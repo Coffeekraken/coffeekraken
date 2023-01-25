@@ -7,6 +7,11 @@ import __fastdom from 'fastdom';
 import type { ISThemeSettings as __ISThemeSettings } from '../shared/SThemeBase';
 import __SThemeBase from '../shared/SThemeBase';
 
+window._console = {};
+['log', 'warn', 'error', 'success'].forEach((key) => {
+    window._console[key] = console[key];
+});
+
 /**
  * @name            STheme
  * @namespace       js
@@ -49,6 +54,7 @@ export default class STheme extends __SThemeBase {
      * @name      theme
      * @type      String
      * @static
+     * @get
      *
      * Store the current theme applied from the html tag context or from the config
      *
@@ -67,6 +73,7 @@ export default class STheme extends __SThemeBase {
      * @name      variant
      * @type      String
      * @static
+     * @get
      *
      * Store the current variant applied from the html tag context or from the config
      *
@@ -79,6 +86,31 @@ export default class STheme extends __SThemeBase {
             return __SFrontspec.get('theme.variant');
         }
         return themeAttr.split('-')[1];
+    }
+
+    /**
+     * @name        cssSettings
+     * @type        Object
+     * @static
+     * @get
+     *
+     * Access the settings printed inside the css by the postcssSugarPlugin postcss plugin.
+     *
+     * @since       2.0.0
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    static _cssSettings;
+    static get cssSettings(): any {
+        if (this._cssSettings) {
+            return this._cssSettings;
+        }
+        const style = window.getComputedStyle(document.body, ':after');
+        let settings;
+        try {
+            settings = JSON.parse(JSON.parse(style.content.toString()));
+        } catch (e) {}
+        this._cssSettings = settings;
+        return this._cssSettings;
     }
 
     /**

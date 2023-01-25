@@ -8,7 +8,7 @@ export interface ISFrontendServerStartParams {
     viewsDir: string;
     pagesDir: string;
     logLevel: string;
-    prod: boolean;
+    target: 'development' | 'production';
 }
 export interface ISFrontendServerAddDefaultPagesParams {
     yes: boolean;

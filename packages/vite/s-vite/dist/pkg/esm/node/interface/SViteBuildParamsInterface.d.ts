@@ -26,7 +26,7 @@ declare class SViteBuildParamsInterface extends __SInterface {
             default: any[];
             alias: string;
         };
-        target: {
+        version: {
             description: string;
             type: string;
             values: string[];
@@ -60,11 +60,11 @@ declare class SViteBuildParamsInterface extends __SInterface {
             type: string;
             default: boolean;
         };
-        prod: {
+        target: {
             description: string;
-            type: string;
-            default: boolean;
+            values: string[];
             alias: string;
+            default: any;
         };
         chunks: {
             description: string;

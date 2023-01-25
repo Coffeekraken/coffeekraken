@@ -1,3 +1,4 @@
+import __SEnv from '@coffeekraken/s-env';
 import __SInterface from '@coffeekraken/s-interface';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
 
@@ -49,9 +50,9 @@ class SViteBuildParamsInterface extends __SInterface {
                 default: [],
                 alias: 'f',
             },
-            target: {
+            version: {
                 description:
-                    'Specify the target you want for your build. Can be "modules","esnext","es2015","es2016" or "es2020"',
+                    'Specify the version you want for your build. Can be "modules","esnext","es2015","es2016" or "es2020"',
                 type: 'String',
                 values: ['modules', 'esnext', 'es2015', 'es2016', 'es2020'],
                 default: undefined,
@@ -89,12 +90,12 @@ class SViteBuildParamsInterface extends __SInterface {
                 type: 'Boolean',
                 default: false,
             },
-            prod: {
+            target: {
                 description:
-                    'Specify if your build is made for production environment or not. This will automatically minify and optimize your build',
-                type: 'Boolean',
-                default: false,
-                alias: 'p',
+                    'Specify the target of the build. Can be "development" or "production"',
+                values: ['development', 'production'],
+                alias: 't',
+                default: __SEnv.get('target') ?? 'development',
             },
             chunks: {
                 description:

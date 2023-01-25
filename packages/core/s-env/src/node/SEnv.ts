@@ -43,6 +43,7 @@ export default class SEnv extends __SEnv {
         process.env.ENVIRONMENT = process.env.NODE_ENV;
         process.env.ENV = process.env.ENVIRONMENT;
         process.env.PLATFORM = 'node';
+        // TARGET: 'development' | 'production'
         return process.env;
     }
 }

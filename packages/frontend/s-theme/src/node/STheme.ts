@@ -25,6 +25,21 @@ import __SThemeBase from '../shared/SThemeBase';
  */
 export default class STheme extends __SThemeBase {
     /**
+     * @name        cssSettings
+     * @type        Object
+     * @static
+     * @get
+     *
+     * Access the settings printed inside the css by the postcssSugarPlugin postcss plugin.
+     *
+     * @since       2.0.0
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    static get cssSettings(): any {
+        return {};
+    }
+
+    /**
      * @name        constructor
      * @type        Function
      * @constructor

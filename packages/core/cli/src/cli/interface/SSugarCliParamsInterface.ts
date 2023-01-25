@@ -35,6 +35,13 @@ export default class SSugarCliParamsInterface extends __SInterface {
                 default: false,
                 explicit: true,
             },
+            target: {
+                description:
+                    'Specify the target of the build processes. Exposes as a global environment variable to simplify usage of multiple builds that support the "target" param',
+                type: 'String',
+                values: ['development', 'production'],
+                explicit: true,
+            },
             logPreset: {
                 type: 'String',
                 values: __SLog.PRESETS,

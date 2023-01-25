@@ -135,7 +135,7 @@ export default function (api) {
             default: {},
             readme: {
                 get inPath() {
-                    return `${api.config.storage.src.docDir}/README.md`;
+                    return `${api.config.storage.src.docDir}/README.md.twig`;
                 },
                 get outPath() {
                     return `${api.config.storage.package.rootDir}/README.md`;

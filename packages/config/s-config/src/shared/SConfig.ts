@@ -228,6 +228,7 @@ export default class SConfig {
                         __SEnv.get('platform') ?? __isNode()
                             ? 'node'
                             : 'browser',
+                    target: __SEnv.get('target') ?? 'development',
                     devsCut: __SEnv.get('devsCut'),
                 },
                 cache: true,

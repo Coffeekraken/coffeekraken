@@ -1,13 +1,13 @@
 export default function (api: any): {
     
     readonly outDir: any;
-    
-    cache: boolean;
-    scopes: {
-        bare: {
-            
-            properties: string[];
-        };
+    clean: {
+        
+        readonly variables: boolean;
+    };
+    compress: {
+        
+        readonly variables: boolean;
     };
     
     excludeByTypes: any[];

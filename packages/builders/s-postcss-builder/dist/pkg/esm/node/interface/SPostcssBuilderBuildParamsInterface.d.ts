@@ -15,11 +15,11 @@ export default class SPostcssBuilderBuildParamsInterface extends __SInterface {
             alias: string;
             default: any;
         };
-        prod: {
+        target: {
             description: string;
-            type: string;
-            default: boolean;
+            values: string[];
             alias: string;
+            default: any;
         };
         minify: {
             description: string;

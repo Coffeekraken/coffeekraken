@@ -1,5 +1,6 @@
 // @ts-nocheck
 
+import __SEnv from '@coffeekraken/s-env';
 import __SInterface from '@coffeekraken/s-interface';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
 
@@ -77,11 +78,12 @@ export default class SFrontendServerStartParamsInterface extends __SInterface {
                 default:
                     __SSugarConfig.get('frontendServer.logLevel') ?? 'info',
             },
-            prod: {
+            target: {
                 description:
-                    'Specify that we want the server to act "like" a production one with compression etc...',
-                type: 'Boolean',
-                default: false,
+                    'Specify the target of the build. Can be "development" or "production"',
+                values: ['development', 'production'],
+                alias: 't',
+                default: __SEnv.get('target') ?? 'development',
             },
         };
     }

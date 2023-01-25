@@ -27,6 +27,7 @@
         "dev": "sugard kitchen.run dev",
         "prod": "sugard kitchen.run prod",
         "build": "sugard kitchen.run build",
+        "buildStatic": "sugard frontendServer --env production & sugard static.build",
         "static": "live-server static"
     },
     "dependencies": {

@@ -74,6 +74,11 @@ if (!cliParams.bench) {
     __SBench.disable();
 }
 
+global._console = {};
+['log', 'warn', 'debug', 'info'].forEach((key) => {
+    global._console[key] = console[key];
+});
+
 if (!__SLog[`PRESET_${cliParams.logPreset.toUpperCase()}`]) {
     console.log(
         `The log preset "${
@@ -310,6 +315,11 @@ export default class SSugarCli {
         // verbose
         if (!process.env.VERBOSE && this.args.params.verbose) {
             process.env.VERBOSE = 'true';
+        }
+
+        // target
+        if (!process.env.TARGET && this.args.params.target) {
+            process.env.TARGET = this.args.params.target;
         }
 
         if (this.args.params.env) {

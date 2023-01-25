@@ -1,3 +1,4 @@
+import __SEnv from '@coffeekraken/s-env';
 import __SInterface from '@coffeekraken/s-interface';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
 
@@ -110,11 +111,12 @@ export default class SStaticBuilderBuildParamsInterface extends __SInterface {
                 alias: 'm',
                 default: false,
             },
-            prod: {
-                description: 'Shorthand to set a production ready build',
-                type: 'Boolean',
-                default: false,
-                alias: 'p',
+            target: {
+                description:
+                    'Specify the target of the build. Can be "development" or "production"',
+                values: ['development', 'production'],
+                alias: 't',
+                default: __SEnv.get('target') ?? 'development',
             },
         };
     }

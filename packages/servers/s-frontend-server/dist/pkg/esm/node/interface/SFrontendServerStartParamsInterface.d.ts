@@ -42,10 +42,11 @@ export default class SFrontendServerStartParamsInterface extends __SInterface {
             values: string[];
             default: any;
         };
-        prod: {
+        target: {
             description: string;
-            type: string;
-            default: boolean;
+            values: string[];
+            alias: string;
+            default: any;
         };
     };
 }

@@ -89,7 +89,7 @@ export interface ISStaticBuilderBuildParams {
     requestRetry: number;
     requestRetryTimeout: number;
     minify: boolean;
-    prod: boolean;
+    target: 'production' | 'development';
 }
 
 export default class SStaticBuilder extends __SBuilder {
@@ -167,7 +167,7 @@ export default class SStaticBuilder extends __SBuilder {
             console.log(`<yellow>[build]</yellow> Starting Static Build`);
             console.log(
                 `<yellow>○</yellow> Environment : ${
-                    params.prod
+                    params.target === 'production'
                         ? '<green>production</green>'
                         : '<yellow>development</yellow>'
                 }`,

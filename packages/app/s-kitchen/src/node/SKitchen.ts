@@ -435,6 +435,19 @@ class SKitchen extends __SClass {
                 }`,
             );
 
+            // loop on each actions for this recipe
+            if (stackObj.actions) {
+                for (let i = 0; i < Object.keys(stackObj.actions).length; i++) {
+                    const actionName = Object.keys(stackObj.actions)[i];
+                    let actionObj = stackObj.actions[actionName];
+                    console.log(
+                        `<yellow>○</yellow> <yellow>${actionName}</yellow> : ${
+                            actionObj.title ?? 'No description'
+                        }`,
+                    );
+                }
+            }
+
             // build shared params to pass to every sub-processes
             let sharedParams = Object.assign({}, finalParams);
             delete sharedParams.recipe;
@@ -529,6 +542,9 @@ class SKitchen extends __SClass {
                             if (key.toLowerCase() === 'verbose') {
                                 return true;
                             }
+                            if (key.toLowerCase() === 'target') {
+                                return true;
+                            }
                             return InterfaceClass.definition[key] !== undefined;
                         });
                     }
@@ -540,9 +556,14 @@ class SKitchen extends __SClass {
                         actionParams,
                     );
 
-                    console.log(
-                        `<yellow>○</yellow> <yellow>${actionName}</yellow> : <cyan>${finalCommand}</cyan>`,
-                    );
+                    console.log({
+                        group: 'SKitchen',
+                        value: `Starting <yellow>${actionName}</yellow> action with command:`,
+                    });
+                    console.log({
+                        group: actionName,
+                        value: `<grey>$</grey> <cyan>${finalCommand}</cyan>`,
+                    });
 
                     const pro = await __SProcess.from(finalCommand, {
                         before: actionObj.before,

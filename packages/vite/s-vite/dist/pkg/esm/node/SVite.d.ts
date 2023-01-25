@@ -9,12 +9,12 @@ export interface ISViteStartParams {
 }
 export interface ISViteBuildParams {
     input: string;
-    prod: boolean;
     noWrite: boolean;
+    target: 'development' | 'production';
     watch: boolean;
     buildInitial: boolean;
     verbose: boolean;
-    target: string;
+    version: string;
     format: ('esm' | 'amd' | 'umd' | 'cjs' | 'iife')[];
     type: ('module' | 'modules' | 'lib' | 'bundle')[];
     chunks: boolean;

@@ -6,8 +6,12 @@ export interface ISThemeLodSettings {
     method: 'class' | 'file';
     stylesheet: string | HTMLLinkElement;
 }
+export interface ISThemeCssSettings {
+    compressVarNames: boolean;
+}
 export interface ISThemeSettings {
     lod: Partial<ISThemeLodSettings>;
+    css: Partial<ISThemeCssSettings>;
 }
 export interface ISThemeDefaultStaticSettings {
     theme: string;
@@ -190,6 +194,7 @@ export default class SThemeBase extends __SEventEmitter {
     static resolveCssObjectPropertiesValues(object: any, settings?: Partial<ISThemeDefaultStaticSettings>): any;
     
     static jsObjectToCssProperties(jsObject: any, settings?: Partial<IJsObjectToCssProperties>): string;
+    static compressVarName(varname: string): string;
     static jsConfigObjectToCssProperties(obj: any): string[];
     
     static remapCssColor(from: string, to: string, settings?: Partial<ISThemeDefaultStaticSettings>): ISThemeRemapColorResult;

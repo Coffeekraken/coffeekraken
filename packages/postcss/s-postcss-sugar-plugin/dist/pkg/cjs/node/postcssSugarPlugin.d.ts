@@ -2,9 +2,17 @@ export interface IPostcssSugarPluginLodSettings {
     enabled: boolean;
     method: 'class' | 'file';
 }
+export interface IPostcssSugarPluginCleanSettings {
+    variables: boolean;
+}
+export interface IPostcssSugarPluginCompressSettings {
+    variables: boolean;
+}
 export interface IPostcssSugarPluginSettings {
     outDir: string;
     lod: IPostcssSugarPluginLodSettings;
+    clean: Partial<IPostcssSugarPluginCleanSettings>;
+    compress: Partial<IPostcssSugarPluginCompressSettings>;
     excludeByTypes?: string[];
     excludeCommentByTypes?: string[];
     excludeCodeByTypes?: string[];

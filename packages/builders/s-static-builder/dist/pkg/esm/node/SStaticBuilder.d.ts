@@ -32,7 +32,7 @@ export interface ISStaticBuilderBuildParams {
     requestRetry: number;
     requestRetryTimeout: number;
     minify: boolean;
-    prod: boolean;
+    target: 'production' | 'development';
 }
 export default class SStaticBuilder extends __SBuilder {
     

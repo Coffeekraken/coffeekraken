@@ -1,16 +1,16 @@
 import __SColor from '@coffeekraken/s-color';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
+import { __compressVarName } from '@coffeekraken/sugar/css';
 import { __get, __sort } from '@coffeekraken/sugar/object';
 import __set from '@coffeekraken/sugar/shared/object/set';
 // import __micromatch from 'micromatch';
 import __SEventEmitter from '@coffeekraken/s-event-emitter';
 import __SInterface from '@coffeekraken/s-interface';
-import { __compressVarName } from '@coffeekraken/sugar/css';
 import { __isColor } from '@coffeekraken/sugar/is';
 import {
     __deepMerge,
     __flatten,
-    __objectHash
+    __objectHash,
 } from '@coffeekraken/sugar/object';
 import __dashCase from '@coffeekraken/sugar/shared/string/dashCase';
 import __knownCssProperties from 'known-css-properties';
@@ -77,8 +77,13 @@ export interface ISThemeLodSettings {
     stylesheet: string | HTMLLinkElement;
 }
 
+export interface ISThemeCssSettings {
+    compressVarNames: boolean;
+}
+
 export interface ISThemeSettings {
     lod: Partial<ISThemeLodSettings>;
+    css: Partial<ISThemeCssSettings>;
 }
 
 export interface ISThemeDefaultStaticSettings {
@@ -715,7 +720,7 @@ export default class SThemeBase extends __SEventEmitter {
         let fb = theme.get(dotPath);
         if (!fallback || (typeof fb === 'string' && fb.includes(','))) fb = 0;
 
-        const v = `var(${__compressVarName(
+        const v = `var(${this.compressVarName(
             `--s-theme-${dotPath
                 .replace(/\./gm, '-')
                 .replace(/:/gm, '-')
@@ -1147,6 +1152,13 @@ export default class SThemeBase extends __SEventEmitter {
         return propsStack.join('\n');
     }
 
+    static compressVarName(varname: string): string {
+        if (!this.cssSettings?.compress?.variables) {
+            return varname;
+        }
+        return __compressVarName(varname);
+    }
+
     static jsConfigObjectToCssProperties(obj: any): string[] {
         let vars: string[] = [];
 
@@ -1164,7 +1176,7 @@ export default class SThemeBase extends __SEventEmitter {
                 .replace(/\?/gm, '')
                 .replace(/--/gm, '-');
 
-            let variable = __compressVarName(`--s-theme-${varKey}`);
+            let variable = this.compressVarName(`--s-theme-${varKey}`);
 
             if (`${value}`.match(/:/)) {
                 vars.push(`${variable}: "${value}";`);
@@ -1205,27 +1217,31 @@ export default class SThemeBase extends __SEventEmitter {
         if (__isColor(to)) {
             const color = new __SColor(to);
             result.vars = [
-                `${__compressVarName(`--s-theme-color-${from}-h`)}: ${
+                `${this.compressVarName(`--s-theme-color-${from}-h`)}: ${
                     color.h
                 };`,
-                `${__compressVarName(`--s-theme-color-${from}-s`)}: ${
+                `${this.compressVarName(`--s-theme-color-${from}-s`)}: ${
                     color.s
                 };`,
-                `${__compressVarName(`--s-theme-color-${from}-l`)}: ${
+                `${this.compressVarName(`--s-theme-color-${from}-l`)}: ${
                     color.l
                 };`,
-                `${__compressVarName(`--s-theme-color-${from}-a`)}: ${
+                `${this.compressVarName(`--s-theme-color-${from}-a`)}: ${
                     color.a
                 };`,
             ];
-            result.properties[__compressVarName(`--s-theme-color-${from}-h`)] =
-                color.h;
-            result.properties[__compressVarName(`--s-theme-color-${from}-s`)] =
-                color.s;
-            result.properties[__compressVarName(`--s-theme-color-${from}-l`)] =
-                color.l;
-            result.properties[__compressVarName(`--s-theme-color-${from}-a`)] =
-                color.a;
+            result.properties[
+                this.compressVarName(`--s-theme-color-${from}-h`)
+            ] = color.h;
+            result.properties[
+                this.compressVarName(`--s-theme-color-${from}-s`)
+            ] = color.s;
+            result.properties[
+                this.compressVarName(`--s-theme-color-${from}-l`)
+            ] = color.l;
+            result.properties[
+                this.compressVarName(`--s-theme-color-${from}-a`)
+            ] = color.a;
         } else {
             const toColorName = to.split('-').slice(0, 1)[0],
                 fromColorName = from.split('-').slice(0, 1)[0];
@@ -1244,121 +1260,131 @@ export default class SThemeBase extends __SEventEmitter {
                         if (toColorVariant) {
                             if (colorObj.schema === toColorVariant) {
                                 result.vars.push(
-                                    `${__compressVarName(
+                                    `${this.compressVarName(
                                         `${fromVariable}-saturation-offset`,
-                                    )}: var(${__compressVarName(
+                                    )}: var(${this.compressVarName(
                                         `${toVariable}-${colorObj.schema}-saturation-offset`,
                                     )}, 0);`,
                                 );
                                 result.properties[
-                                    `${__compressVarName(
+                                    `${this.compressVarName(
                                         `${fromVariable}-saturation-offset`,
                                     )}`
-                                ] = `var(${__compressVarName(
+                                ] = `var(${this.compressVarName(
                                     `${toVariable}-${colorObj.schema}-saturation-offset`,
                                 )}, 0)`;
                                 result.vars.push(
-                                    `${__compressVarName(
+                                    `${this.compressVarName(
                                         `${fromVariable}-lightness-offset`,
-                                    )}: var(${__compressVarName(
+                                    )}: var(${this.compressVarName(
                                         `${toVariable}-${colorObj.schema}-lightness-offset`,
                                     )}, 0);`,
                                 );
                                 result.properties[
-                                    `${__compressVarName(
+                                    `${this.compressVarName(
                                         `${fromVariable}-lightness-offset`,
                                     )}`
-                                ] = `var(${__compressVarName(
+                                ] = `var(${this.compressVarName(
                                     `${toVariable}-${colorObj.schema}-lightness-offset`,
                                 )}, 0)`;
                                 result.vars.push(
-                                    `${__compressVarName(
+                                    `${this.compressVarName(
                                         `${fromVariable}-a`,
-                                    )}: var(${__compressVarName(
+                                    )}: var(${this.compressVarName(
                                         `${toVariable}-a`,
                                     )}, 1);`,
                                 );
                                 result.properties[
-                                    `${__compressVarName(`${fromVariable}-a`)}`
-                                ] = `var(${__compressVarName(
+                                    `${this.compressVarName(
+                                        `${fromVariable}-a`,
+                                    )}`
+                                ] = `var(${this.compressVarName(
                                     `${toVariable}-a`,
                                 )}, 1)`;
                             }
                         } else {
                             if (!colorObj.schema && colorObj.value.color) {
                                 result.vars.push(
-                                    `${__compressVarName(
+                                    `${this.compressVarName(
                                         `${fromVariable}-h`,
-                                    )}: var(${__compressVarName(
+                                    )}: var(${this.compressVarName(
                                         `${toVariable}-h`,
                                     )});`,
                                 );
                                 result.properties[
-                                    `${__compressVarName(`${fromVariable}-h`)}`
-                                ] = `var(${__compressVarName(
+                                    `${this.compressVarName(
+                                        `${fromVariable}-h`,
+                                    )}`
+                                ] = `var(${this.compressVarName(
                                     `${toVariable}-h`,
                                 )})`;
                                 result.vars.push(
-                                    `${__compressVarName(
+                                    `${this.compressVarName(
                                         `${fromVariable}-s`,
-                                    )}: var(${__compressVarName(
+                                    )}: var(${this.compressVarName(
                                         `${toVariable}-s`,
                                     )});`,
                                 );
                                 result.properties[
-                                    `${__compressVarName(`${fromVariable}-s`)}`
-                                ] = `var(${__compressVarName(
+                                    `${this.compressVarName(
+                                        `${fromVariable}-s`,
+                                    )}`
+                                ] = `var(${this.compressVarName(
                                     `${toVariable}-s`,
                                 )})`;
                                 result.vars.push(
-                                    `${__compressVarName(
+                                    `${this.compressVarName(
                                         `${fromVariable}-l`,
-                                    )}: var(${__compressVarName(
+                                    )}: var(${this.compressVarName(
                                         `${toVariable}-l`,
                                     )});`,
                                 );
                                 result.properties[
-                                    `${__compressVarName(`${fromVariable}-l`)}`
-                                ] = `var(${__compressVarName(
+                                    `${this.compressVarName(
+                                        `${fromVariable}-l`,
+                                    )}`
+                                ] = `var(${this.compressVarName(
                                     `${toVariable}-l`,
                                 )})`;
                             } else {
                                 result.vars.push(
-                                    `${__compressVarName(
+                                    `${this.compressVarName(
                                         `${fromVariable}-${colorObj.schema}-saturation-offset`,
-                                    )}: var(${__compressVarName(
+                                    )}: var(${this.compressVarName(
                                         `${toVariable}-${colorObj.schema}-saturation-offset`,
                                     )}, 0);`,
                                 );
                                 result.properties[
-                                    `${__compressVarName(
+                                    `${this.compressVarName(
                                         `${fromVariable}-${colorObj.schema}-saturation-offset`,
                                     )}`
-                                ] = `var(${__compressVarName(
+                                ] = `var(${this.compressVarName(
                                     `${toVariable}-${colorObj.schema}-saturation-offset`,
                                 )}, 0)`;
                                 result.vars.push(
-                                    `${__compressVarName(
+                                    `${this.compressVarName(
                                         `${fromVariable}-${colorObj.schema}-lightness-offset`,
-                                    )}: var(${__compressVarName(
+                                    )}: var(${this.compressVarName(
                                         `${toVariable}-${colorObj.schema}-lightness-offset`,
                                     )}, 0);`,
                                 );
                                 result.properties[
-                                    `${__compressVarName(
+                                    `${this.compressVarName(
                                         `${fromVariable}-${colorObj.schema}-lightness-offset`,
                                     )}`
-                                ] = `var(${__compressVarName(
+                                ] = `var(${this.compressVarName(
                                     `${toVariable}-${colorObj.schema}-lightness-offset`,
                                 )}, 0)`;
                                 result.vars.push(
-                                    `${__compressVarName(
+                                    `${this.compressVarName(
                                         `${fromVariable}-a: var(${toVariable}-a`,
                                     )}, 1);`,
                                 );
                                 result.properties[
-                                    `${__compressVarName(`${fromVariable}-a`)}`
-                                ] = `var(${__compressVarName(
+                                    `${this.compressVarName(
+                                        `${fromVariable}-a`,
+                                    )}`
+                                ] = `var(${this.compressVarName(
                                     `${toVariable}-a`,
                                 )}, 1)`;
                             }
@@ -1407,87 +1433,87 @@ export default class SThemeBase extends __SEventEmitter {
 
             if (!colorObj.schema && colorObj.value.color) {
                 vars.push(
-                    `${__compressVarName(`${baseVariable}-h`)}: ${
+                    `${this.compressVarName(`${baseVariable}-h`)}: ${
                         colorObj.value.h
                     };`,
                 );
                 vars.push(
-                    `${__compressVarName(`${baseVariable}-s`)}: ${
+                    `${this.compressVarName(`${baseVariable}-s`)}: ${
                         colorObj.value.s
                     };`,
                 );
                 vars.push(
-                    `${__compressVarName(`${baseVariable}-l`)}: ${
+                    `${this.compressVarName(`${baseVariable}-l`)}: ${
                         colorObj.value.l
                     };`,
                 );
                 vars.push(
-                    `${__compressVarName(`${baseVariable}-a`)}: ${
+                    `${this.compressVarName(`${baseVariable}-a`)}: ${
                         colorObj.value.a
                     };`,
                 );
                 vars.push(
-                    `${__compressVarName(`${baseVariable}-origin-h`)}: ${
+                    `${this.compressVarName(`${baseVariable}-origin-h`)}: ${
                         colorObj.value.h
                     };`,
                 );
                 vars.push(
-                    `${__compressVarName(`${baseVariable}-origin-s`)}: ${
+                    `${this.compressVarName(`${baseVariable}-origin-s`)}: ${
                         colorObj.value.s
                     };`,
                 );
                 vars.push(
-                    `${__compressVarName(`${baseVariable}-origin-l`)}: ${
+                    `${this.compressVarName(`${baseVariable}-origin-l`)}: ${
                         colorObj.value.l
                     };`,
                 );
                 vars.push(
-                    `${__compressVarName(`${baseVariable}-origin-a`)}: ${
+                    `${this.compressVarName(`${baseVariable}-origin-a`)}: ${
                         colorObj.value.a
                     };`,
                 );
             } else if (colorObj.schema) {
                 if (colorObj.value.saturate) {
                     vars.push(
-                        `${__compressVarName(
+                        `${this.compressVarName(
                             `${baseVariable}-saturation-offset`,
                         )}: ${colorObj.value.saturate};`,
                     );
                 } else if (colorObj.value.desaturate) {
                     vars.push(
-                        `${__compressVarName(
+                        `${this.compressVarName(
                             `${baseVariable}-saturation-offset`,
                         )}: ${colorObj.value.desaturate * -1};`,
                     );
                 } else {
                     vars.push(
-                        `${__compressVarName(
+                        `${this.compressVarName(
                             `${baseVariable}-saturation-offset`,
                         )}: 0;`,
                     );
                 }
                 if (colorObj.value.lighten) {
                     vars.push(
-                        `${__compressVarName(
+                        `${this.compressVarName(
                             `${baseVariable}-lightness-offset`,
                         )}: ${colorObj.value.lighten};`,
                     );
                 } else if (colorObj.value.darken) {
                     vars.push(
-                        `${__compressVarName(
+                        `${this.compressVarName(
                             `${baseVariable}-lightness-offset`,
                         )}: ${colorObj.value.darken * -1};`,
                     );
                 } else {
                     vars.push(
-                        `${__compressVarName(
+                        `${this.compressVarName(
                             `${baseVariable}-lightness-offset`,
                         )}: 0;`,
                     );
                 }
                 if (colorObj.value.alpha >= 0 && colorObj.value.alpha <= 1) {
                     vars.push(
-                        `${__compressVarName(`${baseVariable}-a`)}: ${
+                        `${this.compressVarName(`${baseVariable}-a`)}: ${
                             colorObj.value.alpha
                         };`,
                     );
@@ -1512,13 +1538,13 @@ export default class SThemeBase extends __SEventEmitter {
 
             if (`${value}`.match(/:/)) {
                 vars.push(
-                    `${__compressVarName(`${variable}`)}: "${
+                    `${this.compressVarName(`${variable}`)}: "${
                         flattenedTheme[key]
                     }";`,
                 );
             } else {
                 vars.push(
-                    `${__compressVarName(`${variable}`)}: ${
+                    `${this.compressVarName(`${variable}`)}: ${
                         flattenedTheme[key]
                     };`,
                 );
@@ -1904,7 +1930,9 @@ export default class SThemeBase extends __SEventEmitter {
             const c = new __SColor(colorValue);
             map[colorName] = {
                 color: colorValue,
-                variable: __compressVarName(`--s-theme-color-${colorName}`),
+                variable: this.constructor.compressVarName(
+                    `--s-theme-color-${colorName}`,
+                ),
                 r: c.r,
                 g: c.g,
                 b: c.b,
@@ -2300,7 +2328,9 @@ export default class SThemeBase extends __SEventEmitter {
                 // @ts-ignore
                 value: {
                     color: colorValue,
-                    variable: __compressVarName(`--s-theme-color-${colorName}`),
+                    variable: this.constructor.compressVarName(
+                        `--s-theme-color-${colorName}`,
+                    ),
                     r: c.r,
                     g: c.g,
                     b: c.b,
@@ -2319,7 +2349,7 @@ export default class SThemeBase extends __SEventEmitter {
                     name: colorName,
                     schema: schemaName,
                     value: {
-                        variable: __compressVarName(
+                        variable: this.constructor.compressVarName(
                             `--s-theme-color-${colorName}-${schemaName}`,
                         ),
                         // @ts-ignore
@@ -2349,7 +2379,7 @@ export default class SThemeBase extends __SEventEmitter {
                             name: colorSchemaColorName,
                             schema: schemaName,
                             value: {
-                                variable: __compressVarName(
+                                variable: this.constructor.compressVarName(
                                     `--s-theme-color-${colorSchemaColorName}-${schemaName}`,
                                 ),
                                 // @ts-ignore

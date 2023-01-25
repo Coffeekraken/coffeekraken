@@ -1,3 +1,4 @@
+import __SEnv from '@coffeekraken/s-env';
 import __SInterface from '@coffeekraken/s-interface';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
 
@@ -37,11 +38,12 @@ export default class SPostcssBuilderBuildParamsInterface extends __SInterface {
                 alias: 'o',
                 default: __SSugarConfig.get('postcssBuilder.output'),
             },
-            prod: {
-                description: 'Shorthand to set a production ready build',
-                type: 'Boolean',
-                default: false,
-                alias: 'p',
+            target: {
+                description:
+                    'Specify the target of the build. Can be "development" or "production"',
+                values: ['development', 'production'],
+                alias: 't',
+                default: __SEnv.get('target') ?? 'development',
             },
             minify: {
                 description: 'Specify if you want to minify your output css',

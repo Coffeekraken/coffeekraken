@@ -35,12 +35,12 @@ export interface ISViteTestParams {
 export interface ISViteStartParams {}
 export interface ISViteBuildParams {
     input: string;
-    prod: boolean;
     noWrite: boolean;
+    target: 'development' | 'production';
     watch: boolean;
     buildInitial: boolean;
     verbose: boolean;
-    target: string;
+    version: string;
     format: ('esm' | 'amd' | 'umd' | 'cjs' | 'iife')[];
     type: ('module' | 'modules' | 'lib' | 'bundle')[];
     chunks: boolean;
@@ -233,7 +233,7 @@ export default class SVite extends __SClass {
                 if (buildType === 'lib') {
                     buildParams.minify = 'esbuild';
                 }
-                if (buildParams.prod) {
+                if (buildParams.target === 'production') {
                     buildParams.minify = 'esbuild';
                 }
 
@@ -315,7 +315,7 @@ export default class SVite extends __SClass {
                                   },
                               }
                             : false,
-                        target: buildParams.target ?? 'modules',
+                        target: buildParams.version ?? 'modules',
                         write: false,
                         minify: buildParams.minify,
                         terserOptions: {
@@ -416,17 +416,17 @@ export default class SVite extends __SClass {
                 config.plugins = plugins;
 
                 // mode (production, development)
-                if (buildParams.prod) {
+                if (buildParams.target === 'production') {
                     config.mode = 'production';
                 }
 
                 // target
                 if (buildType.toLowerCase() === 'bundle') {
-                    config.build.target = buildParams.target ?? 'es2015';
+                    config.build.target = buildParams.version ?? 'es2015';
                 } else if (buildType.toLowerCase() === 'lib') {
-                    config.build.target = buildParams.target ?? 'esnext';
+                    config.build.target = buildParams.version ?? 'esnext';
                 } else if (buildType.toLowerCase() === 'module') {
-                    config.build.target = buildParams.target ?? 'modules';
+                    config.build.target = buildParams.version ?? 'modules';
                 }
 
                 // external packages for library mode
@@ -465,7 +465,7 @@ export default class SVite extends __SClass {
                 console.log({
                     type: __SLog.TYPE_INFO,
                     value: `<yellow>○</yellow> Target      : ${
-                        buildParams.prod
+                        buildParams.target === 'production'
                             ? '<green>production</green>'
                             : '<yellow>development</yellow>'
                     }`,
@@ -484,7 +484,7 @@ export default class SVite extends __SClass {
                     `<yellow>○</yellow> Type        : ${buildType.toLowerCase()}`,
                 );
                 console.log(
-                    `<yellow>○</yellow> Target      : ${config.build.target}`,
+                    `<yellow>○</yellow> Versiom     : ${config.build.target}`,
                 );
                 console.log(
                     `<yellow>○</yellow> Format      : ${finalFormats.join(

@@ -68,7 +68,7 @@ export interface ISPostcssBuilderBuildParams {
     output: string;
     purge: boolean;
     minify: boolean;
-    prod: boolean;
+    target: 'development' | 'production';
     saveDev: boolean;
 }
 
@@ -114,10 +114,8 @@ export default class SPostcssBuilder extends __SBuilder {
             let finalCss;
 
             // handle prod shortcut
-            if (params.prod) {
+            if (params.target === 'production') {
                 params.minify = true;
-                // params.purge = true;
-                __SSugarConfig.set('postcssSugarPlugin.cache', false);
             }
 
             // minify using cssnano
@@ -147,7 +145,7 @@ export default class SPostcssBuilder extends __SBuilder {
             console.log(`<yellow>[build]</yellow> Starting Postcss Build`);
             console.log(
                 `<yellow>○</yellow> Target      : ${
-                    params.prod
+                    params.target === 'production'
                         ? '<green>production</green>'
                         : '<yellow>development</yellow>'
                 }`,
@@ -173,11 +171,11 @@ export default class SPostcssBuilder extends __SBuilder {
                     params.minify ? '<green>true</green>' : '<red>false</red>'
                 }`,
             );
-            console.log(
-                `<yellow>○</yellow> Purge       : ${
-                    params.purge ? '<green>true</green>' : '<red>false</red>'
-                }`,
-            );
+            // console.log(
+            //     `<yellow>○</yellow> Purge       : ${
+            //         params.purge ? '<green>true</green>' : '<red>false</red>'
+            //     }`,
+            // );
             console.log(`<yellow>○</yellow> Plugins     :`);
             this.settings.postcss.plugins.forEach((pluginName) => {
                 console.log(`<yellow>|------------</yellow> : ${pluginName}`);
@@ -185,8 +183,15 @@ export default class SPostcssBuilder extends __SBuilder {
                     const postcssSugarPluginConfig =
                         __SSugarConfig.get('postcssSugarPlugin');
                     console.log(
-                        `              <yellow>○</yellow> Cache                     : ${
-                            postcssSugarPluginConfig.cache
+                        `              <yellow>○</yellow> Clean variables           : ${
+                            postcssSugarPluginConfig.clean?.variables
+                                ? '<green>true</green>'
+                                : '<red>false</red>'
+                        }`,
+                    );
+                    console.log(
+                        `              <yellow>○</yellow> Compress variables        : ${
+                            postcssSugarPluginConfig.compress?.variables
                                 ? '<green>true</green>'
                                 : '<red>false</red>'
                         }`,
@@ -238,7 +243,7 @@ export default class SPostcssBuilder extends __SBuilder {
                                     p !==
                                     '@coffeekraken/s-postcss-sugar-plugin',
                             ),
-                            target: params.prod ? 'production' : 'development',
+                            target: params.target,
                             ...options,
                         }),
                     );
@@ -438,14 +443,16 @@ export default class SPostcssBuilder extends __SBuilder {
             // minify
             if (params.minify) {
                 const minifyDuration = new __SDuration();
-                console.log(`<yellow>[minify]</yellow> Minifiying css...`);
+                console.verbose?.(
+                    `<yellow>[minify]</yellow> Minifiying css...`,
+                );
 
                 finalCss = __csso.default.minify(finalCss, {
                     restructure: false,
                     comments: true, // leave all exlamation comments /*! ... */
                 }).css;
 
-                console.log(
+                console.verbose?.(
                     `<green>[minify]</green> Minifiying final css finished <green>successfully</green> in <yellow>${
                         minifyDuration.end().formatedDuration
                     }</yellow>`,

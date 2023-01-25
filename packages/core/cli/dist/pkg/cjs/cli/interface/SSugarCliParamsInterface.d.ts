@@ -15,6 +15,12 @@ export default class SSugarCliParamsInterface extends __SInterface {
             default: boolean;
             explicit: boolean;
         };
+        target: {
+            description: string;
+            type: string;
+            values: string[];
+            explicit: boolean;
+        };
         logPreset: {
             type: string;
             values: String[];

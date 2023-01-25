@@ -61,6 +61,8 @@ export default function ({
         ...params,
     };
 
+    throw new Error(`<red>[postcss]</red> "<magenta>@sugar.partial</magenta>" mixin is not supported for now...`);
+
     if (!finalParams.id || finalParams.id === '') {
         throw new Error(
             `The "@sugar.export" mixin MUST specify an export path or id...`,

@@ -53,7 +53,7 @@ export interface ISFrontendServerStartParams {
     viewsDir: string;
     pagesDir: string;
     logLevel: string;
-    prod: boolean;
+    target: 'development' | 'production';
 }
 
 export interface ISFrontendServerAddDefaultPagesParams {
@@ -150,17 +150,15 @@ export default class SFrontendServer extends __SClass {
             __SFrontendServerStartParamsInterface.apply(params);
 
         return new Promise(async (resolve) => {
-            // enable compression if prod
-            // if (finalParams.prod || __SEnv.is('production')) {
             this._express.use(__compression());
-            // }
 
             // save metas
             this.serverMetas = {
                 hostname: finalParams.hostname,
                 port: finalParams.port,
                 sessionId:
-                    finalParams.prod || __SEnv.is('production')
+                    finalParams.target === 'production' ||
+                    __SEnv.is('production')
                         ? `${(Math.random() + 1).toString(36).substring(2)}`
                         : '',
             };

@@ -79,11 +79,11 @@ export default class SStaticBuilderBuildParamsInterface extends __SInterface {
             alias: string;
             default: boolean;
         };
-        prod: {
+        target: {
             description: string;
-            type: string;
-            default: boolean;
+            values: string[];
             alias: string;
+            default: any;
         };
     };
 }

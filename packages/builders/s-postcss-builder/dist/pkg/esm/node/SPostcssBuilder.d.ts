@@ -17,7 +17,7 @@ export interface ISPostcssBuilderBuildParams {
     output: string;
     purge: boolean;
     minify: boolean;
-    prod: boolean;
+    target: 'development' | 'production';
     saveDev: boolean;
 }
 export default class SPostcssBuilder extends __SBuilder {

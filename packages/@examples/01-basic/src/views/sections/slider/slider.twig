@@ -3,6 +3,12 @@
     {{ specsValues(_context)|raw }}
     >
     <div class="s-container">
-        {% include 'sugar/components/slider/slider.twig' with slider only %}
+        <s-slider controls loop>
+            {% for slide in slides %}
+                <div s-slider-slide>
+                    <img src="{{ slide.url }}" />
+                </div>
+            {% endfor %}
+        </s-slider>
     </div>
 </section>

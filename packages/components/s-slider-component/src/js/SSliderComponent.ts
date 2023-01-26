@@ -1,7 +1,7 @@
 // @ts-nocheck
 
 import __SLitComponent, {
-    ISLitComponentDefaultProps
+    ISLitComponentDefaultProps,
 } from '@coffeekraken/s-lit-component';
 import { __onSwipe } from '@coffeekraken/sugar/dom';
 import { __isClass } from '@coffeekraken/sugar/is';
@@ -10,7 +10,7 @@ import { css, html, unsafeCSS } from 'lit';
 // @ts-ignore
 import {
     __querySelectorLive,
-    __querySelectorUp
+    __querySelectorUp,
 } from '@coffeekraken/sugar/dom';
 import { __uniqid } from '@coffeekraken/sugar/string';
 import __css from '../../../../src/css/s-slider-component.css'; // relative to /dist/pkg/esm/js
@@ -1668,9 +1668,7 @@ export default class SSliderComponent extends __SLitComponent {
             <div class="${this.utils.cls('_root')}">
                 <div class="${this.utils.cls('_slides-wrapper')}">
                     <div class="${this.utils.cls('_slides')}">
-                        <div
-                            class="${this.utils.cls('_pad _pad-start')}"
-                        ></div>
+                        <div class="${this.utils.cls('_pad _pad-start')}"></div>
                         ${this.$slides.map(($slide) => {
                             return $slide;
                         })}
@@ -1693,40 +1691,44 @@ export default class SSliderComponent extends __SLitComponent {
                         ? html`
                               <div class="${this.utils.cls('_progress')}">
                                   <div
-                                      class="${this.utils.cls(
-                                          '_progress-bar',
-                                      )}"
+                                      class="${this.utils.cls('_progress-bar')}"
                                   ></div>
                               </div>
                           `
                         : ''}
-                    <div class="${this.utils.cls('_nav')}">
-                        ${[
-                            ...Array(
-                                Math.ceil(
-                                    this.$slides.length /
-                                        this.props.slidesByPage,
-                                ),
-                            ),
-                        ].map((i, idx) => {
-                            return html`
-                                <div
-                                    class="${this.utils.cls(
-                                        '_nav-item',
-                                    )} ${this.isSlideInPage(
-                                        currentSlide.idx,
-                                        idx,
-                                    )
-                                        ? 'active'
-                                        : ''}"
-                                    @pointerup=${() =>
-                                        this.goTo(
-                                            idx * this.props.slidesByPage,
-                                        )}
-                                ></div>
-                            `;
-                        })}
-                    </div>
+                    ${this.props.nav
+                        ? html`
+                              <div class="${this.utils.cls('_nav')}">
+                                  ${[
+                                      ...Array(
+                                          Math.ceil(
+                                              this.$slides.length /
+                                                  this.props.slidesByPage,
+                                          ),
+                                      ),
+                                  ].map((i, idx) => {
+                                      return html`
+                                          <div
+                                              class="${this.utils.cls(
+                                                  '_nav-item',
+                                              )} ${this.isSlideInPage(
+                                                  currentSlide.idx,
+                                                  idx,
+                                              )
+                                                  ? 'active'
+                                                  : ''}"
+                                              @pointerup=${() =>
+                                                  this.goTo(
+                                                      idx *
+                                                          this.props
+                                                              .slidesByPage,
+                                                  )}
+                                          ></div>
+                                      `;
+                                  })}
+                              </div>
+                          `
+                        : ''}
                     ${this.props.controls
                         ? html`
                               <div class="${this.utils.cls('_controls')}">

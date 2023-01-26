@@ -106,12 +106,10 @@ export default {
       },
     },
     {
-      path: 'sugar.components.slider.slider',
+      path: 'sections.slider.slider',
       async data() {
         const d = (
-          await import(
-            `../views/components/slider/slider.data.js?${__uniqid()}`
-          )
+          await import(`../views/sections/slider/slider.data.js?${__uniqid()}`)
         ).default;
         return d;
       },

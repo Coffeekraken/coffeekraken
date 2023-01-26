@@ -9,14 +9,3 @@
         transform: scale(1.05);
     }
 }
-
-.s-slider_root {
-    /* perspective: 800px;
-    .s-slider_slides-wrapper {
-        transform: rotateY(-3deg);
-    } */
-
-    .s-slider_slide {
-        /* width: 1200px !important; */
-    }
-}

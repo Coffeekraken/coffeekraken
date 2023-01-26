@@ -1,0 +1,8 @@
+<section class="section-slider {{ paddingClasses(padding) }} {{ marginClasses(margin) }}" s-appear in="bottom" delay="500"
+    s-specs="views.sections.slider"
+    {{ specsValues(_context)|raw }}
+    >
+    <div class="s-container">
+        {% include 'sugar/components/slider/slider.twig' with slider only %}
+    </div>
+</section>

@@ -1,59 +1,20 @@
 export default {
-  contactForm: {
-    action: '/',
-    lnf: {
-      labelType: 'float',
-      spacing: 30,
-      color: 'accent',
-    },
-    actions: {
-      submit: {
-        type: 'submit',
-        label: 'Send my message!',
-      },
-    },
-    fields: {
-      name: {
-        type: 'text',
-        label: 'Name',
-        name: 'name',
-        placeholder: 'Firstname lastname',
-        validations: {
-          required: true,
+    name: 'Buzzbrothers',
+    street: 'Rue Vautier 37',
+    city: '1227 Carouge',
+    phone: '022 300 51 40',
+    email: 'hello@buzzbrothers.ch',
+    facebookUrl: '/',
+    twitterUrl: '/',
+    instagramUrl: '/',
+    markers: [
+        {
+            lat: 46.618038,
+            lng: 7.05728,
         },
-      },
-      email: {
-        type: 'text',
-        label: 'Email',
-        name: 'email',
-        placeholder: 'something@something.com',
-        validations: {
-          required: true,
-          email: true,
+        {
+            lat: 45.618038,
+            lng: 8.05728,
         },
-      },
-      url: {
-        type: 'text',
-        label: 'Website url',
-        name: 'url',
-        placeholder: 'coffeekraken.io',
-        validations: {
-          required: true,
-          url: true,
-        },
-      },
-      message: {
-        type: 'textarea',
-        label: 'Message',
-        name: 'message',
-        placeholder: 'Your message',
-        attributes: {
-          rows: 5,
-        },
-        validations: {
-          required: true,
-        },
-      },
-    },
-  },
+    ],
 };

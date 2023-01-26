@@ -1,3 +1,61 @@
+{% set contactForm = {
+    action: '/',
+    lnf: {
+        labelType: 'float',
+        spacing: 30,
+        color: 'accent',
+    },
+    actions: {
+        submit: {
+            type: 'submit',
+            label: 'Send my message!',
+        },
+    },
+    fields: {
+        name: {
+            type: 'text',
+            label: 'Name',
+            name: 'name',
+            placeholder: 'Firstname lastname',
+            validations: {
+                required: true,
+            },
+        },
+        email: {
+            type: 'text',
+            label: 'Email',
+            name: 'email',
+            placeholder: 'something@something.com',
+            validations: {
+                required: true,
+                email: true,
+            },
+        },
+        url: {
+            type: 'text',
+            label: 'Website url',
+            name: 'url',
+            placeholder: 'coffeekraken.io',
+            validations: {
+                required: true,
+                url: true,
+            },
+        },
+        message: {
+            type: 'textarea',
+            label: 'Message',
+            name: 'message',
+            placeholder: 'Your message',
+            attributes: {
+                rows: 5,
+            },
+            validations: {
+                required: true,
+            },
+        },
+    },
+} %}
+
 <section class="section-contact" s-appear in="bottom" delay="600">
     <div class="s-container">
         <div class="_layout">
@@ -9,29 +67,46 @@
                     <h4 class="s-typo:h5 s-mbe:30">
                         Contact
                     </h4>
-                    <p class="s-typo:p s-tc:accent s-mbe:10">BuzzBrothers</p>
-                    <p class="s-typo:p s-mbe:10">Rue Vautier 37</p>
-                    <p class="s-typo:p s-mbe:10">1227 Carouge</p>
-                    <a href="tel: 022 300 51 40" class="s-typo:a">+41 22 300 51 40</a>
+                    <p class="s-typo:p s-tc:accent s-mbe:10">{{ name }}</p>
+                    <p class="s-typo:p s-mbe:10">{{ street }}</p>
+                    <p class="s-typo:p s-mbe:10">{{ city }}</p>
+                    {% if phone %}
+                        <a href="tel: {{ phone }}" class="s-typo:a:p s-mbe:10">{{ phone }}</a>
+                    {% endif %}
+                    {% if email %}
+                        <a href="mailto: {{ email }}" class="s-typo:a:p s-mbe:10">{{ email }}</a>
+                    {% endif %}
                     <div class="_socials">
-                        <a href="/" title="Facebook" target="_blank">
-                            <i class="s-icon:facebook"></i>
-                        </a>
-                        <a href="/" title="Twitter" target="_blank">
-                            <i class="s-icon:twitter"></i>
-                        </a>
-                        <a href="/" title="Instagram" target="_blank">
-                            <i class="s-icon:instagram"></i>
-                        </a>
-
+                        {% if facebookUrl %}
+                            <a href="{{ facebookUrl }}" title="Facebook" target="_blank">
+                                <i class="s-icon:facebook"></i>
+                            </a>
+                        {% endif %}
+                        {% if twitterUrl %}
+                            <a href="{{ twitterUrl }}" title="Twitter" target="_blank">
+                                <i class="s-icon:twitter"></i>
+                            </a>
+                        {% endif %}
+                        {% if instagramUrl %}
+                            <a href="{{ instagramUrl }}" title="Instagram" target="_blank">
+                                <i class="s-icon:instagram"></i>
+                            </a>
+                        {% endif %}
                     </div>
                 </div>
                 <div>
-                    <s-google-map map-id="7bfb2f702a07e548" lat="46.618038" lng="7.057280">
-                        <s-google-map-marker lat="46.618038" lng="7.057280" title="Buzzbrothers" address="Rue Vautier 37" city="1227 Carouge" country="Switzerland" email="info@buzzbrothers.ch" phone="+41 22 300 51 40" url="https://buzzbrothers.ch">
-                            {# <div class="_marker">
-                                Hello world
-                            </div> #}
+                    <s-google-map map-id="7bfb2f702a07e548" lat="46.618038" lng="7.057280" bounds>
+
+                        {% for marker in markers %}
+                            <s-google-map-marker lat="{{ marker.lat }}" lng="{{ marker.lng }}" title="{{ name }}" address="{{ street }}" city="{{ city }}">
+                                <div class="s-google-map-marker">    
+                                    <div class="s-google-map-marker_icon">
+                                        <i class="fa-solid fa-location-dot"></i>
+                                    </div>
+                                </div>
+                            </s-google-map-marker>
+                        {% endfor %}
+                        {# <s-google-map-marker lat="46.618038" lng="7.057280" title="Buzzbrothers" address="Rue Vautier 37" city="1227 Carouge" country="Switzerland" email="info@buzzbrothers.ch" phone="+41 22 300 51 40" url="https://buzzbrothers.ch">
                         </s-google-map-marker>
                         <s-google-map-marker lat="46.118038" lng="7.157280">
                             <div class="s-google-map-marker">
@@ -52,7 +127,7 @@
                                     Hello world Nude
                                 </div>
                             </div>
-                        </s-google-map-marker>
+                        </s-google-map-marker> #}
                     </s-google-map>
 
                     {# <img class="_map" src="https://maps.googleapis.com/maps/api/staticmap?key=AIzaSyAvbt4SUI07-9GmH3B6rGbEkCn25Qsi-SE&center=46.18377246655043,6.142042099999996&zoom=18&format=png&maptype=roadmap&style=element:geometry%7Ccolor:0x212121&style=element:labels.icon%7Cvisibility:off&style=element:labels.text.fill%7Ccolor:0x757575&style=element:labels.text.stroke%7Ccolor:0x212121&style=feature:administrative%7Celement:geometry%7Ccolor:0x757575&style=feature:administrative.country%7Celement:labels.text.fill%7Ccolor:0x9e9e9e&style=feature:administrative.land_parcel%7Cvisibility:off&style=feature:administrative.locality%7Celement:labels.text.fill%7Ccolor:0xbdbdbd&style=feature:poi%7Celement:labels.text.fill%7Ccolor:0x757575&style=feature:poi.park%7Celement:geometry%7Ccolor:0x181818&style=feature:poi.park%7Celement:labels.text.fill%7Ccolor:0x616161&style=feature:poi.park%7Celement:labels.text.stroke%7Ccolor:0x1b1b1b&style=feature:road%7Celement:geometry.fill%7Ccolor:0x2c2c2c&style=feature:road%7Celement:labels.text.fill%7Ccolor:0x8a8a8a&style=feature:road.arterial%7Celement:geometry%7Ccolor:0x373737&style=feature:road.highway%7Celement:geometry%7Ccolor:0x3c3c3c&style=feature:road.highway.controlled_access%7Celement:geometry%7Ccolor:0x4e4e4e&style=feature:road.local%7Celement:labels.text.fill%7Ccolor:0x616161&style=feature:transit%7Celement:labels.text.fill%7Ccolor:0x757575&style=feature:water%7Celement:geometry%7Ccolor:0x000000&style=feature:water%7Celement:labels.text.fill%7Ccolor:0x3d3d3d&size=480x330" /> #}

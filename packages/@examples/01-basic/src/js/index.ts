@@ -1,3 +1,4 @@
+import { __querySelector } from '@coffeekraken/sugar/dom';
 // import __SDashboard from '@coffeekraken/s-dashboard';
 
 import __SFront from '@coffeekraken/s-front';
@@ -25,52 +26,52 @@ import { define as __SSliderComponentDefine } from '@coffeekraken/s-slider-compo
 const viewsRelated = import.meta.globEager('../views/**/*.ts');
 
 if (import.meta.hot) {
-  import.meta.hot.on('sugar.update.css', (data) => {
-    console.log('RELOAD', data);
-    // perform custom update
-    __reloadStylesheets();
-  });
+    import.meta.hot.on('sugar.update.css', (data) => {
+        console.log('RELOAD', data);
+        // perform custom update
+        __reloadStylesheets();
+    });
 }
 
 // Init script
 (async () => {
-  // Set some features defaults
-  __SFeature.setDefaultProps('*', {});
+    // Set some features defaults
+    __SFeature.setDefaultProps('*', {});
 
-  // Set some components defaults
-  __SLitComponent.setDefaultProps('*', {});
+    // Set some components defaults
+    __SLitComponent.setDefaultProps('*', {});
 
-  __SFront.init({});
+    __SFront.init({});
 
-  // sugar feature
-  __sugarFeatureDefine();
+    // sugar feature
+    __sugarFeatureDefine();
 
-  // essentials
-  __SPackEssentials();
+    // essentials
+    __SPackEssentials();
 
-  // features
-  __sFormValidateFeature({});
+    // features
+    __sFormValidateFeature({});
 
-  // Project related components
-  // ...
+    // Project related components
+    // ...
 
-  // Components
-  __SSliderComponentDefine();
-  __sGoogleMapComponentDefine();
-  // __sCarpenterComponentDefine();
+    // Components
+    __SSliderComponentDefine();
+    __sGoogleMapComponentDefine();
+    // __sCarpenterComponentDefine();
 
-  // __SCarpenterComponent.create();
+    // __SCarpenterComponent.create();
 
-  // Dashboard
-  // new __SDashboard({
-  //     dashboard: {
-  //         components: {
-  //             's-dashboard-pages': {
-  //                 onSelect: (page) => {
-  //                     document.location.href = page.item.loc;
-  //                 },
-  //             },
-  //         },
-  //     },
-  // });
+    // Dashboard
+    // new __SDashboard({
+    //     dashboard: {
+    //         components: {
+    //             's-dashboard-pages': {
+    //                 onSelect: (page) => {
+    //                     document.location.href = page.item.loc;
+    //                 },
+    //             },
+    //         },
+    //     },
+    // });
 })();

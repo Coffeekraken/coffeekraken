@@ -1,30 +1,29 @@
-import __SugarConfig from '@coffeekraken/s-sugar-config';
-import __fs from 'fs';
-import __deepMerge from '../../shared/object/deepMerge';
+import { __deepMerge } from '@coffeekraken/sugar/object';
 import { __packageRootDir } from '@coffeekraken/sugar/path';
-import __globalNodeModulesPath from './globalNodeModulesPath';
+import __fs from 'fs';
 export default function packagePath(name, settings) {
     const set = __deepMerge({
-        rootDir: __SugarConfig.get('npm.rootDir'),
+        cwd: process.cwd(),
         monorepo: true,
         global: true,
-    });
+    }, settings !== null && settings !== void 0 ? settings : {});
     let monoDir, globalDir;
-    monoDir = `${__packageRootDir(process.cwd(), {
+    monoDir = `${__packageRootDir(set.cwd, {
         highest: true,
     })}/node_modules`;
+    console.log('mono', monoDir);
     // if the package.json exists in rootDir node_modules folder
-    if (__fs.existsSync(`${set.rootDir}/${name}/package.json`)) {
-        return `${set.rootDir}/${name}`;
+    if (__fs.existsSync(`${set.cwd}/node_modules/${name}/package.json`)) {
+        return `${set.cwd}/node_modules/${name}`;
     }
     if (set.monorepo &&
         monoDir !== (settings === null || settings === void 0 ? void 0 : settings.rootDir) &&
         __fs.existsSync(`${monoDir}/${name}/package.json`)) {
         return `${monoDir}/${name}`;
     }
-    globalDir = __globalNodeModulesPath();
-    if (set.global && __fs.existsSync(`${globalDir}/${name}/package.json`)) {
-        return `${globalDir}/${name}`;
-    }
+    // globalDir = __globalNodeModulesPath();
+    // if (set.global && __fs.existsSync(`${globalDir}/${name}/package.json`)) {
+    //     return `${globalDir}/${name}`;
+    // }
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sYUFBYSxNQUFNLDhCQUE4QixDQUFDO0FBQ3pELE9BQU8sSUFBSSxNQUFNLElBQUksQ0FBQztBQUN0QixPQUFPLFdBQVcsTUFBTSwrQkFBK0IsQ0FBQztBQUN4RCxPQUFPLEVBQUUsZ0JBQWdCLEVBQUUsTUFBTSwwQkFBMEIsQ0FBQztBQUM1RCxPQUFPLHVCQUF1QixNQUFNLHlCQUF5QixDQUFDO0FBK0I5RCxNQUFNLENBQUMsT0FBTyxVQUFVLFdBQVcsQ0FDL0IsSUFBWSxFQUNaLFFBQXdDO0lBRXhDLE1BQU0sR0FBRyxHQUF5QixXQUFXLENBQUM7UUFDMUMsT0FBTyxFQUFFLGFBQWEsQ0FBQyxHQUFHLENBQUMsYUFBYSxDQUFDO1FBQ3pDLFFBQVEsRUFBRSxJQUFJO1FBQ2QsTUFBTSxFQUFFLElBQUk7S0FDZixDQUFDLENBQUM7SUFFSCxJQUFJLE9BQU8sRUFBRSxTQUFTLENBQUM7SUFFdkIsT0FBTyxHQUFHLEdBQUcsZ0JBQWdCLENBQUMsT0FBTyxDQUFDLEdBQUcsRUFBRSxFQUFFO1FBQ3pDLE9BQU8sRUFBRSxJQUFJO0tBQ2hCLENBQUMsZUFBZSxDQUFDO0lBRWxCLDREQUE0RDtJQUM1RCxJQUFJLElBQUksQ0FBQyxVQUFVLENBQUMsR0FBRyxHQUFHLENBQUMsT0FBTyxJQUFJLElBQUksZUFBZSxDQUFDLEVBQUU7UUFDeEQsT0FBTyxHQUFHLEdBQUcsQ0FBQyxPQUFPLElBQUksSUFBSSxFQUFFLENBQUM7S0FDbkM7SUFFRCxJQUNJLEdBQUcsQ0FBQyxRQUFRO1FBQ1osT0FBTyxNQUFLLFFBQVEsYUFBUixRQUFRLHVCQUFSLFFBQVEsQ0FBRSxPQUFPLENBQUE7UUFDN0IsSUFBSSxDQUFDLFVBQVUsQ0FBQyxHQUFHLE9BQU8sSUFBSSxJQUFJLGVBQWUsQ0FBQyxFQUNwRDtRQUNFLE9BQU8sR0FBRyxPQUFPLElBQUksSUFBSSxFQUFFLENBQUM7S0FDL0I7SUFFRCxTQUFTLEdBQUcsdUJBQXVCLEVBQUUsQ0FBQztJQUV0QyxJQUFJLEdBQUcsQ0FBQyxNQUFNLElBQUksSUFBSSxDQUFDLFVBQVUsQ0FBQyxHQUFHLFNBQVMsSUFBSSxJQUFJLGVBQWUsQ0FBQyxFQUFFO1FBQ3BFLE9BQU8sR0FBRyxTQUFTLElBQUksSUFBSSxFQUFFLENBQUM7S0FDakM7QUFDTCxDQUFDIn0=
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sRUFBRSxXQUFXLEVBQUUsTUFBTSw0QkFBNEIsQ0FBQztBQUN6RCxPQUFPLEVBQUUsZ0JBQWdCLEVBQUUsTUFBTSwwQkFBMEIsQ0FBQztBQUM1RCxPQUFPLElBQUksTUFBTSxJQUFJLENBQUM7QUErQnRCLE1BQU0sQ0FBQyxPQUFPLFVBQVUsV0FBVyxDQUMvQixJQUFZLEVBQ1osUUFBd0M7SUFFeEMsTUFBTSxHQUFHLEdBQXlCLFdBQVcsQ0FDekM7UUFDSSxHQUFHLEVBQUUsT0FBTyxDQUFDLEdBQUcsRUFBRTtRQUNsQixRQUFRLEVBQUUsSUFBSTtRQUNkLE1BQU0sRUFBRSxJQUFJO0tBQ2YsRUFDRCxRQUFRLGFBQVIsUUFBUSxjQUFSLFFBQVEsR0FBSSxFQUFFLENBQ2pCLENBQUM7SUFFRixJQUFJLE9BQU8sRUFBRSxTQUFTLENBQUM7SUFFdkIsT0FBTyxHQUFHLEdBQUcsZ0JBQWdCLENBQUMsR0FBRyxDQUFDLEdBQUcsRUFBRTtRQUNuQyxPQUFPLEVBQUUsSUFBSTtLQUNoQixDQUFDLGVBQWUsQ0FBQztJQUVsQixPQUFPLENBQUMsR0FBRyxDQUFDLE1BQU0sRUFBRSxPQUFPLENBQUMsQ0FBQztJQUU3Qiw0REFBNEQ7SUFDNUQsSUFBSSxJQUFJLENBQUMsVUFBVSxDQUFDLEdBQUcsR0FBRyxDQUFDLEdBQUcsaUJBQWlCLElBQUksZUFBZSxDQUFDLEVBQUU7UUFDakUsT0FBTyxHQUFHLEdBQUcsQ0FBQyxHQUFHLGlCQUFpQixJQUFJLEVBQUUsQ0FBQztLQUM1QztJQUVELElBQ0ksR0FBRyxDQUFDLFFBQVE7UUFDWixPQUFPLE1BQUssUUFBUSxhQUFSLFFBQVEsdUJBQVIsUUFBUSxDQUFFLE9BQU8sQ0FBQTtRQUM3QixJQUFJLENBQUMsVUFBVSxDQUFDLEdBQUcsT0FBTyxJQUFJLElBQUksZUFBZSxDQUFDLEVBQ3BEO1FBQ0UsT0FBTyxHQUFHLE9BQU8sSUFBSSxJQUFJLEVBQUUsQ0FBQztLQUMvQjtJQUdELHlDQUF5QztJQUV6Qyw0RUFBNEU7SUFDNUUscUNBQXFDO0lBQ3JDLElBQUk7QUFDUixDQUFDIn0=

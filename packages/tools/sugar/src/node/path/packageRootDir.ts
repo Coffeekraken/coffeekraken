@@ -1,8 +1,8 @@
 // @ts-nocheck
 
 import { __isFile } from '@coffeekraken/sugar/is';
+import { __objectHash } from '@coffeekraken/sugar/object';
 import __findPkgJson from 'find-package-json';
-import __objectHash from '../../shared/object/objectHash';
 
 /**
  * @name                    packageRootDir

@@ -1,6 +1,6 @@
 
 export interface IPackagePathSettings {
-    rootDir: string;
+    cwd: string;
     monorepo: boolean;
     global: boolean;
 }

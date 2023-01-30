@@ -40,6 +40,7 @@
     > .s-slider_root {
         > .s-slider_slides-wrapper {
             overflow: auto;
+            overflow-y: hidden;
             scroll-snap-type: x mandatory;
 
             /* hide scrollbar */
@@ -60,6 +61,8 @@
     &[direction='vertical'] {
         > .s-slider_root {
             > .s-slider_slides-wrapper {
+                overflow-x: hidden;
+                overflow-y: auto;
                 scroll-snap-type: y mandatory;
             }
         }

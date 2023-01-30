@@ -197,6 +197,8 @@ export default function (api) {
                 'name',
                 'as',
                 'type',
+                'param',
+                'setting',
                 'menu',
                 'default',
                 'platform',

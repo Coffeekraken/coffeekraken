@@ -60,7 +60,9 @@ export default function ({
 
     vars.code(
         `
-        margin: 0 auto;
+        @sugar.lod.prevent {
+            margin: 0 auto;
+        }
   `,
     );
 
@@ -76,8 +78,10 @@ export default function ({
 
     vars.code(`
         --s-container-max-width: sugar.theme(layout.container.${finalParams.name}, true);
-        width: 100%;
-        max-width: sugar.theme(layout.container.${finalParams.name}, true);
+        @sugar.lod.prevent {
+            width: 100%;
+            max-width: sugar.theme(layout.container.${finalParams.name}, true);
+        }
     `);
 
     return vars;

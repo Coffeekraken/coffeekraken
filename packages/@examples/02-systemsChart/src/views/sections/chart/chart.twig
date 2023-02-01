@@ -1,0 +1,87 @@
+<section class="section-chart {{ paddingClasses(padding) }} {{ marginClasses(margin) }}"
+    s-specs="views.sections.chart"
+    {{ specsValues(_context)|raw }}
+>
+    <div class="_bkg">
+        <img src="{{ bkg.url }}" />
+    </div>
+    <div class="_content">
+
+        <div class="chart">
+
+            <div class="_heading">
+                
+                <div class="_features"></div>
+
+                <div class="_systems">
+                    {% for system in systems %}
+                        <div class="_system">
+
+                            <div class="s-tooltip-container">
+                                <a href="{{ system.url }}" target="_blank">
+                                    <img class="_system-logo" src="{{ system.logo }}" />
+                                </a>
+                                <div class="s-tooltip:bottom s-color:complementary">
+                                    {{ system.title }}
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            
+            </div>
+
+            <div class="_body">
+
+                <div class="_features">
+                    {% for feature in features %}
+                        <div class="_feature">
+                            {{ feature.title }}
+                        </div>
+                    {% endfor %}
+
+                </div>
+
+                <div class="_systems">
+                    {% for system in systems %}
+                        <div class="_system">
+                                {% for key, feature in features %}
+                                    <div class="_feature">
+                                            {% if system.whyNot %}
+
+                                                <div class="s-tooltip-container">
+                                                    <i class="s-icon:info"></i>
+                                                    <div class="s-tooltip s-color:accent s-white-space:nowrap">
+                                                        {{ system.whyNot }}
+                                                    </div>
+                                                </div>
+                    
+                                            {% else %}
+
+                                                <div class="s-tooltip-container">
+                                                    {% if system.features[key].check %}
+                                                        <i class="s-icon:check"></i>
+                                                        <div class="s-tooltip s-color:accent s-white-space:nowrap">
+                                                            Yeah bro!
+                                                        </div>
+                                                    {% else %}
+                                                        <i class="s-icon:cross"></i>
+                                                        <div class="s-tooltip s-color:error s-white-space:nowrap">
+                                                            Sorry but... no...
+                                                        </div>
+                                                    {% endif %}
+                                                </div>
+
+                                            {% endif %}
+                                        </div>
+                                {% endfor %}
+                        </div>
+                    {% endfor %}
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+</section>

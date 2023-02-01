@@ -1,7 +1,10 @@
 .section-slider {
-    margin-block: -20px;
     position: relative;
     z-index: 10;
+
+    @sugar.lod (3) {
+        margin-block: -20px;
+    }
 
     @sugar.media mobile {
         padding-block: 0;

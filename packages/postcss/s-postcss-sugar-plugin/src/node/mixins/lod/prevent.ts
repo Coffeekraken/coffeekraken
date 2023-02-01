@@ -45,7 +45,6 @@ export default function ({
     settings: any;
     postcssApi: any;
 }) {
-    
     const finalParams = <postcssSugarPluginScopePreventMixinParams>{
         scopes: [],
         ...(params ?? {}),
@@ -56,6 +55,18 @@ export default function ({
         atRule.replaceWith(atRule.nodes);
         return;
     }
+
+    atRule.nodes.forEach((node) => {
+        if (!node.selector) {
+            if (!atRule._parentRule) {
+                atRule._parentRule = postcssApi.rule({
+                    selector: '&',
+                });
+                atRule.append(atRule._parentRule);
+            }
+            atRule._parentRule.append(node);
+        }
+    });
 
     // check if the lod feature is enabled or not
     atRule.walkRules((rule) => {

@@ -35,7 +35,7 @@ import { define as __CKVersionSelector } from './components/CKVersionSelector';
 
 import {
     __querySelectorLive,
-    __reloadStylesheets,
+    __reloadStylesheets
 } from '@coffeekraken/sugar/dom';
 
 // Libs
@@ -43,6 +43,9 @@ import {
 // Views specific
 // @ts-ignore
 const viewsRelated = import.meta.globEager('../views/**/*.ts');
+
+
+__querySelectorLive
 
 // For doc specific
 // @ts-ignore

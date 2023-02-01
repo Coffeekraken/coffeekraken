@@ -44,7 +44,7 @@
 {% endif %}
 
 <!DOCTYPE html>
-<html lang="{{ lang }}" dir="{{ dir }}">
+<html lang="{{ lang }}" dir="{{ dir }}" class="{{ lodClasses(frontspec.lod.defaultLevel ? frontspec.lod.defaultLevel : 3) }}">
 <head>
     <!-- metas -->
     {{ frontspecMetas(frontspec)|raw }}
@@ -63,7 +63,7 @@
 
 </head>
 
-<body class="{{ lodClasses(2) }} {{ bodyAttributes.class }}" s-sugar {{ attrs(bodyAttributes, ['class'])|raw }}>
+<body class="{{ bodyAttributes.class }}" s-sugar {{ attrs(bodyAttributes, ['class'])|raw }}>
 
     <script>
         document.body.classList.add('initial-loading');

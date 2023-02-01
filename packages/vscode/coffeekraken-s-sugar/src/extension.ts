@@ -8,6 +8,14 @@ import * as __fs from 'fs';
 import * as __glob from 'glob';
 import __findPkgJson from 'find-package-json';
 
+function getDocmapObjByName(docmapJson: any, name: string): any {
+    for (let [namespace, docmapObj] of Object.entries(docmapJson)) {
+        if (name === docmapObj.name || name === `__${docmapObj.name}`) {
+            return docmapObj;
+        }
+    }
+}
+
 // This method is called when your extension is activated
 // Your extension is activated the very first time the command is executed
 export async function activate(context: vscode.ExtensionContext) {
@@ -63,6 +71,48 @@ export async function activate(context: vscode.ExtensionContext) {
                 };
             }
         }
+    }
+
+    function popinContent(docmapObj) {
+        const params = docmapObj.param ?? {},
+            settings = docmapObj.setting ?? {};
+
+        return `# __${docmapObj.name}
+
+        ${docmapObj.description}
+        
+        ${Object.keys(params)
+            .map((param) => {
+                const paramObj = params[param];
+                return `
+        **<span style="color: #f00;">${param}</span>** __{${paramObj.type.raw}}__       
+        ${paramObj.description}
+            `;
+            })
+            .join('\n')}
+        
+        ${Object.keys(settings)
+            .map((setting) => {
+                const settingObj = settings[setting];
+                return `
+        **<span style="color: #f00;">${setting}</span>** __{${settingObj.type.raw}}__
+        ${settingObj.description}
+            `;
+            })
+            .join('\n')}
+        
+        ${docmapObj.example
+            ?.map?.(
+                (exampleObj) => `
+        ### ${exampleObj.title ?? 'Example'}
+        
+        \`\`\`${exampleObj.language}
+        ${exampleObj.code}
+        \`\`\`
+        `,
+            )
+            .join('\n')}
+                `;
     }
 
     const snippets: any[] = [];
@@ -141,47 +191,7 @@ export async function activate(context: vscode.ExtensionContext) {
             command: 'coffeekraken.s.sugar.import',
         };
 
-        const params = docmapObj.param ?? {},
-            settings = docmapObj.setting ?? {};
-
-        const docs: any = new vscode.MarkdownString(
-            `# __${docmapObj.name}
-
-${docmapObj.description}
-
-${Object.keys(params)
-    .map((param) => {
-        const paramObj = params[param];
-        return `
-**<span style="color: #f00;">${param}</span>** __{${paramObj.type.raw}}__       
-${paramObj.description}
-    `;
-    })
-    .join('\n')}
-
-${Object.keys(settings)
-    .map((setting) => {
-        const settingObj = settings[setting];
-        return `
-**<span style="color: #f00;">${setting}</span>** __{${settingObj.type.raw}}__
-${settingObj.description}
-    `;
-    })
-    .join('\n')}
-
-${docmapObj.example
-    ?.map?.(
-        (exampleObj) => `
-### ${exampleObj.title ?? 'Example'}
-
-\`\`\`${exampleObj.language}
-${exampleObj.code}
-\`\`\`
-`,
-    )
-    .join('\n')}
-        `,
-        );
+        const docs: any = new vscode.MarkdownString(popinContent(docmapObj));
 
         docs.supportHtml = true;
         docs.isTrusted = true;
@@ -190,6 +200,54 @@ ${exampleObj.code}
 
         snippets.push(snippetCompletion);
     }
+
+    vscode.languages.registerHoverProvider(
+        [
+            {
+                scheme: 'file',
+                language: 'typescript',
+            },
+            {
+                scheme: 'file',
+                language: 'javascript',
+            },
+        ],
+        {
+            provideHover(doc, pos, token) {
+                const editor = vscode.window.activeTextEditor;
+
+                // pos.e
+                const range = editor?.document.getWordRangeAtPosition(
+                    new vscode.Position(pos.line, pos.e),
+                );
+                const hoveredText = editor?.document.getText(range);
+
+                if (!hoveredText) {
+                    return;
+                }
+
+                const docmapObj = getDocmapObjByName(
+                    docmapJsonMap,
+                    hoveredText,
+                );
+
+                if (!docmapObj) {
+                    return;
+                }
+
+                const popinContentStr = new vscode.MarkdownString(
+                    popinContent(docmapObj),
+                );
+
+                docs.supportHtml = true;
+                docs.isTrusted = true;
+
+                return {
+                    contents: [popinContentStr.toString()],
+                };
+            },
+        },
+    );
 
     vscode.languages.registerCompletionItemProvider(
         [
@@ -204,15 +262,8 @@ ${exampleObj.code}
         ],
         {
             provideCompletionItems(document, position, token, context) {
-                console.log(snippets.length);
-
                 return snippets;
             },
-            // provideHover(document, position, token) {
-            //     return {
-            //         contents: ['Hover Content'],
-            //     };
-            // },
         },
     );
 }

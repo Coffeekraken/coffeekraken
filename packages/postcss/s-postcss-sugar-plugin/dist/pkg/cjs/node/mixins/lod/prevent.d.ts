@@ -6,10 +6,10 @@ declare class postcssSugarPluginScopePreventMixinInterface extends __SInterface 
 export { postcssSugarPluginScopePreventMixinInterface as interface };
 export interface postcssSugarPluginScopePreventMixinParams {
 }
-export default function ({ params, sharedData, atRule, replaceWith, postcssApi, }: {
+export default function ({ params, sharedData, atRule, settings, postcssApi, }: {
     params: Partial<IPostcssSugarPluginColorParams>;
     sharedData: any;
     atRule: any;
-    replaceWith: Function;
+    settings: any;
     postcssApi: any;
 }): void;

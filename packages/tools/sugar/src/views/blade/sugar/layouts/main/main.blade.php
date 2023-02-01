@@ -46,7 +46,7 @@ $frontspec->metas->og = $ogObj;
         $dir = $frontspec->metas->dir;
     }
 @endphp
-<html lang="{{ $lang }}" dir="{{ $dir }}">
+<html lang="{{ $lang }}" dir="{{ $dir }}" class="{{ \Sugar\lod\lodClasses(isset($frontspec->lod->defaultLevel)) ? $frontspec->lod->defaultLevel : 3 }}">
 <head>
     <!-- metas -->
     {!! \Sugar\frontspec\metas($frontspec, $env) !!}
@@ -67,7 +67,7 @@ $frontspec->metas->og = $ogObj;
 
 </head>
 
-<body class="{{ \Sugar\lod\lodClasses(2) }} {{ isset($bodyAttributes['class']) ? $bodyAttributes['class'] : '' }}" s-sugar {!! \Sugar\html\attrs($bodyAttributes, ['class']) !!}>
+<body class="{{ isset($bodyAttributes['class']) ? $bodyAttributes['class'] : '' }}" s-sugar {!! \Sugar\html\attrs($bodyAttributes, ['class']) !!}>
 
     <script>
         document.body.classList.add('initial-loading');

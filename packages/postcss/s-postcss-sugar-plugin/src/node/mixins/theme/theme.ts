@@ -85,7 +85,7 @@ export default function ({
         vars.push(`@sugar.lnf.base;`);
         vars.push('}');
     } else if (atRule.parent.type === 'root') {
-        vars.unshift(':root {');
+        vars.unshift('body {');
         vars.push(`@sugar.lnf.base;`);
         vars.push('}');
     } else {

@@ -1,12 +1,14 @@
 import { partytownSnippet } from '@builder.io/partytown/integration';
 import __SClass from '@coffeekraken/s-class';
 import __SEnv from '@coffeekraken/s-env';
-import { __parseHtml } from '@coffeekraken/sugar/console';
 import { __getCookie, __setCookie } from '@coffeekraken/sugar/cookie';
 import { __isCrawler } from '@coffeekraken/sugar/is';
 import { __deepMerge } from '@coffeekraken/sugar/object';
 
-import __SStdio, { __SStdioBasicAdapter, __SStdioConsoleSource } from '@coffeekraken/s-stdio';
+import __SStdio, {
+    __SStdioBasicAdapter,
+    __SStdioConsoleSource,
+} from '@coffeekraken/s-stdio';
 
 import { __speedIndex } from '@coffeekraken/sugar/perf';
 
@@ -222,7 +224,11 @@ export default class SFront extends __SClass {
      */
     constructor(settings?: Partial<ISFrontSettings>) {
         // Stdio
-        const stdio = new __SStdio('default', new __SStdioConsoleSource(), new __SStdioBasicAdapter());
+        const stdio = new __SStdio(
+            'default',
+            new __SStdioConsoleSource(),
+            new __SStdioBasicAdapter(),
+        );
 
         if (!__SEnv.is('production')) {
             const color =
@@ -347,11 +353,13 @@ export default class SFront extends __SClass {
         settings?: Partial<ISThemeSetLodSettings>,
     ): void {
         const finalSettings = <ISThemeSetLodSettings>{
-            $context: document.body,
+            $context: document.querySelector('html'),
             ...(settings ?? {}),
         };
 
-        console.verbose?.(`<yellow>[lod]</yellow> Set lod (level of details) to <cyan>${level}</cyan>`);
+        console.verbose?.(
+            `<yellow>[lod]</yellow> Set lod (level of details) to <cyan>${level}</cyan>`,
+        );
 
         // @ts-ignore
         level = parseInt(`${level}`);

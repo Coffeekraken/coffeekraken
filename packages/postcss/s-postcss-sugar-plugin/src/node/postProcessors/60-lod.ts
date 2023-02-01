@@ -193,6 +193,11 @@ export default async function ({ root, sharedData, postcssApi, settings }) {
 
         //
         root.walkDecls(propertiesReg, (decl) => {
+            // already setted lod with @sugar.lod(...)
+            if (decl.parent?.selector?.match(/\.s-lod--[0-9]{1,2}/)) {
+                return;
+            }
+
             // do not touch s-icons...
             if (decl.parent?.selector?.match(/^\.s-icon/)) {
                 return;
@@ -204,7 +209,7 @@ export default async function ({ root, sharedData, postcssApi, settings }) {
             }
 
             // protect the keyframes declarations
-            if (decl.parent.parent?.name === 'keyframes') {
+            if (decl.parent?.parent?.name === 'keyframes') {
                 return;
             }
 
@@ -316,6 +321,14 @@ export default async function ({ root, sharedData, postcssApi, settings }) {
     root.walkRules(/\.s-lod--prevent/, (rule) => {
         rule.selectors = rule.selectors.map((sel) => {
             return sel.replace(/\.s-lod--prevent\s?/gm, '');
+        });
+    });
+
+    // make sure the remaining ".s-lod--..." classes are at the start of each selectors
+    root.walkRules(/\.s-lod--[0-9]{1,2}/, (rule) => {
+        rule.selectors = rule.selectors.map((sel) => {
+            const lodSel = sel.match(/(\.s-lod--[0-9]{1,2})/gm);
+            return `${lodSel[0]} ${sel.replace(lodSel[0], '')}`;
         });
     });
 

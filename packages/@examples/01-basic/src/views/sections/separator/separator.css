@@ -1,7 +1,10 @@
 .section-separator {
   position: relative;
   width: 100%;
-  transform: skewY(1deg);
+
+  @sugar.lod (3) {
+    transform: skewY(1deg);
+  }
 
   ._bkg {
     background: sugar.color(base, background, --lighten 5%);

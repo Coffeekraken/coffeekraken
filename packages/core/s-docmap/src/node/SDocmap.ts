@@ -356,8 +356,6 @@ class SDocmap extends __SClass implements ISDocmap {
                 highest: true,
             });
 
-            return resolve({});
-
             const extendedPackages: string[] = [];
             const finalDocmapJson: Partial<ISDocmapObj> = {
                 metas: {

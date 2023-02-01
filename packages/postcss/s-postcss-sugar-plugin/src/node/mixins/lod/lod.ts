@@ -67,6 +67,36 @@ export default function ({
         return;
     }
 
+    // handle mixin at root
+    if (atRule.parent.type === 'root') {
+        atRule.nodes.forEach((node) => {
+            if (!node.selector) {
+                throw new Error(
+                    `<red>[postcssSugarPlugin.lod]</red> When using the "<yellow>@sugar.lod</yellow>" mixin at root level, children MUST be css rule and not a property or anything else...`,
+                );
+            }
+        });
+    }
+
+    // atRule.nodes.forEach(node => {
+    //     if (node.selector && node.selector.match(/\&/)) {
+    //         node.selector = node.selector.replace(/\&/gm, node.parent.selec)
+    //     }
+    // })
+
+    // handle direct child declarations
+    atRule.nodes.forEach((node) => {
+        if (!node.selector) {
+            if (!atRule._parentRule) {
+                atRule._parentRule = postcssApi.rule({
+                    selector: '&',
+                });
+                atRule.append(atRule._parentRule);
+            }
+            atRule._parentRule.append(node);
+        }
+    });
+
     const levels: number[] = [];
     let action = settings.lod.defaultAction;
 
@@ -110,10 +140,7 @@ export default function ({
 
     levels.forEach((lod) => {
         let cls = `.s-lod--${lod}`;
-        // if (finalParams.method === 'file') {
-        //     cls += `.s-lod-method--${finalParams.method}`;
-        // }
-        newSelectors.push(`${cls} &`);
+        newSelectors.push(`${cls}`);
     });
 
     const newRule = postcssApi.rule({

@@ -1,6 +1,13 @@
 .footer {
-  background: sugar.color(base, background);
   padding-block: sugar.padding(80);
+
+  @sugar.lod.prevent {
+    background-color: rgba(0, 0, 0, 0.01);
+  }
+
+  @sugar.lod (2) {
+    background-color: sugar.color(base, background);
+  }
 
   .logo {
     width: 150px;

@@ -2,7 +2,7 @@
 * Init sugar. This will import a reset css and print the
 * needed variables
 */
-@sugar.init ($variant: 'dark');
+@sugar.init ($variant: 'light');
 
 /**
 * Generate some utility classes like "s-tc:accent, s-mb:30", etc...
@@ -15,8 +15,8 @@
 * that depends on your theme configuration
 */
 @sugar.media.classes ('mobile,tablet') {
-  /* @sugar.margin.classes(); */
-  @sugar.padding.classes();
+    /* @sugar.margin.classes(); */
+    @sugar.padding.classes();
 }
 
 /* @sugar.ui.menu.classes(); */
@@ -38,9 +38,13 @@
     fab:facebook
     fab:patreon
     fab:instagram
-    far:circle-question:info
-    far:circle-check:check
-    far:circle-xmark:cross
+    fa:star
+    fa:cube:component
+    fa:tag:feature
+    fa:heart:love
+    fa:circle-question:info
+    fa:circle-check:check
+    fa:circle-xmark:cross
     sugar:misc-image:drop-file
     sugar:ui-help-solid:help
 );

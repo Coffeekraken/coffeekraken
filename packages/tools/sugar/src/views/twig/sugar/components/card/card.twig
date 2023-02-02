@@ -4,8 +4,8 @@
 >
 
     {% if image and image.url %}
-        <div class="s-card_media">
-            <img class="s-card_img" src="{{ image.url }}" alt="{{ image.alt }}" title="{{ image.title }}" />
+        <div class="s-card_media s-media-container">
+            <img class="s-card_img s-media" src="{{ image.url }}" alt="{{ image.alt }}" title="{{ image.title }}" />
         </div>
     {% endif %}
 

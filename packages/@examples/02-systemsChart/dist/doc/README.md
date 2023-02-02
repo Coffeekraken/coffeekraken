@@ -4,14 +4,14 @@
 
 
 <!-- header -->
-# @example/01-basic
+# @example/02-systemsChart
 
 ###### [AGPL-version-3.0](./license) 1.0.0 - [Git repository]()
 
 <!-- shields -->
-[![size](https://shields.io/bundlephobia/min/@example/01-basic?style=for-the-badge)](https://www.npmjs.com/package/@example/01-basic)
-[![downloads](https://shields.io/npm/dm/@example/01-basic?style=for-the-badge)](https://www.npmjs.com/package/@example/01-basic)
-[![license](https://shields.io/npm/l/@example/01-basic?style=for-the-badge)](./LICENSE)
+[![size](https://shields.io/bundlephobia/min/@example/02-systemsChart?style=for-the-badge)](https://www.npmjs.com/package/@example/02-systemsChart)
+[![downloads](https://shields.io/npm/dm/@example/02-systemsChart?style=for-the-badge)](https://www.npmjs.com/package/@example/02-systemsChart)
+[![license](https://shields.io/npm/l/@example/02-systemsChart?style=for-the-badge)](./LICENSE)
 [![discord](https://img.shields.io/discord/940362961682333767?color=5100FF&amp;label=Join%20us%20on%20Discord&amp;style=for-the-badge)](https://discord.gg/HzycksDJ)
 
 <!-- description -->
@@ -21,7 +21,7 @@
 ### Install
 
 ```shell
-npm i @example/01-basic
+npm i @example/02-systemsChart
 
 ```
 

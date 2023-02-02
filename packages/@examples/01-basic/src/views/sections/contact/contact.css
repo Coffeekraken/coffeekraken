@@ -49,9 +49,9 @@
 
   .s-google-map {
     width: 43vw;
-    height: 200px;
+    height: 300px;
 
-    @sugar.lod (3) {
+    @sugar.lod (2) {
       margin-bottom: calc(sugar.padding(80) * 2 * -1);
       top: calc(sugar.padding(80) * -1);
       height: 700px;

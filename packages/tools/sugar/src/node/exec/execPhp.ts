@@ -91,6 +91,9 @@ export default function __execPhp(
 
         result = __childProcess.exec(
             `php ${scriptPath} "${paramsFilePath ?? paramsStr}"`,
+            {
+                maxBuffer: 1024 * 1024 * 50,
+            },
             (error, stdout, stderr) => {
                 if (paramsFilePath) {
                     try {

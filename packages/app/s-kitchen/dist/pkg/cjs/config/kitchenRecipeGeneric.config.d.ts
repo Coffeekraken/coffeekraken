@@ -144,14 +144,6 @@ export default function (api: any): {
                 
                 readonly imagesBuild: any;
                 
-                readonly faviconBuild: any;
-                
-                readonly docmapBuild: any;
-                
-                readonly sitemapBuild: any;
-                
-                readonly markdownBuild: any;
-                
                 copyAssets: {
                     extends: string;
                     params: {

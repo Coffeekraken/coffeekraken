@@ -91,6 +91,7 @@ export default function spawn(
             stdio: ['inherit', 'inherit', 'inherit'],
             // stdio: 'inherit',
             // detached: true,
+            maxBuffer: 1024 * 1024 * 50,
             cwd: settings.cwd || process.cwd(),
             ...settings,
             env: {

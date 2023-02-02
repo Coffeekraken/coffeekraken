@@ -17,7 +17,9 @@
             </div>
             <div>
                 {% if image %}
-                    <img class="_img" src="{{ image.url }}" alt="{{ image.alt }}" title="{{ image.title }}" />
+                    <div class="s-media-container">
+                        <img class="_img s-media" src="{{ image.url }}" alt="{{ image.alt }}" title="{{ image.title }}" />
+                    </div>
                 {% endif %}
             </div>
         </div>

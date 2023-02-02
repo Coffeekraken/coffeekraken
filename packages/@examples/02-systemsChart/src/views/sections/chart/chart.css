@@ -1,159 +1,242 @@
 .section-chart {
-  ._bkg {
-    pointer-events: none;
-    overflow: hidden;
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-
-    img {
-      filter: blur(7px);
-      object-fit: cover;
-      width: 100%;
-      height: 100%;
-      transform: scale(1.4);
-      display: none;
-
-      @sugar.lod (3) {
-        display: block;
-      }
-    }
-  }
-
-  .chart {
-    position: absolute;
-    background: sugar.color(base, background);
-    display: flex;
-    top: 100px;
-    left: sugar.margin(70);
-    right: sugar.margin(70);
-    bottom: sugar.margin(70);
-    overflow: auto;
-    @sugar.border.radius (30);
-    @sugar.scrollbar;
-    @sugar.depth (100);
-  }
-
-  ._heading {
-    position: sticky;
-    top: 0;
-    left: 0;
-    display: flex;
-    height: 100px;
-    background: sugar.color(main, background, --darken 2);
-    z-index: 11;
-    @sugar.depth (100);
-
-    ._features {
-      width: 200px;
-    }
-
-    ._systems {
-      position: relative;
-      display: flex;
-    }
-    ._system {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 150px;
-    }
-    ._system-logo {
-      max-width: 100px;
-      max-height: 40px;
-    }
-  }
-
-  i.s-icon--check {
-    color: sugar.color(success);
-  }
-  i.s-icon--cross {
-    color: sugar.color(error);
-  }
-  i.s-icon--info {
-    color: sugar.color(warning);
-    opacity: 0.3;
-  }
-
-  .s-tooltip-container {
-    overflow: hidden;
-    display: inline-block;
-
-    &:hover {
-      overflow: unset;
-    }
-  }
-
-  ._body {
-    position: absolute;
-    top: 100px;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    display: flex;
-
-    ._features {
-      position: sticky;
-      left: 0;
-      z-index: 10;
-
-      ._feature {
-        width: 200px;
-      }
-    }
-    ._systems {
-      display: flex;
-    }
-    ._system {
-      width: 150px;
-    }
-  }
-
-  ._feature {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  ._body ._features {
-  }
-
-  ._body ._feature {
-    padding: sugar.padding(20) sugar.padding(30);
-    height: 100px;
-    width: 150px;
-
-    &:nth-child(odd) {
-      background: sugar.color(base, background, --lighten 5%);
-    }
-  }
-  ._body ._features ._feature {
-    background: sugar.color(base, background, --darken 5);
-    justify-content: end;
-
-    &:nth-child(odd) {
-      background: sugar.color(base, background);
-    }
-  }
-
-  ._body ._systems ._system {
-    &:nth-child(odd) ._feature {
-      position: relative;
-
-      &:before {
-        content: '';
+    ._bkg {
+        pointer-events: none;
+        overflow: hidden;
         position: absolute;
         top: 0;
         left: 0;
         width: 100%;
         height: 100%;
-        border-left: 1px solid sugar.color(base, background, --lighten 10);
-        border-right: 1px solid sugar.color(base, background, --lighten 10);
-      }
 
-      /* background: sugar.color(base, background, --lighten 5%); */
+        img {
+            /* filter: blur(100px); */
+            object-fit: cover;
+            width: 100%;
+            height: 100%;
+            transform: scale(1.4);
+            display: none;
+
+            @sugar.lod (3) {
+                display: block;
+            }
+        }
     }
-  }
+
+    .chart {
+        position: absolute;
+        background: sugar.color(base, background);
+        display: flex;
+        top: 100px;
+        left: sugar.margin(70);
+        right: sugar.margin(70);
+        bottom: sugar.margin(70);
+        overflow: auto;
+        @sugar.scrollbar;
+        /* @sugar.depth (100); */
+        border: solid 2px rgba(0, 0, 0, 0.3);
+        padding-bottom: 100px;
+    }
+
+    ._heading {
+        position: sticky;
+        top: 0;
+        left: 0;
+        display: flex;
+        height: 100px;
+        background: sugar.color(accent, --lighten 100);
+        z-index: 11;
+        border-bottom: solid 2px rgba(0, 0, 0, 0.3);
+
+        ._features {
+            width: 200px;
+        }
+
+        ._systems {
+            position: relative;
+            display: flex;
+        }
+        ._system {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 150px;
+        }
+        ._system-logo {
+            max-width: 100px;
+            max-height: 40px;
+        }
+    }
+
+    ._notes {
+        position: absolute;
+        top: calc(100vh - 194px);
+        left: 0;
+        display: flex;
+        height: 100px;
+        width: 100%;
+        background: sugar.color(accent, --lighten 100);
+        z-index: 12;
+        border-top: solid 2px rgba(0, 0, 0, 0.3);
+        transform: translateY(-100%);
+
+        ._features {
+            width: 200px;
+        }
+        ._systems {
+            position: relative;
+            display: flex;
+        }
+        ._system {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 150px;
+        }
+        ._note {
+            font-size: sugar.font.size(50);
+            font-weight: bolder;
+        }
+    }
+
+    i.s-icon--star {
+        color: sugar.color(warning);
+    }
+
+    i.s-icon--feature {
+        color: sugar.color(warning);
+        margin-inline-start: sugar.margin(20);
+        opacity: 0.6;
+    }
+    i.s-icon--component {
+        color: sugar.color(accent);
+        margin-inline-start: sugar.margin(20);
+    }
+
+    i.s-icon--check {
+        color: sugar.color(success);
+    }
+    i.s-icon--cross {
+        color: sugar.color(error);
+    }
+    i.s-icon--info {
+        color: sugar.color(warning);
+    }
+
+    ._why-not {
+        width: 100px;
+        height: 2px;
+        background: sugar.color(base, background, --darken 30);
+        transform: rotateZ(-10deg);
+        opacity: 0.2;
+    }
+
+    .s-tooltip-container {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        /* overflow: hidden;
+    display: inline-block;
+
+    &:hover {
+      overflow: unset;
+    } */
+    }
+
+    ._body {
+        position: absolute;
+        top: 100px;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        display: flex;
+
+        ._features {
+            position: sticky;
+            left: 0;
+            z-index: 10;
+            margin-bottom: 300px;
+
+            ._feature {
+                border-right: solid 2px rgba(0, 0, 0, 0.3);
+                width: 200px;
+                padding-right: sugar.padding(30);
+                font-weight: bold;
+            }
+        }
+        ._systems {
+            display: flex;
+        }
+        ._system {
+            width: 150px;
+
+            &:hover {
+                background: sugar.color(base, background, --darken 2);
+            }
+        }
+    }
+
+    ._feature {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    ._body ._features {
+    }
+
+    ._body ._feature {
+        /* padding: sugar.padding(20) sugar.padding(30); */
+        height: 100px;
+        width: 150px;
+
+        &:nth-child(odd) {
+            background: sugar.color(base, background, --darken 1%);
+        }
+    }
+    ._body ._features ._feature {
+        background: sugar.color(base, background, --darken 1);
+        justify-content: end;
+        .s-tooltip-container {
+            justify-content: end;
+        }
+
+        &:nth-child(odd) {
+            background: sugar.color(base, background, --darken 2);
+        }
+    }
+
+    ._body ._systems ._system {
+        &:hover ._feature {
+            background: sugar.color(base, background, --darken 2) !important;
+        }
+
+        ._feature {
+            &:hover {
+                background: sugar.color(
+                    base,
+                    background,
+                    --darken 10
+                ) !important;
+            }
+        }
+
+        &:nth-child(odd) ._feature {
+            position: relative;
+
+            &:before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                border-left: 1px solid sugar.color(base, background, --darken 5);
+                border-right: 1px solid
+                    sugar.color(base, background, --darken 5);
+            }
+        }
+    }
 }

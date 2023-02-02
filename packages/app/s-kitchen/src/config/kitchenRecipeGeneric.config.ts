@@ -539,65 +539,65 @@ export default function (api) {
                         return api.config.kitchen.actions.imagesBuild;
                     },
 
-                    /**
-                     * @name            faviconBuild
-                     * @namespace       config.kitchenRecipeDefault.stacks.build.actions
-                     * @type            String
-                     * @default         [config.kitchen.actions.faviconBuild]
-                     *
-                     * Specify the recipe build stack faviconBuild action
-                     *
-                     * @since       2.0.0
-                     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-                     */
-                    get faviconBuild() {
-                        return api.config.kitchen.actions.faviconBuild;
-                    },
+                    // /**
+                    //  * @name            faviconBuild
+                    //  * @namespace       config.kitchenRecipeDefault.stacks.build.actions
+                    //  * @type            String
+                    //  * @default         [config.kitchen.actions.faviconBuild]
+                    //  *
+                    //  * Specify the recipe build stack faviconBuild action
+                    //  *
+                    //  * @since       2.0.0
+                    //  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+                    //  */
+                    // get faviconBuild() {
+                    //     return api.config.kitchen.actions.faviconBuild;
+                    // },
 
-                    /**
-                     * @name            docmapBuild
-                     * @namespace       config.kitchenRecipeDefault.stacks.build.actions
-                     * @type            String
-                     * @default         [config.kitchen.actions.docmapBuild]
-                     *
-                     * Specify the recipe build stack docmapBuild action
-                     *
-                     * @since       2.0.0
-                     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-                     */
-                    get docmapBuild() {
-                        return api.config.kitchen.actions.docmapBuild;
-                    },
+                    // /**
+                    //  * @name            docmapBuild
+                    //  * @namespace       config.kitchenRecipeDefault.stacks.build.actions
+                    //  * @type            String
+                    //  * @default         [config.kitchen.actions.docmapBuild]
+                    //  *
+                    //  * Specify the recipe build stack docmapBuild action
+                    //  *
+                    //  * @since       2.0.0
+                    //  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+                    //  */
+                    // get docmapBuild() {
+                    //     return api.config.kitchen.actions.docmapBuild;
+                    // },
 
-                    /**
-                     * @name            sitemapBuild
-                     * @namespace       config.kitchenRecipeDefault.stacks.build.actions
-                     * @type            String
-                     * @default         [config.kitchen.actions.sitemapBuild]
-                     *
-                     * Specify the recipe build stack sitemapBuild action
-                     *
-                     * @since       2.0.0
-                     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-                     */
-                    get sitemapBuild() {
-                        return api.config.kitchen.actions.sitemapBuild;
-                    },
+                    // /**
+                    //  * @name            sitemapBuild
+                    //  * @namespace       config.kitchenRecipeDefault.stacks.build.actions
+                    //  * @type            String
+                    //  * @default         [config.kitchen.actions.sitemapBuild]
+                    //  *
+                    //  * Specify the recipe build stack sitemapBuild action
+                    //  *
+                    //  * @since       2.0.0
+                    //  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+                    //  */
+                    // get sitemapBuild() {
+                    //     return api.config.kitchen.actions.sitemapBuild;
+                    // },
 
-                    /**
-                     * @name            markdownBuild
-                     * @namespace       config.kitchenRecipeDefault.stacks.build.actions
-                     * @type            String
-                     * @default         [config.kitchen.actions.markdownBuild]
-                     *
-                     * Specify the recipe build stack markdownBuild action
-                     *
-                     * @since       2.0.0
-                     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-                     */
-                    get markdownBuild() {
-                        return api.config.kitchen.actions.markdownBuild;
-                    },
+                    // /**
+                    //  * @name            markdownBuild
+                    //  * @namespace       config.kitchenRecipeDefault.stacks.build.actions
+                    //  * @type            String
+                    //  * @default         [config.kitchen.actions.markdownBuild]
+                    //  *
+                    //  * Specify the recipe build stack markdownBuild action
+                    //  *
+                    //  * @since       2.0.0
+                    //  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+                    //  */
+                    // get markdownBuild() {
+                    //     return api.config.kitchen.actions.markdownBuild;
+                    // },
 
                     /**
                      * @name            copyAssets

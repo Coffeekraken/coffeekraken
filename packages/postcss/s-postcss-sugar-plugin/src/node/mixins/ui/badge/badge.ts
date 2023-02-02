@@ -97,6 +97,7 @@ export default function ({
                 position: relative;
                 color: sugar.color(current);
                 background: none !important;
+                text-shadow: none !important;
                 
                 &:after {
                     content: '';

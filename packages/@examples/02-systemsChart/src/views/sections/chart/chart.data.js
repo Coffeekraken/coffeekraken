@@ -1,49 +1,89 @@
 export default {
   bkg: {
-    url: 'https://images.alphacoders.com/504/504971.jpg',
+    url: '/dist/img/bkg.png',
     title: 'Macbook air',
     alt: 'Macbook air',
   },
   features: {
-    button: {
-      title: 'Button',
-      description: 'Button component',
-      category: 'component',
+    customization: {
+      title: 'Customization',
+      description: 'Ability to customize the output',
+      category: 'feature',
+    },
+    doc: {
+      title: 'Documentation',
+      description: 'Documentation quality',
+      category: 'feature',
     },
     icon: {
       title: 'Icon',
       description: 'Icon system',
       category: 'feature',
     },
-    typography: {
-      title: 'Typography',
-      description: 'Full typegraphy system',
-      category: 'style',
-    },
-    divider: {
-      title: 'Divider',
-      description: 'Divider component',
-      category: 'component',
-    },
     grid: {
       title: 'Grid',
       description: 'Full grid system',
-      category: 'layout',
+      category: 'feature',
     },
     layout: {
       title: 'Layout',
       description: 'Full layout system',
-      category: 'layout',
+      category: 'feature',
+    },
+    cookies: {
+      title: 'Cookies',
+      description: 'Cookies conscent',
+      category: 'feature',
+    },
+    lod: {
+      title: 'LOD',
+      description: 'Level of details',
+      category: 'feature',
+    },
+    responsiveProps: {
+      title: 'Responsive props',
+      description: 'Responsive component/feature properties',
+      category: 'feature',
+    },
+    validation: {
+      title: 'Form validation',
+      description: 'Validate different input data',
+      category: 'feature',
+    },
+    scrollspy: {
+      title: 'Scrollspy',
+      description: 'Spy on scroll position',
+      category: 'feature',
+    },
+    helpers: {
+      title: 'Helper classes',
+      description: 'Helper classes like clearfix, color, margin, etc...',
+      category: 'feature',
     },
     space: {
       title: 'Space',
       description: 'Full space system',
-      category: 'helper',
+      category: 'feature',
     },
     anchor: {
       title: 'Anchor',
       description: 'Scroll to anchor system',
       category: 'feature',
+    },
+    button: {
+      title: 'Button',
+      description: 'Button component',
+      category: 'component',
+    },
+    typography: {
+      title: 'Typography',
+      description: 'Full typegraphy system',
+      category: 'component',
+    },
+    divider: {
+      title: 'Divider',
+      description: 'Divider component',
+      category: 'component',
     },
     breadcrumb: {
       title: 'Breadcrumb',
@@ -111,7 +151,7 @@ export default {
       category: 'component',
     },
     rate: {
-      title: 'rate',
+      title: 'Rating',
       description: 'Rating component',
       category: 'component',
     },
@@ -250,11 +290,6 @@ export default {
       description: 'Range input',
       category: 'component',
     },
-    cookies: {
-      title: 'Cookies',
-      description: 'Cookies conscent',
-      category: 'feature',
-    },
     label: {
       title: 'Label',
       description: 'Form label types',
@@ -275,22 +310,229 @@ export default {
       description: 'Password input',
       category: 'component',
     },
-    lod: {
-      title: 'LOD',
-      description: 'Level of details',
-      category: 'feature',
+    figure: {
+      title: 'Figure',
+      description: 'Display image and description',
+      category: 'component',
     },
-    responsiveProps: {
-      title: 'Responsive props',
-      description: 'Responsive component/feature properties',
-      category: 'feature',
+    inputGroup: {
+      title: 'Input group',
+      description: 'Display input in groups',
+      category: 'component',
+    },
+    buttonGroup: {
+      title: 'Button group',
+      description: 'Display buttons in groups',
+      category: 'component',
     },
   },
   systems: [
     {
-      title: 'Coffeekraken',
+      title: 'Kraken',
       description: 'Nice and awesome frontend system',
       logo: '/dist/img/logos/ck.svg',
+      url: 'https://coffeekraken.io',
+      features: {
+        button: {
+          check: true,
+        },
+        icon: {
+          check: true,
+          info: 'Support for fontawesome and custom icons out of the box',
+        },
+        typography: {
+          check: true,
+          info: 'Possibility to expose then to backend (wordpress, etc...)',
+        },
+        grid: {
+          check: true,
+          info: 'Support for complex layout without rigid columns',
+        },
+        layout: {
+          check: true,
+        },
+        space: {
+          check: true,
+          info: 'Through classes or mixins',
+        },
+        anchor: {
+          check: true,
+          info: 'Support for nested scrollable containers',
+        },
+        breadcrumb: {
+          check: true,
+        },
+        dropdown: {
+          check: true,
+        },
+        menu: {
+          check: true,
+        },
+        pagination: {
+          check: true,
+        },
+        steps: {
+          check: true,
+        },
+        autocomplete: {
+          check: true,
+          info: 'Fully customizable through JS and CSS',
+        },
+        cascader: {
+          check: true,
+        },
+        checkbox: {
+          check: true,
+        },
+        datepicker: {
+          check: true,
+          info: 'Fully customizable through JS and CSS',
+        },
+        form: {
+          check: true,
+        },
+        input: {
+          check: true,
+        },
+        radio: {
+          check: true,
+        },
+        rate: {
+          check: true,
+          info: 'Fully customizable through JS and CSS',
+        },
+        select: {
+          check: true,
+        },
+        slider: {
+          check: true,
+          info: 'Fully customizable through JS and CSS',
+        },
+        switch: {
+          check: true,
+        },
+        timepicker: {
+          check: true,
+          info: 'Fully customizable through JS and CSS',
+        },
+        upload: {
+          check: true,
+          info: 'Fully customizable through JS and CSS',
+        },
+        avatar: {
+          check: true,
+        },
+        badge: {
+          check: true,
+        },
+        card: {
+          check: true,
+        },
+        accordion: {
+          check: true,
+          info: 'Through declarative s-activate feature',
+        },
+        list: {
+          check: true,
+        },
+        tooltip: {
+          check: true,
+        },
+        table: {
+          check: true,
+        },
+        tabs: {
+          check: true,
+          info: 'Through declarative s-activate feature',
+        },
+        timeline: {
+          check: true,
+        },
+        tree: {
+          check: true,
+          info: 'Through declarative s-activate feature',
+        },
+        alert: {
+          check: true,
+        },
+        drawer: {
+          check: true,
+          info: 'Fully customizable through JS and CSS',
+        },
+        modal: {
+          check: true,
+          info: 'Fully customizable through JS and CSS',
+        },
+        notification: {
+          check: true,
+        },
+        progress: {
+          check: true,
+        },
+        spinner: {
+          check: true,
+        },
+        floating: {
+          check: true,
+        },
+        banner: {
+          check: true,
+        },
+        cookies: {
+          check: true,
+          info: 'Through the s-front base class',
+        },
+        label: {
+          check: true,
+        },
+        password: {
+          check: true,
+          info: 'Through the s-form-validator feature',
+        },
+        container: {
+          check: true,
+        },
+        range: {
+          check: true,
+          info: 'Support advanced displays like tooltips, etc...',
+        },
+        responsiveProps: {
+          check: true,
+          info: 'Update component behavior through responsive properties',
+        },
+        lod: {
+          check: true,
+        },
+        inputGroup: {
+          check: true,
+        },
+        buttonGroup: {
+          check: true,
+        },
+        validation: {
+          check: true,
+          info: 'Through the s-form-validator feature',
+        },
+        helpers: {
+          check: true,
+          info: 'Full optional helpers classes for margins, paddings, display, flex, grid, etc...',
+        },
+        customization: {
+          rate: 4.5,
+          info: 'Through sharable JS files, from colors to spaces, etc...',
+        },
+        doc: {
+          rate: 4,
+          info: 'Mostly complete but need some refining',
+        },
+      },
+    },
+    {
+      title: 'Bootstrap',
+      description:
+        'Bootstrap is a powerful, feature-packed frontend toolkit. Build anything—from prototype to production—in minutes.',
+      logo: '/dist/img/logos/bootstrap.png',
+      url: 'https://getbootstrap.com/',
       features: {
         button: {
           check: true,
@@ -313,9 +555,6 @@ export default {
         space: {
           check: true,
         },
-        anchor: {
-          check: true,
-        },
         breadcrumb: {
           check: true,
         },
@@ -328,19 +567,7 @@ export default {
         pagination: {
           check: true,
         },
-        steps: {
-          check: true,
-        },
-        autocomplete: {
-          check: true,
-        },
-        cascader: {
-          check: true,
-        },
         checkbox: {
-          check: true,
-        },
-        datepicker: {
           check: true,
         },
         form: {
@@ -352,9 +579,6 @@ export default {
         radio: {
           check: true,
         },
-        rate: {
-          check: true,
-        },
         select: {
           check: true,
         },
@@ -364,19 +588,7 @@ export default {
         switch: {
           check: true,
         },
-        timepicker: {
-          check: true,
-        },
-        upload: {
-          check: true,
-        },
-        avatar: {
-          check: true,
-        },
         badge: {
-          check: true,
-        },
-        calendar: {
           check: true,
         },
         card: {
@@ -397,15 +609,6 @@ export default {
         tabs: {
           check: true,
         },
-        timeline: {
-          check: true,
-        },
-        tour: {
-          check: true,
-        },
-        tree: {
-          check: true,
-        },
         alert: {
           check: true,
         },
@@ -424,29 +627,37 @@ export default {
         skeleton: {
           check: true,
         },
-        spinner: {
-          check: true,
-        },
-        floating: {
-          check: true,
-        },
-        banner: {
-          check: true,
-        },
-        cookies: {
-          check: true,
-        },
         label: {
           check: true,
         },
         range: {
           check: true,
         },
-        notice: {
+        figure: {
           check: true,
         },
-        lod: {
+        inputGroup: {
           check: true,
+        },
+        buttonGroup: {
+          check: true,
+        },
+        validation: {
+          check: true,
+        },
+        scrollspy: {
+          check: true,
+        },
+        helpers: {
+          check: true,
+        },
+        customization: {
+          rate: 4,
+          info: 'Through sharable JS files and PostCSS plugin, from colors to spaces, etc...',
+        },
+        doc: {
+          rate: 4.5,
+          info: 'Most complete documentation but lack some features',
         },
       },
     },
@@ -598,6 +809,14 @@ export default {
         banner: {
           check: true,
         },
+        customization: {
+          rate: 3,
+          info: 'Mainly through SASS',
+        },
+        doc: {
+          rate: 4,
+          info: 'Complete but sometimes a little perfectible',
+        },
       },
     },
     {
@@ -651,6 +870,14 @@ export default {
         },
         range: {
           check: true,
+        },
+        customization: {
+          rate: 3,
+          info: 'Not so much customization capabilities',
+        },
+        doc: {
+          rate: 3,
+          info: 'To limited and not very well structured',
         },
       },
     },
@@ -745,6 +972,14 @@ export default {
         notice: {
           check: true,
         },
+        customization: {
+          rate: 3,
+          info: 'Not so much customization capabilities',
+        },
+        doc: {
+          rate: 4,
+          info: 'Pretty good in general even if the system lacks a lot of features',
+        },
       },
     },
     {
@@ -822,6 +1057,14 @@ export default {
         },
       },
       url: 'https://luna.sainsburys.co.uk',
+      customization: {
+        rate: 2,
+        info: 'More or less just colors through SASS/JS',
+      },
+      doc: {
+        rate: 3.5,
+        info: 'A little bit confusing and lacks of detailed examples',
+      },
     },
     {
       title: 'Atlassian',
@@ -875,7 +1118,7 @@ export default {
     {
       title: 'Chakra',
       description: 'Chakra design system',
-      logo: '/dist/img/logos/chakra',
+      logo: '/dist/img/logos/chakra.png',
       type: 'React',
       whyNot: 'React only platform',
       url: 'https://chakra-ui.com/',

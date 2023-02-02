@@ -257,6 +257,12 @@ export default function ({
                     }
                 }
 
+                &:not(:focus):not(:focus-within):not(:hover) {
+                    & > .s-tooltip {
+                        @sugar.visually.hidden();
+                    }
+                }
+
                 &:focus > .s-tooltip,
                 &:focus-within > .s-tooltip,
                 .s-tooltip:focus,

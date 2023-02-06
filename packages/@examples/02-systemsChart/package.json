@@ -27,8 +27,9 @@
         "dev": "sugard kitchen.run dev",
         "prod": "sugard kitchen.run prod",
         "build": "sugard kitchen.run build",
-        "buildStatic": "sugard frontendServer --env production & sugard static.build",
-        "static": "live-server static"
+        "static": "live-server static",
+        "static.build": "sugard static.build --clean --env production --target production",
+        "deploy": "rsync -avzh --delete --progress --stats ./static fe0mt_coffeekraken@fe0mt.ftp.infomaniak.com:~/sites/design-systems-overview.coffeekraken.io"
     },
     "dependencies": {
         "@coffeekraken/s-activate-feature": "^2.0.0-alpha.20",

@@ -1,4 +1,3 @@
-
 <!--
 /**
  * @name               main
@@ -38,9 +37,9 @@
     
     
     <!-- assets -->
-                        <script type="module" id="module" defer  src="/dist/js/index.esm.js?652ajjvpsg"></script>
-<script type="text/javascript" id="nomodule" nomodule defer  src="/dist/js/index.amd.js?652ajjvpsg"></script>
-<link id="global" href="/dist/css/index.css?652ajjvpsg" rel="stylesheet" />
+                        <script type="module" id="module" defer  src="/dist/js/index.esm.js?tiae4tmas1"></script>
+<script type="text/javascript" id="nomodule" nomodule defer  src="/dist/js/index.amd.js?tiae4tmas1"></script>
+<link id="global" href="/dist/css/index.css?tiae4tmas1" rel="stylesheet" />
         
     
 </head>
@@ -58,6 +57,20 @@
             </script>
     
     
+<div class="lod">
+<div class="_level" s-activate group="lod" onclick="document.env.SUGAR.front.setLod(1)">
+    Wireframe
+</div>
+<div class="_level" s-activate group="lod" onclick="document.env.SUGAR.front.setLod(2)">
+    Simplified
+</div>
+<div class="_level" s-activate active group="lod" onclick="document.env.SUGAR.front.setLod(3)">
+    Full
+</div>
+
+</div>
+
+
     <header class="header">
     <div class="s-container">
 
@@ -175,7 +188,7 @@
     <div class="content">
         <section class="section-heading  "
     s-specs="views.sections.heading"
-    s-specs-values="{&quot;bkg&quot;:{&quot;url&quot;:&quot;\/dist\/img\/macos-wallpaper-01.jpg&quot;,&quot;title&quot;:&quot;Macbook air&quot;,&quot;alt&quot;:&quot;Macbook air&quot;},&quot;image&quot;:{&quot;url&quot;:&quot;\/dist\/img\/macbookair.png&quot;,&quot;title&quot;:&quot;Macbook air&quot;,&quot;alt&quot;:&quot;Macbook air&quot;},&quot;title&quot;:&quot;Embrace the&lt;br \/&gt;&lt;span class=\&quot;s-tc:accent\&quot;&gt;Extra power&lt;\/span&gt;!&quot;,&quot;text&quot;:&quot;&lt;p class=\&quot;s-typo--lead\&quot;&gt;\n  Lorem ipsum dolor sit amet consectetur adipiscing elit congue eu urna etiam, dignitant magnis ultrices ornare.\n&lt;\/p&gt;\n&lt;p class=\&quot;s-typo--p\&quot;&gt;\n  Metus lobortis aptent senectus hendrerit convallis porttitor montes ligula inceptos, ridiculus curaempus vehicula duis lacus neque sed, quisque etiam fringilla.\n&lt;\/p&gt;&quot;,&quot;cta&quot;:{&quot;label&quot;:&quot;Discover more...&quot;,&quot;color&quot;:&quot;accent&quot;,&quot;link&quot;:{&quot;url&quot;:&quot;https:\/\/apple.com&quot;,&quot;target&quot;:&quot;_blank&quot;,&quot;title&quot;:&quot;Discover more on apple.com&quot;}}}"
+    s-specs-values="{&quot;bkg&quot;:{&quot;url&quot;:&quot;\/dist\/img\/macos-wallpaper-01.jpg&quot;,&quot;title&quot;:&quot;Macbook air&quot;,&quot;alt&quot;:&quot;Macbook air&quot;},&quot;image&quot;:{&quot;url&quot;:&quot;\/dist\/img\/macbookair.png&quot;,&quot;title&quot;:&quot;Macbook air&quot;,&quot;alt&quot;:&quot;Macbook air&quot;},&quot;title&quot;:&quot;Heading&lt;br \/&gt;&lt;span class=\&quot;s-tc:accent\&quot;&gt;Title&lt;\/span&gt;!&quot;,&quot;text&quot;:&quot;&lt;p class=\&quot;s-typo--lead\&quot;&gt;\n    Lorem ipsum dolor sit amet consectetur adipiscing elit congue eu urna etiam, dignitant magnis ultrices ornare.\n&lt;\/p&gt;\n&lt;p class=\&quot;s-typo--p\&quot;&gt;\n  Metus lobortis aptent senectus hendrerit convallis porttitor montes ligula inceptos, ridiculus curaempus vehicula duis lacus neque sed, quisque etiam fringilla.\n&lt;\/p&gt;&quot;,&quot;cta&quot;:{&quot;label&quot;:&quot;CTA label...&quot;,&quot;color&quot;:&quot;accent&quot;,&quot;link&quot;:{&quot;url&quot;:&quot;https:\/\/apple.com&quot;,&quot;target&quot;:&quot;_blank&quot;,&quot;title&quot;:&quot;Discover more on apple.com&quot;}}}"
 >
     <div class="_bkg">
                 <div class="s-media-container">
@@ -187,11 +200,11 @@
             <div>
                 <div s-appear in="left" delay="500">
                                             <h1 class="s-typo s-typo--h2 s-mbe s-mbe--40">
-                            Embrace the<br /><span class="s-tc s-tc--accent">Extra power</span>!
+                            Heading<br /><span class="s-tc s-tc--accent">Title</span>!
                         </h1>
                                                                 <div class="s-rhythm s-rhythm--vertical">
                             <p class="s-typo--lead">
-  Lorem ipsum dolor sit amet consectetur adipiscing elit congue eu urna etiam, dignitant magnis ultrices ornare.
+    Lorem ipsum dolor sit amet consectetur adipiscing elit congue eu urna etiam, dignitant magnis ultrices ornare.
 </p>
 <p class="s-typo--p">
   Metus lobortis aptent senectus hendrerit convallis porttitor montes ligula inceptos, ridiculus curaempus vehicula duis lacus neque sed, quisque etiam fringilla.
@@ -203,7 +216,7 @@
     target="_blank"
     color="accent"
 >
-    Discover more...
+    CTA label...
 </a>                        </div>
                                     </div>
 
@@ -323,9 +336,9 @@ justify-items: stretch;
             <div class="s-container s-container--wide">
         <div class="s-layout s-gap s-gap--50" id="cards-layout">
         <div class="s-cell   " >
-    <div class="s-card card s-card--vertical  " s-appear="1" in="bottom" delay="300-600"
+    <div class="s-card card s-card--vertical  " s-appear="1" in="top" delay="300-600"
     s-specs="views.components.card"
-    s-specs-values="{&quot;image&quot;:{&quot;url&quot;:&quot;\/dist\/img\/slider\/slide-01.jpg&quot;,&quot;alt&quot;:&quot;&quot;,&quot;title&quot;:&quot;&quot;},&quot;attributes&quot;:{&quot;class&quot;:&quot;card&quot;,&quot;s-appear&quot;:true,&quot;in&quot;:&quot;bottom&quot;,&quot;delay&quot;:&quot;300-600&quot;},&quot;direction&quot;:&quot;vertical&quot;,&quot;title&quot;:&quot;Superchardef #1&quot;,&quot;intro&quot;:&quot;Up to 18 hours of battery life.&quot;,&quot;text&quot;:&quot;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla pharetra libero tincidunt arcu dignissim rhoncus. Vivamus a ipsum eget mauris.&quot;,&quot;cta&quot;:{&quot;color&quot;:&quot;accent&quot;,&quot;link&quot;:{&quot;text&quot;:&quot;Discover more...&quot;,&quot;url&quot;:&quot;https:\/\/apple.com&quot;,&quot;target&quot;:&quot;_blank&quot;,&quot;title&quot;:&quot;Discover more on apple.com&quot;}}}"
+    s-specs-values="{&quot;image&quot;:{&quot;url&quot;:&quot;\/dist\/img\/slider\/slide-01.jpg&quot;,&quot;alt&quot;:&quot;&quot;,&quot;title&quot;:&quot;&quot;},&quot;attributes&quot;:{&quot;class&quot;:&quot;card&quot;,&quot;s-appear&quot;:true,&quot;in&quot;:&quot;top&quot;,&quot;delay&quot;:&quot;300-600&quot;},&quot;direction&quot;:&quot;vertical&quot;,&quot;title&quot;:&quot;Card title #1&quot;,&quot;intro&quot;:&quot;Awesome card component&quot;,&quot;text&quot;:&quot;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla pharetra libero tincidunt arcu dignissim rhoncus. Vivamus a ipsum eget mauris.&quot;,&quot;cta&quot;:{&quot;color&quot;:&quot;accent&quot;,&quot;link&quot;:{&quot;text&quot;:&quot;CTA label...&quot;,&quot;url&quot;:&quot;https:\/\/apple.com&quot;,&quot;target&quot;:&quot;_blank&quot;,&quot;title&quot;:&quot;Discover more on apple.com&quot;}}}"
 >
 
             <div class="s-card_media s-media-container">
@@ -333,8 +346,8 @@ justify-items: stretch;
         </div>
     
     <div class="s-card_content s-spacing s-spacing--30">
-                    <h1 class="s-card_title s-typo s-typo--h3">Superchardef #1</h1>
-                            <p class="s-card_lead s-typo s-typo--lead s-tc s-tc--accent">Up to 18 hours of battery life.</p>
+                    <h1 class="s-card_title s-typo s-typo--h3">Card title #1</h1>
+                            <p class="s-card_lead s-typo s-typo--lead s-tc s-tc--accent">Awesome card component</p>
                             <p class="s-card_text s-typo s-typo--p">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla pharetra libero tincidunt arcu dignissim rhoncus. Vivamus a ipsum eget mauris.</p>
                             <div class="s-card_cta">
                                                 <a class="s-cta s-btn s-color s-color--accent " 
@@ -342,15 +355,15 @@ justify-items: stretch;
     target="_blank"
     color="accent"
 >
-    Discover more...
+    CTA label...
 </a>            </div>
             </div>
 </div>
 </div>
 <div class="s-cell   " >
-    <div class="s-card card s-card--vertical  " s-appear="1" in="bottom" delay="300-600"
+    <div class="s-card card s-card--vertical  " s-appear="1" in="top" delay="300-600"
     s-specs="views.components.card"
-    s-specs-values="{&quot;image&quot;:{&quot;url&quot;:&quot;\/dist\/img\/slider\/slide-02.jpg&quot;,&quot;alt&quot;:&quot;&quot;,&quot;title&quot;:&quot;&quot;},&quot;attributes&quot;:{&quot;class&quot;:&quot;card&quot;,&quot;s-appear&quot;:true,&quot;in&quot;:&quot;bottom&quot;,&quot;delay&quot;:&quot;300-600&quot;},&quot;direction&quot;:&quot;vertical&quot;,&quot;title&quot;:&quot;Superchardef #2&quot;,&quot;intro&quot;:&quot;Up to 18 hours of battery life.&quot;,&quot;text&quot;:&quot;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla pharetra libero tincidunt arcu dignissim rhoncus. Vivamus a ipsum eget mauris.&quot;,&quot;cta&quot;:{&quot;color&quot;:&quot;accent&quot;,&quot;link&quot;:{&quot;text&quot;:&quot;Discover more...&quot;,&quot;url&quot;:&quot;https:\/\/apple.com&quot;,&quot;target&quot;:&quot;_blank&quot;,&quot;title&quot;:&quot;Discover more on apple.com&quot;}}}"
+    s-specs-values="{&quot;image&quot;:{&quot;url&quot;:&quot;\/dist\/img\/slider\/slide-02.jpg&quot;,&quot;alt&quot;:&quot;&quot;,&quot;title&quot;:&quot;&quot;},&quot;attributes&quot;:{&quot;class&quot;:&quot;card&quot;,&quot;s-appear&quot;:true,&quot;in&quot;:&quot;top&quot;,&quot;delay&quot;:&quot;300-600&quot;},&quot;direction&quot;:&quot;vertical&quot;,&quot;title&quot;:&quot;Card title #2&quot;,&quot;intro&quot;:&quot;Awesome card component&quot;,&quot;text&quot;:&quot;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla pharetra libero tincidunt arcu dignissim rhoncus. Vivamus a ipsum eget mauris.&quot;,&quot;cta&quot;:{&quot;color&quot;:&quot;accent&quot;,&quot;link&quot;:{&quot;text&quot;:&quot;CTA label...&quot;,&quot;url&quot;:&quot;https:\/\/apple.com&quot;,&quot;target&quot;:&quot;_blank&quot;,&quot;title&quot;:&quot;Discover more on apple.com&quot;}}}"
 >
 
             <div class="s-card_media s-media-container">
@@ -358,8 +371,8 @@ justify-items: stretch;
         </div>
     
     <div class="s-card_content s-spacing s-spacing--30">
-                    <h1 class="s-card_title s-typo s-typo--h3">Superchardef #2</h1>
-                            <p class="s-card_lead s-typo s-typo--lead s-tc s-tc--accent">Up to 18 hours of battery life.</p>
+                    <h1 class="s-card_title s-typo s-typo--h3">Card title #2</h1>
+                            <p class="s-card_lead s-typo s-typo--lead s-tc s-tc--accent">Awesome card component</p>
                             <p class="s-card_text s-typo s-typo--p">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla pharetra libero tincidunt arcu dignissim rhoncus. Vivamus a ipsum eget mauris.</p>
                             <div class="s-card_cta">
                                                 <a class="s-cta s-btn s-color s-color--accent " 
@@ -367,15 +380,15 @@ justify-items: stretch;
     target="_blank"
     color="accent"
 >
-    Discover more...
+    CTA label...
 </a>            </div>
             </div>
 </div>
 </div>
 <div class="s-cell   " >
-    <div class="s-card card s-card--vertical  " s-appear="1" in="bottom" delay="300-600"
+    <div class="s-card card s-card--vertical  " s-appear="1" in="top" delay="300-600"
     s-specs="views.components.card"
-    s-specs-values="{&quot;image&quot;:{&quot;url&quot;:&quot;\/dist\/img\/slider\/slide-03.jpg&quot;,&quot;alt&quot;:&quot;&quot;,&quot;title&quot;:&quot;&quot;},&quot;attributes&quot;:{&quot;class&quot;:&quot;card&quot;,&quot;s-appear&quot;:true,&quot;in&quot;:&quot;bottom&quot;,&quot;delay&quot;:&quot;300-600&quot;},&quot;direction&quot;:&quot;vertical&quot;,&quot;title&quot;:&quot;Superchardef #3&quot;,&quot;intro&quot;:&quot;Up to 18 hours of battery life.&quot;,&quot;text&quot;:&quot;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla pharetra libero tincidunt arcu dignissim rhoncus. Vivamus a ipsum eget mauris.&quot;,&quot;cta&quot;:{&quot;color&quot;:&quot;accent&quot;,&quot;link&quot;:{&quot;text&quot;:&quot;Discover more...&quot;,&quot;url&quot;:&quot;https:\/\/apple.com&quot;,&quot;target&quot;:&quot;_blank&quot;,&quot;title&quot;:&quot;Discover more on apple.com&quot;}}}"
+    s-specs-values="{&quot;image&quot;:{&quot;url&quot;:&quot;\/dist\/img\/slider\/slide-03.jpg&quot;,&quot;alt&quot;:&quot;&quot;,&quot;title&quot;:&quot;&quot;},&quot;attributes&quot;:{&quot;class&quot;:&quot;card&quot;,&quot;s-appear&quot;:true,&quot;in&quot;:&quot;top&quot;,&quot;delay&quot;:&quot;300-600&quot;},&quot;direction&quot;:&quot;vertical&quot;,&quot;title&quot;:&quot;Card title #3&quot;,&quot;intro&quot;:&quot;Awesome card component&quot;,&quot;text&quot;:&quot;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla pharetra libero tincidunt arcu dignissim rhoncus. Vivamus a ipsum eget mauris.&quot;,&quot;cta&quot;:{&quot;color&quot;:&quot;accent&quot;,&quot;link&quot;:{&quot;text&quot;:&quot;CTA label...&quot;,&quot;url&quot;:&quot;https:\/\/apple.com&quot;,&quot;target&quot;:&quot;_blank&quot;,&quot;title&quot;:&quot;Discover more on apple.com&quot;}}}"
 >
 
             <div class="s-card_media s-media-container">
@@ -383,8 +396,8 @@ justify-items: stretch;
         </div>
     
     <div class="s-card_content s-spacing s-spacing--30">
-                    <h1 class="s-card_title s-typo s-typo--h3">Superchardef #3</h1>
-                            <p class="s-card_lead s-typo s-typo--lead s-tc s-tc--accent">Up to 18 hours of battery life.</p>
+                    <h1 class="s-card_title s-typo s-typo--h3">Card title #3</h1>
+                            <p class="s-card_lead s-typo s-typo--lead s-tc s-tc--accent">Awesome card component</p>
                             <p class="s-card_text s-typo s-typo--p">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla pharetra libero tincidunt arcu dignissim rhoncus. Vivamus a ipsum eget mauris.</p>
                             <div class="s-card_cta">
                                                 <a class="s-cta s-btn s-color s-color--accent " 
@@ -392,7 +405,7 @@ justify-items: stretch;
     target="_blank"
     color="accent"
 >
-    Discover more...
+    CTA label...
 </a>            </div>
             </div>
 </div>
@@ -407,24 +420,24 @@ justify-items: stretch;
     <div class="_content">
         <div class="s-container">
                             <h1 class="s-typo s-typo--h2">
-                    Even more<br /><span class="s-tc s-tc--accent">for less</span>!
+                    Simple separator<br /><span class="s-tc s-tc--accent">Usable everywhere</span>!
                 </h1>
                     </div>
     </div>
 </section>
-<section class="section-tabs  " s-specs="views.sections.tabs" s-specs-values="{&quot;title&quot;:&quot;Expect more!&quot;,&quot;tabs&quot;:[{&quot;id&quot;:&quot;tab-1&quot;,&quot;title&quot;:&quot;Supercharged!&quot;,&quot;intro&quot;:&quot;Up to 18 hours of battery life.&quot;,&quot;text&quot;:&quot;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla pharetra libero tincidunt arcu dignissim rhoncus. Vivamus a ipsum eget mauris.&quot;,&quot;cta&quot;:{&quot;color&quot;:&quot;accent&quot;,&quot;link&quot;:{&quot;text&quot;:&quot;Discover more...&quot;,&quot;url&quot;:&quot;https:\/\/apple.com&quot;,&quot;target&quot;:&quot;_blank&quot;,&quot;title&quot;:&quot;Discover more on apple.com&quot;}}},{&quot;id&quot;:&quot;tab-2&quot;,&quot;title&quot;:&quot;Extracharged!&quot;,&quot;intro&quot;:&quot;Up to 18 hours of battery life.&quot;,&quot;text&quot;:&quot;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla pharetra libero tincidunt arcu dignissim rhoncus. Vivamus a ipsum eget mauris.&quot;,&quot;cta&quot;:{&quot;color&quot;:&quot;accent&quot;,&quot;link&quot;:{&quot;text&quot;:&quot;Discover more...&quot;,&quot;url&quot;:&quot;https:\/\/apple.com&quot;,&quot;target&quot;:&quot;_blank&quot;,&quot;title&quot;:&quot;Discover more on apple.com&quot;}}},{&quot;id&quot;:&quot;tab-3&quot;,&quot;title&quot;:&quot;Gigacharged!&quot;,&quot;intro&quot;:&quot;Up to 18 hours of battery life.&quot;,&quot;text&quot;:&quot;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla pharetra libero tincidunt arcu dignissim rhoncus. Vivamus a ipsum eget mauris.&quot;,&quot;cta&quot;:{&quot;color&quot;:&quot;accent&quot;,&quot;link&quot;:{&quot;text&quot;:&quot;Discover more...&quot;,&quot;url&quot;:&quot;https:\/\/apple.com&quot;,&quot;target&quot;:&quot;_blank&quot;,&quot;title&quot;:&quot;Discover more on apple.com&quot;}}}]}">
+<section class="section-tabs  " s-specs="views.sections.tabs" s-specs-values="{&quot;title&quot;:&quot;Expect more!&quot;,&quot;tabs&quot;:[{&quot;id&quot;:&quot;tab-1&quot;,&quot;title&quot;:&quot;Tab #1!&quot;,&quot;intro&quot;:&quot;Awesome tabs component #1&quot;,&quot;text&quot;:&quot;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla pharetra libero tincidunt arcu dignissim rhoncus. Vivamus a ipsum eget mauris.&quot;,&quot;cta&quot;:{&quot;color&quot;:&quot;accent&quot;,&quot;link&quot;:{&quot;text&quot;:&quot;CTA label...&quot;,&quot;url&quot;:&quot;https:\/\/apple.com&quot;,&quot;target&quot;:&quot;_blank&quot;,&quot;title&quot;:&quot;Discover more on apple.com&quot;}}},{&quot;id&quot;:&quot;tab-2&quot;,&quot;title&quot;:&quot;Tab #2!&quot;,&quot;intro&quot;:&quot;Awesome tab component #2&quot;,&quot;text&quot;:&quot;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla pharetra libero tincidunt arcu dignissim rhoncus. Vivamus a ipsum eget mauris.&quot;,&quot;cta&quot;:{&quot;color&quot;:&quot;accent&quot;,&quot;link&quot;:{&quot;text&quot;:&quot;CTA label...&quot;,&quot;url&quot;:&quot;https:\/\/apple.com&quot;,&quot;target&quot;:&quot;_blank&quot;,&quot;title&quot;:&quot;Discover more on apple.com&quot;}}},{&quot;id&quot;:&quot;tab-3&quot;,&quot;title&quot;:&quot;Tab #3!&quot;,&quot;intro&quot;:&quot;Awesome tab component #3&quot;,&quot;text&quot;:&quot;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla pharetra libero tincidunt arcu dignissim rhoncus. Vivamus a ipsum eget mauris.&quot;,&quot;cta&quot;:{&quot;color&quot;:&quot;accent&quot;,&quot;link&quot;:{&quot;text&quot;:&quot;CTA label...&quot;,&quot;url&quot;:&quot;https:\/\/apple.com&quot;,&quot;target&quot;:&quot;_blank&quot;,&quot;title&quot;:&quot;Discover more on apple.com&quot;}}}]}">
     <div class="s-container">
         <div class="_layout">
             <div s-appear in="left" delay="400">
                 <div class="_tabs">
                                             <a class="_tabs-item" href="#tab-1" s-activate group="tabs">
-                            Supercharged!
+                            Tab #1!
                         </a>
                                             <a class="_tabs-item" href="#tab-2" s-activate group="tabs">
-                            Extracharged!
+                            Tab #2!
                         </a>
                                             <a class="_tabs-item" href="#tab-3" s-activate group="tabs">
-                            Gigacharged!
+                            Tab #3!
                         </a>
                                     </div>
             </div>
@@ -432,27 +445,27 @@ justify-items: stretch;
             <div s-appear in="right" delay="600">
 
                                     <div class="_content" id="tab-1">
-                        <h1 class="s-typo s-typo--h3 s-mbe s-mbe--30">Supercharged!</h1>
-                        <p class="s-typo s-typo--lead s-mbe s-mbe--20 s-tc s-tc--accent">Up to 18 hours of battery life.</p>
+                        <h1 class="s-typo s-typo--h3 s-mbe s-mbe--30">Tab #1!</h1>
+                        <p class="s-typo s-typo--lead s-mbe s-mbe--20 s-tc s-tc--accent">Awesome tabs component #1</p>
                         <p class="s-typo s-typo--p">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla pharetra libero tincidunt arcu dignissim rhoncus. Vivamus a ipsum eget mauris.</p>
                         <a class="s-btn s-mbs s-mbs--40 s-color s-color--accent" href="https://apple.com" target="_blank">
-                            Discover more...
+                            CTA label...
                         </a>
                     </div>
                                     <div class="_content" id="tab-2">
-                        <h1 class="s-typo s-typo--h3 s-mbe s-mbe--30">Extracharged!</h1>
-                        <p class="s-typo s-typo--lead s-mbe s-mbe--20 s-tc s-tc--accent">Up to 18 hours of battery life.</p>
+                        <h1 class="s-typo s-typo--h3 s-mbe s-mbe--30">Tab #2!</h1>
+                        <p class="s-typo s-typo--lead s-mbe s-mbe--20 s-tc s-tc--accent">Awesome tab component #2</p>
                         <p class="s-typo s-typo--p">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla pharetra libero tincidunt arcu dignissim rhoncus. Vivamus a ipsum eget mauris.</p>
                         <a class="s-btn s-mbs s-mbs--40 s-color s-color--accent" href="https://apple.com" target="_blank">
-                            Discover more...
+                            CTA label...
                         </a>
                     </div>
                                     <div class="_content" id="tab-3">
-                        <h1 class="s-typo s-typo--h3 s-mbe s-mbe--30">Gigacharged!</h1>
-                        <p class="s-typo s-typo--lead s-mbe s-mbe--20 s-tc s-tc--accent">Up to 18 hours of battery life.</p>
+                        <h1 class="s-typo s-typo--h3 s-mbe s-mbe--30">Tab #3!</h1>
+                        <p class="s-typo s-typo--lead s-mbe s-mbe--20 s-tc s-tc--accent">Awesome tab component #3</p>
                         <p class="s-typo s-typo--p">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla pharetra libero tincidunt arcu dignissim rhoncus. Vivamus a ipsum eget mauris.</p>
                         <a class="s-btn s-mbs s-mbs--40 s-color s-color--accent" href="https://apple.com" target="_blank">
-                            Discover more...
+                            CTA label...
                         </a>
                     </div>
                 
@@ -463,19 +476,19 @@ justify-items: stretch;
 </section>
 <section class="section-story  " layout="12" s-appear in="bottom" delay="500"
     s-specs="views.sections.story"
-    s-specs-values="{&quot;layout&quot;:&quot;12&quot;,&quot;title&quot;:&quot;Extra high&lt;br \/&gt;&lt;span class=\&quot;s-tc:accent\&quot;&gt;Definition&lt;\/span&gt; screen&quot;,&quot;intro&quot;:&quot;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sodales, ipsum sit amet consectetur facilisis, tellus urna iaculis lacus, nec.&quot;,&quot;text&quot;:&quot;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent vestibulum varius mauris, vel lobortis sapien ornare vitae.&quot;,&quot;cta&quot;:{&quot;color&quot;:&quot;accent&quot;,&quot;link&quot;:{&quot;text&quot;:&quot;Discover more...&quot;,&quot;url&quot;:&quot;https:\/\/apple.com&quot;,&quot;target&quot;:&quot;_blank&quot;,&quot;title&quot;:&quot;Discover more on apple.com&quot;}},&quot;image&quot;:{&quot;url&quot;:&quot;\/dist\/img\/macbook-air-02.png&quot;,&quot;alt&quot;:&quot;&quot;,&quot;title&quot;:&quot;&quot;}}"
+    s-specs-values="{&quot;layout&quot;:&quot;12&quot;,&quot;title&quot;:&quot;Simple &lt;br \/&gt;&lt;span class=\&quot;s-tc:accent\&quot;&gt;Story&lt;\/span&gt; component&quot;,&quot;intro&quot;:&quot;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sodales, ipsum sit amet consectetur facilisis, tellus urna iaculis lacus, nec.&quot;,&quot;text&quot;:&quot;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent vestibulum varius mauris, vel lobortis sapien ornare vitae.&quot;,&quot;cta&quot;:{&quot;color&quot;:&quot;accent&quot;,&quot;link&quot;:{&quot;text&quot;:&quot;CTA label...&quot;,&quot;url&quot;:&quot;https:\/\/apple.com&quot;,&quot;target&quot;:&quot;_blank&quot;,&quot;title&quot;:&quot;Discover more on apple.com&quot;}},&quot;image&quot;:{&quot;url&quot;:&quot;\/dist\/img\/macbook-air-02.png&quot;,&quot;alt&quot;:&quot;&quot;,&quot;title&quot;:&quot;&quot;}}"
     >
     <div class="s-container">
         <div class="s-layout s-layout--12 s-layout___mobile s-layout--1_2___mobile">
             <div>
                 <h1 class="s-typo s-typo--h2 s-mbe s-mbe--40">
-                    Extra high<br /><span class="s-tc s-tc--accent">Definition</span> screen
+                    Simple <br /><span class="s-tc s-tc--accent">Story</span> component
                 </h1>
                 <p class="s-typo s-typo--p">
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent vestibulum varius mauris, vel lobortis sapien ornare vitae.
                 </p>
                 <a class="s-btn s-mbs s-mbs--40 s-color s-color--accent" href="https://apple.com" target="_blank">
-                    Discover more...
+                    CTA label...
                 </a>
             </div>
             <div>
@@ -492,7 +505,7 @@ justify-items: stretch;
             <div>
                 <div class="s-card  s-card--horizontal  " s-appear="1" in="left" delay="300-600"
     s-specs="views.components.card"
-    s-specs-values="{&quot;image&quot;:{&quot;url&quot;:&quot;\/dist\/img\/card-01.jpg&quot;,&quot;alt&quot;:&quot;&quot;,&quot;title&quot;:&quot;&quot;},&quot;attributes&quot;:{&quot;s-appear&quot;:true,&quot;in&quot;:&quot;left&quot;,&quot;delay&quot;:&quot;300-600&quot;},&quot;title&quot;:&quot;Supercharged!&quot;,&quot;intro&quot;:&quot;Up to 18 hours of battery life.&quot;,&quot;text&quot;:&quot;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas nec vestibulum mi. Etiam nec arcu ante.&quot;,&quot;cta&quot;:{&quot;label&quot;:&quot;Discover more...&quot;,&quot;color&quot;:&quot;accent&quot;,&quot;link&quot;:{&quot;url&quot;:&quot;https:\/\/apple.com&quot;,&quot;target&quot;:&quot;_blank&quot;,&quot;title&quot;:&quot;Discover more on apple.com&quot;}},&quot;direction&quot;:&quot;horizontal&quot;}"
+    s-specs-values="{&quot;image&quot;:{&quot;url&quot;:&quot;\/dist\/img\/card-01.jpg&quot;,&quot;alt&quot;:&quot;&quot;,&quot;title&quot;:&quot;&quot;},&quot;attributes&quot;:{&quot;s-appear&quot;:true,&quot;in&quot;:&quot;left&quot;,&quot;delay&quot;:&quot;300-600&quot;},&quot;title&quot;:&quot;Card title!&quot;,&quot;intro&quot;:&quot;Awesome card component&quot;,&quot;text&quot;:&quot;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas nec vestibulum mi. Etiam nec arcu ante.&quot;,&quot;cta&quot;:{&quot;label&quot;:&quot;CTA label...&quot;,&quot;color&quot;:&quot;accent&quot;,&quot;link&quot;:{&quot;url&quot;:&quot;https:\/\/apple.com&quot;,&quot;target&quot;:&quot;_blank&quot;,&quot;title&quot;:&quot;Discover more on apple.com&quot;}},&quot;direction&quot;:&quot;horizontal&quot;}"
 >
 
             <div class="s-card_media s-media-container">
@@ -500,8 +513,8 @@ justify-items: stretch;
         </div>
     
     <div class="s-card_content s-spacing s-spacing--30">
-                    <h1 class="s-card_title s-typo s-typo--h3">Supercharged!</h1>
-                            <p class="s-card_lead s-typo s-typo--lead s-tc s-tc--accent">Up to 18 hours of battery life.</p>
+                    <h1 class="s-card_title s-typo s-typo--h3">Card title!</h1>
+                            <p class="s-card_lead s-typo s-typo--lead s-tc s-tc--accent">Awesome card component</p>
                             <p class="s-card_text s-typo s-typo--p">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas nec vestibulum mi. Etiam nec arcu ante.</p>
                             <div class="s-card_cta">
                                                 <a class="s-cta s-btn s-color s-color--accent " 
@@ -509,20 +522,20 @@ justify-items: stretch;
     target="_blank"
     color="accent"
 >
-    Discover more...
+    CTA label...
 </a>            </div>
             </div>
 </div>            </div>
             <div>
                 <div class="s-card  s-card--horizontal  " s-appear="1" in="right" delay="300-600"
     s-specs="views.components.card"
-    s-specs-values="{&quot;image&quot;:null,&quot;attributes&quot;:{&quot;s-appear&quot;:true,&quot;in&quot;:&quot;right&quot;,&quot;delay&quot;:&quot;300-600&quot;},&quot;title&quot;:&quot;Supercharged!&quot;,&quot;intro&quot;:&quot;Up to 18 hours of battery life.&quot;,&quot;text&quot;:&quot;Lorem ipsum dolor sit amet, consectetur adipiscing elit.&quot;,&quot;cta&quot;:{&quot;label&quot;:&quot;Discover more...&quot;,&quot;color&quot;:&quot;accent&quot;,&quot;link&quot;:{&quot;url&quot;:&quot;https:\/\/apple.com&quot;,&quot;target&quot;:&quot;_blank&quot;,&quot;title&quot;:&quot;Discover more on apple.com&quot;}},&quot;direction&quot;:&quot;horizontal&quot;}"
+    s-specs-values="{&quot;image&quot;:null,&quot;attributes&quot;:{&quot;s-appear&quot;:true,&quot;in&quot;:&quot;right&quot;,&quot;delay&quot;:&quot;300-600&quot;},&quot;title&quot;:&quot;Card title!&quot;,&quot;intro&quot;:&quot;Awesome card component&quot;,&quot;text&quot;:&quot;Lorem ipsum dolor sit amet, consectetur adipiscing elit.&quot;,&quot;cta&quot;:{&quot;label&quot;:&quot;CTA label...&quot;,&quot;color&quot;:&quot;accent&quot;,&quot;link&quot;:{&quot;url&quot;:&quot;https:\/\/apple.com&quot;,&quot;target&quot;:&quot;_blank&quot;,&quot;title&quot;:&quot;Discover more on apple.com&quot;}},&quot;direction&quot;:&quot;horizontal&quot;}"
 >
 
     
     <div class="s-card_content s-spacing s-spacing--30">
-                    <h1 class="s-card_title s-typo s-typo--h3">Supercharged!</h1>
-                            <p class="s-card_lead s-typo s-typo--lead s-tc s-tc--accent">Up to 18 hours of battery life.</p>
+                    <h1 class="s-card_title s-typo s-typo--h3">Card title!</h1>
+                            <p class="s-card_lead s-typo s-typo--lead s-tc s-tc--accent">Awesome card component</p>
                             <p class="s-card_text s-typo s-typo--p">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
                             <div class="s-card_cta">
                                                 <a class="s-cta s-btn s-color s-color--accent " 
@@ -530,7 +543,7 @@ justify-items: stretch;
     target="_blank"
     color="accent"
 >
-    Discover more...
+    CTA label...
 </a>            </div>
             </div>
 </div>            </div>
@@ -539,19 +552,19 @@ justify-items: stretch;
 </section>
 <section class="section-story  " layout="21" s-appear in="bottom" delay="500"
     s-specs="views.sections.story"
-    s-specs-values="{&quot;layout&quot;:&quot;21&quot;,&quot;title&quot;:&quot;Ultra, and I mean&lt;br \/&gt;&lt;span class=\&quot;s-tc:accent\&quot;&gt;Ultraaaaaaa&lt;\/span&gt; slim&quot;,&quot;intro&quot;:&quot;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sodales, ipsum sit amet consectetur facilisis, tellus urna iaculis lacus, nec.&quot;,&quot;text&quot;:&quot;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent vestibulum varius mauris, vel lobortis sapien ornare vitae.&quot;,&quot;cta&quot;:{&quot;color&quot;:&quot;accent&quot;,&quot;link&quot;:{&quot;text&quot;:&quot;Discover more...&quot;,&quot;url&quot;:&quot;https:\/\/apple.com&quot;,&quot;target&quot;:&quot;_blank&quot;,&quot;title&quot;:&quot;Discover more on apple.com&quot;}},&quot;image&quot;:{&quot;url&quot;:&quot;\/dist\/img\/macbook-air-03.png&quot;,&quot;alt&quot;:&quot;&quot;,&quot;title&quot;:&quot;&quot;}}"
+    s-specs-values="{&quot;layout&quot;:&quot;21&quot;,&quot;title&quot;:&quot;Simple&lt;br \/&gt;&lt;span class=\&quot;s-tc:accent\&quot;&gt;Story&lt;\/span&gt; component&quot;,&quot;intro&quot;:&quot;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sodales, ipsum sit amet consectetur facilisis, tellus urna iaculis lacus, nec.&quot;,&quot;text&quot;:&quot;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent vestibulum varius mauris, vel lobortis sapien ornare vitae.&quot;,&quot;cta&quot;:{&quot;color&quot;:&quot;accent&quot;,&quot;link&quot;:{&quot;text&quot;:&quot;CTA label...&quot;,&quot;url&quot;:&quot;https:\/\/apple.com&quot;,&quot;target&quot;:&quot;_blank&quot;,&quot;title&quot;:&quot;Discover more on apple.com&quot;}},&quot;image&quot;:{&quot;url&quot;:&quot;\/dist\/img\/macbook-air-03.png&quot;,&quot;alt&quot;:&quot;&quot;,&quot;title&quot;:&quot;&quot;}}"
     >
     <div class="s-container">
         <div class="s-layout s-layout--21 s-layout___mobile s-layout--1_2___mobile">
             <div>
                 <h1 class="s-typo s-typo--h2 s-mbe s-mbe--40">
-                    Ultra, and I mean<br /><span class="s-tc s-tc--accent">Ultraaaaaaa</span> slim
+                    Simple<br /><span class="s-tc s-tc--accent">Story</span> component
                 </h1>
                 <p class="s-typo s-typo--p">
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent vestibulum varius mauris, vel lobortis sapien ornare vitae.
                 </p>
                 <a class="s-btn s-mbs s-mbs--40 s-color s-color--accent" href="https://apple.com" target="_blank">
-                    Discover more...
+                    CTA label...
                 </a>
             </div>
             <div>
@@ -592,7 +605,7 @@ justify-items: stretch;
     <div class="_content">
         <div class="s-container">
                             <h1 class="s-typo s-typo--h2">
-                    Don't be afraid to<br /><span class="s-tc s-tc--accent">Contact us</span>!
+                    Simple separator<br /><span class="s-tc s-tc--accent">Usable everywhere</span>!
                 </h1>
                     </div>
     </div>

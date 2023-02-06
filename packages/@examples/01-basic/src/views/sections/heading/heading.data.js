@@ -9,15 +9,15 @@ export default {
     title: 'Macbook air',
     alt: 'Macbook air',
   },
-  title: 'Embrace the<br /><span class="s-tc:accent">Extra power</span>!',
+  title: 'Heading<br /><span class="s-tc:accent">Title</span>!',
   text: `<p class="s-typo--lead">
-  Lorem ipsum dolor sit amet consectetur adipiscing elit congue eu urna etiam, dignitant magnis ultrices ornare.
+    Lorem ipsum dolor sit amet consectetur adipiscing elit congue eu urna etiam, dignitant magnis ultrices ornare.
 </p>
 <p class="s-typo--p">
   Metus lobortis aptent senectus hendrerit convallis porttitor montes ligula inceptos, ridiculus curaempus vehicula duis lacus neque sed, quisque etiam fringilla.
 </p>`,
   cta: {
-    label: 'Discover more...',
+    label: 'CTA label...',
     color: 'accent',
     link: {
       url: 'https://apple.com',

@@ -93,14 +93,14 @@ export default (api) => {
                  * @name            active
                  * @namespace       config.sitemapBuilder.sources.docmap
                  * @type            Boolean
-                 * @default         true
+                 * @default         false
                  *
                  * Specify if you want to use the docmap.json as a sitemap source
                  *
                  * @since           2.0.0
                  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
-                active: true,
+                active: false,
                 /**
                  * @name            settings
                  * @namespace       config.sitemapBuilder.sources.docmap

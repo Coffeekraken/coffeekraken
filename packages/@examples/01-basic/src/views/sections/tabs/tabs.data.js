@@ -3,13 +3,13 @@ export default {
   tabs: [
     {
       id: 'tab-1',
-      title: 'Supercharged!',
-      intro: 'Up to 18 hours of battery life.',
+      title: 'Tab #1!',
+      intro: 'Awesome tabs component #1',
       text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla pharetra libero tincidunt arcu dignissim rhoncus. Vivamus a ipsum eget mauris.',
       cta: {
         color: 'accent',
         link: {
-          text: 'Discover more...',
+          text: 'CTA label...',
           url: 'https://apple.com',
           target: '_blank',
           title: 'Discover more on apple.com',
@@ -18,13 +18,13 @@ export default {
     },
     {
       id: 'tab-2',
-      title: 'Extracharged!',
-      intro: 'Up to 18 hours of battery life.',
+      title: 'Tab #2!',
+      intro: 'Awesome tab component #2',
       text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla pharetra libero tincidunt arcu dignissim rhoncus. Vivamus a ipsum eget mauris.',
       cta: {
         color: 'accent',
         link: {
-          text: 'Discover more...',
+          text: 'CTA label...',
           url: 'https://apple.com',
           target: '_blank',
           title: 'Discover more on apple.com',
@@ -33,13 +33,13 @@ export default {
     },
     {
       id: 'tab-3',
-      title: 'Gigacharged!',
-      intro: 'Up to 18 hours of battery life.',
+      title: 'Tab #3!',
+      intro: 'Awesome tab component #3',
       text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla pharetra libero tincidunt arcu dignissim rhoncus. Vivamus a ipsum eget mauris.',
       cta: {
         color: 'accent',
         link: {
-          text: 'Discover more...',
+          text: 'CTA label...',
           url: 'https://apple.com',
           target: '_blank',
           title: 'Discover more on apple.com',

@@ -80,17 +80,8 @@ export default async function ({ root, sharedData, postcssApi, settings }) {
 
             // deep support
             if (levelStr) {
-                if (finalSelectorStr.endsWith('body')) {
-                    // apply the lod on the body
-                    finalSelector.push(
-                        `${finalSelectorStr}.s-lod--${levelStr}`,
-                    );
-                } else {
-                    // scope the element into the lod class
-                    finalSelector.push(
-                        `.s-lod--${levelStr} ${finalSelectorStr}`,
-                    );
-                }
+                // scope the element into the lod class
+                finalSelector.push(`.s-lod--${levelStr} ${finalSelectorStr}`);
             }
 
             // add theme if needed
@@ -325,10 +316,33 @@ export default async function ({ root, sharedData, postcssApi, settings }) {
     });
 
     // make sure the remaining ".s-lod--..." classes are at the start of each selectors
-    root.walkRules(/\.s-lod--[0-9]{1,2}/, (rule) => {
+    root.walkRules(
+        /(\.s-lod--[0-9]{1,2}(\:not\(\.s-lod--[0-9]{1,2}\))+)/,
+        (rule) => {
+            rule.selectors = rule.selectors.map((sel) => {
+                const lodSel = sel.match(
+                    /(\.s-lod--[0-9]{1,2}(\:not\(\.s-lod--[0-9]{1,2}\))+)/gm,
+                );
+                if (!lodSel?.[0]) {
+                    return rule.selector;
+                }
+                return `${lodSel[0]} ${sel.replace(lodSel[0], '')}`.replace(
+                    /([a-zA-Z0-9])\s\:/gm,
+                    '$1:',
+                );
+            });
+        },
+    );
+    root.walkRules(/(\.s-lod--[0-9]{1,2})/, (rule) => {
         rule.selectors = rule.selectors.map((sel) => {
             const lodSel = sel.match(/(\.s-lod--[0-9]{1,2})/gm);
-            return `${lodSel[0]} ${sel.replace(lodSel[0], '')}`;
+            if (!lodSel?.[0]) {
+                return rule.selector;
+            }
+            return `${lodSel[0]} ${sel.replace(lodSel[0], '')}`.replace(
+                /([a-zA-Z0-9])\s\:/gm,
+                '$1:',
+            );
         });
     });
 

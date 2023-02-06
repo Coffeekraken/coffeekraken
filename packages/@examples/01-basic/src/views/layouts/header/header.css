@@ -2,8 +2,23 @@
     @sugar.ui.toggle ('burger');
 }
 
+.s-label--float {
+    @sugar.lod.wireframe {
+        pointer-events: none;
+
+        ::placeholder {
+            opacity: 0;
+        }
+    }
+}
+.s-input {
+    @sugar.lod.wireframe {
+        border: solid 1px rgba(0, 0, 0, 0.1);
+    }
+}
+
 .header {
-    position: fixed;
+    position: fixed !important;
     top: sugar.margin(30);
     width: 100%;
     z-index: 100;
@@ -16,6 +31,11 @@
 
     .s-flex {
         pointer-events: all;
+    }
+
+    @sugar.lod.wireframe {
+        background: white;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.1);
     }
 
     @sugar.media mobile {

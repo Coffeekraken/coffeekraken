@@ -4,6 +4,8 @@ import { __expandTemplate, __querySelectorLive } from '@coffeekraken/sugar/dom';
 import { __deepMerge, __get } from '@coffeekraken/sugar/object';
 import __SActivateFeatureInterface from './interface/SActivateFeatureInterface';
 
+import { __wait } from '@coffeekraken/sugar/datetime';
+
 import { __getCookie } from '@coffeekraken/sugar/cookie';
 
 import __define from './define';
@@ -212,6 +214,8 @@ export default class SActivateFeature extends __SFeature {
                     switch (trigger) {
                         case 'click':
                             $triggerer.addEventListener('click', (e) => {
+                                console.log('Hello', e.target);
+
                                 // only direct child(s) of the triggerer can trigger the activation
                                 if (e.target !== $triggerer) {
                                     // @ts-ignore
@@ -219,6 +223,8 @@ export default class SActivateFeature extends __SFeature {
                                         return;
                                     if (e.currentTarget !== $triggerer) return;
                                 }
+                                console.log('CL', this.isActive(), this.props);
+
                                 e.preventDefault();
                                 e.stopPropagation();
                                 if (this.isActive() && this.props.toggle) {
@@ -285,7 +291,7 @@ export default class SActivateFeature extends __SFeature {
         }
 
         // restore the state
-        setTimeout(() => {
+        setTimeout(async () => {
             if (this.props.saveState) {
                 this._restoreState();
             } else if (this.props.active) {
@@ -294,7 +300,27 @@ export default class SActivateFeature extends __SFeature {
                 this.props.group &&
                 this._$groupElements[0] === this.node
             ) {
-                this.activate();
+                // wait until the potential others group elements
+                // are mounted
+                await __wait();
+
+                // check if another element of the group
+                // is activate
+                let hasActiveElementInGroup = false;
+                for (let i = 0; i < this._$groupElements.length; i++) {
+                    const $elm = this._$groupElements[i];
+                    // @ts-ignore
+                    if ($elm.isActive()) {
+                        hasActiveElementInGroup = true;
+                        break;
+                    }
+                }
+
+                // if no other element are activated
+                // activate the first one (this)
+                if (!hasActiveElementInGroup) {
+                    this.activate();
+                }
             }
         });
     }

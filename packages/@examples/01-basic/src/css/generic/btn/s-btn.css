@@ -1,31 +1,35 @@
 .s-btn {
-  background: none !important;
-  border: none !important;
-  border-radius: 0 !important;
-  perspective: 800px;
-
-  &:before {
-    content: '';
-    display: block;
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: sugar.color(current);
-    z-index: -1;
+    background: none !important;
+    border: none !important;
     border-radius: 0 !important;
-    @sugar.transition (fast);
+    perspective: 800px;
 
-    @sugar.lod (3) {
-      transform: rotateX(-5deg) rotateY(25deg) translateX(2%) scale(1);
+    @sugar.lod.wireframe {
+        border: 1px solid rgba(0, 0, 0, 0.1);
     }
-  }
 
-  &:hover:before {
-    @sugar.lod (3) {
-      transform: rotateX(5deg) rotateY(-35deg) rotateZ(5deg) translateX(-5%)
-        scale(1.2);
+    &:before {
+        content: '';
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: sugar.color(current);
+        z-index: -1;
+        border-radius: 0 !important;
+        @sugar.transition (fast);
+
+        @sugar.lod (3) {
+            transform: rotateX(-5deg) rotateY(25deg) translateX(2%) scale(1);
+        }
     }
-  }
+
+    &:hover:before {
+        @sugar.lod (3) {
+            transform: rotateX(5deg) rotateY(-35deg) rotateZ(5deg)
+                translateX(-5%) scale(1.2);
+        }
+    }
 }

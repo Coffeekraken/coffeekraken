@@ -35,6 +35,10 @@ class postcssSugarPluginLodMixinInterface extends __SInterface {
                 type: 'String',
                 values: ['file', 'class'],
             },
+            keepWhenLodDisabled: {
+                type: 'Boolean',
+                default: true,
+            },
         };
     }
 }
@@ -43,6 +47,7 @@ export { postcssSugarPluginLodMixinInterface as interface };
 export interface postcssSugarPluginLodMixinParams {
     level: number | string;
     method: 'file' | 'class';
+    keepWhenLodDisabled: boolean;
 }
 export default function ({
     params,
@@ -63,7 +68,11 @@ export default function ({
 
     // check if the lod feature is enabled or not
     if (!settings.lod?.enabled) {
-        atRule.replaceWith(atRule.nodes);
+        if (finalParams.keepWhenLodDisabled) {
+            atRule.replaceWith(atRule.nodes);
+        } else {
+            atRule.remove();
+        }
         return;
     }
 
@@ -98,7 +107,12 @@ export default function ({
     });
 
     const levels: number[] = [];
-    let action = settings.lod.defaultAction;
+    let action = settings.lod.defaultAction,
+        levelsObj = settings.lod.levels;
+
+    const levelInt = parseInt(
+        `${finalParams.level}`.replace(/^[\<\>\=]{1,2}/gm, ''),
+    );
 
     if (typeof finalParams.level === 'number') {
         levels.push(finalParams.level);
@@ -136,12 +150,22 @@ export default function ({
 
     // create a new rule that will wrap
     // the lod scoped ones
-    const newSelectors: string[] = [];
+    let newSelectors: string[] = [];
 
     levels.forEach((lod) => {
         let cls = `.s-lod--${lod}`;
         newSelectors.push(`${cls}`);
     });
+
+    if (action === '<') {
+        newSelectors = newSelectors.map((s) => {
+            for (let i = levelInt; i < Object.keys(levelsObj).length; i++) {
+                s += `:not(.s-lod--${i})`;
+            }
+            s += ' ';
+            return s;
+        });
+    }
 
     const newRule = postcssApi.rule({
         selector: newSelectors.join(','),

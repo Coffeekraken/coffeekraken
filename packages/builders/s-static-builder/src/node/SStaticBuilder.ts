@@ -166,14 +166,14 @@ export default class SStaticBuilder extends __SBuilder {
 
             console.log(`<yellow>[build]</yellow> Starting Static Build`);
             console.log(
-                `<yellow>○</yellow> Environment : ${
+                `<yellow>○</yellow> Target : ${
                     params.target === 'production'
                         ? '<green>production</green>'
                         : '<yellow>development</yellow>'
                 }`,
             );
             console.log(
-                `<yellow>○</yellow> Host : <cyan>${params.host}</cyan>`,
+                `<yellow>○</yellow> Host   : <cyan>${params.host}</cyan>`,
             );
 
             // handle params
@@ -415,21 +415,20 @@ export default class SStaticBuilder extends __SBuilder {
 
             // assets
             if (params.assets) {
-                console.log(`<yellow>[build]</yellow> Copying assets:`);
                 for (let i = 0; i < Object.keys(params.assets).length; i++) {
                     const assetObj =
                         params.assets[Object.keys(params.assets)[i]];
 
                     console.log(
-                        `<yellow>[build]</yellow> - <cyan>${__path.relative(
+                        `<yellow>[build]</yellow> Copying assets from "<cyan>${__path.relative(
                             __packageRootDir(),
                             assetObj.from,
                         )}${
                             assetObj.glob ? `/${assetObj.glob}` : ''
-                        }</cyan> to <magenta>${__path.relative(
+                        }</cyan>" to "<magenta>${__path.relative(
                             __packageRootDir(),
                             assetObj.to,
-                        )}</magenta>`,
+                        )}</magenta>"`,
                     );
 
                     // filesystem
@@ -443,15 +442,15 @@ export default class SStaticBuilder extends __SBuilder {
                         const req = new __SRequest({
                             url: assetObj.from,
                         });
-                        console.log(
-                            `<yellow>[assets]</yellow> Getting asset "<yellow>${__path.relative(
-                                __packageRootDir(),
-                                assetObj.from,
-                            )}</yellow>" to "<cyan>${__path.relative(
-                                __packageRootDir(),
-                                assetObj.to,
-                            )}</cyan>"`,
-                        );
+                        // console.log(
+                        //     `<yellow>[assets]</yellow> Getting asset "<yellow>${__path.relative(
+                        //         __packageRootDir(),
+                        //         assetObj.from,
+                        //     )}</yellow>" to "<cyan>${__path.relative(
+                        //         __packageRootDir(),
+                        //         assetObj.to,
+                        //     )}</cyan>"`,
+                        // );
                         const res = await req.send().catch((error) => {
                             throw new Error(
                                 `<red>[error]</red> The requested asset "<yellow>${assetObj.from}</yellow>" is not reachable...`,

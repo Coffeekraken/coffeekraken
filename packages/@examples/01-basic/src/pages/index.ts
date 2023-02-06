@@ -21,13 +21,13 @@ export default {
             delay: '300-600',
           },
           direction: 'vertical',
-          title: `Supercharged!`,
-          intro: 'Up to 18 hours of battery life.',
+          title: `Card title!`,
+          intro: 'Awesome card component',
           text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla pharetra libero tincidunt arcu dignissim rhoncus. Vivamus a ipsum eget mauris.',
           cta: {
             color: 'accent',
             link: {
-              text: 'Discover more...',
+              text: 'CTA label...',
               url: 'https://apple.com',
               target: '_blank',
               title: 'Discover more on apple.com',
@@ -43,7 +43,7 @@ export default {
             'sugar.components.card.card',
             {
               ...cardData,
-              title: `Superchardef #${i + 1}`,
+              title: `Card title #${i + 1}`,
             }
           );
           const cellResult = await viewRenderer.render('sugar.bare.cell.cell', {
@@ -119,7 +119,7 @@ export default {
       data() {
         return {
           title:
-            'Don\'t be afraid to<br /><span class="s-tc:accent">Contact us</span>!',
+            'Simple separator<br /><span class="s-tc:accent">Usable everywhere</span>!',
           image: {
             url: '/dist/img/macos-wallpaper-02.webp',
             alt: '',

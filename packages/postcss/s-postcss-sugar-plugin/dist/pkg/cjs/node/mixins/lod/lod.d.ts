@@ -10,12 +10,17 @@ declare class postcssSugarPluginLodMixinInterface extends __SInterface {
             type: string;
             values: string[];
         };
+        keepWhenLodDisabled: {
+            type: string;
+            default: boolean;
+        };
     };
 }
 export { postcssSugarPluginLodMixinInterface as interface };
 export interface postcssSugarPluginLodMixinParams {
     level: number | string;
     method: 'file' | 'class';
+    keepWhenLodDisabled: boolean;
 }
 export default function ({ params, atRule, settings, postcssApi, }: {
     params: Partial<postcssSugarPluginLodMixinParams>;

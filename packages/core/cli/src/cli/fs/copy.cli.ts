@@ -2,7 +2,7 @@
 import __SGlob from '@coffeekraken/s-glob';
 import __SLog from '@coffeekraken/s-log';
 import __SPromise from '@coffeekraken/s-promise';
-import { __copySync } from '@coffeekraken/sugar/fs';
+import { __chdir, __copySync } from '@coffeekraken/sugar/fs';
 import { __isDirectory } from '@coffeekraken/sugar/is';
 import __SCliFsCopyParamsInterface from '../../node/fs/interface/SCliFsCopyParamsInterface';
 
@@ -45,8 +45,7 @@ export default (stringArgs = '') => {
             );
 
             if (finalParams.chdir && files.length === i + 1) {
-                process.chdir(finalParams.dest);
-                emit('chdir', finalParams.dest);
+                __chdir(finalParams.dest);
             }
         });
 

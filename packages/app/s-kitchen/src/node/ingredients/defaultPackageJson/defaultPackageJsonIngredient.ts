@@ -30,10 +30,12 @@ const defaultPackageJsonIngredient: ISKitchenIngredient = {
                 __fs.readFileSync(`${packageRoot}/package.json`).toString(),
             );
         }
+
         json = __deepMerge(
             json,
             __SSugarConfig.get('package.defaultPackageJson') ?? {},
         );
+
         __fs.writeFileSync(
             `${packageRoot}/package.json`,
             JSON.stringify(json, null, 4),

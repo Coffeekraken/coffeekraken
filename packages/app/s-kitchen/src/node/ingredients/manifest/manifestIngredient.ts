@@ -46,7 +46,7 @@ const manifestIngredient: ISKitchenIngredient = {
             __writeJsonSync(`${publicDir}/manifest.json`, json);
         }
 
-        console.log(
+        console.verbose?.(
             `<green>[manifest]</green> Default <cyan>manifest.json</cyan> file addedd <green>successfully</green>`,
         );
 

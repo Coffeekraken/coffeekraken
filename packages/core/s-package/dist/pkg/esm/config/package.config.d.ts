@@ -9,10 +9,14 @@ export default function (api: any): {
     };
     
     defaultPackageJson: {
+        private: boolean;
         scripts: {
             dev: string;
             prod: string;
             build: string;
+            static: string;
+            'static.build': string;
+            deploy: string;
         };
         dependencies: {
             readonly '@coffeekraken/sugar': string;

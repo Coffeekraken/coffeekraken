@@ -57,22 +57,11 @@ export default function (api: any): {
                     params: {};
                 };
                 
-                addFrontspecJson: {
-                    extends: string;
-                    title: string;
-                    description: string;
-                    params: {};
-                };
-                
                 addDefaultPages: {
                     extends: string;
                 };
                 
                 addDefaultScripts: {
-                    extends: string;
-                };
-                
-                addSugar: {
                     extends: string;
                 };
                 
@@ -95,7 +84,12 @@ export default function (api: any): {
                     extends: string;
                 };
                 
-                installDependencies: any;
+                addFrontspecJson: {
+                    extends: string;
+                    title: string;
+                    description: string;
+                    params: {};
+                };
             };
         };
         dev: {

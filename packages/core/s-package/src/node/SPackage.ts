@@ -14,6 +14,9 @@ import { cruise } from 'dependency-cruiser';
 import __fs from 'fs';
 import __glob from 'glob';
 import __path from 'path';
+
+import { __chdir } from '@coffeekraken/sugar/fs';
+
 import __SPackageAddDefaultScriptsParamsInterface from './interface/SPackageApplyDefaultPackageJsonParamsInterface';
 import __SPackageCheckDependenciesParamsInterface from './interface/SPackageCheckDependenciesParamsInterface';
 import __SPackageExportsParamsInterface from './interface/SPackageExportsParamsInterface';
@@ -658,20 +661,12 @@ export default class SPackage extends __SClass {
                 __SPackageInstallParamsInterface.apply(params);
 
             if (!finalParams.name) {
-                finalParams.name = await emit('ask', {
+                finalParams.name = await console.ask?.({
                     type: 'input',
                     message: 'Please enter the new name for your package',
                     pattern: '^[a-zA-Z0-9_@/-]+$',
                 });
             }
-
-            // if (finalParams.folder === undefined) {
-            //     finalParams.folder = await emit('ask', {
-            //         type: 'confirm',
-            //         message: 'Do you want to rename the folder as well ?',
-            //         default: true,
-            //     });
-            // }
 
             // rename package
             console.log(
@@ -691,7 +686,7 @@ export default class SPackage extends __SClass {
                     .slice(0, -1)
                     .join('/')}/${folderName}`;
                 __fs.renameSync(process.cwd(), newPath);
-                process.chdir(newPath);
+                __chdir(newPath);
             }
 
             resolve();

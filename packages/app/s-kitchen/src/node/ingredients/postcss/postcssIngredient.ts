@@ -1,9 +1,11 @@
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
 import { __unique } from '@coffeekraken/sugar/array';
-import __npmInstall from '@coffeekraken/sugar/node/npm/install';
+import { __packageJsonSync } from '@coffeekraken/sugar/package';
 import { __packageRootDir } from '@coffeekraken/sugar/path';
 import __fs from 'fs';
 import type { ISKitchenIngredient } from '../../SKitchen';
+
+import { __addDependencies } from '@coffeekraken/sugar/npm';
 
 import {
     __dirname,
@@ -86,9 +88,22 @@ const postcssIngredient: ISKitchenIngredient = {
         }
 
         // installing the actual plugin
-        console.log(
+        console.verbose?.(
             `<yellow>[postcss]</yellow> Installing the actual <cyan>@coffeekraken/s-postcss-sugar-plugin</cyan> and other useful ones...`,
         );
+
+        const currentPackageJson = __packageJsonSync(__dirname());
+
+        __addDependencies({
+            '@coffeekraken/s-postcss-sugar-plugin': `^${currentPackageJson.version}`,
+            postcss: '^8.4.21',
+            'postcss-import': '^15.1.0',
+            'postcss-nested': '^6.0.0',
+            'postcss-atroot': '^0.2.3',
+            'postcss-extend-rule': '^4.0.0',
+            'postcss-property-lookup': '^3.0.0',
+            autoprefixer: '^10.4.13',
+        });
 
         const plugins = [
             '@coffeekraken/s-postcss-sugar-plugin',
@@ -100,17 +115,17 @@ const postcssIngredient: ISKitchenIngredient = {
             'autoprefixer',
         ];
 
-        // install dependencies
-        await __npmInstall(['postcss', ...plugins]);
-
         // saving new config
-        console.log(
+        console.verbose?.(
             `<yellow>[postcss]</yellow> Saving new configuration file under <cyan>${configFilePath}</cyan>.`,
         );
 
         // add plugins in config
         if (Array.isArray(currentConfig.plugins)) {
-            currentConfig.plugins = __unique([...currentConfig.plugins, ,]);
+            currentConfig.plugins = __unique([
+                ...currentConfig.plugins,
+                ...plugins,
+            ]);
         } else {
             plugins.forEach((plugin) => {
                 if (currentConfig.plugins[plugin]) {
@@ -149,7 +164,7 @@ const postcssIngredient: ISKitchenIngredient = {
         // detecting the package type (next, generic, etc...)
         switch (context.projectType.type) {
             case 'next':
-                console.log(
+                console.verbose?.(
                     `<yellow>[postcss]</yellow> <cyan>Nextjs</cyan> project detected. Adding sugar css files...`,
                 );
 
@@ -171,7 +186,7 @@ const postcssIngredient: ISKitchenIngredient = {
                 }
                 break;
             default:
-                console.log(
+                console.verbose?.(
                     `<yellow>[postcss]</yellow> <cyan>Generic</cyan> project detected. Adding sugar css files...`,
                 );
 
@@ -197,7 +212,7 @@ const postcssIngredient: ISKitchenIngredient = {
                 break;
         }
 
-        console.log(
+        console.verbose?.(
             `<yellow>[postcss]</yellow> Added <green>successfully</green> in your project. Have fun!`,
         );
 

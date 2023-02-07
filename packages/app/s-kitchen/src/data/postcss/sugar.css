@@ -1,28 +1,28 @@
 /**
- * Wrap all large computation mixins into a cache pool
- * To help improve speed
- */
-@sugar.cache ('sugar') {
-    /**
-    * Init sugar. This will import a reset css and print the
-    * needed variables
-    */
-    @sugar.init ($variant: 'dark');
+* Init sugar. This will import a reset css and print the
+* needed variables
+*/
+@sugar.init ($variant: 'dark');
 
-    /**
-    * Generate some utility classes like "s-tc:accent, s-mb:30", etc...
-    * that depends on your theme configuration
-    */
-    @sugar.classes();
+/**
+* Generate some utility classes like "s-tc:accent, s-mb:30", etc...
+* that depends on your theme configuration
+*/
+@sugar.classes();
 
-    /**
-    * Generate media scoped classes to use like "@mobile s-pbe:100", etc...
-    * that depends on your theme configuration
-    */
-    /* @sugar.media.classes ('mobile,tablet') {
-        @sugar.classes();
-    } */
+/**
+* Generate media scoped classes to use like "@mobile s-pbe:100", etc...
+* that depends on your theme configuration
+*/
+@sugar.media.classes ('mobile,tablet') {
+    @sugar.margin.classes();
+    @sugar.padding.classes();
 }
+
+/* @sugar.ui.menu.classes(); */
+@sugar.ui.slider.classes();
+@sugar.ui.googleMap.classes();
+@sugar.ui.googleMapMarker.classes();
 
 /**
  * Define some icons to be used with classes like "s-icon:github", etc...
@@ -37,4 +37,7 @@
     fab:twitter
     fab:facebook
     fab:patreon
+    fab:instagram
+    sugar:misc-image:drop-file
+    sugar:ui-help-solid:help
 );

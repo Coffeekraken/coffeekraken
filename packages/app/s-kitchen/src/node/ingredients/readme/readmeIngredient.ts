@@ -40,7 +40,7 @@ const readmeIngredient: ISKitchenIngredient = {
 
         const sourceReadmePath = __path.resolve(
             __packageRootDir(__dirname()),
-            'src/data/readme/README.md',
+            'src/data/readme/README.md.twig',
         );
 
         // copy the file to the project root
@@ -58,7 +58,7 @@ const readmeIngredient: ISKitchenIngredient = {
         //     outPath: finalParams.path,
         // });
 
-        console.log(
+        console.verbose?.(
             `<green>[readme]</green> <cyan>${__path.relative(
                 __packageRootDir(),
                 input,

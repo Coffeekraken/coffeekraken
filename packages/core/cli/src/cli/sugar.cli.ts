@@ -196,6 +196,7 @@ export default class SSugarCli {
 
         // listen for ctrl+c
         __hotkey('ctrl+c').on('press', () => {
+            process.emit('custom_exit');
             process.emit('SIGINT');
         });
 
@@ -475,28 +476,9 @@ export default class SSugarCli {
 
         // protect from executing command package scoped outside of a package
         if (cliObj.scope === 'package' && !this.packageJson) {
-            console.log(`This command has to be uesed inside a package...`);
+            console.error(`This command has to be uesed inside a package...`);
             process.exit();
         }
-
-        // if (!__isChildProcess()) {
-        //     console.log('START');
-        //     await __spawn('sugard postcss.build');
-
-        //     console.log('End sugar');
-        // } else {
-        //     const answer = await console.ask({
-        //         type: 'confirm',
-        //         message: 'Is that ok??',
-        //     });
-
-        //     console.log('answer', answer);
-
-        //     console.log('Hello child');
-        // }
-
-        // process.exit();
-        // return;
 
         // @ts-ignore
         if (cliObj.processPath) {
@@ -524,14 +506,6 @@ export default class SSugarCli {
             const proPromise = processFn(args);
             // this._eventEmitter.pipe(proPromise, {});
 
-            proPromise.on?.('chdir', (directory) => {
-                if (!__fs.existsSync(directory)) return;
-                proPromise.emit('log', {
-                    value: `<yellow>[process]</yellow> Changing directory to <cyan>${directory}</cyan>`,
-                });
-                process.chdir(directory);
-            });
-
             await proPromise;
 
             await __wait(1000);
@@ -539,7 +513,6 @@ export default class SSugarCli {
         } else if (cliObj.command) {
             // init stdio
             this._initStdio(true);
-
             const promise = __spawn(
                 __replaceCommandTokens(cliObj.command),
                 [],

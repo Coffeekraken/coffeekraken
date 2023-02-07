@@ -3,6 +3,7 @@ import type { ISLog, ISLogAsk } from '@coffeekraken/s-log';
 import __SLog from '@coffeekraken/s-log';
 import __SPromise from '@coffeekraken/s-promise';
 import { __parseHtml } from '@coffeekraken/sugar/console';
+import { __wait } from '@coffeekraken/sugar/datetime';
 import { __getColorFor } from '@coffeekraken/sugar/dev';
 import { __clone, __deepMerge } from '@coffeekraken/sugar/object';
 import { __stripAnsi, __upperFirst } from '@coffeekraken/sugar/string';
@@ -82,7 +83,7 @@ export default class SStdioBasicAdapter
     }
 
     /**
-     * @name          _log
+     * @name          log
      * @type          Function
      * @private
      *
@@ -278,6 +279,8 @@ export default class SStdioBasicAdapter
     ask(askObj: ISLogAsk) {
         return new __SPromise(async ({ resolve, reject, emit }) => {
             let prompt, res;
+
+            await __wait(1000);
 
             // transform html in message
             askObj.message = __parseHtml(askObj.message);

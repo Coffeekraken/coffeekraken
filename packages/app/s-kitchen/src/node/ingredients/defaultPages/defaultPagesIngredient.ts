@@ -43,8 +43,8 @@ const defaultPagesIngredient: ISKitchenIngredient = {
         const engine = await ask({
             type: 'select',
             message: 'Which view engine would you like to use?',
-            choices: ['blade', 'twig'],
-            default: 'blade',
+            choices: ['twig'],
+            default: 'twig',
         });
 
         // source views folder path

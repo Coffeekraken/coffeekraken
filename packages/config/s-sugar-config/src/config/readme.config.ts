@@ -14,7 +14,7 @@ export default function (api) {
          * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         get input() {
-            return `${api.config.storage.src.docDir}/README.md`;
+            return `${api.config.storage.src.docDir}/README.md.twig`;
         },
 
         /**

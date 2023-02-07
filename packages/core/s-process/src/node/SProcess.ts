@@ -234,9 +234,13 @@ class SProcess extends __SEventEmitter implements ISProcessInternal {
                         command: what,
                     },
                     __deepMerge(settings, {
-                        processPath: __path.resolve('./SCommandProcess.js'),
+                        processPath: __path.resolve(
+                            __dirname(),
+                            './SCommandProcess.js',
+                        ),
                     }),
                 );
+
                 return commandProcess;
             }
         }

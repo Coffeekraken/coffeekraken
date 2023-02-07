@@ -42,6 +42,9 @@ $twig = \Sugar\twig\initTwig($twig, $loader);
 // ensure we send an array to the renderer
 $data = \Sugar\convert\toArray($data);
 
+// print '<pre>';
+// print_r($params->viewPath);
+
 try {
     $html = \Sugar\html\expandPleasantCssClassnames(
         $twig->render($params->viewPath, $data)

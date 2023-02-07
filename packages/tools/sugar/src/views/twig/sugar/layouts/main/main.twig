@@ -63,12 +63,7 @@
 
 </head>
 
-<body class="{{ bodyAttributes.class }}" s-sugar {{ attrs(bodyAttributes, ['class'])|raw }}>
-
-    <script>
-        document.body.classList.add('initial-loading');
-        document.body.classList.add('loading');
-    </script>
+<body class="{{ bodyAttributes.class }} initial-loading loading" s-sugar {{ attrs(bodyAttributes, ['class'])|raw }}>
 
     {% if SUGAR or frontspec %}
     <script id="sugar-override">

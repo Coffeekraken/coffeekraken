@@ -52,6 +52,8 @@ export interface ISpawnSettings extends SpawnOptions {
     [key: string]: any;
 }
 
+const _nativeLog = console.log;
+
 export interface ISpawn {
     (
         command: string,
@@ -88,7 +90,7 @@ export default function spawn(
 
         childProcess = __spawn(command, [], {
             shell: true,
-            stdio: ['inherit', 'inherit', 'inherit'],
+            stdio: ['inherit', 'inherit', 'inherit', 'ipc'],
             // stdio: 'inherit',
             // detached: true,
             maxBuffer: 1024 * 1024 * 50,
@@ -107,6 +109,24 @@ export default function spawn(
         });
 
         let childProcessExitPromiseResolve;
+
+        childProcess.on('message', (data) => {
+            if (data.command) {
+                switch (data.command) {
+                    case 'chdir':
+                        console.log(
+                            `<yellow>[spawn]</yellow> Changing working directory to "<cyan>${data.args}</cyan>"`,
+                        );
+                        process.chdir(data.args);
+                        break;
+                    default:
+                        throw new Error(
+                            `<red>spawn</red> Sorry but the passed "<yellow>${data.command}</yellow>" is not supported...`,
+                        );
+                        break;
+                }
+            }
+        });
 
         process.on('exit', function () {
             childProcess.kill();

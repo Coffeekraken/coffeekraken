@@ -64,9 +64,11 @@ export default function __packageJsonSync(
         const path = `${__packageRootDir(fromOrName, {
             highest: finalSettings.highest,
         })}/package.json`;
+
         if (!__fs.existsSync(path)) return false;
 
         json = __readJsonSync(path);
+
         if (finalSettings.standardize) {
             json = __formatPackageJson(json);
         }

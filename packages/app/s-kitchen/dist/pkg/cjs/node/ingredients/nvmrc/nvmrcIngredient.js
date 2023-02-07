@@ -31,6 +31,7 @@ const nvmrcIngredient = {
     description: 'Add the default <cyan>.nvmrc</cyan> file into your project',
     projectTypes: ['unknown', 'sugar', 'next'],
     add() {
+        var _a;
         return __awaiter(this, void 0, void 0, function* () {
             const packageRoot = (0, path_1.__packageRootDir)();
             const cliPackagePath = (0, packagePath_1.default)('@coffeekraken/cli');
@@ -40,7 +41,7 @@ const nvmrcIngredient = {
             if (fs_1.default.existsSync(`${cliPackagePath}/.nvmrc`)) {
                 nvmrc = fs_1.default.readFileSync(`${cliPackagePath}/.nvmrc`).toString();
                 fs_1.default.writeFileSync(`${packageRoot}/.nvmrc`, nvmrc);
-                console.log(`<green>[nvmrc]</green> Default <cyan>.nvmrc</cyan> file addedd <green>successfully</green> with node version <magenta>${nvmrc}</magenta>`);
+                (_a = console.verbose) === null || _a === void 0 ? void 0 : _a.call(console, `<green>[nvmrc]</green> Default <cyan>.nvmrc</cyan> file addedd <green>successfully</green> with node version <magenta>${nvmrc}</magenta>`);
                 return true;
             }
             return false;
@@ -48,4 +49,4 @@ const nvmrcIngredient = {
     },
 };
 exports.default = nvmrcIngredient;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7O0FBQUEsMkZBQXFFO0FBQ3JFLG1EQUE0RDtBQUM1RCw0Q0FBc0I7QUFHdEI7Ozs7Ozs7Ozs7R0FVRztBQUNILE1BQU0sZUFBZSxHQUF3QjtJQUN6QyxFQUFFLEVBQUUsT0FBTztJQUNYLFdBQVcsRUFBRSw0REFBNEQ7SUFDekUsWUFBWSxFQUFFLENBQUMsU0FBUyxFQUFFLE9BQU8sRUFBRSxNQUFNLENBQUM7SUFDcEMsR0FBRzs7WUFDTCxNQUFNLFdBQVcsR0FBRyxJQUFBLHVCQUFnQixHQUFFLENBQUM7WUFFdkMsTUFBTSxjQUFjLEdBQUcsSUFBQSxxQkFBYSxFQUFDLG1CQUFtQixDQUFDLENBQUM7WUFDMUQsSUFBSSxDQUFDLGNBQWM7Z0JBQUUsT0FBTyxLQUFLLENBQUM7WUFFbEMsSUFBSSxLQUFLLENBQUM7WUFDVixJQUFJLFlBQUksQ0FBQyxVQUFVLENBQUMsR0FBRyxjQUFjLFNBQVMsQ0FBQyxFQUFFO2dCQUM3QyxLQUFLLEdBQUcsWUFBSSxDQUFDLFlBQVksQ0FBQyxHQUFHLGNBQWMsU0FBUyxDQUFDLENBQUMsUUFBUSxFQUFFLENBQUM7Z0JBQ2pFLFlBQUksQ0FBQyxhQUFhLENBQUMsR0FBRyxXQUFXLFNBQVMsRUFBRSxLQUFLLENBQUMsQ0FBQztnQkFFbkQsT0FBTyxDQUFDLEdBQUcsQ0FDUCx5SEFBeUgsS0FBSyxZQUFZLENBQzdJLENBQUM7Z0JBQ0YsT0FBTyxJQUFJLENBQUM7YUFDZjtZQUVELE9BQU8sS0FBSyxDQUFDO1FBQ2pCLENBQUM7S0FBQTtDQUNKLENBQUM7QUFDRixrQkFBZSxlQUFlLENBQUMifQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7O0FBQUEsMkZBQXFFO0FBQ3JFLG1EQUE0RDtBQUM1RCw0Q0FBc0I7QUFHdEI7Ozs7Ozs7Ozs7R0FVRztBQUNILE1BQU0sZUFBZSxHQUF3QjtJQUN6QyxFQUFFLEVBQUUsT0FBTztJQUNYLFdBQVcsRUFBRSw0REFBNEQ7SUFDekUsWUFBWSxFQUFFLENBQUMsU0FBUyxFQUFFLE9BQU8sRUFBRSxNQUFNLENBQUM7SUFDcEMsR0FBRzs7O1lBQ0wsTUFBTSxXQUFXLEdBQUcsSUFBQSx1QkFBZ0IsR0FBRSxDQUFDO1lBRXZDLE1BQU0sY0FBYyxHQUFHLElBQUEscUJBQWEsRUFBQyxtQkFBbUIsQ0FBQyxDQUFDO1lBQzFELElBQUksQ0FBQyxjQUFjO2dCQUFFLE9BQU8sS0FBSyxDQUFDO1lBRWxDLElBQUksS0FBSyxDQUFDO1lBQ1YsSUFBSSxZQUFJLENBQUMsVUFBVSxDQUFDLEdBQUcsY0FBYyxTQUFTLENBQUMsRUFBRTtnQkFDN0MsS0FBSyxHQUFHLFlBQUksQ0FBQyxZQUFZLENBQUMsR0FBRyxjQUFjLFNBQVMsQ0FBQyxDQUFDLFFBQVEsRUFBRSxDQUFDO2dCQUNqRSxZQUFJLENBQUMsYUFBYSxDQUFDLEdBQUcsV0FBVyxTQUFTLEVBQUUsS0FBSyxDQUFDLENBQUM7Z0JBRW5ELE1BQUEsT0FBTyxDQUFDLE9BQU8sd0RBQ1gseUhBQXlILEtBQUssWUFBWSxDQUM3SSxDQUFDO2dCQUNGLE9BQU8sSUFBSSxDQUFDO2FBQ2Y7WUFFRCxPQUFPLEtBQUssQ0FBQzs7S0FDaEI7Q0FDSixDQUFDO0FBQ0Ysa0JBQWUsZUFBZSxDQUFDIn0=

@@ -4,7 +4,8 @@ import {
     __dirname,
     __prependToFileSync,
 } from '@coffeekraken/sugar/fs';
-import __npmInstall from '@coffeekraken/sugar/node/npm/install';
+import { __addDependencies } from '@coffeekraken/sugar/npm';
+import { __packageJsonSync } from '@coffeekraken/sugar/package';
 import { __packageRootDir } from '@coffeekraken/sugar/path';
 import __path from 'path';
 import type { ISKitchenIngredient } from '../../SKitchen';
@@ -34,19 +35,16 @@ const sugarIngredient: ISKitchenIngredient = {
             thisPackageRootPath = __packageRootDir(__dirname());
 
         // installing the actual package
-        console.log(
+        console.verbose?.(
             `<yellow>[sugar]</yellow> Installing the actual <cyan>@coffeekraken/sugar</cyan> and <cyan>@coffeekraken/s-sugar-feature</cyan> packages...`,
         );
-        try {
-            await __npmInstall([
-                '@coffeekraken/sugar',
-                '@coffeekraken/s-sugar-feature',
-            ]);
-        } catch (e) {
-            console.error(
-                `<red>sugar</red> Something went wrong when installing the @coffeekraken packages. Please try to install it manually.`,
-            );
-        }
+
+        const currentPackageJson = __packageJsonSync(__dirname());
+
+        __addDependencies({
+            '@coffeekraken/sugar': `^${currentPackageJson.version}`,
+            '@coffeekraken/s-sugar-feature': `^${currentPackageJson.version}`,
+        });
 
         switch (context.projectType.type) {
             case 'next':
@@ -88,7 +86,7 @@ const sugarIngredient: ISKitchenIngredient = {
                 break;
         }
 
-        console.log(
+        console.verbose?.(
             `<yellow>[sugar]</yellow> Added <green>successfully</green> in your project. Have fun!`,
         );
 

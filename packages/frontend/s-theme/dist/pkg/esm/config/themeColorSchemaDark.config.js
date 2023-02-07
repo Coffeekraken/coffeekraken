@@ -21,7 +21,7 @@ export default (api) => {
                     lighten: 46,
                 },
                 complementary: {
-                    lighten: 15,
+                    lighten: 30,
                 },
             },
         },

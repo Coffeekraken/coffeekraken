@@ -67,12 +67,7 @@ $frontspec->metas->og = $ogObj;
 
 </head>
 
-<body class="{{ isset($bodyAttributes['class']) ? $bodyAttributes['class'] : '' }}" s-sugar {!! \Sugar\html\attrs($bodyAttributes, ['class']) !!}>
-
-    <script>
-        document.body.classList.add('initial-loading');
-        document.body.classList.add('loading');
-    </script>
+<body class="{{ isset($bodyAttributes['class']) ? $bodyAttributes['class'] : '' }} initial-loading loading" s-sugar {!! \Sugar\html\attrs($bodyAttributes, ['class']) !!}>
 
     @if (isset($SUGAR) || isset($frontspec))
     <script id="sugar-override">

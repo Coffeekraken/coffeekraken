@@ -1,6 +1,6 @@
 import { __dirname } from '@coffeekraken/sugar/fs';
-import { __deepMerge } from '@coffeekraken/sugar/object';
 import { __uniqid } from '@coffeekraken/sugar/string';
+import __fs from 'fs';
 import __path from 'path';
 
 let newFolderName;
@@ -107,6 +107,10 @@ export default function (api) {
                         },
                         after() {
                             process.chdir(`${process.cwd()}/${newFolderName}`);
+                            __fs.writeFileSync(
+                                `${process.cwd()}/yarn.lock`,
+                                '',
+                            );
                         },
                         params: {},
                         settings: {},
@@ -189,23 +193,6 @@ export default function (api) {
                         params: {},
                     },
                     /**
-                     * @name            addFrontspecJson
-                     * @namespace       config.kitchenRecipeDefault.stacks.new.actions
-                     * @type            String
-                     *
-                     * Specify the recipe init stack addFrontspecJson action
-                     *
-                     * @since       2.0.0
-                     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-                     */
-                    addFrontspecJson: {
-                        extends: 'addFrontspecJson',
-                        title: 'Add frontspec.json file',
-                        description:
-                            'Add the frontspec.json default file in your project',
-                        params: {},
-                    },
-                    /**
                      * @name            addDefaultPages
                      * @namespace       config.kitchenRecipeNextJs.stacks.new.actions
                      * @type            String
@@ -230,20 +217,6 @@ export default function (api) {
                      */
                     addDefaultScripts: {
                         extends: 'addDefaultScripts',
-                    },
-                    /**
-                     * @name            addSugar
-                     * @namespace       config.kitchenRecipeNextJs.stacks.new.actions
-                     * @type            String
-                     *
-                     * Specify the recipe init stack addSugar action
-                     * MUST be after the addDefaultScripts to avoid overriding the script
-                     *
-                     * @since       2.0.0
-                     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-                     */
-                    addSugar: {
-                        extends: 'addSugar',
                     },
                     /**
                      * @name            addManifestJson
@@ -301,19 +274,36 @@ export default function (api) {
                         extends: 'addReadme',
                     },
                     /**
-                     * @name            installDependencies
+                     * @name            addFrontspecJson
                      * @namespace       config.kitchenRecipeDefault.stacks.new.actions
                      * @type            String
                      *
-                     * Specify the recipe init stack installDependencies action
+                     * Specify the recipe init stack addFrontspecJson action
                      *
                      * @since       2.0.0
                      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                      */
-                    installDependencies: __deepMerge(
-                        api.config.kitchen.actions.installDependencies,
-                        {},
-                    ),
+                    addFrontspecJson: {
+                        extends: 'addFrontspecJson',
+                        title: 'Add frontspec.json file',
+                        description:
+                            'Add the frontspec.json file in your project',
+                        params: {},
+                    },
+                    // /**
+                    //  * @name            installDependencies
+                    //  * @namespace       config.kitchenRecipeDefault.stacks.new.actions
+                    //  * @type            String
+                    //  *
+                    //  * Specify the recipe init stack installDependencies action
+                    //  *
+                    //  * @since       2.0.0
+                    //  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+                    //  */
+                    // installDependencies: __deepMerge(
+                    //     api.config.kitchen.actions.installDependencies,
+                    //     {},
+                    // ),
                 },
             },
             dev: {

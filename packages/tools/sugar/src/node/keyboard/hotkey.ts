@@ -1,9 +1,7 @@
 import __SInterface from '@coffeekraken/s-interface';
 import __SPromise from '@coffeekraken/s-promise';
-import __uniqid from '../../node/string/uniqid';
 // import __SIpc from '../ipc/SIpc';
 import { __isChildProcess } from '@coffeekraken/sugar/is';
-import __keypress from 'keypress';
 
 /**
  * @name                hotkey
@@ -38,12 +36,10 @@ import __keypress from 'keypress';
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-const hotkeyStack = {};
-let isListenerAlreadyAdded = false;
-const isSystemWideAlreadyAdded = false;
 
 export interface IHotkeySettings {
     once: boolean;
+    splitChar: string;
 }
 
 export class HotkeySettingsInterface extends __SInterface {
@@ -64,52 +60,11 @@ export class HotkeySettingsInterface extends __SInterface {
     }
 }
 
-function _handleKeypress(ch, keyObj) {
-    if (keyObj && keyObj.ctrl && keyObj.name == 'c') {
-        // @ts-ignore
-        process.emit('custom_exit', 'killed');
-    }
+import __readline from 'readline';
+__readline.emitKeypressEvents(process.stdin);
 
-    // loop on each promises registered
-    Object.keys(hotkeyStack).forEach((id) => {
-        const obj = hotkeyStack[id];
-        if (!obj || !obj.key) return;
-
-        obj.key
-            .toString()
-            .split(',')
-            .map((m) => m.trim())
-            .forEach((key) => {
-                if (ch && ch.toString() === key) {
-                    obj.promise.emit('press', {
-                        key,
-                        ctrl: keyObj ? keyObj.ctrl : false,
-                        meta: keyObj ? keyObj.meta : false,
-                        shift: keyObj ? keyObj.shift : false,
-                    });
-                    return;
-                }
-
-                if (!keyObj) return;
-
-                let pressedKey = keyObj.name;
-                if (keyObj.ctrl)
-                    pressedKey = `ctrl${obj.settings.splitChar}${pressedKey}`;
-                if (keyObj.shift)
-                    pressedKey = `shift${obj.settings.splitChar}${pressedKey}`;
-                if (keyObj.meta)
-                    pressedKey = `alt${obj.settings.splitChar}${pressedKey}`;
-
-                if (pressedKey === key) {
-                    obj.promise.emit('press', {
-                        key,
-                        ctrl: keyObj ? keyObj.ctrl : false,
-                        meta: keyObj ? keyObj.meta : false,
-                        shift: keyObj ? keyObj.shift : false,
-                    });
-                }
-            });
-    });
+if (process.stdin.setRawMode != null) {
+    process.stdin.setRawMode(true);
 }
 
 export { HotkeySettingsInterface as SettingsInterface };
@@ -121,35 +76,31 @@ export default function __hotkey(key, settings?: Partial<IHotkeySettings>) {
         id: 'hotkey',
     });
 
-    if (!__isChildProcess()) {
-        const uniqid = `hotkey.${__uniqid()}`;
-
-        if (!isListenerAlreadyAdded) {
-            isListenerAlreadyAdded = true;
-            __keypress(process.stdin);
-            process.stdin.on('keypress', _handleKeypress);
-            process.stdin.setRawMode(true);
-            process.stdin.resume();
+    process.stdin.on('keypress', (str, keyObj) => {
+        if (__isChildProcess()) {
+            return;
         }
 
-        promise
-            .on('press', (key) => {
-                if (set.once) {
-                    promise.cancel();
-                }
-            })
-            .on('finally', () => {
-                // delete the callback from the stack
-                delete hotkeyStack[uniqid];
-            });
+        let pressedKey = keyObj.name;
+        if (keyObj.ctrl) pressedKey = `ctrl${set.splitChar}${pressedKey}`;
+        if (keyObj.shift) pressedKey = `shift${set.splitChar}${pressedKey}`;
+        if (keyObj.meta) pressedKey = `alt${set.splitChar}${pressedKey}`;
 
-        // save the emit function in the stack
-        hotkeyStack[uniqid] = {
-            key,
-            promise,
-            settings: set,
-        };
-    }
+        if (pressedKey !== key) {
+            return;
+        }
+
+        promise.emit('press', {
+            key: pressedKey,
+            ctrl: keyObj ? keyObj.ctrl : false,
+            meta: keyObj ? keyObj.meta : false,
+            shift: keyObj ? keyObj.shift : false,
+        });
+
+        if (set.once) {
+            promise.cancel();
+        }
+    });
 
     // return the promise
     return promise;

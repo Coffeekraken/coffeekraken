@@ -1,4 +1,5 @@
 import __appendToFileSync from './appendToFileSync';
+import __chdir from './chdir';
 import __checkPathWithMultipleExtensions from './checkPathWithMultipleExtensions';
 import __copy from './copy';
 import __copySync from './copySync';
@@ -41,6 +42,7 @@ import __writeTmpFileSync from './writeTmpFileSync';
 
 export {
     __appendToFileSync,
+    __chdir,
     __checkPathWithMultipleExtensions,
     __copy,
     __copySync,

@@ -3,11 +3,15 @@ import __SLog from '@coffeekraken/s-log';
 import type { ISStdioSource, ISStdioSourceSettings } from '../SStdioSource';
 import __SStdioSource from '../SStdioSource';
 
+import { __wait } from '@coffeekraken/sugar/datetime';
 export interface ISStdioConsoleSource extends ISStdioSource {}
 
 export interface ISStdioConsoleSourceSettings extends ISStdioSourceSettings {}
 
-const _nativeLog = console.log;
+const _nativeConsole = {};
+for (let key of ['log', 'error', 'warn', 'success', 'verbose', 'notify']) {
+    _nativeConsole[key] = console[key];
+}
 
 export default class SStdioConsoleSource
     extends __SStdioSource
@@ -18,7 +22,28 @@ export default class SStdioConsoleSource
     constructor(settings?: Partial<ISStdioConsoleSourceSettings>) {
         super(settings);
 
-        const nativeConsole = {};
+        // overrtide native console
+        this._overrideNativeConsole();
+
+        // @ts-ignore
+        console.ask = async (askObj: ISLogAsj) => {
+            this._restoreNativeConsole();
+            await __wait(100);
+            const res = await this.ask(askObj);
+            this._overrideNativeConsole();
+            return res;
+        };
+
+        // source ready
+        setTimeout(() => {
+            this.ready();
+        }, 1000);
+    }
+
+    /**
+     * Restore native console (for ask, etc...)
+     */
+    _restoreNativeConsole() {
         for (let key of [
             'log',
             'error',
@@ -27,7 +52,23 @@ export default class SStdioConsoleSource
             'verbose',
             'notify',
         ]) {
-            nativeConsole[key] = console[key] ?? nativeConsole.log;
+            console[key] = _nativeConsole[key];
+        }
+    }
+
+    /**
+     * Override native console
+     */
+    _overrideNativeConsole() {
+        for (let key of [
+            'log',
+            'error',
+            'warn',
+            'success',
+            'verbose',
+            'notify',
+        ]) {
+            // _nativeConsole[key] = console[key] ?? _nativeConsole.log;
             console[key] = (...args) => {
                 const e = new Error();
                 const stack = e.stack
@@ -60,7 +101,7 @@ export default class SStdioConsoleSource
                         verbose: key === 'verbose' || log.verbose,
                         metas: log.metas ?? {},
                         // @ts-ignore
-                        logger: nativeConsole[key],
+                        logger: _nativeConsole[key],
                     });
                 });
 
@@ -69,15 +110,5 @@ export default class SStdioConsoleSource
                 });
             };
         }
-
-        // @ts-ignore
-        console.ask = async (askObj: ISLogAsj) => {
-            return await this.ask(askObj);
-        };
-
-        // source ready
-        setTimeout(() => {
-            this.ready();
-        }, 1000);
     }
 }

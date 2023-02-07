@@ -157,9 +157,18 @@ export default function ({
         newSelectors.push(`${cls}`);
     });
 
+    // handle "less than" action
     if (action === '<') {
         newSelectors = newSelectors.map((s) => {
             for (let i = levelInt; i < Object.keys(levelsObj).length; i++) {
+                s += `:not(.s-lod--${i})`;
+            }
+            s += ' ';
+            return s;
+        });
+    } else if (action === '<=') {
+        newSelectors = newSelectors.map((s) => {
+            for (let i = levelInt + 1; i < Object.keys(levelsObj).length; i++) {
                 s += `:not(.s-lod--${i})`;
             }
             s += ' ';

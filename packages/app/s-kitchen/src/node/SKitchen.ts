@@ -10,6 +10,7 @@ import __SProcess, {
 } from '@coffeekraken/s-process';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
 import __SSugarJson from '@coffeekraken/s-sugar-json';
+import { __wait } from '@coffeekraken/sugar/datetime';
 import { __isCommandExists } from '@coffeekraken/sugar/is';
 import { __import } from '@coffeekraken/sugar/module';
 import { __deepMerge, __filter } from '@coffeekraken/sugar/object';
@@ -220,6 +221,8 @@ class SKitchen extends __SClass {
                     10 - recipeId.length,
                 )}: ${recipesObj[recipeId].description}`;
             });
+
+            await __wait(1000);
 
             let recipe = await console.ask?.({
                 type: 'autocomplete',
@@ -470,7 +473,7 @@ class SKitchen extends __SClass {
                         finalParams.action &&
                         actionName !== finalParams.action
                     ) {
-                        console.log(
+                        console.error(
                             `<red>[action]</red> The requested action "<magenta>${finalParams.action}</magenta>" does not exists in the "<yellow>${finalParams.recipe}</yellow>.<cyan>${finalParams.stack}</cyan>" stack`,
                         );
                         continue;
@@ -504,7 +507,7 @@ class SKitchen extends __SClass {
                                 ).join(',')}</green>`,
                             );
                         }
-                        console.log(
+                        console.verbose?.(
                             `<yellow>○</yellow> <magenta>extends</magenta> : Your action "<yellow>${actionName}</yellow>" extends the "<cyan>${actionObj.extends}</cyan>" one`,
                         );
                         actionObj = <ISKitchenAction>(
@@ -556,6 +559,7 @@ class SKitchen extends __SClass {
                         actionParams,
                     );
 
+                    console.log(' ');
                     console.log({
                         group: 'SKitchen',
                         value: `Starting <yellow>${actionName}</yellow> action with command:`,
@@ -593,10 +597,10 @@ class SKitchen extends __SClass {
                         }
 
                         if (!finalParams.runInParallel) {
-                            await processPro;
+                            const res = await processPro;
                         }
                     } catch (e) {
-                        // console.log(e);
+                        console.log(e);
                     }
                 }
             }

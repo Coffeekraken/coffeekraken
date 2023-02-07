@@ -81,13 +81,5 @@
         "tsup": "^5.12.9",
         "typescript": "^4.7.4"
     },
-    "exports": {
-        ".": {
-            "require": "./packages/core/s-log/dist/pkg/cjs/shared/exports.js",
-            "import": "./packages/core/s-log/dist/pkg/esm/shared/exports.js"
-        }
-    },
-    "main": "./packages/core/s-log/dist/pkg/cjs/shared/exports.js",
-    "module": "./packages/core/s-log/dist/pkg/esm/shared/exports.js",
     "packageManager": "yarn@3.2.2"
 }

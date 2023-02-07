@@ -64,10 +64,15 @@ export default function (api) {
          * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         defaultPackageJson: {
+            private: true,
             scripts: {
                 dev: 'sugar kitchen.run dev',
                 prod: 'sugar kitchen.run prod',
                 build: 'sugar kitchen.run build',
+                static: 'live-server static',
+                'static.build':
+                    'sugar static.build --clean --env production --target production',
+                deploy: 'echo "no deploy script configured..."',
             },
             dependencies: {
                 get '@coffeekraken/sugar'() {

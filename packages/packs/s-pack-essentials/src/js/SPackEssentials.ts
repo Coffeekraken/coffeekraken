@@ -52,6 +52,9 @@ export default function SPackEssentials(): void {
     __SSliderComponentDefine();
 
     // features
+    if (!document.body.hasAttribute('s-sugar')) {
+        document.body.setAttribute('s-sugar', 'true');
+    }
     __SSugarFeatureDefine();
     __SActivateFeatureDefine();
     __SAppearFeatureDefine();

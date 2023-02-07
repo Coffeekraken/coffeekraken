@@ -29,7 +29,7 @@ const nvmrcIngredient: ISKitchenIngredient = {
             nvmrc = __fs.readFileSync(`${cliPackagePath}/.nvmrc`).toString();
             __fs.writeFileSync(`${packageRoot}/.nvmrc`, nvmrc);
 
-            console.log(
+            console.verbose?.(
                 `<green>[nvmrc]</green> Default <cyan>.nvmrc</cyan> file addedd <green>successfully</green> with node version <magenta>${nvmrc}</magenta>`,
             );
             return true;

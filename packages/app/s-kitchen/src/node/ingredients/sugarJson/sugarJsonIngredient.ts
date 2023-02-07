@@ -31,8 +31,10 @@ const sugarJsonIngredient: ISKitchenIngredient = {
             });
         }
 
-        console.log(
-            `<yellow>[sugarJson]</yellow> "<cyan>sugar.json</cyan>" file added <green>successfully</green> with the recipe <cyan>generic</cyan>`,
+        console.verbose?.(
+            `<yellow>[sugarJson]</yellow> "<cyan>sugar.json</cyan>" file added <green>successfully</green> with the recipe <cyan>${
+                context.recipe ?? 'generic'
+            }</cyan>`,
         );
 
         return true;

@@ -72,9 +72,7 @@ export default class SCommandProcess extends __SProcess {
         params: Partial<ISCommandProcessParams>,
         settings?: Partial<ISCommandProcessSettings>,
     ): Promise<ISProcessResultObject> {
-        const set = <
-            ISCommandProcessSettings // @ts-ignore
-        >__deepMerge(this.settings, settings ?? {});
+        const set = __deepMerge(this.settings, settings ?? {});
 
         // @ts-ignore
         const finalParams: ISCommandProcessParams =

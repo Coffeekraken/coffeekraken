@@ -323,9 +323,9 @@ export default class SLog {
     constructor(logObj: Partial<ISLog>) {
         // @ts-ignore
         if (!logObj?.value && !logObj._logObj) {
-            throw new Error(
-                `<red>[${this.constructor.name}]</red> Sorry but you cannot instanciate a new SLog without a "<yellow>value</yellow>" property...`,
-            );
+            // throw new Error(
+            //     `<red>[${this.constructor.name}]</red> Sorry but you cannot instanciate a new SLog without a "<yellow>value</yellow>" property...`,
+            // );
         }
 
         // extend with the default log obj

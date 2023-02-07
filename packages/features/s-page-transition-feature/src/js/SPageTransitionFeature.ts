@@ -279,6 +279,9 @@ export default class SPageTransitionFeature extends __SFeature {
                         // if the class is not already in the body classes,
                         // add it
                         if (cls && !$inPageBody.classList.contains(cls)) {
+                            if (cls === 'initial-loading') {
+                                return;
+                            }
                             $inPageBody.classList.add(cls);
                         }
                     });

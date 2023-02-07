@@ -46,7 +46,7 @@ $frontspec->metas->og = $ogObj;
         $dir = $frontspec->metas->dir;
     }
 @endphp
-<html lang="{{ $lang }}" dir="{{ $dir }}" class="{{ \Sugar\lod\lodClasses(isset($frontspec->lod->defaultLevel)) ? $frontspec->lod->defaultLevel : 3 }}">
+<html lang="{{ $lang }}" dir="{{ $dir }}" class="{{ \Sugar\lod\lodClasses(isset($frontspec->lod->defaultLevel) ? $frontspec->lod->defaultLevel : 3) }}">
 <head>
     <!-- metas -->
     {!! \Sugar\frontspec\metas($frontspec, $env) !!}

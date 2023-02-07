@@ -6,14 +6,14 @@ export default function (api) {
                  * @name            fontFamily
                  * @namespace       config.themeFont.family.default
                  * @type            String
-                 * @default         "Titillium Web"
+                 * @default         "Roboto"
                  *
                  * Declare the "default" fontFamily
                  *
                  * @since       2.0.0
                  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
-                fontFamily: '"Titillium Web"',
+                fontFamily: '"Roboto"',
                 /**
                  * @name            fontWeight
                  * @namespace       config.themeFont.family.default
@@ -30,28 +30,28 @@ export default function (api) {
                  * @name            import
                  * @namespace       config.themeFont.family.default
                  * @type            String
-                 * @default         https://fonts.googleapis.com/css2?family=Titillium+Web:wght@400&display=swap
+                 * @default         https://fonts.googleapis.com/css2?family=Roboto:wght@400&display=swap
                  *
                  * Declare the "default" import
                  *
                  * @since       2.0.0
                  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
-                import: 'https://fonts.googleapis.com/css2?family=Titillium+Web:wght@400&display=swap',
+                import: 'https://fonts.googleapis.com/css2?family=Roboto:wght@400&display=swap',
             },
             title: {
                 /**
                  * @name            fontFamily
                  * @namespace       config.themeFont.family.title
                  * @type            String
-                 * @default         https://fonts.googleapis.com/css2?family=Titillium+Web:wght@600&display=swap
+                 * @default         https://fonts.googleapis.com/css2?family=Roboto:wght@600&display=swap
                  *
                  * Declare the "default" fontFamily
                  *
                  * @since       2.0.0
                  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
-                fontFamily: '"Titillium Web"',
+                fontFamily: '"Roboto"',
                 /**
                  * @name            fontWeight
                  * @namespace       config.themeFont.family.title
@@ -68,14 +68,14 @@ export default function (api) {
                  * @name            import
                  * @namespace       config.themeFont.family.title
                  * @type            String
-                 * @default         https://fonts.googleapis.com/css2?family=Titillium+Web:wght@600&display=swap
+                 * @default         https://fonts.googleapis.com/css2?family=Roboto:wght@600&display=swap
                  *
                  * Declare the "default" import
                  *
                  * @since       2.0.0
                  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
-                import: 'https://fonts.googleapis.com/css2?family=Titillium+Web:wght@600&display=swap',
+                import: 'https://fonts.googleapis.com/css2?family=Roboto:wght@600&display=swap',
             },
             quote: {
                 /**
@@ -399,4 +399,4 @@ export default function (api) {
         },
     };
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE1BQU0sQ0FBQyxPQUFPLFdBQVcsR0FBRztJQUN4QixPQUFPO1FBQ0gsTUFBTSxFQUFFO1lBQ0osT0FBTyxFQUFFO2dCQUNMOzs7Ozs7Ozs7O21CQVVHO2dCQUNILFVBQVUsRUFBRSxpQkFBaUI7Z0JBQzdCOzs7Ozs7Ozs7O21CQVVHO2dCQUNILFVBQVUsRUFBRSxHQUFHO2dCQUNmOzs7Ozs7Ozs7O21CQVVHO2dCQUNILE1BQU0sRUFBRSw4RUFBOEU7YUFDekY7WUFFRCxLQUFLLEVBQUU7Z0JBQ0g7Ozs7Ozs7Ozs7bUJBVUc7Z0JBQ0gsVUFBVSxFQUFFLGlCQUFpQjtnQkFDN0I7Ozs7Ozs7Ozs7bUJBVUc7Z0JBQ0gsVUFBVSxFQUFFLEdBQUc7Z0JBQ2Y7Ozs7Ozs7Ozs7bUJBVUc7Z0JBQ0gsTUFBTSxFQUFFLDhFQUE4RTthQUN6RjtZQUVELEtBQUssRUFBRTtnQkFDSDs7Ozs7Ozs7OzttQkFVRztnQkFDSCxVQUFVLEVBQUUsbUNBQW1DO2dCQUMvQzs7Ozs7Ozs7OzttQkFVRztnQkFDSCxVQUFVLEVBQUUsUUFBUTtnQkFDcEI7Ozs7Ozs7Ozs7bUJBVUc7Z0JBQ0gsU0FBUyxFQUFFLFFBQVE7Z0JBQ25COzs7Ozs7Ozs7O21CQVVHO2dCQUNILFdBQVcsRUFBRSxNQUFNO2dCQUNuQjs7Ozs7Ozs7OzttQkFVRztnQkFDSCxTQUFTLEVBQUUsSUFBSTthQUNsQjtZQUVELElBQUksRUFBRTtnQkFDRjs7Ozs7Ozs7OzttQkFVRztnQkFDSCxVQUFVLEVBQUUsaURBQWlEO2dCQUM3RDs7Ozs7Ozs7OzttQkFVRztnQkFDSCxVQUFVLEVBQUUsUUFBUTtnQkFDcEI7Ozs7Ozs7Ozs7bUJBVUc7Z0JBQ0gsU0FBUyxFQUFFLFFBQVE7Z0JBQ25COzs7Ozs7Ozs7O21CQVVHO2dCQUNILFdBQVcsRUFBRSxNQUFNO2dCQUNuQjs7Ozs7Ozs7OzttQkFVRztnQkFDSCxTQUFTLEVBQUUsSUFBSTthQUNsQjtTQUNKO1FBRUQsSUFBSSxFQUFFO1lBQ0Y7Ozs7Ozs7Ozs7O2VBV0c7WUFDSCxJQUFJLE9BQU87Z0JBQ1AsT0FBTyxHQUFHLENBQUMsS0FBSyxDQUFDLElBQUksQ0FBQyxPQUFPLENBQUM7WUFDbEMsQ0FBQztZQUVEOzs7Ozs7Ozs7OztlQVdHO1lBQ0gsQ0FBQyxFQUFFLENBQUM7WUFFSjs7Ozs7Ozs7Ozs7ZUFXRztZQUNILElBQUksQ0FBQztnQkFDRCxPQUFPLEdBQUcsQ0FBQyxLQUFLLENBQUMsSUFBSSxDQUFDLEdBQUcsQ0FBQyxDQUFDO1lBQy9CLENBQUM7WUFFRDs7Ozs7Ozs7Ozs7ZUFXRztZQUNILElBQUksRUFBRTtnQkFDRixPQUFPLEdBQUcsQ0FBQyxLQUFLLENBQUMsSUFBSSxDQUFDLElBQUksQ0FBQyxDQUFDO1lBQ2hDLENBQUM7WUFFRDs7Ozs7Ozs7Ozs7ZUFXRztZQUNILElBQUksRUFBRTtnQkFDRixPQUFPLEdBQUcsQ0FBQyxLQUFLLENBQUMsSUFBSSxDQUFDLElBQUksQ0FBQyxDQUFDO1lBQ2hDLENBQUM7WUFFRDs7Ozs7Ozs7Ozs7ZUFXRztZQUNILElBQUksRUFBRTtnQkFDRixPQUFPLEdBQUcsQ0FBQyxLQUFLLENBQUMsSUFBSSxDQUFDLElBQUksQ0FBQyxDQUFDO1lBQ2hDLENBQUM7WUFFRDs7Ozs7Ozs7Ozs7ZUFXRztZQUNILElBQUksRUFBRTtnQkFDRixPQUFPLEdBQUcsQ0FBQyxLQUFLLENBQUMsSUFBSSxDQUFDLElBQUksQ0FBQyxDQUFDO1lBQ2hDLENBQUM7WUFFRDs7Ozs7Ozs7Ozs7ZUFXRztZQUNILElBQUksRUFBRTtnQkFDRixPQUFPLEdBQUcsQ0FBQyxLQUFLLENBQUMsSUFBSSxDQUFDLElBQUksQ0FBQyxDQUFDO1lBQ2hDLENBQUM7WUFFRDs7Ozs7Ozs7Ozs7ZUFXRztZQUNILElBQUksRUFBRTtnQkFDRixPQUFPLEdBQUcsQ0FBQyxLQUFLLENBQUMsSUFBSSxDQUFDLElBQUksQ0FBQyxDQUFDO1lBQ2hDLENBQUM7WUFFRDs7Ozs7Ozs7Ozs7ZUFXRztZQUNILElBQUksRUFBRTtnQkFDRixPQUFPLEdBQUcsQ0FBQyxLQUFLLENBQUMsSUFBSSxDQUFDLElBQUksQ0FBQyxDQUFDO1lBQ2hDLENBQUM7WUFFRDs7Ozs7Ozs7Ozs7ZUFXRztZQUNILElBQUksRUFBRTtnQkFDRixPQUFPLEdBQUcsQ0FBQyxLQUFLLENBQUMsSUFBSSxDQUFDLElBQUksQ0FBQyxDQUFDO1lBQ2hDLENBQUM7WUFFRDs7Ozs7Ozs7Ozs7ZUFXRztZQUNILElBQUksRUFBRTtnQkFDRixPQUFPLEdBQUcsQ0FBQyxLQUFLLENBQUMsSUFBSSxDQUFDLElBQUksQ0FBQyxDQUFDO1lBQ2hDLENBQUM7WUFFRDs7Ozs7Ozs7Ozs7ZUFXRztZQUNILElBQUksR0FBRztnQkFDSCxPQUFPLEdBQUcsQ0FBQyxLQUFLLENBQUMsSUFBSSxDQUFDLEtBQUssQ0FBQyxDQUFDO1lBQ2pDLENBQUM7U0FDSjtLQUNKLENBQUM7QUFDTixDQUFDIn0=
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE1BQU0sQ0FBQyxPQUFPLFdBQVcsR0FBRztJQUN4QixPQUFPO1FBQ0gsTUFBTSxFQUFFO1lBQ0osT0FBTyxFQUFFO2dCQUNMOzs7Ozs7Ozs7O21CQVVHO2dCQUNILFVBQVUsRUFBRSxVQUFVO2dCQUN0Qjs7Ozs7Ozs7OzttQkFVRztnQkFDSCxVQUFVLEVBQUUsR0FBRztnQkFDZjs7Ozs7Ozs7OzttQkFVRztnQkFDSCxNQUFNLEVBQUUsdUVBQXVFO2FBQ2xGO1lBRUQsS0FBSyxFQUFFO2dCQUNIOzs7Ozs7Ozs7O21CQVVHO2dCQUNILFVBQVUsRUFBRSxVQUFVO2dCQUN0Qjs7Ozs7Ozs7OzttQkFVRztnQkFDSCxVQUFVLEVBQUUsR0FBRztnQkFDZjs7Ozs7Ozs7OzttQkFVRztnQkFDSCxNQUFNLEVBQUUsdUVBQXVFO2FBQ2xGO1lBRUQsS0FBSyxFQUFFO2dCQUNIOzs7Ozs7Ozs7O21CQVVHO2dCQUNILFVBQVUsRUFBRSxtQ0FBbUM7Z0JBQy9DOzs7Ozs7Ozs7O21CQVVHO2dCQUNILFVBQVUsRUFBRSxRQUFRO2dCQUNwQjs7Ozs7Ozs7OzttQkFVRztnQkFDSCxTQUFTLEVBQUUsUUFBUTtnQkFDbkI7Ozs7Ozs7Ozs7bUJBVUc7Z0JBQ0gsV0FBVyxFQUFFLE1BQU07Z0JBQ25COzs7Ozs7Ozs7O21CQVVHO2dCQUNILFNBQVMsRUFBRSxJQUFJO2FBQ2xCO1lBRUQsSUFBSSxFQUFFO2dCQUNGOzs7Ozs7Ozs7O21CQVVHO2dCQUNILFVBQVUsRUFBRSxpREFBaUQ7Z0JBQzdEOzs7Ozs7Ozs7O21CQVVHO2dCQUNILFVBQVUsRUFBRSxRQUFRO2dCQUNwQjs7Ozs7Ozs7OzttQkFVRztnQkFDSCxTQUFTLEVBQUUsUUFBUTtnQkFDbkI7Ozs7Ozs7Ozs7bUJBVUc7Z0JBQ0gsV0FBVyxFQUFFLE1BQU07Z0JBQ25COzs7Ozs7Ozs7O21CQVVHO2dCQUNILFNBQVMsRUFBRSxJQUFJO2FBQ2xCO1NBQ0o7UUFFRCxJQUFJLEVBQUU7WUFDRjs7Ozs7Ozs7Ozs7ZUFXRztZQUNILElBQUksT0FBTztnQkFDUCxPQUFPLEdBQUcsQ0FBQyxLQUFLLENBQUMsSUFBSSxDQUFDLE9BQU8sQ0FBQztZQUNsQyxDQUFDO1lBRUQ7Ozs7Ozs7Ozs7O2VBV0c7WUFDSCxDQUFDLEVBQUUsQ0FBQztZQUVKOzs7Ozs7Ozs7OztlQVdHO1lBQ0gsSUFBSSxDQUFDO2dCQUNELE9BQU8sR0FBRyxDQUFDLEtBQUssQ0FBQyxJQUFJLENBQUMsR0FBRyxDQUFDLENBQUM7WUFDL0IsQ0FBQztZQUVEOzs7Ozs7Ozs7OztlQVdHO1lBQ0gsSUFBSSxFQUFFO2dCQUNGLE9BQU8sR0FBRyxDQUFDLEtBQUssQ0FBQyxJQUFJLENBQUMsSUFBSSxDQUFDLENBQUM7WUFDaEMsQ0FBQztZQUVEOzs7Ozs7Ozs7OztlQVdHO1lBQ0gsSUFBSSxFQUFFO2dCQUNGLE9BQU8sR0FBRyxDQUFDLEtBQUssQ0FBQyxJQUFJLENBQUMsSUFBSSxDQUFDLENBQUM7WUFDaEMsQ0FBQztZQUVEOzs7Ozs7Ozs7OztlQVdHO1lBQ0gsSUFBSSxFQUFFO2dCQUNGLE9BQU8sR0FBRyxDQUFDLEtBQUssQ0FBQyxJQUFJLENBQUMsSUFBSSxDQUFDLENBQUM7WUFDaEMsQ0FBQztZQUVEOzs7Ozs7Ozs7OztlQVdHO1lBQ0gsSUFBSSxFQUFFO2dCQUNGLE9BQU8sR0FBRyxDQUFDLEtBQUssQ0FBQyxJQUFJLENBQUMsSUFBSSxDQUFDLENBQUM7WUFDaEMsQ0FBQztZQUVEOzs7Ozs7Ozs7OztlQVdHO1lBQ0gsSUFBSSxFQUFFO2dCQUNGLE9BQU8sR0FBRyxDQUFDLEtBQUssQ0FBQyxJQUFJLENBQUMsSUFBSSxDQUFDLENBQUM7WUFDaEMsQ0FBQztZQUVEOzs7Ozs7Ozs7OztlQVdHO1lBQ0gsSUFBSSxFQUFFO2dCQUNGLE9BQU8sR0FBRyxDQUFDLEtBQUssQ0FBQyxJQUFJLENBQUMsSUFBSSxDQUFDLENBQUM7WUFDaEMsQ0FBQztZQUVEOzs7Ozs7Ozs7OztlQVdHO1lBQ0gsSUFBSSxFQUFFO2dCQUNGLE9BQU8sR0FBRyxDQUFDLEtBQUssQ0FBQyxJQUFJLENBQUMsSUFBSSxDQUFDLENBQUM7WUFDaEMsQ0FBQztZQUVEOzs7Ozs7Ozs7OztlQVdHO1lBQ0gsSUFBSSxFQUFFO2dCQUNGLE9BQU8sR0FBRyxDQUFDLEtBQUssQ0FBQyxJQUFJLENBQUMsSUFBSSxDQUFDLENBQUM7WUFDaEMsQ0FBQztZQUVEOzs7Ozs7Ozs7OztlQVdHO1lBQ0gsSUFBSSxFQUFFO2dCQUNGLE9BQU8sR0FBRyxDQUFDLEtBQUssQ0FBQyxJQUFJLENBQUMsSUFBSSxDQUFDLENBQUM7WUFDaEMsQ0FBQztZQUVEOzs7Ozs7Ozs7OztlQVdHO1lBQ0gsSUFBSSxHQUFHO2dCQUNILE9BQU8sR0FBRyxDQUFDLEtBQUssQ0FBQyxJQUFJLENBQUMsS0FBSyxDQUFDLENBQUM7WUFDakMsQ0FBQztTQUNKO0tBQ0osQ0FBQztBQUNOLENBQUMifQ==

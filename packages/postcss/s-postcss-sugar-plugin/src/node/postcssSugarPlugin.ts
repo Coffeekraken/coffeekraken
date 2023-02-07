@@ -544,24 +544,26 @@ const plugin = (settings: IPostcssSugarPluginSettings = {}) => {
         }
 
         // compress --s-theme-... variables
-        root.walkDecls((node) => {
-            if (node.variable) {
-                if (node.prop.match(/--s-theme/)) {
-                    const compressedProp = __compressVarName(node.prop);
-                    node.prop = compressedProp;
+        if (settings.compress.variables) {
+            root.walkDecls((node) => {
+                if (node.variable) {
+                    if (node.prop.match(/--s-theme/)) {
+                        const compressedProp = __compressVarName(node.prop);
+                        node.prop = compressedProp;
+                    }
                 }
-            }
 
-            const valueMatches = node.value.match(/--s-theme-[^,\)]+/gm);
-            if (valueMatches) {
-                valueMatches.forEach((match) => {
-                    node.value = node.value.replace(
-                        match,
-                        __compressVarName(match),
-                    );
-                });
-            }
-        });
+                const valueMatches = node.value.match(/--s-theme-[^,\)]+/gm);
+                if (valueMatches) {
+                    valueMatches.forEach((match) => {
+                        node.value = node.value.replace(
+                            match,
+                            __compressVarName(match),
+                        );
+                    });
+                }
+            });
+        }
 
         return root;
     }

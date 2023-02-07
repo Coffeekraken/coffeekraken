@@ -64,15 +64,39 @@ export default function ({
 
     atRootStart(`
          :root {
-            --s-fs-tree-inline-space-ratio: 1;
+            --s-fs-tree-inline-space-ratio: 2.9;
         }
     `);
+
+    // &:after {
+    //     content: '';
+    //     display: block;
+    //     font-weight:bold;
+    //     position: absolute;
+    //     z-index: -1;
+    //     bottom: 0;
+    //     left: calc(0.5em * var(--s-fs-tree-inline-space-ratio, 1));
+    //     width: 1em;
+    //     height: 1px;
+    //     background-color: sugar.color(current, border);
+    // }
+
+    // &:before {
+    //     content: '';
+    //     display: block;
+    //     font-weight:bold;
+    //     position: absolute;
+    //     z-index: -1;
+    //     top: 0;
+    //     left: 0.5em;
+    //     width: 1px; height: 100%;
+    //     background-color: sugar.color(current, border);
+    // }
 
     if (finalParams.scope.indexOf('bare') !== -1) {
         vars.push(`
             font-size: sugar.font.size(30);
             user-select: none;
-
 
             li > div {
                 position: relative;
@@ -86,35 +110,7 @@ export default function ({
                     overflow: hidden;
                     text-overflow: ellipsis;
                 }
-
-                &:before {
-                    content: '';
-                    display: block;
-                    font-weight:bold;
-                    position: absolute;
-                    z-index: -1;
-                    top: 0;
-                    left: calc(0.5em * var(--s-fs-tree-inline-space-ratio, 1));
-                    width: 1px; height: 100%;
-                    background-color: sugar.color(current, border);
-                }
-
-                &:after {
-                    content: '';
-                    display: block;
-                    font-weight:bold;
-                    position: absolute;
-                    z-index: -1;
-                    bottom: 0;
-                    left: calc(0.5em * var(--s-fs-tree-inline-space-ratio, 1));
-                    width: 1em;
-                    height: 1px;
-                    background-color: sugar.color(current, border);
-                }
-
-
             }
-
 
             li {
                 position: relative;

@@ -6,14 +6,14 @@ export default function (api) {
                  * @name            fontFamily
                  * @namespace       config.themeFont.family.default
                  * @type            String
-                 * @default         "Titillium Web"
+                 * @default         "Roboto"
                  *
                  * Declare the "default" fontFamily
                  *
                  * @since       2.0.0
                  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
-                fontFamily: '"Titillium Web"',
+                fontFamily: '"Roboto"',
                 /**
                  * @name            fontWeight
                  * @namespace       config.themeFont.family.default
@@ -30,14 +30,14 @@ export default function (api) {
                  * @name            import
                  * @namespace       config.themeFont.family.default
                  * @type            String
-                 * @default         https://fonts.googleapis.com/css2?family=Titillium+Web:wght@400&display=swap
+                 * @default         https://fonts.googleapis.com/css2?family=Roboto:wght@400&display=swap
                  *
                  * Declare the "default" import
                  *
                  * @since       2.0.0
                  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
-                import: 'https://fonts.googleapis.com/css2?family=Titillium+Web:wght@400&display=swap',
+                import: 'https://fonts.googleapis.com/css2?family=Roboto:wght@400&display=swap',
             },
 
             title: {
@@ -45,14 +45,14 @@ export default function (api) {
                  * @name            fontFamily
                  * @namespace       config.themeFont.family.title
                  * @type            String
-                 * @default         https://fonts.googleapis.com/css2?family=Titillium+Web:wght@600&display=swap
+                 * @default         https://fonts.googleapis.com/css2?family=Roboto:wght@600&display=swap
                  *
                  * Declare the "default" fontFamily
                  *
                  * @since       2.0.0
                  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
-                fontFamily: '"Titillium Web"',
+                fontFamily: '"Roboto"',
                 /**
                  * @name            fontWeight
                  * @namespace       config.themeFont.family.title
@@ -69,14 +69,14 @@ export default function (api) {
                  * @name            import
                  * @namespace       config.themeFont.family.title
                  * @type            String
-                 * @default         https://fonts.googleapis.com/css2?family=Titillium+Web:wght@600&display=swap
+                 * @default         https://fonts.googleapis.com/css2?family=Roboto:wght@600&display=swap
                  *
                  * Declare the "default" import
                  *
                  * @since       2.0.0
                  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
-                import: 'https://fonts.googleapis.com/css2?family=Titillium+Web:wght@600&display=swap',
+                import: 'https://fonts.googleapis.com/css2?family=Roboto:wght@600&display=swap',
             },
 
             quote: {

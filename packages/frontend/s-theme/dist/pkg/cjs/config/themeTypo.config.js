@@ -61,7 +61,7 @@ exports.default = (api) => {
             style: {
                 display: 'block',
                 fontFamily: 'title',
-                fontSize: 90,
+                fontSize: 80,
                 lineHeight: 1.3,
                 maxWidth: '55ch',
                 mobile: {
@@ -89,7 +89,7 @@ exports.default = (api) => {
             style: {
                 display: 'block',
                 fontFamily: 'title',
-                fontSize: 80,
+                fontSize: 70,
                 lineHeight: 1.3,
                 maxWidth: '55ch',
                 mobile: {
@@ -117,7 +117,7 @@ exports.default = (api) => {
             style: {
                 display: 'block',
                 fontFamily: 'title',
-                fontSize: 70,
+                fontSize: 60,
                 lineHeight: 1.3,
                 maxWidth: '55ch',
                 mobile: {
@@ -145,7 +145,7 @@ exports.default = (api) => {
             style: {
                 display: 'block',
                 fontFamily: 'title',
-                fontSize: 60,
+                fontSize: 50,
                 lineHeight: 1.3,
                 maxWidth: '55ch',
                 mobile: {
@@ -173,7 +173,7 @@ exports.default = (api) => {
             style: {
                 display: 'block',
                 fontFamily: 'title',
-                fontSize: 50,
+                fontSize: 40,
                 lineHeight: 1.3,
                 maxWidth: '55ch',
                 mobile: {
@@ -201,7 +201,7 @@ exports.default = (api) => {
             style: {
                 display: 'block',
                 fontFamily: 'title',
-                fontSize: 40,
+                fontSize: 30,
                 lineHeight: 1.3,
                 maxWidth: '55ch',
                 mobile: {
@@ -255,7 +255,7 @@ exports.default = (api) => {
             style: {
                 display: 'block',
                 fontFamily: 'default',
-                fontSize: 50,
+                fontSize: 40,
                 lineHeight: 1.6,
                 maxWidth: '55ch',
                 mobile: {

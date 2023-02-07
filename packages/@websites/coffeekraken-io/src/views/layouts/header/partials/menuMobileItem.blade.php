@@ -24,8 +24,10 @@
                                             class="s-link:stretch s-order:2">
                                             {!! str_replace('@coffeekraken/', '', $subItem->name) !!}
                                         </a>
-                                        <i
-                                            class="s-icon:{{ $icon ? $icon : 'file-md' }} s-tc:accent s-until:sibling:loading s-mie:10"></i>
+                                        @if (isset($icon))
+                                            <i
+                                                class="s-icon:{{ $icon }} s-tc:accent s-until:sibling:loading s-mie:10"></i>
+                                        @endif
                                         <div
                                             class="s-loader:square-dots s-color:accent s-mie:10 s-float:right s-when:siblings:loading">
                                         </div>

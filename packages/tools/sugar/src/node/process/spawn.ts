@@ -93,7 +93,7 @@ export default function spawn(
             stdio: ['inherit', 'inherit', 'inherit', 'ipc'],
             // stdio: 'inherit',
             // detached: true,
-            maxBuffer: 1024 * 1024 * 50,
+            maxBuffer: 1024 * 1024 * 100,
             cwd: settings.cwd || process.cwd(),
             ...settings,
             env: {

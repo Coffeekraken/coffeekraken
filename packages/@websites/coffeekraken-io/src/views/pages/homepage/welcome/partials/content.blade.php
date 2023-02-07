@@ -6,7 +6,7 @@
     @include ('generic.logo')
 </div>
 
-<h1 class="s-typo:h4:bold s-mbe:50 @mobile s-typo:h5">The frontend toolkit<br>that works for <span
+<h1 class="s-typo:h3:bold s-mbe:50 @mobile s-typo:h5">The frontend toolkit<br>that works for <span
         class="s-gradient:text:accent">everyone</span>.<br />Experts, <span class="s-gradient:text:complementary">professionals</span> and
     new-comers<br /></h1>
 

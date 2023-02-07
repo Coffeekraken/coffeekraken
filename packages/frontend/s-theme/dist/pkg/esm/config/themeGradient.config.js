@@ -86,7 +86,7 @@ export default function (api) {
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         defaultTextModifierEnd: {
-            lighten: 20,
+            lighten: 10,
         },
         /**
          * @name          defaultTextAngle

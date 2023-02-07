@@ -1,0 +1,16 @@
+.s-fs-tree {
+  margin-block-end: sugar.margin(40);
+  position: relative;
+
+  .s-fs-tree {
+    &:before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0.3em;
+      width: 1px;
+      height: 100%;
+      background: sugar.color(base, border);
+    }
+  }
+}

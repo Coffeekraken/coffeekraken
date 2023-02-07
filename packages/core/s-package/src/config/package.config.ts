@@ -73,6 +73,7 @@ export default function (api) {
                 'static.build':
                     'sugar static.build --clean --env production --target production',
                 deploy: 'echo "no deploy script configured..."',
+                test: 'echo "no test script configured..."',
             },
             dependencies: {
                 get '@coffeekraken/sugar'() {

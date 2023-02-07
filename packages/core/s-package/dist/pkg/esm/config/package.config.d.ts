@@ -17,6 +17,7 @@ export default function (api: any): {
             static: string;
             'static.build': string;
             deploy: string;
+            test: string;
         };
         dependencies: {
             readonly '@coffeekraken/sugar': string;

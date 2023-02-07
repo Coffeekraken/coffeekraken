@@ -41,8 +41,10 @@
  */
 export default function whenLod(level: number): Promise<void> {
     return new Promise((resolve) => {
+        const $html = document.querySelector('html');
+
         // already reachec
-        if (document.body.classList.contains(`s-lod--${level}`)) {
+        if ($html?.classList.contains(`s-lod--${level}`)) {
             return resolve();
         }
 
@@ -52,7 +54,7 @@ export default function whenLod(level: number): Promise<void> {
                     mutation.type === 'attributes' &&
                     mutation.attributeName === 'class'
                 ) {
-                    if (document.body.classList.contains(`s-lod--${level}`)) {
+                    if ($html?.classList.contains(`s-lod--${level}`)) {
                         observer.disconnect();
                         return resolve();
                     }

@@ -3,6 +3,7 @@
     "extends": [],
     "generated": {
         "extends": [
+            "@coffeekraken/aa",
             "@coffeekraken/cli",
             "@coffeekraken/s-activate-feature",
             "@coffeekraken/s-appear-feature",
@@ -11,6 +12,7 @@
             "@coffeekraken/s-builder",
             "@coffeekraken/s-carpenter",
             "@coffeekraken/s-class",
+            "@coffeekraken/s-classmap",
             "@coffeekraken/s-clipboard-copy-component",
             "@coffeekraken/s-code-example-component",
             "@coffeekraken/s-code-formatter-prettier",
@@ -43,9 +45,11 @@
             "@coffeekraken/s-filtrable-input-component",
             "@coffeekraken/s-floating-feature",
             "@coffeekraken/s-form-validate-feature",
+            "@coffeekraken/s-front",
             "@coffeekraken/s-frontend-checker",
             "@coffeekraken/s-frontend-server",
             "@coffeekraken/s-frontspec",
+            "@coffeekraken/s-glitch-feature",
             "@coffeekraken/s-glob",
             "@coffeekraken/s-google-map-component",
             "@coffeekraken/s-handlebars",
@@ -54,6 +58,7 @@
             "@coffeekraken/s-inline-feature",
             "@coffeekraken/s-interface",
             "@coffeekraken/s-kitchen",
+            "@coffeekraken/s-lazy-feature",
             "@coffeekraken/s-lit-component",
             "@coffeekraken/s-log",
             "@coffeekraken/s-markdown-builder",
@@ -84,7 +89,6 @@
             "@coffeekraken/s-sugar-element",
             "@coffeekraken/s-sugar-feature",
             "@coffeekraken/s-sugar-json",
-            "@coffeekraken/s-lazy-feature",
             "@coffeekraken/s-theme-switcher-component",
             "@coffeekraken/s-theme",
             "@coffeekraken/s-timer",
@@ -140,6 +144,37 @@
                                 }
                             ],
                             "raw": "Function"
+                        },
+                        "param": {
+                            "url": {
+                                "name": "url",
+                                "type": {
+                                    "types": [
+                                        {
+                                            "type": "String"
+                                        }
+                                    ],
+                                    "raw": "String"
+                                },
+                                "description": "The url to parse. If not passed, would take the current browser url as source",
+                                "default": "window.document.location.href",
+                                "defaultStr": "window.document.location.href"
+                            },
+                            "settings": {
+                                "name": "settings",
+                                "type": {
+                                    "types": [
+                                        {
+                                            "type": "Object"
+                                        }
+                                    ],
+                                    "raw": "Object"
+                                },
+                                "description": "On object of settings to configure your SUrl instance. Here's are the available settings:",
+                                "default": {},
+                                "defaultStr": "{}",
+                                "content": "- schema (null) {String}: Specify a schema to analyze the url and get some info like params back. FOr more info on schema, see the \"_parseSchema\" method doc...\n"
+                            }
                         },
                         "description": "Constructor",
                         "author": {

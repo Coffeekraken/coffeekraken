@@ -20,109 +20,17 @@
                 <ck-version-selector versions='{!! json_encode($versions) !!}'></ck-version-selector>
             </div>
             <nav id="nav" class="_nav s-until:media:mobile">
-                <a class="s-typo:bold _main-link" href="/doc/get-started/get-started" title="Get Started">
-                    <span>Get started</span>
+                <a class="_main-link" href="/doc/get-started/get-started" title="Get Started">
+                    <span>Documentation</span>
                 </a>
 
-                @php
-                    $documentationMenu = array_merge((array) $docmap->menu->tree->documentation, []);
-                    $packagesMenu = (object) [
-                        'name' => 'Packages',
-                    ];
-                    foreach ((array) $docmap->menu->packages as $package) {
-                        if (!property_exists($package, 'tree') || !property_exists($package->tree, 'documentation')) {
-                            continue;
-                        }
-                    
-                        $vars = array_keys((array) $package->tree->documentation);
-                    
-                        if (count($vars) <= 1) {
-                            continue;
-                        }
-                    
-                        $packagesMenu->{$package->name} = (object) [
-                            'name' => $package->name,
-                            'slug' => $package->tree->documentation->{$vars[1]}->slug,
-                        ];
-                    }
-                    array_push($documentationMenu, $packagesMenu);
-                    $documentationMenu = (object) $documentationMenu;
-                @endphp
+                <a class="_main-link" href="/styleguide/ui/card" title="Styleguide">
+                    <span>Styleguide</span>
+                </a>
 
-                {{-- Documentation --}}
-                @include('layouts.header.partials.menuItem', ['menuItem' => $documentationMenu, 'class' =>
-                '_subnav-doc'])
-
-                {{-- Styleguide --}}
-                @include('layouts.header.partials.menuItem', ['menuItem' =>
-                $docmap->menu->custom->styleguide->tree->styleguide, 'class' => ''])
-
-                {{-- Specs --}}
-                @include('layouts.header.partials.menuItem', ['menuItem' =>
-                $docmap->menu->custom->specs->tree->specs, 'class' => ''])
-
-                {{-- API --}}
-                @php
-                    $apiMenu = (object) [
-                        'name' => 'API',
-                        'search' => (object) [
-                            'id' => 'api-search',
-                            'name' => 'Search',
-                            'include' => 'generic/header/search-api.blade.php',
-                        ],
-                        'config' => (object) [
-                            'id' => 'api-configuration',
-                            'name' => 'Configuration',
-                            'overview' => (object) [
-                                'name' => 'Overview',
-                                'slug' => '/doc/config/overview',
-                            ],
-                            'explorer' => (object) [
-                                'name' => 'Config Explorer',
-                                'slug' => '/config/explorer',
-                            ],
-                            'builtin' => (object) [
-                                'name' => 'Built-in Config',
-                                'slug' => 'doc/config/built-in',
-                            ],
-                            'override' => (object) [
-                                'name' => 'Override Config',
-                                'slug' => 'doc/config/override',
-                            ],
-                            'register' => (object) [
-                                'name' => 'Register new Config',
-                                'slug' => 'doc/config/register',
-                            ],
-                        ],
-                        'cssDiscover' => (object) [
-                            'id' => 'api-discover-css',
-                            'name' => 'Discover (css)',
-                            'content' => '<ck-discover platform="css"></ck-discover>',
-                        ],
-                        'jsDiscover' => (object) [
-                            'id' => 'api-discover-js',
-                            'name' => 'Discover (js)',
-                            'content' => '<ck-discover platform="js"></ck-discover>',
-                        ],
-                        'postcssDiscover' => (object) [
-                            'id' => 'api-discover-postcss',
-                            'name' => 'Discover (PostCSS)',
-                            'content' => '<ck-discover platform="postcss"></ck-discover>',
-                        ],
-                        'nodeDiscover' => (object) [
-                            'id' => 'api-discover-node',
-                            'name' => 'Discover (node)',
-                            'content' => '<ck-discover platform="node"></ck-discover>',
-                        ],
-                        'phpDiscover' => (object) [
-                            'id' => 'api-discover-php',
-                            'name' => 'Discover (php)',
-                            'content' => '<ck-discover platform="php"></ck-discover>',
-                        ],
-                    ];
-                    
-                @endphp
-                @include('layouts.header.partials.menuItem', ['menuItem' => $apiMenu, 'class' => ''])
+                <a class="_main-link" href="/api/@coffeekraken.sugar.js.dom.query.querySelectorLive" title="API">
+                    <span>API</span>
+                </a>                
 
             </nav>
             <div class="s-flex:align-center">

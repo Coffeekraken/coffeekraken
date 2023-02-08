@@ -3,6 +3,7 @@
     "extends": [],
     "generated": {
         "extends": [
+            "@coffeekraken/aa",
             "@coffeekraken/cli",
             "@coffeekraken/s-activate-feature",
             "@coffeekraken/s-appear-feature",
@@ -42,9 +43,11 @@
             "@coffeekraken/s-filtrable-input-component",
             "@coffeekraken/s-floating-feature",
             "@coffeekraken/s-form-validate-feature",
+            "@coffeekraken/s-front",
             "@coffeekraken/s-frontend-checker",
             "@coffeekraken/s-frontend-server",
             "@coffeekraken/s-frontspec",
+            "@coffeekraken/s-glitch-feature",
             "@coffeekraken/s-glob",
             "@coffeekraken/s-google-map-component",
             "@coffeekraken/s-handlebars",
@@ -83,7 +86,6 @@
             "@coffeekraken/s-sugar-element",
             "@coffeekraken/s-sugar-feature",
             "@coffeekraken/s-sugar-json",
-            "@coffeekraken/s-lazy-feature",
             "@coffeekraken/s-theme-switcher-component",
             "@coffeekraken/s-theme",
             "@coffeekraken/s-timer",
@@ -216,6 +218,23 @@
                             ],
                             "raw": "Function"
                         },
+                        "param": {
+                            "settings": {
+                                "name": "settings",
+                                "type": {
+                                    "types": [
+                                        {
+                                            "type": "Object"
+                                        }
+                                    ],
+                                    "raw": "Object"
+                                },
+                                "description": "An object to configure the SConfigAdapter instance. This is specific to each adapters.settings.settings...",
+                                "default": {},
+                                "defaultStr": "{}",
+                                "content": "- name (null) {String}: Specify a simple name for this adapter instance. This name will be used to save the configs, etc...\n- ...others: All the settings you need for your specific adapter\n"
+                            }
+                        },
                         "description": "Construct the SConfigAdapter instance with the settings passed in object format. See description bellow.",
                         "author": {
                             "name": "Olivier Bossel",
@@ -233,6 +252,21 @@
                                 }
                             ],
                             "raw": "Function"
+                        },
+                        "param": {
+                            "identifier": {
+                                "name": "identifier",
+                                "type": {
+                                    "types": [
+                                        {
+                                            "type": "String"
+                                        }
+                                    ],
+                                    "raw": "String"
+                                },
+                                "description": "A string identifier for the update. Can be a file path, an object hash, etc...",
+                                "defaultStr": ""
+                            }
                         },
                         "description": "Function that you have to call with the new config when it has been updated",
                         "since": "2.0.0",
@@ -252,6 +286,21 @@
                                 }
                             ],
                             "raw": "Function"
+                        },
+                        "param": {
+                            "params": {
+                                "name": "params",
+                                "type": {
+                                    "types": [
+                                        {
+                                            "type": "ISConfigAdapterLoadParams"
+                                        }
+                                    ],
+                                    "raw": "ISConfigAdapterLoadParams"
+                                },
+                                "description": "The parameters passed by the SConfig instance",
+                                "defaultStr": ""
+                            }
                         },
                         "description": "Function that you have to override in your own adapter to load the configurations",
                         "since": "2.0.0",

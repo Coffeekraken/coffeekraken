@@ -17,6 +17,7 @@
   border-radius: sugar.border.radius();
   backdrop-filter: blur(10px);
   background: sugar.color(main, background, --alpha 0.9);
+  border-bottom: 1px solid sugar.color(base, --alpha 0);
 
   @sugar.theme.when dark {
     background: linear-gradient(
@@ -43,6 +44,8 @@
     width: 100%;
     border-top-left-radius: 0;
     border-top-right-radius: 0;
+    @sugar.depth (0);
+    border-bottom: 1px solid sugar.color(base, --alpha 0.1);
 
     @sugar.media (>=wide) {
       width: 100%;
@@ -51,6 +54,8 @@
 
   .s-container {
     flex-grow: 1;
+    position: relative;
+    top: 5px;
   }
 
   ._logo {

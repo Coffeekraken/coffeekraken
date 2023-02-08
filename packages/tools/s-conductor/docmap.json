@@ -3,6 +3,7 @@
     "extends": [],
     "generated": {
         "extends": [
+            "@coffeekraken/aa",
             "@coffeekraken/cli",
             "@coffeekraken/s-activate-feature",
             "@coffeekraken/s-appear-feature",
@@ -11,6 +12,7 @@
             "@coffeekraken/s-builder",
             "@coffeekraken/s-carpenter",
             "@coffeekraken/s-class",
+            "@coffeekraken/s-classmap",
             "@coffeekraken/s-clipboard-copy-component",
             "@coffeekraken/s-code-example-component",
             "@coffeekraken/s-code-formatter-prettier",
@@ -42,9 +44,11 @@
             "@coffeekraken/s-filtrable-input-component",
             "@coffeekraken/s-floating-feature",
             "@coffeekraken/s-form-validate-feature",
+            "@coffeekraken/s-front",
             "@coffeekraken/s-frontend-checker",
             "@coffeekraken/s-frontend-server",
             "@coffeekraken/s-frontspec",
+            "@coffeekraken/s-glitch-feature",
             "@coffeekraken/s-glob",
             "@coffeekraken/s-google-map-component",
             "@coffeekraken/s-handlebars",
@@ -53,6 +57,7 @@
             "@coffeekraken/s-inline-feature",
             "@coffeekraken/s-interface",
             "@coffeekraken/s-kitchen",
+            "@coffeekraken/s-lazy-feature",
             "@coffeekraken/s-lit-component",
             "@coffeekraken/s-log",
             "@coffeekraken/s-markdown-builder",
@@ -83,7 +88,6 @@
             "@coffeekraken/s-sugar-element",
             "@coffeekraken/s-sugar-feature",
             "@coffeekraken/s-sugar-json",
-            "@coffeekraken/s-lazy-feature",
             "@coffeekraken/s-theme-switcher-component",
             "@coffeekraken/s-theme",
             "@coffeekraken/s-timer",
@@ -148,6 +152,22 @@
                     ],
                     "raw": "Class"
                 },
+                "param": {
+                    "settings": {
+                        "name": "settings",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Object"
+                                }
+                            ],
+                            "raw": "Object"
+                        },
+                        "description": "An object of settings to use",
+                        "default": {},
+                        "defaultStr": "{}"
+                    }
+                },
                 "description": "This class represent the conductor for your UI. With it you can register some \"task\" to execute\nat a specific time. The \"times\" available are these ones:\n\n- direct: Execute directly the task\n- directly: Execute directly the task\n- inViewport: Execute when the element enter the viewport\n- nearViewport: Execute when the element is near the viewport\n- outOfViewport: Execute when the element is out of the viewport\n- domReady: Execute when the DOM is ready\n- visible: Execute when the element became visible\n- stylesheetsReady: Execute when the stylesheets are ready\n- interact: Execute when the user interact with the element. See the [whenInteract API documentation](/api/@coffeekraken.sugar.js.dom.detect.whenInteract).\n- idle: Execute when no other task is running",
                 "namespace": "@coffeekraken.s-conductor.s-duration",
                 "status": "beta",
@@ -196,6 +216,51 @@
                             ],
                             "raw": "Function"
                         },
+                        "param": {
+                            "time": {
+                                "name": "time",
+                                "type": {
+                                    "types": [
+                                        {
+                                            "type": "array",
+                                            "of": [
+                                                "TSConductorTrigger"
+                                            ]
+                                        }
+                                    ],
+                                    "raw": "TSConductorTrigger[]"
+                                },
+                                "description": "The time to execute the task. Can be multiple times and the first reached will be the one used",
+                                "defaultStr": ""
+                            },
+                            "$elm": {
+                                "name": "$elm",
+                                "type": {
+                                    "types": [
+                                        {
+                                            "type": "HTMLElement"
+                                        }
+                                    ],
+                                    "raw": "HTMLElement"
+                                },
+                                "description": "The element to watch. Optional depending on the time listened",
+                                "default": null,
+                                "defaultStr": "null"
+                            },
+                            "task": {
+                                "name": "task",
+                                "type": {
+                                    "types": [
+                                        {
+                                            "type": "Function"
+                                        }
+                                    ],
+                                    "raw": "Function"
+                                },
+                                "description": "The task function to execute",
+                                "defaultStr": ""
+                            }
+                        },
                         "description": "This method allows you to register a task to execute at a specific time in the \"default\" conductor instance.",
                         "since": "2.0.0",
                         "author": {
@@ -213,6 +278,24 @@
                                 }
                             ],
                             "raw": "Function"
+                        },
+                        "param": {
+                            "settings": {
+                                "name": "settings",
+                                "type": {
+                                    "types": [
+                                        {
+                                            "type": "Partial",
+                                            "of": [
+                                                "ISConductorSettings"
+                                            ]
+                                        }
+                                    ],
+                                    "raw": "Partial<ISConductorSettings>"
+                                },
+                                "description": "The settings to use",
+                                "defaultStr": ""
+                            }
                         },
                         "description": "This static method allows you to setup the \"default\" SConductor instance created when you use the static methods like \"when\", etc...",
                         "static": "true",

@@ -3,6 +3,7 @@
     "extends": [],
     "generated": {
         "extends": [
+            "@coffeekraken/aa",
             "@coffeekraken/cli",
             "@coffeekraken/s-activate-feature",
             "@coffeekraken/s-appear-feature",
@@ -42,9 +43,11 @@
             "@coffeekraken/s-filtrable-input-component",
             "@coffeekraken/s-floating-feature",
             "@coffeekraken/s-form-validate-feature",
+            "@coffeekraken/s-front",
             "@coffeekraken/s-frontend-checker",
             "@coffeekraken/s-frontend-server",
             "@coffeekraken/s-frontspec",
+            "@coffeekraken/s-glitch-feature",
             "@coffeekraken/s-glob",
             "@coffeekraken/s-google-map-component",
             "@coffeekraken/s-handlebars",
@@ -83,7 +86,6 @@
             "@coffeekraken/s-sugar-element",
             "@coffeekraken/s-sugar-feature",
             "@coffeekraken/s-sugar-json",
-            "@coffeekraken/s-lazy-feature",
             "@coffeekraken/s-theme-switcher-component",
             "@coffeekraken/s-theme",
             "@coffeekraken/s-timer",
@@ -101,34 +103,6 @@
             "@coffeekraken/sugar"
         ],
         "map": {
-            "@coffeekraken.s-dashboard.config.dashboard.layout": {
-                "id": "@coffeekraken.s-dashboard.config.dashboard.layout",
-                "name": "layout",
-                "type": {
-                    "types": [
-                        {
-                            "type": "Array",
-                            "of": [
-                                "String[]"
-                            ]
-                        }
-                    ],
-                    "raw": "Array<String[]>"
-                },
-                "default": "[['s-dashboard-pages'], [], ['s-dashboard-frontend-checker']],",
-                "description": "Specify the layout you want for your dashboard.\nFirst level defined the columns, second level defined the components in each column.",
-                "namespace": "@coffeekraken.s-dashboard.config.dashboard",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "dashboard.config.ts",
-                "extension": "config",
-                "relPath": "src/config/dashboard.config.ts",
-                "children": {}
-            },
             "@coffeekraken.s-dashboard.doc.README": {
                 "id": "@coffeekraken.s-dashboard.doc.README",
                 "name": "README",
@@ -175,6 +149,22 @@
                         }
                     ],
                     "raw": "Class"
+                },
+                "param": {
+                    "settings": {
+                        "name": "settings",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "ISDashboardSettings"
+                                }
+                            ],
+                            "raw": "ISDashboardSettings"
+                        },
+                        "description": "Some settings to configure your monorepo instance",
+                        "default": {},
+                        "defaultStr": "{}"
+                    }
                 },
                 "platform": [
                     {

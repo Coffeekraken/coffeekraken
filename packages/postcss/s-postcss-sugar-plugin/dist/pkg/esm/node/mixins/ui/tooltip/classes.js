@@ -218,7 +218,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
 
                 &:not(:focus):not(:focus-within):not(:hover) {
                     & > .s-tooltip {
-                        @sugar.visually.hidden();
+                        
                     }
                 }
 

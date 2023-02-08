@@ -5,14 +5,14 @@ export default (api) => {
              * @name          lighten
              * @namespace     config.themeColorSchemaDark.text
              * @type          Number
-             * @default      0
+             * @default      15
              *
              * Specify the lighten value for the "text" color variant
              *
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            lighten: 0,
+            lighten: 15,
 
             color: {
                 base: {
@@ -20,9 +20,6 @@ export default (api) => {
                 },
                 main: {
                     lighten: 46,
-                },
-                complementary: {
-                    lighten: 30,
                 },
             },
         },
@@ -127,14 +124,14 @@ export default (api) => {
              * @name          darken
              * @namespace     config.themeColorSchemaDark.ui
              * @type          Number
-             * @default      25
+             * @default      29
              *
              * Specify the darken value for the "ui" color variant
              *
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            darken: 25,
+            darken: 28,
         },
         uiForeground: {
             /**

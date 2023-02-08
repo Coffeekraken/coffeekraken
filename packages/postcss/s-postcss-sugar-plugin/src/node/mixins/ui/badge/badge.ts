@@ -70,6 +70,7 @@ export default function ({
         vars.push(`   
         display: inline-flex;
         align-items: center;
+        line-height: 1;
         white-space: nowrap;
         user-select: none;
     `);
@@ -115,7 +116,6 @@ export default function ({
                 vars.push(`
                      color: sugar.color(current, foreground);
                      background-color: sugar.color(current);
-                     text-shadow: 0 0 1em sugar.color(current, --darken 40% --alpha 0.6);
                 `);
                 break;
         }

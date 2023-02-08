@@ -3,6 +3,7 @@
     "extends": [],
     "generated": {
         "extends": [
+            "@coffeekraken/aa",
             "@coffeekraken/cli",
             "@coffeekraken/s-activate-feature",
             "@coffeekraken/s-appear-feature",
@@ -42,9 +43,11 @@
             "@coffeekraken/s-filtrable-input-component",
             "@coffeekraken/s-floating-feature",
             "@coffeekraken/s-form-validate-feature",
+            "@coffeekraken/s-front",
             "@coffeekraken/s-frontend-checker",
             "@coffeekraken/s-frontend-server",
             "@coffeekraken/s-frontspec",
+            "@coffeekraken/s-glitch-feature",
             "@coffeekraken/s-glob",
             "@coffeekraken/s-google-map-component",
             "@coffeekraken/s-handlebars",
@@ -83,7 +86,6 @@
             "@coffeekraken/s-sugar-element",
             "@coffeekraken/s-sugar-feature",
             "@coffeekraken/s-sugar-json",
-            "@coffeekraken/s-lazy-feature",
             "@coffeekraken/s-theme-switcher-component",
             "@coffeekraken/s-theme",
             "@coffeekraken/s-timer",
@@ -101,53 +103,6 @@
             "@coffeekraken/sugar"
         ],
         "map": {
-            "@coffeekraken.s-code-formatter.config.codeFormatter.glob": {
-                "id": "@coffeekraken.s-code-formatter.config.codeFormatter.glob",
-                "name": "glob",
-                "type": {
-                    "types": [
-                        {
-                            "type": "String"
-                        }
-                    ],
-                    "raw": "String"
-                },
-                "default": "** /*",
-                "description": "Specify the default glob for the SCodeFormatter.format process",
-                "namespace": "@coffeekraken.s-code-formatter.config.codeFormatter",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com"
-                },
-                "filename": "codeFormatter.config.ts",
-                "extension": "config",
-                "relPath": "src/config/codeFormatter.config.ts"
-            },
-            "@coffeekraken.s-code-formatter.config.codeFormatter.inDir": {
-                "id": "@coffeekraken.s-code-formatter.config.codeFormatter.inDir",
-                "name": "inDir",
-                "type": {
-                    "types": [
-                        {
-                            "type": "String"
-                        }
-                    ],
-                    "raw": "String"
-                },
-                "default": "[config.storage.src.rootDir]",
-                "description": "Specify the default inDir for the SCodeFormatter.format process",
-                "namespace": "@coffeekraken.s-code-formatter.config.codeFormatter",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com"
-                },
-                "filename": "codeFormatter.config.ts",
-                "extension": "config",
-                "relPath": "src/config/codeFormatter.config.ts",
-                "children": {}
-            },
             "@coffeekraken.s-code-formatter.doc.README": {
                 "id": "@coffeekraken.s-code-formatter.doc.README",
                 "name": "README",
@@ -195,6 +150,38 @@
                     ],
                     "raw": "Class"
                 },
+                "param": {
+                    "settings": {
+                        "name": "settings",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Object"
+                                }
+                            ],
+                            "raw": "Object"
+                        },
+                        "description": "Specify an object of settings to configure your formatting process",
+                        "default": {},
+                        "defaultStr": "{}"
+                    }
+                },
+                "setting": {
+                    "timeoutBetweenSameFileProcess": {
+                        "name": "timeoutBetweenSameFileProcess",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Number"
+                                }
+                            ],
+                            "raw": "Number"
+                        },
+                        "description": "Specify a timeout between 2 same file processes to avoid loop of formatting",
+                        "default": 1000,
+                        "defaultStr": "1000"
+                    }
+                },
                 "description": "This represent the main code formatter class that allows you to format code like js, css, etc...\nAll the code formatters have to be implemented by exporting an object of type ISCodeFormatterFormatter.",
                 "namespace": "@coffeekraken.s-code-formatter.node",
                 "status": "wip",
@@ -224,6 +211,21 @@
                                 }
                             ],
                             "raw": "Function"
+                        },
+                        "param": {
+                            "formatter": {
+                                "name": "formatter",
+                                "type": {
+                                    "types": [
+                                        {
+                                            "type": "ISCodeFormatterFormatter"
+                                        }
+                                    ],
+                                    "raw": "ISCodeFormatterFormatter"
+                                },
+                                "description": "The formatter to register",
+                                "defaultStr": ""
+                            }
                         },
                         "description": "Register a new formatter by passing the ISCodeFormatterFormatter typed object",
                         "static": "true",
@@ -265,6 +267,21 @@
                             ],
                             "raw": "Function"
                         },
+                        "param": {
+                            "extension": {
+                                "name": "extension",
+                                "type": {
+                                    "types": [
+                                        {
+                                            "type": "String"
+                                        }
+                                    ],
+                                    "raw": "String"
+                                },
+                                "description": "The extension to get the formatter from",
+                                "defaultStr": ""
+                            }
+                        },
                         "description": "Return the appropriate formatter depending on the passed extension",
                         "static": "true",
                         "since": "2.0.0",
@@ -304,6 +321,51 @@
                             ],
                             "raw": "Function"
                         },
+                        "param": {
+                            "code": {
+                                "name": "code",
+                                "type": {
+                                    "types": [
+                                        {
+                                            "type": "String"
+                                        }
+                                    ],
+                                    "raw": "String"
+                                },
+                                "description": "The code to format",
+                                "defaultStr": ""
+                            },
+                            "language": {
+                                "name": "language",
+                                "type": {
+                                    "types": [
+                                        {
+                                            "type": "String"
+                                        }
+                                    ],
+                                    "raw": "String"
+                                },
+                                "description": "The language of the passed code",
+                                "defaultStr": ""
+                            },
+                            "settings": {
+                                "name": "settings",
+                                "type": {
+                                    "types": [
+                                        {
+                                            "type": "Partial",
+                                            "of": [
+                                                "ISCodeFormatterSettings"
+                                            ]
+                                        }
+                                    ],
+                                    "raw": "Partial<ISCodeFormatterSettings>"
+                                },
+                                "description": "Specify an object of settings to configure your format process",
+                                "default": {},
+                                "defaultStr": "{}"
+                            }
+                        },
                         "description": "This method allows you to format a passed string",
                         "async": "true",
                         "since": "2.0.0",
@@ -323,6 +385,42 @@
                                 }
                             ],
                             "raw": "Function"
+                        },
+                        "param": {
+                            "params": {
+                                "name": "params",
+                                "type": {
+                                    "types": [
+                                        {
+                                            "type": "Partial",
+                                            "of": [
+                                                "ISCodeFormatterFormatParams"
+                                            ]
+                                        }
+                                    ],
+                                    "raw": "Partial<ISCodeFormatterFormatParams>"
+                                },
+                                "description": "Specify some parameters to format your code",
+                                "default": {},
+                                "defaultStr": "{}"
+                            },
+                            "settings": {
+                                "name": "settings",
+                                "type": {
+                                    "types": [
+                                        {
+                                            "type": "Partial",
+                                            "of": [
+                                                "ISCodeFormatterSettings"
+                                            ]
+                                        }
+                                    ],
+                                    "raw": "Partial<ISCodeFormatterSettings>"
+                                },
+                                "description": "Specify an object of settings to configure your format process",
+                                "default": {},
+                                "defaultStr": "{}"
+                            }
                         },
                         "description": "This method allows you to actually format either a string of code (you will need to set the \"language\" param), of directly a file\nby passing a file path.",
                         "async": "true",

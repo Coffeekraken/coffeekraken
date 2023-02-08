@@ -3,6 +3,7 @@
     "extends": [],
     "generated": {
         "extends": [
+            "@coffeekraken/aa",
             "@coffeekraken/cli",
             "@coffeekraken/s-activate-feature",
             "@coffeekraken/s-appear-feature",
@@ -42,9 +43,11 @@
             "@coffeekraken/s-file",
             "@coffeekraken/s-floating-feature",
             "@coffeekraken/s-form-validate-feature",
+            "@coffeekraken/s-front",
             "@coffeekraken/s-frontend-checker",
             "@coffeekraken/s-frontend-server",
             "@coffeekraken/s-frontspec",
+            "@coffeekraken/s-glitch-feature",
             "@coffeekraken/s-glob",
             "@coffeekraken/s-google-map-component",
             "@coffeekraken/s-handlebars",
@@ -83,7 +86,6 @@
             "@coffeekraken/s-sugar-element",
             "@coffeekraken/s-sugar-feature",
             "@coffeekraken/s-sugar-json",
-            "@coffeekraken/s-lazy-feature",
             "@coffeekraken/s-theme-switcher-component",
             "@coffeekraken/s-theme",
             "@coffeekraken/s-timer",
@@ -182,7 +184,7 @@
                     },
                     {
                         "language": "js",
-                        "code": "import { define } from '@coffeekraken/s-filtrable-input-component';\ndefine({\n    items: async () => {\n        // you can get your items however you want\n        // const request = await fetch('...');\n        // const items = await request.json();\n        return [{title: 'Hello', value: 'World'},{title: 'Plop', value:'Yop}];\n    },\n    templates: ({ type, html }) => {\n        switch (type) {\n            case 'item':\n                return html`\n                    <li class=\"__item\">\n                        My title: ${item.title}\n                    </li>\n                `;\n                break;\n            case 'loading':\n                return html`\n                    <li class=\"__loading\">\n                        Loading, please wait...\n                    </li>\n                `;\n                break;\n            case 'empty':\n                return html`\n                    <li class=\"__empty\">\n                        No items found...\n                    </li>\n                `;\n                break;\n        }\n    },\n}, 'my-cool-filtrable-input');"
+                        "code": "import { define } from '@coffeekraken/s-filtrable-input-component';\ndefine({\n    items: async () => {\n        // you can get your items however you want\n        // const request = await fetch('...');\n        // const items = await request.json();\n        return [{title: 'Hello', value: 'World'},{title: 'Plop', value:'Yop}];\n    },\n    templates: ({ type, html }) => {\n        switch (type) {\n            case 'item':\n                return html`\n                    <li class=\"_item\">\n                        My title: ${item.title}\n                    </li>\n                `;\n                break;\n            case 'loading':\n                return html`\n                    <li class=\"_loading\">\n                        Loading, please wait...\n                    </li>\n                `;\n                break;\n            case 'empty':\n                return html`\n                    <li class=\"_empty\">\n                        No items found...\n                    </li>\n                `;\n                break;\n        }\n    },\n}, 'my-cool-filtrable-input');"
                     }
                 ],
                 "interface": {
@@ -431,6 +433,36 @@
                                 }
                             ],
                             "raw": "Function"
+                        },
+                        "param": {
+                            "props": {
+                                "name": "props",
+                                "type": {
+                                    "types": [
+                                        {
+                                            "type": "any"
+                                        }
+                                    ],
+                                    "raw": "any"
+                                },
+                                "description": "Some default props you want to set for your custom element",
+                                "default": {},
+                                "defaultStr": "{}"
+                            },
+                            "tagName": {
+                                "name": "tagName",
+                                "type": {
+                                    "types": [
+                                        {
+                                            "type": "String"
+                                        }
+                                    ],
+                                    "raw": "String"
+                                },
+                                "description": "The tagName associated to this custom element",
+                                "default": "s-filtrable-input",
+                                "defaultStr": "'s-filtrable-input'"
+                            }
                         },
                         "description": "This function allows you to define (register) your custom element with some default\nprops if needed.",
                         "since": "2.0.0",

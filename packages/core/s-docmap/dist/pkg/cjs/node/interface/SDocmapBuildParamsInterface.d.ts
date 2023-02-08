@@ -19,7 +19,7 @@ declare class SDocmapBuildParamsInterface extends __SInterface {
             alias: string;
             default: any;
         };
-        filters: {
+        excludeByTags: {
             type: string;
             description: string;
             default: any;

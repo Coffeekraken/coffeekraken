@@ -133,23 +133,28 @@ export default class STheme extends __SThemeBase {
         variant?: string,
         $context = document.querySelector('html'),
     ): STheme {
-        let themeStr;
-        if (theme && variant) {
-            themeStr = `${theme}-${variant}`;
-        } else if (theme) {
-            themeStr = `${theme}-light`;
-        } else if (variant) {
-            themeStr = `default-${variant}`;
-        }
-
         // apply the theme on context
         STheme.applyTheme(theme, variant, $context);
 
         // save the theme in localstorage
-        localStorage.setItem('s-theme', themeStr);
+        localStorage.setItem(
+            's-theme',
+            JSON.stringify({
+                theme,
+                variant,
+            }),
+        );
 
         // get the current theme instance
         const currentTheme = this.getCurrentTheme($context);
+
+        // set the theme in state
+        if (variant) {
+            currentTheme.state.variant = variant;
+        }
+
+        // save
+        currentTheme.save();
 
         // dispatch a change event
         document.dispatchEvent(
@@ -265,6 +270,18 @@ export default class STheme extends __SThemeBase {
         };
 
         let themeInstance;
+
+        // check if the user has defined a theme manually that has been savec in localStorage
+        let savedTheme = {};
+        try {
+            savedTheme = JSON.parse(localStorage.getItem('s-theme'));
+        } catch (e) {}
+        if (savedTheme?.theme) {
+            finalSettings.theme = savedTheme.theme;
+        }
+        if (savedTheme?.variant) {
+            finalSettings.variant = savedTheme.variant;
+        }
 
         // save default theme metas
         STheme._defaultThemeMetas = {

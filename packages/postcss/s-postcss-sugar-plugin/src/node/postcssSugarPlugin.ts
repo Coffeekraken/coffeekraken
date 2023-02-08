@@ -175,6 +175,7 @@ const plugin = (settings: IPostcssSugarPluginSettings = {}) => {
 
         // build the frontSettings
         sharedData.frontSettings = {
+            lod: settings.lod,
             clean: settings.clean,
             compress: settings.compress,
         };

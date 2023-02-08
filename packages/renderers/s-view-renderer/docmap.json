@@ -3,6 +3,7 @@
     "extends": [],
     "generated": {
         "extends": [
+            "@coffeekraken/aa",
             "@coffeekraken/cli",
             "@coffeekraken/s-activate-feature",
             "@coffeekraken/s-appear-feature",
@@ -43,9 +44,11 @@
             "@coffeekraken/s-filtrable-input-component",
             "@coffeekraken/s-floating-feature",
             "@coffeekraken/s-form-validate-feature",
+            "@coffeekraken/s-front",
             "@coffeekraken/s-frontend-checker",
             "@coffeekraken/s-frontend-server",
             "@coffeekraken/s-frontspec",
+            "@coffeekraken/s-glitch-feature",
             "@coffeekraken/s-glob",
             "@coffeekraken/s-google-map-component",
             "@coffeekraken/s-handlebars",
@@ -54,6 +57,7 @@
             "@coffeekraken/s-inline-feature",
             "@coffeekraken/s-interface",
             "@coffeekraken/s-kitchen",
+            "@coffeekraken/s-lazy-feature",
             "@coffeekraken/s-lit-component",
             "@coffeekraken/s-log",
             "@coffeekraken/s-markdown-builder",
@@ -84,7 +88,6 @@
             "@coffeekraken/s-sugar-element",
             "@coffeekraken/s-sugar-feature",
             "@coffeekraken/s-sugar-json",
-            "@coffeekraken/s-lazy-feature",
             "@coffeekraken/s-theme-switcher-component",
             "@coffeekraken/s-theme",
             "@coffeekraken/s-timer",
@@ -101,163 +104,6 @@
             "@coffeekraken/sugar"
         ],
         "map": {
-            "@coffeekraken.s-view-renderer.config.viewRenderer.rootDirs": {
-                "id": "@coffeekraken.s-view-renderer.config.viewRenderer.rootDirs",
-                "name": "rootDirs",
-                "type": {
-                    "types": [
-                        {
-                            "type": "array",
-                            "of": [
-                                "string"
-                            ]
-                        }
-                    ],
-                    "raw": "string[]"
-                },
-                "default": "['[config.storage.src.rootDir]/views']",
-                "description": "Specify the roots views directories",
-                "namespace": "@coffeekraken.s-view-renderer.config.viewRenderer",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "viewRenderer.config.ts",
-                "extension": "config",
-                "relPath": "src/config/viewRenderer.config.ts"
-            },
-            "@coffeekraken.s-view-renderer.config.viewRenderer.cacheDir": {
-                "id": "@coffeekraken.s-view-renderer.config.viewRenderer.cacheDir",
-                "name": "cacheDir",
-                "type": {
-                    "types": [
-                        {
-                            "type": "String"
-                        }
-                    ],
-                    "raw": "String"
-                },
-                "default": "[config.storage.package.cacheDir]",
-                "description": "Specify the views template rendering cache directory",
-                "namespace": "@coffeekraken.s-view-renderer.config.viewRenderer",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "viewRenderer.config.ts",
-                "extension": "config",
-                "relPath": "src/config/viewRenderer.config.ts"
-            },
-            "@coffeekraken.s-view-renderer.config.viewRenderer.defaultEngine": {
-                "id": "@coffeekraken.s-view-renderer.config.viewRenderer.defaultEngine",
-                "name": "defaultEngine",
-                "type": {
-                    "types": [
-                        {
-                            "type": "String"
-                        }
-                    ],
-                    "raw": "String"
-                },
-                "default": "twig",
-                "description": "Store which engine to use when no any is specified at the dotpath start like \"twig://...\", \"blade://...\", etc...",
-                "namespace": "@coffeekraken.s-view-renderer.config.viewRenderer",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "viewRenderer.config.ts",
-                "extension": "config",
-                "relPath": "src/config/viewRenderer.config.ts"
-            },
-            "@coffeekraken.s-view-renderer.config.viewRenderer.engines": {
-                "id": "@coffeekraken.s-view-renderer.config.viewRenderer.engines",
-                "name": "engines",
-                "type": {
-                    "types": [
-                        {
-                            "type": "array",
-                            "of": [
-                                "String"
-                            ]
-                        }
-                    ],
-                    "raw": "String[]"
-                },
-                "default": "['@coffeekraken/s-view-renderer-engine-blade', '@coffeekraken/s-view-renderer-engine-twig']",
-                "description": "Store which engines are available for this renderer",
-                "namespace": "@coffeekraken.s-view-renderer.config.viewRenderer",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "viewRenderer.config.ts",
-                "extension": "config",
-                "relPath": "src/config/viewRenderer.config.ts"
-            },
-            "@coffeekraken.s-view-renderer.config.viewRenderer.sharedDataFiles": {
-                "id": "@coffeekraken.s-view-renderer.config.viewRenderer.sharedDataFiles",
-                "name": "sharedDataFiles",
-                "type": {
-                    "types": [
-                        {
-                            "type": "array",
-                            "of": [
-                                "String"
-                            ]
-                        }
-                    ],
-                    "raw": "String[]"
-                },
-                "default": "['[config.storage.src.rootDir]/views/shared.data.js']",
-                "description": "Store paths to shared data files that will be loaded by the proper dataHandler",
-                "namespace": "@coffeekraken.s-view-renderer.config.viewRenderer",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "viewRenderer.config.ts",
-                "extension": "config",
-                "relPath": "src/config/viewRenderer.config.ts"
-            },
-            "@coffeekraken.s-view-renderer.config.viewRenderer.dataFiles": {
-                "id": "@coffeekraken.s-view-renderer.config.viewRenderer.dataFiles",
-                "name": "dataFiles",
-                "type": {
-                    "types": [
-                        {
-                            "type": "array",
-                            "of": [
-                                "String"
-                            ]
-                        }
-                    ],
-                    "raw": "String[]"
-                },
-                "default": "['@coffeekraken/s-data-file-generic']",
-                "description": "Store which data handlers are available for this renderer",
-                "namespace": "@coffeekraken.s-view-renderer.config.viewRenderer",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "viewRenderer.config.ts",
-                "extension": "config",
-                "relPath": "src/config/viewRenderer.config.ts",
-                "children": {}
-            },
             "@coffeekraken.s-view-renderer.doc.README": {
                 "id": "@coffeekraken.s-view-renderer.doc.README",
                 "name": "README",
@@ -304,6 +150,35 @@
                         }
                     ],
                     "raw": "Class"
+                },
+                "param": {
+                    "viewPath": {
+                        "name": "viewPath",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "String"
+                                }
+                            ],
+                            "raw": "String"
+                        },
+                        "description": "The view doted file path relative to the ```rootDir``` setting, or directly a template string to render using the engine specify in ```engine``` setting...",
+                        "defaultStr": ""
+                    },
+                    "settings": {
+                        "name": "settings",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Object"
+                                }
+                            ],
+                            "raw": "Object"
+                        },
+                        "description": "An object of settings to configure your template rendering process:",
+                        "default": {},
+                        "defaultStr": "{}"
+                    }
                 },
                 "description": "This class represent a template that can be rendered using all the supported render engines listed in the features bellow.",
                 "namespace": "@coffeekraken.s-view-renderer.node",
@@ -395,6 +270,58 @@
                             ],
                             "raw": "Function"
                         },
+                        "param": {
+                            "viewDotPath": {
+                                "name": "viewDotPath",
+                                "type": {
+                                    "types": [
+                                        {
+                                            "type": "String"
+                                        }
+                                    ],
+                                    "raw": "String"
+                                },
+                                "description": "The dotPath of the view you want to render",
+                                "defaultStr": ""
+                            },
+                            "data": {
+                                "name": "data",
+                                "type": {
+                                    "types": [
+                                        {
+                                            "type": "String"
+                                        },
+                                        {
+                                            "type": "Object"
+                                        },
+                                        {
+                                            "type": "Promise",
+                                            "of": [
+                                                "Object"
+                                            ]
+                                        }
+                                    ],
+                                    "raw": "String|Object|Promise<Object>"
+                                },
+                                "description": "An object of data to use to render the view. If is a string, use the SDataGeneric class to resolve the data",
+                                "default": {},
+                                "defaultStr": "{}"
+                            },
+                            "settings": {
+                                "name": "settings",
+                                "type": {
+                                    "types": [
+                                        {
+                                            "type": "Object"
+                                        }
+                                    ],
+                                    "raw": "Object"
+                                },
+                                "description": "An object of settings that will be passed to the render engine method to use to override the default onces passed in the constructor. Check the used engine render documentation",
+                                "default": {},
+                                "defaultStr": "{}"
+                            }
+                        },
                         "description": "Main method to render your view by passing it an object of data to use as well as an object of settings to override the default passed onces",
                         "async": "true",
                         "since": "2.0.0",
@@ -414,6 +341,34 @@
                                 }
                             ],
                             "raw": "Function"
+                        },
+                        "param": {
+                            "EngineClass": {
+                                "name": "EngineClass",
+                                "type": {
+                                    "types": [
+                                        {
+                                            "type": "Class"
+                                        }
+                                    ],
+                                    "raw": "Class"
+                                },
+                                "description": "The class of the engine",
+                                "defaultStr": ""
+                            },
+                            "extension": {
+                                "name": "extension",
+                                "type": {
+                                    "types": [
+                                        {
+                                            "type": "String"
+                                        }
+                                    ],
+                                    "raw": "String"
+                                },
+                                "description": "The file extension to detect the engine. For example \"blade.php\" will be used to render all the files names \"%name.blade.php\"",
+                                "defaultStr": ""
+                            }
                         },
                         "description": "This static method can be used to register a compatible __SViewEngine engine class\ninto the available SViews engines.",
                         "static": "true",
@@ -580,6 +535,21 @@
                         }
                     ],
                     "raw": "Function"
+                },
+                "param": {
+                    "data": {
+                        "name": "data",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "data:I404Data"
+                                }
+                            ],
+                            "raw": "data:I404Data"
+                        },
+                        "description": "An object of data to render the 404 page",
+                        "defaultStr": ""
+                    }
                 },
                 "description": "This function simply take a data object and render a clean 404 page",
                 "namespace": "@coffeekraken.s-view-renderer.s-view.pages",

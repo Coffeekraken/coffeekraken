@@ -4,13 +4,13 @@
 
         <div class="s-layout:12222 s-gap:column:50 @mobile s-layout:1_2 s-mi:30 s-gap:0">
 
-            <nav s-scope class="sidemenu @mobile s-display:none" >
+            <nav s-scope class="sidemenu @mobile s-display:none" s-refocus>
 
                 <div class="sidemenu-sub">
                     <ck-doc-sub-nav source="._content"></ck-doc-sub-nav>
                 </div>
 
-                <div class="sidemenu-main" s-refocus offset-y="100" trigger="event:actual">
+                <div class="sidemenu-main">
 
                     <h5 class="s-typo:h5 s-mbe:20">
                         Specs

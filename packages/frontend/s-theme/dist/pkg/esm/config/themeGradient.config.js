@@ -73,7 +73,9 @@ export default function (api) {
          * @since         2.0.0
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
-        defaultTextModifierStart: {},
+        defaultTextModifierStart: {
+            darken: 5,
+        },
         /**
          * @name          defaulTexttModifierEnd
          * @namespace     config.themeGradient
@@ -86,7 +88,7 @@ export default function (api) {
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         defaultTextModifierEnd: {
-            lighten: 10,
+            lighten: 5,
         },
         /**
          * @name          defaultTextAngle
@@ -102,4 +104,4 @@ export default function (api) {
         defaultTextAngle: '90deg',
     };
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE1BQU0sQ0FBQyxPQUFPLFdBQVcsR0FBRztJQUN4QixPQUFPO1FBQ0g7Ozs7Ozs7Ozs7V0FVRztRQUNILG9CQUFvQixFQUFFLEVBQUU7UUFFeEI7Ozs7Ozs7Ozs7V0FVRztRQUNILGtCQUFrQixFQUFFO1lBQ2hCLE9BQU8sRUFBRSxFQUFFO1NBQ2Q7UUFFRDs7Ozs7Ozs7OztXQVVHO1FBQ0gsUUFBUSxFQUFFLEtBQUs7UUFFZjs7Ozs7Ozs7OztXQVVHO1FBQ0gsUUFBUSxFQUFFLEtBQUs7UUFFZjs7Ozs7Ozs7OztXQVVHO1FBQ0gsWUFBWSxFQUFFLE9BQU87UUFFckI7Ozs7Ozs7Ozs7V0FVRztRQUNILHdCQUF3QixFQUFFLEVBQUU7UUFFNUI7Ozs7Ozs7Ozs7V0FVRztRQUNILHNCQUFzQixFQUFFO1lBQ3BCLE9BQU8sRUFBRSxFQUFFO1NBQ2Q7UUFFRDs7Ozs7Ozs7OztXQVVHO1FBQ0gsZ0JBQWdCLEVBQUUsT0FBTztLQUM1QixDQUFDO0FBQ04sQ0FBQyJ9
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE1BQU0sQ0FBQyxPQUFPLFdBQVcsR0FBRztJQUN4QixPQUFPO1FBQ0g7Ozs7Ozs7Ozs7V0FVRztRQUNILG9CQUFvQixFQUFFLEVBQUU7UUFFeEI7Ozs7Ozs7Ozs7V0FVRztRQUNILGtCQUFrQixFQUFFO1lBQ2hCLE9BQU8sRUFBRSxFQUFFO1NBQ2Q7UUFFRDs7Ozs7Ozs7OztXQVVHO1FBQ0gsUUFBUSxFQUFFLEtBQUs7UUFFZjs7Ozs7Ozs7OztXQVVHO1FBQ0gsUUFBUSxFQUFFLEtBQUs7UUFFZjs7Ozs7Ozs7OztXQVVHO1FBQ0gsWUFBWSxFQUFFLE9BQU87UUFFckI7Ozs7Ozs7Ozs7V0FVRztRQUNILHdCQUF3QixFQUFFO1lBQ3RCLE1BQU0sRUFBRSxDQUFDO1NBQ1o7UUFFRDs7Ozs7Ozs7OztXQVVHO1FBQ0gsc0JBQXNCLEVBQUU7WUFDcEIsT0FBTyxFQUFFLENBQUM7U0FDYjtRQUVEOzs7Ozs7Ozs7O1dBVUc7UUFDSCxnQkFBZ0IsRUFBRSxPQUFPO0tBQzVCLENBQUM7QUFDTixDQUFDIn0=

@@ -3,6 +3,7 @@
     "extends": [],
     "generated": {
         "extends": [
+            "@coffeekraken/aa",
             "@coffeekraken/cli",
             "@coffeekraken/s-activate-feature",
             "@coffeekraken/s-appear-feature",
@@ -42,9 +43,11 @@
             "@coffeekraken/s-filtrable-input-component",
             "@coffeekraken/s-floating-feature",
             "@coffeekraken/s-form-validate-feature",
+            "@coffeekraken/s-front",
             "@coffeekraken/s-frontend-checker",
             "@coffeekraken/s-frontend-server",
             "@coffeekraken/s-frontspec",
+            "@coffeekraken/s-glitch-feature",
             "@coffeekraken/s-glob",
             "@coffeekraken/s-google-map-component",
             "@coffeekraken/s-handlebars",
@@ -83,7 +86,6 @@
             "@coffeekraken/s-sugar-element",
             "@coffeekraken/s-sugar-feature",
             "@coffeekraken/s-sugar-json",
-            "@coffeekraken/s-lazy-feature",
             "@coffeekraken/s-theme-switcher-component",
             "@coffeekraken/s-theme",
             "@coffeekraken/s-timer",
@@ -147,6 +149,23 @@
                         }
                     ],
                     "raw": "Class"
+                },
+                "param": {
+                    "settings": {
+                        "name": "settings",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Object"
+                                }
+                            ],
+                            "raw": "Object"
+                        },
+                        "description": "The adapter settings that let you work with the good data storage solution...",
+                        "default": {},
+                        "defaultStr": "{}",
+                        "content": "- name (null) {String}: This specify the config name that you want to use.\n- fileName ('%name.config.js') {String}: Specify the fileName to use for the file that will store the configs\n- defaultConfigPath (null) {String}: This specify the path to the \"default\" config file.\n- repoConfigPath (${process.cwd()}/[fileName]) {String}: This specify the path to the \"app\" config file\n- userConfigPath (${__localDir()}/[fileName]) {String}: This specify the path to the \"user\" config file"
+                    }
                 },
                 "description": "This adapter let you specify a folder in which to put all the config files and access it normaly as you would with the SConfig system.\nEach file in the folder will be the first level of the final config object like for example the file \"colors.config.js\" will be stored\nin the final object under ```{ colors: ... }```.",
                 "namespace": "@coffeekraken.s-config-folder-adapter.node",

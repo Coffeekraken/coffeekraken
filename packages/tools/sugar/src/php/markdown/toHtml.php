@@ -23,7 +23,7 @@ require_once(__DIR__.'/../_libs/Parsedown.php');
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-function toHtml($markdown, $inline = true) {
+function toHtml($markdown, $inline = false) {
     $parsedown = new \Parsedown();
     if ($inline) return $parsedown->line($markdown);
     else return $parsedown->text($markdown);

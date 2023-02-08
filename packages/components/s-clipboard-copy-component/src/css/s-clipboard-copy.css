@@ -10,6 +10,11 @@
         pointer-events: none;
     }
 
+    .s-clipboard-copy_root {
+        width: 100%;
+        height: 100%;
+    }
+
     .s-clipboard-copy_root[state='pending'] {
         .icon-copy {
             opacity: 1;
@@ -21,15 +26,11 @@
         }
     }
     .s-clipboard-copy_root[state='success'] {
-        color: sugar.color(success);
-
         .icon-success {
             opacity: 1;
         }
     }
     .s-clipboard-copy_root[state='error'] {
-        color: sugar.color(error);
-
         .icon-error {
             opacity: 1;
         }

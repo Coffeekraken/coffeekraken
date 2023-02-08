@@ -9,8 +9,8 @@ export interface ISClipboardCopyComponentProps {
 export default class SClipboardCopyComponent extends __SLitComponent {
     static get properties(): any;
     static get styles(): import("lit").CSSResult;
-    state: {
-        state: string;
+    static get state(): {
+        status: string;
     };
     constructor();
     _copyFromTarget(): void;

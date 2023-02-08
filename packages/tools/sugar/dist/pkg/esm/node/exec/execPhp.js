@@ -44,7 +44,7 @@ export default function __execPhp(scriptPath, params, settings) {
             });
         }
         result = __childProcess.exec(`php ${scriptPath} "${paramsFilePath !== null && paramsFilePath !== void 0 ? paramsFilePath : paramsStr}"`, {
-            maxBuffer: 1024 * 1024 * 50
+            maxBuffer: 1024 * 1024 * 50,
         }, (error, stdout, stderr) => {
             var _a;
             if (paramsFilePath) {

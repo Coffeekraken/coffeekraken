@@ -3,6 +3,7 @@
     "extends": [],
     "generated": {
         "extends": [
+            "@coffeekraken/aa",
             "@coffeekraken/cli",
             "@coffeekraken/s-activate-feature",
             "@coffeekraken/s-appear-feature",
@@ -42,9 +43,11 @@
             "@coffeekraken/s-filtrable-input-component",
             "@coffeekraken/s-floating-feature",
             "@coffeekraken/s-form-validate-feature",
+            "@coffeekraken/s-front",
             "@coffeekraken/s-frontend-checker",
             "@coffeekraken/s-frontend-server",
             "@coffeekraken/s-frontspec",
+            "@coffeekraken/s-glitch-feature",
             "@coffeekraken/s-glob",
             "@coffeekraken/s-google-map-component",
             "@coffeekraken/s-handlebars",
@@ -83,7 +86,6 @@
             "@coffeekraken/s-sugar-element",
             "@coffeekraken/s-sugar-feature",
             "@coffeekraken/s-sugar-json",
-            "@coffeekraken/s-lazy-feature",
             "@coffeekraken/s-theme-switcher-component",
             "@coffeekraken/s-theme",
             "@coffeekraken/s-timer",
@@ -216,6 +218,47 @@
                             ],
                             "raw": "Function"
                         },
+                        "param": {
+                            "configId": {
+                                "name": "configId",
+                                "type": {
+                                    "types": [
+                                        {
+                                            "type": "String"
+                                        }
+                                    ],
+                                    "raw": "String"
+                                },
+                                "description": "The configuration id you want to proxy",
+                                "defaultStr": ""
+                            },
+                            "configKey": {
+                                "name": "configKey",
+                                "type": {
+                                    "types": [
+                                        {
+                                            "type": "String"
+                                        }
+                                    ],
+                                    "raw": "String"
+                                },
+                                "description": "The root config key you want to prepare with that function. This has to be one of the root config property",
+                                "defaultStr": ""
+                            },
+                            "postprocessFn": {
+                                "name": "postprocessFn",
+                                "type": {
+                                    "types": [
+                                        {
+                                            "type": "ISConfigPostprocessFn"
+                                        }
+                                    ],
+                                    "raw": "ISConfigPostprocessFn"
+                                },
+                                "description": "The post process function that MUST return the new current config and that take as parameters the current config object and the whole config object",
+                                "defaultStr": ""
+                            }
+                        },
                         "description": "This method allows you to register a postprocess function that will be fired once the config is ready so you can make updates as needed",
                         "static": "true",
                         "since": "2.0.0",
@@ -235,6 +278,47 @@
                                 }
                             ],
                             "raw": "Function"
+                        },
+                        "param": {
+                            "configId": {
+                                "name": "configId",
+                                "type": {
+                                    "types": [
+                                        {
+                                            "type": "String"
+                                        }
+                                    ],
+                                    "raw": "String"
+                                },
+                                "description": "The configuration id you want to proxy",
+                                "defaultStr": ""
+                            },
+                            "configKey": {
+                                "name": "configKey",
+                                "type": {
+                                    "types": [
+                                        {
+                                            "type": "String"
+                                        }
+                                    ],
+                                    "raw": "String"
+                                },
+                                "description": "The root config key you want to preprocess with that function. This has to be one of the root config property",
+                                "defaultStr": ""
+                            },
+                            "preprocessFn": {
+                                "name": "preprocessFn",
+                                "type": {
+                                    "types": [
+                                        {
+                                            "type": "ISConfigPreprocessFn"
+                                        }
+                                    ],
+                                    "raw": "ISConfigPreprocessFn"
+                                },
+                                "description": "The preprocess function that MUST return the new current config and that take as parameters the current config object and the whole config object",
+                                "defaultStr": ""
+                            }
                         },
                         "description": "This method allows you to register a preprocess function that will be fired once the config is ready so you can make updates as needed",
                         "static": "true",
@@ -256,6 +340,49 @@
                             ],
                             "raw": "Function"
                         },
+                        "param": {
+                            "name": {
+                                "name": "name",
+                                "type": {
+                                    "types": [
+                                        {
+                                            "type": "String"
+                                        }
+                                    ],
+                                    "raw": "String"
+                                },
+                                "description": "The name of the config",
+                                "defaultStr": ""
+                            },
+                            "adapter": {
+                                "name": "adapter",
+                                "type": {
+                                    "types": [
+                                        {
+                                            "type": "SConfigAdapter"
+                                        }
+                                    ],
+                                    "raw": "SConfigAdapter"
+                                },
+                                "description": "An SConfigAdapter instance to use",
+                                "defaultStr": ""
+                            },
+                            "settings": {
+                                "name": "settings",
+                                "type": {
+                                    "types": [
+                                        {
+                                            "type": "Object"
+                                        }
+                                    ],
+                                    "raw": "Object"
+                                },
+                                "description": "null",
+                                "default": {},
+                                "defaultStr": "{}",
+                                "content": "An object to configure your SConfig instance. See the list above\nThe available settings are:\n- throwErrorOnUndefinedConfig (true) {Boolean}: Specify if you want the class to throw some errors when get undefined configs\n- resolvers ([]) {ISConfigResolverObj[]}: Specify some resolvers function to handle special values like \"[theme.something....]\"\n"
+                            }
+                        },
                         "description": "Init the config instance by passing a name and a settings object to configure your instance",
                         "author": {
                             "name": "Olivier Bossel",
@@ -273,6 +400,22 @@
                                 }
                             ],
                             "raw": "Function"
+                        },
+                        "param": {
+                            "adapter": {
+                                "name": "adapter",
+                                "type": {
+                                    "types": [
+                                        {
+                                            "type": "String"
+                                        }
+                                    ],
+                                    "raw": "String"
+                                },
+                                "description": "The adapter to use to load the config",
+                                "default": "this.settings.defaultAdapter",
+                                "defaultStr": "this.settings.defaultAdapter"
+                            }
                         },
                         "description": "Load the config from the default adapter or from the passed adapter",
                         "example": [
@@ -346,6 +489,35 @@
                             ],
                             "raw": "Function"
                         },
+                        "param": {
+                            "path": {
+                                "name": "path",
+                                "type": {
+                                    "types": [
+                                        {
+                                            "type": "String"
+                                        }
+                                    ],
+                                    "raw": "String"
+                                },
+                                "description": "The dotted object path for the value wanted",
+                                "defaultStr": ""
+                            },
+                            "settings": {
+                                "name": "settings",
+                                "type": {
+                                    "types": [
+                                        {
+                                            "type": "Object"
+                                        }
+                                    ],
+                                    "raw": "Object"
+                                },
+                                "description": "The same object settings that you can pass in the constructor but just for this get process",
+                                "default": {},
+                                "defaultStr": "{}"
+                            }
+                        },
                         "description": "Get a config depending on the dotted object path passed and either using the first registered adapter found, or the passed one",
                         "example": [
                             {
@@ -369,6 +541,48 @@
                                 }
                             ],
                             "raw": "Function"
+                        },
+                        "param": {
+                            "path": {
+                                "name": "path",
+                                "type": {
+                                    "types": [
+                                        {
+                                            "type": "String"
+                                        }
+                                    ],
+                                    "raw": "String"
+                                },
+                                "description": "The dotted object path for the value wanted",
+                                "defaultStr": ""
+                            },
+                            "value": {
+                                "name": "value",
+                                "type": {
+                                    "types": [
+                                        {
+                                            "type": "Any"
+                                        }
+                                    ],
+                                    "raw": "Any"
+                                },
+                                "description": "The value to set",
+                                "defaultStr": ""
+                            },
+                            "settings": {
+                                "name": "settings",
+                                "type": {
+                                    "types": [
+                                        {
+                                            "type": "Object"
+                                        }
+                                    ],
+                                    "raw": "Object"
+                                },
+                                "description": "The same object settings that you can pass in the constructor but just for this get process",
+                                "default": {},
+                                "defaultStr": "{}"
+                            }
                         },
                         "description": "Set a config depending on the dotted object path passed and the value to set",
                         "example": [
@@ -422,29 +636,6 @@
                         }
                     }
                 }
-            },
-            "@coffeekraken.s-config.sugar.js.config.adapters.SConfigLsAdapter": {
-                "id": "@coffeekraken.s-config.sugar.js.config.adapters.SConfigLsAdapter",
-                "name": "SConfigLsAdapter",
-                "type": {
-                    "types": [
-                        {
-                            "type": "Class"
-                        }
-                    ],
-                    "raw": "Class"
-                },
-                "description": "This Local Storage adapter for the SConfig class let you define a name for your config and then you can just\nlet the SConfig class do the work for you...",
-                "namespace": "@coffeekraken.s-config.sugar.js.config.adapters",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "SConfigLsAdapter.ts",
-                "extension": "ts",
-                "relPath": "src/js/adapters/SConfigLsAdapter.ts",
-                "children": {}
             }
         }
     }

@@ -9,7 +9,7 @@ import __SStdio, {
     __SStdioBasicAdapter,
     __SStdioConsoleSource,
     __SStdioEventEmitterSource,
-    __SStdioNotificationAdapter,
+    __SStdioNotificationAdapter
 } from '@coffeekraken/s-stdio';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
 import __SSugarJson from '@coffeekraken/s-sugar-json';
@@ -20,7 +20,7 @@ import { __wait } from '@coffeekraken/sugar/datetime';
 import {
     __dirname,
     __readJsonSync,
-    __writeFileSync,
+    __writeFileSync
 } from '@coffeekraken/sugar/fs';
 import { __isChildProcess } from '@coffeekraken/sugar/is';
 import { __hotkey } from '@coffeekraken/sugar/keyboard';
@@ -29,7 +29,7 @@ import { __packageRootDir } from '@coffeekraken/sugar/path';
 import {
     __onProcessExit,
     __processSugar,
-    __spawn,
+    __spawn
 } from '@coffeekraken/sugar/process';
 import __chalk from 'chalk';
 import __dotenv from 'dotenv';
@@ -490,18 +490,19 @@ export default class SSugarCli {
             this._initStdio(true);
 
             await __wait(100);
-
+            
+            
             if (!__isChildProcess()) {
                 this._newStep();
             }
-
+            
             let args = this.args.args;
-
+            
             if (cliObj.interfacePath) {
                 const { default: int } = await import(cliObj.interfacePath);
                 args = int.apply(this.args.args);
             }
-
+            
             // @ts-ignore
             const proPromise = processFn(args);
             // this._eventEmitter.pipe(proPromise, {});

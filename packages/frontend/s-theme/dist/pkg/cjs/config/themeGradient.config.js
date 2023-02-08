@@ -75,7 +75,9 @@ function default_1(api) {
          * @since         2.0.0
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
-        defaultTextModifierStart: {},
+        defaultTextModifierStart: {
+            darken: 5,
+        },
         /**
          * @name          defaulTexttModifierEnd
          * @namespace     config.themeGradient
@@ -88,7 +90,7 @@ function default_1(api) {
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         defaultTextModifierEnd: {
-            lighten: 10,
+            lighten: 5,
         },
         /**
          * @name          defaultTextAngle
@@ -105,4 +107,4 @@ function default_1(api) {
     };
 }
 exports.default = default_1;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7O0FBQUEsbUJBQXlCLEdBQUc7SUFDeEIsT0FBTztRQUNIOzs7Ozs7Ozs7O1dBVUc7UUFDSCxvQkFBb0IsRUFBRSxFQUFFO1FBRXhCOzs7Ozs7Ozs7O1dBVUc7UUFDSCxrQkFBa0IsRUFBRTtZQUNoQixPQUFPLEVBQUUsRUFBRTtTQUNkO1FBRUQ7Ozs7Ozs7Ozs7V0FVRztRQUNILFFBQVEsRUFBRSxLQUFLO1FBRWY7Ozs7Ozs7Ozs7V0FVRztRQUNILFFBQVEsRUFBRSxLQUFLO1FBRWY7Ozs7Ozs7Ozs7V0FVRztRQUNILFlBQVksRUFBRSxPQUFPO1FBRXJCOzs7Ozs7Ozs7O1dBVUc7UUFDSCx3QkFBd0IsRUFBRSxFQUFFO1FBRTVCOzs7Ozs7Ozs7O1dBVUc7UUFDSCxzQkFBc0IsRUFBRTtZQUNwQixPQUFPLEVBQUUsRUFBRTtTQUNkO1FBRUQ7Ozs7Ozs7Ozs7V0FVRztRQUNILGdCQUFnQixFQUFFLE9BQU87S0FDNUIsQ0FBQztBQUNOLENBQUM7QUE5R0QsNEJBOEdDIn0=
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7O0FBQUEsbUJBQXlCLEdBQUc7SUFDeEIsT0FBTztRQUNIOzs7Ozs7Ozs7O1dBVUc7UUFDSCxvQkFBb0IsRUFBRSxFQUFFO1FBRXhCOzs7Ozs7Ozs7O1dBVUc7UUFDSCxrQkFBa0IsRUFBRTtZQUNoQixPQUFPLEVBQUUsRUFBRTtTQUNkO1FBRUQ7Ozs7Ozs7Ozs7V0FVRztRQUNILFFBQVEsRUFBRSxLQUFLO1FBRWY7Ozs7Ozs7Ozs7V0FVRztRQUNILFFBQVEsRUFBRSxLQUFLO1FBRWY7Ozs7Ozs7Ozs7V0FVRztRQUNILFlBQVksRUFBRSxPQUFPO1FBRXJCOzs7Ozs7Ozs7O1dBVUc7UUFDSCx3QkFBd0IsRUFBRTtZQUN0QixNQUFNLEVBQUUsQ0FBQztTQUNaO1FBRUQ7Ozs7Ozs7Ozs7V0FVRztRQUNILHNCQUFzQixFQUFFO1lBQ3BCLE9BQU8sRUFBRSxDQUFDO1NBQ2I7UUFFRDs7Ozs7Ozs7OztXQVVHO1FBQ0gsZ0JBQWdCLEVBQUUsT0FBTztLQUM1QixDQUFDO0FBQ04sQ0FBQztBQWhIRCw0QkFnSEMifQ==

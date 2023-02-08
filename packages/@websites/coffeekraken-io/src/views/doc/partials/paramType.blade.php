@@ -24,7 +24,7 @@
     
     <div class="s-dropdown-container" tabindex="-1">
 
-        <div class="s-typo:bold s-tc:info s-white-space:nowrap">
+        <div class="s-tc:info s-white-space:nowrap">
 
             @if (is_string($type->types[0]))
                 <span>{{ $type->types[0] }}</span>

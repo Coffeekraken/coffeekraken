@@ -3,6 +3,7 @@
     "extends": [],
     "generated": {
         "extends": [
+            "@coffeekraken/aa",
             "@coffeekraken/cli",
             "@coffeekraken/s-activate-feature",
             "@coffeekraken/s-appear-feature",
@@ -43,9 +44,11 @@
             "@coffeekraken/s-filtrable-input-component",
             "@coffeekraken/s-floating-feature",
             "@coffeekraken/s-form-validate-feature",
+            "@coffeekraken/s-front",
             "@coffeekraken/s-frontend-checker",
             "@coffeekraken/s-frontend-server",
             "@coffeekraken/s-frontspec",
+            "@coffeekraken/s-glitch-feature",
             "@coffeekraken/s-glob",
             "@coffeekraken/s-google-map-component",
             "@coffeekraken/s-handlebars",
@@ -83,7 +86,6 @@
             "@coffeekraken/s-sugar-element",
             "@coffeekraken/s-sugar-feature",
             "@coffeekraken/s-sugar-json",
-            "@coffeekraken/s-lazy-feature",
             "@coffeekraken/s-theme-switcher-component",
             "@coffeekraken/s-theme",
             "@coffeekraken/s-timer",
@@ -101,223 +103,6 @@
             "@coffeekraken/sugar"
         ],
         "map": {
-            "@coffeekraken.s-package.config.package.manager": {
-                "id": "@coffeekraken.s-package.config.package.manager",
-                "name": "manager",
-                "type": {
-                    "types": [
-                        {
-                            "type": "String"
-                        }
-                    ],
-                    "raw": "String"
-                },
-                "default": "yarn",
-                "description": "Specify the package manager you want to use. Can be \"npm\" or \"yarn\"",
-                "namespace": "@coffeekraken.s-package.config.package",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "package.config.ts",
-                "extension": "config",
-                "relPath": "src/config/package.config.ts"
-            },
-            "@coffeekraken.s-package.config.package.rootDir": {
-                "id": "@coffeekraken.s-package.config.package.rootDir",
-                "name": "rootDir",
-                "type": {
-                    "types": [
-                        {
-                            "type": "String"
-                        }
-                    ],
-                    "raw": "String"
-                },
-                "default": "[config.storage.package.rootDir]",
-                "description": "Specify a directory from where to search for files to exports using the `glob` config",
-                "namespace": "@coffeekraken.s-package.config.package",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "package.config.ts",
-                "extension": "config",
-                "relPath": "src/config/package.config.ts"
-            },
-            "@coffeekraken.s-package.config.package.readme.path": {
-                "id": "@coffeekraken.s-package.config.package.readme.path",
-                "name": "path",
-                "type": {
-                    "types": [
-                        {
-                            "type": "String"
-                        }
-                    ],
-                    "raw": "String"
-                },
-                "default": "[config.storage.package.rootDir]/README.md",
-                "description": "Specify the path to the README file",
-                "namespace": "@coffeekraken.s-package.config.package.readme",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "package.config.ts",
-                "extension": "config",
-                "relPath": "src/config/package.config.ts"
-            },
-            "@coffeekraken.s-package.config.package.exports.defaultPackageJson": {
-                "id": "@coffeekraken.s-package.config.package.exports.defaultPackageJson",
-                "name": "defaultPackageJson",
-                "type": {
-                    "types": [
-                        {
-                            "type": "Object"
-                        }
-                    ],
-                    "raw": "Object"
-                },
-                "default": "true",
-                "description": "Specify some default packages you want to install when you run `sugar package.install`",
-                "namespace": "@coffeekraken.s-package.config.package.exports",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "package.config.ts",
-                "extension": "config",
-                "relPath": "src/config/package.config.ts"
-            },
-            "@coffeekraken.s-package.config.package.checkDependencies.dirs": {
-                "id": "@coffeekraken.s-package.config.package.checkDependencies.dirs",
-                "name": "dirs",
-                "type": {
-                    "types": [
-                        {
-                            "type": "String"
-                        }
-                    ],
-                    "raw": "String"
-                },
-                "default": "['dist/** /exports.js']",
-                "description": "Specify some directories in which to check for dependencies issues, etc...",
-                "namespace": "@coffeekraken.s-package.config.package.checkDependencies",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "package.config.ts",
-                "extension": "config",
-                "relPath": "src/config/package.config.ts"
-            },
-            "@coffeekraken.s-package.config.package.checkDependencies.packagesMap": {
-                "id": "@coffeekraken.s-package.config.package.checkDependencies.packagesMap",
-                "name": "packagesMap",
-                "type": {
-                    "types": [
-                        {
-                            "type": "String"
-                        }
-                    ],
-                    "raw": "String"
-                },
-                "default": "{'^@coffeekraken/'}",
-                "description": "Specify some patterns for packages you want to add in package.json without installing them.\nThis is usefull for monorepo.",
-                "namespace": "@coffeekraken.s-package.config.package.checkDependencies",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "package.config.ts",
-                "extension": "config",
-                "relPath": "src/config/package.config.ts"
-            },
-            "@coffeekraken.s-package.config.package.exports.glob": {
-                "id": "@coffeekraken.s-package.config.package.exports.glob",
-                "name": "glob",
-                "type": {
-                    "types": [
-                        {
-                            "type": "String"
-                        }
-                    ],
-                    "raw": "String"
-                },
-                "default": "['dist/** /exports.js']",
-                "description": "Specify a glob pattern relative to the \"rootDir\" to specify files you want to exports in your package.json",
-                "namespace": "@coffeekraken.s-package.config.package.exports",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "package.config.ts",
-                "extension": "config",
-                "relPath": "src/config/package.config.ts"
-            },
-            "@coffeekraken.s-package.config.package.exports.folderModuleMap": {
-                "id": "@coffeekraken.s-package.config.package.exports.folderModuleMap",
-                "name": "folderModuleMap",
-                "type": {
-                    "types": [
-                        {
-                            "type": "String"
-                        }
-                    ],
-                    "raw": "String"
-                },
-                "default": "['esm']",
-                "description": "Specify some folders you want to map to a specific package type like \"import\" or \"require\".",
-                "namespace": "@coffeekraken.s-package.config.package.exports",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "package.config.ts",
-                "extension": "config",
-                "relPath": "src/config/package.config.ts"
-            },
-            "@coffeekraken.s-package.config.package.exports.folderPlatformMap": {
-                "id": "@coffeekraken.s-package.config.package.exports.folderPlatformMap",
-                "name": "folderPlatformMap",
-                "type": {
-                    "types": [
-                        {
-                            "type": "String"
-                        }
-                    ],
-                    "raw": "String"
-                },
-                "default": "['esm']",
-                "description": "Specify some folders you want to map to a specific platform like \"node\" or \"browser\", etc...",
-                "namespace": "@coffeekraken.s-package.config.package.exports",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "package.config.ts",
-                "extension": "config",
-                "relPath": "src/config/package.config.ts",
-                "children": {}
-            },
             "@coffeekraken.s-package.doc.README": {
                 "id": "@coffeekraken.s-package.doc.README",
                 "name": "README",
@@ -365,6 +150,22 @@
                     ],
                     "raw": "Class"
                 },
+                "param": {
+                    "settings": {
+                        "name": "settings",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "ISPackageSettings"
+                                }
+                            ],
+                            "raw": "ISPackageSettings"
+                        },
+                        "description": "Some settings to configure your builder instance",
+                        "default": {},
+                        "defaultStr": "{}"
+                    }
+                },
                 "platform": [
                     {
                         "name": "node",
@@ -410,7 +211,7 @@
                         }
                     },
                     "exports": {
-                        "id": "s5c9b8b86f02e8c69012a14957004c7a9a0273764f645084847320b00f0d76f19",
+                        "id": "s66eea33a85a68f0b3b5f15da3de0aeaddd0278aae1204104274542c58cf7a1e4",
                         "name": "exports",
                         "type": {
                             "types": [
@@ -419,6 +220,25 @@
                                 }
                             ],
                             "raw": "Function"
+                        },
+                        "param": {
+                            "params": {
+                                "name": "params",
+                                "type": {
+                                    "types": [
+                                        {
+                                            "type": "Partial",
+                                            "of": [
+                                                "ISPackageExportsParams"
+                                            ]
+                                        }
+                                    ],
+                                    "raw": "Partial<ISPackageExportsParams>"
+                                },
+                                "description": "Some params for your exports",
+                                "default": {},
+                                "defaultStr": "{}"
+                            }
                         },
                         "description": "This method allows you to search for \"exportable\" files defined in params and export them in the package.json file.",
                         "async": "true",
@@ -430,7 +250,7 @@
                         }
                     },
                     "install": {
-                        "id": "s6915f05ed01f072aad13901c8b6ec159a2bdeea3ba3df0809fb94f3e63177bc7",
+                        "id": "s8a30774e298266faa3cac56ed244f39c707165dbeca355f2385899677fab774b",
                         "name": "install",
                         "type": {
                             "types": [
@@ -439,6 +259,25 @@
                                 }
                             ],
                             "raw": "Function"
+                        },
+                        "param": {
+                            "params": {
+                                "name": "params",
+                                "type": {
+                                    "types": [
+                                        {
+                                            "type": "Partial",
+                                            "of": [
+                                                "ISPackageInstallParams"
+                                            ]
+                                        }
+                                    ],
+                                    "raw": "Partial<ISPackageInstallParams>"
+                                },
+                                "description": "Some params for your install",
+                                "default": {},
+                                "defaultStr": "{}"
+                            }
                         },
                         "description": "This method allows you to install dependencies in a package",
                         "async": "true",
@@ -450,7 +289,7 @@
                         }
                     },
                     "checkdependencies": {
-                        "id": "s4dacd7e9838efb59964700de6d35533b3521026a150c96065e2a7e4b07c47c94",
+                        "id": "s4e62a015ec7cbc6f613237b39aa2d57fc94aad59a577f9ac6206e1b7b768cb8e",
                         "name": "checkDependencies",
                         "type": {
                             "types": [
@@ -459,6 +298,25 @@
                                 }
                             ],
                             "raw": "Function"
+                        },
+                        "param": {
+                            "params": {
+                                "name": "params",
+                                "type": {
+                                    "types": [
+                                        {
+                                            "type": "Partial",
+                                            "of": [
+                                                "ISPackageCheckDependenciesParams"
+                                            ]
+                                        }
+                                    ],
+                                    "raw": "Partial<ISPackageCheckDependenciesParams>"
+                                },
+                                "description": "Some params for your check",
+                                "default": {},
+                                "defaultStr": "{}"
+                            }
                         },
                         "description": "This method allows you to check unused, missing dependencies in a package",
                         "async": "true",
@@ -470,7 +328,7 @@
                         }
                     },
                     "rename": {
-                        "id": "s013f97eea9cac1d459956256c2500f37d9a05a20d9537919d897f48e9ed17f6e",
+                        "id": "s38ce632277be678836d91d0a77ec2cdd12eb8710c74a536b35655febdf9b3d87",
                         "name": "rename",
                         "type": {
                             "types": [
@@ -479,6 +337,25 @@
                                 }
                             ],
                             "raw": "Function"
+                        },
+                        "param": {
+                            "params": {
+                                "name": "params",
+                                "type": {
+                                    "types": [
+                                        {
+                                            "type": "Partial",
+                                            "of": [
+                                                "ISPackageRenameParams"
+                                            ]
+                                        }
+                                    ],
+                                    "raw": "Partial<ISPackageRenameParams>"
+                                },
+                                "description": "Some params for your rename",
+                                "default": {},
+                                "defaultStr": "{}"
+                            }
                         },
                         "description": "This method allows you to rename a package (folder, package.json, composer.json, etc...)",
                         "async": "true",
@@ -490,7 +367,7 @@
                         }
                     },
                     "applydefaultpackagejson": {
-                        "id": "sa70117b5902fc1a0b3f06821e6ed9c025d72f4cb8897a9adeb2e0ee3aa73967c",
+                        "id": "s6dc79f956145553498e74bf8d0a08f72f69ff71adf90f85819c0cff49464fe84",
                         "name": "applyDefaultPackageJson",
                         "type": {
                             "types": [
@@ -499,6 +376,25 @@
                                 }
                             ],
                             "raw": "Function"
+                        },
+                        "param": {
+                            "params": {
+                                "name": "params",
+                                "type": {
+                                    "types": [
+                                        {
+                                            "type": "Partial",
+                                            "of": [
+                                                "ISPackageAddDefaultPackageJsonParams"
+                                            ]
+                                        }
+                                    ],
+                                    "raw": "Partial<ISPackageAddDefaultPackageJsonParams>"
+                                },
+                                "description": "Some params for your add default package json process",
+                                "default": {},
+                                "defaultStr": "{}"
+                            }
                         },
                         "description": "This method allows you to apply the default package.json to your package.",
                         "async": "true",

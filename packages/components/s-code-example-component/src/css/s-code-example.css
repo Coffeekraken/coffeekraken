@@ -107,13 +107,7 @@
     top: sugar.margin(20);
 
     & > * {
-        color: sugar.color(current);
         font-size: 20px;
-        opacity: 0.4;
-
-        &:hover {
-            opacity: 0.8;
-        }
     }
 }
 

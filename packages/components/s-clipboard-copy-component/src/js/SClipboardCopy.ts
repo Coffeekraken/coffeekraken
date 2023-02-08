@@ -85,9 +85,11 @@ export default class SClipboardCopyComponent extends __SLitComponent {
         `;
     }
 
-    state = {
-        state: 'pending',
-    };
+    static get state() {
+        return {
+            status: 'pending',
+        };
+    }
 
     constructor() {
         super(
@@ -128,27 +130,31 @@ export default class SClipboardCopyComponent extends __SLitComponent {
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     copy(text) {
-        this.state.state = 'copy';
-        __copy(text)
-            .then(() => {
-                this.state.state = 'success';
-                setTimeout(() => {
-                    this.state.state = 'pending';
-                }, this.props.successTimeout);
-            })
-            .catch((e) => {
-                this.state.state = 'error';
-                setTimeout(() => {
-                    this.state.state = 'pending';
-                }, this.props.errorTimeout);
-            });
+        this.state.status = 'copy';
+        setTimeout(() => {
+            __copy(text)
+                .then(() => {
+                    this.state.status = 'success';
+                    setTimeout(() => {
+                        this.state.status = 'pending';
+                    }, this.props.successTimeout);
+                })
+                .catch((e) => {
+                    this.state.status = 'error';
+                    setTimeout(() => {
+                        this.state.status = 'pending';
+                    }, this.props.errorTimeout);
+                });
+        });
     }
     render() {
         return html`
             <div
-                @click=${() => this._copyFromTarget()}
+                @click=${() => {
+                    this._copyFromTarget();
+                }}
                 class="${this.utils.cls('_root')}"
-                state="${this.state.state}"
+                state="${this.state.status}"
             >
                 <svg
                     ref="svg"

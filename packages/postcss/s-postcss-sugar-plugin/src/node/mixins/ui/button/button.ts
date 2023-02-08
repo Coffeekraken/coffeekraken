@@ -94,14 +94,17 @@ export default function ({
         vars.push(`
         font-size: sugar.scalable(1rem);
         position: relative;
-        display: inline-block;
+        display: inline-flex;
         cursor: pointer;
         user-select: none;
         white-space: nowrap;
         vertical-align: middle;
         padding-inline: sugar.padding(ui.button.paddingInline);
         padding-block: sugar.padding(ui.button.paddingBlock);
-      
+        gap: sugar.margin(20);
+        align-items: center;
+        justify-content: center;
+
         & > * {
           pointer-events: none;
         }
@@ -128,7 +131,6 @@ export default function ({
                     color: sugar.color(current, foreground) !important;
                     transition: sugar.theme(ui.button.transition);
                     border: sugar.color(current, border) solid sugar.theme(ui.button.borderWidth);
-                    text-shadow: 0 0 1em sugar.color(current, --darken 40% --alpha 0.6);
 
                     --borderWidth: sugar.theme(ui.button.borderWidth);
 
@@ -203,7 +205,6 @@ export default function ({
                   background-color: sugar.color(current);
                   border: sugar.color(current, border) solid sugar.theme(ui.button.borderWidth);
                   color: sugar.color(current, foreground) !important;
-                  text-shadow: 0 0 1em sugar.color(current, --darken 40% --alpha 0.6);
 
                   &:hover, &:focus {
                     background-color: sugar.color(current, --darken 6);

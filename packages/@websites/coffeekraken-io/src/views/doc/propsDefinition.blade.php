@@ -29,7 +29,7 @@
                         @endif
                     </div>
                 </div>
-                <div class="s-typo:bold s-p:30 s-tc:info">
+                <div class="s-p:30 s-tc:info">
                     @if (isset($param->type->raw))
                         {{ \Sugar\string\toString($param->type->raw) }}
                     @elseif (isset($param->type->type))

@@ -25,10 +25,11 @@
 
   border-bottom-left-radius: 50%;
   border-bottom-right-radius: 50%;
+  background-image: url('/dist/img/background-light.png');
 
   @sugar.theme.when dark {
-    background-image: url('/dist/img/background.png');
     /* opacity: 0.05; */
+    background-image: url('/dist/img/background.png');
   }
 
   @sugar.media mobile {

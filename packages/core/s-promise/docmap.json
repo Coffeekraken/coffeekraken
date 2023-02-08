@@ -3,6 +3,7 @@
     "extends": [],
     "generated": {
         "extends": [
+            "@coffeekraken/aa",
             "@coffeekraken/cli",
             "@coffeekraken/s-activate-feature",
             "@coffeekraken/s-appear-feature",
@@ -43,9 +44,11 @@
             "@coffeekraken/s-filtrable-input-component",
             "@coffeekraken/s-floating-feature",
             "@coffeekraken/s-form-validate-feature",
+            "@coffeekraken/s-front",
             "@coffeekraken/s-frontend-checker",
             "@coffeekraken/s-frontend-server",
             "@coffeekraken/s-frontspec",
+            "@coffeekraken/s-glitch-feature",
             "@coffeekraken/s-glob",
             "@coffeekraken/s-google-map-component",
             "@coffeekraken/s-handlebars",
@@ -83,7 +86,6 @@
             "@coffeekraken/s-sugar-element",
             "@coffeekraken/s-sugar-feature",
             "@coffeekraken/s-sugar-json",
-            "@coffeekraken/s-lazy-feature",
             "@coffeekraken/s-theme-switcher-component",
             "@coffeekraken/s-theme",
             "@coffeekraken/s-timer",
@@ -177,6 +179,52 @@
                             ],
                             "raw": "Function"
                         },
+                        "param": {
+                            "promises": {
+                                "name": "promises",
+                                "type": {
+                                    "types": [
+                                        {
+                                            "type": "array",
+                                            "of": [
+                                                "Promise"
+                                            ]
+                                        }
+                                    ],
+                                    "raw": "Promise[]"
+                                },
+                                "description": "The array of promises to execute one after the other",
+                                "defaultStr": ""
+                            },
+                            "before": {
+                                "name": "before",
+                                "type": {
+                                    "types": [
+                                        {
+                                            "type": "Function"
+                                        }
+                                    ],
+                                    "raw": "Function"
+                                },
+                                "description": "A callback to call before each promises executions",
+                                "default": null,
+                                "defaultStr": "null"
+                            },
+                            "after": {
+                                "name": "after",
+                                "type": {
+                                    "types": [
+                                        {
+                                            "type": "Function"
+                                        }
+                                    ],
+                                    "raw": "Function"
+                                },
+                                "description": "A callback to call after each promises executions",
+                                "default": null,
+                                "defaultStr": "null"
+                            }
+                        },
                         "description": "This static method allows you to pass an array of promises that will be executed one after the other.\nIt will call the \"callback\" function if specified with the resolved promise as argument.",
                         "async": "true",
                         "static": "true",
@@ -196,6 +244,22 @@
                                 }
                             ],
                             "raw": "Function"
+                        },
+                        "param": {
+                            "settings": {
+                                "name": "settings",
+                                "type": {
+                                    "types": [
+                                        {
+                                            "type": "ITreatAsValueSettings"
+                                        }
+                                    ],
+                                    "raw": "ITreatAsValueSettings"
+                                },
+                                "description": "Some settings to configure your custom behavior",
+                                "default": {},
+                                "defaultStr": "{}"
+                            }
                         },
                         "description": "This method wrap the promise into a revocable proxy to allow\npassing this Promise to methods like ```then```, etc... and make\nthis promise treated as a value and not as a chained promise.\nOnce you have done with this behavior, you just have to call\nthe ```restorePromiseBehavior``` on the returned proxy and\nthe default promise behavior will be restored",
                         "since": "2.0.0",
@@ -232,6 +296,35 @@
                                 }
                             ],
                             "raw": "Function"
+                        },
+                        "param": {
+                            "executor": {
+                                "name": "executor",
+                                "type": {
+                                    "types": [
+                                        {
+                                            "type": "Function"
+                                        }
+                                    ],
+                                    "raw": "Function"
+                                },
+                                "description": "The executor function that will receive the resolve and reject ones...",
+                                "defaultStr": ""
+                            },
+                            "settings": {
+                                "name": "settings",
+                                "type": {
+                                    "types": [
+                                        {
+                                            "type": "Object"
+                                        }
+                                    ],
+                                    "raw": "Object"
+                                },
+                                "description": "An object of settings for this particular SPromise instance. Here's the available settings:",
+                                "default": {},
+                                "defaultStr": "{}"
+                            }
                         },
                         "description": "Constructor",
                         "example": [
@@ -290,6 +383,21 @@
                                 }
                             ],
                             "raw": "Function"
+                        },
+                        "param": {
+                            "status": {
+                                "name": "status",
+                                "type": {
+                                    "types": [
+                                        {
+                                            "type": "String"
+                                        }
+                                    ],
+                                    "raw": "String"
+                                },
+                                "description": "A comma separated list of status to check",
+                                "defaultStr": ""
+                            }
                         },
                         "description": "Check is the promise is on one of the passed status",
                         "author": {
@@ -393,6 +501,38 @@
                             ],
                             "raw": "Function"
                         },
+                        "param": {
+                            "arg": {
+                                "name": "arg",
+                                "type": {
+                                    "types": [
+                                        {
+                                            "type": "Mixed"
+                                        }
+                                    ],
+                                    "raw": "Mixed"
+                                },
+                                "description": "The value that you want to return back from the promise",
+                                "defaultStr": ""
+                            },
+                            "stacksOrder": {
+                                "name": "stacksOrder",
+                                "type": {
+                                    "types": [
+                                        {
+                                            "type": "Array"
+                                        },
+                                        {
+                                            "type": "String"
+                                        }
+                                    ],
+                                    "raw": "Array|String"
+                                },
+                                "description": "This specify in which order have to be called the stacks",
+                                "default": "resolve,finally",
+                                "defaultStr": "'resolve,finally'"
+                            }
+                        },
                         "description": "This is the \"resolve\" method exposed on the promise itself for convinience",
                         "async": "true",
                         "author": {
@@ -410,6 +550,38 @@
                                 }
                             ],
                             "raw": "Function"
+                        },
+                        "param": {
+                            "arg": {
+                                "name": "arg",
+                                "type": {
+                                    "types": [
+                                        {
+                                            "type": "Mixed"
+                                        }
+                                    ],
+                                    "raw": "Mixed"
+                                },
+                                "description": "The value that you want to return back from the promise",
+                                "defaultStr": ""
+                            },
+                            "stacksOrder": {
+                                "name": "stacksOrder",
+                                "type": {
+                                    "types": [
+                                        {
+                                            "type": "Array"
+                                        },
+                                        {
+                                            "type": "String"
+                                        }
+                                    ],
+                                    "raw": "Array|String"
+                                },
+                                "description": "This specify in which order have to be called the stacks",
+                                "default": "catch,reject,finally",
+                                "defaultStr": "'catch,reject,finally'"
+                            }
                         },
                         "description": "This is the \"reject\" method exposed on the promise itself for convinience",
                         "async": "true",
@@ -429,6 +601,38 @@
                             ],
                             "raw": "Function"
                         },
+                        "param": {
+                            "arg": {
+                                "name": "arg",
+                                "type": {
+                                    "types": [
+                                        {
+                                            "type": "Mixed"
+                                        }
+                                    ],
+                                    "raw": "Mixed"
+                                },
+                                "description": "The value that you want to return back from the promise",
+                                "defaultStr": ""
+                            },
+                            "stacksOrder": {
+                                "name": "stacksOrder",
+                                "type": {
+                                    "types": [
+                                        {
+                                            "type": "Array"
+                                        },
+                                        {
+                                            "type": "String"
+                                        }
+                                    ],
+                                    "raw": "Array|String"
+                                },
+                                "description": "This specify in which order have to be called the stacks",
+                                "default": "cancel,finally",
+                                "defaultStr": "'cancel,finally'"
+                            }
+                        },
                         "description": "This is the \"cancel\" method exposed on the promise itself for convinience",
                         "async": "true",
                         "author": {
@@ -446,6 +650,35 @@
                                 }
                             ],
                             "raw": "Function"
+                        },
+                        "param": {
+                            "callNumber": {
+                                "name": "callNumber",
+                                "type": {
+                                    "types": [
+                                        {
+                                            "type": "Number"
+                                        }
+                                    ],
+                                    "raw": "Number"
+                                },
+                                "description": "(Optional) How many times you want this callback to be called at max. -1 means unlimited",
+                                "default": -1,
+                                "defaultStr": "-1"
+                            },
+                            "callback": {
+                                "name": "callback",
+                                "type": {
+                                    "types": [
+                                        {
+                                            "type": "Function"
+                                        }
+                                    ],
+                                    "raw": "Function"
+                                },
+                                "description": "The callback function to register",
+                                "defaultStr": ""
+                            }
                         },
                         "description": "This method allows the SPromise user to register a function that will be called every time the \"reject\" one is called in the executor\nThe context of the callback will be the SPromise instance itself so you can call all the methods available like \"resolve\", \"catch\", etc using\nthe \"this.resolve('something')\" statusment. In an arrow function like \"(value) => { ... }\", the \"this\" keyword will be bound to the current context where you define\nyour function. You can access to the SPromise instance through the last parameter like so \"(value, sPromiseInstance) => { ... }\".",
                         "example": [
@@ -469,6 +702,21 @@
                                 }
                             ],
                             "raw": "Function"
+                        },
+                        "param": {
+                            "callback": {
+                                "name": "callback",
+                                "type": {
+                                    "types": [
+                                        {
+                                            "type": "Function"
+                                        }
+                                    ],
+                                    "raw": "Function"
+                                },
+                                "description": "The callback function to register",
+                                "defaultStr": ""
+                            }
                         },
                         "description": "This method allows the SPromise user to register a function that will be called every time the \"reject\" one is called in the executor\nThe context of the callback will be the SPromise instance itself so you can call all the methods available like \"resolve\", \"catch\", etc using\nthe \"this.resolve('something')\" statusment. In an arrow function like \"(value) => { ... }\", the \"this\" keyword will be bound to the current context where you define\nyour function. You can access to the SPromise instance through the last parameter like so \"(value, sPromiseInstance) => { ... }\".",
                         "example": [
@@ -511,6 +759,21 @@
                         }
                     ],
                     "raw": "Function"
+                },
+                "param": {
+                    "promise": {
+                        "name": "promise",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Promise"
+                                }
+                            ],
+                            "raw": "Promise"
+                        },
+                        "description": "The promise to treat as a simple value",
+                        "defaultStr": ""
+                    }
                 },
                 "description": "This function allows you to wrap a promise in a ```resolve``` call to prevent\nthis promise to be treated as a \"chaining\" promise but to be treated as\nnormal value passed in the resolve call.",
                 "namespace": "@coffeekraken.s-promise.SPromise.js",

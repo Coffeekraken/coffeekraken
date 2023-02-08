@@ -2,6 +2,7 @@
  * @name            getCookie
  * @namespace       js.cookie
  * @type            Function
+ * @platform        js
  * @status          stable
  *
  * Get a cookie value

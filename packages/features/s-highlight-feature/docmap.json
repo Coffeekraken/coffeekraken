@@ -3,6 +3,7 @@
     "extends": [],
     "generated": {
         "extends": [
+            "@coffeekraken/aa",
             "@coffeekraken/cli",
             "@coffeekraken/s-activate-feature",
             "@coffeekraken/s-appear-feature",
@@ -43,9 +44,11 @@
             "@coffeekraken/s-filtrable-input-component",
             "@coffeekraken/s-floating-feature",
             "@coffeekraken/s-form-validate-feature",
+            "@coffeekraken/s-front",
             "@coffeekraken/s-frontend-checker",
             "@coffeekraken/s-frontend-server",
             "@coffeekraken/s-frontspec",
+            "@coffeekraken/s-glitch-feature",
             "@coffeekraken/s-glob",
             "@coffeekraken/s-google-map-component",
             "@coffeekraken/s-handlebars",
@@ -83,7 +86,6 @@
             "@coffeekraken/s-sugar-element",
             "@coffeekraken/s-sugar-feature",
             "@coffeekraken/s-sugar-json",
-            "@coffeekraken/s-lazy-feature",
             "@coffeekraken/s-theme-switcher-component",
             "@coffeekraken/s-theme",
             "@coffeekraken/s-timer",
@@ -133,13 +135,26 @@
                     {
                         "language": "html",
                         "title": "Highlight",
-                        "code": "<section class=\"s-ratio:16-9 s-radius s-bkg:accent s-mbe:30\" s-highlight>\n</section>\n<section class=\"s-ratio:16-9 s-radius s-bkg:complementary s-mbe:30\" s-highlight>\n</section>\n<section class=\"s-ratio:16-9 s-radius s-bkg:error\" s-highlight>\n</section>"
+                        "code": "<div class=\"s-radius s-bg:main s-depth s-mbe:30\" style=\"height:100px\" s-highlight>\n</div>\n<div class=\"s-radius s-bg:accent s-depth s-mbe:30\" style=\"height:100px\" s-highlight intensity=\"1\">\n</div>\n<div class=\"s-radius s-bg:complementary s-depth s-mbe:30\" style=\"height:100px\" s-highlight intensity=\"1\">\n</div>\n<div class=\"s-radius s-bg:error s-depth\" style=\"height:100px\" s-highlight intensity=\"1\">\n</div>"
                     }
                 ],
                 "interface": {
                     "name": "SHighlightFeatureInterface",
                     "description": "",
                     "definition": {
+                        "type": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
+                            "description": "Specify the type of highlight you want",
+                            "default": "light",
+                            "physical": true
+                        },
                         "size": {
                             "type": {
                                 "types": [
@@ -151,7 +166,7 @@
                             },
                             "description": "Specify the size of the highlight in px"
                         },
-                        "opacity": {
+                        "intensity": {
                             "type": {
                                 "types": [
                                     {
@@ -160,7 +175,7 @@
                                 ],
                                 "raw": "Number"
                             },
-                            "description": "Specify the opacity of the highlight beetween 0 and 1"
+                            "description": "Specify the intensity of the highlight beetween 0 and 1"
                         }
                     }
                 },
@@ -199,6 +214,19 @@
                     "name": "SHighlightFeatureInterface",
                     "description": "",
                     "definition": {
+                        "type": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
+                            "description": "Specify the type of highlight you want",
+                            "default": "light",
+                            "physical": true
+                        },
                         "size": {
                             "type": {
                                 "types": [
@@ -210,7 +238,7 @@
                             },
                             "description": "Specify the size of the highlight in px"
                         },
-                        "opacity": {
+                        "intensity": {
                             "type": {
                                 "types": [
                                     {
@@ -219,7 +247,7 @@
                                 ],
                                 "raw": "Number"
                             },
-                            "description": "Specify the opacity of the highlight beetween 0 and 1"
+                            "description": "Specify the intensity of the highlight beetween 0 and 1"
                         }
                     }
                 },

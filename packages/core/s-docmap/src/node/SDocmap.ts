@@ -13,7 +13,7 @@ import {
     __readJsonSync,
     __removeSync,
     __writeFileSync,
-    __writeJsonSync,
+    __writeJsonSync
 } from '@coffeekraken/sugar/fs';
 import __npmInstall from '@coffeekraken/sugar/node/npm/install';
 import { __deepMap, __deepMerge, __get } from '@coffeekraken/sugar/object';
@@ -72,7 +72,7 @@ export interface ISDocmapBuildParams {
     exclude: string[];
     noExtends: boolean;
     excludePackages: string[];
-    filters: Record<string, RegExp>;
+    excludeByTags: Record<string, RegExp[]>;
     tags: string[];
     save: boolean;
     outPath: string;
@@ -830,6 +830,7 @@ class SDocmap extends __SClass implements ISDocmap {
         const finalParams = <ISDocmapBuildParams>(
             __deepMerge(__SDocmapBuildParamsInterface.defaults(), params)
         );
+
         return new Promise(async (resolve) => {
             let docmapJson = {
                 map: {},
@@ -957,18 +958,22 @@ class SDocmap extends __SClass implements ISDocmap {
                 for (let j = 0; j < docblocks.length; j++) {
                     const docblock = docblocks[j];
 
-                    let matchFilters = true;
+                    let matchFilters = false;
 
                     for (
                         let k = 0;
                         // @ts-ignore
-                        k < Object.keys(finalParams.filters).length;
+                        k < Object.keys(finalParams.excludeByTags).length;
                         k++
                     ) {
-                        const key = Object.keys(finalParams.filters)[k];
-                        const filterReg =
+                        const key = Object.keys(finalParams.excludeByTags)[k];
+                        let filterRegs =
                             // @ts-ignore
-                            finalParams.filters[key];
+                            finalParams.excludeByTags[key];
+                        if (!Array.isArray(filterRegs)) {
+                            filterRegs = [filterRegs];
+                        }
+
                         // @ts-ignore
                         let value = docblock[key];
 
@@ -987,16 +992,20 @@ class SDocmap extends __SClass implements ISDocmap {
 
                         // check if the value match the filter or not
                         // if not, we do not take the docblock
-                        if (
-                            typeof value === 'string' &&
-                            !value.match(filterReg)
-                        ) {
-                            matchFilters = false;
-                            break;
+                        if (typeof value === 'string') {
+                            filterRegs.forEach((reg) => {
+                                if (value.match(reg)) {
+                                    matchFilters = true;
+                                }
+                            });
+                            if (matchFilters) {
+                                break;
+                            }
                         }
                     }
 
-                    if (!matchFilters) {
+                    // exclude this item if match any of the excludeByTags filters
+                    if (matchFilters) {
                         continue;
                     }
 

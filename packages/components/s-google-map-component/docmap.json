@@ -3,6 +3,7 @@
     "extends": [],
     "generated": {
         "extends": [
+            "@coffeekraken/aa",
             "@coffeekraken/cli",
             "@coffeekraken/s-activate-feature",
             "@coffeekraken/s-appear-feature",
@@ -43,9 +44,11 @@
             "@coffeekraken/s-filtrable-input-component",
             "@coffeekraken/s-floating-feature",
             "@coffeekraken/s-form-validate-feature",
+            "@coffeekraken/s-front",
             "@coffeekraken/s-frontend-checker",
             "@coffeekraken/s-frontend-server",
             "@coffeekraken/s-frontspec",
+            "@coffeekraken/s-glitch-feature",
             "@coffeekraken/s-glob",
             "@coffeekraken/s-handlebars",
             "@coffeekraken/s-highlight-feature",
@@ -83,7 +86,6 @@
             "@coffeekraken/s-sugar-element",
             "@coffeekraken/s-sugar-feature",
             "@coffeekraken/s-sugar-json",
-            "@coffeekraken/s-lazy-feature",
             "@coffeekraken/s-theme-switcher-component",
             "@coffeekraken/s-theme",
             "@coffeekraken/s-timer",
@@ -174,12 +176,12 @@
                     {
                         "language": "html",
                         "title": "Using the base s-google-map classes",
-                        "code": "<s-google-map class=\"s-ratio:16-9\" map-id=\"7bfb2f702a07e548\" lat=\"46.618038\" lng=\"7.057280\" zoom=\"10\">\n  <s-google-map-marker lat=\"46.148038\" lng=\"7.257280\">\n      <div class=\"s-google-map-marker\">\n          <div class=\"s-google-map-marker__icon\">\n              <i class=\"fa-solid fa-location-dot s-tc:accent\"></i>\n          </div>\n          <div class=\"s-google-map-marker__content\">\n              <h1 class=\"s-typo:h1\">\n                 Hello google!\n             </h1>\n          </div>\n      </div>\n  </s-google-map-marker>\n</s-google-map>"
+                        "code": "<s-google-map class=\"s-ratio:16-9\" map-id=\"7bfb2f702a07e548\" lat=\"46.618038\" lng=\"7.057280\" zoom=\"10\">\n  <s-google-map-marker lat=\"46.148038\" lng=\"7.257280\">\n      <div class=\"s-google-map-marker\">\n          <div class=\"s-google-map-marker_icon\">\n              <i class=\"fa-solid fa-location-dot s-tc:accent\"></i>\n          </div>\n          <div class=\"s-google-map-marker_content\">\n              <h1 class=\"s-typo:h1\">\n                 Hello google!\n             </h1>\n          </div>\n      </div>\n  </s-google-map-marker>\n</s-google-map>"
                     },
                     {
                         "language": "html",
                         "title": "Using multiple markers",
-                        "code": "<s-google-map class=\"s-ratio:16-9\" map-id=\"7bfb2f702a07e548\" lat=\"46.618038\" lng=\"7.057280\">\n  <s-google-map-marker lat=\"46.148038\" lng=\"7.257280\">\n      <div class=\"s-google-map-marker\">\n          <div class=\"s-google-map-marker__icon\">\n              <i class=\"fa-solid fa-location-dot s-tc:accent\"></i>\n          </div>\n          <div class=\"s-google-map-marker__content\">\n              <h1 class=\"s-typo:h1\">\n                 Hello google! #1\n             </h1>\n          </div>\n      </div>\n  </s-google-map-marker>\n  <s-google-map-marker lat=\"46.248038\" lng=\"7.457280\">\n      <div class=\"s-google-map-marker\">\n          <div class=\"s-google-map-marker__icon\">\n              <i class=\"fa-solid fa-location-dot s-tc:accent\"></i>\n          </div>\n          <div class=\"s-google-map-marker__content\">\n              <h1 class=\"s-typo:h1\">\n                 Hello google! #2\n             </h1>\n          </div>\n      </div>\n  </s-google-map-marker>\n</s-google-map>"
+                        "code": "<s-google-map class=\"s-ratio:16-9\" map-id=\"7bfb2f702a07e548\" lat=\"46.618038\" lng=\"7.057280\">\n  <s-google-map-marker lat=\"46.148038\" lng=\"7.257280\">\n      <div class=\"s-google-map-marker\">\n          <div class=\"s-google-map-marker_icon\">\n              <i class=\"fa-solid fa-location-dot s-tc:accent\"></i>\n          </div>\n          <div class=\"s-google-map-marker_content\">\n              <h1 class=\"s-typo:h1\">\n                 Hello google! #1\n             </h1>\n          </div>\n      </div>\n  </s-google-map-marker>\n  <s-google-map-marker lat=\"46.248038\" lng=\"7.457280\">\n      <div class=\"s-google-map-marker\">\n          <div class=\"s-google-map-marker_icon\">\n              <i class=\"fa-solid fa-location-dot s-tc:accent\"></i>\n          </div>\n          <div class=\"s-google-map-marker_content\">\n              <h1 class=\"s-typo:h1\">\n                 Hello google! #2\n             </h1>\n          </div>\n      </div>\n  </s-google-map-marker>\n</s-google-map>"
                     }
                 ],
                 "interface": {

@@ -29,7 +29,7 @@ function default_1(api) {
          * @since       2.0.0
          * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
-        excludePackages: ['@website/*', '@example/*'],
+        excludePackages: ['@website/*', '@example/*', '@tests/*'],
         read: {
             /**
              * @name          input
@@ -120,7 +120,6 @@ function default_1(api) {
              */
             globs: [
                 '*',
-                // 'dist/pkg/esm/**/*.js',
                 `src/!(css)/*{0,4}/*.+(${(0, extension_1.__commonTextFileExtensions)({}).join('|')})`,
                 `dist/+(css)/*`,
             ],
@@ -141,33 +140,33 @@ function default_1(api) {
                 '**/__tests__.wip/**/*',
                 '**/__wip__/**/*',
             ],
-            filters: {
+            excludeByTags: {
                 /**
                  * @name        namespace
-                 * @namespace   config.docmap.build.filters
-                 * @type        Regex
-                 * @default      /^.*$/
+                 * @namespace   config.docmap.build.excludeByTags
+                 * @type        Regex[]
+                 * @default      [/\.config\.)/]
                  *
-                 * Specify some regex to apply on different docblock properties
-                 * to exclude some files from the builded docmap json
+                 * Specify some regex to apply on the namespace.
+                 * All namespaces that does not match one of the specified regex will be excluded
                  *
                  * @since       2.0.0
                  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
-                namespace: /^.*$/,
+                namespace: [/\.config\./],
                 /**
                  * @name        type
-                 * @namespace   config.docmap.build.filters
+                 * @namespace   config.docmap.build.excludeByTags
                  * @type        Regex
-                 * @default       /^(?!CssClass)[a-zA-Z]+$/
+                 * @default       /^CssClass$/
                  *
-                 * Specify some regex to apply on different docblock properties
-                 * to exclude some files from the builded docmap json
+                 * Specify some regex to apply on the type.
+                 * All types that does not match one of the specified regex will be excluded
                  *
                  * @since       2.0.0
                  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
-                type: /^(?!CssClass)[a-zA-Z]+$/,
+                type: [/^CssClass$/],
             },
             /**
              * @name        tags
@@ -230,4 +229,4 @@ function default_1(api) {
     };
 }
 exports.default = default_1;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7O0FBQUEsNkRBQTJFO0FBQzNFLG1EQUE0RDtBQUU1RCxtQkFBeUIsR0FBRztJQUN4QixJQUFJLEdBQUcsQ0FBQyxHQUFHLENBQUMsUUFBUSxLQUFLLE1BQU07UUFBRSxPQUFPO0lBRXhDLE9BQU87UUFDSDs7Ozs7Ozs7OztXQVVHO1FBQ0gsU0FBUyxFQUFFLEtBQUs7UUFFaEI7Ozs7Ozs7Ozs7V0FVRztRQUNILGVBQWUsRUFBRSxDQUFDLFlBQVksRUFBRSxZQUFZLENBQUM7UUFFN0MsSUFBSSxFQUFFO1lBQ0Y7Ozs7Ozs7Ozs7ZUFVRztZQUNILEtBQUssRUFBRSxHQUFHLElBQUEsdUJBQWdCLEdBQUUsY0FBYztZQUUxQzs7Ozs7Ozs7Ozs7ZUFXRztZQUNILElBQUksRUFBRSxDQUFDLGVBQWUsQ0FBQztZQUV2Qjs7Ozs7Ozs7Ozs7ZUFXRztZQUNILFFBQVEsRUFBRSxDQUFDLHdCQUF3QixFQUFFLG1CQUFtQixDQUFDO1NBQzVEO1FBRUQsUUFBUSxFQUFFO1lBQ047Ozs7Ozs7Ozs7ZUFVRztZQUNILElBQUksTUFBTTtnQkFDTixPQUFPLEdBQUcsR0FBRyxDQUFDLE1BQU0sQ0FBQyxPQUFPLENBQUMsT0FBTyxDQUFDLE9BQU8sVUFBVSxDQUFDO1lBQzNELENBQUM7U0FDSjtRQUVELGVBQWUsRUFBRTtZQUNiOzs7Ozs7Ozs7OztlQVdHO1lBQ0gsSUFBSSxJQUFJO2dCQUNKLE9BQU8sR0FBRyxHQUFHLENBQUMsTUFBTSxDQUFDLE9BQU8sQ0FBQyxPQUFPLENBQUMsT0FBTyxZQUFZLENBQUM7WUFDN0QsQ0FBQztTQUNKO1FBRUQsS0FBSyxFQUFFO1lBQ0g7Ozs7Ozs7Ozs7Ozs7ZUFhRztZQUNILEtBQUssRUFBRTtnQkFDSCxHQUFHO2dCQUNILDBCQUEwQjtnQkFDMUIseUJBQXlCLElBQUEsc0NBQTBCLEVBQUMsRUFBRSxDQUFDLENBQUMsSUFBSSxDQUN4RCxHQUFHLENBQ04sR0FBRztnQkFDSixlQUFlO2FBQ2xCO1lBRUQ7Ozs7Ozs7Ozs7O2VBV0c7WUFDSCxPQUFPLEVBQUU7Z0JBQ0wsbUJBQW1CO2dCQUNuQix1QkFBdUI7Z0JBQ3ZCLGlCQUFpQjthQUNwQjtZQUVELE9BQU8sRUFBRTtnQkFDTDs7Ozs7Ozs7Ozs7bUJBV0c7Z0JBQ0gsU0FBUyxFQUFFLE1BQU07Z0JBRWpCOzs7Ozs7Ozs7OzttQkFXRztnQkFDSCxJQUFJLEVBQUUseUJBQXlCO2FBQ2xDO1lBRUQ7Ozs7Ozs7Ozs7ZUFVRztZQUNILElBQUksRUFBRTtnQkFDRixJQUFJO2dCQUNKLE1BQU07Z0JBQ04sSUFBSTtnQkFDSixNQUFNO2dCQUNOLE9BQU87Z0JBQ1AsU0FBUztnQkFDVCxNQUFNO2dCQUNOLFNBQVM7Z0JBQ1QsVUFBVTtnQkFDVixhQUFhO2dCQUNiLFdBQVc7Z0JBQ1gsUUFBUTtnQkFDUixTQUFTO2dCQUNULFdBQVc7Z0JBQ1gsT0FBTztnQkFDUCxRQUFRO2dCQUNSLE9BQU87Z0JBQ1AsUUFBUTthQUNYO1lBRUQ7Ozs7Ozs7Ozs7ZUFVRztZQUNILElBQUksRUFBRSxJQUFJO1lBRVY7Ozs7Ozs7Ozs7ZUFVRztZQUNILElBQUksT0FBTztnQkFDUCxPQUFPLEdBQUcsR0FBRyxDQUFDLE1BQU0sQ0FBQyxPQUFPLENBQUMsT0FBTyxDQUFDLE9BQU8sY0FBYyxDQUFDO1lBQy9ELENBQUM7U0FDSjtLQUNKLENBQUM7QUFDTixDQUFDO0FBalBELDRCQWlQQyJ9
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7O0FBQUEsNkRBQTJFO0FBQzNFLG1EQUE0RDtBQUU1RCxtQkFBeUIsR0FBRztJQUN4QixJQUFJLEdBQUcsQ0FBQyxHQUFHLENBQUMsUUFBUSxLQUFLLE1BQU07UUFBRSxPQUFPO0lBRXhDLE9BQU87UUFDSDs7Ozs7Ozs7OztXQVVHO1FBQ0gsU0FBUyxFQUFFLEtBQUs7UUFFaEI7Ozs7Ozs7Ozs7V0FVRztRQUNILGVBQWUsRUFBRSxDQUFDLFlBQVksRUFBRSxZQUFZLEVBQUUsVUFBVSxDQUFDO1FBRXpELElBQUksRUFBRTtZQUNGOzs7Ozs7Ozs7O2VBVUc7WUFDSCxLQUFLLEVBQUUsR0FBRyxJQUFBLHVCQUFnQixHQUFFLGNBQWM7WUFFMUM7Ozs7Ozs7Ozs7O2VBV0c7WUFDSCxJQUFJLEVBQUUsQ0FBQyxlQUFlLENBQUM7WUFFdkI7Ozs7Ozs7Ozs7O2VBV0c7WUFDSCxRQUFRLEVBQUUsQ0FBQyx3QkFBd0IsRUFBRSxtQkFBbUIsQ0FBQztTQUM1RDtRQUVELFFBQVEsRUFBRTtZQUNOOzs7Ozs7Ozs7O2VBVUc7WUFDSCxJQUFJLE1BQU07Z0JBQ04sT0FBTyxHQUFHLEdBQUcsQ0FBQyxNQUFNLENBQUMsT0FBTyxDQUFDLE9BQU8sQ0FBQyxPQUFPLFVBQVUsQ0FBQztZQUMzRCxDQUFDO1NBQ0o7UUFFRCxlQUFlLEVBQUU7WUFDYjs7Ozs7Ozs7Ozs7ZUFXRztZQUNILElBQUksSUFBSTtnQkFDSixPQUFPLEdBQUcsR0FBRyxDQUFDLE1BQU0sQ0FBQyxPQUFPLENBQUMsT0FBTyxDQUFDLE9BQU8sWUFBWSxDQUFDO1lBQzdELENBQUM7U0FDSjtRQUVELEtBQUssRUFBRTtZQUNIOzs7Ozs7Ozs7Ozs7O2VBYUc7WUFDSCxLQUFLLEVBQUU7Z0JBQ0gsR0FBRztnQkFDSCx5QkFBeUIsSUFBQSxzQ0FBMEIsRUFBQyxFQUFFLENBQUMsQ0FBQyxJQUFJLENBQ3hELEdBQUcsQ0FDTixHQUFHO2dCQUNKLGVBQWU7YUFDbEI7WUFFRDs7Ozs7Ozs7Ozs7ZUFXRztZQUNILE9BQU8sRUFBRTtnQkFDTCxtQkFBbUI7Z0JBQ25CLHVCQUF1QjtnQkFDdkIsaUJBQWlCO2FBQ3BCO1lBRUQsYUFBYSxFQUFFO2dCQUNYOzs7Ozs7Ozs7OzttQkFXRztnQkFDSCxTQUFTLEVBQUUsQ0FBQyxZQUFZLENBQUM7Z0JBRXpCOzs7Ozs7Ozs7OzttQkFXRztnQkFDSCxJQUFJLEVBQUUsQ0FBQyxZQUFZLENBQUM7YUFDdkI7WUFFRDs7Ozs7Ozs7OztlQVVHO1lBQ0gsSUFBSSxFQUFFO2dCQUNGLElBQUk7Z0JBQ0osTUFBTTtnQkFDTixJQUFJO2dCQUNKLE1BQU07Z0JBQ04sT0FBTztnQkFDUCxTQUFTO2dCQUNULE1BQU07Z0JBQ04sU0FBUztnQkFDVCxVQUFVO2dCQUNWLGFBQWE7Z0JBQ2IsV0FBVztnQkFDWCxRQUFRO2dCQUNSLFNBQVM7Z0JBQ1QsV0FBVztnQkFDWCxPQUFPO2dCQUNQLFFBQVE7Z0JBQ1IsT0FBTztnQkFDUCxRQUFRO2FBQ1g7WUFFRDs7Ozs7Ozs7OztlQVVHO1lBQ0gsSUFBSSxFQUFFLElBQUk7WUFFVjs7Ozs7Ozs7OztlQVVHO1lBQ0gsSUFBSSxPQUFPO2dCQUNQLE9BQU8sR0FBRyxHQUFHLENBQUMsTUFBTSxDQUFDLE9BQU8sQ0FBQyxPQUFPLENBQUMsT0FBTyxjQUFjLENBQUM7WUFDL0QsQ0FBQztTQUNKO0tBQ0osQ0FBQztBQUNOLENBQUM7QUFoUEQsNEJBZ1BDIn0=

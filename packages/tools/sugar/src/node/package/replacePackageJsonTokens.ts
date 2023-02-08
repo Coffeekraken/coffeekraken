@@ -1,5 +1,5 @@
-import __packageJsonSync from './packageJsonSync';
 import __flatten from '../../shared/object/flatten';
+import __packageJsonSync from './packageJsonSync';
 
 /**
  * @name            replacePackageJsonTokens

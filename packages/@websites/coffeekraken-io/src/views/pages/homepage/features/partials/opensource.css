@@ -54,7 +54,16 @@
             left: 60%;
 
             path {
-                fill: sugar.color(main, background);
+                fill: sugar.color(main);
+                opacity: 0.1;
+                filter: blur(10px);
+                transform-origin: 50% 50%;
+                transform: scale(0.9);
+
+                @sugar.theme.when dark {
+                    opacity: 1;
+                    fill: sugar.color(main, background);
+                }
             }
         }
         ._logo {
@@ -69,8 +78,15 @@
             transform-origin: 0% 0%;
 
             path {
-                stroke: sugar.color(base, foreground, --alpha 0.2);
+                stroke: sugar.color(base, --alpha 0.05);
                 fill: none;
+            }
+
+            @sugar.theme.when dark {
+                path {
+                    stroke: sugar.color(base, foreground, --alpha 0.1);
+                    fill: none;
+                }
             }
         }
 
@@ -78,6 +94,13 @@
         ._bubble-02,
         ._bubble-03 {
             position: absolute;
+
+            > * > * {
+                fill: white;
+            }
+            > * > *:first-child {
+                fill: sugar.color(accent);
+            }
         }
         ._bubble-01 {
             top: 0;
@@ -86,6 +109,10 @@
         ._bubble-02 {
             top: 50%;
             left: 100%;
+
+            > * > *:first-child {
+                fill: sugar.color(complementary);
+            }
         }
         ._bubble-03 {
             top: calc(100% + 30px);

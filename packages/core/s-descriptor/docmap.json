@@ -3,6 +3,7 @@
     "extends": [],
     "generated": {
         "extends": [
+            "@coffeekraken/aa",
             "@coffeekraken/cli",
             "@coffeekraken/s-activate-feature",
             "@coffeekraken/s-appear-feature",
@@ -42,9 +43,11 @@
             "@coffeekraken/s-filtrable-input-component",
             "@coffeekraken/s-floating-feature",
             "@coffeekraken/s-form-validate-feature",
+            "@coffeekraken/s-front",
             "@coffeekraken/s-frontend-checker",
             "@coffeekraken/s-frontend-server",
             "@coffeekraken/s-frontspec",
+            "@coffeekraken/s-glitch-feature",
             "@coffeekraken/s-glob",
             "@coffeekraken/s-google-map-component",
             "@coffeekraken/s-handlebars",
@@ -83,7 +86,6 @@
             "@coffeekraken/s-sugar-element",
             "@coffeekraken/s-sugar-feature",
             "@coffeekraken/s-sugar-json",
-            "@coffeekraken/s-lazy-feature",
             "@coffeekraken/s-theme-switcher-component",
             "@coffeekraken/s-theme",
             "@coffeekraken/s-timer",
@@ -111,6 +113,21 @@
                         }
                     ],
                     "raw": "Class"
+                },
+                "param": {
+                    "settings": {
+                        "name": "settings",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "ISDescriptorSettings"
+                                }
+                            ],
+                            "raw": "ISDescriptorSettings"
+                        },
+                        "description": "An object of setting to configure your descriptor instance",
+                        "defaultStr": ""
+                    }
                 },
                 "description": "Make a description...",
                 "namespace": "@coffeekraken.s-descriptor.s-descriptor.shared",
@@ -181,6 +198,21 @@
                             ],
                             "raw": "Function"
                         },
+                        "param": {
+                            "rule": {
+                                "name": "rule",
+                                "type": {
+                                    "types": [
+                                        {
+                                            "type": "ISDescriptorRule"
+                                        }
+                                    ],
+                                    "raw": "ISDescriptorRule"
+                                },
+                                "description": "The rule object to register",
+                                "defaultStr": ""
+                            }
+                        },
                         "description": "This static method allows you to register a new rule\nby passing a valid ISDescriptorRule object",
                         "static": "true",
                         "since": "2.0.0",
@@ -219,6 +251,35 @@
                             ],
                             "raw": "Function"
                         },
+                        "param": {
+                            "value": {
+                                "name": "value",
+                                "type": {
+                                    "types": [
+                                        {
+                                            "type": "Any"
+                                        }
+                                    ],
+                                    "raw": "Any"
+                                },
+                                "description": "The value to apply the descriptor on",
+                                "defaultStr": ""
+                            },
+                            "settings": {
+                                "name": "settings",
+                                "type": {
+                                    "types": [
+                                        {
+                                            "type": "ISDescriptorSettings"
+                                        }
+                                    ],
+                                    "raw": "ISDescriptorSettings"
+                                },
+                                "description": "An object of settings to configure your descriptor. These settings will override the base ones passed in the constructor",
+                                "default": {},
+                                "defaultStr": "{}"
+                            }
+                        },
                         "description": "This method simply apply the descriptor instance on the passed value.\nThe value can be anything depending on the descriptor you use.\nWhen you pass an Array, by default it will apply the descriptor on\neach array items. If you don't want this behavior and the Array passed has to be\ntreated as a single value, pass the \"arrayAsValue\" setting to true",
                         "since": "2.0.0",
                         "author": {
@@ -239,6 +300,21 @@
                         }
                     ],
                     "raw": "Class"
+                },
+                "param": {
+                    "settings": {
+                        "name": "settings",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "ISDescriptorResultSettings"
+                                }
+                            ],
+                            "raw": "ISDescriptorResultSettings"
+                        },
+                        "description": "An object of setting to configure your descriptor instance",
+                        "defaultStr": ""
+                    }
                 },
                 "description": "This class is the main one that MUST be used as parent one\nwhen creating any descriptor like object, string, etc...",
                 "namespace": "@coffeekraken.s-descriptor.sugar.js.descriptor",
@@ -306,6 +382,21 @@
                                 }
                             ],
                             "raw": "Function"
+                        },
+                        "param": {
+                            "ruleResult": {
+                                "name": "ruleResult",
+                                "type": {
+                                    "types": [
+                                        {
+                                            "type": "ISDescriptorResultRule"
+                                        }
+                                    ],
+                                    "raw": "ISDescriptorResultRule"
+                                },
+                                "description": "The rule result object you want to add",
+                                "defaultStr": ""
+                            }
                         },
                         "description": "This method is used to add a rule result to the global descriptor result.",
                         "since": "2.0.0",

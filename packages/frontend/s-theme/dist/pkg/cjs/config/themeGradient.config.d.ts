@@ -12,7 +12,9 @@ export default function (api: any): {
     
     defaultAngle: string;
     
-    defaultTextModifierStart: {};
+    defaultTextModifierStart: {
+        darken: number;
+    };
     
     defaultTextModifierEnd: {
         lighten: number;

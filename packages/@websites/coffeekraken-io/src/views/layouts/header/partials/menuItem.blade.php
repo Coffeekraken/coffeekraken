@@ -2,7 +2,7 @@
     active-class="subnav-active" active-attribute="subnav-active" unactivate-timeout="150"
     unactivate-on="event:s-page-transition.start">
 
-    <span class="s-depth:text:100">{{ isset($menuItem->as) ? $menuItem->as : $menuItem->name }}</span>
+    <span>{{ isset($menuItem->as) ? $menuItem->as : $menuItem->name }}</span>
 
     <template>
         <div class="_subnav {{ $class }}">

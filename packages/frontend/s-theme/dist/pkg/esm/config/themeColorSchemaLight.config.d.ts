@@ -44,6 +44,9 @@ declare const _default: (api: any) => {
         
         lighten: number;
         color: {
+            base: {
+                lighten: number;
+            };
             main: {
                 lighten: number;
             };

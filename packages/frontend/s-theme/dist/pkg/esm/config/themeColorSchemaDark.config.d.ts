@@ -9,9 +9,6 @@ declare const _default: (api: any) => {
             main: {
                 lighten: number;
             };
-            complementary: {
-                lighten: number;
-            };
         };
     };
     placeholder: {

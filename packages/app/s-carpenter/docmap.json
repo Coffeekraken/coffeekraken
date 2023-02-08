@@ -3,6 +3,7 @@
     "extends": [],
     "generated": {
         "extends": [
+            "@coffeekraken/aa",
             "@coffeekraken/cli",
             "@coffeekraken/s-activate-feature",
             "@coffeekraken/s-appear-feature",
@@ -42,9 +43,11 @@
             "@coffeekraken/s-filtrable-input-component",
             "@coffeekraken/s-floating-feature",
             "@coffeekraken/s-form-validate-feature",
+            "@coffeekraken/s-front",
             "@coffeekraken/s-frontend-checker",
             "@coffeekraken/s-frontend-server",
             "@coffeekraken/s-frontspec",
+            "@coffeekraken/s-glitch-feature",
             "@coffeekraken/s-glob",
             "@coffeekraken/s-google-map-component",
             "@coffeekraken/s-handlebars",
@@ -83,7 +86,6 @@
             "@coffeekraken/s-sugar-element",
             "@coffeekraken/s-sugar-feature",
             "@coffeekraken/s-sugar-json",
-            "@coffeekraken/s-lazy-feature",
             "@coffeekraken/s-theme-switcher-component",
             "@coffeekraken/s-theme",
             "@coffeekraken/s-timer",
@@ -282,6 +284,22 @@
                     ],
                     "raw": "Class"
                 },
+                "param": {
+                    "settings": {
+                        "name": "settings",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Object"
+                                }
+                            ],
+                            "raw": "Object"
+                        },
+                        "description": "An object of settings to configure your SCarpenter instance:",
+                        "default": {},
+                        "defaultStr": "{}"
+                    }
+                },
                 "description": "This class allows you to use the display your components library as well as your sections, etc... in a\nnice and easy interface that let you customize the props of your components live",
                 "namespace": "@coffeekraken.s-carpenter.node",
                 "status": "wip",
@@ -321,7 +339,7 @@
                         }
                     },
                     "loadspecs": {
-                        "id": "s1e8d2c649e9efd14a99cf59f85d703abe0b42d1bc146db4a8868217107baac7c",
+                        "id": "s887b21efd27927b9cb18456e31cb68eea6d584dcc99f24d853b4d9bda4b48f66",
                         "name": "loadSpecs",
                         "type": {
                             "types": [
@@ -340,7 +358,7 @@
                         }
                     },
                     "start": {
-                        "id": "s529e70eb357c209d1ff3d57848b012fc19e387a9ebc87deeb77c6d2003fbd5ec",
+                        "id": "s2df12c1e07638d63e624bbda45297f0a0afcec5c1ecda818e4a06c059eb3c28d",
                         "name": "start",
                         "type": {
                             "types": [
@@ -349,6 +367,24 @@
                                 }
                             ],
                             "raw": "Function"
+                        },
+                        "param": {
+                            "params": {
+                                "name": "params",
+                                "type": {
+                                    "types": [
+                                        {
+                                            "type": "Partial",
+                                            "of": [
+                                                "ISCarpenterStartParams"
+                                            ]
+                                        }
+                                    ],
+                                    "raw": "Partial<ISCarpenterStartParams>"
+                                },
+                                "description": "The params to use to start your mitosis env",
+                                "defaultStr": ""
+                            }
                         },
                         "description": "This method allows you to start a server in order display your components library in a nice and coherent interface",
                         "since": "2.0.0",

@@ -1,3 +1,12 @@
 {
-  "recipe": "generic"
+  "recipe": "generic",
+  "postcss": {
+    "folders": {
+      "mixins": [
+        {
+          "path": "./dist/pkg/%moduleSystem/node/postcss/mixins"
+        }
+      ]
+    }
+  }
 }

@@ -608,6 +608,9 @@ export default class SMonorepo extends __SClass {
                     )}/src/**/*`,
                     inDir: __packageRootDir(),
                     watch: true,
+                    log: {
+                        summary: false,
+                    },
                     formatInitial: finalParams.formatInitial,
                 });
             }

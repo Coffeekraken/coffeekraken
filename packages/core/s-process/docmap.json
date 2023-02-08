@@ -3,6 +3,7 @@
     "extends": [],
     "generated": {
         "extends": [
+            "@coffeekraken/aa",
             "@coffeekraken/cli",
             "@coffeekraken/s-activate-feature",
             "@coffeekraken/s-appear-feature",
@@ -43,9 +44,11 @@
             "@coffeekraken/s-filtrable-input-component",
             "@coffeekraken/s-floating-feature",
             "@coffeekraken/s-form-validate-feature",
+            "@coffeekraken/s-front",
             "@coffeekraken/s-frontend-checker",
             "@coffeekraken/s-frontend-server",
             "@coffeekraken/s-frontspec",
+            "@coffeekraken/s-glitch-feature",
             "@coffeekraken/s-glob",
             "@coffeekraken/s-google-map-component",
             "@coffeekraken/s-handlebars",
@@ -83,7 +86,6 @@
             "@coffeekraken/s-sugar-element",
             "@coffeekraken/s-sugar-feature",
             "@coffeekraken/s-sugar-json",
-            "@coffeekraken/s-lazy-feature",
             "@coffeekraken/s-theme-switcher-component",
             "@coffeekraken/s-theme",
             "@coffeekraken/s-timer",
@@ -148,6 +150,22 @@
                     ],
                     "raw": "Class"
                 },
+                "param": {
+                    "settings": {
+                        "name": "settings",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "ISCommandProcessSettings"
+                                }
+                            ],
+                            "raw": "ISCommandProcessSettings"
+                        },
+                        "description": "Some settings to configure your command process",
+                        "default": {},
+                        "defaultStr": "{}"
+                    }
+                },
                 "description": "This class represent an SProcess started with a simple bash command like \"ls -la\" or whatever",
                 "namespace": "@coffeekraken.s-process.s-process",
                 "status": "wip",
@@ -196,6 +214,35 @@
                                 }
                             ],
                             "raw": "Function"
+                        },
+                        "param": {
+                            "command": {
+                                "name": "command",
+                                "type": {
+                                    "types": [
+                                        {
+                                            "type": "String"
+                                        }
+                                    ],
+                                    "raw": "String"
+                                },
+                                "description": "The command you want to execute",
+                                "defaultStr": ""
+                            },
+                            "settings": {
+                                "name": "settings",
+                                "type": {
+                                    "types": [
+                                        {
+                                            "type": "ISCommandProcessSettings"
+                                        }
+                                    ],
+                                    "raw": "ISCommandProcessSettings"
+                                },
+                                "description": "Some command process settings you want to override",
+                                "default": {},
+                                "defaultStr": "{}"
+                            }
                         },
                         "description": "Run the actual command through a ```spawn``` call.\nThe spawn function used here is the sugar one stored in \"sugar.node.process.spawn\"",
                         "async": "true",
@@ -350,7 +397,7 @@
                         }
                     },
                     "from": {
-                        "id": "s3d7b12356cc891ced70227ad81fa3a2f6aa029c57d90949dac3a7bc0b440f699",
+                        "id": "seb8957f529c7902f4492d46ad79b18981f0d03778addce61538029d4bfe17078",
                         "name": "from",
                         "type": {
                             "types": [
@@ -360,7 +407,48 @@
                             ],
                             "raw": "Function"
                         },
-                        "description": "This static method allows you to pass arguments like:\n- file path: Will require it, check what's returned from and instanciate an SProcess depending on that\n- command string: Will instanciate a new SCommandProcess instance and returns it for you to run it\n- function: Will execute the function and instanciate the proper SPromise instance type depending on the returned value\n- SPromise instance: Will simply wrap the SPromise  instance inside an SProcess one and returns you this new SProcess instance\n- SProcess based class: This make not so much sens but at least you can rely on this method to instanciate event an SProcess based class\nOnce you get the proper instance back, you can use it the same as an SProcess based class instance and use the ```run``` method to\nexecute your process",
+                        "param": {
+                            "what": {
+                                "name": "what",
+                                "type": {
+                                    "types": [
+                                        {
+                                            "type": "string"
+                                        },
+                                        {
+                                            "type": "function"
+                                        },
+                                        {
+                                            "type": "Promise"
+                                        },
+                                        {
+                                            "type": "SProcess"
+                                        }
+                                    ],
+                                    "raw": "string|function|Promise|SProcess"
+                                },
+                                "description": "The value with which you want to get an SProcess based instance back",
+                                "defaultStr": ""
+                            },
+                            "settings": {
+                                "name": "settings",
+                                "type": {
+                                    "types": [
+                                        {
+                                            "type": "Partial",
+                                            "of": [
+                                                "ISProcessSettings"
+                                            ]
+                                        }
+                                    ],
+                                    "raw": "Partial<ISProcessSettings>"
+                                },
+                                "description": "Some settings to configure your new SProcess based class instance",
+                                "default": {},
+                                "defaultStr": "{}"
+                            }
+                        },
+                        "description": "This static method allows you to pass arguments like:\n- file path: Will require it, check what's returned from and instanciate an SProcess depending on that\n- command string: Will instanciate a new SCommandProcess instance and returns it for you to run it\n- function: Will execute the function and instanciate the proper Promise instance type depending on the returned value\n- Promise instance: Will simply wrap the Promise  instance inside an SProcess one and returns you this new SProcess instance\n- SProcess based class: This make not so much sens but at least you can rely on this method to instanciate event an SProcess based class\nOnce you get the proper instance back, you can use it the same as an SProcess based class instance and use the ```run``` method to\nexecute your process",
                         "async": "true",
                         "static": "true",
                         "since": "true",
@@ -381,6 +469,42 @@
                             ],
                             "raw": "Function"
                         },
+                        "param": {
+                            "initialParams": {
+                                "name": "initialParams",
+                                "type": {
+                                    "types": [
+                                        {
+                                            "type": "Partial",
+                                            "of": [
+                                                "ISCommandProcessParams"
+                                            ]
+                                        }
+                                    ],
+                                    "raw": "Partial<ISCommandProcessParams>"
+                                },
+                                "description": "Some initial params for your command process instance",
+                                "default": {},
+                                "defaultStr": "{}"
+                            },
+                            "settings": {
+                                "name": "settings",
+                                "type": {
+                                    "types": [
+                                        {
+                                            "type": "Partial",
+                                            "of": [
+                                                "ISCommandProcessSettings"
+                                            ]
+                                        }
+                                    ],
+                                    "raw": "Partial<ISCommandProcessSettings>"
+                                },
+                                "description": "Some settings to instanciate your command process as you want",
+                                "default": {},
+                                "defaultStr": "{}"
+                            }
+                        },
                         "description": "Initialize an SCommandProcess instance on which you can call the standard \"run\" method\nand execute a command by passing inside the params object the ```command``` prop.",
                         "async": "true",
                         "static": "true",
@@ -392,7 +516,7 @@
                         }
                     },
                     "run": {
-                        "id": "s4a868b6b0757ad6eb16bf19cdd1a46f9802fe5053e2a111378270772ca5c4a79",
+                        "id": "s2611216076d2636e5bee47b9a0627e7274cee2556ca88d289bcc0fd39ec994da",
                         "name": "run",
                         "type": {
                             "types": [
@@ -401,6 +525,45 @@
                                 }
                             ],
                             "raw": "Function"
+                        },
+                        "param": {
+                            "paramsOrStringArgs": {
+                                "name": "paramsOrStringArgs",
+                                "type": {
+                                    "types": [
+                                        {
+                                            "type": "String"
+                                        },
+                                        {
+                                            "type": "Record",
+                                            "of": [
+                                                "string, any"
+                                            ]
+                                        }
+                                    ],
+                                    "raw": "String|Record<string, any>"
+                                },
+                                "description": "Either a cli string arguments like \"--arg1 value1 --arg2 value2\" that will be transformed to an object using the \"params\" interface, or directly an object representing your parameters",
+                                "default": {},
+                                "defaultStr": "{}"
+                            },
+                            "settings": {
+                                "name": "settings",
+                                "type": {
+                                    "types": [
+                                        {
+                                            "type": "Partial",
+                                            "of": [
+                                                "ISProcessSettings"
+                                            ]
+                                        }
+                                    ],
+                                    "raw": "Partial<ISProcessSettings>"
+                                },
+                                "description": "Some process settings to override if needed",
+                                "default": {},
+                                "defaultStr": "{}"
+                            }
                         },
                         "description": "Run the process by calling the ```process``` method implemented on your\nSProcess class (if exists).\nTake care of starting timers for duration tracking, etc...",
                         "async": "true",
@@ -445,7 +608,7 @@
                         "since": "2.0.0"
                     },
                     "process": {
-                        "id": "s0086e00155c667cbac422b2d47794a31cf30fd8ba3b8c39e6d1f92add80994a6",
+                        "id": "sfafe9639517937d9f384150e779f71e5e541fdfc5734f2f5ca778ffbf820f9ee",
                         "name": "process",
                         "type": {
                             "types": [
@@ -455,7 +618,7 @@
                             ],
                             "raw": "Function"
                         },
-                        "description": "This is the method you have to implement in you SProcess class. It will be called\nwhen you call the ```run``` method with the params, etc...\nYou have to return an SPromise instance in order that the SProcess class is able to keep\ntrack of your process state, logs, etc...",
+                        "description": "This is the method you have to implement in you SProcess class. It will be called\nwhen you call the ```run``` method with the params, etc...\nYou have to return an Promise instance",
                         "since": "2.0.0",
                         "author": {
                             "name": "Olivier Bossel",
@@ -645,6 +808,21 @@
                             ],
                             "raw": "Function"
                         },
+                        "param": {
+                            "message": {
+                                "name": "message",
+                                "type": {
+                                    "types": [
+                                        {
+                                            "type": "String"
+                                        }
+                                    ],
+                                    "raw": "String"
+                                },
+                                "description": "The message you want to log",
+                                "defaultStr": ""
+                            }
+                        },
                         "description": "This method allows you to log a message that will be catched by the parent manager class",
                         "author": {
                             "name": "Olivier Bossel",
@@ -662,6 +840,21 @@
                                 }
                             ],
                             "raw": "Function"
+                        },
+                        "param": {
+                            "message": {
+                                "name": "message",
+                                "type": {
+                                    "types": [
+                                        {
+                                            "type": "String"
+                                        }
+                                    ],
+                                    "raw": "String"
+                                },
+                                "description": "The message you want to error",
+                                "defaultStr": ""
+                            }
                         },
                         "description": "This method allows you to error a message that will be catched by the parent manager class",
                         "author": {
@@ -682,6 +875,22 @@
                         }
                     ],
                     "raw": "Class"
+                },
+                "param": {
+                    "settings": {
+                        "name": "settings",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Object"
+                                }
+                            ],
+                            "raw": "Object"
+                        },
+                        "description": "An object of settings to configure your process instance:",
+                        "default": {},
+                        "defaultStr": "{}"
+                    }
                 },
                 "description": "This class represent a process handler class that will fire up some SProcess processes",
                 "namespace": "@coffeekraken.s-process.s-process",
@@ -725,6 +934,48 @@
                             ],
                             "raw": "Function"
                         },
+                        "param": {
+                            "id": {
+                                "name": "id",
+                                "type": {
+                                    "types": [
+                                        {
+                                            "type": "String"
+                                        }
+                                    ],
+                                    "raw": "String"
+                                },
+                                "description": "A uniquid for your process",
+                                "defaultStr": ""
+                            },
+                            "processInstance": {
+                                "name": "processInstance",
+                                "type": {
+                                    "types": [
+                                        {
+                                            "type": "SProcess"
+                                        }
+                                    ],
+                                    "raw": "SProcess"
+                                },
+                                "description": "The actual process instance",
+                                "defaultStr": ""
+                            },
+                            "settings": {
+                                "name": "settings",
+                                "type": {
+                                    "types": [
+                                        {
+                                            "type": "ISProcessManagerProcessWrapperSettings"
+                                        }
+                                    ],
+                                    "raw": "ISProcessManagerProcessWrapperSettings"
+                                },
+                                "description": "Some settings to configure your added process management like restart, etc...",
+                                "default": {},
+                                "defaultStr": "{}"
+                            }
+                        },
                         "description": "This method allows you to attach a process to the manager with\nhis proper settings like restart, etc...",
                         "since": "2.0.0",
                         "author": {
@@ -744,6 +995,21 @@
                             ],
                             "raw": "Function"
                         },
+                        "param": {
+                            "id": {
+                                "name": "id",
+                                "type": {
+                                    "types": [
+                                        {
+                                            "type": "String"
+                                        }
+                                    ],
+                                    "raw": "String"
+                                },
+                                "description": "The process id to detach",
+                                "defaultStr": ""
+                            }
+                        },
                         "description": "Simple method to detach a process from the manager using his id.",
                         "since": "2.0.0",
                         "author": {
@@ -762,6 +1028,58 @@
                                 }
                             ],
                             "raw": "Function"
+                        },
+                        "param": {
+                            "processId": {
+                                "name": "processId",
+                                "type": {
+                                    "types": [
+                                        {
+                                            "type": "String"
+                                        }
+                                    ],
+                                    "raw": "String"
+                                },
+                                "description": "The process id you want to run",
+                                "defaultStr": ""
+                            },
+                            "paramsOrStringArgs": {
+                                "name": "paramsOrStringArgs",
+                                "type": {
+                                    "types": [
+                                        {
+                                            "type": "String"
+                                        },
+                                        {
+                                            "type": "Record",
+                                            "of": [
+                                                "string, any"
+                                            ]
+                                        }
+                                    ],
+                                    "raw": "String|Record<string, any>"
+                                },
+                                "description": "Either a cli string arguments like \"--arg1 value1 --arg2 value2\" that will be transformed to an object using the \"params\" interface, or directly an object representing your parameters",
+                                "default": {},
+                                "defaultStr": "{}"
+                            },
+                            "settings": {
+                                "name": "settings",
+                                "type": {
+                                    "types": [
+                                        {
+                                            "type": "Partial",
+                                            "of": [
+                                                "ISProcessSettings"
+                                            ]
+                                        }
+                                    ],
+                                    "raw": "Partial<ISProcessSettings>"
+                                },
+                                "description": "Some process settings to override if needed",
+                                "default": {},
+                                "defaultStr": "{}"
+                            }
                         },
                         "description": "Proxy to the ```run``` method on the passed processInstance for the specified process id",
                         "async": "true",
@@ -784,6 +1102,22 @@
                         }
                     ],
                     "raw": "Class"
+                },
+                "param": {
+                    "settings": {
+                        "name": "settings",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Object"
+                                }
+                            ],
+                            "raw": "Object"
+                        },
+                        "description": "An object of settings to configure your process instance:",
+                        "default": {},
+                        "defaultStr": "{}"
+                    }
                 },
                 "description": "This class represent a process manager process wrapper that handle the actual restarting, watch, etc...",
                 "namespace": "@coffeekraken.s-process.s-process",
@@ -902,6 +1236,45 @@
                                 }
                             ],
                             "raw": "Function"
+                        },
+                        "param": {
+                            "paramsOrStringArgs": {
+                                "name": "paramsOrStringArgs",
+                                "type": {
+                                    "types": [
+                                        {
+                                            "type": "String"
+                                        },
+                                        {
+                                            "type": "Record",
+                                            "of": [
+                                                "string, any"
+                                            ]
+                                        }
+                                    ],
+                                    "raw": "String|Record<string, any>"
+                                },
+                                "description": "Either a cli string arguments like \"--arg1 value1 --arg2 value2\" that will be transformed to an object using the \"params\" interface, or directly an object representing your parameters",
+                                "default": {},
+                                "defaultStr": "{}"
+                            },
+                            "settings": {
+                                "name": "settings",
+                                "type": {
+                                    "types": [
+                                        {
+                                            "type": "Partial",
+                                            "of": [
+                                                "ISProcessSettings"
+                                            ]
+                                        }
+                                    ],
+                                    "raw": "Partial<ISProcessSettings>"
+                                },
+                                "description": "Some process settings to override if needed",
+                                "default": {},
+                                "defaultStr": "{}"
+                            }
                         },
                         "description": "Proxy to the ```run``` method on the passed processInstance",
                         "async": "true",

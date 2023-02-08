@@ -29,7 +29,7 @@ export default function (api) {
          * @since       2.0.0
          * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
-        excludePackages: ['@website/*', '@example/*'],
+        excludePackages: ['@website/*', '@example/*', '@tests/*'],
 
         read: {
             /**
@@ -126,7 +126,6 @@ export default function (api) {
              */
             globs: [
                 '*',
-                // 'dist/pkg/esm/**/*.js',
                 `src/!(css)/*{0,4}/*.+(${__commonTextFileExtensions({}).join(
                     '|',
                 )})`,
@@ -151,34 +150,34 @@ export default function (api) {
                 '**/__wip__/**/*',
             ],
 
-            filters: {
+            excludeByTags: {
                 /**
                  * @name        namespace
-                 * @namespace   config.docmap.build.filters
-                 * @type        Regex
-                 * @default      /^.*$/
+                 * @namespace   config.docmap.build.excludeByTags
+                 * @type        Regex[]
+                 * @default      [/\.config\.)/]
                  *
-                 * Specify some regex to apply on different docblock properties
-                 * to exclude some files from the builded docmap json
+                 * Specify some regex to apply on the namespace.
+                 * All namespaces that does not match one of the specified regex will be excluded
                  *
                  * @since       2.0.0
                  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
-                namespace: /^.*$/,
+                namespace: [/\.config\./],
 
                 /**
                  * @name        type
-                 * @namespace   config.docmap.build.filters
+                 * @namespace   config.docmap.build.excludeByTags
                  * @type        Regex
-                 * @default       /^(?!CssClass)[a-zA-Z]+$/
+                 * @default       /^CssClass$/
                  *
-                 * Specify some regex to apply on different docblock properties
-                 * to exclude some files from the builded docmap json
+                 * Specify some regex to apply on the type.
+                 * All types that does not match one of the specified regex will be excluded
                  *
                  * @since       2.0.0
                  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
-                type: /^(?!CssClass)[a-zA-Z]+$/,
+                type: [/^CssClass$/],
             },
 
             /**

@@ -45,7 +45,6 @@ export interface ISFiltrableInputComponentProps {
 export interface ISFiltrableInputState {
     displayedMaxItems: number;
     value: string;
-    isActive: boolean;
     isLoading: boolean;
 }
 
@@ -155,7 +154,6 @@ export default class SFiltrableInputComponent extends __SLitComponent {
         return {
             displayedMaxItems: 0,
             value: '',
-            isActive: false,
             isLoading: false,
             items: []
         };
@@ -271,7 +269,7 @@ export default class SFiltrableInputComponent extends __SLitComponent {
         this.$form = this.$input.form;
         // prevent from sending form if search is opened
         this.$form?.addEventListener('submit', (e) => {
-            if (this.state.isActive) {
+            if (!this.utils.isActive()) {
                 e.preventDefault();
             }
         });
@@ -286,10 +284,9 @@ export default class SFiltrableInputComponent extends __SLitComponent {
 
         // @ts-ignore
         this.$input.addEventListener('keyup', (e) => {
-            if (this.state.isActive) {
+            if (!this.utils.isActive()) {
                 return;
             }
-            this.state.isActive = true;
             // @ts-ignore
             const value = e.target.value;
             this.state.value = value;
@@ -297,13 +294,12 @@ export default class SFiltrableInputComponent extends __SLitComponent {
             this.filterItems();
         });
         this.$input.addEventListener('focus', (e) => {
-            if (this.state.isActive) {
+            if (!this.utils.isActive()) {
                 return;
             }
             // @ts-ignore
             const value = e.target.value;
             this.state.value = value;
-            this.state.isActive = true;
             this.filterItems();
             this._updateListSizeAndPosition();
         });
@@ -349,7 +345,7 @@ export default class SFiltrableInputComponent extends __SLitComponent {
 
         __hotkey('escape').on('press', (e) => {
             e.preventDefault();
-            if (!this.state.isActive) return;
+            if (!this.utils.isActive()) return;
             this.close();
         });
         __hotkey('up').on('press', async (e) => {
@@ -357,7 +353,7 @@ export default class SFiltrableInputComponent extends __SLitComponent {
 
             await __wait();
 
-            if (!this.state.isActive) return;
+            if (!this.utils.isActive()) return;
             if (!this.filteredItems.length) return;
 
             if (!this.preselectedItems.length) {
@@ -390,7 +386,7 @@ export default class SFiltrableInputComponent extends __SLitComponent {
 
             await __wait();
 
-            if (!this.state.isActive) return;
+            if (!this.utils.isActive()) return;
             if (!this.filteredItems.length) return;
 
             if (!this.preselectedItems.length) {
@@ -419,7 +415,7 @@ export default class SFiltrableInputComponent extends __SLitComponent {
         });
         __hotkey('return').on('press', (e) => {
             // protect agains actions when not focus
-            if (!this.state.isActive) return;
+            if (!this.utils.isActive()) return;
             this.validateAndClose();
         });
 
@@ -549,7 +545,6 @@ export default class SFiltrableInputComponent extends __SLitComponent {
     close() {
         __cursorToEnd(this.$input);
         this.$input.blur();
-        this.state.isActive = false;
     }
     async refreshItems() {
         if (typeof this.props.items === 'function') {
@@ -675,7 +670,7 @@ export default class SFiltrableInputComponent extends __SLitComponent {
     }
     _updateListSizeAndPosition() {
         //   if (!__isFocus(this.$input)) return;
-        if (!this.state.isActive || this.props.inline) return;
+        if (!this.utils.isActive() || this.props.inline) return;
 
         const marginTop = __getStyleProperty(this.$dropdown, 'marginTop'),
             marginLeft = __getStyleProperty(this.$dropdown, 'marginLeft'),

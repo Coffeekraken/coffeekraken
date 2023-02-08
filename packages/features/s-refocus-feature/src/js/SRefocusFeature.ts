@@ -107,6 +107,7 @@ export default class SRefocusFeature extends __SFeature {
                 default:
                     if (trigger.match(/^event:/)) {
                         const event = trigger.replace('event:', '').trim();
+                        console.log('e', event);
                         this.node.addEventListener(event, (e) => {
                             this._scrollTo(e.target);
                         });
@@ -127,6 +128,8 @@ export default class SRefocusFeature extends __SFeature {
         if (this.props.offsetY) scrollToSettings.offsetY = this.props.offsetY;
         if (this.props.align) scrollToSettings.align = this.props.align;
         if (this.props.justify) scrollToSettings.justify = this.props.justify;
+
+        console.log('Stroll', scrollToSettings, $elm);
 
         __scrollTo($elm, scrollToSettings);
     }

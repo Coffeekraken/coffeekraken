@@ -67,7 +67,7 @@ export default function (api) {
          * @since         2.0.0
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
-        15: '0.7',
+        15: 0.7,
 
         /**
          * @name          20

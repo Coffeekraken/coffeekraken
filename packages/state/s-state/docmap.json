@@ -3,6 +3,7 @@
     "extends": [],
     "generated": {
         "extends": [
+            "@coffeekraken/aa",
             "@coffeekraken/cli",
             "@coffeekraken/s-activate-feature",
             "@coffeekraken/s-appear-feature",
@@ -43,9 +44,11 @@
             "@coffeekraken/s-filtrable-input-component",
             "@coffeekraken/s-floating-feature",
             "@coffeekraken/s-form-validate-feature",
+            "@coffeekraken/s-front",
             "@coffeekraken/s-frontend-checker",
             "@coffeekraken/s-frontend-server",
             "@coffeekraken/s-frontspec",
+            "@coffeekraken/s-glitch-feature",
             "@coffeekraken/s-glob",
             "@coffeekraken/s-google-map-component",
             "@coffeekraken/s-handlebars",
@@ -54,6 +57,7 @@
             "@coffeekraken/s-inline-feature",
             "@coffeekraken/s-interface",
             "@coffeekraken/s-kitchen",
+            "@coffeekraken/s-lazy-feature",
             "@coffeekraken/s-lit-component",
             "@coffeekraken/s-log",
             "@coffeekraken/s-markdown-builder",
@@ -83,7 +87,6 @@
             "@coffeekraken/s-sugar-element",
             "@coffeekraken/s-sugar-feature",
             "@coffeekraken/s-sugar-json",
-            "@coffeekraken/s-lazy-feature",
             "@coffeekraken/s-theme-switcher-component",
             "@coffeekraken/s-theme",
             "@coffeekraken/s-timer",
@@ -111,6 +114,22 @@
                         }
                     ],
                     "raw": "Class"
+                },
+                "param": {
+                    "settings": {
+                        "name": "settings",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "ISStateSettings"
+                                }
+                            ],
+                            "raw": "ISStateSettings"
+                        },
+                        "description": "Some settings to configure your state instance",
+                        "default": {},
+                        "defaultStr": "{}"
+                    }
                 },
                 "platform": [
                     {
@@ -169,6 +188,22 @@
                     ],
                     "raw": "Class"
                 },
+                "param": {
+                    "settings": {
+                        "name": "settings",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "ISStateManagerSettings"
+                                }
+                            ],
+                            "raw": "ISStateManagerSettings"
+                        },
+                        "description": "Some settings to configure your state instance",
+                        "default": {},
+                        "defaultStr": "{}"
+                    }
+                },
                 "platform": [
                     {
                         "name": "node",
@@ -223,6 +258,48 @@
                                 }
                             ],
                             "raw": "Function"
+                        },
+                        "param": {
+                            "id": {
+                                "name": "id",
+                                "type": {
+                                    "types": [
+                                        {
+                                            "type": "String"
+                                        }
+                                    ],
+                                    "raw": "String"
+                                },
+                                "description": "The state id you want to create",
+                                "defaultStr": ""
+                            },
+                            "state": {
+                                "name": "state",
+                                "type": {
+                                    "types": [
+                                        {
+                                            "type": "Object"
+                                        }
+                                    ],
+                                    "raw": "Object"
+                                },
+                                "description": "The state object used to create the SState instance",
+                                "defaultStr": ""
+                            },
+                            "setting": {
+                                "name": "setting",
+                                "type": {
+                                    "types": [
+                                        {
+                                            "type": "ISStateSettings"
+                                        }
+                                    ],
+                                    "raw": "ISStateSettings"
+                                },
+                                "description": "Some settings to configure your SState instance",
+                                "default": {},
+                                "defaultStr": "{}"
+                            }
                         },
                         "description": "This method allows you to define a new state inside the state manager.\nIt's like creating a new SState instance but quicker",
                         "since": "2.0.0",

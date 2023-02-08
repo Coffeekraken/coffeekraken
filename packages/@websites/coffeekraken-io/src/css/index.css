@@ -12,12 +12,6 @@ body {
   background-color: sugar.color(main, background);
 
   @sugar.theme.when (dark) {
-    background-image: radial-gradient(
-      ellipse at top left,
-      sugar.color(main, --darken 25),
-      sugar.color(main, --darken 35)
-    );
-    background-attachment: fixed;
   }
 
   @sugar.media mobile {
@@ -26,28 +20,19 @@ body {
 }
 
 body {
-  @sugar.media dwarf {
-    @sugar.scale.global (0.9);
-  }
 }
 
-.s-container:not(#header .s-container) {
+.s-container:not(#header .s-container, .s-panel .s-container) {
   margin: 0 0 0 50%;
   translate: -50% 0;
-  @sugar.transition();
+  @sugar.transition;
 }
 
 body:not(#homepage) {
-  .s-container {
+  .s-container:not(._nav .s-container, .s-panel .s-container) {
     margin: 0 0 0 sugar.margin(80) !important;
     max-width: 1500px;
     translate: 0 0 !important;
-  }
-}
-
-@sugar.lod.prevent {
-  .bluring {
-    filter: blur(111px);
   }
 }
 

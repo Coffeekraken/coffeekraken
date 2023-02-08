@@ -3,6 +3,7 @@
     "extends": [],
     "generated": {
         "extends": [
+            "@coffeekraken/aa",
             "@coffeekraken/cli",
             "@coffeekraken/s-activate-feature",
             "@coffeekraken/s-appear-feature",
@@ -43,12 +44,14 @@
             "@coffeekraken/s-filtrable-input-component",
             "@coffeekraken/s-floating-feature",
             "@coffeekraken/s-form-validate-feature",
+            "@coffeekraken/s-front",
             "@coffeekraken/s-frontend-checker",
             "@coffeekraken/s-frontend-server",
             "@coffeekraken/s-frontspec",
             "@coffeekraken/s-glob",
             "@coffeekraken/s-google-map-component",
             "@coffeekraken/s-handlebars",
+            "@coffeekraken/s-highlight-feature",
             "@coffeekraken/s-images-builder",
             "@coffeekraken/s-inline-feature",
             "@coffeekraken/s-interface",
@@ -83,7 +86,6 @@
             "@coffeekraken/s-sugar-element",
             "@coffeekraken/s-sugar-feature",
             "@coffeekraken/s-sugar-json",
-            "@coffeekraken/s-lazy-feature",
             "@coffeekraken/s-theme-switcher-component",
             "@coffeekraken/s-theme",
             "@coffeekraken/s-timer",
@@ -101,10 +103,10 @@
             "@coffeekraken/sugar"
         ],
         "map": {
-            "@coffeekraken.s-highlight-feature.js.SHighlightFeature": {
-                "id": "@coffeekraken.s-highlight-feature.js.SHighlightFeature",
-                "name": "SHighlightFeature",
-                "as": "Highlight",
+            "@coffeekraken.s-glitch-feature.js.SGlitchFeature": {
+                "id": "@coffeekraken.s-glitch-feature.js.SGlitchFeature",
+                "name": "SGlitchFeature",
+                "as": "Glitch",
                 "type": {
                     "types": [
                         {
@@ -118,7 +120,7 @@
                         "Styleguide",
                         "Effects"
                     ],
-                    "slug": "/styleguide/effect/s-highlight-feature"
+                    "slug": "/styleguide/effect/s-glitch-feature"
                 },
                 "platform": [
                     {
@@ -126,21 +128,21 @@
                         "description": ""
                     }
                 ],
-                "description": "This feature allows you to apply some nice highlights effects on any HTMLElement.",
-                "namespace": "@coffeekraken.s-highlight-feature.js",
+                "description": "This feature allows you to apply some nice glitch effects on any HTMLElement.",
+                "namespace": "@coffeekraken.s-glitch-feature.js",
                 "status": "beta",
                 "example": [
                     {
                         "language": "html",
                         "title": "Highlight",
-                        "code": "<section class=\"s-ratio:16-9 s-radius s-bkg:accent s-mbe:30\" s-highlight>\n</section>\n<section class=\"s-ratio:16-9 s-radius s-bkg:complementary s-mbe:30\" s-highlight>\n</section>\n<section class=\"s-ratio:16-9 s-radius s-bkg:error\" s-highlight>\n</section>"
+                        "code": "<div class=\"s-radius s-bg:main s-depth s-mbe:30\" style=\"height:100px\" s-highlight>\n</div>\n<div class=\"s-radius s-bg:accent s-depth s-mbe:30\" style=\"height:100px\" s-highlight opacity=\"1\">\n</div>\n<div class=\"s-radius s-bg:complementary s-depth s-mbe:30\" style=\"height:100px\" s-highlight opacity=\"1\">\n</div>\n<div class=\"s-radius s-bg:error s-depth\" style=\"height:100px\" s-highlight opacity=\"1\">\n</div>"
                     }
                 ],
                 "interface": {
-                    "name": "SHighlightFeatureInterface",
+                    "name": "SGlitchFeatureInterface",
                     "description": "",
                     "definition": {
-                        "size": {
+                        "fps": {
                             "type": {
                                 "types": [
                                     {
@@ -149,9 +151,10 @@
                                 ],
                                 "raw": "Number"
                             },
-                            "description": "Specify the size of the highlight in px"
+                            "description": "Specify the frames per second of the render",
+                            "default": 30
                         },
-                        "opacity": {
+                        "minTimeout": {
                             "type": {
                                 "types": [
                                     {
@@ -160,7 +163,44 @@
                                 ],
                                 "raw": "Number"
                             },
-                            "description": "Specify the opacity of the highlight beetween 0 and 1"
+                            "description": "Specify the min timeout between the glitches phase in ms",
+                            "default": 0
+                        },
+                        "maxTimeout": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Number"
+                                    }
+                                ],
+                                "raw": "Number"
+                            },
+                            "description": "Specify the max timeout between the glitches phase in ms",
+                            "default": 5000
+                        },
+                        "minDuration": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Number"
+                                    }
+                                ],
+                                "raw": "Number"
+                            },
+                            "description": "Specify the min glitch duration in ms",
+                            "default": 100
+                        },
+                        "maxDuration": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Number"
+                                    }
+                                ],
+                                "raw": "Number"
+                            },
+                            "description": "Specify the max glitch duration in ms",
+                            "default": 2000
                         }
                     }
                 },
@@ -170,14 +210,14 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "SHighlightFeature.ts",
+                "filename": "SGlitchFeature.ts",
                 "extension": "ts",
-                "relPath": "src/js/SHighlightFeature.ts",
+                "relPath": "src/js/SGlitchFeature.ts",
                 "children": {}
             },
-            "@coffeekraken.s-highlight-feature.js.interface.SHighlightFeatureInterface": {
-                "id": "@coffeekraken.s-highlight-feature.js.interface.SHighlightFeatureInterface",
-                "name": "SHighlightFeatureInterface",
+            "@coffeekraken.s-glitch-feature.js.interface.SGlitchFeatureInterface": {
+                "id": "@coffeekraken.s-glitch-feature.js.interface.SGlitchFeatureInterface",
+                "name": "SGlitchFeatureInterface",
                 "type": {
                     "types": [
                         {
@@ -192,14 +232,14 @@
                         "description": ""
                     }
                 ],
-                "description": "This interface represent the attributes of the SHighlight feature",
-                "namespace": "@coffeekraken.s-highlight-feature.js.interface",
+                "description": "This interface represent the attributes of the SGlitch feature",
+                "namespace": "@coffeekraken.s-glitch-feature.js.interface",
                 "status": "beta",
                 "interface": {
-                    "name": "SHighlightFeatureInterface",
+                    "name": "SGlitchFeatureInterface",
                     "description": "",
                     "definition": {
-                        "size": {
+                        "fps": {
                             "type": {
                                 "types": [
                                     {
@@ -208,9 +248,10 @@
                                 ],
                                 "raw": "Number"
                             },
-                            "description": "Specify the size of the highlight in px"
+                            "description": "Specify the frames per second of the render",
+                            "default": 30
                         },
-                        "opacity": {
+                        "minTimeout": {
                             "type": {
                                 "types": [
                                     {
@@ -219,7 +260,44 @@
                                 ],
                                 "raw": "Number"
                             },
-                            "description": "Specify the opacity of the highlight beetween 0 and 1"
+                            "description": "Specify the min timeout between the glitches phase in ms",
+                            "default": 0
+                        },
+                        "maxTimeout": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Number"
+                                    }
+                                ],
+                                "raw": "Number"
+                            },
+                            "description": "Specify the max timeout between the glitches phase in ms",
+                            "default": 5000
+                        },
+                        "minDuration": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Number"
+                                    }
+                                ],
+                                "raw": "Number"
+                            },
+                            "description": "Specify the min glitch duration in ms",
+                            "default": 100
+                        },
+                        "maxDuration": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Number"
+                                    }
+                                ],
+                                "raw": "Number"
+                            },
+                            "description": "Specify the max glitch duration in ms",
+                            "default": 2000
                         }
                     }
                 },
@@ -229,9 +307,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "SHighlightFeatureInterface.ts",
+                "filename": "SGlitchFeatureInterface.ts",
                 "extension": "ts",
-                "relPath": "src/js/interface/SHighlightFeatureInterface.ts",
+                "relPath": "src/js/interface/SGlitchFeatureInterface.ts",
                 "children": {}
             }
         }

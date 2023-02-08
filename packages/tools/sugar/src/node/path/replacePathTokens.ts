@@ -1,9 +1,7 @@
-import __distRootDir from './distRootDir';
 import __packageCacheDir from './packageCacheDir';
 import __packageLocalDir from './packageLocalDir';
 import __packageRootDir from './packageRootDir';
 import __packageTmpDir from './packageTmpDir';
-import __srcRootDir from './srcRootDir';
 
 import __srcCssDir from './srcCssDir';
 import __srcDocDir from './srcDocDir';
@@ -12,6 +10,7 @@ import __srcIconsDir from './srcIconsDir';
 import __srcImgDir from './srcImgDir';
 import __srcJsDir from './srcJsDir';
 import __srcNodeDir from './srcNodeDir';
+import __srcRootDir from './srcRootDir';
 import __srcViewsDir from './srcViewsDir';
 
 import __distCssDir from './distCssDir';
@@ -21,6 +20,7 @@ import __distIconsDir from './distIconsDir';
 import __distImgDir from './distImgDir';
 import __distJsDir from './distJsDir';
 import __distNodeDir from './distNodeDir';
+import __distRootDir from './distRootDir';
 import __distViewsDir from './distViewsDir';
 
 /**

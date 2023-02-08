@@ -3,6 +3,7 @@
     "extends": [],
     "generated": {
         "extends": [
+            "@coffeekraken/aa",
             "@coffeekraken/cli",
             "@coffeekraken/s-activate-feature",
             "@coffeekraken/s-appear-feature",
@@ -11,6 +12,7 @@
             "@coffeekraken/s-builder",
             "@coffeekraken/s-carpenter",
             "@coffeekraken/s-class",
+            "@coffeekraken/s-classmap",
             "@coffeekraken/s-clipboard-copy-component",
             "@coffeekraken/s-code-example-component",
             "@coffeekraken/s-code-formatter-prettier",
@@ -43,9 +45,11 @@
             "@coffeekraken/s-filtrable-input-component",
             "@coffeekraken/s-floating-feature",
             "@coffeekraken/s-form-validate-feature",
+            "@coffeekraken/s-front",
             "@coffeekraken/s-frontend-checker",
             "@coffeekraken/s-frontend-server",
             "@coffeekraken/s-frontspec",
+            "@coffeekraken/s-glitch-feature",
             "@coffeekraken/s-glob",
             "@coffeekraken/s-google-map-component",
             "@coffeekraken/s-handlebars",
@@ -54,6 +58,7 @@
             "@coffeekraken/s-inline-feature",
             "@coffeekraken/s-interface",
             "@coffeekraken/s-kitchen",
+            "@coffeekraken/s-lazy-feature",
             "@coffeekraken/s-lit-component",
             "@coffeekraken/s-log",
             "@coffeekraken/s-markdown-builder",
@@ -83,7 +88,6 @@
             "@coffeekraken/s-sugar-element",
             "@coffeekraken/s-sugar-feature",
             "@coffeekraken/s-sugar-json",
-            "@coffeekraken/s-lazy-feature",
             "@coffeekraken/s-theme-switcher-component",
             "@coffeekraken/s-theme",
             "@coffeekraken/s-timer",
@@ -148,6 +152,21 @@
                             ],
                             "raw": "Function"
                         },
+                        "param": {
+                            "int": {
+                                "name": "int",
+                                "type": {
+                                    "types": [
+                                        {
+                                            "type": "SInterface"
+                                        }
+                                    ],
+                                    "raw": "SInterface"
+                                },
+                                "description": "The SInterface class you want to use for your spec object",
+                                "defaultStr": ""
+                            }
+                        },
                         "description": "This method allows you to convert an SInterface class into a spec object",
                         "status": "beta",
                         "static": "true",
@@ -168,6 +187,21 @@
                                 }
                             ],
                             "raw": "Function"
+                        },
+                        "param": {
+                            "int": {
+                                "name": "int",
+                                "type": {
+                                    "types": [
+                                        {
+                                            "type": "SInterface"
+                                        }
+                                    ],
+                                    "raw": "SInterface"
+                                },
+                                "description": "The SInterface class you want to use for your spec object",
+                                "defaultStr": ""
+                            }
                         },
                         "description": "This method allows you to apply an object of value directly on a specs object.\nIt will apply each values to the \"value\" property of each props",
                         "status": "beta",
@@ -199,7 +233,7 @@
                         }
                     },
                     "read": {
-                        "id": "sae80c03594f6902a3375079168bdbcdcf1bdd291d0e0f499fb056b94582aa893",
+                        "id": "s2ce1fc3d6b1e762ff1b06d492a5fb8e5320509792354ccff7c0b25c15b8dcf80",
                         "name": "read",
                         "type": {
                             "types": [
@@ -208,6 +242,21 @@
                                 }
                             ],
                             "raw": "Function"
+                        },
+                        "param": {
+                            "specDotPath": {
+                                "name": "specDotPath",
+                                "type": {
+                                    "types": [
+                                        {
+                                            "type": "String"
+                                        }
+                                    ],
+                                    "raw": "String"
+                                },
+                                "description": "A dotpath that point to a json spec file relative to one of the registered \"$settings.namespaces\" folders. You can then specify an internal dotpath to get a specific value inside the passed file like so \"sugar.views.props.attributes:title. Can also be an absolute path.\"",
+                                "defaultStr": ""
+                            }
                         },
                         "description": "This method allows you to read a spec file and/or a value inside the passed spec file.",
                         "status": "beta",
@@ -228,6 +277,21 @@
                                 }
                             ],
                             "raw": "Function"
+                        },
+                        "param": {
+                            "$namespaces": {
+                                "name": "$namespaces",
+                                "type": {
+                                    "types": [
+                                        {
+                                            "type": "String"
+                                        }
+                                    ],
+                                    "raw": "String"
+                                },
+                                "description": "An array of namespaces to list the specs from. If not set, list all the specs from all the namespaces",
+                                "defaultStr": ""
+                            }
                         },
                         "platform": [
                             {
@@ -254,6 +318,21 @@
                                 }
                             ],
                             "raw": "Function"
+                        },
+                        "param": {
+                            "specJson": {
+                                "name": "specJson",
+                                "type": {
+                                    "types": [
+                                        {
+                                            "type": "Any"
+                                        }
+                                    ],
+                                    "raw": "Any"
+                                },
+                                "description": "The specJson to resolve",
+                                "defaultStr": ""
+                            }
                         },
                         "description": "This method allows you to pass a specJson object and resolve all the \"@...\" values in it",
                         "status": "beta",

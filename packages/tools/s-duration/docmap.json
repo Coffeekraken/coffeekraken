@@ -3,6 +3,7 @@
     "extends": [],
     "generated": {
         "extends": [
+            "@coffeekraken/aa",
             "@coffeekraken/cli",
             "@coffeekraken/s-activate-feature",
             "@coffeekraken/s-appear-feature",
@@ -11,6 +12,7 @@
             "@coffeekraken/s-builder",
             "@coffeekraken/s-carpenter",
             "@coffeekraken/s-class",
+            "@coffeekraken/s-classmap",
             "@coffeekraken/s-clipboard-copy-component",
             "@coffeekraken/s-code-example-component",
             "@coffeekraken/s-code-formatter-prettier",
@@ -42,9 +44,11 @@
             "@coffeekraken/s-filtrable-input-component",
             "@coffeekraken/s-floating-feature",
             "@coffeekraken/s-form-validate-feature",
+            "@coffeekraken/s-front",
             "@coffeekraken/s-frontend-checker",
             "@coffeekraken/s-frontend-server",
             "@coffeekraken/s-frontspec",
+            "@coffeekraken/s-glitch-feature",
             "@coffeekraken/s-glob",
             "@coffeekraken/s-google-map-component",
             "@coffeekraken/s-handlebars",
@@ -53,6 +57,7 @@
             "@coffeekraken/s-inline-feature",
             "@coffeekraken/s-interface",
             "@coffeekraken/s-kitchen",
+            "@coffeekraken/s-lazy-feature",
             "@coffeekraken/s-lit-component",
             "@coffeekraken/s-log",
             "@coffeekraken/s-markdown-builder",
@@ -83,7 +88,6 @@
             "@coffeekraken/s-sugar-element",
             "@coffeekraken/s-sugar-feature",
             "@coffeekraken/s-sugar-json",
-            "@coffeekraken/s-lazy-feature",
             "@coffeekraken/s-theme-switcher-component",
             "@coffeekraken/s-theme",
             "@coffeekraken/s-timer",
@@ -147,6 +151,52 @@
                         }
                     ],
                     "raw": "Class"
+                },
+                "param": {
+                    "settings": {
+                        "name": "settings",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Object"
+                                }
+                            ],
+                            "raw": "Object"
+                        },
+                        "description": "An object of settings to use",
+                        "default": {},
+                        "defaultStr": "{}"
+                    }
+                },
+                "setting": {
+                    "format": {
+                        "name": "format",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "String"
+                                }
+                            ],
+                            "raw": "String"
+                        },
+                        "description": "Specify the format you want for your instance. Can be 'ms|millisecond(s)', 's|second(s)', 'm|minute(s)', 'h|hour(s)', 'd|day', 'w|week(s)', 'month(s)', 'y|year(s)'",
+                        "default": "s",
+                        "defaultStr": "'s'"
+                    },
+                    "suffix": {
+                        "name": "suffix",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Boolean"
+                                }
+                            ],
+                            "raw": "Boolean"
+                        },
+                        "description": "Specify if you want the duration returned with the corresponding suffix like 'ms', 's', etc...",
+                        "default": true,
+                        "defaultStr": "true"
+                    }
                 },
                 "description": "This class represent a duration tracking process. Simply instanciate it,\nthen call the ```instance.get()``` method and you will get back\nthe duration between the instanciation and the ```get``` method call",
                 "namespace": "@coffeekraken.s-duration.shared",
@@ -213,6 +263,22 @@
                             ],
                             "raw": "Function"
                         },
+                        "param": {
+                            "startTime": {
+                                "name": "startTime",
+                                "type": {
+                                    "types": [
+                                        {
+                                            "type": "Number"
+                                        }
+                                    ],
+                                    "raw": "Number"
+                                },
+                                "description": "Specify the timestamp you want",
+                                "default": null,
+                                "defaultStr": "null"
+                            }
+                        },
                         "description": "Start the duration process either with the current timestamp, or with a passed timestamp you prefer",
                         "since": "2.0.0",
                         "author": {
@@ -230,6 +296,22 @@
                                 }
                             ],
                             "raw": "Function"
+                        },
+                        "param": {
+                            "settings": {
+                                "name": "settings",
+                                "type": {
+                                    "types": [
+                                        {
+                                            "type": "Object"
+                                        }
+                                    ],
+                                    "raw": "Object"
+                                },
+                                "description": "An object of settings to use",
+                                "default": {},
+                                "defaultStr": "{}"
+                            }
                         },
                         "description": "Stop the duration counter and return the result in the passed format or in the format setted in the settings",
                         "since": "2.0.0",

@@ -3,6 +3,7 @@
     "extends": [],
     "generated": {
         "extends": [
+            "@coffeekraken/aa",
             "@coffeekraken/cli",
             "@coffeekraken/s-activate-feature",
             "@coffeekraken/s-appear-feature",
@@ -43,9 +44,11 @@
             "@coffeekraken/s-filtrable-input-component",
             "@coffeekraken/s-floating-feature",
             "@coffeekraken/s-form-validate-feature",
+            "@coffeekraken/s-front",
             "@coffeekraken/s-frontend-checker",
             "@coffeekraken/s-frontend-server",
             "@coffeekraken/s-frontspec",
+            "@coffeekraken/s-glitch-feature",
             "@coffeekraken/s-glob",
             "@coffeekraken/s-google-map-component",
             "@coffeekraken/s-handlebars",
@@ -83,7 +86,6 @@
             "@coffeekraken/s-sugar-config",
             "@coffeekraken/s-sugar-feature",
             "@coffeekraken/s-sugar-json",
-            "@coffeekraken/s-lazy-feature",
             "@coffeekraken/s-theme-switcher-component",
             "@coffeekraken/s-theme",
             "@coffeekraken/s-timer",
@@ -228,6 +230,50 @@
                             ],
                             "raw": "Function"
                         },
+                        "param": {
+                            "x": {
+                                "name": "x",
+                                "type": {
+                                    "types": [
+                                        {
+                                            "type": "Number"
+                                        }
+                                    ],
+                                    "raw": "Number"
+                                },
+                                "description": "The x translation in px",
+                                "default": null,
+                                "defaultStr": "null"
+                            },
+                            "y": {
+                                "name": "y",
+                                "type": {
+                                    "types": [
+                                        {
+                                            "type": "Number"
+                                        }
+                                    ],
+                                    "raw": "Number"
+                                },
+                                "description": "The y translation in px",
+                                "default": null,
+                                "defaultStr": "null"
+                            },
+                            "z": {
+                                "name": "z",
+                                "type": {
+                                    "types": [
+                                        {
+                                            "type": "Number"
+                                        }
+                                    ],
+                                    "raw": "Number"
+                                },
+                                "description": "The z translation in px",
+                                "default": null,
+                                "defaultStr": "null"
+                            }
+                        },
                         "description": "Allows you to get back a new matrix by adding the properties passed\nto the current element matrix. This mean that if the element is currently\nin translateX 50 and you pass to the translateX argument 10, it will be 60 at the end.\nTo override the",
                         "since": "2.0.0",
                         "author": {
@@ -247,6 +293,24 @@
                             ],
                             "raw": "Function"
                         },
+                        "param": {
+                            "matrix": {
+                                "name": "matrix",
+                                "type": {
+                                    "types": [
+                                        {
+                                            "type": "array",
+                                            "of": [
+                                                "Array"
+                                            ]
+                                        }
+                                    ],
+                                    "raw": "Array[]"
+                                },
+                                "description": "The matrix to apply",
+                                "defaultStr": ""
+                            }
+                        },
                         "description": "Apply a matrix to the current element",
                         "since": "2.0.0",
                         "author": {
@@ -265,6 +329,24 @@
                                 }
                             ],
                             "raw": "Function"
+                        },
+                        "param": {
+                            "matrix": {
+                                "name": "matrix",
+                                "type": {
+                                    "types": [
+                                        {
+                                            "type": "array",
+                                            "of": [
+                                                "Array"
+                                            ]
+                                        }
+                                    ],
+                                    "raw": "Array[]"
+                                },
+                                "description": "The matrix to apply",
+                                "defaultStr": ""
+                            }
                         },
                         "description": "Apply a matrix to the current element",
                         "since": "2.0.0",
@@ -323,6 +405,50 @@
                             ],
                             "raw": "Function"
                         },
+                        "param": {
+                            "x": {
+                                "name": "x",
+                                "type": {
+                                    "types": [
+                                        {
+                                            "type": "Number"
+                                        }
+                                    ],
+                                    "raw": "Number"
+                                },
+                                "description": "The x translation in px",
+                                "default": null,
+                                "defaultStr": "null"
+                            },
+                            "y": {
+                                "name": "y",
+                                "type": {
+                                    "types": [
+                                        {
+                                            "type": "Number"
+                                        }
+                                    ],
+                                    "raw": "Number"
+                                },
+                                "description": "The y translation in px",
+                                "default": null,
+                                "defaultStr": "null"
+                            },
+                            "z": {
+                                "name": "z",
+                                "type": {
+                                    "types": [
+                                        {
+                                            "type": "Number"
+                                        }
+                                    ],
+                                    "raw": "Number"
+                                },
+                                "description": "The z translation in px",
+                                "default": null,
+                                "defaultStr": "null"
+                            }
+                        },
                         "description": "Allows you to set the translate of an HTMLElement by setting his translates properties.\nThis will override the previous matrix translates. If you want to \"add\" a translation, use the `translate` method instead;",
                         "since": "2.0.0",
                         "author": {
@@ -341,6 +467,50 @@
                                 }
                             ],
                             "raw": "Function"
+                        },
+                        "param": {
+                            "x": {
+                                "name": "x",
+                                "type": {
+                                    "types": [
+                                        {
+                                            "type": "Number"
+                                        }
+                                    ],
+                                    "raw": "Number"
+                                },
+                                "description": "The x translation in px",
+                                "default": null,
+                                "defaultStr": "null"
+                            },
+                            "y": {
+                                "name": "y",
+                                "type": {
+                                    "types": [
+                                        {
+                                            "type": "Number"
+                                        }
+                                    ],
+                                    "raw": "Number"
+                                },
+                                "description": "The y translation in px",
+                                "default": null,
+                                "defaultStr": "null"
+                            },
+                            "z": {
+                                "name": "z",
+                                "type": {
+                                    "types": [
+                                        {
+                                            "type": "Number"
+                                        }
+                                    ],
+                                    "raw": "Number"
+                                },
+                                "description": "The z translation in px",
+                                "default": null,
+                                "defaultStr": "null"
+                            }
                         },
                         "description": "Allows you to translate an HTMLElement by setting his translate properties",
                         "since": "2.0.0",
@@ -361,6 +531,50 @@
                             ],
                             "raw": "Function"
                         },
+                        "param": {
+                            "x": {
+                                "name": "x",
+                                "type": {
+                                    "types": [
+                                        {
+                                            "type": "Number"
+                                        }
+                                    ],
+                                    "raw": "Number"
+                                },
+                                "description": "The x rotation in px",
+                                "default": null,
+                                "defaultStr": "null"
+                            },
+                            "y": {
+                                "name": "y",
+                                "type": {
+                                    "types": [
+                                        {
+                                            "type": "Number"
+                                        }
+                                    ],
+                                    "raw": "Number"
+                                },
+                                "description": "The y rotation in px",
+                                "default": null,
+                                "defaultStr": "null"
+                            },
+                            "z": {
+                                "name": "z",
+                                "type": {
+                                    "types": [
+                                        {
+                                            "type": "Number"
+                                        }
+                                    ],
+                                    "raw": "Number"
+                                },
+                                "description": "The z rotation in px",
+                                "default": null,
+                                "defaultStr": "null"
+                            }
+                        },
                         "description": "Allows you to rotate an HTMLElement by setting his transformation properties",
                         "since": "2.0.0",
                         "author": {
@@ -379,6 +593,50 @@
                                 }
                             ],
                             "raw": "Function"
+                        },
+                        "param": {
+                            "x": {
+                                "name": "x",
+                                "type": {
+                                    "types": [
+                                        {
+                                            "type": "Number"
+                                        }
+                                    ],
+                                    "raw": "Number"
+                                },
+                                "description": "The x rotation in px",
+                                "default": null,
+                                "defaultStr": "null"
+                            },
+                            "y": {
+                                "name": "y",
+                                "type": {
+                                    "types": [
+                                        {
+                                            "type": "Number"
+                                        }
+                                    ],
+                                    "raw": "Number"
+                                },
+                                "description": "The y rotation in px",
+                                "default": null,
+                                "defaultStr": "null"
+                            },
+                            "z": {
+                                "name": "z",
+                                "type": {
+                                    "types": [
+                                        {
+                                            "type": "Number"
+                                        }
+                                    ],
+                                    "raw": "Number"
+                                },
+                                "description": "The z rotation in px",
+                                "default": null,
+                                "defaultStr": "null"
+                            }
                         },
                         "description": "Allows you to set the rotates of any HTMLElement by setting his transformation properties",
                         "since": "2.0.0",

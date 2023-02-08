@@ -3,6 +3,7 @@
     "extends": [],
     "generated": {
         "extends": [
+            "@coffeekraken/aa",
             "@coffeekraken/cli",
             "@coffeekraken/s-activate-feature",
             "@coffeekraken/s-appear-feature",
@@ -43,9 +44,11 @@
             "@coffeekraken/s-filtrable-input-component",
             "@coffeekraken/s-floating-feature",
             "@coffeekraken/s-form-validate-feature",
+            "@coffeekraken/s-front",
             "@coffeekraken/s-frontend-checker",
             "@coffeekraken/s-frontend-server",
             "@coffeekraken/s-frontspec",
+            "@coffeekraken/s-glitch-feature",
             "@coffeekraken/s-glob",
             "@coffeekraken/s-google-map-component",
             "@coffeekraken/s-handlebars",
@@ -83,7 +86,6 @@
             "@coffeekraken/s-sugar-element",
             "@coffeekraken/s-sugar-feature",
             "@coffeekraken/s-sugar-json",
-            "@coffeekraken/s-lazy-feature",
             "@coffeekraken/s-theme-switcher-component",
             "@coffeekraken/s-theme",
             "@coffeekraken/s-timer",
@@ -101,109 +103,6 @@
             "@coffeekraken/sugar"
         ],
         "map": {
-            "@coffeekraken.s-monorepo.config.monorepo.rootDir": {
-                "id": "@coffeekraken.s-monorepo.config.monorepo.rootDir",
-                "name": "rootDir",
-                "type": {
-                    "types": [
-                        {
-                            "type": "String"
-                        }
-                    ],
-                    "raw": "String"
-                },
-                "default": "null",
-                "description": "Specify the root of the monorepo. If not set, it will be computed from the current working directory",
-                "namespace": "@coffeekraken.s-monorepo.config.monorepo",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "monorepo.config.ts",
-                "extension": "config",
-                "relPath": "src/config/monorepo.config.ts"
-            },
-            "@coffeekraken.s-monorepo.config.monorepo.packagesGlob": {
-                "id": "@coffeekraken.s-monorepo.config.monorepo.packagesGlob",
-                "name": "packagesGlob",
-                "type": {
-                    "types": [
-                        {
-                            "type": "string"
-                        }
-                    ],
-                    "raw": "string"
-                },
-                "default": "packages/* /*",
-                "description": "Specify some globs to search for packages relative to the monorepo root directory.\n!!! target folders and not a package.json file, etc...\nThe \"packages/@...\" folders are excluded cause they have as goal to store the none-distributed\n\"projects\".",
-                "namespace": "@coffeekraken.s-monorepo.config.monorepo",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "monorepo.config.ts",
-                "extension": "config",
-                "relPath": "src/config/monorepo.config.ts"
-            },
-            "@coffeekraken.s-monorepo.config.monorepo.upgrade.files": {
-                "id": "@coffeekraken.s-monorepo.config.monorepo.upgrade.files",
-                "name": "files",
-                "type": {
-                    "types": [
-                        {
-                            "type": "array",
-                            "of": [
-                                "string"
-                            ]
-                        }
-                    ],
-                    "raw": "string[]"
-                },
-                "default": "['package.json','composer.json']",
-                "description": "Specify some files to upgrade in each packages when doing a monorepo.upgrade call",
-                "namespace": "@coffeekraken.s-monorepo.config.monorepo.upgrade",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "monorepo.config.ts",
-                "extension": "config",
-                "relPath": "src/config/monorepo.config.ts"
-            },
-            "@coffeekraken.s-monorepo.config.monorepo.upgrade.fields": {
-                "id": "@coffeekraken.s-monorepo.config.monorepo.upgrade.fields",
-                "name": "fields",
-                "type": {
-                    "types": [
-                        {
-                            "type": "array",
-                            "of": [
-                                "string"
-                            ]
-                        }
-                    ],
-                    "raw": "string[]"
-                },
-                "default": "['version','homepage']",
-                "description": "Specify some fields to upgrade in each packages files",
-                "namespace": "@coffeekraken.s-monorepo.config.monorepo.upgrade",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "monorepo.config.ts",
-                "extension": "config",
-                "relPath": "src/config/monorepo.config.ts",
-                "children": {}
-            },
             "@coffeekraken.s-monorepo.doc.README": {
                 "id": "@coffeekraken.s-monorepo.doc.README",
                 "name": "README",
@@ -251,6 +150,22 @@
                     ],
                     "raw": "Class"
                 },
+                "param": {
+                    "settings": {
+                        "name": "settings",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "ISMonorepoSettings"
+                                }
+                            ],
+                            "raw": "ISMonorepoSettings"
+                        },
+                        "description": "Some settings to configure your monorepo instance",
+                        "default": {},
+                        "defaultStr": "{}"
+                    }
+                },
                 "platform": [
                     {
                         "name": "node",
@@ -296,7 +211,7 @@
                         }
                     },
                     "checkdependencies": {
-                        "id": "sc4131c46ca5860cd9a5986de0d60e807e6a50774ba4c1c0d9075f900f1b7d318",
+                        "id": "sd41c088a172e70b4ca1160ba9b407db58986a51e225143900971a2f198feb2f0",
                         "name": "checkDependencies",
                         "type": {
                             "types": [
@@ -305,6 +220,25 @@
                                 }
                             ],
                             "raw": "Function"
+                        },
+                        "param": {
+                            "params": {
+                                "name": "params",
+                                "type": {
+                                    "types": [
+                                        {
+                                            "type": "Partial",
+                                            "of": [
+                                                "ISMonorepoRunParams"
+                                            ]
+                                        }
+                                    ],
+                                    "raw": "Partial<ISMonorepoRunParams>"
+                                },
+                                "description": "Some params for your run process",
+                                "default": {},
+                                "defaultStr": "{}"
+                            }
                         },
                         "description": "This method allows you to check dependencies of each packages of the monorepo",
                         "async": "true",
@@ -316,7 +250,7 @@
                         }
                     },
                     "exec": {
-                        "id": "sc9a98f7d398bb55a426f903bcc94cdbff3f8f64ae1d76ebb493ed83080b1f2c7",
+                        "id": "s4b3039255fefaf63e6c47694ef58cd7843b27a3de193ca84b3bb080f6366b3e0",
                         "name": "exec",
                         "type": {
                             "types": [
@@ -325,6 +259,25 @@
                                 }
                             ],
                             "raw": "Function"
+                        },
+                        "param": {
+                            "params": {
+                                "name": "params",
+                                "type": {
+                                    "types": [
+                                        {
+                                            "type": "Partial",
+                                            "of": [
+                                                "ISMonorepoRunParams"
+                                            ]
+                                        }
+                                    ],
+                                    "raw": "Partial<ISMonorepoRunParams>"
+                                },
+                                "description": "Some params for your run process",
+                                "default": {},
+                                "defaultStr": "{}"
+                            }
                         },
                         "description": "This method allows you to run a command in every packages of the monorepo",
                         "async": "true",
@@ -336,7 +289,7 @@
                         }
                     },
                     "list": {
-                        "id": "sd95c81cc06a30a2829afcea45da572c40d3dc095b621724d97be318c3efcb82d",
+                        "id": "sedf21383714bfde72f263670308db3591451496f063d027c2bb460d6a198429f",
                         "name": "list",
                         "type": {
                             "types": [
@@ -345,6 +298,25 @@
                                 }
                             ],
                             "raw": "Function"
+                        },
+                        "param": {
+                            "params": {
+                                "name": "params",
+                                "type": {
+                                    "types": [
+                                        {
+                                            "type": "Partial",
+                                            "of": [
+                                                "ISMonorepoListParams"
+                                            ]
+                                        }
+                                    ],
+                                    "raw": "Partial<ISMonorepoListParams>"
+                                },
+                                "description": "Some params for your list process",
+                                "default": {},
+                                "defaultStr": "{}"
+                            }
                         },
                         "description": "This method allows you to list all the repo in the monorepo",
                         "async": "true",
@@ -356,7 +328,7 @@
                         }
                     },
                     "publish": {
-                        "id": "s7ca9e74996381f3fe822e4df57f0a57c88d4bb152ed9f34ac2d9a6cea1a1e833",
+                        "id": "s00727b254c9de6edb0417b308029cf31fb84713bce9962d715ebe04ff20c690d",
                         "name": "publish",
                         "type": {
                             "types": [
@@ -365,6 +337,25 @@
                                 }
                             ],
                             "raw": "Function"
+                        },
+                        "param": {
+                            "params": {
+                                "name": "params",
+                                "type": {
+                                    "types": [
+                                        {
+                                            "type": "Partial",
+                                            "of": [
+                                                "ISMonorepoListParams"
+                                            ]
+                                        }
+                                    ],
+                                    "raw": "Partial<ISMonorepoListParams>"
+                                },
+                                "description": "Some params for your list process",
+                                "default": {},
+                                "defaultStr": "{}"
+                            }
                         },
                         "description": "This method allows you to publish all the repo in the monorepo",
                         "async": "true",
@@ -376,7 +367,7 @@
                         }
                     },
                     "dev": {
-                        "id": "sa579840aa98bfb71b6d4b9310bc05e943268734730163df820456fe5dad2a8ec",
+                        "id": "sf493b9be7a9e1c4f2a18caefd2fb8e1f8597b2554baf4d3534d87dd8110f981e",
                         "name": "dev",
                         "type": {
                             "types": [
@@ -385,6 +376,25 @@
                                 }
                             ],
                             "raw": "Function"
+                        },
+                        "param": {
+                            "params": {
+                                "name": "params",
+                                "type": {
+                                    "types": [
+                                        {
+                                            "type": "Partial",
+                                            "of": [
+                                                "ISMonorepoDevParams"
+                                            ]
+                                        }
+                                    ],
+                                    "raw": "Partial<ISMonorepoDevParams>"
+                                },
+                                "description": "Some params for your dev process",
+                                "default": {},
+                                "defaultStr": "{}"
+                            }
                         },
                         "description": "This method allows you to launch the dev stack in the monorepo.\nThis mean principaly transpile the typescript files of each packages",
                         "async": "true",

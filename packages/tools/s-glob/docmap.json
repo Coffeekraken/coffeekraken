@@ -3,6 +3,7 @@
     "extends": [],
     "generated": {
         "extends": [
+            "@coffeekraken/aa",
             "@coffeekraken/cli",
             "@coffeekraken/s-activate-feature",
             "@coffeekraken/s-appear-feature",
@@ -11,6 +12,7 @@
             "@coffeekraken/s-builder",
             "@coffeekraken/s-carpenter",
             "@coffeekraken/s-class",
+            "@coffeekraken/s-classmap",
             "@coffeekraken/s-clipboard-copy-component",
             "@coffeekraken/s-code-example-component",
             "@coffeekraken/s-code-formatter-prettier",
@@ -43,9 +45,11 @@
             "@coffeekraken/s-filtrable-input-component",
             "@coffeekraken/s-floating-feature",
             "@coffeekraken/s-form-validate-feature",
+            "@coffeekraken/s-front",
             "@coffeekraken/s-frontend-checker",
             "@coffeekraken/s-frontend-server",
             "@coffeekraken/s-frontspec",
+            "@coffeekraken/s-glitch-feature",
             "@coffeekraken/s-google-map-component",
             "@coffeekraken/s-handlebars",
             "@coffeekraken/s-highlight-feature",
@@ -53,6 +57,7 @@
             "@coffeekraken/s-inline-feature",
             "@coffeekraken/s-interface",
             "@coffeekraken/s-kitchen",
+            "@coffeekraken/s-lazy-feature",
             "@coffeekraken/s-lit-component",
             "@coffeekraken/s-log",
             "@coffeekraken/s-markdown-builder",
@@ -83,7 +88,6 @@
             "@coffeekraken/s-sugar-element",
             "@coffeekraken/s-sugar-feature",
             "@coffeekraken/s-sugar-json",
-            "@coffeekraken/s-lazy-feature",
             "@coffeekraken/s-theme-switcher-component",
             "@coffeekraken/s-theme",
             "@coffeekraken/s-timer",
@@ -148,6 +152,41 @@
                     ],
                     "raw": "Class"
                 },
+                "param": {
+                    "globs": {
+                        "name": "globs",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "String"
+                                },
+                                {
+                                    "type": "Array",
+                                    "of": [
+                                        "String"
+                                    ]
+                                }
+                            ],
+                            "raw": "String|Array<String>"
+                        },
+                        "description": "The glob pattern(s) you want to use with this instance",
+                        "defaultStr": ""
+                    },
+                    "settings": {
+                        "name": "settings",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Object"
+                                }
+                            ],
+                            "raw": "Object"
+                        },
+                        "description": "An object of settings to configure your glob instance",
+                        "default": {},
+                        "defaultStr": "{}"
+                    }
+                },
                 "platform": [
                     {
                         "name": "node",
@@ -184,6 +223,21 @@
                             ],
                             "raw": "Function"
                         },
+                        "param": {
+                            "glob": {
+                                "name": "glob",
+                                "type": {
+                                    "types": [
+                                        {
+                                            "type": "String"
+                                        }
+                                    ],
+                                    "raw": "String"
+                                },
+                                "description": "The string to check",
+                                "defaultStr": ""
+                            }
+                        },
                         "description": "Alias to the ```isGlob``` function available in sugar under \"shared.is.isGlob\" namespace",
                         "static": "true",
                         "since": "2.0.0",
@@ -203,6 +257,44 @@
                                 }
                             ],
                             "raw": "Function"
+                        },
+                        "param": {
+                            "globs": {
+                                "name": "globs",
+                                "type": {
+                                    "types": [
+                                        {
+                                            "type": "String"
+                                        },
+                                        {
+                                            "type": "Array",
+                                            "of": [
+                                                "String"
+                                            ]
+                                        }
+                                    ],
+                                    "raw": "String|Array<String>"
+                                },
+                                "description": "The glob pattern(s) to search files for",
+                                "defaultStr": ""
+                            },
+                            "settings": {
+                                "name": "settings",
+                                "type": {
+                                    "types": [
+                                        {
+                                            "type": "Partial",
+                                            "of": [
+                                                "IResolveGlobSettings"
+                                            ]
+                                        }
+                                    ],
+                                    "raw": "Partial<IResolveGlobSettings>"
+                                },
+                                "description": "An object of settings to configure your glob process",
+                                "default": {},
+                                "defaultStr": "{}"
+                            }
                         },
                         "description": "Alias to the ```resolveGlob``` function available in sugar under \"node.glob.resolveGlob\"",
                         "static": "true",
@@ -224,6 +316,57 @@
                             ],
                             "raw": "Function"
                         },
+                        "param": {
+                            "globs": {
+                                "name": "globs",
+                                "type": {
+                                    "types": [
+                                        {
+                                            "type": "String"
+                                        },
+                                        {
+                                            "type": "Array",
+                                            "of": [
+                                                "String"
+                                            ]
+                                        }
+                                    ],
+                                    "raw": "String|Array<String>"
+                                },
+                                "description": "The glob pattern(s) to search files for",
+                                "defaultStr": ""
+                            },
+                            "outDir": {
+                                "name": "outDir",
+                                "type": {
+                                    "types": [
+                                        {
+                                            "type": "String"
+                                        }
+                                    ],
+                                    "raw": "String"
+                                },
+                                "description": "The output directory where to put the files",
+                                "defaultStr": ""
+                            },
+                            "settings": {
+                                "name": "settings",
+                                "type": {
+                                    "types": [
+                                        {
+                                            "type": "Partial",
+                                            "of": [
+                                                "IResolveGlobSettings"
+                                            ]
+                                        }
+                                    ],
+                                    "raw": "Partial<IResolveGlobSettings>"
+                                },
+                                "description": "An object of settings to configure your glob process",
+                                "default": {},
+                                "defaultStr": "{}"
+                            }
+                        },
                         "description": "This method allows you to specify a glob to select files as well as an output directory where to put these files in.\nNote that the settings.cwd will be used to create the relative to outDir pathes.",
                         "static": "true",
                         "since": "2.0.0",
@@ -243,6 +386,40 @@
                                 }
                             ],
                             "raw": "Function"
+                        },
+                        "param": {
+                            "path": {
+                                "name": "path",
+                                "type": {
+                                    "types": [
+                                        {
+                                            "type": "String"
+                                        }
+                                    ],
+                                    "raw": "String"
+                                },
+                                "description": "The path to check",
+                                "defaultStr": ""
+                            },
+                            "globs": {
+                                "name": "globs",
+                                "type": {
+                                    "types": [
+                                        {
+                                            "type": "String"
+                                        },
+                                        {
+                                            "type": "Array",
+                                            "of": [
+                                                "String"
+                                            ]
+                                        }
+                                    ],
+                                    "raw": "String|Array<String>"
+                                },
+                                "description": "The glob pattern(s) to check files match for",
+                                "defaultStr": ""
+                            }
                         },
                         "description": "Check if the passed string match the passed glob pattern(s).\nThis make use of the AWESOME micromatch library.",
                         "static": "true",

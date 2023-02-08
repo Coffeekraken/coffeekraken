@@ -4,6 +4,7 @@ import __setCookie from './setCookie';
  * @name            deleteCookie
  * @namespace       js.cookie
  * @type            Function
+ * @platform        js
  * @status          stable
  *
  * Delete a cookie

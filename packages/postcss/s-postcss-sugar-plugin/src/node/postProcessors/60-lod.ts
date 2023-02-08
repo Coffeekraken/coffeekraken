@@ -346,6 +346,14 @@ export default async function ({ root, sharedData, postcssApi, settings }) {
         });
     });
 
+    // ensure the .s-lod--... [theme^="..."] are put together without space...
+    root.walkRules(/\.s-lod--[0-9]{1,2}\s\[theme[\^\$]=/, (rule) => {
+        rule.selector = rule.selector.replace(
+            /\.s-lod--([0-9]{1,2})\s\[theme/gm,
+            '.s-lod--$1[theme',
+        );
+    });
+
     // // classmap
     // classmap.applyOnAst(root);
     // classmap.save();

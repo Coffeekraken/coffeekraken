@@ -30,21 +30,21 @@ export default function (api) {
                  * @name            import
                  * @namespace       config.themeFont.family.default
                  * @type            String
-                 * @default         https://fonts.googleapis.com/css2?family=Roboto:wght@400&display=swap
+                 * @default         https://fonts.googleapis.com/css2?family=Roboto&display=swap
                  *
                  * Declare the "default" import
                  *
                  * @since       2.0.0
                  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
-                import: 'https://fonts.googleapis.com/css2?family=Roboto:wght@400&display=swap',
+                import: 'https://fonts.googleapis.com/css2?family=Roboto&display=swap',
             },
             title: {
                 /**
                  * @name            fontFamily
                  * @namespace       config.themeFont.family.title
                  * @type            String
-                 * @default         https://fonts.googleapis.com/css2?family=Roboto:wght@600&display=swap
+                 * @default         Roboto
                  *
                  * Declare the "default" fontFamily
                  *
@@ -56,14 +56,14 @@ export default function (api) {
                  * @name            fontWeight
                  * @namespace       config.themeFont.family.title
                  * @type            String
-                 * @default         600
+                 * @default         500
                  *
                  * Declare the "default" fontWeight
                  *
                  * @since       2.0.0
                  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
-                fontWeight: 600,
+                fontWeight: 500,
                 /**
                  * @name            import
                  * @namespace       config.themeFont.family.title
@@ -75,7 +75,7 @@ export default function (api) {
                  * @since       2.0.0
                  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
-                import: 'https://fonts.googleapis.com/css2?family=Roboto:wght@600&display=swap',
+                import: 'https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap',
             },
             quote: {
                 /**
@@ -262,6 +262,21 @@ export default function (api) {
                 return api.theme.size['10'];
             },
             /**
+             * @name          15
+             * @namespace     config.themeFont.size
+             * @type          String
+             * @default       [theme.size.15]
+             *
+             * Declare the "15" font size.
+             * MUST be a scale factor relative to the "default" absolute value specified.
+             *
+             * @since         2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+             */
+            get 15() {
+                return api.theme.size['15'];
+            },
+            /**
              * @name          20
              * @namespace     config.themeFont.size
              * @type          String
@@ -275,6 +290,21 @@ export default function (api) {
              */
             get 20() {
                 return api.theme.size['20'];
+            },
+            /**
+             * @name          25
+             * @namespace     config.themeFont.size
+             * @type          String
+             * @default       [theme.size.25]
+             *
+             * Declare the "25" font size.
+             * MUST be a scale factor relative to the "default" absolute value specified.
+             *
+             * @since         2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+             */
+            get 25() {
+                return api.theme.size['25'];
             },
             /**
              * @name          30
@@ -399,4 +429,4 @@ export default function (api) {
         },
     };
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE1BQU0sQ0FBQyxPQUFPLFdBQVcsR0FBRztJQUN4QixPQUFPO1FBQ0gsTUFBTSxFQUFFO1lBQ0osT0FBTyxFQUFFO2dCQUNMOzs7Ozs7Ozs7O21CQVVHO2dCQUNILFVBQVUsRUFBRSxVQUFVO2dCQUN0Qjs7Ozs7Ozs7OzttQkFVRztnQkFDSCxVQUFVLEVBQUUsR0FBRztnQkFDZjs7Ozs7Ozs7OzttQkFVRztnQkFDSCxNQUFNLEVBQUUsdUVBQXVFO2FBQ2xGO1lBRUQsS0FBSyxFQUFFO2dCQUNIOzs7Ozs7Ozs7O21CQVVHO2dCQUNILFVBQVUsRUFBRSxVQUFVO2dCQUN0Qjs7Ozs7Ozs7OzttQkFVRztnQkFDSCxVQUFVLEVBQUUsR0FBRztnQkFDZjs7Ozs7Ozs7OzttQkFVRztnQkFDSCxNQUFNLEVBQUUsdUVBQXVFO2FBQ2xGO1lBRUQsS0FBSyxFQUFFO2dCQUNIOzs7Ozs7Ozs7O21CQVVHO2dCQUNILFVBQVUsRUFBRSxtQ0FBbUM7Z0JBQy9DOzs7Ozs7Ozs7O21CQVVHO2dCQUNILFVBQVUsRUFBRSxRQUFRO2dCQUNwQjs7Ozs7Ozs7OzttQkFVRztnQkFDSCxTQUFTLEVBQUUsUUFBUTtnQkFDbkI7Ozs7Ozs7Ozs7bUJBVUc7Z0JBQ0gsV0FBVyxFQUFFLE1BQU07Z0JBQ25COzs7Ozs7Ozs7O21CQVVHO2dCQUNILFNBQVMsRUFBRSxJQUFJO2FBQ2xCO1lBRUQsSUFBSSxFQUFFO2dCQUNGOzs7Ozs7Ozs7O21CQVVHO2dCQUNILFVBQVUsRUFBRSxpREFBaUQ7Z0JBQzdEOzs7Ozs7Ozs7O21CQVVHO2dCQUNILFVBQVUsRUFBRSxRQUFRO2dCQUNwQjs7Ozs7Ozs7OzttQkFVRztnQkFDSCxTQUFTLEVBQUUsUUFBUTtnQkFDbkI7Ozs7Ozs7Ozs7bUJBVUc7Z0JBQ0gsV0FBVyxFQUFFLE1BQU07Z0JBQ25COzs7Ozs7Ozs7O21CQVVHO2dCQUNILFNBQVMsRUFBRSxJQUFJO2FBQ2xCO1NBQ0o7UUFFRCxJQUFJLEVBQUU7WUFDRjs7Ozs7Ozs7Ozs7ZUFXRztZQUNILElBQUksT0FBTztnQkFDUCxPQUFPLEdBQUcsQ0FBQyxLQUFLLENBQUMsSUFBSSxDQUFDLE9BQU8sQ0FBQztZQUNsQyxDQUFDO1lBRUQ7Ozs7Ozs7Ozs7O2VBV0c7WUFDSCxDQUFDLEVBQUUsQ0FBQztZQUVKOzs7Ozs7Ozs7OztlQVdHO1lBQ0gsSUFBSSxDQUFDO2dCQUNELE9BQU8sR0FBRyxDQUFDLEtBQUssQ0FBQyxJQUFJLENBQUMsR0FBRyxDQUFDLENBQUM7WUFDL0IsQ0FBQztZQUVEOzs7Ozs7Ozs7OztlQVdHO1lBQ0gsSUFBSSxFQUFFO2dCQUNGLE9BQU8sR0FBRyxDQUFDLEtBQUssQ0FBQyxJQUFJLENBQUMsSUFBSSxDQUFDLENBQUM7WUFDaEMsQ0FBQztZQUVEOzs7Ozs7Ozs7OztlQVdHO1lBQ0gsSUFBSSxFQUFFO2dCQUNGLE9BQU8sR0FBRyxDQUFDLEtBQUssQ0FBQyxJQUFJLENBQUMsSUFBSSxDQUFDLENBQUM7WUFDaEMsQ0FBQztZQUVEOzs7Ozs7Ozs7OztlQVdHO1lBQ0gsSUFBSSxFQUFFO2dCQUNGLE9BQU8sR0FBRyxDQUFDLEtBQUssQ0FBQyxJQUFJLENBQUMsSUFBSSxDQUFDLENBQUM7WUFDaEMsQ0FBQztZQUVEOzs7Ozs7Ozs7OztlQVdHO1lBQ0gsSUFBSSxFQUFFO2dCQUNGLE9BQU8sR0FBRyxDQUFDLEtBQUssQ0FBQyxJQUFJLENBQUMsSUFBSSxDQUFDLENBQUM7WUFDaEMsQ0FBQztZQUVEOzs7Ozs7Ozs7OztlQVdHO1lBQ0gsSUFBSSxFQUFFO2dCQUNGLE9BQU8sR0FBRyxDQUFDLEtBQUssQ0FBQyxJQUFJLENBQUMsSUFBSSxDQUFDLENBQUM7WUFDaEMsQ0FBQztZQUVEOzs7Ozs7Ozs7OztlQVdHO1lBQ0gsSUFBSSxFQUFFO2dCQUNGLE9BQU8sR0FBRyxDQUFDLEtBQUssQ0FBQyxJQUFJLENBQUMsSUFBSSxDQUFDLENBQUM7WUFDaEMsQ0FBQztZQUVEOzs7Ozs7Ozs7OztlQVdHO1lBQ0gsSUFBSSxFQUFFO2dCQUNGLE9BQU8sR0FBRyxDQUFDLEtBQUssQ0FBQyxJQUFJLENBQUMsSUFBSSxDQUFDLENBQUM7WUFDaEMsQ0FBQztZQUVEOzs7Ozs7Ozs7OztlQVdHO1lBQ0gsSUFBSSxFQUFFO2dCQUNGLE9BQU8sR0FBRyxDQUFDLEtBQUssQ0FBQyxJQUFJLENBQUMsSUFBSSxDQUFDLENBQUM7WUFDaEMsQ0FBQztZQUVEOzs7Ozs7Ozs7OztlQVdHO1lBQ0gsSUFBSSxFQUFFO2dCQUNGLE9BQU8sR0FBRyxDQUFDLEtBQUssQ0FBQyxJQUFJLENBQUMsSUFBSSxDQUFDLENBQUM7WUFDaEMsQ0FBQztZQUVEOzs7Ozs7Ozs7OztlQVdHO1lBQ0gsSUFBSSxHQUFHO2dCQUNILE9BQU8sR0FBRyxDQUFDLEtBQUssQ0FBQyxJQUFJLENBQUMsS0FBSyxDQUFDLENBQUM7WUFDakMsQ0FBQztTQUNKO0tBQ0osQ0FBQztBQUNOLENBQUMifQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE1BQU0sQ0FBQyxPQUFPLFdBQVcsR0FBRztJQUN4QixPQUFPO1FBQ0gsTUFBTSxFQUFFO1lBQ0osT0FBTyxFQUFFO2dCQUNMOzs7Ozs7Ozs7O21CQVVHO2dCQUNILFVBQVUsRUFBRSxVQUFVO2dCQUN0Qjs7Ozs7Ozs7OzttQkFVRztnQkFDSCxVQUFVLEVBQUUsR0FBRztnQkFDZjs7Ozs7Ozs7OzttQkFVRztnQkFDSCxNQUFNLEVBQUUsOERBQThEO2FBQ3pFO1lBRUQsS0FBSyxFQUFFO2dCQUNIOzs7Ozs7Ozs7O21CQVVHO2dCQUNILFVBQVUsRUFBRSxVQUFVO2dCQUN0Qjs7Ozs7Ozs7OzttQkFVRztnQkFDSCxVQUFVLEVBQUUsR0FBRztnQkFDZjs7Ozs7Ozs7OzttQkFVRztnQkFDSCxNQUFNLEVBQUUsdUVBQXVFO2FBQ2xGO1lBRUQsS0FBSyxFQUFFO2dCQUNIOzs7Ozs7Ozs7O21CQVVHO2dCQUNILFVBQVUsRUFBRSxtQ0FBbUM7Z0JBQy9DOzs7Ozs7Ozs7O21CQVVHO2dCQUNILFVBQVUsRUFBRSxRQUFRO2dCQUNwQjs7Ozs7Ozs7OzttQkFVRztnQkFDSCxTQUFTLEVBQUUsUUFBUTtnQkFDbkI7Ozs7Ozs7Ozs7bUJBVUc7Z0JBQ0gsV0FBVyxFQUFFLE1BQU07Z0JBQ25COzs7Ozs7Ozs7O21CQVVHO2dCQUNILFNBQVMsRUFBRSxJQUFJO2FBQ2xCO1lBRUQsSUFBSSxFQUFFO2dCQUNGOzs7Ozs7Ozs7O21CQVVHO2dCQUNILFVBQVUsRUFBRSxpREFBaUQ7Z0JBQzdEOzs7Ozs7Ozs7O21CQVVHO2dCQUNILFVBQVUsRUFBRSxRQUFRO2dCQUNwQjs7Ozs7Ozs7OzttQkFVRztnQkFDSCxTQUFTLEVBQUUsUUFBUTtnQkFDbkI7Ozs7Ozs7Ozs7bUJBVUc7Z0JBQ0gsV0FBVyxFQUFFLE1BQU07Z0JBQ25COzs7Ozs7Ozs7O21CQVVHO2dC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

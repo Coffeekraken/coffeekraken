@@ -124,11 +124,6 @@ export default function ({
                     & > * {
                         color: sugar.color(current);
                         font-size: 20px;
-                        opacity: 0.4;
-
-                        &:hover {
-                            opacity: 0.8;
-                        }
                     }
                 }
 

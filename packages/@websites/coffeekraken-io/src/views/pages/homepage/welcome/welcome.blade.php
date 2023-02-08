@@ -94,8 +94,9 @@
                 <img s-inline src="/dist/img/illustrations/welcome/tentacule-07.svg" />
             </div>
 
-            <div class="_cup" s-glitch>
-                <img src="/dist/img/welcome/cup.png" />
+            <div class="_cup">
+                <img class="_dark" src="/dist/img/welcome/cup.png" />
+                <img class="_light" src="/dist/img/welcome/cup-light.png" />
             </div>
             <div class="_smoke">
                 <video playsinline autoplay muted loop>

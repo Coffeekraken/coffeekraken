@@ -6,7 +6,7 @@ export interface ISDocmapBuildParams {
     exclude: string[];
     noExtends: boolean;
     excludePackages: string[];
-    filters: Record<string, RegExp>;
+    excludeByTags: Record<string, RegExp[]>;
     tags: string[];
     save: boolean;
     outPath: string;

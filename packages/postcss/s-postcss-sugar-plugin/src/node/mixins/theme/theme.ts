@@ -75,13 +75,7 @@ export default function ({
         selectors.push(`[theme$="${finalParams.variant}"]`);
 
     if (finalParams.scope) {
-        vars.unshift(
-            `${
-                selectors.length === 2
-                    ? `${selectors[0]}${selectors[1]}`
-                    : selectors.join(',')
-            } {`,
-        );
+        vars.unshift(`${selectors.join('')} body {`);
         vars.push(`@sugar.lnf.base;`);
         vars.push('}');
     } else if (atRule.parent.type === 'root') {

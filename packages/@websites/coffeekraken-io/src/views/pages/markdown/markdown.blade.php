@@ -2,19 +2,19 @@
 
     <section class="s-container markdown">
 
-        <div class="s-layout:1222 s-gap:column:50 @mobile s-layout:1_2 s-mi:30 s-gap:0">
+        <div class="s-layout:12222 s-gap:column:50 @mobile s-layout:1_2 s-mi:30 s-gap:0">
 
-            <nav s-scope class="sidemenu @mobile s-display:none" >
+            <nav s-scope class="sidemenu @mobile s-display:none" s-refocus>
 
                 <div class="sidemenu-sub">
                     <ck-doc-sub-nav source="._content"></ck-doc-sub-nav>
                 </div>
 
-                <div class="sidemenu-main" s-refocus offset-y="100" trigger="event:actual">
+                <div class="sidemenu-main">
 
-                    <h5 class="s-typo:h5 s-mbe:20">
+                    {{-- <h5 class="s-typo:h5 s-mbe:20">
                         Coffeekraken
-                    </h5>
+                    </h5> --}}
 
                     @php $menu = get_object_vars($docmap->menu->tree->documentation); @endphp
                     @include('pages.markdown.menu', ['menu' => $menu, 'id' => 'main'])
@@ -35,8 +35,8 @@
                                     trigger="click,event:actual" href="#{{ \Sugar\string\idCompliant($package->name) }}"
                                     toggle save-state trigger="click,event:actual">
                                     <div>
-                                        <i class="s-icon:folder-opened s-tc:complementary s-when:grandparent:active"></i>
-                                        <i class="s-icon:folder"></i>
+                                        <i class="s-icon:folder-opened s-mie:10 s-tc:complementary s-when:grandparent:active"></i>
+                                        <i class="s-icon:folder s-mie:10"></i>
                                         {{ str_replace('@coffeekraken/', '', $package->name) }}
                                     </div>
 

@@ -78,7 +78,9 @@ export default function (api) {
          * @since         2.0.0
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
-        defaultTextModifierStart: {},
+        defaultTextModifierStart: {
+            darken: 5,
+        },
 
         /**
          * @name          defaulTexttModifierEnd
@@ -92,7 +94,7 @@ export default function (api) {
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         defaultTextModifierEnd: {
-            lighten: 10,
+            lighten: 5,
         },
 
         /**

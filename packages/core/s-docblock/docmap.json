@@ -3,6 +3,7 @@
     "extends": [],
     "generated": {
         "extends": [
+            "@coffeekraken/aa",
             "@coffeekraken/cli",
             "@coffeekraken/s-activate-feature",
             "@coffeekraken/s-appear-feature",
@@ -42,9 +43,11 @@
             "@coffeekraken/s-filtrable-input-component",
             "@coffeekraken/s-floating-feature",
             "@coffeekraken/s-form-validate-feature",
+            "@coffeekraken/s-front",
             "@coffeekraken/s-frontend-checker",
             "@coffeekraken/s-frontend-server",
             "@coffeekraken/s-frontspec",
+            "@coffeekraken/s-glitch-feature",
             "@coffeekraken/s-glob",
             "@coffeekraken/s-google-map-component",
             "@coffeekraken/s-handlebars",
@@ -83,7 +86,6 @@
             "@coffeekraken/s-sugar-element",
             "@coffeekraken/s-sugar-feature",
             "@coffeekraken/s-sugar-json",
-            "@coffeekraken/s-lazy-feature",
             "@coffeekraken/s-theme-switcher-component",
             "@coffeekraken/s-theme",
             "@coffeekraken/s-timer",
@@ -148,6 +150,39 @@
                     ],
                     "raw": "Class"
                 },
+                "param": {
+                    "source": {
+                        "name": "source",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "String"
+                                },
+                                {
+                                    "type": "Object"
+                                }
+                            ],
+                            "raw": "String|Object"
+                        },
+                        "description": "The docblock source. Can be either a string to parse or a filePath",
+                        "defaultStr": ""
+                    },
+                    "settings": {
+                        "name": "settings",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Object"
+                                }
+                            ],
+                            "raw": "Object"
+                        },
+                        "description": "An object of settings to configure the SDocblock instance:",
+                        "default": {},
+                        "defaultStr": "{}",
+                        "content": "- tags ({}) {Object}: An object representing the functions used to parse each tags. The object format is ```{ tagName: parseFn }```\n"
+                    }
+                },
                 "platform": [
                     {
                         "name": "node",
@@ -200,6 +235,22 @@
                             ],
                             "raw": "Function"
                         },
+                        "param": {
+                            "sortFunction": {
+                                "name": "sortFunction",
+                                "type": {
+                                    "types": [
+                                        {
+                                            "type": "Function"
+                                        }
+                                    ],
+                                    "raw": "Function"
+                                },
+                                "description": "Specify a custom sort function you want to use. If not set, use the ```sortFunction``` setting.",
+                                "default": null,
+                                "defaultStr": "null"
+                            }
+                        },
                         "description": "This method allows you to set the order in which you want to get the\nblocks back when using the methods like get blocks, etc...",
                         "since": "2.0.0",
                         "author": {
@@ -234,6 +285,22 @@
                                 }
                             ],
                             "raw": "Function"
+                        },
+                        "param": {
+                            "string": {
+                                "name": "string",
+                                "type": {
+                                    "types": [
+                                        {
+                                            "type": "String"
+                                        }
+                                    ],
+                                    "raw": "String"
+                                },
+                                "description": "The string to parse",
+                                "default": "this._source",
+                                "defaultStr": "this._source"
+                            }
                         },
                         "description": "This method is the principal one. Use it to parse a string\nand get back the object version of it",
                         "async": "true",
@@ -295,6 +362,35 @@
                     ],
                     "raw": "Class"
                 },
+                "param": {
+                    "source": {
+                        "name": "source",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "String"
+                                }
+                            ],
+                            "raw": "String"
+                        },
+                        "description": "The docblock source.",
+                        "defaultStr": ""
+                    },
+                    "settings": {
+                        "name": "settings",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Object"
+                                }
+                            ],
+                            "raw": "Object"
+                        },
+                        "description": "A settings object to configure your instance",
+                        "default": {},
+                        "defaultStr": "{}"
+                    }
+                },
                 "platform": [
                     {
                         "name": "node",
@@ -347,6 +443,34 @@
                                 }
                             ],
                             "raw": "Function"
+                        },
+                        "param": {
+                            "tagName": {
+                                "name": "tagName",
+                                "type": {
+                                    "types": [
+                                        {
+                                            "type": "String"
+                                        }
+                                    ],
+                                    "raw": "String"
+                                },
+                                "description": "The tag you want to register without the @",
+                                "defaultStr": ""
+                            },
+                            "parser": {
+                                "name": "parser",
+                                "type": {
+                                    "types": [
+                                        {
+                                            "type": "Function"
+                                        }
+                                    ],
+                                    "raw": "Function"
+                                },
+                                "description": "A function that will be called with the string tag content. You can parse this string and return an object that represent the tag data",
+                                "defaultStr": ""
+                            }
                         },
                         "description": "This static method allows you to register a new tag that will\nbe recognized by the SDocblockBlock class.",
                         "static": "true",
@@ -419,6 +543,36 @@
                         }
                     ],
                     "raw": "Function"
+                },
+                "param": {
+                    "directory": {
+                        "name": "directory",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "String"
+                                }
+                            ],
+                            "raw": "String"
+                        },
+                        "description": "The directory in which to search for files with the namespace tag",
+                        "defaultStr": ""
+                    },
+                    "settings": {
+                        "name": "settings",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Object"
+                                }
+                            ],
+                            "raw": "Object"
+                        },
+                        "description": "A settings object to configure your navigation generation:",
+                        "default": {},
+                        "defaultStr": "{}",
+                        "content": "- exclude ('*\\/+(__tests__ | __wip__)\\') {String}: Specify a glob pattern representing the files to exclude from the generation"
+                    }
                 },
                 "description": "This function search in the passed folder for files containing a \"@namespace\" tag (and an \"@name\" optional one)\nand generate a SNav instance with all these founded files as sources...",
                 "namespace": "@coffeekraken.s-docblock.sugar.node.docblock",
@@ -547,6 +701,34 @@
                     ],
                     "raw": "Function"
                 },
+                "param": {
+                    "data": {
+                        "name": "data",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Object"
+                                }
+                            ],
+                            "raw": "Object"
+                        },
+                        "description": "The data object parsed in the string",
+                        "defaultStr": ""
+                    },
+                    "blockSettings": {
+                        "name": "blockSettings",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "ISDocblockBlockSettings"
+                                }
+                            ],
+                            "raw": "ISDocblockBlockSettings"
+                        },
+                        "description": "The SDocblockBlock settings",
+                        "defaultStr": ""
+                    }
+                },
                 "platform": [
                     {
                         "name": "node",
@@ -576,6 +758,34 @@
                         }
                     ],
                     "raw": "Function"
+                },
+                "param": {
+                    "data": {
+                        "name": "data",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Object"
+                                }
+                            ],
+                            "raw": "Object"
+                        },
+                        "description": "The data object parsed in the string",
+                        "defaultStr": ""
+                    },
+                    "blockSettings": {
+                        "name": "blockSettings",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "ISDocblockBlockSettings"
+                                }
+                            ],
+                            "raw": "ISDocblockBlockSettings"
+                        },
+                        "description": "The SDocblockBlock settings",
+                        "defaultStr": ""
+                    }
                 },
                 "platform": [
                     {
@@ -633,6 +843,34 @@
                     ],
                     "raw": "Function"
                 },
+                "param": {
+                    "data": {
+                        "name": "data",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Object"
+                                }
+                            ],
+                            "raw": "Object"
+                        },
+                        "description": "The data object parsed in the string",
+                        "defaultStr": ""
+                    },
+                    "blockSettings": {
+                        "name": "blockSettings",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "ISDocblockBlockSettings"
+                                }
+                            ],
+                            "raw": "ISDocblockBlockSettings"
+                        },
+                        "description": "The SDocblockBlock settings",
+                        "defaultStr": ""
+                    }
+                },
                 "platform": [
                     {
                         "name": "node",
@@ -663,6 +901,34 @@
                     ],
                     "raw": "Function"
                 },
+                "param": {
+                    "data": {
+                        "name": "data",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Object"
+                                }
+                            ],
+                            "raw": "Object"
+                        },
+                        "description": "The data object parsed in the string",
+                        "defaultStr": ""
+                    },
+                    "blockSettings": {
+                        "name": "blockSettings",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "ISDocblockBlockSettings"
+                                }
+                            ],
+                            "raw": "ISDocblockBlockSettings"
+                        },
+                        "description": "The SDocblockBlock settings",
+                        "defaultStr": ""
+                    }
+                },
                 "platform": [
                     {
                         "name": "node",
@@ -692,6 +958,34 @@
                         }
                     ],
                     "raw": "Function"
+                },
+                "param": {
+                    "data": {
+                        "name": "data",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Object"
+                                }
+                            ],
+                            "raw": "Object"
+                        },
+                        "description": "The data object parsed in the string",
+                        "defaultStr": ""
+                    },
+                    "blockSettings": {
+                        "name": "blockSettings",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "ISDocblockBlockSettings"
+                                }
+                            ],
+                            "raw": "ISDocblockBlockSettings"
+                        },
+                        "description": "The SDocblockBlock settings",
+                        "defaultStr": ""
+                    }
                 },
                 "platform": [
                     {
@@ -724,6 +1018,34 @@
                     ],
                     "raw": "Function"
                 },
+                "param": {
+                    "data": {
+                        "name": "data",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Object"
+                                }
+                            ],
+                            "raw": "Object"
+                        },
+                        "description": "The data object parsed in the string",
+                        "defaultStr": ""
+                    },
+                    "blockSettings": {
+                        "name": "blockSettings",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "ISDocblockBlockSettings"
+                                }
+                            ],
+                            "raw": "ISDocblockBlockSettings"
+                        },
+                        "description": "The SDocblockBlock settings",
+                        "defaultStr": ""
+                    }
+                },
                 "platform": [
                     {
                         "name": "node",
@@ -754,6 +1076,34 @@
                         }
                     ],
                     "raw": "Function"
+                },
+                "param": {
+                    "data": {
+                        "name": "data",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Object"
+                                }
+                            ],
+                            "raw": "Object"
+                        },
+                        "description": "The data object parsed in the string",
+                        "defaultStr": ""
+                    },
+                    "blockSettings": {
+                        "name": "blockSettings",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "ISDocblockBlockSettings"
+                                }
+                            ],
+                            "raw": "ISDocblockBlockSettings"
+                        },
+                        "description": "The SDocblockBlock settings",
+                        "defaultStr": ""
+                    }
                 },
                 "platform": [
                     {
@@ -786,6 +1136,34 @@
                     ],
                     "raw": "Function"
                 },
+                "param": {
+                    "data": {
+                        "name": "data",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Object"
+                                }
+                            ],
+                            "raw": "Object"
+                        },
+                        "description": "The data object parsed in the string",
+                        "defaultStr": ""
+                    },
+                    "blockSettings": {
+                        "name": "blockSettings",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "ISDocblockBlockSettings"
+                                }
+                            ],
+                            "raw": "ISDocblockBlockSettings"
+                        },
+                        "description": "The SDocblockBlock settings",
+                        "defaultStr": ""
+                    }
+                },
                 "platform": [
                     {
                         "name": "node",
@@ -815,6 +1193,47 @@
                         }
                     ],
                     "raw": "Function"
+                },
+                "param": {
+                    "data": {
+                        "name": "data",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Object"
+                                }
+                            ],
+                            "raw": "Object"
+                        },
+                        "description": "The data object parsed in the string",
+                        "defaultStr": ""
+                    },
+                    "blockSettings": {
+                        "name": "blockSettings",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "ISDocblockBlockSettings"
+                                }
+                            ],
+                            "raw": "ISDocblockBlockSettings"
+                        },
+                        "description": "The SDocblockBlock settings",
+                        "defaultStr": ""
+                    },
+                    "The formated object": {
+                        "name": "The formated object",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Object"
+                                }
+                            ],
+                            "raw": "Object"
+                        },
+                        "description": "null",
+                        "defaultStr": ""
+                    }
                 },
                 "platform": [
                     {
@@ -846,6 +1265,50 @@
                     ],
                     "raw": "Function"
                 },
+                "param": {
+                    "data": {
+                        "name": "data",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Object"
+                                }
+                            ],
+                            "raw": "Object"
+                        },
+                        "description": "The data object parsed in the string",
+                        "defaultStr": ""
+                    },
+                    "blockSettings": {
+                        "name": "blockSettings",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "ISDocblockBlockSettings"
+                                }
+                            ],
+                            "raw": "ISDocblockBlockSettings"
+                        },
+                        "description": "The SDocblockBlock settings",
+                        "defaultStr": ""
+                    },
+                    "An array of platform obj": {
+                        "name": "An array of platform obj",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Array",
+                                    "of": [
+                                        "IPlatform"
+                                    ]
+                                }
+                            ],
+                            "raw": "Array<IPlatform>"
+                        },
+                        "description": "null",
+                        "defaultStr": ""
+                    }
+                },
                 "platform": [
                     {
                         "name": "node",
@@ -875,6 +1338,34 @@
                         }
                     ],
                     "raw": "Function"
+                },
+                "param": {
+                    "data": {
+                        "name": "data",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Object"
+                                }
+                            ],
+                            "raw": "Object"
+                        },
+                        "description": "The data object parsed in the string",
+                        "defaultStr": ""
+                    },
+                    "blockSettings": {
+                        "name": "blockSettings",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "ISDocblockBlockSettings"
+                                }
+                            ],
+                            "raw": "ISDocblockBlockSettings"
+                        },
+                        "description": "The SDocblockBlock settings",
+                        "defaultStr": ""
+                    }
                 },
                 "platform": [
                     {
@@ -906,6 +1397,21 @@
                     ],
                     "raw": "Function"
                 },
+                "param": {
+                    "blockSettings": {
+                        "name": "blockSettings",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "ISDocblockBlockSettings"
+                                }
+                            ],
+                            "raw": "ISDocblockBlockSettings"
+                        },
+                        "description": "The SDocblockBlock settings",
+                        "defaultStr": ""
+                    }
+                },
                 "platform": [
                     {
                         "name": "node",
@@ -935,6 +1441,34 @@
                         }
                     ],
                     "raw": "Function"
+                },
+                "param": {
+                    "data": {
+                        "name": "data",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Object"
+                                }
+                            ],
+                            "raw": "Object"
+                        },
+                        "description": "The data object parsed in the string",
+                        "defaultStr": ""
+                    },
+                    "blockSettings": {
+                        "name": "blockSettings",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "ISDocblockBlockSettings"
+                                }
+                            ],
+                            "raw": "ISDocblockBlockSettings"
+                        },
+                        "description": "The SDocblockBlock settings",
+                        "defaultStr": ""
+                    }
                 },
                 "platform": [
                     {
@@ -966,6 +1500,34 @@
                     ],
                     "raw": "Function"
                 },
+                "param": {
+                    "data": {
+                        "name": "data",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Object"
+                                }
+                            ],
+                            "raw": "Object"
+                        },
+                        "description": "The data object parsed in the string",
+                        "defaultStr": ""
+                    },
+                    "blockSettings": {
+                        "name": "blockSettings",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "ISDocblockBlockSettings"
+                                }
+                            ],
+                            "raw": "ISDocblockBlockSettings"
+                        },
+                        "description": "The SDocblockBlock settings",
+                        "defaultStr": ""
+                    }
+                },
                 "platform": [
                     {
                         "name": "node",
@@ -995,6 +1557,34 @@
                         }
                     ],
                     "raw": "Function"
+                },
+                "param": {
+                    "data": {
+                        "name": "data",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Object"
+                                }
+                            ],
+                            "raw": "Object"
+                        },
+                        "description": "The data object parsed in the string",
+                        "defaultStr": ""
+                    },
+                    "blockSettings": {
+                        "name": "blockSettings",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "ISDocblockBlockSettings"
+                                }
+                            ],
+                            "raw": "ISDocblockBlockSettings"
+                        },
+                        "description": "The SDocblockBlock settings",
+                        "defaultStr": ""
+                    }
                 },
                 "platform": [
                     {
@@ -1026,6 +1616,50 @@
                     ],
                     "raw": "Function"
                 },
+                "param": {
+                    "data": {
+                        "name": "data",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Object"
+                                }
+                            ],
+                            "raw": "Object"
+                        },
+                        "description": "The data object parsed in the string",
+                        "defaultStr": ""
+                    },
+                    "blockSettings": {
+                        "name": "blockSettings",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "ISDocblockBlockSettings"
+                                }
+                            ],
+                            "raw": "ISDocblockBlockSettings"
+                        },
+                        "description": "The SDocblockBlock settings",
+                        "defaultStr": ""
+                    },
+                    "An array of platform obj": {
+                        "name": "An array of platform obj",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Array",
+                                    "of": [
+                                        "IPlatform"
+                                    ]
+                                }
+                            ],
+                            "raw": "Array<IPlatform>"
+                        },
+                        "description": "null",
+                        "defaultStr": ""
+                    }
+                },
                 "platform": [
                     {
                         "name": "node",
@@ -1056,6 +1690,50 @@
                     ],
                     "raw": "Function"
                 },
+                "param": {
+                    "data": {
+                        "name": "data",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Object"
+                                }
+                            ],
+                            "raw": "Object"
+                        },
+                        "description": "The data object parsed in the string",
+                        "defaultStr": ""
+                    },
+                    "blockSettings": {
+                        "name": "blockSettings",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "ISDocblockBlockSettings"
+                                }
+                            ],
+                            "raw": "ISDocblockBlockSettings"
+                        },
+                        "description": "The SDocblockBlock settings",
+                        "defaultStr": ""
+                    },
+                    "An array of platform obj": {
+                        "name": "An array of platform obj",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Array",
+                                    "of": [
+                                        "IPlatform"
+                                    ]
+                                }
+                            ],
+                            "raw": "Array<IPlatform>"
+                        },
+                        "description": "null",
+                        "defaultStr": ""
+                    }
+                },
                 "platform": [
                     {
                         "name": "node",
@@ -1085,6 +1763,34 @@
                         }
                     ],
                     "raw": "Function"
+                },
+                "param": {
+                    "data": {
+                        "name": "data",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Object"
+                                }
+                            ],
+                            "raw": "Object"
+                        },
+                        "description": "The data object parsed in the string",
+                        "defaultStr": ""
+                    },
+                    "blockSettings": {
+                        "name": "blockSettings",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "ISDocblockBlockSettings"
+                                }
+                            ],
+                            "raw": "ISDocblockBlockSettings"
+                        },
+                        "description": "The SDocblockBlock settings",
+                        "defaultStr": ""
+                    }
                 },
                 "platform": [
                     {

@@ -41,11 +41,11 @@ class SDocmapBuildParamsInterface extends __SInterface {
                 alias: 'f',
                 default: __SSugarConfig.get('docmap.build.tags'),
             },
-            filters: {
-                type: 'Object<RegExp>',
+            excludeByTags: {
+                type: 'Object',
                 description:
-                    'Specify some properties and regex to use to filter docblocks',
-                default: __SSugarConfig.get('docmap.build.filters'),
+                    'Specify some tags and regex to use to filter out docblocks. Docblock items that have a tag that match one of his regex will be cutted out',
+                default: __SSugarConfig.get('docmap.build.excludeByTags'),
             },
             noExtends: {
                 type: {

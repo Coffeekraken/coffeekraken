@@ -74,8 +74,6 @@ export default class SThemeSwitcherComponent extends __SLitComponent {
         });
 
         this._themes = __STheme.themes;
-        // this._themes['coco'] = this._themes.default;
-        // this._themes['plop'] = this._themes.default;
     }
 
     _toggleDarkMode(): void {
@@ -115,9 +113,8 @@ export default class SThemeSwitcherComponent extends __SLitComponent {
                           ${this.props.darkModeIcon
                               ? html`
                                     <i
-                                        class="${this.utils.cls(
-                                            '_icon',
-                                        )} ${this.props.darkModeIconClass}"
+                                        class="${this.utils.cls('_icon')} ${this
+                                            .props.darkModeIconClass}"
                                     ></i>
                                 `
                               : ''}

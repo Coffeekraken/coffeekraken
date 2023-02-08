@@ -2,6 +2,7 @@
     "map": {},
     "generated": {
         "extends": [
+            "@coffeekraken/aa",
             "@coffeekraken/cli",
             "@coffeekraken/s-activate-feature",
             "@coffeekraken/s-appear-feature",
@@ -10,6 +11,7 @@
             "@coffeekraken/s-builder",
             "@coffeekraken/s-carpenter",
             "@coffeekraken/s-class",
+            "@coffeekraken/s-classmap",
             "@coffeekraken/s-clipboard-copy-component",
             "@coffeekraken/s-code-example-component",
             "@coffeekraken/s-code-formatter-prettier",
@@ -55,6 +57,7 @@
             "@coffeekraken/s-inline-feature",
             "@coffeekraken/s-interface",
             "@coffeekraken/s-kitchen",
+            "@coffeekraken/s-lazy-feature",
             "@coffeekraken/s-lit-component",
             "@coffeekraken/s-log",
             "@coffeekraken/s-markdown-builder",
@@ -101,443 +104,6 @@
             "@coffeekraken/s-vite"
         ],
         "map": {
-            "@coffeekraken.sugar.config.themeUi.menu.paddingInline": {
-                "id": "@coffeekraken.sugar.config.themeUi.menu.paddingInline",
-                "name": "paddingInline",
-                "type": {
-                    "types": [
-                        {
-                            "type": "String"
-                        }
-                    ],
-                    "raw": "String"
-                },
-                "default": "[theme.padding.50]",
-                "description": "Specify the default padding inline for code ui",
-                "namespace": "@coffeekraken.sugar.config.themeUi.menu",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "themeUi.config.ts",
-                "extension": "config",
-                "relPath": "src/config/themeUi.config.ts"
-            },
-            "@coffeekraken.sugar.config.themeUi.menu.paddingBlock": {
-                "id": "@coffeekraken.sugar.config.themeUi.menu.paddingBlock",
-                "name": "paddingBlock",
-                "type": {
-                    "types": [
-                        {
-                            "type": "String"
-                        }
-                    ],
-                    "raw": "String"
-                },
-                "default": "[theme.padding.50]",
-                "description": "Specify the default padding block for code ui",
-                "namespace": "@coffeekraken.sugar.config.themeUi.menu",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "themeUi.config.ts",
-                "extension": "config",
-                "relPath": "src/config/themeUi.config.ts"
-            },
-            "@coffeekraken.sugar.config.themeUi.menu.borderRadius": {
-                "id": "@coffeekraken.sugar.config.themeUi.menu.borderRadius",
-                "name": "borderRadius",
-                "type": {
-                    "types": [
-                        {
-                            "type": "String"
-                        }
-                    ],
-                    "raw": "String"
-                },
-                "default": "[theme.ui.default.borderRadius]",
-                "description": "Specify the default border radius for code ui",
-                "namespace": "@coffeekraken.sugar.config.themeUi.menu",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "themeUi.config.ts",
-                "extension": "config",
-                "relPath": "src/config/themeUi.config.ts"
-            },
-            "@coffeekraken.sugar.config.themeUi.menu.borderWidth": {
-                "id": "@coffeekraken.sugar.config.themeUi.menu.borderWidth",
-                "name": "borderWidth",
-                "type": {
-                    "types": [
-                        {
-                            "type": "String"
-                        }
-                    ],
-                    "raw": "String"
-                },
-                "default": "[theme.ui.default.borderWidth]",
-                "description": "Specify the default border width for code ui",
-                "namespace": "@coffeekraken.sugar.config.themeUi.menu",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "themeUi.config.ts",
-                "extension": "config",
-                "relPath": "src/config/themeUi.config.ts"
-            },
-            "@coffeekraken.sugar.config.themeUi.menu.transition": {
-                "id": "@coffeekraken.sugar.config.themeUi.menu.transition",
-                "name": "transition",
-                "type": {
-                    "types": [
-                        {
-                            "type": "String"
-                        }
-                    ],
-                    "raw": "String"
-                },
-                "default": "[theme.ui.default.transition]",
-                "description": "Specify the default transition for code ui",
-                "namespace": "@coffeekraken.sugar.config.themeUi.menu",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "themeUi.config.ts",
-                "extension": "config",
-                "relPath": "src/config/themeUi.config.ts"
-            },
-            "@coffeekraken.sugar.config.themeUi.menu.defaultColor": {
-                "id": "@coffeekraken.sugar.config.themeUi.menu.defaultColor",
-                "name": "defaultColor",
-                "type": {
-                    "types": [
-                        {
-                            "type": "String"
-                        }
-                    ],
-                    "raw": "String"
-                },
-                "default": "[theme.ui.default.defaultColor]",
-                "description": "Specify the default color for code ui",
-                "namespace": "@coffeekraken.sugar.config.themeUi.menu",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "themeUi.config.ts",
-                "extension": "config",
-                "relPath": "src/config/themeUi.config.ts"
-            },
-            "@coffeekraken.sugar.config.themeUi.menu.defaultLnf": {
-                "id": "@coffeekraken.sugar.config.themeUi.menu.defaultLnf",
-                "name": "defaultLnf",
-                "type": {
-                    "types": [
-                        {
-                            "type": "Number"
-                        }
-                    ],
-                    "raw": "Number"
-                },
-                "default": "[theme.ui.default.defaultStyle]",
-                "description": "Specify the default look and feel for your menus",
-                "namespace": "@coffeekraken.sugar.config.themeUi.menu",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "themeUi.config.ts",
-                "extension": "config",
-                "relPath": "src/config/themeUi.config.ts"
-            },
-            "@coffeekraken.sugar.config.themeUi.menu.defaultType": {
-                "id": "@coffeekraken.sugar.config.themeUi.menu.defaultType",
-                "name": "defaultType",
-                "type": {
-                    "types": [
-                        {
-                            "type": "Number"
-                        }
-                    ],
-                    "raw": "Number"
-                },
-                "default": "primary",
-                "description": "Specify the default look and feel for your menus",
-                "namespace": "@coffeekraken.sugar.config.themeUi.menu",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "themeUi.config.ts",
-                "extension": "config",
-                "relPath": "src/config/themeUi.config.ts"
-            },
-            "@coffeekraken.sugar.config.themeUi.menu.depth": {
-                "id": "@coffeekraken.sugar.config.themeUi.menu.depth",
-                "name": "depth",
-                "type": {
-                    "types": [
-                        {
-                            "type": "String"
-                        }
-                    ],
-                    "raw": "String"
-                },
-                "default": "[theme.ui.default.depth]",
-                "description": "Specify the default depth for code items",
-                "namespace": "@coffeekraken.sugar.config.themeUi.menu",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "themeUi.config.ts",
-                "extension": "config",
-                "relPath": "src/config/themeUi.config.ts"
-            },
-            "@coffeekraken.sugar.config.themeUi.menu.rhythmVertical": {
-                "id": "@coffeekraken.sugar.config.themeUi.menu.rhythmVertical",
-                "name": "rhythmVertical",
-                "type": {
-                    "types": [
-                        {
-                            "type": "Object"
-                        }
-                    ],
-                    "raw": "Object"
-                },
-                "default": "[theme.ui.default.rhythmVertical]",
-                "description": "Specify the default vertical rhythm for your code ui",
-                "namespace": "@coffeekraken.sugar.config.themeUi.menu",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "themeUi.config.ts",
-                "extension": "config",
-                "relPath": "src/config/themeUi.config.ts"
-            },
-            "@coffeekraken.sugar.config.themeUi.card.paddingInline": {
-                "id": "@coffeekraken.sugar.config.themeUi.card.paddingInline",
-                "name": "paddingInline",
-                "type": {
-                    "types": [
-                        {
-                            "type": "String"
-                        }
-                    ],
-                    "raw": "String"
-                },
-                "default": "[theme.padding.50]",
-                "description": "Specify the default padding inline for code ui",
-                "namespace": "@coffeekraken.sugar.config.themeUi.card",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "themeUi.config.ts",
-                "extension": "config",
-                "relPath": "src/config/themeUi.config.ts"
-            },
-            "@coffeekraken.sugar.config.themeUi.card.paddingBlock": {
-                "id": "@coffeekraken.sugar.config.themeUi.card.paddingBlock",
-                "name": "paddingBlock",
-                "type": {
-                    "types": [
-                        {
-                            "type": "String"
-                        }
-                    ],
-                    "raw": "String"
-                },
-                "default": "[theme.padding.50]",
-                "description": "Specify the default padding block for code ui",
-                "namespace": "@coffeekraken.sugar.config.themeUi.card",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "themeUi.config.ts",
-                "extension": "config",
-                "relPath": "src/config/themeUi.config.ts"
-            },
-            "@coffeekraken.sugar.config.themeUi.card.borderRadius": {
-                "id": "@coffeekraken.sugar.config.themeUi.card.borderRadius",
-                "name": "borderRadius",
-                "type": {
-                    "types": [
-                        {
-                            "type": "String"
-                        }
-                    ],
-                    "raw": "String"
-                },
-                "default": "[theme.ui.default.borderRadius]",
-                "description": "Specify the default border radius for code ui",
-                "namespace": "@coffeekraken.sugar.config.themeUi.card",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "themeUi.config.ts",
-                "extension": "config",
-                "relPath": "src/config/themeUi.config.ts"
-            },
-            "@coffeekraken.sugar.config.themeUi.card.borderWidth": {
-                "id": "@coffeekraken.sugar.config.themeUi.card.borderWidth",
-                "name": "borderWidth",
-                "type": {
-                    "types": [
-                        {
-                            "type": "String"
-                        }
-                    ],
-                    "raw": "String"
-                },
-                "default": "[theme.ui.default.borderWidth]",
-                "description": "Specify the default border width for code ui",
-                "namespace": "@coffeekraken.sugar.config.themeUi.card",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "themeUi.config.ts",
-                "extension": "config",
-                "relPath": "src/config/themeUi.config.ts"
-            },
-            "@coffeekraken.sugar.config.themeUi.card.transition": {
-                "id": "@coffeekraken.sugar.config.themeUi.card.transition",
-                "name": "transition",
-                "type": {
-                    "types": [
-                        {
-                            "type": "String"
-                        }
-                    ],
-                    "raw": "String"
-                },
-                "default": "[theme.ui.default.transition]",
-                "description": "Specify the default transition for code ui",
-                "namespace": "@coffeekraken.sugar.config.themeUi.card",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "themeUi.config.ts",
-                "extension": "config",
-                "relPath": "src/config/themeUi.config.ts"
-            },
-            "@coffeekraken.sugar.config.themeUi.card.defaultColor": {
-                "id": "@coffeekraken.sugar.config.themeUi.card.defaultColor",
-                "name": "defaultColor",
-                "type": {
-                    "types": [
-                        {
-                            "type": "String"
-                        }
-                    ],
-                    "raw": "String"
-                },
-                "default": "[theme.ui.default.defaultColor]",
-                "description": "Specify the default color for code ui",
-                "namespace": "@coffeekraken.sugar.config.themeUi.card",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "themeUi.config.ts",
-                "extension": "config",
-                "relPath": "src/config/themeUi.config.ts"
-            },
-            "@coffeekraken.sugar.config.themeUi.card.depth": {
-                "id": "@coffeekraken.sugar.config.themeUi.card.depth",
-                "name": "depth",
-                "type": {
-                    "types": [
-                        {
-                            "type": "String"
-                        }
-                    ],
-                    "raw": "String"
-                },
-                "default": "[theme.ui.default.depth]",
-                "description": "Specify the default depth for code items",
-                "namespace": "@coffeekraken.sugar.config.themeUi.card",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "themeUi.config.ts",
-                "extension": "config",
-                "relPath": "src/config/themeUi.config.ts",
-                "children": {}
-            },
-            "@coffeekraken.sugar.config.viewRenderer.rootDirs": {
-                "id": "@coffeekraken.sugar.config.viewRenderer.rootDirs",
-                "name": "rootDirs",
-                "type": {
-                    "types": [
-                        {
-                            "type": "array",
-                            "of": [
-                                "string"
-                            ]
-                        }
-                    ],
-                    "raw": "string[]"
-                },
-                "default": "['[config.storage.src.rootDir]/views']",
-                "description": "Specify the roots views directories",
-                "namespace": "@coffeekraken.sugar.config.viewRenderer",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "viewRenderer.config.ts",
-                "extension": "config",
-                "relPath": "src/config/viewRenderer.config.ts",
-                "children": {}
-            },
             "@coffeekraken.sugar.cli.interface.SRunCommandParamsInterface": {
                 "id": "@coffeekraken.sugar.cli.interface.SRunCommandParamsInterface",
                 "name": "SRunCommandParamsInterface",
@@ -1183,6 +749,22 @@
                         "defaultStr": "{}"
                     }
                 },
+                "setting": {
+                    "offset": {
+                        "name": "offset",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Number"
+                                }
+                            ],
+                            "raw": "Number"
+                        },
+                        "description": "The offset before entering in the viewport to set the \"src\" attribute",
+                        "default": 50,
+                        "defaultStr": "50"
+                    }
+                },
                 "platform": [
                     {
                         "name": "js",
@@ -1291,6 +873,50 @@
                         "description": "An object of settings to configure your feature",
                         "default": {},
                         "defaultStr": "{}"
+                    }
+                },
+                "setting": {
+                    "empty": {
+                        "name": "empty",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Boolean"
+                                }
+                            ],
+                            "raw": "Boolean"
+                        },
+                        "description": "Specify if you want to \"empty\" attribute",
+                        "default": true,
+                        "defaultStr": "true"
+                    },
+                    "dirty": {
+                        "name": "dirty",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Boolean"
+                                }
+                            ],
+                            "raw": "Boolean"
+                        },
+                        "description": "Specify if you want to \"dirty\" attribute",
+                        "default": true,
+                        "defaultStr": "true"
+                    },
+                    "hasValue": {
+                        "name": "hasValue",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Boolean"
+                                }
+                            ],
+                            "raw": "Boolean"
+                        },
+                        "description": "Specify if you want to \"hasValue\" attribute",
+                        "default": true,
+                        "defaultStr": "true"
                     }
                 },
                 "platform": [
@@ -1403,6 +1029,22 @@
                         "defaultStr": "{}"
                     }
                 },
+                "setting": {
+                    "scroll": {
+                        "name": "scroll",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "IScrollToSettings"
+                                }
+                            ],
+                            "raw": "IScrollToSettings"
+                        },
+                        "description": "Some scroll settings that you can check on the sugar.dom.scroll.scrollTo function",
+                        "default": {},
+                        "defaultStr": "{}"
+                    }
+                },
                 "platform": [
                     {
                         "name": "js",
@@ -1452,6 +1094,22 @@
                             "raw": "ISmoothScrollOnAnchorLinksSettings"
                         },
                         "description": "Some settings to tweak the smooth scroll behavior",
+                        "default": {},
+                        "defaultStr": "{}"
+                    }
+                },
+                "setting": {
+                    "scroll": {
+                        "name": "scroll",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "IScrollToSettings"
+                                }
+                            ],
+                            "raw": "IScrollToSettings"
+                        },
+                        "description": "Some scroll settings that you can check on the sugar.dom.scroll.scrollTo function",
                         "default": {},
                         "defaultStr": "{}"
                     }
@@ -1509,6 +1167,22 @@
                         "defaultStr": "{}"
                     }
                 },
+                "setting": {
+                    "scroll": {
+                        "name": "scroll",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "IScrollToSettings"
+                                }
+                            ],
+                            "raw": "IScrollToSettings"
+                        },
+                        "description": "Some scroll settings that you can check on the sugar.dom.scroll.scrollTo function",
+                        "default": {},
+                        "defaultStr": "{}"
+                    }
+                },
                 "platform": [
                     {
                         "name": "js",
@@ -1558,6 +1232,22 @@
                             "raw": "ISmoothScrollOnPageLoadSettings"
                         },
                         "description": "Some settings to tweak the smooth scroll behavior",
+                        "default": {},
+                        "defaultStr": "{}"
+                    }
+                },
+                "setting": {
+                    "scroll": {
+                        "name": "scroll",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "IScrollToSettings"
+                                }
+                            ],
+                            "raw": "IScrollToSettings"
+                        },
+                        "description": "Some scroll settings that you can check on the sugar.dom.scroll.scrollTo function",
                         "default": {},
                         "defaultStr": "{}"
                     }
@@ -1613,6 +1303,22 @@
                         "description": "An object of settings to configure your feature",
                         "default": {},
                         "defaultStr": "{}"
+                    }
+                },
+                "setting": {
+                    "offset": {
+                        "name": "offset",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Number"
+                                }
+                            ],
+                            "raw": "Number"
+                        },
+                        "description": "The offset before entering in the viewport to set the \"src\" attribute",
+                        "default": 50,
+                        "defaultStr": "50"
                     }
                 },
                 "platform": [
@@ -2900,6 +2606,78 @@
                         "defaultStr": "{}"
                     }
                 },
+                "setting": {
+                    "element": {
+                        "name": "element",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "HTMLElement"
+                                }
+                            ],
+                            "raw": "HTMLElement"
+                        },
+                        "description": "Specify an HTMLElement to detect keyboard events from",
+                        "default": null,
+                        "defaultStr": "null"
+                    },
+                    "keyup": {
+                        "name": "keyup",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Boolean"
+                                }
+                            ],
+                            "raw": "Boolean"
+                        },
+                        "description": "Detect on keyup",
+                        "default": false,
+                        "defaultStr": "false"
+                    },
+                    "keydown": {
+                        "name": "keydown",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Boolean"
+                                }
+                            ],
+                            "raw": "Boolean"
+                        },
+                        "description": "Detect on keydown",
+                        "default": true,
+                        "defaultStr": "true"
+                    },
+                    "once": {
+                        "name": "once",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Boolean"
+                                }
+                            ],
+                            "raw": "Boolean"
+                        },
+                        "description": "Specify if you want to detect the keyboard event just once",
+                        "default": false,
+                        "defaultStr": "false"
+                    },
+                    "splitKey": {
+                        "name": "splitKey",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "String"
+                                }
+                            ],
+                            "raw": "String"
+                        },
+                        "description": "Specify the split key to use in the sequences like \"ctrl+a\"",
+                        "default": "+",
+                        "defaultStr": "'+'"
+                    }
+                },
                 "platform": [
                     {
                         "name": "js",
@@ -3685,6 +3463,58 @@
                 "relPath": "src/node/fs/appendToFileSync.ts",
                 "children": {}
             },
+            "@coffeekraken.sugar.node.fs.chdir": {
+                "id": "@coffeekraken.sugar.node.fs.chdir",
+                "name": "chdir",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Function"
+                        }
+                    ],
+                    "raw": "Function"
+                },
+                "param": {
+                    "path": {
+                        "name": "path",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "String"
+                                }
+                            ],
+                            "raw": "String"
+                        },
+                        "description": "The folder path you want to go to",
+                        "defaultStr": ""
+                    }
+                },
+                "platform": [
+                    {
+                        "name": "node",
+                        "description": ""
+                    }
+                ],
+                "description": "This function allows you to change the process working directory.\nIf you make use of the `__spawn` sugar function, it will also change\nthe directory of the parent process if you call this function in a childProcess.",
+                "namespace": "@coffeekraken.sugar.node.fs",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "js",
+                        "code": "import { __chdir } from '@coffeekraken/sugar/fs';\n__chdir('/my/cool/file.txt', 'Hello world');"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "chdir.ts",
+                "extension": "ts",
+                "relPath": "src/node/fs/chdir.ts",
+                "children": {}
+            },
             "@coffeekraken.sugar.node.fs.checkPathWithMultipleExtensions": {
                 "id": "@coffeekraken.sugar.node.fs.checkPathWithMultipleExtensions",
                 "name": "checkPathWithMultipleExtensions",
@@ -4291,6 +4121,50 @@
                         "defaultStr": "{}"
                     }
                 },
+                "setting": {
+                    "directory": {
+                        "name": "directory",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Boolean"
+                                }
+                            ],
+                            "raw": "Boolean"
+                        },
+                        "description": "Specify if you want to take care of directories",
+                        "default": true,
+                        "defaultStr": "true"
+                    },
+                    "file": {
+                        "name": "file",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Boolean"
+                                }
+                            ],
+                            "raw": "Boolean"
+                        },
+                        "description": "Specify if you want to take care of files",
+                        "default": true,
+                        "defaultStr": "true"
+                    },
+                    "symlink": {
+                        "name": "symlink",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Boolean"
+                                }
+                            ],
+                            "raw": "Boolean"
+                        },
+                        "description": "Specify if you want to take care of symlinks",
+                        "default": true,
+                        "defaultStr": "true"
+                    }
+                },
                 "platform": [
                     {
                         "name": "node",
@@ -4356,6 +4230,50 @@
                         "description": "Some settings for what you want to take care of",
                         "default": {},
                         "defaultStr": "{}"
+                    }
+                },
+                "setting": {
+                    "directory": {
+                        "name": "directory",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Boolean"
+                                }
+                            ],
+                            "raw": "Boolean"
+                        },
+                        "description": "Specify if you want to take care of directories",
+                        "default": true,
+                        "defaultStr": "true"
+                    },
+                    "file": {
+                        "name": "file",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Boolean"
+                                }
+                            ],
+                            "raw": "Boolean"
+                        },
+                        "description": "Specify if you want to take care of files",
+                        "default": true,
+                        "defaultStr": "true"
+                    },
+                    "symlink": {
+                        "name": "symlink",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Boolean"
+                                }
+                            ],
+                            "raw": "Boolean"
+                        },
+                        "description": "Specify if you want to take care of symlinks",
+                        "default": true,
+                        "defaultStr": "true"
                     }
                 },
                 "platform": [
@@ -4474,6 +4392,36 @@
                         "description": "Some settings to configure your hash generation process",
                         "default": {},
                         "defaultStr": "{}"
+                    }
+                },
+                "setting": {
+                    "algo": {
+                        "name": "algo",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "String"
+                                }
+                            ],
+                            "raw": "String"
+                        },
+                        "description": "The algorithm to use",
+                        "default": "sha356",
+                        "defaultStr": "'sha356'"
+                    },
+                    "digest": {
+                        "name": "digest",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "BinaryToTextEncoding"
+                                }
+                            ],
+                            "raw": "BinaryToTextEncoding"
+                        },
+                        "description": "How to digest the hash",
+                        "default": "base64",
+                        "defaultStr": "'base64'"
                     }
                 },
                 "platform": [
@@ -4677,6 +4625,50 @@
                         "description": "Some settings to configure your hash generation process",
                         "default": {},
                         "defaultStr": "{}"
+                    }
+                },
+                "setting": {
+                    "recursive": {
+                        "name": "recursive",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Boolean"
+                                }
+                            ],
+                            "raw": "Boolean"
+                        },
+                        "description": "Specify if you want to generate a hash using also the children or not",
+                        "default": true,
+                        "defaultStr": "true"
+                    },
+                    "algo": {
+                        "name": "algo",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "String"
+                                }
+                            ],
+                            "raw": "String"
+                        },
+                        "description": "The algorithm to use",
+                        "default": "sha356",
+                        "defaultStr": "'sha356'"
+                    },
+                    "digest": {
+                        "name": "digest",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "BinaryToTextEncoding"
+                                }
+                            ],
+                            "raw": "BinaryToTextEncoding"
+                        },
+                        "description": "How to digest the hash",
+                        "default": "base64",
+                        "defaultStr": "'base64'"
                     }
                 },
                 "platform": [
@@ -5266,6 +5258,36 @@
                         "defaultStr": "{}"
                     }
                 },
+                "setting": {
+                    "cwd": {
+                        "name": "cwd",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "String"
+                                }
+                            ],
+                            "raw": "String"
+                        },
+                        "description": "The current working directory to search in",
+                        "default": "/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/tools/sugar",
+                        "defaultStr": "process.cwd()"
+                    },
+                    "SFile": {
+                        "name": "SFile",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Boolean"
+                                }
+                            ],
+                            "raw": "Boolean"
+                        },
+                        "description": "Return an SFile instance if true, otherwise just a simple path string",
+                        "default": true,
+                        "defaultStr": "true"
+                    }
+                },
                 "platform": [
                     {
                         "name": "node",
@@ -5334,6 +5356,81 @@
                             "raw": "IPoolSettings"
                         },
                         "description": "Some settings to configure your pool. Support all the chokidar settings",
+                        "default": {},
+                        "defaultStr": "{}"
+                    }
+                },
+                "setting": {
+                    "SFile": {
+                        "name": "SFile",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Boolean"
+                                }
+                            ],
+                            "raw": "Boolean"
+                        },
+                        "description": "Specify if you want to get back SFile instances or just string path",
+                        "default": true,
+                        "defaultStr": "true"
+                    },
+                    "cwd": {
+                        "name": "cwd",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "String"
+                                }
+                            ],
+                            "raw": "String"
+                        },
+                        "description": "Specify the cwd",
+                        "default": "/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/tools/sugar",
+                        "defaultStr": "process.cwd()"
+                    },
+                    "exclude": {
+                        "name": "exclude",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "array",
+                                    "of": [
+                                        "String"
+                                    ]
+                                }
+                            ],
+                            "raw": "String[]"
+                        },
+                        "description": "Specify some file(s), path(s) to exclude",
+                        "default": [],
+                        "defaultStr": "[]"
+                    },
+                    "watch": {
+                        "name": "watch",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Boolean"
+                                }
+                            ],
+                            "raw": "Boolean"
+                        },
+                        "description": "Specify if you want to watch files or not",
+                        "default": false,
+                        "defaultStr": "false"
+                    },
+                    "chokidar": {
+                        "name": "chokidar",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "IChokidarSettings"
+                                }
+                            ],
+                            "raw": "IChokidarSettings"
+                        },
+                        "description": "Specify some settings to pass to chokidar in order to watch files",
                         "default": {},
                         "defaultStr": "{}"
                     }
@@ -6048,6 +6145,22 @@
                         "defaultStr": "{}"
                     }
                 },
+                "setting": {
+                    "path": {
+                        "name": "path",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "String"
+                                }
+                            ],
+                            "raw": "String"
+                        },
+                        "description": "A path relative to the temp folder to store your file",
+                        "default": null,
+                        "defaultStr": "null"
+                    }
+                },
                 "platform": [
                     {
                         "name": "node",
@@ -6113,6 +6226,22 @@
                         "description": "Some settings to customize your temp file creation",
                         "default": {},
                         "defaultStr": "{}"
+                    }
+                },
+                "setting": {
+                    "path": {
+                        "name": "path",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "String"
+                                }
+                            ],
+                            "raw": "String"
+                        },
+                        "description": "A path relative to the temp folder to store your file",
+                        "default": null,
+                        "defaultStr": "null"
                     }
                 },
                 "platform": [
@@ -7518,6 +7647,92 @@
                 "relPath": "src/node/network/isPortFree.ts",
                 "children": {}
             },
+            "@coffeekraken.sugar.node.npm.addDependencies": {
+                "id": "@coffeekraken.sugar.node.npm.addDependencies",
+                "name": "addDependencies",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Function"
+                        }
+                    ],
+                    "raw": "Function"
+                },
+                "param": {
+                    "dependencies": {
+                        "name": "dependencies",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Record",
+                                    "of": [
+                                        "string, string"
+                                    ]
+                                }
+                            ],
+                            "raw": "Record<string, string>"
+                        },
+                        "description": "Dependencies you want to add",
+                        "defaultStr": ""
+                    },
+                    "settings": {
+                        "name": "settings",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "INpmAddDependenciesSettings"
+                                }
+                            ],
+                            "raw": "INpmAddDependenciesSettings"
+                        },
+                        "description": "Some settings to configure your installation",
+                        "default": {},
+                        "defaultStr": "{}"
+                    }
+                },
+                "setting": {
+                    "cwd": {
+                        "name": "cwd",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "String"
+                                }
+                            ],
+                            "raw": "String"
+                        },
+                        "description": "The directory where you want to execute the install",
+                        "default": "/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/tools/sugar",
+                        "defaultStr": "process.cwd()"
+                    }
+                },
+                "platform": [
+                    {
+                        "name": "node",
+                        "description": ""
+                    }
+                ],
+                "description": "This function allows you to just add some dependencies without installing them directly.\nIt just add the dependency into the package.json file",
+                "namespace": "@coffeekraken.sugar.node.npm",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "js",
+                        "code": "import install from '@coffeekraken/sugar/node/npm/install';\nawait install();"
+                    }
+                ],
+                "async": "true",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "addDependencies.ts",
+                "extension": "ts",
+                "relPath": "src/node/npm/addDependencies.ts",
+                "children": {}
+            },
             "@coffeekraken.sugar.node.npm.globalNodeModulesPath": {
                 "id": "@coffeekraken.sugar.node.npm.globalNodeModulesPath",
                 "name": "globalNodeModulesPath",
@@ -7599,6 +7814,64 @@
                             "raw": "INpmInstallSettings"
                         },
                         "description": "Some settings to configure your installation",
+                        "default": {},
+                        "defaultStr": "{}"
+                    }
+                },
+                "setting": {
+                    "cwd": {
+                        "name": "cwd",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "String"
+                                }
+                            ],
+                            "raw": "String"
+                        },
+                        "description": "The directory where you want to execute the install",
+                        "default": "/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/tools/sugar",
+                        "defaultStr": "process.cwd()"
+                    },
+                    "yarn": {
+                        "name": "yarn",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Boolean"
+                                }
+                            ],
+                            "raw": "Boolean"
+                        },
+                        "description": "Use yarn in priority over npm. Fallback to npm if not available",
+                        "default": true,
+                        "defaultStr": "true"
+                    },
+                    "silent": {
+                        "name": "silent",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Boolean"
+                                }
+                            ],
+                            "raw": "Boolean"
+                        },
+                        "description": "Specify if you want the process to be silent",
+                        "default": true,
+                        "defaultStr": "true"
+                    },
+                    "args": {
+                        "name": "args",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Any"
+                                }
+                            ],
+                            "raw": "Any"
+                        },
+                        "description": "An object of arguments passed directly to the yarn or npm install command",
                         "default": {},
                         "defaultStr": "{}"
                     }
@@ -7959,6 +8232,63 @@
                         "description": "Some settings to tweak scraping behavior",
                         "default": {},
                         "defaultStr": "{}"
+                    }
+                },
+                "setting": {
+                    "id": {
+                        "name": "id",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "String"
+                                }
+                            ],
+                            "raw": "String"
+                        },
+                        "description": "Specify an id used for the cache",
+                        "defaultStr": "undefined"
+                    },
+                    "scraper": {
+                        "name": "scraper",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Any"
+                                }
+                            ],
+                            "raw": "Any"
+                        },
+                        "description": "Specify settings for the sraper. See https://www.npmjs.com/package/open-graph-scraper for more infos",
+                        "default": {},
+                        "defaultStr": "{}"
+                    },
+                    "cache": {
+                        "name": "cache",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "ISCacheSettings"
+                                }
+                            ],
+                            "raw": "ISCacheSettings"
+                        },
+                        "description": "Specify some settings for the caching behavior. Default ttl set to 1 week",
+                        "default": {},
+                        "defaultStr": "{}"
+                    },
+                    "timeout": {
+                        "name": "timeout",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Number"
+                                }
+                            ],
+                            "raw": "Number"
+                        },
+                        "description": "Specigy a timeout after which to consider the url as unreachable",
+                        "default": 2000,
+                        "defaultStr": "2000"
                     }
                 },
                 "platform": [
@@ -8968,6 +9298,55 @@
                         "defaultStr": "{}"
                     }
                 },
+                "setting": {
+                    "highest": {
+                        "name": "highest",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Boolean"
+                                }
+                            ],
+                            "raw": "Boolean"
+                        },
+                        "description": "Specify if you want the highest package possible",
+                        "default": false,
+                        "defaultStr": "false"
+                    },
+                    "upCount": {
+                        "name": "upCount",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Number"
+                                }
+                            ],
+                            "raw": "Number"
+                        },
+                        "description": "Specify a number of packages to go up. Cannot be used alongside the `highest` setting",
+                        "defaultStr": "undefined"
+                    },
+                    "requiredProperties": {
+                        "name": "requiredProperties",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "array",
+                                    "of": [
+                                        "String"
+                                    ]
+                                }
+                            ],
+                            "raw": "String[]"
+                        },
+                        "description": "Specify some required properties that MUST be present in the package.json to be considered as a valid package",
+                        "default": [
+                            "name",
+                            "version"
+                        ],
+                        "defaultStr": "['name','version']"
+                    }
+                },
                 "platform": [
                     {
                         "name": "node",
@@ -9018,6 +9397,22 @@
                         "description": "Some settings to configure your temp directory process",
                         "default": {},
                         "defaultStr": "{}"
+                    }
+                },
+                "setting": {
+                    "scope": {
+                        "name": "scope",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "String"
+                                }
+                            ],
+                            "raw": "String"
+                        },
+                        "description": "Specify the scope in which you want your tmpDir to be returned. Can be \"local\" or \"global\"",
+                        "default": "local",
+                        "defaultStr": "'local'"
                     }
                 },
                 "platform": [
@@ -9606,6 +10001,22 @@
                     ],
                     "raw": "Function"
                 },
+                "setting": {
+                    "scope": {
+                        "name": "scope",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "String"
+                                }
+                            ],
+                            "raw": "String"
+                        },
+                        "description": "Specify the scope in which you want your sugarRootDir to be returned. Can be \"local\" or \"global\"",
+                        "default": "local",
+                        "defaultStr": "'local'"
+                    }
+                },
                 "platform": [
                     {
                         "name": "node",
@@ -9944,6 +10355,21 @@
                         "defaultStr": "{}"
                     }
                 },
+                "setting": {
+                    "...SpawnOptions": {
+                        "name": "...SpawnOptions",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Any"
+                                }
+                            ],
+                            "raw": "Any"
+                        },
+                        "description": "All the supported ```spawn``` options. see: https://nodejs.org/api/child_process.html#child_process_child_process_spawn_command_args_options",
+                        "defaultStr": ""
+                    }
+                },
                 "platform": [
                     {
                         "name": "node",
@@ -10247,6 +10673,22 @@
                         "description": "A setting object to configure your resolve process",
                         "default": {},
                         "defaultStr": "{}"
+                    }
+                },
+                "setting": {
+                    "cwd": {
+                        "name": "cwd",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "String"
+                                }
+                            ],
+                            "raw": "String"
+                        },
+                        "description": "The cwd to use to resolve the type string when they are path",
+                        "default": "/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/tools/sugar",
+                        "defaultStr": "process.cwd()"
                     }
                 },
                 "platform": [
@@ -10901,6 +11343,48 @@
                         "defaultStr": "[]"
                     }
                 },
+                "setting": {
+                    "[defaultAction='>=']": {
+                        "name": "[defaultAction='>=']",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "String"
+                                }
+                            ],
+                            "raw": "String"
+                        },
+                        "description": "Specify the default action you want when none is passed in the $media parameter. Can be \"<\", \">\", \"=\", \"<=\" or \">=\".",
+                        "defaultStr": ""
+                    },
+                    "defaultQuery": {
+                        "name": "defaultQuery",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "String"
+                                }
+                            ],
+                            "raw": "String"
+                        },
+                        "description": "A default query to always use in the generation",
+                        "default": "screen",
+                        "defaultStr": "'screen'"
+                    },
+                    "[queries=['mobile'=>[],'tablet'=>[],'desktop'=>[],'wide'=>[],'dwarf'=>[]]]": {
+                        "name": "[queries=['mobile'=>[],'tablet'=>[],'desktop'=>[],'wide'=>[],'dwarf'=>[]]]",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Array"
+                                }
+                            ],
+                            "raw": "Array"
+                        },
+                        "description": "All the available queries you want to support with for each the \"min-width|height\" and \"max-width|height\" values in integer (used as px)",
+                        "defaultStr": ""
+                    }
+                },
                 "platform": [
                     {
                         "name": "php",
@@ -10965,6 +11449,140 @@
                         "description": "Some settings to configure your layout generation",
                         "default": [],
                         "defaultStr": "[]"
+                    }
+                },
+                "setting": {
+                    "selector": {
+                        "name": "selector",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "String"
+                                }
+                            ],
+                            "raw": "String"
+                        },
+                        "description": "A css selector used to target the correct section/div...",
+                        "default": "#layout",
+                        "defaultStr": "'#layout'"
+                    },
+                    "gap": {
+                        "name": "gap",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "String"
+                                }
+                            ],
+                            "raw": "String"
+                        },
+                        "description": "A gap value to apply on your layout",
+                        "default": null,
+                        "defaultStr": "null"
+                    },
+                    "gapBetween": {
+                        "name": "gapBetween",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Boolean"
+                                }
+                            ],
+                            "raw": "Boolean"
+                        },
+                        "description": "Specify if you want the gap only between the cells or all around",
+                        "default": true,
+                        "defaultStr": "true"
+                    },
+                    "align": {
+                        "name": "align",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "String"
+                                }
+                            ],
+                            "raw": "String"
+                        },
+                        "description": "The \"align-items\" value for your grid layout",
+                        "default": "stretch",
+                        "defaultStr": "'stretch'"
+                    },
+                    "justify": {
+                        "name": "justify",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "String"
+                                }
+                            ],
+                            "raw": "String"
+                        },
+                        "description": "The \"justify-items\" value for your grid layout",
+                        "default": "stretch",
+                        "defaultStr": "'stretch'"
+                    },
+                    "media": {
+                        "name": "media",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "String"
+                                }
+                            ],
+                            "raw": "String"
+                        },
+                        "description": "A media to pass to the \\Sugar\\css\\buildMediaQuery function to scope the generated css in the correct media query",
+                        "default": null,
+                        "defaultStr": "null"
+                    },
+                    "mediaSettings": {
+                        "name": "mediaSettings",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Array"
+                                }
+                            ],
+                            "raw": "Array"
+                        },
+                        "description": "Specify the \\Sugar\\css\\buildMediaQuery $settings parameter if you specify a \"media\" setting",
+                        "default": [],
+                        "defaultStr": "[]"
+                    },
+                    "minify": {
+                        "name": "minify",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Boolean"
+                                }
+                            ],
+                            "raw": "Boolean"
+                        },
+                        "description": "Minify the output css or not",
+                        "default": true,
+                        "defaultStr": "true"
+                    },
+                    "$scope": {
+                        "name": "$scope",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Array"
+                                }
+                            ],
+                            "raw": "Array"
+                        },
+                        "description": "The scope(s) you want to generate",
+                        "default": [
+                            "bare",
+                            "lnf",
+                            "gap",
+                            "align",
+                            "justify"
+                        ],
+                        "defaultStr": "['bare','lnf','gap','align','justify']"
                     }
                 },
                 "platform": [
@@ -13158,6 +13776,34 @@
                         "defaultStr": ""
                     }
                 },
+                "setting": {
+                    "'frontend.path'": {
+                        "name": "'frontend.path'",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "String"
+                                }
+                            ],
+                            "raw": "String"
+                        },
+                        "description": "The absolute path to the frontend directory where you will find the frontspec.json file, package.json, etc...",
+                        "defaultStr": ""
+                    },
+                    "'frontspec.path'": {
+                        "name": "'frontspec.path'",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "String"
+                                }
+                            ],
+                            "raw": "String"
+                        },
+                        "description": "The absolute path to the frontspec.json file",
+                        "defaultStr": ""
+                    }
+                },
                 "platform": [
                     {
                         "name": "twig",
@@ -13432,6 +14078,34 @@
                         "description": "Some settings to configure your array generation",
                         "default": {},
                         "defaultStr": "{}"
+                    }
+                },
+                "setting": {
+                    "max": {
+                        "name": "max",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Number"
+                                }
+                            ],
+                            "raw": "Number"
+                        },
+                        "description": "The maximum wanted when using > and >= quantifiers",
+                        "defaultStr": ""
+                    },
+                    "value": {
+                        "name": "value",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ],
+                            "raw": "Function"
+                        },
+                        "description": "A function that take the current index and that MUST return the value wanted in the generated array",
+                        "defaultStr": ""
                     }
                 },
                 "platform": [
@@ -13846,6 +14520,36 @@
                         "defaultStr": "{}"
                     }
                 },
+                "setting": {
+                    "references": {
+                        "name": "references",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Boolean"
+                                }
+                            ],
+                            "raw": "Boolean"
+                        },
+                        "description": "Specify if you want to use the references comparaison or not",
+                        "default": true,
+                        "defaultStr": "true"
+                    },
+                    "hash": {
+                        "name": "hash",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Boolean"
+                                }
+                            ],
+                            "raw": "Boolean"
+                        },
+                        "description": "Specify if you want to allows transforming object etc in to hashes and compare this instead",
+                        "default": true,
+                        "defaultStr": "true"
+                    }
+                },
                 "description": "This function take two arrays and return all the items that are the same.\nYou can specify if you want only comparing by reference for object, etc... or if\nyou want to transform items in hashes and compare that instead.",
                 "namespace": "@coffeekraken.sugar.shared.array",
                 "example": [
@@ -14141,6 +14845,22 @@
                         "description": "Some settings to configure your process",
                         "default": {},
                         "defaultStr": "{}"
+                    }
+                },
+                "setting": {
+                    "includeBaseClass": {
+                        "name": "includeBaseClass",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Boolean"
+                                }
+                            ],
+                            "raw": "Boolean"
+                        },
+                        "description": "Specify if you want to include the base class in the stack or not",
+                        "default": false,
+                        "defaultStr": "false"
                     }
                 },
                 "platform": [
@@ -14547,6 +15267,22 @@
                         "content": "- includeAllParams (true) {Boolean}: Specify if you want all the arguments in the definition object in your command line string, or if you just want the one passed in your argsObj argument\n- alias (true) {Boolean}: Specify if you want to make use of the aliases in your generated command"
                     }
                 },
+                "setting": {
+                    "keepFalsy": {
+                        "name": "keepFalsy",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Boolean"
+                                }
+                            ],
+                            "raw": "Boolean"
+                        },
+                        "description": "Specify if you want to keep falsy arguments in your command line or not",
+                        "default": false,
+                        "defaultStr": "false"
+                    }
+                },
                 "platform": [
                     {
                         "name": "js",
@@ -14615,6 +15351,56 @@
                         "description": "A settings object that configure how the string will be parsed. Here's the settings options:",
                         "default": {},
                         "defaultStr": "{}"
+                    }
+                },
+                "setting": {
+                    "valueQuote": {
+                        "name": "valueQuote",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "string",
+                                    "value": "'\""
+                                },
+                                {
+                                    "type": "'\"'"
+                                },
+                                {
+                                    "type": "'`'"
+                                }
+                            ],
+                            "raw": "\"'\" | '\"' | '`'"
+                        },
+                        "description": "Specify which quote is used for quoted values. If not set, will take the first quote of the passed string",
+                        "defaultStr": "undefined"
+                    },
+                    "treatNoAsBoolean": {
+                        "name": "treatNoAsBoolean",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Boolean"
+                                }
+                            ],
+                            "raw": "Boolean"
+                        },
+                        "description": "If true, the \"no-...\" argument will be treated as false boolean. \"--no-format\": { format: false }",
+                        "default": true,
+                        "defaultStr": "true"
+                    },
+                    "camelCase": {
+                        "name": "camelCase",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Boolean"
+                                }
+                            ],
+                            "raw": "Boolean"
+                        },
+                        "description": "If true, will transform returned object properties to camelCase",
+                        "default": true,
+                        "defaultStr": "true"
                     }
                 },
                 "platform": [
@@ -16464,6 +17250,36 @@
                         "description": "An object of settings",
                         "default": {},
                         "defaultStr": "{}"
+                    }
+                },
+                "setting": {
+                    "block": {
+                        "name": "block",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Boolean"
+                                }
+                            ],
+                            "raw": "Boolean"
+                        },
+                        "description": "Remove the blocks comments",
+                        "default": true,
+                        "defaultStr": "true"
+                    },
+                    "line": {
+                        "name": "line",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Boolean"
+                                }
+                            ],
+                            "raw": "Boolean"
+                        },
+                        "description": "Remove the line comments",
+                        "default": true,
+                        "defaultStr": "true"
                     }
                 },
                 "platform": [
@@ -18557,6 +19373,64 @@
                         "defaultStr": "{}"
                     }
                 },
+                "setting": {
+                    "inteval": {
+                        "name": "inteval",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Number"
+                                }
+                            ],
+                            "raw": "Number"
+                        },
+                        "description": "An interval in ms to call your callback function",
+                        "default": 40,
+                        "defaultStr": "1000/25"
+                    },
+                    "easing": {
+                        "name": "easing",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ],
+                            "raw": "Function"
+                        },
+                        "description": "An easing function that take as parameter a value between 0 and 1",
+                        "default": "easeInOutQuart",
+                        "defaultStr": "easeInOutQuart"
+                    },
+                    "from": {
+                        "name": "from",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Number"
+                                }
+                            ],
+                            "raw": "Number"
+                        },
+                        "description": "The value to start with",
+                        "default": 0,
+                        "defaultStr": "0"
+                    },
+                    "to": {
+                        "name": "to",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Number"
+                                }
+                            ],
+                            "raw": "Number"
+                        },
+                        "description": "The value to end with",
+                        "default": 100,
+                        "defaultStr": "100"
+                    }
+                },
                 "platform": [
                     {
                         "name": "js",
@@ -19031,6 +19905,22 @@
                         },
                         "description": "The HTML to process.",
                         "defaultStr": ""
+                    }
+                },
+                "setting": {
+                    "expandPleasantCssClassname": {
+                        "name": "expandPleasantCssClassname",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Boolean"
+                                }
+                            ],
+                            "raw": "Boolean"
+                        },
+                        "description": "Specify if you want to expand the pleasant css classes names like \"s-typo:p\" to \"s-typo--p\"",
+                        "default": true,
+                        "defaultStr": "true"
                     }
                 },
                 "platform": [
@@ -22361,6 +23251,36 @@
                         "defaultStr": "{}"
                     }
                 },
+                "setting": {
+                    "deep": {
+                        "name": "deep",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Boolean"
+                                }
+                            ],
+                            "raw": "Boolean"
+                        },
+                        "description": "Specify if you want to apply the scope deep in the object or just in the first level",
+                        "default": true,
+                        "defaultStr": "true"
+                    },
+                    "clone": {
+                        "name": "clone",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Boolean"
+                                }
+                            ],
+                            "raw": "Boolean"
+                        },
+                        "description": "Specify if you want to clone the object before applying scope or not",
+                        "default": false,
+                        "defaultStr": "false"
+                    }
+                },
                 "platform": [
                     {
                         "name": "js",
@@ -22431,6 +23351,22 @@
                         "defaultStr": "{}"
                     }
                 },
+                "setting": {
+                    "deep": {
+                        "name": "deep",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Boolean"
+                                }
+                            ],
+                            "raw": "Boolean"
+                        },
+                        "description": "Specify if you want to apply the treatment deep in the object or just in the first level",
+                        "default": true,
+                        "defaultStr": "true"
+                    }
+                },
                 "platform": [
                     {
                         "name": "js",
@@ -22499,6 +23435,22 @@
                         "description": "Specify some settings to configure your clone process",
                         "default": {},
                         "defaultStr": "{}"
+                    }
+                },
+                "setting": {
+                    "deep": {
+                        "name": "deep",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Boolean"
+                                }
+                            ],
+                            "raw": "Boolean"
+                        },
+                        "description": "Specify if you want to clone the object deeply",
+                        "default": false,
+                        "defaultStr": "false"
                     }
                 },
                 "platform": [
@@ -22905,6 +23857,22 @@
                         "defaultStr": "{}"
                     }
                 },
+                "setting": {
+                    "mergeArray": {
+                        "name": "mergeArray",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Boolean"
+                                }
+                            ],
+                            "raw": "Boolean"
+                        },
+                        "description": "Merge or not arrays",
+                        "default": false,
+                        "defaultStr": "false"
+                    }
+                },
                 "platform": [
                     {
                         "name": "js",
@@ -22987,6 +23955,78 @@
                         "description": "An object of settings to configure your proxy:",
                         "default": {},
                         "defaultStr": "{}"
+                    }
+                },
+                "setting": {
+                    "deep": {
+                        "name": "deep",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Boolean"
+                                }
+                            ],
+                            "raw": "Boolean"
+                        },
+                        "description": "Specify if you want to watch the passed object deeply or juste the first level",
+                        "default": true,
+                        "defaultStr": "true"
+                    },
+                    "handleSet": {
+                        "name": "handleSet",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Boolean"
+                                }
+                            ],
+                            "raw": "Boolean"
+                        },
+                        "description": "Specify if you want to handle the \"set\" action",
+                        "default": true,
+                        "defaultStr": "true"
+                    },
+                    "handleGet": {
+                        "name": "handleGet",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Boolean"
+                                }
+                            ],
+                            "raw": "Boolean"
+                        },
+                        "description": "Specify if you want to handle the \"get\" action",
+                        "default": false,
+                        "defaultStr": "false"
+                    },
+                    "handleDelete": {
+                        "name": "handleDelete",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Boolean"
+                                }
+                            ],
+                            "raw": "Boolean"
+                        },
+                        "description": "Specify if you want to handle the \"delete\" action",
+                        "default": true,
+                        "defaultStr": "true"
+                    },
+                    "domElements": {
+                        "name": "domElements",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Boolean"
+                                }
+                            ],
+                            "raw": "Boolean"
+                        },
+                        "description": "Specify if you want to proxy dom elements",
+                        "default": false,
+                        "defaultStr": "false"
                     }
                 },
                 "platform": [
@@ -23435,6 +24475,78 @@
                         "defaultStr": "{}"
                     }
                 },
+                "setting": {
+                    "separation": {
+                        "name": "separation",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "String"
+                                }
+                            ],
+                            "raw": "String"
+                        },
+                        "description": "The separation character to use for preperty names",
+                        "default": ".",
+                        "defaultStr": "\".\""
+                    },
+                    "array": {
+                        "name": "array",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Boolean"
+                                }
+                            ],
+                            "raw": "Boolean"
+                        },
+                        "description": "Specify if you want to flatten array or not",
+                        "default": false,
+                        "defaultStr": "false"
+                    },
+                    "quoteSeparatedProperties": {
+                        "name": "quoteSeparatedProperties",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Boolean"
+                                }
+                            ],
+                            "raw": "Boolean"
+                        },
+                        "description": "Specify if you want to quote dotted properties to be able to restore them correctly later",
+                        "default": true,
+                        "defaultStr": "true"
+                    },
+                    "quoteCharacter": {
+                        "name": "quoteCharacter",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "String"
+                                }
+                            ],
+                            "raw": "String"
+                        },
+                        "description": "Specify the quote character to use when need to quote separated properties",
+                        "default": "\"",
+                        "defaultStr": "'\"'"
+                    },
+                    "keepLastIntact": {
+                        "name": "keepLastIntact",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Boolean"
+                                }
+                            ],
+                            "raw": "Boolean"
+                        },
+                        "description": "Specify if you want to keep the last level (object, array) intact and not to flatten each properties",
+                        "default": false,
+                        "defaultStr": "false"
+                    }
+                },
                 "platform": [
                     {
                         "name": "js",
@@ -23585,6 +24697,22 @@
                         "description": "A settings object to configure your glob get process",
                         "default": {},
                         "defaultStr": "{}"
+                    }
+                },
+                "setting": {
+                    "deepize": {
+                        "name": "deepize",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Boolean"
+                                }
+                            ],
+                            "raw": "Boolean"
+                        },
+                        "description": "Specify if you want the result object to be deepized using the ```deepize``` sugar function",
+                        "default": true,
+                        "defaultStr": "true"
                     }
                 },
                 "platform": [
@@ -26148,6 +27276,22 @@
                         "defaultStr": "[]"
                     }
                 },
+                "setting": {
+                    "splitWords": {
+                        "name": "splitWords",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Boolean"
+                                }
+                            ],
+                            "raw": "Boolean"
+                        },
+                        "description": "If you want to split the words or not...",
+                        "default": true,
+                        "defaultStr": "true"
+                    }
+                },
                 "platform": [
                     {
                         "name": "js",
@@ -27869,6 +29013,22 @@
                         "defaultStr": "{}"
                     }
                 },
+                "setting": {
+                    "offset": {
+                        "name": "offset",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "String"
+                                }
+                            ],
+                            "raw": "String"
+                        },
+                        "description": "An offset to detect the in/out earlier or later",
+                        "default": "10px",
+                        "defaultStr": "'10px'"
+                    }
+                },
                 "platform": [
                     {
                         "name": "js",
@@ -27949,6 +29109,22 @@
                         "defaultStr": "100"
                     }
                 },
+                "setting": {
+                    "maxSpeed": {
+                        "name": "maxSpeed",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Number"
+                                }
+                            ],
+                            "raw": "Number"
+                        },
+                        "description": "The maximum speed",
+                        "default": 0.01,
+                        "defaultStr": "0.01"
+                    }
+                },
                 "platform": [
                     {
                         "name": "js",
@@ -28027,6 +29203,50 @@
                         "description": "Some settings like offset, etc...",
                         "default": {},
                         "defaultStr": "{}"
+                    }
+                },
+                "setting": {
+                    "offset": {
+                        "name": "offset",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Number"
+                                }
+                            ],
+                            "raw": "Number"
+                        },
+                        "description": "An offset to detect earlier the end of the scroll",
+                        "default": 20,
+                        "defaultStr": "20"
+                    },
+                    "once": {
+                        "name": "once",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "boolean"
+                                }
+                            ],
+                            "raw": "boolean"
+                        },
+                        "description": "true if you want to detect the scroll end just once",
+                        "default": false,
+                        "defaultStr": "false"
+                    },
+                    "times": {
+                        "name": "times",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "number"
+                                }
+                            ],
+                            "raw": "number"
+                        },
+                        "description": "Specify a number of times to detect the scroll end",
+                        "default": -1,
+                        "defaultStr": "-1"
                     }
                 },
                 "platform": [
@@ -28112,6 +29332,22 @@
                         "defaultStr": "{}"
                     }
                 },
+                "setting": {
+                    "threshold": {
+                        "name": "threshold",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Number"
+                                }
+                            ],
+                            "raw": "Number"
+                        },
+                        "description": "The swipe threshold",
+                        "default": 100,
+                        "defaultStr": "100"
+                    }
+                },
                 "platform": [
                     {
                         "name": "js",
@@ -28194,6 +29430,127 @@
                             "raw": "IwhenSettings"
                         },
                         "description": "Some settings like offset, etc...",
+                        "default": {},
+                        "defaultStr": "{}"
+                    }
+                },
+                "setting": {
+                    "whenInViewport": {
+                        "name": "whenInViewport",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Partial",
+                                    "of": [
+                                        "IWhenInViewportSettings"
+                                    ]
+                                }
+                            ],
+                            "raw": "Partial<IWhenInViewportSettings>"
+                        },
+                        "description": "Some settings for the whenInViewport function",
+                        "default": {},
+                        "defaultStr": "{}"
+                    },
+                    "whenNearViewport": {
+                        "name": "whenNearViewport",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Partial",
+                                    "of": [
+                                        "IWhenNearViewportSettings"
+                                    ]
+                                }
+                            ],
+                            "raw": "Partial<IWhenNearViewportSettings>"
+                        },
+                        "description": "Some settings for the whenNearViewport function",
+                        "default": {},
+                        "defaultStr": "{}"
+                    },
+                    "whenEntersViewport": {
+                        "name": "whenEntersViewport",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Partial",
+                                    "of": [
+                                        "IWhenEntersViewportSettubgs"
+                                    ]
+                                }
+                            ],
+                            "raw": "Partial<IWhenEntersViewportSettubgs>"
+                        },
+                        "description": "Some settings for the whenEntersViewport function",
+                        "default": {},
+                        "defaultStr": "{}"
+                    },
+                    "whenOutOfViewport": {
+                        "name": "whenOutOfViewport",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Partial",
+                                    "of": [
+                                        "IWhenOutOfViewportSettings"
+                                    ]
+                                }
+                            ],
+                            "raw": "Partial<IWhenOutOfViewportSettings>"
+                        },
+                        "description": "Some settings for the whenOutOfViewport function",
+                        "default": {},
+                        "defaultStr": "{}"
+                    },
+                    "whenInteract": {
+                        "name": "whenInteract",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Partial",
+                                    "of": [
+                                        "IWhenInteractSettings"
+                                    ]
+                                }
+                            ],
+                            "raw": "Partial<IWhenInteractSettings>"
+                        },
+                        "description": "Some settings for the whenInteract function",
+                        "default": {},
+                        "defaultStr": "{}"
+                    },
+                    "whenVisible": {
+                        "name": "whenVisible",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Partial",
+                                    "of": [
+                                        "IWhenVisibleSettings"
+                                    ]
+                                }
+                            ],
+                            "raw": "Partial<IWhenVisibleSettings>"
+                        },
+                        "description": "Some settings for the whenVisible function",
+                        "default": {},
+                        "defaultStr": "{}"
+                    },
+                    "whenStylesheetsReady": {
+                        "name": "whenStylesheetsReady",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Partial",
+                                    "of": [
+                                        "IWhenStyleSheetsReadySettings"
+                                    ]
+                                }
+                            ],
+                            "raw": "Partial<IWhenStyleSheetsReadySettings>"
+                        },
+                        "description": "Some settings for the whenStylesheetsReady function",
                         "default": {},
                         "defaultStr": "{}"
                     }
@@ -28505,6 +29862,22 @@
                         "defaultStr": "{}"
                     }
                 },
+                "setting": {
+                    "offset": {
+                        "name": "offset",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "String"
+                                }
+                            ],
+                            "raw": "String"
+                        },
+                        "description": "An offset to detect the element entering in viewport earlier or later",
+                        "default": "0px 0px -25% 0px",
+                        "defaultStr": "'0px 0px -25% 0px'"
+                    }
+                },
                 "platform": [
                     {
                         "name": "js",
@@ -28710,6 +30083,92 @@
                         "defaultStr": "{}"
                     }
                 },
+                "setting": {
+                    "pointerover": {
+                        "name": "pointerover",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "boolean"
+                                }
+                            ],
+                            "raw": "boolean"
+                        },
+                        "description": "Specify if you want to detect the pointerover or not",
+                        "default": true,
+                        "defaultStr": "true"
+                    },
+                    "pointerout": {
+                        "name": "pointerout",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "boolean"
+                                }
+                            ],
+                            "raw": "boolean"
+                        },
+                        "description": "Specify if you want to detect the pointerout or not",
+                        "default": true,
+                        "defaultStr": "true"
+                    },
+                    "pointerdown": {
+                        "name": "pointerdown",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "boolean"
+                                }
+                            ],
+                            "raw": "boolean"
+                        },
+                        "description": "Specify if you want to detect the pointerdown or not",
+                        "default": true,
+                        "defaultStr": "true"
+                    },
+                    "touchstart": {
+                        "name": "touchstart",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "boolean"
+                                }
+                            ],
+                            "raw": "boolean"
+                        },
+                        "description": "Specify if you want to detect the touchstart or not",
+                        "default": true,
+                        "defaultStr": "true"
+                    },
+                    "touchend": {
+                        "name": "touchend",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "boolean"
+                                }
+                            ],
+                            "raw": "boolean"
+                        },
+                        "description": "Specify if you want to detect the touchend or not",
+                        "default": true,
+                        "defaultStr": "true"
+                    },
+                    "focus": {
+                        "name": "focus",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "boolean"
+                                }
+                            ],
+                            "raw": "boolean"
+                        },
+                        "description": "Specify if you want to detect the focus or not",
+                        "default": true,
+                        "defaultStr": "true"
+                    }
+                },
                 "platform": [
                     {
                         "name": "js",
@@ -28856,6 +30315,22 @@
                         "description": "Some settings to tweak the detection behavior",
                         "default": {},
                         "defaultStr": "{}"
+                    }
+                },
+                "setting": {
+                    "offset": {
+                        "name": "offset",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "String"
+                                }
+                            ],
+                            "raw": "String"
+                        },
+                        "description": "An offset to detect sooner or later the element entering in the viewport",
+                        "default": "10px",
+                        "defaultStr": "'10px'"
                     }
                 },
                 "platform": [
@@ -29081,6 +30556,22 @@
                         "defaultStr": "{}"
                     }
                 },
+                "setting": {
+                    "offset": {
+                        "name": "offset",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "String"
+                                }
+                            ],
+                            "raw": "String"
+                        },
+                        "description": "Some offset",
+                        "default": "`${window.innerHeight}px ${window.innerWidth}px`",
+                        "defaultStr": "`${window.innerHeight}px ${window.innerWidth}px`"
+                    }
+                },
                 "platform": [
                     {
                         "name": "js",
@@ -29149,6 +30640,22 @@
                         "description": "Some settings to tweak the detection behavior",
                         "default": {},
                         "defaultStr": "{}"
+                    }
+                },
+                "setting": {
+                    "offset": {
+                        "name": "offset",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "String"
+                                }
+                            ],
+                            "raw": "String"
+                        },
+                        "description": "An offset to detect sooner or later the element exits the viewport",
+                        "default": "10px",
+                        "defaultStr": "10px"
                     }
                 },
                 "platform": [
@@ -29704,6 +31211,26 @@
                         },
                         "description": "The element you want to enhance",
                         "defaultStr": ""
+                    }
+                },
+                "setting": {
+                    "relativeTo": {
+                        "name": "relativeTo",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "HTMLElement"
+                                },
+                                {
+                                    "type": "string",
+                                    "value": "visible"
+                                }
+                            ],
+                            "raw": "HTMLElement|'visible'"
+                        },
+                        "description": "The element to calculate the visible surface relative to",
+                        "default": "visible",
+                        "defaultStr": "'visible'"
                     }
                 },
                 "platform": [
@@ -30394,6 +31921,34 @@
                         "description": "Some settings to configure your injection",
                         "default": null,
                         "defaultStr": "null"
+                    }
+                },
+                "setting": {
+                    "id": {
+                        "name": "id",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "String"
+                                }
+                            ],
+                            "raw": "String"
+                        },
+                        "description": "An id for the injected style tag",
+                        "defaultStr": ""
+                    },
+                    "rootNode": {
+                        "name": "rootNode",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "HTMLElement"
+                                }
+                            ],
+                            "raw": "HTMLElement"
+                        },
+                        "description": "A node in which to inject the style",
+                        "defaultStr": "undefined"
                     }
                 },
                 "platform": [
@@ -31973,6 +33528,49 @@
                         "defaultStr": ""
                     }
                 },
+                "setting": {
+                    "visible": {
+                        "name": "visible",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Boolean"
+                                }
+                            ],
+                            "raw": "Boolean"
+                        },
+                        "description": "Specify if you want only the visible nodes",
+                        "default": null,
+                        "defaultStr": "null"
+                    },
+                    "inViewport": {
+                        "name": "inViewport",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Boolean"
+                                }
+                            ],
+                            "raw": "Boolean"
+                        },
+                        "description": "Specify if you want only the nodes that are in the viewport",
+                        "default": null,
+                        "defaultStr": "null"
+                    },
+                    "rootNode": {
+                        "name": "rootNode",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "HTMLElement"
+                                }
+                            ],
+                            "raw": "HTMLElement"
+                        },
+                        "description": "Specify the root node from where you want to query",
+                        "defaultStr": "document.body"
+                    }
+                },
                 "platform": [
                     {
                         "name": "js",
@@ -32036,6 +33634,49 @@
                         },
                         "description": "The settings of the query",
                         "defaultStr": ""
+                    }
+                },
+                "setting": {
+                    "visible": {
+                        "name": "visible",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Boolean"
+                                }
+                            ],
+                            "raw": "Boolean"
+                        },
+                        "description": "Specify if you want only the visible nodes",
+                        "default": null,
+                        "defaultStr": "null"
+                    },
+                    "inViewport": {
+                        "name": "inViewport",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Boolean"
+                                }
+                            ],
+                            "raw": "Boolean"
+                        },
+                        "description": "Specify if you want only the nodes that are in the viewport",
+                        "default": null,
+                        "defaultStr": "null"
+                    },
+                    "rootNode": {
+                        "name": "rootNode",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "HTMLElement"
+                                }
+                            ],
+                            "raw": "HTMLElement"
+                        },
+                        "description": "Specify the root node from where you want to query",
+                        "defaultStr": "document.body"
                     }
                 },
                 "platform": [
@@ -32115,6 +33756,36 @@
                         "description": "An optional settings object to specify things like the rootNode to monitor, etc...",
                         "default": {},
                         "defaultStr": "{}"
+                    }
+                },
+                "setting": {
+                    "rootNode": {
+                        "name": "rootNode",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "HTMLElement"
+                                }
+                            ],
+                            "raw": "HTMLElement"
+                        },
+                        "description": "The root node from where to observe childs",
+                        "default": {},
+                        "defaultStr": "document"
+                    },
+                    "once": {
+                        "name": "once",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Boolean"
+                                }
+                            ],
+                            "raw": "Boolean"
+                        },
+                        "description": "If true, each observed nodes will be handled only once even if they are removed and reinjected in the dom",
+                        "default": true,
+                        "defaultStr": "true"
                     }
                 },
                 "platform": [
@@ -32288,6 +33959,78 @@
                         "defaultStr": "{}"
                     }
                 },
+                "setting": {
+                    "duration": {
+                        "name": "duration",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Number"
+                                }
+                            ],
+                            "raw": "Number"
+                        },
+                        "description": "The animation duration",
+                        "default": 1000,
+                        "defaultStr": "1000"
+                    },
+                    "easing": {
+                        "name": "easing",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ],
+                            "raw": "Function"
+                        },
+                        "description": "An easing Function",
+                        "default": "easeInOutQuad",
+                        "defaultStr": "easeInOutQuad"
+                    },
+                    "offset": {
+                        "name": "offset",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Number"
+                                }
+                            ],
+                            "raw": "Number"
+                        },
+                        "description": "The destination offset",
+                        "default": 0,
+                        "defaultStr": "0"
+                    },
+                    "align": {
+                        "name": "align",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "String"
+                                }
+                            ],
+                            "raw": "String"
+                        },
+                        "description": "The destination align (top, center, bottom)",
+                        "default": "top",
+                        "defaultStr": "'top'"
+                    },
+                    "onFinish": {
+                        "name": "onFinish",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ],
+                            "raw": "Function"
+                        },
+                        "description": "A callback to call when the animation if finished",
+                        "default": null,
+                        "defaultStr": "null"
+                    }
+                },
                 "platform": [
                     {
                         "name": "js",
@@ -32337,6 +34080,22 @@
                             "raw": "IScrollToLocationHashSettings"
                         },
                         "description": "Some settings to tweak the scroll behavior",
+                        "default": {},
+                        "defaultStr": "{}"
+                    }
+                },
+                "setting": {
+                    "scroll": {
+                        "name": "scroll",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "IScrollToSettings"
+                                }
+                            ],
+                            "raw": "IScrollToSettings"
+                        },
+                        "description": "Some scroll settings that you can check on the sugar.dom.scroll.scrollTo function",
                         "default": {},
                         "defaultStr": "{}"
                     }
@@ -32468,6 +34227,22 @@
                             "raw": "Number"
                         },
                         "description": "The swipe threshold",
+                        "default": 100,
+                        "defaultStr": "100"
+                    }
+                },
+                "setting": {
+                    "threshold": {
+                        "name": "threshold",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Number"
+                                }
+                            ],
+                            "raw": "Number"
+                        },
+                        "description": "The minimum distance the user has to swipe before detection",
                         "default": 100,
                         "defaultStr": "100"
                     }
@@ -33452,6 +35227,22 @@
                         "defaultStr": "{}"
                     }
                 },
+                "setting": {
+                    "timeout": {
+                        "name": "timeout",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Number"
+                                }
+                            ],
+                            "raw": "Number"
+                        },
+                        "description": "The timeout in ms to wait before removing the animations/transitions clearing",
+                        "default": 0,
+                        "defaultStr": "0"
+                    }
+                },
                 "platform": [
                     {
                         "name": "js",
@@ -34136,6 +35927,36 @@
                         "defaultStr": "{}"
                     }
                 },
+                "setting": {
+                    "tag": {
+                        "name": "tag",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "String"
+                                }
+                            ],
+                            "raw": "String"
+                        },
+                        "description": "The tag to use to split the letters",
+                        "default": "span",
+                        "defaultStr": "\"span\""
+                    },
+                    "class": {
+                        "name": "class",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "String"
+                                }
+                            ],
+                            "raw": "String"
+                        },
+                        "description": "The class to apply on the tags",
+                        "default": "s-split-letters",
+                        "defaultStr": "\"s-split-letters\""
+                    }
+                },
                 "platform": [
                     {
                         "name": "js",
@@ -34202,6 +36023,36 @@
                         "defaultStr": "{}"
                     }
                 },
+                "setting": {
+                    "tag": {
+                        "name": "tag",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "String"
+                                }
+                            ],
+                            "raw": "String"
+                        },
+                        "description": "The tag to use to split the lines",
+                        "default": "p",
+                        "defaultStr": "\"p\""
+                    },
+                    "class": {
+                        "name": "class",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "String"
+                                }
+                            ],
+                            "raw": "String"
+                        },
+                        "description": "The class to apply on the tags",
+                        "default": "s-split-lines",
+                        "defaultStr": "\"s-split-lines\""
+                    }
+                },
                 "platform": [
                     {
                         "name": "js",
@@ -34266,6 +36117,36 @@
                         "description": "Some settings to tweak the process",
                         "default": {},
                         "defaultStr": "{}"
+                    }
+                },
+                "setting": {
+                    "tag": {
+                        "name": "tag",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "String"
+                                }
+                            ],
+                            "raw": "String"
+                        },
+                        "description": "The tag to use to split the words",
+                        "default": "p",
+                        "defaultStr": "\"p\""
+                    },
+                    "tagClass": {
+                        "name": "tagClass",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "String"
+                                }
+                            ],
+                            "raw": "String"
+                        },
+                        "description": "The class to apply on the tags",
+                        "default": "s-split-lines",
+                        "defaultStr": "\"s-split-lines\""
                     }
                 },
                 "platform": [
@@ -35514,6 +37395,140 @@
                         "description": "Some settings to configure your layout generation",
                         "default": [],
                         "defaultStr": "[]"
+                    }
+                },
+                "setting": {
+                    "selector": {
+                        "name": "selector",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "String"
+                                }
+                            ],
+                            "raw": "String"
+                        },
+                        "description": "A css selector used to target the correct section/div...",
+                        "default": "#layout",
+                        "defaultStr": "'#layout'"
+                    },
+                    "gap": {
+                        "name": "gap",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "String"
+                                }
+                            ],
+                            "raw": "String"
+                        },
+                        "description": "A gap value to apply on your layout",
+                        "default": null,
+                        "defaultStr": "null"
+                    },
+                    "gapBetween": {
+                        "name": "gapBetween",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Boolean"
+                                }
+                            ],
+                            "raw": "Boolean"
+                        },
+                        "description": "Specify if you want the gap only between the cells or all around",
+                        "default": true,
+                        "defaultStr": "true"
+                    },
+                    "align": {
+                        "name": "align",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "String"
+                                }
+                            ],
+                            "raw": "String"
+                        },
+                        "description": "The \"align-items\" value for your grid layout",
+                        "default": "stretch",
+                        "defaultStr": "'stretch'"
+                    },
+                    "justify": {
+                        "name": "justify",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "String"
+                                }
+                            ],
+                            "raw": "String"
+                        },
+                        "description": "The \"justify-items\" value for your grid layout",
+                        "default": "stretch",
+                        "defaultStr": "'stretch'"
+                    },
+                    "media": {
+                        "name": "media",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "String"
+                                }
+                            ],
+                            "raw": "String"
+                        },
+                        "description": "A media to pass to the \\Sugar\\css\\buildMediaQuery function to scope the generated css in the correct media query",
+                        "default": null,
+                        "defaultStr": "null"
+                    },
+                    "mediaSettings": {
+                        "name": "mediaSettings",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Array"
+                                }
+                            ],
+                            "raw": "Array"
+                        },
+                        "description": "Specify the \\Sugar\\css\\buildMediaQuery $settings parameter if you specify a \"media\" setting",
+                        "default": [],
+                        "defaultStr": "[]"
+                    },
+                    "minify": {
+                        "name": "minify",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Boolean"
+                                }
+                            ],
+                            "raw": "Boolean"
+                        },
+                        "description": "Minify the output css or not",
+                        "default": true,
+                        "defaultStr": "true"
+                    },
+                    "$scope": {
+                        "name": "$scope",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Array"
+                                }
+                            ],
+                            "raw": "Array"
+                        },
+                        "description": "The scope(s) you want to generate",
+                        "default": [
+                            "bare",
+                            "lnf",
+                            "gap",
+                            "align",
+                            "justify"
+                        ],
+                        "defaultStr": "['bare','lnf','gap','align','justify']"
                     }
                 },
                 "platform": [

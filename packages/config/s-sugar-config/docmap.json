@@ -3,6 +3,7 @@
     "extends": [],
     "generated": {
         "extends": [
+            "@coffeekraken/aa",
             "@coffeekraken/cli",
             "@coffeekraken/s-activate-feature",
             "@coffeekraken/s-appear-feature",
@@ -43,9 +44,11 @@
             "@coffeekraken/s-filtrable-input-component",
             "@coffeekraken/s-floating-feature",
             "@coffeekraken/s-form-validate-feature",
+            "@coffeekraken/s-front",
             "@coffeekraken/s-frontend-checker",
             "@coffeekraken/s-frontend-server",
             "@coffeekraken/s-frontspec",
+            "@coffeekraken/s-glitch-feature",
             "@coffeekraken/s-glob",
             "@coffeekraken/s-google-map-component",
             "@coffeekraken/s-handlebars",
@@ -83,7 +86,6 @@
             "@coffeekraken/s-sugar-element",
             "@coffeekraken/s-sugar-feature",
             "@coffeekraken/s-sugar-json",
-            "@coffeekraken/s-lazy-feature",
             "@coffeekraken/s-theme-switcher-component",
             "@coffeekraken/s-theme",
             "@coffeekraken/s-timer",
@@ -101,2619 +103,6 @@
             "@coffeekraken/sugar"
         ],
         "map": {
-            "@coffeekraken.s-sugar-config.config.assets.dev": {
-                "id": "@coffeekraken.s-sugar-config.config.assets.dev",
-                "name": "dev",
-                "type": {
-                    "types": [
-                        {
-                            "type": "String"
-                        }
-                    ],
-                    "raw": "String"
-                },
-                "default": "{ type: 'module', defer: true, src: '/src/js/index.ts', env: 'development' }",
-                "description": "Specify the development javascript index asset.",
-                "namespace": "@coffeekraken.s-sugar-config.config.assets",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "assets.config.ts",
-                "extension": "config",
-                "relPath": "src/config/assets.config.ts"
-            },
-            "@coffeekraken.s-sugar-config.config.assets.module": {
-                "id": "@coffeekraken.s-sugar-config.config.assets.module",
-                "name": "module",
-                "type": {
-                    "types": [
-                        {
-                            "type": "String"
-                        }
-                    ],
-                    "raw": "String"
-                },
-                "default": "{ type: 'module', defer: true, src: '/dist/js/index.esm.js', env: 'production' }",
-                "description": "Specify the production javascript module index asset.",
-                "namespace": "@coffeekraken.s-sugar-config.config.assets",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "assets.config.ts",
-                "extension": "config",
-                "relPath": "src/config/assets.config.ts"
-            },
-            "@coffeekraken.s-sugar-config.config.assets.nomodule": {
-                "id": "@coffeekraken.s-sugar-config.config.assets.nomodule",
-                "name": "nomodule",
-                "type": {
-                    "types": [
-                        {
-                            "type": "String"
-                        }
-                    ],
-                    "raw": "String"
-                },
-                "default": "{ nomodule: true, defer: true, src: '/dist/js/index.amd.js', env: 'production' }",
-                "description": "Specify the production javascript nomodule index asset.",
-                "namespace": "@coffeekraken.s-sugar-config.config.assets",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "assets.config.ts",
-                "extension": "config",
-                "relPath": "src/config/assets.config.ts"
-            },
-            "@coffeekraken.s-sugar-config.config.assets.style": {
-                "id": "@coffeekraken.s-sugar-config.config.assets.style",
-                "name": "style",
-                "type": {
-                    "types": [
-                        {
-                            "type": "String"
-                        }
-                    ],
-                    "raw": "String"
-                },
-                "default": "{ defer: true, src: '/dist/css/index.css' }",
-                "description": "Specify the production style index asset.",
-                "namespace": "@coffeekraken.s-sugar-config.config.assets",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "assets.config.ts",
-                "extension": "config",
-                "relPath": "src/config/assets.config.ts",
-                "children": {}
-            },
-            "@coffeekraken.s-sugar-config.config.config.browser.include.include": {
-                "id": "@coffeekraken.s-sugar-config.config.config.browser.include.include",
-                "name": "include",
-                "type": {
-                    "types": [
-                        {
-                            "type": "Array",
-                            "of": [
-                                "String"
-                            ]
-                        }
-                    ],
-                    "raw": "Array<String>"
-                },
-                "default": "['contact', 'datetime', 'log', 'serve', 'env', 'theme']",
-                "description": "Specify which configuration you want to include for the \"browser\". If the array is empty, will include all the configs",
-                "namespace": "@coffeekraken.s-sugar-config.config.config.browser.include",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "config.config.ts",
-                "extension": "config",
-                "relPath": "src/config/config.config.ts"
-            },
-            "@coffeekraken.s-sugar-config.config.config.node.include.include": {
-                "id": "@coffeekraken.s-sugar-config.config.config.node.include.include",
-                "name": "include",
-                "type": {
-                    "types": [
-                        {
-                            "type": "Array",
-                            "of": [
-                                "String"
-                            ]
-                        }
-                    ],
-                    "raw": "Array<String>"
-                },
-                "default": "[storage.package.cacheDir]/config",
-                "description": "Specify which configuration you want to include for the \"browser\". If the array is empty, will include all the configs",
-                "namespace": "@coffeekraken.s-sugar-config.config.config.node.include",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "config.config.ts",
-                "extension": "config",
-                "relPath": "src/config/config.config.ts",
-                "children": {}
-            },
-            "@coffeekraken.s-sugar-config.config.contact.discord.url": {
-                "id": "@coffeekraken.s-sugar-config.config.contact.discord.url",
-                "name": "url",
-                "type": {
-                    "types": [
-                        {
-                            "type": "String"
-                        }
-                    ],
-                    "raw": "String"
-                },
-                "default": "[config.discord.server.url]",
-                "description": "Specify the url for the \"discord\" contact",
-                "namespace": "@coffeekraken.s-sugar-config.config.contact.discord",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "contact.config.ts",
-                "extension": "config",
-                "relPath": "src/config/contact.config.ts"
-            },
-            "@coffeekraken.s-sugar-config.config.contact.email.url": {
-                "id": "@coffeekraken.s-sugar-config.config.contact.email.url",
-                "name": "url",
-                "type": {
-                    "types": [
-                        {
-                            "type": "String"
-                        }
-                    ],
-                    "raw": "String"
-                },
-                "default": "config?.packageJson?.author?.email ?? config?.git?.user?.email",
-                "description": "Specify the url for the \"email\" contact",
-                "namespace": "@coffeekraken.s-sugar-config.config.contact.email",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "contact.config.ts",
-                "extension": "config",
-                "relPath": "src/config/contact.config.ts"
-            },
-            "@coffeekraken.s-sugar-config.config.contact.email.shield": {
-                "id": "@coffeekraken.s-sugar-config.config.contact.email.shield",
-                "name": "shield",
-                "type": {
-                    "types": [
-                        {
-                            "type": "String"
-                        }
-                    ],
-                    "raw": "String"
-                },
-                "default": "[config.discord.server.url]",
-                "description": "Specify the shield url for the \"email\" contact",
-                "namespace": "@coffeekraken.s-sugar-config.config.contact.email",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "contact.config.ts",
-                "extension": "config",
-                "relPath": "src/config/contact.config.ts",
-                "children": {
-                    "url": {
-                        "id": "@coffeekraken.s-sugar-config.config.contact.discord.url",
-                        "name": "url",
-                        "type": {
-                            "types": [
-                                {
-                                    "type": "String"
-                                }
-                            ],
-                            "raw": "String"
-                        },
-                        "default": "https://img.shields.io/badge/Join%20us%20on%20discord-Join-blueviolet?style=[config.shieldsio.style]&logo=discord",
-                        "description": "Specify the shield url for the \"discord\" contact",
-                        "namespace": "@coffeekraken.s-sugar-config.config.contact.discord",
-                        "since": "2.0.0",
-                        "author": {
-                            "name": "Olivier Bossel",
-                            "email": "olivier.bossel@gmail.com",
-                            "url": "https://coffeekraken.io"
-                        }
-                    }
-                }
-            },
-            "@coffeekraken.s-sugar-config.config.core.namespace.pattern": {
-                "id": "@coffeekraken.s-sugar-config.config.core.namespace.pattern",
-                "name": "pattern",
-                "type": {
-                    "types": [
-                        {
-                            "type": "String"
-                        }
-                    ],
-                    "raw": "String"
-                },
-                "default": "{path}",
-                "description": "Specify a generation pattern to generate the namespace. Here's the available tokens:\n- {package.name}: The package name specified in the package.json\n- {package.version}: The package version specified in the package.json\n- {path}: The passed path parameter",
-                "namespace": "@coffeekraken.s-sugar-config.config.core.namespace",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "core.config.ts",
-                "extension": "config",
-                "relPath": "src/config/core.config.ts"
-            },
-            "@coffeekraken.s-sugar-config.config.core.namespace.context": {
-                "id": "@coffeekraken.s-sugar-config.config.core.namespace.context",
-                "name": "context",
-                "type": {
-                    "types": [
-                        {
-                            "type": "String"
-                        }
-                    ],
-                    "raw": "String"
-                },
-                "default": "__packageRootDir()",
-                "description": "Specify the context in which to generate the namespace.\nThe context is simply a root folder from which to search for the package.json\nfile to get the name that serve to the namespace generation",
-                "namespace": "@coffeekraken.s-sugar-config.config.core.namespace",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "core.config.ts",
-                "extension": "config",
-                "relPath": "src/config/core.config.ts",
-                "children": {}
-            },
-            "@coffeekraken.s-sugar-config.config.datetime.dateFormat": {
-                "id": "@coffeekraken.s-sugar-config.config.datetime.dateFormat",
-                "name": "dateFormat",
-                "type": {
-                    "types": [
-                        {
-                            "type": "String"
-                        }
-                    ],
-                    "raw": "String"
-                },
-                "default": "YYYY-MM-DD",
-                "description": "This specify the format of the date you want across your project.\nStick to the Moment.js (https://momentjs.com/) formating syntax to keep coherence across\nyour format definition",
-                "namespace": "@coffeekraken.s-sugar-config.config.datetime",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "datetime.config.ts",
-                "extension": "config",
-                "relPath": "src/config/datetime.config.ts"
-            },
-            "@coffeekraken.s-sugar-config.config.datetime.timeFormat": {
-                "id": "@coffeekraken.s-sugar-config.config.datetime.timeFormat",
-                "name": "timeFormat",
-                "type": {
-                    "types": [
-                        {
-                            "type": "String"
-                        }
-                    ],
-                    "raw": "String"
-                },
-                "default": "h:mm:ss",
-                "description": "This specify the format of the time you want across your project.\nStick to the Moment.js (https://momentjs.com/) formating syntax to keep coherence across\nyour format definition",
-                "namespace": "@coffeekraken.s-sugar-config.config.datetime",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "datetime.config.ts",
-                "extension": "config",
-                "relPath": "src/config/datetime.config.ts"
-            },
-            "@coffeekraken.s-sugar-config.config.datetime.i18n.previousMonth": {
-                "id": "@coffeekraken.s-sugar-config.config.datetime.i18n.previousMonth",
-                "name": "previousMonth",
-                "type": {
-                    "types": [
-                        {
-                            "type": "String"
-                        }
-                    ],
-                    "raw": "String"
-                },
-                "default": "Previous Month",
-                "description": "This specify the \"previous month\" translation",
-                "namespace": "@coffeekraken.s-sugar-config.config.datetime.i18n",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "datetime.config.ts",
-                "extension": "config",
-                "relPath": "src/config/datetime.config.ts"
-            },
-            "@coffeekraken.s-sugar-config.config.datetime.i18n.nextMonth": {
-                "id": "@coffeekraken.s-sugar-config.config.datetime.i18n.nextMonth",
-                "name": "nextMonth",
-                "type": {
-                    "types": [
-                        {
-                            "type": "String"
-                        }
-                    ],
-                    "raw": "String"
-                },
-                "default": "Next Month",
-                "description": "This specify the \"next month\" translation",
-                "namespace": "@coffeekraken.s-sugar-config.config.datetime.i18n",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "datetime.config.ts",
-                "extension": "config",
-                "relPath": "src/config/datetime.config.ts"
-            },
-            "@coffeekraken.s-sugar-config.config.datetime.i18n.months": {
-                "id": "@coffeekraken.s-sugar-config.config.datetime.i18n.months",
-                "name": "months",
-                "type": {
-                    "types": [
-                        {
-                            "type": "String"
-                        }
-                    ],
-                    "raw": "String"
-                },
-                "default": "['January','February','March','April','May','June','July','August','September','October','November','December']",
-                "description": "This specify the \"months\" translation",
-                "namespace": "@coffeekraken.s-sugar-config.config.datetime.i18n",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "datetime.config.ts",
-                "extension": "config",
-                "relPath": "src/config/datetime.config.ts"
-            },
-            "@coffeekraken.s-sugar-config.config.datetime.i18n.weekdays": {
-                "id": "@coffeekraken.s-sugar-config.config.datetime.i18n.weekdays",
-                "name": "weekdays",
-                "type": {
-                    "types": [
-                        {
-                            "type": "String"
-                        }
-                    ],
-                    "raw": "String"
-                },
-                "default": "['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday']",
-                "description": "This specify the \"weekdays\" translation",
-                "namespace": "@coffeekraken.s-sugar-config.config.datetime.i18n",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "datetime.config.ts",
-                "extension": "config",
-                "relPath": "src/config/datetime.config.ts"
-            },
-            "@coffeekraken.s-sugar-config.config.datetime.i18n.weekdaysShort": {
-                "id": "@coffeekraken.s-sugar-config.config.datetime.i18n.weekdaysShort",
-                "name": "weekdaysShort",
-                "type": {
-                    "types": [
-                        {
-                            "type": "String"
-                        }
-                    ],
-                    "raw": "String"
-                },
-                "default": "['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']",
-                "description": "This specify the \"weekdays shorts\" translation",
-                "namespace": "@coffeekraken.s-sugar-config.config.datetime.i18n",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "datetime.config.ts",
-                "extension": "config",
-                "relPath": "src/config/datetime.config.ts",
-                "children": {}
-            },
-            "@coffeekraken.s-sugar-config.config.dev.colors.yellow": {
-                "id": "@coffeekraken.s-sugar-config.config.dev.colors.yellow",
-                "name": "yellow",
-                "type": {
-                    "types": [
-                        {
-                            "type": "Color"
-                        }
-                    ],
-                    "raw": "Color"
-                },
-                "default": "#ffdc89",
-                "description": "Specify the \"yellow\" terminal color value",
-                "namespace": "@coffeekraken.s-sugar-config.config.dev.colors",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "dev.config.ts",
-                "extension": "config",
-                "relPath": "src/config/dev.config.ts"
-            },
-            "@coffeekraken.s-sugar-config.config.dev.colors.cyan": {
-                "id": "@coffeekraken.s-sugar-config.config.dev.colors.cyan",
-                "name": "cyan",
-                "type": {
-                    "types": [
-                        {
-                            "type": "Color"
-                        }
-                    ],
-                    "raw": "Color"
-                },
-                "default": "#65c1cd",
-                "description": "Specify the \"cyan\" terminal color value",
-                "namespace": "@coffeekraken.s-sugar-config.config.dev.colors",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "dev.config.ts",
-                "extension": "config",
-                "relPath": "src/config/dev.config.ts"
-            },
-            "@coffeekraken.s-sugar-config.config.dev.colors.green": {
-                "id": "@coffeekraken.s-sugar-config.config.dev.colors.green",
-                "name": "green",
-                "type": {
-                    "types": [
-                        {
-                            "type": "Color"
-                        }
-                    ],
-                    "raw": "Color"
-                },
-                "default": "#a7cb8b",
-                "description": "Specify the \"green\" terminal color value",
-                "namespace": "@coffeekraken.s-sugar-config.config.dev.colors",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "dev.config.ts",
-                "extension": "config",
-                "relPath": "src/config/dev.config.ts"
-            },
-            "@coffeekraken.s-sugar-config.config.dev.colors.magenta": {
-                "id": "@coffeekraken.s-sugar-config.config.dev.colors.magenta",
-                "name": "magenta",
-                "type": {
-                    "types": [
-                        {
-                            "type": "Color"
-                        }
-                    ],
-                    "raw": "Color"
-                },
-                "default": "#d190e3",
-                "description": "Specify the \"magenta\" terminal color value",
-                "namespace": "@coffeekraken.s-sugar-config.config.dev.colors",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "dev.config.ts",
-                "extension": "config",
-                "relPath": "src/config/dev.config.ts"
-            },
-            "@coffeekraken.s-sugar-config.config.dev.colors.red": {
-                "id": "@coffeekraken.s-sugar-config.config.dev.colors.red",
-                "name": "red",
-                "type": {
-                    "types": [
-                        {
-                            "type": "Color"
-                        }
-                    ],
-                    "raw": "Color"
-                },
-                "default": "#e78287",
-                "description": "Specify the \"red\" terminal color value",
-                "namespace": "@coffeekraken.s-sugar-config.config.dev.colors",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "dev.config.ts",
-                "extension": "config",
-                "relPath": "src/config/dev.config.ts"
-            },
-            "@coffeekraken.s-sugar-config.config.dev.colors.blue": {
-                "id": "@coffeekraken.s-sugar-config.config.dev.colors.blue",
-                "name": "blue",
-                "type": {
-                    "types": [
-                        {
-                            "type": "Color"
-                        }
-                    ],
-                    "raw": "Color"
-                },
-                "default": "#71bdf2",
-                "description": "Specify the \"blue\" terminal color value",
-                "namespace": "@coffeekraken.s-sugar-config.config.dev.colors",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "dev.config.ts",
-                "extension": "config",
-                "relPath": "src/config/dev.config.ts"
-            },
-            "@coffeekraken.s-sugar-config.config.dev.colors.primary": {
-                "id": "@coffeekraken.s-sugar-config.config.dev.colors.primary",
-                "name": "primary",
-                "type": {
-                    "types": [
-                        {
-                            "type": "Color"
-                        }
-                    ],
-                    "raw": "Color"
-                },
-                "default": "#ffdc89",
-                "description": "Specify the \"primary\" terminal color value",
-                "namespace": "@coffeekraken.s-sugar-config.config.dev.colors",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "dev.config.ts",
-                "extension": "config",
-                "relPath": "src/config/dev.config.ts"
-            },
-            "@coffeekraken.s-sugar-config.config.dev.colors.secondary": {
-                "id": "@coffeekraken.s-sugar-config.config.dev.colors.secondary",
-                "name": "secondary",
-                "type": {
-                    "types": [
-                        {
-                            "type": "Color"
-                        }
-                    ],
-                    "raw": "Color"
-                },
-                "default": "#65c1cd",
-                "description": "Specify the \"secondary\" terminal color value",
-                "namespace": "@coffeekraken.s-sugar-config.config.dev.colors",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "dev.config.ts",
-                "extension": "config",
-                "relPath": "src/config/dev.config.ts"
-            },
-            "@coffeekraken.s-sugar-config.config.dev.colors.grey": {
-                "id": "@coffeekraken.s-sugar-config.config.dev.colors.grey",
-                "name": "grey",
-                "type": {
-                    "types": [
-                        {
-                            "type": "Color"
-                        }
-                    ],
-                    "raw": "Color"
-                },
-                "default": "#e2e5e9",
-                "description": "Specify the \"grey\" terminal color value",
-                "namespace": "@coffeekraken.s-sugar-config.config.dev.colors",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "dev.config.ts",
-                "extension": "config",
-                "relPath": "src/config/dev.config.ts"
-            },
-            "@coffeekraken.s-sugar-config.config.dev.colors.gray": {
-                "id": "@coffeekraken.s-sugar-config.config.dev.colors.gray",
-                "name": "gray",
-                "type": {
-                    "types": [
-                        {
-                            "type": "Color"
-                        }
-                    ],
-                    "raw": "Color"
-                },
-                "default": "#e2e5e9",
-                "description": "Specify the \"gray\" terminal color value",
-                "namespace": "@coffeekraken.s-sugar-config.config.dev.colors",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "dev.config.ts",
-                "extension": "config",
-                "relPath": "src/config/dev.config.ts"
-            },
-            "@coffeekraken.s-sugar-config.config.dev.colors.black": {
-                "id": "@coffeekraken.s-sugar-config.config.dev.colors.black",
-                "name": "black",
-                "type": {
-                    "types": [
-                        {
-                            "type": "Color"
-                        }
-                    ],
-                    "raw": "Color"
-                },
-                "default": "#343a43",
-                "description": "Specify the \"black\" terminal color value",
-                "namespace": "@coffeekraken.s-sugar-config.config.dev.colors",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "dev.config.ts",
-                "extension": "config",
-                "relPath": "src/config/dev.config.ts"
-            },
-            "@coffeekraken.s-sugar-config.config.dev.colors.white": {
-                "id": "@coffeekraken.s-sugar-config.config.dev.colors.white",
-                "name": "white",
-                "type": {
-                    "types": [
-                        {
-                            "type": "Color"
-                        }
-                    ],
-                    "raw": "Color"
-                },
-                "default": "#e2e5e9",
-                "description": "Specify the \"white\" terminal color value",
-                "namespace": "@coffeekraken.s-sugar-config.config.dev.colors",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "dev.config.ts",
-                "extension": "config",
-                "relPath": "src/config/dev.config.ts",
-                "children": {}
-            },
-            "@coffeekraken.s-sugar-config.config.discord.server.id": {
-                "id": "@coffeekraken.s-sugar-config.config.discord.server.id",
-                "name": "id",
-                "type": {
-                    "types": [
-                        {
-                            "type": "String"
-                        }
-                    ],
-                    "raw": "String"
-                },
-                "default": "940362961682333767",
-                "description": "Specify the discord server id",
-                "namespace": "@coffeekraken.s-sugar-config.config.discord.server",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "discord.config.ts",
-                "extension": "config",
-                "relPath": "src/config/discord.config.ts"
-            },
-            "@coffeekraken.s-sugar-config.config.discord.server.url": {
-                "id": "@coffeekraken.s-sugar-config.config.discord.server.url",
-                "name": "url",
-                "type": {
-                    "types": [
-                        {
-                            "type": "String"
-                        }
-                    ],
-                    "raw": "String"
-                },
-                "default": "https://discord.gg/HzycksDJ",
-                "description": "Specify the discord server url",
-                "namespace": "@coffeekraken.s-sugar-config.config.discord.server",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "discord.config.ts",
-                "extension": "config",
-                "relPath": "src/config/discord.config.ts",
-                "children": {}
-            },
-            "@coffeekraken.s-sugar-config.config.git.user.name": {
-                "id": "@coffeekraken.s-sugar-config.config.git.user.name",
-                "name": "name",
-                "type": {
-                    "types": [
-                        {
-                            "type": "String"
-                        }
-                    ],
-                    "raw": "String"
-                },
-                "default": "undefined",
-                "description": "Specify the git user name. Usually taken automatically from your git configuration",
-                "namespace": "@coffeekraken.s-sugar-config.config.git.user",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "git.config.ts",
-                "extension": "config",
-                "relPath": "src/config/git.config.ts"
-            },
-            "@coffeekraken.s-sugar-config.config.git.user.email": {
-                "id": "@coffeekraken.s-sugar-config.config.git.user.email",
-                "name": "email",
-                "type": {
-                    "types": [
-                        {
-                            "type": "String"
-                        }
-                    ],
-                    "raw": "String"
-                },
-                "default": "undefined",
-                "description": "Specify the git email. Usually taken automatically from your git configuration",
-                "namespace": "@coffeekraken.s-sugar-config.config.git.user",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "git.config.ts",
-                "extension": "config",
-                "relPath": "src/config/git.config.ts"
-            },
-            "@coffeekraken.s-sugar-config.config.git.repo.url": {
-                "id": "@coffeekraken.s-sugar-config.config.git.repo.url",
-                "name": "url",
-                "type": {
-                    "types": [
-                        {
-                            "type": "String"
-                        }
-                    ],
-                    "raw": "String"
-                },
-                "default": "undefined",
-                "description": "Specify the git repository url. Usually taken automatically from your git repo config",
-                "namespace": "@coffeekraken.s-sugar-config.config.git.repo",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "git.config.ts",
-                "extension": "config",
-                "relPath": "src/config/git.config.ts",
-                "children": {}
-            },
-            "@coffeekraken.s-sugar-config.config.google.gtm": {
-                "id": "@coffeekraken.s-sugar-config.config.google.gtm",
-                "name": "gtm",
-                "type": {
-                    "types": [
-                        {
-                            "type": "String"
-                        }
-                    ],
-                    "raw": "String"
-                },
-                "description": "Specigy the google tag manager you want to use across your project",
-                "namespace": "@coffeekraken.s-sugar-config.config.google",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "google.config.ts",
-                "extension": "config",
-                "relPath": "src/config/google.config.ts"
-            },
-            "@coffeekraken.s-sugar-config.config.google.ga": {
-                "id": "@coffeekraken.s-sugar-config.config.google.ga",
-                "name": "ga",
-                "type": {
-                    "types": [
-                        {
-                            "type": "String"
-                        }
-                    ],
-                    "raw": "String"
-                },
-                "description": "Specigy the google analytics id you want to use across your project",
-                "namespace": "@coffeekraken.s-sugar-config.config.google",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "google.config.ts",
-                "extension": "config",
-                "relPath": "src/config/google.config.ts"
-            },
-            "@coffeekraken.s-sugar-config.config.google.apiKey": {
-                "id": "@coffeekraken.s-sugar-config.config.google.apiKey",
-                "name": "apiKey",
-                "type": {
-                    "types": [
-                        {
-                            "type": "String"
-                        }
-                    ],
-                    "raw": "String"
-                },
-                "description": "Specigy the google map api key to use across your project",
-                "namespace": "@coffeekraken.s-sugar-config.config.google",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "google.config.ts",
-                "extension": "config",
-                "relPath": "src/config/google.config.ts",
-                "children": {}
-            },
-            "@coffeekraken.s-sugar-config.config.icons.fontawesome.url": {
-                "id": "@coffeekraken.s-sugar-config.config.icons.fontawesome.url",
-                "name": "url",
-                "type": {
-                    "types": [
-                        {
-                            "type": "String"
-                        }
-                    ],
-                    "raw": "String"
-                },
-                "default": "https://use.fontawesome.com/releases/v5.15.3/css/all.css",
-                "description": "Specify the url to the font-awesome stylesheet to load. By default it will load\nall the icons but you can create a \"kit\" on the fontaawesome website and load only\nthe icons you need.\nWhen using the postcss sugar plugin with the ```@sugar.icon.fa``` mixin, this url will be automatically\nloaded in your css if you use some fontawesome icons.",
-                "namespace": "@coffeekraken.s-sugar-config.config.icons.fontawesome",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "icons.config.ts",
-                "extension": "config",
-                "relPath": "src/config/icons.config.ts"
-            },
-            "@coffeekraken.s-sugar-config.config.icons.fantasticon.name": {
-                "id": "@coffeekraken.s-sugar-config.config.icons.fantasticon.name",
-                "name": "name",
-                "type": {
-                    "types": [
-                        {
-                            "type": "String"
-                        }
-                    ],
-                    "raw": "String"
-                },
-                "default": "sugar-fonticon",
-                "description": "Specify the name of the generated font",
-                "namespace": "@coffeekraken.s-sugar-config.config.icons.fantasticon",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "icons.config.ts",
-                "extension": "config",
-                "relPath": "src/config/icons.config.ts"
-            },
-            "@coffeekraken.s-sugar-config.config.icons.fantasticon.outputDir": {
-                "id": "@coffeekraken.s-sugar-config.config.icons.fantasticon.outputDir",
-                "name": "outputDir",
-                "type": {
-                    "types": [
-                        {
-                            "type": "String"
-                        }
-                    ],
-                    "raw": "String"
-                },
-                "default": "[config.storage.src.fontsDir]/sugar-icons",
-                "description": "Specify the output directory to generate fonticon in",
-                "namespace": "@coffeekraken.s-sugar-config.config.icons.fantasticon",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "icons.config.ts",
-                "extension": "config",
-                "relPath": "src/config/icons.config.ts"
-            },
-            "@coffeekraken.s-sugar-config.config.icons.fantasticon.serveFontsDir": {
-                "id": "@coffeekraken.s-sugar-config.config.icons.fantasticon.serveFontsDir",
-                "name": "serveFontsDir",
-                "type": {
-                    "types": [
-                        {
-                            "type": "String"
-                        }
-                    ],
-                    "raw": "String"
-                },
-                "default": "[config.storage.dist.fontsDir]/sugar-icons",
-                "description": "Specify the path to the fonts directory to serve",
-                "namespace": "@coffeekraken.s-sugar-config.config.icons.fantasticon",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "icons.config.ts",
-                "extension": "config",
-                "relPath": "src/config/icons.config.ts",
-                "children": {}
-            },
-            "@coffeekraken.s-sugar-config.config.license.layout.headerImageUrl": {
-                "id": "@coffeekraken.s-sugar-config.config.license.layout.headerImageUrl",
-                "name": "headerImageUrl",
-                "type": {
-                    "types": [
-                        {
-                            "type": "String"
-                        }
-                    ],
-                    "raw": "String"
-                },
-                "default": "[config.serve.img.url]/doc/licenseHeader.jpg",
-                "description": "Specify the header image to use for displaying license. This has to be relative to your project root directory",
-                "namespace": "@coffeekraken.s-sugar-config.config.license.layout",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "license.config.ts",
-                "extension": "config",
-                "relPath": "src/config/license.config.ts",
-                "children": {}
-            },
-            "@coffeekraken.s-sugar-config.config.log.types": {
-                "id": "@coffeekraken.s-sugar-config.config.log.types",
-                "name": "types",
-                "type": {
-                    "types": [
-                        {
-                            "type": "array",
-                            "of": [
-                                "String"
-                            ]
-                        }
-                    ],
-                    "raw": "String[]"
-                },
-                "default": "['info','warning','error']",
-                "description": "Set the log types you want for your app.\n- false: No log at all\n- info: Default logs\n- warning: Display the warnings\n- error: Display the errors\n- verbose: Detailed logs",
-                "namespace": "@coffeekraken.s-sugar-config.config.log",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "log.config.ts",
-                "extension": "config",
-                "relPath": "src/config/log.config.ts",
-                "children": {}
-            },
-            "@coffeekraken.s-sugar-config.config.metas.lang": {
-                "id": "@coffeekraken.s-sugar-config.config.metas.lang",
-                "name": "lang",
-                "type": {
-                    "types": [
-                        {
-                            "type": "String"
-                        }
-                    ],
-                    "raw": "String"
-                },
-                "default": "en",
-                "description": "Specify the lang of the project",
-                "namespace": "@coffeekraken.s-sugar-config.config.metas",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "metas.config.ts",
-                "extension": "config",
-                "relPath": "src/config/metas.config.ts"
-            },
-            "@coffeekraken.s-sugar-config.config.metas.title": {
-                "id": "@coffeekraken.s-sugar-config.config.metas.title",
-                "name": "title",
-                "type": {
-                    "types": [
-                        {
-                            "type": "String"
-                        }
-                    ],
-                    "raw": "String"
-                },
-                "default": "config.package.title ?? config.package.name",
-                "description": "Specify the title of the project",
-                "namespace": "@coffeekraken.s-sugar-config.config.metas",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "metas.config.ts",
-                "extension": "config",
-                "relPath": "src/config/metas.config.ts"
-            },
-            "@coffeekraken.s-sugar-config.config.metas.homepage": {
-                "id": "@coffeekraken.s-sugar-config.config.metas.homepage",
-                "name": "homepage",
-                "type": {
-                    "types": [
-                        {
-                            "type": "String"
-                        }
-                    ],
-                    "raw": "String"
-                },
-                "default": "config.package.homepage",
-                "description": "Specify the homepage url of the project",
-                "namespace": "@coffeekraken.s-sugar-config.config.metas",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "metas.config.ts",
-                "extension": "config",
-                "relPath": "src/config/metas.config.ts"
-            },
-            "@coffeekraken.s-sugar-config.config.metas.description": {
-                "id": "@coffeekraken.s-sugar-config.config.metas.description",
-                "name": "description",
-                "type": {
-                    "types": [
-                        {
-                            "type": "String"
-                        }
-                    ],
-                    "raw": "String"
-                },
-                "default": "config.package.description",
-                "description": "Specify the description of the project",
-                "namespace": "@coffeekraken.s-sugar-config.config.metas",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "metas.config.ts",
-                "extension": "config",
-                "relPath": "src/config/metas.config.ts"
-            },
-            "@coffeekraken.s-sugar-config.config.metas.themeColor": {
-                "id": "@coffeekraken.s-sugar-config.config.metas.themeColor",
-                "name": "themeColor",
-                "type": {
-                    "types": [
-                        {
-                            "type": "String"
-                        }
-                    ],
-                    "raw": "String"
-                },
-                "default": "theme.color.accent",
-                "description": "Specify the theme main color of the project",
-                "namespace": "@coffeekraken.s-sugar-config.config.metas",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "metas.config.ts",
-                "extension": "config",
-                "relPath": "src/config/metas.config.ts"
-            },
-            "@coffeekraken.s-sugar-config.config.metas.author": {
-                "id": "@coffeekraken.s-sugar-config.config.metas.author",
-                "name": "author",
-                "type": {
-                    "types": [
-                        {
-                            "type": "String"
-                        }
-                    ],
-                    "raw": "String"
-                },
-                "default": "config.package.author",
-                "description": "Specify the author of the project.\nMust be an object with the \"name\", \"email\" and \"url\" properties",
-                "namespace": "@coffeekraken.s-sugar-config.config.metas",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "metas.config.ts",
-                "extension": "config",
-                "relPath": "src/config/metas.config.ts"
-            },
-            "@coffeekraken.s-sugar-config.config.metas.ob": {
-                "id": "@coffeekraken.s-sugar-config.config.metas.ob",
-                "name": "ob",
-                "type": {
-                    "types": [
-                        {
-                            "type": "String"
-                        }
-                    ],
-                    "raw": "String"
-                },
-                "default": "config.package.author",
-                "description": "Specify the opengraph metas for the project\nMust be an object with the \"title\", \"description\", \"type\", \"url\" and \"image\" properties",
-                "namespace": "@coffeekraken.s-sugar-config.config.metas",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "metas.config.ts",
-                "extension": "config",
-                "relPath": "src/config/metas.config.ts",
-                "children": {}
-            },
-            "@coffeekraken.s-sugar-config.config.npm.rootDir": {
-                "id": "@coffeekraken.s-sugar-config.config.npm.rootDir",
-                "name": "rootDir",
-                "type": {
-                    "types": [
-                        {
-                            "type": "String"
-                        }
-                    ],
-                    "raw": "String"
-                },
-                "default": "[config.storage.package.rootDir]/node_modules",
-                "description": "Specify the \"node_modules\" directory path",
-                "namespace": "@coffeekraken.s-sugar-config.config.npm",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "npm.config.ts",
-                "extension": "config",
-                "relPath": "src/config/npm.config.ts",
-                "children": {}
-            },
-            "@coffeekraken.s-sugar-config.config.process.killOnError": {
-                "id": "@coffeekraken.s-sugar-config.config.process.killOnError",
-                "name": "killOnError",
-                "type": {
-                    "types": [
-                        {
-                            "type": "Boolean"
-                        }
-                    ],
-                    "raw": "Boolean"
-                },
-                "default": "true",
-                "description": "Specify if the process has to be killed (rejected) on error",
-                "namespace": "@coffeekraken.s-sugar-config.config.process",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "process.config.ts",
-                "extension": "config",
-                "relPath": "src/config/process.config.ts"
-            },
-            "@coffeekraken.s-sugar-config.config.process.stdio": {
-                "id": "@coffeekraken.s-sugar-config.config.process.stdio",
-                "name": "stdio",
-                "type": {
-                    "types": [
-                        {
-                            "type": "String"
-                        }
-                    ],
-                    "raw": "String"
-                },
-                "default": "inherit",
-                "description": "Specify the in/out style to use. Available by default:\n- inherit: Simply log into console\n- blessed: Take the entire screen and log items using blessed",
-                "namespace": "@coffeekraken.s-sugar-config.config.process",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "process.config.ts",
-                "extension": "config",
-                "relPath": "src/config/process.config.ts"
-            },
-            "@coffeekraken.s-sugar-config.config.process.throw": {
-                "id": "@coffeekraken.s-sugar-config.config.process.throw",
-                "name": "throw",
-                "type": {
-                    "types": [
-                        {
-                            "type": "Boolean"
-                        }
-                    ],
-                    "raw": "Boolean"
-                },
-                "default": "true",
-                "description": "Specify if you want to process class to throw errors when some happend",
-                "namespace": "@coffeekraken.s-sugar-config.config.process",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "process.config.ts",
-                "extension": "config",
-                "relPath": "src/config/process.config.ts"
-            },
-            "@coffeekraken.s-sugar-config.config.process.exitAtEnd": {
-                "id": "@coffeekraken.s-sugar-config.config.process.exitAtEnd",
-                "name": "exitAtEnd",
-                "type": {
-                    "types": [
-                        {
-                            "type": "Boolean"
-                        }
-                    ],
-                    "raw": "Boolean"
-                },
-                "default": "false",
-                "description": "Specify if you want the actual node process to exist when the process has ended",
-                "namespace": "@coffeekraken.s-sugar-config.config.process",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "process.config.ts",
-                "extension": "config",
-                "relPath": "src/config/process.config.ts"
-            },
-            "@coffeekraken.s-sugar-config.config.process.runAsChild": {
-                "id": "@coffeekraken.s-sugar-config.config.process.runAsChild",
-                "name": "runAsChild",
-                "type": {
-                    "types": [
-                        {
-                            "type": "Boolean"
-                        }
-                    ],
-                    "raw": "Boolean"
-                },
-                "default": "true",
-                "description": "Specify if you want the process to be runned into a child process",
-                "namespace": "@coffeekraken.s-sugar-config.config.process",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "process.config.ts",
-                "extension": "config",
-                "relPath": "src/config/process.config.ts"
-            },
-            "@coffeekraken.s-sugar-config.config.process.processPath": {
-                "id": "@coffeekraken.s-sugar-config.config.process.processPath",
-                "name": "processPath",
-                "type": {
-                    "types": [
-                        {
-                            "type": "String"
-                        }
-                    ],
-                    "raw": "String"
-                },
-                "default": "null",
-                "description": "Specify the path to the SProcess file. Usually setted automatically and used to start the process as child one\nwhen specify the parameter ```runAsChild```",
-                "namespace": "@coffeekraken.s-sugar-config.config.process",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "process.config.ts",
-                "extension": "config",
-                "relPath": "src/config/process.config.ts",
-                "children": {}
-            },
-            "@coffeekraken.s-sugar-config.config.readme.input": {
-                "id": "@coffeekraken.s-sugar-config.config.readme.input",
-                "name": "input",
-                "type": {
-                    "types": [
-                        {
-                            "type": "String"
-                        }
-                    ],
-                    "raw": "String"
-                },
-                "default": "[config.storage.src.docDir]/README.md",
-                "description": "Specify where is stored the input README.md file before bein builded using the SMarkdownBuilder class",
-                "namespace": "@coffeekraken.s-sugar-config.config.readme",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "readme.config.ts",
-                "extension": "config",
-                "relPath": "src/config/readme.config.ts"
-            },
-            "@coffeekraken.s-sugar-config.config.readme.output": {
-                "id": "@coffeekraken.s-sugar-config.config.readme.output",
-                "name": "output",
-                "type": {
-                    "types": [
-                        {
-                            "type": "String"
-                        }
-                    ],
-                    "raw": "String"
-                },
-                "default": "[config.storage.package.rootDir]/README.md",
-                "description": "Specify where is stored the output README.md file after bein builded using the SMarkdownBuilder class",
-                "namespace": "@coffeekraken.s-sugar-config.config.readme",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "readme.config.ts",
-                "extension": "config",
-                "relPath": "src/config/readme.config.ts"
-            },
-            "@coffeekraken.s-sugar-config.config.readme.layout.headerImageUrl": {
-                "id": "@coffeekraken.s-sugar-config.config.readme.layout.headerImageUrl",
-                "name": "headerImageUrl",
-                "type": {
-                    "types": [
-                        {
-                            "type": "String"
-                        }
-                    ],
-                    "raw": "String"
-                },
-                "default": "https://cdnv2.coffeekraken.io/readme-header.jpg",
-                "description": "Specify the header image to use for displaying readme. This has to be relative to your project root directory",
-                "namespace": "@coffeekraken.s-sugar-config.config.readme.layout",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "readme.config.ts",
-                "extension": "config",
-                "relPath": "src/config/readme.config.ts"
-            },
-            "@coffeekraken.s-sugar-config.config.readme.shields": {
-                "id": "@coffeekraken.s-sugar-config.config.readme.shields",
-                "name": "shields",
-                "type": {
-                    "types": [
-                        {
-                            "type": "Object"
-                        }
-                    ],
-                    "raw": "Object"
-                },
-                "default": "[config.shieldsio.shields]",
-                "description": "Specify the readme shields to display in your readme.",
-                "namespace": "@coffeekraken.s-sugar-config.config.readme",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "readme.config.ts",
-                "extension": "config",
-                "relPath": "src/config/readme.config.ts",
-                "children": {}
-            },
-            "@coffeekraken.s-sugar-config.config.serve.img.imgPath": {
-                "id": "@coffeekraken.s-sugar-config.config.serve.img.imgPath",
-                "name": "imgPath",
-                "type": {
-                    "types": [
-                        {
-                            "type": "String"
-                        }
-                    ],
-                    "raw": "String"
-                },
-                "default": "/dist/img",
-                "description": "Specify the serving img folder path to use in your views",
-                "namespace": "@coffeekraken.s-sugar-config.config.serve.img",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "serve.config.ts",
-                "extension": "config",
-                "relPath": "src/config/serve.config.ts"
-            },
-            "@coffeekraken.s-sugar-config.config.serve.js.path": {
-                "id": "@coffeekraken.s-sugar-config.config.serve.js.path",
-                "name": "path",
-                "type": {
-                    "types": [
-                        {
-                            "type": "String"
-                        }
-                    ],
-                    "raw": "String"
-                },
-                "default": "/dist/js",
-                "description": "Specify the serving js folder path to use in your views",
-                "namespace": "@coffeekraken.s-sugar-config.config.serve.js",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "serve.config.ts",
-                "extension": "config",
-                "relPath": "src/config/serve.config.ts"
-            },
-            "@coffeekraken.s-sugar-config.config.serve.css.path": {
-                "id": "@coffeekraken.s-sugar-config.config.serve.css.path",
-                "name": "path",
-                "type": {
-                    "types": [
-                        {
-                            "type": "String"
-                        }
-                    ],
-                    "raw": "String"
-                },
-                "default": "/dist/css",
-                "description": "Specify the serving css folder path to use in your views",
-                "namespace": "@coffeekraken.s-sugar-config.config.serve.css",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "serve.config.ts",
-                "extension": "config",
-                "relPath": "src/config/serve.config.ts"
-            },
-            "@coffeekraken.s-sugar-config.config.serve.icons.path": {
-                "id": "@coffeekraken.s-sugar-config.config.serve.icons.path",
-                "name": "path",
-                "type": {
-                    "types": [
-                        {
-                            "type": "String"
-                        }
-                    ],
-                    "raw": "String"
-                },
-                "default": "/dist/icons",
-                "description": "Specify the serving icons folder path to use in your views",
-                "namespace": "@coffeekraken.s-sugar-config.config.serve.icons",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "serve.config.ts",
-                "extension": "config",
-                "relPath": "src/config/serve.config.ts"
-            },
-            "@coffeekraken.s-sugar-config.config.serve.fonts.path": {
-                "id": "@coffeekraken.s-sugar-config.config.serve.fonts.path",
-                "name": "path",
-                "type": {
-                    "types": [
-                        {
-                            "type": "String"
-                        }
-                    ],
-                    "raw": "String"
-                },
-                "default": "/dist/fonts",
-                "description": "Specify the serving fonts folder path to use in your views",
-                "namespace": "@coffeekraken.s-sugar-config.config.serve.fonts",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "serve.config.ts",
-                "extension": "config",
-                "relPath": "src/config/serve.config.ts"
-            },
-            "@coffeekraken.s-sugar-config.config.serve.cache.path": {
-                "id": "@coffeekraken.s-sugar-config.config.serve.cache.path",
-                "name": "path",
-                "type": {
-                    "types": [
-                        {
-                            "type": "String"
-                        }
-                    ],
-                    "raw": "String"
-                },
-                "default": "/cache",
-                "description": "Specify the serving cache folder path to use in your views",
-                "namespace": "@coffeekraken.s-sugar-config.config.serve.cache",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "serve.config.ts",
-                "extension": "config",
-                "relPath": "src/config/serve.config.ts",
-                "children": {}
-            },
-            "@coffeekraken.s-sugar-config.config.shieldsio.style": {
-                "id": "@coffeekraken.s-sugar-config.config.shieldsio.style",
-                "name": "style",
-                "type": {
-                    "types": [
-                        {
-                            "type": "String"
-                        }
-                    ],
-                    "raw": "String"
-                },
-                "default": "for-the-badge",
-                "description": "Specify the shieldsio style you want for your badges",
-                "namespace": "@coffeekraken.s-sugar-config.config.shieldsio",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "shieldsio.config.ts",
-                "extension": "config",
-                "relPath": "src/config/shieldsio.config.ts"
-            },
-            "@coffeekraken.s-sugar-config.config.shieldsio.shields.size.url": {
-                "id": "@coffeekraken.s-sugar-config.config.shieldsio.shields.size.url",
-                "name": "url",
-                "type": {
-                    "types": [
-                        {
-                            "type": "String"
-                        }
-                    ],
-                    "raw": "String"
-                },
-                "default": "https://shields.io/bundlephobia/min/[packageJson.name]?style=[config.shieldsio.style]",
-                "description": "Specify the shieldsio url for the \"size\" shield",
-                "namespace": "@coffeekraken.s-sugar-config.config.shieldsio.shields.size",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "shieldsio.config.ts",
-                "extension": "config",
-                "relPath": "src/config/shieldsio.config.ts"
-            },
-            "@coffeekraken.s-sugar-config.config.shieldsio.shields.href.href": {
-                "id": "@coffeekraken.s-sugar-config.config.shieldsio.shields.href.href",
-                "name": "href",
-                "type": {
-                    "types": [
-                        {
-                            "type": "String"
-                        }
-                    ],
-                    "raw": "String"
-                },
-                "default": "https://www.npmjs.com/package/[packageJson.name]",
-                "description": "Specify the shieldsio href for the \"size\" shield",
-                "namespace": "@coffeekraken.s-sugar-config.config.shieldsio.shields.href",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "shieldsio.config.ts",
-                "extension": "config",
-                "relPath": "src/config/shieldsio.config.ts"
-            },
-            "@coffeekraken.s-sugar-config.config.shieldsio.shields.download.url": {
-                "id": "@coffeekraken.s-sugar-config.config.shieldsio.shields.download.url",
-                "name": "url",
-                "type": {
-                    "types": [
-                        {
-                            "type": "String"
-                        }
-                    ],
-                    "raw": "String"
-                },
-                "default": "https://shields.io/npm/dm/[packageJson.name]?style=[config.shieldsio.style]",
-                "description": "Specify the shieldsio url for the \"download\" shield",
-                "namespace": "@coffeekraken.s-sugar-config.config.shieldsio.shields.download",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "shieldsio.config.ts",
-                "extension": "config",
-                "relPath": "src/config/shieldsio.config.ts"
-            },
-            "@coffeekraken.s-sugar-config.config.shieldsio.shields.download.href": {
-                "id": "@coffeekraken.s-sugar-config.config.shieldsio.shields.download.href",
-                "name": "href",
-                "type": {
-                    "types": [
-                        {
-                            "type": "String"
-                        }
-                    ],
-                    "raw": "String"
-                },
-                "default": "https://www.npmjs.com/package/[packageJson.name]",
-                "description": "Specify the shieldsio href for the \"download\" shield",
-                "namespace": "@coffeekraken.s-sugar-config.config.shieldsio.shields.download",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "shieldsio.config.ts",
-                "extension": "config",
-                "relPath": "src/config/shieldsio.config.ts"
-            },
-            "@coffeekraken.s-sugar-config.config.shieldsio.shields.license.url": {
-                "id": "@coffeekraken.s-sugar-config.config.shieldsio.shields.license.url",
-                "name": "url",
-                "type": {
-                    "types": [
-                        {
-                            "type": "String"
-                        }
-                    ],
-                    "raw": "String"
-                },
-                "default": "https://shields.io/npm/l/[packageJson.name]?style=[config.shieldsio.style]",
-                "description": "Specify the shieldsio url for the \"license\" shield",
-                "namespace": "@coffeekraken.s-sugar-config.config.shieldsio.shields.license",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "shieldsio.config.ts",
-                "extension": "config",
-                "relPath": "src/config/shieldsio.config.ts"
-            },
-            "@coffeekraken.s-sugar-config.config.shieldsio.shields.license.href": {
-                "id": "@coffeekraken.s-sugar-config.config.shieldsio.shields.license.href",
-                "name": "href",
-                "type": {
-                    "types": [
-                        {
-                            "type": "String"
-                        }
-                    ],
-                    "raw": "String"
-                },
-                "default": "./LICENSE",
-                "description": "Specify the shieldsio href for the \"license\" shield",
-                "namespace": "@coffeekraken.s-sugar-config.config.shieldsio.shields.license",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "shieldsio.config.ts",
-                "extension": "config",
-                "relPath": "src/config/shieldsio.config.ts"
-            },
-            "@coffeekraken.s-sugar-config.config.shieldsio.shields.discord.url": {
-                "id": "@coffeekraken.s-sugar-config.config.shieldsio.shields.discord.url",
-                "name": "url",
-                "type": {
-                    "types": [
-                        {
-                            "type": "String"
-                        }
-                    ],
-                    "raw": "String"
-                },
-                "default": "https://shields.io/discord/[config.discord.server.id]?style=[api.this.style]",
-                "description": "Specify the shieldsio url for the \"discord\" shield",
-                "namespace": "@coffeekraken.s-sugar-config.config.shieldsio.shields.discord",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "shieldsio.config.ts",
-                "extension": "config",
-                "relPath": "src/config/shieldsio.config.ts",
-                "children": {
-                    "href": {
-                        "id": "@coffeekraken.s-sugar-config.config.shieldsio.shields.license.href",
-                        "name": "href",
-                        "type": {
-                            "types": [
-                                {
-                                    "type": "String"
-                                }
-                            ],
-                            "raw": "String"
-                        },
-                        "default": "[config.discord.server.url]",
-                        "description": "Specify the shieldsio href for the \"discord\" shield",
-                        "namespace": "@coffeekraken.s-sugar-config.config.shieldsio.shields.license",
-                        "since": "2.0.0",
-                        "author": {
-                            "name": "Olivier Bossel",
-                            "email": "olivier.bossel@gmail.com",
-                            "url": "https://coffeekraken.io"
-                        }
-                    }
-                }
-            },
-            "@coffeekraken.s-sugar-config.config.storage.system.tmpDir": {
-                "id": "@coffeekraken.s-sugar-config.config.storage.system.tmpDir",
-                "name": "tmpDir",
-                "type": {
-                    "types": [
-                        {
-                            "type": "String"
-                        }
-                    ],
-                    "raw": "String"
-                },
-                "default": "__systemTmpDir()",
-                "description": "Configure where is located the system \"temp\" folder",
-                "namespace": "@coffeekraken.s-sugar-config.config.storage.system",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "storage.config.ts",
-                "extension": "config",
-                "relPath": "src/config/storage.config.ts"
-            },
-            "@coffeekraken.s-sugar-config.config.storage.rootDir": {
-                "id": "@coffeekraken.s-sugar-config.config.storage.rootDir",
-                "name": "rootDir",
-                "type": {
-                    "types": [
-                        {
-                            "type": "String"
-                        }
-                    ],
-                    "raw": "String"
-                },
-                "default": "${__packageRootDir()}",
-                "description": "Configure the root directory. Usually the package root dir",
-                "namespace": "@coffeekraken.s-sugar-config.config.storage",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "storage.config.ts",
-                "extension": "config",
-                "relPath": "src/config/storage.config.ts"
-            },
-            "@coffeekraken.s-sugar-config.config.storage.package.localDir": {
-                "id": "@coffeekraken.s-sugar-config.config.storage.package.localDir",
-                "name": "localDir",
-                "type": {
-                    "types": [
-                        {
-                            "type": "String"
-                        }
-                    ],
-                    "raw": "String"
-                },
-                "default": "[config.storage.package.rootDir]/.local",
-                "description": "Configure where is located the \".local\" folder in which are stored usually some things like cache, etc...",
-                "namespace": "@coffeekraken.s-sugar-config.config.storage.package",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "storage.config.ts",
-                "extension": "config",
-                "relPath": "src/config/storage.config.ts"
-            },
-            "@coffeekraken.s-sugar-config.config.storage.package.cacheDir": {
-                "id": "@coffeekraken.s-sugar-config.config.storage.package.cacheDir",
-                "name": "cacheDir",
-                "type": {
-                    "types": [
-                        {
-                            "type": "String"
-                        }
-                    ],
-                    "raw": "String"
-                },
-                "default": "[config.storage.package.localDir]/cache",
-                "description": "Configure where is located the \"cache\" folder",
-                "namespace": "@coffeekraken.s-sugar-config.config.storage.package",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "storage.config.ts",
-                "extension": "config",
-                "relPath": "src/config/storage.config.ts"
-            },
-            "@coffeekraken.s-sugar-config.config.storage.package.tmpDir": {
-                "id": "@coffeekraken.s-sugar-config.config.storage.package.tmpDir",
-                "name": "tmpDir",
-                "type": {
-                    "types": [
-                        {
-                            "type": "String"
-                        }
-                    ],
-                    "raw": "String"
-                },
-                "default": "[config.storage.package.localDir]/cache",
-                "description": "Configure where is located the \"temp\" folder",
-                "namespace": "@coffeekraken.s-sugar-config.config.storage.package",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "storage.config.ts",
-                "extension": "config",
-                "relPath": "src/config/storage.config.ts"
-            },
-            "@coffeekraken.s-sugar-config.config.storage.package.nodeModulesDir": {
-                "id": "@coffeekraken.s-sugar-config.config.storage.package.nodeModulesDir",
-                "name": "nodeModulesDir",
-                "type": {
-                    "types": [
-                        {
-                            "type": "String"
-                        }
-                    ],
-                    "raw": "String"
-                },
-                "default": "[config.storage.package.rootDir]/node_modules",
-                "description": "Configure where is located the \"node_modules\" folder",
-                "namespace": "@coffeekraken.s-sugar-config.config.storage.package",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "storage.config.ts",
-                "extension": "config",
-                "relPath": "src/config/storage.config.ts"
-            },
-            "@coffeekraken.s-sugar-config.config.storage.src.rootDir": {
-                "id": "@coffeekraken.s-sugar-config.config.storage.src.rootDir",
-                "name": "rootDir",
-                "type": {
-                    "types": [
-                        {
-                            "type": "String"
-                        }
-                    ],
-                    "raw": "String"
-                },
-                "default": "[config.storage.package.rootDir]/src",
-                "description": "Configure where is located the \"src\" directory where are stored all the sources like js, ts, css, images, etc...",
-                "namespace": "@coffeekraken.s-sugar-config.config.storage.src",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "storage.config.ts",
-                "extension": "config",
-                "relPath": "src/config/storage.config.ts"
-            },
-            "@coffeekraken.s-sugar-config.config.storage.src.jsDir": {
-                "id": "@coffeekraken.s-sugar-config.config.storage.src.jsDir",
-                "name": "jsDir",
-                "type": {
-                    "types": [
-                        {
-                            "type": "String"
-                        }
-                    ],
-                    "raw": "String"
-                },
-                "default": "[config.storage.src.rootDir]/js",
-                "description": "Configure where is located the javascript/typescript source files",
-                "namespace": "@coffeekraken.s-sugar-config.config.storage.src",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "storage.config.ts",
-                "extension": "config",
-                "relPath": "src/config/storage.config.ts"
-            },
-            "@coffeekraken.s-sugar-config.config.storage.src.nodeDir": {
-                "id": "@coffeekraken.s-sugar-config.config.storage.src.nodeDir",
-                "name": "nodeDir",
-                "type": {
-                    "types": [
-                        {
-                            "type": "String"
-                        }
-                    ],
-                    "raw": "String"
-                },
-                "default": "[config.storage.src.rootDir]/node",
-                "description": "Configure where is located the javascript/typescript node source files",
-                "namespace": "@coffeekraken.s-sugar-config.config.storage.src",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "storage.config.ts",
-                "extension": "config",
-                "relPath": "src/config/storage.config.ts"
-            },
-            "@coffeekraken.s-sugar-config.config.storage.src.cssDir": {
-                "id": "@coffeekraken.s-sugar-config.config.storage.src.cssDir",
-                "name": "cssDir",
-                "type": {
-                    "types": [
-                        {
-                            "type": "String"
-                        }
-                    ],
-                    "raw": "String"
-                },
-                "default": "[config.storage.src.rootDir]/css",
-                "description": "Configure where is located the css source files",
-                "namespace": "@coffeekraken.s-sugar-config.config.storage.src",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "storage.config.ts",
-                "extension": "config",
-                "relPath": "src/config/storage.config.ts"
-            },
-            "@coffeekraken.s-sugar-config.config.storage.src.configDir": {
-                "id": "@coffeekraken.s-sugar-config.config.storage.src.configDir",
-                "name": "configDir",
-                "type": {
-                    "types": [
-                        {
-                            "type": "String"
-                        }
-                    ],
-                    "raw": "String"
-                },
-                "default": "[config.storage.src.rootDir]/config",
-                "description": "Configure where is located the config source files",
-                "namespace": "@coffeekraken.s-sugar-config.config.storage.src",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "storage.config.ts",
-                "extension": "config",
-                "relPath": "src/config/storage.config.ts"
-            },
-            "@coffeekraken.s-sugar-config.config.storage.src.docDir": {
-                "id": "@coffeekraken.s-sugar-config.config.storage.src.docDir",
-                "name": "docDir",
-                "type": {
-                    "types": [
-                        {
-                            "type": "String"
-                        }
-                    ],
-                    "raw": "String"
-                },
-                "default": "[config.storage.src.rootDir]/doc",
-                "description": "Configure where is located the documentation markdown source files",
-                "namespace": "@coffeekraken.s-sugar-config.config.storage.src",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "storage.config.ts",
-                "extension": "config",
-                "relPath": "src/config/storage.config.ts"
-            },
-            "@coffeekraken.s-sugar-config.config.storage.src.fontsDir": {
-                "id": "@coffeekraken.s-sugar-config.config.storage.src.fontsDir",
-                "name": "fontsDir",
-                "type": {
-                    "types": [
-                        {
-                            "type": "String"
-                        }
-                    ],
-                    "raw": "String"
-                },
-                "default": "[config.storage.src.rootDir]/fonts",
-                "description": "Configure where is located the fonts source files",
-                "namespace": "@coffeekraken.s-sugar-config.config.storage.src",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "storage.config.ts",
-                "extension": "config",
-                "relPath": "src/config/storage.config.ts"
-            },
-            "@coffeekraken.s-sugar-config.config.storage.src.iconsDir": {
-                "id": "@coffeekraken.s-sugar-config.config.storage.src.iconsDir",
-                "name": "iconsDir",
-                "type": {
-                    "types": [
-                        {
-                            "type": "String"
-                        }
-                    ],
-                    "raw": "String"
-                },
-                "default": "[config.storage.src.rootDir]/icons",
-                "description": "Configure where is located the icons source files",
-                "namespace": "@coffeekraken.s-sugar-config.config.storage.src",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "storage.config.ts",
-                "extension": "config",
-                "relPath": "src/config/storage.config.ts"
-            },
-            "@coffeekraken.s-sugar-config.config.storage.src.imgDir": {
-                "id": "@coffeekraken.s-sugar-config.config.storage.src.imgDir",
-                "name": "imgDir",
-                "type": {
-                    "types": [
-                        {
-                            "type": "String"
-                        }
-                    ],
-                    "raw": "String"
-                },
-                "default": "[config.storage.src.rootDir]/img",
-                "description": "Configure where is located the images source files",
-                "namespace": "@coffeekraken.s-sugar-config.config.storage.src",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "storage.config.ts",
-                "extension": "config",
-                "relPath": "src/config/storage.config.ts"
-            },
-            "@coffeekraken.s-sugar-config.config.storage.src.pagesDir": {
-                "id": "@coffeekraken.s-sugar-config.config.storage.src.pagesDir",
-                "name": "pagesDir",
-                "type": {
-                    "types": [
-                        {
-                            "type": "String"
-                        }
-                    ],
-                    "raw": "String"
-                },
-                "default": "[config.storage.src.rootDir]/views",
-                "description": "Configure where is located the pages definition source files",
-                "namespace": "@coffeekraken.s-sugar-config.config.storage.src",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "storage.config.ts",
-                "extension": "config",
-                "relPath": "src/config/storage.config.ts"
-            },
-            "@coffeekraken.s-sugar-config.config.storage.src.publicDir": {
-                "id": "@coffeekraken.s-sugar-config.config.storage.src.publicDir",
-                "name": "publicDir",
-                "type": {
-                    "types": [
-                        {
-                            "type": "String"
-                        }
-                    ],
-                    "raw": "String"
-                },
-                "default": "[config.storage.src.rootDir]/public",
-                "description": "Configure where is located the public source files",
-                "namespace": "@coffeekraken.s-sugar-config.config.storage.src",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "storage.config.ts",
-                "extension": "config",
-                "relPath": "src/config/storage.config.ts"
-            },
-            "@coffeekraken.s-sugar-config.config.storage.src.viewsDir": {
-                "id": "@coffeekraken.s-sugar-config.config.storage.src.viewsDir",
-                "name": "viewsDir",
-                "type": {
-                    "types": [
-                        {
-                            "type": "String"
-                        }
-                    ],
-                    "raw": "String"
-                },
-                "default": "[config.storage.src.rootDir]/views",
-                "description": "Configure where is located the views (blade, twig, etc...) source files",
-                "namespace": "@coffeekraken.s-sugar-config.config.storage.src",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "storage.config.ts",
-                "extension": "config",
-                "relPath": "src/config/storage.config.ts"
-            },
-            "@coffeekraken.s-sugar-config.config.storage.dist.rootDir": {
-                "id": "@coffeekraken.s-sugar-config.config.storage.dist.rootDir",
-                "name": "rootDir",
-                "type": {
-                    "types": [
-                        {
-                            "type": "String"
-                        }
-                    ],
-                    "raw": "String"
-                },
-                "default": "[config.storage.package.rootDir]/dist",
-                "description": "Configure where is located the \"dist\" folder in which are stored usually the \"distribution\" files like production css, js, images, etc...",
-                "namespace": "@coffeekraken.s-sugar-config.config.storage.dist",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "storage.config.ts",
-                "extension": "config",
-                "relPath": "src/config/storage.config.ts"
-            },
-            "@coffeekraken.s-sugar-config.config.storage.dist.jsDir": {
-                "id": "@coffeekraken.s-sugar-config.config.storage.dist.jsDir",
-                "name": "jsDir",
-                "type": {
-                    "types": [
-                        {
-                            "type": "String"
-                        }
-                    ],
-                    "raw": "String"
-                },
-                "default": "[config.storage.dist.rootDir]/js",
-                "description": "Configure where is located the javascript/typescript distribution files",
-                "namespace": "@coffeekraken.s-sugar-config.config.storage.dist",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "storage.config.ts",
-                "extension": "config",
-                "relPath": "src/config/storage.config.ts"
-            },
-            "@coffeekraken.s-sugar-config.config.storage.dist.nodeDir": {
-                "id": "@coffeekraken.s-sugar-config.config.storage.dist.nodeDir",
-                "name": "nodeDir",
-                "type": {
-                    "types": [
-                        {
-                            "type": "String"
-                        }
-                    ],
-                    "raw": "String"
-                },
-                "default": "[config.storage.dist.rootDir]/node",
-                "description": "Configure where is located the javascript/typescript node distribution files",
-                "namespace": "@coffeekraken.s-sugar-config.config.storage.dist",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "storage.config.ts",
-                "extension": "config",
-                "relPath": "src/config/storage.config.ts"
-            },
-            "@coffeekraken.s-sugar-config.config.storage.dist.cssDir": {
-                "id": "@coffeekraken.s-sugar-config.config.storage.dist.cssDir",
-                "name": "cssDir",
-                "type": {
-                    "types": [
-                        {
-                            "type": "String"
-                        }
-                    ],
-                    "raw": "String"
-                },
-                "default": "[config.storage.dist.rootDir]/css",
-                "description": "Configure where is located the css distribution files",
-                "namespace": "@coffeekraken.s-sugar-config.config.storage.dist",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "storage.config.ts",
-                "extension": "config",
-                "relPath": "src/config/storage.config.ts"
-            },
-            "@coffeekraken.s-sugar-config.config.storage.dist.docDir": {
-                "id": "@coffeekraken.s-sugar-config.config.storage.dist.docDir",
-                "name": "docDir",
-                "type": {
-                    "types": [
-                        {
-                            "type": "String"
-                        }
-                    ],
-                    "raw": "String"
-                },
-                "default": "[config.storage.dist.rootDir]/doc",
-                "description": "Configure where is located the doc markdown distribution files",
-                "namespace": "@coffeekraken.s-sugar-config.config.storage.dist",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "storage.config.ts",
-                "extension": "config",
-                "relPath": "src/config/storage.config.ts"
-            },
-            "@coffeekraken.s-sugar-config.config.storage.dist.fontsDir": {
-                "id": "@coffeekraken.s-sugar-config.config.storage.dist.fontsDir",
-                "name": "fontsDir",
-                "type": {
-                    "types": [
-                        {
-                            "type": "String"
-                        }
-                    ],
-                    "raw": "String"
-                },
-                "default": "[config.storage.dist.rootDir]/fonts",
-                "description": "Configure where is located the fonts distribution files",
-                "namespace": "@coffeekraken.s-sugar-config.config.storage.dist",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "storage.config.ts",
-                "extension": "config",
-                "relPath": "src/config/storage.config.ts"
-            },
-            "@coffeekraken.s-sugar-config.config.storage.dist.iconsDir": {
-                "id": "@coffeekraken.s-sugar-config.config.storage.dist.iconsDir",
-                "name": "iconsDir",
-                "type": {
-                    "types": [
-                        {
-                            "type": "String"
-                        }
-                    ],
-                    "raw": "String"
-                },
-                "default": "[config.storage.dist.rootDir]/icons",
-                "description": "Configure where is located the icons distribution files",
-                "namespace": "@coffeekraken.s-sugar-config.config.storage.dist",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "storage.config.ts",
-                "extension": "config",
-                "relPath": "src/config/storage.config.ts"
-            },
-            "@coffeekraken.s-sugar-config.config.storage.dist.imgDir": {
-                "id": "@coffeekraken.s-sugar-config.config.storage.dist.imgDir",
-                "name": "imgDir",
-                "type": {
-                    "types": [
-                        {
-                            "type": "String"
-                        }
-                    ],
-                    "raw": "String"
-                },
-                "default": "[config.storage.dist.rootDir]/img",
-                "description": "Configure where is located the images distribution files",
-                "namespace": "@coffeekraken.s-sugar-config.config.storage.dist",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "storage.config.ts",
-                "extension": "config",
-                "relPath": "src/config/storage.config.ts"
-            },
-            "@coffeekraken.s-sugar-config.config.storage.dist.pagesDir": {
-                "id": "@coffeekraken.s-sugar-config.config.storage.dist.pagesDir",
-                "name": "pagesDir",
-                "type": {
-                    "types": [
-                        {
-                            "type": "String"
-                        }
-                    ],
-                    "raw": "String"
-                },
-                "default": "[config.storage.dist.rootDir]/views",
-                "description": "Configure where is located the pages definition distribution files",
-                "namespace": "@coffeekraken.s-sugar-config.config.storage.dist",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "storage.config.ts",
-                "extension": "config",
-                "relPath": "src/config/storage.config.ts"
-            },
-            "@coffeekraken.s-sugar-config.config.storage.dist.viewsDir": {
-                "id": "@coffeekraken.s-sugar-config.config.storage.dist.viewsDir",
-                "name": "viewsDir",
-                "type": {
-                    "types": [
-                        {
-                            "type": "String"
-                        }
-                    ],
-                    "raw": "String"
-                },
-                "default": "[config.storage.dist.rootDir]/views",
-                "description": "Configure where is located the views (blade, twig, etc...) distribution files",
-                "namespace": "@coffeekraken.s-sugar-config.config.storage.dist",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "storage.config.ts",
-                "extension": "config",
-                "relPath": "src/config/storage.config.ts"
-            },
-            "@coffeekraken.s-sugar-config.config.storage.exclude": {
-                "id": "@coffeekraken.s-sugar-config.config.storage.exclude",
-                "name": "exclude",
-                "type": {
-                    "types": [
-                        {
-                            "type": "Array",
-                            "of": [
-                                "String"
-                            ]
-                        }
-                    ],
-                    "raw": "Array<String>"
-                },
-                "description": "Specify which file(s) or directory(ies) you want to exclude from the major part of the functions\nlike resolveGlob, SSugarJson.search, etc...\nThis accept globs.",
-                "namespace": "@coffeekraken.s-sugar-config.config.storage",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "storage.config.ts",
-                "extension": "config",
-                "relPath": "src/config/storage.config.ts",
-                "children": {
-                    "rootdir": {
-                        "id": "@coffeekraken.s-sugar-config.config.storage.rootDir",
-                        "name": "rootDir",
-                        "type": {
-                            "types": [
-                                {
-                                    "type": "String"
-                                }
-                            ],
-                            "raw": "String"
-                        },
-                        "default": "${__packageRootDir(__dirname())}",
-                        "description": "Configure where is located sugar package directory. Usually in the node_modules/@coffeekraken/sugar folder",
-                        "namespace": "@coffeekraken.s-sugar-config.config.storage",
-                        "since": "2.0.0",
-                        "author": {
-                            "name": "Olivier Bossel",
-                            "email": "olivier.bossel@gmail.com",
-                            "url": "https://coffeekraken.io"
-                        }
-                    }
-                }
-            },
             "@coffeekraken.s-sugar-config.doc.README": {
                 "id": "@coffeekraken.s-sugar-config.doc.README",
                 "name": "README",
@@ -2786,8 +175,27 @@
                 "extension": "ts",
                 "relPath": "src/js/sugar.ts",
                 "children": {
+                    "config": {
+                        "id": "sb1cead87a1ae146b5fcba7eb15c5e8a2f093d320a70d161127f9b6e111dd5b5b",
+                        "name": "config",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "ISSugarConfig"
+                                }
+                            ],
+                            "raw": "ISSugarConfig"
+                        },
+                        "description": "Simple config accessor to access directly the config object",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://coffeekraken.io"
+                        }
+                    },
                     "get": {
-                        "id": "s723f7a70f501f7dfab142f312460bc2190f491f23e1129dd062b05c0e7207122",
+                        "id": "s427cf698daf3678faf407fb430be86f93fc1803a7eeeb173d000204d813a7226",
                         "name": "get",
                         "type": {
                             "types": [
@@ -2796,6 +204,22 @@
                                 }
                             ],
                             "raw": "Function"
+                        },
+                        "param": {
+                            "dotpath": {
+                                "name": "dotpath",
+                                "type": {
+                                    "types": [
+                                        {
+                                            "type": "String"
+                                        }
+                                    ],
+                                    "raw": "String"
+                                },
+                                "description": "The dotpath representing the configuration you want to access",
+                                "default": ".",
+                                "defaultStr": "'.'"
+                            }
                         },
                         "description": "This static method allows you to access your configurations",
                         "static": "true",
@@ -2816,6 +240,34 @@
                                 }
                             ],
                             "raw": "Function"
+                        },
+                        "param": {
+                            "dotpath": {
+                                "name": "dotpath",
+                                "type": {
+                                    "types": [
+                                        {
+                                            "type": "String"
+                                        }
+                                    ],
+                                    "raw": "String"
+                                },
+                                "description": "The dotpath representing the configuration you want to access",
+                                "defaultStr": ""
+                            },
+                            "value": {
+                                "name": "value",
+                                "type": {
+                                    "types": [
+                                        {
+                                            "type": "any"
+                                        }
+                                    ],
+                                    "raw": "any"
+                                },
+                                "description": "The value you want to set",
+                                "defaultStr": ""
+                            }
                         },
                         "description": "This static method allows you to set a configuration value",
                         "static": "true",
@@ -2838,6 +290,21 @@
                         }
                     ],
                     "raw": "Class"
+                },
+                "param": {
+                    "dotPath": {
+                        "name": "dotPath",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "String"
+                                }
+                            ],
+                            "raw": "String"
+                        },
+                        "description": "The dot path to the config wanted",
+                        "defaultStr": ""
+                    }
                 },
                 "description": "This function allows you to access easily the configurations stored in the ```sugar.config.js```.\nThe returned configuration is the result of the default sugar config stored in the toolkit and the\napp defined config stored in current application root folder",
                 "namespace": "@coffeekraken.s-sugar-config.node",
@@ -2869,6 +336,21 @@
                     ],
                     "raw": "Function"
                 },
+                "param": {
+                    "folderPath": {
+                        "name": "folderPath",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "String"
+                                }
+                            ],
+                            "raw": "String"
+                        },
+                        "description": "The folder path in which to check for .config.js files",
+                        "defaultStr": ""
+                    }
+                },
                 "description": "This function allows you to register some folders to be taken in consideration\nwhen accessing the config using the ```sugar``` function",
                 "namespace": "@coffeekraken.s-sugar-config.shared",
                 "example": [
@@ -2888,6 +370,25 @@
                 "extension": "ts",
                 "relPath": "src/node/sugar.ts",
                 "children": {
+                    "config": {
+                        "id": "sb1cead87a1ae146b5fcba7eb15c5e8a2f093d320a70d161127f9b6e111dd5b5b",
+                        "name": "config",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "ISSugarConfig"
+                                }
+                            ],
+                            "raw": "ISSugarConfig"
+                        },
+                        "description": "Simple config accessor to access directly the config object",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://coffeekraken.io"
+                        }
+                    },
                     "filesrealpaths": {
                         "id": "s84baa66c57b5603b5250e08b768b51f80de4373dc5b287dae2a99644fa79a1cf",
                         "name": "filesRealPaths",
@@ -3051,6 +552,22 @@
                             ],
                             "raw": "Function"
                         },
+                        "param": {
+                            "id": {
+                                "name": "id",
+                                "type": {
+                                    "types": [
+                                        {
+                                            "type": "String"
+                                        }
+                                    ],
+                                    "raw": "String"
+                                },
+                                "description": "The configuration id you want to get the config from",
+                                "default": "default",
+                                "defaultStr": "\"default\""
+                            }
+                        },
                         "description": "This static method allows you to test if the default or a particular configuration\nis loaded or not",
                         "since": "2.0.0",
                         "author": {
@@ -3070,6 +587,21 @@
                             ],
                             "raw": "Function"
                         },
+                        "param": {
+                            "configId": {
+                                "name": "configId",
+                                "type": {
+                                    "types": [
+                                        {
+                                            "type": "String"
+                                        }
+                                    ],
+                                    "raw": "String"
+                                },
+                                "description": "The configuration if you want to get docblocks back for",
+                                "defaultStr": ""
+                            }
+                        },
                         "description": "This function take a config id as parameter and returns an array of docblocks parsed objects",
                         "async": "true",
                         "since": "2.0.0",
@@ -3080,7 +612,7 @@
                         }
                     },
                     "hash": {
-                        "id": "sfe2aa035d00035d95409f5766dcd824e09e5cf2947c70edf152889d17249f1f2",
+                        "id": "sd4d27037ddf4aec8b4091861cb8db93a244fe3aa6b545ce75debfd44be15f5d3",
                         "name": "hash",
                         "type": {
                             "types": [
@@ -3089,6 +621,22 @@
                                 }
                             ],
                             "raw": "String"
+                        },
+                        "param": {
+                            "dotPath": {
+                                "name": "dotPath",
+                                "type": {
+                                    "types": [
+                                        {
+                                            "type": "String"
+                                        }
+                                    ],
+                                    "raw": "String"
+                                },
+                                "description": "The dot path of the config you want to hash",
+                                "default": ".",
+                                "defaultStr": "'.'"
+                            }
                         },
                         "description": "This hash function gives you access to the actual configuration hash.\nYou can specify a dot path to get the hash of a sub configuration",
                         "since": "2.0.0",
@@ -3099,7 +647,7 @@
                         }
                     },
                     "get": {
-                        "id": "s7eeb95172d92394b57bd174a18e88ee00364eeddbe6b179c2b7169efcdf0e8f4",
+                        "id": "s1eab4d06a28a6dd837cc4ff46815adbea420138f8b9a44c6f96028310ba33a86",
                         "name": "get",
                         "type": {
                             "types": [
@@ -3108,6 +656,22 @@
                                 }
                             ],
                             "raw": "Function"
+                        },
+                        "param": {
+                            "dotpath": {
+                                "name": "dotpath",
+                                "type": {
+                                    "types": [
+                                        {
+                                            "type": "String"
+                                        }
+                                    ],
+                                    "raw": "String"
+                                },
+                                "description": "The dotpath that specify the config you want to get back",
+                                "default": ".",
+                                "defaultStr": "'.'"
+                            }
                         },
                         "description": "This method allows you to get a configuration back by passing a dotpath like \"something.else\"",
                         "since": "2.0.0",
@@ -3128,6 +692,35 @@
                             ],
                             "raw": "Function"
                         },
+                        "param": {
+                            "dotpath": {
+                                "name": "dotpath",
+                                "type": {
+                                    "types": [
+                                        {
+                                            "type": "String"
+                                        }
+                                    ],
+                                    "raw": "String"
+                                },
+                                "description": "The dotpath that specify the configuration you want to get",
+                                "defaultStr": ""
+                            },
+                            "id": {
+                                "name": "id",
+                                "type": {
+                                    "types": [
+                                        {
+                                            "type": "String"
+                                        }
+                                    ],
+                                    "raw": "String"
+                                },
+                                "description": "The configuration id you want to get the config from",
+                                "default": "default",
+                                "defaultStr": "\"default\""
+                            }
+                        },
                         "description": "Same as the \"get\" method but does not throw error if the config is not accessible...",
                         "since": "2.0.0",
                         "author": {
@@ -3146,6 +739,34 @@
                                 }
                             ],
                             "raw": "Function"
+                        },
+                        "param": {
+                            "dotpath": {
+                                "name": "dotpath",
+                                "type": {
+                                    "types": [
+                                        {
+                                            "type": "String"
+                                        }
+                                    ],
+                                    "raw": "String"
+                                },
+                                "description": "The dotpath that specify the config you want to get back",
+                                "defaultStr": ""
+                            },
+                            "value": {
+                                "name": "value",
+                                "type": {
+                                    "types": [
+                                        {
+                                            "type": "any"
+                                        }
+                                    ],
+                                    "raw": "any"
+                                },
+                                "description": "The value you want to set",
+                                "defaultStr": ""
+                            }
                         },
                         "description": "This method allows you to set a configuration back by passing a dotpath like \"something.else\"",
                         "since": "2.0.0",

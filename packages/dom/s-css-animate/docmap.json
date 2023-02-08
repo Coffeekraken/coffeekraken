@@ -3,6 +3,7 @@
     "extends": [],
     "generated": {
         "extends": [
+            "@coffeekraken/aa",
             "@coffeekraken/cli",
             "@coffeekraken/s-activate-feature",
             "@coffeekraken/s-appear-feature",
@@ -42,9 +43,11 @@
             "@coffeekraken/s-filtrable-input-component",
             "@coffeekraken/s-floating-feature",
             "@coffeekraken/s-form-validate-feature",
+            "@coffeekraken/s-front",
             "@coffeekraken/s-frontend-checker",
             "@coffeekraken/s-frontend-server",
             "@coffeekraken/s-frontspec",
+            "@coffeekraken/s-glitch-feature",
             "@coffeekraken/s-glob",
             "@coffeekraken/s-google-map-component",
             "@coffeekraken/s-handlebars",
@@ -83,7 +86,6 @@
             "@coffeekraken/s-sugar-element",
             "@coffeekraken/s-sugar-feature",
             "@coffeekraken/s-sugar-json",
-            "@coffeekraken/s-lazy-feature",
             "@coffeekraken/s-theme-switcher-component",
             "@coffeekraken/s-theme",
             "@coffeekraken/s-timer",
@@ -228,6 +230,94 @@
                             ],
                             "raw": "Function"
                         },
+                        "param": {
+                            "settings": {
+                                "name": "settings",
+                                "type": {
+                                    "types": [
+                                        {
+                                            "type": "ISCssAnimationPlaySettings"
+                                        }
+                                    ],
+                                    "raw": "ISCssAnimationPlaySettings"
+                                },
+                                "description": "Some settings to play your animation",
+                                "default": {},
+                                "defaultStr": "{}"
+                            },
+                            "animationName": {
+                                "name": "animationName",
+                                "type": {
+                                    "types": [
+                                        {
+                                            "type": "String"
+                                        }
+                                    ],
+                                    "raw": "String"
+                                },
+                                "description": "The name of the animation you want to play",
+                                "default": "this._animations[0]?.name",
+                                "defaultStr": "this._animations[0]?.name"
+                            }
+                        },
+                        "setting": {
+                            "easing": {
+                                "name": "easing",
+                                "type": {
+                                    "types": [
+                                        {
+                                            "type": "String"
+                                        },
+                                        {
+                                            "type": "Function"
+                                        }
+                                    ],
+                                    "raw": "String|Function"
+                                },
+                                "description": "The easing to use for the animation. If not set, take the css defined property",
+                                "defaultStr": ""
+                            },
+                            "duration": {
+                                "name": "duration",
+                                "type": {
+                                    "types": [
+                                        {
+                                            "type": "Number"
+                                        }
+                                    ],
+                                    "raw": "Number"
+                                },
+                                "description": "The duration of the animation. If not set, take the css defined property",
+                                "defaultStr": ""
+                            },
+                            "iterations": {
+                                "name": "iterations",
+                                "type": {
+                                    "types": [
+                                        {
+                                            "type": "Number"
+                                        }
+                                    ],
+                                    "raw": "Number"
+                                },
+                                "description": "The number of iterations of the animation. If not set, take the css defined property",
+                                "defaultStr": ""
+                            },
+                            "yoyo": {
+                                "name": "yoyo",
+                                "type": {
+                                    "types": [
+                                        {
+                                            "type": "Boolean"
+                                        }
+                                    ],
+                                    "raw": "Boolean"
+                                },
+                                "description": "If set to true, the animation will be played in forwards AND backwards in each iteration(s)",
+                                "default": false,
+                                "defaultStr": "false"
+                            }
+                        },
                         "description": "This method allows you to play the animation",
                         "since": "2.0.0",
                         "author": {
@@ -266,6 +356,35 @@
                             ],
                             "raw": "Function"
                         },
+                        "param": {
+                            "percentage": {
+                                "name": "percentage",
+                                "type": {
+                                    "types": [
+                                        {
+                                            "type": "Number"
+                                        }
+                                    ],
+                                    "raw": "Number"
+                                },
+                                "description": "The percentage you want to go in the animation",
+                                "defaultStr": ""
+                            },
+                            "animationName": {
+                                "name": "animationName",
+                                "type": {
+                                    "types": [
+                                        {
+                                            "type": "String"
+                                        }
+                                    ],
+                                    "raw": "String"
+                                },
+                                "description": "The name of the animation you want to seek to",
+                                "default": "this._animations[0]?.name",
+                                "defaultStr": "this._animations[0]?.name"
+                            }
+                        },
                         "description": "This method allows you to seek to a specific percentage of the animation",
                         "since": "2.0.0",
                         "author": {
@@ -284,6 +403,21 @@
                                 }
                             ],
                             "raw": "Function"
+                        },
+                        "param": {
+                            "name": {
+                                "name": "name",
+                                "type": {
+                                    "types": [
+                                        {
+                                            "type": "String"
+                                        }
+                                    ],
+                                    "raw": "String"
+                                },
+                                "description": "The name of the animation to get",
+                                "defaultStr": ""
+                            }
                         },
                         "description": "This method allows you to get an animation object by it's name",
                         "since": "2.0.0",

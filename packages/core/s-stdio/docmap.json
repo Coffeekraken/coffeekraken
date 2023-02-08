@@ -3,6 +3,7 @@
     "extends": [],
     "generated": {
         "extends": [
+            "@coffeekraken/aa",
             "@coffeekraken/cli",
             "@coffeekraken/s-activate-feature",
             "@coffeekraken/s-appear-feature",
@@ -43,9 +44,11 @@
             "@coffeekraken/s-filtrable-input-component",
             "@coffeekraken/s-floating-feature",
             "@coffeekraken/s-form-validate-feature",
+            "@coffeekraken/s-front",
             "@coffeekraken/s-frontend-checker",
             "@coffeekraken/s-frontend-server",
             "@coffeekraken/s-frontspec",
+            "@coffeekraken/s-glitch-feature",
             "@coffeekraken/s-glob",
             "@coffeekraken/s-google-map-component",
             "@coffeekraken/s-handlebars",
@@ -83,7 +86,6 @@
             "@coffeekraken/s-sugar-element",
             "@coffeekraken/s-sugar-feature",
             "@coffeekraken/s-sugar-json",
-            "@coffeekraken/s-lazy-feature",
             "@coffeekraken/s-theme-switcher-component",
             "@coffeekraken/s-theme",
             "@coffeekraken/s-timer",
@@ -137,6 +139,73 @@
                 "relPath": "src/doc/README.md.twig",
                 "children": {}
             },
+            "@coffeekraken.s-stdio.js.SStdio": {
+                "id": "@coffeekraken.s-stdio.js.SStdio",
+                "name": "SStdio",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Class"
+                        }
+                    ],
+                    "raw": "Class"
+                },
+                "param": {
+                    "settings": {
+                        "name": "settings",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "ISStdioSettings"
+                                }
+                            ],
+                            "raw": "ISStdioSettings"
+                        },
+                        "description": "Some settings to configure your Stdio",
+                        "default": {},
+                        "defaultStr": "{}"
+                    }
+                },
+                "description": "This class represent the base one for all the \"Stdio\"\ncompatible setting.",
+                "namespace": "@coffeekraken.s-stdio.js",
+                "status": "wip",
+                "example": [
+                    {
+                        "language": "js",
+                        "code": "import SStdio from '@coffeekraken/s-stdio';\nclass MyCoolStdio extends SStdio {\n   constructor(sources, settings = {}) {\n     super(sources, settings);\n     // do something...\n   }\n}"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "SStdio.ts",
+                "extension": "ts",
+                "relPath": "src/js/SStdio.ts",
+                "children": {
+                    "constructor": {
+                        "id": "s2a18a91810a2967c4c3f68d3fff37dd6b64f7a342ee8f07a7f5a775103631987",
+                        "name": "constructor",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ],
+                            "raw": "Function"
+                        },
+                        "description": "Constructor",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://coffeekraken.io"
+                        }
+                    }
+                }
+            },
             "@coffeekraken.s-stdio.sugar.node.stdio.SStdio": {
                 "id": "@coffeekraken.s-stdio.sugar.node.stdio.SStdio",
                 "name": "SStdio",
@@ -147,6 +216,22 @@
                         }
                     ],
                     "raw": "Class"
+                },
+                "param": {
+                    "settings": {
+                        "name": "settings",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "ISStdioSettings"
+                                }
+                            ],
+                            "raw": "ISStdioSettings"
+                        },
+                        "description": "Some settings to configure your Stdio",
+                        "default": {},
+                        "defaultStr": "{}"
+                    }
                 },
                 "description": "This class represent the base one for all the \"Stdio\"\ncompatible setting.",
                 "namespace": "@coffeekraken.s-stdio.sugar.node.stdio",
@@ -167,66 +252,6 @@
                 "extension": "ts",
                 "relPath": "src/shared/SStdio.ts",
                 "children": {
-                    "registeredcomponents": {
-                        "id": "s1e5f06dddc7df6bf28dd2b7817c1b3b55745cb29c6086aab694f10e5032fef93",
-                        "name": "registeredComponents",
-                        "type": {
-                            "types": [
-                                {
-                                    "type": "ISStdioRegisteredComponents"
-                                }
-                            ],
-                            "raw": "ISStdioRegisteredComponents"
-                        },
-                        "description": "Store the registered stdio components",
-                        "static": "true",
-                        "since": "2.0.0",
-                        "author": {
-                            "name": "Olivier Bossel",
-                            "email": "olivier.bossel@gmail.com",
-                            "url": "https://coffeekraken.io"
-                        }
-                    },
-                    "ui_basic": {
-                        "id": "sb588c6cc9cc428335b167fe927204ad99184779651815efae947c6cebe2abefb",
-                        "name": "UI_BASIC",
-                        "type": {
-                            "types": [
-                                {
-                                    "type": "ISStdioUi"
-                                }
-                            ],
-                            "raw": "ISStdioUi"
-                        },
-                        "description": "Represent the \"basic\" stdio",
-                        "static": "true",
-                        "since": "2.0.0",
-                        "author": {
-                            "name": "Olivier Bossel",
-                            "email": "olivier.bossel@gmail.com",
-                            "url": "https://coffeekraken.io"
-                        }
-                    },
-                    "registercomponent": {
-                        "id": "s3f10f6e8c902e8f7b118d6c7705279d8666d0614184ef2ff323c9c6116afdb98",
-                        "name": "registerComponent",
-                        "type": {
-                            "types": [
-                                {
-                                    "type": "Function"
-                                }
-                            ],
-                            "raw": "Function"
-                        },
-                        "description": "This static method allows you to register a new Stdio component\nthat you will be able to use then through the \"type\" property of\nthe logObj passed to the STerminalStdio instance.",
-                        "static": "true",
-                        "since": "2.0.0",
-                        "author": {
-                            "name": "Olivier Bossel",
-                            "email": "olivier.bossel@gmail.com",
-                            "url": "https://coffeekraken.io"
-                        }
-                    },
                     "existingornew": {
                         "id": "s0188ebb98a18f3a8ab64d387653eb60aebed502c804ae2c333f589c30ee29680",
                         "name": "existingOrNew",
@@ -237,6 +262,48 @@
                                 }
                             ],
                             "raw": "Function"
+                        },
+                        "param": {
+                            "id": {
+                                "name": "id",
+                                "type": {
+                                    "types": [
+                                        {
+                                            "type": "String"
+                                        }
+                                    ],
+                                    "raw": "String"
+                                },
+                                "description": "The id of the instance you want to get back",
+                                "defaultStr": ""
+                            },
+                            "proc": {
+                                "name": "proc",
+                                "type": {
+                                    "types": [
+                                        {
+                                            "type": "SProcess"
+                                        }
+                                    ],
+                                    "raw": "SProcess"
+                                },
+                                "description": "The process to display Stdio for",
+                                "defaultStr": ""
+                            },
+                            "settings": {
+                                "name": "settings",
+                                "type": {
+                                    "types": [
+                                        {
+                                            "type": "Object"
+                                        }
+                                    ],
+                                    "raw": "Object"
+                                },
+                                "description": "An object of blessed settings that will be passed to the main blessed.box instance",
+                                "default": {},
+                                "defaultStr": "{}"
+                            }
                         },
                         "description": "This static method allows you to get back either an existing stdio instance or a new one",
                         "async": "true",
@@ -257,6 +324,48 @@
                                 }
                             ],
                             "raw": "Function"
+                        },
+                        "param": {
+                            "id": {
+                                "name": "id",
+                                "type": {
+                                    "types": [
+                                        {
+                                            "type": "String"
+                                        }
+                                    ],
+                                    "raw": "String"
+                                },
+                                "description": "A unique id for your stdio instance",
+                                "defaultStr": ""
+                            },
+                            "proc": {
+                                "name": "proc",
+                                "type": {
+                                    "types": [
+                                        {
+                                            "type": "SProcess"
+                                        }
+                                    ],
+                                    "raw": "SProcess"
+                                },
+                                "description": "The process to display Stdio for",
+                                "defaultStr": ""
+                            },
+                            "settings": {
+                                "name": "settings",
+                                "type": {
+                                    "types": [
+                                        {
+                                            "type": "Object"
+                                        }
+                                    ],
+                                    "raw": "Object"
+                                },
+                                "description": "An object of blessed settings that will be passed to the main blessed.box instance",
+                                "default": {},
+                                "defaultStr": "{}"
+                            }
                         },
                         "description": "This static method is a sugar to instanciate an stdio by specifying some sources,\nand either a path to a SStdio class, an SStdio class directly or a pre-registered\nstdio id like:\n- inherit: If is in node context, will fallback to STerminalStdio, if in browser, in SConsoleStdio\n-\n- terminal: STerminalStdio (node only)\n- console: SConsoleStdio (browser only)",
                         "example": [
@@ -360,6 +469,35 @@
                             ],
                             "raw": "Function"
                         },
+                        "param": {
+                            "source": {
+                                "name": "source",
+                                "type": {
+                                    "types": [
+                                        {
+                                            "type": "SPromise"
+                                        }
+                                    ],
+                                    "raw": "SPromise"
+                                },
+                                "description": "The source to register",
+                                "defaultStr": ""
+                            },
+                            "settings": {
+                                "name": "settings",
+                                "type": {
+                                    "types": [
+                                        {
+                                            "type": "ISBlessedStdioSettings"
+                                        }
+                                    ],
+                                    "raw": "ISBlessedStdioSettings"
+                                },
+                                "description": "null",
+                                "default": {},
+                                "defaultStr": "{}"
+                            }
+                        },
                         "description": "This method simply listen to the process and log the values getted\nfrom it into the panel",
                         "author": {
                             "name": "Olivier Bossel",
@@ -368,7 +506,7 @@
                         }
                     },
                     "log": {
-                        "id": "sbdbfa8e35fc473aa98edc8441bb540438de9115653e33e811599b05a26606832",
+                        "id": "sec8e397c7328ddfba55ac325ebfb27bdbeec0d3bc2d1840915a41f63ebf04b4a",
                         "name": "log",
                         "type": {
                             "types": [
@@ -378,7 +516,25 @@
                             ],
                             "raw": "Function"
                         },
-                        "description": "This method is the one called to log something.\nIt will call the ```_log``` method that each implementation of the\nSStdio class MUST have",
+                        "param": {
+                            "...logObj": {
+                                "name": "...logObj",
+                                "type": {
+                                    "types": [
+                                        {
+                                            "type": "array",
+                                            "of": [
+                                                "ISLog"
+                                            ]
+                                        }
+                                    ],
+                                    "raw": "ISLog[]"
+                                },
+                                "description": "The log object(s) you want to log",
+                                "defaultStr": ""
+                            }
+                        },
+                        "description": "This method is the one called to log something.\nIt will call the ```log``` method on each registered adapters",
                         "since": "2.0.0",
                         "author": {
                             "name": "Olivier Bossel",
@@ -396,6 +552,24 @@
                                 }
                             ],
                             "raw": "Function"
+                        },
+                        "param": {
+                            "...logObj": {
+                                "name": "...logObj",
+                                "type": {
+                                    "types": [
+                                        {
+                                            "type": "array",
+                                            "of": [
+                                                "ISLog"
+                                            ]
+                                        }
+                                    ],
+                                    "raw": "ISLog[]"
+                                },
+                                "description": "The log object(s) you want to log",
+                                "defaultStr": ""
+                            }
                         },
                         "description": "This method is the one called to ask something.\nIt will call the ```_ask``` method that each implementation of the\nSStdio class MUST have",
                         "async": "true",
@@ -438,6 +612,38 @@
                     ],
                     "raw": "Class"
                 },
+                "param": {
+                    "sources": {
+                        "name": "sources",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "array",
+                                    "of": [
+                                        "SEventEmitter"
+                                    ]
+                                }
+                            ],
+                            "raw": "SEventEmitter[]"
+                        },
+                        "description": "An array of sources to display with this Stdio instance",
+                        "defaultStr": ""
+                    },
+                    "settings": {
+                        "name": "settings",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Object"
+                                }
+                            ],
+                            "raw": "Object"
+                        },
+                        "description": "The settings object to configure your SStdio",
+                        "default": {},
+                        "defaultStr": "{}"
+                    }
+                },
                 "description": "This class represent a \"basic\" terminal strandard in out interface.",
                 "namespace": "@coffeekraken.s-stdio.node.basic",
                 "example": [
@@ -452,9 +658,173 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "SBasicStdio.ts",
+                "filename": "SStdioBasicAdapter.ts",
                 "extension": "ts",
-                "relPath": "src/node/basic/SBasicStdio.ts",
+                "relPath": "src/js/adapters/SStdioBasicAdapter.ts",
+                "children": {
+                    "constructor": {
+                        "id": "sfa166a726e2f17bad10f0fa6a932646b6f0d93a5c18c2e6571524f4a269e2402",
+                        "name": "constructor",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ],
+                            "raw": "Function"
+                        },
+                        "description": "Constructor",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://coffeekraken.io"
+                        }
+                    }
+                }
+            },
+            "@coffeekraken.s-stdio.node.basic.SStdioBasicAdapter": {
+                "id": "@coffeekraken.s-stdio.node.basic.SStdioBasicAdapter",
+                "name": "SStdioBasicAdapter",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Class"
+                        }
+                    ],
+                    "raw": "Class"
+                },
+                "param": {
+                    "sources": {
+                        "name": "sources",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "array",
+                                    "of": [
+                                        "SEventEmitter"
+                                    ]
+                                }
+                            ],
+                            "raw": "SEventEmitter[]"
+                        },
+                        "description": "An array of sources to display with this Stdio instance",
+                        "defaultStr": ""
+                    },
+                    "settings": {
+                        "name": "settings",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Object"
+                                }
+                            ],
+                            "raw": "Object"
+                        },
+                        "description": "The settings object to configure your SStdio",
+                        "default": {},
+                        "defaultStr": "{}"
+                    }
+                },
+                "description": "This class represent a \"basic\" terminal strandard in out interface.",
+                "namespace": "@coffeekraken.s-stdio.node.basic",
+                "example": [
+                    {
+                        "language": "js",
+                        "code": "import { __SStdioBasicAdapter } from '@coffeekraken/s-stdio';\nconst terminal = new __SStdioBasicAdapter();"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "SStdioBasicAdapter.ts",
+                "extension": "ts",
+                "relPath": "src/node/adapters/SStdioBasicAdapter.ts",
+                "children": {
+                    "constructor": {
+                        "id": "sfa166a726e2f17bad10f0fa6a932646b6f0d93a5c18c2e6571524f4a269e2402",
+                        "name": "constructor",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ],
+                            "raw": "Function"
+                        },
+                        "description": "Constructor",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://coffeekraken.io"
+                        }
+                    }
+                }
+            },
+            "@coffeekraken.s-stdio.node.basic.SStdioNotificationAdapter": {
+                "id": "@coffeekraken.s-stdio.node.basic.SStdioNotificationAdapter",
+                "name": "SStdioNotificationAdapter",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Class"
+                        }
+                    ],
+                    "raw": "Class"
+                },
+                "param": {
+                    "sources": {
+                        "name": "sources",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "array",
+                                    "of": [
+                                        "SEventEmitter"
+                                    ]
+                                }
+                            ],
+                            "raw": "SEventEmitter[]"
+                        },
+                        "description": "An array of sources to display with this Stdio instance",
+                        "defaultStr": ""
+                    },
+                    "settings": {
+                        "name": "settings",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Object"
+                                }
+                            ],
+                            "raw": "Object"
+                        },
+                        "description": "The settings object to configure your SStdio",
+                        "default": {},
+                        "defaultStr": "{}"
+                    }
+                },
+                "description": "This class represent a \"notification\" out interface.",
+                "namespace": "@coffeekraken.s-stdio.node.basic",
+                "example": [
+                    {
+                        "language": "js",
+                        "code": "import { __SStdioNotificationAdapter } from '@coffeekraken/s-stdio';\nconst terminal = new __SStdioNotificationAdapter();"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "SStdioNotificationAdapter.ts",
+                "extension": "ts",
+                "relPath": "src/node/adapters/SStdioNotificationAdapter.ts",
                 "children": {
                     "constructor": {
                         "id": "sfa166a726e2f17bad10f0fa6a932646b6f0d93a5c18c2e6571524f4a269e2402",
@@ -558,54 +928,6 @@
                 "filename": "SStdioSettingsInterface.ts",
                 "extension": "ts",
                 "relPath": "src/shared/interface/SStdioSettingsInterface.ts",
-                "children": {}
-            },
-            "@coffeekraken.s-stdio.shared.basic.components.defaultBasicStdioComponent": {
-                "id": "@coffeekraken.s-stdio.shared.basic.components.defaultBasicStdioComponent",
-                "name": "defaultBasicStdioComponent",
-                "type": {
-                    "types": [
-                        {
-                            "type": "ISStdioComponent"
-                        }
-                    ],
-                    "raw": "ISStdioComponent"
-                },
-                "description": "Basic stdio component",
-                "namespace": "@coffeekraken.s-stdio.shared.basic.components",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "defaultBasicStdioComponent.ts",
-                "extension": "ts",
-                "relPath": "src/node/basic/components/defaultBasicStdioComponent.ts",
-                "children": {}
-            },
-            "@coffeekraken.s-stdio.shared.basic.components.errorBasicStdioComponent": {
-                "id": "@coffeekraken.s-stdio.shared.basic.components.errorBasicStdioComponent",
-                "name": "errorBasicStdioComponent",
-                "type": {
-                    "types": [
-                        {
-                            "type": "ISStdioComponent"
-                        }
-                    ],
-                    "raw": "ISStdioComponent"
-                },
-                "description": "Basic stdio error component",
-                "namespace": "@coffeekraken.s-stdio.shared.basic.components",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "errorBasicStdioComponent.ts",
-                "extension": "ts",
-                "relPath": "src/node/basic/components/errorBasicStdioComponent.ts",
                 "children": {}
             }
         }

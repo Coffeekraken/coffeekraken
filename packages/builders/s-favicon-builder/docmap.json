@@ -3,6 +3,7 @@
     "extends": [],
     "generated": {
         "extends": [
+            "@coffeekraken/aa",
             "@coffeekraken/cli",
             "@coffeekraken/s-activate-feature",
             "@coffeekraken/s-appear-feature",
@@ -42,9 +43,11 @@
             "@coffeekraken/s-filtrable-input-component",
             "@coffeekraken/s-floating-feature",
             "@coffeekraken/s-form-validate-feature",
+            "@coffeekraken/s-front",
             "@coffeekraken/s-frontend-checker",
             "@coffeekraken/s-frontend-server",
             "@coffeekraken/s-frontspec",
+            "@coffeekraken/s-glitch-feature",
             "@coffeekraken/s-glob",
             "@coffeekraken/s-google-map-component",
             "@coffeekraken/s-handlebars",
@@ -83,7 +86,6 @@
             "@coffeekraken/s-sugar-element",
             "@coffeekraken/s-sugar-feature",
             "@coffeekraken/s-sugar-json",
-            "@coffeekraken/s-lazy-feature",
             "@coffeekraken/s-theme-switcher-component",
             "@coffeekraken/s-theme",
             "@coffeekraken/s-timer",
@@ -101,79 +103,6 @@
             "@coffeekraken/sugar"
         ],
         "map": {
-            "@coffeekraken.s-favicon-builder.config.faviconBuilder.input": {
-                "id": "@coffeekraken.s-favicon-builder.config.faviconBuilder.input",
-                "name": "input",
-                "type": {
-                    "types": [
-                        {
-                            "type": "String"
-                        }
-                    ],
-                    "raw": "String"
-                },
-                "default": "[config.storage.src.rootDir]/favicon/favicon.png",
-                "description": "Specify where the favicon source file is stored",
-                "namespace": "@coffeekraken.s-favicon-builder.config.faviconBuilder",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "faviconBuilder.config.ts",
-                "extension": "config",
-                "relPath": "src/config/faviconBuilder.config.ts"
-            },
-            "@coffeekraken.s-favicon-builder.config.faviconBuilder.outDir": {
-                "id": "@coffeekraken.s-favicon-builder.config.faviconBuilder.outDir",
-                "name": "outDir",
-                "type": {
-                    "types": [
-                        {
-                            "type": "String"
-                        }
-                    ],
-                    "raw": "String"
-                },
-                "default": "[config.storage.dist.rootDir]/favicon",
-                "description": "Specify where the favicon output files have to be stored",
-                "namespace": "@coffeekraken.s-favicon-builder.config.faviconBuilder",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "faviconBuilder.config.ts",
-                "extension": "config",
-                "relPath": "src/config/faviconBuilder.config.ts"
-            },
-            "@coffeekraken.s-favicon-builder.config.faviconBuilder.settings": {
-                "id": "@coffeekraken.s-favicon-builder.config.faviconBuilder.settings",
-                "name": "settings",
-                "type": {
-                    "types": [
-                        {
-                            "type": "String"
-                        }
-                    ],
-                    "raw": "String"
-                },
-                "default": "{}",
-                "description": "Specify some settings to override and pass to the [favicons](https://www.npmjs.com/package/favicons) builder",
-                "namespace": "@coffeekraken.s-favicon-builder.config.faviconBuilder",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "faviconBuilder.config.ts",
-                "extension": "config",
-                "relPath": "src/config/faviconBuilder.config.ts",
-                "children": {}
-            },
             "@coffeekraken.s-favicon-builder.doc.README": {
                 "id": "@coffeekraken.s-favicon-builder.doc.README",
                 "name": "README",
@@ -220,6 +149,22 @@
                         }
                     ],
                     "raw": "Class"
+                },
+                "param": {
+                    "settings": {
+                        "name": "settings",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "ISFaviconBuilderSettings"
+                                }
+                            ],
+                            "raw": "ISFaviconBuilderSettings"
+                        },
+                        "description": "Some settings to configure your image compression process",
+                        "default": {},
+                        "defaultStr": "{}"
+                    }
                 },
                 "platform": [
                     {

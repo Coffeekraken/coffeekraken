@@ -3,6 +3,7 @@
     "extends": [],
     "generated": {
         "extends": [
+            "@coffeekraken/aa",
             "@coffeekraken/cli",
             "@coffeekraken/s-activate-feature",
             "@coffeekraken/s-appear-feature",
@@ -43,9 +44,11 @@
             "@coffeekraken/s-filtrable-input-component",
             "@coffeekraken/s-floating-feature",
             "@coffeekraken/s-form-validate-feature",
+            "@coffeekraken/s-front",
             "@coffeekraken/s-frontend-checker",
             "@coffeekraken/s-frontend-server",
             "@coffeekraken/s-frontspec",
+            "@coffeekraken/s-glitch-feature",
             "@coffeekraken/s-glob",
             "@coffeekraken/s-google-map-component",
             "@coffeekraken/s-handlebars",
@@ -83,7 +86,6 @@
             "@coffeekraken/s-sugar-element",
             "@coffeekraken/s-sugar-feature",
             "@coffeekraken/s-sugar-json",
-            "@coffeekraken/s-lazy-feature",
             "@coffeekraken/s-theme-switcher-component",
             "@coffeekraken/s-theme",
             "@coffeekraken/s-timer",
@@ -101,223 +103,6 @@
             "@coffeekraken/sugar"
         ],
         "map": {
-            "@coffeekraken.s-markdown-builder.config.markdownBuilder.default.glob": {
-                "id": "@coffeekraken.s-markdown-builder.config.markdownBuilder.default.glob",
-                "name": "glob",
-                "type": {
-                    "types": [
-                        {
-                            "type": "String"
-                        }
-                    ],
-                    "raw": "String"
-                },
-                "default": "** /+(README|LICENSE|*.md)",
-                "description": "Specify a glob pattern relative to your \"inDir\" config",
-                "namespace": "@coffeekraken.s-markdown-builder.config.markdownBuilder.default",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "markdownBuilder.config.ts",
-                "extension": "config",
-                "relPath": "src/config/markdownBuilder.config.ts"
-            },
-            "@coffeekraken.s-markdown-builder.config.markdownBuilder.default.inDir": {
-                "id": "@coffeekraken.s-markdown-builder.config.markdownBuilder.default.inDir",
-                "name": "inDir",
-                "type": {
-                    "types": [
-                        {
-                            "type": "String"
-                        }
-                    ],
-                    "raw": "String"
-                },
-                "default": "[config.storage.src.rootDir]",
-                "description": "Specify the input directory where to search for files to build using the \"glob\" config",
-                "namespace": "@coffeekraken.s-markdown-builder.config.markdownBuilder.default",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "markdownBuilder.config.ts",
-                "extension": "config",
-                "relPath": "src/config/markdownBuilder.config.ts"
-            },
-            "@coffeekraken.s-markdown-builder.config.markdownBuilder.default.inPath": {
-                "id": "@coffeekraken.s-markdown-builder.config.markdownBuilder.default.inPath",
-                "name": "inPath",
-                "type": {
-                    "types": [
-                        {
-                            "type": "String"
-                        }
-                    ],
-                    "raw": "String"
-                },
-                "default": "null",
-                "description": "Specify a file path to process.",
-                "namespace": "@coffeekraken.s-markdown-builder.config.markdownBuilder.default",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "markdownBuilder.config.ts",
-                "extension": "config",
-                "relPath": "src/config/markdownBuilder.config.ts"
-            },
-            "@coffeekraken.s-markdown-builder.config.markdownBuilder.default.inRaw": {
-                "id": "@coffeekraken.s-markdown-builder.config.markdownBuilder.default.inRaw",
-                "name": "inRaw",
-                "type": {
-                    "types": [
-                        {
-                            "type": "String"
-                        }
-                    ],
-                    "raw": "String"
-                },
-                "default": "null",
-                "description": "Specify some markdown to build in string format.",
-                "namespace": "@coffeekraken.s-markdown-builder.config.markdownBuilder.default",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "markdownBuilder.config.ts",
-                "extension": "config",
-                "relPath": "src/config/markdownBuilder.config.ts"
-            },
-            "@coffeekraken.s-markdown-builder.config.markdownBuilder.default.outDir": {
-                "id": "@coffeekraken.s-markdown-builder.config.markdownBuilder.default.outDir",
-                "name": "outDir",
-                "type": {
-                    "types": [
-                        {
-                            "type": "String"
-                        }
-                    ],
-                    "raw": "String"
-                },
-                "default": "[config.storage.dist.rootDir]",
-                "description": "Specify the output directory where to save the processed files.",
-                "namespace": "@coffeekraken.s-markdown-builder.config.markdownBuilder.default",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "markdownBuilder.config.ts",
-                "extension": "config",
-                "relPath": "src/config/markdownBuilder.config.ts"
-            },
-            "@coffeekraken.s-markdown-builder.config.markdownBuilder.default.outPath": {
-                "id": "@coffeekraken.s-markdown-builder.config.markdownBuilder.default.outPath",
-                "name": "outPath",
-                "type": {
-                    "types": [
-                        {
-                            "type": "String"
-                        }
-                    ],
-                    "raw": "String"
-                },
-                "default": "null",
-                "description": "Specify an output file path when using the \"inPath\" config",
-                "namespace": "@coffeekraken.s-markdown-builder.config.markdownBuilder.default",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "markdownBuilder.config.ts",
-                "extension": "config",
-                "relPath": "src/config/markdownBuilder.config.ts"
-            },
-            "@coffeekraken.s-markdown-builder.config.markdownBuilder.default.save": {
-                "id": "@coffeekraken.s-markdown-builder.config.markdownBuilder.default.save",
-                "name": "save",
-                "type": {
-                    "types": [
-                        {
-                            "type": "Boolean"
-                        }
-                    ],
-                    "raw": "Boolean"
-                },
-                "default": "true",
-                "description": "Specify if you want to save the processed files out or not",
-                "namespace": "@coffeekraken.s-markdown-builder.config.markdownBuilder.default",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "markdownBuilder.config.ts",
-                "extension": "config",
-                "relPath": "src/config/markdownBuilder.config.ts"
-            },
-            "@coffeekraken.s-markdown-builder.config.markdownBuilder.default.target": {
-                "id": "@coffeekraken.s-markdown-builder.config.markdownBuilder.default.target",
-                "name": "target",
-                "type": {
-                    "types": [
-                        {
-                            "type": "String"
-                        }
-                    ],
-                    "raw": "String"
-                },
-                "default": "markdown",
-                "description": "Specify the output target you want. Can be \"markdown\" or \"html\"",
-                "namespace": "@coffeekraken.s-markdown-builder.config.markdownBuilder.default",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "markdownBuilder.config.ts",
-                "extension": "config",
-                "relPath": "src/config/markdownBuilder.config.ts"
-            },
-            "@coffeekraken.s-markdown-builder.config.markdownBuilder.websiteUrl": {
-                "id": "@coffeekraken.s-markdown-builder.config.markdownBuilder.websiteUrl",
-                "name": "websiteUrl",
-                "type": {
-                    "types": [
-                        {
-                            "type": "String"
-                        }
-                    ],
-                    "raw": "String"
-                },
-                "default": "config.package.homepage",
-                "description": "Specify the website url that will be used for things like \"absoluteLinks\" conversion, etc...",
-                "namespace": "@coffeekraken.s-markdown-builder.config.markdownBuilder",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "markdownBuilder.config.ts",
-                "extension": "config",
-                "relPath": "src/config/markdownBuilder.config.ts",
-                "children": {}
-            },
             "@coffeekraken.s-markdown-builder.doc.README": {
                 "id": "@coffeekraken.s-markdown-builder.doc.README",
                 "name": "README",
@@ -365,6 +150,22 @@
                     ],
                     "raw": "Class"
                 },
+                "param": {
+                    "settings": {
+                        "name": "settings",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "ISMarkdownBuilderSettings"
+                                }
+                            ],
+                            "raw": "ISMarkdownBuilderSettings"
+                        },
+                        "description": "Some settings to configure your builder instance",
+                        "default": {},
+                        "defaultStr": "{}"
+                    }
+                },
                 "platform": [
                     {
                         "name": "node",
@@ -410,7 +211,7 @@
                         }
                     },
                     "build": {
-                        "id": "s03e4e4a678bff3fb5b2cf33d72629d36d8a7df39cadf8494dc492aa2f39dd71c",
+                        "id": "s5b57573c2c5226663622e61752813be7e36eca3cd6d23adf7020f83883fb09fb",
                         "name": "build",
                         "type": {
                             "types": [
@@ -419,6 +220,22 @@
                                 }
                             ],
                             "raw": "Function"
+                        },
+                        "param": {
+                            "params": {
+                                "name": "params",
+                                "type": {
+                                    "types": [
+                                        {
+                                            "type": "dist/pkg/%moduleSystem/node/interface/SMarkdownBuilderBuildParamsInterface.js"
+                                        }
+                                    ],
+                                    "raw": "dist/pkg/%moduleSystem/node/interface/SMarkdownBuilderBuildParamsInterface.js"
+                                },
+                                "description": "Some params for your build",
+                                "default": {},
+                                "defaultStr": "{}"
+                            }
                         },
                         "description": "This method is the internal builder _build one.\nIt will be called by the SBuilder class with the final params\nfor the build",
                         "async": "true",

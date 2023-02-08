@@ -361,6 +361,8 @@ export default class SFront extends __SClass {
             `<yellow>[lod]</yellow> Set lod (level of details) to <cyan>${level}</cyan>`,
         );
 
+        const cssSettings = __STheme.cssSettings;
+
         // @ts-ignore
         level = parseInt(`${level}`);
 
@@ -368,15 +370,27 @@ export default class SFront extends __SClass {
         this.state.lod.level = level;
         this.save();
 
-        const lodStylesheets = Array.from(
-            document.querySelectorAll('link[s-lod]'),
-        );
+        if (cssSettings.lod?.method === 'file') {
+            const lodStylesheets = Array.from(
+                document.querySelectorAll('link[s-lod]'),
+            );
 
-        let $stylesheet;
-        if (this.settings.lod.stylesheet instanceof HTMLLinkElement) {
-            $stylesheet = this.settings.lod.stylesheet;
-        } else if (typeof this.settings.lod.stylesheet === 'string') {
-            $stylesheet = document.querySelector(this.settings.lod.stylesheet);
+            let $stylesheet;
+            if (this.settings.lod.stylesheet instanceof HTMLLinkElement) {
+                $stylesheet = this.settings.lod.stylesheet;
+            } else if (typeof this.settings.lod.stylesheet === 'string') {
+                $stylesheet = document.querySelector(
+                    this.settings.lod.stylesheet,
+                );
+            }
+
+            // remove all none used stylesheets
+            lodStylesheets.forEach(($link) => {
+                const l = parseInt($link.getAttribute('s-lod'));
+                if (l > level) {
+                    $link.remove();
+                }
+            });
         }
 
         // remove all the lod classes above the wanted level
@@ -386,38 +400,32 @@ export default class SFront extends __SClass {
             }
         }
 
-        // remove all none used stylesheets
-        lodStylesheets.forEach(($link) => {
-            const l = parseInt($link.getAttribute('s-lod'));
-            if (l > level) {
-                $link.remove();
-            }
-        });
-
         // add the new classes
         for (let i = 0; i <= level; i++) {
             finalSettings.$context.classList.add('s-lod', `s-lod--${i}`);
 
-            // check if already have the stylesheet in the dom
-            if (
-                i > 0 &&
-                !lodStylesheets.filter(($link) => {
-                    const l = parseInt($link.getAttribute('s-lod'));
-                    return l === i;
-                }).length
-            ) {
-                const $lodLink = $stylesheet.cloneNode();
-                $lodLink.setAttribute(
-                    'href',
-                    $stylesheet
-                        .getAttribute('href')
-                        .replace(
-                            /([a-zA-Z0-9_-]+)\.css(\?.*)?/,
-                            `lod/$1.lod-${i}.css`,
-                        ),
-                );
-                $lodLink.setAttribute('s-lod', i);
-                document.head.appendChild($lodLink);
+            if (cssSettings.lod?.method === 'file') {
+                // check if already have the stylesheet in the dom
+                if (
+                    i > 0 &&
+                    !lodStylesheets.filter(($link) => {
+                        const l = parseInt($link.getAttribute('s-lod'));
+                        return l === i;
+                    }).length
+                ) {
+                    const $lodLink = $stylesheet.cloneNode();
+                    $lodLink.setAttribute(
+                        'href',
+                        $stylesheet
+                            .getAttribute('href')
+                            .replace(
+                                /([a-zA-Z0-9_-]+)\.css(\?.*)?/,
+                                `lod/$1.lod-${i}.css`,
+                            ),
+                    );
+                    $lodLink.setAttribute('s-lod', i);
+                    document.head.appendChild($lodLink);
+                }
             }
         }
 

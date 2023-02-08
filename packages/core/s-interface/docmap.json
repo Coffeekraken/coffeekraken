@@ -3,6 +3,7 @@
     "extends": [],
     "generated": {
         "extends": [
+            "@coffeekraken/aa",
             "@coffeekraken/cli",
             "@coffeekraken/s-activate-feature",
             "@coffeekraken/s-appear-feature",
@@ -43,9 +44,11 @@
             "@coffeekraken/s-filtrable-input-component",
             "@coffeekraken/s-floating-feature",
             "@coffeekraken/s-form-validate-feature",
+            "@coffeekraken/s-front",
             "@coffeekraken/s-frontend-checker",
             "@coffeekraken/s-frontend-server",
             "@coffeekraken/s-frontspec",
+            "@coffeekraken/s-glitch-feature",
             "@coffeekraken/s-glob",
             "@coffeekraken/s-google-map-component",
             "@coffeekraken/s-handlebars",
@@ -83,7 +86,6 @@
             "@coffeekraken/s-sugar-element",
             "@coffeekraken/s-sugar-feature",
             "@coffeekraken/s-sugar-json",
-            "@coffeekraken/s-lazy-feature",
             "@coffeekraken/s-theme-switcher-component",
             "@coffeekraken/s-theme",
             "@coffeekraken/s-timer",
@@ -248,6 +250,21 @@
                             ],
                             "raw": "Function"
                         },
+                        "param": {
+                            "rendererClass": {
+                                "name": "rendererClass",
+                                "type": {
+                                    "types": [
+                                        {
+                                            "type": "SInterfaceRenderer"
+                                        }
+                                    ],
+                                    "raw": "SInterfaceRenderer"
+                                },
+                                "description": "The renderer class you want to register",
+                                "defaultStr": ""
+                            }
+                        },
                         "description": "This static method allows you to register a renderer that you can then\nuse through the ```interface.render('{rendererId}')``` interface method",
                         "static": "true",
                         "since": "2.0.0",
@@ -267,6 +284,24 @@
                                 }
                             ],
                             "raw": "Function"
+                        },
+                        "param": {
+                            "...ints": {
+                                "name": "...ints",
+                                "type": {
+                                    "types": [
+                                        {
+                                            "type": "array",
+                                            "of": [
+                                                "SInterface"
+                                            ]
+                                        }
+                                    ],
+                                    "raw": "SInterface[]"
+                                },
+                                "description": "The interfaces to mix together",
+                                "defaultStr": ""
+                            }
                         },
                         "description": "This static method allows you to mix multiple interfaces into one",
                         "static": "true",
@@ -288,6 +323,21 @@
                             ],
                             "raw": "Function"
                         },
+                        "param": {
+                            "definition": {
+                                "name": "definition",
+                                "type": {
+                                    "types": [
+                                        {
+                                            "type": "Object"
+                                        }
+                                    ],
+                                    "raw": "Object"
+                                },
+                                "description": "A definition object to override or extends the base one",
+                                "defaultStr": ""
+                            }
+                        },
                         "description": "This static method is usefull to make a duplicate of the base interface with some updates\nin the definition object.",
                         "static": "true",
                         "since": "2.0.0",
@@ -307,6 +357,34 @@
                                 }
                             ],
                             "raw": "Function"
+                        },
+                        "param": {
+                            "prop": {
+                                "name": "prop",
+                                "type": {
+                                    "types": [
+                                        {
+                                            "type": "String"
+                                        }
+                                    ],
+                                    "raw": "String"
+                                },
+                                "description": "The property to check if it's the default of or not",
+                                "defaultStr": ""
+                            },
+                            "value": {
+                                "name": "value",
+                                "type": {
+                                    "types": [
+                                        {
+                                            "type": "Any"
+                                        }
+                                    ],
+                                    "raw": "Any"
+                                },
+                                "description": "The value to check with",
+                                "defaultStr": ""
+                            }
                         },
                         "description": "This static method allows you to check if a certain value is the default of a certain property or not.",
                         "static": "true",
@@ -347,6 +425,22 @@
                                 }
                             ],
                             "raw": "Function"
+                        },
+                        "param": {
+                            "name": {
+                                "name": "name",
+                                "type": {
+                                    "types": [
+                                        {
+                                            "type": "String"
+                                        }
+                                    ],
+                                    "raw": "String"
+                                },
+                                "description": "A custom name to register your interface. Otherwise take the class name and register two types: MyClassInterface => MyClassInterface && MyClass",
+                                "default": null,
+                                "defaultStr": "null"
+                            }
                         },
                         "description": "This static method allows you to promote your interface at the level where it can be\nused in the \"type\" interface definition property like so \"Object<MyCoolType>\"",
                         "static": "true",
@@ -408,6 +502,35 @@
                             ],
                             "raw": "Function"
                         },
+                        "param": {
+                            "objectOrString": {
+                                "name": "objectOrString",
+                                "type": {
+                                    "types": [
+                                        {
+                                            "type": "Any"
+                                        }
+                                    ],
+                                    "raw": "Any"
+                                },
+                                "description": "The object on which to apply the interface on, or a cli like string to use as input",
+                                "defaultStr": ""
+                            },
+                            "settings": {
+                                "name": "settings",
+                                "type": {
+                                    "types": [
+                                        {
+                                            "type": "ISInterfaceSettings"
+                                        }
+                                    ],
+                                    "raw": "ISInterfaceSettings"
+                                },
+                                "description": "An object of settings to configure your apply process",
+                                "default": {},
+                                "defaultStr": "{}"
+                            }
+                        },
                         "description": "This method allows you to apply the interface on an object instance.\nBy default, if something is wrong in your class implementation, an error with the\ndescription of what's wrong will be thrown. You can change that behavior if you prefer having\ntrue returned when all is ok, or a string describing the current issue by specify the \"settings.throw\" property to false.",
                         "since": "2.0.0",
                         "author": {
@@ -426,6 +549,72 @@
                                 }
                             ],
                             "raw": "Function"
+                        },
+                        "param": {
+                            "renderer": {
+                                "name": "renderer",
+                                "type": {
+                                    "types": [
+                                        {
+                                            "type": "String"
+                                        }
+                                    ],
+                                    "raw": "String"
+                                },
+                                "description": "The registered renderer you want to use.",
+                                "default": "terminal",
+                                "defaultStr": "\"terminal\""
+                            },
+                            "settings": {
+                                "name": "settings",
+                                "type": {
+                                    "types": [
+                                        {
+                                            "type": "ISInterfaceRendererSettings"
+                                        }
+                                    ],
+                                    "raw": "ISInterfaceRendererSettings"
+                                },
+                                "description": "Some settings to configure your render",
+                                "default": {},
+                                "defaultStr": "{}"
+                            }
+                        },
+                        "setting": {
+                            "renderer": {
+                                "name": "renderer",
+                                "type": {
+                                    "types": [
+                                        {
+                                            "type": "string",
+                                            "value": "terminal"
+                                        }
+                                    ],
+                                    "raw": "'terminal'"
+                                },
+                                "description": "The renderer you want to use.",
+                                "default": "terminal",
+                                "defaultStr": "\"terminal\""
+                            },
+                            "exclude": {
+                                "name": "exclude",
+                                "type": {
+                                    "types": [
+                                        {
+                                            "type": "Array",
+                                            "of": [
+                                                "String"
+                                            ]
+                                        }
+                                    ],
+                                    "raw": "Array<String>"
+                                },
+                                "description": "An array of properties you don't want to render",
+                                "default": [
+                                    "help"
+                                ],
+                                "defaultStr": "['help']"
+                            }
                         },
                         "description": "This static method allows you to get back the help using the\npassed renderer. Awailable rendered are for now:\n- terminal (default): The default terminal renderer\n- more to come depending on needs...",
                         "static": "true",
@@ -467,6 +656,35 @@
                         }
                     ],
                     "raw": "Class"
+                },
+                "param": {
+                    "interface": {
+                        "name": "interface",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "SInterface"
+                                }
+                            ],
+                            "raw": "SInterface"
+                        },
+                        "description": "The interface you want to render",
+                        "defaultStr": ""
+                    },
+                    "settings": {
+                        "name": "settings",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "ISInterfaceRendererSettings"
+                                }
+                            ],
+                            "raw": "ISInterfaceRendererSettings"
+                        },
+                        "description": "Some settings to configure your renderer like properties to exclude, etc...",
+                        "default": {},
+                        "defaultStr": "{}"
+                    }
                 },
                 "description": "This class represent the base for every interface renderers.\nIt handle things like registering types templates, properties to exclude, etc...",
                 "namespace": "@coffeekraken.s-interface.sugar.node.interface.renderers",
@@ -536,6 +754,22 @@
                             ],
                             "raw": "Function"
                         },
+                        "param": {
+                            "settings": {
+                                "name": "settings",
+                                "type": {
+                                    "types": [
+                                        {
+                                            "type": "ISInterfaceRendererSettings"
+                                        }
+                                    ],
+                                    "raw": "ISInterfaceRendererSettings"
+                                },
+                                "description": "Override some settings passed in the constructor if needed",
+                                "default": {},
+                                "defaultStr": "{}"
+                            }
+                        },
                         "description": "This method simply render the passed interface",
                         "async": "true",
                         "since": "2.0.0",
@@ -557,6 +791,35 @@
                         }
                     ],
                     "raw": "Class"
+                },
+                "param": {
+                    "interface": {
+                        "name": "interface",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "ISInterface"
+                                }
+                            ],
+                            "raw": "ISInterface"
+                        },
+                        "description": "The interface you want to render",
+                        "defaultStr": ""
+                    },
+                    "settings": {
+                        "name": "settings",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "ISInterfaceTerminalRendererSettings"
+                                }
+                            ],
+                            "raw": "ISInterfaceTerminalRendererSettings"
+                        },
+                        "description": "Some settings to configure your renderer like properties to exclude, etc...",
+                        "default": {},
+                        "defaultStr": "{}"
+                    }
                 },
                 "description": "This class represent the terminal interface renderer",
                 "namespace": "@coffeekraken.s-interface.sugar.node.interface.renderers",
@@ -594,6 +857,21 @@
             "@coffeekraken.s-interface.sugar.js.interface.renderers.terminal.undefined": {
                 "id": "@coffeekraken.s-interface.sugar.js.interface.renderers.terminal.undefined",
                 "name": "undefined",
+                "param": {
+                    "propertyObj": {
+                        "name": "propertyObj",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "ISInterfaceRendererRenderPropertyObj"
+                                }
+                            ],
+                            "raw": "ISInterfaceRendererRenderPropertyObj"
+                        },
+                        "description": "The property object to render",
+                        "defaultStr": ""
+                    }
+                },
                 "description": "Render the \"alias\" field.",
                 "namespace": "@coffeekraken.s-interface.sugar.js.interface.renderers.terminal",
                 "since": "2.0.0",
@@ -610,6 +888,21 @@
             "@coffeekraken.s-interface.sugar.js.interface.renderers.terminal.default": {
                 "id": "@coffeekraken.s-interface.sugar.js.interface.renderers.terminal.default",
                 "name": "default",
+                "param": {
+                    "propertyObj": {
+                        "name": "propertyObj",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "ISInterfaceRendererRenderPropertyObj"
+                                }
+                            ],
+                            "raw": "ISInterfaceRendererRenderPropertyObj"
+                        },
+                        "description": "The property object to render",
+                        "defaultStr": ""
+                    }
+                },
                 "default": "Function",
                 "description": "Render the \"default\" field.",
                 "namespace": "@coffeekraken.s-interface.sugar.js.interface.renderers.terminal",
@@ -635,6 +928,21 @@
                     ],
                     "raw": "Function"
                 },
+                "param": {
+                    "propertyObj": {
+                        "name": "propertyObj",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "ISInterfaceRendererRenderPropertyObj"
+                                }
+                            ],
+                            "raw": "ISInterfaceRendererRenderPropertyObj"
+                        },
+                        "description": "The property object to render",
+                        "defaultStr": ""
+                    }
+                },
                 "description": "Return the layout you want for the \"terminal\" renderer.\nYou can use tokens like these:\n- %type : Will be replaced with the \"type\" field rendered string\n- %default : Same but for the \"default\" field\n- etc...",
                 "namespace": "@coffeekraken.s-interface.sugar.js.interface.renderers.terminal",
                 "since": "2.0.0",
@@ -658,6 +966,21 @@
                         }
                     ],
                     "raw": "Function"
+                },
+                "param": {
+                    "propertyObj": {
+                        "name": "propertyObj",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "ISInterfaceRendererRenderPropertyObj"
+                                }
+                            ],
+                            "raw": "ISInterfaceRendererRenderPropertyObj"
+                        },
+                        "description": "The property object to render",
+                        "defaultStr": ""
+                    }
                 },
                 "description": "Render the \"type\" field.",
                 "namespace": "@coffeekraken.s-interface.sugar.js.interface.renderers.terminal",

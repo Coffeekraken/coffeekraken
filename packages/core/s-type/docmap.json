@@ -3,6 +3,7 @@
     "extends": [],
     "generated": {
         "extends": [
+            "@coffeekraken/aa",
             "@coffeekraken/cli",
             "@coffeekraken/s-activate-feature",
             "@coffeekraken/s-appear-feature",
@@ -43,9 +44,11 @@
             "@coffeekraken/s-filtrable-input-component",
             "@coffeekraken/s-floating-feature",
             "@coffeekraken/s-form-validate-feature",
+            "@coffeekraken/s-front",
             "@coffeekraken/s-frontend-checker",
             "@coffeekraken/s-frontend-server",
             "@coffeekraken/s-frontspec",
+            "@coffeekraken/s-glitch-feature",
             "@coffeekraken/s-glob",
             "@coffeekraken/s-google-map-component",
             "@coffeekraken/s-handlebars",
@@ -84,7 +87,6 @@
             "@coffeekraken/s-sugar-element",
             "@coffeekraken/s-sugar-feature",
             "@coffeekraken/s-sugar-json",
-            "@coffeekraken/s-lazy-feature",
             "@coffeekraken/s-theme-switcher-component",
             "@coffeekraken/s-theme",
             "@coffeekraken/s-timer",
@@ -111,6 +113,78 @@
                         }
                     ],
                     "raw": "Class"
+                },
+                "param": {
+                    "typeString": {
+                        "name": "typeString",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "String"
+                                }
+                            ],
+                            "raw": "String"
+                        },
+                        "description": "The type string to represent with this instance like \"Array<String>\", etc...",
+                        "defaultStr": ""
+                    },
+                    "settings": {
+                        "name": "settings",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "ISTypeSettings"
+                                }
+                            ],
+                            "raw": "ISTypeSettings"
+                        },
+                        "description": "An object of setting to configure your descriptor instance",
+                        "defaultStr": ""
+                    }
+                },
+                "setting": {
+                    "id": {
+                        "name": "id",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "String"
+                                }
+                            ],
+                            "raw": "String"
+                        },
+                        "description": "An id for your instance",
+                        "default": "this.constructor.name",
+                        "defaultStr": "this.constructor.name"
+                    },
+                    "name": {
+                        "name": "name",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "String"
+                                }
+                            ],
+                            "raw": "String"
+                        },
+                        "description": "A name for your instance",
+                        "default": "this.constructor.name",
+                        "defaultStr": "this.constructor.name"
+                    },
+                    "customTypes": {
+                        "name": "customTypes",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Boolean"
+                                }
+                            ],
+                            "raw": "Boolean"
+                        },
+                        "description": "Specify if you want the instance to take care of custom types like \"SType\", \"SPromise\", etc. or not",
+                        "default": true,
+                        "defaultStr": "true"
+                    }
                 },
                 "description": "This class is the main one that MUST be used as parent one\nwhen creating any type like object, string, etc...",
                 "namespace": "@coffeekraken.s-type.shared",
@@ -182,6 +256,21 @@
                             ],
                             "raw": "Function"
                         },
+                        "param": {
+                            "rule": {
+                                "name": "rule",
+                                "type": {
+                                    "types": [
+                                        {
+                                            "type": "ISDescriptorRule"
+                                        }
+                                    ],
+                                    "raw": "ISDescriptorRule"
+                                },
+                                "description": "The rule object to register",
+                                "defaultStr": ""
+                            }
+                        },
                         "description": "This static method allows you to register a new rule\nby passing a valid ISDescriptorRule object",
                         "static": "true",
                         "since": "2.0.0",
@@ -200,6 +289,21 @@
                                 }
                             ],
                             "raw": "Function"
+                        },
+                        "param": {
+                            "typeString": {
+                                "name": "typeString",
+                                "type": {
+                                    "types": [
+                                        {
+                                            "type": "String"
+                                        }
+                                    ],
+                                    "raw": "String"
+                                },
+                                "description": "The type string to parse",
+                                "defaultStr": ""
+                            }
                         },
                         "description": "This static method allows you to parse a type string using the `@coffeekraken/sugar/shared/type/parseTypeString` function.",
                         "static": "true",
@@ -239,6 +343,35 @@
                             ],
                             "raw": "Function"
                         },
+                        "param": {
+                            "value": {
+                                "name": "value",
+                                "type": {
+                                    "types": [
+                                        {
+                                            "type": "Any"
+                                        }
+                                    ],
+                                    "raw": "Any"
+                                },
+                                "description": "The value to check",
+                                "defaultStr": ""
+                            },
+                            "settings": {
+                                "name": "settings",
+                                "type": {
+                                    "types": [
+                                        {
+                                            "type": "ISTypeSettings"
+                                        }
+                                    ],
+                                    "raw": "ISTypeSettings"
+                                },
+                                "description": "Some settings to configure your check",
+                                "default": {},
+                                "defaultStr": "{}"
+                            }
+                        },
                         "description": "This method make a simple check to see if the passed value correspond to the\ntype that this instance represent.\nSame as the ```check``` method, but return only a Boolean.",
                         "since": "2.0.0",
                         "author": {
@@ -256,6 +389,35 @@
                                 }
                             ],
                             "raw": "Function"
+                        },
+                        "param": {
+                            "value": {
+                                "name": "value",
+                                "type": {
+                                    "types": [
+                                        {
+                                            "type": "Any"
+                                        }
+                                    ],
+                                    "raw": "Any"
+                                },
+                                "description": "The value to check",
+                                "defaultStr": ""
+                            },
+                            "settings": {
+                                "name": "settings",
+                                "type": {
+                                    "types": [
+                                        {
+                                            "type": "ISTypeSettings"
+                                        }
+                                    ],
+                                    "raw": "ISTypeSettings"
+                                },
+                                "description": "Some settings to configure your check",
+                                "default": {},
+                                "defaultStr": "{}"
+                            }
                         },
                         "description": "This method allows you to make sure the passed value correspond with the type(s)\nthis instance represent\nIf all is ok, return true, otherwise return an instance of the STypeResult class that\ndescribe what is wrong",
                         "since": "2.0.0",
@@ -275,6 +437,35 @@
                             ],
                             "raw": "Function"
                         },
+                        "param": {
+                            "value": {
+                                "name": "value",
+                                "type": {
+                                    "types": [
+                                        {
+                                            "type": "Any"
+                                        }
+                                    ],
+                                    "raw": "Any"
+                                },
+                                "description": "The value you want to cast",
+                                "defaultStr": ""
+                            },
+                            "settings": {
+                                "name": "settings",
+                                "type": {
+                                    "types": [
+                                        {
+                                            "type": "ISTypeSettings"
+                                        }
+                                    ],
+                                    "raw": "ISTypeSettings"
+                                },
+                                "description": "Some settings you want to override",
+                                "default": {},
+                                "defaultStr": "{}"
+                            }
+                        },
                         "description": "This method allows you to cast the passed value to the wanted type.\n!!! If multiple types are passed in the typeString, the first one that\nis \"castable\" to will be used.",
                         "since": "2.0.0",
                         "author": {
@@ -292,6 +483,21 @@
                                 }
                             ],
                             "raw": "Function"
+                        },
+                        "param": {
+                            "value": {
+                                "name": "value",
+                                "type": {
+                                    "types": [
+                                        {
+                                            "type": "Any"
+                                        }
+                                    ],
+                                    "raw": "Any"
+                                },
+                                "description": "The value to check",
+                                "defaultStr": ""
+                            }
                         },
                         "description": "This method simply take a value and return true if can have child(s), false if not",
                         "since": "2.0.0",

@@ -19,32 +19,22 @@ import __SDocmapReadParamsInterface from './SDocmapReadParamsInterface';
  */
 class SDocmapReadParamsInterface extends __SInterface {
     static get _definition() {
-        return Object.assign(
-            Object.assign({}, __SDocmapReadParamsInterface.definition),
-            {
-                slug: {
-                    description:
-                        'Specify a slug to search for. Can be a micromatch glob as well',
-                    type: 'String',
-                    alias: 's',
+        return Object.assign(Object.assign({}, __SDocmapReadParamsInterface.definition), { slug: {
+                description: 'Specify a slug to search for. Can be a micromatch glob as well',
+                type: 'String',
+                alias: 's',
+            }, namespace: {
+                description: 'Specify a namespace to search for. Can be a micromatch glob as well',
+                type: 'String',
+                alias: 'n',
+            }, excludePackages: {
+                type: {
+                    type: 'String[]',
+                    splitChars: [' ', ','],
                 },
-                namespace: {
-                    description:
-                        'Specify a namespace to search for. Can be a micromatch glob as well',
-                    type: 'String',
-                    alias: 'n',
-                },
-                excludePackages: {
-                    type: {
-                        type: 'String[]',
-                        splitChars: [' ', ','],
-                    },
-                    description:
-                        'Specify some package(s) name(s) (glob) to exclude',
-                    default: __SSugarConfig.get('docmap.excludePackages'),
-                },
-            },
-        );
+                description: 'Specify some package(s) name(s) (glob) to exclude',
+                default: __SSugarConfig.get('docmap.excludePackages'),
+            } });
     }
 }
 export default SDocmapReadParamsInterface;

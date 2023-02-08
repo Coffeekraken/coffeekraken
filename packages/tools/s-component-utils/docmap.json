@@ -3,6 +3,7 @@
     "extends": [],
     "generated": {
         "extends": [
+            "@coffeekraken/aa",
             "@coffeekraken/cli",
             "@coffeekraken/s-activate-feature",
             "@coffeekraken/s-appear-feature",
@@ -11,6 +12,7 @@
             "@coffeekraken/s-builder",
             "@coffeekraken/s-carpenter",
             "@coffeekraken/s-class",
+            "@coffeekraken/s-classmap",
             "@coffeekraken/s-clipboard-copy-component",
             "@coffeekraken/s-code-example-component",
             "@coffeekraken/s-code-formatter-prettier",
@@ -42,9 +44,11 @@
             "@coffeekraken/s-filtrable-input-component",
             "@coffeekraken/s-floating-feature",
             "@coffeekraken/s-form-validate-feature",
+            "@coffeekraken/s-front",
             "@coffeekraken/s-frontend-checker",
             "@coffeekraken/s-frontend-server",
             "@coffeekraken/s-frontspec",
+            "@coffeekraken/s-glitch-feature",
             "@coffeekraken/s-glob",
             "@coffeekraken/s-google-map-component",
             "@coffeekraken/s-handlebars",
@@ -53,6 +57,7 @@
             "@coffeekraken/s-inline-feature",
             "@coffeekraken/s-interface",
             "@coffeekraken/s-kitchen",
+            "@coffeekraken/s-lazy-feature",
             "@coffeekraken/s-lit-component",
             "@coffeekraken/s-log",
             "@coffeekraken/s-markdown-builder",
@@ -83,7 +88,6 @@
             "@coffeekraken/s-sugar-element",
             "@coffeekraken/s-sugar-feature",
             "@coffeekraken/s-sugar-json",
-            "@coffeekraken/s-lazy-feature",
             "@coffeekraken/s-theme-switcher-component",
             "@coffeekraken/s-theme",
             "@coffeekraken/s-timer",
@@ -173,24 +177,6 @@
                             },
                             "physical": true
                         },
-                        "status": {
-                            "description": "Specify the status of the component. Can be \"pending\", \"mounting\" or \"mounted\"",
-                            "type": {
-                                "types": [
-                                    {
-                                        "type": "String"
-                                    }
-                                ],
-                                "raw": "String"
-                            },
-                            "values": [
-                                "pending",
-                                "mounting",
-                                "mounted"
-                            ],
-                            "default": "pending",
-                            "physical": true
-                        },
                         "mountWhen": {
                             "description": "Specify when your component will be mounted",
                             "type": {
@@ -212,9 +198,47 @@
                                 "visible",
                                 "stylesheetsReady",
                                 "domReady",
-                                "animationEnd"
+                                "animationEnd",
+                                "lod:0",
+                                "lod:1",
+                                "lod:2",
+                                "lod:3",
+                                "lod:4"
                             ],
                             "default": "direct"
+                        },
+                        "activeWhen": {
+                            "description": "Specify when your component is active and when it is not",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "array",
+                                        "of": [
+                                            "String"
+                                        ]
+                                    }
+                                ],
+                                "raw": "String[]"
+                            },
+                            "values": [
+                                "inViewport",
+                                "lod"
+                            ],
+                            "default": [
+                                "inViewport",
+                                "lod"
+                            ]
+                        },
+                        "lod": {
+                            "description": "Specify the minimum lod (level of details) from when this component is active",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Number"
+                                    }
+                                ],
+                                "raw": "Number"
+                            }
                         },
                         "adoptStyle": {
                             "description": "Specify if your component adopt the style of the global DOM. This worts only if you are using a shadowRoot element",
@@ -326,6 +350,17 @@
                     "name": "SComponentUtilsSettingsInterface",
                     "description": "",
                     "definition": {
+                        "name": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
+                            "description": "The name of the component/feature that will be used to generate className, etc..."
+                        },
                         "interface": {
                             "description": "Specify an SInterface class to use as our properties definition",
                             "type": {
@@ -369,6 +404,18 @@
                                 ],
                                 "raw": "Object"
                             }
+                        },
+                        "useTagNameForClassName": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Boolean"
+                                    }
+                                ],
+                                "raw": "Boolean"
+                            },
+                            "description": "Specify if the method \"className\" will generate a class using the node tagName additionaly to the passed \"name\" setting",
+                            "default": true
                         }
                     }
                 },

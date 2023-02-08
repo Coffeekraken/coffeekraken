@@ -1,10 +1,10 @@
-<div class="tools s-until:media:mobile" theme="default-dark">
+<div class="tools s-until:media:mobile">
 
     <div class="tools_issue s-tooltip-container">
         <a class="s-btn:block s-color:error" title="Share the love" target="_blank">
             <i class="s-icon:fire"></i>
         </a>
-        <div s-floating placement="left" class="s-tooltip:interactive s-text:center">
+        <div s-floating placement="left" class="s-bare s-tooltip:interactive s-text:center">
             <div class="s-position:relative">
                 <i class="s-icon:bugs s-font:100 s-mbe:30"></i>
                 <h3 class="s-typo:h5 s-mbe:30">
@@ -31,7 +31,7 @@
         <a class="s-btn:block s-color:accent" title="Share the love" target="_blank">
             <i class="s-icon:heart"></i>
         </a>
-        <div s-floating placement="left" class="s-tooltip:interactive s-text:center">
+        <div s-floating placement="left" class="s-bare s-tooltip:interactive s-text:center">
             <div class="s-position:relative">
                 <i class="s-icon:heart s-font:100 s-mbe:30"></i>
                 <h3 class="s-typo:h5 s-mbe:30">
@@ -69,7 +69,7 @@
         <a class="s-btn:block s-color:complementary" title="Join us on Discord" target="_blank">
             <i class="s-icon:user"></i>
         </a>
-        <div s-floating placement="left" class="s-tooltip:interactive s-text:center">
+        <div s-floating placement="left" class="s-bare s-tooltip:interactive s-text:center">
             <div class="s-position:relative">
                 <i class="s-icon:discord s-font:100 s-mbe:30"></i>
                 <h3 class="s-typo:h5 s-mbe:30">
@@ -88,9 +88,9 @@
     </div>
     <div class="tools_opensource s-tooltip-container">
         <a class="s-btn:block s-bg:main-surface" title="We love open source!" target="_blank">
-            <i class="s-icon:logo-opensource"></i>
+            <i class="s-icon:logo-opensource s-tc:base"></i>
         </a>
-        <div s-floating placement="left" class="s-tooltip:interactive s-text:center">
+        <div s-floating placement="left" class="s-bare s-tooltip:interactive s-text:center">
             <div class="s-position:relative">
                 <i class="s-icon:logo-opensource s-font:100 s-mbe:30"></i>
                 <h3 class="s-typo:h5 s-mbe:30">

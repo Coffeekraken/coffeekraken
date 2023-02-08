@@ -10,7 +10,7 @@ import { __isColor } from '@coffeekraken/sugar/is';
 import {
     __deepMerge,
     __flatten,
-    __objectHash
+    __objectHash,
 } from '@coffeekraken/sugar/object';
 import __dashCase from '@coffeekraken/sugar/shared/string/dashCase';
 import __knownCssProperties from 'known-css-properties';

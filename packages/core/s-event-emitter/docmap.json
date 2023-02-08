@@ -3,6 +3,7 @@
     "extends": [],
     "generated": {
         "extends": [
+            "@coffeekraken/aa",
             "@coffeekraken/cli",
             "@coffeekraken/s-activate-feature",
             "@coffeekraken/s-appear-feature",
@@ -42,9 +43,11 @@
             "@coffeekraken/s-filtrable-input-component",
             "@coffeekraken/s-floating-feature",
             "@coffeekraken/s-form-validate-feature",
+            "@coffeekraken/s-front",
             "@coffeekraken/s-frontend-checker",
             "@coffeekraken/s-frontend-server",
             "@coffeekraken/s-frontspec",
+            "@coffeekraken/s-glitch-feature",
             "@coffeekraken/s-glob",
             "@coffeekraken/s-google-map-component",
             "@coffeekraken/s-handlebars",
@@ -83,7 +86,6 @@
             "@coffeekraken/s-sugar-element",
             "@coffeekraken/s-sugar-feature",
             "@coffeekraken/s-sugar-json",
-            "@coffeekraken/s-lazy-feature",
             "@coffeekraken/s-theme-switcher-component",
             "@coffeekraken/s-theme",
             "@coffeekraken/s-timer",
@@ -191,6 +193,35 @@
                             ],
                             "raw": "Function"
                         },
+                        "param": {
+                            "dest": {
+                                "name": "dest",
+                                "type": {
+                                    "types": [
+                                        {
+                                            "type": "SEventEmitter"
+                                        }
+                                    ],
+                                    "raw": "SEventEmitter"
+                                },
+                                "description": "The destination event emitter on which to pipe the events from this one",
+                                "defaultStr": ""
+                            },
+                            "settings": {
+                                "name": "settings",
+                                "type": {
+                                    "types": [
+                                        {
+                                            "type": "ISEventEmitterPipeSettings"
+                                        }
+                                    ],
+                                    "raw": "ISEventEmitterPipeSettings"
+                                },
+                                "description": "An object ob settings to configure the pipe process:",
+                                "default": {},
+                                "defaultStr": "{}"
+                            }
+                        },
                         "description": "This method is the same as the ```pipe```and ```pipeFrom``` one but it's just act as the inverse.\nHere you specify whenre you want to pipe this instance events and not from which you want to pipe them here...",
                         "since": "2.0.0",
                         "author": {
@@ -199,7 +230,7 @@
                         }
                     },
                     "constructor": {
-                        "id": "s3d98fac23aa320e2fd3553e4c27de61b2b55848a5c925e1407a92f4bedbf8466",
+                        "id": "s6779cc467102e4ba7d4839b8d1471a67320f66ffaaf4e44abb6fc0b5f488f925",
                         "name": "constructor",
                         "type": {
                             "types": [
@@ -209,13 +240,23 @@
                             ],
                             "raw": "Function"
                         },
-                        "description": "Constructor",
-                        "example": [
-                            {
-                                "language": "js",
-                                "code": "const promise = new SEventEmitter(({ resolve, reject, emit }) => {\n   // do something...\n}).then(value => {\n   // do something...\n}).finally(value => {\n   // do something...\n});"
+                        "param": {
+                            "settings": {
+                                "name": "settings",
+                                "type": {
+                                    "types": [
+                                        {
+                                            "type": "Object"
+                                        }
+                                    ],
+                                    "raw": "Object"
+                                },
+                                "description": "An object of settings for this particular SEventEmitter instance. Here's the available settings:",
+                                "default": {},
+                                "defaultStr": "{}"
                             }
-                        ],
+                        },
+                        "description": "Constructor",
                         "author": {
                             "name": "Olivier Bossel",
                             "email": "olivier.bossel@gmail.com"
@@ -249,6 +290,35 @@
                                 }
                             ],
                             "raw": "Function"
+                        },
+                        "param": {
+                            "input": {
+                                "name": "input",
+                                "type": {
+                                    "types": [
+                                        {
+                                            "type": "SEventEmitter"
+                                        }
+                                    ],
+                                    "raw": "SEventEmitter"
+                                },
+                                "description": "The input promise on which to pipe the events in this one",
+                                "defaultStr": ""
+                            },
+                            "settings": {
+                                "name": "settings",
+                                "type": {
+                                    "types": [
+                                        {
+                                            "type": "ISEventEmitterPipeSettings"
+                                        }
+                                    ],
+                                    "raw": "ISEventEmitterPipeSettings"
+                                },
+                                "description": "An object ob settings to configure the pipe process:",
+                                "default": {},
+                                "defaultStr": "{}"
+                            }
                         },
                         "description": "This is the exact same as the original ```pipe``` method. It's just pipe only the errors.",
                         "since": "2.0.0",
@@ -304,6 +374,37 @@
                             ],
                             "raw": "Function"
                         },
+                        "param": {
+                            "event": {
+                                "name": "event",
+                                "type": {
+                                    "types": [
+                                        {
+                                            "type": "String"
+                                        },
+                                        {
+                                            "type": "Array"
+                                        }
+                                    ],
+                                    "raw": "String|Array"
+                                },
+                                "description": "The event that you want to emit. You can emit multiple events by passing an Array like ['catch','finally'], or a string like \"catch,finally\"",
+                                "defaultStr": ""
+                            },
+                            "value": {
+                                "name": "value",
+                                "type": {
+                                    "types": [
+                                        {
+                                            "type": "Mixed"
+                                        }
+                                    ],
+                                    "raw": "Mixed"
+                                },
+                                "description": "The value you want to pass to the callback",
+                                "defaultStr": ""
+                            }
+                        },
                         "description": "This is the method that allows you to emit the callbacks like \"catch\", \"finally\", etc... without actually resolving the Promise itself",
                         "example": [],
                         "async": "true",
@@ -323,6 +424,37 @@
                             ],
                             "raw": "Function"
                         },
+                        "param": {
+                            "stacks": {
+                                "name": "stacks",
+                                "type": {
+                                    "types": [
+                                        {
+                                            "type": "String"
+                                        },
+                                        {
+                                            "type": "Array"
+                                        }
+                                    ],
+                                    "raw": "String|Array"
+                                },
+                                "description": "The stacks in which you want register your callback. Either an Array like ['catch','finally'], or a String like \"catch,finally\"",
+                                "defaultStr": ""
+                            },
+                            "callback": {
+                                "name": "callback",
+                                "type": {
+                                    "types": [
+                                        {
+                                            "type": "Function"
+                                        }
+                                    ],
+                                    "raw": "Function"
+                                },
+                                "description": "The callback function to register",
+                                "defaultStr": ""
+                            }
+                        },
                         "description": "This method allows the SEventEmitter user to register a function that will be called every time the \"resolve\" one is called in the executor\nThe context of the callback will be the SEventEmitter instance itself so you can call all the methods available like \"resolve\", \"release\", \"on\", etc using\nthe \"this.resolve('something')\" statusment. In an arrow function like \"(value) => { ... }\", the \"this\" keyword will be bound to the current context where you define\nyour function. You can access to the SEventEmitter instance through the last parameter like so \"(value, SEventEmitterInstance) => { ... }\".",
                         "example": [],
                         "author": {
@@ -340,6 +472,35 @@
                                 }
                             ],
                             "raw": "Function"
+                        },
+                        "param": {
+                            "event": {
+                                "name": "event",
+                                "type": {
+                                    "types": [
+                                        {
+                                            "type": "String"
+                                        }
+                                    ],
+                                    "raw": "String"
+                                },
+                                "description": "The event name to unsubscribe to. It can be also an \"on\" method passed setting \"id\". In this case, it will unsubscribe all the created subscription(s) in this particular \"on\" call.",
+                                "defaultStr": ""
+                            },
+                            "callback": {
+                                "name": "callback",
+                                "type": {
+                                    "types": [
+                                        {
+                                            "type": "Function"
+                                        }
+                                    ],
+                                    "raw": "Function"
+                                },
+                                "description": "The callback function you want to unsubscribe",
+                                "default": null,
+                                "defaultStr": "null"
+                            }
                         },
                         "description": "This method allows you to unsubscribe to an event by passing the event name an optionally the callback function.\nIf you don't pass the callback function, all the subscribed events the same as the passed one will be unsubscribed.",
                         "since": "2.0.0",

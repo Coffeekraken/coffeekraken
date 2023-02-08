@@ -361,11 +361,9 @@ class SCodeFormatter extends __SClass {
                         // resolve file
                         resolveFile();
                     } else {
-                        if (finalSettings.log.verbose) {
-                            console.log(
-                                `<yellow>[format]</yellow> Formatting file "<cyan>${relFilePath}</cyan>"`,
-                            );
-                        }
+                        console.verbose?.(
+                            `<yellow>[format]</yellow> Formatting file "<cyan>${relFilePath}</cyan>"`,
+                        );
                         try {
                             // apply the formatter on the file content
                             const result = await formatter.format(code, {
@@ -392,15 +390,13 @@ class SCodeFormatter extends __SClass {
                             // add in stach
                             formattedFiles.push(__SFile.new(filePath));
 
-                            if (finalSettings.log.verbose) {
-                                console.log({
-                                    clear: 1,
-                                    type: __SLog.TYPE_INFO,
-                                    value: `<green>[format]</green> File "<cyan>${relFilePath}</cyan>" formatted <green>successfully</green> in <yellow>${
-                                        duration.end().formatedDuration
-                                    }</yellow>`,
-                                });
-                            }
+                            console.verbose?.({
+                                clear: 1,
+                                type: __SLog.TYPE_INFO,
+                                value: `<green>[format]</green> File "<cyan>${relFilePath}</cyan>" formatted <green>successfully</green> in <yellow>${
+                                    duration.end().formatedDuration
+                                }</yellow>`,
+                            });
                         } catch (e) {
                             console.error(e);
                         }

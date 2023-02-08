@@ -3,6 +3,7 @@
     "extends": [],
     "generated": {
         "extends": [
+            "@coffeekraken/aa",
             "@coffeekraken/cli",
             "@coffeekraken/s-activate-feature",
             "@coffeekraken/s-appear-feature",
@@ -11,6 +12,7 @@
             "@coffeekraken/s-builder",
             "@coffeekraken/s-carpenter",
             "@coffeekraken/s-class",
+            "@coffeekraken/s-classmap",
             "@coffeekraken/s-clipboard-copy-component",
             "@coffeekraken/s-code-example-component",
             "@coffeekraken/s-code-formatter-prettier",
@@ -43,9 +45,11 @@
             "@coffeekraken/s-filtrable-input-component",
             "@coffeekraken/s-floating-feature",
             "@coffeekraken/s-form-validate-feature",
+            "@coffeekraken/s-front",
             "@coffeekraken/s-frontend-checker",
             "@coffeekraken/s-frontend-server",
             "@coffeekraken/s-frontspec",
+            "@coffeekraken/s-glitch-feature",
             "@coffeekraken/s-glob",
             "@coffeekraken/s-google-map-component",
             "@coffeekraken/s-handlebars",
@@ -54,6 +58,7 @@
             "@coffeekraken/s-inline-feature",
             "@coffeekraken/s-interface",
             "@coffeekraken/s-kitchen",
+            "@coffeekraken/s-lazy-feature",
             "@coffeekraken/s-lit-component",
             "@coffeekraken/s-log",
             "@coffeekraken/s-markdown-builder",
@@ -84,7 +89,6 @@
             "@coffeekraken/s-sugar-element",
             "@coffeekraken/s-sugar-feature",
             "@coffeekraken/s-sugar-json",
-            "@coffeekraken/s-lazy-feature",
             "@coffeekraken/s-theme-switcher-component",
             "@coffeekraken/s-theme",
             "@coffeekraken/s-timer",
@@ -101,397 +105,6 @@
             "@coffeekraken/sugar"
         ],
         "map": {
-            "@coffeekraken.s-vite.config.vite.root": {
-                "id": "@coffeekraken.s-vite.config.vite.root",
-                "name": "root",
-                "type": {
-                    "types": [
-                        {
-                            "type": "String"
-                        }
-                    ],
-                    "raw": "String"
-                },
-                "default": "[config.storage.package.rootDir]",
-                "description": "Specify the root directory to work with",
-                "namespace": "@coffeekraken.s-vite.config.vite",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "vite.config.ts",
-                "extension": "config",
-                "relPath": "src/config/vite.config.ts"
-            },
-            "@coffeekraken.s-vite.config.vite.base": {
-                "id": "@coffeekraken.s-vite.config.vite.base",
-                "name": "base",
-                "type": {
-                    "types": [
-                        {
-                            "type": "String"
-                        }
-                    ],
-                    "raw": "String"
-                },
-                "default": "/",
-                "description": "Specify the base directory to work with",
-                "namespace": "@coffeekraken.s-vite.config.vite",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "vite.config.ts",
-                "extension": "config",
-                "relPath": "src/config/vite.config.ts"
-            },
-            "@coffeekraken.s-vite.config.vite.logLevel": {
-                "id": "@coffeekraken.s-vite.config.vite.logLevel",
-                "name": "logLevel",
-                "type": {
-                    "types": [
-                        {
-                            "type": "String"
-                        }
-                    ],
-                    "raw": "String"
-                },
-                "default": "error",
-                "description": "Specify the log level",
-                "namespace": "@coffeekraken.s-vite.config.vite",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "vite.config.ts",
-                "extension": "config",
-                "relPath": "src/config/vite.config.ts"
-            },
-            "@coffeekraken.s-vite.config.vite.mode": {
-                "id": "@coffeekraken.s-vite.config.vite.mode",
-                "name": "mode",
-                "type": {
-                    "types": [
-                        {
-                            "type": "String"
-                        }
-                    ],
-                    "raw": "String"
-                },
-                "default": "development",
-                "description": "Specify the mode to work with. Can be \"development\" or \"production\"",
-                "namespace": "@coffeekraken.s-vite.config.vite",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "vite.config.ts",
-                "extension": "config",
-                "relPath": "src/config/vite.config.ts"
-            },
-            "@coffeekraken.s-vite.config.vite.resolve.alias.vue": {
-                "id": "@coffeekraken.s-vite.config.vite.resolve.alias.vue",
-                "name": "vue",
-                "type": {
-                    "types": [
-                        {
-                            "type": "String"
-                        }
-                    ],
-                    "raw": "String"
-                },
-                "default": "vue/dist/vue.esm-bundler.js",
-                "description": "Specify the esm builder alias resolution path",
-                "namespace": "@coffeekraken.s-vite.config.vite.resolve.alias",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "vite.config.ts",
-                "extension": "config",
-                "relPath": "src/config/vite.config.ts"
-            },
-            "@coffeekraken.s-vite.config.vite.plugins": {
-                "id": "@coffeekraken.s-vite.config.vite.plugins",
-                "name": "plugins",
-                "type": {
-                    "types": [
-                        {
-                            "type": "array",
-                            "of": [
-                                "String"
-                            ]
-                        }
-                    ],
-                    "raw": "String[]"
-                },
-                "default": "[__path.resolve(`${__dirname()}/../node/plugins/sugarPlugin`), __path.resolve(`${__dirname()}/../node/plugins/postcssPlugin`)]",
-                "description": "Specify the plugins to use",
-                "namespace": "@coffeekraken.s-vite.config.vite",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "vite.config.ts",
-                "extension": "config",
-                "relPath": "src/config/vite.config.ts"
-            },
-            "@coffeekraken.s-vite.config.vite.publicDir": {
-                "id": "@coffeekraken.s-vite.config.vite.publicDir",
-                "name": "publicDir",
-                "type": {
-                    "types": [
-                        {
-                            "type": "String"
-                        }
-                    ],
-                    "raw": "String"
-                },
-                "default": "[config.storage.src.rootDir]/public",
-                "description": "Specify the public directory to use",
-                "namespace": "@coffeekraken.s-vite.config.vite",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "vite.config.ts",
-                "extension": "config",
-                "relPath": "src/config/vite.config.ts"
-            },
-            "@coffeekraken.s-vite.config.vite.cacheDir": {
-                "id": "@coffeekraken.s-vite.config.vite.cacheDir",
-                "name": "cacheDir",
-                "type": {
-                    "types": [
-                        {
-                            "type": "String"
-                        }
-                    ],
-                    "raw": "String"
-                },
-                "default": "[config.storage.package.cacheDir]/vite'",
-                "description": "Specify the cache directory to use",
-                "namespace": "@coffeekraken.s-vite.config.vite",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "vite.config.ts",
-                "extension": "config",
-                "relPath": "src/config/vite.config.ts"
-            },
-            "@coffeekraken.s-vite.config.vite.clearScreen": {
-                "id": "@coffeekraken.s-vite.config.vite.clearScreen",
-                "name": "clearScreen",
-                "type": {
-                    "types": [
-                        {
-                            "type": "Boolean"
-                        }
-                    ],
-                    "raw": "Boolean"
-                },
-                "default": "false",
-                "description": "Specify if the terminal screen has to be cleared or not",
-                "namespace": "@coffeekraken.s-vite.config.vite",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "vite.config.ts",
-                "extension": "config",
-                "relPath": "src/config/vite.config.ts"
-            },
-            "@coffeekraken.s-vite.config.vite.optimizeDeps.exclude": {
-                "id": "@coffeekraken.s-vite.config.vite.optimizeDeps.exclude",
-                "name": "exclude",
-                "type": {
-                    "types": [
-                        {
-                            "type": "array",
-                            "of": [
-                                "String"
-                            ]
-                        }
-                    ],
-                    "raw": "String[]"
-                },
-                "default": "false",
-                "description": "Specify some packages to exclude from build",
-                "namespace": "@coffeekraken.s-vite.config.vite.optimizeDeps",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "vite.config.ts",
-                "extension": "config",
-                "relPath": "src/config/vite.config.ts"
-            },
-            "@coffeekraken.s-vite.config.vite.build.outDir": {
-                "id": "@coffeekraken.s-vite.config.vite.build.outDir",
-                "name": "outDir",
-                "type": {
-                    "types": [
-                        {
-                            "type": "String"
-                        }
-                    ],
-                    "raw": "String"
-                },
-                "default": "[config.storage.dist.jsDir]",
-                "description": "Specify the output directory for the build",
-                "namespace": "@coffeekraken.s-vite.config.vite.build",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "vite.config.ts",
-                "extension": "config",
-                "relPath": "src/config/vite.config.ts"
-            },
-            "@coffeekraken.s-vite.config.vite.build.assetsDir": {
-                "id": "@coffeekraken.s-vite.config.vite.build.assetsDir",
-                "name": "assetsDir",
-                "type": {
-                    "types": [
-                        {
-                            "type": "String"
-                        }
-                    ],
-                    "raw": "String"
-                },
-                "default": "'''",
-                "description": "Specify the output assets directory for the build relative to the \"outDir\"",
-                "namespace": "@coffeekraken.s-vite.config.vite.build",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "vite.config.ts",
-                "extension": "config",
-                "relPath": "src/config/vite.config.ts"
-            },
-            "@coffeekraken.s-vite.config.vite.server.host": {
-                "id": "@coffeekraken.s-vite.config.vite.server.host",
-                "name": "host",
-                "type": {
-                    "types": [
-                        {
-                            "type": "String"
-                        }
-                    ],
-                    "raw": "String"
-                },
-                "default": "0.0.0.0",
-                "description": "Specify the hostname for the vite server",
-                "namespace": "@coffeekraken.s-vite.config.vite.server",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "vite.config.ts",
-                "extension": "config",
-                "relPath": "src/config/vite.config.ts"
-            },
-            "@coffeekraken.s-vite.config.vite.server.post": {
-                "id": "@coffeekraken.s-vite.config.vite.server.post",
-                "name": "post",
-                "type": {
-                    "types": [
-                        {
-                            "type": "Number"
-                        }
-                    ],
-                    "raw": "Number"
-                },
-                "default": "3000",
-                "description": "Specify the port for the vite server",
-                "namespace": "@coffeekraken.s-vite.config.vite.server",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "vite.config.ts",
-                "extension": "config",
-                "relPath": "src/config/vite.config.ts"
-            },
-            "@coffeekraken.s-vite.config.vite.server.hostname": {
-                "id": "@coffeekraken.s-vite.config.vite.server.hostname",
-                "name": "hostname",
-                "type": {
-                    "types": [
-                        {
-                            "type": "String"
-                        }
-                    ],
-                    "raw": "String"
-                },
-                "default": "http://[config.vite.server.host]:[config.vite.server.port]",
-                "description": "Specify the full hostname for the vite server",
-                "namespace": "@coffeekraken.s-vite.config.vite.server",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "vite.config.ts",
-                "extension": "config",
-                "relPath": "src/config/vite.config.ts"
-            },
-            "@coffeekraken.s-vite.config.vite.test.dir": {
-                "id": "@coffeekraken.s-vite.config.vite.test.dir",
-                "name": "dir",
-                "type": {
-                    "types": [
-                        {
-                            "type": "String"
-                        }
-                    ],
-                    "raw": "String"
-                },
-                "default": "[config.storage.src.rootDir]",
-                "description": "Specify the directory to include for the tests",
-                "namespace": "@coffeekraken.s-vite.config.vite.test",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "vite.config.ts",
-                "extension": "config",
-                "relPath": "src/config/vite.config.ts",
-                "children": {}
-            },
             "@coffeekraken.s-vite.doc.README": {
                 "id": "@coffeekraken.s-vite.doc.README",
                 "name": "README",
@@ -614,8 +227,8 @@
                             "default": [],
                             "alias": "f"
                         },
-                        "target": {
-                            "description": "Specify the target you want for your build. Can be \"modules\",\"esnext\",\"es2015\",\"es2016\" or \"es2020\"",
+                        "version": {
+                            "description": "Specify the version you want for your build. Can be \"modules\",\"esnext\",\"es2015\",\"es2016\" or \"es2020\"",
                             "type": {
                                 "types": [
                                     {
@@ -695,18 +308,14 @@
                             },
                             "default": false
                         },
-                        "prod": {
-                            "description": "Specify if your build is made for production environment or not. This will automatically minify and optimize your build",
-                            "type": {
-                                "types": [
-                                    {
-                                        "type": "Boolean"
-                                    }
-                                ],
-                                "raw": "Boolean"
-                            },
-                            "default": false,
-                            "alias": "p"
+                        "target": {
+                            "description": "Specify the target of the build. Can be \"development\" or \"production\"",
+                            "values": [
+                                "development",
+                                "production"
+                            ],
+                            "alias": "t",
+                            "default": "development"
                         },
                         "chunks": {
                             "description": "Specify if you allow your build to be separated into multiple chunks or not",

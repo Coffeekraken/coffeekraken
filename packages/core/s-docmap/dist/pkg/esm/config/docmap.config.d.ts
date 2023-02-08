@@ -24,11 +24,11 @@ export default function (api: any): {
         globs: string[];
         
         exclude: string[];
-        filters: {
+        excludeByTags: {
             
-            namespace: RegExp;
+            namespace: RegExp[];
             
-            type: RegExp;
+            type: RegExp[];
         };
         
         tags: string[];

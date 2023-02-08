@@ -3,6 +3,7 @@
     "extends": [],
     "generated": {
         "extends": [
+            "@coffeekraken/aa",
             "@coffeekraken/cli",
             "@coffeekraken/s-activate-feature",
             "@coffeekraken/s-appear-feature",
@@ -11,6 +12,7 @@
             "@coffeekraken/s-builder",
             "@coffeekraken/s-carpenter",
             "@coffeekraken/s-class",
+            "@coffeekraken/s-classmap",
             "@coffeekraken/s-clipboard-copy-component",
             "@coffeekraken/s-code-example-component",
             "@coffeekraken/s-code-formatter-prettier",
@@ -42,9 +44,11 @@
             "@coffeekraken/s-filtrable-input-component",
             "@coffeekraken/s-floating-feature",
             "@coffeekraken/s-form-validate-feature",
+            "@coffeekraken/s-front",
             "@coffeekraken/s-frontend-checker",
             "@coffeekraken/s-frontend-server",
             "@coffeekraken/s-frontspec",
+            "@coffeekraken/s-glitch-feature",
             "@coffeekraken/s-glob",
             "@coffeekraken/s-google-map-component",
             "@coffeekraken/s-handlebars",
@@ -53,6 +57,7 @@
             "@coffeekraken/s-inline-feature",
             "@coffeekraken/s-interface",
             "@coffeekraken/s-kitchen",
+            "@coffeekraken/s-lazy-feature",
             "@coffeekraken/s-lit-component",
             "@coffeekraken/s-log",
             "@coffeekraken/s-markdown-builder",
@@ -83,7 +88,6 @@
             "@coffeekraken/s-sugar-element",
             "@coffeekraken/s-sugar-feature",
             "@coffeekraken/s-sugar-json",
-            "@coffeekraken/s-lazy-feature",
             "@coffeekraken/s-theme-switcher-component",
             "@coffeekraken/s-theme",
             "@coffeekraken/s-timer",
@@ -147,6 +151,35 @@
                         }
                     ],
                     "raw": "Class"
+                },
+                "param": {
+                    "color": {
+                        "name": "color",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "object"
+                                }
+                            ],
+                            "raw": "object"
+                        },
+                        "description": "The color description like (#ff0000 | rgba(...) | hsl(...) | {r:255,r:140,b:23,a:40})",
+                        "defaultStr": ""
+                    },
+                    "settings": {
+                        "name": "settings",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "ISColorSettings"
+                                }
+                            ],
+                            "raw": "ISColorSettings"
+                        },
+                        "description": "The settings to configure the SColor instance. Here's the available settings:",
+                        "default": {},
+                        "defaultStr": "{}"
+                    }
                 },
                 "description": "Class that provide complete and simple to use color manupilation capabilities like:\n- Modifiers\n- lighten\n- darken\n- saturate\n- desaturate\n- spin (change hue)\n- alpha\n- opacity\n- grayscale\n- Conversions\n- rgb\n- rgba\n- hsl\n- hsla\n- hex\n- Print out formats\n- toRgbString\n- toRgbaString\n- toHslString\n- toHslaString\n- toHexString\n- toString(format = null)",
                 "namespace": "@coffeekraken.s-color.shared",
@@ -588,6 +621,38 @@
                             ],
                             "raw": "Function"
                         },
+                        "param": {
+                            "params": {
+                                "name": "params",
+                                "type": {
+                                    "types": [
+                                        {
+                                            "type": "String"
+                                        },
+                                        {
+                                            "type": "ISColorApplyParams"
+                                        }
+                                    ],
+                                    "raw": "String|ISColorApplyParams"
+                                },
+                                "description": "The parameters you want to apply",
+                                "defaultStr": ""
+                            },
+                            "returnNewInstance": {
+                                "name": "returnNewInstance",
+                                "type": {
+                                    "types": [
+                                        {
+                                            "type": "Boolean"
+                                        }
+                                    ],
+                                    "raw": "Boolean"
+                                },
+                                "description": "Specify if you want back a new SColor instance of the actual one",
+                                "default": "this.settings.returnNewInstance",
+                                "defaultStr": "this.settings.returnNewInstance"
+                            }
+                        },
                         "description": "This method allows you to apply some updated to your color\nusing the parameters defined in the SColorApplyInterface like\nfor example \"saturate\", \"desaturate\", etc...",
                         "since": "2.0.0",
                         "author": {
@@ -606,6 +671,35 @@
                                 }
                             ],
                             "raw": "Function"
+                        },
+                        "param": {
+                            "amount": {
+                                "name": "amount",
+                                "type": {
+                                    "types": [
+                                        {
+                                            "type": "Number"
+                                        }
+                                    ],
+                                    "raw": "Number"
+                                },
+                                "description": "The amount of desaturation wanted between 0-100",
+                                "defaultStr": ""
+                            },
+                            "returnNewInstance": {
+                                "name": "returnNewInstance",
+                                "type": {
+                                    "types": [
+                                        {
+                                            "type": "Boolean"
+                                        }
+                                    ],
+                                    "raw": "Boolean"
+                                },
+                                "description": "Specify if you want back a new SColor instance of the actual one",
+                                "default": "this.settings.returnNewInstance",
+                                "defaultStr": "this.settings.returnNewInstance"
+                            }
                         },
                         "description": "Desaturate",
                         "example": [
@@ -631,6 +725,35 @@
                             ],
                             "raw": "Function"
                         },
+                        "param": {
+                            "amount": {
+                                "name": "amount",
+                                "type": {
+                                    "types": [
+                                        {
+                                            "type": "Number"
+                                        }
+                                    ],
+                                    "raw": "Number"
+                                },
+                                "description": "The amount of saturation wanted between 0-100",
+                                "defaultStr": ""
+                            },
+                            "returnNewInstance": {
+                                "name": "returnNewInstance",
+                                "type": {
+                                    "types": [
+                                        {
+                                            "type": "Boolean"
+                                        }
+                                    ],
+                                    "raw": "Boolean"
+                                },
+                                "description": "Specify if you want back a new SColor instance of the actual one",
+                                "default": "this.settings.returnNewInstance",
+                                "defaultStr": "this.settings.returnNewInstance"
+                            }
+                        },
                         "description": "Saturate",
                         "example": [
                             {
@@ -654,6 +777,22 @@
                                 }
                             ],
                             "raw": "Function"
+                        },
+                        "param": {
+                            "returnNewInstance": {
+                                "name": "returnNewInstance",
+                                "type": {
+                                    "types": [
+                                        {
+                                            "type": "Boolean"
+                                        }
+                                    ],
+                                    "raw": "Boolean"
+                                },
+                                "description": "Specify if you want back a new SColor instance of the actual one",
+                                "default": "this.settings.returnNewInstance",
+                                "defaultStr": "this.settings.returnNewInstance"
+                            }
                         },
                         "description": "Return a new SColor instance of the color to grayscale",
                         "example": [
@@ -679,6 +818,35 @@
                             ],
                             "raw": "Function"
                         },
+                        "param": {
+                            "amount": {
+                                "name": "amount",
+                                "type": {
+                                    "types": [
+                                        {
+                                            "type": "Number"
+                                        }
+                                    ],
+                                    "raw": "Number"
+                                },
+                                "description": "The amount of hue spin wanted between 0-360",
+                                "defaultStr": ""
+                            },
+                            "returnNewInstance": {
+                                "name": "returnNewInstance",
+                                "type": {
+                                    "types": [
+                                        {
+                                            "type": "Boolean"
+                                        }
+                                    ],
+                                    "raw": "Boolean"
+                                },
+                                "description": "Specify if you want back a new SColor instance of the actual one",
+                                "default": "this.settings.returnNewInstance",
+                                "defaultStr": "this.settings.returnNewInstance"
+                            }
+                        },
                         "description": "Spin the hue on the passed value (max 360)",
                         "example": [
                             {
@@ -702,6 +870,35 @@
                                 }
                             ],
                             "raw": "Function"
+                        },
+                        "param": {
+                            "alpha": {
+                                "name": "alpha",
+                                "type": {
+                                    "types": [
+                                        {
+                                            "type": "Number"
+                                        }
+                                    ],
+                                    "raw": "Number"
+                                },
+                                "description": "The new alpha value to apply between 0-100|0-1",
+                                "defaultStr": ""
+                            },
+                            "returnNewInstance": {
+                                "name": "returnNewInstance",
+                                "type": {
+                                    "types": [
+                                        {
+                                            "type": "Boolean"
+                                        }
+                                    ],
+                                    "raw": "Boolean"
+                                },
+                                "description": "Specify if you want back a new SColor instance of the actual one",
+                                "default": "this.settings.returnNewInstance",
+                                "defaultStr": "this.settings.returnNewInstance"
+                            }
                         },
                         "description": "Set the alpha",
                         "example": [
@@ -727,6 +924,35 @@
                             ],
                             "raw": "Function"
                         },
+                        "param": {
+                            "amount": {
+                                "name": "amount",
+                                "type": {
+                                    "types": [
+                                        {
+                                            "type": "Number"
+                                        }
+                                    ],
+                                    "raw": "Number"
+                                },
+                                "description": "The amount of darkness (of the nightmare of the shadow) to apply between 0-100",
+                                "defaultStr": ""
+                            },
+                            "returnNewInstance": {
+                                "name": "returnNewInstance",
+                                "type": {
+                                    "types": [
+                                        {
+                                            "type": "Boolean"
+                                        }
+                                    ],
+                                    "raw": "Boolean"
+                                },
+                                "description": "Specify if you want back a new SColor instance of the actual one",
+                                "default": "this.settings.returnNewInstance",
+                                "defaultStr": "this.settings.returnNewInstance"
+                            }
+                        },
                         "description": "Darken",
                         "example": [
                             {
@@ -751,6 +977,35 @@
                             ],
                             "raw": "Function"
                         },
+                        "param": {
+                            "amount": {
+                                "name": "amount",
+                                "type": {
+                                    "types": [
+                                        {
+                                            "type": "Number"
+                                        }
+                                    ],
+                                    "raw": "Number"
+                                },
+                                "description": "The amount of lightness (of the sky of the angels) to apply between 0-100",
+                                "defaultStr": ""
+                            },
+                            "returnNewInstance": {
+                                "name": "returnNewInstance",
+                                "type": {
+                                    "types": [
+                                        {
+                                            "type": "Boolean"
+                                        }
+                                    ],
+                                    "raw": "Boolean"
+                                },
+                                "description": "Specify if you want back a new SColor instance of the actual one",
+                                "default": "this.settings.returnNewInstance",
+                                "defaultStr": "this.settings.returnNewInstance"
+                            }
+                        },
                         "description": "Lighten",
                         "example": [
                             {
@@ -774,6 +1029,22 @@
                                 }
                             ],
                             "raw": "Function"
+                        },
+                        "param": {
+                            "returnNewInstance": {
+                                "name": "returnNewInstance",
+                                "type": {
+                                    "types": [
+                                        {
+                                            "type": "Boolean"
+                                        }
+                                    ],
+                                    "raw": "Boolean"
+                                },
+                                "description": "Specify if you want a new SColor instance back or update the current one",
+                                "default": "this.settings.returnNewInstance",
+                                "defaultStr": "this.settings.returnNewInstance"
+                            }
                         },
                         "description": "Calculate the best color value that will have the best contrast ratio",
                         "since": "2.0.0",
@@ -961,6 +1232,22 @@
                                 }
                             ],
                             "raw": "Function"
+                        },
+                        "param": {
+                            "format": {
+                                "name": "format",
+                                "type": {
+                                    "types": [
+                                        {
+                                            "type": "String"
+                                        }
+                                    ],
+                                    "raw": "String"
+                                },
+                                "description": "The format you want back",
+                                "default": "this.settings.defaultFormat",
+                                "defaultStr": "this.settings.defaultFormat"
+                            }
                         },
                         "description": "To string",
                         "example": [

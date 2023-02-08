@@ -37,7 +37,7 @@ export default function ({ params, atRule, replaceWith, }) {
             color: sugar.color(main, uiForeground);
             background-color: sugar.color(main, ui);
             font-size: sugar.scalable(1rem);
-            border: sugar.color(current, --alpha 0.5) solid sugar.theme(ui.${finalParams.name}.borderWidth);
+            border: sugar.color(current, --alpha 0.2) solid sugar.theme(ui.${finalParams.name}.borderWidth);
             border-radius: sugar.border.radius(ui.${finalParams.name}.borderRadius);
             transition: sugar.theme(ui.${finalParams.name}.transition);
             @sugar.depth(${__STheme.get(`ui.${finalParams.name}.depth`)});
@@ -57,13 +57,13 @@ export default function ({ params, atRule, replaceWith, }) {
             }
 
             @sugar.state.hover {
-                border: sugar.color(current, --alpha 0.7) solid 1px;
+                border: sugar.color(current, --alpha 0.3) solid 1px;
             }
             @sugar.state.focus {
-                border: sugar.color(current) solid 1px;
+                border: sugar.color(current, --alpha 0.4) solid 1px;
             }
             @sugar.state.active {
-                border: sugar.color(current) solid 1px;
+                border: sugar.color(current, --alpha 0.4) solid 1px;
             }
     `);
     }

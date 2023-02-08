@@ -30,14 +30,14 @@ export default function (api) {
                  * @name            import
                  * @namespace       config.themeFont.family.default
                  * @type            String
-                 * @default         https://fonts.googleapis.com/css2?family=Roboto:wght@400&display=swap
+                 * @default         https://fonts.googleapis.com/css2?family=Roboto&display=swap
                  *
                  * Declare the "default" import
                  *
                  * @since       2.0.0
                  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
-                import: 'https://fonts.googleapis.com/css2?family=Roboto:wght@400&display=swap',
+                import: 'https://fonts.googleapis.com/css2?family=Roboto&display=swap',
             },
 
             title: {
@@ -45,7 +45,7 @@ export default function (api) {
                  * @name            fontFamily
                  * @namespace       config.themeFont.family.title
                  * @type            String
-                 * @default         https://fonts.googleapis.com/css2?family=Roboto:wght@600&display=swap
+                 * @default         Roboto
                  *
                  * Declare the "default" fontFamily
                  *
@@ -57,14 +57,14 @@ export default function (api) {
                  * @name            fontWeight
                  * @namespace       config.themeFont.family.title
                  * @type            String
-                 * @default         600
+                 * @default         500
                  *
                  * Declare the "default" fontWeight
                  *
                  * @since       2.0.0
                  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
-                fontWeight: 600,
+                fontWeight: 500,
                 /**
                  * @name            import
                  * @namespace       config.themeFont.family.title
@@ -76,7 +76,7 @@ export default function (api) {
                  * @since       2.0.0
                  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
-                import: 'https://fonts.googleapis.com/css2?family=Roboto:wght@600&display=swap',
+                import: 'https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap',
             },
 
             quote: {
@@ -270,6 +270,22 @@ export default function (api) {
             },
 
             /**
+             * @name          15
+             * @namespace     config.themeFont.size
+             * @type          String
+             * @default       [theme.size.15]
+             *
+             * Declare the "15" font size.
+             * MUST be a scale factor relative to the "default" absolute value specified.
+             *
+             * @since         2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+             */
+            get 15() {
+                return api.theme.size['15'];
+            },
+
+            /**
              * @name          20
              * @namespace     config.themeFont.size
              * @type          String
@@ -283,6 +299,22 @@ export default function (api) {
              */
             get 20() {
                 return api.theme.size['20'];
+            },
+
+            /**
+             * @name          25
+             * @namespace     config.themeFont.size
+             * @type          String
+             * @default       [theme.size.25]
+             *
+             * Declare the "25" font size.
+             * MUST be a scale factor relative to the "default" absolute value specified.
+             *
+             * @since         2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+             */
+            get 25() {
+                return api.theme.size['25'];
             },
 
             /**

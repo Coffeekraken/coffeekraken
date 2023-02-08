@@ -35,7 +35,7 @@
         <div class="@mobile s-display:none">
             <span class="s-tc:base s-opacity:20">&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;</span>
         </div>
-        <div theme="dark" class="@mobile s-mbs:20 s-float:right">
+        <div class="@mobile s-mbs:20 s-float:right">
             <div class="s-tooltip-container">
                 @php
                     $user = $block->author;

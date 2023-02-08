@@ -3,6 +3,7 @@
     "extends": [],
     "generated": {
         "extends": [
+            "@coffeekraken/aa",
             "@coffeekraken/cli",
             "@coffeekraken/s-activate-feature",
             "@coffeekraken/s-appear-feature",
@@ -43,8 +44,10 @@
             "@coffeekraken/s-filtrable-input-component",
             "@coffeekraken/s-floating-feature",
             "@coffeekraken/s-form-validate-feature",
+            "@coffeekraken/s-front",
             "@coffeekraken/s-frontend-checker",
             "@coffeekraken/s-frontend-server",
+            "@coffeekraken/s-glitch-feature",
             "@coffeekraken/s-glob",
             "@coffeekraken/s-google-map-component",
             "@coffeekraken/s-handlebars",
@@ -83,7 +86,6 @@
             "@coffeekraken/s-sugar-element",
             "@coffeekraken/s-sugar-feature",
             "@coffeekraken/s-sugar-json",
-            "@coffeekraken/s-lazy-feature",
             "@coffeekraken/s-theme-switcher-component",
             "@coffeekraken/s-theme",
             "@coffeekraken/s-timer",
@@ -101,31 +103,6 @@
             "@coffeekraken/sugar"
         ],
         "map": {
-            "@coffeekraken.s-frontspec.config.frontspec.default.assets.viteClient": {
-                "id": "@coffeekraken.s-frontspec.config.frontspec.default.assets.viteClient",
-                "name": "viteClient",
-                "type": {
-                    "types": [
-                        {
-                            "type": "Object"
-                        }
-                    ],
-                    "raw": "Object"
-                },
-                "default": "vite client script",
-                "description": "Specify some items you want to integrate to the head tag. It can be everything you want",
-                "namespace": "@coffeekraken.s-frontspec.config.frontspec.default.assets",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "frontspec.config.ts",
-                "extension": "config",
-                "relPath": "src/config/frontspec.config.ts",
-                "children": {}
-            },
             "@coffeekraken.s-frontspec.doc.README": {
                 "id": "@coffeekraken.s-frontspec.doc.README",
                 "name": "README",
@@ -162,6 +139,128 @@
                 "relPath": "src/doc/README.md.twig",
                 "children": {}
             },
+            "@coffeekraken.s-frontspec.js.SFrontspec": {
+                "id": "@coffeekraken.s-frontspec.js.SFrontspec",
+                "name": "SFrontspec",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Class"
+                        }
+                    ],
+                    "raw": "Class"
+                },
+                "param": {
+                    "frontspec": {
+                        "name": "frontspec",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Object"
+                                }
+                            ],
+                            "raw": "Object"
+                        },
+                        "description": "A frontspec formated object",
+                        "default": {},
+                        "defaultStr": "{}"
+                    }
+                },
+                "description": "This class represent the ```frontspec.json``` json that must be either in:\n1. The `document.env.SUGAR.frontspec` object\n2. The `document.env.FRONTSPEC` object\n3. The \"frontspec\" param of the constructor\nEach level will be overrided by the upper one using a deepMerge.",
+                "namespace": "@coffeekraken.s-frontspec.js",
+                "status": "wip",
+                "example": [
+                    {
+                        "language": "js",
+                        "code": "import __SFrontspec from '@coffeekraken/s-frontspec';\nconst frontspec = new SFrontspec();\nfrontspec.get('partytown.enabled');\n__SFrontspec.get('partytown.enabled');"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "SFrontspec.ts",
+                "extension": "ts",
+                "relPath": "src/js/SFrontspec.ts",
+                "children": {
+                    "init": {
+                        "id": "sa663fb3f977dc4ceb46e0edcb7edf30b62debbac92276760eeb4c2ea2f571560",
+                        "name": "init",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ],
+                            "raw": "Function"
+                        },
+                        "description": "This method allows you to init the your SFrontspec instance and store it into the document.env.SUGAR.frontspec property",
+                        "static": "true",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://coffeekraken.io"
+                        }
+                    },
+                    "get": {
+                        "id": "sfda70ff1c490280ecafbf483e47bd195a37c33db9f264e91607051864f5213b3",
+                        "name": "get",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ],
+                            "raw": "Function"
+                        },
+                        "param": {
+                            "dotpah": {
+                                "name": "dotpah",
+                                "type": {
+                                    "types": [
+                                        {
+                                            "type": "String"
+                                        }
+                                    ],
+                                    "raw": "String"
+                                },
+                                "description": "The dotpath of the frontspec value you want to access",
+                                "default": ".",
+                                "defaultStr": "\".\""
+                            }
+                        },
+                        "description": "Access a frontspec value by passing a dotpath like \"partytown.enabled\", or by accessing the full frontspec object by using `.get()` call.",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://coffeekraken.io"
+                        }
+                    },
+                    "constructor": {
+                        "id": "sfa166a726e2f17bad10f0fa6a932646b6f0d93a5c18c2e6571524f4a269e2402",
+                        "name": "constructor",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ],
+                            "raw": "Function"
+                        },
+                        "description": "Constructor",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://coffeekraken.io"
+                        }
+                    }
+                }
+            },
             "@coffeekraken.s-frontspec.node.SFrontspec": {
                 "id": "@coffeekraken.s-frontspec.node.SFrontspec",
                 "name": "SFrontspec",
@@ -172,6 +271,22 @@
                         }
                     ],
                     "raw": "Class"
+                },
+                "param": {
+                    "settings": {
+                        "name": "settings",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Object"
+                                }
+                            ],
+                            "raw": "Object"
+                        },
+                        "description": "An object of settings to configure your frontspec instance:",
+                        "default": {},
+                        "defaultStr": "{}"
+                    }
                 },
                 "description": "This class represent the ```frontspec.json``` file and allows you to generate it.",
                 "namespace": "@coffeekraken.s-frontspec.node",
@@ -231,7 +346,7 @@
                         }
                     },
                     "build": {
-                        "id": "s1eca1a6a17c03833470399749c6f31c212cd88410ad077a005e8fd739a1ec9fd",
+                        "id": "sf9876b188d98b5d4d3162db47347a2532c5cd745c98bc880b0f99e9597e56ebc",
                         "name": "build",
                         "type": {
                             "types": [
@@ -240,6 +355,24 @@
                                 }
                             ],
                             "raw": "Function"
+                        },
+                        "param": {
+                            "params": {
+                                "name": "params",
+                                "type": {
+                                    "types": [
+                                        {
+                                            "type": "Partial",
+                                            "of": [
+                                                "ISFrontspecBuildParams"
+                                            ]
+                                        }
+                                    ],
+                                    "raw": "Partial<ISFrontspecBuildParams>"
+                                },
+                                "description": "The params to use to build your frontspec",
+                                "defaultStr": ""
+                            }
                         },
                         "description": "This static method allows you to build the frontspec.json file from the configs specifies in the config.frontspec.build.sources stack.",
                         "since": "2.0.0",
@@ -282,6 +415,41 @@
                     ],
                     "raw": "Class"
                 },
+                "param": {
+                    "$settings": {
+                        "name": "$settings",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Object"
+                                },
+                                {
+                                    "type": "Array"
+                                }
+                            ],
+                            "raw": "Object|Array"
+                        },
+                        "description": "Some settings to configure your frontspec instance",
+                        "default": [],
+                        "defaultStr": "[]"
+                    }
+                },
+                "setting": {
+                    "$path": {
+                        "name": "$path",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "String"
+                                }
+                            ],
+                            "raw": "String"
+                        },
+                        "description": "The frontspec path. If not specified, it will try to find it by looking for the nearest `frontspec.json` file from the cwd",
+                        "default": "$_ENV['S_FRONTSPEC_PATH'] || $_ENV['S_FRONTEND_PATH'] . '/frontspec.json'",
+                        "defaultStr": "$_ENV['S_FRONTSPEC_PATH'] || $_ENV['S_FRONTEND_PATH'] . '/frontspec.json'"
+                    }
+                },
                 "platform": [
                     {
                         "name": "php",
@@ -317,6 +485,22 @@
                                 }
                             ],
                             "raw": "Function"
+                        },
+                        "param": {
+                            "$frontspecPath": {
+                                "name": "$frontspecPath",
+                                "type": {
+                                    "types": [
+                                        {
+                                            "type": "String"
+                                        }
+                                    ],
+                                    "raw": "String"
+                                },
+                                "description": "A path to the frontspec file you want to load",
+                                "default": null,
+                                "defaultStr": "null"
+                            }
                         },
                         "platform": [
                             {

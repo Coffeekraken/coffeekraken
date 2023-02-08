@@ -108,16 +108,19 @@ export default (api) => {
              * @name          lighten
              * @namespace     config.themeColorSchemaLight.surface
              * @type          Number
-             * @default      49
+             * @default      40
              *
              * Specify the lighten value for the "surface" color variant
              *
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            lighten: 49,
+            lighten: 40,
 
             color: {
+                base: {
+                    lighten: 49,
+                },
                 main: {
                     lighten: 49,
                 },
@@ -149,21 +152,21 @@ export default (api) => {
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            lighten: 48,
+            lighten: 49,
         },
         uiForeground: {
             /**
              * @name          darken
              * @namespace     config.themeColorSchemaLight.uiForeground
              * @type          Number
-             * @default      25
+             * @default      15
              *
              * Specify the darken value for the "uiForeground" color variant
              *
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            darken: 25,
+            darken: 15,
         },
         border: {
             /**

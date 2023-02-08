@@ -17,7 +17,7 @@
             <li>
                 <span class="s-tooltip-container">
                     <i class="s-icon:todo s-tc:{{ $todoColor }}"></i>
-                    <div class="s-tooltip:nowrap">
+                    <div class="s-tooltip s-white-space:nowrap">
                         {{ $todo->priority }} priority
                     </div>
                 </span>&nbsp;&nbsp;<span class="s-format:text">{!! \Sugar\markdown\toHtml($todo->description) !!}</span>

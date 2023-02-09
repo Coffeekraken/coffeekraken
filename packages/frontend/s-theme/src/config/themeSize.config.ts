@@ -11,7 +11,7 @@ export default function (api) {
          * @since         2.0.0
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
-        default: '16px',
+        default: '15px',
 
         /**
          * @name          0
@@ -87,7 +87,7 @@ export default function (api) {
          * @name          25
          * @namespace     config.themeSize
          * @type          String
-         * @default       0.9
+         * @default       0.95
          *
          * Declare the size "25".
          * MUST be a scale factor relative to the "default" absolute value specified.
@@ -95,7 +95,7 @@ export default function (api) {
          * @since         2.0.0
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
-        25: 0.9,
+        25: 0.95,
 
         /**
          * @name          30

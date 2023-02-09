@@ -9,6 +9,12 @@ declare class postcssSugarPluginLayoutInterface extends __SInterface {
         gap: {
             type: string;
         };
+        columnGap: {
+            type: string;
+        };
+        rowGap: {
+            type: string;
+        };
         gapBetween: {
             type: string;
             default: boolean;
@@ -33,6 +39,8 @@ declare class postcssSugarPluginLayoutInterface extends __SInterface {
 export interface IPostcssSugarPluginLayoutParams {
     layout: string;
     gap: number;
+    columnGap: number;
+    rowGap: number;
     gapBetween: boolean;
     align: 'start' | 'end' | 'center' | 'stretch';
     justify: 'start' | 'end' | 'center' | 'stretch';

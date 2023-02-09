@@ -810,6 +810,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         } catch (e) {
             this.state = Object.assign({}, this._originalState);
         }
+        console.log('STate', this.state);
     }
 
     /**

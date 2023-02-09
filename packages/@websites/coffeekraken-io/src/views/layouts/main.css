@@ -18,17 +18,12 @@
   height: 100vh;
   overflow: hidden;
   transition: opacity 0.5s ease-out;
-  /* background-image: url('/dist/img/welcome/welcome-bg-light-01.jpg'); */
   background-position: 50% bottom;
   background-size: cover;
-  opacity: 0.2;
-
-  border-bottom-left-radius: 50%;
-  border-bottom-right-radius: 50%;
   background-image: url('/dist/img/background-light.png');
+  clip-path: polygon(0 0, 100% 0, 100% calc(100% - 500px), 0 100%);
 
   @sugar.theme.when dark {
-    /* opacity: 0.05; */
     background-image: url('/dist/img/background.png');
   }
 
@@ -36,24 +31,9 @@
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
     background-position: 50% -50px;
-    /* transform: translateY(-100px); */
   }
-
-  /* background-image: linear-gradient(
-    -90deg,
-    sugar.color(base, background),
-    sugar.color(base, background, --darken 2%)
-  ); */
 }
 [s-sugar]:not(#homepage) .bkg,
 .scrolled .bkg {
-  opacity: 0.05;
-}
-[s-sugar]:not(#homepage),
-.scrolled {
-  /* @sugar.theme.when dark {
-        .bkg {
-            opacity: 0.3;
-        }
-    } */
+  opacity: 0.2;
 }

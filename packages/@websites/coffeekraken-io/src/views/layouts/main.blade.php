@@ -31,11 +31,12 @@
         </template>
     </s-panel>
 
-    {{-- <s-panel id="legal" position="bottom"  s-activate mount-when="direct" trigger="!cookie:s-legal" unactivate-on="event:s-front.legal.agree:document,event:s-front.legal.disagree:document">
+    <s-panel id="legal" position="bottom">
         <template>
             @include('generic.legal.legal')
         </template>
-    </s-panel> --}}
+    </s-panel>
+    <s href="#legal" s-activate mount-when="timeout:4000" trigger="!cookie:s-legal" unactivate-on="event:s-front.legal.agree:document,event:s-front.legal.disagree:document"></s>
 
     @include('layouts.footer.footer')
 

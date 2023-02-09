@@ -93,6 +93,7 @@ export default function ({
     if (finalParams.scope.indexOf('bare') !== -1) {
         vars.push(`
         font-size: sugar.scalable(1rem);
+        line-height: 1;
         position: relative;
         display: inline-flex;
         cursor: pointer;
@@ -107,10 +108,6 @@ export default function ({
 
         & > * {
           pointer-events: none;
-        }
-        & > i,
-        & > .s-icon {
-          font-size: 1em;
         }
     `);
     }

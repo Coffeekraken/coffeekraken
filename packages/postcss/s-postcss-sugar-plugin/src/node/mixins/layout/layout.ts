@@ -54,6 +54,12 @@ class postcssSugarPluginLayoutInterface extends __SInterface {
             gap: {
                 type: 'Number',
             },
+            columnGap: {
+                type: 'Number',
+            },
+            rowGap: {
+                type: 'Number',
+            },
             gapBetween: {
                 type: 'Boolean',
                 default: false,
@@ -80,6 +86,8 @@ class postcssSugarPluginLayoutInterface extends __SInterface {
 export interface IPostcssSugarPluginLayoutParams {
     layout: string;
     gap: number;
+    columnGap: number;
+    rowGap: number;
     gapBetween: boolean;
     align: 'start' | 'end' | 'center' | 'stretch';
     justify: 'start' | 'end' | 'center' | 'stretch';
@@ -243,17 +251,22 @@ export default function ({
         });
     }
 
-    if (finalParams.scope.indexOf('gap') !== -1 && finalParams.gap) {
-        vars.push(`
-            gap: sugar.margin(${finalParams.gap});
-      `);
-
-        //     if (finalParams.gapBetween) {
-        //         vars.push(`
-        //     width: calc(100% + sugar.margin(${finalParams.gap}) * 2);
-        //     margin-left: calc(sugar.margin(${finalParams.gap}) * -1);
-        //   `);
-        //     }
+    if (finalParams.scope.indexOf('gap') !== -1) {
+        if (finalParams.gap) {
+            vars.push(`
+                gap: sugar.margin(${finalParams.gap});
+            `);
+        }
+        if (finalParams.columnGap) {
+            vars.push(`
+                column-gap: sugar.margin(${finalParams.columnGap});
+            `);
+        }
+        if (finalParams.rowGap) {
+            vars.push(`
+                row-gap: sugar.margin(${finalParams.rowGap});
+            `);
+        }
     }
 
     return vars;

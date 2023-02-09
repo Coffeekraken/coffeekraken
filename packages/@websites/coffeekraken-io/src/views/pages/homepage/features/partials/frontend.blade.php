@@ -11,10 +11,10 @@
 
         <div class="code-example-section" ">
             <div>
-                <h4 class="s-typo:h4 s-mbe:30 s-pbs:30">
+                <h3 class="s-typo:h3 s-mbe:30 s-pbs:30">
                     CSS made<br>
                     <span class="s-gradient:text:accent">pleasant</span> again
-                </h4>
+                </h3>
                 <ol class="s-list:ol s-color:accent">
                     <li>
                         Powerfull and <span class="s-typo:code">pleasant</span> classnames syntax
@@ -78,7 +78,9 @@
             <div>
                 <a class="s-btn s-color:complementary @mobile s-btn:block" href="/doc/css/pleasant-syntax"
                     title="Coffeekraken CSS pleasant syntax">
+                    <i class="s-icon:more"></i>
                     Discover more!
+                    <i class="s-icon:more"></i>
                 </a>
             </div>
         </div>
@@ -87,10 +89,10 @@
 
         <div class="code-example-section:right" ">
             <div>
-                <h4 class="s-typo:h4 s-mbe:30 s-pbs:30">
+                <h3 class="s-typo:h3 s-mbe:30 s-pbs:30">
                     <span class="s-gradient:text:accent">Theming</span> made<br>
                     As tasty as a donut
-                </h4>
+                </h3>
                 <ol class="s-list:ol s-color:accent">
                     <li>
                         Easy and Powerfull <span class="s-typo:code">color management</span>
@@ -123,7 +125,9 @@
             </div>
             <div>
                 <a class="s-btn s-color:accent @mobile s-btn:block" href="/doc/css/theming" title="Coffeekraken CSS pleasant syntax">
+                    <i class="s-icon:more"></i>
                     Discover more!
+                    <i class="s-icon:more"></i>
                 </a>
             </div>
 
@@ -131,10 +135,10 @@
 
         <div class="code-example-section" ">
             <div>
-                <h4 class="s-typo:h4 s-mbe:30 s-pbs:30">
+                <h3 class="s-typo:h3 s-mbe:30 s-pbs:30">
                     <span class="s-gradient:text:accent">Layout</span> finally<br>
                     Nice to work with
-                </h4>
+                </h3>
                 <ol class="s-list:ol s-color:accent">
                     <li>
                         <span class="s-typo:code">No more</span> pre-defined columns
@@ -224,7 +228,9 @@
             <div>
                 <a class="s-btn s-color:complementary @mobile s-btn:block" href="/doc/css/layout"
                     title="Coffeekraken CSS pleasant syntax">
+                    <i class="s-icon:more"></i>
                     Discover more!
+                    <i class="s-icon:more"></i>
                 </a>
             </div>
 

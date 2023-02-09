@@ -8,7 +8,7 @@ export default function (api: any): {
     
     10: number;
     
-    15: string;
+    15: number;
     
     20: number;
     

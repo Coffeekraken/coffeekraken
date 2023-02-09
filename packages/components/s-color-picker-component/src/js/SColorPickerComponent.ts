@@ -5,12 +5,12 @@ import __SLitComponent from '@coffeekraken/s-lit-component';
 import { __copy } from '@coffeekraken/sugar/clipboard';
 import {
     __makeFloat,
-    __preventViewportMovement
+    __preventViewportMovement,
 } from '@coffeekraken/sugar/dom';
 import { __isMobile } from '@coffeekraken/sugar/is';
 import type {
     IFloatApi,
-    IFloatSettings
+    IFloatSettings,
 } from '@coffeekraken/sugar/js/dom/ui/makeFloat';
 import { __deepMerge } from '@coffeekraken/sugar/object';
 import { css, html, unsafeCSS } from 'lit';
@@ -355,6 +355,7 @@ export default class SColorPickerComponent extends __SLitComponent {
 
         // dispatch a "change" event
         if (step !== 'init') {
+            console.log('Dispa', this._color.toObject());
             this.utils.dispatchEvent('change', {
                 detail: this._color.toObject(),
             });

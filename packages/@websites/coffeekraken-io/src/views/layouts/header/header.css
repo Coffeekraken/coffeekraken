@@ -7,7 +7,7 @@
   left: 50%;
   transform: translate(-50%, 0);
   width: calc(1280px + sugar.padding(30) * 2);
-  z-index: 99;
+  z-index: 200;
   height: 80px;
   display: flex;
   align-items: center;
@@ -22,8 +22,8 @@
   @sugar.theme.when dark {
     background: linear-gradient(
       90deg,
-      sugar.color(main, surface, --alpha 0.8),
-      sugar.color(main, background)
+      sugar.color(main, surface, --alpha 0.9),
+      sugar.color(main, background, --alpha 0.9)
     );
   }
 
@@ -50,6 +50,10 @@
     @sugar.media (>=wide) {
       width: 100%;
     }
+
+    @sugar.theme.when dark {
+      border-bottom: 1px solid sugar.color(base, --alpha 0.2);
+    }
   }
 
   .s-container {
@@ -59,12 +63,12 @@
   }
 
   ._logo {
-    width: 140px;
+    width: 110px;
     margin-inline-end: sugar.margin(20);
 
     svg {
       height: 40px;
-      width: 140px;
+      width: 110px;
       transform-origin: 0 50%;
 
       @sugar.media mobile {

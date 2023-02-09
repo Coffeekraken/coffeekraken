@@ -1,24 +1,106 @@
+@keyframes welcome-illustration-kraken-waves {
+    0% {
+        scale: 1 0.8;
+    }
+    50% {
+        scale: 1 1.2;
+    }
+    100% {
+        scale: 1 0.8;
+    }
+}
+@keyframes welcome-illustration-kraken-tentacules {
+    0% {
+        scale: 0.9;
+    }
+    50% {
+        scale: 1.05;
+    }
+    100% {
+        scale: 0.9;
+    }
+}
+
 .welcome-illustration-kraken {
     position: absolute;
     top: 50%;
-    right: 50%;
+    right: calc(50% + 150px);
     transform: translateX(100%) translateY(-50%);
     width: 900px;
     height: 100%;
-    pointer-events: none;
-    user-select: none;
-    z-index: 999999;
+    /* pointer-events: none; */
+    /* user-select: none; */
+    z-index: 10;
 
-    [fill='#F7C032'] {
-        fill: url(#gradient-accent);
+    @sugar.media mobile {
+        display: none;
     }
-    [fill='#5929FB'],
-    [fill='#4D1AF9'] {
-        fill: url(#gradient-complementary);
+
+    /* [stop-color='#F2BC2B'] {
+          stop-color: sugar.color(accent, --alpha 0);
+      }
+      [stop-color='#4900E6'] {
+          stop-color: sugar.color(complementary, --alpha 0);
+      } */
+
+    ._tentacule-01,
+    ._tentacule-03,
+    ._tentacule-05,
+    ._tentacule-07 {
+        pointer-events: none;
+        path {
+            stroke: sugar.color(base, --alpha 0.2);
+            fill: none;
+        }
+
+        @sugar.lod (4) {
+            animation: welcome-illustration-kraken-tentacules 4s ease-in-out
+                infinite;
+        }
     }
-    [fill='white'] {
-        fill: sugar.color(base, --alpha 0.2);
-        mix-blend-mode: multiply !important;
+    ._tentacule-02,
+    ._tentacule-04,
+    ._tentacule-06 {
+        pointer-events: none;
+        path {
+            stroke: sugar.color(base, --alpha 0.08);
+            fill: none;
+        }
+        @sugar.lod (4) {
+            animation: welcome-illustration-kraken-tentacules 3s ease-in-out
+                infinite;
+            animation-delay: 0.7s;
+        }
+    }
+
+    @sugar.theme.when dark {
+        ._tentacule-01,
+        ._tentacule-03,
+        ._tentacule-05,
+        ._tentacule-07 {
+            path {
+                stroke: sugar.color(base, foreground, --alpha 0.2);
+                fill: none;
+            }
+
+            @sugar.lod (4) {
+                animation: welcome-illustration-kraken-tentacules 4s ease-in-out
+                    infinite;
+            }
+        }
+        ._tentacule-02,
+        ._tentacule-04,
+        ._tentacule-06 {
+            path {
+                stroke: sugar.color(base, foreground, --alpha 0.08);
+                fill: none;
+            }
+            @sugar.lod (4) {
+                animation: welcome-illustration-kraken-tentacules 3s ease-in-out
+                    infinite;
+                animation-delay: 0.7s;
+            }
+        }
     }
 
     ._gradient-accent-start {
@@ -35,18 +117,35 @@
     }
 
     ._cup {
+        pointer-events: none;
         position: absolute;
         left: 50%;
         top: 90%;
         transform: translateX(-50%) translateY(-100%);
         z-index: 10;
+
+        ._dark {
+            display: none;
+        }
+
+        @sugar.theme.when dark {
+            ._dark {
+                display: block;
+            }
+            ._light {
+                display: none;
+            }
+        }
     }
+
     ._smoke {
+        pointer-events: none;
         position: absolute;
         left: 50%;
         top: -150px;
         transform: translateX(calc(-50% - 50px)) translateY(0);
         z-index: 5;
+        opacity: 0.15;
 
         video {
             position: absolute;
@@ -56,12 +155,172 @@
             height: 750px;
             opacity: 0.6;
         }
+
+        display: none;
+        @sugar.lod (4) {
+            display: block;
+        }
+
+        @sugar.theme.when dark {
+            opacity: 0.3;
+        }
     }
 
     ._tentacule-01 {
         position: absolute;
-        bottom: 0;
+        bottom: 100px;
         left: 0;
+    }
+    ._tentacule-02 {
+        position: absolute;
+        bottom: 350px;
+        left: -60px;
+    }
+    ._tentacule-03 {
+        position: absolute;
+        top: 120px;
+        left: 450px;
+    }
+    ._tentacule-04 {
+        position: absolute;
+        top: 300px;
+        left: 510px;
+    }
+    ._tentacule-05 {
+        position: absolute;
+        bottom: 300px;
+        left: 550px;
+    }
+    ._tentacule-06 {
+        position: absolute;
+        bottom: 200px;
+        left: 560px;
+    }
+    ._tentacule-07 {
+        position: absolute;
+        bottom: 100px;
+        left: 400px;
+        /* filter: drop-shadow(4px -10px 10px rgba(0, 0, 0, 0.2)); */
+    }
+
+    ._waves-cup {
+        pointer-events: none;
+        position: absolute;
+        bottom: 95px;
+        left: 260px;
+        z-index: 20;
+        opacity: 0.2;
+
+        @sugar.lod (4) {
+            animation: welcome-illustration-kraken-waves 3s ease-in-out infinite;
+        }
+
+        @sugar.theme.when dark {
+            opacity: 0.7;
+        }
+    }
+
+    ._waves-01,
+    ._waves-03,
+    ._waves-05,
+    ._waves-07,
+    ._waves-09 {
+        pointer-events: none;
+        opacity: 0.1;
+        @sugar.lod (4) {
+            animation: welcome-illustration-kraken-waves 3s ease-in-out infinite;
+        }
+    }
+    ._waves-02,
+    ._waves-04,
+    ._waves-06,
+    ._waves-08,
+    ._waves-10 {
+        pointer-events: none;
+        opacity: 0.3;
+        animation-delay: 1.5s;
+
+        @sugar.lod (4) {
+            animation: welcome-illustration-kraken-waves 3s ease-in-out infinite;
+        }
+    }
+
+    @sugar.theme.when dark {
+        ._waves-01,
+        ._waves-03,
+        ._waves-05,
+        ._waves-07,
+        ._waves-09 {
+            opacity: 0.3;
+        }
+        ._waves-02,
+        ._waves-04,
+        ._waves-06,
+        ._waves-08,
+        ._waves-10 {
+            opacity: 0.6;
+        }
+    }
+
+    ._waves-01 {
+        position: absolute;
+        bottom: 70px;
+        left: -150px;
+        z-index: 20;
+    }
+    ._waves-02 {
+        position: absolute;
+        bottom: 50px;
+        left: 30px;
+        z-index: 20;
+    }
+    ._waves-03 {
+        position: absolute;
+        bottom: 70px;
+        left: 200px;
+        z-index: 20;
+    }
+    ._waves-04 {
+        position: absolute;
+        bottom: 60px;
+        left: 300px;
+        z-index: 20;
+    }
+    ._waves-05 {
+        position: absolute;
+        bottom: 30px;
+        left: 230px;
+        z-index: 20;
+    }
+    ._waves-06 {
+        position: absolute;
+        bottom: 60px;
+        left: 450px;
+        z-index: 20;
+    }
+    ._waves-07 {
+        position: absolute;
+        bottom: 30px;
+        left: 500px;
+        z-index: 20;
+    }
+    ._waves-08 {
+        position: absolute;
+        bottom: 50px;
+        left: 650px;
+        z-index: 20;
+    }
+    ._waves-09 {
+        position: absolute;
+        bottom: 30px;
+        left: 760px;
+        z-index: 20;
+    }
+    ._waves-10 {
+        position: absolute;
+        bottom: 90px;
+        left: 890px;
+        z-index: 20;
     }
 
     ._discover-02 {
@@ -69,7 +328,7 @@
         top: 70%;
         left: 0;
         width: calc(100% - 100px);
-        transform: translateX(-100px) translateY(-50%);
+        transform: translateX(50px) translateY(-50%);
         z-index: 100;
     }
 
@@ -80,7 +339,7 @@
         left: 0;
         width: calc(100% - 100px);
         height: 10px;
-        transform: translateX(-100px);
+        transform: translateX(100px);
         background: linear-gradient(
             90deg,
             rgba(0, 0, 0, 0),
@@ -88,5 +347,11 @@
             rgba(0, 0, 0, 0)
         );
         filter: blur(10px);
+        pointer-events: none;
+        opacity: 0.2;
+
+        @sugar.theme.when dark {
+            opacity: 1;
+        }
     }
 }

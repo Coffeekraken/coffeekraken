@@ -7,7 +7,7 @@
                 </div>
             </div>
             <div class="s-pb:100">
-                <h3 class="s-typo:h2 s-mbe:30">Built-in<br /><span class="s-gradient:text:accent">development<br>stack</span></h3>
+                <h2 class="s-typo:h2 s-mbe:30">Built-in<br /><span class="s-gradient:text:accent">development<br>stack</span></h2>
                 <p class="s-typo:lead s-mbe:30">
                     Coffeekraken has a <span class="s-tc:complementary">built-in</span> <span
                         class="s-tc:accent">development stack environment</span> make to simplify and speed up your
@@ -25,9 +25,9 @@
 
         <div class="code-example-section" ">
             <div>
-                <h5 class="s-typo:h4 s-mbe:30">
+                <h3 class="s-typo:h3 s-mbe:30">
                     <span class="s-gradient:text:accent">Speed up</span><br />your process
-                </h5>
+                </h3>
                 <p class="s-typo:p s-mbe:30">
                     Create projects using our totally customizable <span class="s-typo:code">recipes</span> that let
                     you <span class="s-tc:accent">start as soom as possible</span> with production grade ready
@@ -47,16 +47,18 @@
             </div>
             <div>
                 <a class="s-btn s-color:accent @mobile s-btn:block" href="/doc/cli/overview" title="Discover more about the Coffeekraken Sugar CLI">
+                    <i class="s-icon:more"></i>
                     More on Sugar CLI
+                    <i class="s-icon:more"></i>
                 </a>
             </div>
         </div>
 
         <div class="code-example-section:right" ">   
             <div>
-                <h5 class="s-typo:h4 s-mbe:30">
+                <h3 class="s-typo:h3 s-mbe:30">
                     All the <span class="s-gradient:text:accent">sugar</span> power<br />ready to go!
-                </h5>
+                </h3>
                 <p class="s-typo:p s-mbe:30">
                     Make use of the power of the <span class="s-typo:code">Sugar</span> toolkit to enhance your <span
                         class="s-typo:code">js/ts</span> and <span class="s-typo:code">node</span> development
@@ -83,16 +85,18 @@
             </div>
             <div>
                 <a class="s-btn s-color:complementary @mobile s-btn:block" href="/package/@coffeekraken/sugar/doc/readme" title="More on Coffeekraken Sugar">
+                    <i class="s-icon:more"></i>
                     Discover more on Sugar
+                    <i class="s-icon:more"></i>
                 </a>
             </div>
         </div>
 
         <div class="code-example-section" ">
             <div>
-                <h5 class="s-typo:h4 s-mbe:30">
+                <h3 class="s-typo:h3 s-mbe:30">
                     Development<br /><span class="s-gradient:text:accent">server</span>
-                </h5>
+                </h3>
                 <p class="s-typo:p s-mbe:30">
                     Start working as soon as possible with our development server that will gives you the power of the
                     <span class="s-typo:code">live assets compilation</span> as well as the possibility for you to
@@ -110,7 +114,9 @@ sugar dev'
             <div>
                 <a class="s-btn s-color:accent @mobile s-btn:block" href="/doc/servers/overview"
                     title="More on the Coffeekraken frontend server">
+                    <i class="s-icon:more"></i>
                     More on our servers
+                    <i class="s-icon:more"></i>
                 </a>
             </div>
         </div>
@@ -123,10 +129,10 @@ sugar dev'
                     <div>
                         <i class="s-icon:computer s-font:90 s-opacity:30"></i>
                     </div>
-                    <h5 class="s-typo:h5 s-mbe:30">
+                    <h4 class="s-typo:h4 s-mbe:30">
                         Under<br />
                         <span class="s-gradient:text:accent">the hood</span>
-                    </h5>
+                    </h4>
                 </div>
                 <p class="s-typo:p">
                     Our development server strategy is to make use of <span class="s-typo:code">two different
@@ -139,9 +145,9 @@ sugar dev'
                     <div>
                         <i class="s-icon:logo-vite-solid s-font:90 s-opacity:30"></i>
                     </div>
-                    <h5 class="s-typo:h5 s-mbe:30">
+                    <h4 class="s-typo:h4 s-mbe:30">
                         <span class="s-gradient:text:accent">ViteJS</span><br />server
-                    </h5>
+                    </h4>
                 </div>
                 <p class="s-typo:p">
                     The ViteJs development server is used for the <span class="s-typo:code">js/ts</span> and <span
@@ -155,9 +161,9 @@ sugar dev'
                     <div>
                         <i class="s-icon:server s-font:90 s-opacity:30"></i>
                     </div>
-                     <h5 class="s-typo:h5 s-mbe:30">
+                     <h4 class="s-typo:h4 s-mbe:30">
                         <span class="s-gradient:text:accent">Internal</span><br />server
-                    </h5>
+                    </h4>
                 </div>
                 <p class="s-typo:p ">
                     Our internal server based on <span class="s-typo:code">Express</span> is used to serve all the
@@ -169,9 +175,9 @@ sugar dev'
 
         <div class="code-example-section:right" "> 
             <div>
-                <h5 class="s-typo:h4 s-mbe:30">
+                <h3 class="s-typo:h3 s-mbe:30">
                     <span class="s-gradient:text:accent">Build</span><br />for production
-                </h5>
+                </h3>
                 <p class="s-typo:p ">
                     Generate all the needed assets for production like bundling your <span
                         class="s-typo:code">css</span> and <span class="s-typo:code">javascript</span>, as well as
@@ -191,22 +197,7 @@ sugar build'
             </div>
         </div>
 
-        <div class="s-layout:122 s-gap:column:50 s-pb:80 @mobile s-layout:1_2">
-            <div class="@mobile s-mbe:50">
-                <h4 class="s-typo:h4 s-mbe:30">
-                    Built-in<br /><span class="s-gradient:text:accent">recipes</span>
-                </h4>
-                <p class="s-typo:lead s-mbe:30">
-                    <span class="s-tc:accent">Recipe</span> is our term to define <span
-                        class="s-tc:complementary">project template</span>.
-                </p>
-                <p class="s-typo:p s-mbe:30 @mobile s-hide">
-                    You can check bellow the build-in and official Coffeekraken recipes available and ready to use. Each
-                    recipe comes with the <span class="s-tc:accent">development environment</span>, <span
-                        class="s-tc:complementary">the production testing environment</span> and <span
-                        class="s-tc:accent">the full production build process</span>.
-                </p>
-            </div>
+        <div class="s-layout:112 s-gap:column:50 s-pb:80 @mobile s-layout:1_2">
             <div>
                 <ul class="_recipes-grid s-mbe:50">
                     <li>
@@ -263,6 +254,21 @@ sugar new'
                 </div>
 
             </div>
+            <div class="@mobile s-mbs:50">
+                <h3 class="s-typo:h3 s-mbe:30">
+                    Built-in<br /><span class="s-gradient:text:accent">recipes</span>
+                </h3>
+                <p class="s-typo:lead s-mbe:30">
+                    <span class="s-tc:accent">Recipe</span> is our term to define <span
+                        class="s-tc:complementary">project template</span>.
+                </p>
+                <p class="s-typo:p s-mbe:30 @mobile s-hide">
+                    You can check bellow the build-in and official Coffeekraken recipes available and ready to use. Each
+                    recipe comes with the <span class="s-tc:accent">development environment</span>, <span
+                        class="s-tc:complementary">the production testing environment</span> and <span
+                        class="s-tc:accent">the full production build process</span>.
+                </p>
+            </div>
         </div>
 
         <div class="s-text:center s-pbs:50 @mobile s-text:left">
@@ -274,7 +280,9 @@ sugar new'
             </p>
             <a class="s-btn s-color:complementary @mobile s-btn:block" href="/doc/recipes/what-are-recipes"
                 title="More on what Coffeekraken recipes are">
+                <i class="s-icon:more"></i>
                 Discover more on recipes!
+                <i class="s-icon:more"></i>
             </a>
         </div>
 

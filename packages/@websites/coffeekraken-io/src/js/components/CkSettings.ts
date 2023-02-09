@@ -7,61 +7,65 @@ import { define as __SThemeSwitcherComponentDefine } from '@coffeekraken/s-theme
 __SThemeSwitcherComponentDefine();
 
 export default class CkSettings extends __SLitComponent {
-  _front = __SFront.instance;
+    _front = __SFront.instance;
 
-  static get properties() {
-    return __SLitComponent.propertiesFromInterface();
-  }
+    static get properties() {
+        return __SLitComponent.propertiesFromInterface();
+    }
 
-  static state = {};
+    static state = {};
 
-  constructor() {
-    super({
-      shadowDom: false,
-    });
+    constructor() {
+        super({
+            shadowDom: false,
+        });
 
-    document.addEventListener('s-front.legal.change', () => {
-      this.requestUpdate();
-    });
-  }
+        document.addEventListener('s-front.legal.change', () => {
+            this.requestUpdate();
+        });
+    }
 
-  async firstUpdated() {
-    const $baseColorPicker = this.querySelector('#setting-base-color');
-    const $mainColorPicker = this.querySelector('#setting-main-color');
-    const $accentColorPicker = this.querySelector('#setting-accent-color');
-    const $complementaryColorPicker = this.querySelector(
-      '#setting-complementary-color'
-    );
-    const $fontSizeRange = this.querySelector('#setting-font-size');
+    async firstUpdated() {
+        const $baseColorPicker = this.querySelector('#setting-base-color');
+        const $mainColorPicker = this.querySelector('#setting-main-color');
+        const $accentColorPicker = this.querySelector('#setting-accent-color');
+        const $complementaryColorPicker = this.querySelector(
+            '#setting-complementary-color',
+        );
 
-    $baseColorPicker.addEventListener('s-color-picker.change', (e) => {
-      this._front.theme.setColor('base', e.detail.hex);
-    });
-    $mainColorPicker.addEventListener('s-color-picker.change', (e) => {
-      this._front.theme.setColor('main', e.detail.hex);
-    });
-    $accentColorPicker.addEventListener('s-color-picker.change', (e) => {
-      this._front.theme.setColor('accent', e.detail.hex);
-    });
-    $complementaryColorPicker.addEventListener('s-color-picker.change', (e) => {
-      this._front.theme.setColor('complementary', e.detail.hex);
-    });
-    $fontSizeRange.addEventListener('change', (e) => {
-      this._front.theme.set('scale.default', `${e.target.value}`);
-    });
-  }
+        const $fontSizeRange = this.querySelector('#setting-font-size');
 
-  async mount() {}
+        $baseColorPicker.addEventListener('s-color-picker.change', (e) => {
+            this._front.theme.setColor('base', e.detail.hex);
+        });
+        $mainColorPicker.addEventListener('s-color-picker.change', (e) => {
+            this._front.theme.setColor('main', e.detail.hex);
+        });
+        $accentColorPicker.addEventListener('s-color-picker.change', (e) => {
+            this._front.theme.setColor('accent', e.detail.hex);
+        });
+        $complementaryColorPicker.addEventListener(
+            's-color-picker.change',
+            (e) => {
+                this._front.theme.setColor('complementary', e.detail.hex);
+            },
+        );
+        $fontSizeRange.addEventListener('change', (e) => {
+            this._front.theme.set('scale.default', `${e.target.value}`);
+        });
+    }
 
-  _setLod(level: number) {
-    this._front.setLod(level);
-  }
+    async mount() {}
 
-  render() {
-    return html`
+    _setLod(level: number) {
+        this._front.setLod(level);
+    }
+
+    render() {
+        return html`
       <div s-deps css="ckSettings">
         <div class="s-p:50 s-mbe:40 @mobile s-p:40 s-mbe:10">
-          <h1 class="s-typo:h3 s-mbe:40 @mobile s-mbe:0">Settings</h1>
+          <h1 class="s-typo:h3 s-gradient:text:accent s-mbe:40 @mobile s-mbe:0">Settings</h1>
           <p class="s-typo:p @mobile s-hide">
             These settings allows you to customize your Coffeekraken experience
             as well as feature some of the capabilities that our toolkit has to
@@ -76,9 +80,12 @@ export default class CkSettings extends __SLitComponent {
                                 class="s-label s-pi:50 s-pb:30 @mobile s-pi:40"
                             >
                                 <span> Dark mode </span>
-                                <s-theme-switcher
-                                    class="s-color:accent"
-                                ></s-theme-switcher>
+                                <div>
+                                  <i class="s-icon:dark-mode s-mie:20"></i>
+                                  <s-theme-switcher
+                                      class="s-color:accent"
+                                  ></s-theme-switcher>
+                                </div>
                             </label>
                         </li>
             <li class="s-bg:main-surface">
@@ -97,7 +104,7 @@ export default class CkSettings extends __SLitComponent {
                   tooltip
                   step="1"
                   @change=${(e) => {
-                    this._setLod(parseInt(e.target.value) + 2);
+                      this._setLod(parseInt(e.target.value) + 2);
                   }}
                 >
                 </s-range>
@@ -178,8 +185,8 @@ export default class CkSettings extends __SLitComponent {
                       type="text"
                       class="s-input"
                       value="${this._front.theme
-                        .getColor('complementary')
-                        .toHex()}"
+                          .getColor('complementary')
+                          .toHex()}"
                     />
                     <button class="s-btn s-color:complementary">
                       <i class="s-icon:color"></i>
@@ -216,7 +223,7 @@ export default class CkSettings extends __SLitComponent {
                   type="reset"
                   class="s-btn s-color:accent"
                   @click=${() => {
-                    this._front.theme.clear();
+                      this._front.theme.clear();
                   }}
                 >
                   Restore!
@@ -229,24 +236,24 @@ export default class CkSettings extends __SLitComponent {
               >
                 <span>
                     Legals condition agreement&nbsp;&nbsp;${
-                      this._front.isLegalAgree()
-                        ? html`
-                            <span class="s-badge s-color:success">
-                              Agreed
-                            </span>
-                          `
-                        : html`
-                            <span class="s-badge s-color:error">
-                              Disagreed
-                            </span>
-                          `
+                        this._front.isLegalAgree()
+                            ? html`
+                                  <span class="s-badge s-color:success">
+                                      Agreed
+                                  </span>
+                              `
+                            : html`
+                                  <span class="s-badge s-color:error">
+                                      Disagreed
+                                  </span>
+                              `
                     }
                 </span>
                     <button
                     type="reset"
                     class="s-btn s-color:complementary"
                     @click=${() => {
-                      document.querySelector('#legal').activate();
+                        document.querySelector('#legal').activate();
                     }}
                     >
 
@@ -259,12 +266,12 @@ export default class CkSettings extends __SLitComponent {
         </form>
       </div>
     `;
-  }
+    }
 }
 
 export function define(props: any = {}, tagName = 'ck-settings') {
-  __SLitComponent.define(tagName, CkSettings, {
-    id: 'ck-settings',
-    ...props,
-  });
+    __SLitComponent.define(tagName, CkSettings, {
+        id: 'ck-settings',
+        ...props,
+    });
 }

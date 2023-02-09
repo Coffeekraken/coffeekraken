@@ -138,6 +138,17 @@ export default function __when(
                 return;
             }
 
+            // timeout
+            const timeoutMatches = t.match(/^timeout\:([0-9]+)/);
+            if (timeoutMatches && timeoutMatches[1]) {
+                const timeout = parseInt(timeoutMatches[1]);
+                const promise = new Promise((resolve) => {
+                    setTimeout(resolve, timeout);
+                });
+                promises.push(promise);
+                return;
+            }
+
             switch (t) {
                 case 'inViewport':
                     promises.push(

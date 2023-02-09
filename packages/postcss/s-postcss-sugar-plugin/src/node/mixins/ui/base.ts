@@ -79,6 +79,10 @@ export default function ({
                 background-color: sugar.color(current);
             }
 
+            &:not(textarea) {
+                line-height: 1;
+            }
+
             &[disabled] {
                 @sugar.disabled();
             }

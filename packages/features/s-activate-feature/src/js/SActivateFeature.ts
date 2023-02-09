@@ -214,8 +214,6 @@ export default class SActivateFeature extends __SFeature {
                     switch (trigger) {
                         case 'click':
                             $triggerer.addEventListener('click', (e) => {
-                                console.log('Hello', e.target);
-
                                 // only direct child(s) of the triggerer can trigger the activation
                                 if (e.target !== $triggerer) {
                                     // @ts-ignore
@@ -223,7 +221,6 @@ export default class SActivateFeature extends __SFeature {
                                         return;
                                     if (e.currentTarget !== $triggerer) return;
                                 }
-                                console.log('CL', this.isActive(), this.props);
 
                                 e.preventDefault();
                                 e.stopPropagation();

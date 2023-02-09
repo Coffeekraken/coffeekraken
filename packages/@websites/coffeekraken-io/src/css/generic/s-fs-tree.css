@@ -1,28 +1,28 @@
 .s-fs-tree {
-  margin-block-end: sugar.margin(40);
-  position: relative;
-  font-size: sugar.font.size(25);
+    margin-block-end: sugar.margin(40);
+    position: relative;
+    font-size: sugar.font.size(25);
 
-  color: sugar.color(base, text, --alpha 0.6);
+    color: sugar.color(base, text, --alpha 0.6);
 
-  ._folder > div,
-  [s-activate] > div {
-    color: sugar.color(base, text);
-  }
-
-  .s-fs-tree {
-    &:before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0.65em;
-      width: 1px;
-      height: 100%;
-      background: sugar.color(base, border);
+    ._folder > div,
+    [s-activate] > div {
+        color: sugar.color(base, text);
     }
 
-    .s-fs-tree:before {
-      display: none;
+    .s-fs-tree {
+        &:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0.65em;
+            width: 1px;
+            height: 100%;
+            background: sugar.color(base, border);
+        }
+
+        .s-fs-tree:before {
+            display: none;
+        }
     }
-  }
 }

@@ -8,10 +8,10 @@
                     <img s-inline class="illustration adaptive-color @mobile s-hide" src="/dist/img/illustrations/packages.svg" />
                 </div>
                 <div class="s-mbe:80">
-                    <h3 class="s-typo:h3 s-mbe:30">
+                    <h2 class="s-typo:h2 s-mbe:30">
                         Sugar toolkit
                         <br>to <span class="s-gradient:text:accent">serve you</span>
-                    </h3>
+                    </h2>
                     <p class="s-typo:lead s-mbe:30">
                         We all know as developer that a lot of our <span class="s-tc:accent">precious time</span> is
                         taken
@@ -25,14 +25,16 @@
                         it and import your own tools.
                     </p>
                     <a class="s-btn s-color:accent @mobile s-btn:block" href="/package/@coffeekraken/sugar/doc/readme" title="Get started with Sugar!">
+                        <i class="s-icon:more"></i>
                         Discover what Sugar has to offer
+                        <i class="s-icon:more"></i>
                     </a>
                 </div>
             </div>
 
             <div class="code-example-section" ">
                 <div>
-                    <h5 class="s-typo:h4 s-mbe:30 @mobile s-typo:h5">
+                    <h3 class="s-typo:h3 s-mbe:30 @mobile s-typo:h4">
                         A coherant <span class="s-gradient:text:accent">CLI</span><br />with some cool features
                     </h5>
                     <p class="s-typo:p">
@@ -58,16 +60,18 @@
                 </div>
                 <div>
                     <a class="s-btn s-color:complementary @mobile s-btn:block" href="/doc/cli/overview" title="More on the Coffeekraken Sugar CLI">
+                        <i class="s-icon:more"></i>
                         More on our CLI
+                        <i class="s-icon:more"></i>
                     </a>
                 </div>
             </div>
 
             <div class="code-example-section:right" ">
                 <div>
-                    <h5 class="s-typo:h4 s-mbe:30 @mobile s-typo:h5">
+                    <h3 class="s-typo:h3 s-mbe:30 @mobile s-typo:h4">
                         querySelector<span class="s-gradient:text:accent">Live</span>
-                    </h5>
+                    </h3>
                     <p class="s-typo:p">
                         This function allows you to do exactly the same as the <span
                             class="s-typo:code">querySelector</span> but
@@ -93,16 +97,18 @@
                 </div>
                 <div>
                     <a class="s-btn s-color:accent @mobile s-btn:block" href="/api/@coffeekraken.sugar.js.dom.query.querySelectorLive" title="querySelectorLive coffeekraken sugar documentation">
+                        <i class="s-icon:more"></i>
                         querySelectorLive documentation
+                        <i class="s-icon:more"></i>
                     </a>
                 </div>
             </div>
 
             <div class="code-example-section" ">
                 <div>
-                    <h5 class="s-typo:h4 s-mbe:30 @mobile s-typo:h5">
+                    <h3 class="s-typo:h3 s-mbe:30 @mobile s-typo:h4">
                         sha256,<span class="s-gradient:text:accent">base64</span>/etc...
-                    </h5>
+                    </h3>
                     <p class="s-typo:p">
                         These crypt functions allows you to encrypt strings with ease. Sugar support some encryption
                         algorhytm like <span class="s-typo:code">aes</span>,
@@ -120,17 +126,19 @@
                 </div>
                 <div>
                     <a class="s-btn s-color:complementary @mobile s-btn:block" href="/api/@coffeekraken.sugar.js.crypt.md5" title="MD5 Coffeekraken sugar documentation">
+                        <i class="s-icon:more"></i>
                         MD5 documentation
+                        <i class="s-icon:more"></i>
                     </a>
                 </div>
             </div>
 
             <div class="code-example-section:right" "> 
                 <div>
-                    <h5 class="s-typo:h4 s-mbe:30 @mobile s-typo:h5">
+                    <h3 class="s-typo:h3 s-mbe:30 @mobile s-typo:h4">
                         is(<span class="s-gradient:text:accent">Mobile</span>,<span class="s-gradient:text:accent">Color</span>,<span
                             class="s-gradient:text:accent">PlainObject</span>, etc...)
-                    </h5>
+                    </h3>
                     <p class="s-typo:p">
                         These functions are made to check if your user is on mobile, if your javascript is executed into
                         a node environment, is the passed string is a URL, etc...
@@ -146,7 +154,9 @@
                 </div>
                 <div>
                     <a class="s-btn s-color:accent @mobile s-btn:block" href="/api/@coffeekraken.sugar.js.is.isMobile" title="isMobile Coffeekraken sugar documentation">
+                        <i class="s-icon:more"></i>
                         isMobile documentation
+                        <i class="s-icon:more"></i>
                     </a>    
                 </div>
             </div>
@@ -160,7 +170,9 @@
                         the rest step by step</span>.
                 </p>
                 <a class="s-btn s-color:complementary @mobile s-btn:block" href="/package/@coffeekraken/sugar/doc/readme" title="Discover what Coffeekraken Sugar has to offer!">
+                    <i class="s-icon:more"></i>
                     Discover all of what sugar has to offer!
+                    <i class="s-icon:more"></i>
                 </a>
             </div>
 

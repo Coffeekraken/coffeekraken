@@ -890,7 +890,8 @@ export default class SSliderComponent extends __SLitComponent {
      * @author          Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     getNextSlideIdx(): number {
-        const nextSlideIdx = this.state.currentSlideIdx + 1;
+        const nextSlideIdx =
+            this.state.currentSlideIdx + this.props.slidesByPage;
         if (nextSlideIdx >= this.$slides.length - 1)
             return this.$slides.length - 1;
         return nextSlideIdx;
@@ -949,7 +950,8 @@ export default class SSliderComponent extends __SLitComponent {
      * @author          Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     getPreviousSlideIdx(): number {
-        const previousSlideIdx = this.state.currentSlideIdx - 1;
+        const previousSlideIdx =
+            this.state.currentSlideIdx - this.props.slidesByPage;
         if (previousSlideIdx <= 0) return 0;
         return previousSlideIdx;
     }
@@ -1454,7 +1456,7 @@ export default class SSliderComponent extends __SLitComponent {
         if (this.props.loop && this.isLast()) {
             return this.goTo(0);
         }
-        return this.goTo(this.nextSlideIdx);
+        return this.goTo(this.getNextSlideIdx());
     }
 
     /**

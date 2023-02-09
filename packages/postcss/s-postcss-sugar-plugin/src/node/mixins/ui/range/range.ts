@@ -81,12 +81,10 @@ export default function ({
         --track-width: 100%;
         --track-height: sugar.scalable(0.5em);
         --track-border-width: sugar.theme(ui.form.borderWidth);
-        --track-border-color: sugar.color(current, border);
+        --track-border-color: sugar.color(current, --alpha 0.2);
 
         --track-radius: var(--s-shape, sugar.border.radius(ui.form.borderRadius));
         --contrast: 5%;
-
-        --ie-bottom-track-color: darken($track-color, $contrast);
 `,
     ];
 
@@ -119,6 +117,15 @@ export default function ({
 
                 &::-webkit-slider-runnable-track {
                     background: var(--track-color);
+                    border: var(--thumb-border-width) solid sugar.color(current, --alpha 0.3);
+                }
+                &::-moz-range-track {
+                    background: var(--track-color);
+                    border: var(--thumb-border-width) solid sugar.color(current, --alpha 0.3);
+                }
+                &::-ms-track {
+                    background: var(--track-color);
+                    border: var(--thumb-border-width) solid sugar.color(current, --alpha 0.3);
                 }
 
                 &::-ms-fill-lower {

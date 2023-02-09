@@ -17,11 +17,14 @@
     capabilities!</p> --}}
 
 <a class="s-btn s-color:accent @mobile s-display:block" href="/doc/get-started/get-started" title="Coffeekraken get started!">
-    <i class="s-icon:fire s-mie:10"></i> Get started!
+    <i class="s-icon:fire"></i>
+    Get started!
 </a>
 &nbsp;
 <a class="s-btn s-color:complementary @mobile s-display:none" s-slider-next title="Discover our components!">
-    Take a quick features tour <i class="s-icon:arrow-right s-mis:10"></i>
+    <i class="s-icon:more"></i>
+    Take a quick features tour
+    <i class="s-icon:more"></i>
 </a>
 
 {{-- 

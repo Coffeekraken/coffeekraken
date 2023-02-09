@@ -542,14 +542,13 @@ export default class STheme extends __SThemeBase {
     getColor(
         name: string,
         variant?: string,
-        $context = document.querySelector('html'),
+        $context = document.body,
     ): __SColor {
         const $elm = document.createElement('p');
         $elm.classList.add(`s-bg--${name}${variant ? `-${variant}` : ''}`);
         const $wrapper = document.createElement('div');
         $wrapper.setAttribute('hidden', 'true');
-        $wrapper.setAttribute('theme', this.theme);
-        $wrapper.setAttribute('variant', this.variant);
+        $wrapper.setAttribute('theme', `${this.theme}-${this.variant}`);
         $wrapper.appendChild($elm);
         // @ts-ignore
         $context.appendChild($wrapper);
@@ -586,7 +585,7 @@ export default class STheme extends __SThemeBase {
      * @since       2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    applyState($context: HTMLElement = document.querySelector('html')): STheme {
+    applyState($context: HTMLElement = document.body): STheme {
         // overrided configs (css)
         const properties = __SThemeBase.jsConfigObjectToCssProperties(
             this.getOverridedConfig(),
@@ -606,7 +605,7 @@ export default class STheme extends __SThemeBase {
      */
     _applyOverridedConfigs(
         properties,
-        $context: HTMLElement = document.querySelector('html'),
+        $context: HTMLElement = document.body,
     ): void {
         if (!$context._sThemeOverridedConfigs) {
             $context._sThemeOverridedConfigs = {};
@@ -620,8 +619,14 @@ export default class STheme extends __SThemeBase {
             );
             $context.appendChild($context._sThemeOverridedConfigs[this.id]);
         }
+
+        let selector = `[theme="${this.theme}-${this.variant}"]`;
+        if ($context === document.body) {
+            selector += ' body';
+        }
+
         $context._sThemeOverridedConfigs[this.id].innerHTML = `
-            [theme="${this.theme}-${this.variant}"] {
+            ${selector} {
                 ${properties.join('\n')}
             }
         `;
@@ -643,6 +648,8 @@ export default class STheme extends __SThemeBase {
     save(): STheme {
         clearTimeout(this._saveTimeout);
         this._saveTimeout = setTimeout(() => {
+            this.state.overridedConfigs = this._overridedConfig;
+            console.log('save', this.state);
             // save in localStorage
             localStorage.setItem(
                 `s-theme-${this.theme}`,
@@ -679,6 +686,9 @@ export default class STheme extends __SThemeBase {
         } catch (e) {
             savedState = {};
         }
+
+        console.log('saved', savedState);
+
         // restore configs
         // @ts-ignore
         super.restore(savedState.overridedConfigs);

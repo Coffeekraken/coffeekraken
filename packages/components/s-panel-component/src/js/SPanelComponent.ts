@@ -189,7 +189,7 @@ export default class SPanelComponent extends __SLitComponent {
         const $tpl = this.querySelector('template');
         if ($tpl) {
             this._template = $tpl.content;
-            // $tpl.remove();
+            $tpl.remove();
         }
     }
     isTopPanel() {

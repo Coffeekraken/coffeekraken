@@ -80,7 +80,7 @@
             ];
         @endphp
 
-        <s-slider controls slides-by-page="3" pad nav loop class="s-mbe:100 s-ratio:none ui-card-slider">
+        <s-slider lnf="default-contight" controls slides-by-page="3" pad nav loop class="s-mbe:100 s-ratio:none ui-card-slider">
             <responsive media="mobile" slides-by-page="1"></responsive>
             @foreach ($uiCards as $card)
                 <div s-slider-slide>
@@ -107,7 +107,9 @@
                 </p>
                 <a class="s-btn s-color:complementary @mobile s-btn:block" href="/doc/get-started/get-started"
                     title="Get started with Coffeekraken!">
+                    <i class="s-icon:more"></i>
                     Get started!
+                    <i class="s-icon:more"></i>
                 </a>
             </div>
 

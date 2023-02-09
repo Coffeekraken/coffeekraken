@@ -21,15 +21,15 @@
 
 /* mobile specific classes */
 @sugar.media.classes mobile {
-    @sugar.margin.classes;
-    @sugar.padding.classes;
-    @sugar.display.classes;
-    @sugar.layout.classes;
-    @sugar.hide.classes;
-    @sugar.flex.classes;
-    @sugar.text.classes;
-    @sugar.gap.classes;
-    @sugar.ui.button.classes;
+  @sugar.margin.classes;
+  @sugar.padding.classes;
+  @sugar.display.classes;
+  @sugar.layout.classes;
+  @sugar.hide.classes;
+  @sugar.flex.classes;
+  @sugar.text.classes;
+  @sugar.gap.classes;
+  @sugar.ui.button.classes;
 }
 
 /* icons */
@@ -40,13 +40,14 @@
   fa:fire
   fa:eye:preview
   fab:css3-alt:css
-  fa:calendar-alt:calendar
-  fa:angle-down
-  fa:angle-up
-  fa:angle-left
-  fa:angle-right
+  fa:calendar-alt:calendarp
+  fa:angle-down:arrow-down
+  fa:angle-up:arrow-up
+  fa:angle-left:arrow-left
+  fa:angle-right:arrow-right
   fa:user-graduate:documentation
   fa:box-open:box
+  fa:angles-right:more
   fa:angle-up
   fa:palette:color
   fa:eye-dropper

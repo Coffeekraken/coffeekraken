@@ -1,12 +1,16 @@
 /* @sugar.partial (codeExampleSection) { */
 .code-example-section {
   margin-block-end: sugar.margin(80);
-  padding-block: sugar.padding(50);
+  padding-block: sugar.padding(70);
+
+  .s-typo--p {
+    margin-block-end: sugar.margin(30);
+  }
 
   @sugar.layout (
     2 2 1
     2 2 3
-    , $gap: 50, $gapBetween: true
+    , $columnGap: 70, $gapBetween: true
 );
 
   @sugar.media mobile {
@@ -17,7 +21,7 @@
     1
     2
     3
-    , $gap: 50, $gapBetween: true
+    , $columnGap: 70, $gapBetween: true
     );
   }
 }
@@ -26,7 +30,7 @@
   @sugar.layout (
     1 2 2
     3 2 2
-    , $gap: 50, $gapBetween: true
+    , $columnGap: 70, $gapBetween: true
 );
 
   @sugar.media mobile {
@@ -34,8 +38,7 @@
     1
     2
     3
-    , $gap: 50, $gapBetween: true
+    , $columnGap: 70, $gapBetween: true
     );
   }
 }
-/* } */

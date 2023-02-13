@@ -27,7 +27,7 @@ To illustrate this, we will take as example of overriding the javascript sources
 -   Fill it like so
 
 ```js
-export default (env, config) => {
+export default () => {
     return {
         src: {
             jsDir: 'your new absolute directory path',
@@ -42,7 +42,7 @@ export default (env, config) => {
 -   Fill it like so
 
 ```js
-export default (env, config) => {
+export default () => {
     return {
         src: {
             jsDir: 'your new absolute directory path',
@@ -52,5 +52,37 @@ export default (env, config) => {
 ```
 
 > You'll see that the process is the same. The only difference is where are stored files. Note that the `.local` folder MUST be added in your **.gitignore file** if you're not using our development toolchain.
+
+## Config API and lazy values
+
+Sometimes you will need to refer to an existing configuration like for example accessing the `storage.package.rootDir` value.
+
+To do that, the safer way is to define your configuration like so:
+
+`.sugar/myConfig.config.ts`
+
+```js
+export default function(api) {
+    return {
+        get myConfigValue() {
+            return `${api.config.storage.package.rootDir}/something`;
+        }
+}
+```
+
+You can see that an `api` object is accessible on the first argument of your config function.
+This first argument is an object containing these properties that you can use in your configs:
+
+- `config`: The global configuration object containing every registered configs.
+- `env`: An object containing some environment informations like:
+    - `env`: The current environment like `development`, `production`, etc...
+    - `platform`: The platform on which the config is running like `browser` or `node`.
+    - `target`: The targeted environment in case of a "build" like `development` or `production`.
+- `this`: The current configuration. If you are in the `frontendServer.config.ts` file, this will be the complete `frontentServer` config object.
+- `theme`: The current theme configurations object
+- `extends`: A simple `merge` function (not recursive) if you need to.
+
+You can also notice that your configuration value `myConfigValue` is defined using a **getter**. This is important to make sure your accessing code `${api.config.storage.package.rootDir}/something` is executed only when the value is read.
+This avoid issues like accessing configs that are maybe not already loaded depending on the load order.
 
 {% endblock %}

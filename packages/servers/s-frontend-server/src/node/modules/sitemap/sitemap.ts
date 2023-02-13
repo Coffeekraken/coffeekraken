@@ -1,6 +1,6 @@
 import { __dirname } from '@coffeekraken/sugar/fs';
 
-export default function sitemap(express, settings, config) {
+export default function sitemap({ express, settings, config }) {
     return new Promise(async (resolve) => {
         // handlers
         config.handlers.sitemapJson = {

@@ -43,15 +43,19 @@ npm run dev
 
 That will launch some processes like:
 
-###### **frontendServer**
+#### **frontendServer**
 
-This server is the main one to access your project. It runs by default on port **8888** and handle thinks like views compilation (bladePHP, twig, and others to come depending on needs...).
+This server is the main one to access your project. It runs by default on port **8080** for the `development` environment, and on the port **9090** for the `production` one.
+
+> Note that when we say `production` for this server, it's just to test your project locally with the production assets (js, css, etc...). This server is not meant to be used as a production one...
+
+Under the hood, our server handles thinks like views compilation (twig, blade, and others to come depending on needs...).
 
 More on this server in the [@coffeekraken/s-frontend-server](https://www.npmjs.com/package/@coffeekraken/s-sfrontend-server) package documentation
 
-###### **vitejs**
+#### **vitejs**
 
-This server is powered by the AWESOME [vitejs](https://vitejs.dev/) project and is responsible to compile and serve on the fly your assets like javascript and typescript files, css through [PostCSS](https://postcss.org/), and more...
+This server is powered by the AWESOME [ViteJs](https://vitejs.dev/) project and is responsible to compile and serve on the fly your assets like javascript and typescript files, css through [PostCSS](https://postcss.org/), and more...
 
 We use this package under the hood to add built-in support for things ike [PostCSS](https://postcss.org/), [Typescript](https://www.typescriptlang.org/), [React](https://reactjs.org/), [Svelte](https://svelte.dev/) and more...
 
@@ -62,5 +66,7 @@ Each recipes comes with full production ready build stack. To build your project
 ```shell
 npm run build
 ```
+
+All your productions assets will be stored in the `dist` folder by default. This can be updated through our [configuration system](/doc/config/overview) by setting the `storage.distRootDir` configuration.
 
 {% endblock %}

@@ -12,6 +12,7 @@
             "@coffeekraken/s-builder",
             "@coffeekraken/s-carpenter",
             "@coffeekraken/s-class",
+            "@coffeekraken/s-classmap",
             "@coffeekraken/s-code-example-component",
             "@coffeekraken/s-code-formatter-prettier",
             "@coffeekraken/s-code-formatter",
@@ -56,6 +57,7 @@
             "@coffeekraken/s-inline-feature",
             "@coffeekraken/s-interface",
             "@coffeekraken/s-kitchen",
+            "@coffeekraken/s-lazy-feature",
             "@coffeekraken/s-lit-component",
             "@coffeekraken/s-log",
             "@coffeekraken/s-markdown-builder",
@@ -341,6 +343,43 @@
                 "filename": "SClipboardCopyComponentInterface.ts",
                 "extension": "ts",
                 "relPath": "src/js/interface/SClipboardCopyComponentInterface.ts",
+                "children": {}
+            },
+            "@coffeekraken.s-clipboard-copy-component.ui.clipboardCopy.clipbordCopy": {
+                "id": "@coffeekraken.s-clipboard-copy-component.ui.clipboardCopy.clipbordCopy",
+                "name": "clipbordCopy",
+                "type": {
+                    "types": [
+                        {
+                            "type": "PostcssMixin"
+                        }
+                    ],
+                    "raw": "PostcssMixin"
+                },
+                "platform": [
+                    {
+                        "name": "css",
+                        "description": ""
+                    }
+                ],
+                "description": "Apply the clipbord copy style to any s-clipboard-copy element",
+                "namespace": "@coffeekraken.s-clipboard-copy-component.ui.clipboardCopy",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "css",
+                        "code": ".s-clipboard-copy {\n   @sugar.ui.clipboardCopy;\n}"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "clipboardCopy.ts",
+                "extension": "ts",
+                "relPath": "src/node/postcss/mixins/ui/clipboardCopy/clipboardCopy.ts",
                 "children": {}
             }
         }

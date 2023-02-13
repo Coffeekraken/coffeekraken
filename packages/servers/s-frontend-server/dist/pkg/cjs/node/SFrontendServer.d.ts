@@ -1,4 +1,5 @@
 import __SClass from '@coffeekraken/s-class';
+import __express from 'express';
 
 export interface ISFrontendServerStartParams {
     port: number;
@@ -9,6 +10,12 @@ export interface ISFrontendServerStartParams {
     pagesDir: string;
     logLevel: string;
     target: 'development' | 'production';
+}
+export interface ISFrontendServerModuleApi {
+    express: __express;
+    settings: any;
+    config: any;
+    startParams: ISFrontendServerStartParams;
 }
 export interface ISFrontendServerAddDefaultPagesParams {
     yes: boolean;

@@ -104,6 +104,395 @@
             "@coffeekraken/s-vite"
         ],
         "map": {
+            "@coffeekraken.sugar.config.themeUi.menu.paddingInline": {
+                "id": "@coffeekraken.sugar.config.themeUi.menu.paddingInline",
+                "name": "paddingInline",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ],
+                    "raw": "String"
+                },
+                "default": "[theme.padding.50]",
+                "description": "Specify the default padding inline for code ui",
+                "namespace": "@coffeekraken.sugar.config.themeUi.menu",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "themeUi.config.ts",
+                "extension": "config",
+                "relPath": "src/config/themeUi.config.ts"
+            },
+            "@coffeekraken.sugar.config.themeUi.menu.paddingBlock": {
+                "id": "@coffeekraken.sugar.config.themeUi.menu.paddingBlock",
+                "name": "paddingBlock",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ],
+                    "raw": "String"
+                },
+                "default": "[theme.padding.50]",
+                "description": "Specify the default padding block for code ui",
+                "namespace": "@coffeekraken.sugar.config.themeUi.menu",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "themeUi.config.ts",
+                "extension": "config",
+                "relPath": "src/config/themeUi.config.ts"
+            },
+            "@coffeekraken.sugar.config.themeUi.menu.borderRadius": {
+                "id": "@coffeekraken.sugar.config.themeUi.menu.borderRadius",
+                "name": "borderRadius",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ],
+                    "raw": "String"
+                },
+                "default": "[theme.ui.default.borderRadius]",
+                "description": "Specify the default border radius for code ui",
+                "namespace": "@coffeekraken.sugar.config.themeUi.menu",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "themeUi.config.ts",
+                "extension": "config",
+                "relPath": "src/config/themeUi.config.ts"
+            },
+            "@coffeekraken.sugar.config.themeUi.menu.borderWidth": {
+                "id": "@coffeekraken.sugar.config.themeUi.menu.borderWidth",
+                "name": "borderWidth",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ],
+                    "raw": "String"
+                },
+                "default": "[theme.ui.default.borderWidth]",
+                "description": "Specify the default border width for code ui",
+                "namespace": "@coffeekraken.sugar.config.themeUi.menu",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "themeUi.config.ts",
+                "extension": "config",
+                "relPath": "src/config/themeUi.config.ts"
+            },
+            "@coffeekraken.sugar.config.themeUi.menu.transition": {
+                "id": "@coffeekraken.sugar.config.themeUi.menu.transition",
+                "name": "transition",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ],
+                    "raw": "String"
+                },
+                "default": "[theme.ui.default.transition]",
+                "description": "Specify the default transition for code ui",
+                "namespace": "@coffeekraken.sugar.config.themeUi.menu",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "themeUi.config.ts",
+                "extension": "config",
+                "relPath": "src/config/themeUi.config.ts"
+            },
+            "@coffeekraken.sugar.config.themeUi.menu.defaultLnf": {
+                "id": "@coffeekraken.sugar.config.themeUi.menu.defaultLnf",
+                "name": "defaultLnf",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Number"
+                        }
+                    ],
+                    "raw": "Number"
+                },
+                "default": "[theme.ui.default.defaultLnf]",
+                "description": "Specify the default look and feel for your menus",
+                "namespace": "@coffeekraken.sugar.config.themeUi.menu",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "themeUi.config.ts",
+                "extension": "config",
+                "relPath": "src/config/themeUi.config.ts"
+            },
+            "@coffeekraken.sugar.config.themeUi.menu.defaultType": {
+                "id": "@coffeekraken.sugar.config.themeUi.menu.defaultType",
+                "name": "defaultType",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Number"
+                        }
+                    ],
+                    "raw": "Number"
+                },
+                "default": "primary",
+                "description": "Specify the default look and feel for your menus",
+                "namespace": "@coffeekraken.sugar.config.themeUi.menu",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "themeUi.config.ts",
+                "extension": "config",
+                "relPath": "src/config/themeUi.config.ts"
+            },
+            "@coffeekraken.sugar.config.themeUi.menu.depth": {
+                "id": "@coffeekraken.sugar.config.themeUi.menu.depth",
+                "name": "depth",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ],
+                    "raw": "String"
+                },
+                "default": "[theme.ui.default.depth]",
+                "description": "Specify the default depth for code items",
+                "namespace": "@coffeekraken.sugar.config.themeUi.menu",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "themeUi.config.ts",
+                "extension": "config",
+                "relPath": "src/config/themeUi.config.ts"
+            },
+            "@coffeekraken.sugar.config.themeUi.menu.rhythmVertical": {
+                "id": "@coffeekraken.sugar.config.themeUi.menu.rhythmVertical",
+                "name": "rhythmVertical",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Object"
+                        }
+                    ],
+                    "raw": "Object"
+                },
+                "default": "[theme.ui.default.rhythmVertical]",
+                "description": "Specify the default vertical rhythm for your code ui",
+                "namespace": "@coffeekraken.sugar.config.themeUi.menu",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "themeUi.config.ts",
+                "extension": "config",
+                "relPath": "src/config/themeUi.config.ts"
+            },
+            "@coffeekraken.sugar.config.themeUi.card.paddingInline": {
+                "id": "@coffeekraken.sugar.config.themeUi.card.paddingInline",
+                "name": "paddingInline",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ],
+                    "raw": "String"
+                },
+                "default": "[theme.padding.50]",
+                "description": "Specify the default padding inline for code ui",
+                "namespace": "@coffeekraken.sugar.config.themeUi.card",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "themeUi.config.ts",
+                "extension": "config",
+                "relPath": "src/config/themeUi.config.ts"
+            },
+            "@coffeekraken.sugar.config.themeUi.card.paddingBlock": {
+                "id": "@coffeekraken.sugar.config.themeUi.card.paddingBlock",
+                "name": "paddingBlock",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ],
+                    "raw": "String"
+                },
+                "default": "[theme.padding.50]",
+                "description": "Specify the default padding block for code ui",
+                "namespace": "@coffeekraken.sugar.config.themeUi.card",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "themeUi.config.ts",
+                "extension": "config",
+                "relPath": "src/config/themeUi.config.ts"
+            },
+            "@coffeekraken.sugar.config.themeUi.card.borderRadius": {
+                "id": "@coffeekraken.sugar.config.themeUi.card.borderRadius",
+                "name": "borderRadius",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ],
+                    "raw": "String"
+                },
+                "default": "[theme.ui.default.borderRadius]",
+                "description": "Specify the default border radius for code ui",
+                "namespace": "@coffeekraken.sugar.config.themeUi.card",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "themeUi.config.ts",
+                "extension": "config",
+                "relPath": "src/config/themeUi.config.ts"
+            },
+            "@coffeekraken.sugar.config.themeUi.card.borderWidth": {
+                "id": "@coffeekraken.sugar.config.themeUi.card.borderWidth",
+                "name": "borderWidth",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ],
+                    "raw": "String"
+                },
+                "default": "[theme.ui.default.borderWidth]",
+                "description": "Specify the default border width for code ui",
+                "namespace": "@coffeekraken.sugar.config.themeUi.card",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "themeUi.config.ts",
+                "extension": "config",
+                "relPath": "src/config/themeUi.config.ts"
+            },
+            "@coffeekraken.sugar.config.themeUi.card.transition": {
+                "id": "@coffeekraken.sugar.config.themeUi.card.transition",
+                "name": "transition",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ],
+                    "raw": "String"
+                },
+                "default": "[theme.ui.default.transition]",
+                "description": "Specify the default transition for code ui",
+                "namespace": "@coffeekraken.sugar.config.themeUi.card",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "themeUi.config.ts",
+                "extension": "config",
+                "relPath": "src/config/themeUi.config.ts"
+            },
+            "@coffeekraken.sugar.config.themeUi.card.depth": {
+                "id": "@coffeekraken.sugar.config.themeUi.card.depth",
+                "name": "depth",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ],
+                    "raw": "String"
+                },
+                "default": "[theme.ui.default.depth]",
+                "description": "Specify the default depth for code items",
+                "namespace": "@coffeekraken.sugar.config.themeUi.card",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "themeUi.config.ts",
+                "extension": "config",
+                "relPath": "src/config/themeUi.config.ts",
+                "children": {}
+            },
+            "@coffeekraken.sugar.config.viewRenderer.rootDirs": {
+                "id": "@coffeekraken.sugar.config.viewRenderer.rootDirs",
+                "name": "rootDirs",
+                "type": {
+                    "types": [
+                        {
+                            "type": "array",
+                            "of": [
+                                "string"
+                            ]
+                        }
+                    ],
+                    "raw": "string[]"
+                },
+                "default": "['[config.storage.src.rootDir]/views']",
+                "description": "Specify the roots views directories",
+                "namespace": "@coffeekraken.sugar.config.viewRenderer",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "viewRenderer.config.ts",
+                "extension": "config",
+                "relPath": "src/config/viewRenderer.config.ts",
+                "children": {}
+            },
             "@coffeekraken.sugar.cli.interface.SRunCommandParamsInterface": {
                 "id": "@coffeekraken.sugar.cli.interface.SRunCommandParamsInterface",
                 "name": "SRunCommandParamsInterface",
@@ -580,6 +969,12 @@
                         "defaultStr": ""
                     }
                 },
+                "platform": [
+                    {
+                        "name": "js",
+                        "description": ""
+                    }
+                ],
                 "description": "Delete a cookie",
                 "namespace": "@coffeekraken.sugar.js.cookie",
                 "status": "stable",
@@ -626,6 +1021,12 @@
                         "defaultStr": ""
                     }
                 },
+                "platform": [
+                    {
+                        "name": "js",
+                        "description": ""
+                    }
+                ],
                 "description": "Get a cookie value",
                 "namespace": "@coffeekraken.sugar.js.cookie",
                 "status": "stable",
@@ -684,24 +1085,136 @@
                         "description": "The cookie value to set",
                         "defaultStr": ""
                     },
-                    "options": {
-                        "name": "options",
+                    "settings": {
+                        "name": "settings",
                         "type": {
                             "types": [
                                 {
                                     "type": "Partial",
                                     "of": [
-                                        "ISetCookieOptions"
+                                        "ISetCookieSettings"
                                     ]
                                 }
                             ],
-                            "raw": "Partial<ISetCookieOptions>"
+                            "raw": "Partial<ISetCookieSettings>"
                         },
-                        "description": "Some options to configure your cookie",
+                        "description": "Some settings to configure your cookie",
                         "default": {},
                         "defaultStr": "{}"
                     }
                 },
+                "setting": {
+                    "path": {
+                        "name": "path",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "String"
+                                }
+                            ],
+                            "raw": "String"
+                        },
+                        "description": "The path of the cookie to store",
+                        "default": "/",
+                        "defaultStr": "\"/\""
+                    },
+                    "domain": {
+                        "name": "domain",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "String"
+                                }
+                            ],
+                            "raw": "String"
+                        },
+                        "description": "The domain on which to store the cookie",
+                        "default": null,
+                        "defaultStr": "null"
+                    },
+                    "expires": {
+                        "name": "expires",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "String"
+                                }
+                            ],
+                            "raw": "String"
+                        },
+                        "description": "The date when the cookie expires",
+                        "default": null,
+                        "defaultStr": "null"
+                    },
+                    "max-age": {
+                        "name": "max-age",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Number"
+                                }
+                            ],
+                            "raw": "Number"
+                        },
+                        "description": "The number of seconds until the cookie expires",
+                        "default": null,
+                        "defaultStr": "null"
+                    },
+                    "secure": {
+                        "name": "secure",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Boolean"
+                                }
+                            ],
+                            "raw": "Boolean"
+                        },
+                        "description": "Specify if the cookie is available only on HTTPS or not",
+                        "default": null,
+                        "defaultStr": "null"
+                    },
+                    "samesite": {
+                        "name": "samesite",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Boolean"
+                                },
+                                {
+                                    "type": "'strict'"
+                                },
+                                {
+                                    "type": "'lax'"
+                                }
+                            ],
+                            "raw": "Boolean | 'strict' | 'lax'"
+                        },
+                        "description": "Controls whether or not a cookie is sent with cross-site requests, providing some protection against cross-site request forgery attacks (CSRF)",
+                        "default": null,
+                        "defaultStr": "null"
+                    },
+                    "httpOnly": {
+                        "name": "httpOnly",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Boolean"
+                                }
+                            ],
+                            "raw": "Boolean"
+                        },
+                        "description": "Forbids JavaScript from accessing the cookie, for example, through the Document.cookie property.",
+                        "default": null,
+                        "defaultStr": "null"
+                    }
+                },
+                "platform": [
+                    {
+                        "name": "js",
+                        "description": ""
+                    }
+                ],
                 "description": "Set a cookie",
                 "namespace": "@coffeekraken.sugar.js.cookie",
                 "status": "stable",
@@ -3034,7 +3547,7 @@
                         "description": ""
                     }
                 ],
-                "description": "This function take as input a string and replace some tokens using these functions:\n-",
+                "description": "This function replace these tokens in the passed string:\n\n- `%moduleSystem` - Either \"esm\" or \"cjs\"",
                 "namespace": "@coffeekraken.sugar.js.string",
                 "status": "beta",
                 "example": [
@@ -10612,7 +11125,7 @@
                         "description": ""
                     }
                 ],
-                "description": "This function take as input a string and replace some tokens using these functions:\n- sharedReplaceToken: Replace tokens like %moduleSystem\n- replacePathTokens: Replace path tokens like %packageRootDir, %distJsDir, etc...\n- replacePackageJsonTokens: Replace tokens like %packageJson.name, %packageJson.version, etc... with package.json values",
+                "description": "This function replace these tokens in the passed string:\n- `%moduleSystem`: Either \"esm\" or \"cjs\"\n- `%distRootDir`: The absolute path to the \"dist\" directory\n- `%packageCacheDir`: The absolute path to the \"cache\" directory in the package\n- `%packageLocalDir`: The absolute path to the \".local\" directory in the package\n- `%packageRootDir`: The absolute path to the package directory\n- `%packageTmpDir`: The absolute path to the \"tmp\" package directory\n- `%srcCssDir`: The absolute path to the \"css\" directory in the \"src\" one\n- `%srcDocDir`: The absolute path to the \"doc\" directory in the \"src\" one\n- `%srcFontDir`: The absolute path to the \"font\" directory in the \"src\" one\n- `%srcIconDir`: The absolute path to the \"icon\" directory in the \"src\" one\n- `%srcImgDir`: The absolute path to the \"img\" directory in the \"src\" one\n- `%srcJsDir`: The absolute path to the \"js\" directory in the \"src\" one\n- `%srcNodeDir`: The absolute path to the \"node\" directory in the \"src\" one\n- `%srcRootDir`: The absolute path to the \"src\" directory\n- `%srcViewsDir`: The absolute path to the \"views\" directory in the \"src\" one\n- `%distCssDir`: The absolute path to the \"css\" directory in the \"dist\" one\n- `%distDocDir`: The absolute path to the \"doc\" directory in the \"dist\" one\n- `%distFontDir`: The absolute path to the \"font\" directory in the \"dist\" one\n- `%distIconDir`: The absolute path to the \"icon\" directory in the \"dist\" one\n- `%distImgDir`: The absolute path to the \"img\" directory in the \"dist\" one\n- `%distJsDir`: The absolute path to the \"js\" directory in the \"dist\" one\n- `%distNodeDir`: The absolute path to the \"node\" directory in the \"dist\" one\n- `%distRootDir`: The absolute path to the \"dist\" directory\n- `%distViewsDir`: The absolute path to the \"views\" directory in the \"dist\" one\n- `%packageJson.property...`: Any value from the package.json file",
                 "namespace": "@coffeekraken.sugar.node.string",
                 "status": "beta",
                 "example": [
@@ -13930,6 +14443,61 @@
                 "filename": "initTwig.php",
                 "extension": "php",
                 "relPath": "src/php/twig/initTwig.php",
+                "children": {}
+            },
+            "@coffeekraken.sugar.php.type.typeToString": {
+                "id": "@coffeekraken.sugar.php.type.typeToString",
+                "name": "typeToString",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Function"
+                        }
+                    ],
+                    "raw": "Function"
+                },
+                "param": {
+                    "$type": {
+                        "name": "$type",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "String"
+                                },
+                                {
+                                    "type": "Array"
+                                }
+                            ],
+                            "raw": "String|Array"
+                        },
+                        "description": "The type to convert into string",
+                        "defaultStr": ""
+                    }
+                },
+                "platform": [
+                    {
+                        "name": "php",
+                        "description": ""
+                    }
+                ],
+                "description": "This function take as input either a simple string that will be returned as he's, or a type object|array like:\n{\ntypes: [{\ntype: 'Array',\nof: ['String','Boolean']\n}, {\ntype: 'Array',\nof: undefined\n}]\n}\nAnd convert it into a type string like:\nArray<String|Boolean>|Array",
+                "namespace": "@coffeekraken.sugar.php.type",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "php",
+                        "code": "Sugar\\type\\generateRandomString('Array'); // => Array\nSugar\\type\\generateRandomString({\n   types: [{\n       type: 'Array',\n       of: ['String','Boolean']\n   }]\n}); // => Array<String|Boolean>"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "typeOtString.php",
+                "extension": "php",
+                "relPath": "src/php/type/typeOtString.php",
                 "children": {}
             },
             "@coffeekraken.sugar.php.url.currentUrl": {
@@ -27993,7 +28561,7 @@
                         "description": ""
                     }
                 ],
-                "description": "This function take as input a string and replace some tokens like:\n- %moduleSystem: The current module system like \"esm\" or \"cjs\"",
+                "description": "This function replace these tokens in the passed string:\n- `%moduleSystem` - Either \"esm\" or \"cjs\"",
                 "namespace": "@coffeekraken.sugar.shared.token",
                 "status": "beta",
                 "example": [
@@ -37210,7 +37778,7 @@
                             ],
                             "raw": "String"
                         },
-                        "description": "The string to replace",
+                        "description": "The string to replace. Can be a regex",
                         "defaultStr": ""
                     },
                     "$replaceBy": {
@@ -37233,7 +37801,7 @@
                         "description": ""
                     }
                 ],
-                "description": "This twig function allows you to replace a value by another in your string",
+                "description": "This twig function allows you to replace a value by another in your string.\nIt support for regex as the search",
                 "namespace": "@coffeekraken.sugar.php.twig.filters.string",
                 "status": "beta",
                 "example": [
@@ -37251,6 +37819,61 @@
                 "filename": "replace.php",
                 "extension": "php",
                 "relPath": "src/php/twig/filters/string/replace.php",
+                "children": {}
+            },
+            "@coffeekraken.sugar.php.twig.filters.type.typeToString": {
+                "id": "@coffeekraken.sugar.php.twig.filters.type.typeToString",
+                "name": "typeToString",
+                "type": {
+                    "types": [
+                        {
+                            "type": "TwigFilter"
+                        }
+                    ],
+                    "raw": "TwigFilter"
+                },
+                "param": {
+                    "$type": {
+                        "name": "$type",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "String"
+                                },
+                                {
+                                    "type": "Array"
+                                }
+                            ],
+                            "raw": "String|Array"
+                        },
+                        "description": "The type you want to convert to string.",
+                        "defaultStr": ""
+                    }
+                },
+                "platform": [
+                    {
+                        "name": "php",
+                        "description": ""
+                    }
+                ],
+                "description": "This twig filter allows you to convert a type array to a string is needed",
+                "namespace": "@coffeekraken.sugar.php.twig.filters.type",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "twig",
+                        "code": "{% set id = 'Array'|typeToString %}"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "typeToString.php",
+                "extension": "php",
+                "relPath": "src/php/twig/filters/type/typeToString.php",
                 "children": {}
             },
             "@coffeekraken.sugar.php.twig.functions.cast.toArray": {

@@ -68,53 +68,18 @@ export default (api) => {
             },
 
             /**
-             * @name          defaultColor
-             * @namespace     config.themeUi.default
-             * @type          String
-             * @default      main
-             *
-             * Specify the default color for ui's
-             *
-             * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-             */
-            defaultColor: 'main',
-            /**
-             * @name          defaultStyle
+             * @name          defaultLnf
              * @namespace     config.themeUi.default
              * @type          String
              * @default      solid
              *
-             * Specify the default style for ui's.
+             * Specify the default lnf for ui's.
              *
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            defaultStyle: 'solid',
-            /**
-             * @name          defaultLnf
-             * @namespace     config.themeUi.default
-             * @type          String
-             * @default      default
-             *
-             * Specify the default style for ui's.
-             *
-             * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-             */
-            defaultLnf: 'default',
-            /**
-             * @name          defaultShape
-             * @namespace     config.themeUi.default
-             * @type          String
-             * @default      default
-             *
-             * Specify the default style for ui's.
-             *
-             * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-             */
-            defaultShape: 'default',
+            defaultLnf: 'solid',
+
             /**
              * @name          depth
              * @namespace     config.themeUi.default
@@ -256,54 +221,6 @@ export default (api) => {
             },
 
             /**
-             * @name          defaultColor
-             * @namespace     config.themeUi.form
-             * @type          String
-             * @default      accent
-             *
-             * Specify the default color for form items
-             *
-             * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-             */
-            defaultColor: 'accent',
-            /**
-             * @name          defaultStyle
-             * @namespace     config.themeUi.form
-             * @type          String
-             * @default      solid
-             *
-             * Specify the default style for form items
-             *
-             * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-             */
-            defaultStyle: 'solid',
-            /**
-             * @name          defaultLnf
-             * @namespace     config.themeUi.form
-             * @type          String
-             * @default      default
-             *
-             * Specify the default style for form items
-             *
-             * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-             */
-            defaultLnf: 'default',
-            /**
-             * @name          defaultShape
-             * @namespace     config.themeUi.form
-             * @type          String
-             * @default      solid
-             *
-             * Specify the default shape for form items
-             *
-             * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-             */
-            defaultShape: 'default',
-            /**
              * @name          depth
              * @namespace     config.themeUi.form
              * @type          String
@@ -400,7 +317,7 @@ export default (api) => {
              */
             size: '2px',
             /**
-             * @name          defaultColor
+             * @name          color
              * @namespace     config.themeUi.scrollbar
              * @type          String
              * @default      accent
@@ -410,7 +327,7 @@ export default (api) => {
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            defaultColor: 'accent',
+            color: 'accent',
         },
         label: {
             /**

@@ -11,6 +11,7 @@
             "@coffeekraken/s-builder",
             "@coffeekraken/s-carpenter",
             "@coffeekraken/s-class",
+            "@coffeekraken/s-classmap",
             "@coffeekraken/s-clipboard-copy-component",
             "@coffeekraken/s-code-example-component",
             "@coffeekraken/s-code-formatter-prettier",
@@ -104,6 +105,55 @@
             "@coffeekraken/sugar"
         ],
         "map": {
+            "@coffeekraken.s-bench.config.bench.filters.min": {
+                "id": "@coffeekraken.s-bench.config.bench.filters.min",
+                "name": "min",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Number"
+                        }
+                    ],
+                    "raw": "Number"
+                },
+                "default": "40",
+                "description": "Specify the benches to filters out when under a certain duration in ms",
+                "namespace": "@coffeekraken.s-bench.config.bench.filters",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "bench.config.ts",
+                "extension": "config",
+                "relPath": "src/config/bench.config.ts"
+            },
+            "@coffeekraken.s-bench.config.bench.filters.max": {
+                "id": "@coffeekraken.s-bench.config.bench.filters.max",
+                "name": "max",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Number"
+                        }
+                    ],
+                    "raw": "Number"
+                },
+                "default": "99999999999",
+                "description": "Specify the benches to filters out when above a certain duration in ms",
+                "namespace": "@coffeekraken.s-bench.config.bench.filters",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "bench.config.ts",
+                "extension": "config",
+                "relPath": "src/config/bench.config.ts",
+                "children": {}
+            },
             "@coffeekraken.s-bench.doc.README": {
                 "id": "@coffeekraken.s-bench.doc.README",
                 "name": "README",

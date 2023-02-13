@@ -103,9 +103,7 @@ export default class CkSettings extends __SLitComponent {
                   values='["Low","Medium","High"]'
                   tooltip
                   step="1"
-                  @change=${(e) => {
-                      this._setLod(parseInt(e.target.value) + 2);
-                  }}
+                  @change=${(e) => this._setLod(parseInt(e.target.value) + 2)}
                 >
                 </s-range>
               </label>

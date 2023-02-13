@@ -9,11 +9,11 @@ class postcssUiDatetimePickerClassesInterface extends __SInterface {
                 values: ['solid'],
                 default: ['solid'],
             },
-            defaultStyle: {
+            defaultLnf: {
                 type: 'String',
                 values: ['solid'],
                 default:
-                    __STheme.get('ui.datetimePicker.defaultStyle') ?? 'solid',
+                    __STheme.get('ui.datetimePicker.defaultLnf') ?? 'solid',
             },
             scope: {
                 type: {
@@ -29,7 +29,7 @@ class postcssUiDatetimePickerClassesInterface extends __SInterface {
 
 export interface IPostcssUiDatetimePickerInputClassesParams {
     styles: 'solid'[];
-    defaultStyle: 'solid';
+    defaultLnf: 'solid';
     scope: ('bare' | 'lnf' | 'vr')[];
 }
 
@@ -48,7 +48,7 @@ export default function ({
 }) {
     const finalParams: IPostcssUiDatetimePickerInputClassesParams = {
         styles: ['solid'],
-        defaultStyle: 'solid',
+        defaultLnf: 'solid',
         scope: ['bare', 'lnf'],
         ...params,
     };
@@ -69,7 +69,7 @@ export default function ({
     }
 
     if (
-        finalParams.styles.includes(finalParams.defaultStyle) &&
+        finalParams.styles.includes(finalParams.defaultLnf) &&
         finalParams.scope.includes('lnf')
     ) {
         vars.comment(
@@ -88,7 +88,7 @@ export default function ({
         */`,
         ).code(
             `.s-datetime-picker[lnf="default"]:not(.s-bare) {
-                @sugar.ui.datetimePicker($style: ${finalParams.defaultStyle}, $scope: lnf);
+                @sugar.ui.datetimePicker($lnf: ${finalParams.defaultLnf}, $scope: lnf);
             }`,
             {
                 type: 'CssClass',

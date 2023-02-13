@@ -256,6 +256,11 @@ export default class SComponentUtils extends __SClass {
                 this._isInViewport = false;
             });
 
+        // bare class
+        if (this.props.bare) {
+            this.node.classList.add('s-bare');
+        }
+
         // @ts-ignore
         const styleStr = this.settings.style;
         this.injectStyle(styleStr ?? '');

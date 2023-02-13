@@ -38,5 +38,8 @@ function registerFilters($twig)
     $replace = require __DIR__ . '/string/replace.php';
     $twig->addFilter($replace);
 
+    $typeToString = require __DIR__ . '/type/typeToString.php';
+    $twig->addFilter($typeToString);
+
     return $twig;
 }

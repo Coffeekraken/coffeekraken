@@ -12,6 +12,7 @@
             "@coffeekraken/s-builder",
             "@coffeekraken/s-carpenter",
             "@coffeekraken/s-class",
+            "@coffeekraken/s-classmap",
             "@coffeekraken/s-clipboard-copy-component",
             "@coffeekraken/s-code-example-component",
             "@coffeekraken/s-code-formatter-prettier",
@@ -57,6 +58,7 @@
             "@coffeekraken/s-inline-feature",
             "@coffeekraken/s-interface",
             "@coffeekraken/s-kitchen",
+            "@coffeekraken/s-lazy-feature",
             "@coffeekraken/s-lit-component",
             "@coffeekraken/s-log",
             "@coffeekraken/s-markdown-builder",
@@ -103,6 +105,109 @@
             "@coffeekraken/sugar"
         ],
         "map": {
+            "@coffeekraken.s-monorepo.config.monorepo.rootDir": {
+                "id": "@coffeekraken.s-monorepo.config.monorepo.rootDir",
+                "name": "rootDir",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ],
+                    "raw": "String"
+                },
+                "default": "null",
+                "description": "Specify the root of the monorepo. If not set, it will be computed from the current working directory",
+                "namespace": "@coffeekraken.s-monorepo.config.monorepo",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "monorepo.config.ts",
+                "extension": "config",
+                "relPath": "src/config/monorepo.config.ts"
+            },
+            "@coffeekraken.s-monorepo.config.monorepo.packagesGlob": {
+                "id": "@coffeekraken.s-monorepo.config.monorepo.packagesGlob",
+                "name": "packagesGlob",
+                "type": {
+                    "types": [
+                        {
+                            "type": "string"
+                        }
+                    ],
+                    "raw": "string"
+                },
+                "default": "packages/* /*",
+                "description": "Specify some globs to search for packages relative to the monorepo root directory.\n!!! target folders and not a package.json file, etc...\nThe \"packages/@...\" folders are excluded cause they have as goal to store the none-distributed\n\"projects\".",
+                "namespace": "@coffeekraken.s-monorepo.config.monorepo",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "monorepo.config.ts",
+                "extension": "config",
+                "relPath": "src/config/monorepo.config.ts"
+            },
+            "@coffeekraken.s-monorepo.config.monorepo.upgrade.files": {
+                "id": "@coffeekraken.s-monorepo.config.monorepo.upgrade.files",
+                "name": "files",
+                "type": {
+                    "types": [
+                        {
+                            "type": "array",
+                            "of": [
+                                "string"
+                            ]
+                        }
+                    ],
+                    "raw": "string[]"
+                },
+                "default": "['package.json','composer.json']",
+                "description": "Specify some files to upgrade in each packages when doing a monorepo.upgrade call",
+                "namespace": "@coffeekraken.s-monorepo.config.monorepo.upgrade",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "monorepo.config.ts",
+                "extension": "config",
+                "relPath": "src/config/monorepo.config.ts"
+            },
+            "@coffeekraken.s-monorepo.config.monorepo.upgrade.fields": {
+                "id": "@coffeekraken.s-monorepo.config.monorepo.upgrade.fields",
+                "name": "fields",
+                "type": {
+                    "types": [
+                        {
+                            "type": "array",
+                            "of": [
+                                "string"
+                            ]
+                        }
+                    ],
+                    "raw": "string[]"
+                },
+                "default": "['version','homepage']",
+                "description": "Specify some fields to upgrade in each packages files",
+                "namespace": "@coffeekraken.s-monorepo.config.monorepo.upgrade",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "monorepo.config.ts",
+                "extension": "config",
+                "relPath": "src/config/monorepo.config.ts",
+                "children": {}
+            },
             "@coffeekraken.s-monorepo.doc.README": {
                 "id": "@coffeekraken.s-monorepo.doc.README",
                 "name": "README",

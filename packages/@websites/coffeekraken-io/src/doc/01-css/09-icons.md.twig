@@ -23,7 +23,7 @@ This make the treatment and usage of these icons a pain in the ass to say at lea
 
 Our solution to this is the `@sugar.icon.classes` mixin that let you register all of your icons from different sources and use them down the line with a single class syntax the looks like `.s-icon:user`.
 
-> Your final icons will be generated in a font-icon format so you can apply them colors, and all features a text can have.
+> Your final icons will be generated in a **font-icon format** so you can apply them colors, and all features a text can have.
 
 ## Register some icons
 
@@ -36,6 +36,7 @@ To register some icons, simply call the `@sugar.icon.classes` mixin with the lis
     fa:hammer:todo
     fs:src/icons/read-direction.svg:support-rtl
     fs:src/icons/ *.svg
+    {# sugar:ui-help-solid:help #}
 );
 ```
 
@@ -51,9 +52,10 @@ Each line define an icon using this syntax:
 
 For now, we support 2 protocols that are:
 
--   `fa|fab|fas|fad|fal`: These are [Font awesome](https://fontawesome.com) icons
--   `fs`: This is `filesystem` plain SVG icons
+- `fa|fab|fas|fad|fal`: These are [Font awesome](https://fontawesome.com) icons
+- `fs`: This is `filesystem` plain SVG icons
     -   Support glob paths like `src/icons/*.svg`
+{# - `sugar`: Access the sugar icons (list bellow) #}
 
 > These are the supported protocols that we have for now. We can as well add some depending on your needs and requests through our different communication channels.
 
@@ -66,5 +68,25 @@ To use your registered icons, simply reference them inside your html like so:
 <i class="s-icon:support-rtl"></i>
 <!-- etc... -->
 ```
+
+{# ## Sugar icons
+
+Sugar comes with some default icons that you can use like so:
+
+```css
+@sugar.icon.classes(
+    sugar:misc-eye
+)
+```
+
+```html
+<i class="s-icon:misc-eye"></i>
+```
+
+Here's the list of available icons:
+
+{% for icon in sugarIcons %}
+- <i class="s-icon:{{ icon }}"></i> `{{ icon }}`
+{% endfor %} #}
 
 {% endblock %}

@@ -10,7 +10,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const fs_1 = require("@coffeekraken/sugar/fs");
-function generic(express, settings, config) {
+function generic({ express, settings, config }) {
     return __awaiter(this, void 0, void 0, function* () {
         // register handler
         config.handlers.generic = {
@@ -21,4 +21,4 @@ function generic(express, settings, config) {
     });
 }
 exports.default = generic;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7O0FBQUEsK0NBQW1EO0FBRW5ELFNBQThCLE9BQU8sQ0FBQyxPQUFPLEVBQUUsUUFBUSxFQUFFLE1BQU07O1FBQzNELG1CQUFtQjtRQUNuQixNQUFNLENBQUMsUUFBUSxDQUFDLE9BQU8sR0FBRztZQUN0QixXQUFXLEVBQ1Asa0hBQWtIO1lBQ3RILElBQUksRUFBRSxHQUFHLElBQUEsY0FBUyxHQUFFLGlCQUFpQjtTQUN4QyxDQUFDO1FBRUYsT0FBTyxJQUFJLENBQUM7SUFDaEIsQ0FBQztDQUFBO0FBVEQsMEJBU0MifQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7O0FBQUEsK0NBQW1EO0FBRW5ELFNBQThCLE9BQU8sQ0FBQyxFQUFFLE9BQU8sRUFBRSxRQUFRLEVBQUUsTUFBTSxFQUFFOztRQUMvRCxtQkFBbUI7UUFDbkIsTUFBTSxDQUFDLFFBQVEsQ0FBQyxPQUFPLEdBQUc7WUFDdEIsV0FBVyxFQUNQLGtIQUFrSDtZQUN0SCxJQUFJLEVBQUUsR0FBRyxJQUFBLGNBQVMsR0FBRSxpQkFBaUI7U0FDeEMsQ0FBQztRQUVGLE9BQU8sSUFBSSxDQUFDO0lBQ2hCLENBQUM7Q0FBQTtBQVRELDBCQVNDIn0=

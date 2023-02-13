@@ -13,40 +13,9 @@ import { __deepMerge } from '@coffeekraken/sugar/object';
 import __dashCase from '@coffeekraken/sugar/shared/string/dashCase';
 import { html as __html, LitElement } from 'lit';
 
-function tplToStr(tpl) {
-    if (!tpl) {
-        return '';
-    }
-
-    if (typeof tpl === 'string') {
-        return tpl;
-    } else if (tpl.strings && tpl.values) {
-        let str = tpl.strings[0];
-        for (let i = 1; i < tpl.strings.length; i++) {
-            const val = tpl.values?.[i - 1] ?? '';
-            if (typeof val === 'string') {
-                str += val;
-            } else if (Array.isArray(val)) {
-                val.forEach((v) => {
-                    str += tplToStr(v);
-                });
-            } else if (val.values) {
-                str += tplToStr(val);
-            }
-
-            str += tpl.strings[i] ?? '';
-        }
-        return str;
-    } else if (tpl.values) {
-        let str = '';
-        tpl.values.forEach((val) => {
-            str += val;
-        });
-        return str;
-    }
-}
-
 export function html(strings, ...values) {
+    return __html(strings, ...values);
+
     const newStrings = [];
     newStrings.raw = strings.raw;
     const newValues = [];
@@ -118,7 +87,6 @@ export interface ISLitComponentDefaultProps {
     mountWhen: 'directly' | 'direct' | 'inViewport';
     adoptStyle: boolean;
     saveState: boolean;
-    defaultStyle: boolean;
 }
 
 export default class SLitComponent extends LitElement {

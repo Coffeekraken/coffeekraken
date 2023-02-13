@@ -3,7 +3,7 @@ import __SSugarConfig from '@coffeekraken/s-sugar-config';
 import { __packageRootDir } from '@coffeekraken/sugar/path';
 import __express from 'express';
 
-export default function rootFiles(express, settings, config) {
+export default function rootFiles({ express, settings, config }) {
     return new Promise(async (resolve) => {
         const packageRoot = __packageRootDir(),
             publicDir = __SSugarConfig.get('storage.src.publicDir');

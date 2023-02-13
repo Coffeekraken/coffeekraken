@@ -7,7 +7,8 @@ export default function (api) {
              * @type              Number
              * @default           1px
              *
-             * Specify the "default" border width
+             * Specify the "default" border width.
+             * MUST be an absolute value like "1px", etc...
              *
              * @since             2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -19,7 +20,8 @@ export default function (api) {
              * @type              Number
              * @default           0
              *
-             * Specify the "0" border width
+             * Specify the "0" border width.
+             * MUST be a scale factor relative to the "default" absolute value specified.
              *
              * @since             2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -31,7 +33,8 @@ export default function (api) {
              * @type              Number
              * @default           1
              *
-             * Specify the "10" border width
+             * Specify the "10" border width.
+             * MUST be a scale factor relative to the "default" absolute value specified.
              *
              * @since             2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -43,7 +46,8 @@ export default function (api) {
              * @type              Number
              * @default           2
              *
-             * Specify the "20" border width
+             * Specify the "20" border width.
+             * MUST be a scale factor relative to the "default" absolute value specified.
              *
              * @since             2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -55,7 +59,8 @@ export default function (api) {
              * @type              Number
              * @default           4
              *
-             * Specify the "30" border width
+             * Specify the "30" border width.
+             * MUST be a scale factor relative to the "default" absolute value specified.
              *
              * @since             2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -67,7 +72,8 @@ export default function (api) {
              * @type              Number
              * @default           6
              *
-             * Specify the "40" border width
+             * Specify the "40" border width.
+             * MUST be a scale factor relative to the "default" absolute value specified.
              *
              * @since             2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -79,7 +85,8 @@ export default function (api) {
              * @type              Number
              * @default           8
              *
-             * Specify the "50" border width
+             * Specify the "50" border width.
+             * MUST be a scale factor relative to the "default" absolute value specified.
              *
              * @since             2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -91,7 +98,8 @@ export default function (api) {
              * @type              Number
              * @default           12
              *
-             * Specify the "60" border width
+             * Specify the "60" border width.
+             * MUST be a scale factor relative to the "default" absolute value specified.
              *
              * @since             2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -103,7 +111,8 @@ export default function (api) {
              * @type              Number
              * @default           16
              *
-             * Specify the "70" border width
+             * Specify the "70" border width.
+             * MUST be a scale factor relative to the "default" absolute value specified.
              *
              * @since             2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -115,7 +124,8 @@ export default function (api) {
              * @type              Number
              * @default           20
              *
-             * Specify the "80" border width
+             * Specify the "80" border width.
+             * MUST be a scale factor relative to the "default" absolute value specified.
              *
              * @since             2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -127,7 +137,8 @@ export default function (api) {
              * @type              Number
              * @default           24
              *
-             * Specify the "90" border width
+             * Specify the "90" border width.
+             * MUST be a scale factor relative to the "default" absolute value specified.
              *
              * @since             2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -139,7 +150,8 @@ export default function (api) {
              * @type              Number
              * @default           30
              *
-             * Specify the "90" border width
+             * Specify the "100" border width.
+             * MUST be a scale factor relative to the "default" absolute value specified.
              *
              * @since             2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -296,7 +308,7 @@ export default function (api) {
              * @type              Number
              * @default           12
              *
-             * Specify the "90" border radius.
+             * Specify the "100" border radius.
              * MUST be a scale factor relative to the "default" absolute value specified.
              *
              * @since             2.0.0
@@ -306,4 +318,4 @@ export default function (api) {
         },
     };
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE1BQU0sQ0FBQyxPQUFPLFdBQVcsR0FBRztJQUN4QixPQUFPO1FBQ0gsS0FBSyxFQUFFO1lBQ0g7Ozs7Ozs7Ozs7ZUFVRztZQUNILE9BQU8sRUFBRSxLQUFLO1lBRWQ7Ozs7Ozs7Ozs7ZUFVRztZQUNILENBQUMsRUFBRSxDQUFDO1lBRUo7Ozs7Ozs7Ozs7ZUFVRztZQUNILEVBQUUsRUFBRSxDQUFDO1lBRUw7Ozs7Ozs7Ozs7ZUFVRztZQUNILEVBQUUsRUFBRSxDQUFDO1lBRUw7Ozs7Ozs7Ozs7ZUFVRztZQUNILEVBQUUsRUFBRSxDQUFDO1lBRUw7Ozs7Ozs7Ozs7ZUFVRztZQUNILEVBQUUsRUFBRSxDQUFDO1lBRUw7Ozs7Ozs7Ozs7ZUFVRztZQUNILEVBQUUsRUFBRSxDQUFDO1lBRUw7Ozs7Ozs7Ozs7ZUFVRztZQUNILEVBQUUsRUFBRSxFQUFFO1lBRU47Ozs7Ozs7Ozs7ZUFVRztZQUNILEVBQUUsRUFBRSxFQUFFO1lBRU47Ozs7Ozs7Ozs7ZUFVRztZQUNILEVBQUUsRUFBRSxFQUFFO1lBRU47Ozs7Ozs7Ozs7ZUFVRztZQUNILEVBQUUsRUFBRSxFQUFFO1lBRU47Ozs7Ozs7Ozs7ZUFVRztZQUNILEdBQUcsRUFBRSxFQUFFO1NBQ1Y7UUFFRCxNQUFNLEVBQUU7WUFDSjs7Ozs7Ozs7Ozs7ZUFXRztZQUNILE9BQU8sRUFBRSxLQUFLO1lBRWQ7Ozs7Ozs7Ozs7O2VBV0c7WUFDSCxDQUFDLEVBQUUsQ0FBQztZQUVKOzs7Ozs7Ozs7OztlQVdHO1lBQ0gsRUFBRSxFQUFFLEdBQUc7WUFFUDs7Ozs7Ozs7Ozs7ZUFXRztZQUNILEVBQUUsRUFBRSxHQUFHO1lBRVA7Ozs7Ozs7Ozs7O2VBV0c7WUFDSCxFQUFFLEVBQUUsR0FBRztZQUVQOzs7Ozs7Ozs7OztlQVdHO1lBQ0gsRUFBRSxFQUFFLEdBQUc7WUFFUDs7Ozs7Ozs7Ozs7ZUFXRztZQUNILEVBQUUsRUFBRSxDQUFDO1lBRUw7Ozs7Ozs7Ozs7O2VBV0c7WUFDSCxFQUFFLEVBQUUsR0FBRztZQUVQOzs7Ozs7Ozs7OztlQVdHO1lBQ0gsRUFBRSxFQUFFLEdBQUc7WUFFUDs7Ozs7Ozs7Ozs7ZUFXRztZQUNILEVBQUUsRUFBRSxDQUFDO1lBRUw7Ozs7Ozs7Ozs7O2VBV0c7WUFDSCxFQUFFLEVBQUUsRUFBRTtZQUVOOzs7Ozs7Ozs7OztlQVdHO1lBQ0gsR0FBRyxFQUFFLEVBQUU7U0FDVjtLQUNKLENBQUM7QUFDTixDQUFDIn0=
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE1BQU0sQ0FBQyxPQUFPLFdBQVcsR0FBRztJQUN4QixPQUFPO1FBQ0gsS0FBSyxFQUFFO1lBQ0g7Ozs7Ozs7Ozs7O2VBV0c7WUFDSCxPQUFPLEVBQUUsS0FBSztZQUVkOzs7Ozs7Ozs7OztlQVdHO1lBQ0gsQ0FBQyxFQUFFLENBQUM7WUFFSjs7Ozs7Ozs7Ozs7ZUFXRztZQUNILEVBQUUsRUFBRSxDQUFDO1lBRUw7Ozs7Ozs7Ozs7O2VBV0c7WUFDSCxFQUFFLEVBQUUsQ0FBQztZQUVMOzs7Ozs7Ozs7OztlQVdHO1lBQ0gsRUFBRSxFQUFFLENBQUM7WUFFTDs7Ozs7Ozs7Ozs7ZUFXRztZQUNILEVBQUUsRUFBRSxDQUFDO1lBRUw7Ozs7Ozs7Ozs7O2VBV0c7WUFDSCxFQUFFLEVBQUUsQ0FBQztZQUVMOzs7Ozs7Ozs7OztlQVdHO1lBQ0gsRUFBRSxFQUFFLEVBQUU7WUFFTjs7Ozs7Ozs7Ozs7ZUFXRztZQUNILEVBQUUsRUFBRSxFQUFFO1lBRU47Ozs7Ozs7Ozs7O2VBV0c7WUFDSCxFQUFFLEVBQUUsRUFBRTtZQUVOOzs7Ozs7Ozs7OztlQVdHO1lBQ0gsRUFBRSxFQUFFLEVBQUU7WUFFTjs7Ozs7Ozs7Ozs7ZUFXRztZQUNILEdBQUcsRUFBRSxFQUFFO1NBQ1Y7UUFFRCxNQUFNLEVBQUU7WUFDSjs7Ozs7Ozs7Ozs7ZUFXRztZQUNILE9BQU8sRUFBRSxLQUFLO1lBRWQ7Ozs7Ozs7Ozs7O2VBV0c7WUFDSCxDQUFDLEVBQUUsQ0FBQztZQUVKOzs7Ozs7Ozs7OztlQVdHO1lBQ0gsRUFBRSxFQUFFLEdBQUc7WUFFUDs7Ozs7Ozs7Ozs7ZUFXRztZQUNILEVBQUUsRUFBRSxHQUFHO1lBRVA7Ozs7Ozs7Ozs7O2VBV0c7WUFDSCxFQUFFLEVBQUUsR0FBRztZQUVQOzs7Ozs7Ozs7OztlQVdHO1lBQ0gsRUFBRSxFQUFFLEdBQUc7WUFFUDs7Ozs7Ozs7Ozs7ZUFXRztZQUNILEVBQUUsRUFBRSxDQUFDO1lBRUw7Ozs7Ozs7Ozs7O2VBV0c7WUFDSCxFQUFFLEVBQUUsR0FBRztZQUVQOzs7Ozs7Ozs7OztlQVdHO1lBQ0gsRUFBRSxFQUFFLEdBQUc7WUFFUDs7Ozs7Ozs7Ozs7ZUFXRztZQUNILEVBQUUsRUFBRSxDQUFDO1lBRUw7Ozs7Ozs7Ozs7O2VBV0c7WUFDSCxFQUFFLEVBQUUsRUFBRTtZQUVOOzs7Ozs7Ozs7OztlQVdHO1lBQ0gsR0FBRyxFQUFFLEVBQUU7U0FDVjtLQUNKLENBQUM7QUFDTixDQUFDIn0=

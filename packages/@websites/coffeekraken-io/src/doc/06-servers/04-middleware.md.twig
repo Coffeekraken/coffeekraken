@@ -26,7 +26,7 @@ To register your own handler, the easiest way is to register it through a module
 > To check how to register a module, check the [modules documentation page](/doc/servers/modules).
 
 ```js
-export default function myModule(express, settings, config) {
+export default function myModule({express, settings, config, startParams}) {
   config.middlewares.myMiddleware = {
     path: `/absolute/path/to/my/middleware`,
     settings: {},

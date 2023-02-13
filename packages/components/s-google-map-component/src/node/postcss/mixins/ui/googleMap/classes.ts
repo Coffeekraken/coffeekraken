@@ -79,18 +79,6 @@ export default function ({
         );
     }
 
-    // // default color
-    // if (finalParams.scope.includes('lnf')) {
-    //     vars.code(
-    //         () => `
-    //         .s-google-map:not(.s-color) {
-    //             @sugar.color(${finalParams.defaultColor});
-    //         }
-    //     `,
-    //         { type: 'CssClass' },
-    //     );
-    // }
-
     if (finalParams.scope.indexOf('vr') !== -1) {
         vars.comment(
             `/**

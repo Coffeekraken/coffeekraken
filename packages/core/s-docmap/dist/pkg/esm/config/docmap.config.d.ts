@@ -26,7 +26,6 @@ export default function (api: any): {
         exclude: string[];
         excludeByTags: {
             
-            namespace: RegExp[];
             
             type: RegExp[];
         };

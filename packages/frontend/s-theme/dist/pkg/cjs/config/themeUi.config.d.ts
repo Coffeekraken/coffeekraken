@@ -11,13 +11,7 @@ declare const _default: (api: any) => {
         
         readonly transition: any;
         
-        defaultColor: string;
-        
-        defaultStyle: string;
-        
         defaultLnf: string;
-        
-        defaultShape: string;
         
         readonly depth: any;
         
@@ -43,14 +37,6 @@ declare const _default: (api: any) => {
         
         readonly outline: any;
         
-        defaultColor: string;
-        
-        defaultStyle: string;
-        
-        defaultLnf: string;
-        
-        defaultShape: string;
-        
         readonly depth: any;
         rhythmVertical: {
             
@@ -71,7 +57,7 @@ declare const _default: (api: any) => {
         
         size: string;
         
-        defaultColor: string;
+        color: string;
     };
     label: {
         

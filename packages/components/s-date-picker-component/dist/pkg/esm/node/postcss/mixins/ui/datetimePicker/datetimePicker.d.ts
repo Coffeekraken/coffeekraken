@@ -1,7 +1,7 @@
 import __SInterface from '@coffeekraken/s-interface';
 declare class postcssUiDatetimePickerInterface extends __SInterface {
     static get _definition(): {
-        style: {
+        lnf: {
             type: string;
             values: string[];
             default: any;
@@ -17,7 +17,7 @@ declare class postcssUiDatetimePickerInterface extends __SInterface {
     };
 }
 export interface IPostcssUiDatetimePickerParams {
-    style: 'solid';
+    lnf: 'solid';
     scope: ('bare' | 'lnf')[];
 }
 export { postcssUiDatetimePickerInterface as interface };

@@ -12,6 +12,7 @@
             "@coffeekraken/s-builder",
             "@coffeekraken/s-carpenter",
             "@coffeekraken/s-class",
+            "@coffeekraken/s-classmap",
             "@coffeekraken/s-clipboard-copy-component",
             "@coffeekraken/s-code-example-component",
             "@coffeekraken/s-code-formatter-prettier",
@@ -57,6 +58,7 @@
             "@coffeekraken/s-inline-feature",
             "@coffeekraken/s-interface",
             "@coffeekraken/s-kitchen",
+            "@coffeekraken/s-lazy-feature",
             "@coffeekraken/s-lit-component",
             "@coffeekraken/s-log",
             "@coffeekraken/s-markdown-builder",
@@ -103,6 +105,223 @@
             "@coffeekraken/sugar"
         ],
         "map": {
+            "@coffeekraken.s-package.config.package.manager": {
+                "id": "@coffeekraken.s-package.config.package.manager",
+                "name": "manager",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ],
+                    "raw": "String"
+                },
+                "default": "yarn",
+                "description": "Specify the package manager you want to use. Can be \"npm\" or \"yarn\"",
+                "namespace": "@coffeekraken.s-package.config.package",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "package.config.ts",
+                "extension": "config",
+                "relPath": "src/config/package.config.ts"
+            },
+            "@coffeekraken.s-package.config.package.rootDir": {
+                "id": "@coffeekraken.s-package.config.package.rootDir",
+                "name": "rootDir",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ],
+                    "raw": "String"
+                },
+                "default": "[config.storage.package.rootDir]",
+                "description": "Specify a directory from where to search for files to exports using the `glob` config",
+                "namespace": "@coffeekraken.s-package.config.package",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "package.config.ts",
+                "extension": "config",
+                "relPath": "src/config/package.config.ts"
+            },
+            "@coffeekraken.s-package.config.package.readme.path": {
+                "id": "@coffeekraken.s-package.config.package.readme.path",
+                "name": "path",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ],
+                    "raw": "String"
+                },
+                "default": "[config.storage.package.rootDir]/README.md",
+                "description": "Specify the path to the README file",
+                "namespace": "@coffeekraken.s-package.config.package.readme",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "package.config.ts",
+                "extension": "config",
+                "relPath": "src/config/package.config.ts"
+            },
+            "@coffeekraken.s-package.config.package.exports.defaultPackageJson": {
+                "id": "@coffeekraken.s-package.config.package.exports.defaultPackageJson",
+                "name": "defaultPackageJson",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Object"
+                        }
+                    ],
+                    "raw": "Object"
+                },
+                "default": "true",
+                "description": "Specify some default packages you want to install when you run `sugar package.install`",
+                "namespace": "@coffeekraken.s-package.config.package.exports",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "package.config.ts",
+                "extension": "config",
+                "relPath": "src/config/package.config.ts"
+            },
+            "@coffeekraken.s-package.config.package.checkDependencies.dirs": {
+                "id": "@coffeekraken.s-package.config.package.checkDependencies.dirs",
+                "name": "dirs",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ],
+                    "raw": "String"
+                },
+                "default": "['dist/** /exports.js']",
+                "description": "Specify some directories in which to check for dependencies issues, etc...",
+                "namespace": "@coffeekraken.s-package.config.package.checkDependencies",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "package.config.ts",
+                "extension": "config",
+                "relPath": "src/config/package.config.ts"
+            },
+            "@coffeekraken.s-package.config.package.checkDependencies.packagesMap": {
+                "id": "@coffeekraken.s-package.config.package.checkDependencies.packagesMap",
+                "name": "packagesMap",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ],
+                    "raw": "String"
+                },
+                "default": "{'^@coffeekraken/'}",
+                "description": "Specify some patterns for packages you want to add in package.json without installing them.\nThis is usefull for monorepo.",
+                "namespace": "@coffeekraken.s-package.config.package.checkDependencies",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "package.config.ts",
+                "extension": "config",
+                "relPath": "src/config/package.config.ts"
+            },
+            "@coffeekraken.s-package.config.package.exports.glob": {
+                "id": "@coffeekraken.s-package.config.package.exports.glob",
+                "name": "glob",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ],
+                    "raw": "String"
+                },
+                "default": "['dist/** /exports.js']",
+                "description": "Specify a glob pattern relative to the \"rootDir\" to specify files you want to exports in your package.json",
+                "namespace": "@coffeekraken.s-package.config.package.exports",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "package.config.ts",
+                "extension": "config",
+                "relPath": "src/config/package.config.ts"
+            },
+            "@coffeekraken.s-package.config.package.exports.folderModuleMap": {
+                "id": "@coffeekraken.s-package.config.package.exports.folderModuleMap",
+                "name": "folderModuleMap",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ],
+                    "raw": "String"
+                },
+                "default": "['esm']",
+                "description": "Specify some folders you want to map to a specific package type like \"import\" or \"require\".",
+                "namespace": "@coffeekraken.s-package.config.package.exports",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "package.config.ts",
+                "extension": "config",
+                "relPath": "src/config/package.config.ts"
+            },
+            "@coffeekraken.s-package.config.package.exports.folderPlatformMap": {
+                "id": "@coffeekraken.s-package.config.package.exports.folderPlatformMap",
+                "name": "folderPlatformMap",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ],
+                    "raw": "String"
+                },
+                "default": "['esm']",
+                "description": "Specify some folders you want to map to a specific platform like \"node\" or \"browser\", etc...",
+                "namespace": "@coffeekraken.s-package.config.package.exports",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "package.config.ts",
+                "extension": "config",
+                "relPath": "src/config/package.config.ts",
+                "children": {}
+            },
             "@coffeekraken.s-package.doc.README": {
                 "id": "@coffeekraken.s-package.doc.README",
                 "name": "README",

@@ -13,8 +13,6 @@ import __SInterface from '@coffeekraken/s-interface';
  * @param       {('default')[]}                                                [lnfs=['default']]         The lnf(s) you want to generate
  * @param       {('default'|'square'|'rounded')[]}                 [shape=['default'|'square','pill','rounded']]         The shape(s) you want to generate
  * @param       {'default''}                                                  [defaultLnf='theme.ui.avatar.defaultLnf']           The default lnf you want
- * @param       {'default'|'square'|'rounded'}                                     [defaultShape='theme.ui.avatar.defaultShape']           The default shape you want
- * @param       {String}                            [defaultColor=theme.ui.avatar.defaultColor]
  * @param       {('bare'|'lnf'|'shape'|'interactive'|'notifications')[]}        [scope=['bare','lnf','shape','interactive','notifications']]      The scope you want to generate
  * @return      {Css}                   The corresponding css
  *

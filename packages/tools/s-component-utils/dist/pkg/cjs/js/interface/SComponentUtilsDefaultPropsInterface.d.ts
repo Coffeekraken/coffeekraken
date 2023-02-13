@@ -39,6 +39,11 @@ export default class SComponentUtilsDefaultPropsInterface extends __SInterface {
             default: string;
             physical: boolean;
         };
+        bare: {
+            description: string;
+            type: string;
+            default: boolean;
+        };
         responsive: {
             description: string;
             type: string;

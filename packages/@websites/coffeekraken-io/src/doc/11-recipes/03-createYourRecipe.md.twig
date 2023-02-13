@@ -24,7 +24,7 @@ Recipes are what we use to drive a project. It is used to generate a new project
 To register a new recipe, you have to create a new file called `kitchen.config.ts` inside of the `.sugar` folder at your project root. Here's the content of this file:
 
 ```js
-export default function (env, config) {
+export default function () {
     return {
         recipes: {
             myCoolRecipe: {
@@ -161,6 +161,8 @@ At this point, your recipe `dev` stack has to run and throw an error because we 
 
 ### Node process file
 
+When you set the `process` property on one of your action, it **MUST** be an absolute path to a process file.
+
 A node process file is a simply nodejs file that exports a function that will be called when our action is runned.
 
 ```js
@@ -175,21 +177,5 @@ export default function (params) {
 ```
 
 This function **MUST** return a `Promise`. Inside it, you can do whatever you need.
-
-> We encourage you to make use of our [@coffeekraken/s-promise](/@coffeekraken/s-promise/doc/readme) extended promise package to make use of his `emit` capabilities in order to log your messages with more control...
-
-```js
-import __SPromise from '@coffeekraken/s-promise';
-
-export default function (params) {
-    return new __SPromise(({ resolve, reject, emit }) => {
-        emit('log', {
-            value: 'Hello world',
-        });
-        // do something...
-        resolve();
-    });
-}
-```
 
 {% endblock %}

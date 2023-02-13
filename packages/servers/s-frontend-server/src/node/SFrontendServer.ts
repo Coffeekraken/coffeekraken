@@ -56,6 +56,13 @@ export interface ISFrontendServerStartParams {
     target: 'development' | 'production';
 }
 
+export interface ISFrontendServerModuleApi {
+    express: __express;
+    settings: any;
+    config: any;
+    startParams: ISFrontendServerStartParams;
+}
+
 export interface ISFrontendServerAddDefaultPagesParams {
     yes: boolean;
     pagesDir: string;
@@ -220,11 +227,12 @@ export default class SFrontendServer extends __SClass {
                             `<red>${this.constructor.name}</red> Sorry but a module called "<yellow>startServer.${moduleId}</yellow>" has been registered but does not exists under "<cyan>${moduleObj.path}</cyan>"`,
                         );
                     }
-                    await module.default(
-                        this._express,
-                        moduleObj.settings,
-                        this._frontendServerConfig,
-                    );
+                    await module.default(<ISFrontendServerModuleApi>{
+                        express: this._express,
+                        settings: moduleObj.settings,
+                        config: this._frontendServerConfig,
+                        startParams: finalParams,
+                    });
                 }
             }
 
@@ -702,6 +710,7 @@ export default class SFrontendServer extends __SClass {
                             next,
                             pageConfig: _pageConfig,
                             pageFile,
+                            config: this._frontendServerConfig,
                             frontendServerConfig: this._frontendServerConfig,
                         });
                     });

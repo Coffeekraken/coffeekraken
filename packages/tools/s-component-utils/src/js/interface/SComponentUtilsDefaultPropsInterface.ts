@@ -74,6 +74,12 @@ export default class SComponentUtilsDefaultPropsInterface extends __SInterface {
                 default: 'default',
                 physical: true,
             },
+            bare: {
+                description:
+                    'Specify if you want your component with only the bare styling. It just add the "s-bare" class on the component itself',
+                type: 'Boolean',
+                default: false,
+            },
             responsive: {
                 description:
                     'Specify some responsive properties. A "media" property is required and has to be either a media query, or a media query name defined in the config.themeMedia.queries theme setting',

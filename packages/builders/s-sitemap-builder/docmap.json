@@ -12,6 +12,7 @@
             "@coffeekraken/s-builder",
             "@coffeekraken/s-carpenter",
             "@coffeekraken/s-class",
+            "@coffeekraken/s-classmap",
             "@coffeekraken/s-clipboard-copy-component",
             "@coffeekraken/s-code-example-component",
             "@coffeekraken/s-code-formatter-prettier",
@@ -57,6 +58,7 @@
             "@coffeekraken/s-inline-feature",
             "@coffeekraken/s-interface",
             "@coffeekraken/s-kitchen",
+            "@coffeekraken/s-lazy-feature",
             "@coffeekraken/s-lit-component",
             "@coffeekraken/s-log",
             "@coffeekraken/s-markdown-builder",
@@ -103,6 +105,226 @@
             "@coffeekraken/sugar"
         ],
         "map": {
+            "@coffeekraken.s-sitemap-builder.config.sitemapBuilder.build.output": {
+                "id": "@coffeekraken.s-sitemap-builder.config.sitemapBuilder.build.output",
+                "name": "output",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ],
+                    "raw": "String"
+                },
+                "default": "[config.storage.src.publicDir]/sitemap.xml",
+                "description": "Specify if you want to use the docmap.json as a sitemap source",
+                "namespace": "@coffeekraken.s-sitemap-builder.config.sitemapBuilder.build",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "sitemapBuilder.config.ts",
+                "extension": "config",
+                "relPath": "src/config/sitemapBuilder.config.ts"
+            },
+            "@coffeekraken.s-sitemap-builder.config.sitemapBuilder.sources.file.active": {
+                "id": "@coffeekraken.s-sitemap-builder.config.sitemapBuilder.sources.file.active",
+                "name": "active",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Boolean"
+                        }
+                    ],
+                    "raw": "Boolean"
+                },
+                "default": "true",
+                "description": "Specify if you want to use the files (.sitemap.{ts,js}) as a sitemap source",
+                "namespace": "@coffeekraken.s-sitemap-builder.config.sitemapBuilder.sources.file",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "sitemapBuilder.config.ts",
+                "extension": "config",
+                "relPath": "src/config/sitemapBuilder.config.ts"
+            },
+            "@coffeekraken.s-sitemap-builder.config.sitemapBuilder.sources.file.settings": {
+                "id": "@coffeekraken.s-sitemap-builder.config.sitemapBuilder.sources.file.settings",
+                "name": "settings",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Object"
+                        }
+                    ],
+                    "raw": "Object"
+                },
+                "default": "{}",
+                "description": "Specify some setting to pass to the file sitemap source",
+                "namespace": "@coffeekraken.s-sitemap-builder.config.sitemapBuilder.sources.file",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "sitemapBuilder.config.ts",
+                "extension": "config",
+                "relPath": "src/config/sitemapBuilder.config.ts"
+            },
+            "@coffeekraken.s-sitemap-builder.config.sitemapBuilder.sources.file.settings.glob": {
+                "id": "@coffeekraken.s-sitemap-builder.config.sitemapBuilder.sources.file.settings.glob",
+                "name": "glob",
+                "type": {
+                    "types": [
+                        {
+                            "type": "array",
+                            "of": [
+                                "String"
+                            ]
+                        }
+                    ],
+                    "raw": "String[]"
+                },
+                "default": "['** /*.sitemap.js']",
+                "description": "Specify the glob(s) to use to find the sitemap files",
+                "namespace": "@coffeekraken.s-sitemap-builder.config.sitemapBuilder.sources.file.settings",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "sitemapBuilder.config.ts",
+                "extension": "config",
+                "relPath": "src/config/sitemapBuilder.config.ts"
+            },
+            "@coffeekraken.s-sitemap-builder.config.sitemapBuilder.sources.file.settings.inDir": {
+                "id": "@coffeekraken.s-sitemap-builder.config.sitemapBuilder.sources.file.settings.inDir",
+                "name": "inDir",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ],
+                    "raw": "String"
+                },
+                "default": "[config.storage.src.rootDir]",
+                "description": "Specify the input directory where to search for sitemap files",
+                "namespace": "@coffeekraken.s-sitemap-builder.config.sitemapBuilder.sources.file.settings",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "sitemapBuilder.config.ts",
+                "extension": "config",
+                "relPath": "src/config/sitemapBuilder.config.ts"
+            },
+            "@coffeekraken.s-sitemap-builder.config.sitemapBuilder.sources.file.path": {
+                "id": "@coffeekraken.s-sitemap-builder.config.sitemapBuilder.sources.file.path",
+                "name": "path",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ],
+                    "raw": "String"
+                },
+                "default": "__path.resolve(`${__dirname()}/../node/sources/SSitemapFileSource`)",
+                "description": "Specify where to find the file source",
+                "namespace": "@coffeekraken.s-sitemap-builder.config.sitemapBuilder.sources.file",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "sitemapBuilder.config.ts",
+                "extension": "config",
+                "relPath": "src/config/sitemapBuilder.config.ts"
+            },
+            "@coffeekraken.s-sitemap-builder.config.sitemapBuilder.sources.docmap.active": {
+                "id": "@coffeekraken.s-sitemap-builder.config.sitemapBuilder.sources.docmap.active",
+                "name": "active",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Boolean"
+                        }
+                    ],
+                    "raw": "Boolean"
+                },
+                "default": "false",
+                "description": "Specify if you want to use the docmap.json as a sitemap source",
+                "namespace": "@coffeekraken.s-sitemap-builder.config.sitemapBuilder.sources.docmap",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "sitemapBuilder.config.ts",
+                "extension": "config",
+                "relPath": "src/config/sitemapBuilder.config.ts"
+            },
+            "@coffeekraken.s-sitemap-builder.config.sitemapBuilder.sources.docmap.settings": {
+                "id": "@coffeekraken.s-sitemap-builder.config.sitemapBuilder.sources.docmap.settings",
+                "name": "settings",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Object"
+                        }
+                    ],
+                    "raw": "Object"
+                },
+                "default": "{}",
+                "description": "Specify some setting to pass to the docmap sitemap source",
+                "namespace": "@coffeekraken.s-sitemap-builder.config.sitemapBuilder.sources.docmap",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "sitemapBuilder.config.ts",
+                "extension": "config",
+                "relPath": "src/config/sitemapBuilder.config.ts"
+            },
+            "@coffeekraken.s-sitemap-builder.config.sitemapBuilder.sources.docmap.path": {
+                "id": "@coffeekraken.s-sitemap-builder.config.sitemapBuilder.sources.docmap.path",
+                "name": "path",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ],
+                    "raw": "String"
+                },
+                "default": "__path.resolve(`${__dirname()}/../node/sources/SSitemapDocmapSource`)",
+                "description": "Specify where to find the docmap source",
+                "namespace": "@coffeekraken.s-sitemap-builder.config.sitemapBuilder.sources.docmap",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "sitemapBuilder.config.ts",
+                "extension": "config",
+                "relPath": "src/config/sitemapBuilder.config.ts",
+                "children": {}
+            },
             "@coffeekraken.s-sitemap-builder.doc.README": {
                 "id": "@coffeekraken.s-sitemap-builder.doc.README",
                 "name": "README",

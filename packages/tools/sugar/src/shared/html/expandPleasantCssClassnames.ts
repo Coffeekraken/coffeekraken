@@ -63,5 +63,5 @@ export default function __expandPleasantCssClassnames(html: string): string {
         });
     }
 
-    return html;
+    return 'expanded ' + html;
 }

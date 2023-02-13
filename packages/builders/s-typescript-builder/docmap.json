@@ -12,6 +12,7 @@
             "@coffeekraken/s-builder",
             "@coffeekraken/s-carpenter",
             "@coffeekraken/s-class",
+            "@coffeekraken/s-classmap",
             "@coffeekraken/s-clipboard-copy-component",
             "@coffeekraken/s-code-example-component",
             "@coffeekraken/s-code-formatter-prettier",
@@ -57,6 +58,7 @@
             "@coffeekraken/s-inline-feature",
             "@coffeekraken/s-interface",
             "@coffeekraken/s-kitchen",
+            "@coffeekraken/s-lazy-feature",
             "@coffeekraken/s-lit-component",
             "@coffeekraken/s-log",
             "@coffeekraken/s-markdown-builder",
@@ -103,6 +105,214 @@
             "@coffeekraken/sugar"
         ],
         "map": {
+            "@coffeekraken.s-typescript-builder.config.typescriptBuilder.glob": {
+                "id": "@coffeekraken.s-typescript-builder.config.typescriptBuilder.glob",
+                "name": "glob",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ],
+                    "raw": "String"
+                },
+                "default": "[config.typescriptBuilder.inDir]/** /*",
+                "description": "Specify a glob pattern relative to the \"inDir\" to specify files you want to compress",
+                "namespace": "@coffeekraken.s-typescript-builder.config.typescriptBuilder",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "typescriptBuilder.config.ts",
+                "extension": "config",
+                "relPath": "src/config/typescriptBuilder.config.ts"
+            },
+            "@coffeekraken.s-typescript-builder.config.typescriptBuilder.inDir": {
+                "id": "@coffeekraken.s-typescript-builder.config.typescriptBuilder.inDir",
+                "name": "inDir",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ],
+                    "raw": "String"
+                },
+                "default": "[config.storage.src.rootDir]",
+                "description": "Specify a directory from where to search for ts and js files to build",
+                "namespace": "@coffeekraken.s-typescript-builder.config.typescriptBuilder",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "typescriptBuilder.config.ts",
+                "extension": "config",
+                "relPath": "src/config/typescriptBuilder.config.ts"
+            },
+            "@coffeekraken.s-typescript-builder.config.typescriptBuilder.outDir": {
+                "id": "@coffeekraken.s-typescript-builder.config.typescriptBuilder.outDir",
+                "name": "outDir",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ],
+                    "raw": "String"
+                },
+                "default": "[config.storage.dist.rootDir]/pkg/%moduleSystem",
+                "description": "Specify a directory where you want to put the builded files.\nYou can use the %moduleSystem and %platform token in your value",
+                "namespace": "@coffeekraken.s-typescript-builder.config.typescriptBuilder",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "typescriptBuilder.config.ts",
+                "extension": "config",
+                "relPath": "src/config/typescriptBuilder.config.ts"
+            },
+            "@coffeekraken.s-typescript-builder.config.typescriptBuilder.formats": {
+                "id": "@coffeekraken.s-typescript-builder.config.typescriptBuilder.formats",
+                "name": "formats",
+                "type": {
+                    "types": [
+                        {
+                            "type": "array",
+                            "of": [
+                                "String"
+                            ]
+                        }
+                    ],
+                    "raw": "String[]"
+                },
+                "default": "['esm','cjs']",
+                "description": "Specify the formats you want to generate. Can be \"esm\" or/and \"cjs\"",
+                "namespace": "@coffeekraken.s-typescript-builder.config.typescriptBuilder",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "typescriptBuilder.config.ts",
+                "extension": "config",
+                "relPath": "src/config/typescriptBuilder.config.ts"
+            },
+            "@coffeekraken.s-typescript-builder.config.typescriptBuilder.platform": {
+                "id": "@coffeekraken.s-typescript-builder.config.typescriptBuilder.platform",
+                "name": "platform",
+                "type": {
+                    "types": [
+                        {
+                            "type": "array",
+                            "of": [
+                                "String"
+                            ]
+                        }
+                    ],
+                    "raw": "String[]"
+                },
+                "default": "node",
+                "description": "Specify for which platform you want to build the typescript files. Can be \"browser\" or \"node\".",
+                "namespace": "@coffeekraken.s-typescript-builder.config.typescriptBuilder",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "typescriptBuilder.config.ts",
+                "extension": "config",
+                "relPath": "src/config/typescriptBuilder.config.ts"
+            },
+            "@coffeekraken.s-typescript-builder.config.typescriptBuilder.customSettings": {
+                "id": "@coffeekraken.s-typescript-builder.config.typescriptBuilder.customSettings",
+                "name": "customSettings",
+                "type": {
+                    "types": [
+                        {
+                            "type": "array",
+                            "of": [
+                                "String"
+                            ]
+                        }
+                    ],
+                    "raw": "String[]"
+                },
+                "default": "{}",
+                "description": "Specify some custom settings for the typescript builder based on the glob pattern used as property",
+                "namespace": "@coffeekraken.s-typescript-builder.config.typescriptBuilder",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "typescriptBuilder.config.ts",
+                "extension": "config",
+                "relPath": "src/config/typescriptBuilder.config.ts"
+            },
+            "@coffeekraken.s-typescript-builder.config.typescriptBuilder.exclude": {
+                "id": "@coffeekraken.s-typescript-builder.config.typescriptBuilder.exclude",
+                "name": "exclude",
+                "type": {
+                    "types": [
+                        {
+                            "type": "array",
+                            "of": [
+                                "String"
+                            ]
+                        }
+                    ],
+                    "raw": "String[]"
+                },
+                "default": "['** /node_module']",
+                "description": "Specify some glob patterns for files/folders you want to exclude of the build process",
+                "namespace": "@coffeekraken.s-typescript-builder.config.typescriptBuilder",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "typescriptBuilder.config.ts",
+                "extension": "config",
+                "relPath": "src/config/typescriptBuilder.config.ts"
+            },
+            "@coffeekraken.s-typescript-builder.config.typescriptBuilder.tsconfig": {
+                "id": "@coffeekraken.s-typescript-builder.config.typescriptBuilder.tsconfig",
+                "name": "tsconfig",
+                "type": {
+                    "types": [
+                        {
+                            "type": "array",
+                            "of": [
+                                "String"
+                            ]
+                        }
+                    ],
+                    "raw": "String[]"
+                },
+                "default": "[config.ts]",
+                "description": "Specify some tsconfig configurations.",
+                "namespace": "@coffeekraken.s-typescript-builder.config.typescriptBuilder",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "typescriptBuilder.config.ts",
+                "extension": "config",
+                "relPath": "src/config/typescriptBuilder.config.ts",
+                "children": {}
+            },
             "@coffeekraken.s-typescript-builder.doc.README": {
                 "id": "@coffeekraken.s-typescript-builder.doc.README",
                 "name": "README",

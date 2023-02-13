@@ -31,5 +31,5 @@ namespace Sugar\object;
  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 return new \Twig\TwigFunction('filter', function ($object, $filter) {
-    return \Sugar\object\filter($object, $filter);
+    return (array) \Sugar\object\filter($object, $filter);
 });

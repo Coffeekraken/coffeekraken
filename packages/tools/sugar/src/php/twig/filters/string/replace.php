@@ -7,9 +7,10 @@
  * @status      beta
  * @platform    php
  *
- * This twig function allows you to replace a value by another in your string
+ * This twig function allows you to replace a value by another in your string.
+ * It support for regex as the search
  *
- * @param       {String}            $search         The string to replace
+ * @param       {String}            $search         The string to replace. Can be a regex
  * @param       {String}            $replaceBy      The string to replace your $search with
  * @return      {String}                        The new string
  *
@@ -24,5 +25,11 @@ return new \Twig\TwigFilter('replace', function (
     string $search,
     string $replaceBy
 ): string {
+    // handle regex
+    if (preg_match("/^\/.+\/[a-z]*$/i", $search)) {
+        return preg_replace($search, $replaceBy, $string);
+    }
+
+    // normal replace
     return str_replace($search, $replaceBy, $string);
 });

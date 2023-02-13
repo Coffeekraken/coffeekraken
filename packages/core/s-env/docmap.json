@@ -12,6 +12,7 @@
             "@coffeekraken/s-builder",
             "@coffeekraken/s-carpenter",
             "@coffeekraken/s-class",
+            "@coffeekraken/s-classmap",
             "@coffeekraken/s-clipboard-copy-component",
             "@coffeekraken/s-code-example-component",
             "@coffeekraken/s-code-formatter-prettier",
@@ -56,6 +57,7 @@
             "@coffeekraken/s-inline-feature",
             "@coffeekraken/s-interface",
             "@coffeekraken/s-kitchen",
+            "@coffeekraken/s-lazy-feature",
             "@coffeekraken/s-lit-component",
             "@coffeekraken/s-log",
             "@coffeekraken/s-markdown-builder",
@@ -103,6 +105,103 @@
             "@coffeekraken/sugar"
         ],
         "map": {
+            "@coffeekraken.s-env.config.env.env": {
+                "id": "@coffeekraken.s-env.config.env.env",
+                "name": "env",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ],
+                    "raw": "String"
+                },
+                "default": "undefined",
+                "description": "Specify the environment env. This is usually \"production\" or \"dev\" as value.\nIf undefined, will be determined depending on the platform.\nFor node, it will take the process.env.NODE_ENV variable\nFor browser, if not specified manually, it will depends on the \"env.envFromLocation\" configuration to determine the correct environment using regex check",
+                "namespace": "@coffeekraken.s-env.config.env",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "env.config.ts",
+                "extension": "config",
+                "relPath": "src/config/env.config.ts"
+            },
+            "@coffeekraken.s-env.config.env.envFromLocation.development": {
+                "id": "@coffeekraken.s-env.config.env.envFromLocation.development",
+                "name": "development",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Regex"
+                        }
+                    ],
+                    "raw": "Regex"
+                },
+                "default": "https?://(localhost|127.0.0.1|0.0.0.0|192.168.[0-9]{1,3}.[0-9]{1,3}|.*.local)",
+                "description": "Specify the regex to detect the \"development\" environment from the document.location.href variable",
+                "namespace": "@coffeekraken.s-env.config.env.envFromLocation",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "env.config.ts",
+                "extension": "config",
+                "relPath": "src/config/env.config.ts"
+            },
+            "@coffeekraken.s-env.config.env.envFromLocation.staging": {
+                "id": "@coffeekraken.s-env.config.env.envFromLocation.staging",
+                "name": "staging",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Regex"
+                        }
+                    ],
+                    "raw": "Regex"
+                },
+                "default": "https?://([a-zA-Z0-9.-]+)?staging([a-zA-Z0-9.-]+)?",
+                "description": "Specify the regex to detect the \"staging\" environment from the document.location.href variable",
+                "namespace": "@coffeekraken.s-env.config.env.envFromLocation",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "env.config.ts",
+                "extension": "config",
+                "relPath": "src/config/env.config.ts"
+            },
+            "@coffeekraken.s-env.config.env.envFromLocation.production": {
+                "id": "@coffeekraken.s-env.config.env.envFromLocation.production",
+                "name": "production",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Regex"
+                        }
+                    ],
+                    "raw": "Regex"
+                },
+                "default": "https://.*",
+                "description": "Specify the regex to detect the \"production\" environment from the document.location.href variable",
+                "namespace": "@coffeekraken.s-env.config.env.envFromLocation",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "env.config.ts",
+                "extension": "config",
+                "relPath": "src/config/env.config.ts",
+                "children": {}
+            },
             "@coffeekraken.s-env.doc.README": {
                 "id": "@coffeekraken.s-env.doc.README",
                 "name": "README",

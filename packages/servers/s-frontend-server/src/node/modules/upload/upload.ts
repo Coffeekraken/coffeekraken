@@ -1,10 +1,10 @@
 import { __ensureDirSync } from '@coffeekraken/sugar/fs';
 import { __packageTmpDir } from '@coffeekraken/sugar/path';
 
-export default function upload(app, settings, config) {
+export default function upload({ express, settings, config }) {
     return new Promise(async (resolve) => {
         // register the "upload" post handler
-        app.post('/upload', async (req, res) => {
+        express.post('/upload', async (req, res) => {
             if (!req.files || Object.keys(req.files).length === 0) {
                 return res.status(400).send('No files were uploaded.');
             }
@@ -33,7 +33,7 @@ export default function upload(app, settings, config) {
             }
 
             res.status(200);
-            res.type('application/json');
+            res.type('expresslication/json');
             res.send(JSON.stringify(uploadResult));
         });
 

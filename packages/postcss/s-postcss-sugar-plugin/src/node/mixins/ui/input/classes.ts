@@ -30,7 +30,7 @@ class postcssSugarPluginUiFormClassesInterface extends __SInterface {
         return {
             lnfs: {
                 type: 'String[]',
-                default: ['default', 'underline'],
+                default: ['solid', 'underline'],
             },
             defaultLnf: {
                 type: 'String',
@@ -50,7 +50,7 @@ class postcssSugarPluginUiFormClassesInterface extends __SInterface {
 
 export interface IPostcssSugarPluginUiFormClassesParams {
     lnfs: string[];
-    defaultLnf: 'default' | 'underline';
+    defaultLnf: 'solid' | 'underline';
     scope: ('bare' | 'lnf' | 'vr' | 'tf')[];
 }
 
@@ -69,7 +69,7 @@ export default function ({
 }) {
     const finalParams: IPostcssSugarPluginUiFormClassesParams = {
         lnfs: [],
-        defaultLnf: 'default',
+        defaultLnf: 'solid',
         scope: [],
         ...params,
     };

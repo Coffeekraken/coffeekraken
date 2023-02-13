@@ -1,6 +1,6 @@
 import { __dirname } from '@coffeekraken/sugar/fs';
 
-export default async function generic(express, settings, config) {
+export default async function generic({ express, settings, config }) {
     // register handler
     config.handlers.generic = {
         description:

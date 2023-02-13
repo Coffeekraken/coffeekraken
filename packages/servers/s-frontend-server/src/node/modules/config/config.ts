@@ -1,6 +1,6 @@
 import { __dirname } from '@coffeekraken/sugar/fs';
 
-export default async function config(express, settings, config) {
+export default async function config({ express, settings, config }) {
     config.middlewares.config = {
         description:
             'Middleware that inject a "config" and a "configFiles" object for the views',

@@ -24,11 +24,6 @@ class postcssUiCodeExampleClassesInterface extends __SInterface {
                 values: ['primary', 'mobile'],
                 default: __STheme.get('ui.menu.defaultType') ?? 'primary',
             },
-            defaultColor: {
-                type: 'String',
-                values: Object.keys(__STheme.get('color')),
-                default: __STheme.get('ui.menu.defaultColor'),
-            },
             scope: {
                 type: {
                     type: 'Array<String>',
@@ -46,7 +41,6 @@ export interface IPostcssUiCodeExampleClassesParams {
     types: ('primary' | 'mobile')[];
     defaultLnf: 'solid';
     defaultType: 'primary' | 'mobile';
-    defaultColor: string;
     scope: ('bare' | 'lnf' | 'vr')[];
 }
 
@@ -68,7 +62,6 @@ export default function ({
         types: ['primary', 'mobile'],
         defaultLnf: 'solid',
         defaultType: 'primary',
-        defaultColor: 'main',
         scope: ['bare', 'lnf'],
         ...params,
     };

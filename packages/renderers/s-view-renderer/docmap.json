@@ -12,6 +12,7 @@
             "@coffeekraken/s-builder",
             "@coffeekraken/s-carpenter",
             "@coffeekraken/s-class",
+            "@coffeekraken/s-classmap",
             "@coffeekraken/s-clipboard-copy-component",
             "@coffeekraken/s-code-example-component",
             "@coffeekraken/s-code-formatter-prettier",
@@ -104,6 +105,163 @@
             "@coffeekraken/sugar"
         ],
         "map": {
+            "@coffeekraken.s-view-renderer.config.viewRenderer.rootDirs": {
+                "id": "@coffeekraken.s-view-renderer.config.viewRenderer.rootDirs",
+                "name": "rootDirs",
+                "type": {
+                    "types": [
+                        {
+                            "type": "array",
+                            "of": [
+                                "string"
+                            ]
+                        }
+                    ],
+                    "raw": "string[]"
+                },
+                "default": "['[config.storage.src.rootDir]/views']",
+                "description": "Specify the roots views directories",
+                "namespace": "@coffeekraken.s-view-renderer.config.viewRenderer",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "viewRenderer.config.ts",
+                "extension": "config",
+                "relPath": "src/config/viewRenderer.config.ts"
+            },
+            "@coffeekraken.s-view-renderer.config.viewRenderer.cacheDir": {
+                "id": "@coffeekraken.s-view-renderer.config.viewRenderer.cacheDir",
+                "name": "cacheDir",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ],
+                    "raw": "String"
+                },
+                "default": "[config.storage.package.cacheDir]",
+                "description": "Specify the views template rendering cache directory",
+                "namespace": "@coffeekraken.s-view-renderer.config.viewRenderer",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "viewRenderer.config.ts",
+                "extension": "config",
+                "relPath": "src/config/viewRenderer.config.ts"
+            },
+            "@coffeekraken.s-view-renderer.config.viewRenderer.defaultEngine": {
+                "id": "@coffeekraken.s-view-renderer.config.viewRenderer.defaultEngine",
+                "name": "defaultEngine",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ],
+                    "raw": "String"
+                },
+                "default": "twig",
+                "description": "Store which engine to use when no any is specified at the dotpath start like \"twig://...\", \"blade://...\", etc...",
+                "namespace": "@coffeekraken.s-view-renderer.config.viewRenderer",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "viewRenderer.config.ts",
+                "extension": "config",
+                "relPath": "src/config/viewRenderer.config.ts"
+            },
+            "@coffeekraken.s-view-renderer.config.viewRenderer.engines": {
+                "id": "@coffeekraken.s-view-renderer.config.viewRenderer.engines",
+                "name": "engines",
+                "type": {
+                    "types": [
+                        {
+                            "type": "array",
+                            "of": [
+                                "String"
+                            ]
+                        }
+                    ],
+                    "raw": "String[]"
+                },
+                "default": "['@coffeekraken/s-view-renderer-engine-blade', '@coffeekraken/s-view-renderer-engine-twig']",
+                "description": "Store which engines are available for this renderer",
+                "namespace": "@coffeekraken.s-view-renderer.config.viewRenderer",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "viewRenderer.config.ts",
+                "extension": "config",
+                "relPath": "src/config/viewRenderer.config.ts"
+            },
+            "@coffeekraken.s-view-renderer.config.viewRenderer.sharedDataFiles": {
+                "id": "@coffeekraken.s-view-renderer.config.viewRenderer.sharedDataFiles",
+                "name": "sharedDataFiles",
+                "type": {
+                    "types": [
+                        {
+                            "type": "array",
+                            "of": [
+                                "String"
+                            ]
+                        }
+                    ],
+                    "raw": "String[]"
+                },
+                "default": "['[config.storage.src.rootDir]/views/shared.data.js']",
+                "description": "Store paths to shared data files that will be loaded by the proper dataHandler",
+                "namespace": "@coffeekraken.s-view-renderer.config.viewRenderer",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "viewRenderer.config.ts",
+                "extension": "config",
+                "relPath": "src/config/viewRenderer.config.ts"
+            },
+            "@coffeekraken.s-view-renderer.config.viewRenderer.dataFiles": {
+                "id": "@coffeekraken.s-view-renderer.config.viewRenderer.dataFiles",
+                "name": "dataFiles",
+                "type": {
+                    "types": [
+                        {
+                            "type": "array",
+                            "of": [
+                                "String"
+                            ]
+                        }
+                    ],
+                    "raw": "String[]"
+                },
+                "default": "['@coffeekraken/s-data-file-generic']",
+                "description": "Store which data handlers are available for this renderer",
+                "namespace": "@coffeekraken.s-view-renderer.config.viewRenderer",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "viewRenderer.config.ts",
+                "extension": "config",
+                "relPath": "src/config/viewRenderer.config.ts",
+                "children": {}
+            },
             "@coffeekraken.s-view-renderer.doc.README": {
                 "id": "@coffeekraken.s-view-renderer.doc.README",
                 "name": "README",

@@ -69,7 +69,7 @@ export default function ({
     ).code(
         `
                 [lnf="default"]:not(.s-bare) > .s-filtrable-input {
-                    @sugar.ui.filtrableInput($style: solid, $scope: lnf);
+                    @sugar.ui.filtrableInput($lnf: solid, $scope: lnf);
                 }`,
         {
             type: 'CssClass',

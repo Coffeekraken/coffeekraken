@@ -1,6 +1,6 @@
 import { __dirname } from '@coffeekraken/sugar/fs';
 
-export default async function classmap(express, settings, config) {
+export default async function classmap({ express, settings, config }) {
     // handlers
     config.handlers.classmapJson = {
         description: 'Load and serve the classmap.json file',

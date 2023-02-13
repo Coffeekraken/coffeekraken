@@ -7,7 +7,8 @@ export default function (api) {
              * @type              Number
              * @default           1px
              *
-             * Specify the "default" border width
+             * Specify the "default" border width.
+             * MUST be an absolute value like "1px", etc...
              *
              * @since             2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -20,7 +21,8 @@ export default function (api) {
              * @type              Number
              * @default           0
              *
-             * Specify the "0" border width
+             * Specify the "0" border width.
+             * MUST be a scale factor relative to the "default" absolute value specified.
              *
              * @since             2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -33,7 +35,8 @@ export default function (api) {
              * @type              Number
              * @default           1
              *
-             * Specify the "10" border width
+             * Specify the "10" border width.
+             * MUST be a scale factor relative to the "default" absolute value specified.
              *
              * @since             2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -46,7 +49,8 @@ export default function (api) {
              * @type              Number
              * @default           2
              *
-             * Specify the "20" border width
+             * Specify the "20" border width.
+             * MUST be a scale factor relative to the "default" absolute value specified.
              *
              * @since             2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -59,7 +63,8 @@ export default function (api) {
              * @type              Number
              * @default           4
              *
-             * Specify the "30" border width
+             * Specify the "30" border width.
+             * MUST be a scale factor relative to the "default" absolute value specified.
              *
              * @since             2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -72,7 +77,8 @@ export default function (api) {
              * @type              Number
              * @default           6
              *
-             * Specify the "40" border width
+             * Specify the "40" border width.
+             * MUST be a scale factor relative to the "default" absolute value specified.
              *
              * @since             2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -85,7 +91,8 @@ export default function (api) {
              * @type              Number
              * @default           8
              *
-             * Specify the "50" border width
+             * Specify the "50" border width.
+             * MUST be a scale factor relative to the "default" absolute value specified.
              *
              * @since             2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -98,7 +105,8 @@ export default function (api) {
              * @type              Number
              * @default           12
              *
-             * Specify the "60" border width
+             * Specify the "60" border width.
+             * MUST be a scale factor relative to the "default" absolute value specified.
              *
              * @since             2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -111,7 +119,8 @@ export default function (api) {
              * @type              Number
              * @default           16
              *
-             * Specify the "70" border width
+             * Specify the "70" border width.
+             * MUST be a scale factor relative to the "default" absolute value specified.
              *
              * @since             2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -124,7 +133,8 @@ export default function (api) {
              * @type              Number
              * @default           20
              *
-             * Specify the "80" border width
+             * Specify the "80" border width.
+             * MUST be a scale factor relative to the "default" absolute value specified.
              *
              * @since             2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -137,7 +147,8 @@ export default function (api) {
              * @type              Number
              * @default           24
              *
-             * Specify the "90" border width
+             * Specify the "90" border width.
+             * MUST be a scale factor relative to the "default" absolute value specified.
              *
              * @since             2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -150,7 +161,8 @@ export default function (api) {
              * @type              Number
              * @default           30
              *
-             * Specify the "90" border width
+             * Specify the "100" border width.
+             * MUST be a scale factor relative to the "default" absolute value specified.
              *
              * @since             2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -319,7 +331,7 @@ export default function (api) {
              * @type              Number
              * @default           12
              *
-             * Specify the "90" border radius.
+             * Specify the "100" border radius.
              * MUST be a scale factor relative to the "default" absolute value specified.
              *
              * @since             2.0.0

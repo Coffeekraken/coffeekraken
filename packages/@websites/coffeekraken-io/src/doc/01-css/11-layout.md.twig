@@ -58,6 +58,18 @@ This defines a 3 columns layout with `4` areas and will provide this layout:
 
 This technique allows you to make really crazy layouts using a simple and kind of "visual" syntax.
 
+> Note that this is obviously usable in a media query (native or sugar) like so:
+
+```css
+.my-layout {
+@sugar.layout('1 2 _ 3 4');
+
+@sugar.media mobile {
+    @sugar.layout('1 _ 2 _ 3 _ 4');
+}
+}
+```
+
 ## Mixin
 
 First possibility to apply layouts using this technique is to use the `@sugar.layout` mixin. Here's how:

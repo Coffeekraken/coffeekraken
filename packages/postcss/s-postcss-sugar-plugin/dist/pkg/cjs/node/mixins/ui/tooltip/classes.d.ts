@@ -23,8 +23,8 @@ declare class postcssSugarPluginUiTooltipClassesInterface extends __SInterface {
     };
 }
 export interface IPostcssSugarPluginUiTooltipClassesParams {
-    lnfs: 'default'[];
-    defaultLnf: 'default';
+    lnfs: 'solid'[];
+    defaultLnf: 'solid';
     scope: ('bare' | 'lnf')[];
 }
 export { postcssSugarPluginUiTooltipClassesInterface as interface };

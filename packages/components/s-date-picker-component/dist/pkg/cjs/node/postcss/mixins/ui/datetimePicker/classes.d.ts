@@ -6,7 +6,7 @@ declare class postcssUiDatetimePickerClassesInterface extends __SInterface {
             values: string[];
             default: string[];
         };
-        defaultStyle: {
+        defaultLnf: {
             type: string;
             values: string[];
             default: any;
@@ -23,7 +23,7 @@ declare class postcssUiDatetimePickerClassesInterface extends __SInterface {
 }
 export interface IPostcssUiDatetimePickerInputClassesParams {
     styles: 'solid'[];
-    defaultStyle: 'solid';
+    defaultLnf: 'solid';
     scope: ('bare' | 'lnf' | 'vr')[];
 }
 export { postcssUiDatetimePickerClassesInterface as interface };

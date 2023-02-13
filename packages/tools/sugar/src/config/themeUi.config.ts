@@ -79,25 +79,10 @@ export default function (api) {
             },
 
             /**
-             * @name          defaultColor
-             * @namespace     config.themeUi.menu
-             * @type          String
-             * @default      [theme.ui.default.defaultColor]
-             *
-             * Specify the default color for code ui
-             *
-             * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-             */
-            get defaultColor() {
-                return api.theme.ui.default.defaultColor;
-            },
-
-            /**
              * @name          defaultLnf
              * @namespace     config.themeUi.menu
              * @type          Number
-             * @default      [theme.ui.default.defaultStyle]
+             * @default      [theme.ui.default.defaultLnf]
              *
              * Specify the default look and feel for your menus
              *
@@ -105,7 +90,7 @@ export default function (api) {
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             get defaultLnf() {
-                return api.theme.ui.default.defaultStyle;
+                return api.theme.ui.default.defaultLnf;
             },
 
             /**
@@ -225,21 +210,6 @@ export default function (api) {
              */
             get transition() {
                 return api.theme.ui.default.transition;
-            },
-
-            /**
-             * @name          defaultColor
-             * @namespace     config.themeUi.card
-             * @type          String
-             * @default      [theme.ui.default.defaultColor]
-             *
-             * Specify the default color for code ui
-             *
-             * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-             */
-            get defaultColor() {
-                return api.theme.ui.default.defaultColor;
             },
 
             /**

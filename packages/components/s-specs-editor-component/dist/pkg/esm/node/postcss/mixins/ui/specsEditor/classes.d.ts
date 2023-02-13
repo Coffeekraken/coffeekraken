@@ -12,9 +12,8 @@ declare class postcssUiSpecsEditorClassesInterface extends __SInterface {
     };
 }
 export interface IPostcssUiSpecsEditorClassesParams {
-    styles: 'solid'[];
-    defaultStyle: 'solid';
-    defaultColor: string;
+    lnfs: 'solid'[];
+    defaultLnf: 'solid';
     scope: ('bare' | 'lnf' | 'behavior' | 'vr')[];
 }
 export { postcssUiSpecsEditorClassesInterface as interface };

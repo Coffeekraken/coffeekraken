@@ -17,7 +17,9 @@
 
 # Create your own component
 
-## Stack
+> A simple command line will be available soon to scaffold your new component...
+
+{# ## Stack
 
 For our official components, we make use of the [LitElement](https://lit.dev/) stack that provides some nice features like:
 
@@ -28,8 +30,8 @@ For our official components, we make use of the [LitElement](https://lit.dev/) s
 On top of that, we make use of our own `SLitComponent` class that extends the `LitElement` one and gives you access to some sugars like:
 
 1. Support for `SInterface` interfaces through the `SLitComponent.properties` static method
-2. Access to a `componentUtils` property that store a `SComponentUtils` instance and gives you access to methods like:
-    - `className`: Get classname linked to the component name
+2. Access to a `utils` property that store a `SComponentUtils` instance and gives you access to methods like:
+    - `cls`: Get classname linked to the component name
     - Adopting root style when has a shadowRoot
     - `SComponentDefaultInterface` exposed
     - System to delaying the `firstUpdated` method execution when the component enter in viewport, etc...
@@ -41,7 +43,7 @@ On top of that, we make use of our own `SLitComponent` class that extends the `L
 To create a new component project, simply launch this command:
 
 ```shell
-sugar new generic
+sugar new
 ```
 
 > You need to have the `sugar` CLI installed using `npm i @coffeekraken/cli -g`
@@ -58,6 +60,6 @@ This will start the **development environment** in which you can implement and t
 
 ```shell
 npm run build
-```
+``` #}
 
 {% endblock %}

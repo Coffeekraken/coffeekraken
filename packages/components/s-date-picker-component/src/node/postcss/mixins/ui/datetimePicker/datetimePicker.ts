@@ -4,10 +4,10 @@ import __STheme from '@coffeekraken/s-theme';
 class postcssUiDatetimePickerInterface extends __SInterface {
     static get _definition() {
         return {
-            style: {
+            lnf: {
                 type: 'String',
                 values: ['solid'],
-                default: __STheme.get('ui.datetimePicker.defaultStyle'),
+                default: __STheme.get('ui.datetimePicker.defaultLnf'),
             },
             scope: {
                 type: {
@@ -22,7 +22,7 @@ class postcssUiDatetimePickerInterface extends __SInterface {
 }
 
 export interface IPostcssUiDatetimePickerParams {
-    style: 'solid';
+    lnf: 'solid';
     scope: ('bare' | 'lnf')[];
 }
 
@@ -35,7 +35,7 @@ export { postcssUiDatetimePickerInterface as interface };
  * @platform      css
  * @status        beta
  *
- * Apply the datetime picker style to any s-datetime-picker element
+ * Apply the datetime picker lnf to any s-datetime-picker element
  *
  * @example     css
  * .s-datetime-picker {
@@ -58,7 +58,7 @@ export default function ({
     replaceWith: Function;
 }) {
     const finalParams: IPostcssUiDatetimePickerParams = {
-        style: __STheme.get('ui.datetimePicker.defaultStyle'),
+        lnf: __STheme.get('ui.datetimePicker.defaultLnf'),
         scope: ['bare', 'lnf'],
         ...params,
     };
@@ -140,7 +140,7 @@ export default function ({
         vars.push(`
         `);
 
-        switch (finalParams.style) {
+        switch (finalParams.lnf) {
             case 'solid':
             default:
                 vars.push(`

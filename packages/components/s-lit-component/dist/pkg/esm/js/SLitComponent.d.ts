@@ -19,7 +19,6 @@ export interface ISLitComponentDefaultProps {
     mountWhen: 'directly' | 'direct' | 'inViewport';
     adoptStyle: boolean;
     saveState: boolean;
-    defaultStyle: boolean;
 }
 export default class SLitComponent extends LitElement {
     static _keepInjectedCssBeforeStylesheetLinksInited: boolean;

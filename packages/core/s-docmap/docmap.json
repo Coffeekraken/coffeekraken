@@ -12,6 +12,7 @@
             "@coffeekraken/s-builder",
             "@coffeekraken/s-carpenter",
             "@coffeekraken/s-class",
+            "@coffeekraken/s-classmap",
             "@coffeekraken/s-clipboard-copy-component",
             "@coffeekraken/s-code-example-component",
             "@coffeekraken/s-code-formatter-prettier",
@@ -56,6 +57,7 @@
             "@coffeekraken/s-inline-feature",
             "@coffeekraken/s-interface",
             "@coffeekraken/s-kitchen",
+            "@coffeekraken/s-lazy-feature",
             "@coffeekraken/s-lit-component",
             "@coffeekraken/s-log",
             "@coffeekraken/s-markdown-builder",
@@ -103,6 +105,361 @@
             "@coffeekraken/sugar"
         ],
         "map": {
+            "@coffeekraken.s-docmap.config.docmap.noExtends": {
+                "id": "@coffeekraken.s-docmap.config.docmap.noExtends",
+                "name": "noExtends",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Boolean"
+                        }
+                    ],
+                    "raw": "Boolean"
+                },
+                "default": "false",
+                "description": "Specify if you want to disable the extends search process that will result in the \"extends\" array in the docmap.json file",
+                "namespace": "@coffeekraken.s-docmap.config.docmap",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "docmap.config.ts",
+                "extension": "config",
+                "relPath": "src/config/docmap.config.ts"
+            },
+            "@coffeekraken.s-docmap.config.docmap.excludePackages": {
+                "id": "@coffeekraken.s-docmap.config.docmap.excludePackages",
+                "name": "excludePackages",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Boolean"
+                        }
+                    ],
+                    "raw": "Boolean"
+                },
+                "default": "['@website/*', '@example/*']",
+                "description": "Specify some package(s) name(s) (glob) to avoid extending.",
+                "namespace": "@coffeekraken.s-docmap.config.docmap",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "docmap.config.ts",
+                "extension": "config",
+                "relPath": "src/config/docmap.config.ts"
+            },
+            "@coffeekraken.s-docmap.config.docmap.read.input": {
+                "id": "@coffeekraken.s-docmap.config.docmap.read.input",
+                "name": "input",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ],
+                    "raw": "String"
+                },
+                "default": "${__packageRootDir()}/docmap.json",
+                "description": "Specify the path of the docmap.json source file to read",
+                "namespace": "@coffeekraken.s-docmap.config.docmap.read",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "docmap.config.ts",
+                "extension": "config",
+                "relPath": "src/config/docmap.config.ts"
+            },
+            "@coffeekraken.s-docmap.config.docmap.read.sort": {
+                "id": "@coffeekraken.s-docmap.config.docmap.read.sort",
+                "name": "sort",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Array",
+                            "of": [
+                                "String"
+                            ]
+                        }
+                    ],
+                    "raw": "Array<String>"
+                },
+                "default": "true",
+                "description": "Specify which of the docmap entries has to be sorted alphabetically.\nThese array values has to be a dotPath like 'menu.documentation'",
+                "namespace": "@coffeekraken.s-docmap.config.docmap.read",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "docmap.config.ts",
+                "extension": "config",
+                "relPath": "src/config/docmap.config.ts"
+            },
+            "@coffeekraken.s-docmap.config.docmap.read.sortDeep": {
+                "id": "@coffeekraken.s-docmap.config.docmap.read.sortDeep",
+                "name": "sortDeep",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Array",
+                            "of": [
+                                "String"
+                            ]
+                        }
+                    ],
+                    "raw": "Array<String>"
+                },
+                "default": "true",
+                "description": "Specify which of the docmap entries has to be sorted alphabetically and deeply.\nThese array values has to be a dotPath like 'menu.documentation'",
+                "namespace": "@coffeekraken.s-docmap.config.docmap.read",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "docmap.config.ts",
+                "extension": "config",
+                "relPath": "src/config/docmap.config.ts"
+            },
+            "@coffeekraken.s-docmap.config.docmap.snapshot.outDir": {
+                "id": "@coffeekraken.s-docmap.config.docmap.snapshot.outDir",
+                "name": "outDir",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ],
+                    "raw": "String"
+                },
+                "default": "[config.storage.package.rootDir]/.docmap",
+                "description": "Specify where to save the generated snapshot",
+                "namespace": "@coffeekraken.s-docmap.config.docmap.snapshot",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "docmap.config.ts",
+                "extension": "config",
+                "relPath": "src/config/docmap.config.ts"
+            },
+            "@coffeekraken.s-docmap.config.docmap.installSnapshot.glob": {
+                "id": "@coffeekraken.s-docmap.config.docmap.installSnapshot.glob",
+                "name": "glob",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ],
+                    "raw": "String"
+                },
+                "default": "[config.storage.package.rootDir]/.docmap/*",
+                "description": "Specify where to find the snapshot(s) to install. It must refer\nto folder(s) where a docmap.json and a package.json exists...",
+                "namespace": "@coffeekraken.s-docmap.config.docmap.installSnapshot",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "docmap.config.ts",
+                "extension": "config",
+                "relPath": "src/config/docmap.config.ts"
+            },
+            "@coffeekraken.s-docmap.config.docmap.build.globs": {
+                "id": "@coffeekraken.s-docmap.config.docmap.build.globs",
+                "name": "globs",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Array",
+                            "of": [
+                                "String"
+                            ]
+                        }
+                    ],
+                    "raw": "Array<String>"
+                },
+                "default": "['*',`src/!(css)/** /*.+(${__commonTextFileExtensions(false).join('|')})`,`dist/+(css)/*`]",
+                "description": "Specify the input globs to use in order to find files that will\nbe used for docmap generation.\nThe syntax is standard glob with an additional feature which is:\n- [glob]:[regex] -> This will search for files using the [glob] part, and search inside them using the [regex] part",
+                "namespace": "@coffeekraken.s-docmap.config.docmap.build",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "docmap.config.ts",
+                "extension": "config",
+                "relPath": "src/config/docmap.config.ts"
+            },
+            "@coffeekraken.s-docmap.config.docmap.build.exclude": {
+                "id": "@coffeekraken.s-docmap.config.docmap.build.exclude",
+                "name": "exclude",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Array",
+                            "of": [
+                                "String"
+                            ]
+                        }
+                    ],
+                    "raw": "Array<String>"
+                },
+                "default": "['**\\/__tests__/**\\/*','**\\/__tests__.wip/**\\/*','**\\/__wip__/**\\/*']",
+                "description": "Specify some regex to apply on different docblock and path properties\nto exclude some files from the buildd docMap json",
+                "namespace": "@coffeekraken.s-docmap.config.docmap.build",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "docmap.config.ts",
+                "extension": "config",
+                "relPath": "src/config/docmap.config.ts"
+            },
+            "@coffeekraken.s-docmap.config.docmap.build.excludeByTags.namespace": {
+                "id": "@coffeekraken.s-docmap.config.docmap.build.excludeByTags.namespace",
+                "name": "namespace",
+                "type": {
+                    "types": [
+                        {
+                            "type": "array",
+                            "of": [
+                                "Regex"
+                            ]
+                        }
+                    ],
+                    "raw": "Regex[]"
+                },
+                "default": "[/\\.config\\.)/]",
+                "description": "Specify some regex to apply on the namespace.\nAll namespaces that does not match one of the specified regex will be excluded",
+                "namespace": "@coffeekraken.s-docmap.config.docmap.build.excludeByTags",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "docmap.config.ts",
+                "extension": "config",
+                "relPath": "src/config/docmap.config.ts"
+            },
+            "@coffeekraken.s-docmap.config.docmap.build.excludeByTags.type": {
+                "id": "@coffeekraken.s-docmap.config.docmap.build.excludeByTags.type",
+                "name": "type",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Regex"
+                        }
+                    ],
+                    "raw": "Regex"
+                },
+                "default": "/^CssClass$/",
+                "description": "Specify some regex to apply on the type.\nAll types that does not match one of the specified regex will be excluded",
+                "namespace": "@coffeekraken.s-docmap.config.docmap.build.excludeByTags",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "docmap.config.ts",
+                "extension": "config",
+                "relPath": "src/config/docmap.config.ts"
+            },
+            "@coffeekraken.s-docmap.config.docmap.build.tags": {
+                "id": "@coffeekraken.s-docmap.config.docmap.build.tags",
+                "name": "tags",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Array",
+                            "of": [
+                                "String"
+                            ]
+                        }
+                    ],
+                    "raw": "Array<String>"
+                },
+                "default": "['id','name','type','menu','default','platform','description','namespace','status','example','interface','styleguide','static','since','author']",
+                "description": "Specify which docblock tags you want to integrate to your docmap.json items",
+                "namespace": "@coffeekraken.s-docmap.config.docmap.build",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "docmap.config.ts",
+                "extension": "config",
+                "relPath": "src/config/docmap.config.ts"
+            },
+            "@coffeekraken.s-docmap.config.docmap.build.save": {
+                "id": "@coffeekraken.s-docmap.config.docmap.build.save",
+                "name": "save",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Boolean"
+                        }
+                    ],
+                    "raw": "Boolean"
+                },
+                "default": "true",
+                "description": "Specify if you want to save the buildd docmap.json file under the ```outPath``` path",
+                "namespace": "@coffeekraken.s-docmap.config.docmap.build",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "docmap.config.ts",
+                "extension": "config",
+                "relPath": "src/config/docmap.config.ts"
+            },
+            "@coffeekraken.s-docmap.config.docmap.build.outPath": {
+                "id": "@coffeekraken.s-docmap.config.docmap.build.outPath",
+                "name": "outPath",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ],
+                    "raw": "String"
+                },
+                "default": "[config.storage.package.rootDir]/docmap.json",
+                "description": "Specify where you want to outPath the file",
+                "namespace": "@coffeekraken.s-docmap.config.docmap.build",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "docmap.config.ts",
+                "extension": "config",
+                "relPath": "src/config/docmap.config.ts",
+                "children": {}
+            },
             "@coffeekraken.s-docmap.doc.README": {
                 "id": "@coffeekraken.s-docmap.doc.README",
                 "name": "README",
@@ -528,9 +885,6 @@
                             },
                             "description": "Specify some tags and regex to use to filter out docblocks. Docblock items that have a tag that match one of his regex will be cutted out",
                             "default": {
-                                "namespace": [
-                                    {}
-                                ],
                                 "type": [
                                     {}
                                 ]

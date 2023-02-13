@@ -10,7 +10,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const fs_1 = require("@coffeekraken/sugar/fs");
-function redirect(express, settings, config) {
+function redirect({ express, settings, config }) {
     return __awaiter(this, void 0, void 0, function* () {
         // register handler
         config.handlers.redirect = {
@@ -20,4 +20,4 @@ function redirect(express, settings, config) {
     });
 }
 exports.default = redirect;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7O0FBQUEsK0NBQW1EO0FBRW5ELFNBQThCLFFBQVEsQ0FBQyxPQUFPLEVBQUUsUUFBUSxFQUFFLE1BQU07O1FBQzVELG1CQUFtQjtRQUNuQixNQUFNLENBQUMsUUFBUSxDQUFDLFFBQVEsR0FBRztZQUN2QixJQUFJLEVBQUUsR0FBRyxJQUFBLGNBQVMsR0FBRSxrQkFBa0I7U0FDekMsQ0FBQztRQUVGLE9BQU8sSUFBSSxDQUFDO0lBQ2hCLENBQUM7Q0FBQTtBQVBELDJCQU9DIn0=
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7O0FBQUEsK0NBQW1EO0FBRW5ELFNBQThCLFFBQVEsQ0FBQyxFQUFFLE9BQU8sRUFBRSxRQUFRLEVBQUUsTUFBTSxFQUFFOztRQUNoRSxtQkFBbUI7UUFDbkIsTUFBTSxDQUFDLFFBQVEsQ0FBQyxRQUFRLEdBQUc7WUFDdkIsSUFBSSxFQUFFLEdBQUcsSUFBQSxjQUFTLEdBQUUsa0JBQWtCO1NBQ3pDLENBQUM7UUFFRixPQUFPLElBQUksQ0FBQztJQUNoQixDQUFDO0NBQUE7QUFQRCwyQkFPQyJ9

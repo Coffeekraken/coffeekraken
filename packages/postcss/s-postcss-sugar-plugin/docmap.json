@@ -12,6 +12,7 @@
             "@coffeekraken/s-builder",
             "@coffeekraken/s-carpenter",
             "@coffeekraken/s-class",
+            "@coffeekraken/s-classmap",
             "@coffeekraken/s-clipboard-copy-component",
             "@coffeekraken/s-code-example-component",
             "@coffeekraken/s-code-formatter-prettier",
@@ -104,6 +105,160 @@
             "@coffeekraken/sugar"
         ],
         "map": {
+            "@coffeekraken.s-postcss-sugar-plugin.config.postcssSugarPlugin.outDir": {
+                "id": "@coffeekraken.s-postcss-sugar-plugin.config.postcssSugarPlugin.outDir",
+                "name": "outDir",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ],
+                    "raw": "String"
+                },
+                "default": "__path.dirname(config.postcssBuilder.output)",
+                "description": "Specify a directory in which to save relatively exported css, etc...",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.config.postcssSugarPlugin",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "postcssSugarPlugin.config.ts",
+                "extension": "config",
+                "relPath": "src/config/postcssSugarPlugin.config.ts"
+            },
+            "@coffeekraken.s-postcss-sugar-plugin.config.postcssSugarPlugin.clean.variables": {
+                "id": "@coffeekraken.s-postcss-sugar-plugin.config.postcssSugarPlugin.clean.variables",
+                "name": "variables",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Boolean"
+                        }
+                    ],
+                    "raw": "Boolean"
+                },
+                "default": "undefined",
+                "description": "Specify if you want to clean unused variables in your final css.\nIf is set to \"undefined\", it will be true only for production target build.",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.config.postcssSugarPlugin.clean",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "postcssSugarPlugin.config.ts",
+                "extension": "config",
+                "relPath": "src/config/postcssSugarPlugin.config.ts"
+            },
+            "@coffeekraken.s-postcss-sugar-plugin.config.postcssSugarPlugin.compress.variables": {
+                "id": "@coffeekraken.s-postcss-sugar-plugin.config.postcssSugarPlugin.compress.variables",
+                "name": "variables",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Boolean"
+                        }
+                    ],
+                    "raw": "Boolean"
+                },
+                "default": "undefined",
+                "description": "Specify if you want to compress the --s-theme... variables or not.\nIf is set to \"undefined\", it will be true only for production target build.",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.config.postcssSugarPlugin.compress",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "postcssSugarPlugin.config.ts",
+                "extension": "config",
+                "relPath": "src/config/postcssSugarPlugin.config.ts"
+            },
+            "@coffeekraken.s-postcss-sugar-plugin.config.postcssSugarPlugin.excludeByTypes": {
+                "id": "@coffeekraken.s-postcss-sugar-plugin.config.postcssSugarPlugin.excludeByTypes",
+                "name": "excludeByTypes",
+                "type": {
+                    "types": [
+                        {
+                            "type": "array",
+                            "of": [
+                                "String"
+                            ]
+                        }
+                    ],
+                    "raw": "String[]"
+                },
+                "default": "[]",
+                "description": "Specify some types of comments and code to exclude from the builded css",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.config.postcssSugarPlugin",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "postcssSugarPlugin.config.ts",
+                "extension": "config",
+                "relPath": "src/config/postcssSugarPlugin.config.ts"
+            },
+            "@coffeekraken.s-postcss-sugar-plugin.config.postcssSugarPlugin.excludeCommentByTypes": {
+                "id": "@coffeekraken.s-postcss-sugar-plugin.config.postcssSugarPlugin.excludeCommentByTypes",
+                "name": "excludeCommentByTypes",
+                "type": {
+                    "types": [
+                        {
+                            "type": "array",
+                            "of": [
+                                "String"
+                            ]
+                        }
+                    ],
+                    "raw": "String[]"
+                },
+                "default": "['CssClass']",
+                "description": "Specify some types of comments to exclude from the builded css",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.config.postcssSugarPlugin",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "postcssSugarPlugin.config.ts",
+                "extension": "config",
+                "relPath": "src/config/postcssSugarPlugin.config.ts"
+            },
+            "@coffeekraken.s-postcss-sugar-plugin.config.postcssSugarPlugin.excludeCodeByTypes": {
+                "id": "@coffeekraken.s-postcss-sugar-plugin.config.postcssSugarPlugin.excludeCodeByTypes",
+                "name": "excludeCodeByTypes",
+                "type": {
+                    "types": [
+                        {
+                            "type": "array",
+                            "of": [
+                                "String"
+                            ]
+                        }
+                    ],
+                    "raw": "String[]"
+                },
+                "default": "[]",
+                "description": "Specify some types of code to exclude from the builded css",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.config.postcssSugarPlugin",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "postcssSugarPlugin.config.ts",
+                "extension": "config",
+                "relPath": "src/config/postcssSugarPlugin.config.ts",
+                "children": {}
+            },
             "@coffeekraken.s-postcss-sugar-plugin.doc.README": {
                 "id": "@coffeekraken.s-postcss-sugar-plugin.doc.README",
                 "name": "README",
@@ -6686,43 +6841,6 @@
                         "default": "theme.ui.avatar.defaultLnf",
                         "defaultStr": "'theme.ui.avatar.defaultLnf'"
                     },
-                    "defaultShape": {
-                        "name": "defaultShape",
-                        "type": {
-                            "types": [
-                                {
-                                    "type": "string",
-                                    "value": "default"
-                                },
-                                {
-                                    "type": "string",
-                                    "value": "square"
-                                },
-                                {
-                                    "type": "string",
-                                    "value": "rounded"
-                                }
-                            ],
-                            "raw": "'default'|'square'|'rounded'"
-                        },
-                        "description": "The default shape you want",
-                        "default": "theme.ui.avatar.defaultShape",
-                        "defaultStr": "'theme.ui.avatar.defaultShape'"
-                    },
-                    "defaultColor": {
-                        "name": "defaultColor",
-                        "type": {
-                            "types": [
-                                {
-                                    "type": "String"
-                                }
-                            ],
-                            "raw": "String"
-                        },
-                        "description": "null",
-                        "default": "theme.ui.avatar.defaultColor",
-                        "defaultStr": "theme.ui.avatar.defaultColor"
-                    },
                     "scope": {
                         "name": "scope",
                         "type": {
@@ -7044,7 +7162,7 @@
                                 "default",
                                 "outline"
                             ],
-                            "default": "default"
+                            "default": "solid"
                         },
                         "scope": {
                             "type": {
@@ -7531,7 +7649,7 @@
                                 "outline",
                                 "text"
                             ],
-                            "default": "default"
+                            "default": "solid"
                         },
                         "scope": {
                             "type": {
@@ -7607,7 +7725,7 @@
                                 "outline",
                                 "text"
                             ],
-                            "default": "default"
+                            "default": "solid"
                         },
                         "scope": {
                             "type": {
@@ -7802,7 +7920,7 @@
                                 "outline",
                                 "text"
                             ],
-                            "default": "default"
+                            "default": "solid"
                         },
                         "scope": {
                             "type": {
@@ -7919,7 +8037,7 @@
                             "values": [
                                 "default"
                             ],
-                            "default": "default"
+                            "default": "solid"
                         },
                         "scope": {
                             "type": {
@@ -8083,7 +8201,7 @@
                             "values": [
                                 "default"
                             ],
-                            "default": "default"
+                            "default": "solid"
                         },
                         "scope": {
                             "type": {
@@ -8665,7 +8783,7 @@
                                 ],
                                 "raw": "String"
                             },
-                            "default": "default"
+                            "default": "solid"
                         },
                         "scope": {
                             "type": {
@@ -8788,7 +8906,7 @@
                                 "default",
                                 "underline"
                             ],
-                            "default": "default"
+                            "default": "solid"
                         },
                         "outline": {
                             "type": {
@@ -10429,7 +10547,7 @@
                             "values": [
                                 "default"
                             ],
-                            "default": "default"
+                            "default": "solid"
                         },
                         "scope": {
                             "type": {
@@ -10551,7 +10669,7 @@
                             "values": [
                                 "default"
                             ],
-                            "default": "default"
+                            "default": "solid"
                         },
                         "scope": {
                             "type": {
@@ -10715,7 +10833,7 @@
                             "values": [
                                 "default"
                             ],
-                            "default": "default"
+                            "default": "solid"
                         },
                         "scope": {
                             "type": {
@@ -10837,7 +10955,7 @@
                             "values": [
                                 "default"
                             ],
-                            "default": "default"
+                            "default": "solid"
                         },
                         "scope": {
                             "type": {
@@ -10999,7 +11117,7 @@
                             "values": [
                                 "default"
                             ],
-                            "default": "default"
+                            "default": "solid"
                         },
                         "scope": {
                             "type": {
@@ -11121,7 +11239,7 @@
                             "values": [
                                 "default"
                             ],
-                            "default": "default"
+                            "default": "solid"
                         },
                         "scope": {
                             "type": {
@@ -11285,7 +11403,7 @@
                             "values": [
                                 "default"
                             ],
-                            "default": "default"
+                            "default": "solid"
                         },
                         "scope": {
                             "type": {
@@ -11405,7 +11523,7 @@
                             "values": [
                                 "default"
                             ],
-                            "default": "default"
+                            "default": "solid"
                         },
                         "scope": {
                             "type": {
@@ -12223,7 +12341,7 @@
                             "values": [
                                 "default"
                             ],
-                            "default": "default"
+                            "default": "solid"
                         },
                         "scope": {
                             "type": {
@@ -12382,7 +12500,7 @@
                             "values": [
                                 "default"
                             ],
-                            "default": "default"
+                            "default": "solid"
                         },
                         "position": {
                             "type": {

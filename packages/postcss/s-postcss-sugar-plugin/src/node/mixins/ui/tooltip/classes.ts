@@ -29,12 +29,12 @@ class postcssSugarPluginUiTooltipClassesInterface extends __SInterface {
         return {
             lnfs: {
                 type: 'String[]',
-                values: ['default'],
-                default: ['default'],
+                values: ['solid'],
+                default: ['solid'],
             },
             defaultLnf: {
                 type: 'String',
-                values: ['default'],
+                values: ['solid'],
                 default: __STheme.get('ui.tooltip.defaultLnf'),
             },
             scope: {
@@ -50,8 +50,8 @@ class postcssSugarPluginUiTooltipClassesInterface extends __SInterface {
 }
 
 export interface IPostcssSugarPluginUiTooltipClassesParams {
-    lnfs: 'default'[];
-    defaultLnf: 'default';
+    lnfs: 'solid'[];
+    defaultLnf: 'solid';
     scope: ('bare' | 'lnf')[];
 }
 
@@ -70,7 +70,7 @@ export default function ({
 }) {
     const finalParams: IPostcssSugarPluginUiTooltipClassesParams = {
         lnfs: [],
-        defaultLnf: 'default',
+        defaultLnf: 'solid',
         scope: [],
         ...params,
     };

@@ -30,7 +30,7 @@ First, Coffeekraken gives you access to a bunch of UI components ready to use li
 {% endif %}
 {% endfor %}
 
-> For a more visual discovery of our UI's components, please check out our **styleguide**
+> For a more visual discovery of our UI's components, please check out our [styleguide](/styleguide/ui/card)
 
 ## Theming suite
 
@@ -45,6 +45,11 @@ This plugin allows you to make use of mixins and functions like these:
   background-color: sugar.color(accent);
   color: sugar.color(accent, foreground);
   /* and a lot more */
+
+  @sugar.media mobile {
+    display: none;
+    /* etc... */
+  }
 }
 ```
 
@@ -53,6 +58,7 @@ In addition to this, you will have access to a lot of helper classes for things 
 ```css
 /* init the theming suite with resets, variables, etc... */
 @sugar.init();
+
 /* generate the helpers and ui classes */
 @sugar.classes();
 
@@ -75,7 +81,7 @@ In order to make your daily work experience as smooth as possible, we've built a
 
 Our stack is as well modular and can be updated as you want through our [configuration system](/doc/config/overview).
 
-All the different project types like **generic**, **Nextjs**, **litElement**, etc... are builded upon our **recipes** system. This system is mainly a procedural project generator that you can take advantage of by [creating your own recipes](/doc/recipes/what-are-recipes) and speed up your workflow.
+All the different project types like **generic**, **Nextjs**, etc... are builded upon our **recipes** system. This system is mainly a procedural project generator that you can take advantage of by [creating your own recipes](/doc/recipes/what-are-recipes) and speed up your workflow.
 
 #### Built-in recipes
 
@@ -83,7 +89,7 @@ All the different project types like **generic**, **Nextjs**, **litElement**, et
 
 ## Sugar toolkit
 
-Our toolkit named [/package/@coffeekraken/sugar/doc/README](Sugar) regroup in 1 packages a lot of helper functions that we uses every day and that we have usually the habbit to search on google every time like `querySelectorLive`, `deepMerge`, `unique`, `md5`, `sha256`, `easeInterval` and a lot more...
+Our toolkit named [Sugar](/package/@coffeekraken/sugar/doc/README) regroup in 1 packages a lot of helper functions that we uses every day and that we have usually the habbit to search on google every time like `querySelectorLive`, `deepMerge`, `unique`, `md5`, `sha256`, `easeInterval` and a lot more...
 
 The toolkit covers areas like **js (browser)**, **node**, **shared** as well as some **php** ones for now.
 The goal is to have a toolbox where you have most of the tools you need available at your findertips instead of having to copy/paste code from internet each time...
@@ -103,7 +109,7 @@ npm i @coffeekraken/cli -g
 sugar -h
 ```
 
-> For more info about how to use our CLI, check out our [@coffeekraken/cli](/package/@coffeekraken/cli/doc/README) package documentation.
+> For more info about how to use our CLI, check out our [/package/@coffeekraken/cli/doc/README](@coffeekraken/cli) package documentation.
 
 ## Packages
 

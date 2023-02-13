@@ -12,6 +12,7 @@
             "@coffeekraken/s-builder",
             "@coffeekraken/s-carpenter",
             "@coffeekraken/s-class",
+            "@coffeekraken/s-classmap",
             "@coffeekraken/s-clipboard-copy-component",
             "@coffeekraken/s-code-formatter-prettier",
             "@coffeekraken/s-code-formatter",
@@ -56,6 +57,7 @@
             "@coffeekraken/s-inline-feature",
             "@coffeekraken/s-interface",
             "@coffeekraken/s-kitchen",
+            "@coffeekraken/s-lazy-feature",
             "@coffeekraken/s-lit-component",
             "@coffeekraken/s-log",
             "@coffeekraken/s-markdown-builder",
@@ -103,6 +105,55 @@
             "@coffeekraken/sugar"
         ],
         "map": {
+            "@coffeekraken.s-code-example-component.config.themeUi.codeExample.paddingInline": {
+                "id": "@coffeekraken.s-code-example-component.config.themeUi.codeExample.paddingInline",
+                "name": "paddingInline",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ],
+                    "raw": "String"
+                },
+                "default": "[theme.padding.50]",
+                "description": "Specify the default padding inline for code ui",
+                "namespace": "@coffeekraken.s-code-example-component.config.themeUi.codeExample",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "themeUi.config.ts",
+                "extension": "config",
+                "relPath": "src/config/themeUi.config.ts"
+            },
+            "@coffeekraken.s-code-example-component.config.themeUi.codeExample.paddingBlock": {
+                "id": "@coffeekraken.s-code-example-component.config.themeUi.codeExample.paddingBlock",
+                "name": "paddingBlock",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ],
+                    "raw": "String"
+                },
+                "default": "[theme.padding.50]",
+                "description": "Specify the default padding block for code ui",
+                "namespace": "@coffeekraken.s-code-example-component.config.themeUi.codeExample",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "themeUi.config.ts",
+                "extension": "config",
+                "relPath": "src/config/themeUi.config.ts",
+                "children": {}
+            },
             "@coffeekraken.s-code-example-component.doc.README": {
                 "id": "@coffeekraken.s-code-example-component.doc.README",
                 "name": "README",

@@ -27,11 +27,11 @@ class postcssSugarPluginScrollbarInterface extends __SInterface {
         return {
             color: {
                 type: 'String',
-                default: __STheme.get('ui.scrollbar.defaultColor'),
+                default: __STheme.get('ui.scrollbar.color'),
             },
             background: {
                 type: 'String',
-                default: __STheme.get('ui.scrollbar.defaultColor'),
+                default: __STheme.get('ui.scrollbar.color'),
             },
             size: {
                 type: 'String',

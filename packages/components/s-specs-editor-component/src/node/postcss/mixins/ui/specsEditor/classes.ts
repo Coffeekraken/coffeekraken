@@ -1,4 +1,5 @@
 import __SInterface from '@coffeekraken/s-interface';
+import __STheme from '@coffeekraken/s-theme';
 
 class postcssUiSpecsEditorClassesInterface extends __SInterface {
     static get _definition() {
@@ -16,9 +17,8 @@ class postcssUiSpecsEditorClassesInterface extends __SInterface {
 }
 
 export interface IPostcssUiSpecsEditorClassesParams {
-    styles: 'solid'[];
-    defaultStyle: 'solid';
-    defaultColor: string;
+    lnfs: 'solid'[];
+    defaultLnf: 'solid';
     scope: ('bare' | 'lnf' | 'behavior' | 'vr')[];
 }
 export { postcssUiSpecsEditorClassesInterface as interface };
@@ -35,9 +35,8 @@ export default function ({
     replaceWith: Function;
 }) {
     const finalParams: IPostcssUiSpecsEditorClassesParams = {
-        styles: ['solid'],
-        defaultStyle: 'solid',
-        defaultColor: 'main',
+        lnfs: ['solid'],
+        defaultLnf: 'solid',
         scope: ['bare', 'lnf', 'behavior'],
         ...params,
     };
@@ -58,7 +57,7 @@ export default function ({
     }
 
     if (
-        finalParams.styles.includes(finalParams.defaultStyle) &&
+        finalParams.lnfs.includes(finalParams.defaultLnf) &&
         finalParams.scope.includes('lnf')
     ) {
         vars.comment(
@@ -78,7 +77,7 @@ export default function ({
         ).code(
             `
             .s-specs-editor[lnf="default"]:not(.s-bare) {
-                @sugar.ui.specsEditor($style: ${finalParams.defaultStyle}, $scope: lnf);
+                @sugar.ui.specsEditor($lnf: ${finalParams.defaultLnf}, $scope: lnf);
             }
             `,
             {
@@ -88,13 +87,13 @@ export default function ({
     }
 
     if (
-        finalParams.styles.includes(finalParams.defaultStyle) &&
+        finalParams.lnfs.includes(finalParams.defaultLnf) &&
         finalParams.scope.includes('behavior')
     ) {
         vars.code(
             `
             .s-specs-editor[behavior="default"] {
-                @sugar.ui.specsEditor($style: ${finalParams.defaultStyle}, $scope: behavior);
+                @sugar.ui.specsEditor($lnf: ${finalParams.defaultLnf}, $scope: behavior);
             }`,
             {
                 type: 'CssClass',

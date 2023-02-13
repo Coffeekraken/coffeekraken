@@ -3,6 +3,7 @@
 import __SBench from '@coffeekraken/s-bench';
 import __SDuration from '@coffeekraken/s-duration';
 import __SLog from '@coffeekraken/s-log';
+import __STheme from '@coffeekraken/s-theme';
 import { __isPlainObject } from '@coffeekraken/sugar/is';
 import { __deepMerge } from '@coffeekraken/sugar/object';
 import __fs from 'fs';
@@ -56,6 +57,8 @@ export default function genericHandler({
         //     return resolve();
         // }
 
+        const theme = new __STheme();
+
         const bench = new __SBench('handlers.generic');
 
         bench.step('beforeViewsRendering');
@@ -63,7 +66,9 @@ export default function genericHandler({
         const renderedViews: string[] = [];
 
         for (let [idx, viewObj] of pageConfig.views.entries()) {
-            let data = Object.assign({}, res.templateData ?? {}),
+            let data = Object.assign({}, res.templateData ?? {}, {
+                    theme: theme.get('.'),
+                }),
                 viewPath = viewObj.path;
 
             const duration = new __SDuration();

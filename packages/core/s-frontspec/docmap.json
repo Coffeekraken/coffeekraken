@@ -12,6 +12,7 @@
             "@coffeekraken/s-builder",
             "@coffeekraken/s-carpenter",
             "@coffeekraken/s-class",
+            "@coffeekraken/s-classmap",
             "@coffeekraken/s-clipboard-copy-component",
             "@coffeekraken/s-code-example-component",
             "@coffeekraken/s-code-formatter-prettier",
@@ -56,6 +57,7 @@
             "@coffeekraken/s-inline-feature",
             "@coffeekraken/s-interface",
             "@coffeekraken/s-kitchen",
+            "@coffeekraken/s-lazy-feature",
             "@coffeekraken/s-lit-component",
             "@coffeekraken/s-log",
             "@coffeekraken/s-markdown-builder",
@@ -103,6 +105,55 @@
             "@coffeekraken/sugar"
         ],
         "map": {
+            "@coffeekraken.s-frontspec.config.frontspec.default.assets.viteClient": {
+                "id": "@coffeekraken.s-frontspec.config.frontspec.default.assets.viteClient",
+                "name": "viteClient",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Object"
+                        }
+                    ],
+                    "raw": "Object"
+                },
+                "default": "vite client script",
+                "description": "Specify some items you want to integrate to the head tag. It can be everything you want",
+                "namespace": "@coffeekraken.s-frontspec.config.frontspec.default.assets",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "frontspec.config.ts",
+                "extension": "config",
+                "relPath": "src/config/frontspec.config.ts",
+                "children": {
+                    "removeforfrontend": {
+                        "id": "s59b605d424572222f491085390862068a2a2a695aec8c8cc5cdade8baaecf69a",
+                        "name": "removeForFrontend",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "array",
+                                    "of": [
+                                        "String"
+                                    ]
+                                }
+                            ],
+                            "raw": "String[]"
+                        },
+                        "default": "['frontspec', 'assets', 'views', 'specs', 'margin', 'padding']",
+                        "description": "Specify some sources you want to remove from the frontend js file",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://coffeekraken.io"
+                        }
+                    }
+                }
+            },
             "@coffeekraken.s-frontspec.doc.README": {
                 "id": "@coffeekraken.s-frontspec.doc.README",
                 "name": "README",

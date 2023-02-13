@@ -24,8 +24,14 @@ namespace Sugar\html;
 function get_tag($tag, $xml)
 {
     $tag = preg_quote($tag);
+
     preg_match_all(
-        '{<' . $tag . '[^>]*>(.*?)</' . $tag . '>' . '}',
+        // '{<' . $tag . '[^>]*>(.*?)</' . $tag . '>' . '}',
+        '/<' .
+            preg_quote($tag, '/') .
+            '(?:[^"\'>]*|"[^"]*"|\'[^\']*\')*>.*?<\/' .
+            preg_quote($tag, '/') .
+            '>/s',
         $xml,
         $matches,
         PREG_PATTERN_ORDER
@@ -36,14 +42,26 @@ function get_tag($tag, $xml)
 
 function expandPleasantCssClassnames($html)
 {
+    $plainTags = [];
+
     // grab do not touch tags
-    preg_match_all('/<code[^>]*>(.*?)<\/code>/s', $html, $doNotTouchTagCode);
-    foreach ($doNotTouchTagCode[0] as $idx => $tag) {
-        $html = str_replace(
-            $tag,
-            '[sExpandColonClassesTagCode:' . $idx . ']',
-            $html
-        );
+    $tags = ['code', 'template'];
+    foreach ($tags as $tag) {
+        $tagsHtmls = get_tag($tag, $html);
+
+        // print '<pre>';
+        // print_r($tagsHtmls);
+
+        foreach ($tagsHtmls[0] as $tagHtml) {
+            $id = uniqid();
+
+            $plainTags['[expandPleasantCssClassnames:' . $id . ']'] = $tagHtml;
+            $html = str_replace(
+                $tagHtml,
+                '[expandPleasantCssClassnames:' . $id . ']',
+                $html
+            );
+        }
     }
 
     $reg = '/class="[a-zA-Z0-9_\-:@\s]+"/';
@@ -102,35 +120,43 @@ function expandPleasantCssClassnames($html)
         );
     }
 
-    $escapedParts = [];
-    $escapedReg = '/class=".*\\\:.*"/';
-    $escapedMatches = preg_match_all($escapedReg, $html, $escapedParts);
+    // $escapedParts = [];
+    // $escapedReg = '/class=".*\\\:.*"/';
+    // $escapedMatches = preg_match_all($escapedReg, $html, $escapedParts);
 
-    if (count($escapedParts)) {
-        foreach ($escapedParts[0] as $class) {
-            $newClass = str_replace('\:', ':', $class);
-            $html = str_replace($class, $newClass, $html);
-        }
+    // if (count($escapedParts)) {
+    //     foreach ($escapedParts[0] as $class) {
+    //         $newClass = str_replace('\:', ':', $class);
+    //         $html = str_replace($class, $newClass, $html);
+    //     }
+    // }
+
+    // print '<pre>';
+    // print_r($plainTags);
+
+    // restore protected tags
+    foreach ($plainTags as $id => $rawHtml) {
+        $html = str_replace($id, $rawHtml, $html);
     }
 
     // restore do not touch tags
-    preg_match_all(
-        '/\[sExpandColonClassesTagCode:[0-9]{1,999}\]/ms',
-        $html,
-        $restoreTagCode
-    );
-    preg_match_all(
-        '/\[sExpandColonClassesTagTemplate\:[0-9]{1,999}\]/ms',
-        $html,
-        $restoreTagTemplate
-    );
+    // preg_match_all(
+    //     '/\[sExpandColonClassesTagCode:[0-9]{1,999}\]/ms',
+    //     $html,
+    //     $restoreTagCode
+    // );
+    // preg_match_all(
+    //     '/\[sExpandColonClassesTagTemplate\:[0-9]{1,999}\]/ms',
+    //     $html,
+    //     $restoreTagTemplate
+    // );
 
-    foreach ($restoreTagCode[0] as $idx => $tag) {
-        $html = str_replace($tag, $doNotTouchTagCode[0][$idx], $html);
-    }
-    foreach ($restoreTagTemplate[0] as $idx => $tag) {
-        $html = str_replace($tag, $doNotTouchTagTemplate[0][$idx], $html);
-    }
+    // foreach ($restoreTagCode[0] as $idx => $tag) {
+    //     $html = str_replace($tag, $doNotTouchTagCode[0][$idx], $html);
+    // }
+    // foreach ($restoreTagTemplate[0] as $idx => $tag) {
+    //     $html = str_replace($tag, $doNotTouchTagTemplate[0][$idx], $html);
+    // }
 
     return $html;
 }

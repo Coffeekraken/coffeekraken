@@ -3,7 +3,7 @@ import __SSpecs from '@coffeekraken/s-specs';
 import { __dirname } from '@coffeekraken/sugar/fs';
 import { __deepMerge } from '@coffeekraken/sugar/object';
 
-export default function carpenter(app, settings, config) {
+export default function carpenter({ express, settings, config }) {
     return new Promise(async (resolve) => {
         // handlers
         config.handlers.carpenterJson = {
@@ -32,7 +32,7 @@ export default function carpenter(app, settings, config) {
             handler: 'carpenter',
         };
 
-        app.post('/carpenter/:dotpath', async (req, res) => {
+        express.post('/carpenter/:dotpath', async (req, res) => {
             // read the requested spec file
             const specsInstance = new __SSpecs(),
                 specs = await specsInstance.read(req.params.dotpath, {

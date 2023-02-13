@@ -12,6 +12,7 @@
             "@coffeekraken/s-builder",
             "@coffeekraken/s-carpenter",
             "@coffeekraken/s-class",
+            "@coffeekraken/s-classmap",
             "@coffeekraken/s-clipboard-copy-component",
             "@coffeekraken/s-code-example-component",
             "@coffeekraken/s-code-formatter-prettier",
@@ -56,6 +57,7 @@
             "@coffeekraken/s-inline-feature",
             "@coffeekraken/s-interface",
             "@coffeekraken/s-kitchen",
+            "@coffeekraken/s-lazy-feature",
             "@coffeekraken/s-lit-component",
             "@coffeekraken/s-log",
             "@coffeekraken/s-markdown-builder",
@@ -103,6 +105,53 @@
             "@coffeekraken/sugar"
         ],
         "map": {
+            "@coffeekraken.s-code-formatter.config.codeFormatter.glob": {
+                "id": "@coffeekraken.s-code-formatter.config.codeFormatter.glob",
+                "name": "glob",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ],
+                    "raw": "String"
+                },
+                "default": "** /*",
+                "description": "Specify the default glob for the SCodeFormatter.format process",
+                "namespace": "@coffeekraken.s-code-formatter.config.codeFormatter",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com"
+                },
+                "filename": "codeFormatter.config.ts",
+                "extension": "config",
+                "relPath": "src/config/codeFormatter.config.ts"
+            },
+            "@coffeekraken.s-code-formatter.config.codeFormatter.inDir": {
+                "id": "@coffeekraken.s-code-formatter.config.codeFormatter.inDir",
+                "name": "inDir",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ],
+                    "raw": "String"
+                },
+                "default": "[config.storage.src.rootDir]",
+                "description": "Specify the default inDir for the SCodeFormatter.format process",
+                "namespace": "@coffeekraken.s-code-formatter.config.codeFormatter",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com"
+                },
+                "filename": "codeFormatter.config.ts",
+                "extension": "config",
+                "relPath": "src/config/codeFormatter.config.ts",
+                "children": {}
+            },
             "@coffeekraken.s-code-formatter.doc.README": {
                 "id": "@coffeekraken.s-code-formatter.doc.README",
                 "name": "README",

@@ -28,12 +28,12 @@ class postcssSugarPluginUiButtonClassesInterface extends __SInterface {
         return {
             lnfs: {
                 type: 'String[]',
-                values: ['default', 'gradient', 'outline', 'text'],
-                default: ['default', 'gradient', 'outline', 'text'],
+                values: ['solid', 'gradient', 'outline', 'text'],
+                default: ['solid', 'gradient', 'outline', 'text'],
             },
             defaultLnf: {
                 type: 'String',
-                values: ['default', 'gradient', 'outline', 'text'],
+                values: ['solid', 'gradient', 'outline', 'text'],
                 default: __STheme.get('ui.button.defaultLnf') ?? 'default',
             },
             scope: {
@@ -49,8 +49,8 @@ class postcssSugarPluginUiButtonClassesInterface extends __SInterface {
 }
 
 export interface IPostcssSugarPluginUiButtonClassesParams {
-    lnfs: ('default' | 'gradient' | 'outline' | 'text')[];
-    defaultLnf: 'default' | 'gradient' | 'outline' | 'text';
+    lnfs: ('solid' | 'gradient' | 'outline' | 'text')[];
+    defaultLnf: 'solid' | 'gradient' | 'outline' | 'text';
     scope: ('bare' | 'lnf' | 'bare' | 'vr' | 'tf')[];
 }
 
@@ -68,8 +68,8 @@ export default function ({
     replaceWith: Function;
 }) {
     const finalParams: IPostcssSugarPluginUiButtonClassesParams = {
-        lnfs: ['default', 'gradient', 'outline', 'text'],
-        defaultLnf: 'default',
+        lnfs: ['solid', 'gradient', 'outline', 'text'],
+        defaultLnf: 'solid',
         scope: ['bare', 'lnf', 'vr', 'tf'],
         ...params,
     };

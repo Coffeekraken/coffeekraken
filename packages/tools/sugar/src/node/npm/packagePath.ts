@@ -18,8 +18,8 @@ import __fs from 'fs';
  * @return      {String}                      The package path
  *
  * @example         js
- * import packagePath from '@coffeekraken/sugar/node/npm/packagePath`;
- * packagrJson('lodash');
+ * import { __packagePath } from '@coffeekraken/sugar/npm`;
+ * __packagePath('lodash');
  *
  * @todo        Implement a cache strategy to avoid making same process again and again
  *
@@ -53,7 +53,7 @@ export default function packagePath(
 
     // if the package.json exists in rootDir node_modules folder
     if (__fs.existsSync(`${set.cwd}/node_modules/${name}/package.json`)) {
-        return `${set.cwd}/node_modules/${name}`;
+        return __fs.realpathSync(`${set.cwd}/node_modules/${name}`);
     }
 
     if (
@@ -61,12 +61,12 @@ export default function packagePath(
         monoDir !== settings?.rootDir &&
         __fs.existsSync(`${monoDir}/${name}/package.json`)
     ) {
-        return `${monoDir}/${name}`;
+        return __fs.realpathSync(`${monoDir}/${name}`);
     }
 
     globalDir = __globalNodeModulesPath();
 
     if (set.global && __fs.existsSync(`${globalDir}/${name}/package.json`)) {
-        return `${globalDir}/${name}`;
+        return __fs.realpathSync(`${globalDir}/${name}`);
     }
 }

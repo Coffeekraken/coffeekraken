@@ -47,7 +47,7 @@ Here's are the excluded folders:
 If you need to update or add some globs to search in, simply create a file under `.sugar/docmap.config.ts` and fill it like so:
 
 ```js
-export default function (env, config) {
+export default function ({env, config}) {
   if (env.platform !== 'node') return {};
   return {
     build: {

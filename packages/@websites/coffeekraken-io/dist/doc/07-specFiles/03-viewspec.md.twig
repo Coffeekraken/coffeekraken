@@ -21,12 +21,12 @@
 
 ## Why?
 
-His goal is to describe a particular view like `hello.blade.php`.
+His goal is to describe a particular view like `hello.twig`.
 By describing the data that this view depends on, you can use that and build your backend automatically. Pretty usefull for medium/large projects.
 
 ## Filename
 
-A specification file has to be named with `.spec.json` at his end. Usually this mean that if you have a view named `card.twig.php`, the files will be something like this:
+A specification file has to be named with `.spec.json` at his end. Usually this mean that if you have a view named `card.twig`, the files will be something like this:
 
 ```
 | src
@@ -99,6 +99,8 @@ export default {
 Here's the main data types that we think cover a lot of situations. Note that this is more to take as example that final types. You can specify your own types as well depending on your needs:
 
 - `String`: Simple string data
+- `Text`: Similar as "String"
+- `Wysiwyg`: String that can contain formatting tags
 - `Date`: Simple [ISO](https://en.wikipedia.org/wiki/ISO_8601) date string
 - `DateTime`: Simple [ISO](https://en.wikipedia.org/wiki/ISO_8601) datetime string
 - `Time`: Simple [ISO](https://en.wikipedia.org/wiki/ISO_8601) time string

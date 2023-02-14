@@ -23,8 +23,8 @@ declare class postcssSugarPluginUiSwitchClassesMixinInterface extends __SInterfa
     };
 }
 export interface IPostcssSugarPluginUiSwitchClassesMixinParams {
-    lnfs: 'default'[];
-    defaultLnf: 'default';
+    lnfs: 'solid'[];
+    defaultLnf: 'solid';
     scope: ('bare' | 'lnf' | 'vr' | 'tf')[];
 }
 export { postcssSugarPluginUiSwitchClassesMixinInterface as interface };

@@ -25,14 +25,14 @@ exports.default = (api) => {
              * @name            development
              * @type            Regex
              * @namespace       config.env.envFromLocation
-             * @default         https?://(localhost|127.0.0.1|0.0.0.0|192.168.[0-9]{1,3}.[0-9]{1,3}|.*.local)
+             * @default         https?://(localhost|127.0.0.1|0.0.0.0|192.168.[0-9]{1,3}.[0-9]{1,3})
              *
              * Specify the regex to detect the "development" environment from the document.location.href variable
              *
              * @since           2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            development: 'https?://(localhost|127.0.0.1|0.0.0.0|192.168.[0-9]{1,3}.[0-9]{1,3}|.*.local)',
+            development: 'https?://(localhost|127.0.0.1|0.0.0.0|192.168.[0-9]{1,3}.[0-9]{1,3})',
             /**
              * @name            staging
              * @type            Regex
@@ -49,14 +49,14 @@ exports.default = (api) => {
              * @name            production
              * @type            Regex
              * @namespace       config.env.envFromLocation
-             * @default         https://.*
+             * @default         https?://.*
              *
              * Specify the regex to detect the "production" environment from the document.location.href variable
              *
              * @since           2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            production: 'https://.*',
+            production: 'https?://.*',
         },
         git: {
             template: {
@@ -69,4 +69,4 @@ exports.default = (api) => {
         },
     };
 };
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7O0FBQUEsYUFBYTtBQUNiLElBQUksTUFBTSxJQUFJLENBQUMsTUFBTSxDQUFDLFFBQVE7SUFBRSxNQUFNLENBQUMsUUFBUSxHQUFHLEVBQUUsQ0FBQztBQUVyRCxrQkFBZSxDQUFDLEdBQUcsRUFBRSxFQUFFO0lBQ25CLE9BQU87UUFDSDs7Ozs7Ozs7Ozs7OztXQWFHO1FBQ0gsR0FBRyxFQUFFLFNBQVM7UUFFZCxlQUFlLEVBQUU7WUFDYjs7Ozs7Ozs7OztlQVVHO1lBQ0gsV0FBVyxFQUNQLCtFQUErRTtZQUVuRjs7Ozs7Ozs7OztlQVVHO1lBQ0gsT0FBTyxFQUFFLG9EQUFvRDtZQUU3RDs7Ozs7Ozs7OztlQVVHO1lBQ0gsVUFBVSxFQUFFLFlBQVk7U0FDM0I7UUFFRCxHQUFHLEVBQUU7WUFDRCxRQUFRLEVBQUU7Z0JBQ04sSUFBSSxFQUFFLFVBQVU7Z0JBQ2hCLE1BQU0sRUFBRTtvQkFDSixFQUFFLEVBQUUsU0FBUztvQkFDYixJQUFJLEVBQUUsU0FBUztpQkFDbEI7YUFDSjtTQUNKO0tBQ0osQ0FBQztBQUNOLENBQUMsQ0FBQyJ9
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7O0FBQUEsYUFBYTtBQUNiLElBQUksTUFBTSxJQUFJLENBQUMsTUFBTSxDQUFDLFFBQVE7SUFBRSxNQUFNLENBQUMsUUFBUSxHQUFHLEVBQUUsQ0FBQztBQUVyRCxrQkFBZSxDQUFDLEdBQUcsRUFBRSxFQUFFO0lBQ25CLE9BQU87UUFDSDs7Ozs7Ozs7Ozs7OztXQWFHO1FBQ0gsR0FBRyxFQUFFLFNBQVM7UUFFZCxlQUFlLEVBQUU7WUFDYjs7Ozs7Ozs7OztlQVVHO1lBQ0gsV0FBVyxFQUNQLHNFQUFzRTtZQUUxRTs7Ozs7Ozs7OztlQVVHO1lBQ0gsT0FBTyxFQUFFLG9EQUFvRDtZQUU3RDs7Ozs7Ozs7OztlQVVHO1lBQ0gsVUFBVSxFQUFFLGFBQWE7U0FDNUI7UUFFRCxHQUFHLEVBQUU7WUFDRCxRQUFRLEVBQUU7Z0JBQ04sSUFBSSxFQUFFLFVBQVU7Z0JBQ2hCLE1BQU0sRUFBRTtvQkFDSixFQUFFLEVBQUUsU0FBUztvQkFDYixJQUFJLEVBQUUsU0FBUztpQkFDbEI7YUFDSjtTQUNKO0tBQ0osQ0FBQztBQUNOLENBQUMsQ0FBQyJ9

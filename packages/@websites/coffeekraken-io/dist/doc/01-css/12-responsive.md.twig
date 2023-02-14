@@ -28,6 +28,7 @@ See this as a simpler replacement for the traditional `@media` css statement. He
 ```css
 .my-button {
     background: red;
+
     @sugar.media mobile {
         background: green;
     }
@@ -44,7 +45,7 @@ This(ese) "breakpoints" comes from your theme configuration as all other setting
 export default {{ media|json_encode()|raw }};
 ```
 
-These settings gives us a "mobile first" approach and 5 breakpoints that are `mobile`, `tablet`, `desktop`, `wide` and `dwarf`. The role of the `defaultAction` property will be more obvious right bellow.
+These settings gives us a "mobile first" approach and 5 breakpoints that are `mobile`, `tablet`, `desktop` and `wide`. The role of the `defaultAction` property will be more obvious right bellow.
 
 Here's some more "complex" queries to explain the role of the `defaultAction` property:
 

@@ -1,6 +1,8 @@
 #!/usr/bin/env -S node --experimental-json-modules --trace-warnings --trace-uncaught --no-warnings --es-module-specifier-resolution node
 // @ts-nocheck
 
+import { __hashFrom } from '@coffeekraken/sugar/hash';
+
 import __SBench from '@coffeekraken/s-bench';
 import __SEventEmitter from '@coffeekraken/s-event-emitter';
 import __SLog from '@coffeekraken/s-log';
@@ -9,7 +11,7 @@ import __SStdio, {
     __SStdioBasicAdapter,
     __SStdioConsoleSource,
     __SStdioEventEmitterSource,
-    __SStdioNotificationAdapter
+    __SStdioNotificationAdapter,
 } from '@coffeekraken/s-stdio';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
 import __SSugarJson from '@coffeekraken/s-sugar-json';
@@ -20,7 +22,7 @@ import { __wait } from '@coffeekraken/sugar/datetime';
 import {
     __dirname,
     __readJsonSync,
-    __writeFileSync
+    __writeFileSync,
 } from '@coffeekraken/sugar/fs';
 import { __isChildProcess } from '@coffeekraken/sugar/is';
 import { __hotkey } from '@coffeekraken/sugar/keyboard';
@@ -29,7 +31,7 @@ import { __packageRootDir } from '@coffeekraken/sugar/path';
 import {
     __onProcessExit,
     __processSugar,
-    __spawn
+    __spawn,
 } from '@coffeekraken/sugar/process';
 import __chalk from 'chalk';
 import __dotenv from 'dotenv';
@@ -224,6 +226,20 @@ export default class SSugarCli {
         const config = await __SSugarConfig.load({
             cache: true,
         });
+
+        console.log(
+            __hashFrom([
+                '@coffeekraken/sugar',
+                __dirname(),
+                `${__dirname()}/sugar.cli.js`,
+                `${__dirname()}/**/*.*`,
+                {
+                    hello: 'world',
+                },
+            ]),
+        );
+
+        return;
 
         // console.log('LOADED');
         // console.log(__SSugarConfig.get('viewRenderer'));
@@ -490,19 +506,18 @@ export default class SSugarCli {
             this._initStdio(true);
 
             await __wait(100);
-            
-            
+
             if (!__isChildProcess()) {
                 this._newStep();
             }
-            
+
             let args = this.args.args;
-            
+
             if (cliObj.interfacePath) {
                 const { default: int } = await import(cliObj.interfacePath);
                 args = int.apply(this.args.args);
             }
-            
+
             // @ts-ignore
             const proPromise = processFn(args);
             // this._eventEmitter.pipe(proPromise, {});

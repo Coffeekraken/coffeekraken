@@ -36,7 +36,7 @@ export default {
 };
 ```
 
-- Create your view `hello.blade.php` (twig is also supported) unto the `src/views/hello` folder
+- Create your view `hello.twig` (blade is also supported) unto the `src/views/hello` folder
 - Your page will be available under `/hello` url!
 
 > You can create nested folders to generate nested urls.
@@ -62,12 +62,12 @@ export default {
 
 Coffeekraken has a built-in server that support multiple views types like:
 
-- `.blade.php`
-- `.twig`
+- [twig](https://twig.symfony.com/)
+- [blade](https://laravel.com/docs/9.x/blade)
 - and more to come...
 
 These views are rendered using native PHP libraries through the `@coffeekraken/s-view-renderer` package.
 
-> For more information about the `@coffeekraken/s-view-renderer`, please check his own documentation.
+> For more information about the `@coffeekraken/s-view-renderer`, please check his own [documentation](/package/@coffeekraken/s-view-renderer/doc/readme).
 
 {% endblock %}

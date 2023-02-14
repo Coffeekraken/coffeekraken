@@ -18,7 +18,7 @@ declare class postcssSugarPluginUiRangeInterface extends __SInterface {
     };
 }
 export interface IPostcssSugarPluginUiButtonParams {
-    lnf: 'default';
+    lnf: 'solid';
     scope: ('bare' | 'lnf')[];
 }
 export { postcssSugarPluginUiRangeInterface as interface };

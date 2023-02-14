@@ -54,7 +54,7 @@ exports.default = (api) => {
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            alpha: 0.2,
+            alpha: 0.4,
         },
         foreground: {
             /**

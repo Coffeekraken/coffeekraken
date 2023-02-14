@@ -117,7 +117,6 @@ export default function ({
         vars.push(`
           font-size: sugar.scalable(1rem);
           text-decoration: none;
-          font-weight: bold;
           @sugar.shape;
         `);
 

@@ -29,7 +29,7 @@ class postcssSugarPluginUiRangeInterface extends __SInterface {
         return {
             lnf: {
                 type: 'String',
-                values: ['default'],
+                values: ['solid'],
                 default: __STheme.get('ui.form.defaultLnf'),
             },
             scope: {
@@ -45,7 +45,7 @@ class postcssSugarPluginUiRangeInterface extends __SInterface {
 }
 
 export interface IPostcssSugarPluginUiButtonParams {
-    lnf: 'default';
+    lnf: 'solid';
     scope: ('bare' | 'lnf')[];
 }
 
@@ -60,7 +60,7 @@ export default function ({
     replaceWith: Function;
 }) {
     const finalParams: IPostcssSugarPluginUiButtonParams = {
-        lnf: 'default',
+        lnf: 'solid',
         scope: ['bare', 'lnf'],
         ...params,
     };

@@ -12,8 +12,8 @@ import __faker from 'faker';
  *
  * Generate the range classes
  *
- * @param       {('default')[]}                           [lnfs=['default']]         The style(s) you want to generate
- * @param       {'default'}                [defaultLnf='theme.ui.range.defaultLnf']           The default style you want
+ * @param       {('solid')[]}                           [lnfs=['solid']]         The style(s) you want to generate
+ * @param       {'solid'}                [defaultLnf='theme.ui.range.defaultLnf']           The default style you want
  * @param       {('bare'|'lnf'|'vr'|'tf')[]}        [scope=['bare', 'lnf', 'vr', 'tf']]      The scope you want to generate
  * @return      {String}            The generated css
  *
@@ -29,12 +29,12 @@ class postcssSugarPluginUiRangeClassesInterface extends __SInterface {
         return {
             lnfs: {
                 type: 'String[]',
-                values: ['default'],
-                default: ['default'],
+                values: ['solid'],
+                default: ['solid'],
             },
             defaultLnf: {
                 type: 'String',
-                values: ['default'],
+                values: ['solid'],
                 default: __STheme.get('ui.range.defaultLnf'),
             },
             scope: {
@@ -51,7 +51,7 @@ class postcssSugarPluginUiRangeClassesInterface extends __SInterface {
 
 export interface IPostcssSugarPluginUiRangeClassesParams {
     lnfs: 'default'[];
-    defaultLnf: 'default';
+    defaultLnf: 'solid';
     scope: ('bare' | 'lnf' | 'vr' | 'tf')[];
 }
 
@@ -70,7 +70,7 @@ export default function ({
 }) {
     const finalParams: IPostcssSugarPluginUiRangeClassesParams = {
         lnfs: [],
-        defaultLnf: 'default',
+        defaultLnf: 'solid',
         scope: [],
         ...params,
     };

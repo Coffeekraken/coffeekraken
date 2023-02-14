@@ -447,7 +447,7 @@ export default class SImagesBuilder extends __SBuilder {
                             );
 
                             console.log(
-                                `<yellow>[webp]</yellow> Generatating webp version of file "<cyan>${__path.relative(
+                                `<yellow>[webp]</yellow> Generating webp version of file "<cyan>${__path.relative(
                                     __packageRootDir(),
                                     imgObj.outPath,
                                 )}</cyan>"`,

@@ -24,7 +24,7 @@ export default (api) => {
              * @name            development
              * @type            Regex
              * @namespace       config.env.envFromLocation
-             * @default         https?://(localhost|127.0.0.1|0.0.0.0|192.168.[0-9]{1,3}.[0-9]{1,3}|.*.local)
+             * @default         https?://(localhost|127.0.0.1|0.0.0.0|192.168.[0-9]{1,3}.[0-9]{1,3})
              *
              * Specify the regex to detect the "development" environment from the document.location.href variable
              *
@@ -32,7 +32,7 @@ export default (api) => {
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             development:
-                'https?://(localhost|127.0.0.1|0.0.0.0|192.168.[0-9]{1,3}.[0-9]{1,3}|.*.local)',
+                'https?://(localhost|127.0.0.1|0.0.0.0|192.168.[0-9]{1,3}.[0-9]{1,3})',
 
             /**
              * @name            staging
@@ -51,14 +51,14 @@ export default (api) => {
              * @name            production
              * @type            Regex
              * @namespace       config.env.envFromLocation
-             * @default         https://.*
+             * @default         https?://.*
              *
              * Specify the regex to detect the "production" environment from the document.location.href variable
              *
              * @since           2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            production: 'https://.*',
+            production: 'https?://.*',
         },
 
         git: {

@@ -11,8 +11,8 @@ import __STheme from '@coffeekraken/s-theme';
  *
  * Generate the button classes
  *
- * @param       {('default'|'gradient'|'outline'|'text')[]}                           [lnfs=['default','gradient','outline','text']]         The style(s) you want to generate
- * @param       {'default'|'gradient'|'outline'|'text'}                [defaultLnf='theme.ui.button.defaultLnf']           The default style you want
+ * @param       {('default'|'outline'|'text')[]}                           [lnfs=['default','outline','text']]         The style(s) you want to generate
+ * @param       {'default'|'outline'|'text'}                [defaultLnf='theme.ui.button.defaultLnf']           The default style you want
  * @param       {('bare'|'lnf'|'vr')[]}        [scope=['bare', 'lnf', 'vr']]      The scope you want to generate
  * @return      {Css}                   The corresponding css
  *
@@ -28,12 +28,12 @@ class postcssSugarPluginUiButtonClassesInterface extends __SInterface {
         return {
             lnfs: {
                 type: 'String[]',
-                values: ['solid', 'gradient', 'outline', 'text'],
-                default: ['solid', 'gradient', 'outline', 'text'],
+                values: ['solid', 'outline', 'text'],
+                default: ['solid', 'outline', 'text'],
             },
             defaultLnf: {
                 type: 'String',
-                values: ['solid', 'gradient', 'outline', 'text'],
+                values: ['solid', 'outline', 'text'],
                 default: __STheme.get('ui.button.defaultLnf') ?? 'default',
             },
             scope: {
@@ -49,8 +49,8 @@ class postcssSugarPluginUiButtonClassesInterface extends __SInterface {
 }
 
 export interface IPostcssSugarPluginUiButtonClassesParams {
-    lnfs: ('solid' | 'gradient' | 'outline' | 'text')[];
-    defaultLnf: 'solid' | 'gradient' | 'outline' | 'text';
+    lnfs: ('solid' | 'outline' | 'text')[];
+    defaultLnf: 'solid' | 'outline' | 'text';
     scope: ('bare' | 'lnf' | 'bare' | 'vr' | 'tf')[];
 }
 
@@ -68,7 +68,7 @@ export default function ({
     replaceWith: Function;
 }) {
     const finalParams: IPostcssSugarPluginUiButtonClassesParams = {
-        lnfs: ['solid', 'gradient', 'outline', 'text'],
+        lnfs: ['solid', 'outline', 'text'],
         defaultLnf: 'solid',
         scope: ['bare', 'lnf', 'vr', 'tf'],
         ...params,

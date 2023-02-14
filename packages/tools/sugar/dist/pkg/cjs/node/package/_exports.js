@@ -17,9 +17,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.__replacePackageJsonTokens = exports.__renamePackage = exports.__packageJsonSync = exports.__packageJson = exports.__dependenciesHash = void 0;
-const dependenciesHash_1 = __importDefault(require("./dependenciesHash"));
-exports.__dependenciesHash = dependenciesHash_1.default;
+exports.__replacePackageJsonTokens = exports.__renamePackage = exports.__packageJsonSync = exports.__packageJson = void 0;
 const packageJson_1 = __importDefault(require("./packageJson"));
 exports.__packageJson = packageJson_1.default;
 const packageJsonSync_1 = __importDefault(require("./packageJsonSync"));
@@ -29,4 +27,4 @@ exports.__renamePackage = renamePackage_1.default;
 const replacePackageJsonTokens_1 = __importDefault(require("./replacePackageJsonTokens"));
 exports.__replacePackageJsonTokens = replacePackageJsonTokens_1.default;
 __exportStar(require("../../shared/package/_exports"), exports);
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0FBQUEsMEVBQW9EO0FBUWhELDZCQVJHLDBCQUFrQixDQVFIO0FBUHRCLGdFQUEwQztBQVF0Qyx3QkFSRyxxQkFBYSxDQVFIO0FBUGpCLHdFQUFrRDtBQVE5Qyw0QkFSRyx5QkFBaUIsQ0FRSDtBQVByQixvRUFBOEM7QUFRMUMsMEJBUkcsdUJBQWUsQ0FRSDtBQVBuQiwwRkFBb0U7QUFRaEUscUNBUkcsa0NBQTBCLENBUUg7QUFOOUIsZ0VBQThDIn0=
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0FBQUEsZ0VBQTBDO0FBT3RDLHdCQVBHLHFCQUFhLENBT0g7QUFOakIsd0VBQWtEO0FBTzlDLDRCQVBHLHlCQUFpQixDQU9IO0FBTnJCLG9FQUE4QztBQU8xQywwQkFQRyx1QkFBZSxDQU9IO0FBTm5CLDBGQUFvRTtBQU9oRSxxQ0FQRyxrQ0FBMEIsQ0FPSDtBQUw5QixnRUFBOEMifQ==

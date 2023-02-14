@@ -29,17 +29,17 @@ Inside the component category, we also include `web`components. These are new cu
 
 Here's the list of currently official available components:
 
-{% for key, slug in docmap.menu.slug %}
-{% if key in 'styleguide/ui' %}
-- [`{{ key|replace('/styleguide/ui/', '') }}`]({{key}})
+{% for key, slug in docmap.menu.custom.styleguide.slug %}
+{% if '/styleguide/ui' in key and '-component' not in key %}
+- [**{{ slug.name }}**]({{key}})
 {% endif %}
 {% endfor %}
 
 And here's the list of our official `web`components:
 
-{% for key, package in docmap.menu.packages %}
-{% if key in '-component' %}
-- [`{{ key|replace('@coffeekraken/', '') }}`](/package/{{key}}/doc/readme)
+{% for key, obj in docmap.menu.custom.styleguide.slug %}
+{% if '-component' in key %}
+- [**{{ obj.name }}**](/package/{{key}}/doc/readme)
 {% endif %}
 {% endfor %}
 
@@ -48,7 +48,12 @@ And here's the list of our official `web`components:
 All the components that we provide follows these simple rules:
 
 1. A component **MUST** be as customizable as possible
-2. A component **MUST** provide at least 2 `scopes`. (see bellow for more information)
+2. A component **MUST** provide at least 2 `scopes`:
+    1. The "**bare**" scope that contain all the structural css for your component to work.
+        - Usually loaded directly in your JS file.
+    2. The "**lnf**" (look and feel) scope that provides optional visual styling.
+        - Usually provided through a `@sugar.ui.componentName.classes` mixin
+        - **MUST** take in consideration the theme configurations.
 3. A component **MUST** work out of the box without anything more to do
 4. A component **MUST** follow your `theme` specifications if the `lnf` (look and feel) `scope` is applied
 

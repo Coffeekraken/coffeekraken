@@ -1,12 +1,10 @@
 import __SDocmap from '@coffeekraken/s-docmap';
-import __SLog from '@coffeekraken/s-log';
-import __SPromise from '@coffeekraken/s-promise';
 import { ISSitemapBuilderResultItem } from '@coffeekraken/s-sitemap-builder';
 import { __fileHash } from '@coffeekraken/sugar/fs';
 import __fs from 'fs';
 
 export default function apiSitemap() {
-    return new __SPromise(async ({ resolve, emit }) => {
+    return new Promise(async (resolve) => {
         const docmap = new __SDocmap();
         const docmapJson = await docmap.read();
         const hashesByPath = {};
@@ -27,11 +25,9 @@ export default function apiSitemap() {
             if (!hash) {
                 // @ts-ignore
                 if (!__fs.existsSync(docmapObj.path)) {
-                    emit('log', {
-                        type: __SLog.TYPE_WARN,
-                        // @ts-ignore
-                        value: `<red>[sitemap]</red> The file "<cyan>${docmapObj.path}</cyan>" has been skipped cause it does not exists...`,
-                    });
+                    console.log(
+                        `<red>[sitemap]</red> The file "<cyan>${docmapObj.path}</cyan>" has been skipped cause it does not exists...`,
+                    );
                 } else {
                     // @ts-ignore
                     hash = __fileHash(docmapObj.path);

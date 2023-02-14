@@ -271,6 +271,12 @@
                 "import": "./dist/pkg/esm/js/glob/_exports.js"
             }
         },
+        "./hash": {
+            "node": {
+                "require": "./dist/pkg/cjs/node/hash/_exports.js",
+                "import": "./dist/pkg/esm/node/hash/_exports.js"
+            }
+        },
         "./html": {
             "require": "./dist/pkg/cjs/shared/html/_exports.js",
             "import": "./dist/pkg/esm/shared/html/_exports.js"

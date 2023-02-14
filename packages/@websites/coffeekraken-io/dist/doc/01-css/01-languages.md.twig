@@ -42,10 +42,10 @@ The sugar plugin for PostCss gives you a lot of features like:
     - `@sugat.layout(1 2 3)`: Build some complex layouts using `css grid`.
     - etc...
 3. Theming support using these mixins:
-    - `@sugar.theme(dark)`: Apply the dark theme to any HTMLElement and his childs
+    - `@sugar.theme(dark)`: Apply the dark theme to any HTMLElement and his children
     - `@sugar.init`: Apply some resets as well as printing the variables needed for theming
     - etc...
 
-> More information on theming [here](/doc/css/theming).
+> Note that the values passed in the mixins like `30`, `main`, etc... are values coming from the theme configuration. All of these can be updated through out [configuration system](/doc/config/overview). More information on theming [here](/doc/css/theming).
 
 {% endblock %}

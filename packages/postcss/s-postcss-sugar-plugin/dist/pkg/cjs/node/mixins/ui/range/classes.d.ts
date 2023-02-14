@@ -24,7 +24,7 @@ declare class postcssSugarPluginUiRangeClassesInterface extends __SInterface {
 }
 export interface IPostcssSugarPluginUiRangeClassesParams {
     lnfs: 'default'[];
-    defaultLnf: 'default';
+    defaultLnf: 'solid';
     scope: ('bare' | 'lnf' | 'vr' | 'tf')[];
 }
 export { postcssSugarPluginUiRangeClassesInterface as interface };

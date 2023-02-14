@@ -18,7 +18,7 @@ declare class postcssSugarPluginUiSwitchMixinInterface extends __SInterface {
     };
 }
 export interface IPostcssSugarPluginUiSwitchMixinParams {
-    lnf: 'default';
+    lnf: 'solid';
     scope: ('bare' | 'lnf')[];
 }
 export { postcssSugarPluginUiSwitchMixinInterface as interface };

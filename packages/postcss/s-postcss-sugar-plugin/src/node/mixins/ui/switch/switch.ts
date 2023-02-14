@@ -11,7 +11,7 @@ import __STheme from '@coffeekraken/s-theme';
  *
  * Apply the switch style to any element
  *
- * @param       {'default'}                           [style='theme.ui.form.defaultLnf']         The style you want to generate
+ * @param       {'solid'}                           [style='theme.ui.form.defaultLnf']         The style you want to generate
  * @param       {('bare'|'lnf')[]}        [scope=['bare', 'lnf']]      The scope you want to generate
  * @return      {String}            The generated css
  *
@@ -29,7 +29,7 @@ class postcssSugarPluginUiSwitchMixinInterface extends __SInterface {
         return {
             lnf: {
                 type: 'String',
-                values: ['default'],
+                values: ['solid'],
                 default: __STheme.get('ui.form.defaultLnf'),
             },
             scope: {
@@ -45,7 +45,7 @@ class postcssSugarPluginUiSwitchMixinInterface extends __SInterface {
 }
 
 export interface IPostcssSugarPluginUiSwitchMixinParams {
-    lnf: 'default';
+    lnf: 'solid';
     scope: ('bare' | 'lnf')[];
 }
 
@@ -61,7 +61,7 @@ export default function ({
     replaceWith: Function;
 }) {
     const finalParams: IPostcssSugarPluginUiSwitchMixinParams = {
-        lnf: 'default',
+        lnf: 'solid',
         scope: ['bare', 'lnf'],
         ...params,
     };

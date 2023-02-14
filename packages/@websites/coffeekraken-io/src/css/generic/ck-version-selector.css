@@ -1,5 +1,7 @@
 .ck-version-selector {
     .s-dropdown {
+        transform: translateX(calc(sugar.margin(40) * -1));
+
         &:before {
             content: '';
             @sugar.ui.backdrop;

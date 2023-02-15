@@ -24,6 +24,16 @@ export default class SRefocusFeatureInterface extends __SInterface {
             description: string;
             type: string;
         };
+        focusedClass: {
+            description: string;
+            type: string;
+            default: string;
+        };
+        focusedClassDuration: {
+            description: string;
+            type: string;
+            default: number;
+        };
         offset: {
             description: string;
             type: string;

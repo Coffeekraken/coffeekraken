@@ -4,7 +4,7 @@ export default [
     views: ['pages.api.index'],
   },
   {
-    slugs: ['/api/:namespace'],
+    slugs: ['/api/:namespace!'],
     views: [
       {
         data: 'docmapApi',

@@ -552,7 +552,7 @@ export default class SFront extends __SClass {
 
         // partytown
         if (this.settings.partytown?.enabled) {
-            this._initPartytown();
+            // this._initPartytown();
         }
     }
 

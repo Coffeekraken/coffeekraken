@@ -8,7 +8,8 @@ import { __isScrollable, __traverseUp } from '@coffeekraken/sugar/dom';
  * @platform          js
  * @status      beta
  *
- * Go up the dom three to find the first element that is scrollable
+ * Go up the dom three to find the first element that is scrollable.
+ * The default scrollable element is the body
  *
  * @param 		{HTMLElement} 					$elm  		The element to start on
  * @return 		{HTMLElement} 								The element found or null

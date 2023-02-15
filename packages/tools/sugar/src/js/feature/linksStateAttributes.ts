@@ -102,7 +102,6 @@ export default function __linksStateAttributes(
             if ($linkElm.getAttribute('href') === document.location.pathname) {
                 $linkElm.setAttribute('actual', true);
                 $linkElm.parentNode.setAttribute('actual-parent', true);
-                console.log('ACDDD');
                 $linkElm.dispatchEvent(
                     new CustomEvent('actual', {
                         bubbles: true,
@@ -116,7 +115,6 @@ export default function __linksStateAttributes(
             ) {
                 $linkElm.removeAttribute('actual');
                 $linkElm.setAttribute('actual-child', true);
-                console.log('AC');
                 $linkElm.dispatchEvent(
                     new CustomEvent('actual', {
                         bubbles: true,

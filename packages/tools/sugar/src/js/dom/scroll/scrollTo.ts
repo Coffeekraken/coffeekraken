@@ -10,6 +10,7 @@ import requestAnimationFrame from '../utilities/requestAnimationFrame';
  * @type      Function
  * @platform          js
  * @status          beta
+ * @async
  *
  * Function that let you make a smooth page scroll to a specific element in the page
  *
@@ -188,6 +189,8 @@ export default function __scrollTo(
             targetY -= elmBounds.top;
             targetX -= elmBounds.left;
         }
+
+        console.log('__scro', settings.$elm === window ? 'window' : 'node');
 
         const obj = {
             targetY,

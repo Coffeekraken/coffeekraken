@@ -7,16 +7,17 @@ export interface ISRefocusFeatureProps {
     timeout: number;
     duration: number;
     easing: Function;
+    focusedClass: string | boolean;
+    focusedClassDuration: number;
     offset: number;
     offsetX: number;
     offsetY: number;
     align: 'start' | 'center' | 'end';
     justify: 'start' | 'center' | 'end';
 }
-
 export default class SRefocusFeature extends __SFeature {
     constructor(name: string, node: HTMLElement, settings: any);
     mount(): void;
-    _scrollTo($elm: any): void;
+    _scrollTo($elm: any): Promise<void>;
 }
 export { __define as define };

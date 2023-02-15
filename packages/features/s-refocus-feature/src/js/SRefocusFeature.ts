@@ -4,6 +4,8 @@ import type { IScrollToSettings } from '@coffeekraken/sugar/js/dom/scroll/scroll
 import { __deepMerge } from '@coffeekraken/sugar/object';
 import __SRefocusFeatureInterface from './interface/SRefocusFeatureInterface';
 
+import { __closestScrollable } from '@coffeekraken/sugar/dom';
+
 import __define from './define';
 
 export interface ISRefocusFeatureProps {
@@ -12,6 +14,8 @@ export interface ISRefocusFeatureProps {
     timeout: number;
     duration: number;
     easing: Function;
+    focusedClass: string | boolean;
+    focusedClassDuration: number;
     offset: number;
     offsetX: number;
     offsetY: number;
@@ -53,6 +57,19 @@ export interface ISRefocusFeatureProps {
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
+
+var _wr = function (type) {
+    var orig = history[type];
+    return function () {
+        var rv = orig.apply(this, arguments);
+        var e = new Event(type);
+        e.arguments = arguments;
+        window.dispatchEvent(e);
+        return rv;
+    };
+};
+history.pushState = _wr('pushstate');
+
 export default class SRefocusFeature extends __SFeature {
     constructor(name: string, node: HTMLElement, settings: any) {
         super(
@@ -68,10 +85,14 @@ export default class SRefocusFeature extends __SFeature {
         );
     }
     mount() {
+        console.log('props', this.props);
+
         this.props.trigger.forEach((trigger) => {
             switch (trigger) {
                 case 'anchor':
                     setTimeout(() => {
+                        console.log('COCO');
+
                         if (document.location.hash) {
                             const $targetElm = this.node.querySelector(
                                 document.location.hash,
@@ -84,6 +105,8 @@ export default class SRefocusFeature extends __SFeature {
                     break;
                 case 'history':
                     window.addEventListener('hashchange', (e) => {
+                        console.log('HASH change!', document.location.hash);
+
                         if (document.location.hash) {
                             const $targetElm = this.node.querySelector(
                                 document.location.hash,
@@ -94,6 +117,19 @@ export default class SRefocusFeature extends __SFeature {
                         }
                     });
                     window.addEventListener('popstate', (e) => {
+                        console.log('HASH', document.location.hash);
+
+                        if (document.location.hash) {
+                            const $targetElm = this.node.querySelector(
+                                document.location.hash,
+                            );
+                            if ($targetElm) {
+                                this._scrollTo($targetElm);
+                            }
+                        }
+                    });
+                    window.addEventListener('pushstate', (e) => {
+                        console.log('PUSH HASH', document.location.hash);
                         if (document.location.hash) {
                             const $targetElm = this.node.querySelector(
                                 document.location.hash,
@@ -105,18 +141,17 @@ export default class SRefocusFeature extends __SFeature {
                     });
                     break;
                 default:
-                    if (trigger.match(/^event:/)) {
-                        const event = trigger.replace('event:', '').trim();
-                        console.log('e', event);
-                        this.node.addEventListener(event, (e) => {
-                            this._scrollTo(e.target);
-                        });
-                    }
+                    // if (trigger.match(/^event:/)) {
+                    //     const event = trigger.replace('event:', '').trim();
+                    //     this.node.addEventListener(event, (e) => {
+                    //         this._scrollTo(e.target);
+                    //     });
+                    // }
                     break;
             }
         });
     }
-    _scrollTo($elm) {
+    async _scrollTo($elm) {
         const scrollToSettings = {
             $elm: this.node,
         };
@@ -129,9 +164,43 @@ export default class SRefocusFeature extends __SFeature {
         if (this.props.align) scrollToSettings.align = this.props.align;
         if (this.props.justify) scrollToSettings.justify = this.props.justify;
 
-        console.log('Stroll', scrollToSettings, $elm);
+        // handle nested scrollable containers
+        let $nestedScrollables: HTMLElement[] = [];
+        let $scrollable = __closestScrollable($elm);
 
-        __scrollTo($elm, scrollToSettings);
+        // while ($scrollable) {
+        //     $nestedScrollables.push($scrollable);
+        //     $scrollable = __closestScrollable($scrollable);
+        // }
+
+        // if ($scrollable && !$nestedScrollables.includes($scrollable)) {
+        //     $nestedScrollables.push($scrollable);
+        // }
+
+        // reverse the nestedScrollables to refocus it correctly
+        // $nestedScrollables = $nestedScrollables.reverse();
+
+        console.log(
+            'Scroll',
+            $scrollable === window ? 'window' : 'node',
+            $elm,
+            'scrollable',
+            $scrollable,
+        );
+
+        // scroll to element
+        await __scrollTo($elm, {
+            ...scrollToSettings,
+            $elm: $scrollable ?? this.node,
+        });
+
+        // add and remove a "focused" class
+        if (this.props.focusedClass) {
+            $elm.classList.add(this.props.focusedClass);
+            setTimeout(() => {
+                $elm.classList.remove(this.props.focusedClass);
+            }, this.props.focusedClassDuration);
+        }
     }
 }
 

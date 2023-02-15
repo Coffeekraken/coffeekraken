@@ -44,17 +44,22 @@ import { define as __SSugarFeatureDefine } from '@coffeekraken/s-sugar-feature';
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 export default function SPackEssentials(): void {
-    // components
+    // Attributes
+    if (!document.body.hasAttribute('s-sugar')) {
+        document.body.setAttribute('s-sugar', 'true');
+    }
+    if (!document.body.hasAttribute('s-refocus')) {
+        document.body.setAttribute('s-refocus', 'true');
+    }
+
+    // Components
     __SClipboardCopyComponentDefine();
     __SPanelComponentDefine();
     __SRangeComponentDefine();
     __SScrollComponentDefine();
     __SSliderComponentDefine();
 
-    // features
-    if (!document.body.hasAttribute('s-sugar')) {
-        document.body.setAttribute('s-sugar', 'true');
-    }
+    // Features
     __SSugarFeatureDefine();
     __SActivateFeatureDefine();
     __SAppearFeatureDefine();

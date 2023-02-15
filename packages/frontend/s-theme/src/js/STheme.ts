@@ -687,8 +687,6 @@ export default class STheme extends __SThemeBase {
             savedState = {};
         }
 
-        console.log('saved', savedState);
-
         // restore configs
         // @ts-ignore
         super.restore(savedState.overridedConfigs);

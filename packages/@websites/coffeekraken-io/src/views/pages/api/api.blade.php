@@ -42,7 +42,7 @@ if (isset($firstBlock->status)) {
 
             <div s-page-transition-container="api">
 
-                <div s-scope class="_content s-pb:50">
+                <div s-scope class="_content s-pb:50 s-pis:50 @mobile s-pis:0">
 
                     @if (!count((array) $docblocks))
 

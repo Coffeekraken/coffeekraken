@@ -60,7 +60,7 @@
                             @if (isset($docblock->namespace))
 
                                 <li class="s-font:40 s-mbe:30">
-                                    <header class="s-flex s-bg:main-surface s-radius">
+                                    <header class="s-flex s-bg:main-surface s-radius" id="{{ str_replace('.','-', explode('.config.', $docblock->id)[1]) }}">
                                         <div class="s-flex-item:grow s-tc:accent s-p:30 s-color:complementary">
 
                                             @php

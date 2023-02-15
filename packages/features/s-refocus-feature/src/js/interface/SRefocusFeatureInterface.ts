@@ -47,6 +47,18 @@ export default class SRefocusFeatureInterface extends __SInterface {
                     'Specify the easing function of the refocus animation',
                 type: 'Function',
             },
+            focusedClass: {
+                description:
+                    'Specify the class to add when the target element has been focused',
+                type: 'String|Boolean',
+                default: 'focused',
+            },
+            focusedClassDuration: {
+                description:
+                    'Specify how many ms the focused class has to be added, then removed',
+                type: 'Number',
+                default: 1000,
+            },
             offset: {
                 description:
                     'Specify the offset of the refocus animation in px',

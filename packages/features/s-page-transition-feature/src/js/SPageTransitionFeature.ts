@@ -2,7 +2,7 @@ import __SEnv from '@coffeekraken/s-env';
 import __SFeature from '@coffeekraken/s-feature';
 import __SRequest from '@coffeekraken/s-request';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
-import { __querySelectorUp, __scrollTo } from '@coffeekraken/sugar/dom';
+import { __querySelectorUp } from '@coffeekraken/sugar/dom';
 import { __deepMerge } from '@coffeekraken/sugar/object';
 import __SPageTransitionFeatureInterface from './interface/SPageTransitionFeatureInterface';
 
@@ -103,22 +103,22 @@ export default class SPageTransitionFeature extends __SFeature {
         );
 
         // handle popstate
-        window.addEventListener('popstate', (e) => {
-            if (!e.state?.html) return;
-            if (e.state.containerId) {
-                const $elm = document.querySelector(
-                    `[s-page-transition-container="${e.state.containerId}"]`,
-                );
-                if (!$elm) {
-                    return;
-                }
-                $elm.innerHTML = e.state.html;
-                __scrollTo(<HTMLElement>$elm);
-            } else {
-                this.node.innerHTML = e.state.html;
-                __scrollTo(this.node);
-            }
-        });
+        // window.addEventListener('popstate', (e) => {
+        //     if (!e.state?.html) return;
+        //     if (e.state.containerId) {
+        //         const $elm = document.querySelector(
+        //             `[s-page-transition-container="${e.state.containerId}"]`,
+        //         );
+        //         if (!$elm) {
+        //             return;
+        //         }
+        //         $elm.innerHTML = e.state.html;
+        //         __scrollTo(<HTMLElement>$elm);
+        //     } else {
+        //         this.node.innerHTML = e.state.html;
+        //         __scrollTo(this.node);
+        //     }
+        // });
 
         // listen for "location.href" event
         document.addEventListener('location.href', (e) => {
@@ -331,7 +331,7 @@ export default class SPageTransitionFeature extends __SFeature {
             // scrolltop if needed
             if (this.props.scrollTop) {
                 // @ts-ignore
-                __scrollTo($inPageScopedContainer ?? $inPageContainer);
+                // __scrollTo($inPageScopedContainer ?? $inPageContainer);
             }
 
             // after process with success
@@ -403,7 +403,7 @@ export default class SPageTransitionFeature extends __SFeature {
         }
 
         // scroll to top
-        __scrollTo('top');
+        // __scrollTo('top');
 
         // push a new state
         if (code === 200 && newState && url) {

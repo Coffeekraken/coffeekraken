@@ -339,7 +339,6 @@ export default class SFrontendServer extends __SClass {
                         <ISFrontendServerPageConfig>pageConfig,
                         null,
                         id,
-                        id,
                     );
                 }
             }
@@ -613,112 +612,133 @@ export default class SFrontendServer extends __SClass {
         return this._pagesConfigsBySlug[slug];
     }
     _registerPageConfig(
-        pageConfig: ISFrontendServerPageConfig,
+        pageConfig: ISFrontendServerPageConfig | ISFrontendServerPageConfig[],
         pageFile?: any,
         configId?: string,
     ): Promise<void> {
         return new Promise(async (resolve) => {
-            let slug = '',
-                slugs: string[] = pageConfig.slugs ?? [];
-
-            // generate path
-            if (
-                pageFile &&
-                !pageConfig.slugs &&
-                pageFile.nameWithoutExt !== 'index'
-            ) {
-                slug = `/${pageFile.path
-                    .replace(
-                        `${__SSugarConfig.get('storage.src.pagesDir')}/`,
-                        '',
-                    )
-                    .split('/')
-                    .slice(0, -1)
-                    .join('/')
-                    .replace(/\.(t|j)s$/, '')
-                    .replace(/\./g, '/')}`;
-            } else if (
-                !pageConfig.slugs &&
-                pageFile.nameWithoutExt === 'index'
-            ) {
-                slug = '/';
+            // ensure array
+            if (!Array.isArray(pageConfig)) {
+                pageConfig = [pageConfig];
             }
 
-            if (!pageConfig.slugs) {
-                if (pageConfig.params) {
-                    let isOptional = false;
-                    for (let [name, requiredOrStr] of Object.entries(
-                        pageConfig.params,
-                    )) {
-                        if (typeof requiredOrStr === 'string') {
-                            slug += `/${requiredOrStr}`;
-                        } else if (requiredOrStr) {
-                            if (isOptional) {
-                                throw new Error(
-                                    `[SFrontendServer] You cannot have required params after optional onces in the page ${pageFile.path}`,
-                                );
+            for (let pageConfigObj of pageConfig) {
+                let slug = '',
+                    slugs: string[] = pageConfigObj.slugs ?? [];
+
+                // generate path
+                if (
+                    pageFile &&
+                    !pageConfigObj.slugs &&
+                    pageFile.nameWithoutExt !== 'index'
+                ) {
+                    slug = `/${pageFile.path
+                        .replace(
+                            `${__SSugarConfig.get('storage.src.pagesDir')}/`,
+                            '',
+                        )
+                        .split('/')
+                        .slice(0, -1)
+                        .join('/')
+                        .replace(/\.(t|j)s$/, '')
+                        .replace(/\./g, '/')}`;
+                } else if (
+                    !pageConfigObj.slugs &&
+                    pageFile.nameWithoutExt === 'index'
+                ) {
+                    slug = '/';
+                }
+
+                if (!pageConfigObj.slugs) {
+                    if (pageConfigObj.params) {
+                        let isOptional = false;
+                        for (let [name, requiredOrStr] of Object.entries(
+                            pageConfigObj.params,
+                        )) {
+                            if (typeof requiredOrStr === 'string') {
+                                slug += `/${requiredOrStr}`;
+                            } else if (requiredOrStr) {
+                                if (isOptional) {
+                                    throw new Error(
+                                        `[SFrontendServer] You cannot have required params after optional onces in the page ${pageFile.path}`,
+                                    );
+                                }
+                                slug += `/:${name}`;
+                            } else {
+                                isOptional = true;
+                                slug += `/:${name}?`;
                             }
-                            slug += `/:${name}`;
-                        } else {
-                            isOptional = true;
-                            slug += `/:${name}?`;
                         }
                     }
+                    slugs = [slug];
                 }
-                slugs = [slug];
-            }
 
-            slugs.forEach((slug) => {
-                console.verbose?.(
-                    `<yellow>[route]</yellow> <cyan>${slug}</cyan> route registered <green>successfully</green> from ${
-                        pageFile
-                            ? `<magenta>${pageFile.relPath}</magenta>`
-                            : `<magenta>config.pages.${configId}</magenta>`
-                    }`,
-                );
+                slugs.forEach((slug) => {
+                    console.verbose?.(
+                        `<yellow>[route]</yellow> <cyan>${slug}</cyan> route registered <green>successfully</green> from ${
+                            pageFile
+                                ? `<magenta>${pageFile.relPath}</magenta>`
+                                : `<magenta>config.pages.${configId}</magenta>`
+                        }`,
+                    );
 
-                // register the route only once by slug
-                if (!this._getPageConfigBySlug(slug)) {
-                    this._express.get(slug, async (req, res, next) => {
-                        const _pageConfig =
-                            this._getPageConfigBySlug(slug) ?? pageConfig;
-
-                        // handler
-                        const handlerFn = await this._getHandlerFn(
-                            _pageConfig.handler ?? 'generic',
-                        );
-
-                        if (_pageConfig.params) {
-                            for (let [key, value] of Object.entries(
-                                req.params,
-                            )) {
-                                // do not process non "number" keys
-                                if (typeof __autoCast(key) !== 'number') {
-                                    continue;
-                                }
-                                const paramKey = Object.keys(
-                                    _pageConfig.params,
-                                )[parseInt(key)];
-                                delete req.params[key];
-                                req.params[paramKey] = value;
-                            }
+                    let slugParts = slug.split('/');
+                    const requiredParams = [];
+                    slugParts = slugParts.map((p) => {
+                        if (p.endsWith('!')) {
+                            const newParam = p.replace(/\!$/, '');
+                            requiredParams.push(newParam);
+                            return newParam;
                         }
-
-                        handlerFn({
-                            req,
-                            res,
-                            next,
-                            pageConfig: _pageConfig,
-                            pageFile,
-                            config: this._frontendServerConfig,
-                            frontendServerConfig: this._frontendServerConfig,
-                        });
+                        return p;
                     });
-                }
+                    const newSlug = slugParts.join('/');
 
-                // set the new pageConfig for this slug
-                this._pagesConfigsBySlug[slug] = pageConfig;
-            });
+                    // register the route only once by slug
+                    if (!this._getPageConfigBySlug(newSlug)) {
+                        this._express.get(newSlug, async (req, res, next) => {
+                            const _pageConfig =
+                                this._getPageConfigBySlug(slug) ??
+                                pageConfigObj;
+
+                            // handler
+                            const handlerFn = await this._getHandlerFn(
+                                _pageConfig.handler ?? 'generic',
+                            );
+
+                            if (_pageConfig.params) {
+                                for (let [key, value] of Object.entries(
+                                    req.params,
+                                )) {
+                                    // do not process non "number" keys
+                                    if (typeof __autoCast(key) !== 'number') {
+                                        continue;
+                                    }
+                                    const paramKey = Object.keys(
+                                        _pageConfig.params,
+                                    )[parseInt(key)];
+                                    delete req.params[key];
+                                    req.params[paramKey] = value;
+                                }
+                            }
+
+                            handlerFn({
+                                req,
+                                res,
+                                next,
+                                pageConfig: _pageConfig,
+                                pageFile,
+                                config: this._frontendServerConfig,
+                                frontendServerConfig:
+                                    this._frontendServerConfig,
+                            });
+                        });
+                    }
+
+                    // set the new pageConfig for this slug
+                    this._pagesConfigsBySlug[slug] = pageConfigObj;
+                });
+            }
 
             resolve();
         });

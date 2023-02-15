@@ -1,6 +1,6 @@
 {
     "name": "@coffeekraken/s-parallax-feature",
-    "version": "2.0.0-alpha.20",
+    "version": "2.0.0-alpha.21",
     "description": "Parallax... Parallax... I know... But sometimes...",
     "type": "module",
     "scripts": {
@@ -11,10 +11,10 @@
     "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)",
     "license": "MIT",
     "dependencies": {
-        "@coffeekraken/s-class": "^2.0.0-alpha.20",
-        "@coffeekraken/s-feature": "^2.0.0-alpha.20",
-        "@coffeekraken/s-interface": "^2.0.0-alpha.20",
-        "@coffeekraken/sugar": "^2.0.0-alpha.20",
+        "@coffeekraken/s-class": "^2.0.0-alpha.21",
+        "@coffeekraken/s-feature": "^2.0.0-alpha.21",
+        "@coffeekraken/s-interface": "^2.0.0-alpha.21",
+        "@coffeekraken/sugar": "^2.0.0-alpha.21",
         "rematrix": "^0.7.2"
     },
     "main": "dist/pkg/cjs/js/exports.js",

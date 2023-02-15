@@ -1,7 +1,9 @@
 import __SDocmap from '@coffeekraken/s-docmap';
 import { ISSitemapBuilderResultItem } from '@coffeekraken/s-sitemap-builder';
-import { __fileHash } from '@coffeekraken/sugar/fs';
+import { __dirname } from '@coffeekraken/sugar/fs';
+import { __hashFrom } from '@coffeekraken/sugar/hash';
 import __fs from 'fs';
+import __path from 'path';
 
 export default function apiSitemap() {
     return new Promise(async (resolve) => {
@@ -9,14 +11,16 @@ export default function apiSitemap() {
         const docmapJson = await docmap.read();
         const hashesByPath = {};
 
+        const envHash = __hashFrom([
+            '@coffeekraken/sugar',
+            __path.resolve(__dirname(), '../../views'),
+        ]);
+
         const items: ISSitemapBuilderResultItem[] = [];
 
         for (let [namespace, docmapObj] of Object.entries(docmapJson.map)) {
             // do not take ".config" items
-            if (
-                namespace.match(/\.config\./) &&
-                !namespace.match(/\.doc\.config/)
-            ) {
+            if (namespace.match(/\.config\./)) {
                 continue;
             }
 
@@ -30,7 +34,7 @@ export default function apiSitemap() {
                     );
                 } else {
                     // @ts-ignore
-                    hash = __fileHash(docmapObj.path);
+                    hash = __hashFrom([envHash, docmapObj.path]);
                     // save in stack
                     // @ts-ignore
                     hashesByPath[docmapObj.path] = hash;

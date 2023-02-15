@@ -13,7 +13,7 @@ import {
     __readJsonSync,
     __removeSync,
     __writeFileSync,
-    __writeJsonSync
+    __writeJsonSync,
 } from '@coffeekraken/sugar/fs';
 import __npmInstall from '@coffeekraken/sugar/node/npm/install';
 import { __deepMap, __deepMerge, __get } from '@coffeekraken/sugar/object';

@@ -4,7 +4,6 @@ import { __packagePath } from '@coffeekraken/sugar/npm';
 import { __objectHash } from '@coffeekraken/sugar/object';
 import __crypto, { BinaryToTextEncoding } from 'crypto';
 import __fs from 'fs';
-import __glob from 'glob';
 
 /**
  * @name                            hashFrom
@@ -49,7 +48,7 @@ export interface IHashFromSettings {
 export default function __hashFrom(
     sources: (string | any)[],
     settings?: Partial<IHashFromSettings>,
-): string {
+): string | undefined {
     const hashes: string[] = [];
 
     const finalSettings: IHashFromSettings = {
@@ -57,6 +56,8 @@ export default function __hashFrom(
         digest: 'base64',
         ...(settings ?? {}),
     };
+
+    let hash;
 
     for (let source of sources) {
         // plain object
@@ -66,7 +67,7 @@ export default function __hashFrom(
         }
 
         // package
-        if (typeof source === 'string' && !source.startsWith('/')) {
+        if (!source.startsWith('/') && source.match(/^[a-zA-Z-_\/\@]+$/)) {
             const path = __packagePath(source);
             if (path) {
                 hashes.push(__folderHash(path));
@@ -75,19 +76,19 @@ export default function __hashFrom(
         }
 
         // directory
-        if (typeof source === 'string' && __isDirectory(source)) {
+        if (__isDirectory(source)) {
             hashes.push(__folderHash(source));
             continue;
         }
 
         // absolute file
-        if (typeof source === 'string' && __fs.existsSync(source)) {
+        if (__fs.existsSync(source)) {
             hashes.push(__fileHash(source));
             continue;
         }
 
         // glob
-        if (typeof source === 'string' && __isGlob(source)) {
+        if (__isGlob(source)) {
             const files = __glob.sync(source);
             for (let filePath of files) {
                 if (__isDirectory(filePath)) {
@@ -100,18 +101,17 @@ export default function __hashFrom(
             continue;
         }
 
-        // otherwise it's an unsupported source
-        console.error(source);
-        throw new Error(
-            `<red>[__hashFrom]</red> The logged source above is not a supported one...`,
-        );
+        // simple string
+        hashes.push(source);
     }
 
     // create the final hash
-    const hash = __crypto
-        .createHash(finalSettings.algo)
-        .update(hashes.join('-'))
-        .digest(finalSettings.digest);
+    if (hashes.length) {
+        hash = __crypto
+            .createHash(finalSettings.algo)
+            .update(hashes.join('-'))
+            .digest(finalSettings.digest);
+    }
 
     // return the hash
     return hash;

@@ -1,8 +1,6 @@
 #!/usr/bin/env -S node --experimental-json-modules --trace-warnings --trace-uncaught --no-warnings --es-module-specifier-resolution node
 // @ts-nocheck
 
-import { __hashFrom } from '@coffeekraken/sugar/hash';
-
 import __SBench from '@coffeekraken/s-bench';
 import __SEventEmitter from '@coffeekraken/s-event-emitter';
 import __SLog from '@coffeekraken/s-log';
@@ -226,20 +224,6 @@ export default class SSugarCli {
         const config = await __SSugarConfig.load({
             cache: true,
         });
-
-        console.log(
-            __hashFrom([
-                '@coffeekraken/sugar',
-                __dirname(),
-                `${__dirname()}/sugar.cli.js`,
-                `${__dirname()}/**/*.*`,
-                {
-                    hello: 'world',
-                },
-            ]),
-        );
-
-        return;
 
         // console.log('LOADED');
         // console.log(__SSugarConfig.get('viewRenderer'));

@@ -2,7 +2,6 @@
 
 import __SBench from '@coffeekraken/s-bench';
 import __SDuration from '@coffeekraken/s-duration';
-import __SLog from '@coffeekraken/s-log';
 import __STheme from '@coffeekraken/s-theme';
 import { __isPlainObject } from '@coffeekraken/sugar/is';
 import { __deepMerge } from '@coffeekraken/sugar/object';
@@ -149,10 +148,7 @@ export default function genericHandler({
                 const dataFnResult = await dataFnResultPromise;
 
                 if (dataFnResult instanceof Error) {
-                    emit('log', {
-                        type: __SLog.TYPE_ERROR,
-                        value: dataFnResult,
-                    });
+                    throw dataFnResult;
                 } else {
                     data = __deepMerge(data ?? {}, dataFnResult ?? {});
                 }

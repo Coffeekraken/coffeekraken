@@ -61,5 +61,5 @@ export default class SFrontendServer extends __SClass {
     
     _pagesConfigsBySlug: {};
     _getPageConfigBySlug(slug: any): any;
-    _registerPageConfig(pageConfig: ISFrontendServerPageConfig, pageFile?: any, configId?: string): Promise<void>;
+    _registerPageConfig(pageConfig: ISFrontendServerPageConfig | ISFrontendServerPageConfig[], pageFile?: any, configId?: string): Promise<void>;
 }

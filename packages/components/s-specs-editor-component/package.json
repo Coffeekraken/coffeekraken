@@ -1,6 +1,6 @@
 {
     "name": "@coffeekraken/s-specs-editor-component",
-    "version": "2.0.0-alpha.20",
+    "version": "2.0.0-alpha.21",
     "description": "",
     "type": "module",
     "scripts": {
@@ -11,12 +11,12 @@
     "author": "",
     "license": "ISC",
     "dependencies": {
-        "@coffeekraken/s-asset-picker-component": "^2.0.0-alpha.20",
-        "@coffeekraken/s-clipboard-copy-component": "^2.0.0-alpha.20",
-        "@coffeekraken/s-dropzone-component": "^2.0.0-alpha.20",
-        "@coffeekraken/s-interface": "^2.0.0-alpha.20",
-        "@coffeekraken/s-theme": "^2.0.0-alpha.20",
-        "@coffeekraken/sugar": "^2.0.0-alpha.20",
+        "@coffeekraken/s-asset-picker-component": "^2.0.0-alpha.21",
+        "@coffeekraken/s-clipboard-copy-component": "^2.0.0-alpha.21",
+        "@coffeekraken/s-dropzone-component": "^2.0.0-alpha.21",
+        "@coffeekraken/s-interface": "^2.0.0-alpha.21",
+        "@coffeekraken/s-theme": "^2.0.0-alpha.21",
+        "@coffeekraken/sugar": "^2.0.0-alpha.21",
         "html-tags": "^3.2.0",
         "known-css-properties": "^0.25.0"
     },
@@ -43,5 +43,6 @@
         }
     },
     "main": "dist/pkg/cjs/js/exports.js",
-    "module": "dist/pkg/esm/js/exports.js"
+    "module": "dist/pkg/esm/js/exports.js",
+    "homepage": "https://coffeekraken.io"
 }

@@ -1,11 +1,15 @@
-export default {
-  params: {
-    namespace: true,
+export default [
+  {
+    slugs: ['/api'],
+    views: ['pages.api.index'],
   },
-  views: [
-    {
-      data: "docmapApi",
-      path: "pages.api.api",
-    },
-  ],
-};
+  {
+    slugs: ['/api/:namespace'],
+    views: [
+      {
+        data: 'docmapApi',
+        path: 'pages.api.api',
+      },
+    ],
+  },
+];

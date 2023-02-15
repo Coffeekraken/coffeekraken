@@ -4,15 +4,15 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "ccd45c1e49c89d9d23088b1f38905d48",
+    "content-hash": "aee6ef0881b9fc884cd8c6c9432cd8fa",
     "packages": [
         {
             "name": "coffeekraken/s-frontspec",
-            "version": "2.0.0-alpha.20",
+            "version": "2.0.0-alpha.21",
             "dist": {
                 "type": "path",
                 "url": "../../core/s-frontspec",
-                "reference": "10540a76e356c65c069772124200b3e202655b49"
+                "reference": "c11aea42c6e6d082ea6da1d8b157a4fa9b233f4d"
             },
             "type": "library",
             "autoload": {
@@ -36,5 +36,5 @@
     "prefer-lowest": false,
     "platform": [],
     "platform-dev": [],
-    "plugin-api-version": "2.2.0"
+    "plugin-api-version": "2.3.0"
 }

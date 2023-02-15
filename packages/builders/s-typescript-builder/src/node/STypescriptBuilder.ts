@@ -528,17 +528,17 @@ export default class STypescriptBuilder extends __SBuilder {
                 filePath = __path.relative(packageRoot, file.path);
             }
 
-            if (!params.silent) {
+            // if (!params.silent) {
+            if (console.log !== global._console.log) {
                 console.log(
-                    `Compiling "<cyan>${filePath}</cyan>" to <yellow>${
+                    `<yellow>[${
+                        new Date().toLocaleTimeString().split(' ')[0]
+                    }]</yellow> Compiling "<cyan>${filePath}</cyan>" to <yellow>${
                         file.format
-                    }</yellow> format, <magenta>${
-                        tsconfig.module ?? module
-                    }</magenta> module system and <cyan>${
-                        tsconfig.target ?? 'es6'
-                    }</cyan> as target...`,
+                    }</yellow>:<magenta>${tsconfig.module ?? module}</magenta>`,
                 );
             }
+            // }
 
             let result = __ts.transpileModule(
                 source,

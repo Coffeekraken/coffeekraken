@@ -1,15 +1,15 @@
 {
     "name": "@coffeekraken/s-descriptor",
-    "version": "2.0.0-alpha.20",
+    "version": "2.0.0-alpha.21",
     "description": "Low level class that allows to create types schemas and apply them on passed values like object, etc...",
     "type": "module",
     "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)",
     "license": "MIT",
     "dependencies": {
-        "@coffeekraken/s-class": "^2.0.0-alpha.20",
-        "@coffeekraken/s-glob": "^2.0.0-alpha.20",
-        "@coffeekraken/s-type": "^2.0.0-alpha.20",
-        "@coffeekraken/sugar": "^2.0.0-alpha.20"
+        "@coffeekraken/s-class": "^2.0.0-alpha.21",
+        "@coffeekraken/s-glob": "^2.0.0-alpha.21",
+        "@coffeekraken/s-type": "^2.0.0-alpha.21",
+        "@coffeekraken/sugar": "^2.0.0-alpha.21"
     },
     "main": "dist/pkg/cjs/js/exports.js",
     "module": "dist/pkg/esm/js/exports.js",

@@ -2,12 +2,12 @@
     "packages": [
         {
             "name": "coffeekraken/s-frontspec",
-            "version": "2.0.0-alpha.20",
-            "version_normalized": "2.0.0.0-alpha20",
+            "version": "2.0.0-alpha.21",
+            "version_normalized": "2.0.0.0-alpha21",
             "dist": {
                 "type": "path",
                 "url": "../../core/s-frontspec",
-                "reference": "10540a76e356c65c069772124200b3e202655b49"
+                "reference": "c11aea42c6e6d082ea6da1d8b157a4fa9b233f4d"
             },
             "type": "library",
             "installation-source": "dist",

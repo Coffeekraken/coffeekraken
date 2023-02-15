@@ -1,15 +1,15 @@
 {
     "name": "@coffeekraken/s-vite-sugar-plugin",
-    "version": "2.0.0-alpha.20",
+    "version": "2.0.0-alpha.21",
     "description": "Enable the Coffeekraken toolchain in your Vite stack. Inject your coffeekraken configs into your builded js files for example...",
     "type": "module",
     "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)",
     "license": "MIT",
     "dependencies": {
-        "@coffeekraken/s-env": "^2.0.0-alpha.20",
-        "@coffeekraken/s-frontspec": "^2.0.0-alpha.20",
-        "@coffeekraken/s-sugar-config": "^2.0.0-alpha.20",
-        "@coffeekraken/sugar": "^2.0.0-alpha.20"
+        "@coffeekraken/s-env": "^2.0.0-alpha.21",
+        "@coffeekraken/s-frontspec": "^2.0.0-alpha.21",
+        "@coffeekraken/s-sugar-config": "^2.0.0-alpha.21",
+        "@coffeekraken/sugar": "^2.0.0-alpha.21"
     },
     "homepage": "https://coffeekraken.io",
     "main": "dist/pkg/cjs/node/exports.js",

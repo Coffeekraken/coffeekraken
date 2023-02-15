@@ -1,12 +1,16 @@
-export default {
-    params: {
-        namespace: true,
-    },
+export default [
+  {
+    slugs: ['/api'],
+    views: ['pages.api.index'],
+  },
+  {
+    slugs: ['/api/:namespace'],
     views: [
-        {
-            data: 'docmapApi',
-            path: 'pages.api.api',
-        },
+      {
+        data: 'docmapApi',
+        path: 'pages.api.api',
+      },
     ],
-};
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGVBQWU7SUFDYixNQUFNLEVBQUU7UUFDTixTQUFTLEVBQUUsSUFBSTtLQUNoQjtJQUNELEtBQUssRUFBRTtRQUNMO1lBQ0UsSUFBSSxFQUFFLFdBQVc7WUFDakIsSUFBSSxFQUFFLGVBQWU7U0FDdEI7S0FDRjtDQUNGLENBQUMifQ==
+  },
+];
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGVBQWU7SUFDYjtRQUNFLEtBQUssRUFBRSxDQUFDLE1BQU0sQ0FBQztRQUNmLEtBQUssRUFBRSxDQUFDLGlCQUFpQixDQUFDO0tBQzNCO0lBQ0Q7UUFDRSxLQUFLLEVBQUUsQ0FBQyxpQkFBaUIsQ0FBQztRQUMxQixLQUFLLEVBQUU7WUFDTDtnQkFDRSxJQUFJLEVBQUUsV0FBVztnQkFDakIsSUFBSSxFQUFFLGVBQWU7YUFDdEI7U0FDRjtLQUNGO0NBQ0YsQ0FBQyJ9

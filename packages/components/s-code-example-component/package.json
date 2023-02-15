@@ -1,6 +1,6 @@
 {
     "name": "@coffeekraken/s-code-example-component",
-    "version": "2.0.0-alpha.20",
+    "version": "2.0.0-alpha.21",
     "description": "Display with ease your code examples with this component that support code formatting, syntax highlighting, and more...",
     "type": "module",
     "homepage": "https://coffeekraken.io",
@@ -12,10 +12,10 @@
     "author": "",
     "license": "MIT",
     "dependencies": {
-        "@coffeekraken/s-clipboard-copy-component": "^2.0.0-alpha.20",
-        "@coffeekraken/s-interface": "^2.0.0-alpha.20",
-        "@coffeekraken/s-lit-component": "^2.0.0-alpha.20",
-        "@coffeekraken/sugar": "^2.0.0-alpha.20",
+        "@coffeekraken/s-clipboard-copy-component": "^2.0.0-alpha.21",
+        "@coffeekraken/s-interface": "^2.0.0-alpha.21",
+        "@coffeekraken/s-lit-component": "^2.0.0-alpha.21",
+        "@coffeekraken/sugar": "^2.0.0-alpha.21",
         "@prettier/plugin-php": "^0.18.9",
         "highlight.js": "^11.6.0",
         "html-tags": "^3.2.0",

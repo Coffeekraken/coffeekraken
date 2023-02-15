@@ -1,6 +1,6 @@
 {
     "name": "coffeekraken/s-view-renderer-engine-twig",
-    "version": "2.0.0-alpha.20",
+    "version": "2.0.0-alpha.21",
     "require": {
         "twig/twig": "^3.0",
         "coffeekraken/sugar": "^2.0@alpha"

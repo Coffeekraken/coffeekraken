@@ -1,15 +1,7 @@
 <?php
 // require the vendors
-$nodeModulesVendorsPath = realpath(__DIR__ . '/../../vendor/autoload.php');
-$monorepoVendorsPath = realpath(__DIR__ . '/../../../vendor/autoload.php');
-
-if ($nodeModulesVendorsPath) {
-    require_once $nodeModulesVendorsPath;
-} elseif ($monorepoVendorsPath) {
-    require_once $monorepoVendorsPath;
-}
-// use Jenssegers\Blade\Blade;
-use eftec\bladeone\BladeOne;
+$nodeModulesVendorsPath = realpath(__DIR__ . '/../../../../../autoload.php');
+require_once $nodeModulesVendorsPath;
 
 // set some environment variables
 $_ENV['S_SPECS_VALUES'] = true;
@@ -40,7 +32,7 @@ $params->rootDirs = array_merge(
     \Sugar\blade\getDefaultViewDirs()
 );
 
-$blade = new BladeOne(
+$blade = new eftec\bladeone\BladeOne(
     $params->rootDirs,
     $params->cacheDir . '/blade'
     // BladeOne::MODE_DEBUG

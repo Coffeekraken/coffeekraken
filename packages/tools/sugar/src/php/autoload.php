@@ -1,6 +1,6 @@
 <?php
 
-// get the Thorin class
+// get the Sugar class
 require_once 'core/Sugar.php';
 
 Sugar::requireFolder(__DIR__, [

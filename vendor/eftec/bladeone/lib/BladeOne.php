@@ -36,13 +36,13 @@ use InvalidArgumentException;
  * @copyright Copyright (c) 2016-2022 Jorge Patricio Castro Castillo MIT License.
  *            Don't delete this comment, its part of the license.
  *            Part of this code is based in the work of Laravel PHP Components.
- * @version   4.5
+ * @version   4.7.1
  * @link      https://github.com/EFTEC/BladeOne
  */
 class BladeOne
 {
     //<editor-fold desc="fields">
-    public const VERSION = '4.5';
+    public const VERSION = '4.7.1';
     /** @var int BladeOne reads if the compiled file has changed. If it has changed,then the file is replaced. */
     public const MODE_AUTO = 0;
     /** @var int Then compiled file is always replaced. It's slow and it's useful for development. */
@@ -82,7 +82,7 @@ class BladeOne
     /**
      * @var bool if true then the variables defined in the "include" as arguments are scoped to work only
      * inside the include.<br>
-     * If false (default value), then the variables defined in the include as arguments are defined globally.<br>
+     * If false (default value), then the variables defined in the "include" as arguments are defined globally.<br>
      * <b>Example: (includeScope=false)</b><br>
      * <pre>
      * @include("template",['a1'=>'abc']) // a1 is equals to abc
@@ -148,11 +148,10 @@ class BladeOne
     /** @var string the extension of the compiled file. */
     protected $compileExtension = '.bladec';
     /**
-     * @var string=['auto','sha1','md5','nochange'][$i] It determines how the compiled filename will be called.<br>
-     *            <b>auto</b> (default mode) the mode is "sha1" unless the mode is MODE_DEBUG<br>
+     * @var string=['auto','sha1','md5'][$i] It determines how the compiled filename will be called.<br>
+     *            <b>auto</b> (default mode) the mode is "sha1"<br>
      *            <b>sha1</b> the filename is converted into a sha1 hash<br>
      *            <b>md5</b> the filename is converted into a md5 hash<br>
-     *            <b>normal</b> the filename is left untouched<br>
      */
     protected $compileTypeFileName='auto';
 
@@ -192,7 +191,7 @@ class BladeOne
     /** @var array Array of opening and closing tags for escaped echos. */
     protected $escapedTags = ['{{{', '}}}'];
     /** @var string The "regular" / legacy echo string format. */
-    protected $echoFormat = '\htmlentities(%s, ENT_QUOTES, \'UTF-8\', false)';
+    protected $echoFormat = '\htmlentities(%s??\'\', ENT_QUOTES, \'UTF-8\', false)';
     /** @var string */
     protected $echoFormatOld = 'static::e(%s)';
     /** @var array Lines that will be added at the footer of the template */
@@ -272,17 +271,8 @@ class BladeOne
             return false;
         };
 
-        if (!\is_dir($this->compiledPath)) {
-            $ok = @\mkdir($this->compiledPath, 0777, true);
-            if ($ok === false) {
-                $this->showError(
-                    'Constructing',
-                    "Unable to create the compile folder [$this->compiledPath]. Check the permissions of it's parent folder.",
-                    true
-                );
-            }
-        }
-        // If the traits has "Constructors", then we call them.
+
+        // If the "traits" has "Constructors", then we call them.
         // Requisites.
         // 1- the method must be public or protected
         // 2- it must don't have arguments
@@ -329,7 +319,7 @@ class BladeOne
     /**
      * Escape HTML entities in a string.
      *
-     * @param string|null $value
+     * @param int|string|null $value
      * @return string
      */
     public static function e($value): string
@@ -338,11 +328,12 @@ class BladeOne
         if (\is_null($value)) {
             return '';
         }
-
         if (\is_array($value) || \is_object($value)) {
             return \htmlentities(\print_r($value, true), ENT_QUOTES, 'UTF-8', false);
         }
-
+        if (\is_numeric($value)) {
+            $value=(string)$value;
+        }
         return \htmlentities($value, ENT_QUOTES, 'UTF-8', false);
     }
 
@@ -435,7 +426,7 @@ class BladeOne
         if (\is_array($value) || \is_object($value)) {
             return \htmlentities(\print_r($value, true), ENT_NOQUOTES, 'UTF-8', false);
         }
-        return \htmlentities($value, ENT_NOQUOTES, 'UTF-8', false);
+        return \htmlentities($value??'', ENT_NOQUOTES, 'UTF-8', false);
     }
 
     /**
@@ -517,7 +508,7 @@ class BladeOne
      *
      * @param bool $bool
      * @return BladeOne
-     * @see \eftec\bladeone\BladeOne::setMode
+     * @see BladeOne::setMode
      */
     public function setIsCompiled($bool = false): BladeOne
     {
@@ -591,9 +582,9 @@ class BladeOne
     /**
      * run the blade engine. It returns the result of the code.
      *
-     * @param string HTML to parse
-     * @param array $data
-     * @return string
+     * @param string $string HTML to parse
+     * @param array $data It is an associative array with the datas to display.
+     * @return string It returns a parsed string
      * @throws Exception
      */
     public function runString($string, $data = []): string
@@ -686,10 +677,10 @@ class BladeOne
      *
      * @return string
      *
-     * @see \eftec\bladeone\BladeOne::compileStatements
-     * @see \eftec\bladeone\BladeOne::compileExtends
-     * @see \eftec\bladeone\BladeOne::compileComments
-     * @see \eftec\bladeone\BladeOne::compileEchos
+     * @see BladeOne::compileStatements
+     * @see BladeOne::compileExtends
+     * @see BladeOne::compileComments
+     * @see BladeOne::compileEchos
      */
     protected function parseToken($token): string
     {
@@ -1087,7 +1078,7 @@ class BladeOne
             $this->showError('run/include', "RunChild: Include/run variables should be defined as array ['idx'=>'value']", true);
             return '';
         }
-        $r = $this->runInternal($view, $newVariables, false, false, $this->isRunFast);
+        $r = $this->runInternal($view, $newVariables, false, $this->isRunFast);
         if ($backup !== null) {
             $this->variables = $backup;
         }
@@ -1100,14 +1091,13 @@ class BladeOne
      * @param string $view
      * @param array  $variables
      * @param bool   $forced  if true then it recompiles no matter if the compiled file exists or not.
-     * @param bool   $isParent
      * @param bool   $runFast if true then the code is not compiled neither checked, and it runs directly the compiled
      *                        version.
      * @return string
      * @throws Exception
      * @noinspection PhpUnusedParameterInspection
      */
-    protected function runInternal($view, $variables = [], $forced = false, $isParent = true, $runFast = false): string
+    protected function runInternal($view, $variables = [], $forced = false, $runFast = false): string
     {
         $this->currentView = $view;
         if (@\count($this->composerStack)) {
@@ -1248,18 +1238,6 @@ class BladeOne
             // compile the original file
             $contents = $this->compileString($this->getFile($template));
             $this->compileCallBacks($contents, $templateName);
-            $dir = \dirname($compiled);
-            if (!\is_dir($dir)) {
-                $ok = @\mkdir($dir, 0777, true);
-                if ($ok === false) {
-                    $this->showError(
-                        'Compiling',
-                        "Unable to create the compile folder [$dir]. Check the permissions of it's parent folder.",
-                        true
-                    );
-                    return false;
-                }
-            }
             if ($this->optimize) {
                 // removes space and tabs and replaces by a single space
                 $contents = \preg_replace('/^ {2,}/m', ' ', $contents);
@@ -1286,19 +1264,18 @@ class BladeOne
     public function getCompiledFile($templateName = ''): string
     {
         $templateName = (empty($templateName)) ? $this->fileName : $templateName;
+
+        $fullPath = $this->getTemplateFile($templateName);
+        if($fullPath == '') {
+            throw new \RuntimeException('Template not found: ' . $templateName);
+        }
+
         $style=$this->compileTypeFileName;
         if ($style==='auto') {
-            $style=($this->getMode() === self::MODE_DEBUG)?'nochange':'sha1';
+            $style='sha1';
         }
-        switch ($style) {
-            case 'normal':
-                return $this->compiledPath . '/' . $templateName . $this->compileExtension;
-            case 'md5':
-                return $this->compiledPath . '/' . \md5($templateName) . $this->compileExtension;
-            case 'sha1':
-                return $this->compiledPath . '/' . \sha1($templateName) . $this->compileExtension;
-        }
-        return $this->compiledPath . '/' . $templateName . $this->compileExtension;
+        $hash = $style === 'md5' ? \md5($fullPath) : \sha1($fullPath);
+        return $this->compiledPath . '/' . basename($templateName) . '_' . $hash . $this->compileExtension;
     }
 
 
@@ -1569,7 +1546,7 @@ class BladeOne
     {
         if (
             isset($_SERVER['HTTP_X_FORWARDED_FOR'])
-            && \preg_match('/^([d]{1,3}).([d]{1,3}).([d]{1,3}).([d]{1,3})$/', $_SERVER['HTTP_X_FORWARDED_FOR'])
+            && \preg_match('/^(d{1,3}).(d{1,3}).(d{1,3}).(d{1,3})$/', $_SERVER['HTTP_X_FORWARDED_FOR'])
         ) {
             return $_SERVER['HTTP_X_FORWARDED_FOR'];
         }
@@ -1712,7 +1689,7 @@ class BladeOne
      * @param string|array $varname It is the name of the variable or, it is an associative array
      * @param mixed        $value
      * @return $this
-     * @see \eftec\bladeone\BladeOne::share
+     * @see BladeOne::share
      */
     public function with($varname, $value = null): BladeOne
     {
@@ -1894,7 +1871,7 @@ class BladeOne
     }
     /**
      * @return string
-     * @see \eftec\bladeone\BladeOne::setCompileTypeFileName
+     * @see BladeOne::setCompileTypeFileName
      */
     public function getCompileTypeFileName(): string
     {
@@ -1903,11 +1880,10 @@ class BladeOne
 
     /**
      * It determines how the compiled filename will be called.<br>
-     * <b>auto</b> (default mode) the mode is "sha1" unless the mode is MODE_DEBUG<br>
+     * <b>auto</b> (default mode) the mode is "sha1"<br>
      * <b>sha1</b> the filename is converted into a sha1 hash (it's the slow method, but it is safest)<br>
      * <b>md5</b> the filename is converted into a md5 hash (it's faster than sha1, and it uses less space)<br>
-     * <b>normal</b> the filename is left untouched (it's the fastest mode but the filename could be exposed)<br>
-     * @param string $compileTypeFileName=['auto','sha1','md5','nochange'][$i]
+     * @param string $compileTypeFileName=['auto','sha1','md5'][$i]
      * @return BladeOne
      */
     public function setCompileTypeFileName(string $compileTypeFileName): BladeOne
@@ -2006,7 +1982,7 @@ class BladeOne
         } elseif (static::startsWith($empty, 'raw|')) {
             $result = \substr($empty, 4);
         } else {
-            $result = $this->run($empty, []);
+            $result = $this->run($empty);
         }
         return $result;
     }
@@ -2032,13 +2008,13 @@ class BladeOne
             return '';
         }
 
-        $forced = $mode & 1; // mode=1 forced:it recompiles no matter if the compiled file exists or not.
-        $runFast = $mode & 2; // mode=2 runfast: the code is not compiled neither checked, and it runs directly the compiled
+        $forced = ($mode & 1)!==0; // mode=1 forced:it recompiles no matter if the compiled file exists or not.
+        $runFast = ($mode & 2)!==0; // mode=2 runfast: the code is not compiled neither checked, and it runs directly the compiled
         $this->sections = [];
         if ($mode == 3) {
             $this->showError('run', "we can't force and run fast at the same time", true);
         }
-        return $this->runInternal($view, $variables, $forced, true, $runFast);
+        return $this->runInternal($view, $variables, $forced, $runFast);
     }
 
     /**
@@ -2345,7 +2321,7 @@ class BladeOne
      * <b>Note:</b>The relative path is calculated when we set the base url.
      *
      * @return string
-     * @see \eftec\bladeone\BladeOne::setBaseUrl
+     * @see BladeOne::setBaseUrl
      */
     public function getRelativePath(): string
     {
@@ -2518,7 +2494,7 @@ class BladeOne
         $r = $this->_e($phrase);
         $argv[0] = $r; // replace the first argument with the translation.
         $result = @sprintf(...$argv);
-        return ($result == false) ? $r : $result;
+        return !$result ? $r : $result;
     }
 
     /**
@@ -2584,7 +2560,7 @@ class BladeOne
     /**
      * @param $expression
      * @return string
-     * @see \eftec\bladeone\BladeOne::getCanonicalUrl
+     * @see BladeOne::getCanonicalUrl
      */
     public function compileCanonical($expression = null): string
     {
@@ -2595,7 +2571,7 @@ class BladeOne
     /**
      * @param $expression
      * @return string
-     * @see \eftec\bladeone\BladeOne::getBaseUrl()
+     * @see BladeOne::getBaseUrl
      */
     public function compileBase($expression = null): string
     {
@@ -2703,7 +2679,7 @@ class BladeOne
     {
         $ex = $this->stripParentheses($expression);
         $p0 = \strpos($ex, ',');
-        if ($p0 == false) {
+        if (!$p0) {
             $var = $this->stripQuotes($ex);
             $namespace = '';
         } else {
@@ -2764,6 +2740,7 @@ class BladeOne
      *
      * @param string $value
      * @return string
+     * @throws Exception
      */
     protected function compileEchos($value): string
     {
@@ -2840,7 +2817,7 @@ class BladeOne
                     return $this->compileStatementClass($match);
                 }
                 if (isset($this->customDirectivesRT[$match[1]])) {
-                    if ($this->customDirectivesRT[$match[1]] == true) {
+                    if ($this->customDirectivesRT[$match[1]]) {
                         $match[0] = $this->compileStatementCustom($match);
                     } else {
                         $match[0] = \call_user_func(
@@ -2901,7 +2878,7 @@ class BladeOne
      * @param string $text
      *
      * @return string
-     * @see \eftec\bladeone\BladeOne::$aliasClasses
+     * @see BladeOne
      */
     protected function fixNamespaceClass($text): string
     {
@@ -2984,7 +2961,7 @@ class BladeOne
     }
 
     /**
-     * It separates a string using a separator and a identifier<br>
+     * It separates a string using a separator and an identifier<br>
      * It excludes quotes,double quotes and the "¬" symbol.<br>
      * <b>Example</b><br>
      * <pre>
@@ -3035,7 +3012,7 @@ class BladeOne
             } else {
                 $nextpart .= $char;
             }
-            if ($char === $separator && $insidePar == false) {
+            if ($char === $separator && !$insidePar) {
                 $parts[] = substr($nextpart, 0, -1);
                 $nextpart = '';
             }
@@ -3151,7 +3128,7 @@ class BladeOne
     }
 
     /**
-     * It converts a string separated by pipes | into an filtered expression.<br>
+     * It converts a string separated by pipes | into a filtered expression.<br>
      * If the method exists (as directive), then it is used<br>
      * If the method exists (in this class) then it is used<br>
      * Otherwise, it uses a global function.<br>
@@ -3174,9 +3151,8 @@ class BladeOne
         if ($c === 0) {
             return $result;
         }
-
         $prev = '';
-        for ($i = $c; $i >= 1; $i--) {
+        for ($i = 1; $i <=$c; $i++) {
             $r = @explode(':', $array[$i], 2);
             $fnName = trim($r[0]);
             $fnNameF = $fnName[0]; // first character
@@ -3187,22 +3163,23 @@ class BladeOne
             } elseif (method_exists($this, $fnName)) {
                 $fnName = '$this->' . $fnName;
             }
+            $hasArgument=count($r) === 2;
             if ($i === 1) {
                 $prev = $fnName . '(' . $array[0];
-                if (count($r) === 2) {
+                if ($hasArgument) {
                     $prev .= ',' . $r[1];
                 }
                 $prev .= ')';
             } else {
                 $prev = $fnName . '(' . $prev;
-                if (count($r) === 2) {
-                    if ($i === 2) {
-                        $prev .= ',';
-                    }
-                    $prev .= $r[1] . ')';
+                if ($hasArgument) {
+                    $prev .=','. $r[1] . ')';
+                } else {
+                    $prev.=')';
                 }
             }
         }
+
         return $prev;
     }
 
@@ -3259,7 +3236,7 @@ class BladeOne
     {
         //$segments = \explode('=', \preg_replace("/[()\\\']/", '', $expression));
         $segments = \explode('=', $this->stripParentheses($expression));
-        $value = (\count($segments) >= 2) ? '=@' . $segments[1] : '++';
+        $value = (\count($segments) >= 2) ? '=@' . implode('=', array_slice($segments, 1)) : '++';
         return $this->phpTag . \trim($segments[0]) . $value . ';?>';
     }
 
@@ -3585,6 +3562,9 @@ class BladeOne
     protected function compileForeach($expression): string
     {
         //\preg_match('/\( *(.*) * as *([^\)]*)/', $expression, $matches);
+        if($expression===null) {
+            return '@foreach';
+        }
         \preg_match('/\( *(.*) * as *([^)]*)/', $expression, $matches);
         $iteratee = \trim($matches[1]);
         $iteration = \trim($matches[2]);
@@ -4159,6 +4139,8 @@ class BladeOne
                 return "\033[33m$str\033[0m";
             case 'i': //info
                 return "\033[36m$str\033[0m";
+            case 'b':
+                return "\e[01m$str\e[22m";
             default:
                 return $str;
         }
@@ -4173,6 +4155,14 @@ class BladeOne
         } else {
             $status=false;
             echo "Compile-path [$this->compiledPath] is not a folder " . self::colorLog("ERROR", 'e') . "\n";
+        }
+        foreach($this->templatePath as $t) {
+            if (is_dir($t)) {
+                echo "Template-path (view) [$t] is a folder " . self::colorLog("OK") . "\n";
+            } else {
+                $status = false;
+                echo "Template-path (view) [$t] is not a folder " . self::colorLog("ERROR", 'e') . "\n";
+            }
         }
         $error = self::colorLog('OK');
         try {
@@ -4193,6 +4183,34 @@ class BladeOne
         echo "Testing reading in the view folder [" . $this->templatePath[0] . "].\n";
         echo "View(s) found :" . count($files) . "\n";
         return $status;
+    }
+    public function createFolders(): void
+    {
+        echo self::colorLog("Creating Folder\n");
+        echo "Creating compile folder[".self::colorLog($this->compiledPath,'b')."] ";
+        if (!\is_dir($this->compiledPath)) {
+            $ok = @\mkdir($this->compiledPath, 0770, true);
+            if ($ok === false) {
+                echo self::colorLog("Error: Unable to create folder, check the permissions\n", 'e');
+            } else {
+                echo self::colorLog("OK\n");
+            }
+        } else {
+            echo self::colorLog("Note: folder already exist.\n", 'w');
+        }
+        foreach($this->templatePath as $t) {
+            echo "Creating template folder [".self::colorLog($t,'b')."] ";
+            if (!\is_dir($t)) {
+                $ok = @\mkdir($t, 0770, true);
+                if ($ok === false) {
+                    echo self::colorLog("Error: Unable to create folder, check the permissions\n", 'e');
+                } else {
+                    echo self::colorLog("OK\n");
+                }
+            } else {
+                echo self::colorLog("Note: folder already exist.\n", 'w');
+            }
+        }
     }
 
     public function clearcompile(): int
@@ -4219,6 +4237,7 @@ class BladeOne
     public function cliEngine(): void
     {
         $clearcompile = self::getParameterCli('clearcompile');
+        $createfolder = self::getParameterCli('createfolder');
         $check = self::getParameterCli('check');
         echo '  ____  _           _       ____             ' . "\n";
         echo ' |  _ \| |         | |     / __ \            ' . "\n";
@@ -4236,12 +4255,24 @@ class BladeOne
             $done = true;
             $this->clearcompile();
         }
+        if($createfolder) {
+            $done=true;
+            $this->createFolders();
+        }
         if (!$done) {
             echo " Syntax:\n";
-            echo " -templatepath <templatepath> (optional) the template-path.\n  Example: '/folder/views' or 'views' (relative)\n";
-            echo " -compilepath <compilepath>  (optional) the compile-path.\n  Example: '/folder/compiles or 'compiles' (relative)\n";
-            echo " -clearcompile It deletes the content of the compile path\n";
-            echo " -check It checks the library\n";
+            echo " ".self::colorLog("-templatepath","b")." <templatepath> (optional) the template-path (view path).\n";
+            echo "    Default value: 'views'\n";
+            echo "    Example: 'php /vendor/bin/bladeonecli /folder/views' (absolute)\n";
+            echo "    Example: 'php /vendor/bin/bladeonecli folder/view1' (relative)\n";
+            echo " ".self::colorLog("-compilepath","b")." <compilepath>  (optional) the compile-path.\n";
+            echo "    Default value: 'compiles'\n";
+            echo "    Example: 'php /vendor/bin/bladeonecli /folder/compiles' (absolute)\n";
+            echo "    Example: 'php /vendor/bin/bladeonecli compiles' (relative)\n";
+            echo " ".self::colorLog("-createfolder","b")." it creates the folders if they don't exist.\n";
+            echo "    Example: php ./vendor/bin/bladeonecli -createfolder\n";
+            echo " ".self::colorLog("-clearcompile","b")." It deletes the content of the compile path\n";
+            echo " ".self::colorLog("-check","b")." It checks the folders and permissions\n";
         }
     }
 
@@ -4258,21 +4289,4 @@ class BladeOne
     }
 
     //</editor-fold>
-}
-
-if (
-    !defined('PHPUNIT_COMPOSER_INSTALL') && !defined('__PHPUNIT_PHAR__')
-    && isset($_SERVER['PHP_SELF']) && basename($_SERVER['PHP_SELF']) === 'BladeOne.php'
-    && BladeOne::isCli()
-) {
-    $compilepath = BladeOne::getParameterCli('compilepath', null);
-    $templatepath = BladeOne::getParameterCli('templatepath', null);
-    if (!BladeOne::isAbsolutePath($compilepath)) {
-        $compilepath = getcwd() . '/' . $compilepath;
-    }
-    if (!BladeOne::isAbsolutePath($templatepath)) {
-        $templatepath = getcwd() . '/' . $templatepath;
-    }
-    $inst = new BladeOne($templatepath, $compilepath);
-    $inst->cliEngine();
 }

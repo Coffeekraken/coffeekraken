@@ -1,7 +1,7 @@
 <?php
 
 // require the vendors
-$nodeModulesVendorsPath = realpath(__DIR__ . '/../../vendor/autoload.php');
+$nodeModulesVendorsPath = realpath(__DIR__ . '/../../../../../autoload.php');
 require_once $nodeModulesVendorsPath;
 
 // set some environment variables

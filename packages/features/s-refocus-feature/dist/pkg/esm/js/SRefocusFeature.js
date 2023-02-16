@@ -24,6 +24,12 @@ import __define from './define';
  * @status          beta
  *
  * This feature allows you to automatically visually refocus an element that is inside a scrollable one on different trigger(s) like events, etc...
+ * This feature will occurs on these actions:
+ * - At page display, check the anchor and refocus if found an element with the correct id
+ * - At some events like: popstate, hashchange and pushstate.
+ *    - Note that the "pushstate" event is emitted by a proxies `history.pushState` method.
+ *    - In order to make the refocus happend, your pushed state MUST have the `scroll` property to `true`
+ * - On any events specified in the `props.trigger` property using this syntax: `event:click`, etc...
  *
  * @support          chromium
  * @support          firefox
@@ -47,31 +53,19 @@ import __define from './define';
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-var _wr = function (type) {
-    var orig = history[type];
-    return function () {
-        var rv = orig.apply(this, arguments);
-        var e = new Event(type);
-        e.arguments = arguments;
-        window.dispatchEvent(e);
-        return rv;
-    };
-};
-history.pushState = _wr('pushstate');
 export default class SRefocusFeature extends __SFeature {
     constructor(name, node, settings) {
         super(name, node, __deepMerge({
             name: 's-refocus',
             interface: __SRefocusFeatureInterface,
         }, settings !== null && settings !== void 0 ? settings : {}));
+        this._currentScrolledTargets = [];
     }
     mount() {
-        console.log('props', this.props);
         this.props.trigger.forEach((trigger) => {
             switch (trigger) {
                 case 'anchor':
                     setTimeout(() => {
-                        console.log('COCO');
                         if (document.location.hash) {
                             const $targetElm = this.node.querySelector(document.location.hash);
                             if ($targetElm) {
@@ -81,47 +75,59 @@ export default class SRefocusFeature extends __SFeature {
                     }, this.props.timeout);
                     break;
                 case 'history':
-                    window.addEventListener('hashchange', (e) => {
-                        console.log('HASH change!', document.location.hash);
-                        if (document.location.hash) {
-                            const $targetElm = this.node.querySelector(document.location.hash);
-                            if ($targetElm) {
-                                this._scrollTo($targetElm);
+                    ['hashchange', 'popstate', 'pushstate'].forEach((eventName) => {
+                        window.addEventListener(eventName, (e) => {
+                            var _a;
+                            // if the event is the custom "pushstate"
+                            // make sure that the state object has the "scroll" property to "true"
+                            if (eventName === 'pushstate' &&
+                                !((_a = e.detail) === null || _a === void 0 ? void 0 : _a.scroll)) {
+                                return;
                             }
-                        }
-                    });
-                    window.addEventListener('popstate', (e) => {
-                        console.log('HASH', document.location.hash);
-                        if (document.location.hash) {
-                            const $targetElm = this.node.querySelector(document.location.hash);
-                            if ($targetElm) {
-                                this._scrollTo($targetElm);
+                            if (document.location.hash) {
+                                const $targetElm = this.node.querySelector(document.location.hash);
+                                if ($targetElm) {
+                                    this._scrollTo($targetElm);
+                                }
                             }
-                        }
-                    });
-                    window.addEventListener('pushstate', (e) => {
-                        console.log('PUSH HASH', document.location.hash);
-                        if (document.location.hash) {
-                            const $targetElm = this.node.querySelector(document.location.hash);
-                            if ($targetElm) {
-                                this._scrollTo($targetElm);
+                            else {
+                                setTimeout(() => {
+                                    // scroll to top
+                                    this._scrollTo(document.body);
+                                }, 100);
                             }
-                        }
+                        });
                     });
                     break;
                 default:
-                    // if (trigger.match(/^event:/)) {
-                    //     const event = trigger.replace('event:', '').trim();
-                    //     this.node.addEventListener(event, (e) => {
-                    //         this._scrollTo(e.target);
-                    //     });
-                    // }
+                    if (trigger.match(/^event:/)) {
+                        const event = trigger.replace('event:', '').trim();
+                        this.node.addEventListener(event, (e) => {
+                            this._scrollTo(e.target);
+                        });
+                    }
                     break;
             }
         });
     }
     _scrollTo($elm) {
         return __awaiter(this, void 0, void 0, function* () {
+            // do not scroll to an element already in the current stack
+            if (this._currentScrolledTargets.includes($elm)) {
+                return;
+            }
+            // do not scroll to a none existing element
+            if ($elm !== document.body && !this.node.contains($elm)) {
+                return;
+            }
+            // // avoid scrolling if unecessary
+            // const scrollTop =
+            //     $elm === document.body
+            //         ? document.documentElement.scrollTop
+            //         : $elm.scrollTop;
+            // const bounds = $elm.getBoundingClientRect();
+            // console.log('bounds', bounds);
+            // if (scrollTop > this.props.minToScroll) {
             const scrollToSettings = {
                 $elm: this.node,
             };
@@ -139,23 +145,26 @@ export default class SRefocusFeature extends __SFeature {
                 scrollToSettings.align = this.props.align;
             if (this.props.justify)
                 scrollToSettings.justify = this.props.justify;
-            // handle nested scrollable containers
-            let $nestedScrollables = [];
+            // handle scrollable containers
             let $scrollable = __closestScrollable($elm);
-            // while ($scrollable) {
-            //     $nestedScrollables.push($scrollable);
-            //     $scrollable = __closestScrollable($scrollable);
-            // }
-            // if ($scrollable && !$nestedScrollables.includes($scrollable)) {
-            //     $nestedScrollables.push($scrollable);
-            // }
-            // reverse the nestedScrollables to refocus it correctly
-            // $nestedScrollables = $nestedScrollables.reverse();
-            console.log('Scroll', $scrollable === window ? 'window' : 'node', $elm, 'scrollable', $scrollable);
+            // do not scroll multiple times the same container
+            if ($scrollable._isScrolling) {
+                return;
+            }
+            $scrollable._isScrolling = true;
+            // maintain the current scrollable stack
+            if ($scrollable._sRefocusFeatureCurrentElm) {
+                this._currentScrolledTargets.splice(this._currentScrolledTargets.indexOf($scrollable._sRefocusFeatureCurrentElm, 1));
+            }
+            $scrollable._sRefocusFeatureCurrentElm = $elm;
+            this._currentScrolledTargets.push($elm);
             // scroll to element
-            yield __scrollTo($elm, Object.assign(Object.assign({}, scrollToSettings), { $elm: $scrollable !== null && $scrollable !== void 0 ? $scrollable : this.node }));
+            yield __scrollTo($elm, Object.assign(Object.assign({}, scrollToSettings), { $elm: $scrollable }));
+            // reset the scrolling state
+            $scrollable._isScrolling = false;
+            // }
             // add and remove a "focused" class
-            if (this.props.focusedClass) {
+            if (this.props.focusedClass && $elm !== document.body) {
                 $elm.classList.add(this.props.focusedClass);
                 setTimeout(() => {
                     $elm.classList.remove(this.props.focusedClass);
@@ -165,4 +174,4 @@ export default class SRefocusFeature extends __SFeature {
     }
 }
 export { __define as define };
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7OztBQUFBLE9BQU8sVUFBVSxNQUFNLHlCQUF5QixDQUFDO0FBQ2pELE9BQU8sRUFBRSxVQUFVLEVBQUUsTUFBTSx5QkFBeUIsQ0FBQztBQUVyRCxPQUFPLEVBQUUsV0FBVyxFQUFFLE1BQU0sNEJBQTRCLENBQUM7QUFDekQsT0FBTywwQkFBMEIsTUFBTSxzQ0FBc0MsQ0FBQztBQUU5RSxPQUFPLEVBQUUsbUJBQW1CLEVBQUUsTUFBTSx5QkFBeUIsQ0FBQztBQUU5RCxPQUFPLFFBQVEsTUFBTSxVQUFVLENBQUM7QUFpQmhDOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0FpQ0c7QUFFSCxJQUFJLEdBQUcsR0FBRyxVQUFVLElBQUk7SUFDcEIsSUFBSSxJQUFJLEdBQUcsT0FBTyxDQUFDLElBQUksQ0FBQyxDQUFDO0lBQ3pCLE9BQU87UUFDSCxJQUFJLEVBQUUsR0FBRyxJQUFJLENBQUMsS0FBSyxDQUFDLElBQUksRUFBRSxTQUFTLENBQUMsQ0FBQztRQUNyQyxJQUFJLENBQUMsR0FBRyxJQUFJLEtBQUssQ0FBQyxJQUFJLENBQUMsQ0FBQztRQUN4QixDQUFDLENBQUMsU0FBUyxHQUFHLFNBQVMsQ0FBQztRQUN4QixNQUFNLENBQUMsYUFBYSxDQUFDLENBQUMsQ0FBQyxDQUFDO1FBQ3hCLE9BQU8sRUFBRSxDQUFDO0lBQ2QsQ0FBQyxDQUFDO0FBQ04sQ0FBQyxDQUFDO0FBQ0YsT0FBTyxDQUFDLFNBQVMsR0FBRyxHQUFHLENBQUMsV0FBVyxDQUFDLENBQUM7QUFFckMsTUFBTSxDQUFDLE9BQU8sT0FBTyxlQUFnQixTQUFRLFVBQVU7SUFDbkQsWUFBWSxJQUFZLEVBQUUsSUFBaUIsRUFBRSxRQUFhO1FBQ3RELEtBQUssQ0FDRCxJQUFJLEVBQ0osSUFBSSxFQUNKLFdBQVcsQ0FDUDtZQUNJLElBQUksRUFBRSxX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
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7OztBQUFBLE9BQU8sVUFBVSxNQUFNLHlCQUF5QixDQUFDO0FBQ2pELE9BQU8sRUFBRSxVQUFVLEVBQUUsTUFBTSx5QkFBeUIsQ0FBQztBQUVyRCxPQUFPLEVBQUUsV0FBVyxFQUFFLE1BQU0sNEJBQTRCLENBQUM7QUFDekQsT0FBTywwQkFBMEIsTUFBTSxzQ0FBc0MsQ0FBQztBQUU5RSxPQUFPLEVBQUUsbUJBQW1CLEVBQUUsTUFBTSx5QkFBeUIsQ0FBQztBQUU5RCxPQUFPLFFBQVEsTUFBTSxVQUFVLENBQUM7QUFrQmhDOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0F1Q0c7QUFDSCxNQUFNLENBQUMsT0FBTyxPQUFPLGVBQWdCLFNBQVEsVUFBVTtJQUduRCxZQUFZLElBQVksRUFBRSxJQUFpQixFQUFFLFFBQWE7UUFDdEQsS0FBSyxDQUNELElBQUksRUFDSixJQUFJLEVBQ0osV0FBVyxDQUNQO1lBQ0ksSUFBSSxFQUFFLFdBQVc7WUFDakIsU0FBUyxFQUFFLDBCQUEwQjtTQUN4QyxFQUNELFFBQVEsYUFBUixRQUFRLGNBQVIsUUFBUSxHQUFJLEVBQUUsQ0FDakIsQ0FDSixDQUFDO1FBYk4sNEJBQXVCLEdBQWtCLEVBQUUsQ0FBQztJQWM1QyxDQUFDO0lBQ0QsS0FBSztRQUNELElBQUksQ0FBQyxLQUFLLENBQUMsT0FBTyxDQUFDLE9BQU8sQ0FBQyxDQUFDLE9BQU8sRUFBRSxFQUFFO1lBQ25DLFFBQVEsT0FBTyxFQUFFO2dCQUNiLEtBQUssUUFBUTtvQkFDVCxVQUFVLENBQUMsR0FBRyxFQUFFO3dCQUNaLElBQUksUUFBUSxDQUFDLFFBQVEsQ0FBQyxJQUFJLEVBQUU7NEJBQ3hCLE1BQU0sVUFBVSxHQUFHLElBQUksQ0FBQyxJQUFJLENBQUMsYUFBYSxDQUN0QyxRQUFRLENBQUMsUUFBUSxD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

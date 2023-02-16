@@ -16,6 +16,7 @@ export interface ISRefocusFeatureProps {
     easing: Function;
     focusedClass: string | boolean;
     focusedClassDuration: number;
+    // minToScroll: number;
     offset: number;
     offsetX: number;
     offsetY: number;
@@ -34,6 +35,12 @@ export interface ISRefocusFeatureProps {
  * @status          beta
  *
  * This feature allows you to automatically visually refocus an element that is inside a scrollable one on different trigger(s) like events, etc...
+ * This feature will occurs on these actions:
+ * - At page display, check the anchor and refocus if found an element with the correct id
+ * - At some events like: popstate, hashchange and pushstate.
+ *    - Note that the "pushstate" event is emitted by a proxies `history.pushState` method.
+ *    - In order to make the refocus happend, your pushed state MUST have the `scroll` property to `true`
+ * - On any events specified in the `props.trigger` property using this syntax: `event:click`, etc...
  *
  * @support          chromium
  * @support          firefox
@@ -57,20 +64,9 @@ export interface ISRefocusFeatureProps {
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-
-var _wr = function (type) {
-    var orig = history[type];
-    return function () {
-        var rv = orig.apply(this, arguments);
-        var e = new Event(type);
-        e.arguments = arguments;
-        window.dispatchEvent(e);
-        return rv;
-    };
-};
-history.pushState = _wr('pushstate');
-
 export default class SRefocusFeature extends __SFeature {
+    _currentScrolledTargets: HTMLElement[] = [];
+
     constructor(name: string, node: HTMLElement, settings: any) {
         super(
             name,
@@ -85,14 +81,10 @@ export default class SRefocusFeature extends __SFeature {
         );
     }
     mount() {
-        console.log('props', this.props);
-
         this.props.trigger.forEach((trigger) => {
             switch (trigger) {
                 case 'anchor':
                     setTimeout(() => {
-                        console.log('COCO');
-
                         if (document.location.hash) {
                             const $targetElm = this.node.querySelector(
                                 document.location.hash,
@@ -104,54 +96,65 @@ export default class SRefocusFeature extends __SFeature {
                     }, this.props.timeout);
                     break;
                 case 'history':
-                    window.addEventListener('hashchange', (e) => {
-                        console.log('HASH change!', document.location.hash);
+                    ['hashchange', 'popstate', 'pushstate'].forEach(
+                        (eventName) => {
+                            window.addEventListener(eventName, (e) => {
+                                // if the event is the custom "pushstate"
+                                // make sure that the state object has the "scroll" property to "true"
+                                if (
+                                    eventName === 'pushstate' &&
+                                    !e.detail?.scroll
+                                ) {
+                                    return;
+                                }
 
-                        if (document.location.hash) {
-                            const $targetElm = this.node.querySelector(
-                                document.location.hash,
-                            );
-                            if ($targetElm) {
-                                this._scrollTo($targetElm);
-                            }
-                        }
-                    });
-                    window.addEventListener('popstate', (e) => {
-                        console.log('HASH', document.location.hash);
-
-                        if (document.location.hash) {
-                            const $targetElm = this.node.querySelector(
-                                document.location.hash,
-                            );
-                            if ($targetElm) {
-                                this._scrollTo($targetElm);
-                            }
-                        }
-                    });
-                    window.addEventListener('pushstate', (e) => {
-                        console.log('PUSH HASH', document.location.hash);
-                        if (document.location.hash) {
-                            const $targetElm = this.node.querySelector(
-                                document.location.hash,
-                            );
-                            if ($targetElm) {
-                                this._scrollTo($targetElm);
-                            }
-                        }
-                    });
+                                if (document.location.hash) {
+                                    const $targetElm = this.node.querySelector(
+                                        document.location.hash,
+                                    );
+                                    if ($targetElm) {
+                                        this._scrollTo($targetElm);
+                                    }
+                                } else {
+                                    setTimeout(() => {
+                                        // scroll to top
+                                        this._scrollTo(document.body);
+                                    }, 100);
+                                }
+                            });
+                        },
+                    );
                     break;
                 default:
-                    // if (trigger.match(/^event:/)) {
-                    //     const event = trigger.replace('event:', '').trim();
-                    //     this.node.addEventListener(event, (e) => {
-                    //         this._scrollTo(e.target);
-                    //     });
-                    // }
+                    if (trigger.match(/^event:/)) {
+                        const event = trigger.replace('event:', '').trim();
+                        this.node.addEventListener(event, (e) => {
+                            this._scrollTo(e.target);
+                        });
+                    }
                     break;
             }
         });
     }
     async _scrollTo($elm) {
+        // do not scroll to an element already in the current stack
+        if (this._currentScrolledTargets.includes($elm)) {
+            return;
+        }
+        // do not scroll to a none existing element
+        if ($elm !== document.body && !this.node.contains($elm)) {
+            return;
+        }
+
+        // // avoid scrolling if unecessary
+        // const scrollTop =
+        //     $elm === document.body
+        //         ? document.documentElement.scrollTop
+        //         : $elm.scrollTop;
+        // const bounds = $elm.getBoundingClientRect();
+        // console.log('bounds', bounds);
+
+        // if (scrollTop > this.props.minToScroll) {
         const scrollToSettings = {
             $elm: this.node,
         };
@@ -164,38 +167,39 @@ export default class SRefocusFeature extends __SFeature {
         if (this.props.align) scrollToSettings.align = this.props.align;
         if (this.props.justify) scrollToSettings.justify = this.props.justify;
 
-        // handle nested scrollable containers
-        let $nestedScrollables: HTMLElement[] = [];
+        // handle scrollable containers
         let $scrollable = __closestScrollable($elm);
 
-        // while ($scrollable) {
-        //     $nestedScrollables.push($scrollable);
-        //     $scrollable = __closestScrollable($scrollable);
-        // }
+        // do not scroll multiple times the same container
+        if ($scrollable._isScrolling) {
+            return;
+        }
+        $scrollable._isScrolling = true;
 
-        // if ($scrollable && !$nestedScrollables.includes($scrollable)) {
-        //     $nestedScrollables.push($scrollable);
-        // }
-
-        // reverse the nestedScrollables to refocus it correctly
-        // $nestedScrollables = $nestedScrollables.reverse();
-
-        console.log(
-            'Scroll',
-            $scrollable === window ? 'window' : 'node',
-            $elm,
-            'scrollable',
-            $scrollable,
-        );
+        // maintain the current scrollable stack
+        if ($scrollable._sRefocusFeatureCurrentElm) {
+            this._currentScrolledTargets.splice(
+                this._currentScrolledTargets.indexOf(
+                    $scrollable._sRefocusFeatureCurrentElm,
+                    1,
+                ),
+            );
+        }
+        $scrollable._sRefocusFeatureCurrentElm = $elm;
+        this._currentScrolledTargets.push($elm);
 
         // scroll to element
         await __scrollTo($elm, {
             ...scrollToSettings,
-            $elm: $scrollable ?? this.node,
+            $elm: $scrollable,
         });
 
+        // reset the scrolling state
+        $scrollable._isScrolling = false;
+        // }
+
         // add and remove a "focused" class
-        if (this.props.focusedClass) {
+        if (this.props.focusedClass && $elm !== document.body) {
             $elm.classList.add(this.props.focusedClass);
             setTimeout(() => {
                 $elm.classList.remove(this.props.focusedClass);

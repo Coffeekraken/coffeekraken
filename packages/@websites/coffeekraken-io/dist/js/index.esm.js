@@ -10639,7 +10639,7 @@ var globToRegexp = function(glob, opts) {
   }
   return new RegExp(reStr, flags2);
 };
-var __awaiter$y = globalThis && globalThis.__awaiter || function(thisArg, _arguments, P, generator) {
+var __awaiter$z = globalThis && globalThis.__awaiter || function(thisArg, _arguments, P, generator) {
   function adopt(value) {
     return value instanceof P ? value : new P(function(resolve) {
       resolve(value);
@@ -10697,7 +10697,7 @@ class SEventEmitter$1 extends SClass {
     if (!sourceSEventEmitter || !sourceSEventEmitter.on || typeof sourceSEventEmitter.on !== "function") {
       return sourceSEventEmitter;
     }
-    sourceSEventEmitter.on(set.events || "*", (value, metas) => __awaiter$y(this, void 0, void 0, function* () {
+    sourceSEventEmitter.on(set.events || "*", (value, metas) => __awaiter$z(this, void 0, void 0, function* () {
       var _a2, _b2, _c2, _d2, _e, _f, _g;
       if (!metas || !value) {
         return;
@@ -10790,7 +10790,7 @@ class SEventEmitter$1 extends SClass {
     }, metas !== null && metas !== void 0 ? metas : {});
   }
   emit(event, value, metas) {
-    return new Promise((resolve, reject) => __awaiter$y(this, void 0, void 0, function* () {
+    return new Promise((resolve, reject) => __awaiter$z(this, void 0, void 0, function* () {
       let metasObj = this._createMetas(event, metas);
       const isFirstLevel = !metasObj.level;
       if (__isPlainObject(value)) {
@@ -10831,7 +10831,7 @@ class SEventEmitter$1 extends SClass {
     }));
   }
   _emit(logObj) {
-    return __awaiter$y(this, void 0, void 0, function* () {
+    return __awaiter$z(this, void 0, void 0, function* () {
       logObj.metas.uid = __uniqid();
       if (logObj.event === "ask") {
         this.constructor.global.on(`answer.${logObj.metas.askId}`, (answer, metas) => {
@@ -10897,7 +10897,7 @@ class SEventEmitter$1 extends SClass {
     }
   }
   _emitEventStack(event, initialValue, metasObj) {
-    return __awaiter$y(this, void 0, void 0, function* () {
+    return __awaiter$z(this, void 0, void 0, function* () {
       let currentCallbackReturnedValue = initialValue;
       if (!this._eventsStacks || Object.keys(this._eventsStacks).length === 0)
         return currentCallbackReturnedValue;
@@ -10959,7 +10959,7 @@ class SEventEmitter$1 extends SClass {
     });
   }
   _emitEvents(events, initialValue, metas) {
-    return new Promise((resolve, reject) => __awaiter$y(this, void 0, void 0, function* () {
+    return new Promise((resolve, reject) => __awaiter$z(this, void 0, void 0, function* () {
       if (!events)
         return this;
       if (typeof events === "string")
@@ -11129,7 +11129,7 @@ const fn = function treatAsValue(promise, settings = {}) {
     return promise;
   }
 };
-var __awaiter$x = globalThis && globalThis.__awaiter || function(thisArg, _arguments, P, generator) {
+var __awaiter$y = globalThis && globalThis.__awaiter || function(thisArg, _arguments, P, generator) {
   function adopt(value) {
     return value instanceof P ? value : new P(function(resolve) {
       resolve(value);
@@ -11219,7 +11219,7 @@ class SPromise extends SClass.extends(Promise) {
           return;
         api[func] = this[func].bind(this);
       });
-      (() => __awaiter$x(this, void 0, void 0, function* () {
+      (() => __awaiter$y(this, void 0, void 0, function* () {
         yield __wait(0);
         try {
           yield executorFn(api);
@@ -11246,10 +11246,10 @@ class SPromise extends SClass.extends(Promise) {
     }
   }
   static queue(promises, before, after) {
-    return new SPromise(({ resolve, reject, pipe }) => __awaiter$x(this, void 0, void 0, function* () {
+    return new SPromise(({ resolve, reject, pipe }) => __awaiter$y(this, void 0, void 0, function* () {
       const results = {};
       function next() {
-        return __awaiter$x(this, void 0, void 0, function* () {
+        return __awaiter$y(this, void 0, void 0, function* () {
           const firstKey = Object.keys(promises)[0];
           let promise = promises[firstKey];
           if (typeof promise === "function")
@@ -11335,7 +11335,7 @@ class SPromise extends SClass.extends(Promise) {
     return this._resolve(arg, stacksOrder);
   }
   _resolve(arg, stacksOrder = "resolve,finally") {
-    return __awaiter$x(this, void 0, void 0, function* () {
+    return __awaiter$y(this, void 0, void 0, function* () {
       if (this._promiseState === "destroyed")
         return;
       this._promiseState = "resolved";
@@ -11355,7 +11355,7 @@ class SPromise extends SClass.extends(Promise) {
     return this._reject(arg, stacksOrder);
   }
   _reject(arg, stacksOrder = `catch,reject,finally`) {
-    return __awaiter$x(this, void 0, void 0, function* () {
+    return __awaiter$y(this, void 0, void 0, function* () {
       if (this._promiseState === "destroyed")
         return;
       this._promiseState = "rejected";
@@ -11377,7 +11377,7 @@ class SPromise extends SClass.extends(Promise) {
   _cancel(arg, stacksOrder = "cancel,finally") {
     if (this._promiseState === "destroyed")
       return;
-    return new Promise((resolve, reject) => __awaiter$x(this, void 0, void 0, function* () {
+    return new Promise((resolve, reject) => __awaiter$y(this, void 0, void 0, function* () {
       this._promiseState = "canceled";
       const stacksOrderArray = stacksOrder.split(",").map((l) => l.trim());
       for (let i = 0; i < stacksOrderArray.length; i++) {
@@ -11604,7 +11604,7 @@ class SStdioSettingsInterface extends SInterface {
     };
   }
 }
-var __awaiter$w = globalThis && globalThis.__awaiter || function(thisArg, _arguments, P, generator) {
+var __awaiter$x = globalThis && globalThis.__awaiter || function(thisArg, _arguments, P, generator) {
   function adopt(value) {
     return value instanceof P ? value : new P(function(resolve) {
       resolve(value);
@@ -11658,8 +11658,8 @@ class SStdio extends SClass {
     return this.new(id, sources, adapters, settings);
   }
   static new(id, sources, adapters, settings = {}) {
-    return new Promise((resolve) => __awaiter$w(this, void 0, void 0, function* () {
-      const __new = (yield __vitePreload(() => import("./new.d09bed4f.js"), true ? [] : void 0)).default;
+    return new Promise((resolve) => __awaiter$x(this, void 0, void 0, function* () {
+      const __new = (yield __vitePreload(() => import("./new.6203f6f7.js"), true ? [] : void 0)).default;
       return __new(id, sources, adapters, settings);
     }));
   }
@@ -11703,7 +11703,7 @@ class SStdio extends SClass {
       if (this._lastLogObj && this._lastLogObj.temp) {
         if (!this.clearLast || typeof this.clearLast !== "function")
           throw new Error(`You try to clear the last log but it does not implements the "<cyan>clearLast</cyan>" method`);
-        (() => __awaiter$w(this, void 0, void 0, function* () {
+        (() => __awaiter$x(this, void 0, void 0, function* () {
           if (!this.clearLast)
             return;
           this._applyOnAdapters((adapter) => {
@@ -11717,7 +11717,7 @@ class SStdio extends SClass {
         this._isClearing = true;
         if (!this.clear || typeof this.clear !== "function")
           throw new Error(`You try to clear the "<yellow>${this.constructor.name}</yellow>" stdio but it does not implements the "<cyan>clear</cyan>" method`);
-        (() => __awaiter$w(this, void 0, void 0, function* () {
+        (() => __awaiter$x(this, void 0, void 0, function* () {
           this._applyOnAdapters((adapter) => {
             var _a2;
             (_a2 = adapter.clear) === null || _a2 === void 0 ? void 0 : _a2.call(adapter);
@@ -11736,7 +11736,7 @@ class SStdio extends SClass {
     }
   }
   ask(askObj) {
-    return __awaiter$w(this, void 0, void 0, function* () {
+    return __awaiter$x(this, void 0, void 0, function* () {
       let ask = __deepMerge(this.settings.defaultAskObj, askObj);
       const answer = yield this.adapters[0].ask(ask);
       return answer;
@@ -11752,7 +11752,7 @@ class SStdioAdapter extends SClass {
     super(settings);
   }
 }
-var __awaiter$v = globalThis && globalThis.__awaiter || function(thisArg, _arguments, P, generator) {
+var __awaiter$w = globalThis && globalThis.__awaiter || function(thisArg, _arguments, P, generator) {
   function adopt(value) {
     return value instanceof P ? value : new P(function(resolve) {
       resolve(value);
@@ -11844,12 +11844,12 @@ class SStdioBasicAdapter extends SStdioAdapter {
     this._lastLogObj = logObj;
   }
   _ask(askObj) {
-    return new SPromise(({ resolve, reject, emit }) => __awaiter$v(this, void 0, void 0, function* () {
+    return new SPromise(({ resolve, reject, emit }) => __awaiter$w(this, void 0, void 0, function* () {
       throw new Error(`<red>[SStdioBasicAdapter]</red> The "ask" feature has not been implemented yet in the browser environment...`);
     }));
   }
 }
-var __awaiter$u = globalThis && globalThis.__awaiter || function(thisArg, _arguments, P, generator) {
+var __awaiter$v = globalThis && globalThis.__awaiter || function(thisArg, _arguments, P, generator) {
   function adopt(value) {
     return value instanceof P ? value : new P(function(resolve) {
       resolve(value);
@@ -11888,7 +11888,7 @@ class SStdioSource extends SClass {
     });
   }
   ask(askObj) {
-    return new Promise((resolve, reject) => __awaiter$u(this, void 0, void 0, function* () {
+    return new Promise((resolve, reject) => __awaiter$v(this, void 0, void 0, function* () {
       let answer;
       for (let [key, fn2] of this._callbacks.ask.entries()) {
         answer = yield fn2(askObj);
@@ -11921,7 +11921,7 @@ class SStdioSource extends SClass {
     this._callbacks[event].splice(this._callbacks[event].indexOf(callback, 1));
   }
 }
-var __awaiter$t = globalThis && globalThis.__awaiter || function(thisArg, _arguments, P, generator) {
+var __awaiter$u = globalThis && globalThis.__awaiter || function(thisArg, _arguments, P, generator) {
   function adopt(value) {
     return value instanceof P ? value : new P(function(resolve) {
       resolve(value);
@@ -11957,7 +11957,7 @@ class SStdioConsoleSource extends SStdioSource {
     super(settings);
     this._tmpPrintedLogs = [];
     this._overrideNativeConsole();
-    console.ask = (askObj) => __awaiter$t(this, void 0, void 0, function* () {
+    console.ask = (askObj) => __awaiter$u(this, void 0, void 0, function* () {
       this._restoreNativeConsole();
       yield __wait(100);
       const res = yield this.ask(askObj);
@@ -12859,7 +12859,7 @@ globalThis && globalThis.__awaiter || function(thisArg, _arguments, P, generator
     step((generator = generator.apply(thisArg, _arguments || [])).next());
   });
 };
-var __awaiter$s = globalThis && globalThis.__awaiter || function(thisArg, _arguments, P, generator) {
+var __awaiter$t = globalThis && globalThis.__awaiter || function(thisArg, _arguments, P, generator) {
   function adopt(value) {
     return value instanceof P ? value : new P(function(resolve) {
       resolve(value);
@@ -12887,10 +12887,10 @@ var __awaiter$s = globalThis && globalThis.__awaiter || function(thisArg, _argum
   });
 };
 function __adoptStyleInShadowRoot($shadowRoot, $context = document) {
-  return __awaiter$s(this, void 0, void 0, function* () {
+  return __awaiter$t(this, void 0, void 0, function* () {
     const $links = $context.querySelectorAll('link[rel="stylesheet"]');
     if ($links && $shadowRoot) {
-      Array.from($links).forEach(($link) => __awaiter$s(this, void 0, void 0, function* () {
+      Array.from($links).forEach(($link) => __awaiter$t(this, void 0, void 0, function* () {
         $shadowRoot === null || $shadowRoot === void 0 ? void 0 : $shadowRoot.appendChild($link.cloneNode());
       }));
     }
@@ -13143,7 +13143,7 @@ function __onSwipe(elm, cb, settings = {}) {
     }
   }
 }
-var __awaiter$r = globalThis && globalThis.__awaiter || function(thisArg, _arguments, P, generator) {
+var __awaiter$s = globalThis && globalThis.__awaiter || function(thisArg, _arguments, P, generator) {
   function adopt(value) {
     return value instanceof P ? value : new P(function(resolve) {
       resolve(value);
@@ -13190,7 +13190,7 @@ const triggers = [
 ];
 function __when($elm, trigger2, settings) {
   const finalSettings = Object.assign({ whenInViewport: {}, whenNearViewport: {}, whenOutOfViewport: {}, whenInteract: {}, whenVisible: {}, whenStylesheetsReady: {} }, settings !== null && settings !== void 0 ? settings : {});
-  return new Promise((resolve, reject) => __awaiter$r(this, void 0, void 0, function* () {
+  return new Promise((resolve, reject) => __awaiter$s(this, void 0, void 0, function* () {
     if (!Array.isArray(trigger2))
       trigger2 = trigger2.split(",").map((t) => t.trim());
     const promises = [];
@@ -13298,7 +13298,7 @@ function __whenDomReady() {
     }
   });
 }
-var __awaiter$q = globalThis && globalThis.__awaiter || function(thisArg, _arguments, P, generator) {
+var __awaiter$r = globalThis && globalThis.__awaiter || function(thisArg, _arguments, P, generator) {
   function adopt(value) {
     return value instanceof P ? value : new P(function(resolve) {
       resolve(value);
@@ -13336,7 +13336,7 @@ function __whenEntersViewport(elm, settings = {}) {
   }
   settings = Object.assign({}, settings);
   let observer, resizeTimeout;
-  return new Promise((resolve) => __awaiter$q(this, void 0, void 0, function* () {
+  return new Promise((resolve) => __awaiter$r(this, void 0, void 0, function* () {
     var _a2;
     const options = {
       root: null,
@@ -13597,7 +13597,7 @@ function whenLod(level) {
     });
   });
 }
-var __awaiter$p = globalThis && globalThis.__awaiter || function(thisArg, _arguments, P, generator) {
+var __awaiter$q = globalThis && globalThis.__awaiter || function(thisArg, _arguments, P, generator) {
   function adopt(value) {
     return value instanceof P ? value : new P(function(resolve) {
       resolve(value);
@@ -13638,7 +13638,7 @@ function __whenNearViewport(elm, settings = {}) {
   let $closest = __closestScrollable(elm);
   if (($closest === null || $closest === void 0 ? void 0 : $closest.tagName) === "HTML")
     $closest = null;
-  return new Promise((resolve) => __awaiter$p(this, void 0, void 0, function* () {
+  return new Promise((resolve) => __awaiter$q(this, void 0, void 0, function* () {
     var _a2;
     const options = {
       root: $closest,
@@ -14077,7 +14077,7 @@ function __matches(el, selector) {
   };
   return f.call(el, selector);
 }
-var __awaiter$o = globalThis && globalThis.__awaiter || function(thisArg, _arguments, P, generator) {
+var __awaiter$p = globalThis && globalThis.__awaiter || function(thisArg, _arguments, P, generator) {
   function adopt(value) {
     return value instanceof P ? value : new P(function(resolve) {
       resolve(value);
@@ -14156,7 +14156,7 @@ function __querySelectorLive(selector, cb = null, settings = {}, _isFirstLevel =
     }
   }
   function processNode(node, sel) {
-    return __awaiter$o(this, void 0, void 0, function* () {
+    return __awaiter$p(this, void 0, void 0, function* () {
       if (!node.matches || isCanceled()) {
         return;
       }
@@ -14185,7 +14185,7 @@ function __querySelectorLive(selector, cb = null, settings = {}, _isFirstLevel =
   }
   if (settings.scopes && (settings.rootNode === document || !((_a2 = settings.rootNode) === null || _a2 === void 0 ? void 0 : _a2.hasAttribute("s-scope")))) {
     let isAfterCalledByScopeId = {};
-    innerPromises.push(__querySelectorLive("[s-scope]", ($scope) => __awaiter$o(this, void 0, void 0, function* () {
+    innerPromises.push(__querySelectorLive("[s-scope]", ($scope) => __awaiter$p(this, void 0, void 0, function* () {
       const scopeId = $scope.id || `s-scope-${__uniqid()}`;
       if ($scope.id !== scopeId) {
         $scope.setAttribute("id", scopeId);
@@ -14304,6 +14304,8 @@ function __scrollTo(target, settings = {}) {
     if (settings.$elm === document.body)
       settings.$elm = window;
     if (settings.$elm === document)
+      settings.$elm = window;
+    if (settings.$elm === document.querySelector("html"))
       settings.$elm = window;
     const $scrollElm = settings.$elm === window ? document.body : settings.$elm;
     let elmHeight = settings.$elm === window ? window.innerHeight : settings.$elm.offsetHeight;
@@ -16005,7 +16007,7 @@ const computePosition = (reference, floating, options) => computePosition$1(refe
   platform,
   ...options
 });
-var __awaiter$n = globalThis && globalThis.__awaiter || function(thisArg, _arguments, P, generator) {
+var __awaiter$o = globalThis && globalThis.__awaiter || function(thisArg, _arguments, P, generator) {
   function adopt(value) {
     return value instanceof P ? value : new P(function(resolve) {
       resolve(value);
@@ -16060,7 +16062,7 @@ function __makeFloat($elm, $depending, settings) {
   if (finalSettings.arrowSize) {
     $elm.style.setProperty(`--arrow-size`, `${finalSettings.arrowSize}px`);
   }
-  const update = () => __awaiter$n(this, void 0, void 0, function* () {
+  const update = () => __awaiter$o(this, void 0, void 0, function* () {
     yield computePosition($depending, $elm, {
       placement: finalSettings.position,
       middleware: middlewares
@@ -17377,7 +17379,7 @@ const require$$0$2 = {
   properties
 };
 knownCssProperties.all = require$$0$2.properties;
-var __awaiter$m = globalThis && globalThis.__awaiter || function(thisArg, _arguments, P, generator) {
+var __awaiter$n = globalThis && globalThis.__awaiter || function(thisArg, _arguments, P, generator) {
   function adopt(value) {
     return value instanceof P ? value : new P(function(resolve) {
       resolve(value);
@@ -18233,7 +18235,7 @@ class SThemeBase extends SEventEmitter {
     return finalValue;
   }
   loopOnColors(callback) {
-    return __awaiter$m(this, void 0, void 0, function* () {
+    return __awaiter$n(this, void 0, void 0, function* () {
       const colorsObj = this.get("color"), colorSchemasObj = this.get("colorSchema");
       for (let [colorName2, colorValue] of Object.entries(colorsObj)) {
         const c = new SColor(colorValue);
@@ -18505,7 +18507,6 @@ class STheme extends SThemeBase {
     } catch (e) {
       savedState = {};
     }
-    console.log("saved", savedState);
     super.restore(savedState.overridedConfigs);
     this.applyState();
     return this;
@@ -18708,9 +18709,8 @@ class SFront extends SClass {
     if ((_a2 = this.settings.google) === null || _a2 === void 0 ? void 0 : _a2.gtm) {
       this._initGtm();
     }
-    if ((_b2 = this.settings.partytown) === null || _b2 === void 0 ? void 0 : _b2.enabled) {
-      this._initPartytown();
-    }
+    if ((_b2 = this.settings.partytown) === null || _b2 === void 0 ? void 0 : _b2.enabled)
+      ;
   }
   _initGtm() {
     var _a2;
@@ -18820,7 +18820,7 @@ class SStateLsAdapter {
     return JSON.parse((_a2 = window.localStorage.getItem(`state-${this._id}`)) !== null && _a2 !== void 0 ? _a2 : "{}");
   }
 }
-var __awaiter$l = globalThis && globalThis.__awaiter || function(thisArg, _arguments, P, generator) {
+var __awaiter$m = globalThis && globalThis.__awaiter || function(thisArg, _arguments, P, generator) {
   function adopt(value) {
     return value instanceof P ? value : new P(function(resolve) {
       resolve(value);
@@ -18855,14 +18855,14 @@ class SStateFsAdapter {
   }
   _init() {
     var _a2, _b2;
-    return __awaiter$l(this, void 0, void 0, function* () {
-      const _packageTmpDir = (yield __vitePreload(() => import("./packageTmpDir.759aec90.js"), true ? [] : void 0)).default;
+    return __awaiter$m(this, void 0, void 0, function* () {
+      const _packageTmpDir = (yield __vitePreload(() => import("./packageTmpDir.f91c342b.js"), true ? [] : void 0)).default;
       this._statesDir = (_b2 = (_a2 = this._settings) === null || _a2 === void 0 ? void 0 : _a2.folder) !== null && _b2 !== void 0 ? _b2 : `${_packageTmpDir()}/states`;
       this._stateFile = `${this._statesDir}/${this._id}.state.json`;
     });
   }
   save(state) {
-    return new Promise((resolve) => __awaiter$l(this, void 0, void 0, function* () {
+    return new Promise((resolve) => __awaiter$m(this, void 0, void 0, function* () {
       const _fs = yield __vitePreload(() => import("./__vite-browser-external_fs.addc2852.js"), true ? [] : void 0);
       yield this._init();
       if (!_fs.existsSync(this._statesDir)) {
@@ -18876,7 +18876,7 @@ class SStateFsAdapter {
     }));
   }
   load() {
-    return new Promise((resolve) => __awaiter$l(this, void 0, void 0, function* () {
+    return new Promise((resolve) => __awaiter$m(this, void 0, void 0, function* () {
       const _fs = yield __vitePreload(() => import("./__vite-browser-external_fs.addc2852.js"), true ? [] : void 0);
       yield this._init();
       let fileContent = "{}";
@@ -18887,7 +18887,7 @@ class SStateFsAdapter {
     }));
   }
 }
-var __awaiter$k = globalThis && globalThis.__awaiter || function(thisArg, _arguments, P, generator) {
+var __awaiter$l = globalThis && globalThis.__awaiter || function(thisArg, _arguments, P, generator) {
   function adopt(value) {
     return value instanceof P ? value : new P(function(resolve) {
       resolve(value);
@@ -18980,7 +18980,7 @@ class SState extends SClass {
     });
     if (this.settings.save) {
       if (this.settings.adapter.async) {
-        (() => __awaiter$k(this, void 0, void 0, function* () {
+        (() => __awaiter$l(this, void 0, void 0, function* () {
           const restoredState = yield this.settings.adapter.load();
           __deepAssign(proxy, restoredState);
         }))();
@@ -19988,7 +19988,7 @@ class SComponentUtilsSettingsInterface extends SInterface {
     };
   }
 }
-var __awaiter$j = globalThis && globalThis.__awaiter || function(thisArg, _arguments, P, generator) {
+var __awaiter$k = globalThis && globalThis.__awaiter || function(thisArg, _arguments, P, generator) {
   function adopt(value) {
     return value instanceof P ? value : new P(function(resolve) {
       resolve(value);
@@ -20250,7 +20250,7 @@ class SComponentUtils extends SClass {
     props.responsive = responsiveObj;
   }
   waitAndExecute(when, callback) {
-    return new Promise((resolve, reject) => __awaiter$j(this, void 0, void 0, function* () {
+    return new Promise((resolve, reject) => __awaiter$k(this, void 0, void 0, function* () {
       if (!Array.isArray(when)) {
         when = [when];
       }
@@ -22057,7 +22057,7 @@ polyfillSupport === null || polyfillSupport === void 0 ? void 0 : polyfillSuppor
 if (globalThis.litElementVersions.length > 1) {
   issueWarning("multiple-versions", `Multiple versions of Lit loaded. Loading multiple versions is not recommended.`);
 }
-var __awaiter$i = globalThis && globalThis.__awaiter || function(thisArg, _arguments, P, generator) {
+var __awaiter$j = globalThis && globalThis.__awaiter || function(thisArg, _arguments, P, generator) {
   function adopt(value) {
     return value instanceof P ? value : new P(function(resolve) {
       resolve(value);
@@ -22128,7 +22128,7 @@ class SLitComponent extends LitElement {
       SLitComponent._keepInjectedCssBeforeStylesheetLinksInited = true;
     }
     const nodeFirstUpdated = (_b2 = this.firstUpdated) === null || _b2 === void 0 ? void 0 : _b2.bind(this);
-    this.firstUpdated = () => __awaiter$i(this, void 0, void 0, function* () {
+    this.firstUpdated = () => __awaiter$j(this, void 0, void 0, function* () {
       if (nodeFirstUpdated) {
         yield nodeFirstUpdated();
       }
@@ -22144,7 +22144,7 @@ class SLitComponent extends LitElement {
       return this._shouldUpdate;
     };
     this.utils = new SComponentUtils(this, Object.assign(Object.assign(Object.assign({}, (_d2 = this.settings) !== null && _d2 !== void 0 ? _d2 : {}), (_e = this.settings.componentUtils) !== null && _e !== void 0 ? _e : {}), { style: (_k = (_h = (_g = (_f = this.constructor.styles) === null || _f === void 0 ? void 0 : _f.cssText) !== null && _g !== void 0 ? _g : this.settings.style) !== null && _h !== void 0 ? _h : (_j = this.settings.componentUtils) === null || _j === void 0 ? void 0 : _j.style) !== null && _k !== void 0 ? _k : "" }));
-    (() => __awaiter$i(this, void 0, void 0, function* () {
+    (() => __awaiter$j(this, void 0, void 0, function* () {
       var _l, _m;
       const defaultProps = SComponentUtils.getDefaultProps(this.tagName.toLowerCase());
       const mountWhen = (_m = (_l = this.getAttribute("mount-when")) !== null && _l !== void 0 ? _l : defaultProps.mountWhen) !== null && _m !== void 0 ? _m : "direct";
@@ -22250,7 +22250,7 @@ class SLitComponent extends LitElement {
   }
   _mount() {
     var _a2, _b2, _c2;
-    return __awaiter$i(this, void 0, void 0, function* () {
+    return __awaiter$j(this, void 0, void 0, function* () {
       const _this = this, defaultProps = SComponentUtils.getDefaultProps(this.tagName.toLowerCase());
       let properties2 = this.constructor.properties;
       if (!properties2) {
@@ -24832,7 +24832,7 @@ const __css$h = `.s-filtrable-input {
                     content: '{"lod":{"enabled":true,"defaultLevel":3,"botLevel":1,"levels":{"0":{"name":"bare","speedIndex":0},"1":{"name":"bare+","speedIndex":30},"2":{"name":"low","speedIndex":40},"3":{"name":"medium","speedIndex":50},"4":{"name":"high","speedIndex":60}},"method":"class","defaultAction":">=","cssProperties":{"animation":3,"animation-delay":3,"animation-direction":3,"animation-duration":3,"animation-fill-mode":3,"animation-iteration-count":3,"animation-name":3,"animation-play-state":3,"animation-timing-function":3,"backdrop-filter":3,"background":2,"background-attachment":2,"background-blend-mode":3,"background-clip":2,"background-color":2,"background-image":2,"background-origin":2,"background-position":2,"background-repeat":2,"background-size":2,"border":2,"border-bottom":2,"border-bottom-color":2,"border-bottom-left-radius":2,"border-bottom-right-radius":2,"border-bottom-style":2,"border-bottom-width":2,"border-collapse":2,"border-color":2,"border-image":2,"border-image-outset":2,"border-image-repeat":2,"border-image-slice":2,"border-image-source":2,"border-image-width":2,"border-left":2,"border-left-color":2,"border-left-style":2,"border-left-width":2,"border-radius":2,"border-right":2,"border-right-color":2,"border-right-style":2,"border-right-width":2,"border-spacing":2,"border-style":2,"border-top":2,"border-top-color":2,"border-top-left-radius":2,"border-top-right-radius":2,"border-top-style":2,"border-top-width":2,"border-width":2,"box-shadow":3,"caret-color":1,"color":2,"column-count":2,"column-fill":2,"column-gap":2,"column-rule":2,"column-rule-color":2,"column-rule-style":2,"column-rule-width":2,"counter-increment":2,"counter-reset":2,"filter":3,"font":1,"font-family":1,"font-kerning":1,"font-size":1,"font-stretch":1,"font-style":1,"font-variant":1,"font-weight":1,"gap":1,"letter-spacing":1,"line-height":1,"list-style-image":2,"margin":1,"margin-bottom":1,"margin-left":1,"margin-right":1,"margin-top":1,"margin-inline":1,"margin-inline-start":1,"margin-inline-end":1,"margin-block":1,"margin-block-start":1,"margin-block-end":1,"outline":2,"outline-color":2,"outline-offset":2,"outline-style":2,"outline-width":2,"padding":1,"padding-bottom":1,"padding-left":1,"padding-right":1,"padding-top":1,"padding-inline":1,"padding-inline-start":1,"padding-inline-end":1,"padding-block":1,"padding-block-start":1,"padding-block-end":1,"text-decoration":2,"text-decoration-color":2,"text-decoration-line":2,"text-indent":2,"text-justify":2,"text-overflow":2,"text-shadow":3,"text-transform":2,"transition":3,"transition-delay":3,"transition-duration":3,"transition-property":3,"transition-timing-function":3,"word-break":1,"word-spacing":1,"word-wrap":1}},"clean":{"variables":false},"compress":{"variables":false}}';
 }
 `;
-var __awaiter$h = globalThis && globalThis.__awaiter || function(thisArg, _arguments, P, generator) {
+var __awaiter$i = globalThis && globalThis.__awaiter || function(thisArg, _arguments, P, generator) {
   function adopt(value) {
     return value instanceof P ? value : new P(function(resolve) {
       resolve(value);
@@ -24888,7 +24888,7 @@ class SFiltrableInputComponent extends SLitComponent {
     };
   }
   mount() {
-    return __awaiter$h(this, void 0, void 0, function* () {
+    return __awaiter$i(this, void 0, void 0, function* () {
       this.state.displayedMaxItems = this.props.maxItems;
       if (this.props.items && typeof this.props.items === "string") {
         try {
@@ -24941,7 +24941,7 @@ class SFiltrableInputComponent extends SLitComponent {
   }
   firstUpdated() {
     var _a2, _b2;
-    return __awaiter$h(this, void 0, void 0, function* () {
+    return __awaiter$i(this, void 0, void 0, function* () {
       this.$input = this.querySelector("input");
       this.utils.fastdom.mutate(() => {
         this.$input.setAttribute("autocomplete", "off");
@@ -25003,7 +25003,7 @@ class SFiltrableInputComponent extends SLitComponent {
           return;
         this.close();
       });
-      __hotkey("up").on("press", (e) => __awaiter$h(this, void 0, void 0, function* () {
+      __hotkey("up").on("press", (e) => __awaiter$i(this, void 0, void 0, function* () {
         e.preventDefault();
         yield __wait();
         if (!this.utils.isActive())
@@ -25027,7 +25027,7 @@ class SFiltrableInputComponent extends SLitComponent {
         const $item = this.$list.children[this.filteredItems.indexOf(this.preselectedItems[0])];
         $item.focus();
       }));
-      __hotkey("down").on("press", (e) => __awaiter$h(this, void 0, void 0, function* () {
+      __hotkey("down").on("press", (e) => __awaiter$i(this, void 0, void 0, function* () {
         e.preventDefault();
         yield __wait();
         if (!this.utils.isActive())
@@ -25157,7 +25157,7 @@ class SFiltrableInputComponent extends SLitComponent {
     this.$input.blur();
   }
   refreshItems() {
-    return __awaiter$h(this, void 0, void 0, function* () {
+    return __awaiter$i(this, void 0, void 0, function* () {
       if (typeof this.props.items === "function") {
         this.state.isLoading = true;
         this.requestUpdate();
@@ -25181,7 +25181,7 @@ class SFiltrableInputComponent extends SLitComponent {
     });
   }
   filterItems(needUpdate = true) {
-    return __awaiter$h(this, void 0, void 0, function* () {
+    return __awaiter$i(this, void 0, void 0, function* () {
       if (needUpdate)
         yield this.refreshItems();
       this.resetSelected();
@@ -25406,7 +25406,7 @@ function define$s(props = {}, tagName = "s-filtrable-input") {
     "my-cool-filtrable-input"
   );
 })();
-var __awaiter$g = globalThis && globalThis.__awaiter || function(thisArg, _arguments, P, generator) {
+var __awaiter$h = globalThis && globalThis.__awaiter || function(thisArg, _arguments, P, generator) {
   function adopt(value) {
     return value instanceof P ? value : new P(function(resolve) {
       resolve(value);
@@ -25451,7 +25451,7 @@ class SFeature extends SClass {
     this.node.classList.add(...this.utils.cls("").split(" "));
     this.utils.waitAndExecute(
       this.props.mountWhen,
-      () => __awaiter$g(this, void 0, void 0, function* () {
+      () => __awaiter$h(this, void 0, void 0, function* () {
         var _e;
         yield (_e = this.mount) === null || _e === void 0 ? void 0 : _e.call(this);
         this.props.mounted = true;
@@ -25563,7 +25563,7 @@ class SActivateFeatureInterface extends SInterface {
 function define$r(props = {}, name2 = "s-activate") {
   SActivateFeature.define(name2, SActivateFeature, props);
 }
-var __awaiter$f = globalThis && globalThis.__awaiter || function(thisArg, _arguments, P, generator) {
+var __awaiter$g = globalThis && globalThis.__awaiter || function(thisArg, _arguments, P, generator) {
   function adopt(value) {
     return value instanceof P ? value : new P(function(resolve) {
       resolve(value);
@@ -25730,7 +25730,7 @@ class SActivateFeature extends SFeature {
         }
       });
     }
-    setTimeout(() => __awaiter$f(this, void 0, void 0, function* () {
+    setTimeout(() => __awaiter$g(this, void 0, void 0, function* () {
       if (this.props.saveState) {
         this._restoreState();
       } else if (this.props.active) {
@@ -25778,7 +25778,7 @@ class SActivateFeature extends SFeature {
     });
   }
   activate(params) {
-    return __awaiter$f(this, void 0, void 0, function* () {
+    return __awaiter$g(this, void 0, void 0, function* () {
       const finalParams = Object.assign({ force: false, preventSave: false }, params !== null && params !== void 0 ? params : {});
       clearTimeout(this._unactivateTimeout);
       if (!finalParams.force && this.isActive())
@@ -25827,7 +25827,7 @@ class SActivateFeature extends SFeature {
     });
   }
   unactivate(params) {
-    return __awaiter$f(this, void 0, void 0, function* () {
+    return __awaiter$g(this, void 0, void 0, function* () {
       const finalParams = Object.assign({ force: false, preventSave: false }, params !== null && params !== void 0 ? params : {});
       if (!finalParams.force && !this.isActive())
         return;
@@ -25915,7 +25915,7 @@ const __css$g = `/* [s-appear] {
                     content: '{"lod":{"enabled":true,"defaultLevel":3,"botLevel":1,"levels":{"0":{"name":"bare","speedIndex":0},"1":{"name":"bare+","speedIndex":30},"2":{"name":"low","speedIndex":40},"3":{"name":"medium","speedIndex":50},"4":{"name":"high","speedIndex":60}},"method":"class","defaultAction":">=","cssProperties":{"animation":3,"animation-delay":3,"animation-direction":3,"animation-duration":3,"animation-fill-mode":3,"animation-iteration-count":3,"animation-name":3,"animation-play-state":3,"animation-timing-function":3,"backdrop-filter":3,"background":2,"background-attachment":2,"background-blend-mode":3,"background-clip":2,"background-color":2,"background-image":2,"background-origin":2,"background-position":2,"background-repeat":2,"background-size":2,"border":2,"border-bottom":2,"border-bottom-color":2,"border-bottom-left-radius":2,"border-bottom-right-radius":2,"border-bottom-style":2,"border-bottom-width":2,"border-collapse":2,"border-color":2,"border-image":2,"border-image-outset":2,"border-image-repeat":2,"border-image-slice":2,"border-image-source":2,"border-image-width":2,"border-left":2,"border-left-color":2,"border-left-style":2,"border-left-width":2,"border-radius":2,"border-right":2,"border-right-color":2,"border-right-style":2,"border-right-width":2,"border-spacing":2,"border-style":2,"border-top":2,"border-top-color":2,"border-top-left-radius":2,"border-top-right-radius":2,"border-top-style":2,"border-top-width":2,"border-width":2,"box-shadow":3,"caret-color":1,"color":2,"column-count":2,"column-fill":2,"column-gap":2,"column-rule":2,"column-rule-color":2,"column-rule-style":2,"column-rule-width":2,"counter-increment":2,"counter-reset":2,"filter":3,"font":1,"font-family":1,"font-kerning":1,"font-size":1,"font-stretch":1,"font-style":1,"font-variant":1,"font-weight":1,"gap":1,"letter-spacing":1,"line-height":1,"list-style-image":2,"margin":1,"margin-bottom":1,"margin-left":1,"margin-right":1,"margin-top":1,"margin-inline":1,"margin-inline-start":1,"margin-inline-end":1,"margin-block":1,"margin-block-start":1,"margin-block-end":1,"outline":2,"outline-color":2,"outline-offset":2,"outline-style":2,"outline-width":2,"padding":1,"padding-bottom":1,"padding-left":1,"padding-right":1,"padding-top":1,"padding-inline":1,"padding-inline-start":1,"padding-inline-end":1,"padding-block":1,"padding-block-start":1,"padding-block-end":1,"text-decoration":2,"text-decoration-color":2,"text-decoration-line":2,"text-indent":2,"text-justify":2,"text-overflow":2,"text-shadow":3,"text-transform":2,"transition":3,"transition-delay":3,"transition-duration":3,"transition-property":3,"transition-timing-function":3,"word-break":1,"word-spacing":1,"word-wrap":1}},"clean":{"variables":false},"compress":{"variables":false}}';
 }
 `;
-var __awaiter$e = globalThis && globalThis.__awaiter || function(thisArg, _arguments, P, generator) {
+var __awaiter$f = globalThis && globalThis.__awaiter || function(thisArg, _arguments, P, generator) {
   function adopt(value) {
     return value instanceof P ? value : new P(function(resolve) {
       resolve(value);
@@ -25956,7 +25956,7 @@ class SAppearFeature extends SFeature {
     });
   }
   mount() {
-    return __awaiter$e(this, void 0, void 0, function* () {
+    return __awaiter$f(this, void 0, void 0, function* () {
       switch (this.node.tagName.toLowerCase()) {
         case "img":
           yield __whenImageLoaded(this.node);
@@ -27224,7 +27224,7 @@ class SFormValidateFeatureInterface extends SInterface {
 function define$n(props = {}, name2 = "s-form-validate") {
   SFormValidateFeature.define(name2, SFormValidateFeature, Object.assign({ mountWhen: "inViewport" }, props));
 }
-var __awaiter$d = globalThis && globalThis.__awaiter || function(thisArg, _arguments, P, generator) {
+var __awaiter$e = globalThis && globalThis.__awaiter || function(thisArg, _arguments, P, generator) {
   function adopt(value) {
     return value instanceof P ? value : new P(function(resolve) {
       resolve(value);
@@ -27502,7 +27502,7 @@ class SFormValidateFeature extends SFeature {
   }
   _applyResult(res, event) {
     var _a2, _b2, _c2, _d2, _e, _f;
-    return __awaiter$d(this, void 0, void 0, function* () {
+    return __awaiter$e(this, void 0, void 0, function* () {
       for (let [validator2, definition2] of Object.entries(SValidator.getValidatorsDefinition())) {
         if (!this.props[validator2]) {
           continue;
@@ -27586,7 +27586,7 @@ function define$m(props = {}, name2 = "s-inline") {
   SInlineFeature.define(name2, SInlineFeature, props);
 }
 const sInlineFeature = "";
-var __awaiter$c = globalThis && globalThis.__awaiter || function(thisArg, _arguments, P, generator) {
+var __awaiter$d = globalThis && globalThis.__awaiter || function(thisArg, _arguments, P, generator) {
   function adopt(value) {
     return value instanceof P ? value : new P(function(resolve) {
       resolve(value);
@@ -27629,7 +27629,7 @@ class SInlineFeature extends SFeature {
     }
   }
   _inlineImg(src2) {
-    return __awaiter$c(this, void 0, void 0, function* () {
+    return __awaiter$d(this, void 0, void 0, function* () {
       const r = yield fetch(src2);
       const text = yield r.text();
       const parser = new DOMParser();
@@ -27842,7 +27842,7 @@ const __css$c = `.s-panel {
                     content: '{"lod":{"enabled":true,"defaultLevel":3,"botLevel":1,"levels":{"0":{"name":"bare","speedIndex":0},"1":{"name":"bare+","speedIndex":30},"2":{"name":"low","speedIndex":40},"3":{"name":"medium","speedIndex":50},"4":{"name":"high","speedIndex":60}},"method":"class","defaultAction":">=","cssProperties":{"animation":3,"animation-delay":3,"animation-direction":3,"animation-duration":3,"animation-fill-mode":3,"animation-iteration-count":3,"animation-name":3,"animation-play-state":3,"animation-timing-function":3,"backdrop-filter":3,"background":2,"background-attachment":2,"background-blend-mode":3,"background-clip":2,"background-color":2,"background-image":2,"background-origin":2,"background-position":2,"background-repeat":2,"background-size":2,"border":2,"border-bottom":2,"border-bottom-color":2,"border-bottom-left-radius":2,"border-bottom-right-radius":2,"border-bottom-style":2,"border-bottom-width":2,"border-collapse":2,"border-color":2,"border-image":2,"border-image-outset":2,"border-image-repeat":2,"border-image-slice":2,"border-image-source":2,"border-image-width":2,"border-left":2,"border-left-color":2,"border-left-style":2,"border-left-width":2,"border-radius":2,"border-right":2,"border-right-color":2,"border-right-style":2,"border-right-width":2,"border-spacing":2,"border-style":2,"border-top":2,"border-top-color":2,"border-top-left-radius":2,"border-top-right-radius":2,"border-top-style":2,"border-top-width":2,"border-width":2,"box-shadow":3,"caret-color":1,"color":2,"column-count":2,"column-fill":2,"column-gap":2,"column-rule":2,"column-rule-color":2,"column-rule-style":2,"column-rule-width":2,"counter-increment":2,"counter-reset":2,"filter":3,"font":1,"font-family":1,"font-kerning":1,"font-size":1,"font-stretch":1,"font-style":1,"font-variant":1,"font-weight":1,"gap":1,"letter-spacing":1,"line-height":1,"list-style-image":2,"margin":1,"margin-bottom":1,"margin-left":1,"margin-right":1,"margin-top":1,"margin-inline":1,"margin-inline-start":1,"margin-inline-end":1,"margin-block":1,"margin-block-start":1,"margin-block-end":1,"outline":2,"outline-color":2,"outline-offset":2,"outline-style":2,"outline-width":2,"padding":1,"padding-bottom":1,"padding-left":1,"padding-right":1,"padding-top":1,"padding-inline":1,"padding-inline-start":1,"padding-inline-end":1,"padding-block":1,"padding-block-start":1,"padding-block-end":1,"text-decoration":2,"text-decoration-color":2,"text-decoration-line":2,"text-indent":2,"text-justify":2,"text-overflow":2,"text-shadow":3,"text-transform":2,"transition":3,"transition-delay":3,"transition-duration":3,"transition-property":3,"transition-timing-function":3,"word-break":1,"word-spacing":1,"word-wrap":1}},"clean":{"variables":false},"compress":{"variables":false}}';
 }
 `;
-var __awaiter$b = globalThis && globalThis.__awaiter || function(thisArg, _arguments, P, generator) {
+var __awaiter$c = globalThis && globalThis.__awaiter || function(thisArg, _arguments, P, generator) {
   function adopt(value) {
     return value instanceof P ? value : new P(function(resolve) {
       resolve(value);
@@ -27889,7 +27889,7 @@ class SPanelComponent extends SLitComponent {
         `;
   }
   mount() {
-    return __awaiter$b(this, void 0, void 0, function* () {
+    return __awaiter$c(this, void 0, void 0, function* () {
       if (this.props.active) {
         this.constructor._activePanels.push(this);
       }
@@ -28113,7 +28113,7 @@ const __css$b = `.s-range {
                     content: '{"lod":{"enabled":true,"defaultLevel":3,"botLevel":1,"levels":{"0":{"name":"bare","speedIndex":0},"1":{"name":"bare+","speedIndex":30},"2":{"name":"low","speedIndex":40},"3":{"name":"medium","speedIndex":50},"4":{"name":"high","speedIndex":60}},"method":"class","defaultAction":">=","cssProperties":{"animation":3,"animation-delay":3,"animation-direction":3,"animation-duration":3,"animation-fill-mode":3,"animation-iteration-count":3,"animation-name":3,"animation-play-state":3,"animation-timing-function":3,"backdrop-filter":3,"background":2,"background-attachment":2,"background-blend-mode":3,"background-clip":2,"background-color":2,"background-image":2,"background-origin":2,"background-position":2,"background-repeat":2,"background-size":2,"border":2,"border-bottom":2,"border-bottom-color":2,"border-bottom-left-radius":2,"border-bottom-right-radius":2,"border-bottom-style":2,"border-bottom-width":2,"border-collapse":2,"border-color":2,"border-image":2,"border-image-outset":2,"border-image-repeat":2,"border-image-slice":2,"border-image-source":2,"border-image-width":2,"border-left":2,"border-left-color":2,"border-left-style":2,"border-left-width":2,"border-radius":2,"border-right":2,"border-right-color":2,"border-right-style":2,"border-right-width":2,"border-spacing":2,"border-style":2,"border-top":2,"border-top-color":2,"border-top-left-radius":2,"border-top-right-radius":2,"border-top-style":2,"border-top-width":2,"border-width":2,"box-shadow":3,"caret-color":1,"color":2,"column-count":2,"column-fill":2,"column-gap":2,"column-rule":2,"column-rule-color":2,"column-rule-style":2,"column-rule-width":2,"counter-increment":2,"counter-reset":2,"filter":3,"font":1,"font-family":1,"font-kerning":1,"font-size":1,"font-stretch":1,"font-style":1,"font-variant":1,"font-weight":1,"gap":1,"letter-spacing":1,"line-height":1,"list-style-image":2,"margin":1,"margin-bottom":1,"margin-left":1,"margin-right":1,"margin-top":1,"margin-inline":1,"margin-inline-start":1,"margin-inline-end":1,"margin-block":1,"margin-block-start":1,"margin-block-end":1,"outline":2,"outline-color":2,"outline-offset":2,"outline-style":2,"outline-width":2,"padding":1,"padding-bottom":1,"padding-left":1,"padding-right":1,"padding-top":1,"padding-inline":1,"padding-inline-start":1,"padding-inline-end":1,"padding-block":1,"padding-block-start":1,"padding-block-end":1,"text-decoration":2,"text-decoration-color":2,"text-decoration-line":2,"text-indent":2,"text-justify":2,"text-overflow":2,"text-shadow":3,"text-transform":2,"transition":3,"transition-delay":3,"transition-duration":3,"transition-property":3,"transition-timing-function":3,"word-break":1,"word-spacing":1,"word-wrap":1}},"clean":{"variables":false},"compress":{"variables":false}}';
 }
 `;
-var __awaiter$a = globalThis && globalThis.__awaiter || function(thisArg, _arguments, P, generator) {
+var __awaiter$b = globalThis && globalThis.__awaiter || function(thisArg, _arguments, P, generator) {
   function adopt(value) {
     return value instanceof P ? value : new P(function(resolve) {
       resolve(value);
@@ -28159,7 +28159,7 @@ class SRangeComponent extends SLitComponent {
   }
   firstUpdated() {
     var _a2;
-    return __awaiter$a(this, void 0, void 0, function* () {
+    return __awaiter$b(this, void 0, void 0, function* () {
       this._$input = this.querySelector("input");
       this._$tooltip = this.querySelector(".s-range_tooltip");
       this._$input.addEventListener("input", (e) => {
@@ -28254,6 +28254,16 @@ class SRefocusFeatureInterface extends SInterface {
         description: "Specify the easing function of the refocus animation",
         type: "Function"
       },
+      focusedClass: {
+        description: "Specify the class to add when the target element has been focused",
+        type: "String|Boolean",
+        default: "focused"
+      },
+      focusedClassDuration: {
+        description: "Specify how many ms the focused class has to be added, then removed",
+        type: "Number",
+        default: 1e3
+      },
       offset: {
         description: "Specify the offset of the refocus animation in px",
         type: "Number"
@@ -28282,12 +28292,40 @@ class SRefocusFeatureInterface extends SInterface {
 function define$j(props = {}, name2 = "s-refocus") {
   SRefocusFeature.define(name2, SRefocusFeature, Object.assign({}, props));
 }
+var __awaiter$a = globalThis && globalThis.__awaiter || function(thisArg, _arguments, P, generator) {
+  function adopt(value) {
+    return value instanceof P ? value : new P(function(resolve) {
+      resolve(value);
+    });
+  }
+  return new (P || (P = Promise))(function(resolve, reject) {
+    function fulfilled(value) {
+      try {
+        step(generator.next(value));
+      } catch (e) {
+        reject(e);
+      }
+    }
+    function rejected(value) {
+      try {
+        step(generator["throw"](value));
+      } catch (e) {
+        reject(e);
+      }
+    }
+    function step(result2) {
+      result2.done ? resolve(result2.value) : adopt(result2.value).then(fulfilled, rejected);
+    }
+    step((generator = generator.apply(thisArg, _arguments || [])).next());
+  });
+};
 class SRefocusFeature extends SFeature {
   constructor(name2, node, settings) {
     super(name2, node, __deepMerge({
       name: "s-refocus",
       interface: SRefocusFeatureInterface
     }, settings !== null && settings !== void 0 ? settings : {}));
+    this._currentScrolledTargets = [];
   }
   mount() {
     this.props.trigger.forEach((trigger2) => {
@@ -28303,27 +28341,28 @@ class SRefocusFeature extends SFeature {
           }, this.props.timeout);
           break;
         case "history":
-          window.addEventListener("hashchange", (e) => {
-            if (document.location.hash) {
-              const $targetElm = this.node.querySelector(document.location.hash);
-              if ($targetElm) {
-                this._scrollTo($targetElm);
+          ["hashchange", "popstate", "pushstate"].forEach((eventName) => {
+            window.addEventListener(eventName, (e) => {
+              var _a2;
+              if (eventName === "pushstate" && !((_a2 = e.detail) === null || _a2 === void 0 ? void 0 : _a2.scroll)) {
+                return;
               }
-            }
-          });
-          window.addEventListener("popstate", (e) => {
-            if (document.location.hash) {
-              const $targetElm = this.node.querySelector(document.location.hash);
-              if ($targetElm) {
-                this._scrollTo($targetElm);
+              if (document.location.hash) {
+                const $targetElm = this.node.querySelector(document.location.hash);
+                if ($targetElm) {
+                  this._scrollTo($targetElm);
+                }
+              } else {
+                setTimeout(() => {
+                  this._scrollTo(document.body);
+                }, 100);
               }
-            }
+            });
           });
           break;
         default:
           if (trigger2.match(/^event:/)) {
             const event = trigger2.replace("event:", "").trim();
-            console.log("e", event);
             this.node.addEventListener(event, (e) => {
               this._scrollTo(e.target);
             });
@@ -28333,25 +28372,49 @@ class SRefocusFeature extends SFeature {
     });
   }
   _scrollTo($elm) {
-    const scrollToSettings = {
-      $elm: this.node
-    };
-    if (this.props.duration)
-      scrollToSettings.duration = this.props.duration;
-    if (this.props.easing)
-      scrollToSettings.easing = this.props.easing;
-    if (this.props.offset)
-      scrollToSettings.offset = this.props.offset;
-    if (this.props.offsetX)
-      scrollToSettings.offsetX = this.props.offsetX;
-    if (this.props.offsetY)
-      scrollToSettings.offsetY = this.props.offsetY;
-    if (this.props.align)
-      scrollToSettings.align = this.props.align;
-    if (this.props.justify)
-      scrollToSettings.justify = this.props.justify;
-    console.log("Stroll", scrollToSettings, $elm);
-    __scrollTo($elm, scrollToSettings);
+    return __awaiter$a(this, void 0, void 0, function* () {
+      if (this._currentScrolledTargets.includes($elm)) {
+        return;
+      }
+      if ($elm !== document.body && !this.node.contains($elm)) {
+        return;
+      }
+      const scrollToSettings = {
+        $elm: this.node
+      };
+      if (this.props.duration)
+        scrollToSettings.duration = this.props.duration;
+      if (this.props.easing)
+        scrollToSettings.easing = this.props.easing;
+      if (this.props.offset)
+        scrollToSettings.offset = this.props.offset;
+      if (this.props.offsetX)
+        scrollToSettings.offsetX = this.props.offsetX;
+      if (this.props.offsetY)
+        scrollToSettings.offsetY = this.props.offsetY;
+      if (this.props.align)
+        scrollToSettings.align = this.props.align;
+      if (this.props.justify)
+        scrollToSettings.justify = this.props.justify;
+      let $scrollable = __closestScrollable($elm);
+      if ($scrollable._isScrolling) {
+        return;
+      }
+      $scrollable._isScrolling = true;
+      if ($scrollable._sRefocusFeatureCurrentElm) {
+        this._currentScrolledTargets.splice(this._currentScrolledTargets.indexOf($scrollable._sRefocusFeatureCurrentElm, 1));
+      }
+      $scrollable._sRefocusFeatureCurrentElm = $elm;
+      this._currentScrolledTargets.push($elm);
+      yield __scrollTo($elm, Object.assign(Object.assign({}, scrollToSettings), { $elm: $scrollable }));
+      $scrollable._isScrolling = false;
+      if (this.props.focusedClass && $elm !== document.body) {
+        $elm.classList.add(this.props.focusedClass);
+        setTimeout(() => {
+          $elm.classList.remove(this.props.focusedClass);
+        }, this.props.focusedClassDuration);
+      }
+    });
   }
 }
 class SScrollComponentInterface extends SInterface {
@@ -29863,36 +29926,6 @@ function __inputAdditionalAttributes(settings = {}) {
   document.addEventListener("reset", handleFormSubmitOrReset);
   document.addEventListener("submit", handleFormSubmitOrReset);
 }
-/*! (C) 2017 Andrea Giammarchi - @WebReflection - ISC License */
-document.addEventListener("click", function(t) {
-  var e = t.target.shadowRoot ? t.path[0] : t.target, a3 = (e.closest || function(t2) {
-    for (; e && e.nodeName !== t2; )
-      e = e.parentNode;
-    return e;
-  }).call(e, "A");
-  if (a3 && /^(?:_self)?$/i.test(a3.target) && !a3.hasAttribute("download") && "external" !== a3.getAttribute("rel") && !t.ctrlKey && !t.metaKey && !t.shiftKey && !t.altKey && a3.href) {
-    var n = new URL(a3.href), o = location;
-    if (n.origin === o.origin) {
-      var r = n.pathname + n.search, i = n.hash, s2 = true;
-      if (t.preventDefault(), r === o.pathname + o.search) {
-        if (/^#[a-z][a-z0-9.:_-]+$/i.test(i)) {
-          var e = document.querySelector(i + ',[name="' + i.slice(1) + '"]');
-          e && (t.preventDefault = function() {
-            s2 = false;
-          }, setTimeout(function() {
-            s2 && e.scrollIntoView(true);
-          }));
-        }
-        history.replaceState(history.state, document.title, r + i);
-      } else {
-        var c = new CustomEvent("pushstate");
-        c.state = o.href, setTimeout(function() {
-          dispatchEvent(c), window.onpushstate && onpushstate(c);
-        }), history.pushState(c.state, document.title, r + i);
-      }
-    }
-  }
-}, true);
 function __linksStateAttributes(settings = {}) {
   settings = __deepMerge({}, settings);
   function handleLink($linkElm) {
@@ -29900,14 +29933,12 @@ function __linksStateAttributes(settings = {}) {
       if ($linkElm.getAttribute("href") === document.location.pathname) {
         $linkElm.setAttribute("actual", true);
         $linkElm.parentNode.setAttribute("actual-parent", true);
-        console.log("ACDDD");
         $linkElm.dispatchEvent(new CustomEvent("actual", {
           bubbles: true
         }));
       } else if (document.location.pathname !== "/" && $linkElm.getAttribute("href").startsWith(document.location.pathname)) {
         $linkElm.removeAttribute("actual");
         $linkElm.setAttribute("actual-child", true);
-        console.log("AC");
         $linkElm.dispatchEvent(new CustomEvent("actual", {
           bubbles: true
         }));
@@ -30074,6 +30105,19 @@ var __awaiter$7 = globalThis && globalThis.__awaiter || function(thisArg, _argum
     step((generator = generator.apply(thisArg, _arguments || [])).next());
   });
 };
+var _wr = function(type) {
+  var orig = history[type];
+  return function(...args) {
+    var rv = orig.apply(this, arguments);
+    var e = new CustomEvent(type.toLowerCase(), {
+      bubbles: true,
+      detail: args[0]
+    });
+    window.dispatchEvent(e);
+    return rv;
+  };
+};
+history.pushState = _wr("pushState");
 class SSugarFeature extends SFeature {
   constructor(name2, node, settings) {
     super(name2, node, __deepMerge({
@@ -30163,9 +30207,6 @@ function SPackEssentials() {
   define$k();
   define$i();
   define$h();
-  if (!document.body.hasAttribute("s-sugar")) {
-    document.body.setAttribute("s-sugar", "true");
-  }
   define$g();
   define$r();
   define$q();
@@ -37476,6 +37517,7 @@ const __css$2 = `[s-highlight][type='light'] {
 
 [s-highlight][type='light']::before,
 [s-highlight][type='light']::after {
+    border-radius: inherit;
     content: '';
     display: block;
     height: 100%;
@@ -37483,43 +37525,30 @@ const __css$2 = `[s-highlight][type='light'] {
     opacity: 0;
     position: absolute;
     top: 0px;
+    transition: opacity 500ms;
     width: 100%;
     mix-blend-mode: overlay;
     pointer-events: none;
 }
 
-.s-lod--3  [s-highlight][type='light']::before, .s-lod--3  [s-highlight][type='light']::after {
-    transition: opacity 500ms;
-}
-
-.s-lod--2  [s-highlight][type='light']::before, .s-lod--2  [s-highlight][type='light']::after {
-    border-radius: inherit;
-}
-
 [s-highlight][type='light']::before {
-    z-index: 3;
-}
-
-.s-lod--2  [s-highlight][type='light']::before {
     background: radial-gradient(
         var(--s-highlight-size, 1000px) circle at var(--s-highlight-mouse-x)
             var(--s-highlight-mouse-y),
         rgba(255, 255, 255, 0.06),
         transparent 40%
     );
+    z-index: 3;
 }
 
 [s-highlight][type='light']::after {
-    z-index: 1;
-}
-
-.s-lod--2  [s-highlight][type='light']::after {
     background: radial-gradient(
         var(--s-highlight-size, 1000px) circle at var(--s-highlight-mouse-x)
             var(--s-highlight-mouse-y),
         rgba(255, 255, 255, 0.4),
         transparent 40%
     );
+    z-index: 1;
 }
 
 [s-highlight][type='light'].highlight:before,
@@ -37681,10 +37710,10 @@ class SPageTransitionFeatureInterface extends SInterface {
         type: "Boolean",
         default: true
       },
-      scrollTop: {
-        description: "Specify if you want to scroll to the top of the updated element after a transition",
+      scroll: {
+        description: "Specify if you want this feature to handle scroll to top after loading, etc...",
         type: "Boolean",
-        default: true
+        default: false
       },
       before: {
         description: "Specify a function to run before the transition",
@@ -37761,6 +37790,7 @@ class SPageTransitionFeature extends SFeature {
       interface: SPageTransitionFeatureInterface,
       style: __css
     }, settings !== null && settings !== void 0 ? settings : {}));
+    this._currentRequestedUrl = document.location.pathname;
     this._currentUrl = `${document.location.pathname}${document.location.search}`;
     window.history.pushState({
       html: this.node.innerHTML
@@ -37775,10 +37805,14 @@ class SPageTransitionFeature extends SFeature {
           return;
         }
         $elm.innerHTML = e.state.html;
-        __scrollTo($elm);
+        if (this.props.scroll) {
+          __scrollTo($elm);
+        }
       } else {
         this.node.innerHTML = e.state.html;
-        __scrollTo(this.node);
+        if (this.props.scroll) {
+          __scrollTo(this.node);
+        }
       }
     });
     document.addEventListener("location.href", (e) => {
@@ -37809,10 +37843,12 @@ class SPageTransitionFeature extends SFeature {
   transitionTo(url, $source) {
     return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
       var _a2, _b2, _c2;
-      if (this._currentRequestedUrl === url) {
+      const pathname = url.replace(/#[\w\W]+$/, "");
+      if (this._currentRequestedUrl === pathname) {
+        this._onAfter($source, 200, url);
         return;
       }
-      this._currentRequestedUrl = url;
+      this._currentRequestedUrl = pathname;
       this.utils.dispatchEvent("start", {
         $elm: $source,
         detail: {
@@ -37839,7 +37875,6 @@ class SPageTransitionFeature extends SFeature {
       } catch (e) {
         response = e;
       }
-      this._currentRequestedUrl = null;
       if (!response || response.status !== 200) {
         this._onAfter($source, response.status, url);
         return reject(response);
@@ -37903,7 +37938,8 @@ class SPageTransitionFeature extends SFeature {
         $inPageContainer.innerHTML = $container.innerHTML;
         newState.html = $container.innerHTML;
       }
-      if (this.props.scrollTop) {
+      this._currentState = newState;
+      if (this.props.scroll) {
         __scrollTo($inPageScopedContainer !== null && $inPageScopedContainer !== void 0 ? $inPageScopedContainer : $inPageContainer);
       }
       this._onAfter($source, 200, url, newState);
@@ -37918,19 +37954,28 @@ class SPageTransitionFeature extends SFeature {
           });
         }
       } else if (window.gtag && this.props.verbose) {
-        console.log(`%c[SPageTransitionFeature] Google analytics is activate and this transition to "${document.location.pathname}" will be correctly tracked in production environment`, "color: lightGreen");
+        console.log(`<green>[SPageTransitionFeature]</green> Google analytics is activate and this transition to "${document.location.pathname}" will be correctly tracked in production environment`);
       }
       resolve();
     }));
   }
   _onAfter($source, code3, url, newState) {
-    var _a2, _b2, _c2, _d2;
+    var _a2, _b2, _c2, _d2, _e;
+    if (url === void 0) {
+      url = this._currentUrl;
+    }
+    if (newState === void 0) {
+      newState = (_a2 = this._currentState) !== null && _a2 !== void 0 ? _a2 : {};
+    }
     document.body.classList.remove("loading");
     document.body.removeAttribute("loading");
     $source.classList.remove("s-page-transition-source");
     $source.classList.remove("loading");
     $source.removeAttribute("loading");
-    (_b2 = (_a2 = this.props).after) === null || _b2 === void 0 ? void 0 : _b2.call(_a2, {
+    (_c2 = (_b2 = this.props).after) === null || _c2 === void 0 ? void 0 : _c2.call(_b2, {
+      code: code3,
+      url,
+      newState,
       $source
     });
     if (code3 !== 200) {
@@ -37951,13 +37996,15 @@ class SPageTransitionFeature extends SFeature {
           $source
         }
       });
-      (_d2 = (_c2 = this.props).onError) === null || _d2 === void 0 ? void 0 : _d2.call(_c2, {
+      (_e = (_d2 = this.props).onError) === null || _e === void 0 ? void 0 : _e.call(_d2, {
         $source
       });
     }
-    __scrollTo("top");
+    if (this.props.scroll) {
+      __scrollTo("top");
+    }
     if (code3 === 200 && newState && url) {
-      window.history.pushState(newState, document.title, url);
+      window.history.pushState(Object.assign(Object.assign({}, newState), { scroll: !this.props.scroll }), document.title, url);
       this._currentUrl = url;
     }
     this.utils.dispatchEvent("end", {
@@ -38442,48 +38489,54 @@ define$s(
           case "category":
           case "package":
             return html2`
-              <div class="ck-search__list-item">
-                <div class="s-flex s-mbe:10">
-                  <h4
-                    class="ck-search__list-item-title s-typo:bold s-tc:accent s-flex-item:grow"
-                  >
-                    ${unsafeHTML2(item.name)}
-                  </h4>
-                </div>
-                <p class="_description s-typo:p s-truncate:2">
-                  ${unsafeHTML2((_a2 = item.description) != null ? _a2 : "")}
-                </p>
-              </div>
-            `;
+                            <div class="ck-search__list-item">
+                                <div class="s-flex s-mbe:10">
+                                    <h4
+                                        class="ck-search__list-item-title s-typo:bold s-tc:accent s-flex-item:grow"
+                                    >
+                                        ${unsafeHTML2(item.name)}
+                                    </h4>
+                                </div>
+                                <p class="_description s-typo:p s-truncate:2">
+                                    ${unsafeHTML2((_a2 = item.description) != null ? _a2 : "")}
+                                </p>
+                            </div>
+                        `;
           default:
             return html2`
-              <div class="ck-search__list-item">
-                <div class="s-flex s-mbe:10">
-                  <h4
-                    class="ck-search__list-item-title s-typo:bold s-tc:accent s-flex-item:grow"
-                  >
-                    ${unsafeHTML2(item.name)}
-                  </h4>
-                  <div>
-                    ${(_b2 = item.platform) == null ? void 0 : _b2.map(
+                            <div class="ck-search__list-item">
+                                <div class="s-flex s-mbe:10">
+                                    <h4
+                                        class="ck-search__list-item-title s-typo:bold s-tc:accent s-flex-item:grow"
+                                    >
+                                        ${unsafeHTML2(item.name)}
+                                    </h4>
+                                    <div>
+                                        ${(_b2 = item.platform) == null ? void 0 : _b2.map(
               (platform2) => html2`
-                        <i class="s-platform:${platform2.name}"></i>
-                      `
+                                                <i
+                                                    class="s-platform:${platform2.name}"
+                                                ></i>
+                                            `
             )}
-                    &nbsp;
-                    <span class="s-badge s-color:main"
-                      >${unsafeHTML2((_e = (_d2 = (_c2 = item.type) == null ? void 0 : _c2.types) == null ? void 0 : _d2[0].type) != null ? _e : "")}</span
-                    >
-                  </div>
-                </div>
-                <p class="_namespace s-opacity:50 s-font:20 s-mbe:20">
-                  ${unsafeHTML2((_f = item.namespace) != null ? _f : "")}
-                </p>
-                <p class="_description s-typo:p s-truncate:2">
-                  ${unsafeHTML2((_g = item.description) != null ? _g : "")}
-                </p>
-              </div>
-            `;
+                                        &nbsp;
+                                        <span class="s-badge s-color:main"
+                                            >${unsafeHTML2(
+              (_e = (_d2 = (_c2 = item.type) == null ? void 0 : _c2.types) == null ? void 0 : _d2[0].type) != null ? _e : ""
+            )}</span
+                                        >
+                                    </div>
+                                </div>
+                                <p
+                                    class="_namespace s-opacity:50 s-font:20 s-mbe:20"
+                                >
+                                    ${unsafeHTML2((_f = item.namespace) != null ? _f : "")}
+                                </p>
+                                <p class="_description s-typo:p s-truncate:2">
+                                    ${unsafeHTML2((_g = item.description) != null ? _g : "")}
+                                </p>
+                            </div>
+                        `;
         }
       }
     },
@@ -38507,10 +38560,15 @@ define$s(
         let packageName = value.replace(/^@/, "");
         let packages = {};
         items.forEach((item) => {
-          if (item.package.name.includes(`@coffeekraken/${packageName}`)) {
+          if (item.package.name.includes(
+            `@coffeekraken/${packageName}`
+          )) {
             if (!packages[item.package.name]) {
               packages[item.package.name] = {
-                value: `@${item.package.name.replace("@coffeekraken/", "")}`,
+                value: `@${item.package.name.replace(
+                  "@coffeekraken/",
+                  ""
+                )}`,
                 namespace: item.package.name,
                 type: "package",
                 name: item.package.name,
@@ -38629,6 +38687,16 @@ class CKSearch extends SLitComponent {
               })
             );
           }
+        } else if (item.id.match(/\.config\./)) {
+          $elm.dispatchEvent(
+            new CustomEvent("location.href", {
+              detail: `/config/explorer/${item.filename.replace(
+                /\.config\.(j|t)s$/,
+                ""
+              )}#${item.id.split(".config.")[1].replace(/\./gm, "-")}`,
+              bubbles: true
+            })
+          );
         } else {
           $elm.dispatchEvent(
             new CustomEvent("location.href", {
@@ -38642,40 +38710,44 @@ class CKSearch extends SLitComponent {
   }
   render() {
     return html$1`
-      <div class="ck-search" s-deps css="ckSearch">
-        <div class="ck-search__background"></div>
-        <div class="ck-search__content">
-          <ck-search-input id="ck-search-input">
-            <input
-              placeholder="Search ( Ctrl+F )..."
-              type="text"
-              name="search"
-              value="${this._search}"
-              class="s-input s-color:accent s-scale:08"
-            />
-            <template type="before">
-              <div class="s-p:30" id="search-tips">
-                <p class="s-mbe:20">
-                  <span class="s-typo:p s-tc:current">Search tips</span>
-                </p>
-                <p class="s-typo:p s-color:accent">
-                  <span class="s-badge:outline s-mie:10">/...</span>
-                  Categories&nbsp;&nbsp;&nbsp;&nbsp;<span
-                    class="s-badge:outline s-mie:10"
-                    >@...</span
-                  >
-                  Packages&nbsp;&nbsp;&nbsp;&nbsp;<span
-                    class="s-badge s-color:complementary s-mie:10"
-                    >CTRL+F</span
-                  >
-                  Search
-                </p>
-              </div>
-            </template>
-          </ck-search-input>
-        </div>
-      </div>
-    `;
+            <div class="ck-search" s-deps css="ckSearch">
+                <div class="ck-search__background"></div>
+                <div class="ck-search__content">
+                    <ck-search-input id="ck-search-input">
+                        <input
+                            placeholder="Search ( Ctrl+F )..."
+                            type="text"
+                            name="search"
+                            value="${this._search}"
+                            class="s-input s-color:accent s-scale:08"
+                        />
+                        <template type="before">
+                            <div class="s-p:30" id="search-tips">
+                                <p class="s-mbe:20">
+                                    <span class="s-typo:p s-tc:current"
+                                        >Search tips</span
+                                    >
+                                </p>
+                                <p class="s-typo:p s-color:accent">
+                                    <span class="s-badge:outline s-mie:10"
+                                        >/...</span
+                                    >
+                                    Categories&nbsp;&nbsp;&nbsp;&nbsp;<span
+                                        class="s-badge:outline s-mie:10"
+                                        >@...</span
+                                    >
+                                    Packages&nbsp;&nbsp;&nbsp;&nbsp;<span
+                                        class="s-badge s-color:complementary s-mie:10"
+                                        >CTRL+F</span
+                                    >
+                                    Search
+                                </p>
+                            </div>
+                        </template>
+                    </ck-search-input>
+                </div>
+            </div>
+        `;
   }
 }
 function define$2(props = {}, tagName = "ck-search") {
@@ -39141,7 +39213,7 @@ if (!window.___deepMerge) {
   };
 }
 document.env = window.___deepMerge(
-  JSON.parse(`{"PLATFORM":"browser","ENV":"development","ENVIRONMENT":"development","SUGAR":{"config":{"datetime":{"dateFormat":"YYYY-MM-DD","timeFormat":"h:mm:ss","i18n":{"previousMonth":"Previous Month","nextMonth":"Next Month","months":["January","February","March","April","May","June","July","August","September","October","November","December"],"weekdays":["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],"weekdaysShort":["Sun","Mon","Tue","Wed","Thu","Fri","Sat"]}},"google":{"gtm":"GTM-K4LMN8Q","map":{"apiKey":"AIzaSyDzFfEzhmYXRTlONUCtMWQ88uHJhsbtXY4"}},"project":{"environments":{"dev":{"branch":"develop","urls":{"website":{"label":"Template","url":"http://localhost:3000"},"admin":{"label":"Admin","url":"http://localhost:3000/admin"}}},"staging":{"branch":"staging","urls":{"website":{"label":"Template","url":"http://staging.localhost:3000"},"admin":{"label":"Admin","url":"http://staging.localhost:3000/admin"}}},"preprod":{"branch":"preprod","urls":{"website":{"label":"Template","url":"http://preprod.localhost:3000"},"admin":{"label":"Admin","url":"http://preprod.localhost:3000/admin"}}},"prod":{"branch":"prod","urls":{"website":{"label":"Template","url":"http://prod.localhost:3000"},"admin":{"label":"Admin","url":"http://prod.localhost:3000/admin"}}}}},"serve":{"img":{"imgPath":"/dist/img"},"js":{"path":"/dist/js"},"css":{"path":"/dist/css"},"icons":{"path":"/dist/icons"},"fonts":{"path":"/dist/fonts"},"cache":{"path":"/cache"}},"dashboard":{"layout":[["s-dashboard-pages"],["s-dashboard-browserstack","s-dashboard-google","s-dashboard-web-vitals","s-dashboard-responsive"],["s-dashboard-project","s-dashboard-frontend-checker"]]},"env":{"envFromLocation":{"development":"https?://(localhost|127.0.0.1|0.0.0.0|192.168.[0-9]{1,3}.[0-9]{1,3})","staging":"https?://([a-zA-Z0-9.-]+)?staging([a-zA-Z0-9.-]+)?","production":"https?://.*"},"git":{"template":{"name":"Template","commit":{}}}},"sitemapBuilder":{"sources":{"docmap":{"active":true}}},"theme":{"theme":"default","variant":"dark","themes":{"default-light":{"defaultColor":"main","color":{"current":"hsla(212,8,50,1)","base":"hsla(212,8,50,1)","main":"hsla(212,8,50,1)","accent":"#ffbb00","complementary":"#5100ff","success":"#91ff00","warning":"#ffd500","error":"#ff003b","info":"#00ffff"},"classmap":{"enabled":true,"url":"/classmap.json"},"lod":{"enabled":true,"defaultLevel":3,"botLevel":1,"levels":{"0":{"name":"bare","speedIndex":0},"1":{"name":"bare+","speedIndex":30},"2":{"name":"low","speedIndex":40},"3":{"name":"medium","speedIndex":50},"4":{"name":"high","speedIndex":60}},"method":"file","defaultAction":">=","cssProperties":{}},"easing":{"default":"cubic-bezier(0.700, 0.000, 0.305, 0.995)"},"scroll":{"duration":300,"offset":0,"offsetX":0,"offsetY":100},"partytown":{"enabled":true,"forward":["dataLayer.push","fbq","freshpaint.addPageviewProperties","freshpaint.identify","freshpaint.track","_hsq.push","Intercom","_learnq.push","ttq.track","ttq.page","ttq.load","mixpanel.track"]},"timing":{"slow":".6s","default":".3s","fast":".1s"},"transition":{"slow":"all .6s cubic-bezier(0.700, 0.000, 0.305, 0.995)","default":"all .3s cubic-bezier(0.700, 0.000, 0.305, 0.995)","fast":"all .1s cubic-bezier(0.700, 0.000, 0.305, 0.995)"},"gradient":{"defaultModifierStart":{},"defaultModifierEnd":{"lighten":20},"defaultX":"50%","defaultY":"50%","defaultAngle":"90deg","defaultTextModifierStart":{"darken":5},"defaultTextModifierEnd":{"lighten":5},"defaultTextAngle":"90deg"},"helpers":{"states":["mounted","active","loading"],"clearfix":{"default":"overflow"},"disabled":{"opacity":0.4},"truncate":{"count":10},"order":{"count":20}},"layout":{"offset":{"top":100,"right":0,"bottom":0,"left":0},"container":{"default":"1280px","wide":"1440px","full":"none"},"grid":{"1":1,"2":2,"3":3,"4":4,"5":5,"6":6,"7":7,"8":8,"9":9,"10":10,"11":11,"12":12},"layout":{"1":"1","12":"1 2","21":"2 1","112":"1 1 2","122":"1 2 2","123":"1 2 3","211":"2 1 1","221":"2 2 1","321":"3 2 1","1112":"1 1 1 2","1222":"1 2 2 2","1234":"1 2 3 4","2221":"2 2 2 1","11112":"1 1 1 1 2","12222":"1 2 2 2 2","12345":"1 2 3 4 5","22221":"2 2 2 2 1","111112":"1 1 1 1 1 2","122222":"1 2 2 2 2 2","123456":"1 2 3 4 5 6","1_2":"1 _ 2","2_1":"2 _ 1","12_33":"1 2 _ 3 3","1_23":"1 _ 2 3","1_2_3":"1 _ 2 _ 3","32_1":"3 2 _ 1","3_21":"3 _ 2 1","12_34":"1 2 _ 3 4","123_4":"1 2 3 _ 4","1_234":"1 _ 2 3 4","1_2_3_4":"1 _ 2 _ 3 _ 4","123_45":"1 2 3 _ 4 5","12_345":"1 2 _ 3 4 5","1_2345":"1 _ 2 3 4 5","1234_5":"1 2 3 4 _ 5","1_2_3_4_5":"1 _ 2 _ 3 _ 4 _ 5"}},"ratio":{"1":1,"21-9":2.3333333333333335,"16-9":1.7777777777777777,"2-3":0.6666666666666666,"4-3":1.3333333333333333,"3-4":0.75},"scalable":{"margin":false,"padding":true,"offsize":false,"font":true},"scale":{"10":1,"11":1.1,"12":1.2,"13":1.3,"14":1.4,"15":1.5,"16":1.6,"17":1.7,"18":1.8,"19":1.9,"20":2,"default":1,"01":0.1,"02":0.2,"03":0.3,"04":0.4,"05":0.5,"06":0.6,"07":0.7,"08":0.8,"09":0.9},"opacity":{"0":0,"10":0.1,"20":0.2,"30":0.3,"40":0.4,"50":0.5,"60":0.6,"70":0.7,"80":0.8,"90":0.9,"100":1},"width":{"0":"0","10":"10%","20":"20%","30":"30%","40":"40%","50":"50%","60":"60%","70":"70%","80":"80%","90":"90%","100":"100%"},"height":{"0":"0","10":"10%","20":"20%","30":"30%","40":"40%","50":"50%","60":"60%","70":"70%","80":"80%","90":"90%","100":"100%"},"depth":{"0":"0","5":"0px 0.6px 0.4px rgba(0, 0, 0, 0.006),\\n  0px 1.3px 1px rgba(0, 0, 0, 0.006),\\n  0px 2.5px 1.5px rgba(0, 0, 0, 0.005),\\n  0px 3.5px 3.4px rgba(0, 0, 0, 0.006),\\n  0px 4.4px 4.3px rgba(0, 0, 0, 0.007),\\n  0px 10px 10px rgba(0, 0, 0, 0.01)","10":"0px 0.6px 0.4px rgba(0, 0, 0, 0.006),\\n  0px 1.3px 1px rgba(0, 0, 0, 0.008),\\n  0px 2.5px 1.9px rgba(0, 0, 0, 0.01),\\n  0px 4.5px 3.4px rgba(0, 0, 0, 0.012),\\n  0px 8.4px 6.3px rgba(0, 0, 0, 0.014),\\n  0px 20px 15px rgba(0, 0, 0, 0.02)","20":"0px 0.6px 0.4px rgba(0, 0, 0, 0.006),\\n  0px 1.3px 1px rgba(0, 0, 0, 0.008),\\n  0px 2.5px 1.9px rgba(0, 0, 0, 0.01),\\n  0px 4.5px 3.4px rgba(0, 0, 0, 0.012),\\n  0px 8.4px 6.3px rgba(0, 0, 0, 0.014),\\n  0px 20px 15px rgba(0, 0, 0, 0.02)","30":"0px 0.6px 0.4px rgba(0, 0, 0, 0.008),\\n  0px 1.3px 1px rgba(0, 0, 0, 0.012),\\n  0px 2.5px 1.9px rgba(0, 0, 0, 0.015),\\n  0px 4.5px 3.4px rgba(0, 0, 0, 0.018),\\n  0px 8.4px 6.3px rgba(0, 0, 0, 0.022),\\n  0px 20px 15px rgba(0, 0, 0, 0.03)","40":"0px 0.8px 0.6px rgba(0, 0, 0, 0.008),\\n  0px 2px 1.3px rgba(0, 0, 0, 0.012),\\n  0px 3.8px 2.5px rgba(0, 0, 0, 0.015),\\n  0px 6.7px 4.5px rgba(0, 0, 0, 0.018),\\n  0px 12.5px 8.4px rgba(0, 0, 0, 0.022),\\n  0px 30px 20px rgba(0, 0, 0, 0.03)","50":"0px 1px 0.8px rgba(0, 0, 0, 0.011),\\n  0px 2.3px 2px rgba(0, 0, 0, 0.016),\\n  0px 4.4px 3.8px rgba(0, 0, 0, 0.02),\\n  0px 7.8px 6.7px rgba(0, 0, 0, 0.024),\\n  0px 14.6px 12.5px rgba(0, 0, 0, 0.029),\\n  0px 35px 30px rgba(0, 0, 0, 0.04)","60":"0px 1px 0.7px rgba(0, 0, 0, 0.011),\\n  0px 2.3px 1.7px rgba(0, 0, 0, 0.016),\\n  0px 4.4px 3.1px rgba(0, 0, 0, 0.02),\\n  0px 7.8px 5.6px rgba(0, 0, 0, 0.024),\\n  0px 14.6px 10.4px rgba(0, 0, 0, 0.029),\\n  0px 35px 25px rgba(0, 0, 0, 0.04)","70":"0px 1.1px 0.8px rgba(0, 0, 0, 0.011),\\n  0px 2.7px 2px rgba(0, 0, 0, 0.016),\\n  0px 5px 3.8px rgba(0, 0, 0, 0.02),\\n  0px 8.9px 6.7px rgba(0, 0, 0, 0.024),\\n  0px 16.7px 12.5px rgba(0, 0, 0, 0.029),\\n  0px 40px 30px rgba(0, 0, 0, 0.04)","80":"0px 1.1px 1px rgba(0, 0, 0, 0.011),\\n  0px 2.7px 2.3px rgba(0, 0, 0, 0.016),\\n  0px 5px 4.4px rgba(0, 0, 0, 0.02),\\n  0px 8.9px 7.8px rgba(0, 0, 0, 0.024),\\n  0px 16.7px 14.6px rgba(0, 0, 0, 0.029),\\n  0px 40px 35px rgba(0, 0, 0, 0.04)","90":"0px 1.4px 1.1px rgba(0, 0, 0, 0.011),\\n  0px 3.3px 2.7px rgba(0, 0, 0, 0.016),\\n  0px 6.1px 5px rgba(0, 0, 0, 0.02),\\n  0px 10.9px 8.9px rgba(0, 0, 0, 0.024),\\n  0px 20.5px 16.7px rgba(0, 0, 0, 0.029),\\n  0px 49px 40px rgba(0, 0, 0, 0.04)","100":"0px 1.4px 1.4px rgba(0, 0, 0, 0.011),\\n  0px 3.3px 3.5px rgba(0, 0, 0, 0.016),\\n  0px 6.1px 6.5px rgba(0, 0, 0, 0.02),\\n  0px 10.9px 11.6px rgba(0, 0, 0, 0.024),\\n  0px 20.5px 21.7px rgba(0, 0, 0, 0.029),\\n  0px 49px 52px rgba(0, 0, 0, 0.04)","default":"0"},"size":{"0":0.25,"5":"0.5","10":0.65,"15":0.7,"20":0.75,"25":0.95,"30":1.1,"40":1.25,"50":1.5,"60":2,"70":2.5,"80":3,"90":4,"100":5,"default":"15px"},"font":{"family":{"default":{"fontFamily":"\\"Roboto\\"","fontWeight":400,"import":"https://fonts.googleapis.com/css2?family=Roboto&display=swap"},"title":{"fontFamily":"\\"Roboto\\"","fontWeight":500,"import":"https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap"},"quote":{"fontFamily":"\\"Palatino, Times, Georgia, serif\\"","fontWeight":"normal","fontStyle":"normal","fontDisplay":"auto","capHeight":0.65},"code":{"fontFamily":"Menlo, Monaco, Consolas, Courier New, monospace","fontWeight":"normal","fontStyle":"normal","fontDisplay":"auto","capHeight":0.65}},"size":{"0":0,"5":"0.5","10":0.65,"15":0.7,"20":0.75,"25":0.95,"30":1.1,"40":1.25,"50":1.5,"60":2,"70":2.5,"80":3,"90":4,"100":5,"default":"15px"}},"border":{"width":{"0":0,"10":1,"20":2,"30":4,"40":6,"50":8,"60":12,"70":16,"80":20,"90":24,"100":30,"default":"1px"},"radius":{"0":0,"10":0.8,"20":1.6,"30":2.4,"40":3.2,"50":4,"60":5.2,"70":6.4,"80":8,"90":10,"100":12,"default":"5px"}},"space":{"0":0,"10":0.375,"20":0.75,"30":1.5,"40":2.25,"50":3.25,"60":4.25,"70":5.5,"80":7,"90":9,"100":11,"default":"1rem"},"margin":{"0":0,"10":0.375,"20":0.75,"30":1.5,"40":2.25,"50":3.25,"60":4.25,"70":5.5,"80":7,"90":9,"100":11,"default":"1rem"},"padding":{"0":0,"10":0.375,"20":0.75,"30":1.5,"40":2.25,"50":3.25,"60":4.25,"70":5.5,"80":7,"90":9,"100":11,"default":"1rem"},"offsize":{"0":0,"10":0.375,"20":0.75,"30":1.5,"40":2.25,"50":3.25,"60":4.25,"70":5.5,"80":7,"90":9,"100":11,"default":"1rem"},"media":{"defaultAction":"<=","defaultMedia":"desktop","defaultQuery":"screen","queries":{"mobile":{"minWidth":0,"maxWidth":639},"tablet":{"minWidth":640,"maxWidth":1279},"desktop":{"minWidth":1280,"maxWidth":2047},"wide":{"minWidth":2048,"maxWidth":null}}},"ui":{"default":{"paddingInline":1.5,"paddingBlock":0.75,"borderRadius":1,"borderWidth":"1px","transition":"all .1s cubic-bezier(0.700, 0.000, 0.305, 0.995)","defaultLnf":"solid","depth":"0","outline":true,"spacing":1.5,"rhythmVertical":{"margin-bottom":60}},"form":{"paddingInline":1,"paddingBlock":0.75,"borderRadius":1,"borderWidth":"1px","transition":"all .1s cubic-bezier(0.700, 0.000, 0.305, 0.995)","outline":true,"depth":"0","rhythmVertical":{"margin-bottom":40}},"outline":{"active":true,"borderWidth":"10px","borderRadius":1,"transition":"all .2s ease-out"},"scrollbar":{"size":"2px","color":"accent"},"label":{"defaultLnf":"inline"},"dropdown":{"paddingInline":0.75,"paddingBlock":0.75,"itemPaddingInline":1.5,"itemPaddingBlock":0.75},"list":{"defaultLnf":"dl","bulletChar":"-"},"fsTree":{"bulletChar":"\u25CF"},"tooltip":{"defaultPosition":"top","arrowSize":"15px"},"loader":{"duration":"1s","easing":"linear"}},"typo":{"h1":{"label":"H1","group":"style","style":{"display":"block","fontFamily":"title","fontSize":80,"lineHeight":1.3,"maxWidth":"55ch","mobile":{"fontSize":70}},"rhythmVertical":{"marginBottom":50}},"h2":{"label":"H2","group":"style","style":{"display":"block","fontFamily":"title","fontSize":70,"lineHeight":1.3,"maxWidth":"55ch","mobile":{"fontSize":60}},"rhythmVertical":{"marginBottom":50}},"h3":{"label":"H3","group":"style","style":{"display":"block","fontFamily":"title","fontSize":60,"lineHeight":1.3,"maxWidth":"55ch","mobile":{"fontSize":50}},"rhythmVertical":{"marginBottom":50}},"h4":{"label":"H4","group":"style","style":{"display":"block","fontFamily":"title","fontSize":50,"lineHeight":1.3,"maxWidth":"55ch","mobile":{"fontSize":40}},"rhythmVertical":{"marginBottom":50}},"h5":{"label":"H5","group":"style","style":{"display":"block","fontFamily":"title","fontSize":40,"lineHeight":1.3,"maxWidth":"55ch","mobile":{"fontSize":30}},"rhythmVertical":{"marginBottom":40}},"h6":{"label":"H6","group":"style","style":{"display":"block","fontFamily":"title","fontSize":30,"lineHeight":1.3,"maxWidth":"55ch","mobile":{"fontSize":30}},"hythmVertical":{"marginBottom":40}},"p":{"label":"Paragraph","group":"style","default":true,"style":{"display":"block","fontFamily":"default","fontSize":30,"lineHeight":1.8,"maxWidth":"55ch"},"rhythmVertical":{"marginBottom":40}},"lead":{"label":"Lead paragraph","group":"style","style":{"display":"block","fontFamily":"default","fontSize":40,"lineHeight":1.6,"maxWidth":"55ch","mobile":{"fontSize":40}},"rhythmVertical":{"marginBottom":40}},"hr":{"label":"--","group":"block","button":{"label":"--"},"style":{"display":"block","color":"hsla(212,8,50,1)","opacity":0.2},"rhythmVertical":{"marginBottom":50}},"pre:not([class])":{"label":"Pre","group":"text","style":{"display":"block","fontFamily":"code","color":["main","text"],"backgroundColor":["main","surface"],"lineHeight":1.5,"paddingInline":1.5,"paddingBlock":0.75,"borderRadius":1,"depth":"0"},"rhythmVertical":{"marginBottom":50}},"code:not(pre > code)":{"label":"Code","group":"text","button":{"label":"</>"},"style":{"display":"inline-block","fontFamily":"code","color":["main","text"],"lineHeight":1.1,"backgroundColor":["accent","surface"],"borderRadius":10,"paddingInline":10,"paddingBlock":0}},"blockquote":{"label":"Blockquote","group":"block","button":{"label":"<svg viewBox=\\"0 0 20 20\\"><path d=\\"M3 10.423a6.5 6.5 0 0 1 6.056-6.408l.038.67C6.448 5.423 5.354 7.663 5.22 10H9c.552 0 .5.432.5.986v4.511c0 .554-.448.503-1 .503h-5c-.552 0-.5-.449-.5-1.003v-4.574zm8 0a6.5 6.5 0 0 1 6.056-6.408l.038.67c-2.646.739-3.74 2.979-3.873 5.315H17c.552 0 .5.432.5.986v4.511c0 .554-.448.503-1 .503h-5c-.552 0-.5-.449-.5-1.003v-4.574z\\"></path></svg>"},"style":{"display":"block","fontFamily":"quote"},"editor":{"style":{"paddingInlineStart":1.5,"borderLeft":"1px solid #000"}},"rhythmVertical":{"marginBottom":50}},"a":{"label":"Link","group":"text","button":{"label":"<svg viewBox=\\"0 0 20 20\\"><path d=\\"m11.077 15 .991-1.416a.75.75 0 1 1 1.229.86l-1.148 1.64a.748.748 0 0 1-.217.206 5.251 5.251 0 0 1-8.503-5.955.741.741 0 0 1 .12-.274l1.147-1.639a.75.75 0 1 1 1.228.86L4.933 10.7l.006.003a3.75 3.75 0 0 0 6.132 4.294l.006.004zm5.494-5.335a.748.748 0 0 1-.12.274l-1.147 1.639a.75.75 0 1 1-1.228-.86l.86-1.23a3.75 3.75 0 0 0-6.144-4.301l-.86 1.229a.75.75 0 0 1-1.229-.86l1.148-1.64a.748.748 0 0 1 .217-.206 5.251 5.251 0 0 1 8.503 5.955zm-4.563-2.532a.75.75 0 0 1 .184 1.045l-3.155 4.505a.75.75 0 1 1-1.229-.86l3.155-4.506a.75.75 0 0 1 1.045-.184z\\"></path></svg>"},"style":{"color":"accent","textDecoration":"underline"}},"quote":{"label":"Quote","group":"text","button":{"label":"<svg viewBox=\\"0 0 20 20\\"><path d=\\"M3 10.423a6.5 6.5 0 0 1 6.056-6.408l.038.67C6.448 5.423 5.354 7.663 5.22 10H9c.552 0 .5.432.5.986v4.511c0 .554-.448.503-1 .503h-5c-.552 0-.5-.449-.5-1.003v-4.574zm8 0a6.5 6.5 0 0 1 6.056-6.408l.038.67c-2.646.739-3.74 2.979-3.873 5.315H17c.552 0 .5.432.5.986v4.511c0 .554-.448.503-1 .503h-5c-.552 0-.5-.449-.5-1.003v-4.574z\\"></path></svg>"},"style":{"fontFamily":"quote"},"rhythmVertical":{"marginBottom":50}},"bold":{"label":"Bold","group":"text","style":{"fontWeight":"bold"},"button":{"label":"B","style":{"fontWeight":"bolder"}}},"italic":{"label":"Italic","group":"text","style":{"fontStyle":"italic"},"button":{"label":"I","style":{"fontStyle":"italic"}}},"large":{"label":"Large","group":"text","style":{"fontSize":"1.1em"},"button":{"label":"A","style":{"fontSize":"1.01em"}}},"larger":{"label":"Larger","group":"text","style":{"fontSize":"1.2em"},"button":{"label":"A","style":{"fontSize":"1.02em"}}},"largest":{"label":"Largest","group":"text","style":{"fontSize":"1.3em"},"button":{"label":"A","style":{"fontSize":"1.03em"}}},"small":{"label":"Small","group":"text","style":{"fontSize":"0.9em"},"button":{"label":"A","style":{"fontSize":"0.99em"}}},"smaller":{"label":"Smaller","group":"text","style":{"fontSize":"0.8em"},"button":{"label":"A","style":{"fontSize":"0.98em"}}},"smallest":{"label":"Smallest","group":"text","style":{"fontSize":"0.7em"},"button":{"label":"A","style":{"fontSize":"0.97em"}}},"mark":{"label":"Mark","group":"text","button":{"label":"M"},"style":{"backgroundColor":"#ffbb00"}},"del":{"label":"Deleted","group":"text","style":{"textDecoration":"line-through"},"button":{"label":"D","style":{"textDecoration":"line-through"}}},"ins":{"label":"Inserted","group":"text","style":{"textDecoration":"underline"},"button":{"label":"U","style":{"textDecoration":"underline"}}},"sub":{"label":"Subscript","group":"text","style":{"verticalAlign":"sub","fontSize":"0.6em"},"button":{"label":"Sub","style":{"verticalAlign":"sub","fontSize":"0.6em"}}},"sup":{"label":"Superscript","group":"text","style":{"verticalAlign":"sup","fontSize":"0.6em"},"button":{"label":"Sup","style":{"verticalAlign":"sup","fontSize":"0.6em"}}},"base":{"label":"Base","group":"color","type":"color","style":{"color":"hsla(212,8,50,1)"}},"baseGradient":{"label":"Base gradient","group":"color","type":"color","style":{"backgroundSize":"100%","-webkitBackgroundClip":"text","-mozBackgroundClip":"text","-webkitTextFillColor":"transparent","-mozTextFillColor":"transparent","backgroundImage":"linear-gradient(90deg, hsla(212,8,50,1) 0%, #838c95 100%)"}},"main":{"label":"Main","group":"color","type":"color","style":{"color":"hsla(212,8,50,1)"}},"mainGradient":{"label":"Main gradient","group":"color","type":"color","style":{"backgroundSize":"100%","-webkitBackgroundClip":"text","-mozBackgroundClip":"text","-webkitTextFillColor":"transparent","-mozTextFillColor":"transparent","backgroundImage":"linear-gradient(90deg, hsla(212,8,50,1) 0%, #838c95 100%)"}},"accent":{"label":"Accent","group":"color","type":"color","style":{"color":"#ffbb00"}},"accentGradient":{"label":"Accent gradient","group":"color","type":"color","style":{"backgroundSize":"100%","-webkitBackgroundClip":"text","-mozBackgroundClip":"text","-webkitTextFillColor":"transparent","-mozTextFillColor":"transparent","backgroundImage":"linear-gradient(90deg, #ffbb00 0%, #ffc21a 100%)"}},"complementary":{"label":"Complementary","group":"color","type":"color","style":{"color":"#5100ff"}},"complementaryGradient":{"label":"Complementary gradient","group":"color","type":"color","style":{"backgroundSize":"100%","-webkitBackgroundClip":"text","-mozBackgroundClip":"text","-webkitTextFillColor":"transparent","-mozTextFillColor":"transparent","backgroundImage":"linear-gradient(90deg, #5100ff 0%, #621aff 100%)"}},"success":{"label":"Success","group":"color","type":"color","style":{"color":"#91ff00"}},"successGradient":{"label":"Success gradient","group":"color","type":"color","style":{"backgroundSize":"100%","-webkitBackgroundClip":"text","-mozBackgroundClip":"text","-webkitTextFillColor":"transparent","-mozTextFillColor":"transparent","backgroundImage":"linear-gradient(90deg, #91ff00 0%, #9cff1a 100%)"}},"warning":{"label":"Warning","group":"color","type":"color","style":{"color":"#ffd500"}},"warningGradient":{"label":"Warning gradient","group":"color","type":"color","style":{"backgroundSize":"100%","-webkitBackgroundClip":"text","-mozBackgroundClip":"text","-webkitTextFillColor":"transparent","-mozTextFillColor":"transparent","backgroundImage":"linear-gradient(90deg, #ffd500 0%, #ffd91a 100%)"}},"error":{"label":"Error","group":"color","type":"color","style":{"color":"#ff003b"}},"errorGradient":{"label":"Error gradient","group":"color","type":"color","style":{"backgroundSize":"100%","-webkitBackgroundClip":"text","-mozBackgroundClip":"text","-webkitTextFillColor":"transparent","-mozTextFillColor":"transparent","backgroundImage":"linear-gradient(90deg, #ff003b 0%, #ff1a4f 100%)"}},"info":{"label":"Info","group":"color","type":"color","style":{"color":"#00ffff"}},"infoGradient":{"label":"Info gradient","group":"color","type":"color","style":{"backgroundSize":"100%","-webkitBackgroundClip":"text","-mozBackgroundClip":"text","-webkitTextFillColor":"transparent","-mozTextFillColor":"transparent","backgroundImage":"linear-gradient(90deg, #00ffff 0%, #1affff 100%)"}}},"metas":{"title":"Default light","description":"Nice and elegant light theme"},"colorSchema":{"text":{"darken":0,"color":{"base":{"darken":5},"main":{"darken":10},"complementary":{"lighten":15},"info":{"darken":10}}},"placeholder":{"darken":0,"alpha":0.4},"foreground":{"lighten":50},"background":{"lighten":50,"color":{"surface":{"darken":20}}},"backgroundForeground":{"darken":45},"surface":{"lighten":40,"color":{"base":{"lighten":49},"main":{"lighten":49}}},"surfaceForeground":{"darken":45},"ui":{"lighten":49},"uiForeground":{"darken":15},"border":{"alpha":0.2},"gradientStart":{"lighten":0},"gradientEnd":{"lighten":20}}},"default-dark":{"defaultColor":"main","color":{"current":"hsla(212,8,50,1)","base":"hsla(212,8,50,1)","main":"hsla(212,8,50,1)","accent":"#ffbb00","complementary":"#5100ff","success":"#91ff00","warning":"#ffd500","error":"#ff003b","info":"#00ffff"},"classmap":{"enabled":true,"url":"/classmap.json"},"lod":{"enabled":true,"defaultLevel":3,"botLevel":1,"levels":{"0":{"name":"bare","speedIndex":0},"1":{"name":"bare+","speedIndex":30},"2":{"name":"low","speedIndex":40},"3":{"name":"medium","speedIndex":50},"4":{"name":"high","speedIndex":60}},"method":"file","defaultAction":">=","cssProperties":{}},"easing":{"default":"cubic-bezier(0.700, 0.000, 0.305, 0.995)"},"scroll":{"duration":300,"offset":0,"offsetX":0,"offsetY":100},"partytown":{"enabled":true,"forward":["dataLayer.push","fbq","freshpaint.addPageviewProperties","freshpaint.identify","freshpaint.track","_hsq.push","Intercom","_learnq.push","ttq.track","ttq.page","ttq.load","mixpanel.track"]},"timing":{"slow":".6s","default":".3s","fast":".1s"},"transition":{"slow":"all .6s cubic-bezier(0.700, 0.000, 0.305, 0.995)","default":"all .3s cubic-bezier(0.700, 0.000, 0.305, 0.995)","fast":"all .1s cubic-bezier(0.700, 0.000, 0.305, 0.995)"},"gradient":{"defaultModifierStart":{},"defaultModifierEnd":{"lighten":20},"defaultX":"50%","defaultY":"50%","defaultAngle":"90deg","defaultTextModifierStart":{"darken":5},"defaultTextModifierEnd":{"lighten":5},"defaultTextAngle":"90deg"},"helpers":{"states":["mounted","active","loading"],"clearfix":{"default":"overflow"},"disabled":{"opacity":0.4},"truncate":{"count":10},"order":{"count":20}},"layout":{"offset":{"top":100,"right":0,"bottom":0,"left":0},"container":{"default":"1280px","wide":"1440px","full":"none"},"grid":{"1":1,"2":2,"3":3,"4":4,"5":5,"6":6,"7":7,"8":8,"9":9,"10":10,"11":11,"12":12},"layout":{"1":"1","12":"1 2","21":"2 1","112":"1 1 2","122":"1 2 2","123":"1 2 3","211":"2 1 1","221":"2 2 1","321":"3 2 1","1112":"1 1 1 2","1222":"1 2 2 2","1234":"1 2 3 4","2221":"2 2 2 1","11112":"1 1 1 1 2","12222":"1 2 2 2 2","12345":"1 2 3 4 5","22221":"2 2 2 2 1","111112":"1 1 1 1 1 2","122222":"1 2 2 2 2 2","123456":"1 2 3 4 5 6","1_2":"1 _ 2","2_1":"2 _ 1","12_33":"1 2 _ 3 3","1_23":"1 _ 2 3","1_2_3":"1 _ 2 _ 3","32_1":"3 2 _ 1","3_21":"3 _ 2 1","12_34":"1 2 _ 3 4","123_4":"1 2 3 _ 4","1_234":"1 _ 2 3 4","1_2_3_4":"1 _ 2 _ 3 _ 4","123_45":"1 2 3 _ 4 5","12_345":"1 2 _ 3 4 5","1_2345":"1 _ 2 3 4 5","1234_5":"1 2 3 4 _ 5","1_2_3_4_5":"1 _ 2 _ 3 _ 4 _ 5"}},"ratio":{"1":1,"21-9":2.3333333333333335,"16-9":1.7777777777777777,"2-3":0.6666666666666666,"4-3":1.3333333333333333,"3-4":0.75},"scalable":{"margin":false,"padding":true,"offsize":false,"font":true},"scale":{"10":1,"11":1.1,"12":1.2,"13":1.3,"14":1.4,"15":1.5,"16":1.6,"17":1.7,"18":1.8,"19":1.9,"20":2,"default":1,"01":0.1,"02":0.2,"03":0.3,"04":0.4,"05":0.5,"06":0.6,"07":0.7,"08":0.8,"09":0.9},"opacity":{"0":0,"10":0.1,"20":0.2,"30":0.3,"40":0.4,"50":0.5,"60":0.6,"70":0.7,"80":0.8,"90":0.9,"100":1},"width":{"0":"0","10":"10%","20":"20%","30":"30%","40":"40%","50":"50%","60":"60%","70":"70%","80":"80%","90":"90%","100":"100%"},"height":{"0":"0","10":"10%","20":"20%","30":"30%","40":"40%","50":"50%","60":"60%","70":"70%","80":"80%","90":"90%","100":"100%"},"depth":{"0":"0","5":"0px 0.6px 0.4px rgba(0, 0, 0, 0.006),\\n  0px 1.3px 1px rgba(0, 0, 0, 0.006),\\n  0px 2.5px 1.5px rgba(0, 0, 0, 0.005),\\n  0px 3.5px 3.4px rgba(0, 0, 0, 0.006),\\n  0px 4.4px 4.3px rgba(0, 0, 0, 0.007),\\n  0px 10px 10px rgba(0, 0, 0, 0.01)","10":"0px 0.6px 0.4px rgba(0, 0, 0, 0.006),\\n  0px 1.3px 1px rgba(0, 0, 0, 0.008),\\n  0px 2.5px 1.9px rgba(0, 0, 0, 0.01),\\n  0px 4.5px 3.4px rgba(0, 0, 0, 0.012),\\n  0px 8.4px 6.3px rgba(0, 0, 0, 0.014),\\n  0px 20px 15px rgba(0, 0, 0, 0.02)","20":"0px 0.6px 0.4px rgba(0, 0, 0, 0.006),\\n  0px 1.3px 1px rgba(0, 0, 0, 0.008),\\n  0px 2.5px 1.9px rgba(0, 0, 0, 0.01),\\n  0px 4.5px 3.4px rgba(0, 0, 0, 0.012),\\n  0px 8.4px 6.3px rgba(0, 0, 0, 0.014),\\n  0px 20px 15px rgba(0, 0, 0, 0.02)","30":"0px 0.6px 0.4px rgba(0, 0, 0, 0.008),\\n  0px 1.3px 1px rgba(0, 0, 0, 0.012),\\n  0px 2.5px 1.9px rgba(0, 0, 0, 0.015),\\n  0px 4.5px 3.4px rgba(0, 0, 0, 0.018),\\n  0px 8.4px 6.3px rgba(0, 0, 0, 0.022),\\n  0px 20px 15px rgba(0, 0, 0, 0.03)","40":"0px 0.8px 0.6px rgba(0, 0, 0, 0.008),\\n  0px 2px 1.3px rgba(0, 0, 0, 0.012),\\n  0px 3.8px 2.5px rgba(0, 0, 0, 0.015),\\n  0px 6.7px 4.5px rgba(0, 0, 0, 0.018),\\n  0px 12.5px 8.4px rgba(0, 0, 0, 0.022),\\n  0px 30px 20px rgba(0, 0, 0, 0.03)","50":"0px 1px 0.8px rgba(0, 0, 0, 0.011),\\n  0px 2.3px 2px rgba(0, 0, 0, 0.016),\\n  0px 4.4px 3.8px rgba(0, 0, 0, 0.02),\\n  0px 7.8px 6.7px rgba(0, 0, 0, 0.024),\\n  0px 14.6px 12.5px rgba(0, 0, 0, 0.029),\\n  0px 35px 30px rgba(0, 0, 0, 0.04)","60":"0px 1px 0.7px rgba(0, 0, 0, 0.011),\\n  0px 2.3px 1.7px rgba(0, 0, 0, 0.016),\\n  0px 4.4px 3.1px rgba(0, 0, 0, 0.02),\\n  0px 7.8px 5.6px rgba(0, 0, 0, 0.024),\\n  0px 14.6px 10.4px rgba(0, 0, 0, 0.029),\\n  0px 35px 25px rgba(0, 0, 0, 0.04)","70":"0px 1.1px 0.8px rgba(0, 0, 0, 0.011),\\n  0px 2.7px 2px rgba(0, 0, 0, 0.016),\\n  0px 5px 3.8px rgba(0, 0, 0, 0.02),\\n  0px 8.9px 6.7px rgba(0, 0, 0, 0.024),\\n  0px 16.7px 12.5px rgba(0, 0, 0, 0.029),\\n  0px 40px 30px rgba(0, 0, 0, 0.04)","80":"0px 1.1px 1px rgba(0, 0, 0, 0.011),\\n  0px 2.7px 2.3px rgba(0, 0, 0, 0.016),\\n  0px 5px 4.4px rgba(0, 0, 0, 0.02),\\n  0px 8.9px 7.8px rgba(0, 0, 0, 0.024),\\n  0px 16.7px 14.6px rgba(0, 0, 0, 0.029),\\n  0px 40px 35px rgba(0, 0, 0, 0.04)","90":"0px 1.4px 1.1px rgba(0, 0, 0, 0.011),\\n  0px 3.3px 2.7px rgba(0, 0, 0, 0.016),\\n  0px 6.1px 5px rgba(0, 0, 0, 0.02),\\n  0px 10.9px 8.9px rgba(0, 0, 0, 0.024),\\n  0px 20.5px 16.7px rgba(0, 0, 0, 0.029),\\n  0px 49px 40px rgba(0, 0, 0, 0.04)","100":"0px 1.4px 1.4px rgba(0, 0, 0, 0.011),\\n  0px 3.3px 3.5px rgba(0, 0, 0, 0.016),\\n  0px 6.1px 6.5px rgba(0, 0, 0, 0.02),\\n  0px 10.9px 11.6px rgba(0, 0, 0, 0.024),\\n  0px 20.5px 21.7px rgba(0, 0, 0, 0.029),\\n  0px 49px 52px rgba(0, 0, 0, 0.04)","default":"0"},"size":{"0":0.25,"5":"0.5","10":0.65,"15":0.7,"20":0.75,"25":0.95,"30":1.1,"40":1.25,"50":1.5,"60":2,"70":2.5,"80":3,"90":4,"100":5,"default":"15px"},"font":{"family":{"default":{"fontFamily":"\\"Roboto\\"","fontWeight":400,"import":"https://fonts.googleapis.com/css2?family=Roboto&display=swap"},"title":{"fontFamily":"\\"Roboto\\"","fontWeight":500,"import":"https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap"},"quote":{"fontFamily":"\\"Palatino, Times, Georgia, serif\\"","fontWeight":"normal","fontStyle":"normal","fontDisplay":"auto","capHeight":0.65},"code":{"fontFamily":"Menlo, Monaco, Consolas, Courier New, monospace","fontWeight":"normal","fontStyle":"normal","fontDisplay":"auto","capHeight":0.65}},"size":{"0":0,"5":"0.5","10":0.65,"15":0.7,"20":0.75,"25":0.95,"30":1.1,"40":1.25,"50":1.5,"60":2,"70":2.5,"80":3,"90":4,"100":5,"default":"15px"}},"border":{"width":{"0":0,"10":1,"20":2,"30":4,"40":6,"50":8,"60":12,"70":16,"80":20,"90":24,"100":30,"default":"1px"},"radius":{"0":0,"10":0.8,"20":1.6,"30":2.4,"40":3.2,"50":4,"60":5.2,"70":6.4,"80":8,"90":10,"100":12,"default":"5px"}},"space":{"0":0,"10":0.375,"20":0.75,"30":1.5,"40":2.25,"50":3.25,"60":4.25,"70":5.5,"80":7,"90":9,"100":11,"default":"1rem"},"margin":{"0":0,"10":0.375,"20":0.75,"30":1.5,"40":2.25,"50":3.25,"60":4.25,"70":5.5,"80":7,"90":9,"100":11,"default":"1rem"},"padding":{"0":0,"10":0.375,"20":0.75,"30":1.5,"40":2.25,"50":3.25,"60":4.25,"70":5.5,"80":7,"90":9,"100":11,"default":"1rem"},"offsize":{"0":0,"10":0.375,"20":0.75,"30":1.5,"40":2.25,"50":3.25,"60":4.25,"70":5.5,"80":7,"90":9,"100":11,"default":"1rem"},"media":{"defaultAction":"<=","defaultMedia":"desktop","defaultQuery":"screen","queries":{"mobile":{"minWidth":0,"maxWidth":639},"tablet":{"minWidth":640,"maxWidth":1279},"desktop":{"minWidth":1280,"maxWidth":2047},"wide":{"minWidth":2048,"maxWidth":null}}},"ui":{"default":{"paddingInline":1.5,"paddingBlock":0.75,"borderRadius":1,"borderWidth":"1px","transition":"all .1s cubic-bezier(0.700, 0.000, 0.305, 0.995)","defaultLnf":"solid","depth":"0","outline":true,"spacing":1.5,"rhythmVertical":{"margin-bottom":60}},"form":{"paddingInline":1,"paddingBlock":0.75,"borderRadius":1,"borderWidth":"1px","transition":"all .1s cubic-bezier(0.700, 0.000, 0.305, 0.995)","outline":true,"depth":"0","rhythmVertical":{"margin-bottom":40}},"outline":{"active":true,"borderWidth":"10px","borderRadius":1,"transition":"all .2s ease-out"},"scrollbar":{"size":"2px","color":"accent"},"label":{"defaultLnf":"inline"},"dropdown":{"paddingInline":0.75,"paddingBlock":0.75,"itemPaddingInline":1.5,"itemPaddingBlock":0.75},"list":{"defaultLnf":"dl","bulletChar":"-"},"fsTree":{"bulletChar":"\u25CF"},"tooltip":{"defaultPosition":"top","arrowSize":"15px"},"loader":{"duration":"1s","easing":"linear"}},"typo":{"h1":{"label":"H1","group":"style","style":{"display":"block","fontFamily":"title","fontSize":80,"lineHeight":1.3,"maxWidth":"55ch","mobile":{"fontSize":70}},"rhythmVertical":{"marginBottom":50}},"h2":{"label":"H2","group":"style","style":{"display":"block","fontFamily":"title","fontSize":70,"lineHeight":1.3,"maxWidth":"55ch","mobile":{"fontSize":60}},"rhythmVertical":{"marginBottom":50}},"h3":{"label":"H3","group":"style","style":{"display":"block","fontFamily":"title","fontSize":60,"lineHeight":1.3,"maxWidth":"55ch","mobile":{"fontSize":50}},"rhythmVertical":{"marginBottom":50}},"h4":{"label":"H4","group":"style","style":{"display":"block","fontFamily":"title","fontSize":50,"lineHeight":1.3,"maxWidth":"55ch","mobile":{"fontSize":40}},"rhythmVertical":{"marginBottom":50}},"h5":{"label":"H5","group":"style","style":{"display":"block","fontFamily":"title","fontSize":40,"lineHeight":1.3,"maxWidth":"55ch","mobile":{"fontSize":30}},"rhythmVertical":{"marginBottom":40}},"h6":{"label":"H6","group":"style","style":{"display":"block","fontFamily":"title","fontSize":30,"lineHeight":1.3,"maxWidth":"55ch","mobile":{"fontSize":30}},"hythmVertical":{"marginBottom":40}},"p":{"label":"Paragraph","group":"style","default":true,"style":{"display":"block","fontFamily":"default","fontSize":30,"lineHeight":1.8,"maxWidth":"55ch"},"rhythmVertical":{"marginBottom":40}},"lead":{"label":"Lead paragraph","group":"style","style":{"display":"block","fontFamily":"default","fontSize":40,"lineHeight":1.6,"maxWidth":"55ch","mobile":{"fontSize":40}},"rhythmVertical":{"marginBottom":40}},"hr":{"label":"--","group":"block","button":{"label":"--"},"style":{"display":"block","color":"hsla(212,8,50,1)","opacity":0.2},"rhythmVertical":{"marginBottom":50}},"pre:not([class])":{"label":"Pre","group":"text","style":{"display":"block","fontFamily":"code","color":["main","text"],"backgroundColor":["main","surface"],"lineHeight":1.5,"paddingInline":1.5,"paddingBlock":0.75,"borderRadius":1,"depth":"0"},"rhythmVertical":{"marginBottom":50}},"code:not(pre > code)":{"label":"Code","group":"text","button":{"label":"</>"},"style":{"display":"inline-block","fontFamily":"code","color":["main","text"],"lineHeight":1.1,"backgroundColor":["accent","surface"],"borderRadius":10,"paddingInline":10,"paddingBlock":0}},"blockquote":{"label":"Blockquote","group":"block","button":{"label":"<svg viewBox=\\"0 0 20 20\\"><path d=\\"M3 10.423a6.5 6.5 0 0 1 6.056-6.408l.038.67C6.448 5.423 5.354 7.663 5.22 10H9c.552 0 .5.432.5.986v4.511c0 .554-.448.503-1 .503h-5c-.552 0-.5-.449-.5-1.003v-4.574zm8 0a6.5 6.5 0 0 1 6.056-6.408l.038.67c-2.646.739-3.74 2.979-3.873 5.315H17c.552 0 .5.432.5.986v4.511c0 .554-.448.503-1 .503h-5c-.552 0-.5-.449-.5-1.003v-4.574z\\"></path></svg>"},"style":{"display":"block","fontFamily":"quote"},"editor":{"style":{"paddingInlineStart":1.5,"borderLeft":"1px solid #000"}},"rhythmVertical":{"marginBottom":50}},"a":{"label":"Link","group":"text","button":{"label":"<svg viewBox=\\"0 0 20 20\\"><path d=\\"m11.077 15 .991-1.416a.75.75 0 1 1 1.229.86l-1.148 1.64a.748.748 0 0 1-.217.206 5.251 5.251 0 0 1-8.503-5.955.741.741 0 0 1 .12-.274l1.147-1.639a.75.75 0 1 1 1.228.86L4.933 10.7l.006.003a3.75 3.75 0 0 0 6.132 4.294l.006.004zm5.494-5.335a.748.748 0 0 1-.12.274l-1.147 1.639a.75.75 0 1 1-1.228-.86l.86-1.23a3.75 3.75 0 0 0-6.144-4.301l-.86 1.229a.75.75 0 0 1-1.229-.86l1.148-1.64a.748.748 0 0 1 .217-.206 5.251 5.251 0 0 1 8.503 5.955zm-4.563-2.532a.75.75 0 0 1 .184 1.045l-3.155 4.505a.75.75 0 1 1-1.229-.86l3.155-4.506a.75.75 0 0 1 1.045-.184z\\"></path></svg>"},"style":{"color":"accent","textDecoration":"underline"}},"quote":{"label":"Quote","group":"text","button":{"label":"<svg viewBox=\\"0 0 20 20\\"><path d=\\"M3 10.423a6.5 6.5 0 0 1 6.056-6.408l.038.67C6.448 5.423 5.354 7.663 5.22 10H9c.552 0 .5.432.5.986v4.511c0 .554-.448.503-1 .503h-5c-.552 0-.5-.449-.5-1.003v-4.574zm8 0a6.5 6.5 0 0 1 6.056-6.408l.038.67c-2.646.739-3.74 2.979-3.873 5.315H17c.552 0 .5.432.5.986v4.511c0 .554-.448.503-1 .503h-5c-.552 0-.5-.449-.5-1.003v-4.574z\\"></path></svg>"},"style":{"fontFamily":"quote"},"rhythmVertical":{"marginBottom":50}},"bold":{"label":"Bold","group":"text","style":{"fontWeight":"bold"},"button":{"label":"B","style":{"fontWeight":"bolder"}}},"italic":{"label":"Italic","group":"text","style":{"fontStyle":"italic"},"button":{"label":"I","style":{"fontStyle":"italic"}}},"large":{"label":"Large","group":"text","style":{"fontSize":"1.1em"},"button":{"label":"A","style":{"fontSize":"1.01em"}}},"larger":{"label":"Larger","group":"text","style":{"fontSize":"1.2em"},"button":{"label":"A","style":{"fontSize":"1.02em"}}},"largest":{"label":"Largest","group":"text","style":{"fontSize":"1.3em"},"button":{"label":"A","style":{"fontSize":"1.03em"}}},"small":{"label":"Small","group":"text","style":{"fontSize":"0.9em"},"button":{"label":"A","style":{"fontSize":"0.99em"}}},"smaller":{"label":"Smaller","group":"text","style":{"fontSize":"0.8em"},"button":{"label":"A","style":{"fontSize":"0.98em"}}},"smallest":{"label":"Smallest","group":"text","style":{"fontSize":"0.7em"},"button":{"label":"A","style":{"fontSize":"0.97em"}}},"mark":{"label":"Mark","group":"text","button":{"label":"M"},"style":{"backgroundColor":"#ffbb00"}},"del":{"label":"Deleted","group":"text","style":{"textDecoration":"line-through"},"button":{"label":"D","style":{"textDecoration":"line-through"}}},"ins":{"label":"Inserted","group":"text","style":{"textDecoration":"underline"},"button":{"label":"U","style":{"textDecoration":"underline"}}},"sub":{"label":"Subscript","group":"text","style":{"verticalAlign":"sub","fontSize":"0.6em"},"button":{"label":"Sub","style":{"verticalAlign":"sub","fontSize":"0.6em"}}},"sup":{"label":"Superscript","group":"text","style":{"verticalAlign":"sup","fontSize":"0.6em"},"button":{"label":"Sup","style":{"verticalAlign":"sup","fontSize":"0.6em"}}},"base":{"label":"Base","group":"color","type":"color","style":{"color":"hsla(212,8,50,1)"}},"baseGradient":{"label":"Base gradient","group":"color","type":"color","style":{"backgroundSize":"100%","-webkitBackgroundClip":"text","-mozBackgroundClip":"text","-webkitTextFillColor":"transparent","-mozTextFillColor":"transparent","backgroundImage":"linear-gradient(90deg, hsla(212,8,50,1) 0%, #838c95 100%)"}},"main":{"label":"Main","group":"color","type":"color","style":{"color":"hsla(212,8,50,1)"}},"mainGradient":{"label":"Main gradient","group":"color","type":"color","style":{"backgroundSize":"100%","-webkitBackgroundClip":"text","-mozBackgroundClip":"text","-webkitTextFillColor":"transparent","-mozTextFillColor":"transparent","backgroundImage":"linear-gradient(90deg, hsla(212,8,50,1) 0%, #838c95 100%)"}},"accent":{"label":"Accent","group":"color","type":"color","style":{"color":"#ffbb00"}},"accentGradient":{"label":"Accent gradient","group":"color","type":"color","style":{"backgroundSize":"100%","-webkitBackgroundClip":"text","-mozBackgroundClip":"text","-webkitTextFillColor":"transparent","-mozTextFillColor":"transparent","backgroundImage":"linear-gradient(90deg, #ffbb00 0%, #ffc21a 100%)"}},"complementary":{"label":"Complementary","group":"color","type":"color","style":{"color":"#5100ff"}},"complementaryGradient":{"label":"Complementary gradient","group":"color","type":"color","style":{"backgroundSize":"100%","-webkitBackgroundClip":"text","-mozBackgroundClip":"text","-webkitTextFillColor":"transparent","-mozTextFillColor":"transparent","backgroundImage":"linear-gradient(90deg, #5100ff 0%, #621aff 100%)"}},"success":{"label":"Success","group":"color","type":"color","style":{"color":"#91ff00"}},"successGradient":{"label":"Success gradient","group":"color","type":"color","style":{"backgroundSize":"100%","-webkitBackgroundClip":"text","-mozBackgroundClip":"text","-webkitTextFillColor":"transparent","-mozTextFillColor":"transparent","backgroundImage":"linear-gradient(90deg, #91ff00 0%, #9cff1a 100%)"}},"warning":{"label":"Warning","group":"color","type":"color","style":{"color":"#ffd500"}},"warningGradient":{"label":"Warning gradient","group":"color","type":"color","style":{"backgroundSize":"100%","-webkitBackgroundClip":"text","-mozBackgroundClip":"text","-webkitTextFillColor":"transparent","-mozTextFillColor":"transparent","backgroundImage":"linear-gradient(90deg, #ffd500 0%, #ffd91a 100%)"}},"error":{"label":"Error","group":"color","type":"color","style":{"color":"#ff003b"}},"errorGradient":{"label":"Error gradient","group":"color","type":"color","style":{"backgroundSize":"100%","-webkitBackgroundClip":"text","-mozBackgroundClip":"text","-webkitTextFillColor":"transparent","-mozTextFillColor":"transparent","backgroundImage":"linear-gradient(90deg, #ff003b 0%, #ff1a4f 100%)"}},"info":{"label":"Info","group":"color","type":"color","style":{"color":"#00ffff"}},"infoGradient":{"label":"Info gradient","group":"color","type":"color","style":{"backgroundSize":"100%","-webkitBackgroundClip":"text","-mozBackgroundClip":"text","-webkitTextFillColor":"transparent","-mozTextFillColor":"transparent","backgroundImage":"linear-gradient(90deg, #00ffff 0%, #1affff 100%)"}}},"metas":{"title":"Default dark","description":"Nice and elegant dark theme"},"colorSchema":{"text":{"lighten":15,"color":{"base":{"lighten":30},"main":{"lighten":46},"complementary":{"lighten":30}}},"placeholder":{"lighten":50,"alpha":0.4},"foreground":{"lighten":50},"background":{"darken":30},"backgroundForeground":{"lighten":50},"surface":{"darken":25},"surfaceForeground":{"lighten":50},"ui":{"darken":28},"uiForeground":{"lighten":45},"border":{"alpha":0.4},"gradientStart":{"lighten":0},"gradientEnd":{"darken":20}}}}}},"frontspec":{"metas":{"lang":"en","title":"Coffeekraken","homepage":"https://coffeekraken.io","description":"The frontend toolkit that works for everyone. Experts, professionals and new-comers","themeColor":"#ffbb00","author":{"name":"Olivier Bossel","email":"olivier.bossel@gmail.com","url":"https://coffeekraken.io"},"og":{"title":"Coffeekraken","description":"The frontend toolkit that works for everyone. Experts, professionals and new-comers","type":"website","url":"https://coffeekraken.io","image":"https://cdnv2.coffeekraken.io/coffeekraken-og.png"}},"theme":{"theme":"default","variant":"dark","themes":{"default-light":{"title":"Default light","description":"Nice and elegant light theme"},"default-dark":{"title":"Default dark","description":"Nice and elegant dark theme"}}},"media":{"defaultAction":"<=","defaultMedia":"desktop","defaultQuery":"screen","queries":{"dwarf":{"minHeight":0,"maxHeight":950},"wide":{"minWidth":2048,"maxWidth":null},"desktop":{"minWidth":1280,"maxWidth":2047},"tablet":{"minWidth":640,"maxWidth":1279},"mobile":{"minWidth":0,"maxWidth":639}}},"google":{"gtm":"GTM-K4LMN8Q","map":{"apiKey":"AIzaSyDzFfEzhmYXRTlONUCtMWQ88uHJhsbtXY4"}},"lod":{"enabled":true,"defaultLevel":3,"botLevel":1,"levels":{"0":{"name":"bare","speedIndex":0},"1":{"name":"low","speedIndex":30},"2":{"name":"medium","speedIndex":40},"3":{"name":"high","speedIndex":50},"4":{"name":"extrem","speedIndex":60}},"method":"file","defaultAction":">="},"partytown":{"enabled":true,"forward":["dataLayer.push","fbq","freshpaint.addPageviewProperties","freshpaint.identify","freshpaint.track","_hsq.push","Intercom","_learnq.push","ttq.track","ttq.page","ttq.load","mixpanel.track"]},"font":{"family":{"default":{"fontFamily":"\\"Titillium Web\\"","fontWeight":400,"import":"https://fonts.googleapis.com/css2?family=Titillium+Web:wght@400&display=swap"},"title":{"fontFamily":"\\"Titillium Web\\"","fontWeight":600,"import":"https://fonts.googleapis.com/css2?family=Titillium+Web:wght@600&display=swap"},"quote":{"fontFamily":"\\"Palatino, Times, Georgia, serif\\"","fontWeight":"normal","fontStyle":"normal","fontDisplay":"auto","capHeight":0.65},"code":{"fontFamily":"Menlo, Monaco, Consolas, Courier New, monospace","fontWeight":"normal","fontStyle":"normal","fontDisplay":"auto","capHeight":0.65}},"size":{"0":0,"5":"0.5","10":0.65,"20":0.75,"30":1.1,"40":1.25,"50":1.5,"60":2,"70":2.5,"80":3,"90":4,"100":5,"default":"16px"}},"typo":{"h1":{"label":"H1","group":"style","button":{},"editor":{},"style":{"display":"block","fontFamily":"\\"Titillium Web\\"","fontSize":"64px","lineHeight":1.3,"maxWidth":"55ch","marginBottom":"3.25rem"}},"h2":{"label":"H2","group":"style","button":{},"editor":{},"style":{"display":"block","fontFamily":"\\"Titillium Web\\"","fontSize":"48px","lineHeight":1.3,"maxWidth":"55ch","marginBottom":"3.25rem"}},"h3":{"label":"H3","group":"style","button":{},"editor":{},"style":{"display":"block","fontFamily":"\\"Titillium Web\\"","fontSize":"40px","lineHeight":1.3,"maxWidth":"55ch","marginBottom":"3.25rem"}},"h4":{"label":"H4","group":"style","button":{},"editor":{},"style":{"display":"block","fontFamily":"\\"Titillium Web\\"","fontSize":"32px","lineHeight":1.3,"maxWidth":"55ch","marginBottom":"3.25rem"}},"h5":{"label":"H5","group":"style","button":{},"editor":{},"style":{"display":"block","fontFamily":"\\"Titillium Web\\"","fontSize":"24px","lineHeight":1.3,"maxWidth":"55ch","marginBottom":"2.25rem"}},"h6":{"label":"H6","group":"style","button":{},"editor":{},"style":{"display":"block","fontFamily":"\\"Titillium Web\\"","fontSize":"20px","lineHeight":1.3,"maxWidth":"55ch"}},"p":{"label":"Paragraph","group":"style","button":{},"editor":{},"style":{"display":"block","fontFamily":"\\"Titillium Web\\"","fontSize":"17.6px","lineHeight":1.8,"maxWidth":"55ch","marginBottom":"3.25rem"},"default":true},"lead":{"label":"Lead paragraph","group":"style","button":{},"editor":{},"style":{"display":"block","fontFamily":"\\"Titillium Web\\"","fontSize":"24px","lineHeight":1.6,"maxWidth":"55ch","marginBottom":"3.25rem"}},"hr":{"label":"--","group":"block","button":{"label":"--"},"editor":{},"style":{"display":"block","color":"hsla(212,14,50,1)","opacity":0.2,"marginBottom":"3.25rem"}},"pre":{"label":"Pre","group":"text","button":{},"editor":{},"style":{"display":"block","fontFamily":"Menlo, Monaco, Consolas, Courier New, monospace","color":"#f3f5f6","backgroundColor":"#373f48","lineHeight":1.5,"paddingInline":"1.5rem","paddingBlock":"0.75rem","borderRadius":"5px","depth":"0","marginBottom":"3.25rem"}},"code":{"label":"Code","group":"text","button":{"label":"</>"},"editor":{},"style":{"display":"inline-block","fontFamily":"Menlo, Monaco, Consolas, Courier New, monospace","color":"#f3f5f6","lineHeight":1.1,"backgroundColor":"#805e00","borderRadius":"4px","paddingInline":"0.375rem","paddingBlock":"0rem"}},"blockquote":{"label":"Blockquote","group":"block","button":{"label":"<svg viewBox=\\"0 0 20 20\\"><path d=\\"M3 10.423a6.5 6.5 0 0 1 6.056-6.408l.038.67C6.448 5.423 5.354 7.663 5.22 10H9c.552 0 .5.432.5.986v4.511c0 .554-.448.503-1 .503h-5c-.552 0-.5-.449-.5-1.003v-4.574zm8 0a6.5 6.5 0 0 1 6.056-6.408l.038.67c-2.646.739-3.74 2.979-3.873 5.315H17c.552 0 .5.432.5.986v4.511c0 .554-.448.503-1 .503h-5c-.552 0-.5-.449-.5-1.003v-4.574z\\"></path></svg>"},"editor":{"style":{"paddingInlineStart":1.5,"borderLeft":"1px solid #000"}},"style":{"display":"block","fontFamily":"\\"Palatino, Times, Georgia, serif\\"","marginBottom":"3.25rem"}},"a":{"label":"Link","group":"text","button":{"label":"<svg viewBox=\\"0 0 20 20\\"><path d=\\"m11.077 15 .991-1.416a.75.75 0 1 1 1.229.86l-1.148 1.64a.748.748 0 0 1-.217.206 5.251 5.251 0 0 1-8.503-5.955.741.741 0 0 1 .12-.274l1.147-1.639a.75.75 0 1 1 1.228.86L4.933 10.7l.006.003a3.75 3.75 0 0 0 6.132 4.294l.006.004zm5.494-5.335a.748.748 0 0 1-.12.274l-1.147 1.639a.75.75 0 1 1-1.228-.86l.86-1.23a3.75 3.75 0 0 0-6.144-4.301l-.86 1.229a.75.75 0 0 1-1.229-.86l1.148-1.64a.748.748 0 0 1 .217-.206 5.251 5.251 0 0 1 8.503 5.955zm-4.563-2.532a.75.75 0 0 1 .184 1.045l-3.155 4.505a.75.75 0 1 1-1.229-.86l3.155-4.506a.75.75 0 0 1 1.045-.184z\\"></path></svg>"},"editor":{},"style":{"color":"#ffbb00","textDecoration":"underline"}},"quote":{"label":"Quote","group":"text","button":{"label":"<svg viewBox=\\"0 0 20 20\\"><path d=\\"M3 10.423a6.5 6.5 0 0 1 6.056-6.408l.038.67C6.448 5.423 5.354 7.663 5.22 10H9c.552 0 .5.432.5.986v4.511c0 .554-.448.503-1 .503h-5c-.552 0-.5-.449-.5-1.003v-4.574zm8 0a6.5 6.5 0 0 1 6.056-6.408l.038.67c-2.646.739-3.74 2.979-3.873 5.315H17c.552 0 .5.432.5.986v4.511c0 .554-.448.503-1 .503h-5c-.552 0-.5-.449-.5-1.003v-4.574z\\"></path></svg>"},"editor":{},"style":{"fontFamily":"\\"Palatino, Times, Georgia, serif\\"","marginBottom":"3.25rem"}},"bold":{"label":"Bold","group":"text","button":{"label":"B","style":{"fontWeight":"bolder"}},"editor":{},"style":{"fontWeight":"bold"}},"italic":{"label":"Italic","group":"text","button":{"label":"I","style":{"fontStyle":"italic"}},"editor":{},"style":{"fontStyle":"italic"}},"large":{"label":"Large","group":"text","button":{"label":"A","style":{"fontSize":"1.01em"}},"editor":{},"style":{"fontSize":"1.1em"}},"larger":{"label":"Larger","group":"text","button":{"label":"A","style":{"fontSize":"1.02em"}},"editor":{},"style":{"fontSize":"1.2em"}},"largest":{"label":"Largest","group":"text","button":{"label":"A","style":{"fontSize":"1.03em"}},"editor":{},"style":{"fontSize":"1.3em"}},"small":{"label":"Small","group":"text","button":{"label":"A","style":{"fontSize":"0.99em"}},"editor":{},"style":{"fontSize":"0.9em"}},"smaller":{"label":"Smaller","group":"text","button":{"label":"A","style":{"fontSize":"0.98em"}},"editor":{},"style":{"fontSize":"0.8em"}},"smallest":{"label":"Smallest","group":"text","button":{"label":"A","style":{"fontSize":"0.97em"}},"editor":{},"style":{"fontSize":"0.7em"}},"mark":{"label":"Mark","group":"text","button":{"label":"M"},"editor":{},"style":{"backgroundColor":"#ffbb00"}},"del":{"label":"Deleted","group":"text","button":{"label":"D","style":{"textDecoration":"line-through"}},"editor":{},"style":{"textDecoration":"line-through"}},"ins":{"label":"Inserted","group":"text","button":{"label":"U","style":{"textDecoration":"underline"}},"editor":{},"style":{"textDecoration":"underline"}},"sub":{"label":"Subscript","group":"text","button":{"label":"Sub","style":{"verticalAlign":"sub","fontSize":"0.6em"}},"editor":{},"style":{"verticalAlign":"sub","fontSize":"0.6em"}},"sup":{"label":"Superscript","group":"text","button":{"label":"Sup","style":{"verticalAlign":"sup","fontSize":"0.6em"}},"editor":{},"style":{"verticalAlign":"sup","fontSize":"0.6em"}},"base":{"label":"Base","group":"color","type":"color","button":{},"editor":{},"style":{"color":"hsla(212,14,50,1)"}},"baseGradient":{"label":"Base gradient","group":"color","type":"color","button":{},"editor":{},"style":{"backgroundSize":"100%","-webkitBackgroundClip":"text","-mozBackgroundClip":"text","-webkitTextFillColor":"transparent","-mozTextFillColor":"transparent","backgroundImage":"linear-gradient(90deg, hsla(212,14,50,1) 0%, #a9b2bc 100%)"}},"main":{"label":"Main","group":"color","type":"color","button":{},"editor":{},"style":{"color":"hsla(212,14,50,1)"}},"mainGradient":{"label":"Main gradient","group":"color","type":"color","button":{},"editor":{},"style":{"backgroundSize":"100%","-webkitBackgroundClip":"text","-mozBackgroundClip":"text","-webkitTextFillColor":"transparent","-mozTextFillColor":"transparent","backgroundImage":"linear-gradient(90deg, hsla(212,14,50,1) 0%, #a9b2bc 100%)"}},"accent":{"label":"Accent","group":"color","type":"color","button":{},"editor":{},"style":{"color":"#ffbb00"}},"accentGradient":{"label":"Accent gradient","group":"color","type":"color","button":{},"editor":{},"style":{"backgroundSize":"100%","-webkitBackgroundClip":"text","-mozBackgroundClip":"text","-webkitTextFillColor":"transparent","-mozTextFillColor":"transparent","backgroundImage":"linear-gradient(90deg, #ffbb00 0%, #ffd666 100%)"}},"complementary":{"label":"Complementary","group":"color","type":"color","button":{},"editor":{},"style":{"color":"#5100ff"}},"complementaryGradient":{"label":"Complementary gradient","group":"color","type":"color","button":{},"editor":{},"style":{"backgroundSize":"100%","-webkitBackgroundClip":"text","-mozBackgroundClip":"text","-webkitTextFillColor":"transparent","-mozTextFillColor":"transparent","backgroundImage":"linear-gradient(90deg, #5100ff 0%, #9666ff 100%)"}},"success":{"label":"Success","group":"color","type":"color","button":{},"editor":{},"style":{"color":"#91ff00"}},"successGradient":{"label":"Success gradient","group":"color","type":"color","button":{},"editor":{},"style":{"backgroundSize":"100%","-webkitBackgroundClip":"text","-mozBackgroundClip":"text","-webkitTextFillColor":"transparent","-mozTextFillColor":"transparent","backgroundImage":"linear-gradient(90deg, #91ff00 0%, #bdff66 100%)"}},"warning":{"label":"Warning","group":"color","type":"color","button":{},"editor":{},"style":{"color":"#ffd500"}},"warningGradient":{"label":"Warning gradient","group":"color","type":"color","button":{},"editor":{},"style":{"backgroundSize":"100%","-webkitBackgroundClip":"text","-mozBackgroundClip":"text","-webkitTextFillColor":"transparent","-mozTextFillColor":"transparent","backgroundImage":"linear-gradient(90deg, #ffd500 0%, #ffe666 100%)"}},"error":{"label":"Error","group":"color","type":"color","button":{},"editor":{},"style":{"color":"#ff003c"}},"errorGradient":{"label":"Error gradient","group":"color","type":"color","button":{},"editor":{},"style":{"backgroundSize":"100%","-webkitBackgroundClip":"text","-mozBackgroundClip":"text","-webkitTextFillColor":"transparent","-mozTextFillColor":"transparent","backgroundImage":"linear-gradient(90deg, #ff003b 0%, #ff668a 100%)"}},"info":{"label":"Info","group":"color","type":"color","button":{},"editor":{},"style":{"color":"#00ffff"}},"infoGradient":{"label":"Info gradient","group":"color","type":"color","button":{},"editor":{},"style":{"backgroundSize":"100%","-webkitBackgroundClip":"text","-mozBackgroundClip":"text","-webkitTextFillColor":"transparent","-mozTextFillColor":"transparent","backgroundImage":"linear-gradient(90deg, #00ffff 0%, #66ffff 100%)"}}},"layout":{"offset":{"top":100,"right":0,"bottom":0,"left":0},"container":{"default":"1280px","wide":"1440px","full":"none"},"grid":{"1":1,"2":2,"3":3,"4":4,"5":5,"6":6,"7":7,"8":8,"9":9,"10":10,"11":11,"12":12},"layout":{"1":"1","12":"1 2","21":"2 1","112":"1 1 2","122":"1 2 2","123":"1 2 3","211":"2 1 1","221":"2 2 1","321":"3 2 1","1112":"1 1 1 2","1222":"1 2 2 2","1234":"1 2 3 4","2221":"2 2 2 1","11112":"1 1 1 1 2","12222":"1 2 2 2 2","12345":"1 2 3 4 5","22221":"2 2 2 2 1","111112":"1 1 1 1 1 2","122222":"1 2 2 2 2 2","123456":"1 2 3 4 5 6","1_2":"1 _ 2","2_1":"2 _ 1","12_33":"1 2 _ 3 3","1_23":"1 _ 2 3","1_2_3":"1 _ 2 _ 3","32_1":"3 2 _ 1","3_21":"3 _ 2 1","12_34":"1 2 _ 3 4","123_4":"1 2 3 _ 4","1_234":"1 _ 2 3 4","1_2_3_4":"1 _ 2 _ 3 _ 4","123_45":"1 2 3 _ 4 5","12_345":"1 2 _ 3 4 5","1_2345":"1 _ 2 3 4 5","1234_5":"1 2 3 4 _ 5","1_2_3_4_5":"1 _ 2 _ 3 _ 4 _ 5"}}}},"PACKAGE":{"name":"@website/coffeekraken-io","title":"Coffeekraken","version":"2.0.0-alpha.20","description":"The frontend toolkit that works for everyone. Experts, professionals and new-comers","type":"module","private":true,"scripts":{"dev":"sugard kitchen.run dev","prod":"sugard kitchen.run prod","build":"sugard kitchen.run build","static":"live-server static","static.build":"sugard static.build --clean --env production --target production","deploy":"rsync -avzh --delete --progress --stats ./static fe0mt_coffeekraken@fe0mt.ftp.infomaniak.com:~/sites/coffeekraken.io","deploy.bogdanov":"rsync -avzh --delete --progress --stats ./static fe0mt_bogdanov_ssh@fe0mt.ftp.infomaniak.com:~/sites/bogdanov.coffeekraken.io"},"repository":{"type":"git","url":"https://olivierbossel.com"},"author":"Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)","license":"MIT","dependencies":{"@coffeekraken/cli":"^2.0.0-alpha.20","@coffeekraken/s-activate-feature":"^2.0.0-alpha.20","@coffeekraken/s-appear-feature":"^2.0.0-alpha.20","@coffeekraken/s-bench":"^2.0.0-alpha.20","@coffeekraken/s-builder":"^2.0.0-alpha.20","@coffeekraken/s-carpenter":"^2.0.0-alpha.20","@coffeekraken/s-class":"^2.0.0-alpha.20","@coffeekraken/s-clipboard-copy-component":"^2.0.0-alpha.20","@coffeekraken/s-code-example-component":"^2.0.0-alpha.20","@coffeekraken/s-color":"^2.0.0-alpha.20","@coffeekraken/s-color-picker-component":"^2.0.0-alpha.20","@coffeekraken/s-component-utils":"^2.0.0-alpha.20","@coffeekraken/s-conductor":"^2.0.0-alpha.20","@coffeekraken/s-config":"^2.0.0-alpha.20","@coffeekraken/s-dashboard":"^2.0.0-alpha.20","@coffeekraken/s-datetime-picker-component":"^2.0.0-alpha.20","@coffeekraken/s-descriptor":"^2.0.0-alpha.20","@coffeekraken/s-docblock":"^2.0.0-alpha.20","@coffeekraken/s-docmap":"^2.0.0-alpha.20","@coffeekraken/s-duration":"^2.0.0-alpha.20","@coffeekraken/s-env":"^2.0.0-alpha.20","@coffeekraken/s-event-emitter":"^2.0.0-alpha.20","@coffeekraken/s-favicon-builder":"^2.0.0-alpha.20","@coffeekraken/s-feature":"^2.0.0-alpha.20","@coffeekraken/s-file":"^2.0.0-alpha.20","@coffeekraken/s-filtrable-input-component":"^2.0.0-alpha.20","@coffeekraken/s-floating-feature":"^2.0.0-alpha.20","@coffeekraken/s-form-validate-feature":"^2.0.0-alpha.20","@coffeekraken/s-front":"^2.0.0-alpha.20","@coffeekraken/s-frontend-server":"^2.0.0-alpha.20","@coffeekraken/s-frontspec":"^2.0.0-alpha.20","@coffeekraken/s-glitch-feature":"^2.0.0-alpha.20","@coffeekraken/s-glob":"^2.0.0-alpha.20","@coffeekraken/s-google-map-component":"^2.0.0-alpha.20","@coffeekraken/s-handlebars":"^2.0.0-alpha.20","@coffeekraken/s-highlight-feature":"^2.0.0-alpha.20","@coffeekraken/s-images-builder":"^2.0.0-alpha.20","@coffeekraken/s-inline-feature":"^2.0.0-alpha.20","@coffeekraken/s-interface":"^2.0.0-alpha.20","@coffeekraken/s-kitchen":"^2.0.0-alpha.20","@coffeekraken/s-lazy-feature":"^2.0.0-alpha.20","@coffeekraken/s-lit-component":"^2.0.0-alpha.20","@coffeekraken/s-log":"^2.0.0-alpha.20","@coffeekraken/s-markdown-builder":"^2.0.0-alpha.20","@coffeekraken/s-pack-essentials":"^2.0.0-alpha.20","@coffeekraken/s-page-transition-feature":"^2.0.0-alpha.20","@coffeekraken/s-panel-component":"^2.0.0-alpha.20","@coffeekraken/s-parallax-feature":"^2.0.0-alpha.20","@coffeekraken/s-postcss-sugar-plugin":"^2.0.0-alpha.20","@coffeekraken/s-process":"^2.0.0-alpha.20","@coffeekraken/s-promise":"^2.0.0-alpha.20","@coffeekraken/s-range-component":"^2.0.0-alpha.20","@coffeekraken/s-rating-component":"^2.0.0-alpha.20","@coffeekraken/s-refocus-feature":"^2.0.0-alpha.20","@coffeekraken/s-request":"^2.0.0-alpha.20","@coffeekraken/s-scroll-component":"^2.0.0-alpha.20","@coffeekraken/s-sitemap-builder":"^2.0.0-alpha.20","@coffeekraken/s-slider-component":"^2.0.0-alpha.20","@coffeekraken/s-state":"^2.0.0-alpha.20","@coffeekraken/s-static-builder":"^2.0.0-alpha.20","@coffeekraken/s-stdio":"^2.0.0-alpha.20","@coffeekraken/s-sugar-config":"^2.0.0-alpha.20","@coffeekraken/s-sugar-feature":"^2.0.0-alpha.20","@coffeekraken/s-sugar-json":"^2.0.0-alpha.20","@coffeekraken/s-theme":"^2.0.0-alpha.20","@coffeekraken/s-theme-switcher-component":"^2.0.0-alpha.20","@coffeekraken/s-timer":"^2.0.0-alpha.20","@coffeekraken/s-type":"^2.0.0-alpha.20","@coffeekraken/s-typescript-builder":"^2.0.0-alpha.20","@coffeekraken/s-url":"^2.0.0-alpha.20","@coffeekraken/s-view-renderer":"^2.0.0-alpha.20","@coffeekraken/s-vite":"^2.0.0-alpha.20","@coffeekraken/s-vite-postcss-plugin":"^2.0.0-alpha.20","@coffeekraken/s-vite-sugar-plugin":"^2.0.0-alpha.20","@coffeekraken/sugar":"^2.0.0-alpha.20","firebase":"^9.9.1","lit":"^2.2.8","lit-element":"^2.5.1","minisearch":"^3.3.0","three":"^0.143.0"},"devDependencies":{"esbuild":"^0.14.53"},"exports":{"./shared/*":{"require":"./dist/pkg/cjs/shared/*.js","import":"./dist/pkg/esm/shared/*.js"},"./node/*":{"require":"./dist/pkg/cjs/node/*.js","import":"./dist/pkg/esm/node/*.js"},"./js/*":{"require":"./dist/pkg/cjs/js/*.js","import":"./dist/pkg/esm/js/*.js"}},"homepage":"https://coffeekraken.io"}}`),
+  JSON.parse(`{"PLATFORM":"browser","ENV":"development","ENVIRONMENT":"development","SUGAR":{"config":{"datetime":{"dateFormat":"YYYY-MM-DD","timeFormat":"h:mm:ss","i18n":{"previousMonth":"Previous Month","nextMonth":"Next Month","months":["January","February","March","April","May","June","July","August","September","October","November","December"],"weekdays":["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],"weekdaysShort":["Sun","Mon","Tue","Wed","Thu","Fri","Sat"]}},"google":{"gtm":"GTM-K4LMN8Q","map":{"apiKey":"AIzaSyDzFfEzhmYXRTlONUCtMWQ88uHJhsbtXY4"}},"project":{"environments":{"dev":{"branch":"develop","urls":{"website":{"label":"Template","url":"http://localhost:3000"},"admin":{"label":"Admin","url":"http://localhost:3000/admin"}}},"staging":{"branch":"staging","urls":{"website":{"label":"Template","url":"http://staging.localhost:3000"},"admin":{"label":"Admin","url":"http://staging.localhost:3000/admin"}}},"preprod":{"branch":"preprod","urls":{"website":{"label":"Template","url":"http://preprod.localhost:3000"},"admin":{"label":"Admin","url":"http://preprod.localhost:3000/admin"}}},"prod":{"branch":"prod","urls":{"website":{"label":"Template","url":"http://prod.localhost:3000"},"admin":{"label":"Admin","url":"http://prod.localhost:3000/admin"}}}}},"serve":{"img":{"imgPath":"/dist/img"},"js":{"path":"/dist/js"},"css":{"path":"/dist/css"},"icons":{"path":"/dist/icons"},"fonts":{"path":"/dist/fonts"},"cache":{"path":"/cache"}},"dashboard":{"layout":[["s-dashboard-pages"],["s-dashboard-browserstack","s-dashboard-google","s-dashboard-web-vitals","s-dashboard-responsive"],["s-dashboard-project","s-dashboard-frontend-checker"]]},"env":{"envFromLocation":{"development":"https?://(localhost|127.0.0.1|0.0.0.0|192.168.[0-9]{1,3}.[0-9]{1,3})","staging":"https?://([a-zA-Z0-9.-]+)?staging([a-zA-Z0-9.-]+)?","production":"https?://.*"},"git":{"template":{"name":"Template","commit":{}}}},"sitemapBuilder":{"sources":{"docmap":{"active":true}}},"theme":{"theme":"default","variant":"dark","themes":{"default-light":{"defaultColor":"main","color":{"current":"hsla(212,8,50,1)","base":"hsla(212,8,50,1)","main":"hsla(212,8,50,1)","accent":"#ffbb00","complementary":"#5100ff","success":"#91ff00","warning":"#ffd500","error":"#ff003b","info":"#00ffff"},"classmap":{"enabled":true,"url":"/classmap.json"},"lod":{"enabled":true,"defaultLevel":3,"botLevel":1,"levels":{"0":{"name":"bare","speedIndex":0},"1":{"name":"bare+","speedIndex":30},"2":{"name":"low","speedIndex":40},"3":{"name":"medium","speedIndex":50},"4":{"name":"high","speedIndex":60}},"method":"file","defaultAction":">=","cssProperties":{}},"easing":{"default":"cubic-bezier(0.700, 0.000, 0.305, 0.995)"},"scroll":{"duration":300,"offset":0,"offsetX":0,"offsetY":100},"partytown":{"enabled":false,"forward":["dataLayer.push","fbq","freshpaint.addPageviewProperties","freshpaint.identify","freshpaint.track","_hsq.push","Intercom","_learnq.push","ttq.track","ttq.page","ttq.load","mixpanel.track"]},"timing":{"slow":".6s","default":".3s","fast":".1s"},"transition":{"slow":"all .6s cubic-bezier(0.700, 0.000, 0.305, 0.995)","default":"all .3s cubic-bezier(0.700, 0.000, 0.305, 0.995)","fast":"all .1s cubic-bezier(0.700, 0.000, 0.305, 0.995)"},"gradient":{"defaultModifierStart":{},"defaultModifierEnd":{"lighten":20},"defaultX":"50%","defaultY":"50%","defaultAngle":"90deg","defaultTextModifierStart":{"darken":5},"defaultTextModifierEnd":{"lighten":5},"defaultTextAngle":"90deg"},"helpers":{"states":["mounted","active","loading"],"clearfix":{"default":"overflow"},"disabled":{"opacity":0.4},"truncate":{"count":10},"order":{"count":20}},"layout":{"offset":{"top":100,"right":0,"bottom":0,"left":0},"container":{"default":"1280px","wide":"1440px","full":"none"},"grid":{"1":1,"2":2,"3":3,"4":4,"5":5,"6":6,"7":7,"8":8,"9":9,"10":10,"11":11,"12":12},"layout":{"1":"1","12":"1 2","21":"2 1","112":"1 1 2","122":"1 2 2","123":"1 2 3","211":"2 1 1","221":"2 2 1","321":"3 2 1","1112":"1 1 1 2","1222":"1 2 2 2","1234":"1 2 3 4","2221":"2 2 2 1","11112":"1 1 1 1 2","12222":"1 2 2 2 2","12345":"1 2 3 4 5","22221":"2 2 2 2 1","111112":"1 1 1 1 1 2","122222":"1 2 2 2 2 2","123456":"1 2 3 4 5 6","1_2":"1 _ 2","2_1":"2 _ 1","12_33":"1 2 _ 3 3","1_23":"1 _ 2 3","1_2_3":"1 _ 2 _ 3","32_1":"3 2 _ 1","3_21":"3 _ 2 1","12_34":"1 2 _ 3 4","123_4":"1 2 3 _ 4","1_234":"1 _ 2 3 4","1_2_3_4":"1 _ 2 _ 3 _ 4","123_45":"1 2 3 _ 4 5","12_345":"1 2 _ 3 4 5","1_2345":"1 _ 2 3 4 5","1234_5":"1 2 3 4 _ 5","1_2_3_4_5":"1 _ 2 _ 3 _ 4 _ 5"}},"ratio":{"1":1,"21-9":2.3333333333333335,"16-9":1.7777777777777777,"2-3":0.6666666666666666,"4-3":1.3333333333333333,"3-4":0.75},"scalable":{"margin":false,"padding":true,"offsize":false,"font":true},"scale":{"10":1,"11":1.1,"12":1.2,"13":1.3,"14":1.4,"15":1.5,"16":1.6,"17":1.7,"18":1.8,"19":1.9,"20":2,"default":1,"01":0.1,"02":0.2,"03":0.3,"04":0.4,"05":0.5,"06":0.6,"07":0.7,"08":0.8,"09":0.9},"opacity":{"0":0,"10":0.1,"20":0.2,"30":0.3,"40":0.4,"50":0.5,"60":0.6,"70":0.7,"80":0.8,"90":0.9,"100":1},"width":{"0":"0","10":"10%","20":"20%","30":"30%","40":"40%","50":"50%","60":"60%","70":"70%","80":"80%","90":"90%","100":"100%"},"height":{"0":"0","10":"10%","20":"20%","30":"30%","40":"40%","50":"50%","60":"60%","70":"70%","80":"80%","90":"90%","100":"100%"},"depth":{"0":"0","5":"0px 0.6px 0.4px rgba(0, 0, 0, 0.006),\\n  0px 1.3px 1px rgba(0, 0, 0, 0.006),\\n  0px 2.5px 1.5px rgba(0, 0, 0, 0.005),\\n  0px 3.5px 3.4px rgba(0, 0, 0, 0.006),\\n  0px 4.4px 4.3px rgba(0, 0, 0, 0.007),\\n  0px 10px 10px rgba(0, 0, 0, 0.01)","10":"0px 0.6px 0.4px rgba(0, 0, 0, 0.006),\\n  0px 1.3px 1px rgba(0, 0, 0, 0.008),\\n  0px 2.5px 1.9px rgba(0, 0, 0, 0.01),\\n  0px 4.5px 3.4px rgba(0, 0, 0, 0.012),\\n  0px 8.4px 6.3px rgba(0, 0, 0, 0.014),\\n  0px 20px 15px rgba(0, 0, 0, 0.02)","20":"0px 0.6px 0.4px rgba(0, 0, 0, 0.006),\\n  0px 1.3px 1px rgba(0, 0, 0, 0.008),\\n  0px 2.5px 1.9px rgba(0, 0, 0, 0.01),\\n  0px 4.5px 3.4px rgba(0, 0, 0, 0.012),\\n  0px 8.4px 6.3px rgba(0, 0, 0, 0.014),\\n  0px 20px 15px rgba(0, 0, 0, 0.02)","30":"0px 0.6px 0.4px rgba(0, 0, 0, 0.008),\\n  0px 1.3px 1px rgba(0, 0, 0, 0.012),\\n  0px 2.5px 1.9px rgba(0, 0, 0, 0.015),\\n  0px 4.5px 3.4px rgba(0, 0, 0, 0.018),\\n  0px 8.4px 6.3px rgba(0, 0, 0, 0.022),\\n  0px 20px 15px rgba(0, 0, 0, 0.03)","40":"0px 0.8px 0.6px rgba(0, 0, 0, 0.008),\\n  0px 2px 1.3px rgba(0, 0, 0, 0.012),\\n  0px 3.8px 2.5px rgba(0, 0, 0, 0.015),\\n  0px 6.7px 4.5px rgba(0, 0, 0, 0.018),\\n  0px 12.5px 8.4px rgba(0, 0, 0, 0.022),\\n  0px 30px 20px rgba(0, 0, 0, 0.03)","50":"0px 1px 0.8px rgba(0, 0, 0, 0.011),\\n  0px 2.3px 2px rgba(0, 0, 0, 0.016),\\n  0px 4.4px 3.8px rgba(0, 0, 0, 0.02),\\n  0px 7.8px 6.7px rgba(0, 0, 0, 0.024),\\n  0px 14.6px 12.5px rgba(0, 0, 0, 0.029),\\n  0px 35px 30px rgba(0, 0, 0, 0.04)","60":"0px 1px 0.7px rgba(0, 0, 0, 0.011),\\n  0px 2.3px 1.7px rgba(0, 0, 0, 0.016),\\n  0px 4.4px 3.1px rgba(0, 0, 0, 0.02),\\n  0px 7.8px 5.6px rgba(0, 0, 0, 0.024),\\n  0px 14.6px 10.4px rgba(0, 0, 0, 0.029),\\n  0px 35px 25px rgba(0, 0, 0, 0.04)","70":"0px 1.1px 0.8px rgba(0, 0, 0, 0.011),\\n  0px 2.7px 2px rgba(0, 0, 0, 0.016),\\n  0px 5px 3.8px rgba(0, 0, 0, 0.02),\\n  0px 8.9px 6.7px rgba(0, 0, 0, 0.024),\\n  0px 16.7px 12.5px rgba(0, 0, 0, 0.029),\\n  0px 40px 30px rgba(0, 0, 0, 0.04)","80":"0px 1.1px 1px rgba(0, 0, 0, 0.011),\\n  0px 2.7px 2.3px rgba(0, 0, 0, 0.016),\\n  0px 5px 4.4px rgba(0, 0, 0, 0.02),\\n  0px 8.9px 7.8px rgba(0, 0, 0, 0.024),\\n  0px 16.7px 14.6px rgba(0, 0, 0, 0.029),\\n  0px 40px 35px rgba(0, 0, 0, 0.04)","90":"0px 1.4px 1.1px rgba(0, 0, 0, 0.011),\\n  0px 3.3px 2.7px rgba(0, 0, 0, 0.016),\\n  0px 6.1px 5px rgba(0, 0, 0, 0.02),\\n  0px 10.9px 8.9px rgba(0, 0, 0, 0.024),\\n  0px 20.5px 16.7px rgba(0, 0, 0, 0.029),\\n  0px 49px 40px rgba(0, 0, 0, 0.04)","100":"0px 1.4px 1.4px rgba(0, 0, 0, 0.011),\\n  0px 3.3px 3.5px rgba(0, 0, 0, 0.016),\\n  0px 6.1px 6.5px rgba(0, 0, 0, 0.02),\\n  0px 10.9px 11.6px rgba(0, 0, 0, 0.024),\\n  0px 20.5px 21.7px rgba(0, 0, 0, 0.029),\\n  0px 49px 52px rgba(0, 0, 0, 0.04)","default":"0"},"size":{"0":0.25,"5":"0.5","10":0.65,"15":0.7,"20":0.75,"25":0.95,"30":1.1,"40":1.25,"50":1.5,"60":2,"70":2.5,"80":3,"90":4,"100":5,"default":"15px"},"font":{"family":{"default":{"fontFamily":"\\"Roboto\\"","fontWeight":400,"import":"https://fonts.googleapis.com/css2?family=Roboto&display=swap"},"title":{"fontFamily":"\\"Roboto\\"","fontWeight":500,"import":"https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap"},"quote":{"fontFamily":"\\"Palatino, Times, Georgia, serif\\"","fontWeight":"normal","fontStyle":"normal","fontDisplay":"auto","capHeight":0.65},"code":{"fontFamily":"Menlo, Monaco, Consolas, Courier New, monospace","fontWeight":"normal","fontStyle":"normal","fontDisplay":"auto","capHeight":0.65}},"size":{"0":0,"5":"0.5","10":0.65,"15":0.7,"20":0.75,"25":0.95,"30":1.1,"40":1.25,"50":1.5,"60":2,"70":2.5,"80":3,"90":4,"100":5,"default":"15px"}},"border":{"width":{"0":0,"10":1,"20":2,"30":4,"40":6,"50":8,"60":12,"70":16,"80":20,"90":24,"100":30,"default":"1px"},"radius":{"0":0,"10":0.8,"20":1.6,"30":2.4,"40":3.2,"50":4,"60":5.2,"70":6.4,"80":8,"90":10,"100":12,"default":"5px"}},"space":{"0":0,"10":0.375,"20":0.75,"30":1.5,"40":2.25,"50":3.25,"60":4.25,"70":5.5,"80":7,"90":9,"100":11,"default":"1rem"},"margin":{"0":0,"10":0.375,"20":0.75,"30":1.5,"40":2.25,"50":3.25,"60":4.25,"70":5.5,"80":7,"90":9,"100":11,"default":"1rem"},"padding":{"0":0,"10":0.375,"20":0.75,"30":1.5,"40":2.25,"50":3.25,"60":4.25,"70":5.5,"80":7,"90":9,"100":11,"default":"1rem"},"offsize":{"0":0,"10":0.375,"20":0.75,"30":1.5,"40":2.25,"50":3.25,"60":4.25,"70":5.5,"80":7,"90":9,"100":11,"default":"1rem"},"media":{"defaultAction":"<=","defaultMedia":"desktop","defaultQuery":"screen","queries":{"mobile":{"minWidth":0,"maxWidth":639},"tablet":{"minWidth":640,"maxWidth":1279},"desktop":{"minWidth":1280,"maxWidth":2047},"wide":{"minWidth":2048,"maxWidth":null}}},"ui":{"default":{"paddingInline":1.5,"paddingBlock":0.75,"borderRadius":1,"borderWidth":"1px","transition":"all .1s cubic-bezier(0.700, 0.000, 0.305, 0.995)","defaultLnf":"solid","depth":"0","outline":true,"spacing":1.5,"rhythmVertical":{"margin-bottom":60}},"form":{"paddingInline":1,"paddingBlock":0.75,"borderRadius":1,"borderWidth":"1px","transition":"all .1s cubic-bezier(0.700, 0.000, 0.305, 0.995)","outline":true,"depth":"0","rhythmVertical":{"margin-bottom":40}},"outline":{"active":true,"borderWidth":"10px","borderRadius":1,"transition":"all .2s ease-out"},"scrollbar":{"size":"2px","color":"accent"},"label":{"defaultLnf":"inline"},"dropdown":{"paddingInline":0.75,"paddingBlock":0.75,"itemPaddingInline":1.5,"itemPaddingBlock":0.75},"list":{"defaultLnf":"dl","bulletChar":"-"},"fsTree":{"bulletChar":"\u25CF"},"tooltip":{"defaultPosition":"top","arrowSize":"15px"},"loader":{"duration":"1s","easing":"linear"}},"typo":{"h1":{"label":"H1","group":"style","style":{"display":"block","fontFamily":"title","fontSize":80,"lineHeight":1.3,"maxWidth":"55ch","mobile":{"fontSize":70}},"rhythmVertical":{"marginBottom":50}},"h2":{"label":"H2","group":"style","style":{"display":"block","fontFamily":"title","fontSize":70,"lineHeight":1.3,"maxWidth":"55ch","mobile":{"fontSize":60}},"rhythmVertical":{"marginBottom":50}},"h3":{"label":"H3","group":"style","style":{"display":"block","fontFamily":"title","fontSize":60,"lineHeight":1.3,"maxWidth":"55ch","mobile":{"fontSize":50}},"rhythmVertical":{"marginBottom":50}},"h4":{"label":"H4","group":"style","style":{"display":"block","fontFamily":"title","fontSize":50,"lineHeight":1.3,"maxWidth":"55ch","mobile":{"fontSize":40}},"rhythmVertical":{"marginBottom":50}},"h5":{"label":"H5","group":"style","style":{"display":"block","fontFamily":"title","fontSize":40,"lineHeight":1.3,"maxWidth":"55ch","mobile":{"fontSize":30}},"rhythmVertical":{"marginBottom":40}},"h6":{"label":"H6","group":"style","style":{"display":"block","fontFamily":"title","fontSize":30,"lineHeight":1.3,"maxWidth":"55ch","mobile":{"fontSize":30}},"hythmVertical":{"marginBottom":40}},"p":{"label":"Paragraph","group":"style","default":true,"style":{"display":"block","fontFamily":"default","fontSize":30,"lineHeight":1.8,"maxWidth":"55ch"},"rhythmVertical":{"marginBottom":40}},"lead":{"label":"Lead paragraph","group":"style","style":{"display":"block","fontFamily":"default","fontSize":40,"lineHeight":1.6,"maxWidth":"55ch","mobile":{"fontSize":40}},"rhythmVertical":{"marginBottom":40}},"hr":{"label":"--","group":"block","button":{"label":"--"},"style":{"display":"block","color":"hsla(212,8,50,1)","opacity":0.2},"rhythmVertical":{"marginBottom":50}},"pre:not([class])":{"label":"Pre","group":"text","style":{"display":"block","fontFamily":"code","color":["main","text"],"backgroundColor":["main","surface"],"lineHeight":1.5,"paddingInline":1.5,"paddingBlock":0.75,"borderRadius":1,"depth":"0"},"rhythmVertical":{"marginBottom":50}},"code:not(pre > code)":{"label":"Code","group":"text","button":{"label":"</>"},"style":{"display":"inline-block","fontFamily":"code","color":["main","text"],"lineHeight":1.1,"backgroundColor":["accent","surface"],"borderRadius":10,"paddingInline":10,"paddingBlock":0}},"blockquote":{"label":"Blockquote","group":"block","button":{"label":"<svg viewBox=\\"0 0 20 20\\"><path d=\\"M3 10.423a6.5 6.5 0 0 1 6.056-6.408l.038.67C6.448 5.423 5.354 7.663 5.22 10H9c.552 0 .5.432.5.986v4.511c0 .554-.448.503-1 .503h-5c-.552 0-.5-.449-.5-1.003v-4.574zm8 0a6.5 6.5 0 0 1 6.056-6.408l.038.67c-2.646.739-3.74 2.979-3.873 5.315H17c.552 0 .5.432.5.986v4.511c0 .554-.448.503-1 .503h-5c-.552 0-.5-.449-.5-1.003v-4.574z\\"></path></svg>"},"style":{"display":"block","fontFamily":"quote"},"editor":{"style":{"paddingInlineStart":1.5,"borderLeft":"1px solid #000"}},"rhythmVertical":{"marginBottom":50}},"a":{"label":"Link","group":"text","button":{"label":"<svg viewBox=\\"0 0 20 20\\"><path d=\\"m11.077 15 .991-1.416a.75.75 0 1 1 1.229.86l-1.148 1.64a.748.748 0 0 1-.217.206 5.251 5.251 0 0 1-8.503-5.955.741.741 0 0 1 .12-.274l1.147-1.639a.75.75 0 1 1 1.228.86L4.933 10.7l.006.003a3.75 3.75 0 0 0 6.132 4.294l.006.004zm5.494-5.335a.748.748 0 0 1-.12.274l-1.147 1.639a.75.75 0 1 1-1.228-.86l.86-1.23a3.75 3.75 0 0 0-6.144-4.301l-.86 1.229a.75.75 0 0 1-1.229-.86l1.148-1.64a.748.748 0 0 1 .217-.206 5.251 5.251 0 0 1 8.503 5.955zm-4.563-2.532a.75.75 0 0 1 .184 1.045l-3.155 4.505a.75.75 0 1 1-1.229-.86l3.155-4.506a.75.75 0 0 1 1.045-.184z\\"></path></svg>"},"style":{"color":"accent","textDecoration":"underline"}},"quote":{"label":"Quote","group":"text","button":{"label":"<svg viewBox=\\"0 0 20 20\\"><path d=\\"M3 10.423a6.5 6.5 0 0 1 6.056-6.408l.038.67C6.448 5.423 5.354 7.663 5.22 10H9c.552 0 .5.432.5.986v4.511c0 .554-.448.503-1 .503h-5c-.552 0-.5-.449-.5-1.003v-4.574zm8 0a6.5 6.5 0 0 1 6.056-6.408l.038.67c-2.646.739-3.74 2.979-3.873 5.315H17c.552 0 .5.432.5.986v4.511c0 .554-.448.503-1 .503h-5c-.552 0-.5-.449-.5-1.003v-4.574z\\"></path></svg>"},"style":{"fontFamily":"quote"},"rhythmVertical":{"marginBottom":50}},"bold":{"label":"Bold","group":"text","style":{"fontWeight":"bold"},"button":{"label":"B","style":{"fontWeight":"bolder"}}},"italic":{"label":"Italic","group":"text","style":{"fontStyle":"italic"},"button":{"label":"I","style":{"fontStyle":"italic"}}},"large":{"label":"Large","group":"text","style":{"fontSize":"1.1em"},"button":{"label":"A","style":{"fontSize":"1.01em"}}},"larger":{"label":"Larger","group":"text","style":{"fontSize":"1.2em"},"button":{"label":"A","style":{"fontSize":"1.02em"}}},"largest":{"label":"Largest","group":"text","style":{"fontSize":"1.3em"},"button":{"label":"A","style":{"fontSize":"1.03em"}}},"small":{"label":"Small","group":"text","style":{"fontSize":"0.9em"},"button":{"label":"A","style":{"fontSize":"0.99em"}}},"smaller":{"label":"Smaller","group":"text","style":{"fontSize":"0.8em"},"button":{"label":"A","style":{"fontSize":"0.98em"}}},"smallest":{"label":"Smallest","group":"text","style":{"fontSize":"0.7em"},"button":{"label":"A","style":{"fontSize":"0.97em"}}},"mark":{"label":"Mark","group":"text","button":{"label":"M"},"style":{"backgroundColor":"#ffbb00"}},"del":{"label":"Deleted","group":"text","style":{"textDecoration":"line-through"},"button":{"label":"D","style":{"textDecoration":"line-through"}}},"ins":{"label":"Inserted","group":"text","style":{"textDecoration":"underline"},"button":{"label":"U","style":{"textDecoration":"underline"}}},"sub":{"label":"Subscript","group":"text","style":{"verticalAlign":"sub","fontSize":"0.6em"},"button":{"label":"Sub","style":{"verticalAlign":"sub","fontSize":"0.6em"}}},"sup":{"label":"Superscript","group":"text","style":{"verticalAlign":"sup","fontSize":"0.6em"},"button":{"label":"Sup","style":{"verticalAlign":"sup","fontSize":"0.6em"}}},"base":{"label":"Base","group":"color","type":"color","style":{"color":"hsla(212,8,50,1)"}},"baseGradient":{"label":"Base gradient","group":"color","type":"color","style":{"backgroundSize":"100%","-webkitBackgroundClip":"text","-mozBackgroundClip":"text","-webkitTextFillColor":"transparent","-mozTextFillColor":"transparent","backgroundImage":"linear-gradient(90deg, hsla(212,8,50,1) 0%, #838c95 100%)"}},"main":{"label":"Main","group":"color","type":"color","style":{"color":"hsla(212,8,50,1)"}},"mainGradient":{"label":"Main gradient","group":"color","type":"color","style":{"backgroundSize":"100%","-webkitBackgroundClip":"text","-mozBackgroundClip":"text","-webkitTextFillColor":"transparent","-mozTextFillColor":"transparent","backgroundImage":"linear-gradient(90deg, hsla(212,8,50,1) 0%, #838c95 100%)"}},"accent":{"label":"Accent","group":"color","type":"color","style":{"color":"#ffbb00"}},"accentGradient":{"label":"Accent gradient","group":"color","type":"color","style":{"backgroundSize":"100%","-webkitBackgroundClip":"text","-mozBackgroundClip":"text","-webkitTextFillColor":"transparent","-mozTextFillColor":"transparent","backgroundImage":"linear-gradient(90deg, #ffbb00 0%, #ffc21a 100%)"}},"complementary":{"label":"Complementary","group":"color","type":"color","style":{"color":"#5100ff"}},"complementaryGradient":{"label":"Complementary gradient","group":"color","type":"color","style":{"backgroundSize":"100%","-webkitBackgroundClip":"text","-mozBackgroundClip":"text","-webkitTextFillColor":"transparent","-mozTextFillColor":"transparent","backgroundImage":"linear-gradient(90deg, #5100ff 0%, #621aff 100%)"}},"success":{"label":"Success","group":"color","type":"color","style":{"color":"#91ff00"}},"successGradient":{"label":"Success gradient","group":"color","type":"color","style":{"backgroundSize":"100%","-webkitBackgroundClip":"text","-mozBackgroundClip":"text","-webkitTextFillColor":"transparent","-mozTextFillColor":"transparent","backgroundImage":"linear-gradient(90deg, #91ff00 0%, #9cff1a 100%)"}},"warning":{"label":"Warning","group":"color","type":"color","style":{"color":"#ffd500"}},"warningGradient":{"label":"Warning gradient","group":"color","type":"color","style":{"backgroundSize":"100%","-webkitBackgroundClip":"text","-mozBackgroundClip":"text","-webkitTextFillColor":"transparent","-mozTextFillColor":"transparent","backgroundImage":"linear-gradient(90deg, #ffd500 0%, #ffd91a 100%)"}},"error":{"label":"Error","group":"color","type":"color","style":{"color":"#ff003b"}},"errorGradient":{"label":"Error gradient","group":"color","type":"color","style":{"backgroundSize":"100%","-webkitBackgroundClip":"text","-mozBackgroundClip":"text","-webkitTextFillColor":"transparent","-mozTextFillColor":"transparent","backgroundImage":"linear-gradient(90deg, #ff003b 0%, #ff1a4f 100%)"}},"info":{"label":"Info","group":"color","type":"color","style":{"color":"#00ffff"}},"infoGradient":{"label":"Info gradient","group":"color","type":"color","style":{"backgroundSize":"100%","-webkitBackgroundClip":"text","-mozBackgroundClip":"text","-webkitTextFillColor":"transparent","-mozTextFillColor":"transparent","backgroundImage":"linear-gradient(90deg, #00ffff 0%, #1affff 100%)"}}},"metas":{"title":"Default light","description":"Nice and elegant light theme"},"colorSchema":{"text":{"darken":0,"color":{"base":{"darken":5},"main":{"darken":10},"complementary":{"lighten":15},"info":{"darken":10}}},"placeholder":{"darken":0,"alpha":0.4},"foreground":{"lighten":50},"background":{"lighten":50,"color":{"surface":{"darken":20}}},"backgroundForeground":{"darken":45},"surface":{"lighten":40,"color":{"base":{"lighten":49},"main":{"lighten":49}}},"surfaceForeground":{"darken":45},"ui":{"lighten":49},"uiForeground":{"darken":15},"border":{"alpha":0.2},"gradientStart":{"lighten":0},"gradientEnd":{"lighten":20}}},"default-dark":{"defaultColor":"main","color":{"current":"hsla(212,8,50,1)","base":"hsla(212,8,50,1)","main":"hsla(212,8,50,1)","accent":"#ffbb00","complementary":"#5100ff","success":"#91ff00","warning":"#ffd500","error":"#ff003b","info":"#00ffff"},"classmap":{"enabled":true,"url":"/classmap.json"},"lod":{"enabled":true,"defaultLevel":3,"botLevel":1,"levels":{"0":{"name":"bare","speedIndex":0},"1":{"name":"bare+","speedIndex":30},"2":{"name":"low","speedIndex":40},"3":{"name":"medium","speedIndex":50},"4":{"name":"high","speedIndex":60}},"method":"file","defaultAction":">=","cssProperties":{}},"easing":{"default":"cubic-bezier(0.700, 0.000, 0.305, 0.995)"},"scroll":{"duration":300,"offset":0,"offsetX":0,"offsetY":100},"partytown":{"enabled":false,"forward":["dataLayer.push","fbq","freshpaint.addPageviewProperties","freshpaint.identify","freshpaint.track","_hsq.push","Intercom","_learnq.push","ttq.track","ttq.page","ttq.load","mixpanel.track"]},"timing":{"slow":".6s","default":".3s","fast":".1s"},"transition":{"slow":"all .6s cubic-bezier(0.700, 0.000, 0.305, 0.995)","default":"all .3s cubic-bezier(0.700, 0.000, 0.305, 0.995)","fast":"all .1s cubic-bezier(0.700, 0.000, 0.305, 0.995)"},"gradient":{"defaultModifierStart":{},"defaultModifierEnd":{"lighten":20},"defaultX":"50%","defaultY":"50%","defaultAngle":"90deg","defaultTextModifierStart":{"darken":5},"defaultTextModifierEnd":{"lighten":5},"defaultTextAngle":"90deg"},"helpers":{"states":["mounted","active","loading"],"clearfix":{"default":"overflow"},"disabled":{"opacity":0.4},"truncate":{"count":10},"order":{"count":20}},"layout":{"offset":{"top":100,"right":0,"bottom":0,"left":0},"container":{"default":"1280px","wide":"1440px","full":"none"},"grid":{"1":1,"2":2,"3":3,"4":4,"5":5,"6":6,"7":7,"8":8,"9":9,"10":10,"11":11,"12":12},"layout":{"1":"1","12":"1 2","21":"2 1","112":"1 1 2","122":"1 2 2","123":"1 2 3","211":"2 1 1","221":"2 2 1","321":"3 2 1","1112":"1 1 1 2","1222":"1 2 2 2","1234":"1 2 3 4","2221":"2 2 2 1","11112":"1 1 1 1 2","12222":"1 2 2 2 2","12345":"1 2 3 4 5","22221":"2 2 2 2 1","111112":"1 1 1 1 1 2","122222":"1 2 2 2 2 2","123456":"1 2 3 4 5 6","1_2":"1 _ 2","2_1":"2 _ 1","12_33":"1 2 _ 3 3","1_23":"1 _ 2 3","1_2_3":"1 _ 2 _ 3","32_1":"3 2 _ 1","3_21":"3 _ 2 1","12_34":"1 2 _ 3 4","123_4":"1 2 3 _ 4","1_234":"1 _ 2 3 4","1_2_3_4":"1 _ 2 _ 3 _ 4","123_45":"1 2 3 _ 4 5","12_345":"1 2 _ 3 4 5","1_2345":"1 _ 2 3 4 5","1234_5":"1 2 3 4 _ 5","1_2_3_4_5":"1 _ 2 _ 3 _ 4 _ 5"}},"ratio":{"1":1,"21-9":2.3333333333333335,"16-9":1.7777777777777777,"2-3":0.6666666666666666,"4-3":1.3333333333333333,"3-4":0.75},"scalable":{"margin":false,"padding":true,"offsize":false,"font":true},"scale":{"10":1,"11":1.1,"12":1.2,"13":1.3,"14":1.4,"15":1.5,"16":1.6,"17":1.7,"18":1.8,"19":1.9,"20":2,"default":1,"01":0.1,"02":0.2,"03":0.3,"04":0.4,"05":0.5,"06":0.6,"07":0.7,"08":0.8,"09":0.9},"opacity":{"0":0,"10":0.1,"20":0.2,"30":0.3,"40":0.4,"50":0.5,"60":0.6,"70":0.7,"80":0.8,"90":0.9,"100":1},"width":{"0":"0","10":"10%","20":"20%","30":"30%","40":"40%","50":"50%","60":"60%","70":"70%","80":"80%","90":"90%","100":"100%"},"height":{"0":"0","10":"10%","20":"20%","30":"30%","40":"40%","50":"50%","60":"60%","70":"70%","80":"80%","90":"90%","100":"100%"},"depth":{"0":"0","5":"0px 0.6px 0.4px rgba(0, 0, 0, 0.006),\\n  0px 1.3px 1px rgba(0, 0, 0, 0.006),\\n  0px 2.5px 1.5px rgba(0, 0, 0, 0.005),\\n  0px 3.5px 3.4px rgba(0, 0, 0, 0.006),\\n  0px 4.4px 4.3px rgba(0, 0, 0, 0.007),\\n  0px 10px 10px rgba(0, 0, 0, 0.01)","10":"0px 0.6px 0.4px rgba(0, 0, 0, 0.006),\\n  0px 1.3px 1px rgba(0, 0, 0, 0.008),\\n  0px 2.5px 1.9px rgba(0, 0, 0, 0.01),\\n  0px 4.5px 3.4px rgba(0, 0, 0, 0.012),\\n  0px 8.4px 6.3px rgba(0, 0, 0, 0.014),\\n  0px 20px 15px rgba(0, 0, 0, 0.02)","20":"0px 0.6px 0.4px rgba(0, 0, 0, 0.006),\\n  0px 1.3px 1px rgba(0, 0, 0, 0.008),\\n  0px 2.5px 1.9px rgba(0, 0, 0, 0.01),\\n  0px 4.5px 3.4px rgba(0, 0, 0, 0.012),\\n  0px 8.4px 6.3px rgba(0, 0, 0, 0.014),\\n  0px 20px 15px rgba(0, 0, 0, 0.02)","30":"0px 0.6px 0.4px rgba(0, 0, 0, 0.008),\\n  0px 1.3px 1px rgba(0, 0, 0, 0.012),\\n  0px 2.5px 1.9px rgba(0, 0, 0, 0.015),\\n  0px 4.5px 3.4px rgba(0, 0, 0, 0.018),\\n  0px 8.4px 6.3px rgba(0, 0, 0, 0.022),\\n  0px 20px 15px rgba(0, 0, 0, 0.03)","40":"0px 0.8px 0.6px rgba(0, 0, 0, 0.008),\\n  0px 2px 1.3px rgba(0, 0, 0, 0.012),\\n  0px 3.8px 2.5px rgba(0, 0, 0, 0.015),\\n  0px 6.7px 4.5px rgba(0, 0, 0, 0.018),\\n  0px 12.5px 8.4px rgba(0, 0, 0, 0.022),\\n  0px 30px 20px rgba(0, 0, 0, 0.03)","50":"0px 1px 0.8px rgba(0, 0, 0, 0.011),\\n  0px 2.3px 2px rgba(0, 0, 0, 0.016),\\n  0px 4.4px 3.8px rgba(0, 0, 0, 0.02),\\n  0px 7.8px 6.7px rgba(0, 0, 0, 0.024),\\n  0px 14.6px 12.5px rgba(0, 0, 0, 0.029),\\n  0px 35px 30px rgba(0, 0, 0, 0.04)","60":"0px 1px 0.7px rgba(0, 0, 0, 0.011),\\n  0px 2.3px 1.7px rgba(0, 0, 0, 0.016),\\n  0px 4.4px 3.1px rgba(0, 0, 0, 0.02),\\n  0px 7.8px 5.6px rgba(0, 0, 0, 0.024),\\n  0px 14.6px 10.4px rgba(0, 0, 0, 0.029),\\n  0px 35px 25px rgba(0, 0, 0, 0.04)","70":"0px 1.1px 0.8px rgba(0, 0, 0, 0.011),\\n  0px 2.7px 2px rgba(0, 0, 0, 0.016),\\n  0px 5px 3.8px rgba(0, 0, 0, 0.02),\\n  0px 8.9px 6.7px rgba(0, 0, 0, 0.024),\\n  0px 16.7px 12.5px rgba(0, 0, 0, 0.029),\\n  0px 40px 30px rgba(0, 0, 0, 0.04)","80":"0px 1.1px 1px rgba(0, 0, 0, 0.011),\\n  0px 2.7px 2.3px rgba(0, 0, 0, 0.016),\\n  0px 5px 4.4px rgba(0, 0, 0, 0.02),\\n  0px 8.9px 7.8px rgba(0, 0, 0, 0.024),\\n  0px 16.7px 14.6px rgba(0, 0, 0, 0.029),\\n  0px 40px 35px rgba(0, 0, 0, 0.04)","90":"0px 1.4px 1.1px rgba(0, 0, 0, 0.011),\\n  0px 3.3px 2.7px rgba(0, 0, 0, 0.016),\\n  0px 6.1px 5px rgba(0, 0, 0, 0.02),\\n  0px 10.9px 8.9px rgba(0, 0, 0, 0.024),\\n  0px 20.5px 16.7px rgba(0, 0, 0, 0.029),\\n  0px 49px 40px rgba(0, 0, 0, 0.04)","100":"0px 1.4px 1.4px rgba(0, 0, 0, 0.011),\\n  0px 3.3px 3.5px rgba(0, 0, 0, 0.016),\\n  0px 6.1px 6.5px rgba(0, 0, 0, 0.02),\\n  0px 10.9px 11.6px rgba(0, 0, 0, 0.024),\\n  0px 20.5px 21.7px rgba(0, 0, 0, 0.029),\\n  0px 49px 52px rgba(0, 0, 0, 0.04)","default":"0"},"size":{"0":0.25,"5":"0.5","10":0.65,"15":0.7,"20":0.75,"25":0.95,"30":1.1,"40":1.25,"50":1.5,"60":2,"70":2.5,"80":3,"90":4,"100":5,"default":"15px"},"font":{"family":{"default":{"fontFamily":"\\"Roboto\\"","fontWeight":400,"import":"https://fonts.googleapis.com/css2?family=Roboto&display=swap"},"title":{"fontFamily":"\\"Roboto\\"","fontWeight":500,"import":"https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap"},"quote":{"fontFamily":"\\"Palatino, Times, Georgia, serif\\"","fontWeight":"normal","fontStyle":"normal","fontDisplay":"auto","capHeight":0.65},"code":{"fontFamily":"Menlo, Monaco, Consolas, Courier New, monospace","fontWeight":"normal","fontStyle":"normal","fontDisplay":"auto","capHeight":0.65}},"size":{"0":0,"5":"0.5","10":0.65,"15":0.7,"20":0.75,"25":0.95,"30":1.1,"40":1.25,"50":1.5,"60":2,"70":2.5,"80":3,"90":4,"100":5,"default":"15px"}},"border":{"width":{"0":0,"10":1,"20":2,"30":4,"40":6,"50":8,"60":12,"70":16,"80":20,"90":24,"100":30,"default":"1px"},"radius":{"0":0,"10":0.8,"20":1.6,"30":2.4,"40":3.2,"50":4,"60":5.2,"70":6.4,"80":8,"90":10,"100":12,"default":"5px"}},"space":{"0":0,"10":0.375,"20":0.75,"30":1.5,"40":2.25,"50":3.25,"60":4.25,"70":5.5,"80":7,"90":9,"100":11,"default":"1rem"},"margin":{"0":0,"10":0.375,"20":0.75,"30":1.5,"40":2.25,"50":3.25,"60":4.25,"70":5.5,"80":7,"90":9,"100":11,"default":"1rem"},"padding":{"0":0,"10":0.375,"20":0.75,"30":1.5,"40":2.25,"50":3.25,"60":4.25,"70":5.5,"80":7,"90":9,"100":11,"default":"1rem"},"offsize":{"0":0,"10":0.375,"20":0.75,"30":1.5,"40":2.25,"50":3.25,"60":4.25,"70":5.5,"80":7,"90":9,"100":11,"default":"1rem"},"media":{"defaultAction":"<=","defaultMedia":"desktop","defaultQuery":"screen","queries":{"mobile":{"minWidth":0,"maxWidth":639},"tablet":{"minWidth":640,"maxWidth":1279},"desktop":{"minWidth":1280,"maxWidth":2047},"wide":{"minWidth":2048,"maxWidth":null}}},"ui":{"default":{"paddingInline":1.5,"paddingBlock":0.75,"borderRadius":1,"borderWidth":"1px","transition":"all .1s cubic-bezier(0.700, 0.000, 0.305, 0.995)","defaultLnf":"solid","depth":"0","outline":true,"spacing":1.5,"rhythmVertical":{"margin-bottom":60}},"form":{"paddingInline":1,"paddingBlock":0.75,"borderRadius":1,"borderWidth":"1px","transition":"all .1s cubic-bezier(0.700, 0.000, 0.305, 0.995)","outline":true,"depth":"0","rhythmVertical":{"margin-bottom":40}},"outline":{"active":true,"borderWidth":"10px","borderRadius":1,"transition":"all .2s ease-out"},"scrollbar":{"size":"2px","color":"accent"},"label":{"defaultLnf":"inline"},"dropdown":{"paddingInline":0.75,"paddingBlock":0.75,"itemPaddingInline":1.5,"itemPaddingBlock":0.75},"list":{"defaultLnf":"dl","bulletChar":"-"},"fsTree":{"bulletChar":"\u25CF"},"tooltip":{"defaultPosition":"top","arrowSize":"15px"},"loader":{"duration":"1s","easing":"linear"}},"typo":{"h1":{"label":"H1","group":"style","style":{"display":"block","fontFamily":"title","fontSize":80,"lineHeight":1.3,"maxWidth":"55ch","mobile":{"fontSize":70}},"rhythmVertical":{"marginBottom":50}},"h2":{"label":"H2","group":"style","style":{"display":"block","fontFamily":"title","fontSize":70,"lineHeight":1.3,"maxWidth":"55ch","mobile":{"fontSize":60}},"rhythmVertical":{"marginBottom":50}},"h3":{"label":"H3","group":"style","style":{"display":"block","fontFamily":"title","fontSize":60,"lineHeight":1.3,"maxWidth":"55ch","mobile":{"fontSize":50}},"rhythmVertical":{"marginBottom":50}},"h4":{"label":"H4","group":"style","style":{"display":"block","fontFamily":"title","fontSize":50,"lineHeight":1.3,"maxWidth":"55ch","mobile":{"fontSize":40}},"rhythmVertical":{"marginBottom":50}},"h5":{"label":"H5","group":"style","style":{"display":"block","fontFamily":"title","fontSize":40,"lineHeight":1.3,"maxWidth":"55ch","mobile":{"fontSize":30}},"rhythmVertical":{"marginBottom":40}},"h6":{"label":"H6","group":"style","style":{"display":"block","fontFamily":"title","fontSize":30,"lineHeight":1.3,"maxWidth":"55ch","mobile":{"fontSize":30}},"hythmVertical":{"marginBottom":40}},"p":{"label":"Paragraph","group":"style","default":true,"style":{"display":"block","fontFamily":"default","fontSize":30,"lineHeight":1.8,"maxWidth":"55ch"},"rhythmVertical":{"marginBottom":40}},"lead":{"label":"Lead paragraph","group":"style","style":{"display":"block","fontFamily":"default","fontSize":40,"lineHeight":1.6,"maxWidth":"55ch","mobile":{"fontSize":40}},"rhythmVertical":{"marginBottom":40}},"hr":{"label":"--","group":"block","button":{"label":"--"},"style":{"display":"block","color":"hsla(212,8,50,1)","opacity":0.2},"rhythmVertical":{"marginBottom":50}},"pre:not([class])":{"label":"Pre","group":"text","style":{"display":"block","fontFamily":"code","color":["main","text"],"backgroundColor":["main","surface"],"lineHeight":1.5,"paddingInline":1.5,"paddingBlock":0.75,"borderRadius":1,"depth":"0"},"rhythmVertical":{"marginBottom":50}},"code:not(pre > code)":{"label":"Code","group":"text","button":{"label":"</>"},"style":{"display":"inline-block","fontFamily":"code","color":["main","text"],"lineHeight":1.1,"backgroundColor":["accent","surface"],"borderRadius":10,"paddingInline":10,"paddingBlock":0}},"blockquote":{"label":"Blockquote","group":"block","button":{"label":"<svg viewBox=\\"0 0 20 20\\"><path d=\\"M3 10.423a6.5 6.5 0 0 1 6.056-6.408l.038.67C6.448 5.423 5.354 7.663 5.22 10H9c.552 0 .5.432.5.986v4.511c0 .554-.448.503-1 .503h-5c-.552 0-.5-.449-.5-1.003v-4.574zm8 0a6.5 6.5 0 0 1 6.056-6.408l.038.67c-2.646.739-3.74 2.979-3.873 5.315H17c.552 0 .5.432.5.986v4.511c0 .554-.448.503-1 .503h-5c-.552 0-.5-.449-.5-1.003v-4.574z\\"></path></svg>"},"style":{"display":"block","fontFamily":"quote"},"editor":{"style":{"paddingInlineStart":1.5,"borderLeft":"1px solid #000"}},"rhythmVertical":{"marginBottom":50}},"a":{"label":"Link","group":"text","button":{"label":"<svg viewBox=\\"0 0 20 20\\"><path d=\\"m11.077 15 .991-1.416a.75.75 0 1 1 1.229.86l-1.148 1.64a.748.748 0 0 1-.217.206 5.251 5.251 0 0 1-8.503-5.955.741.741 0 0 1 .12-.274l1.147-1.639a.75.75 0 1 1 1.228.86L4.933 10.7l.006.003a3.75 3.75 0 0 0 6.132 4.294l.006.004zm5.494-5.335a.748.748 0 0 1-.12.274l-1.147 1.639a.75.75 0 1 1-1.228-.86l.86-1.23a3.75 3.75 0 0 0-6.144-4.301l-.86 1.229a.75.75 0 0 1-1.229-.86l1.148-1.64a.748.748 0 0 1 .217-.206 5.251 5.251 0 0 1 8.503 5.955zm-4.563-2.532a.75.75 0 0 1 .184 1.045l-3.155 4.505a.75.75 0 1 1-1.229-.86l3.155-4.506a.75.75 0 0 1 1.045-.184z\\"></path></svg>"},"style":{"color":"accent","textDecoration":"underline"}},"quote":{"label":"Quote","group":"text","button":{"label":"<svg viewBox=\\"0 0 20 20\\"><path d=\\"M3 10.423a6.5 6.5 0 0 1 6.056-6.408l.038.67C6.448 5.423 5.354 7.663 5.22 10H9c.552 0 .5.432.5.986v4.511c0 .554-.448.503-1 .503h-5c-.552 0-.5-.449-.5-1.003v-4.574zm8 0a6.5 6.5 0 0 1 6.056-6.408l.038.67c-2.646.739-3.74 2.979-3.873 5.315H17c.552 0 .5.432.5.986v4.511c0 .554-.448.503-1 .503h-5c-.552 0-.5-.449-.5-1.003v-4.574z\\"></path></svg>"},"style":{"fontFamily":"quote"},"rhythmVertical":{"marginBottom":50}},"bold":{"label":"Bold","group":"text","style":{"fontWeight":"bold"},"button":{"label":"B","style":{"fontWeight":"bolder"}}},"italic":{"label":"Italic","group":"text","style":{"fontStyle":"italic"},"button":{"label":"I","style":{"fontStyle":"italic"}}},"large":{"label":"Large","group":"text","style":{"fontSize":"1.1em"},"button":{"label":"A","style":{"fontSize":"1.01em"}}},"larger":{"label":"Larger","group":"text","style":{"fontSize":"1.2em"},"button":{"label":"A","style":{"fontSize":"1.02em"}}},"largest":{"label":"Largest","group":"text","style":{"fontSize":"1.3em"},"button":{"label":"A","style":{"fontSize":"1.03em"}}},"small":{"label":"Small","group":"text","style":{"fontSize":"0.9em"},"button":{"label":"A","style":{"fontSize":"0.99em"}}},"smaller":{"label":"Smaller","group":"text","style":{"fontSize":"0.8em"},"button":{"label":"A","style":{"fontSize":"0.98em"}}},"smallest":{"label":"Smallest","group":"text","style":{"fontSize":"0.7em"},"button":{"label":"A","style":{"fontSize":"0.97em"}}},"mark":{"label":"Mark","group":"text","button":{"label":"M"},"style":{"backgroundColor":"#ffbb00"}},"del":{"label":"Deleted","group":"text","style":{"textDecoration":"line-through"},"button":{"label":"D","style":{"textDecoration":"line-through"}}},"ins":{"label":"Inserted","group":"text","style":{"textDecoration":"underline"},"button":{"label":"U","style":{"textDecoration":"underline"}}},"sub":{"label":"Subscript","group":"text","style":{"verticalAlign":"sub","fontSize":"0.6em"},"button":{"label":"Sub","style":{"verticalAlign":"sub","fontSize":"0.6em"}}},"sup":{"label":"Superscript","group":"text","style":{"verticalAlign":"sup","fontSize":"0.6em"},"button":{"label":"Sup","style":{"verticalAlign":"sup","fontSize":"0.6em"}}},"base":{"label":"Base","group":"color","type":"color","style":{"color":"hsla(212,8,50,1)"}},"baseGradient":{"label":"Base gradient","group":"color","type":"color","style":{"backgroundSize":"100%","-webkitBackgroundClip":"text","-mozBackgroundClip":"text","-webkitTextFillColor":"transparent","-mozTextFillColor":"transparent","backgroundImage":"linear-gradient(90deg, hsla(212,8,50,1) 0%, #838c95 100%)"}},"main":{"label":"Main","group":"color","type":"color","style":{"color":"hsla(212,8,50,1)"}},"mainGradient":{"label":"Main gradient","group":"color","type":"color","style":{"backgroundSize":"100%","-webkitBackgroundClip":"text","-mozBackgroundClip":"text","-webkitTextFillColor":"transparent","-mozTextFillColor":"transparent","backgroundImage":"linear-gradient(90deg, hsla(212,8,50,1) 0%, #838c95 100%)"}},"accent":{"label":"Accent","group":"color","type":"color","style":{"color":"#ffbb00"}},"accentGradient":{"label":"Accent gradient","group":"color","type":"color","style":{"backgroundSize":"100%","-webkitBackgroundClip":"text","-mozBackgroundClip":"text","-webkitTextFillColor":"transparent","-mozTextFillColor":"transparent","backgroundImage":"linear-gradient(90deg, #ffbb00 0%, #ffc21a 100%)"}},"complementary":{"label":"Complementary","group":"color","type":"color","style":{"color":"#5100ff"}},"complementaryGradient":{"label":"Complementary gradient","group":"color","type":"color","style":{"backgroundSize":"100%","-webkitBackgroundClip":"text","-mozBackgroundClip":"text","-webkitTextFillColor":"transparent","-mozTextFillColor":"transparent","backgroundImage":"linear-gradient(90deg, #5100ff 0%, #621aff 100%)"}},"success":{"label":"Success","group":"color","type":"color","style":{"color":"#91ff00"}},"successGradient":{"label":"Success gradient","group":"color","type":"color","style":{"backgroundSize":"100%","-webkitBackgroundClip":"text","-mozBackgroundClip":"text","-webkitTextFillColor":"transparent","-mozTextFillColor":"transparent","backgroundImage":"linear-gradient(90deg, #91ff00 0%, #9cff1a 100%)"}},"warning":{"label":"Warning","group":"color","type":"color","style":{"color":"#ffd500"}},"warningGradient":{"label":"Warning gradient","group":"color","type":"color","style":{"backgroundSize":"100%","-webkitBackgroundClip":"text","-mozBackgroundClip":"text","-webkitTextFillColor":"transparent","-mozTextFillColor":"transparent","backgroundImage":"linear-gradient(90deg, #ffd500 0%, #ffd91a 100%)"}},"error":{"label":"Error","group":"color","type":"color","style":{"color":"#ff003b"}},"errorGradient":{"label":"Error gradient","group":"color","type":"color","style":{"backgroundSize":"100%","-webkitBackgroundClip":"text","-mozBackgroundClip":"text","-webkitTextFillColor":"transparent","-mozTextFillColor":"transparent","backgroundImage":"linear-gradient(90deg, #ff003b 0%, #ff1a4f 100%)"}},"info":{"label":"Info","group":"color","type":"color","style":{"color":"#00ffff"}},"infoGradient":{"label":"Info gradient","group":"color","type":"color","style":{"backgroundSize":"100%","-webkitBackgroundClip":"text","-mozBackgroundClip":"text","-webkitTextFillColor":"transparent","-mozTextFillColor":"transparent","backgroundImage":"linear-gradient(90deg, #00ffff 0%, #1affff 100%)"}}},"metas":{"title":"Default dark","description":"Nice and elegant dark theme"},"colorSchema":{"text":{"lighten":15,"color":{"base":{"lighten":30},"main":{"lighten":46},"complementary":{"lighten":30}}},"placeholder":{"lighten":50,"alpha":0.4},"foreground":{"lighten":50},"background":{"darken":30},"backgroundForeground":{"lighten":50},"surface":{"darken":25},"surfaceForeground":{"lighten":50},"ui":{"darken":28},"uiForeground":{"lighten":45},"border":{"alpha":0.4},"gradientStart":{"lighten":0},"gradientEnd":{"darken":20}}}}}},"frontspec":{"metas":{"lang":"en","title":"Coffeekraken","homepage":"https://coffeekraken.io","description":"The frontend toolkit that works for everyone. Experts, professionals and new-comers","themeColor":"#ffbb00","author":{"name":"Olivier Bossel","email":"olivier.bossel@gmail.com","url":"https://coffeekraken.io"},"og":{"title":"Coffeekraken","description":"The frontend toolkit that works for everyone. Experts, professionals and new-comers","type":"website","url":"https://coffeekraken.io","image":"https://cdnv2.coffeekraken.io/coffeekraken-og.png"}},"theme":{"theme":"default","variant":"dark","themes":{"default-light":{"title":"Default light","description":"Nice and elegant light theme"},"default-dark":{"title":"Default dark","description":"Nice and elegant dark theme"}}},"media":{"defaultAction":"<=","defaultMedia":"desktop","defaultQuery":"screen","queries":{"dwarf":{"minHeight":0,"maxHeight":950},"wide":{"minWidth":2048,"maxWidth":null},"desktop":{"minWidth":1280,"maxWidth":2047},"tablet":{"minWidth":640,"maxWidth":1279},"mobile":{"minWidth":0,"maxWidth":639}}},"google":{"gtm":"GTM-K4LMN8Q","map":{"apiKey":"AIzaSyDzFfEzhmYXRTlONUCtMWQ88uHJhsbtXY4"}},"lod":{"enabled":true,"defaultLevel":3,"botLevel":1,"levels":{"0":{"name":"bare","speedIndex":0},"1":{"name":"low","speedIndex":30},"2":{"name":"medium","speedIndex":40},"3":{"name":"high","speedIndex":50},"4":{"name":"extrem","speedIndex":60}},"method":"file","defaultAction":">="},"partytown":{"enabled":true,"forward":["dataLayer.push","fbq","freshpaint.addPageviewProperties","freshpaint.identify","freshpaint.track","_hsq.push","Intercom","_learnq.push","ttq.track","ttq.page","ttq.load","mixpanel.track"]},"font":{"family":{"default":{"fontFamily":"\\"Titillium Web\\"","fontWeight":400,"import":"https://fonts.googleapis.com/css2?family=Titillium+Web:wght@400&display=swap"},"title":{"fontFamily":"\\"Titillium Web\\"","fontWeight":600,"import":"https://fonts.googleapis.com/css2?family=Titillium+Web:wght@600&display=swap"},"quote":{"fontFamily":"\\"Palatino, Times, Georgia, serif\\"","fontWeight":"normal","fontStyle":"normal","fontDisplay":"auto","capHeight":0.65},"code":{"fontFamily":"Menlo, Monaco, Consolas, Courier New, monospace","fontWeight":"normal","fontStyle":"normal","fontDisplay":"auto","capHeight":0.65}},"size":{"0":0,"5":"0.5","10":0.65,"20":0.75,"30":1.1,"40":1.25,"50":1.5,"60":2,"70":2.5,"80":3,"90":4,"100":5,"default":"16px"}},"typo":{"h1":{"label":"H1","group":"style","button":{},"editor":{},"style":{"display":"block","fontFamily":"\\"Titillium Web\\"","fontSize":"64px","lineHeight":1.3,"maxWidth":"55ch","marginBottom":"3.25rem"}},"h2":{"label":"H2","group":"style","button":{},"editor":{},"style":{"display":"block","fontFamily":"\\"Titillium Web\\"","fontSize":"48px","lineHeight":1.3,"maxWidth":"55ch","marginBottom":"3.25rem"}},"h3":{"label":"H3","group":"style","button":{},"editor":{},"style":{"display":"block","fontFamily":"\\"Titillium Web\\"","fontSize":"40px","lineHeight":1.3,"maxWidth":"55ch","marginBottom":"3.25rem"}},"h4":{"label":"H4","group":"style","button":{},"editor":{},"style":{"display":"block","fontFamily":"\\"Titillium Web\\"","fontSize":"32px","lineHeight":1.3,"maxWidth":"55ch","marginBottom":"3.25rem"}},"h5":{"label":"H5","group":"style","button":{},"editor":{},"style":{"display":"block","fontFamily":"\\"Titillium Web\\"","fontSize":"24px","lineHeight":1.3,"maxWidth":"55ch","marginBottom":"2.25rem"}},"h6":{"label":"H6","group":"style","button":{},"editor":{},"style":{"display":"block","fontFamily":"\\"Titillium Web\\"","fontSize":"20px","lineHeight":1.3,"maxWidth":"55ch"}},"p":{"label":"Paragraph","group":"style","button":{},"editor":{},"style":{"display":"block","fontFamily":"\\"Titillium Web\\"","fontSize":"17.6px","lineHeight":1.8,"maxWidth":"55ch","marginBottom":"3.25rem"},"default":true},"lead":{"label":"Lead paragraph","group":"style","button":{},"editor":{},"style":{"display":"block","fontFamily":"\\"Titillium Web\\"","fontSize":"24px","lineHeight":1.6,"maxWidth":"55ch","marginBottom":"3.25rem"}},"hr":{"label":"--","group":"block","button":{"label":"--"},"editor":{},"style":{"display":"block","color":"hsla(212,14,50,1)","opacity":0.2,"marginBottom":"3.25rem"}},"pre":{"label":"Pre","group":"text","button":{},"editor":{},"style":{"display":"block","fontFamily":"Menlo, Monaco, Consolas, Courier New, monospace","color":"#f3f5f6","backgroundColor":"#373f48","lineHeight":1.5,"paddingInline":"1.5rem","paddingBlock":"0.75rem","borderRadius":"5px","depth":"0","marginBottom":"3.25rem"}},"code":{"label":"Code","group":"text","button":{"label":"</>"},"editor":{},"style":{"display":"inline-block","fontFamily":"Menlo, Monaco, Consolas, Courier New, monospace","color":"#f3f5f6","lineHeight":1.1,"backgroundColor":"#805e00","borderRadius":"4px","paddingInline":"0.375rem","paddingBlock":"0rem"}},"blockquote":{"label":"Blockquote","group":"block","button":{"label":"<svg viewBox=\\"0 0 20 20\\"><path d=\\"M3 10.423a6.5 6.5 0 0 1 6.056-6.408l.038.67C6.448 5.423 5.354 7.663 5.22 10H9c.552 0 .5.432.5.986v4.511c0 .554-.448.503-1 .503h-5c-.552 0-.5-.449-.5-1.003v-4.574zm8 0a6.5 6.5 0 0 1 6.056-6.408l.038.67c-2.646.739-3.74 2.979-3.873 5.315H17c.552 0 .5.432.5.986v4.511c0 .554-.448.503-1 .503h-5c-.552 0-.5-.449-.5-1.003v-4.574z\\"></path></svg>"},"editor":{"style":{"paddingInlineStart":1.5,"borderLeft":"1px solid #000"}},"style":{"display":"block","fontFamily":"\\"Palatino, Times, Georgia, serif\\"","marginBottom":"3.25rem"}},"a":{"label":"Link","group":"text","button":{"label":"<svg viewBox=\\"0 0 20 20\\"><path d=\\"m11.077 15 .991-1.416a.75.75 0 1 1 1.229.86l-1.148 1.64a.748.748 0 0 1-.217.206 5.251 5.251 0 0 1-8.503-5.955.741.741 0 0 1 .12-.274l1.147-1.639a.75.75 0 1 1 1.228.86L4.933 10.7l.006.003a3.75 3.75 0 0 0 6.132 4.294l.006.004zm5.494-5.335a.748.748 0 0 1-.12.274l-1.147 1.639a.75.75 0 1 1-1.228-.86l.86-1.23a3.75 3.75 0 0 0-6.144-4.301l-.86 1.229a.75.75 0 0 1-1.229-.86l1.148-1.64a.748.748 0 0 1 .217-.206 5.251 5.251 0 0 1 8.503 5.955zm-4.563-2.532a.75.75 0 0 1 .184 1.045l-3.155 4.505a.75.75 0 1 1-1.229-.86l3.155-4.506a.75.75 0 0 1 1.045-.184z\\"></path></svg>"},"editor":{},"style":{"color":"#ffbb00","textDecoration":"underline"}},"quote":{"label":"Quote","group":"text","button":{"label":"<svg viewBox=\\"0 0 20 20\\"><path d=\\"M3 10.423a6.5 6.5 0 0 1 6.056-6.408l.038.67C6.448 5.423 5.354 7.663 5.22 10H9c.552 0 .5.432.5.986v4.511c0 .554-.448.503-1 .503h-5c-.552 0-.5-.449-.5-1.003v-4.574zm8 0a6.5 6.5 0 0 1 6.056-6.408l.038.67c-2.646.739-3.74 2.979-3.873 5.315H17c.552 0 .5.432.5.986v4.511c0 .554-.448.503-1 .503h-5c-.552 0-.5-.449-.5-1.003v-4.574z\\"></path></svg>"},"editor":{},"style":{"fontFamily":"\\"Palatino, Times, Georgia, serif\\"","marginBottom":"3.25rem"}},"bold":{"label":"Bold","group":"text","button":{"label":"B","style":{"fontWeight":"bolder"}},"editor":{},"style":{"fontWeight":"bold"}},"italic":{"label":"Italic","group":"text","button":{"label":"I","style":{"fontStyle":"italic"}},"editor":{},"style":{"fontStyle":"italic"}},"large":{"label":"Large","group":"text","button":{"label":"A","style":{"fontSize":"1.01em"}},"editor":{},"style":{"fontSize":"1.1em"}},"larger":{"label":"Larger","group":"text","button":{"label":"A","style":{"fontSize":"1.02em"}},"editor":{},"style":{"fontSize":"1.2em"}},"largest":{"label":"Largest","group":"text","button":{"label":"A","style":{"fontSize":"1.03em"}},"editor":{},"style":{"fontSize":"1.3em"}},"small":{"label":"Small","group":"text","button":{"label":"A","style":{"fontSize":"0.99em"}},"editor":{},"style":{"fontSize":"0.9em"}},"smaller":{"label":"Smaller","group":"text","button":{"label":"A","style":{"fontSize":"0.98em"}},"editor":{},"style":{"fontSize":"0.8em"}},"smallest":{"label":"Smallest","group":"text","button":{"label":"A","style":{"fontSize":"0.97em"}},"editor":{},"style":{"fontSize":"0.7em"}},"mark":{"label":"Mark","group":"text","button":{"label":"M"},"editor":{},"style":{"backgroundColor":"#ffbb00"}},"del":{"label":"Deleted","group":"text","button":{"label":"D","style":{"textDecoration":"line-through"}},"editor":{},"style":{"textDecoration":"line-through"}},"ins":{"label":"Inserted","group":"text","button":{"label":"U","style":{"textDecoration":"underline"}},"editor":{},"style":{"textDecoration":"underline"}},"sub":{"label":"Subscript","group":"text","button":{"label":"Sub","style":{"verticalAlign":"sub","fontSize":"0.6em"}},"editor":{},"style":{"verticalAlign":"sub","fontSize":"0.6em"}},"sup":{"label":"Superscript","group":"text","button":{"label":"Sup","style":{"verticalAlign":"sup","fontSize":"0.6em"}},"editor":{},"style":{"verticalAlign":"sup","fontSize":"0.6em"}},"base":{"label":"Base","group":"color","type":"color","button":{},"editor":{},"style":{"color":"hsla(212,14,50,1)"}},"baseGradient":{"label":"Base gradient","group":"color","type":"color","button":{},"editor":{},"style":{"backgroundSize":"100%","-webkitBackgroundClip":"text","-mozBackgroundClip":"text","-webkitTextFillColor":"transparent","-mozTextFillColor":"transparent","backgroundImage":"linear-gradient(90deg, hsla(212,14,50,1) 0%, #a9b2bc 100%)"}},"main":{"label":"Main","group":"color","type":"color","button":{},"editor":{},"style":{"color":"hsla(212,14,50,1)"}},"mainGradient":{"label":"Main gradient","group":"color","type":"color","button":{},"editor":{},"style":{"backgroundSize":"100%","-webkitBackgroundClip":"text","-mozBackgroundClip":"text","-webkitTextFillColor":"transparent","-mozTextFillColor":"transparent","backgroundImage":"linear-gradient(90deg, hsla(212,14,50,1) 0%, #a9b2bc 100%)"}},"accent":{"label":"Accent","group":"color","type":"color","button":{},"editor":{},"style":{"color":"#ffbb00"}},"accentGradient":{"label":"Accent gradient","group":"color","type":"color","button":{},"editor":{},"style":{"backgroundSize":"100%","-webkitBackgroundClip":"text","-mozBackgroundClip":"text","-webkitTextFillColor":"transparent","-mozTextFillColor":"transparent","backgroundImage":"linear-gradient(90deg, #ffbb00 0%, #ffd666 100%)"}},"complementary":{"label":"Complementary","group":"color","type":"color","button":{},"editor":{},"style":{"color":"#5100ff"}},"complementaryGradient":{"label":"Complementary gradient","group":"color","type":"color","button":{},"editor":{},"style":{"backgroundSize":"100%","-webkitBackgroundClip":"text","-mozBackgroundClip":"text","-webkitTextFillColor":"transparent","-mozTextFillColor":"transparent","backgroundImage":"linear-gradient(90deg, #5100ff 0%, #9666ff 100%)"}},"success":{"label":"Success","group":"color","type":"color","button":{},"editor":{},"style":{"color":"#91ff00"}},"successGradient":{"label":"Success gradient","group":"color","type":"color","button":{},"editor":{},"style":{"backgroundSize":"100%","-webkitBackgroundClip":"text","-mozBackgroundClip":"text","-webkitTextFillColor":"transparent","-mozTextFillColor":"transparent","backgroundImage":"linear-gradient(90deg, #91ff00 0%, #bdff66 100%)"}},"warning":{"label":"Warning","group":"color","type":"color","button":{},"editor":{},"style":{"color":"#ffd500"}},"warningGradient":{"label":"Warning gradient","group":"color","type":"color","button":{},"editor":{},"style":{"backgroundSize":"100%","-webkitBackgroundClip":"text","-mozBackgroundClip":"text","-webkitTextFillColor":"transparent","-mozTextFillColor":"transparent","backgroundImage":"linear-gradient(90deg, #ffd500 0%, #ffe666 100%)"}},"error":{"label":"Error","group":"color","type":"color","button":{},"editor":{},"style":{"color":"#ff003c"}},"errorGradient":{"label":"Error gradient","group":"color","type":"color","button":{},"editor":{},"style":{"backgroundSize":"100%","-webkitBackgroundClip":"text","-mozBackgroundClip":"text","-webkitTextFillColor":"transparent","-mozTextFillColor":"transparent","backgroundImage":"linear-gradient(90deg, #ff003b 0%, #ff668a 100%)"}},"info":{"label":"Info","group":"color","type":"color","button":{},"editor":{},"style":{"color":"#00ffff"}},"infoGradient":{"label":"Info gradient","group":"color","type":"color","button":{},"editor":{},"style":{"backgroundSize":"100%","-webkitBackgroundClip":"text","-mozBackgroundClip":"text","-webkitTextFillColor":"transparent","-mozTextFillColor":"transparent","backgroundImage":"linear-gradient(90deg, #00ffff 0%, #66ffff 100%)"}}},"layout":{"offset":{"top":100,"right":0,"bottom":0,"left":0},"container":{"default":"1280px","wide":"1440px","full":"none"},"grid":{"1":1,"2":2,"3":3,"4":4,"5":5,"6":6,"7":7,"8":8,"9":9,"10":10,"11":11,"12":12},"layout":{"1":"1","12":"1 2","21":"2 1","112":"1 1 2","122":"1 2 2","123":"1 2 3","211":"2 1 1","221":"2 2 1","321":"3 2 1","1112":"1 1 1 2","1222":"1 2 2 2","1234":"1 2 3 4","2221":"2 2 2 1","11112":"1 1 1 1 2","12222":"1 2 2 2 2","12345":"1 2 3 4 5","22221":"2 2 2 2 1","111112":"1 1 1 1 1 2","122222":"1 2 2 2 2 2","123456":"1 2 3 4 5 6","1_2":"1 _ 2","2_1":"2 _ 1","12_33":"1 2 _ 3 3","1_23":"1 _ 2 3","1_2_3":"1 _ 2 _ 3","32_1":"3 2 _ 1","3_21":"3 _ 2 1","12_34":"1 2 _ 3 4","123_4":"1 2 3 _ 4","1_234":"1 _ 2 3 4","1_2_3_4":"1 _ 2 _ 3 _ 4","123_45":"1 2 3 _ 4 5","12_345":"1 2 _ 3 4 5","1_2345":"1 _ 2 3 4 5","1234_5":"1 2 3 4 _ 5","1_2_3_4_5":"1 _ 2 _ 3 _ 4 _ 5"}}}},"PACKAGE":{"name":"@website/coffeekraken-io","title":"Coffeekraken","version":"2.0.0-alpha.25","description":"The frontend toolkit that works for everyone. Experts, professionals and new-comers","type":"module","private":true,"scripts":{"dev":"sugard kitchen.run dev","prod":"sugard kitchen.run prod","build":"sugard kitchen.run build","static":"live-server static","static.build":"sugard static.build --clean --env production --target production","deploy":"rsync -avzh --delete --progress --stats ./static fe0mt_coffeekraken@fe0mt.ftp.infomaniak.com:~/sites/coffeekraken.io","deploy.bogdanov":"rsync -avzh --delete --progress --stats ./static fe0mt_bogdanov_ssh@fe0mt.ftp.infomaniak.com:~/sites/bogdanov.coffeekraken.io"},"repository":{"type":"git","url":"https://olivierbossel.com"},"author":"Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)","license":"MIT","dependencies":{"@coffeekraken/cli":"^2.0.0-alpha.25","@coffeekraken/s-activate-feature":"^2.0.0-alpha.25","@coffeekraken/s-appear-feature":"^2.0.0-alpha.25","@coffeekraken/s-bench":"^2.0.0-alpha.25","@coffeekraken/s-builder":"^2.0.0-alpha.25","@coffeekraken/s-carpenter":"^2.0.0-alpha.25","@coffeekraken/s-class":"^2.0.0-alpha.25","@coffeekraken/s-clipboard-copy-component":"^2.0.0-alpha.25","@coffeekraken/s-code-example-component":"^2.0.0-alpha.25","@coffeekraken/s-color":"^2.0.0-alpha.25","@coffeekraken/s-color-picker-component":"^2.0.0-alpha.25","@coffeekraken/s-component-utils":"^2.0.0-alpha.25","@coffeekraken/s-conductor":"^2.0.0-alpha.25","@coffeekraken/s-config":"^2.0.0-alpha.25","@coffeekraken/s-dashboard":"^2.0.0-alpha.25","@coffeekraken/s-datetime-picker-component":"^2.0.0-alpha.25","@coffeekraken/s-descriptor":"^2.0.0-alpha.25","@coffeekraken/s-docblock":"^2.0.0-alpha.25","@coffeekraken/s-docmap":"^2.0.0-alpha.25","@coffeekraken/s-duration":"^2.0.0-alpha.25","@coffeekraken/s-env":"^2.0.0-alpha.25","@coffeekraken/s-event-emitter":"^2.0.0-alpha.25","@coffeekraken/s-favicon-builder":"^2.0.0-alpha.25","@coffeekraken/s-feature":"^2.0.0-alpha.25","@coffeekraken/s-file":"^2.0.0-alpha.25","@coffeekraken/s-filtrable-input-component":"^2.0.0-alpha.25","@coffeekraken/s-floating-feature":"^2.0.0-alpha.25","@coffeekraken/s-form-validate-feature":"^2.0.0-alpha.25","@coffeekraken/s-front":"^2.0.0-alpha.25","@coffeekraken/s-frontend-server":"^2.0.0-alpha.25","@coffeekraken/s-frontspec":"^2.0.0-alpha.25","@coffeekraken/s-glitch-feature":"^2.0.0-alpha.25","@coffeekraken/s-glob":"^2.0.0-alpha.25","@coffeekraken/s-google-map-component":"^2.0.0-alpha.25","@coffeekraken/s-handlebars":"^2.0.0-alpha.25","@coffeekraken/s-highlight-feature":"^2.0.0-alpha.25","@coffeekraken/s-images-builder":"^2.0.0-alpha.25","@coffeekraken/s-inline-feature":"^2.0.0-alpha.25","@coffeekraken/s-interface":"^2.0.0-alpha.25","@coffeekraken/s-kitchen":"^2.0.0-alpha.25","@coffeekraken/s-lazy-feature":"^2.0.0-alpha.25","@coffeekraken/s-lit-component":"^2.0.0-alpha.25","@coffeekraken/s-log":"^2.0.0-alpha.25","@coffeekraken/s-markdown-builder":"^2.0.0-alpha.25","@coffeekraken/s-pack-essentials":"^2.0.0-alpha.25","@coffeekraken/s-page-transition-feature":"^2.0.0-alpha.25","@coffeekraken/s-panel-component":"^2.0.0-alpha.25","@coffeekraken/s-parallax-feature":"^2.0.0-alpha.25","@coffeekraken/s-postcss-sugar-plugin":"^2.0.0-alpha.25","@coffeekraken/s-process":"^2.0.0-alpha.25","@coffeekraken/s-promise":"^2.0.0-alpha.25","@coffeekraken/s-range-component":"^2.0.0-alpha.25","@coffeekraken/s-rating-component":"^2.0.0-alpha.25","@coffeekraken/s-refocus-feature":"^2.0.0-alpha.25","@coffeekraken/s-request":"^2.0.0-alpha.25","@coffeekraken/s-scroll-component":"^2.0.0-alpha.25","@coffeekraken/s-sitemap-builder":"^2.0.0-alpha.25","@coffeekraken/s-slider-component":"^2.0.0-alpha.25","@coffeekraken/s-state":"^2.0.0-alpha.25","@coffeekraken/s-static-builder":"^2.0.0-alpha.25","@coffeekraken/s-stdio":"^2.0.0-alpha.25","@coffeekraken/s-sugar-config":"^2.0.0-alpha.25","@coffeekraken/s-sugar-feature":"^2.0.0-alpha.25","@coffeekraken/s-sugar-json":"^2.0.0-alpha.25","@coffeekraken/s-theme":"^2.0.0-alpha.25","@coffeekraken/s-theme-switcher-component":"^2.0.0-alpha.25","@coffeekraken/s-timer":"^2.0.0-alpha.25","@coffeekraken/s-type":"^2.0.0-alpha.25","@coffeekraken/s-typescript-builder":"^2.0.0-alpha.25","@coffeekraken/s-url":"^2.0.0-alpha.25","@coffeekraken/s-view-renderer":"^2.0.0-alpha.25","@coffeekraken/s-vite":"^2.0.0-alpha.25","@coffeekraken/s-vite-postcss-plugin":"^2.0.0-alpha.25","@coffeekraken/s-vite-sugar-plugin":"^2.0.0-alpha.25","@coffeekraken/sugar":"^2.0.0-alpha.25","firebase":"^9.9.1","lit":"^2.2.8","lit-element":"^2.5.1","minisearch":"^3.3.0","three":"^0.143.0"},"devDependencies":{"esbuild":"^0.14.53"},"exports":{"./shared/*":{"require":"./dist/pkg/cjs/shared/*.js","import":"./dist/pkg/esm/shared/*.js"},"./node/*":{"require":"./dist/pkg/cjs/node/*.js","import":"./dist/pkg/esm/node/*.js"},"./js/*":{"require":"./dist/pkg/cjs/js/*.js","import":"./dist/pkg/esm/js/*.js"}},"homepage":"https://coffeekraken.io"}}`),
   document.env || {}
 );
 (async () => {

@@ -2,7 +2,7 @@ import __SEnv from '@coffeekraken/s-env';
 import __SFeature from '@coffeekraken/s-feature';
 import __SRequest from '@coffeekraken/s-request';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
-import { __querySelectorUp } from '@coffeekraken/sugar/dom';
+import { __querySelectorUp, __scrollTo } from '@coffeekraken/sugar/dom';
 import { __deepMerge } from '@coffeekraken/sugar/object';
 import __SPageTransitionFeatureInterface from './interface/SPageTransitionFeatureInterface';
 
@@ -11,11 +11,28 @@ import __define from './define';
 // @ts-ignore
 import __css from '../../../../src/css/s-page-transition.css'; // relative to /dist/pkg/esm/js
 
+export interface ISPageTransitionFeatureState {
+    html: string;
+    containerId: string;
+}
+
+export interface ISPageTransitionFeatureBefore {
+    (api: { url: string; $source: HTMLElement }): void;
+}
+export interface ISPageTransitionFeatureAfter {
+    (api: {
+        code: number;
+        url: string;
+        newState: ISPageTransitionFeatureState;
+        $source: HTMLElement;
+    }): void;
+}
+
 export interface ISPageTransitionFeatureProps {
     patchBody: boolean;
-    scrollTop: boolean;
-    before: Function;
-    after: Function;
+    scroll: boolean;
+    before: ISPageTransitionFeatureBefore;
+    after: ISPageTransitionFeatureAfter;
     onError: Function;
     autoStyle: boolean;
     injectErrorIcon: boolean;
@@ -38,7 +55,7 @@ export interface ISPageTransitionFeatureProps {
  * @event           s-page-transition.start             Dispatched when a transition starts
  * @event           s-page-transition.end               Dispatch when a transition ends
  * @event           s-page-transition.error             Dispatch when an error occurs
- * 
+ *
  * @support          chromium
  * @support          firefox
  * @support          safari
@@ -50,7 +67,7 @@ export interface ISPageTransitionFeatureProps {
  *   <p class="s-typo:p">This website is a perfect example of this feature behavior...</p>
  *   <a class="s-typo:a" href="/package/@coffeekraken/s-page-transition-feature/styleguide/feature/s-page-transition-feature">This link will reload this same page using a page transition...</a>
  * <!-- </body> -->
- * 
+ *
  * @example         html            Update only a part of the page
  * <p class="s-typo:p">To update only a part of the UI, simply add the <span class="s-typo:code">s-page-transition-container="something"</span> on the part you want to be updated</p>
  * <p class="s-typo:p">If this same container exists in the loaded page, only this part will be updated.</p>
@@ -65,17 +82,21 @@ export interface ISPageTransitionFeatureProps {
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 export default class SPageTransitionFeature extends __SFeature {
-    
     /**
      * Store the current page url
      */
     _currentUrl: string;
 
     /**
+     * Store the current state
+     */
+    _currentState: ISPageTransitionFeatureState;
+
+    /**
      * Store the current loading page url to avoid triggering multiple
      * same requests during a page load
      */
-    _currentRequestedUrl: string;
+    _currentRequestedUrl: string = document.location.pathname;
 
     constructor(name: string, node: HTMLElement, settings: any) {
         super(
@@ -103,29 +124,32 @@ export default class SPageTransitionFeature extends __SFeature {
         );
 
         // handle popstate
-        // window.addEventListener('popstate', (e) => {
-        //     if (!e.state?.html) return;
-        //     if (e.state.containerId) {
-        //         const $elm = document.querySelector(
-        //             `[s-page-transition-container="${e.state.containerId}"]`,
-        //         );
-        //         if (!$elm) {
-        //             return;
-        //         }
-        //         $elm.innerHTML = e.state.html;
-        //         __scrollTo(<HTMLElement>$elm);
-        //     } else {
-        //         this.node.innerHTML = e.state.html;
-        //         __scrollTo(this.node);
-        //     }
-        // });
+        window.addEventListener('popstate', (e) => {
+            if (!e.state?.html) return;
+            if (e.state.containerId) {
+                const $elm = document.querySelector(
+                    `[s-page-transition-container="${e.state.containerId}"]`,
+                );
+                if (!$elm) {
+                    return;
+                }
+                $elm.innerHTML = e.state.html;
+                if (this.props.scroll) {
+                    __scrollTo(<HTMLElement>$elm);
+                }
+            } else {
+                this.node.innerHTML = e.state.html;
+                if (this.props.scroll) {
+                    __scrollTo(this.node);
+                }
+            }
+        });
 
         // listen for "location.href" event
         document.addEventListener('location.href', (e) => {
-            this.transitionTo(
-                (<CustomEvent>e).detail,
-                e.target,
-            ).catch((e) => {});
+            this.transitionTo((<CustomEvent>e).detail, e.target).catch(
+                (e) => {},
+            );
         });
 
         // listen for clicks to prevent default behaviors
@@ -133,9 +157,7 @@ export default class SPageTransitionFeature extends __SFeature {
             const $target = <HTMLElement>e.target;
 
             // @ts-ignore
-            if (
-               this._isEligibleLink($target)
-            ) {
+            if (this._isEligibleLink($target)) {
                 e.preventDefault();
                 this.transitionTo(
                     <string>$target.getAttribute('href'),
@@ -155,32 +177,38 @@ export default class SPageTransitionFeature extends __SFeature {
     }
     mount() {}
     _isEligibleLink($link: HTMLElement): boolean {
-        return ($link.tagName === 'A' && $link.hasAttribute('href') &&
-                // @ts-ignore
+        return (
+            $link.tagName === 'A' &&
+            $link.hasAttribute('href') &&
+            // @ts-ignore
             !$link.getAttribute('href').match(/^https?:\/\//) &&
             // @ts-ignore
             !$link.getAttribute('href').match(/^#/) &&
-            !$link.hasAttribute('target'));
+            !$link.hasAttribute('target')
+        );
     }
     transitionTo(url: string, $source): Promise<void> {
         return new Promise(async (resolve, reject) => {
+            // get the pathame to compare with the current url
+            const pathname = url.replace(/#[\w\W]+$/, '');
 
             // prevent loading same page multiple times
             // during a request
-            if (this._currentRequestedUrl === url) {
+            if (this._currentRequestedUrl === pathname) {
+                this._onAfter($source, 200, url);
                 return;
             }
 
             // set the current requested url
-            this._currentRequestedUrl = url;
+            this._currentRequestedUrl = pathname;
 
             // dispatch an event
             this.utils.dispatchEvent('start', {
                 $elm: $source,
                 detail: {
-                    url
-                }
-            })
+                    url,
+                },
+            });
 
             // add classes
             this.utils.fastdom.mutate(() => {
@@ -209,7 +237,7 @@ export default class SPageTransitionFeature extends __SFeature {
             }
 
             // reset the current requested url
-            this._currentRequestedUrl = null;
+            // this._currentRequestedUrl = null;
 
             // handle error
             if (!response || response.status !== 200) {
@@ -255,11 +283,17 @@ export default class SPageTransitionFeature extends __SFeature {
                     const newAttrNames: string[] = [];
 
                     // handle the classes differently than the others attributes
-                    const inPageBodyClasses = $inPageBody.classList.toString().split(' ').map(l => l.trim()),
-                        newBodyClasses = $newBody.classList.toString().split(' ').map(l => l.trim());
+                    const inPageBodyClasses = $inPageBody.classList
+                            .toString()
+                            .split(' ')
+                            .map((l) => l.trim()),
+                        newBodyClasses = $newBody.classList
+                            .toString()
+                            .split(' ')
+                            .map((l) => l.trim());
 
                     // remove classes that are not in the new page body classes
-                    inPageBodyClasses.forEach(cls => {
+                    inPageBodyClasses.forEach((cls) => {
                         // do not touch lod (level of details) classes
                         if (cls.match(/^s-lod/)) {
                             return;
@@ -271,7 +305,7 @@ export default class SPageTransitionFeature extends __SFeature {
                     });
 
                     // add the new classes that are not in the page already
-                    newBodyClasses.forEach(cls => {
+                    newBodyClasses.forEach((cls) => {
                         // do not touch lod (level of details) classes
                         if (cls.match(/^s-lod/)) {
                             return;
@@ -305,7 +339,8 @@ export default class SPageTransitionFeature extends __SFeature {
                 }
             }
 
-            let newState: any = {};
+            // @ts-ignore
+            let newState: ISPageTransitionFeatureState = {};
 
             // if we have scoped containers in each "pages" and they match each other
             // we remplace only this content
@@ -328,10 +363,13 @@ export default class SPageTransitionFeature extends __SFeature {
                 newState.html = $container.innerHTML;
             }
 
-            // scrolltop if needed
-            if (this.props.scrollTop) {
+            // save current state
+            this._currentState = newState;
+
+            // scroll if needed
+            if (this.props.scroll) {
                 // @ts-ignore
-                // __scrollTo($inPageScopedContainer ?? $inPageContainer);
+                __scrollTo($inPageScopedContainer ?? $inPageContainer);
             }
 
             // after process with success
@@ -339,17 +377,22 @@ export default class SPageTransitionFeature extends __SFeature {
 
             // track pageView if gtag is present in the page
             if (window.gtag && __SEnv.is('production')) {
-                const gaUid = typeof this.props.ga === 'string' ? this.props.ga : __SSugarConfig.get('google.ga');
+                const gaUid =
+                    typeof this.props.ga === 'string'
+                        ? this.props.ga
+                        : __SSugarConfig.get('google.ga');
                 if (gaUid) {
                     window.gtag('event', 'page_view', {
                         page_title: document.title,
                         page_location: document.location.href,
                         page_path: document.location.pathname,
-                        send_to: gaUid
-                      });
+                        send_to: gaUid,
+                    });
                 }
             } else if (window.gtag && this.props.verbose) {
-                console.log(`%c[SPageTransitionFeature] Google analytics is activate and this transition to "${document.location.pathname}" will be correctly tracked in production environment`, 'color: lightGreen');
+                console.log(
+                    `<green>[SPageTransitionFeature]</green> Google analytics is activate and this transition to "${document.location.pathname}" will be correctly tracked in production environment`,
+                );
             }
 
             // resolve transition
@@ -360,7 +403,13 @@ export default class SPageTransitionFeature extends __SFeature {
      * This function take care of handling the after transition process.
      * The code passed allows to know if the transition was a success (200) or an error (404|500)
      */
-    _onAfter($source: HTMLElement, code: number, url?:string; newState?: any) {
+    _onAfter(
+        $source: HTMLElement,
+        code: number,
+        url: string = this._currentUrl,
+        newState: Partial<ISPageTransitionFeatureState> = this._currentState ??
+            {},
+    ) {
         // remove class on body
         document.body.classList.remove('loading');
         document.body.removeAttribute('loading');
@@ -370,6 +419,9 @@ export default class SPageTransitionFeature extends __SFeature {
 
         // before callback
         this.props.after?.({
+            code,
+            url,
+            newState,
             $source,
         });
 
@@ -385,16 +437,24 @@ export default class SPageTransitionFeature extends __SFeature {
             }
             // broken link icon
             // @ts-ignore
-            if (this.props.injectBrokenLinkIcon && !$source.querySelector('[s-page-transition-broken-link-icon]')) {
-                $source.innerHTML = `${$source.innerHTML}${this.props.brokenLinkIcon.replace(/^\<([a-z]+)/, '<$1 s-page-transition-broken-link-icon')}`;
+            if (
+                this.props.injectBrokenLinkIcon &&
+                !$source.querySelector('[s-page-transition-broken-link-icon]')
+            ) {
+                $source.innerHTML = `${
+                    $source.innerHTML
+                }${this.props.brokenLinkIcon.replace(
+                    /^\<([a-z]+)/,
+                    '<$1 s-page-transition-broken-link-icon',
+                )}`;
             }
             // dispatch an error event
             this.utils.dispatchEvent('error', {
                 $elm: $source,
                 detail: {
                     code,
-                    $source
-                }
+                    $source,
+                },
             });
             // before callback
             this.props.onError?.({
@@ -403,11 +463,20 @@ export default class SPageTransitionFeature extends __SFeature {
         }
 
         // scroll to top
-        // __scrollTo('top');
+        if (this.props.scroll) {
+            __scrollTo('top');
+        }
 
         // push a new state
         if (code === 200 && newState && url) {
-            window.history.pushState(newState, document.title, url);
+            window.history.pushState(
+                {
+                    ...newState,
+                    scroll: !this.props.scroll,
+                },
+                document.title,
+                url,
+            );
             this._currentUrl = url;
         }
 
@@ -416,8 +485,8 @@ export default class SPageTransitionFeature extends __SFeature {
             $elm: $source,
             detail: {
                 code,
-                $source
-            }
+                $source,
+            },
         });
     }
 }

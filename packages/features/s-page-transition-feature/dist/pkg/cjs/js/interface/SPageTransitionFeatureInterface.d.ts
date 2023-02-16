@@ -7,7 +7,7 @@ export default class SPageTransitionFeatureInterface extends __SInterface {
             type: string;
             default: boolean;
         };
-        scrollTop: {
+        scroll: {
             description: string;
             type: string;
             default: boolean;

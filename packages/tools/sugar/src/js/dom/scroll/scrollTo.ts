@@ -72,6 +72,8 @@ export default function __scrollTo(
         // remap element if needed
         if (settings.$elm === document.body) settings.$elm = window;
         if (settings.$elm === document) settings.$elm = window;
+        if (settings.$elm === document.querySelector('html'))
+            settings.$elm = window;
 
         const $scrollElm =
             settings.$elm === window ? document.body : settings.$elm;
@@ -189,8 +191,6 @@ export default function __scrollTo(
             targetY -= elmBounds.top;
             targetX -= elmBounds.left;
         }
-
-        console.log('__scro', settings.$elm === window ? 'window' : 'node');
 
         const obj = {
             targetY,

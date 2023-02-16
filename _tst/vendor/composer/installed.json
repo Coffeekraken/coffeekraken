@@ -36,7 +36,7 @@
             "homepage": "https://coffeekraken.io",
             "support": {
                 "issues": "https://github.com/Coffeekraken/coffeekraken/issues",
-                "source": "https://github.com/Coffeekraken/coffeekraken/tree/develop"
+                "source": "https://github.com/Coffeekraken/coffeekraken/tree/master"
             },
             "install-path": "../coffeekraken/coffeekraken"
         },

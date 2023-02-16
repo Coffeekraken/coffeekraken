@@ -59,6 +59,12 @@ export default class SRefocusFeatureInterface extends __SInterface {
                 type: 'Number',
                 default: 1000,
             },
+            // minToScroll: {
+            //     description:
+            //         'Specify a minimum scroll distance to make the browser actually scroll',
+            //     type: 'Number',
+            //     default: 200,
+            // },
             offset: {
                 description:
                     'Specify the offset of the refocus animation in px',

@@ -15,7 +15,9 @@ export interface ISRefocusFeatureProps {
     align: 'start' | 'center' | 'end';
     justify: 'start' | 'center' | 'end';
 }
+
 export default class SRefocusFeature extends __SFeature {
+    _currentScrolledTargets: HTMLElement[];
     constructor(name: string, node: HTMLElement, settings: any);
     mount(): void;
     _scrollTo($elm: any): Promise<void>;

@@ -64,6 +64,7 @@ export interface ISSugarFeatureProps {
  * @feature         Add state attributes to links like `actual` and `actual-child` depending on the document location url
  * @feature         Prevent the scroll restoration behavior on chrome that can usually be anoying
  * @feature         Remove some classes at page loading end: "initial-loading", "loading"
+ * @feature         Proxy the `history.pushState` method to make it dispatch an "pushstate" event with the actual state as detail
  *
  * @example         html        Simple usage        Simply add the `s-sugar` property on your body tag
  * <bodyTag s-sugar>
@@ -73,6 +74,21 @@ export interface ISSugarFeatureProps {
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
+
+var _wr = function (type) {
+    var orig = history[type];
+    return function (...args) {
+        var rv = orig.apply(this, arguments);
+        var e = new CustomEvent(type.toLowerCase(), {
+            bubbles: true,
+            detail: args[0],
+        });
+        window.dispatchEvent(e);
+        return rv;
+    };
+};
+history.pushState = _wr('pushState');
+
 export default class SSugarFeature extends __SFeature implements ISFeature {
     _matrix;
     _originalTransform;

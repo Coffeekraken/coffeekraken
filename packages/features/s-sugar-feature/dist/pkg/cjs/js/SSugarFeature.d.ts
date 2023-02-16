@@ -12,7 +12,6 @@ export interface ISSugarFeatureProps {
     pleasantCss: boolean;
     env: boolean;
 }
-
 export default class SSugarFeature extends __SFeature implements ISFeature {
     _matrix: any;
     _originalTransform: any;

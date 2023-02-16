@@ -1,0 +1,576 @@
+{
+    "map": {},
+    "extends": [],
+    "generated": {
+        "extends": [
+            "@coffeekraken/aa",
+            "@coffeekraken/cli",
+            "@coffeekraken/s-activate-feature",
+            "@coffeekraken/s-appear-feature",
+            "@coffeekraken/s-asset-picker-component",
+            "@coffeekraken/s-bench",
+            "@coffeekraken/s-builder",
+            "@coffeekraken/s-carpenter",
+            "@coffeekraken/s-class",
+            "@coffeekraken/s-classmap",
+            "@coffeekraken/s-clipboard-copy-component",
+            "@coffeekraken/s-code-example-component",
+            "@coffeekraken/s-code-formatter-prettier",
+            "@coffeekraken/s-color-picker-component",
+            "@coffeekraken/s-color",
+            "@coffeekraken/s-component-utils",
+            "@coffeekraken/s-conductor",
+            "@coffeekraken/s-config-adapter",
+            "@coffeekraken/s-config-folder-adapter",
+            "@coffeekraken/s-config-inline-adapter",
+            "@coffeekraken/s-config",
+            "@coffeekraken/s-css-animation",
+            "@coffeekraken/s-dashboard",
+            "@coffeekraken/s-data-file-generic",
+            "@coffeekraken/s-data-file-js",
+            "@coffeekraken/s-data-file-php",
+            "@coffeekraken/s-datetime-picker-component",
+            "@coffeekraken/s-deps-feature",
+            "@coffeekraken/s-descriptor",
+            "@coffeekraken/s-docblock",
+            "@coffeekraken/s-docmap",
+            "@coffeekraken/s-dropzone-component",
+            "@coffeekraken/s-duration",
+            "@coffeekraken/s-env",
+            "@coffeekraken/s-event-emitter",
+            "@coffeekraken/s-favicon-builder",
+            "@coffeekraken/s-feature",
+            "@coffeekraken/s-file",
+            "@coffeekraken/s-filtrable-input-component",
+            "@coffeekraken/s-floating-feature",
+            "@coffeekraken/s-form-validate-feature",
+            "@coffeekraken/s-front",
+            "@coffeekraken/s-frontend-checker",
+            "@coffeekraken/s-frontend-server",
+            "@coffeekraken/s-frontspec",
+            "@coffeekraken/s-glitch-feature",
+            "@coffeekraken/s-glob",
+            "@coffeekraken/s-google-map-component",
+            "@coffeekraken/s-handlebars",
+            "@coffeekraken/s-highlight-feature",
+            "@coffeekraken/s-images-builder",
+            "@coffeekraken/s-inline-feature",
+            "@coffeekraken/s-interface",
+            "@coffeekraken/s-kitchen",
+            "@coffeekraken/s-lazy-feature",
+            "@coffeekraken/s-lit-component",
+            "@coffeekraken/s-log",
+            "@coffeekraken/s-markdown-builder",
+            "@coffeekraken/s-monorepo",
+            "@coffeekraken/s-pack-essentials",
+            "@coffeekraken/s-package",
+            "@coffeekraken/s-page-transition-feature",
+            "@coffeekraken/s-panel-component",
+            "@coffeekraken/s-parallax-feature",
+            "@coffeekraken/s-postcss-builder",
+            "@coffeekraken/s-postcss-sugar-export-plugin",
+            "@coffeekraken/s-postcss-sugar-plugin",
+            "@coffeekraken/s-process",
+            "@coffeekraken/s-promise",
+            "@coffeekraken/s-range-component",
+            "@coffeekraken/s-rating-component",
+            "@coffeekraken/s-refocus-feature",
+            "@coffeekraken/s-request",
+            "@coffeekraken/s-scroll-component",
+            "@coffeekraken/s-sitemap-builder",
+            "@coffeekraken/s-slider-component",
+            "@coffeekraken/s-specs-editor-component",
+            "@coffeekraken/s-specs",
+            "@coffeekraken/s-state",
+            "@coffeekraken/s-static-builder",
+            "@coffeekraken/s-stdio",
+            "@coffeekraken/s-sugar-config",
+            "@coffeekraken/s-sugar-element",
+            "@coffeekraken/s-sugar-feature",
+            "@coffeekraken/s-sugar-json",
+            "@coffeekraken/s-theme-switcher-component",
+            "@coffeekraken/s-theme",
+            "@coffeekraken/s-timer",
+            "@coffeekraken/s-type",
+            "@coffeekraken/s-typescript-builder",
+            "@coffeekraken/s-url",
+            "@coffeekraken/s-validator",
+            "@coffeekraken/s-view-renderer-engine-blade",
+            "@coffeekraken/s-view-renderer-engine-lit",
+            "@coffeekraken/s-view-renderer-engine-twig",
+            "@coffeekraken/s-view-renderer",
+            "@coffeekraken/s-vite-postcss-plugin",
+            "@coffeekraken/s-vite-sugar-plugin",
+            "@coffeekraken/s-vite",
+            "@coffeekraken/sugar"
+        ],
+        "map": {
+            "@coffeekraken.s-code-formatter.config.codeFormatter.glob": {
+                "id": "@coffeekraken.s-code-formatter.config.codeFormatter.glob",
+                "name": "glob",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ],
+                    "raw": "String"
+                },
+                "default": "** /*",
+                "description": "Specify the default glob for the SCodeFormatter.format process",
+                "namespace": "@coffeekraken.s-code-formatter.config.codeFormatter",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com"
+                },
+                "filename": "codeFormatter.config.ts",
+                "extension": "config",
+                "relPath": "src/config/codeFormatter.config.ts"
+            },
+            "@coffeekraken.s-code-formatter.config.codeFormatter.inDir": {
+                "id": "@coffeekraken.s-code-formatter.config.codeFormatter.inDir",
+                "name": "inDir",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ],
+                    "raw": "String"
+                },
+                "default": "[config.storage.src.rootDir]",
+                "description": "Specify the default inDir for the SCodeFormatter.format process",
+                "namespace": "@coffeekraken.s-code-formatter.config.codeFormatter",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com"
+                },
+                "filename": "codeFormatter.config.ts",
+                "extension": "config",
+                "relPath": "src/config/codeFormatter.config.ts",
+                "children": {}
+            },
+            "@coffeekraken.s-code-formatter.doc.README": {
+                "id": "@coffeekraken.s-code-formatter.doc.README",
+                "name": "README",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Markdown"
+                        }
+                    ],
+                    "raw": "Markdown"
+                },
+                "menu": {
+                    "tree": [
+                        "Documentation"
+                    ],
+                    "slug": "/doc/readme"
+                },
+                "platform": [
+                    {
+                        "name": "md",
+                        "description": ""
+                    }
+                ],
+                "namespace": "@coffeekraken.s-code-formatter.doc",
+                "status": "stable",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "README.md.twig",
+                "extension": "md",
+                "relPath": "src/doc/README.md.twig",
+                "children": {}
+            },
+            "@coffeekraken.s-code-formatter.node.SCodeFormatter": {
+                "id": "@coffeekraken.s-code-formatter.node.SCodeFormatter",
+                "name": "SCodeFormatter",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Class"
+                        }
+                    ],
+                    "raw": "Class"
+                },
+                "param": {
+                    "settings": {
+                        "name": "settings",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Object"
+                                }
+                            ],
+                            "raw": "Object"
+                        },
+                        "description": "Specify an object of settings to configure your formatting process",
+                        "default": {},
+                        "defaultStr": "{}"
+                    }
+                },
+                "setting": {
+                    "timeoutBetweenSameFileProcess": {
+                        "name": "timeoutBetweenSameFileProcess",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Number"
+                                }
+                            ],
+                            "raw": "Number"
+                        },
+                        "description": "Specify a timeout between 2 same file processes to avoid loop of formatting",
+                        "default": 1000,
+                        "defaultStr": "1000"
+                    }
+                },
+                "description": "This represent the main code formatter class that allows you to format code like js, css, etc...\nAll the code formatters have to be implemented by exporting an object of type ISCodeFormatterFormatter.",
+                "namespace": "@coffeekraken.s-code-formatter.node",
+                "status": "wip",
+                "example": [
+                    {
+                        "language": "js",
+                        "code": "import __SCodeFormatter from '@coffeekraken/s-code-formatter';\nconst formatter = new __SCodeFormatter();\nawait formatter.format('/my/cool/file.js');"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "SCodeFormatter.ts",
+                "extension": "ts",
+                "relPath": "src/node/SCodeFormatter.ts",
+                "children": {
+                    "registerformatter": {
+                        "id": "s5769095a4723a9579dd15ad18aa93e91fd120d5dba86f7c4df0f45a156214bf7",
+                        "name": "registerFormatter",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ],
+                            "raw": "Function"
+                        },
+                        "param": {
+                            "formatter": {
+                                "name": "formatter",
+                                "type": {
+                                    "types": [
+                                        {
+                                            "type": "ISCodeFormatterFormatter"
+                                        }
+                                    ],
+                                    "raw": "ISCodeFormatterFormatter"
+                                },
+                                "description": "The formatter to register",
+                                "defaultStr": ""
+                            }
+                        },
+                        "description": "Register a new formatter by passing the ISCodeFormatterFormatter typed object",
+                        "static": "true",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://coffeekraken.io"
+                        }
+                    },
+                    "gethandledextensions": {
+                        "id": "s14d40294b864f608f6352abd26af184768469fe977b5dc2283a2d28313ae2a3a",
+                        "name": "getHandledExtensions",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ],
+                            "raw": "Function"
+                        },
+                        "description": "Return an array of all the handled extensions with the registered formatter",
+                        "static": "true",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://coffeekraken.io"
+                        }
+                    },
+                    "getformatterforextension": {
+                        "id": "s68109c7830eef507b7ca8fa8691c5012123bcb715b8c694504c63a7ccc825b8f",
+                        "name": "getFormatterForExtension",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ],
+                            "raw": "Function"
+                        },
+                        "param": {
+                            "extension": {
+                                "name": "extension",
+                                "type": {
+                                    "types": [
+                                        {
+                                            "type": "String"
+                                        }
+                                    ],
+                                    "raw": "String"
+                                },
+                                "description": "The extension to get the formatter from",
+                                "defaultStr": ""
+                            }
+                        },
+                        "description": "Return the appropriate formatter depending on the passed extension",
+                        "static": "true",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://coffeekraken.io"
+                        }
+                    },
+                    "constructor": {
+                        "id": "s1a89c514940eb0896265bdcc93868bccdc3432cd05e1b3d2b4f2ac7136029e96",
+                        "name": "constructor",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ],
+                            "raw": "Function"
+                        },
+                        "description": "Constructor",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://coffeekraken.io"
+                        }
+                    },
+                    "formatinline": {
+                        "id": "s8e3316cdc55eaef7876de0b704862d54d76af628e525cc788b2a628916051e5e",
+                        "name": "formatInline",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ],
+                            "raw": "Function"
+                        },
+                        "param": {
+                            "code": {
+                                "name": "code",
+                                "type": {
+                                    "types": [
+                                        {
+                                            "type": "String"
+                                        }
+                                    ],
+                                    "raw": "String"
+                                },
+                                "description": "The code to format",
+                                "defaultStr": ""
+                            },
+                            "language": {
+                                "name": "language",
+                                "type": {
+                                    "types": [
+                                        {
+                                            "type": "String"
+                                        }
+                                    ],
+                                    "raw": "String"
+                                },
+                                "description": "The language of the passed code",
+                                "defaultStr": ""
+                            },
+                            "settings": {
+                                "name": "settings",
+                                "type": {
+                                    "types": [
+                                        {
+                                            "type": "Partial",
+                                            "of": [
+                                                "ISCodeFormatterSettings"
+                                            ]
+                                        }
+                                    ],
+                                    "raw": "Partial<ISCodeFormatterSettings>"
+                                },
+                                "description": "Specify an object of settings to configure your format process",
+                                "default": {},
+                                "defaultStr": "{}"
+                            }
+                        },
+                        "description": "This method allows you to format a passed string",
+                        "async": "true",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://coffeekraken.io"
+                        }
+                    },
+                    "format": {
+                        "id": "s84027772338af899063887dd39cb3d5dd0461eef87cc6747e1fb53c9337be87f",
+                        "name": "format",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ],
+                            "raw": "Function"
+                        },
+                        "param": {
+                            "params": {
+                                "name": "params",
+                                "type": {
+                                    "types": [
+                                        {
+                                            "type": "Partial",
+                                            "of": [
+                                                "ISCodeFormatterFormatParams"
+                                            ]
+                                        }
+                                    ],
+                                    "raw": "Partial<ISCodeFormatterFormatParams>"
+                                },
+                                "description": "Specify some parameters to format your code",
+                                "default": {},
+                                "defaultStr": "{}"
+                            },
+                            "settings": {
+                                "name": "settings",
+                                "type": {
+                                    "types": [
+                                        {
+                                            "type": "Partial",
+                                            "of": [
+                                                "ISCodeFormatterSettings"
+                                            ]
+                                        }
+                                    ],
+                                    "raw": "Partial<ISCodeFormatterSettings>"
+                                },
+                                "description": "Specify an object of settings to configure your format process",
+                                "default": {},
+                                "defaultStr": "{}"
+                            }
+                        },
+                        "description": "This method allows you to actually format either a string of code (you will need to set the \"language\" param), of directly a file\nby passing a file path.",
+                        "async": "true",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://coffeekraken.io"
+                        }
+                    }
+                }
+            },
+            "@coffeekraken.s-code-formatter.js.interface.SCodeFormatterFormatParamsInterface": {
+                "id": "@coffeekraken.s-code-formatter.js.interface.SCodeFormatterFormatParamsInterface",
+                "name": "SCodeFormatterFormatParamsInterface",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Class"
+                        }
+                    ],
+                    "raw": "Class"
+                },
+                "platform": [
+                    {
+                        "name": "js",
+                        "description": ""
+                    }
+                ],
+                "description": "This interface represent the parameters for the SCodeFormatter.format method",
+                "namespace": "@coffeekraken.s-code-formatter.js.interface",
+                "status": "beta",
+                "interface": {
+                    "name": "SCodeFormatterFormatParamsInterface",
+                    "description": "",
+                    "definition": {
+                        "glob": {
+                            "description": "Specify a glog pattern relative to the \"inDir\"",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
+                            "default": "**/*",
+                            "alias": "i"
+                        },
+                        "inDir": {
+                            "description": "Specify the working directory from where the glob will be resolved",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
+                            "default": "/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/codeFormatters/s-code-formatter/src",
+                            "alias": "d"
+                        },
+                        "watch": {
+                            "description": "Specify if you want to watch for files changes and format them automatically",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Boolean"
+                                    }
+                                ],
+                                "raw": "Boolean"
+                            },
+                            "default": false,
+                            "alias": "w"
+                        },
+                        "formatInitial": {
+                            "description": "Specify if you want to format the founded files directly even if you have specified the watch parameter to true",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Boolean"
+                                    }
+                                ],
+                                "raw": "Boolean"
+                            },
+                            "default": false,
+                            "alias": "f"
+                        }
+                    }
+                },
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "SCodeFormatterFormatParamsInterface.ts",
+                "extension": "ts",
+                "relPath": "src/node/interface/SCodeFormatterFormatParamsInterface.ts",
+                "children": {}
+            }
+        }
+    }
+}

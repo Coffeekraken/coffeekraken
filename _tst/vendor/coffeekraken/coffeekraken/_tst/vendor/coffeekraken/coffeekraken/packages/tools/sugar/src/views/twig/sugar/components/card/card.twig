@@ -1,0 +1,34 @@
+<div class="s-card {{ attributes.class }} {{ direction ? 's-card--' ~ direction : '' }} {{ paddingClasses(padding, frontspec) }} {{ marginClasses(margin, frontspec) }}" {{ attrs(attributes, ['class'])|raw }}
+    s-specs="views.components.card"
+    {{ specsValues(_context)|raw }}
+>
+
+    {% if image and image.url %}
+        <div class="s-card_media s-media-container">
+            <img class="s-card_img s-media" src="{{ image.url }}" alt="{{ image.alt }}" title="{{ image.title }}" />
+        </div>
+    {% endif %}
+
+    <div class="s-card_content s-spacing:{{ spacing ? spacing : '30' }}">
+        {% if title %}
+            <h1 class="s-card_title s-typo:h3">{{ title|raw }}</h1>
+        {% endif %}
+        {% if intro %}
+            <p class="s-card_lead s-typo:lead s-tc:{{ color ? color : 'accent' }}">{{ intro|raw }}</p>
+        {% endif %}
+        {% if text %}
+            <p class="s-card_text s-typo:p">{{ text|raw }}</p>
+        {% endif %}
+        {% if cta %}
+            <div class="s-card_cta">
+                {% set override = {} %}
+                {% if color and not cta.color %}
+                    {% set override = {
+                        color: color
+                    } %}
+                {% endif %}
+                {% include 'sugar/components/cta/cta.twig' with cta|merge(override) only %}
+            </div>
+        {% endif %}
+    </div>
+</div>

@@ -1,6 +1,6 @@
 {
     "name": "@coffeekraken/s-datetime-picker-component",
-    "version": "2.0.0-alpha.24",
+    "version": "2.0.0-alpha.25",
     "description": "Clean datetime picker web component that support all ISO formats as well as dates|weekend|... disabling, and more...",
     "type": "module",
     "homepage": "https://coffeekraken.io",
@@ -13,11 +13,11 @@
     "author": "",
     "license": "MIT",
     "dependencies": {
-        "@coffeekraken/s-color": "^2.0.0-alpha.24",
-        "@coffeekraken/s-interface": "^2.0.0-alpha.24",
-        "@coffeekraken/s-lit-component": "^2.0.0-alpha.24",
-        "@coffeekraken/s-theme": "^2.0.0-alpha.24",
-        "@coffeekraken/sugar": "^2.0.0-alpha.24",
+        "@coffeekraken/s-color": "^2.0.0-alpha.25",
+        "@coffeekraken/s-interface": "^2.0.0-alpha.25",
+        "@coffeekraken/s-lit-component": "^2.0.0-alpha.25",
+        "@coffeekraken/s-theme": "^2.0.0-alpha.25",
+        "@coffeekraken/sugar": "^2.0.0-alpha.25",
         "date-format-parse": "^0.2.7",
         "dateformat": "^5.0.3",
         "lit": "^2.2.8"

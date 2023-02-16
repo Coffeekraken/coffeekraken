@@ -1,0 +1,24 @@
+{
+    "type": "Select",
+    "title": "Media",
+    "description": "Specify the media on which to apply this new layout",
+    "required": true,
+    "options": [
+        {
+            "name": "Wide",
+            "value": "wide"
+        },
+        {
+            "name": "desktop",
+            "value": "desktop"
+        },
+        {
+            "name": "tablet",
+            "value": "tablet"
+        },
+        {
+            "name": "mobile",
+            "value": "mobile"
+        }
+    ]
+}

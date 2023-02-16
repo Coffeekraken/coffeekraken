@@ -1,0 +1,23 @@
+{
+    "config": {
+        "folders": [
+            {
+                "path": "./dist/pkg/%moduleSystem/config"
+            }
+        ]
+    },
+    "cli": [
+        {
+            "stack": "sugarJson",
+            "description": "Sugar.json processes like update, etc...",
+            "actions": {
+                "list": {
+                    "scope": "package",
+                    "description": "Search and list for sugar.json files",
+                    "interface": "./dist/pkg/esm/node/interface/SSugarJsonListParamsInterface.js",
+                    "process": "./dist/pkg/esm/cli/list.cli.js"
+                }
+            }
+        }
+    ]
+}

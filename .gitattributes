@@ -18,7 +18,10 @@
 *.cjs              export-ignore
 *.mjs              export-ignore
 
+*.txt              export-ignore
+
 *.css              export-ignore
+*.scss              export-ignore
 
 *.eot              export-ignore
 *.ttf              export-ignore
@@ -46,10 +49,22 @@
 *.gitignore              export-ignore
 *.gitmodules              export-ignore
 
+*.config.json              export-ignore
+tsconfig.json              export-ignore
+docmap.json              export-ignore
+frontspec.json              export-ignore
+yarn.lock              export-ignore
+package.json              export-ignore
+sugar.json                export-ignore
+
+packages/@website/              export-ignore
+packages/@examples/              export-ignore
+packages/@tests/              export-ignore
+
 LICENSE              export-ignore
 README              export-ignore
 Dockerfile              export-ignore
 
-.yarn              export-ignore
-.vscode              export-ignore
-.old              export-ignore
+.yarn/              export-ignore
+.vscode/              export-ignore
+.old/              export-ignore

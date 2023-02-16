@@ -1,16 +1,16 @@
 {
     "name": "@coffeekraken/s-conductor",
-    "version": "2.0.0-alpha.24",
+    "version": "2.0.0-alpha.25",
     "description": "Class that let you register things to do at a certain point in time. It can be \"inViewport\", \"nearViewport\", \"visible\", and more...",
     "type": "module",
     "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)",
     "license": "MIT",
     "dependencies": {
-        "@coffeekraken/s-class": "^2.0.0-alpha.24",
-        "@coffeekraken/s-duration": "^2.0.0-alpha.24",
-        "@coffeekraken/s-interface": "^2.0.0-alpha.24",
-        "@coffeekraken/s-promise": "^2.0.0-alpha.24",
-        "@coffeekraken/sugar": "^2.0.0-alpha.24"
+        "@coffeekraken/s-class": "^2.0.0-alpha.25",
+        "@coffeekraken/s-duration": "^2.0.0-alpha.25",
+        "@coffeekraken/s-interface": "^2.0.0-alpha.25",
+        "@coffeekraken/s-promise": "^2.0.0-alpha.25",
+        "@coffeekraken/sugar": "^2.0.0-alpha.25"
     },
     "main": "dist/pkg/cjs/js/exports.js",
     "module": "dist/pkg/esm/js/exports.js",

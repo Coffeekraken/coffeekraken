@@ -1,0 +1,43 @@
+{
+    "name": "@coffeekraken/s-sugar-json",
+    "version": "2.0.0-alpha.23",
+    "description": "Simple class that let you list and read sugar.json files. A sugar.json file is more or less the configuration you want to apply in your project regarding the Coffeekraken toolchain...",
+    "type": "module",
+    "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)",
+    "license": "MIT",
+    "dependencies": {
+        "@coffeekraken/s-bench": "^2.0.0-alpha.23",
+        "@coffeekraken/s-class": "^2.0.0-alpha.23",
+        "@coffeekraken/s-duration": "^2.0.0-alpha.23",
+        "@coffeekraken/s-event-emitter": "^2.0.0-alpha.23",
+        "@coffeekraken/s-glob": "^2.0.0-alpha.23",
+        "@coffeekraken/s-interface": "^2.0.0-alpha.23",
+        "@coffeekraken/s-kitchen": "^2.0.0-alpha.23",
+        "@coffeekraken/s-log": "^2.0.0-alpha.23",
+        "@coffeekraken/s-promise": "^2.0.0-alpha.23",
+        "@coffeekraken/s-stdio": "^2.0.0-alpha.23",
+        "@coffeekraken/sugar": "^2.0.0-alpha.23",
+        "glob-all": "^3.3.0"
+    },
+    "main": "dist/pkg/cjs/node/exports.js",
+    "module": "dist/pkg/esm/node/exports.js",
+    "exports": {
+        ".": {
+            "require": "./dist/pkg/cjs/node/exports.js",
+            "import": "./dist/pkg/esm/node/exports.js"
+        },
+        "./shared/*": {
+            "require": "./dist/pkg/cjs/shared/*.js",
+            "import": "./dist/pkg/esm/shared/*.js"
+        },
+        "./node/*": {
+            "require": "./dist/pkg/cjs/node/*.js",
+            "import": "./dist/pkg/esm/node/*.js"
+        },
+        "./js/*": {
+            "require": "./dist/pkg/cjs/js/*.js",
+            "import": "./dist/pkg/esm/js/*.js"
+        }
+    },
+    "homepage": "https://coffeekraken.io"
+}

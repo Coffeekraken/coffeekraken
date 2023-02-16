@@ -1,0 +1,43 @@
+{
+    "type": "Object",
+    "title": "Margin",
+    "description": "Specify the margins you want around your layout",
+    "responsive": true,
+    "props": {
+        "all": {
+            "extends": "sugar.views.props.space",
+            "title": "All sides",
+            "description": "Specify the margin (top, bottom, right and left)"
+        },
+        "block": {
+            "extends": "sugar.views.props.space",
+            "title": "Block",
+            "description": "Specify the margin block (top, bottom)"
+        },
+        "inline": {
+            "extends": "sugar.views.props.space",
+            "title": "Inline",
+            "description": "Specify the margin inkine (left, right)"
+        },
+        "blockStart": {
+            "extends": "sugar.views.props.space",
+            "title": "Block start",
+            "description": "Specify the margin block start (top)"
+        },
+        "blockEnd": {
+            "extends": "sugar.views.props.space",
+            "title": "Block end",
+            "description": "Specify the margin block end (bottom)"
+        },
+        "inlineStart": {
+            "extends": "sugar.views.props.space",
+            "title": "Inline start",
+            "description": "Specify the margin inline start (left)"
+        },
+        "inlineEnd": {
+            "extends": "sugar.views.props.space",
+            "title": "Inline end",
+            "description": "Specify the margin inline end (right)"
+        }
+    }
+}

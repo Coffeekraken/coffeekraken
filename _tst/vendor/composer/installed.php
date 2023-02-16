@@ -3,7 +3,7 @@
         'name' => 'tst/tst',
         'pretty_version' => 'dev-master',
         'version' => 'dev-master',
-        'reference' => 'f4d32ebec74517049d47a014469f89b013b94c75',
+        'reference' => '227e8e1d8c6a1e515332ae6c86b1242c1d64f946',
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -13,7 +13,7 @@
         'coffeekraken/coffeekraken' => array(
             'pretty_version' => 'dev-master',
             'version' => 'dev-master',
-            'reference' => 'f4d32ebec74517049d47a014469f89b013b94c75',
+            'reference' => '227e8e1d8c6a1e515332ae6c86b1242c1d64f946',
             'type' => 'library',
             'install_path' => __DIR__ . '/../coffeekraken/coffeekraken',
             'aliases' => array(
@@ -51,7 +51,7 @@
         'tst/tst' => array(
             'pretty_version' => 'dev-master',
             'version' => 'dev-master',
-            'reference' => 'f4d32ebec74517049d47a014469f89b013b94c75',
+            'reference' => '227e8e1d8c6a1e515332ae6c86b1242c1d64f946',
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),

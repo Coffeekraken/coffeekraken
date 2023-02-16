@@ -1,0 +1,411 @@
+{
+    "map": {},
+    "extends": [],
+    "generated": {
+        "extends": [
+            "@coffeekraken/aa",
+            "@coffeekraken/cli",
+            "@coffeekraken/s-activate-feature",
+            "@coffeekraken/s-appear-feature",
+            "@coffeekraken/s-asset-picker-component",
+            "@coffeekraken/s-bench",
+            "@coffeekraken/s-builder",
+            "@coffeekraken/s-carpenter",
+            "@coffeekraken/s-class",
+            "@coffeekraken/s-classmap",
+            "@coffeekraken/s-clipboard-copy-component",
+            "@coffeekraken/s-code-example-component",
+            "@coffeekraken/s-code-formatter-prettier",
+            "@coffeekraken/s-code-formatter",
+            "@coffeekraken/s-color-picker-component",
+            "@coffeekraken/s-color",
+            "@coffeekraken/s-component-utils",
+            "@coffeekraken/s-conductor",
+            "@coffeekraken/s-config-adapter",
+            "@coffeekraken/s-config-folder-adapter",
+            "@coffeekraken/s-config-inline-adapter",
+            "@coffeekraken/s-config",
+            "@coffeekraken/s-css-animation",
+            "@coffeekraken/s-dashboard",
+            "@coffeekraken/s-data-file-generic",
+            "@coffeekraken/s-data-file-js",
+            "@coffeekraken/s-data-file-php",
+            "@coffeekraken/s-datetime-picker-component",
+            "@coffeekraken/s-deps-feature",
+            "@coffeekraken/s-descriptor",
+            "@coffeekraken/s-docblock",
+            "@coffeekraken/s-docmap",
+            "@coffeekraken/s-dropzone-component",
+            "@coffeekraken/s-duration",
+            "@coffeekraken/s-env",
+            "@coffeekraken/s-event-emitter",
+            "@coffeekraken/s-favicon-builder",
+            "@coffeekraken/s-feature",
+            "@coffeekraken/s-file",
+            "@coffeekraken/s-filtrable-input-component",
+            "@coffeekraken/s-floating-feature",
+            "@coffeekraken/s-form-validate-feature",
+            "@coffeekraken/s-front",
+            "@coffeekraken/s-frontend-checker",
+            "@coffeekraken/s-frontend-server",
+            "@coffeekraken/s-frontspec",
+            "@coffeekraken/s-glitch-feature",
+            "@coffeekraken/s-glob",
+            "@coffeekraken/s-google-map-component",
+            "@coffeekraken/s-handlebars",
+            "@coffeekraken/s-highlight-feature",
+            "@coffeekraken/s-images-builder",
+            "@coffeekraken/s-inline-feature",
+            "@coffeekraken/s-interface",
+            "@coffeekraken/s-kitchen",
+            "@coffeekraken/s-lazy-feature",
+            "@coffeekraken/s-lit-component",
+            "@coffeekraken/s-log",
+            "@coffeekraken/s-markdown-builder",
+            "@coffeekraken/s-monorepo",
+            "@coffeekraken/s-pack-essentials",
+            "@coffeekraken/s-package",
+            "@coffeekraken/s-page-transition-feature",
+            "@coffeekraken/s-parallax-feature",
+            "@coffeekraken/s-postcss-builder",
+            "@coffeekraken/s-postcss-sugar-export-plugin",
+            "@coffeekraken/s-postcss-sugar-plugin",
+            "@coffeekraken/s-process",
+            "@coffeekraken/s-promise",
+            "@coffeekraken/s-range-component",
+            "@coffeekraken/s-rating-component",
+            "@coffeekraken/s-refocus-feature",
+            "@coffeekraken/s-request",
+            "@coffeekraken/s-scroll-component",
+            "@coffeekraken/s-sitemap-builder",
+            "@coffeekraken/s-slider-component",
+            "@coffeekraken/s-specs-editor-component",
+            "@coffeekraken/s-specs",
+            "@coffeekraken/s-state",
+            "@coffeekraken/s-static-builder",
+            "@coffeekraken/s-stdio",
+            "@coffeekraken/s-sugar-config",
+            "@coffeekraken/s-sugar-element",
+            "@coffeekraken/s-sugar-feature",
+            "@coffeekraken/s-sugar-json",
+            "@coffeekraken/s-theme-switcher-component",
+            "@coffeekraken/s-theme",
+            "@coffeekraken/s-timer",
+            "@coffeekraken/s-type",
+            "@coffeekraken/s-typescript-builder",
+            "@coffeekraken/s-url",
+            "@coffeekraken/s-validator",
+            "@coffeekraken/s-view-renderer-engine-blade",
+            "@coffeekraken/s-view-renderer-engine-lit",
+            "@coffeekraken/s-view-renderer-engine-twig",
+            "@coffeekraken/s-view-renderer",
+            "@coffeekraken/s-vite-postcss-plugin",
+            "@coffeekraken/s-vite-sugar-plugin",
+            "@coffeekraken/s-vite",
+            "@coffeekraken/sugar"
+        ],
+        "map": {
+            "@coffeekraken.s-panel-component.doc.README": {
+                "id": "@coffeekraken.s-panel-component.doc.README",
+                "name": "README",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Markdown"
+                        }
+                    ],
+                    "raw": "Markdown"
+                },
+                "menu": {
+                    "tree": [
+                        "Documentation"
+                    ],
+                    "slug": "/doc/readme"
+                },
+                "platform": [
+                    {
+                        "name": "md",
+                        "description": ""
+                    }
+                ],
+                "namespace": "@coffeekraken.s-panel-component.doc",
+                "status": "stable",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "README.md.twig",
+                "extension": "md",
+                "relPath": "src/doc/README.md.twig",
+                "children": {}
+            },
+            "@coffeekraken.s-panel-component.js.SPanelComponent": {
+                "id": "@coffeekraken.s-panel-component.js.SPanelComponent",
+                "name": "SPanelComponent",
+                "as": "Panel (modal)",
+                "type": {
+                    "types": [
+                        {
+                            "type": "CustomElement"
+                        }
+                    ],
+                    "raw": "CustomElement"
+                },
+                "menu": {
+                    "tree": [
+                        "Styleguide",
+                        "UI"
+                    ],
+                    "slug": "/styleguide/ui/s-panel"
+                },
+                "platform": [
+                    {
+                        "name": "html",
+                        "description": ""
+                    }
+                ],
+                "description": "This component specify a panel that can be opened and closed with positions like \"top\", \"right\", \"bottom\", \"left\" or \"modal\".\nIt has multiple systems to open and close panels depending on your needs and can be programatically manipulated.",
+                "namespace": "@coffeekraken.s-panel-component.js",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "html",
+                        "title": "Simple top panel",
+                        "code": "<s-panel position=\"top\" id=\"simple-top-panel-open\" backdrop>\n <div class=\"s-p:50\">\n     <h1 class=\"s-typo:h1 s-mbe:30\">Hello world</h1>\n     <p class=\"s-typo:p s-mbe:30\">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc sit amet lectus magna. Ut vehicula eros a sapien egestas, sed ultricies orci lacinia. In hac habitasse platea dictumst. Nulla metus elit, mollis at ante id, varius faucibus nulla. Praesent aliquam justo vel justo accumsan, non dictum lorem porta. Donec varius magna id semper pulvinar. Nunc ultrices pellentesque mollis. Mauris vestibulum justo in facilisis tempor. Nunc gravida dictum ex ut condimentum. Aenean sagittis dignissim semper.</p>\n     <button class=\"s-btn s-color:accent s-mie:10\" s-panel-close=\"simple-top-panel-open\">Close panel</button> or click outside or use the escape key...\n </div>\n</s-panel>\n<button class=\"s-btn s-color:complementary\" s-panel-open=\"simple-top-panel-open\">Open top panel</button>"
+                    },
+                    {
+                        "language": "html",
+                        "title": "Simple right panel",
+                        "code": "<s-panel position=\"right\" id=\"simple-right-panel-open\" backdrop>\n <div class=\"s-p:50\">\n     <h1 class=\"s-typo:h1 s-mbe:30\">Hello world</h1>\n     <p class=\"s-typo:p s-mbe:30\">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc sit amet lectus magna. Ut vehicula eros a sapien egestas, sed ultricies orci lacinia. In hac habitasse platea dictumst. Nulla metus elit, mollis at ante id, varius faucibus nulla. Praesent aliquam justo vel justo accumsan, non dictum lorem porta. Donec varius magna id semper pulvinar. Nunc ultrices pellentesque mollis. Mauris vestibulum justo in facilisis tempor. Nunc gravida dictum ex ut condimentum. Aenean sagittis dignissim semper.</p>\n     <button class=\"s-btn s-color:accent s-mie:10\" s-panel-close=\"simple-right-panel-open\">Close panel</button> or click outside or use the escape key...\n </div>\n</s-panel>\n<button class=\"s-btn s-color:complementary\" s-panel-open=\"simple-right-panel-open\">Open right panel</button>"
+                    },
+                    {
+                        "language": "html",
+                        "title": "Simple bottom panel",
+                        "code": "<s-panel position=\"bottom\" id=\"simple-bottom-panel-open\" backdrop>\n <div class=\"s-p:50\">\n     <h1 class=\"s-typo:h1 s-mbe:30\">Hello world</h1>\n     <p class=\"s-typo:p s-mbe:30\">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc sit amet lectus magna. Ut vehicula eros a sapien egestas, sed ultricies orci lacinia. In hac habitasse platea dictumst. Nulla metus elit, mollis at ante id, varius faucibus nulla. Praesent aliquam justo vel justo accumsan, non dictum lorem porta. Donec varius magna id semper pulvinar. Nunc ultrices pellentesque mollis. Mauris vestibulum justo in facilisis tempor. Nunc gravida dictum ex ut condimentum. Aenean sagittis dignissim semper.</p>\n     <button class=\"s-btn s-color:accent s-mie:10\" s-panel-close=\"simple-bottom-panel-open\">Close panel</button> or click outside or use the escape key...\n </div>\n</s-panel>\n<button class=\"s-btn s-color:complementary\" s-panel-open=\"simple-bottom-panel-open\">Open bottom panel</button>"
+                    },
+                    {
+                        "language": "html",
+                        "title": "Simple left panel",
+                        "code": "<s-panel position=\"left\" id=\"simple-left-panel-open\" backdrop>\n <div class=\"s-p:50\">\n     <h1 class=\"s-typo:h1 s-mbe:30\">Hello world</h1>\n     <p class=\"s-typo:p s-mbe:30\">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc sit amet lectus magna. Ut vehicula eros a sapien egestas, sed ultricies orci lacinia. In hac habitasse platea dictumst. Nulla metus elit, mollis at ante id, varius faucibus nulla. Praesent aliquam justo vel justo accumsan, non dictum lorem porta. Donec varius magna id semper pulvinar. Nunc ultrices pellentesque mollis. Mauris vestibulum justo in facilisis tempor. Nunc gravida dictum ex ut condimentum. Aenean sagittis dignissim semper.</p>\n     <button class=\"s-btn s-color:accent s-mie:10\" s-panel-close=\"simple-left-panel-open\">Close panel</button> or click outside or use the escape key...\n </div>\n</s-panel>\n<button class=\"s-btn s-color:complementary\" s-panel-open=\"simple-left-panel-open\">Open left panel</button>"
+                    },
+                    {
+                        "language": "html",
+                        "title": "Simple modal panel",
+                        "code": "<s-panel position=\"modal\" id=\"simple-modal-panel-open\" backdrop>\n <div class=\"s-p:50\">\n     <h1 class=\"s-typo:h1 s-mbe:30\">Hello world</h1>\n     <p class=\"s-typo:p s-mbe:30\">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc sit amet lectus magna. Ut vehicula eros a sapien egestas, sed ultricies orci lacinia. In hac habitasse platea dictumst. Nulla metus elit, mollis at ante id, varius faucibus nulla. Praesent aliquam justo vel justo accumsan, non dictum lorem porta. Donec varius magna id semper pulvinar. Nunc ultrices pellentesque mollis. Mauris vestibulum justo in facilisis tempor. Nunc gravida dictum ex ut condimentum. Aenean sagittis dignissim semper.</p>\n     <button class=\"s-btn s-color:accent s-mie:10\" s-panel-close=\"simple-modal-panel-open\">Close panel</button> or click outside or use the escape key...\n </div>\n</s-panel>\n<button class=\"s-btn s-color:complementary\" s-panel-open=\"simple-modal-panel-open\">Open modal panel</button>"
+                    },
+                    {
+                        "language": "html",
+                        "title": "Modal panel closable only with button",
+                        "code": "<s-panel position=\"modal\" id=\"simple-modal-panel-open-button\" backdrop close-on=\"\">\n <div class=\"s-p:50\">\n     <h1 class=\"s-typo:h1 s-mbe:30\">Hello world</h1>\n     <p class=\"s-typo:p s-mbe:30\">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc sit amet lectus magna. Ut vehicula eros a sapien egestas, sed ultricies orci lacinia. In hac habitasse platea dictumst. Nulla metus elit, mollis at ante id, varius faucibus nulla. Praesent aliquam justo vel justo accumsan, non dictum lorem porta. Donec varius magna id semper pulvinar. Nunc ultrices pellentesque mollis. Mauris vestibulum justo in facilisis tempor. Nunc gravida dictum ex ut condimentum. Aenean sagittis dignissim semper.</p>\n     <button class=\"s-btn s-color:accent s-mie:10\" s-panel-close=\"simple-modal-panel-open-button\">Close panel</button>\n </div>\n</s-panel>\n<button class=\"s-btn s-color:complementary\" s-panel-open=\"simple-modal-panel-open-button\">Open modal panel cloable by button</button>"
+                    },
+                    {
+                        "language": "html",
+                        "title": "Modal panel closable on event",
+                        "code": "<s-panel position=\"modal\" id=\"simple-modal-panel-open-event\" backdrop close-on=\"event:submit\">\n <div class=\"s-p:50\" style=\"width: 400px\">\n     <h1 class=\"s-typo:h3\">Login</h1>\n     <form>\n         <label class=\"s-label:float s-color:accent s-mbs:30\" s-form-validate>\n             <input class=\"s-input\" type=\"text\" placeholder=\"John\" required />\n             <span>Firstname</span>\n         </label>\n         <label class=\"s-label:float s-color:accent s-mbs:30\" s-form-validate>\n             <input class=\"s-input\" type=\"text\" placeholder=\"Doe\" required />\n             <span>Lastname</span>\n         </label>\n         <div class=\"s-flex:align-center s-mbs:30\">\n             <span class=\"s-flex-item:grow\">\n                 <a href=\"#\" class=\"s-typo:a\">Forgot password?</a>\n             </span>\n             <input type=\"submit\" class=\"s-btn s-color:accent\" value=\"Submit\" />\n        </div>\n    </form>\n </div>\n</s-panel>\n<button class=\"s-btn s-color:complementary\" s-panel-open=\"simple-modal-panel-open-event\">Open fake login modal</button>"
+                    }
+                ],
+                "interface": {
+                    "name": "SPanelComponentInterface",
+                    "description": "",
+                    "definition": {
+                        "position": {
+                            "description": "Specify the side where to display the panel. Can be \"top\",\"left\",\"bottom\" or \"right\"",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
+                            "values": [
+                                "top",
+                                "left",
+                                "bottom",
+                                "right",
+                                "modal"
+                            ],
+                            "default": "modal",
+                            "physical": true
+                        },
+                        "active": {
+                            "description": "Specify the panel initial state",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Boolean"
+                                    }
+                                ],
+                                "raw": "Boolean"
+                            },
+                            "default": false,
+                            "physical": true
+                        },
+                        "backdrop": {
+                            "description": "Specify if you want an \"backdrop\" between the panel and your content",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Boolean"
+                                    }
+                                ],
+                                "raw": "Boolean"
+                            },
+                            "default": false
+                        },
+                        "triggerer": {
+                            "description": "Specify a css selector that targets the elements in your UI you want to open the panel on click",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            }
+                        },
+                        "closeOn": {
+                            "description": "Specify which \"action(s)\" close the panel. Valid values are \"click\" or/and \"escape\" or/and \"event:%eventName\". When using the \"event:\", the listener will be the node itself by default but you can specify the \"document\" like so \"event:%eventName:document",
+                            "type": {
+                                "type": "Array<String>",
+                                "splitChars": [
+                                    ","
+                                ]
+                            },
+                            "values": [
+                                "click",
+                                "escape"
+                            ],
+                            "default": [
+                                "click",
+                                "escape"
+                            ]
+                        }
+                    }
+                },
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "SPanelComponent.ts",
+                "extension": "ts",
+                "relPath": "src/js/SPanelComponent.ts",
+                "children": {}
+            },
+            "@coffeekraken.s-panel-component.js.interface.SPanelComponentInterface": {
+                "id": "@coffeekraken.s-panel-component.js.interface.SPanelComponentInterface",
+                "name": "SPanelComponentInterface",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Class"
+                        }
+                    ],
+                    "raw": "Class"
+                },
+                "platform": [
+                    {
+                        "name": "js",
+                        "description": ""
+                    }
+                ],
+                "description": "This class represent the interface that describe parameters of the SPanelComponent",
+                "namespace": "@coffeekraken.s-panel-component.js.interface",
+                "status": "beta",
+                "interface": {
+                    "name": "SPanelComponentInterface",
+                    "description": "",
+                    "definition": {
+                        "position": {
+                            "description": "Specify the side where to display the panel. Can be \"top\",\"left\",\"bottom\" or \"right\"",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
+                            "values": [
+                                "top",
+                                "left",
+                                "bottom",
+                                "right",
+                                "modal"
+                            ],
+                            "default": "modal",
+                            "physical": true
+                        },
+                        "active": {
+                            "description": "Specify the panel initial state",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Boolean"
+                                    }
+                                ],
+                                "raw": "Boolean"
+                            },
+                            "default": false,
+                            "physical": true
+                        },
+                        "backdrop": {
+                            "description": "Specify if you want an \"backdrop\" between the panel and your content",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Boolean"
+                                    }
+                                ],
+                                "raw": "Boolean"
+                            },
+                            "default": false
+                        },
+                        "triggerer": {
+                            "description": "Specify a css selector that targets the elements in your UI you want to open the panel on click",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            }
+                        },
+                        "closeOn": {
+                            "description": "Specify which \"action(s)\" close the panel. Valid values are \"click\" or/and \"escape\" or/and \"event:%eventName\". When using the \"event:\", the listener will be the node itself by default but you can specify the \"document\" like so \"event:%eventName:document",
+                            "type": {
+                                "type": "Array<String>",
+                                "splitChars": [
+                                    ","
+                                ]
+                            },
+                            "values": [
+                                "click",
+                                "escape"
+                            ],
+                            "default": [
+                                "click",
+                                "escape"
+                            ]
+                        }
+                    }
+                },
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "SPanelComponentInterface.ts",
+                "extension": "ts",
+                "relPath": "src/js/interface/SPanelComponentInterface.ts",
+                "children": {}
+            }
+        }
+    }
+}

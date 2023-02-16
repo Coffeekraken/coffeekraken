@@ -1,0 +1,14 @@
+{
+  "version": "1.0",
+  "name": "@example/02-systemsChart",
+  "description": "",
+  "icons": {
+    "60": "/dist/favicon/firefox_app_60x60.png",
+    "128": "/dist/favicon/firefox_app_128x128.png",
+    "512": "/dist/favicon/firefox_app_512x512.png"
+  },
+  "developer": {
+    "name": "",
+    "url": ""
+  }
+}

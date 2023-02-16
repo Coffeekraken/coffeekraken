@@ -1,6 +1,6 @@
 {
     "name": "@coffeekraken/s-lazy-feature",
-    "version": "2.0.0-alpha.24",
+    "version": "2.0.0-alpha.25",
     "description": "This feature allows you to scope your sections, etc... inside a template that will be rendered only when the section comes near the viewport.",
     "type": "module",
     "scripts": {
@@ -9,11 +9,11 @@
     "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)",
     "license": "MIT",
     "dependencies": {
-        "@coffeekraken/s-class": "^2.0.0-alpha.24",
-        "@coffeekraken/s-env": "^2.0.0-alpha.24",
-        "@coffeekraken/s-feature": "^2.0.0-alpha.24",
-        "@coffeekraken/s-interface": "^2.0.0-alpha.24",
-        "@coffeekraken/sugar": "^2.0.0-alpha.24"
+        "@coffeekraken/s-class": "^2.0.0-alpha.25",
+        "@coffeekraken/s-env": "^2.0.0-alpha.25",
+        "@coffeekraken/s-feature": "^2.0.0-alpha.25",
+        "@coffeekraken/s-interface": "^2.0.0-alpha.25",
+        "@coffeekraken/sugar": "^2.0.0-alpha.25"
     },
     "main": "dist/pkg/cjs/js/exports.js",
     "module": "dist/pkg/esm/js/exports.js",

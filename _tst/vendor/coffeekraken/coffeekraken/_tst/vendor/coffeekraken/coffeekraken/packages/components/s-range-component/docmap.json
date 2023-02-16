@@ -1,0 +1,507 @@
+{
+    "map": {},
+    "extends": [],
+    "generated": {
+        "extends": [
+            "@coffeekraken/aa",
+            "@coffeekraken/cli",
+            "@coffeekraken/s-activate-feature",
+            "@coffeekraken/s-appear-feature",
+            "@coffeekraken/s-asset-picker-component",
+            "@coffeekraken/s-bench",
+            "@coffeekraken/s-builder",
+            "@coffeekraken/s-carpenter",
+            "@coffeekraken/s-class",
+            "@coffeekraken/s-classmap",
+            "@coffeekraken/s-clipboard-copy-component",
+            "@coffeekraken/s-code-example-component",
+            "@coffeekraken/s-code-formatter-prettier",
+            "@coffeekraken/s-code-formatter",
+            "@coffeekraken/s-color-picker-component",
+            "@coffeekraken/s-color",
+            "@coffeekraken/s-component-utils",
+            "@coffeekraken/s-conductor",
+            "@coffeekraken/s-config-adapter",
+            "@coffeekraken/s-config-folder-adapter",
+            "@coffeekraken/s-config-inline-adapter",
+            "@coffeekraken/s-config",
+            "@coffeekraken/s-css-animation",
+            "@coffeekraken/s-dashboard",
+            "@coffeekraken/s-data-file-generic",
+            "@coffeekraken/s-data-file-js",
+            "@coffeekraken/s-data-file-php",
+            "@coffeekraken/s-datetime-picker-component",
+            "@coffeekraken/s-deps-feature",
+            "@coffeekraken/s-descriptor",
+            "@coffeekraken/s-docblock",
+            "@coffeekraken/s-docmap",
+            "@coffeekraken/s-dropzone-component",
+            "@coffeekraken/s-duration",
+            "@coffeekraken/s-env",
+            "@coffeekraken/s-event-emitter",
+            "@coffeekraken/s-favicon-builder",
+            "@coffeekraken/s-feature",
+            "@coffeekraken/s-file",
+            "@coffeekraken/s-filtrable-input-component",
+            "@coffeekraken/s-floating-feature",
+            "@coffeekraken/s-form-validate-feature",
+            "@coffeekraken/s-front",
+            "@coffeekraken/s-frontend-checker",
+            "@coffeekraken/s-frontend-server",
+            "@coffeekraken/s-frontspec",
+            "@coffeekraken/s-glitch-feature",
+            "@coffeekraken/s-glob",
+            "@coffeekraken/s-google-map-component",
+            "@coffeekraken/s-handlebars",
+            "@coffeekraken/s-highlight-feature",
+            "@coffeekraken/s-images-builder",
+            "@coffeekraken/s-inline-feature",
+            "@coffeekraken/s-interface",
+            "@coffeekraken/s-kitchen",
+            "@coffeekraken/s-lazy-feature",
+            "@coffeekraken/s-lit-component",
+            "@coffeekraken/s-log",
+            "@coffeekraken/s-markdown-builder",
+            "@coffeekraken/s-monorepo",
+            "@coffeekraken/s-pack-essentials",
+            "@coffeekraken/s-package",
+            "@coffeekraken/s-page-transition-feature",
+            "@coffeekraken/s-panel-component",
+            "@coffeekraken/s-parallax-feature",
+            "@coffeekraken/s-postcss-builder",
+            "@coffeekraken/s-postcss-sugar-export-plugin",
+            "@coffeekraken/s-postcss-sugar-plugin",
+            "@coffeekraken/s-process",
+            "@coffeekraken/s-promise",
+            "@coffeekraken/s-rating-component",
+            "@coffeekraken/s-refocus-feature",
+            "@coffeekraken/s-request",
+            "@coffeekraken/s-scroll-component",
+            "@coffeekraken/s-sitemap-builder",
+            "@coffeekraken/s-slider-component",
+            "@coffeekraken/s-specs-editor-component",
+            "@coffeekraken/s-specs",
+            "@coffeekraken/s-state",
+            "@coffeekraken/s-static-builder",
+            "@coffeekraken/s-stdio",
+            "@coffeekraken/s-sugar-config",
+            "@coffeekraken/s-sugar-element",
+            "@coffeekraken/s-sugar-feature",
+            "@coffeekraken/s-sugar-json",
+            "@coffeekraken/s-theme-switcher-component",
+            "@coffeekraken/s-theme",
+            "@coffeekraken/s-timer",
+            "@coffeekraken/s-type",
+            "@coffeekraken/s-typescript-builder",
+            "@coffeekraken/s-url",
+            "@coffeekraken/s-validator",
+            "@coffeekraken/s-view-renderer-engine-blade",
+            "@coffeekraken/s-view-renderer-engine-lit",
+            "@coffeekraken/s-view-renderer-engine-twig",
+            "@coffeekraken/s-view-renderer",
+            "@coffeekraken/s-vite-postcss-plugin",
+            "@coffeekraken/s-vite-sugar-plugin",
+            "@coffeekraken/s-vite",
+            "@coffeekraken/sugar"
+        ],
+        "map": {
+            "@coffeekraken.s-range-component.doc.README": {
+                "id": "@coffeekraken.s-range-component.doc.README",
+                "name": "README",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Markdown"
+                        }
+                    ],
+                    "raw": "Markdown"
+                },
+                "menu": {
+                    "tree": [
+                        "Documentation"
+                    ],
+                    "slug": "/doc/readme"
+                },
+                "platform": [
+                    {
+                        "name": "md",
+                        "description": ""
+                    }
+                ],
+                "namespace": "@coffeekraken.s-range-component.doc",
+                "status": "stable",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "README.md.twig",
+                "extension": "md",
+                "relPath": "src/doc/README.md.twig",
+                "children": {}
+            },
+            "@coffeekraken.s-range-component.js.SRangeComponent": {
+                "id": "@coffeekraken.s-range-component.js.SRangeComponent",
+                "name": "SRangeComponent",
+                "as": "Range (component)",
+                "type": {
+                    "types": [
+                        {
+                            "type": "CustomElement"
+                        }
+                    ],
+                    "raw": "CustomElement"
+                },
+                "menu": {
+                    "tree": [
+                        "Styleguide",
+                        "Forms"
+                    ],
+                    "slug": "/styleguide/form/s-range"
+                },
+                "platform": [
+                    {
+                        "name": "html",
+                        "description": ""
+                    }
+                ],
+                "description": "This component specify a range with some additional features than the native one like\ndisplaying the value automatically in tooltip or inline.",
+                "namespace": "@coffeekraken.s-range-component.js",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "html",
+                        "title": "Simple range",
+                        "code": "<s-range name=\"myCoolRange\" value=\"90\" class=\"s-color:accent s-mbe:30\"></s-range>"
+                    },
+                    {
+                        "language": "html",
+                        "title": "With tooltip",
+                        "code": "<s-range name=\"myOtherRanfe\" class=\"s-mbe:30\" tooltip></s-range>"
+                    },
+                    {
+                        "language": "html",
+                        "title": "With tooltip and colored",
+                        "code": "<s-range name=\"myOtherRanfe\" class=\"s-mbe:30 s-color:accent\" tooltip></s-range>"
+                    },
+                    {
+                        "language": "html",
+                        "title": "With steps",
+                        "code": "<s-range name=\"myRangeWithSteps\" value=\"70\" class=\"s-color:complementary s-mbe:30\" step=\"5\"></s-range>"
+                    },
+                    {
+                        "language": "html",
+                        "title": "Disabled",
+                        "code": "<s-range name=\"myRangeWithSteps\" disabled value=\"70\" class=\"s-color:complementary s-mbe:30\" step=\"5\"></s-range>"
+                    },
+                    {
+                        "language": "html",
+                        "title": "External target input",
+                        "code": "<div class=\"s-flex:align-center s-mbe:30\">\n <s-range name=\"myRangeWithTarget\" value=\"30\" target=\"#my-range-with-target-target\"></s-range>\n <span class=\"s-pis:20\" id=\"my-range-with-target-target\"></span>\n</div>"
+                    },
+                    {
+                        "language": "html",
+                        "title": "Some colors",
+                        "code": "<s-range name=\"myRangeColoredSuccess\" value=\"30\" class=\"s-color:success s-mbe:30\"></s-range>\n<s-range name=\"myRangeColoredWarning\" value=\"0\" class=\"s-color:warning s-mbe:30\"></s-range>\n<s-range name=\"myRangeColoredError\" value=\"1\" min=\"0\" max=\"10\" class=\"s-color:error s-mbe:30\"></s-range>"
+                    }
+                ],
+                "interface": {
+                    "name": "SRangeComponentInterface",
+                    "description": "",
+                    "definition": {
+                        "name": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
+                            "description": "Specify the name to assign to the internal input[type=\"range\"]"
+                        },
+                        "value": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Number"
+                                    }
+                                ],
+                                "raw": "Number"
+                            },
+                            "description": "Specify the initial range value"
+                        },
+                        "values": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Object"
+                                    }
+                                ],
+                                "raw": "Object"
+                            },
+                            "description": "Specify some values in array like [\"hello\",\"world\"] that will be used for tooltip. Your range steps MUST be integers for this to work properly"
+                        },
+                        "min": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Number"
+                                    }
+                                ],
+                                "raw": "Number"
+                            },
+                            "description": "Specify the minimal value or the range",
+                            "default": 0
+                        },
+                        "max": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Number"
+                                    }
+                                ],
+                                "raw": "Number"
+                            },
+                            "description": "Specify the maximal value of the range",
+                            "default": 100
+                        },
+                        "step": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Number"
+                                    }
+                                ],
+                                "raw": "Number"
+                            },
+                            "description": "Specify the steps between each values"
+                        },
+                        "target": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
+                            "description": "Specify a css selector of any HTMLElement or HTMLInputElement in which to inject the value when the range is updated"
+                        },
+                        "tooltip": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Boolean"
+                                    }
+                                ],
+                                "raw": "Boolean"
+                            },
+                            "description": "Specify if you want to display the value inside a tooltip on top of the thumb",
+                            "default": false
+                        },
+                        "disabled": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Boolean"
+                                    }
+                                ],
+                                "raw": "Boolean"
+                            },
+                            "description": "Specify if this range is disabled",
+                            "default": false
+                        }
+                    }
+                },
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "SRangeComponent.ts",
+                "extension": "ts",
+                "relPath": "src/js/SRangeComponent.ts",
+                "children": {
+                    "webcomponent": {
+                        "id": "sc13098f28fc63079b0848fdc11c469c6032a39f07a54f8315345e8e762556218",
+                        "name": "webcomponent",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ],
+                            "raw": "Function"
+                        },
+                        "param": {
+                            "props": {
+                                "name": "props",
+                                "type": {
+                                    "types": [
+                                        {
+                                            "type": "any"
+                                        }
+                                    ],
+                                    "raw": "any"
+                                },
+                                "description": "Some default props you want to set for your webcomponent",
+                                "default": {},
+                                "defaultStr": "{}"
+                            }
+                        },
+                        "description": "This function allows you to define (register) your webcomponent with some default\nprops if needed.",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://coffeekraken.io"
+                        }
+                    }
+                }
+            },
+            "@coffeekraken.s-range-component.js.interface.SRangeComponentInterface": {
+                "id": "@coffeekraken.s-range-component.js.interface.SRangeComponentInterface",
+                "name": "SRangeComponentInterface",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Class"
+                        }
+                    ],
+                    "raw": "Class"
+                },
+                "platform": [
+                    {
+                        "name": "js",
+                        "description": ""
+                    }
+                ],
+                "description": "This class represent the interface that describe parameters of the SRangeComponent",
+                "namespace": "@coffeekraken.s-range-component.js.interface",
+                "status": "beta",
+                "interface": {
+                    "name": "SRangeComponentInterface",
+                    "description": "",
+                    "definition": {
+                        "name": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
+                            "description": "Specify the name to assign to the internal input[type=\"range\"]"
+                        },
+                        "value": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Number"
+                                    }
+                                ],
+                                "raw": "Number"
+                            },
+                            "description": "Specify the initial range value"
+                        },
+                        "values": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Object"
+                                    }
+                                ],
+                                "raw": "Object"
+                            },
+                            "description": "Specify some values in array like [\"hello\",\"world\"] that will be used for tooltip. Your range steps MUST be integers for this to work properly"
+                        },
+                        "min": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Number"
+                                    }
+                                ],
+                                "raw": "Number"
+                            },
+                            "description": "Specify the minimal value or the range",
+                            "default": 0
+                        },
+                        "max": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Number"
+                                    }
+                                ],
+                                "raw": "Number"
+                            },
+                            "description": "Specify the maximal value of the range",
+                            "default": 100
+                        },
+                        "step": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Number"
+                                    }
+                                ],
+                                "raw": "Number"
+                            },
+                            "description": "Specify the steps between each values"
+                        },
+                        "target": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
+                            "description": "Specify a css selector of any HTMLElement or HTMLInputElement in which to inject the value when the range is updated"
+                        },
+                        "tooltip": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Boolean"
+                                    }
+                                ],
+                                "raw": "Boolean"
+                            },
+                            "description": "Specify if you want to display the value inside a tooltip on top of the thumb",
+                            "default": false
+                        },
+                        "disabled": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Boolean"
+                                    }
+                                ],
+                                "raw": "Boolean"
+                            },
+                            "description": "Specify if this range is disabled",
+                            "default": false
+                        }
+                    }
+                },
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "SRangeComponentInterface.ts",
+                "extension": "ts",
+                "relPath": "src/js/interface/SRangeComponentInterface.ts",
+                "children": {}
+            }
+        }
+    }
+}

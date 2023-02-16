@@ -7,12 +7,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Coffeekraken/coffeekraken.git",
-                "reference": "f4d32ebec74517049d47a014469f89b013b94c75"
+                "reference": "227e8e1d8c6a1e515332ae6c86b1242c1d64f946"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Coffeekraken/coffeekraken/zipball/f4d32ebec74517049d47a014469f89b013b94c75",
-                "reference": "f4d32ebec74517049d47a014469f89b013b94c75",
+                "url": "https://api.github.com/repos/Coffeekraken/coffeekraken/zipball/227e8e1d8c6a1e515332ae6c86b1242c1d64f946",
+                "reference": "227e8e1d8c6a1e515332ae6c86b1242c1d64f946",
                 "shasum": ""
             },
             "require": {
@@ -22,7 +22,7 @@
             "require-dev": {
                 "phpunit/phpunit": "^9"
             },
-            "time": "2023-02-16T09:56:02+00:00",
+            "time": "2023-02-16T10:15:12+00:00",
             "default-branch": true,
             "type": "library",
             "installation-source": "dist",

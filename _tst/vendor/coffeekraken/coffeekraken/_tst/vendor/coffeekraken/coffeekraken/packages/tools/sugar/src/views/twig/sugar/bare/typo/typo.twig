@@ -1,0 +1,39 @@
+{% if type == 'color' %}
+    <span class="s-tc--{{ id }}">
+        {{ html|raw }}
+    </span>
+{% elseif id == 'lead' or id == 'p' %}
+    <p class="s-typo--{{ id }}">
+        {{ html|raw }}
+    </p>
+{% elseif id == 'pre' or id == 'code' %}
+    <{{ id }} class="s-typo--{{ id }}">
+        {{ html|raw }}
+    </{{ id }}>
+{% elseif id == 'quote' or id == 'blockquote' %}
+    <blockquote class="s-typo--{{ id }}">
+        {{ html|raw }}
+    </blockquote>
+{% elseif id == 'bold' or id == 'b' or id == 'strong' %}
+    <strong class="s-typo--{{ id }}">
+        {{ html|raw }}
+    </strong>
+{% elseif id == 'italic' or id == 'i' %}
+    <em class="s-typo--{{ id }}">
+        {{ html|raw }}
+    </em>
+{% elseif id == 'mark' or id == 'del' or id == 'ins' or id == 'sub' or id == 'sup' %}
+    <{{ id }} class="s-typo--{{ id }}">
+        {{ html|raw }}
+    </{{ id }}>
+{% elseif id|slice(0,1) == 'h' and id|length == 2 %}
+    <{{ id }} class="s-typo--{{ id }}">
+        {{ html|raw }}
+    </{{ id }}>
+{% elseif id == 'a' and data.url and data.target is defined %}
+    <a href="{{ data.url }}" target="{{ data.target }}">
+        {{ html|raw }}
+    </a>
+{% else %}
+    {{ html|raw }}
+{% endif %}

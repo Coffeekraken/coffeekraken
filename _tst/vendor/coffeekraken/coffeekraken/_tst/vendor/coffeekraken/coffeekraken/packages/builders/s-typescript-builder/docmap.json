@@ -1,0 +1,547 @@
+{
+    "map": {},
+    "extends": [],
+    "generated": {
+        "extends": [
+            "@coffeekraken/aa",
+            "@coffeekraken/cli",
+            "@coffeekraken/s-activate-feature",
+            "@coffeekraken/s-appear-feature",
+            "@coffeekraken/s-asset-picker-component",
+            "@coffeekraken/s-bench",
+            "@coffeekraken/s-builder",
+            "@coffeekraken/s-carpenter",
+            "@coffeekraken/s-class",
+            "@coffeekraken/s-classmap",
+            "@coffeekraken/s-clipboard-copy-component",
+            "@coffeekraken/s-code-example-component",
+            "@coffeekraken/s-code-formatter-prettier",
+            "@coffeekraken/s-code-formatter",
+            "@coffeekraken/s-color-picker-component",
+            "@coffeekraken/s-color",
+            "@coffeekraken/s-component-utils",
+            "@coffeekraken/s-conductor",
+            "@coffeekraken/s-config-adapter",
+            "@coffeekraken/s-config-folder-adapter",
+            "@coffeekraken/s-config-inline-adapter",
+            "@coffeekraken/s-config",
+            "@coffeekraken/s-css-animation",
+            "@coffeekraken/s-dashboard",
+            "@coffeekraken/s-data-file-generic",
+            "@coffeekraken/s-data-file-js",
+            "@coffeekraken/s-data-file-php",
+            "@coffeekraken/s-datetime-picker-component",
+            "@coffeekraken/s-deps-feature",
+            "@coffeekraken/s-descriptor",
+            "@coffeekraken/s-docblock",
+            "@coffeekraken/s-docmap",
+            "@coffeekraken/s-dropzone-component",
+            "@coffeekraken/s-duration",
+            "@coffeekraken/s-env",
+            "@coffeekraken/s-event-emitter",
+            "@coffeekraken/s-favicon-builder",
+            "@coffeekraken/s-feature",
+            "@coffeekraken/s-file",
+            "@coffeekraken/s-filtrable-input-component",
+            "@coffeekraken/s-floating-feature",
+            "@coffeekraken/s-form-validate-feature",
+            "@coffeekraken/s-front",
+            "@coffeekraken/s-frontend-checker",
+            "@coffeekraken/s-frontend-server",
+            "@coffeekraken/s-frontspec",
+            "@coffeekraken/s-glitch-feature",
+            "@coffeekraken/s-glob",
+            "@coffeekraken/s-google-map-component",
+            "@coffeekraken/s-handlebars",
+            "@coffeekraken/s-highlight-feature",
+            "@coffeekraken/s-images-builder",
+            "@coffeekraken/s-inline-feature",
+            "@coffeekraken/s-interface",
+            "@coffeekraken/s-kitchen",
+            "@coffeekraken/s-lazy-feature",
+            "@coffeekraken/s-lit-component",
+            "@coffeekraken/s-log",
+            "@coffeekraken/s-markdown-builder",
+            "@coffeekraken/s-monorepo",
+            "@coffeekraken/s-pack-essentials",
+            "@coffeekraken/s-package",
+            "@coffeekraken/s-page-transition-feature",
+            "@coffeekraken/s-panel-component",
+            "@coffeekraken/s-parallax-feature",
+            "@coffeekraken/s-postcss-builder",
+            "@coffeekraken/s-postcss-sugar-export-plugin",
+            "@coffeekraken/s-postcss-sugar-plugin",
+            "@coffeekraken/s-process",
+            "@coffeekraken/s-promise",
+            "@coffeekraken/s-range-component",
+            "@coffeekraken/s-rating-component",
+            "@coffeekraken/s-refocus-feature",
+            "@coffeekraken/s-request",
+            "@coffeekraken/s-scroll-component",
+            "@coffeekraken/s-sitemap-builder",
+            "@coffeekraken/s-slider-component",
+            "@coffeekraken/s-specs-editor-component",
+            "@coffeekraken/s-specs",
+            "@coffeekraken/s-state",
+            "@coffeekraken/s-static-builder",
+            "@coffeekraken/s-stdio",
+            "@coffeekraken/s-sugar-config",
+            "@coffeekraken/s-sugar-element",
+            "@coffeekraken/s-sugar-feature",
+            "@coffeekraken/s-sugar-json",
+            "@coffeekraken/s-theme-switcher-component",
+            "@coffeekraken/s-theme",
+            "@coffeekraken/s-timer",
+            "@coffeekraken/s-type",
+            "@coffeekraken/s-url",
+            "@coffeekraken/s-validator",
+            "@coffeekraken/s-view-renderer-engine-blade",
+            "@coffeekraken/s-view-renderer-engine-lit",
+            "@coffeekraken/s-view-renderer-engine-twig",
+            "@coffeekraken/s-view-renderer",
+            "@coffeekraken/s-vite-postcss-plugin",
+            "@coffeekraken/s-vite-sugar-plugin",
+            "@coffeekraken/s-vite",
+            "@coffeekraken/sugar"
+        ],
+        "map": {
+            "@coffeekraken.s-typescript-builder.config.typescriptBuilder.glob": {
+                "id": "@coffeekraken.s-typescript-builder.config.typescriptBuilder.glob",
+                "name": "glob",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ],
+                    "raw": "String"
+                },
+                "default": "[config.typescriptBuilder.inDir]/** /*",
+                "description": "Specify a glob pattern relative to the \"inDir\" to specify files you want to compress",
+                "namespace": "@coffeekraken.s-typescript-builder.config.typescriptBuilder",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "typescriptBuilder.config.ts",
+                "extension": "config",
+                "relPath": "src/config/typescriptBuilder.config.ts"
+            },
+            "@coffeekraken.s-typescript-builder.config.typescriptBuilder.inDir": {
+                "id": "@coffeekraken.s-typescript-builder.config.typescriptBuilder.inDir",
+                "name": "inDir",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ],
+                    "raw": "String"
+                },
+                "default": "[config.storage.src.rootDir]",
+                "description": "Specify a directory from where to search for ts and js files to build",
+                "namespace": "@coffeekraken.s-typescript-builder.config.typescriptBuilder",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "typescriptBuilder.config.ts",
+                "extension": "config",
+                "relPath": "src/config/typescriptBuilder.config.ts"
+            },
+            "@coffeekraken.s-typescript-builder.config.typescriptBuilder.outDir": {
+                "id": "@coffeekraken.s-typescript-builder.config.typescriptBuilder.outDir",
+                "name": "outDir",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ],
+                    "raw": "String"
+                },
+                "default": "[config.storage.dist.rootDir]/pkg/%moduleSystem",
+                "description": "Specify a directory where you want to put the builded files.\nYou can use the %moduleSystem and %platform token in your value",
+                "namespace": "@coffeekraken.s-typescript-builder.config.typescriptBuilder",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "typescriptBuilder.config.ts",
+                "extension": "config",
+                "relPath": "src/config/typescriptBuilder.config.ts"
+            },
+            "@coffeekraken.s-typescript-builder.config.typescriptBuilder.formats": {
+                "id": "@coffeekraken.s-typescript-builder.config.typescriptBuilder.formats",
+                "name": "formats",
+                "type": {
+                    "types": [
+                        {
+                            "type": "array",
+                            "of": [
+                                "String"
+                            ]
+                        }
+                    ],
+                    "raw": "String[]"
+                },
+                "default": "['esm','cjs']",
+                "description": "Specify the formats you want to generate. Can be \"esm\" or/and \"cjs\"",
+                "namespace": "@coffeekraken.s-typescript-builder.config.typescriptBuilder",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "typescriptBuilder.config.ts",
+                "extension": "config",
+                "relPath": "src/config/typescriptBuilder.config.ts"
+            },
+            "@coffeekraken.s-typescript-builder.config.typescriptBuilder.platform": {
+                "id": "@coffeekraken.s-typescript-builder.config.typescriptBuilder.platform",
+                "name": "platform",
+                "type": {
+                    "types": [
+                        {
+                            "type": "array",
+                            "of": [
+                                "String"
+                            ]
+                        }
+                    ],
+                    "raw": "String[]"
+                },
+                "default": "node",
+                "description": "Specify for which platform you want to build the typescript files. Can be \"browser\" or \"node\".",
+                "namespace": "@coffeekraken.s-typescript-builder.config.typescriptBuilder",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "typescriptBuilder.config.ts",
+                "extension": "config",
+                "relPath": "src/config/typescriptBuilder.config.ts"
+            },
+            "@coffeekraken.s-typescript-builder.config.typescriptBuilder.customSettings": {
+                "id": "@coffeekraken.s-typescript-builder.config.typescriptBuilder.customSettings",
+                "name": "customSettings",
+                "type": {
+                    "types": [
+                        {
+                            "type": "array",
+                            "of": [
+                                "String"
+                            ]
+                        }
+                    ],
+                    "raw": "String[]"
+                },
+                "default": "{}",
+                "description": "Specify some custom settings for the typescript builder based on the glob pattern used as property",
+                "namespace": "@coffeekraken.s-typescript-builder.config.typescriptBuilder",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "typescriptBuilder.config.ts",
+                "extension": "config",
+                "relPath": "src/config/typescriptBuilder.config.ts"
+            },
+            "@coffeekraken.s-typescript-builder.config.typescriptBuilder.exclude": {
+                "id": "@coffeekraken.s-typescript-builder.config.typescriptBuilder.exclude",
+                "name": "exclude",
+                "type": {
+                    "types": [
+                        {
+                            "type": "array",
+                            "of": [
+                                "String"
+                            ]
+                        }
+                    ],
+                    "raw": "String[]"
+                },
+                "default": "['** /node_module']",
+                "description": "Specify some glob patterns for files/folders you want to exclude of the build process",
+                "namespace": "@coffeekraken.s-typescript-builder.config.typescriptBuilder",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "typescriptBuilder.config.ts",
+                "extension": "config",
+                "relPath": "src/config/typescriptBuilder.config.ts"
+            },
+            "@coffeekraken.s-typescript-builder.config.typescriptBuilder.tsconfig": {
+                "id": "@coffeekraken.s-typescript-builder.config.typescriptBuilder.tsconfig",
+                "name": "tsconfig",
+                "type": {
+                    "types": [
+                        {
+                            "type": "array",
+                            "of": [
+                                "String"
+                            ]
+                        }
+                    ],
+                    "raw": "String[]"
+                },
+                "default": "[config.ts]",
+                "description": "Specify some tsconfig configurations.",
+                "namespace": "@coffeekraken.s-typescript-builder.config.typescriptBuilder",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "typescriptBuilder.config.ts",
+                "extension": "config",
+                "relPath": "src/config/typescriptBuilder.config.ts",
+                "children": {}
+            },
+            "@coffeekraken.s-typescript-builder.doc.README": {
+                "id": "@coffeekraken.s-typescript-builder.doc.README",
+                "name": "README",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Markdown"
+                        }
+                    ],
+                    "raw": "Markdown"
+                },
+                "menu": {
+                    "tree": [
+                        "Documentation"
+                    ],
+                    "slug": "/doc/readme"
+                },
+                "platform": [
+                    {
+                        "name": "md",
+                        "description": ""
+                    }
+                ],
+                "namespace": "@coffeekraken.s-typescript-builder.doc",
+                "status": "stable",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "README.md.twig",
+                "extension": "md",
+                "relPath": "src/doc/README.md.twig",
+                "children": {}
+            },
+            "@coffeekraken.s-typescript-builder.node.STypescriptBuilder": {
+                "id": "@coffeekraken.s-typescript-builder.node.STypescriptBuilder",
+                "name": "STypescriptBuilder",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Class"
+                        }
+                    ],
+                    "raw": "Class"
+                },
+                "param": {
+                    "settings": {
+                        "name": "settings",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "ISTypescriptBuilderSettings"
+                                }
+                            ],
+                            "raw": "ISTypescriptBuilderSettings"
+                        },
+                        "description": "Some settings to configure your builder instance",
+                        "default": {},
+                        "defaultStr": "{}"
+                    }
+                },
+                "platform": [
+                    {
+                        "name": "node",
+                        "description": ""
+                    }
+                ],
+                "description": "This class represent the typescript builder that you can use to build your .ts|js files\nwith a simple and efficient API.",
+                "namespace": "@coffeekraken.s-typescript-builder.node",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "js",
+                        "code": "import STypescriptBuilder from '@coffeekraken/s-postcss-builder';\nconst builder = new STypescriptBuilder({\n    // settings here...\n});\nawait builder.build({\n     input: 'my-cool-file.css',\n     output: 'my/cool/file-output.css'\n});"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "STypescriptBuilder.ts",
+                "extension": "ts",
+                "relPath": "src/node/STypescriptBuilder.ts",
+                "children": {
+                    "buildtemporary": {
+                        "id": "scc189ed79e1109ba0a5163a06c623bbcf8788e868e1aef51728f2836c26bb09b",
+                        "name": "buildTemporary",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ],
+                            "raw": "Function"
+                        },
+                        "param": {
+                            "path": {
+                                "name": "path",
+                                "type": {
+                                    "types": [
+                                        {
+                                            "type": "String"
+                                        }
+                                    ],
+                                    "raw": "String"
+                                },
+                                "description": "The file path to build",
+                                "defaultStr": ""
+                            },
+                            "settings": {
+                                "name": "settings",
+                                "type": {
+                                    "types": [
+                                        {
+                                            "type": "Partial",
+                                            "of": [
+                                                "ISTypescriptBuilderSettings"
+                                            ]
+                                        }
+                                    ],
+                                    "raw": "Partial<ISTypescriptBuilderSettings>"
+                                },
+                                "description": "Some settings to configure your builder instance",
+                                "default": {},
+                                "defaultStr": "{}"
+                            }
+                        },
+                        "description": "This static method allows you to build a file for and remove it after calling the returned callback.\nThis is usefull to compile a typescript file like tests, execute your test and deleting the compiled file.",
+                        "async": "true",
+                        "static": "true",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://coffeekraken.io"
+                        }
+                    },
+                    "constructor": {
+                        "id": "s25157e6a4133a99a095f14428f2e6cfbeaf0016f59b7d54942bf3c86ee65eec1",
+                        "name": "constructor",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ],
+                            "raw": "Function"
+                        },
+                        "description": "Constructor",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://coffeekraken.io"
+                        }
+                    }
+                }
+            },
+            "@coffeekraken.s-typescript-builder.node.interface.STypescriptBuilderBuildParamsInterface": {
+                "id": "@coffeekraken.s-typescript-builder.node.interface.STypescriptBuilderBuildParamsInterface",
+                "name": "STypescriptBuilderBuildParamsInterface",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Class"
+                        }
+                    ],
+                    "raw": "Class"
+                },
+                "platform": [
+                    {
+                        "name": "node",
+                        "description": ""
+                    }
+                ],
+                "description": "This interface specify the parameters needed to the `sugar mono.list` command.",
+                "namespace": "@coffeekraken.s-typescript-builder.node.interface",
+                "status": "beta",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "STypescriptBuilderBuildParamsInterface.ts",
+                "extension": "ts",
+                "relPath": "src/node/interface/STypescriptBuilderBuildParamsInterface.ts",
+                "children": {}
+            },
+            "@coffeekraken.s-typescript-builder.node.interface.STypescriptBuilderSettingsInterface": {
+                "id": "@coffeekraken.s-typescript-builder.node.interface.STypescriptBuilderSettingsInterface",
+                "name": "STypescriptBuilderSettingsInterface",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Class"
+                        }
+                    ],
+                    "raw": "Class"
+                },
+                "platform": [
+                    {
+                        "name": "node",
+                        "description": ""
+                    }
+                ],
+                "description": "This interface specify the settings of the class STypescriptBuilder.",
+                "namespace": "@coffeekraken.s-typescript-builder.node.interface",
+                "status": "beta",
+                "interface": {
+                    "name": "STypescriptBuilderSettingsInterface",
+                    "description": "",
+                    "definition": {}
+                },
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "STypescriptBuilderSettingsInterface.ts",
+                "extension": "ts",
+                "relPath": "src/node/interface/STypescriptBuilderSettingsInterface.ts",
+                "children": {}
+            }
+        }
+    }
+}

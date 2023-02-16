@@ -1,6 +1,6 @@
 {
     "name": "@coffeekraken/aa",
-    "version": "2.0.0-alpha.23",
+    "version": "2.0.0-alpha.24",
     "description": "",
     "main": "index.js",
     "type": "module",
@@ -33,8 +33,8 @@
         "deploy": "echo \"no deploy script configured...\""
     },
     "dependencies": {
-        "@coffeekraken/s-postcss-sugar-plugin": "^2.0.0-alpha.23",
-        "@coffeekraken/sugar": "^2.0.0-alpha.23",
+        "@coffeekraken/s-postcss-sugar-plugin": "^2.0.0-alpha.24",
+        "@coffeekraken/sugar": "^2.0.0-alpha.24",
         "autoprefixer": "^10.4.13",
         "postcss": "^8.4.21",
         "postcss-atroot": "^0.2.3",

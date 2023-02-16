@@ -1,0 +1,10 @@
+{
+    "recipe": "generic",
+    "config": {
+        "folders": [
+            {
+                "path": "./dist/pkg/%moduleSystem/config"
+            }
+        ]
+    }
+}

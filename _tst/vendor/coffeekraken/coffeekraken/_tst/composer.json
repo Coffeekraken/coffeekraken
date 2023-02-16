@@ -1,0 +1,17 @@
+{
+    "name": "tst/tst",
+    "autoload": {
+        "psr-4": {
+            "Tst\\Tst\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Olivier Bossel",
+            "email": "olivier.bossel@gmail.com"
+        }
+    ],
+    "require": {
+        "coffeekraken/coffeekraken": "dev-master"
+    }
+}

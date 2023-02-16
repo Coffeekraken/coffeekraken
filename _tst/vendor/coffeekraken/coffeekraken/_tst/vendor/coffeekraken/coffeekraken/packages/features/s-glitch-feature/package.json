@@ -1,0 +1,50 @@
+{
+    "private": true,
+    "name": "@coffeekraken/s-glitch-feature",
+    "version": "2.0.0-alpha.23",
+    "description": "This feature allows you to apply some nice glitch effect on any HTMLElement",
+    "type": "module",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)",
+    "license": "MIT",
+    "dependencies": {
+        "@coffeekraken/s-class": "^2.0.0-alpha.23",
+        "@coffeekraken/s-component-utils": "^2.0.0-alpha.23",
+        "@coffeekraken/s-feature": "^2.0.0-alpha.23",
+        "@coffeekraken/s-interface": "^2.0.0-alpha.23",
+        "@coffeekraken/s-sugar-config": "^2.0.0-alpha.23",
+        "@coffeekraken/s-sugar-element": "^2.0.0-alpha.23",
+        "@coffeekraken/s-theme": "^2.0.0-alpha.23",
+        "@coffeekraken/sugar": "^2.0.0-alpha.23",
+        "html2canvas": "^1.4.1",
+        "powerglitch": "^2.3.2",
+        "three-full": "11.3.2"
+    },
+    "main": "dist/pkg/cjs/js/exports.js",
+    "module": "dist/pkg/esm/js/exports.js",
+    "exports": {
+        ".": {
+            "require": "./dist/pkg/cjs/js/exports.js",
+            "import": "./dist/pkg/esm/js/exports.js"
+        },
+        "./lazy": {
+            "require": "./dist/pkg/cjs/js/lazy.js",
+            "import": "./dist/pkg/esm/js/lazy.js"
+        },
+        "./shared/*": {
+            "require": "./dist/pkg/cjs/shared/*.js",
+            "import": "./dist/pkg/esm/shared/*.js"
+        },
+        "./node/*": {
+            "require": "./dist/pkg/cjs/node/*.js",
+            "import": "./dist/pkg/esm/node/*.js"
+        },
+        "./js/*": {
+            "require": "./dist/pkg/cjs/js/*.js",
+            "import": "./dist/pkg/esm/js/*.js"
+        }
+    },
+    "homepage": "https://coffeekraken.io"
+}

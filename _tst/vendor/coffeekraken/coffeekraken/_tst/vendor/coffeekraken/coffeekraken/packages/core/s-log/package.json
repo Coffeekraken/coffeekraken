@@ -1,0 +1,33 @@
+{
+    "name": "@coffeekraken/s-log",
+    "version": "2.0.0-alpha.23",
+    "description": "Simple base log class that mainly specify what a log object has to have like a \"type\" property. It also export a lot of static constants to make use in your code like the __SLog.TYPE_INFO, and more...",
+    "type": "module",
+    "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)",
+    "license": "MIT",
+    "dependencies": {
+        "@coffeekraken/s-class": "^2.0.0-alpha.23",
+        "@coffeekraken/sugar": "^2.0.0-alpha.23"
+    },
+    "main": "dist/pkg/cjs/shared/exports.js",
+    "module": "dist/pkg/esm/shared/exports.js",
+    "exports": {
+        ".": {
+            "require": "./dist/pkg/cjs/shared/exports.js",
+            "import": "./dist/pkg/esm/shared/exports.js"
+        },
+        "./shared/*": {
+            "require": "./dist/pkg/cjs/shared/*.js",
+            "import": "./dist/pkg/esm/shared/*.js"
+        },
+        "./node/*": {
+            "require": "./dist/pkg/cjs/node/*.js",
+            "import": "./dist/pkg/esm/node/*.js"
+        },
+        "./js/*": {
+            "require": "./dist/pkg/cjs/js/*.js",
+            "import": "./dist/pkg/esm/js/*.js"
+        }
+    },
+    "homepage": "https://coffeekraken.io"
+}

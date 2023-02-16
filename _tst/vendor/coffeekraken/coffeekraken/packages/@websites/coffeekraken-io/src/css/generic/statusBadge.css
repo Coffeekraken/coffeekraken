@@ -1,9 +1,0 @@
-.s-badge--alpha {
-  @sugar.color (error);
-}
-.s-badge--beta {
-  @sugar.color (warning);
-}
-.s-badge--stable {
-  @sugar.color (success);
-}

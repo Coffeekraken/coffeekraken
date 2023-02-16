@@ -1,0 +1,53 @@
+{% if settings.layouts.readme.data.headerImageUrl %}
+<!-- image -->
+![{{ config.package.name }}]({{ settings.layouts.readme.data.headerImageUrl }})
+{% endif %}
+
+{% if not sections or 'header' in sections|keys %}
+    <!-- header -->
+    # {{ config.package.name }}
+
+    ###### [{{ config.package.license }}](./license) {{ config.package.version }} - [Git repository]({{ git.repo.url }})
+
+    {% if config.readme.shields %}
+        <!-- shields -->
+        {% for key, shield in config.readme.shields %}
+        [![{{ key }}]({{ shield.url|replace('%packageName',  config.package.name) }})]({{ shield.href|replace('%packageName', config.package.name) }})
+        {% endfor %}
+    {% endif %}
+{% endif %}
+
+{% if not sections or 'description' in sections|keys %}
+    <!-- description -->
+    {{ config.package.description }}
+{% endif %}
+
+{% if not sections or 'install' in sections|keys %}
+    <!-- install -->
+    ### Install
+
+    ```shell
+    npm i {{ config.package.name }}
+    ```
+{% endif %}
+
+<!-- body -->
+{% block body %}{% endblock %}
+
+{% if not sections or 'license' in sections|keys %}
+    <!-- license -->    
+    ### License
+
+    Distributed under the **{{config.package.license }}** License. See **[LICENSE](./license)** for more information.
+{% endif %}
+
+{% if not sections or 'contact' in sections|keys %}
+    <!-- contact -->
+    ### Contact
+
+    Here's all the ways you can contact us listed:
+
+    {% for key, contact in config.contact %}
+    [![{{ key }}]({{ contact.shield }})]({{contact.url }})
+    {% endfor %}
+{% endif %}

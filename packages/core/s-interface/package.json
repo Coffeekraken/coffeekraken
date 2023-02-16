@@ -1,14 +1,14 @@
 {
     "name": "@coffeekraken/s-interface",
-    "version": "2.0.0-alpha.24",
+    "version": "2.0.0-alpha.25",
     "description": "Simple but powerful class that allowa you to define a schema that an object has to follow with default values, types, etc... You can then apply this interface on your objects and get back a complient result.",
     "type": "module",
     "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)",
     "license": "MIT",
     "dependencies": {
-        "@coffeekraken/s-class": "^2.0.0-alpha.24",
-        "@coffeekraken/s-descriptor": "^2.0.0-alpha.24",
-        "@coffeekraken/sugar": "^2.0.0-alpha.24"
+        "@coffeekraken/s-class": "^2.0.0-alpha.25",
+        "@coffeekraken/s-descriptor": "^2.0.0-alpha.25",
+        "@coffeekraken/sugar": "^2.0.0-alpha.25"
     },
     "main": "dist/pkg/cjs/js/exports.js",
     "module": "dist/pkg/esm/js/exports.js",

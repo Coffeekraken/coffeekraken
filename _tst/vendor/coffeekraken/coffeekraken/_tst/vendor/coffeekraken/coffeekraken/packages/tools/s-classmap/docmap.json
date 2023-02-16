@@ -1,0 +1,706 @@
+{
+    "map": {},
+    "extends": [],
+    "generated": {
+        "extends": [
+            "@coffeekraken/aa",
+            "@coffeekraken/cli",
+            "@coffeekraken/s-activate-feature",
+            "@coffeekraken/s-appear-feature",
+            "@coffeekraken/s-asset-picker-component",
+            "@coffeekraken/s-bench",
+            "@coffeekraken/s-builder",
+            "@coffeekraken/s-carpenter",
+            "@coffeekraken/s-class",
+            "@coffeekraken/s-clipboard-copy-component",
+            "@coffeekraken/s-code-example-component",
+            "@coffeekraken/s-code-formatter-prettier",
+            "@coffeekraken/s-code-formatter",
+            "@coffeekraken/s-color-picker-component",
+            "@coffeekraken/s-color",
+            "@coffeekraken/s-component-utils",
+            "@coffeekraken/s-conductor",
+            "@coffeekraken/s-config-adapter",
+            "@coffeekraken/s-config-folder-adapter",
+            "@coffeekraken/s-config-inline-adapter",
+            "@coffeekraken/s-config",
+            "@coffeekraken/s-css-animation",
+            "@coffeekraken/s-dashboard",
+            "@coffeekraken/s-data-file-generic",
+            "@coffeekraken/s-data-file-js",
+            "@coffeekraken/s-data-file-php",
+            "@coffeekraken/s-datetime-picker-component",
+            "@coffeekraken/s-deps-feature",
+            "@coffeekraken/s-descriptor",
+            "@coffeekraken/s-docblock",
+            "@coffeekraken/s-docmap",
+            "@coffeekraken/s-dropzone-component",
+            "@coffeekraken/s-duration",
+            "@coffeekraken/s-env",
+            "@coffeekraken/s-event-emitter",
+            "@coffeekraken/s-favicon-builder",
+            "@coffeekraken/s-feature",
+            "@coffeekraken/s-file",
+            "@coffeekraken/s-filtrable-input-component",
+            "@coffeekraken/s-floating-feature",
+            "@coffeekraken/s-form-validate-feature",
+            "@coffeekraken/s-front",
+            "@coffeekraken/s-frontend-checker",
+            "@coffeekraken/s-frontend-server",
+            "@coffeekraken/s-frontspec",
+            "@coffeekraken/s-glitch-feature",
+            "@coffeekraken/s-glob",
+            "@coffeekraken/s-google-map-component",
+            "@coffeekraken/s-handlebars",
+            "@coffeekraken/s-highlight-feature",
+            "@coffeekraken/s-images-builder",
+            "@coffeekraken/s-inline-feature",
+            "@coffeekraken/s-interface",
+            "@coffeekraken/s-kitchen",
+            "@coffeekraken/s-lazy-feature",
+            "@coffeekraken/s-lit-component",
+            "@coffeekraken/s-log",
+            "@coffeekraken/s-markdown-builder",
+            "@coffeekraken/s-monorepo",
+            "@coffeekraken/s-pack-essentials",
+            "@coffeekraken/s-package",
+            "@coffeekraken/s-page-transition-feature",
+            "@coffeekraken/s-panel-component",
+            "@coffeekraken/s-parallax-feature",
+            "@coffeekraken/s-postcss-builder",
+            "@coffeekraken/s-postcss-sugar-export-plugin",
+            "@coffeekraken/s-postcss-sugar-plugin",
+            "@coffeekraken/s-process",
+            "@coffeekraken/s-promise",
+            "@coffeekraken/s-range-component",
+            "@coffeekraken/s-rating-component",
+            "@coffeekraken/s-refocus-feature",
+            "@coffeekraken/s-request",
+            "@coffeekraken/s-scroll-component",
+            "@coffeekraken/s-sitemap-builder",
+            "@coffeekraken/s-slider-component",
+            "@coffeekraken/s-specs-editor-component",
+            "@coffeekraken/s-specs",
+            "@coffeekraken/s-state",
+            "@coffeekraken/s-static-builder",
+            "@coffeekraken/s-stdio",
+            "@coffeekraken/s-sugar-config",
+            "@coffeekraken/s-sugar-element",
+            "@coffeekraken/s-sugar-feature",
+            "@coffeekraken/s-sugar-json",
+            "@coffeekraken/s-theme-switcher-component",
+            "@coffeekraken/s-theme",
+            "@coffeekraken/s-timer",
+            "@coffeekraken/s-type",
+            "@coffeekraken/s-typescript-builder",
+            "@coffeekraken/s-url",
+            "@coffeekraken/s-validator",
+            "@coffeekraken/s-view-renderer-engine-blade",
+            "@coffeekraken/s-view-renderer-engine-lit",
+            "@coffeekraken/s-view-renderer-engine-twig",
+            "@coffeekraken/s-view-renderer",
+            "@coffeekraken/s-vite-postcss-plugin",
+            "@coffeekraken/s-vite-sugar-plugin",
+            "@coffeekraken/s-vite",
+            "@coffeekraken/sugar"
+        ],
+        "map": {
+            "@coffeekraken.s-classmap.doc.README": {
+                "id": "@coffeekraken.s-classmap.doc.README",
+                "name": "README",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Markdown"
+                        }
+                    ],
+                    "raw": "Markdown"
+                },
+                "menu": {
+                    "tree": [
+                        "Documentation"
+                    ],
+                    "slug": "/doc/readme"
+                },
+                "platform": [
+                    {
+                        "name": "md",
+                        "description": ""
+                    }
+                ],
+                "namespace": "@coffeekraken.s-classmap.doc",
+                "status": "stable",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "README.md.twig",
+                "extension": "md",
+                "relPath": "src/doc/README.md.twig",
+                "children": {}
+            },
+            "@coffeekraken.s-classmap.js.SClassmap": {
+                "id": "@coffeekraken.s-classmap.js.SClassmap",
+                "name": "SClassmap",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Class"
+                        }
+                    ],
+                    "raw": "Class"
+                },
+                "param": {
+                    "settings": {
+                        "name": "settings",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Object"
+                                }
+                            ],
+                            "raw": "Object"
+                        },
+                        "description": "An object of settings to use",
+                        "default": {},
+                        "defaultStr": "{}"
+                    }
+                },
+                "description": "This package allows you to compress your css classes/variables,\nto patch them in your HTML as well as to proxy js native functions\nlike classList.add, style.setProperty, etc, to reflect your minified classnames.",
+                "namespace": "@coffeekraken.s-classmap.js",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "js",
+                        "code": "import SClassmap from '@coffeekraken/s-classmap';\nconst classmap = new SClassmap();\nawait classmap.read();"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com"
+                },
+                "filename": "SClassmap.ts",
+                "extension": "ts",
+                "relPath": "src/js/SClassmap.ts",
+                "children": {
+                    "constructor": {
+                        "id": "s2ec1eb0b75c3d998c2688ffbf03f92d0487e9a5bd2cd5e533b16e00b2266f575",
+                        "name": "constructor",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ],
+                            "raw": "Function"
+                        },
+                        "description": "Constructor",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com"
+                        }
+                    },
+                    "patchnativemethods": {
+                        "id": "s3498e21f21949c61a2b931867fa8bb89010d98008d82eedc0857b8ca083a9caf",
+                        "name": "patchNativeMethods",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ],
+                            "raw": "Function"
+                        },
+                        "description": "This method will patch the native methods like classList.add, style.setProperty, etc... to make use\nof the classmap",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com"
+                        }
+                    },
+                    "loadfromurl": {
+                        "id": "s9ef61c8296289a201d746b7202e36f6c8083e0481f2656eb334f333769a9b81f",
+                        "name": "loadFromUrl",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ],
+                            "raw": "Function"
+                        },
+                        "param": {
+                            "url": {
+                                "name": "url",
+                                "type": {
+                                    "types": [
+                                        {
+                                            "type": "string"
+                                        }
+                                    ],
+                                    "raw": "string"
+                                },
+                                "description": "The url to load the map from",
+                                "defaultStr": ""
+                            }
+                        },
+                        "description": "Load a classmap from a url",
+                        "async": "true",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com"
+                        }
+                    }
+                }
+            },
+            "@coffeekraken.s-classmap.node.SClassmap": {
+                "id": "@coffeekraken.s-classmap.node.SClassmap",
+                "name": "SClassmap",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Class"
+                        }
+                    ],
+                    "raw": "Class"
+                },
+                "param": {
+                    "settings": {
+                        "name": "settings",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Object"
+                                }
+                            ],
+                            "raw": "Object"
+                        },
+                        "description": "An object of settings to use",
+                        "default": {},
+                        "defaultStr": "{}"
+                    }
+                },
+                "description": "This package allows you to compress your css classes/variables,\nto patch them in your HTML as well as to proxy js native functions\nlike classList.add, style.setProperty, etc, to reflect your minified classnames.",
+                "namespace": "@coffeekraken.s-classmap.node",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "js",
+                        "code": "import SClassmap from '@coffeekraken/s-classmap';\nconst classmap = new SClassmap();\nawait classmap.read();"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com"
+                },
+                "filename": "SClassmap.ts",
+                "extension": "ts",
+                "relPath": "src/node/SClassmap.ts",
+                "children": {
+                    "constructor": {
+                        "id": "s2ec1eb0b75c3d998c2688ffbf03f92d0487e9a5bd2cd5e533b16e00b2266f575",
+                        "name": "constructor",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ],
+                            "raw": "Function"
+                        },
+                        "description": "Constructor",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com"
+                        }
+                    },
+                    "read": {
+                        "id": "s313966b968dc298d48a47f5521b9fa79cd6fc02d976324eaefe15eda3c1a9538",
+                        "name": "read",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ],
+                            "raw": "Function"
+                        },
+                        "description": "This method simply load the classmap.json file at the root of your project",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com"
+                        }
+                    },
+                    "save": {
+                        "id": "s00152805c1c689f9f1f0602a0f7d94c626fdbd7f5c0beaaa2da1a0105a57efc7",
+                        "name": "save",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ],
+                            "raw": "Function"
+                        },
+                        "description": "This method simply save the classmap.json file at the root of your project",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com"
+                        }
+                    },
+                    "applyonast": {
+                        "id": "s46225e9b63b346a3f2b2491ba74c7f4e65d4815ceadaa1ee89a49ecf140869ba",
+                        "name": "applyOnAst",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "function"
+                                }
+                            ],
+                            "raw": "function"
+                        },
+                        "param": {
+                            "node": {
+                                "name": "node",
+                                "type": {
+                                    "types": [
+                                        {
+                                            "type": "Node"
+                                        }
+                                    ],
+                                    "raw": "Node"
+                                },
+                                "description": "The postcss AST node on which to apply the classmap",
+                                "defaultStr": ""
+                            }
+                        },
+                        "description": "This method simply apply the classmap on an postcss AST",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com"
+                        }
+                    }
+                }
+            },
+            "@coffeekraken.s-classmap.php.SClassmap": {
+                "id": "@coffeekraken.s-classmap.php.SClassmap",
+                "name": "SClassmap",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Class"
+                        }
+                    ],
+                    "raw": "Class"
+                },
+                "param": {
+                    "$settings": {
+                        "name": "$settings",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Object"
+                                },
+                                {
+                                    "type": "Array"
+                                }
+                            ],
+                            "raw": "Object|Array"
+                        },
+                        "description": "Some settings to configure your instance",
+                        "default": [],
+                        "defaultStr": "[]"
+                    }
+                },
+                "setting": {
+                    "path": {
+                        "name": "path",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "String"
+                                }
+                            ],
+                            "raw": "String"
+                        },
+                        "description": "Specify the path to the classmap file to load",
+                        "default": null,
+                        "defaultStr": "null"
+                    },
+                    "sFrontspecSettings": {
+                        "name": "sFrontspecSettings",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Object"
+                                },
+                                {
+                                    "type": "Array"
+                                }
+                            ],
+                            "raw": "Object|Array"
+                        },
+                        "description": "Some settings to pass to the SFrontspec class in order to read the `frontspec.json` content",
+                        "default": [],
+                        "defaultStr": "[]"
+                    }
+                },
+                "platform": [
+                    {
+                        "name": "php",
+                        "description": ""
+                    }
+                ],
+                "description": "This package allows you to compress your css classes/variables,\nto patch them in your HTML as well as to proxy js native functions\nlike classList.add, style.setProperty, etc, to reflect your minified classnames.",
+                "namespace": "@coffeekraken.s-classmap.php",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "php",
+                        "code": "$classmap = new SClassmap();\n$patchedHtml = $classmap->patchHtml('...');"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "SClassmap.php",
+                "extension": "php",
+                "relPath": "src/php/SClassmap.php",
+                "children": {
+                    "$map": {
+                        "id": "sf9908a6656a067652dd24f051bbaa282ea4567401f38e20489f9f95dd5145fb3",
+                        "name": "$map",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Array"
+                                }
+                            ],
+                            "raw": "Array"
+                        },
+                        "description": "Store the actual classmap",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://coffeekraken.io"
+                        }
+                    },
+                    "patchhtml": {
+                        "id": "sc32688c577cfa70eec96189effa98b1b7b4d1e0cbaee78338de26889ebf00b14",
+                        "name": "patchHtml",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ],
+                            "raw": "Function"
+                        },
+                        "param": {
+                            "$html": {
+                                "name": "$html",
+                                "type": {
+                                    "types": [
+                                        {
+                                            "type": "String"
+                                        }
+                                    ],
+                                    "raw": "String"
+                                },
+                                "description": "The html to patch",
+                                "defaultStr": ""
+                            }
+                        },
+                        "platform": [
+                            {
+                                "name": "php",
+                                "description": ""
+                            }
+                        ],
+                        "description": "This method allows you to patch the passed html and replace in it all the available\nclasses in the map",
+                        "status": "beta",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://coffeekraken.io"
+                        }
+                    },
+                    "read": {
+                        "id": "s4d693de8e457e7de0b14e63e647c8b77c415e52073409d0d005255e46baabbbf",
+                        "name": "read",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ],
+                            "raw": "Function"
+                        },
+                        "param": {
+                            "$path": {
+                                "name": "$path",
+                                "type": {
+                                    "types": [
+                                        {
+                                            "type": "String"
+                                        }
+                                    ],
+                                    "raw": "String"
+                                },
+                                "description": "The classmap.json file path to read",
+                                "defaultStr": ""
+                            }
+                        },
+                        "platform": [
+                            {
+                                "name": "php",
+                                "description": ""
+                            }
+                        ],
+                        "description": "This method allows you to read a spec file and/or a value inside the passed spec file.",
+                        "status": "beta",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://coffeekraken.io"
+                        }
+                    }
+                }
+            },
+            "@coffeekraken.s-classmap.shared.SClassmapBase": {
+                "id": "@coffeekraken.s-classmap.shared.SClassmapBase",
+                "name": "SClassmapBase",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Class"
+                        }
+                    ],
+                    "raw": "Class"
+                },
+                "param": {
+                    "settings": {
+                        "name": "settings",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Object"
+                                }
+                            ],
+                            "raw": "Object"
+                        },
+                        "description": "An object of settings to use",
+                        "default": {},
+                        "defaultStr": "{}"
+                    }
+                },
+                "description": "This package allows you to compress your css classes/variables,\nto patch them in your HTML as well as to proxy js native functions\nlike classList.add, style.setProperty, etc, to reflect your minified classnames.",
+                "namespace": "@coffeekraken.s-classmap.shared",
+                "status": "beta",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com"
+                },
+                "filename": "SClassmapBase.ts",
+                "extension": "ts",
+                "relPath": "src/shared/SClassmapBase.ts",
+                "children": {
+                    "map": {
+                        "id": "s38db0b5201524cdcad7da9e2cbfd799af79bd46593c53f8bb4bb874cccf2f509",
+                        "name": "map",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Object"
+                                }
+                            ],
+                            "raw": "Object"
+                        },
+                        "description": "Store the classmap used across",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com"
+                        }
+                    },
+                    "constructor": {
+                        "id": "s2ec1eb0b75c3d998c2688ffbf03f92d0487e9a5bd2cd5e533b16e00b2266f575",
+                        "name": "constructor",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ],
+                            "raw": "Function"
+                        },
+                        "description": "Constructor",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com"
+                        }
+                    },
+                    "patchhtml": {
+                        "id": "sc32688c577cfa70eec96189effa98b1b7b4d1e0cbaee78338de26889ebf00b14",
+                        "name": "patchHtml",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ],
+                            "raw": "Function"
+                        },
+                        "param": {
+                            "$html": {
+                                "name": "$html",
+                                "type": {
+                                    "types": [
+                                        {
+                                            "type": "String"
+                                        }
+                                    ],
+                                    "raw": "String"
+                                },
+                                "description": "The html to patch",
+                                "defaultStr": ""
+                            }
+                        },
+                        "platform": [
+                            {
+                                "name": "php",
+                                "description": ""
+                            }
+                        ],
+                        "description": "This method allows you to patch the passed html and replace in it all the available\nclasses in the map",
+                        "status": "beta",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://coffeekraken.io"
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

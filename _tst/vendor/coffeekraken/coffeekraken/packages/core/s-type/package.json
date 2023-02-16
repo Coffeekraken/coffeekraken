@@ -1,16 +1,16 @@
 {
     "name": "@coffeekraken/s-type",
-    "version": "2.0.0-alpha.23",
+    "version": "2.0.0-alpha.24",
     "description": "Low level class that allows to define types and behaviors (cast, etc...), then apply these types on values to get back casted values or casting errors...",
     "type": "module",
     "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)",
     "license": "MIT",
     "dependencies": {
-        "@coffeekraken/s-class": "^2.0.0-alpha.23",
-        "@coffeekraken/s-descriptor": "^2.0.0-alpha.23",
-        "@coffeekraken/s-interface": "^2.0.0-alpha.23",
-        "@coffeekraken/s-promise": "^2.0.0-alpha.23",
-        "@coffeekraken/sugar": "^2.0.0-alpha.23"
+        "@coffeekraken/s-class": "^2.0.0-alpha.24",
+        "@coffeekraken/s-descriptor": "^2.0.0-alpha.24",
+        "@coffeekraken/s-interface": "^2.0.0-alpha.24",
+        "@coffeekraken/s-promise": "^2.0.0-alpha.24",
+        "@coffeekraken/sugar": "^2.0.0-alpha.24"
     },
     "main": "dist/pkg/cjs/js/exports.js",
     "module": "dist/pkg/esm/js/exports.js",

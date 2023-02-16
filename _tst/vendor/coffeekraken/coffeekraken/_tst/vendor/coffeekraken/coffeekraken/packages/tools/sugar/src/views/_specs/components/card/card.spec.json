@@ -1,0 +1,69 @@
+{
+    "type": "Component",
+    "title": "Card",
+    "description": "Display a nice card with some infos like \"image\", \"title\", \"intro\", \"description\" and \"cta\"",
+    "props": {
+        "title": {
+            "type": "Text",
+            "title": "Title",
+            "description": "The card title"
+        },
+        "intro": {
+            "type": "Text",
+            "title": "Intro",
+            "description": "The card intro"
+        },
+        "text": {
+            "type": "Text",
+            "title": "Text",
+            "description": "The card text"
+        },
+        "direction": {
+            "type": "Select",
+            "title": "Direction",
+            "description": "Specify the direction of the card. Horizontal, vertical, etc...",
+            "options": [
+                {
+                    "name": "Vertical",
+                    "value": "vertical"
+                },
+                {
+                    "name": "Horizontal",
+                    "value": "horizontal"
+                },
+                {
+                    "name": "Vertical reversed",
+                    "value": "vertical-reverse"
+                },
+                {
+                    "name": "Horizontal reversed",
+                    "value": "horizontal-reverse"
+                }
+            ]
+        },
+        "spacing": "@sugar.views.props.spacing",
+        "image": "@sugar.views.props.image",
+        "cta": "@sugar.views.components.cta",
+        "attributes": "@sugar.views.props.attributes",
+        "margin": "@sugar.views.props.margin",
+        "padding": "@sugar.views.props.padding"
+    },
+    "examples": {
+        "twig": {
+            "title": "Twig",
+            "description": "Here's a twig sample of how to use the card view",
+            "code": [
+                "{% include('sugar.components.card.card') with {",
+                "   title: '...',",
+                "   intro: '...',",
+                "   text: '...',",
+                "   image: {",
+                "       url: '...',",
+                "       title: '...',",
+                "       alt: '...'",
+                "   }",
+                "} %}"
+            ]
+        }
+    }
+}

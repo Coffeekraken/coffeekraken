@@ -1,0 +1,11 @@
+{
+    "version": 3,
+    "names": [],
+    "sources": [
+        "index.svelte"
+    ],
+    "sourcesContent": [
+        "\n\n<svelte:options tag=\"s-highlight-js\" />\n\n<script type=\"text/ts\">import hljs from 'highlight.js';\nimport javascript from 'highlight.js/lib/languages/javascript';\nhljs.registerLanguage('javascript', javascript);\nimport __SSvelteComponent from '@coffeekraken/s-svelte-component';\nimport __SHighlightJsComponentInterface from './interface/SHighlightJsComponentInterface';\nclass MyCoolComponent extends __SSvelteComponent {\n    constructor() {\n        super({ w,\n            svelteComponent: {}\n        });\n    }\n}\nMyCoolComponent.interface = __SHighlightJsComponentInterface;\nconsole.log('fff');\nnew MyCoolComponent();\n</script>\n\n<style>h1 {\n  color: var(--s-theme-default-color-primary-default, #f2bc2b);\n  background: magenta\n}</style>\n\n<div>\n\t<h1>Hello worlc</h1>\n</div>"
+    ],
+    "mappings": ";;;;;;;;;;;;;;;;;;OAI8B,IAAI,MAAM,cAAc;OAC/C,UAAU,MAAM,uCAAuC;OAEvD,kBAAkB,MAAM,kCAAkC;OAC1D,gCAAgC,MAAM,4CAA4C;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;CAFzF,IAAI,CAAC,gBAAgB,CAAC,YAAY,EAAE,UAAU;;OAGxC,eAAe,SAAS,kBAAkB;EAC5C,WAAW;GACP,KAAK,GAAG,CAAC,EACL,eAAe;;;;CAI3B,eAAe,CAAC,SAAS,GAAG,gCAAgC;CAC5D,OAAO,CAAC,GAAG,CAAC,KAAK;KACb,eAAe;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;"
+}

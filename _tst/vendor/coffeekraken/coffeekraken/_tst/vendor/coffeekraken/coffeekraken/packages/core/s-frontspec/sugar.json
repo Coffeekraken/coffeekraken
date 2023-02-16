@@ -1,0 +1,24 @@
+{
+  "config": {
+    "folders": [
+      {
+        "path": "./dist/pkg/%moduleSystem/config"
+      }
+    ]
+  },
+  "cli": [
+    {
+        "stack": "frontspec",
+        "description": "SFrontspec CLI",
+        "defaultAction": "build",
+        "actions": {
+            "build": {
+                "scope": "package",
+                "description": "Build the frontspec.json file from configs specified in the config.frontspec.build.fromConfigs stack",
+                "process": "./dist/pkg/esm/cli/build.cli.js",
+                "interface": "./dist/pkg/esm/node/interface/SFrontspecBuildParamsInterface.js"
+            }
+        }
+    }
+]
+}

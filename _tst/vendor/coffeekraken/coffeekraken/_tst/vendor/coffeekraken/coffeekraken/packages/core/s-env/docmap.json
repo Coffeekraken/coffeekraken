@@ -1,0 +1,542 @@
+{
+    "map": {},
+    "extends": [],
+    "generated": {
+        "extends": [
+            "@coffeekraken/aa",
+            "@coffeekraken/cli",
+            "@coffeekraken/s-activate-feature",
+            "@coffeekraken/s-appear-feature",
+            "@coffeekraken/s-asset-picker-component",
+            "@coffeekraken/s-bench",
+            "@coffeekraken/s-builder",
+            "@coffeekraken/s-carpenter",
+            "@coffeekraken/s-class",
+            "@coffeekraken/s-classmap",
+            "@coffeekraken/s-clipboard-copy-component",
+            "@coffeekraken/s-code-example-component",
+            "@coffeekraken/s-code-formatter-prettier",
+            "@coffeekraken/s-code-formatter",
+            "@coffeekraken/s-color-picker-component",
+            "@coffeekraken/s-color",
+            "@coffeekraken/s-component-utils",
+            "@coffeekraken/s-conductor",
+            "@coffeekraken/s-config-adapter",
+            "@coffeekraken/s-config-folder-adapter",
+            "@coffeekraken/s-config-inline-adapter",
+            "@coffeekraken/s-config",
+            "@coffeekraken/s-css-animation",
+            "@coffeekraken/s-dashboard",
+            "@coffeekraken/s-data-file-generic",
+            "@coffeekraken/s-data-file-js",
+            "@coffeekraken/s-data-file-php",
+            "@coffeekraken/s-datetime-picker-component",
+            "@coffeekraken/s-deps-feature",
+            "@coffeekraken/s-descriptor",
+            "@coffeekraken/s-docblock",
+            "@coffeekraken/s-docmap",
+            "@coffeekraken/s-dropzone-component",
+            "@coffeekraken/s-duration",
+            "@coffeekraken/s-event-emitter",
+            "@coffeekraken/s-favicon-builder",
+            "@coffeekraken/s-feature",
+            "@coffeekraken/s-file",
+            "@coffeekraken/s-filtrable-input-component",
+            "@coffeekraken/s-floating-feature",
+            "@coffeekraken/s-form-validate-feature",
+            "@coffeekraken/s-front",
+            "@coffeekraken/s-frontend-checker",
+            "@coffeekraken/s-frontend-server",
+            "@coffeekraken/s-frontspec",
+            "@coffeekraken/s-glitch-feature",
+            "@coffeekraken/s-glob",
+            "@coffeekraken/s-google-map-component",
+            "@coffeekraken/s-handlebars",
+            "@coffeekraken/s-highlight-feature",
+            "@coffeekraken/s-images-builder",
+            "@coffeekraken/s-inline-feature",
+            "@coffeekraken/s-interface",
+            "@coffeekraken/s-kitchen",
+            "@coffeekraken/s-lazy-feature",
+            "@coffeekraken/s-lit-component",
+            "@coffeekraken/s-log",
+            "@coffeekraken/s-markdown-builder",
+            "@coffeekraken/s-monorepo",
+            "@coffeekraken/s-pack-essentials",
+            "@coffeekraken/s-package",
+            "@coffeekraken/s-page-transition-feature",
+            "@coffeekraken/s-panel-component",
+            "@coffeekraken/s-parallax-feature",
+            "@coffeekraken/s-postcss-builder",
+            "@coffeekraken/s-postcss-sugar-export-plugin",
+            "@coffeekraken/s-postcss-sugar-plugin",
+            "@coffeekraken/s-process",
+            "@coffeekraken/s-promise",
+            "@coffeekraken/s-range-component",
+            "@coffeekraken/s-rating-component",
+            "@coffeekraken/s-refocus-feature",
+            "@coffeekraken/s-request",
+            "@coffeekraken/s-scroll-component",
+            "@coffeekraken/s-sitemap-builder",
+            "@coffeekraken/s-slider-component",
+            "@coffeekraken/s-specs-editor-component",
+            "@coffeekraken/s-specs",
+            "@coffeekraken/s-state",
+            "@coffeekraken/s-static-builder",
+            "@coffeekraken/s-stdio",
+            "@coffeekraken/s-sugar-config",
+            "@coffeekraken/s-sugar-element",
+            "@coffeekraken/s-sugar-feature",
+            "@coffeekraken/s-sugar-json",
+            "@coffeekraken/s-theme-switcher-component",
+            "@coffeekraken/s-theme",
+            "@coffeekraken/s-timer",
+            "@coffeekraken/s-type",
+            "@coffeekraken/s-typescript-builder",
+            "@coffeekraken/s-url",
+            "@coffeekraken/s-validator",
+            "@coffeekraken/s-view-renderer-engine-blade",
+            "@coffeekraken/s-view-renderer-engine-lit",
+            "@coffeekraken/s-view-renderer-engine-twig",
+            "@coffeekraken/s-view-renderer",
+            "@coffeekraken/s-vite-postcss-plugin",
+            "@coffeekraken/s-vite-sugar-plugin",
+            "@coffeekraken/s-vite",
+            "@coffeekraken/sugar"
+        ],
+        "map": {
+            "@coffeekraken.s-env.config.env.env": {
+                "id": "@coffeekraken.s-env.config.env.env",
+                "name": "env",
+                "type": {
+                    "types": [
+                        {
+                            "type": "String"
+                        }
+                    ],
+                    "raw": "String"
+                },
+                "default": "undefined",
+                "description": "Specify the environment env. This is usually \"production\" or \"dev\" as value.\nIf undefined, will be determined depending on the platform.\nFor node, it will take the process.env.NODE_ENV variable\nFor browser, if not specified manually, it will depends on the \"env.envFromLocation\" configuration to determine the correct environment using regex check",
+                "namespace": "@coffeekraken.s-env.config.env",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "env.config.ts",
+                "extension": "config",
+                "relPath": "src/config/env.config.ts"
+            },
+            "@coffeekraken.s-env.config.env.envFromLocation.development": {
+                "id": "@coffeekraken.s-env.config.env.envFromLocation.development",
+                "name": "development",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Regex"
+                        }
+                    ],
+                    "raw": "Regex"
+                },
+                "default": "https?://(localhost|127.0.0.1|0.0.0.0|192.168.[0-9]{1,3}.[0-9]{1,3}|.*.local)",
+                "description": "Specify the regex to detect the \"development\" environment from the document.location.href variable",
+                "namespace": "@coffeekraken.s-env.config.env.envFromLocation",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "env.config.ts",
+                "extension": "config",
+                "relPath": "src/config/env.config.ts"
+            },
+            "@coffeekraken.s-env.config.env.envFromLocation.staging": {
+                "id": "@coffeekraken.s-env.config.env.envFromLocation.staging",
+                "name": "staging",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Regex"
+                        }
+                    ],
+                    "raw": "Regex"
+                },
+                "default": "https?://([a-zA-Z0-9.-]+)?staging([a-zA-Z0-9.-]+)?",
+                "description": "Specify the regex to detect the \"staging\" environment from the document.location.href variable",
+                "namespace": "@coffeekraken.s-env.config.env.envFromLocation",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "env.config.ts",
+                "extension": "config",
+                "relPath": "src/config/env.config.ts"
+            },
+            "@coffeekraken.s-env.config.env.envFromLocation.production": {
+                "id": "@coffeekraken.s-env.config.env.envFromLocation.production",
+                "name": "production",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Regex"
+                        }
+                    ],
+                    "raw": "Regex"
+                },
+                "default": "https://.*",
+                "description": "Specify the regex to detect the \"production\" environment from the document.location.href variable",
+                "namespace": "@coffeekraken.s-env.config.env.envFromLocation",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "env.config.ts",
+                "extension": "config",
+                "relPath": "src/config/env.config.ts",
+                "children": {}
+            },
+            "@coffeekraken.s-env.doc.README": {
+                "id": "@coffeekraken.s-env.doc.README",
+                "name": "README",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Markdown"
+                        }
+                    ],
+                    "raw": "Markdown"
+                },
+                "menu": {
+                    "tree": [
+                        "Documentation"
+                    ],
+                    "slug": "/doc/readme"
+                },
+                "platform": [
+                    {
+                        "name": "md",
+                        "description": ""
+                    }
+                ],
+                "namespace": "@coffeekraken.s-env.doc",
+                "status": "stable",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "README.md.twig",
+                "extension": "md",
+                "relPath": "src/doc/README.md.twig",
+                "children": {}
+            },
+            "@coffeekraken.s-env.js.SEnv": {
+                "id": "@coffeekraken.s-env.js.SEnv",
+                "name": "SEnv",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Class"
+                        }
+                    ],
+                    "raw": "Class"
+                },
+                "description": "This class allows you to access, set and update environment variables seemlessly on node\nand browser env.\nYou can also check if the environment is a dev one or a production using the\nhelpfull ```is``` function like so: ```SEnv.is('prod')```",
+                "namespace": "@coffeekraken.s-env.js",
+                "example": [
+                    {
+                        "language": "js",
+                        "code": "import __SEnv from '@coffeekraken/s-env';\nthis.get('something');\n__SEnv.is('prod');\n__SEnv.is('production');\n__SEnv.is('development');\n// etc..."
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "SEnv.ts",
+                "extension": "ts",
+                "relPath": "src/js/SEnv.ts",
+                "children": {
+                    "env": {
+                        "id": "s3c882527536778ebe3cda2c893232e50953fd4db23e2eafe4b5eca1b2cf49ecb",
+                        "name": "env",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Object"
+                                }
+                            ],
+                            "raw": "Object"
+                        },
+                        "description": "Store the actual environment variables object. In node it will be process.env, in the browser,\ndocument.env",
+                        "static": "true",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://coffeekraken.io"
+                        }
+                    }
+                }
+            },
+            "@coffeekraken.s-env.node.SEnv": {
+                "id": "@coffeekraken.s-env.node.SEnv",
+                "name": "SEnv",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Class"
+                        }
+                    ],
+                    "raw": "Class"
+                },
+                "description": "This class allows you to access, set and update environment variables seemlessly on node\nand browser env.\nYou can also check if the environment is a dev one or a production using the\nhelpfull ```is``` function like so: ```sEnv.is('prod')```",
+                "namespace": "@coffeekraken.s-env.node",
+                "example": [
+                    {
+                        "language": "js",
+                        "code": "import SEnv from '@coffeekraken/s-env';\nthis.get('something');\nSEnv.is('prod');\nSEnv.is('production');\nSEnv.is('development');\n// etc..."
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "SEnv.ts",
+                "extension": "ts",
+                "relPath": "src/node/SEnv.ts",
+                "children": {
+                    "env": {
+                        "id": "s3c882527536778ebe3cda2c893232e50953fd4db23e2eafe4b5eca1b2cf49ecb",
+                        "name": "env",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Object"
+                                }
+                            ],
+                            "raw": "Object"
+                        },
+                        "description": "Store the actual environment variables object. In node it will be process.env, in the browser,\ndocument.env",
+                        "static": "true",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://coffeekraken.io"
+                        }
+                    }
+                }
+            },
+            "@coffeekraken.s-env.shared.SEnv": {
+                "id": "@coffeekraken.s-env.shared.SEnv",
+                "name": "SEnv",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Class"
+                        }
+                    ],
+                    "raw": "Class"
+                },
+                "description": "This class allows you to access, set and update environment variables seemlessly on node\nand browser env.\nYou can also check if the environment is a dev one or a production using the\nhelpfull ```is``` function like so: ```sEnv.is('prod')```",
+                "namespace": "@coffeekraken.s-env.shared",
+                "example": [
+                    {
+                        "language": "js",
+                        "code": "import SEnv from '@coffeekraken/s-env';\nthis.get('something');\nthis.is('prod');\nthis.is('production');\nthis.is('development');\n// etc..."
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "SEnv.ts",
+                "extension": "ts",
+                "relPath": "src/shared/SEnv.ts",
+                "children": {
+                    "is": {
+                        "id": "sc357a00a09108492292733809ec56df14e55c2978e2c9a558fda1dfc19f11441",
+                        "name": "is",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ],
+                            "raw": "Function"
+                        },
+                        "param": {
+                            "env": {
+                                "name": "env",
+                                "type": {
+                                    "types": [
+                                        {
+                                            "type": "String"
+                                        }
+                                    ],
+                                    "raw": "String"
+                                },
+                                "description": "The environment you want to check",
+                                "defaultStr": ""
+                            }
+                        },
+                        "description": "This static method allows you to check if the environment\nis \"dev\", \"development\", \"prod\" or \"production\"",
+                        "static": "true",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://coffeekraken.io"
+                        }
+                    },
+                    "get": {
+                        "id": "s863b0c53622da90d13800cca8b98a09cad4b3c06e24f8b62484c4b9d11e227a0",
+                        "name": "get",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ],
+                            "raw": "Function"
+                        },
+                        "param": {
+                            "name": {
+                                "name": "name",
+                                "type": {
+                                    "types": [
+                                        {
+                                            "type": "String"
+                                        }
+                                    ],
+                                    "raw": "String"
+                                },
+                                "description": "The variable name you want to get back",
+                                "defaultStr": ""
+                            }
+                        },
+                        "description": "This static method allows you to access an env variable.\nThe variables keys are stored in UPPERCASE but you can use lowercase as well",
+                        "static": "true",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://coffeekraken.io"
+                        }
+                    },
+                    "set": {
+                        "id": "s3238cad0a4de2ae08a869eb13d976429eeb7b8431293a218aeab84660fa16510",
+                        "name": "set",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ],
+                            "raw": "Function"
+                        },
+                        "param": {
+                            "name": {
+                                "name": "name",
+                                "type": {
+                                    "types": [
+                                        {
+                                            "type": "String"
+                                        }
+                                    ],
+                                    "raw": "String"
+                                },
+                                "description": "The variable name you want to get back",
+                                "defaultStr": ""
+                            },
+                            "value": {
+                                "name": "value",
+                                "type": {
+                                    "types": [
+                                        {
+                                            "type": "Any"
+                                        }
+                                    ],
+                                    "raw": "Any"
+                                },
+                                "description": "The value you want to set",
+                                "defaultStr": ""
+                            }
+                        },
+                        "description": "This static method allows you to set an env variable.\nThe variables keys are stored in UPPERCASE but you can use lowercase as well",
+                        "static": "true",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://coffeekraken.io"
+                        }
+                    },
+                    "delete": {
+                        "id": "s97f8f0f76311c34699d5fcbdac6092a7f8532ce564afee6fb15e9ba281e31c6f",
+                        "name": "delete",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ],
+                            "raw": "Function"
+                        },
+                        "param": {
+                            "name": {
+                                "name": "name",
+                                "type": {
+                                    "types": [
+                                        {
+                                            "type": "String"
+                                        }
+                                    ],
+                                    "raw": "String"
+                                },
+                                "description": "The variable name you want to get back",
+                                "defaultStr": ""
+                            },
+                            "value": {
+                                "name": "value",
+                                "type": {
+                                    "types": [
+                                        {
+                                            "type": "Any"
+                                        }
+                                    ],
+                                    "raw": "Any"
+                                },
+                                "description": "The value you want to set",
+                                "defaultStr": ""
+                            }
+                        },
+                        "description": "This static method allows you to delete an env variable.\nThe variables keys are stored in UPPERCASE but you can use lowercase as well",
+                        "static": "true",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://coffeekraken.io"
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

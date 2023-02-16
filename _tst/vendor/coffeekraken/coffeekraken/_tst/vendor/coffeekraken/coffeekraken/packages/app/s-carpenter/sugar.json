@@ -1,0 +1,24 @@
+{
+    "config": {
+        "folders": [
+            {
+                "path": "./dist/pkg/%moduleSystem/config"
+            }
+        ]
+    },
+    "cli": [
+        {
+            "stack": "carpenter",
+            "description": "SCarpenter CLI",
+            "defaultAction": "start",
+            "actions": {
+                "start": {
+                    "scope": "package",
+                    "description": "Start a carpenter environment and display easily your components",
+                    "process": "./dist/pkg/esm/cli/start.cli.js",
+                    "interface": "./dist/pkg/esm/node/interface/SCarpenterStartParamsInterface.js"
+                }
+            }
+        }
+    ]
+}

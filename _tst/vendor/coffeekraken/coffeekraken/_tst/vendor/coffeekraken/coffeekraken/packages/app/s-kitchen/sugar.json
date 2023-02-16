@@ -1,0 +1,42 @@
+{
+    "config": {
+        "folders": [
+            {
+                "path": "./dist/pkg/%moduleSystem/config"
+            }
+        ]
+    },
+    "cli": [
+        {
+            "stack": "kitchen",
+            "description": "Sugar kitchen application that allows you to develop quickly and efficiently",
+            "defaultAction": "recipe",
+            "actions": {
+                "new": {
+                    "scope": "global",
+                    "description": "Create a new project from a recipe (template) like the default one or for example the litElement one, etc...",
+                    "interface": "./dist/pkg/esm/node/interface/SKitchenNewParamsInterface.js",
+                    "process": "./dist/pkg/esm/cli/new.cli.js"
+                },
+                "run": {
+                    "scope": "global",
+                    "description": "Run a recipe (or action) of the kitchen application into the current working directory",
+                    "interface": "./dist/pkg/esm/node/interface/SKitchenRunParamsInterface.js",
+                    "process": "./dist/pkg/esm/cli/run.cli.js"
+                },
+                "ls": {
+                    "scope": "global",
+                    "description": "List either all the recipes available or particular recipe actions stack",
+                    "interface": "./dist/pkg/esm/node/interface/SKitchenListParamsInterface.js",
+                    "process": "./dist/pkg/esm/cli/list.cli.js"
+                },
+                "add": {
+                    "scope": "package",
+                    "description": "Add some ingredient(s) to your project like \"frontspec\", \"favicon\", etc...",
+                    "interface": "./dist/pkg/esm/node/interface/SKitchenAddParamsInterface.js",
+                    "process": "./dist/pkg/esm/cli/add.cli.js"
+                }
+            }
+        }
+    ]
+}

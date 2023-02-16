@@ -1,0 +1,106 @@
+{
+    "config": {
+        "folders": [
+            {
+                "path": "./dist/pkg/%moduleSystem/config"
+            }
+        ]
+    },
+    "cli": [
+        {
+            "stack": "new",
+            "description": "Sugar new action",
+            "defaultAction": "project",
+            "actions": {
+                "project": {
+                    "scope": "global",
+                    "description": "Init a new project",
+                    "command": "sugar kitchen.new"
+                }
+            }
+        },
+        {
+            "stack": "dev",
+            "description": "Sugar development stack actions",
+            "defaultAction": "start",
+            "actions": {
+                "start": {
+                    "scope": "package",
+                    "description": "Start the development stack",
+                    "command": "sugar kitchen.recipe -s dev"
+                }
+            }
+        },
+        {
+            "stack": "prod",
+            "description": "Sugar production testing stack actions",
+            "defaultAction": "start",
+            "actions": {
+                "start": {
+                    "scope": "package",
+                    "description": "Start the production testing stack",
+                    "command": "sugar kitchen.recipe -s prod"
+                }
+            }
+        },
+        {
+            "stack": "build",
+            "description": "Sugar build action",
+            "defaultAction": "prod",
+            "actions": {
+                "prod": {
+                    "scope": "package",
+                    "description": "Build for production",
+                    "command": "sugar kitchen.recipe -s build"
+                }
+            }
+        },
+        {
+            "stack": "fs",
+            "description": "Filesystem related actions",
+            "defaultAction": "copy",
+            "actions": {
+                "copy": {
+                    "scope": "global",
+                    "description": "Copy a file/directory to a specified destination",
+                    "interface": "./dist/pkg/esm/node/fs/interface/SCliFsCopyParamsInterface.js",
+                    "process": "./dist/pkg/esm/cli/fs/copy.cli.js"
+                }
+            }
+        },
+        {
+            "stack": "process",
+            "description": "Process related actions",
+            "interactive": {
+                "project": {
+                    "scope": "global",
+                    "title": "Kill a process",
+                    "description": "Allows you to kill particular process through parameters like the port on which it runs, etc...",
+                    "interface": "./dist/pkg/esm/cli/process/interface/SSugarCliProcessKillParamsInterface.js",
+                    "process": "./dist/pkg/esm/cli/process/interactiveKill.cli.js"
+                }
+            },
+            "defaultAction": "kill",
+            "actions": {
+                "kill": {
+                    "scope": "global",
+                    "description": "Kill a process by it's pid, port and more",
+                    "interface": "./dist/pkg/esm/cli/process/interface/SSugarCliProcessKillParamsInterface.js",
+                    "process": "./dist/pkg/esm/cli/process/kill.cli.js"
+                }
+            }
+        },
+        {
+            "stack": "nvm",
+            "description": "NVM related actions",
+            "actions": {
+                "autoSwitch": {
+                    "scope": "global",
+                    "description": "Add the necessary (zsh, bash) script to make your NVM automatically change the node version when detecting a .nvmrc file in your project",
+                    "interface": "./dist/pkg/esm/node/nvm/interface/SCliNvmAutoSwitchParamsInterface.js",
+                    "process": "./dist/pkg/esm/cli/nvm/autoSwitch.cli.js"
+                }
+            }
+        }
+    ]
+}

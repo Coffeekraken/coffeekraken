@@ -1,0 +1,30 @@
+{% extends 'sugar/layouts/main/main.twig' %}
+
+{% block title %}
+    Coffeekraken
+{% endblock %}
+
+{% block body %}
+
+<div class="lod">
+<div class="_level" s-activate group="lod" onclick="document.env.SUGAR.front.setLod(1)">
+    Wireframe
+</div>
+<div class="_level" s-activate group="lod" onclick="document.env.SUGAR.front.setLod(2)">
+    Simplified
+</div>
+<div class="_level" s-activate active group="lod" onclick="document.env.SUGAR.front.setLod(3)">
+    Full
+</div>
+
+</div>
+
+    {% include 'layouts/header/header.twig' %}
+
+    <div class="content">
+        {{ body|raw }}
+    </div>
+
+    {% include 'layouts/footer/footer.twig' %}
+
+{% endblock %}

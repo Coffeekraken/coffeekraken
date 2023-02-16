@@ -1,0 +1,447 @@
+{
+    "map": {},
+    "extends": [],
+    "generated": {
+        "extends": [
+            "@coffeekraken/aa",
+            "@coffeekraken/cli",
+            "@coffeekraken/s-activate-feature",
+            "@coffeekraken/s-appear-feature",
+            "@coffeekraken/s-asset-picker-component",
+            "@coffeekraken/s-bench",
+            "@coffeekraken/s-builder",
+            "@coffeekraken/s-carpenter",
+            "@coffeekraken/s-class",
+            "@coffeekraken/s-classmap",
+            "@coffeekraken/s-clipboard-copy-component",
+            "@coffeekraken/s-code-example-component",
+            "@coffeekraken/s-code-formatter-prettier",
+            "@coffeekraken/s-code-formatter",
+            "@coffeekraken/s-color-picker-component",
+            "@coffeekraken/s-color",
+            "@coffeekraken/s-conductor",
+            "@coffeekraken/s-config-adapter",
+            "@coffeekraken/s-config-folder-adapter",
+            "@coffeekraken/s-config-inline-adapter",
+            "@coffeekraken/s-config",
+            "@coffeekraken/s-css-animation",
+            "@coffeekraken/s-dashboard",
+            "@coffeekraken/s-data-file-generic",
+            "@coffeekraken/s-data-file-js",
+            "@coffeekraken/s-data-file-php",
+            "@coffeekraken/s-datetime-picker-component",
+            "@coffeekraken/s-deps-feature",
+            "@coffeekraken/s-descriptor",
+            "@coffeekraken/s-docblock",
+            "@coffeekraken/s-docmap",
+            "@coffeekraken/s-dropzone-component",
+            "@coffeekraken/s-duration",
+            "@coffeekraken/s-env",
+            "@coffeekraken/s-event-emitter",
+            "@coffeekraken/s-favicon-builder",
+            "@coffeekraken/s-feature",
+            "@coffeekraken/s-file",
+            "@coffeekraken/s-filtrable-input-component",
+            "@coffeekraken/s-floating-feature",
+            "@coffeekraken/s-form-validate-feature",
+            "@coffeekraken/s-front",
+            "@coffeekraken/s-frontend-checker",
+            "@coffeekraken/s-frontend-server",
+            "@coffeekraken/s-frontspec",
+            "@coffeekraken/s-glitch-feature",
+            "@coffeekraken/s-glob",
+            "@coffeekraken/s-google-map-component",
+            "@coffeekraken/s-handlebars",
+            "@coffeekraken/s-highlight-feature",
+            "@coffeekraken/s-images-builder",
+            "@coffeekraken/s-inline-feature",
+            "@coffeekraken/s-interface",
+            "@coffeekraken/s-kitchen",
+            "@coffeekraken/s-lazy-feature",
+            "@coffeekraken/s-lit-component",
+            "@coffeekraken/s-log",
+            "@coffeekraken/s-markdown-builder",
+            "@coffeekraken/s-monorepo",
+            "@coffeekraken/s-pack-essentials",
+            "@coffeekraken/s-package",
+            "@coffeekraken/s-page-transition-feature",
+            "@coffeekraken/s-panel-component",
+            "@coffeekraken/s-parallax-feature",
+            "@coffeekraken/s-postcss-builder",
+            "@coffeekraken/s-postcss-sugar-export-plugin",
+            "@coffeekraken/s-postcss-sugar-plugin",
+            "@coffeekraken/s-process",
+            "@coffeekraken/s-promise",
+            "@coffeekraken/s-range-component",
+            "@coffeekraken/s-rating-component",
+            "@coffeekraken/s-refocus-feature",
+            "@coffeekraken/s-request",
+            "@coffeekraken/s-scroll-component",
+            "@coffeekraken/s-sitemap-builder",
+            "@coffeekraken/s-slider-component",
+            "@coffeekraken/s-specs-editor-component",
+            "@coffeekraken/s-specs",
+            "@coffeekraken/s-state",
+            "@coffeekraken/s-static-builder",
+            "@coffeekraken/s-stdio",
+            "@coffeekraken/s-sugar-config",
+            "@coffeekraken/s-sugar-element",
+            "@coffeekraken/s-sugar-feature",
+            "@coffeekraken/s-sugar-json",
+            "@coffeekraken/s-theme-switcher-component",
+            "@coffeekraken/s-theme",
+            "@coffeekraken/s-timer",
+            "@coffeekraken/s-type",
+            "@coffeekraken/s-typescript-builder",
+            "@coffeekraken/s-url",
+            "@coffeekraken/s-validator",
+            "@coffeekraken/s-view-renderer-engine-blade",
+            "@coffeekraken/s-view-renderer-engine-lit",
+            "@coffeekraken/s-view-renderer-engine-twig",
+            "@coffeekraken/s-view-renderer",
+            "@coffeekraken/s-vite-postcss-plugin",
+            "@coffeekraken/s-vite-sugar-plugin",
+            "@coffeekraken/s-vite",
+            "@coffeekraken/sugar"
+        ],
+        "map": {
+            "@coffeekraken.s-component-utils.doc.README": {
+                "id": "@coffeekraken.s-component-utils.doc.README",
+                "name": "README",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Markdown"
+                        }
+                    ],
+                    "raw": "Markdown"
+                },
+                "menu": {
+                    "tree": [
+                        "Documentation"
+                    ],
+                    "slug": "/doc/readme"
+                },
+                "platform": [
+                    {
+                        "name": "md",
+                        "description": ""
+                    }
+                ],
+                "namespace": "@coffeekraken.s-component-utils.doc",
+                "status": "stable",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "README.md.twig",
+                "extension": "md",
+                "relPath": "src/doc/README.md.twig",
+                "children": {}
+            },
+            "@coffeekraken.s-component-utils.js.interface.SComponentUtilsDefaultPropsInterface": {
+                "id": "@coffeekraken.s-component-utils.js.interface.SComponentUtilsDefaultPropsInterface",
+                "name": "SComponentUtilsDefaultPropsInterface",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Class"
+                        }
+                    ],
+                    "raw": "Class"
+                },
+                "platform": [
+                    {
+                        "name": "js",
+                        "description": ""
+                    }
+                ],
+                "description": "This class represent the interface that describe parameters of a basic SComponent",
+                "namespace": "@coffeekraken.s-component-utils.js.interface",
+                "status": "beta",
+                "interface": {
+                    "name": "SComponentUtilsDefaultPropsInterface",
+                    "description": "",
+                    "definition": {
+                        "id": {
+                            "description": "Specify an id for your component",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
+                            "physical": true
+                        },
+                        "mountWhen": {
+                            "description": "Specify when your component will be mounted",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
+                            "values": [
+                                "direct",
+                                "directly",
+                                "inViewport",
+                                "nearViewport",
+                                "enterViewport",
+                                "outOfViewport",
+                                "interact",
+                                "visible",
+                                "stylesheetsReady",
+                                "domReady",
+                                "animationEnd",
+                                "lod:0",
+                                "lod:1",
+                                "lod:2",
+                                "lod:3",
+                                "lod:4"
+                            ],
+                            "default": "direct"
+                        },
+                        "activeWhen": {
+                            "description": "Specify when your component is active and when it is not",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "array",
+                                        "of": [
+                                            "String"
+                                        ]
+                                    }
+                                ],
+                                "raw": "String[]"
+                            },
+                            "values": [
+                                "inViewport",
+                                "lod"
+                            ],
+                            "default": [
+                                "inViewport",
+                                "lod"
+                            ]
+                        },
+                        "lod": {
+                            "description": "Specify the minimum lod (level of details) from when this component is active",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Number"
+                                    }
+                                ],
+                                "raw": "Number"
+                            }
+                        },
+                        "adoptStyle": {
+                            "description": "Specify if your component adopt the style of the global DOM. This worts only if you are using a shadowRoot element",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Boolean"
+                                    }
+                                ],
+                                "raw": "Boolean"
+                            },
+                            "default": true
+                        },
+                        "saveState": {
+                            "description": "Specify if you want to save the state of your component",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Boolean"
+                                    }
+                                ],
+                                "raw": "Boolean"
+                            },
+                            "default": false
+                        },
+                        "lnf": {
+                            "description": "Specify the lnf (look-and-feel) of your component. This is used by the css to style your component",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
+                            "default": "default",
+                            "physical": true
+                        },
+                        "bare": {
+                            "description": "Specify if you want your component with only the bare styling. It just add the \"s-bare\" class on the component itself",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Boolean"
+                                    }
+                                ],
+                                "raw": "Boolean"
+                            },
+                            "default": false
+                        },
+                        "responsive": {
+                            "description": "Specify some responsive properties. A \"media\" property is required and has to be either a media query, or a media query name defined in the config.themeMedia.queries theme setting",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Object"
+                                    }
+                                ],
+                                "raw": "Object"
+                            },
+                            "default": {}
+                        },
+                        "prefixEvent": {
+                            "description": "Specify if you want the emitted events to be prefixed by the name of the feature/component like \"s-slider.change\" or not",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Boolean"
+                                    }
+                                ],
+                                "raw": "Boolean"
+                            },
+                            "default": true
+                        },
+                        "verbose": {
+                            "description": "Specify if you want this component/feature to log informations about activity or not",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Boolean"
+                                    }
+                                ],
+                                "raw": "Boolean"
+                            },
+                            "default": false
+                        }
+                    }
+                },
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "SComponentUtilsDefaultPropsInterface.ts",
+                "extension": "ts",
+                "relPath": "src/js/interface/SComponentUtilsDefaultPropsInterface.ts",
+                "children": {}
+            },
+            "@coffeekraken.s-component-utils.js.interface.SComponentUtilsSettingsInterface": {
+                "id": "@coffeekraken.s-component-utils.js.interface.SComponentUtilsSettingsInterface",
+                "name": "SComponentUtilsSettingsInterface",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Class"
+                        }
+                    ],
+                    "raw": "Class"
+                },
+                "platform": [
+                    {
+                        "name": "js",
+                        "description": ""
+                    }
+                ],
+                "description": "This class represent the interface that describe SComponentUtils settings",
+                "namespace": "@coffeekraken.s-component-utils.js.interface",
+                "status": "beta",
+                "interface": {
+                    "name": "SComponentUtilsSettingsInterface",
+                    "description": "",
+                    "definition": {
+                        "name": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
+                            "description": "The name of the component/feature that will be used to generate className, etc..."
+                        },
+                        "interface": {
+                            "description": "Specify an SInterface class to use as our properties definition",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "SInterface"
+                                    }
+                                ],
+                                "raw": "SInterface"
+                            }
+                        },
+                        "props": {
+                            "description": "Specify a properties object to use as our properties definition",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Object"
+                                    }
+                                ],
+                                "raw": "Object"
+                            }
+                        },
+                        "style": {
+                            "description": "Specify a style string to use as style to inject for our component",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            }
+                        },
+                        "defaultProps": {
+                            "description": "Pass an object that act as the default properties value for our component",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Object"
+                                    }
+                                ],
+                                "raw": "Object"
+                            }
+                        },
+                        "useTagNameForClassName": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Boolean"
+                                    }
+                                ],
+                                "raw": "Boolean"
+                            },
+                            "description": "Specify if the method \"className\" will generate a class using the node tagName additionaly to the passed \"name\" setting",
+                            "default": true
+                        }
+                    }
+                },
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "SComponentUtilsSettingsInterface.ts",
+                "extension": "ts",
+                "relPath": "src/js/interface/SComponentUtilsSettingsInterface.ts",
+                "children": {}
+            }
+        }
+    }
+}

@@ -1,6 +1,6 @@
 {
     "name": "@coffeekraken/s-specs-editor-component",
-    "version": "2.0.0-alpha.23",
+    "version": "2.0.0-alpha.24",
     "description": "",
     "type": "module",
     "scripts": {
@@ -11,12 +11,12 @@
     "author": "",
     "license": "ISC",
     "dependencies": {
-        "@coffeekraken/s-asset-picker-component": "^2.0.0-alpha.23",
-        "@coffeekraken/s-clipboard-copy-component": "^2.0.0-alpha.23",
-        "@coffeekraken/s-dropzone-component": "^2.0.0-alpha.23",
-        "@coffeekraken/s-interface": "^2.0.0-alpha.23",
-        "@coffeekraken/s-theme": "^2.0.0-alpha.23",
-        "@coffeekraken/sugar": "^2.0.0-alpha.23",
+        "@coffeekraken/s-asset-picker-component": "^2.0.0-alpha.24",
+        "@coffeekraken/s-clipboard-copy-component": "^2.0.0-alpha.24",
+        "@coffeekraken/s-dropzone-component": "^2.0.0-alpha.24",
+        "@coffeekraken/s-interface": "^2.0.0-alpha.24",
+        "@coffeekraken/s-theme": "^2.0.0-alpha.24",
+        "@coffeekraken/sugar": "^2.0.0-alpha.24",
         "html-tags": "^3.2.0",
         "known-css-properties": "^0.25.0"
     },

@@ -1,0 +1,53 @@
+{
+    "name": "@coffeekraken/s-static-builder",
+    "version": "2.0.0-alpha.23",
+    "description": "Simple builder that let you specify a sitemap.xml file as source, and generate a static version of the website by scraping each urls.",
+    "type": "module",
+    "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)",
+    "license": "MIT",
+    "dependencies": {
+        "@coffeekraken/s-builder": "^2.0.0-alpha.23",
+        "@coffeekraken/s-env": "^2.0.0-alpha.23",
+        "@coffeekraken/s-event-emitter": "^2.0.0-alpha.23",
+        "@coffeekraken/s-file": "^2.0.0-alpha.23",
+        "@coffeekraken/s-frontend-server": "^2.0.0-alpha.23",
+        "@coffeekraken/s-glob": "^2.0.0-alpha.23",
+        "@coffeekraken/s-interface": "^2.0.0-alpha.23",
+        "@coffeekraken/s-log": "^2.0.0-alpha.23",
+        "@coffeekraken/s-postcss-sugar-plugin": "^2.0.0-alpha.23",
+        "@coffeekraken/s-promise": "^2.0.0-alpha.23",
+        "@coffeekraken/s-request": "^2.0.0-alpha.23",
+        "@coffeekraken/s-sugar-config": "^2.0.0-alpha.23",
+        "@coffeekraken/sugar": "^2.0.0-alpha.23",
+        "@fullhuman/postcss-purgecss": "^4.1.3",
+        "csso": "^4.2.0",
+        "postcss": "^8.4.14",
+        "postcss-atroot": "^0.2.3",
+        "postcss-extend-rule": "^3.0.0",
+        "postcss-import": "^14.1.0",
+        "postcss-nested": "^5.0.6",
+        "postcss-property-lookup": "^3.0.0",
+        "purgecss": "^4.1.3"
+    },
+    "main": "dist/pkg/cjs/node/exports.js",
+    "module": "dist/pkg/esm/node/exports.js",
+    "exports": {
+        ".": {
+            "require": "./dist/pkg/cjs/node/exports.js",
+            "import": "./dist/pkg/esm/node/exports.js"
+        },
+        "./shared/*": {
+            "require": "./dist/pkg/cjs/shared/*.js",
+            "import": "./dist/pkg/esm/shared/*.js"
+        },
+        "./node/*": {
+            "require": "./dist/pkg/cjs/node/*.js",
+            "import": "./dist/pkg/esm/node/*.js"
+        },
+        "./js/*": {
+            "require": "./dist/pkg/cjs/js/*.js",
+            "import": "./dist/pkg/esm/js/*.js"
+        }
+    },
+    "homepage": "https://coffeekraken.io"
+}

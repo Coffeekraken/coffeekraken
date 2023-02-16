@@ -1,7 +1,7 @@
 {
     "private": true,
     "name": "@coffeekraken/s-css-animation",
-    "version": "2.0.0-alpha.24",
+    "version": "2.0.0-alpha.25",
     "description": "Simple class that let you target an HTMLElement in your DOM and control his applied CSS animation using a simple api.",
     "type": "module",
     "scripts": {

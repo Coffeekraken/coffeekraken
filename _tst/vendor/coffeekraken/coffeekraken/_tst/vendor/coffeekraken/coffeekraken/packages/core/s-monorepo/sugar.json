@@ -1,0 +1,48 @@
+{
+    "config": {
+        "folders": [
+            {
+                "path": "./dist/pkg/%moduleSystem/config"
+            }
+        ]
+    },
+    "cli": [
+        {
+            "stack": "mono",
+            "description": "Mono repository related actions",
+            "defaultAction": "list",
+            "actions": {
+                "exec": {
+                    "scope": "package",
+                    "description": "Exec a command in all the packages of the monorepo",
+                    "interface": "./dist/pkg/esm/node/interface/SMonorepoExecParamsInterface.js",
+                    "process": "./dist/pkg/esm/cli/exec.cli.js"
+                },
+                "list": {
+                    "scope": "package",
+                    "description": "List all the repositories that compose the current mono repo",
+                    "interface": "./dist/pkg/esm/node/interface/SMonorepoListParamsInterface.js",
+                    "process": "./dist/pkg/esm/cli/list.cli.js"
+                },
+                "publish": {
+                    "scope": "package",
+                    "description": "Publish all the repositories that compose the current mono repo",
+                    "interface": "./dist/pkg/esm/node/interface/SMonorepoPublishParamsInterface.js",
+                    "process": "./dist/pkg/esm/cli/publish.cli.js"
+                },
+                "dev": {
+                    "scope": "package",
+                    "description": "Launch the monorepo dev stack. Principally transpiling the packages typescript files",
+                    "interface": "./dist/pkg/esm/node/interface/SMonorepoDevParamsInterface.js",
+                    "process": "./dist/pkg/esm/cli/dev.cli.js"
+                },
+                "upgrade": {
+                    "scope": "package",
+                    "description": "Upgrade the repositories informations depending on the mono repo ones",
+                    "interface": "./dist/pkg/esm/node/interface/SMonorepoUpgradeParamsInterface.js",
+                    "process": "./dist/pkg/esm/cli/upgrade.cli.js"
+                }
+            }
+        }
+    ]
+}

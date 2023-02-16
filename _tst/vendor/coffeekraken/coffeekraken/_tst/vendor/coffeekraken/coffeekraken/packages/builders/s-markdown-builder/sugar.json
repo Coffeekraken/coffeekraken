@@ -1,0 +1,23 @@
+{
+  "config": {
+    "folders": [
+      {
+        "path": "./dist/pkg/%moduleSystem/config"
+      }
+    ]
+  },
+  "cli": [
+    {
+      "stack": "markdown",
+      "description": "Markdown related actions",
+      "defaultAction": "build",
+      "actions": {
+        "build": {
+          "scope": "package",
+          "description": "Build your markdown using marked and some internal extensions like s-code-example and others",
+          "process": "./dist/pkg/esm/cli/build.cli.js"
+        }
+      }
+    }
+  ]
+}

@@ -11659,7 +11659,7 @@ class SStdio extends SClass {
   }
   static new(id, sources, adapters, settings = {}) {
     return new Promise((resolve) => __awaiter$x(this, void 0, void 0, function* () {
-      const __new = (yield __vitePreload(() => import("./new.6203f6f7.js"), true ? [] : void 0)).default;
+      const __new = (yield __vitePreload(() => import("./new.c4d75505.js"), true ? [] : void 0)).default;
       return __new(id, sources, adapters, settings);
     }));
   }
@@ -18856,7 +18856,7 @@ class SStateFsAdapter {
   _init() {
     var _a2, _b2;
     return __awaiter$m(this, void 0, void 0, function* () {
-      const _packageTmpDir = (yield __vitePreload(() => import("./packageTmpDir.f91c342b.js"), true ? [] : void 0)).default;
+      const _packageTmpDir = (yield __vitePreload(() => import("./packageTmpDir.d343fe75.js"), true ? [] : void 0)).default;
       this._statesDir = (_b2 = (_a2 = this._settings) === null || _a2 === void 0 ? void 0 : _a2.folder) !== null && _b2 !== void 0 ? _b2 : `${_packageTmpDir()}/states`;
       this._stateFile = `${this._statesDir}/${this._id}.state.json`;
     });
@@ -37749,9 +37749,9 @@ class SPageTransitionFeatureInterface extends SInterface {
 function define$7(props = {}, name2 = "s-page-transition") {
   SPageTransitionFeature.define(name2, SPageTransitionFeature, Object.assign({}, props));
 }
-const __css = `.s-lod--1  .s-page-transition-source.error [s-page-transition-broken-link-icon] {
+const __css = `.s-page-transition-source.error [s-page-transition-broken-link-icon] {
     margin-right: 0.5ch;
-    margin-left: 0.5ch
+    margin-left: 0.5ch;
 }body:after {
                     display: none;;
                     content: '{"lod":{"enabled":true,"defaultLevel":3,"botLevel":1,"levels":{"0":{"name":"bare","speedIndex":0},"1":{"name":"bare+","speedIndex":30},"2":{"name":"low","speedIndex":40},"3":{"name":"medium","speedIndex":50},"4":{"name":"high","speedIndex":60}},"method":"class","defaultAction":">=","cssProperties":{"animation":3,"animation-delay":3,"animation-direction":3,"animation-duration":3,"animation-fill-mode":3,"animation-iteration-count":3,"animation-name":3,"animation-play-state":3,"animation-timing-function":3,"backdrop-filter":3,"background":2,"background-attachment":2,"background-blend-mode":3,"background-clip":2,"background-color":2,"background-image":2,"background-origin":2,"background-position":2,"background-repeat":2,"background-size":2,"border":2,"border-bottom":2,"border-bottom-color":2,"border-bottom-left-radius":2,"border-bottom-right-radius":2,"border-bottom-style":2,"border-bottom-width":2,"border-collapse":2,"border-color":2,"border-image":2,"border-image-outset":2,"border-image-repeat":2,"border-image-slice":2,"border-image-source":2,"border-image-width":2,"border-left":2,"border-left-color":2,"border-left-style":2,"border-left-width":2,"border-radius":2,"border-right":2,"border-right-color":2,"border-right-style":2,"border-right-width":2,"border-spacing":2,"border-style":2,"border-top":2,"border-top-color":2,"border-top-left-radius":2,"border-top-right-radius":2,"border-top-style":2,"border-top-width":2,"border-width":2,"box-shadow":3,"caret-color":1,"color":2,"column-count":2,"column-fill":2,"column-gap":2,"column-rule":2,"column-rule-color":2,"column-rule-style":2,"column-rule-width":2,"counter-increment":2,"counter-reset":2,"filter":3,"font":1,"font-family":1,"font-kerning":1,"font-size":1,"font-stretch":1,"font-style":1,"font-variant":1,"font-weight":1,"gap":1,"letter-spacing":1,"line-height":1,"list-style-image":2,"margin":1,"margin-bottom":1,"margin-left":1,"margin-right":1,"margin-top":1,"margin-inline":1,"margin-inline-start":1,"margin-inline-end":1,"margin-block":1,"margin-block-start":1,"margin-block-end":1,"outline":2,"outline-color":2,"outline-offset":2,"outline-style":2,"outline-width":2,"padding":1,"padding-bottom":1,"padding-left":1,"padding-right":1,"padding-top":1,"padding-inline":1,"padding-inline-start":1,"padding-inline-end":1,"padding-block":1,"padding-block-start":1,"padding-block-end":1,"text-decoration":2,"text-decoration-color":2,"text-decoration-line":2,"text-indent":2,"text-justify":2,"text-overflow":2,"text-shadow":3,"text-transform":2,"transition":3,"transition-delay":3,"transition-duration":3,"transition-property":3,"transition-timing-function":3,"word-break":1,"word-spacing":1,"word-wrap":1}},"clean":{"variables":false},"compress":{"variables":false}}';

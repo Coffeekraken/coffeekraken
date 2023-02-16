@@ -1,8 +1,8 @@
 <?php return array(
     'root' => array(
         'name' => 'coffeekraken/coffeekraken',
-        'pretty_version' => '2.0.0-alpha.21',
-        'version' => '2.0.0.0-alpha21',
+        'pretty_version' => '2.0.0-alpha.22',
+        'version' => '2.0.0.0-alpha22',
         'reference' => NULL,
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
@@ -11,8 +11,8 @@
     ),
     'versions' => array(
         'coffeekraken/coffeekraken' => array(
-            'pretty_version' => '2.0.0-alpha.21',
-            'version' => '2.0.0.0-alpha21',
+            'pretty_version' => '2.0.0-alpha.22',
+            'version' => '2.0.0.0-alpha22',
             'reference' => NULL,
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',

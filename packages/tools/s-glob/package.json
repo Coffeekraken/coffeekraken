@@ -1,15 +1,15 @@
 {
     "name": "@coffeekraken/s-glob",
-    "version": "2.0.0-alpha.22",
+    "version": "2.0.0-alpha.23",
     "description": "Glob utility class that expose methods like \"copySync\", \"resolve\", and more...",
     "type": "module",
     "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)",
     "license": "MIT",
     "dependencies": {
-        "@coffeekraken/s-class": "^2.0.0-alpha.22",
-        "@coffeekraken/s-file": "^2.0.0-alpha.22",
-        "@coffeekraken/s-interface": "^2.0.0-alpha.22",
-        "@coffeekraken/sugar": "^2.0.0-alpha.22"
+        "@coffeekraken/s-class": "^2.0.0-alpha.23",
+        "@coffeekraken/s-file": "^2.0.0-alpha.23",
+        "@coffeekraken/s-interface": "^2.0.0-alpha.23",
+        "@coffeekraken/sugar": "^2.0.0-alpha.23"
     },
     "main": "dist/pkg/cjs/node/exports.js",
     "module": "dist/pkg/esm/node/exports.js",

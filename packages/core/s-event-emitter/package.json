@@ -1,14 +1,14 @@
 {
     "name": "@coffeekraken/s-event-emitter",
-    "version": "2.0.0-alpha.22",
+    "version": "2.0.0-alpha.23",
     "description": "Powerful event system for node that let you dispatch events, pipe them upper or to different emitters as well as subscribe to them with glob like support.",
     "type": "module",
     "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)",
     "license": "MIT",
     "dependencies": {
-        "@coffeekraken/s-class": "^2.0.0-alpha.22",
-        "@coffeekraken/s-log": "^2.0.0-alpha.22",
-        "@coffeekraken/sugar": "^2.0.0-alpha.22",
+        "@coffeekraken/s-class": "^2.0.0-alpha.23",
+        "@coffeekraken/s-log": "^2.0.0-alpha.23",
+        "@coffeekraken/sugar": "^2.0.0-alpha.23",
         "glob-to-regexp": "^0.4.1",
         "micromatch": "^4.0.5",
         "minimatch": "^5.1.0",

@@ -1,12 +1,12 @@
 {
     "name": "@coffeekraken/s-duration",
-    "version": "2.0.0-alpha.22",
+    "version": "2.0.0-alpha.23",
     "description": "Simple class to handle duration like execute something and print out how many times it has takes.",
     "type": "module",
     "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)",
     "license": "MIT",
     "dependencies": {
-        "@coffeekraken/sugar": "^2.0.0-alpha.22"
+        "@coffeekraken/sugar": "^2.0.0-alpha.23"
     },
     "main": "dist/pkg/cjs/shared/exports.js",
     "module": "dist/pkg/esm/shared/exports.js",

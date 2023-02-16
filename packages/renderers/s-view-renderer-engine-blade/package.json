@@ -1,17 +1,17 @@
 {
     "name": "@coffeekraken/s-view-renderer-engine-blade",
-    "version": "2.0.0-alpha.21",
+    "version": "2.0.0-alpha.22",
     "description": "SViewRenderer blade engine that allows you to render \".blade.php\" files with ease.",
     "type": "module",
     "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)",
     "license": "MIT",
     "dependencies": {
-        "@coffeekraken/s-bench": "^2.0.0-alpha.21",
-        "@coffeekraken/s-interface": "^2.0.0-alpha.21",
-        "@coffeekraken/s-log": "^2.0.0-alpha.21",
-        "@coffeekraken/s-promise": "^2.0.0-alpha.21",
-        "@coffeekraken/s-sugar-config": "^2.0.0-alpha.21",
-        "@coffeekraken/sugar": "^2.0.0-alpha.21"
+        "@coffeekraken/s-bench": "^2.0.0-alpha.22",
+        "@coffeekraken/s-interface": "^2.0.0-alpha.22",
+        "@coffeekraken/s-log": "^2.0.0-alpha.22",
+        "@coffeekraken/s-promise": "^2.0.0-alpha.22",
+        "@coffeekraken/s-sugar-config": "^2.0.0-alpha.22",
+        "@coffeekraken/sugar": "^2.0.0-alpha.22"
     },
     "main": "dist/pkg/cjs/node/exports.js",
     "module": "dist/pkg/esm/node/exports.js",

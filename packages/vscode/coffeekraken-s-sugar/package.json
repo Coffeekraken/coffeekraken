@@ -2,7 +2,7 @@
     "name": "coffeekraken-s-sugar",
     "displayName": "@coffeekraken/s-sugar",
     "description": "Coffeekraken sugar helpers like snippets, etc...",
-    "version": "2.0.0-alpha.21",
+    "version": "2.0.0-alpha.22",
     "engines": {
         "vscode": "^1.74.0"
     },
@@ -27,8 +27,8 @@
         "test": "node ./out/test/runTest.js"
     },
     "dependencies": {
-        "@coffeekraken/s-docmap": "^2.0.0-alpha.21",
-        "@coffeekraken/sugar": "^2.0.0-alpha.21",
+        "@coffeekraken/s-docmap": "^2.0.0-alpha.22",
+        "@coffeekraken/sugar": "^2.0.0-alpha.22",
         "find-package-json": "^1.2.0"
     },
     "devDependencies": {

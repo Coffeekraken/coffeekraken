@@ -1,16 +1,16 @@
 {
     "name": "@coffeekraken/s-bench",
-    "version": "2.0.0-alpha.21",
+    "version": "2.0.0-alpha.22",
     "description": "Simple and pretty convinient class to make simple benches like a process duration, etc...",
     "type": "module",
     "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)",
     "license": "MIT",
     "dependencies": {
-        "@coffeekraken/s-class": "^2.0.0-alpha.21",
-        "@coffeekraken/s-env": "^2.0.0-alpha.21",
-        "@coffeekraken/s-interface": "^2.0.0-alpha.21",
-        "@coffeekraken/s-promise": "^2.0.0-alpha.21",
-        "@coffeekraken/sugar": "^2.0.0-alpha.21",
+        "@coffeekraken/s-class": "^2.0.0-alpha.22",
+        "@coffeekraken/s-env": "^2.0.0-alpha.22",
+        "@coffeekraken/s-interface": "^2.0.0-alpha.22",
+        "@coffeekraken/s-promise": "^2.0.0-alpha.22",
+        "@coffeekraken/sugar": "^2.0.0-alpha.22",
         "micromatch": "^4.0.5"
     },
     "main": "dist/pkg/cjs/shared/exports.js",

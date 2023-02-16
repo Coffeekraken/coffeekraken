@@ -1,0 +1,93 @@
+{
+    "type": "frontspec",
+    "title": "Frontspec",
+    "description": "Describe the frontspec.json properties",
+    "props": {
+        "metas": {
+            "description": "Specify the metas properties like the title, description, etc...",
+            "type": "Object",
+            "props": {
+                "charset": {
+                    "description": "Specify the charset of the current document",
+                    "type": "String",
+                    "default": "UTF-8"
+                },
+                "http-equiv": {
+                    "description": "Specigy the http-equiv metas",
+                    "type": "String",
+                    "default": "X-UA-Compatible"
+                },
+                "robots": {
+                    "description": "Specify the robots metas",
+                    "type": "String",
+                    "default": "all"
+                },
+                "viewport": {
+                    "description": "Specify the viewport policy for the current document",
+                    "type": "String",
+                    "default": "width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
+                },
+                "title": {
+                    "description": "Specify the title meta",
+                    "type": "String",
+                    "required": true
+                },
+                "description": {
+                    "description": "Specify the description meta",
+                    "type": "String",
+                    "required": true
+                },
+                "author": {
+                    "description": "Specify the author meta",
+                    "type": "String"
+                },
+                "og": {
+                    "description": "Specify the opengraph metas like \"title\", \"description\", \"image\", etc...",
+                    "type": "Object"
+                }
+            }
+        },
+        "assets": {
+            "description": "Specify the assets you want to load by environments",
+            "type": "Object",
+            "props": {
+                "id": {
+                    "type": "String",
+                    "required": true
+                },
+                "type": {
+                    "type": "String"
+                },
+                "defer": {
+                    "type": "Boolean",
+                    "default": false
+                },
+                "nomodule": {
+                    "type": "Boolean"
+                },
+                "src": {
+                    "type": "String",
+                    "required": true
+                },
+                "env": {
+                    "type": "String",
+                    "default": "production"
+                }
+            }
+        },
+        "google": {
+            "description": "Specify some google relative infos",
+            "type": "Object",
+            "props": {
+                "ga": {
+                    "description": "Specify a google analytics ID",
+                    "type": "String"
+                },
+                "gtm": {
+                    "description": "Specify a google tag manager ID",
+                    "type": "String"
+                }
+            }
+        }
+    }
+}

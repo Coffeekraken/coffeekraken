@@ -1,0 +1,28 @@
+s-dashboard-pages {
+    flex-grow: 1;
+}
+
+.s-dashboard-pages {
+    height: calc(100vh - 150px - sugar.margin(20) * 3);
+
+    .s-filtrable-input {
+        height: calc(100% - sugar.margin(20) * 4);
+
+        &_dropdown {
+            margin-block-start: sugar.margin(20);
+        }
+        &_list {
+            @sugar.scrollbar();
+        }
+    }
+
+    .s-highlight {
+        background: sugar.color(accent);
+        color: black;
+        border-radius: sugar.border.radius(10);
+    }
+
+    ._description {
+        font-size: 14px;
+    }
+}

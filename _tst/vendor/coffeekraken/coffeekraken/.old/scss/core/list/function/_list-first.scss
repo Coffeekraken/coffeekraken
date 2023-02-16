@@ -1,0 +1,21 @@
+@use 'sass:list';
+/**
+ * @name      list-first
+ * @namespace            scss.core.list.function
+ * @type      function
+ *
+ * Return the first element of the passed list
+ *
+ * @param         {List}        $list         The list to get the first element from
+ * @return        {Mixed}                     The first element of the list
+ *
+ * @example       scss
+ * Sugar.list-first(('hello', 'world')); // => 'hello'
+ *
+ * @since       1.0.0
+ * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+@function list-first($list) {
+  $list: test-argument('Sugar.list-first', 'list', list, $list);
+  @return list.nth($list, 1);
+}

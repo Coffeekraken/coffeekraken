@@ -1,0 +1,63 @@
+<?php return array(
+    'root' => array(
+        'pretty_version' => '2.0.0-alpha.20',
+        'version' => '2.0.0.0-alpha20',
+        'type' => 'library',
+        'install_path' => __DIR__ . '/../../',
+        'aliases' => array(),
+        'reference' => NULL,
+        'name' => 'coffeekraken/s-view-renderer-engine-twig',
+        'dev' => true,
+    ),
+    'versions' => array(
+        'coffeekraken/s-view-renderer-engine-twig' => array(
+            'pretty_version' => '2.0.0-alpha.20',
+            'version' => '2.0.0.0-alpha20',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../../',
+            'aliases' => array(),
+            'reference' => NULL,
+            'dev_requirement' => false,
+        ),
+        'coffeekraken/sugar' => array(
+            'pretty_version' => '2.0.0-alpha.20',
+            'version' => '2.0.0.0-alpha20',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../coffeekraken/sugar',
+            'aliases' => array(),
+            'reference' => '00ce153729c145a0c4552dcd730000642226c592',
+            'dev_requirement' => false,
+        ),
+        'symfony/polyfill-ctype' => array(
+            'pretty_version' => 'dev-main',
+            'version' => 'dev-main',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../symfony/polyfill-ctype',
+            'aliases' => array(
+                0 => '1.26.x-dev',
+            ),
+            'reference' => '6fd1b9a79f6e3cf65f9e679b23af304cd9e010d4',
+            'dev_requirement' => false,
+        ),
+        'symfony/polyfill-mbstring' => array(
+            'pretty_version' => 'dev-main',
+            'version' => 'dev-main',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../symfony/polyfill-mbstring',
+            'aliases' => array(
+                0 => '1.26.x-dev',
+            ),
+            'reference' => '9344f9cb97f3b19424af1a21a3b0e75b0a7d8d7e',
+            'dev_requirement' => false,
+        ),
+        'twig/twig' => array(
+            'pretty_version' => '3.x-dev',
+            'version' => '3.9999999.9999999.9999999-dev',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../twig/twig',
+            'aliases' => array(),
+            'reference' => '7a2e23ce17c048d2c393a55d76d72eb0dbbf356b',
+            'dev_requirement' => false,
+        ),
+    ),
+);

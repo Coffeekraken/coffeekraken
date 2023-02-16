@@ -1,0 +1,21 @@
+{% set finalId = id %}
+{% if not id  %}
+    {% set finalId = 's-layout-' ~ uniqid() %}
+{% endif %}
+<style>
+{{ layoutCss(layout.media, {
+    selector: '#' ~ finalId ~ '-layout',
+    mediaSettings: frontspec.media|toObject
+})|raw }}
+</style>
+<div id="{{ finalId }}" class="{{ attributes.class }} {{ paddingClasses(padding) }} {{ marginClasses(margin) }}" {{ attrs(attributes, ['class'])|raw }}>
+    {% if container %}
+        <div class="s-container:{{ container }}">
+    {% endif %}
+    <div class="s-layout {{ gap ? 's-gap:' ~ gap : '' }}" id="{{ finalId }}-layout">
+        {{ html|raw }}
+    </div>
+    {% if container %}
+    </div>
+    {% endif %}
+</div>

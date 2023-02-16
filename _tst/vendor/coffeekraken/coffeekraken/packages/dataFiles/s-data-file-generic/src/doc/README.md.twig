@@ -1,0 +1,46 @@
+{% extends 'sugar/readme/layouts/main/main.twig' %}
+{% block body %}
+
+<!--
+/**
+ * @name            README
+ * @namespace       doc
+ * @type            Markdown
+ * @platform        md
+ * @status          wip
+ * @menu            Documentation           /doc/readme
+ *
+ * @since           2.0.0
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+ */
+-->
+
+## SDataFileGeneric
+
+This package expose a simple `SDataFileGeneric` class that allows you to load data from different file types like `js`, `json`, `php`, etc...
+
+## Features
+
+-   Regroup multiple data handlers to load a wide variety of file types
+-   Supported file types:
+    -   `.js`: A js file that export a function or directly some data
+    -   `.json`: Simple json file
+    -   `.php`: A php file that return some data
+    -   More to come depending on needs...
+-   And more...
+
+## Usage
+
+Here's a simple example how to use the SDataFileGeneric class:
+
+```js
+import __SDataFileGeneric from '@coffeekraken/s-data-file-generic';
+const dataFromJson = await __SDataFileGeneric.load('/my/cool/file.json');
+const dataFromPhp = await __SDataFileGeneric.load('/my/cool/file.php');
+```
+
+## API
+
+For more information about the API, please check out [the API documentation](/api/@coffeekraken.s-data-file-generic.node.SDataFileGeneric)
+
+{% endblock %}

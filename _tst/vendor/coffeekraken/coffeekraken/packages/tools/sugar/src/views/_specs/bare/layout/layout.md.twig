@@ -1,0 +1,22 @@
+{% extends 'sugar/readme/layouts/doc/doc.twig' %}
+{% block body %}
+
+<!--
+/**
+ * @name            Layout
+ * @namespace       specs.views.bare.layout
+ * @type            Markdown
+ * @platform        blade
+ * @platform        twig
+ * @status          stable
+ * @menu            Specs / Bare           /specs/sugar.views.bare.layout
+ *
+ * @since           2.0.0
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+ */
+-->
+
+{% set specs = readSpec('sugar.views.bare.layout') %}
+{{ specsToMarkdown(specs, {})|raw }}
+
+{% endblock %}

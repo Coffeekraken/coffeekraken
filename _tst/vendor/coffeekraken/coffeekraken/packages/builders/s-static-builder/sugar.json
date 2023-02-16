@@ -1,0 +1,23 @@
+{
+    "config": {
+        "folders": [
+            {
+                "path": "./dist/pkg/%moduleSystem/config"
+            }
+        ]
+    },
+    "cli": [
+        {
+            "stack": "static",
+            "description": "Static builder related actions",
+            "defaultAction": "build",
+            "actions": {
+                "build": {
+                    "scope": "package",
+                    "description": "Build your static website version",
+                    "process": "./dist/pkg/esm/cli/build.cli.js"
+                }
+            }
+        }
+    ]
+}

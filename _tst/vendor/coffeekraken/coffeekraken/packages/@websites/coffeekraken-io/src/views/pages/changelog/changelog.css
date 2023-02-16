@@ -1,0 +1,18 @@
+.changelog {
+    ._list {
+        li a {
+            display: flex;
+            align-items: center;
+            padding: sugar.padding(30) sugar.padding(30);
+            @sugar.border.radius;
+
+            ._version {
+                flex-grow: 1;
+            }
+
+            &:hover {
+                background: sugar.color(base, background);
+            }
+        }
+    }
+}

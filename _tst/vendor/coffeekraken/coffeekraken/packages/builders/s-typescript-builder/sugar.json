@@ -1,0 +1,24 @@
+{
+    "config": {
+        "folders": [
+            {
+                "path": "./dist/pkg/%moduleSystem/config"
+            }
+        ]
+    },
+    "cli": [
+        {
+            "stack": "typescript",
+            "description": "Typescript (js) related actions",
+            "defaultAction": "build",
+            "actions": {
+                "build": {
+                    "scope": "package",
+                    "description": "Build the ts and js files found in the repository",
+                    "interface": "./dist/pkg/esm/node/interface/STypescriptBuilderBuildParamsInterface.js",
+                    "process": "./dist/pkg/esm/cli/build.cli.js"
+                }
+            }
+        }
+    ]
+}

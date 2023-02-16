@@ -1,6 +1,6 @@
 {
     "name": "@coffeekraken/s-range-component",
-    "version": "2.0.0-alpha.23",
+    "version": "2.0.0-alpha.24",
     "description": "Create nice and clean ranges using this web component. Support tooltip, target to display value, and more...",
     "type": "module",
     "homepage": "https://coffeekraken.io",
@@ -12,10 +12,10 @@
     "author": "",
     "license": "MIT",
     "dependencies": {
-        "@coffeekraken/s-interface": "^2.0.0-alpha.23",
-        "@coffeekraken/s-lit-component": "^2.0.0-alpha.23",
-        "@coffeekraken/s-sugar-config": "^2.0.0-alpha.23",
-        "@coffeekraken/sugar": "^2.0.0-alpha.23",
+        "@coffeekraken/s-interface": "^2.0.0-alpha.24",
+        "@coffeekraken/s-lit-component": "^2.0.0-alpha.24",
+        "@coffeekraken/s-sugar-config": "^2.0.0-alpha.24",
+        "@coffeekraken/sugar": "^2.0.0-alpha.24",
         "lit": "^2.2.8"
     },
     "main": "dist/pkg/cjs/js/exports.js",

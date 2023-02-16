@@ -1,0 +1,118 @@
+{% extends 'sugar/readme/layouts/main/main.twig' %}
+{% block body %}
+
+<!--
+/**
+ * @name            README
+ * @namespace       doc
+ * @type            Markdown
+ * @platform        md
+ * @status          wip
+ * @menu            Documentation           /doc/readme
+ *
+ * @since           2.0.0
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+ */
+-->
+
+## SProcess
+
+This package expose a simple `SProcess` class that allows you execute processes either in the same process, or as child one.
+
+## Features
+
+-   Generate a process from `file`, `command`, `function` or `SPromise`
+    -   `__SProcess.from('/my/cool/file.js')`
+-   States `idle`, `ready`, `running`, `killed`, `error` and `success`
+-   Inter process communication (IPC)
+    -   Use the [@coffeekraken/s-promise](/package/@coffeekraken/s-promise/doc/readme) event emitter capability
+-   And more...
+
+## Usage
+
+Here's how to generate some processes and run them easily:
+
+###### From a function
+
+```js
+import __SProcess from '@coffeekraken/s-process';
+
+// from a simple function
+const fnProcess = __SProcess.from((params) => {
+    return new Promise((resolve) => {
+        // do something...
+        resolve();
+    });
+});
+const result = await fnProcess.run();
+```
+
+###### From a file
+
+```js
+// /my/cool/file.js
+export default function (params) {
+    return new Promise((resolve) => {
+        // do something
+        resolve();
+    });
+}
+
+import __SProcess from '@coffeekraken/s-process';
+const fileProcess = __SProcess.from('/my/cool/file.js');
+const result = await fileProcess.run(
+    {},
+    {
+        runAsChild: true,
+    },
+);
+```
+
+###### From a command
+
+```js
+import __SProcess from '@coffeekraken/s-process';
+const commandProcess = __SProcess.from('ls -la');
+const result = await commandProcess.run();
+```
+
+###### From an SPromise
+
+```js
+// /my/cool/file.js
+import __SPromise from '@coffeekraken/s-promise';
+export default function (params) {
+    return new __SPromise(({ resolve, emit }) => {
+        // do something
+        emit('log', {
+            value: 'Hello world',
+        });
+        resolve();
+    });
+}
+
+import __SProcess from '@coffeekraken/s-process';
+const sPromiseProcess = __SProcess.from('/my/cool/file.js');
+const promise = sPromiseProcess.run(
+    {},
+    {
+        runAsChild: true,
+    },
+);
+promise.on('log', (value) => {
+    console.log('Log', value); // { value: 'Hello world' }
+});
+const result = await promise;
+```
+
+## Settings
+
+{% include 'sugar/interface/fromDocmap/fromDocmap.twig' with {
+    docmapItem: docmap.map['@coffeekraken.s-process.node.interface.SProcessSettingsInterface']
+} only %}
+
+## API
+
+For more information about the API, please check out [the API documentation](/api/@coffeekraken.s-process.node.SProcess)
+
+{% endblock %}

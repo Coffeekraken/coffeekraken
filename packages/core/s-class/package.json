@@ -1,14 +1,14 @@
 {
     "name": "@coffeekraken/s-class",
-    "version": "2.0.0-alpha.23",
+    "version": "2.0.0-alpha.24",
     "description": "Base class that can be (and is) used as base class for all your needs. It mainly expose the \"settings\" property which store your passed settings up from your class.",
     "type": "module",
     "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)",
     "license": "MIT",
     "dependencies": {
-        "@coffeekraken/s-event-emitter": "^2.0.0-alpha.23",
-        "@coffeekraken/s-interface": "^2.0.0-alpha.23",
-        "@coffeekraken/sugar": "^2.0.0-alpha.23"
+        "@coffeekraken/s-event-emitter": "^2.0.0-alpha.24",
+        "@coffeekraken/s-interface": "^2.0.0-alpha.24",
+        "@coffeekraken/sugar": "^2.0.0-alpha.24"
     },
     "main": "dist/pkg/cjs/shared/exports.js",
     "module": "dist/pkg/esm/shared/exports.js",

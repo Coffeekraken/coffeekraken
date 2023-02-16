@@ -1,0 +1,117 @@
+.s-code-example {
+    display: block;
+    text-align: initial;
+
+    @sugar.rhythm.vertical (ui.codeExample.rhythmVertical);
+}
+
+.s-code-example {
+    > * {
+        display: none;
+    }
+
+    &[mounted] {
+        > * {
+            display: block;
+        }
+    }
+}
+
+.hljs {
+    overflow: visible;
+    white-space: pre-wrap;
+}
+
+.s-code-example_slot {
+    display: none;
+}
+
+.s-code-example_nav {
+    position: relative;
+    z-index: 20;
+}
+
+.s-code-example_tabs {
+    list-style: none;
+}
+.s-code-example_tab {
+}
+
+.s-code-example_content {
+    position: relative;
+    /* this variable comes from the @sugar.codeExample mixin */
+    overflow: hidden;
+
+    .s-code-example[lines] & {
+        max-height: calc(
+            2em * var(--max-lines) + (var(--paddingBlock, 1em) * 2)
+        );
+    }
+    .s-code-example--more & {
+        max-height: 99999px !important;
+    }
+}
+
+.s-code-example_more-bar {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 50%;
+    width: 100%;
+    opacity: 0;
+    pointer-events: none;
+    display: flex;
+    align-items: flex-end;
+
+    .s-code-example[lines] & {
+        opacity: 1;
+        pointer-events: all;
+    }
+}
+.s-code-example_more-bar {
+    text-align: center;
+    justify-content: center;
+
+    &:before {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+    }
+}
+
+.s-code-example--more .s-code-example_more-bar {
+    &:before {
+        height: 0;
+    }
+}
+
+.s-code-example_code {
+    display: none;
+    line-height: 0;
+
+    &[active] {
+        display: block;
+    }
+
+    & > code {
+        line-height: 1;
+    }
+}
+
+.s-code-example_toolbar {
+    position: absolute;
+    right: sugar.margin(20);
+    top: sugar.margin(20);
+
+    & > * {
+        font-size: 20px;
+    }
+}
+
+[toolbar-position='nav'] .s-code-example_toolbar {
+    right: sugar.margin(20);
+    top: sugar.margin(20);
+}

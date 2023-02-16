@@ -1,0 +1,62 @@
+{% extends 'sugar/readme/layouts/doc/doc.twig' %}
+{% block body %}
+
+<!--
+/**
+ * @name            Sugar toolkit
+ * @namespace       doc.js
+ * @type            Markdown
+ * @platform        md
+ * @status          stable
+ * @menu            Documentation / JS - Node           /doc/js/sugar
+ *
+ * @since           2.0.0
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+ */
+-->
+
+# Sugar toolkit
+
+**Sugar** is the name of the toolkit used across all of our packages. This toolkit has some goals to achieve which are:
+
+## Utilities
+
+Sugar provide some utilities for some languages like `JS`, `Node`, etc...
+These utilities covers things like `DOM` helpers, `Network` helpers, and many more:
+
+#### JS
+
+-   `DOM` helpers like `__querySelectorLive`, etc...
+-   `Object` helpers like `__deepMerge`, etc...
+-   `Array` helpers like `__unique`, etc...
+-   `Colors` helpers like `__convert`, `__hsla2rgba`, etc...
+-   `Is` helpers like `__isBrowser`, `__isEmail`, `__isJson`, etc...
+-   `Crypto` helpers like `__base64`, etc...
+-   [And many many more...](#search=@coffeekraken.sugar.js)
+
+#### Node
+
+-   `Glob` helpers like `__resolveGlob`, etc...
+-   `Network` helpers like `__ipAddress`, `__isPortFree`, etc...
+-   `PHP` helpers like `__execPhp`, etc...
+-   `Zip` helpers like `__unzip`, etc...
+-   [And many many more...](#search=@coffeekraken.sugar.node)
+
+## CLI
+
+Sugar provide the `sugar` CLI that expose some features like:
+
+#### Core features
+
+-   `sugar --help`: Display the CLI help
+-   `sugar kitchen.run dev`: Start the development environment in the current project
+-   `sugar kitchen.run build`: Build your project for production
+-   `sugar postcss.build`: Build your postcss for production
+-   [And many many more...](/doc/cli/overview)
+
+#### Utilities
+
+-   `sugar process.kill -p 8888`: Kill process on port `8888`
+-   And many more to discover...
+
+{% endblock %}

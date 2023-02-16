@@ -1,0 +1,21 @@
+@use 'sass:map';
+/**
+ * @name      _get-property-type
+ * @namespace            scss.core.dev
+ * @type      function
+ *
+ * Get the property type
+ *
+ * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+@function _get-property-type($property, $keywords: ()) {
+  @if not $keywords {
+    $keywords: ();
+  }
+
+  // check if exist
+  $type: map.get($keywords, $property);
+
+  // return the type
+  @return $type;
+}

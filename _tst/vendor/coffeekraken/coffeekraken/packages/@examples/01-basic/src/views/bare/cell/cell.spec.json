@@ -1,0 +1,4 @@
+{
+  "extends": "sugar.views.bare.cell",
+  "viewPath": "sugar/bare/cell/cell.twig"
+}

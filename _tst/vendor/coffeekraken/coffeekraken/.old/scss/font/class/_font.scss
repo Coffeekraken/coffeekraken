@@ -1,0 +1,67 @@
+/**
+ * @name              font-classes
+ * @namespace            scss.font.class
+ * @type              Mixin
+ *
+ * This mixin generate all the "font" related classes.
+ *
+ * @classname       #{sel(f-[name])}       Apply the font [name]
+ *
+ * @example         scss
+ * @include Sugar.font-classes();
+ *
+ * @since         2.0.0
+ * @author 	        Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+ */
+@mixin font-classes() {
+  @if class-match-namespace('sugar.font.family') {
+    @each $name, $font in setting('fonts.families') {
+      @if class-match-namespace('sugar.font.family.#{$name}') {
+        /**
+          * @name       	  #{sel(f-#{$name})}
+          * @namespace            scss.font.class
+          * @class-namespace           sugar.font.family.#{$name}
+          * @type        Classname
+          *
+          * Apply the font family **#{$name}**
+          *
+          * @example 	html
+          * <div class="#{sel(f-#{$name})}">
+          * 	I have the font family "#{$name}" applied
+          * </div>
+          *
+          * @since       1.0.0
+          * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+          */
+        .#{sel('f-#{$name}')} {
+          @include font($name);
+        }
+      }
+    }
+  }
+  @if class-match-namespace('sugar.font.size') {
+    @each $name, $size in setting('fonts.sizes') {
+      @if class-match-namespace('sugar.font.size.#{$name}') {
+        /**
+          * @name       	  #{sel(f-#{$name})}
+          * @namespace            scss.font.class
+          * @class-namespace           sugar.font.size.#{$name}
+          * @type        Classname
+          *
+          * Apply the font size **#{$name}** (**#{$size}**)
+          *
+          * @example 	html
+          * <div class="#{sel(f-#{$name})}">
+          * 	I have the font size "#{$name}" applied
+          * </div>
+          *
+          * @since       1.0.0
+          * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+          */
+        .#{sel('f-#{$name}')} {
+          font-size: font-size($name);
+        }
+      }
+    }
+  }
+}

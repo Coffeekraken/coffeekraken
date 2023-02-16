@@ -1,0 +1,18 @@
+{
+    "name": "coffeekraken/coffeekraken",
+    "description": "We are a young collectve of creative developers with one goal in mind. Build tools to make every team working day life better",
+    "autoload": {
+        "files": [
+            "autoload.php"
+        ]
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^9"
+    },
+    "require": {
+        "eftec/bladeone": "^4.8",
+        "twig/twig": "^3.4"
+    },
+    "version": "2.0.0-alpha.23",
+    "homepage": "https://coffeekraken.io"
+}

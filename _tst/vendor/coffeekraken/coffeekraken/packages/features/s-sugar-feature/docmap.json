@@ -1,0 +1,440 @@
+{
+    "map": {},
+    "extends": [],
+    "generated": {
+        "extends": [
+            "@coffeekraken/aa",
+            "@coffeekraken/cli",
+            "@coffeekraken/s-activate-feature",
+            "@coffeekraken/s-appear-feature",
+            "@coffeekraken/s-asset-picker-component",
+            "@coffeekraken/s-bench",
+            "@coffeekraken/s-builder",
+            "@coffeekraken/s-carpenter",
+            "@coffeekraken/s-class",
+            "@coffeekraken/s-classmap",
+            "@coffeekraken/s-clipboard-copy-component",
+            "@coffeekraken/s-code-example-component",
+            "@coffeekraken/s-code-formatter-prettier",
+            "@coffeekraken/s-code-formatter",
+            "@coffeekraken/s-color-picker-component",
+            "@coffeekraken/s-color",
+            "@coffeekraken/s-component-utils",
+            "@coffeekraken/s-conductor",
+            "@coffeekraken/s-config-adapter",
+            "@coffeekraken/s-config-folder-adapter",
+            "@coffeekraken/s-config-inline-adapter",
+            "@coffeekraken/s-config",
+            "@coffeekraken/s-css-animation",
+            "@coffeekraken/s-dashboard",
+            "@coffeekraken/s-data-file-generic",
+            "@coffeekraken/s-data-file-js",
+            "@coffeekraken/s-data-file-php",
+            "@coffeekraken/s-datetime-picker-component",
+            "@coffeekraken/s-deps-feature",
+            "@coffeekraken/s-descriptor",
+            "@coffeekraken/s-docblock",
+            "@coffeekraken/s-docmap",
+            "@coffeekraken/s-dropzone-component",
+            "@coffeekraken/s-duration",
+            "@coffeekraken/s-env",
+            "@coffeekraken/s-event-emitter",
+            "@coffeekraken/s-favicon-builder",
+            "@coffeekraken/s-feature",
+            "@coffeekraken/s-file",
+            "@coffeekraken/s-filtrable-input-component",
+            "@coffeekraken/s-floating-feature",
+            "@coffeekraken/s-form-validate-feature",
+            "@coffeekraken/s-front",
+            "@coffeekraken/s-frontend-checker",
+            "@coffeekraken/s-frontend-server",
+            "@coffeekraken/s-frontspec",
+            "@coffeekraken/s-glitch-feature",
+            "@coffeekraken/s-glob",
+            "@coffeekraken/s-google-map-component",
+            "@coffeekraken/s-handlebars",
+            "@coffeekraken/s-highlight-feature",
+            "@coffeekraken/s-images-builder",
+            "@coffeekraken/s-inline-feature",
+            "@coffeekraken/s-interface",
+            "@coffeekraken/s-kitchen",
+            "@coffeekraken/s-lazy-feature",
+            "@coffeekraken/s-lit-component",
+            "@coffeekraken/s-log",
+            "@coffeekraken/s-markdown-builder",
+            "@coffeekraken/s-monorepo",
+            "@coffeekraken/s-pack-essentials",
+            "@coffeekraken/s-package",
+            "@coffeekraken/s-page-transition-feature",
+            "@coffeekraken/s-panel-component",
+            "@coffeekraken/s-parallax-feature",
+            "@coffeekraken/s-postcss-builder",
+            "@coffeekraken/s-postcss-sugar-export-plugin",
+            "@coffeekraken/s-postcss-sugar-plugin",
+            "@coffeekraken/s-process",
+            "@coffeekraken/s-promise",
+            "@coffeekraken/s-range-component",
+            "@coffeekraken/s-rating-component",
+            "@coffeekraken/s-refocus-feature",
+            "@coffeekraken/s-request",
+            "@coffeekraken/s-scroll-component",
+            "@coffeekraken/s-sitemap-builder",
+            "@coffeekraken/s-slider-component",
+            "@coffeekraken/s-specs-editor-component",
+            "@coffeekraken/s-specs",
+            "@coffeekraken/s-state",
+            "@coffeekraken/s-static-builder",
+            "@coffeekraken/s-stdio",
+            "@coffeekraken/s-sugar-config",
+            "@coffeekraken/s-sugar-element",
+            "@coffeekraken/s-sugar-json",
+            "@coffeekraken/s-theme-switcher-component",
+            "@coffeekraken/s-theme",
+            "@coffeekraken/s-timer",
+            "@coffeekraken/s-type",
+            "@coffeekraken/s-typescript-builder",
+            "@coffeekraken/s-url",
+            "@coffeekraken/s-validator",
+            "@coffeekraken/s-view-renderer-engine-blade",
+            "@coffeekraken/s-view-renderer-engine-lit",
+            "@coffeekraken/s-view-renderer-engine-twig",
+            "@coffeekraken/s-view-renderer",
+            "@coffeekraken/s-vite-postcss-plugin",
+            "@coffeekraken/s-vite-sugar-plugin",
+            "@coffeekraken/s-vite",
+            "@coffeekraken/sugar"
+        ],
+        "map": {
+            "@coffeekraken.s-sugar-feature.js.SSugarFeature": {
+                "id": "@coffeekraken.s-sugar-feature.js.SSugarFeature",
+                "name": "SSugarFeature",
+                "as": "Sugar features",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Feature"
+                        }
+                    ],
+                    "raw": "Feature"
+                },
+                "menu": {
+                    "tree": [
+                        "Styleguide",
+                        "Features"
+                    ],
+                    "slug": "/styleguide/feature/s-sugar-feature"
+                },
+                "platform": [
+                    {
+                        "name": "js",
+                        "description": ""
+                    }
+                ],
+                "description": "This feature allows you to apply some \"nice to have\" features like having a \"scrolled\" class applied on the body\nwhen the user has scroll in the page or having access to a `--vh` css variable that represent the exact\nviewport innerHeight and avoid having issues with mobile different viewport height values. Note that if you use\nthe `sPostcssSugarPlugin` postcss plugin, you can use the `vh` unit as normal and if will automatically take the\nvalue of the `--vh` variable if it exists.\nMore feature can be added in the future depending on the needs.",
+                "namespace": "@coffeekraken.s-sugar-feature.js",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "html",
+                        "title": "Simple usage",
+                        "description": "Simply add the `s-sugar` property on your body tag",
+                        "code": "<bodyTag s-sugar>\n\n</bodyTag>"
+                    }
+                ],
+                "interface": {
+                    "name": "SSugarFeatureInterface",
+                    "description": "",
+                    "definition": {
+                        "pleasantCss": {
+                            "description": "Specify if you want the \"pleasant css\" syntax in your pages",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Boolean"
+                                    }
+                                ],
+                                "raw": "Boolean"
+                            },
+                            "default": true
+                        },
+                        "containerQuery": {
+                            "description": "Specify if you want support for container queries in your css or not",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Boolean"
+                                    }
+                                ],
+                                "raw": "Boolean"
+                            },
+                            "default": true
+                        },
+                        "scrolled": {
+                            "description": "Specify if you want the `scrolled` class to be applied on the `body` element when the page has been scrolled",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Boolean"
+                                    }
+                                ],
+                                "raw": "Boolean"
+                            },
+                            "default": true
+                        },
+                        "scrolledDelta": {
+                            "description": "Specify after how many scroll the scrolled class will be applied",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Number"
+                                    }
+                                ],
+                                "raw": "Number"
+                            },
+                            "default": 200
+                        },
+                        "vhvar": {
+                            "description": "Specify if you want the `--vh` css variable to be computed and available",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Boolean"
+                                    }
+                                ],
+                                "raw": "Boolean"
+                            },
+                            "default": true
+                        },
+                        "inputAdditionalAttributes": {
+                            "description": "Specify if you want to have the additional attributes on inputs like \"has-value\", \"empty\" and \"dirty\" or not",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Boolean"
+                                    }
+                                ],
+                                "raw": "Boolean"
+                            },
+                            "default": true
+                        },
+                        "resizeTransmations": {
+                            "description": "Specify if you want all the transitions and animations cleared during window resize",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Boolean"
+                                    }
+                                ],
+                                "raw": "Boolean"
+                            },
+                            "default": true
+                        },
+                        "linksStateAttributes": {
+                            "description": "Specify if you want to have the state attributes on links like \"actual\" and \"actual-child\" or not",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Boolean"
+                                    }
+                                ],
+                                "raw": "Boolean"
+                            },
+                            "default": true
+                        },
+                        "preventScrollRestoration": {
+                            "description": "Specify if you want to prevent the scroll restoration behavior on chrome that can usually be anoying",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Boolean"
+                                    }
+                                ],
+                                "raw": "Boolean"
+                            },
+                            "default": true
+                        },
+                        "env": {
+                            "description": "Specify if you want to display the current environment at start",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Boolean"
+                                    }
+                                ],
+                                "raw": "Boolean"
+                            },
+                            "default": true
+                        }
+                    }
+                },
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "SSugarFeature.ts",
+                "extension": "ts",
+                "relPath": "src/js/SSugarFeature.ts",
+                "children": {}
+            },
+            "@coffeekraken.s-sugar-feature.js.interface.SSugarFeatureInterface": {
+                "id": "@coffeekraken.s-sugar-feature.js.interface.SSugarFeatureInterface",
+                "name": "SSugarFeatureInterface",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Class"
+                        }
+                    ],
+                    "raw": "Class"
+                },
+                "platform": [
+                    {
+                        "name": "js",
+                        "description": ""
+                    }
+                ],
+                "description": "This interface represent the attributes of the SSugarFeature",
+                "namespace": "@coffeekraken.s-sugar-feature.js.interface",
+                "status": "beta",
+                "interface": {
+                    "name": "SSugarFeatureInterface",
+                    "description": "",
+                    "definition": {
+                        "pleasantCss": {
+                            "description": "Specify if you want the \"pleasant css\" syntax in your pages",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Boolean"
+                                    }
+                                ],
+                                "raw": "Boolean"
+                            },
+                            "default": true
+                        },
+                        "containerQuery": {
+                            "description": "Specify if you want support for container queries in your css or not",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Boolean"
+                                    }
+                                ],
+                                "raw": "Boolean"
+                            },
+                            "default": true
+                        },
+                        "scrolled": {
+                            "description": "Specify if you want the `scrolled` class to be applied on the `body` element when the page has been scrolled",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Boolean"
+                                    }
+                                ],
+                                "raw": "Boolean"
+                            },
+                            "default": true
+                        },
+                        "scrolledDelta": {
+                            "description": "Specify after how many scroll the scrolled class will be applied",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Number"
+                                    }
+                                ],
+                                "raw": "Number"
+                            },
+                            "default": 200
+                        },
+                        "vhvar": {
+                            "description": "Specify if you want the `--vh` css variable to be computed and available",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Boolean"
+                                    }
+                                ],
+                                "raw": "Boolean"
+                            },
+                            "default": true
+                        },
+                        "inputAdditionalAttributes": {
+                            "description": "Specify if you want to have the additional attributes on inputs like \"has-value\", \"empty\" and \"dirty\" or not",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Boolean"
+                                    }
+                                ],
+                                "raw": "Boolean"
+                            },
+                            "default": true
+                        },
+                        "resizeTransmations": {
+                            "description": "Specify if you want all the transitions and animations cleared during window resize",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Boolean"
+                                    }
+                                ],
+                                "raw": "Boolean"
+                            },
+                            "default": true
+                        },
+                        "linksStateAttributes": {
+                            "description": "Specify if you want to have the state attributes on links like \"actual\" and \"actual-child\" or not",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Boolean"
+                                    }
+                                ],
+                                "raw": "Boolean"
+                            },
+                            "default": true
+                        },
+                        "preventScrollRestoration": {
+                            "description": "Specify if you want to prevent the scroll restoration behavior on chrome that can usually be anoying",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Boolean"
+                                    }
+                                ],
+                                "raw": "Boolean"
+                            },
+                            "default": true
+                        },
+                        "env": {
+                            "description": "Specify if you want to display the current environment at start",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Boolean"
+                                    }
+                                ],
+                                "raw": "Boolean"
+                            },
+                            "default": true
+                        }
+                    }
+                },
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "SSugarFeatureInterface.ts",
+                "extension": "ts",
+                "relPath": "src/js/interface/SSugarFeatureInterface.ts",
+                "children": {}
+            }
+        }
+    }
+}

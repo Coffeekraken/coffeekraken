@@ -1,0 +1,40 @@
+.tools {
+  position: fixed;
+  top: 70%;
+  right: 0;
+  z-index: 100;
+  transform: translate(0, -50%);
+
+  > * {
+    display: block !important;
+    margin-block: sugar.margin(20);
+    margin-inline-end: sugar.margin(20);
+
+    > .s-btn {
+      border-radius: 999px !important;
+    }
+  }
+
+  .s-tooltip {
+    width: 400px;
+    padding: sugar.padding(50);
+    background-color: sugar.color(main, surface);
+    background-position: 50% 50%;
+    background-size: cover;
+    border: solid 1px sugar.color(base, --alpha 0.05);
+    @sugar.depth (10);
+
+    @sugar.theme.when dark {
+      background-image: url('/dist/img/discord-illustration-bkg.png');
+    }
+
+    &:after {
+      border-color: sugar.color(main, surface) transparent transparent
+        transparent;
+    }
+
+    .s-floating_arrow {
+      background: sugar.color(main, surface);
+    }
+  }
+}

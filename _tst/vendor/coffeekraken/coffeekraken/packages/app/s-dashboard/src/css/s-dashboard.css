@@ -1,0 +1,35 @@
+@import './sugar.css';
+
+@import './generic/action.css';
+@import './generic/branch.css';
+@import './generic/count.css';
+@import './generic/panel.css';
+@import './generic/list.css';
+@import './generic/stat.css';
+@import './generic/tabs.css';
+
+@import './partials/header.css';
+
+body:has(.s-dashboard) {
+    /* overflow: hidden; */
+    padding-block-end: sugar.margin(100);
+}
+
+.s-dashboard {
+    .s-layout ._column {
+        /* height: calc(100vh - 80px); */
+        /* overflow-y: auto;
+        overflow-x: visible; */
+        padding-block-start: sugar.padding(50);
+        /* @sugar.scrollbar (sugar.color(accent, --alpha 0.3)); */
+    }
+
+    .s-layout > * > *:not(:first-child) {
+        display: block;
+        margin-block-start: sugar.margin(30);
+    }
+    .s-layout > * > * h2.s-typo--h6 {
+        padding-inline-start: sugar.padding(30);
+        opacity: 0.6;
+    }
+}

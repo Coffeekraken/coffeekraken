@@ -1,17 +1,55 @@
 # https://php.watch/articles/composer-gitattributes
+
 *.jpg             export-ignore
 *.jpeg            export-ignore
 *.png               export-ignore
 *.gif               export-ignore
+*.svg               export-ignore
 *.webp              export-ignore
 *.webm              export-ignore
+
+*.mov              export-ignore
 *.avi              export-ignore
 *.mp3              export-ignore
 *.mp4              export-ignore
+
 *.ts              export-ignore
 *.js              export-ignore
 *.cjs              export-ignore
 *.mjs              export-ignore
+
+*.css              export-ignore
+
+*.eot              export-ignore
+*.ttf              export-ignore
+*.woff              export-ignore
+*.woff2              export-ignore
+
+*.html              export-ignore
+*.xml              export-ignore
+*.md.twig           export-ignore
+
+*.ico              export-ignore
+
 *.sh              export-ignore
+*.htaccess              export-ignore
+*.htpasswd              export-ignore
+*.nvmrv              export-ignore
+*.yml              export-ignore
+
 *.md              export-ignore
-*.webm              export-ignore
+
+*.editorconfig              export-ignore
+*.prettierc              export-ignore
+*.eslintignore              export-ignore
+*.gitattributes              export-ignore
+*.gitignore              export-ignore
+*.gitmodules              export-ignore
+
+LICENSE              export-ignore
+README              export-ignore
+Dockerfile              export-ignore
+
+.yarn              export-ignore
+.vscode              export-ignore
+.old              export-ignore

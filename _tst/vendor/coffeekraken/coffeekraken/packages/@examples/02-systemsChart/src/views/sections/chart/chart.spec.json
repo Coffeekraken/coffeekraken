@@ -1,0 +1,38 @@
+{
+  "type": "Section",
+  "title": "Chart",
+  "description": "Chart section",
+  "props": {
+    "bkg": {
+      "type": "Image",
+      "Title": "Background image",
+      "description": "Background image",
+      "required": true
+    },
+    "systems": {
+      "type": "Object[]",
+      "title": "Systems",
+      "description": "Systems list",
+      "props": {
+        "title": {
+          "type": "Text",
+          "title": "Title",
+          "description": "System title",
+          "required": true
+        },
+        "description": {
+          "type": "Text",
+          "title": "Description",
+          "description": "System description",
+          "required": true
+        },
+        "features": {
+          "type": "Text[]",
+          "title": "Features",
+          "description": "Available features",
+          "required": true
+        }
+      }
+    }
+  }
+}

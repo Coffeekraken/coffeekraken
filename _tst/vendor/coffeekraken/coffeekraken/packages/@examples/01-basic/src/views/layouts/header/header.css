@@ -1,0 +1,99 @@
+._menu-toggle {
+    @sugar.ui.toggle ('burger');
+}
+
+.s-label--float {
+    @sugar.lod.wireframe {
+        pointer-events: none;
+
+        ::placeholder {
+            opacity: 0;
+        }
+    }
+}
+.s-input {
+    @sugar.lod.wireframe {
+        border: solid 1px rgba(0, 0, 0, 0.1);
+    }
+}
+
+.header {
+    position: fixed !important;
+    top: sugar.margin(30);
+    width: 100%;
+    z-index: 100;
+    pointer-events: none;
+    @sugar.transition();
+
+    body.scrolled & {
+        top: 0;
+    }
+
+    .s-flex {
+        pointer-events: all;
+    }
+
+    @sugar.lod.wireframe {
+        background: white;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    }
+
+    @sugar.media mobile {
+        padding: sugar.padding(30);
+        top: 0;
+        padding-inline: sugar.padding(30);
+        background: sugar.color(base, background);
+        height: 80px;
+        @sugar.depth (100);
+    }
+
+    .logo {
+        width: 150px;
+
+        @sugar.media mobile {
+            width: 130px;
+        }
+    }
+
+    ._menu-toggle {
+        position: fixed;
+        top: calc(40px - 0.35em);
+        right: 0;
+        font-size: 30px;
+        display: none;
+
+        @sugar.media <=mobile {
+            display: block;
+        }
+    }
+
+    .s-container {
+        position: relative;
+        perspective: 800px;
+
+        &:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: calc(sugar.margin(30) * -1);
+            right: calc(sugar.margin(30) * -1);
+            bottom: 0;
+            z-index: -1;
+            background: sugar.color(base, surface);
+            opacity: 0;
+            transform: rotateX(-10deg) rotateY(1deg) translateX(2%) scale(1.1);
+            @sugar.border.radius();
+            @sugar.depth (100);
+            @sugar.transition();
+
+            body.scrolled & {
+                opacity: 1;
+                background: sugar.color(base, surface, --darken 5%);
+            }
+
+            @sugar.media mobile {
+                display: none;
+            }
+        }
+    }
+}

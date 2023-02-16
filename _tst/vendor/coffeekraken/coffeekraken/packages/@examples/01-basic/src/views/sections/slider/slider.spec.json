@@ -1,0 +1,12 @@
+{
+  "type": "Section",
+  "title": "Slider",
+  "description": "Slider section",
+  "props": {
+    "slides": {
+      "type": "Image[]",
+      "title": "Slides",
+      "description": "Slider slides"
+    }
+  }
+}

@@ -1,0 +1,98 @@
+.quote {
+    position: relative;
+    min-height: 450px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    ._content {
+        position: absolute;
+        z-index: 10;
+        @sugar.font.family (title);
+        @sugar.font.size (100);
+    }
+
+    ._quote-1,
+    ._quote-2,
+    ._quote-3,
+    ._quote-4,
+    ._quote-5,
+    ._quote-6 {
+        position: absolute;
+        --color: rgba(255, 255, 255, 0.3);
+        transform: scale(0.5);
+    }
+    ._quote-1 {
+        top: -80px;
+        left: -15%;
+        transform: scale(0.5) rotate(30deg);
+    }
+    ._quote-2 {
+        bottom: -50px;
+        left: -20%;
+        transform: scale(0.5) rotate(-18deg);
+    }
+    ._quote-3 {
+        top: -50px;
+        right: -15%;
+        transform: scale(0.5) rotate(-60deg);
+    }
+    ._quote-4 {
+        bottom: -80px;
+        right: -15%;
+        transform: scale(0.5) rotate(35deg);
+    }
+    ._quote-5 {
+        top: 0px;
+        left: -30%;
+        transform: scale(1) rotate(-60deg);
+        --color: rgba(255, 255, 255, 0.1);
+    }
+    ._quote-6 {
+        top: 0px;
+        right: -30%;
+        transform: scale(1) rotate(-60deg);
+        --color: rgba(255, 255, 255, 0.1);
+    }
+
+    ._quote-start {
+        --color: sugar.color(complementary, --lighten 10);
+        position: absolute;
+        left: 73%;
+        top: -20px;
+    }
+    ._quote-end {
+        --color: sugar.color(accent);
+        transform: rotate(180deg);
+        position: absolute;
+        left: 15%;
+        bottom: -30px;
+    }
+
+    &:before {
+        content: '';
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        @sugar.gradient (sugar.color(accent), sugar.color(accent, --saturate 20 --darken 10), $angle: 90);
+        clip-path: polygon(200px 0%, 100% 0, 100% 100%, 0% 100%);
+    }
+    &:after {
+        content: '';
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 25%;
+        height: 100%;
+        @sugar.gradient (sugar.color(complementary), sugar.color(complementary, --darken 20), $angle: 90);
+        clip-path: polygon(0% 0%, 100% 0, calc(100% - 200px) 100%, 0% 100%);
+        transition: all ease-in-out 0.2s;
+    }
+    &:hover:after {
+        width: 85%;
+    }
+}

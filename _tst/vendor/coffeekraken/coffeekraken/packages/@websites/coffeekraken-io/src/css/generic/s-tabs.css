@@ -1,0 +1,8 @@
+.s-tabs:not(.preview-html .s-tabs) {
+  background: sugar.color(current, --darken 15);
+
+  @sugar.media mobile {
+    max-width: 100%;
+    overflow-x: auto;
+  }
+}

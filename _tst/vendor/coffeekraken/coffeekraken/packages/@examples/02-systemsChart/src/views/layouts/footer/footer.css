@@ -1,0 +1,7 @@
+.footer {
+  ._copy {
+    position: absolute;
+    bottom: sugar.margin(40);
+    right: sugar.margin(80);
+  }
+}

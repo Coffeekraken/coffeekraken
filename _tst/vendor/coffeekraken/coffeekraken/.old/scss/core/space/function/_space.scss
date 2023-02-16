@@ -1,0 +1,27 @@
+@use 'sass:string';
+
+/**
+ * @name      space
+ * @namespace            scss.core.space.function
+ * @type    function
+ *
+ * Return a value interpolated from the settings.spaces stack
+ *
+ * @param 			{String} 			$size 			The space size wanted. Must exist in the settings.sizes stack
+ * @return 			{Number} 							The actual space value
+ *
+ * @example     scss
+ * .my-cool-section {
+ * 		padding : Sugar.space(big);
+ * }
+ *
+ * @since       1.0.0
+ * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+@function space($size) {
+  $size: '#{$size}';
+  @if type-of(string.unquote($size)) == 'number' {
+    @return $size;
+  }
+  @return setting('spaces.#{$size}');
+}

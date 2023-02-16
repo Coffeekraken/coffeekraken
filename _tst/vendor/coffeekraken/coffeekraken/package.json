@@ -1,0 +1,85 @@
+{
+    "name": "@coffeekraken/coffeekraken",
+    "version": "2.0.0-alpha.23",
+    "description": "We are a young collectve of front-end creative developers with one goal in mind. Build tools to make every team working day life better",
+    "type": "module",
+    "scripts": {
+        "dev": "sugard mono.dev",
+        "container": "docker exec --workdir /workspaces/coffeekraken -it coffeekraken /bin/bash"
+    },
+    "private": true,
+    "workspaces": [
+        "packages/*/*"
+    ],
+    "pre-commit": [],
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/Coffeekraken/coffeekraken.git"
+    },
+    "keywords": [
+        "coffee",
+        "kraken",
+        "coffeekraken"
+    ],
+    "author": "Coffeekraken <hello@coffeekraken.io>",
+    "contributors": [
+        {
+            "name": "Olivier Bossel",
+            "email": "olivier.bossel@gmail.com",
+            "url": "http://olivierbossel.com"
+        }
+    ],
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/Coffeekraken/coffeekraken/issues"
+    },
+    "homepage": "https://coffeekraken.io",
+    "dependencies": {
+        "@babel/plugin-syntax-dynamic-import": "^7.8.3",
+        "@coffeekraken/s-builder": "^2.0.0-alpha.23",
+        "@coffeekraken/s-class": "^2.0.0-alpha.23",
+        "@coffeekraken/s-code-formatter": "^2.0.0-alpha.23",
+        "@coffeekraken/s-code-formatter-prettier": "^2.0.0-alpha.23",
+        "@coffeekraken/s-descriptor": "^2.0.0-alpha.23",
+        "@coffeekraken/s-duration": "^2.0.0-alpha.23",
+        "@coffeekraken/s-event-emitter": "^2.0.0-alpha.23",
+        "@coffeekraken/s-file": "^2.0.0-alpha.23",
+        "@coffeekraken/s-glob": "^2.0.0-alpha.23",
+        "@coffeekraken/s-interface": "^2.0.0-alpha.23",
+        "@coffeekraken/s-log": "^2.0.0-alpha.23",
+        "@coffeekraken/s-package": "^2.0.0-alpha.23",
+        "@coffeekraken/s-promise": "^2.0.0-alpha.23",
+        "@coffeekraken/s-type": "^2.0.0-alpha.23",
+        "@coffeekraken/s-vite": "^2.0.0-alpha.23",
+        "@coffeekraken/sugar": "^2.0.0-alpha.23",
+        "chalk": "^5.0.1",
+        "concurrently": "^6.5.1",
+        "dependency-check": "^4.1.0",
+        "jest-esm-transformer": "^1.0.0",
+        "jsdom": "^18.1.1",
+        "peacenotwar": "^9.1.7",
+        "prettier": "^2.7.1",
+        "prettier-plugin-svelte": "^2.7.0",
+        "typescript-esm": "^2.0.0",
+        "uuid": "^8.3.2"
+    },
+    "globalDependencies": {},
+    "devDependencies": {
+        "@babel/core": "^7.18.10",
+        "@babel/preset-env": "^7.18.10",
+        "@babel/preset-typescript": "^7.18.6",
+        "@coffeekraken/s-monorepo": "^2.0.0-alpha.23",
+        "@coffeekraken/s-sugar-config": "^2.0.0-alpha.23",
+        "@coffeekraken/s-typescript-builder": "^2.0.0-alpha.23",
+        "@types/jest": "^26.0.24",
+        "@types/node": "^14.18.23",
+        "@typescript-eslint/eslint-plugin": "^4.33.0",
+        "@typescript-eslint/parser": "^4.33.0",
+        "babel-jest": "^27.5.1",
+        "cross-env": "^7.0.3",
+        "jest": "^27.5.1",
+        "tsup": "^5.12.9",
+        "typescript": "^4.7.4"
+    },
+    "packageManager": "yarn@3.2.2"
+}

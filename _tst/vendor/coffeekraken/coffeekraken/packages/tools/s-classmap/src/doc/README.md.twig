@@ -1,0 +1,48 @@
+{% extends 'sugar/readme/layouts/main/main.twig' %}
+{% block body %}
+
+<!--
+/**
+ * @name            README
+ * @namespace       doc
+ * @type            Markdown
+ * @platform        md
+ * @status          stable
+ * @menu            Documentation           /doc/readme
+ *
+ * @since           2.0.0
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+ */
+-->
+
+## SClassmap
+
+## Usage
+
+Here's how to use our implementation:
+
+```js
+import __SClassmap from '@coffeekraken/s-classmap';
+
+const classmap = new __SClassmap({
+    map: {
+        'my-cool-class': 's0',
+        // etc...   
+    }
+});
+
+const html = `<div class="my-cool-class">
+    Hello world
+</div>`;
+
+const finalHtml = classmap.patchHtml(html);
+// <div class="s0">
+//      Hello world
+// </div>
+```
+
+## API
+
+For more information about the API of this class, please check [our API documentation](/api/@coffeekraken.s-classmap.shared.SClassmap)
+
+{% endblock %}

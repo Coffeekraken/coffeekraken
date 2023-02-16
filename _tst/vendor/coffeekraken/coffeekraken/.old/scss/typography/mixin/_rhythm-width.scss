@@ -1,0 +1,20 @@
+/**
+ * @name        rhythm-width
+ * @namespace            scss.typography.mixin
+ * @type      mixin
+ *
+ * Print out the css on a container that will make the lines displays a maximum number of characters.
+ *
+ * @example 	scss
+ * h1 {
+ * 	\@include Sugar.rhythm-width(45);
+ * }
+ *
+ * @since      1.0.0
+ * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+@mixin rhythm-width($letters-count: setting('typography.line-letters-count')) {
+  @each $prop, $value in rhythm-width($letters-count) {
+    #{$prop}: $value;
+  }
+}

@@ -1,18 +1,18 @@
 {
     "name": "@coffeekraken/s-specs",
-    "version": "2.0.0-alpha.23",
+    "version": "2.0.0-alpha.24",
     "description": "Package that let you access some json specifications files with feature like referencing values between files and more",
     "type": "module",
     "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)",
     "license": "MIT",
     "dependencies": {
-        "@coffeekraken/s-class": "^2.0.0-alpha.23",
-        "@coffeekraken/s-data-file-generic": "^2.0.0-alpha.23",
-        "@coffeekraken/s-file": "^2.0.0-alpha.23",
-        "@coffeekraken/s-interface": "^2.0.0-alpha.23",
-        "@coffeekraken/s-promise": "^2.0.0-alpha.23",
-        "@coffeekraken/s-sugar-config": "^2.0.0-alpha.23",
-        "@coffeekraken/sugar": "^2.0.0-alpha.23"
+        "@coffeekraken/s-class": "^2.0.0-alpha.24",
+        "@coffeekraken/s-data-file-generic": "^2.0.0-alpha.24",
+        "@coffeekraken/s-file": "^2.0.0-alpha.24",
+        "@coffeekraken/s-interface": "^2.0.0-alpha.24",
+        "@coffeekraken/s-promise": "^2.0.0-alpha.24",
+        "@coffeekraken/s-sugar-config": "^2.0.0-alpha.24",
+        "@coffeekraken/sugar": "^2.0.0-alpha.24"
     },
     "main": "dist/pkg/cjs/node/exports.js",
     "module": "dist/pkg/esm/node/exports.js",

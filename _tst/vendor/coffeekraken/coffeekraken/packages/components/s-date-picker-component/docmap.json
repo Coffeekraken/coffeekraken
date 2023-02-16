@@ -1,0 +1,966 @@
+{
+    "map": {},
+    "extends": [],
+    "generated": {
+        "extends": [
+            "@coffeekraken/aa",
+            "@coffeekraken/cli",
+            "@coffeekraken/s-activate-feature",
+            "@coffeekraken/s-appear-feature",
+            "@coffeekraken/s-asset-picker-component",
+            "@coffeekraken/s-bench",
+            "@coffeekraken/s-builder",
+            "@coffeekraken/s-carpenter",
+            "@coffeekraken/s-class",
+            "@coffeekraken/s-classmap",
+            "@coffeekraken/s-clipboard-copy-component",
+            "@coffeekraken/s-code-example-component",
+            "@coffeekraken/s-code-formatter-prettier",
+            "@coffeekraken/s-code-formatter",
+            "@coffeekraken/s-color-picker-component",
+            "@coffeekraken/s-color",
+            "@coffeekraken/s-component-utils",
+            "@coffeekraken/s-conductor",
+            "@coffeekraken/s-config-adapter",
+            "@coffeekraken/s-config-folder-adapter",
+            "@coffeekraken/s-config-inline-adapter",
+            "@coffeekraken/s-config",
+            "@coffeekraken/s-css-animation",
+            "@coffeekraken/s-dashboard",
+            "@coffeekraken/s-data-file-generic",
+            "@coffeekraken/s-data-file-js",
+            "@coffeekraken/s-data-file-php",
+            "@coffeekraken/s-deps-feature",
+            "@coffeekraken/s-descriptor",
+            "@coffeekraken/s-docblock",
+            "@coffeekraken/s-docmap",
+            "@coffeekraken/s-dropzone-component",
+            "@coffeekraken/s-duration",
+            "@coffeekraken/s-env",
+            "@coffeekraken/s-event-emitter",
+            "@coffeekraken/s-favicon-builder",
+            "@coffeekraken/s-feature",
+            "@coffeekraken/s-file",
+            "@coffeekraken/s-filtrable-input-component",
+            "@coffeekraken/s-floating-feature",
+            "@coffeekraken/s-form-validate-feature",
+            "@coffeekraken/s-front",
+            "@coffeekraken/s-frontend-checker",
+            "@coffeekraken/s-frontend-server",
+            "@coffeekraken/s-frontspec",
+            "@coffeekraken/s-glitch-feature",
+            "@coffeekraken/s-glob",
+            "@coffeekraken/s-google-map-component",
+            "@coffeekraken/s-handlebars",
+            "@coffeekraken/s-highlight-feature",
+            "@coffeekraken/s-images-builder",
+            "@coffeekraken/s-inline-feature",
+            "@coffeekraken/s-interface",
+            "@coffeekraken/s-kitchen",
+            "@coffeekraken/s-lazy-feature",
+            "@coffeekraken/s-lit-component",
+            "@coffeekraken/s-log",
+            "@coffeekraken/s-markdown-builder",
+            "@coffeekraken/s-monorepo",
+            "@coffeekraken/s-pack-essentials",
+            "@coffeekraken/s-package",
+            "@coffeekraken/s-page-transition-feature",
+            "@coffeekraken/s-panel-component",
+            "@coffeekraken/s-parallax-feature",
+            "@coffeekraken/s-postcss-builder",
+            "@coffeekraken/s-postcss-sugar-export-plugin",
+            "@coffeekraken/s-postcss-sugar-plugin",
+            "@coffeekraken/s-process",
+            "@coffeekraken/s-promise",
+            "@coffeekraken/s-range-component",
+            "@coffeekraken/s-rating-component",
+            "@coffeekraken/s-refocus-feature",
+            "@coffeekraken/s-request",
+            "@coffeekraken/s-scroll-component",
+            "@coffeekraken/s-sitemap-builder",
+            "@coffeekraken/s-slider-component",
+            "@coffeekraken/s-specs-editor-component",
+            "@coffeekraken/s-specs",
+            "@coffeekraken/s-state",
+            "@coffeekraken/s-static-builder",
+            "@coffeekraken/s-stdio",
+            "@coffeekraken/s-sugar-config",
+            "@coffeekraken/s-sugar-element",
+            "@coffeekraken/s-sugar-feature",
+            "@coffeekraken/s-sugar-json",
+            "@coffeekraken/s-theme-switcher-component",
+            "@coffeekraken/s-theme",
+            "@coffeekraken/s-timer",
+            "@coffeekraken/s-type",
+            "@coffeekraken/s-typescript-builder",
+            "@coffeekraken/s-url",
+            "@coffeekraken/s-validator",
+            "@coffeekraken/s-view-renderer-engine-blade",
+            "@coffeekraken/s-view-renderer-engine-lit",
+            "@coffeekraken/s-view-renderer-engine-twig",
+            "@coffeekraken/s-view-renderer",
+            "@coffeekraken/s-vite-postcss-plugin",
+            "@coffeekraken/s-vite-sugar-plugin",
+            "@coffeekraken/s-vite",
+            "@coffeekraken/sugar"
+        ],
+        "map": {
+            "@coffeekraken.s-datetime-picker-component.doc.README": {
+                "id": "@coffeekraken.s-datetime-picker-component.doc.README",
+                "name": "README",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Markdown"
+                        }
+                    ],
+                    "raw": "Markdown"
+                },
+                "menu": {
+                    "tree": [
+                        "Documentation"
+                    ],
+                    "slug": "/doc/readme"
+                },
+                "platform": [
+                    {
+                        "name": "md",
+                        "description": ""
+                    }
+                ],
+                "namespace": "@coffeekraken.s-datetime-picker-component.doc",
+                "status": "stable",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "README.md.twig",
+                "extension": "md",
+                "relPath": "src/doc/README.md.twig",
+                "children": {}
+            },
+            "@coffeekraken.s-datetime-picker-component.js.SDatetimePickerComponent": {
+                "id": "@coffeekraken.s-datetime-picker-component.js.SDatetimePickerComponent",
+                "name": "SDatetimePickerComponent",
+                "as": "Datetime Picker",
+                "type": {
+                    "types": [
+                        {
+                            "type": "CustomElement"
+                        }
+                    ],
+                    "raw": "CustomElement"
+                },
+                "menu": {
+                    "tree": [
+                        "Styleguide",
+                        "Forms"
+                    ],
+                    "slug": "/styleguide/form/s-datetime-picker"
+                },
+                "platform": [
+                    {
+                        "name": "html",
+                        "description": ""
+                    }
+                ],
+                "description": "This component specify a datetime picker. It make uses of (this package)[https://www.npmjs.com/package/date-format-parse] behind the scene to\nparse and format dates.",
+                "namespace": "@coffeekraken.s-datetime-picker-component.js",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "html",
+                        "title": "Simple input",
+                        "code": "<label class=\"s-label:responsive s-color:accent\">\n    <span>Choose a date</span>\n     <s-datetime-picker calendar placeholder=\"Choose a date\">\n         <input type=\"text\" class=\"s-input\" placeholder=\"Choose a date\" />\n     </s-datetime-picker>\n</label>"
+                    },
+                    {
+                        "language": "html",
+                        "title": "With a calendar",
+                        "code": "<label class=\"s-label:responsive s-color:accent\">\n     <span>Choose a date</span>\n     <s-datetime-picker calendar placeholder=\"Choose a date\">\n         <input type=\"text\" class=\"s-input\" placeholder=\"Choose a date\" />\n     </s-datetime-picker>\n</label>"
+                    },
+                    {
+                        "language": "html",
+                        "title": "With a backdrop",
+                        "code": "<label class=\"s-label:responsive s-color:accent\">\n     <span>Choose a date</span>\n     <s-datetime-picker calendar backdrop placeholder=\"Choose a date\">\n         <input type=\"text\" class=\"s-input\" placeholder=\"Choose a date\" />\n     </s-datetime-picker>\n</label>"
+                    },
+                    {
+                        "language": "html",
+                        "title": "With a different format and a calendar",
+                        "code": "<label class=\"s-label:responsive s-color:accent\">\n     <span>Choose a date</span>\n     <s-datetime-picker calendar format=\"yyyy-mm-dd:HH:MM\" placeholder=\"Choose a date\">\n         <input type=\"text\" class=\"s-input\" placeholder=\"Choose a date\" />\n     </s-datetime-picker>\n</label>"
+                    },
+                    {
+                        "language": "html",
+                        "title": "Just a button with disabled weekend",
+                        "code": "<label class=\"s-label:responsive s-color:accent\">\n     <span>Choose a date</span>\n     <s-datetime-picker calendar disable=\"weekend\">\n         <button class=\"s-btn\">Choose a date</button>\n     </s-datetime-picker>\n</label>"
+                    },
+                    {
+                        "language": "html",
+                        "title": "Disabled",
+                        "code": "<label class=\"s-label:responsive s-color:accent\">\n     <span>Choose a date</span>\n     <s-datetime-picker>\n         <input type=\"text\" disabled class=\"s-input\" placeholder=\"Choose a date\" />\n     </s-datetime-picker>\n</label>"
+                    },
+                    {
+                        "language": "html",
+                        "title": "RTL Support",
+                        "code": "<label class=\"s-label:responsive s-color:accent\" dir=\"rtl\">\n     <span>Choose a date</span>\n     <s-datetime-picker placeholder=\"Choose a date\" dir=\"rtl\">\n         <input type=\"text\" class=\"s-input\" placeholder=\"Choose a date\" />\n     </s-datetime-picker>\n</label>"
+                    }
+                ],
+                "interface": {
+                    "name": "SDatetimePickerComponentInterface",
+                    "description": "",
+                    "definition": {
+                        "name": {
+                            "description": "Specify the name that will be assigned to the injected input if you don't provide one yourself",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
+                            "default": "color"
+                        },
+                        "value": {
+                            "description": "Specify the initial value for your picker",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            }
+                        },
+                        "updateInput": {
+                            "description": "Specify when you want to updat the attached input. Can be \"pointermove\", \"pointerup\", \"pointerdown\", \"input\", \"validate\", \"close\"",
+                            "type": {
+                                "type": "Array<String>",
+                                "splitChars": [
+                                    ","
+                                ]
+                            },
+                            "values": [
+                                "select",
+                                "validate",
+                                "reset",
+                                "clear",
+                                "close"
+                            ],
+                            "default": [
+                                "select",
+                                "validate",
+                                "reset",
+                                "clear",
+                                "close"
+                            ]
+                        },
+                        "format": {
+                            "description": "Specify the format of the color you want as end in the input value. Can be \"hex\", \"hexa\", \"rgb\", \"rgba\", \"hsl\" or \"hsla\"",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
+                            "default": "YYYY-MM-DD"
+                        },
+                        "inline": {
+                            "description": "Specify if you want to initalize the color picker inline or if you want it to be displayed only when the focus is in the input",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Boolean"
+                                    }
+                                ],
+                                "raw": "Boolean"
+                            },
+                            "default": false,
+                            "physical": true
+                        },
+                        "calendar": {
+                            "description": "Specify if you want to display a calendar or not",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Boolean"
+                                    }
+                                ],
+                                "raw": "Boolean"
+                            },
+                            "default": false,
+                            "physical": true
+                        },
+                        "i18n": {
+                            "description": "Specify some translations for the color picker. You can translate the \"reset\", \"clear\" and \"validate\" buttons",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Object"
+                                    }
+                                ],
+                                "raw": "Object"
+                            },
+                            "default": {
+                                "reset": "Reset",
+                                "clear": "Clear",
+                                "validate": "Validate",
+                                "months": [
+                                    "Jan",
+                                    "Feb",
+                                    "Mar",
+                                    "Apr",
+                                    "May",
+                                    "Jun",
+                                    "Jul",
+                                    "Aug",
+                                    "Sep",
+                                    "Oct",
+                                    "Nov",
+                                    "Dec"
+                                ]
+                            }
+                        },
+                        "placeholder": {
+                            "description": "Specify the placeholder that will be assigned to the injected input if you don't provide one yourself",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
+                            "default": "Select a color"
+                        },
+                        "floatSettings": {
+                            "description": "Specify some float settings to pass to the \"makeFloat\" function of the sugar toolkit",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Object"
+                                    }
+                                ],
+                                "raw": "Object"
+                            },
+                            "default": {}
+                        },
+                        "copyIconClass": {
+                            "description": "Specify the class you want to apply on the \"i\" that display the \"copy\" icon",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
+                            "default": "s-icon s-icon--copy"
+                        },
+                        "copiedIconClass": {
+                            "description": "Specify the class you want to apply on the \"i\" that display the \"copy\" icon when the color has been copied",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
+                            "default": "s-icon s-icon--copied"
+                        },
+                        "buttonIconClass": {
+                            "description": "Specify the class you want to apply on the injected button icon",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
+                            "default": "s-icon s-icon--color"
+                        },
+                        "backdropClass": {
+                            "description": "Specify the class to apply on the backdrop when the \"backdrop\" prop is true",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
+                            "default": "s-backdrop"
+                        },
+                        "disable": {
+                            "description": "Specify what you want to disable. It can be \"weekend\", \"week\" or \"2022-12-19\" (dates)",
+                            "type": {
+                                "type": "Array<String>",
+                                "splitChars": [
+                                    ",",
+                                    " "
+                                ]
+                            },
+                            "default": []
+                        },
+                        "disabled": {
+                            "description": "Specify if the color picker is disabled",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Boolean"
+                                    }
+                                ],
+                                "raw": "Boolean"
+                            },
+                            "default": false
+                        },
+                        "backdrop": {
+                            "description": "Specify if you want the \".s-backdrop\" element or not",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Boolean"
+                                    }
+                                ],
+                                "raw": "Boolean"
+                            },
+                            "default": false
+                        },
+                        "actions": {
+                            "description": "Specify the actions buttons you want to display. Can be \"clear\", \"reset\" and \"validate\". If false, hide all button",
+                            "type": {
+                                "type": "Array<String>",
+                                "splitChars": [
+                                    ",",
+                                    " "
+                                ]
+                            },
+                            "values": [
+                                "clear",
+                                "reset",
+                                "validate"
+                            ],
+                            "default": [
+                                "reset",
+                                "validate"
+                            ]
+                        },
+                        "hours": {
+                            "description": "Specify the hours you want in the time selector",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Array",
+                                        "of": [
+                                            "Number"
+                                        ]
+                                    }
+                                ],
+                                "raw": "Array<Number>"
+                            },
+                            "default": [
+                                0,
+                                1,
+                                2,
+                                3,
+                                4,
+                                5,
+                                6,
+                                7,
+                                8,
+                                9,
+                                10,
+                                11,
+                                12,
+                                13,
+                                14,
+                                15,
+                                16,
+                                17,
+                                18,
+                                19,
+                                20,
+                                21,
+                                22,
+                                23
+                            ]
+                        },
+                        "minutes": {
+                            "description": "Specify the minutes you want in the time selector",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Array",
+                                        "of": [
+                                            "Number"
+                                        ]
+                                    }
+                                ],
+                                "raw": "Array<Number>"
+                            },
+                            "default": [
+                                0,
+                                5,
+                                10,
+                                15,
+                                20,
+                                25,
+                                30,
+                                25,
+                                40,
+                                45,
+                                50,
+                                55
+                            ]
+                        },
+                        "fromYear": {
+                            "description": "Specify the first year to allow selection from",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Number"
+                                    }
+                                ],
+                                "raw": "Number"
+                            },
+                            "default": 1923
+                        },
+                        "toYear": {
+                            "description": "Specify the last year to allow selection from",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Number"
+                                    }
+                                ],
+                                "raw": "Number"
+                            },
+                            "default": 2123
+                        }
+                    }
+                },
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "SDatetimePickerComponent.ts",
+                "extension": "ts",
+                "relPath": "src/js/SDatetimePickerComponent.ts",
+                "children": {}
+            },
+            "@coffeekraken.s-datetime-picker-component.js.interface.SDatetimePickerComponentInterface": {
+                "id": "@coffeekraken.s-datetime-picker-component.js.interface.SDatetimePickerComponentInterface",
+                "name": "SDatetimePickerComponentInterface",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Class"
+                        }
+                    ],
+                    "raw": "Class"
+                },
+                "platform": [
+                    {
+                        "name": "js",
+                        "description": ""
+                    }
+                ],
+                "description": "This class represent the interface that describe parameters of the SDatetimePickerComponent",
+                "namespace": "@coffeekraken.s-datetime-picker-component.js.interface",
+                "status": "beta",
+                "interface": {
+                    "name": "SDatetimePickerComponentInterface",
+                    "description": "",
+                    "definition": {
+                        "name": {
+                            "description": "Specify the name that will be assigned to the injected input if you don't provide one yourself",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
+                            "default": "color"
+                        },
+                        "value": {
+                            "description": "Specify the initial value for your picker",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            }
+                        },
+                        "updateInput": {
+                            "description": "Specify when you want to updat the attached input. Can be \"pointermove\", \"pointerup\", \"pointerdown\", \"input\", \"validate\", \"close\"",
+                            "type": {
+                                "type": "Array<String>",
+                                "splitChars": [
+                                    ","
+                                ]
+                            },
+                            "values": [
+                                "select",
+                                "validate",
+                                "reset",
+                                "clear",
+                                "close"
+                            ],
+                            "default": [
+                                "select",
+                                "validate",
+                                "reset",
+                                "clear",
+                                "close"
+                            ]
+                        },
+                        "format": {
+                            "description": "Specify the format of the color you want as end in the input value. Can be \"hex\", \"hexa\", \"rgb\", \"rgba\", \"hsl\" or \"hsla\"",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
+                            "default": "YYYY-MM-DD"
+                        },
+                        "inline": {
+                            "description": "Specify if you want to initalize the color picker inline or if you want it to be displayed only when the focus is in the input",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Boolean"
+                                    }
+                                ],
+                                "raw": "Boolean"
+                            },
+                            "default": false,
+                            "physical": true
+                        },
+                        "calendar": {
+                            "description": "Specify if you want to display a calendar or not",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Boolean"
+                                    }
+                                ],
+                                "raw": "Boolean"
+                            },
+                            "default": false,
+                            "physical": true
+                        },
+                        "i18n": {
+                            "description": "Specify some translations for the color picker. You can translate the \"reset\", \"clear\" and \"validate\" buttons",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Object"
+                                    }
+                                ],
+                                "raw": "Object"
+                            },
+                            "default": {
+                                "reset": "Reset",
+                                "clear": "Clear",
+                                "validate": "Validate",
+                                "months": [
+                                    "Jan",
+                                    "Feb",
+                                    "Mar",
+                                    "Apr",
+                                    "May",
+                                    "Jun",
+                                    "Jul",
+                                    "Aug",
+                                    "Sep",
+                                    "Oct",
+                                    "Nov",
+                                    "Dec"
+                                ]
+                            }
+                        },
+                        "placeholder": {
+                            "description": "Specify the placeholder that will be assigned to the injected input if you don't provide one yourself",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
+                            "default": "Select a color"
+                        },
+                        "floatSettings": {
+                            "description": "Specify some float settings to pass to the \"makeFloat\" function of the sugar toolkit",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Object"
+                                    }
+                                ],
+                                "raw": "Object"
+                            },
+                            "default": {}
+                        },
+                        "copyIconClass": {
+                            "description": "Specify the class you want to apply on the \"i\" that display the \"copy\" icon",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
+                            "default": "s-icon s-icon--copy"
+                        },
+                        "copiedIconClass": {
+                            "description": "Specify the class you want to apply on the \"i\" that display the \"copy\" icon when the color has been copied",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
+                            "default": "s-icon s-icon--copied"
+                        },
+                        "buttonIconClass": {
+                            "description": "Specify the class you want to apply on the injected button icon",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
+                            "default": "s-icon s-icon--color"
+                        },
+                        "backdropClass": {
+                            "description": "Specify the class to apply on the backdrop when the \"backdrop\" prop is true",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
+                            "default": "s-backdrop"
+                        },
+                        "disable": {
+                            "description": "Specify what you want to disable. It can be \"weekend\", \"week\" or \"2022-12-19\" (dates)",
+                            "type": {
+                                "type": "Array<String>",
+                                "splitChars": [
+                                    ",",
+                                    " "
+                                ]
+                            },
+                            "default": []
+                        },
+                        "disabled": {
+                            "description": "Specify if the color picker is disabled",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Boolean"
+                                    }
+                                ],
+                                "raw": "Boolean"
+                            },
+                            "default": false
+                        },
+                        "backdrop": {
+                            "description": "Specify if you want the \".s-backdrop\" element or not",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Boolean"
+                                    }
+                                ],
+                                "raw": "Boolean"
+                            },
+                            "default": false
+                        },
+                        "actions": {
+                            "description": "Specify the actions buttons you want to display. Can be \"clear\", \"reset\" and \"validate\". If false, hide all button",
+                            "type": {
+                                "type": "Array<String>",
+                                "splitChars": [
+                                    ",",
+                                    " "
+                                ]
+                            },
+                            "values": [
+                                "clear",
+                                "reset",
+                                "validate"
+                            ],
+                            "default": [
+                                "reset",
+                                "validate"
+                            ]
+                        },
+                        "hours": {
+                            "description": "Specify the hours you want in the time selector",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Array",
+                                        "of": [
+                                            "Number"
+                                        ]
+                                    }
+                                ],
+                                "raw": "Array<Number>"
+                            },
+                            "default": [
+                                0,
+                                1,
+                                2,
+                                3,
+                                4,
+                                5,
+                                6,
+                                7,
+                                8,
+                                9,
+                                10,
+                                11,
+                                12,
+                                13,
+                                14,
+                                15,
+                                16,
+                                17,
+                                18,
+                                19,
+                                20,
+                                21,
+                                22,
+                                23
+                            ]
+                        },
+                        "minutes": {
+                            "description": "Specify the minutes you want in the time selector",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Array",
+                                        "of": [
+                                            "Number"
+                                        ]
+                                    }
+                                ],
+                                "raw": "Array<Number>"
+                            },
+                            "default": [
+                                0,
+                                5,
+                                10,
+                                15,
+                                20,
+                                25,
+                                30,
+                                25,
+                                40,
+                                45,
+                                50,
+                                55
+                            ]
+                        },
+                        "fromYear": {
+                            "description": "Specify the first year to allow selection from",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Number"
+                                    }
+                                ],
+                                "raw": "Number"
+                            },
+                            "default": 1923
+                        },
+                        "toYear": {
+                            "description": "Specify the last year to allow selection from",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Number"
+                                    }
+                                ],
+                                "raw": "Number"
+                            },
+                            "default": 2123
+                        }
+                    }
+                },
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "SDatetimePickerComponentInterface.ts",
+                "extension": "ts",
+                "relPath": "src/js/interface/SDatetimePickerComponentInterface.ts",
+                "children": {}
+            },
+            "@coffeekraken.s-datetime-picker-component.ui.datetimePicker.datetimePicker": {
+                "id": "@coffeekraken.s-datetime-picker-component.ui.datetimePicker.datetimePicker",
+                "name": "datetimePicker",
+                "type": {
+                    "types": [
+                        {
+                            "type": "PostcssMixin"
+                        }
+                    ],
+                    "raw": "PostcssMixin"
+                },
+                "platform": [
+                    {
+                        "name": "css",
+                        "description": ""
+                    }
+                ],
+                "description": "Apply the datetime picker lnf to any s-datetime-picker element",
+                "namespace": "@coffeekraken.s-datetime-picker-component.ui.datetimePicker",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "css",
+                        "code": ".s-datetime-picker {\n   @sugar.ui.datetimePicker;\n}"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "datetimePicker.ts",
+                "extension": "ts",
+                "relPath": "src/node/postcss/mixins/ui/datetimePicker/datetimePicker.ts",
+                "children": {}
+            }
+        }
+    }
+}

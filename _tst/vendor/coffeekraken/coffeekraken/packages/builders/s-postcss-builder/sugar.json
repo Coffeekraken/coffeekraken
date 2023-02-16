@@ -1,0 +1,23 @@
+{
+  "config": {
+    "folders": [
+      {
+        "path": "./dist/pkg/%moduleSystem/config"
+      }
+    ]
+  },
+  "cli": [
+    {
+      "stack": "postcss",
+      "description": "Postcss related actions",
+      "defaultAction": "build",
+      "actions": {
+        "build": {
+          "scope": "package",
+          "description": "Build your css using postcss and some built-in tools like the sugar plugin.",
+          "process": "./dist/pkg/esm/cli/build.cli.js"
+        }
+      }
+    }
+  ]
+}

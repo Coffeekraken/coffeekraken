@@ -1,0 +1,8 @@
+.s-typo--lead,
+.s-typo--p:not(.s-dropdown .s-typo--p) {
+  /* color: sugar.color(main, --lighten 20); */
+}
+
+strong {
+  color: sugar.color(accent);
+}

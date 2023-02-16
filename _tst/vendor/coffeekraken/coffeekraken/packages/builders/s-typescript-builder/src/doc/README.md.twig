@@ -1,0 +1,82 @@
+{% extends 'sugar/readme/layouts/main/main.twig' %}
+{% block body %}
+
+<!--
+/**
+ * @name            README
+ * @namespace       doc
+ * @type            Markdown
+ * @platform        md
+ * @status          stable
+ * @menu            Documentation           /doc/readme
+ *
+ * @see         https://www.npmjs.com/package/favicons
+ * @since           2.0.0
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+ */
+-->
+
+## STypescriptBuilder
+
+This package expose a simple `STypescriptBuilder` class that lets you build your typescript files easily.
+
+## Features
+
+This builder class gives you some features like:
+
+-   Compile to multiple formats at once (esm|cjs)
+-   Watch your files to compile them at save
+-   Custom settings for some files/folders
+-   And more...
+
+## Usage
+
+To make use of this builder, you have two choices:
+
+#### Using the `sugar` CLI
+
+Simply call this command:
+
+```shell
+sugar typescript.build [arguments]
+```
+
+For arguments documentation, simple use:
+
+```shell
+sugar typescript.build -h
+```
+
+#### Using the API
+
+Here's a simple usage example
+
+```js
+import __STypescriptBuilder from '@coffeekraken/s-typescript-builder';
+const builder = new __STypescriptBuilder();
+await builder.build({
+    glob: '**/*.ts',
+    inDir: '/absolute/path/to/the/input/directory',
+    outDir: '/absolute/path/to/the/output/directory',
+});
+```
+
+> Note that the `outDir` parameter supports the `%moduleSystem` and `%platform` tokens to use like `/absolute/path/%moduleSystem`.
+
+#### Build parameters
+
+{% include 'sugar/interface/fromDocmap/fromDocmap.twig' with {
+    docmapItem: docmap.map['@coffeekraken.s-typescript-builder.node.interface.STypescriptBuilderBuildParamsInterface']
+} only %}
+
+#### Settings
+
+{% include 'sugar/interface/fromDocmap/fromDocmap.twig' with {
+    docmapItem: docmap.map['@coffeekraken.s-typescript-builder.node.interface.STypescriptBuilderSettingsInterface']
+} only %}
+
+## API
+
+For more information about the API, please check out [the API documentation](/api/@coffeekraken.s-typescript-builder.node.STypescriptBuilder)
+
+{% endblock %}

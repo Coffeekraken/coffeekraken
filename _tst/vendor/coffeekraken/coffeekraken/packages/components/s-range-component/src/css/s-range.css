@@ -1,0 +1,30 @@
+.s-range {
+    display: block;
+    width: 100%;
+
+    &:not([mounted]) > * {
+        display: none;
+    }
+
+    &[disabled] {
+        pointer-events: none;
+    }
+}
+.s-range_root {
+    display: flex;
+    width: 100%;
+}
+
+.s-range_input {
+    flex-grow: 1;
+    opacity: 1 !important;
+}
+
+.s-range_input:hover + .s-range_tooltip,
+.s-range_input:focus + .s-range_tooltip {
+    opacity: 1 !important;
+}
+
+.s-range_tooltip {
+    transition: none;
+}

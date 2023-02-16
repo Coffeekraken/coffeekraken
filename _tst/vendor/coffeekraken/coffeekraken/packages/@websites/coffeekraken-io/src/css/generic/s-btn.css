@@ -1,0 +1,19 @@
+.s-btn {
+  i {
+    @sugar.transition (fast);
+    transition-easing: linear;
+  }
+
+  i ~ i {
+    font-size: 0;
+  }
+
+  &:hover {
+    i:first-child {
+      font-size: 0;
+    }
+    i:last-child {
+      font-size: 1em;
+    }
+  }
+}

@@ -1,0 +1,20 @@
+{
+    "type": "menuItem",
+    "title": "Menu item",
+    "description": "Describe a menu item with props like url, target, etc...",
+    "props": {
+        "label": {
+            "type": "Text",
+            "description": "Specify the label to display"
+        },
+        "raw": {
+            "type": "Html",
+            "description": "Specify some raw html to be used for the menu. If specified, will be used instead of the \"label\" property"
+        },
+        "link": "@sugar.views.props.link",
+        "children": {
+            "type": "Object[]",
+            "description": "Specify a menu item child"
+        }
+    }
+}

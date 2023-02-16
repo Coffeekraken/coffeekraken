@@ -1,0 +1,27 @@
+/**
+ * @name      text-truncate
+ * @namespace            scss.typography.mixin
+ * @type      mixin
+ *
+ * Print out the style to truncate the text if needed
+ *
+ * @example 	scss
+ * h1 {
+ * 	\@include Sugar.text-truncate();
+ * }
+ *
+ * @since      1.0.0
+ * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+@mixin text-truncate() {
+  display: inline-block;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+
+  > * {
+    text-overflow: ellipsis;
+    overflow: hidden;
+  }
+}

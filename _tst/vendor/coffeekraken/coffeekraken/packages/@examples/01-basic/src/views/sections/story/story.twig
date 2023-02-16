@@ -1,0 +1,27 @@
+<section class="section-story {{ paddingClasses(padding) }} {{ marginClasses(margin) }}" layout="{{ layout }}" s-appear in="bottom" delay="500"
+    s-specs="views.sections.story"
+    {{ specsValues(_context)|raw }}
+    >
+    <div class="s-container">
+        <div class="s-layout:{{ layout }} @mobile s-layout:1_2">
+            <div>
+                <h1 class="s-typo:h2 s-mbe:40">
+                    {{ title|raw }}
+                </h1>
+                <p class="s-typo:p">
+                    {{ text|raw }}
+                </p>
+                <a class="s-btn s-mbs:40 s-color:{{ cta.color }}" href="{{ cta.link.url }}" target="{{ cta.link.target }}">
+                    {{ cta.link.text }}
+                </a>
+            </div>
+            <div>
+                {% if image %}
+                    <div class="s-media-container">
+                        <img class="_img s-media" src="{{ image.url }}" alt="{{ image.alt }}" title="{{ image.title }}" />
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</section>

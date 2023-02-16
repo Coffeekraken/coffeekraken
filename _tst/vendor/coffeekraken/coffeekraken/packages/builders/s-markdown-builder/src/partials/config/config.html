@@ -1,0 +1,23 @@
+<span class="s-file s-mb:30">
+    <i class="s-icon:file"></i>&nbsp;&nbsp;{{configFileNameFromDocmapPath
+    namespace}}
+</span>
+
+<dl>
+    {{#each (configFromDocmap docmap namespace)}}
+    <dt class="s-font:40 s-mbe:30">
+        <header class="s-flex s-bg:main-surface s-radius">
+            <div class="s-flex-item:grow s-tc:accent s-p:30 s-typo:strong">
+                {{ @key }}
+            </div>
+            <div class="s-typo:bold s-p:30 s-tc:info">{{ this.type }}</div>
+        </header>
+        {{#if this.default}}
+        <div class="s-pi:30 s-mbs:40">
+            <div class="s-typo:code">{{ formatConfigValue this.default }}</div>
+        </div>
+        {{/if}}
+        <p class="s-typo:p s-p:30">{{{ this.description }}}</p>
+    </dt>
+    {{/each}}
+</dl>

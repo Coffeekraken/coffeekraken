@@ -1,0 +1,45 @@
+{% extends 'sugar/readme/layouts/main/main.twig' %}
+{% block body %}
+
+<!--
+/**
+ * @name            README
+ * @namespace       doc
+ * @type            Markdown
+ * @platform        md
+ * @status          stable
+ * @menu            Documentation           /doc/readme
+ *
+ * @since           2.0.0
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+ */
+-->
+
+## SConfigInlineAdapter
+
+This package expose a simple `SConfigInlineAdapter` class that let you load a simple object as config.
+
+## Features
+
+-   Let you load a simple object as configuration.
+-   Nothing more, nothing less...
+
+## Usage
+
+Here's a simple example how to use the SConfigInlineAdapter class:
+
+```js
+import __SConfigInlineAdapter from '@coffeekraken/s-config-folder-adapter';
+
+const myFolderAdapter = new __SConfigInlineAdapter({
+    my: 'config',
+});
+const myConfig = new __SConfig('my-config', myFolderAdapter);
+myConfig.get('my'); // 'config'
+```
+
+## API
+
+For more information about the API, please check out [the API documentation](/api/@coffeekraken.s-config-inline-adapter.shared.SConfigInlineAdapter)
+
+{% endblock %}

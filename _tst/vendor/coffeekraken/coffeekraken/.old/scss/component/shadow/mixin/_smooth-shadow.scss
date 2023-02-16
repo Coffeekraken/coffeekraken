@@ -1,0 +1,25 @@
+/**
+ * @todo        Mixin header and documentation
+ */
+@mixin smooth-shadow(
+  $layers: setting('look-and-feel.shadow.layers'),
+  $startX: setting('look-and-feel.shadow.startX'),
+  $startY: setting('look-and-feel.shadow.startY'),
+  $startBlur: setting('look-and-feel.shadow.startBlur'),
+  $color: setting('look-and-feel.shadow.color')
+) {
+
+  $layersList: ();
+  $currentX: $startX;
+  $currentY: $startY;
+  $currentBlur: $startBlur;
+
+  @for $i from 1 through $layers {
+    $layersList: list-append($layersList, $currentX $currentY $currentBlur $color);
+    $currentBlur: $currentBlur*2;
+    $currentX: $currentX*2;
+    $currentY: $currentY*2;
+  }
+
+  box-shadow: unquote(list-implode($layersList,','));
+}

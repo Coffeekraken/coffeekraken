@@ -1,0 +1,36 @@
+{
+  "config": {
+    "folders": [
+      {
+        "path": "./dist/pkg/%moduleSystem/config"
+      }
+    ]
+  },
+  "cli": [
+    {
+      "stack": "vite",
+      "description": "Sugar vite wrapper",
+      "defaultAction": "start",
+      "actions": {
+        "start": {
+          "scope": "package",
+          "description": "Start the vite server and compilators development stack",
+          "interface": "./dist/pkg/esm/node/interface/SViteStartParamsInterface.js",
+          "process": "./dist/pkg/esm/cli/start.cli.js"
+        },
+        "build": {
+          "scope": "package",
+          "description": "Build your assets like js, and css using vite",
+          "interface": "./dist/pkg/esm/node/interface/SViteBuildParamsInterface.js",
+          "process": "./dist/pkg/esm/cli/build.cli.js"
+        },
+        "test": {
+          "scope": "package",
+          "description": "Launch the tests using vitest",
+          "interface": "./dist/pkg/esm/node/interface/SViteTestParamsInterface.js",
+          "process": "./dist/pkg/esm/cli/test.cli.js"
+        }
+      }
+    }
+  ]
+}

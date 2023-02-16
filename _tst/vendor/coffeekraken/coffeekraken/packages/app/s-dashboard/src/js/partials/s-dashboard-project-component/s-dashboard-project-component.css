@@ -1,0 +1,28 @@
+.s-dashboard-project {
+    ._details {
+        display: flex;
+        align-items: center;
+        margin-block-start: sugar.margin(20);
+        padding: sugar.padding(20);
+
+        background: sugar.color(main, background, --darken 2);
+
+        @sugar.theme.when dark {
+            background: sugar.color(main, background, --lighten 5);
+        }
+    }
+
+    ._commit-time {
+        display: flex;
+        flex-grow: 1;
+        flex-direction: column;
+        align-items: center;
+
+        ._commit-time-time {
+            font-size: 17px;
+        }
+        ._commit-time-date {
+            font-size: 12px;
+        }
+    }
+}

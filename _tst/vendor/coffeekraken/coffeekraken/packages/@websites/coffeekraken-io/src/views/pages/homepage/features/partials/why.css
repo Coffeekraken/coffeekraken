@@ -1,0 +1,5 @@
+#features-why {
+  &:after {
+    display: none;
+  }
+}

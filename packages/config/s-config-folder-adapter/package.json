@@ -1,15 +1,15 @@
 {
     "name": "@coffeekraken/s-config-folder-adapter",
-    "version": "2.0.0-alpha.23",
+    "version": "2.0.0-alpha.24",
     "description": "Config folder adapter that allows you to load .config.(j|t)s files from multiple folders. This is used in the @coffeekraken/s-sugar-config package.",
     "type": "module",
     "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)",
     "license": "MIT",
     "dependencies": {
-        "@coffeekraken/s-class": "^2.0.0-alpha.23",
-        "@coffeekraken/s-config": "^2.0.0-alpha.23",
-        "@coffeekraken/s-config-adapter": "^2.0.0-alpha.23",
-        "@coffeekraken/sugar": "^2.0.0-alpha.23"
+        "@coffeekraken/s-class": "^2.0.0-alpha.24",
+        "@coffeekraken/s-config": "^2.0.0-alpha.24",
+        "@coffeekraken/s-config-adapter": "^2.0.0-alpha.24",
+        "@coffeekraken/sugar": "^2.0.0-alpha.24"
     },
     "main": "dist/pkg/cjs/node/exports.js",
     "module": "dist/pkg/esm/node/exports.js",

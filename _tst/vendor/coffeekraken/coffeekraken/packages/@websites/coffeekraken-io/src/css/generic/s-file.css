@@ -1,0 +1,6 @@
+.s-file {
+  display: inline-block;
+  background: sugar.color(accent, surface);
+  padding: sugar.padding(20);
+  @sugar.border.radius();
+}

@@ -1,0 +1,6 @@
+@mixin init-layout() {
+  // // border box
+  @if setting('border-box') == true {
+    @include init-border-box();
+  }
+}

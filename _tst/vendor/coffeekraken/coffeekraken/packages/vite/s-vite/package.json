@@ -1,0 +1,67 @@
+{
+    "name": "@coffeekraken/s-vite",
+    "version": "2.0.0-alpha.23",
+    "description": "AMAZING ViteJs encapsulation to make it work flowlessly inside of the Coffeekraken toolchain.",
+    "type": "module",
+    "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)",
+    "license": "MIT",
+    "dependencies": {
+        "@coffeekraken/s-class": "^2.0.0-alpha.23",
+        "@coffeekraken/s-duration": "^2.0.0-alpha.23",
+        "@coffeekraken/s-env": "^2.0.0-alpha.23",
+        "@coffeekraken/s-event-emitter": "^2.0.0-alpha.23",
+        "@coffeekraken/s-file": "^2.0.0-alpha.23",
+        "@coffeekraken/s-form-validate-feature": "^2.0.0-alpha.23",
+        "@coffeekraken/s-interface": "^2.0.0-alpha.23",
+        "@coffeekraken/s-log": "^2.0.0-alpha.23",
+        "@coffeekraken/s-postcss-sugar-plugin": "^2.0.0-alpha.23",
+        "@coffeekraken/s-promise": "^2.0.0-alpha.23",
+        "@coffeekraken/s-sugar-config": "^2.0.0-alpha.23",
+        "@coffeekraken/s-vite-postcss-plugin": "^2.0.0-alpha.23",
+        "@coffeekraken/s-vite-sugar-plugin": "^2.0.0-alpha.23",
+        "@coffeekraken/sugar": "^2.0.0-alpha.23",
+        "@sveltejs/vite-plugin-svelte": "^1.0.1",
+        "@vitejs/plugin-vue": "^1.10.2",
+        "@vitest/ui": "^0.15.2",
+        "chokidar": "^3.5.3",
+        "happy-dom": "^5.4.0",
+        "picomatch": "^2.3.1",
+        "postcss": "^8.4.14",
+        "postcss-atroot": "^0.2.3",
+        "postcss-extend-rule": "^3.0.0",
+        "postcss-import-ext-glob": "^2.0.1",
+        "postcss-nested": "^5.0.6",
+        "postcss-preset-env": "^6.7.1",
+        "postcss-property-lookup": "^2.0.0",
+        "rollup-plugin-analyzer": "^4.0.0",
+        "rollup-plugin-import-css": "^3.0.3",
+        "rollup-plugin-uglify": "^6.0.4",
+        "terser": "^5.16.1",
+        "url-parse": "^1.5.10",
+        "vite": "^3.0.0",
+        "vite-plugin-compress": "^2.1.1",
+        "vite-plugin-compression2": "^0.4.3",
+        "vitest": "^0.20.3"
+    },
+    "homepage": "https://coffeekraken.io",
+    "main": "dist/pkg/cjs/node/exports.js",
+    "module": "dist/pkg/esm/node/exports.js",
+    "exports": {
+        ".": {
+            "require": "./dist/pkg/cjs/node/exports.js",
+            "import": "./dist/pkg/esm/node/exports.js"
+        },
+        "./shared/*": {
+            "require": "./dist/pkg/cjs/shared/*.js",
+            "import": "./dist/pkg/esm/shared/*.js"
+        },
+        "./node/*": {
+            "require": "./dist/pkg/cjs/node/*.js",
+            "import": "./dist/pkg/esm/node/*.js"
+        },
+        "./js/*": {
+            "require": "./dist/pkg/cjs/js/*.js",
+            "import": "./dist/pkg/esm/js/*.js"
+        }
+    }
+}

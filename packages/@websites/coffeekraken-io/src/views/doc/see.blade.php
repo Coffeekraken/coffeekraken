@@ -1,4 +1,4 @@
-@if (isset($block->see))
+@if (isset($block->see) && $block->see != null)
 
     <h4 id="related-{{ $block->name }}" class="s-typo:h4 s-mb:50">
         <i class="s-icon:box s-tc:accent"></i>&nbsp;&nbsp;Related resource(s)

@@ -57,7 +57,7 @@ export default class SFrontendServer extends __SClass {
     
     _getHandlerFn(handlerNameOrPath: string): Promise<any>;
     
-    _registerPagesRoutes(): Promise<unknown>;
+    _registerPagesRoutes(): Promise<void>;
     
     _pagesConfigsBySlug: {};
     _getPageConfigBySlug(slug: any): any;

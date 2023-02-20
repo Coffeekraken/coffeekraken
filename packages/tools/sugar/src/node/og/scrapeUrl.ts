@@ -43,6 +43,10 @@ export interface IScrapeUrlSettings {
     timeout: number;
 }
 
+export interface IScrapeUrlError {
+    error: string;
+}
+
 export interface IScrapeUrlResult {
     ogTitle: string;
     ogType: string;
@@ -61,7 +65,7 @@ export interface IScrapeUrlResult {
 export default function srapeUrl(
     url: string,
     settings: Partial<IScrapeUrlSettings> = {},
-): Promise<IScrapeUrlResult> {
+): Promise<IScrapeUrlResult | void> {
     return new Promise(async (resolve, reject) => {
         const finalSettings = <IScrapeUrlSettings>__deepMerge(
             {
@@ -92,9 +96,7 @@ export default function srapeUrl(
         if (finalSettings.timeout) {
             timeout = setTimeout(() => {
                 rejected = true;
-                reject({
-                    error: `The url "${url}" is unreachable...`,
-                });
+                resolve();
             }, finalSettings.timeout);
         }
 

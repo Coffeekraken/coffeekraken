@@ -1,33 +1,23 @@
 @php
-
     $finalId = $id;
     if (!isset($id)) {
         $finalId = 's-layout-' . uniqid();
     }
-
-    $defaultCss = \Sugar\css\layoutCss($layout->default, [
-        'selector' => '#' . $finalId,
-    ]);
-
-    $mediasCss = [];
-    if (isset($medias)) {
-        foreach ($layout as $media => $lay) {
-            if ($media != 'default') {
-                $css = \Sugar\css\layoutCss($lay, [
-                    'selector' => '#' . $finalId,
-                    'media' => $media,
-                    'mediaSettings' => $frontspec->media
-                ]);
-                array_push($mediasCss, $css);
-            }
-        }
-    }
-
 @endphp
 <style>
-    {!! $defaultCss !!}
-    {!! implode('\n', $mediasCss) !!}
+{!! \Sugar\css\layoutCss($layout->media, [
+    "selector" => '#' . $finalId . '-layout',
+    "mediaSettings" => \Sugar\convert\toObject($frontspec->media)
+]) !!}
 </style>
-<div id="{{ $finalId }}" @foreach ($attributes as $prop => $value) {{ $prop }}="{{ $value }}" @endforeach>
-    {!! $content !!}
+<div id="{{ $finalId }}" class="{{ $attributes->class }} {{ \Sugar\css\paddingClasses($padding) }} {{ \Sugar\css\marginClasses($margin) }}" {!! \Sugar\html\attrs($attributes, ['class']) !!}>
+    @if (isset($container))
+        <div class="s-container:{{ $container }}">
+    @endif
+    <div class="s-layout {{ isset($gap) ? 's-gap:' . $gap : '' }}" id="{{ $finalId }}-layout">
+        {!! $html !!}
+    </div>
+    @if (isset($container))
+    </div>
+    @endif
 </div>

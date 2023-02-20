@@ -16,7 +16,7 @@ if (file_exists($argv[1])) {
 $data = (object) $params->data;
 
 // shared data file path
-if ($data->_sharedDataFilePath) {
+if ($data->_sharedDataFilePath && file_exists($data->_sharedDataFilePath)) {
     $sharedData = json_decode(file_get_contents($data->_sharedDataFilePath));
     $data = array_merge((array) $sharedData, (array) $data);
 }

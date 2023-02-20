@@ -29,6 +29,10 @@ export interface ISSitemapBuilderSourceSettings {
     settings: any;
     path: string;
 }
+export interface ISSitemapBuilderSourceBuildResult {
+    logs: string[];
+    items: ISSitemapBuilderResultItem[];
+}
 export interface ISSitemapBuilderSettings extends ISBuilderSettings {
     sources: ISSitemapBuilderSourcesSettings;
 }

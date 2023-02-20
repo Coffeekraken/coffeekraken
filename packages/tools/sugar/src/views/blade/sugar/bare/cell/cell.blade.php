@@ -1,3 +1,3 @@
-<div @foreach ($attributes as $prop => $value) {{ $prop }}="{{ $value }}" @endforeach>
-    {!! $content !!}
+<div class="s-cell {{ $attributes->class }} {{ \Sugar\css\paddingClasses($padding) }} {{ \Sugar\css\marginClasses($margin) }}" {!! \Sugar\html\attrs($attributes, ['class']) !!}>
+    {!! $html !!}
 </div>

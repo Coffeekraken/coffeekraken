@@ -1,6 +1,5 @@
 import type { ISSitemapBuilderBuildParams } from '../interface/SSitemapBuildIParamsInterface';
-import type { ISSitemapBuilderResultItem } from '../SSitemapBuilder';
-import __SSitemapBuilderSource from '../SSitemapBuilderSource';
+import __SSitemapBuilderSource, { ISSitemapBuilderSourceResult } from '../SSitemapBuilderSource';
 
 export interface ISSitemapBuilderDocmapSourceSettings {
 }
@@ -10,5 +9,5 @@ export default class SSitemapBuilderDocmapSource extends __SSitemapBuilderSource
     
     constructor(settings?: Partial<ISSitemapBuilderDocmapSourceSettings>);
     
-    build(params?: Partial<ISSitemapBuilderBuildParams>): Promise<ISSitemapBuilderResultItem[]>;
+    build(params?: Partial<ISSitemapBuilderBuildParams>): Promise<ISSitemapBuilderSourceResult>;
 }

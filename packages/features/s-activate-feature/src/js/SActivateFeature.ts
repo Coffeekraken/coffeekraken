@@ -1,6 +1,10 @@
 import __SFeature from '@coffeekraken/s-feature';
 import { __unique } from '@coffeekraken/sugar/array';
-import { __expandTemplate, __querySelectorLive } from '@coffeekraken/sugar/dom';
+import {
+    __expandTemplate,
+    __querySelectorLive,
+    __scrollSpy,
+} from '@coffeekraken/sugar/dom';
 import { __deepMerge, __get } from '@coffeekraken/sugar/object';
 import __SActivateFeatureInterface from './interface/SActivateFeatureInterface';
 
@@ -210,6 +214,33 @@ export default class SActivateFeature extends __SFeature {
                             preventSave: true,
                         });
                     });
+                } else if (trigger.match(/^scrollspy:/)) {
+                    const parts = trigger.split(':'),
+                        selector = parts[1],
+                        group = parts[2];
+
+                    const $toSpyElm = document.querySelector(selector);
+
+                    if (!$toSpyElm) {
+                        throw new Error(
+                            `<red>[SActivate]</red> The s-activate trigger "${trigger}" does not resolve to any HTMLElement to spy on`,
+                        );
+                    }
+
+                    // spy on the element in the page
+                    __scrollSpy($toSpyElm, {
+                        group,
+                    })
+                        .on('activate', () => {
+                            if (!this.isActive()) {
+                                this.activate();
+                            }
+                        })
+                        .on('unactivate', () => {
+                            if (this.isActive()) {
+                                this.unactivate();
+                            }
+                        });
                 } else {
                     switch (trigger) {
                         case 'click':

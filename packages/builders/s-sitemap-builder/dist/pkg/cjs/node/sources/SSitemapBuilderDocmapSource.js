@@ -13,8 +13,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const s_docmap_1 = __importDefault(require("@coffeekraken/s-docmap"));
-const s_log_1 = __importDefault(require("@coffeekraken/s-log"));
-const s_promise_1 = __importDefault(require("@coffeekraken/s-promise"));
 const fs_1 = require("@coffeekraken/sugar/fs");
 const number_1 = require("@coffeekraken/sugar/number");
 const object_1 = require("@coffeekraken/sugar/object");
@@ -48,25 +46,20 @@ class SSitemapBuilderDocmapSource extends SSitemapBuilderSource_1.default {
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     build(params = {}) {
-        return new s_promise_1.default(({ resolve, reject, emit, pipe }) => __awaiter(this, void 0, void 0, function* () {
+        return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
+            var _a;
             const docmapInstance = new s_docmap_1.default();
             const docmap = yield docmapInstance.read();
             const items = [];
+            const logs = [];
             const date = new Date();
             const lastmod = `${date.getFullYear()}-${(0, number_1.__pad)(date.getMonth(), 2)}-${(0, number_1.__pad)(date.getDate(), 2)}`;
-            emit('log', {
-                type: s_log_1.default.TYPE_INFO,
-                value: `<yellow>[docmap]</yellow> Start generating sitemap from the project "<cyan>docmap.json</cyan>"`,
-            });
+            (_a = console.verbose) === null || _a === void 0 ? void 0 : _a.call(console, `<yellow>[docmap]</yellow> Start generating sitemap from the project "<cyan>docmap.json</cyan>"`);
             // @ts-ignore
             for (let [slug, docmapObj] of Object.entries(docmap.menu.slug)) {
                 // @ts-ignore
                 if (!fs_2.default.existsSync(docmapObj.docmap.path)) {
-                    emit('log', {
-                        type: s_log_1.default.TYPE_WARNING,
-                        // @ts-ignore
-                        value: `<yellow>[build]</yellow> Docmap referenced file "<cyan>${docmapObj.docmap.path}</cyan>" does not exist. Skipping it...`,
-                    });
+                    console.warn(`<yellow>[build]</yellow> Docmap referenced file "<cyan>${docmapObj.docmap.path}</cyan>" does not exist. Skipping it...`);
                 }
                 else {
                     // @ts-ignore
@@ -85,11 +78,7 @@ class SSitemapBuilderDocmapSource extends SSitemapBuilderSource_1.default {
                 packageObj.slug)) {
                     // @ts-ignore
                     if (!fs_2.default.existsSync(docmapObj.docmap.path)) {
-                        emit('log', {
-                            type: s_log_1.default.TYPE_WARNING,
-                            // @ts-ignore
-                            value: `<yellow>[build]</yellow> Docmap referenced file "<cyan>${docmapObj.docmap.path}</cyan>" does not exist. Skipping it...`,
-                        });
+                        console.warn(`<yellow>[build]</yellow> Docmap referenced file "<cyan>${docmapObj.docmap.path}</cyan>" does not exist. Skipping it...`);
                     }
                     else {
                         // @ts-ignore
@@ -102,16 +91,12 @@ class SSitemapBuilderDocmapSource extends SSitemapBuilderSource_1.default {
                     }
                 }
             }
-            emit('log', {
-                type: s_log_1.default.TYPE_INFO,
-                value: `<green>[docmap]</green> <magenta>${items.length}</magenta> sitemap entrie(s) gathered from the "<cyan>docmap.json</cyan>" file`,
+            logs.push(`<green>[docmap]</green> <magenta>${items.length}</magenta> sitemap entrie(s) gathered from the "<cyan>docmap.json</cyan>" file`);
+            resolve({
+                items,
+                logs,
             });
-            resolve(items);
-        }), {
-            eventEmitter: {
-                bind: this,
-            },
-        });
+        }));
     }
 }
 exports.default = SSitemapBuilderDocmapSource;
@@ -126,4 +111,4 @@ exports.default = SSitemapBuilderDocmapSource;
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 SSitemapBuilderDocmapSource.settingsId = 'sitemapDocmapSource';
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7O0FBQUEsc0VBQStDO0FBQy9DLGdFQUF5QztBQUN6Qyx3RUFBaUQ7QUFDakQsK0NBQW9EO0FBQ3BELHVEQUFtRDtBQUNuRCx1REFBeUQ7QUFDekQsNENBQXNCO0FBR3RCLHFGQUErRDtBQWtCL0QsTUFBcUIsMkJBQTRCLFNBQVEsK0JBQXVCO0lBYTVFOzs7Ozs7Ozs7T0FTRztJQUNILFlBQVksUUFBd0Q7UUFDaEUsS0FBSyxDQUFDLElBQUEsb0JBQVcsRUFBQyxFQUFFLEVBQUUsUUFBUSxhQUFSLFFBQVEsY0FBUixRQUFRLEdBQUksRUFBRSxDQUFDLENBQUMsQ0FBQztJQUMzQyxDQUFDO0lBRUQ7Ozs7Ozs7Ozs7OztPQVlHO0lBQ0gsS0FBSyxDQUNELFNBQStDLEVBQUU7UUFFakQsT0FBTyxJQUFJLG1CQUFVLENBQ2pCLENBQU8sRUFBRSxPQUFPLEVBQUUsTUFBTSxFQUFFLElBQUksRUFBRSxJQUFJLEVBQUUsRUFBRSxFQUFFO1lBQ3RDLE1BQU0sY0FBYyxHQUFHLElBQUksa0JBQVMsRUFBRSxDQUFDO1lBQ3ZDLE1BQU0sTUFBTSxHQUFHLE1BQU0sY0FBYyxDQUFDLElBQUksRUFBRSxDQUFDO1lBRTNDLE1BQU0sS0FBSyxHQUFpQyxFQUFFLENBQUM7WUFFL0MsTUFBTSxJQUFJLEdBQUcsSUFBSSxJQUFJLEVBQUUsQ0FBQztZQUN4QixNQUFNLE9BQU8sR0FBRyxHQUFHLElBQUksQ0FBQyxXQUFXLEVBQUUsSUFBSSxJQUFBLGNBQUssRUFDMUMsSUFBSSxDQUFDLFFBQVEsRUFBRSxFQUNmLENBQUMsQ0FDSixJQUFJLElBQUEsY0FBSyxFQUFDLElBQUksQ0FBQyxPQUFPLEVBQUUsRUFBRSxDQUFDLENBQUMsRUFBRSxDQUFDO1lBRWhDLElBQUksQ0FBQyxLQUFLLEVBQUU7Z0JBQ1IsSUFBSSxFQUFFLGVBQU0sQ0FB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
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7O0FBQUEsc0VBQStDO0FBQy9DLCtDQUFvRDtBQUNwRCx1REFBbUQ7QUFDbkQsdURBQXlEO0FBQ3pELDRDQUFzQjtBQUd0QixxRkFFa0M7QUFrQmxDLE1BQXFCLDJCQUE0QixTQUFRLCtCQUF1QjtJQWE1RTs7Ozs7Ozs7O09BU0c7SUFDSCxZQUFZLFFBQXdEO1FBQ2hFLEtBQUssQ0FBQyxJQUFBLG9CQUFXLEVBQUMsRUFBRSxFQUFFLFFBQVEsYUFBUixRQUFRLGNBQVIsUUFBUSxHQUFJLEVBQUUsQ0FBQyxDQUFDLENBQUM7SUFDM0MsQ0FBQztJQUVEOzs7Ozs7Ozs7Ozs7T0FZRztJQUNILEtBQUssQ0FDRCxTQUErQyxFQUFFO1FBRWpELE9BQU8sSUFBSSxPQUFPLENBQUMsQ0FBTyxPQUFPLEVBQUUsTUFBTSxFQUFFLEVBQUU7O1lBQ3pDLE1BQU0sY0FBYyxHQUFHLElBQUksa0JBQVMsRUFBRSxDQUFDO1lBQ3ZDLE1BQU0sTUFBTSxHQUFHLE1BQU0sY0FBYyxDQUFDLElBQUksRUFBRSxDQUFDO1lBRTNDLE1BQU0sS0FBSyxHQUFpQyxFQUFFLENBQUM7WUFFL0MsTUFBTSxJQUFJLEdBQWEsRUFBRSxDQUFDO1lBRTFCLE1BQU0sSUFBSSxHQUFHLElBQUksSUFBSSxFQUFFLENBQUM7WUFDeEIsTUFBTSxPQUFPLEdBQUcsR0FBRyxJQUFJLENBQUMsV0FBVyxFQUFFLElBQUksSUFBQSxjQUFLLEVBQzFDLElBQUksQ0FBQyxRQUFRLEVBQUUsRUFDZixDQUFDLENBQ0osSUFBSSxJQUFBLGNBQUssRUFBQyxJQUFJLENBQUMsT0FBTyxFQUFFLEVBQUUsQ0FBQyxDQUFDLEVBQUUsQ0FBQztZQUVoQyxNQUFBLE9BQU8sQ0FBQyxPQUFPLHdEQUNYLGdHQUFnRyxDQUNuRyxDQUFDO1lBRUYsYUFBYTtZQUNiLEtBQUssSUFBSSxDQUFDLElBQUksRUFBRSxTQUFTLENBQUMsSUFBSSxNQUFNLENBQUMsT0FBTyxDQUFDLE1BQU0sQ0FBQyxJQUFJLENBQUMsSUFBSSxDQUFDLEVBQUU7Z0JBQzVELGFBQWE7Z0JBQ2IsSUFBSSxDQUFDLFlBQUksQ0FBQyxVQUFVLENBQUMsU0FBUyxDQUFDLE1BQU0sQ0FBQyxJQUFJLENBQUMsRUFBRTtvQkFDekMsT0FBTyxDQUFDLElBQUksQ0FDUiwwREFBMEQsU0FBUyxDQUFDLE1BQU0sQ0FBQyxJQUFJLHlDQUF5QyxDQUMzSCxDQUFDO2lCQUNMO3FCQUFNO29CQUNILGFBQWE7b0JBQ2IsTUFBTSxJQUFJLEdBQUcsSUFBQSxlQUFVLEVBQUMsU0FBUyxDQUFDLE1BQU0sQ0FBQyxJQUFJLENBQUMsQ0FBQztvQkFDL0MsS0FBSyxDQUFDLElBQUksQ0FBQzt3QkFDUCxHQUFHLEVBQUUsSUFBSTt3QkFDVCxPQUFPO3dCQUNQLFNBQVMsRUFBRSxJQUFJO3FCQUNsQixDQUFDLENBQUM7aUJBQ047YUFDSjtZQUVELGFBQWE7WUFDYixLQUFLLElBQUksQ0FBQyxXQUFXLEVBQUUsVUFBVSxDQUFDLElBQUksTUFBTSxDQUFDLE9BQU8sQ0FDaEQsTUFBTSxDQUFDLElBQUksQ0FBQyxRQUFRLENBQ3ZCLEVBQUU7Z0JBQ0MsS0FBSyxJQUFJLENBQUMsSUFBSSxFQUFFLFNBQVMsQ0FBQyxJQUFJLE1BQU0sQ0FBQyxPQUFPO2dCQUN4QyxhQUFhO2dCQUNiLFVBQVUsQ0FBQyxJQUFJLENBQ2xCLEVBQUU7b0JBQ0MsYUFBYTtvQkFDYixJQUFJLENBQUMsWUFBSSxDQUFDLFVBQVUsQ0FBQyxTQUFTLENBQUMsTUFBTSxDQUFDLElBQUksQ0FBQyxFQUFFO3dCQUN6QyxPQUFPLENBQUMsSUFBSSxDQUNSLDBEQUEwRCxTQUFTLENBQUMsTUFBTSxDQUFDLElBQUkseUNBQXlDLENBQzNILENBQUM7cUJBQ0w7eUJBQU07d0JBQ0gsYUFBYTt3QkFDYixNQUFNLElBQUksR0FBRyxJQUFBLGVBQVUsRUFBQyxTQUFTLENBQUMsTUFBTSxDQUFDLElBQUksQ0FBQyxDQUFDO3dCQUMvQyxLQUFLLENBQUMsSUFBSSxDQUFDOzRCQUNQLEdBQUcsRUFBRSxJQUFJOzRCQUNULE9BQU87NEJBQ1AsU0FBUyxFQUFFLElBQUk7eUJBQ2xCLENBQUMsQ0FBQztxQkFDTjtpQkFDSjthQUNKO1lBRUQsSUFBSSxDQUFDLElBQUksQ0FDTCxvQ0FBb0MsS0FBSyxDQUFDLE1BQU0sZ0ZBQWdGLENBQ25JLENBQUM7WUFFRixPQUFPLENBQUM7Z0JBQ0osS0FBSztnQkFDTCxJQUFJO2FBQ1AsQ0FBQyxDQUFDO1FBQ1AsQ0FBQyxDQUFBLENBQUMsQ0FBQztJQUNQLENBQUM7O0FBakhMLDhDQWtIQztBQWpIRzs7Ozs7Ozs7O0dBU0c7QUFDSSxzQ0FBVSxHQUFHLHFCQUFxQixDQUFDIn0=

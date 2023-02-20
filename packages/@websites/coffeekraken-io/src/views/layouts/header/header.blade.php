@@ -13,7 +13,7 @@
             </div>
             <div class="_logo">
                 <a href="/" title="Coffeekraken.io" class="s-text:center">
-                    @include ('generic.logo')
+                    @include ('sugar.logos.coffeekraken.coffeekraken')
                 </a>
             </div>
             <div class="_version">

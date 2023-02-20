@@ -3,7 +3,9 @@ export default function _404Handler({ req, res, pageConfig }) {
         // rendering view using data
         const _404Res = await res.viewRenderer.render('pages.error.404', {});
 
-        res.status(200);
+        console.log('404', req.url);
+
+        res.status(404);
         res.type('text/html');
         res.send(_404Res.value);
         resolve(_404Res.value);

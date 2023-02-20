@@ -1,9 +1,7 @@
-import type { ISLogAsj } from '@coffeekraken/s-log';
 import __SLog from '@coffeekraken/s-log';
 import type { ISStdioSource, ISStdioSourceSettings } from '../SStdioSource';
 import __SStdioSource from '../SStdioSource';
 
-import { __wait } from '@coffeekraken/sugar/datetime';
 export interface ISStdioConsoleSource extends ISStdioSource {}
 
 export interface ISStdioConsoleSourceSettings extends ISStdioSourceSettings {}
@@ -12,6 +10,14 @@ const _nativeConsole = {};
 for (let key of ['log', 'error', 'warn', 'success', 'verbose', 'notify']) {
     _nativeConsole[key] = console[key];
 }
+
+// process.on('unhandledRejection', (error) => {
+//     throw error;
+// });
+
+// process.on('uncaughtException', (error) => {
+//     _nativeConsole.log(error);
+// });
 
 export default class SStdioConsoleSource
     extends __SStdioSource
@@ -68,8 +74,14 @@ export default class SStdioConsoleSource
             'verbose',
             'notify',
         ]) {
-            // _nativeConsole[key] = console[key] ?? _nativeConsole.log;
+            _nativeConsole[key] = console[key] ?? _nativeConsole.log;
             console[key] = (...args) => {
+                args.forEach((log) => {
+                    if (log.toString().match(/[a-zA-Z0-9]Error\:/)) {
+                        _nativeConsole.error(log);
+                    }
+                });
+
                 const e = new Error();
                 const stack = e.stack
                     .toString()
@@ -92,7 +104,7 @@ export default class SStdioConsoleSource
                 }
 
                 args = args.map((log) => {
-                    if (!log) return;
+                    // if (!log) return;
                     return new __SLog({
                         type: log.type ?? __SLog.TYPE_LOG,
                         value: log.value ?? log,
@@ -106,6 +118,7 @@ export default class SStdioConsoleSource
                 });
 
                 args.forEach((log) => {
+                    // global._console.log(log);
                     this.log(log);
                 });
             };

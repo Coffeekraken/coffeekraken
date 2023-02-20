@@ -62,10 +62,6 @@
         "defaultMedia": "desktop",
         "defaultQuery": "screen",
         "queries": {
-            "dwarf": {
-                "minHeight": 0,
-                "maxHeight": 950
-            },
             "wide": {
                 "minWidth": 2048,
                 "maxWidth": null
@@ -178,19 +174,19 @@
                 "speedIndex": 0
             },
             "1": {
-                "name": "low",
+                "name": "bare+",
                 "speedIndex": 30
             },
             "2": {
-                "name": "medium",
+                "name": "low",
                 "speedIndex": 40
             },
             "3": {
-                "name": "high",
+                "name": "medium",
                 "speedIndex": 50
             },
             "4": {
-                "name": "extrem",
+                "name": "high",
                 "speedIndex": 60
             }
         },
@@ -198,7 +194,7 @@
         "defaultAction": ">="
     },
     "partytown": {
-        "enabled": true,
+        "enabled": false,
         "forward": [
             "dataLayer.push",
             "fbq",
@@ -217,14 +213,14 @@
     "font": {
         "family": {
             "default": {
-                "fontFamily": "\"Titillium Web\"",
+                "fontFamily": "\"Roboto\"",
                 "fontWeight": 400,
-                "import": "https://fonts.googleapis.com/css2?family=Titillium+Web:wght@400&display=swap"
+                "import": "https://fonts.googleapis.com/css2?family=Roboto&display=swap"
             },
             "title": {
-                "fontFamily": "\"Titillium Web\"",
-                "fontWeight": 600,
-                "import": "https://fonts.googleapis.com/css2?family=Titillium+Web:wght@600&display=swap"
+                "fontFamily": "\"Roboto\"",
+                "fontWeight": 500,
+                "import": "https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap"
             },
             "quote": {
                 "fontFamily": "\"Palatino, Times, Georgia, serif\"",
@@ -245,7 +241,9 @@
             "0": 0,
             "5": "0.5",
             "10": 0.65,
+            "15": 0.7,
             "20": 0.75,
+            "25": 0.95,
             "30": 1.1,
             "40": 1.25,
             "50": 1.5,
@@ -254,7 +252,7 @@
             "80": 3,
             "90": 4,
             "100": 5,
-            "default": "16px"
+            "default": "15px"
         }
     },
     "typo": {
@@ -265,8 +263,8 @@
             "editor": {},
             "style": {
                 "display": "block",
-                "fontFamily": "\"Titillium Web\"",
-                "fontSize": "64px",
+                "fontFamily": "\"Roboto\"",
+                "fontSize": "45px",
                 "lineHeight": 1.3,
                 "maxWidth": "55ch",
                 "marginBottom": "3.25rem"
@@ -279,8 +277,8 @@
             "editor": {},
             "style": {
                 "display": "block",
-                "fontFamily": "\"Titillium Web\"",
-                "fontSize": "48px",
+                "fontFamily": "\"Roboto\"",
+                "fontSize": "37.5px",
                 "lineHeight": 1.3,
                 "maxWidth": "55ch",
                 "marginBottom": "3.25rem"
@@ -293,8 +291,8 @@
             "editor": {},
             "style": {
                 "display": "block",
-                "fontFamily": "\"Titillium Web\"",
-                "fontSize": "40px",
+                "fontFamily": "\"Roboto\"",
+                "fontSize": "30px",
                 "lineHeight": 1.3,
                 "maxWidth": "55ch",
                 "marginBottom": "3.25rem"
@@ -307,8 +305,8 @@
             "editor": {},
             "style": {
                 "display": "block",
-                "fontFamily": "\"Titillium Web\"",
-                "fontSize": "32px",
+                "fontFamily": "\"Roboto\"",
+                "fontSize": "22.5px",
                 "lineHeight": 1.3,
                 "maxWidth": "55ch",
                 "marginBottom": "3.25rem"
@@ -321,8 +319,8 @@
             "editor": {},
             "style": {
                 "display": "block",
-                "fontFamily": "\"Titillium Web\"",
-                "fontSize": "24px",
+                "fontFamily": "\"Roboto\"",
+                "fontSize": "18.75px",
                 "lineHeight": 1.3,
                 "maxWidth": "55ch",
                 "marginBottom": "2.25rem"
@@ -335,8 +333,8 @@
             "editor": {},
             "style": {
                 "display": "block",
-                "fontFamily": "\"Titillium Web\"",
-                "fontSize": "20px",
+                "fontFamily": "\"Roboto\"",
+                "fontSize": "16.5px",
                 "lineHeight": 1.3,
                 "maxWidth": "55ch"
             }
@@ -348,11 +346,11 @@
             "editor": {},
             "style": {
                 "display": "block",
-                "fontFamily": "\"Titillium Web\"",
-                "fontSize": "17.6px",
+                "fontFamily": "\"Roboto\"",
+                "fontSize": "16.5px",
                 "lineHeight": 1.8,
                 "maxWidth": "55ch",
-                "marginBottom": "3.25rem"
+                "marginBottom": "2.25rem"
             },
             "default": true
         },
@@ -363,11 +361,11 @@
             "editor": {},
             "style": {
                 "display": "block",
-                "fontFamily": "\"Titillium Web\"",
-                "fontSize": "24px",
+                "fontFamily": "\"Roboto\"",
+                "fontSize": "18.75px",
                 "lineHeight": 1.6,
                 "maxWidth": "55ch",
-                "marginBottom": "3.25rem"
+                "marginBottom": "2.25rem"
             }
         },
         "hr": {
@@ -379,7 +377,7 @@
             "editor": {},
             "style": {
                 "display": "block",
-                "color": "hsla(212,14,50,1)",
+                "color": "hsla(212,8,50,1)",
                 "opacity": 0.2,
                 "marginBottom": "3.25rem"
             }
@@ -392,8 +390,8 @@
             "style": {
                 "display": "block",
                 "fontFamily": "Menlo, Monaco, Consolas, Courier New, monospace",
-                "color": "#f3f5f6",
-                "backgroundColor": "#373f48",
+                "color": "#f4f5f6",
+                "backgroundColor": "#3b4045",
                 "lineHeight": 1.5,
                 "paddingInline": "1.5rem",
                 "paddingBlock": "0.75rem",
@@ -412,7 +410,7 @@
             "style": {
                 "display": "inline-block",
                 "fontFamily": "Menlo, Monaco, Consolas, Courier New, monospace",
-                "color": "#f3f5f6",
+                "color": "#f4f5f6",
                 "lineHeight": 1.1,
                 "backgroundColor": "#805e00",
                 "borderRadius": "4px",
@@ -652,7 +650,7 @@
             "button": {},
             "editor": {},
             "style": {
-                "color": "hsla(212,14,50,1)"
+                "color": "hsla(212,8,50,1)"
             }
         },
         "baseGradient": {
@@ -667,7 +665,7 @@
                 "-mozBackgroundClip": "text",
                 "-webkitTextFillColor": "transparent",
                 "-mozTextFillColor": "transparent",
-                "backgroundImage": "linear-gradient(90deg, hsla(212,14,50,1) 0%, #a9b2bc 100%)"
+                "backgroundImage": "linear-gradient(90deg, hsla(212,8,50,1) 0%, #838c95 100%)"
             }
         },
         "main": {
@@ -677,7 +675,7 @@
             "button": {},
             "editor": {},
             "style": {
-                "color": "hsla(212,14,50,1)"
+                "color": "hsla(212,8,50,1)"
             }
         },
         "mainGradient": {
@@ -692,7 +690,7 @@
                 "-mozBackgroundClip": "text",
                 "-webkitTextFillColor": "transparent",
                 "-mozTextFillColor": "transparent",
-                "backgroundImage": "linear-gradient(90deg, hsla(212,14,50,1) 0%, #a9b2bc 100%)"
+                "backgroundImage": "linear-gradient(90deg, hsla(212,8,50,1) 0%, #838c95 100%)"
             }
         },
         "accent": {
@@ -717,7 +715,7 @@
                 "-mozBackgroundClip": "text",
                 "-webkitTextFillColor": "transparent",
                 "-mozTextFillColor": "transparent",
-                "backgroundImage": "linear-gradient(90deg, #ffbb00 0%, #ffd666 100%)"
+                "backgroundImage": "linear-gradient(90deg, #ffbb00 0%, #ffc21a 100%)"
             }
         },
         "complementary": {
@@ -742,7 +740,7 @@
                 "-mozBackgroundClip": "text",
                 "-webkitTextFillColor": "transparent",
                 "-mozTextFillColor": "transparent",
-                "backgroundImage": "linear-gradient(90deg, #5100ff 0%, #9666ff 100%)"
+                "backgroundImage": "linear-gradient(90deg, #5100ff 0%, #621aff 100%)"
             }
         },
         "success": {
@@ -767,7 +765,7 @@
                 "-mozBackgroundClip": "text",
                 "-webkitTextFillColor": "transparent",
                 "-mozTextFillColor": "transparent",
-                "backgroundImage": "linear-gradient(90deg, #91ff00 0%, #bdff66 100%)"
+                "backgroundImage": "linear-gradient(90deg, #91ff00 0%, #9cff1a 100%)"
             }
         },
         "warning": {
@@ -792,7 +790,7 @@
                 "-mozBackgroundClip": "text",
                 "-webkitTextFillColor": "transparent",
                 "-mozTextFillColor": "transparent",
-                "backgroundImage": "linear-gradient(90deg, #ffd500 0%, #ffe666 100%)"
+                "backgroundImage": "linear-gradient(90deg, #ffd500 0%, #ffd91a 100%)"
             }
         },
         "error": {
@@ -817,7 +815,7 @@
                 "-mozBackgroundClip": "text",
                 "-webkitTextFillColor": "transparent",
                 "-mozTextFillColor": "transparent",
-                "backgroundImage": "linear-gradient(90deg, #ff003b 0%, #ff668a 100%)"
+                "backgroundImage": "linear-gradient(90deg, #ff003b 0%, #ff1a4f 100%)"
             }
         },
         "info": {
@@ -842,7 +840,7 @@
                 "-mozBackgroundClip": "text",
                 "-webkitTextFillColor": "transparent",
                 "-mozTextFillColor": "transparent",
-                "backgroundImage": "linear-gradient(90deg, #00ffff 0%, #66ffff 100%)"
+                "backgroundImage": "linear-gradient(90deg, #00ffff 0%, #1affff 100%)"
             }
         }
     },

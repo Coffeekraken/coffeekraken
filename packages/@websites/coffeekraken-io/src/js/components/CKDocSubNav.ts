@@ -1,12 +1,26 @@
 // @ts-nocheck
 
+import __SInterface from '@coffeekraken/s-interface';
 import __SLitComponent from '@coffeekraken/s-lit-component';
 import { html } from 'lit';
-import { property } from 'lit/decorators.js';
+
+class SCKSubNavPropsInterface extends __SInterface {
+    static get _definition() {
+        return {
+            source: {
+                type: 'String',
+            },
+        };
+    }
+}
 
 export default class CKDocSubNav extends __SLitComponent {
-    @property({ type: String })
-    source;
+    static get properties() {
+        return __SLitComponent.propertiesFromInterface(
+            {},
+            SCKSubNavPropsInterface,
+        );
+    }
 
     constructor() {
         super({
@@ -40,13 +54,13 @@ export default class CKDocSubNav extends __SLitComponent {
 
         this._$items = Array.from(
             $source.querySelectorAll(
-                'section.docblock.first [id]:not(code [id]):not(template [id]):not(.preview-html [id]), h4#doc-api',
+                '[id]:not(code [id]):not(template [id]):not(.preview-html [id]), h4#doc-api',
             ),
-        ).filter(($item) => {
+        )?.filter?.(($item) => {
             if (!$item.id) return false;
-            if ($item.innerText.match(/@/)) return false;
+            if ($item.innerText?.match(/@/)) return false;
             switch ($item.tagName.toLowerCase()) {
-                // case 'h1':
+                case 'h1':
                 case 'h2':
                 case 'h3':
                 case 'h4':
@@ -74,13 +88,15 @@ export default class CKDocSubNav extends __SLitComponent {
                 <div class="_list">
                     ${this._$items.map(
                         ($item, i) => html`
-                            <s-scroll class="_list-item" to="#${$item.id}">
+                            <s-scroll class="_list-item" to="#${
+                                $item.id
+                            }" s-activate trigger="scrollspy:#${$item.id}">
                                     <span class="s-tc:accent class="_index"
                                         >${(i + 1)
                                             .toString()
                                             .padStart(2, 0)}</span
                                     >.
-                                    <span class="s-typo:bold __title"
+                                    <span class="__title s-mis:20"
                                         >${$item.innerText.trim()}</span
                                     >
                             </s-scroll>

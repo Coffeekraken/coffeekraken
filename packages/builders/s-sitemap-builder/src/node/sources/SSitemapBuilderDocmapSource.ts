@@ -1,13 +1,13 @@
 import __SDocmap from '@coffeekraken/s-docmap';
-import __SLog from '@coffeekraken/s-log';
-import __SPromise from '@coffeekraken/s-promise';
 import { __fileHash } from '@coffeekraken/sugar/fs';
 import { __pad } from '@coffeekraken/sugar/number';
 import { __deepMerge } from '@coffeekraken/sugar/object';
 import __fs from 'fs';
 import type { ISSitemapBuilderBuildParams } from '../interface/SSitemapBuildIParamsInterface';
 import type { ISSitemapBuilderResultItem } from '../SSitemapBuilder';
-import __SSitemapBuilderSource from '../SSitemapBuilderSource';
+import __SSitemapBuilderSource, {
+    ISSitemapBuilderSourceResult,
+} from '../SSitemapBuilderSource';
 
 /**
  * @name            SSitemapBuilderDocmapSource
@@ -67,36 +67,56 @@ export default class SSitemapBuilderDocmapSource extends __SSitemapBuilderSource
      */
     build(
         params: Partial<ISSitemapBuilderBuildParams> = {},
-    ): Promise<ISSitemapBuilderResultItem[]> {
-        return new __SPromise(
-            async ({ resolve, reject, emit, pipe }) => {
-                const docmapInstance = new __SDocmap();
-                const docmap = await docmapInstance.read();
+    ): Promise<ISSitemapBuilderSourceResult> {
+        return new Promise(async (resolve, reject) => {
+            const docmapInstance = new __SDocmap();
+            const docmap = await docmapInstance.read();
 
-                const items: ISSitemapBuilderResultItem[] = [];
+            const items: ISSitemapBuilderResultItem[] = [];
 
-                const date = new Date();
-                const lastmod = `${date.getFullYear()}-${__pad(
-                    date.getMonth(),
-                    2,
-                )}-${__pad(date.getDate(), 2)}`;
+            const logs: string[] = [];
 
-                emit('log', {
-                    type: __SLog.TYPE_INFO,
-                    value: `<yellow>[docmap]</yellow> Start generating sitemap from the project "<cyan>docmap.json</cyan>"`,
-                });
+            const date = new Date();
+            const lastmod = `${date.getFullYear()}-${__pad(
+                date.getMonth(),
+                2,
+            )}-${__pad(date.getDate(), 2)}`;
 
+            console.verbose?.(
+                `<yellow>[docmap]</yellow> Start generating sitemap from the project "<cyan>docmap.json</cyan>"`,
+            );
+
+            // @ts-ignore
+            for (let [slug, docmapObj] of Object.entries(docmap.menu.slug)) {
                 // @ts-ignore
+                if (!__fs.existsSync(docmapObj.docmap.path)) {
+                    console.warn(
+                        `<yellow>[build]</yellow> Docmap referenced file "<cyan>${docmapObj.docmap.path}</cyan>" does not exist. Skipping it...`,
+                    );
+                } else {
+                    // @ts-ignore
+                    const hash = __fileHash(docmapObj.docmap.path);
+                    items.push({
+                        loc: slug,
+                        lastmod,
+                        integrity: hash,
+                    });
+                }
+            }
+
+            // @ts-ignore
+            for (let [packageName, packageObj] of Object.entries(
+                docmap.menu.packages,
+            )) {
                 for (let [slug, docmapObj] of Object.entries(
-                    docmap.menu.slug,
+                    // @ts-ignore
+                    packageObj.slug,
                 )) {
                     // @ts-ignore
                     if (!__fs.existsSync(docmapObj.docmap.path)) {
-                        emit('log', {
-                            type: __SLog.TYPE_WARNING,
-                            // @ts-ignore
-                            value: `<yellow>[build]</yellow> Docmap referenced file "<cyan>${docmapObj.docmap.path}</cyan>" does not exist. Skipping it...`,
-                        });
+                        console.warn(
+                            `<yellow>[build]</yellow> Docmap referenced file "<cyan>${docmapObj.docmap.path}</cyan>" does not exist. Skipping it...`,
+                        );
                     } else {
                         // @ts-ignore
                         const hash = __fileHash(docmapObj.docmap.path);
@@ -107,46 +127,16 @@ export default class SSitemapBuilderDocmapSource extends __SSitemapBuilderSource
                         });
                     }
                 }
+            }
 
-                // @ts-ignore
-                for (let [packageName, packageObj] of Object.entries(
-                    docmap.menu.packages,
-                )) {
-                    for (let [slug, docmapObj] of Object.entries(
-                        // @ts-ignore
-                        packageObj.slug,
-                    )) {
-                        // @ts-ignore
-                        if (!__fs.existsSync(docmapObj.docmap.path)) {
-                            emit('log', {
-                                type: __SLog.TYPE_WARNING,
-                                // @ts-ignore
-                                value: `<yellow>[build]</yellow> Docmap referenced file "<cyan>${docmapObj.docmap.path}</cyan>" does not exist. Skipping it...`,
-                            });
-                        } else {
-                            // @ts-ignore
-                            const hash = __fileHash(docmapObj.docmap.path);
-                            items.push({
-                                loc: slug,
-                                lastmod,
-                                integrity: hash,
-                            });
-                        }
-                    }
-                }
+            logs.push(
+                `<green>[docmap]</green> <magenta>${items.length}</magenta> sitemap entrie(s) gathered from the "<cyan>docmap.json</cyan>" file`,
+            );
 
-                emit('log', {
-                    type: __SLog.TYPE_INFO,
-                    value: `<green>[docmap]</green> <magenta>${items.length}</magenta> sitemap entrie(s) gathered from the "<cyan>docmap.json</cyan>" file`,
-                });
-
-                resolve(items);
-            },
-            {
-                eventEmitter: {
-                    bind: this,
-                },
-            },
-        );
+            resolve({
+                items,
+                logs,
+            });
+        });
     }
 }

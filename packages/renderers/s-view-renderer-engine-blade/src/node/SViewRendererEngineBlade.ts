@@ -49,8 +49,8 @@ export default class SViewRendererEngineBlade {
 
             bench.step(`beforeRender`);
 
-            if (!__fs.existsSync(viewRendererSettings.cacheDir)) {
-                __fs.mkdirSync(viewRendererSettings.cacheDir, {
+            if (!__fs.existsSync(`${viewRendererSettings.cacheDir}/blade`)) {
+                __fs.mkdirSync(`${viewRendererSettings.cacheDir}/blade`, {
                     recursive: true,
                 });
             }

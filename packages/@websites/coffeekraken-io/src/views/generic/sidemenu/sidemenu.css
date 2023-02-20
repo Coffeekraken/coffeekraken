@@ -21,10 +21,6 @@
     /* padding: sugar.padding(30); */
   }
 
-  .sidemenu-sub {
-    display: none;
-  }
-
   [actual] {
     font-weight: bold;
     color: sugar.color(accent);

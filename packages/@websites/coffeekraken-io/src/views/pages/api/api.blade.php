@@ -18,15 +18,13 @@ if (isset($firstBlock->status)) {
 
 <div id="api">
 
+    <ck-doc-sub-nav source="._content"></ck-doc-sub-nav>
+
     <section class="s-container markdown">
 
         <div class="s-layout:12222 s-gap:column:50 @mobile s-layout:1_2 s-mi:30">
 
             <nav s-scope class="sidemenu @mobile s-display:none" s-refocus>
-
-                <div class="sidemenu-sub">
-                    <ck-doc-sub-nav source="._content"></ck-doc-sub-nav>
-                </div>
 
                 <div class="sidemenu-main">
 

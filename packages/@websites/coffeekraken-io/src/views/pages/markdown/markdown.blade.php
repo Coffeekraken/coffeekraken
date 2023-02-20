@@ -1,20 +1,14 @@
 <div id="markdown">
 
+    <ck-doc-sub-nav source="._content"></ck-doc-sub-nav>
+
     <section class="s-container markdown">
 
         <div class="s-layout:12222 s-gap:column:50 @mobile s-layout:1_2 s-mi:30 s-gap:0">
 
             <nav s-scope class="sidemenu @mobile s-display:none" s-refocus>
 
-                <div class="sidemenu-sub">
-                    <ck-doc-sub-nav source="._content"></ck-doc-sub-nav>
-                </div>
-
                 <div class="sidemenu-main">
-
-                    {{-- <h5 class="s-typo:h5 s-mbe:20">
-                        Coffeekraken
-                    </h5> --}}
 
                     @php $menu = get_object_vars($docmap->menu->tree->documentation); @endphp
                     @include('pages.markdown.menu', ['menu' => $menu, 'id' => 'main'])

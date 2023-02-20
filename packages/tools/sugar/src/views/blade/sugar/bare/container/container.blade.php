@@ -1,3 +1,3 @@
-<section class="s-container:{{ $type }} {{ $attributes->class }}" @foreach ($attributes as $prop => $value) @if ($prop != 'class') {{ $prop }}="{{ $value }}" @endif @endforeach>>
-    {!! $content !!}
-</section>
+<div class="s-container:{{ $type }} {{ $attributes->class }} {{ \Sugar\css\paddingClasses($padding) }} {{ \Sugar\css\marginClasses($margin) }}" {!! \Sugar\html\attrs($attributes, ['class']) !!}>
+    {!! $html !!}
+</div>

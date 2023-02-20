@@ -233,28 +233,6 @@ export default class SStdio extends __SClass {
             ),
         );
 
-        // // proxy console.log to filter empty logs
-        // const _nativeLog = console.log;
-        // console.log = (...args) => {
-        //     args = args
-        //         .filter((log) => {
-        //             if (!log) {
-        //                 return false;
-        //             }
-        //             if (typeof log === 'string' && log.trim?.() === '') {
-        //                 return false;
-        //             }
-        //             return true;
-        //         })
-        //         .map((log) => {
-        //             if (typeof log === 'string') {
-        //                 return log.trim().replace(/\\n$/, '');
-        //             }
-        //             return log;
-        //         });
-        //     _nativeLog(...args);
-        // };
-
         // save id
         this._id = id;
 
@@ -271,6 +249,7 @@ export default class SStdio extends __SClass {
                 `<red>${this.constructor.name}</red> Sorry but a instance of the SStdio class already exists with the id "<yellow>${this.id}</yellow>"`,
             );
         }
+
         // @ts-ignore)
         this.constructor._instanciatedStdio[this.id] = this;
 

@@ -22,6 +22,7 @@ export default function docmapApiData({ req, res, pageConfig }) {
         const docObj = docmapJson.map[req.params.namespace];
 
         if (!docObj) {
+            console.log('NOT');
             return reject(
                 `The api documentation "${req.path}" you requested does not exists...`,
             );
@@ -67,10 +68,14 @@ export default function docmapApiData({ req, res, pageConfig }) {
                     console.log(
                         `<yellow>[og]</yellow> Scraping opengraph from url "<cyan>${docblocks[0].see[i].url}</cyan>"`,
                     );
-                    docblocks[0].see[i].og = await __scrapeUrl(
-                        docblocks[0].see[i].url,
-                    );
+                    const ogResult = await __scrapeUrl(docblocks[0].see[i].url);
+                    if (!ogResult) {
+                        docblocks[0].see[i] = null;
+                    }
                 }
+                docblocks[0].see = docblocks[0].see?.filter?.(
+                    (l) => l !== null,
+                );
             }
         }
 

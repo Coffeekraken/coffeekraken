@@ -15,6 +15,7 @@
                 "build": {
                     "scope": "package",
                     "description": "Build your static website version",
+                    "interface": "./dist/pkg/esm/node/interface/SStaticBuilderBuildParamsInterface.js",
                     "process": "./dist/pkg/esm/cli/build.cli.js"
                 }
             }

@@ -1,9 +1,5 @@
-import __SDocmap from '@coffeekraken/s-docmap';
-import { ISSitemapBuilderResultItem } from '@coffeekraken/s-sitemap-builder';
 import __SPromise from '@coffeekraken/s-promise';
-import __SLog from '@coffeekraken/s-log';
-import { __fileHash } from '@coffeekraken/sugar/fs';
-import __fs from 'fs';
+import { ISSitemapBuilderResultItem } from '@coffeekraken/s-sitemap-builder';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
 import __path from 'path';
 

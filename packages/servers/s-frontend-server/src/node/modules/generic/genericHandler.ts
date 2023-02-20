@@ -30,6 +30,7 @@ import __fs from 'fs';
 export default function genericHandler({
     req,
     res,
+    next,
     pageConfig,
     pageFile,
     frontendServerConfig,
@@ -43,18 +44,16 @@ export default function genericHandler({
             );
         }
 
+        // avoid files
+        if (req.url.match(/\/[a-zA-Z0-9-_]+\.[a-z0-9]{1,4}$/)) {
+            return next();
+        }
+
         const errors = {
             pageConfig,
             views: [],
             layout: undefined,
         };
-
-        // // if we refer to a file with an extension, stop here...
-        // if (req.url.match(/.*\.[a-z]{1,4}$/)) {
-        //     res.status(404);
-        //     res.send(null);
-        //     return resolve();
-        // }
 
         const theme = new __STheme();
 
@@ -166,6 +165,7 @@ export default function genericHandler({
             // rendering view using data
             const viewResPro = res.viewRenderer.render(viewPath, data);
             let viewRes = await viewResPro;
+
             if (viewRes.error) {
                 errors.views.push({
                     viewPath,

@@ -753,19 +753,17 @@ export default class SSugarCli {
         return promise;
     }
 
-    static async _displayHelp() {
+    static async _displayHelp(stack?, action?) {
         // init stdop
         this._initStdio(true);
 
-        await __wait(500);
+        await __wait(1000);
 
         this._newStep();
 
-        if (this.args.stack && this.args.action) {
+        if (stack && action) {
             const commandObj =
-                this._availableCli.endpoints[
-                    `${this.args.stack}.${this.args.action}`
-                ];
+                this._availableCli.endpoints[`${stack}.${action}`];
 
             console.log(``);
             console.log(
@@ -792,8 +790,6 @@ export default class SSugarCli {
 
             console.log(``);
 
-            // console.log('com', commandObj);
-
             if (commandObj.interfacePath) {
                 const { default: int } = await import(commandObj.interfacePath);
                 Object.entries(int.definition).forEach(([arg, argObj]) => {
@@ -803,7 +799,7 @@ export default class SSugarCli {
                                 ? `(<magenta>-${argObj.alias}</magenta>)`
                                 : ''
                         } {<yellow>${
-                            argObj.type.type ?? argObj.type
+                            argObj.type?.type ?? argObj.type
                         }</yellow>}`,
                     );
                     console.log(`   ${argObj.description}`);

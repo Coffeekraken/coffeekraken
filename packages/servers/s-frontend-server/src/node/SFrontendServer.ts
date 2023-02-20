@@ -368,7 +368,9 @@ export default class SFrontendServer extends __SClass {
 
                         // 404
                         this._express.get('*', function (req, res) {
-                            res.status(404).send('what???');
+                            res.status(404).send(
+                                `╰◝◟≖◞౪◟≖◞◜╯ Lost in the darkness your "${req.url}" certainly is...`,
+                            );
                         });
 
                         // server started successfully
@@ -511,7 +513,7 @@ export default class SFrontendServer extends __SClass {
     /**
      * This method scrap the "pages" folder and register all the routes found inside.
      */
-    _registerPagesRoutes() {
+    _registerPagesRoutes(): Promise<void> {
         return new Promise(async (resolve) => {
             const pagesFolder = __SSugarConfig.get('storage.src.pagesDir');
 

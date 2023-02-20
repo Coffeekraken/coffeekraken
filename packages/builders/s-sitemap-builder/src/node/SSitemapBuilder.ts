@@ -65,6 +65,11 @@ export interface ISSitemapBuilderSourceSettings {
     path: string;
 }
 
+export interface ISSitemapBuilderSourceBuildResult {
+    logs: string[];
+    items: ISSitemapBuilderResultItem[];
+}
+
 export interface ISSitemapBuilderSettings extends ISBuilderSettings {
     sources: ISSitemapBuilderSourcesSettings;
 }
@@ -166,7 +171,11 @@ export default class SSitemapBuilder extends __SBuilder {
                 // build
                 const buildResultPromise = buildFn(finalParams);
                 const buildResult = await buildResultPromise;
-                sitemap = [...sitemap, ...(buildResult ?? [])];
+
+                const buildResultItems = buildResult.items ?? buildResult,
+                    buildResultLogs = buildResult.logs ?? [];
+
+                sitemap = [...sitemap, ...(buildResultItems ?? [])];
                 console.log(
                     `<yellow>[build]</yellow> "<magenta>${sourceId}</magenta>" sitemap builded with <magenta>${
                         buildResult.length
@@ -174,6 +183,10 @@ export default class SSitemapBuilder extends __SBuilder {
                         sourceDuration.end().formatedDuration
                     }</yellow>`,
                 );
+                buildResultLogs.forEach((log) => {
+                    console.log(`- ${log}`);
+                });
+                console.log(' ');
             }
 
             if (finalParams.save) {

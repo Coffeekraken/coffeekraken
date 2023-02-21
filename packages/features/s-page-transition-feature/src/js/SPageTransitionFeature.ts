@@ -51,6 +51,9 @@ export interface ISPageTransitionFeatureProps {
  *
  * This feature allows you to add page transition to your size by using ajax requests and configurable
  * transition effects.
+ * When inited, it will proxy all the internal links (not the _blank or links starting with http...) and make the ajax
+ * transition between pages.
+ * It also listen on the `document` for the `location.href` event and transition to the specified `detail` property of the event.
  *
  * @event           s-page-transition.start             Dispatched when a transition starts
  * @event           s-page-transition.end               Dispatch when a transition ends
@@ -211,13 +214,7 @@ export default class SPageTransitionFeature extends __SFeature {
             });
 
             // add classes
-            this.utils.fastdom.mutate(() => {
-                document.body.classList.add('loading');
-                document.body.setAttribute('loading', 'true');
-                $source.classList.add('s-page-transition-source');
-                $source.classList.add('loading');
-                $source.setAttribute('loading', true);
-            });
+            this._applyLoadingState($source);
 
             // before callback
             // @ts-ignore
@@ -400,6 +397,31 @@ export default class SPageTransitionFeature extends __SFeature {
         });
     }
     /**
+     * This function just apply the loading state
+     */
+    _applyLoadingState($source?: HTMLElement): void {
+        document.body.classList.add('loading');
+        document.body.setAttribute('loading', 'true');
+        if ($source) {
+            $source.classList.add('s-page-transition-source');
+            $source.classList.add('loading');
+            $source.setAttribute('loading', true);
+        }
+    }
+    /**
+     * This function just remove the loading state
+     */
+    _removeLoadingState($source?: HTMLElement): void {
+        // remove class on body
+        document.body.classList.remove('loading');
+        document.body.removeAttribute('loading');
+        if ($source) {
+            $source.classList.remove('s-page-transition-source');
+            $source.classList.remove('loading');
+            $source.removeAttribute('loading');
+        }
+    }
+    /**
      * This function take care of handling the after transition process.
      * The code passed allows to know if the transition was a success (200) or an error (404|500)
      */
@@ -410,12 +432,8 @@ export default class SPageTransitionFeature extends __SFeature {
         newState: Partial<ISPageTransitionFeatureState> = this._currentState ??
             {},
     ) {
-        // remove class on body
-        document.body.classList.remove('loading');
-        document.body.removeAttribute('loading');
-        $source.classList.remove('s-page-transition-source');
-        $source.classList.remove('loading');
-        $source.removeAttribute('loading');
+        // remove the loading state
+        this._removeLoadingState($source);
 
         // before callback
         this.props.after?.({

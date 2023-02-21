@@ -7,7 +7,7 @@
             <div>
 
                 <a href="/" title="Coffeekraken.io">
-                    @include ('sugar.logos.coffeekraken.coffeekraken');
+                    @include ('sugar.logos.coffeekraken.coffeekraken')
                 </a>
 
                 <p class="s-typo:p:small s-mbe:30">

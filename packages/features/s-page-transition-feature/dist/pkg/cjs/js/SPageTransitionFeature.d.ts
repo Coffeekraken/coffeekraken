@@ -41,6 +41,10 @@ export default class SPageTransitionFeature extends __SFeature {
     _isEligibleLink($link: HTMLElement): boolean;
     transitionTo(url: string, $source: any): Promise<void>;
     
+    _applyLoadingState($source?: HTMLElement): void;
+    
+    _removeLoadingState($source?: HTMLElement): void;
+    
     _onAfter($source: HTMLElement, code: number, url?: string, newState?: Partial<ISPageTransitionFeatureState>): void;
 }
 export { __define as define };

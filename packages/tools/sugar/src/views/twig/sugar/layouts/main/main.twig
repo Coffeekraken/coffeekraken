@@ -17,7 +17,7 @@
 {% endif %}
 
 {% if frontspec.metas.og %}
-    {% set ogObj = frontspec.metas.og|toArray|merge(ogObj) %}
+    {% set ogObj = frontspec.metas.og|__toArray|merge(ogObj) %}
 {% endif %}
 
 {% if not metas %}
@@ -26,7 +26,7 @@
 
 {% set metasObj = metas %}
 {% if frontspec.metas %}
-    {% set metasObj = frontspec.metas|toArray|merge(metas) %}
+    {% set metasObj = frontspec.metas|__toArray|merge(metas) %}
 {% endif %}
 
 {% set lang = 'en' %}
@@ -44,26 +44,26 @@
 {% endif %}
 
 <!DOCTYPE html>
-<html lang="{{ lang }}" dir="{{ dir }}" class="{{ lodClasses(frontspec.lod.defaultLevel ? frontspec.lod.defaultLevel : 3) }}">
+<html lang="{{ lang }}" dir="{{ dir }}" class="{{ __lodClasses(frontspec.lod.defaultLevel ? frontspec.lod.defaultLevel : 3) }}">
 <head>
     <!-- metas -->
-    {{ frontspecMetas(frontspec)|raw }}
+    {{ __frontspecMetas(frontspec)|raw }}
     
     <!-- og -->
-    {{ frontspecOg(frontspec|toObject)|raw }}
+    {{ __frontspecOg(frontspec|__toObject)|raw }}
     
     <!-- assets -->
     {% set cacheBuster = '' %}
     {% if shared.server.sessionId %}
         {% set cacheBuster = shared.server.sessionId %}
     {% endif %}
-    {{ frontspecAssets(frontspec, cacheBuster)|raw }}
+    {{ __frontspecAssets(frontspec, cacheBuster)|raw }}
         
     {% block head %}{% endblock %}
 
 </head>
 
-<body class="{{ bodyAttributes.class }} initial-loading loading" s-sugar {{ attrs(bodyAttributes, ['class'])|raw }}>
+<body class="{{ bodyAttributes.class }} initial-loading loading" s-sugar {{ __attrs(bodyAttributes, ['class'])|raw }}>
 
     {% if SUGAR or frontspec %}
     <script id="sugar-override">
@@ -72,7 +72,7 @@
             document.env.SUGAR = {{ SUGAR|json_encode()|raw }};
         {% endif %}
         {% if frontspec %}
-            document.env.FRONTSPEC = {{ deepDiff(readFrontspec(), frontspec)|json_encode()|raw }};
+            document.env.FRONTSPEC = {{ __deepDiff(__readFrontspec(), frontspec)|json_encode()|raw }};
         {% endif %}
     </script>
     {% endif %}

@@ -1,14 +1,14 @@
 {% set finalId = id %}
 {% if not id  %}
-    {% set finalId = 's-layout-' ~ uniqid() %}
+    {% set finalId = 's-layout-' ~ __uniqid() %}
 {% endif %}
 <style>
-{{ layoutCss(layout.media, {
+{{ __layoutCss(layout.media, {
     selector: '#' ~ finalId ~ '-layout',
-    mediaSettings: frontspec.media|toObject
+    mediaSettings: frontspec.media|__toObject
 })|raw }}
 </style>
-<div id="{{ finalId }}" class="{{ attributes.class }} {{ paddingClasses(padding) }} {{ marginClasses(margin) }}" {{ attrs(attributes, ['class'])|raw }}>
+<div id="{{ finalId }}" class="{{ attributes.class }} {{ __paddingClasses(padding) }} {{ __marginClasses(margin) }}" {{ __attrs(attributes, ['class'])|raw }}>
     {% if container %}
         <div class="s-container:{{ container }}">
     {% endif %}

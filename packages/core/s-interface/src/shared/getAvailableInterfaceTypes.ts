@@ -2,17 +2,19 @@ import { __isNode } from '@coffeekraken/sugar/is';
 
 /**
  * @name                getAvailableInterfaceTypes
- * @namespace           s-interface.shared
+ * @namespace           shared
  * @type                Function
+ * @platform            node
  * @status              beta
+ * @private
  *
  * This function simply return an object with all the promoted as types interfaces.
  *
  * @return          {Object<SInterface>}            An object of types mapped to SInterfaces classes
  *
  * @example         js
- * import getAvailableInterfaceTypes from '@coffeekraken/sugar/js/interface/getAvailableInterfaceTypes';
- * getAvailableInterfaceTypes();
+ * import { __getAvailableInterfaceTypes } from '@coffeekraken/s-interface';
+ * __getAvailableInterfaceTypes();
  * // {
  * //    MyCoolType: MyInterface
  * // }

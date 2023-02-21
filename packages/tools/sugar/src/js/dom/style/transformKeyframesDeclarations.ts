@@ -1,9 +1,9 @@
-import __camelCase from '../../../shared/string/camelCase';
-import { __getDefinedStyles } from '@coffeekraken/sugar/dom';
 import {
     __parseKeyframeKey,
     __removeVendorPrefix,
 } from '@coffeekraken/sugar/css';
+import { __getDefinedStyles } from '@coffeekraken/sugar/dom';
+import __camelCase from '../../../shared/string/camelCase';
 
 /**
  * @name      transformKeyframesDeclarations
@@ -26,7 +26,7 @@ import {
  * import __transformKeyframesDeclarations from '@coffeekraken/sugar/js/dom/style/transformKeyframesDeclarations';
  *
  * @see             https://github.com/marionebl/jogwheel/blob/master/source/library/transform-keyframe-declaration.js
- * @since         1.0.0
+ @since           2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 

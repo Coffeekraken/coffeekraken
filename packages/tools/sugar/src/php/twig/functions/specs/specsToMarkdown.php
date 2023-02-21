@@ -4,8 +4,8 @@
  * @name        specsToMarkdown
  * @namespace   php.twig.functions.specs
  * @type        Function
+ * @platform    twig
  * @status      beta
- * @platform    php
  *
  * This function allows display a spec in the markdown with all the available informations available in the passed spec json
  *
@@ -13,12 +13,12 @@
  * @return      {String}                                    The markdown list string
  *
  * @example       twig
- * {{ specsToMarkdown(mySpecs) }}
+ * {{ __specsToMarkdown(mySpecs) }}
  *
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-return new \Twig\TwigFunction('specsToMarkdown', function (
+return new \Twig\TwigFunction('__specsToMarkdown', function (
     $specs,
     $details = []
 ) {

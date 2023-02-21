@@ -21,7 +21,7 @@ import __SViewRendererSettingsInterface from './interface/SViewRendererSettingsI
  * @namespace     node
  * @type          Class
  * @extends       SClass
- * @plarform        node
+ * @platform        node
  * @status              beta
  *
  * This class represent a template that can be rendered using all the supported render engines listed in the features bellow.

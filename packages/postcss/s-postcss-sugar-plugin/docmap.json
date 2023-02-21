@@ -371,6 +371,12 @@
                         "defaultStr": ""
                     }
                 },
+                "platform": [
+                    {
+                        "name": "node",
+                        "description": ""
+                    }
+                ],
                 "description": "This function just take an AST nodes array and returns the string version of it\nwith \";\" when needed, etc...",
                 "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.utils",
                 "status": "beta",
@@ -7782,10 +7788,6 @@
                                         },
                                         {
                                             "type": "string",
-                                            "value": "gradient"
-                                        },
-                                        {
-                                            "type": "string",
                                             "value": "outline"
                                         },
                                         {
@@ -7795,16 +7797,15 @@
                                     ]
                                 }
                             ],
-                            "raw": "('default'|'gradient'|'outline'|'text')[]"
+                            "raw": "('default'|'outline'|'text')[]"
                         },
                         "description": "The style(s) you want to generate",
                         "default": [
                             "default",
-                            "gradient",
                             "outline",
                             "text"
                         ],
-                        "defaultStr": "['default','gradient','outline','text']"
+                        "defaultStr": "['default','outline','text']"
                     },
                     "defaultLnf": {
                         "name": "defaultLnf",
@@ -7816,10 +7817,6 @@
                                 },
                                 {
                                     "type": "string",
-                                    "value": "gradient"
-                                },
-                                {
-                                    "type": "string",
                                     "value": "outline"
                                 },
                                 {
@@ -7827,7 +7824,7 @@
                                     "value": "text"
                                 }
                             ],
-                            "raw": "'default'|'gradient'|'outline'|'text'"
+                            "raw": "'default'|'outline'|'text'"
                         },
                         "description": "The default style you want",
                         "default": "theme.ui.button.defaultLnf",
@@ -7893,14 +7890,12 @@
                                 "raw": "String[]"
                             },
                             "values": [
-                                "default",
-                                "gradient",
+                                "solid",
                                 "outline",
                                 "text"
                             ],
                             "default": [
-                                "default",
-                                "gradient",
+                                "solid",
                                 "outline",
                                 "text"
                             ]
@@ -7915,8 +7910,7 @@
                                 "raw": "String"
                             },
                             "values": [
-                                "default",
-                                "gradient",
+                                "solid",
                                 "outline",
                                 "text"
                             ],
@@ -8770,7 +8764,7 @@
                                 "raw": "String[]"
                             },
                             "default": [
-                                "default",
+                                "solid",
                                 "underline"
                             ]
                         },
@@ -10722,18 +10716,18 @@
                                     "of": [
                                         {
                                             "type": "string",
-                                            "value": "default"
+                                            "value": "solid"
                                         }
                                     ]
                                 }
                             ],
-                            "raw": "('default')[]"
+                            "raw": "('solid')[]"
                         },
                         "description": "The style(s) you want to generate",
                         "default": [
-                            "default"
+                            "solid"
                         ],
-                        "defaultStr": "['default']"
+                        "defaultStr": "['solid']"
                     },
                     "defaultLnf": {
                         "name": "defaultLnf",
@@ -10741,10 +10735,10 @@
                             "types": [
                                 {
                                     "type": "string",
-                                    "value": "default"
+                                    "value": "solid"
                                 }
                             ],
-                            "raw": "'default'"
+                            "raw": "'solid'"
                         },
                         "description": "The default style you want",
                         "default": "theme.ui.range.defaultLnf",
@@ -10815,10 +10809,10 @@
                                 "raw": "String[]"
                             },
                             "values": [
-                                "default"
+                                "solid"
                             ],
                             "default": [
-                                "default"
+                                "solid"
                             ]
                         },
                         "defaultLnf": {
@@ -10831,7 +10825,7 @@
                                 "raw": "String"
                             },
                             "values": [
-                                "default"
+                                "solid"
                             ],
                             "default": "solid"
                         },
@@ -10953,7 +10947,7 @@
                                 "raw": "String"
                             },
                             "values": [
-                                "default"
+                                "solid"
                             ],
                             "default": "solid"
                         },
@@ -11292,18 +11286,18 @@
                                     "of": [
                                         {
                                             "type": "string",
-                                            "value": "default"
+                                            "value": "solid"
                                         }
                                     ]
                                 }
                             ],
-                            "raw": "('default')[]"
+                            "raw": "('solid')[]"
                         },
                         "description": "The style(s) you want to generate",
                         "default": [
-                            "default"
+                            "solid"
                         ],
-                        "defaultStr": "['default']"
+                        "defaultStr": "['solid']"
                     },
                     "defaultLnf": {
                         "name": "defaultLnf",
@@ -11311,10 +11305,10 @@
                             "types": [
                                 {
                                     "type": "string",
-                                    "value": "default"
+                                    "value": "solid"
                                 }
                             ],
-                            "raw": "'default'"
+                            "raw": "'solid'"
                         },
                         "description": "The default style you want",
                         "default": "theme.ui.form.defaultLnf",
@@ -11385,10 +11379,10 @@
                                 "raw": "String[]"
                             },
                             "values": [
-                                "default"
+                                "solid"
                             ],
                             "default": [
-                                "default"
+                                "solid"
                             ]
                         },
                         "defaultLnf": {
@@ -11401,7 +11395,7 @@
                                 "raw": "String"
                             },
                             "values": [
-                                "default"
+                                "solid"
                             ],
                             "default": "solid"
                         },
@@ -11455,10 +11449,10 @@
                             "types": [
                                 {
                                     "type": "string",
-                                    "value": "default"
+                                    "value": "solid"
                                 }
                             ],
-                            "raw": "'default'"
+                            "raw": "'solid'"
                         },
                         "description": "The style you want to generate",
                         "default": "theme.ui.form.defaultLnf",
@@ -11521,7 +11515,7 @@
                                 "raw": "String"
                             },
                             "values": [
-                                "default"
+                                "solid"
                             ],
                             "default": "solid"
                         },
@@ -12323,10 +12317,10 @@
                                 "raw": "String[]"
                             },
                             "values": [
-                                "default"
+                                "solid"
                             ],
                             "default": [
-                                "default"
+                                "solid"
                             ]
                         },
                         "defaultLnf": {
@@ -12339,7 +12333,7 @@
                                 "raw": "String"
                             },
                             "values": [
-                                "default"
+                                "solid"
                             ],
                             "default": "solid"
                         },

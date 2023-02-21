@@ -6,7 +6,8 @@ import __SFrontspec from '@coffeekraken/s-frontspec';
  * @name            frontspecMiddleware
  * @namespace       sugar.node.server.frontend.middleware
  * @type            Function
- * @status              wip
+ * @platform            node
+ * @status              beta
  *
  * This function describe the middleware that will fetch the ```frontspec.json``` file at the root of
  * your server directory and add it to the template data sended to the rendered view

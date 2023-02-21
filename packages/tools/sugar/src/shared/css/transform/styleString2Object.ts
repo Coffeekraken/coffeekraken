@@ -1,7 +1,7 @@
 // @ts-nocheck
 
-import __camelize from '../../../shared/string/camelize';
 import __autoCast from '../../../shared/string/autoCast';
+import __camelize from '../../../shared/string/camelize';
 
 /**
  * @name      styleString2Object
@@ -27,7 +27,7 @@ import __autoCast from '../../../shared/string/autoCast';
  * // 		display : 'block'
  * // }
  *
- * @since         1.0.0
+ @since           2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 export default function __styleString2Object(style: string): any {

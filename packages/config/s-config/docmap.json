@@ -141,9 +141,9 @@
                 "relPath": "src/doc/README.md.twig",
                 "children": {}
             },
-            "@coffeekraken.s-config.s-config.shared.config": {
-                "id": "@coffeekraken.s-config.s-config.shared.config",
-                "name": "config",
+            "@coffeekraken.s-config.shared.SConfig": {
+                "id": "@coffeekraken.s-config.shared.SConfig",
+                "name": "SConfig",
                 "type": {
                     "types": [
                         {
@@ -152,8 +152,18 @@
                     ],
                     "raw": "Class"
                 },
+                "platform": [
+                    {
+                        "name": "node",
+                        "description": ""
+                    },
+                    {
+                        "name": "js",
+                        "description": ""
+                    }
+                ],
                 "description": "This class allows you to quickly access/update some configuration depending on the data adapters specified.\nThe base available data adapters are:\n- For node:\n- File system adapter: @coffeekraken/s-config/src/node/adapters/SConfigFsAdapter\n- For js:\n- Localstorage adapter: @coffeekraken/s-config/src/js/adapters/SConfigLsAdapter",
-                "namespace": "@coffeekraken.s-config.s-config.shared",
+                "namespace": "@coffeekraken.s-config.shared",
                 "status": "beta",
                 "example": [
                     {
@@ -667,8 +677,15 @@
                         "content": "- name (null) {String}: This specify the config name that you want to use.\n- defaultConfig ({}) {Object}: This specify the \"default\" config that you want.\n- appConfig ({}) {Object}: This specify the \"application\" level config that you want.\n- userConfig ({}) {Object}: This specify the \"user\" level config that you want. It's usually this config that is updated"
                     }
                 },
+                "platform": [
+                    {
+                        "name": "js",
+                        "description": ""
+                    }
+                ],
                 "description": "This Local Storage adapter for the SConfig class let you define a name for your config and then you can just\nlet the SConfig class do the work for you...",
                 "namespace": "@coffeekraken.s-config.sugar.js.config.adapters",
+                "status": "wip",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",

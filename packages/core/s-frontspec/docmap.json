@@ -217,9 +217,15 @@
                         "defaultStr": "{}"
                     }
                 },
+                "platform": [
+                    {
+                        "name": "js",
+                        "description": ""
+                    }
+                ],
                 "description": "This class represent the ```frontspec.json``` json that must be either in:\n1. The `document.env.SUGAR.frontspec` object\n2. The `document.env.FRONTSPEC` object\n3. The \"frontspec\" param of the constructor\nEach level will be overrided by the upper one using a deepMerge.",
                 "namespace": "@coffeekraken.s-frontspec.js",
-                "status": "wip",
+                "status": "beta",
                 "example": [
                     {
                         "language": "js",
@@ -339,9 +345,15 @@
                         "defaultStr": "{}"
                     }
                 },
+                "platform": [
+                    {
+                        "name": "node",
+                        "description": ""
+                    }
+                ],
                 "description": "This class represent the ```frontspec.json``` file and allows you to generate it.",
                 "namespace": "@coffeekraken.s-frontspec.node",
-                "status": "wip",
+                "status": "beta",
                 "example": [
                     {
                         "language": "js",

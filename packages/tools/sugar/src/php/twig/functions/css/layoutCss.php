@@ -25,7 +25,7 @@
  * @setting         {Array}         [$scope=['bare','lnf','gap','align','justify']]             The scope(s) you want to generate
  *
  * @example         twig
- * {% set css = layoutCss('1 2 _ 3 3', {
+ * {% set css = __layoutCss('1 2 _ 3 3', {
  *      selector: '#my-layout'
  * }) %}
  * <style>
@@ -40,6 +40,9 @@
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-return new \Twig\TwigFunction('layoutCss', function ($layout, $settings = []) {
+return new \Twig\TwigFunction('__layoutCss', function (
+    $layout,
+    $settings = []
+) {
     return \Sugar\css\layoutCss($layout, $settings);
 });

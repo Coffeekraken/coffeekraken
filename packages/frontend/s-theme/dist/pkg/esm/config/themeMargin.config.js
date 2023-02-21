@@ -9,7 +9,7 @@ export default function (api) {
          * Specify the "default" space used for margins.
          * MUST be an absolute css value like "3rem", etc...
          *
-         * @since           1.0.0
+         @since           2.0.0
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         get default() {
@@ -24,7 +24,7 @@ export default function (api) {
          * Specify the "0" space used for margins.
          * MUST be a scale factor relative to the "default" absolute value specified.
          *
-         * @since           1.0.0
+         @since           2.0.0
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         get 0() {
@@ -39,7 +39,7 @@ export default function (api) {
          * Specify the "10" space used for margins.
          * MUST be a scale factor relative to the "default" absolute value specified.
          *
-         * @since           1.0.0
+         @since           2.0.0
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         get 10() {
@@ -54,7 +54,7 @@ export default function (api) {
          * Specify the "20" space used for margins.
          * MUST be a scale factor relative to the "default" absolute value specified.
          *
-         * @since           1.0.0
+         @since           2.0.0
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         get 20() {
@@ -69,7 +69,7 @@ export default function (api) {
          * Specify the "30" space used for margins.
          * MUST be a scale factor relative to the "default" absolute value specified.
          *
-         * @since           1.0.0
+         @since           2.0.0
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         get 30() {
@@ -84,7 +84,7 @@ export default function (api) {
          * Specify the "40" space used for margins.
          * MUST be a scale factor relative to the "default" absolute value specified.
          *
-         * @since           1.0.0
+         @since           2.0.0
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         get 40() {
@@ -99,7 +99,7 @@ export default function (api) {
          * Specify the "50" space used for margins.
          * .MUST be a scale factor relative to the "default" absolute value specified.
          *
-         * @since           1.0.0
+         @since           2.0.0
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         get 50() {
@@ -114,7 +114,7 @@ export default function (api) {
          * Specify the "60" space used for margins.
          * MUST be a scale factor relative to the "default" absolute value specified.
          *
-         * @since           1.0.0
+         @since           2.0.0
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         get 60() {
@@ -129,7 +129,7 @@ export default function (api) {
          * Specify the "70" space used for margins.
          * MUST be a scale factor relative to the "default" absolute value specified.
          *
-         * @since           1.0.0
+         @since           2.0.0
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         get 70() {
@@ -144,7 +144,7 @@ export default function (api) {
          * Specify the "80" space used for margins.
          * MUST be a scale factor relative to the "default" absolute value specified.
          *
-         * @since           1.0.0
+         @since           2.0.0
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         get 80() {
@@ -159,7 +159,7 @@ export default function (api) {
          * Specify the "90" space used for margins.
          * MUST be a scale factor relative to the "default" absolute value specified.
          *
-         * @since           1.0.0
+         @since           2.0.0
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         get 90() {
@@ -174,7 +174,7 @@ export default function (api) {
          * Specify the "100" space used for margins.
          * MUST be a scale factor relative to the "default" absolute value specified.
          *
-         * @since           1.0.0
+         @since           2.0.0
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         get 100() {

@@ -18,7 +18,9 @@ const s_view_renderer_1 = __importDefault(require("@coffeekraken/s-view-renderer
  * @name            viewRendererMiddleware
  * @namespace       node.middleware
  * @type            Function
- * @status              wip
+ * @platform            node
+ * @status              beta
+ * @private
  *
  * This middleware will gives you access down the tree to a "viewRenerer" propery on the "res" object that you can use to render your views.
  * It's juar an SViewRenderer instance instanciates with all the shared data passed from the server
@@ -58,4 +60,4 @@ function viewRendererMiddleware(settings = {}) {
     };
 }
 exports.default = viewRendererMiddleware;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOzs7Ozs7Ozs7Ozs7OztBQUVkLG9GQUE0RDtBQUU1RDs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0EwQkc7QUFDSCxJQUFJLGFBQWEsRUFBRSxXQUFXLENBQUM7QUFDL0IsU0FBUyxzQkFBc0IsQ0FBQyxRQUFRLEdBQUcsRUFBRTtJQUN6QyxPQUFPLFVBQWdCLEdBQUcsRUFBRSxHQUFHLEVBQUUsSUFBSTs7O1lBQ2pDLFdBQVc7WUFDWCxJQUFJLENBQUMsYUFBYSxFQUFFO2dCQUNoQixhQUFhLEdBQUcsSUFBSSx5QkFBZSxDQUFDO29CQUNoQyxVQUFVLEVBQUUsTUFBQSxHQUFHLENBQUMsWUFBWSxDQUFDLE1BQU0sbUNBQUksRUFBRTtpQkFDNUMsQ0FBQyxDQUFDO2FBQ047WUFFRCxHQUFHLENBQUMsWUFBWSxHQUFHLGFBQWEsQ0FBQztZQUVqQyxPQUFPLElBQUksRUFBRSxDQUFDOztLQUNqQixDQUFDO0FBQ04sQ0FBQztBQUNELGtCQUFlLHNCQUFzQixDQUFDIn0=
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOzs7Ozs7Ozs7Ozs7OztBQUVkLG9GQUE0RDtBQUU1RDs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQTRCRztBQUNILElBQUksYUFBYSxFQUFFLFdBQVcsQ0FBQztBQUMvQixTQUFTLHNCQUFzQixDQUFDLFFBQVEsR0FBRyxFQUFFO0lBQ3pDLE9BQU8sVUFBZ0IsR0FBRyxFQUFFLEdBQUcsRUFBRSxJQUFJOzs7WUFDakMsV0FBVztZQUNYLElBQUksQ0FBQyxhQUFhLEVBQUU7Z0JBQ2hCLGFBQWEsR0FBRyxJQUFJLHlCQUFlLENBQUM7b0JBQ2hDLFVBQVUsRUFBRSxNQUFBLEdBQUcsQ0FBQyxZQUFZLENBQUMsTUFBTSxtQ0FBSSxFQUFFO2lCQUM1QyxDQUFDLENBQUM7YUFDTjtZQUVELEdBQUcsQ0FBQyxZQUFZLEdBQUcsYUFBYSxDQUFDO1lBRWpDLE9BQU8sSUFBSSxFQUFFLENBQUM7O0tBQ2pCLENBQUM7QUFDTixDQUFDO0FBQ0Qsa0JBQWUsc0JBQXNCLENBQUMifQ==

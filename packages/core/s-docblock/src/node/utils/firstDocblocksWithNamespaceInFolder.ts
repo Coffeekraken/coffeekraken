@@ -10,9 +10,10 @@ import __SDocblock from '../../shared/SDocblock';
 
 /**
  * @name                  firstDocblockWithNamespaceInFolder
- * @namespace           sugar.node.docblock
+ * @namespace           node.utils
  * @type                  Function
  * @async
+ * @platform            node
  * @status              wip
  *
  * This function search in the passed folder for files containing a "@namespace" tag (and an "@name" optional one)

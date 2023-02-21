@@ -4,8 +4,8 @@
  * @name        cleanContext
  * @namespace   php.twig.filters.json
  * @type        TwigFilter
+ * @platform    twig
  * @status      beta
- * @platform    php
  *
  * This twig filter allows you to clean the "_context" variable to get only the values you actually passed
  *
@@ -13,12 +13,12 @@
  * @return      {String}                        The cleaned context variable
  *
  * @example       twig
- * <div data="{{ _context|cleanContext|json_encode }}"></div>
+ * <div data="{{ _context|__cleanContext|json_encode }}"></div>
  *
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-return new \Twig\TwigFilter('cleanContext', function ($value) {
+return new \Twig\TwigFilter('__cleanContext', function ($value) {
     unset($value['frontspec']);
     unset($value['docmap']);
     unset($value['server']);

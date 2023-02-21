@@ -17,6 +17,8 @@ window._console = {};
  * @namespace       js
  * @type            Class
  * @extends         SThemeBase
+ * @platform         js
+ * @status              beta
  *
  * This class represent the sugar theme you've passed the name in the constructor.
  * Once you have an instance of this theme you will have access to a lot of utilities

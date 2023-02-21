@@ -5,7 +5,7 @@ namespace Sugar\lod;
  * @name        lodClasses
  * @namespace            php.twig.functions.lod
  * @type        TwigFunction
- * @platform        php
+ * @platform        twig
  * @status          beta
  *
  * This function is about the lod system (level of details).
@@ -15,11 +15,11 @@ namespace Sugar\lod;
  * @return      {String}                            The classes separated by spaces
  *
  * @example      php
- * <div classes="{{ lodClasses(2) }}"></div>
+ * <div classes="{{ __lodClasses(2) }}"></div>
  *
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-return new \Twig\TwigFunction('lodClasses', function ($level) {
+return new \Twig\TwigFunction('__lodClasses', function ($level) {
     return \Sugar\lod\lodClasses($level);
 });

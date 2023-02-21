@@ -168,6 +168,16 @@
                         "defaultStr": "{}"
                     }
                 },
+                "platform": [
+                    {
+                        "name": "js",
+                        "description": ""
+                    },
+                    {
+                        "name": "node",
+                        "description": ""
+                    }
+                ],
                 "description": "This class is a simple and effective one that manage the ```settings``` property\nand some others features that will be documented asap",
                 "namespace": "@coffeekraken.s-class.sugar.js.class",
                 "status": "beta",

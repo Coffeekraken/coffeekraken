@@ -32,7 +32,7 @@ import __WhenInteractSettingsInterface from './interface/WhenInteractSettingsInt
  * import { __whenInteract } from '@coffeekraken/sugar/js/dom/detect/whenInteract'
  * await __whenInteract(myCoolElement);
  *
- * @since           1.0.0
+ @since           2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 

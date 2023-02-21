@@ -6,7 +6,8 @@ import __SBench from '@coffeekraken/s-bench';
  * @name                redirectHandler
  * @namespace           sugar.node.server.frontend.modules.redirect
  * @type                Function
- * @status              wip
+ * @platform            node
+ * @status              beta
  *
  * This function is responsible of responding to express requests made on the  pages
  *

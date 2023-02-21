@@ -1,4 +1,4 @@
-import __SPromise from '@coffeekraken/s-promise';
+import __SClass from '@coffeekraken/s-class';
 
 export interface ISFrontspecSourceConfigObj {
     config: String;
@@ -18,7 +18,7 @@ export interface ISFrontspecAddParams {
 }
 export interface ISFrontspecAssetToServe {
 }
-export default class SFrontspec extends __SPromise {
+export default class SFrontspec extends __SClass {
     static _cachesStack: {};
     
     constructor(settings?: {});

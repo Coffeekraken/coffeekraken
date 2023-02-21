@@ -10403,8 +10403,15 @@
                         "defaultStr": "undefined"
                     }
                 },
+                "platform": [
+                    {
+                        "name": "js",
+                        "description": ""
+                    }
+                ],
                 "description": "This class represent the sugar theme you've passed the name in the constructor.\nOnce you have an instance of this theme you will have access to a lot of utilities\nmethods like \"loopOnColors\", etc...",
                 "namespace": "@coffeekraken.s-theme.js",
+                "status": "beta",
                 "example": [
                     {
                         "language": "js",
@@ -11167,8 +11174,15 @@
                         "defaultStr": "undefined"
                     }
                 },
+                "platform": [
+                    {
+                        "name": "node",
+                        "description": ""
+                    }
+                ],
                 "description": "This class represent the sugar theme you've passed the name in the constructor.\nOnce you have an instance of this theme you will have access to a lot of utilities\nmethods like \"loopOnColors\", etc...",
                 "namespace": "@coffeekraken.s-theme.node",
+                "status": "beta",
                 "example": [
                     {
                         "language": "js",
@@ -11333,8 +11347,19 @@
                         "defaultStr": "undefined"
                     }
                 },
+                "platform": [
+                    {
+                        "name": "node",
+                        "description": ""
+                    },
+                    {
+                        "name": "js",
+                        "description": ""
+                    }
+                ],
                 "description": "This class represent the sugar theme you've passed the name in the constructor.\nOnce you have an instance of this theme you will have access to a lot of utilities\nmethods like \"loopOnColors\", etc...",
                 "namespace": "@coffeekraken.s-theme.shared",
+                "status": "beta",
                 "example": [
                     {
                         "language": "js",

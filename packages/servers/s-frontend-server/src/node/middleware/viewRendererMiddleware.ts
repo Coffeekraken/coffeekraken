@@ -6,7 +6,9 @@ import __SViewRenderer from '@coffeekraken/s-view-renderer';
  * @name            viewRendererMiddleware
  * @namespace       node.middleware
  * @type            Function
- * @status              wip
+ * @platform            node
+ * @status              beta
+ * @private
  *
  * This middleware will gives you access down the tree to a "viewRenerer" propery on the "res" object that you can use to render your views.
  * It's juar an SViewRenderer instance instanciates with all the shared data passed from the server

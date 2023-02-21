@@ -14,13 +14,13 @@
  *
  * @example         twig
  * <code>
- *  {{ readFrontspec() }}
+ *  {{ __readFrontspec() }}
  * </code>
  *
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-return new \Twig\TwigFunction('readFrontspec', function (
+return new \Twig\TwigFunction('__readFrontspec', function (
     $sFrontspecSettings = []
 ) {
     return \Sugar\frontspec\readFrontspec($sFrontspecSettings);

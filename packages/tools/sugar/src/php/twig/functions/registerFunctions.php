@@ -6,8 +6,8 @@ namespace Sugar\twig;
  * @name        registerFunctions
  * @namespace   php.twig.functions
  * @type        Function
- * @status      beta
  * @platform    php
+ * @status      beta
  *
  * This function allows you to register only the functions on your twig instance
  *

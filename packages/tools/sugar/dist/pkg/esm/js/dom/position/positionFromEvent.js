@@ -19,7 +19,7 @@
  * __positionFromEvent(e);
  * // output : { x, 230, y: 122 }
  *
- * @since         1.0.0
+ @since           2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 export default function __positionFromEvent(e) {

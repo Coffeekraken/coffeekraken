@@ -20,6 +20,7 @@ import type { ISSugarConfig } from '../shared/types';
  * @namespace           node
  * @type                  Class
  * @extends             SClass
+ * @platform            node
  * @status              beta
  *
  * This function allows you to access easily the configurations stored in the ```sugar.config.js```.
@@ -71,7 +72,6 @@ export default class SSugarConfig extends __SClass {
 
     /**
      * @name            registerFolder
-     * @namespace       shared
      * @type            Function
      * @static
      *

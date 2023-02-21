@@ -6,8 +6,8 @@ namespace Sugar\twig;
  * @name        getDefaultViewDirs
  * @namespace   php.twig
  * @type        Function
- * @status      beta
  * @platform    php
+ * @status      beta
  *
  * This function gives you the default root directories where to search for views.
  * You will need to add these if you want to use the "@coffeekraken" layouts, etc...

@@ -16,13 +16,13 @@
  *
  * @example         twig
  * <code>
- *  {{ readSpec('sugar.views.component.card') }}
+ *  {{ __readSpec('sugar.views.component.card') }}
  * </code>
  *
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-return new \Twig\TwigFunction('readSpec', function (
+return new \Twig\TwigFunction('__readSpec', function (
     $jsonDotPath,
     $sJsonSettings = []
 ) {

@@ -20,7 +20,9 @@ export interface ISStdioLogFn {
  * @name          SStdio
  * @namespace     sugar.node.stdio
  * @type          Class
- * @status              wip
+ * @platform            node
+ * @platform            js
+ * @status              beta
  *
  * This class represent the base one for all the "Stdio"
  * compatible setting.

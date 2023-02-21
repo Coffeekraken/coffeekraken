@@ -2898,6 +2898,12 @@
                         "defaultStr": ""
                     }
                 },
+                "platform": [
+                    {
+                        "name": "node",
+                        "description": ""
+                    }
+                ],
                 "description": "This function allows you to access easily the configurations stored in the ```sugar.config.js```.\nThe returned configuration is the result of the default sugar config stored in the toolkit and the\napp defined config stored in current application root folder",
                 "namespace": "@coffeekraken.s-sugar-config.node",
                 "status": "beta",
@@ -2915,53 +2921,49 @@
                 },
                 "filename": "sugar.ts",
                 "extension": "ts",
-                "relPath": "src/node/sugar.ts"
-            },
-            "@coffeekraken.s-sugar-config.shared.registerFolder": {
-                "id": "@coffeekraken.s-sugar-config.shared.registerFolder",
-                "name": "registerFolder",
-                "type": {
-                    "types": [
-                        {
-                            "type": "Function"
-                        }
-                    ],
-                    "raw": "Function"
-                },
-                "param": {
-                    "folderPath": {
-                        "name": "folderPath",
+                "relPath": "src/node/sugar.ts",
+                "children": {
+                    "registerfolder": {
+                        "id": "sf6ae16a714847f844b5d4120f96e6f60d40c41fb209204b2ecebe0868198bdec",
+                        "name": "registerFolder",
                         "type": {
                             "types": [
                                 {
-                                    "type": "String"
+                                    "type": "Function"
                                 }
                             ],
-                            "raw": "String"
+                            "raw": "Function"
                         },
-                        "description": "The folder path in which to check for .config.js files",
-                        "defaultStr": ""
-                    }
-                },
-                "description": "This function allows you to register some folders to be taken in consideration\nwhen accessing the config using the ```sugar``` function",
-                "namespace": "@coffeekraken.s-sugar-config.shared",
-                "example": [
-                    {
-                        "language": "js",
-                        "code": "import registerFolder from '@coffeekraken/sugar/shared/config/registerFolder';\nregisterFolder('/something/cool');"
-                    }
-                ],
-                "static": "true",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "sugar.ts",
-                "extension": "ts",
-                "relPath": "src/node/sugar.ts",
-                "children": {
+                        "param": {
+                            "folderPath": {
+                                "name": "folderPath",
+                                "type": {
+                                    "types": [
+                                        {
+                                            "type": "String"
+                                        }
+                                    ],
+                                    "raw": "String"
+                                },
+                                "description": "The folder path in which to check for .config.js files",
+                                "defaultStr": ""
+                            }
+                        },
+                        "description": "This function allows you to register some folders to be taken in consideration\nwhen accessing the config using the ```sugar``` function",
+                        "example": [
+                            {
+                                "language": "js",
+                                "code": "import registerFolder from '@coffeekraken/sugar/shared/config/registerFolder';\nregisterFolder('/something/cool');"
+                            }
+                        ],
+                        "static": "true",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://coffeekraken.io"
+                        }
+                    },
                     "config": {
                         "id": "sb1cead87a1ae146b5fcba7eb15c5e8a2f093d320a70d161127f9b6e111dd5b5b",
                         "name": "config",
@@ -3470,9 +3472,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "SCliConfigCacheParamsInterface.ts",
-                "extension": "ts",
-                "relPath": "src/cli/interface/SCliConfigCacheParamsInterface.ts",
+                "filename": "SCliConfigCacheParamsInterface.js",
+                "extension": "js",
+                "relPath": "src/cli/interface/SCliConfigCacheParamsInterface.js",
                 "children": {}
             }
         }

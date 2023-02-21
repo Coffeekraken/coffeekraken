@@ -15,6 +15,7 @@ import { define as __SSugarFeatureDefine } from '@coffeekraken/s-sugar-feature';
  * @name 		                    SPackEssentials
  * @namespace           js
  * @type                        Function
+ * @platform            js
  * @status              beta
  *
  * This function init automatically these packages:

@@ -24,7 +24,7 @@
  * }
  *
  * @see 		https://developer.mozilla.org/en/docs/Web/API/Element/matches
- * @since         1.0.0
+ @since           2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 export default function __matches(el: HTMLElement, selector: string): boolean {

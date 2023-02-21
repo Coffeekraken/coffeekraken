@@ -3,6 +3,7 @@
     "extends": [],
     "generated": {
         "extends": [
+            "coffeekraken-s-sugar",
             "@coffeekraken/aa",
             "@coffeekraken/cli",
             "@coffeekraken/s-activate-feature",
@@ -338,6 +339,12 @@
                         "defaultStr": "{}"
                     }
                 },
+                "platform": [
+                    {
+                        "name": "node",
+                        "description": ""
+                    }
+                ],
                 "description": "This class represent a template that can be rendered using all the supported render engines listed in the features bellow.",
                 "namespace": "@coffeekraken.s-view-renderer.node",
                 "status": "beta",
@@ -681,52 +688,6 @@
                 "filename": "SViewRendererSettingsInterface.ts",
                 "extension": "ts",
                 "relPath": "src/node/interface/SViewRendererSettingsInterface.ts",
-                "children": {}
-            },
-            "@coffeekraken.s-view-renderer.s-view.pages.404": {
-                "id": "@coffeekraken.s-view-renderer.s-view.pages.404",
-                "name": "404",
-                "type": {
-                    "types": [
-                        {
-                            "type": "Function"
-                        }
-                    ],
-                    "raw": "Function"
-                },
-                "param": {
-                    "data": {
-                        "name": "data",
-                        "type": {
-                            "types": [
-                                {
-                                    "type": "data:I404Data"
-                                }
-                            ],
-                            "raw": "data:I404Data"
-                        },
-                        "description": "An object of data to render the 404 page",
-                        "defaultStr": ""
-                    }
-                },
-                "description": "This function simply take a data object and render a clean 404 page",
-                "namespace": "@coffeekraken.s-view-renderer.s-view.pages",
-                "example": [
-                    {
-                        "language": "js",
-                        "code": "import page404 from '@coffeekraken/sugar/node/engines/pages/404';\nconst html = await page404(renderer, {\n     title: 'Not found',\n     body: 'The page you want does not exists...'\n});"
-                    }
-                ],
-                "async": "true",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "404.ts",
-                "extension": "ts",
-                "relPath": "src/node/pages/404.ts",
                 "children": {}
             }
         }

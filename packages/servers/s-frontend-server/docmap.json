@@ -3,6 +3,7 @@
     "extends": [],
     "generated": {
         "extends": [
+            "coffeekraken-s-sugar",
             "@coffeekraken/aa",
             "@coffeekraken/cli",
             "@coffeekraken/s-activate-feature",
@@ -1062,54 +1063,8 @@
                 "relPath": "src/doc/README.md.twig",
                 "children": {}
             },
-            "@coffeekraken.s-frontend-server.sugar.node.server.frontend.express": {
-                "id": "@coffeekraken.s-frontend-server.sugar.node.server.frontend.express",
-                "name": "express",
-                "type": {
-                    "types": [
-                        {
-                            "type": "Function"
-                        }
-                    ],
-                    "raw": "Function"
-                },
-                "param": {
-                    "args": {
-                        "name": "args",
-                        "type": {
-                            "types": [
-                                {
-                                    "type": "Object"
-                                }
-                            ],
-                            "raw": "Object"
-                        },
-                        "description": "The args object to configure the build process. Check the PhpSCli class definition object for available arguments",
-                        "default": {},
-                        "defaultStr": "{}"
-                    }
-                },
-                "description": "This function take care of starting a frontend express based server",
-                "namespace": "@coffeekraken.s-frontend-server.sugar.node.server.frontend",
-                "status": "wip",
-                "example": [
-                    {
-                        "language": "js",
-                        "code": "import frontendServer from '@coffeekraken/sugar/node/server/frontend/frontend';\nfrontendServer({});"
-                    }
-                ],
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com"
-                },
-                "filename": "frontend.ts",
-                "extension": "ts",
-                "relPath": "src/node/frontend.ts",
-                "children": {}
-            },
-            "@coffeekraken.s-frontend-server.s-frontend-server.SFrontendServer": {
-                "id": "@coffeekraken.s-frontend-server.s-frontend-server.SFrontendServer",
+            "@coffeekraken.s-frontend-server.node.SFrontendServer": {
+                "id": "@coffeekraken.s-frontend-server.node.SFrontendServer",
                 "name": "SFrontendServer",
                 "type": {
                     "types": [
@@ -1135,8 +1090,15 @@
                         "defaultStr": "{}"
                     }
                 },
+                "platform": [
+                    {
+                        "name": "node",
+                        "description": ""
+                    }
+                ],
                 "description": "This class represent a frontend server that handle features like documentation, views rendering,\nfrontspec reading middleware, packageJson middleware and more...",
-                "namespace": "@coffeekraken.s-frontend-server.s-frontend-server",
+                "namespace": "@coffeekraken.s-frontend-server.node",
+                "status": "beta",
                 "example": [
                     {
                         "language": "js",
@@ -1266,9 +1228,15 @@
                         "defaultStr": "{}"
                     }
                 },
+                "platform": [
+                    {
+                        "name": "node",
+                        "description": ""
+                    }
+                ],
                 "description": "This function is responsible of responding to express requests made on the doc pages",
                 "namespace": "@coffeekraken.s-frontend-server.sugar.node.server.frontend.handlers",
-                "status": "wip",
+                "status": "beta",
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
@@ -1333,9 +1301,15 @@
                         "defaultStr": "{}"
                     }
                 },
+                "platform": [
+                    {
+                        "name": "node",
+                        "description": ""
+                    }
+                ],
                 "description": "This function is responsible of responding to express requests made on the docmap url",
                 "namespace": "@coffeekraken.s-frontend-server.sugar.node.server.frontend.handlers",
-                "status": "wip",
+                "status": "beta",
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
@@ -1400,9 +1374,15 @@
                         "defaultStr": "{}"
                     }
                 },
+                "platform": [
+                    {
+                        "name": "node",
+                        "description": ""
+                    }
+                ],
                 "description": "This function is responsible of responding to express requests made on the index pages",
                 "namespace": "@coffeekraken.s-frontend-server.sugar.node.server.frontend.handlers",
-                "status": "wip",
+                "status": "beta",
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
@@ -1467,9 +1447,15 @@
                         "defaultStr": "{}"
                     }
                 },
+                "platform": [
+                    {
+                        "name": "node",
+                        "description": ""
+                    }
+                ],
                 "description": "This function is responsible of responding to express requests made on the doc pages",
                 "namespace": "@coffeekraken.s-frontend-server.sugar.node.server.frontend.handlers",
-                "status": "wip",
+                "status": "beta",
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
@@ -1771,438 +1757,6 @@
                 "relPath": "src/node/interface/SFrontendServerStartParamsInterface.ts",
                 "children": {}
             },
-            "@coffeekraken.s-frontend-server.sugar.node.server.frontend.middleware.benchEndMiddleware": {
-                "id": "@coffeekraken.s-frontend-server.sugar.node.server.frontend.middleware.benchEndMiddleware",
-                "name": "benchEndMiddleware",
-                "type": {
-                    "types": [
-                        {
-                            "type": "Function"
-                        }
-                    ],
-                    "raw": "Function"
-                },
-                "param": {
-                    "req": {
-                        "name": "req",
-                        "type": {
-                            "types": [
-                                {
-                                    "type": "Object"
-                                }
-                            ],
-                            "raw": "Object"
-                        },
-                        "description": "The request made on the express server",
-                        "defaultStr": ""
-                    },
-                    "res": {
-                        "name": "res",
-                        "type": {
-                            "types": [
-                                {
-                                    "type": "Object"
-                                }
-                            ],
-                            "raw": "Object"
-                        },
-                        "description": "The response object of the express server",
-                        "defaultStr": ""
-                    },
-                    "next": {
-                        "name": "next",
-                        "type": {
-                            "types": [
-                                {
-                                    "type": "Function"
-                                }
-                            ],
-                            "raw": "Function"
-                        },
-                        "description": "The next function to call when the middleware has finished his job",
-                        "defaultStr": ""
-                    }
-                },
-                "description": "SMall middleware to end the request benchmark",
-                "namespace": "@coffeekraken.s-frontend-server.sugar.node.server.frontend.middleware",
-                "status": "beta",
-                "example": [
-                    {
-                        "language": "js",
-                        "code": "import express from 'express';\nimport benchEndMiddleware from '@coffeekraken/sugar/server/frontend/middleware/benchEndMiddleware';\nconst server = express();\nserver.use(benchEndMiddleware);\nserver.listen(3000);"
-                    }
-                ],
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "benchMiddleware.ts",
-                "extension": "ts",
-                "relPath": "src/node/middleware/benchMiddleware.ts",
-                "children": {}
-            },
-            "@coffeekraken.s-frontend-server.sugar.node.server.frontend.middleware.envMiddleware": {
-                "id": "@coffeekraken.s-frontend-server.sugar.node.server.frontend.middleware.envMiddleware",
-                "name": "envMiddleware",
-                "type": {
-                    "types": [
-                        {
-                            "type": "Function"
-                        }
-                    ],
-                    "raw": "Function"
-                },
-                "param": {
-                    "req": {
-                        "name": "req",
-                        "type": {
-                            "types": [
-                                {
-                                    "type": "Object"
-                                }
-                            ],
-                            "raw": "Object"
-                        },
-                        "description": "The request made on the express server",
-                        "defaultStr": ""
-                    },
-                    "res": {
-                        "name": "res",
-                        "type": {
-                            "types": [
-                                {
-                                    "type": "Object"
-                                }
-                            ],
-                            "raw": "Object"
-                        },
-                        "description": "The response object of the express server",
-                        "defaultStr": ""
-                    },
-                    "next": {
-                        "name": "next",
-                        "type": {
-                            "types": [
-                                {
-                                    "type": "Function"
-                                }
-                            ],
-                            "raw": "Function"
-                        },
-                        "description": "The next function to call when the middleware has finished his job",
-                        "defaultStr": ""
-                    }
-                },
-                "description": "This function describe the middleware that will add the \"env\" property to the ```res.templateData``` object",
-                "namespace": "@coffeekraken.s-frontend-server.sugar.node.server.frontend.middleware",
-                "status": "beta",
-                "example": [
-                    {
-                        "language": "js",
-                        "code": "import express from 'express';\nimport envMiddleware from '@coffeekraken/sugar/server/frontend/middleware/envMiddleware';\nconst server = express();\nserver.use(envMiddleware);\nserver.listen(3000);"
-                    }
-                ],
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "envMiddleware.ts",
-                "extension": "ts",
-                "relPath": "src/node/middleware/envMiddleware.ts",
-                "children": {}
-            },
-            "@coffeekraken.s-frontend-server.sugar.node.server.frontend.middleware.packageJsonMiddleware": {
-                "id": "@coffeekraken.s-frontend-server.sugar.node.server.frontend.middleware.packageJsonMiddleware",
-                "name": "packageJsonMiddleware",
-                "type": {
-                    "types": [
-                        {
-                            "type": "Function"
-                        }
-                    ],
-                    "raw": "Function"
-                },
-                "param": {
-                    "req": {
-                        "name": "req",
-                        "type": {
-                            "types": [
-                                {
-                                    "type": "Object"
-                                }
-                            ],
-                            "raw": "Object"
-                        },
-                        "description": "The request made on the express server",
-                        "defaultStr": ""
-                    },
-                    "res": {
-                        "name": "res",
-                        "type": {
-                            "types": [
-                                {
-                                    "type": "Object"
-                                }
-                            ],
-                            "raw": "Object"
-                        },
-                        "description": "The response object of the express server",
-                        "defaultStr": ""
-                    },
-                    "next": {
-                        "name": "next",
-                        "type": {
-                            "types": [
-                                {
-                                    "type": "Function"
-                                }
-                            ],
-                            "raw": "Function"
-                        },
-                        "description": "The next function to call when the middleware has finished his job",
-                        "defaultStr": ""
-                    }
-                },
-                "description": "This function describe the middleware that will fetch the ```package.json``` file at the root of\nyour server directory and add it to the template data sended to the rendered view",
-                "namespace": "@coffeekraken.s-frontend-server.sugar.node.server.frontend.middleware",
-                "status": "beta",
-                "example": [
-                    {
-                        "language": "js",
-                        "code": "import express from 'express';\nimport packageJsonMiddleware from '@coffeekraken/sugar/server/frontend/middleware/packageJsonMiddleware';\nconst server = express();\nserver.use(packageJsonMiddleware);\nserver.listen(3000);"
-                    }
-                ],
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "packageJsonMiddleware.ts",
-                "extension": "ts",
-                "relPath": "src/node/middleware/packageJsonMiddleware.ts",
-                "children": {}
-            },
-            "@coffeekraken.s-frontend-server.sugar.node.server.frontend.middleware.requestMiddleware": {
-                "id": "@coffeekraken.s-frontend-server.sugar.node.server.frontend.middleware.requestMiddleware",
-                "name": "requestMiddleware",
-                "type": {
-                    "types": [
-                        {
-                            "type": "Function"
-                        }
-                    ],
-                    "raw": "Function"
-                },
-                "param": {
-                    "req": {
-                        "name": "req",
-                        "type": {
-                            "types": [
-                                {
-                                    "type": "Object"
-                                }
-                            ],
-                            "raw": "Object"
-                        },
-                        "description": "The request made on the express server",
-                        "defaultStr": ""
-                    },
-                    "res": {
-                        "name": "res",
-                        "type": {
-                            "types": [
-                                {
-                                    "type": "Object"
-                                }
-                            ],
-                            "raw": "Object"
-                        },
-                        "description": "The response object of the express server",
-                        "defaultStr": ""
-                    },
-                    "next": {
-                        "name": "next",
-                        "type": {
-                            "types": [
-                                {
-                                    "type": "Function"
-                                }
-                            ],
-                            "raw": "Function"
-                        },
-                        "description": "The next function to call when the middleware has finished his job",
-                        "defaultStr": ""
-                    }
-                },
-                "description": "This function describe the middleware will fill the templateData.request object with the\nactual express one",
-                "namespace": "@coffeekraken.s-frontend-server.sugar.node.server.frontend.middleware",
-                "status": "wip",
-                "example": [
-                    {
-                        "language": "js",
-                        "code": "import express from 'express';\nimport requestMiddleware from '@coffeekraken/sugar/server/frontend/middleware/requestMiddleware';\nconst server = express();\nserver.use(requestMiddleware);\nserver.listen(3000);"
-                    }
-                ],
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "requestMiddleware.ts",
-                "extension": "ts",
-                "relPath": "src/node/middleware/requestMiddleware.ts",
-                "children": {}
-            },
-            "@coffeekraken.s-frontend-server.sugar.node.server.frontend.middleware.resolveExtensionFreePath": {
-                "id": "@coffeekraken.s-frontend-server.sugar.node.server.frontend.middleware.resolveExtensionFreePath",
-                "name": "resolveExtensionFreePath",
-                "type": {
-                    "types": [
-                        {
-                            "type": "Function"
-                        }
-                    ],
-                    "raw": "Function"
-                },
-                "param": {
-                    "req": {
-                        "name": "req",
-                        "type": {
-                            "types": [
-                                {
-                                    "type": "Object"
-                                }
-                            ],
-                            "raw": "Object"
-                        },
-                        "description": "The request made on the express server",
-                        "defaultStr": ""
-                    },
-                    "res": {
-                        "name": "res",
-                        "type": {
-                            "types": [
-                                {
-                                    "type": "Object"
-                                }
-                            ],
-                            "raw": "Object"
-                        },
-                        "description": "The response object of the express server",
-                        "defaultStr": ""
-                    },
-                    "next": {
-                        "name": "next",
-                        "type": {
-                            "types": [
-                                {
-                                    "type": "Function"
-                                }
-                            ],
-                            "raw": "Function"
-                        },
-                        "description": "The next function to call when the middleware has finished his job",
-                        "defaultStr": ""
-                    }
-                },
-                "description": "This function will try to resolve extension free requests like node modules, etc...",
-                "namespace": "@coffeekraken.s-frontend-server.sugar.node.server.frontend.middleware",
-                "status": "wip",
-                "example": [
-                    {
-                        "language": "js",
-                        "code": "import express from 'express';\nimport resolveExtensionFreePath from '@coffeekraken/sugar/server/frontend/middleware/resolveExtensionFreePath';\nconst server = express();\nserver.use(resolveExtensionFreePath);\nserver.listen(3000);"
-                    }
-                ],
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "resolveExtensionFreePath.ts",
-                "extension": "ts",
-                "relPath": "src/node/middleware/resolveExtensionFreePath.ts",
-                "children": {}
-            },
-            "@coffeekraken.s-frontend-server.node.middleware.viewRendererMiddleware": {
-                "id": "@coffeekraken.s-frontend-server.node.middleware.viewRendererMiddleware",
-                "name": "viewRendererMiddleware",
-                "type": {
-                    "types": [
-                        {
-                            "type": "Function"
-                        }
-                    ],
-                    "raw": "Function"
-                },
-                "param": {
-                    "req": {
-                        "name": "req",
-                        "type": {
-                            "types": [
-                                {
-                                    "type": "Object"
-                                }
-                            ],
-                            "raw": "Object"
-                        },
-                        "description": "The request made on the express server",
-                        "defaultStr": ""
-                    },
-                    "res": {
-                        "name": "res",
-                        "type": {
-                            "types": [
-                                {
-                                    "type": "Object"
-                                }
-                            ],
-                            "raw": "Object"
-                        },
-                        "description": "The response object of the express server",
-                        "defaultStr": ""
-                    },
-                    "next": {
-                        "name": "next",
-                        "type": {
-                            "types": [
-                                {
-                                    "type": "Function"
-                                }
-                            ],
-                            "raw": "Function"
-                        },
-                        "description": "The next function to call when the middleware has finished his job",
-                        "defaultStr": ""
-                    }
-                },
-                "description": "This middleware will gives you access down the tree to a \"viewRenerer\" propery on the \"res\" object that you can use to render your views.\nIt's juar an SViewRenderer instance instanciates with all the shared data passed from the server",
-                "namespace": "@coffeekraken.s-frontend-server.node.middleware",
-                "status": "wip",
-                "example": [
-                    {
-                        "language": "js",
-                        "code": "import express from 'express';\nimport viewRendererMiddleware from '@coffeekraken/sugar/server/frontend/middleware/viewRendererMiddleware';\nconst server = express();\nserver.use(viewRendererMiddleware);\nserver.listen(3000);"
-                    }
-                ],
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "viewRendererMiddleware.ts",
-                "extension": "ts",
-                "relPath": "src/node/middleware/viewRendererMiddleware.ts",
-                "children": {}
-            },
             "@coffeekraken.s-frontend-server.sugar.node.server.frontend.middleware.configMiddleware": {
                 "id": "@coffeekraken.s-frontend-server.sugar.node.server.frontend.middleware.configMiddleware",
                 "name": "configMiddleware",
@@ -2255,9 +1809,15 @@
                         "defaultStr": ""
                     }
                 },
+                "platform": [
+                    {
+                        "name": "node",
+                        "description": ""
+                    }
+                ],
                 "description": "This function describe the middleware that will expose the config and config files add it to the template data sended to the rendered view",
                 "namespace": "@coffeekraken.s-frontend-server.sugar.node.server.frontend.middleware",
-                "status": "wip",
+                "status": "beta",
                 "example": [
                     {
                         "language": "js",
@@ -2327,9 +1887,15 @@
                         "defaultStr": ""
                     }
                 },
+                "platform": [
+                    {
+                        "name": "node",
+                        "description": ""
+                    }
+                ],
                 "description": "This function describe the middleware that will fetch the ```docmap.json``` file at the root of\nyour server directory and add it to the template data sended to the rendered view",
                 "namespace": "@coffeekraken.s-frontend-server.sugar.node.server.frontend.middleware",
-                "status": "wip",
+                "status": "beta",
                 "example": [
                     {
                         "language": "js",
@@ -2399,9 +1965,15 @@
                         "defaultStr": ""
                     }
                 },
+                "platform": [
+                    {
+                        "name": "node",
+                        "description": ""
+                    }
+                ],
                 "description": "This function describe the middleware that will fetch the ```frontspec.json``` file at the root of\nyour server directory and add it to the template data sended to the rendered view",
                 "namespace": "@coffeekraken.s-frontend-server.sugar.node.server.frontend.middleware",
-                "status": "wip",
+                "status": "beta",
                 "example": [
                     {
                         "language": "js",
@@ -2472,9 +2044,15 @@
                         "defaultStr": "{}"
                     }
                 },
+                "platform": [
+                    {
+                        "name": "node",
+                        "description": ""
+                    }
+                ],
                 "description": "This function is responsible of responding to express requests made on the doc pages",
                 "namespace": "@coffeekraken.s-frontend-server.node.modules.docmap",
-                "status": "wip",
+                "status": "beta",
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
@@ -2539,9 +2117,15 @@
                         "defaultStr": "{}"
                     }
                 },
+                "platform": [
+                    {
+                        "name": "node",
+                        "description": ""
+                    }
+                ],
                 "description": "This function is responsible of responding to express requests made on the  pages",
                 "namespace": "@coffeekraken.s-frontend-server.sugar.node.server.frontend.modules.redirect",
-                "status": "wip",
+                "status": "beta",
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",

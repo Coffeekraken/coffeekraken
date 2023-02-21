@@ -6,8 +6,8 @@ namespace Sugar\twig;
  * @name        initTwig
  * @namespace   php.twig
  * @type        Function
- * @status      beta
  * @platform    php
+ * @status      beta
  *
  * This function init your twig to have access to helpers delivered from the "coffeekraken/sugar" package like "toArray", "idCompliant", and many more...
  * These helpers/functions are used inside the @coffeekraken layouts, views, etc... so you will need to init your twig using this function.

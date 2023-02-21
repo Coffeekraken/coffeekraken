@@ -17,7 +17,7 @@
  * @todo      doc
  *
  * @since       2.0.0
- * @contributor 	Olivier Bossel <olivier.bossel@gmail.com>
+ * @author 	Olivier Bossel <olivier.bossel@gmail.com>
  */
 function contributor(data, blockSettings) {
     data = Array.from(data);
@@ -25,9 +25,10 @@ function contributor(data, blockSettings) {
     const contributors: any[] = [];
 
     data.forEach((d) => {
-        const contributorNfo = /^([^<(]+?)?[ \t]*(?:<([^>(]+?)>)?[ \t]*(?:\(([^)]+?)\)|$)/gm.exec(
-            d.value,
-        );
+        const contributorNfo =
+            /^([^<(]+?)?[ \t]*(?:<([^>(]+?)>)?[ \t]*(?:\(([^)]+?)\)|$)/gm.exec(
+                d.value,
+            );
         if (!contributorNfo) return null;
 
         contributors.push({

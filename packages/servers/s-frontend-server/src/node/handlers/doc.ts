@@ -9,7 +9,8 @@ import __scrapeUrl from '@coffeekraken/sugar/node/og/scrapeUrl';
  * @name                doc
  * @namespace           sugar.node.server.frontend.handlers
  * @type                Function
- * @status              wip
+ * @platform            node
+ * @status              beta
  *
  * This function is responsible of responding to express requests made on the doc pages
  *

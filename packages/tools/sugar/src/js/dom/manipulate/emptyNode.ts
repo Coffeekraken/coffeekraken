@@ -20,7 +20,7 @@
  * @import { __emptyNode } from '@coffeekraken/sugar/dom';
  * __emptyNode (myCoolNode);
  *
- * @since       1.0.0
+ @since           2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 export default function __emptyNode(node: HTMLElement): HTMLElement {

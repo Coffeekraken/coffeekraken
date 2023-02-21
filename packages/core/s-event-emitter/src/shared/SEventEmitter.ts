@@ -17,6 +17,8 @@ import __globToRegex from 'glob-to-regexp';
  * @name                  SEventEmitter
  * @namespace           sugar.js.event
  * @type                  Class
+ * @platform            node
+ * @platform            js
  * @status                beta
  *
  *

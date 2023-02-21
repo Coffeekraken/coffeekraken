@@ -26,7 +26,7 @@ const is_valid_path_1 = __importDefault(require("is-valid-path"));
  * import { __isPath } from '@coffeekraken/sugar/is';
  * __isPath('hello/world'); // => true
  *
- * @since           1.0.0
+ @since           2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 function __isPath(path) {

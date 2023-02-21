@@ -24,7 +24,7 @@
  * __isIsoTime('17:21') => true
  *
  * @see             https://www.oreilly.com/library/view/regular-expressions-cookbook/9781449327453/ch04s07.html
- * @since         1.0.0
+ @since           2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 export default function __isIsoTime(value) {

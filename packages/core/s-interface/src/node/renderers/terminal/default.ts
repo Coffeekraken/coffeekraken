@@ -2,8 +2,11 @@ import { __toString } from '@coffeekraken/sugar/string';
 
 /**
  * @name                default
- * @namespace           sugar.js.interface.renderers.terminal
- * @default                Function
+ * @namespace           renderers.terminal
+ * @type                Function
+ * @platform            node
+ * @status              beta
+ * @private
  *
  * Render the "default" field.
  *

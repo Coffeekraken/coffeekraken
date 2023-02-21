@@ -3,8 +3,11 @@ import __countLine from '@coffeekraken/sugar/shared/string/countLine';
 
 /**
  * @name                layout
- * @namespace           sugar.js.interface.renderers.terminal
+ * @namespace           renderers.terminal
  * @type                Function
+ * @platform          node
+ * @status            beta
+ * @private
  *
  * Return the layout you want for the "terminal" renderer.
  * You can use tokens like these:

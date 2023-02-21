@@ -5,6 +5,8 @@ import __postcss from 'postcss';
  * @name            sVitePluginPostcss
  * @namespace       node
  * @type            Function
+ * @platform        node
+ * @status          beta
  *
  * This plugin allows you to use the awesome RiotJs library
  * to build your webcomponent using vite frontend development stack.

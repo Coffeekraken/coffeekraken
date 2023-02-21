@@ -4,8 +4,8 @@
  * @name        idCompliant
  * @namespace   php.twig.functions.string
  * @type        TwigFunction
+ * @platform    twig
  * @status      beta
- * @platform    php
  *
  * This twig function allows you to ensure that a string is "html" id compliant
  *
@@ -13,11 +13,11 @@
  * @return      {String}                        The id compliant version
  *
  * @example       twig
- * {% set id = idCompliant('something cool) %}
+ * {% set id = __idCompliant('something cool) %}
  *
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-return new \Twig\TwigFunction('idCompliant', function ($value) {
+return new \Twig\TwigFunction('__idCompliant', function ($value) {
     return \Sugar\string\idCompliant($value);
 });

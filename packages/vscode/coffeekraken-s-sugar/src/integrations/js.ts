@@ -1,5 +1,6 @@
 import * as vscode from 'vscode';
 import __colors from '../lib/colors';
+import __popinContent from '../lib/popinContent';
 
 function getDocmapObjByName(docmapJson: any, name: string): any {
     for (let [namespace, docmapObj] of Object.entries(docmapJson)) {
@@ -10,77 +11,6 @@ function getDocmapObjByName(docmapJson: any, name: string): any {
 }
 
 export default function jsIntegration(docmapJson: any): void {
-    function popinContent(docmapObj) {
-        const params = docmapObj.param ?? {},
-            settings = docmapObj.setting ?? {};
-
-        const content = `# __${docmapObj.name}
-
-${docmapObj.description}
-
-${Object.keys(params)
-    .map((param) => {
-        const paramObj = params[param];
-        return `
-- <span style="color:${__colors.yellow};">**${
-            paramObj.defaultStr ? `[${param}=${paramObj.defaultStr}]` : param
-        }**</span>${'&nbsp;'.repeat(
-            20 - param.length >= 0 ? 20 - param.length : 1,
-        )}<span style="color:${__colors.cyan};">__{${
-            paramObj.type.raw
-        }}__</span>
-    - ${paramObj.description}`;
-    })
-    .join('\n')}
-${
-    Object.keys(settings).length
-        ? `
-### Settings
-`
-        : ''
-}
-
-${Object.keys(settings)
-    .map((setting) => {
-        const settingObj = settings[setting];
-        return `
-- <span style="color:${__colors.yellow};">**${
-            settingObj.defaultStr
-                ? `[${setting}=${settingObj.defaultStr}]`
-                : setting
-        }**</span>${'&nbsp;'.repeat(
-            20 - setting.length >= 0 ? 20 - setting.length : 1,
-        )}<span style="color:${__colors.cyan};">__{${
-            settingObj.type.raw
-        }}__</span>
-    - ${settingObj.description}`;
-    })
-    .join('\n')}
-
-${docmapObj.example
-    ?.map?.(
-        (exampleObj) => `
-### ${exampleObj.title ?? 'Example'}
-
-\`\`\`${exampleObj.language}
-${exampleObj.code}
-\`\`\`
-`,
-    )
-    .join('\n')}
-    
-### More
-
-- [Full documentation](https://coffeekraken.io/api/${docmapObj.id})
-    
-    `;
-
-        const docs: any = new vscode.MarkdownString(content);
-        docs.supportHtml = true;
-        docs.isTrusted = true;
-        return docs;
-    }
-
     const snippets: any[] = [];
 
     vscode.commands.registerCommand(
@@ -97,6 +27,8 @@ ${exampleObj.code}
                         if (!importStr.match(/^import\s/)) {
                             return;
                         }
+
+                        // ending ";"
 
                         const editor = vscode.window.activeTextEditor,
                             curPos = editor.selection.active;
@@ -133,17 +65,48 @@ ${exampleObj.code}
     for (let [key, docmapObj] of Object.entries(docmapJson)) {
         const type = docmapObj.type?.raw?.toLowerCase?.();
 
+        // only beta and stable items
+        if (docmapObj.status !== 'beta' && docmapObj.status !== 'stable') {
+            continue;
+        }
+
         // handle only class and functions
         if (type !== 'function' && type !== 'class') {
             continue;
         }
 
+        if (!docmapObj.author?.name) {
+            console.log(
+                `[Sugar] The namespace ${docmapObj.id} does not have any author defined...`,
+            );
+            continue;
+        }
+
+        // handle only js stuff
+        let isEligible = false;
+        if (!docmapObj.platform) {
+            console.log(
+                `The namespace ${docmapObj.id} does not have any platform defined...`,
+            );
+            continue;
+        }
+        for (let platformObj of docmapObj.platform) {
+            if (platformObj.name === 'js' || platformObj.name === 'node') {
+                isEligible = true;
+                break;
+            }
+        }
+        if (!isEligible) {
+            continue;
+        }
+
         let str = `__${docmapObj.name}`,
-            label = `sugar ${str}`;
+            label = `${str}`;
 
         const snippetCompletion = new vscode.CompletionItem(str);
         snippetCompletion.kind = vscode.CompletionItemKind.Function;
         snippetCompletion.label = label;
+        snippetCompletion.filterText = `${docmapObj.namespace}.${label}`;
         snippetCompletion.insertText = new vscode.SnippetString(str);
         snippetCompletion.sup;
         snippetCompletion.command = {
@@ -151,7 +114,7 @@ ${exampleObj.code}
             command: 'coffeekraken.s.sugar.import',
         };
 
-        const docs: any = popinContent(docmapObj);
+        const docs: any = __popinContent(docmapObj);
         snippetCompletion.documentation = docs;
         snippets.push(snippetCompletion);
     }
@@ -187,7 +150,7 @@ ${exampleObj.code}
                     return;
                 }
 
-                const popinContentStr = popinContent(docmapObj);
+                const popinContentStr = __popinContent(docmapObj);
                 return {
                     contents: [popinContentStr],
                 };

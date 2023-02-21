@@ -302,6 +302,12 @@
                         "defaultStr": "{}"
                     }
                 },
+                "platform": [
+                    {
+                        "name": "js",
+                        "description": ""
+                    }
+                ],
                 "description": "This class allows you to use the display your components library as well as your sections, etc... in a\nnice and easy interface that let you customize the props of your components live",
                 "namespace": "@coffeekraken.s-carpenter.node",
                 "status": "wip",

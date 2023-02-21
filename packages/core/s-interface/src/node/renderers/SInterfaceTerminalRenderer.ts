@@ -10,6 +10,8 @@ import { __dirname } from '@coffeekraken/sugar/fs';
  * @namespace       sugar.node.interface.renderers
  * @type            Class
  * @extends         SClass
+ * @platform        node
+ * @status          beta
  *
  * This class represent the terminal interface renderer
  *

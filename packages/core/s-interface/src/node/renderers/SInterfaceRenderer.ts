@@ -11,9 +11,11 @@ import __SInterface from '../SInterface';
 
 /**
  * @name            SInterfaceRenderer
- * @namespace       sugar.node.interface.renderers
+ * @namespace       node.renderers
  * @type            Class
  * @extends         SClass
+ * @platform        node
+ * @status          beta
  *
  * This class represent the base for every interface renderers.
  * It handle things like registering types templates, properties to exclude, etc...

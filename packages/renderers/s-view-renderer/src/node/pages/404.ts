@@ -4,7 +4,10 @@ import type { ISViewRendererRenderResult } from '../SViewRenderer';
  * @name           404
  * @namespace       s-view.pages
  * @type            Function
+ * @platform        node
+ * @status              beta
  * @async
+ * @private
  *
  * This function simply take a data object and render a clean 404 page
  *

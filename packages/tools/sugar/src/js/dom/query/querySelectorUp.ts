@@ -29,7 +29,7 @@ import { __matches } from '@coffeekraken/sugar/dom';
  *   return elm.hasAttribute('my-cool-attribute')
  * })
  *
- * @since         1.0.0
+ @since           2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 export default function __querySelectorUp(

@@ -7,6 +7,8 @@ import { __deepMerge } from '@coffeekraken/sugar/object';
  * @name                SDuration
  * @namespace           shared
  * @type                Class
+ * @platform            node
+ * @platform            js
  * @status              beta
  *
  * This class represent a duration tracking process. Simply instanciate it,

@@ -9,7 +9,9 @@ import __fs from 'fs';
  * @name            packageJsonMiddleware
  * @namespace       sugar.node.server.frontend.middleware
  * @type            Function
+ * @platform             node
  * @status              beta
+ * @private
  *
  * This function describe the middleware that will fetch the ```package.json``` file at the root of
  * your server directory and add it to the template data sended to the rendered view

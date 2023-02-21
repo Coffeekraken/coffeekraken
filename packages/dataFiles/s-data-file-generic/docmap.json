@@ -152,6 +152,12 @@
                     ],
                     "raw": "Class"
                 },
+                "platform": [
+                    {
+                        "name": "node",
+                        "description": ""
+                    }
+                ],
                 "description": "This class represent the generic data file loader.\nIt actually regroup all the other data file loader into one single for convinience.",
                 "namespace": "@coffeekraken.s-data-file-generic.node",
                 "status": "beta",

@@ -141,8 +141,8 @@
                 "relPath": "src/doc/README.md.twig",
                 "children": {}
             },
-            "@coffeekraken.s-process.s-process.SCommandProcess": {
-                "id": "@coffeekraken.s-process.s-process.SCommandProcess",
+            "@coffeekraken.s-process.node.SCommandProcess": {
+                "id": "@coffeekraken.s-process.node.SCommandProcess",
                 "name": "SCommandProcess",
                 "type": {
                     "types": [
@@ -168,9 +168,15 @@
                         "defaultStr": "{}"
                     }
                 },
+                "platform": [
+                    {
+                        "name": "node",
+                        "description": ""
+                    }
+                ],
                 "description": "This class represent an SProcess started with a simple bash command like \"ls -la\" or whatever",
-                "namespace": "@coffeekraken.s-process.s-process",
-                "status": "wip",
+                "namespace": "@coffeekraken.s-process.node",
+                "status": "beta",
                 "example": [
                     {
                         "language": "js",
@@ -257,8 +263,8 @@
                     }
                 }
             },
-            "@coffeekraken.s-process.sugar.node.process.SProcess": {
-                "id": "@coffeekraken.s-process.sugar.node.process.SProcess",
+            "@coffeekraken.s-process.node.SProcess": {
+                "id": "@coffeekraken.s-process.node.SProcess",
                 "name": "SProcess",
                 "type": {
                     "types": [
@@ -268,9 +274,15 @@
                     ],
                     "raw": "Class"
                 },
+                "platform": [
+                    {
+                        "name": "node",
+                        "description": ""
+                    }
+                ],
                 "description": "This class represent an SProcess run iteration that store things like\nthe value, the startTime, endTime, duration, state, etc...",
-                "namespace": "@coffeekraken.s-process.sugar.node.process",
-                "status": "wip",
+                "namespace": "@coffeekraken.s-process.node",
+                "status": "beta",
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
@@ -867,8 +879,8 @@
                     }
                 }
             },
-            "@coffeekraken.s-process.s-process.SProcessManager": {
-                "id": "@coffeekraken.s-process.s-process.SProcessManager",
+            "@coffeekraken.s-process.node.SProcessManager": {
+                "id": "@coffeekraken.s-process.node.SProcessManager",
                 "name": "SProcessManager",
                 "type": {
                     "types": [
@@ -894,9 +906,15 @@
                         "defaultStr": "{}"
                     }
                 },
+                "platform": [
+                    {
+                        "name": "node",
+                        "description": ""
+                    }
+                ],
                 "description": "This class represent a process handler class that will fire up some SProcess processes",
-                "namespace": "@coffeekraken.s-process.s-process",
-                "status": "wip",
+                "namespace": "@coffeekraken.s-process.node",
+                "status": "beta",
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
@@ -1094,8 +1112,8 @@
                     }
                 }
             },
-            "@coffeekraken.s-process.s-process.SProcessManagerProcessWrapper": {
-                "id": "@coffeekraken.s-process.s-process.SProcessManagerProcessWrapper",
+            "@coffeekraken.s-process.node.SProcessManagerProcessWrapper": {
+                "id": "@coffeekraken.s-process.node.SProcessManagerProcessWrapper",
                 "name": "SProcessManagerProcessWrapper",
                 "type": {
                     "types": [
@@ -1121,9 +1139,15 @@
                         "defaultStr": "{}"
                     }
                 },
+                "platform": [
+                    {
+                        "name": "node",
+                        "description": ""
+                    }
+                ],
                 "description": "This class represent a process manager process wrapper that handle the actual restarting, watch, etc...",
-                "namespace": "@coffeekraken.s-process.s-process",
-                "status": "wip",
+                "namespace": "@coffeekraken.s-process.node",
+                "status": "beta",
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",

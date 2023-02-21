@@ -1,7 +1,10 @@
 /**
  * @name                alias
- * @namespace           sugar.js.interface.renderers.terminal
+ * @namespace           renderers.terminal
  * @name                Function
+ * @platform          node
+ * @status          beta
+ * @private
  *
  * Render the "alias" field.
  *
@@ -12,5 +15,5 @@
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 export default function ({ value, interfaceClass }) {
-  return `-${value}`;
+    return `-${value}`;
 }

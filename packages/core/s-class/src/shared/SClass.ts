@@ -6,6 +6,8 @@ import __toJson from '@coffeekraken/sugar/shared/object/toJson';
  * @name            SClass
  * @namespace       sugar.js.class
  * @type            Class
+ * @platform        js
+ * @platform        node
  * @status              beta
  *
  * This class is a simple and effective one that manage the ```settings``` property

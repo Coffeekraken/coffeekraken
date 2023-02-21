@@ -29,7 +29,7 @@ import __SPromise from '@coffeekraken/s-promise';
  * observe();
  *
  * @see 		https://developer.mozilla.org/en/docs/Web/API/MutationObserver
- * @since       1.0.0
+ @since           2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 export default function __observeAttributes(

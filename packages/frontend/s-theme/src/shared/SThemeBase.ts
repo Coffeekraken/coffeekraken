@@ -20,6 +20,9 @@ import __knownCssProperties from 'known-css-properties';
  * @namespace       shared
  * @type            Class
  * @extends         SEventEmitter
+ * @platform        node
+ * @platform        js
+ * @status          beta
  *
  * This class represent the sugar theme you've passed the name in the constructor.
  * Once you have an instance of this theme you will have access to a lot of utilities

@@ -21,7 +21,7 @@ import { XMLParser } from 'fast-xml-parser';
  * @todo        doc
  *
  * @see             https://www.npmjs.com/package/fast-xml-parser
- * @since         1.0.0
+ @since           2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 export default function __xmlToJson(xml: string): any {

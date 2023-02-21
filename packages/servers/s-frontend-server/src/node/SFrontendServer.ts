@@ -28,9 +28,11 @@ import __request from 'request';
 
 /**
  * @name            SFrontendServer
- * @namespace       s-frontend-server
+ * @namespace       node
  * @type            Class
  * @extends         SEventEmitter
+ * @platform        node
+ * @status          beta
  *
  * This class represent a frontend server that handle features like documentation, views rendering,
  * frontspec reading middleware, packageJson middleware and more...

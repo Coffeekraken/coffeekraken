@@ -1,6 +1,6 @@
 // @ts-nocheck
 
-import { __offsetFromViewport, __forceRedraw } from '@coffeekraken/sugar/dom';
+import { __forceRedraw, __offsetFromViewport } from '@coffeekraken/sugar/dom';
 import { __SSvgFilter } from '@coffeekraken/sugar/filter';
 
 /**
@@ -23,7 +23,7 @@ import { __SSvgFilter } from '@coffeekraken/sugar/filter';
  * filter.applyTo(myCoolHTMLElement);
  * // now when your element will move, it will be blured accordingly
  *
- * @since         1.0.0
+ @since           2.0.0
  * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 export default class __SMotionblurSvgFilter extends __SSvgFilter {

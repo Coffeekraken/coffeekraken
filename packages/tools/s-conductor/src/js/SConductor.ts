@@ -15,6 +15,7 @@ import __SConductorSettingsInterface from './interface/SConductorSettingsInterfa
  * @namespace           s-duration
  * @type                Class
  * @extends             SClass
+ * @platform            js
  * @status              beta
  *
  * This class represent the conductor for your UI. With it you can register some "task" to execute

@@ -9,7 +9,8 @@ import { __deepMerge } from '@coffeekraken/sugar/object';
  * @namespace           node
  * @type                Class
  * @extends             SClass
- * @status              wip
+ * @platform            node
+ * @status              beta
  *
  * This represent the main builder class that has to be extended for builders like typescript, scss, etc...
  * His main goal is to provide basic features like storing the inputs, settings, etc...

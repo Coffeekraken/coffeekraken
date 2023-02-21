@@ -181,6 +181,16 @@
                         "defaultStr": "{}"
                     }
                 },
+                "platform": [
+                    {
+                        "name": "js",
+                        "description": ""
+                    },
+                    {
+                        "name": "node",
+                        "description": ""
+                    }
+                ],
                 "description": "Class that provide complete and simple to use color manupilation capabilities like:\n- Modifiers\n- lighten\n- darken\n- saturate\n- desaturate\n- spin (change hue)\n- alpha\n- opacity\n- grayscale\n- Conversions\n- rgb\n- rgba\n- hsl\n- hsla\n- hex\n- Print out formats\n- toRgbString\n- toRgbaString\n- toHslString\n- toHslaString\n- toHexString\n- toString(format = null)",
                 "namespace": "@coffeekraken.s-color.shared",
                 "status": "beta",

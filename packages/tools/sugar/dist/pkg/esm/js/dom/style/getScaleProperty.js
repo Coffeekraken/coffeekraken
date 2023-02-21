@@ -22,7 +22,7 @@ import * as rematrix from 'rematrix';
  * // output format
  * // 2
  *
- * @since           1.0.0
+ @since           2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 export default function __getScaleProperty($elm) {

@@ -30,7 +30,7 @@ import __deepClone from 'lodash.clonedeep';
  * });
  *
  * @see       https://www.npmjs.com/package/lodash
- * @since         1.0.0
+ @since           2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 export default function clone(object, settings = {}) {

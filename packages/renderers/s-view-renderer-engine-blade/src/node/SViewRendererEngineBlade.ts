@@ -12,6 +12,8 @@ import __SViewRendererBladeEngineSettingsInterface from './interface/SViewRender
  * @name            SViewRendererEngineBlade
  * @namespace       node
  * @type            Class
+ * @platform            node
+ * @status          beta
  *
  * This class is the blade.php view engine that allows you
  * to render .blade.php views.

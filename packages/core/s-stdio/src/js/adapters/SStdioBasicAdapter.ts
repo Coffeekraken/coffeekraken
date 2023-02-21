@@ -10,8 +10,10 @@ import __SStdioAdapter from '../../shared/SStdioAdapter';
 
 /**
  * @name            SBasicStdio
- * @namespace       node.basic
+ * @namespace       js.basic
  * @type            Class
+ * @platform            js
+ * @status              beta
  *
  * This class represent a "basic" terminal strandard in out interface.
  *

@@ -19,7 +19,7 @@
  * import { __injectIframeContent } from '@coffeekraken/sugar/dom'
  *  __injectIframeContent($myIframe, '<html>...</html>');
  *
- * @since     1.0.0
+ @since           2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 export default function __injectIframeContent($iframe, html) {

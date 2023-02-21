@@ -11,7 +11,8 @@ import __fs from 'fs';
  * @name                genericHandler
  * @namespace           node.modules.docmap
  * @type                Function
- * @status              wip
+ * @platform            node
+ * @status              beta
  *
  * This function is responsible of responding to express requests made on the doc pages
  *

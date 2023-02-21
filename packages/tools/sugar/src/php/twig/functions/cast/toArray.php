@@ -4,8 +4,8 @@
  * @name        toArray
  * @namespace   php.twig.functions.cast
  * @type        TwigFunction
+ * @platform    twig
  * @status      beta
- * @platform    php
  *
  * This twig function allows you to convert an object to an array
  *
@@ -14,11 +14,11 @@
  *
  * @example       twig
  * {% set obj = {'something':true} %}
- * {% set ar = toArray(obj) %}
+ * {% set ar = __toArray(obj) %}
  *
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-return new \Twig\TwigFunction('toArray', function ($value) {
+return new \Twig\TwigFunction('__toArray', function ($value) {
     return (array) $value;
 });

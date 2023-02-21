@@ -4,8 +4,8 @@
  * @name        metas
  * @namespace   php.twig.functions.frontspec
  * @type        TwigFunction
+ * @platform    twig
  * @status      beta
- * @platform    php
  *
  * This twig function allows you to print out the frontspec.json "metas" property
  *
@@ -13,11 +13,11 @@
  * @return      {Array}                        The html representing the metas
  *
  * @example       twig
- * {% frontspecMetas(fronspec) %}
+ * {% __frontspecMetas(fronspec) %}
  *
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-return new \Twig\TwigFunction('frontspecMetas', function ($frontspec = null) {
+return new \Twig\TwigFunction('__frontspecMetas', function ($frontspec = null) {
     return \Sugar\frontspec\metas($frontspec);
 });

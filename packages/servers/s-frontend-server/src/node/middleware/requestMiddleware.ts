@@ -4,7 +4,9 @@
  * @name            requestMiddleware
  * @namespace       sugar.node.server.frontend.middleware
  * @type            Function
- * @status              wip
+ * @platform            node
+ * @status              beta
+ * @private
  *
  * This function describe the middleware will fill the templateData.request object with the
  * actual express one

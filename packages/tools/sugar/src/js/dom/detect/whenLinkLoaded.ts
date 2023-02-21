@@ -26,7 +26,7 @@
  * 		// do something when the link is loaded
  * });
  *
- * @since         1.0.0
+ @since           2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 function alreadyLoaded(link: HTMLLinkElement): boolean {

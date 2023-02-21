@@ -8,7 +8,8 @@ import { __filter } from '@coffeekraken/sugar/object';
  * @name            configMiddleware
  * @namespace       sugar.node.server.frontend.middleware
  * @type            Function
- * @status              wip
+ * @platform            node
+ * @status              beta
  *
  * This function describe the middleware that will expose the config and config files add it to the template data sended to the rendered view
  *

@@ -2,6 +2,7 @@
  * @name                astNodesToString
  * @namespace           node.utils
  * @type                Function
+ * @platform            node
  * @status              beta
  *
  * This function just take an AST nodes array and returns the string version of it

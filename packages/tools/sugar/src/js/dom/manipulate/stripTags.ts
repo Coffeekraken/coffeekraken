@@ -20,7 +20,7 @@
  * import { __stripTags } from '@coffeekraken/sugar/dom'
  * __stripTags('<h1>Hello World</h1>') // => Hello World
  *
- * @since       1.0.0
+ @since           2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 export default function __stripTags(html: string): string {

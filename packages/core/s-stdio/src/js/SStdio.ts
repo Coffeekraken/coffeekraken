@@ -9,7 +9,8 @@ import __SStdio from '../shared/SStdio';
  * @name          SStdio
  * @namespace     js
  * @type          Class
- * @status              wip
+ * @platform        js
+ * @status              beta
  *
  * This class represent the base one for all the "Stdio"
  * compatible setting.

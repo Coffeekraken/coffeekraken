@@ -30,7 +30,7 @@ import { __dispatchEvent } from '@coffeekraken/sugar/dom';
  * import { __inputAdditionalEvents } from '@coffeekraken/sugar/feature';
  * __inputAdditionalEvents();
  *
- * @since         1.0.0
+ @since           2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 

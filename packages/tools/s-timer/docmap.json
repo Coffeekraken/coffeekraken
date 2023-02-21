@@ -149,6 +149,16 @@
                         "content": "- tickInterval (1000) {Number}: Specify the interval wanted between each ticks in miliseconds\n- tickCount (null) {Number}: Specify how many ticks you want during the timer process\n- loop (false) {Boolean}: Specify if you want the timer to loop or not.\n"
                     }
                 },
+                "platform": [
+                    {
+                        "name": "node",
+                        "description": ""
+                    },
+                    {
+                        "name": "js",
+                        "description": ""
+                    }
+                ],
                 "description": "Class that let you create and handle timer with ease.\nWith this class you can set some callback function that will be\ncalled each x ms or tell that you want your callbacks to be called\na certain number of time during the timer time.\nThis class extends the SPromise one, meaning that you can subscribe to differents \"events\" emited by the timer instance. Here's the list:\n- complete: emited when the timer is completed\n- tick: emited at each ticks depending on your settings\n- duration: emited when the duration has been changed\n- tickCount: emited when the tickCount has been changed\n- reset: emited when the timer has been reseted\n- start: emited when the timer starts\n- pause: emited when the timer has been paused\n- stop: emited when the timer has been stoped\n- destroy: emited when the timer has been destroyed",
                 "namespace": "@coffeekraken.s-timer.shared",
                 "status": "beta",

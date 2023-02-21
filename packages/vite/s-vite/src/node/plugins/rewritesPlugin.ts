@@ -1,8 +1,10 @@
-
 /**
  * @name            rewritesPlugin
  * @namespace       node.plugins
  * @type            Function
+ * @platform      node
+ * @status      beta
+ * @private
  *
  * This vite plugin allows you to rewrite some code simply by specifying
  * which files have to be touched using the ```match``` property and
@@ -27,34 +29,34 @@
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 export interface IRewritesPluginRewrite {
-  match: RegExp;
-  rewrite(src: string, id: string): string;
+    match: RegExp;
+    rewrite(src: string, id: string): string;
 }
 
 export default function rewritesPlugin(rewrites: IRewritesPluginRewrite[]) {
-  return {
-    name: 'rewrites-plugin',
-    async transform(src, id) {
-      for (let i = 0; i < rewrites.length; i++) {
-        let rewriteObj = rewrites[i];
+    return {
+        name: 'rewrites-plugin',
+        async transform(src, id) {
+            for (let i = 0; i < rewrites.length; i++) {
+                let rewriteObj = rewrites[i];
 
-        // resolve pathes
-        if (typeof rewriteObj === 'string') {
-          const { default: re } = await import(rewriteObj);
-          rewriteObj = re;
-        }
+                // resolve pathes
+                if (typeof rewriteObj === 'string') {
+                    const { default: re } = await import(rewriteObj);
+                    rewriteObj = re;
+                }
 
-        if (!src.match(rewriteObj.match)) continue;
-        return {
-          code: rewriteObj.rewrite(src, id),
-          map: null
-        };
-      }
+                if (!src.match(rewriteObj.match)) continue;
+                return {
+                    code: rewriteObj.rewrite(src, id),
+                    map: null,
+                };
+            }
 
-      return {
-        code: src,
-        map: null
-      };
-    }
-  };
+            return {
+                code: src,
+                map: null,
+            };
+        },
+    };
 }

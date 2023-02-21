@@ -1,7 +1,7 @@
 // @ts-nocheck
 
-import requestFullscreen from './requestFullscreen';
 import exitFullscreen from './exitFullscreen';
+import requestFullscreen from './requestFullscreen';
 
 /**
  * @name      toggleFullscreen
@@ -23,7 +23,7 @@ import exitFullscreen from './exitFullscreen';
  * import { __toggleFullscreen } from '@coffeekraken/sugar/dom'
  * __toggleFullscreen(myDomElm)
  *
- * @since       1.0.0
+ @since           2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 export default function __toggleFullscreen(elm: HTMLElement): Promise<any> {

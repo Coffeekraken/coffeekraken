@@ -2,7 +2,10 @@
  * @name           treatAsValue
  * @namespace       SPromise.js
  * @type            Function
+ * @platform          node
+ * @platform          js
  * @status              beta
+ * @private
  *
  * This function allows you to wrap a promise in a ```resolve``` call to prevent
  * this promise to be treated as a "chaining" promise but to be treated as
@@ -23,47 +26,47 @@
  */
 
 export interface ITreatAsValueSettings {
-  during?: number;
+    during?: number;
 }
 
 export interface ITreatAsValueProxy extends ProxyConstructor {
-  restorePromiseBehavior: Function;
+    restorePromiseBehavior: Function;
 }
 
 export interface ITreatAsValue {
-  (promise: any, settings?: ITreatAsValueSettings): ITreatAsValueProxy;
+    (promise: any, settings?: ITreatAsValueSettings): ITreatAsValueProxy;
 }
 
 const fn: ITreatAsValue = function treatAsValue(
-  promise: any,
-  settings: ITreatAsValueSettings = {}
+    promise: any,
+    settings: ITreatAsValueSettings = {},
 ): any {
-  settings = {
-    during: -1,
-    ...settings
-  };
-  let during: number = settings.during || -1;
-  try {
-    const proxy = Proxy.revocable(promise, {
-      get(target, prop, receiver) {
-        if (prop === 'then') {
-          return target;
-        }
-        if (during > 0) during--;
-        else if (during === 0) {
-          proxy.revoke();
-        }
-        // @ts-ignore
-        return Reflect.get(...arguments);
-      }
-    });
-    proxy.proxy.restorePromiseBehavior = () => {
-      proxy.revoke();
-      return promise;
+    settings = {
+        during: -1,
+        ...settings,
     };
-    return proxy.proxy;
-  } catch (e) {
-    return promise;
-  }
+    let during: number = settings.during || -1;
+    try {
+        const proxy = Proxy.revocable(promise, {
+            get(target, prop, receiver) {
+                if (prop === 'then') {
+                    return target;
+                }
+                if (during > 0) during--;
+                else if (during === 0) {
+                    proxy.revoke();
+                }
+                // @ts-ignore
+                return Reflect.get(...arguments);
+            },
+        });
+        proxy.proxy.restorePromiseBehavior = () => {
+            proxy.revoke();
+            return promise;
+        };
+        return proxy.proxy;
+    } catch (e) {
+        return promise;
+    }
 };
 export default fn;

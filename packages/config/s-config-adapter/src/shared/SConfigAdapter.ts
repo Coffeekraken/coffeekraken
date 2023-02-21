@@ -6,6 +6,8 @@ import { __uniqid } from '@coffeekraken/sugar/string';
  * @name                                SConfigAdapter
  * @namespace           shared
  * @type                                Class
+ * @platform            node
+ * @platform            js
  * @status              beta
  *
  * Base class for SConfig adapters

@@ -31,7 +31,7 @@ import { __uniqid } from '@coffeekraken/sugar/string';
  * // when you want to stop listening
  * promise.cancel();
  *
- * @since         1.0.0
+ @since           2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 

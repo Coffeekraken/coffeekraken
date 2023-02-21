@@ -10,6 +10,8 @@ import __SConfigAdapter from '../../shared/adapters/SConfigAdapter';
  * @name                  SConfigLsAdapter
  * @namespace           sugar.js.config.adapters
  * @type                  Class
+ * @platform                js
+ * @status                  wip
  *
  * This Local Storage adapter for the SConfig class let you define a name for your config and then you can just
  * let the SConfig class do the work for you...

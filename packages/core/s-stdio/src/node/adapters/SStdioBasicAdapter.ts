@@ -15,6 +15,8 @@ import __SStdioAdapter from '../../shared/SStdioAdapter';
  * @name            SStdioBasicAdapter
  * @namespace       node.basic
  * @type            Class
+ * @platform        node
+ * @status          beta
  *
  * This class represent a "basic" terminal strandard in out interface.
  *

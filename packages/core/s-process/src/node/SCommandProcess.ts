@@ -10,10 +10,11 @@ import __SProcess from './SProcess';
 
 /**
  * @name            SCommandProcess
- * @namespace       s-process
+ * @namespace       node
  * @type            Class
  * @extends         SProcess
- * @status          wip
+ * @platform        node
+ * @status          beta
  *
  * This class represent an SProcess started with a simple bash command like "ls -la" or whatever
  *

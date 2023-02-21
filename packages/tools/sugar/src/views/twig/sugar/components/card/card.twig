@@ -1,11 +1,11 @@
-<div class="s-card {{ attributes.class }} {{ direction ? 's-card--' ~ direction : '' }} {{ paddingClasses(padding, frontspec) }} {{ marginClasses(margin, frontspec) }}" {{ attrs(attributes, ['class'])|raw }}
+<div class="s-card {{ attributes.class }} {{ direction ? 's-card--' ~ direction : '' }} {{ __paddingClasses(padding, frontspec) }} {{ __marginClasses(margin, frontspec) }}" {{ __attrs(attributes, ['class'])|raw }}
     s-specs="views.components.card"
-    {{ specsValues(_context)|raw }}
+    {{ __specsValues(_context)|raw }}
 >
 
     {% if image and image.url %}
         <div class="s-card_media s-media-container">
-            <img class="s-card_img s-media" src="{{ image.url }}" alt="{{ image.alt }}" title="{{ image.title }}" />
+            <img class="s-card_img s-media" src="{{ image.url }}" alt="{{ image.alt }}" title="{{ image.title }}" />
         </div>
     {% endif %}
 

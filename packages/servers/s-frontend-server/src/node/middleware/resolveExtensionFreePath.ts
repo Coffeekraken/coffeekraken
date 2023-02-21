@@ -8,7 +8,9 @@ import __fs from 'fs';
  * @name            resolveExtensionFreePath
  * @namespace       sugar.node.server.frontend.middleware
  * @type            Function
- * @status              wip
+ * @platform            node
+ * @status              beta
+ * @private
  *
  * This function will try to resolve extension free requests like node modules, etc...
  *

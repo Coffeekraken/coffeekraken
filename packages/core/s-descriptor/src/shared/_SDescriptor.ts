@@ -11,9 +11,11 @@ import __SDescriptorResult, {
 
 /**
  * @name                SDescriptor
- * @namespace           s-descriptor.shared
+ * @namespace           shared
  * @type                Class
  * @extends             SClass
+ * @platform            node
+ * @platform            js
  * @status              beta
  *
  * Make a description...

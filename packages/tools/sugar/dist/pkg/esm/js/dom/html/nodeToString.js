@@ -21,7 +21,7 @@
  * const myDomNode = document.querySelector('.my-dom-node')
  *  __nodeToString(myDomNode, false) // <div class="my-dom-node"></div>
  *
- * @since       1.0.0
+ @since           2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 export default function __nodeToString(node, deep = true) {

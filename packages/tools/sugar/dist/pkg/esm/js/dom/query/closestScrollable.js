@@ -21,7 +21,7 @@ import { __isScrollable, __traverseUp } from '@coffeekraken/sugar/dom';
  * import { __closestScrollable } from '@coffeekraken/sugar/dom';
  * __closestScrollable($myElement);
  *
- * @since         1.0.0
+ @since           2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 export default function __closestScrollable($elm, selector) {

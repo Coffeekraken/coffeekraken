@@ -16,7 +16,7 @@
  * @todo      doc
  *
  * @since       2.0.0
- * @contributor 	Olivier Bossel <olivier.bossel@gmail.com>
+ * @author 	Olivier Bossel <olivier.bossel@gmail.com>
  */
 function contributor(data, blockSettings) {
     data = Array.from(data);

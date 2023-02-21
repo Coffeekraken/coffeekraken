@@ -8,7 +8,8 @@ import { __deepMerge, __get } from '@coffeekraken/sugar/object';
  * @namespace           js
  * @type                Class
  * @extends             SClass
- * @status              wip
+ * @platform            js
+ * @status              beta
  *
  * This class represent the ```frontspec.json``` json that must be either in:
  * 1. The `document.env.SUGAR.frontspec` object
@@ -108,13 +109,11 @@ export default class SFrontspec extends __SClass {
      */
     constructor(frontspec = {}) {
         super(
-            __deepMerge(
-                {
-                    metas: {
-                        id: 'SFrontspec',
-                    },
+            __deepMerge({
+                metas: {
+                    id: 'SFrontspec',
                 },
-            ),
+            }),
         );
 
         this.constructor._defaultFrontspecInstance = this;

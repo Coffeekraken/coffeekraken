@@ -4,8 +4,8 @@
  * @name        typeToString
  * @namespace   php.twig.filters.type
  * @type        TwigFilter
+ * @platform    twig
  * @status      beta
- * @platform    php
  *
  * This twig filter allows you to convert a type array to a string is needed
  *
@@ -13,11 +13,11 @@
  * @return      {String}                                The type string
  *
  * @example       twig
- * {% set id = 'Array'|typeToString %}
+ * {% set id = 'Array'|__typeToString %}
  *
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-return new \Twig\TwigFilter('typeToString', function ($type) {
+return new \Twig\TwigFilter('__typeToString', function ($type) {
     return \Sugar\type\typeToString($type);
 });

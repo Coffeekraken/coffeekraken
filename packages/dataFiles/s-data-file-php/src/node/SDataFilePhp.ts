@@ -9,6 +9,7 @@ import __path from 'path';
  * @name          SDataFilePhp
  * @namespace     node
  * @type          Class
+ * @platform        node
  * @status              beta
  *
  * This class represent the php data file loader

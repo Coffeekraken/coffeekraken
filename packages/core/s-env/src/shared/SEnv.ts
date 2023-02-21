@@ -15,6 +15,9 @@ try {
  * @name            SEnv
  * @namespace       shared
  * @type            Class
+ * @platform        js
+ * @platform        node
+ * @status          beta
  *
  * This class allows you to access, set and update environment variables seemlessly on node
  * and browser env.

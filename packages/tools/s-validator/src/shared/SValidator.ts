@@ -57,10 +57,12 @@ import __requiredValidator, {
 } from './validators/required';
 
 /**
- * @name            SValidation
+ * @name            SValidator
  * @namespace           shared
  * @type            Class
  * @extends       SClass
+ * @platform        node
+ * @platform        js
  * @status              beta
  *
  * This class allows you to validate a lot of data with a lot of validators like "email", "url", "min", "max", etc...

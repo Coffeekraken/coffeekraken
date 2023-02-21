@@ -4,8 +4,8 @@
  * @name        props
  * @namespace   php.twig.functions.object
  * @type        TwigFilter
+ * @platform    twig
  * @status      beta
- * @platform    php
  *
  * This twig filter allows you to get back an array of object properties
  *
@@ -13,12 +13,12 @@
  * @return      {String[]}                      The array of object properties
  *
  * @example       twig
- * <div data="{{ myObject|props }}"></div>
+ * <div data="{{ __props(myObject) }}"></div>
  *
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-return new \Twig\TwigFunction('props', function ($object) {
+return new \Twig\TwigFunction('__props', function ($object) {
     if (is_string($object)) {
         $object = json_decode($object);
     }

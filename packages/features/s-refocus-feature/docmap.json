@@ -166,7 +166,7 @@
                         "description": ""
                     }
                 ],
-                "description": "This feature allows you to automatically visually refocus an element that is inside a scrollable one on different trigger(s) like events, etc...",
+                "description": "This feature allows you to automatically visually refocus an element that is inside a scrollable one on different trigger(s) like events, etc...\nThis feature will occurs on these actions:\n- At page display, check the anchor and refocus if found an element with the correct id\n- At some events like: popstate, hashchange and pushstate.\n- Note that the \"pushstate\" event is emitted by a proxies `history.pushState` method.\n- In order to make the refocus happend, your pushed state MUST have the `scroll` property to `true`\n- On any events specified in the `props.trigger` property using this syntax: `event:click`, etc...",
                 "namespace": "@coffeekraken.s-refocus-feature.js",
                 "status": "beta",
                 "example": [
@@ -228,6 +228,33 @@
                                 ],
                                 "raw": "Function"
                             }
+                        },
+                        "focusedClass": {
+                            "description": "Specify the class to add when the target element has been focused",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    },
+                                    {
+                                        "type": "Boolean"
+                                    }
+                                ],
+                                "raw": "String|Boolean"
+                            },
+                            "default": "focused"
+                        },
+                        "focusedClassDuration": {
+                            "description": "Specify how many ms the focused class has to be added, then removed",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Number"
+                                    }
+                                ],
+                                "raw": "Number"
+                            },
+                            "default": 1000
                         },
                         "offset": {
                             "description": "Specify the offset of the refocus animation in px",
@@ -379,6 +406,33 @@
                                 ],
                                 "raw": "Function"
                             }
+                        },
+                        "focusedClass": {
+                            "description": "Specify the class to add when the target element has been focused",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    },
+                                    {
+                                        "type": "Boolean"
+                                    }
+                                ],
+                                "raw": "String|Boolean"
+                            },
+                            "default": "focused"
+                        },
+                        "focusedClassDuration": {
+                            "description": "Specify how many ms the focused class has to be added, then removed",
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Number"
+                                    }
+                                ],
+                                "raw": "Number"
+                            },
+                            "default": 1000
                         },
                         "offset": {
                             "description": "Specify the offset of the refocus animation in px",

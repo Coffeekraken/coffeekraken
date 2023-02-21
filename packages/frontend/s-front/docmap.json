@@ -152,8 +152,15 @@
                     ],
                     "raw": "Class"
                 },
+                "platform": [
+                    {
+                        "name": "js",
+                        "description": ""
+                    }
+                ],
                 "description": "Central class to handle frontend stuffs like theme, google, etc...",
                 "namespace": "@coffeekraken.s-front.js",
+                "status": "beta",
                 "example": [
                     {
                         "language": "js",

@@ -181,6 +181,12 @@
                         "defaultStr": "{}"
                     }
                 },
+                "platform": [
+                    {
+                        "name": "js",
+                        "description": ""
+                    }
+                ],
                 "description": "This class allows you to create \"features\". Feature is like webcomponent but does not provide a\ncustom HTML tag.",
                 "namespace": "@coffeekraken.s-feature.shared",
                 "status": "beta",

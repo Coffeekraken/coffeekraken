@@ -7,7 +7,7 @@ import {
     __fileName,
     __readJsonSync,
     __writeFile,
-    __writeFileSync
+    __writeFileSync,
 } from '@coffeekraken/sugar/fs';
 import { __deepMerge } from '@coffeekraken/sugar/object';
 import { __toString } from '@coffeekraken/sugar/string';
@@ -21,6 +21,7 @@ import __path from 'path';
  * @type            Class
  * @implements      SFileInterface
  * @extends         SPromise
+ * @platform            node
  * @status              beta
  *
  * This class represent a file in the filesystem. With it you can simply instanciate one by passing the file path,

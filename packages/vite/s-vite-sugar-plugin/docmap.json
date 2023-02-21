@@ -116,8 +116,15 @@
                     ],
                     "raw": "Function"
                 },
+                "platform": [
+                    {
+                        "name": "node",
+                        "description": ""
+                    }
+                ],
                 "description": "This plugin allows you to automate some things like injecting\nenvironment variables in the js, etc...",
                 "namespace": "@coffeekraken.s-vite-sugar-plugin.node",
+                "status": "beta",
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",

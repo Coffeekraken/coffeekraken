@@ -24,7 +24,7 @@ import { __getStyleProperty } from '@coffeekraken/sugar/dom';
  * // text directly (no font-size management so it's less accurate...)
  * const width =  __textWidth('Hello World');
  *
- * @since         1.0.0
+ @since           2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 export default function __textWidth(source) {

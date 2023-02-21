@@ -6,6 +6,8 @@ namespace Sugar\object;
  * @name            filter
  * @namespace       php.object
  * @type            Function
+ * @platform        php
+ * @status          beta
  *
  * This function allows you filter some object items either by:
  * - `^...`: The keys that starts with the passed string

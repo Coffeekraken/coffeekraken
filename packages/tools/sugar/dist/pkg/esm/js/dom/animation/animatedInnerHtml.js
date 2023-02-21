@@ -42,7 +42,7 @@ import __convertTime from '../../../shared/datetime/convertTime';
  *    // do something when the change has been made...
  * });
  *
- * @since         1.0.0
+ @since           2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 export default function __animatedInnerHtml(node, content, settings = {}) {

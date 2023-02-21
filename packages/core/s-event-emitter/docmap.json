@@ -152,6 +152,16 @@
                     ],
                     "raw": "Class"
                 },
+                "platform": [
+                    {
+                        "name": "node",
+                        "description": ""
+                    },
+                    {
+                        "name": "js",
+                        "description": ""
+                    }
+                ],
                 "namespace": "@coffeekraken.s-event-emitter.sugar.js.event",
                 "status": "beta",
                 "example": [

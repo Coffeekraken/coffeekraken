@@ -20,7 +20,7 @@ import { __whenLinkLoaded } from '@coffeekraken/sugar/dom';
  * import { __injectStylesheet } from '@coffeekraken/sugar/dom'
  * __injectStylesheet('/dist/css/style.css')
  *
- * @since     1.0.0
+ @since           2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 export default function __injectStylesheet(href) {

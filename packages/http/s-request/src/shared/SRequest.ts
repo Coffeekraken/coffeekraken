@@ -1,8 +1,6 @@
 // @ts-nocheck
 
 import __SClass from '@coffeekraken/s-class';
-import { __stringToNode } from '@coffeekraken/sugar/dom';
-import __htmlToString from '@coffeekraken/sugar/js/html/toString';
 import { __deepMerge } from '@coffeekraken/sugar/object';
 import __axios from 'axios';
 import __SRequestParamsInterface from './interface/SRequestParamsInterface';
@@ -11,6 +9,8 @@ import __SRequestParamsInterface from './interface/SRequestParamsInterface';
  * @name 		                    SRequest
  * @namespace           shared
  * @type                        Class
+ * @platform            node
+ * @platform            js
  * @status              wip
  *
  * Class that allows to simply handle ajax requests with ease.

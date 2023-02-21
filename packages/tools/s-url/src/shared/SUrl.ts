@@ -7,10 +7,12 @@ import __urlParse from 'url-parse';
 
 /**
  * @name            SUrl
- * @namespace           shated
+ * @namespace           shared
  * @type            Class
  * @extends       SClass
- * @status              wip
+ * @platform        node
+ * @platform        js
+ * @status             beta
  *
  * Simple class that is useful to parse a URL (or the current browser URL) and gives you back
  * an instance that has all these values availables as well as functions to modify the instancied URL:

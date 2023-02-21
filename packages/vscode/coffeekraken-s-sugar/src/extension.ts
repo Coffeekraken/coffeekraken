@@ -11,6 +11,7 @@ import __colors from './lib/colors';
 import __docmapJson from './lib/docmapJson';
 
 import __jsIntegration from './integrations/js';
+import __cssIntegration from './integrations/css';
 
 // This method is called when your extension is activated
 // Your extension is activated the very first time the command is executed
@@ -20,6 +21,9 @@ export async function activate(context: vscode.ExtensionContext) {
 
     // js integration
     __jsIntegration(docmapJson);
+
+    // css integration
+    __cssIntegration(docmapJson);
 }
 
 // This method is called when your extension is deactivated

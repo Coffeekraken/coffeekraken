@@ -21,7 +21,7 @@ import { __whenAnimationEnd } from '@coffeekraken/sugar/dom';
  * import { __removeClassOnAnimationEnd } from '@coffeekraken/sugar/dom';
  *  __removeClassOnAnimationEnd(myCoolElm, 'my-class');
  *
- * @since       1.0.0
+ @since           2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 export default function __removeClassOnAnimationEnd(

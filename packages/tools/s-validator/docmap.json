@@ -141,9 +141,9 @@
                 "relPath": "src/doc/README.md.twig",
                 "children": {}
             },
-            "@coffeekraken.s-validator.shared.SValidation": {
-                "id": "@coffeekraken.s-validator.shared.SValidation",
-                "name": "SValidation",
+            "@coffeekraken.s-validator.shared.SValidator": {
+                "id": "@coffeekraken.s-validator.shared.SValidator",
+                "name": "SValidator",
                 "type": {
                     "types": [
                         {
@@ -168,6 +168,16 @@
                         "defaultStr": "{}"
                     }
                 },
+                "platform": [
+                    {
+                        "name": "node",
+                        "description": ""
+                    },
+                    {
+                        "name": "js",
+                        "description": ""
+                    }
+                ],
                 "description": "This class allows you to validate a lot of data with a lot of validators like \"email\", \"url\", \"min\", \"max\", etc...",
                 "namespace": "@coffeekraken.s-validator.shared",
                 "status": "beta",
@@ -463,9 +473,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "SValidatorValidatorsInterface.js",
-                "extension": "js",
-                "relPath": "src/shared/interface/SValidatorValidatorsInterface.js",
+                "filename": "SValidatorValidatorsInterface.ts",
+                "extension": "ts",
+                "relPath": "src/shared/interface/SValidatorValidatorsInterface.ts",
                 "children": {}
             },
             "@coffeekraken.s-validator.shared.validators.alphanum": {

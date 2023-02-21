@@ -8,6 +8,8 @@ import { __deepMerge } from '@coffeekraken/sugar/object';
  * @namespace           shared
  * @extends             SClass
  * @type                Class
+ * @platform            node
+ * @platform            js
  * @status              beta
  *
  * This package allows you to compress your css classes/variables,

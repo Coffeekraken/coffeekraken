@@ -14,6 +14,7 @@ import __SCarpenterStartParamsInterface from './interface/SCarpenterStartParamsI
  * @namespace           node
  * @type                Class
  * @extends             SPromise
+ * @platform            js
  * @status              wip
  *
  * This class allows you to use the display your components library as well as your sections, etc... in a

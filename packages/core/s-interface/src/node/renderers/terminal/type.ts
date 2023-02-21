@@ -1,7 +1,10 @@
 /**
  * @name                type
- * @namespace           sugar.js.interface.renderers.terminal
+ * @namespace           renderers.terminal
  * @type                Function
+ * @platform          node
+ * @status            beta
+ * @private
  *
  * Render the "type" field.
  *
@@ -12,5 +15,5 @@
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 export default function ({ value, interfaceClass }) {
-  return `<cyan>${value}</cyan>`;
+    return `<cyan>${value}</cyan>`;
 }

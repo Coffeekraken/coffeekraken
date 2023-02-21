@@ -4,7 +4,7 @@
  * @name            marginClasses
  * @namespace            php.twig.css
  * @type            Function
- * @platform        php
+ * @platform        twig
  * @status          beta
  *
  * This function takes an object|array of margins issued from the themeMargin.config.ts configuration file like:
@@ -19,14 +19,14 @@
  * @return      {String}                         The resulting css classes
  *
  * @example         php
- * <div class="{{ marginClasses({
+ * <div class="{{ __marginClasses({
  *  block: 10
  * }) }}
  *
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-return new \Twig\TwigFunction('marginClasses', function (
+return new \Twig\TwigFunction('__marginClasses', function (
     $margins,
     $frontspec = []
 ) {

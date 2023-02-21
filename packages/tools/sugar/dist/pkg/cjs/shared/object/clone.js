@@ -33,7 +33,7 @@ const lodash_clonedeep_1 = __importDefault(require("lodash.clonedeep"));
  * });
  *
  * @see       https://www.npmjs.com/package/lodash
- * @since         1.0.0
+ @since           2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 function clone(object, settings = {}) {

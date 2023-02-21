@@ -1,9 +1,8 @@
 // @ts-nocheck
 
-import type { IScrollToSettings } from './scrollTo';
 import { __scrollTo } from '@coffeekraken/sugar/dom';
-import __easing from '../../../shared/easing/easeInOutQuint';
 import __deepMerge from '../../../shared/object/deepMerge';
+import type { IScrollToSettings } from './scrollTo';
 
 /**
  * @name      scrollToLocationHash
@@ -28,7 +27,7 @@ import __deepMerge from '../../../shared/object/deepMerge';
  * import { __scrollToLocationHash } from '@coffeekraken/sugar/dom'
  * __scrollToLocationHash(500, 0)
  *
- * @since       1.0.0
+ @since           2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io) (https://olivierbossel.com)
  */
 

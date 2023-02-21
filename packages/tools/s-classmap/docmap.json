@@ -168,6 +168,12 @@
                         "defaultStr": "{}"
                     }
                 },
+                "platform": [
+                    {
+                        "name": "js",
+                        "description": ""
+                    }
+                ],
                 "description": "This package allows you to compress your css classes/variables,\nto patch them in your HTML as well as to proxy js native functions\nlike classList.add, style.setProperty, etc, to reflect your minified classnames.",
                 "namespace": "@coffeekraken.s-classmap.js",
                 "status": "beta",
@@ -285,6 +291,12 @@
                         "defaultStr": "{}"
                     }
                 },
+                "platform": [
+                    {
+                        "name": "node",
+                        "description": ""
+                    }
+                ],
                 "description": "This package allows you to compress your css classes/variables,\nto patch them in your HTML as well as to proxy js native functions\nlike classList.add, style.setProperty, etc, to reflect your minified classnames.",
                 "namespace": "@coffeekraken.s-classmap.node",
                 "status": "beta",
@@ -610,6 +622,16 @@
                         "defaultStr": "{}"
                     }
                 },
+                "platform": [
+                    {
+                        "name": "node",
+                        "description": ""
+                    },
+                    {
+                        "name": "js",
+                        "description": ""
+                    }
+                ],
                 "description": "This package allows you to compress your css classes/variables,\nto patch them in your HTML as well as to proxy js native functions\nlike classList.add, style.setProperty, etc, to reflect your minified classnames.",
                 "namespace": "@coffeekraken.s-classmap.shared",
                 "status": "beta",

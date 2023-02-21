@@ -231,9 +231,15 @@
                         "defaultStr": "1000"
                     }
                 },
+                "platform": [
+                    {
+                        "name": "node",
+                        "description": ""
+                    }
+                ],
                 "description": "This represent the main code formatter class that allows you to format code like js, css, etc...\nAll the code formatters have to be implemented by exporting an object of type ISCodeFormatterFormatter.",
                 "namespace": "@coffeekraken.s-code-formatter.node",
-                "status": "wip",
+                "status": "beta",
                 "example": [
                     {
                         "language": "js",

@@ -6,7 +6,9 @@ import __SBench from '@coffeekraken/s-bench';
  * @name            benchEndMiddleware
  * @namespace       sugar.node.server.frontend.middleware
  * @type            Function
+ * @platform            node
  * @status              beta
+ * @private
  *
  * SMall middleware to end the request benchmark
  *

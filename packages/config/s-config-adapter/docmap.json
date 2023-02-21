@@ -152,6 +152,16 @@
                     ],
                     "raw": "Class"
                 },
+                "platform": [
+                    {
+                        "name": "node",
+                        "description": ""
+                    },
+                    {
+                        "name": "js",
+                        "description": ""
+                    }
+                ],
                 "description": "Base class for SConfig adapters",
                 "namespace": "@coffeekraken.s-config-adapter.shared",
                 "status": "beta",

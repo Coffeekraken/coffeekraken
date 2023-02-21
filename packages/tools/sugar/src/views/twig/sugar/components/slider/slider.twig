@@ -1,7 +1,7 @@
-<div class="{{ attributes.class }} {{ container ? 's-container:' ~ container : '' }} {{ marginClasses(margin, frontspec) }} {{ paddingClasses(padding, frontspec) }}"
-    {{ attrs(attributes, ['class'])|raw }}
+<div class="{{ attributes.class }} {{ container ? 's-container:' ~ container : '' }} {{ __marginClasses(margin, frontspec) }} {{ __paddingClasses(padding, frontspec) }}"
+    {{ __attrs(attributes, ['class'])|raw }}
     s-specs="views.components.slider"
-    {{ specsValues(_context)|raw }}
+    {{ __specsValues(_context)|raw }}
 >
 
 <s-slider 

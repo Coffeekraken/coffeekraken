@@ -4,8 +4,8 @@
  * @name        jsonDecode
  * @namespace   php.twig.functions.json
  * @type        TwigFilter
+ * @platform    twig
  * @status      beta
- * @platform    php
  *
  * This twig function allows you to decode a json string into a usable twig object
  *
@@ -13,12 +13,12 @@
  * @return      {Object}                        The decoded json object
  *
  * @example       twig
- * <div data="{{ myJson|jsonDecode }}"></div>
+ * <div data="{{ __jsonDecode(myJson) }}"></div>
  *
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-return new \Twig\TwigFunction('jsonDecode', function ($json) {
+return new \Twig\TwigFunction('__jsonDecode', function ($json) {
     if (!is_string($json)) {
         return $json;
     }

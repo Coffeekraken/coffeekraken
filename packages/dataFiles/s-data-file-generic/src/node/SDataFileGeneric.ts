@@ -12,6 +12,7 @@ import __fs from 'fs';
  * @name          SDataFileGeneric
  * @namespace     node
  * @type          Class
+ * @platform        node
  * @status              beta
  *
  * This class represent the generic data file loader.

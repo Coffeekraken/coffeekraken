@@ -18,6 +18,7 @@ import __path from 'path';
  * @name                  SConfigFolderAdapter
  * @namespace           node
  * @type                  Class
+ * @platform                node
  * @status              beta
  *
  * This adapter let you specify a folder in which to put all the config files and access it normaly as you would with the SConfig system.

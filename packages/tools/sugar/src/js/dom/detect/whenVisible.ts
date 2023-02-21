@@ -29,7 +29,7 @@ import { __closestNotVisible, __isVisible } from '@coffeekraken/sugar/dom';
  * 		// do something with your element that is now visible
  * });
  *
- * @since         1.0.0
+ @since           2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 

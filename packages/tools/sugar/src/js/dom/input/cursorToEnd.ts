@@ -18,7 +18,7 @@
  * __cursorToEnd($input);
  *
  * @see             https://stackoverflow.com/a/56416714
- * @since         1.0.0
+ @since           2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierboss$input.com)
  */
 export default function __cursorToEnd($input) {

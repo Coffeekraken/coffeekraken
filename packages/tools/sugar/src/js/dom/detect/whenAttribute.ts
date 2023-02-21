@@ -1,7 +1,7 @@
 // @ts-nocheck
 
-import __autoCast from '../../../shared/string/autoCast';
 import { __observeAttributes } from '@coffeekraken/sugar/dom';
+import __autoCast from '../../../shared/string/autoCast';
 
 /**
  * @name      whenAttribute
@@ -37,7 +37,7 @@ import { __observeAttributes } from '@coffeekraken/sugar/dom';
  * 		// do something with your number value...
  * });
  *
- * @since         1.0.0
+ @since           2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 export default function __whenAttribute(elm, attrName, checkFn = null) {

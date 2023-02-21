@@ -7086,6 +7086,101 @@
                 "relPath": "src/node/glob/resolveGlob.ts",
                 "children": {}
             },
+            "@coffeekraken.sugar.node.hash.hashFrom": {
+                "id": "@coffeekraken.sugar.node.hash.hashFrom",
+                "name": "hashFrom",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Function"
+                        }
+                    ],
+                    "raw": "Function"
+                },
+                "param": {
+                    "sources": {
+                        "name": "sources",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Array<String"
+                                },
+                                {
+                                    "type": "any>"
+                                }
+                            ],
+                            "raw": "Array<String|any>"
+                        },
+                        "description": "The sources to generate the final hash",
+                        "defaultStr": ""
+                    }
+                },
+                "setting": {
+                    "algo": {
+                        "name": "algo",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "string",
+                                    "value": "sha256"
+                                },
+                                {
+                                    "type": "string",
+                                    "value": "sha512"
+                                }
+                            ],
+                            "raw": "'sha256'|'sha512'"
+                        },
+                        "description": "The algo to use",
+                        "default": "sha256",
+                        "defaultStr": "'sha256'"
+                    },
+                    "digest": {
+                        "name": "digest",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "string",
+                                    "value": "base64"
+                                },
+                                {
+                                    "type": "string",
+                                    "value": "hex"
+                                }
+                            ],
+                            "raw": "'base64'|'hex'"
+                        },
+                        "description": "The digest encoding",
+                        "default": "base64",
+                        "defaultStr": "'base64'"
+                    }
+                },
+                "platform": [
+                    {
+                        "name": "node",
+                        "description": ""
+                    }
+                ],
+                "description": "Return a hash generated from sources like:\n- String: Simple string\n- Folder: Absolute path to a folder\n- File: Absolute path to a file\n- Glob: An absolute glob pattern to target some files\n- NPM package: An NPM package name\n- Object: A plain object",
+                "namespace": "@coffeekraken.sugar.node.hash",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "js",
+                        "code": "import { __hashFrom } from '@coffeekraken/sugar/hash';\n__hashFrom([{\n  hello: 'world'\n}, '/my/cool/folder']);"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "hashFrom.ts",
+                "extension": "ts",
+                "relPath": "src/node/hash/hashFrom.ts",
+                "children": {}
+            },
             "@coffeekraken.sugar.node.is.isCommandExists": {
                 "id": "@coffeekraken.sugar.node.is.isCommandExists",
                 "name": "isCommandExists",
@@ -8587,7 +8682,7 @@
                 "example": [
                     {
                         "language": "js",
-                        "code": "import packagePath from '@coffeekraken/sugar/node/npm/packagePath`;\npackagrJson('lodash');"
+                        "code": "import { __packagePath } from '@coffeekraken/sugar/npm`;\n__packagePath('lodash');"
                     }
                 ],
                 "since": "2.0.0",
@@ -8829,77 +8924,6 @@
                 "filename": "scrapeUrl.ts",
                 "extension": "ts",
                 "relPath": "src/node/og/scrapeUrl.ts",
-                "children": {}
-            },
-            "@coffeekraken.sugar.node.dependencies.dependenciesHash": {
-                "id": "@coffeekraken.sugar.node.dependencies.dependenciesHash",
-                "name": "dependenciesHash",
-                "type": {
-                    "types": [
-                        {
-                            "type": "Function"
-                        }
-                    ],
-                    "raw": "Function"
-                },
-                "param": {
-                    "dependenciesObj": {
-                        "name": "dependenciesObj",
-                        "type": {
-                            "types": [
-                                {
-                                    "type": "IDependencyHashObj"
-                                }
-                            ],
-                            "raw": "IDependencyHashObj"
-                        },
-                        "description": "The dependency object to treat",
-                        "defaultStr": ""
-                    },
-                    "settings": {
-                        "name": "settings",
-                        "type": {
-                            "types": [
-                                {
-                                    "type": "IDependencyHashSettings"
-                                }
-                            ],
-                            "raw": "IDependencyHashSettings"
-                        },
-                        "description": "Some settings for your dependency hashing process",
-                        "default": {},
-                        "defaultStr": "{}"
-                    }
-                },
-                "platform": [
-                    {
-                        "name": "js",
-                        "description": ""
-                    },
-                    {
-                        "name": "node",
-                        "description": ""
-                    }
-                ],
-                "description": "This function take as input an object that follows the structure described in the example bellow.\nWith that, if will recursively (for files dependencies) load them, check if they have some dependencies,\nand create a hash depending on all of that.\nHere's the process steps:\n1. Check the files dependencies.\n2. If their's, load recursively these dependencies and start the process over them again\n3. Create a hash for the current dependency with using all non \"files\" dependencies as well as the file updated timestamp\n4. Make this process recursively until all the \"files\" have been processed\n5. Return the final hash for your dependency object",
-                "namespace": "@coffeekraken.sugar.node.dependencies",
-                "status": "beta",
-                "example": [
-                    {
-                        "language": "js",
-                        "code": "import { __dependenciesHash } from '@coffeekraken/sugar/package';\nawait __dependenciesHash({\n     files: [\n         'my-cool-file.js',\n         'my-other-file.jpg'\n     ],\n     data: {\n         something: 'cool',\n         another: 'cool thing'\n     }\n});"
-                    }
-                ],
-                "async": "true",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "dependenciesHash.ts",
-                "extension": "ts",
-                "relPath": "src/node/package/dependenciesHash.ts",
                 "children": {}
             },
             "@coffeekraken.sugar.node.package.namespace": {
@@ -11467,8 +11491,15 @@
                         "defaultStr": ""
                     }
                 },
+                "platform": [
+                    {
+                        "name": "php",
+                        "description": ""
+                    }
+                ],
                 "description": "This function allows you filter some array items either by:\n- `^...`: The keys that starts with the passed string\n- `...$`: The keys that ends with the passed string\n- `function($key, $value) { retur true; }`: A function that must return true or false",
                 "namespace": "@coffeekraken.sugar.php.ar",
+                "status": "beta",
                 "example": [
                     {
                         "language": "php",
@@ -11539,8 +11570,15 @@
                         "defaultStr": "'.'"
                     }
                 },
+                "platform": [
+                    {
+                        "name": "php",
+                        "description": ""
+                    }
+                ],
                 "description": "This function allows you to get a value from the passed object using the passed dotpath",
                 "namespace": "@coffeekraken.sugar.php.ar",
+                "status": "beta",
                 "example": [
                     {
                         "language": "php",
@@ -13516,8 +13554,15 @@
                         "defaultStr": ""
                     }
                 },
+                "platform": [
+                    {
+                        "name": "php",
+                        "description": ""
+                    }
+                ],
                 "description": "This function allows you filter some object items either by:\n- `^...`: The keys that starts with the passed string\n- `...$`: The keys that ends with the passed string\n- `function($key, $value) { retur true; }`: A function that must return true or false",
                 "namespace": "@coffeekraken.sugar.php.object",
+                "status": "beta",
                 "example": [
                     {
                         "language": "php",
@@ -13588,8 +13633,15 @@
                         "defaultStr": "'.'"
                     }
                 },
+                "platform": [
+                    {
+                        "name": "php",
+                        "description": ""
+                    }
+                ],
                 "description": "This function allows you to get a value from the passed object using the passed dotpath.\nY",
                 "namespace": "@coffeekraken.sugar.php.object",
+                "status": "beta",
                 "example": [
                     {
                         "language": "php",
@@ -15118,8 +15170,19 @@
                         "defaultStr": "true"
                     }
                 },
+                "platform": [
+                    {
+                        "name": "node",
+                        "description": ""
+                    },
+                    {
+                        "name": "js",
+                        "description": ""
+                    }
+                ],
                 "description": "This function take two arrays and return all the items that are the same.\nYou can specify if you want only comparing by reference for object, etc... or if\nyou want to transform items in hashes and compare that instead.",
                 "namespace": "@coffeekraken.sugar.shared.array",
+                "status": "beta",
                 "example": [
                     {
                         "language": "js",
@@ -33842,7 +33905,7 @@
                         "description": ""
                     }
                 ],
-                "description": "Go up the dom three to find the first element that is scrollable",
+                "description": "Go up the dom three to find the first element that is scrollable.\nThe default scrollable element is the body",
                 "namespace": "@coffeekraken.sugar.js.dom.query",
                 "status": "beta",
                 "example": [
@@ -34487,6 +34550,73 @@
                 "relPath": "src/js/dom/scroll/preventScrollRestoration.ts",
                 "children": {}
             },
+            "@coffeekraken.sugar.js.dom.scroll.scrollSpy": {
+                "id": "@coffeekraken.sugar.js.dom.scroll.scrollSpy",
+                "name": "scrollSpy",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Function"
+                        }
+                    ],
+                    "raw": "Function"
+                },
+                "param": {
+                    "$target": {
+                        "name": "$target",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "HTMLElement"
+                                }
+                            ],
+                            "raw": "HTMLElement"
+                        },
+                        "description": "The element to monitor",
+                        "defaultStr": ""
+                    },
+                    "settings": {
+                        "name": "settings",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "IScrollSpySettings"
+                                }
+                            ],
+                            "raw": "IScrollSpySettings"
+                        },
+                        "description": "Some settings to tweak the active and unactive detection",
+                        "default": {},
+                        "defaultStr": "{}"
+                    }
+                },
+                "platform": [
+                    {
+                        "name": "js",
+                        "description": ""
+                    }
+                ],
+                "description": "Function that let you monitor an HTMLElement passed and being notified when\nit is \"active\" and when it is \"unactive\".",
+                "namespace": "@coffeekraken.sugar.js.dom.scroll",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "js",
+                        "code": "import { __scrollSpy } from '@coffeekraken/sugar/dom';\n__scrollSpy($myElement).on('activate', () => {\n     // do something\n}).on('unactivate', () => {\n     // do something\n});"
+                    }
+                ],
+                "async": "true",
+                "since": "1.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "scrollSpy.ts",
+                "extension": "ts",
+                "relPath": "src/js/dom/scroll/scrollSpy.ts",
+                "children": {}
+            },
             "@coffeekraken.sugar.js.dom.scroll.scrollTo": {
                 "id": "@coffeekraken.sugar.js.dom.scroll.scrollTo",
                 "name": "scrollTo",
@@ -34614,6 +34744,7 @@
                         "code": "import { __scrollTop } from '@coffeekraken/sugar/dom'\nimport easeInOutQuad from '@coffeekraken/sugar/js/easings/easeInOutQuad'\n__scrollTo(myCoolHTMLElement);"
                     }
                 ],
+                "async": "true",
                 "since": "1.0.0",
                 "author": {
                     "name": "Olivier Bossel",
@@ -37576,7 +37707,7 @@
                 },
                 "platform": [
                     {
-                        "name": "php",
+                        "name": "twig",
                         "description": ""
                     }
                 ],
@@ -37586,7 +37717,7 @@
                 "example": [
                     {
                         "language": "twig",
-                        "code": "{% set obj = {'something':true} %}\n{% set ar = obj|toArray %}"
+                        "code": "{% set obj = {'something':true} %}\n{% set ar = obj|__toArray %}"
                     }
                 ],
                 "since": "2.0.0",
@@ -37628,7 +37759,7 @@
                 },
                 "platform": [
                     {
-                        "name": "php",
+                        "name": "trig",
                         "description": ""
                     }
                 ],
@@ -37638,7 +37769,7 @@
                 "example": [
                     {
                         "language": "twig",
-                        "code": "{% set obj = {'something':true} %}\n{% set ar = obj|toObject %}"
+                        "code": "{% set obj = {'something':true} %}\n{% set ar = obj|__toObject %}"
                     }
                 ],
                 "since": "2.0.0",
@@ -37680,7 +37811,7 @@
                 },
                 "platform": [
                     {
-                        "name": "php",
+                        "name": "twig",
                         "description": ""
                     }
                 ],
@@ -37690,7 +37821,7 @@
                 "example": [
                     {
                         "language": "twig",
-                        "code": "<div data=\"{{ _context|cleanContext|json_encode }}\"></div>"
+                        "code": "<div data=\"{{ _context|__cleanContext|json_encode }}\"></div>"
                     }
                 ],
                 "since": "2.0.0",
@@ -37732,7 +37863,7 @@
                 },
                 "platform": [
                     {
-                        "name": "php",
+                        "name": "twig",
                         "description": ""
                     }
                 ],
@@ -37742,7 +37873,7 @@
                 "example": [
                     {
                         "language": "twig",
-                        "code": "{% set id = 'something cool'|idCompliant %}"
+                        "code": "{% set id = 'something cool'|__idCompliant %}"
                     }
                 ],
                 "since": "2.0.0",
@@ -37797,7 +37928,7 @@
                 },
                 "platform": [
                     {
-                        "name": "php",
+                        "name": "twig",
                         "description": ""
                     }
                 ],
@@ -37807,7 +37938,7 @@
                 "example": [
                     {
                         "language": "twig",
-                        "code": "{{ 'hello world'|replace('world', 'coco') }}"
+                        "code": "{{ 'hello world'|__replace('world', 'coco') }}"
                     }
                 ],
                 "since": "2.0.0",
@@ -37852,7 +37983,7 @@
                 },
                 "platform": [
                     {
-                        "name": "php",
+                        "name": "twig",
                         "description": ""
                     }
                 ],
@@ -37862,7 +37993,7 @@
                 "example": [
                     {
                         "language": "twig",
-                        "code": "{% set id = 'Array'|typeToString %}"
+                        "code": "{% set id = 'Array'|__typeToString %}"
                     }
                 ],
                 "since": "2.0.0",
@@ -37904,7 +38035,7 @@
                 },
                 "platform": [
                     {
-                        "name": "php",
+                        "name": "twig",
                         "description": ""
                     }
                 ],
@@ -37914,7 +38045,7 @@
                 "example": [
                     {
                         "language": "twig",
-                        "code": "{% set obj = {'something':true} %}\n{% set ar = toArray(obj) %}"
+                        "code": "{% set obj = {'something':true} %}\n{% set ar = __toArray(obj) %}"
                     }
                 ],
                 "since": "2.0.0",
@@ -37956,7 +38087,7 @@
                 },
                 "platform": [
                     {
-                        "name": "php",
+                        "name": "twig",
                         "description": ""
                     }
                 ],
@@ -37966,7 +38097,7 @@
                 "example": [
                     {
                         "language": "twig",
-                        "code": "{% set obj = {'something':true} %}\n{% set ar = toObject(obj) %}"
+                        "code": "{% set obj = {'something':true} %}\n{% set ar = __toObject(obj) %}"
                     }
                 ],
                 "since": "2.0.0",
@@ -38166,7 +38297,7 @@
                 "example": [
                     {
                         "language": "twig",
-                        "code": "{% set css = layoutCss('1 2 _ 3 3', {\n     selector: '#my-layout'\n}) %}\n<style>\n     {{ css }}\n</style>\n<div id=\"my-layout\">\n     <div>Cell #1</div>\n     <div>Cell #2</div>\n     <div>Cell #3</div>\n</div>"
+                        "code": "{% set css = __layoutCss('1 2 _ 3 3', {\n     selector: '#my-layout'\n}) %}\n<style>\n     {{ css }}\n</style>\n<div id=\"my-layout\">\n     <div>Cell #1</div>\n     <div>Cell #2</div>\n     <div>Cell #3</div>\n</div>"
                     }
                 ],
                 "since": "2.0.0",
@@ -38228,7 +38359,7 @@
                 },
                 "platform": [
                     {
-                        "name": "php",
+                        "name": "twig",
                         "description": ""
                     }
                 ],
@@ -38238,7 +38369,7 @@
                 "example": [
                     {
                         "language": "php",
-                        "code": "<div class=\"{{ marginClasses({\n block: 10\n}) }}"
+                        "code": "<div class=\"{{ __marginClasses({\n block: 10\n}) }}"
                     }
                 ],
                 "since": "2.0.0",
@@ -38300,7 +38431,7 @@
                 },
                 "platform": [
                     {
-                        "name": "php",
+                        "name": "twig",
                         "description": ""
                     }
                 ],
@@ -38310,7 +38441,7 @@
                 "example": [
                     {
                         "language": "php",
-                        "code": "<div class=\"{{ paddingClasses({\n block: 10\n}) }}"
+                        "code": "<div class=\"{{ __paddingClasses({\n block: 10\n}) }}"
                     }
                 ],
                 "since": "2.0.0",
@@ -38353,7 +38484,7 @@
                 },
                 "platform": [
                     {
-                        "name": "php",
+                        "name": "twig",
                         "description": ""
                     }
                 ],
@@ -38363,7 +38494,7 @@
                 "example": [
                     {
                         "language": "twig",
-                        "code": "{% frontspecAssets(fronspec) %}"
+                        "code": "{% __frontspecAssets(fronspec) %}"
                     }
                 ],
                 "since": "2.0.0",
@@ -38406,7 +38537,7 @@
                 },
                 "platform": [
                     {
-                        "name": "php",
+                        "name": "twig",
                         "description": ""
                     }
                 ],
@@ -38416,7 +38547,7 @@
                 "example": [
                     {
                         "language": "twig",
-                        "code": "{% frontspecMetas(fronspec) %}"
+                        "code": "{% __frontspecMetas(fronspec) %}"
                     }
                 ],
                 "since": "2.0.0",
@@ -38459,7 +38590,7 @@
                 },
                 "platform": [
                     {
-                        "name": "php",
+                        "name": "twig",
                         "description": ""
                     }
                 ],
@@ -38469,7 +38600,7 @@
                 "example": [
                     {
                         "language": "twig",
-                        "code": "{% frontspecOg(frontspec) %}"
+                        "code": "{% __frontspecOg(frontspec) %}"
                     }
                 ],
                 "since": "2.0.0",
@@ -38521,7 +38652,7 @@
                 "example": [
                     {
                         "language": "twig",
-                        "code": "<div {{ attrs(attributes) }}></div>"
+                        "code": "<div {{ __attrs(attributes) }}></div>"
                     }
                 ],
                 "since": "2.0.0",
@@ -38563,7 +38694,7 @@
                 },
                 "platform": [
                     {
-                        "name": "php",
+                        "name": "twig",
                         "description": ""
                     }
                 ],
@@ -38573,7 +38704,7 @@
                 "example": [
                     {
                         "language": "twig",
-                        "code": "<div data=\"{{ myJson|jsonDecode }}\"></div>"
+                        "code": "<div data=\"{{ __jsonDecode(myJson) }}\"></div>"
                     }
                 ],
                 "since": "2.0.0",
@@ -38615,7 +38746,7 @@
                 },
                 "platform": [
                     {
-                        "name": "php",
+                        "name": "twig",
                         "description": ""
                     }
                 ],
@@ -38625,7 +38756,7 @@
                 "example": [
                     {
                         "language": "php",
-                        "code": "<div classes=\"{{ lodClasses(2) }}\"></div>"
+                        "code": "<div classes=\"{{ __lodClasses(2) }}\"></div>"
                     }
                 ],
                 "since": "2.0.0",
@@ -38680,7 +38811,7 @@
                 },
                 "platform": [
                     {
-                        "name": "php",
+                        "name": "twig",
                         "description": ""
                     }
                 ],
@@ -38690,7 +38821,7 @@
                 "example": [
                     {
                         "language": "twig",
-                        "code": "{{ deepDiff({\n   prop1: 'Hello',\n   prop2: 'World'\n}, {\n   prop1: 'Plop'\n   prop2: 'World'\n}) }}"
+                        "code": "{{ __deepDiff({\n   prop1: 'Hello',\n   prop2: 'World'\n}, {\n   prop1: 'Plop'\n   prop2: 'World'\n}) }}"
                     }
                 ],
                 "since": "2.0.0",
@@ -38704,16 +38835,84 @@
                 "relPath": "src/php/twig/functions/object/deepDiff.php",
                 "children": {}
             },
+            "@coffeekraken.sugar.php.twig.object.filter": {
+                "id": "@coffeekraken.sugar.php.twig.object.filter",
+                "name": "filter",
+                "type": {
+                    "types": [
+                        {
+                            "type": "TwigFunction"
+                        }
+                    ],
+                    "raw": "TwigFunction"
+                },
+                "param": {
+                    "$object": {
+                        "name": "$object",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Object"
+                                }
+                            ],
+                            "raw": "Object"
+                        },
+                        "description": "The object to filter",
+                        "defaultStr": ""
+                    },
+                    "$filter": {
+                        "name": "$filter",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "String"
+                                },
+                                {
+                                    "type": "Function"
+                                }
+                            ],
+                            "raw": "String|Function"
+                        },
+                        "description": "The filter to use",
+                        "defaultStr": ""
+                    }
+                },
+                "platform": [
+                    {
+                        "name": "twig",
+                        "description": ""
+                    }
+                ],
+                "description": "This function allows you filter some object items either by:\n- `^...`: The keys that starts with the passed string\n- `...$`: The keys that ends with the passed string\n- `function($key, $value) { retur true; }`: A function that must return true or false",
+                "namespace": "@coffeekraken.sugar.php.twig.object",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "php",
+                        "code": "{% set obj = {\n  hello: 'world',\n  yop: 'plop',\n  helloPlop: true\n} %}\n__filter($obj, '^hel'); // (object) [\"hello\" => 'world', \"helloPlop\" => true]\n__filter($obj, function($key, $value) {\n  return false;\n}); // (object) []"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "filter.php",
+                "extension": "php",
+                "relPath": "src/php/twig/functions/object/filter.php",
+                "children": {}
+            },
             "@coffeekraken.sugar.php.twig.functions.object.get": {
                 "id": "@coffeekraken.sugar.php.twig.functions.object.get",
                 "name": "get",
                 "type": {
                     "types": [
                         {
-                            "type": "Function"
+                            "type": "TwigFunction"
                         }
                     ],
-                    "raw": "Function"
+                    "raw": "TwigFunction"
                 },
                 "param": {
                     "$object": {
@@ -38757,12 +38956,19 @@
                         "defaultStr": "'.'"
                     }
                 },
+                "platform": [
+                    {
+                        "name": "twig",
+                        "description": ""
+                    }
+                ],
                 "description": "This function allows you to get a value from the passed object using the passed dotpath",
                 "namespace": "@coffeekraken.sugar.php.twig.functions.object",
+                "status": "beta",
                 "example": [
                     {
                         "language": "twig",
-                        "code": "{% set obj = {\n  hello: {\n     world : \"plop\"\n  }\n} %}\n{{ get(obj, 'hello.world') }}"
+                        "code": "{% set obj = {\n  hello: {\n     world : \"plop\"\n  }\n} %}\n{{ __get(obj, 'hello.world') }}"
                     }
                 ],
                 "since": "2.0.0",
@@ -38804,7 +39010,7 @@
                 },
                 "platform": [
                     {
-                        "name": "php",
+                        "name": "twig",
                         "description": ""
                     }
                 ],
@@ -38814,7 +39020,7 @@
                 "example": [
                     {
                         "language": "twig",
-                        "code": "<div data=\"{{ myObject|props }}\"></div>"
+                        "code": "<div data=\"{{ __props(myObject) }}\"></div>"
                     }
                 ],
                 "since": "2.0.0",
@@ -38873,7 +39079,7 @@
                 },
                 "platform": [
                     {
-                        "name": "php",
+                        "name": "twig",
                         "description": ""
                     }
                 ],
@@ -38883,7 +39089,7 @@
                 "example": [
                     {
                         "language": "twig",
-                        "code": "{{ markdownSpecsList(['margin','padding'], {\n     margin: {\n         title: 'Margin',\n         description: 'Manage the margins with ease\n     }\n}) }}"
+                        "code": "{{ __markdownSpecsList(['margin','padding'], {\n     margin: {\n         title: 'Margin',\n         description: 'Manage the margins with ease\n     }\n}) }}"
                     }
                 ],
                 "since": "2.0.0",
@@ -38948,7 +39154,7 @@
                 "example": [
                     {
                         "language": "twig",
-                        "code": "<code>\n {{ readSpec('sugar.views.component.card') }}\n</code>"
+                        "code": "<code>\n {{ __readSpec('sugar.views.component.card') }}\n</code>"
                     }
                 ],
                 "since": "2.0.0",
@@ -38993,7 +39199,7 @@
                 },
                 "platform": [
                     {
-                        "name": "php",
+                        "name": "twig",
                         "description": ""
                     }
                 ],
@@ -39003,7 +39209,7 @@
                 "example": [
                     {
                         "language": "twig",
-                        "code": "{{ specsToMarkdown(mySpecs) }}"
+                        "code": "{{ __specsToMarkdown(mySpecs) }}"
                     }
                 ],
                 "since": "2.0.0",
@@ -39055,7 +39261,7 @@
                 "example": [
                     {
                         "language": "twig",
-                        "code": "<div {{ specsValues(_context) }}>\n</div>"
+                        "code": "<div {{ __specsValues(_context) }}>\n</div>"
                     }
                 ],
                 "since": "2.0.0",
@@ -39097,7 +39303,7 @@
                 },
                 "platform": [
                     {
-                        "name": "php",
+                        "name": "twig",
                         "description": ""
                     }
                 ],
@@ -39107,7 +39313,7 @@
                 "example": [
                     {
                         "language": "twig",
-                        "code": "{% set id = idCompliant('something cool) %}"
+                        "code": "{% set id = __idCompliant('something cool) %}"
                     }
                 ],
                 "since": "2.0.0",
@@ -39162,7 +39368,7 @@
                 },
                 "platform": [
                     {
-                        "name": "php",
+                        "name": "twig",
                         "description": ""
                     }
                 ],
@@ -39172,7 +39378,7 @@
                 "example": [
                     {
                         "language": "twig",
-                        "code": "{% set str = 'hello world' %}\n{% set id = replace(str, 'world', 'coco') %}"
+                        "code": "{% set str = 'hello world' %}\n{% set id = __replace(str, 'world', 'coco') %}"
                     }
                 ],
                 "since": "2.0.0",
@@ -39199,7 +39405,7 @@
                 },
                 "platform": [
                     {
-                        "name": "php",
+                        "name": "twig",
                         "description": ""
                     }
                 ],
@@ -39209,7 +39415,7 @@
                 "example": [
                     {
                         "language": "twig",
-                        "code": "{% set id = uniqid() %}"
+                        "code": "{% set id = __uniqid() %}"
                     }
                 ],
                 "since": "2.0.0",

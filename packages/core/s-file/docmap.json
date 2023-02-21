@@ -210,6 +210,12 @@
                         "content": "- cwd (__packageRootDir()) {String}: Specify a root directory for the file. This is usefull to have then access to properties like ```relPath```, etc...\n- checkExistence (true) {Boolean}: Specify if you want this inited file to really exists on the disk or not\n"
                     }
                 },
+                "platform": [
+                    {
+                        "name": "node",
+                        "description": ""
+                    }
+                ],
                 "description": "This class represent a file in the filesystem. With it you can simply instanciate one by passing the file path,\nand get access to all the nice meta data like:\n- name: The file name\n- path: The full path to the file\n- cwd: The root directory specified through the settings.cwd property\n- relPath: The relative file path from the cwd\n- dirPath: The path to the folder where is the file\n- extension: The file extension\n- stats: An object with file stats like size in mb, kb, etc...\n- exists: true if the file exists on the disk, false otherwise",
                 "namespace": "@coffeekraken.s-file.node.fs",
                 "status": "beta",

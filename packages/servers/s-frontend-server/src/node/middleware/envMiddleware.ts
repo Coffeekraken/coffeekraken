@@ -6,7 +6,9 @@ import __SEnv from '@coffeekraken/s-env';
  * @name            envMiddleware
  * @namespace       sugar.node.server.frontend.middleware
  * @type            Function
+ * @platform            node
  * @status              beta
+ * @private
  *
  * This function describe the middleware that will add the "env" property to the ```res.templateData``` object
  *

@@ -9,9 +9,12 @@ import { __toString } from '@coffeekraken/sugar/string';
 
 /**
  * @name                SDescriptorResult
- * @namespace           sugar.js.descriptor
+ * @namespace           shared
  * @type                Class
  * @extends             SClass
+ * @platform            node
+ * @platform            js
+ * @status              wip
  *
  * This class is the main one that MUST be used as parent one
  * when creating any descriptor like object, string, etc...

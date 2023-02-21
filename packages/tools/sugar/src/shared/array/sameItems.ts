@@ -6,6 +6,9 @@ import __unique from './unique';
  * @name            sameItems
  * @namespace       shared.array
  * @type            Function
+ * @platform        node
+ * @platform        js
+ * @status           beta
  *
  * This function take two arrays and return all the items that are the same.
  * You can specify if you want only comparing by reference for object, etc... or if

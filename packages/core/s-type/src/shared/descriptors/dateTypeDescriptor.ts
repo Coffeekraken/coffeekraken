@@ -5,8 +5,12 @@ import type { ISTypeDescriptor } from '../SType';
 
 /**
  * @name              dateTypeDescriptor
- * @namespace         sugar.js.type.descriptor
+ * @namespace         shared.descriptor
  * @type              ISTypeDescriptor
+ * @platform            node
+ * @platform            js
+ * @status              beta
+ * @private
  *
  * Describe the type "date" with some utilities methods like "is", "cast", etc...
  *

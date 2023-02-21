@@ -13,13 +13,13 @@
  * @return      {String}                                The `s-specs-values="{...}"` attribute containing your values
  *
  * @example         twig
- * <div {{ specsValues(_context) }}>
+ * <div {{ __specsValues(_context) }}>
  * </div>
  *
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-return new \Twig\TwigFunction('specsValues', function ($values) {
+return new \Twig\TwigFunction('__specsValues', function ($values) {
     // check if the $_ENV['S_SPECS_VALUES'] is set to true
     if (!isset($_ENV['S_SPECS_VALUES']) || $_ENV['S_SPECS_VALUES'] == false) {
         return '';

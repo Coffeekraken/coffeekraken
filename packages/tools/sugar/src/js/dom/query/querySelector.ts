@@ -1,8 +1,8 @@
 // @ts-nocheck
 import {
+    __closestNotVisible,
     __isInViewport,
     __isVisible,
-    __closestNotVisible,
 } from '@coffeekraken/sugar/dom';
 
 /**
@@ -40,7 +40,7 @@ import {
  * 		inViewport : true
  * });
  *
- * @since         1.0.0
+ @since           2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 

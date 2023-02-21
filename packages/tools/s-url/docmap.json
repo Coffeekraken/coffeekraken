@@ -105,8 +105,8 @@
             "@coffeekraken/sugar"
         ],
         "map": {
-            "@coffeekraken.s-url.shated.SUrl": {
-                "id": "@coffeekraken.s-url.shated.SUrl",
+            "@coffeekraken.s-url.shared.SUrl": {
+                "id": "@coffeekraken.s-url.shared.SUrl",
                 "name": "SUrl",
                 "type": {
                     "types": [
@@ -116,9 +116,19 @@
                     ],
                     "raw": "Class"
                 },
+                "platform": [
+                    {
+                        "name": "node",
+                        "description": ""
+                    },
+                    {
+                        "name": "js",
+                        "description": ""
+                    }
+                ],
                 "description": "Simple class that is useful to parse a URL (or the current browser URL) and gives you back\nan instance that has all these values availables as well as functions to modify the instancied URL:\n- protocol: The protocol scheme of the URL (e.g. http:).\n- slashes: A boolean which indicates whether the protocol is followed by two forward slashes (//).\n- auth: Authentication information portion (e.g. username:password).\n- username: Username of basic authentication.\n- password: Password of basic authentication.\n- host: Host name with port number.\n- hostname: Host name without port number.\n- port: Optional port number.\n- pathname: URL path.\n- query: Parsed object containing query string\n- queryString: Origin query string from the URL\n- hash: The \"fragment\" portion of the URL including the pound-sign (#).\n- href: The full URL.\n- origin: The origin of the URL.\n- schema: The schema property gives you access to an object containing these properties (only if you have provided the settings.schema setting):\n- match (true) {Boolean}: Tells you if your current url match the passed schema\n- errors (null) {Object}: Gives you access to which param(s) is/are in error\n- params (null) {Object}: Gives you access to each params specified in the schema with their values, etc...\n\nThis class use internally the `url-parse` npm module that you can find here: https://www.npmjs.com/package/url-parse",
-                "namespace": "@coffeekraken.s-url.shated",
-                "status": "wip",
+                "namespace": "@coffeekraken.s-url.shared",
+                "status": "beta",
                 "example": [
                     {
                         "language": "js",

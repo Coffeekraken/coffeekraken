@@ -21,6 +21,8 @@ import __treatAsValue, {
  * @name                  SPromise
  * @namespace           shared
  * @type                  Class
+ * @platform            node
+ * @platform            js
  * @status                beta
  *
  * This class works the same as the default Promise one. The difference is that you have more control on this one like

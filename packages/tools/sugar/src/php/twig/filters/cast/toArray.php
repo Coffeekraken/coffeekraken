@@ -4,8 +4,8 @@
  * @name        toArray
  * @namespace   php.twig.filters.cast
  * @type        TwigFilter
+ * @platform    twig
  * @status      beta
- * @platform    php
  *
  * This twig filter allows you to convert an object to an array
  *
@@ -14,11 +14,11 @@
  *
  * @example       twig
  * {% set obj = {'something':true} %}
- * {% set ar = obj|toArray %}
+ * {% set ar = obj|__toArray %}
  *
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-return new \Twig\TwigFilter('toArray', function ($value) {
+return new \Twig\TwigFilter('__toArray', function ($value) {
     return (array) $value;
 });

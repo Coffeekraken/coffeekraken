@@ -167,6 +167,16 @@
                         "defaultStr": ""
                     }
                 },
+                "platform": [
+                    {
+                        "name": "node",
+                        "description": ""
+                    },
+                    {
+                        "name": "js",
+                        "description": ""
+                    }
+                ],
                 "description": "This adapter let you pass directly an object to the SConfig instance",
                 "namespace": "@coffeekraken.s-config-inline-adapter.node",
                 "status": "beta",

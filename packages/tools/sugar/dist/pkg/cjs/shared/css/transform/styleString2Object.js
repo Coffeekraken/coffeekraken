@@ -4,8 +4,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const camelize_1 = __importDefault(require("../../../shared/string/camelize"));
 const autoCast_1 = __importDefault(require("../../../shared/string/autoCast"));
+const camelize_1 = __importDefault(require("../../../shared/string/camelize"));
 /**
  * @name      styleString2Object
  * @namespace            js.css.transform
@@ -30,7 +30,7 @@ const autoCast_1 = __importDefault(require("../../../shared/string/autoCast"));
  * // 		display : 'block'
  * // }
  *
- * @since         1.0.0
+ @since           2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 function __styleString2Object(style) {

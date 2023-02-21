@@ -6,6 +6,10 @@ import { __toString } from '@coffeekraken/sugar/string';
  * @name            STypeResult
  * @namespace       sugar.js.type
  * @type            Class
+ * @platform        node
+ * @platform         js
+ * @status          beta
+ * @private
  *
  * This class represent what you will get back from the ```SType.apply``` method.
  * You will be able to generate some string terminal version of the return as well as some html

@@ -18,7 +18,8 @@ import __SCodeFormatterFormatParamsInterface from './interface/SCodeFormatterFor
  * @namespace           node
  * @type                Class
  * @extends             SClass
- * @status              wip
+ * @platform            node
+ * @status              beta
  *
  * This represent the main code formatter class that allows you to format code like js, css, etc...
  * All the code formatters have to be implemented by exporting an object of type ISCodeFormatterFormatter.

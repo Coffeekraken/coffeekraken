@@ -17,7 +17,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
  * import { __easeInOutCubic } from '@coffeekraken/sugar/easing';
  * __easeInOutCubic(0.4);
  *
- * @since         1.0.0
+ @since           2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 function __easeInOutCubic(t) {

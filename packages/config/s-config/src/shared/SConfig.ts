@@ -13,9 +13,11 @@ import {
 import __set from '@coffeekraken/sugar/shared/object/set';
 
 /**
- * @name                                            config
- * @namespace           s-config.shared
+ * @name                                            SConfig
+ * @namespace          shared
  * @type                                            Class
+ * @platform            node
+ * @platform            js
  * @status              beta
  *
  * This class allows you to quickly access/update some configuration depending on the data adapters specified.

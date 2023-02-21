@@ -21,7 +21,7 @@ import __fastdom from 'fastdom';
  * import { __imagesLoadedAttribute } from '@coffeekraken/sugar/feature';
  *  __imagesLoadedAttribute();
  *
- * @since         1.0.0
+ @since           2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 export default function __imagesLoadedAttribute() {

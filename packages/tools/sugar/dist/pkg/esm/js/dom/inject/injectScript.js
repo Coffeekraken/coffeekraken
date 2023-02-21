@@ -20,7 +20,7 @@ import { __whenScriptLoaded } from '@coffeekraken/sugar/dom';
  * import { __injectScript } from '@coffeekraken/sugar/dom'
  *  __injectScript('dist/js/app.js')
  *
- * @since     1.0.0
+ @since           2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 export default function __injectScript(src, $parent = document.body) {

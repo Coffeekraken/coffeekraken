@@ -3,6 +3,7 @@
     "extends": [],
     "generated": {
         "extends": [
+            "coffeekraken-s-sugar",
             "@coffeekraken/aa",
             "@coffeekraken/cli",
             "@coffeekraken/s-activate-feature",
@@ -152,6 +153,16 @@
                     ],
                     "raw": "Class"
                 },
+                "platform": [
+                    {
+                        "name": "node",
+                        "description": ""
+                    },
+                    {
+                        "name": "js",
+                        "description": ""
+                    }
+                ],
                 "description": "This class works the same as the default Promise one. The difference is that you have more control on this one like\nthe possibility to resolve it multiple times. Here's a list of the \"differences\" and the \"features\" that this class provide:",
                 "namespace": "@coffeekraken.s-promise.shared",
                 "status": "beta",
@@ -750,51 +761,6 @@
                         }
                     }
                 }
-            },
-            "@coffeekraken.s-promise.SPromise.js.treatAsValue": {
-                "id": "@coffeekraken.s-promise.SPromise.js.treatAsValue",
-                "name": "treatAsValue",
-                "type": {
-                    "types": [
-                        {
-                            "type": "Function"
-                        }
-                    ],
-                    "raw": "Function"
-                },
-                "param": {
-                    "promise": {
-                        "name": "promise",
-                        "type": {
-                            "types": [
-                                {
-                                    "type": "Promise"
-                                }
-                            ],
-                            "raw": "Promise"
-                        },
-                        "description": "The promise to treat as a simple value",
-                        "defaultStr": ""
-                    }
-                },
-                "description": "This function allows you to wrap a promise in a ```resolve``` call to prevent\nthis promise to be treated as a \"chaining\" promise but to be treated as\nnormal value passed in the resolve call.",
-                "namespace": "@coffeekraken.s-promise.SPromise.js",
-                "status": "beta",
-                "example": [
-                    {
-                        "language": "js",
-                        "code": "import treatAsValue from '@coffeekraken/sugar/js/promise/treatAsValue';\nawait new Promise(resolve => {\n     const myPromise = new Promise(resolve => {});\n     resolve(treatAsValue(myPromise));\n}); // => myPromise"
-                    }
-                ],
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com"
-                },
-                "filename": "treatAsValue.ts",
-                "extension": "ts",
-                "relPath": "src/shared/treatAsValue.ts",
-                "children": {}
             },
             "@coffeekraken.s-promise.shared.interface.SPromiseSettingsInterface": {
                 "id": "@coffeekraken.s-promise.shared.interface.SPromiseSettingsInterface",

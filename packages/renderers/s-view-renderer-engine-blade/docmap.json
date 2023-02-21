@@ -116,8 +116,15 @@
                     ],
                     "raw": "Class"
                 },
+                "platform": [
+                    {
+                        "name": "node",
+                        "description": ""
+                    }
+                ],
                 "description": "This class is the blade.php view engine that allows you\nto render .blade.php views.",
                 "namespace": "@coffeekraken.s-view-renderer-engine-blade.node",
+                "status": "beta",
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",

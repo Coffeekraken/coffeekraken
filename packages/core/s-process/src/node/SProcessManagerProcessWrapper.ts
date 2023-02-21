@@ -12,10 +12,11 @@ import __SProcess from './SProcess';
 
 /**
  * @name            SProcessManagerProcessWrapper
- * @namespace       s-process
+ * @namespace       node
  * @type            Class
  * @extends         SEventEmitter
- * @status              wip
+ * @platform            node
+ * @status              beta
  *
  * This class represent a process manager process wrapper that handle the actual restarting, watch, etc...
  *

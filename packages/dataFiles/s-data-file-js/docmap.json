@@ -152,6 +152,12 @@
                     ],
                     "raw": "Class"
                 },
+                "platform": [
+                    {
+                        "name": "node",
+                        "description": ""
+                    }
+                ],
                 "description": "This class represent the js/json data file loader",
                 "namespace": "@coffeekraken.s-data-file-js.node",
                 "status": "beta",

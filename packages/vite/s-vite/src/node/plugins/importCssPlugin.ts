@@ -1,9 +1,10 @@
-import __fs from 'fs';
-
 /**
  * @name            importCssPlugin
  * @namespace       node.plugins
  * @type            Function
+ * @platform        node
+ * @status          beta
+ * @private
  *
  * This vite plugin allows you to rewrite some code simply by specifying
  * which files have to be touched using the ```match``` property and

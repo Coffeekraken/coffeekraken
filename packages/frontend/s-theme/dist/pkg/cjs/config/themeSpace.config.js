@@ -11,7 +11,7 @@ function default_1(api) {
          * Specify the "default" space used for margins and paddings.
          * MUST be an absolute css value like "1rem".
          *
-         * @since           1.0.0
+         @since           2.0.0
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         default: '1rem',
@@ -24,7 +24,7 @@ function default_1(api) {
          * Specify the "0" space used for margins and paddings.
          * MUST be a scale factor relative to the "default" absolute value specified.
          *
-         * @since           1.0.0
+         @since           2.0.0
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         0: 0,
@@ -37,7 +37,7 @@ function default_1(api) {
          * Specify the "10" space used for margins and paddings.
          * MUST be a scale factor relative to the "default" absolute value specified.
          *
-         * @since           1.0.0
+         @since           2.0.0
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         10: 0.375,
@@ -50,7 +50,7 @@ function default_1(api) {
          * Specify the "20" space used for margins and paddings.
          * MUST be a scale factor relative to the "default" absolute value specified.
          *
-         * @since           1.0.0
+         @since           2.0.0
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         20: 0.75,
@@ -63,7 +63,7 @@ function default_1(api) {
          * Specify the "30" space used for margins and paddings.
          * MUST be a scale factor relative to the "default" absolute value specified.
          *
-         * @since           1.0.0
+         @since           2.0.0
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         30: 1.5,
@@ -76,7 +76,7 @@ function default_1(api) {
          * Specify the "40" space used for margins and paddings.
          * MUST be a scale factor relative to the "default" absolute value specified.
          *
-         * @since           1.0.0
+         @since           2.0.0
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         40: 2.25,
@@ -89,7 +89,7 @@ function default_1(api) {
          * Specify the "50" space used for margins and paddings.
          * MUST be a scale factor relative to the "default" absolute value specified.
          *
-         * @since           1.0.0
+         @since           2.0.0
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         50: 3.25,
@@ -102,7 +102,7 @@ function default_1(api) {
          * Specify the "60" space used for margins and paddings.
          * MUST be a scale factor relative to the "default" absolute value specified.
          *
-         * @since           1.0.0
+         @since           2.0.0
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         60: 4.25,
@@ -115,7 +115,7 @@ function default_1(api) {
          * Specify the "70" space used for margins and paddings.
          * MUST be a scale factor relative to the "default" absolute value specified.
          *
-         * @since           1.0.0
+         @since           2.0.0
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         70: 5.5,
@@ -128,7 +128,7 @@ function default_1(api) {
          * Specify the "80" space used for margins and paddings.
          * MUST be a scale factor relative to the "default" absolute value specified.
          *
-         * @since           1.0.0
+         @since           2.0.0
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         80: 7,
@@ -141,7 +141,7 @@ function default_1(api) {
          * Specify the "90" space used for margins and paddings.
          * MUST be a scale factor relative to the "default" absolute value specified.
          *
-         * @since           1.0.0
+         @since           2.0.0
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         90: 9,
@@ -154,7 +154,7 @@ function default_1(api) {
          * Specify the "100" space used for margins and paddings.
          * MUST be a scale factor relative to the "default" absolute value specified.
          *
-         * @since           1.0.0
+         @since           2.0.0
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         100: 11,

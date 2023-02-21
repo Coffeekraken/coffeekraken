@@ -19,7 +19,7 @@
  * import { __scrollTop } from '@coffeekraken/sugar/dom';
  * __scrollTop();
  *
- * @since       1.0.0
+ @since           2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io) (https://olivierbossel.com)
  */
 function scrollTop(): number {

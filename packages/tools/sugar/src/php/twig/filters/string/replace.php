@@ -4,8 +4,8 @@
  * @name        replace
  * @namespace   php.twig.filters.string
  * @type        TwigFunction
+ * @platform    twig
  * @status      beta
- * @platform    php
  *
  * This twig function allows you to replace a value by another in your string.
  * It support for regex as the search
@@ -15,12 +15,12 @@
  * @return      {String}                        The new string
  *
  * @example       twig
- * {{ 'hello world'|replace('world', 'coco') }}
+ * {{ 'hello world'|__replace('world', 'coco') }}
  *
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-return new \Twig\TwigFilter('replace', function (
+return new \Twig\TwigFilter('__replace', function (
     string $string,
     string $search,
     string $replaceBy

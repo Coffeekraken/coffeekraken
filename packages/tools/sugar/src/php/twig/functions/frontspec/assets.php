@@ -4,8 +4,8 @@
  * @name        assets
  * @namespace   php.twig.functions.frontspec
  * @type        TwigFunction
+ * @platform    twig
  * @status      beta
- * @platform    php
  *
  * This twig function allows you to print out the frontspec.json "assets" property
  *
@@ -13,12 +13,12 @@
  * @return      {Array}                        The html representing the assets
  *
  * @example       twig
- * {% frontspecAssets(fronspec) %}
+ * {% __frontspecAssets(fronspec) %}
  *
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-return new \Twig\TwigFunction('frontspecAssets', function (
+return new \Twig\TwigFunction('__frontspecAssets', function (
     $frontspec = null,
     $cacheBuster = null
 ) {

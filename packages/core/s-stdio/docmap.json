@@ -3,6 +3,7 @@
     "extends": [],
     "generated": {
         "extends": [
+            "coffeekraken-s-sugar",
             "@coffeekraken/aa",
             "@coffeekraken/cli",
             "@coffeekraken/s-activate-feature",
@@ -168,9 +169,15 @@
                         "defaultStr": "{}"
                     }
                 },
+                "platform": [
+                    {
+                        "name": "js",
+                        "description": ""
+                    }
+                ],
                 "description": "This class represent the base one for all the \"Stdio\"\ncompatible setting.",
                 "namespace": "@coffeekraken.s-stdio.js",
-                "status": "wip",
+                "status": "beta",
                 "example": [
                     {
                         "language": "js",
@@ -235,9 +242,19 @@
                         "defaultStr": "{}"
                     }
                 },
+                "platform": [
+                    {
+                        "name": "node",
+                        "description": ""
+                    },
+                    {
+                        "name": "js",
+                        "description": ""
+                    }
+                ],
                 "description": "This class represent the base one for all the \"Stdio\"\ncompatible setting.",
                 "namespace": "@coffeekraken.s-stdio.sugar.node.stdio",
-                "status": "wip",
+                "status": "beta",
                 "example": [
                     {
                         "language": "js",
@@ -603,8 +620,8 @@
                     }
                 }
             },
-            "@coffeekraken.s-stdio.node.basic.SBasicStdio": {
-                "id": "@coffeekraken.s-stdio.node.basic.SBasicStdio",
+            "@coffeekraken.s-stdio.js.basic.SBasicStdio": {
+                "id": "@coffeekraken.s-stdio.js.basic.SBasicStdio",
                 "name": "SBasicStdio",
                 "type": {
                     "types": [
@@ -646,8 +663,15 @@
                         "defaultStr": "{}"
                     }
                 },
+                "platform": [
+                    {
+                        "name": "js",
+                        "description": ""
+                    }
+                ],
                 "description": "This class represent a \"basic\" terminal strandard in out interface.",
-                "namespace": "@coffeekraken.s-stdio.node.basic",
+                "namespace": "@coffeekraken.s-stdio.js.basic",
+                "status": "beta",
                 "example": [
                     {
                         "language": "js",
@@ -728,8 +752,15 @@
                         "defaultStr": "{}"
                     }
                 },
+                "platform": [
+                    {
+                        "name": "node",
+                        "description": ""
+                    }
+                ],
                 "description": "This class represent a \"basic\" terminal strandard in out interface.",
                 "namespace": "@coffeekraken.s-stdio.node.basic",
+                "status": "beta",
                 "example": [
                     {
                         "language": "js",
@@ -810,8 +841,15 @@
                         "defaultStr": "{}"
                     }
                 },
+                "platform": [
+                    {
+                        "name": "node",
+                        "description": ""
+                    }
+                ],
                 "description": "This class represent a \"notification\" out interface.",
                 "namespace": "@coffeekraken.s-stdio.node.basic",
+                "status": "beta",
                 "example": [
                     {
                         "language": "js",

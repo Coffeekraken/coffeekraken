@@ -11,6 +11,8 @@ import __SViewRendererTwigEngineSettingsInterface from './interface/SViewRendere
  * @name            SViewRendererEngineTwig
  * @namespace       node
  * @type            Class
+ * @platform            node
+ * @status          beta
  *
  * This class is the blade.php view engine that allows you
  * to render .twig views.

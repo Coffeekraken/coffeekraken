@@ -1,6 +1,6 @@
-<section class="section-story {{ paddingClasses(padding) }} {{ marginClasses(margin) }}" layout="{{ layout }}" s-appear in="bottom" delay="500"
+<section class="section-story {{ __paddingClasses(padding) }} {{ __marginClasses(margin) }}" layout="{{ layout }}" s-appear in="bottom" delay="500"
     s-specs="views.sections.story"
-    {{ specsValues(_context)|raw }}
+    {{ __specsValues(_context)|raw }}
     >
     <div class="s-container">
         <div class="s-layout:{{ layout }} @mobile s-layout:1_2">

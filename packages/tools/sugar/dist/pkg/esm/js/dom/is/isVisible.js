@@ -23,7 +23,7 @@
  * }
  *
  * @see             https://stackoverflow.com/questions/19669786/check-if-element-is-visible-in-dom
- * @since         1.0.0
+ @since           2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 function _isVisible(e) {

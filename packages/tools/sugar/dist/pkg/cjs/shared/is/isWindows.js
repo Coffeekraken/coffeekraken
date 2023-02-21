@@ -21,7 +21,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
  * import { __isWindows } from '@coffeekraken/sugar/is';
  * __isWindows(); // => true
  *
- * @since       1.0.0
+ @since           2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 function __isWindows() {

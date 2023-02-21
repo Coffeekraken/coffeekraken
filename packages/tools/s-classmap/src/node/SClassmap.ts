@@ -11,6 +11,7 @@ import __SClassmapBase from '../shared/SClassmap';
  * @namespace           node
  * @extends             SClass
  * @type                Class
+ * @platform            node
  * @status              beta
  *
  * This package allows you to compress your css classes/variables,

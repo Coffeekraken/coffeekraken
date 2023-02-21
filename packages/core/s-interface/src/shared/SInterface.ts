@@ -51,8 +51,11 @@ try {
 
 /**
  * @name            SInterface
- * @namespace       s-interface.shared
+ * @namespace       shared
  * @type            Class
+ * @platform        node
+ * @platform        js
+ * @status          beta
  *
  * This class allows you to define some rules that some object or instance
  * have to follow. You will be able to apply these rules and see what

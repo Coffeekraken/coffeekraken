@@ -5,55 +5,55 @@
 @sugar.import ('./generic/**/*.css');
 
 body {
-  background: sugar.color(base, background);
-  overflow-x: hidden;
+    background: sugar.color(base, background);
+    overflow-x: hidden;
 }
 
 [s-appear] {
-  opacity: 0;
+    opacity: 0;
 }
 [s-appear][appear] {
-  opacity: 1;
+    opacity: 1;
 }
 
 .content {
-  min-height: 100vh;
+    min-height: 100vh;
 }
 
 @sugar.lod.prevent {
-  html[class='s-lod s-lod--0'] *:hover,
-  html[class='s-lod s-lod--0 s-lod--1'] *:hover {
-    position: relative;
+    html[class='s-lod s-lod--0'] *:hover,
+    html[class='s-lod s-lod--0 s-lod--1'] *:hover {
+        position: relative;
 
-    &:after {
-      display: block;
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      bottom: 0;
-      right: 0;
-      border: dashed 1px rgba(255, 0, 0, 0.3);
-      pointer-events: none;
+        &:after {
+            display: block;
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            border: dashed 1px rgba(255, 0, 0, 0.3);
+            pointer-events: none;
+        }
     }
-  }
 }
 
 /* logo */
 .logo {
-  svg [fill='white'] {
-    fill: sugar.color(main, --darken 10);
-  }
-  svg [fill='#FEBD0F'] {
-    fill: sugar.color(accent);
-  }
-
-  @sugar.theme.when (dark) {
     svg [fill='white'] {
-      fill: sugar.color(main, text);
+        fill: sugar.color(main, --darken 10);
     }
     svg [fill='#FEBD0F'] {
-      fill: sugar.color(accent);
+        fill: sugar.color(accent);
     }
-  }
+
+    @sugar.theme.when (dark) {
+        svg [fill='white'] {
+            fill: sugar.color(main, text);
+        }
+        svg [fill='#FEBD0F'] {
+            fill: sugar.color(accent);
+        }
+    }
 }

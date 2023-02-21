@@ -141,39 +141,8 @@
                 "relPath": "src/doc/README.md.twig",
                 "children": {}
             },
-            "@coffeekraken.s-interface.s-interface.shared.getAvailableInterfaceTypes": {
-                "id": "@coffeekraken.s-interface.s-interface.shared.getAvailableInterfaceTypes",
-                "name": "getAvailableInterfaceTypes",
-                "type": {
-                    "types": [
-                        {
-                            "type": "Function"
-                        }
-                    ],
-                    "raw": "Function"
-                },
-                "description": "This function simply return an object with all the promoted as types interfaces.",
-                "namespace": "@coffeekraken.s-interface.s-interface.shared",
-                "status": "beta",
-                "example": [
-                    {
-                        "language": "js",
-                        "code": "import getAvailableInterfaceTypes from '@coffeekraken/sugar/js/interface/getAvailableInterfaceTypes';\ngetAvailableInterfaceTypes();\n// {\n//    MyCoolType: MyInterface\n// }"
-                    }
-                ],
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "getAvailableInterfaceTypes.ts",
-                "extension": "ts",
-                "relPath": "src/shared/getAvailableInterfaceTypes.ts",
-                "children": {}
-            },
-            "@coffeekraken.s-interface.s-interface.shared.SInterface": {
-                "id": "@coffeekraken.s-interface.s-interface.shared.SInterface",
+            "@coffeekraken.s-interface.shared.SInterface": {
+                "id": "@coffeekraken.s-interface.shared.SInterface",
                 "name": "SInterface",
                 "type": {
                     "types": [
@@ -183,8 +152,19 @@
                     ],
                     "raw": "Class"
                 },
+                "platform": [
+                    {
+                        "name": "node",
+                        "description": ""
+                    },
+                    {
+                        "name": "js",
+                        "description": ""
+                    }
+                ],
                 "description": "This class allows you to define some rules that some object or instance\nhave to follow. You will be able to apply these rules and see what\ndoes not fit correctly.",
-                "namespace": "@coffeekraken.s-interface.s-interface.shared",
+                "namespace": "@coffeekraken.s-interface.shared",
+                "status": "beta",
                 "example": [
                     {
                         "language": "js",
@@ -648,8 +628,8 @@
                     }
                 }
             },
-            "@coffeekraken.s-interface.sugar.node.interface.renderers.SInterfaceRenderer": {
-                "id": "@coffeekraken.s-interface.sugar.node.interface.renderers.SInterfaceRenderer",
+            "@coffeekraken.s-interface.node.renderers.SInterfaceRenderer": {
+                "id": "@coffeekraken.s-interface.node.renderers.SInterfaceRenderer",
                 "name": "SInterfaceRenderer",
                 "type": {
                     "types": [
@@ -688,8 +668,15 @@
                         "defaultStr": "{}"
                     }
                 },
+                "platform": [
+                    {
+                        "name": "node",
+                        "description": ""
+                    }
+                ],
                 "description": "This class represent the base for every interface renderers.\nIt handle things like registering types templates, properties to exclude, etc...",
-                "namespace": "@coffeekraken.s-interface.sugar.node.interface.renderers",
+                "namespace": "@coffeekraken.s-interface.node.renderers",
+                "status": "beta",
                 "example": [
                     {
                         "language": "js",
@@ -823,8 +810,15 @@
                         "defaultStr": "{}"
                     }
                 },
+                "platform": [
+                    {
+                        "name": "node",
+                        "description": ""
+                    }
+                ],
                 "description": "This class represent the terminal interface renderer",
                 "namespace": "@coffeekraken.s-interface.sugar.node.interface.renderers",
+                "status": "beta",
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
@@ -855,147 +849,6 @@
                         }
                     }
                 }
-            },
-            "@coffeekraken.s-interface.sugar.js.interface.renderers.terminal.undefined": {
-                "id": "@coffeekraken.s-interface.sugar.js.interface.renderers.terminal.undefined",
-                "name": "undefined",
-                "param": {
-                    "propertyObj": {
-                        "name": "propertyObj",
-                        "type": {
-                            "types": [
-                                {
-                                    "type": "ISInterfaceRendererRenderPropertyObj"
-                                }
-                            ],
-                            "raw": "ISInterfaceRendererRenderPropertyObj"
-                        },
-                        "description": "The property object to render",
-                        "defaultStr": ""
-                    }
-                },
-                "description": "Render the \"alias\" field.",
-                "namespace": "@coffeekraken.s-interface.sugar.js.interface.renderers.terminal",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "alias.ts",
-                "extension": "ts",
-                "relPath": "src/node/renderers/terminal/alias.ts",
-                "children": {}
-            },
-            "@coffeekraken.s-interface.sugar.js.interface.renderers.terminal.default": {
-                "id": "@coffeekraken.s-interface.sugar.js.interface.renderers.terminal.default",
-                "name": "default",
-                "param": {
-                    "propertyObj": {
-                        "name": "propertyObj",
-                        "type": {
-                            "types": [
-                                {
-                                    "type": "ISInterfaceRendererRenderPropertyObj"
-                                }
-                            ],
-                            "raw": "ISInterfaceRendererRenderPropertyObj"
-                        },
-                        "description": "The property object to render",
-                        "defaultStr": ""
-                    }
-                },
-                "default": "Function",
-                "description": "Render the \"default\" field.",
-                "namespace": "@coffeekraken.s-interface.sugar.js.interface.renderers.terminal",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "default.ts",
-                "extension": "ts",
-                "relPath": "src/node/renderers/terminal/default.ts",
-                "children": {}
-            },
-            "@coffeekraken.s-interface.sugar.js.interface.renderers.terminal.layout": {
-                "id": "@coffeekraken.s-interface.sugar.js.interface.renderers.terminal.layout",
-                "name": "layout",
-                "type": {
-                    "types": [
-                        {
-                            "type": "Function"
-                        }
-                    ],
-                    "raw": "Function"
-                },
-                "param": {
-                    "propertyObj": {
-                        "name": "propertyObj",
-                        "type": {
-                            "types": [
-                                {
-                                    "type": "ISInterfaceRendererRenderPropertyObj"
-                                }
-                            ],
-                            "raw": "ISInterfaceRendererRenderPropertyObj"
-                        },
-                        "description": "The property object to render",
-                        "defaultStr": ""
-                    }
-                },
-                "description": "Return the layout you want for the \"terminal\" renderer.\nYou can use tokens like these:\n- %type : Will be replaced with the \"type\" field rendered string\n- %default : Same but for the \"default\" field\n- etc...",
-                "namespace": "@coffeekraken.s-interface.sugar.js.interface.renderers.terminal",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "template.ts",
-                "extension": "ts",
-                "relPath": "src/node/renderers/terminal/template.ts",
-                "children": {}
-            },
-            "@coffeekraken.s-interface.sugar.js.interface.renderers.terminal.type": {
-                "id": "@coffeekraken.s-interface.sugar.js.interface.renderers.terminal.type",
-                "name": "type",
-                "type": {
-                    "types": [
-                        {
-                            "type": "Function"
-                        }
-                    ],
-                    "raw": "Function"
-                },
-                "param": {
-                    "propertyObj": {
-                        "name": "propertyObj",
-                        "type": {
-                            "types": [
-                                {
-                                    "type": "ISInterfaceRendererRenderPropertyObj"
-                                }
-                            ],
-                            "raw": "ISInterfaceRendererRenderPropertyObj"
-                        },
-                        "description": "The property object to render",
-                        "defaultStr": ""
-                    }
-                },
-                "description": "Render the \"type\" field.",
-                "namespace": "@coffeekraken.s-interface.sugar.js.interface.renderers.terminal",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "type.ts",
-                "extension": "ts",
-                "relPath": "src/node/renderers/terminal/type.ts",
-                "children": {}
             }
         }
     }

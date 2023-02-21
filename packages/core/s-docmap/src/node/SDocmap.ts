@@ -44,6 +44,7 @@ function __toLowerCase(l = '') {
  * @namespace           node
  * @type                Class
  * @extends             SClass
+ * @platform            node
  * @status              beta
  *
  * This class represent the ```docmap.json``` file and allows you to build it from some sources (glob pattern(s))

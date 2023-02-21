@@ -21,6 +21,8 @@ import __STheme from '@coffeekraken/s-theme';
  * @namespace       js
  * @type            Class
  * @extends         SFrontBase
+ * @platform        js
+ * @status          beta
  *
  * Central class to handle frontend stuffs like theme, google, etc...
  *

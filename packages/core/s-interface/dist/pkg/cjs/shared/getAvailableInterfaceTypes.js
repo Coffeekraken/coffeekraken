@@ -3,17 +3,19 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const is_1 = require("@coffeekraken/sugar/is");
 /**
  * @name                getAvailableInterfaceTypes
- * @namespace           s-interface.shared
+ * @namespace           shared
  * @type                Function
+ * @platform            node
  * @status              beta
+ * @private
  *
  * This function simply return an object with all the promoted as types interfaces.
  *
  * @return          {Object<SInterface>}            An object of types mapped to SInterfaces classes
  *
  * @example         js
- * import getAvailableInterfaceTypes from '@coffeekraken/sugar/js/interface/getAvailableInterfaceTypes';
- * getAvailableInterfaceTypes();
+ * import { __getAvailableInterfaceTypes } from '@coffeekraken/s-interface';
+ * __getAvailableInterfaceTypes();
  * // {
  * //    MyCoolType: MyInterface
  * // }
@@ -32,4 +34,4 @@ function getAvailableInterfaceTypes() {
         return {};
 }
 exports.default = getAvailableInterfaceTypes;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7O0FBQUEsK0NBQWtEO0FBRWxEOzs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBbUJHO0FBQ0gsU0FBUywwQkFBMEI7SUFDL0IsYUFBYTtJQUNiLElBQUksSUFBQSxhQUFRLEdBQUU7UUFBRSxPQUFPLE1BQU0sQ0FBQywwQkFBMEIsSUFBSSxFQUFFLENBQUM7SUFDL0QsYUFBYTtTQUNSLElBQUksTUFBTSxLQUFLLFNBQVM7UUFDekIsT0FBTyxNQUFNLENBQUMsMEJBQTBCLElBQUksRUFBRSxDQUFDOztRQUM5QyxPQUFPLEVBQUUsQ0FBQztBQUNuQixDQUFDO0FBQ0Qsa0JBQWUsMEJBQTBCLENBQUMifQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7O0FBQUEsK0NBQWtEO0FBRWxEOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0FxQkc7QUFDSCxTQUFTLDBCQUEwQjtJQUMvQixhQUFhO0lBQ2IsSUFBSSxJQUFBLGFBQVEsR0FBRTtRQUFFLE9BQU8sTUFBTSxDQUFDLDBCQUEwQixJQUFJLEVBQUUsQ0FBQztJQUMvRCxhQUFhO1NBQ1IsSUFBSSxNQUFNLEtBQUssU0FBUztRQUN6QixPQUFPLE1BQU0sQ0FBQywwQkFBMEIsSUFBSSxFQUFFLENBQUM7O1FBQzlDLE9BQU8sRUFBRSxDQUFDO0FBQ25CLENBQUM7QUFDRCxrQkFBZSwwQkFBMEIsQ0FBQyJ9

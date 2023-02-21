@@ -13,10 +13,11 @@ import __SProcessManagerProcessWrapper, {
 
 /**
  * @name            SProcessManager
- * @namespace       s-process
+ * @namespace       node
  * @type            Class
  * @extends         SEventEmitter
- * @status              wip
+ * @platform        node
+ * @status              beta
  *
  * This class represent a process handler class that will fire up some SProcess processes
  *

@@ -7,6 +7,7 @@ import { __uniqid } from '@coffeekraken/sugar/string';
  * @name          SDataFileJs
  * @namespace     node
  * @type          Class
+ * @platform        node
  * @status              beta
  *
  * This class represent the js/json data file loader

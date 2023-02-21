@@ -10,6 +10,8 @@ import { __deepMerge } from '@coffeekraken/sugar/object';
  * @name                  SConfigInlineAdapter
  * @namespace           node
  * @type                  Class
+ * @platform            node
+ * @platform            js
  * @status              beta
  *
  * This adapter let you pass directly an object to the SConfig instance

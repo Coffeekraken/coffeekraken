@@ -1,17 +1,19 @@
 import { __isNode } from '@coffeekraken/sugar/is';
 /**
  * @name                getAvailableInterfaceTypes
- * @namespace           s-interface.shared
+ * @namespace           shared
  * @type                Function
+ * @platform            node
  * @status              beta
+ * @private
  *
  * This function simply return an object with all the promoted as types interfaces.
  *
  * @return          {Object<SInterface>}            An object of types mapped to SInterfaces classes
  *
  * @example         js
- * import getAvailableInterfaceTypes from '@coffeekraken/sugar/js/interface/getAvailableInterfaceTypes';
- * getAvailableInterfaceTypes();
+ * import { __getAvailableInterfaceTypes } from '@coffeekraken/s-interface';
+ * __getAvailableInterfaceTypes();
  * // {
  * //    MyCoolType: MyInterface
  * // }
@@ -30,4 +32,4 @@ function getAvailableInterfaceTypes() {
         return {};
 }
 export default getAvailableInterfaceTypes;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sRUFBRSxRQUFRLEVBQUUsTUFBTSx3QkFBd0IsQ0FBQztBQUVsRDs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQW1CRztBQUNILFNBQVMsMEJBQTBCO0lBQy9CLGFBQWE7SUFDYixJQUFJLFFBQVEsRUFBRTtRQUFFLE9BQU8sTUFBTSxDQUFDLDBCQUEwQixJQUFJLEVBQUUsQ0FBQztJQUMvRCxhQUFhO1NBQ1IsSUFBSSxNQUFNLEtBQUssU0FBUztRQUN6QixPQUFPLE1BQU0sQ0FBQywwQkFBMEIsSUFBSSxFQUFFLENBQUM7O1FBQzlDLE9BQU8sRUFBRSxDQUFDO0FBQ25CLENBQUM7QUFDRCxlQUFlLDBCQUEwQixDQUFDIn0=
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sRUFBRSxRQUFRLEVBQUUsTUFBTSx3QkFBd0IsQ0FBQztBQUVsRDs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBcUJHO0FBQ0gsU0FBUywwQkFBMEI7SUFDL0IsYUFBYTtJQUNiLElBQUksUUFBUSxFQUFFO1FBQUUsT0FBTyxNQUFNLENBQUMsMEJBQTBCLElBQUksRUFBRSxDQUFDO0lBQy9ELGFBQWE7U0FDUixJQUFJLE1BQU0sS0FBSyxTQUFTO1FBQ3pCLE9BQU8sTUFBTSxDQUFDLDBCQUEwQixJQUFJLEVBQUUsQ0FBQzs7UUFDOUMsT0FBTyxFQUFFLENBQUM7QUFDbkIsQ0FBQztBQUNELGVBQWUsMEJBQTBCLENBQUMifQ==

@@ -105,8 +105,8 @@
             "@coffeekraken/sugar"
         ],
         "map": {
-            "@coffeekraken.s-descriptor.s-descriptor.shared.SDescriptor": {
-                "id": "@coffeekraken.s-descriptor.s-descriptor.shared.SDescriptor",
+            "@coffeekraken.s-descriptor.shared.SDescriptor": {
+                "id": "@coffeekraken.s-descriptor.shared.SDescriptor",
                 "name": "SDescriptor",
                 "type": {
                     "types": [
@@ -131,8 +131,18 @@
                         "defaultStr": ""
                     }
                 },
+                "platform": [
+                    {
+                        "name": "node",
+                        "description": ""
+                    },
+                    {
+                        "name": "js",
+                        "description": ""
+                    }
+                ],
                 "description": "Make a description...",
-                "namespace": "@coffeekraken.s-descriptor.s-descriptor.shared",
+                "namespace": "@coffeekraken.s-descriptor.shared",
                 "status": "beta",
                 "example": [
                     {
@@ -292,8 +302,8 @@
                     }
                 }
             },
-            "@coffeekraken.s-descriptor.sugar.js.descriptor.SDescriptorResult": {
-                "id": "@coffeekraken.s-descriptor.sugar.js.descriptor.SDescriptorResult",
+            "@coffeekraken.s-descriptor.shared.SDescriptorResult": {
+                "id": "@coffeekraken.s-descriptor.shared.SDescriptorResult",
                 "name": "SDescriptorResult",
                 "type": {
                     "types": [
@@ -318,8 +328,19 @@
                         "defaultStr": ""
                     }
                 },
+                "platform": [
+                    {
+                        "name": "node",
+                        "description": ""
+                    },
+                    {
+                        "name": "js",
+                        "description": ""
+                    }
+                ],
                 "description": "This class is the main one that MUST be used as parent one\nwhen creating any descriptor like object, string, etc...",
-                "namespace": "@coffeekraken.s-descriptor.sugar.js.descriptor",
+                "namespace": "@coffeekraken.s-descriptor.shared",
+                "status": "wip",
                 "example": [
                     {
                         "language": "js",

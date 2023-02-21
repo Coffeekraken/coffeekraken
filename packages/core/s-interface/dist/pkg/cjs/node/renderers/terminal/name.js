@@ -2,8 +2,11 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 /**
  * @name                name
- * @namespace           sugar.js.interface.renderers.terminal
- * @name                Function
+ * @namespace           renderers.terminal
+ * @type                Function
+ * @platform          node
+ * @status            beta
+ * @private
  *
  * Render the "name" field.
  *
@@ -17,4 +20,4 @@ function default_1({ value, interfaceClass }) {
     return `<yellow>${value}</yellow>`;
 }
 exports.default = default_1;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7O0FBQUE7Ozs7Ozs7Ozs7OztHQVlHO0FBQ0gsbUJBQXlCLEVBQUUsS0FBSyxFQUFFLGNBQWMsRUFBRTtJQUNoRCxPQUFPLFdBQVcsS0FBSyxXQUFXLENBQUM7QUFDckMsQ0FBQztBQUZELDRCQUVDIn0=
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7O0FBQUE7Ozs7Ozs7Ozs7Ozs7OztHQWVHO0FBQ0gsbUJBQXlCLEVBQUUsS0FBSyxFQUFFLGNBQWMsRUFBRTtJQUM5QyxPQUFPLFdBQVcsS0FBSyxXQUFXLENBQUM7QUFDdkMsQ0FBQztBQUZELDRCQUVDIn0=

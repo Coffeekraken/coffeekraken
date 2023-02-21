@@ -6,7 +6,7 @@ namespace Sugar\object;
  * @name            deepDiff
  * @namespace            twig.object
  * @type            TwigFunction
- * @platform        php
+ * @platform        twig
  * @status          beta
  *
  * This function take two objects and return only what is different from one to the other
@@ -16,7 +16,7 @@ namespace Sugar\object;
  * @return      {Object}                         The object with all the differences
  *
  * @example         twig
- * {{ deepDiff({
+ * {{ __deepDiff({
  *    prop1: 'Hello',
  *    prop2: 'World'
  * }, {
@@ -27,8 +27,7 @@ namespace Sugar\object;
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-return new \Twig\TwigFunction('deepDiff', function ($object1, $object2) {
-
+return new \Twig\TwigFunction('__deepDiff', function ($object1, $object2) {
     $object1 = \Sugar\convert\toObject($object1);
     $object2 = \Sugar\convert\toObject($object2);
 

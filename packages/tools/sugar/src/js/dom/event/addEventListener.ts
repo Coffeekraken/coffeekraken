@@ -39,7 +39,7 @@ import __SPromise from '@coffeekraken/s-promise';
  *    // do something when the event is the mouseover one
  * });
  *
- * @since       1.0.0
+ @since           2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 export default function __addEventListener(

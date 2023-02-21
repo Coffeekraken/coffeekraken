@@ -168,9 +168,15 @@
                         "defaultStr": "{}"
                     }
                 },
+                "platform": [
+                    {
+                        "name": "node",
+                        "description": ""
+                    }
+                ],
                 "description": "This represent the main builder class that has to be extended for builders like typescript, scss, etc...\nHis main goal is to provide basic features like storing the inputs, settings, etc...",
                 "namespace": "@coffeekraken.s-builder.node",
-                "status": "wip",
+                "status": "beta",
                 "example": [
                     {
                         "language": "js",

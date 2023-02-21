@@ -6,6 +6,8 @@ import __SThemeBase from '../shared/SThemeBase';
  * @namespace       node
  * @type            Class
  * @extends         SThemeBase
+ * @platform            node
+ * @status          beta
  *
  * This class represent the sugar theme you've passed the name in the constructor.
  * Once you have an instance of this theme you will have access to a lot of utilities

@@ -6,6 +6,8 @@ namespace Sugar\ar;
  * @name            filter
  * @namespace       php.ar
  * @type            Function
+ * @platform        php
+ * @status          beta
  *
  * This function allows you filter some array items either by:
  * - `^...`: The keys that starts with the passed string

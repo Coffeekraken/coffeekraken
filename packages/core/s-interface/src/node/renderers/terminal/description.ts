@@ -1,7 +1,10 @@
 /**
  * @name                description
- * @namespace           sugar.js.interface.renderers.terminal
- * @name                Function
+ * @namespace           renderers.terminal
+ * @type                Function
+ * @platform          node
+ * @status            beta
+ * @private
  *
  * Render the "description" field.
  *
@@ -12,5 +15,5 @@
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 export default function ({ value, interfaceClass }) {
-  return `${value}`;
+    return `${value}`;
 }

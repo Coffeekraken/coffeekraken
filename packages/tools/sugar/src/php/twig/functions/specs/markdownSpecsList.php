@@ -4,8 +4,8 @@
  * @name        markdownSpecsList
  * @namespace   php.twig.functions.specs
  * @type        Function
+ * @platform    twig
  * @status      beta
- * @platform    php
  *
  * This function allows you to display a markdown specs list with some default specifications info like "margin", "padding", "gap", etc...
  * You can abviously override the defaults with your own details object that MUST contains an "title" and "description" property for each spec
@@ -15,7 +15,7 @@
  * @return      {String}                                    The markdown list string
  *
  * @example       twig
- * {{ markdownSpecsList(['margin','padding'], {
+ * {{ __markdownSpecsList(['margin','padding'], {
  *      margin: {
  *          title: 'Margin',
  *          description: 'Manage the margins with ease
@@ -25,7 +25,7 @@
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-return new \Twig\TwigFunction('markdownSpecsList', function (
+return new \Twig\TwigFunction('__markdownSpecsList', function (
     array $specs,
     $details = []
 ) {

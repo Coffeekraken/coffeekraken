@@ -152,6 +152,16 @@
                     ],
                     "raw": "Class"
                 },
+                "platform": [
+                    {
+                        "name": "node",
+                        "description": ""
+                    },
+                    {
+                        "name": "js",
+                        "description": ""
+                    }
+                ],
                 "description": "Class that allows to simply handle ajax requests with ease.\nThis class give some useful features like :\n- Promise support\n- Recursive requests",
                 "namespace": "@coffeekraken.s-request.shared",
                 "status": "wip",

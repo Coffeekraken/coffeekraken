@@ -10,6 +10,8 @@ import __SStdioAdapter from '../../shared/SStdioAdapter';
  * @name            SStdioNotificationAdapter
  * @namespace       node.basic
  * @type            Class
+ * @platform        node
+ * @status          beta
  *
  * This class represent a "notification" out interface.
  *

@@ -21,7 +21,7 @@
  * import { __insertAfter } from '@coffeekraken/sugar/dom'
  * __insertAfter(myElementToInsert, theReferenceElement);
  *
- * @since         1.0.0
+ @since           2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 export default function __insertAfter(

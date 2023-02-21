@@ -535,8 +535,8 @@
                     }
                 }
             },
-            "@coffeekraken.s-docblock.sugar.node.docblock.firstDocblockWithNamespaceInFolder": {
-                "id": "@coffeekraken.s-docblock.sugar.node.docblock.firstDocblockWithNamespaceInFolder",
+            "@coffeekraken.s-docblock.node.utils.firstDocblockWithNamespaceInFolder": {
+                "id": "@coffeekraken.s-docblock.node.utils.firstDocblockWithNamespaceInFolder",
                 "name": "firstDocblockWithNamespaceInFolder",
                 "type": {
                     "types": [
@@ -576,8 +576,14 @@
                         "content": "- exclude ('*\\/+(__tests__ | __wip__)\\') {String}: Specify a glob pattern representing the files to exclude from the generation"
                     }
                 },
+                "platform": [
+                    {
+                        "name": "node",
+                        "description": ""
+                    }
+                ],
                 "description": "This function search in the passed folder for files containing a \"@namespace\" tag (and an \"@name\" optional one)\nand generate a SNav instance with all these founded files as sources...",
-                "namespace": "@coffeekraken.s-docblock.sugar.node.docblock",
+                "namespace": "@coffeekraken.s-docblock.node.utils",
                 "status": "wip",
                 "example": [
                     {

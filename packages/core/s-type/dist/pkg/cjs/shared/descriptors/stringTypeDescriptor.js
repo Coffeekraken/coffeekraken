@@ -5,8 +5,12 @@ const is_1 = require("@coffeekraken/sugar/is");
 const string_1 = require("@coffeekraken/sugar/string");
 /**
  * @name              stringTypeDescriptor
- * @namespace         sugar.js.type.descriptor
+ * @namespace         shared.descriptors
  * @type              ISTypeDescriptor
+ * @platform            node
+ * @platform            js
+ * @status              beta
+ * @private
  *
  * Describe the type "string" with some utilities methods like "is", "cast", etc...
  *
@@ -31,4 +35,4 @@ const descriptor = {
     }),
 };
 exports.default = descriptor;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxTQUFTOztBQUVULCtDQUFvRDtBQUNwRCx1REFBd0Q7QUFHeEQ7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQWtCRztBQUNILE1BQU0sVUFBVSxHQUFxQjtJQUNqQyxJQUFJLEVBQUUsUUFBUTtJQUNkLEVBQUUsRUFBRSxRQUFRO0lBQ1osRUFBRSxFQUFFLENBQUMsS0FBVSxFQUFFLEVBQUUsQ0FBQyxJQUFBLGVBQVUsRUFBQyxLQUFLLENBQUM7SUFDckMsSUFBSSxFQUFFLENBQUMsS0FBVSxFQUFFLEVBQUUsQ0FDakIsSUFBQSxtQkFBVSxFQUFDLEtBQUssRUFBRTtRQUNkLFFBQVEsRUFBRSxJQUFJO0tBQ2pCLENBQUM7Q0FDVCxDQUFDO0FBRUYsa0JBQWUsVUFBVSxDQUFDIn0=
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxTQUFTOztBQUVULCtDQUFvRDtBQUNwRCx1REFBd0Q7QUFHeEQ7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0FzQkc7QUFDSCxNQUFNLFVBQVUsR0FBcUI7SUFDakMsSUFBSSxFQUFFLFFBQVE7SUFDZCxFQUFFLEVBQUUsUUFBUTtJQUNaLEVBQUUsRUFBRSxDQUFDLEtBQVUsRUFBRSxFQUFFLENBQUMsSUFBQSxlQUFVLEVBQUMsS0FBSyxDQUFDO0lBQ3JDLElBQUksRUFBRSxDQUFDLEtBQVUsRUFBRSxFQUFFLENBQ2pCLElBQUEsbUJBQVUsRUFBQyxLQUFLLEVBQUU7UUFDZCxRQUFRLEVBQUUsSUFBSTtLQUNqQixDQUFDO0NBQ1QsQ0FBQztBQUVGLGtCQUFlLFVBQVUsQ0FBQyJ9

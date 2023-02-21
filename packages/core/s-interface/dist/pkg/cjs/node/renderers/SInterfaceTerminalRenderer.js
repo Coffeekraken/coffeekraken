@@ -10,6 +10,8 @@ const fs_1 = require("@coffeekraken/sugar/fs");
  * @namespace       sugar.node.interface.renderers
  * @type            Class
  * @extends         SClass
+ * @platform        node
+ * @status          beta
  *
  * This class represent the terminal interface renderer
  *
@@ -37,4 +39,4 @@ class SInterfaceTerminalRenderer extends SInterfaceRenderer_1.default {
 }
 SInterfaceTerminalRenderer.id = 'terminal';
 exports.default = SInterfaceTerminalRenderer;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7O0FBQ0EsOEVBQXdEO0FBSXhELCtDQUFtRDtBQUVuRDs7Ozs7Ozs7Ozs7OztHQWFHO0FBQ0gsTUFBTSwwQkFBMkIsU0FBUSw0QkFBb0I7SUFHekQ7Ozs7Ozs7OztPQVNHO0lBQ0gsWUFDSSxHQUFpQixFQUNqQixRQUErQztRQUUvQyxLQUFLLENBQUMsR0FBRyxrQkFDTCxZQUFZLEVBQUUsR0FBRyxJQUFBLGNBQVMsR0FBRSxXQUFXLElBQ3BDLFFBQVEsRUFDYixDQUFDO0lBQ1AsQ0FBQztJQUVELFVBQVUsQ0FBQyxJQUFJLElBQUcsQ0FBQzs7QUF0QlosNkJBQUUsR0FBRyxVQUFVLENBQUM7QUF5QjNCLGtCQUFlLDBCQUEwQixDQUFDIn0=
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7O0FBQ0EsOEVBQXdEO0FBSXhELCtDQUFtRDtBQUVuRDs7Ozs7Ozs7Ozs7Ozs7O0dBZUc7QUFDSCxNQUFNLDBCQUEyQixTQUFRLDRCQUFvQjtJQUd6RDs7Ozs7Ozs7O09BU0c7SUFDSCxZQUNJLEdBQWlCLEVBQ2pCLFFBQStDO1FBRS9DLEtBQUssQ0FBQyxHQUFHLGtCQUNMLFlBQVksRUFBRSxHQUFHLElBQUEsY0FBUyxHQUFFLFdBQVcsSUFDcEMsUUFBUSxFQUNiLENBQUM7SUFDUCxDQUFDO0lBRUQsVUFBVSxDQUFDLElBQUksSUFBRyxDQUFDOztBQXRCWiw2QkFBRSxHQUFHLFVBQVUsQ0FBQztBQXlCM0Isa0JBQWUsMEJBQTBCLENBQUMifQ==

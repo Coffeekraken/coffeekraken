@@ -5,7 +5,9 @@ namespace Sugar\object;
 /**
  * @name            get
  * @namespace       php.twig.functions.object
- * @type            Function
+ * @type            TwigFunction
+ * @platform        twig
+ * @status          beta
  *
  * This function allows you to get a value from the passed object using the passed dotpath
  *
@@ -20,12 +22,12 @@ namespace Sugar\object;
  *      world : "plop"
  *   }
  * } %}
- * {{ get(obj, 'hello.world') }}
+ * {{ __get(obj, 'hello.world') }}
  *
  * @since       2.0.0
  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-return new \Twig\TwigFunction('get', function (
+return new \Twig\TwigFunction('__get', function (
     $object,
     $dotpath,
     $separator = '.'

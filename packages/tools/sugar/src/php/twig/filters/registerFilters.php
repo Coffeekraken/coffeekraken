@@ -6,8 +6,8 @@ namespace Sugar\twig;
  * @name        registerFilter
  * @namespace   php.filters
  * @type        Function
- * @status      beta
  * @platform    php
+ * @status      beta
  *
  * This function allows you to register only the filters on your twig instance
  *

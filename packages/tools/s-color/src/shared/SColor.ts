@@ -13,11 +13,13 @@ import __SColorApplyParamsInterface from './interface/SColorApplyParamsInterface
 import __SColorSettingsInterface from './interface/SColorSettingsInterface';
 
 /**
- * @name 		SColor
- * @namespace           shared
- * @type    Class
+ * @name 		    SColor
+ * @namespace       shared
+ * @type            Class
  * @extends         SClass
- * @status              beta
+ * @platform        js
+ * @platform        node
+ * @status          beta
  *
  * Class that provide complete and simple to use color manupilation capabilities like:
  * - Modifiers

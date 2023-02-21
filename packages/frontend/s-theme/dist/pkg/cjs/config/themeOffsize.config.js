@@ -10,7 +10,7 @@ function default_1(api) {
          *
          * Specify the "default" space used for offsize
          *
-         * @since           1.0.0
+         @since           2.0.0
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         get default() {
@@ -25,7 +25,7 @@ function default_1(api) {
          * Specify the "0" space used for offsize.
          * MUST be a scale factor relative to the "default" absolute value specified.
          *
-         * @since           1.0.0
+         @since           2.0.0
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         get 0() {
@@ -40,7 +40,7 @@ function default_1(api) {
          * Specify the "10" space used for offsize.
          * MUST be a scale factor relative to the "default" absolute value specified.
          *
-         * @since           1.0.0
+         @since           2.0.0
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         get 10() {
@@ -55,7 +55,7 @@ function default_1(api) {
          * Specify the "20" space used for offsize.
          * MUST be a scale factor relative to the "default" absolute value specified.
          *
-         * @since           1.0.0
+         @since           2.0.0
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         get 20() {
@@ -70,7 +70,7 @@ function default_1(api) {
          * Specify the "30" space used for offsize.
          * MUST be a scale factor relative to the "default" absolute value specified.
          *
-         * @since           1.0.0
+         @since           2.0.0
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         get 30() {
@@ -85,7 +85,7 @@ function default_1(api) {
          * Specify the "40" space used for offsize.
          * MUST be a scale factor relative to the "default" absolute value specified.
          *
-         * @since           1.0.0
+         @since           2.0.0
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         get 40() {
@@ -100,7 +100,7 @@ function default_1(api) {
          * Specify the "50" space used for offsize.
          * MUST be a scale factor relative to the "default" absolute value specified.
          *
-         * @since           1.0.0
+         @since           2.0.0
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         get 50() {
@@ -115,7 +115,7 @@ function default_1(api) {
          * Specify the "60" space used for offsize.
          * MUST be a scale factor relative to the "default" absolute value specified.
          *
-         * @since           1.0.0
+         @since           2.0.0
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         get 60() {
@@ -130,7 +130,7 @@ function default_1(api) {
          * Specify the "70" space used for offsize.
          * MUST be a scale factor relative to the "default" absolute value specified.
          *
-         * @since           1.0.0
+         @since           2.0.0
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         get 70() {
@@ -145,7 +145,7 @@ function default_1(api) {
          * Specify the "80" space used for offsize.
          * MUST be a scale factor relative to the "default" absolute value specified.
          *
-         * @since           1.0.0
+         @since           2.0.0
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         get 80() {
@@ -160,7 +160,7 @@ function default_1(api) {
          * Specify the "90" space used for offsize.
          * MUST be a scale factor relative to the "default" absolute value specified.
          *
-         * @since           1.0.0
+         @since           2.0.0
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         get 90() {
@@ -175,7 +175,7 @@ function default_1(api) {
          * Specify the "100" space used for offsize.
          * MUST be a scale factor relative to the "default" absolute value specified.
          *
-         * @since           1.0.0
+         @since           2.0.0
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         get 100() {

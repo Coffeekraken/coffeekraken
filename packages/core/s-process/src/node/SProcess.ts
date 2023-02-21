@@ -30,10 +30,11 @@ import {
 
 /**
  * @name                SProcess
- * @namespace           sugar.node.process
+ * @namespace           node
  * @type                Class
  * @extends             SEventEmitter
- * @status              wip
+ * @platform            node
+ * @status              beta
  *
  * This class represent an SProcess run iteration that store things like
  * the value, the startTime, endTime, duration, state, etc...

@@ -36,7 +36,7 @@ import requestAnimationFrame from '../utilities/requestAnimationFrame';
  * import easeInOutQuad from '@coffeekraken/sugar/js/easings/easeInOutQuad'
  * __scrollTo(myCoolHTMLElement);
  *
- * @since         1.0.0
+ @since           2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 export interface IScrollToSettings {

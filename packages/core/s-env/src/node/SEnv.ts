@@ -4,6 +4,8 @@ import __SEnv from '../shared/SEnv';
  * @name            SEnv
  * @namespace       node
  * @type            Class
+ * @platform            node
+ * @status          beta
  *
  * This class allows you to access, set and update environment variables seemlessly on node
  * and browser env.

@@ -1,8 +1,8 @@
 // @ts-nocheck
 
+import __SClass from '@coffeekraken/s-class';
 import __SEnv from '@coffeekraken/s-env';
 import __SFile from '@coffeekraken/s-file';
-import __SPromise from '@coffeekraken/s-promise';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
 import { __folderPath, __readJsonSync } from '@coffeekraken/sugar/fs';
 import __packageRootDir from '@coffeekraken/sugar/node/path/packageRootDir';
@@ -15,8 +15,9 @@ import __SFrontspecBuildParamsInterface from './interface/SFrontspecBuildParamsI
  * @name                SFrontspec
  * @namespace           node
  * @type                Class
- * @extends             SPromise
- * @status              wip
+ * @extends             SClass
+ * @platform            node
+ * @status             beta
  *
  * This class represent the ```frontspec.json``` file and allows you to generate it.
  *
@@ -58,7 +59,7 @@ export interface ISFrontspecAddParams {}
 
 export interface ISFrontspecAssetToServe {}
 
-export default class SFrontspec extends __SPromise {
+export default class SFrontspec extends __SClass {
     static _cachesStack = {};
 
     /**

@@ -6,8 +6,12 @@ import type { ISTypeDescriptor } from '../SType';
 
 /**
  * @name              stringTypeDescriptor
- * @namespace         sugar.js.type.descriptor
+ * @namespace         shared.descriptors
  * @type              ISTypeDescriptor
+ * @platform            node
+ * @platform            js
+ * @status              beta
+ * @private
  *
  * Describe the type "string" with some utilities methods like "is", "cast", etc...
  *

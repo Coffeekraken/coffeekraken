@@ -25,7 +25,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
  * __isCreditCard('hello') => false
  * __isCreditCard('378282246310006') => true
  *
- * @since         1.0.0
+ @since           2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 function __isCreditCard(value) {

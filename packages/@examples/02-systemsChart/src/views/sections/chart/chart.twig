@@ -1,6 +1,6 @@
-<section class="section-chart {{ paddingClasses(padding) }} {{ marginClasses(margin) }}"
+<section class="section-chart {{ __paddingClasses(padding) }} {{ __marginClasses(margin) }}"
     s-specs="views.sections.chart"
-    {{ specsValues(_context)|raw }}
+    {{ __specsValues(_context)|raw }}
 >
     <div class="_bkg">
         <img src="{{ bkg.url }}" />

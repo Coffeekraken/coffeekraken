@@ -10,8 +10,8 @@ const s_interface_1 = __importDefault(require("@coffeekraken/s-interface"));
  * @type                      Class
  * @extends             SInterface
  * @interface
- * @status              beta
  * @platform             js
+ * @status              beta
  *
  * This class represent the interface that describe SStdio settings
  *

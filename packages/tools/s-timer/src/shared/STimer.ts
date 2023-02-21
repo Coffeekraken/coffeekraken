@@ -9,6 +9,8 @@ import { __deepMerge } from '@coffeekraken/sugar/object';
  * @namespace           shared
  * @type                  Class
  * @extends               SPromise
+ * @platform            node
+ * @platform            js
  * @status              beta
  *
  * Class that let you create and handle timer with ease.

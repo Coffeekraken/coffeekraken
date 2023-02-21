@@ -4,8 +4,10 @@ namespace Sugar\object;
 
 /**
  * @name            filter
- * @namespace       php.object
- * @type            Function
+ * @namespace       php.twig.object
+ * @type            TwigFunction
+ * @platform        twig
+ * @status          beta
  *
  * This function allows you filter some object items either by:
  * - `^...`: The keys that starts with the passed string
@@ -22,14 +24,14 @@ namespace Sugar\object;
  *   yop: 'plop',
  *   helloPlop: true
  * } %}
- * \Sugar\object\filter($obj, '^hel'); // (object) ["hello" => 'world', "helloPlop" => true]
- * \Sugar\object\filter($obj, function($key, $value) {
+ * __filter($obj, '^hel'); // (object) ["hello" => 'world', "helloPlop" => true]
+ * __filter($obj, function($key, $value) {
  *   return false;
  * }); // (object) []
  *
  * @since       2.0.0
  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-return new \Twig\TwigFunction('filter', function ($object, $filter) {
+return new \Twig\TwigFunction('__filter', function ($object, $filter) {
     return (array) \Sugar\object\filter($object, $filter);
 });

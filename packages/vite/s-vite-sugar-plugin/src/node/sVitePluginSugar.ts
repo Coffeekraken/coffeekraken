@@ -8,6 +8,8 @@ import { __packageJsonSync } from '@coffeekraken/sugar/package';
  * @name            sVitePluginSugar
  * @namespace       node
  * @type            Function
+ * @platform        node
+ * @status          beta
  *
  * This plugin allows you to automate some things like injecting
  * environment variables in the js, etc...

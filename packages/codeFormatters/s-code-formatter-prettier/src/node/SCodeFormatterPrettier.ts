@@ -11,7 +11,8 @@ import * as __prettier from 'prettier';
  * @namespace           node
  * @type                Class
  * @extends             SClass
- * @status              wip
+ * @platform            node
+ * @status              beta
  *
  * This represent the prettier code formatter. It will format things like js, jsx, ts, tsx, json, css, less, scss, md, vue, hbs, php and html
  *

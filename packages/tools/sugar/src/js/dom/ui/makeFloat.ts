@@ -6,7 +6,7 @@ import {
     flip,
     inline,
     offset,
-    shift
+    shift,
 } from '@floating-ui/dom';
 
 import { __whenRemoved } from '@coffeekraken/sugar/dom';
@@ -36,7 +36,7 @@ import { __whenRemoved } from '@coffeekraken/sugar/dom';
  * __makeFloat($myElement, $dependingOn);
  *
  * @see         https://floating-ui.com
- * @since         1.0.0
+ @since           2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 

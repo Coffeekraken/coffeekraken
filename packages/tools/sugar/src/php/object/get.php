@@ -6,6 +6,8 @@ namespace Sugar\object;
  * @name            get
  * @namespace       php.object
  * @type            Function
+ * @platform        php
+ * @status          beta
  *
  * This function allows you to get a value from the passed object using the passed dotpath.
  * Y

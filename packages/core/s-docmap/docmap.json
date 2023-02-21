@@ -524,6 +524,12 @@
                         "content": "- filename (docmap.json) {String}: Specify the filename you want\n- outputDir (packageRootDir()) {String}: Specify the directory where you want to save your docmap.json file when using the ```save``` method\n"
                     }
                 },
+                "platform": [
+                    {
+                        "name": "node",
+                        "description": ""
+                    }
+                ],
                 "description": "This class represent the ```docmap.json``` file and allows you to build it from some sources (glob pattern(s))\nand save it inside a directory you choose.",
                 "namespace": "@coffeekraken.s-docmap.node",
                 "status": "beta",

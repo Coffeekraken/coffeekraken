@@ -13,11 +13,11 @@
  * @return      {String}                         The resulting html string
  *
  * @example         twig
- * <div {{ attrs(attributes) }}></div>
+ * <div {{ __attrs(attributes) }}></div>
  *
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-return new \Twig\TwigFunction('attrs', function ($attributes, $exclude = []) {
+return new \Twig\TwigFunction('__attrs', function ($attributes, $exclude = []) {
     return \Sugar\html\attrs($attributes, $exclude);
 });

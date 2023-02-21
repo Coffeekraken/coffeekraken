@@ -6,7 +6,8 @@ import __SDocmap from '@coffeekraken/s-docmap';
  * @name            docmapMiddleware
  * @namespace       sugar.node.server.frontend.middleware
  * @type            Function
- * @status              wip
+ * @platform            node
+ * @status              beta
  *
  * This function describe the middleware that will fetch the ```docmap.json``` file at the root of
  * your server directory and add it to the template data sended to the rendered view

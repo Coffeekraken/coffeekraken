@@ -36,7 +36,7 @@ import { define as __CKVersionSelector } from './components/CKVersionSelector';
 
 import {
     __querySelectorLive,
-    __reloadStylesheets,
+    __reloadStylesheets
 } from '@coffeekraken/sugar/dom';
 
 // Libs

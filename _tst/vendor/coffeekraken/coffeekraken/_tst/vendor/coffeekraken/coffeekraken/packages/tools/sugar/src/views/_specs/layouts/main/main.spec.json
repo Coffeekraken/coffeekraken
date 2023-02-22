@@ -1,8 +1,0 @@
-{
-    "type": "view",
-    "title": "Main layout",
-    "description": "This represent the main layout that supports frontspec (assets, metas, etc...) as well as things like google analytics / tag managet, etc... A good start for any project",
-    "props": {
-        "frontspec": "@sugar.views.frontspec"
-    }
-}

@@ -19,7 +19,7 @@ import __nodeIpc from 'node-ipc';
  * @extends         SClass
  * @platform        js
  * @platform        node
- * @status          alpha
+ * @status          beta
  *
  * This class allows you to perform some simple benchmarking actions
  * like dividing a process into multiple "steps" and track the timing

@@ -58,7 +58,7 @@ export default function packagePath(
 
     if (
         set.monorepo &&
-        monoDir !== settings?.rootDir &&
+        monoDir !== settings?.cwd &&
         __fs.existsSync(`${monoDir}/${name}/package.json`)
     ) {
         return __fs.realpathSync(`${monoDir}/${name}`);

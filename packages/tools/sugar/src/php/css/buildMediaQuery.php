@@ -18,7 +18,6 @@ namespace Sugar\css;
  * - tablet: 640px-1279px
  * - desktop: 1280px-2047px
  * - wide: 2048px-...
- * - dwarf: 0-700px (height)
  * You can as well override these in the $settings parameter.
  *
  * @param       {String}        $media          The media query definition you want like "mobile", ">mobile", etc...
@@ -140,15 +139,10 @@ function buildMediaQuery($media, $frontspecMedia = null)
 
             $camelToDashMap = [
                 'minWidth' => 'min-width',
-                'maxWidth' => 'max-width'
+                'maxWidth' => 'max-width',
             ];
 
-            if (
-                in_array($prop, [
-                    'minWidth',
-                    'maxWidth'
-                ])
-            ) {
+            if (in_array($prop, ['minWidth', 'maxWidth'])) {
                 if ($action == '>') {
                     if ($prop == 'maxWidth') {
                         $argName = 'min-width';
@@ -171,7 +165,6 @@ function buildMediaQuery($media, $frontspecMedia = null)
                         '(' . $camelToDashMap[$prop] . ': ' . $value . 'px)'
                     );
                 } elseif ($action == '>=') {
-
                     if (end($sortedMedias) == $media) {
                         continue;
                     }
@@ -184,7 +177,6 @@ function buildMediaQuery($media, $frontspecMedia = null)
                         );
                     }
                 } elseif ($action == '<=') {
-
                     if ($sortedMedias[0] == $media) {
                         continue;
                     }

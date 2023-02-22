@@ -1,108 +1,6 @@
 {
     "map": {},
     "generated": {
-        "extends": [
-            "@coffeekraken/aa",
-            "@coffeekraken/cli",
-            "@coffeekraken/s-activate-feature",
-            "@coffeekraken/s-appear-feature",
-            "@coffeekraken/s-asset-picker-component",
-            "@coffeekraken/s-bench",
-            "@coffeekraken/s-builder",
-            "@coffeekraken/s-carpenter",
-            "@coffeekraken/s-class",
-            "@coffeekraken/s-classmap",
-            "@coffeekraken/s-clipboard-copy-component",
-            "@coffeekraken/s-code-example-component",
-            "@coffeekraken/s-code-formatter-prettier",
-            "@coffeekraken/s-code-formatter",
-            "@coffeekraken/s-color-picker-component",
-            "@coffeekraken/s-color",
-            "@coffeekraken/s-component-utils",
-            "@coffeekraken/s-conductor",
-            "@coffeekraken/s-config-adapter",
-            "@coffeekraken/s-config-folder-adapter",
-            "@coffeekraken/s-config-inline-adapter",
-            "@coffeekraken/s-config",
-            "@coffeekraken/s-css-animation",
-            "@coffeekraken/s-dashboard",
-            "@coffeekraken/s-data-file-generic",
-            "@coffeekraken/s-data-file-js",
-            "@coffeekraken/s-data-file-php",
-            "@coffeekraken/s-datetime-picker-component",
-            "@coffeekraken/s-deps-feature",
-            "@coffeekraken/s-descriptor",
-            "@coffeekraken/s-docblock",
-            "@coffeekraken/s-docmap",
-            "@coffeekraken/s-dropzone-component",
-            "@coffeekraken/s-duration",
-            "@coffeekraken/s-env",
-            "@coffeekraken/s-event-emitter",
-            "@coffeekraken/s-favicon-builder",
-            "@coffeekraken/s-feature",
-            "@coffeekraken/s-file",
-            "@coffeekraken/s-filtrable-input-component",
-            "@coffeekraken/s-floating-feature",
-            "@coffeekraken/s-form-validate-feature",
-            "@coffeekraken/s-front",
-            "@coffeekraken/s-frontend-checker",
-            "@coffeekraken/s-frontend-server",
-            "@coffeekraken/s-frontspec",
-            "@coffeekraken/s-glitch-feature",
-            "@coffeekraken/s-glob",
-            "@coffeekraken/s-google-map-component",
-            "@coffeekraken/s-handlebars",
-            "@coffeekraken/s-highlight-feature",
-            "@coffeekraken/s-images-builder",
-            "@coffeekraken/s-inline-feature",
-            "@coffeekraken/s-interface",
-            "@coffeekraken/s-kitchen",
-            "@coffeekraken/s-lazy-feature",
-            "@coffeekraken/s-lit-component",
-            "@coffeekraken/s-log",
-            "@coffeekraken/s-markdown-builder",
-            "@coffeekraken/s-monorepo",
-            "@coffeekraken/s-pack-essentials",
-            "@coffeekraken/s-package",
-            "@coffeekraken/s-page-transition-feature",
-            "@coffeekraken/s-panel-component",
-            "@coffeekraken/s-parallax-feature",
-            "@coffeekraken/s-postcss-builder",
-            "@coffeekraken/s-postcss-sugar-export-plugin",
-            "@coffeekraken/s-postcss-sugar-plugin",
-            "@coffeekraken/s-process",
-            "@coffeekraken/s-promise",
-            "@coffeekraken/s-range-component",
-            "@coffeekraken/s-rating-component",
-            "@coffeekraken/s-refocus-feature",
-            "@coffeekraken/s-request",
-            "@coffeekraken/s-scroll-component",
-            "@coffeekraken/s-sitemap-builder",
-            "@coffeekraken/s-slider-component",
-            "@coffeekraken/s-specs-editor-component",
-            "@coffeekraken/s-specs",
-            "@coffeekraken/s-state",
-            "@coffeekraken/s-static-builder",
-            "@coffeekraken/s-stdio",
-            "@coffeekraken/s-sugar-config",
-            "@coffeekraken/s-sugar-element",
-            "@coffeekraken/s-sugar-feature",
-            "@coffeekraken/s-sugar-json",
-            "@coffeekraken/s-theme-switcher-component",
-            "@coffeekraken/s-theme",
-            "@coffeekraken/s-timer",
-            "@coffeekraken/s-type",
-            "@coffeekraken/s-typescript-builder",
-            "@coffeekraken/s-url",
-            "@coffeekraken/s-validator",
-            "@coffeekraken/s-view-renderer-engine-blade",
-            "@coffeekraken/s-view-renderer-engine-lit",
-            "@coffeekraken/s-view-renderer-engine-twig",
-            "@coffeekraken/s-view-renderer",
-            "@coffeekraken/s-vite-postcss-plugin",
-            "@coffeekraken/s-vite-sugar-plugin",
-            "@coffeekraken/s-vite"
-        ],
         "map": {
             "@coffeekraken.sugar.config.themeUi.menu.paddingInline": {
                 "id": "@coffeekraken.sugar.config.themeUi.menu.paddingInline",
@@ -1347,10 +1245,9 @@
                 "example": [
                     {
                         "language": "js",
-                        "code": "import { __imagesLoadedAttribute } from '@coffeekraken/sugar/feature';\n __imagesLoadedAttribute();"
+                        "code": "import { __imagesLoadedAttribute } from '@coffeekraken/sugar/feature';\n __imagesLoadedAttribute();\n @since           2.0.0"
                     }
                 ],
-                "since": "1.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
@@ -1444,10 +1341,9 @@
                 "example": [
                     {
                         "language": "js",
-                        "code": "import { __inputAdditionalAttributes } from '@coffeekraken/sugar/feature';\n __inputAdditionalAttributes();"
+                        "code": "import { __inputAdditionalAttributes } from '@coffeekraken/sugar/feature';\n __inputAdditionalAttributes();\n @since           2.0.0"
                     }
                 ],
-                "since": "1.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
@@ -1886,10 +1782,9 @@
                 "example": [
                     {
                         "language": "js",
-                        "code": "import { __SGooeySvgFilter } from '@coffeekraken/sugar/filter';\nconst filter = new __SGooeySvgFilter();\nfilter.applyTo(myCoolHTMLElement);"
+                        "code": "import { __SGooeySvgFilter } from '@coffeekraken/sugar/filter';\nconst filter = new __SGooeySvgFilter();\nfilter.applyTo(myCoolHTMLElement);\n @since           2.0.0"
                     }
                 ],
-                "since": "1.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
@@ -2029,10 +1924,9 @@
                 "example": [
                     {
                         "language": "js",
-                        "code": "import { __SGradientSvgFilter } from '@coffeekraken/sugar/filter';\nconst filter = new  __SGradientSvgFilter();\nfilter.linear(['red','blue','green']);\nfilter.applyTo(myCoolHTMLElement);"
+                        "code": "import { __SGradientSvgFilter } from '@coffeekraken/sugar/filter';\nconst filter = new  __SGradientSvgFilter();\nfilter.linear(['red','blue','green']);\nfilter.applyTo(myCoolHTMLElement);\n @since           2.0.0"
                     }
                 ],
-                "since": "1.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
@@ -2249,10 +2143,9 @@
                 "example": [
                     {
                         "language": "js",
-                        "code": "import { __SMotionblurSvgFilter } from '@coffeekraken/sugar/filter';\nconst filter = new  __SMotionblurSvgFilter();\nfilter.applyTo(myCoolHTMLElement);\n// now when your element will move, it will be blured accordingly"
+                        "code": "import { __SMotionblurSvgFilter } from '@coffeekraken/sugar/filter';\nconst filter = new  __SMotionblurSvgFilter();\nfilter.applyTo(myCoolHTMLElement);\n// now when your element will move, it will be blured accordingly\n @since           2.0.0"
                     }
                 ],
-                "since": "1.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
@@ -2427,7 +2320,6 @@
                         "code": "import {__SOutlineSvgFilter } from '@coffeekraken/sugar/filter';\nconst filter = new __SOutlineSvgFilter();\nfilter.applyTo(myCoolHTMLElement);"
                     }
                 ],
-                "since": "1.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
@@ -2636,10 +2528,9 @@
                 "example": [
                     {
                         "language": "js",
-                        "code": "import { __isEdge } from '@coffeekraken/sugar/is'\nif (__isEdge()) {\n  // do something cool\n}"
+                        "code": "import { __isEdge } from '@coffeekraken/sugar/is'\nif (__isEdge()) {\n  // do something cool\n}\n @since           2.0.0"
                     }
                 ],
-                "since": "1.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
@@ -2689,10 +2580,9 @@
                 "example": [
                     {
                         "language": "js",
-                        "code": "import { __isFirefox } from '@coffeekraken/sugar/is'\nif (__isFirefox()) {\n  // do something cool\n}"
+                        "code": "import { __isFirefox } from '@coffeekraken/sugar/is'\nif (__isFirefox()) {\n  // do something cool\n}\n @since           2.0.0"
                     }
                 ],
-                "since": "1.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
@@ -2742,10 +2632,9 @@
                 "example": [
                     {
                         "language": "js",
-                        "code": "import { __isIe } from '@coffeekraken/sugar/is'\nif (__isIe()) {\n  // do something cool\n}"
+                        "code": "import { __isIe } from '@coffeekraken/sugar/is'\nif (__isIe()) {\n  // do something cool\n}\n @since           2.0.0"
                     }
                 ],
-                "since": "1.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
@@ -2782,7 +2671,6 @@
                         "code": "import { __isMobile } from 'coffeekraken/sugar/is'\nif (__isMobile()) {\n  // do something cool...\n}"
                     }
                 ],
-                "since": "1.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
@@ -2832,10 +2720,9 @@
                 "example": [
                     {
                         "language": "js",
-                        "code": "import { __isOpera } from '@coffeekraken/sugar/is'\nif ( __isOpera()) {\n  // do something cool\n}"
+                        "code": "import { __isOpera } from '@coffeekraken/sugar/is'\nif ( __isOpera()) {\n  // do something cool\n}\n @since           2.0.0"
                     }
                 ],
-                "since": "1.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
@@ -2872,7 +2759,6 @@
                         "code": "import { __isPhone } from '@coffeekraken/sugar/is'\nif (__isPhone()) {\n  // do something cool...\n}"
                     }
                 ],
-                "since": "1.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
@@ -2922,10 +2808,9 @@
                 "example": [
                     {
                         "language": "js",
-                        "code": "import { __isSafari } from '@coffeekraken/sugar/is'\nif (__isSafari()) {\n  // do something cool\n}"
+                        "code": "import { __isSafari } from '@coffeekraken/sugar/is'\nif (__isSafari()) {\n  // do something cool\n}\n @since           2.0.0"
                     }
                 ],
-                "since": "1.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
@@ -2975,10 +2860,9 @@
                 "example": [
                     {
                         "language": "js",
-                        "code": "import { __isSamsumgBrowser } from '@coffeekraken/sugar/is'\nif (__isSamsumgBrowser()) {\n  // do something\n}"
+                        "code": "import { __isSamsumgBrowser } from '@coffeekraken/sugar/is'\nif (__isSamsumgBrowser()) {\n  // do something\n}\n @since           2.0.0"
                     }
                 ],
-                "since": "1.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
@@ -3015,7 +2899,6 @@
                         "code": "import { __isTablet } from '@coffeekraken/sugar/is'\nif (__isTablet()) {\n  // do something cool...\n}"
                     }
                 ],
-                "since": "1.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
@@ -3065,10 +2948,9 @@
                 "example": [
                     {
                         "language": "js",
-                        "code": "import { __isUcBrowser } from '@coffeekraken/sugar/is'\nif (__isUcBrowser()) {\n  // do something\n}"
+                        "code": "import { __isUcBrowser } from '@coffeekraken/sugar/is'\nif (__isUcBrowser()) {\n  // do something\n}\n @since           2.0.0"
                     }
                 ],
-                "since": "1.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
@@ -3501,10 +3383,9 @@
                 "example": [
                     {
                         "language": "js",
-                        "code": "import { __decodeHtmlEntities } from '@coffeekraken/sugar/string';\n__decodeHtmlEntities('&#111;&#108;&#105;&#118;&#105;&#101;&#114;&#046;&#098;&#111;&#115;&#115;&#101;&#108;&#064;&#103;&#109;&#097;&#105;&#108;&#046;&#099;&#111;&#109;');\n// return => olivier.bossel@gmail.com"
+                        "code": "import { __decodeHtmlEntities } from '@coffeekraken/sugar/string';\n__decodeHtmlEntities('&#111;&#108;&#105;&#118;&#105;&#101;&#114;&#046;&#098;&#111;&#115;&#115;&#101;&#108;&#064;&#103;&#109;&#097;&#105;&#108;&#046;&#099;&#111;&#109;');\n// return => olivier.bossel@gmail.com\n @since           2.0.0"
                     }
                 ],
-                "since": "1.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
@@ -3733,6 +3614,139 @@
                 "filename": "getCoffeekrakenMetas.ts",
                 "extension": "ts",
                 "relPath": "src/node/coffeekraken/getCoffeekrakenMetas.ts",
+                "children": {}
+            },
+            "@coffeekraken.sugar.node.npm.composerJsonSync": {
+                "id": "@coffeekraken.sugar.node.npm.composerJsonSync",
+                "name": "composerJsonSync",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Function"
+                        }
+                    ],
+                    "raw": "Function"
+                },
+                "param": {
+                    "nameOrPath": {
+                        "name": "nameOrPath",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "String"
+                                }
+                            ],
+                            "raw": "String"
+                        },
+                        "description": "the package name or path wanted",
+                        "default": "/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/tools/sugar",
+                        "defaultStr": "process.cwd()"
+                    },
+                    "settings": {
+                        "name": "settings",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "IPackageJson"
+                                }
+                            ],
+                            "raw": "IPackageJson"
+                        },
+                        "description": "Some settings to configure your process",
+                        "default": {},
+                        "defaultStr": "{}"
+                    }
+                },
+                "platform": [
+                    {
+                        "name": "node",
+                        "description": ""
+                    }
+                ],
+                "description": "This function simply take a package name as parameter, and return the corresponding\ncomposer.json JSON content",
+                "namespace": "@coffeekraken.sugar.node.npm",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "js",
+                        "code": "import { __packageJson } from '@coffeekraken/sugar/composer`;\n__packageJson('lodash');"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "composerJsonSync.ts",
+                "extension": "ts",
+                "relPath": "src/node/composer/composerJsonSync.ts",
+                "children": {}
+            },
+            "@coffeekraken.sugar.node.composer.composerPath": {
+                "id": "@coffeekraken.sugar.node.composer.composerPath",
+                "name": "composerPath",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Function"
+                        }
+                    ],
+                    "raw": "Function"
+                },
+                "param": {
+                    "name": {
+                        "name": "name",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "String"
+                                }
+                            ],
+                            "raw": "String"
+                        },
+                        "description": "the package name wanted",
+                        "defaultStr": ""
+                    },
+                    "settings": {
+                        "name": "settings",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "IComposerPathSettings"
+                                }
+                            ],
+                            "raw": "IComposerPathSettings"
+                        },
+                        "description": "Some settings to configure your process",
+                        "default": {},
+                        "defaultStr": "{}"
+                    }
+                },
+                "platform": [
+                    {
+                        "name": "node",
+                        "description": ""
+                    }
+                ],
+                "description": "This function simply take a package name as parameter, and return the corresponding\ncomposer package path",
+                "namespace": "@coffeekraken.sugar.node.composer",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "js",
+                        "code": "import { __composerPath } from '@coffeekraken/sugar/composer`;\n__composerPath('lodash');"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "composerPath.ts",
+                "extension": "ts",
+                "relPath": "src/node/composer/composerPath.ts",
                 "children": {}
             },
             "@coffeekraken.sugar.node.compression.unzip": {
@@ -9096,6 +9110,58 @@
                 "relPath": "src/node/package/packageJsonSync.ts",
                 "children": {}
             },
+            "@coffeekraken.sugar.node.package.packageMetas": {
+                "id": "@coffeekraken.sugar.node.package.packageMetas",
+                "name": "packageMetas",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Function"
+                        }
+                    ],
+                    "raw": "Function"
+                },
+                "param": {
+                    "path": {
+                        "name": "path",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "String"
+                                }
+                            ],
+                            "raw": "String"
+                        },
+                        "description": "The path of the package to search metas for",
+                        "default": "/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/tools/sugar",
+                        "defaultStr": "process.cwd()"
+                    }
+                },
+                "platform": [
+                    {
+                        "name": "node",
+                        "description": ""
+                    }
+                ],
+                "description": "This function take a package root path and returns the metas informations from one of these sources:\n- package.json\n- composer.json",
+                "namespace": "@coffeekraken.sugar.node.package",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "js",
+                        "code": "import { __packageMetas } from '@coffeekraken/sugar/package';\n__packageMetas();"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com"
+                },
+                "filename": "packageMetas.ts",
+                "extension": "ts",
+                "relPath": "src/node/package/packageMetas.ts",
+                "children": {}
+            },
             "@coffeekraken.sugar.node.package.renamePackage": {
                 "id": "@coffeekraken.sugar.node.package.renamePackage",
                 "name": "renamePackage",
@@ -11942,7 +12008,7 @@
                         "description": ""
                     }
                 ],
-                "description": "This function takes a media query definition like \"mobile\", \">mobile\", \"=tablet\", etc... and\nreturns you the corresponding css media query string.\nThis is based on the passed settings that you can pass as a second parameter.\n\nHere's the default medias availables:\n- mobile: 0-639px\n- tablet: 640px-1279px\n- desktop: 1280px-2047px\n- wide: 2048px-...\n- dwarf: 0-700px (height)\nYou can as well override these in the $settings parameter.",
+                "description": "This function takes a media query definition like \"mobile\", \">mobile\", \"=tablet\", etc... and\nreturns you the corresponding css media query string.\nThis is based on the passed settings that you can pass as a second parameter.\n\nHere's the default medias availables:\n- mobile: 0-639px\n- tablet: 640px-1279px\n- desktop: 1280px-2047px\n- wide: 2048px-...\nYou can as well override these in the $settings parameter.",
                 "namespace": "@coffeekraken.sugar.php.css",
                 "status": "beta",
                 "example": [
@@ -17017,7 +17083,6 @@
                         "code": "import ( __xmlToJson ) from '@coffeekraken/sugar/convert';\n__xmlToJson('...');"
                     }
                 ],
-                "since": "1.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
@@ -17058,7 +17123,6 @@
                         "code": "import { __aes } from '@coffeekraken/sugar/crypto';\n__aes.encrypt('hello world');"
                     }
                 ],
-                "since": "1.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
@@ -18295,7 +18359,6 @@
                 "description": "Ease in cubic function",
                 "namespace": "@coffeekraken.sugar.shared.easing",
                 "status": "beta",
-                "since": "1.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
@@ -18345,7 +18408,6 @@
                 "description": "Ease in out cubic function",
                 "namespace": "@coffeekraken.sugar.shared.easing",
                 "status": "beta",
-                "since": "1.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
@@ -18395,7 +18457,6 @@
                 "description": "Ease in out quad function",
                 "namespace": "@coffeekraken.sugar.shared.easing",
                 "status": "beta",
-                "since": "1.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
@@ -18445,7 +18506,6 @@
                 "description": "Ease in out quart function",
                 "namespace": "@coffeekraken.sugar.shared.easing",
                 "status": "beta",
-                "since": "1.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
@@ -18495,7 +18555,6 @@
                 "description": "Ease in out quint function",
                 "namespace": "@coffeekraken.sugar.shared.easing",
                 "status": "beta",
-                "since": "1.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
@@ -18545,7 +18604,6 @@
                 "description": "Ease in quad function",
                 "namespace": "@coffeekraken.sugar.shared.easing",
                 "status": "beta",
-                "since": "1.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
@@ -18595,7 +18653,6 @@
                 "description": "Ease in quart function",
                 "namespace": "@coffeekraken.sugar.shared.easing",
                 "status": "beta",
-                "since": "1.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
@@ -18645,7 +18702,6 @@
                 "description": "Ease in quint function",
                 "namespace": "@coffeekraken.sugar.shared.easing",
                 "status": "beta",
-                "since": "1.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
@@ -18695,7 +18751,6 @@
                 "description": "Ease out cubic function",
                 "namespace": "@coffeekraken.sugar.shared.easing",
                 "status": "beta",
-                "since": "1.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
@@ -18745,7 +18800,6 @@
                 "description": "Ease out quad function",
                 "namespace": "@coffeekraken.sugar.shared.easing",
                 "status": "beta",
-                "since": "1.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
@@ -18795,7 +18849,6 @@
                 "description": "Ease out quart function",
                 "namespace": "@coffeekraken.sugar.shared.easing",
                 "status": "beta",
-                "since": "1.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
@@ -18845,7 +18898,6 @@
                 "description": "Ease out quint function",
                 "namespace": "@coffeekraken.sugar.shared.easing",
                 "status": "beta",
-                "since": "1.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
@@ -18895,7 +18947,6 @@
                 "description": "Ease linear function",
                 "namespace": "@coffeekraken.sugar.shared.easing",
                 "status": "beta",
-                "since": "1.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
@@ -20611,10 +20662,9 @@
                 "example": [
                     {
                         "language": "js",
-                        "code": "import { __replaceTags } from '@coffeekraken/sugar/html';\n __replaceTags('<span>Hello</span> world', {\n   span: (tag, content) => `<div>${content}</div>`; // => <div>Hello</div> world\n});"
+                        "code": "import { __replaceTags } from '@coffeekraken/sugar/html';\n __replaceTags('<span>Hello</span> world', {\n   span: (tag, content) => `<div>${content}</div>`; // => <div>Hello</div> world\n});\n @since           2.0.0"
                     }
                 ],
-                "since": "1.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
@@ -20805,10 +20855,9 @@
                 "example": [
                     {
                         "language": "js",
-                        "code": "import { __isArray } from '@coffeekraken/sugar/is'\nif (__isArray([]) {\n  // do something\n}"
+                        "code": "import { __isArray } from '@coffeekraken/sugar/is'\nif (__isArray([]) {\n  // do something\n}\n @since           2.0.0"
                     }
                 ],
-                "since": "1.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
@@ -20917,10 +20966,9 @@
                 "example": [
                     {
                         "language": "js",
-                        "code": "import { __isBoolean } from '@coffeekraken/sugar/is'\nif (__isBoolean(true) {\n  // do something\n}"
+                        "code": "import { __isBoolean } from '@coffeekraken/sugar/is'\nif (__isBoolean(true) {\n  // do something\n}\n @since           2.0.0"
                     }
                 ],
-                "since": "1.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
@@ -21263,10 +21311,9 @@
                 "example": [
                     {
                         "language": "js",
-                        "code": "import {__isCreditCard } from '@coffeekraken/sugar/is';\n__isCreditCard('john.doe@gmail.com') => true\n__isCreditCard('plop@yop.com') => true\n__isCreditCard('hello') => false\n__isCreditCard('378282246310006') => true"
+                        "code": "import {__isCreditCard } from '@coffeekraken/sugar/is';\n__isCreditCard('john.doe@gmail.com') => true\n__isCreditCard('plop@yop.com') => true\n__isCreditCard('hello') => false\n__isCreditCard('378282246310006') => true\n @since           2.0.0"
                     }
                 ],
-                "since": "1.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
@@ -21430,7 +21477,6 @@
                         "code": "import { __isDomElement } from '@coffeekraken/sugar/dom'\n__isDomElement($myElement);"
                     }
                 ],
-                "since": "1.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
@@ -21482,7 +21528,6 @@
                         "code": "import { __isDomNode } from '@coffeekraken/sugar/dom'\n__isDomNode($myElement);"
                     }
                 ],
-                "since": "1.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
@@ -21535,10 +21580,9 @@
                 "example": [
                     {
                         "language": "js",
-                        "code": "import { __isEmail } from '@coffeekraken/sugar/is';\n__isEmail('john.doe@gmail.com') => true\n__isEmail('plop@yop.com') => true\n__isEmail('hello') => false"
+                        "code": "import { __isEmail } from '@coffeekraken/sugar/is';\n__isEmail('john.doe@gmail.com') => true\n__isEmail('plop@yop.com') => true\n__isEmail('hello') => false\n @since           2.0.0"
                     }
                 ],
-                "since": "1.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
@@ -21632,10 +21676,9 @@
                 "example": [
                     {
                         "language": "js",
-                        "code": "import { __isEven } from '@coffeekraken/sugar/is'\n__isEven(1) // false\n__isEven(2) // true"
+                        "code": "import { __isEven } from '@coffeekraken/sugar/is'\n__isEven(1) // false\n__isEven(2) // true\n @since           2.0.0"
                     }
                 ],
-                "since": "1.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
@@ -21688,10 +21731,9 @@
                 "example": [
                     {
                         "language": "js",
-                        "code": "import { __isFunction } from '@coffeekraken/sugar/is'\nif (__isFunction(function() {})) {\n  // do something\n}"
+                        "code": "import { __isFunction } from '@coffeekraken/sugar/is'\nif (__isFunction(function() {})) {\n  // do something\n}\n @since           2.0.0"
                     }
                 ],
-                "since": "1.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
@@ -21856,10 +21898,9 @@
                 "example": [
                     {
                         "language": "js",
-                        "code": "import { __isInteger } from '@coffeekraken/sugar/is';\n__isInteger(10) => true\n__isInteger('hello') => false"
+                        "code": "import { __isInteger } from '@coffeekraken/sugar/is';\n__isInteger(10) => true\n__isInteger('hello') => false\n @since           2.0.0"
                     }
                 ],
-                "since": "1.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
@@ -21915,7 +21956,6 @@
                         "code": "import { __isIsoDate } from '@coffeekraken/sugar/is';\n__isIsoDate('john.doe@gmail.com') => false\n__isIsoDate('plop@yop.com') => false\n__isIsoDate('hello') => false\n__isIsoDate('2008-08') => true"
                     }
                 ],
-                "since": "1.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
@@ -21971,7 +22011,6 @@
                         "code": "import { __isIsoDateTime } from '@coffeekraken/sugar/is';\n__isIsoDateTime('john.doe@gmail.com') => false\n__isIsoDateTime('plop@yop.com') => false\n__isIsoDateTime('2008-08-30 17:21:59') => true"
                     }
                 ],
-                "since": "1.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
@@ -22027,7 +22066,6 @@
                         "code": "import { __isIsoTime } from '@coffeekraken/sugar/is';\n__isIsoTime('john.doe@gmail.com') => false\n__isIsoTime('plop@yop.com') => false\n__isIsoTime('hello') => false\n__isIsoTime('17:21') => true"
                     }
                 ],
-                "since": "1.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
@@ -22080,10 +22118,9 @@
                 "example": [
                     {
                         "language": "js",
-                        "code": "import { __isJson } from '@coffeekraken/sugar/is'\nif (__isJson('[{id:10}]')) {\n  // do something\n}"
+                        "code": "import { __isJson } from '@coffeekraken/sugar/is'\nif (__isJson('[{id:10}]')) {\n  // do something\n}\n @since           2.0.0"
                     }
                 ],
-                "since": "1.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
@@ -22121,10 +22158,9 @@
                 "example": [
                     {
                         "language": "js",
-                        "code": "import { __isLinux } from '@coffeekraken/sugar/is';\n__isLinux(); // => true"
+                        "code": "import { __isLinux } from '@coffeekraken/sugar/is';\n__isLinux(); // => true\n @since           2.0.0"
                     }
                 ],
-                "since": "1.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
@@ -22177,10 +22213,9 @@
                 "example": [
                     {
                         "language": "js",
-                        "code": "import { __isMap } from '@coffeekraken/sugar/is'\nconst map = new Map();\nif (__isMap(map) {\n  // do something\n}"
+                        "code": "import { __isMap } from '@coffeekraken/sugar/is'\nconst map = new Map();\nif (__isMap(map) {\n  // do something\n}\n @since           2.0.0"
                     }
                 ],
-                "since": "1.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
@@ -22233,10 +22268,9 @@
                 "example": [
                     {
                         "language": "js",
-                        "code": "import { __isMmddyyyyDate } from '@coffeekraken/sugar/is'\nif (__isMmddyyyyDate('12.25.2018')) {\n    // do something cool\n}"
+                        "code": "import { __isMmddyyyyDate } from '@coffeekraken/sugar/is'\nif (__isMmddyyyyDate('12.25.2018')) {\n    // do something cool\n}\n @since           2.0.0"
                     }
                 ],
-                "since": "1.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
@@ -22340,10 +22374,9 @@
                 "example": [
                     {
                         "language": "js",
-                        "code": "import { __isNode } from '@coffeekraken/sugar/is';\n__isNode(); // => true"
+                        "code": "import { __isNode } from '@coffeekraken/sugar/is';\n__isNode(); // => true\n @since           2.0.0"
                     }
                 ],
-                "since": "1.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
@@ -22396,10 +22429,9 @@
                 "example": [
                     {
                         "language": "js",
-                        "code": "import { __isNumber } from '@coffeekraken/sugar/is';\n__isNumber(12) => true\n__isNumber(22.3) => true\n__isNumber('20') => false"
+                        "code": "import { __isNumber } from '@coffeekraken/sugar/is';\n__isNumber(12) => true\n__isNumber(22.3) => true\n__isNumber('20') => false\n @since           2.0.0"
                     }
                 ],
-                "since": "1.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
@@ -22452,10 +22484,9 @@
                 "example": [
                     {
                         "language": "js",
-                        "code": "import { __isObject } from '@coffeekraken/sugar/is'\nif (__isObject({}) {\n  // do something\n}"
+                        "code": "import { __isObject } from '@coffeekraken/sugar/is'\nif (__isObject({}) {\n  // do something\n}\n @since           2.0.0"
                     }
                 ],
-                "since": "1.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
@@ -22508,10 +22539,9 @@
                 "example": [
                     {
                         "language": "js",
-                        "code": "import { __isOdd } from '@coffeekraken/sugar/is'\n__isOdd(1) // true\n__isOdd(2) // false"
+                        "code": "import { __isOdd } from '@coffeekraken/sugar/is'\n__isOdd(1) // true\n__isOdd(2) // false\n @since           2.0.0"
                     }
                 ],
-                "since": "1.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
@@ -22646,10 +22676,9 @@
                 "example": [
                     {
                         "language": "js",
-                        "code": "import { __isOsx } from '@coffeekraken/sugar/is';\n__isOsx(); // => true"
+                        "code": "import { __isOsx } from '@coffeekraken/sugar/is';\n__isOsx(); // => true\n @since           2.0.0"
                     }
                 ],
-                "since": "1.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
@@ -22702,10 +22731,9 @@
                 "example": [
                     {
                         "language": "js",
-                        "code": "import { __isPath } from '@coffeekraken/sugar/is';\n__isPath('hello/world'); // => true"
+                        "code": "import { __isPath } from '@coffeekraken/sugar/is';\n__isPath('hello/world'); // => true\n @since           2.0.0"
                     }
                 ],
-                "since": "1.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
@@ -22761,10 +22789,9 @@
                 "example": [
                     {
                         "language": "js",
-                        "code": "import { __isPlainObject } from '@coffeekraken/sugar/is';\n__isPlainObject({ hello: 'world'}); // => true"
+                        "code": "import { __isPlainObject } from '@coffeekraken/sugar/is';\n__isPlainObject({ hello: 'world'}); // => true\n @since           2.0.0"
                     }
                 ],
-                "since": "1.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
@@ -22817,10 +22844,9 @@
                 "example": [
                     {
                         "language": "js",
-                        "code": "import { __isRegexp } from '@coffeekraken/sugar/is'\nif (__isRegexp(/^hello$/g) {\n  // do something\n}"
+                        "code": "import { __isRegexp } from '@coffeekraken/sugar/is'\nif (__isRegexp(/^hello$/g) {\n  // do something\n}\n @since           2.0.0"
                     }
                 ],
-                "since": "1.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
@@ -22873,10 +22899,9 @@
                 "example": [
                     {
                         "language": "js",
-                        "code": "import { __isString } from '@coffeekraken/sugar/is'\nif (__isString({}) {\n  // do something\n}"
+                        "code": "import { __isString } from '@coffeekraken/sugar/is'\nif (__isString({}) {\n  // do something\n}\n @since           2.0.0"
                     }
                 ],
-                "since": "1.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
@@ -23052,10 +23077,9 @@
                 "example": [
                     {
                         "language": "js",
-                        "code": "import { __isWindows } from '@coffeekraken/sugar/is';\n__isWindows(); // => true"
+                        "code": "import { __isWindows } from '@coffeekraken/sugar/is';\n__isWindows(); // => true\n @since           2.0.0"
                     }
                 ],
-                "since": "1.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
@@ -23108,10 +23132,9 @@
                 "example": [
                     {
                         "language": "js",
-                        "code": "import { __isYyyymmddDate } from '@coffeekraken/sugar/is'\nif (__isYyyymmddDate('2018.12.25')) {\n    // do something cool\n}"
+                        "code": "import { __isYyyymmddDate } from '@coffeekraken/sugar/is'\nif (__isYyyymmddDate('2018.12.25')) {\n    // do something cool\n}\n @since           2.0.0"
                     }
                 ],
-                "since": "1.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
@@ -23812,10 +23835,9 @@
                 "example": [
                     {
                         "language": "js",
-                        "code": "import { __pad } from '@coffeekraken/sugar/number'\n__pad(123, 4) // 0123"
+                        "code": "import { __pad } from '@coffeekraken/sugar/number'\n__pad(123, 4) // 0123\n @since           2.0.0"
                     }
                 ],
-                "since": "1.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
@@ -24103,7 +24125,6 @@
                         "code": "import { __clone } from '@coffeekraken/sugar/object';\n__clone({\n   hello: 'world'\n});"
                     }
                 ],
-                "since": "1.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
@@ -29186,10 +29207,9 @@
                 "example": [
                     {
                         "language": "js",
-                        "code": "import { __animatedInnerHtml } from '@coffeekraken/sugar/dom';\n __animatedInnerHtml(myCoolNode, 'Hello World', {\n   action: 'replace', // replace, append, prepend\n   animIn: 'fade', // fade, fadeUp, fadeDown, fadeLeft, fadeRight\n   animOut: 'fadeUp', // fade, fadeUp, fadeDown, fadeLeft, fadeRight\n   animInDuration: 600, // in ms if number, otherwise a string like '1s', '1m', etc...\n   animOutDuration: 300, // in ms if number, otherwise a string like '1s', '1m', etc...\n   animInDistance: 25, // in px\n   animOutDistance: 25, // in px\n   animInEasing: 'ease-in-out',\n   animOutEasing: 'ease-in-out'\n}).then(() => {\n   // do something when the change has been made...\n});"
+                        "code": "import { __animatedInnerHtml } from '@coffeekraken/sugar/dom';\n __animatedInnerHtml(myCoolNode, 'Hello World', {\n   action: 'replace', // replace, append, prepend\n   animIn: 'fade', // fade, fadeUp, fadeDown, fadeLeft, fadeRight\n   animOut: 'fadeUp', // fade, fadeUp, fadeDown, fadeLeft, fadeRight\n   animInDuration: 600, // in ms if number, otherwise a string like '1s', '1m', etc...\n   animOutDuration: 300, // in ms if number, otherwise a string like '1s', '1m', etc...\n   animInDistance: 25, // in px\n   animOutDistance: 25, // in px\n   animInEasing: 'ease-in-out',\n   animOutEasing: 'ease-in-out'\n}).then(() => {\n   // do something when the change has been made...\n});\n @since           2.0.0"
                     }
                 ],
-                "since": "1.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
@@ -29254,10 +29274,9 @@
                 "example": [
                     {
                         "language": "js",
-                        "code": "import { __addAnimationClass } from '@coffeekraken/sugar/dom';\n __addAnimationClass(myElm, 'my-cool-class').then($elm => {\n   // do something at the animation end...\n});"
+                        "code": "import { __addAnimationClass } from '@coffeekraken/sugar/dom';\n __addAnimationClass(myElm, 'my-cool-class').then($elm => {\n   // do something at the animation end...\n});\n @since           2.0.0"
                     }
                 ],
-                "since": "1.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
@@ -29325,10 +29344,9 @@
                 "example": [
                     {
                         "language": "js",
-                        "code": "import { __removeClassOnAnimationEnd } from '@coffeekraken/sugar/dom';\n __removeClassOnAnimationEnd(myCoolElm, 'my-class');"
+                        "code": "import { __removeClassOnAnimationEnd } from '@coffeekraken/sugar/dom';\n __removeClassOnAnimationEnd(myCoolElm, 'my-class');\n @since           2.0.0"
                     }
                 ],
-                "since": "1.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
@@ -29586,11 +29604,10 @@
                 "example": [
                     {
                         "language": "js",
-                        "code": "import { __detectInOutDirection } from '@coffeekraken/sugar/dom';\nconst detector = __detectInOutDirection($myElm).on('in', (direction) => {\n   // direction can be \"up\", \"down\", \"left\" or \"right\"\n}).on('out', (direction) => {\n   // direction can be \"up\", \"down\", \"left\" or \"right\"\n});\n\n// cancel the detection process\ndetector.cancel();"
+                        "code": "import { __detectInOutDirection } from '@coffeekraken/sugar/dom';\nconst detector = __detectInOutDirection($myElm).on('in', (direction) => {\n   // direction can be \"up\", \"down\", \"left\" or \"right\"\n}).on('out', (direction) => {\n   // direction can be \"up\", \"down\", \"left\" or \"right\"\n});\n\n// cancel the detection process\ndetector.cancel();\n @since           2.0.0"
                     }
                 ],
                 "async": "true",
-                "since": "1.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
@@ -29672,11 +29689,10 @@
                 "example": [
                     {
                         "language": "js",
-                        "code": "import { __inViewportStatusChange } from '@coffeekraken/sugar/dom';\n__inViewportStatusChange(myElm).on('enter', $elm => {\n   // do something...\n}).on('enter', $elm => {\n   // do something...\n}).on('leave', $elm => {\n   // do something...\n});"
+                        "code": "import { __inViewportStatusChange } from '@coffeekraken/sugar/dom';\n__inViewportStatusChange(myElm).on('enter', $elm => {\n   // do something...\n}).on('enter', $elm => {\n   // do something...\n}).on('leave', $elm => {\n   // do something...\n});\n @since           2.0.0"
                     }
                 ],
                 "async": "true",
-                "since": "1.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
@@ -29768,11 +29784,10 @@
                 "example": [
                     {
                         "language": "js",
-                        "code": "import { __onDrag } from '@coffeekraken/sugar/dom'\n__onDrag($myElement, (drag) => {\n   // do something...\n});"
+                        "code": "import { __onDrag } from '@coffeekraken/sugar/dom'\n__onDrag($myElement, (drag) => {\n   // do something...\n});\n @since           2.0.0"
                     }
                 ],
                 "async": "true",
-                "since": "1.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
@@ -29995,7 +30010,6 @@
                     }
                 ],
                 "async": "true",
-                "since": "1.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
@@ -30251,11 +30265,10 @@
                 "example": [
                     {
                         "language": "js",
-                        "code": "import { __whenAnimationEnd } from '@coffeekraken/sugar/dom'\nawait __whenAnimationEnd(myCoolElm);"
+                        "code": "import { __whenAnimationEnd } from '@coffeekraken/sugar/dom'\nawait __whenAnimationEnd(myCoolElm);\n @since           2.0.0"
                     }
                 ],
                 "async": "true",
-                "since": "1.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
@@ -30331,11 +30344,10 @@
                 "example": [
                     {
                         "language": "js",
-                        "code": "import { __whenAttribute } from '@coffeekraken/sugar/dom'\n__whenAttribute(myCoolHTMLElement, 'value').then((value) => {\n\t\t// the value attribute exist on the element\n});\n// with a checkFn\n__whenAttribute(myCoolHTMLElement, 'value', (newVal, oldVal) => {\n\t\t// make sure the value is a number\n\t\treturn typeof(newVal) === 'number';\n}).then((value) => {\n\t\t// do something with your number value...\n});"
+                        "code": "import { __whenAttribute } from '@coffeekraken/sugar/dom'\n__whenAttribute(myCoolHTMLElement, 'value').then((value) => {\n\t\t// the value attribute exist on the element\n});\n// with a checkFn\n__whenAttribute(myCoolHTMLElement, 'value', (newVal, oldVal) => {\n\t\t// make sure the value is a number\n\t\treturn typeof(newVal) === 'number';\n}).then((value) => {\n\t\t// do something with your number value...\n});\n @since           2.0.0"
                     }
                 ],
                 "async": "true",
-                "since": "1.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
@@ -30398,10 +30410,9 @@
                 "example": [
                     {
                         "language": "js",
-                        "code": "import { __whenBackgroundImageLoaded } from '@coffeekraken/sugar/dom'\n__whenBackgroundImageLoaded($myElm).then(() => {\n  // do something when loaded\n})"
+                        "code": "import { __whenBackgroundImageLoaded } from '@coffeekraken/sugar/dom'\n__whenBackgroundImageLoaded($myElm).then(() => {\n  // do something when loaded\n})\n @since           2.0.0"
                     }
                 ],
-                "since": "1.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
@@ -30439,7 +30450,6 @@
                     }
                 ],
                 "async": "true",
-                "since": "1.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
@@ -30521,11 +30531,10 @@
                 "example": [
                     {
                         "language": "js",
-                        "code": "import { __whenEntersViewport } from '@coffeekraken/sugar/dom'\n__whenEntersViewport(myCoolHTMLElement).then((elm) => {\n\t\t// do something with your element that has entered the viewport...\n});"
+                        "code": "import { __whenEntersViewport } from '@coffeekraken/sugar/dom'\n__whenEntersViewport(myCoolHTMLElement).then((elm) => {\n\t\t// do something with your element that has entered the viewport...\n});\n @since           2.0.0"
                     }
                 ],
                 "async": "true",
-                "since": "1.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
@@ -30588,10 +30597,9 @@
                 "example": [
                     {
                         "language": "js",
-                        "code": "import { __whenImageLoaded } from '@coffeekraken/sugar/dom'\n __whenImageLoaded(myCoolHTMLImageElement).then(($img) => {\n\t\t// do something when the image is loaded\n});"
+                        "code": "import { __whenImageLoaded } from '@coffeekraken/sugar/dom'\n __whenImageLoaded(myCoolHTMLImageElement).then(($img) => {\n\t\t// do something when the image is loaded\n});\n @since           2.0.0"
                     }
                 ],
-                "since": "1.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
@@ -30657,10 +30665,9 @@
                 "example": [
                     {
                         "language": "js",
-                        "code": "import { __whenImagesLoaded } from '@coffeekraken/sugar/dom'\n__whenImagesLoaded([\n\t$img1, $img2, $img3\n]).on('loaded', $img => {\n   // do something with the loaded image\n}).then(() => {\n  // do something here\n})"
+                        "code": "import { __whenImagesLoaded } from '@coffeekraken/sugar/dom'\n__whenImagesLoaded([\n\t$img1, $img2, $img3\n]).on('loaded', $img => {\n   // do something with the loaded image\n}).then(() => {\n  // do something here\n})\n @since           2.0.0"
                     }
                 ],
-                "since": "1.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
@@ -30812,7 +30819,7 @@
                 "example": [
                     {
                         "language": "js",
-                        "code": "import { __whenInteract } from '@coffeekraken/sugar/js/dom/detect/whenInteract'\nawait __whenInteract(myCoolElement);"
+                        "code": "import { __whenInteract } from '@coffeekraken/sugar/js/dom/detect/whenInteract'\nawait __whenInteract(myCoolElement);\n @since           2.0.0"
                     }
                 ],
                 "interface": {
@@ -30894,7 +30901,6 @@
                     }
                 },
                 "async": "true",
-                "since": "1.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
@@ -30976,11 +30982,10 @@
                 "example": [
                     {
                         "language": "js",
-                        "code": "import { __whenInViewport } from '@coffeekraken/sugar/dom'\nconst promise = __whenInViewport(myCoolHTMLElement).then((elm) => {\n\t\t// do something with your element that has entered the viewport...\n});\n// when you want to stop listening\npromise.cancel();"
+                        "code": "import { __whenInViewport } from '@coffeekraken/sugar/dom'\nconst promise = __whenInViewport(myCoolHTMLElement).then((elm) => {\n\t\t// do something with your element that has entered the viewport...\n});\n// when you want to stop listening\npromise.cancel();\n @since           2.0.0"
                     }
                 ],
                 "async": "true",
-                "since": "1.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
@@ -31043,10 +31048,9 @@
                 "example": [
                     {
                         "language": "js",
-                        "code": "import { __whenLinkLoaded } from '@coffeekraken/sugar/dom'\n__whenLinkLoaded(myCoolHTMLLinlElement).then((link) => {\n\t\t// do something when the link is loaded\n});"
+                        "code": "import { __whenLinkLoaded } from '@coffeekraken/sugar/dom'\n__whenLinkLoaded(myCoolHTMLLinlElement).then((link) => {\n\t\t// do something when the link is loaded\n});\n @since           2.0.0"
                     }
                 ],
-                "since": "1.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
@@ -31095,10 +31099,9 @@
                 "example": [
                     {
                         "language": "js",
-                        "code": "import { __whenLod } from '@coffeekraken/sugar/dom'\n__whenLod(3).then((link) => {\n\t\t// do something when the lod is reached\n});"
+                        "code": "import { __whenLod } from '@coffeekraken/sugar/dom'\n__whenLod(3).then((link) => {\n\t\t// do something when the lod is reached\n});\n @since           2.0.0"
                     }
                 ],
-                "since": "1.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
@@ -31215,11 +31218,10 @@
                 "example": [
                     {
                         "language": "js",
-                        "code": "import { __whenNearViewport } from '@coffeekraken/sugar/dom'\n__whenNearViewport(myCoolHTMLElement).then((elm) => {\n\t\t// do something with your element that has entered the viewport...\n});"
+                        "code": "import { __whenNearViewport } from '@coffeekraken/sugar/dom'\n__whenNearViewport(myCoolHTMLElement).then((elm) => {\n\t\t// do something with your element that has entered the viewport...\n});\n @since           2.0.0"
                     }
                 ],
                 "async": "true",
-                "since": "1.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
@@ -31301,11 +31303,10 @@
                 "example": [
                     {
                         "language": "js",
-                        "code": "import { __whenOutOfViewport } from '@coffeekraken/sugar/dom'\n__whenOutOfViewport(myCoolHTMLElement).then((elm) => {\n\t\t// do something with your element that has exit the viewport...\n});"
+                        "code": "import { __whenOutOfViewport } from '@coffeekraken/sugar/dom'\n__whenOutOfViewport(myCoolHTMLElement).then((elm) => {\n\t\t// do something with your element that has exit the viewport...\n});\n @since           2.0.0"
                     }
                 ],
                 "async": "true",
-                "since": "1.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
@@ -31354,11 +31355,10 @@
                 "example": [
                     {
                         "language": "js",
-                        "code": "import { __whenRemoved } from '@coffeekraken/sugar/dom'\n__whenRemoved(myCoolHTMLElement).then((value) => {\n\t\t// the element has been removed\n});"
+                        "code": "import { __whenRemoved } from '@coffeekraken/sugar/dom'\n__whenRemoved(myCoolHTMLElement).then((value) => {\n\t\t// the element has been removed\n});\n @since           2.0.0"
                     }
                 ],
                 "async": "true",
-                "since": "1.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
@@ -31421,10 +31421,9 @@
                 "example": [
                     {
                         "language": "js",
-                        "code": "import { __whenScriptLoaded } from '@coffeekraken/sugar/dom'\n__whenScriptLoaded($script).then(($script) => {\n  // do something here\n})"
+                        "code": "import { __whenScriptLoaded } from '@coffeekraken/sugar/dom'\n__whenScriptLoaded($script).then(($script) => {\n  // do something here\n})\n @since           2.0.0"
                     }
                 ],
-                "since": "1.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
@@ -31491,11 +31490,10 @@
                 "example": [
                     {
                         "language": "js",
-                        "code": "import { __whenStylesheetsReady } from '@coffeekraken/sugar/dom'\nawait __whenStylesheetsReady([\n\t\tmyHTMLLinkElement1,\n\t\tmyHTMLLinkElement2\n]);"
+                        "code": "import { __whenStylesheetsReady } from '@coffeekraken/sugar/dom'\nawait __whenStylesheetsReady([\n\t\tmyHTMLLinkElement1,\n\t\tmyHTMLLinkElement2\n]);\n @since           2.0.0"
                     }
                 ],
                 "async": "true",
-                "since": "1.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
@@ -31558,11 +31556,10 @@
                 "example": [
                     {
                         "language": "js",
-                        "code": "import { __whenTransitionEnd } from '@coffeekraken/sugar/dom'\nawait __whenTransitionEnd(myCoolHTMLElement);"
+                        "code": "import { __whenTransitionEnd } from '@coffeekraken/sugar/dom'\nawait __whenTransitionEnd(myCoolHTMLElement);\n @since           2.0.0"
                     }
                 ],
                 "async": "true",
-                "since": "1.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
@@ -31625,11 +31622,10 @@
                 "example": [
                     {
                         "language": "js",
-                        "code": "import { __whenVisible } from '@coffeekraken/sugar/js/dom/whenVisible'\n__whenVisible(myCoolHTMLElement).then((elm) => {\n\t\t// do something with your element that is now visible\n});"
+                        "code": "import { __whenVisible } from '@coffeekraken/sugar/js/dom/whenVisible'\n__whenVisible(myCoolHTMLElement).then((elm) => {\n\t\t// do something with your element that is now visible\n});\n @since           2.0.0"
                     }
                 ],
                 "async": "true",
-                "since": "1.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
@@ -31767,10 +31763,9 @@
                 "example": [
                     {
                         "language": "js",
-                        "code": "import { __scrollLeft } from '@coffeekraken/sugar/dom'\n__scrollLeft() // 40"
+                        "code": "import { __scrollLeft } from '@coffeekraken/sugar/dom'\n__scrollLeft() // 40\n @since           2.0.0"
                     }
                 ],
-                "since": "1.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
@@ -31804,10 +31799,9 @@
                 "example": [
                     {
                         "language": "js",
-                        "code": "import { __scrollTop } from '@coffeekraken/sugar/dom';\n__scrollTop();"
+                        "code": "import { __scrollTop } from '@coffeekraken/sugar/dom';\n__scrollTop();\n @since           2.0.0"
                     }
                 ],
-                "since": "1.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
@@ -31968,10 +31962,9 @@
                 "example": [
                     {
                         "language": "js",
-                        "code": "import { __addEventListener } from '@coffeekraken/sugar/dom'\nconst listener = __addEventListener($myCoolElm, 'click', (event) => {\n   // event.type; // => click\n});\n// remove the event listener\nlistener.cancel();\n\n// listen for more than one event at a time\n__addEventListener($myCoolElm, 'click,mouseover,mouseout', (event) => {\n   // do something depending on the event.type property\n}).on('mouseover', (event) => {\n   // do something when the event is the mouseover one\n});"
+                        "code": "import { __addEventListener } from '@coffeekraken/sugar/dom'\nconst listener = __addEventListener($myCoolElm, 'click', (event) => {\n   // event.type; // => click\n});\n// remove the event listener\nlistener.cancel();\n\n// listen for more than one event at a time\n__addEventListener($myCoolElm, 'click,mouseover,mouseout', (event) => {\n   // do something depending on the event.type property\n}).on('mouseover', (event) => {\n   // do something when the event is the mouseover one\n});\n @since           2.0.0"
                     }
                 ],
-                "since": "1.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
@@ -32061,10 +32054,9 @@
                 "example": [
                     {
                         "language": "js",
-                        "code": "import { __addEventListenerOnce } from '@coffeekraken/sugar/dom'\n __addEventListenerOnce(myElm, 'click', (e) => {\n    // do something on click\n});\n __addEventListenerOnce(myElm, 'click').on('click', (e) => {\n\n});"
+                        "code": "import { __addEventListenerOnce } from '@coffeekraken/sugar/dom'\n __addEventListenerOnce(myElm, 'click', (e) => {\n    // do something on click\n});\n __addEventListenerOnce(myElm, 'click').on('click', (e) => {\n\n});\n @since           2.0.0"
                     }
                 ],
-                "since": "1.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
@@ -32139,10 +32131,9 @@
                 "example": [
                     {
                         "language": "js",
-                        "code": "import { __dispatchEvent } from '@coffeekraken/sugar/js/dom/dispatchEvent'\n __dispatchEvent(myCoolHTMLElement, 'myCoolEventName', {\n\t\tvar1 : 'value1'\n});"
+                        "code": "import { __dispatchEvent } from '@coffeekraken/sugar/js/dom/dispatchEvent'\n __dispatchEvent(myCoolHTMLElement, 'myCoolEventName', {\n\t\tvar1 : 'value1'\n});\n @since           2.0.0"
                     }
                 ],
-                "since": "1.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
@@ -32210,10 +32201,9 @@
                 "example": [
                     {
                         "language": "js",
-                        "code": "import { __isFileAccepted } from '@coffeekraken/sugar/dom'\n__isFileAccepted(myFile, 'image/png');\n__isFileAccepted(myFile, 'image/png, application/json');\n__isFileAccepted(myFile, ['image/','text/html'])"
+                        "code": "import { __isFileAccepted } from '@coffeekraken/sugar/dom'\n__isFileAccepted(myFile, 'image/png');\n__isFileAccepted(myFile, 'image/png, application/json');\n__isFileAccepted(myFile, ['image/','text/html'])\n @since           2.0.0"
                     }
                 ],
-                "since": "1.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
@@ -32262,10 +32252,9 @@
                 "example": [
                     {
                         "language": "js",
-                        "code": "import { __resetFileInput } from '@coffeekraken/sugar/dom'\n __resetFileInput($myInpuit);"
+                        "code": "import { __resetFileInput } from '@coffeekraken/sugar/dom'\n __resetFileInput($myInpuit);\n @since           2.0.0"
                     }
                 ],
-                "since": "1.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
@@ -32328,10 +32317,9 @@
                 "example": [
                     {
                         "language": "js",
-                        "code": "import { __nodeToString } from '@coffeekraken/sugar/dom'\nconst myDomNode = document.querySelector('.my-dom-node')\n __nodeToString(myDomNode, false) // <div class=\"my-dom-node\"></div>"
+                        "code": "import { __nodeToString } from '@coffeekraken/sugar/dom'\nconst myDomNode = document.querySelector('.my-dom-node')\n __nodeToString(myDomNode, false) // <div class=\"my-dom-node\"></div>\n @since           2.0.0"
                     }
                 ],
-                "since": "1.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
@@ -32380,10 +32368,9 @@
                 "example": [
                     {
                         "language": "js",
-                        "code": "import { __stringToNode } from '@coffeekraken/sugar/dom'\nconst myString = '<p>Hello World</p>'\n__stringToNode(myString) // <p>Hello World</p>"
+                        "code": "import { __stringToNode } from '@coffeekraken/sugar/dom'\nconst myString = '<p>Hello World</p>'\n__stringToNode(myString) // <p>Hello World</p>\n @since           2.0.0"
                     }
                 ],
-                "since": "1.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
@@ -32445,10 +32432,9 @@
                 "example": [
                     {
                         "language": "js",
-                        "code": "import { __injectIframeContent } from '@coffeekraken/sugar/dom'\n __injectIframeContent($myIframe, '<html>...</html>');"
+                        "code": "import { __injectIframeContent } from '@coffeekraken/sugar/dom'\n __injectIframeContent($myIframe, '<html>...</html>');\n @since           2.0.0"
                     }
                 ],
-                "since": "1.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
@@ -32497,10 +32483,9 @@
                 "example": [
                     {
                         "language": "js",
-                        "code": "import { __injectScript } from '@coffeekraken/sugar/dom'\n __injectScript('dist/js/app.js')"
+                        "code": "import { __injectScript } from '@coffeekraken/sugar/dom'\n __injectScript('dist/js/app.js')\n @since           2.0.0"
                     }
                 ],
-                "since": "1.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
@@ -32646,10 +32631,9 @@
                 "example": [
                     {
                         "language": "js",
-                        "code": "import { __injectStylesheet } from '@coffeekraken/sugar/dom'\n__injectStylesheet('/dist/css/style.css')"
+                        "code": "import { __injectStylesheet } from '@coffeekraken/sugar/dom'\n__injectStylesheet('/dist/css/style.css')\n @since           2.0.0"
                     }
                 ],
-                "since": "1.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
@@ -32701,7 +32685,6 @@
                         "code": "import { __cursorToEnd } from '@coffeekraken/sugar/dom';\n__cursorToEnd($input);"
                     }
                 ],
-                "since": "1.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
@@ -32750,10 +32733,9 @@
                 "example": [
                     {
                         "language": "js",
-                        "code": "import { __isFocus } from '@coffeekraken/sugar/dom'\nconst $myElm = document.querySelector('.my-elm')\nif (__isFocus($myElm)) {\n  // do something\n}"
+                        "code": "import { __isFocus } from '@coffeekraken/sugar/dom'\nconst $myElm = document.querySelector('.my-elm')\nif (__isFocus($myElm)) {\n  // do something\n}\n @since           2.0.0"
                     }
                 ],
-                "since": "1.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
@@ -32802,10 +32784,9 @@
                 "example": [
                     {
                         "language": "js",
-                        "code": "import { __isFocusWithin } from '@coffeekraken/sugar/dom'\nconst $myElm = document.querySelector('.my-elm')\nif (__isFocusWithin($myElm)) {\n  // do something\n}"
+                        "code": "import { __isFocusWithin } from '@coffeekraken/sugar/dom'\nconst $myElm = document.querySelector('.my-elm')\nif (__isFocusWithin($myElm)) {\n  // do something\n}\n @since           2.0.0"
                     }
                 ],
-                "since": "1.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
@@ -32854,10 +32835,9 @@
                 "example": [
                     {
                         "language": "js",
-                        "code": "import { __isHover } from '@coffeekraken/sugar/dom'\nconst $myElm = document.querySelector('.my-elm')\nif (__isHover($myElm)) {\n  // do something\n}"
+                        "code": "import { __isHover } from '@coffeekraken/sugar/dom'\nconst $myElm = document.querySelector('.my-elm')\nif (__isHover($myElm)) {\n  // do something\n}\n @since           2.0.0"
                     }
                 ],
-                "since": "1.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
@@ -32891,10 +32871,9 @@
                 "example": [
                     {
                         "language": "js",
-                        "code": "import { __isInIframe } from '@coffeekraken/sugar/dom'\nif (__isInIframe()) {\n  // do something\n}"
+                        "code": "import { __isInIframe } from '@coffeekraken/sugar/dom'\nif (__isInIframe()) {\n  // do something\n}\n @since           2.0.0"
                     }
                 ],
-                "since": "1.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
@@ -32957,10 +32936,9 @@
                 "example": [
                     {
                         "language": "js",
-                        "code": "import { __isInViewport } from '@coffeekraken/sugar/dom'\nif (__isInViewport(myCoolHTMLElement) {\n\t\t// i'm in the viewport\n}"
+                        "code": "import { __isInViewport } from '@coffeekraken/sugar/dom'\nif (__isInViewport(myCoolHTMLElement) {\n\t\t// i'm in the viewport\n}\n @since           2.0.0"
                     }
                 ],
-                "since": "1.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
@@ -32994,10 +32972,9 @@
                 "example": [
                     {
                         "language": "js",
-                        "code": "import { __isScrollable } from '@coffeekraken/sugar/dom'\nif (__isScrollable($myElement)) {\n  // do something\n}"
+                        "code": "import { __isScrollable } from '@coffeekraken/sugar/dom'\nif (__isScrollable($myElement)) {\n  // do something\n}\n @since           2.0.0"
                     }
                 ],
-                "since": "1.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
@@ -33047,11 +33024,10 @@
                 "example": [
                     {
                         "language": "js",
-                        "code": "import { __isUserScrolling } from '@coffeekraken/sugar/dom'\nif (__isUserScrolling(myCoolHTMLElement) {\n\t\t// i'm in the viewport\n}"
+                        "code": "import { __isUserScrolling } from '@coffeekraken/sugar/dom'\nif (__isUserScrolling(myCoolHTMLElement) {\n\t\t// i'm in the viewport\n}\n @since           2.0.0"
                     }
                 ],
                 "async": "true",
-                "since": "1.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
@@ -33103,7 +33079,6 @@
                         "code": "import { __isVisible } from '@coffeekraken/sugar/dom'\nif (isVisible(myCoolHTMLElement) {\n\t\t// i'm visible\n}"
                     }
                 ],
-                "since": "1.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
@@ -33150,7 +33125,6 @@
                 "namespace": "@coffeekraken.sugar.js.dom.manipulate",
                 "status": "beta",
                 "example": [],
-                "since": "1.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
@@ -33212,10 +33186,9 @@
                 "example": [
                     {
                         "language": "js",
-                        "code": "import { __insertAfter } from '@coffeekraken/sugar/dom'\n__insertAfter(myElementToInsert, theReferenceElement);"
+                        "code": "import { __insertAfter } from '@coffeekraken/sugar/dom'\n__insertAfter(myElementToInsert, theReferenceElement);\n @since           2.0.0"
                     }
                 ],
-                "since": "1.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
@@ -33277,10 +33250,9 @@
                 "example": [
                     {
                         "language": "js",
-                        "code": "import { __prependChild } from '@coffeekraken/sugar/dom'\n__prependChild(myElementToInsert, theReferenceElement);"
+                        "code": "import { __prependChild } from '@coffeekraken/sugar/dom'\n__prependChild(myElementToInsert, theReferenceElement);\n @since           2.0.0"
                     }
                 ],
-                "since": "1.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
@@ -33329,10 +33301,9 @@
                 "example": [
                     {
                         "language": "js",
-                        "code": "import { __stripTags } from '@coffeekraken/sugar/dom'\n__stripTags('<h1>Hello World</h1>') // => Hello World"
+                        "code": "import { __stripTags } from '@coffeekraken/sugar/dom'\n__stripTags('<h1>Hello World</h1>') // => Hello World\n @since           2.0.0"
                     }
                 ],
-                "since": "1.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
@@ -33384,10 +33355,9 @@
                 "example": [
                     {
                         "language": "js",
-                        "code": "import { __toDomNodes } from '@coffeekraken/sugar/dom';\n__toDomNodes('<span>Hello World</span>');"
+                        "code": "import { __toDomNodes } from '@coffeekraken/sugar/dom';\n__toDomNodes('<span>Hello World</span>');\n @since           2.0.0"
                     }
                 ],
-                "since": "1.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
@@ -33449,10 +33419,9 @@
                 "example": [
                     {
                         "language": "js",
-                        "code": "import { __wrap } from '@coffeekraken/sugar/dom'\nconst $wrapper = document.createElement('div')\n// assuming:\n// <div>\n//   <span class=\"wrap\">Hello World</span>\n// </div>\n__wrap(document.querySelector('.wrap'), $wrapper)\n// output:\n// <div>\n//   <div>\n//     <span class=\"wrap\">Hello World</span>\n//   </div>\n// </div>"
+                        "code": "import { __wrap } from '@coffeekraken/sugar/dom'\nconst $wrapper = document.createElement('div')\n// assuming:\n// <div>\n//   <span class=\"wrap\">Hello World</span>\n// </div>\n__wrap(document.querySelector('.wrap'), $wrapper)\n// output:\n// <div>\n//   <div>\n//     <span class=\"wrap\">Hello World</span>\n//   </div>\n// </div>\n @since           2.0.0"
                     }
                 ],
-                "since": "1.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
@@ -33514,10 +33483,9 @@
                 "example": [
                     {
                         "language": "js",
-                        "code": "import { __wrapInner } from '@coffeekraken/sugar/dom'\nconst $myWrapper = document.createElement('div')\n// assuming\n// <div class=\"container\">\n//   <span>Hello World</span>\n// </div>\n__wrapInner(document.querySelector('.container'), $myWrapper)\n// return\n// <div class=\"container\">\n//   <div>\n//     <span>Hello World</span>\n//   </div>\n// </div>"
+                        "code": "import { __wrapInner } from '@coffeekraken/sugar/dom'\nconst $myWrapper = document.createElement('div')\n// assuming\n// <div class=\"container\">\n//   <span>Hello World</span>\n// </div>\n__wrapInner(document.querySelector('.container'), $myWrapper)\n// return\n// <div class=\"container\">\n//   <div>\n//     <span>Hello World</span>\n//   </div>\n// </div>\n @since           2.0.0"
                     }
                 ],
-                "since": "1.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
@@ -33583,7 +33551,6 @@
                     }
                 ],
                 "async": "true",
-                "since": "1.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
@@ -33632,10 +33599,9 @@
                 "example": [
                     {
                         "language": "js",
-                        "code": "import { __offsetFromParent } from '@coffeekraken/sugar/dom'\nconst offsetFromParentElm = __offsetFromParent(myCoolElement);\n// output : { top : 200, left : 300 }"
+                        "code": "import { __offsetFromParent } from '@coffeekraken/sugar/dom'\nconst offsetFromParentElm = __offsetFromParent(myCoolElement);\n// output : { top : 200, left : 300 }\n @since           2.0.0"
                     }
                 ],
-                "since": "1.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
@@ -33684,10 +33650,9 @@
                 "example": [
                     {
                         "language": "js",
-                        "code": "import { __offsetFromViewport } from '@coffeekraken/sugar/dom'\nconst __offsetFromViewport = offset(myCoolElement);\n// output : { top : 200, left : 300 }"
+                        "code": "import { __offsetFromViewport } from '@coffeekraken/sugar/dom'\nconst __offsetFromViewport = offset(myCoolElement);\n// output : { top : 200, left : 300 }\n @since           2.0.0"
                     }
                 ],
-                "since": "1.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
@@ -33739,10 +33704,9 @@
                 "example": [
                     {
                         "language": "js",
-                        "code": "import { __positionFromEvent } from '@coffeekraken/sugar/dom'\n__positionFromEvent(e);\n// output : { x, 230, y: 122 }"
+                        "code": "import { __positionFromEvent } from '@coffeekraken/sugar/dom'\n__positionFromEvent(e);\n// output : { x, 230, y: 122 }\n @since           2.0.0"
                     }
                 ],
-                "since": "1.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
@@ -33807,10 +33771,9 @@
                 "example": [
                     {
                         "language": "js",
-                        "code": "import { __closest } from '@coffeekraken/sugar/dom'\nconst closestElm =  __closest(myCoolElement, '.my-cool-class');\nif (closestElm) {\n\t\t// we have found en element that matches the selector\n}\n// the selector param can be a function that need to return either true or false like so:\nclosest(myCoolElement, (elm) => {\n  return elm.hasAttribute('my-cool-attribute')\n})"
+                        "code": "import { __closest } from '@coffeekraken/sugar/dom'\nconst closestElm =  __closest(myCoolElement, '.my-cool-class');\nif (closestElm) {\n\t\t// we have found en element that matches the selector\n}\n// the selector param can be a function that need to return either true or false like so:\nclosest(myCoolElement, (elm) => {\n  return elm.hasAttribute('my-cool-attribute')\n})\n @since           2.0.0"
                     }
                 ],
-                "since": "1.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
@@ -33859,10 +33822,9 @@
                 "example": [
                     {
                         "language": "js",
-                        "code": "import { __closestNotVisible } from '@coffeekraken/sugar/dom'\nconst closestElm =  __closestNotVisible(myCoolElement);\nif (closestElm) {\n\t\t// we have found en element that is not visible\n}"
+                        "code": "import { __closestNotVisible } from '@coffeekraken/sugar/dom'\nconst closestElm =  __closestNotVisible(myCoolElement);\nif (closestElm) {\n\t\t// we have found en element that is not visible\n}\n @since           2.0.0"
                     }
                 ],
-                "since": "1.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
@@ -33911,10 +33873,9 @@
                 "example": [
                     {
                         "language": "js",
-                        "code": "import { __closestScrollable } from '@coffeekraken/sugar/dom';\n__closestScrollable($myElement);"
+                        "code": "import { __closestScrollable } from '@coffeekraken/sugar/dom';\n__closestScrollable($myElement);\n @since           2.0.0"
                     }
                 ],
-                "since": "1.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
@@ -33979,7 +33940,6 @@
                         "code": "import { __matches } from '@coffeekraken/sugar/dom'\nif (__matches(myCoolHTMLElement, '.my-cool-css-selector')) {\n\t\t// the element match the selector\n}"
                     }
                 ],
-                "since": "1.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
@@ -34041,10 +34001,9 @@
                 "example": [
                     {
                         "language": "js",
-                        "code": "import { __next } from '@coffeekraken/sugar/dom'\nconst nextElm =  __next(myCoolElement, '.my-cool-class');\nif (nextElm) {\n\t\t// we have found en element that matches the selector\n}"
+                        "code": "import { __next } from '@coffeekraken/sugar/dom'\nconst nextElm =  __next(myCoolElement, '.my-cool-class');\nif (nextElm) {\n\t\t// we have found en element that matches the selector\n}\n @since           2.0.0"
                     }
                 ],
-                "since": "1.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
@@ -34106,10 +34065,9 @@
                 "example": [
                     {
                         "language": "js",
-                        "code": "import { __previous } from '@coffeekraken/sugar/dom'\nconst previousElm = __previous(myCoolElement, '.my-cool-class');\nif (previousElm) {\n\t\t// we have found en element that matches the selector\n}"
+                        "code": "import { __previous } from '@coffeekraken/sugar/dom'\nconst previousElm = __previous(myCoolElement, '.my-cool-class');\nif (previousElm) {\n\t\t// we have found en element that matches the selector\n}\n @since           2.0.0"
                     }
                 ],
-                "since": "1.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
@@ -34214,10 +34172,9 @@
                 "example": [
                     {
                         "language": "js",
-                        "code": "import { __querySelector } from '@coffeekraken/sugar/dom';\n// simple query\nconst elm = __querySelector('.a-cool-css-selector');\n\n// get an element that is in the viewport\nconst elm = __querySelector('.a-cool-css-selector', {\n\t\tinViewport : true\n});"
+                        "code": "import { __querySelector } from '@coffeekraken/sugar/dom';\n// simple query\nconst elm = __querySelector('.a-cool-css-selector');\n\n// get an element that is in the viewport\nconst elm = __querySelector('.a-cool-css-selector', {\n\t\tinViewport : true\n});\n @since           2.0.0"
                     }
                 ],
-                "since": "1.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
@@ -34322,10 +34279,9 @@
                 "example": [
                     {
                         "language": "js",
-                        "code": "import { __querySelectorAll } from '@coffeekraken/sugar/dom';\n// simple query\nconst elms = __querySelectorAll('.a-cool-css-selector');\n\n// get elements that are in the viewport\nconst elms = __querySelectorAll('.a-cool-css-selector', {\n\t\tinViewport : true\n});"
+                        "code": "import { __querySelectorAll } from '@coffeekraken/sugar/dom';\n// simple query\nconst elms = __querySelectorAll('.a-cool-css-selector');\n\n// get elements that are in the viewport\nconst elms = __querySelectorAll('.a-cool-css-selector', {\n\t\tinViewport : true\n});\n @since           2.0.0"
                     }
                 ],
-                "since": "1.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
@@ -34431,10 +34387,9 @@
                 "example": [
                     {
                         "language": "js",
-                        "code": "import { __querySelectorLive } from '@coffeekraken/sugar/dom'\n__querySelectorLive('.my-cool-item', (node, api) => {\n\t    // do something here with the detected node\n     // call api.cancel if you want to stop listening for this selector\n     api.cancel();\n});"
+                        "code": "import { __querySelectorLive } from '@coffeekraken/sugar/dom'\n__querySelectorLive('.my-cool-item', (node, api) => {\n\t    // do something here with the detected node\n     // call api.cancel if you want to stop listening for this selector\n     api.cancel();\n});\n @since           2.0.0"
                     }
                 ],
-                "since": "1.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
@@ -34499,10 +34454,9 @@
                 "example": [
                     {
                         "language": "js",
-                        "code": "import { __querySelectorUp } from '@coffeekraken/sugar/dom'\nconst closestElm =  __querySelectorUp(myCoolElement, '.my-cool-class');\nif (closestElm) {\n\t\t// we have found en element that matches the selector\n}\n// the selector param can be a function that need to return either true or false like so:\n __querySelectorUp(myCoolElement, (elm) => {\n  return elm.hasAttribute('my-cool-attribute')\n})"
+                        "code": "import { __querySelectorUp } from '@coffeekraken/sugar/dom'\nconst closestElm =  __querySelectorUp(myCoolElement, '.my-cool-class');\nif (closestElm) {\n\t\t// we have found en element that matches the selector\n}\n// the selector param can be a function that need to return either true or false like so:\n __querySelectorUp(myCoolElement, (elm) => {\n  return elm.hasAttribute('my-cool-attribute')\n})\n @since           2.0.0"
                     }
                 ],
-                "since": "1.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
@@ -34536,10 +34490,9 @@
                 "example": [
                     {
                         "language": "js",
-                        "code": "import { __preventScrolLRestoration } from '@coffeekraken/sugar/dom'\n__preventScrollRestoration();"
+                        "code": "import { __preventScrolLRestoration } from '@coffeekraken/sugar/dom'\n__preventScrollRestoration();\n @since           2.0.0"
                     }
                 ],
-                "since": "1.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
@@ -34602,11 +34555,10 @@
                 "example": [
                     {
                         "language": "js",
-                        "code": "import { __scrollSpy } from '@coffeekraken/sugar/dom';\n__scrollSpy($myElement).on('activate', () => {\n     // do something\n}).on('unactivate', () => {\n     // do something\n});"
+                        "code": "import { __scrollSpy } from '@coffeekraken/sugar/dom';\n__scrollSpy($myElement).on('activate', () => {\n     // do something\n}).on('unactivate', () => {\n     // do something\n});\n @since           2.0.0"
                     }
                 ],
                 "async": "true",
-                "since": "1.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
@@ -34741,11 +34693,10 @@
                 "example": [
                     {
                         "language": "js",
-                        "code": "import { __scrollTop } from '@coffeekraken/sugar/dom'\nimport easeInOutQuad from '@coffeekraken/sugar/js/easings/easeInOutQuad'\n__scrollTo(myCoolHTMLElement);"
+                        "code": "import { __scrollTop } from '@coffeekraken/sugar/dom'\nimport easeInOutQuad from '@coffeekraken/sugar/js/easings/easeInOutQuad'\n__scrollTo(myCoolHTMLElement);\n @since           2.0.0"
                     }
                 ],
                 "async": "true",
-                "since": "1.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
@@ -34811,10 +34762,9 @@
                 "example": [
                     {
                         "language": "js",
-                        "code": "import { __scrollToLocationHash } from '@coffeekraken/sugar/dom'\n__scrollToLocationHash(500, 0)"
+                        "code": "import { __scrollToLocationHash } from '@coffeekraken/sugar/dom'\n__scrollToLocationHash(500, 0)\n @since           2.0.0"
                     }
                 ],
-                "since": "1.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
@@ -34863,10 +34813,9 @@
                 "example": [
                     {
                         "language": "js",
-                        "code": "import { __realHeight } from '@coffeekraken/sugar/dom';\n__realHeight(myCoolHtmlElement);"
+                        "code": "import { __realHeight } from '@coffeekraken/sugar/dom';\n__realHeight(myCoolHtmlElement);\n @since           2.0.0"
                     }
                 ],
-                "since": "1.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
@@ -34958,11 +34907,10 @@
                 "example": [
                     {
                         "language": "js",
-                        "code": "import { __slideable } from '@coffeekraken/sugar/dom';\n__slideable($myElement);"
+                        "code": "import { __slideable } from '@coffeekraken/sugar/dom';\n__slideable($myElement);\n @since           2.0.0"
                     }
                 ],
                 "async": "true",
-                "since": "1.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
@@ -35011,10 +34959,9 @@
                 "example": [
                     {
                         "language": "js",
-                        "code": "import { __getAnimationProperties } from '@coffeekraken/sugar/dom'\nconst props = __getAnimationProperties(myCoolHTMLElement);\n// output format\n// {\n// \tname : ['animation1'],\n// \tduration : [200],\n// \tdelay : [0],\n// \ttimingFunction : ['linear'],\n// \titerationCount : [1],\n// \tdirection : ['forward'],\n// \ttotalDuration : 200\n// }"
+                        "code": "import { __getAnimationProperties } from '@coffeekraken/sugar/dom'\nconst props = __getAnimationProperties(myCoolHTMLElement);\n// output format\n// {\n// \tname : ['animation1'],\n// \tduration : [200],\n// \tdelay : [0],\n// \ttimingFunction : ['linear'],\n// \titerationCount : [1],\n// \tdirection : ['forward'],\n// \ttotalDuration : 200\n// }\n @since           2.0.0"
                     }
                 ],
-                "since": "1.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
@@ -35063,10 +35010,9 @@
                 "example": [
                     {
                         "language": "js",
-                        "code": "import { __getAnimationsFromElement } from '@coffeekraken/sugar/dom'\nconst props = __getAnimationsFromElement(myCoolHTMLElement);\n// output format\n// [{\n//   name : 'animation1',\n// \tduration : 200,\n// \tdelay : 0,\n// \ttimingFunction : 'linear',\n// \titerationCount : 1,\n// \tdirection : 'forward',\n//   playState: 'running',\n//   fillMode: 'none'\n// }]"
+                        "code": "import { __getAnimationsFromElement } from '@coffeekraken/sugar/dom'\nconst props = __getAnimationsFromElement(myCoolHTMLElement);\n// output format\n// [{\n//   name : 'animation1',\n// \tduration : 200,\n// \tdelay : 0,\n// \ttimingFunction : 'linear',\n// \titerationCount : 1,\n// \tdirection : 'forward',\n//   playState: 'running',\n//   fillMode: 'none'\n// }]\n @since           2.0.0"
                     }
                 ],
-                "since": "1.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
@@ -35146,7 +35092,6 @@
                         "code": "import { __getCssDeclarations } from '@coffeekraken/sugar/dom';\n__getCssDeclarations('style', [myCoolCssRules]);"
                     }
                 ],
-                "since": "1.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
@@ -35212,7 +35157,6 @@
                         "code": "import { __getCssRulesFromStylesheet } from '@coffeekraken/sugar/dom';\n__getCssRulesFromStylesheet(myStylesheet);"
                     }
                 ],
-                "since": "1.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
@@ -35264,7 +35208,6 @@
                         "code": "import { __getDefinedStyles } from '@coffeekraken/sugar/dom';"
                     }
                 ],
-                "since": "1.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
@@ -35329,7 +35272,6 @@
                         "code": "import __getKeyframesDeclarations from '@coffeekraken/sugar/js/dom/style/getKeyframesDeclarations';\n__getKeyframesDeclarations('myCoolAnimation', [myCoolCssRules]);"
                     }
                 ],
-                "since": "1.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
@@ -35378,10 +35320,9 @@
                 "example": [
                     {
                         "language": "js",
-                        "code": "import { __getRotateProperties } from '@coffeekraken/sugar/dom'\nconst props = __getRotateProperties(myCoolHTMLElement);\n// output format\n// {\n// \tx : 100,\n// \ty : 0,\n// \tz : 0\n// }"
+                        "code": "import { __getRotateProperties } from '@coffeekraken/sugar/dom'\nconst props = __getRotateProperties(myCoolHTMLElement);\n// output format\n// {\n// \tx : 100,\n// \ty : 0,\n// \tz : 0\n// }\n @since           2.0.0"
                     }
                 ],
-                "since": "1.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
@@ -35430,10 +35371,9 @@
                 "example": [
                     {
                         "language": "js",
-                        "code": "import { __getScaleProperty } from '@coffeekraken/sugar/dom'\nconst props = __getScaleProperty(myCoolHTMLElement);\n// output format\n// 2"
+                        "code": "import { __getScaleProperty } from '@coffeekraken/sugar/dom'\nconst props = __getScaleProperty(myCoolHTMLElement);\n// output format\n// 2\n @since           2.0.0"
                     }
                 ],
-                "since": "1.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
@@ -35498,7 +35438,6 @@
                         "code": "import { __getStyleProperty } from '@coffeekraken/sugar/dom'\nconst opacity = __getStyleProperty(myCoolHTMLElement, 'opacity');"
                     }
                 ],
-                "since": "1.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
@@ -35547,10 +35486,9 @@
                 "example": [
                     {
                         "language": "js",
-                        "code": "import getTransformProperties from '@coffeekraken/sugar/js/dom/getTransformProperties'\nconst props = getTransformProperties(myCoolHTMLElement);\n// output format\n// {\n// \ttranslateX : 100,\n// \ttranslateY : 0,\n// \ttranslateZ : 0,\n//   rotateX: 0,\n//   rotateY: 0,\n//   rotateZ: 0\n// }"
+                        "code": "import getTransformProperties from '@coffeekraken/sugar/js/dom/getTransformProperties'\nconst props = getTransformProperties(myCoolHTMLElement);\n// output format\n// {\n// \ttranslateX : 100,\n// \ttranslateY : 0,\n// \ttranslateZ : 0,\n//   rotateX: 0,\n//   rotateY: 0,\n//   rotateZ: 0\n// }\n @since           2.0.0"
                     }
                 ],
-                "since": "1.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
@@ -35599,10 +35537,9 @@
                 "example": [
                     {
                         "language": "js",
-                        "code": "import getTransitionProperties from '@coffeekraken/sugar/js/dom/getTransitionProperties'\nconst props = getTransitionProperties(myCoolHTMLElement);\n// output format\n// {\n// \tproperty : ['all'],\n// \tduration : [200],\n// \tdelay : [0],\n// \ttimingFunction : ['linear'],\n// \ttotalDuration : 200\n// }"
+                        "code": "import getTransitionProperties from '@coffeekraken/sugar/js/dom/getTransitionProperties'\nconst props = getTransitionProperties(myCoolHTMLElement);\n// output format\n// {\n// \tproperty : ['all'],\n// \tduration : [200],\n// \tdelay : [0],\n// \ttimingFunction : ['linear'],\n// \ttotalDuration : 200\n// }\n @since           2.0.0"
                     }
                 ],
-                "since": "1.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
@@ -35651,10 +35588,9 @@
                 "example": [
                     {
                         "language": "js",
-                        "code": "import { __getTranslateProperties } from '@coffeekraken/sugar/dom'\nconst props = __getTranslateProperties(myCoolHTMLElement);\n// output format\n// {\n// \tx : 100,\n// \ty : 0,\n// \tz : 0\n// }"
+                        "code": "import { __getTranslateProperties } from '@coffeekraken/sugar/dom'\nconst props = __getTranslateProperties(myCoolHTMLElement);\n// output format\n// {\n// \tx : 100,\n// \ty : 0,\n// \tz : 0\n// }\n @since           2.0.0"
                     }
                 ],
-                "since": "1.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
@@ -35716,10 +35652,9 @@
                 "example": [
                     {
                         "language": "js",
-                        "code": "import { __style } from '@coffeekraken/sugar/dom'\n__style(myCoolHTMLElement, {\n\t\tpaddingLeft : 20,\n\t\tdisplay : null\n});"
+                        "code": "import { __style } from '@coffeekraken/sugar/dom'\n__style(myCoolHTMLElement, {\n\t\tpaddingLeft : 20,\n\t\tdisplay : null\n});\n @since           2.0.0"
                     }
                 ],
-                "since": "1.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
@@ -35771,7 +35706,6 @@
                         "code": "import __transformKeyframesDeclarations from '@coffeekraken/sugar/js/dom/style/transformKeyframesDeclarations';"
                     }
                 ],
-                "since": "1.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
@@ -35820,10 +35754,9 @@
                 "example": [
                     {
                         "language": "js",
-                        "code": "import { __expandTemplate } from '@coffeekraken/sugar/dom'\n__expandTemplate($templte);"
+                        "code": "import { __expandTemplate } from '@coffeekraken/sugar/dom'\n__expandTemplate($templte);\n @since           2.0.0"
                     }
                 ],
-                "since": "1.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
@@ -35872,10 +35805,9 @@
                 "example": [
                     {
                         "language": "js",
-                        "code": "import { __preventViewportMovement } from '@coffeekraken/sugar/dom'\n__preventViewportMovement($elm)"
+                        "code": "import { __preventViewportMovement } from '@coffeekraken/sugar/dom'\n__preventViewportMovement($elm)\n @since           2.0.0"
                     }
                 ],
-                "since": "1.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
@@ -35954,10 +35886,9 @@
                 "example": [
                     {
                         "language": "js",
-                        "code": "import { __clearTransmations } from '@coffeekraken/sugar/dom'\n __clearTransmations($myElement, {\n timeout: 1000\n});\nconst reset =  __clearTransmations($myElement);\nsetTimeout(() => reset(), 2000);"
+                        "code": "import { __clearTransmations } from '@coffeekraken/sugar/dom'\n __clearTransmations($myElement, {\n timeout: 1000\n});\nconst reset =  __clearTransmations($myElement);\nsetTimeout(() => reset(), 2000);\n @since           2.0.0"
                     }
                 ],
-                "since": "1.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
@@ -36019,10 +35950,9 @@
                 "example": [
                     {
                         "language": "js",
-                        "code": "import { __traverseUp } from '@coffeekraken/sugar/dom'\nconst $elm = __traverseUp($myElement, elm => {\n     return elm.classList.contains('my-class')\n});"
+                        "code": "import { __traverseUp } from '@coffeekraken/sugar/dom'\nconst $elm = __traverseUp($myElement, elm => {\n     return elm.classList.contains('my-class')\n});\n @since           2.0.0"
                     }
                 ],
-                "since": "1.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
@@ -36087,7 +36017,6 @@
                         "code": "import { __makeFloat } from '@coffeekraken/sugar/dom'\n__makeFloat($myElement, $dependingOn);"
                     }
                 ],
-                "since": "1.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
@@ -36176,10 +36105,9 @@
                 "example": [
                     {
                         "language": "js",
-                        "code": "import { __exitFullscreen } from '@coffeekraken/sugar/dom'\n__exitFullscreen()"
+                        "code": "import { __exitFullscreen } from '@coffeekraken/sugar/dom'\n__exitFullscreen()\n @since           2.0.0"
                     }
                 ],
-                "since": "1.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
@@ -36228,10 +36156,9 @@
                 "example": [
                     {
                         "language": "js",
-                        "code": "import { __forceRedraw } from '@coffeekraken/sugar/dom'\n__forceRedraw($elm)"
+                        "code": "import { __forceRedraw } from '@coffeekraken/sugar/dom'\n__forceRedraw($elm)\n @since           2.0.0"
                     }
                 ],
-                "since": "1.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
@@ -36421,10 +36348,9 @@
                 "example": [
                     {
                         "language": "js",
-                        "code": "import { __inViewportPercentage } from '@coffeekraken/sugar/dom'\nconst percentage = __inViewportPercentage(myCoolHTMLElement);\n// 20"
+                        "code": "import { __inViewportPercentage } from '@coffeekraken/sugar/dom'\nconst percentage = __inViewportPercentage(myCoolHTMLElement);\n// 20\n @since           2.0.0"
                     }
                 ],
-                "since": "1.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
@@ -36473,10 +36399,9 @@
                 "example": [
                     {
                         "language": "js",
-                        "code": "import { __nodeIndex } from '@coffeekraken/sugar/dom'\n// assuming:\n// <li>item #1</li>\n// <li class=\"match\">item #2</li>\n// <li>item #3</li>\n __nodeIndex(document.querySelector('.match')) // 1"
+                        "code": "import { __nodeIndex } from '@coffeekraken/sugar/dom'\n// assuming:\n// <li>item #1</li>\n// <li class=\"match\">item #2</li>\n// <li>item #3</li>\n __nodeIndex(document.querySelector('.match')) // 1\n @since           2.0.0"
                     }
                 ],
-                "since": "1.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
@@ -36523,7 +36448,6 @@
                 "namespace": "@coffeekraken.sugar.js.dom.utils",
                 "status": "beta",
                 "example": [],
-                "since": "1.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
@@ -36572,10 +36496,9 @@
                 "example": [
                     {
                         "language": "js",
-                        "code": "import { __requestFullscreen } from '@coffeekraken/sugar/dom'\n __requestFullscreen(myDomElm)"
+                        "code": "import { __requestFullscreen } from '@coffeekraken/sugar/dom'\n __requestFullscreen(myDomElm)\n @since           2.0.0"
                     }
                 ],
-                "since": "1.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
@@ -36668,10 +36591,9 @@
                 "example": [
                     {
                         "language": "js",
-                        "code": "import { __splitLetters } from '@coffeekraken/sugar/dom'\nconst myCoolElement = document.querySelector('.my-cool-element');\n__splitLetters(myCoolElement);"
+                        "code": "import { __splitLetters } from '@coffeekraken/sugar/dom'\nconst myCoolElement = document.querySelector('.my-cool-element');\n__splitLetters(myCoolElement);\n @since           2.0.0"
                     }
                 ],
-                "since": "1.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
@@ -36764,10 +36686,9 @@
                 "example": [
                     {
                         "language": "js",
-                        "code": "import { __splitLines } from '@coffeekraken/sugar/dom'\nconst myCoolElement = document.querySelector('.my-cool-element');\n __splitLines(myCoolElement);"
+                        "code": "import { __splitLines } from '@coffeekraken/sugar/dom'\nconst myCoolElement = document.querySelector('.my-cool-element');\n __splitLines(myCoolElement);\n @since           2.0.0"
                     }
                 ],
-                "since": "1.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
@@ -36860,10 +36781,9 @@
                 "example": [
                     {
                         "language": "js",
-                        "code": "import { __splitWords } from '@coffeekraken/sugar/dom'\nconst myCoolElement = document.querySelector('.my-cool-element');\n__splitWords(myCoolElement);"
+                        "code": "import { __splitWords } from '@coffeekraken/sugar/dom'\nconst myCoolElement = document.querySelector('.my-cool-element');\n__splitWords(myCoolElement);\n @since           2.0.0"
                     }
                 ],
-                "since": "1.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
@@ -36915,10 +36835,9 @@
                 "example": [
                     {
                         "language": "js",
-                        "code": "import { __textWidth } from '@coffeekraken/sugar/dom'\n// text of an HTMLElement\nconst width =  __textWidth(myCoolHTMLElement);\n\n// text directly (no font-size management so it's less accurate...)\nconst width =  __textWidth('Hello World');"
+                        "code": "import { __textWidth } from '@coffeekraken/sugar/dom'\n// text of an HTMLElement\nconst width =  __textWidth(myCoolHTMLElement);\n\n// text directly (no font-size management so it's less accurate...)\nconst width =  __textWidth('Hello World');\n @since           2.0.0"
                     }
                 ],
-                "since": "1.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
@@ -36967,10 +36886,9 @@
                 "example": [
                     {
                         "language": "js",
-                        "code": "import { __toggleFullscreen } from '@coffeekraken/sugar/dom'\n__toggleFullscreen(myDomElm)"
+                        "code": "import { __toggleFullscreen } from '@coffeekraken/sugar/dom'\n__toggleFullscreen(myDomElm)\n @since           2.0.0"
                     }
                 ],
-                "since": "1.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
@@ -37037,8 +36955,8 @@
                 "relPath": "src/node/dev/color/getColorFor.ts",
                 "children": {}
             },
-            "@coffeekraken.sugar.php.filters.registerFilter": {
-                "id": "@coffeekraken.sugar.php.filters.registerFilter",
+            "@coffeekraken.sugar.php.twig.filters.registerFilter": {
+                "id": "@coffeekraken.sugar.php.twig.filters.registerFilter",
                 "name": "registerFilter",
                 "type": {
                     "types": [
@@ -37070,7 +36988,7 @@
                     }
                 ],
                 "description": "This function allows you to register only the filters on your twig instance",
-                "namespace": "@coffeekraken.sugar.php.filters",
+                "namespace": "@coffeekraken.sugar.php.twig.filters",
                 "status": "beta",
                 "example": [
                     {
@@ -37182,7 +37100,6 @@
                         "code": "import { __cssEasingStrToJsFunction } from '@coffeekraken/sugar/css'\nconst fn = __cssEasingStrToJsFunction('cubic-bezier(.17,.67,.83,.67)');\nfn(0.5);\nfn(0.34);"
                     }
                 ],
-                "since": "1.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
@@ -37234,7 +37151,6 @@
                         "code": "import { __parseKeyframeKey } from '@coffeekraken/sugar/css';\n__parseKeyframeKey('from');"
                     }
                 ],
-                "since": "1.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
@@ -37286,7 +37202,6 @@
                         "code": "import { __parseTransformRule } from '@coffeekraken/sugar/css';\n__parseTransformRule('translate(-100px, 200rem));"
                     }
                 ],
-                "since": "1.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
@@ -37338,7 +37253,6 @@
                         "code": "import { __removeVendorPrefix } from '@coffeekraken/sugar/css';\n__removeVendorPrefix('moz-something'); // 'something'"
                     }
                 ],
-                "since": "1.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
@@ -37387,10 +37301,9 @@
                 "example": [
                     {
                         "language": "js",
-                        "code": "import { __styleObject2String } from '@coffeekraken/sugar/css'\nconst styleString =  __styleObject2String({\n\t\tpaddingLeft : '20px',\n\t\tdisplay : 'block'\n});\n// output => padding-left:20px; display:block;"
+                        "code": "import { __styleObject2String } from '@coffeekraken/sugar/css'\nconst styleString =  __styleObject2String({\n\t\tpaddingLeft : '20px',\n\t\tdisplay : 'block'\n});\n// output => padding-left:20px; display:block;\n @since           2.0.0"
                     }
                 ],
-                "since": "1.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
@@ -37439,10 +37352,9 @@
                 "example": [
                     {
                         "language": "js",
-                        "code": "import { __styleString2Object } from '@coffeekraken/sugar/css'\nconst styleString =  __styleString2Object('padding-left:20px; display:block;');\n// output => {\n//\t\tpaddingLeft : '20px',\n// \t\tdisplay : 'block'\n// }"
+                        "code": "import { __styleString2Object } from '@coffeekraken/sugar/css'\nconst styleString =  __styleString2Object('padding-left:20px; display:block;');\n// output => {\n//\t\tpaddingLeft : '20px',\n// \t\tdisplay : 'block'\n// }\n @since           2.0.0"
                     }
                 ],
-                "since": "1.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",

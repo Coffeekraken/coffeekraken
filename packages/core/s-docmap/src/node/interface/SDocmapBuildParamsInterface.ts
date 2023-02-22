@@ -47,24 +47,6 @@ class SDocmapBuildParamsInterface extends __SInterface {
                     'Specify some tags and regex to use to filter out docblocks. Docblock items that have a tag that match one of his regex will be cutted out',
                 default: __SSugarConfig.get('docmap.build.excludeByTags'),
             },
-            noExtends: {
-                type: {
-                    type: 'Boolean',
-                    nullishAsTrue: true,
-                },
-                description:
-                    'Specify if you want to avoid searching for docmap.json files in the dependency packages',
-                default: __SSugarConfig.get('docmap.noExtends'),
-            },
-            excludePackages: {
-                type: {
-                    type: 'String[]',
-                    splitChars: [' ', ','],
-                },
-                description:
-                    'Specify some package(s) name(s) (glob) to exclude',
-                default: __SSugarConfig.get('docmap.excludePackages'),
-            },
             save: {
                 type: 'Boolean',
                 alias: 's',

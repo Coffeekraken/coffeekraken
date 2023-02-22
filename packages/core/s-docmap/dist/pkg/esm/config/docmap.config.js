@@ -5,18 +5,6 @@ export default function (api) {
         return;
     return {
         /**
-         * @name        noExtends
-         * @namespace   config.docmap
-         * @type        Boolean
-         * @default     false
-         *
-         * Specify if you want to disable the extends search process that will result in the "extends" array in the docmap.json file
-         *
-         * @since       2.0.0
-         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-         */
-        noExtends: false,
-        /**
          * @name        excludePackages
          * @namespace   config.docmap
          * @type        Boolean
@@ -67,39 +55,6 @@ export default function (api) {
              * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             sortDeep: ['menu.custom.styleguide', 'menu.custom.specs'],
-        },
-        snapshot: {
-            /**
-             * @name          outDir
-             * @namespace     config.docmap.snapshot
-             * @type          String
-             * @default       [config.storage.package.rootDir]/.docmap
-             *
-             * Specify where to save the generated snapshot
-             *
-             * @since       2.0.0
-             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-             */
-            get outDir() {
-                return `${api.config.storage.package.rootDir}/.docmap`;
-            },
-        },
-        installSnapshot: {
-            /**
-             * @name          glob
-             * @namespace     config.docmap.installSnapshot
-             * @type          String
-             * @default       [config.storage.package.rootDir]/.docmap/*
-             *
-             * Specify where to find the snapshot(s) to install. It must refer
-             * to folder(s) where a docmap.json and a package.json exists...
-             *
-             * @since       2.0.0
-             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-             */
-            get glob() {
-                return `${api.config.storage.package.rootDir}/.docmap/*`;
-            },
         },
         build: {
             /**
@@ -226,4 +181,4 @@ export default function (api) {
         },
     };
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sRUFBRSwwQkFBMEIsRUFBRSxNQUFNLCtCQUErQixDQUFDO0FBQzNFLE9BQU8sRUFBRSxnQkFBZ0IsRUFBRSxNQUFNLDBCQUEwQixDQUFDO0FBRTVELE1BQU0sQ0FBQyxPQUFPLFdBQVcsR0FBRztJQUN4QixJQUFJLEdBQUcsQ0FBQyxHQUFHLENBQUMsUUFBUSxLQUFLLE1BQU07UUFBRSxPQUFPO0lBRXhDLE9BQU87UUFDSDs7Ozs7Ozs7OztXQVVHO1FBQ0gsU0FBUyxFQUFFLEtBQUs7UUFFaEI7Ozs7Ozs7Ozs7V0FVRztRQUNILGVBQWUsRUFBRSxDQUFDLFlBQVksRUFBRSxZQUFZLEVBQUUsVUFBVSxDQUFDO1FBRXpELElBQUksRUFBRTtZQUNGOzs7Ozs7Ozs7O2VBVUc7WUFDSCxLQUFLLEVBQUUsR0FBRyxnQkFBZ0IsRUFBRSxjQUFjO1lBRTFDOzs7Ozs7Ozs7OztlQVdHO1lBQ0gsSUFBSSxFQUFFLENBQUMsZUFBZSxDQUFDO1lBRXZCOzs7Ozs7Ozs7OztlQVdHO1lBQ0gsUUFBUSxFQUFFLENBQUMsd0JBQXdCLEVBQUUsbUJBQW1CLENBQUM7U0FDNUQ7UUFFRCxRQUFRLEVBQUU7WUFDTjs7Ozs7Ozs7OztlQVVHO1lBQ0gsSUFBSSxNQUFNO2dCQUNOLE9BQU8sR0FBRyxHQUFHLENBQUMsTUFBTSxDQUFDLE9BQU8sQ0FBQyxPQUFPLENBQUMsT0FBTyxVQUFVLENBQUM7WUFDM0QsQ0FBQztTQUNKO1FBRUQsZUFBZSxFQUFFO1lBQ2I7Ozs7Ozs7Ozs7O2VBV0c7WUFDSCxJQUFJLElBQUk7Z0JBQ0osT0FBTyxHQUFHLEdBQUcsQ0FBQyxNQUFNLENBQUMsT0FBTyxDQUFDLE9BQU8sQ0FBQyxPQUFPLFlBQVksQ0FBQztZQUM3RCxDQUFDO1NBQ0o7UUFFRCxLQUFLLEVBQUU7WUFDSDs7Ozs7Ozs7Ozs7OztlQWFHO1lBQ0gsS0FBSyxFQUFFO2dCQUNILEdBQUc7Z0JBQ0gseUJBQXlCLDBCQUEwQixDQUFDLEVBQUUsQ0FBQyxDQUFDLElBQUksQ0FDeEQsR0FBRyxDQUNOLEdBQUc7Z0JBQ0osZUFBZTthQUNsQjtZQUVEOzs7Ozs7Ozs7OztlQVdHO1lBQ0gsT0FBTyxFQUFFO2dCQUNMLG1CQUFtQjtnQkFDbkIsdUJBQXVCO2dCQUN2QixpQkFBaUI7YUFDcEI7WUFFRCxhQUFhLEVBQUU7Z0JBQ1g7Ozs7Ozs7Ozs7O21CQVdHO2dCQUNILDZCQUE2QjtnQkFFN0I7Ozs7Ozs7Ozs7O21CQVdHO2dCQUNILElBQUksRUFBRSxDQUFDLFlBQVksQ0FBQzthQUN2QjtZQUVEOzs7Ozs7Ozs7O2VBVUc7WUFDSCxJQUFJLEVBQUU7Z0JBQ0YsSUFBSTtnQkFDSixNQUFNO2dCQUNOLElBQUk7Z0JBQ0osTUFBTTtnQkFDTixPQUFPO2dCQUNQLFNBQVM7Z0JBQ1QsTUFBTTtnQkFDTixTQUFTO2dCQUNULFVBQVU7Z0JBQ1YsYUFBYTtnQkFDYixXQUFXO2dCQUNYLFFBQVE7Z0JBQ1IsU0FBUztnQkFDVCxXQUFXO2dCQUNYLE9BQU87Z0JBQ1AsUUFBUTtnQkFDUixPQUFPO2dCQUNQLFFBQVE7YUFDWDtZQUVEOzs7Ozs7Ozs7O2VBVUc7WUFDSCxJQUFJLEVBQUUsSUFBSTtZQUVWOzs7Ozs7Ozs7O2VBVUc7WUFDSCxJQUFJLE9BQU87Z0JBQ1AsT0FBTyxHQUFHLEdBQUcsQ0FBQyxNQUFNLENBQUMsT0FBTyxDQUFDLE9BQU8sQ0FBQyxPQUFPLGNBQWMsQ0FBQztZQUMvRCxDQUFDO1NBQ0o7S0FDSixDQUFDO0FBQ04sQ0FBQyJ9
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sRUFBRSwwQkFBMEIsRUFBRSxNQUFNLCtCQUErQixDQUFDO0FBQzNFLE9BQU8sRUFBRSxnQkFBZ0IsRUFBRSxNQUFNLDBCQUEwQixDQUFDO0FBRTVELE1BQU0sQ0FBQyxPQUFPLFdBQVcsR0FBRztJQUN4QixJQUFJLEdBQUcsQ0FBQyxHQUFHLENBQUMsUUFBUSxLQUFLLE1BQU07UUFBRSxPQUFPO0lBRXhDLE9BQU87UUFDSDs7Ozs7Ozs7OztXQVVHO1FBQ0gsZUFBZSxFQUFFLENBQUMsWUFBWSxFQUFFLFlBQVksRUFBRSxVQUFVLENBQUM7UUFFekQsSUFBSSxFQUFFO1lBQ0Y7Ozs7Ozs7Ozs7ZUFVRztZQUNILEtBQUssRUFBRSxHQUFHLGdCQUFnQixFQUFFLGNBQWM7WUFFMUM7Ozs7Ozs7Ozs7O2VBV0c7WUFDSCxJQUFJLEVBQUUsQ0FBQyxlQUFlLENBQUM7WUFFdkI7Ozs7Ozs7Ozs7O2VBV0c7WUFDSCxRQUFRLEVBQUUsQ0FBQyx3QkFBd0IsRUFBRSxtQkFBbUIsQ0FBQztTQUM1RDtRQUVELEtBQUssRUFBRTtZQUNIOzs7Ozs7Ozs7Ozs7O2VBYUc7WUFDSCxLQUFLLEVBQUU7Z0JBQ0gsR0FBRztnQkFDSCx5QkFBeUIsMEJBQTBCLENBQUMsRUFBRSxDQUFDLENBQUMsSUFBSSxDQUN4RCxHQUFHLENBQ04sR0FBRztnQkFDSixlQUFlO2FBQ2xCO1lBRUQ7Ozs7Ozs7Ozs7O2VBV0c7WUFDSCxPQUFPLEVBQUU7Z0JBQ0wsbUJBQW1CO2dCQUNuQix1QkFBdUI7Z0JBQ3ZCLGlCQUFpQjthQUNwQjtZQUVELGFBQWEsRUFBRTtnQkFDWDs7Ozs7Ozs7Ozs7bUJBV0c7Z0JBQ0gsNkJBQTZCO2dCQUU3Qjs7Ozs7Ozs7Ozs7bUJBV0c7Z0JBQ0gsSUFBSSxFQUFFLENBQUMsWUFBWSxDQUFDO2FBQ3ZCO1lBRUQ7Ozs7Ozs7Ozs7ZUFVRztZQUNILElBQUksRUFBRTtnQkFDRixJQUFJO2dCQUNKLE1BQU07Z0JBQ04sSUFBSTtnQkFDSixNQUFNO2dCQUNOLE9BQU87Z0JBQ1AsU0FBUztnQkFDVCxNQUFNO2dCQUNOLFNBQVM7Z0JBQ1QsVUFBVTtnQkFDVixhQUFhO2dCQUNiLFdBQVc7Z0JBQ1gsUUFBUTtnQkFDUixTQUFTO2dCQUNULFdBQVc7Z0JBQ1gsT0FBTztnQkFDUCxRQUFRO2dCQUNSLE9BQU87Z0JBQ1AsUUFBUTthQUNYO1lBRUQ7Ozs7Ozs7Ozs7ZUFVRztZQUNILElBQUksRUFBRSxJQUFJO1lBRVY7Ozs7Ozs7Ozs7ZUFVRztZQUNILElBQUksT0FBTztnQkFDUCxPQUFPLEdBQUcsR0FBRyxDQUFDLE1BQU0sQ0FBQyxPQUFPLENBQUMsT0FBTyxDQUFDLE9BQU8sY0FBYyxDQUFDO1lBQy9ELENBQUM7U0FDSjtLQUNKLENBQUM7QUFDTixDQUFDIn0=

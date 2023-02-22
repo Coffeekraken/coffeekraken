@@ -11,6 +11,11 @@ export default (stringArgs = '') => {
         console.log(
             `<green>[read]</green> docmap.json copied to your clipboard`,
         );
+        console.log(
+            `<green>[read]</green> <cyan>${
+                Object.keys(result.map).length
+            }</cyan> docmap items`,
+        );
         resolve(result);
     });
 };

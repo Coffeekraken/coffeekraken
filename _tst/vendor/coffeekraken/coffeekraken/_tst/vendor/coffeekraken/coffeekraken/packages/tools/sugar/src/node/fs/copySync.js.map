@@ -1,1 +1,0 @@
-{"version":3,"file":"copySync.js","sourceRoot":"","sources":["copySync.ts"],"names":[],"mappings":";AAAA,cAAc;;;;;AAEd,wDAA4B;AAC5B,kFAA4D;AAE5D;;;;;;;;;;;;;;;;;;;;;;;;;GAyBG;AACH,SAAS,QAAQ,CAAC,GAAG,EAAE,IAAI;IACzB,GAAG,GAAG,2BAAmB,CAAC,GAAG,CAAC,CAAC;IAC/B,IAAI,GAAG,2BAAmB,CAAC,IAAI,CAAC,CAAC;IACjC,kBAAI,CAAC,QAAQ,CAAC,GAAG,EAAE,IAAI,CAAC,CAAC;AAC3B,CAAC;AACD,kBAAe,QAAQ,CAAC"}

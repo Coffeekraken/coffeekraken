@@ -1,7 +1,6 @@
 // @ts-nocheck
 
 import __SInterface from '@coffeekraken/s-interface';
-import __SSugarConfig from '@coffeekraken/s-sugar-config';
 import __SDocmapReadParamsInterface from './SDocmapReadParamsInterface';
 
 /**
@@ -34,15 +33,6 @@ class SDocmapReadParamsInterface extends __SInterface {
                     'Specify a namespace to search for. Can be a micromatch glob as well',
                 type: 'String',
                 alias: 'n',
-            },
-            excludePackages: {
-                type: {
-                    type: 'String[]',
-                    splitChars: [' ', ','],
-                },
-                description:
-                    'Specify some package(s) name(s) (glob) to exclude',
-                default: __SSugarConfig.get('docmap.excludePackages'),
             },
         };
     }

@@ -40,27 +40,6 @@ class SDocmapReadParamsInterface extends __SInterface {
                 type: 'String[]',
                 default: __SSugarConfig.get('docmap.read.sortDeep'),
             },
-            excludePackages: {
-                type: {
-                    type: 'String[]',
-                    splitChars: [' ', ','],
-                },
-                description:
-                    'Specify some package(s) name(s) (glob) to exclude',
-                default: __SSugarConfig.get('docmap.excludePackages'),
-            },
-            // snapshot: {
-            //     type: 'String',
-            //     alias: 's',
-            // },
-            // snapshotDir: {
-            //     type: 'String',
-            //     path: {
-            //         absolute: true,
-            //         tokens: true,
-            //     },
-            //     default: __SSugarConfig.get('docmap.snapshot.outDir'),
-            // },
         };
     }
 }

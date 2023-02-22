@@ -18,14 +18,6 @@ declare class SDocmapReadParamsInterface extends __SInterface {
             type: string;
             default: any;
         };
-        excludePackages: {
-            type: {
-                type: string;
-                splitChars: string[];
-            };
-            description: string;
-            default: any;
-        };
     };
 }
 export default SDocmapReadParamsInterface;

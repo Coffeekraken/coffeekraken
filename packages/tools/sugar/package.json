@@ -185,6 +185,12 @@
             },
             "types": "./dist/pkg/esm/js/dom/_exports.d.ts"
         },
+        "./composer": {
+            "node": {
+                "require": "./dist/pkg/cjs/node/composer/_exports.js",
+                "import": "./dist/pkg/esm/node/composer/_exports.js"
+            }
+        },
         "./css": {
             "node": {
                 "require": "./dist/pkg/cjs/node/css/_exports.js",

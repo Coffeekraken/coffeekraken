@@ -4,7 +4,7 @@ namespace Sugar\twig;
 
 /**
  * @name        registerFilter
- * @namespace   php.filters
+ * @namespace   php.twig.filters
  * @type        Function
  * @platform    php
  * @status      beta

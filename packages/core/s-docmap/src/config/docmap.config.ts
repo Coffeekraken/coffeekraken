@@ -6,19 +6,6 @@ export default function (api) {
 
     return {
         /**
-         * @name        noExtends
-         * @namespace   config.docmap
-         * @type        Boolean
-         * @default     false
-         *
-         * Specify if you want to disable the extends search process that will result in the "extends" array in the docmap.json file
-         *
-         * @since       2.0.0
-         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-         */
-        noExtends: false,
-
-        /**
          * @name        excludePackages
          * @namespace   config.docmap
          * @type        Boolean
@@ -72,41 +59,6 @@ export default function (api) {
              * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             sortDeep: ['menu.custom.styleguide', 'menu.custom.specs'],
-        },
-
-        snapshot: {
-            /**
-             * @name          outDir
-             * @namespace     config.docmap.snapshot
-             * @type          String
-             * @default       [config.storage.package.rootDir]/.docmap
-             *
-             * Specify where to save the generated snapshot
-             *
-             * @since       2.0.0
-             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-             */
-            get outDir() {
-                return `${api.config.storage.package.rootDir}/.docmap`;
-            },
-        },
-
-        installSnapshot: {
-            /**
-             * @name          glob
-             * @namespace     config.docmap.installSnapshot
-             * @type          String
-             * @default       [config.storage.package.rootDir]/.docmap/*
-             *
-             * Specify where to find the snapshot(s) to install. It must refer
-             * to folder(s) where a docmap.json and a package.json exists...
-             *
-             * @since       2.0.0
-             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-             */
-            get glob() {
-                return `${api.config.storage.package.rootDir}/.docmap/*`;
-            },
         },
 
         build: {

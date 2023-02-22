@@ -1,7 +1,5 @@
 export default function (api: any): {
     
-    noExtends: boolean;
-    
     excludePackages: string[];
     read: {
         
@@ -10,14 +8,6 @@ export default function (api: any): {
         sort: string[];
         
         sortDeep: string[];
-    };
-    snapshot: {
-        
-        readonly outDir: string;
-    };
-    installSnapshot: {
-        
-        readonly glob: string;
     };
     build: {
         

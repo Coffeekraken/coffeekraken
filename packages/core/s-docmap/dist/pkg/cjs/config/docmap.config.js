@@ -7,18 +7,6 @@ function default_1(api) {
         return;
     return {
         /**
-         * @name        noExtends
-         * @namespace   config.docmap
-         * @type        Boolean
-         * @default     false
-         *
-         * Specify if you want to disable the extends search process that will result in the "extends" array in the docmap.json file
-         *
-         * @since       2.0.0
-         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-         */
-        noExtends: false,
-        /**
          * @name        excludePackages
          * @namespace   config.docmap
          * @type        Boolean
@@ -69,39 +57,6 @@ function default_1(api) {
              * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             sortDeep: ['menu.custom.styleguide', 'menu.custom.specs'],
-        },
-        snapshot: {
-            /**
-             * @name          outDir
-             * @namespace     config.docmap.snapshot
-             * @type          String
-             * @default       [config.storage.package.rootDir]/.docmap
-             *
-             * Specify where to save the generated snapshot
-             *
-             * @since       2.0.0
-             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-             */
-            get outDir() {
-                return `${api.config.storage.package.rootDir}/.docmap`;
-            },
-        },
-        installSnapshot: {
-            /**
-             * @name          glob
-             * @namespace     config.docmap.installSnapshot
-             * @type          String
-             * @default       [config.storage.package.rootDir]/.docmap/*
-             *
-             * Specify where to find the snapshot(s) to install. It must refer
-             * to folder(s) where a docmap.json and a package.json exists...
-             *
-             * @since       2.0.0
-             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-             */
-            get glob() {
-                return `${api.config.storage.package.rootDir}/.docmap/*`;
-            },
         },
         build: {
             /**
@@ -229,4 +184,4 @@ function default_1(api) {
     };
 }
 exports.default = default_1;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7O0FBQUEsNkRBQTJFO0FBQzNFLG1EQUE0RDtBQUU1RCxtQkFBeUIsR0FBRztJQUN4QixJQUFJLEdBQUcsQ0FBQyxHQUFHLENBQUMsUUFBUSxLQUFLLE1BQU07UUFBRSxPQUFPO0lBRXhDLE9BQU87UUFDSDs7Ozs7Ozs7OztXQVVHO1FBQ0gsU0FBUyxFQUFFLEtBQUs7UUFFaEI7Ozs7Ozs7Ozs7V0FVRztRQUNILGVBQWUsRUFBRSxDQUFDLFlBQVksRUFBRSxZQUFZLEVBQUUsVUFBVSxDQUFDO1FBRXpELElBQUksRUFBRTtZQUNGOzs7Ozs7Ozs7O2VBVUc7WUFDSCxLQUFLLEVBQUUsR0FBRyxJQUFBLHVCQUFnQixHQUFFLGNBQWM7WUFFMUM7Ozs7Ozs7Ozs7O2VBV0c7WUFDSCxJQUFJLEVBQUUsQ0FBQyxlQUFlLENBQUM7WUFFdkI7Ozs7Ozs7Ozs7O2VBV0c7WUFDSCxRQUFRLEVBQUUsQ0FBQyx3QkFBd0IsRUFBRSxtQkFBbUIsQ0FBQztTQUM1RDtRQUVELFFBQVEsRUFBRTtZQUNOOzs7Ozs7Ozs7O2VBVUc7WUFDSCxJQUFJLE1BQU07Z0JBQ04sT0FBTyxHQUFHLEdBQUcsQ0FBQyxNQUFNLENBQUMsT0FBTyxDQUFDLE9BQU8sQ0FBQyxPQUFPLFVBQVUsQ0FBQztZQUMzRCxDQUFDO1NBQ0o7UUFFRCxlQUFlLEVBQUU7WUFDYjs7Ozs7Ozs7Ozs7ZUFXRztZQUNILElBQUksSUFBSTtnQkFDSixPQUFPLEdBQUcsR0FBRyxDQUFDLE1BQU0sQ0FBQyxPQUFPLENBQUMsT0FBTyxDQUFDLE9BQU8sWUFBWSxDQUFDO1lBQzdELENBQUM7U0FDSjtRQUVELEtBQUssRUFBRTtZQUNIOzs7Ozs7Ozs7Ozs7O2VBYUc7WUFDSCxLQUFLLEVBQUU7Z0JBQ0gsR0FBRztnQkFDSCx5QkFBeUIsSUFBQSxzQ0FBMEIsRUFBQyxFQUFFLENBQUMsQ0FBQyxJQUFJLENBQ3hELEdBQUcsQ0FDTixHQUFHO2dCQUNKLGVBQWU7YUFDbEI7WUFFRDs7Ozs7Ozs7Ozs7ZUFXRztZQUNILE9BQU8sRUFBRTtnQkFDTCxtQkFBbUI7Z0JBQ25CLHVCQUF1QjtnQkFDdkIsaUJBQWlCO2FBQ3BCO1lBRUQsYUFBYSxFQUFFO2dCQUNYOzs7Ozs7Ozs7OzttQkFXRztnQkFDSCw2QkFBNkI7Z0JBRTdCOzs7Ozs7Ozs7OzttQkFXRztnQkFDSCxJQUFJLEVBQUUsQ0FBQyxZQUFZLENBQUM7YUFDdkI7WUFFRDs7Ozs7Ozs7OztlQVVHO1lBQ0gsSUFBSSxFQUFFO2dCQUNGLElBQUk7Z0JBQ0osTUFBTTtnQkFDTixJQUFJO2dCQUNKLE1BQU07Z0JBQ04sT0FBTztnQkFDUCxTQUFTO2dCQUNULE1BQU07Z0JBQ04sU0FBUztnQkFDVCxVQUFVO2dCQUNWLGFBQWE7Z0JBQ2IsV0FBVztnQkFDWCxRQUFRO2dCQUNSLFNBQVM7Z0JBQ1QsV0FBVztnQkFDWCxPQUFPO2dCQUNQLFFBQVE7Z0JBQ1IsT0FBTztnQkFDUCxRQUFRO2FBQ1g7WUFFRDs7Ozs7Ozs7OztlQVVHO1lBQ0gsSUFBSSxFQUFFLElBQUk7WUFFVjs7Ozs7Ozs7OztlQVVHO1lBQ0gsSUFBSSxPQUFPO2dCQUNQLE9BQU8sR0FBRyxHQUFHLENBQUMsTUFBTSxDQUFDLE9BQU8sQ0FBQyxPQUFPLENBQUMsT0FBTyxjQUFjLENBQUM7WUFDL0QsQ0FBQztTQUNKO0tBQ0osQ0FBQztBQUNOLENBQUM7QUFoUEQsNEJBZ1BDIn0=
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7O0FBQUEsNkRBQTJFO0FBQzNFLG1EQUE0RDtBQUU1RCxtQkFBeUIsR0FBRztJQUN4QixJQUFJLEdBQUcsQ0FBQyxHQUFHLENBQUMsUUFBUSxLQUFLLE1BQU07UUFBRSxPQUFPO0lBRXhDLE9BQU87UUFDSDs7Ozs7Ozs7OztXQVVHO1FBQ0gsZUFBZSxFQUFFLENBQUMsWUFBWSxFQUFFLFlBQVksRUFBRSxVQUFVLENBQUM7UUFFekQsSUFBSSxFQUFFO1lBQ0Y7Ozs7Ozs7Ozs7ZUFVRztZQUNILEtBQUssRUFBRSxHQUFHLElBQUEsdUJBQWdCLEdBQUUsY0FBYztZQUUxQzs7Ozs7Ozs7Ozs7ZUFXRztZQUNILElBQUksRUFBRSxDQUFDLGVBQWUsQ0FBQztZQUV2Qjs7Ozs7Ozs7Ozs7ZUFXRztZQUNILFFBQVEsRUFBRSxDQUFDLHdCQUF3QixFQUFFLG1CQUFtQixDQUFDO1NBQzVEO1FBRUQsS0FBSyxFQUFFO1lBQ0g7Ozs7Ozs7Ozs7Ozs7ZUFhRztZQUNILEtBQUssRUFBRTtnQkFDSCxHQUFHO2dCQUNILHlCQUF5QixJQUFBLHNDQUEwQixFQUFDLEVBQUUsQ0FBQyxDQUFDLElBQUksQ0FDeEQsR0FBRyxDQUNOLEdBQUc7Z0JBQ0osZUFBZTthQUNsQjtZQUVEOzs7Ozs7Ozs7OztlQVdHO1lBQ0gsT0FBTyxFQUFFO2dCQUNMLG1CQUFtQjtnQkFDbkIsdUJBQXVCO2dCQUN2QixpQkFBaUI7YUFDcEI7WUFFRCxhQUFhLEVBQUU7Z0JBQ1g7Ozs7Ozs7Ozs7O21CQVdHO2dCQUNILDZCQUE2QjtnQkFFN0I7Ozs7Ozs7Ozs7O21CQVdHO2dCQUNILElBQUksRUFBRSxDQUFDLFlBQVksQ0FBQzthQUN2QjtZQUVEOzs7Ozs7Ozs7O2VBVUc7WUFDSCxJQUFJLEVBQUU7Z0JBQ0YsSUFBSTtnQkFDSixNQUFNO2dCQUNOLElBQUk7Z0JBQ0osTUFBTTtnQkFDTixPQUFPO2dCQUNQLFNBQVM7Z0JBQ1QsTUFBTTtnQkFDTixTQUFTO2dCQUNULFVBQVU7Z0JBQ1YsYUFBYTtnQkFDYixXQUFXO2dCQUNYLFFBQVE7Z0JBQ1IsU0FBUztnQkFDVCxXQUFXO2dCQUNYLE9BQU87Z0JBQ1AsUUFBUTtnQkFDUixPQUFPO2dCQUNQLFFBQVE7YUFDWDtZQUVEOzs7Ozs7Ozs7O2VBVUc7WUFDSCxJQUFJLEVBQUUsSUFBSTtZQUVWOzs7Ozs7Ozs7O2VBVUc7WUFDSCxJQUFJLE9BQU87Z0JBQ1AsT0FBTyxHQUFHLEdBQUcsQ0FBQyxNQUFNLENBQUMsT0FBTyxDQUFDLE9BQU8sQ0FBQyxPQUFPLGNBQWMsQ0FBQztZQUMvRCxDQUFDO1NBQ0o7S0FDSixDQUFDO0FBQ04sQ0FBQztBQWhNRCw0QkFnTUMifQ==

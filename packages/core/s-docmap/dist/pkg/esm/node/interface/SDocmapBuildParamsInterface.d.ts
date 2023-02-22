@@ -24,22 +24,6 @@ declare class SDocmapBuildParamsInterface extends __SInterface {
             description: string;
             default: any;
         };
-        noExtends: {
-            type: {
-                type: string;
-                nullishAsTrue: boolean;
-            };
-            description: string;
-            default: any;
-        };
-        excludePackages: {
-            type: {
-                type: string;
-                splitChars: string[];
-            };
-            description: string;
-            default: any;
-        };
         save: {
             type: string;
             alias: string;

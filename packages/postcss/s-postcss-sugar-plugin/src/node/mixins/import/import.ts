@@ -47,22 +47,6 @@ export interface IPostcssSugarPluginImportParams {
 
 export { postcssSugarPluginImportInterface as interface };
 
-/**
- * @name          import
- * @namespace     sugar.postcss.mixin.import
- * @type          PostcssMixin
- *
- * This mixin allows you to import files as default import statement does but add the glob support like "something/* * /*.css"
- *
- * @param       {String}        path      The path or glob to import
- * @return      {Css}                   The corresponding imported css
- *
- * @example       css
- * @sugar.import('./** /*.css');
- *
- * @since     2.0.0
- * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
 let _watcherByPath = {};
 export default function ({
     params,

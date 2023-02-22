@@ -5,6 +5,7 @@
     "type": "module",
     "scripts": {
         "dev": "sugard mono.dev",
+        "deploy.cdn": "rsync -avzh --delete --progress --stats ./src/cdn/v2/ fe0mt_coffeekraken@fe0mt.ftp.infomaniak.com:~/sites/cdnv2.coffeekraken.io",
         "container": "docker exec --workdir /workspaces/coffeekraken -it coffeekraken /bin/bash"
     },
     "private": true,

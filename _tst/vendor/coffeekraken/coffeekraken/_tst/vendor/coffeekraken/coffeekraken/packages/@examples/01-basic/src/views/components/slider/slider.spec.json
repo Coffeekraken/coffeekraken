@@ -1,4 +1,0 @@
-{
-  "extends": "sugar.views.components.slider",
-  "viewPath": "sugar/components/slider/slider.twig"
-}

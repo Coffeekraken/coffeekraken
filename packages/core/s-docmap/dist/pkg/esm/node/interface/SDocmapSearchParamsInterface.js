@@ -1,6 +1,5 @@
 // @ts-nocheck
 import __SInterface from '@coffeekraken/s-interface';
-import __SSugarConfig from '@coffeekraken/s-sugar-config';
 import __SDocmapReadParamsInterface from './SDocmapReadParamsInterface';
 /**
  * @name                SDocmapReadParamsInterface
@@ -27,15 +26,8 @@ class SDocmapReadParamsInterface extends __SInterface {
                 description: 'Specify a namespace to search for. Can be a micromatch glob as well',
                 type: 'String',
                 alias: 'n',
-            }, excludePackages: {
-                type: {
-                    type: 'String[]',
-                    splitChars: [' ', ','],
-                },
-                description: 'Specify some package(s) name(s) (glob) to exclude',
-                default: __SSugarConfig.get('docmap.excludePackages'),
             } });
     }
 }
 export default SDocmapReadParamsInterface;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7QUFFZCxPQUFPLFlBQVksTUFBTSwyQkFBMkIsQ0FBQztBQUNyRCxPQUFPLGNBQWMsTUFBTSw4QkFBOEIsQ0FBQztBQUMxRCxPQUFPLDRCQUE0QixNQUFNLDhCQUE4QixDQUFDO0FBRXhFOzs7Ozs7Ozs7Ozs7OztHQWNHO0FBQ0gsTUFBTSwwQkFBMkIsU0FBUSxZQUFZO0lBQ2pELE1BQU0sS0FBSyxXQUFXO1FBQ2xCLHVDQUNPLDRCQUE0QixDQUFDLFVBQVUsS0FDMUMsSUFBSSxFQUFFO2dCQUNGLFdBQVcsRUFDUCxnRUFBZ0U7Z0JBQ3BFLElBQUksRUFBRSxRQUFRO2dCQUNkLEtBQUssRUFBRSxHQUFHO2FBQ2IsRUFDRCxTQUFTLEVBQUU7Z0JBQ1AsV0FBVyxFQUNQLHFFQUFxRTtnQkFDekUsSUFBSSxFQUFFLFFBQVE7Z0JBQ2QsS0FBSyxFQUFFLEdBQUc7YUFDYixFQUNELGVBQWUsRUFBRTtnQkFDYixJQUFJLEVBQUU7b0JBQ0YsSUFBSSxFQUFFLFVBQVU7b0JBQ2hCLFVBQVUsRUFBRSxDQUFDLEdBQUcsRUFBRSxHQUFHLENBQUM7aUJBQ3pCO2dCQUNELFdBQVcsRUFDUCxtREFBbUQ7Z0JBQ3ZELE9BQU8sRUFBRSxjQUFjLENBQUMsR0FBRyxDQUFDLHdCQUF3QixDQUFDO2FBQ3hELElBQ0g7SUFDTixDQUFDO0NBQ0o7QUFDRCxlQUFlLDBCQUEwQixDQUFDIn0=
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7QUFFZCxPQUFPLFlBQVksTUFBTSwyQkFBMkIsQ0FBQztBQUNyRCxPQUFPLDRCQUE0QixNQUFNLDhCQUE4QixDQUFDO0FBRXhFOzs7Ozs7Ozs7Ozs7OztHQWNHO0FBQ0gsTUFBTSwwQkFBMkIsU0FBUSxZQUFZO0lBQ2pELE1BQU0sS0FBSyxXQUFXO1FBQ2xCLHVDQUNPLDRCQUE0QixDQUFDLFVBQVUsS0FDMUMsSUFBSSxFQUFFO2dCQUNGLFdBQVcsRUFDUCxnRUFBZ0U7Z0JBQ3BFLElBQUksRUFBRSxRQUFRO2dCQUNkLEtBQUssRUFBRSxHQUFHO2FBQ2IsRUFDRCxTQUFTLEVBQUU7Z0JBQ1AsV0FBVyxFQUNQLHFFQUFxRTtnQkFDekUsSUFBSSxFQUFFLFFBQVE7Z0JBQ2QsS0FBSyxFQUFFLEdBQUc7YUFDYixJQUNIO0lBQ04sQ0FBQztDQUNKO0FBQ0QsZUFBZSwwQkFBMEIsQ0FBQyJ9

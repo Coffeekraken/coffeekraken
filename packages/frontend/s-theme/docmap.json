@@ -2,108 +2,6 @@
     "map": {},
     "extends": [],
     "generated": {
-        "extends": [
-            "@coffeekraken/aa",
-            "@coffeekraken/cli",
-            "@coffeekraken/s-activate-feature",
-            "@coffeekraken/s-appear-feature",
-            "@coffeekraken/s-asset-picker-component",
-            "@coffeekraken/s-bench",
-            "@coffeekraken/s-builder",
-            "@coffeekraken/s-carpenter",
-            "@coffeekraken/s-class",
-            "@coffeekraken/s-classmap",
-            "@coffeekraken/s-clipboard-copy-component",
-            "@coffeekraken/s-code-example-component",
-            "@coffeekraken/s-code-formatter-prettier",
-            "@coffeekraken/s-code-formatter",
-            "@coffeekraken/s-color-picker-component",
-            "@coffeekraken/s-color",
-            "@coffeekraken/s-component-utils",
-            "@coffeekraken/s-conductor",
-            "@coffeekraken/s-config-adapter",
-            "@coffeekraken/s-config-folder-adapter",
-            "@coffeekraken/s-config-inline-adapter",
-            "@coffeekraken/s-config",
-            "@coffeekraken/s-css-animation",
-            "@coffeekraken/s-dashboard",
-            "@coffeekraken/s-data-file-generic",
-            "@coffeekraken/s-data-file-js",
-            "@coffeekraken/s-data-file-php",
-            "@coffeekraken/s-datetime-picker-component",
-            "@coffeekraken/s-deps-feature",
-            "@coffeekraken/s-descriptor",
-            "@coffeekraken/s-docblock",
-            "@coffeekraken/s-docmap",
-            "@coffeekraken/s-dropzone-component",
-            "@coffeekraken/s-duration",
-            "@coffeekraken/s-env",
-            "@coffeekraken/s-event-emitter",
-            "@coffeekraken/s-favicon-builder",
-            "@coffeekraken/s-feature",
-            "@coffeekraken/s-file",
-            "@coffeekraken/s-filtrable-input-component",
-            "@coffeekraken/s-floating-feature",
-            "@coffeekraken/s-form-validate-feature",
-            "@coffeekraken/s-front",
-            "@coffeekraken/s-frontend-checker",
-            "@coffeekraken/s-frontend-server",
-            "@coffeekraken/s-frontspec",
-            "@coffeekraken/s-glitch-feature",
-            "@coffeekraken/s-glob",
-            "@coffeekraken/s-google-map-component",
-            "@coffeekraken/s-handlebars",
-            "@coffeekraken/s-highlight-feature",
-            "@coffeekraken/s-images-builder",
-            "@coffeekraken/s-inline-feature",
-            "@coffeekraken/s-interface",
-            "@coffeekraken/s-kitchen",
-            "@coffeekraken/s-lazy-feature",
-            "@coffeekraken/s-lit-component",
-            "@coffeekraken/s-log",
-            "@coffeekraken/s-markdown-builder",
-            "@coffeekraken/s-monorepo",
-            "@coffeekraken/s-pack-essentials",
-            "@coffeekraken/s-package",
-            "@coffeekraken/s-page-transition-feature",
-            "@coffeekraken/s-panel-component",
-            "@coffeekraken/s-parallax-feature",
-            "@coffeekraken/s-postcss-builder",
-            "@coffeekraken/s-postcss-sugar-export-plugin",
-            "@coffeekraken/s-postcss-sugar-plugin",
-            "@coffeekraken/s-process",
-            "@coffeekraken/s-promise",
-            "@coffeekraken/s-range-component",
-            "@coffeekraken/s-rating-component",
-            "@coffeekraken/s-refocus-feature",
-            "@coffeekraken/s-request",
-            "@coffeekraken/s-scroll-component",
-            "@coffeekraken/s-sitemap-builder",
-            "@coffeekraken/s-slider-component",
-            "@coffeekraken/s-specs-editor-component",
-            "@coffeekraken/s-specs",
-            "@coffeekraken/s-state",
-            "@coffeekraken/s-static-builder",
-            "@coffeekraken/s-stdio",
-            "@coffeekraken/s-sugar-config",
-            "@coffeekraken/s-sugar-element",
-            "@coffeekraken/s-sugar-feature",
-            "@coffeekraken/s-sugar-json",
-            "@coffeekraken/s-theme-switcher-component",
-            "@coffeekraken/s-timer",
-            "@coffeekraken/s-type",
-            "@coffeekraken/s-typescript-builder",
-            "@coffeekraken/s-url",
-            "@coffeekraken/s-validator",
-            "@coffeekraken/s-view-renderer-engine-blade",
-            "@coffeekraken/s-view-renderer-engine-lit",
-            "@coffeekraken/s-view-renderer-engine-twig",
-            "@coffeekraken/s-view-renderer",
-            "@coffeekraken/s-vite-postcss-plugin",
-            "@coffeekraken/s-vite-sugar-plugin",
-            "@coffeekraken/s-vite",
-            "@coffeekraken/sugar"
-        ],
         "map": {
             "@coffeekraken.s-theme.config.theme.theme": {
                 "id": "@coffeekraken.s-theme.config.theme.theme",
@@ -5584,9 +5482,8 @@
                     "raw": "String"
                 },
                 "default": "[theme.space.default]",
-                "description": "Specify the \"default\" space used for margins.\nMUST be an absolute css value like \"3rem\", etc...",
+                "description": "Specify the \"default\" space used for margins.\nMUST be an absolute css value like \"3rem\", etc...\n@since           2.0.0",
                 "namespace": "@coffeekraken.s-theme.config.themeMargin",
-                "since": "1.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
@@ -5608,9 +5505,8 @@
                     "raw": "String"
                 },
                 "default": "[theme.space.0]",
-                "description": "Specify the \"0\" space used for margins.\nMUST be a scale factor relative to the \"default\" absolute value specified.",
+                "description": "Specify the \"0\" space used for margins.\nMUST be a scale factor relative to the \"default\" absolute value specified.\n@since           2.0.0",
                 "namespace": "@coffeekraken.s-theme.config.themeMargin",
-                "since": "1.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
@@ -5632,9 +5528,8 @@
                     "raw": "String"
                 },
                 "default": "[theme.space.10]",
-                "description": "Specify the \"10\" space used for margins.\nMUST be a scale factor relative to the \"default\" absolute value specified.",
+                "description": "Specify the \"10\" space used for margins.\nMUST be a scale factor relative to the \"default\" absolute value specified.\n@since           2.0.0",
                 "namespace": "@coffeekraken.s-theme.config.themeMargin",
-                "since": "1.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
@@ -5656,9 +5551,8 @@
                     "raw": "String"
                 },
                 "default": "[theme.space.20]",
-                "description": "Specify the \"20\" space used for margins.\nMUST be a scale factor relative to the \"default\" absolute value specified.",
+                "description": "Specify the \"20\" space used for margins.\nMUST be a scale factor relative to the \"default\" absolute value specified.\n@since           2.0.0",
                 "namespace": "@coffeekraken.s-theme.config.themeMargin",
-                "since": "1.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
@@ -5680,9 +5574,8 @@
                     "raw": "String"
                 },
                 "default": "[theme.space.30]",
-                "description": "Specify the \"30\" space used for margins.\nMUST be a scale factor relative to the \"default\" absolute value specified.",
+                "description": "Specify the \"30\" space used for margins.\nMUST be a scale factor relative to the \"default\" absolute value specified.\n@since           2.0.0",
                 "namespace": "@coffeekraken.s-theme.config.themeMargin",
-                "since": "1.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
@@ -5704,9 +5597,8 @@
                     "raw": "String"
                 },
                 "default": "[theme.space.40]",
-                "description": "Specify the \"40\" space used for margins.\nMUST be a scale factor relative to the \"default\" absolute value specified.",
+                "description": "Specify the \"40\" space used for margins.\nMUST be a scale factor relative to the \"default\" absolute value specified.\n@since           2.0.0",
                 "namespace": "@coffeekraken.s-theme.config.themeMargin",
-                "since": "1.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
@@ -5728,9 +5620,8 @@
                     "raw": "String"
                 },
                 "default": "[theme.space.50]",
-                "description": "Specify the \"50\" space used for margins.\n.MUST be a scale factor relative to the \"default\" absolute value specified.",
+                "description": "Specify the \"50\" space used for margins.\n.MUST be a scale factor relative to the \"default\" absolute value specified.\n@since           2.0.0",
                 "namespace": "@coffeekraken.s-theme.config.themeMargin",
-                "since": "1.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
@@ -5752,9 +5643,8 @@
                     "raw": "String"
                 },
                 "default": "[theme.space.60]",
-                "description": "Specify the \"60\" space used for margins.\nMUST be a scale factor relative to the \"default\" absolute value specified.",
+                "description": "Specify the \"60\" space used for margins.\nMUST be a scale factor relative to the \"default\" absolute value specified.\n@since           2.0.0",
                 "namespace": "@coffeekraken.s-theme.config.themeMargin",
-                "since": "1.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
@@ -5776,9 +5666,8 @@
                     "raw": "String"
                 },
                 "default": "[theme.space.70]",
-                "description": "Specify the \"70\" space used for margins.\nMUST be a scale factor relative to the \"default\" absolute value specified.",
+                "description": "Specify the \"70\" space used for margins.\nMUST be a scale factor relative to the \"default\" absolute value specified.\n@since           2.0.0",
                 "namespace": "@coffeekraken.s-theme.config.themeMargin",
-                "since": "1.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
@@ -5800,9 +5689,8 @@
                     "raw": "String"
                 },
                 "default": "[theme.space.80]",
-                "description": "Specify the \"80\" space used for margins.\nMUST be a scale factor relative to the \"default\" absolute value specified.",
+                "description": "Specify the \"80\" space used for margins.\nMUST be a scale factor relative to the \"default\" absolute value specified.\n@since           2.0.0",
                 "namespace": "@coffeekraken.s-theme.config.themeMargin",
-                "since": "1.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
@@ -5824,9 +5712,8 @@
                     "raw": "String"
                 },
                 "default": "[theme.space.90]",
-                "description": "Specify the \"90\" space used for margins.\nMUST be a scale factor relative to the \"default\" absolute value specified.",
+                "description": "Specify the \"90\" space used for margins.\nMUST be a scale factor relative to the \"default\" absolute value specified.\n@since           2.0.0",
                 "namespace": "@coffeekraken.s-theme.config.themeMargin",
-                "since": "1.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
@@ -5848,9 +5735,8 @@
                     "raw": "String"
                 },
                 "default": "[theme.space.100]",
-                "description": "Specify the \"100\" space used for margins.\nMUST be a scale factor relative to the \"default\" absolute value specified.",
+                "description": "Specify the \"100\" space used for margins.\nMUST be a scale factor relative to the \"default\" absolute value specified.\n@since           2.0.0",
                 "namespace": "@coffeekraken.s-theme.config.themeMargin",
-                "since": "1.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
@@ -6042,9 +5928,8 @@
                     "raw": "String"
                 },
                 "default": "[theme.space.default]",
-                "description": "Specify the \"default\" space used for offsize",
+                "description": "Specify the \"default\" space used for offsize\n@since           2.0.0",
                 "namespace": "@coffeekraken.s-theme.config.themeOffsize",
-                "since": "1.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
@@ -6066,9 +5951,8 @@
                     "raw": "String"
                 },
                 "default": "[theme.space.0]",
-                "description": "Specify the \"0\" space used for offsize.\nMUST be a scale factor relative to the \"default\" absolute value specified.",
+                "description": "Specify the \"0\" space used for offsize.\nMUST be a scale factor relative to the \"default\" absolute value specified.\n@since           2.0.0",
                 "namespace": "@coffeekraken.s-theme.config.themeOffsize",
-                "since": "1.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
@@ -6090,9 +5974,8 @@
                     "raw": "String"
                 },
                 "default": "[theme.space.10]",
-                "description": "Specify the \"10\" space used for offsize.\nMUST be a scale factor relative to the \"default\" absolute value specified.",
+                "description": "Specify the \"10\" space used for offsize.\nMUST be a scale factor relative to the \"default\" absolute value specified.\n@since           2.0.0",
                 "namespace": "@coffeekraken.s-theme.config.themeOffsize",
-                "since": "1.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
@@ -6114,9 +5997,8 @@
                     "raw": "String"
                 },
                 "default": "[theme.space.20]",
-                "description": "Specify the \"20\" space used for offsize.\nMUST be a scale factor relative to the \"default\" absolute value specified.",
+                "description": "Specify the \"20\" space used for offsize.\nMUST be a scale factor relative to the \"default\" absolute value specified.\n@since           2.0.0",
                 "namespace": "@coffeekraken.s-theme.config.themeOffsize",
-                "since": "1.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
@@ -6138,9 +6020,8 @@
                     "raw": "String"
                 },
                 "default": "[theme.space.30]",
-                "description": "Specify the \"30\" space used for offsize.\nMUST be a scale factor relative to the \"default\" absolute value specified.",
+                "description": "Specify the \"30\" space used for offsize.\nMUST be a scale factor relative to the \"default\" absolute value specified.\n@since           2.0.0",
                 "namespace": "@coffeekraken.s-theme.config.themeOffsize",
-                "since": "1.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
@@ -6162,9 +6043,8 @@
                     "raw": "String"
                 },
                 "default": "[theme.space.40]",
-                "description": "Specify the \"40\" space used for offsize.\nMUST be a scale factor relative to the \"default\" absolute value specified.",
+                "description": "Specify the \"40\" space used for offsize.\nMUST be a scale factor relative to the \"default\" absolute value specified.\n@since           2.0.0",
                 "namespace": "@coffeekraken.s-theme.config.themeOffsize",
-                "since": "1.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
@@ -6186,9 +6066,8 @@
                     "raw": "String"
                 },
                 "default": "[theme.space.50]",
-                "description": "Specify the \"50\" space used for offsize.\nMUST be a scale factor relative to the \"default\" absolute value specified.",
+                "description": "Specify the \"50\" space used for offsize.\nMUST be a scale factor relative to the \"default\" absolute value specified.\n@since           2.0.0",
                 "namespace": "@coffeekraken.s-theme.config.themeOffsize",
-                "since": "1.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
@@ -6210,9 +6089,8 @@
                     "raw": "String"
                 },
                 "default": "[theme.space.60]",
-                "description": "Specify the \"60\" space used for offsize.\nMUST be a scale factor relative to the \"default\" absolute value specified.",
+                "description": "Specify the \"60\" space used for offsize.\nMUST be a scale factor relative to the \"default\" absolute value specified.\n@since           2.0.0",
                 "namespace": "@coffeekraken.s-theme.config.themeOffsize",
-                "since": "1.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
@@ -6234,9 +6112,8 @@
                     "raw": "String"
                 },
                 "default": "[theme.space.70]",
-                "description": "Specify the \"70\" space used for offsize.\nMUST be a scale factor relative to the \"default\" absolute value specified.",
+                "description": "Specify the \"70\" space used for offsize.\nMUST be a scale factor relative to the \"default\" absolute value specified.\n@since           2.0.0",
                 "namespace": "@coffeekraken.s-theme.config.themeOffsize",
-                "since": "1.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
@@ -6258,9 +6135,8 @@
                     "raw": "String"
                 },
                 "default": "[theme.space.80]",
-                "description": "Specify the \"80\" space used for offsize.\nMUST be a scale factor relative to the \"default\" absolute value specified.",
+                "description": "Specify the \"80\" space used for offsize.\nMUST be a scale factor relative to the \"default\" absolute value specified.\n@since           2.0.0",
                 "namespace": "@coffeekraken.s-theme.config.themeOffsize",
-                "since": "1.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
@@ -6282,9 +6158,8 @@
                     "raw": "String"
                 },
                 "default": "[theme.space.90]",
-                "description": "Specify the \"90\" space used for offsize.\nMUST be a scale factor relative to the \"default\" absolute value specified.",
+                "description": "Specify the \"90\" space used for offsize.\nMUST be a scale factor relative to the \"default\" absolute value specified.\n@since           2.0.0",
                 "namespace": "@coffeekraken.s-theme.config.themeOffsize",
-                "since": "1.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
@@ -6306,9 +6181,8 @@
                     "raw": "String"
                 },
                 "default": "[theme.space.100]",
-                "description": "Specify the \"100\" space used for offsize.\nMUST be a scale factor relative to the \"default\" absolute value specified.",
+                "description": "Specify the \"100\" space used for offsize.\nMUST be a scale factor relative to the \"default\" absolute value specified.\n@since           2.0.0",
                 "namespace": "@coffeekraken.s-theme.config.themeOffsize",
-                "since": "1.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
@@ -6596,9 +6470,8 @@
                     "raw": "String"
                 },
                 "default": "[theme.space.default]",
-                "description": "Specify the \"default\" space used for paddings",
+                "description": "Specify the \"default\" space used for paddings\n@since           2.0.0",
                 "namespace": "@coffeekraken.s-theme.config.themePadding",
-                "since": "1.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
@@ -6620,9 +6493,8 @@
                     "raw": "String"
                 },
                 "default": "[theme.space.0]",
-                "description": "Specify the \"0\" space used for paddings.\nMUST be a scale factor relative to the \"default\" absolute value specified.",
+                "description": "Specify the \"0\" space used for paddings.\nMUST be a scale factor relative to the \"default\" absolute value specified.\n@since           2.0.0",
                 "namespace": "@coffeekraken.s-theme.config.themePadding",
-                "since": "1.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
@@ -6644,9 +6516,8 @@
                     "raw": "String"
                 },
                 "default": "[theme.space.10]",
-                "description": "Specify the \"10\" space used for paddings.\nMUST be a scale factor relative to the \"default\" absolute value specified.",
+                "description": "Specify the \"10\" space used for paddings.\nMUST be a scale factor relative to the \"default\" absolute value specified.\n@since           2.0.0",
                 "namespace": "@coffeekraken.s-theme.config.themePadding",
-                "since": "1.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
@@ -6668,9 +6539,8 @@
                     "raw": "String"
                 },
                 "default": "[theme.space.20]",
-                "description": "Specify the \"20\" space used for paddings.\nMUST be a scale factor relative to the \"default\" absolute value specified.",
+                "description": "Specify the \"20\" space used for paddings.\nMUST be a scale factor relative to the \"default\" absolute value specified.\n@since           2.0.0",
                 "namespace": "@coffeekraken.s-theme.config.themePadding",
-                "since": "1.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
@@ -6692,9 +6562,8 @@
                     "raw": "String"
                 },
                 "default": "[theme.space.30]",
-                "description": "Specify the \"30\" space used for paddings.\nMUST be a scale factor relative to the \"default\" absolute value specified.",
+                "description": "Specify the \"30\" space used for paddings.\nMUST be a scale factor relative to the \"default\" absolute value specified.\n@since           2.0.0",
                 "namespace": "@coffeekraken.s-theme.config.themePadding",
-                "since": "1.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
@@ -6716,9 +6585,8 @@
                     "raw": "String"
                 },
                 "default": "[theme.space.40]",
-                "description": "Specify the \"40\" space used for paddings.\nMUST be a scale factor relative to the \"default\" absolute value specified.",
+                "description": "Specify the \"40\" space used for paddings.\nMUST be a scale factor relative to the \"default\" absolute value specified.\n@since           2.0.0",
                 "namespace": "@coffeekraken.s-theme.config.themePadding",
-                "since": "1.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
@@ -6740,9 +6608,8 @@
                     "raw": "String"
                 },
                 "default": "[theme.space.50]",
-                "description": "Specify the \"50\" space used for paddings.\nMUST be a scale factor relative to the \"default\" absolute value specified.",
+                "description": "Specify the \"50\" space used for paddings.\nMUST be a scale factor relative to the \"default\" absolute value specified.\n@since           2.0.0",
                 "namespace": "@coffeekraken.s-theme.config.themePadding",
-                "since": "1.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
@@ -6764,9 +6631,8 @@
                     "raw": "String"
                 },
                 "default": "[theme.space.60]",
-                "description": "Specify the \"60\" space used for paddings.\nMUST be a scale factor relative to the \"default\" absolute value specified.",
+                "description": "Specify the \"60\" space used for paddings.\nMUST be a scale factor relative to the \"default\" absolute value specified.\n@since           2.0.0",
                 "namespace": "@coffeekraken.s-theme.config.themePadding",
-                "since": "1.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
@@ -6788,9 +6654,8 @@
                     "raw": "String"
                 },
                 "default": "[theme.space.70]",
-                "description": "Specify the \"70\" space used for paddings.\nMUST be a scale factor relative to the \"default\" absolute value specified.",
+                "description": "Specify the \"70\" space used for paddings.\nMUST be a scale factor relative to the \"default\" absolute value specified.\n@since           2.0.0",
                 "namespace": "@coffeekraken.s-theme.config.themePadding",
-                "since": "1.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
@@ -6812,9 +6677,8 @@
                     "raw": "String"
                 },
                 "default": "[theme.space.80]",
-                "description": "Specify the \"80\" space used for paddings.\nMUST be a scale factor relative to the \"default\" absolute value specified.",
+                "description": "Specify the \"80\" space used for paddings.\nMUST be a scale factor relative to the \"default\" absolute value specified.\n@since           2.0.0",
                 "namespace": "@coffeekraken.s-theme.config.themePadding",
-                "since": "1.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
@@ -6836,9 +6700,8 @@
                     "raw": "String"
                 },
                 "default": "[theme.space.90]",
-                "description": "Specify the \"90\" space used for paddings.\nMUST be a scale factor relative to the \"default\" absolute value specified.",
+                "description": "Specify the \"90\" space used for paddings.\nMUST be a scale factor relative to the \"default\" absolute value specified.\n@since           2.0.0",
                 "namespace": "@coffeekraken.s-theme.config.themePadding",
-                "since": "1.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
@@ -6860,9 +6723,8 @@
                     "raw": "String"
                 },
                 "default": "[theme.space.90]",
-                "description": "Specify the \"100\" space used for paddings.\nMUST be a scale factor relative to the \"default\" absolute value specified.",
+                "description": "Specify the \"100\" space used for paddings.\nMUST be a scale factor relative to the \"default\" absolute value specified.\n@since           2.0.0",
                 "namespace": "@coffeekraken.s-theme.config.themePadding",
-                "since": "1.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
@@ -8139,9 +8001,8 @@
                     "raw": "String"
                 },
                 "default": "1rem",
-                "description": "Specify the \"default\" space used for margins and paddings.\nMUST be an absolute css value like \"1rem\".",
+                "description": "Specify the \"default\" space used for margins and paddings.\nMUST be an absolute css value like \"1rem\".\n@since           2.0.0",
                 "namespace": "@coffeekraken.s-theme.config.themeSpace",
-                "since": "1.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
@@ -8163,9 +8024,8 @@
                     "raw": "String"
                 },
                 "default": "0",
-                "description": "Specify the \"0\" space used for margins and paddings.\nMUST be a scale factor relative to the \"default\" absolute value specified.",
+                "description": "Specify the \"0\" space used for margins and paddings.\nMUST be a scale factor relative to the \"default\" absolute value specified.\n@since           2.0.0",
                 "namespace": "@coffeekraken.s-theme.config.themeSpace",
-                "since": "1.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
@@ -8187,9 +8047,8 @@
                     "raw": "String"
                 },
                 "default": "0.375",
-                "description": "Specify the \"10\" space used for margins and paddings.\nMUST be a scale factor relative to the \"default\" absolute value specified.",
+                "description": "Specify the \"10\" space used for margins and paddings.\nMUST be a scale factor relative to the \"default\" absolute value specified.\n@since           2.0.0",
                 "namespace": "@coffeekraken.s-theme.config.themeSpace",
-                "since": "1.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
@@ -8211,9 +8070,8 @@
                     "raw": "String"
                 },
                 "default": "0.75",
-                "description": "Specify the \"20\" space used for margins and paddings.\nMUST be a scale factor relative to the \"default\" absolute value specified.",
+                "description": "Specify the \"20\" space used for margins and paddings.\nMUST be a scale factor relative to the \"default\" absolute value specified.\n@since           2.0.0",
                 "namespace": "@coffeekraken.s-theme.config.themeSpace",
-                "since": "1.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
@@ -8235,9 +8093,8 @@
                     "raw": "String"
                 },
                 "default": "1.5",
-                "description": "Specify the \"30\" space used for margins and paddings.\nMUST be a scale factor relative to the \"default\" absolute value specified.",
+                "description": "Specify the \"30\" space used for margins and paddings.\nMUST be a scale factor relative to the \"default\" absolute value specified.\n@since           2.0.0",
                 "namespace": "@coffeekraken.s-theme.config.themeSpace",
-                "since": "1.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
@@ -8259,9 +8116,8 @@
                     "raw": "String"
                 },
                 "default": "2.25",
-                "description": "Specify the \"40\" space used for margins and paddings.\nMUST be a scale factor relative to the \"default\" absolute value specified.",
+                "description": "Specify the \"40\" space used for margins and paddings.\nMUST be a scale factor relative to the \"default\" absolute value specified.\n@since           2.0.0",
                 "namespace": "@coffeekraken.s-theme.config.themeSpace",
-                "since": "1.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
@@ -8283,9 +8139,8 @@
                     "raw": "String"
                 },
                 "default": "3.25",
-                "description": "Specify the \"50\" space used for margins and paddings.\nMUST be a scale factor relative to the \"default\" absolute value specified.",
+                "description": "Specify the \"50\" space used for margins and paddings.\nMUST be a scale factor relative to the \"default\" absolute value specified.\n@since           2.0.0",
                 "namespace": "@coffeekraken.s-theme.config.themeSpace",
-                "since": "1.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
@@ -8307,9 +8162,8 @@
                     "raw": "String"
                 },
                 "default": "4.25",
-                "description": "Specify the \"60\" space used for margins and paddings.\nMUST be a scale factor relative to the \"default\" absolute value specified.",
+                "description": "Specify the \"60\" space used for margins and paddings.\nMUST be a scale factor relative to the \"default\" absolute value specified.\n@since           2.0.0",
                 "namespace": "@coffeekraken.s-theme.config.themeSpace",
-                "since": "1.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
@@ -8331,9 +8185,8 @@
                     "raw": "String"
                 },
                 "default": "5.5",
-                "description": "Specify the \"70\" space used for margins and paddings.\nMUST be a scale factor relative to the \"default\" absolute value specified.",
+                "description": "Specify the \"70\" space used for margins and paddings.\nMUST be a scale factor relative to the \"default\" absolute value specified.\n@since           2.0.0",
                 "namespace": "@coffeekraken.s-theme.config.themeSpace",
-                "since": "1.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
@@ -8355,9 +8208,8 @@
                     "raw": "String"
                 },
                 "default": "7",
-                "description": "Specify the \"80\" space used for margins and paddings.\nMUST be a scale factor relative to the \"default\" absolute value specified.",
+                "description": "Specify the \"80\" space used for margins and paddings.\nMUST be a scale factor relative to the \"default\" absolute value specified.\n@since           2.0.0",
                 "namespace": "@coffeekraken.s-theme.config.themeSpace",
-                "since": "1.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
@@ -8379,9 +8231,8 @@
                     "raw": "String"
                 },
                 "default": "9",
-                "description": "Specify the \"90\" space used for margins and paddings.\nMUST be a scale factor relative to the \"default\" absolute value specified.",
+                "description": "Specify the \"90\" space used for margins and paddings.\nMUST be a scale factor relative to the \"default\" absolute value specified.\n@since           2.0.0",
                 "namespace": "@coffeekraken.s-theme.config.themeSpace",
-                "since": "1.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
@@ -8403,9 +8254,8 @@
                     "raw": "String"
                 },
                 "default": "11",
-                "description": "Specify the \"100\" space used for margins and paddings.\nMUST be a scale factor relative to the \"default\" absolute value specified.",
+                "description": "Specify the \"100\" space used for margins and paddings.\nMUST be a scale factor relative to the \"default\" absolute value specified.\n@since           2.0.0",
                 "namespace": "@coffeekraken.s-theme.config.themeSpace",
-                "since": "1.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",

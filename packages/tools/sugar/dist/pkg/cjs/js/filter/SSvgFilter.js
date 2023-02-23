@@ -34,7 +34,7 @@ const uniqid_1 = __importDefault(require("../../js/string/uniqid"));
  * const myFilter = new MyBlurFilter(10);
  * myFilter.applyTo(myCoolHTMLElement);
  *
- @since           2.0.0
+ * @since           2.0.0
  * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 class __SSvgFilter {

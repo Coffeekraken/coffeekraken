@@ -1,2 +1,2 @@
 
-export default function __whenImageLoaded($img: HTMLImageElement, callback?: any): Promise<HTMLImageElement>;
+export default function __whenImageLoaded($img: HTMLImageElement): Promise<HTMLImageElement>;

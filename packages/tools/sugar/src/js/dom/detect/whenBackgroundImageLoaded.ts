@@ -13,11 +13,14 @@ import __unquote from '../../../shared/string/unquote';
  * Detect when a background image has been loaded on an HTMLElement
  *
  * @feature       Promise based API
- * @feature       Callback support
  *
  * @param    {HTMLElement}    $elm    The HTMLElement on which to detect the background image load
- * @param     {Function}      [cb=null]       A callback function if you prefer
  * @return    {SPromise}    A promise that will be resolved when the background image has been loaded
+ *
+ * @snippet         __whenBackgroundImageLoaded($1);
+ * __whenBackgroundImageLoaded($1).then(\$elm => {
+ *      $2
+ * });
  *
  * @todo      interface
  * @todo      doc
@@ -25,16 +28,15 @@ import __unquote from '../../../shared/string/unquote';
  *
  * @example    js
  * import { __whenBackgroundImageLoaded } from '@coffeekraken/sugar/dom'
- * __whenBackgroundImageLoaded($myElm).then(() => {
- *   // do something when loaded
- * })
  *
- @since           2.0.0
+ * // using promise
+ * await __whenBackgroundImageLoaded($elm);
+ *
+ * @since           2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 export default function __whenBackgroundImageLoaded(
     $elm: HTMLElement,
-    cb = null,
 ): Promise<HTMLElement> {
     let isCancelled = false,
         $img;

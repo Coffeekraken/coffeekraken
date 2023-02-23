@@ -13,6 +13,8 @@
  * @param 		{HTMLElement} 				refElm 		The element in which to prepend the new element
  * @return    {HTMLElement}               The prepended element
  *
+ * @snippet         __prependChild($1, $2);
+ *
  * @todo      interface
  * @todo      doc
  * @todo      tests
@@ -21,7 +23,7 @@
  * import { __prependChild } from '@coffeekraken/sugar/dom'
  * __prependChild(myElementToInsert, theReferenceElement);
  *
- @since           2.0.0
+ * @since           2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 export default function __prependChild(

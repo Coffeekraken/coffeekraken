@@ -29,7 +29,7 @@ const uncamelize_1 = __importDefault(require("../../../shared/string/uncamelize"
  * });
  * // output => padding-left:20px; display:block;
  *
- @since           2.0.0
+ * @since           2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 function __styleObject2String(styleObj) {

@@ -13,6 +13,8 @@ namespace Sugar\frontspec;
  * a new object mostly the same but with the "queries" object|array sorted depending on the
  * "defaultAction" property.
  *
+ * @snippet             \Sugar\frontspec\sortMedia($1);
+ *
  * @param     {Object}      $media                      The frontspec "media" object
  * @return    {Object}                                  The same object with the "queries" sorted correctly
  *

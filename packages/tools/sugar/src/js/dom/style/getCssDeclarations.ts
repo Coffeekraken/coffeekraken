@@ -22,7 +22,7 @@
  * __getCssDeclarations('style', [myCoolCssRules]);
  *
  * @see             https://github.com/marionebl/jogwheel/blob/master/source/library/get-declarations.js
- @since           2.0.0
+ * @since           2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 export default function getCssDeclarations(

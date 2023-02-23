@@ -18,6 +18,8 @@
  * @param       {Array|Object}          [$frontspec=[]]     The frontspec json to handle things like defaultMedia, etc...
  * @return      {String}                         The resulting css classes
  *
+ * @snippet             __marginClasses($1)
+ *
  * @example         php
  * <div class="{{ __marginClasses({
  *  block: 10

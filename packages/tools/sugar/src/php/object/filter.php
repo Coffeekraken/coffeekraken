@@ -18,6 +18,11 @@ namespace Sugar\object;
  * @param       {String|Function}       $filter         The filter to use
  * @return      {Object}                        The filtered object
  *
+ * @snippet             \Sugar\object\filter($1, $2);
+ * \Sugar\object\filter($1, funciton(\$key, \$value) {
+ *      $0
+ * });
+ *
  * @example         php
  * $obj = (object) [
  *   "hello" => 'world',

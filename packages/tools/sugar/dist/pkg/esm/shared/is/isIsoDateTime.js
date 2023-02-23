@@ -23,7 +23,7 @@
  * __isIsoDateTime('2008-08-30 17:21:59') => true
  *
  * @see             https://www.oreilly.com/library/view/regular-expressions-cookbook/9781449327453/ch04s07.html
- @since           2.0.0
+ * @since           2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 export default function __isIsoDateTime(value) {

@@ -24,10 +24,7 @@ function snippet(data, blockSettings) {
         data.content = data.content.slice(0, -1);
     }
     return {
-        language:
-            typeof data.value === 'string'
-                ? data.value.toLowerCase()
-                : data.value,
+        label: data.value,
         code: Array.isArray(data.content)
             ? data.content.join('\n')
             : data.content,

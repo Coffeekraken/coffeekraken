@@ -16,6 +16,11 @@ import { __positionFromEvent } from '@coffeekraken/sugar/dom';
  *
  * @setting     {Number}      [maxSpeed=0.01]       The maximum speed
  *
+ * @snippet         __onDrag($1, $2);
+ * __onDrag($1, drag => {
+ *     $2
+ * });
+ *
  * @todo      tests
  *
  * @example 	js
@@ -24,7 +29,7 @@ import { __positionFromEvent } from '@coffeekraken/sugar/dom';
  *    // do something...
  * });
  *
- @since           2.0.0
+ * @since           2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 

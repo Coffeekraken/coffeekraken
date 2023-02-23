@@ -21,6 +21,8 @@ namespace Sugar;
  * @setting         {String}        'frontend.path'         The absolute path to the frontend directory where you will find the frontspec.json file, package.json, etc...
  * @setting         {String}        'frontspec.path'        The absolute path to the frontspec.json file
  *
+ * @snippet             \Sugar\init($1);
+ *
  * @example         php
  * \Sugar\init([
  *    "frontend.path" => "/something/cool/..."

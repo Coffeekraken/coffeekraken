@@ -12,6 +12,8 @@
  * @param       {String}            $value          The value you want to make id compliant
  * @return      {String}                        The id compliant version
  *
+ * @snippet             __idCompliant($1)
+ *
  * @example       twig
  * {% set id = __idCompliant('something cool) %}
  *

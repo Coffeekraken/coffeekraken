@@ -9,6 +9,8 @@
  *
  * @param       {HTMLInputElement}        $input       The input field to reset
  *
+ * @snippet         __resetFileInput($1);
+ *
  * @todo      interface
  * @todo      doc
  * @todo      tests
@@ -17,7 +19,7 @@
  * import { __resetFileInput } from '@coffeekraken/sugar/dom'
  *  __resetFileInput($myInpuit);
  *
- @since           2.0.0
+ * @since           2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 export default function __resetFileInput($input: HTMLInputElement): void {

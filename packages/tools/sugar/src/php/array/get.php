@@ -16,6 +16,8 @@ namespace Sugar\ar;
  * @param       {String}        [$separator='.']        The dotpath separator
  * @return      {Any}                           The getted value
  *
+ * @snippet         \Sugar\ar\get($1, $2);
+ *
  * @example         php
  * $obj = [
  *   "hello" => [

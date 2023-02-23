@@ -11,13 +11,15 @@
  *
  * @param    {HTMLElement}    html    The string to convert to dom nodes
  * @return    {HTMLElement}    The dom nodes representation of the passed string
- * *
+ *
+ * @snippet         __stringToNode($1);
+ *
  * @example    js
  * import { __stringToNode } from '@coffeekraken/sugar/dom'
  * const myString = '<p>Hello World</p>'
  * __stringToNode(myString) // <p>Hello World</p>
  *
- @since           2.0.0
+ * @since           2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 export default function __stringToNode(string: string): HTMLElement | string {

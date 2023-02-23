@@ -10,23 +10,26 @@
  * Wait until the passed HTMLLinkElement is fully loaded
  *
  * @feature       Promise based API
- * @feature       Callback support
  *
  * @param 		{HTMLLinkElement} 			link  		The link tag to check the loading state
- * @param 		{Function}					[cb=null] 	An optional callback to call
  * @return 		{Promise} 								The promise that will be resolved
  *
  * @todo      interface
  * @todo      doc
  * @todo      tests
  *
+ * @snippet         __whenLinkLoaded($1);
+ * __whenLinkLoaded($1).then(\$elm => {
+ *      $2
+ * });
+ *
  * @example  	js
  * import { __whenLinkLoaded } from '@coffeekraken/sugar/dom'
- * __whenLinkLoaded(myCoolHTMLLinlElement).then((link) => {
+ * __whenLinkLoaded(myCoolHTMLLinlElement).then($link => {
  * 		// do something when the link is loaded
  * });
  *
- @since           2.0.0
+ * @since           2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 function alreadyLoaded(link: HTMLLinkElement): boolean {

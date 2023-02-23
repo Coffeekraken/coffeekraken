@@ -24,7 +24,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
  * __isEmail('plop@yop.com') => true
  * __isEmail('hello') => false
  *
- @since           2.0.0
+ * @since           2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 function __isEmail(value) {

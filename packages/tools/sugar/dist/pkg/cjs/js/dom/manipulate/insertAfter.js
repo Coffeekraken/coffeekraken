@@ -14,6 +14,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
  * @param 		{HTMLElement} 				refElm 		The element after which to insert the passed element
  * @return    {HTMLElement}               The inserted node
  *
+ * @snippet         __insertAfter($1, $2);
+ *
  * @todo      interface
  * @todo      doc
  * @todo      tests
@@ -22,7 +24,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
  * import { __insertAfter } from '@coffeekraken/sugar/dom'
  * __insertAfter(myElementToInsert, theReferenceElement);
  *
- @since           2.0.0
+ * @since           2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 function __insertAfter(elm, refElm) {
@@ -37,4 +39,4 @@ function __insertAfter(elm, refElm) {
     return elm;
 }
 exports.default = __insertAfter;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOztBQUVkOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQXVCRztBQUNILFNBQXdCLGFBQWEsQ0FDakMsR0FBZ0IsRUFDaEIsTUFBbUI7SUFFbkIsMEJBQTBCO0lBQzFCLE1BQU0sV0FBVyxHQUFHLE1BQU0sQ0FBQyxXQUFXLENBQUM7SUFDdkMsSUFBSSxDQUFDLFdBQVcsRUFBRTtRQUNkLE1BQU0sQ0FBQyxVQUFVLENBQUMsV0FBVyxDQUFDLEdBQUcsQ0FBQyxDQUFDO0tBQ3RDO1NBQU07UUFDSCxNQUFNLENBQUMsVUFBVSxDQUFDLFlBQVksQ0FBQyxHQUFHLEVBQUUsV0FBVyxDQUFDLENBQUM7S0FDcEQ7SUFDRCxPQUFPLEdBQUcsQ0FBQztBQUNmLENBQUM7QUFaRCxnQ0FZQyJ9
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOztBQUVkOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBeUJHO0FBQ0gsU0FBd0IsYUFBYSxDQUNqQyxHQUFnQixFQUNoQixNQUFtQjtJQUVuQiwwQkFBMEI7SUFDMUIsTUFBTSxXQUFXLEdBQUcsTUFBTSxDQUFDLFdBQVcsQ0FBQztJQUN2QyxJQUFJLENBQUMsV0FBVyxFQUFFO1FBQ2QsTUFBTSxDQUFDLFVBQVUsQ0FBQyxXQUFXLENBQUMsR0FBRyxDQUFDLENBQUM7S0FDdEM7U0FBTTtRQUNILE1BQU0sQ0FBQyxVQUFVLENBQUMsWUFBWSxDQUFDLEdBQUcsRUFBRSxXQUFXLENBQUMsQ0FBQztLQUNwRDtJQUNELE9BQU8sR0FBRyxDQUFDO0FBQ2YsQ0FBQztBQVpELGdDQVlDIn0=

@@ -21,7 +21,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
  * import { __realHeight } from '@coffeekraken/sugar/dom';
  * __realHeight(myCoolHtmlElement);
  *
- @since           2.0.0
+ * @since           2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 function __realHeight(elm) {

@@ -35,7 +35,7 @@ import __throttle from '../../../shared/function/throttle';
  * const myCoolElement = document.querySelector('.my-cool-element');
  *  __splitLines(myCoolElement);
  *
- @since           2.0.0
+ * @since           2.0.0
  * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 

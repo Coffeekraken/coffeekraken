@@ -10,11 +10,14 @@
  * Wait until the passed image is fully loaded
  *
  * @feature         Promise based API
- * @feature         Callback support
  *
  * @param 		{HTMLImageElement} 			$img  		The image to check the loading state
- * @param 		{Function}					[cb=null] 	An optional callback to call
  * @return 		{SPromise} 								The promise that will be resolved when all the images are correctly loaded
+ *
+ * @snippet         __whenImageLoaded($1);
+ * __whenImageLoaded($1).then(\$img => {
+ *      $2
+ * });
  *
  * @todo      interface
  * @todo      doc
@@ -26,12 +29,11 @@
  * 		// do something when the image is loaded
  * });
  *
- @since           2.0.0
+ * @since           2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 export default function __whenImageLoaded(
     $img: HTMLImageElement,
-    callback = null,
 ): Promise<HTMLImageElement> {
     let imgLoadedHandler, imgErrorHandler;
 
@@ -40,15 +42,11 @@ export default function __whenImageLoaded(
         if ($img.hasAttribute('src') && $img.complete) {
             // resolve promise
             resolve($img);
-            // call the callback if exist
-            callback && callback($img);
         } else {
             // wait until loaded
             imgLoadedHandler = (e) => {
                 // resolve the promise
                 resolve($img);
-                // callback if exist
-                callback && callback($img);
             };
             $img.addEventListener('load', imgLoadedHandler);
             // listen for error

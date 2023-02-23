@@ -25,7 +25,7 @@ const toString_1 = __importDefault(require("../string/toString"));
  * @todo        interface
  * @todo        doc
  *
- @since           2.0.0
+ * @since           2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 exports.default = {

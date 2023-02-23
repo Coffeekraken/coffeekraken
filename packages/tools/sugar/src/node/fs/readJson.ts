@@ -1,5 +1,5 @@
-import __fs from 'fs';
 import { __readJsonSync } from '@coffeekraken/sugar/fs';
+import __fs from 'fs';
 
 /**
  * @name            readJson
@@ -7,6 +7,7 @@ import { __readJsonSync } from '@coffeekraken/sugar/fs';
  * @type            Function
  * @platform        node
  * @status          beta
+ * @async
  *
  * This function allows you to read a json file
  *

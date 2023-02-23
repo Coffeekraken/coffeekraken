@@ -14,6 +14,8 @@ namespace Sugar\frontspec;
  * @param     {Object}     $frontspec        The frontspec object containing the "og" property
  * @return    {String}    The HTML code of the og
  *
+ * @snippet             \Sugar\frontspec\og($1);
+ *
  * @example    php
  * \Sugar\frontspec\og($frontspec);
  *

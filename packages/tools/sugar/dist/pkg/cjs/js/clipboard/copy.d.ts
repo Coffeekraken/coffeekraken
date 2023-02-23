@@ -1,0 +1,2 @@
+
+export default function copy(text: string): Promise<void>;

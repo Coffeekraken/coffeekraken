@@ -26,7 +26,7 @@ const filter_1 = require("@coffeekraken/sugar/filter");
  * const filter = new __SGooeySvgFilter();
  * filter.applyTo(myCoolHTMLElement);
  *
- @since           2.0.0
+ * @since           2.0.0
  * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 class __SGooeySvgFilter extends filter_1.__SSvgFilter {

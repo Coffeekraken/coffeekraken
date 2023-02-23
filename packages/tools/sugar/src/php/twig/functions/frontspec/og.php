@@ -12,6 +12,8 @@
  * @param       {Object}            [$frontspec=null]      The frontspec object from where to take the metas. If not specified, try to get it from the frontspec.json at the root of your project
  * @return      {Array}                        The html representing the og
  *
+ * @snippet             __frontspecOg($1)
+ *
  * @example       twig
  * {% __frontspecOg(frontspec) %}
  *

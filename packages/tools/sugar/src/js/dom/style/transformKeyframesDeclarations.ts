@@ -26,7 +26,7 @@ import __camelCase from '../../../shared/string/camelCase';
  * import __transformKeyframesDeclarations from '@coffeekraken/sugar/js/dom/style/transformKeyframesDeclarations';
  *
  * @see             https://github.com/marionebl/jogwheel/blob/master/source/library/transform-keyframe-declaration.js
- @since           2.0.0
+ * @since           2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 

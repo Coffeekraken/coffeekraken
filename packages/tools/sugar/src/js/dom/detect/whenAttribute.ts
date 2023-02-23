@@ -22,32 +22,56 @@ import __autoCast from '../../../shared/string/autoCast';
  * @param 		{Function} 					[checkFn=null] 		An optional function to check the attribute. The promise is resolved when this function return true
  * @return 		(Promise) 										The promise that will be resolved when the attribute exist on the element (and that it passes the checkFn)
  *
+ * @snippet         __whenAttribute($1, $2);
+ * __whenAttribute($1, $2).then(value => {
+ *      $3
+ * });
+ *
  * @todo      tests
  *
  * @example 	js
  * import { __whenAttribute } from '@coffeekraken/sugar/dom'
- * __whenAttribute(myCoolHTMLElement, 'value').then((value) => {
- * 		// the value attribute exist on the element
- * });
- * // with a checkFn
- * __whenAttribute(myCoolHTMLElement, 'value', (newVal, oldVal) => {
- * 		// make sure the value is a number
- * 		return typeof(newVal) === 'number';
- * }).then((value) => {
- * 		// do something with your number value...
+ *
+ * // using promise
+ * __whenAttribute(myCoolHTMLElement, 'value').then(value => {
+ *      // do something...
  * });
  *
- @since           2.0.0
+ * // with a check function
+ * __whenAttribute(myCoolHTMLElement, 'value', {
+ *    check(newVal, oldVal) {
+ * 	      // make sure the value is a number
+ * 		  return typeof(newVal) === 'number';
+ *    }
+ * }).then(value => {
+ *      // do something...
+ * });
+ *
+ * @since           2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-export default function __whenAttribute(elm, attrName, checkFn = null) {
-    return new Promise(async (resolve, reject) => {
+
+export interface IWhenAttributeSettings {
+    check: Function;
+}
+
+export default function __whenAttribute(
+    elm,
+    attrName,
+    settings?: Partial<IWhenAttributeSettings>,
+): Promise<any> {
+    return new Promise(async (resolve) => {
+        const finalSettings: IWhenAttributeSettings = {
+            check: undefined,
+            ...(settings ?? {}),
+        };
+
         if (elm.hasAttribute(attrName)) {
             const value = __autoCast(elm.getAttribute(attrName));
-            if (checkFn && checkFn(value, value)) {
+            if (finalSettings.check && finalSettings.check(value, value)) {
                 resolve(value);
                 return;
-            } else if (!checkFn) {
+            } else if (!finalSettings.check) {
                 resolve(value);
                 return;
             }
@@ -60,10 +84,13 @@ export default function __whenAttribute(elm, attrName, checkFn = null) {
                 const value = __autoCast(
                     mutation.target.getAttribute(mutation.attributeName),
                 );
-                if (checkFn && checkFn(value, mutation.oldValue)) {
+                if (
+                    finalSettings.check &&
+                    finalSettings.check(value, mutation.oldValue)
+                ) {
                     resolve(value);
                     obs.cancel();
-                } else if (!checkFn) {
+                } else if (!finalSettings.check) {
                     resolve(value);
                     obs.cancel();
                 }

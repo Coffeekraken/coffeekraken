@@ -136,7 +136,7 @@ export default function (api) {
              * @name        tags
              * @namespace     config.docmap.build
              * @type        Array<String>
-             * @default     ['id','name','type','menu','default','platform','description','namespace','status','example','interface','styleguide','static','since','author']
+             * @default     ['id','name','as','type','param','return','setting','menu','default','platform','description','namespace','status','snippet','example','interface','async','static','since','author']
              *
              * Specify which docblock tags you want to integrate to your docmap.json items
              *
@@ -149,6 +149,7 @@ export default function (api) {
                 'as',
                 'type',
                 'param',
+                'return',
                 'setting',
                 'menu',
                 'default',
@@ -156,6 +157,7 @@ export default function (api) {
                 'description',
                 'namespace',
                 'status',
+                'snippet',
                 'example',
                 'interface',
                 'async',

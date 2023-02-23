@@ -14,6 +14,8 @@ namespace Sugar\twig;
  * @param       {Twig}      $twig           The twig instance on which to register the functions
  * @return      {Twig}                      The twig instance
  *
+ * @snippet             \Sugar\twig\registerFunctions($1);
+ *
  * @example        php
  * \Sugar\twig\registerFunctions($twig);
  *

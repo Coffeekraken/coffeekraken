@@ -7,6 +7,7 @@
  * @platform          js
  * @platform          node
  * @status            beta
+ * @private
  *
  * Store the tag->function map used in ```parseHtml``` function for example
  *

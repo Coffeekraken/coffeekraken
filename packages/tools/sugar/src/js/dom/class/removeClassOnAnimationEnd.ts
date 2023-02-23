@@ -15,13 +15,15 @@ import { __whenAnimationEnd } from '@coffeekraken/sugar/dom';
  * @param    {String|String[]}    cls    The class or classes (Array) to remove
  * @return   {Promise<HTMLElement>}                  A promise that will be resolved once the class has been removed and the animation finished
  *
+ * @snippet         __removeClassOnAnimationEnd($1, $2);
+ *
  * @todo      tests
  *
  * @example    js
  * import { __removeClassOnAnimationEnd } from '@coffeekraken/sugar/dom';
  *  __removeClassOnAnimationEnd(myCoolElm, 'my-class');
  *
- @since           2.0.0
+ * @since           2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 export default function __removeClassOnAnimationEnd(

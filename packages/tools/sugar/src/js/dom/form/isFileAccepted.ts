@@ -13,6 +13,12 @@
  * @param       {String|String[]}       accept      The "accept" string to use
  * @return      {Boolean}               true if accepted, false if not
  *
+ * @snippet         __isFileAccepted($1, $2);
+ * __isFileAccepted($1, $2, [
+ *      'image/png',
+ *      $3
+ * ]);
+ *
  * @todo      interface
  * @todo      doc
  * @todo      tests
@@ -23,7 +29,7 @@
  * __isFileAccepted(myFile, 'image/png, application/json');
  * __isFileAccepted(myFile, ['image/*','text/html'])
  *
- @since           2.0.0
+ * @since           2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 export default function __isFileAccepted(

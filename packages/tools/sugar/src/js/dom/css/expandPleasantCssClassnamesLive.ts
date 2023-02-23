@@ -14,6 +14,8 @@ import __expandPleasantCssClassname from '../../../shared/html/expandPleasantCss
  * This function do this live when detecting a new node in the page, etc...
  * This function does not transform content of "template" and "code" tags.
  *
+ * @snippet         __expandPleasantCssClassnamesLive();
+ *
  * @example         js
  * import { __expandPleasantCssClassnamesLive } from '@coffeekraken/sugar/dom';
  * __expandPleasantCssClassnamesLive();

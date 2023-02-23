@@ -38,6 +38,8 @@ function processNodeElm(elm) {
  * @param 			{String|HTMLElement} 			source 			The source of the template (html string, selector, node element)
  * @return 			{HTMLElement} 									An HTMLElement node tree that represent the template
  *
+ * @snippet         __toDomNodes($1);
+ *
  * @todo      interface
  * @todo      doc
  * @todo      tests
@@ -46,7 +48,7 @@ function processNodeElm(elm) {
  * import { __toDomNodes } from '@coffeekraken/sugar/dom';
  * __toDomNodes('<span>Hello World</span>');
  *
- @since           2.0.0
+ * @since           2.0.0
  * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 export default function __toDomNodes(

@@ -12,6 +12,8 @@
  * @param       {Array}            $value          The value you want to cast to object
  * @return      {Object}                        The casted array value
  *
+ * @snippet             __toObject
+ *
  * @example       twig
  * {% set obj = {'something':true} %}
  * {% set ar = obj|__toObject %}

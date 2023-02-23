@@ -23,7 +23,7 @@
  * __isCreditCard('hello') => false
  * __isCreditCard('378282246310006') => true
  *
- @since           2.0.0
+ * @since           2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 export default function __isCreditCard(value) {

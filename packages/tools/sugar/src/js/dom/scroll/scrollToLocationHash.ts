@@ -27,7 +27,7 @@ import type { IScrollToSettings } from './scrollTo';
  * import { __scrollToLocationHash } from '@coffeekraken/sugar/dom'
  * __scrollToLocationHash(500, 0)
  *
- @since           2.0.0
+ * @since           2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io) (https://olivierbossel.com)
  */
 

@@ -23,7 +23,7 @@ import { __isVisible } from '@coffeekraken/sugar/dom';
  * const percentage = __inViewportPercentage(myCoolHTMLElement);
  * // 20
  *
- @since           2.0.0
+ * @since           2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 export default function __inViewportPercentage(elm: HTMLElement): number {

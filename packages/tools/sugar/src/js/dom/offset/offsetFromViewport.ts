@@ -12,6 +12,8 @@
  * @param 		{HTMLElement} 					elm  		The element to get the offset from
  * @return 		{top: number; left: number;} 									The offset top and left object
  *
+ * @snippet         __offsetFromViewport($1);
+ *
  * @todo      interface
  * @todo      doc
  * @todo      tests
@@ -21,7 +23,7 @@
  * const __offsetFromViewport = offset(myCoolElement);
  * // output : { top : 200, left : 300 }
  *
- @since           2.0.0
+ * @since           2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 export default function __offsetFromViewport(elm: HTMLElement): {

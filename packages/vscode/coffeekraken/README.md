@@ -1,4 +1,4 @@
-\!\[Coffeekraken\]\(https://cdnv2.coffeekraken.io/readme-header.png\)
+![Coffeekraken](https://cdnv2.coffeekraken.io/readme-header.png)
 
 # Coffeekraken
 

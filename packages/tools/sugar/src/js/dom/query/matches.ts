@@ -13,6 +13,8 @@
  * @param 		{String} 				selector 		The selector to check on the element
  * @return 		{Boolean} 								If the element match the selector or not
  *
+ * @snippet         __matches($1, $2);
+ *
  * @todo      interface
  * @todo      doc
  * @todo      tests
@@ -24,7 +26,7 @@
  * }
  *
  * @see 		https://developer.mozilla.org/en/docs/Web/API/Element/matches
- @since           2.0.0
+ * @since           2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 export default function __matches(el: HTMLElement, selector: string): boolean {

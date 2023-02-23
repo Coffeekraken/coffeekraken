@@ -25,9 +25,11 @@ namespace Sugar\type;
  * @param       {String|Array}          $type           The type to convert into string
  * @return      {String}                        The type string
  *
+ * @snippet             \Sugar\type\typeToString($1);
+ *
  * @example         php
- * Sugar\type\generateRandomString('Array'); // => Array
- * Sugar\type\generateRandomString({
+ * Sugar\type\typeToString('Array'); // => Array
+ * Sugar\type\typeToString({
  *    types: [{
  *        type: 'Array',
  *        of: ['String','Boolean']

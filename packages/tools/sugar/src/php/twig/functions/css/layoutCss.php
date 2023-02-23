@@ -24,6 +24,8 @@
  * @setting         {Boolean}       [minify=true]             Minify the output css or not
  * @setting         {Array}         [$scope=['bare','lnf','gap','align','justify']]             The scope(s) you want to generate
  *
+ * @snippet             __layoutCss($1);
+ *
  * @example         twig
  * {% set css = __layoutCss('1 2 _ 3 3', {
  *      selector: '#my-layout'

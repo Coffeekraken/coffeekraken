@@ -14,6 +14,8 @@ namespace Sugar\convert;
  * @param       {Array}         $array         The base array to convert to an object
  * @return      {Object}                         The resulting object
  *
+ * @snippet         \Sugar\convert\toObject($1);
+ *
  * @example         php
  * \Sugar\convert\toObject([
  *    'prop1' => 'Hello',

@@ -12,6 +12,8 @@
  * @param       {String|Array}            $type       The type you want to convert to string.
  * @return      {String}                                The type string
  *
+ * @snippet             __typeToString
+ *
  * @example       twig
  * {% set id = 'Array'|__typeToString %}
  *

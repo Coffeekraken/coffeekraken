@@ -29,7 +29,7 @@ import { __uniqid } from '@coffeekraken/sugar/string';
  * const reset =  __clearTransmations($myElement);
  * setTimeout(() => reset(), 2000);
  *
- @since           2.0.0
+ * @since           2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 

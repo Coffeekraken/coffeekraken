@@ -16,6 +16,11 @@
  * @param       {Function}      [cb=null]     A callback if you prefer
  * @return    {Promise}    The promise that will be resolved when the script is fully loaded
  *
+ * @snippet         __whenScriptLoaded($1);
+ * __whenScriptLoaded($1).then(\$script => {
+ *      $2
+ * });
+ *
  * @todo      interface
  * @todo      doc
  * @todo      tests
@@ -26,7 +31,7 @@
  *   // do something here
  * })
  *
- @since           2.0.0
+ * @since           2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 export default function __whenScriptLoaded(

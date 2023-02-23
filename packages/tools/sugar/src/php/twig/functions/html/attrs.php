@@ -12,6 +12,8 @@
  * @param       {Object}         $attributes
  * @return      {String}                         The resulting html string
  *
+ * @snippet             __attrs($1)
+ *
  * @example         twig
  * <div {{ __attrs(attributes) }}></div>
  *

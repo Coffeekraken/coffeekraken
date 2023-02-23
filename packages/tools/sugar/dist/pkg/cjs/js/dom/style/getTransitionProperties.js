@@ -35,7 +35,7 @@ const convertTime_1 = __importDefault(require("../../../shared/datetime/convertT
  * // 	totalDuration : 200
  * // }
  *
- @since           2.0.0
+ * @since           2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 function splitIfNeeded(what, separator) {

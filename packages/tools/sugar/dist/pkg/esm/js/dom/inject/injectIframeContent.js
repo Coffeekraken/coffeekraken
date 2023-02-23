@@ -11,6 +11,8 @@
  * @param       {HTMLIFrameElement}        $iframe          The iframe element to inject content into
  * @param    {String}    html           The html to inject
  *
+ * @snippet         __injectIframeContent($1, $2);
+ *
  * @todo      interface
  * @todo      doc
  * @todo      tests
@@ -19,7 +21,7 @@
  * import { __injectIframeContent } from '@coffeekraken/sugar/dom'
  *  __injectIframeContent($myIframe, '<html>...</html>');
  *
- @since           2.0.0
+ * @since           2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 export default function __injectIframeContent($iframe, html) {
@@ -36,4 +38,4 @@ export default function __injectIframeContent($iframe, html) {
     //     // $iframe.remove();
     // }
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7QUFFZDs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQXNCRztBQUNILE1BQU0sQ0FBQyxPQUFPLFVBQVUscUJBQXFCLENBQ3pDLE9BQTBCLEVBQzFCLElBQVk7SUFFWiwyQkFBMkI7SUFDM0IsZ0NBQWdDO0lBQ2hDLDRCQUE0QjtJQUM1QiwwQ0FBMEM7SUFDMUMsSUFBSTtJQUNKLCtCQUErQjtJQUMvQixPQUFPLENBQUMsYUFBYSxDQUFDLFFBQVEsQ0FBQyxJQUFJLEVBQUUsQ0FBQztJQUN0QyxPQUFPLENBQUMsYUFBYSxDQUFDLFFBQVEsQ0FBQyxLQUFLLENBQUMsSUFBSSxDQUFDLENBQUM7SUFDM0MsT0FBTyxDQUFDLGFBQWEsQ0FBQyxRQUFRLENBQUMsS0FBSyxFQUFFLENBQUM7SUFDdkMsdUJBQXVCO0lBQ3ZCLDJCQUEyQjtJQUMzQixJQUFJO0FBQ1IsQ0FBQyJ9
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7QUFFZDs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBd0JHO0FBQ0gsTUFBTSxDQUFDLE9BQU8sVUFBVSxxQkFBcUIsQ0FDekMsT0FBMEIsRUFDMUIsSUFBWTtJQUVaLDJCQUEyQjtJQUMzQixnQ0FBZ0M7SUFDaEMsNEJBQTRCO0lBQzVCLDBDQUEwQztJQUMxQyxJQUFJO0lBQ0osK0JBQStCO0lBQy9CLE9BQU8sQ0FBQyxhQUFhLENBQUMsUUFBUSxDQUFDLElBQUksRUFBRSxDQUFDO0lBQ3RDLE9BQU8sQ0FBQyxhQUFhLENBQUMsUUFBUSxDQUFDLEtBQUssQ0FBQyxJQUFJLENBQUMsQ0FBQztJQUMzQyxPQUFPLENBQUMsYUFBYSxDQUFDLFFBQVEsQ0FBQyxLQUFLLEVBQUUsQ0FBQztJQUN2Qyx1QkFBdUI7SUFDdkIsMkJBQTJCO0lBQzNCLElBQUk7QUFDUixDQUFDIn0=

@@ -87,12 +87,14 @@ export default function jsIntegration(docmapJson: any): void {
         let str = `__${docmapObj.name}`,
             label = `${str}`;
 
-        const snippetCompletion = new vscode.CompletionItem(str);
+        const snippetCompletion = new vscode.CompletionItem(
+            docmapObj.snippet.label,
+        );
         snippetCompletion.kind = vscode.CompletionItemKind.Function;
-        snippetCompletion.label = label;
-        snippetCompletion.filterText = `${docmapObj.namespace}.${label}`;
-        snippetCompletion.insertText = new vscode.SnippetString(str);
-        snippetCompletion.sup;
+        snippetCompletion.label = docmapObj.snippet.label.split('(')[0];
+        snippetCompletion.insertText = new vscode.SnippetString(
+            docmapObj.snippet.code ?? docmapObj.snippet.label,
+        );
         snippetCompletion.command = {
             arguments: [docmapObj],
             command: 'coffeekraken.s.sugar.import',

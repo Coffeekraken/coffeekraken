@@ -13,6 +13,8 @@ import { __offsetFromViewport, __scrollTop } from '@coffeekraken/sugar/dom';
  * @param       {HTMLElement}       elm             The element you want to get the distance from
  * @return      {Number}                            The calculated distance
  *
+ * @snippet         __distanceFromElementTopToViewportBottom($1);
+ *
  * @example         js
  * import { __distanceFromElementTopToViewportBottom } from '@coffeekraken/sugar/dom';
  * __distanceFromElementTopToViewportBottom(myElement); // => 23

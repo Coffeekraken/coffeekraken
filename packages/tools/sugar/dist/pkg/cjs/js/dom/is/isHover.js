@@ -12,6 +12,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
  *
  * @param    {HTMLElement}    $elm    The HTMLElement to check
  *
+ * @snippet         __isHover($1);
+ *
  * @todo      interface
  * @todo      doc
  * @todo      tests
@@ -23,11 +25,11 @@ Object.defineProperty(exports, "__esModule", { value: true });
  *   // do something
  * }
  *
- @since           2.0.0
+ * @since           2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 function __isHover($elm) {
     return $elm.parentElement.querySelector(':isHover') === $elm;
 }
 exports.default = __isHover;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOztBQUVkOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0F3Qkc7QUFDSCxTQUF3QixTQUFTLENBQUMsSUFBaUI7SUFDL0MsT0FBTyxJQUFJLENBQUMsYUFBYSxDQUFDLGFBQWEsQ0FBQyxVQUFVLENBQUMsS0FBSyxJQUFJLENBQUM7QUFDakUsQ0FBQztBQUZELDRCQUVDIn0=
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOztBQUVkOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQTBCRztBQUNILFNBQXdCLFNBQVMsQ0FBQyxJQUFpQjtJQUMvQyxPQUFPLElBQUksQ0FBQyxhQUFhLENBQUMsYUFBYSxDQUFDLFVBQVUsQ0FBQyxLQUFLLElBQUksQ0FBQztBQUNqRSxDQUFDO0FBRkQsNEJBRUMifQ==

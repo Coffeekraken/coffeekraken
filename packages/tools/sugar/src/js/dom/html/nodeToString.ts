@@ -17,12 +17,14 @@
  * @todo      doc
  * @todo      tests
  *
+ * @snippet         __nodeToString($1);
+ *
  * @example    js
  * import { __nodeToString } from '@coffeekraken/sugar/dom'
  * const myDomNode = document.querySelector('.my-dom-node')
  *  __nodeToString(myDomNode, false) // <div class="my-dom-node"></div>
  *
- @since           2.0.0
+ * @since           2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 export default function __nodeToString(

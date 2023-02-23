@@ -11,6 +11,8 @@ namespace Sugar\frontspec;
  *
  * This function allows you to read the `frontspec.json` file
  *
+ * @snippet             \Sugar\frontspec\readFrontspec();
+ *
  * @param       {Object}            $sFrontspecSettings         Some settings to pass to the SFrontspec class like the path, etc...
  * @return      {Object}                                        The frontspec json
  *

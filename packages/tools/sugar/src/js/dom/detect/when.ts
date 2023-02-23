@@ -44,16 +44,21 @@ import {
  * @setting         {Partial<IWhenVisibleSettings>}      [whenVisible={}]         Some settings for the whenVisible function
  * @setting         {Partial<IWhenStyleSheetsReadySettings>}      [whenStylesheetsReady={}]         Some settings for the whenStylesheetsReady function
  *
+ * @snippet         __when($1, $2, $3);
+ * __when($1, $2).then(() => {
+ *      $2
+ * });
+ *
  * @todo      tests
  *
  * @example         js
  * import { __when } from '@coffeekraken/sugar/dom';
- * __when($elm, 'inViewport', () => {
- *      // do something
- * }, {
+ * __when($elm, 'inViewport', {
  *    whenInViewport: {
  *       offset: 50
  *    }
+ * }).then(() => {
+ *      // do something
  * });
  *
  * @since       2.0.0

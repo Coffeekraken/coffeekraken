@@ -23,7 +23,7 @@ const filter_1 = require("@coffeekraken/sugar/filter");
  * filter.applyTo(myCoolHTMLElement);
  * // now when your element will move, it will be blured accordingly
  *
- @since           2.0.0
+ * @since           2.0.0
  * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 class __SMotionblurSvgFilter extends filter_1.__SSvgFilter {

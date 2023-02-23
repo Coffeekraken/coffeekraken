@@ -1,2 +1,2 @@
 
-export default function __whenStylesheetsReady(links?: HTMLLinkElement[], cb?: Function): Promise<void>;
+export default function __whenStylesheetsReady(links?: HTMLLinkElement[]): Promise<void>;

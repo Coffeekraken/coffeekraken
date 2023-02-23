@@ -12,6 +12,8 @@
  * @param      {String}            $values              The values to print in the attribute
  * @return      {String}                                The `s-specs-values="{...}"` attribute containing your values
  *
+ * @snippet             __specsValues($1)
+ *
  * @example         twig
  * <div {{ __specsValues(_context) }}>
  * </div>

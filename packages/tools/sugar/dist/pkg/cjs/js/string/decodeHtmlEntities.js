@@ -22,7 +22,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
  * __decodeHtmlEntities('&#111;&#108;&#105;&#118;&#105;&#101;&#114;&#046;&#098;&#111;&#115;&#115;&#101;&#108;&#064;&#103;&#109;&#097;&#105;&#108;&#046;&#099;&#111;&#109;');
  * // return => olivier.bossel@gmail.com
  *
- @since           2.0.0
+ * @since           2.0.0
  * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 function __decodeHtmlEntities(string) {

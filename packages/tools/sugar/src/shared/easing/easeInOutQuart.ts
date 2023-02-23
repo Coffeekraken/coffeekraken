@@ -20,7 +20,7 @@
  * @todo      doc
  * @todo      tests
  *
- @since           2.0.0
+ * @since           2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 export default function __easeInOutQuart(t) {

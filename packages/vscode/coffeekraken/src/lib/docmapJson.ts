@@ -75,6 +75,11 @@ export default function docmapJson(): any {
         let isValid = true;
         const type = docmapObj.type?.raw?.toLowerCase?.();
 
+        if (!docmapObj.snippet) {
+            delete docmapJsonMap[key];
+            continue;
+        }
+
         if (
             ![
                 'class',

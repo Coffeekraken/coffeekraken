@@ -31,7 +31,7 @@ import __fastdom from 'fastdom';
  * import { __inputAdditionalAttributes } from '@coffeekraken/sugar/feature';
  *  __inputAdditionalAttributes();
  *
- @since           2.0.0
+ * @since           2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 

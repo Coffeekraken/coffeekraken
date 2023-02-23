@@ -16,6 +16,8 @@ const setCookie_1 = __importDefault(require("./setCookie"));
  * @param       {String}            name            The cookie name to delete
  * @return      {any}                               The cookie value
  *
+ * @snippet         __deleteCookie($1);
+ *
  * @example         js
  * import { __deleteCookie } from '@coffeekraken/sugar/cookie';
  * __deleteCookie('myCookie');
@@ -29,4 +31,4 @@ function __deleteCookie(name) {
     });
 }
 exports.default = __deleteCookie;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7O0FBQUEsNERBQXNDO0FBRXRDOzs7Ozs7Ozs7Ozs7Ozs7Ozs7R0FrQkc7QUFDSCxTQUF3QixjQUFjLENBQUMsSUFBWTtJQUMvQyxJQUFBLG1CQUFXLEVBQUMsSUFBSSxFQUFFLEVBQUUsRUFBRTtRQUNsQixTQUFTLEVBQUUsQ0FBQyxDQUFDO0tBQ2hCLENBQUMsQ0FBQztBQUNQLENBQUM7QUFKRCxpQ0FJQyJ9
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7O0FBQUEsNERBQXNDO0FBRXRDOzs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQW9CRztBQUNILFNBQXdCLGNBQWMsQ0FBQyxJQUFZO0lBQy9DLElBQUEsbUJBQVcsRUFBQyxJQUFJLEVBQUUsRUFBRSxFQUFFO1FBQ2xCLFNBQVMsRUFBRSxDQUFDLENBQUM7S0FDaEIsQ0FBQyxDQUFDO0FBQ1AsQ0FBQztBQUpELGlDQUlDIn0=

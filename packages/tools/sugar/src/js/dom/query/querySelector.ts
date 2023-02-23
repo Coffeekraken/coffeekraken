@@ -26,6 +26,8 @@ import {
  * @param 		{Object} 			settings	 		The settings of the query
  * @return 		{HTMLElement} 							The founded element
  *
+ * @snippet         __querySelector($1);
+ *
  * @todo      interface
  * @todo      doc
  * @todo      tests
@@ -40,7 +42,7 @@ import {
  * 		inViewport : true
  * });
  *
- @since           2.0.0
+ * @since           2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 

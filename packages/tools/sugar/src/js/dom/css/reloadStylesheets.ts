@@ -9,7 +9,9 @@
  * and reload them by adding a "queryString" with the timestamp in it
  * to prevent caching
  *
- * @param       {}
+ * @param       {HTMLElement}           [$root=document]            The root element in which to reload the stylesheets
+ *
+ * @snippet         __reloadStylesheets();
  *
  * @example         js
  * import { __reloeadStylesheets } from '@coffeekraken/sugar/dom';

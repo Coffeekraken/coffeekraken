@@ -16,13 +16,15 @@
  * @todo      doc
  * @todo      tests
  *
+ * @snippet         __dispatchEvent($1, $2, $3);
+ *
  * @example  	js
  * import { __dispatchEvent } from '@coffeekraken/sugar/js/dom/dispatchEvent'
  *  __dispatchEvent(myCoolHTMLElement, 'myCoolEventName', {
  * 		var1 : 'value1'
  * });
  *
- @since           2.0.0
+ * @since           2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 export default function __dispatchEvent(

@@ -21,6 +21,11 @@
  *
  * @setting       {Number}              [threshold=100]       The swipe threshold
  *
+ * @snippet         __onSwipe($1, $2);
+ * __onSwipe($1, swipe => {
+ *      $2
+ * });
+ *
  * @todo      tests
  *
  * @example 	js
@@ -37,7 +42,7 @@
  * });
  *
  * @see 		https://gist.github.com/SleepWalker/da5636b1abcbaff48c4d
- @since           2.0.0
+ * @since           2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 

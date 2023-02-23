@@ -14,7 +14,11 @@ export default function popinContent(
     const params = docmapObj.param ?? {},
         settings = docmapObj.setting ?? {};
 
-    const content = `## ${metas?.title ?? `__${docmapObj.name}`}
+    const content = `## ${
+        docmapObj.async
+            ? `<span style="color:${__colors.yellow};">async</span>`
+            : ''
+    } ${metas?.title ?? `__${docmapObj.name}`}
 <span style="color:${__colors.grey};">${docmapObj.id}</span><br/>
 Status: <span style="color:${
         docmapObj.status === 'beta'
@@ -30,16 +34,24 @@ ${Object.keys(params)
     .map((param) => {
         const paramObj = params[param];
         return `
-<span style="color:${__colors.yellow};">**${
+@param ${'&nbsp;'.repeat(5)} <span style="color:${__colors.yellow};">**${
             paramObj.defaultStr ? `[${param}=${paramObj.defaultStr}]` : param
-        }**</span>${'&nbsp;'.repeat(
-            20 - param.length >= 0 ? 20 - param.length : 1,
-        )}<span style="color:${__colors.cyan};">__{${
+        }**</span> - <span style="color:${__colors.cyan};">{${
             paramObj.type.raw
-        }}__</span><br/>
+        }}</span><br/>
 ${paramObj.description}`;
     })
     .join('\n')}
+${
+    docmapObj.return
+        ? `
+@return ${'&nbsp;'.repeat(5)} <span style="color:${__colors.cyan};">{${
+              docmapObj.return.type.raw
+          }}</span><br/>
+${docmapObj.return.description}`
+        : ''
+}
+
 ${
     Object.keys(settings).length
         ? `
@@ -52,15 +64,13 @@ ${Object.keys(settings)
     .map((setting) => {
         const settingObj = settings[setting];
         return `
-<span style="color:${__colors.yellow};">**${
+@setting ${'&nbsp;'.repeat(5)} <span style="color:${__colors.yellow};">**${
             settingObj.defaultStr
                 ? `[${setting}=${settingObj.defaultStr}]`
                 : setting
-        }**</span>${'&nbsp;'.repeat(
-            20 - setting.length >= 0 ? 20 - setting.length : 1,
-        )}<span style="color:${__colors.cyan};">__{${
+        }**</span> - <span style="color:${__colors.cyan};">{${
             settingObj.type.raw
-        }}__</span><br/>
+        }}</span><br/>
 ${settingObj.description}`;
     })
     .join('\n')}
@@ -68,7 +78,7 @@ ${settingObj.description}`;
 ${docmapObj.example
     ?.map?.(
         (exampleObj) => `
-### ${exampleObj.title ?? 'Example'}
+### ${exampleObj.title ?? 'Example'} (${exampleObj.language})
 
 \`\`\`${exampleObj.language}
 ${exampleObj.code}

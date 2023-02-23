@@ -15,11 +15,14 @@ import { __whenImageLoaded } from '@coffeekraken/sugar/dom';
  * See in the example bellow.
  *
  * @feature       Promise based API
- * @feature       Callback support
  *
  * @param    {Array<HTMLImageElement>}    $imgs    An array (or nodeList) of HTMLImageElement to detect the load
- * @param     {Function}          [cb=null]       A callback function if you prefer
  * @return    {Promise}    A promise resolved when all images are loaded properly
+ *
+ * @snippet         __whenImagesLoaded($1);
+ * __whenImagesLoaded($1).then(imgs => {
+ *      $2
+ * });
  *
  * @todo      interface
  * @todo      doc
@@ -31,16 +34,15 @@ import { __whenImageLoaded } from '@coffeekraken/sugar/dom';
  * 	$img1, $img2, $img3
  * ]).on('loaded', $img => {
  *    // do something with the loaded image
- * }).then(() => {
+ * }).then(imgs => {
  *   // do something here
  * })
  *
- @since           2.0.0
+ * @since           2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 export default function __whenImagesLoaded(
     $imgs: HTMLImageElement[],
-    cb = null,
 ): __SPromise<HTMLImageElement[]> {
     return new __SPromise(({ resolve, reject, emit }) => {
         const promises = [],
@@ -50,10 +52,8 @@ export default function __whenImagesLoaded(
                 __whenImageLoaded($img)
                     .then((_$img) => {
                         loadedImages.push(_$img);
-                        emit('img.loaded', _$img);
+                        emit('loaded', _$img);
                         if (loadedImages.length === $imgs.length) {
-                            emit('loaded', loadedImages);
-                            if (cb) cb(loadedImages);
                             resolve(loadedImages);
                         }
                     })

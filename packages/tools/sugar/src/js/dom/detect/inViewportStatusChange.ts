@@ -21,6 +21,13 @@ import __SPromise from '@coffeekraken/s-promise';
  * @event       enter               Dispatched when the passed element enters the viewport
  * @event       leave               Dispatched when the passed element leave the viewport
  *
+ * @snippet         __inViewportStatusChange($1)
+ * __inViewportStatusChange($1).on('enter', \$elm => {
+ *      $2
+ * }).on('leave', \$elm => {
+ *      $3
+ * });
+ *
  * @todo      tests
  *
  * @example  	js
@@ -33,7 +40,7 @@ import __SPromise from '@coffeekraken/s-promise';
  *    // do something...
  * });
  *
- @since           2.0.0
+ * @since           2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 export interface IInViewportStatusChangeSettings {

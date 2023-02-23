@@ -15,6 +15,8 @@ namespace Sugar\specs;
  * @param       {Object}            $sJsonSettings         Some settings to pass to the SJson class like the rootDirs, etc...
  * @return      {Any}                               A list of all the specs files available
  *
+ * @snippet             \Sugar\specs\listSpecs();
+ *
  * @example       twig
  * $specs = \Sugar\specs\listSpecs();
  *

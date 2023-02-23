@@ -14,6 +14,11 @@ namespace Sugar\ar;
  * - `...$`: The keys that ends with the passed string
  * - `function($key, $value) { retur true; }`: A function that must return true or false
  *
+ * @snippet        \Sugar\ar\filter($1, $2);
+ * \Sugar\ar\filter($1, function(\$key, \$value) {
+ *      $0
+ * });
+ *
  * @param       {Object}        $array         The object to filter
  * @param       {String|Function}       $filter         The filter to use
  * @return      {Object}                        The filtered object

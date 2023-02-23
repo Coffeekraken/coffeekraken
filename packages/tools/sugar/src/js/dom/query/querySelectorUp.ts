@@ -18,6 +18,8 @@ import { __matches } from '@coffeekraken/sugar/dom';
  * @todo      doc
  * @todo      tests
  *
+ * @snippet         __querySelectorUp($1, $2);
+ *
  * @example  	js
  * import { __querySelectorUp } from '@coffeekraken/sugar/dom'
  * const closestElm =  __querySelectorUp(myCoolElement, '.my-cool-class');
@@ -29,7 +31,7 @@ import { __matches } from '@coffeekraken/sugar/dom';
  *   return elm.hasAttribute('my-cool-attribute')
  * })
  *
- @since           2.0.0
+ * @since           2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 export default function __querySelectorUp(

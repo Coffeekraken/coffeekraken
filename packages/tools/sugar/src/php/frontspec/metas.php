@@ -15,6 +15,8 @@ namespace Sugar\frontspec;
  * @param     {Object}      [$env='development']        The "env" string that can be "development" or "production"
  * @return    {String}    The HTML code of the metas
  *
+ * @snippet             \Sugar\frontspec\metas($1);
+ *
  * @example    php
  * \Sugar\frontspec\metas($frontspec, 'production');
  *

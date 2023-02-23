@@ -13,6 +13,8 @@
  * @param 		{HTMLElement} 				[$elm=document]  			The element to monitor
  * @return 		{Boolean}									If the element is in the viewport or not
  *
+ * @snippet         __isUserScrolling();
+ *
  * @todo      interface
  * @todo      doc
  * @todo      tests
@@ -23,7 +25,7 @@
  * 		// i'm in the viewport
  * }
  *
- @since           2.0.0
+ * @since           2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 let _isUserScrolling = false,

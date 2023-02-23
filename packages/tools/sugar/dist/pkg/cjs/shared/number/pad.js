@@ -23,7 +23,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
  * import { __pad } from '@coffeekraken/sugar/number'
  * __pad(123, 4) // 0123
  *
- @since           2.0.0
+ * @since           2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 function __pad(number, width, character = '0') {

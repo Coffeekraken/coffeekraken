@@ -12,6 +12,8 @@
  * @param       {String[]}          $specs                  The specs you want to display
  * @return      {String}                                    The markdown list string
  *
+ * @snippet             __specsToMarkdown($1)
+ *
  * @example       twig
  * {{ __specsToMarkdown(mySpecs) }}
  *

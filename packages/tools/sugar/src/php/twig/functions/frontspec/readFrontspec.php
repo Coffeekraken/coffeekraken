@@ -12,6 +12,8 @@
  * @param       {Object}            $sFrontspecSettings         Some settings to pass to the SFrontspec class like the path, etc...
  * @return      {Object}                                        The frontspec json
  *
+ * @snippet             __readFrontspec()
+ *
  * @example         twig
  * <code>
  *  {{ __readFrontspec() }}

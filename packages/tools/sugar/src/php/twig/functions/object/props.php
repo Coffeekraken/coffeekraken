@@ -12,6 +12,8 @@
  * @param       {Object}            $object     The object to get props from
  * @return      {String[]}                      The array of object properties
  *
+ * @snippet             __props($1)
+ *
  * @example       twig
  * <div data="{{ __props(myObject) }}"></div>
  *

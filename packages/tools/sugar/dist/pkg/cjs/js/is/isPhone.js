@@ -26,7 +26,7 @@ const isMobile_1 = __importDefault(require("./isMobile"));
  * }
  *
  * @see       https://blog.devgenius.io/4-ways-to-detect-mobile-browsers-in-javascript-943b66657524
- @since           2.0.0
+ * @since           2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 exports.default = isMobile_1.default;

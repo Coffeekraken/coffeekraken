@@ -13,26 +13,31 @@ const dom_1 = require("@coffeekraken/sugar/dom");
  * Wait until all the HTMLLinkElement's are properly loaded
  *
  * @feature       Async promise based
- * @feature       Callback support
  * @feature       Multiple stylesheets elements listening
  *
  * @param 		{Array}<HTMLLinkElement> 		[links=null] 			The HTMLLinkElement tags to process. If not passed, take the local stylesheets links
- * @param 		{Function} 						[cb=null] 		An optional callback function to call when all the links are loaded
  * @return 		{Promise<void>} 										The promise that will be resolved when all the links are loaded
  *
  * @todo      tests
  *
+ * @snippet         __whenStylesheetsReady($1);
+ * __whenStylesheetsReady($1).then(stylesheets => {
+ *      $2
+ * });
+ *
  * @example 	js
  * import { __whenStylesheetsReady } from '@coffeekraken/sugar/dom'
- * await __whenStylesheetsReady([
+ * __whenStylesheetsReady([
  * 		myHTMLLinkElement1,
  * 		myHTMLLinkElement2
- * ]);
+ * ]).then(stylesheets => {
+ *      // do something...
+ * });
  *
- @since           2.0.0
+ * @since           2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-function __whenStylesheetsReady(links = null, cb = null) {
+function __whenStylesheetsReady(links = null) {
     if (!links) {
         links = Array.from(document.querySelectorAll('link[rel="stylesheet"]'));
     }
@@ -41,10 +46,7 @@ function __whenStylesheetsReady(links = null, cb = null) {
         promises.push((0, dom_1.__whenLinkLoaded)($link));
     });
     const allPromises = Promise.all(promises);
-    allPromises.then(() => {
-        cb === null || cb === void 0 ? void 0 : cb();
-    });
     return allPromises;
 }
 exports.default = __whenStylesheetsReady;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOztBQUVkLGlEQUEyRDtBQUMzRDs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0E2Qkc7QUFDSCxTQUF3QixzQkFBc0IsQ0FDMUMsUUFBMkIsSUFBSSxFQUMvQixLQUFlLElBQUk7SUFFbkIsSUFBSSxDQUFDLEtBQUssRUFBRTtRQUNSLEtBQUssR0FBRyxLQUFLLENBQUMsSUFBSSxDQUFDLFFBQVEsQ0FBQyxnQkFBZ0IsQ0FBQyx3QkFBd0IsQ0FBQyxDQUFDLENBQUM7S0FDM0U7SUFDRCxNQUFNLFFBQVEsR0FBRyxFQUFFLENBQUM7SUFDcEIsRUFBRSxDQUFDLE9BQU8sQ0FBQyxJQUFJLENBQUMsS0FBSyxFQUFFLENBQUMsS0FBSyxFQUFFLEVBQUU7UUFDN0IsUUFBUSxDQUFDLElBQUksQ0FBQyxJQUFBLHNCQUFnQixFQUFDLEtBQUssQ0FBQyxDQUFDLENBQUM7SUFDM0MsQ0FBQyxDQUFDLENBQUM7SUFDSCxNQUFNLFdBQVcsR0FBRyxPQUFPLENBQUMsR0FBRyxDQUFDLFFBQVEsQ0FBQyxDQUFDO0lBQzFDLFdBQVcsQ0FBQyxJQUFJLENBQUMsR0FBRyxFQUFFO1FBQ2xCLEVBQUUsYUFBRixFQUFFLHVCQUFGLEVBQUUsRUFBSSxDQUFDO0lBQ1gsQ0FBQyxDQUFDLENBQUM7SUFDSCxPQUFPLFdBQVcsQ0FBQztBQUN2QixDQUFDO0FBaEJELHlDQWdCQyJ9
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOztBQUVkLGlEQUEyRDtBQUMzRDs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQWtDRztBQUNILFNBQXdCLHNCQUFzQixDQUMxQyxRQUEyQixJQUFJO0lBRS9CLElBQUksQ0FBQyxLQUFLLEVBQUU7UUFDUixLQUFLLEdBQUcsS0FBSyxDQUFDLElBQUksQ0FBQyxRQUFRLENBQUMsZ0JBQWdCLENBQUMsd0JBQXdCLENBQUMsQ0FBQyxDQUFDO0tBQzNFO0lBQ0QsTUFBTSxRQUFRLEdBQUcsRUFBRSxDQUFDO0lBQ3BCLEVBQUUsQ0FBQyxPQUFPLENBQUMsSUFBSSxDQUFDLEtBQUssRUFBRSxDQUFDLEtBQUssRUFBRSxFQUFFO1FBQzdCLFFBQVEsQ0FBQyxJQUFJLENBQUMsSUFBQSxzQkFBZ0IsRUFBQyxLQUFLLENBQUMsQ0FBQyxDQUFDO0lBQzNDLENBQUMsQ0FBQyxDQUFDO0lBQ0gsTUFBTSxXQUFXLEdBQUcsT0FBTyxDQUFDLEdBQUcsQ0FBQyxRQUFRLENBQUMsQ0FBQztJQUMxQyxPQUFPLFdBQVcsQ0FBQztBQUN2QixDQUFDO0FBWkQseUNBWUMifQ==

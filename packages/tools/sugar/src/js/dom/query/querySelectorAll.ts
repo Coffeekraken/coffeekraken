@@ -31,6 +31,8 @@ import {
  * @todo      doc
  * @todo      tests
  *
+ * @snippet         __querySelectorAll($1);
+ *
  * @example 	js
  * import { __querySelectorAll } from '@coffeekraken/sugar/dom';
  * // simple query
@@ -41,7 +43,7 @@ import {
  * 		inViewport : true
  * });
  *
- @since           2.0.0
+ * @since           2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 

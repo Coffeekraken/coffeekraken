@@ -19,7 +19,7 @@ import { __SSvgFilter } from '@coffeekraken/sugar/filter';
  * @todo      doc
  * @todo      tests
  *
- @since           2.0.0
+ * @since           2.0.0
  * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 export default class __SOutlineSvgFilter extends __SSvgFilter {

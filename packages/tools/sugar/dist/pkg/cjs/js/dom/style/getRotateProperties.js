@@ -51,7 +51,7 @@ const rematrix = __importStar(require("rematrix"));
  * // 	z : 0
  * // }
  *
- @since           2.0.0
+ * @since           2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 function __getRotateProperties($elm) {

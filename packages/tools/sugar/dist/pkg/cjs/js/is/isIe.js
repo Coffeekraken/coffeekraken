@@ -23,7 +23,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
  *   // do something cool
  * }
  *
- @since           2.0.0
+ * @since           2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 function __isIe(ua = navigator.userAgent) {

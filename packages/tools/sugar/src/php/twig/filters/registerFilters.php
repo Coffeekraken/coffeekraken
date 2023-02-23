@@ -14,8 +14,10 @@ namespace Sugar\twig;
  * @param       {Twig}      $twig           The twig instance on which to register the filters
  * @return      {Twig}                      The twig instance
  *
+ * @snippet             \Sugar\twig\registerFilters($1);
+ *
  * @example       php
- * \STwig\registerFilters($twig);
+ * \Sugar\twig\registerFilters($twig);
  *
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)

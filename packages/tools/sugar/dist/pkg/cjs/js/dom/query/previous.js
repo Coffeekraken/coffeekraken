@@ -15,6 +15,8 @@ const dom_1 = require("@coffeekraken/sugar/dom");
  * @param 		{String} 						selector 	A css selector to search for
  * @return 		{HTMLElement} 								The element found or null
  *
+ * @snippet         __previous($1, $2);
+ *
  * @todo      interface
  * @todo      doc
  * @todo      tests
@@ -26,7 +28,7 @@ const dom_1 = require("@coffeekraken/sugar/dom");
  * 		// we have found en element that matches the selector
  * }
  *
- @since           2.0.0
+ * @since           2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 function __previous(elm, selector) {
@@ -40,4 +42,4 @@ function __previous(elm, selector) {
     return false;
 }
 exports.default = __previous;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOztBQUVkLGlEQUFvRDtBQUVwRDs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0EwQkc7QUFDSCxTQUF3QixVQUFVLENBQzlCLEdBQWdCLEVBQ2hCLFFBQWdCO0lBRWhCLEdBQUcsR0FBRyxHQUFHLENBQUMsZUFBZSxDQUFDO0lBQzFCLE9BQU8sR0FBRyxFQUFFO1FBQ1IsSUFBSSxJQUFBLGVBQVMsRUFBQyxHQUFHLEVBQUUsUUFBUSxDQUFDLEVBQUU7WUFDMUIsT0FBTyxHQUFHLENBQUM7U0FDZDtRQUNELEdBQUcsR0FBRyxHQUFHLENBQUMsZUFBZSxDQUFDO0tBQzdCO0lBQ0QsT0FBTyxLQUFLLENBQUM7QUFDakIsQ0FBQztBQVpELDZCQVlDIn0=
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOztBQUVkLGlEQUFvRDtBQUVwRDs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQTRCRztBQUNILFNBQXdCLFVBQVUsQ0FDOUIsR0FBZ0IsRUFDaEIsUUFBZ0I7SUFFaEIsR0FBRyxHQUFHLEdBQUcsQ0FBQyxlQUFlLENBQUM7SUFDMUIsT0FBTyxHQUFHLEVBQUU7UUFDUixJQUFJLElBQUEsZUFBUyxFQUFDLEdBQUcsRUFBRSxRQUFRLENBQUMsRUFBRTtZQUMxQixPQUFPLEdBQUcsQ0FBQztTQUNkO1FBQ0QsR0FBRyxHQUFHLEdBQUcsQ0FBQyxlQUFlLENBQUM7S0FDN0I7SUFDRCxPQUFPLEtBQUssQ0FBQztBQUNqQixDQUFDO0FBWkQsNkJBWUMifQ==

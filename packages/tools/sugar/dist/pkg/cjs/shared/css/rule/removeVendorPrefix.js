@@ -21,7 +21,7 @@
  * __removeVendorPrefix('moz-something'); // 'something'
  *
  * @see            https://github.com/marionebl/jogwheel/blob/master/source/library/remove-vendor-prefix.js
- @since           2.0.0
+ * @since           2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 Object.defineProperty(exports, "__esModule", { value: true });

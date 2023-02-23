@@ -1,2 +1,2 @@
 
-export default function __whenTransitionEnd(elm: HTMLElement, cb?: Function): Promise<HTMLElement>;
+export default function __whenTransitionEnd(elm: HTMLElement): Promise<HTMLElement>;

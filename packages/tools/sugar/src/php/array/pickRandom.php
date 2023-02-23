@@ -14,6 +14,8 @@ namespace Sugar\ar;
  * @param       {Array}         $array          The array in which you want to pick a random item
  * @return      {Any}                         The random array item
  *
+ * @snippet         \Sugar\ar\pickRandom($1);
+ *
  * @example         php
  * \Sugar\ar\pickRandom(['hello','world','test']);
  *

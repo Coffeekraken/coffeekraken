@@ -26,6 +26,8 @@ namespace Sugar\css;
  * @setting         {Boolean}       [minify=true]             Minify the output css or not
  * @setting         {Array}         [$scope=['bare','lnf','gap','align','justify']]             The scope(s) you want to generate
  *
+ * @snippet         \Sugar\css\layoutCss($1);
+ *
  * @example         php
  * \Sugar\css\layoutCss('1 2 _ 3 3', [
  *    'selector' => '.my-layout'

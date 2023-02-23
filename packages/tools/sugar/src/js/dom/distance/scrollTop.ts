@@ -11,6 +11,8 @@
  *
  * @return      {Number}            The amount of scroll top that the user as made in the page
  *
+ * @snippet         __scrollTop();
+ *
  * @todo      interface
  * @todo      doc
  * @todo      tests
@@ -19,7 +21,7 @@
  * import { __scrollTop } from '@coffeekraken/sugar/dom';
  * __scrollTop();
  *
- @since           2.0.0
+ * @since           2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io) (https://olivierbossel.com)
  */
 function scrollTop(): number {

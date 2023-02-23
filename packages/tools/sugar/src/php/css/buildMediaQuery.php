@@ -27,6 +27,8 @@ namespace Sugar\css;
  * @setting         {String}        [defaultQuery='screen']         A default query to always use in the generation
  * @setting         {Array}         [queries=['mobile'=>[],'tablet'=>[],'desktop'=>[],'wide'=>[],'dwarf'=>[]]]      All the available queries you want to support with for each the "min-width|height" and "max-width|height" values in integer (used as px)
  *
+ * @snippet         \Sugar\css\buildMediaQuery($1);
+ *
  * @example         php
  * \Sugar\css\buildMediaQuery('desktop');
  * \Sugar\css\buildMediaQuery('>desktop');

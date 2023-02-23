@@ -13,12 +13,14 @@
  * @todo      doc
  * @todo      tests
  *
+ * @snippet         __cursorToEnd($1);
+ *
  * @example 	js
  * import { __cursorToEnd } from '@coffeekraken/sugar/dom';
  * __cursorToEnd($input);
  *
  * @see             https://stackoverflow.com/a/56416714
- @since           2.0.0
+ * @since           2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierboss$input.com)
  */
 export default function __cursorToEnd($input) {

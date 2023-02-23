@@ -10,52 +10,16 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 import { __observeAttributes } from '@coffeekraken/sugar/dom';
 import __autoCast from '../../../shared/string/autoCast';
-/**
- * @name      whenAttribute
- * @namespace            js.dom.detect
- * @type      Function
- * @platform          js
- * @status        stable
- * @async
- *
- * Resolve a promise when the wanted attribute on the passed HTMLElement exist or pass the check function provided
- *
- * @feature       Detect attribute changes
- * @feature       Possibility to pass a check function to check if the attribute suits your needs
- * @feature       Promise based API
- *
- * @param 		{HTMLElement} 				elm 				The HTMLElement on which to monitor the property
- * @param 		{String} 					attribute 			The attribute to monitor
- * @param 		{Function} 					[checkFn=null] 		An optional function to check the attribute. The promise is resolved when this function return true
- * @return 		(Promise) 										The promise that will be resolved when the attribute exist on the element (and that it passes the checkFn)
- *
- * @todo      tests
- *
- * @example 	js
- * import { __whenAttribute } from '@coffeekraken/sugar/dom'
- * __whenAttribute(myCoolHTMLElement, 'value').then((value) => {
- * 		// the value attribute exist on the element
- * });
- * // with a checkFn
- * __whenAttribute(myCoolHTMLElement, 'value', (newVal, oldVal) => {
- * 		// make sure the value is a number
- * 		return typeof(newVal) === 'number';
- * }).then((value) => {
- * 		// do something with your number value...
- * });
- *
- @since           2.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
-export default function __whenAttribute(elm, attrName, checkFn = null) {
-    return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
+export default function __whenAttribute(elm, attrName, settings) {
+    return new Promise((resolve) => __awaiter(this, void 0, void 0, function* () {
+        const finalSettings = Object.assign({ check: undefined }, (settings !== null && settings !== void 0 ? settings : {}));
         if (elm.hasAttribute(attrName)) {
             const value = __autoCast(elm.getAttribute(attrName));
-            if (checkFn && checkFn(value, value)) {
+            if (finalSettings.check && finalSettings.check(value, value)) {
                 resolve(value);
                 return;
             }
-            else if (!checkFn) {
+            else if (!finalSettings.check) {
                 resolve(value);
                 return;
             }
@@ -64,11 +28,12 @@ export default function __whenAttribute(elm, attrName, checkFn = null) {
         obs.on('attribute', (mutation) => {
             if (mutation.attributeName === attrName) {
                 const value = __autoCast(mutation.target.getAttribute(mutation.attributeName));
-                if (checkFn && checkFn(value, mutation.oldValue)) {
+                if (finalSettings.check &&
+                    finalSettings.check(value, mutation.oldValue)) {
                     resolve(value);
                     obs.cancel();
                 }
-                else if (!checkFn) {
+                else if (!finalSettings.check) {
                     resolve(value);
                     obs.cancel();
                 }
@@ -76,4 +41,4 @@ export default function __whenAttribute(elm, attrName, checkFn = null) {
         });
     }));
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7Ozs7Ozs7Ozs7QUFFZCxPQUFPLEVBQUUsbUJBQW1CLEVBQUUsTUFBTSx5QkFBeUIsQ0FBQztBQUM5RCxPQUFPLFVBQVUsTUFBTSxpQ0FBaUMsQ0FBQztBQUV6RDs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBb0NHO0FBQ0gsTUFBTSxDQUFDLE9BQU8sVUFBVSxlQUFlLENBQUMsR0FBRyxFQUFFLFFBQVEsRUFBRSxPQUFPLEdBQUcsSUFBSTtJQUNqRSxPQUFPLElBQUksT0FBTyxDQUFDLENBQU8sT0FBTyxFQUFFLE1BQU0sRUFBRSxFQUFFO1FBQ3pDLElBQUksR0FBRyxDQUFDLFlBQVksQ0FBQyxRQUFRLENBQUMsRUFBRTtZQUM1QixNQUFNLEtBQUssR0FBRyxVQUFVLENBQUMsR0FBRyxDQUFDLFlBQVksQ0FBQyxRQUFRLENBQUMsQ0FBQyxDQUFDO1lBQ3JELElBQUksT0FBTyxJQUFJLE9BQU8sQ0FBQyxLQUFLLEVBQUUsS0FBSyxDQUFDLEVBQUU7Z0JBQ2xDLE9BQU8sQ0FBQyxLQUFLLENBQUMsQ0FBQztnQkFDZixPQUFPO2FBQ1Y7aUJBQU0sSUFBSSxDQUFDLE9BQU8sRUFBRTtnQkFDakIsT0FBTyxDQUFDLEtBQUssQ0FBQyxDQUFDO2dCQUNmLE9BQU87YUFDVjtTQUNKO1FBRUQsTUFBTSxHQUFHLEdBQUcsbUJBQW1CLENBQUMsR0FBRyxDQUFDLENBQUM7UUFFckMsR0FBRyxDQUFDLEVBQUUsQ0FBQyxXQUFXLEVBQUUsQ0FBQyxRQUFRLEVBQUUsRUFBRTtZQUM3QixJQUFJLFFBQVEsQ0FBQyxhQUFhLEtBQUssUUFBUSxFQUFFO2dCQUNyQyxNQUFNLEtBQUssR0FBRyxVQUFVLENBQ3BCLFFBQVEsQ0FBQyxNQUFNLENBQUMsWUFBWSxDQUFDLFFBQVEsQ0FBQyxhQUFhLENBQUMsQ0FDdkQsQ0FBQztnQkFDRixJQUFJLE9BQU8sSUFBSSxPQUFPLENBQUMsS0FBSyxFQUFFLFFBQVEsQ0FBQyxRQUFRLENBQUMsRUFBRTtvQkFDOUMsT0FBTyxDQUFDLEtBQUssQ0FBQyxDQUFDO29CQUNmLEdBQUcsQ0FBQyxNQUFNLEVBQUUsQ0FBQztpQkFDaEI7cUJBQU0sSUFBSSxDQUFDLE9BQU8sRUFBRTtvQkFDakIsT0FBTyxDQUFDLEtBQUssQ0FBQyxDQUFDO29CQUNmLEdBQUcsQ0FBQyxNQUFNLEVBQUUsQ0FBQztpQkFDaEI7YUFDSjtRQUNMLENBQUMsQ0FBQyxDQUFDO0lBQ1AsQ0FBQyxDQUFBLENBQUMsQ0FBQztBQUNQLENBQUMifQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7Ozs7Ozs7Ozs7QUFFZCxPQUFPLEVBQUUsbUJBQW1CLEVBQUUsTUFBTSx5QkFBeUIsQ0FBQztBQUM5RCxPQUFPLFVBQVUsTUFBTSxpQ0FBaUMsQ0FBQztBQXNEekQsTUFBTSxDQUFDLE9BQU8sVUFBVSxlQUFlLENBQ25DLEdBQUcsRUFDSCxRQUFRLEVBQ1IsUUFBMEM7SUFFMUMsT0FBTyxJQUFJLE9BQU8sQ0FBQyxDQUFPLE9BQU8sRUFBRSxFQUFFO1FBQ2pDLE1BQU0sYUFBYSxtQkFDZixLQUFLLEVBQUUsU0FBUyxJQUNiLENBQUMsUUFBUSxhQUFSLFFBQVEsY0FBUixRQUFRLEdBQUksRUFBRSxDQUFDLENBQ3RCLENBQUM7UUFFRixJQUFJLEdBQUcsQ0FBQyxZQUFZLENBQUMsUUFBUSxDQUFDLEVBQUU7WUFDNUIsTUFBTSxLQUFLLEdBQUcsVUFBVSxDQUFDLEdBQUcsQ0FBQyxZQUFZLENBQUMsUUFBUSxDQUFDLENBQUMsQ0FBQztZQUNyRCxJQUFJLGFBQWEsQ0FBQyxLQUFLLElBQUksYUFBYSxDQUFDLEtBQUssQ0FBQyxLQUFLLEVBQUUsS0FBSyxDQUFDLEVBQUU7Z0JBQzFELE9BQU8sQ0FBQyxLQUFLLENBQUMsQ0FBQztnQkFDZixPQUFPO2FBQ1Y7aUJBQU0sSUFBSSxDQUFDLGFBQWEsQ0FBQyxLQUFLLEVBQUU7Z0JBQzdCLE9BQU8sQ0FBQyxLQUFLLENBQUMsQ0FBQztnQkFDZixPQUFPO2FBQ1Y7U0FDSjtRQUVELE1BQU0sR0FBRyxHQUFHLG1CQUFtQixDQUFDLEdBQUcsQ0FBQyxDQUFDO1FBRXJDLEdBQUcsQ0FBQyxFQUFFLENBQUMsV0FBVyxFQUFFLENBQUMsUUFBUSxFQUFFLEVBQUU7WUFDN0IsSUFBSSxRQUFRLENBQUMsYUFBYSxLQUFLLFFBQVEsRUFBRTtnQkFDckMsTUFBTSxLQUFLLEdBQUcsVUFBVSxDQUNwQixRQUFRLENBQUMsTUFBTSxDQUFDLFlBQVksQ0FBQyxRQUFRLENBQUMsYUFBYSxDQUFDLENBQ3ZELENBQUM7Z0JBQ0YsSUFDSSxhQUFhLENBQUMsS0FBSztvQkFDbkIsYUFBYSxDQUFDLEtBQUssQ0FBQyxLQUFLLEVBQUUsUUFBUSxDQUFDLFFBQVEsQ0FBQyxFQUMvQztvQkFDRSxPQUFPLENBQUMsS0FBSyxDQUFDLENBQUM7b0JBQ2YsR0FBRyxDQUFDLE1BQU0sRUFBRSxDQUFDO2lCQUNoQjtxQkFBTSxJQUFJLENBQUMsYUFBYSxDQUFDLEtBQUssRUFBRTtvQkFDN0IsT0FBTyxDQUFDLEtBQUssQ0FBQyxDQUFDO29CQUNmLEdBQUcsQ0FBQyxNQUFNLEVBQUUsQ0FBQztpQkFDaEI7YUFDSjtRQUNMLENBQUMsQ0FBQyxDQUFDO0lBQ1AsQ0FBQyxDQUFBLENBQUMsQ0FBQztBQUNQLENBQUMifQ==

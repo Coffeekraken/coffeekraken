@@ -71,7 +71,7 @@ function _decodeHtml(html) {
  * const myCoolElement = document.querySelector('.my-cool-element');
  * __splitLetters(myCoolElement);
  *
- @since           2.0.0
+ * @since           2.0.0
  * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 

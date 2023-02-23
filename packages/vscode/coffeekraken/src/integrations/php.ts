@@ -45,11 +45,14 @@ export default function phpIntegration(docmapJson: any): void {
 
         docmapObj._phpId = str;
 
-        const snippetCompletion = new vscode.CompletionItem(str);
+        const snippetCompletion = new vscode.CompletionItem(
+            docmapObj.snippet.label,
+        );
         snippetCompletion.kind = vscode.CompletionItemKind.Function;
-        snippetCompletion.label = label;
-        snippetCompletion.filterText = `${docmapObj.namespace}.${label}`;
-        snippetCompletion.insertText = new vscode.SnippetString(str);
+        snippetCompletion.label = docmapObj.snippet.label.split('(')[0];
+        snippetCompletion.insertText = new vscode.SnippetString(
+            docmapObj.snippet.code ?? docmapObj.snippet.label,
+        );
 
         const docs: any = __popinContent(docmapObj, {
             title: str,

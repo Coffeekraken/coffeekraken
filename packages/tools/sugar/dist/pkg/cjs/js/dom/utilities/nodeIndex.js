@@ -25,7 +25,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
  * // <li>item #3</li>
  *  __nodeIndex(document.querySelector('.match')) // 1
  *
- @since           2.0.0
+ * @since           2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 function __nodeIndex(node) {

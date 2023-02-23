@@ -14,6 +14,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
  * @param 		{HTMLElement} 				refElm 		The element in which to prepend the new element
  * @return    {HTMLElement}               The prepended element
  *
+ * @snippet         __prependChild($1, $2);
+ *
  * @todo      interface
  * @todo      doc
  * @todo      tests
@@ -22,7 +24,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
  * import { __prependChild } from '@coffeekraken/sugar/dom'
  * __prependChild(myElementToInsert, theReferenceElement);
  *
- @since           2.0.0
+ * @since           2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 function __prependChild(elm, refElm) {
@@ -35,4 +37,4 @@ function __prependChild(elm, refElm) {
     return elm;
 }
 exports.default = __prependChild;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOztBQUVkOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQXVCRztBQUNILFNBQXdCLGNBQWMsQ0FDbEMsR0FBZ0IsRUFDaEIsTUFBbUI7SUFFbkIsSUFBSSxDQUFDLE1BQU0sQ0FBQyxVQUFVLEVBQUU7UUFDcEIsTUFBTSxDQUFDLFdBQVcsQ0FBQyxHQUFHLENBQUMsQ0FBQztLQUMzQjtTQUFNO1FBQ0gsTUFBTSxDQUFDLFlBQVksQ0FBQyxHQUFHLEVBQUUsTUFBTSxDQUFDLFVBQVUsQ0FBQyxDQUFDO0tBQy9DO0lBQ0QsT0FBTyxHQUFHLENBQUM7QUFDZixDQUFDO0FBVkQsaUNBVUMifQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOztBQUVkOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBeUJHO0FBQ0gsU0FBd0IsY0FBYyxDQUNsQyxHQUFnQixFQUNoQixNQUFtQjtJQUVuQixJQUFJLENBQUMsTUFBTSxDQUFDLFVBQVUsRUFBRTtRQUNwQixNQUFNLENBQUMsV0FBVyxDQUFDLEdBQUcsQ0FBQyxDQUFDO0tBQzNCO1NBQU07UUFDSCxNQUFNLENBQUMsWUFBWSxDQUFDLEdBQUcsRUFBRSxNQUFNLENBQUMsVUFBVSxDQUFDLENBQUM7S0FDL0M7SUFDRCxPQUFPLEdBQUcsQ0FBQztBQUNmLENBQUM7QUFWRCxpQ0FVQyJ9

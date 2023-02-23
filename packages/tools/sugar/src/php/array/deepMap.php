@@ -15,6 +15,11 @@ namespace Sugar\ar;
  * @param       {Function}      $callback       The function to run on each values. Must return the new value to set
  * @return      {Array}                         The processed array
  *
+ * @snippet     \Sugar\ar\deepMap($1, $2);
+ * \Sugar\ar\deepMap($1, function(\$prop, \$value, \$object) {
+ *      $0
+ * });
+ *
  * @example         php
  * \Sugar\ar\deepMap([
  *    'prop1' => 'Hello',

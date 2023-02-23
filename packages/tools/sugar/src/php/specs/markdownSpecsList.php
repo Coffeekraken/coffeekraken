@@ -16,6 +16,8 @@ namespace Sugar\specs;
  * @param       {Object}            [$override=[]]           An object to override some of the passed specs
  * @return      {String}                                    The markdown list string
  *
+ * @snippet             \Sugar\specs\markdownSpecsList($1);
+ *
  * @example       php
  * $markdown = \Sugar\specs\markdownSpecsList($mySpecs);
  *

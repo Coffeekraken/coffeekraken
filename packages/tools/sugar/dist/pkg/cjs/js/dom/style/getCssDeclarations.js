@@ -24,7 +24,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
  * __getCssDeclarations('style', [myCoolCssRules]);
  *
  * @see             https://github.com/marionebl/jogwheel/blob/master/source/library/get-declarations.js
- @since           2.0.0
+ * @since           2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 function getCssDeclarations(typeName = 'style', rules = [], predecate = Boolean) {

@@ -10,6 +10,8 @@
  * @param 		{MouseEvent|TouchEvent} 					e  		The event to get the position from
  * @return 		{x: number; y: number;} 									The absolute position of the event
  *
+ * @snippet         __positionFromEvent($1);
+ *
  * @todo      interface
  * @todo      doc
  * @todo      tests
@@ -19,7 +21,7 @@
  * __positionFromEvent(e);
  * // output : { x, 230, y: 122 }
  *
- @since           2.0.0
+ * @since           2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 export default function __positionFromEvent(e: MouseEvent | TouchEvent): {

@@ -14,6 +14,8 @@ namespace Sugar\path;
  * @param     {String}      The path to parse and get the extension from
  * @return    {String}    The extension of the passed path
  *
+ * @snippet             \Sugar\path\extension($1);
+ *
  * @example    php
  * \Sugar\path\extension('/path/to/file.ext'); // => ext
  *

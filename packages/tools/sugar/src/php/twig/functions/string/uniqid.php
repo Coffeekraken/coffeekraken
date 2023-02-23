@@ -11,6 +11,8 @@
  *
  * @return      {String}                        The generated uniqid
  *
+ * @snippet             __uniqid()
+ *
  * @example       twig
  * {% set id = __uniqid() %}
  *

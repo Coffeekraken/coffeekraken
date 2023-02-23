@@ -12,6 +12,8 @@ import __setCookie from './setCookie';
  * @param       {String}            name            The cookie name to delete
  * @return      {any}                               The cookie value
  *
+ * @snippet         __deleteCookie($1);
+ *
  * @example         js
  * import { __deleteCookie } from '@coffeekraken/sugar/cookie';
  * __deleteCookie('myCookie');

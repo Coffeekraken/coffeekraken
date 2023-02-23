@@ -16,6 +16,8 @@ namespace Sugar\specs;
  * @param       {Object}            [$override=[]]           An associative array or an object that specify each specs details like `{margin:{title:'Margin',description':'Manage margins'}}`
  * @return      {String}                                    The markdown list string
  *
+ * @snippet             \Sugar\specs\specsToMarkdown($1);
+ *
  * @example       php
  * $markdown = \Sugar\specs\specsToMarkdown(['margin','padding'], [
  *   "margin" => [

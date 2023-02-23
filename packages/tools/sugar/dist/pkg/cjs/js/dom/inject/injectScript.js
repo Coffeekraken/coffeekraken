@@ -14,6 +14,8 @@ const dom_1 = require("@coffeekraken/sugar/dom");
  * @param    {String}    src    The script src to load
  * @return    {Promise}    A promise resolved with the script tag when it has fully loaded
  *
+ * @snippet         __injectScript($1);
+ *
  * @todo      interface
  * @todo      doc
  * @todo      tests
@@ -22,7 +24,7 @@ const dom_1 = require("@coffeekraken/sugar/dom");
  * import { __injectScript } from '@coffeekraken/sugar/dom'
  *  __injectScript('dist/js/app.js')
  *
- @since           2.0.0
+ * @since           2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 function __injectScript(src, $parent = document.body) {
@@ -32,4 +34,4 @@ function __injectScript(src, $parent = document.body) {
     return (0, dom_1.__whenScriptLoaded)($script);
 }
 exports.default = __injectScript;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOztBQUVkLGlEQUE2RDtBQUU3RDs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQXNCRztBQUNILFNBQXdCLGNBQWMsQ0FDbEMsR0FBVyxFQUNYLFVBQXVCLFFBQVEsQ0FBQyxJQUFJO0lBRXBDLE1BQU0sT0FBTyxHQUFHLFFBQVEsQ0FBQyxhQUFhLENBQUMsUUFBUSxDQUFDLENBQUM7SUFDakQsT0FBTyxDQUFDLEdBQUcsR0FBRyxHQUFHLENBQUM7SUFDbEIsT0FBTyxDQUFDLFdBQVcsQ0FBQyxPQUFPLENBQUMsQ0FBQztJQUM3QixPQUFPLElBQUEsd0JBQWtCLEVBQUMsT0FBTyxDQUFDLENBQUM7QUFDdkMsQ0FBQztBQVJELGlDQVFDIn0=
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOztBQUVkLGlEQUE2RDtBQUU3RDs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBd0JHO0FBQ0gsU0FBd0IsY0FBYyxDQUNsQyxHQUFXLEVBQ1gsVUFBdUIsUUFBUSxDQUFDLElBQUk7SUFFcEMsTUFBTSxPQUFPLEdBQUcsUUFBUSxDQUFDLGFBQWEsQ0FBQyxRQUFRLENBQUMsQ0FBQztJQUNqRCxPQUFPLENBQUMsR0FBRyxHQUFHLEdBQUcsQ0FBQztJQUNsQixPQUFPLENBQUMsV0FBVyxDQUFDLE9BQU8sQ0FBQyxDQUFDO0lBQzdCLE9BQU8sSUFBQSx3QkFBa0IsRUFBQyxPQUFPLENBQUMsQ0FBQztBQUN2QyxDQUFDO0FBUkQsaUNBUUMifQ==

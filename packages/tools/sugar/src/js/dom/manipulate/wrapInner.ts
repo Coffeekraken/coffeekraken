@@ -13,6 +13,8 @@
  * @param    {HTMLElement}    $wrapper    The wrapper element
  * @return    {HTMLElement}             Return the parent element
  *
+ * @snippet         __wrapInner($1, $2);
+ *
  * @todo      interface
  * @todo      doc
  * @todo      tests
@@ -32,7 +34,7 @@
  * //   </div>
  * // </div>
  *
- @since           2.0.0
+ * @since           2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel@gmail.com)
  */
 export default function __wrapInner(

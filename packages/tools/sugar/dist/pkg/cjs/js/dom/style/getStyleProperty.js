@@ -30,7 +30,7 @@ const camelize_1 = __importDefault(require("../../../shared/string/camelize"));
  * const opacity = __getStyleProperty(myCoolHTMLElement, 'opacity');
  *
  * @see 		https://developer.mozilla.org/en-US/docs/Web/API/Window/getComputedStyle
- @since           2.0.0
+ * @since           2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 function __getStyleProperty(elm, property) {

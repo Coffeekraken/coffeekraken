@@ -18,6 +18,8 @@
  * @todo      doc
  * @todo      tests
  *
+ * @snippet         __emToPx($1);
+ *
  * @example         js
  * import { __emToPx } from '@coffeekraken/sugar/convert';
  * __emToPx(2);

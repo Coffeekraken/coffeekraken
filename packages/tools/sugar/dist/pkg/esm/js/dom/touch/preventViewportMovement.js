@@ -19,7 +19,7 @@
  * import { __preventViewportMovement } from '@coffeekraken/sugar/dom'
  * __preventViewportMovement($elm)
  *
- @since           2.0.0
+ * @since           2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 export default function __preventViewportMovement($elm) {

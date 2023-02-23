@@ -21,7 +21,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
  * import { __requestFullscreen } from '@coffeekraken/sugar/dom'
  *  __requestFullscreen(myDomElm)
  *
- @since           2.0.0
+ * @since           2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 function __requestFullscreen(elm) {

@@ -14,6 +14,8 @@ const dom_1 = require("@coffeekraken/sugar/dom");
  * @param 		{HTMLElement} 					elm  		The element to get the offset from
  * @return 		{top: number; left: number;} 									The offset top and left object
  *
+ * @snippet         __offsetFromParent($1);
+ *
  * @todo      interface
  * @todo      doc
  * @todo      tests
@@ -23,7 +25,7 @@ const dom_1 = require("@coffeekraken/sugar/dom");
  * const offsetFromParentElm = __offsetFromParent(myCoolElement);
  * // output : { top : 200, left : 300 }
  *
- @since           2.0.0
+ * @since           2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 function __offsetFromParent(elm) {
@@ -35,4 +37,4 @@ function __offsetFromParent(elm) {
     };
 }
 exports.default = __offsetFromParent;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOztBQUVkLGlEQUErRDtBQUMvRDs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0F1Qkc7QUFDSCxTQUF3QixrQkFBa0IsQ0FBQyxHQUFnQjtJQUl2RCxNQUFNLFlBQVksR0FBRyxJQUFBLDBCQUFvQixFQUFDLEdBQUcsQ0FBQyxVQUFVLENBQUMsQ0FBQztJQUMxRCxNQUFNLE1BQU0sR0FBRyxJQUFBLDBCQUFvQixFQUFDLEdBQUcsQ0FBQyxDQUFDO0lBQ3pDLE9BQU87UUFDSCxHQUFHLEVBQUUsTUFBTSxDQUFDLEdBQUcsR0FBRyxZQUFZLENBQUMsR0FBRztRQUNsQyxJQUFJLEVBQUUsTUFBTSxDQUFDLElBQUksR0FBRyxZQUFZLENBQUMsSUFBSTtLQUN4QyxDQUFDO0FBQ04sQ0FBQztBQVZELHFDQVVDIn0=
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOztBQUVkLGlEQUErRDtBQUMvRDs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQXlCRztBQUNILFNBQXdCLGtCQUFrQixDQUFDLEdBQWdCO0lBSXZELE1BQU0sWUFBWSxHQUFHLElBQUEsMEJBQW9CLEVBQUMsR0FBRyxDQUFDLFVBQVUsQ0FBQyxDQUFDO0lBQzFELE1BQU0sTUFBTSxHQUFHLElBQUEsMEJBQW9CLEVBQUMsR0FBRyxDQUFDLENBQUM7SUFDekMsT0FBTztRQUNILEdBQUcsRUFBRSxNQUFNLENBQUMsR0FBRyxHQUFHLFlBQVksQ0FBQyxHQUFHO1FBQ2xDLElBQUksRUFBRSxNQUFNLENBQUMsSUFBSSxHQUFHLFlBQVksQ0FBQyxJQUFJO0tBQ3hDLENBQUM7QUFDTixDQUFDO0FBVkQscUNBVUMifQ==

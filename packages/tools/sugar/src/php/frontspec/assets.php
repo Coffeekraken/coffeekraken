@@ -15,6 +15,8 @@ namespace Sugar\frontspec;
  * @param     {String}      [$cacheBuster='']      A string to be added to the asset url to bust cache
  * @return    {String}    The HTML code of the assets
  *
+ * @snippet             \Sugar\frontspec\assets($1);
+ *
  * @example    php
  * \Sugar\frontspec\assets($frontspec);
  *

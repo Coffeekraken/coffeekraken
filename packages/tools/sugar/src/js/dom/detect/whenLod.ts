@@ -21,10 +21,14 @@
  * See @coffeekraken/s-theme package for more infos
  *
  * @feature       Promise based API
- * @feature       Callback support
  *
  * @param       {Number}                    number      The level of details to wait on
  * @return 		{Promise} 								The promise that will be resolved
+ *
+ * @snippet         __whenLod($1);
+ * __whenLod($1).then(() => {
+ *      $2
+ * });
  *
  * @todo      interface
  * @todo      doc
@@ -32,11 +36,11 @@
  *
  * @example  	js
  * import { __whenLod } from '@coffeekraken/sugar/dom'
- * __whenLod(3).then((link) => {
+ * __whenLod(3).then(() => {
  * 		// do something when the lod is reached
  * });
  *
- @since           2.0.0
+ * @since           2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 export default function whenLod(level: number): Promise<void> {

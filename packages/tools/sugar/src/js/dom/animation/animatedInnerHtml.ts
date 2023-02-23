@@ -24,6 +24,8 @@ import __convertTime from '../../../shared/datetime/convertTime';
  * @param           {Object}                 [settings={}]  The settings to change the content like 'animIn', 'animOut', and more...
  * @return          {Promise}                               A promise resolved when the change has been made
  *
+ * @snippet         __animatedInnerHtml($1, $2);
+ *
  * @todo      interface
  * @todo      doc
  * @todo      tests
@@ -44,7 +46,7 @@ import __convertTime from '../../../shared/datetime/convertTime';
  *    // do something when the change has been made...
  * });
  *
- @since           2.0.0
+ * @since           2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 export default function __animatedInnerHtml(node, content, settings = {}) {

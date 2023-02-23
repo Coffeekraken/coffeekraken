@@ -26,7 +26,7 @@ const css_1 = require("@coffeekraken/sugar/css");
  * 		display : null
  * });
  *
- @since           2.0.0
+ * @since           2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 function __style(elm, styleObj) {

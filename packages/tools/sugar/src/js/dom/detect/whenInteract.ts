@@ -24,15 +24,22 @@ import __WhenInteractSettingsInterface from './interface/WhenInteractSettingsInt
  * @setting         {boolean}           [touchend=true]          Specify if you want to detect the touchend or not
  * @setting         {boolean}           [focus=true]          Specify if you want to detect the focus or not
  *
+ * @snippet         __whenInteract($1);
+ * __whenInteract($1).then(\$elm => {
+ *      $2
+ * });
+ *
  * @todo      interface
  * @todo      doc
  * @todo      tests
  *
  * @example  	js
  * import { __whenInteract } from '@coffeekraken/sugar/js/dom/detect/whenInteract'
- * await __whenInteract(myCoolElement);
+ * __whenInteract(myCoolElement).then($elm => {
+ *      // do something...
+ * });
  *
- @since           2.0.0
+ * @since           2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 

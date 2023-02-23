@@ -20,7 +20,7 @@
  * import { __requestFullscreen } from '@coffeekraken/sugar/dom'
  *  __requestFullscreen(myDomElm)
  *
- @since           2.0.0
+ * @since           2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 export default function __requestFullscreen(elm: HTMLElement): Promise<any> {

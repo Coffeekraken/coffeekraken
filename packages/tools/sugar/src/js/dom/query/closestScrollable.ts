@@ -14,6 +14,8 @@ import { __isScrollable, __traverseUp } from '@coffeekraken/sugar/dom';
  * @param 		{HTMLElement} 					$elm  		The element to start on
  * @return 		{HTMLElement} 								The element found or null
  *
+ * @snippet         __closestScrollable($1);
+ *
  * @todo      interface
  * @todo      doc
  * @todo      tests
@@ -22,7 +24,7 @@ import { __isScrollable, __traverseUp } from '@coffeekraken/sugar/dom';
  * import { __closestScrollable } from '@coffeekraken/sugar/dom';
  * __closestScrollable($myElement);
  *
- @since           2.0.0
+ * @since           2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 export default function __closestScrollable(

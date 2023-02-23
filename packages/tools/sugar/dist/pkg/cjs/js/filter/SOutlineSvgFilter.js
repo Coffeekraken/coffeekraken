@@ -21,7 +21,7 @@ const filter_1 = require("@coffeekraken/sugar/filter");
  * @todo      doc
  * @todo      tests
  *
- @since           2.0.0
+ * @since           2.0.0
  * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 class __SOutlineSvgFilter extends filter_1.__SSvgFilter {

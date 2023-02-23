@@ -22,7 +22,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
  * import { __isLinux } from '@coffeekraken/sugar/is';
  * __isLinux(); // => true
  *
- @since           2.0.0
+ * @since           2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 function __isLinux() {

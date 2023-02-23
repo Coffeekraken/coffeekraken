@@ -15,6 +15,8 @@ namespace Sugar\html;
  * @param       {String}        $html           The html to process
  * @return      {String}                       The processed html
  *
+ * @snippet             \Sugar\html\expandPleasantCssClassnames($1);
+ *
  * @example      php
  * Sugar\html\expandPleasantCssClassnames('...html');
  *

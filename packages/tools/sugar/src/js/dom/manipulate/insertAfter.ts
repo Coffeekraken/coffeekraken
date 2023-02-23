@@ -13,6 +13,8 @@
  * @param 		{HTMLElement} 				refElm 		The element after which to insert the passed element
  * @return    {HTMLElement}               The inserted node
  *
+ * @snippet         __insertAfter($1, $2);
+ *
  * @todo      interface
  * @todo      doc
  * @todo      tests
@@ -21,7 +23,7 @@
  * import { __insertAfter } from '@coffeekraken/sugar/dom'
  * __insertAfter(myElementToInsert, theReferenceElement);
  *
- @since           2.0.0
+ * @since           2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 export default function __insertAfter(

@@ -19,6 +19,11 @@
  *
  * @setting       {String}      [offset=10px]     An offset to detect sooner or later the element exits the viewport
  *
+ * @snippet         __whenOutOfViewport($1);
+ * __whenOutOfViewport($1).then(\$elm => {
+ *      $2
+ * });
+ *
  * @todo      tests
  *
  * @example 	js
@@ -27,7 +32,7 @@
  * 		// do something with your element that has exit the viewport...
  * });
  *
- @since           2.0.0
+ * @since           2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 

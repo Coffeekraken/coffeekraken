@@ -15,13 +15,20 @@ const dom_1 = require("@coffeekraken/sugar/dom");
  * @param    {HTMLElement}    elm    The element to listen on
  * @return   {Promise<HTMLElement>}                  A promise that will be resolved once the animation has ended
  *
+ * @snippet         __whenAnimationEnd($1);
+ * __whenAnimationEnd($1).then(\$elm => {
+ *      $2
+ * });
+ *
  * @todo      tests
  *
  * @example    js
  * import { __whenAnimationEnd } from '@coffeekraken/sugar/dom'
- * await __whenAnimationEnd(myCoolElm);
+ * __whenAnimationEnd(myCoolElm).then(($elm) => {
+ *      // do something...
+ * });
  *
- @since           2.0.0
+ * @since           2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 function __whenAnimationEnd($elm) {
@@ -32,4 +39,4 @@ function __whenAnimationEnd($elm) {
     });
 }
 exports.default = __whenAnimationEnd;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOztBQUVkLGlEQUFpRTtBQUVqRTs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBcUJHO0FBQ0gsU0FBd0Isa0JBQWtCLENBQ3RDLElBQWlCO0lBRWpCLE9BQU8sSUFBSSxPQUFPLENBQUMsQ0FBQyxPQUFPLEVBQUUsRUFBRTtRQUMzQixJQUFBLDRCQUFzQixFQUFDLElBQUksRUFBRSxjQUFjLEVBQUUsQ0FBQyxDQUFDLEVBQUUsRUFBRTtZQUMvQyxPQUFPLENBQUMsSUFBSSxDQUFDLENBQUM7UUFDbEIsQ0FBQyxDQUFDLENBQUM7SUFDUCxDQUFDLENBQUMsQ0FBQztBQUNQLENBQUM7QUFSRCxxQ0FRQyJ9
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOztBQUVkLGlEQUFpRTtBQUVqRTs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQTRCRztBQUNILFNBQXdCLGtCQUFrQixDQUN0QyxJQUFpQjtJQUVqQixPQUFPLElBQUksT0FBTyxDQUFDLENBQUMsT0FBTyxFQUFFLEVBQUU7UUFDM0IsSUFBQSw0QkFBc0IsRUFBQyxJQUFJLEVBQUUsY0FBYyxFQUFFLENBQUMsQ0FBQyxFQUFFLEVBQUU7WUFDL0MsT0FBTyxDQUFDLElBQUksQ0FBQyxDQUFDO1FBQ2xCLENBQUMsQ0FBQyxDQUFDO0lBQ1AsQ0FBQyxDQUFDLENBQUM7QUFDUCxDQUFDO0FBUkQscUNBUUMifQ==

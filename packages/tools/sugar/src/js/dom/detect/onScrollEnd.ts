@@ -21,6 +21,11 @@
  *
  * @todo      tests
  *
+ * @snippet         __onScrollEnd($1, $2);
+ * __onScrollEnd($1, () => {
+ *      $2
+ * });
+ *
  * @example         js
  * import { __onScrollEnd } from '@coffeekraken/sugar/dom';
  * __onScrollEnd($elm, () => {

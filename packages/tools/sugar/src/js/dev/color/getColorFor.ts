@@ -19,13 +19,15 @@ import __deepMerge from '../../../shared/object/deepMerge';
  * @param       {any}          for             Pass something to take as reference to get the same color back every time
  * @return      {String}                        A color name to use as you want
  *
+ * @snippet         __getColorFor($1);
+ *
  * @example         js
- * import getColorFor from '@coffeekraken/sugar/dev';
- * getColorFor('something'); // => cyan
- * getColorFor({
+ * import { __getColorFor } from '@coffeekraken/sugar/dev';
+ * __getColorFor('something'); // => cyan
+ * __getColorFor({
  *      else: true
  * }); // => magenta
- * getColorFor('something') // => cyan
+ * __getColorFor('something') // => cyan
  *
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)

@@ -14,6 +14,8 @@ namespace Sugar\lod;
  * @param       {Number}            $level          The lod level you want to generate classes for
  * @return      {String}                            The classes separated by spaces
  *
+ * @snippet             \Sugar\lod\lodClasses($1);
+ *
  * @example      php
  * Sugar\lod\lodClasses(2); // => .s-lod .s-lod--0 .s-lod--1 .s-lod--2
  *

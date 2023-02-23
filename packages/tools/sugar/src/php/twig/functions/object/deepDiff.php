@@ -15,6 +15,8 @@ namespace Sugar\object;
  * @param       {Object}         $object2         The object you want to deepDiff the first one
  * @return      {Object}                         The object with all the differences
  *
+ * @snippet             __deepDiff($1, $2)
+ *
  * @example         twig
  * {{ __deepDiff({
  *    prop1: 'Hello',

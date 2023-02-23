@@ -18,11 +18,14 @@ const dom_1 = require("@coffeekraken/sugar/dom");
  * See in the example bellow.
  *
  * @feature       Promise based API
- * @feature       Callback support
  *
  * @param    {Array<HTMLImageElement>}    $imgs    An array (or nodeList) of HTMLImageElement to detect the load
- * @param     {Function}          [cb=null]       A callback function if you prefer
  * @return    {Promise}    A promise resolved when all images are loaded properly
+ *
+ * @snippet         __whenImagesLoaded($1);
+ * __whenImagesLoaded($1).then(imgs => {
+ *      $2
+ * });
  *
  * @todo      interface
  * @todo      doc
@@ -34,25 +37,22 @@ const dom_1 = require("@coffeekraken/sugar/dom");
  * 	$img1, $img2, $img3
  * ]).on('loaded', $img => {
  *    // do something with the loaded image
- * }).then(() => {
+ * }).then(imgs => {
  *   // do something here
  * })
  *
- @since           2.0.0
+ * @since           2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-function __whenImagesLoaded($imgs, cb = null) {
+function __whenImagesLoaded($imgs) {
     return new s_promise_1.default(({ resolve, reject, emit }) => {
         const promises = [], loadedImages = [];
         Array.from($imgs).forEach(($img) => {
             promises.push((0, dom_1.__whenImageLoaded)($img)
                 .then((_$img) => {
                 loadedImages.push(_$img);
-                emit('img.loaded', _$img);
+                emit('loaded', _$img);
                 if (loadedImages.length === $imgs.length) {
-                    emit('loaded', loadedImages);
-                    if (cb)
-                        cb(loadedImages);
                     resolve(loadedImages);
                 }
             })
@@ -63,4 +63,4 @@ function __whenImagesLoaded($imgs, cb = null) {
     });
 }
 exports.default = __whenImagesLoaded;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOzs7OztBQUVkLHdFQUFpRDtBQUNqRCxpREFBNEQ7QUFFNUQ7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0FrQ0c7QUFDSCxTQUF3QixrQkFBa0IsQ0FDdEMsS0FBeUIsRUFDekIsRUFBRSxHQUFHLElBQUk7SUFFVCxPQUFPLElBQUksbUJBQVUsQ0FBQyxDQUFDLEVBQUUsT0FBTyxFQUFFLE1BQU0sRUFBRSxJQUFJLEVBQUUsRUFBRSxFQUFFO1FBQ2hELE1BQU0sUUFBUSxHQUFHLEVBQUUsRUFDZixZQUFZLEdBQUcsRUFBRSxDQUFDO1FBQ3RCLEtBQUssQ0FBQyxJQUFJLENBQUMsS0FBSyxDQUFDLENBQUMsT0FBTyxDQUFDLENBQUMsSUFBSSxFQUFFLEVBQUU7WUFDL0IsUUFBUSxDQUFDLElBQUksQ0FDVCxJQUFBLHVCQUFpQixFQUFDLElBQUksQ0FBQztpQkFDbEIsSUFBSSxDQUFDLENBQUMsS0FBSyxFQUFFLEVBQUU7Z0JBQ1osWUFBWSxDQUFDLElBQUksQ0FBQyxLQUFLLENBQUMsQ0FBQztnQkFDekIsSUFBSSxDQUFDLFlBQVksRUFBRSxLQUFLLENBQUMsQ0FBQztnQkFDMUIsSUFBSSxZQUFZLENBQUMsTUFBTSxLQUFLLEtBQUssQ0FBQyxNQUFNLEVBQUU7b0JBQ3RDLElBQUksQ0FBQyxRQUFRLEVBQUUsWUFBWSxDQUFDLENBQUM7b0JBQzdCLElBQUksRUFBRTt3QkFBRSxFQUFFLENBQUMsWUFBWSxDQUFDLENBQUM7b0JBQ3pCLE9BQU8sQ0FBQyxZQUFZLENBQUMsQ0FBQztpQkFDekI7WUFDTCxDQUFDLENBQUM7aUJBQ0QsS0FBSyxDQUFDLENBQUMsS0FBSyxFQUFFLEVBQUU7Z0JBQ2IsTUFBTSxDQUFDLEtBQUssQ0FBQyxDQUFDO1lBQ2xCLENBQUMsQ0FBQyxDQUNULENBQUM7UUFDTixDQUFDLENBQUMsQ0FBQztJQUNQLENBQUMsQ0FBQyxDQUFDO0FBQ1AsQ0FBQztBQXpCRCxxQ0F5QkMifQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOzs7OztBQUVkLHdFQUFpRDtBQUNqRCxpREFBNEQ7QUFFNUQ7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0FxQ0c7QUFDSCxTQUF3QixrQkFBa0IsQ0FDdEMsS0FBeUI7SUFFekIsT0FBTyxJQUFJLG1CQUFVLENBQUMsQ0FBQyxFQUFFLE9BQU8sRUFBRSxNQUFNLEVBQUUsSUFBSSxFQUFFLEVBQUUsRUFBRTtRQUNoRCxNQUFNLFFBQVEsR0FBRyxFQUFFLEVBQ2YsWUFBWSxHQUFHLEVBQUUsQ0FBQztRQUN0QixLQUFLLENBQUMsSUFBSSxDQUFDLEtBQUssQ0FBQyxDQUFDLE9BQU8sQ0FBQyxDQUFDLElBQUksRUFBRSxFQUFFO1lBQy9CLFFBQVEsQ0FBQyxJQUFJLENBQ1QsSUFBQSx1QkFBaUIsRUFBQyxJQUFJLENBQUM7aUJBQ2xCLElBQUksQ0FBQyxDQUFDLEtBQUssRUFBRSxFQUFFO2dCQUNaLFlBQVksQ0FBQyxJQUFJLENBQUMsS0FBSyxDQUFDLENBQUM7Z0JBQ3pCLElBQUksQ0FBQyxRQUFRLEVBQUUsS0FBSyxDQUFDLENBQUM7Z0JBQ3RCLElBQUksWUFBWSxDQUFDLE1BQU0sS0FBSyxLQUFLLENBQUMsTUFBTSxFQUFFO29CQUN0QyxPQUFPLENBQUMsWUFBWSxDQUFDLENBQUM7aUJBQ3pCO1lBQ0wsQ0FBQyxDQUFDO2lCQUNELEtBQUssQ0FBQyxDQUFDLEtBQUssRUFBRSxFQUFFO2dCQUNiLE1BQU0sQ0FBQyxLQUFLLENBQUMsQ0FBQztZQUNsQixDQUFDLENBQUMsQ0FDVCxDQUFDO1FBQ04sQ0FBQyxDQUFDLENBQUM7SUFDUCxDQUFDLENBQUMsQ0FBQztBQUNQLENBQUM7QUF0QkQscUNBc0JDIn0=

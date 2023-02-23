@@ -14,6 +14,8 @@ import { __whenLinkLoaded } from '@coffeekraken/sugar/dom';
  * @param    {String}    href    THe url to the stylesheet
  * @return    {Promise}    A promise when the stylesheet is loaded with the link element as parameter
  *
+ * @snippet         __injectStylesheet($1);
+ *
  * @todo      interface
  * @todo      doc
  * @todo      tests
@@ -22,7 +24,7 @@ import { __whenLinkLoaded } from '@coffeekraken/sugar/dom';
  * import { __injectStylesheet } from '@coffeekraken/sugar/dom'
  * __injectStylesheet('/dist/css/style.css')
  *
- @since           2.0.0
+ * @since           2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 export default function __injectStylesheet(

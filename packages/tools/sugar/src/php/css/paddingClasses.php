@@ -20,6 +20,8 @@ namespace Sugar\css;
  * @param       {Array|Object}          [$frontspec=[]]     The frontspec json to handle things like defaultMedia, etc...
  * @return      {String}                         The resulting css classes
  *
+ * @snippet         \Sugar\css\marginClasses($1);
+ *
  * @example         php
  * \Sugar\css\paddingClasses([
  *      'block' => 20,

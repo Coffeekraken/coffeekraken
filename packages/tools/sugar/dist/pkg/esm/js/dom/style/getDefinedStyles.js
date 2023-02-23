@@ -25,7 +25,7 @@
  * import { __getDefinedStyles } from '@coffeekraken/sugar/dom';
  *
  * @see             https://github.com/marionebl/jogwheel/blob/master/source/library/get-defined-styles.js
- @since           2.0.0
+ * @since           2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 export default function __getDefinedStyles(properties) {

@@ -20,6 +20,11 @@ import __SPromise from '@coffeekraken/s-promise';
  * @param    {Boolean}    [useCapture=false]    A Boolean value that specifies whether the event should be executed in the capturing or in the bubbling phase
  * @return    {SPromise}                An SPromise instance on which you can listen for events or simply "cancel" the listeneing process
  *
+ * @snippet         __addEventListener($1, $2, $3);
+ * __addEventListener($1, $2, e => {
+ *      $3
+ * });
+ *
  * @todo      interface
  * @todo      doc
  * @todo      tests
@@ -39,7 +44,7 @@ import __SPromise from '@coffeekraken/s-promise';
  *    // do something when the event is the mouseover one
  * });
  *
- @since           2.0.0
+ * @since           2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 export default function __addEventListener(

@@ -1,6 +1,6 @@
 
 declare function snippet(data: any, blockSettings: any): {
-    language: any;
+    label: any;
     code: any;
 };
 export default snippet;

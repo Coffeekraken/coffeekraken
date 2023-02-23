@@ -16,6 +16,8 @@ namespace Sugar\object;
  * @param       {String}        [$separator='.']        The dotpath separator
  * @return      {Any}                           The getted value
  *
+ * @snippet             __get($1, $2)
+ *
  * @example         twig
  * {% set obj = {
  *   hello: {

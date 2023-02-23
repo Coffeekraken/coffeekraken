@@ -6,9 +6,9 @@ import __SPromise from '@coffeekraken/s-promise';
  * @name        observeAttributes
  * @namespace            js.dom.observe
  * @type      Function
- * @async
  * @platform          js
  * @status        beta
+ * @async
  *
  * Observe attributes on an HTMLElement and get mutations through the SPromise instance
  *
@@ -16,20 +16,23 @@ import __SPromise from '@coffeekraken/s-promise';
  * @param 		{MutationObserverInit} 			settings 	The mutation observer settings
  * @return 		{SPromise} 								The SPromise throught which you can have the mutations using the "then" callback
  *
+ * @snippet         __observeAttributes($1);
+ * __observeAttributes($1).on('attribute', mutation => {
+ *      $2
+ * });
+ *
  * @todo      interface
  * @todo      doc
  * @todo      tests
  *
  * @example  	js
  * import { __observeAttributes } from '@coffeekraken/sugar/dom'
- * const observer =  __observeAttributes(myCoolHTMLElement).then(mutation => {
+ * __observeAttributes(myCoolHTMLElement).on('attribute', mutation => {
  * 		// do something with the mutation
  * });
- * / the observer
- * observe();
  *
  * @see 		https://developer.mozilla.org/en/docs/Web/API/MutationObserver
- @since           2.0.0
+ * @since           2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 export default function __observeAttributes(

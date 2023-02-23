@@ -11,8 +11,11 @@ namespace Sugar\html;
  *
  * This function allows you to generate an html attributes string from a key=>pair object
  *
- * @param       {Object}         $attributes
+ * @param       {Object|Array}         $attributes            An associative array of key=>value pairs attributes
+ * @param       {Array}                 [$exclude=[]]           An array of attributes to exclude
  * @return      {String}                         The resulting html string
+ *
+ * @snippet             \Sugar\html\attrs($1);
  *
  * @example         twig
  * <div <?php print \Sugar\attrs(attributes) ?>></div>
@@ -22,6 +25,8 @@ namespace Sugar\html;
  */
 function attrs($attributes, $exclude = [])
 {
+    $attributes = (array) $attributes;
+
     $attrsAr = [];
     if (!isset($attributes)) {
         return '';

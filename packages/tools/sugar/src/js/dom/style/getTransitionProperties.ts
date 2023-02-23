@@ -32,7 +32,7 @@ import __convertTime from '../../../shared/datetime/convertTime';
  * // 	totalDuration : 200
  * // }
  *
- @since           2.0.0
+ * @since           2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 

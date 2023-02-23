@@ -15,6 +15,8 @@ const dom_1 = require("@coffeekraken/sugar/dom");
  * @param 		{HTMLElement} 					$elm  		The element to start on
  * @return 		{HTMLElement} 								The element found or null
  *
+ * @snippet         __closestScrollable($1);
+ *
  * @todo      interface
  * @todo      doc
  * @todo      tests
@@ -23,7 +25,7 @@ const dom_1 = require("@coffeekraken/sugar/dom");
  * import { __closestScrollable } from '@coffeekraken/sugar/dom';
  * __closestScrollable($myElement);
  *
- @since           2.0.0
+ * @since           2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 function __closestScrollable($elm, selector) {
@@ -31,4 +33,4 @@ function __closestScrollable($elm, selector) {
     return res;
 }
 exports.default = __closestScrollable;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7O0FBQUEsY0FBYztBQUNkLGlEQUF1RTtBQUV2RTs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0F1Qkc7QUFDSCxTQUF3QixtQkFBbUIsQ0FDdkMsSUFBaUIsRUFDakIsUUFBMkI7SUFFM0IsTUFBTSxHQUFHLEdBQUcsSUFBQSxrQkFBWSxFQUFDLElBQUksRUFBRSxDQUFDLEVBQUUsRUFBRSxFQUFFLENBQUMsSUFBQSxvQkFBYyxFQUFDLEVBQUUsQ0FBQyxDQUFDLENBQUM7SUFDM0QsT0FBTyxHQUFHLENBQUM7QUFDZixDQUFDO0FBTkQsc0NBTUMifQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7O0FBQUEsY0FBYztBQUNkLGlEQUF1RTtBQUV2RTs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQXlCRztBQUNILFNBQXdCLG1CQUFtQixDQUN2QyxJQUFpQixFQUNqQixRQUEyQjtJQUUzQixNQUFNLEdBQUcsR0FBRyxJQUFBLGtCQUFZLEVBQUMsSUFBSSxFQUFFLENBQUMsRUFBRSxFQUFFLEVBQUUsQ0FBQyxJQUFBLG9CQUFjLEVBQUMsRUFBRSxDQUFDLENBQUMsQ0FBQztJQUMzRCxPQUFPLEdBQUcsQ0FBQztBQUNmLENBQUM7QUFORCxzQ0FNQyJ9

@@ -9,6 +9,8 @@
  *
  * @return    {Boolean}    true if is scrollable, false if not
  *
+ * @snippet         __isScrollable($1);
+ *
  * @todo      interface
  * @todo      doc
  * @todo      tests
@@ -19,7 +21,7 @@
  *   // do something
  * }
  *
- @since           2.0.0
+ * @since           2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 

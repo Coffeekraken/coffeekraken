@@ -16,6 +16,8 @@ namespace Sugar\specs;
  * @param       {Object}            $sJsonSettings         Some settings to pass to the SJson class like the rootDirs, etc...
  * @return      {any}                                      The getted value. Can be an entire object, or a simple (string|boolean|...) value depending on the passed $jsonDotPath
  *
+ * @snippet             \Sugar\specs\readSpec($1);
+ *
  * @example       twig
  * $value = \Sugar\specs\readSpec('my.cool.viewspec);
  *

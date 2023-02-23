@@ -26,7 +26,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
  * __isIsoDate('2008-08') => true
  *
  * @see             https://www.oreilly.com/library/view/regular-expressions-cookbook/9781449327453/ch04s07.html
- @since           2.0.0
+ * @since           2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 function __isIsoDate(value) {

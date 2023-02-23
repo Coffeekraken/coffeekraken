@@ -36,7 +36,7 @@ import { __whenRemoved } from '@coffeekraken/sugar/dom';
  * __makeFloat($myElement, $dependingOn);
  *
  * @see         https://floating-ui.com
- @since           2.0.0
+ * @since           2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 

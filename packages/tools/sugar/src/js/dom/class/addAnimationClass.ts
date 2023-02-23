@@ -14,6 +14,8 @@ import __removeClassesOnAnimationEnd from './removeClassOnAnimationEnd';
  * @param    {String|Array}    cls    The class or classes (Array) to apply
  * @return    {Promise<HTMLElement>}               A promise that will be resolved once the class have been removed and the animation finished
  *
+ * @snippet         __addAnimationClass($1, $2);
+ *
  * @todo        tests
  *
  * @example    js
@@ -22,7 +24,7 @@ import __removeClassesOnAnimationEnd from './removeClassOnAnimationEnd';
  *    // do something at the animation end...
  * });
  *
- @since           2.0.0
+ * @since           2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 export default function __addAnimationClass(

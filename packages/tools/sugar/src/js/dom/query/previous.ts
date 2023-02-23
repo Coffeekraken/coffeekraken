@@ -15,6 +15,8 @@ import { __matches } from '@coffeekraken/sugar/dom';
  * @param 		{String} 						selector 	A css selector to search for
  * @return 		{HTMLElement} 								The element found or null
  *
+ * @snippet         __previous($1, $2);
+ *
  * @todo      interface
  * @todo      doc
  * @todo      tests
@@ -26,7 +28,7 @@ import { __matches } from '@coffeekraken/sugar/dom';
  * 		// we have found en element that matches the selector
  * }
  *
- @since           2.0.0
+ * @since           2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 export default function __previous(

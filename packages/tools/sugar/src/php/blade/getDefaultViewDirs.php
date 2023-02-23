@@ -14,6 +14,8 @@ namespace Sugar\blade;
  *
  * @return      {String[]}                  The root directories for views
  *
+ * @snippet         \Sugar\blade\getDefaultViewDirs();
+ *
  * @example       twig
  * $viewDirs = \Sugar\blade\getDefaultViewDirs();
  *

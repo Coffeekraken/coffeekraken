@@ -12,6 +12,8 @@
  * @param       {String}            $context          The context value
  * @return      {String}                        The cleaned context variable
  *
+ * @snippet             __cleanContext
+ *
  * @example       twig
  * <div data="{{ _context|__cleanContext|json_encode }}"></div>
  *

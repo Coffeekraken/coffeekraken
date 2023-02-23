@@ -21,6 +21,11 @@ import { __uniqid } from '@coffeekraken/sugar/string';
  * @param 		{Partial<IWhenInViewportSettings>} 					[settings={}] 		Some settings to tweak the detection behavior
  * @return 		(SPromise<HTMLElement>) 											The promise that will be resolved when the element is in the viewport
  *
+ * @snippet         __whenInViewport($1);
+ * __whenInViewport($1).then(\$elm => {
+ *      $2
+ * });
+ *
  * @todo      tests
  *
  * @example 	js
@@ -31,7 +36,7 @@ import { __uniqid } from '@coffeekraken/sugar/string';
  * // when you want to stop listening
  * promise.cancel();
  *
- @since           2.0.0
+ * @since           2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 

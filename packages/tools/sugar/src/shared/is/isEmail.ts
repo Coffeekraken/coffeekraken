@@ -23,7 +23,7 @@
  * __isEmail('plop@yop.com') => true
  * __isEmail('hello') => false
  *
- @since           2.0.0
+ * @since           2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 export default function __isEmail(value: string): boolean {

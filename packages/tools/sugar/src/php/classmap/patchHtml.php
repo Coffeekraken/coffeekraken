@@ -16,6 +16,8 @@ namespace Sugar\classname;
  * @param       {Object}            $settings       Some settings to pass to the SClassmap class
  * @return      {String}                            The patched html
  *
+ * @snippet         \Sugar\classmap\patchHtml($1);
+ *
  * @example       php
  * $patchedHtml = \Sugar\classmap\patchHtml('...');
  *

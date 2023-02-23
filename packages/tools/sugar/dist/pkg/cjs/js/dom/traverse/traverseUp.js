@@ -24,7 +24,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
  *      return elm.classList.contains('my-class')
  * });
  *
- @since           2.0.0
+ * @since           2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 function __traverseUp($elm, callback) {

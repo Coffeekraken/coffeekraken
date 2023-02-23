@@ -15,6 +15,12 @@ namespace Sugar\draftJs;
  * @param       {Function}      $renderFunction             The render function that will take as parameter an array with the "type" and the "html" properties
  * @return      {String}                                    Returned HTML
  *
+ * @snippet         \Sugar\draftJs\renderContent($1, $2);
+ * \Sugar\draftJs\renderContent($1, function($2) {
+ *      $0
+ * });
+ *
+ *
  * @since       2.0.0
  * @author    Paul Balanche <pb@buzzbrothers.ch> (https://buzzbrothers.ch)
  */

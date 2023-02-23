@@ -9,9 +9,9 @@ const s_promise_1 = __importDefault(require("@coffeekraken/s-promise"));
  * @name        observeAttributes
  * @namespace            js.dom.observe
  * @type      Function
- * @async
  * @platform          js
  * @status        beta
+ * @async
  *
  * Observe attributes on an HTMLElement and get mutations through the SPromise instance
  *
@@ -19,20 +19,23 @@ const s_promise_1 = __importDefault(require("@coffeekraken/s-promise"));
  * @param 		{MutationObserverInit} 			settings 	The mutation observer settings
  * @return 		{SPromise} 								The SPromise throught which you can have the mutations using the "then" callback
  *
+ * @snippet         __observeAttributes($1);
+ * __observeAttributes($1).on('attribute', mutation => {
+ *      $2
+ * });
+ *
  * @todo      interface
  * @todo      doc
  * @todo      tests
  *
  * @example  	js
  * import { __observeAttributes } from '@coffeekraken/sugar/dom'
- * const observer =  __observeAttributes(myCoolHTMLElement).then(mutation => {
+ * __observeAttributes(myCoolHTMLElement).on('attribute', mutation => {
  * 		// do something with the mutation
  * });
- * / the observer
- * observe();
  *
  * @see 		https://developer.mozilla.org/en/docs/Web/API/MutationObserver
- @since           2.0.0
+ * @since           2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 function __observeAttributes(target, settings = {}) {
@@ -59,4 +62,4 @@ function __observeAttributes(target, settings = {}) {
     return pro;
 }
 exports.default = __observeAttributes;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOzs7OztBQUVkLHdFQUFpRDtBQUVqRDs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0E2Qkc7QUFDSCxTQUF3QixtQkFBbUIsQ0FDdkMsTUFBbUIsRUFDbkIsV0FBZ0IsRUFBRTtJQUVsQixJQUFJLGdCQUFnQixDQUFDO0lBRXJCLE1BQU0sR0FBRyxHQUFHLElBQUksbUJBQVUsQ0FBQyxDQUFDLEVBQUUsT0FBTyxFQUFFLElBQUksRUFBRSxFQUFFLEVBQUU7UUFDN0Msd0JBQXdCO1FBQ3hCLGdCQUFnQixHQUFHLElBQUksZ0JBQWdCLENBQUMsQ0FBQyxTQUFTLEVBQUUsRUFBRTtZQUNsRCxJQUFJLFVBQVUsR0FBRyxFQUFFLENBQUM7WUFDcEIsb0JBQW9CO1lBQ3BCLFNBQVMsQ0FBQyxPQUFPLENBQUMsQ0FBQyxRQUFRLEVBQUUsRUFBRTtnQkFDM0IsZ0JBQWdCO2dCQUNoQixJQUFJLENBQUMsVUFBVSxDQUFDLFFBQVEsQ0FBQyxhQUFhLENBQUMsRUFBRTtvQkFDckMsSUFBSSxDQUFDLFdBQVcsRUFBRSxRQUFRLENBQUMsQ0FBQztvQkFDNUIsVUFBVSxDQUFDLFFBQVEsQ0FBQyxhQUFhLENBQUMsR0FBRyxJQUFJLENBQUM7aUJBQzdDO1lBQ0wsQ0FBQyxDQUFDLENBQUM7WUFDSCxVQUFVLEdBQUcsRUFBRSxDQUFDO1FBQ3BCLENBQUMsQ0FBQyxDQUFDO1FBQ0gsZ0JBQWdCLENBQUMsT0FBTyxDQUFDLE1BQU0sa0JBQzNCLFVBQVUsRUFBRSxJQUFJLElBQ2IsUUFBUSxFQUNiLENBQUM7SUFDUCxDQUFDLENBQUMsQ0FBQztJQUNILEdBQUcsQ0FBQyxFQUFFLENBQUMsU0FBUyxFQUFFLEdBQUcsRUFBRTtRQUNuQixnQkFBZ0IsQ0FBQyxVQUFVLEVBQUUsQ0FBQztJQUNsQyxDQUFDLENBQUMsQ0FBQztJQUNILE9BQU8sR0FBRyxDQUFDO0FBQ2YsQ0FBQztBQTdCRCxzQ0E2QkMifQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOzs7OztBQUVkLHdFQUFpRDtBQUVqRDs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0FnQ0c7QUFDSCxTQUF3QixtQkFBbUIsQ0FDdkMsTUFBbUIsRUFDbkIsV0FBZ0IsRUFBRTtJQUVsQixJQUFJLGdCQUFnQixDQUFDO0lBRXJCLE1BQU0sR0FBRyxHQUFHLElBQUksbUJBQVUsQ0FBQyxDQUFDLEVBQUUsT0FBTyxFQUFFLElBQUksRUFBRSxFQUFFLEVBQUU7UUFDN0Msd0JBQXdCO1FBQ3hCLGdCQUFnQixHQUFHLElBQUksZ0JBQWdCLENBQUMsQ0FBQyxTQUFTLEVBQUUsRUFBRTtZQUNsRCxJQUFJLFVBQVUsR0FBRyxFQUFFLENBQUM7WUFDcEIsb0JBQW9CO1lBQ3BCLFNBQVMsQ0FBQyxPQUFPLENBQUMsQ0FBQyxRQUFRLEVBQUUsRUFBRTtnQkFDM0IsZ0JBQWdCO2dCQUNoQixJQUFJLENBQUMsVUFBVSxDQUFDLFFBQVEsQ0FBQyxhQUFhLENBQUMsRUFBRTtvQkFDckMsSUFBSSxDQUFDLFdBQVcsRUFBRSxRQUFRLENBQUMsQ0FBQztvQkFDNUIsVUFBVSxDQUFDLFFBQVEsQ0FBQyxhQUFhLENBQUMsR0FBRyxJQUFJLENBQUM7aUJBQzdDO1lBQ0wsQ0FBQyxDQUFDLENBQUM7WUFDSCxVQUFVLEdBQUcsRUFBRSxDQUFDO1FBQ3BCLENBQUMsQ0FBQyxDQUFDO1FBQ0gsZ0JBQWdCLENBQUMsT0FBTyxDQUFDLE1BQU0sa0JBQzNCLFVBQVUsRUFBRSxJQUFJLElBQ2IsUUFBUSxFQUNiLENBQUM7SUFDUCxDQUFDLENBQUMsQ0FBQztJQUNILEdBQUcsQ0FBQyxFQUFFLENBQUMsU0FBUyxFQUFFLEdBQUcsRUFBRTtRQUNuQixnQkFBZ0IsQ0FBQyxVQUFVLEVBQUUsQ0FBQztJQUNsQyxDQUFDLENBQUMsQ0FBQztJQUNILE9BQU8sR0FBRyxDQUFDO0FBQ2YsQ0FBQztBQTdCRCxzQ0E2QkMifQ==

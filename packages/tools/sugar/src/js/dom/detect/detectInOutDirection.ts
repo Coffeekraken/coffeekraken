@@ -18,6 +18,13 @@ import __SPromise from '@coffeekraken/s-promise';
  * @event       in          Emitted when the pointer enters the element
  * @event       out         Emitted when the pointer leaves the element
  *
+ * @snippet         __detectInOutDirection($1);
+ * __detectInOutDirection($1).on('in', direction => {
+ *      $2
+ * }).on('out', direction => {
+ *      $3
+ * });
+ *
  * @todo      tests
  *
  * @example     js
@@ -31,7 +38,7 @@ import __SPromise from '@coffeekraken/s-promise';
  * // cancel the detection process
  * detector.cancel();
  *
- @since           2.0.0
+ * @since           2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 export default function __detectInOutDirection($elm: HTMLElement): __SPromise {

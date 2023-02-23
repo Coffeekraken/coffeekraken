@@ -13,6 +13,8 @@
  * @param       {String}            $replaceBy      The string to replace your $search with
  * @return      {String}                        The new string
  *
+ * @snippet             __replace($1, $2, $3)
+ *
  * @example       twig
  * {% set str = 'hello world' %}
  * {% set id = __replace(str, 'world', 'coco') %}

@@ -12,6 +12,8 @@
  * @param       {String}            $json       The json string to decode
  * @return      {Object}                        The decoded json object
  *
+ * @snippet             __jsonDecode($1)
+ *
  * @example       twig
  * <div data="{{ __jsonDecode(myJson) }}"></div>
  *

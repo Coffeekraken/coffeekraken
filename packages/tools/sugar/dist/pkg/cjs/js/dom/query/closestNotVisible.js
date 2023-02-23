@@ -15,6 +15,8 @@ const dom_1 = require("@coffeekraken/sugar/dom");
  * @param 		{HTMLElement} 					elm  		The element to start on
  * @return 		{HTMLElement} 								The element found or null
  *
+ * @snippet         __closestNotVisible($1);
+ *
  * @todo      interface
  * @todo      doc
  * @todo      tests
@@ -26,7 +28,7 @@ const dom_1 = require("@coffeekraken/sugar/dom");
  * 		// we have found en element that is not visible
  * }
  *
- @since           2.0.0
+ * @since           2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 function __closestNotVisible(elm) {
@@ -41,4 +43,4 @@ function __closestNotVisible(elm) {
     return null;
 }
 exports.default = __closestNotVisible;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOztBQUVkLGlEQUFzRDtBQUV0RDs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0EwQkc7QUFDSCxTQUF3QixtQkFBbUIsQ0FBQyxHQUFnQjtJQUN4RCxNQUFNLFdBQVcsR0FBRyxHQUFHLENBQUM7SUFDeEIsR0FBRyxHQUFHLEdBQUcsQ0FBQyxVQUFVLENBQUM7SUFDckIsT0FBTyxHQUFHLElBQUksR0FBRyxJQUFJLFdBQVcsQ0FBQyxhQUFhLEVBQUU7UUFDNUMsSUFBSSxDQUFDLElBQUEsaUJBQVcsRUFBQyxHQUFHLENBQUMsRUFBRTtZQUNuQixPQUFPLEdBQUcsQ0FBQztTQUNkO1FBQ0QsR0FBRyxHQUFHLEdBQUcsQ0FBQyxVQUFVLENBQUM7S0FDeEI7SUFDRCxPQUFPLElBQUksQ0FBQztBQUNoQixDQUFDO0FBVkQsc0NBVUMifQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOztBQUVkLGlEQUFzRDtBQUV0RDs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQTRCRztBQUNILFNBQXdCLG1CQUFtQixDQUFDLEdBQWdCO0lBQ3hELE1BQU0sV0FBVyxHQUFHLEdBQUcsQ0FBQztJQUN4QixHQUFHLEdBQUcsR0FBRyxDQUFDLFVBQVUsQ0FBQztJQUNyQixPQUFPLEdBQUcsSUFBSSxHQUFHLElBQUksV0FBVyxDQUFDLGFBQWEsRUFBRTtRQUM1QyxJQUFJLENBQUMsSUFBQSxpQkFBVyxFQUFDLEdBQUcsQ0FBQyxFQUFFO1lBQ25CLE9BQU8sR0FBRyxDQUFDO1NBQ2Q7UUFDRCxHQUFHLEdBQUcsR0FBRyxDQUFDLFVBQVUsQ0FBQztLQUN4QjtJQUNELE9BQU8sSUFBSSxDQUFDO0FBQ2hCLENBQUM7QUFWRCxzQ0FVQyJ9

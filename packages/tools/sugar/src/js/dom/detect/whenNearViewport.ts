@@ -20,15 +20,20 @@ import { __closestScrollable } from '@coffeekraken/sugar/dom';
  *
  * @setting         {String}            [offset=`${window.innerHeight}px ${window.innerWidth}px`]           Some offset
  *
+ * @snippet         __whenNearViewport($1);
+ * __whenNearViewport($1).then(\$elm => {
+ *      $2
+ * });
+ *
  * @todo      tests
  *
  * @example 	js
  * import { __whenNearViewport } from '@coffeekraken/sugar/dom'
- * __whenNearViewport(myCoolHTMLElement).then((elm) => {
+ * __whenNearViewport(myCoolHTMLElement).then($elm => {
  * 		// do something with your element that has entered the viewport...
  * });
  *
- @since           2.0.0
+ * @since           2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 

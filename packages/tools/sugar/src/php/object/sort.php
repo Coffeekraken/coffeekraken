@@ -19,6 +19,11 @@ namespace Sugar\object;
  * @todo      doc
  * @todo      tests
  *
+ * @snippet             \Sugar\object\sort($1, $2);
+ * \Sugar\object\sort($1, function(\$a, \$b) {
+ *      $0
+ * });
+ *
  * @example               js
  * import { __sort } from '@coffeekraken/sugar/object';
  * __sort({

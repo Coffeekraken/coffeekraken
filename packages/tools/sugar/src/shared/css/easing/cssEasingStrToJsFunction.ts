@@ -24,7 +24,7 @@ import __bezierEasing from 'bezier-easing';
  * fn(0.34);
  *
  * @see             https://www.npmjs.com/package/bezier-easing
- @since           2.0.0
+ * @since           2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 export interface IEasingFunction {

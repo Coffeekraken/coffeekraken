@@ -13,6 +13,8 @@
  * @param 		{Object} 					[offset=50] 	An object of top, right, bottom and left offset used to detect the status or an object with top, right, bottom and left offsets
  * @return 		{Boolean}									If the element is in the viewport or not
  *
+ * @snippet         __isInViewport($1);
+ *
  * @todo      interface
  * @todo      doc
  * @todo      tests
@@ -23,7 +25,7 @@
  * 		// i'm in the viewport
  * }
  *
- @since           2.0.0
+ * @since           2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 

@@ -11,6 +11,8 @@
  *
  * @return    {Boolean}    true if in iframe, false if not
  *
+ * @snippet         __isInIframe($1);
+ *
  * @todo      interface
  * @todo      doc
  * @todo      tests
@@ -21,7 +23,7 @@
  *   // do something
  * }
  *
- @since           2.0.0
+ * @since           2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 export default function __isInIframe(): boolean {

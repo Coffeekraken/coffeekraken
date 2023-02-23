@@ -23,7 +23,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
  * }
  *
  * @see       https://blog.devgenius.io/4-ways-to-detect-mobile-browsers-in-javascript-943b66657524
- @since           2.0.0
+ * @since           2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 function __isTablet() {

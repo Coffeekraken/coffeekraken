@@ -15,6 +15,8 @@ import { __isVisible } from '@coffeekraken/sugar/dom';
  * @param 		{HTMLElement} 					elm  		The element to start on
  * @return 		{HTMLElement} 								The element found or null
  *
+ * @snippet         __closestNotVisible($1);
+ *
  * @todo      interface
  * @todo      doc
  * @todo      tests
@@ -26,7 +28,7 @@ import { __isVisible } from '@coffeekraken/sugar/dom';
  * 		// we have found en element that is not visible
  * }
  *
- @since           2.0.0
+ * @since           2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 export default function __closestNotVisible(elm: HTMLElement): HTMLElement {

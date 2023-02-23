@@ -16,6 +16,8 @@ namespace Sugar\twig;
  * @param       {TwigLoader}            $loader         Your twig loader to be able to register default layout directories, etc...
  * @return      {Twig}                              The inited twig
  *
+ * @snippet             \Sugar\twig\initTwig($1);
+ *
  * @example       twig
  * $twig = \Sugar\twig\initTwig($twig);
  *

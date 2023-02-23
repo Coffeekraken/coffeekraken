@@ -15,6 +15,8 @@ namespace Sugar\object;
  * @param       {Object}        $object2        The second object
  * @return      {Object}                        The merged object
  *
+ * @snippet             \Sugar\object\deepMerge($1, $2);
+ *
  * @example         php
  * \Sugar\object\deepMerge((object) [
  *  'hello' => 'world'

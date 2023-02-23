@@ -8,23 +8,25 @@ namespace Sugar\is;
  * @type            Function
  * @platform         php
  * @status            beta
- * 
+ *
  * This function simply check if the passed string a an url or not
- * 
+ *
  * @param       {String}        $url            The url to check
  * @return      {Boolean}                       true if a valid url, false if not
- * 
+ *
+ * @snippet             \Sugar\is\url($1);
+ *
  * @example         php
  * Sugar\is\url('something'); // => false
  * Sugar\is\url('http://hello.com'); // => true
- * 
+ *
  * @see                 https://www.php.net/manual/en/function.preg-match.php#93824
  * @since           2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-function url($url) {
-
-    return (bool)parse_url($url);
+function url($url)
+{
+    return (bool) parse_url($url);
 
     // $regex = "((https?|ftp)\:\/\/)?"; // SCHEME
     // $regex .= "([a-z0-9+!*(),;?&=\$_.-]+(\:[a-z0-9+!*(),;?&=\$_.-]+)?@)?"; // User and Pass

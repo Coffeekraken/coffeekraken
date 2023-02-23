@@ -12,6 +12,8 @@
  * @param       {StyleSheet|StyleSheetList}        stalesheet      The StyleSheet instance to convert
  * @return      {String}                            The css string
  *
+ * @snippet         __stylesheetToString($1);
+ *
  * @example         js
  * import { __stylesheetToString } from '@coffeekraken/sugar/dom';
  * __stylesheetToString(document.stylesheets); // => body { ... }

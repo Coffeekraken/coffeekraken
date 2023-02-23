@@ -23,7 +23,7 @@
  * __isNumber(22.3) => true
  * __isNumber('20') => false
  *
- @since           2.0.0
+ * @since           2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 export default function __isNumber(source) {

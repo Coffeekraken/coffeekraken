@@ -13,6 +13,7 @@ import type { TWhenTrigger } from '../detect/when';
  * @type            Function
  * @platform        js
  * @status          beta
+ * @async
  *
  * Observe the dom to get all the elements that matches a passed css selector at any point in time.
  * Be warned that this use the mutation observer API and will monitor all the document for new nodes. Make sure to use it
@@ -31,6 +32,11 @@ import type { TWhenTrigger } from '../detect/when';
  * @setting         {HTMLElement}           [rootNode=document]         The root node from where to observe childs
  * @setting         {Boolean}              [once=true]                If true, each observed nodes will be handled only once even if they are removed and reinjected in the dom
  *
+ * @snippet         __querySelectorLive($1, $2);
+ * __querySelectorLive($1, \$elm => {
+ *      $2
+ * });
+ *
  * @example 	js
  * import { __querySelectorLive } from '@coffeekraken/sugar/dom'
  * __querySelectorLive('.my-cool-item', (node, api) => {
@@ -39,7 +45,7 @@ import type { TWhenTrigger } from '../detect/when';
  *      api.cancel();
  * });
  *
- @since           2.0.0
+ * @since           2.0.0
  * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 

@@ -14,6 +14,8 @@ namespace Sugar\debug;
  * @param       {Array}         $toPrint        The data to print
  * @return      {String}                        The printed data
  *
+ * @snippet         \Sugar\debug\pre($1);
+ *
  * @example         php
  * print \Sugar\debug\pre([
  *    'prop1' => 'Hello',

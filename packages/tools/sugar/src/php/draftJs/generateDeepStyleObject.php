@@ -19,6 +19,8 @@ namespace Sugar\draftJs;
  * @param       {Array}         $breakPoint                 Contains deep elements to close
  * @return      {Array}         Deep object
  *
+ * @snippet         \Sugar\draftJs\generateDeepStyleObject($1);
+ *
  * @since       2.0.0
  * @author    Paul Balanche <pb@buzzbrothers.ch> (https://buzzbrothers.ch)
  */
@@ -56,9 +58,9 @@ function generateDeepStyleObject(
                 $keyInlineStylePosition = $keyInlineStyle;
                 $content[] = generateDeepStyleObject(
                     $block,
-                    ( isset($inlineStyle['style']) ) ? $inlineStyle['style'] : null,
-                    ( isset($inlineStyle['type']) ) ? $inlineStyle['type'] : null,
-                    ( isset($inlineStyle['data']) ) ? $inlineStyle['data'] : null,
+                    isset($inlineStyle['style']) ? $inlineStyle['style'] : null,
+                    isset($inlineStyle['type']) ? $inlineStyle['type'] : null,
+                    isset($inlineStyle['data']) ? $inlineStyle['data'] : null,
                     $char_position,
                     $keyInlineStyle,
                     $breakPoint

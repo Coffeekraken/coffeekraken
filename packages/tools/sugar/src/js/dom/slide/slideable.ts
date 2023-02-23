@@ -32,7 +32,7 @@ import __injectStyle from '../inject/injectStyle';
  * import { __slideable } from '@coffeekraken/sugar/dom';
  * __slideable($myElement);
  *
- @since           2.0.0
+ * @since           2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 export interface ISlideableSettings {

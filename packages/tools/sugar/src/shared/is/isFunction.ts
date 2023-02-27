@@ -17,6 +17,8 @@
  * @todo      doc
  * @todo      tests
  *
+ * @snippet         __isFunction($1)
+ * 
  * @example    js
  * import { __isFunction } from '@coffeekraken/sugar/is'
  * if (__isFunction(function() {})) {

@@ -13,6 +13,8 @@
  *
  * @param       {String}            path            The folder path you want to go to
  *
+ * @snippet         __chdir($1)
+ *
  * @example         js
  * import { __chdir } from '@coffeekraken/sugar/fs';
  * __chdir('/my/cool/file.txt', 'Hello world');

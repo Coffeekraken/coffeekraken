@@ -17,7 +17,7 @@ import __unquote from '../../../shared/string/unquote';
  * @param    {HTMLElement}    $elm    The HTMLElement on which to detect the background image load
  * @return    {SPromise}    A promise that will be resolved when the background image has been loaded
  *
- * @snippet         __whenBackgroundImageLoaded($1);
+ * @snippet         __whenBackgroundImageLoaded($1)
  * __whenBackgroundImageLoaded($1).then(\$elm => {
  *      $2
  * });

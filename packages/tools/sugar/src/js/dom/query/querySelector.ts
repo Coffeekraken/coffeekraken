@@ -26,7 +26,7 @@ import {
  * @param 		{Object} 			settings	 		The settings of the query
  * @return 		{HTMLElement} 							The founded element
  *
- * @snippet         __querySelector($1);
+ * @snippet         __querySelector($1)
  *
  * @todo      interface
  * @todo      doc

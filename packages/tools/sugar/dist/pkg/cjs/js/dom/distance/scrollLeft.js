@@ -14,7 +14,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
  * @todo      doc
  * @todo      tests
  *
- * @snippet         __scrollLeft();
+ * @snippet         __scrollLeft()
  *
  * @example    js
  * import { __scrollLeft } from '@coffeekraken/sugar/dom'

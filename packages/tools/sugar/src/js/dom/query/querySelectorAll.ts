@@ -31,7 +31,7 @@ import {
  * @todo      doc
  * @todo      tests
  *
- * @snippet         __querySelectorAll($1);
+ * @snippet         __querySelectorAll($1)
  *
  * @example 	js
  * import { __querySelectorAll } from '@coffeekraken/sugar/dom';

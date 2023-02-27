@@ -39,6 +39,8 @@ import __sharedReplaceTokens from '../../shared/token/replaceTokens';
  * @param       {String}            string          The string you want to process
  * @return      {String}                            The processed string
  *
+ * @snippet         _replaceTokens($1)
+ * 
  * @example         js
  * import { __replaceTokens } from '@coffeekraken/sugar/string';
  * __replaceTokens('Hello %packageJson.name, hope you are doing well (%packageRootDir)');

@@ -5,7 +5,7 @@ import __parseHtml from '../../shared/console/parseHtml';
 import __toString from '../../shared/string/toString';
 
 /**
- * @name                    handleError
+ * @name                    handleErrors
  * @namespace            node.error
  * @type                    Function
  * @platform        node
@@ -19,14 +19,16 @@ import __toString from '../../shared/string/toString';
  * @todo      doc
  * @todo      tests
  *
+ * @snippet         __handleErrors()
+ *
  * @example           js
- * import { __handleError } from '@coffeekraken/sugar/error';
- * __handleError
+ * import { __handleErrors } from '@coffeekraken/sugar/error';
+ * __handleErrors();
  *
  * @since         2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-export default function __handleError() {
+export default function __handleErrors() {
     if (process.env.NODE_ENV === 'test') return;
     if (__isChildProcess()) {
         process.on('uncaughtException', __handleChildProcessErrors);

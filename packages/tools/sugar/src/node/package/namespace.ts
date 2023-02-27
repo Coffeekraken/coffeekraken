@@ -1,9 +1,9 @@
 // @ts-nocheck
 
-import __json from './json';
-import __deepMerge from '../../shared/object/deepMerge';
-import { __fileName } from '@coffeekraken/sugar/fs';
 import __SugarConfig from '@coffeekraken/s-sugar-config';
+import { __fileName } from '@coffeekraken/sugar/fs';
+import __deepMerge from '../../shared/object/deepMerge';
+import __json from './json';
 
 /**
  * @name          namespace
@@ -11,7 +11,8 @@ import __SugarConfig from '@coffeekraken/s-sugar-config';
  * @type          Function
  * @platform        node
  * @status          wip
- *
+ * @private
+ * 
  * This function take a string as parameter like a path, or a doted string like "something.cool" and return you
  * a proper namespace build using the package name, your passed string sanitized, etc...
  *

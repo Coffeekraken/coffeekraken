@@ -17,6 +17,8 @@
  * @todo      doc
  * @todo      tests
  *
+ * @snippet         __toPlainObject($1)
+ * 
  * @example             js
  * import { __toPlainObject } from '@coffeekraken/sugar/class';
  * class Coco {

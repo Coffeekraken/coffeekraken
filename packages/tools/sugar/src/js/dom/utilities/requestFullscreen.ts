@@ -16,6 +16,8 @@
  * @todo      doc
  * @todo      tests
  *
+ * @snippet         __requestFullscreen()
+ *
  * @example    js
  * import { __requestFullscreen } from '@coffeekraken/sugar/dom'
  *  __requestFullscreen(myDomElm)

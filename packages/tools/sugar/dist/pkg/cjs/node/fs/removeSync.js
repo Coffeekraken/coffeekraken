@@ -20,6 +20,8 @@ const fs_extra_1 = __importDefault(require("fs-extra"));
  * @todo      doc
  * @todo      tests
  *
+ * @snippet         __removeSync($1)
+ *
  * @example       js
  * import { __removeSync } from '@coffeekraken/sugar/fs';
  *  __removeSync('my/cool/file.json');
@@ -32,4 +34,4 @@ function __removeSync(path) {
     return fs_extra_1.default.removeSync(path);
 }
 exports.default = __removeSync;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOzs7OztBQUVkLHdEQUE0QjtBQUU1Qjs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQXNCRztBQUNILFNBQXdCLFlBQVksQ0FBQyxJQUFJO0lBQ3JDLE9BQU8sa0JBQUksQ0FBQyxVQUFVLENBQUMsSUFBSSxDQUFDLENBQUM7QUFDakMsQ0FBQztBQUZELCtCQUVDIn0=
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOzs7OztBQUVkLHdEQUE0QjtBQUU1Qjs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBd0JHO0FBQ0gsU0FBd0IsWUFBWSxDQUFDLElBQUk7SUFDckMsT0FBTyxrQkFBSSxDQUFDLFVBQVUsQ0FBQyxJQUFJLENBQUMsQ0FBQztBQUNqQyxDQUFDO0FBRkQsK0JBRUMifQ==

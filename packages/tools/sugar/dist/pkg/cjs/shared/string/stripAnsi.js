@@ -17,6 +17,8 @@ const strip_ansi_1 = __importDefault(require("strip-ansi"));
  * @param       {String}        string          The string to strip ansi from
  * @return      {String}                        The new string without any ansi characters
  *
+ * @snippet         __stripAnsi($1)
+ *
  * @example     js
  * import { __stripAnsi } from '@coffeekraken/sugar/string';
  * __stripAnsi('\u001B]8;;https://github.com\u0007Click\u001B]8;;\u0007'); // => Click
@@ -29,4 +31,4 @@ function stripAnsi(string) {
     return (0, strip_ansi_1.default)(string);
 }
 exports.default = stripAnsi;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7O0FBQUEsNERBQXFDO0FBRXJDOzs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQW9CRztBQUNILFNBQXdCLFNBQVMsQ0FBQyxNQUFNO0lBQ3BDLE9BQU8sSUFBQSxvQkFBVyxFQUFDLE1BQU0sQ0FBQyxDQUFDO0FBQy9CLENBQUM7QUFGRCw0QkFFQyJ9
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7O0FBQUEsNERBQXFDO0FBRXJDOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBc0JHO0FBQ0gsU0FBd0IsU0FBUyxDQUFDLE1BQU07SUFDcEMsT0FBTyxJQUFBLG9CQUFXLEVBQUMsTUFBTSxDQUFDLENBQUM7QUFDL0IsQ0FBQztBQUZELDRCQUVDIn0=

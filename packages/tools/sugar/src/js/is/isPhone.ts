@@ -15,6 +15,8 @@ import __isMobile from './isMobile';
  * @todo      doc
  * @todo      tests
  *
+ * @snippet         __isPhone()
+ *
  * @example 	js
  * import { __isPhone } from '@coffeekraken/sugar/is'
  * if (__isPhone()) {

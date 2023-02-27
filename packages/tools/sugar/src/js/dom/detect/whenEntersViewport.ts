@@ -20,7 +20,7 @@ import { __isInViewport } from '@coffeekraken/sugar/dom';
  *
  * @setting         {String}        [offset='0px 0px -25% 0px']         An offset to detect the element entering in viewport earlier or later
  *
- * @snippet         __whenEntersViewport($1);
+ * @snippet         __whenEntersViewport($1)
  * __whenEntersViewport($1).then(\$elm => {
  *      $2
  * });

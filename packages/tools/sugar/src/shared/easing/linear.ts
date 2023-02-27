@@ -13,6 +13,9 @@
  * @param 		{Number} 		t 		The current time
  * @return 		{Number} 				The value depending on time
  *
+ * @snippet         __linear($1)
+ * 
+ * @example         js
  * import { __linear } from '@coffeekraken/sugar/easing';
  * __linear(0.4);
  *

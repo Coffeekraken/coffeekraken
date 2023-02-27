@@ -18,7 +18,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
  * @todo      doc
  * @todo      tests
  *
- * @snippet         __dispatchEvent($1, $2, $3);
+ * @snippet         __dispatchEvent($1, $2, $3)
  *
  * @example  	js
  * import { __dispatchEvent } from '@coffeekraken/sugar/js/dom/dispatchEvent'

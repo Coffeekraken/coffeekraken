@@ -10,7 +10,7 @@
  *
  * @param    {HTMLElement}    $elm    The HTMLElement to check
  *
- * @snippet         __isFocus($1);
+ * @snippet         __isFocus($1)
  *
  * @todo      interface
  * @todo      doc

@@ -16,6 +16,8 @@ import __camelCase from '../string/camelCase';
  *
  * @setting         {Boolean}           [deep=true]             Specify if you want to apply the treatment deep in the object or just in the first level
  *
+ * @snippet         __camelCaseProps($1)
+ * 
  * @example         js
  * import { __camelCaseProps } from '@coffeekraken/sugar/object';
  * __camelCaseProps({

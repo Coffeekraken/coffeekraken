@@ -5,14 +5,6 @@ import { __deepMerge } from '@coffeekraken/sugar/object';
 import __fs from 'fs';
 import __path from 'path';
 
-// const mixinsStack = {},
-//     functionsStack = {};
-// let pluginHash = __folderHash(__path.resolve(__dirname(), '../../..'), {
-//         include: {
-//             ctime: true,
-//         },
-//     }),
-//     rootDir;
 let loadedPromise;
 
 const _cacheObjById = {};

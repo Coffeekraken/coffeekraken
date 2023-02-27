@@ -20,6 +20,9 @@ const ip_1 = __importDefault(require("ip"));
  * @todo      doc
  * @todo      tests
  *
+ * @snippet         __isAddress()
+ * await __ipAddress()
+ *
  * @example           js
  * import { __ipAddress } from '@coffeekraken/sugar/network';
  * __ipAddress(); // => 192.168.1.45
@@ -32,4 +35,4 @@ function __ipAddress() {
     return ip_1.default.address();
 }
 exports.default = __ipAddress;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOzs7OztBQUVkLDRDQUFzQjtBQUV0Qjs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQXNCRztBQUNILFNBQXdCLFdBQVc7SUFDL0IsT0FBTyxZQUFJLENBQUMsT0FBTyxFQUFFLENBQUM7QUFDMUIsQ0FBQztBQUZELDhCQUVDIn0=
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOzs7OztBQUVkLDRDQUFzQjtBQUV0Qjs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQXlCRztBQUNILFNBQXdCLFdBQVc7SUFDL0IsT0FBTyxZQUFJLENBQUMsT0FBTyxFQUFFLENBQUM7QUFDMUIsQ0FBQztBQUZELDhCQUVDIn0=

@@ -19,6 +19,8 @@ import __SSugarConfig from '@coffeekraken/s-sugar-config';
  * @todo      doc
  * @todo      tests
  *
+ * @snippet         __packageTmpDir()
+ * 
  * @example             js
  * import { __packageTmpDir } from '@coffeekraken/sugar/path';
  * __packageTmpDir(); // => '/private/var/folders/3x/jf5977fn79jbglr7rk0tq4d00000gn/T'

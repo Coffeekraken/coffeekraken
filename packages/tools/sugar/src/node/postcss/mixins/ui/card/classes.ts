@@ -91,6 +91,8 @@ export default function ({
         * @cssClass             s-card:vertical-reverse            Specify that the card has to be displayed verticaly reversed
         * @cssClass             s-card:horizontal-reverse            Specify that the card has to be displayed horizontaly reverses
         * 
+        * @snippet          @sugar.ui.card.classes
+        * 
         * @example          html            Default vertical
         ${cardTpl({
             class: 's-card',

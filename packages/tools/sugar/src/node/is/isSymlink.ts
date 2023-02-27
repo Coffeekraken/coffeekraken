@@ -18,6 +18,8 @@ import __fs from 'fs';
  * @todo      doc
  * @todo      tests
  *
+ * @snippet         __isSymlink($1)
+ * 
  * @example     js
  * import { __isSymlink } from '@coffeekraken/sugar/is';
  * __isSymlink('something/cool');

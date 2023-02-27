@@ -17,6 +17,8 @@
  * @todo      doc
  * @todo      tests
  *
+ * @snippet         __parse($1)
+ * 
  * @example           js
  * import { __parse } from '@coffeekraken/sugar/string';
  *  __parse('10'); // => 10

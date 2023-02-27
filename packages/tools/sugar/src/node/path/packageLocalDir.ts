@@ -16,6 +16,8 @@ import __SSugarConfig from '@coffeekraken/s-sugar-config';
  * @todo      doc
  * @todo      tests
  *
+ * @snippet         __packageLocalDir()
+ * 
  * @example             js
  * import { __packageLocalDir } from '@coffeekraken/sugar/path';
  * __packageLocalDir(); // => '/my/cool/path/.local'

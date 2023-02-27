@@ -15,6 +15,8 @@
  * @todo      doc
  * @todo      tests
  *
+ * @snippet         __exitFullscreen()
+ *
  * @example    js
  * import { __exitFullscreen } from '@coffeekraken/sugar/dom'
  * __exitFullscreen()

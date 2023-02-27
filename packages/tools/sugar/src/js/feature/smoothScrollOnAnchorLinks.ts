@@ -1,10 +1,9 @@
 // @ts-nocheck
 
-import __easing from '../../shared/easing/easeInOutQuint';
 import { __querySelectorLive, __scrollTo } from '@coffeekraken/sugar/dom';
 import urlParse from 'url-parse';
-import type { IScrollToSettings } from '../dom/scroll/scrollTo';
 import __deepMerge from '../../shared/object/deepMerge';
+import type { IScrollToSettings } from '../dom/scroll/scrollTo';
 
 /**
  * @name        smoothScrollOnAnchorLinks
@@ -22,6 +21,8 @@ import __deepMerge from '../../shared/object/deepMerge';
  * @todo            interface
  * @todo            doc
  * @todo            tests
+ *
+ * @snippet         __smoothScrollOnAnchorLinks()
  *
  * @example    js
  * import { __smoothScrollOnAnchorLinks } from '@coffeekraken/sugar/feature'

@@ -1,9 +1,9 @@
-import __resolveGlob from '../resolveGlob';
 import __SFile from '@coffeekraken/s-file';
+import __resolveGlobSync from '../resolveGlob';
 
 describe('sugar.node.glob.resolveGlob', () => {
     it('Should resolve the passed glob correctly', (done) => {
-        const files = __resolveGlob(`data/**/*`, {
+        const files = __resolveGlobSync(`data/**/*`, {
             cwd: __dirname,
         });
         const file = <__SFile>files[0];

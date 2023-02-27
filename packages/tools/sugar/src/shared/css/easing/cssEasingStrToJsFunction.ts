@@ -17,6 +17,8 @@ import __bezierEasing from 'bezier-easing';
  * @todo      doc
  * @todo      tests
  *
+ * @snippet         __cssEasingStrToJsFunction($1)
+ * 
  * @example  	js
  * import { __cssEasingStrToJsFunction } from '@coffeekraken/sugar/css'
  * const fn = __cssEasingStrToJsFunction('cubic-bezier(.17,.67,.83,.67)');

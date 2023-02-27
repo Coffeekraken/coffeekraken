@@ -16,6 +16,8 @@
  * @todo      doc
  * @todo      tests
  *
+ * @snippet         __requestAnimationFrame()
+ *
  * @example     js
  * @import { __requestAnimationFrame } from '@coffeekraken/sugar/dom';
  * __requestAnimationFrame(function() {

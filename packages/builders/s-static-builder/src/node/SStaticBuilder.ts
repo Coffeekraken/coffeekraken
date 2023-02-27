@@ -13,7 +13,7 @@ import {
     __readJsonSync,
     __removeSync,
     __writeFileSync,
-    __writeJsonSync,
+    __writeJsonSync
 } from '@coffeekraken/sugar/fs';
 import { __deepMerge } from '@coffeekraken/sugar/object';
 import { __packageCacheDir, __packageRootDir } from '@coffeekraken/sugar/path';
@@ -28,6 +28,7 @@ import { parseStringPromise } from 'xml2js';
  * @extends             SBuilder
  * @platform            node
  * @status              beta
+ * @private
  *
  * This class represent the postcss builder that you can use to build your postcss files
  * with a simple and efficient API.

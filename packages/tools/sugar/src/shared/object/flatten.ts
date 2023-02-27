@@ -26,6 +26,8 @@ import __isPlain from '../is/isPlainObject';
  * @todo      doc
  * @todo      tests
  *
+ * @snippet         __flatten($1)
+ * 
  * @example             js
  * import { __flatten } from '@coffeekraken/sugar/object';
  * __flatten({

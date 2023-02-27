@@ -1,4 +1,4 @@
-import __packagePath from '@coffeekraken/sugar/node/npm/packagePath';
+import { __packagePathSync } from '@coffeekraken/sugar/npm';
 import { __packageRootDir } from '@coffeekraken/sugar/path';
 import __fs from 'fs';
 import type { ISKitchenIngredient } from '../../SKitchen';
@@ -21,7 +21,7 @@ const nvmrcIngredient: ISKitchenIngredient = {
     async add() {
         const packageRoot = __packageRootDir();
 
-        const cliPackagePath = __packagePath('@coffeekraken/cli');
+        const cliPackagePath = __packagePathSync('@coffeekraken/cli');
         if (!cliPackagePath) return false;
 
         let nvmrc;

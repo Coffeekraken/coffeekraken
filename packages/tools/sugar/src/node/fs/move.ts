@@ -15,6 +15,9 @@ import __fs from 'fs-extra';
  * @param       {String}              dest          The destination path
  * @return      {Promise}                           A promise that will be resolved once the file/directory has been moved...
  *
+ * @snippet         __move($1, $2)
+ * await __move($1, $2)
+ *
  * @example       js
  * import { __move } from '@coffeekraken/sugar/fs';
  * await __move('my/cool/dir', 'another/place/for/directory').then(() => {

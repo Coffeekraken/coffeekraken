@@ -22,6 +22,8 @@ import __get from './get';
  * @todo      doc
  * @todo      tests
  *
+ * @snippet         __set($1, $2)
+ * 
  * @example               js
  * import { __set } from '@coffeekraken/sugar/object';
  *  __set('myObject.cool.value', 'Hello world'); // => Hello world

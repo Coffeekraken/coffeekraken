@@ -31,6 +31,8 @@ export { postcssUiFiltrableInputInterface as interface };
  *
  * Apply the filtrable input style to any s-filtrable-input element
  *
+ * @snippet         @sugar.ui.filtrableInput($1);
+ * 
  * @example     css
  * .s-filtrable-input {
  *    @sugar.ui.filtrableInput;

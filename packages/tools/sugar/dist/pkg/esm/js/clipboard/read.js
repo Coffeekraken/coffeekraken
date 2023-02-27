@@ -19,7 +19,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
  *
  * @return      {Promise}                          A promise fullfilled when the content has been read correctly
  *
- * @snippet         __read($1);
+ * @snippet         __read($1)
  *
  * @example         js
  * import { __copy, __read } from '@coffeekraken/sugar/clipboard';

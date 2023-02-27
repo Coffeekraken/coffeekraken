@@ -18,6 +18,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
  * @todo      doc
  * @todo      tests
  *
+ * @snippet         __isNumber($1)
+ *
  * @example 	js
  * import { __isNumber } from '@coffeekraken/sugar/is';
  * __isNumber(12) => true
@@ -31,4 +33,4 @@ function __isNumber(source) {
     return !isNaN(parseFloat(source)) && isFinite(source);
 }
 exports.default = __isNumber;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOztBQUVkOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBeUJHO0FBQ0gsU0FBd0IsVUFBVSxDQUFDLE1BQU07SUFDckMsT0FBTyxDQUFDLEtBQUssQ0FBQyxVQUFVLENBQUMsTUFBTSxDQUFDLENBQUMsSUFBSSxRQUFRLENBQUMsTUFBTSxDQUFDLENBQUM7QUFDMUQsQ0FBQztBQUZELDZCQUVDIn0=
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOztBQUVkOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0EyQkc7QUFDSCxTQUF3QixVQUFVLENBQUMsTUFBTTtJQUNyQyxPQUFPLENBQUMsS0FBSyxDQUFDLFVBQVUsQ0FBQyxNQUFNLENBQUMsQ0FBQyxJQUFJLFFBQVEsQ0FBQyxNQUFNLENBQUMsQ0FBQztBQUMxRCxDQUFDO0FBRkQsNkJBRUMifQ==

@@ -27,6 +27,8 @@ import __fastdom from 'fastdom';
  * @todo        tests
  * @todo        add setting to specify on which elements you want to enable the feature
  *
+ * @snippet         __inputAdditionalAttributes()
+ *
  * @example 	js
  * import { __inputAdditionalAttributes } from '@coffeekraken/sugar/feature';
  *  __inputAdditionalAttributes();

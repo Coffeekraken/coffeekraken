@@ -30,6 +30,8 @@ export { postcssUiGoogleMapInterface as interface };
  *
  * Apply the google map style to any s-google-map element
  *
+ * @snippet         @sugar.ui.googleMap($1);
+ * 
  * @example     css
  * .s-google-map {
  *    @sugar.ui.googleMap;

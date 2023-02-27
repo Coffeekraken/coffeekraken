@@ -15,6 +15,8 @@
  * @todo      doc
  * @todo      tests
  *
+ * @snippet         __isTestEnv()
+ * 
  * @example       js
  * import { __isTestEnv } from '@coffeekraken/sugar/is';
  * __isTestEnv(); // => true

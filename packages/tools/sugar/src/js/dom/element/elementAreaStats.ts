@@ -18,7 +18,7 @@ import {
  *
  * @setting         {HTMLElement|'visible'}     [relativeTo='visible']         The element to calculate the visible surface relative to
  *
- * @snippet         __elementAreaStats($1);
+ * @snippet         __elementAreaStats($1)
  *
  * @example         js
  * import { __elementAreaStats } from '@coffeekraken/sugar/dom';

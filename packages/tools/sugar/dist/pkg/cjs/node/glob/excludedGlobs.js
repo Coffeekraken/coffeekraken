@@ -20,6 +20,8 @@ const s_sugar_config_1 = __importDefault(require("@coffeekraken/s-sugar-config")
  * @todo      doc
  * @todo      tests
  *
+ * @snippet         __excludedGlobs()
+ *
  * @example             js
  * import { __excludedGlobs } from '@coffeekraken/sugar/glob';
  * __excludedGlobs();
@@ -34,4 +36,4 @@ function __excludedGlobs() {
     return [];
 }
 exports.default = __excludedGlobs;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOzs7OztBQUVkLGtGQUF5RDtBQUV6RDs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBcUJHO0FBRUgsU0FBd0IsZUFBZTtJQUNuQyxJQUFJLHdCQUFhLENBQUMsUUFBUSxFQUFFLEVBQUU7UUFDMUIsT0FBTyx3QkFBYSxDQUFDLEdBQUcsQ0FBQyxpQkFBaUIsQ0FBQyxDQUFDO0tBQy9DO0lBQ0QsT0FBTyxFQUFFLENBQUM7QUFDZCxDQUFDO0FBTEQsa0NBS0MifQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOzs7OztBQUVkLGtGQUF5RDtBQUV6RDs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0F1Qkc7QUFFSCxTQUF3QixlQUFlO0lBQ25DLElBQUksd0JBQWEsQ0FBQyxRQUFRLEVBQUUsRUFBRTtRQUMxQixPQUFPLHdCQUFhLENBQUMsR0FBRyxDQUFDLGlCQUFpQixDQUFDLENBQUM7S0FDL0M7SUFDRCxPQUFPLEVBQUUsQ0FBQztBQUNkLENBQUM7QUFMRCxrQ0FLQyJ9

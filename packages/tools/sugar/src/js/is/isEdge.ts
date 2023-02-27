@@ -16,6 +16,8 @@
  * @todo      doc
  * @todo      tests
  *
+ * @snippet         __isEdge()
+ *
  * @example 	js
  * import { __isEdge } from '@coffeekraken/sugar/is'
  * if (__isEdge()) {

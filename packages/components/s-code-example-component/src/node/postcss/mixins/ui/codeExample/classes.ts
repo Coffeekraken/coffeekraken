@@ -22,6 +22,24 @@ export interface IPostcssUiCodeExampleClassesParams {
 
 export { postcssUiCodeExampleClassesInterface as interface };
 
+/**
+ * @name                 classes
+ * @namespace            node.postcss.mixins.ui.codeExample
+ * @type                 PostcssMixin
+ * @platform            css
+ * @status              beta
+ * 
+ * This mixin represent a code example
+ *
+ * @snippet      @sugar.ui.codeExample.classes($1);
+ * 
+ * @example        css
+ * \@sugar.ui.codeExample.classes;
+ * 
+ * @since    2.0.0
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+ */
+
 export default function ({
     params,
     atRule,

@@ -25,6 +25,8 @@ const striptags_1 = __importDefault(require("striptags"));
  * @todo      doc
  * @todo      tests
  *
+ * @snippet         __stripTags($1)
+ *
  * @example    js
  * import { __stripTags } from '@coffeekraken/sugar/html'
  * __stripTags('<p><span>Hello</span> world</p>', '<span>') // <span>Hello</span> world
@@ -38,4 +40,4 @@ function stripTags(html, allowedTags = '', tagReplacement = '') {
     return res;
 }
 exports.default = stripTags;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOzs7OztBQUVkLDBEQUFvQztBQUVwQzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBMkJHO0FBQ0gsU0FBd0IsU0FBUyxDQUFDLElBQUksRUFBRSxXQUFXLEdBQUcsRUFBRSxFQUFFLGNBQWMsR0FBRyxFQUFFO0lBQ3pFLElBQUksR0FBRyxHQUFHLElBQUEsbUJBQVcsRUFBQyxJQUFJLEVBQUUsV0FBVyxFQUFFLGNBQWMsQ0FBQyxDQUFDO0lBQ3pELE9BQU8sR0FBRyxDQUFDO0FBQ2YsQ0FBQztBQUhELDRCQUdDIn0=
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOzs7OztBQUVkLDBEQUFvQztBQUVwQzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0E2Qkc7QUFDSCxTQUF3QixTQUFTLENBQUMsSUFBSSxFQUFFLFdBQVcsR0FBRyxFQUFFLEVBQUUsY0FBYyxHQUFHLEVBQUU7SUFDekUsSUFBSSxHQUFHLEdBQUcsSUFBQSxtQkFBVyxFQUFDLElBQUksRUFBRSxXQUFXLEVBQUUsY0FBYyxDQUFDLENBQUM7SUFDekQsT0FBTyxHQUFHLENBQUM7QUFDZixDQUFDO0FBSEQsNEJBR0MifQ==

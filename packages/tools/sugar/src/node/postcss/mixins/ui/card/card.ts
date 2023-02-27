@@ -30,6 +30,8 @@ export { postcssUiCardInterface as interface };
  *
  * Apply the menu lnf to any .s-menu element
  *
+ * @snippet         @sugar.ui.card
+ * 
  * @example     css
  * .s-menu {
  *    @sugar.ui.card;

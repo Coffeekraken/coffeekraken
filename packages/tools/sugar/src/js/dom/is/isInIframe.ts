@@ -11,7 +11,7 @@
  *
  * @return    {Boolean}    true if in iframe, false if not
  *
- * @snippet         __isInIframe($1);
+ * @snippet         __isInIframe($1)
  *
  * @todo      interface
  * @todo      doc

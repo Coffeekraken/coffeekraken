@@ -6,7 +6,7 @@ import { __hotkey } from '@coffeekraken/sugar/keyboard';
 import { __clamp } from '@coffeekraken/sugar/math';
 import { __deepMerge } from '@coffeekraken/sugar/object';
 import { __onProcessExit } from '@coffeekraken/sugar/process';
-import { __countLine } from '@coffeekraken/sugar/string';
+import { __countLineChars } from '@coffeekraken/sugar/string';
 import __micromatch from 'micromatch';
 import __nodeIpc from 'node-ipc';
 
@@ -241,8 +241,8 @@ export default class SBench extends __SClass {
                 `${title}${' '.repeat(
                     __clamp(
                         process.stdout.columns -
-                            __countLine(title) -
-                            __countLine(metas),
+                            __countLineChars(title) -
+                            __countLineChars(metas),
                         0,
                         9999,
                     ),

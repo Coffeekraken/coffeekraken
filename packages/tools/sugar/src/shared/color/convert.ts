@@ -1,9 +1,9 @@
 // @ts-nocheck
 
 import __hslaToRgba from './hslaToRgba';
-import __parse from './parse';
-import __rgbaToHsla from './rgbaToHsla';
+import __parseColor from './parse';
 import __rgbaToHex from './rgbaToHex';
+import __rgbaToHsla from './rgbaToHsla';
 
 /**
  * @name                  convert
@@ -24,6 +24,8 @@ import __rgbaToHex from './rgbaToHex';
  * @todo      doc
  * @todo      tests
  *
+ * @snippet         __convert($1, $2)
+ * 
  * @example         js
  * import { __convert } from '@coffeekraken/sugar/color';
  * __convert('rgba(10,20,30,100)', 'rgba'); // => { r: 10, g: 20, b: 30, a: 100 }
@@ -35,7 +37,7 @@ export default function __convert(input, format = 'rgba') {
     // transforming the input into rgba object
     let rgbaObj = {};
     if (typeof input === 'string') {
-        rgbaObj = __parse(input, 'rgba');
+        rgbaObj = __parseColor(input, 'rgba');
     } else if (typeof input === 'object') {
         if (
             input.r !== undefined &&

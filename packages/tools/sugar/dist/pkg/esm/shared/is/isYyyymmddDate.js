@@ -17,6 +17,8 @@
  * @todo      doc
  * @todo      tests
  *
+ * @snippet         __isYyyymmddDate($1)
+ *
  * @example    js
  * import { __isYyyymmddDate } from '@coffeekraken/sugar/is'
  * if (__isYyyymmddDate('2018.12.25')) {
@@ -29,4 +31,4 @@
 export default function __isYyyymmddDate(date) {
     return /^\d{4}[\-\/\s\.]?((((0[13578])|(1[02]))[\-\/\s\.]?(([0-2][0-9])|(3[01])))|(((0[469])|(11))[\-\/\s\.]?(([0-2][0-9])|(30)))|(02[\-\/\s\.]?[0-2][0-9]))$/.test(date);
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7QUFFZDs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0EwQkc7QUFDSCxNQUFNLENBQUMsT0FBTyxVQUFVLGdCQUFnQixDQUFDLElBQUk7SUFDekMsT0FBTyx1SkFBdUosQ0FBQyxJQUFJLENBQy9KLElBQUksQ0FDUCxDQUFDO0FBQ04sQ0FBQyJ9
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7QUFFZDs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQTRCRztBQUNILE1BQU0sQ0FBQyxPQUFPLFVBQVUsZ0JBQWdCLENBQUMsSUFBSTtJQUN6QyxPQUFPLHVKQUF1SixDQUFDLElBQUksQ0FDL0osSUFBSSxDQUNQLENBQUM7QUFDTixDQUFDIn0=

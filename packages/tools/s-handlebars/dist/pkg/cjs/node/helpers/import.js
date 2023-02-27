@@ -50,8 +50,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
  */
 function _import(filePath) {
     return __awaiter(this, void 0, void 0, function* () {
-        return yield Promise.resolve().then(() => __importStar(require(filePath.replace(/\.ts$/, '.js'))));
+        var _a;
+        return yield (_a = filePath.replace(/\.ts$/, '.js'), Promise.resolve().then(() => __importStar(require(_a))));
     });
 }
 exports.default = _import;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7QUFBQTs7Ozs7Ozs7Ozs7Ozs7O0dBZUc7QUFDSCxTQUE4QixPQUFPLENBQUMsUUFBUTs7UUFDMUMsT0FBTyx3REFBYSxRQUFRLENBQUMsT0FBTyxDQUFDLE9BQU8sRUFBRSxLQUFLLENBQUMsR0FBQyxDQUFDO0lBQzFELENBQUM7Q0FBQTtBQUZELDBCQUVDIn0=
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7QUFBQTs7Ozs7Ozs7Ozs7Ozs7O0dBZUc7QUFDSCxTQUE4QixPQUFPLENBQUMsUUFBUTs7O1FBQzFDLE9BQU8sWUFBYSxRQUFRLENBQUMsT0FBTyxDQUFDLE9BQU8sRUFBRSxLQUFLLENBQUMsMERBQUMsQ0FBQztJQUMxRCxDQUFDO0NBQUE7QUFGRCwwQkFFQyJ9

@@ -16,6 +16,8 @@
  * @todo      doc
  * @todo      tests
  *
+ * @snippet         __isIsoDateTime($1)
+ *
  * @example 	js
  * import { __isIsoDateTime } from '@coffeekraken/sugar/is';
  * __isIsoDateTime('john.doe@gmail.com') => false
@@ -30,4 +32,4 @@ export default function __isIsoDateTime(value) {
     return (value.match(/^([0-9]{4})-?(1[0-2]|0[1-9])-?(3[01]|0[1-9]|[12][0-9])↵\s(2[0-3]|[01][0-9]):?([0-5][0-9]):?([0-5][0-9])$/) ||
         value.match(/^(?:([0-9]{4})-?(1[0-2]|0[1-9])-?(3[01]|0[1-9]|[12][0-9])\s(2[0-3]|[01][0-9]):?([0-5][0-9]):?([0-5][0-9])|([0-9]{4})(1[0-2]|0[1-9])(3[01]|0[1-9]|[12][0-9])\s(2[0-3]|[01][0-9])([0-5][0-9])([0-5][0-9]))$/));
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7QUFFZDs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0EwQkc7QUFDSCxNQUFNLENBQUMsT0FBTyxVQUFVLGVBQWUsQ0FBQyxLQUFhO0lBQ2pELE9BQU8sQ0FDSCxLQUFLLENBQUMsS0FBSyxDQUNQLDBHQUEwRyxDQUM3RztRQUNELEtBQUssQ0FBQyxLQUFLLENBQ1AsMk1BQTJNLENBQzlNLENBQ0osQ0FBQztBQUNOLENBQUMifQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7QUFFZDs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQTRCRztBQUNILE1BQU0sQ0FBQyxPQUFPLFVBQVUsZUFBZSxDQUFDLEtBQWE7SUFDakQsT0FBTyxDQUNILEtBQUssQ0FBQyxLQUFLLENBQ1AsMEdBQTBHLENBQzdHO1FBQ0QsS0FBSyxDQUFDLEtBQUssQ0FDUCwyTUFBMk0sQ0FDOU0sQ0FDSixDQUFDO0FBQ04sQ0FBQyJ9

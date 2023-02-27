@@ -18,6 +18,8 @@ import { __getStyleProperty } from '@coffeekraken/sugar/dom';
  * @todo      doc
  * @todo      tests
  *
+ * @snippet         __forceRedraw()
+ *
  * @example    js
  * import { __forceRedraw } from '@coffeekraken/sugar/dom'
  * __forceRedraw($elm)

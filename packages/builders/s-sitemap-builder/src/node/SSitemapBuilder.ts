@@ -18,6 +18,7 @@ import __SSitemapBuilderSource from './SSitemapBuilderSource';
  * @platform        js
  * @platform        node
  * @status          beta
+ * @private
  *
  * This class allows you to generate a sitemap easily taking in consideration things like
  * docmap.json, frontspec.json, etc...

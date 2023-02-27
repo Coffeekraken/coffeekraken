@@ -28,6 +28,8 @@ import __argsToString from './argsToString';
  * @todo      doc
  * @todo      tests
  *
+ * @snippet         __buildCommandLine($1, $2)
+ * 
  * @example       js
  * import { __buildCommandLine } from '@coffeekraken/sugar/cli';
  * __buildCommandLine('php [hostname]:[port] [rootDir] [arguments]', {

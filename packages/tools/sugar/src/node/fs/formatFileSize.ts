@@ -16,6 +16,8 @@ import __filesize from 'filesize';
  * @param               {Object}                    [settings={}]     The "filesize" settings to customize the output. See [filesize](https://www.npmjs.com/package/filesize) settings
  * @return              {String}                                      The human readable version of the passed size
  *
+ * @snippet         __formatFileSize($1)
+ *
  * @example             js
  * import { __formatFilesize } from '@coffeekraken/sugar/fs';
  * __formatFilesize(163931); // => 326.86 KB

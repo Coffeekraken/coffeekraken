@@ -40,6 +40,7 @@ const fs_1 = require("@coffeekraken/sugar/fs");
  * @platform            node
  * @status              beta
  * @async
+ * @private
  *
  * This function is the same as the native "import" one unless it allows you to pass an array with 2 values when the
  * first is the package name from which to import things, and the second is the "export" to import.
@@ -57,13 +58,14 @@ const fs_1 = require("@coffeekraken/sugar/fs");
  */
 function _import(what) {
     return __awaiter(this, void 0, void 0, function* () {
+        var _a, _b;
         let imported;
         if (Array.isArray(what)) {
             if (what[0].match(/\.json$/)) {
                 imported = (0, fs_1.__readJsonSync)(what[0]);
             }
             else {
-                imported = yield Promise.resolve().then(() => __importStar(require(what[0])));
+                imported = yield (_a = what[0], Promise.resolve().then(() => __importStar(require(_a))));
             }
             return imported[what[1]];
         }
@@ -71,8 +73,8 @@ function _import(what) {
             imported = (0, fs_1.__readJsonSync)(what);
             return imported;
         }
-        return (yield Promise.resolve().then(() => __importStar(require(what)))).default;
+        return (yield (_b = what, Promise.resolve().then(() => __importStar(require(_b))))).default;
     });
 }
 exports.default = _import;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7QUFBQSwrQ0FBd0Q7QUFFeEQ7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQXFCRztBQUNILFNBQThCLE9BQU8sQ0FBQyxJQUF1Qjs7UUFDekQsSUFBSSxRQUFRLENBQUM7UUFDYixJQUFJLEtBQUssQ0FBQyxPQUFPLENBQUMsSUFBSSxDQUFDLEVBQUU7WUFDckIsSUFBSSxJQUFJLENBQUMsQ0FBQyxDQUFDLENBQUMsS0FBSyxDQUFDLFNBQVMsQ0FBQyxFQUFFO2dCQUMxQixRQUFRLEdBQUcsSUFBQSxtQkFBYyxFQUFDLElBQUksQ0FBQyxDQUFDLENBQUMsQ0FBQyxDQUFDO2FBQ3RDO2lCQUFNO2dCQUNILFFBQVEsR0FBRyx3REFBYSxJQUFJLENBQUMsQ0FBQyxDQUFDLEdBQUMsQ0FBQzthQUNwQztZQUNELE9BQU8sUUFBUSxDQUFDLElBQUksQ0FBQyxDQUFDLENBQUMsQ0FBQyxDQUFDO1NBQzVCO1FBQ0QsSUFBSSxJQUFJLENBQUMsS0FBSyxDQUFDLFNBQVMsQ0FBQyxFQUFFO1lBQ3ZCLFFBQVEsR0FBRyxJQUFBLG1CQUFjLEVBQUMsSUFBSSxDQUFDLENBQUM7WUFDaEMsT0FBTyxRQUFRLENBQUM7U0FDbkI7UUFDRCxPQUFPLENBQUMsd0RBQWEsSUFBSSxHQUFDLENBQUMsQ0FBQyxPQUFPLENBQUM7SUFDeEMsQ0FBQztDQUFBO0FBZkQsMEJBZUMifQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7QUFBQSwrQ0FBd0Q7QUFFeEQ7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0FzQkc7QUFDSCxTQUE4QixPQUFPLENBQUMsSUFBdUI7OztRQUN6RCxJQUFJLFFBQVEsQ0FBQztRQUNiLElBQUksS0FBSyxDQUFDLE9BQU8sQ0FBQyxJQUFJLENBQUMsRUFBRTtZQUNyQixJQUFJLElBQUksQ0FBQyxDQUFDLENBQUMsQ0FBQyxLQUFLLENBQUMsU0FBUyxDQUFDLEVBQUU7Z0JBQzFCLFFBQVEsR0FBRyxJQUFBLG1CQUFjLEVBQUMsSUFBSSxDQUFDLENBQUMsQ0FBQyxDQUFDLENBQUM7YUFDdEM7aUJBQU07Z0JBQ0gsUUFBUSxHQUFHLFlBQWEsSUFBSSxDQUFDLENBQUMsQ0FBQywwREFBQyxDQUFDO2FBQ3BDO1lBQ0QsT0FBTyxRQUFRLENBQUMsSUFBSSxDQUFDLENBQUMsQ0FBQyxDQUFDLENBQUM7U0FDNUI7UUFDRCxJQUFJLElBQUksQ0FBQyxLQUFLLENBQUMsU0FBUyxDQUFDLEVBQUU7WUFDdkIsUUFBUSxHQUFHLElBQUEsbUJBQWMsRUFBQyxJQUFJLENBQUMsQ0FBQztZQUNoQyxPQUFPLFFBQVEsQ0FBQztTQUNuQjtRQUNELE9BQU8sQ0FBQyxZQUFhLElBQUksMERBQUMsQ0FBQyxDQUFDLE9BQU8sQ0FBQztJQUN4QyxDQUFDO0NBQUE7QUFmRCwwQkFlQyJ9

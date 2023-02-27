@@ -35,6 +35,25 @@ export interface IPostcssUiDatetimePickerInputClassesParams {
 
 export { postcssUiDatetimePickerClassesInterface as interface };
 
+
+/**
+ * @name          datePicker
+ * @namespace     ui.datePicker
+ * @type               PostcssMixin
+ * @platform      css
+ * @status        beta
+ *
+ * Represent a date picker
+ *
+ * @snippet         @sugar.ui.datePicker.classes($1);
+ * 
+ * @example     css
+ * \@sugar.ui.datePicker();
+ *
+ * @since      2.0.0
+ * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+ */
+
 export default function ({
     params,
     atRule,

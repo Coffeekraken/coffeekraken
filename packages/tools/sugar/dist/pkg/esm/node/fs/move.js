@@ -13,6 +13,9 @@ import __fs from 'fs-extra';
  * @param       {String}              dest          The destination path
  * @return      {Promise}                           A promise that will be resolved once the file/directory has been moved...
  *
+ * @snippet         __move($1, $2)
+ * await __move($1, $2)
+ *
  * @example       js
  * import { __move } from '@coffeekraken/sugar/fs';
  * await __move('my/cool/dir', 'another/place/for/directory').then(() => {
@@ -26,4 +29,4 @@ import __fs from 'fs-extra';
 export default function __move(src, dest) {
     return __fs.move(src, dest);
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7QUFFZCxPQUFPLElBQUksTUFBTSxVQUFVLENBQUM7QUFFNUI7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0FzQkc7QUFDSCxNQUFNLENBQUMsT0FBTyxVQUFVLE1BQU0sQ0FBQyxHQUFHLEVBQUUsSUFBSTtJQUNwQyxPQUFPLElBQUksQ0FBQyxJQUFJLENBQUMsR0FBRyxFQUFFLElBQUksQ0FBQyxDQUFDO0FBQ2hDLENBQUMifQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7QUFFZCxPQUFPLElBQUksTUFBTSxVQUFVLENBQUM7QUFFNUI7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0F5Qkc7QUFDSCxNQUFNLENBQUMsT0FBTyxVQUFVLE1BQU0sQ0FBQyxHQUFHLEVBQUUsSUFBSTtJQUNwQyxPQUFPLElBQUksQ0FBQyxJQUFJLENBQUMsR0FBRyxFQUFFLElBQUksQ0FBQyxDQUFDO0FBQ2hDLENBQUMifQ==

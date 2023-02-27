@@ -4,7 +4,7 @@ import { __deepMerge } from '@coffeekraken/sugar/object';
 import type { ISSitemapBuilderBuildParams } from '../interface/SSitemapBuildIParamsInterface';
 import type { ISSitemapBuilderResultItem } from '../SSitemapBuilder';
 import __SSitemapBuilderSource, {
-    ISSitemapBuilderSourceResult,
+    ISSitemapBuilderSourceResult
 } from '../SSitemapBuilderSource';
 
 /**
@@ -78,7 +78,7 @@ export default class SSitemapBuilderFileSource extends __SSitemapBuilderSource {
 
             const logs: string[] = [];
 
-            const files = __SGlob.resolve(this.settings.glob, {
+            const files = __SGlob.resolveSync(this.settings.glob, {
                 cwd: this.settings.inDir,
             });
 

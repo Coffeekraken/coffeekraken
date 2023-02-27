@@ -1,29 +1,8 @@
 // @ts-nocheck
 import { __isPath } from '@coffeekraken/sugar/fs';
-/**
- * @name                folderPath
- * @namespace            node.fs
- * @type                Function
- * @platform        node
- * @status          beta
- *
- * This function returns you the folder path of the file path passed.
- * You can tell the function to check for file existence before getting
- * the folder path with the second parameter.
- *
- * @param           {String}            path            The file path to get folder path from
- * @param           {Boolean}        [checkExistence=false]        Specify if you want to check the file existence before
- * @return          {String|Boolean}                    The folder path or false if not exists
- *
- * @example         js
- * import { __folderPath } from '@coffeekraken/sugar/fs';
- * __folderPath('my/cool/path.js'); // => true
- *
- * @since           2.0.0
- * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
-export default function __folderPath(path, checkExistence = false) {
-    if (checkExistence) {
+export default function __folderPath(path, settings) {
+    const finalSettings = Object.assign({ checkExistence: false }, settings !== null && settings !== void 0 ? settings : {});
+    if (finalSettings.checkExistence) {
         if (!__isPath(path, true))
             return false;
     }
@@ -33,4 +12,4 @@ export default function __folderPath(path, checkExistence = false) {
     }
     return parts.slice(0, -1).join('/');
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7QUFFZCxPQUFPLEVBQUUsUUFBUSxFQUFFLE1BQU0sd0JBQXdCLENBQUM7QUFFbEQ7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQXFCRztBQUNILE1BQU0sQ0FBQyxPQUFPLFVBQVUsWUFBWSxDQUFDLElBQUksRUFBRSxjQUFjLEdBQUcsS0FBSztJQUM3RCxJQUFJLGNBQWMsRUFBRTtRQUNoQixJQUFJLENBQUMsUUFBUSxDQUFDLElBQUksRUFBRSxJQUFJLENBQUM7WUFBRSxPQUFPLEtBQUssQ0FBQztLQUMzQztJQUNELE1BQU0sS0FBSyxHQUFHLElBQUksQ0FBQyxLQUFLLENBQUMsR0FBRyxDQUFDLENBQUM7SUFDOUIsSUFBSSxLQUFLLENBQUMsTUFBTSxJQUFJLENBQUMsRUFBRTtRQUNuQixPQUFPLEVBQUUsQ0FBQztLQUNiO0lBQ0QsT0FBTyxLQUFLLENBQUMsS0FBSyxDQUFDLENBQUMsRUFBRSxDQUFDLENBQUMsQ0FBQyxDQUFDLElBQUksQ0FBQyxHQUFHLENBQUMsQ0FBQztBQUN4QyxDQUFDIn0=
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7QUFFZCxPQUFPLEVBQUUsUUFBUSxFQUFFLE1BQU0sd0JBQXdCLENBQUM7QUErQmxELE1BQU0sQ0FBQyxPQUFPLFVBQVUsWUFBWSxDQUFDLElBQUksRUFBRSxRQUF1QztJQUU5RSxNQUFNLGFBQWEsbUJBQ2YsY0FBYyxFQUFFLEtBQUssSUFDbEIsUUFBUSxhQUFSLFFBQVEsY0FBUixRQUFRLEdBQUksRUFBRSxDQUNwQixDQUFBO0lBRUQsSUFBSSxhQUFhLENBQUMsY0FBYyxFQUFFO1FBQzlCLElBQUksQ0FBQyxRQUFRLENBQUMsSUFBSSxFQUFFLElBQUksQ0FBQztZQUFFLE9BQU8sS0FBSyxDQUFDO0tBQzNDO0lBQ0QsTUFBTSxLQUFLLEdBQUcsSUFBSSxDQUFDLEtBQUssQ0FBQyxHQUFHLENBQUMsQ0FBQztJQUM5QixJQUFJLEtBQUssQ0FBQyxNQUFNLElBQUksQ0FBQyxFQUFFO1FBQ25CLE9BQU8sRUFBRSxDQUFDO0tBQ2I7SUFDRCxPQUFPLEtBQUssQ0FBQyxLQUFLLENBQUMsQ0FBQyxFQUFFLENBQUMsQ0FBQyxDQUFDLENBQUMsSUFBSSxDQUFDLEdBQUcsQ0FBQyxDQUFDO0FBQ3hDLENBQUMifQ==

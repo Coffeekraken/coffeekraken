@@ -19,6 +19,8 @@
  * @todo      doc
  * @todo      tests
  *
+ * @snippet         __extractValues($1, $2)
+ * 
  * @example         js
  * import { __extractValues } from '@coffeekraken/sugar/object';
  * __extractValues ([{

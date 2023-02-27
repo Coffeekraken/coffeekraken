@@ -18,6 +18,8 @@ import * as __rematrix from 'rematrix';
  * @todo      doc
  * @todo      tests
  *
+ * @snippet         __getTranslateProperties($1)
+ *
  * @example  	js
  * import { __getTranslateProperties } from '@coffeekraken/sugar/dom'
  * const props = __getTranslateProperties(myCoolHTMLElement);

@@ -1,6 +1,6 @@
 import __SBench from '@coffeekraken/s-bench';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
-import { __grabFirstExisting, __readXmlSync } from '@coffeekraken/sugar/fs';
+import { __grabFirstExistingSync, __readXmlSync } from '@coffeekraken/sugar/fs';
 import { __packageRootDir } from '@coffeekraken/sugar/path';
 
 export default function sitemapXmlHandler({ req, res, pageConfig }) {
@@ -9,7 +9,7 @@ export default function sitemapXmlHandler({ req, res, pageConfig }) {
 
         bench.step('beforeSitemapRead');
 
-        const sitemapPath = __grabFirstExisting([
+        const sitemapPath = __grabFirstExistingSync([
             `${__packageRootDir()}/sitemap.xml`,
             __SSugarConfig.get('sitemapBuilder.build.output'),
         ]);

@@ -15,6 +15,11 @@ import __typeOf from '../type/typeof';
  * @param       {IIterableCallbackFn}                     A callback called on each stack items with parameters "key" and "value". You must return either a new value for the stack item to be set, either nothing to pass to the next item
  * @return      {Promise}               A promise resolved with the new stack
  *
+ * @snippet         __map($1, $2)
+ * __map($1, ({key, value}) => {
+ *      $2
+ * })
+ * 
  * @example       js
  * import { __map } from '@coffeekraken/sugar/iterable';
  * const myStack = ['hello', 'world'];

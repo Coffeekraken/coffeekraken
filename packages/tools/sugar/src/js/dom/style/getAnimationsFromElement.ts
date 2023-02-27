@@ -19,6 +19,8 @@ import { __getAnimationProperties } from '@coffeekraken/sugar/dom';
  * @todo      doc
  * @todo      tests
  *
+ * @snippet     __getAnimationsFromElement($1)
+ *
  * @example  	js
  * import { __getAnimationsFromElement } from '@coffeekraken/sugar/dom'
  * const props = __getAnimationsFromElement(myCoolHTMLElement);

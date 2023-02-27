@@ -15,6 +15,8 @@
  * @todo      doc
  * @todo      tests
  *
+ * @snippet         __isMobile()
+ *
  * @example 	js
  * import { __isMobile } from 'coffeekraken/sugar/is'
  * if (__isMobile()) {

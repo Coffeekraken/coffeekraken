@@ -21,6 +21,10 @@ import { __SSvgFilter } from '@coffeekraken/sugar/filter';
  * @todo      doc
  * @todo      tests
  *
+ * @snippet         __SGooeySvgFilter()
+ * const filter = new __SGooeySvgFilter();
+ * filter.applyTo($1);
+ *
  * @example 		js
  * import { __SGooeySvgFilter } from '@coffeekraken/sugar/filter';
  * const filter = new __SGooeySvgFilter();

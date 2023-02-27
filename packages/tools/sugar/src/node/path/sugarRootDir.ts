@@ -18,6 +18,8 @@ import __SSugarConfig from '@coffeekraken/s-sugar-config';
  * @todo      doc
  * @todo      tests
  *
+ * @snippet         __sugarRootDir()
+ * 
  * @example             js
  * import { __sugarRootDir } from '@coffeekraken/sugar/path';
  * __sugarRootDir(); // => '/something/node_modules/@coffeekraken/sugar'

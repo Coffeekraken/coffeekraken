@@ -5,7 +5,7 @@ import { __writeJsonSync } from '@coffeekraken/sugar/fs';
 import { __deepMerge } from '@coffeekraken/sugar/object';
 import {
     __packageJsonSync,
-    __renamePackage,
+    __renamePackageSync
 } from '@coffeekraken/sugar/package';
 import { __packageRootDir } from '@coffeekraken/sugar/path';
 import __childProcess from 'child_process';
@@ -673,7 +673,7 @@ export default class SPackage extends __SClass {
                 `<yellow>[rename]</yellow> Renaming the package with "<cyan>${finalParams.name}</cyan>"`,
             );
 
-            __renamePackage(finalParams.name);
+            __renamePackageSync(finalParams.name);
 
             if (finalParams.folder) {
                 const folderName = finalParams.name.split('/').pop();

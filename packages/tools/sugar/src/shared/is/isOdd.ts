@@ -17,6 +17,8 @@
  * @todo      doc
  * @todo      tests
  *
+ * @snippet         __isOdd($1)
+ * 
  * @example    js
  * import { __isOdd } from '@coffeekraken/sugar/is'
  * __isOdd(1) // true

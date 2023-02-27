@@ -19,6 +19,8 @@ import __convertTime from '../../../shared/datetime/convertTime';
  * @todo      doc
  * @todo      tests
  *
+ * @snippet         __getAnimationProperties($1)
+ *
  * @example  	js
  * import { __getAnimationProperties } from '@coffeekraken/sugar/dom'
  * const props = __getAnimationProperties(myCoolHTMLElement);

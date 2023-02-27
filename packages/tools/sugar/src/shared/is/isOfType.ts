@@ -24,6 +24,8 @@ import __SType from '@coffeekraken/s-type';
  * @todo      doc
  * @todo      tests
  *
+ * @snippet         __isOfType($1)
+ * 
  * @example       js
  * import { __isOfType } from '@coffeekraken/sugar/is';
  * __isOfType(true, 'Boolean'); // => true

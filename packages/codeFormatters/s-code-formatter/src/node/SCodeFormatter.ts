@@ -28,6 +28,10 @@ import __SCodeFormatterFormatParamsInterface from './interface/SCodeFormatterFor
  *
  * @setting         {Number}                [timeoutBetweenSameFileProcess=1000]            Specify a timeout between 2 same file processes to avoid loop of formatting
  *
+ * @snippet         __SCodeFormatter($1)
+ * const codeFormatter = new __SCodeFormatter();
+ * const codeFormatterResult = await codeFormatter.format($1);
+ * 
  * @example         js
  * import __SCodeFormatter from '@coffeekraken/s-code-formatter';
  * const formatter = new __SCodeFormatter();

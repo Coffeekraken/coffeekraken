@@ -13,6 +13,8 @@ import __fs from 'fs';
  * @param       {String}           path            The xml file path to read
  * @return      {Object}                            The readed json
  *
+ * @snippet         __readXmlSync($1)
+ * 
  * @example         js
  * import { __readXmlSync } from '@coffeekraken/sugar/fs';
  * __readXmlSync('my-cool-xml/file.xml');

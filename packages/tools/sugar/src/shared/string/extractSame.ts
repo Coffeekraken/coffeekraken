@@ -20,6 +20,8 @@
  * @todo      doc
  * @todo      tests
  *
+ * @snippet             __extractSame($1)
+ * 
  * @example       js
  * import { __extractSame } from '@coffeekraken/sugar/string';
  * __extractSame('Hello world', 'Hello plop'); // => 'Hello '

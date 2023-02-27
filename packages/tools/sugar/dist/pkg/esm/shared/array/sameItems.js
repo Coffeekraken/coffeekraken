@@ -20,7 +20,7 @@ import __unique from './unique';
  * @setting         {Boolean}          [references=true]        Specify if you want to use the references comparaison or not
  * @setting         {Boolean}           [hash=true]             Specify if you want to allows transforming object etc in to hashes and compare this instead
  *
- * @import      import sameItems from '@coffeekraken/sugar/shared/array/sameItems';
+ * @snippet         __sameItems($1, $2)
  *
  * @example         js
  * import { __sameItems } from '@coffeekraken/sugar/array';

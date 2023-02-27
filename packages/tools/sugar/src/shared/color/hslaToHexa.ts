@@ -20,6 +20,8 @@ import __parseHsla from './parseHsla';
  * @todo      doc
  * @todo      tests
  *
+ * @snippet         __hslaToHexa($1)
+ * 
  * @example         js
  * import { __hslaToHexa } from '@coffeekraken/sugar/color';
  * __hslaToHexa(10,20,30,1);

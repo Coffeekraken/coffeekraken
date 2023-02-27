@@ -12,6 +12,9 @@ import __encodeObject from 'object-encode';
  *
  * Expose two function named "encrypt" and "decrypt" that you can use to process your content using the object algorithm
  *
+ * @snippet         __object.encrypt($1)
+ * 
+ * @example         js
  * import { __object } from '@coffeekraken/sugar/crypto';
  * __object.encrypt({
  *      hello: 'world'

@@ -13,7 +13,7 @@
  * @param    {HTMLElement}    $wrapper    The wrapper element
  * @return    {HTMLElement}           The toWrap element
  *
- * @snippet         __wrap($1);
+ * @snippet         __wrap($1)
  *
  * @todo      interface
  * @todo      doc

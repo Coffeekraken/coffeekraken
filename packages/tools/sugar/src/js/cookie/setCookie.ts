@@ -19,7 +19,7 @@
  * @setting         {Boolean | 'strict' | 'lax'}        [samesite=null]         Controls whether or not a cookie is sent with cross-site requests, providing some protection against cross-site request forgery attacks (CSRF)
  * @setting         {Boolean}       [httpOnly=null]         Forbids JavaScript from accessing the cookie, for example, through the Document.cookie property.
  *
- * @snippet         __setCookie($1, $2);
+ * @snippet         __setCookie($1, $2)
  *
  * @example         js
  * import { __setCookie } from '@coffeekraken/sugar/cookie';

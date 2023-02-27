@@ -18,6 +18,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
  * @todo      doc
  * @todo      tests
  *
+ * @snippet         __isBoolean($1)
+ *
  * @example    js
  * import { __isBoolean } from '@coffeekraken/sugar/is'
  * if (__isBoolean(true) {
@@ -31,4 +33,4 @@ function __isBoolean(value) {
     return typeof value === 'boolean';
 }
 exports.default = __isBoolean;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOztBQUVkOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBeUJHO0FBQ0gsU0FBd0IsV0FBVyxDQUFDLEtBQUs7SUFDckMsT0FBTyxPQUFPLEtBQUssS0FBSyxTQUFTLENBQUM7QUFDdEMsQ0FBQztBQUZELDhCQUVDIn0=
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOztBQUVkOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0EyQkc7QUFDSCxTQUF3QixXQUFXLENBQUMsS0FBSztJQUNyQyxPQUFPLE9BQU8sS0FBSyxLQUFLLFNBQVMsQ0FBQztBQUN0QyxDQUFDO0FBRkQsOEJBRUMifQ==

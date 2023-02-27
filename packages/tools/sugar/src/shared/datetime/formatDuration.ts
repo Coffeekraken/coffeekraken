@@ -18,6 +18,8 @@
  * @todo      doc
  * @todo      tests
  *
+ * @snippet         __formatDuration($1)
+ * 
  * @example       js
  * import { __formatDuration } from '@coffeekraken/sugar/datetime';
  * __formatDuration(2000); // => 2s

@@ -548,9 +548,9 @@ export default class SComponentUtils extends __SClass {
         // apply on resize
         window.addEventListener(
             'resize',
-            __debounce(() => {
+            __debounce(100, () => {
                 this._applyResponsiveProps(props);
-            }, 100),
+            }),
         );
 
         // first apply

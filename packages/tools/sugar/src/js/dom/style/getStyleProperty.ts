@@ -22,6 +22,8 @@ import camelize from '../../../shared/string/camelize';
  * @todo      doc
  * @todo      tests
  *
+ * @snippet         __getStyleProperty($1, $2)
+ *
  * @example  	js
  * import { __getStyleProperty } from '@coffeekraken/sugar/dom'
  * const opacity = __getStyleProperty(myCoolHTMLElement, 'opacity');

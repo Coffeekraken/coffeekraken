@@ -13,6 +13,8 @@
  * @param       {String}            str         The string to process
  * @return      {String}                        The processed string
  *
+ * @snippet         __stripSourcemap($1)
+ * 
  * @example         js
  * import { __stripSourcemap } from '@coffeekraken/sugar/string';
  * __stripSourcemap('...');

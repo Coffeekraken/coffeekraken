@@ -27,6 +27,8 @@ import __isPlainObject from '../is/isPlainObject';
  * @todo      doc
  * @todo      tests
  *
+ * @snippet         __deepMerge($1, $2)
+ * 
  * @example           js
  * import { __deepMerge } from '@coffeekraken/sugar/object';
  * __deepMerge({a: {b: {c: 'c', d: 'd'}}}, {a: {b: {e: 'e', f: 'f'}}});

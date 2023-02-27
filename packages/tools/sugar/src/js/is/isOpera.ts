@@ -16,6 +16,8 @@
  * @todo      doc
  * @todo      tests
  *
+ * @snippet         __isOpera()
+ *
  * @example 	js
  * import { __isOpera } from '@coffeekraken/sugar/is'
  * if ( __isOpera()) {

@@ -37,12 +37,16 @@ export interface ISClipboardCopyComponentProps {
  * @support         safari
  * @support         edge
  *
+ * @import          import { define as __SClipboardCopyComponentDefine } from '@coffeekraken/s-clipboard-copy-component';
+ * 
+ * @snippet         __SClipboardCopyComponentDefine($1)
+ * 
  * @install           shell
  * npm i @coffeekraken/s-clipboard-copy-component
  *
  * @install           js
- * import { define } from '@coffeekraken/s-clipboard-copy-component';
- * define();
+ * import { define as __SClipboardCopyComponentDefine } from '@coffeekraken/s-clipboard-copy-component';
+ * __SClipboardCopyComponentDefine();
  *
  * @example         html        Copy from an input
  * <div class="s-flex:align-center">

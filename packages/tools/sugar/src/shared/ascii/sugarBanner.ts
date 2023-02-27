@@ -20,6 +20,8 @@ import __deepMerge from '../object/deepMerge';
  * @todo      doc
  * @todo      tests
  *
+ * @snippet         __sugarBanner()
+ * 
  * @example     js
  * import { __sugarBanner } from '@coffeekraken/sugar/ascii';
  * __sugarBanner();

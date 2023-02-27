@@ -13,45 +13,6 @@ import { __injectStyle, __querySelectorLive } from '@coffeekraken/sugar/dom';
 import { __deepMerge } from '@coffeekraken/sugar/object';
 export default class SFeature extends __SClass {
     /**
-     * @name            constructor
-     * @type            Function
-     * @constructor
-     *
-     * Constructor
-     *
-     * @since       2.0.0
-     * @author 		Olivier Bossel<olivier.bossel@gmail.com>
-     */
-    constructor(name, node, settings) {
-        var _a, _b, _c, _d;
-        super(__deepMerge({}, settings));
-        // inject style if needed
-        if (this.settings.style) {
-            __injectStyle(this.settings.style, {
-                id: `s-feature-${name}`,
-            });
-        }
-        this.utils = new __SComponentUtils(node, Object.assign(Object.assign(Object.assign({}, ((_a = this.settings) !== null && _a !== void 0 ? _a : {})), ((_b = this.settings.componentUtils) !== null && _b !== void 0 ? _b : {})), { useTagNameForClassName: false, name }));
-        // name
-        this.name = name;
-        // node
-        this.node = node;
-        // assign props
-        this.props = this.utils.handleProps({}, {
-            interface: (_c = this.settings.interface) !== null && _c !== void 0 ? _c : (_d = this.settings.componentUtils) === null || _d === void 0 ? void 0 : _d.interface,
-        });
-        // add the base class on the feature
-        this.node.classList.add(...this.utils.cls('').split(' '));
-        this.utils.waitAndExecute(this.props.mountWhen, 
-        // @ts-ignore
-        () => __awaiter(this, void 0, void 0, function* () {
-            var _e;
-            // @ts-ignore
-            yield ((_e = this.mount) === null || _e === void 0 ? void 0 : _e.call(this));
-            this.props.mounted = true;
-        }));
-    }
-    /**
      * @name            setDefaultProps
      * @type            Function
      * @static
@@ -93,5 +54,44 @@ export default class SFeature extends __SClass {
         // attributes: [name],
         });
     }
+    /**
+     * @name            constructor
+     * @type            Function
+     * @constructor
+     *
+     * Constructor
+     *
+     * @since       2.0.0
+     * @author 		Olivier Bossel<olivier.bossel@gmail.com>
+     */
+    constructor(name, node, settings) {
+        var _a, _b, _c, _d;
+        super(__deepMerge({}, settings));
+        // inject style if needed
+        if (this.settings.style) {
+            __injectStyle(this.settings.style, {
+                id: `s-feature-${name}`,
+            });
+        }
+        this.utils = new __SComponentUtils(node, Object.assign(Object.assign(Object.assign({}, ((_a = this.settings) !== null && _a !== void 0 ? _a : {})), ((_b = this.settings.componentUtils) !== null && _b !== void 0 ? _b : {})), { useTagNameForClassName: false, name }));
+        // name
+        this.name = name;
+        // node
+        this.node = node;
+        // assign props
+        this.props = this.utils.handleProps({}, {
+            interface: (_c = this.settings.interface) !== null && _c !== void 0 ? _c : (_d = this.settings.componentUtils) === null || _d === void 0 ? void 0 : _d.interface,
+        });
+        // add the base class on the feature
+        this.node.classList.add(...this.utils.cls('').split(' '));
+        this.utils.waitAndExecute(this.props.mountWhen, 
+        // @ts-ignore
+        () => __awaiter(this, void 0, void 0, function* () {
+            var _e;
+            // @ts-ignore
+            yield ((_e = this.mount) === null || _e === void 0 ? void 0 : _e.call(this));
+            this.props.mounted = true;
+        }));
+    }
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7OztBQUFBLE9BQU8sUUFBUSxNQUFNLHVCQUF1QixDQUFDO0FBRTdDLE9BQU8saUJBQWlCLE1BQU0saUNBQWlDLENBQUM7QUFFaEUsT0FBTyxFQUFFLGFBQWEsRUFBRSxtQkFBbUIsRUFBRSxNQUFNLHlCQUF5QixDQUFDO0FBQzdFLE9BQU8sRUFBRSxXQUFXLEVBQUUsTUFBTSw0QkFBNEIsQ0FBQztBQWdEekQsTUFBTSxDQUFDLE9BQU8sT0FBTyxRQUFTLFNBQVEsUUFBUTtJQTZGMUM7Ozs7Ozs7OztPQVNHO0lBQ0gsWUFDSSxJQUFZLEVBQ1osSUFBaUIsRUFDakIsUUFBcUM7O1FBRXJDLEtBQUssQ0FBQyxXQUFXLENBQUMsRUFBRSxFQUFFLFFBQVEsQ0FBQyxDQUFDLENBQUM7UUFFakMseUJBQXlCO1FBQ3pCLElBQUksSUFBSSxDQUFDLFFBQVEsQ0FBQyxLQUFLLEVBQUU7WUFDckIsYUFBYSxDQUFDLElBQUksQ0FBQyxRQUFRLENBQUMsS0FBSyxFQUFFO2dCQUMvQixFQUFFLEVBQUUsYUFBYSxJQUFJLEVBQUU7YUFDMUIsQ0FBQyxDQUFDO1NBQ047UUFFRCxJQUFJLENBQUMsS0FBSyxHQUFHLElBQUksaUJBQWlCLENBQUMsSUFBSSxnREFDaEMsQ0FBQyxNQUFBLElBQUksQ0FBQyxRQUFRLG1DQUFJLEVBQUUsQ0FBQyxHQUNyQixDQUFDLE1BQUEsSUFBSSxDQUFDLFFBQVEsQ0FBQyxjQUFjLG1DQUFJLEVBQUUsQ0FBQyxLQUN2QyxzQkFBc0IsRUFBRSxLQUFLLEVBQzdCLElBQUksSUFDTixDQUFDO1FBRUgsT0FBTztRQUNQLElBQUksQ0FBQyxJQUFJLEdBQUcsSUFBSSxDQUFDO1FBRWpCLE9BQU87UUFDUCxJQUFJLENBQUMsSUFBSSxHQUFHLElBQUksQ0FBQztRQUVqQixlQUFlO1FBQ2YsSUFBSSxDQUFDLEtBQUssR0FBRyxJQUFJLENBQUMsS0FBSyxDQUFDLFdBQVcsQ0FDL0IsRUFBRSxFQUNGO1lBQ0ksU0FBUyxFQUNMLE1BQUEsSUFBSSxDQUFDLFFBQVEsQ0FBQyxTQUFTLG1DQUN2QixNQUFBLElBQUksQ0FBQyxRQUFRLENBQUMsY0FBYywwQ0FBRSxTQUFTO1NBQzlDLENBQ0osQ0FBQztRQUVGLG9DQUFvQztRQUNwQyxJQUFJLENBQUMsSUFBSSxDQUFDLFNBQVMsQ0FBQyxHQUFHLENBQUMsR0FBRyxJQUFJLENBQUMsS0FBSyxDQUFDLEdBQUcsQ0FBQyxFQUFFLENBQUMsQ0FBQyxLQUFLLENBQUMsR0FBRyxDQUFDLENBQUMsQ0FBQztRQUUxRCxJQUFJLENBQUMsS0FBSyxDQUFDLGNBQWMsQ0FDckIsSUFBSSxDQUFDLEtBQUssQ0FBQyxTQUFTO1FBQ3BCLGFBQWE7UUFDYixHQUFTLEVBQUU7O1lBQ1AsYUFBYTtZQUNiLE1BQU0sQ0FBQSxNQUFBLElBQUksQ0FBQyxLQUFLLG9EQUFJLENBQUEsQ0FBQztZQUNyQixJQUFJLENBQUMsS0FBSyxDQUFDLE9BQU8sR0FBRyxJQUFJLENBQUM7UUFDOUIsQ0FBQyxDQUFBLENBQ0osQ0FBQztJQUNOLENBQUM7SUFuSEQ7Ozs7Ozs7Ozs7Ozs7OztPQWVHO0lBQ0gsTUFBTSxDQUFDLGVBQWUsQ0FBQyxRQUEyQixFQUFFLEtBQVU7UUFDMUQsaUJBQWlCLENBQUMsZUFBZSxDQUFDLFFBQVEsRUFBRSxLQUFLLENBQUMsQ0FBQztJQUN2RCxDQUFDO0lBRUQ7Ozs7Ozs7Ozs7Ozs7O09BY0c7SUFDSCxNQUFNLENBQUMsTUFBTSxDQUNULElBQVksRUFDWixVQUEyQixFQUMzQixlQUFvQixFQUFFO1FBRXRCLElBQUksQ0FBQyxlQUFlLENBQUMsSUFBSSxFQUFFLFlBQVksQ0FBQyxDQUFDO1FBQ3pDLG1CQUFtQixDQUNmLElBQUksSUFBSSxHQUFHLEVBQ1gsQ0FBQyxJQUFJLEVBQUUsRUFBRTtZQUNMLElBQUksVUFBVSxDQUNWLElBQUksRUFDSixJQUFJLEVBQ0osaUJBQWlCLENBQUMsZUFBZSxDQUFDLElBQUksQ0FBQyxDQUMxQyxDQUFDO1FBQ04sQ0FBQyxFQUNEO1FBQ0ksc0JBQXNCO1NBQ3pCLENBQ0osQ0FBQztJQUNOLENBQUM7Q0F1R0oifQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7OztBQUFBLE9BQU8sUUFBUSxNQUFNLHVCQUF1QixDQUFDO0FBRTdDLE9BQU8saUJBQWlCLE1BQU0saUNBQWlDLENBQUM7QUFFaEUsT0FBTyxFQUFFLGFBQWEsRUFBRSxtQkFBbUIsRUFBRSxNQUFNLHlCQUF5QixDQUFDO0FBQzdFLE9BQU8sRUFBRSxXQUFXLEVBQUUsTUFBTSw0QkFBNEIsQ0FBQztBQWdEekQsTUFBTSxDQUFDLE9BQU8sT0FBTyxRQUFTLFNBQVEsUUFBUTtJQXFDMUM7Ozs7Ozs7Ozs7Ozs7OztPQWVHO0lBQ0gsTUFBTSxDQUFDLGVBQWUsQ0FBQyxRQUEyQixFQUFFLEtBQVU7UUFDMUQsaUJBQWlCLENBQUMsZUFBZSxDQUFDLFFBQVEsRUFBRSxLQUFLLENBQUMsQ0FBQztJQUN2RCxDQUFDO0lBRUQ7Ozs7Ozs7Ozs7Ozs7O09BY0c7SUFDSCxNQUFNLENBQUMsTUFBTSxDQUNULElBQVksRUFDWixVQUEyQixFQUMzQixlQUFvQixFQUFFO1FBRXRCLElBQUksQ0FBQyxlQUFlLENBQUMsSUFBSSxFQUFFLFlBQVksQ0FBQyxDQUFDO1FBQ3pDLG1CQUFtQixDQUNmLElBQUksSUFBSSxHQUFHLEVBQ1gsQ0FBQyxJQUFJLEVBQUUsRUFBRTtZQUNMLElBQUksVUFBVSxDQUNWLElBQUksRUFDSixJQUFJLEVBQ0osaUJBQWlCLENBQUMsZUFBZSxDQUFDLElBQUksQ0FBQyxDQUMxQyxDQUFDO1FBQ04sQ0FBQyxFQUNEO1FBQ0ksc0JBQXNCO1NBQ3pCLENBQ0osQ0FBQztJQUNOLENBQUM7SUFFRDs7Ozs7Ozs7O09BU0c7SUFDSCxZQUNJLElBQVksRUFDWixJQUFpQixFQUNqQixRQUFxQzs7UUFFckMsS0FBSyxDQUFDLFdBQVcsQ0FBQyxFQUFFLEVBQUUsUUFBUSxDQUFDLENBQUMsQ0FBQztRQUVqQyx5QkFBeUI7UUFDekIsSUFBSSxJQUFJLENBQUMsUUFBUSxDQUFDLEtBQUssRUFBRTtZQUNyQixhQUFhLENBQUMsSUFBSSxDQUFDLFFBQVEsQ0FBQyxLQUFLLEVBQUU7Z0JBQy9CLEVBQUUsRUFBRSxhQUFhLElBQUksRUFBRTthQUMxQixDQUFDLENBQUM7U0FDTjtRQUVELElBQUksQ0FBQyxLQUFLLEdBQUcsSUFBSSxpQkFBaUIsQ0FBQyxJQUFJLGdEQUNoQyxDQUFDLE1BQUEsSUFBSSxDQUFDLFFBQVEsbUNBQUksRUFBRSxDQUFDLEdBQ3JCLENBQUMsTUFBQSxJQUFJLENBQUMsUUFBUSxDQUFDLGNBQWMsbUNBQUksRUFBRSxDQUFDLEtBQ3ZDLHNCQUFzQixFQUFFLEtBQUssRUFDN0IsSUFBSSxJQUNOLENBQUM7UUFFSCxPQUFPO1FBQ1AsSUFBSSxDQUFDLElBQUksR0FBRyxJQUFJLENBQUM7UUFFakIsT0FBTztRQUNQLElBQUksQ0FBQyxJQUFJLEdBQUcsSUFBSSxDQUFDO1FBRWpCLGVBQWU7UUFDZixJQUFJLENBQUMsS0FBSyxHQUFHLElBQUksQ0FBQyxLQUFLLENBQUMsV0FBVyxDQUMvQixFQUFFLEVBQ0Y7WUFDSSxTQUFTLEVBQ0wsTUFBQSxJQUFJLENBQUMsUUFBUSxDQUFDLFNBQVMsbUNBQ3ZCLE1BQUEsSUFBSSxDQUFDLFFBQVEsQ0FBQyxjQUFjLDBDQUFFLFNBQVM7U0FDOUMsQ0FDSixDQUFDO1FBRUYsb0NBQW9DO1FBQ3BDLElBQUksQ0FBQyxJQUFJLENBQUMsU0FBUyxDQUFDLEdBQUcsQ0FBQyxHQUFHLElBQUksQ0FBQyxLQUFLLENBQUMsR0FBRyxDQUFDLEVBQUUsQ0FBQyxDQUFDLEtBQUssQ0FBQyxHQUFHLENBQUMsQ0FBQyxDQUFDO1FBRTFELElBQUksQ0FBQyxLQUFLLENBQUMsY0FBYyxDQUNyQixJQUFJLENBQUMsS0FBSyxDQUFDLFNBQVM7UUFDcEIsYUFBYTtRQUNiLEdBQVMsRUFBRTs7WUFDUCxhQUFhO1lBQ2IsTUFBTSxDQUFBLE1BQUEsSUFBSSxDQUFDLEtBQUssb0RBQUksQ0FBQSxDQUFDO1lBQ3JCLElBQUksQ0FBQyxLQUFLLENBQUMsT0FBTyxHQUFHLElBQUksQ0FBQztRQUM5QixDQUFDLENBQUEsQ0FDSixDQUFDO0lBQ04sQ0FBQztDQTBDSiJ9

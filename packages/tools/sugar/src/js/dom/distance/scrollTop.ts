@@ -11,7 +11,7 @@
  *
  * @return      {Number}            The amount of scroll top that the user as made in the page
  *
- * @snippet         __scrollTop();
+ * @snippet         __scrollTop()
  *
  * @todo      interface
  * @todo      doc

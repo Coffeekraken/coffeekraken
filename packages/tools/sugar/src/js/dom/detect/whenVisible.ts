@@ -17,7 +17,7 @@ import { __uniqid } from '@coffeekraken/sugar/string';
  * @param 		{HTMLElement} 				$elm 		The element to monitor
  * @return 		(Promise<HTMLElement>) 								The promise that will be resolved when the element is visible
  *
- * @snippet         __whenVisible($1);
+ * @snippet         __whenVisible($1)
  * __whenVisible($1).then(\$elm => {
  *      $2
  * });

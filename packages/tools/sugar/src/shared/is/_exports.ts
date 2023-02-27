@@ -35,7 +35,7 @@ import __isOfType from './isOfType';
 import __isOsx from './isOsx';
 import __isPath from './isPath';
 import __isPlainObject from './isPlainObject';
-import __isRegexp from './isRegexp';
+import __isRegex from './isRegex';
 import __isString from './isString';
 import __isTerminal from './isTerminal';
 import __isTestEnv from './isTestEnv';
@@ -81,7 +81,7 @@ export {
     __isOsx,
     __isPath,
     __isPlainObject,
-    __isRegexp,
+    __isRegex,
     __isString,
     __isTerminal,
     __isTestEnv,

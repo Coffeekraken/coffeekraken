@@ -13,6 +13,8 @@ import { XMLParser } from 'fast-xml-parser';
  * @param       {String}            xml             The xml string to convert
  * @return      {Object}                            The corresponding json object
  *
+ * @snippet         __xmlToJson($1)
+ * 
  * @example         js
  * import ( __xmlToJson ) from '@coffeekraken/sugar/convert';
  * __xmlToJson('...');

@@ -4,7 +4,7 @@ import __SEnv from '@coffeekraken/s-env';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
 import __SSugarJson from '@coffeekraken/s-sugar-json';
 import __STheme from '@coffeekraken/s-theme';
-import { __dirname, __folderHash } from '@coffeekraken/sugar/fs';
+import { __dirname, __folderHashSync } from '@coffeekraken/sugar/fs';
 import { __deepMerge, __objectHash } from '@coffeekraken/sugar/object';
 import { __packageRootDir } from '@coffeekraken/sugar/path';
 import { __unquote } from '@coffeekraken/sugar/string';
@@ -15,13 +15,13 @@ import __path from 'path';
 import __postcss from 'postcss';
 import __getRoot from './utils/getRoot';
 
-import { __compressVarName } from '@coffeekraken/sugar/css';
+import { __compressCssVarName } from '@coffeekraken/sugar/css';
 import __CssVars from './CssVars';
 
 const mixinsStack = {},
     functionsStack = {};
 const externalPackagesHashes: string[] = [];
-let packageHash = __folderHash(__path.dirname(__dirname()));
+let packageHash = __folderHashSync(__path.dirname(__dirname()));
 let loadedPromise, compileFileTimeout;
 
 const sharedData = {
@@ -272,7 +272,7 @@ const plugin = (settings: IPostcssSugarPluginSettings = {}) => {
         folderPath = __replaceTokens(folderPath);
 
         // update plugin hash with these new folders hash
-        externalPackagesHashes.push(__folderHash(folderPath));
+        externalPackagesHashes.push(__folderHashSync(folderPath));
 
         const paths = __glob.sync(`${folderPath}/**/*.js`, {
             // cwd: __dirname(),
@@ -549,7 +549,7 @@ const plugin = (settings: IPostcssSugarPluginSettings = {}) => {
             root.walkDecls((node) => {
                 if (node.variable) {
                     if (node.prop.match(/--s-theme/)) {
-                        const compressedProp = __compressVarName(node.prop);
+                        const compressedProp = __compressCssVarName(node.prop);
                         node.prop = compressedProp;
                     }
                 }
@@ -559,7 +559,7 @@ const plugin = (settings: IPostcssSugarPluginSettings = {}) => {
                     valueMatches.forEach((match) => {
                         node.value = node.value.replace(
                             match,
-                            __compressVarName(match),
+                            __compressCssVarName(match),
                         );
                     });
                 }

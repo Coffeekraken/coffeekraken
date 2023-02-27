@@ -18,6 +18,8 @@ import { __isVisible } from '@coffeekraken/sugar/dom';
  * @todo      doc
  * @todo      tests
  *
+ * @snippet         __inViewportPercentage($1)
+ *
  * @example  	js
  * import { __inViewportPercentage } from '@coffeekraken/sugar/dom'
  * const percentage = __inViewportPercentage(myCoolHTMLElement);

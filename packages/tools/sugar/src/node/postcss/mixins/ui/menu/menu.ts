@@ -43,6 +43,8 @@ export { postcssUiDatetimePickerInterface as interface };
  *
  * Apply the menu lnf to any .s-menu element
  *
+ * @snippet         @sugar.ui.menu
+ * 
  * @example     css
  * .s-menu {
  *    @sugar.ui.menu;

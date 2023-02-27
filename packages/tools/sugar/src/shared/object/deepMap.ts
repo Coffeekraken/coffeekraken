@@ -25,6 +25,11 @@ import __deepMerge from '../object/deepMerge';
  * @todo      doc
  * @todo      tests
  *
+ * @snippet         __deepMap($1, $2)
+ * __deepMap($1, ({object, prop, value, path}) => {
+ *      $2
+ * })
+ * 
  * @example       js
  * import { __deepMap } from '@coffeekraken/sugar/object';
  * __deepMap({

@@ -21,7 +21,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
  *
  * @return      {Promise}                          A promise fullfilled when the content has been read correctly
  *
- * @snippet         __read($1);
+ * @snippet         __read($1)
  *
  * @example         js
  * import { __copy, __read } from '@coffeekraken/sugar/clipboard';

@@ -50,9 +50,10 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 function interfaceTagProxy(data) {
     return __awaiter(this, void 0, void 0, function* () {
-        const int = (yield Promise.resolve().then(() => __importStar(require(data.path)))).default;
+        var _a;
+        const int = (yield (_a = data.path, Promise.resolve().then(() => __importStar(require(_a))))).default;
         return int.toObject();
     });
 }
 exports.default = interfaceTagProxy;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQTs7Ozs7Ozs7Ozs7Ozs7O0dBZUc7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7QUFJSCxTQUE4QixpQkFBaUIsQ0FDM0MsSUFBUzs7UUFFVCxNQUFNLEdBQUcsR0FBRyxDQUFDLHdEQUFhLElBQUksQ0FBQyxJQUFJLEdBQUMsQ0FBQyxDQUFDLE9BQU8sQ0FBQztRQUM5QyxPQUFPLEdBQUcsQ0FBQyxRQUFRLEVBQUUsQ0FBQztJQUMxQixDQUFDO0NBQUE7QUFMRCxvQ0FLQyJ9
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQTs7Ozs7Ozs7Ozs7Ozs7O0dBZUc7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7QUFJSCxTQUE4QixpQkFBaUIsQ0FDM0MsSUFBUzs7O1FBRVQsTUFBTSxHQUFHLEdBQUcsQ0FBQyxZQUFhLElBQUksQ0FBQyxJQUFJLDBEQUFDLENBQUMsQ0FBQyxPQUFPLENBQUM7UUFDOUMsT0FBTyxHQUFHLENBQUMsUUFBUSxFQUFFLENBQUM7SUFDMUIsQ0FBQztDQUFBO0FBTEQsb0NBS0MifQ==

@@ -1,7 +1,8 @@
 import __excludedGlobs from './excludedGlobs';
 import __matchExcludeGlobs from './matchExcludeGlobs';
-import __matchGlob from './matchGlob';
-import __resolveGlob from './resolveGlob';
+import __matchGlobSync from './matchGlobSync';
+import __resolveGlobSync from './resolveGlobSync';
 
 export * from '../../shared/glob/_exports';
-export { __excludedGlobs, __matchExcludeGlobs, __matchGlob, __resolveGlob };
+export { __excludedGlobs, __matchExcludeGlobs, __matchGlobSync, __resolveGlobSync };
+

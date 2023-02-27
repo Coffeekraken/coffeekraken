@@ -15,6 +15,11 @@ const memoizee_1 = __importDefault(require("memoizee"));
  * This function can be used to memorize a function call result in order to save memory.
  * This is just a "proxy" of the "memoizee" package.
  *
+ * @snippet         __momoize($1)
+ *
+ * @param       {Function}          fn      The function to memoize his result
+ * @return      {Any}                       The memoized function result
+ *
  * @example         js
  * import { __memoize } from '@coffeekraken/sugar/function';
  * const fn =  __memoize(function(text) => {
@@ -32,4 +37,4 @@ function __memoize(...args) {
     return (0, memoizee_1.default)(...args);
 }
 exports.default = __memoize;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7O0FBQUEsd0RBQWtDO0FBRWxDOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQXVCRztBQUNILFNBQXdCLFNBQVMsQ0FBQyxHQUFHLElBQUk7SUFDckMsT0FBTyxJQUFBLGtCQUFVLEVBQUMsR0FBRyxJQUFJLENBQUMsQ0FBQztBQUMvQixDQUFDO0FBRkQsNEJBRUMifQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7O0FBQUEsd0RBQWtDO0FBRWxDOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBNEJHO0FBQ0gsU0FBd0IsU0FBUyxDQUFDLEdBQUcsSUFBSTtJQUNyQyxPQUFPLElBQUEsa0JBQVUsRUFBQyxHQUFHLElBQUksQ0FBQyxDQUFDO0FBQy9CLENBQUM7QUFGRCw0QkFFQyJ9

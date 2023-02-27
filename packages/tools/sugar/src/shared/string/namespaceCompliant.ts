@@ -14,6 +14,8 @@ import __simplifySpecialChars from './simplifySpecialChars';
  * @param       {String}        string         The string to process
  * @return      {String}                        The processed string
  *
+ * @snippet         __namespaceCompliant($1)
+ * 
  * @example         php
  * import { __namespaceCompliant } from '@coffeekraken/sugar/string';
  * __namespaceCompliant('Hello world'); // => hello-world

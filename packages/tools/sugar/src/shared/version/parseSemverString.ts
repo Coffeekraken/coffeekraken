@@ -13,6 +13,8 @@ import __semverParser from 'semver/functions/parse';
  * @param       {String}       semverString      The semver string to parse
  * @return      {ISemverObject}          The parsed semver object
  *
+ * @snippet         __parseSemverString($1)
+ * 
  * @example       js
  * import { __parseSemverString } from '@coffeekraken/sugar/version';
  * __parseSemverString('2.3.1);

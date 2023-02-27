@@ -15,7 +15,7 @@ import { __isVisible } from '@coffeekraken/sugar/dom';
  * @param 		{HTMLElement} 					elm  		The element to start on
  * @return 		{HTMLElement} 								The element found or null
  *
- * @snippet         __closestNotVisible($1);
+ * @snippet         __closestNotVisible($1)
  *
  * @todo      interface
  * @todo      doc

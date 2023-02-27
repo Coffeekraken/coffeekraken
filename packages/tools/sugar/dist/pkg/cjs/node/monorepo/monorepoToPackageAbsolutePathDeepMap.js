@@ -3,13 +3,13 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const deepMap_1 = __importDefault(require("../../shared/object/deepMap"));
-const path_1 = require("@coffeekraken/sugar/path");
 const monorepo_1 = require("@coffeekraken/sugar/monorepo");
+const path_1 = require("@coffeekraken/sugar/path");
+const deepMap_1 = __importDefault(require("../../shared/object/deepMap"));
 /**
  * @name            monorepoToPackageAbsolutePathDeepMap
  * @type            Function
- * @static
+ * @private
  *
  * This method allows you to make the passed path absolute to the package root passed.
  * This uses the `monorepoToPackageAbsolutePath` method to make all the paths in the passed object
@@ -31,4 +31,4 @@ function __monorepoToPackageAbsolutePathDeepMap(obj, packageRootPath = (0, path_
     });
 }
 exports.default = __monorepoToPackageAbsolutePathDeepMap;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7O0FBQUEsMEVBQW9EO0FBQ3BELG1EQUE0RDtBQUM1RCwyREFBK0U7QUFFL0U7Ozs7Ozs7Ozs7Ozs7OztHQWVHO0FBQ0gsU0FBd0Isc0NBQXNDLENBQzFELEdBQVEsRUFDUixrQkFBMEIsSUFBQSx1QkFBZ0IsR0FBRTtJQUU1QyxPQUFPLElBQUEsaUJBQVMsRUFBQyxHQUFHLEVBQUUsQ0FBQyxFQUFFLE1BQU0sRUFBRSxJQUFJLEVBQUUsS0FBSyxFQUFFLElBQUksRUFBRSxFQUFFLEVBQUU7UUFDcEQsSUFBSSxPQUFPLEtBQUssS0FBSyxRQUFRLEVBQUU7WUFDM0IsS0FBSyxHQUFHLElBQUEsMENBQStCLEVBQUMsS0FBSyxFQUFFLGVBQWUsQ0FBQyxDQUFDO1NBQ25FO1FBQ0QsT0FBTyxLQUFLLENBQUM7SUFDakIsQ0FBQyxDQUFDLENBQUM7QUFDUCxDQUFDO0FBVkQseURBVUMifQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7O0FBQUEsMkRBQStFO0FBQy9FLG1EQUE0RDtBQUM1RCwwRUFBb0Q7QUFFcEQ7Ozs7Ozs7Ozs7Ozs7OztHQWVHO0FBQ0gsU0FBd0Isc0NBQXNDLENBQzFELEdBQVEsRUFDUixrQkFBMEIsSUFBQSx1QkFBZ0IsR0FBRTtJQUU1QyxPQUFPLElBQUEsaUJBQVMsRUFBQyxHQUFHLEVBQUUsQ0FBQyxFQUFFLE1BQU0sRUFBRSxJQUFJLEVBQUUsS0FBSyxFQUFFLElBQUksRUFBRSxFQUFFLEVBQUU7UUFDcEQsSUFBSSxPQUFPLEtBQUssS0FBSyxRQUFRLEVBQUU7WUFDM0IsS0FBSyxHQUFHLElBQUEsMENBQStCLEVBQUMsS0FBSyxFQUFFLGVBQWUsQ0FBQyxDQUFDO1NBQ25FO1FBQ0QsT0FBTyxLQUFLLENBQUM7SUFDakIsQ0FBQyxDQUFDLENBQUM7QUFDUCxDQUFDO0FBVkQseURBVUMifQ==

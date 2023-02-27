@@ -16,11 +16,11 @@ import { __getCoffeekrakenMetas } from '@coffeekraken/sugar/coffeekraken';
 import { __packageCacheDir, __packageRootDir } from '@coffeekraken/sugar/path';
 
 import {
-    __fileHash,
+    __fileHashSync,
     __folderPath,
     __readJsonSync,
     __writeFileSync,
-    __writeTmpFileSync,
+    __writeTmpFileSync
 } from '@coffeekraken/sugar/fs';
 import { __deepMerge, __objectHash } from '@coffeekraken/sugar/object';
 import __fs from 'fs';
@@ -38,6 +38,7 @@ import __ogTransformer from './transformers/og';
  * @extends             SBuilder
  * @platform            node
  * @status              beta
+ * @private
  *
  * This class represent the markdown builder that helps you create and maintain multiple README for example
  * with a common style and some common sections like footer, etc...
@@ -313,7 +314,7 @@ export default class SMarkdownBuilder extends __SBuilder {
                 } else if (__SGlob.isGlob(path)) {
                     sourceObj.inRelPath = __path.relative(process.cwd(), path);
                     // @ts-ignore
-                    sourceObj.files = __SGlob.resolve(path, {
+                    sourceObj.files = __SGlob.resolveSync(path, {
                         SFile: false,
                     });
                 } else {
@@ -385,7 +386,7 @@ export default class SMarkdownBuilder extends __SBuilder {
                 for (let j = 0; j < sourceObj.files.length; j++) {
                     const filePath = <string>sourceObj.files[j];
 
-                    const fileHash = __fileHash(filePath),
+                    const fileHash = __fileHashSync(filePath),
                         finalFileHash = `${fileHash}-${paramsHash}-${settingsHash}`;
 
                     const buildObj = {

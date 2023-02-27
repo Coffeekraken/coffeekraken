@@ -12,6 +12,7 @@ import __chokidar from 'chokidar';
  * @async
  * @platform        node
  * @status          stable
+ * @private
  *
  * This function wrap the AMAZING chokidar to make use of it even simplier with some default values and support for
  * things like multiple globs, etc...

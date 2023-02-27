@@ -308,7 +308,7 @@ export default class SMonorepo extends __SClass {
                 `${this._rootDir}/package.json`,
             );
 
-            const files = __SGlob.resolve(
+            const files = __SGlob.resolveSync(
                 `${finalParams.packagesGlob}/package.json`,
                 {
                     cwd: this._rootDir,
@@ -676,7 +676,7 @@ export default class SMonorepo extends __SClass {
                 `${this._rootDir}/package.json`,
             );
 
-            const files = __SGlob.resolve(
+            const files = __SGlob.resolveSync(
                 `${finalParams.packagesGlob}/package.json`,
                 {
                     cwd: this._rootDir,

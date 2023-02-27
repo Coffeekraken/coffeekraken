@@ -17,6 +17,8 @@
  * @todo      doc
  * @todo      tests
  *
+ * @snippet         isEven($1)
+ * 
  * @example    js
  * import { __isEven } from '@coffeekraken/sugar/is'
  * __isEven(1) // false

@@ -8,10 +8,10 @@ import {
     __checkPathWithMultipleExtensions,
     __fileName,
     __folderPath,
-    __readJsonSync,
+    __readJsonSync
 } from '@coffeekraken/sugar/fs';
 import { __deepMap, __deepMerge, __get } from '@coffeekraken/sugar/object';
-import { __packageJsonSync, __packageMetas } from '@coffeekraken/sugar/package';
+import { __packageJsonSync, __packageMetasSync } from '@coffeekraken/sugar/package';
 import { __packageRootDir } from '@coffeekraken/sugar/path';
 import __deepFilter from '@coffeekraken/sugar/shared/object/deepFilter';
 import __set from '@coffeekraken/sugar/shared/object/set';
@@ -353,7 +353,7 @@ class SDocmap extends __SClass implements ISDocmap {
                 const docmapJson = __readJsonSync(currentPathDocmapJsonPath);
 
                 // get package metas
-                const packageMetas = __packageMetas(packageRootPath);
+                const packageMetas = __packageMetasSync(packageRootPath);
                 Object.keys(docmapJson.map).forEach((namespace) => {
                     if (docmapJson.map[namespace]) {
                         docmapJson.map[namespace].package = packageMetas;
@@ -752,7 +752,7 @@ class SDocmap extends __SClass implements ISDocmap {
             );
 
             // searching inside the current package for docblocks to use
-            const filesInPackage = __SGlob.resolve(
+            const filesInPackage = __SGlob.resolveSync(
                 finalParams.globs.map((glob) => {
                     return `${glob}:\\*\\s@namespace`;
                 }),

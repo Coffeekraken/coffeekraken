@@ -18,14 +18,17 @@ const get_folder_size_1 = __importDefault(require("get-folder-size"));
  * @name                            folderSize
  * @namespace            node.fs
  * @type                            Function
- * @async
  * @platform        node
  * @status          beta
+ * @async
  *
  * Calculate the size of the passed folder and return it through a promise in bytes format
  *
  * @param             {String}                folderPath                  The folder path to calculate the size
  * @return            {Promise}                                           A promise that will be resolved once the folder size has been calculated
+ *
+ * @snippet         __folderSize($1)
+ * await __folderSize($1)
  *
  * @example           js
  * import { __folderSize } from '@coffeekraken/sugar/fs';
@@ -43,4 +46,4 @@ function __folderSize(folderPath) {
     }));
 }
 exports.default = __folderSize;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOzs7Ozs7Ozs7Ozs7OztBQUVkLHNFQUF3QztBQUV4Qzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBcUJHO0FBQ0gsU0FBd0IsWUFBWSxDQUFDLFVBQWtCO0lBQ25ELE9BQU8sSUFBSSxPQUFPLENBQUMsQ0FBTyxPQUFPLEVBQUUsTUFBTSxFQUFFLEVBQUU7UUFDekMsTUFBTSxJQUFJLEdBQUcsTUFBTSx5QkFBUyxDQUFDLEtBQUssQ0FBQyxVQUFVLENBQUMsQ0FBQztRQUMvQyxPQUFPLENBQUMsSUFBSSxDQUFDLENBQUM7SUFDbEIsQ0FBQyxDQUFBLENBQUMsQ0FBQztBQUNQLENBQUM7QUFMRCwrQkFLQyJ9
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOzs7Ozs7Ozs7Ozs7OztBQUVkLHNFQUF3QztBQUV4Qzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBd0JHO0FBQ0gsU0FBd0IsWUFBWSxDQUFDLFVBQWtCO0lBQ25ELE9BQU8sSUFBSSxPQUFPLENBQUMsQ0FBTyxPQUFPLEVBQUUsTUFBTSxFQUFFLEVBQUU7UUFDekMsTUFBTSxJQUFJLEdBQUcsTUFBTSx5QkFBUyxDQUFDLEtBQUssQ0FBQyxVQUFVLENBQUMsQ0FBQztRQUMvQyxPQUFPLENBQUMsSUFBSSxDQUFDLENBQUM7SUFDbEIsQ0FBQyxDQUFBLENBQUMsQ0FBQztBQUNQLENBQUM7QUFMRCwrQkFLQyJ9

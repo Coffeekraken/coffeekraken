@@ -13,7 +13,7 @@
  * @todo      doc
  * @todo      tests
  *
- * @snippet         __cursorToEnd($1);
+ * @snippet         __cursorToEnd($1)
  *
  * @example 	js
  * import { __cursorToEnd } from '@coffeekraken/sugar/dom';

@@ -27,6 +27,8 @@ import __set from './set';
  * @todo      doc
  * @todo      tests
  *
+ * @snippet         __deepize($1)
+ * 
  * @example       js
  * import { __deepize } from '@coffeekraken/sugar/object';
  * __deepize ({ 'something.cool': 'hello' }); // => { something: { cool: 'hello' } }

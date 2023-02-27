@@ -16,6 +16,8 @@ import __isbot from 'isbot';
  * @todo      doc
  * @todo      tests
  *
+ * @snippet         __isCrawler()
+ *
  * @example 	js
  * import { __isCrawler } from '@coffeekraken/sugar/is'
  * if (__isCrawler()) {

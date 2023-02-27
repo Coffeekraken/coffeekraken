@@ -1,3 +1,4 @@
+import __SPromise from '@coffeekraken/s-promise';
 
 export interface ISlideableSettings {
     direction: 'vertical' | 'horizontal';
@@ -12,4 +13,4 @@ export interface ISlideableSettings {
     onRefocusEnd: Function;
     refocus: number;
 }
-export default function slideable($elm: HTMLElement, settings?: Partial<ISlideableSettings>): Promise<void>;
+export default function slideable($elm: HTMLElement, settings?: Partial<ISlideableSettings>): __SPromise;

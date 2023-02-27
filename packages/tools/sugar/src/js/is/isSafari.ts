@@ -16,6 +16,8 @@
  * @todo      doc
  * @todo      tests
  *
+ * @snippet         __isSafari()
+ *
  * @example 	js
  * import { __isSafari } from '@coffeekraken/sugar/is'
  * if (__isSafari()) {

@@ -18,6 +18,8 @@ import __aggregation from 'aggregation/es5';
  * @todo      doc
  * @todo      tests
  *
+ * @snippet         __multipleExtends($1, $2)
+ * 
  * @example         js
  * import { __multipleExtends } from '@coffeekraken/sugar/class';
  * class MyCoolClass extends __multipleExtends(Another, AnotherOne) {

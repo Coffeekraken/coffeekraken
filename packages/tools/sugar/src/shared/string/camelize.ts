@@ -17,6 +17,8 @@
  * @todo      doc
  * @todo      tests
  *
+ * @snippet         __camelize($1)
+ * 
  * @example     js
  * import { __camelize } from '@coffeekraken/sugar/string';
  * __camelize('hello world'); // => helloWorld

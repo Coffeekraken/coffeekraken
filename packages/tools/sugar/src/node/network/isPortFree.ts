@@ -18,6 +18,9 @@ import __tcpPortUsed from 'tcp-port-used';
  * @todo      doc
  * @todo      tests
  *
+ * @snippet         __isPortFree($1)
+ * await __isPortFree($1)
+ * 
  * @example         js
  * import { __isPortFree } from '@coffeekraken/sugar/network';
  * await __isPortFree(22000); // => true

@@ -20,7 +20,7 @@ import __SPromise from '@coffeekraken/s-promise';
  * @param    {Boolean}    [useCapture=false]    A Boolean value that specifies whether the event should be executed in the capturing or in the bubbling phase
  * @return    {SPromise}                An SPromise instance on which you can listen for events or simply "cancel" the listeneing process
  *
- * @snippet         __addEventListener($1, $2, $3);
+ * @snippet         __addEventListener($1, $2, $3)
  * __addEventListener($1, $2, e => {
  *      $3
  * });

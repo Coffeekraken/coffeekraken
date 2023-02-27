@@ -26,14 +26,15 @@ import __deepMerge from '../../shared/object/deepMerge';
  *
  * @setting     {Any}           ...SpawnOptions     All the supported ```spawn``` options. see: https://nodejs.org/api/child_process.html#child_process_child_process_spawn_command_args_options
  *
- * @event       data        emited when some data have been pushed in the child process like console.log, etc...
- * @event       error       emited when an error has occured in the child process
  * @event       close       emited when the child process has been closed for whatever reason
  * @event       close.error     emited when the child process has been closed due to an error
  * @event       close.cancel      emited when the child process has been closed due to the call of the ```cancel``` method
  * @event       close.kill      emited when the child process has been closed due to a kill call
  * @event       close.success   emited when the child process has been closed after a successfull execution
  *
+ * @snippet         __spawn($1)
+ * await __spawn($1)
+ * 
  * @example       js
  * import { __spawn } from '@coffeekraken/sugar/process';
  * const pro = __spawn('echo "hello world");

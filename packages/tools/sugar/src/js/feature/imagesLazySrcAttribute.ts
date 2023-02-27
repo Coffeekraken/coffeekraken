@@ -22,6 +22,8 @@ import deepMerge from '../../shared/object/deepMerge';
  * @todo            doc
  * @todo            tests
  *
+ * @snippet         __imagesLazySrcAttribute()
+ *
  * @example       js
  * import { __imagesLazySrcAttribute } from '@coffeekraken/sugar/feature';
  * __imagesLazySrcAttribute();

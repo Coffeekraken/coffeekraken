@@ -17,6 +17,8 @@
  * @todo      doc
  * @todo      tests
  *
+ * @snippet         __isArray($1)
+ * 
  * @example    js
  * import { __isArray } from '@coffeekraken/sugar/is'
  * if (__isArray([]) {

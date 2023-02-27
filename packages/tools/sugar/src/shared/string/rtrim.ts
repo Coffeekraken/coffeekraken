@@ -19,6 +19,8 @@
  * @todo      doc
  * @todo      tests
  *
+ * @snippet             __rtrim($1, $2)
+ * 
  * @example    js
  * import { __rtrim } from '@coffeekraken/sugar/string'
  * __rtrim('Hello World', 'ld') // Hello Wor

@@ -8,6 +8,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
  * @platform          js
  * @platform          node
  * @status              wip
+ * @private
  *
  * This is just a list of data types available in the
  * current language (node/js)
@@ -31,4 +32,4 @@ exports.default = [
     'JSON',
     'Function',
 ];
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOztBQUVkOzs7Ozs7Ozs7Ozs7Ozs7OztHQWlCRztBQUNILGtCQUFlO0lBQ1gsUUFBUTtJQUNSLFFBQVE7SUFDUixRQUFRO0lBQ1IsU0FBUztJQUNULE1BQU07SUFDTixXQUFXO0lBQ1gsUUFBUTtJQUNSLE9BQU87SUFDUCxNQUFNO0lBQ04sVUFBVTtDQUNiLENBQUMifQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOztBQUVkOzs7Ozs7Ozs7Ozs7Ozs7Ozs7R0FrQkc7QUFDSCxrQkFBZTtJQUNYLFFBQVE7SUFDUixRQUFRO0lBQ1IsUUFBUTtJQUNSLFNBQVM7SUFDVCxNQUFNO0lBQ04sV0FBVztJQUNYLFFBQVE7SUFDUixPQUFPO0lBQ1AsTUFBTTtJQUNOLFVBQVU7Q0FDYixDQUFDIn0=

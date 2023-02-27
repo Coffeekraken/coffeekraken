@@ -18,6 +18,8 @@
  * @todo      doc
  * @todo      tests
  *
+ * @snippet         __isLinux($1)
+ * 
  * @example       js
  * import { __isLinux } from '@coffeekraken/sugar/is';
  * __isLinux(); // => true

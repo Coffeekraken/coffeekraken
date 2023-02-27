@@ -16,6 +16,8 @@ import __clipboardy from 'clipboardy';
  * @todo      doc
  * @todo      tests
  *
+ * @snippet         __read()
+ *
  * @example       js
  * import { __copy, __read } from '@coffeekraken/sugar/clipboard';
  * __copy('Hello world');
@@ -29,4 +31,4 @@ function read() {
     return __clipboardy.readSync();
 }
 export default read;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7QUFFZCxPQUFPLFlBQVksTUFBTSxZQUFZLENBQUM7QUFFdEM7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQXdCRztBQUNILFNBQVMsSUFBSTtJQUNULE9BQU8sWUFBWSxDQUFDLFFBQVEsRUFBRSxDQUFDO0FBQ25DLENBQUM7QUFDRCxlQUFlLElBQUksQ0FBQyJ9
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7QUFFZCxPQUFPLFlBQVksTUFBTSxZQUFZLENBQUM7QUFFdEM7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBMEJHO0FBQ0gsU0FBUyxJQUFJO0lBQ1QsT0FBTyxZQUFZLENBQUMsUUFBUSxFQUFFLENBQUM7QUFDbkMsQ0FBQztBQUNELGVBQWUsSUFBSSxDQUFDIn0=

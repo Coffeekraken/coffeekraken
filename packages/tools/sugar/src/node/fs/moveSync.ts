@@ -1,7 +1,5 @@
 // @ts-nocheck
 
-import __fs from 'fs-extra';
-
 /**
  * @name        moveSync
  * @namespace            node.fs
@@ -13,6 +11,8 @@ import __fs from 'fs-extra';
  *
  * @param       {String}              src           The source path to moveSync
  * @param       {String}              dest          The destination path
+ *
+ * @snippet         __moveSync($1, $2)
  *
  * @example       js
  * import { __moveSync } from '@coffeekraken/sugar/fs';

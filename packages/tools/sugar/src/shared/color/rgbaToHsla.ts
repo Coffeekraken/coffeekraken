@@ -20,6 +20,8 @@ import __parseRgba from './parseRgba';
  * @todo      doc
  * @todo      tests
  *
+ * @snippet         __rgbaToHsla($1)
+ * 
  * @example         js
  * import { __rgbaToHsla } from '@coffeekraken/sugar/color';
  * __rgbaToHsla(10,20,50,10);

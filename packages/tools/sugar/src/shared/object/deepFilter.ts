@@ -21,6 +21,11 @@ import __isPlainObject from '../is/isPlainObject';
  * @todo      doc
  * @todo      tests
  *
+ * @snippet         __deepFilter($1, $2)
+ * __deepFilter($1, ({item, key}) => {
+ *      $2
+ * })
+ * 
  * @example           js
  * import { __deepFilter } from '@coffeekraken/sugar/object';
  * __deepFilter ({

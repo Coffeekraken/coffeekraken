@@ -19,6 +19,8 @@ import requestFullscreen from './requestFullscreen';
  * @todo      doc
  * @todo      tests
  *
+ * @snippet         __toggleFullscreen()
+ *
  * @example   js
  * import { __toggleFullscreen } from '@coffeekraken/sugar/dom'
  * __toggleFullscreen(myDomElm)

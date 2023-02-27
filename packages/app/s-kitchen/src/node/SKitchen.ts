@@ -6,14 +6,14 @@ import __SLog from '@coffeekraken/s-log';
 import __SProcess, {
     ISProcessManagerProcessSettings,
     ISProcessSettings,
-    SProcessManager as __SProcessManager,
+    SProcessManager as __SProcessManager
 } from '@coffeekraken/s-process';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
 import __SSugarJson from '@coffeekraken/s-sugar-json';
 import { __wait } from '@coffeekraken/sugar/datetime';
 import { __isCommandExists } from '@coffeekraken/sugar/is';
 import { __import } from '@coffeekraken/sugar/module';
-import { __deepMerge, __filter } from '@coffeekraken/sugar/object';
+import { __deepMerge, __filterObject } from '@coffeekraken/sugar/object';
 import { __sharedContext } from '@coffeekraken/sugar/process';
 import type { IDetectProjectTypeResult } from '@coffeekraken/sugar/project';
 import { __detectProjectType } from '@coffeekraken/sugar/project';
@@ -206,7 +206,7 @@ class SKitchen extends __SClass {
     new(params: ISKitchenNewParams | string) {
         return new Promise(async (resolve) => {
             const kitchenConfig = __SSugarConfig.get('kitchen');
-            const recipesObj = __filter(
+            const recipesObj = __filterObject(
                 kitchenConfig.recipes,
                 (key, recipeObj) => {
                     return recipeObj.stacks?.new !== undefined;
@@ -534,7 +534,7 @@ class SKitchen extends __SClass {
                     if (actionObj.interface) {
                         InterfaceClass = await __import(actionObj.interface);
                         // filter shared params using each action "interface"
-                        actionParams = __filter(actionParams, (key, value) => {
+                        actionParams = __filterObject(actionParams, (key, value) => {
                             if (key === 'env') return true;
                             if (key.toLowerCase() === 'bench') {
                                 return true;

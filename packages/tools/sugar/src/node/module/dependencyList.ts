@@ -1,6 +1,6 @@
 import __SPromise from '@coffeekraken/s-promise';
-import __deepMap from '../../shared/object/deepMap';
 import { __dependencyTree } from '@coffeekraken/sugar/module';
+import __deepMap from '../../shared/object/deepMap';
 import type { IDependencyTreeExtendedSettings } from './dependencyTree';
 
 /**
@@ -17,6 +17,9 @@ import type { IDependencyTreeExtendedSettings } from './dependencyTree';
  * @param       {IDependencyTreeExtendedSettings}       [settings={}]       Some settings (like all the dependency-tree supported ones (excluding filename and directory)), and some additional like caching.
  * @return      {SPromise}                               An SPromise instance through which you can get logs, and that will be resolved once the process is over
  *
+ * @snippet         __dependencyList($1)
+ * await __dependencyList($1)
+ * 
  * @example         js
  * import { __dependencyList } from '@coffeekraken/sugar/module';
  * await __dependencyList('/something/cool.js', {

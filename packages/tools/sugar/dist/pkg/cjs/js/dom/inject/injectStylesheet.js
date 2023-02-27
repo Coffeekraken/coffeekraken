@@ -14,7 +14,7 @@ const dom_1 = require("@coffeekraken/sugar/dom");
  * @param    {String}    href    THe url to the stylesheet
  * @return    {Promise}    A promise when the stylesheet is loaded with the link element as parameter
  *
- * @snippet         __injectStylesheet($1);
+ * @snippet         __injectStylesheet($1)
  *
  * @todo      interface
  * @todo      doc

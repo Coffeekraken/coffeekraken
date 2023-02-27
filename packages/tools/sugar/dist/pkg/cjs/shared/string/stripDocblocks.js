@@ -13,6 +13,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
  * @param       {String}            str         The string to process
  * @return      {String}                        The processed string
  *
+ * @snippet         __stripDocblocks($1)
+ *
  * @example         js
  * import { __stripDocblocks } from '@coffeekraken/sugar/string';
  * __stripDocblocks('...');
@@ -24,4 +26,4 @@ function __stripDocblocks(str) {
     return str.replace(/(\/\*{2})([\s\S]+?)(\*\/)/gm, '');
 }
 exports.default = __stripDocblocks;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7O0FBQUE7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0FtQkc7QUFDSCxTQUF3QixnQkFBZ0IsQ0FBQyxHQUFXO0lBQ2hELE9BQU8sR0FBRyxDQUFDLE9BQU8sQ0FBQyw2QkFBNkIsRUFBRSxFQUFFLENBQUMsQ0FBQztBQUMxRCxDQUFDO0FBRkQsbUNBRUMifQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7O0FBQUE7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQXFCRztBQUNILFNBQXdCLGdCQUFnQixDQUFDLEdBQVc7SUFDaEQsT0FBTyxHQUFHLENBQUMsT0FBTyxDQUFDLDZCQUE2QixFQUFFLEVBQUUsQ0FBQyxDQUFDO0FBQzFELENBQUM7QUFGRCxtQ0FFQyJ9

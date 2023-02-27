@@ -15,6 +15,8 @@ import __tmpDir from 'temp-dir';
  * @todo      doc
  * @todo      tests
  *
+ * @snippet         __systemTmpDir()
+ *
  * @example             js
  * import { __systemTmpDir } from '@coffeekraken/sugar/path';
  * __systemTmpDir(); // => '/private/var/folders/3x/jf5977fn79jbglr7rk0tq4d00000gn/T'
@@ -25,4 +27,4 @@ import __tmpDir from 'temp-dir';
 export default function __systemTmpDir() {
     return __tmpDir;
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7QUFFZCxPQUFPLFFBQVEsTUFBTSxVQUFVLENBQUM7QUFFaEM7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQXFCRztBQUVILE1BQU0sQ0FBQyxPQUFPLFVBQVUsY0FBYztJQUNsQyxPQUFPLFFBQVEsQ0FBQztBQUNwQixDQUFDIn0=
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7QUFFZCxPQUFPLFFBQVEsTUFBTSxVQUFVLENBQUM7QUFFaEM7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBdUJHO0FBRUgsTUFBTSxDQUFDLE9BQU8sVUFBVSxjQUFjO0lBQ2xDLE9BQU8sUUFBUSxDQUFDO0FBQ3BCLENBQUMifQ==

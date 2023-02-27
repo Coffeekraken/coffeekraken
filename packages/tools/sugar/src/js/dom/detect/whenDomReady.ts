@@ -13,7 +13,7 @@
  * @param       {Function}          [callback=null]     A callback to call when ready
  * @return 		{Promise<void>} 					A promise that will be resolved when the dom is ready
  *
- * @snippet         __whenDomReady();
+ * @snippet         __whenDomReady()
  * __whenDomReady().then(() => {
  *      $1
  * });

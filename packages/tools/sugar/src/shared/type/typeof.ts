@@ -42,6 +42,8 @@ interface ITypeofSettings {
  * @todo      doc
  * @todo      tests
  *
+ * @snippet         __typeof($1)
+ * 
  * @example         js
  * import { __typeof } from '@coffeekraken/sugar/type';
  * __typeof(true); // => Boolean

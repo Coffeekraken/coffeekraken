@@ -18,7 +18,7 @@ import { __matches } from '@coffeekraken/sugar/dom';
  * @todo      doc
  * @todo      tests
  *
- * @snippet         __querySelectorUp($1, $2);
+ * @snippet         __querySelectorUp($1, $2)
  *
  * @example  	js
  * import { __querySelectorUp } from '@coffeekraken/sugar/dom'

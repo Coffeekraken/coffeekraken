@@ -15,6 +15,8 @@ import toString from '../string/toString';
  *
  * Expose two function named "encrypt" and "decrypt" that you can use to process your content using the base64 algorithm
  *
+ * @snippet         __base64.encrypt($1)
+ * 
  * @example         js
  * import { __base64 } from '@coffeekraken/sugar/crypto';
  * __base64.encrypt('hello world');

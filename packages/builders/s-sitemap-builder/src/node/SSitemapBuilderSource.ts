@@ -3,7 +3,7 @@ import { __deepMerge } from '@coffeekraken/sugar/object';
 import type { ISSitemapBuilderBuildParams } from './interface/SSitemapBuilderBuildParamsInterface';
 import type {
     ISSitemapBuilderResultItem,
-    ISSitemapBuilderSourceBuildResult,
+    ISSitemapBuilderSourceBuildResult
 } from './SSitemapBuilder';
 
 /**
@@ -13,6 +13,7 @@ import type {
  * @platform        js
  * @platform        node
  * @status          beta
+ * @private
  *
  * This class represent a SSitemap source like docmap, frontspec, etc...
  *

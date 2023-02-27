@@ -13,6 +13,8 @@
  * @todo      doc
  * @todo      tests
  *
+ * @snippet         __htmlTagToHtmlClassMap
+ *
  * @example       js
  * import { __htmlTagToHtmlClassMap } from '@coffeekraken/sugar/dom';
  * console.log(__htmlTagToHtmlClassMap);

@@ -21,6 +21,8 @@ import __fastdom from 'fastdom';
  * @todo            doc
  * @todo            tests
  *
+ * @snippet         __videosLazySrcAttribute()
+ *
  * @example     js
  * import { __videoLazySrcAttribute } from '@coffeekraken/sugar/feature';
  * __videoLazySrcAttribute();

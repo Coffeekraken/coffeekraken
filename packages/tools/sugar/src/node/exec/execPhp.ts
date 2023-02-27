@@ -20,6 +20,11 @@ import __fs from 'fs';
  * from nodejs.
  * Note that you MUST have php installed on your system and available a global command.
  *
+ * @snippet         __execPhp($1, $2)
+ * __execPhp($1, $2).then(result => {
+ *      $3
+ * });
+ *
  * @example         js
  * import { __execPhp } from '@coffeekraken/sugar/exec';
  * await __execPhp('/my/cool/script.php', {

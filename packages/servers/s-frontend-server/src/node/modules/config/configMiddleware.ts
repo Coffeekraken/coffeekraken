@@ -2,7 +2,7 @@
 
 import __SFile from '@coffeekraken/s-file';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
-import { __filter } from '@coffeekraken/sugar/object';
+import { __filterObject } from '@coffeekraken/sugar/object';
 
 /**
  * @name            configMiddleware
@@ -37,7 +37,7 @@ function configMiddleware(settings = {}) {
 
         if (!res.templateData) res.templateData = {};
         if (!res.templateData.shared) res.templateData.shared = {};
-        res.templateData.shared.config = __filter(configJson, (key, value) => {
+        res.templateData.shared.config = __filterObject(configJson, (key, value) => {
             return Object.keys(value).length > 0;
         });
 

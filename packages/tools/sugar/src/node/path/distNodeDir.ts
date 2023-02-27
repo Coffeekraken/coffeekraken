@@ -17,6 +17,8 @@ import __SSugarConfig from '@coffeekraken/s-sugar-config';
  * @todo      doc
  * @todo      tests
  *
+ * @snippet         __distNodeDir()
+ * 
  * @example             js
  * import { __distNodeDir } from '@coffeekraken/sugar/path';
  * __distNodeDir(); // => '/private/var/folders/3x/jf5977fn79jbglr7rk0tq4d00000gn/T'

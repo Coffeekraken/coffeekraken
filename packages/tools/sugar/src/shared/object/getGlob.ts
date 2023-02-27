@@ -27,6 +27,8 @@ import __flatten from './flatten';
  * @todo      doc
  * @todo      tests
  *
+ * @snippet         __getGlob($1, $2)
+ * 
  * @example             js
  * import { __getGlob } from '@coffeekraken/sugar/object';
  * __getGlob({

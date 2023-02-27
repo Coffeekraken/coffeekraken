@@ -20,6 +20,8 @@ import __isPlainObject from '../is/isPlainObject';
  * @todo      doc
  * @todo      tests
  *
+ * @snippet         __toPlainObject($1)
+ * 
  * @example           js
  * import { __toPlainObject } from '@coffeekraken/sugar/object';
  * __toPlainObject({ something: 'cool' });

@@ -512,7 +512,7 @@
                 "namespace": "@coffeekraken.sugar.js.clipboard",
                 "status": "stable",
                 "snippet": {
-                    "label": "__copy($1);"
+                    "label": "__copy($1)"
                 },
                 "example": [
                     {
@@ -564,7 +564,7 @@
                 "namespace": "@coffeekraken.sugar.js.clipboard",
                 "status": "stable",
                 "snippet": {
-                    "label": "__read($1);"
+                    "label": "__read($1)"
                 },
                 "example": [
                     {
@@ -648,7 +648,7 @@
                 "namespace": "@coffeekraken.sugar.js.convert",
                 "status": "beta",
                 "snippet": {
-                    "label": "__emToPx($1);"
+                    "label": "__emToPx($1)"
                 },
                 "example": [
                     {
@@ -731,7 +731,7 @@
                 "namespace": "@coffeekraken.sugar.js.convert",
                 "status": "beta",
                 "snippet": {
-                    "label": "__pxToEm($1);"
+                    "label": "__pxToEm($1)"
                 },
                 "example": [
                     {
@@ -801,7 +801,7 @@
                 "namespace": "@coffeekraken.sugar.js.convert",
                 "status": "beta",
                 "snippet": {
-                    "label": "__pxToRem($1);"
+                    "label": "__pxToRem($1)"
                 },
                 "example": [
                     {
@@ -871,7 +871,7 @@
                 "namespace": "@coffeekraken.sugar.js.convert",
                 "status": "beta",
                 "snippet": {
-                    "label": "__remToPx($1);"
+                    "label": "__remToPx($1)"
                 },
                 "example": [
                     {
@@ -937,7 +937,7 @@
                 "namespace": "@coffeekraken.sugar.js.cookie",
                 "status": "stable",
                 "snippet": {
-                    "label": "__deleteCookie($1);"
+                    "label": "__deleteCookie($1)"
                 },
                 "example": [
                     {
@@ -1003,7 +1003,7 @@
                 "namespace": "@coffeekraken.sugar.js.cookie",
                 "status": "stable",
                 "snippet": {
-                    "label": "__getCookie($1);"
+                    "label": "__getCookie($1)"
                 },
                 "example": [
                     {
@@ -1194,7 +1194,7 @@
                 "namespace": "@coffeekraken.sugar.js.cookie",
                 "status": "stable",
                 "snippet": {
-                    "label": "__setCookie($1, $2);"
+                    "label": "__setCookie($1, $2)"
                 },
                 "example": [
                     {
@@ -1265,6 +1265,9 @@
                 "description": "Add support for the `lazy-src` attribute on `img` elements.\nThe video `src` attribute will be populated when the `img` element enter the viewport",
                 "namespace": "@coffeekraken.sugar.js.feature",
                 "status": "beta",
+                "snippet": {
+                    "label": "__imagesLazySrcAttribute()"
+                },
                 "example": [
                     {
                         "language": "js",
@@ -1322,6 +1325,9 @@
                 "description": "Add on every images the attribute \"loaded\" when it has been fully loaded. This is useful\nfor styling purposes and for others thinks as well.",
                 "namespace": "@coffeekraken.sugar.js.feature",
                 "status": "beta",
+                "snippet": {
+                    "label": "__imagesLoadedAttribute()"
+                },
                 "example": [
                     {
                         "language": "js",
@@ -1419,6 +1425,9 @@
                 "description": "Add some attributes on inputs, textarea and select to help with styling purposes and more.\nHere's the attributes added:\n- `has-value`: When the input has a value in it\n- `empty`: When the input is has no value in it\n- `dirty`: When the input has been touched",
                 "namespace": "@coffeekraken.sugar.js.feature",
                 "status": "beta",
+                "snippet": {
+                    "label": "__inputAdditionalAttributes()"
+                },
                 "example": [
                     {
                         "language": "js",
@@ -1472,6 +1481,9 @@
                 "description": "This feature simply add some special attributes on links like \"actual\" when the link correspond to the actual visited page url,\n\"actual-child\" when the link point to a child page, and maybe some more depending on needs and \"actual-parent\" on the actual link parent node",
                 "namespace": "@coffeekraken.sugar.js.feature",
                 "status": "beta",
+                "snippet": {
+                    "label": "__linksStateAttributes()"
+                },
                 "example": [
                     {
                         "language": "js",
@@ -1545,6 +1557,9 @@
                 "description": "This feature enable some underhood features like the automatic scroll on anchor links as well as\nthe smooth scroll on page load.",
                 "namespace": "@coffeekraken.sugar.js.feature",
                 "status": "beta",
+                "snippet": {
+                    "label": "__smoothScroll()"
+                },
                 "example": [
                     {
                         "language": "js",
@@ -1614,6 +1629,9 @@
                 "description": "Listen for links contains an hash to init them for scroll to target on click",
                 "namespace": "@coffeekraken.sugar.js.feature",
                 "status": "beta",
+                "snippet": {
+                    "label": "__smoothScrollOnAnchorLinks()"
+                },
                 "example": [
                     {
                         "language": "js",
@@ -1683,6 +1701,9 @@
                 "description": "This feature simply allow a snooth scroll on hash changes",
                 "namespace": "@coffeekraken.sugar.js.feature",
                 "status": "beta",
+                "snippet": {
+                    "label": "__smoothScrollOnHashChange()"
+                },
                 "example": [
                     {
                         "language": "js",
@@ -1752,6 +1773,9 @@
                 "description": "This feature simply allow a snooth scroll on page load if an hash exists in the url",
                 "namespace": "@coffeekraken.sugar.js.feature",
                 "status": "beta",
+                "snippet": {
+                    "label": "__smoothScrollOnPageLoad()"
+                },
                 "example": [
                     {
                         "language": "js",
@@ -1821,6 +1845,9 @@
                 "description": "Add support for the `lazy-src` attribute on `video` elements.\nThe video `src` attribute will be populated when the `video` element enter the viewport",
                 "namespace": "@coffeekraken.sugar.js.feature",
                 "status": "beta",
+                "snippet": {
+                    "label": "__videosLazySrcAttribute()"
+                },
                 "example": [
                     {
                         "language": "js",
@@ -1861,6 +1888,10 @@
                 "description": "This class represent a gooey SVG filter that can be applied on any HTMLElement.\nHere's the values that you can control on it:\n- blur: The amout of blur you want\n- contrast: The amout of contrast you want\n- shrink: The amount of shrink you want\n- amount: The overall amount of effect you want",
                 "namespace": "@coffeekraken.sugar.js.filter",
                 "status": "beta",
+                "snippet": {
+                    "label": "__SGooeySvgFilter()",
+                    "code": "const filter = new __SGooeySvgFilter();\nfilter.applyTo($1);"
+                },
                 "example": [
                     {
                         "language": "js",
@@ -2004,6 +2035,10 @@
                 ],
                 "namespace": "@coffeekraken.sugar.js.filter",
                 "status": "beta",
+                "snippet": {
+                    "label": "__SGradientSvgFilter()",
+                    "code": "const filter = new __SGradientSvgFilter();\nfilter.linear([$1]);\nfilter.applyTo($2);"
+                },
                 "example": [
                     {
                         "language": "js",
@@ -2224,6 +2259,10 @@
                 "description": "This class represent a motion blur svg filter that will blur your\nelement depending on his movements, direction and speed",
                 "namespace": "@coffeekraken.sugar.js.filter",
                 "status": "beta",
+                "snippet": {
+                    "label": "__SMotionBlurSvgFilter()",
+                    "code": "const filter = new __SMotionBlurSvgFilter();\nfilter.applyTo($1);"
+                },
                 "example": [
                     {
                         "language": "js",
@@ -2399,6 +2438,10 @@
                 "description": "This class represent an outline filter that can be applied on any HTMLElement.",
                 "namespace": "@coffeekraken.sugar.js.filter",
                 "status": "beta",
+                "snippet": {
+                    "label": "__SOutlineSvgFilter()",
+                    "code": "const filter = new __SOutlineSvgFilter();\nfilter.applyTo($1);"
+                },
                 "example": [
                     {
                         "language": "js",
@@ -2516,6 +2559,9 @@
                 "description": "Detect if is chrome",
                 "namespace": "@coffeekraken.sugar.js.is",
                 "status": "beta",
+                "snippet": {
+                    "label": "__isChrome()"
+                },
                 "example": [
                     {
                         "language": "js",
@@ -2580,6 +2626,9 @@
                 "description": "Detect if request is from a crawler (google bot, etc...) or not",
                 "namespace": "@coffeekraken.sugar.js.is",
                 "status": "beta",
+                "snippet": {
+                    "label": "__isCrawler()"
+                },
                 "example": [
                     {
                         "language": "js",
@@ -2644,6 +2693,9 @@
                 "description": "Detect if is edge",
                 "namespace": "@coffeekraken.sugar.js.is",
                 "status": "beta",
+                "snippet": {
+                    "label": "__isEdge()"
+                },
                 "example": [
                     {
                         "language": "js",
@@ -2708,6 +2760,9 @@
                 "description": "Detect if is firefox",
                 "namespace": "@coffeekraken.sugar.js.is",
                 "status": "beta",
+                "snippet": {
+                    "label": "__isFirefox()"
+                },
                 "example": [
                     {
                         "language": "js",
@@ -2772,6 +2827,9 @@
                 "description": "Detect if is ie (internet explorer)",
                 "namespace": "@coffeekraken.sugar.js.is",
                 "status": "beta",
+                "snippet": {
+                    "label": "__isIe()"
+                },
                 "example": [
                     {
                         "language": "js",
@@ -2820,6 +2878,9 @@
                 "description": "Detect if is a mobile device (phone or tablet)",
                 "namespace": "@coffeekraken.sugar.js.is",
                 "status": "beta",
+                "snippet": {
+                    "label": "__isMobile()"
+                },
                 "example": [
                     {
                         "language": "js",
@@ -2884,6 +2945,9 @@
                 "description": "Detect if is opera",
                 "namespace": "@coffeekraken.sugar.js.is",
                 "status": "beta",
+                "snippet": {
+                    "label": "__isOpera()"
+                },
                 "example": [
                     {
                         "language": "js",
@@ -2932,6 +2996,9 @@
                 "description": "Detect if is a phone device",
                 "namespace": "@coffeekraken.sugar.js.is",
                 "status": "beta",
+                "snippet": {
+                    "label": "__isPhone()"
+                },
                 "example": [
                     {
                         "language": "js",
@@ -2996,6 +3063,9 @@
                 "description": "Detect if is safari",
                 "namespace": "@coffeekraken.sugar.js.is",
                 "status": "beta",
+                "snippet": {
+                    "label": "__isSafari()"
+                },
                 "example": [
                     {
                         "language": "js",
@@ -3060,6 +3130,9 @@
                 "description": "Detect if is the samsung stock browser that is running the page",
                 "namespace": "@coffeekraken.sugar.js.is",
                 "status": "beta",
+                "snippet": {
+                    "label": "__isSamsungBrowser()"
+                },
                 "example": [
                     {
                         "language": "js",
@@ -3108,6 +3181,9 @@
                 "description": "Detect if is a tablet device",
                 "namespace": "@coffeekraken.sugar.js.is",
                 "status": "beta",
+                "snippet": {
+                    "label": "__isTablet()"
+                },
                 "example": [
                     {
                         "language": "js",
@@ -3161,6 +3237,9 @@
                 "description": "Detect if is the UC stock browser that is running the page",
                 "namespace": "@coffeekraken.sugar.js.is",
                 "status": "beta",
+                "snippet": {
+                    "label": "__isUcBrowser()"
+                },
                 "example": [
                     {
                         "language": "js",
@@ -3310,6 +3389,10 @@
                 "description": "Simple function to add a hotkey like \"ctrl+a\" and an handler function that will be called when the hotkey has been pressed\nThe following keys are supported:\n- shift, option, alt, ctrl, control, command\n- backspace, tab, clear, enter, return, esc, escape, space, up, down, left, right, home, end, pageup, pagedown, del, delete\n- from f1 to f19\n- all the letters keys\n\nYou can pass an option object to your hotkey function call.",
                 "namespace": "@coffeekraken.sugar.js.keyboard",
                 "status": "beta",
+                "snippet": {
+                    "label": "__hotkey($1)",
+                    "code": "__hotkey($1).on('press', e => {\n     $2\n});"
+                },
                 "example": [
                     {
                         "language": "js",
@@ -3347,6 +3430,10 @@
                 "description": "This SIndexDb class gives you a nive and easy way to interact with your indexDb storage.\nIt provides a localStorage like api with the methods \"setItem\", \"getItem\", \"getAll\" and \"removeItem\"\nwrapped in a nice Promise based api.\nYou can also use it through his static methods that are exacly the same as the instance ones.",
                 "namespace": "@coffeekraken.sugar.js.storage",
                 "status": "beta",
+                "snippet": {
+                    "label": "__SIndexDb($1)",
+                    "code": "const db = new __SIndexDb({\n   db: $1,\n   table: $2\n});"
+                },
                 "example": [
                     {
                         "language": "js",
@@ -3663,6 +3750,9 @@
                 "description": "Decode an htmlentities encoded string",
                 "namespace": "@coffeekraken.sugar.js.string",
                 "status": "beta",
+                "snippet": {
+                    "label": "__decodeHtmlEntities($1)"
+                },
                 "example": [
                     {
                         "language": "js",
@@ -3726,6 +3816,9 @@
                 "description": "This function replace these tokens in the passed string:\n\n- `%moduleSystem` - Either \"esm\" or \"cjs\"",
                 "namespace": "@coffeekraken.sugar.js.string",
                 "status": "beta",
+                "snippet": {
+                    "label": "__replaceTokens($1)"
+                },
                 "example": [
                     {
                         "language": "js",
@@ -3778,6 +3871,9 @@
                 "description": "Generate a uniqid string of 8 bytes. Work using the [uniqid](https://www.npmjs.com/package/uniqid) npm package under the hood.",
                 "namespace": "@coffeekraken.sugar.js.string",
                 "status": "beta",
+                "snippet": {
+                    "label": "__uniqid()"
+                },
                 "example": [
                     {
                         "language": "js",
@@ -3830,6 +3926,9 @@
                 "description": "Simple function to copy things into the system clipboard.\nThis is using https://www.npmjs.com/package/clipboardy under the hood.",
                 "namespace": "@coffeekraken.sugar.node.clipboard",
                 "status": "beta",
+                "snippet": {
+                    "label": "__copy($1)"
+                },
                 "example": [
                     {
                         "language": "js",
@@ -3878,6 +3977,9 @@
                 "description": "Simple function to read things from the system clipboard.\nThis is using https://www.npmjs.com/package/clipboardy under the hood.",
                 "namespace": "@coffeekraken.sugar.node.clipboard",
                 "status": "beta",
+                "snippet": {
+                    "label": "__read()"
+                },
                 "example": [
                     {
                         "language": "js",
@@ -3926,6 +4028,10 @@
                 "description": "This function will returns you the coffeekraken metas object containing things like:\n- version: The version of the coffeekraken stack used",
                 "namespace": "@coffeekraken.sugar.node.coffeekraken",
                 "status": "beta",
+                "snippet": {
+                    "label": "__getCoffeekrakenMetas()",
+                    "code": "__getCoffeekrakenMetas().then(metas => {\n     $1\n});"
+                },
                 "example": [
                     {
                         "language": "js",
@@ -4005,10 +4111,13 @@
                 "description": "This function simply take a package name as parameter, and return the corresponding\ncomposer.json JSON content",
                 "namespace": "@coffeekraken.sugar.node.npm",
                 "status": "beta",
+                "snippet": {
+                    "label": "__composerJson($1)"
+                },
                 "example": [
                     {
                         "language": "js",
-                        "code": "import { __packageJson } from '@coffeekraken/sugar/composer`;\n__packageJson('lodash');"
+                        "code": "import { __composerJson } from '@coffeekraken/sugar/composer`;\n__composerJson('lodash');"
                     }
                 ],
                 "since": "2.0.0",
@@ -4082,6 +4191,9 @@
                 "description": "This function simply take a package name as parameter, and return the corresponding\ncomposer package path",
                 "namespace": "@coffeekraken.sugar.node.composer",
                 "status": "beta",
+                "snippet": {
+                    "label": "__composerPath($1)"
+                },
                 "example": [
                     {
                         "language": "js",
@@ -4162,6 +4274,9 @@
                 "description": "This function allows you to unzip quickly a zip file\nto a particular destination.\nNote that the zip filename will be used as folder name",
                 "namespace": "@coffeekraken.sugar.node.compression",
                 "status": "beta",
+                "snippet": {
+                    "label": "__unzip($1)"
+                },
                 "example": [
                     {
                         "language": "js",
@@ -4180,44 +4295,9 @@
                 "relPath": "src/node/compression/unzip.ts",
                 "children": {}
             },
-            "@coffeekraken.sugar.node.console.tagsMap": {
-                "id": "@coffeekraken.sugar.node.console.tagsMap",
-                "name": "tagsMap",
-                "type": {
-                    "types": [
-                        {
-                            "type": "Object"
-                        }
-                    ],
-                    "raw": "Object"
-                },
-                "platform": [
-                    {
-                        "name": "js",
-                        "description": ""
-                    },
-                    {
-                        "name": "node",
-                        "description": ""
-                    }
-                ],
-                "description": "Store the tag->function map used in ```parseHtml``` function for example",
-                "namespace": "@coffeekraken.sugar.node.console",
-                "status": "beta",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "tagsMap.ts",
-                "extension": "ts",
-                "relPath": "src/node/console/tagsMap.ts",
-                "children": {}
-            },
-            "@coffeekraken.sugar.node.error.handleError": {
-                "id": "@coffeekraken.sugar.node.error.handleError",
-                "name": "handleError",
+            "@coffeekraken.sugar.node.error.handleErrors": {
+                "id": "@coffeekraken.sugar.node.error.handleErrors",
+                "name": "handleErrors",
                 "type": {
                     "types": [
                         {
@@ -4235,10 +4315,13 @@
                 "description": "This function take a thrown error and try to display it the best way possible.\nSimply add the \"uncaughtException\" and the \"unhandledRejection\" listeners on the process object,\npass this function as the handler one and that's it...",
                 "namespace": "@coffeekraken.sugar.node.error",
                 "status": "wip",
+                "snippet": {
+                    "label": "__handleErrors()"
+                },
                 "example": [
                     {
                         "language": "js",
-                        "code": "import { __handleError } from '@coffeekraken/sugar/error';\n__handleError"
+                        "code": "import { __handleErrors } from '@coffeekraken/sugar/error';\n__handleErrors();"
                     }
                 ],
                 "since": "2.0.0",
@@ -4272,6 +4355,10 @@
                 "description": "This function allows you to execute quickly and efficiently some php\nfrom nodejs.\nNote that you MUST have php installed on your system and available a global command.",
                 "namespace": "@coffeekraken.sugar.node.exec",
                 "status": "beta",
+                "snippet": {
+                    "label": "__execPhp($1, $2)",
+                    "code": "__execPhp($1, $2).then(result => {\n     $3\n});"
+                },
                 "example": [
                     {
                         "language": "js",
@@ -4337,6 +4424,9 @@
                 "description": "This function allows you to simply append a string to a file.",
                 "namespace": "@coffeekraken.sugar.node.fs",
                 "status": "beta",
+                "snippet": {
+                    "label": "__appendToFileSync($1, $2)"
+                },
                 "example": [
                     {
                         "language": "js",
@@ -4389,6 +4479,9 @@
                 "description": "This function allows you to change the process working directory.\nIf you make use of the `__spawn` sugar function, it will also change\nthe directory of the parent process if you call this function in a childProcess.",
                 "namespace": "@coffeekraken.sugar.node.fs",
                 "status": "beta",
+                "snippet": {
+                    "label": "__chdir($1)"
+                },
                 "example": [
                     {
                         "language": "js",
@@ -4471,6 +4564,10 @@
                 "description": "This function take a path and some extensions to check if a file\nexists with one of these particular extensions.\nIf a file exists, the function return the path with the first extensions that matches",
                 "namespace": "@coffeekraken.sugar.node.fs",
                 "status": "beta",
+                "snippet": {
+                    "label": "__checkPathWithMultipleExtensions($1, $2)",
+                    "code": "__checkPathWithMultipleExtensions($1, [\n    $2\n])"
+                },
                 "example": [
                     {
                         "language": "js",
@@ -4547,6 +4644,10 @@
                 "description": "Copy a file or directory (async)",
                 "namespace": "@coffeekraken.sugar.node.fs",
                 "status": "beta",
+                "snippet": {
+                    "label": "__copy($1, $2)",
+                    "code": "await __copy($1, $2)"
+                },
                 "example": [
                     {
                         "language": "js",
@@ -4613,6 +4714,9 @@
                 "description": "Copy a file or directory (sync)",
                 "namespace": "@coffeekraken.sugar.node.fs",
                 "status": "beta",
+                "snippet": {
+                    "label": "__copySync($1, $2)"
+                },
                 "example": [
                     {
                         "language": "js",
@@ -4676,6 +4780,9 @@
                 "description": "Return the dirname the same as the __dirname cjs variable.\nThe only difference is that it's a function and you need to pass the \"import\" variable\nfrom the filename in which you use this...",
                 "namespace": "@coffeekraken.sugar.node.fs",
                 "status": "beta",
+                "snippet": {
+                    "label": "__dirname()"
+                },
                 "example": [
                     {
                         "language": "js",
@@ -4739,6 +4846,10 @@
                 "description": "Empty a directory (async)",
                 "namespace": "@coffeekraken.sugar.node.fs",
                 "status": "beta",
+                "snippet": {
+                    "label": "__emptyDir($1)",
+                    "code": "await __emptyDir($1)"
+                },
                 "example": [
                     {
                         "language": "js",
@@ -4792,6 +4903,9 @@
                 "description": "Empty a directory (sync)",
                 "namespace": "@coffeekraken.sugar.node.fs",
                 "status": "beta",
+                "snippet": {
+                    "label": "__emptyDirSync($1)"
+                },
                 "example": [
                     {
                         "language": "js",
@@ -4855,6 +4969,10 @@
                 "description": "Ensure that the passed directory exists. If not, will be created recursively... (async)",
                 "namespace": "@coffeekraken.sugar.node.fs",
                 "status": "beta",
+                "snippet": {
+                    "label": "__ensureDir($1)",
+                    "code": "await __ensureDir($1)"
+                },
                 "example": [
                     {
                         "language": "js",
@@ -4919,6 +5037,9 @@
                 "description": "Ensure that the passed directory exists. If not, will be created recursively... (sync)",
                 "namespace": "@coffeekraken.sugar.node.fs",
                 "status": "beta",
+                "snippet": {
+                    "label": "__ensureDirSync($1)"
+                },
                 "example": [
                     {
                         "language": "js",
@@ -4982,6 +5103,10 @@
                 "description": "Ensure that the passed file exists. If not, it will be created... (async)",
                 "namespace": "@coffeekraken.sugar.node.fs",
                 "status": "beta",
+                "snippet": {
+                    "label": "__ensureFile($1)",
+                    "code": "await __ensureFile($1)"
+                },
                 "example": [
                     {
                         "language": "js",
@@ -5035,6 +5160,9 @@
                 "description": "Ensure that the passed file exists. If not, will be created... (async)",
                 "namespace": "@coffeekraken.sugar.node.fs",
                 "status": "beta",
+                "snippet": {
+                    "label": "__ensureFileSync($1)"
+                },
                 "example": [
                     {
                         "language": "js",
@@ -5156,6 +5284,10 @@
                 "description": "This function simply check if the path passed exists.\nYou can specify what you want to take care of using the settings object",
                 "namespace": "@coffeekraken.sugar.node.fs",
                 "status": "beta",
+                "snippet": {
+                    "label": "__exists($1)",
+                    "code": "await __exists($1)"
+                },
                 "example": [
                     {
                         "language": "js",
@@ -5278,6 +5410,9 @@
                 "description": "This function simply check if the path passed exists.\nYou can specify what you want to take care of using the settings object",
                 "namespace": "@coffeekraken.sugar.node.fs",
                 "status": "beta",
+                "snippet": {
+                    "label": "__existsSync($1)"
+                },
                 "example": [
                     {
                         "language": "js",
@@ -5341,6 +5476,9 @@
                 "description": "Return the passed file path extension",
                 "namespace": "@coffeekraken.sugar.node.fs",
                 "status": "beta",
+                "snippet": {
+                    "label": "__extension($1)"
+                },
                 "example": [
                     {
                         "language": "js",
@@ -5358,9 +5496,9 @@
                 "relPath": "src/node/fs/extension.ts",
                 "children": {}
             },
-            "@coffeekraken.sugar.node.fs.fileHash": {
-                "id": "@coffeekraken.sugar.node.fs.fileHash",
-                "name": "fileHash",
+            "@coffeekraken.sugar.node.fs.fileHashSync": {
+                "id": "@coffeekraken.sugar.node.fs.fileHashSync",
+                "name": "fileHashSync",
                 "type": {
                     "types": [
                         {
@@ -5452,10 +5590,13 @@
                 "description": "This function allows you to get back an integrity hash for the passed file.\nThis mean that if a file returns the same integrity hash twice, the folder or files in it\nhas not been updated...",
                 "namespace": "@coffeekraken.sugar.node.fs",
                 "status": "beta",
+                "snippet": {
+                    "label": "__fileHashSync($1)"
+                },
                 "example": [
                     {
                         "language": "js",
-                        "code": "import { __fileHash } from '@coffeekraken/sugar/fs';\n__fileHash('my/cool/folder'); // => YZOrKDx9LCLd8X39PoFTflXGpRU=,"
+                        "code": "import { __fileHashSync } from '@coffeekraken/sugar/fs';\n__fileHashSync('my/cool/folder'); // => YZOrKDx9LCLd8X39PoFTflXGpRU=,"
                     }
                 ],
                 "since": "2.0.0",
@@ -5464,9 +5605,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "fileHash.ts",
+                "filename": "fileHashSync.ts",
                 "extension": "ts",
-                "relPath": "src/node/fs/fileHash.ts",
+                "relPath": "src/node/fs/fileHashSync.ts",
                 "children": {}
             },
             "@coffeekraken.sugar.node.fs.filename": {
@@ -5529,6 +5670,9 @@
                 "description": "Return the filename from the passed path with or without the extension",
                 "namespace": "@coffeekraken.sugar.node.fs",
                 "status": "beta",
+                "snippet": {
+                    "label": "__filename($1)"
+                },
                 "example": [
                     {
                         "language": "js",
@@ -5609,6 +5753,10 @@
                 "description": "This function simply walk across upper folders to search for a file\nand returns you the first finded",
                 "namespace": "@coffeekraken.sugar.node.fs",
                 "status": "beta",
+                "snippet": {
+                    "label": "__findUp($1)",
+                    "code": "await __findUp($1)"
+                },
                 "example": [
                     {
                         "language": "js",
@@ -5627,9 +5775,9 @@
                 "relPath": "src/node/fs/findUp.ts",
                 "children": {}
             },
-            "@coffeekraken.sugar.node.fs.folderHash": {
-                "id": "@coffeekraken.sugar.node.fs.folderHash",
-                "name": "folderHash",
+            "@coffeekraken.sugar.node.fs.folderHashSync": {
+                "id": "@coffeekraken.sugar.node.fs.folderHashSync",
+                "name": "folderHashSync",
                 "type": {
                     "types": [
                         {
@@ -5735,10 +5883,13 @@
                 "description": "This function allows you to get back an integrity hash for the passed folder.\nThis mean that if a folder returns the same integrity hash twice, the folder or files in it\nhas not been updated...",
                 "namespace": "@coffeekraken.sugar.node.fs",
                 "status": "beta",
+                "snippet": {
+                    "label": "__folderHashSync($1)"
+                },
                 "example": [
                     {
                         "language": "js",
-                        "code": "import { __folderHash } from '@coffeekraken/sugar/fs';\n__folderHash('my/cool/folder'); // => YZOrKDx9LCLd8X39PoFTflXGpRU=,"
+                        "code": "import { __folderHashSync } from '@coffeekraken/sugar/fs';\n__folderHashSync('my/cool/folder'); // => YZOrKDx9LCLd8X39PoFTflXGpRU=,"
                     }
                 ],
                 "since": "2.0.0",
@@ -5747,9 +5898,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "folderHash.ts",
+                "filename": "folderHashSync.ts",
                 "extension": "ts",
-                "relPath": "src/node/fs/folderHash.ts",
+                "relPath": "src/node/fs/folderHashSync.ts",
                 "children": {}
             },
             "@coffeekraken.sugar.node.fs.folderPath": {
@@ -5815,6 +5966,9 @@
                 "description": "This function returns you the folder path of the file path passed.\nYou can tell the function to check for file existence before getting\nthe folder path with the second parameter.",
                 "namespace": "@coffeekraken.sugar.node.fs",
                 "status": "beta",
+                "snippet": {
+                    "label": "__folderPath($1)"
+                },
                 "example": [
                     {
                         "language": "js",
@@ -5878,6 +6032,10 @@
                 "description": "Calculate the size of the passed folder and return it through a promise in bytes format",
                 "namespace": "@coffeekraken.sugar.node.fs",
                 "status": "beta",
+                "snippet": {
+                    "label": "__folderSize($1)",
+                    "code": "await __folderSize($1)"
+                },
                 "example": [
                     {
                         "language": "js",
@@ -5959,6 +6117,9 @@
                 "description": "Transform into human readable string a file size from a number (float or integer) or string.\nThis function use the wonderfull \"filesize\" npm package under the houd.",
                 "namespace": "@coffeekraken.sugar.node.fs",
                 "status": "stable",
+                "snippet": {
+                    "label": "__formatFileSize($1)"
+                },
                 "example": [
                     {
                         "language": "js",
@@ -5976,95 +6137,9 @@
                 "relPath": "src/node/fs/formatFileSize.ts",
                 "children": {}
             },
-            "@coffeekraken.sugar.node.fs.getFiles": {
-                "id": "@coffeekraken.sugar.node.fs.getFiles",
-                "name": "getFiles",
-                "type": {
-                    "types": [
-                        {
-                            "type": "Function"
-                        }
-                    ],
-                    "raw": "Function"
-                },
-                "param": {
-                    "paths": {
-                        "name": "paths",
-                        "type": {
-                            "types": [
-                                {
-                                    "type": "String"
-                                },
-                                {
-                                    "type": "array",
-                                    "of": [
-                                        "String"
-                                    ]
-                                }
-                            ],
-                            "raw": "String|String[]"
-                        },
-                        "description": "The path(s)/glob(s) you want to get files from",
-                        "defaultStr": ""
-                    },
-                    "Some settings to configure your file search/watch process": {
-                        "name": "Some settings to configure your file search/watch process",
-                        "type": {
-                            "types": [
-                                {
-                                    "type": "Partial",
-                                    "of": [
-                                        "IGetFilesSettings"
-                                    ]
-                                }
-                            ],
-                            "raw": "Partial<IGetFilesSettings>"
-                        },
-                        "description": "null",
-                        "defaultStr": ""
-                    }
-                },
-                "return": {
-                    "type": {
-                        "types": [
-                            {
-                                "type": "SPromise"
-                            }
-                        ],
-                        "raw": "SPromise"
-                    },
-                    "description": "A promise that will be resolved when the getFiles is completed, or that will diaptch some events to let you know of new files, etc..."
-                },
-                "platform": [
-                    {
-                        "name": "node",
-                        "description": ""
-                    }
-                ],
-                "description": "This function wrap the AMAZING chokidar to make use of it even simplier with some default values and support for\nthings like multiple globs, etc...",
-                "namespace": "@coffeekraken.sugar.node.fs",
-                "status": "stable",
-                "example": [
-                    {
-                        "language": "js",
-                        "code": "import { __getFiles } from '@coffeekraken/sugar/fs';\nawait __getFiles('* /*.txt');\nconst watcher = __getFiles('* /*.txt', {\n watch: true\n});\nwatcher.on('add', ({file, resolve}) => {\n // do something with your file\n // mark the file as treated\n resolve();\n});"
-                    }
-                ],
-                "async": "true",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "getFiles.ts",
-                "extension": "ts",
-                "relPath": "src/node/fs/getFiles.ts",
-                "children": {}
-            },
-            "@coffeekraken.sugar.node.fs.grabFirstExisting": {
-                "id": "@coffeekraken.sugar.node.fs.grabFirstExisting",
-                "name": "grabFirstExisting",
+            "@coffeekraken.sugar.node.fs.grabFirstExistingSync": {
+                "id": "@coffeekraken.sugar.node.fs.grabFirstExistingSync",
+                "name": "grabFirstExistingSync",
                 "type": {
                     "types": [
                         {
@@ -6111,10 +6186,13 @@
                 "description": "Check every passed paths and return the first existing one.",
                 "namespace": "@coffeekraken.sugar.node.fs",
                 "status": "beta",
+                "snippet": {
+                    "label": "__gradFirst"
+                },
                 "example": [
                     {
                         "language": "js",
-                        "code": "import { __grabFirstExisting } from '@coffeekraken/sugar/fs';\n__grabFirstExisting([\n 'file/1.txt',\n 'file/2.txt\n]); // => 'file/2.txt'\n'"
+                        "code": "import { __grabFirstExistinSync } from '@coffeekraken/sugar/fs';\n__grabFirstExisting([\n 'file/1.txt',\n 'file/2.txt\n]); // => 'file/2.txt'\n'"
                     }
                 ],
                 "since": "2.0.0",
@@ -6123,9 +6201,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "grabFirstExisting.ts",
+                "filename": "grabFirstExistingSync.ts",
                 "extension": "ts",
-                "relPath": "src/node/fs/grabFirstExisting.ts",
+                "relPath": "src/node/fs/grabFirstExistingSync.ts",
                 "children": {}
             },
             "@coffeekraken.sugar.node.fs.isPath": {
@@ -6188,6 +6266,9 @@
                 "description": "Check if the passed string is a valid path or not",
                 "namespace": "@coffeekraken.sugar.node.fs",
                 "status": "beta",
+                "snippet": {
+                    "label": "__isPath($1)"
+                },
                 "example": [
                     {
                         "language": "js",
@@ -6264,6 +6345,10 @@
                 "description": "Moves a file or directory, even across devices (async)",
                 "namespace": "@coffeekraken.sugar.node.fs",
                 "status": "stable",
+                "snippet": {
+                    "label": "__move($1, $2)",
+                    "code": "await __move($1, $2)"
+                },
                 "example": [
                     {
                         "language": "js",
@@ -6329,6 +6414,9 @@
                 "description": "Moves a file or directory, even across devices (sync)",
                 "namespace": "@coffeekraken.sugar.node.fs",
                 "status": "stable",
+                "snippet": {
+                    "label": "__moveSync($1, $2)"
+                },
                 "example": [
                     {
                         "language": "js",
@@ -6346,9 +6434,9 @@
                 "relPath": "src/node/fs/moveSync.ts",
                 "children": {}
             },
-            "@coffeekraken.sugar.node.fs.pickOne": {
-                "id": "@coffeekraken.sugar.node.fs.pickOne",
-                "name": "pickOne",
+            "@coffeekraken.sugar.node.fs.pickOneSync": {
+                "id": "@coffeekraken.sugar.node.fs.pickOneSync",
+                "name": "pickOneSync",
                 "type": {
                     "types": [
                         {
@@ -6379,10 +6467,10 @@
                         "type": {
                             "types": [
                                 {
-                                    "type": "IPickOneSettings"
+                                    "type": "IPickOneSyncSettings"
                                 }
                             ],
-                            "raw": "IPickOneSettings"
+                            "raw": "IPickOneSyncSettings"
                         },
                         "description": "An object of settings to configure your research",
                         "default": {},
@@ -6442,10 +6530,13 @@
                 "description": "This function allows you to specify multiple files to check and pick one of them",
                 "namespace": "@coffeekraken.sugar.node.fs",
                 "status": "beta",
+                "snippet": {
+                    "label": "__pickOneSync([$1])"
+                },
                 "example": [
                     {
                         "language": "js",
-                        "code": "import { __pickOne } from '@coffeekraken/sugar/fs';\n__pickOne(['myCoolFile.json', 'myCoolFile2.json'], {});"
+                        "code": "import { __pickOneSync } from '@coffeekraken/sugar/fs';\n__pickOneSync(['myCoolFile.json', 'myCoolFile2.json'], {});"
                     }
                 ],
                 "since": "2.0.0",
@@ -6454,9 +6545,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "pickOne.ts",
+                "filename": "pickOneSync.ts",
                 "extension": "ts",
-                "relPath": "src/node/fs/pickOne.ts",
+                "relPath": "src/node/fs/pickOneSync.ts",
                 "children": {}
             },
             "@coffeekraken.sugar.node.fs.pool": {
@@ -6597,9 +6688,13 @@
                         "description": ""
                     }
                 ],
-                "description": "This function simply take as parameter a glob (or array of globs) pattern(s)\nand return an SPromise instance through which you can subscribe to events like:\n- ready: Emitted once the pool is ready\n- add: Emitted when a file has been added\n- change: Emitted when a file has been updated (alias to update)\n- unlink: Emitted when a file has been deleted",
+                "description": "This function simply take as parameter a glob (or array of globs) pattern(s)\nand return an SPromise instance through which you can subscribe to events like:\n- ready: Emitted once the pool is ready\n- add: Emitted when a file has been added\n- change: Emitted when a file has been updated\n- update: Alias of \"change\"\n- unlink: Emitted when a file has been deleted",
                 "namespace": "@coffeekraken.sugar.node.fs",
                 "status": "beta",
+                "snippet": {
+                    "label": "__pool($1)",
+                    "code": "const pool = __pool($1).on('file', file => {\n     $2\n}).on('update', file => {\n     $3\n});\nawait pool.ready; // wait for pool to be ready\n// pool.cancel();"
+                },
                 "example": [
                     {
                         "language": "js",
@@ -6666,6 +6761,9 @@
                 "description": "This function allows you to simply append a string to a file.",
                 "namespace": "@coffeekraken.sugar.node.fs",
                 "status": "beta",
+                "snippet": {
+                    "label": "__prependToFileSync($1, $2)"
+                },
                 "example": [
                     {
                         "language": "js",
@@ -6729,6 +6827,10 @@
                 "description": "This function allows you to read a json file",
                 "namespace": "@coffeekraken.sugar.node.fs",
                 "status": "beta",
+                "snippet": {
+                    "label": "__readJson($1)",
+                    "code": "await __readJson($1)"
+                },
                 "example": [
                     {
                         "language": "js",
@@ -6793,6 +6895,9 @@
                 "description": "This function allows you to read a json file",
                 "namespace": "@coffeekraken.sugar.node.fs",
                 "status": "beta",
+                "snippet": {
+                    "label": "__readJsonSync($1)"
+                },
                 "example": [
                     {
                         "language": "js",
@@ -6856,6 +6961,9 @@
                 "description": "This function allows you to read an xml file and get his content back as JSON",
                 "namespace": "@coffeekraken.sugar.node.fs",
                 "status": "beta",
+                "snippet": {
+                    "label": "__readXmlSync($1)"
+                },
                 "example": [
                     {
                         "language": "js",
@@ -6919,6 +7027,10 @@
                 "description": "Removes a file or directory. The directory can have contents. If the path does not exist, silently does nothing. Like rm -rf (async)",
                 "namespace": "@coffeekraken.sugar.node.fs",
                 "status": "stable",
+                "snippet": {
+                    "label": "__remove($1)",
+                    "code": "await __remove($1)"
+                },
                 "example": [
                     {
                         "language": "js",
@@ -6971,6 +7083,9 @@
                 "description": "Removes a file or directory. The directory can have contents. If the path does not exist, silently does nothing. Like rm -rf (sync)",
                 "namespace": "@coffeekraken.sugar.node.fs",
                 "status": "stable",
+                "snippet": {
+                    "label": "__removeSync($1)"
+                },
                 "example": [
                     {
                         "language": "js",
@@ -7061,6 +7176,10 @@
                 "description": "CWrite a file. If don't exist, will be created as well as the directory structure if needed... ( (async)",
                 "namespace": "@coffeekraken.sugar.node.fs",
                 "status": "stable",
+                "snippet": {
+                    "label": "__writeFile($1, $2)",
+                    "code": "await __writeFile($1, $2)"
+                },
                 "example": [
                     {
                         "language": "js",
@@ -7141,6 +7260,9 @@
                 "description": "Write a file. If don't exist, will be created as well as the directory structure if needed... (sync)",
                 "namespace": "@coffeekraken.sugar.node.fs",
                 "status": "stable",
+                "snippet": {
+                    "label": "__writeFileSync($1, $2)"
+                },
                 "example": [
                     {
                         "language": "js",
@@ -7231,6 +7353,10 @@
                 "description": "Write a JSON file. If don't exist, will be created as well as the directory structure if needed... ( (async)",
                 "namespace": "@coffeekraken.sugar.node.fs",
                 "status": "stable",
+                "snippet": {
+                    "label": "__writeJson($1, $2)",
+                    "code": "await _writeJson($1, $2)"
+                },
                 "example": [
                     {
                         "language": "js",
@@ -7311,6 +7437,9 @@
                 "description": "Write a JSON file. If don't exist, will be created as well as the directory structure if needed... (sync)",
                 "namespace": "@coffeekraken.sugar.node.fs",
                 "status": "stable",
+                "snippet": {
+                    "label": "__writeJsonSync($1, $2)"
+                },
                 "example": [
                     {
                         "language": "js",
@@ -7407,6 +7536,10 @@
                 "description": "Create a temporary file on the disk with the passed content and returns the path\nto it.",
                 "namespace": "@coffeekraken.sugar.node.fs",
                 "status": "stable",
+                "snippet": {
+                    "label": "__writeTmpFile($1, $2)",
+                    "code": "await __writeTmpFile($1, $2)"
+                },
                 "example": [
                     {
                         "language": "js",
@@ -7501,6 +7634,9 @@
                 "description": "Create a temporary file on the disk with the passed content and returns the path\nto it.",
                 "namespace": "@coffeekraken.sugar.node.fs",
                 "status": "stable",
+                "snippet": {
+                    "label": "__writeTmpFileSync($1, $2)"
+                },
                 "example": [
                     {
                         "language": "js",
@@ -7568,6 +7704,10 @@
                 "description": "This function allows you to download a github repository\nand unzip it where you want to store it",
                 "namespace": "@coffeekraken.sugar.node.github",
                 "status": "beta",
+                "snippet": {
+                    "label": "__downloadGithubRepository($1)",
+                    "code": "__downloadGithubRepository($1).then(result => {\n     $2\n});"
+                },
                 "example": [
                     {
                         "language": "js",
@@ -7620,6 +7760,9 @@
                 "description": "Return the array of exclude globs",
                 "namespace": "@coffeekraken.sugar.node.glob",
                 "status": "beta",
+                "snippet": {
+                    "label": "__excludedGlobs()"
+                },
                 "example": [
                     {
                         "language": "js",
@@ -7683,6 +7826,9 @@
                 "description": "This function check if the passed path match one or more exclude globs specified in the config \"storage.exclude\"",
                 "namespace": "@coffeekraken.sugar.node.glob",
                 "status": "beta",
+                "snippet": {
+                    "label": "__matchExcludedGlobs($1)"
+                },
                 "example": [
                     {
                         "language": "js",
@@ -7765,6 +7911,9 @@
                 "description": "This function take as input a file path and a glob pattern that can be an extended one (this mean that is support the listed features above).\nThen it check if the passed filepath match the passed glob pattern or not and return true or false depending on the result.",
                 "namespace": "@coffeekraken.sugar.node.glob",
                 "status": "beta",
+                "snippet": {
+                    "label": "__matchGlob($1, $2);"
+                },
                 "example": [
                     {
                         "language": "js",
@@ -33764,7 +33913,7 @@
                 "namespace": "@coffeekraken.sugar.js.dev.color",
                 "status": "beta",
                 "snippet": {
-                    "label": "__getColorFor($1);"
+                    "label": "__getColorFor($1)"
                 },
                 "example": [
                     {
@@ -33857,7 +34006,7 @@
                 "namespace": "@coffeekraken.sugar.js.dom.animation",
                 "status": "stable",
                 "snippet": {
-                    "label": "__animatedInnerHtml($1, $2);"
+                    "label": "__animatedInnerHtml($1, $2)"
                 },
                 "example": [
                     {
@@ -33942,7 +34091,7 @@
                 "namespace": "@coffeekraken.sugar.js.dom.class",
                 "status": "stable",
                 "snippet": {
-                    "label": "__addAnimationClass($1, $2);"
+                    "label": "__addAnimationClass($1, $2)"
                 },
                 "example": [
                     {
@@ -34030,7 +34179,7 @@
                 "namespace": "@coffeekraken.sugar.js.dom.class",
                 "status": "stable",
                 "snippet": {
-                    "label": "__removeClassOnAnimationEnd($1, $2);"
+                    "label": "__removeClassOnAnimationEnd($1, $2)"
                 },
                 "example": [
                     {
@@ -34110,7 +34259,7 @@
                 "namespace": "@coffeekraken.sugar.js.css",
                 "status": "stable",
                 "snippet": {
-                    "label": "__adoptStyleInShadowRoot($1);"
+                    "label": "__adoptStyleInShadowRoot($1)"
                 },
                 "example": [
                     {
@@ -34149,7 +34298,7 @@
                 "namespace": "@coffeekraken.sugar.js.dom.css",
                 "status": "beta",
                 "snippet": {
-                    "label": "__expandPleasantCssClassnamesLive();"
+                    "label": "__expandPleasantCssClassnamesLive()"
                 },
                 "example": [
                     {
@@ -34205,7 +34354,7 @@
                 "namespace": "@coffeekraken.sugar.js.dom.css",
                 "status": "stable",
                 "snippet": {
-                    "label": "__reloadStylesheets();"
+                    "label": "__reloadStylesheets()"
                 },
                 "example": [
                     {
@@ -34274,7 +34423,7 @@
                 "namespace": "@coffeekraken.sugar.js.css",
                 "status": "stable",
                 "snippet": {
-                    "label": "__stylesheetToString($1);"
+                    "label": "__stylesheetToString($1)"
                 },
                 "example": [
                     {
@@ -34340,7 +34489,7 @@
                 "namespace": "@coffeekraken.sugar.js.dom.detection",
                 "status": "beta",
                 "snippet": {
-                    "label": "__detectInOutDirection($1);",
+                    "label": "__detectInOutDirection($1)",
                     "code": "__detectInOutDirection($1).on('in', direction => {\n     $2\n}).on('out', direction => {\n     $3\n});"
                 },
                 "example": [
@@ -34541,7 +34690,7 @@
                 "namespace": "@coffeekraken.sugar.js.dom.detect",
                 "status": "beta",
                 "snippet": {
-                    "label": "__onDrag($1, $2);",
+                    "label": "__onDrag($1, $2)",
                     "code": "__onDrag($1, drag => {\n    $2\n});"
                 },
                 "example": [
@@ -34669,7 +34818,7 @@
                 "namespace": "@coffeekraken.sugar.js.dom.detect",
                 "status": "stable",
                 "snippet": {
-                    "label": "__onScrollEnd($1, $2);",
+                    "label": "__onScrollEnd($1, $2)",
                     "code": "__onScrollEnd($1, () => {\n     $2\n});"
                 },
                 "example": [
@@ -34772,7 +34921,7 @@
                 "namespace": "@coffeekraken.sugar.js.dom.detect",
                 "status": "stable",
                 "snippet": {
-                    "label": "__onSwipe($1, $2);",
+                    "label": "__onSwipe($1, $2)",
                     "code": "__onSwipe($1, swipe => {\n     $2\n});"
                 },
                 "example": [
@@ -34997,7 +35146,7 @@
                 "namespace": "@coffeekraken.sugar.js.dom.detect",
                 "status": "stable",
                 "snippet": {
-                    "label": "__when($1, $2, $3);",
+                    "label": "__when($1, $2, $3)",
                     "code": "__when($1, $2).then(() => {\n     $2\n});"
                 },
                 "example": [
@@ -35068,7 +35217,7 @@
                 "namespace": "@coffeekraken.sugar.js.dom.detect",
                 "status": "stable",
                 "snippet": {
-                    "label": "__whenAnimationEnd($1);",
+                    "label": "__whenAnimationEnd($1)",
                     "code": "__whenAnimationEnd($1).then(\\$elm => {\n     $2\n});"
                 },
                 "example": [
@@ -35166,7 +35315,7 @@
                 "namespace": "@coffeekraken.sugar.js.dom.detect",
                 "status": "stable",
                 "snippet": {
-                    "label": "__whenAttribute($1, $2);",
+                    "label": "__whenAttribute($1, $2)",
                     "code": "__whenAttribute($1, $2).then(value => {\n     $3\n});"
                 },
                 "example": [
@@ -35234,7 +35383,7 @@
                 "namespace": "@coffeekraken.sugar.js.dom.detect",
                 "status": "betas",
                 "snippet": {
-                    "label": "__whenBackgroundImageLoaded($1);",
+                    "label": "__whenBackgroundImageLoaded($1)",
                     "code": "__whenBackgroundImageLoaded($1).then(\\$elm => {\n     $2\n});"
                 },
                 "example": [
@@ -35305,7 +35454,7 @@
                 "namespace": "@coffeekraken.sugar.js.dom.detect",
                 "status": "stable",
                 "snippet": {
-                    "label": "__whenDomReady();",
+                    "label": "__whenDomReady()",
                     "code": "__whenDomReady().then(() => {\n     $1\n});"
                 },
                 "example": [
@@ -35406,7 +35555,7 @@
                 "namespace": "@coffeekraken.sugar.js.dom.detect",
                 "status": "stable",
                 "snippet": {
-                    "label": "__whenEntersViewport($1);",
+                    "label": "__whenEntersViewport($1)",
                     "code": "__whenEntersViewport($1).then(\\$elm => {\n     $2\n});"
                 },
                 "example": [
@@ -35474,7 +35623,7 @@
                 "namespace": "@coffeekraken.sugar.js.dom.detect",
                 "status": "beta",
                 "snippet": {
-                    "label": "__whenImageLoaded($1);",
+                    "label": "__whenImageLoaded($1)",
                     "code": "__whenImageLoaded($1).then(\\$img => {\n     $2\n});"
                 },
                 "example": [
@@ -35544,7 +35693,7 @@
                 "namespace": "@coffeekraken.sugar.js.dom.detect",
                 "status": "beta",
                 "snippet": {
-                    "label": "__whenImagesLoaded($1);",
+                    "label": "__whenImagesLoaded($1)",
                     "code": "__whenImagesLoaded($1).then(imgs => {\n     $2\n});"
                 },
                 "example": [
@@ -35717,7 +35866,7 @@
                 "namespace": "@coffeekraken.sugar.js.dom.detect",
                 "status": "beta",
                 "snippet": {
-                    "label": "__whenInteract($1);",
+                    "label": "__whenInteract($1)",
                     "code": "__whenInteract($1).then(\\$elm => {\n     $2\n});"
                 },
                 "example": [
@@ -35896,7 +36045,7 @@
                 "namespace": "@coffeekraken.sugar.js.dom.detect",
                 "status": "beta",
                 "snippet": {
-                    "label": "__whenInViewport($1);",
+                    "label": "__whenInViewport($1)",
                     "code": "__whenInViewport($1).then(\\$elm => {\n     $2\n});"
                 },
                 "example": [
@@ -35964,7 +36113,7 @@
                 "namespace": "@coffeekraken.sugar.js.dom.detect",
                 "status": "beta",
                 "snippet": {
-                    "label": "__whenLinkLoaded($1);",
+                    "label": "__whenLinkLoaded($1)",
                     "code": "__whenLinkLoaded($1).then(\\$elm => {\n     $2\n});"
                 },
                 "example": [
@@ -36031,7 +36180,7 @@
                 "namespace": "@coffeekraken.sugar.js.dom.detect",
                 "status": "beta",
                 "snippet": {
-                    "label": "__whenLod($1);",
+                    "label": "__whenLod($1)",
                     "code": "__whenLod($1).then(() => {\n     $2\n});"
                 },
                 "example": [
@@ -36177,7 +36326,7 @@
                 "namespace": "@coffeekraken.sugar.js.dom.detect",
                 "status": "beta",
                 "snippet": {
-                    "label": "__whenNearViewport($1);",
+                    "label": "__whenNearViewport($1)",
                     "code": "__whenNearViewport($1).then(\\$elm => {\n     $2\n});"
                 },
                 "example": [
@@ -36278,7 +36427,7 @@
                 "namespace": "@coffeekraken.sugar.js.dom.detect",
                 "status": "stable",
                 "snippet": {
-                    "label": "__whenOutOfViewport($1);",
+                    "label": "__whenOutOfViewport($1)",
                     "code": "__whenOutOfViewport($1).then(\\$elm => {\n     $2\n});"
                 },
                 "example": [
@@ -36428,7 +36577,7 @@
                 "namespace": "@coffeekraken.sugar.js.dom.detect",
                 "status": "beta",
                 "snippet": {
-                    "label": "__whenScriptLoaded($1);",
+                    "label": "__whenScriptLoaded($1)",
                     "code": "__whenScriptLoaded($1).then(\\$script => {\n     $2\n});"
                 },
                 "example": [
@@ -36502,7 +36651,7 @@
                 "namespace": "@coffeekraken.sugar.js.dom.detect",
                 "status": "stable",
                 "snippet": {
-                    "label": "__whenStylesheetsReady($1);",
+                    "label": "__whenStylesheetsReady($1)",
                     "code": "__whenStylesheetsReady($1).then(stylesheets => {\n     $2\n});"
                 },
                 "example": [
@@ -36570,7 +36719,7 @@
                 "namespace": "@coffeekraken.sugar.js.dom.detect",
                 "status": "stable",
                 "snippet": {
-                    "label": "__whenTransitionEnd($1);",
+                    "label": "__whenTransitionEnd($1)",
                     "code": "__whenTransitionEnd($1).then(\\$elm => {\n     $2\n});"
                 },
                 "example": [
@@ -36638,7 +36787,7 @@
                 "namespace": "@coffeekraken.sugar.js.dom.detect",
                 "status": "stable",
                 "snippet": {
-                    "label": "__whenVisible($1);",
+                    "label": "__whenVisible($1)",
                     "code": "__whenVisible($1).then(\\$elm => {\n     $2\n});"
                 },
                 "example": [
@@ -36706,7 +36855,7 @@
                 "namespace": "@coffeekraken.sugar.js.dom.distance",
                 "status": "beta",
                 "snippet": {
-                    "label": "__distanceFromElementTopToViewportBottom($1);"
+                    "label": "__distanceFromElementTopToViewportBottom($1)"
                 },
                 "example": [
                     {
@@ -36772,7 +36921,7 @@
                 "namespace": "@coffeekraken.sugar.js.dom.distance",
                 "status": "betas",
                 "snippet": {
-                    "label": "__distanceFromElementTopToViewportTop($1);"
+                    "label": "__distanceFromElementTopToViewportTop($1)"
                 },
                 "example": [
                     {
@@ -36812,7 +36961,7 @@
                 "namespace": "@coffeekraken.sugar.js.dom.distance",
                 "status": "stable",
                 "snippet": {
-                    "label": "__scrollLeft();"
+                    "label": "__scrollLeft()"
                 },
                 "example": [
                     {
@@ -36863,7 +37012,7 @@
                 "namespace": "@coffeekraken.sugar.js.dom.distance",
                 "status": "beta",
                 "snippet": {
-                    "label": "__scrollTop();"
+                    "label": "__scrollTop()"
                 },
                 "example": [
                     {
@@ -36949,7 +37098,7 @@
                 "namespace": "@coffeekraken.sugar.js.dom.element",
                 "status": "beta",
                 "snippet": {
-                    "label": "__elementAreaStats($1);"
+                    "label": "__elementAreaStats($1)"
                 },
                 "example": [
                     {
@@ -37055,7 +37204,7 @@
                 "namespace": "@coffeekraken.sugar.js.dom.event",
                 "status": "beta",
                 "snippet": {
-                    "label": "__addEventListener($1, $2, $3);",
+                    "label": "__addEventListener($1, $2, $3)",
                     "code": "__addEventListener($1, $2, e => {\n     $3\n});"
                 },
                 "example": [
@@ -37163,7 +37312,7 @@
                 "namespace": "@coffeekraken.sugar.js.dom.event",
                 "status": "beta",
                 "snippet": {
-                    "label": "__addEventListenerOnce($1, $2, $3);",
+                    "label": "__addEventListenerOnce($1, $2, $3)",
                     "code": "__addEventListenerOnce($1, $2, e => {\n     $3\n});"
                 },
                 "example": [
@@ -37245,7 +37394,7 @@
                 "namespace": "@coffeekraken.sugar.js.dom.event",
                 "status": "stable",
                 "snippet": {
-                    "label": "__dispatchEvent($1, $2, $3);"
+                    "label": "__dispatchEvent($1, $2, $3)"
                 },
                 "example": [
                     {
@@ -37330,7 +37479,7 @@
                 "namespace": "@coffeekraken.sugar.js.dom.form",
                 "status": "beta",
                 "snippet": {
-                    "label": "__isFileAccepted($1, $2);",
+                    "label": "__isFileAccepted($1, $2)",
                     "code": "__isFileAccepted($1, $2, [\n     'image/png',\n     $3\n]);"
                 },
                 "example": [
@@ -37386,7 +37535,7 @@
                 "namespace": "@coffeekraken.sugar.js.dom.form",
                 "status": "beta",
                 "snippet": {
-                    "label": "__resetFileInput($1);"
+                    "label": "__resetFileInput($1)"
                 },
                 "example": [
                     {
@@ -37466,7 +37615,7 @@
                 "namespace": "@coffeekraken.sugar.js.dom.html",
                 "status": "beta",
                 "snippet": {
-                    "label": "__nodeToString($1);"
+                    "label": "__nodeToString($1)"
                 },
                 "example": [
                     {
@@ -37532,7 +37681,7 @@
                 "namespace": "@coffeekraken.sugar.js.dom.html",
                 "status": "beta",
                 "snippet": {
-                    "label": "__stringToNode($1);"
+                    "label": "__stringToNode($1)"
                 },
                 "example": [
                     {
@@ -37600,7 +37749,7 @@
                 "namespace": "@coffeekraken.sugar.js.dom.inject",
                 "status": "beta",
                 "snippet": {
-                    "label": "__injectIframeContent($1, $2);"
+                    "label": "__injectIframeContent($1, $2)"
                 },
                 "example": [
                     {
@@ -37666,7 +37815,7 @@
                 "namespace": "@coffeekraken.sugar.js.dom.inject",
                 "status": "beta",
                 "snippet": {
-                    "label": "__injectScript($1);"
+                    "label": "__injectScript($1)"
                 },
                 "example": [
                     {
@@ -37777,7 +37926,7 @@
                 "namespace": "@coffeekraken.sugar.js.dom.inject",
                 "status": "stable",
                 "snippet": {
-                    "label": "__injectStyle($1);"
+                    "label": "__injectStyle($1)"
                 },
                 "example": [
                     {
@@ -37843,7 +37992,7 @@
                 "namespace": "@coffeekraken.sugar.js.dom.inject",
                 "status": "beta",
                 "snippet": {
-                    "label": "__injectStylesheet($1);"
+                    "label": "__injectStylesheet($1)"
                 },
                 "example": [
                     {
@@ -37898,7 +38047,7 @@
                 "namespace": "@coffeekraken.sugar.js.dom.input",
                 "status": "beta",
                 "snippet": {
-                    "label": "__cursorToEnd($1);"
+                    "label": "__cursorToEnd($1)"
                 },
                 "example": [
                     {
@@ -37953,7 +38102,7 @@
                 "namespace": "@coffeekraken.sugar.js.dom.is",
                 "status": "beta",
                 "snippet": {
-                    "label": "__isFocus($1);"
+                    "label": "__isFocus($1)"
                 },
                 "example": [
                     {
@@ -38008,7 +38157,7 @@
                 "namespace": "@coffeekraken.sugar.js.dom.is",
                 "status": "beta",
                 "snippet": {
-                    "label": "__isFocusWithin($1);"
+                    "label": "__isFocusWithin($1)"
                 },
                 "example": [
                     {
@@ -38063,7 +38212,7 @@
                 "namespace": "@coffeekraken.sugar.js.dom.is",
                 "status": "beta",
                 "snippet": {
-                    "label": "__isHover($1);"
+                    "label": "__isHover($1)"
                 },
                 "example": [
                     {
@@ -38114,7 +38263,7 @@
                 "namespace": "@coffeekraken.sugar.js.dom.is",
                 "status": "beta",
                 "snippet": {
-                    "label": "__isInIframe($1);"
+                    "label": "__isInIframe($1)"
                 },
                 "example": [
                     {
@@ -38194,7 +38343,7 @@
                 "namespace": "@coffeekraken.sugar.js.dom.is",
                 "status": "beta",
                 "snippet": {
-                    "label": "__isInViewport($1);"
+                    "label": "__isInViewport($1)"
                 },
                 "example": [
                     {
@@ -38245,7 +38394,7 @@
                 "namespace": "@coffeekraken.sugar.js.dom.is",
                 "status": "beta",
                 "snippet": {
-                    "label": "__isScrollable($1);"
+                    "label": "__isScrollable($1)"
                 },
                 "example": [
                     {
@@ -38312,7 +38461,7 @@
                 "namespace": "@coffeekraken.sugar.js.dom.is",
                 "status": "beta",
                 "snippet": {
-                    "label": "__isUserScrolling();"
+                    "label": "__isUserScrolling()"
                 },
                 "example": [
                     {
@@ -38379,7 +38528,7 @@
                 "namespace": "@coffeekraken.sugar.js.dom.is",
                 "status": "beta",
                 "snippet": {
-                    "label": "__isVisible($1);"
+                    "label": "__isVisible($1)"
                 },
                 "example": [
                     {
@@ -38445,7 +38594,7 @@
                 "namespace": "@coffeekraken.sugar.js.dom.manipulate",
                 "status": "beta",
                 "snippet": {
-                    "label": "__emptyNode($1);"
+                    "label": "__emptyNode($1)"
                 },
                 "example": [],
                 "since": "2.0.0",
@@ -38519,7 +38668,7 @@
                 "namespace": "@coffeekraken.sugar.js.dom.manipulate",
                 "status": "beta",
                 "snippet": {
-                    "label": "__insertAfter($1, $2);"
+                    "label": "__insertAfter($1, $2)"
                 },
                 "example": [
                     {
@@ -38598,7 +38747,7 @@
                 "namespace": "@coffeekraken.sugar.js.dom.manipulate",
                 "status": "beta",
                 "snippet": {
-                    "label": "__prependChild($1, $2);"
+                    "label": "__prependChild($1, $2)"
                 },
                 "example": [
                     {
@@ -38664,7 +38813,7 @@
                 "namespace": "@coffeekraken.sugar.js.dom.manipulate",
                 "status": "beta",
                 "snippet": {
-                    "label": "stripTags($1);"
+                    "label": "stripTags($1)"
                 },
                 "example": [
                     {
@@ -38733,7 +38882,7 @@
                 "namespace": "@coffeekraken.sugar.js.dom.manipulate",
                 "status": "betas",
                 "snippet": {
-                    "label": "__toDomNodes($1);"
+                    "label": "__toDomNodes($1)"
                 },
                 "example": [
                     {
@@ -38812,7 +38961,7 @@
                 "namespace": "@coffeekraken.sugar.js.dom.manipulate",
                 "status": "beta",
                 "snippet": {
-                    "label": "__wrap($1);"
+                    "label": "__wrap($1)"
                 },
                 "example": [
                     {
@@ -38891,7 +39040,7 @@
                 "namespace": "@coffeekraken.sugar.js.dom.manipulate",
                 "status": "beta",
                 "snippet": {
-                    "label": "__wrapInner($1, $2);"
+                    "label": "__wrapInner($1, $2)"
                 },
                 "example": [
                     {
@@ -38970,7 +39119,7 @@
                 "namespace": "@coffeekraken.sugar.js.dom.observe",
                 "status": "beta",
                 "snippet": {
-                    "label": "__observeAttributes($1);",
+                    "label": "__observeAttributes($1)",
                     "code": "__observeAttributes($1).on('attribute', mutation => {\n     $2\n});"
                 },
                 "example": [
@@ -39038,7 +39187,7 @@
                 "namespace": "@coffeekraken.sugar.js.dom.offset",
                 "status": "beta",
                 "snippet": {
-                    "label": "__offsetFromParent($1);"
+                    "label": "__offsetFromParent($1)"
                 },
                 "example": [
                     {
@@ -39104,7 +39253,7 @@
                 "namespace": "@coffeekraken.sugar.js.dom.offset",
                 "status": "beta",
                 "snippet": {
-                    "label": "__offsetFromViewport($1);"
+                    "label": "__offsetFromViewport($1)"
                 },
                 "example": [
                     {
@@ -39173,7 +39322,7 @@
                 "namespace": "@coffeekraken.sugar.js.dom.position",
                 "status": "beta",
                 "snippet": {
-                    "label": "__positionFromEvent($1);"
+                    "label": "__positionFromEvent($1)"
                 },
                 "example": [
                     {
@@ -39255,7 +39404,7 @@
                 "namespace": "@coffeekraken.sugar.js.dom.query",
                 "status": "beta",
                 "snippet": {
-                    "label": "__closest($1, $2);"
+                    "label": "__closest($1, $2)"
                 },
                 "example": [
                     {
@@ -39321,7 +39470,7 @@
                 "namespace": "@coffeekraken.sugar.js.dom.query",
                 "status": "beta",
                 "snippet": {
-                    "label": "__closestNotVisible($1);"
+                    "label": "__closestNotVisible($1)"
                 },
                 "example": [
                     {
@@ -39387,7 +39536,7 @@
                 "namespace": "@coffeekraken.sugar.js.dom.query",
                 "status": "beta",
                 "snippet": {
-                    "label": "__closestScrollable($1);"
+                    "label": "__closestScrollable($1)"
                 },
                 "example": [
                     {
@@ -39466,7 +39615,7 @@
                 "namespace": "@coffeekraken.sugar.js.dom.query",
                 "status": "beta",
                 "snippet": {
-                    "label": "__matches($1, $2);"
+                    "label": "__matches($1, $2)"
                 },
                 "example": [
                     {
@@ -39545,7 +39694,7 @@
                 "namespace": "@coffeekraken.sugar.js.dom.query",
                 "status": "beta",
                 "snippet": {
-                    "label": "__next($1, $2);"
+                    "label": "__next($1, $2)"
                 },
                 "example": [
                     {
@@ -39624,7 +39773,7 @@
                 "namespace": "@coffeekraken.sugar.js.dom.query",
                 "status": "beta",
                 "snippet": {
-                    "label": "__previous($1, $2);"
+                    "label": "__previous($1, $2)"
                 },
                 "example": [
                     {
@@ -39746,7 +39895,7 @@
                 "namespace": "@coffeekraken.sugar.js.dom.query",
                 "status": "beta",
                 "snippet": {
-                    "label": "__querySelector($1);"
+                    "label": "__querySelector($1)"
                 },
                 "example": [
                     {
@@ -39871,7 +40020,7 @@
                 "namespace": "@coffeekraken.sugar.js.dom.query",
                 "status": "beta",
                 "snippet": {
-                    "label": "__querySelectorAll($1);"
+                    "label": "__querySelectorAll($1)"
                 },
                 "example": [
                     {
@@ -39997,7 +40146,7 @@
                 "namespace": "@coffeekraken.sugar.js.dom.query",
                 "status": "beta",
                 "snippet": {
-                    "label": "__querySelectorLive($1, $2);",
+                    "label": "__querySelectorLive($1, $2)",
                     "code": "__querySelectorLive($1, \\$elm => {\n     $2\n});"
                 },
                 "example": [
@@ -40081,7 +40230,7 @@
                 "namespace": "@coffeekraken.sugar.js.dom.query",
                 "status": "beta",
                 "snippet": {
-                    "label": "__querySelectorUp($1, $2);"
+                    "label": "__querySelectorUp($1, $2)"
                 },
                 "example": [
                     {
@@ -40120,6 +40269,9 @@
                 "description": "Function that set the `history.scrollRestoration` property to `manual`",
                 "namespace": "@coffeekraken.sugar.js.dom.scroll",
                 "status": "stable",
+                "snippet": {
+                    "label": "__preventScrollRestoration()"
+                },
                 "example": [
                     {
                         "language": "js",
@@ -40197,6 +40349,10 @@
                 "description": "Function that let you monitor an HTMLElement passed and being notified when\nit is \"active\" and when it is \"unactive\".",
                 "namespace": "@coffeekraken.sugar.js.dom.scroll",
                 "status": "beta",
+                "snippet": {
+                    "label": "__scrollSpy($1)",
+                    "code": "__scrollSpy($1).on('activate', \\$elm => {\n     $2\n}).on('unactivate', \\$elm => {\n     $3\n});"
+                },
                 "example": [
                     {
                         "language": "js",
@@ -40347,6 +40503,9 @@
                 "description": "Function that let you make a smooth page scroll to a specific element in the page",
                 "namespace": "@coffeekraken.sugar.js.dom.scroll",
                 "status": "beta",
+                "snippet": {
+                    "label": "__scrollTo($1)"
+                },
                 "example": [
                     {
                         "language": "js",
@@ -40428,6 +40587,9 @@
                 "description": "Scroll to the location hash if an hash is present.\nThis function will try to get the target element from the hash and scroll to it",
                 "namespace": "@coffeekraken.sugar.js.dom.scroll",
                 "status": "beta",
+                "snippet": {
+                    "label": "__scrollToLocationHash()"
+                },
                 "example": [
                     {
                         "language": "js",
@@ -40491,6 +40653,9 @@
                 "description": "Return the full height of an element that has maybe a max-height, etc...",
                 "namespace": "@coffeekraken.sugar.js.dom.size",
                 "status": "beta",
+                "snippet": {
+                    "label": "__realHeight($1)"
+                },
                 "example": [
                     {
                         "language": "js",
@@ -40586,6 +40751,9 @@
                 "description": "Simulate the slide gesture with optional inertia and direction restriction",
                 "namespace": "@coffeekraken.sugar.js.dom.drag",
                 "status": "beta",
+                "snippet": {
+                    "label": "__slideable($1)"
+                },
                 "example": [
                     {
                         "language": "js",
@@ -40650,6 +40818,9 @@
                 "description": "Get the css animation properties from an HTMLElement in an object format",
                 "namespace": "@coffeekraken.sugar.js.dom.style",
                 "status": "wip",
+                "snippet": {
+                    "label": "__getAnimationProperties($1)"
+                },
                 "example": [
                     {
                         "language": "js",
@@ -40716,6 +40887,9 @@
                 "description": "Get the animations applied to the passed element.",
                 "namespace": "@coffeekraken.sugar.js.dom.style",
                 "status": "wip",
+                "snippet": {
+                    "label": "__getAnimationsFromElement($1)"
+                },
                 "example": [
                     {
                         "language": "js",
@@ -40807,6 +40981,9 @@
                 "description": "Get all the CSSRules of the passed type",
                 "namespace": "@coffeekraken.sugar.js.dom.style",
                 "status": "wip",
+                "snippet": {
+                    "label": "__getCssDeclarations()"
+                },
                 "example": [
                     {
                         "language": "js",
@@ -40887,6 +41064,9 @@
                 "description": "Get all the CSSRules of the passed stylesheet",
                 "namespace": "@coffeekraken.sugar.js.dom.style",
                 "status": "wip",
+                "snippet": {
+                    "label": "__getCssRulesFromStylesheet($1)"
+                },
                 "example": [
                     {
                         "language": "js",
@@ -41026,6 +41206,9 @@
                 "description": "Get all the keyframes declarations from the passed rules",
                 "namespace": "@coffeekraken.sugar.js.dom.style",
                 "status": "wip",
+                "snippet": {
+                    "label": "__getKeyframesDeclarations($1)"
+                },
                 "example": [
                     {
                         "language": "js",
@@ -41089,6 +41272,9 @@
                 "description": "Get a rotate properties of an HTMLElement",
                 "namespace": "@coffeekraken.sugar.js.dom.style",
                 "status": "beta",
+                "snippet": {
+                    "label": "__getRotateProperties($1)"
+                },
                 "example": [
                     {
                         "language": "js",
@@ -41152,6 +41338,9 @@
                 "description": "Get a scale properties of an HTMLElement",
                 "namespace": "@coffeekraken.sugar.js.dom.style",
                 "status": "beta",
+                "snippet": {
+                    "label": "__getScaleProperty($1)"
+                },
                 "example": [
                     {
                         "language": "js",
@@ -41228,6 +41417,9 @@
                 "description": "Get a style property on the passed element through the computed style.\nThis function try to store the actual style to not trigger more that 1 redraw\neach js execution loop.",
                 "namespace": "@coffeekraken.sugar.js.dom.style",
                 "status": "beta",
+                "snippet": {
+                    "label": "__getStyleProperty($1, $2)"
+                },
                 "example": [
                     {
                         "language": "js",
@@ -41291,6 +41483,9 @@
                 "description": "Get a translate properties of an HTMLElement",
                 "namespace": "@coffeekraken.sugar.js.dom.style",
                 "status": "beta",
+                "snippet": {
+                    "label": "__getTransformProperties($1)"
+                },
                 "example": [
                     {
                         "language": "js",
@@ -41354,6 +41549,9 @@
                 "description": "Get the css transition properties from an HTMLElement in an object format",
                 "namespace": "@coffeekraken.sugar.js.dom.style",
                 "status": "wip",
+                "snippet": {
+                    "label": "__getTransitionProperties($1)"
+                },
                 "example": [
                     {
                         "language": "js",
@@ -41417,6 +41615,9 @@
                 "description": "Get a translate properties of an HTMLElement",
                 "namespace": "@coffeekraken.sugar.js.dom.style",
                 "status": "beta",
+                "snippet": {
+                    "label": "__getTranslateProperties($1)"
+                },
                 "example": [
                     {
                         "language": "js",
@@ -41496,6 +41697,9 @@
                 "description": "Set or remove a css style property on an HTMLElement",
                 "namespace": "@coffeekraken.sugar.js.dom.style",
                 "status": "beta",
+                "snippet": {
+                    "label": "__style($1, $2)"
+                },
                 "example": [
                     {
                         "language": "js",
@@ -41559,6 +41763,9 @@
                 "description": "Transforms KeyFrameRule to array of web animation compatible keyframes",
                 "namespace": "@coffeekraken.sugar.js.dom.style",
                 "status": "wip",
+                "snippet": {
+                    "label": "__transformKeyframesDeclarations($1)"
+                },
                 "example": [
                     {
                         "language": "js",
@@ -41622,6 +41829,9 @@
                 "description": "This function allows you to take an HTMLTemplateElement and transform it into real DOM.\nNote that the provided DOM will be wrapper into a nude div",
                 "namespace": "@coffeekraken.sugar.js.dom.template",
                 "status": "beta",
+                "snippet": {
+                    "label": "__expandTemplate($1)"
+                },
                 "example": [
                     {
                         "language": "js",
@@ -41685,6 +41895,9 @@
                 "description": "Capture the \"touchstart\", \"touchmove\", \"touchend\" and \"touchcancel\" of the passed element and\napply a \"preventDefault()\" on all events",
                 "namespace": "@coffeekraken.sugar.js.dom.touch",
                 "status": "beta",
+                "snippet": {
+                    "label": "__preventViewportMovement($1)"
+                },
                 "example": [
                     {
                         "language": "js",
@@ -41778,6 +41991,9 @@
                 "description": "This function allows you to clear all the animations and transitions inside a particular dom element.\nYou can specify a timeout if you want to clear them only for a limited amount of time.",
                 "namespace": "@coffeekraken.sugar.js.dom.transmation",
                 "status": "beta",
+                "snippet": {
+                    "label": "__clearTransmations($1)"
+                },
                 "example": [
                     {
                         "language": "js",
@@ -41854,6 +42070,10 @@
                 "description": "Go up the dom three until the callback function return true",
                 "namespace": "@coffeekraken.sugar.js.dom.traverse",
                 "status": "beta",
+                "snippet": {
+                    "label": "__traverseUp($1, $2)",
+                    "code": "__traverseUp($1, \\$elm => {\n     $2\n});"
+                },
                 "example": [
                     {
                         "language": "js",
@@ -41896,8 +42116,8 @@
                         "description": "The element to start on",
                         "defaultStr": ""
                     },
-                    "callback": {
-                        "name": "callback",
+                    "$depending": {
+                        "name": "$depending",
                         "type": {
                             "types": [
                                 {
@@ -41906,7 +42126,7 @@
                             ],
                             "raw": "Function"
                         },
-                        "description": "The callback function to call on each element. If this returns on an element, it will be the returned element",
+                        "description": "The element on which your floating one depends on",
                         "defaultStr": ""
                     }
                 },
@@ -41919,7 +42139,7 @@
                         ],
                         "raw": "Function"
                     },
-                    "description": "A function to"
+                    "description": "An IMakeFloatApi object with properties like `update` to update the position and `cancel` to cancel the floating behavior"
                 },
                 "platform": [
                     {
@@ -41930,6 +42150,9 @@
                 "description": "This function allows you to make an element float depending on another one.\nIt will make sure the element is placed as best as possible dependong on the page position,\nsurroundings, etc...\nThis make use of the AMAZING [Floating UI](https://floating-ui.com) library.",
                 "namespace": "@coffeekraken.sugar.js.dom.ui",
                 "status": "beta",
+                "snippet": {
+                    "label": "__makeFloat($1, $2)"
+                },
                 "example": [
                     {
                         "language": "js",
@@ -41996,6 +42219,9 @@
                 "description": "This function take as input either a tagName String like \"img\", \"div\", etc... or an HTMLElement node\nand return true or false depending if this element is supposed to have children or not.",
                 "namespace": "@coffeekraken.sugar.js.dom.utils",
                 "status": "beta",
+                "snippet": {
+                    "label": "__canHaveChildren($1)"
+                },
                 "example": [
                     {
                         "language": "js",
@@ -42044,6 +42270,9 @@
                 "description": "Exit the fullscreen mode",
                 "namespace": "@coffeekraken.sugar.js.dom.utils",
                 "status": "beta",
+                "snippet": {
+                    "label": "__exitFullscreen()"
+                },
                 "example": [
                     {
                         "language": "js",
@@ -42107,6 +42336,9 @@
                 "description": "Force the element to be painted again in case of visual issues",
                 "namespace": "@coffeekraken.sugar.js.dom.utils",
                 "status": "beta",
+                "snippet": {
+                    "label": "__forceRedraw()"
+                },
                 "example": [
                     {
                         "language": "js",
@@ -42170,6 +42402,9 @@
                 "description": "This function simply return the HTML{name}Element class depending on the passed\ntag name like \"p\", \"input\", \"textarea\", etc...",
                 "namespace": "@coffeekraken.sugar.js.dom.utils",
                 "status": "beta",
+                "snippet": {
+                    "label": "__getHtmlClassFromTagName($1)"
+                },
                 "example": [
                     {
                         "language": "js",
@@ -42233,10 +42468,13 @@
                 "description": "This function simply return the tagname depending on the passed HTML class\nlike HTMLAnchorElement, HTMLLinkElement, etc...",
                 "namespace": "@coffeekraken.sugar.js.dom.utils",
                 "status": "beta",
+                "snippet": {
+                    "label": "__getTagNameFromHtmlClass($1)"
+                },
                 "example": [
                     {
                         "language": "js",
-                        "code": "import { __getHtmlhtmlClassFromHtmlClass } from '@coffeekraken/sugar/dom';\n__getHtmlhtmlClassFromHtmlClass(HTMLAnchorElement); // => 'a'"
+                        "code": "import { __getTagNameFromHtmlClass } from '@coffeekraken/sugar/dom';\n__getTagNameFromHtmlClass(HTMLAnchorElement); // => 'a'"
                     }
                 ],
                 "since": "2.0.0",
@@ -42270,6 +42508,9 @@
                 "description": "This export an object mapping the HTML tag name to his corresponding HTML class (object not css class)",
                 "namespace": "@coffeekraken.sugar.js.dom.utils",
                 "status": "beta",
+                "snippet": {
+                    "label": "__htmlTagToHtmlClassMap"
+                },
                 "example": [
                     {
                         "language": "js",
@@ -42333,6 +42574,9 @@
                 "description": "Return how many percent the passed element is visible in the viewport",
                 "namespace": "@coffeekraken.sugar.js.dom.utils",
                 "status": "beta",
+                "snippet": {
+                    "label": "__inViewportPercentage($1)"
+                },
                 "example": [
                     {
                         "language": "js",
@@ -42396,6 +42640,9 @@
                 "description": "Return the inde of the passed node inside the html",
                 "namespace": "@coffeekraken.sugar.js.dom.utils",
                 "status": "beta",
+                "snippet": {
+                    "label": "__nodeIndex($1)"
+                },
                 "example": [
                     {
                         "language": "js",
@@ -42459,6 +42706,9 @@
                 "description": "Proxy for the window.requestAnimationFrame function",
                 "namespace": "@coffeekraken.sugar.js.dom.utils",
                 "status": "beta",
+                "snippet": {
+                    "label": "__requestAnimationFrame()"
+                },
                 "example": [],
                 "since": "2.0.0",
                 "author": {
@@ -42517,6 +42767,9 @@
                 "description": "Request fullscreen on the passed DOM element",
                 "namespace": "@coffeekraken.sugar.js.dom.utils",
                 "status": "beta",
+                "snippet": {
+                    "label": "__requestFullscreen()"
+                },
                 "example": [
                     {
                         "language": "js",
@@ -42624,6 +42877,9 @@
                 "description": "Split each letters inside an HTMLElement by scoping them inside multiple tags.\nHere's an result sample for : Hello World\n```html\n<span style=\"white-space:nowrap\">\n<span class=\"split-letters\">\n<span class=\"split-letters__letter\">H</span>\n</span>\n<span class=\"split-letters\">\n<span class=\"split-letters__letter\">e</span>\n</span>\n<span class=\"split-letters\">\n<span class=\"split-letters__letter\">l</span>\n</span>\n<span class=\"split-letters\">\n<span class=\"split-letters__letter\">l</span>\n</span>\n<span class=\"split-letters\">\n<span class=\"split-letters__letter\">o</span>\n</span>\n</span>\n<span class=\"split-letters\">\n<span class=\"split-letters__letter\">&nbsp;</span>\n</span>\n<span style=\"white-space:nowrap\">\n<span class=\"split-letters\">\n<span class=\"split-letters__letter\">W</span>\n</span>\n<span class=\"split-letters\">\n<span class=\"split-letters__letter\">o</span>\n</span>\n<span class=\"split-letters\">\n<span class=\"split-letters__letter\">r</span>\n</span>\n<span class=\"split-letters\">\n<span class=\"split-letters__letter\">l</span>\n</span>\n<span class=\"split-letters\">\n<span class=\"split-letters__letter\">d</span>\n</span>\n</span>\n```",
                 "namespace": "@coffeekraken.sugar.js.dom.utils",
                 "status": "beta",
+                "snippet": {
+                    "label": "__splitLetters($1)"
+                },
                 "example": [
                     {
                         "language": "js",
@@ -42731,6 +42987,9 @@
                 "description": "Split each lines inside an HTMLElement by scoping them inside some tags.\nHere's an result sample for :\nHello\nWorld\n\n```html\n<p class=\"s-split-lines\">Hello</p>\n<p class=\"s-split-lines\">World</p>\n```",
                 "namespace": "@coffeekraken.sugar.js.dom.utils",
                 "status": "beta",
+                "snippet": {
+                    "label": "__splitLines($1)"
+                },
                 "example": [
                     {
                         "language": "js",
@@ -42838,6 +43097,9 @@
                 "description": "Split each words inside an HTMLElement by scoping them inside some tags.\nHere's an result sample for :\nHello World\n\n```html\n<span class=\"s-split-words\">Hello</span>\n<span class=\"s-split-words\">World</span>\n```",
                 "namespace": "@coffeekraken.sugar.js.dom.utils",
                 "status": "beta",
+                "snippet": {
+                    "label": "__splitWords($1)"
+                },
                 "example": [
                     {
                         "language": "js",
@@ -42904,6 +43166,9 @@
                 "description": "Get the text width in px of a passed string or the passed HTMLElement",
                 "namespace": "@coffeekraken.sugar.js.dom.utils",
                 "status": "beta",
+                "snippet": {
+                    "label": "__textWidth($1)"
+                },
                 "example": [
                     {
                         "language": "js",
@@ -42967,6 +43232,9 @@
                 "description": "Toggle the fullscreen mode",
                 "namespace": "@coffeekraken.sugar.js.dom.utils",
                 "status": "beta",
+                "snippet": {
+                    "label": "__toggleFullscreen()"
+                },
                 "example": [
                     {
                         "language": "js",
@@ -43034,6 +43302,9 @@
                 "description": "This function let you pass anything like an object, a string, etc... and get the same\ncolor back everytime you pass the same value.\nThis if usefull for output logs, etc...",
                 "namespace": "@coffeekraken.sugar.node.dev.color",
                 "status": "beta",
+                "snippet": {
+                    "label": "__getColorFor($1)"
+                },
                 "example": [
                     {
                         "language": "js",

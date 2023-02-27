@@ -1,6 +1,6 @@
 // @ts-nocheck
 
-import { __resolveGlob } from '@coffeekraken/sugar/glob';
+import { __resolveGlobSync } from '@coffeekraken/sugar/glob';
 import { __isGlob, __isNode, __isPath } from '@coffeekraken/sugar/is';
 import { __replaceTokens } from '@coffeekraken/sugar/token';
 import __fs from 'fs';
@@ -91,7 +91,7 @@ const ruleObj: ISDescriptorRule = {
                             `The parameter "<magenta>glob: 'resolve'</magenta>" can be used only in a node context`,
                         );
                     /* eslint-disable */
-                    let files = __resolveGlob(value, {
+                    let files = __resolveGlobSync(value, {
                         cwd: params.rootDir,
                     });
                     files = files.map((file) => {

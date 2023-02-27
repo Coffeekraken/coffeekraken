@@ -17,6 +17,8 @@ const fs_extra_1 = __importDefault(require("fs-extra"));
  * @param       {String}              dir           The directory to ensure that it exists...
  * @return      {Promise}                           A promise that will be resolved once the directory has been created if needed...
  *
+ * @snippet         __ensureDirSync($1)
+ *
  * @example       js
  * import { __ensureDirSync } from '@coffeekraken/sugar/fs';
  * __ensureDirSync('my/cool/dir');
@@ -29,4 +31,4 @@ function __ensureDirSync(dir) {
     fs_extra_1.default.ensureDirSync(dir);
 }
 exports.default = __ensureDirSync;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOzs7OztBQUVkLHdEQUE0QjtBQUU1Qjs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQW1CRztBQUNILFNBQXdCLGVBQWUsQ0FBQyxHQUFHO0lBQ3ZDLGtCQUFJLENBQUMsYUFBYSxDQUFDLEdBQUcsQ0FBQyxDQUFDO0FBQzVCLENBQUM7QUFGRCxrQ0FFQyJ9
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOzs7OztBQUVkLHdEQUE0QjtBQUU1Qjs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBcUJHO0FBQ0gsU0FBd0IsZUFBZSxDQUFDLEdBQUc7SUFDdkMsa0JBQUksQ0FBQyxhQUFhLENBQUMsR0FBRyxDQUFDLENBQUM7QUFDNUIsQ0FBQztBQUZELGtDQUVDIn0=

@@ -12,7 +12,7 @@
  * @param       {HTMLIFrameElement}        $iframe          The iframe element to inject content into
  * @param    {String}    html           The html to inject
  *
- * @snippet         __injectIframeContent($1, $2);
+ * @snippet         __injectIframeContent($1, $2)
  *
  * @todo      interface
  * @todo      doc

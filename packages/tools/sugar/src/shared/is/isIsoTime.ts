@@ -17,6 +17,8 @@
  * @todo      doc
  * @todo      tests
  *
+ * @snippet         __isIsoTime($1)
+ * 
  * @example 	js
  * import { __isIsoTime } from '@coffeekraken/sugar/is';
  * __isIsoTime('john.doe@gmail.com') => false

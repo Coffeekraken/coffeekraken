@@ -17,6 +17,8 @@
  * @todo      doc
  * @todo      tests
  *
+ * @snippet         __toQueryString($1)
+ * 
  * @example 	js
  * import { __toQueryString } from '@coffeekraken/sugar/object'
  * console.log(__toQueryString({

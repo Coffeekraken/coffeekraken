@@ -13,7 +13,7 @@ import { __querySelectorUp } from '@coffeekraken/sugar/dom';
  * @param 		{String|Function} 				selector 	A css selector to search for or a check function that will be used
  * @return 		{HTMLElement} 								The element found or null
  *
- * @snippet         __closest($1, $2);
+ * @snippet         __closest($1, $2)
  *
  * @todo      interface
  * @todo      doc

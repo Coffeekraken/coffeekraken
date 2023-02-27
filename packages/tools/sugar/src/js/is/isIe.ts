@@ -16,6 +16,8 @@
  * @todo      doc
  * @todo      tests
  *
+ * @snippet         __isIe()
+ *
  * @example 	js
  * import { __isIe } from '@coffeekraken/sugar/is'
  * if (__isIe()) {

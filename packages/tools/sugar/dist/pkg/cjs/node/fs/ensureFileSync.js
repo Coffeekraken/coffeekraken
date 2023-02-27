@@ -16,6 +16,8 @@ const fs_extra_1 = __importDefault(require("fs-extra"));
  *
  * @param       {String}              file           The file to ensure that it exists...
  *
+ * @snippet         __ensureFileSync($1)
+ *
  * @example       js
  * import { __ensureFileSync } from '@coffeekraken/sugar/fs';
  * __ensureFileSync('my/cool/file.jpg');
@@ -28,4 +30,4 @@ function __ensureFileSync(file) {
     fs_extra_1.default.ensureFileSync(file);
 }
 exports.default = __ensureFileSync;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOzs7OztBQUVkLHdEQUE0QjtBQUU1Qjs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBa0JHO0FBQ0gsU0FBd0IsZ0JBQWdCLENBQUMsSUFBSTtJQUN6QyxrQkFBSSxDQUFDLGNBQWMsQ0FBQyxJQUFJLENBQUMsQ0FBQztBQUM5QixDQUFDO0FBRkQsbUNBRUMifQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOzs7OztBQUVkLHdEQUE0QjtBQUU1Qjs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0FvQkc7QUFDSCxTQUF3QixnQkFBZ0IsQ0FBQyxJQUFJO0lBQ3pDLGtCQUFJLENBQUMsY0FBYyxDQUFDLElBQUksQ0FBQyxDQUFDO0FBQzlCLENBQUM7QUFGRCxtQ0FFQyJ9

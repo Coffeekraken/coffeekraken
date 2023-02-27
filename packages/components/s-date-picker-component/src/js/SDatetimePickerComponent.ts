@@ -69,12 +69,16 @@ export interface ISDatetimePickerComponentProps {
  * @event           s-datetime-picker.change                                  Dispatched when the datepicker change value
  * @event           s-datetime-picker                       Dispatched for every events of this component. Check the detail.eventType prop for event type
  *
+ * @import          import { define as __SDatetimePickerComponentDefine } from '@coffeekraken/s-datetime-picker-component';
+ * 
+ * @snippet         __SDatetimePickerComponentDefine($1)
+ * 
  * @install         bash
  * npm i @coffeekraken/s-datetime-picker-component
  *
  * @install         js
- * import { define } from '@coffeekraken/s-datetime-picker-component';
- * define();
+ * import { define as __SDatetimePickerComponentDefine } from '@coffeekraken/s-datetime-picker-component';
+ * __SDatetimePickerComponentDefine();
  *
  * @example         html            Simple input
  * <label class="s-label:responsive s-color:accent">

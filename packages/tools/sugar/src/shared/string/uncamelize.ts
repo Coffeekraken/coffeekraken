@@ -18,6 +18,8 @@
  * @todo      doc
  * @todo      tests
  *
+ * @snippet         __uncamelize($1)
+ * 
  * @example    js
  * import { __uncamelize } from '@coffeekraken/sugar/string'
  * __uncamelize('helloWorldAndUniverse') // hello-world-and-universe

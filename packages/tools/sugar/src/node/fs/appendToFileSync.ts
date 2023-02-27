@@ -14,6 +14,8 @@ import __fs from 'fs';
  * @param       {String}            path            The file path you want to check. With or without an extension
  * @param       {String}            content             The content to add to the file
  *
+ * @snippet         __appendToFileSync($1, $2)
+ *
  * @example         js
  * import { __appendToFileSync } from '@coffeekraken/sugar/fs';
  * __appendToFileSync('/my/cool/file.txt', 'Hello world');

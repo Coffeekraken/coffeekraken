@@ -15,6 +15,8 @@
  * @todo      doc
  * @todo      tests
  *
+ * @snippet         __isChildProcess()
+ * 
  * @example       js
  * import { __isChildProcess } from '@coffeekraken/sugar/is';
  * __isChildProcess(); // => false

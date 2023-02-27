@@ -13,6 +13,7 @@ import __deepMerge from '../object/deepMerge';
  * @platform          js
  * @platform          node
  * @status        wip
+ * @private
  *
  * This function allows you to add Proxy to an object in deep fashion.
  * Normally the Proxy process only the level on which it has been added. Here we add Proxy to all the
@@ -39,7 +40,7 @@ import __deepMerge from '../object/deepMerge';
  * @todo      interface
  * @todo      doc
  * @todo      tests
- *
+ * 
  * @example           js
  * import { __deepProxy } from '@coffeekraken/sugar/object';
  * const a = __deepProxy({

@@ -21,6 +21,8 @@ const es5_1 = __importDefault(require("aggregation/es5"));
  * @todo      doc
  * @todo      tests
  *
+ * @snippet         __multipleExtends($1, $2)
+ *
  * @example         js
  * import { __multipleExtends } from '@coffeekraken/sugar/class';
  * class MyCoolClass extends __multipleExtends(Another, AnotherOne) {
@@ -33,4 +35,4 @@ const es5_1 = __importDefault(require("aggregation/es5"));
 exports.default = (...classes) => {
     return (0, es5_1.default)(...classes);
 };
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOzs7OztBQUVkLDBEQUE0QztBQUU1Qzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBd0JHO0FBQ0gsa0JBQWUsQ0FBQyxHQUFHLE9BQU8sRUFBRSxFQUFFO0lBQzFCLE9BQU8sSUFBQSxhQUFhLEVBQUMsR0FBRyxPQUFPLENBQUMsQ0FBQztBQUNyQyxDQUFDLENBQUMifQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOzs7OztBQUVkLDBEQUE0QztBQUU1Qzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0EwQkc7QUFDSCxrQkFBZSxDQUFDLEdBQUcsT0FBTyxFQUFFLEVBQUU7SUFDMUIsT0FBTyxJQUFBLGFBQWEsRUFBQyxHQUFHLE9BQU8sQ0FBQyxDQUFDO0FBQ3JDLENBQUMsQ0FBQyJ9

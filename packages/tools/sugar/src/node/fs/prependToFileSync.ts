@@ -1,5 +1,5 @@
-import __fs from 'fs';
 import { __writeFileSync } from '@coffeekraken/sugar/fs';
+import __fs from 'fs';
 
 /**
  * @name            prependToFileSync
@@ -15,6 +15,8 @@ import { __writeFileSync } from '@coffeekraken/sugar/fs';
  * @param       {String}            path            The file path you want to check. With or without an extension
  * @param       {String}            content             The content to add to the file
  *
+ * @snippet         __prependToFileSync($1, $2)
+ * 
  * @example         js
  * import { __prependToFileSync } from '@coffeekraken/sugar/fs';
  * __prependToFileSync('/my/cool/file.txt', 'Hello world');

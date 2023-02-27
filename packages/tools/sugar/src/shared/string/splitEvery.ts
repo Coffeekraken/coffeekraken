@@ -1,6 +1,6 @@
 // @ts-nocheck
 
-import __countLine from './countLine';
+import __countLineChars from './countLineChars';
 
 /**
  * @name                          splitEvery
@@ -23,6 +23,8 @@ import __countLine from './countLine';
  * @todo      doc
  * @todo      tests
  *
+ * @snippet         __splitEvery($1, $2)
+ * 
  * @example           js
  * import { __splitEvery } from '@coffeekraken/sugar/string';
  * __splitEvery('Hello World', 2, {
@@ -99,7 +101,7 @@ export default function __splitEvery(
                 //   finalLines[finalLines.length - 1] += '-';
                 const restLines = splitEvery(rest, every);
                 finalLines = [...finalLines, ...restLines];
-                lineCount = __countLine(finalLines[finalLines.length - 1]);
+                lineCount = __countLineChars(finalLines[finalLines.length - 1]);
             } else {
                 lineCount += item.length;
                 finalLines[finalLines.length - 1] += item;

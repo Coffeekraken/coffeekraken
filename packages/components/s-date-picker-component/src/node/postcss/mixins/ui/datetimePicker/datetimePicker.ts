@@ -37,9 +37,11 @@ export { postcssUiDatetimePickerInterface as interface };
  *
  * Apply the datetime picker lnf to any s-datetime-picker element
  *
+ * @snippet         @sugar.ui.datetimePicker($1);
+ * 
  * @example     css
  * .s-datetime-picker {
- *    @sugar.ui.datetimePicker;
+ *    @sugar.ui.datetimePicker();
  * }
  *
  * @since      2.0.0

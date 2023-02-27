@@ -18,6 +18,8 @@
  * @todo      doc
  * @todo      tests
  *
+ * @snippet         __getKeyByValue($1, $2)
+ * 
  * @example       js
  * import { __getKeyByValue } from '@coffeekraken/sugar/object';
  * __getKeyByValue({ hello: 'world' }, 'world'); // => hello

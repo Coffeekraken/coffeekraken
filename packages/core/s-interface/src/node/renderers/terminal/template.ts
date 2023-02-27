@@ -1,5 +1,5 @@
 import { __parseHtml } from '@coffeekraken/sugar/console';
-import __countLine from '@coffeekraken/sugar/shared/string/countLine';
+import __countLineChar from '@coffeekraken/sugar/shared/string/countLine';
 
 /**
  * @name                layout
@@ -40,12 +40,12 @@ export default function ({ interfaceClass, properties }) {
         const titleStr = `--${propertyObj.name} ${
             propertyObj.alias ? `(${propertyObj.alias})` : ''
         } ${propertyObj.type} ${
-            propertyObj.default && __countLine(propertyObj.default) <= 20
+            propertyObj.default && __countLineChar(propertyObj.default) <= 20
                 ? propertyObj.default
                 : ''
         } ${propertyObj.description || ''}`;
         tpl.push(titleStr.replace(/\s{2,999}/gm, ' '));
-        if (propertyObj.default && __countLine(propertyObj.default) > 20) {
+        if (propertyObj.default && __countLineChar(propertyObj.default) > 20) {
             tpl.push(propertyObj.default);
         }
     }

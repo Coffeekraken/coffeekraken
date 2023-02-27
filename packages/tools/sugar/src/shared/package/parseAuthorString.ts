@@ -18,6 +18,8 @@
  * @todo      doc
  * @todo      tests
  *
+ * @snippet         __parseAuthorString($1)
+ * 
  * @example       js
  * import { __parseAuthorString } from '@coffeekraken/sugar/package';
  *  __parseAuthorString("Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)")

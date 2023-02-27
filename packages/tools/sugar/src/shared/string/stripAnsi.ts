@@ -13,6 +13,8 @@ import __stripAnsi from 'strip-ansi';
  * @param       {String}        string          The string to strip ansi from
  * @return      {String}                        The new string without any ansi characters
  *
+ * @snippet         __stripAnsi($1)
+ * 
  * @example     js
  * import { __stripAnsi } from '@coffeekraken/sugar/string';
  * __stripAnsi('\u001B]8;;https://github.com\u0007Click\u001B]8;;\u0007'); // => Click

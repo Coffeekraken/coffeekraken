@@ -14,6 +14,8 @@ import __set from './set';
  * @param       {Any}           object      The object to convert
  * @return      {Any}                       The converted object
  *
+ * @snippet         __toJson($1)
+ * 
  * @example         js
  * import { __toJson } from '@coffeekraken/sugar/object';
  * class MyClass {

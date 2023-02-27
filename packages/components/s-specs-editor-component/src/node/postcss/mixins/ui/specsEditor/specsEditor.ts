@@ -27,9 +27,12 @@ export { postcssUiSpecsEditorInterface as interface };
  * @type               PostcssMixin
  * @platform      css
  * @status        beta
+ * @private
  *
  * Apply the slider style to any s-slider element
  *
+ * @snippet         @sugar.ui.specsEditor($1);
+ * 
  * @example     css
  * .s-slider {
  *    @sugar.ui.specsEditor;

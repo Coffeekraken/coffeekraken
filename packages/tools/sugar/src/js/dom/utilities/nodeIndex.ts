@@ -16,6 +16,8 @@
  * @todo      doc
  * @todo      tests
  *
+ * @snippet         __nodeIndex($1)
+ *
  * @example    js
  * import { __nodeIndex } from '@coffeekraken/sugar/dom'
  * // assuming:

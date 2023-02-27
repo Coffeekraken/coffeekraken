@@ -17,6 +17,8 @@ import __crypto from 'crypto';
  * @todo      doc
  * @todo      tests
  *
+ * @snippet         __uniqid()
+ * 
  * @example       js
  * import { __uniqid } from '@coffeekraken/sugar/string';
  * console.log(__uniqid()); // => 1b9d6bcd-bbfd-4b2d-9b5d-ab8dfbbd4bed

@@ -24,12 +24,14 @@ import { __whenRemoved } from '@coffeekraken/sugar/dom';
  * This make use of the AMAZING [Floating UI](https://floating-ui.com) library.
  *
  * @param 		{HTMLElement} 					$elm  		The element to start on
- * @param 		{Function} 				        callback 	The callback function to call on each element. If this returns on an element, it will be the returned element
- * @return 		{Function} 								A function to
+ * @param 		{Function} 				        $depending          The element on which your floating one depends on
+ * @return 		{Function} 								An IMakeFloatApi object with properties like `update` to update the position and `cancel` to cancel the floating behavior
  *
  * @todo      interface
  * @todo      doc
  * @todo      tests
+ *
+ * @snippet         __makeFloat($1, $2)
  *
  * @example  	js
  * import { __makeFloat } from '@coffeekraken/sugar/dom'
@@ -64,7 +66,7 @@ export interface IMakeFloatSettings {
 
 export interface IMakeFloatApi {
     update: Function;
-    cleanup: Function;
+    cancel: Function;
 }
 
 export default function __makeFloat(
@@ -171,15 +173,15 @@ export default function __makeFloat(
     update();
 
     // auto update
-    const cleanup = autoUpdate($depending, $elm, () => {
+    const cancel = autoUpdate($depending, $elm, () => {
         update();
     });
 
     __whenRemoved($elm).then(() => {
-        cleanup();
+        cancel();
     });
     __whenRemoved($depending).then(() => {
-        cleanup();
+        cancel();
     });
 
     $depending.addEventListener('pointerover', () => {
@@ -189,6 +191,6 @@ export default function __makeFloat(
     // return the update function
     return {
         update,
-        cleanup,
+        cancel,
     };
 }

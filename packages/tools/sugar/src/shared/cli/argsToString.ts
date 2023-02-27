@@ -23,6 +23,8 @@ import __toString from '../string/toString';
  * @todo      tests
  * @todo      {Test}      Testing when no definition is passed
  *
+ * @snippet         __argsToString($1)
+ * 
  * @example       js
  * import { __argsToString } from '@coffeekraken/sugar/cli';
  * __argsToString({

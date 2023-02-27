@@ -9,6 +9,6 @@ export interface IMakeFloatSettings {
 }
 export interface IMakeFloatApi {
     update: Function;
-    cleanup: Function;
+    cancel: Function;
 }
 export default function __makeFloat($elm: HTMLElement, $depending: HTMLElement, settings?: Partial<IMakeFloatSettings>): IMakeFloatApi;

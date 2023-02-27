@@ -19,6 +19,8 @@ import __md5 from '../crypto/md5';
  * @todo      tests
  * @todo      move into "gravatar" folder
  *
+ * @snippet         __gravatarUrl($1)
+ *
  * @example       js
  * import { __gravatarUrl } from '@coffeekraken/sugar/url';
  * __gravatarUrl('olivier.bossel@gmail.com'); // https://www.gravatar.com/avatar/b5df60055b6287bb7c90c0078ce20a5f
@@ -29,4 +31,4 @@ import __md5 from '../crypto/md5';
 export default function __gravatarUrl(email, size = 200) {
     return `https://www.gravatar.com/avatar/${__md5.encrypt(email)}?s=${size}`;
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7QUFFZCxPQUFPLEtBQUssTUFBTSxlQUFlLENBQUM7QUFFbEM7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0F5Qkc7QUFDSCxNQUFNLENBQUMsT0FBTyxVQUFVLGFBQWEsQ0FBQyxLQUFLLEVBQUUsSUFBSSxHQUFHLEdBQUc7SUFDbkQsT0FBTyxtQ0FBbUMsS0FBSyxDQUFDLE9BQU8sQ0FBQyxLQUFLLENBQUMsTUFBTSxJQUFJLEVBQUUsQ0FBQztBQUMvRSxDQUFDIn0=
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7QUFFZCxPQUFPLEtBQUssTUFBTSxlQUFlLENBQUM7QUFFbEM7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQTJCRztBQUNILE1BQU0sQ0FBQyxPQUFPLFVBQVUsYUFBYSxDQUFDLEtBQUssRUFBRSxJQUFJLEdBQUcsR0FBRztJQUNuRCxPQUFPLG1DQUFtQyxLQUFLLENBQUMsT0FBTyxDQUFDLEtBQUssQ0FBQyxNQUFNLElBQUksRUFBRSxDQUFDO0FBQy9FLENBQUMifQ==

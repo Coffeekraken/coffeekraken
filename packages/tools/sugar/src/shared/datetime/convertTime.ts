@@ -18,6 +18,8 @@
  * @todo      doc
  * @todo      tests
  *
+ * @snippet         __convertTime($1, $2)
+ * 
  * @example           js
  * import { __convertTime } from '@coffeekraken/sugar/datetime';
  * __convertTime('10s', 'ms'); // => 10000

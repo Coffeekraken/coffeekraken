@@ -1,5 +1,5 @@
 import __SDocmap from '@coffeekraken/s-docmap';
-import { __fileHash } from '@coffeekraken/sugar/fs';
+import { __fileHashSync } from '@coffeekraken/sugar/fs';
 import { __pad } from '@coffeekraken/sugar/number';
 import { __deepMerge } from '@coffeekraken/sugar/object';
 import __fs from 'fs';
@@ -95,7 +95,7 @@ export default class SSitemapBuilderDocmapSource extends __SSitemapBuilderSource
                     );
                 } else {
                     // @ts-ignore
-                    const hash = __fileHash(docmapObj.docmap.path);
+                    const hash = __fileHashSync(docmapObj.docmap.path);
                     items.push({
                         loc: slug,
                         lastmod,
@@ -119,7 +119,7 @@ export default class SSitemapBuilderDocmapSource extends __SSitemapBuilderSource
                         );
                     } else {
                         // @ts-ignore
-                        const hash = __fileHash(docmapObj.docmap.path);
+                        const hash = __fileHashSync(docmapObj.docmap.path);
                         items.push({
                             loc: slug,
                             lastmod,

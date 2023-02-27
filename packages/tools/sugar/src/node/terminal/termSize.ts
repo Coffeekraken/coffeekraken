@@ -15,6 +15,8 @@ import __termSize from 'term-size';
  * @todo      doc
  * @todo      tests
  *
+ * @snippet         __termSize()
+ * 
  * @example         js
  * import { __termSize } from '@coffeekraken/sugar/terminal';
  * __termSize().width; // => 200

@@ -7,12 +7,13 @@
  * @platform          js
  * @platform          node
  * @status              wip
- *
+ * @private
+ * 
  * This function override the passed array prototype to intercept changes made through
  *
  * @param         {Array}           array           The array to proxy
  * @return        {Array}                           The same array with his prototype proxied
- *
+ * 
  * @example       js
  * import { __proxyArray } from '@coffeekraken/sugar/array';
  * const myArray = __proxyArray([1,2,3]);

@@ -30,6 +30,8 @@ export { postcssUiSliderInterface as interface };
  *
  * Apply the slider style to any s-slider element
  *
+ * @snippet         @sugar.ui.slider($1);
+ * 
  * @example     css
  * .s-slider {
  *    @sugar.ui.slider;

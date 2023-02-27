@@ -16,6 +16,8 @@ import { __packageJsonSync } from '@coffeekraken/sugar/package';
  *
  * @return          {Boolean}           true if is in a monorepo, false if not
  *
+ * @snippet         __isMonorepo()
+ * 
  * @example         js
  * import {__isMonorepo } from '@coffeekraken/sugar/is';
  * __isMonorepo(); // => true

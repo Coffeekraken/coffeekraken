@@ -17,16 +17,16 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.__replacePackageJsonTokens = exports.__renamePackage = exports.__packageMetas = exports.__packageJsonSync = exports.__packageJson = void 0;
+exports.__replacePackageJsonTokens = exports.__renamePackageSync = exports.__packageMetasSync = exports.__packageJsonSync = exports.__packageJson = void 0;
 const packageJson_1 = __importDefault(require("./packageJson"));
 exports.__packageJson = packageJson_1.default;
 const packageJsonSync_1 = __importDefault(require("./packageJsonSync"));
 exports.__packageJsonSync = packageJsonSync_1.default;
-const packageMetas_1 = __importDefault(require("./packageMetas"));
-exports.__packageMetas = packageMetas_1.default;
-const renamePackage_1 = __importDefault(require("./renamePackage"));
-exports.__renamePackage = renamePackage_1.default;
+const packageMetasSync_1 = __importDefault(require("./packageMetasSync"));
+exports.__packageMetasSync = packageMetasSync_1.default;
+const renamePackageSync_1 = __importDefault(require("./renamePackageSync"));
+exports.__renamePackageSync = renamePackageSync_1.default;
 const replacePackageJsonTokens_1 = __importDefault(require("./replacePackageJsonTokens"));
 exports.__replacePackageJsonTokens = replacePackageJsonTokens_1.default;
 __exportStar(require("../../shared/package/_exports"), exports);
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0FBQUEsZ0VBQTBDO0FBUXRDLHdCQVJHLHFCQUFhLENBUUg7QUFQakIsd0VBQWtEO0FBUTlDLDRCQVJHLHlCQUFpQixDQVFIO0FBUHJCLGtFQUE0QztBQVF4Qyx5QkFSRyxzQkFBYyxDQVFIO0FBUGxCLG9FQUE4QztBQVExQywwQkFSRyx1QkFBZSxDQVFIO0FBUG5CLDBGQUFvRTtBQVFoRSxxQ0FSRyxrQ0FBMEIsQ0FRSDtBQU45QixnRUFBOEMifQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0FBQUEsZ0VBQTBDO0FBUXRDLHdCQVJHLHFCQUFhLENBUUg7QUFQakIsd0VBQWtEO0FBUTlDLDRCQVJHLHlCQUFpQixDQVFIO0FBUHJCLDBFQUFvRDtBQVFoRCw2QkFSRywwQkFBa0IsQ0FRSDtBQVB0Qiw0RUFBc0Q7QUFRbEQsOEJBUkcsMkJBQW1CLENBUUg7QUFQdkIsMEZBQW9FO0FBUWhFLHFDQVJHLGtDQUEwQixDQVFIO0FBTjlCLGdFQUE4QyJ9

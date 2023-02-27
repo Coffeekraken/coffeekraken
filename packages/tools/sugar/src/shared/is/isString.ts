@@ -17,6 +17,8 @@
  * @todo      doc
  * @todo      tests
  *
+ * @snippet         __isString($1)
+ * 
  * @example    js
  * import { __isString } from '@coffeekraken/sugar/is'
  * if (__isString({}) {

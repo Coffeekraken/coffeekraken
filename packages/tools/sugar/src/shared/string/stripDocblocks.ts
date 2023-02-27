@@ -11,6 +11,8 @@
  * @param       {String}            str         The string to process
  * @return      {String}                        The processed string
  *
+ * @snippet         __stripDocblocks($1)
+ * 
  * @example         js
  * import { __stripDocblocks } from '@coffeekraken/sugar/string';
  * __stripDocblocks('...');

@@ -13,7 +13,7 @@
  * @param 		{HTMLElement} 				[$elm=document]  			The element to monitor
  * @return 		{Boolean}									If the element is in the viewport or not
  *
- * @snippet         __isUserScrolling();
+ * @snippet         __isUserScrolling()
  *
  * @todo      interface
  * @todo      doc

@@ -20,6 +20,8 @@ import __toString from '../../shared/string/toString';
  * @todo      doc
  * @todo      tests
  *
+ * @snippet         __copy($1)
+ *
  * @example       js
  * import { __copy } from '@coffeekraken/sugar/clipboard';
  * __copy('Hello world');

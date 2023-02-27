@@ -19,6 +19,8 @@ import { paramCase } from 'param-case';
  * @todo      doc
  * @todo      tests
  *
+ * @snippet         __paramCase($1)
+ * 
  * @example       js
  * import { __paramCase } from '@coffeekraken/sugar/string';
  * __paramCase('some thoing cool'); // => some-thing-cool

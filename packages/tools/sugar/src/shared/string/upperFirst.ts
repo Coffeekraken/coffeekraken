@@ -17,6 +17,8 @@
  * @todo      doc
  * @todo      tests
  *
+ * @snippet         __upperFirst($1)
+ * 
  * @example    js
  * import { __upperFirst } from '@coffeekraken/sugar/string'
  * __upperFirst('hello world') // Hello world

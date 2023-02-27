@@ -5,12 +5,12 @@ import __SLitComponent from '@coffeekraken/s-lit-component';
 import { __copy } from '@coffeekraken/sugar/clipboard';
 import {
     __makeFloat,
-    __preventViewportMovement,
+    __preventViewportMovement
 } from '@coffeekraken/sugar/dom';
 import { __isMobile } from '@coffeekraken/sugar/is';
 import type {
     IFloatApi,
-    IFloatSettings,
+    IFloatSettings
 } from '@coffeekraken/sugar/js/dom/ui/makeFloat';
 import { __deepMerge } from '@coffeekraken/sugar/object';
 import { css, html, unsafeCSS } from 'lit';
@@ -76,12 +76,16 @@ export interface ISColorPickerComponentProps {
  * @support         safari
  * @support         edge
  *
+ * @import          import { define as __SColorPickerComponentDefine } from '@coffeekraken/s-color-picker-component';
+ * 
+ * @snippet         __SColorPickerComponentDefine($1)
+ * 
  * @install         bash
  * npm i @coffeekraken/s-color-picker-component
  *
  * @install         js
- * import { define } from '@coffeekraken/s-color-picker-component';
- * define();
+ * import { define as __SColorPickerComponentDefine } from '@coffeekraken/s-color-picker-component';
+ * __SColorPickerComponentDefine();
  *
  * @example         html            With a different format (hsla)
  * <label class="s-label:responsive">

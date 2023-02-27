@@ -34,7 +34,7 @@ function processNodeElm(elm) {
  * @param 			{String|HTMLElement} 			source 			The source of the template (html string, selector, node element)
  * @return 			{HTMLElement} 									An HTMLElement node tree that represent the template
  *
- * @snippet         __toDomNodes($1);
+ * @snippet         __toDomNodes($1)
  *
  * @todo      interface
  * @todo      doc

@@ -9,7 +9,8 @@ import __SWatch from './SWatch';
  * @platform          js
  * @platform          node
  * @status        wip
- *
+ * @private
+ * 
  * This method is a simple wrapper around the SWatch class that allows you to watch some action on object and arrays
  *
  * @param       {Object|Array}        target          The array or object to watch

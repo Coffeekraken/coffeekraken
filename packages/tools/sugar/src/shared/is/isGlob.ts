@@ -19,6 +19,8 @@ import __isGlob from 'is-glob';
  * @todo      doc
  * @todo      tests
  *
+ * @snippet         __isGlob($1)
+ * 
  * @example               js
  * import { __isGlob } from '@coffeekraken/sugar/is';
  * __isGlob('something/*.js); // => true

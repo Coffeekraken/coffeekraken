@@ -11,7 +11,7 @@
  *
  * @param    {HTMLElement}    $elm    The HTMLElement to check
  *
- * @snippet         __isFocusWithin($1);
+ * @snippet         __isFocusWithin($1)
  *
  * @todo      interface
  * @todo      doc

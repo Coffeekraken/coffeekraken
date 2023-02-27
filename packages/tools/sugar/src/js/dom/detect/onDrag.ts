@@ -16,7 +16,7 @@ import { __positionFromEvent } from '@coffeekraken/sugar/dom';
  *
  * @setting     {Number}      [maxSpeed=0.01]       The maximum speed
  *
- * @snippet         __onDrag($1, $2);
+ * @snippet         __onDrag($1, $2)
  * __onDrag($1, drag => {
  *     $2
  * });

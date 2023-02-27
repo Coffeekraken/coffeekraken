@@ -1,7 +1,7 @@
 // @ts-nocheck
 
 import __SLitComponent, {
-    ISLitComponentDefaultProps,
+    ISLitComponentDefaultProps
 } from '@coffeekraken/s-lit-component';
 import __STheme from '@coffeekraken/s-theme';
 import { __scrollTo } from '@coffeekraken/sugar/dom';
@@ -36,12 +36,16 @@ import __css from '../../../../src/css/s-scroll.css'; // relative to /dist/pkg/e
  * @support         safari
  * @support         edge
  *
+ * @import          import { define as __SScrollComponentDefine } from '@coffeekraken/s-scroll-component';
+ * 
+ * @snippet         __SScrollComponentDefine($1)
+ * 
  * @install          bash
  * npm i @coffeekraken/s-scroll-component
  *
  * @install         js
- * import { define } from '@coffeekraken/s-scroll-component';
- * define();
+ * import { define as __SScrollComponentDefine } from '@coffeekraken/s-scroll-component';
+ * __SScrollComponentDefine();
  *
  * @example         html        Scroll to top
  * <s-scroll class="s-btn s-color:accent" to="top">

@@ -17,6 +17,8 @@
  * @todo      doc
  * @todo      tests
  *
+ * @snippet         __isCreditCard($1)
+ * 
  * @example 	js
  * import {__isCreditCard } from '@coffeekraken/sugar/is';
  * __isCreditCard('john.doe@gmail.com') => true

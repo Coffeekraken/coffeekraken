@@ -1,16 +1,16 @@
 import __SPromise from '@coffeekraken/s-promise';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
-import __argsToString from '../../shared/cli/argsToString';
 import { __isCommandExists } from '@coffeekraken/sugar/is';
+import __argsToString from '../../shared/cli/argsToString';
 import __spawn from '../process/spawn';
 
 /**
  * @name            install
  * @namespace       node.npm
  * @type            Function
- * @async
  * @platform        node
  * @status          beta
+ * @async
  *
  * This function allows you to install the node packages using npm or yarn depending
  * on your settings.
@@ -24,9 +24,13 @@ import __spawn from '../process/spawn';
  * @setting         {Boolean}           [silent=true]           Specify if you want the process to be silent
  * @setting         {Any}           [args={}]                   An object of arguments passed directly to the yarn or npm install command
  *
+ * @snippet         __install($1)
+ * await __install($1)
+ * 
  * @example         js
  * import install from '@coffeekraken/sugar/node/npm/install';
- * await install();
+ * await install(); // install all dependencies
+ * await install(['@coffeekraken/sugar']); // install just 1 dependency
  *
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)

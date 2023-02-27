@@ -15,12 +15,17 @@
  * @todo      doc
  * @todo      tests
  *
+ * @snippet         __throttle($1, $2)
+ * __throttle($1, () => {
+ *      $2
+ * })
+ * 
  * @example 		js
  * import { __throttle } from '@coffeekraken/sugar/function';
- * const myThrottledFn = __throttle(() => {
+ * const myThrottledFn = __throttle(1000, () => {
  * 		// my function content that will be
  * 		// executed only once each second
- * }, 1000);
+ * });
  *
  * document.addEventListener('scroll', (e) => {
  * 		// call my throttled function
@@ -30,7 +35,7 @@
  * @since         2.0.0
  * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-export default function __throttle(fn, threshhold) {
+export default function __throttle(threshhold, fn) {
     threshhold || (threshhold = 250);
     let last;
     return function () {

@@ -13,6 +13,9 @@
  * @param 		{Number} 		t 		The current time
  * @return 		{Number} 				The value depending on time
  *
+ * @snippet         __easeOutQuart($1)
+ * 
+ * @example         js
  * import { __easeOutQuart } from '@coffeekraken/sugar/easing';
  * __easeOutQuart(0.4);
  *

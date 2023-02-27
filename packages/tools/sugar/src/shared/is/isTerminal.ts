@@ -10,6 +10,8 @@
  *
  * @return      {Boolean}           true if is in the terminal, false if not
  *
+ * @snippet         __isTerminal($1)
+ * 
  * @example         js
  * import { __isTerminal } from '@coffeekraken/sugar/is';
  * __isTerminal(); // => true

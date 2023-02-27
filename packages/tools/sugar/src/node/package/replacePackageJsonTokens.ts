@@ -15,6 +15,8 @@ import __packageJsonSync from './packageJsonSync';
  * @param       {IReplacePackageJsonTokensSettings}            [settings={}]       Some settings to configure your tokens replacements
  * @return      {String}                                        The resulting string
  *
+ * @snippet         __replacePackageJsonTokens($1)
+ * 
  * @example         js
  * import { __replacePackageJsonTokens } from '@coffeekraken/sugar/package';
  * __replacePackageJsonTokens('Hello %packageJson.name'); // => Hello @coffeekraken/sugar

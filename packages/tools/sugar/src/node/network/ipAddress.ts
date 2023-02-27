@@ -17,6 +17,9 @@ import __ip from 'ip';
  * @todo      doc
  * @todo      tests
  *
+ * @snippet         __isAddress()
+ * await __ipAddress()
+ * 
  * @example           js
  * import { __ipAddress } from '@coffeekraken/sugar/network';
  * __ipAddress(); // => 192.168.1.45

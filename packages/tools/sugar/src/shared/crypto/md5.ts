@@ -16,6 +16,8 @@ const __encryptedMessages = {};
  *
  * Expose two function named "encrypt" and "decrypt" that you can use to process your content using the md5 algorithm
  *
+ * @snippet         __md5.encrypt($1)
+ * 
  * @example         js
  * import { __md5 } from '@coffeekraken/sugar/crypto';
  * __md5.encrypt('hello world');

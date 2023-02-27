@@ -17,6 +17,8 @@ import __tmpDir from 'temp-dir';
  * @todo      doc
  * @todo      tests
  *
+ * @snippet         __systemTmpDir()
+ * 
  * @example             js
  * import { __systemTmpDir } from '@coffeekraken/sugar/path';
  * __systemTmpDir(); // => '/private/var/folders/3x/jf5977fn79jbglr7rk0tq4d00000gn/T'

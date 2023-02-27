@@ -37,12 +37,16 @@ export interface ISThemeSwitcherComponentProps {
  * @support         safari
  * @support         edge
  *
+ * @import          import { define as __SThemeSwitcherComponentDefine } from '@coffeekraken/s-theme-switcher-component';
+ * 
+ * @snippet             __SThemeSwitcherComponentDefine($1)
+ * 
  * @install           shell
  * npm i @coffeekraken/s-theme-switcher-component
  *
  * @install           js
- * import { define } from '@coffeekraken/s-theme-switcher-component';
- * define();
+ * import { define as __SThemeSwitcherComponentDefine } from '@coffeekraken/s-theme-switcher-component';
+ * __SThemeSwitcherComponentDefine();
  *
  * @example         html        Simple dark mode switcher
  * <s-theme-switcher></s-theme-switcher>

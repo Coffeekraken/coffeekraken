@@ -15,6 +15,9 @@ import __fs from 'fs-extra';
  * @param       {String}              file           The file to ensure that it exists...
  * @return      {Promise}                           A promise that will be resolved once the file has been created if needed...
  *
+ * @snippet         __ensureFile($1)
+ * await __ensureFile($1)
+ *
  * @example       js
  * import { __ensureFile } from '@coffeekraken/sugar/fs';
  * await __ensureFile('my/cool/file.jpg').then(() => {

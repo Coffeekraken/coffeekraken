@@ -11,6 +11,8 @@
  * @param       {Any}           object          The object to check
  * @return      {Boolean}                           true if is an custom object instance, false if not
  *
+ * @snippet         __isClassInstance($1)
+ * 
  * @example         js
  * import { __isClassInstance } from '@coffeekraken/sugar/is';
  * if (__isClassInstance({

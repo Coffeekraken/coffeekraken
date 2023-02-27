@@ -21,6 +21,8 @@ import { sprintf as _sprintf } from 'sprintf-js';
  * @todo      doc
  * @todo      tests
  *
+ * @snippet         __sprintf($1)
+ * 
  * @example    js
  * import { __sprintf } from '@coffeekraken/sugar/string'
  * __sprintf('Hello %s', 'world') // Hello World

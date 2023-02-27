@@ -20,7 +20,7 @@ import { __closestScrollable } from '@coffeekraken/sugar/dom';
  *
  * @setting         {String}            [offset=`${window.innerHeight}px ${window.innerWidth}px`]           Some offset
  *
- * @snippet         __whenNearViewport($1);
+ * @snippet         __whenNearViewport($1)
  * __whenNearViewport($1).then(\$elm => {
  *      $2
  * });

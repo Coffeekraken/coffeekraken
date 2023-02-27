@@ -12,6 +12,8 @@
  * @param       {String}        str         The string to process
  * @return      {String}                        The processed string
  *
+ * @snippet         __simplifySpecialChars($1)
+ * 
  * @example         php
  * import { __simplifySpecialChars } from '@coffeekraken/sugar/string';
  * __simplifySpecialChars('É'); // E

@@ -14,6 +14,8 @@
  * @todo      doc
  * @todo      tests
  *
+ * @snippet         __isTablet()
+ *
  * @example 	js
  * import { __isTablet } from '@coffeekraken/sugar/is'
  * if (__isTablet()) {

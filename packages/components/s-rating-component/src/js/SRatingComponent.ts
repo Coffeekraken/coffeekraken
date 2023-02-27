@@ -37,12 +37,16 @@ export interface ISRatingComponentProps {
  * @support         safari
  * @support         edge
  *
+ * @import          import { define as __SRatingComponentDefine } from '@coffeekraken/s-rating-component';
+ * 
+ * @snippet         __SRatingComponentDefine($1)
+ * 
  * @install           shell
  * npm i @coffeekraken/s-rating-component
  *
  * @install           js
- * import { define } from '@coffeekraken/s-rating-component';
- * define();
+ * import { define as __SRatingComponentDefine } from '@coffeekraken/s-rating-component';
+ * __SRatingComponentDefine();
  *
  * @example         html        Simple rating
  * <s-rating name="my-rating" class="s-color:accent"></s-rating>

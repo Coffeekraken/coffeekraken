@@ -11,7 +11,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
  *
  * @param       {HTMLInputElement}        $input       The input field to reset
  *
- * @snippet         __resetFileInput($1);
+ * @snippet         __resetFileInput($1)
  *
  * @todo      interface
  * @todo      doc

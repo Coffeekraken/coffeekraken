@@ -30,9 +30,11 @@ export { postcssUiGoogleMapMarkerInterface as interface };
  *
  * Apply the google map style to any s-google-map element
  *
+ * @snippet         @sugar.ui.googleMapMarker($1);
+ * 
  * @example     css
- * .s-google-map {
- *    @sugar.ui.googleMap;
+ * .s-google-map-marker {
+ *    @sugar.ui.googleMapMarker;
  * }
  *
  * @since      2.0.0

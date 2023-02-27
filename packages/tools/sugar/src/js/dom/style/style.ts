@@ -1,8 +1,8 @@
 // @ts-nocheck
 
 import {
-    __styleObject2String,
-    __styleString2Object,
+    __styleObjectToString,
+    __styleStringToObject
 } from '@coffeekraken/sugar/css';
 
 /**
@@ -22,6 +22,8 @@ import {
  * @todo      doc
  * @todo      tests
  *
+ * @snippet         __style($1, $2)
+ *
  * @example 	js
  * import { __style } from '@coffeekraken/sugar/dom'
  * __style(myCoolHTMLElement, {
@@ -38,14 +40,14 @@ export default function __style(elm: HTMLElement, styleObj: any): any {
 
     if (styleAttr) {
         styleObj = {
-            ...__styleString2Object(styleAttr),
+            ...__styleStringToObject(styleAttr),
             ...styleObj,
         };
     }
 
     // apply the style to the element
-    // elm.setAttribute('style', __styleObject2String(current.styleObj));
-    elm.style.cssText = __styleObject2String(styleObj);
+    // elm.setAttribute('style', __styleObjectToString(current.styleObj));
+    elm.style.cssText = __styleObjectToString(styleObj);
 
     // return the style
     return elm.style;

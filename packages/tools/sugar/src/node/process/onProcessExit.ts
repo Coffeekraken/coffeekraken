@@ -22,6 +22,11 @@ import __terminalKit from 'terminal-kit';
  * @todo      doc
  * @todo      tests
  *
+ * @snippet         __onProcessExit($1)
+ * __onProcessExit(() => {
+ *      $1
+ * });
+ * 
  * @example         js
  * import { __onProcessExit } from '@coffeekraken/sugar/process';
  * __onProcessExit(() => {

@@ -24,14 +24,22 @@ import __SFaviconBuilderBuildParamsInterface from './interface/SFaviconBuilderBu
  *
  * @param           {ISFaviconBuilderSettings}         [settings={}]           Some settings to configure your image compression process
  *
- * @example         js
- * import SFaviconBuilder from '@coffeekraken/s-favicon-builder';
- * const builder = new SFaviconBuilder({
- *      faviconBuilder: {
- *          // some settings...
- *      }
+ * @snippet         __SFaviconBuilder($1)
+ * const faviconBuilder = new __SFaviconBuilder();
+ * const faviconBuilderResult = await faviconBuilder({
+ *      input: $1,
+ *      outDir: $2
  * });
- * await builder.build('src/** /*.jpg');
+ * 
+ * @example         js
+ * import _SFaviconBuilder from '@coffeekraken/s-favicon-builder';
+ * const builder = new _SFaviconBuilder({
+ *      // some settings...
+ * });
+ * await builder.build({
+ *      input: 'src/img/favicon.png',
+ *      outDir: 'dist/favicon'
+ * });
  *
  * @see             https://www.npmjs.com/package/favicons
  * @since           2.0.0

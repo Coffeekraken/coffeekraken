@@ -17,6 +17,8 @@
  * @todo      doc
  * @todo      tests
  *
+ * @snippet         __isCyclic($1)
+ * 
  * @example           js
  * import { __isCyclic } from '@coffeekraken/sugar/is';
  * const obj = { hello: 'world' };

@@ -24,6 +24,8 @@ import __findPkgJson from 'find-package-json';
  * @param           {Boolean}             [settings={}]         Some settings to configure the research
  * @return          {String}                                      The finded package path or false if not finded
  *
+ * @snippet         __packageRootDir()
+ * 
  * @example         js
  * import { __packageRootDir } from '@coffeekraken/sugar/path';
  * const root = __packageRootDir();

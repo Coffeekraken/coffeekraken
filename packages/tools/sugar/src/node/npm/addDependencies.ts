@@ -6,9 +6,9 @@ import __fs from 'fs';
  * @name            addDependencies
  * @namespace       node.npm
  * @type            Function
- * @async
  * @platform        node
  * @status          beta
+ * @async
  *
  * This function allows you to just add some dependencies without installing them directly.
  * It just add the dependency into the package.json file
@@ -19,9 +19,12 @@ import __fs from 'fs';
  *
  * @setting         {String}        [cwd=process.cwd()]         The directory where you want to execute the install
  *
+ * @snippet         __addDependencies($1)
+ * await __addDependencies($1)
+ * 
  * @example         js
- * import install from '@coffeekraken/sugar/node/npm/install';
- * await install();
+ * import { __addDependencies } from '@coffeekraken/sugar/npm';
+ * await __addDependencies($1);
  *
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)

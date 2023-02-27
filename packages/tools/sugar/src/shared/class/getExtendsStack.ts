@@ -20,6 +20,8 @@ import __isClass from '../is/isClass';
  * @todo      doc
  * @todo      tests
  *
+ * @snippet         __getExtendsStack($1)
+ * 
  * @example         js
  * import { __getExtendsStack } from '@coffeekraken/sugar/class';
  * class Coco extends Error {}

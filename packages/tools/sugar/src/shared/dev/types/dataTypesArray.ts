@@ -7,7 +7,8 @@
  * @platform          js
  * @platform          node
  * @status              wip
- *
+ * @private
+ * 
  * This is just a list of data types available in the
  * current language (node/js)
  *

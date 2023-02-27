@@ -12,7 +12,7 @@ import { __whenScriptLoaded } from '@coffeekraken/sugar/dom';
  * @param    {String}    src    The script src to load
  * @return    {Promise}    A promise resolved with the script tag when it has fully loaded
  *
- * @snippet         __injectScript($1);
+ * @snippet         __injectScript($1)
  *
  * @todo      interface
  * @todo      doc

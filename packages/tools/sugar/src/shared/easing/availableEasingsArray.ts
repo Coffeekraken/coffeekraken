@@ -12,6 +12,8 @@
  *
  * @return      {Array}             An array of all the easing functions available
  *
+ * @snippet         __availableEasingsArray()
+ * 
  * @example         js
  * import { __availableEasingsArray } from '@coffeekraken/sugar/easing';
  * __availableEasingsArray();

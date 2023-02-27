@@ -21,7 +21,7 @@
  *
  * @setting       {Number}              [threshold=100]       The swipe threshold
  *
- * @snippet         __onSwipe($1, $2);
+ * @snippet         __onSwipe($1, $2)
  * __onSwipe($1, swipe => {
  *      $2
  * });

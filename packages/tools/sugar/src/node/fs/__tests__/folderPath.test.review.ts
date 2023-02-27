@@ -5,7 +5,9 @@ describe('sugar.node.fs.folderPath', () => {
         expect(path).toBe(`${__dirname}/data`);
     });
     it('Should return false when checking for a non existing folder', () => {
-        const path = __folderPath(`${__dirname}/data/file111.jpg`, true);
+        const path = __folderPath(`${__dirname}/data/file111.jpg`, {
+            checkExistence: true
+        });
         expect(path).toBe(false);
     });
 });

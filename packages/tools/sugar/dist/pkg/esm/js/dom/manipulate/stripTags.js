@@ -11,7 +11,7 @@
  * @param    {String}    html    the html to process
  * @return    {String}    The html without any tags
  *
- * @snippet         stripTags($1);
+ * @snippet         stripTags($1)
  *
  * @todo      interface
  * @todo      doc

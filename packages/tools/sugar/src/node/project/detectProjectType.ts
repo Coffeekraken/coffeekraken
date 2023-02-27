@@ -13,6 +13,8 @@ import __fs from 'fs';
  * @param       {String}            [cwd=process.cwd()]         The root project directory to detect the type from
  * @return      {IDetectProjectTypeResult}                      An object that describe the detected project type
  *
+ * @snippet         __detectProjectType()
+ * 
  * @example         js
  * import { __detectProjectType } from '@coffeekraken/sugar/project';
  * __detectProjectType();

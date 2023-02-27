@@ -20,7 +20,7 @@ const getTransitionProperties_1 = __importDefault(require("../style/getTransitio
  * @param 		{HTMLElement} 				elm 		The element to monitor
  * @return 		(Promise<HTMLElement>) 								The promise that will be resolved when the element transition has ended
  *
- * @snippet         __whenTransitionEnd($1);
+ * @snippet         __whenTransitionEnd($1)
  * __whenTransitionEnd($1).then(\$elm => {
  *      $2
  * });

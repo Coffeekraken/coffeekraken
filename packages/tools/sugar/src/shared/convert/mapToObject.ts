@@ -11,6 +11,8 @@
  * @param       {Map}         map       The map object to convert into object
  * @return      {Object}                The plain object
  *
+ * @snippet         __mapToObject($1)
+ * 
  * @example       js
  * import { __mapToObject } from '@coffeekraken/sugar/convert';
  * const myMap = new Map();

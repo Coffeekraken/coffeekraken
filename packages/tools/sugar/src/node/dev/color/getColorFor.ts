@@ -20,6 +20,8 @@ import __deepMerge from '../../../shared/object/deepMerge';
  * @param       {any}          for             Pass something to take as reference to get the same color back every time
  * @return      {String}                        A color name to use as you want
  *
+ * @snippet         __getColorFor($1)
+ *
  * @example         js
  * import { __getColorFor } from '@coffeekraken/sugar/dev';
  * __getColorFor('something'); // => cyan

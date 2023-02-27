@@ -6,7 +6,8 @@ import __autoCast from '../../../shared/string/autoCast';
  * @type      Function
  * @platform          js
  * @status          wip
- *
+ * @private
+ * 
  * Parse the transform rule of an element and returns a simple object with each properties separated.
  *
  * @param 		 {string}		 transformStr	            The transform string to parse

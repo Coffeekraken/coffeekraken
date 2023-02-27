@@ -18,6 +18,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
  * @todo      doc
  * @todo      tests
  *
+ * @snippet         __isIsoDateTime($1)
+ *
  * @example 	js
  * import { __isIsoDateTime } from '@coffeekraken/sugar/is';
  * __isIsoDateTime('john.doe@gmail.com') => false
@@ -33,4 +35,4 @@ function __isIsoDateTime(value) {
         value.match(/^(?:([0-9]{4})-?(1[0-2]|0[1-9])-?(3[01]|0[1-9]|[12][0-9])\s(2[0-3]|[01][0-9]):?([0-5][0-9]):?([0-5][0-9])|([0-9]{4})(1[0-2]|0[1-9])(3[01]|0[1-9]|[12][0-9])\s(2[0-3]|[01][0-9])([0-5][0-9])([0-5][0-9]))$/));
 }
 exports.default = __isIsoDateTime;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOztBQUVkOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQTBCRztBQUNILFNBQXdCLGVBQWUsQ0FBQyxLQUFhO0lBQ2pELE9BQU8sQ0FDSCxLQUFLLENBQUMsS0FBSyxDQUNQLDBHQUEwRyxDQUM3RztRQUNELEtBQUssQ0FBQyxLQUFLLENBQ1AsMk1BQTJNLENBQzlNLENBQ0osQ0FBQztBQUNOLENBQUM7QUFURCxrQ0FTQyJ9
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOztBQUVkOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBNEJHO0FBQ0gsU0FBd0IsZUFBZSxDQUFDLEtBQWE7SUFDakQsT0FBTyxDQUNILEtBQUssQ0FBQyxLQUFLLENBQ1AsMEdBQTBHLENBQzdHO1FBQ0QsS0FBSyxDQUFDLEtBQUssQ0FDUCwyTUFBMk0sQ0FDOU0sQ0FDSixDQUFDO0FBQ04sQ0FBQztBQVRELGtDQVNDIn0=

@@ -22,6 +22,9 @@ import __extractImport from './extractImport';
  * @param       {IDependencyTreeExtendedSettings}       [settings={}]       Some settings (like all the dependency-tree supported ones (excluding filename and directory)), and some additional like caching.
  * @return      {SPromise}                               An SPromise instance through which you can get logs, and that will be resolved once the process is over
  *
+ * @snippet     __dependencyTree($1)
+ * await __dependencyTree($1)
+ * 
  * @example         js
  * import { __dependencyTree } from '@coffeekraken/sugar/module';
  * await __dependencyTree('/something/cool.js', {

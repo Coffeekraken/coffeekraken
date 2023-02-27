@@ -15,6 +15,9 @@ const object_encode_1 = __importDefault(require("object-encode"));
  *
  * Expose two function named "encrypt" and "decrypt" that you can use to process your content using the object algorithm
  *
+ * @snippet         __object.encrypt($1)
+ *
+ * @example         js
  * import { __object } from '@coffeekraken/sugar/crypto';
  * __object.encrypt({
  *      hello: 'world'
@@ -58,4 +61,4 @@ exports.default = {
         return object_encode_1.default.decode_object(encodedObject, 'base64', salt);
     },
 };
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOzs7OztBQUVkLGtFQUEyQztBQUUzQzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0FvQkc7QUFDSCxrQkFBZTtJQUNYOzs7Ozs7Ozs7OztPQVdHO0lBQ0gsT0FBTyxFQUFFLFVBQVUsTUFBTSxFQUFFLElBQUksR0FBRyxrQ0FBa0M7UUFDaEUsT0FBTyx1QkFBYyxDQUFDLGFBQWEsQ0FBQyxNQUFNLEVBQUUsUUFBUSxFQUFFLElBQUksQ0FBQyxDQUFDO0lBQ2hFLENBQUM7SUFFRDs7Ozs7Ozs7Ozs7T0FXRztJQUNILE9BQU8sRUFBRSxVQUNMLGFBQWEsRUFDYixJQUFJLEdBQUcsa0NBQWtDO1FBRXpDLE9BQU8sdUJBQWMsQ0FBQyxhQUFhLENBQUMsYUFBYSxFQUFFLFFBQVEsRUFBRSxJQUFJLENBQUMsQ0FBQztJQUN2RSxDQUFDO0NBQ0osQ0FBQyJ9
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOzs7OztBQUVkLGtFQUEyQztBQUUzQzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0F1Qkc7QUFDSCxrQkFBZTtJQUNYOzs7Ozs7Ozs7OztPQVdHO0lBQ0gsT0FBTyxFQUFFLFVBQVUsTUFBTSxFQUFFLElBQUksR0FBRyxrQ0FBa0M7UUFDaEUsT0FBTyx1QkFBYyxDQUFDLGFBQWEsQ0FBQyxNQUFNLEVBQUUsUUFBUSxFQUFFLElBQUksQ0FBQyxDQUFDO0lBQ2hFLENBQUM7SUFFRDs7Ozs7Ozs7Ozs7T0FXRztJQUNILE9BQU8sRUFBRSxVQUNMLGFBQWEsRUFDYixJQUFJLEdBQUcsa0NBQWtDO1FBRXpDLE9BQU8sdUJBQWMsQ0FBQyxhQUFhLENBQUMsYUFBYSxFQUFFLFFBQVEsRUFBRSxJQUFJLENBQUMsQ0FBQztJQUN2RSxDQUFDO0NBQ0osQ0FBQyJ9

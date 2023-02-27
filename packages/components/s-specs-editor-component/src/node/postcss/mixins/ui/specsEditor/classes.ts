@@ -23,6 +23,25 @@ export interface IPostcssUiSpecsEditorClassesParams {
 }
 export { postcssUiSpecsEditorClassesInterface as interface };
 
+/**
+ * @name                 classes
+ * @namespace            node.postcss.mixins.ui.specsEditor
+ * @type                 PostcssMixin
+ * @platform            css
+ * @status              beta
+ * @private
+ * 
+ * This mixin represent a specs editor
+ *
+ * @snippet      @sugar.ui.specsEditor.classes($1);
+ *
+ * @example        css
+ * \@sugar.ui.specsEditor.classes;
+ * 
+ * @since    2.0.0
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+ */
+
 export default function ({
     params,
     atRule,

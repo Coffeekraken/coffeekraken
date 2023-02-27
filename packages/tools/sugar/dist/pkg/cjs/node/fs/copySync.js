@@ -17,6 +17,8 @@ const fs_extra_1 = __importDefault(require("fs-extra"));
  * @param       {String}              src           The source path to copy
  * @param       {String}              dest          The destination path
  *
+ * @snippet         __copySync($1, $2)
+ *
  * @example       js
  * import { __copySync } from '@coffeekraken/sugar/fs';
  *  __copySync('my/cool/file.jpg', 'my/new/file.jpg');
@@ -29,4 +31,4 @@ function __copySync(src, dest) {
     fs_extra_1.default.copySync(src, dest);
 }
 exports.default = __copySync;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOzs7OztBQUVkLHdEQUE0QjtBQUU1Qjs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQW1CRztBQUNILFNBQXdCLFVBQVUsQ0FBQyxHQUFHLEVBQUUsSUFBSTtJQUN4QyxrQkFBSSxDQUFDLFFBQVEsQ0FBQyxHQUFHLEVBQUUsSUFBSSxDQUFDLENBQUM7QUFDN0IsQ0FBQztBQUZELDZCQUVDIn0=
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOzs7OztBQUVkLHdEQUE0QjtBQUU1Qjs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBcUJHO0FBQ0gsU0FBd0IsVUFBVSxDQUFDLEdBQUcsRUFBRSxJQUFJO0lBQ3hDLGtCQUFJLENBQUMsUUFBUSxDQUFDLEdBQUcsRUFBRSxJQUFJLENBQUMsQ0FBQztBQUM3QixDQUFDO0FBRkQsNkJBRUMifQ==

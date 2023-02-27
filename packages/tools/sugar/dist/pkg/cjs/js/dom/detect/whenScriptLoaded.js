@@ -17,7 +17,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
  * @param       {Function}      [cb=null]     A callback if you prefer
  * @return    {Promise}    The promise that will be resolved when the script is fully loaded
  *
- * @snippet         __whenScriptLoaded($1);
+ * @snippet         __whenScriptLoaded($1)
  * __whenScriptLoaded($1).then(\$script => {
  *      $2
  * });

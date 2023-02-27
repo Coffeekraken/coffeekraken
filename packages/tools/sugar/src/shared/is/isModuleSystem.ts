@@ -14,6 +14,8 @@ import __isEsm from './isEsm';
  * @param       {('esm'|'cjs')[]}    systemNames    An array of system names to check against
  * @return      {Boolean}           true if the current system is one of the passed system names, false otherwise
  *
+ * @snippet         __isModuleSystem($1)
+ * 
  * @example       js
  * import { __isModuleSystem } from '@coffeekraken/sugar/is';
  * __isModuleSystem('esm'); // => true

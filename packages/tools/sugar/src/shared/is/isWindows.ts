@@ -16,6 +16,8 @@
  * @todo      doc
  * @todo      tests
  *
+ * @snippet         __isWindows()
+ * 
  * @example       js
  * import { __isWindows } from '@coffeekraken/sugar/is';
  * __isWindows(); // => true

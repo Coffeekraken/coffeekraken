@@ -10,6 +10,12 @@
  * wrapped in a nice Promise based api.
  * You can also use it through his static methods that are exacly the same as the instance ones.
  *
+ * @snippet         __SIndexDb($1)
+ * const db = new __SIndexDb({
+ *    db: $1,
+ *    table: $2
+ * });
+ *
  * @example    js
  * import { __SIndexDb } from '@coffeekraken/sugar/storage';
  * const db = new __SIndexDb({

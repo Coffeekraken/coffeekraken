@@ -15,6 +15,8 @@
  * @todo      doc
  * @todo      tests
  *
+ * @snippet         __removeVendorPrefix($1)
+ * 
  * @example  	js
  * import { __removeVendorPrefix } from '@coffeekraken/sugar/css';
  * __removeVendorPrefix('moz-something'); // 'something'

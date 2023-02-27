@@ -14,7 +14,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
  * @param 		{HTMLElement} 				refElm 		The element after which to insert the passed element
  * @return    {HTMLElement}               The inserted node
  *
- * @snippet         __insertAfter($1, $2);
+ * @snippet         __insertAfter($1, $2)
  *
  * @todo      interface
  * @todo      doc

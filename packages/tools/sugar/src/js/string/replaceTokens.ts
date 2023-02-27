@@ -8,11 +8,14 @@ import __sharedReplaceTokens from '../../shared/token/replaceTokens';
  * @status          beta
  *
  * This function replace these tokens in the passed string:
- * 
+ *
  * - `%moduleSystem` - Either "esm" or "cjs"
  *
  * @param       {String}            string          The string you want to process
  * @return      {String}                            The processed string
+ *
+ * @snippet         (string) __replaceTokens($1)
+ * __replaceTokens($1)
  *
  * @example         js
  * import { __replaceTokens } from '@coffeekraken/sugar/string';

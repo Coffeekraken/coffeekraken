@@ -18,6 +18,8 @@
  * @todo      doc
  * @todo      tests
  *
+ * @snippet         __isOsx()
+ * 
  * @example       js
  * import { __isOsx } from '@coffeekraken/sugar/is';
  * __isOsx(); // => true

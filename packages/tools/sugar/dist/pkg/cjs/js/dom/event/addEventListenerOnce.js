@@ -24,7 +24,7 @@ const dom_1 = require("@coffeekraken/sugar/dom");
  * @param    {Boolean}    [useCapture=false]    A Boolean value that specifies whether the event should be executed in the capturing or in the bubbling phase
  * @return    {Promise}                   A promise that will be resolved once the event has been called
  *
- * @snippet         __addEventListenerOnce($1, $2, $3);
+ * @snippet         __addEventListenerOnce($1, $2, $3)
  * __addEventListenerOnce($1, $2, e => {
  *      $3
  * });

@@ -23,6 +23,8 @@ import type { IScrollToSettings } from './scrollTo';
  * @todo      doc
  * @todo      tests
  *
+ * @snippet         __scrollToLocationHash()
+ *
  * @example 	js
  * import { __scrollToLocationHash } from '@coffeekraken/sugar/dom'
  * __scrollToLocationHash(500, 0)

@@ -19,14 +19,16 @@ import __htmlTagToHtmlClassMap from './htmlTagToHtmlClassMap';
  * @todo      doc
  * @todo      tests
  *
+ * @snippet         __getTagNameFromHtmlClass($1)
+ *
  * @example       js
- * import { __getHtmlhtmlClassFromHtmlClass } from '@coffeekraken/sugar/dom';
- * __getHtmlhtmlClassFromHtmlClass(HTMLAnchorElement); // => 'a'
+ * import { __getTagNameFromHtmlClass } from '@coffeekraken/sugar/dom';
+ * __getTagNameFromHtmlClass(HTMLAnchorElement); // => 'a'
  *
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-export default function __getHtmlhtmlClassFromHtmlClass(
+export default function __getTagNameFromHtmlClass(
     htmlClass: HTMLElement,
 ): string {
     if (!htmlClass) return false;

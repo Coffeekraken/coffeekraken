@@ -13,6 +13,8 @@ import __fs from 'fs-extra';
  *
  * @param       {String}              dir           The directory path to empty
  *
+ * @snippet         __emptyDirSync($1)
+ *
  * @example       js
  * import { __emptyDirSync } from '@coffeekraken/sugar/fs';
  * __emptyDirSync('my/cool/directory');

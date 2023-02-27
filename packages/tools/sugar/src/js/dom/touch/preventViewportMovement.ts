@@ -15,6 +15,8 @@
  * @todo      doc
  * @todo      tests
  *
+ * @snippet         __preventViewportMovement($1)
+ *
  * @example    js
  * import { __preventViewportMovement } from '@coffeekraken/sugar/dom'
  * __preventViewportMovement($elm)

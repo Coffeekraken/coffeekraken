@@ -7,9 +7,9 @@ import _glob from 'glob';
  * @name            findPackages
  * @namespace            node.monorepo
  * @type            Function
- * @async
  * @platform        node
  * @status          beta
+ * @async
  *
  * This function simply let you search for packages (that are not dependencies) inside
  * the passed folder and returns a object with relative paths as keys and package.json
@@ -22,6 +22,9 @@ import _glob from 'glob';
  * @todo      doc
  * @todo      tests
  *
+ * @snippet         __findPackages($1)
+ * await __findPackages($1)
+ * 
  * @example       js
  * import { __findPackages } from '@coffeekraken/sugar/monorepo';
  * const packages = await __findPackages();

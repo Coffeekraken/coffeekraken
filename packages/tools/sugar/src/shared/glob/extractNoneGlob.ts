@@ -19,6 +19,8 @@ import __globParent from 'glob-parent';
  * @todo      doc
  * @todo      tests
  *
+ * @snippet         __extractNoneGlob($1)
+ * 
  * @example         js
  * import { __extractNoneGlob } from '@coffeekraken/sugar/glob';
  * __extractNoneGlob('/coco/hello/*.js'); // => '*.js'

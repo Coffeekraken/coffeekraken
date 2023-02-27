@@ -16,6 +16,8 @@
  * @todo      doc
  * @todo      tests
  *
+ * @snippet         __isNode()
+ * 
  * @example               js
  * import { __isNode } from '@coffeekraken/sugar/is';
  * __isNode(); // => true

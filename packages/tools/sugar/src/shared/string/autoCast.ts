@@ -17,6 +17,8 @@
  * @todo      doc
  * @todo      tests
  *
+ * @snippet         __autoCast($1)
+ * 
  * @example    js
  * import { __autoCast } from '@coffeekraken/sugar/string'
  * __autoCast('12') // => 12

@@ -14,6 +14,8 @@ import __urlSlug from 'url';
  *
  * @todo            tests
  *
+ * @snippet         __urlFromString($1)
+ * 
  * @example             js
  * import urlFromString from '@coffeekraken/sugar/shared/url/urlFromString';
  * urlFromString('Sir James Paul McCartney MBE is an English singer-songwriter');

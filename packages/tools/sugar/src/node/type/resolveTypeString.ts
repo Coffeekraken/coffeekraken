@@ -4,7 +4,7 @@ import { __replaceTokens } from '@coffeekraken/sugar/token';
 import __fs from 'fs';
 import __path from 'path';
 import __parseTypeString, {
-    ITypeStringObject,
+    ITypeStringObject
 } from '../../shared/type/parseTypeString';
 
 /**
@@ -24,6 +24,8 @@ import __parseTypeString, {
  *
  * @setting         {String}       [cwd=process.cwd()]          The cwd to use to resolve the type string when they are path
  *
+ * @snippet         __resolveTypeString($1)
+ * 
  * @example       js
  * import { __resolveTypeString } from '@coffeekraken/sugar/type';
  * __resolveTypeString('string');

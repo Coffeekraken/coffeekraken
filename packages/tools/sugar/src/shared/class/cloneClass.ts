@@ -17,6 +17,8 @@ import { cloneClass } from 'clone-class';
  * @todo      doc
  * @todo      tests
  *
+ * @snippet         __cloneClass($1)
+ * 
  * @example         js
  * import { __cloneClass } from '@coffeekraken/sugar/class';
  * const NewClass = __cloneClass(class MyClass() {});

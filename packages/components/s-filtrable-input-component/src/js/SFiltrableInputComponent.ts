@@ -74,12 +74,16 @@ export interface ISFiltrableInputState {
  * @support         safari
  * @support         edge
  *
+ * @import          import { define as __SFiltrableInputComponentDefine } from '@coffeekraken/s-filtrable-input-component';
+ * 
+ * @snippet         __SFiltrableInputComponentDefine($1)
+ * 
  * @install           shell
  * npm i @coffeekraken/s-filtrable-input-component
  *
  * @install           js
- * import { define } from '@coffeekraken/s-filtrable-input-component';
- * define();
+ * import { define as __SFiltrableInputComponentDefine } from '@coffeekraken/s-filtrable-input-component';
+ * __SFiltrableInputComponentDefine();
  *
  * @example         html            Simple example
  * <template id="items">

@@ -22,6 +22,24 @@ export interface IPostcssUiSliderClassesParams {
 
 export { postcssUiSliderClassesInterface as interface };
 
+/**
+ * @name                 classes
+ * @namespace            node.postcss.mixins.ui.slider
+ * @type                 PostcssMixin
+ * @platform            css
+ * @status              beta
+ * 
+ * This mixin represent a color picker
+ *
+ * @snippet      @sugar.ui.slider.classes($1);
+ *
+ * @example        css
+ * \@sugar.ui.slider.classes;
+ * 
+ * @since    2.0.0
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+ */
+
 export default function ({
     params,
     atRule,

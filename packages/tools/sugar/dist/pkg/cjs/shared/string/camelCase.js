@@ -22,6 +22,8 @@ const camelize_1 = __importDefault(require("./camelize"));
  * @todo      doc
  * @todo      tests
  *
+ * @snippet         __camelCase($1)
+ *
  * @example     js
  * import { __camelCase } from '@coffeekraken/sugar/string';
  * __camelCase('hello world'); // => helloWorld
@@ -33,4 +35,4 @@ function __camelCase(text) {
     return (0, camelize_1.default)(text);
 }
 exports.default = __camelCase;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOzs7OztBQUVkLDBEQUFvQztBQUVwQzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0F1Qkc7QUFDSCxTQUF3QixXQUFXLENBQUMsSUFBSTtJQUNwQyxPQUFPLElBQUEsa0JBQVUsRUFBQyxJQUFJLENBQUMsQ0FBQztBQUM1QixDQUFDO0FBRkQsOEJBRUMifQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOzs7OztBQUVkLDBEQUFvQztBQUVwQzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQXlCRztBQUNILFNBQXdCLFdBQVcsQ0FBQyxJQUFJO0lBQ3BDLE9BQU8sSUFBQSxrQkFBVSxFQUFDLElBQUksQ0FBQyxDQUFDO0FBQzVCLENBQUM7QUFGRCw4QkFFQyJ9

@@ -16,6 +16,8 @@
  * @todo      doc
  * @todo      tests
  *
+ * @snippet         __realHeight($1)
+ *
  * @example     js
  * import { __realHeight } from '@coffeekraken/sugar/dom';
  * __realHeight(myCoolHtmlElement);

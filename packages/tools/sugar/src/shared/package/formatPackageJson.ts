@@ -24,6 +24,8 @@ import __parseAuthorString from './parseAuthorString';
  * @todo      doc
  * @todo      tests
  *
+ * @snippet         __formatPackageJson($1)
+ * 
  * @example       js
  * import { __formatPackageJson } from '@coffeekraken/sugar/package';
  * __formatPackageJson({

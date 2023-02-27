@@ -10,7 +10,7 @@
  *
  * @return    {Boolean}    true if is scrollable, false if not
  *
- * @snippet         __isScrollable($1);
+ * @snippet         __isScrollable($1)
  *
  * @todo      interface
  * @todo      doc

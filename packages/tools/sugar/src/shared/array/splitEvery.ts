@@ -14,6 +14,8 @@
  * @param           {Number}          every               Every how many items to split the array
  * @return          {Array}                               An array of arrays splited
  *
+ * @snippet         __splitEvery($1, $2)
+ * 
  * @example           js
  * import { __splitEvery } from '@coffeekraken/sugar/array';
  * __splitEvery([1,2,3,4,5,6,7,8,9], 3);

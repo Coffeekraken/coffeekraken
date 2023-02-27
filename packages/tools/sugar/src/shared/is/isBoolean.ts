@@ -17,6 +17,8 @@
  * @todo      doc
  * @todo      tests
  *
+ * @snippet         __isBoolean($1)
+ * 
  * @example    js
  * import { __isBoolean } from '@coffeekraken/sugar/is'
  * if (__isBoolean(true) {

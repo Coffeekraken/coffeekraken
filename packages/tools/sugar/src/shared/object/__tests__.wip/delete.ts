@@ -1,4 +1,4 @@
-module.exports = (__delete) => {
+module.exports = (__deleteProperty) => {
     describe('sugar.shared.object.delete', () => {
         it('Should delete correctly a simple property', () => {
             const obj = {
@@ -8,7 +8,7 @@ module.exports = (__delete) => {
                 plop: 'yop',
             };
 
-            expect(__delete(obj, 'hello.world')).toEqual({
+            expect(__deleteProperty(obj, 'hello.world')).toEqual({
                 hello: {},
                 plop: 'yop',
             });
@@ -22,7 +22,7 @@ module.exports = (__delete) => {
                 plop: 'yop',
             };
 
-            const deletedObj = __delete(obj, 'hello.world.1');
+            const deletedObj = __deleteProperty(obj, 'hello.world.1');
             expect(deletedObj).toEqual({
                 hello: {
                     world: ['one', 'three', 'four', 'five'],
@@ -50,7 +50,7 @@ module.exports = (__delete) => {
                 plop: 'yop',
             };
 
-            const deletedObj = __delete(obj, 'hello.world.2.del.branch');
+            const deletedObj = __deleteProperty(obj, 'hello.world.2.del.branch');
             expect(deletedObj).toEqual({
                 hello: {
                     world: [
@@ -82,7 +82,7 @@ module.exports = (__delete) => {
                 plop: 'yop',
             };
 
-            const deletedObj = __delete(obj, 'hello.world.2.1');
+            const deletedObj = __deleteProperty(obj, 'hello.world.2.1');
             expect(deletedObj).toEqual({
                 hello: {
                     world: ['one', 'two', ['01', '03', '04'], 'four', 'five'],

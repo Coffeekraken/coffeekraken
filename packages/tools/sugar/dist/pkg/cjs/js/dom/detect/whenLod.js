@@ -27,7 +27,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
  * @param       {Number}                    number      The level of details to wait on
  * @return 		{Promise} 								The promise that will be resolved
  *
- * @snippet         __whenLod($1);
+ * @snippet         __whenLod($1)
  * __whenLod($1).then(() => {
  *      $2
  * });

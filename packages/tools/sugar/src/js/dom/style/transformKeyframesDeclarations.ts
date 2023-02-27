@@ -17,6 +17,8 @@ import __camelCase from '../../../shared/string/camelCase';
  * @param               {Object}            keyFrameRule                 KeyFrameRule to transform
  * @return              {Array}               Array of webanimation keyframes
  *
+ * @snippet         __transformKeyframesDeclarations($1)
+ *
  * @todo      refactore
  * @todo      interface
  * @todo      doc

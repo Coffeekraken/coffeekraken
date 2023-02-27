@@ -26,6 +26,8 @@ import __loopsCount from './loopsCount';
  * @todo      doc
  * @todo      tests
  *
+ * @snippet         __speedIndex($1, $2)
+ * 
  * @example       js
  * import { __speedIndex } from '@coffeekraken/sugar/perf';
  * __speedIndex(); // 78

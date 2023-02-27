@@ -17,6 +17,8 @@
  * @todo      doc
  * @todo      tests
  *
+ * @snippet         __parseRgba($1)
+ * 
  * @example           js
  * import { __parseRgba } from '@coffeekraken/sugar/color';
  * __parseRgba('rgba(20,10,100,20)');

@@ -23,6 +23,8 @@ import __deepClone from 'lodash.clonedeep';
  * @todo      doc
  * @todo      tests
  *
+ * @snippet         __clone($1)
+ * 
  * @example       js
  * import { __clone } from '@coffeekraken/sugar/object';
  * __clone({

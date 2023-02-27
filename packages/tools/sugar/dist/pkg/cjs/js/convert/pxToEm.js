@@ -19,7 +19,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
  * @todo      doc
  * @todo      tests
  *
- * @snippet         __pxToEm($1);
+ * @snippet         __pxToEm($1)
  *
  * @example         js
  * import { __pxToEm } from '@coffeekraken/sugar/convert';

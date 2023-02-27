@@ -17,6 +17,8 @@
  * @todo      doc
  * @todo      tests
  *
+ * @snippet         __isBase64($1)
+ * 
  * @example    js
  * import { __isBase64 } from '@coffeekraken/sugar/is'
  * if (__isBase64('wfwefwefiowjfiojwiefjwoiejfiowjfi9jef98je9f3j') {

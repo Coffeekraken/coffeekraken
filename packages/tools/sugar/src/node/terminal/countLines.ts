@@ -1,7 +1,5 @@
 // @ts-nocheck
 
-import __deepMerge from '../../shared/object/deepMerge';
-import __stripAnsi from '../../shared/string/stripAnsi';
 import __countLine from '../../shared/string/countLine';
 
 /**
@@ -20,6 +18,8 @@ import __countLine from '../../shared/string/countLine';
  * @todo      doc
  * @todo      tests
  *
+ * @snippet         __countLines($1)
+ * 
  * @example         js
  * import { __countLines } from '@coffeekraken/sugar/terminal';
  * __countLines('Hello <red>World</red>'); // 11

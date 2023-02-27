@@ -35,16 +35,23 @@ import __SPostcssBuilderSettingsInterface from './interface/SPostcssBuilderSetti
  *
  * @param           {ISPostcssBuilderSettings}          [settings={}]           Some settings to configure your builder instance
  *
- * @example         js
- * import SPostcssBuilder from '@coffeekraken/s-postcss-builder';
- * const builder = new SPostcssBuilder({
- *      postcssBuilder: {
- *          // settings here...
- *      }
+ * @snippet         __SPostcssBuilder($1)
+ * const postcssBuilder = new __SPostcssBuilder();
+ * const postcssBuilderResult = await postcssBuilder.build({
+ *      input: $1,
+ *      output: $2,
+ *      minify: true,
+ *      target: 'production'
  * });
- * await builder.build({
+ * 
+ * @example         js
+ * import __SPostcssBuilder from '@coffeekraken/s-postcss-builder';
+ * const postcssBuilder = new __SPostcssBuilder({
+ *      // settings here...
+ * });
+ * await postcssBuilder.build({
  *      input: 'my-cool-file.css',
- *      output: 'my/cool/file-output.css'
+ *      output: 'my/cool/file-output.css',
  * });
  *
  * @since           2.0.0
@@ -369,7 +376,7 @@ export default class SPostcssBuilder extends __SBuilder {
                             const packagePath =
                                 __resolvePackagePath(packageName);
                             if (!packagePath) continue;
-                            const specsFiles = __SGlob.resolve(
+                            const specsFiles = __SGlob.resolveSync(
                                 `${packagePath}/**/*.spec.js`,
                             );
                             for (let file of specsFiles) {
@@ -387,7 +394,7 @@ export default class SPostcssBuilder extends __SBuilder {
                     }
                 }
 
-                const srcJsFiles = __SGlob.resolve(
+                const srcJsFiles = __SGlob.resolveSync(
                     `${__SSugarConfig.get('storage.src.jsDir')}/**/*.spec.js`,
                 );
                 for (let file of srcJsFiles) {
@@ -413,7 +420,7 @@ export default class SPostcssBuilder extends __SBuilder {
                         content.push(contentObj);
                     }
                 });
-                const files = __SGlob.resolve(globs);
+                const files = __SGlob.resolveSync(globs);
                 files.forEach((file) => {
                     content.push({
                         extension: file.extension,

@@ -19,6 +19,8 @@ import __fs from 'fs';
  * @todo      doc
  * @todo      tests
  *
+ * @snippet         __isFile($1);
+ * 
  * @example     js
  * import { __isFile } from '@coffeekraken/sugar/is';
  * __isFile('something/cool');

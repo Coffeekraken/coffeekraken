@@ -11,6 +11,19 @@ import { __deepMerge } from '@coffeekraken/sugar/object';
 import { __uniqid } from '@coffeekraken/sugar/string';
 export default class SConfigAdapter {
     /**
+     * @name            name
+     * @type            String
+     * @get
+     *
+     * Access the adapter name. You can specify it through settings.configAdapter.name, otherwise it will be a randon string generated
+     *
+     * @since       2.0.0
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    get name() {
+        return this.settings.name;
+    }
+    /**
      * @name                              constructor
      * @type                              Function
      *
@@ -26,19 +39,6 @@ export default class SConfigAdapter {
         this.settings = __deepMerge({
             name: `s-config-adapter-${__uniqid()}`,
         }, settings !== null && settings !== void 0 ? settings : {});
-    }
-    /**
-     * @name            name
-     * @type            String
-     * @get
-     *
-     * Access the adapter name. You can specify it through settings.configAdapter.name, otherwise it will be a randon string generated
-     *
-     * @since       2.0.0
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-     */
-    get name() {
-        return this.settings.name;
     }
     update() {
         // calling the "onUpdate" setting callback if exists
@@ -65,4 +65,4 @@ export default class SConfigAdapter {
         });
     }
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7OztBQUNBLE9BQU8sRUFBRSxXQUFXLEVBQUUsTUFBTSw0QkFBNEIsQ0FBQztBQUN6RCxPQUFPLEVBQUUsUUFBUSxFQUFFLE1BQU0sNEJBQTRCLENBQUM7QUFrRHRELE1BQU0sQ0FBQyxPQUFPLE9BQU8sY0FBYztJQTBCL0I7Ozs7Ozs7Ozs7O09BV0c7SUFDSCxZQUFZLFFBQTBDO1FBQ2xELElBQUksQ0FBQyxRQUFRLEdBQUcsV0FBVyxDQUN2QjtZQUNJLElBQUksRUFBRSxvQkFBb0IsUUFBUSxFQUFFLEVBQUU7U0FDekMsRUFDRCxRQUFRLGFBQVIsUUFBUSxjQUFSLFFBQVEsR0FBSSxFQUFFLENBQ2pCLENBQUM7SUFDTixDQUFDO0lBakNEOzs7Ozs7Ozs7T0FTRztJQUNILElBQUksSUFBSTtRQUNKLE9BQU8sSUFBSSxDQUFDLFFBQVEsQ0FBQyxJQUFJLENBQUM7SUFDOUIsQ0FBQztJQW1DRCxNQUFNO1FBQ0Ysb0RBQW9EO1FBQ3BELFlBQVksQ0FBQyxJQUFJLENBQUMsY0FBYyxDQUFDLENBQUM7UUFDbEMsSUFBSSxDQUFDLGNBQWMsR0FBRyxVQUFVLENBQUMsR0FBRyxFQUFFOztZQUNsQyxNQUFBLE1BQUEsSUFBSSxDQUFDLFFBQVEsRUFBQyxRQUFRLGtEQUFJLENBQUM7UUFDL0IsQ0FBQyxFQUFFLEVBQUUsQ0FBQyxDQUFDO0lBQ1gsQ0FBQztJQUVEOzs7Ozs7Ozs7O09BVUc7SUFDRyxJQUFJLENBQUMsTUFBaUM7O1lBQ3hDLE9BQU8sRUFBRSxDQUFDO1FBQ2QsQ0FBQztLQUFBO0NBQ0oifQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7OztBQUNBLE9BQU8sRUFBRSxXQUFXLEVBQUUsTUFBTSw0QkFBNEIsQ0FBQztBQUN6RCxPQUFPLEVBQUUsUUFBUSxFQUFFLE1BQU0sNEJBQTRCLENBQUM7QUFrRHRELE1BQU0sQ0FBQyxPQUFPLE9BQU8sY0FBYztJQVkvQjs7Ozs7Ozs7O09BU0c7SUFDSCxJQUFJLElBQUk7UUFDSixPQUFPLElBQUksQ0FBQyxRQUFRLENBQUMsSUFBSSxDQUFDO0lBQzlCLENBQUM7SUFFRDs7Ozs7Ozs7Ozs7T0FXRztJQUNILFlBQVksUUFBMEM7UUFDbEQsSUFBSSxDQUFDLFFBQVEsR0FBRyxXQUFXLENBQ3ZCO1lBQ0ksSUFBSSxFQUFFLG9CQUFvQixRQUFRLEVBQUUsRUFBRTtTQUN6QyxFQUNELFFBQVEsYUFBUixRQUFRLGNBQVIsUUFBUSxHQUFJLEVBQUUsQ0FDakIsQ0FBQztJQUNOLENBQUM7SUFjRCxNQUFNO1FBQ0Ysb0RBQW9EO1FBQ3BELFlBQVksQ0FBQyxJQUFJLENBQUMsY0FBYyxDQUFDLENBQUM7UUFDbEMsSUFBSSxDQUFDLGNBQWMsR0FBRyxVQUFVLENBQUMsR0FBRyxFQUFFOztZQUNsQyxNQUFBLE1BQUEsSUFBSSxDQUFDLFFBQVEsRUFBQyxRQUFRLGtEQUFJLENBQUM7UUFDL0IsQ0FBQyxFQUFFLEVBQUUsQ0FBQyxDQUFDO0lBQ1gsQ0FBQztJQUVEOzs7Ozs7Ozs7O09BVUc7SUFDRyxJQUFJLENBQUMsTUFBaUM7O1lBQ3hDLE9BQU8sRUFBRSxDQUFDO1FBQ2QsQ0FBQztLQUFBO0NBQ0oifQ==

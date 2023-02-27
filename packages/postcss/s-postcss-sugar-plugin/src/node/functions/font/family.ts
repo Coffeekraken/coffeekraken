@@ -1,5 +1,5 @@
 import __SInterface from '@coffeekraken/s-interface';
-import { __isValidUnitValue } from '@coffeekraken/sugar/css';
+import { __isValidCssUnitValue } from '@coffeekraken/sugar/css';
 
 /**
  * @name          family
@@ -52,7 +52,7 @@ export default function ({
 
     const name = finalParams.name;
 
-    if (__isValidUnitValue(name)) {
+    if (__isValidCssUnitValue(name)) {
         return name;
     }
 

@@ -17,6 +17,8 @@
  * @todo      doc
  * @todo      tests
  *
+ * @snippet         __isNumber($1)
+ * 
  * @example 	js
  * import { __isNumber } from '@coffeekraken/sugar/is';
  * __isNumber(12) => true

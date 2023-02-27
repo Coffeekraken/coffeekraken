@@ -19,6 +19,8 @@
  * @setting         {Number}        max             The maximum wanted when using > and >= quantifiers
  * @setting         {Function}      value           A function that take the current index and that MUST return the value wanted in the generated array
  *
+ * @snippet         __fromQuantifier($1)
+ * 
  * @example    js
  * import { __fromQuantifier } from '@coffeekraken/sugar/array'
  * __fromQuantifier(3); // => [0,1,2]

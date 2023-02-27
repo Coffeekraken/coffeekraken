@@ -18,6 +18,8 @@
  * @todo      doc
  * @todo      tests
  *
+ * @snippet         __methodExists($1)
+ * 
  * @example           js
  * class Coco {
  *    hello() {}

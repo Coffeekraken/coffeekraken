@@ -22,6 +22,24 @@ export interface IPostcssUiRatingClassesParams {
 
 export { postcssUiRatingClassesInterface as interface };
 
+/**
+ * @name                 classes
+ * @namespace            node.postcss.mixins.ui.rating
+ * @type                 PostcssMixin
+ * @platform            css
+ * @status              beta
+ * 
+ * This mixin represent rating
+ *
+ * @snippet      @sugar.ui.rating.classes($1);
+ *
+ * @example        css
+ * \@sugar.ui.rating.classes;
+ * 
+ * @since    2.0.0
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+ */
+
 export default function ({
     params,
     atRule,

@@ -7,7 +7,7 @@ export default function rootFiles({ express, settings, config }) {
     return new Promise(async (resolve) => {
         const packageRoot = __packageRootDir(),
             publicDir = __SSugarConfig.get('storage.src.publicDir');
-        const files = __SGlob.resolve('**/*', {
+        const files = __SGlob.resolveSync('**/*', {
             cwd: publicDir,
         });
 

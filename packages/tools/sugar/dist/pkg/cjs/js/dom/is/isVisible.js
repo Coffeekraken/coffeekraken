@@ -14,7 +14,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
  * @param 		{HTMLElement} 				$elm  		The element to check
  * @return 		{Boolean}								If the element is visible or not
  *
- * @snippet         __isVisible($1);
+ * @snippet         __isVisible($1)
  *
  * @todo      interface
  * @todo      doc

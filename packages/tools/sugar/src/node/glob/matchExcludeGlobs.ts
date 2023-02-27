@@ -1,7 +1,6 @@
 // @ts-nocheck
 
 import __minimatch from 'minimatch';
-import __excludeGlobs from './excludedGlobs';
 
 /**
  * @name                    matchExcludeGlobs
@@ -15,6 +14,8 @@ import __excludeGlobs from './excludedGlobs';
  * @param           {String}            path            The path to check
  * @return          {Boolean}                           true if the path match at least 1 exclude glob, false if not
  *
+ * @snippet         __matchExcludedGlobs($1)
+ * 
  * @example         js
  * import { __matchExcludeGlobs } from '@coffeekraken/sugar/glob';
  * if (__matchExcludeGlobs('something/cool.js')) {

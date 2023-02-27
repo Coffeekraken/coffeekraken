@@ -14,6 +14,8 @@ import __fs from 'fs-extra';
  * @param       {String}              dir           The directory to ensure that it exists...
  * @return      {Promise}                           A promise that will be resolved once the directory has been created if needed...
  *
+ * @snippet         __ensureDirSync($1)
+ *
  * @example       js
  * import { __ensureDirSync } from '@coffeekraken/sugar/fs';
  * __ensureDirSync('my/cool/dir');

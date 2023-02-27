@@ -13,6 +13,8 @@ import __fs from 'fs-extra';
  *
  * @param       {String}              file           The file to ensure that it exists...
  *
+ * @snippet         __ensureFileSync($1)
+ *
  * @example       js
  * import { __ensureFileSync } from '@coffeekraken/sugar/fs';
  * __ensureFileSync('my/cool/file.jpg');

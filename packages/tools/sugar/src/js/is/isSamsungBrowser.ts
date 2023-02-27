@@ -16,6 +16,8 @@
  * @todo      doc
  * @todo      tests
  *
+ * @snippet         __isSamsungBrowser()
+ *
  * @example    js
  * import { __isSamsumgBrowser } from '@coffeekraken/sugar/is'
  * if (__isSamsumgBrowser()) {

@@ -10,7 +10,7 @@
  *
  * @param    {HTMLElement}    $elm    The HTMLElement to check
  *
- * @snippet         __isHover($1);
+ * @snippet         __isHover($1)
  *
  * @todo      interface
  * @todo      doc

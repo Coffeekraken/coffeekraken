@@ -1,7 +1,7 @@
-module.exports = (__filter) => {
+module.exports = (__filterObject) => {
     describe('sugar.shared.object.filter', () => {
         it('Should filter the object correctly', (done) => {
-            const obj1 = __filter(
+            const obj1 = __filterObject(
                 {
                     hello: {
                         world: 'hello world',

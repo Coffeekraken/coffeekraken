@@ -17,6 +17,8 @@
  * @todo      doc
  * @todo      tests
  *
+ * @snippet         __isInteger($1)
+ * 
  * @example 	js
  * import { __isInteger } from '@coffeekraken/sugar/is';
  * __isInteger(10) => true

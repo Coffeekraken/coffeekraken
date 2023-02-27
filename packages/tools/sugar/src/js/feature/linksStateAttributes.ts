@@ -20,6 +20,8 @@ import deepMerge from '../../shared/object/deepMerge';
  * @todo            doc
  * @todo            tests
  *
+ * @snippet         __linksStateAttributes()
+ *
  * @example       js
  * import { __linksStateAttributes } from '@coffeekraken/sugar/feature';
  * __linksStateAttributes();

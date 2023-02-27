@@ -13,6 +13,8 @@ import __unique from './unique';
  * @param       {Array}         array       The array from which to pick a random item
  * @return      {Any}                       A random array item
  *
+ * @snippet         __pickRandom($1)
+ * 
  * @example         js
  * import { __pickRandom } from '@coffeekraken/sugar/array';
  * const array = ['hello','world'];

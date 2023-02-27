@@ -26,6 +26,8 @@ import __deepMerge from '../object/deepMerge';
  * @todo        interface
  * @todo        doc
  *
+ * @snippet         __stripCssComments($1)
+ * 
  * @example       js
  * import { __stripCssComments } from '@coffeekraken/sugar/css';
  * __stripCssComments(`

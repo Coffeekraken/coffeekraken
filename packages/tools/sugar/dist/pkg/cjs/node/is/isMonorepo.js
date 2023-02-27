@@ -17,6 +17,8 @@ const package_1 = require("@coffeekraken/sugar/package");
  *
  * @return          {Boolean}           true if is in a monorepo, false if not
  *
+ * @snippet         __isMonorepo()
+ *
  * @example         js
  * import {__isMonorepo } from '@coffeekraken/sugar/is';
  * __isMonorepo(); // => true
@@ -29,4 +31,4 @@ function __isMonorepo() {
     return json.workspaces !== undefined;
 }
 exports.default = __isMonorepo;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7O0FBQUEseURBQWdFO0FBRWhFOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBc0JHO0FBQ0gsU0FBd0IsWUFBWTtJQUNoQyxNQUFNLElBQUksR0FBRyxJQUFBLDJCQUFpQixHQUFFLENBQUM7SUFDakMsT0FBTyxJQUFJLENBQUMsVUFBVSxLQUFLLFNBQVMsQ0FBQztBQUN6QyxDQUFDO0FBSEQsK0JBR0MifQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7O0FBQUEseURBQWdFO0FBRWhFOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0F3Qkc7QUFDSCxTQUF3QixZQUFZO0lBQ2hDLE1BQU0sSUFBSSxHQUFHLElBQUEsMkJBQWlCLEdBQUUsQ0FBQztJQUNqQyxPQUFPLElBQUksQ0FBQyxVQUFVLEtBQUssU0FBUyxDQUFDO0FBQ3pDLENBQUM7QUFIRCwrQkFHQyJ9

@@ -1,7 +1,7 @@
 // @ts-nocheck
 
-import hotkeys from 'hotkeys-js/dist/hotkeys.common';
 import __SPromise from '@coffeekraken/s-promise';
+import hotkeys from 'hotkeys-js/dist/hotkeys.common';
 hotkeys.filter = function () {
     return true;
 };
@@ -35,6 +35,11 @@ hotkeys.filter = function () {
  * @todo      interface
  * @todo      doc
  * @todo      tests
+ *
+ * @snippet         __hotkey($1)
+ * __hotkey($1).on('press', e => {
+ *      $2
+ * });
  *
  * @example    js
  * import { __hotkey } from '@coffeekraken/sugar/keyboard'

@@ -17,6 +17,8 @@
  * @todo      doc
  * @todo      tests
  *
+ * @snippet         __isJson($1)
+ * 
  * @example    js
  * import { __isJson } from '@coffeekraken/sugar/is'
  * if (__isJson('[{id:10}]')) {

@@ -1,4 +1,4 @@
-import __styleObject2String from './styleObject2String';
-import __styleString2Object from './styleString2Object';
+import __styleObjectToString from './styleObjectToString';
+import __styleStringToObject from './styleStringToObject';
 
-export { __styleObject2String, __styleString2Object };
+export { __styleObjectToString, __styleStringToObject };

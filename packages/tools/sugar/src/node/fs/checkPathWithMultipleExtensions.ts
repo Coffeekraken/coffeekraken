@@ -1,6 +1,5 @@
 import { __extension } from '@coffeekraken/sugar/fs';
 import __fs from 'fs';
-import __path from 'path';
 
 /**
  * @name            checkPathWithMultipleExtensions
@@ -18,6 +17,11 @@ import __path from 'path';
  * @param       {String}            path            The file path you want to check. With or without an extension
  * @param       {Array<String>}     extensions      The extensions (without the dot) you want to check
  * @return      {String|undefined}                  The first valid path founded, or undefined
+ *
+ * @snippet         __checkPathWithMultipleExtensions($1, $2)
+ * __checkPathWithMultipleExtensions($1, [
+ *     $2
+ * ])
  *
  * @example         js
  * import { __checkPathWithMultipleExtensions } from '@coffeekraken/sugar/fs';

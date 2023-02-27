@@ -4,7 +4,7 @@ import { __readJsonSync } from '@coffeekraken/sugar/fs';
 import __fs from 'fs';
 import __objectHash from '../../shared/object/objectHash';
 import __formatPackageJson from '../../shared/package/formatPackageJson';
-import __packageJson from '../npm/packageJson';
+import __packageJsonSync from '../npm/packageJsonSync';
 import __packageRootDir from '../path/packageRootDir';
 
 /**
@@ -23,6 +23,8 @@ import __packageRootDir from '../path/packageRootDir';
  * @todo      doc
  * @todo      tests
  *
+ * @snippet         __packageJsonSync()
+ * 
  * @example     js
  * import { __packageJsonSync } from '@coffeekraken/sugar/package';
  * __packageJsonSync();
@@ -37,7 +39,7 @@ export interface IPackageJsonSyncSettings {
 }
 
 let __packageJsonCache = {};
-export default function __packageJsonSync(
+export default function packageJsonSync(
     fromOrName = process.cwd(),
     settings?: Partial<IPackageJsonSyncSettings>,
 ): any {
@@ -73,7 +75,7 @@ export default function __packageJsonSync(
             json = __formatPackageJson(json);
         }
     } else {
-        json = __packageJson(fromOrName);
+        json = __packageJsonSync(fromOrName);
     }
 
     // cache

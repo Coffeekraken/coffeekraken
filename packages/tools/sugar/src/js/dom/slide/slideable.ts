@@ -28,6 +28,8 @@ import __injectStyle from '../inject/injectStyle';
  * @todo      doc
  * @todo      tests
  *
+ * @snippet         __slideable($1)
+ *
  * @example 	js
  * import { __slideable } from '@coffeekraken/sugar/dom';
  * __slideable($myElement);
@@ -70,7 +72,7 @@ function _getMostDisplayedItem($items: HTMLElement[]): HTMLElement {
 export default function slideable(
     $elm: HTMLElement,
     settings?: Partial<ISlideableSettings>,
-): Promise<void> {
+): __SPromise {
     return new __SPromise(({ resolve, reject, emit }) => {
         const finalSettings = <ISlideableSettings>{
             direction: 'horizontal',

@@ -16,6 +16,8 @@
  * @todo      doc
  * @todo      tests
  *
+ * @snippet         __buildInNodeModules
+ * 
  * @example             js
  * import { __builtInNodeModules } from '@coffeekraken/sugar/module';
  * // {

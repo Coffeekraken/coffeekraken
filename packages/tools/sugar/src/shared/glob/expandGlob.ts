@@ -5,6 +5,7 @@
  * @platform          js
  * @platform          node
  * @status            alpha
+ * @private
  *
  * This function take some extended glob pattern(s) and expand them to standard supported
  * glob patterns. With this, you will have access to some syntax sugar like these:
@@ -12,7 +13,7 @@
  *
  * @param       {String|Array<String>}      globs           The glob(s) to expand
  * @return      {Array<String>}                             An array of expanded globs
- *
+ * 
  * @example         js
  * import { __expandGlob } from '@coffeekraken/sugar/glob';
  * __expandGlob('/something/*{2,4}/*.ts');

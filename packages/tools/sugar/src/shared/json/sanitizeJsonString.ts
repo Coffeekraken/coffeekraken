@@ -15,6 +15,8 @@
  *
  * @todo            tests
  *
+ * @snippet         __sanitizeJsonString($1)
+ * 
  * @example         js
  * import { __sanitizeJsonString } from '@coffeekraken/sugar/json';
  * __sanitizeJsonString('{"something": ""cool""}'); // => '{"something":"\"cool\""}'

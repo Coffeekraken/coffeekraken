@@ -1,2 +1,2 @@
-import __hashFrom from './hashFrom';
-export { __hashFrom };
+import __hashFromSync from './hashFromSync';
+export { __hashFromSync };

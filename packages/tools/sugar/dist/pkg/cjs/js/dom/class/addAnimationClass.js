@@ -18,7 +18,7 @@ const removeClassOnAnimationEnd_1 = __importDefault(require("./removeClassOnAnim
  * @param    {String|Array}    cls    The class or classes (Array) to apply
  * @return    {Promise<HTMLElement>}               A promise that will be resolved once the class have been removed and the animation finished
  *
- * @snippet         __addAnimationClass($1, $2);
+ * @snippet         __addAnimationClass($1, $2)
  *
  * @todo        tests
  *

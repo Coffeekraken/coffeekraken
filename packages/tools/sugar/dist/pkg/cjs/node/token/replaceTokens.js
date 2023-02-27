@@ -43,6 +43,8 @@ const replaceTokens_1 = __importDefault(require("../../shared/token/replaceToken
  * @param       {String}            string          The string you want to process
  * @return      {String}                            The processed string
  *
+ * @snippet         _replaceTokens($1)
+ *
  * @example         js
  * import { __replaceTokens } from '@coffeekraken/sugar/string';
  * __replaceTokens('Hello %packageJson.name, hope you are doing well (%packageRootDir)');
@@ -57,4 +59,4 @@ function replaceTokens(string) {
     return string;
 }
 exports.default = replaceTokens;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7O0FBQUEseURBQXlFO0FBQ3pFLG1EQUErRDtBQUMvRCxxRkFBcUU7QUFFckU7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0EyQ0c7QUFDSCxTQUF3QixhQUFhLENBQUMsTUFBYztJQUNoRCxNQUFNLEdBQUcsSUFBQSx1QkFBcUIsRUFBQyxNQUFNLENBQUMsQ0FBQztJQUN2QyxNQUFNLEdBQVcsSUFBQSwwQkFBbUIsRUFBQyxNQUFNLENBQUMsQ0FBQztJQUM3QyxNQUFNLEdBQUcsSUFBQSxvQ0FBMEIsRUFBQyxNQUFNLENBQUMsQ0FBQztJQUM1QyxPQUFPLE1BQU0sQ0FBQztBQUNsQixDQUFDO0FBTEQsZ0NBS0MifQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7O0FBQUEseURBQXlFO0FBQ3pFLG1EQUErRDtBQUMvRCxxRkFBcUU7QUFFckU7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQTZDRztBQUNILFNBQXdCLGFBQWEsQ0FBQyxNQUFjO0lBQ2hELE1BQU0sR0FBRyxJQUFBLHVCQUFxQixFQUFDLE1BQU0sQ0FBQyxDQUFDO0lBQ3ZDLE1BQU0sR0FBVyxJQUFBLDBCQUFtQixFQUFDLE1BQU0sQ0FBQyxDQUFDO0lBQzdDLE1BQU0sR0FBRyxJQUFBLG9DQUEwQixFQUFDLE1BQU0sQ0FBQyxDQUFDO0lBQzVDLE9BQU8sTUFBTSxDQUFDO0FBQ2xCLENBQUM7QUFMRCxnQ0FLQyJ9

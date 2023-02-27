@@ -1,7 +1,7 @@
 // @ts-nocheck
-import type { IScrollToSettings } from '../dom/scroll/scrollTo';
 import { __scrollToLocationHash } from '@coffeekraken/sugar/dom';
 import __deepMerge from '../../shared/object/deepMerge';
+import type { IScrollToSettings } from '../dom/scroll/scrollTo';
 
 /**
  * @name        smoothScrollOnHashChange
@@ -19,6 +19,8 @@ import __deepMerge from '../../shared/object/deepMerge';
  * @todo            interface
  * @todo            doc
  * @todo            tests
+ *
+ * @snippet         __smoothScrollOnHashChange()
  *
  * @example    js
  * import { __smoothScrollOnHashChange } from '@coffeekraken/sugar/feature'

@@ -30,6 +30,8 @@ import __throttle from '../../../shared/function/throttle';
  * @todo      doc
  * @todo      tests
  *
+ * @snippet         __splitLines($1)
+ *
  * @example 	js
  * import { __splitLines } from '@coffeekraken/sugar/dom'
  * const myCoolElement = document.querySelector('.my-cool-element');
@@ -57,9 +59,9 @@ export default function __splitLines(
     // apply again on resize
     window.addEventListener(
         'resize',
-        __throttle((e) => {
+        __throttle(150, (e) => {
             _splitLines(elm, settings);
-        }, 150),
+        }),
     );
 
     // first call

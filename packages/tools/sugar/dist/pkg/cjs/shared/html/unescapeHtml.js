@@ -17,6 +17,8 @@ const unescape_1 = __importDefault(require("unescape"));
  * @param       {String}            html            The html to unescape
  * @return      {String}                            The unescaped html
  *
+ * @snippet         __unescapeHtml($1)
+ *
  * @example         js
  * import { __unescapeHtml } from '@coffeekraken/sugar/html';
  * __unescapeHtml('&lt;s-code-example&gt;'); // => <s-code-example>
@@ -30,4 +32,4 @@ function __unescapeHtml(html) {
     return (0, unescape_1.default)(html);
 }
 exports.default = __unescapeHtml;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7O0FBQUEsd0RBQWtDO0FBRWxDOzs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQW9CRztBQUNILFNBQXdCLGNBQWMsQ0FBQyxJQUFJO0lBQ3ZDLGFBQWE7SUFDYixPQUFPLElBQUEsa0JBQVUsRUFBQyxJQUFJLENBQUMsQ0FBQztBQUM1QixDQUFDO0FBSEQsaUNBR0MifQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7O0FBQUEsd0RBQWtDO0FBRWxDOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBc0JHO0FBQ0gsU0FBd0IsY0FBYyxDQUFDLElBQUk7SUFDdkMsYUFBYTtJQUNiLE9BQU8sSUFBQSxrQkFBVSxFQUFDLElBQUksQ0FBQyxDQUFDO0FBQzVCLENBQUM7QUFIRCxpQ0FHQyJ9

@@ -7,7 +7,8 @@ import __isPlainObject from '../is/isPlainObject';
  * @platform            js
  * @platform            node
  * @status              beta
- *
+ * @private
+ * 
  * This function allows you to apply a certain scope on the passed object.
  * A scope can be for example the environment your object lives in like "production",
  * "development", etc...

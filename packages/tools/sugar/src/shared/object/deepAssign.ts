@@ -19,6 +19,8 @@ import __clone from './clone';
  * @param       {Object}          ...objects            Some objects you want to assign in the first one
  * @return      {Object}                                Return the reference to the first passed object
  *
+ * @snippet         __deepAssign($1, $2)
+ * 
  * @example         js
  * import { __deepAssign } from '@coffeekraken/sugar/object';
  * const obj1 = { something: 'cool' };

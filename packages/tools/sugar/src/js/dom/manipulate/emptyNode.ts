@@ -12,7 +12,7 @@
  * @param           {HTMLElement}         node          The node to empty
  * @return          {HTMLElement}                       The node that was passed to maintain chainability
  *
- * @snippet         __emptyNode($1);
+ * @snippet         __emptyNode($1)
  *
  * @todo      interface
  * @todo      doc

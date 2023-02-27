@@ -30,6 +30,8 @@ export { postcssUiThemeSwitcherInterface as interface };
  *
  * Apply the theme-switcher style to any s-theme-switcher element
  *
+ * @snippet         @sugar.ui.themeSwitcher($1);
+ * 
  * @example     css
  * .s-theme-switcher {
  *    @sugar.ui.themeSwitcher;

@@ -18,7 +18,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
  * @todo      doc
  * @todo      tests
  *
- * @snippet         __nodeToString($1);
+ * @snippet         __nodeToString($1)
  *
  * @example    js
  * import { __nodeToString } from '@coffeekraken/sugar/dom'

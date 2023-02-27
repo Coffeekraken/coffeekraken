@@ -4,7 +4,7 @@ import __hexToRgba from './hexToRgba';
 import __hslaToHex from './hslaToHex';
 import __hslaToHexa from './hslaToHexa';
 import __hslaToRgba from './hslaToRgba';
-import __parse from './parse';
+import __parseColor from './parseColor';
 import __parseHsla from './parseHsla';
 import __parseRgba from './parseRgba';
 import __rgbaToHex from './rgbaToHex';
@@ -17,7 +17,7 @@ export {
     __hslaToHex,
     __hslaToHexa,
     __hslaToRgba,
-    __parse,
+    __parseColor,
     __parseHsla,
     __parseRgba,
     __rgbaToHex,

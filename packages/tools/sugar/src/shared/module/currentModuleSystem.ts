@@ -13,6 +13,8 @@ import __isEsm from '../is/isEsm';
  *
  * @return      {('esm'|'cjs')}           The module system the code is running on
  *
+ * @snippet         __currentModuleSystem()
+ * 
  * @example       js
  * import { __currentModuleSystem } from '@coffeekraken/sugar/module';
  * __currentModuleSystem(); // => 'cjs'

@@ -13,6 +13,8 @@ import __unescape from 'unescape';
  * @param       {String}            html            The html to unescape
  * @return      {String}                            The unescaped html
  *
+ * @snippet         __unescapeHtml($1)
+ * 
  * @example         js
  * import { __unescapeHtml } from '@coffeekraken/sugar/html';
  * __unescapeHtml('&lt;s-code-example&gt;'); // => <s-code-example>

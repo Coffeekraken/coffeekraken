@@ -16,6 +16,8 @@
  * @todo      doc
  * @todo      tests
  *
+ * @snippet         __isChrome()
+ *
  * @example 	js
  * import { __isChrome } from '@coffeekraken/sugar/is'
  * if ( __isChrome()) {

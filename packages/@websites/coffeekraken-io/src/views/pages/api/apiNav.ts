@@ -2,7 +2,7 @@
 
 import __SLitComponent from '@coffeekraken/s-lit-component';
 import __SRequest from '@coffeekraken/s-request';
-import { __filter, __get } from '@coffeekraken/sugar/object';
+import { __filterObject, __get } from '@coffeekraken/sugar/object';
 import __set from '@coffeekraken/sugar/shared/object/set';
 import { html } from 'lit';
 
@@ -63,7 +63,7 @@ export class ApiNav extends __SLitComponent {
     const res = await request.send();
     const types = [];
 
-    res.data.map = __filter(res.data.map, (key, item) => {
+    res.data.map = __filterObject(res.data.map, (key, item) => {
       const supportedTypes = [
         'function',
         'class',

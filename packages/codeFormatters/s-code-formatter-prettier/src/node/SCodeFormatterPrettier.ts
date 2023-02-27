@@ -1,7 +1,7 @@
 import type {
     ISCodeFormatterFormatter,
     ISCodeFormatterFormatterMetas,
-    ISCodeFormatterFormatterResult,
+    ISCodeFormatterFormatterResult
 } from '@coffeekraken/s-code-formatter';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
 import * as __prettier from 'prettier';
@@ -13,7 +13,8 @@ import * as __prettier from 'prettier';
  * @extends             SClass
  * @platform            node
  * @status              beta
- *
+ * @private 
+ * 
  * This represent the prettier code formatter. It will format things like js, jsx, ts, tsx, json, css, less, scss, md, vue, hbs, php and html
  *
  * @since           2.0.0

@@ -20,6 +20,8 @@ import __toRegex from 'to-regex';
  * @todo      doc
  * @todo      tests
  *
+ * @snippet         __dedupe($1, $2)
+ * 
  * @example       js
  * import { __dedupe } from '@coffeekraken/sugar/string';
  * __dedupe('hello world hello your', 'hello'); // => hello world your

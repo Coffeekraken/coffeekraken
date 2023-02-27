@@ -13,7 +13,7 @@
  * @param 		{HTMLElement} 				refElm 		The element in which to prepend the new element
  * @return    {HTMLElement}               The prepended element
  *
- * @snippet         __prependChild($1, $2);
+ * @snippet         __prependChild($1, $2)
  *
  * @todo      interface
  * @todo      doc

@@ -14,6 +14,8 @@ import __commonProgrammingFileExtensions from './commonProgrammingFileExtensions
  * @param       {Boolean}           withDot          If true, the dot will be added to the extension
  * @return     {Array<String>}                           The array of extensions
  *
+ * @snippet         __commonTextFileExtensions()
+ * 
  * @example         js
  * import { __commonTextFileExtensions } from '@coffeekraken/sugar/extension';
  * const extensions = __commonTextFileExtensions();

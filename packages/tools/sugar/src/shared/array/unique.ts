@@ -14,6 +14,8 @@
  * @param         {Array}         array               The array to deduplicates
  * @return        {Array}                             The deduplicated array
  *
+ * @snippet         __unique($1)
+ * 
  * @example         js
  * import { __unique } from '@coffeekraken/sugar/array';
  * __unique(['hello','world','hello','world']); // => ['hello','world']

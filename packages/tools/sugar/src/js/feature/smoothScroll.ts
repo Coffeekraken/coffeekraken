@@ -1,11 +1,11 @@
 // @ts-nocheck
-import type { IScrollToSettings } from '../dom/scroll/scrollTo';
 import __deepMerge from '../../shared/object/deepMerge';
+import type { IScrollToSettings } from '../dom/scroll/scrollTo';
 
 import {
     __smoothScrollOnAnchorLinks,
-    __smoothScrollOnPageLoad,
     __smoothScrollOnHashChange,
+    __smoothScrollOnPageLoad,
 } from '@coffeekraken/sugar/feature';
 
 /**
@@ -28,6 +28,8 @@ import {
  * @todo            interface
  * @todo            doc
  * @todo            tests
+ *
+ * @snippet         __smoothScroll()
  *
  * @example    js
  * import { __smoothScroll } from '@coffeekraken/sugar/feature'

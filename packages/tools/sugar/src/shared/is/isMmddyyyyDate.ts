@@ -18,6 +18,8 @@
  * @todo      doc
  * @todo      tests
  *
+ * @snippet         __isMmddyyyyDate($1)
+ * 
  * @example    js
  * import { __isMmddyyyyDate } from '@coffeekraken/sugar/is'
  * if (__isMmddyyyyDate('12.25.2018')) {

@@ -14,6 +14,9 @@ import __fs from 'fs-extra';
  * @param       {String}              path           The file/directory path to delete
  * @return      {Promise}                           A promise that will be resolved when the remove is completed
  *
+ * @snippet         __remove($1)
+ * await __remove($1)
+ * 
  * @example       js
  * import { __remove } from '@coffeekraken/sugar/fs';
  * await __remove('my/cool/file.json').then(() => {

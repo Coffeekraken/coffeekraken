@@ -12,6 +12,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
  *
  * @return      {Boolean}           true if the current system is esm
  *
+ * @snippet         __isCjs()
+ *
  * @example       js
  * import { __isCjs } from '@coffeekraken/sugar/is';
  * __isCjs(); // => true
@@ -23,4 +25,4 @@ function __isCjs() {
     return typeof module !== 'undefined';
 }
 exports.default = __isCjs;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7O0FBQUE7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQWtCRztBQUNILFNBQXdCLE9BQU87SUFDM0IsT0FBTyxPQUFPLE1BQU0sS0FBSyxXQUFXLENBQUM7QUFDekMsQ0FBQztBQUZELDBCQUVDIn0=
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7O0FBQUE7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBb0JHO0FBQ0gsU0FBd0IsT0FBTztJQUMzQixPQUFPLE9BQU8sTUFBTSxLQUFLLFdBQVcsQ0FBQztBQUN6QyxDQUFDO0FBRkQsMEJBRUMifQ==

@@ -16,9 +16,11 @@ import __composerPath from './composerPath';
  * @param       {IPackageJson}      [settings={}]       Some settings to configure your process
  * @return      {JSON}                      The package.json content
  *
+ * @snippet         __composerJson($1)
+ *
  * @example         js
- * import { __packageJson } from '@coffeekraken/sugar/composer`;
- * __packageJson('lodash');
+ * import { __composerJson } from '@coffeekraken/sugar/composer`;
+ * __composerJson('lodash');
  *
  * @todo        Implement a cache strategy to avoid making same process again and again
  *

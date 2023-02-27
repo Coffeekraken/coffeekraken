@@ -16,6 +16,8 @@
  * @todo      doc
  * @todo      tests
  *
+ * @snippet         __isBrowser()
+ * 
  * @example    js
  * import { __isBrowser } from '@coffeekraken/sugar/is'
  * if (__isBrowser() {

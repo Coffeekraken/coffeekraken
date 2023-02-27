@@ -30,6 +30,8 @@ export { postcssUiRatingInterface as interface };
  *
  * Apply the datetime picker style to any s-rating element
  *
+ * @snippet         @sugar.ui.rating($1);
+ * 
  * @example     css
  * .s-rating {
  *    @sugar.ui.rating;

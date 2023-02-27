@@ -1,7 +1,7 @@
 // @ts-nocheck
 
 import __deepMerge from '../object/deepMerge';
-import __countLine from './countLine';
+import __countLineChars from './countLineChars';
 
 /**
  * @name                                        crop
@@ -24,6 +24,8 @@ import __countLine from './countLine';
  * @todo      doc
  * @todo      tests
  *
+ * @snippet         __crop($1, $2)
+ * 
  * @example         js
  * import { __crop } from '@coffeekraken/sugar/string';
  * __crop('Hello World', 10); // => Hello w...
@@ -83,9 +85,9 @@ export default function __crop(text, length, settings = {}) {
                     currentWord += c;
                 } else {
                     if (
-                        __countLine(result) +
-                            __countLine(currentWord) +
-                            __countLine(settings.chars) <=
+                        __countLineChars(result) +
+                            __countLineChars(currentWord) +
+                            __countLineChars(settings.chars) <=
                         length
                     ) {
                         result += currentWord;

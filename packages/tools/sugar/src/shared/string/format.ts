@@ -20,6 +20,8 @@ import { format } from 'fecha';
  * @todo      doc
  * @todo      tests
  *
+ * @snippet         __format($1, $2)
+ * 
  * @example    js
  * import { __format } from '@coffeekraken/sugar/string'
  *

@@ -1,7 +1,7 @@
 import __SDocmap from '@coffeekraken/s-docmap';
 import { ISSitemapBuilderResultItem } from '@coffeekraken/s-sitemap-builder';
 import { __dirname } from '@coffeekraken/sugar/fs';
-import { __hashFrom } from '@coffeekraken/sugar/hash';
+import { __hashFromSync } from '@coffeekraken/sugar/hash';
 import __fs from 'fs';
 import __path from 'path';
 
@@ -11,7 +11,7 @@ export default function apiSitemap() {
         const docmapJson = await docmap.read();
         const hashesByPath = {};
 
-        const envHash = __hashFrom([
+        const envHash = __hashFromSync([
             '@coffeekraken/sugar',
             __path.resolve(__dirname(), '../../views'),
         ]);
@@ -34,7 +34,7 @@ export default function apiSitemap() {
                     );
                 } else {
                     // @ts-ignore
-                    hash = __hashFrom([envHash, docmapObj.path]);
+                    hash = __hashFromSync([envHash, docmapObj.path]);
                     // save in stack
                     // @ts-ignore
                     hashesByPath[docmapObj.path] = hash;

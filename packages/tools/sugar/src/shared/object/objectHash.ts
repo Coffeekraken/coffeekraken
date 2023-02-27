@@ -15,6 +15,8 @@ import __hashSum from 'hash-sum';
  * @param           {IObjectHashSettings}       [settings={}]       Some settings to configure your hash generation process
  * @return          {String}                            The calculated folder hash
  *
+ * @snippet             __objectHash($1)
+ * 
  * @example         js
  * import { __objectHash } from '@coffeekraken/sugar/object';
  * __objectHash('my/cool/folder'); // => YZOrKDx9LCLd8X39PoFTflXGpRU=,

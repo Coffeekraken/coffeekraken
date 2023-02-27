@@ -3,7 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.__watch = exports.__toQueryString = exports.__toPlainObject = exports.__toJson = exports.__SWatch = exports.__sortDeep = exports.__sort = exports.__set = exports.__propertyProxy = exports.__objectHash = exports.__merge = exports.__map = exports.__getKeyByValue = exports.__getGlob = exports.__get = exports.__flatten = exports.__filter = exports.__extractValues = exports.__ensureExists = exports.__diff = exports.__delete = exports.__deepProxy = exports.__deepMerge = exports.__deepMap = exports.__deepize = exports.__deepAssign = exports.__decycle = exports.__clone = exports.__camelCaseProps = exports.__applyScope = void 0;
+exports.__watch = exports.__toQueryString = exports.__toPlainObject = exports.__toJson = exports.__SWatch = exports.__sortDeep = exports.__sort = exports.__set = exports.__propertyProxy = exports.__objectHash = exports.__merge = exports.__map = exports.__getKeyByValue = exports.__getGlob = exports.__get = exports.__flatten = exports.__filterObject = exports.__extractValues = exports.__ensurePropertyExists = exports.__diff = exports.__deleteProperty = exports.__deepProxy = exports.__deepMerge = exports.__deepMap = exports.__deepize = exports.__deepAssign = exports.__decycle = exports.__clone = exports.__camelCaseProps = exports.__applyScope = void 0;
 const applyScope_1 = __importDefault(require("./applyScope"));
 exports.__applyScope = applyScope_1.default;
 const camelCaseProps_1 = __importDefault(require("./camelCaseProps"));
@@ -22,16 +22,16 @@ const deepMerge_1 = __importDefault(require("./deepMerge"));
 exports.__deepMerge = deepMerge_1.default;
 const deepProxy_1 = __importDefault(require("./deepProxy"));
 exports.__deepProxy = deepProxy_1.default;
-const delete_1 = __importDefault(require("./delete"));
-exports.__delete = delete_1.default;
+const deleteProperty_1 = __importDefault(require("./deleteProperty"));
+exports.__deleteProperty = deleteProperty_1.default;
 const diff_1 = __importDefault(require("./diff"));
 exports.__diff = diff_1.default;
-const ensureExists_1 = __importDefault(require("./ensureExists"));
-exports.__ensureExists = ensureExists_1.default;
+const ensurePropertyExists_1 = __importDefault(require("./ensurePropertyExists"));
+exports.__ensurePropertyExists = ensurePropertyExists_1.default;
 const extractValues_1 = __importDefault(require("./extractValues"));
 exports.__extractValues = extractValues_1.default;
-const filter_1 = __importDefault(require("./filter"));
-exports.__filter = filter_1.default;
+const filterObject_1 = __importDefault(require("./filterObject"));
+exports.__filterObject = filterObject_1.default;
 const flatten_1 = __importDefault(require("./flatten"));
 exports.__flatten = flatten_1.default;
 const get_1 = __importDefault(require("./get"));
@@ -64,4 +64,4 @@ const toQueryString_1 = __importDefault(require("./toQueryString"));
 exports.__toQueryString = toQueryString_1.default;
 const watch_1 = __importDefault(require("./watch"));
 exports.__watch = watch_1.default;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7OztBQUFBLDhEQUF3QztBQWdDcEMsdUJBaENHLG9CQUFZLENBZ0NIO0FBL0JoQixzRUFBZ0Q7QUFnQzVDLDJCQWhDRyx3QkFBZ0IsQ0FnQ0g7QUEvQnBCLG9EQUE4QjtBQWdDMUIsa0JBaENHLGVBQU8sQ0FnQ0g7QUEvQlgsd0RBQWtDO0FBZ0M5QixvQkFoQ0csaUJBQVMsQ0FnQ0g7QUEvQmIsOERBQXdDO0FBZ0NwQyx1QkFoQ0csb0JBQVksQ0FnQ0g7QUEvQmhCLHdEQUFrQztBQWdDOUIsb0JBaENHLGlCQUFTLENBZ0NIO0FBL0JiLHdEQUFrQztBQWdDOUIsb0JBaENHLGlCQUFTLENBZ0NIO0FBL0JiLDREQUFzQztBQWdDbEMsc0JBaENHLG1CQUFXLENBZ0NIO0FBL0JmLDREQUFzQztBQWdDbEMsc0JBaENHLG1CQUFXLENBZ0NIO0FBL0JmLHNEQUFnQztBQWdDNUIsbUJBaENHLGdCQUFRLENBZ0NIO0FBL0JaLGtEQUE0QjtBQWdDeEIsaUJBaENHLGNBQU0sQ0FnQ0g7QUEvQlYsa0VBQTRDO0FBZ0N4Qyx5QkFoQ0csc0JBQWMsQ0FnQ0g7QUEvQmxCLG9FQUE4QztBQWdDMUMsMEJBaENHLHVCQUFlLENBZ0NIO0FBL0JuQixzREFBZ0M7QUFnQzVCLG1CQWhDRyxnQkFBUSxDQWdDSDtBQS9CWix3REFBa0M7QUFnQzlCLG9CQWhDRyxpQkFBUyxDQWdDSDtBQS9CYixnREFBMEI7QUFnQ3RCLGdCQWhDRyxhQUFLLENBZ0NIO0FBL0JULHdEQUFrQztBQWdDOUIsb0JBaENHLGlCQUFTLENBZ0NIO0FBL0JiLG9FQUE4QztBQWdDMUMsMEJBaENHLHVCQUFlLENBZ0NIO0FBL0JuQixnREFBMEI7QUFnQ3RCLGdCQWhDRyxhQUFLLENBZ0NIO0FBL0JULG9EQUE4QjtBQWdDMUIsa0JBaENHLGVBQU8sQ0FnQ0g7QUEvQlgsOERBQXdDO0FBZ0NwQyx1QkFoQ0csb0JBQVksQ0FnQ0g7QUEvQmhCLG9FQUE4QztBQWdDMUMsMEJBaENHLHVCQUFlLENBZ0NIO0FBL0JuQixnREFBMEI7QUFnQ3RCLGdCQWhDRyxhQUFLLENBZ0NIO0FBL0JULGtEQUE0QjtBQWdDeEIsaUJBaENHLGNBQU0sQ0FnQ0g7QUEvQlYsMERBQW9DO0FBZ0NoQyxxQkFoQ0csa0JBQVUsQ0FnQ0g7QUEvQmQsc0RBQWdDO0FBZ0M1QixtQkFoQ0csZ0JBQVEsQ0FnQ0g7QUEvQlosc0RBQWdDO0FBZ0M1QixtQkFoQ0csZ0JBQVEsQ0FnQ0g7QUEvQlosb0VBQThDO0FBZ0MxQywwQkFoQ0csdUJBQWUsQ0FnQ0g7QUEvQm5CLG9FQUE4QztBQWdDMUMsMEJBaENHLHVCQUFlLENBZ0NIO0FBL0JuQixvREFBOEI7QUFnQzFCLGtCQWhDRyxlQUFPLENBZ0NIIn0=
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7OztBQUFBLDhEQUF3QztBQWdDcEMsdUJBaENHLG9CQUFZLENBZ0NIO0FBL0JoQixzRUFBZ0Q7QUFnQzVDLDJCQWhDRyx3QkFBZ0IsQ0FnQ0g7QUEvQnBCLG9EQUE4QjtBQWdDMUIsa0JBaENHLGVBQU8sQ0FnQ0g7QUEvQlgsd0RBQWtDO0FBZ0M5QixvQkFoQ0csaUJBQVMsQ0FnQ0g7QUEvQmIsOERBQXdDO0FBZ0NwQyx1QkFoQ0csb0JBQVksQ0FnQ0g7QUEvQmhCLHdEQUFrQztBQWdDOUIsb0JBaENHLGlCQUFTLENBZ0NIO0FBL0JiLHdEQUFrQztBQWdDOUIsb0JBaENHLGlCQUFTLENBZ0NIO0FBL0JiLDREQUFzQztBQWdDbEMsc0JBaENHLG1CQUFXLENBZ0NIO0FBL0JmLDREQUFzQztBQWdDbEMsc0JBaENHLG1CQUFXLENBZ0NIO0FBL0JmLHNFQUFnRDtBQWdDNUMsMkJBaENHLHdCQUFnQixDQWdDSDtBQS9CcEIsa0RBQTRCO0FBZ0N4QixpQkFoQ0csY0FBTSxDQWdDSDtBQS9CVixrRkFBNEQ7QUFnQ3hELGlDQWhDRyw4QkFBc0IsQ0FnQ0g7QUEvQjFCLG9FQUE4QztBQWdDMUMsMEJBaENHLHVCQUFlLENBZ0NIO0FBL0JuQixrRUFBNEM7QUFnQ3hDLHlCQWhDRyxzQkFBYyxDQWdDSDtBQS9CbEIsd0RBQWtDO0FBZ0M5QixvQkFoQ0csaUJBQVMsQ0FnQ0g7QUEvQmIsZ0RBQTBCO0FBZ0N0QixnQkFoQ0csYUFBSyxDQWdDSDtBQS9CVCx3REFBa0M7QUFnQzlCLG9CQWhDRyxpQkFBUyxDQWdDSDtBQS9CYixvRUFBOEM7QUFnQzFDLDBCQWhDRyx1QkFBZSxDQWdDSDtBQS9CbkIsZ0RBQTBCO0FBZ0N0QixnQkFoQ0csYUFBSyxDQWdDSDtBQS9CVCxvREFBOEI7QUFnQzFCLGtCQWhDRyxlQUFPLENBZ0NIO0FBL0JYLDhEQUF3QztBQWdDcEMsdUJBaENHLG9CQUFZLENBZ0NIO0FBL0JoQixvRUFBOEM7QUFnQzFDLDBCQWhDRyx1QkFBZSxDQWdDSDtBQS9CbkIsZ0RBQTBCO0FBZ0N0QixnQkFoQ0csYUFBSyxDQWdDSDtBQS9CVCxrREFBNEI7QUFnQ3hCLGlCQWhDRyxjQUFNLENBZ0NIO0FBL0JWLDBEQUFvQztBQWdDaEMscUJBaENHLGtCQUFVLENBZ0NIO0FBL0JkLHNEQUFnQztBQWdDNUIsbUJBaENHLGdCQUFRLENBZ0NIO0FBL0JaLHNEQUFnQztBQWdDNUIsbUJBaENHLGdCQUFRLENBZ0NIO0FBL0JaLG9FQUE4QztBQWdDMUMsMEJBaENHLHVCQUFlLENBZ0NIO0FBL0JuQixvRUFBOEM7QUFnQzFDLDBCQWhDRyx1QkFBZSxDQWdDSDtBQS9CbkIsb0RBQThCO0FBZ0MxQixrQkFoQ0csZUFBTyxDQWdDSCJ9

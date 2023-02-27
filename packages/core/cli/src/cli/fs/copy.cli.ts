@@ -13,7 +13,7 @@ export default (stringArgs = '') => {
         let files = [finalParams.src];
 
         if (finalParams.glob) {
-            const paths = __SGlob.resolve(finalParams.glob, {
+            const paths = __SGlob.resolveSync(finalParams.glob, {
                 cwd: finalParams.src,
                 nodir: false,
             });

@@ -112,7 +112,7 @@ declare class SFile extends __SClass implements ISFile {
     
     extension: any;
     
-    constructor(filepath: string, settings?: ISFileSettings);
+    constructor(filepath: string, settings?: Partial<ISFileSettings>);
     
     get hash(): any;
     

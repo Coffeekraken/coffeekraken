@@ -14,6 +14,9 @@ import __fs from 'fs';
  * @param       {String}           path            The json file path to read
  * @return      {Object}                            The readed json
  *
+ * @snippet         __readJson($1)
+ * await __readJson($1)
+ * 
  * @example         js
  * import { __readJson } from '@coffeekraken/sugar/fs';
  * await __readJson('my-cool-json/file.json');

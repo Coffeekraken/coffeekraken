@@ -16,6 +16,8 @@ const isCjs_1 = __importDefault(require("./isCjs"));
  *
  * @return      {Boolean}           true if the current system is esm
  *
+ * @snippet         __isEsm()
+ *
  * @example       js
  * import { __isEsm } from '@coffeekraken/sugar/is';
  * __isEsm(); // => true
@@ -27,4 +29,4 @@ function __isEsm() {
     return !(0, isCjs_1.default)();
 }
 exports.default = __isEsm;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7O0FBQUEsb0RBQThCO0FBRTlCOzs7Ozs7Ozs7Ozs7Ozs7Ozs7R0FrQkc7QUFDSCxTQUF3QixPQUFPO0lBQzNCLE9BQU8sQ0FBQyxJQUFBLGVBQU8sR0FBRSxDQUFDO0FBQ3RCLENBQUM7QUFGRCwwQkFFQyJ9
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7O0FBQUEsb0RBQThCO0FBRTlCOzs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQW9CRztBQUNILFNBQXdCLE9BQU87SUFDM0IsT0FBTyxDQUFDLElBQUEsZUFBTyxHQUFFLENBQUM7QUFDdEIsQ0FBQztBQUZELDBCQUVDIn0=

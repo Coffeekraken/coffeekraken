@@ -15,6 +15,8 @@ import __unique from './unique';
  * @param    {Array}    keys    The keys to start the array with
  * @return    {Array}    The processed array
  *
+ * @snippet         __keysFirst($1, $2)
+ * 
  * @example    js
  * import { __keysFirst } from '@coffeekraken/sugar/array'
  * __keysFirst(['a','b','d','g','c'], ['d','g'])

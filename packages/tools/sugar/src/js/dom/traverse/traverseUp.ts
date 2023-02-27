@@ -17,6 +17,11 @@
  * @todo      doc
  * @todo      tests
  *
+ * @snippet         __traverseUp($1, $2)
+ * __traverseUp($1, \$elm => {
+ *      $2
+ * });
+ *
  * @example  	js
  * import { __traverseUp } from '@coffeekraken/sugar/dom'
  * const $elm = __traverseUp($myElement, elm => {

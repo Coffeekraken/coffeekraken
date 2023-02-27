@@ -19,7 +19,7 @@ import { __whenLinkLoaded } from '@coffeekraken/sugar/dom';
  *
  * @todo      tests
  *
- * @snippet         __whenStylesheetsReady($1);
+ * @snippet         __whenStylesheetsReady($1)
  * __whenStylesheetsReady($1).then(stylesheets => {
  *      $2
  * });

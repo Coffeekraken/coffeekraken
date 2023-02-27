@@ -17,6 +17,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
  * @todo      doc
  * @todo      tests
  *
+ * @snippet         __isDomNode($1)
+ *
  * @example    js
  * import { __isDomNode } from '@coffeekraken/sugar/dom'
  * __isDomNode($myElement);
@@ -34,4 +36,4 @@ function __isDomNode(element) {
             typeof element.nodeName === 'string';
 }
 exports.default = __isDomNode;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOztBQUVkOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQXVCRztBQUNILFNBQXdCLFdBQVcsQ0FBQyxPQUFZO0lBQzVDLE9BQU8sT0FBTyxJQUFJLEtBQUssUUFBUTtRQUMzQixDQUFDLENBQUMsT0FBTyxZQUFZLElBQUk7UUFDekIsQ0FBQyxDQUFDLE9BQU87WUFDSCxPQUFPLE9BQU8sS0FBSyxRQUFRO1lBQzNCLE9BQU8sT0FBTyxDQUFDLFFBQVEsS0FBSyxRQUFRO1lBQ3BDLE9BQU8sT0FBTyxDQUFDLFFBQVEsS0FBSyxRQUFRLENBQUM7QUFDbkQsQ0FBQztBQVBELDhCQU9DIn0=
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOztBQUVkOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBeUJHO0FBQ0gsU0FBd0IsV0FBVyxDQUFDLE9BQVk7SUFDNUMsT0FBTyxPQUFPLElBQUksS0FBSyxRQUFRO1FBQzNCLENBQUMsQ0FBQyxPQUFPLFlBQVksSUFBSTtRQUN6QixDQUFDLENBQUMsT0FBTztZQUNILE9BQU8sT0FBTyxLQUFLLFFBQVE7WUFDM0IsT0FBTyxPQUFPLENBQUMsUUFBUSxLQUFLLFFBQVE7WUFDcEMsT0FBTyxPQUFPLENBQUMsUUFBUSxLQUFLLFFBQVEsQ0FBQztBQUNuRCxDQUFDO0FBUEQsOEJBT0MifQ==

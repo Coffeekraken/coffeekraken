@@ -1,6 +1,6 @@
 import __SLitComponent from '@coffeekraken/s-lit-component';
 
-import { __delete, __get, __set } from '@coffeekraken/sugar/object';
+import { __deleteProperty, __get, __set } from '@coffeekraken/sugar/object';
 
 import { define as __SAssetPickerComponentDefine } from '@coffeekraken/s-asset-picker-component';
 import { define as __SDropzoneComponentDefine } from '@coffeekraken/s-dropzone-component';
@@ -49,7 +49,8 @@ export interface ISSpecsEditorComponentProps {
  * @menu                Styleguide / UI              /styleguide/ui/s-clipboard-copy
  * @platform            html
  * @status              beta
- *
+ * @private
+ * 
  * This component represent a simple, fully features "specs" (properties) editor. With it you will be able to pass it a `.spec.json` object
  * and it will build for you a complete editor
  *
@@ -68,12 +69,16 @@ export interface ISSpecsEditorComponentProps {
  *
  * @todo            documentation
  *
+ * @import          import { define as __SSpecsEditorComponentDefine } from '@coffeekraken/s-clipboard-copy-component';
+ * 
+ * @snippet         __SSpecsEditorComponentDegine($1)
+ * 
  * @install           shell
  * npm i @coffeekraken/s-clipboard-copy-component
  *
  * @install           js
- * import { define } from '@coffeekraken/s-clipboard-copy-component';
- * define();
+ * import { define as __SSpecsEditorComponentDefine } from '@coffeekraken/s-clipboard-copy-component';
+ * __SSpecsEditorComponentDefine();
  *
  * @example         html        Copy from an input
  * <div class="s-flex:align-center">
@@ -236,10 +241,10 @@ export default class SSpecsEditorComponent extends __SLitComponent {
                 media: this.props.media,
                 ...(settings ?? {}),
             });
-            __delete(this.props.specs.values ?? {}, valuePath.join('.'));
+            __deleteProperty(this.props.specs.values ?? {}, valuePath.join('.'));
         } else {
             const valuePath = path.filter((p) => p !== 'props').join('.');
-            __delete(this.props.specs.values, valuePath);
+            __deleteProperty(this.props.specs.values, valuePath);
         }
 
         this._update(path);
@@ -305,7 +310,7 @@ export default class SSpecsEditorComponent extends __SLitComponent {
                 default:
                     // @TODO            check to handle "default" in render part and not here...
                     // if (finalValue === propSpecs.default) {
-                    //     __delete(this.props.specs.values, valuePath);
+                    //     __deleteProperty(this.props.specs.values, valuePath);
                     // } else {
                     this.setValueFromPath(path, finalValue);
                     // }

@@ -38,6 +38,8 @@ import { decycle } from 'json-cyclic';
  * @todo      doc
  * @todo      tests
  *
+ * @snippet         __toString($1)
+ * 
  * @example    js
  * import { __toString } from '@coffeekraken/sugar/string'
  * __toString({

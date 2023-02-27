@@ -18,6 +18,8 @@
  * @todo      doc
  * @todo      tests
  *
+ * @snippet         __pad($1, $2)
+ * 
  * @example    js
  * import { __pad } from '@coffeekraken/sugar/number'
  * __pad(123, 4) // 0123

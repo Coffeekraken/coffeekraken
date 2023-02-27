@@ -19,6 +19,9 @@ import __fs from 'fs';
  * @setting         {Boolean}       [file=true]         Specify if you want to take care of files
  * @setting         {Boolean}       [symlink=true]      Specify if you want to take care of symlinks
  *
+ * @snippet         __exists($1)
+ * await __exists($1)
+ *
  * @example         js
  * import { __exists } from '@coffeekraken/sugar/fs';
  *  __exists('/something/cool.txt'); // => true

@@ -66,6 +66,8 @@ function _decodeHtml(html) {
  * @todo      doc
  * @todo      tests
  *
+ * @snippet         __splitLetters($1)
+ *
  * @example 	js
  * import { __splitLetters } from '@coffeekraken/sugar/dom'
  * const myCoolElement = document.querySelector('.my-cool-element');

@@ -14,6 +14,8 @@ import __expandPleasantCssClassname from './expandPleasantCssClassname';
  * @param     {String}          html          The HTML to process. It can be actually any string values like .vue file, etc...
  * @return    {String}                      The processed string with converted classnames
  *
+ * @snippet         __expandPleasantCssClassnames($1)
+ * 
  * @example         js
  * import { __expandPleasantCssClassnames } from '@coffeekraken/sugar/html';
  * __expandPleasantCssClassnames('...');

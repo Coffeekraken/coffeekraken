@@ -17,7 +17,7 @@ import __uniqid from '../../../js/string/uniqid';
  * @setting         {String}        id          An id for the injected style tag
  * @setting         {HTMLElement}   [rootNode=undefined]        A node in which to inject the style
  *
- * @snippet         __injectStyle($1);
+ * @snippet         __injectStyle($1)
  *
  * @todo        tests
  *

@@ -21,6 +21,24 @@ export interface IPostcssUiClipboardCopyClassesParams {
 
 export { postcssUiClipboardCopyClassesInterface as interface };
 
+/**
+ * @name                 classes
+ * @namespace            node.postcss.mixins.ui.clipboardCopy
+ * @type                 PostcssMixin
+ * @platform            css
+ * @status              beta
+ * 
+ * This mixin represent a clipboard copy
+ *
+ * @snippet      @sugar.ui.clipboardCopy.classes($1);
+ *
+ * @example        css
+ * \@sugar.ui.clipboardCopy.classes;
+ * 
+ * @since    2.0.0
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+ */
+
 export default function ({
     params,
     atRule,

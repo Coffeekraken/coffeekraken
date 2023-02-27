@@ -21,6 +21,8 @@ import {
  * @todo      doc
  * @todo      tests
  *
+ * @snippet         __getTransformProperties($1)
+ *
  * @example  	js
  * import getTransformProperties from '@coffeekraken/sugar/js/dom/getTransformProperties'
  * const props = getTransformProperties(myCoolHTMLElement);

@@ -8,9 +8,9 @@ import __deepMerge from '../../shared/object/deepMerge';
  * @name            scrapeUrl
  * @namespace       node.og
  * @type            Function
- * @async
  * @platform        node
  * @status          beta
+ * @async
  *
  * This function allows you to scrape a url and get back the open graph metadata
  * like "ogTitle", "ogDescription", etc...
@@ -28,9 +28,12 @@ import __deepMerge from '../../shared/object/deepMerge';
  *
  * @todo          tests
  *
+ * @snippet         __scrapUrl($1)
+ * await __scrapUrl($1)
+ * 
  * @example         js
- * import scrapeUrl from '@coffeekraken/sugar/node/og/scrapeUrl';
- * await scrapeUrl('https://www.npmjs.com/package/open-graph-scraper');
+ * import { __scrapeUrl } from '@coffeekraken/sugar/og';
+ * await __scrapeUrl('https://www.npmjs.com/package/open-graph-scraper');
  *
  * @see         https://www.npmjs.com/package/open-graph-scraper
  * @since       2.0.0

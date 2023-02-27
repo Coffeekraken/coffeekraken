@@ -1,7 +1,7 @@
-import __packageRootDir from '../path/packageRootDir';
-import __glob from 'glob-all';
 import __fs from 'fs';
+import __glob from 'glob-all';
 import __unique from '../../shared/array/unique';
+import __packageRootDir from '../path/packageRootDir';
 
 /**
  * @name        listNodeModulesPackages
@@ -17,9 +17,11 @@ import __unique from '../../shared/array/unique';
  * @param       {IListNodeModulesPackagesSettings}      [settings={}]       Specify some settings for your listing process
  * @return      {Record<string, IPackageJson}            An object containing each modules under the module name as key
  *
+ * @snippet         __listNodeModulesPackages()
+ * 
  * @example         js
- * import listNodeModulesPackages from '@coffeekraken/sugar/node/npm/listNodeModulesPackages';
- * listNodeModulesPackages();
+ * import { __listNodeModulesPackages } from '@coffeekraken/sugar/node/npm/listNodeModulesPackages';
+ * __listNodeModulesPackages();
  *
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)

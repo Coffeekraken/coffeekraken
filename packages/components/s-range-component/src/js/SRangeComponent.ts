@@ -33,12 +33,16 @@ import __css from '../../../../src/css/s-range.css'; // relative to /dist/pkg/es
  * @support         safari
  * @support         edge
  *
+ * @import          import { define as __SRangeComponentDefine } from '@coffeekraken/s-range-component';
+ * 
+ * @snippet         __SRangeComponentDefine($1)
+ * 
  * @install          bash
  * npm i @coffeekraken/s-range-component
  *
  * @install         js
- * import { define } from '@coffeekraken/s-range-component';
- * define();
+ * import { define as __SRangeComponentDefine } from '@coffeekraken/s-range-component';
+ * __SRangeComponentDefine();
  *
  * @example         html        Simple range
  * <s-range name="myCoolRange" value="90" class="s-color:accent s-mbe:30"></s-range>

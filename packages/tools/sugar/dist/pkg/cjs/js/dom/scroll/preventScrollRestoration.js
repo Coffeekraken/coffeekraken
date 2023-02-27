@@ -9,6 +9,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
  *
  * Function that set the `history.scrollRestoration` property to `manual`
  *
+ * @snippet         __preventScrollRestoration()
+ *
  * @example 	js
  * import { __preventScrolLRestoration } from '@coffeekraken/sugar/dom'
  * __preventScrollRestoration();
@@ -23,4 +25,4 @@ function default_1() {
     }
 }
 exports.default = default_1;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7O0FBQUE7Ozs7Ozs7Ozs7Ozs7OztHQWVHO0FBQ0g7SUFDSSxJQUFJLG1CQUFtQixJQUFJLE9BQU8sRUFBRTtRQUNoQyxtQ0FBbUM7UUFDbkMsT0FBTyxDQUFDLGlCQUFpQixHQUFHLFFBQVEsQ0FBQztLQUN4QztBQUNMLENBQUM7QUFMRCw0QkFLQyJ9
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7O0FBQUE7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBaUJHO0FBQ0g7SUFDSSxJQUFJLG1CQUFtQixJQUFJLE9BQU8sRUFBRTtRQUNoQyxtQ0FBbUM7UUFDbkMsT0FBTyxDQUFDLGlCQUFpQixHQUFHLFFBQVEsQ0FBQztLQUN4QztBQUNMLENBQUM7QUFMRCw0QkFLQyJ9

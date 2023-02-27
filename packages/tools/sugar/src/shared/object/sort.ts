@@ -18,6 +18,11 @@
  * @todo      doc
  * @todo      tests
  *
+ * @snippet         __sort($1, $2)
+ * __sort($1, (a, b) => {
+ *      $2
+ * })
+ * 
  * @example               js
  * import { __sort } from '@coffeekraken/sugar/object';
  * __sort({

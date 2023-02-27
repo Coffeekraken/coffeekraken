@@ -12,6 +12,8 @@
  * @param           {String}            path                The file path to get the extension from
  * @return          {String}                                The file extension
  *
+ * @snippet         __extension($1)
+ *
  * @example         js
  * import { __extension } from '@coffeekraken/sugar/fs';
  * __extension('hello/world.jpg'); // => jpg

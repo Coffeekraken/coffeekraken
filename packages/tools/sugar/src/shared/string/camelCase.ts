@@ -19,6 +19,8 @@ import __camelize from './camelize';
  * @todo      doc
  * @todo      tests
  *
+ * @snippet         __camelCase($1)
+ * 
  * @example     js
  * import { __camelCase } from '@coffeekraken/sugar/string';
  * __camelCase('hello world'); // => helloWorld

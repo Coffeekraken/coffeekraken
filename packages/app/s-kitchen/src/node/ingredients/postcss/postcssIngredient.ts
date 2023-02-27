@@ -9,9 +9,9 @@ import { __addDependencies } from '@coffeekraken/sugar/npm';
 
 import {
     __dirname,
-    __pickOne,
+    __pickOneSync,
     __readJsonSync,
-    __writeFileSync,
+    __writeFileSync
 } from '@coffeekraken/sugar/fs';
 
 /**
@@ -42,7 +42,7 @@ const postcssIngredient: ISKitchenIngredient = {
             plugins: [],
         };
 
-        let configFile = __pickOne(
+        let configFile = __pickOneSync(
             [
                 '.postcssrc.json',
                 '.postcssrc.js',

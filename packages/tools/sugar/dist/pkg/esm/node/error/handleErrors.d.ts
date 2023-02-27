@@ -1,2 +1,2 @@
 
-export default function __handleError(): void;
+export default function __handleErrors(): void;

@@ -26,6 +26,8 @@ import { __dispatchEvent } from '@coffeekraken/sugar/dom';
  * @todo        tests
  * @todo        add setting to specify on which elements you want to enable the feature
  *
+ * @snippet         __inputAdditionalEvents()
+ *
  * @example 	js
  * import { __inputAdditionalEvents } from '@coffeekraken/sugar/feature';
  * __inputAdditionalEvents();

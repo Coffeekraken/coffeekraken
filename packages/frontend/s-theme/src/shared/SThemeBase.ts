@@ -1,6 +1,6 @@
 import __SColor from '@coffeekraken/s-color';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
-import { __compressVarName } from '@coffeekraken/sugar/css';
+import { __compressCssVarName } from '@coffeekraken/sugar/css';
 import { __get, __sort } from '@coffeekraken/sugar/object';
 import __set from '@coffeekraken/sugar/shared/object/set';
 // import __micromatch from 'micromatch';
@@ -10,7 +10,7 @@ import { __isColor } from '@coffeekraken/sugar/is';
 import {
     __deepMerge,
     __flatten,
-    __objectHash,
+    __objectHash
 } from '@coffeekraken/sugar/object';
 import __dashCase from '@coffeekraken/sugar/shared/string/dashCase';
 import __knownCssProperties from 'known-css-properties';
@@ -1159,7 +1159,7 @@ export default class SThemeBase extends __SEventEmitter {
         if (!this.cssSettings?.compress?.variables) {
             return varname;
         }
-        return __compressVarName(varname);
+        return __compressCssVarName(varname);
     }
 
     static jsConfigObjectToCssProperties(obj: any): string[] {

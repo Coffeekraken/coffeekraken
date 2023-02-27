@@ -7,8 +7,8 @@ import { __isNode, __isPlainObject } from '@coffeekraken/sugar/is';
 import {
     __decycle,
     __deepMerge,
-    __filter,
-    __get,
+    __filterObject,
+    __get
 } from '@coffeekraken/sugar/object';
 import __set from '@coffeekraken/sugar/shared/object/set';
 
@@ -399,7 +399,7 @@ export default class SConfig {
 
         // filter the empty config
         if (finalSettings.clean) {
-            this.config = __filter(this.config, (key, value) => {
+            this.config = __filterObject(this.config, (key, value) => {
                 if (__isPlainObject(value) && !Object.keys(value).length)
                     return false;
                 return true;

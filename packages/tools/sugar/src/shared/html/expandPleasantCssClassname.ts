@@ -12,6 +12,8 @@
  * @param     {String}          classesStr          The classes string to convert like "s-typo:h1 s-font:40", etc...
  * @return    {String}                      The processed string with converted classnames
  *
+ * @snippet         __expandPleasantCssClassname($1)
+ * 
  * @example         js
  * import { __expandPleasantCssClassname } from '@coffeekraken/sugar/html';
  * __expandPleasantCssClassname('...');

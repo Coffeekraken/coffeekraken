@@ -15,6 +15,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
  * @param       {Number}       max             The maximum value
  * @return      {Number}                The clamped number
  *
+ * @snippet         __clamp($1, $2, $3)
+ *
  * @example       js
  * import { __clamp } from '@coffeekraken/sugar/math';
  * __clamp(10, 0, 100); // => 10
@@ -33,4 +35,4 @@ function __clamp(num, min, max) {
     return Math.min(Math.max(num, min), max);
 }
 exports.default = __clamp;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7O0FBQUE7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQXdCRztBQUNILFNBQXdCLE9BQU8sQ0FBQyxHQUFHLEVBQUUsR0FBRyxFQUFFLEdBQUc7SUFDekMsbURBQW1EO0lBRW5ELDRCQUE0QjtJQUM1QixpQ0FBaUM7SUFDakMsY0FBYztJQUVkLE9BQU8sSUFBSSxDQUFDLEdBQUcsQ0FBQyxJQUFJLENBQUMsR0FBRyxDQUFDLEdBQUcsRUFBRSxHQUFHLENBQUMsRUFBRSxHQUFHLENBQUMsQ0FBQztBQUM3QyxDQUFDO0FBUkQsMEJBUUMifQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7O0FBQUE7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBMEJHO0FBQ0gsU0FBd0IsT0FBTyxDQUFDLEdBQUcsRUFBRSxHQUFHLEVBQUUsR0FBRztJQUN6QyxtREFBbUQ7SUFFbkQsNEJBQTRCO0lBQzVCLGlDQUFpQztJQUNqQyxjQUFjO0lBRWQsT0FBTyxJQUFJLENBQUMsR0FBRyxDQUFDLElBQUksQ0FBQyxHQUFHLENBQUMsR0FBRyxFQUFFLEdBQUcsQ0FBQyxFQUFFLEdBQUcsQ0FBQyxDQUFDO0FBQzdDLENBQUM7QUFSRCwwQkFRQyJ9

@@ -15,8 +15,9 @@
  *
  * @todo        interface
  * @todo        doc
- * @todo        move this into the "function" folder
  *
+ * @snippet         __getArgsNames($1)
+ * 
  * @example         js
  * import { __getArgsNames } from '@coffeekraken/sugar/function';
  * function hello(world, coco, plop) { }

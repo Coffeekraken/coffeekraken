@@ -18,6 +18,8 @@ import __clipboardy from 'clipboardy';
  * @todo      doc
  * @todo      tests
  *
+ * @snippet         __read()
+ *
  * @example       js
  * import { __copy, __read } from '@coffeekraken/sugar/clipboard';
  * __copy('Hello world');

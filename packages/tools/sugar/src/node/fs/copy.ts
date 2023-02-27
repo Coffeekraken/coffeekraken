@@ -16,6 +16,9 @@ import __fs from 'fs-extra';
  * @param       {String}              dest          The destination path
  * @return      {Promise}                           A promise that will be resolved when the copy is completed
  *
+ * @snippet         __copy($1, $2)
+ * await __copy($1, $2)
+ *
  * @example       js
  * import { __copy } from '@coffeekraken/sugar/fs';
  * await __copy('my/cool/file.jpg', 'my/new/file.jpg').then(() => {

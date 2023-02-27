@@ -19,6 +19,8 @@ import __fastdom from 'fastdom';
  * @todo            doc
  * @todo            tests
  *
+ * @snippet         __imagesLoadedAttribute()
+ *
  * @example 	js
  * import { __imagesLoadedAttribute } from '@coffeekraken/sugar/feature';
  *  __imagesLoadedAttribute();

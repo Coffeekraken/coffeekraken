@@ -12,7 +12,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
  * @param       {String}            name            The cookie name to get
  * @return      {any}                               The cookie value
  *
- * @snippet         __getCookie($1);
+ * @snippet         __getCookie($1)
  *
  * @example         js
  * import { __getCookie } from '@coffeekraken/sugar/cookie';

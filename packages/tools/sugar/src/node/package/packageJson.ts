@@ -5,10 +5,10 @@ import __packageJsonSync from './packageJsonSync';
 /**
  * @name          packageJson
  * @namespace            node.package
- * @async
  * @type          Function
  * @platform        node
  * @status          beta
+ * @async
  *
  * This function return you the package.json of the package you asked for, or search upward for a package.json
  *
@@ -19,6 +19,9 @@ import __packageJsonSync from './packageJsonSync';
  * @todo      doc
  * @todo      tests
  *
+ * @snippet         __packageJson()
+ * await __packageJson()
+ * 
  * @example     js
  * import { __packageJson } from '@coffeekraken/sugar/package;
  * __packageJson();

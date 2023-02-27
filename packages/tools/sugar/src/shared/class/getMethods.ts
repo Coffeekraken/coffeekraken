@@ -17,6 +17,8 @@
  * @todo      doc
  * @todo      tests
  *
+ * @snippet         __getMethods($1)
+ * 
  * @example         js
  * import { __getMethods } from '@coffeekraken/sugar/class';
  * myClass {

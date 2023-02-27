@@ -20,6 +20,8 @@
  * @todo      doc
  * @todo      tests
  *
+ * @snippet         __unquote($1)
+ * 
  * @example    js
  * import { __unquote } from '@coffeekraken/sugar/string'
  * __unquote("'Hello world'") // "Hello world"

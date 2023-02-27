@@ -27,6 +27,8 @@ import requestAnimationFrame from '../utilities/requestAnimationFrame';
  * @param       {IScrollToSettings}     [settings={}]       Some settings to tweak the scroll behavior
  * @return      {Promise}           A promise resolved once the scroll has ended
  *
+ * @snippet         __scrollTo($1)
+ *
  * @todo      interface
  * @todo      doc
  * @todo      tests

@@ -22,6 +22,8 @@ const glob_parent_1 = __importDefault(require("glob-parent"));
  * @todo      doc
  * @todo      tests
  *
+ * @snippet         __extractNoneGlob($1)
+ *
  * @example         js
  * import { __extractNoneGlob } from '@coffeekraken/sugar/glob';
  * __extractNoneGlob('/coco/hello/*.js'); // => '*.js'
@@ -35,4 +37,4 @@ function __extractNoneGlob(string) {
     return parent;
 }
 exports.default = __extractNoneGlob;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOzs7OztBQUVkLDhEQUF1QztBQUV2Qzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBd0JHO0FBQ0gsU0FBd0IsaUJBQWlCLENBQUMsTUFBTTtJQUM1QyxNQUFNLE1BQU0sR0FBRyxJQUFBLHFCQUFZLEVBQUMsTUFBTSxDQUFDLENBQUM7SUFDcEMsT0FBTyxNQUFNLENBQUM7QUFDbEIsQ0FBQztBQUhELG9DQUdDIn0=
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOzs7OztBQUVkLDhEQUF1QztBQUV2Qzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0EwQkc7QUFDSCxTQUF3QixpQkFBaUIsQ0FBQyxNQUFNO0lBQzVDLE1BQU0sTUFBTSxHQUFHLElBQUEscUJBQVksRUFBQyxNQUFNLENBQUMsQ0FBQztJQUNwQyxPQUFPLE1BQU0sQ0FBQztBQUNsQixDQUFDO0FBSEQsb0NBR0MifQ==

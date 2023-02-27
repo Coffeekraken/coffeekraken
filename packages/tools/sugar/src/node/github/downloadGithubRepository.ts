@@ -1,17 +1,17 @@
-import __fs from 'fs';
-import __https from 'https';
-import __tmpDir from '../path/systemTmpDir';
-import __unzip from '../compression/unzip';
-import __fsExtra from 'fs-extra';
 import { __fileName, __folderPath } from '@coffeekraken/sugar/fs';
+import __fs from 'fs';
+import __fsExtra from 'fs-extra';
+import __https from 'https';
+import __unzip from '../compression/unzip';
+import __tmpDir from '../path/systemTmpDir';
 
 /**
  * @name            downloadGithubRepository
  * @namespace       node.github
  * @type            Function
- * @async
  * @platform        node
  * @status          beta
+ * @async
  *
  * This function allows you to download a github repository
  * and unzip it where you want to store it
@@ -21,6 +21,11 @@ import { __fileName, __folderPath } from '@coffeekraken/sugar/fs';
  *
  * @todo        documentation
  *
+ * @snippet         __downloadGithubRepository($1)
+ * __downloadGithubRepository($1).then(result => {
+ *      $2
+ * });
+ * 
  * @example         js
  * import __downloadGithubRepository from '@coffeekraken/sugar/github';
  * await __downloadGithubRepository('Coffeekraken/coffeekraken', {
@@ -36,7 +41,9 @@ export interface IGithubDownloadRepositorySettings {
     unzip: boolean;
     branch: String;
 }
-export interface IGithubDownloadRepositoryResult {}
+export interface IGithubDownloadRepositoryResult {
+    dest: string;
+}
 
 export default function __downloadGithubRepository(
     repository: string,

@@ -30,6 +30,8 @@ export { postcssUiClipboardCopyInterface as interface };
  *
  * Apply the clipbord copy style to any s-clipboard-copy element
  *
+ * @snippet         @sugar.ui.clipboardCopy($1);
+ * 
  * @example     css
  * .s-clipboard-copy {
  *    @sugar.ui.clipboardCopy;

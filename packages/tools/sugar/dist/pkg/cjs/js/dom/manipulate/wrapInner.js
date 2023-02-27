@@ -14,7 +14,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
  * @param    {HTMLElement}    $wrapper    The wrapper element
  * @return    {HTMLElement}             Return the parent element
  *
- * @snippet         __wrapInner($1, $2);
+ * @snippet         __wrapInner($1, $2)
  *
  * @todo      interface
  * @todo      doc

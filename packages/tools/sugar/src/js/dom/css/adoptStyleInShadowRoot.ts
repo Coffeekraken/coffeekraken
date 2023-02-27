@@ -11,7 +11,7 @@
  * @param      {HTMLElement}                   [$context=document]     The context from which you want to adopt the styles
  * @return      {Promise}                                               Return a promise fullfilled when the styles have been adopted
  *
- * @snippet         __adoptStyleInShadowRoot($1);
+ * @snippet         __adoptStyleInShadowRoot($1)
  *
  * @todo        tests
  *

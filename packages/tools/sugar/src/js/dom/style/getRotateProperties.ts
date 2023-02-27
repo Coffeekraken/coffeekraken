@@ -18,6 +18,8 @@ import * as rematrix from 'rematrix';
  * @todo      doc
  * @todo      tests
  *
+ * @snippet         __getRotateProperties($1)
+ *
  * @example  	js
  * import { __getRotateProperties } from '@coffeekraken/sugar/dom'
  * const props = __getRotateProperties(myCoolHTMLElement);

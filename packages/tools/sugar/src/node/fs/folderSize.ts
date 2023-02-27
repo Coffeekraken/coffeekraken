@@ -6,14 +6,17 @@ import __getSize from 'get-folder-size';
  * @name                            folderSize
  * @namespace            node.fs
  * @type                            Function
- * @async
  * @platform        node
  * @status          beta
+ * @async
  *
  * Calculate the size of the passed folder and return it through a promise in bytes format
  *
  * @param             {String}                folderPath                  The folder path to calculate the size
  * @return            {Promise}                                           A promise that will be resolved once the folder size has been calculated
+ *
+ * @snippet         __folderSize($1)
+ * await __folderSize($1)
  *
  * @example           js
  * import { __folderSize } from '@coffeekraken/sugar/fs';

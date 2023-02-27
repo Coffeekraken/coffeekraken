@@ -15,6 +15,9 @@ import __fs from 'fs-extra';
  * @param       {String}              dir           The directory path to empty
  * @return      {Promise}                           A promise that will be resolved once the directory has been cleaned
  *
+ * @snippet             __emptyDir($1)
+ * await __emptyDir($1)
+ *
  * @example       js
  * import { __emptyDir } from '@coffeekraken/sugar/fs';
  * await __emptyDir('my/cool/directory').then(() => {

@@ -18,6 +18,13 @@ import __SPromise from '@coffeekraken/s-promise';
  * @param       {IScrollSpySettings}     [settings={}]       Some settings to tweak the active and unactive detection
  * @return      {SPromise}           An SPromise that will emit events like "activate" and "unactivate"
  *
+ * @snippet         __scrollSpy($1)
+ * __scrollSpy($1).on('activate', \$elm => {
+ *      $2
+ * }).on('unactivate', \$elm => {
+ *      $3
+ * });
+ *
  * @todo      interface
  * @todo      doc
  * @todo      tests

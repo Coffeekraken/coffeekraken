@@ -19,6 +19,11 @@ import { __SSvgFilter } from '@coffeekraken/sugar/filter';
  * @todo      doc
  * @todo      tests
  *
+ * @snippet         __SGradientSvgFilter()
+ * const filter = new __SGradientSvgFilter();
+ * filter.linear([$1]);
+ * filter.applyTo($2);
+ *
  * @example 		js
  * import { __SGradientSvgFilter } from '@coffeekraken/sugar/filter';
  * const filter = new  __SGradientSvgFilter();

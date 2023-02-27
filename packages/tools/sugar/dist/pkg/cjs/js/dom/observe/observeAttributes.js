@@ -19,7 +19,7 @@ const s_promise_1 = __importDefault(require("@coffeekraken/s-promise"));
  * @param 		{MutationObserverInit} 			settings 	The mutation observer settings
  * @return 		{SPromise} 								The SPromise throught which you can have the mutations using the "then" callback
  *
- * @snippet         __observeAttributes($1);
+ * @snippet         __observeAttributes($1)
  * __observeAttributes($1).on('attribute', mutation => {
  *      $2
  * });

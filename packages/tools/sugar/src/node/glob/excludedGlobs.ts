@@ -17,6 +17,8 @@ import __SugarConfig from '@coffeekraken/s-sugar-config';
  * @todo      doc
  * @todo      tests
  *
+ * @snippet         __excludedGlobs()
+ * 
  * @example             js
  * import { __excludedGlobs } from '@coffeekraken/sugar/glob';
  * __excludedGlobs();

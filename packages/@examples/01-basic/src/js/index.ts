@@ -1,3 +1,4 @@
+import { __matchGlob } from '@coffeekraken/sugar/glob';
 import { __whenDomReady } from '@coffeekraken/sugar/dom';
 import { __matches } from '@coffeekraken/sugar/dom';
 import { __querySelectorUp } from '@coffeekraken/sugar/dom';

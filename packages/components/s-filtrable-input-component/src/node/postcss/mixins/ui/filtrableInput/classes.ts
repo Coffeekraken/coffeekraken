@@ -22,6 +22,24 @@ export interface IPostcssUiFiltrableInputClassesParams {
 
 export { postcssUiFiltrableInputClassesInterface as interface };
 
+/**
+ * @name                 classes
+ * @namespace            node.postcss.mixins.ui.filtrableInput
+ * @type                 PostcssMixin
+ * @platform            css
+ * @status              beta
+ * 
+ * This mixin represent a filtrable input
+ *
+ * @snippet      @sugar.ui.filtrableInput.classes($1);
+ *
+ * @example        css
+ * \@sugar.ui.filtrableInput.classes;
+ * 
+ * @since    2.0.0
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+ */
+
 export default function ({
     params,
     atRule,

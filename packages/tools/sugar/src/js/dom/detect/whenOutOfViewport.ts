@@ -19,7 +19,7 @@
  *
  * @setting       {String}      [offset=10px]     An offset to detect sooner or later the element exits the viewport
  *
- * @snippet         __whenOutOfViewport($1);
+ * @snippet         __whenOutOfViewport($1)
  * __whenOutOfViewport($1).then(\$elm => {
  *      $2
  * });

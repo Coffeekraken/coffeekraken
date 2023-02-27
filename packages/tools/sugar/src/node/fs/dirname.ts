@@ -14,6 +14,8 @@ import __path from 'path';
  * @param       {Import}            import          The "import" variable from the file you use this function
  * @return      {String}                            The dirname path
  *
+ * @snippet         __dirname()
+ *
  * @example             js
  * import { __dirname } from '@coffeekraken/sugar/fs';
  * __dirname(import);

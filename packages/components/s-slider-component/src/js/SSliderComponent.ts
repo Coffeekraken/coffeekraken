@@ -1,7 +1,7 @@
 // @ts-nocheck
 
 import __SLitComponent, {
-    ISLitComponentDefaultProps,
+    ISLitComponentDefaultProps
 } from '@coffeekraken/s-lit-component';
 import { __onSwipe } from '@coffeekraken/sugar/dom';
 import { __isClass } from '@coffeekraken/sugar/is';
@@ -10,7 +10,7 @@ import { css, html, unsafeCSS } from 'lit';
 // @ts-ignore
 import {
     __querySelectorLive,
-    __querySelectorUp,
+    __querySelectorUp
 } from '@coffeekraken/sugar/dom';
 import { __uniqid } from '@coffeekraken/sugar/string';
 import __css from '../../../../src/css/s-slider-component.css'; // relative to /dist/pkg/esm/js
@@ -57,19 +57,16 @@ import __scrollBehavior from './behaviors/scrollBehavior';
  * @feature         Custom behavior (extensions) capabilities built-in
  * @feature         Slideable behavior available
  *
+ * @import          import { define as __SSliderComponentDefine } from '@coffeekraken/s-slider-component';
+ * 
+ * @snippet         __SSliderComponentDefine($1)
+ * 
  * @install          bash
  * npm i @coffeekraken/s-slider-component
  *
  * @install         js
- * import { define, SSliderSlideableBehavior } from '@coffeekraken/s-slider-component';
- * define({
- *      behaviors: {
- *          slideable: {
- *              class: SSliderSlideableBehavior
- *              settings: {}
- *          }
- *      }
- * });
+ * import { define as __SSliderComponentDefine } from '@coffeekraken/s-slider-component';
+ * __SSliderComponentDefine();
  *
  * @example         html        Simple slider
  * <s-slider controls nav responsive='{"mobile":{"lnf":"default-contained"}}'>

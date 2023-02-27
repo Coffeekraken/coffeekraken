@@ -22,6 +22,8 @@
  * @todo      doc
  * @todo      tests
  *
+ * @snippet         __merge($1, $2)
+ * 
  * @example           js
  * import { __merge } from '@coffeekraken/sugar/object';
  * __merge({a: 'hello'}, {a: 'plop', hello: 'world');

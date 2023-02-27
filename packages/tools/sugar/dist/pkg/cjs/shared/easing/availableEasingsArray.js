@@ -13,6 +13,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
  *
  * @return      {Array}             An array of all the easing functions available
  *
+ * @snippet         __availableEasingsArray()
+ *
  * @example         js
  * import { __availableEasingsArray } from '@coffeekraken/sugar/easing';
  * __availableEasingsArray();
@@ -41,4 +43,4 @@ function __availableEasingsArray() {
     ];
 }
 exports.default = __availableEasingsArray;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOztBQUVkOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBc0JHO0FBQ0gsU0FBd0IsdUJBQXVCO0lBQzNDLE9BQU87UUFDSCxnQkFBZ0I7UUFDaEIsZUFBZTtRQUNmLGdCQUFnQjtRQUNoQixnQkFBZ0I7UUFDaEIsYUFBYTtRQUNiLFlBQVk7UUFDWixhQUFhO1FBQ2IsYUFBYTtRQUNiLGNBQWM7UUFDZCxhQUFhO1FBQ2IsY0FBYztRQUNkLGNBQWM7S0FDakIsQ0FBQztBQUNOLENBQUM7QUFmRCwwQ0FlQyJ9
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOztBQUVkOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0F3Qkc7QUFDSCxTQUF3Qix1QkFBdUI7SUFDM0MsT0FBTztRQUNILGdCQUFnQjtRQUNoQixlQUFlO1FBQ2YsZ0JBQWdCO1FBQ2hCLGdCQUFnQjtRQUNoQixhQUFhO1FBQ2IsWUFBWTtRQUNaLGFBQWE7UUFDYixhQUFhO1FBQ2IsY0FBYztRQUNkLGFBQWE7UUFDYixjQUFjO1FBQ2QsY0FBYztLQUNqQixDQUFDO0FBQ04sQ0FBQztBQWZELDBDQWVDIn0=

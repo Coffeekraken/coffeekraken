@@ -10,7 +10,7 @@
  * @param 		{MouseEvent|TouchEvent} 					e  		The event to get the position from
  * @return 		{x: number; y: number;} 									The absolute position of the event
  *
- * @snippet         __positionFromEvent($1);
+ * @snippet         __positionFromEvent($1)
  *
  * @todo      interface
  * @todo      doc

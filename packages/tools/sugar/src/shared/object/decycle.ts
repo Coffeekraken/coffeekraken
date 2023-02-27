@@ -13,6 +13,8 @@ import { decycle as __decycle } from 'json-cyclic';
  * @param     {Object}      obj         The object to process
  * @return    {Object}                  The new object circular references free
  *
+ * @snippet         __decycle($1)
+ * 
  * @example     js
  * import { __decycle } from '@coffeekraken/sugar/object';
  * __decycle({

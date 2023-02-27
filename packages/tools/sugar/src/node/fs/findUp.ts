@@ -10,9 +10,9 @@ import __isGlob from '../../shared/is/isGlob';
  * @name            findUp
  * @namespace            node.fs
  * @type            Function
- * @async
  * @platform        node
  * @status          beta
+ * @async
  *
  * This function simply walk across upper folders to search for a file
  * and returns you the first finded
@@ -20,6 +20,9 @@ import __isGlob from '../../shared/is/isGlob';
  * @param       {IFindUpSearch}         search          The name of the file you search
  * @param       {IFindUpSettings}       [settings={}]       An object of settings to configure your research
  * @return      {SFile|null}                                 An SFile instance or null if nothings founded
+ *
+ * @snippet         __findUp($1)
+ * await __findUp($1)
  *
  * @example         js
  * import { __findUp } from '@coffeekraken/sugar/fs';

@@ -13,7 +13,7 @@ import { __addEventListenerOnce } from '@coffeekraken/sugar/dom';
  * @param    {HTMLElement}    elm    The element to listen on
  * @return   {Promise<HTMLElement>}                  A promise that will be resolved once the animation has ended
  *
- * @snippet         __whenAnimationEnd($1);
+ * @snippet         __whenAnimationEnd($1)
  * __whenAnimationEnd($1).then(\$elm => {
  *      $2
  * });

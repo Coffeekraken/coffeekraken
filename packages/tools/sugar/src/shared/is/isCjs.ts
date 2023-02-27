@@ -10,6 +10,8 @@
  *
  * @return      {Boolean}           true if the current system is esm
  *
+ * @snippet         __isCjs()
+ * 
  * @example       js
  * import { __isCjs } from '@coffeekraken/sugar/is';
  * __isCjs(); // => true

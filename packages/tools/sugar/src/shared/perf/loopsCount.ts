@@ -16,6 +16,8 @@
  * @todo      doc
  * @todo      tests
  *
+ * @snippet         __loopsCount($1)
+ * 
  * @example       js
  * import { __loopsCount } from '@coffeekraken/sugar/perf';
  * __loopsCount(); // 122003

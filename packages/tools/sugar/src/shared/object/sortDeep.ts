@@ -21,6 +21,11 @@ import __sort from './sort';
  * @todo      doc
  * @todo      tests
  *
+ * @snippet         __sortDeep($1, $2)
+ * __sortDeep($1, (a, b) => {
+ *      $2
+ * })
+ * 
  * @example               js
  * import { __sortDeep } from '@coffeekraken/sugar/object';
  * __sortDeep({

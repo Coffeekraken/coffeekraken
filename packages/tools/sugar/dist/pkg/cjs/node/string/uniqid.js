@@ -21,6 +21,8 @@ const crypto_1 = __importDefault(require("crypto"));
  * @todo      doc
  * @todo      tests
  *
+ * @snippet         __uniqid()
+ *
  * @example       js
  * import { __uniqid } from '@coffeekraken/sugar/string';
  * console.log(__uniqid()); // => 1b9d6bcd-bbfd-4b2d-9b5d-ab8dfbbd4bed
@@ -33,4 +35,4 @@ function __uniqid() {
     return `s-${crypto_1.default.randomUUID()}`;
 }
 exports.default = __uniqid;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7O0FBQUEsY0FBYztBQUNkLG9EQUE4QjtBQUU5Qjs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0F1Qkc7QUFDSCxTQUF3QixRQUFRO0lBQzVCLE9BQU8sS0FBSyxnQkFBUSxDQUFDLFVBQVUsRUFBRSxFQUFFLENBQUM7QUFDeEMsQ0FBQztBQUZELDJCQUVDIn0=
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7O0FBQUEsY0FBYztBQUNkLG9EQUE4QjtBQUU5Qjs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQXlCRztBQUNILFNBQXdCLFFBQVE7SUFDNUIsT0FBTyxLQUFLLGdCQUFRLENBQUMsVUFBVSxFQUFFLEVBQUUsQ0FBQztBQUN4QyxDQUFDO0FBRkQsMkJBRUMifQ==

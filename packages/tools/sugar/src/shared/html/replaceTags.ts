@@ -20,6 +20,8 @@ import __toString from '../string/toString';
  * @todo      doc
  * @todo      tests
  *
+ * @snippet         __replaceTags($1m $2)
+ * 
  * @example             js
  * import { __replaceTags } from '@coffeekraken/sugar/html';
  *  __replaceTags('<span>Hello</span> world', {

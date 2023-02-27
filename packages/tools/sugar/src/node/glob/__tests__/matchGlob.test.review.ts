@@ -1,14 +1,14 @@
-import __matchGlob from '../matchGlob';
+import __matchGlobSync from '../matchGlobSync';
 
 describe('sugar.node.glob.matchGlob', () => {
     it('Should resolve the passed glob correctly', async () => {
-        const match = __matchGlob('data/myCoolData.txt', `data/**/*`, {
+        const match = __matchGlobSync('data/myCoolData.txt', `data/**/*`, {
             cwd: __dirname,
         });
         expect(match).toBe(true);
     });
     it('Should resolve the passed glob with a content regex correctly', async () => {
-        const match = __matchGlob(
+        const match = __matchGlobSync(
             'data/myCoolData.txt',
             `data/**/*:/.*@namespace.*/gm`,
             {
@@ -18,7 +18,7 @@ describe('sugar.node.glob.matchGlob', () => {
         expect(match).toBe(true);
     });
     it('Should not match the passed glob with a incorrect content regex correctly', async () => {
-        const match = __matchGlob(
+        const match = __matchGlobSync(
             'data/myCoolData.txt',
             `data/**/*:/.*@naspace.*/gm`,
             {
@@ -28,7 +28,7 @@ describe('sugar.node.glob.matchGlob', () => {
         expect(match).toBe(false);
     });
     it('Should not match the passed glob with a correct and incorrect content regex correctly', async () => {
-        const match = __matchGlob(
+        const match = __matchGlobSync(
             'data/myCoolData.txt',
             [`data/**/*:/.*@naspace.*/gm`, `data/**/*:/.*@namespace.*/gm`],
             {

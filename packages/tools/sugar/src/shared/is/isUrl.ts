@@ -17,6 +17,8 @@
  * @todo      doc
  * @todo      tests
  *
+ * @snippet         __isUrl($1)
+ * 
  * @example 	js
  * import { __isUrl } from '@coffeekraken/sugar/is';
  * __isUrl('http://google.com') => true

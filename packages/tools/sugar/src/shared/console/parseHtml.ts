@@ -20,6 +20,8 @@ import { __tagsMap } from '@coffeekraken/sugar/console';
  * @todo        interface
  * @todo        doc
  *
+ * @snippet         __parseHtml($1)
+ * 
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */

@@ -13,6 +13,9 @@ import __currentModuleSystem from '../module/currentModuleSystem';
  * @param       {String}            string          The string you want to process
  * @return      {String}                            The processed string
  *
+ * @snippet         (tokens) __replaceTokens($1)
+ * __replaceTokens($1)
+ * 
  * @example         js
  * import replaceTokens from '@coffeekraken/sugar/shared/token/replaceTokens';
  * replaceTokens('Current module system is %moduleSystem');

@@ -15,6 +15,8 @@
  * @todo      doc
  * @todo      tests
  *
+ * @snippet         __expandTemplate($1)
+ *
  * @example    js
  * import { __expandTemplate } from '@coffeekraken/sugar/dom'
  * __expandTemplate($templte);

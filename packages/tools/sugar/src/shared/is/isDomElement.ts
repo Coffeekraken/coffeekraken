@@ -16,6 +16,8 @@
  * @todo      doc
  * @todo      tests
  *
+ * @snippet         __isDomElement($1)
+ * 
  * @example    js
  * import { __isDomElement } from '@coffeekraken/sugar/dom'
  * __isDomElement($myElement);

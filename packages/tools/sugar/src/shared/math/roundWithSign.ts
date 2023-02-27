@@ -11,6 +11,8 @@
  * @param       {Number}    number    The number to round
  * @return      {Number}     The rounded number
  *
+ * @snippet         __roundWithSign($1)
+ * 
  * @example         js
  * import { __roundWithSign } from '@coffeekraken/sugar/math';
  * __roundWithSign(1.5); // => 1

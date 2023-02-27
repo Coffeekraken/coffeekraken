@@ -15,6 +15,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
  *
  * @param       {String}            path            The folder path you want to go to
  *
+ * @snippet         __chdir($1)
+ *
  * @example         js
  * import { __chdir } from '@coffeekraken/sugar/fs';
  * __chdir('/my/cool/file.txt', 'Hello world');
@@ -31,4 +33,4 @@ function __chdir(path) {
     process.chdir(path);
 }
 exports.default = __chdir;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7O0FBQUE7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQXFCRztBQUNILFNBQXdCLE9BQU8sQ0FBQyxJQUFZOztJQUN4QyxNQUFBLE9BQU8sQ0FBQyxJQUFJLHdEQUFHO1FBQ1gsT0FBTyxFQUFFLE9BQU87UUFDaEIsSUFBSSxFQUFFLElBQUk7S0FDYixDQUFDLENBQUM7SUFDSCxPQUFPLENBQUMsS0FBSyxDQUFDLElBQUksQ0FBQyxDQUFDO0FBQ3hCLENBQUM7QUFORCwwQkFNQyJ9
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7O0FBQUE7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBdUJHO0FBQ0gsU0FBd0IsT0FBTyxDQUFDLElBQVk7O0lBQ3hDLE1BQUEsT0FBTyxDQUFDLElBQUksd0RBQUc7UUFDWCxPQUFPLEVBQUUsT0FBTztRQUNoQixJQUFJLEVBQUUsSUFBSTtLQUNiLENBQUMsQ0FBQztJQUNILE9BQU8sQ0FBQyxLQUFLLENBQUMsSUFBSSxDQUFDLENBQUM7QUFDeEIsQ0FBQztBQU5ELDBCQU1DIn0=

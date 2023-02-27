@@ -2,7 +2,7 @@ import __SGlob from '@coffeekraken/s-glob';
 import __SInterface from '@coffeekraken/s-interface';
 import { __fileName } from '@coffeekraken/sugar/fs';
 import { __isGlob } from '@coffeekraken/sugar/is';
-import { __packagePath } from '@coffeekraken/sugar/npm';
+import { __packagePathSync } from '@coffeekraken/sugar/npm';
 import { __packageRootDir } from '@coffeekraken/sugar/path';
 import { __unquote } from '@coffeekraken/sugar/string';
 
@@ -126,7 +126,7 @@ export default function ({
 
                 // handle globs
                 if (__isGlob(path)) {
-                    const files = __SGlob.resolve(path, {
+                    const files = __SGlob.resolveSync(path, {
                         cwd: __packageRootDir(),
                     });
                     files.forEach((file: any) => {
@@ -156,8 +156,8 @@ export default function ({
 
                 // handle globs
                 if (__isGlob(name)) {
-                    const files = __SGlob.resolve(
-                        `${__packagePath(
+                    const files = __SGlob.resolveSync(
+                        `${__packagePathSync(
                             '@coffeekraken/sugar',
                         )}/src/icons/${name}`,
                         {
@@ -169,7 +169,7 @@ export default function ({
                     });
                 } else {
                     iconsPaths.push(
-                        `${__packagePath(
+                        `${__packagePathSync(
                             '@coffeekraken/sugar',
                         )}/src/icons/${name}.svg`,
                     );

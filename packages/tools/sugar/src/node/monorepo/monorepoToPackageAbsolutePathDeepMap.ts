@@ -1,11 +1,11 @@
-import __deepMap from '../../shared/object/deepMap';
-import { __packageRootDir } from '@coffeekraken/sugar/path';
 import { __monorepoToPackageAbsolutePath } from '@coffeekraken/sugar/monorepo';
+import { __packageRootDir } from '@coffeekraken/sugar/path';
+import __deepMap from '../../shared/object/deepMap';
 
 /**
  * @name            monorepoToPackageAbsolutePathDeepMap
  * @type            Function
- * @static
+ * @private
  *
  * This method allows you to make the passed path absolute to the package root passed.
  * This uses the `monorepoToPackageAbsolutePath` method to make all the paths in the passed object

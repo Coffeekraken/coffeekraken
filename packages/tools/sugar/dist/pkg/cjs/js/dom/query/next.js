@@ -15,7 +15,7 @@ const dom_1 = require("@coffeekraken/sugar/dom");
  * @param 		{String} 						selector 	A css selector to search for
  * @return 		{HTMLElement} 								The element found or null
  *
- * @snippet         __next($1, $2);
+ * @snippet         __next($1, $2)
  *
  * @todo      interface
  * @todo      doc

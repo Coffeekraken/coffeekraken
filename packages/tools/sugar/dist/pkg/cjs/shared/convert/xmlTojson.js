@@ -14,6 +14,8 @@ const fast_xml_parser_1 = require("fast-xml-parser");
  * @param       {String}            xml             The xml string to convert
  * @return      {Object}                            The corresponding json object
  *
+ * @snippet         __xmlToJson($1)
+ *
  * @example         js
  * import ( __xmlToJson ) from '@coffeekraken/sugar/convert';
  * __xmlToJson('...');
@@ -30,4 +32,4 @@ function __xmlToJson(xml) {
     return parser.parse(xml);
 }
 exports.default = __xmlToJson;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7O0FBQUEscURBQTRDO0FBRTVDOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQXVCRztBQUNILFNBQXdCLFdBQVcsQ0FBQyxHQUFXO0lBQzNDLE1BQU0sTUFBTSxHQUFHLElBQUksMkJBQVMsRUFBRSxDQUFDO0lBQy9CLE9BQU8sTUFBTSxDQUFDLEtBQUssQ0FBQyxHQUFHLENBQUMsQ0FBQztBQUM3QixDQUFDO0FBSEQsOEJBR0MifQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7O0FBQUEscURBQTRDO0FBRTVDOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBeUJHO0FBQ0gsU0FBd0IsV0FBVyxDQUFDLEdBQVc7SUFDM0MsTUFBTSxNQUFNLEdBQUcsSUFBSSwyQkFBUyxFQUFFLENBQUM7SUFDL0IsT0FBTyxNQUFNLENBQUMsS0FBSyxDQUFDLEdBQUcsQ0FBQyxDQUFDO0FBQzdCLENBQUM7QUFIRCw4QkFHQyJ9

@@ -3,7 +3,7 @@ import __SProcess, { ISProcessSettings } from '@coffeekraken/s-process';
 import __SPromise from '@coffeekraken/s-promise';
 import __depCheck from 'depcheck';
 import __packageRootDir from '../path/packageRootDir';
-import __packageJson from './packageJson';
+import __packageJsonSync from './packageJsonSync';
 
 /**
  * @name            SNpmUnusedProcess
@@ -12,6 +12,7 @@ import __packageJson from './packageJson';
  * @extends         SProcess
  * @platform        node
  * @status          beta
+ * @private
  *
  * This process is used to check npm unused dependencies, remove unsused once, etc...
  * It use under the hood the amazing depcheck package made by @rumpl and @lijunle
@@ -105,7 +106,7 @@ class SNpmUnusedProcess extends __SProcess implements ISNpmUnusedProcess {
             if (unusedDepJson.dependencies) {
                 unusedDepJson.dependencies.forEach((dep) => {
                     // get package json
-                    const packageJson = __packageJson(dep);
+                    const packageJson = __packageJsonSync(dep);
                     unusedListArray.push({
                         group: 'dependency',
                         name: packageJson.name,
@@ -119,7 +120,7 @@ class SNpmUnusedProcess extends __SProcess implements ISNpmUnusedProcess {
             if (!finalParams.skipDev && unusedDepJson.devDependencies) {
                 unusedDepJson.devDependencies.forEach((dep) => {
                     // get package json
-                    const packageJson = __packageJson(dep);
+                    const packageJson = __packageJsonSync(dep);
                     unusedListArray.push({
                         group: 'devDependency',
                         name: packageJson.name,

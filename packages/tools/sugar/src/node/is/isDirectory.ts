@@ -19,6 +19,8 @@ import __deepMerge from '../../shared/object/deepMerge';
  * @todo      doc
  * @todo      tests
  *
+ * @snippet         __isDirectory($1)
+ * 
  * @example     js
  * import { __isDirectory } from '@coffeekraken/sugar/is';
  * __isDirectory('something/cool');

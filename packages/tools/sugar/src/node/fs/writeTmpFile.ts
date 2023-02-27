@@ -22,6 +22,9 @@ import __uniqid from '../../node/string/uniqid';
  *
  * @setting         {String}            [path=null]         A path relative to the temp folder to store your file
  *
+ * @snippet         __writeTmpFile($1, $2)
+ * await __writeTmpFile($1, $2)
+ * 
  * @todo      tests
  *
  * @example       js

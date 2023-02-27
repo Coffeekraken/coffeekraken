@@ -17,14 +17,16 @@ import __htmlTagToHtmlClassMap from './htmlTagToHtmlClassMap';
  * @todo      doc
  * @todo      tests
  *
+ * @snippet         __getTagNameFromHtmlClass($1)
+ *
  * @example       js
- * import { __getHtmlhtmlClassFromHtmlClass } from '@coffeekraken/sugar/dom';
- * __getHtmlhtmlClassFromHtmlClass(HTMLAnchorElement); // => 'a'
+ * import { __getTagNameFromHtmlClass } from '@coffeekraken/sugar/dom';
+ * __getTagNameFromHtmlClass(HTMLAnchorElement); // => 'a'
  *
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-export default function __getHtmlhtmlClassFromHtmlClass(htmlClass) {
+export default function __getTagNameFromHtmlClass(htmlClass) {
     if (!htmlClass)
         return false;
     for (const key in __htmlTagToHtmlClassMap) {
@@ -33,4 +35,4 @@ export default function __getHtmlhtmlClassFromHtmlClass(htmlClass) {
     }
     return false;
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7QUFFZCxPQUFPLHVCQUF1QixNQUFNLHlCQUF5QixDQUFDO0FBRTlEOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQXVCRztBQUNILE1BQU0sQ0FBQyxPQUFPLFVBQVUsK0JBQStCLENBQ25ELFNBQXNCO0lBRXRCLElBQUksQ0FBQyxTQUFTO1FBQUUsT0FBTyxLQUFLLENBQUM7SUFFN0IsS0FBSyxNQUFNLEdBQUcsSUFBSSx1QkFBdUIsRUFBRTtRQUN2QyxJQUFJLHVCQUF1QixDQUFDLEdBQUcsQ0FBQyxLQUFLLFNBQVM7WUFBRSxPQUFPLEdBQUcsQ0FBQztLQUM5RDtJQUVELE9BQU8sS0FBSyxDQUFDO0FBQ2pCLENBQUMifQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7QUFFZCxPQUFPLHVCQUF1QixNQUFNLHlCQUF5QixDQUFDO0FBRTlEOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBeUJHO0FBQ0gsTUFBTSxDQUFDLE9BQU8sVUFBVSx5QkFBeUIsQ0FDN0MsU0FBc0I7SUFFdEIsSUFBSSxDQUFDLFNBQVM7UUFBRSxPQUFPLEtBQUssQ0FBQztJQUU3QixLQUFLLE1BQU0sR0FBRyxJQUFJLHVCQUF1QixFQUFFO1FBQ3ZDLElBQUksdUJBQXVCLENBQUMsR0FBRyxDQUFDLEtBQUssU0FBUztZQUFFLE9BQU8sR0FBRyxDQUFDO0tBQzlEO0lBRUQsT0FBTyxLQUFLLENBQUM7QUFDakIsQ0FBQyJ9

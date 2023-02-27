@@ -26,6 +26,12 @@ import { __isChildProcess } from '@coffeekraken/sugar/is';
  * @todo      {Feature}       Add IPC support to allow listen for key press in child processes
  * @todo      {Feature}       Add the system wide support
  *
+ * @snippet         __hotkey($1)
+ * const hotkey = __hotkey($1).on('press', e => {
+ *      $2
+ * });
+ * // hotkey.cancel(); // when want to cancel the listener
+ * 
  * @example         js
  * import { __hotkey } from '@coffeekraken/sugar/keyboard';
  * const promise = __hotkey('ctrl+a').on('press', (e) => {

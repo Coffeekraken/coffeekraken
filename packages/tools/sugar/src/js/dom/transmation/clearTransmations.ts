@@ -21,6 +21,8 @@ import { __uniqid } from '@coffeekraken/sugar/string';
  * @todo      doc
  * @todo      tests
  *
+ * @snippet         __clearTransmations($1)
+ *
  * @example    js
  * import { __clearTransmations } from '@coffeekraken/sugar/dom'
  *  __clearTransmations($myElement, {

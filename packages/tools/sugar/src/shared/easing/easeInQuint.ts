@@ -13,6 +13,9 @@
  * @param 		{Number} 		t 		The current time
  * @return 		{Number} 				The value depending on time
  *
+ * @snippet         __easeInQuint($1)
+ * 
+ * @example         js
  * import { __easeInQuint } from '@coffeekraken/sugar/easing';
  * __easeInQuint(0.4);
  *

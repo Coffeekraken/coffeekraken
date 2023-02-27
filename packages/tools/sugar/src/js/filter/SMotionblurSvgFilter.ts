@@ -17,6 +17,10 @@ import { __SSvgFilter } from '@coffeekraken/sugar/filter';
  * @todo      doc
  * @todo      tests
  *
+ * @snippet         __SMotionBlurSvgFilter()
+ * const filter = new __SMotionBlurSvgFilter();
+ * filter.applyTo($1);
+ *
  * @example 		js
  * import { __SMotionblurSvgFilter } from '@coffeekraken/sugar/filter';
  * const filter = new  __SMotionblurSvgFilter();

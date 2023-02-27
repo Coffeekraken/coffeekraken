@@ -46,12 +46,16 @@ export interface SPanelComponentProps {
  * @event       s-panel.open          Dispatched when the panel is opened
  * @event       s-panel.close         Dispatched when the panel is closed
  *
+ * @import          import { define as __SPanelComponentDefine } from '@coffeekraken/s-panel-component';
+ * 
+ * @snippet         __SPanelComponentDefine($1)
+ * 
  * @install          bash
  * npm i @coffeekraken/s-panel-component
  *
  * @install         js
- * import { define } from '@coffeekraken/s-panel-component';
- * define();
+ * import { define as __SPanelComponentDefine } from '@coffeekraken/s-panel-component';
+ * __SPanelComponentDefine();
  *
  * @example         html        Simple top panel
  * <s-panel position="top" id="simple-top-panel-open" backdrop>

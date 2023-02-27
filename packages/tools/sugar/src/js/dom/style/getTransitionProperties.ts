@@ -20,6 +20,8 @@ import __convertTime from '../../../shared/datetime/convertTime';
  * @todo      doc
  * @todo      tests
  *
+ * @snippet         __getTransitionProperties($1)
+ *
  * @example  	js
  * import getTransitionProperties from '@coffeekraken/sugar/js/dom/getTransitionProperties'
  * const props = getTransitionProperties(myCoolHTMLElement);

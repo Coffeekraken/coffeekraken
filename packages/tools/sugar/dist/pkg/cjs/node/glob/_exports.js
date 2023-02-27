@@ -17,14 +17,14 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.__resolveGlob = exports.__matchGlob = exports.__matchExcludeGlobs = exports.__excludedGlobs = void 0;
+exports.__resolveGlobSync = exports.__matchGlobSync = exports.__matchExcludeGlobs = exports.__excludedGlobs = void 0;
 const excludedGlobs_1 = __importDefault(require("./excludedGlobs"));
 exports.__excludedGlobs = excludedGlobs_1.default;
 const matchExcludeGlobs_1 = __importDefault(require("./matchExcludeGlobs"));
 exports.__matchExcludeGlobs = matchExcludeGlobs_1.default;
-const matchGlob_1 = __importDefault(require("./matchGlob"));
-exports.__matchGlob = matchGlob_1.default;
-const resolveGlob_1 = __importDefault(require("./resolveGlob"));
-exports.__resolveGlob = resolveGlob_1.default;
+const matchGlobSync_1 = __importDefault(require("./matchGlobSync"));
+exports.__matchGlobSync = matchGlobSync_1.default;
+const resolveGlobSync_1 = __importDefault(require("./resolveGlobSync"));
+exports.__resolveGlobSync = resolveGlobSync_1.default;
 __exportStar(require("../../shared/glob/_exports"), exports);
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0FBQUEsb0VBQThDO0FBTXJDLDBCQU5GLHVCQUFlLENBTUU7QUFMeEIsNEVBQXNEO0FBSzVCLDhCQUxuQiwyQkFBbUIsQ0FLbUI7QUFKN0MsNERBQXNDO0FBSVMsc0JBSnhDLG1CQUFXLENBSXdDO0FBSDFELGdFQUEwQztBQUdrQix3QkFIckQscUJBQWEsQ0FHcUQ7QUFEekUsNkRBQTJDIn0=
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0FBQUEsb0VBQThDO0FBTXJDLDBCQU5GLHVCQUFlLENBTUU7QUFMeEIsNEVBQXNEO0FBSzVCLDhCQUxuQiwyQkFBbUIsQ0FLbUI7QUFKN0Msb0VBQThDO0FBSUMsMEJBSnhDLHVCQUFlLENBSXdDO0FBSDlELHdFQUFrRDtBQUdjLDRCQUh6RCx5QkFBaUIsQ0FHeUQ7QUFEakYsNkRBQTJDIn0=

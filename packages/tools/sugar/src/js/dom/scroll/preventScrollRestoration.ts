@@ -7,6 +7,8 @@
  *
  * Function that set the `history.scrollRestoration` property to `manual`
  *
+ * @snippet         __preventScrollRestoration()
+ *
  * @example 	js
  * import { __preventScrolLRestoration } from '@coffeekraken/sugar/dom'
  * __preventScrollRestoration();

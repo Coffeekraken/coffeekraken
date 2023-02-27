@@ -19,6 +19,9 @@ import __stringify from '../../shared/json/stringify';
  * @param       {Object}              [options={}]  options are what you'd pass to [fs.writeJson()](https://nodejs.org/api/fs.html#fs_fs_writefile_file_data_options_callback)
  * @return      {Promise}                           A promise that will be resolved when the writeJson is completed
  *
+ * @snippet         __writeJson($1, $2)
+ * await _writeJson($1, $2)
+ * 
  * @example       js
  * import { __writeJson } from '@coffeekraken/sugar/fs';
  * __writeJson('my/cool/file.json', { hello: 'world' }).then(() => {

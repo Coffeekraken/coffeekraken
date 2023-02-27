@@ -11,7 +11,7 @@
  *
  * @param       {HTMLElement}           [$root=document]            The root element in which to reload the stylesheets
  *
- * @snippet         __reloadStylesheets();
+ * @snippet         __reloadStylesheets()
  *
  * @example         js
  * import { __reloeadStylesheets } from '@coffeekraken/sugar/dom';

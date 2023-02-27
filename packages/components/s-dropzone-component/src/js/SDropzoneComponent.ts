@@ -54,12 +54,16 @@ export interface ISDropzoneComponentUploadResult {
  *
  * @icon            drop-file           Icon displayed when the dropzone wait for files
  *
+ * @import      import { define as __SDropzoneComponentDefine } from '@coffeekraken/s-dropzone-component';
+ * 
+ * @snippet         __SDropzoneComponentDefine($1)
+ * 
  * @install           shell
  * npm i @coffeekraken/s-dropzone-component
  *
  * @install           js
- * import { define } from '@coffeekraken/s-dropzone-component';
- * define();
+ * import { define as __SDropzoneComponentDefine } from '@coffeekraken/s-dropzone-component';
+ * __SDropzoneComponentDefine();
  *
  * @example         html        Copy from an input
  * <s-dropzone action="/upload"></s-dropzone>

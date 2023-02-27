@@ -13,7 +13,7 @@
  * @param       {String|String[]}       accept      The "accept" string to use
  * @return      {Boolean}               true if accepted, false if not
  *
- * @snippet         __isFileAccepted($1, $2);
+ * @snippet         __isFileAccepted($1, $2)
  * __isFileAccepted($1, $2, [
  *      'image/png',
  *      $3

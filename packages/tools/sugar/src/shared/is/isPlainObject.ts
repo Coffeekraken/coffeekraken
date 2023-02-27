@@ -17,6 +17,8 @@
  * @todo      doc
  * @todo      tests
  *
+ * @snippet         __isPlainObject($1)
+ * 
  * @example           js
  * import { __isPlainObject } from '@coffeekraken/sugar/is';
  * __isPlainObject({ hello: 'world'}); // => true

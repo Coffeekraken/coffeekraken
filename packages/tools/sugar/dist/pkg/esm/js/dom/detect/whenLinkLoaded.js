@@ -17,7 +17,7 @@
  * @todo      doc
  * @todo      tests
  *
- * @snippet         __whenLinkLoaded($1);
+ * @snippet         __whenLinkLoaded($1)
  * __whenLinkLoaded($1).then(\$elm => {
  *      $2
  * });

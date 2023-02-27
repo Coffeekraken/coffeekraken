@@ -8,7 +8,7 @@ import { __deepMerge } from '@coffeekraken/sugar/object';
 import {
     __packageCacheDir,
     __packageRootDir,
-    __srcRootDir,
+    __srcRootDir
 } from '@coffeekraken/sugar/path';
 import { __onProcessExit } from '@coffeekraken/sugar/process';
 import __currentModuleSystem from '@coffeekraken/sugar/shared/module/currentModuleSystem';
@@ -28,7 +28,8 @@ import * as __tsMorph from 'ts-morph';
  * @extends             SBuilder
  * @platform            node
  * @status              beta
- *
+ * @private
+ * 
  * This class represent the typescript builder that you can use to build your .ts|js files
  * with a simple and efficient API.
  *

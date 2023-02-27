@@ -24,6 +24,9 @@ import __yaml from 'yaml';
  * @param       {ILoadConfigFileSettings}       [settings={}]       Some settings to configure your file load
  * @return          {Any}                       Return the config js object or undefined
  *
+ * @snippet         __loadConfigFile($1)
+ * await __loadConfigFile($1)
+ * 
  * @example         js
  * import { __loadConfigFile } from '@coffeekraken/sugar/load';
  * await __loadConfigFile('vite.config.js`);

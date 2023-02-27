@@ -17,6 +17,8 @@
  * @todo      doc
  * @todo      tests
  *
+ * @snippet         __isMap($1)
+ * 
  * @example    js
  * import { __isMap } from '@coffeekraken/sugar/is'
  * const map = new Map();

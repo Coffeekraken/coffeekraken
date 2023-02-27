@@ -14,6 +14,8 @@ import __fs from 'fs-extra';
  * @param       {String}              src           The source path to copy
  * @param       {String}              dest          The destination path
  *
+ * @snippet         __copySync($1, $2)
+ *
  * @example       js
  * import { __copySync } from '@coffeekraken/sugar/fs';
  *  __copySync('my/cool/file.jpg', 'my/new/file.jpg');

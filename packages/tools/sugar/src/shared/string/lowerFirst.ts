@@ -17,6 +17,8 @@
  * @todo      doc
  * @todo      tests
  *
+ * @snippet         __lowerFirst($1)
+ * 
  * @example    js
  * import { __lowerFirst } from '@coffeekraken/sugar/string'
  * __lowerFirst('Hello world') // hello world

@@ -15,7 +15,7 @@ const dom_1 = require("@coffeekraken/sugar/dom");
  * @param 		{HTMLElement} 					$elm  		The element to start on
  * @return 		{HTMLElement} 								The element found or null
  *
- * @snippet         __closestScrollable($1);
+ * @snippet         __closestScrollable($1)
  *
  * @todo      interface
  * @todo      doc

@@ -13,7 +13,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
  * @param 		{HTMLElement} 					elm  		The element to get the offset from
  * @return 		{top: number; left: number;} 									The offset top and left object
  *
- * @snippet         __offsetFromViewport($1);
+ * @snippet         __offsetFromViewport($1)
  *
  * @todo      interface
  * @todo      doc

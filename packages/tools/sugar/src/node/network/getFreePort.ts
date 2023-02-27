@@ -20,6 +20,9 @@ import { __isPortFree } from '@coffeekraken/sugar/network';
  * @todo      doc
  * @todo      tests
  *
+ * @snippet         __getFreePort()
+ * await __getFreePort()
+ * 
  * @example         js
  * import { __getFreePort } from '@coffeekraken/sugar/network';
  * await __getFreePort(); // => 22343

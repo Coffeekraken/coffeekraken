@@ -1,6 +1,6 @@
 import __SDocmap from '@coffeekraken/s-docmap';
 import __SPromise from '@coffeekraken/s-promise';
-import { __fileHash } from '@coffeekraken/sugar/fs';
+import { __fileHashSync } from '@coffeekraken/sugar/fs';
 import __fs from 'fs';
 
 export default function sitemap() {
@@ -27,7 +27,7 @@ export default function sitemap() {
                     );
                 } else {
                     // @ts-ignore
-                    hash = __fileHash(docmapObj.path);
+                    hash = __fileHashSync(docmapObj.path);
                     // save in stack
                     // @ts-ignore
                     hashesByPath[docmapObj.path] = hash;

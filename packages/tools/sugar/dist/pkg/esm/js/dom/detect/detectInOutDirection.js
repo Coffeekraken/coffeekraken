@@ -17,7 +17,7 @@ import __SPromise from '@coffeekraken/s-promise';
  * @event       in          Emitted when the pointer enters the element
  * @event       out         Emitted when the pointer leaves the element
  *
- * @snippet         __detectInOutDirection($1);
+ * @snippet         __detectInOutDirection($1)
  * __detectInOutDirection($1).on('in', direction => {
  *      $2
  * }).on('out', direction => {

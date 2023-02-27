@@ -16,6 +16,8 @@ import __fs from 'fs';
  * @param       {IComposerPathSettings}      [settings={}]       Some settings to configure your process
  * @return      {String}                      The package path
  *
+ * @snippet         __composerPath($1)
+ *
  * @example         js
  * import { __composerPath } from '@coffeekraken/sugar/composer`;
  * __composerPath('lodash');

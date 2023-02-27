@@ -18,6 +18,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
  * @todo      doc
  * @todo      tests
  *
+ * @snippet         __isEmail($1)
+ *
  * @example 	js
  * import { __isEmail } from '@coffeekraken/sugar/is';
  * __isEmail('john.doe@gmail.com') => true
@@ -32,4 +34,4 @@ function __isEmail(value) {
     return re.test(value.toLowerCase());
 }
 exports.default = __isEmail;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOztBQUVkOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBeUJHO0FBQ0gsU0FBd0IsU0FBUyxDQUFDLEtBQWE7SUFDM0MsTUFBTSxFQUFFLEdBQ0osd0pBQXdKLENBQUM7SUFDN0osT0FBTyxFQUFFLENBQUMsSUFBSSxDQUFDLEtBQUssQ0FBQyxXQUFXLEVBQUUsQ0FBQyxDQUFDO0FBQ3hDLENBQUM7QUFKRCw0QkFJQyJ9
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOztBQUVkOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0EyQkc7QUFDSCxTQUF3QixTQUFTLENBQUMsS0FBYTtJQUMzQyxNQUFNLEVBQUUsR0FDSix3SkFBd0osQ0FBQztJQUM3SixPQUFPLEVBQUUsQ0FBQyxJQUFJLENBQUMsS0FBSyxDQUFDLFdBQVcsRUFBRSxDQUFDLENBQUM7QUFDeEMsQ0FBQztBQUpELDRCQUlDIn0=

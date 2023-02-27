@@ -15,6 +15,8 @@
  * @todo      doc
  * @todo      tests
  *
+ * @snippet         __hexToRgba($1)
+ * 
  * @example         js
  * import { __hexToRgba } from '@coffeekraken/sugar/color';
  * __hexToRgba('#ff00ff');

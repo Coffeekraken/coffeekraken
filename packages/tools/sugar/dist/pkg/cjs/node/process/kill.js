@@ -27,6 +27,8 @@ const fkill_1 = __importDefault(require("fkill"));
  * @param       {number|string}            portOrId        The port or the id of the process you want to kill. If you want to kill from a port, prefix your port with ":" like so ":8888"
  * @return      {Promise}                           A promise resolved if the process has been killed, rejected if not
  *
+ * @snippet         __kill($1)
+ *
  * @example         js
  * import { __kill } from '@coffeekraken/sugar/process';
  * await __kill(':8888'); // port
@@ -42,4 +44,4 @@ function __kill(portOrId) {
     });
 }
 exports.default = __kill;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7O0FBQUEsa0RBQTRCO0FBRTVCOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBc0JHO0FBQ0gsU0FBOEIsTUFBTSxDQUFDLFFBQXlCOztRQUMxRCxPQUFPLElBQUEsZUFBTyxFQUFDLFFBQVEsQ0FBQyxDQUFDO0lBQzdCLENBQUM7Q0FBQTtBQUZELHlCQUVDIn0=
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7O0FBQUEsa0RBQTRCO0FBRTVCOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0F3Qkc7QUFDSCxTQUE4QixNQUFNLENBQUMsUUFBeUI7O1FBQzFELE9BQU8sSUFBQSxlQUFPLEVBQUMsUUFBUSxDQUFDLENBQUM7SUFDN0IsQ0FBQztDQUFBO0FBRkQseUJBRUMifQ==

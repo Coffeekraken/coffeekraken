@@ -22,6 +22,9 @@ const stringify_1 = __importDefault(require("../../shared/json/stringify"));
  * @param       {Object}              [options={}]  options are what you'd pass to [fs.writeJson()](https://nodejs.org/api/fs.html#fs_fs_writefile_file_data_options_callback)
  * @return      {Promise}                           A promise that will be resolved when the writeJson is completed
  *
+ * @snippet         __writeJson($1, $2)
+ * await _writeJson($1, $2)
+ *
  * @example       js
  * import { __writeJson } from '@coffeekraken/sugar/fs';
  * __writeJson('my/cool/file.json', { hello: 'world' }).then(() => {
@@ -38,4 +41,4 @@ function __writeJson(path, data, options = {}) {
     return fs_2.default.writeFile(path, jsonStr);
 }
 exports.default = __writeJson;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOzs7OztBQUVkLCtDQUF1RTtBQUN2RSw0Q0FBc0I7QUFDdEIsNEVBQXNEO0FBRXREOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQXVCRztBQUNILFNBQXdCLFdBQVcsQ0FBQyxJQUFJLEVBQUUsSUFBSSxFQUFFLE9BQU8sR0FBRyxFQUFFO0lBQ3hELE1BQU0sVUFBVSxHQUFHLElBQUEsaUJBQVksRUFBQyxJQUFJLENBQUMsQ0FBQztJQUN0QyxJQUFBLG9CQUFlLEVBQUMsVUFBVSxDQUFDLENBQUM7SUFDNUIsTUFBTSxPQUFPLEdBQUcsSUFBQSxtQkFBVyxFQUFDLElBQUksRUFBRSxJQUFJLEVBQUUsQ0FBQyxDQUFDLENBQUM7SUFDM0MsT0FBTyxZQUFJLENBQUMsU0FBUyxDQUFDLElBQUksRUFBRSxPQUFPLENBQUMsQ0FBQztBQUN6QyxDQUFDO0FBTEQsOEJBS0MifQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOzs7OztBQUVkLCtDQUF1RTtBQUN2RSw0Q0FBc0I7QUFDdEIsNEVBQXNEO0FBRXREOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQTBCRztBQUNILFNBQXdCLFdBQVcsQ0FBQyxJQUFJLEVBQUUsSUFBSSxFQUFFLE9BQU8sR0FBRyxFQUFFO0lBQ3hELE1BQU0sVUFBVSxHQUFHLElBQUEsaUJBQVksRUFBQyxJQUFJLENBQUMsQ0FBQztJQUN0QyxJQUFBLG9CQUFlLEVBQUMsVUFBVSxDQUFDLENBQUM7SUFDNUIsTUFBTSxPQUFPLEdBQUcsSUFBQSxtQkFBVyxFQUFDLElBQUksRUFBRSxJQUFJLEVBQUUsQ0FBQyxDQUFDLENBQUM7SUFDM0MsT0FBTyxZQUFJLENBQUMsU0FBUyxDQUFDLElBQUksRUFBRSxPQUFPLENBQUMsQ0FBQztBQUN6QyxDQUFDO0FBTEQsOEJBS0MifQ==

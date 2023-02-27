@@ -17,6 +17,8 @@
  * @todo      doc
  * @todo      tests
  *
+ * @snippet         __canHaveChildren($1)
+ *
  * @example       js
  * import { __canHaveChildren } from '@coffeekraken/sugar/dom';
  *  __canHaveChildren('img'); // => false

@@ -9,7 +9,7 @@ import {
     __copySync,
     __ensureDirSync,
     __folderPath,
-    __removeSync,
+    __removeSync
 } from '@coffeekraken/sugar/fs';
 import { __deepMerge } from '@coffeekraken/sugar/object';
 import { __packageRootDir } from '@coffeekraken/sugar/path';
@@ -35,14 +35,38 @@ import __SImagesBuilderSettingsInterface from './interface/SImagesBuilderSetting
  *
  * @param           {ISImagesBuilderSettings}         [settings={}]           Some settings to configure your image compression process
  *
- * @example         js
- * import SImagesBuilder from '@coffeekraken/s-image-builder';
- * const builder = new SImagesBuilder({
- *      imagesBuilder: {
- *          // some settings...
- *      }
+ * @snippet         __SImagesBuilder($1)
+ * const imagesBuilder = new __SImagesBuilder();
+ * const imagesBuilderResult = await imagesBuilder.build({
+ *      glob: $1,
+ *      inDir: $2,
+ *      outDir: $3,
+ *      quality: 80,
+ *      webp: true,
+ *      width: 1280,
+ *      height: 1280,
+ *      resolution: [1,2],
+ *      clear: false
+ *      specificParams: {}
  * });
- * await builder.build('src/** /*.jpg');
+ * 
+ * @example         js
+ * import __SImagesBuilder from '@coffeekraken/s-image-builder';
+ * const imagesBuilder = new __SImagesBuilder({
+ *     // some settings...
+ * });
+ * const imagesBuilderResult = await imagesBuilder.build({
+ *      glob: '** /*.jpg',
+ *      inDir: 'src/img',
+ *      outDir: 'dist/img',
+ *      quality: 80,
+ *      webp: true,
+ *      width: 1280,
+ *      height: 1280,
+ *      resolution: [1,2],
+ *      clear: false
+ *      specificParams: {}
+ * });
  *
  * @see             https://www.npmjs.com/package/sharp
  * @since           2.0.0

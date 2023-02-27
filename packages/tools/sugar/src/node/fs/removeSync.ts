@@ -17,6 +17,8 @@ import __fs from 'fs-extra';
  * @todo      doc
  * @todo      tests
  *
+ * @snippet         __removeSync($1)
+ * 
  * @example       js
  * import { __removeSync } from '@coffeekraken/sugar/fs';
  *  __removeSync('my/cool/file.json');

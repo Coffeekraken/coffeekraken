@@ -405,7 +405,7 @@ class SFile extends __SClass implements ISFile {
      * @since       2.0.0
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    constructor(filepath: string, settings?: ISFileSettings) {
+    constructor(filepath: string, settings?: Partial<ISFileSettings>) {
         super(
             __deepMerge(
                 {

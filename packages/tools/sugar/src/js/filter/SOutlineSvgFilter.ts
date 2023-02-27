@@ -12,6 +12,10 @@ import { __SSvgFilter } from '@coffeekraken/sugar/filter';
  *
  * This class represent an outline filter that can be applied on any HTMLElement.
  *
+ * @snippet         __SOutlineSvgFilter()
+ * const filter = new __SOutlineSvgFilter();
+ * filter.applyTo($1);
+ *
  * @example 		js
  * import {__SOutlineSvgFilter } from '@coffeekraken/sugar/filter';
  * const filter = new __SOutlineSvgFilter();

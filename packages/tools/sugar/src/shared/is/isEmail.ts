@@ -17,6 +17,8 @@
  * @todo      doc
  * @todo      tests
  *
+ * @snippet         __isEmail($1)
+ * 
  * @example 	js
  * import { __isEmail } from '@coffeekraken/sugar/is';
  * __isEmail('john.doe@gmail.com') => true

@@ -19,6 +19,8 @@ const param_case_1 = require("param-case");
  * @todo      doc
  * @todo      tests
  *
+ * @snippet         __paramCase($1)
+ *
  * @example       js
  * import { __paramCase } from '@coffeekraken/sugar/string';
  * __paramCase('some thoing cool'); // => some-thing-cool
@@ -31,4 +33,4 @@ function __paramCase(string) {
     return (0, param_case_1.paramCase)(string);
 }
 exports.default = __paramCase;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOztBQUVkLDJDQUF1QztBQUV2Qzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBd0JHO0FBQ0gsU0FBd0IsV0FBVyxDQUFDLE1BQU07SUFDdEMsT0FBTyxJQUFBLHNCQUFTLEVBQUMsTUFBTSxDQUFDLENBQUM7QUFDN0IsQ0FBQztBQUZELDhCQUVDIn0=
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOztBQUVkLDJDQUF1QztBQUV2Qzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0EwQkc7QUFDSCxTQUF3QixXQUFXLENBQUMsTUFBTTtJQUN0QyxPQUFPLElBQUEsc0JBQVMsRUFBQyxNQUFNLENBQUMsQ0FBQztBQUM3QixDQUFDO0FBRkQsOEJBRUMifQ==

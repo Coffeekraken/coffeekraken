@@ -15,6 +15,8 @@ import { __extension } from '@coffeekraken/sugar/fs';
  * @param           {Boolean}             [withExtension=true]        Tell if we want the filename with or without the extension
  * @return          {String}                                  The requested filename
  *
+ * @snippet         __filename($1)
+ *
  * @example       js
  * import { __filename } from '@coffeekraken/sugar/fs';
  * __filename('hello/world.js'); // => world.js

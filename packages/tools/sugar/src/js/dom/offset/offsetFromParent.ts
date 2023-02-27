@@ -13,7 +13,7 @@ import { __offsetFromViewport } from '@coffeekraken/sugar/dom';
  * @param 		{HTMLElement} 					elm  		The element to get the offset from
  * @return 		{top: number; left: number;} 									The offset top and left object
  *
- * @snippet         __offsetFromParent($1);
+ * @snippet         __offsetFromParent($1)
  *
  * @todo      interface
  * @todo      doc

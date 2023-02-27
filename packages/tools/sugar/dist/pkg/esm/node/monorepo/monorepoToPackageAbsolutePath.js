@@ -2,7 +2,7 @@ import { __packageRootDir } from '@coffeekraken/sugar/path';
 /**
  * @name            monorepoToPackageAbsolutePath
  * @type            Function
- * @static
+ * @private
  *
  * This static method allows you to make the passed path absolute to the package root passed.
  * It will check if the passed package is in a monorepo, and relace the monorepo root path with the passed

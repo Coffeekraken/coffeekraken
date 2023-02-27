@@ -32,6 +32,8 @@ import __unquote from '../string/unquote';
  * @todo      doc
  * @todo      tests
  *
+ * @snippet         __parseArgs($1)
+ * 
  * @example         js
  * import { __parseArgs } from '@coffeekraken/sugar/cli';
  * __parseArgs('hello -w 10 yop "hello world" -b --hello.world Nelson --help "coco yep" #blop', {

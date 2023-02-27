@@ -3,9 +3,9 @@ module.exports = (__throttle) => {
   describe('sugar.js.function.throttle', () => {
 
     let calledCount = 0;
-    const fn = __throttle(() => {
+    const fn = __throttle(100, () => {
       calledCount++;
-    }, 100);
+    });
 
     fn();
     fn();

@@ -32,7 +32,7 @@ import type { TWhenTrigger } from '../detect/when';
  * @setting         {HTMLElement}           [rootNode=document]         The root node from where to observe childs
  * @setting         {Boolean}              [once=true]                If true, each observed nodes will be handled only once even if they are removed and reinjected in the dom
  *
- * @snippet         __querySelectorLive($1, $2);
+ * @snippet         __querySelectorLive($1, $2)
  * __querySelectorLive($1, \$elm => {
  *      $2
  * });

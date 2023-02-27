@@ -17,6 +17,8 @@
  * @todo      doc
  * @todo      tests
  *
+ * @snippet         __getCssDeclarations()
+ *
  * @example  	js
  * import { __getCssDeclarations } from '@coffeekraken/sugar/dom';
  * __getCssDeclarations('style', [myCoolCssRules]);

@@ -17,15 +17,26 @@ import { __deepMerge } from '@coffeekraken/sugar/object';
  *
  * @param           {Object}                        [settings={}]       Specify an object of settings to configure your compilation process
  *
- * @example         js
- * import SBuilder from '@coffeekraken/s-builder';
- * import SPromise from '@coffeekraken/s-promise';
- * class MyBuilder extends SBuilder {
+ * @snippet         __SBuilder
+ * class $1 extends __SBuilder {
  *      constructor(settings = {}) {
  *          super(settings);
  *      }
  *      _build(params, settings) {
- *          return new SPromise(({resolve, reject, emit}) => {
+ *          return new Promise(resolve => {
+ *              $2
+ *          });
+ *      }
+ * }
+ * 
+ * @example         js
+ * import __SBuilder from '@coffeekraken/s-builder';
+ * class MyBuilder extends __SBuilder {
+ *      constructor(settings = {}) {
+ *          super(settings);
+ *      }
+ *      _build(params, settings) {
+ *          return new Promise(async (resolve) => {
  *              // compilation logic
  *          });
  *      }

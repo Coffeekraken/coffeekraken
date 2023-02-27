@@ -22,6 +22,8 @@ import __stringify from 'fast-safe-stringify';
  * @todo      doc
  * @todo      tests
  *
+ * @snippet         __stringify($1)
+ * 
  * @example         js
  * import { __stringify } from '@coffeekraken/sugar/json';
  * __stringify({

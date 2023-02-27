@@ -15,6 +15,8 @@ import __simplifySpecialChars from './simplifySpecialChars';
  * @param       {String}        string         The string to process
  * @return      {String}                        The processed string
  *
+ * @snippet         __urlCompliant($1)
+ * 
  * @example         php
  * import { __urlCompliant } from '@coffeekraken/sugar/string';
  * __urlCompliant('Hello world'); // => hello-world

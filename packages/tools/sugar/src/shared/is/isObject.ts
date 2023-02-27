@@ -17,6 +17,8 @@
  * @todo      doc
  * @todo      tests
  *
+ * @snippet         __isObject($1)
+ * 
  * @example    js
  * import { __isObject } from '@coffeekraken/sugar/is'
  * if (__isObject({}) {

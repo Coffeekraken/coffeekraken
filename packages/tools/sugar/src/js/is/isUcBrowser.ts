@@ -15,6 +15,8 @@
  * @todo      doc
  * @todo      tests
  *
+ * @snippet         __isUcBrowser()
+ *
  * @example    js
  * import { __isUcBrowser } from '@coffeekraken/sugar/is'
  * if (__isUcBrowser()) {

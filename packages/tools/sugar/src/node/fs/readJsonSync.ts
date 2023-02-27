@@ -12,6 +12,8 @@ import __fs from 'fs';
  * @param       {String}           path            The json file path to read
  * @return      {Object}                            The readed json
  *
+ * @snippet         __readJsonSync($1)
+ * 
  * @example         js
  * import { __readJsonSync } from '@coffeekraken/sugar/fs';
  * __readJsonSync('my-cool-json/file.json');

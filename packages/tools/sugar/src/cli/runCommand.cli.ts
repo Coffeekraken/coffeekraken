@@ -16,7 +16,7 @@ export default function runCommand(stringArgs = '') {
         let currentDuration = 0;
 
         if (props.directory) {
-            paths = <string[]>__SGlob.resolve(props.directory, {
+            paths = <string[]>__SGlob.resolveSync(props.directory, {
                 cwd: process.cwd(),
                 nodir: false,
                 SFile: false,

@@ -16,6 +16,8 @@
  * @todo      doc
  * @todo      tests
  *
+ * @snippet         __isFirefox()
+ *
  * @example 	js
  * import { __isFirefox } from '@coffeekraken/sugar/is'
  * if (__isFirefox()) {

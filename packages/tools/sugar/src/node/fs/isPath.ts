@@ -1,7 +1,7 @@
 // @ts-nocheck
 
-import __isValidPath from 'is-valid-path';
 import __fs from 'fs';
+import __isValidPath from 'is-valid-path';
 
 /**
  * @name                            isPath
@@ -15,6 +15,8 @@ import __fs from 'fs';
  * @param         {String}            path              The path to check
  * @param         {Boolean}           [checkExistence=false]      Specify if you want to check that the passed path actually exist
  * @return        {Boolean}                             true if the path is valide, false if not
+ *
+ * @snippet         __isPath($1)
  *
  * @example       js
  * import { __isPath } from '@coffeekraken/sugar/fs';

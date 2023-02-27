@@ -19,6 +19,11 @@ import __parseSemverString, {
  *
  * @return          {ICoffeekrakenMetas}                The coffeekraken metas object
  *
+ * @snippet         __getCoffeekrakenMetas()
+ * __getCoffeekrakenMetas().then(metas => {
+ *      $1
+ * });
+ *
  * @example         js
  * import { __getCoffeekrakenMetas } from '@coffeekraken/sugar/coffeekraken';
  * await __getCoffeekrakenMetas();

@@ -22,7 +22,7 @@ import __autoCast from '../../../shared/string/autoCast';
  * @param 		{Function} 					[checkFn=null] 		An optional function to check the attribute. The promise is resolved when this function return true
  * @return 		(Promise) 										The promise that will be resolved when the attribute exist on the element (and that it passes the checkFn)
  *
- * @snippet         __whenAttribute($1, $2);
+ * @snippet         __whenAttribute($1, $2)
  * __whenAttribute($1, $2).then(value => {
  *      $3
  * });

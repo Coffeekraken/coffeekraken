@@ -18,6 +18,8 @@ import __dashCase from './dashCase';
  * @todo      doc
  * @todo      tests
  *
+ * @snippet         __snakeCase($1)
+ * 
  * @example     js
  * import { __snakeCase } from '@coffeekraken/sugar/string';
  * __snakeCase('hello world'); // => hello_world

@@ -19,6 +19,8 @@ import __isClass from 'is-class';
  * @todo      doc
  * @todo      tests
  *
+ * @snippet         __isClass($1)
+ * 
  * @example           js
  * import { __isClass } = from '@coffeekraken/sugar/is';
  * __isClass({ hello: 'world'}); // => false

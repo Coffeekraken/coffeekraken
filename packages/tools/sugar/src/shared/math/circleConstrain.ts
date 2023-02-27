@@ -21,6 +21,13 @@ import distanceBetween from './distanceBetween';
  * @todo      doc
  * @todo      tests
  *
+ * @snippet         __circleConstrain($1, $1)
+ * __circleConstain({
+ *      x: $1, y: $2
+ * }, $3, {
+ *      x: $4, y: $5
+ * })
+ * 
  * @example    js
  * import { __circleConstrain } from '@coffeekraken/sugar/math'
  * __circleConstrain({

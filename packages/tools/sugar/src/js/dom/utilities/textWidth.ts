@@ -18,6 +18,8 @@ import { __getStyleProperty } from '@coffeekraken/sugar/dom';
  * @todo      doc
  * @todo      tests
  *
+ * @snippet         __textWidth($1)
+ *
  * @example 	js
  * import { __textWidth } from '@coffeekraken/sugar/dom'
  * // text of an HTMLElement

@@ -4,7 +4,8 @@
  * @type      Function
  * @platform          js
  * @status          wip
- *
+ * @private
+ * 
  * Parses KeyFrameRule.keyText to an array of integers holding keyframe percentages
  *
  * @param 		 {string}		 keyText			 KeyFrameRule.keyText to parse
@@ -14,6 +15,8 @@
  * @todo      interface
  * @todo      doc
  * @todo      tests
+ *
+ * @snippet         __parseKeyframeKey($1) 
  *
  * @example  	js
  * import { __parseKeyframeKey } from '@coffeekraken/sugar/css';

@@ -24,6 +24,8 @@ import __uniqid from '../../node/string/uniqid';
  *
  * @todo      tests
  *
+ * @snippet         __writeTmpFileSync($1, $2)
+ * 
  * @example       js
  * import { __writeTmpFileSync } from '@coffeekraken/sugar/fs';
  * const path = __writeTmpFileSync('Hello World');

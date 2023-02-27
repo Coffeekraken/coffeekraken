@@ -26,6 +26,10 @@ import __SCarpenterStartParamsInterface from './interface/SCarpenterStartParamsI
  * @todo      doc
  * @todo      tests
  *
+ * @snippet         __SCarpenter($1)
+ * const carpenter = new __SCarpenter($1);
+ * carpenter.start();
+ * 
  * @example             js
  * import SCarpenter from '@coffeekraken/s-carpenter';
  * const carpenter = new SCarpenter();

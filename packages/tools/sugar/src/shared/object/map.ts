@@ -21,6 +21,11 @@
  * @todo      doc
  * @todo      tests
  *
+ * @snippet         __map($1, $2)
+ * __map($1, ({value, prop}) => {
+ *      $2
+ * })
+ * 
  * @example         js
  * import { __map } from '@coffeekraken/sugar/object';
  * const myObject = {

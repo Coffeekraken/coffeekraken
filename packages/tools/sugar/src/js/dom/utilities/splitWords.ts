@@ -27,6 +27,8 @@
  * @todo      doc
  * @todo      tests
  *
+ * @snippet         __splitWords($1)
+ *
  * @example 	js
  * import { __splitWords } from '@coffeekraken/sugar/dom'
  * const myCoolElement = document.querySelector('.my-cool-element');

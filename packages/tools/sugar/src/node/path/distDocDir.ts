@@ -17,6 +17,8 @@ import __SSugarConfig from '@coffeekraken/s-sugar-config';
  * @todo      doc
  * @todo      tests
  *
+ * @snippet         __distDocDir()
+ * 
  * @example             js
  * import { __distDocDir } from '@coffeekraken/sugar/path';
  * __distDocDir(); // => '/somethign/dist/doc'

@@ -18,6 +18,8 @@ import * as rematrix from 'rematrix';
  * @todo      doc
  * @todo      tests
  *
+ * @snippet         __getScaleProperty($1)
+ *
  * @example  	js
  * import { __getScaleProperty } from '@coffeekraken/sugar/dom'
  * const props = __getScaleProperty(myCoolHTMLElement);

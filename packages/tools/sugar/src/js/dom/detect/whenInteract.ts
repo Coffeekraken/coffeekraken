@@ -24,7 +24,7 @@ import __WhenInteractSettingsInterface from './interface/WhenInteractSettingsInt
  * @setting         {boolean}           [touchend=true]          Specify if you want to detect the touchend or not
  * @setting         {boolean}           [focus=true]          Specify if you want to detect the focus or not
  *
- * @snippet         __whenInteract($1);
+ * @snippet         __whenInteract($1)
  * __whenInteract($1).then(\$elm => {
  *      $2
  * });

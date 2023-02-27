@@ -9,6 +9,7 @@ import __parseEs6Imports from 'parse-es6-imports';
  * @platform          js
  * @platform          node
  * @status              alpha
+ * @private
  *
  * This class represent an es6 import statement with properties like:
  * - path {String}: The import path

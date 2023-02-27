@@ -14,6 +14,8 @@
  *
  * @todo        tests
  *
+ * @snippet         __utcTime()
+ * 
  * @example         js
  * import { __utcTime } from '@coffeekraken/sugar/date';
  * __utcTime(); // => 10:20:32

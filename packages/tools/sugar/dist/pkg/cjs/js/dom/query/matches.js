@@ -14,7 +14,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
  * @param 		{String} 				selector 		The selector to check on the element
  * @return 		{Boolean} 								If the element match the selector or not
  *
- * @snippet         __matches($1, $2);
+ * @snippet         __matches($1, $2)
  *
  * @todo      interface
  * @todo      doc

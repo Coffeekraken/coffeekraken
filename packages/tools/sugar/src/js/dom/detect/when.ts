@@ -44,7 +44,7 @@ import {
  * @setting         {Partial<IWhenVisibleSettings>}      [whenVisible={}]         Some settings for the whenVisible function
  * @setting         {Partial<IWhenStyleSheetsReadySettings>}      [whenStylesheetsReady={}]         Some settings for the whenStylesheetsReady function
  *
- * @snippet         __when($1, $2, $3);
+ * @snippet         __when($1, $2, $3)
  * __when($1, $2).then(() => {
  *      $2
  * });

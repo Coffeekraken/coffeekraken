@@ -23,6 +23,8 @@ const sprintf_js_1 = __importDefault(require("sprintf-js"));
  * @todo      doc
  * @todo      tests
  *
+ * @snippet         __printf($1)
+ *
  * @example     js
  * import { __printf } from '@coffeekraken/sugar/string';
  * __printf('Hello %s', 'world'); // => Hello world
@@ -37,4 +39,4 @@ function __printf(...args) {
     return sprintf_js_1.default.sprintf.apply(null, args);
 }
 exports.default = __printf;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOzs7OztBQUVkLDREQUFtQztBQUVuQzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBMkJHO0FBQ0gsU0FBd0IsUUFBUSxDQUFDLEdBQUcsSUFBSTtJQUNwQyxPQUFPLG9CQUFTLENBQUMsT0FBTyxDQUFDLEtBQUssQ0FBQyxJQUFJLEVBQUUsSUFBSSxDQUFDLENBQUM7QUFDL0MsQ0FBQztBQUZELDJCQUVDIn0=
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOzs7OztBQUVkLDREQUFtQztBQUVuQzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0E2Qkc7QUFDSCxTQUF3QixRQUFRLENBQUMsR0FBRyxJQUFJO0lBQ3BDLE9BQU8sb0JBQVMsQ0FBQyxPQUFPLENBQUMsS0FBSyxDQUFDLElBQUksRUFBRSxJQUFJLENBQUMsQ0FBQztBQUMvQyxDQUFDO0FBRkQsMkJBRUMifQ==

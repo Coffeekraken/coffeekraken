@@ -24,6 +24,13 @@ import __easeInOutQuart from '../easing/easeInOutQuart';
  * @setting         {Number}        [from=0]                    The value to start with
  * @setting         {Number}        [to=100]                    The value to end with
  *
+ * @snippet         __easeInterval($1, $2)
+ * const easeInterval = __easeInterval($1, percent => {
+ *      $2
+ * });
+ * // easeInterval.cancel(); // stop the easing process
+ * await easeInterval;
+ * 
  * @example         js
  * import { __easeInterval } from '@coffeekraken/sugar/function';
  * await __easeInterval(2000, (easedPercent) => {

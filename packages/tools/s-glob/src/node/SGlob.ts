@@ -3,7 +3,7 @@
 import __SClass from '@coffeekraken/s-class';
 import SFile from '@coffeekraken/s-file';
 import { __copySync } from '@coffeekraken/sugar/fs';
-import { __extractGlob, __extractNoneGlob, __resolveGlob } from '@coffeekraken/sugar/glob';
+import { __extractGlob, __extractNoneGlob, __resolveGlobSync } from '@coffeekraken/sugar/glob';
 import { __isGlob } from '@coffeekraken/sugar/is';
 import type { IResolveGlobSettings } from '@coffeekraken/sugar/node/glob/resolveGlob';
 import { __deepMerge } from '@coffeekraken/sugar/object';
@@ -29,8 +29,8 @@ import __micromatch from 'micromatch';
  * @example         js
  * import SGlob from '@coffeekraken/sugar/node/glob/SGlob';
  * const glob = new SGlob('my/cool/glob/*.js');
- * const files = glob.resolve();
- * SGlob.resolve('my/cool/glob/*.js');
+ * const files = glob.resolveSync();
+ * SGlob.resolveSync('my/cool/glob/*.js');
  *
  * @since           2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -72,7 +72,7 @@ export default class SGlob extends __SClass {
     }
 
     /**
-     * @name                resolve
+     * @name                resolveSync
      * @type                Function
      * @static
      *
@@ -85,11 +85,11 @@ export default class SGlob extends __SClass {
      * @since         2.0.0
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    static resolve(
+    static resolveSync(
         globs,
         settings: Partial<IResolveGlobSettings> = {},
     ): SFile[] | string[] {
-        return __resolveGlob(globs, settings);
+        return __resolveGlobSync(globs, settings);
     }
 
     /**
@@ -208,9 +208,9 @@ export default class SGlob extends __SClass {
      * @since         2.0.0
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    resolve(settings: Partial<IResolveGlobSettings> = {}): SFile[] | string[] {
+    resolveSync(settings: Partial<IResolveGlobSettings> = {}): SFile[] | string[] {
         settings = __deepMerge(this.settings, settings);
-        return SGlob.resolve(this._globs, settings);
+        return SGlob.resolveSync(this._globs, settings);
     }
 
     /**
@@ -234,7 +234,7 @@ export default class SGlob extends __SClass {
         settings: Partial<IResolveGlobSettings> = {},
     ): SFile[] | string[] {
         settings = __deepMerge(this.settings, {}, settings);
-        const files = this.resolve(this._globs, settings);
+        const files = this.resolveSync(this._globs, settings);
 
         const copiedFiles: SFile | string[] = [];
         for (let [key, file] of Object.entries(files)) {

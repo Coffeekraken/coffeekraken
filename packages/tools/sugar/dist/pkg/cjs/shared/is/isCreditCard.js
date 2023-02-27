@@ -18,6 +18,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
  * @todo      doc
  * @todo      tests
  *
+ * @snippet         __isCreditCard($1)
+ *
  * @example 	js
  * import {__isCreditCard } from '@coffeekraken/sugar/is';
  * __isCreditCard('john.doe@gmail.com') => true
@@ -33,4 +35,4 @@ function __isCreditCard(value) {
     return re.test(value);
 }
 exports.default = __isCreditCard;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOztBQUVkOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQTBCRztBQUNILFNBQXdCLGNBQWMsQ0FBQyxLQUFhO0lBQ2hELE1BQU0sRUFBRSxHQUNKLHVLQUF1SyxDQUFDO0lBQzVLLE9BQU8sRUFBRSxDQUFDLElBQUksQ0FBQyxLQUFLLENBQUMsQ0FBQztBQUMxQixDQUFDO0FBSkQsaUNBSUMifQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOztBQUVkOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBNEJHO0FBQ0gsU0FBd0IsY0FBYyxDQUFDLEtBQWE7SUFDaEQsTUFBTSxFQUFFLEdBQ0osdUtBQXVLLENBQUM7SUFDNUssT0FBTyxFQUFFLENBQUMsSUFBSSxDQUFDLEtBQUssQ0FBQyxDQUFDO0FBQzFCLENBQUM7QUFKRCxpQ0FJQyJ9

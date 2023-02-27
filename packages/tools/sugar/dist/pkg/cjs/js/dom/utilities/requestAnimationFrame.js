@@ -17,6 +17,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
  * @todo      doc
  * @todo      tests
  *
+ * @snippet         __requestAnimationFrame()
+ *
  * @example     js
  * @import { __requestAnimationFrame } from '@coffeekraken/sugar/dom';
  * __requestAnimationFrame(function() {
@@ -37,4 +39,4 @@ try {
 }
 catch (e) { }
 exports.default = requestAnimationFrame;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOztBQUVkOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0F3Qkc7QUFFSCxJQUFJLHFCQUFxQixDQUFDO0FBQzFCLElBQUk7SUFDQSxxQkFBcUI7UUFDakIsTUFBTSxDQUFDLHFCQUFxQjtZQUM1QixNQUFNLENBQUMsMkJBQTJCO1lBQ2xDLE1BQU0sQ0FBQyx3QkFBd0I7WUFDL0IsTUFBTSxDQUFDLHNCQUFzQjtZQUM3QixNQUFNLENBQUMsdUJBQXVCLENBQUM7Q0FDdEM7QUFBQyxPQUFPLENBQUMsRUFBRSxHQUFFO0FBRWQsa0JBQWUscUJBQXFCLENBQUMifQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOztBQUVkOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQTBCRztBQUVILElBQUkscUJBQXFCLENBQUM7QUFDMUIsSUFBSTtJQUNBLHFCQUFxQjtRQUNqQixNQUFNLENBQUMscUJBQXFCO1lBQzVCLE1BQU0sQ0FBQywyQkFBMkI7WUFDbEMsTUFBTSxDQUFDLHdCQUF3QjtZQUMvQixNQUFNLENBQUMsc0JBQXNCO1lBQzdCLE1BQU0sQ0FBQyx1QkFBdUIsQ0FBQztDQUN0QztBQUFDLE9BQU8sQ0FBQyxFQUFFLEdBQUU7QUFFZCxrQkFBZSxxQkFBcUIsQ0FBQyJ9

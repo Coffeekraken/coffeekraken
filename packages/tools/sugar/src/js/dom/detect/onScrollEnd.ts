@@ -21,7 +21,7 @@
  *
  * @todo      tests
  *
- * @snippet         __onScrollEnd($1, $2);
+ * @snippet         __onScrollEnd($1, $2)
  * __onScrollEnd($1, () => {
  *      $2
  * });

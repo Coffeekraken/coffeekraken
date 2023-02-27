@@ -13,19 +13,19 @@ import __ensureFileSync from './ensureFileSync';
 import __exists from './exists';
 import __existsSync from './existsSync';
 import __extension from './extension';
-import __fileHash from './fileHash';
+import __fileHashSync from './fileHashSync';
 import __filename from './filename';
 import __findUp from './findUp';
-import __folderHash from './folderHash';
+import __folderHashSync from './folderHashSync';
 import __folderPath from './folderPath';
 import __folderSize from './folderSize';
 import __formatFileSize from './formatFileSize';
 import __getFiles from './getFiles';
-import __grabFirstExisting from './grabFirstExisting';
+import __grabFirstExistingSync from './grabFirstExistingSync';
 import __isPath from './isPath';
 import __move from './move';
 import __moveSync from './moveSync';
-import __pickOne from './pickOne';
+import __pickOneSync from './pickOneSync';
 import __pool from './pool';
 import __prependToFileSync from './prependToFileSync';
 import __readJson from './readJson';
@@ -56,20 +56,20 @@ export {
     __exists,
     __existsSync,
     __extension,
-    __fileHash,
+    __fileHashSync,
     __filename,
     __filename as __fileName,
     __findUp,
-    __folderHash,
+    __folderHashSync,
     __folderPath,
     __folderSize,
     __formatFileSize,
     __getFiles,
-    __grabFirstExisting,
+    __grabFirstExistingSync,
     __isPath,
     __move,
     __moveSync,
-    __pickOne,
+    __pickOneSync,
     __pool,
     __prependToFileSync,
     __readJson,

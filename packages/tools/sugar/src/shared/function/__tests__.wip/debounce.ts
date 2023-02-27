@@ -4,9 +4,9 @@ module.exports = (__debounce) => {
 
     let calledCount = 0;
 
-    const myCoolFn = __debounce((param1) => {
+    const myCoolFn = __debounce(100, (param1) => {
       calledCount++;
-    }, 100);
+    });
 
     myCoolFn();
     myCoolFn();

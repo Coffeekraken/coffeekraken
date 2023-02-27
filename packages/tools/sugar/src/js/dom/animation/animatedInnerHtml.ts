@@ -24,7 +24,7 @@ import __convertTime from '../../../shared/datetime/convertTime';
  * @param           {Object}                 [settings={}]  The settings to change the content like 'animIn', 'animOut', and more...
  * @return          {Promise}                               A promise resolved when the change has been made
  *
- * @snippet         __animatedInnerHtml($1, $2);
+ * @snippet         __animatedInnerHtml($1, $2)
  *
  * @todo      interface
  * @todo      doc

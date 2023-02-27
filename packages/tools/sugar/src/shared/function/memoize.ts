@@ -11,6 +11,11 @@ import __memoizee from 'memoizee';
  * This function can be used to memorize a function call result in order to save memory.
  * This is just a "proxy" of the "memoizee" package.
  *
+ * @snippet         __momoize($1)
+ * 
+ * @param       {Function}          fn      The function to memoize his result
+ * @return      {Any}                       The memoized function result
+ * 
  * @example         js
  * import { __memoize } from '@coffeekraken/sugar/function';
  * const fn =  __memoize(function(text) => {

@@ -22,6 +22,8 @@ import __deepMerge from '../object/deepMerge';
  * @todo      doc
  * @todo      tests
  *
+ * @snippet         __trimLines($1)
+ * 
  * @example         js
  * import { __trimLines } from '@coffeekraken/sugar/string';
  * __trimLines(`my cool lines

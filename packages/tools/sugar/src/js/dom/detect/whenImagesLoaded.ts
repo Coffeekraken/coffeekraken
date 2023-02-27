@@ -19,7 +19,7 @@ import { __whenImageLoaded } from '@coffeekraken/sugar/dom';
  * @param    {Array<HTMLImageElement>}    $imgs    An array (or nodeList) of HTMLImageElement to detect the load
  * @return    {Promise}    A promise resolved when all images are loaded properly
  *
- * @snippet         __whenImagesLoaded($1);
+ * @snippet         __whenImagesLoaded($1)
  * __whenImagesLoaded($1).then(imgs => {
  *      $2
  * });

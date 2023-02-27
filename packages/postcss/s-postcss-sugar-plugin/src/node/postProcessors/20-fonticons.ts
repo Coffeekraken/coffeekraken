@@ -4,7 +4,7 @@ import __SSugarConfig from '@coffeekraken/s-sugar-config';
 import {
     __ensureDirSync,
     __extension,
-    __folderHash,
+    __folderHashSync,
     __writeFileSync,
 } from '@coffeekraken/sugar/fs';
 import {
@@ -86,7 +86,7 @@ export default async function ({ root, sharedData, settings }) {
     });
 
     // get actual folder hash
-    const folderHash = __folderHash(inputDir);
+    const folderHash = __folderHashSync(inputDir);
 
     // use cache only if the target is  "vite"
     const hashCacheFilePath = `${__packageCacheDir()}/postcss/iconsFolderHash.txt`;

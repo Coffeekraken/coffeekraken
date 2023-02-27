@@ -12,6 +12,8 @@ import __unescape from 'unescape';
  * @param       {String}            html            The html to unescape
  * @return      {String}                            The unescaped html
  *
+ * @snippet         __unescapeHtml($1)
+ *
  * @example         js
  * import { __unescapeHtml } from '@coffeekraken/sugar/html';
  * __unescapeHtml('&lt;s-code-example&gt;'); // => <s-code-example>
@@ -24,4 +26,4 @@ export default function __unescapeHtml(html) {
     // @ts-ignore
     return __unescape(html);
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sVUFBVSxNQUFNLFVBQVUsQ0FBQztBQUVsQzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0FvQkc7QUFDSCxNQUFNLENBQUMsT0FBTyxVQUFVLGNBQWMsQ0FBQyxJQUFJO0lBQ3ZDLGFBQWE7SUFDYixPQUFPLFVBQVUsQ0FBQyxJQUFJLENBQUMsQ0FBQztBQUM1QixDQUFDIn0=
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sVUFBVSxNQUFNLFVBQVUsQ0FBQztBQUVsQzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQXNCRztBQUNILE1BQU0sQ0FBQyxPQUFPLFVBQVUsY0FBYyxDQUFDLElBQUk7SUFDdkMsYUFBYTtJQUNiLE9BQU8sVUFBVSxDQUFDLElBQUksQ0FBQyxDQUFDO0FBQzVCLENBQUMifQ==

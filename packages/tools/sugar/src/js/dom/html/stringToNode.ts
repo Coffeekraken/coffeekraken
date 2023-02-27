@@ -12,7 +12,7 @@
  * @param    {HTMLElement}    html    The string to convert to dom nodes
  * @return    {HTMLElement}    The dom nodes representation of the passed string
  *
- * @snippet         __stringToNode($1);
+ * @snippet         __stringToNode($1)
  *
  * @example    js
  * import { __stringToNode } from '@coffeekraken/sugar/dom'

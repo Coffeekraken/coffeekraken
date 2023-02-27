@@ -13,6 +13,8 @@
  * @param       {Number}       max             The maximum value
  * @return      {Number}                The clamped number
  *
+ * @snippet         __clamp($1, $2, $3)
+ * 
  * @example       js
  * import { __clamp } from '@coffeekraken/sugar/math';
  * __clamp(10, 0, 100); // => 10

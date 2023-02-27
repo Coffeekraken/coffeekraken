@@ -18,6 +18,9 @@ const fs_extra_1 = __importDefault(require("fs-extra"));
  * @param       {String}              file           The file to ensure that it exists...
  * @return      {Promise}                           A promise that will be resolved once the file has been created if needed...
  *
+ * @snippet         __ensureFile($1)
+ * await __ensureFile($1)
+ *
  * @example       js
  * import { __ensureFile } from '@coffeekraken/sugar/fs';
  * await __ensureFile('my/cool/file.jpg').then(() => {
@@ -32,4 +35,4 @@ function __ensureFile(file) {
     return fs_extra_1.default.ensureFile(file);
 }
 exports.default = __ensureFile;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOzs7OztBQUVkLHdEQUE0QjtBQUU1Qjs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQXNCRztBQUNILFNBQXdCLFlBQVksQ0FBQyxJQUFJO0lBQ3JDLE9BQU8sa0JBQUksQ0FBQyxVQUFVLENBQUMsSUFBSSxDQUFDLENBQUM7QUFDakMsQ0FBQztBQUZELCtCQUVDIn0=
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOzs7OztBQUVkLHdEQUE0QjtBQUU1Qjs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQXlCRztBQUNILFNBQXdCLFlBQVksQ0FBQyxJQUFJO0lBQ3JDLE9BQU8sa0JBQUksQ0FBQyxVQUFVLENBQUMsSUFBSSxDQUFDLENBQUM7QUFDakMsQ0FBQztBQUZELCtCQUVDIn0=

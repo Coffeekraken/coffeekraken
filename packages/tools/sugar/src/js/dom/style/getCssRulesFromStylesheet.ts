@@ -16,6 +16,8 @@
  * @todo      doc
  * @todo      tests
  *
+ * @snippet         __getCssRulesFromStylesheet($1)
+ *
  * @example  	js
  * import { __getCssRulesFromStylesheet } from '@coffeekraken/sugar/dom';
  * __getCssRulesFromStylesheet(myStylesheet);

@@ -25,6 +25,9 @@ import __deepMerge from '../object/deepMerge';
  * - regexp ('\\[([a-zA-Z0-9-_]+)\\]') {String}: Specify the token reg to use for detecting/replacing values
  * - stripUndefined (true) {Boolean}: Specify if you want to strip the tokens that doesn't have any value passed
  *
+ * @snippet         (string) __replaceTokens($1, $2)
+ * __replaceTokens($1, $2)
+ * 
  * @example     js
  * import replaceTokens from '@coffeekraken/sugar/js/string/replaceTokens';
  * replaceTokens('hello [world]', { world: 'Coco' }); // => hello Coco

@@ -1,7 +1,7 @@
 import __autoCast from './autoCast';
 import __camelCase from './camelCase';
 import __camelize from './camelize';
-import __countLine from './countLine';
+import __countLineChars from './countLineChars';
 import __crop from './crop';
 import __dashCase from './dashCase';
 import __dedupe from './dedupe';
@@ -35,7 +35,7 @@ export {
     __autoCast,
     __camelCase,
     __camelize,
-    __countLine,
+    __countLineChars,
     __crop,
     __dashCase,
     __dedupe,

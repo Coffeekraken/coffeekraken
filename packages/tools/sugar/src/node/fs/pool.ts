@@ -1,7 +1,7 @@
 import __SFile from '@coffeekraken/s-file';
 import __SPromise from '@coffeekraken/s-promise';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
-import { __matchGlob } from '@coffeekraken/sugar/glob';
+import { __matchGlobSync } from '@coffeekraken/sugar/glob';
 import __chokidar from 'chokidar';
 import __fs from 'fs';
 import __expandGlob from '../../shared/glob/expandGlob';
@@ -11,15 +11,16 @@ import __deepMerge from '../../shared/object/deepMerge';
  * @name                pool
  * @namespace            node.fs
  * @type                Function
- * @async
  * @platform        node
  * @status          beta
+ * @async
  *
  * This function simply take as parameter a glob (or array of globs) pattern(s)
  * and return an SPromise instance through which you can subscribe to events like:
  * - ready: Emitted once the pool is ready
  * - add: Emitted when a file has been added
- * - change: Emitted when a file has been updated (alias to update)
+ * - change: Emitted when a file has been updated
+ * - update: Alias of "change"
  * - unlink: Emitted when a file has been deleted
  *
  * @param       {String|Array<String>}          input           The input glob(s)
@@ -32,6 +33,21 @@ import __deepMerge from '../../shared/object/deepMerge';
  * @setting             {Boolean}       [watch=false]           Specify if you want to watch files or not
  * @setting             {IChokidarSettings}     [chokidar={}]       Specify some settings to pass to chokidar in order to watch files
  *
+ * @event       ready       Emitted when the pool is ready
+ * @event       add         Emitted when a new file has been added
+ * @event       change      Emitted when a file has been changed
+ * @event       update      Alias of the "change" event
+ * @event       unlink      Emitted when a file has been deleted
+ * 
+ * @snippet             __pool($1)
+ * const pool = __pool($1).on('file', file => {
+ *      $2
+ * }).on('update', file => {
+ *      $3
+ * });
+ * await pool.ready; // wait for pool to be ready
+ * // pool.cancel();
+ * 
  * @example         js
  * import { __pool } from '@coffeekraken/sugar/fs';
  * const myPool = __pool('/something/cool/** /*', {
@@ -145,6 +161,7 @@ export default function __pool(input, settings?: Partial<IPoolSettings>) {
                         else filesStack[path] = path;
                     }
                     emit('change', filesStack[path]);
+                    emit('update', filesStack[path]);
                 })
                 .on('unlink', (path) => {
                     // @ts-ignore
@@ -171,7 +188,7 @@ export default function __pool(input, settings?: Partial<IPoolSettings>) {
                     });
                     filesPaths
                         .filter((filePath) => {
-                            return __matchGlob(filePath, input, {
+                            return __matchGlobSync(filePath, input, {
                                 cwd: set.cwd,
                             });
                         })

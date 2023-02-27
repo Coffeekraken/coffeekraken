@@ -18,7 +18,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
  * @todo      doc
  * @todo      tests
  *
- * @snippet         __remToPx($1);
+ * @snippet         __remToPx($1)
  *
  * @example         js
  * import { __remToPx } from '@coffeekraken/sugar/convert';

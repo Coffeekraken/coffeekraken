@@ -60,12 +60,16 @@ export interface ISGoogleMapComponentProps {
  * @support         safari
  * @support         edge
  *
+ * @import          import { define as __SGoogleMapComponentDefine } from '@coffeekraken/s-google-map-component';
+ * 
+ * @snippet         __SGoogleMapComponentDefine($1)
+ * 
  * @install           shell
  * npm i @coffeekraken/s-google-map-component
  *
  * @install           js
- * import { define } from '@coffeekraken/s-google-map-component';
- * define();
+ * import { define as __SGoogleMapComponentDefine } from '@coffeekraken/s-google-map-component';
+ * __SGoogleMapComponentDefine();
  *
  * @example         html        Simple google map
  * <s-google-map class="s-ratio:16-9" map-id="7bfb2f702a07e548" lat="46.618038" lng="7.057280" zoom="10">

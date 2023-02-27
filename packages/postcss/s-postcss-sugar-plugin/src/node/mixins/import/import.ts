@@ -75,7 +75,7 @@ export default function ({
             : __dirname();
 
     // resolve globs even if it's a simple path
-    const files = __SGlob.resolve(finalParams.path, {
+    const files = __SGlob.resolveSync(finalParams.path, {
         cwd: dirName,
     });
 

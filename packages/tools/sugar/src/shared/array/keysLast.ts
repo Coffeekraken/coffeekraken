@@ -14,6 +14,8 @@ import __unique from './unique';
  * @param    {Array}    keys    The keys to end the array with
  * @return    {Array}    The processed array
  *
+ * @snippet         __keysLast($1, $2)
+ * 
  * @example    js
  * import { __keysLast } from '@coffeekraken/sugar/array'
  * __keysLast(['a','b','d','g','c'], ['d','g'])

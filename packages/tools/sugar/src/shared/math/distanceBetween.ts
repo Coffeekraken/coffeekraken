@@ -18,6 +18,13 @@
  * @todo      doc
  * @todo      tests
  *
+ * @snippet         __distanceBetween($1, $2)
+ * __distanceBeetween({
+ *      x: $1, y: $2
+ * }, {
+ *      x: $3, y: $4
+ * })
+ * 
  * @example    js
  * import { __distanceBetween } from '@coffeekraken/sugar/js/geom/2d/distanceBetween'
  * __distanceBetween({

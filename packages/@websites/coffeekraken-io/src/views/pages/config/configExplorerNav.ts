@@ -2,7 +2,7 @@
 
 // import __SLitComponent from '@coffeekraken/s-lit-component';
 // import __SRequest from '@coffeekraken/s-request';
-// import __filter from '@coffeekraken/sugar/shared/object/filter';
+// import __filterObject from '@coffeekraken/sugar/shared/object/filter';
 // import { __get } from '@coffeekraken/sugar/object';
 // import { html } from 'lit';
 // import { property } from 'lit/decorators.js';
@@ -45,7 +45,7 @@
 
 //         const res = await request.send();
 //         const listed = [];
-//         res.data.map = __filter(res.data.map, (key, item) => {
+//         res.data.map = __filterObject(res.data.map, (key, item) => {
 //             if (!key.match(/[a-zA-Z0-9]+\.config\.[a-zA-Z0-9]+/)) return false;
 //             if (listed.includes(key)) return false;
 //             listed.push(key);

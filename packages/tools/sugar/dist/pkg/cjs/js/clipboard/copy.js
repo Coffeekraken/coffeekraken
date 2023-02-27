@@ -20,7 +20,7 @@ const clipboard_copy_1 = __importDefault(require("clipboard-copy"));
  * @todo        doc
  * @todo        tests
  *
- * @snippet         __copy($1);
+ * @snippet         __copy($1)
  *
  * @example         js
  * import { __copy } from '@coffeekraken/sugar/clipboard';

@@ -22,6 +22,8 @@ import __unzipper from 'unzipper';
  *
  * @todo            documentation
  *
+ * @snippet         __unzip($1)
+ *
  * @example         js
  * import { __unzip } from '@coffeekraken/sugar/compression';
  * await __unzip('my/cool/file.zip');

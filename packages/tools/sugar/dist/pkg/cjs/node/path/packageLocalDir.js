@@ -20,6 +20,8 @@ const s_sugar_config_1 = __importDefault(require("@coffeekraken/s-sugar-config")
  * @todo      doc
  * @todo      tests
  *
+ * @snippet         __packageLocalDir()
+ *
  * @example             js
  * import { __packageLocalDir } from '@coffeekraken/sugar/path';
  * __packageLocalDir(); // => '/my/cool/path/.local'
@@ -31,4 +33,4 @@ function __packageLocalDir() {
     return s_sugar_config_1.default.get('storage.package.localDir');
 }
 exports.default = __packageLocalDir;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOzs7OztBQUVkLGtGQUEwRDtBQUMxRDs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBcUJHO0FBQ0gsU0FBd0IsaUJBQWlCO0lBQ3JDLE9BQU8sd0JBQWMsQ0FBQyxHQUFHLENBQUMsMEJBQTBCLENBQUMsQ0FBQztBQUMxRCxDQUFDO0FBRkQsb0NBRUMifQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOzs7OztBQUVkLGtGQUEwRDtBQUMxRDs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0F1Qkc7QUFDSCxTQUF3QixpQkFBaUI7SUFDckMsT0FBTyx3QkFBYyxDQUFDLEdBQUcsQ0FBQywwQkFBMEIsQ0FBQyxDQUFDO0FBQzFELENBQUM7QUFGRCxvQ0FFQyJ9

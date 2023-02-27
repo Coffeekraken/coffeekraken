@@ -20,6 +20,8 @@ import __sprintf from 'sprintf-js';
  * @todo      doc
  * @todo      tests
  *
+ * @snippet         __printf($1)
+ * 
  * @example     js
  * import { __printf } from '@coffeekraken/sugar/string';
  * __printf('Hello %s', 'world'); // => Hello world

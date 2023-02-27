@@ -15,6 +15,8 @@ import __autoCast from '../string/autoCast';
  * @param     {String}        typeString      The type string to parse
  * @return    {ITypeStringObject[]}             An array of object(s) describing the type string passed
  *
+ * @snippet         __parseTypeString($1)
+ * 
  * @example       js
  * import { __parseTypeString } from '@coffeekraken/sugar/type';
  * __parseTypeString('string|number');

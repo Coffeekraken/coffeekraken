@@ -17,6 +17,8 @@
  * @todo      doc
  * @todo      tests
  *
+ * @snippet         __isColor($1)
+ * 
  * @example 	js
  * import { __isColor } from '@coffeekraken/sugar/is';
  * __isColor('red') => true

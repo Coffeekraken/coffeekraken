@@ -1,2 +1,2 @@
-const __ensureExists = require('../ensureExists');
-require('./ensureExists')(__ensureExists);
+const __ensurePropertyExists = require('../ensurePropertyExists');
+require('./ensurePropertyExists')(__ensurePropertyExists);

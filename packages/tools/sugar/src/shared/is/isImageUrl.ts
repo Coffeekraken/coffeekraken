@@ -17,6 +17,8 @@ import { __commonImageFileExtensions } from '@coffeekraken/sugar/extension';
  * @todo      doc
  * @todo      tests
  *
+ * @snippet         __isImageUrl($1)
+ * 
  * @example               js
  * import { __isImageUrl } from '@coffeekraken/sugar/is';
  * __isImageUrl('something.jpg); // => true

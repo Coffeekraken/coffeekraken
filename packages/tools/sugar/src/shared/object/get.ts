@@ -23,6 +23,8 @@ import __unquote from '../string/unquote';
  * @todo      doc
  * @todo      tests
  *
+ * @snippet         __get($1, $2)
+ * 
  * @example             js
  * import { __get } from '@coffeekraken/sugar/object';
  * __get(myObject, 'my.cool.value'); // => 'Hello world'

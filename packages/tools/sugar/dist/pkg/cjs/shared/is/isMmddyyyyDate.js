@@ -19,6 +19,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
  * @todo      doc
  * @todo      tests
  *
+ * @snippet         __isMmddyyyyDate($1)
+ *
  * @example    js
  * import { __isMmddyyyyDate } from '@coffeekraken/sugar/is'
  * if (__isMmddyyyyDate('12.25.2018')) {
@@ -32,4 +34,4 @@ function __isMmddyyyyDate(date) {
     return /^(0[1-9]|1[012])[- \/.](0[1-9]|[12][0-9]|3[01])[- \/.]\d\d\d\d$/.test(date);
 }
 exports.default = __isMmddyyyyDate;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOztBQUVkOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQTBCRztBQUNILFNBQXdCLGdCQUFnQixDQUFDLElBQUk7SUFDekMsT0FBTyxpRUFBaUUsQ0FBQyxJQUFJLENBQ3pFLElBQUksQ0FDUCxDQUFDO0FBQ04sQ0FBQztBQUpELG1DQUlDIn0=
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOztBQUVkOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBNEJHO0FBQ0gsU0FBd0IsZ0JBQWdCLENBQUMsSUFBSTtJQUN6QyxPQUFPLGlFQUFpRSxDQUFDLElBQUksQ0FDekUsSUFBSSxDQUNQLENBQUM7QUFDTixDQUFDO0FBSkQsbUNBSUMifQ==

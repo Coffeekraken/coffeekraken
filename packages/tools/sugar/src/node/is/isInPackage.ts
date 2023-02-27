@@ -14,10 +14,14 @@ import __packageRootDir from '../path/packageRootDir';
  * Return the path to either the first finded package root going up the folders, or the highest package root finded
  *
  * @param           {String|Array}              name             The package name to check or a string comma separated like "myPackage,another"
- * @param           {String}              [from=process.cwd()]    Specify from where the research has to be done
- * @param           {Boolean}             [highest=false]         Specify if you want the highest package root or the first finded
+ * @param           {IIsInPackageSettings}      [settings={}]       Some settings to configure your heck
  * @return          {String}                                      The finded package path or false if not finded
+ * 
+ * @setting           {String}              [cwd=process.cwd()]    Specify from where the research has to be done
+ * @setting           {Boolean}             [highest=false]         Specify if you want the highest package root or the first finded
  *
+ * @snippet         __isInPackage($1);
+ * 
  * @example         js
  * import { __isInPackage } from '@coffeekraken/sugar/is';
  * const root = __isInPackage();
@@ -26,12 +30,24 @@ import __packageRootDir from '../path/packageRootDir';
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
+
+interface IIsInPackageSettings {
+    cwd: string;
+    highest: boolean;
+}
+
 export default function __isInPackage(
     name,
-    from = process.cwd(),
-    highest = false,
+    settings?: Partial<IIsInPackageSettings>
 ) {
-    const packageRootDir = __packageRootDir(from);
+
+    const finalSettings: IIsInPackageSettings = {
+        cwd: process.cwd(),
+        highest: false,
+        ...settings ?? {}
+    }
+
+    const packageRootDir = __packageRootDir(finalSettings.cwd);
     if (!packageRootDir) return false;
 
     if (!__fs.existsSync(`${packageRootDir}/package.json`)) return false;
@@ -53,8 +69,11 @@ export default function __isInPackage(
         .join('/');
 
     // no package found... check if we need to check higher
-    if (highest) {
-        return isInPackage(name, newPath, highest);
+    if (finalSettings.highest) {
+        return __isInPackage(name, {
+            cwd: newPath,
+            highest: true
+        });
     }
 
     return false;

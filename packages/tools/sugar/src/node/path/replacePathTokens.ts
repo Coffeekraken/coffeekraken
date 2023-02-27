@@ -37,6 +37,8 @@ import __distViewsDir from './distViewsDir';
  * @param       {IReplacePathTokensSettings}            [settings={}]       Some settings to configure your tokens replacements
  * @return      {String|Array<String>}                          If passed a string, get back a string, if passed an array, get back an array
  *
+ * @snippet         __replacePathTokens($1)
+ * 
  * @example         js
  * import { __replacePathTokens } from '@coffeekraken/sugar/path';
  * __replacePathTokens('%packageCacheDir/something.txt'); // => /path/to/cache/directory/something.txt'

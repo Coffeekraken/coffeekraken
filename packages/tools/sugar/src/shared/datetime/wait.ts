@@ -18,6 +18,9 @@
  * @todo      doc
  * @todo      tests
  *
+ * @snippet         __wait($1)
+ * await __wait($1)
+ * 
  * @example       js
  * import { __wait } from '@coffeekraken/sugar/datetime';
  * await __wait(2000);

@@ -18,6 +18,8 @@ import { __getCssDeclarations } from '@coffeekraken/sugar/dom';
  * @todo      doc
  * @todo      tests
  *
+ * @snippet         __getKeyframesDeclarations($1)
+ *
  * @example  	js
  * import __getKeyframesDeclarations from '@coffeekraken/sugar/js/dom/style/getKeyframesDeclarations';
  * __getKeyframesDeclarations('myCoolAnimation', [myCoolCssRules]);

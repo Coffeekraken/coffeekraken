@@ -71,12 +71,16 @@ export interface ISCodeExampleComponentProps {
  * @support         safari
  * @support         edge
  *
+ * @snippet         __SCodeExampleComponentDefine($1)
+ * 
+ * @import      import { define as __SCodeExampleComponentDefine } from '@coffeekraken/s-code-example-component';
+ * 
  * @install           shell
  * npm i @coffeekraken/s-code-example-component
  *
  * @install           js
- * import { define } from '@coffeekraken/s-code-example-component';
- * define();
+ * import { define as __SCodeExampleComponentDefine } from '@coffeekraken/s-code-example-component';
+ * __SCodeExampleComponentDefine();
  *
  * @example         html
  * <s-code-example>

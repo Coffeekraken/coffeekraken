@@ -66,9 +66,15 @@ __sSpecsEditorComponentDefine();
  * @install           shell
  * npm i @coffeekraken/s-carpenter
  *
+ * @snippet             __defineSCarpenterComponent()
+ * 
+ * @example           js
+ * import { define as __defineSCarpenterComponent } from '@coffeekraken/s-carpenter';
+ * __defineSCarpenterComponent();
+ * 
  * @install           js
- * import { define } from '@coffeekraken/s-carpenter';
- * define();
+ * import { define as __defineSCarpenterComponent } from '@coffeekraken/s-carpenter';
+ * __defineSCarpenterComponent();
  *
  * @since           2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)

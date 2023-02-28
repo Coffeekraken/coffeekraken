@@ -6,7 +6,7 @@ import {
     __hslaToHex,
     __hslaToHexa,
     __hslaToRgba,
-    __rgbaToHsla,
+    __rgbaToHsla
 } from '@coffeekraken/sugar/color';
 import { __deepMerge } from '@coffeekraken/sugar/object';
 import __SColorApplyParamsInterface from './interface/SColorApplyParamsInterface';
@@ -52,9 +52,11 @@ import __SColorSettingsInterface from './interface/SColorSettingsInterface';
  * @todo      doc
  * @todo      tests
  *
+ * @snippet         new __SColor($1)
+ * 
  * @example 	js
- * import SColor from '@coffeekraken/s-color'
- * let myColor = new SColor(#ff0000);
+ * import __SColor from '@coffeekraken/s-color'
+ * let myColor = new __SColor(#ff0000);
  * // get a lighter color
  * let ligtherColor = myColor.lighten(20);
  * // print the color to rgba

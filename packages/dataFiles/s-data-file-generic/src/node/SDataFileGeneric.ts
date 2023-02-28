@@ -14,14 +14,15 @@ import __fs from 'fs';
  * @type          Class
  * @platform        node
  * @status              beta
- *
+ * @private
+ * 
  * This class represent the generic data file loader.
  * It actually regroup all the other data file loader into one single for convinience.
  *
  * @todo      interface
  * @todo      doc
  * @todo      tests
- *
+ * 
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */

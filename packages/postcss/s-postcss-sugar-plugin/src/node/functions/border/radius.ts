@@ -15,6 +15,8 @@ import __STheme from '@coffeekraken/s-theme';
  * @param       {Boolean}       [scalable='theme.scalable.padding']      Whether to scale the value or not
  * @return      {Css}                   The corresponding css
  *
+ * @snippet         sugar.border.radius($1)
+ * 
  * @example       css
  * .my-element {
  *    border-radius: sugar.border.radius(30);

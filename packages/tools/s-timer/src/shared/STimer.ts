@@ -11,7 +11,7 @@ import { __deepMerge } from '@coffeekraken/sugar/object';
  * @extends               SPromise
  * @platform            node
  * @platform            js
- * @status              beta
+ * @status              wip
  *
  * Class that let you create and handle timer with ease.
  * With this class you can set some callback function that will be

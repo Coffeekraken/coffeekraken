@@ -31,6 +31,9 @@
                 "description": "This feature allows you to make some elements appear when it enter the viewport with different\napparition animation as well as custom one depending on your needs.",
                 "namespace": "@coffeekraken.s-appear-feature.js",
                 "status": "beta",
+                "snippet": {
+                    "label": "__SAppearFeatureDefine($1)"
+                },
                 "example": [
                     {
                         "language": "html",

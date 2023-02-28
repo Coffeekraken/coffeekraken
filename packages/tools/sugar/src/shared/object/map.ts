@@ -4,7 +4,6 @@
  * @name                map
  * @namespace            shared.object
  * @type                Function
- * @async
  * @platform          js
  * @platform          node
  * @status        beta

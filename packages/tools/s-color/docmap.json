@@ -92,10 +92,13 @@
                 "description": "Class that provide complete and simple to use color manupilation capabilities like:\n- Modifiers\n- lighten\n- darken\n- saturate\n- desaturate\n- spin (change hue)\n- alpha\n- opacity\n- grayscale\n- Conversions\n- rgb\n- rgba\n- hsl\n- hsla\n- hex\n- Print out formats\n- toRgbString\n- toRgbaString\n- toHslString\n- toHslaString\n- toHexString\n- toString(format = null)",
                 "namespace": "@coffeekraken.s-color.shared",
                 "status": "beta",
+                "snippet": {
+                    "label": "new __SColor($1)"
+                },
                 "example": [
                     {
                         "language": "js",
-                        "code": "import SColor from '@coffeekraken/s-color'\nlet myColor = new SColor(#ff0000);\n// get a lighter color\nlet ligtherColor = myColor.lighten(20);\n// print the color to rgba\nconsole.log(lighterColor.toRgbaString());"
+                        "code": "import __SColor from '@coffeekraken/s-color'\nlet myColor = new __SColor(#ff0000);\n// get a lighter color\nlet ligtherColor = myColor.lighten(20);\n// print the color to rgba\nconsole.log(lighterColor.toRgbaString());"
                     }
                 ],
                 "since": "2.0.0",
@@ -169,6 +172,17 @@
                             ],
                             "raw": "Function"
                         },
+                        "return": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "string"
+                                    }
+                                ],
+                                "raw": "string"
+                            },
+                            "description": "The hex string representation"
+                        },
                         "description": "To hex",
                         "example": [
                             {
@@ -192,6 +206,17 @@
                                 }
                             ],
                             "raw": "Function"
+                        },
+                        "return": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "string"
+                                    }
+                                ],
+                                "raw": "string"
+                            },
+                            "description": "The hex string representation"
                         },
                         "description": "To hex",
                         "example": [
@@ -217,6 +242,17 @@
                             ],
                             "raw": "Function"
                         },
+                        "return": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "object"
+                                    }
+                                ],
+                                "raw": "object"
+                            },
+                            "description": "The hsl object representation"
+                        },
                         "description": "To hsl",
                         "example": [
                             {
@@ -240,6 +276,17 @@
                                 }
                             ],
                             "raw": "Function"
+                        },
+                        "return": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "object"
+                                    }
+                                ],
+                                "raw": "object"
+                            },
+                            "description": "The hsla object representation"
                         },
                         "description": "To hsla",
                         "example": [
@@ -265,6 +312,17 @@
                             ],
                             "raw": "Function"
                         },
+                        "return": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "object"
+                                    }
+                                ],
+                                "raw": "object"
+                            },
+                            "description": "The rgb object representation"
+                        },
                         "description": "To rgb",
                         "example": [
                             {
@@ -288,6 +346,17 @@
                                 }
                             ],
                             "raw": "Function"
+                        },
+                        "return": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "object"
+                                    }
+                                ],
+                                "raw": "object"
+                            },
+                            "description": "The rgba object representation"
                         },
                         "description": "To rgba",
                         "example": [
@@ -561,6 +630,17 @@
                                 "defaultStr": "this.settings.returnNewInstance"
                             }
                         },
+                        "return": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "SColor"
+                                    }
+                                ],
+                                "raw": "SColor"
+                            },
+                            "description": "Returns you either the same instance or a new one depending on the settings ```returnNewInstance```"
+                        },
                         "description": "This method allows you to apply some updated to your color\nusing the parameters defined in the SColorApplyInterface like\nfor example \"saturate\", \"desaturate\", etc...",
                         "since": "2.0.0",
                         "author": {
@@ -608,6 +688,17 @@
                                 "default": "this.settings.returnNewInstance",
                                 "defaultStr": "this.settings.returnNewInstance"
                             }
+                        },
+                        "return": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "SColor"
+                                    }
+                                ],
+                                "raw": "SColor"
+                            },
+                            "description": "A new SColor instance or the actual one"
                         },
                         "description": "Desaturate",
                         "example": [
@@ -662,6 +753,17 @@
                                 "defaultStr": "this.settings.returnNewInstance"
                             }
                         },
+                        "return": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "SColor"
+                                    }
+                                ],
+                                "raw": "SColor"
+                            },
+                            "description": "A new SColor instance or the actual one"
+                        },
                         "description": "Saturate",
                         "example": [
                             {
@@ -701,6 +803,17 @@
                                 "default": "this.settings.returnNewInstance",
                                 "defaultStr": "this.settings.returnNewInstance"
                             }
+                        },
+                        "return": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "SColor"
+                                    }
+                                ],
+                                "raw": "SColor"
+                            },
+                            "description": "A new SColor instance or the actual one"
                         },
                         "description": "Return a new SColor instance of the color to grayscale",
                         "example": [
@@ -755,6 +868,17 @@
                                 "defaultStr": "this.settings.returnNewInstance"
                             }
                         },
+                        "return": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "SColor"
+                                    }
+                                ],
+                                "raw": "SColor"
+                            },
+                            "description": "A new SColor instance or the actual one"
+                        },
                         "description": "Spin the hue on the passed value (max 360)",
                         "example": [
                             {
@@ -807,6 +931,17 @@
                                 "default": "this.settings.returnNewInstance",
                                 "defaultStr": "this.settings.returnNewInstance"
                             }
+                        },
+                        "return": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "SColor"
+                                    }
+                                ],
+                                "raw": "SColor"
+                            },
+                            "description": "A new SColor instance or the actual one"
                         },
                         "description": "Set the alpha",
                         "example": [
@@ -861,6 +996,17 @@
                                 "defaultStr": "this.settings.returnNewInstance"
                             }
                         },
+                        "return": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "SColor"
+                                    }
+                                ],
+                                "raw": "SColor"
+                            },
+                            "description": "A new SColor instance or the actual one"
+                        },
                         "description": "Darken",
                         "example": [
                             {
@@ -914,6 +1060,17 @@
                                 "defaultStr": "this.settings.returnNewInstance"
                             }
                         },
+                        "return": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "SColor"
+                                    }
+                                ],
+                                "raw": "SColor"
+                            },
+                            "description": "A new SColor instance or the actual one"
+                        },
                         "description": "Lighten",
                         "example": [
                             {
@@ -954,6 +1111,17 @@
                                 "defaultStr": "this.settings.returnNewInstance"
                             }
                         },
+                        "return": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "SColor"
+                                    }
+                                ],
+                                "raw": "SColor"
+                            },
+                            "description": "The SColor instance that represent this new color"
+                        },
                         "description": "Calculate the best color value that will have the best contrast ratio",
                         "since": "2.0.0",
                         "author": {
@@ -972,6 +1140,17 @@
                                 }
                             ],
                             "raw": "Function"
+                        },
+                        "return": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "object"
+                                    }
+                                ],
+                                "raw": "object"
+                            },
+                            "description": "The object representation of the color (r,g,b,a,h,s,l)"
                         },
                         "description": "To simple json object. This object can be injected in the constructor to recover the same color",
                         "example": [
@@ -997,6 +1176,17 @@
                             ],
                             "raw": "Function"
                         },
+                        "return": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "string"
+                                    }
+                                ],
+                                "raw": "string"
+                            },
+                            "description": "The hex string representation of the color"
+                        },
                         "description": "To hex string",
                         "example": [
                             {
@@ -1020,6 +1210,17 @@
                                 }
                             ],
                             "raw": "Function"
+                        },
+                        "return": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "string"
+                                    }
+                                ],
+                                "raw": "string"
+                            },
+                            "description": "The hex string representation of the color"
                         },
                         "description": "To hex string",
                         "example": [
@@ -1045,6 +1246,17 @@
                             ],
                             "raw": "Function"
                         },
+                        "return": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "string"
+                                    }
+                                ],
+                                "raw": "string"
+                            },
+                            "description": "The rgb string representation of the color"
+                        },
                         "description": "To rgb string",
                         "example": [
                             {
@@ -1068,6 +1280,17 @@
                                 }
                             ],
                             "raw": "Function"
+                        },
+                        "return": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "string"
+                                    }
+                                ],
+                                "raw": "string"
+                            },
+                            "description": "The rgba string representation of the color"
                         },
                         "description": "To rgba string",
                         "example": [
@@ -1093,6 +1316,17 @@
                             ],
                             "raw": "Function"
                         },
+                        "return": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "string"
+                                    }
+                                ],
+                                "raw": "string"
+                            },
+                            "description": "The hsl string representation of the color"
+                        },
                         "description": "To hsl string",
                         "example": [
                             {
@@ -1116,6 +1350,17 @@
                                 }
                             ],
                             "raw": "Function"
+                        },
+                        "return": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "string"
+                                    }
+                                ],
+                                "raw": "string"
+                            },
+                            "description": "The hsl string representation of the color"
                         },
                         "description": "To hsla string",
                         "example": [
@@ -1156,6 +1401,17 @@
                                 "default": "this.settings.defaultFormat",
                                 "defaultStr": "this.settings.defaultFormat"
                             }
+                        },
+                        "return": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "string"
+                                    }
+                                ],
+                                "raw": "string"
+                            },
+                            "description": "The rgba string representation of the color"
                         },
                         "description": "To string",
                         "example": [

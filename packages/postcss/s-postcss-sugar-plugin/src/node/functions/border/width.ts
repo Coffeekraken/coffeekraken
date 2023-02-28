@@ -14,6 +14,8 @@ import __STheme from '@coffeekraken/s-theme';
  * @param       {String}        width      The width to get
  * @return      {Css}                   The corresponding css
  *
+ * @snippet         sugar.border.width($1)
+ * 
  * @example       css
  * .my-element {
  *    border-width: sugar.border.width(50);

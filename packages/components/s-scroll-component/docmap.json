@@ -67,6 +67,9 @@
                 "description": "This component allows you to scroll to a specific element using a css selector or to the top|bottom of the page.",
                 "namespace": "@coffeekraken.s-scroll-component.js",
                 "status": "beta",
+                "snippet": {
+                    "label": "__SScrollComponentDefine($1)"
+                },
                 "example": [
                     {
                         "language": "html",

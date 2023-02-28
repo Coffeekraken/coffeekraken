@@ -1,14 +1,14 @@
 import __SClass from '@coffeekraken/s-class';
 import {
     __cssEasingStrToJsFunction,
-    __parseTransformRule,
+    __parseTransformRule
 } from '@coffeekraken/sugar/css';
 import { __easeInterval } from '@coffeekraken/sugar/function';
 import __getAnimationsFromElement, {
-    IGetAnimationsFromElementResult,
+    IGetAnimationsFromElementResult
 } from '@coffeekraken/sugar/js/dom/style/getAnimationsFromElement';
 import __getKeyframesFromStylesheets, {
-    IKeyframe,
+    IKeyframe
 } from '@coffeekraken/sugar/js/dom/style/getKeyframesFromStylesheets';
 import { __deepMerge, __flatten, __get } from '@coffeekraken/sugar/object';
 import __set from '@coffeekraken/sugar/shared/object/set';
@@ -20,7 +20,7 @@ import * as __rematrix from 'rematrix';
  * @type            Class
  * @interface       ./interface/SCssAnimationInterface.ts
  * @platform        js
- * @status          beta
+ * @status          wip
  *
  * This class allows you to get the css animation applied to the passed element and to control
  * it's duration, state, etc...

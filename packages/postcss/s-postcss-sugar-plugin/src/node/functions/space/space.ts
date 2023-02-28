@@ -14,6 +14,8 @@ import __STheme from '@coffeekraken/s-theme';
  * @param       {String}        space      The space to get
  * @return      {Css}                   The corresponding css
  *
+ * @snippet         sugar.space($1)
+ * 
  * @example       css
  * .my-element {
  *    padding: sugar.space(20);

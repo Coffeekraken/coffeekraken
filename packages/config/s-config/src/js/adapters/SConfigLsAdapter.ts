@@ -17,12 +17,21 @@ import __SConfigAdapter from '../../shared/adapters/SConfigAdapter';
  * let the SConfig class do the work for you...
  *
  * @param                   {Object}                    [settings={}]         The adapter settings that let you work with the good data storage solution...
- * - name (null) {String}: This specify the config name that you want to use.
- * - defaultConfig ({}) {Object}: This specify the "default" config that you want.
- * - appConfig ({}) {Object}: This specify the "application" level config that you want.
- * - userConfig ({}) {Object}: This specify the "user" level config that you want. It's usually this config that is updated
  * @return                  {Promise}                                         A promise that will be resolved once the data has been getted/saved...
  *
+ * @setting      {String}    [name=null]            Specify the config name that you want to use.
+ * @setting      {Any}   [defaultConfig={}]         Specify the "default" config that you want.
+ * @setting      {Any}   [appConfig={}]             Specify the "application" level config that you want.
+ * @setting      {Any}   [userConfig={}]            Specify the "user" level config that you want. It's usually this config that is updated
+ * 
+ * @snippet         __SConfigLsAdapter($1)
+ * new __SConfigLsAdapter($1)
+ * 
+ * @example         js
+ * import __SConfig, { __SConfigLsAdapter } from '@coffeekraken/s-config';
+ * const config = new __SConfig($1, new __SConfigLsAdapter($2));
+ * 
+ * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 

@@ -9,6 +9,7 @@ import { __uniqid } from '@coffeekraken/sugar/string';
  * @type          Class
  * @platform        node
  * @status              beta
+ * @private
  *
  * This class represent the js/json data file loader
  *

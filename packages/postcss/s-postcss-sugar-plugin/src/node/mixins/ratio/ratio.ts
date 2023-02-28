@@ -12,6 +12,8 @@ import __SInterface from '@coffeekraken/s-interface';
  *
  * @return        {Css}         The generated css
  *
+ * @snippet         @sugar.ratio($1)
+ * 
  * @example        css
  * .my-cool-element {
  *    \@sugar.ratio(16/9);

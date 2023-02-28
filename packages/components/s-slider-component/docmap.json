@@ -67,6 +67,9 @@
                 "description": "This component specify a range with some additional features than the native one like\ndisplaying the value automatically in tooltip or inline.",
                 "namespace": "@coffeekraken.s-slider-component.js",
                 "status": "beta",
+                "snippet": {
+                    "label": "__SSliderComponentDefine($1)"
+                },
                 "example": [
                     {
                         "language": "html",
@@ -466,6 +469,17 @@
                                 "defaultStr": "this.state.currentPage"
                             }
                         },
+                        "return": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Boolean"
+                                    }
+                                ],
+                                "raw": "Boolean"
+                            },
+                            "description": "true if the actual slide is the last one, false otherwise"
+                        },
                         "description": "This method allows you to check if the passed slide is in the current \"page\" or not",
                         "since": "2.0.0",
                         "author": {
@@ -484,6 +498,17 @@
                                 }
                             ],
                             "raw": "Function"
+                        },
+                        "return": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Boolean"
+                                    }
+                                ],
+                                "raw": "Boolean"
+                            },
+                            "description": "true if the actual slide is the last one, false otherwise"
                         },
                         "description": "This method allows you to check if the actual slide is the last one",
                         "since": "2.0.0",
@@ -504,6 +529,17 @@
                             ],
                             "raw": "Function"
                         },
+                        "return": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Boolean"
+                                    }
+                                ],
+                                "raw": "Boolean"
+                            },
+                            "description": "true if the actual slide is the first one, false otherwise"
+                        },
                         "description": "This method allows you to check if the actual slide is the first one",
                         "since": "2.0.0",
                         "author": {
@@ -522,6 +558,17 @@
                                 }
                             ],
                             "raw": "Function"
+                        },
+                        "return": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Number"
+                                    }
+                                ],
+                                "raw": "Number"
+                            },
+                            "description": "The current slide idx"
                         },
                         "description": "Access the current slide idx. Begin from 0...",
                         "since": "2.0.0",
@@ -597,6 +644,17 @@
                                 "defaultStr": ""
                             }
                         },
+                        "return": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "SSLiderComponent"
+                                    }
+                                ],
+                                "raw": "SSLiderComponent"
+                            },
+                            "description": "The slider component to maintain chainability"
+                        },
                         "description": "This method allows you to get the current clide using an id or an idx.",
                         "since": "2.0.0",
                         "author": {
@@ -634,6 +692,17 @@
                                 }
                             ],
                             "raw": "Function"
+                        },
+                        "return": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "HTMLElement"
+                                    }
+                                ],
+                                "raw": "HTMLElement"
+                            },
+                            "description": "The current slide element"
                         },
                         "description": "Access the current slide item.",
                         "since": "2.0.0",
@@ -673,6 +742,17 @@
                             ],
                             "raw": "HTMLElement"
                         },
+                        "return": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Number"
+                                    }
+                                ],
+                                "raw": "Number"
+                            },
+                            "description": "The next slide idx"
+                        },
                         "description": "Access the next slide idx.",
                         "since": "2.0.0",
                         "author": {
@@ -710,6 +790,17 @@
                                 }
                             ],
                             "raw": "Function"
+                        },
+                        "return": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "HTMLElement"
+                                    }
+                                ],
+                                "raw": "HTMLElement"
+                            },
+                            "description": "The next slide element"
                         },
                         "description": "Access the next slide idx.",
                         "since": "2.0.0",
@@ -749,6 +840,17 @@
                             ],
                             "raw": "Function"
                         },
+                        "return": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "HTMLElement"
+                                    }
+                                ],
+                                "raw": "HTMLElement"
+                            },
+                            "description": "The previous slide idx"
+                        },
                         "description": "Access the previous slide idx.",
                         "since": "2.0.0",
                         "author": {
@@ -768,6 +870,17 @@
                             ],
                             "raw": "Number"
                         },
+                        "return": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "HTMLElement"
+                                    }
+                                ],
+                                "raw": "HTMLElement"
+                            },
+                            "description": "The previous slide idx"
+                        },
                         "description": "Access the previous slide idx.",
                         "since": "2.0.0",
                         "author": {
@@ -786,6 +899,17 @@
                                 }
                             ],
                             "raw": "Function"
+                        },
+                        "return": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "HTMLElement"
+                                    }
+                                ],
+                                "raw": "HTMLElement"
+                            },
+                            "description": "The previous slide element"
                         },
                         "description": "Access the previous slide element.",
                         "since": "2.0.0",
@@ -840,6 +964,17 @@
                                 "defaultStr": ""
                             }
                         },
+                        "return": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Number"
+                                    }
+                                ],
+                                "raw": "Number"
+                            },
+                            "description": "The slide idx"
+                        },
                         "description": "This method allows you to get back the slide idx by its id.",
                         "since": "2.0.0",
                         "author": {
@@ -874,6 +1009,17 @@
                                 "defaultStr": ""
                             }
                         },
+                        "return": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "HTMLElement"
+                                    }
+                                ],
+                                "raw": "HTMLElement"
+                            },
+                            "description": "The slide HTMLElement"
+                        },
                         "description": "This method allows you to get back a slide HTMLElement by its index.",
                         "since": "2.0.0",
                         "author": {
@@ -892,6 +1038,17 @@
                                 }
                             ],
                             "raw": "Function"
+                        },
+                        "return": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "ISSliderComponentSlide"
+                                    }
+                                ],
+                                "raw": "ISSliderComponentSlide"
+                            },
+                            "description": "The slide object"
                         },
                         "description": "This method allows you to get back the current slide object <ISSliderComponentSlide> either by it's id, or by it's idx.",
                         "since": "2.0.0",
@@ -931,6 +1088,17 @@
                             ],
                             "raw": "Function"
                         },
+                        "return": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Number"
+                                    }
+                                ],
+                                "raw": "Number"
+                            },
+                            "description": "The last page idx"
+                        },
                         "description": "Get the last page idx",
                         "since": "2.0.0",
                         "author": {
@@ -950,6 +1118,20 @@
                             ],
                             "raw": "Function"
                         },
+                        "return": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "array",
+                                        "of": [
+                                            "ISSliderComponentSlide"
+                                        ]
+                                    }
+                                ],
+                                "raw": "ISSliderComponentSlide[]"
+                            },
+                            "description": "An array of slides"
+                        },
                         "description": "This method allows you to get all first page slides.",
                         "since": "2.0.0",
                         "author": {
@@ -968,6 +1150,20 @@
                                 }
                             ],
                             "raw": "Function"
+                        },
+                        "return": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "array",
+                                        "of": [
+                                            "ISSliderComponentSlide"
+                                        ]
+                                    }
+                                ],
+                                "raw": "ISSliderComponentSlide[]"
+                            },
+                            "description": "An array of slides"
                         },
                         "description": "This method allows you to get all last page slides.",
                         "since": "2.0.0",
@@ -1004,6 +1200,17 @@
                                 "defaultStr": "this.state.currentPage"
                             }
                         },
+                        "return": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "ISSliderPageRect"
+                                    }
+                                ],
+                                "raw": "ISSliderPageRect"
+                            },
+                            "description": "The page rect object"
+                        },
                         "description": "This method allows you to get a page rect just like the getBoundingClientRect native function",
                         "since": "2.0.0",
                         "author": {
@@ -1023,6 +1230,17 @@
                             ],
                             "raw": "Function"
                         },
+                        "return": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "ISSliderPageRect"
+                                    }
+                                ],
+                                "raw": "ISSliderPageRect"
+                            },
+                            "description": "The page rect object"
+                        },
                         "description": "This method allows you to get the first page rect just like the getBoundingClientRect native function",
                         "since": "2.0.0",
                         "author": {
@@ -1041,6 +1259,17 @@
                                 }
                             ],
                             "raw": "Function"
+                        },
+                        "return": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "ISSliderPageRect"
+                                    }
+                                ],
+                                "raw": "ISSliderPageRect"
+                            },
+                            "description": "The page rect object"
                         },
                         "description": "This method allows you to get the last page rect just like the getBoundingClientRect native function",
                         "since": "2.0.0",
@@ -1075,6 +1304,20 @@
                                 "description": "The page you want to get slides from",
                                 "defaultStr": ""
                             }
+                        },
+                        "return": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "array",
+                                        "of": [
+                                            "ISSliderComponentSlide"
+                                        ]
+                                    }
+                                ],
+                                "raw": "ISSliderComponentSlide[]"
+                            },
+                            "description": "An array of slides"
                         },
                         "description": "This method allows you to get all the slides in a particular \"page\".",
                         "since": "2.0.0",
@@ -1113,6 +1356,17 @@
                                 "defaultStr": ""
                             }
                         },
+                        "return": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "ISSliderComponentSlide"
+                                    }
+                                ],
+                                "raw": "ISSliderComponentSlide"
+                            },
+                            "description": "The slide object"
+                        },
                         "description": "This method allows you to get back a slide object <ISSliderComponentSlide> either by it's id, or by it's idx.",
                         "since": "2.0.0",
                         "author": {
@@ -1132,6 +1386,17 @@
                             ],
                             "raw": "Function"
                         },
+                        "return": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "ISSliderComponentSlide"
+                                    }
+                                ],
+                                "raw": "ISSliderComponentSlide"
+                            },
+                            "description": "The first slide object"
+                        },
                         "description": "This method allows you to get the first slide of the slider",
                         "since": "2.0.0",
                         "author": {
@@ -1150,6 +1415,17 @@
                                 }
                             ],
                             "raw": "Function"
+                        },
+                        "return": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "ISSliderComponentSlide"
+                                    }
+                                ],
+                                "raw": "ISSliderComponentSlide"
+                            },
+                            "description": "The last slide object"
                         },
                         "description": "This method allows you to get the last slide of the slider",
                         "since": "2.0.0",
@@ -1226,6 +1502,17 @@
                                 "defaultStr": ""
                             }
                         },
+                        "return": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "SSliderComponent"
+                                    }
+                                ],
+                                "raw": "SSliderComponent"
+                            },
+                            "description": "The slider element to maintain chainability"
+                        },
                         "description": "Go to a specific slide.",
                         "since": "2.0.0",
                         "author": {
@@ -1244,6 +1531,17 @@
                                 }
                             ],
                             "raw": "Function"
+                        },
+                        "return": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "SSliderComponent"
+                                    }
+                                ],
+                                "raw": "SSliderComponent"
+                            },
+                            "description": "The slider element to maintain chainability"
                         },
                         "description": "Go to the next slide",
                         "since": "2.0.0",
@@ -1264,6 +1562,17 @@
                             ],
                             "raw": "Function"
                         },
+                        "return": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "SSliderComponent"
+                                    }
+                                ],
+                                "raw": "SSliderComponent"
+                            },
+                            "description": "The slider element to maintain chainability"
+                        },
                         "description": "Go to the previous slide",
                         "since": "2.0.0",
                         "author": {
@@ -1282,6 +1591,17 @@
                                 }
                             ],
                             "raw": "Function"
+                        },
+                        "return": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "ISSliderComponentTimer"
+                                    }
+                                ],
+                                "raw": "ISSliderComponentTimer"
+                            },
+                            "description": "The timer object"
                         },
                         "description": "This method allows you to get back the timer object",
                         "since": "2.0.0",
@@ -1302,6 +1622,17 @@
                             ],
                             "raw": "Function"
                         },
+                        "return": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Boolean"
+                                    }
+                                ],
+                                "raw": "Boolean"
+                            },
+                            "description": "trie if the slider is playing or not"
+                        },
                         "description": "This method allows you to know if the slider is currently playing or not",
                         "since": "2.0.0",
                         "author": {
@@ -1321,6 +1652,17 @@
                             ],
                             "raw": "Function"
                         },
+                        "return": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "SSliderComponent"
+                                    }
+                                ],
+                                "raw": "SSliderComponent"
+                            },
+                            "description": "The slider element to maintain chainability"
+                        },
                         "description": "This method allows you to play the slider when a `timer` has been defined",
                         "since": "2.0.0",
                         "author": {
@@ -1339,6 +1681,17 @@
                                 }
                             ],
                             "raw": "Function"
+                        },
+                        "return": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "SSliderComponent"
+                                    }
+                                ],
+                                "raw": "SSliderComponent"
+                            },
+                            "description": "The slider element to maintain chainability"
                         },
                         "description": "This method allows you to stop the slider",
                         "since": "2.0.0",
@@ -1695,6 +2048,46 @@
                 "relPath": "src/js/interface/SSliderComponentInterface.ts",
                 "children": {}
             },
+            "@coffeekraken.s-slider-component.node.postcss.mixins.ui.slider.classes": {
+                "id": "@coffeekraken.s-slider-component.node.postcss.mixins.ui.slider.classes",
+                "name": "classes",
+                "type": {
+                    "types": [
+                        {
+                            "type": "PostcssMixin"
+                        }
+                    ],
+                    "raw": "PostcssMixin"
+                },
+                "platform": [
+                    {
+                        "name": "css",
+                        "description": ""
+                    }
+                ],
+                "description": "This mixin represent a color picker",
+                "namespace": "@coffeekraken.s-slider-component.node.postcss.mixins.ui.slider",
+                "status": "beta",
+                "snippet": {
+                    "label": "@sugar.ui.slider.classes($1);"
+                },
+                "example": [
+                    {
+                        "language": "css",
+                        "code": "@sugar.ui.slider.classes;"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "classes.ts",
+                "extension": "ts",
+                "relPath": "src/node/postcss/mixins/ui/slider/classes.ts",
+                "children": {}
+            },
             "@coffeekraken.s-slider-component.ui.slider.slider": {
                 "id": "@coffeekraken.s-slider-component.ui.slider.slider",
                 "name": "slider",
@@ -1715,6 +2108,9 @@
                 "description": "Apply the slider style to any s-slider element",
                 "namespace": "@coffeekraken.s-slider-component.ui.slider",
                 "status": "beta",
+                "snippet": {
+                    "label": "@sugar.ui.slider($1);"
+                },
                 "example": [
                     {
                         "language": "css",

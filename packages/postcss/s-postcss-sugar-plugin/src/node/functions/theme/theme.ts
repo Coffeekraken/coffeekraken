@@ -20,6 +20,8 @@ import __STheme from '@coffeekraken/s-theme';
  * @param       {Any}           [fallback=null]         Specify a fallback in case the variable does not resolve to any value
  * @return      {Css}                   The corresponding css
  *
+ * @snippet         sugar.theme($1)
+ * 
  * @example       css
  * .my-element {
  *    font-family: sugar.theme(font.family.fontFamily);

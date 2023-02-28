@@ -18,7 +18,7 @@ window._console = {};
  * @type            Class
  * @extends         SThemeBase
  * @platform         js
- * @status              beta
+ * @status              wip
  *
  * This class represent the sugar theme you've passed the name in the constructor.
  * Once you have an instance of this theme you will have access to a lot of utilities
@@ -26,9 +26,11 @@ window._console = {};
  *
  * @param       {String}        [theme=undefined]        The name of the theme you want to instanciate utilities for. If not specified, will take either the "default" theme, or the theme defined in the sugar.json file
  *
+ * @snippet         new __STheme($1)
+ * 
  * @example         js
- * import STheme from '@coffeekraken/s-theme';
- * const theme = new STheme();
+ * import __STheme from '@coffeekraken/s-theme';
+ * const theme = new __STheme();
  * theme.loopOnColors(({name, schema, value}) => {
  *      // do something...
  * });

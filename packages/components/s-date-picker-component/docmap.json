@@ -67,6 +67,9 @@
                 "description": "This component specify a datetime picker. It make uses of (this package)[https://www.npmjs.com/package/date-format-parse] behind the scene to\nparse and format dates.",
                 "namespace": "@coffeekraken.s-datetime-picker-component.js",
                 "status": "beta",
+                "snippet": {
+                    "label": "__SDatetimePickerComponentDefine($1)"
+                },
                 "example": [
                     {
                         "language": "html",
@@ -822,6 +825,46 @@
                 "relPath": "src/js/interface/SDatetimePickerComponentInterface.ts",
                 "children": {}
             },
+            "@coffeekraken.s-datetime-picker-component.ui.datePicker.datePicker": {
+                "id": "@coffeekraken.s-datetime-picker-component.ui.datePicker.datePicker",
+                "name": "datePicker",
+                "type": {
+                    "types": [
+                        {
+                            "type": "PostcssMixin"
+                        }
+                    ],
+                    "raw": "PostcssMixin"
+                },
+                "platform": [
+                    {
+                        "name": "css",
+                        "description": ""
+                    }
+                ],
+                "description": "Represent a date picker",
+                "namespace": "@coffeekraken.s-datetime-picker-component.ui.datePicker",
+                "status": "beta",
+                "snippet": {
+                    "label": "@sugar.ui.datePicker.classes($1);"
+                },
+                "example": [
+                    {
+                        "language": "css",
+                        "code": "@sugar.ui.datePicker();"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "classes.ts",
+                "extension": "ts",
+                "relPath": "src/node/postcss/mixins/ui/datetimePicker/classes.ts",
+                "children": {}
+            },
             "@coffeekraken.s-datetime-picker-component.ui.datetimePicker.datetimePicker": {
                 "id": "@coffeekraken.s-datetime-picker-component.ui.datetimePicker.datetimePicker",
                 "name": "datetimePicker",
@@ -842,10 +885,13 @@
                 "description": "Apply the datetime picker lnf to any s-datetime-picker element",
                 "namespace": "@coffeekraken.s-datetime-picker-component.ui.datetimePicker",
                 "status": "beta",
+                "snippet": {
+                    "label": "@sugar.ui.datetimePicker($1);"
+                },
                 "example": [
                     {
                         "language": "css",
-                        "code": ".s-datetime-picker {\n   @sugar.ui.datetimePicker;\n}"
+                        "code": ".s-datetime-picker {\n   @sugar.ui.datetimePicker();\n}"
                     }
                 ],
                 "since": "2.0.0",

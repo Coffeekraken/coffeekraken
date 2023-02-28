@@ -63,10 +63,14 @@
                 "description": "This class works the same as the default Promise one. The difference is that you have more control on this one like\nthe possibility to resolve it multiple times. Here's a list of the \"differences\" and the \"features\" that this class provide:",
                 "namespace": "@coffeekraken.s-promise.shared",
                 "status": "beta",
+                "snippet": {
+                    "label": "new __SPromise()",
+                    "code": "new __SPromise(({resolve, reject, emit, pipe, on}) => {\n     $1\n});"
+                },
                 "example": [
                     {
                         "language": "js",
-                        "code": "import SPromise from '@coffeekraken/s-promise';\nfunction myCoolFunction() {\n   return new SPromise(({ resolve, reject, emit }) => {\n       // do something...\n       setInterval(() => {\n           // resolve the promise\n           resolve('something');\n\n       }, 1000);\n   });\n}\n\n// calling the function and get back the SPromise instance\nmyCoolFunction().then(value => {\n   // do something here...\n}).then(1, value => {\n   // do something just once...\n}).catch(error => {\n   // do something with the returned reason of failure...\n});"
+                        "code": "import __SPromise from '@coffeekraken/s-promise';\nfunction myCoolFunction() {\n   return new __SPromise(({ resolve, reject, emit }) => {\n       // do something...\n       setInterval(() => {\n           // resolve the promise\n           resolve('something');\n\n       }, 1000);\n   });\n}\n\n// calling the function and get back the SPromise instance\nmyCoolFunction().then(value => {\n   // do something here...\n}).then(1, value => {\n   // do something just once...\n}).catch(error => {\n   // do something with the returned reason of failure...\n});"
                     }
                 ],
                 "since": "2.0.0",
@@ -135,6 +139,17 @@
                                 "defaultStr": "null"
                             }
                         },
+                        "return": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "SPromise"
+                                    }
+                                ],
+                                "raw": "SPromise"
+                            },
+                            "description": "The promise that will be resolved once all promises are resolved"
+                        },
                         "description": "This static method allows you to pass an array of promises that will be executed one after the other.\nIt will call the \"callback\" function if specified with the resolved promise as argument.",
                         "async": "true",
                         "static": "true",
@@ -170,6 +185,17 @@
                                 "default": {},
                                 "defaultStr": "{}"
                             }
+                        },
+                        "return": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "ITreatAsValueProxy"
+                                    }
+                                ],
+                                "raw": "ITreatAsValueProxy"
+                            },
+                            "description": "A custom proxy that you can revoke using the ```restorePromiseBehavior```"
                         },
                         "description": "This method wrap the promise into a revocable proxy to allow\npassing this Promise to methods like ```then```, etc... and make\nthis promise treated as a value and not as a chained promise.\nOnce you have done with this behavior, you just have to call\nthe ```restorePromiseBehavior``` on the returned proxy and\nthe default promise behavior will be restored",
                         "since": "2.0.0",
@@ -309,6 +335,17 @@
                                 "defaultStr": ""
                             }
                         },
+                        "return": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Boolean"
+                                    }
+                                ],
+                                "raw": "Boolean"
+                            },
+                            "description": "Return true if the promise is in one of the passed status"
+                        },
                         "description": "Check is the promise is on one of the passed status",
                         "author": {
                             "name": "Olivier Bossel",
@@ -325,6 +362,17 @@
                                 }
                             ],
                             "raw": "Function"
+                        },
+                        "return": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Boolean"
+                                    }
+                                ],
+                                "raw": "Boolean"
+                            },
+                            "description": "true or false depending on the promise status"
                         },
                         "description": "Return back true or false depending on the promise status",
                         "author": {
@@ -343,6 +391,17 @@
                             ],
                             "raw": "Function"
                         },
+                        "return": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Boolean"
+                                    }
+                                ],
+                                "raw": "Boolean"
+                            },
+                            "description": "true or false depending on the promise status"
+                        },
                         "description": "Return back true or false depending on the promise status",
                         "author": {
                             "name": "Olivier Bossel",
@@ -359,6 +418,17 @@
                                 }
                             ],
                             "raw": "Function"
+                        },
+                        "return": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Boolean"
+                                    }
+                                ],
+                                "raw": "Boolean"
+                            },
+                            "description": "true or false depending on the promise status"
                         },
                         "description": "Return back true or false depending on the promise status",
                         "author": {
@@ -377,6 +447,17 @@
                             ],
                             "raw": "Function"
                         },
+                        "return": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Boolean"
+                                    }
+                                ],
+                                "raw": "Boolean"
+                            },
+                            "description": "true or false depending on the promise status"
+                        },
                         "description": "Return back true or false depending on the promise status",
                         "author": {
                             "name": "Olivier Bossel",
@@ -393,6 +474,17 @@
                                 }
                             ],
                             "raw": "Function"
+                        },
+                        "return": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Boolean"
+                                    }
+                                ],
+                                "raw": "Boolean"
+                            },
+                            "description": "true or false depending on the promise status"
                         },
                         "description": "Return back true or false depending on the promise status",
                         "author": {
@@ -442,6 +534,17 @@
                                 "default": "resolve,finally",
                                 "defaultStr": "'resolve,finally'"
                             }
+                        },
+                        "return": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Promise"
+                                    }
+                                ],
+                                "raw": "Promise"
+                            },
+                            "description": "A simple promise that will be resolved once the promise has been canceled with the cancel stack result as value"
                         },
                         "description": "This is the \"resolve\" method exposed on the promise itself for convinience",
                         "async": "true",
@@ -493,6 +596,17 @@
                                 "defaultStr": "'catch,reject,finally'"
                             }
                         },
+                        "return": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Promise"
+                                    }
+                                ],
+                                "raw": "Promise"
+                            },
+                            "description": "A simple promise that will be resolved once the promise has been canceled with the cancel stack result as value"
+                        },
                         "description": "This is the \"reject\" method exposed on the promise itself for convinience",
                         "async": "true",
                         "author": {
@@ -543,6 +657,17 @@
                                 "defaultStr": "'cancel,finally'"
                             }
                         },
+                        "return": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Promise"
+                                    }
+                                ],
+                                "raw": "Promise"
+                            },
+                            "description": "A simple promise that will be resolved once the promise has been canceled with the cancel stack result as value"
+                        },
                         "description": "This is the \"cancel\" method exposed on the promise itself for convinience",
                         "async": "true",
                         "author": {
@@ -590,6 +715,17 @@
                                 "defaultStr": ""
                             }
                         },
+                        "return": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "SPromise"
+                                    }
+                                ],
+                                "raw": "SPromise"
+                            },
+                            "description": "The SPromise instance to maintain chainability"
+                        },
                         "description": "This method allows the SPromise user to register a function that will be called every time the \"reject\" one is called in the executor\nThe context of the callback will be the SPromise instance itself so you can call all the methods available like \"resolve\", \"catch\", etc using\nthe \"this.resolve('something')\" statusment. In an arrow function like \"(value) => { ... }\", the \"this\" keyword will be bound to the current context where you define\nyour function. You can access to the SPromise instance through the last parameter like so \"(value, sPromiseInstance) => { ... }\".",
                         "example": [
                             {
@@ -627,6 +763,17 @@
                                 "description": "The callback function to register",
                                 "defaultStr": ""
                             }
+                        },
+                        "return": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "SPromise"
+                                    }
+                                ],
+                                "raw": "SPromise"
+                            },
+                            "description": "The SPromise instance to maintain chainability"
                         },
                         "description": "This method allows the SPromise user to register a function that will be called every time the \"reject\" one is called in the executor\nThe context of the callback will be the SPromise instance itself so you can call all the methods available like \"resolve\", \"catch\", etc using\nthe \"this.resolve('something')\" statusment. In an arrow function like \"(value) => { ... }\", the \"this\" keyword will be bound to the current context where you define\nyour function. You can access to the SPromise instance through the last parameter like so \"(value, sPromiseInstance) => { ... }\".",
                         "example": [

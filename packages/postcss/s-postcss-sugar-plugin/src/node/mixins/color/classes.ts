@@ -20,8 +20,10 @@ export { postcssSugarPluginClassesMixinInterface as interface };
  *
  * @return    {Css}         The generated css for color classes
  *
+ * @snippet         @sugar.color.classes
+ * 
  * @example        css
- * @sugar.color;
+ * \@sugar.color.classes;
  *
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)

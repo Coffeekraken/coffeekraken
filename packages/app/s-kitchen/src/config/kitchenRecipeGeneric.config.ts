@@ -381,20 +381,20 @@ export default function (api) {
                         return api.config.kitchen.actions.vite;
                     },
 
-                    /**
-                     * @name            format
-                     * @namespace       config.kitchenRecipeDefault.stacks.dev.actions
-                     * @type            String
-                     * @default         [config.kitchen.actions.format]
-                     *
-                     * Specify the format action settings
-                     *
-                     * @since       2.0.0
-                     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-                     */
-                    get format() {
-                        return api.config.kitchen.actions.format;
-                    },
+                    // /**
+                    //  * @name            format
+                    //  * @namespace       config.kitchenRecipeDefault.stacks.dev.actions
+                    //  * @type            String
+                    //  * @default         [config.kitchen.actions.format]
+                    //  *
+                    //  * Specify the format action settings
+                    //  *
+                    //  * @since       2.0.0
+                    //  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+                    //  */
+                    // get format() {
+                    //     return api.config.kitchen.actions.format;
+                    // },
                 },
             },
             prod: {

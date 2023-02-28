@@ -11,7 +11,7 @@ const s_interface_1 = __importDefault(require("@coffeekraken/s-interface"));
  * @type           PostcssMixin
  * @platform      postcss
  * @interface       ./when
- * @status        beta
+ * @status        wip
  *
  * This mixin allows you to set some css applied only WHEN a specific "state" has been
  * reached.

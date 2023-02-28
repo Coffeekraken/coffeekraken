@@ -1,5 +1,4 @@
 import __SInterface from '@coffeekraken/s-interface';
-import __STheme from '@coffeekraken/s-theme';
 
 /**
  * @name           noise
@@ -12,6 +11,8 @@ import __STheme from '@coffeekraken/s-theme';
  *
  * @return        {Css}         The generated css
  *
+ * @snippet         @sugar.filter.noise
+ * 
  * @example        css
  * .my-element {
  *    \@sugar.filter.noise(20);

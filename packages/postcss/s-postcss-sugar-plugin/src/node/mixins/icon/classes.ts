@@ -24,14 +24,14 @@ import { __unquote } from '@coffeekraken/sugar/string';
  *
  * - Filesystem:
  * Here's some example of filesystem icons declarations:
- * @sugar.icon.classes(
+ * \@sugar.icon.classes(
  *    fs:src/icons/vuejs.svg:vue
  *    fs:src/icons/something.svg:something
  * );
  *
  * - Font awesome (5)
  * Here's some example of font awesome icons declarations:
- * @sugar.icon.classes(
+ * \@sugar.icon.classes(
  *    fa:user:user
  *    fa:heart:heart
  *    fa:fire:fire
@@ -42,8 +42,15 @@ import { __unquote } from '@coffeekraken/sugar/string';
  * @param       {String}       icons        The icons you want. Each line define a new icon
  * @return        {Css}         The generated css
  *
+ * @snippet         @sugar.icon.classes($1)
+ * \@sugar.icon.classes(
+ *      fa:user:user
+ *      fs:src/icons/*.svg
+ *      $1
+ * )
+ * 
  * @example        css
- * @sugar.icon.classes(
+ * \@sugar.icon.classes(
  *    fa:user:user
  *    fa:heart:heart
  *    fs:src/icons/vuejs.svg:vue
@@ -237,7 +244,7 @@ export default function ({
         *   </div>
         * 
         * @example      css
-        * @sugar.icon.classes("
+        * \@sugar.icon.classes("
         ${iconsObjs
             .map((iconObj) => {
                 // @ts-ignore

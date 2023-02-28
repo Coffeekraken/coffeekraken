@@ -13,6 +13,8 @@ import __SInterface from '@coffeekraken/s-interface';
  * @param       {Number}        value      The value you want for scale (0-...)
  * @return      {Css}                   The corresponding css
  *
+ * @snippet         @sugar.scale($1)
+ * 
  * @example       css
  * .my-element {
  *    @sugar.scale(1.2);

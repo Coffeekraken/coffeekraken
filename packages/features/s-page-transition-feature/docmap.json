@@ -31,6 +31,9 @@
                 "description": "This feature allows you to add page transition to your size by using ajax requests and configurable\ntransition effects.\nWhen inited, it will proxy all the internal links (not the _blank or links starting with http...) and make the ajax\ntransition between pages.\nIt also listen on the `document` for the `location.href` event and transition to the specified `detail` property of the event.",
                 "namespace": "@coffeekraken.s-page-transition-feature.js",
                 "status": "beta",
+                "snippet": {
+                    "label": "__SPageTransitionFeatureDefine($1)"
+                },
                 "example": [
                     {
                         "language": "html",

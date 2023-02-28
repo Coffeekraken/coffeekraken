@@ -31,11 +31,11 @@ export default function composerJsonSync(
     nameOrPath: string,
     settings?: Partial<IComposerPathSettings>,
 ): any {
+
+    
     if (nameOrPath.match(/^\//)) {
         if (!__fs.existsSync(`${nameOrPath}/composer.json`)) {
-            throw new Error(
-                `<red>[composerJsonSync]</red> The passed "${nameOrPath}" folder directory does not contain any composer.json file...`,
-            );
+            return;
         }
         return JSON.parse(
             __fs.readFileSync(`${nameOrPath}/composer.json`).toString(),

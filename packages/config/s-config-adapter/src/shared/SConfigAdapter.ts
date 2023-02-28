@@ -16,7 +16,18 @@ import { __uniqid } from '@coffeekraken/sugar/string';
  * @todo      doc
  * @todo      tests
  *
+ * @snippet         __SConfigAdapter
+ * class $1 extends __SConfigAdapter {
+ *      constructor(settings = {}) {
+ *          super(settings);
+ *      }
+ *      async load() {
+ *          return {};
+ *      }
+ * }
+ * 
  * @example             js
+ * import __SConfigAdapter from '@coffeekraken/s-config-adapter';
  * class SConfigCoolAdapter extends SConfigAdapter {
  *    constructor(settings = {}) {
  *      super(settings);

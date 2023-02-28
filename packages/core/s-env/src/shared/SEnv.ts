@@ -28,12 +28,15 @@ try {
  * @todo        tests
  * @todo        add possibility to set a "details" on each rules for better returns
  *
+ * @snippet         __SEnv.get($1)
+ * @snippet         __SEnv.is($1)
+ * 
  * @example         js
- * import SEnv from '@coffeekraken/s-env';
- * this.get('something');
- * this.is('prod');
- * this.is('production');
- * this.is('development');
+ * import __SEnv from '@coffeekraken/s-env';
+ * __SEnv.get('something');
+ * __SEnv.is('prod');
+ * __SEnv.is('production');
+ * __SEnv.is('development');
  * // etc...
  *
  * @since           2.0.0

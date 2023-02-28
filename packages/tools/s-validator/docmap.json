@@ -79,6 +79,10 @@
                 "description": "This class allows you to validate a lot of data with a lot of validators like \"email\", \"url\", \"min\", \"max\", etc...",
                 "namespace": "@coffeekraken.s-validator.shared",
                 "status": "beta",
+                "snippet": {
+                    "label": "new __SValidator()",
+                    "code": "const validator = new __SValidator();\nconst validatorRes = validator.validate('Hello world plop', {\n     min: 2\n     max: 10\n});\n// {\n//   valid: false,\n//   messages: [\n//       'This must have at max 10 characters'\n//   ]\n// }"
+                },
                 "example": [
                     {
                         "language": "js",
@@ -244,6 +248,17 @@
                                 "default": {},
                                 "defaultStr": "{}"
                             }
+                        },
+                        "return": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "ISValidatorValidateResult"
+                                    }
+                                ],
+                                "raw": "ISValidatorValidateResult"
+                            },
+                            "description": "The result object"
                         },
                         "description": "This method allows you to validate any data using a lot of validators like \"email\", \"url\", \"min\", \"max\", etc...\nThe passed rules have to be an object with one or multiple properties representing the validations you want to make on your passed value.",
                         "example": [
@@ -416,6 +431,17 @@
                         "defaultStr": "{}"
                     }
                 },
+                "return": {
+                    "type": {
+                        "types": [
+                            {
+                                "type": "ISValidatorResult"
+                            }
+                        ],
+                        "raw": "ISValidatorResult"
+                    },
+                    "description": "The result object"
+                },
                 "platform": [
                     {
                         "name": "js",
@@ -485,6 +511,17 @@
                         "default": {},
                         "defaultStr": "{}"
                     }
+                },
+                "return": {
+                    "type": {
+                        "types": [
+                            {
+                                "type": "ISValidatorResult"
+                            }
+                        ],
+                        "raw": "ISValidatorResult"
+                    },
+                    "description": "The result object"
                 },
                 "platform": [
                     {
@@ -556,6 +593,17 @@
                         "defaultStr": "{}"
                     }
                 },
+                "return": {
+                    "type": {
+                        "types": [
+                            {
+                                "type": "ISValidatorResult"
+                            }
+                        ],
+                        "raw": "ISValidatorResult"
+                    },
+                    "description": "The result object"
+                },
                 "platform": [
                     {
                         "name": "js",
@@ -625,6 +673,17 @@
                         "default": {},
                         "defaultStr": "{}"
                     }
+                },
+                "return": {
+                    "type": {
+                        "types": [
+                            {
+                                "type": "ISValidatorResult"
+                            }
+                        ],
+                        "raw": "ISValidatorResult"
+                    },
+                    "description": "The result object"
                 },
                 "platform": [
                     {
@@ -696,6 +755,17 @@
                         "defaultStr": "{}"
                     }
                 },
+                "return": {
+                    "type": {
+                        "types": [
+                            {
+                                "type": "ISValidatorResult"
+                            }
+                        ],
+                        "raw": "ISValidatorResult"
+                    },
+                    "description": "The result object"
+                },
                 "platform": [
                     {
                         "name": "js",
@@ -765,6 +835,17 @@
                         "default": {},
                         "defaultStr": "{}"
                     }
+                },
+                "return": {
+                    "type": {
+                        "types": [
+                            {
+                                "type": "ISValidatorResult"
+                            }
+                        ],
+                        "raw": "ISValidatorResult"
+                    },
+                    "description": "The result object"
                 },
                 "platform": [
                     {
@@ -836,6 +917,17 @@
                         "defaultStr": "{}"
                     }
                 },
+                "return": {
+                    "type": {
+                        "types": [
+                            {
+                                "type": "ISValidatorResult"
+                            }
+                        ],
+                        "raw": "ISValidatorResult"
+                    },
+                    "description": "The result object"
+                },
                 "platform": [
                     {
                         "name": "js",
@@ -906,6 +998,17 @@
                         "defaultStr": "{}"
                     }
                 },
+                "return": {
+                    "type": {
+                        "types": [
+                            {
+                                "type": "ISValidatorResult"
+                            }
+                        ],
+                        "raw": "ISValidatorResult"
+                    },
+                    "description": "The result object"
+                },
                 "platform": [
                     {
                         "name": "js",
@@ -975,6 +1078,17 @@
                         "default": {},
                         "defaultStr": "{}"
                     }
+                },
+                "return": {
+                    "type": {
+                        "types": [
+                            {
+                                "type": "ISValidatorResult"
+                            }
+                        ],
+                        "raw": "ISValidatorResult"
+                    },
+                    "description": "The result object"
                 },
                 "platform": [
                     {
@@ -1059,6 +1173,17 @@
                         "defaultStr": "{}"
                     }
                 },
+                "return": {
+                    "type": {
+                        "types": [
+                            {
+                                "type": "ISValidatorResult"
+                            }
+                        ],
+                        "raw": "ISValidatorResult"
+                    },
+                    "description": "The result object"
+                },
                 "platform": [
                     {
                         "name": "js",
@@ -1142,6 +1267,17 @@
                         "defaultStr": "{}"
                     }
                 },
+                "return": {
+                    "type": {
+                        "types": [
+                            {
+                                "type": "ISValidatorResult"
+                            }
+                        ],
+                        "raw": "ISValidatorResult"
+                    },
+                    "description": "The result object"
+                },
                 "platform": [
                     {
                         "name": "js",
@@ -1211,6 +1347,17 @@
                         "default": {},
                         "defaultStr": "{}"
                     }
+                },
+                "return": {
+                    "type": {
+                        "types": [
+                            {
+                                "type": "ISValidatorResult"
+                            }
+                        ],
+                        "raw": "ISValidatorResult"
+                    },
+                    "description": "The result object"
                 },
                 "platform": [
                     {
@@ -1282,6 +1429,17 @@
                         "defaultStr": "{}"
                     }
                 },
+                "return": {
+                    "type": {
+                        "types": [
+                            {
+                                "type": "ISValidatorResult"
+                            }
+                        ],
+                        "raw": "ISValidatorResult"
+                    },
+                    "description": "The result object"
+                },
                 "platform": [
                     {
                         "name": "js",
@@ -1351,6 +1509,17 @@
                         "default": {},
                         "defaultStr": "{}"
                     }
+                },
+                "return": {
+                    "type": {
+                        "types": [
+                            {
+                                "type": "ISValidatorResult"
+                            }
+                        ],
+                        "raw": "ISValidatorResult"
+                    },
+                    "description": "The result object"
                 },
                 "platform": [
                     {
@@ -1435,6 +1604,17 @@
                         "defaultStr": "{}"
                     }
                 },
+                "return": {
+                    "type": {
+                        "types": [
+                            {
+                                "type": "ISValidatorResult"
+                            }
+                        ],
+                        "raw": "ISValidatorResult"
+                    },
+                    "description": "The result object"
+                },
                 "platform": [
                     {
                         "name": "js",
@@ -1505,6 +1685,17 @@
                         "defaultStr": "{}"
                     }
                 },
+                "return": {
+                    "type": {
+                        "types": [
+                            {
+                                "type": "ISValidatorResult"
+                            }
+                        ],
+                        "raw": "ISValidatorResult"
+                    },
+                    "description": "The result object"
+                },
                 "platform": [
                     {
                         "name": "js",
@@ -1574,6 +1765,17 @@
                         "default": {},
                         "defaultStr": "{}"
                     }
+                },
+                "return": {
+                    "type": {
+                        "types": [
+                            {
+                                "type": "ISValidatorResult"
+                            }
+                        ],
+                        "raw": "ISValidatorResult"
+                    },
+                    "description": "The result object"
                 },
                 "platform": [
                     {

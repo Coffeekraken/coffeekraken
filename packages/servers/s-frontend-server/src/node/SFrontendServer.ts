@@ -33,6 +33,7 @@ import __request from 'request';
  * @extends         SEventEmitter
  * @platform        node
  * @status          beta
+ * @private
  *
  * This class represent a frontend server that handle features like documentation, views rendering,
  * frontspec reading middleware, packageJson middleware and more...

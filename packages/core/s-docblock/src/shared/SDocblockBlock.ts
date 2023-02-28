@@ -38,17 +38,47 @@ import __typeTag from './tags/type';
  * - Converting the block to markdown
  * - More to come...
  *
+ * @feature         `author` tag support
+ * @feature         `contributor` tag support
+ * @feature         `cssClass` tag support
+ * @feature         `description` tag support
+ * @feature         `event` tag support
+ * @feature         `example` tag support
+ * @feature         `install` tag support
+ * @feature         `interface` tag support
+ * @feature         `menu` tag support
+ * @feature         `namespace` tag support
+ * @feature         `param` tag support
+ * @feature         `platform` tag support
+ * @feature         `return` tag support
+ * @feature         `see` tag support
+ * @feature         `snippet` tag support
+ * @feature         `support` tag support
+ * @feature         `todo` tag support
+ * @feature         `type` tag support
+ * @feature         All the other tags are treated like a `String` value
+ * 
  * @param         {String}       source      The docblock source.  Has to be a parsable docblock string
  * @param         {Object}      [settings={}]       A settings object to configure your instance
  *
+ * @setting         {String}        [filePath=null]         Specify the file path where the docblocks are parsed from
+ * @setting         {Any}           [packageJson={}]        Pass the current package.json data to add some metas to the docblocks
+ * @setting         {Boolean}       [renderMarkdown=false]              Specify if you want to render the markdown in the tags values or not
+ * @setting         {Any}           [markedOptions={}]                  Specify some [marked](https://www.npmjs.com/package/marked) options to render markdown
+ * @setting         {Function}      [sortFunction=function(a, b) {})]       Specify a function to sort the docblocks. A default sort is applied
+ * @setting         {Record<String, Function>}      [tags={}]           Specify some tags you want to include with a function that will be used to actually parse his value and return the formatted one. Some tags are built-in. Look at the features section.
+ * 
  * @todo        tests
  * @todo        Support "feature" tag
  * @todo        Check the supported tags
  *
+ * @snippet         __SDocblockBlock($1)
+ * new __SDocblockBlock($1)
+ * 
  * @example         js
- * import SDocblockBlock from '@coffeekraken/sugar/js/docblock/SDocblockBlock';
- * const myBlock = new SDocblockBlock(myDocblockString);
- * const myBlock.toObject();
+ * import { __SDocblockBlock } from '@coffeekraken/s-docblock';
+ * const docblock = new __SDocblockBlock(myDocblockString);
+ * const docblock.toObject();
  *
  * @since     2.0.0
  * @author 	Olivier Bossel <olivier.bossel@gmail.com>

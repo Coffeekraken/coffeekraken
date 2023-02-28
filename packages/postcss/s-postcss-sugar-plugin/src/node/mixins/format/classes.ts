@@ -13,8 +13,10 @@ import __faker from 'faker';
  *
  * @return        {Css}         The generated css
  *
+ * @snippet         @sugar.format.classes
+ * 
  * @example        css
- * @sugar.format.classes;
+ * \@sugar.format.classes;
  *
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)

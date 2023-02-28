@@ -24,6 +24,17 @@ import __css from '../../../../src/css/s-highlight-feature.css'; // relative to 
  * @support          safari
  * @support          edge
  *
+ * @import          import { define as __SHighlightFeatureDefine } from '@coffeekraken/s-highlight-feature';
+ * 
+ * @snippet         __SHighlightFeatureDefine($1)
+ * 
+ * @install         js
+ * import { define as __SHighlightFeatureDefine } from '@coffeekraken/s-highlight-feature';
+ * __SHighlightFeatureDefine();
+ * 
+ * @install         bash
+ * npm i @coffeekraken/s-form-validate-feature
+ * 
  * @example         html            Highlight
  * <div class="s-radius s-bg:main s-depth s-mbe:30" style="height:100px" s-highlight>
  * </div>

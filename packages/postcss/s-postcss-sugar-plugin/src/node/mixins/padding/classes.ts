@@ -14,8 +14,10 @@ import __faker from 'faker';
  *
  * @return        {Css}         The generated css
  *
+ * @snippet         @sugar.padding.classes
+ * 
  * @example        css
- * @sugar.padding.classes;
+ * \@sugar.padding.classes;
  *
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)

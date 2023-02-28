@@ -13,6 +13,8 @@ import type { ISSugarConfig } from '../shared/types';
  * This class allows you to access your sugar configurations that are
  * injected into the page by the @coffeekraken/s-vite-sugar-plugin
  *
+ * @snippet         __SSugarConfig.get($1)
+ * 
  * @example         js
  * import __SSugarConfig from '@coffeekraken/s-sugar-config';
  * __SSugarConfig.get('something.cool');

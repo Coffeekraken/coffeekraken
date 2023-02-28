@@ -18,7 +18,7 @@ import __fs from 'fs';
  * @return      {Css}                   The generated css
  *
  * @example       css
- * @sugar.autoload;
+ * \@sugar.autoload;
  *
  * @since     2.0.0
  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)

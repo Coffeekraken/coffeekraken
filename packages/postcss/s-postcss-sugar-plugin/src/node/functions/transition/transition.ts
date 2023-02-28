@@ -14,6 +14,8 @@ import __STheme from '@coffeekraken/s-theme';
  * @param       {String}        transition      The transition to get
  * @return      {Css}                   The corresponding css
  *
+ * @snippet         sugar.transition($1)
+ * 
  * @example       css
  * .my-element {
  *      transition: sugar.transition(fast);

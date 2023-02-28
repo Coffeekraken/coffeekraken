@@ -38,6 +38,7 @@
         "@coffeekraken/s-google-map-component": "^2.0.0-alpha.25",
         "@coffeekraken/s-postcss-sugar-plugin": "^2.0.0-alpha.25",
         "@coffeekraken/s-sugar-feature": "^2.0.0-alpha.25",
+        "@coffeekraken/s-log": "^2.0.0-alpha.25",
         "@coffeekraken/sugar": "^2.0.0-alpha.25",
         "autoprefixer": "^10.4.12",
         "postcss": "^8.4.17",

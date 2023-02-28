@@ -14,8 +14,10 @@ import __STheme from '@coffeekraken/s-theme';
  *
  * @return        {Css}         The generated css
  *
+ * @snippet         @sugar.theme($1)
+ * 
  * @example        css
- * @sugar.theme(light);
+ * \@sugar.theme(light);
  * .my-cool-element {
  *    \@sugar.theme(dark);
  * }

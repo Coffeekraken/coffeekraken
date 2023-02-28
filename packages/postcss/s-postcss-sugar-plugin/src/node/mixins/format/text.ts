@@ -21,6 +21,11 @@ export interface postcssSugarPluginFormatTextMixinParams {}
  *
  * @return      {Css}         The generated css
  *
+ * @snippet         @sugar.format.text
+ * \@sugar.format.text {
+ *      $1
+ * }
+ * 
  * @example        css
  * .my-cool-element {
  *    \@sugar.format.text {

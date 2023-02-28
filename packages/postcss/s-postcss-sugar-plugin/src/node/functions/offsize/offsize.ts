@@ -15,6 +15,8 @@ import __STheme from '@coffeekraken/s-theme';
  * @param       {Boolean}       [scalable='theme.scalable.offsize']      Whether to scale the value or not
  * @return      {Css}                   The corresponding css
  *
+ * @snippet         sugar.offsize($1)
+ * 
  * @example       css
  * .my-element {
  *      margin-top: sugar.offsize(20);

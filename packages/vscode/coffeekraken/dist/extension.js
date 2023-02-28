@@ -140,21 +140,22 @@ function jsIntegration(docmapJson) {
             case 'ts':
                 if (docmapObj.example?.length) {
                     const firstExample = docmapObj.example[0];
-                    let importStr = firstExample.code.split('\n')[0];
-                    if (!importStr.match(/^import\s/)) {
-                        return;
-                    }
-                    // ending ";"
-                    const editor = vscode.window.activeTextEditor, curPos = editor.selection.active;
-                    const restorePosition = editor?.selection.active.with(curPos.c + 1, curPos.e);
-                    if (editor) {
-                        // avoid multiple add
-                        if (editor?.document.getText().includes(importStr)) {
+                    let codeLines = firstExample.code.split('\n');
+                    for (let importStr of codeLines) {
+                        if (!importStr.match(/^import\s/)) {
                             return;
                         }
-                        editor.insertSnippet(new vscode.SnippetString(`${importStr}\n`), new vscode.Position(0, 0));
-                        var newSelection = new vscode.Selection(restorePosition, restorePosition);
-                        editor.selection = newSelection;
+                        const editor = vscode.window.activeTextEditor, curPos = editor.selection.active;
+                        const restorePosition = editor?.selection.active.with(curPos.c + 1, curPos.e);
+                        if (editor) {
+                            // avoid multiple add
+                            if (editor?.document.getText().includes(importStr)) {
+                                return;
+                            }
+                            editor.insertSnippet(new vscode.SnippetString(`${importStr}\n`), new vscode.Position(0, 0));
+                            var newSelection = new vscode.Selection(restorePosition, restorePosition);
+                            editor.selection = newSelection;
+                        }
                     }
                 }
                 break;

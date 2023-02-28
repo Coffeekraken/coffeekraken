@@ -30,6 +30,8 @@ export { postcssSugarPluginColorRemapMixinInterface as interface };
  * @param       {String}        toColor         THe color you want to override with the previous one
  * @return      {Css}                     The generated remap css
  *
+ * @snippet         @sugar.color.remap($1, $2)
+ * 
  * @example        css
  * .my-section {
  *      @sugar.color.remap(warning, accent);

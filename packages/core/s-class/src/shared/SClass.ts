@@ -15,9 +15,16 @@ import __toJson from '@coffeekraken/sugar/shared/object/toJson';
  *
  * @param       {Object}           [settings={}]               An object of settings that will be available as the property ```settings```
  *
+ * @snippet         __SClass
+ * class $1 extends __SClass {
+ *      constructor(settings = {}) {
+ *          super(settings);
+ *      }
+ * }
+ * 
  * @example         js
- * import SClass from '@coffeekraken/sugar/js/class/SClass';
- * class MyCoolClass extends SClass {
+ * import __SClass from '@coffeekraken/s-class';
+ * class MyCoolClass extends __SClass {
  *      constructor(settings = {}) {
  *          super(settings);
  *      }

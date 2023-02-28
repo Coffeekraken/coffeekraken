@@ -13,7 +13,7 @@ export default (stringArgs = '') => {
         );
         console.log(
             `<green>[read]</green> <cyan>${
-                Object.keys(result.map).length
+                Object.keys(result?.map ?? {}).length
             }</cyan> docmap items`,
         );
         resolve(result);

@@ -18,6 +18,14 @@ import { __deepMerge } from '@coffeekraken/sugar/object';
  *
  * @param                   {Object}                    json            The json to use as config
  *
+ * @snippet         __SConfigInlineAdapter($1)
+ * new __SConfigInlineAdapter($1)
+ * 
+ * @example         js
+ * import __SConfigInlineAdapter from '@coffeekraken/s-config-folder-adapter';
+ * import __SConfig from '@coffeekraken/s-config';
+ * const config = new __SConfig($1, new __SConfigInlineAdapter($2));
+ * 
  * @todo      interface
  * @todo      doc
  * @todo      tests

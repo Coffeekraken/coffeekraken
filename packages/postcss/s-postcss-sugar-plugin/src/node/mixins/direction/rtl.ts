@@ -1,5 +1,4 @@
 import __SInterface from '@coffeekraken/s-interface';
-import __astNodesToString from '../../utils/astNodesToString';
 
 class postcssSugarPluginDirectionRtlMixinInterface extends __SInterface {
     static get _definition() {
@@ -21,6 +20,11 @@ export interface postcssSugarPluginDirectionRtlMixinParams {}
  *
  * @param       {String}        query       The query string like ">tablet", "<=desktop", etc...
  *
+ * @snippet         @sugar.direction.rtl
+ * \@sugar.direction.rtl {
+ *      $1
+ * }
+ * 
  * @example        css
  * .myCoolItem {
  *  \@sugar.direction.rtl {

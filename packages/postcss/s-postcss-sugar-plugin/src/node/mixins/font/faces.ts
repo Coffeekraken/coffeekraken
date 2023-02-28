@@ -13,8 +13,10 @@ import __STheme from '@coffeekraken/s-theme';
  *
  * @return        {Css}         The generated css
  *
+ * @snippet         @sugar.font.faces
+ * 
  * @example        css
- * @sugar.font.faces;
+ * \@sugar.font.faces;
  *
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)

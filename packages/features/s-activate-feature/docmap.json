@@ -67,6 +67,9 @@
                 "description": "This feature allows you to activate some elements depending on triggers like `click`, `mouseover`, `mouseout`, `anchor`, etc...\nTo be explicit, you can apply this feature on a link tag with the href attribute `#something`, and on click,\nthe DOM element that has the id \"something\" will get the \"active\" class applied.",
                 "namespace": "@coffeekraken.s-activate-feature.js",
                 "status": "beta",
+                "snippet": {
+                    "label": "__SActivateFeatureDefine($1)"
+                },
                 "example": [
                     {
                         "language": "html",

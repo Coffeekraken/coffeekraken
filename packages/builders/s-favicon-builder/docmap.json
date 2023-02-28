@@ -148,10 +148,14 @@
                 "description": "This class allows you to generate all the favicons you need for your website.",
                 "namespace": "@coffeekraken.s-favicon-builder.node",
                 "status": "beta",
+                "snippet": {
+                    "label": "__SFaviconBuilder($1)",
+                    "code": "const faviconBuilder = new __SFaviconBuilder();\nconst faviconBuilderResult = await faviconBuilder({\n     input: $1,\n     outDir: $2\n});"
+                },
                 "example": [
                     {
                         "language": "js",
-                        "code": "import SFaviconBuilder from '@coffeekraken/s-favicon-builder';\nconst builder = new SFaviconBuilder({\n     faviconBuilder: {\n         // some settings...\n     }\n});\nawait builder.build('src /.jpg');"
+                        "code": "import _SFaviconBuilder from '@coffeekraken/s-favicon-builder';\nconst builder = new _SFaviconBuilder({\n     // some settings...\n});\nawait builder.build({\n     input: 'src/img/favicon.png',\n     outDir: 'dist/favicon'\n});"
                     }
                 ],
                 "interface": {

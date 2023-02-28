@@ -17,6 +17,10 @@
  * @setting         {Object|Array}            [namespaces=[]]             An array|object of namespace like "my.namespace" property with a simple array of folders where to search for specs files when using this namespace
  * @setting         {Object|Array}            [sFrontspecSettings=[]]           Some settings to pass to the SFrontspec class in order to read the `frontspec.json` content
  *
+ * @snippet         new SSpecs($1);
+ * $specs = new SSpecs($1);
+ * $spec = $specs->read('sugar.views.components.card');
+ * 
  * @example         php
  * $spec = new SSpecs([
  *   'namespaces' => [

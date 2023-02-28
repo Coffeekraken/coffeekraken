@@ -78,6 +78,16 @@
                 "description": "This adapter let you pass directly an object to the SConfig instance",
                 "namespace": "@coffeekraken.s-config-inline-adapter.node",
                 "status": "beta",
+                "snippet": {
+                    "label": "__SConfigInlineAdapter($1)",
+                    "code": "new __SConfigInlineAdapter($1)"
+                },
+                "example": [
+                    {
+                        "language": "js",
+                        "code": "import __SConfigInlineAdapter from '@coffeekraken/s-config-folder-adapter';\nimport __SConfig from '@coffeekraken/s-config';\nconst config = new __SConfig($1, new __SConfigInlineAdapter($2));"
+                    }
+                ],
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",

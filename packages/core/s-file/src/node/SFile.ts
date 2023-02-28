@@ -7,7 +7,7 @@ import {
     __fileName,
     __readJsonSync,
     __writeFile,
-    __writeFileSync,
+    __writeFileSync
 } from '@coffeekraken/sugar/fs';
 import { __deepMerge } from '@coffeekraken/sugar/object';
 import { __toString } from '@coffeekraken/sugar/string';
@@ -25,15 +25,16 @@ import __path from 'path';
  * @status              beta
  *
  * This class represent a file in the filesystem. With it you can simply instanciate one by passing the file path,
- * and get access to all the nice meta data like:
- * - name: The file name
- * - path: The full path to the file
- * - cwd: The root directory specified through the settings.cwd property
- * - relPath: The relative file path from the cwd
- * - dirPath: The path to the folder where is the file
- * - extension: The file extension
- * - stats: An object with file stats like size in mb, kb, etc...
- * - exists: true if the file exists on the disk, false otherwise
+ * and get access to all the nice meta data like the ones listed in the feature section
+ * 
+ * @feature         `name`: The file name
+ * @feature         `path`: The full path to the file
+ * @feature         `cwd`: The root directory specified through the settings.cwd property
+ * @feature         `relPath`: The relative file path from the cwd
+ * @feature         `dirPath`: The path to the folder where is the file
+ * @feature         `extension`: The file extension
+ * @feature         `stats`: An object with file stats like size in mb, kb, etc...
+ * @feature         `exists`: true if the file exists on the disk, false otherwise
  *
  * @param         {String}          filepath        The file path you want to init
  * @param         {Object}          [settings={}]    An object of settings to configure your file instance:
@@ -45,9 +46,12 @@ import __path from 'path';
  * @todo      tests
  * @todo      {Feature}       Add support for autocasting like yml, etc...
  *
+ * @snippet         __SFile($1)
+ * new __SFile($1)
+ * 
  * @example           js
- * import SFile from '@coffeekraken/s-file';
- * const file = new SFile('something/cool/sugar.json');
+ * import __SFile from '@coffeekraken/s-file';
+ * const file = new __SFile('something/cool/sugar.json');
  * file.extension; // => json
  * file.exists; // => true
  *

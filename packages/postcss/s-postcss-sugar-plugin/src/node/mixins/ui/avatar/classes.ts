@@ -16,8 +16,10 @@ import __SInterface from '@coffeekraken/s-interface';
  * @param       {('bare'|'lnf'|'shape'|'interactive'|'notifications')[]}        [scope=['bare','lnf','shape','interactive','notifications']]      The scope you want to generate
  * @return      {Css}                   The corresponding css
  *
+ * @snippet         @sugar.ui.avatar.classes
+ * 
  * @example       css
- * @sugar.ui.avatar.classes();
+ * \@sugar.ui.avatar.classes();
  *
  * @since     2.0.0
  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)

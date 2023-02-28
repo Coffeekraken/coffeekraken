@@ -13,6 +13,8 @@ import __SInterface from '@coffeekraken/s-interface';
  *
  * @return        {Css}         The generated css
  *
+ * @snippet         @sugar.visually.hidden
+ * 
  * @example        css
  * .my-element {
  *  \@sugar.visually.hidden;

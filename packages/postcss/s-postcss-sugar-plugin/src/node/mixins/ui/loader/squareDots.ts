@@ -17,6 +17,8 @@ import { __uniqid } from '@coffeekraken/sugar/string';
  * @param        {String}           [easing='theme.ui.loader.easing']            The easing you want for your squareDots animation
  * @return      {String}            The generated css
  *
+ * @snippet         @sugar.ui.loader.squareDots
+ * 
  * @example     css
  * .my-squareDots {
  *    @sugar.ui.loader.squareDots;

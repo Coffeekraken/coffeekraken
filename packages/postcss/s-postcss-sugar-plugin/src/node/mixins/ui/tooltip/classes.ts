@@ -17,8 +17,10 @@ import __faker from 'faker';
  * @param       {('bare'|'lnf'|'shape'|'vr'|'tf')[]}        [scope=['bare', 'lnf', 'shape', 'vr', 'tf']]      The scope you want to generate
  * @return      {String}            The generated css
  *
+ * @snippet         @sugar.ui.tooltip.classes
+ * 
  * @example     css
- * @sugar.ui.tooltip.classes;
+ * \@sugar.ui.tooltip.classes;
  *
  * @since      2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)

@@ -12,7 +12,7 @@ const fs_1 = __importDefault(require("fs"));
  * @namespace      node.mixin.cache
  * @type           PostcssMixin
  * @platform      postcss
- * @status        beta
+ * @status        wip
  *
  * This mixin allows you to cache some generated css to avoid generating it when it's not absolutely necessary.
  * This cache depends on the config.theme configuration as well as on the @coffeekraken/s-postcss-sugar-plugin integrity.
@@ -21,7 +21,7 @@ const fs_1 = __importDefault(require("fs"));
  * @return        {Css}         The generated css
  *
  * @example        css
- * @sugar.cache {
+ * \@sugar.cache {
  *   @sugar.classes;
  * }
  *

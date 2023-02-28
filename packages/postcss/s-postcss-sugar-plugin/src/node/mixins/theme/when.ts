@@ -1,7 +1,4 @@
 import __SInterface from '@coffeekraken/s-interface';
-import __astNodesToString from '../../utils/astNodesToString';
-import __SSugarConfig from '@coffeekraken/s-sugar-config';
-import __STheme from '@coffeekraken/s-theme';
 
 class postcssSugarPluginThemeWhenMixinInterface extends __SInterface {
     static get _definition() {
@@ -35,6 +32,11 @@ export interface postcssSugarPluginThemeWhenMixinParams {
  *
  * @return      {Css}         The generated css
  *
+ * @snippet         @sugar.theme.when($1)
+ * \@sugar.theme.when $1 {
+ *      $2
+ * }
+ * 
  * @example        css
  * .my-cool-element {
  *    \@sugar.theme.when(dark) {

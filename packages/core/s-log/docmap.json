@@ -168,6 +168,9 @@
                 "description": "This class represent a log that can be make across the application using the \"emit\"\nfunction of an SPromise instance for example. It has as goal to centralize and harmonize\nwhat a log can be and can do.\nEach log is specified by some characteristic like a \"type\" that can be something like \"SLog.LOG\" or \"SLog.WARN\".\nIt has also the possibility to unactivate some logs depending on different cisronstances like for example the\nfact to set the `SLog.filter([SLog.WARN, SLog.ERROR])` to only let the warn and error logs\nactivated.",
                 "namespace": "@coffeekraken.s-log.shared",
                 "status": "beta",
+                "snippet": {
+                    "label": "new __SLog($1)"
+                },
                 "example": [
                     {
                         "language": "js",
@@ -580,6 +583,17 @@
                                 "description": "The log type(s) you want to check",
                                 "defaultStr": ""
                             }
+                        },
+                        "return": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Boolean"
+                                    }
+                                ],
+                                "raw": "Boolean"
+                            },
+                            "description": "True if the log type is enabled, false otherwise"
                         },
                         "description": "This static method allows you Check if a particular log type is enabled or not.\nYou can pass as well multiple log types as an array.",
                         "static": "true",

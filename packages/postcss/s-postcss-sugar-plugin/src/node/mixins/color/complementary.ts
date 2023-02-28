@@ -24,6 +24,8 @@ export { postcssSugarPluginColorSecondaryMixinInterface as interface };
  * @param       {String}        color           The color you want to map on another one
  * @return      {Css}                     The generated remap css
  *
+ * @snippet         @sugar.color.complementary($1)
+ * 
  * @example        css
  * .my-section {
  *      @sugar.color.complementary(accent);

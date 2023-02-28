@@ -63,10 +63,14 @@
                 "description": "Base class for SConfig adapters",
                 "namespace": "@coffeekraken.s-config-adapter.shared",
                 "status": "beta",
+                "snippet": {
+                    "label": "__SConfigAdapter",
+                    "code": "class $1 extends __SConfigAdapter {\n     constructor(settings = {}) {\n         super(settings);\n     }\n     async load() {\n         return {};\n     }\n}"
+                },
                 "example": [
                     {
                         "language": "js",
-                        "code": "class SConfigCoolAdapter extends SConfigAdapter {\n   constructor(settings = {}) {\n     super(settings);\n     // settings are accessible through this.settings\n   }\n   async load() {\n     // load the config the way you want and return it in Object format\n     return {};\n   }\n}"
+                        "code": "import __SConfigAdapter from '@coffeekraken/s-config-adapter';\nclass SConfigCoolAdapter extends SConfigAdapter {\n   constructor(settings = {}) {\n     super(settings);\n     // settings are accessible through this.settings\n   }\n   async load() {\n     // load the config the way you want and return it in Object format\n     return {};\n   }\n}"
                     }
                 ],
                 "since": "2.0.0",

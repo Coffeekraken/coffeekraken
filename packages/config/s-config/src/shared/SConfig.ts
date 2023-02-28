@@ -32,6 +32,9 @@ import __set from '@coffeekraken/sugar/shared/object/set';
  * @todo      tests
  * @todo      Add a "catch" method that allows to get the saving errors, etc...
  *
+ * @snippet         __SConfig($1)
+ * new __SConfig($1);
+ * 
  * @example             js
  * import SConfig, { SConfigLsAdapter } from '@coffeekraken/s-config';
  * const config = new SConfig('my-config', new SConfigLsAdapter();

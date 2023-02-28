@@ -124,6 +124,9 @@
                 "description": "This class represent the ```frontspec.json``` json that must be either in:\n1. The `document.env.SUGAR.frontspec` object\n2. The `document.env.FRONTSPEC` object\n3. The \"frontspec\" param of the constructor\nEach level will be overrided by the upper one using a deepMerge.",
                 "namespace": "@coffeekraken.s-frontspec.js",
                 "status": "beta",
+                "snippet": {
+                    "label": "__SFrontspec.get($1)"
+                },
                 "example": [
                     {
                         "language": "js",
@@ -150,6 +153,17 @@
                                 }
                             ],
                             "raw": "Function"
+                        },
+                        "return": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "SFrontspec"
+                                    }
+                                ],
+                                "raw": "SFrontspec"
+                            },
+                            "description": "The SFrontspec instance that represent the frontspec.json file"
                         },
                         "description": "This method allows you to init the your SFrontspec instance and store it into the document.env.SUGAR.frontspec property",
                         "static": "true",
@@ -186,6 +200,17 @@
                                 "default": ".",
                                 "defaultStr": "\".\""
                             }
+                        },
+                        "return": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Any"
+                                    }
+                                ],
+                                "raw": "Any"
+                            },
+                            "description": "The getted frontspec value"
                         },
                         "description": "Access a frontspec value by passing a dotpath like \"partytown.enabled\", or by accessing the full frontspec object by using `.get()` call.",
                         "since": "2.0.0",
@@ -252,10 +277,13 @@
                 "description": "This class represent the ```frontspec.json``` file and allows you to generate it.",
                 "namespace": "@coffeekraken.s-frontspec.node",
                 "status": "beta",
+                "snippet": {
+                    "label": "__SFrontspec.get($1)"
+                },
                 "example": [
                     {
                         "language": "js",
-                        "code": "import SFrontspec from '@coffeekraken/s-frontspec';\nconst frontspec = new SFrontspec();\nconst result = await frontspec.read();"
+                        "code": "import __SFrontspec from '@coffeekraken/s-frontspec';\nconst frontspec = new __SFrontspec();\nconst result = await frontspec.read();\n__SFrontspec.get('media')"
                     }
                 ],
                 "since": "2.0.0",
@@ -298,6 +326,17 @@
                             ],
                             "raw": "Function"
                         },
+                        "return": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "SPromise"
+                                    }
+                                ],
+                                "raw": "SPromise"
+                            },
+                            "description": "An SPromise instance that will be resolved once the frontspec.json file has been correctly read"
+                        },
                         "description": "This static method allows you to search for frontspec.json files and read them to get\nback the content of them in one call.",
                         "since": "2.0.0",
                         "author": {
@@ -334,6 +373,17 @@
                                 "description": "The params to use to build your frontspec",
                                 "defaultStr": ""
                             }
+                        },
+                        "return": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Promise"
+                                    }
+                                ],
+                                "raw": "Promise"
+                            },
+                            "description": "A promise resolved once the scan process has been finished"
                         },
                         "description": "This static method allows you to build the frontspec.json file from the configs specifies in the config.frontspec.build.sources stack.",
                         "since": "2.0.0",
@@ -462,6 +512,17 @@
                                 "default": null,
                                 "defaultStr": "null"
                             }
+                        },
+                        "return": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Any"
+                                    }
+                                ],
+                                "raw": "Any"
+                            },
+                            "description": "The requested spec value"
                         },
                         "platform": [
                             {

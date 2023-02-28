@@ -18,23 +18,15 @@ import __SDocmapReadParamsInterface from './SDocmapReadParamsInterface';
  */
 class SDocmapReadParamsInterface extends __SInterface {
     static get _definition() {
-        return Object.assign(
-            Object.assign({}, __SDocmapReadParamsInterface.definition),
-            {
-                slug: {
-                    description:
-                        'Specify a slug to search for. Can be a micromatch glob as well',
-                    type: 'String',
-                    alias: 's',
-                },
-                namespace: {
-                    description:
-                        'Specify a namespace to search for. Can be a micromatch glob as well',
-                    type: 'String',
-                    alias: 'n',
-                },
-            },
-        );
+        return Object.assign(Object.assign({}, __SDocmapReadParamsInterface.definition), { slug: {
+                description: 'Specify a slug to search for. Can be a micromatch glob as well',
+                type: 'String',
+                alias: 's',
+            }, namespace: {
+                description: 'Specify a namespace to search for. Can be a micromatch glob as well',
+                type: 'String',
+                alias: 'n',
+            } });
     }
 }
 export default SDocmapReadParamsInterface;

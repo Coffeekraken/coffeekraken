@@ -59,6 +59,9 @@
                 "description": "This function init automatically these packages:\n\n- [@coffeekraken/s-activate-feature](/package/@coffeekraken/s-activate/doc/readme)\n- [@coffeekraken/s-appear-feature](/package/@coffeekraken/s-appear/doc/readme)\n- [@coffeekraken/s-floating-feature](/package/@coffeekraken/s-floating/doc/readme)\n- [@coffeekraken/s-form-validate-feature](/package/@coffeekraken/s-form-validate/doc/readme)\n- [@coffeekraken/s-inline-feature](/package/@coffeekraken/s-inline/doc/readme)\n- [@coffeekraken/s-refocus-feature](/package/@coffeekraken/s-refocus/doc/readme)\n- [@coffeekraken/s-sugar-feature](/package/@coffeekraken/s-sugar/doc/readme)\n- [@coffeekraken/s-clipboard-copy-component](/package/@coffeekraken/s-clipboard-copy-component/doc/readme)\n- [@coffeekraken/s-panel-component](/package/@coffeekraken/s-panel-component/doc/readme)\n- [@coffeekraken/s-range-component](/package/@coffeekraken/s-range-component/doc/readme)\n- [@coffeekraken/s-scroll-component](/package/@coffeekraken/s-scroll-component/doc/readme)\n- [@coffeekraken/s-slider-component](/package/@coffeekraken/s-slider-component/doc/readme)",
                 "namespace": "@coffeekraken.s-pack-essentials.js",
                 "status": "beta",
+                "snippet": {
+                    "label": "new __SPackEssentials()"
+                },
                 "example": [
                     {
                         "language": "js",

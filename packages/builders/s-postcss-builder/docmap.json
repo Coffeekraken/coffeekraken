@@ -225,10 +225,14 @@
                 "description": "This class represent the postcss builder that you can use to build your postcss files\nwith a simple and efficient API.",
                 "namespace": "@coffeekraken.s-postcss-builder.node",
                 "status": "beta",
+                "snippet": {
+                    "label": "__SPostcssBuilder($1)",
+                    "code": "const postcssBuilder = new __SPostcssBuilder();\nconst postcssBuilderResult = await postcssBuilder.build({\n     input: $1,\n     output: $2,\n     minify: true,\n     target: 'production'\n});"
+                },
                 "example": [
                     {
                         "language": "js",
-                        "code": "import SPostcssBuilder from '@coffeekraken/s-postcss-builder';\nconst builder = new SPostcssBuilder({\n     postcssBuilder: {\n         // settings here...\n     }\n});\nawait builder.build({\n     input: 'my-cool-file.css',\n     output: 'my/cool/file-output.css'\n});"
+                        "code": "import __SPostcssBuilder from '@coffeekraken/s-postcss-builder';\nconst postcssBuilder = new __SPostcssBuilder({\n     // settings here...\n});\nawait postcssBuilder.build({\n     input: 'my-cool-file.css',\n     output: 'my/cool/file-output.css',\n});"
                     }
                 ],
                 "since": "2.0.0",
@@ -367,9 +371,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "SPostcssBuilderBuildParamsInterface.ts",
-                "extension": "ts",
-                "relPath": "src/node/interface/SPostcssBuilderBuildParamsInterface.ts",
+                "filename": "SPostcssBuilderBuildParamsInterface.js",
+                "extension": "js",
+                "relPath": "src/node/interface/SPostcssBuilderBuildParamsInterface.js",
                 "children": {}
             },
             "@coffeekraken.s-postcss-builder.node.interface.SPostcssBuilderSettingsInterface": {

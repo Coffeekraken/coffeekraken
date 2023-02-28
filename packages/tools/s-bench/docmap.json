@@ -112,6 +112,10 @@
                 "description": "This class allows you to perform some simple benchmarking actions\nlike dividing a process into multiple \"steps\" and track the timing\nbetween these, etc...",
                 "namespace": "@coffeekraken.s-bench.shared",
                 "status": "beta",
+                "snippet": {
+                    "label": "new __SBench($1)",
+                    "code": "const bench = new __SBench($1);\n// ...\nbench.step($2);\n// ..\nbench.end().log();"
+                },
                 "example": [
                     {
                         "language": "js",
@@ -194,6 +198,17 @@
                                 "defaultStr": ""
                             }
                         },
+                        "return": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "SBench"
+                                    }
+                                ],
+                                "raw": "SBench"
+                            },
+                            "description": "The SBench instance for this bench"
+                        },
                         "description": "This method allows you to log some stats about the gathered benches",
                         "static": "true",
                         "since": "2.0.0",
@@ -232,6 +247,17 @@
                                 }
                             ],
                             "raw": "Function"
+                        },
+                        "return": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "SBench"
+                                    }
+                                ],
+                                "raw": "SBench"
+                            },
+                            "description": "The instance to maintain chainability"
                         },
                         "description": "This method allows you to start a new bench \"session\"",
                         "since": "2.0.0",
@@ -281,6 +307,17 @@
                                 "defaultStr": "''"
                             }
                         },
+                        "return": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "SBench"
+                                    }
+                                ],
+                                "raw": "SBench"
+                            },
+                            "description": "The instance to maintain chainability"
+                        },
                         "description": "This method allows you to declare a new step in your bench.\nA step is simple a point in your code like \"after compilation\", etc.\nIt will keep track of each steps and display the time it has taken\nfrom the last step.",
                         "since": "2.0.0",
                         "author": {
@@ -316,6 +353,17 @@
                                 "defaultStr": "false"
                             }
                         },
+                        "return": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "SBench"
+                                    }
+                                ],
+                                "raw": "SBench"
+                            },
+                            "description": "The instance to maintain chainability"
+                        },
                         "description": "This method allows you to end a bencvh \"session\"",
                         "since": "2.0.0",
                         "author": {
@@ -335,6 +383,17 @@
                             ],
                             "raw": "Function"
                         },
+                        "return": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "SBench"
+                                    }
+                                ],
+                                "raw": "SBench"
+                            },
+                            "description": "The instance to maintain chainability"
+                        },
                         "description": "This method allows you to log the summary if this bench is active",
                         "since": "2.0.0",
                         "author": {
@@ -353,6 +412,17 @@
                                 }
                             ],
                             "raw": "Function"
+                        },
+                        "return": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
+                            "description": "The bench in string format"
                         },
                         "description": "This method allows you to print the bench in string format",
                         "since": "2.0.0",

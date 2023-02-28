@@ -12,6 +12,11 @@ import __SInterface from '@coffeekraken/s-interface';
  *
  * @return        {Css}         The generated css
  *
+ * @snippet         @sugar.lod($1)
+ * \@sugar.lod($1) {
+ *      $2
+ * }
+ * 
  * @example        css
  * \@sugar.lod(4) {
  *      .myElement {

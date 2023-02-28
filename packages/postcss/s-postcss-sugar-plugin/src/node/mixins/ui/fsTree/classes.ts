@@ -17,8 +17,10 @@ import __faker from 'faker';
  * @param       {('bare'|'lnf')[]}        [scope=['bare', 'lnf']]      The scope you want to generate
  * @return      {String}            The generated css
  *
+ * @snippet         @sugar.ui.fsTree.classes
+ * 
  * @example     css
- * @sugar.ui.fsTree.classes;
+ * \@sugar.ui.fsTree.classes;
  *
  * @since      2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)

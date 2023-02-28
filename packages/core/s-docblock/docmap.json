@@ -79,8 +79,96 @@
                         },
                         "description": "An object of settings to configure the SDocblock instance:",
                         "default": {},
-                        "defaultStr": "{}",
-                        "content": "- tags ({}) {Object}: An object representing the functions used to parse each tags. The object format is ```{ tagName: parseFn }```\n"
+                        "defaultStr": "{}"
+                    }
+                },
+                "setting": {
+                    "filePath": {
+                        "name": "filePath",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "String"
+                                }
+                            ],
+                            "raw": "String"
+                        },
+                        "description": "Specify the file path where the docblocks are parsed from",
+                        "default": null,
+                        "defaultStr": "null"
+                    },
+                    "filter": {
+                        "name": "filter",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ],
+                            "raw": "Function"
+                        },
+                        "description": "Specify a function that will filter the SDocblockBlock items",
+                        "default": null,
+                        "defaultStr": "null"
+                    },
+                    "filterByTag": {
+                        "name": "filterByTag",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Record<String, Function"
+                                },
+                                {
+                                    "type": "Regex>"
+                                }
+                            ],
+                            "raw": "Record<String, Function|Regex>"
+                        },
+                        "description": "Specify some filters by tag. Can be a regex or a function",
+                        "default": {},
+                        "defaultStr": "{}"
+                    },
+                    "renderMarkdown": {
+                        "name": "renderMarkdown",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Boolean"
+                                }
+                            ],
+                            "raw": "Boolean"
+                        },
+                        "description": "Specify if you want to render the markdown in the tags values or not",
+                        "default": false,
+                        "defaultStr": "false"
+                    },
+                    "markedOptions": {
+                        "name": "markedOptions",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Any"
+                                }
+                            ],
+                            "raw": "Any"
+                        },
+                        "description": "Specify some [marked](https://www.npmjs.com/package/marked) options to render markdown",
+                        "default": {},
+                        "defaultStr": "{}"
+                    },
+                    "sortFunction": {
+                        "name": "sortFunction",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Function"
+                                }
+                            ],
+                            "raw": "Function"
+                        },
+                        "description": "Specify a function to sort the docblocks. A default sort is applied",
+                        "default": "function(a, b) {})",
+                        "defaultStr": "function(a, b) {})"
                     }
                 },
                 "platform": [
@@ -92,10 +180,14 @@
                 "description": "This is the main class that expose the methods like \"parse\", etc...\nYou have to instanciate it by passing a settings object. Here's the available options:",
                 "namespace": "@coffeekraken.s-docblock.shared",
                 "status": "beta",
+                "snippet": {
+                    "label": "__SDocblock($1)",
+                    "code": "new __SDocblock($1)"
+                },
                 "example": [
                     {
                         "language": "js",
-                        "code": "import SDocblock from '@coffeekraken/sugar/js/docblock/SSDocblock';\nnew SDocblock(source, {\n   // override some settings here...\n});"
+                        "code": "import __SDocblock from '@coffeekraken/s-docblock';\nnew __SDocblock(source, {\n   // override some settings here...\n});"
                     }
                 ],
                 "since": "2.0.0",
@@ -151,6 +243,17 @@
                                 "defaultStr": "null"
                             }
                         },
+                        "return": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "SDocblock"
+                                    }
+                                ],
+                                "raw": "SDocblock"
+                            },
+                            "description": "The class instance itself to maintain chainability"
+                        },
                         "description": "This method allows you to set the order in which you want to get the\nblocks back when using the methods like get blocks, etc...",
                         "since": "2.0.0",
                         "author": {
@@ -202,6 +305,20 @@
                                 "defaultStr": "this._source"
                             }
                         },
+                        "return": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Array",
+                                        "of": [
+                                            "SDocblockBlock"
+                                        ]
+                                    }
+                                ],
+                                "raw": "Array<SDocblockBlock>"
+                            },
+                            "description": "An array of SDocblockBlock instances"
+                        },
                         "description": "This method is the principal one. Use it to parse a string\nand get back the object version of it",
                         "async": "true",
                         "since": "2.0.0",
@@ -251,16 +368,19 @@
                     }
                 }
             },
-            "@coffeekraken.s-docblock.shared.SDocblockBlock": {
-                "id": "@coffeekraken.s-docblock.shared.SDocblockBlock",
-                "name": "SDocblockBlock",
+            "@coffeekraken.s-docblock.shared.tags": {
+                "id": "@coffeekraken.s-docblock.shared.tags",
+                "name": "tags",
                 "type": {
                     "types": [
                         {
-                            "type": "Class"
+                            "type": "Record",
+                            "of": [
+                                "String, Function"
+                            ]
                         }
                     ],
-                    "raw": "Class"
+                    "raw": "Record<String, Function>"
                 },
                 "param": {
                     "source": {
@@ -291,19 +411,24 @@
                         "defaultStr": "{}"
                     }
                 },
+                "default": {},
                 "platform": [
                     {
                         "name": "node",
                         "description": ""
                     }
                 ],
-                "description": "This class represent a docblock object that contains all the \"tags\" values and some features like:\n- Converting the block to markdown\n- More to come...",
+                "description": "Specify some tags you want to include with a function that will be used to actually parse his value and return the formatted one. Some tags are built-in. Look at the features section.",
                 "namespace": "@coffeekraken.s-docblock.shared",
                 "status": "beta",
+                "snippet": {
+                    "label": "__SDocblockBlock($1)",
+                    "code": "new __SDocblockBlock($1)"
+                },
                 "example": [
                     {
                         "language": "js",
-                        "code": "import SDocblockBlock from '@coffeekraken/sugar/js/docblock/SDocblockBlock';\nconst myBlock = new SDocblockBlock(myDocblockString);\nconst myBlock.toObject();"
+                        "code": "import { __SDocblockBlock } from '@coffeekraken/s-docblock';\nconst docblock = new __SDocblockBlock(myDocblockString);\nconst docblock.toObject();"
                     }
                 ],
                 "since": "2.0.0",
@@ -406,6 +531,17 @@
                             ],
                             "raw": "Function"
                         },
+                        "return": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
+                            "description": "The passed docblock string"
+                        },
                         "description": "This method return the passed source string",
                         "author": {
                             "name": "Olivier Bossel",
@@ -423,6 +559,17 @@
                                 }
                             ],
                             "raw": "Function"
+                        },
+                        "return": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Object"
+                                    }
+                                ],
+                                "raw": "Object"
+                            },
+                            "description": "The parsed dobclock object"
                         },
                         "description": "This method return the parsed docblock object",
                         "author": {
@@ -473,6 +620,17 @@
                         "defaultStr": "{}",
                         "content": "- exclude ('*\\/+(__tests__ | __wip__)\\') {String}: Specify a glob pattern representing the files to exclude from the generation"
                     }
+                },
+                "return": {
+                    "type": {
+                        "types": [
+                            {
+                                "type": "Object"
+                            }
+                        ],
+                        "raw": "Object"
+                    },
+                    "description": "An object containing the docblocks holded in each namespaces as properties"
                 },
                 "platform": [
                     {
@@ -635,6 +793,17 @@
                         "defaultStr": ""
                     }
                 },
+                "return": {
+                    "type": {
+                        "types": [
+                            {
+                                "type": "Object"
+                            }
+                        ],
+                        "raw": "Object"
+                    },
+                    "description": "The formated object"
+                },
                 "platform": [
                     {
                         "name": "node",
@@ -692,6 +861,17 @@
                         "description": "The SDocblockBlock settings",
                         "defaultStr": ""
                     }
+                },
+                "return": {
+                    "type": {
+                        "types": [
+                            {
+                                "type": "Object"
+                            }
+                        ],
+                        "raw": "Object"
+                    },
+                    "description": "The formated object"
                 },
                 "platform": [
                     {
@@ -781,6 +961,17 @@
                         "defaultStr": ""
                     }
                 },
+                "return": {
+                    "type": {
+                        "types": [
+                            {
+                                "type": "Object"
+                            }
+                        ],
+                        "raw": "Object"
+                    },
+                    "description": "The formated object"
+                },
                 "platform": [
                     {
                         "name": "node",
@@ -838,6 +1029,17 @@
                         "description": "The SDocblockBlock settings",
                         "defaultStr": ""
                     }
+                },
+                "return": {
+                    "type": {
+                        "types": [
+                            {
+                                "type": "Object"
+                            }
+                        ],
+                        "raw": "Object"
+                    },
+                    "description": "The formated object"
                 },
                 "platform": [
                     {
@@ -1015,6 +1217,17 @@
                         "defaultStr": ""
                     }
                 },
+                "return": {
+                    "type": {
+                        "types": [
+                            {
+                                "type": "Object"
+                            }
+                        ],
+                        "raw": "Object"
+                    },
+                    "description": "The formated object"
+                },
                 "platform": [
                     {
                         "name": "node",
@@ -1073,6 +1286,17 @@
                         "description": "The SDocblockBlock settings",
                         "defaultStr": ""
                     }
+                },
+                "return": {
+                    "type": {
+                        "types": [
+                            {
+                                "type": "Object"
+                            }
+                        ],
+                        "raw": "Object"
+                    },
+                    "description": "The formated object"
                 },
                 "platform": [
                     {
@@ -1277,6 +1501,17 @@
                         "defaultStr": ""
                     }
                 },
+                "return": {
+                    "type": {
+                        "types": [
+                            {
+                                "type": "Object"
+                            }
+                        ],
+                        "raw": "Object"
+                    },
+                    "description": "The formated object"
+                },
                 "platform": [
                     {
                         "name": "node",
@@ -1380,6 +1615,17 @@
                         "defaultStr": ""
                     }
                 },
+                "return": {
+                    "type": {
+                        "types": [
+                            {
+                                "type": "Object"
+                            }
+                        ],
+                        "raw": "Object"
+                    },
+                    "description": "The formated object"
+                },
                 "platform": [
                     {
                         "name": "node",
@@ -1437,6 +1683,17 @@
                         "description": "The SDocblockBlock settings",
                         "defaultStr": ""
                     }
+                },
+                "return": {
+                    "type": {
+                        "types": [
+                            {
+                                "type": "Object"
+                            }
+                        ],
+                        "raw": "Object"
+                    },
+                    "description": "The formated object"
                 },
                 "platform": [
                     {
@@ -1505,6 +1762,9 @@
                 "description": "Parse the snippet tag",
                 "namespace": "@coffeekraken.s-docblock.shared.tags",
                 "status": "beta",
+                "snippet": {
+                    "label": "{Object}                      The formated object"
+                },
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
@@ -1701,6 +1961,17 @@
                         "description": "The SDocblockBlock settings",
                         "defaultStr": ""
                     }
+                },
+                "return": {
+                    "type": {
+                        "types": [
+                            {
+                                "type": "Object"
+                            }
+                        ],
+                        "raw": "Object"
+                    },
+                    "description": "The formated object"
                 },
                 "platform": [
                     {

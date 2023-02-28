@@ -45,11 +45,16 @@ export { postcssSugarPluginMediaMixinInterface as interface };
  * @param       {String}        query       The query string like ">tablet", "<=desktop", etc...
  * @return      {Css}         The generated css
  *
+ * @snippet         @sugar.media $1
+ * \@sugar.media $1 {
+ *      $2
+ * }
+ * 
  * @example        css
- * @sugar.media >=desktop {
+ * \@sugar.media >=desktop {
  *      // ...
  * }
- * @sugar.media tablet {
+ * \@sugar.media tablet {
  *      // ...
  * }
  *

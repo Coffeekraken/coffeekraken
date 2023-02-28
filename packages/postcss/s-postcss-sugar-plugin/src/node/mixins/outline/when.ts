@@ -18,7 +18,7 @@ export interface postcssSugarPluginStateOutlineWhenMixinParams {
 }
 
 /**
- * @name           outline
+ * @name           when
  * @namespace      node.mixin.outline
  * @type           PostcssMixin
  * @platform      postcss
@@ -28,12 +28,13 @@ export interface postcssSugarPluginStateOutlineWhenMixinParams {
  * This outline will be display on hover and focus by default but can be displayed
  * always by passing the `on` parameter to `always` like so `@sugar.outline(always)`
  *
- *
  * @return      {Css}         The generated css
  *
+ * @snippet         @sugar.outline.when($1)
+ * 
  * @example        css
  * .myCoolItem {
- *      @sugar.outline();
+ *      @sugar.outline.when(focus);
  * }
  *
  * @since       2.0.0

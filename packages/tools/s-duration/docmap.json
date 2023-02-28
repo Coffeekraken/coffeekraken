@@ -109,10 +109,14 @@
                 "description": "This class represent a duration tracking process. Simply instanciate it,\nthen call the ```instance.get()``` method and you will get back\nthe duration between the instanciation and the ```get``` method call",
                 "namespace": "@coffeekraken.s-duration.shared",
                 "status": "beta",
+                "snippet": {
+                    "label": "new __SDuration()",
+                    "code": "const duration = new __SDuration();\n// ...\nconsole.log(duration.end().formatedDuration);"
+                },
                 "example": [
                     {
                         "language": "js",
-                        "code": "import SDuration from '@coffeekraken/s-duration';\nconst duration = new SDuration();\nawait ...\nconsole.log(duration.end());"
+                        "code": "import __SDuration from '@coffeekraken/s-duration';\nconst duration = new __SDuration();\nawait ...\nconsole.log(duration.end());"
                     }
                 ],
                 "since": "2.0.0",
@@ -152,6 +156,17 @@
                                 }
                             ],
                             "raw": "Function"
+                        },
+                        "return": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "ISDurationObject"
+                                    }
+                                ],
+                                "raw": "ISDurationObject"
+                            },
+                            "description": "The duration object"
                         },
                         "description": "This method end the duration if needed and return an object with these properties:\n- startTime: the start timestamp\n- endTime: the end timestamp\n- duration: the duration in miliseconds\n- formatedDuration: the duration formated",
                         "since": "2.0.0",
@@ -220,6 +235,17 @@
                                 "default": {},
                                 "defaultStr": "{}"
                             }
+                        },
+                        "return": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Mixed"
+                                    }
+                                ],
+                                "raw": "Mixed"
+                            },
+                            "description": "Return the duration depending on your settings"
                         },
                         "description": "Stop the duration counter and return the result in the passed format or in the format setted in the settings",
                         "since": "2.0.0",

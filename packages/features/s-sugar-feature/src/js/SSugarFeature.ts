@@ -3,11 +3,11 @@ import __SFeature from '@coffeekraken/s-feature';
 import {
     __clearTransmations,
     __expandPleasantCssClassnamesLive,
-    __preventScrollRestoration,
+    __preventScrollRestoration
 } from '@coffeekraken/sugar/dom';
 import {
     __inputAdditionalAttributes,
-    __linksStateAttributes,
+    __linksStateAttributes
 } from '@coffeekraken/sugar/feature';
 import { __deepMerge } from '@coffeekraken/sugar/object';
 import __SSugarFeatureInterface from './interface/SSugarFeatureInterface';
@@ -66,6 +66,17 @@ export interface ISSugarFeatureProps {
  * @feature         Remove some classes at page loading end: "initial-loading", "loading"
  * @feature         Proxy the `history.pushState` method to make it dispatch an "pushstate" event with the actual state as detail
  *
+ * @import          import { define as __SSugarFeatureDefine } from '@coffeekraken/s-sugar-feature';
+ * 
+ * @snippet         __SSugarFeatureDefine($1)
+ * 
+ * @install         js
+ * import { define as __SSugarFeatureDefine } from '@coffeekraken/s-sugar-feature';
+ * __SSugarFeatureDefine();
+ * 
+ * @install         bash
+ * npm i @coffeekraken/s-form-validate-feature
+ * 
  * @example         html        Simple usage        Simply add the `s-sugar` property on your body tag
  * <bodyTag s-sugar>
  *

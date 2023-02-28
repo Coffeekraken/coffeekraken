@@ -31,6 +31,9 @@
                 "description": "This feature allows you to lazy load things like images, template, etc...",
                 "namespace": "@coffeekraken.s-lazy-feature.js",
                 "status": "beta",
+                "snippet": {
+                    "label": "__SLazyFeatureDefine($1)"
+                },
                 "example": [
                     {
                         "language": "html",

@@ -6,7 +6,7 @@ import {
     __deepMap,
     __deepMerge,
     __get,
-    __toPlainObject,
+    __toPlainObject
 } from '@coffeekraken/sugar/object';
 import { __packageRootDir } from '@coffeekraken/sugar/path';
 import __fs from 'fs';
@@ -25,6 +25,10 @@ import __path from 'path';
  * You will also have easy access to your files through "namespaces" that represent different folders on your system. This will simplify
  * the way you read your files by prefixing your dotpath (simple fs "/" replacement) with the namespace you want to look in.
  *
+ * @snippet         new __SSpecs($1)
+ * const specs = new __SSpecs($1);
+ * const spec = specs.read('sugar.views.components.card');
+ * 
  * @example         js
  * import __SSpecs from '@coffeekraken/s-specs';
  * const spec = new __SSpecs({

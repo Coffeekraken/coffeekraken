@@ -24,6 +24,8 @@ export { postcssSugarPluginColorPrimaryMixinInterface as interface };
  * @param       {String}        color           The color you want to map on the accent one
  * @return      {Css}                     The generated remap css
  *
+ * @snippet         @sugar.color.accent($1)
+ * 
  * @example        css
  * .my-section {
  *      @sugar.color.accent(success);

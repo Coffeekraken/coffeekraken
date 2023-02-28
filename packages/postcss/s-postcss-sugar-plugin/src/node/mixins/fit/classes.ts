@@ -11,8 +11,10 @@ import __SInterface from '@coffeekraken/s-interface';
  *
  * @return        {Css}        The generated css
  *
+ * @snippet         @sugar.fit.classes
+ * 
  * @example        css
- * @sugar.clearfix.classes;
+ * \@sugar.fit.classes;
  *
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)

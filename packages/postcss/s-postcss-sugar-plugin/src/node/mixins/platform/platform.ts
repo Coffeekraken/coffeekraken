@@ -17,6 +17,8 @@ import __fs from 'fs';
  * @param         {IPostcssSugarPluginAssetPlatformParams}    params      The parameters object
  * @return        {Css}         The generated css
  *
+ * @snippet         @sugar.platform($1)
+ * 
  * @example        css
  * .my-platform {
  *    \@sugar.platform(css);

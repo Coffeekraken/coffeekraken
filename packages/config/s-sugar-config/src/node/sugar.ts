@@ -36,6 +36,8 @@ import type { ISSugarConfig } from '../shared/types';
  * @todo      {Enhancement}       Find a way to specify the "userConfigPath" dynamically without having circular dependencies
  * @todo      Add multi level extends support
  *
+ * @snippet         __SSugarConfig.get($1)
+ * 
  * @example             js
  * import __SSugarConfig from '@coffeekraken/s-sugar-config';
  * __SSugarConfig.get('scss.unit'); // => rem

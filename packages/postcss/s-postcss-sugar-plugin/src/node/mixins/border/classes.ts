@@ -23,8 +23,10 @@ export { postcssSugarPluginBorderRadiusClassesMixinInterface as interface };
  *
  * @return      {Css}                   The generated css
  *
+ * @snippet         @sugar.border.classes
+ * 
  * @example       css
- * @sugar.border.classes;
+ * \@sugar.border.classes;
  *
  * @since     2.0.0
  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)

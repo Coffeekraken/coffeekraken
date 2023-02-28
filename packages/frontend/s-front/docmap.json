@@ -58,11 +58,14 @@
                 ],
                 "description": "Central class to handle frontend stuffs like theme, google, etc...",
                 "namespace": "@coffeekraken.s-front.js",
-                "status": "beta",
+                "status": "wip",
+                "snippet": {
+                    "label": "new __SFront($1)"
+                },
                 "example": [
                     {
                         "language": "js",
-                        "code": "import SFront from '@coffeekraken/s-front';\nconst theme = new SFront();\ntheme.loopOnColors(({name, schema, value}) => {\n     // do something...\n});"
+                        "code": "import __SFront from '@coffeekraken/s-front';\nconst front = new __SFront();\nfront.setLod(3);"
                     }
                 ],
                 "since": "2.0.0",
@@ -85,6 +88,17 @@
                                 }
                             ],
                             "raw": "Function"
+                        },
+                        "return": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "SFront"
+                                    }
+                                ],
+                                "raw": "SFront"
+                            },
+                            "description": "The SFront instance that represent the current applied front"
                         },
                         "description": "This method allows you to init the your SFront instance, restore savec updated if their some, etc...",
                         "static": "true",
@@ -121,6 +135,17 @@
                                 "default": true,
                                 "defaultStr": "true"
                             }
+                        },
+                        "return": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Boolean"
+                                    }
+                                ],
+                                "raw": "Boolean"
+                            },
+                            "description": "True if inited, false if not (and will thro)"
                         },
                         "description": "This method allows you to make sure the front has been inited using the `__SFront.init()` static method.\nIf it's not the case, it will throw an error to make sure the developer knows why it's not working...",
                         "static": "true",
@@ -310,6 +335,17 @@
                                 "defaultStr": ""
                             }
                         },
+                        "return": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "STheme"
+                                    }
+                                ],
+                                "raw": "STheme"
+                            },
+                            "description": "The STheme instance that represent the current applied theme"
+                        },
                         "description": "This method allows you to set the level of details you want on any HTMLElement context",
                         "since": "2.0.0",
                         "author": {
@@ -435,6 +471,17 @@
                             ],
                             "raw": "Function"
                         },
+                        "return": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Any"
+                                    }
+                                ],
+                                "raw": "Any"
+                            },
+                            "description": "The legal metas saved"
+                        },
                         "description": "This method allows you to get the legal saved metas",
                         "since": "2.0.0",
                         "author": {
@@ -453,6 +500,17 @@
                                 }
                             ],
                             "raw": "Function"
+                        },
+                        "return": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Boolean"
+                                    }
+                                ],
+                                "raw": "Boolean"
+                            },
+                            "description": "true if agree, false if not"
                         },
                         "description": "This method allows you to check if the legal are agree or not",
                         "since": "2.0.0",

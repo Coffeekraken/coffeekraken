@@ -67,6 +67,9 @@
                 "description": "This component specify a range with some additional features than the native one like\ndisplaying the value automatically in tooltip or inline.",
                 "namespace": "@coffeekraken.s-range-component.js",
                 "status": "beta",
+                "snippet": {
+                    "label": "__SRangeComponentDefine($1)"
+                },
                 "example": [
                     {
                         "language": "html",

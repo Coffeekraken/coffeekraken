@@ -7,7 +7,7 @@ import __STheme from '@coffeekraken/s-theme';
  * @type            PostcssMixin
  * @interface       ./configToCss
  * @platform        css
- * @status          beta
+ * @status          wip
  *
  * This mixin allows you to pass a theme config dot path that point to an object
  * and to print out the result as css properties.

@@ -114,13 +114,17 @@
                         "description": ""
                     }
                 ],
-                "description": "This class represent a file in the filesystem. With it you can simply instanciate one by passing the file path,\nand get access to all the nice meta data like:\n- name: The file name\n- path: The full path to the file\n- cwd: The root directory specified through the settings.cwd property\n- relPath: The relative file path from the cwd\n- dirPath: The path to the folder where is the file\n- extension: The file extension\n- stats: An object with file stats like size in mb, kb, etc...\n- exists: true if the file exists on the disk, false otherwise",
+                "description": "This class represent a file in the filesystem. With it you can simply instanciate one by passing the file path,\nand get access to all the nice meta data like the ones listed in the feature section",
                 "namespace": "@coffeekraken.s-file.node.fs",
                 "status": "beta",
+                "snippet": {
+                    "label": "__SFile($1)",
+                    "code": "new __SFile($1)"
+                },
                 "example": [
                     {
                         "language": "js",
-                        "code": "import SFile from '@coffeekraken/s-file';\nconst file = new SFile('something/cool/sugar.json');\nfile.extension; // => json\nfile.exists; // => true"
+                        "code": "import __SFile from '@coffeekraken/s-file';\nconst file = new __SFile('something/cool/sugar.json');\nfile.extension; // => json\nfile.exists; // => true"
                     }
                 ],
                 "since": "2.0.0",
@@ -528,6 +532,17 @@
                             ],
                             "raw": "Function"
                         },
+                        "return": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Object"
+                                    }
+                                ],
+                                "raw": "Object"
+                            },
+                            "description": "A plain object version of this instance"
+                        },
                         "description": "This method transform this instance into a plain object",
                         "since": "2.0.0",
                         "author": {
@@ -600,6 +615,17 @@
                             ],
                             "raw": "Function"
                         },
+                        "return": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
+                            "description": "The file path"
+                        },
                         "description": "Return the string version of the file. Here, the path...",
                         "since": "2.0.0",
                         "author": {
@@ -633,6 +659,17 @@
                                 "description": "The path where you want to duplicate this file including the file name",
                                 "defaultStr": "undefined"
                             }
+                        },
+                        "return": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Promise"
+                                    }
+                                ],
+                                "raw": "Promise"
+                            },
+                            "description": "A promise that will be resolved once the file is fully duplicated and gives you access to a new SFile instance"
                         },
                         "description": "This method allows you to make a copy of this file.\nIf you don't specify a \"to\" path, the file will be diplicated\ninto the temp directory",
                         "async": "true",
@@ -669,6 +706,17 @@
                                 "defaultStr": "undefined"
                             }
                         },
+                        "return": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "SFile"
+                                    }
+                                ],
+                                "raw": "SFile"
+                            },
+                            "description": "A new SFile instance that represent your new file"
+                        },
                         "description": "This method allows you to make a copy of this file.\nIf you don't specify a \"to\" path, the file will be diplicated\ninto the temp directory",
                         "since": "2.0.0",
                         "author": {
@@ -687,6 +735,17 @@
                                 }
                             ],
                             "raw": "Function"
+                        },
+                        "return": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Promise"
+                                    }
+                                ],
+                                "raw": "Promise"
+                            },
+                            "description": "A promise resolved once the file has been save"
                         },
                         "description": "This method allows you to save the file with the content\nthat you can set by setting the ```content``` property",
                         "async": "true",
@@ -708,6 +767,17 @@
                             ],
                             "raw": "Function"
                         },
+                        "return": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Promise"
+                                    }
+                                ],
+                                "raw": "Promise"
+                            },
+                            "description": "A promise resolved once the file has been save"
+                        },
                         "description": "This method allows you to save the file with the content\nthat you can set by setting the ```content``` property",
                         "since": "2.0.0",
                         "author": {
@@ -726,6 +796,20 @@
                                 }
                             ],
                             "raw": "Function"
+                        },
+                        "return": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Promise<boolean"
+                                    },
+                                    {
+                                        "type": "Error"
+                                    }
+                                ],
+                                "raw": "Promise<boolean|Error"
+                            },
+                            "description": "A promise that will be resolved with true if all good, and rejected with an Error if not"
                         },
                         "description": "This method allows you to unlink the file asyncronously",
                         "async": "true",
@@ -746,6 +830,20 @@
                                 }
                             ],
                             "raw": "Function"
+                        },
+                        "return": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Boolean"
+                                    },
+                                    {
+                                        "type": "Error"
+                                    }
+                                ],
+                                "raw": "Boolean|Error"
+                            },
+                            "description": "true if deleted properly, throw an error if not"
                         },
                         "description": "This method allows you to unlinkSync the file syncronously",
                         "async": "true",
@@ -783,6 +881,17 @@
                                 "defaultStr": "{}"
                             }
                         },
+                        "return": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Promise"
+                                    }
+                                ],
+                                "raw": "Promise"
+                            },
+                            "description": "A promise that will be resolved with the file content when readed"
+                        },
                         "description": "This method allows you to read the file asycronously",
                         "async": "true",
                         "since": "2.0.0",
@@ -818,6 +927,17 @@
                                 "default": {},
                                 "defaultStr": "{}"
                             }
+                        },
+                        "return": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
+                            "description": "The file content readed"
                         },
                         "description": "This method allows you to read the file syncronously",
                         "since": "2.0.0",
@@ -867,6 +987,17 @@
                                 "defaultStr": "{}"
                             }
                         },
+                        "return": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Promise"
+                                    }
+                                ],
+                                "raw": "Promise"
+                            },
+                            "description": "A promise that will be resolved with the file content when readed"
+                        },
                         "description": "This method allows you to write the file asycronously",
                         "async": "true",
                         "since": "2.0.0",
@@ -915,6 +1046,17 @@
                                 "default": {},
                                 "defaultStr": "{}"
                             }
+                        },
+                        "return": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Promise"
+                                    }
+                                ],
+                                "raw": "Promise"
+                            },
+                            "description": "A promise that will be resolved with the file content when readed"
                         },
                         "description": "This method allows you to write the file sycronously",
                         "since": "2.0.0",

@@ -63,10 +63,14 @@
                 "description": "This class allows you to define some rules that some object or instance\nhave to follow. You will be able to apply these rules and see what\ndoes not fit correctly.",
                 "namespace": "@coffeekraken.s-interface.shared",
                 "status": "beta",
+                "snippet": {
+                    "label": "extends __SInterface",
+                    "code": "class $1 extends __SInterface {\n     static get _definition() {\n         return {\n             $2\n         }\n     }\n}"
+                },
                 "example": [
                     {
                         "language": "js",
-                        "code": "import SInterface from '@coffeekraken/sugar/js/interface/SInterface';\nclass MyCoolInterface extends SInterface {\n    static rules = {\n         myProperty: {\n             type: 'String',\n             required: true\n         }\n     }\n}\nMyCoolInterface.apply({\n     myProperty: 'Hello'\n}); // => true"
+                        "code": "import __SInterface from '@coffeekraken/s-interface';\nclass MyCoolInterface extends SInterface {\n    static get _definition() {\n         return {\n             myProperty: {\n                 type: 'String',\n                 required: true\n             },\n             otherProperty: {\n                 type: 'String',\n                 default: 'Something'\n             }\n         }\n     }\n}\nMyCoolInterface.apply({\n     myProperty: 'Hello'\n});\n// {\n//       myProperty: 'Hello',\n//       otherProperty: 'Something'\n// }"
                     }
                 ],
                 "since": "2.0.0",
@@ -183,6 +187,17 @@
                                 "defaultStr": ""
                             }
                         },
+                        "return": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "SInterface"
+                                    }
+                                ],
+                                "raw": "SInterface"
+                            },
+                            "description": "The mixed interface"
+                        },
                         "description": "This static method allows you to mix multiple interfaces into one",
                         "static": "true",
                         "since": "2.0.0",
@@ -217,6 +232,17 @@
                                 "description": "A definition object to override or extends the base one",
                                 "defaultStr": ""
                             }
+                        },
+                        "return": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "SInterface"
+                                    }
+                                ],
+                                "raw": "SInterface"
+                            },
+                            "description": "A new interface overrided with your new values"
                         },
                         "description": "This static method is usefull to make a duplicate of the base interface with some updates\nin the definition object.",
                         "static": "true",
@@ -266,6 +292,17 @@
                                 "defaultStr": ""
                             }
                         },
+                        "return": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Boolean"
+                                    }
+                                ],
+                                "raw": "Boolean"
+                            },
+                            "description": "true if is the default value, false if not"
+                        },
                         "description": "This static method allows you to check if a certain value is the default of a certain property or not.",
                         "static": "true",
                         "since": "2.0.0",
@@ -285,6 +322,20 @@
                                 }
                             ],
                             "raw": "Function"
+                        },
+                        "return": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Object",
+                                        "of": [
+                                            "SInterface"
+                                        ]
+                                    }
+                                ],
+                                "raw": "Object<SInterface>"
+                            },
+                            "description": "An object listing all the interface types maked available widely"
                         },
                         "description": "This static method allows you to get the types that have been make widely available\nusing the ```makeAvailableAsType``` method.",
                         "static": "true",
@@ -341,6 +392,17 @@
                                 }
                             ],
                             "raw": "Function"
+                        },
+                        "return": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "ISInterfaceObj"
+                                    }
+                                ],
+                                "raw": "ISInterfaceObj"
+                            },
+                            "description": "The interface in plain object format"
                         },
                         "description": "This function allows you to get back a simple object describing the interface",
                         "static": "true",
@@ -410,6 +472,20 @@
                                 "default": {},
                                 "defaultStr": "{}"
                             }
+                        },
+                        "return": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Boolean"
+                                    },
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "Boolean|String"
+                            },
+                            "description": "true if all is ok, a string describing the issue if not..."
                         },
                         "description": "This method allows you to apply the interface on an object instance.\nBy default, if something is wrong in your class implementation, an error with the\ndescription of what's wrong will be thrown. You can change that behavior if you prefer having\ntrue returned when all is ok, or a string describing the current issue by specify the \"settings.throw\" property to false.",
                         "since": "2.0.0",
@@ -656,6 +732,17 @@
                                 "default": {},
                                 "defaultStr": "{}"
                             }
+                        },
+                        "return": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
+                            "description": "The rendered interface string"
                         },
                         "description": "This method simply render the passed interface",
                         "async": "true",

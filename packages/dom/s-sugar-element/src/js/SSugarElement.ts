@@ -8,7 +8,7 @@ export interface ISActivateFeatureProps {}
  * @type            Class
  * @interface       ./interface/SSugarElementInterface.ts
  * @platform        js
- * @status          beta
+ * @status          wip
  *
  * This class allows you to wrap any HTMLElement and enhance it with some sugar methods like `translate`, `translateX`, `rotateY`, etc...
  *

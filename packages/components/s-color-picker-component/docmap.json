@@ -67,6 +67,9 @@
                 "description": "This component specify a color picker. It uses under the hood the **AMAZING Pickr library** with some additional features like\nsugar theming support as well as some events and more.\nAlmost all the Pickr options are available through properties. Check out the api documentation for more details...",
                 "namespace": "@coffeekraken.s-color-picker-component.js",
                 "status": "beta",
+                "snippet": {
+                    "label": "__SColorPickerComponentDefine($1)"
+                },
                 "example": [
                     {
                         "language": "html",
@@ -633,6 +636,46 @@
                 "relPath": "src/js/interface/SColorPickerComponentInterface.ts",
                 "children": {}
             },
+            "@coffeekraken.s-color-picker-component.node.postcss.mixins.ui.colorPicker.classes": {
+                "id": "@coffeekraken.s-color-picker-component.node.postcss.mixins.ui.colorPicker.classes",
+                "name": "classes",
+                "type": {
+                    "types": [
+                        {
+                            "type": "PostcssMixin"
+                        }
+                    ],
+                    "raw": "PostcssMixin"
+                },
+                "platform": [
+                    {
+                        "name": "css",
+                        "description": ""
+                    }
+                ],
+                "description": "This mixin represent a color picker",
+                "namespace": "@coffeekraken.s-color-picker-component.node.postcss.mixins.ui.colorPicker",
+                "status": "beta",
+                "snippet": {
+                    "label": "@sugar.ui.colorPicker.classes($1);"
+                },
+                "example": [
+                    {
+                        "language": "css",
+                        "code": "@sugar.ui.colorPicker.classes;"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "classes.ts",
+                "extension": "ts",
+                "relPath": "src/node/postcss/mixins/ui/colorPicker/classes.ts",
+                "children": {}
+            },
             "@coffeekraken.s-color-picker-component.ui.colorPicker.colorPicker": {
                 "id": "@coffeekraken.s-color-picker-component.ui.colorPicker.colorPicker",
                 "name": "colorPicker",
@@ -653,10 +696,13 @@
                 "description": "Apply the color picker style to any s-color-picker element",
                 "namespace": "@coffeekraken.s-color-picker-component.ui.colorPicker",
                 "status": "beta",
+                "snippet": {
+                    "label": "@sugar.ui.colorPicker($1);"
+                },
                 "example": [
                     {
                         "language": "css",
-                        "code": ".s-color-picker {\n   @sugar.ui.colorPicker;\n}"
+                        "code": ".s-color-picker {\n   @sugar.ui.colorPicker();\n}"
                     }
                 ],
                 "since": "2.0.0",

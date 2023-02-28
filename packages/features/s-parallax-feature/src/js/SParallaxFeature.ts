@@ -31,6 +31,17 @@ export interface ISParallaxFeatureProps {
  * @support          safari
  * @support          edge
  *
+ * @import          import { define as __SParallaxFeatureDefine } from '@coffeekraken/s-parallax-feature';
+ * 
+ * @snippet         __SParallaxFeatureDefine($1)
+ * 
+ * @install         js
+ * import { define as __SParallaxFeatureDefine } from '@coffeekraken/s-parallax-feature';
+ * __SParallaxFeatureDefine();
+ * 
+ * @install         bash
+ * npm i @coffeekraken/s-form-validate-feature
+ * 
  * @example         html
  * <div class="s-position:relative" style="width:150px; height:150px;">
  *      <div s-parallax amount="0.1" class="s-ratio:1 s-radius s-bg:error" style="position:absolute; top:0; width:150px"></div>

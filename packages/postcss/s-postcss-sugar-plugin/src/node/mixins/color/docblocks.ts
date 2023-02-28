@@ -13,15 +13,17 @@ export { postcssSugarPluginDocblockColorsMixinInterface as interface };
  * @namespace      node.mixin.color
  * @type           PostcssMixin
  * @platform      postcss
- * @status        beta
+ * @status        wip
  *
  * This mixin print the documentation docblocks for the colors
  * into your final css.
  *
  * @param       {String}        query       The query string like ">tablet", "<=desktop", etc...
  *
+ * @snippet         @sugar.color.docblocks
+ * 
  * @example        css
- * @sugar.color.docblocks;
+ * \@sugar.color.docblocks;
  *
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)

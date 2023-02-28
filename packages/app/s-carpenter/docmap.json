@@ -60,6 +60,15 @@
                 "description": "This component represent a carpenter UI that display some components/section/etc... and let you change their properties\non the fly to see how it behave",
                 "namespace": "@coffeekraken.s-carpenter.js",
                 "status": "beta",
+                "snippet": {
+                    "label": "__defineSCarpenterComponent()"
+                },
+                "example": [
+                    {
+                        "language": "js",
+                        "code": "import { define as __defineSCarpenterComponent } from '@coffeekraken/s-carpenter';\n__defineSCarpenterComponent();"
+                    }
+                ],
                 "interface": {
                     "name": "SCarpenterComponentInterface",
                     "description": "",
@@ -209,6 +218,10 @@
                 "description": "This class allows you to use the display your components library as well as your sections, etc... in a\nnice and easy interface that let you customize the props of your components live",
                 "namespace": "@coffeekraken.s-carpenter.node",
                 "status": "wip",
+                "snippet": {
+                    "label": "__SCarpenter($1)",
+                    "code": "const carpenter = new __SCarpenter($1);\ncarpenter.start();"
+                },
                 "example": [
                     {
                         "language": "js",
@@ -255,6 +268,17 @@
                             ],
                             "raw": "Function"
                         },
+                        "return": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Promise"
+                                    }
+                                ],
+                                "raw": "Promise"
+                            },
+                            "description": "A promise resolved with the corresponding specs loaded"
+                        },
                         "description": "This method allows you to load the specs specified in the config.carpenter.sources configuration",
                         "since": "2.0.0",
                         "author": {
@@ -291,6 +315,17 @@
                                 "description": "The params to use to start your mitosis env",
                                 "defaultStr": ""
                             }
+                        },
+                        "return": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Promise"
+                                    }
+                                ],
+                                "raw": "Promise"
+                            },
+                            "description": "A promise resolved once the scan process has been finished"
                         },
                         "description": "This method allows you to start a server in order display your components library in a nice and coherent interface",
                         "since": "2.0.0",

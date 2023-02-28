@@ -13,6 +13,8 @@ import __STheme from '@coffeekraken/s-theme';
  *
  * @return        {Css}         The generated css
  *
+ * @snippet         @sugar.font.size($1)
+ * 
  * @example        css
  * .my-cool-element {
  *    \@sugar.font.size(20);

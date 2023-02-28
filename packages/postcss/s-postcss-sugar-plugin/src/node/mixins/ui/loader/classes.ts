@@ -14,8 +14,10 @@ import __camelCase from '@coffeekraken/sugar/shared/string/camelCase';
  * @param       {('spinner'|'round'|'drop'|'square-dots')}                [loaders=['spinner','round','drop','square-dots']]         The loader(s) you want to generate
  * @return      {String}            The generated css
  *
+ * @snippet         @sugar.ui.loader.classes
+ * 
  * @example     css
- * @sugar.ui.loader.classes;
+ * \@sugar.ui.loader.classes;
  *
  * @since      2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)

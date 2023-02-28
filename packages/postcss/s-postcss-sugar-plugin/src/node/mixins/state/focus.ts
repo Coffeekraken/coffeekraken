@@ -23,6 +23,11 @@ export interface postcssSugarPluginStateFocusMixinParams {}
  *
  * @param       {String}        query       The query string like ">tablet", "<=desktop", etc...
  *
+ * @snippet         @sugar.state.focus
+ * \@sugar.state.focus {
+ *      $1
+ * }
+ * 
  * @example        css
  * .myCoolItem {
  *  \@sugar.state.focus {

@@ -30,6 +30,11 @@ export interface postcssSugarPluginRhythmVerticalMixinParams {
  *
  * @return      {Css}         The generated css
  *
+ * @snippet         @sugar.rhythm.vertical
+ * \@sugar.rhythm.vertical {
+ *      $1
+ * }
+ * 
  * @example        css          Custom styling
  * .my-cool-element {
  *    \@sugar.rhythm.vertical {

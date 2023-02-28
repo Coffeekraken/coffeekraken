@@ -31,6 +31,8 @@ export { postcssSugarPluginAlignInterface as interface };
  * @param       {String}        align      How to align the item like "top left", "bottom center-x", etc...
  * @return      {Css}                   The corresponding grid css
  *
+ * @snippet         @sugar.align.abs($1)
+ * 
  * @example       css
  * .my-element {
  *    \@sugar.align.abs(top right);

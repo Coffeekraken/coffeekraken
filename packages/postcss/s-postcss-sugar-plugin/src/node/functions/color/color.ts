@@ -18,6 +18,8 @@ import __STheme from '@coffeekraken/s-theme';
  * @param       {String}        [modifier=null]     A color modifier like "--alpha 0.3 --saturate 20", etc...
  * @return      {Css}                   The corresponding css
  *
+ * @snippet         sugar.color($1)
+ * 
  * @example       css
  * .my-element {
  *    color: sugar.color(accent);

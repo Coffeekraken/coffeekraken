@@ -12,6 +12,7 @@ import { __deepMerge } from '@coffeekraken/sugar/object';
  * @extends             SClass
  * @platform            js
  * @status              beta
+ * @private
  *
  * This class allows you to create "features". Feature is like webcomponent but does not provide a
  * custom HTML tag.

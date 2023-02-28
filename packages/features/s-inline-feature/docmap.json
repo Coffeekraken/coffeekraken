@@ -31,6 +31,9 @@
                 "description": "This feature allows you to inline things like svg, and maybe more to come.",
                 "namespace": "@coffeekraken.s-inline-feature.js",
                 "status": "beta",
+                "snippet": {
+                    "label": "__SInlineFeatureDefine($1)"
+                },
                 "example": [
                     {
                         "language": "html",

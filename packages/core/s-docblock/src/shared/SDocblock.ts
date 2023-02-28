@@ -22,15 +22,24 @@ import __SDocblockBlock from './SDocblockBlock';
  *
  * @param       {String|Object}     source        The docblock source. Can be either a string to parse or a filePath
  * @param       {Object}      [settings={}]       An object of settings to configure the SDocblock instance:
- * - tags ({}) {Object}: An object representing the functions used to parse each tags. The object format is ```{ tagName: parseFn }```
  *
+ * @setting         {String}        [filePath=null]         Specify the file path where the docblocks are parsed from
+ * @setting         {Function}      [filter=null]           Specify a function that will filter the SDocblockBlock items
+ * @setting         {Record<String, Function|Regex>}        [filterByTag={}]        Specify some filters by tag. Can be a regex or a function
+ * @setting         {Boolean}       [renderMarkdown=false]              Specify if you want to render the markdown in the tags values or not
+ * @setting         {Any}           [markedOptions={}]                  Specify some [marked](https://www.npmjs.com/package/marked) options to render markdown
+ * @setting         {Function}      [sortFunction=function(a, b) {})]       Specify a function to sort the docblocks. A default sort is applied
+ * 
  * @todo        tests
  * @todo        interface
  * @todo        doc
  *
+ * @snippet         __SDocblock($1)
+ * new __SDocblock($1)
+ * 
  * @example         js
- * import SDocblock from '@coffeekraken/sugar/js/docblock/SSDocblock';
- * new SDocblock(source, {
+ * import __SDocblock from '@coffeekraken/s-docblock';
+ * new __SDocblock(source, {
  *    // override some settings here...
  * });
  *

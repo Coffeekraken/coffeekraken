@@ -224,7 +224,7 @@
                     ],
                     "raw": "Array<String>"
                 },
-                "default": "['id','name','type','menu','default','platform','description','namespace','status','example','interface','styleguide','static','since','author']",
+                "default": "['id','name','as','type','param','return','setting','menu','default','platform','description','namespace','status','snippet','example','interface','async','static','since','author']",
                 "description": "Specify which docblock tags you want to integrate to your docmap.json items",
                 "namespace": "@coffeekraken.s-docmap.config.docmap.build",
                 "since": "2.0.0",
@@ -344,10 +344,45 @@
                             ],
                             "raw": "Object"
                         },
-                        "description": "An object of settings to configure your docmap instance:",
+                        "description": "An object of settings to configure your docmap instance",
                         "default": {},
-                        "defaultStr": "{}",
-                        "content": "- filename (docmap.json) {String}: Specify the filename you want\n- outputDir (packageRootDir()) {String}: Specify the directory where you want to save your docmap.json file when using the ```save``` method\n"
+                        "defaultStr": "{}"
+                    }
+                },
+                "setting": {
+                    "customMenu": {
+                        "name": "customMenu",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Record",
+                                    "of": [
+                                        "String, ISDocmapCustomMenuSettingFn"
+                                    ]
+                                }
+                            ],
+                            "raw": "Record<String, ISDocmapCustomMenuSettingFn>"
+                        },
+                        "description": "Specify some custom menus you want to extract from the docmap.",
+                        "default": {},
+                        "defaultStr": "{}"
+                    },
+                    "tagsProxy": {
+                        "name": "tagsProxy",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Record",
+                                    "of": [
+                                        "String, ISDocmapTagProxyFn"
+                                    ]
+                                }
+                            ],
+                            "raw": "Record<String, ISDocmapTagProxyFn>"
+                        },
+                        "description": "Specify some tags proxy to transform some tags values at BUILD process.",
+                        "default": {},
+                        "defaultStr": "{}"
                     }
                 },
                 "platform": [
@@ -362,7 +397,7 @@
                 "example": [
                     {
                         "language": "js",
-                        "code": "import SDocmap from '@coffeekraken/s-docmap';\nconst docmap = new SDocmap();\nawait docmap.read();"
+                        "code": "import __SDocmap from '@coffeekraken/s-docmap';\nconst docmap = new __SDocmap();\nawait docmap.read();"
                     }
                 ],
                 "since": "2.0.0",
@@ -469,6 +504,20 @@
                                 "defaultStr": "{}"
                             }
                         },
+                        "return": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Promise",
+                                        "of": [
+                                            "ISDocmapObj"
+                                        ]
+                                    }
+                                ],
+                                "raw": "Promise<ISDocmapObj>"
+                            },
+                            "description": "A promise instance that will be resolved once the docmap.json file(s) have been correctly read"
+                        },
                         "description": "This static method allows you to search for docmap.json files and read them to get\nback the content of them in one call. It can take advantage of the cache if",
                         "async": "true",
                         "since": "2.0.0",
@@ -504,6 +553,17 @@
                                 "defaultStr": ""
                             }
                         },
+                        "return": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "ISDocmapSearchResult"
+                                    }
+                                ],
+                                "raw": "ISDocmapSearchResult"
+                            },
+                            "description": "The result of your search"
+                        },
                         "description": "This methodallows you to search for an docmap item by it's slug.\nYou can specify if you want to search also in the \"packages\" section or not",
                         "since": "2.0.0",
                         "author": {
@@ -522,6 +582,20 @@
                                 }
                             ],
                             "raw": "Function"
+                        },
+                        "return": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Record",
+                                        "of": [
+                                            "string: SFile"
+                                        ]
+                                    }
+                                ],
+                                "raw": "Record<string: SFile>"
+                            },
+                            "description": "The structured menu tree with an SFile instance attached for each source file"
                         },
                         "description": "This method allows you to extract the docmap items that have a \"menu\" array property and\nreturn all of these in a structured object",
                         "since": "2.0.0",
@@ -559,6 +633,17 @@
                                 "description": "The params to use to build your docmap",
                                 "defaultStr": ""
                             }
+                        },
+                        "return": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Promise"
+                                    }
+                                ],
+                                "raw": "Promise"
+                            },
+                            "description": "A promise resolved once the scan process has been finished"
                         },
                         "description": "This method allows you to specify one or more glob patterns to scan files for \"@namespace\" docblock tags\nand extract all the necessary informations to build the docmap.json file",
                         "since": "2.0.0",
@@ -653,6 +738,7 @@
                                 "as",
                                 "type",
                                 "param",
+                                "return",
                                 "setting",
                                 "menu",
                                 "default",
@@ -660,6 +746,7 @@
                                 "description",
                                 "namespace",
                                 "status",
+                                "snippet",
                                 "example",
                                 "interface",
                                 "async",
@@ -894,6 +981,17 @@
                         "description": "The interface data to process",
                         "defaultStr": ""
                     }
+                },
+                "return": {
+                    "type": {
+                        "types": [
+                            {
+                                "type": "ISDocmapInterfaceField"
+                            }
+                        ],
+                        "raw": "ISDocmapInterfaceField"
+                    },
+                    "description": "The full interface data"
                 },
                 "platform": [
                     {

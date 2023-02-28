@@ -11,6 +11,7 @@ import __path from 'path';
  * @type          Class
  * @platform        node
  * @status              beta
+ * @private
  *
  * This class represent the php data file loader
  *

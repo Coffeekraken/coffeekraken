@@ -10,9 +10,10 @@ import __SInterface from '@coffeekraken/s-interface';
  * This mixin allows you to stretch a link clickable area without having to change the actual link css.
  * It uses the `after` pseudo class to create a new clickable area that will spend until it reach an element that as a position specified.
  *
- *
  * @return          {Css}                                   The generated css
  *
+ * @snippet         @sugar.link.stretch
+ * 
  * @example         css
  * .my-cool-element {
  *      @sugar.link.stretch;

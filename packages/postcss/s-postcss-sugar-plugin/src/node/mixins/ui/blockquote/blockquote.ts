@@ -13,6 +13,8 @@ import __SInterface from '@coffeekraken/s-interface';
  * @param       {('bare'|'lnf')[]}        [scope=['bare', 'lnf'']]      The scope you want to generate
  * @return      {Css}                   The corresponding css
  *
+ * @snippet         @sugar.ui.blockquote
+ * 
  * @example       css
  * .my-element {
  *      \@sugar.ui.blockquote();

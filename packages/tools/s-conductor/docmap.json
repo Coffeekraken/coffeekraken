@@ -74,7 +74,7 @@
                 ],
                 "description": "This class represent the conductor for your UI. With it you can register some \"task\" to execute\nat a specific time. The \"times\" available are these ones:\n\n- direct: Execute directly the task\n- directly: Execute directly the task\n- inViewport: Execute when the element enter the viewport\n- nearViewport: Execute when the element is near the viewport\n- outOfViewport: Execute when the element is out of the viewport\n- domReady: Execute when the DOM is ready\n- visible: Execute when the element became visible\n- stylesheetsReady: Execute when the stylesheets are ready\n- interact: Execute when the user interact with the element. See the [whenInteract API documentation](/api/@coffeekraken.sugar.js.dom.detect.whenInteract).\n- idle: Execute when no other task is running",
                 "namespace": "@coffeekraken.s-conductor.s-duration",
-                "status": "beta",
+                "status": "wip",
                 "example": [
                     {
                         "language": "js",
@@ -164,6 +164,17 @@
                                 "description": "The task function to execute",
                                 "defaultStr": ""
                             }
+                        },
+                        "return": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "SPromise"
+                                    }
+                                ],
+                                "raw": "SPromise"
+                            },
+                            "description": "An SPromise instance resolved when one of the passed time(s) is/are reached"
                         },
                         "description": "This method allows you to register a task to execute at a specific time in the \"default\" conductor instance.",
                         "since": "2.0.0",

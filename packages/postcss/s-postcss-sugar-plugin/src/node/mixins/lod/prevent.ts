@@ -23,8 +23,13 @@ export interface postcssSugarPluginScopePreventMixinParams {}
  *
  * @param       {String}        query       The query string like ">tablet", "<=desktop", etc...
  *
+ * @snippet         @sugar.lod.prevent
+ * \@sugar.lod.prevent {
+ *      $1
+ * }
+ * 
  * @example        css
- * @sugar.lod.prevent() {
+ * \@sugar.lod.prevent() {
  *      // ...
  * }
  *

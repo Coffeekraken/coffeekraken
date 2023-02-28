@@ -11,7 +11,8 @@ import __SStdio from '../shared/SStdio';
  * @type          Class
  * @platform        js
  * @status              beta
- *
+ * @private
+ * 
  * This class represent the base one for all the "Stdio"
  * compatible setting.
  *

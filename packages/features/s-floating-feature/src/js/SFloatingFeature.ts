@@ -26,6 +26,17 @@ import __css from '../../../../src/css/s-floating-feature.css'; // relative to /
  * @support          safari
  * @support          edge
  *
+ * @import          import { define as __SFloatingFeatureDefine } from '@coffeekraken/s-activate-feature';
+ * 
+ * @snippet         __SFloatingFeatureDefine($1)
+ * 
+ * @install         js
+ * import { define as __SFloatingFeatureDefine } from '@coffeekraken/s-floating-feature';
+ * __SFloatingFeatureDefine();
+ * 
+ * @install             bash
+ * npm i @coffeekraken/s-floating-feature
+ * 
  * @example         html            Email field
  * <div class="s-ratio:16-9 s-width:50 s-bg:main-surface s-p:30">
  *   Floating element preview. Try to scroll...

@@ -67,6 +67,9 @@
                 "description": "This component specify a panel that can be opened and closed with positions like \"top\", \"right\", \"bottom\", \"left\" or \"modal\".\nIt has multiple systems to open and close panels depending on your needs and can be programatically manipulated.",
                 "namespace": "@coffeekraken.s-panel-component.js",
                 "status": "beta",
+                "snippet": {
+                    "label": "__SPanelComponentDefine($1)"
+                },
                 "example": [
                     {
                         "language": "html",

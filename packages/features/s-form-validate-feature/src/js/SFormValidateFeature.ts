@@ -42,12 +42,16 @@ import __define from './define';
  * @event           error           Dispatched when a validation error occurs
  * @event           valid               Dispatched when a validation pass correctly
  *
+ * @import          import { define as __SFormValidateFeatureDefine } from '@coffeekraken/s-form-validate-feature';
+ * 
+ * @snippet         __SFormValidateFeatureDefine($1)
+ * 
+ * @install         js
+ * import { define as __SFormValidateFeatureDefine } from '@coffeekraken/s-form-validate-feature';
+ * __SFormValidateFeatureDefine();
+ * 
  * @install         bash
  * npm i @coffeekraken/s-form-validate-feature
- *
- * @install        js
- * import { define } from '@coffeekraken/s-form-validate-feature';
- * define();
  *
  * @example         html            Password
  * <label class="s-label:responsive" s-form-validate password="strong">

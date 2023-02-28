@@ -13,6 +13,7 @@ import __SStdioAdapter from '../../shared/SStdioAdapter';
  * @type            Class
  * @platform            js
  * @status              beta
+ * @private
  *
  * This class represent a "basic" terminal strandard in out interface.
  *

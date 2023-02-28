@@ -23,6 +23,11 @@ export interface postcssSugarPluginStateDisabledMixinParams {}
  *
  * @param       {String}        query       The query string like ">tablet", "<=desktop", etc...
  *
+ * @snippet         @sugar.state.disabled
+ * \@sugar.state.disabled {
+ *      $1
+ * }
+ * 
  * @example        css
  * .myCoolItem {
  *  \@sugar.state.disabled {

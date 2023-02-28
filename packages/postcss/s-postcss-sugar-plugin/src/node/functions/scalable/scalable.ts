@@ -16,6 +16,8 @@ import __SInterface from '@coffeekraken/s-interface';
  * @param       {Number}        value      The value you want to be scalable
  * @return      {Css}                   The corresponding css
  *
+ * @snippet         sugar.scalable($1)
+ * 
  * @example       css
  * .my-element {
  *    padding: sugar.scalable(20px);

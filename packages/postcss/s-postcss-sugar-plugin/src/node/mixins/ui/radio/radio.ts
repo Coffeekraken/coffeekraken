@@ -15,6 +15,8 @@ import __STheme from '@coffeekraken/s-theme';
  * @param       {('bare'|'lnf'')[]}        [scope=['bare', 'lnf']]      The scope you want to generate
  * @return      {String}            The generated css
  *
+ * @snippet         @sugar.ui.radio
+ * 
  * @example     css
  * .my-radio {
  *    @sugar.ui.radio;

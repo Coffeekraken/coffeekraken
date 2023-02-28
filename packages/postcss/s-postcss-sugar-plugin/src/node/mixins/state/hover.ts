@@ -23,6 +23,11 @@ export interface postcssSugarPluginStateHoverMixinParams {}
  *
  * @param       {String}        query       The query string like ">tablet", "<=desktop", etc...
  *
+ * @snippet         @sugar.state.hover
+ * \@sugar.state.hover {
+ *      $1
+ * }
+ * 
  * @example        css
  * .myCoolItem {
  *  \@sugar.state.hover {

@@ -1,5 +1,4 @@
 import __SInterface from '@coffeekraken/s-interface';
-import __STheme from '@coffeekraken/s-theme';
 
 /**
  * @name           noise
@@ -16,9 +15,11 @@ import __STheme from '@coffeekraken/s-theme';
  * @param       {String}        [height='5000px']       The height of the noise
  * @return        {Css}         The generated css
  *
+ * @snippet         sugar.filter.noise();
+ * 
  * @example        css
  * .my-element {
- *    filter: sugar.filter.noise();
+ *    filter: sugar.filter.noise()
  * }
  *
  * @since       2.0.0

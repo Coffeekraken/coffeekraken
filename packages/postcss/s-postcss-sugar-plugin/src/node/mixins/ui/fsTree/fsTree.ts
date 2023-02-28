@@ -14,6 +14,8 @@ import __SInterface from '@coffeekraken/s-interface';
  * @param       {('bare'|'lnf')[]}        [scope=['bare', 'lnf']]      The scope you want to generate
  * @return      {String}            The generated css
  *
+ * @snippet         @sugar.ui.fsTree
+ * 
  * @example     css
  * .my-fsTree {
  *    @sugar.ui.fsTree;

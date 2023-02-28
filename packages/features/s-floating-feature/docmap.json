@@ -31,6 +31,9 @@
                 "description": "This feature allows you to put your floating UI elements like tooltips, etc, under steroid using the\nAMAZING [Floating UI](https://floating-ui.com) package.",
                 "namespace": "@coffeekraken.s-floating-feature.js",
                 "status": "beta",
+                "snippet": {
+                    "label": "__SFloatingFeatureDefine($1)"
+                },
                 "example": [
                     {
                         "language": "html",

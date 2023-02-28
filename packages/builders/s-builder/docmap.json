@@ -75,10 +75,14 @@
                 "description": "This represent the main builder class that has to be extended for builders like typescript, scss, etc...\nHis main goal is to provide basic features like storing the inputs, settings, etc...",
                 "namespace": "@coffeekraken.s-builder.node",
                 "status": "beta",
+                "snippet": {
+                    "label": "__SBuilder",
+                    "code": "class $1 extends __SBuilder {\n     constructor(settings = {}) {\n         super(settings);\n     }\n     _build(params, settings) {\n         return new Promise(resolve => {\n             $2\n         });\n     }\n}"
+                },
                 "example": [
                     {
                         "language": "js",
-                        "code": "import SBuilder from '@coffeekraken/s-builder';\nimport SPromise from '@coffeekraken/s-promise';\nclass MyBuilder extends SBuilder {\n     constructor(settings = {}) {\n         super(settings);\n     }\n     _build(params, settings) {\n         return new SPromise(({resolve, reject, emit}) => {\n             // compilation logic\n         });\n     }\n}"
+                        "code": "import __SBuilder from '@coffeekraken/s-builder';\nclass MyBuilder extends __SBuilder {\n     constructor(settings = {}) {\n         super(settings);\n     }\n     _build(params, settings) {\n         return new Promise(async (resolve) => {\n             // compilation logic\n         });\n     }\n}"
                     }
                 ],
                 "since": "2.0.0",

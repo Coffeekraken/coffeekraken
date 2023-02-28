@@ -16,7 +16,7 @@ import __SConductorSettingsInterface from './interface/SConductorSettingsInterfa
  * @type                Class
  * @extends             SClass
  * @platform            js
- * @status              beta
+ * @status              wip
  *
  * This class represent the conductor for your UI. With it you can register some "task" to execute
  * at a specific time. The "times" available are these ones:

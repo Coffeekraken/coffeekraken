@@ -2,7 +2,7 @@
 
 import type { ISDurationObject } from '@coffeekraken/s-duration';
 import __SEventEmitter, {
-    ISEventEmitterPipeSettingsFilterFn,
+    ISEventEmitterPipeSettingsFilterFn
 } from '@coffeekraken/s-event-emitter';
 import __SPromise from '@coffeekraken/s-promise';
 import { __wait } from '@coffeekraken/sugar/datetime';
@@ -17,6 +17,7 @@ import __SProcess from './SProcess';
  * @extends         SEventEmitter
  * @platform            node
  * @status              beta
+ * @private
  *
  * This class represent a process manager process wrapper that handle the actual restarting, watch, etc...
  *

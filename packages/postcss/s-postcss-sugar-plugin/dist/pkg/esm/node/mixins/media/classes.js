@@ -5,7 +5,7 @@ import __STheme from '@coffeekraken/s-theme';
  * @namespace      node.mixin.media
  * @type           PostcssMixin
  * @platform      postcss
- * @status        beta
+ * @status        wip
  *
  * This mixin allows you to automatically generate the requested media query as well
  * as updating all the direct child classnames so you will have classes that applies
@@ -14,7 +14,7 @@ import __STheme from '@coffeekraken/s-theme';
  * Take this as an example:
  *
  * ```css
- * @sugar.media.classes(mobile) {
+ * \@sugar.media.classes(mobile) {
  *    .my-cool-element {
  *      color: green;
  *    }
@@ -31,7 +31,7 @@ import __STheme from '@coffeekraken/s-theme';
  * @return        {Css}         The generated css
  *
  * @example         css
- * @sugar.media.classes(mobile) {
+ * \@sugar.media.classes(mobile) {
  *    // only for this media context...
  * }
  *

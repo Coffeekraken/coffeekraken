@@ -56,6 +56,17 @@ import __deepMerge from '../object/deepMerge';
 
 const _loopTimeout = new WeakMap();
 
+export interface IDeepProxyActionObj {
+    object: any;
+    target: string;
+    key: string;
+    path: string;
+    action: 'set'|'get'|'delete';
+    fullAction: string;
+    oldValue: any;
+    value: any;
+}
+
 export interface IDeepProxySettings {
     deep: boolean;
     handleSet: boolean;
@@ -117,7 +128,7 @@ export default function __deepProxy(
 
                 // call the handler function with all the
                 // usefull parameters
-                handlerFn({
+                handlerFn(<IDeepProxyActionObj>{
                     object,
                     target,
                     key,
@@ -136,7 +147,7 @@ export default function __deepProxy(
                 if (Reflect.has(target, key)) {
                     if (!settings.handleGet) return target[key];
 
-                    const value = handlerFn({
+                    const value = handlerFn(<IDeepProxyActionObj>{
                         object,
                         target,
                         key,
@@ -159,7 +170,7 @@ export default function __deepProxy(
                     const oldValue = target[key];
                     const deleted = Reflect.deleteProperty(target, key);
                     if (deleted) {
-                        handlerFn({
+                        handlerFn(<IDeepProxyActionObj>{
                             object,
                             target,
                             key,

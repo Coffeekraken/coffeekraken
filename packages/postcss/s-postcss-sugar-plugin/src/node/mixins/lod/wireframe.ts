@@ -21,8 +21,13 @@ export interface postcssSugarPluginScopeWireframeMixinParams {}
  * calling the mixin @sugar.lod (<2, false); that mean "less than 2 and don't keep when lod is disabled".
  * It also prevent the lod to be applied inside the atRule.
  *
+ * @snippet         @sugar.lod.wireframe
+ * \@sugar.lod.wireframe {
+ *      $1
+ * }
+ * 
  * @example        css
- * @sugar.lod.wireframe() {
+ * \@sugar.lod.wireframe() {
  *      // ...
  * }
  *

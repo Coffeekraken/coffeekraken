@@ -13,6 +13,8 @@ import __STheme from '@coffeekraken/s-theme';
  *
  * @return        {Css}         The generated css
  *
+ * @snippet         @sugar.container($1)
+ * 
  * @example        css
  * .my-cool-container {
  *    \@sugar.container;

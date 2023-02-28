@@ -16,6 +16,11 @@ import { __fromQuantifier } from '@coffeekraken/sugar/array';
  * @param           {Number|String}         level           The level of details you want to keep. "2" will mean 0, 1 and 2. "=2" will mean only the level 2. ">=2" will mean 2 and greater, etc...
  * @return        {Css}         The generated css
  *
+ * @snippet         @sugar.lod.only($1)
+ * \@sugar.lod.only($1) {
+ *      $2
+ * }
+ * 
  * @example        css
  * \@sugar.lod.only(2) {
  *      \@sugar.ui.button.classes;

@@ -39,10 +39,14 @@
                 "description": "This class represent a state in your application. This state can be updated, saved, restored, etc...\nYou can subscribe to a state to be notified when data are updating inside, etc...",
                 "namespace": "@coffeekraken.s-state.node",
                 "status": "beta",
+                "snippet": {
+                    "label": "new __SState($1)",
+                    "code": "const state = new __SState($1);\nstate.$set('', ({\n   object,\n   target,\n   key,\n   path,\n   action,\n   fullAction,\n   oldValue,\n   value\n}) => {\n   $2\n});"
+                },
                 "example": [
                     {
                         "language": "js",
-                        "code": "import SState from '@coffeekraken/s-state';\nconst myState = new SState({\n     myProp: 'hello',\n     sub: {\n         title: 'world'\n     }\n});\nmyState.$set('', (actionObj) => {\n    // do something when your props are updating\n});\nmyState.$set('myProp', (actionObj) => {\n    // do something when the prop \"myProp\" is updated\n});\nmyState.$set('sub.', (actionObj) => {\n    // do something when the sub.title prop is updated\n});\n\n// updating the state as a normal object\nmyState.sub.title = 'plop';"
+                        "code": "import __SState from '@coffeekraken/s-state';\nconst myState = new __SState({\n     myProp: 'hello',\n     sub: {\n         title: 'world'\n     }\n});\nmyState.$set('', (actionObj) => {\n    // do something when your props are updating\n});\nmyState.$set('myProp', (actionObj) => {\n    // do something when the prop \"myProp\" is updated\n});\nmyState.$set('sub.', (actionObj) => {\n    // do something when the sub.title prop is updated\n});\n\n// updating the state as a normal object\nmyState.sub.title = 'plop';"
                     }
                 ],
                 "since": "2.0.0",
@@ -200,6 +204,17 @@
                                 "defaultStr": "{}"
                             }
                         },
+                        "return": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "SState"
+                                    }
+                                ],
+                                "raw": "SState"
+                            },
+                            "description": "The SState instanvce that describe your state"
+                        },
                         "description": "This method allows you to define a new state inside the state manager.\nIt's like creating a new SState instance but quicker",
                         "since": "2.0.0",
                         "author": {
@@ -209,66 +224,6 @@
                         }
                     }
                 }
-            },
-            "@coffeekraken.s-state.js.adapters.SStateLsAdapter": {
-                "id": "@coffeekraken.s-state.js.adapters.SStateLsAdapter",
-                "name": "SStateLsAdapter",
-                "type": {
-                    "types": [
-                        {
-                            "type": "ISStateAdapter"
-                        }
-                    ],
-                    "raw": "ISStateAdapter"
-                },
-                "platform": [
-                    {
-                        "name": "js",
-                        "description": ""
-                    }
-                ],
-                "description": "This state adapter allows you to save your state in the localStorage of the browser",
-                "namespace": "@coffeekraken.s-state.js.adapters",
-                "status": "beta",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com"
-                },
-                "filename": "SStateLsAdapter.ts",
-                "extension": "ts",
-                "relPath": "src/js/adapters/SStateLsAdapter.ts",
-                "children": {}
-            },
-            "@coffeekraken.s-state.js.adapters.SStateFsAdapter": {
-                "id": "@coffeekraken.s-state.js.adapters.SStateFsAdapter",
-                "name": "SStateFsAdapter",
-                "type": {
-                    "types": [
-                        {
-                            "type": "ISStateAdapter"
-                        }
-                    ],
-                    "raw": "ISStateAdapter"
-                },
-                "platform": [
-                    {
-                        "name": "js",
-                        "description": ""
-                    }
-                ],
-                "description": "This state adapter allows you to save your state in the localStorage of the browser",
-                "namespace": "@coffeekraken.s-state.js.adapters",
-                "status": "beta",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com"
-                },
-                "filename": "SStateFsAdapter.ts",
-                "extension": "ts",
-                "relPath": "src/node/adapters/SStateFsAdapter.ts",
-                "children": {}
             }
         }
     }

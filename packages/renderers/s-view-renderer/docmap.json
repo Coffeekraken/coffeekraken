@@ -245,10 +245,14 @@
                 "description": "This class represent a template that can be rendered using all the supported render engines listed in the features bellow.",
                 "namespace": "@coffeekraken.s-view-renderer.node",
                 "status": "beta",
+                "snippet": {
+                    "label": "new __SViewRenderer($1)",
+                    "code": "const viewRenderer = new __SViewRenderer($1);\nconst viewRendererResult = await viewRenderer.render($1, $2);"
+                },
                 "example": [
                     {
                         "language": "js",
-                        "code": "import SViewRenderer from '@coffeekraken/s-view-renderer';\nconst myTemplate = new SViewRenderer({\n     rootDirs: ['/my/cool/folder/where/to/search/for/views']\n});\nconst result = await myTemplate.render('my.view', {\n   title: 'World'\n});"
+                        "code": "import __SViewRenderer from '@coffeekraken/s-view-renderer';\nconst myTemplate = new __SViewRenderer({\n     rootDirs: ['/my/cool/folder/where/to/search/for/views']\n});\nconst result = await myTemplate.render('my.view', {\n   title: 'World'\n});"
                     }
                 ],
                 "since": "2.0.0",
@@ -383,6 +387,17 @@
                                 "default": {},
                                 "defaultStr": "{}"
                             }
+                        },
+                        "return": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "SPromise"
+                                    }
+                                ],
+                                "raw": "SPromise"
+                            },
+                            "description": "An SPromise instance that will be resolved once the rendering process has correctly finished"
                         },
                         "description": "Main method to render your view by passing it an object of data to use as well as an object of settings to override the default passed onces",
                         "async": "true",

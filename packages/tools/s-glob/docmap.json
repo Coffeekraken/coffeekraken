@@ -93,11 +93,11 @@
                 ],
                 "description": "This class represent a glob pattern and can be used to resolve some globs and get back\nan array of SFile instances or to extract some part of the pattern, etc...",
                 "namespace": "@coffeekraken.s-glob.node",
-                "status": "beta",
+                "status": "wip",
                 "example": [
                     {
                         "language": "js",
-                        "code": "import SGlob from '@coffeekraken/sugar/node/glob/SGlob';\nconst glob = new SGlob('my/cool/glob/.js');\nconst files = glob.resolve();\nSGlob.resolve('my/cool/glob/.js');"
+                        "code": "import SGlob from '@coffeekraken/sugar/node/glob/SGlob';\nconst glob = new SGlob('my/cool/glob/.js');\nconst files = glob.resolveSync();\nSGlob.resolveSync('my/cool/glob/.js');"
                     }
                 ],
                 "since": "2.0.0",
@@ -136,6 +136,17 @@
                                 "defaultStr": ""
                             }
                         },
+                        "return": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Boolean"
+                                    }
+                                ],
+                                "raw": "Boolean"
+                            },
+                            "description": "true if is a glob, false if not"
+                        },
                         "description": "Alias to the ```isGlob``` function available in sugar under \"shared.is.isGlob\" namespace",
                         "static": "true",
                         "since": "2.0.0",
@@ -145,9 +156,9 @@
                             "url": "https://coffeekraken.io"
                         }
                     },
-                    "resolve": {
-                        "id": "s9d27a017574baf7205e04e370aa88ec0e35913dcfacb517e3ebe0fff3ae5b539",
-                        "name": "resolve",
+                    "resolvesync": {
+                        "id": "s46215d3fefb15e86ec768af3e48e597678f6d58858e64325175f449c1af5f1ef",
+                        "name": "resolveSync",
                         "type": {
                             "types": [
                                 {
@@ -193,6 +204,26 @@
                                 "default": {},
                                 "defaultStr": "{}"
                             }
+                        },
+                        "return": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "array",
+                                        "of": [
+                                            "SFile"
+                                        ]
+                                    },
+                                    {
+                                        "type": "array",
+                                        "of": [
+                                            "string"
+                                        ]
+                                    }
+                                ],
+                                "raw": "SFile[]|string[]"
+                            },
+                            "description": "An array of SFile instances or string if is a directory"
                         },
                         "description": "Alias to the ```resolveGlob``` function available in sugar under \"node.glob.resolveGlob\"",
                         "static": "true",
@@ -265,6 +296,26 @@
                                 "defaultStr": "{}"
                             }
                         },
+                        "return": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "array",
+                                        "of": [
+                                            "SFile"
+                                        ]
+                                    },
+                                    {
+                                        "type": "array",
+                                        "of": [
+                                            "string"
+                                        ]
+                                    }
+                                ],
+                                "raw": "SFile[]|string[]"
+                            },
+                            "description": "An array of SFile instances or string if is a directory"
+                        },
                         "description": "This method allows you to specify a glob to select files as well as an output directory where to put these files in.\nNote that the settings.cwd will be used to create the relative to outDir pathes.",
                         "static": "true",
                         "since": "2.0.0",
@@ -319,6 +370,17 @@
                                 "defaultStr": ""
                             }
                         },
+                        "return": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Boolean"
+                                    }
+                                ],
+                                "raw": "Boolean"
+                            },
+                            "description": "true if match, false if not"
+                        },
                         "description": "Check if the passed string match the passed glob pattern(s).\nThis make use of the AWESOME micromatch library.",
                         "static": "true",
                         "since": "2.0.0",
@@ -339,6 +401,23 @@
                             ],
                             "raw": "Function"
                         },
+                        "return": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    },
+                                    {
+                                        "type": "Array",
+                                        "of": [
+                                            "String"
+                                        ]
+                                    }
+                                ],
+                                "raw": "String|Array<String>"
+                            },
+                            "description": "The glob part of the glob(s) passed in constructor. If multiple globs, return an Array, otherwise a simple string"
+                        },
                         "description": "This function simply return you the glob part of the glob(s) passed in constructor",
                         "since": "2.0.0",
                         "author": {
@@ -357,6 +436,23 @@
                                 }
                             ],
                             "raw": "Function"
+                        },
+                        "return": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    },
+                                    {
+                                        "type": "Array",
+                                        "of": [
+                                            "String"
+                                        ]
+                                    }
+                                ],
+                                "raw": "String|Array<String>"
+                            },
+                            "description": "The none glob part of the glob(s) passed in constructor. If multiple globs, return an Array, otherwise a simple string"
                         },
                         "description": "This function simply return you the none glob part of the glob(s) passed in constructor",
                         "since": "2.0.0",

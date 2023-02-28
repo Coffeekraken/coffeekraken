@@ -11,6 +11,8 @@ import __SInterface from '@coffeekraken/s-interface';
  *
  * @return        {Css}           The generated css
  *
+ * @snippet         @sugar.scrollbar.hide
+ * 
  * @example        css
  * body {
  *    @sugar.scrollbar.hide();

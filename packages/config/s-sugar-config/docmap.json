@@ -2649,6 +2649,9 @@
                 "description": "This class allows you to access your sugar configurations that are\ninjected into the page by the @coffeekraken/s-vite-sugar-plugin",
                 "namespace": "@coffeekraken.s-sugar-config.js",
                 "status": "beta",
+                "snippet": {
+                    "label": "__SSugarConfig.get($1)"
+                },
                 "example": [
                     {
                         "language": "js",
@@ -2711,6 +2714,17 @@
                                 "defaultStr": "'.'"
                             }
                         },
+                        "return": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "any"
+                                    }
+                                ],
+                                "raw": "any"
+                            },
+                            "description": "The getted configuration"
+                        },
                         "description": "This static method allows you to access your configurations",
                         "static": "true",
                         "since": "2.0.0",
@@ -2759,6 +2773,17 @@
                                 "defaultStr": ""
                             }
                         },
+                        "return": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "any"
+                                    }
+                                ],
+                                "raw": "any"
+                            },
+                            "description": "The getted configuration"
+                        },
                         "description": "This static method allows you to set a configuration value",
                         "static": "true",
                         "since": "2.0.0",
@@ -2796,6 +2821,17 @@
                         "defaultStr": ""
                     }
                 },
+                "return": {
+                    "type": {
+                        "types": [
+                            {
+                                "type": "Mixed"
+                            }
+                        ],
+                        "raw": "Mixed"
+                    },
+                    "description": "Return the value if exists, undefined if not"
+                },
                 "platform": [
                     {
                         "name": "node",
@@ -2805,6 +2841,9 @@
                 "description": "This function allows you to access easily the configurations stored in the ```sugar.config.js```.\nThe returned configuration is the result of the default sugar config stored in the toolkit and the\napp defined config stored in current application root folder",
                 "namespace": "@coffeekraken.s-sugar-config.node",
                 "status": "beta",
+                "snippet": {
+                    "label": "__SSugarConfig.get($1)"
+                },
                 "example": [
                     {
                         "language": "js",
@@ -2984,6 +3023,20 @@
                             ],
                             "raw": "Function"
                         },
+                        "return": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Promise",
+                                        "of": [
+                                            "any"
+                                        ]
+                                    }
+                                ],
+                                "raw": "Promise<any>"
+                            },
+                            "description": "Return a promise resolved once the configuration has been loaded"
+                        },
                         "description": "This method is responsible to load the config depending on the passed ```sugarConfig.env``` setting",
                         "async": "true",
                         "since": "2.0.0",
@@ -3004,6 +3057,20 @@
                             ],
                             "raw": "Function"
                         },
+                        "return": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "array",
+                                        "of": [
+                                            "Any"
+                                        ]
+                                    }
+                                ],
+                                "raw": "Any[]"
+                            },
+                            "description": "An array of docblocks objects"
+                        },
                         "description": "This function returns you the configuration as a json object",
                         "async": "true",
                         "since": "2.0.0",
@@ -3023,6 +3090,20 @@
                                 }
                             ],
                             "raw": "Function"
+                        },
+                        "return": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "array",
+                                        "of": [
+                                            "Any"
+                                        ]
+                                    }
+                                ],
+                                "raw": "Any[]"
+                            },
+                            "description": "An array of docblocks objects"
                         },
                         "description": "This function returns you the configuration as an object",
                         "async": "true",
@@ -3060,6 +3141,17 @@
                                 "defaultStr": "\"default\""
                             }
                         },
+                        "return": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Boolean"
+                                    }
+                                ],
+                                "raw": "Boolean"
+                            },
+                            "description": "true if is loaded, false if not"
+                        },
                         "description": "This static method allows you to test if the default or a particular configuration\nis loaded or not",
                         "since": "2.0.0",
                         "author": {
@@ -3093,6 +3185,20 @@
                                 "description": "The configuration if you want to get docblocks back for",
                                 "defaultStr": ""
                             }
+                        },
+                        "return": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "array",
+                                        "of": [
+                                            "Any"
+                                        ]
+                                    }
+                                ],
+                                "raw": "Any[]"
+                            },
+                            "description": "An array of docblocks objects"
                         },
                         "description": "This function take a config id as parameter and returns an array of docblocks parsed objects",
                         "async": "true",
@@ -3130,6 +3236,17 @@
                                 "defaultStr": "'.'"
                             }
                         },
+                        "return": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
+                            "description": "The generated hash for this config"
+                        },
                         "description": "This hash function gives you access to the actual configuration hash.\nYou can specify a dot path to get the hash of a sub configuration",
                         "since": "2.0.0",
                         "author": {
@@ -3164,6 +3281,17 @@
                                 "default": ".",
                                 "defaultStr": "'.'"
                             }
+                        },
+                        "return": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "any"
+                                    }
+                                ],
+                                "raw": "any"
+                            },
+                            "description": "The getted configuration"
                         },
                         "description": "This method allows you to get a configuration back by passing a dotpath like \"something.else\"",
                         "since": "2.0.0",
@@ -3213,6 +3341,17 @@
                                 "defaultStr": "\"default\""
                             }
                         },
+                        "return": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "any"
+                                    }
+                                ],
+                                "raw": "any"
+                            },
+                            "description": "The getted configuration"
+                        },
                         "description": "Same as the \"get\" method but does not throw error if the config is not accessible...",
                         "since": "2.0.0",
                         "author": {
@@ -3260,6 +3399,17 @@
                                 "defaultStr": ""
                             }
                         },
+                        "return": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "any"
+                                    }
+                                ],
+                                "raw": "any"
+                            },
+                            "description": "The getted configuration"
+                        },
                         "description": "This method allows you to set a configuration back by passing a dotpath like \"something.else\"",
                         "since": "2.0.0",
                         "author": {
@@ -3297,6 +3447,17 @@
                                 }
                             ],
                             "raw": "Function"
+                        },
+                        "return": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Promise"
+                                    }
+                                ],
+                                "raw": "Promise"
+                            },
+                            "description": "A promise resolved once the caching process has been done"
                         },
                         "description": "Save the config in the cache to load it faster next time",
                         "example": [

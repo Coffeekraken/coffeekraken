@@ -67,6 +67,9 @@
                 "description": "This component allows you to drop files on it and handle upload for you easily.",
                 "namespace": "@coffeekraken.s-dropzone-component.js",
                 "status": "beta",
+                "snippet": {
+                    "label": "__SDropzoneComponentDefine($1)"
+                },
                 "example": [
                     {
                         "language": "html",

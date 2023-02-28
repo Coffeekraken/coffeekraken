@@ -22,7 +22,7 @@
                 ],
                 "description": "This class allows you to wrap any HTMLElement and enhance it with some sugar methods like `translate`, `translateX`, `rotateY`, etc...",
                 "namespace": "@coffeekraken.s-sugar-element.js",
-                "status": "beta",
+                "status": "wip",
                 "example": [
                     {
                         "language": "js",
@@ -174,6 +174,17 @@
                                 "defaultStr": "null"
                             }
                         },
+                        "return": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "SSugarElement"
+                                    }
+                                ],
+                                "raw": "SSugarElement"
+                            },
+                            "description": "The sugar element instance"
+                        },
                         "description": "Allows you to get back a new matrix by adding the properties passed\nto the current element matrix. This mean that if the element is currently\nin translateX 50 and you pass to the translateX argument 10, it will be 60 at the end.\nTo override the",
                         "since": "2.0.0",
                         "author": {
@@ -210,6 +221,17 @@
                                 "description": "The matrix to apply",
                                 "defaultStr": ""
                             }
+                        },
+                        "return": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "SSugarElement"
+                                    }
+                                ],
+                                "raw": "SSugarElement"
+                            },
+                            "description": "The sugar element instance"
                         },
                         "description": "Apply a matrix to the current element",
                         "since": "2.0.0",
@@ -248,6 +270,17 @@
                                 "defaultStr": ""
                             }
                         },
+                        "return": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "SSugarElement"
+                                    }
+                                ],
+                                "raw": "SSugarElement"
+                            },
+                            "description": "The sugar element instance"
+                        },
                         "description": "Apply a matrix to the current element",
                         "since": "2.0.0",
                         "author": {
@@ -267,6 +300,17 @@
                             ],
                             "raw": "Function"
                         },
+                        "return": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "ISSugarElementTranslates"
+                                    }
+                                ],
+                                "raw": "ISSugarElementTranslates"
+                            },
+                            "description": "The translates object"
+                        },
                         "description": "This method allows you to get the current translation of the element at a this specific time",
                         "since": "2.0.0",
                         "author": {
@@ -285,6 +329,17 @@
                                 }
                             ],
                             "raw": "Function"
+                        },
+                        "return": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "ISSugarElementTranslates"
+                                    }
+                                ],
+                                "raw": "ISSugarElementTranslates"
+                            },
+                            "description": "The translates object"
                         },
                         "description": "This method allows you to get the current translation of the element at a this specific time",
                         "since": "2.0.0",
@@ -349,6 +404,17 @@
                                 "defaultStr": "null"
                             }
                         },
+                        "return": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "SSugarElement"
+                                    }
+                                ],
+                                "raw": "SSugarElement"
+                            },
+                            "description": "The sugar element instance"
+                        },
                         "description": "Allows you to set the translate of an HTMLElement by setting his translates properties.\nThis will override the previous matrix translates. If you want to \"add\" a translation, use the `translate` method instead;",
                         "since": "2.0.0",
                         "author": {
@@ -411,6 +477,17 @@
                                 "default": null,
                                 "defaultStr": "null"
                             }
+                        },
+                        "return": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "SSugarElement"
+                                    }
+                                ],
+                                "raw": "SSugarElement"
+                            },
+                            "description": "The sugar element instance"
                         },
                         "description": "Allows you to translate an HTMLElement by setting his translate properties",
                         "since": "2.0.0",
@@ -475,6 +552,17 @@
                                 "defaultStr": "null"
                             }
                         },
+                        "return": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "SSugarElement"
+                                    }
+                                ],
+                                "raw": "SSugarElement"
+                            },
+                            "description": "The sugar element instance"
+                        },
                         "description": "Allows you to rotate an HTMLElement by setting his transformation properties",
                         "since": "2.0.0",
                         "author": {
@@ -537,6 +625,17 @@
                                 "default": null,
                                 "defaultStr": "null"
                             }
+                        },
+                        "return": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "SSugarElement"
+                                    }
+                                ],
+                                "raw": "SSugarElement"
+                            },
+                            "description": "The sugar element instance"
                         },
                         "description": "Allows you to set the rotates of any HTMLElement by setting his transformation properties",
                         "since": "2.0.0",

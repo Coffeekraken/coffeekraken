@@ -13,8 +13,10 @@ import __SInterface from '@coffeekraken/s-interface';
  *
  * @return        {Css}         The generated css
  *
+ * @snippet         @sugar.cursor.classes
+ * 
  * @example        css
- * @sugar.cursor.classes;
+ * \@sugar.cursor.classes;
  *
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)

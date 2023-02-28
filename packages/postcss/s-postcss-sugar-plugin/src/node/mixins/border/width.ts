@@ -16,6 +16,8 @@ import __STheme from '@coffeekraken/s-theme';
  *
  * @todo      Add multiple values support like @sugar.border.width(10);
  *
+ * @snippet         @sugar.border.width($1)
+ * 
  * @example       css
  * .my-element {
  *    @sugar.border.width(10);

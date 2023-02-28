@@ -31,6 +31,9 @@
                 "description": "This feature allows you to easily apply some parallax effect to any HTMLElement items you want.",
                 "namespace": "@coffeekraken.s-parallax-feature.js",
                 "status": "beta",
+                "snippet": {
+                    "label": "__SParallaxFeatureDefine($1)"
+                },
                 "example": [
                     {
                         "language": "html",

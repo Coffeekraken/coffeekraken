@@ -5,55 +5,55 @@ import { __deepMerge } from '@coffeekraken/sugar/object';
 import __en from './i18n/en';
 
 import __alphanumValidator, {
-    definition as __alphanumValidatorDefinition,
+    definition as __alphanumValidatorDefinition
 } from './validators/alphanum';
 import __colorValidator, {
-    definition as __colorValidatorDefinition,
+    definition as __colorValidatorDefinition
 } from './validators/color';
 import __creditCardValidator, {
-    definition as __creditCardValidatorDefinition,
+    definition as __creditCardValidatorDefinition
 } from './validators/creditCard';
 import __emailValidator, {
-    definition as __emailValidatorDefinition,
+    definition as __emailValidatorDefinition
 } from './validators/email';
 import __hexValidator, {
-    definition as __hexValidatorDefinition,
+    definition as __hexValidatorDefinition
 } from './validators/hex';
 import __integerValidator, {
-    definition as __integerValidatorDefinition,
+    definition as __integerValidatorDefinition
 } from './validators/integer';
 import __isoDateValidator, {
-    definition as __isoDateValidatorDefinition,
+    definition as __isoDateValidatorDefinition
 } from './validators/isoDate';
 import __isoDateTimeValidator, {
-    definition as __isoDateTimeValidatorDefinition,
+    definition as __isoDateTimeValidatorDefinition
 } from './validators/isoDateTime';
 import __isoTimeValidator, {
-    definition as __isoTimeValidatorDefinition,
+    definition as __isoTimeValidatorDefinition
 } from './validators/isoTime';
 import __maxValidator, {
-    definition as __maxValidatorDefinition,
+    definition as __maxValidatorDefinition
 } from './validators/max';
 import __minValidator, {
-    definition as __minValidatorDefinition,
+    definition as __minValidatorDefinition
 } from './validators/min';
 import __negativeValidator, {
-    definition as __negativeValidatorDefinition,
+    definition as __negativeValidatorDefinition
 } from './validators/negative';
 import __numberValidator, {
-    definition as __numberValidatorDefinition,
+    definition as __numberValidatorDefinition
 } from './validators/number';
 import __passwordValidator, {
-    definition as __passwordValidatorDefinition,
+    definition as __passwordValidatorDefinition
 } from './validators/password';
 import __patternValidator, {
-    definition as __patternValidatorDefinition,
+    definition as __patternValidatorDefinition
 } from './validators/pattern';
 import __positiveValidator, {
-    definition as __positiveValidatorDefinition,
+    definition as __positiveValidatorDefinition
 } from './validators/positive';
 import __requiredValidator, {
-    definition as __requiredValidatorDefinition,
+    definition as __requiredValidatorDefinition
 } from './validators/required';
 
 /**
@@ -73,6 +73,19 @@ import __requiredValidator, {
  * @todo      doc
  * @todo      tests
  *
+ * @snippet         new __SValidator()
+ * const validator = new __SValidator();
+ * const validatorRes = validator.validate('Hello world plop', {
+ *      min: 2
+ *      max: 10
+ * });
+ * // {
+ * //   valid: false,
+ * //   messages: [
+ * //       'This must have at max 10 characters'
+ * //   ]
+ * // }
+ * 
  * @example     js
  * import __SValidator from '@coffeekraken/s-validation';
  * const validator = new __SValidator();

@@ -12,6 +12,8 @@ import __STheme from '@coffeekraken/s-theme';
  *
  * @return        {Css}         The generated css
  *
+ * @snippet         @sugar.gradient($1, $2, $3)
+ * 
  * @example        css
  * .my-cool-element {
  *    \@sugar.gradient(accent, secondary, radial);

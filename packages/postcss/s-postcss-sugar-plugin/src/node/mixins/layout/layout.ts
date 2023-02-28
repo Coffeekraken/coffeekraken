@@ -24,6 +24,8 @@ import __SInterface from '@coffeekraken/s-interface';
  * @param       {String}        layout      The layout you want to generate
  * @return        {Css}         The generated css
  *
+ * @snippet         @sugar.layout($1)
+ * 
  * @example        css
  * .my-element {
  *    \@sugar.layout(

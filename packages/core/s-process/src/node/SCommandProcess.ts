@@ -4,7 +4,7 @@ import __SCommandProcessInterface from './interface/SCommandProcessInterface';
 import {
     ISCommandProcessParams,
     ISCommandProcessSettings,
-    ISProcessResultObject,
+    ISProcessResultObject
 } from './ISProcess';
 import __SProcess from './SProcess';
 
@@ -15,7 +15,8 @@ import __SProcess from './SProcess';
  * @extends         SProcess
  * @platform        node
  * @status          beta
- *
+ * @private
+ * 
  * This class represent an SProcess started with a simple bash command like "ls -la" or whatever
  *
  * @param       {ISCommandProcessSettings}          [settings={}]           Some settings to configure your command process

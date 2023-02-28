@@ -5,7 +5,7 @@ import __SInterface from '@coffeekraken/s-interface';
  * @namespace      node.mixin.export
  * @type           PostcssMixin
  * @platform      postcss
- * @status        beta
+ * @status        wip
  *
  * This mixin allows you to mark some css to be exported as separated file.
  * You can specify the name of your partial
@@ -13,7 +13,7 @@ import __SInterface from '@coffeekraken/s-interface';
  * @return        {Css}         The generated css
  *
  * @example        css
- * @sugar.partial(general) {
+ * \@sugar.partial(general) {
  *   body {
  *      background: red;
  *   }

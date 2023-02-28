@@ -11,6 +11,8 @@ import { interface as PostcssSugarPluginGradientInterface } from './gradient';
  *
  * @return        {Css}         The generated css
  *
+ * @snippet         @sugar.gradient.text($1, $2, $3)
+ * 
  * @example        css
  * .my-cool-element {
  *    \@sugar.gradient.text(accent, secondary, radial);

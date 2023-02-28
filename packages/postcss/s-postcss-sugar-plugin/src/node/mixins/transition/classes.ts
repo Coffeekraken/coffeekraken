@@ -14,8 +14,10 @@ import { __uniqid } from '@coffeekraken/sugar/string';
  *
  * @return        {Css}         The generated css
  *
+ * @snippet         @sugar.transition.classes
+ * 
  * @example        css
- * @sugar.transition.classes;
+ * \@sugar.transition.classes;
  *
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)

@@ -15,6 +15,8 @@ import __STheme from '@coffeekraken/s-theme';
  * @param       {Boolean}       [scalable='theme.scalable.margin']      Whether to scale the value or not
  * @return      {Css}                   The corresponding css
  *
+ * @snippet         sugar.margin($1)
+ * 
  * @example       css
  * .my-element {
  *      margin-top: sugar.margin(20);

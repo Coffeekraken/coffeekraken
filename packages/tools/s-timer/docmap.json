@@ -59,7 +59,7 @@
                 ],
                 "description": "Class that let you create and handle timer with ease.\nWith this class you can set some callback function that will be\ncalled each x ms or tell that you want your callbacks to be called\na certain number of time during the timer time.\nThis class extends the SPromise one, meaning that you can subscribe to differents \"events\" emited by the timer instance. Here's the list:\n- complete: emited when the timer is completed\n- tick: emited at each ticks depending on your settings\n- duration: emited when the duration has been changed\n- tickCount: emited when the tickCount has been changed\n- reset: emited when the timer has been reseted\n- start: emited when the timer starts\n- pause: emited when the timer has been paused\n- stop: emited when the timer has been stoped\n- destroy: emited when the timer has been destroyed",
                 "namespace": "@coffeekraken.s-timer.shared",
-                "status": "beta",
+                "status": "wip",
                 "example": [
                     {
                         "language": "js",
@@ -227,6 +227,17 @@
                                 "defaultStr": ""
                             }
                         },
+                        "return": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "STimer"
+                                    }
+                                ],
+                                "raw": "STimer"
+                            },
+                            "description": "The STimer instance"
+                        },
                         "description": "Reset the timer",
                         "author": {
                             "name": "Olivier Bossel",
@@ -261,6 +272,17 @@
                                 "defaultStr": "null"
                             }
                         },
+                        "return": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "STimer"
+                                    }
+                                ],
+                                "raw": "STimer"
+                            },
+                            "description": "The STimer instance"
+                        },
                         "description": "Start the timer",
                         "author": {
                             "name": "Olivier Bossel",
@@ -278,6 +300,17 @@
                                 }
                             ],
                             "raw": "Function"
+                        },
+                        "return": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "STimer"
+                                    }
+                                ],
+                                "raw": "STimer"
+                            },
+                            "description": "The STimer instance"
                         },
                         "description": "Pause the timer",
                         "author": {
@@ -297,6 +330,17 @@
                             ],
                             "raw": "Function"
                         },
+                        "return": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "STimer"
+                                    }
+                                ],
+                                "raw": "STimer"
+                            },
+                            "description": "The STimer instance"
+                        },
                         "description": "Stop the timer",
                         "author": {
                             "name": "Olivier Bossel",
@@ -315,6 +359,17 @@
                             ],
                             "raw": "Function"
                         },
+                        "return": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "STimer"
+                                    }
+                                ],
+                                "raw": "STimer"
+                            },
+                            "description": "The STimer instance"
+                        },
                         "description": "Destroy the timer",
                         "author": {
                             "name": "Olivier Bossel",
@@ -332,6 +387,17 @@
                                 }
                             ],
                             "raw": "Function"
+                        },
+                        "return": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Boolean"
+                                    }
+                                ],
+                                "raw": "Boolean"
+                            },
+                            "description": "true if started, false if not"
                         },
                         "description": "Check if the timer is started",
                         "author": {

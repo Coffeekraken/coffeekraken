@@ -7,7 +7,7 @@ import { __deepMerge } from '@coffeekraken/sugar/object';
 
 import __SStdio, {
     __SStdioBasicAdapter,
-    __SStdioConsoleSource,
+    __SStdioConsoleSource
 } from '@coffeekraken/s-stdio';
 
 import { __speedIndex } from '@coffeekraken/sugar/perf';
@@ -22,16 +22,16 @@ import __STheme from '@coffeekraken/s-theme';
  * @type            Class
  * @extends         SFrontBase
  * @platform        js
- * @status          beta
+ * @status          wip
  *
  * Central class to handle frontend stuffs like theme, google, etc...
  *
+ * @snippet             new __SFront($1)
+ * 
  * @example         js
- * import SFront from '@coffeekraken/s-front';
- * const theme = new SFront();
- * theme.loopOnColors(({name, schema, value}) => {
- *      // do something...
- * });
+ * import __SFront from '@coffeekraken/s-front';
+ * const front = new __SFront();
+ * front.setLod(3);
  *
  * @event       s-front.legal.agree         Dispatched when the user has agree the legal terms throug the `front.agreeLegal` method
  * @event       s-front.legal.disagree         Dispatched when the user has disagree the legal terms throug the `front.disagreeLegal` method

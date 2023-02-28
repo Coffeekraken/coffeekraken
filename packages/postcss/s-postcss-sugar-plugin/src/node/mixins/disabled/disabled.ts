@@ -12,6 +12,8 @@ import __STheme from '@coffeekraken/s-theme';
  *
  * @return        {Css}         The generated css
  *
+ * @snippet         @sugar.disabled
+ * 
  * @example        css
  * .my-element {
  *    \@sugar.disabled();

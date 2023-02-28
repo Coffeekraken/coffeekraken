@@ -10,7 +10,7 @@ import { __deepMerge } from '@coffeekraken/sugar/object';
  * @type                Class
  * @platform            node
  * @platform            js
- * @status              beta
+ * @status              wip
  *
  * This package allows you to compress your css classes/variables,
  * to patch them in your HTML as well as to proxy js native functions

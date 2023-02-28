@@ -67,6 +67,9 @@
                 "description": "This component represent a simple rating \"stars\" based component. You can as well choose the icon you want to use, the number of them, etc...",
                 "namespace": "@coffeekraken.s-rating-component.js",
                 "status": "beta",
+                "snippet": {
+                    "label": "__SRatingComponentDefine($1)"
+                },
                 "example": [
                     {
                         "language": "html",
@@ -311,6 +314,46 @@
                 "relPath": "src/js/interface/SRatingComponentInterface.ts",
                 "children": {}
             },
+            "@coffeekraken.s-rating-component.node.postcss.mixins.ui.rating.classes": {
+                "id": "@coffeekraken.s-rating-component.node.postcss.mixins.ui.rating.classes",
+                "name": "classes",
+                "type": {
+                    "types": [
+                        {
+                            "type": "PostcssMixin"
+                        }
+                    ],
+                    "raw": "PostcssMixin"
+                },
+                "platform": [
+                    {
+                        "name": "css",
+                        "description": ""
+                    }
+                ],
+                "description": "This mixin represent rating",
+                "namespace": "@coffeekraken.s-rating-component.node.postcss.mixins.ui.rating",
+                "status": "beta",
+                "snippet": {
+                    "label": "@sugar.ui.rating.classes($1);"
+                },
+                "example": [
+                    {
+                        "language": "css",
+                        "code": "@sugar.ui.rating.classes;"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "classes.ts",
+                "extension": "ts",
+                "relPath": "src/node/postcss/mixins/ui/rating/classes.ts",
+                "children": {}
+            },
             "@coffeekraken.s-rating-component.ui.rating.rating": {
                 "id": "@coffeekraken.s-rating-component.ui.rating.rating",
                 "name": "rating",
@@ -331,6 +374,9 @@
                 "description": "Apply the datetime picker style to any s-rating element",
                 "namespace": "@coffeekraken.s-rating-component.ui.rating",
                 "status": "beta",
+                "snippet": {
+                    "label": "@sugar.ui.rating($1);"
+                },
                 "example": [
                     {
                         "language": "css",

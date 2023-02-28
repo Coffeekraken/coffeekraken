@@ -27,6 +27,17 @@ export interface ISLazyFeatureProps {}
  * @support          safari
  * @support          edge
  *
+ * @import          import { define as __SLazyFeatureDefine } from '@coffeekraken/s-lazy-feature';
+ * 
+ * @snippet         __SLazyFeatureDefine($1)
+ * 
+ * @install         js
+ * import { define as __SLazyFeatureDefine } from '@coffeekraken/s-lazy-feature';
+ * __SLazyFeatureDefine();
+ * 
+ * @install         bash
+ * npm i @coffeekraken/s-form-validate-feature
+ * 
  * @example         html        Template        Simply add the "s-lazy" on your template tag and template content will be appended right after when it comes in the viewport
  * <template s-lazy>
  *      <!-- my normal code... -->

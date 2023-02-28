@@ -47,6 +47,17 @@ export interface ISRefocusFeatureProps {
  * @support          safari
  * @support          edge
  *
+ * @import          import { define as __SRefocusFeatureDefine } from '@coffeekraken/s-refocus-feature';
+ * 
+ * @snippet         __SRefocusFeatureDefine($1)
+ * 
+ * @install         js
+ * import { define as __SRefocusFeatureDefine } from '@coffeekraken/s-refocus-feature';
+ * __SRefocusFeatureDefine();
+ * 
+ * @install         bash
+ * npm i @coffeekraken/s-form-validate-feature
+ * 
  * @example         html            Simple usage
  * <div class="scrollable" s-refocus trigger="event:actual">
  *    <ul>

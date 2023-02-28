@@ -156,10 +156,11 @@
                 "description": "This class allows you to access, set and update environment variables seemlessly on node\nand browser env.\nYou can also check if the environment is a dev one or a production using the\nhelpfull ```is``` function like so: ```SEnv.is('prod')```",
                 "namespace": "@coffeekraken.s-env.js",
                 "status": "beta",
+                "snippet": {},
                 "example": [
                     {
                         "language": "js",
-                        "code": "import __SEnv from '@coffeekraken/s-env';\nthis.get('something');\n__SEnv.is('prod');\n__SEnv.is('production');\n__SEnv.is('development');\n// etc..."
+                        "code": "import __SEnv from '@coffeekraken/s-env';\n__SEnv.get('something');\n__SEnv.is('prod');\n__SEnv.is('production');\n__SEnv.is('development');\n// etc..."
                     }
                 ],
                 "since": "2.0.0",
@@ -214,10 +215,11 @@
                 "description": "This class allows you to access, set and update environment variables seemlessly on node\nand browser env.\nYou can also check if the environment is a dev one or a production using the\nhelpfull ```is``` function like so: ```sEnv.is('prod')```",
                 "namespace": "@coffeekraken.s-env.node",
                 "status": "beta",
+                "snippet": {},
                 "example": [
                     {
                         "language": "js",
-                        "code": "import SEnv from '@coffeekraken/s-env';\nthis.get('something');\nSEnv.is('prod');\nSEnv.is('production');\nSEnv.is('development');\n// etc..."
+                        "code": "import __SEnv from '@coffeekraken/s-env';\n__SEnv.get('something');\n__SEnv.is('prod');\n__SEnv.is('production');\n__SEnv.is('development');\n// etc..."
                     }
                 ],
                 "since": "2.0.0",
@@ -276,10 +278,11 @@
                 "description": "This class allows you to access, set and update environment variables seemlessly on node\nand browser env.\nYou can also check if the environment is a dev one or a production using the\nhelpfull ```is``` function like so: ```sEnv.is('prod')```",
                 "namespace": "@coffeekraken.s-env.shared",
                 "status": "beta",
+                "snippet": {},
                 "example": [
                     {
                         "language": "js",
-                        "code": "import SEnv from '@coffeekraken/s-env';\nthis.get('something');\nthis.is('prod');\nthis.is('production');\nthis.is('development');\n// etc..."
+                        "code": "import __SEnv from '@coffeekraken/s-env';\n__SEnv.get('something');\n__SEnv.is('prod');\n__SEnv.is('production');\n__SEnv.is('development');\n// etc..."
                     }
                 ],
                 "since": "2.0.0",
@@ -318,6 +321,17 @@
                                 "defaultStr": ""
                             }
                         },
+                        "return": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Boolean"
+                                    }
+                                ],
+                                "raw": "Boolean"
+                            },
+                            "description": "true if is the passed environment, false if not"
+                        },
                         "description": "This static method allows you to check if the environment\nis \"dev\", \"development\", \"prod\" or \"production\"",
                         "static": "true",
                         "since": "2.0.0",
@@ -352,6 +366,17 @@
                                 "description": "The variable name you want to get back",
                                 "defaultStr": ""
                             }
+                        },
+                        "return": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Any"
+                                    }
+                                ],
+                                "raw": "Any"
+                            },
+                            "description": "The variable getted or undefined"
                         },
                         "description": "This static method allows you to access an env variable.\nThe variables keys are stored in UPPERCASE but you can use lowercase as well",
                         "static": "true",
@@ -401,6 +426,17 @@
                                 "defaultStr": ""
                             }
                         },
+                        "return": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Any"
+                                    }
+                                ],
+                                "raw": "Any"
+                            },
+                            "description": "The value setted"
+                        },
                         "description": "This static method allows you to set an env variable.\nThe variables keys are stored in UPPERCASE but you can use lowercase as well",
                         "static": "true",
                         "since": "2.0.0",
@@ -448,6 +484,17 @@
                                 "description": "The value you want to set",
                                 "defaultStr": ""
                             }
+                        },
+                        "return": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Any"
+                                    }
+                                ],
+                                "raw": "Any"
+                            },
+                            "description": "The value setted"
                         },
                         "description": "This static method allows you to delete an env variable.\nThe variables keys are stored in UPPERCASE but you can use lowercase as well",
                         "static": "true",

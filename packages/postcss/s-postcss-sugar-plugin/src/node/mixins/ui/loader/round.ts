@@ -16,6 +16,8 @@ import __STheme from '@coffeekraken/s-theme';
  * @param        {String}           [easing='theme.ui.loader.easing']            The easing you want for your round animation
  * @return      {String}            The generated css
  *
+ * @snippet         @sugar.ui.loader.round
+ * 
  * @example     css
  * .my-round {
  *    @sugar.ui.loader.round;

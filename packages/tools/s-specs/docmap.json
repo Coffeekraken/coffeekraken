@@ -23,6 +23,10 @@
                 "description": "This class allows you to access with ease some specification file(s) that supports internal and external references to other files, etc...\nThis is usefull to build specification files in json format that make share some parts through common files, etc...\nYou will also have easy access to your files through \"namespaces\" that represent different folders on your system. This will simplify\nthe way you read your files by prefixing your dotpath (simple fs \"/\" replacement) with the namespace you want to look in.",
                 "namespace": "@coffeekraken.s-specs.php",
                 "status": "beta",
+                "snippet": {
+                    "label": "new __SSpecs($1)",
+                    "code": "const specs = new __SSpecs($1);\nconst spec = specs.read('sugar.views.components.card');"
+                },
                 "example": [
                     {
                         "language": "js",
@@ -65,6 +69,17 @@
                                 "defaultStr": ""
                             }
                         },
+                        "return": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Any"
+                                    }
+                                ],
+                                "raw": "Any"
+                            },
+                            "description": "The requested spec object"
+                        },
                         "description": "This method allows you to convert an SInterface class into a spec object",
                         "status": "beta",
                         "static": "true",
@@ -100,6 +115,17 @@
                                 "description": "The SInterface class you want to use for your spec object",
                                 "defaultStr": ""
                             }
+                        },
+                        "return": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Any"
+                                    }
+                                ],
+                                "raw": "Any"
+                            },
+                            "description": "The requested spec object"
                         },
                         "description": "This method allows you to apply an object of value directly on a specs object.\nIt will apply each values to the \"value\" property of each props",
                         "status": "beta",
@@ -156,6 +182,17 @@
                                 "defaultStr": ""
                             }
                         },
+                        "return": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Any"
+                                    }
+                                ],
+                                "raw": "Any"
+                            },
+                            "description": "The requested spec value"
+                        },
                         "description": "This method allows you to read a spec file and/or a value inside the passed spec file.",
                         "status": "beta",
                         "since": "2.0.0",
@@ -190,6 +227,17 @@
                                 "description": "An array of namespaces to list the specs from. If not set, list all the specs from all the namespaces",
                                 "defaultStr": ""
                             }
+                        },
+                        "return": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Any"
+                                    }
+                                ],
+                                "raw": "Any"
+                            },
+                            "description": "A list of all the specs files available"
                         },
                         "platform": [
                             {
@@ -231,6 +279,17 @@
                                 "description": "The specJson to resolve",
                                 "defaultStr": ""
                             }
+                        },
+                        "return": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Any"
+                                    }
+                                ],
+                                "raw": "Any"
+                            },
+                            "description": "The resolved specJson object"
                         },
                         "description": "This method allows you to pass a specJson object and resolve all the \"@...\" values in it",
                         "status": "beta",

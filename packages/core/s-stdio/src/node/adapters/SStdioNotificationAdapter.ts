@@ -12,6 +12,7 @@ import __SStdioAdapter from '../../shared/SStdioAdapter';
  * @type            Class
  * @platform        node
  * @status          beta
+ * @private
  *
  * This class represent a "notification" out interface.
  *

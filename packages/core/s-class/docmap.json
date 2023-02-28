@@ -79,10 +79,14 @@
                 "description": "This class is a simple and effective one that manage the ```settings``` property\nand some others features that will be documented asap",
                 "namespace": "@coffeekraken.s-class.sugar.js.class",
                 "status": "beta",
+                "snippet": {
+                    "label": "__SClass",
+                    "code": "class $1 extends __SClass {\n     constructor(settings = {}) {\n         super(settings);\n     }\n}"
+                },
                 "example": [
                     {
                         "language": "js",
-                        "code": "import SClass from '@coffeekraken/sugar/js/class/SClass';\nclass MyCoolClass extends SClass {\n     constructor(settings = {}) {\n         super(settings);\n     }\n}"
+                        "code": "import __SClass from '@coffeekraken/s-class';\nclass MyCoolClass extends __SClass {\n     constructor(settings = {}) {\n         super(settings);\n     }\n}"
                     }
                 ],
                 "since": "2.0.0",

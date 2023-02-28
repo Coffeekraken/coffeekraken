@@ -2,7 +2,7 @@ import __SClass from '@coffeekraken/s-class';
 import __SDescriptor, {
     ISDescriptorResult,
     ISDescriptorRules,
-    ISDescriptorSettings,
+    ISDescriptorSettings
 } from '@coffeekraken/s-descriptor';
 import { __parseArgs } from '@coffeekraken/sugar/cli';
 import { __deepMerge } from '@coffeekraken/sugar/object';
@@ -65,19 +65,38 @@ try {
  * @todo        tests
  * @todo        add possibility to set a "details" on each rules for better returns
  *
+ * @snippet         extends __SInterface
+ * class $1 extends __SInterface {
+ *      static get _definition() {
+ *          return {
+ *              $2
+ *          }
+ *      }
+ * } 
+ * 
  * @example         js
- * import SInterface from '@coffeekraken/sugar/js/interface/SInterface';
+ * import __SInterface from '@coffeekraken/s-interface';
  * class MyCoolInterface extends SInterface {
- *     static rules = {
- *          myProperty: {
- *              type: 'String',
- *              required: true
+ *     static get _definition() {
+ *          return {
+ *              myProperty: {
+ *                  type: 'String',
+ *                  required: true
+ *              },
+ *              otherProperty: {
+ *                  type: 'String',
+ *                  default: 'Something'
+ *              }
  *          }
  *      }
  * }
  * MyCoolInterface.apply({
  *      myProperty: 'Hello'
- * }); // => true
+ * });
+ * // {
+ * //       myProperty: 'Hello',
+ * //       otherProperty: 'Something'
+ * // }
  *
  * @since           2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)

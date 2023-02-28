@@ -40,14 +40,14 @@ import __SPackageSettingsInterface from './interface/SPackageSettingsInterface';
  *
  * @param           {ISPackageSettings}          [settings={}]           Some settings to configure your builder instance
  *
+ * @setting         {'npm'|'yarn'}          [manager=__SSugarConfig.get('package.manager')]     Specify the package manager you want to use
+ * 
+ * @snippet         new __SPackage($1)
+ * 
  * @example         js
- * import SPackage from '@coffeekraken/s-package';
- * const builder = new SPackage({
- *      package: {
- *          // settings here...
- *      }
- * });
- * await package.exports();
+ * import __SPackage from '@coffeekraken/s-package';
+ * const builder = new __SPackage();
+ * await package.install();
  *
  * @see         https://www.npmjs.com/package/dependency-cruiser
  * @since           2.0.0

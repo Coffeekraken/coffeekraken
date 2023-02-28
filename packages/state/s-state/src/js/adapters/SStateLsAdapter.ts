@@ -4,8 +4,9 @@ import { ISStateAdapter } from '../../shared/SState';
  * @name        SStateLsAdapter
  * @namespace   js.adapters
  * @type        ISStateAdapter
- * @status      beta
  * @platform    js
+ * @status      beta
+ * @private
  *
  * This state adapter allows you to save your state in the localStorage of the browser
  *

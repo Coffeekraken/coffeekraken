@@ -30,6 +30,17 @@ export interface IInlineFeatureProps {}
  * @support          safari
  * @support          edge
  *
+ * @import          import { define as __SInlineFeatureDefine } from '@coffeekraken/s-inline-feature';
+ * 
+ * @snippet         __SInlineFeatureDefine($1)
+ * 
+ * @install         js
+ * import { define as __SInlineFeatureDefine } from '@coffeekraken/s-inline-feature';
+ * __SInlineFeatureDefine();
+ * 
+ * @install         bash
+ * npm i @coffeekraken/s-form-validate-feature
+ * 
  * @example         html        Inline svg image
  * <img s-inline src="/dist/img/illustrations/stack.svg" />
  *

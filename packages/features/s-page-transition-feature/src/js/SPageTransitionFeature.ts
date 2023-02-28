@@ -64,6 +64,17 @@ export interface ISPageTransitionFeatureProps {
  * @support          safari
  * @support          edge
  *
+ * @import          import { define as __SPageTransitionFeatureDefine } from '@coffeekraken/s-page-transition-feature';
+ * 
+ * @snippet         __SPageTransitionFeatureDefine($1)
+ * 
+ * @install         js
+ * import { define as __SPageTransitionFeatureDefine } from '@coffeekraken/s-page-transition-feature';
+ * __SPageTransitionFeatureDefine();
+ * 
+ * @install         bash
+ * npm i @coffeekraken/s-form-validate-feature
+ * 
  * @example         html            Simple example
  * <p class="s-typo:p">On your body tag, put the <span class="s-typo:code">s-page-transition</span> attribute</p>
  * <!-- <body s-page-transition> -->

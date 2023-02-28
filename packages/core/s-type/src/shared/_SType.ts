@@ -6,7 +6,7 @@ import { __parseHtml } from '@coffeekraken/sugar/console';
 import { __map } from '@coffeekraken/sugar/iterable';
 import { __deepMerge } from '@coffeekraken/sugar/object';
 import __parseTypeString, {
-    IParseTypeStringResultObj,
+    IParseTypeStringResultObj
 } from '@coffeekraken/sugar/shared/type/parseTypeString';
 import __typeOf from '@coffeekraken/sugar/shared/type/typeof';
 import __STypeResult from './STypeResult';
@@ -18,6 +18,7 @@ import __STypeResult from './STypeResult';
  * @platform            node
  * @platform            js
  * @status              beta
+ * @private
  *
  * This class is the main one that MUST be used as parent one
  * when creating any type like object, string, etc...

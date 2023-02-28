@@ -10,7 +10,7 @@ const s_interface_1 = __importDefault(require("@coffeekraken/s-interface"));
  * @namespace      node.mixin.shadow
  * @type           PostcssMixin
  * @platform        css
- * @status        beta
+ * @status        wip
  *
  * This mixin allows you to apply a linear gradient shadow to any HTMLElement.
  * Note that this mixin make use of the :before pseudo class.

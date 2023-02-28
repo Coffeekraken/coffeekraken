@@ -17,6 +17,8 @@ import __STheme from '@coffeekraken/s-theme';
  * @param       {('bare'|'lnf'|'shape')[]}      [scope=['bare','lnf','shape']]                      The scope(s) you want to generate
  * @return      {String}            The generated css
  *
+ * @snippet     @sugar.ui.tabs
+ * 
  * @example     css
  * .my-tabs {
  *    @sugar.ui.tabs;

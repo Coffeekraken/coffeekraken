@@ -12,8 +12,10 @@ import __STheme from '@coffeekraken/s-theme';
  *
  * @return        {Css}        The generated css
  *
+ * @snippet         @sugar.clearfix.classes
+ * 
  * @example        css
- * @sugar.clearfix.classes;
+ * \@sugar.clearfix.classes;
  *
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)

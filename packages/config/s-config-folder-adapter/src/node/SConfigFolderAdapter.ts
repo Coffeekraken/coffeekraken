@@ -25,14 +25,20 @@ import __path from 'path';
  * Each file in the folder will be the first level of the final config object like for example the file "colors.config.js" will be stored
  * in the final object under ```{ colors: ... }```.
  *
- * @param                   {Object}                   [settings={}]         The adapter settings that let you work with the good data storage solution...
- * - name (null) {String}: This specify the config name that you want to use.
- * - fileName ('%name.config.js') {String}: Specify the fileName to use for the file that will store the configs
- * - defaultConfigPath (null) {String}: This specify the path to the "default" config file.
- * - repoConfigPath (${process.cwd()}/[fileName]) {String}: This specify the path to the "app" config file
- * - userConfigPath (${__localDir()}/[fileName]) {String}: This specify the path to the "user" config file
- * @return                  {Promise}                                        A promise that will be resolved once the data has been getted/saved...
+ * @param                   {ISConfigFolderAdapterSettings}                   [settings={}]         The adapter settings that let you work with the good data storage solution...
  *
+ * @setting         {String}            [fileName='%name.config.js']        Specify the config filename schema
+ * @setting         {String}            [folderName='.sugar']               Specify the folder name schema
+ * @setting         {ISConfigFolderAdapterScopesSettings}       [scopes={}]     Specify the scopes "default", "module", "repo", "package" and "user" folder paths
+ *  
+ * @snippet         __SConfigFolderAdapter($1)
+ * new __SConfigFolderAdapter($1)
+ * 
+ * @example         js
+ * import __SConfigFolderAdapter from '@coffeekraken/s-config-folder-adapter';
+ * import __SConfig from '@coffeekraken/s-config';
+ * const config = new __SConfig($1, new __SConfigFolderAdapter($2));
+ * 
  * @todo      interface
  * @todo      doc
  * @todo      tests

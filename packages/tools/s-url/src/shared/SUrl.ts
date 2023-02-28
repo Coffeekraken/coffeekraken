@@ -12,7 +12,7 @@ import __urlParse from 'url-parse';
  * @extends       SClass
  * @platform        node
  * @platform        js
- * @status             beta
+ * @status             wip
  *
  * Simple class that is useful to parse a URL (or the current browser URL) and gives you back
  * an instance that has all these values availables as well as functions to modify the instancied URL:

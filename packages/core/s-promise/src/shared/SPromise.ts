@@ -4,7 +4,7 @@
 import __SClass from '@coffeekraken/s-class';
 import type {
     ISEmitterSettings,
-    ISEventEmitter,
+    ISEventEmitter
 } from '@coffeekraken/s-event-emitter';
 import __SEventEmitter from '@coffeekraken/s-event-emitter';
 import __SLog from '@coffeekraken/s-log';
@@ -14,7 +14,7 @@ import { __deepMerge } from '@coffeekraken/sugar/object';
 // import __SPromiseSettingsInterface from './interface/SPromiseSettingsInterface';
 import __treatAsValue, {
     ITreatAsValueProxy,
-    ITreatAsValueSettings,
+    ITreatAsValueSettings
 } from './treatAsValue';
 
 /**
@@ -32,12 +32,19 @@ import __treatAsValue, {
  * @todo      doc
  * @todo      tests
  * @todo      Add a "pipe" capabilities on events to allow for "throttle", "debounce", etc...
- * @feature       Something cool
- *
+ * 
+ * @feature         Support all the native `Promise` api
+ * @feature         Support for event emitting through the [@coffeekraken/s-event-emitter](https://coffeekraken.io/package/@coffeekraken/s-event-emitter/doc/readme) package
+ * 
+ * @snippet         new __SPromise()
+ * new __SPromise(({resolve, reject, emit, pipe, on}) => {
+ *      $1
+ * });
+ * 
  * @example         js
- * import SPromise from '@coffeekraken/s-promise';
+ * import __SPromise from '@coffeekraken/s-promise';
  * function myCoolFunction() {
- *    return new SPromise(({ resolve, reject, emit }) => {
+ *    return new __SPromise(({ resolve, reject, emit }) => {
  *        // do something...
  *        setInterval(() => {
  *            // resolve the promise

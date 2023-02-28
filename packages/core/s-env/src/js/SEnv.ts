@@ -16,9 +16,12 @@ import __SEnv from '../shared/SEnv';
  *
  * @todo        tests
  *
+ * @snippet         __SEnv.get($1)
+ * @snippet         __SEnv.is($1)
+ * 
  * @example         js
  * import __SEnv from '@coffeekraken/s-env';
- * this.get('something');
+ * __SEnv.get('something');
  * __SEnv.is('prod');
  * __SEnv.is('production');
  * __SEnv.is('development');

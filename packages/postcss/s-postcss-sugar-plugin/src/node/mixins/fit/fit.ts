@@ -12,9 +12,11 @@ import __SInterface from '@coffeekraken/s-interface';
  *
  * @return        {Css}         The generated css
  *
+ * @snippet         @sugar.fix($1)
+ * 
  * @example        css
  * .my-element {
- *    \@sugar.depth(20);
+ *    \@sugar.fit(cover);
  * }
  *
  * @since       2.0.0

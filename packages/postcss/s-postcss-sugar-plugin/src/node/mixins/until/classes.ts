@@ -16,8 +16,10 @@ import __STheme from '@coffeekraken/s-theme';
  *
  * @return        {Css}         The generated css
  *
+ * @snippet         @sugar.until.classes
+ * 
  * @example        css
- * @sugar.until.classes;
+ * \@sugar.until.classes;
  *
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)

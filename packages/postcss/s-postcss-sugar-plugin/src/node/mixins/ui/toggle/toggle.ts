@@ -14,6 +14,8 @@ import __SInterface from '@coffeekraken/s-interface';
  * @param       {'burger'}                          type            The toggle type you want
  * @return      {Css}                   The corresponding css
  *
+ * @snippet         @sugar.ui.toggle
+ * 
  * @example       css
  * .my-element {
  *      \@sugar.ui.toggle(burger);

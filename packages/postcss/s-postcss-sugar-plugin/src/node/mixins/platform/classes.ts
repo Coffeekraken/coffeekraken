@@ -15,8 +15,10 @@ import __fs from 'fs';
  *
  * @return        {Css}         The generated css
  *
+ * @snippet         @sugar.platform.classes
+ * 
  * @example        css
- * @sugar.platform.classes;
+ * \@sugar.platform.classes;
  *
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)

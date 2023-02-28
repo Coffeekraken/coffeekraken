@@ -8,7 +8,7 @@ import __SClassmapBase from '../shared/SClassmapBase';
  * @extends             SClass
  * @type                Class
  * @platform            js
- * @status              beta
+ * @status              wip
  *
  * This package allows you to compress your css classes/variables,
  * to patch them in your HTML as well as to proxy js native functions

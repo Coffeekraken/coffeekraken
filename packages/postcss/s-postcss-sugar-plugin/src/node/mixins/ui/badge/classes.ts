@@ -15,8 +15,10 @@ import __SInterface from '@coffeekraken/s-interface';
  * @param       {('bare'|'lnf'|'vr')[]}        [scope=['bare', 'lnf', 'vr']]      The scope you want to generate
  * @return      {Css}                   The corresponding css
  *
+ * @snippet         @sugar.ui.badge.classes
+ * 
  * @example       css
- * @sugar.ui.badge.classes();
+ * \@sugar.ui.badge.classes();
  *
  * @since     2.0.0
  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)

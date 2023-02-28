@@ -19,11 +19,12 @@ import { __deepMerge, __get } from '@coffeekraken/sugar/object';
  *
  * @param           {Object}        [frontspec={}]          A frontspec formated object
  *
- *
  * @todo      interface
  * @todo      doc
  * @todo      tests
  *
+ * @snippet        __SFrontspec.get($1)
+ * 
  * @example             js
  * import __SFrontspec from '@coffeekraken/s-frontspec';
  * const frontspec = new SFrontspec();

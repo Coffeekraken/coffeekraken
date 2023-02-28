@@ -31,6 +31,9 @@
                 "description": "This feature allows you to apply some nice highlights effects on any HTMLElement.",
                 "namespace": "@coffeekraken.s-highlight-feature.js",
                 "status": "beta",
+                "snippet": {
+                    "label": "__SHighlightFeatureDefine($1)"
+                },
                 "example": [
                     {
                         "language": "html",

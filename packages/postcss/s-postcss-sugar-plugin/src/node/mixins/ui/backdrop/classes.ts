@@ -13,8 +13,10 @@ import __SInterface from '@coffeekraken/s-interface';
  * @param       {('bare'|'lnf')[]}        [scope=['bare', 'lnf']]      The scope you want to generate
  * @return      {Css}                   The corresponding css
  *
+ * @snippet         @sugar.ui.backdrop.classes
+ * 
  * @example       css
- * @sugar.ui.backdrop.classes();
+ * \@sugar.ui.backdrop.classes();
  *
  * @since     2.0.0
  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)

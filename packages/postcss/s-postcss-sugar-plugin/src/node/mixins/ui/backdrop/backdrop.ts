@@ -33,6 +33,8 @@ export { postcssSugarPluginBackdropInterface as interface };
  * @param       {('bare'|'lnf')[]}        [scope=['bare', 'lnf']]      The scope you want to generate
  * @return      {Css}                   The corresponding css
  *
+ * @snippet         @sugar.backdrop
+ * 
  * @example       css
  * .my-element {
  *    \@sugar.backdrop();

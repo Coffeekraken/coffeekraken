@@ -23,15 +23,17 @@ import __SFrontspecBuildParamsInterface from './interface/SFrontspecBuildParamsI
  *
  * @param           {Object}        [settings={}]           An object of settings to configure your frontspec instance:
  *
- *
  * @todo      interface
  * @todo      doc
  * @todo      tests
  *
+ * @snippet         __SFrontspec.get($1)
+ * 
  * @example             js
- * import SFrontspec from '@coffeekraken/s-frontspec';
- * const frontspec = new SFrontspec();
+ * import __SFrontspec from '@coffeekraken/s-frontspec';
+ * const frontspec = new __SFrontspec();
  * const result = await frontspec.read();
+ * __SFrontspec.get('media')
  *
  * @since           2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)

@@ -14,8 +14,10 @@ import __faker from 'faker';
  * @param       {('bare'|'lnf')[]}        [scope=['bare', 'lnf']]      The scope you want to generate
  * @return      {String}            The generated css
  *
+ * @snippet         @sugar.ui.dropdown.classes
+ * 
  * @example     css
- * @sugar.ui.dropdown.classes;
+ * \@sugar.ui.dropdown.classes;
  *
  * @since      2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)

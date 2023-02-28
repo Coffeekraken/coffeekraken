@@ -34,6 +34,7 @@ import __SMonorepoUpgradeParamsInterface from './interface/SMonorepoUpgradeParam
  * @extends             SClass
  * @platform            node
  * @status              beta
+ * @private
  *
  * This class represent a monorepo with some features like executing a command on all packages, list all the packages, upgrade each package's package.json, etc...
  *

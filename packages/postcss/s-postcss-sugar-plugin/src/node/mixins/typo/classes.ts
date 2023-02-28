@@ -14,8 +14,10 @@ import __faker from 'faker';
  *
  * @return        {Css}         The generated css
  *
+ * @snippet         @sugar.typo.classes
+ * 
  * @example        css
- * @sugar.typo.classes;
+ * \@sugar.typo.classes;
  *
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)

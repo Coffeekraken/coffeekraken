@@ -6,7 +6,7 @@ import {
     __isChildProcess,
     __isClass,
     __isNode,
-    __isPlainObject,
+    __isPlainObject
 } from '@coffeekraken/sugar/is';
 import { __deepMerge } from '@coffeekraken/sugar/object';
 import __toString from '@coffeekraken/sugar/shared/string/toString';
@@ -20,15 +20,20 @@ import __globToRegex from 'glob-to-regexp';
  * @platform            node
  * @platform            js
  * @status                beta
- *
+ * @private
  *
  * @todo      interface
  * @todo      doc
  * @todo      tests
  * @todo      Add a "pipe" capabilities on events to allow for "throttle", "debounce", etc...
- *
+ * 
  * @example         js
- * import SEventEmitter from '@coffeekraken/sugar/js/event/SEventEmitter';
+ * import __SEventEmitter from '@coffeekraken/s-event-emitter';
+ * const emitter = new __SEventEmitter();
+ * emitter.emit('something', myData);
+ * emitter.on('something', data => {
+ *     // do something...
+ * });
  *
  * @since       2.0.0
  * @author 		Olivier Bossel<olivier.bossel@gmail.com>

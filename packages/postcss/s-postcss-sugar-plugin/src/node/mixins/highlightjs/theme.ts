@@ -12,8 +12,10 @@ import __SInterface from '@coffeekraken/s-interface';
  *
  * @return        {Css}         The generated css
  *
+ * @snippet         @sugar.highlightjs.theme
+ * 
  * @example        css
- * @sugar.highlightjs.theme;
+ * \@sugar.highlightjs.theme;
  *
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)

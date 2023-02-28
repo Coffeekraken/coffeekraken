@@ -17,8 +17,10 @@ import __faker from 'faker';
  * @param       {('bare'|'lnf'|'vr'|'tf')[]}        [scope=['bare', 'lnf', 'vr', 'tf']]      The scope you want to generate
  * @return      {Css}                   The corresponding css
  *
+ * @snippet         @sugar.checkbox.classes
+ * 
  * @example       css
- * @sugar.ui.form.classes();
+ * \@sugar.ui.form.classes();
  *
  * @since     2.0.0
  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)

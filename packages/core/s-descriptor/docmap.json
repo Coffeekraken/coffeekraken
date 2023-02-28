@@ -3,203 +3,6 @@
     "extends": [],
     "generated": {
         "map": {
-            "@coffeekraken.s-descriptor.shared.SDescriptor": {
-                "id": "@coffeekraken.s-descriptor.shared.SDescriptor",
-                "name": "SDescriptor",
-                "type": {
-                    "types": [
-                        {
-                            "type": "Class"
-                        }
-                    ],
-                    "raw": "Class"
-                },
-                "param": {
-                    "settings": {
-                        "name": "settings",
-                        "type": {
-                            "types": [
-                                {
-                                    "type": "ISDescriptorSettings"
-                                }
-                            ],
-                            "raw": "ISDescriptorSettings"
-                        },
-                        "description": "An object of setting to configure your descriptor instance",
-                        "defaultStr": ""
-                    }
-                },
-                "platform": [
-                    {
-                        "name": "node",
-                        "description": ""
-                    },
-                    {
-                        "name": "js",
-                        "description": ""
-                    }
-                ],
-                "description": "Make a description...",
-                "namespace": "@coffeekraken.s-descriptor.shared",
-                "status": "beta",
-                "example": [
-                    {
-                        "language": "js",
-                        "code": "import SDescriptor from '@coffeekraken/sugar/js/descriptor/SDescriptor';\nclass MyDescriptor extends SDescriptor {\n   constructor(settings) {\n     super(settings);\n     // do something...\n   }\n}"
-                    }
-                ],
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "_SDescriptor.ts",
-                "extension": "ts",
-                "relPath": "src/shared/_SDescriptor.ts",
-                "children": {
-                    "rules": {
-                        "id": "s2f0a3a23bc4509bfae6ffdf4e30b001ef40916077bfb95609e9345a7b19790f9",
-                        "name": "rules",
-                        "type": {
-                            "types": [
-                                {
-                                    "type": "Object"
-                                }
-                            ],
-                            "raw": "Object"
-                        },
-                        "description": "Store the registered rules into a simple object",
-                        "static": "true",
-                        "since": "2.0.0",
-                        "author": {
-                            "name": "Olivier Bossel",
-                            "email": "olivier.bossel@gmail.com"
-                        }
-                    },
-                    "type": {
-                        "id": "s795529aae9c7105c94769245f3cf7b5c847095ec4de44b4aad9ae086a8737e49",
-                        "name": "type",
-                        "type": {
-                            "types": [
-                                {
-                                    "type": "String"
-                                }
-                            ],
-                            "raw": "String"
-                        },
-                        "default": "Object",
-                        "description": "Specify the type of the values that this descriptor is made for.\nCan be:",
-                        "static": "true",
-                        "since": "2.0.0",
-                        "author": {
-                            "name": "Olivier Bossel",
-                            "email": "olivier.bossel@gmail.com"
-                        }
-                    },
-                    "registerrule": {
-                        "id": "s0f19bc366d576bac7277c20e03e814ff4dc8496159a6ca364b5138cb12d0b8ad",
-                        "name": "registerRule",
-                        "type": {
-                            "types": [
-                                {
-                                    "type": "Function"
-                                }
-                            ],
-                            "raw": "Function"
-                        },
-                        "param": {
-                            "rule": {
-                                "name": "rule",
-                                "type": {
-                                    "types": [
-                                        {
-                                            "type": "ISDescriptorRule"
-                                        }
-                                    ],
-                                    "raw": "ISDescriptorRule"
-                                },
-                                "description": "The rule object to register",
-                                "defaultStr": ""
-                            }
-                        },
-                        "description": "This static method allows you to register a new rule\nby passing a valid ISDescriptorRule object",
-                        "static": "true",
-                        "since": "2.0.0",
-                        "author": {
-                            "name": "Olivier Bossel",
-                            "email": "olivier.bossel@gmail.com"
-                        }
-                    },
-                    "constructor": {
-                        "id": "sea1d71c951c0f396e0a8848fdace207bd0312608d7bc1e7a991b3072dcaceedd",
-                        "name": "constructor",
-                        "type": {
-                            "types": [
-                                {
-                                    "type": "Function"
-                                }
-                            ],
-                            "raw": "Function"
-                        },
-                        "description": "Constructor",
-                        "since": "2.0.0",
-                        "author": {
-                            "name": "Olivier Bossel",
-                            "email": "olivier.bossel@gmail.com",
-                            "url": "https://coffeekraken.io"
-                        }
-                    },
-                    "apply": {
-                        "id": "s8ca9f191eb2958ddacc4ac2aa58973ed3044099da9372961803a7474d734f850",
-                        "name": "apply",
-                        "type": {
-                            "types": [
-                                {
-                                    "type": "Function"
-                                }
-                            ],
-                            "raw": "Function"
-                        },
-                        "param": {
-                            "value": {
-                                "name": "value",
-                                "type": {
-                                    "types": [
-                                        {
-                                            "type": "Any"
-                                        }
-                                    ],
-                                    "raw": "Any"
-                                },
-                                "description": "The value to apply the descriptor on",
-                                "defaultStr": ""
-                            },
-                            "settings": {
-                                "name": "settings",
-                                "type": {
-                                    "types": [
-                                        {
-                                            "type": "ISDescriptorSettings"
-                                        }
-                                    ],
-                                    "raw": "ISDescriptorSettings"
-                                },
-                                "description": "An object of settings to configure your descriptor. These settings will override the base ones passed in the constructor",
-                                "default": {},
-                                "defaultStr": "{}"
-                            }
-                        },
-                        "description": "This method simply apply the descriptor instance on the passed value.\nThe value can be anything depending on the descriptor you use.\nWhen you pass an Array, by default it will apply the descriptor on\neach array items. If you don't want this behavior and the Array passed has to be\ntreated as a single value, pass the \"arrayAsValue\" setting to true",
-                        "since": "2.0.0",
-                        "author": {
-                            "name": "Olivier Bossel",
-                            "email": "olivier.bossel@gmail.com",
-                            "url": "https://coffeekraken.io"
-                        }
-                    }
-                }
-            },
             "@coffeekraken.s-descriptor.shared.SDescriptorResult": {
                 "id": "@coffeekraken.s-descriptor.shared.SDescriptorResult",
                 "name": "SDescriptorResult",
@@ -285,6 +88,17 @@
                             ],
                             "raw": "Function"
                         },
+                        "return": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Boolean"
+                                    }
+                                ],
+                                "raw": "Boolean"
+                            },
+                            "description": "true if no issue(s), false if not"
+                        },
                         "description": "This method return true if theirs no issues, false if not",
                         "since": "2.0.0",
                         "author": {
@@ -338,6 +152,17 @@
                             ],
                             "raw": "Functio n"
                         },
+                        "return": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
+                            "description": "The result object in string format"
+                        },
                         "description": "This method return a string terminal compatible of this result object",
                         "since": "2.0.0",
                         "author": {
@@ -356,6 +181,17 @@
                                 }
                             ],
                             "raw": "Function"
+                        },
+                        "return": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
+                            "description": "The result object in string format"
                         },
                         "description": "This method return a string terminal compatible of this result object",
                         "since": "2.0.0",

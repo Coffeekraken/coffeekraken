@@ -8,7 +8,7 @@ import { __dirname } from '@coffeekraken/sugar/fs';
 import {
     __isChildProcess,
     __isClass,
-    __isPlainObject,
+    __isPlainObject
 } from '@coffeekraken/sugar/is';
 import { __deepMerge } from '@coffeekraken/sugar/object';
 import { __onProcessExit, __spawn } from '@coffeekraken/sugar/process';
@@ -25,7 +25,7 @@ import {
     ISProcessParams,
     ISProcessProcessObj,
     ISProcessResultObject,
-    ISProcessSettings,
+    ISProcessSettings
 } from './ISProcess';
 
 /**
@@ -35,6 +35,7 @@ import {
  * @extends             SEventEmitter
  * @platform            node
  * @status              beta
+ * @private
  *
  * This class represent an SProcess run iteration that store things like
  * the value, the startTime, endTime, duration, state, etc...

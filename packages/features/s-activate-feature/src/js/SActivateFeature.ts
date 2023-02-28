@@ -3,7 +3,7 @@ import { __unique } from '@coffeekraken/sugar/array';
 import {
     __expandTemplate,
     __querySelectorLive,
-    __scrollSpy,
+    __scrollSpy
 } from '@coffeekraken/sugar/dom';
 import { __deepMerge, __get } from '@coffeekraken/sugar/object';
 import __SActivateFeatureInterface from './interface/SActivateFeatureInterface';
@@ -61,6 +61,17 @@ export interface ISActivateActivateParams {
  * @event           s-activate.activate             Dispatched from each targets when they are activated
  * @event           s-activate.unactivate           Dispatched from each targets when they are unactivated
  *
+ * @import          import { define as __SActivateFeatureDefine } from '@coffeekraken/s-activate-feature';
+ * 
+ * @snippet         __SActivateFeatureDefine($1)
+ * 
+ * @install         js
+ * import { define as __SActivateFeatureDefine } from '@coffeekraken/s-activate-feature';
+ * __SActivateFeatureDefine();
+ * 
+ * @install         bash
+ * npm i @coffeekraken/s-activate-feature
+ * 
  * @example         html            Simple click activation
  * <a class="s-btn s-color:accent" href="#my-element" s-activate>Click me!</a>
  * <div id="my-element" class="s-radius s-p:30">I will be activated on click</div>

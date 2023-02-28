@@ -1917,6 +1917,20 @@
                         "defaultStr": ""
                     }
                 },
+                "return": {
+                    "type": {
+                        "types": [
+                            {
+                                "type": "array",
+                                "of": [
+                                    "any"
+                                ]
+                            }
+                        ],
+                        "raw": "any[]"
+                    },
+                    "description": "The filtered array"
+                },
                 "platform": [
                     {
                         "name": "js",
@@ -2025,6 +2039,20 @@
                         "default": {},
                         "defaultStr": "{}"
                     }
+                },
+                "return": {
+                    "type": {
+                        "types": [
+                            {
+                                "type": "SPromise",
+                                "of": [
+                                    "HTMLElement"
+                                ]
+                            }
+                        ],
+                        "raw": "SPromise<HTMLElement>"
+                    },
+                    "description": "An SPromise instance on which to listen for nodes using the \"node\" event"
                 },
                 "platform": [
                     {

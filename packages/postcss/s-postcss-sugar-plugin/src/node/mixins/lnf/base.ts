@@ -16,6 +16,7 @@ export { postcssSugarPluginLiikAndFeelBaseInterface as interface };
  * @type          PostcssMixin
  * @platform      postcss
  * @status        beta
+ * @private
  *
  * This mixin apply some base look and feel depending on the current theme like:
  *
@@ -25,8 +26,10 @@ export { postcssSugarPluginLiikAndFeelBaseInterface as interface };
  * @param       {String}        layout      The layout to generate
  * @return      {Css}                   The corresponding grid css
  *
+ * @snippet         @sugar.lnf.base
+ * 
  * @example       css
- * @sugar.lnf.base;
+ * \@sugar.lnf.base;
  *
  * @since     2.0.0
  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)

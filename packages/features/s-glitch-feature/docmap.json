@@ -30,7 +30,10 @@
                 ],
                 "description": "This feature allows you to apply some nice glitch effects on any HTMLElement.",
                 "namespace": "@coffeekraken.s-glitch-feature.js",
-                "status": "beta",
+                "status": "wip",
+                "snippet": {
+                    "label": "__SGlitchFeatureDefine($1)"
+                },
                 "example": [
                     {
                         "language": "html",

@@ -67,6 +67,9 @@
                 "description": "This package expose a simple `SFormValidateFeature` class that allows you to validate\nyour forms before sending them to your backend.",
                 "namespace": "@coffeekraken.s-form-validate-feature.js",
                 "status": "beta",
+                "snippet": {
+                    "label": "__SFormValidateFeatureDefine($1)"
+                },
                 "example": [
                     {
                         "language": "html",

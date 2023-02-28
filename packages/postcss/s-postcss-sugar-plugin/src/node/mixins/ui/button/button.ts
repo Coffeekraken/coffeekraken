@@ -15,6 +15,8 @@ import __STheme from '@coffeekraken/s-theme';
  * @param       {('bare'|'lnf')[]}        [scope=['bare', 'lnf']]      The scope you want to generate
  * @return      {Css}                   The corresponding css
  *
+ * @snippet     @sugar.ui.button
+ * 
  * @example       css
  * .my-element {
  *      \@sugar.ui.button();

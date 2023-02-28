@@ -138,6 +138,10 @@
                 "description": "This represent the main code formatter class that allows you to format code like js, css, etc...\nAll the code formatters have to be implemented by exporting an object of type ISCodeFormatterFormatter.",
                 "namespace": "@coffeekraken.s-code-formatter.node",
                 "status": "beta",
+                "snippet": {
+                    "label": "__SCodeFormatter($1)",
+                    "code": "const codeFormatter = new __SCodeFormatter();\nconst codeFormatterResult = await codeFormatter.format($1);"
+                },
                 "example": [
                     {
                         "language": "js",
@@ -200,6 +204,20 @@
                             ],
                             "raw": "Function"
                         },
+                        "return": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "array",
+                                        "of": [
+                                            "String"
+                                        ]
+                                    }
+                                ],
+                                "raw": "String[]"
+                            },
+                            "description": "An array of handled extensions"
+                        },
                         "description": "Return an array of all the handled extensions with the registered formatter",
                         "static": "true",
                         "since": "2.0.0",
@@ -234,6 +252,17 @@
                                 "description": "The extension to get the formatter from",
                                 "defaultStr": ""
                             }
+                        },
+                        "return": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "ISCodeFormatterFormatter"
+                                    }
+                                ],
+                                "raw": "ISCodeFormatterFormatter"
+                            },
+                            "description": "The formatter object"
                         },
                         "description": "Return the appropriate formatter depending on the passed extension",
                         "static": "true",

@@ -67,6 +67,9 @@
                 "description": "This component allows you to create easily nice google map with custom marker(s) on it.",
                 "namespace": "@coffeekraken.s-google-map-component.js",
                 "status": "beta",
+                "snippet": {
+                    "label": "__SGoogleMapComponentDefine($1)"
+                },
                 "example": [
                     {
                         "language": "html",
@@ -454,6 +457,46 @@
                 "relPath": "src/js/interface/SGoogleMapComponentInterface.ts",
                 "children": {}
             },
+            "@coffeekraken.s-google-map-component.node.postcss.mixins.ui.googleMap.classes": {
+                "id": "@coffeekraken.s-google-map-component.node.postcss.mixins.ui.googleMap.classes",
+                "name": "classes",
+                "type": {
+                    "types": [
+                        {
+                            "type": "PostcssMixin"
+                        }
+                    ],
+                    "raw": "PostcssMixin"
+                },
+                "platform": [
+                    {
+                        "name": "css",
+                        "description": ""
+                    }
+                ],
+                "description": "This mixin represent a google map",
+                "namespace": "@coffeekraken.s-google-map-component.node.postcss.mixins.ui.googleMap",
+                "status": "beta",
+                "snippet": {
+                    "label": "@sugar.ui.googleMap.classes($1);"
+                },
+                "example": [
+                    {
+                        "language": "css",
+                        "code": "@sugar.ui.googleMap.classes;"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "classes.ts",
+                "extension": "ts",
+                "relPath": "src/node/postcss/mixins/ui/googleMap/classes.ts",
+                "children": {}
+            },
             "@coffeekraken.s-google-map-component.ui.googleMap.googleMap": {
                 "id": "@coffeekraken.s-google-map-component.ui.googleMap.googleMap",
                 "name": "googleMap",
@@ -474,6 +517,9 @@
                 "description": "Apply the google map style to any s-google-map element",
                 "namespace": "@coffeekraken.s-google-map-component.ui.googleMap",
                 "status": "beta",
+                "snippet": {
+                    "label": "@sugar.ui.googleMap($1);"
+                },
                 "example": [
                     {
                         "language": "css",
@@ -489,6 +535,46 @@
                 "filename": "googleMap.ts",
                 "extension": "ts",
                 "relPath": "src/node/postcss/mixins/ui/googleMap/googleMap.ts",
+                "children": {}
+            },
+            "@coffeekraken.s-google-map-component.node.postcss.mixins.ui.googleMapMarker.classes": {
+                "id": "@coffeekraken.s-google-map-component.node.postcss.mixins.ui.googleMapMarker.classes",
+                "name": "classes",
+                "type": {
+                    "types": [
+                        {
+                            "type": "PostcssMixin"
+                        }
+                    ],
+                    "raw": "PostcssMixin"
+                },
+                "platform": [
+                    {
+                        "name": "css",
+                        "description": ""
+                    }
+                ],
+                "description": "This mixin represent a google map marker",
+                "namespace": "@coffeekraken.s-google-map-component.node.postcss.mixins.ui.googleMapMarker",
+                "status": "beta",
+                "snippet": {
+                    "label": "@sugar.ui.googleMapMarker.classes($1);"
+                },
+                "example": [
+                    {
+                        "language": "css",
+                        "code": "@sugar.ui.googleMapMarker.classes;"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "classes.ts",
+                "extension": "ts",
+                "relPath": "src/node/postcss/mixins/ui/googleMapMarker/classes.ts",
                 "children": {}
             }
         }

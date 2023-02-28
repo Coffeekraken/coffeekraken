@@ -2,38 +2,6 @@
     "map": {},
     "extends": [],
     "generated": {
-        "map": {
-            "@coffeekraken.s-code-formatter-prettier.node.SCodeFormatterPrettier": {
-                "id": "@coffeekraken.s-code-formatter-prettier.node.SCodeFormatterPrettier",
-                "name": "SCodeFormatterPrettier",
-                "type": {
-                    "types": [
-                        {
-                            "type": "Class"
-                        }
-                    ],
-                    "raw": "Class"
-                },
-                "platform": [
-                    {
-                        "name": "node",
-                        "description": ""
-                    }
-                ],
-                "description": "This represent the prettier code formatter. It will format things like js, jsx, ts, tsx, json, css, less, scss, md, vue, hbs, php and html",
-                "namespace": "@coffeekraken.s-code-formatter-prettier.node",
-                "status": "beta",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://coffeekraken.io"
-                },
-                "filename": "SCodeFormatterPrettier.ts",
-                "extension": "ts",
-                "relPath": "src/node/SCodeFormatterPrettier.ts",
-                "children": {}
-            }
-        }
+        "map": {}
     }
 }

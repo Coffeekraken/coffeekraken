@@ -283,6 +283,27 @@
                         "defaultStr": "{}"
                     }
                 },
+                "setting": {
+                    "manager": {
+                        "name": "manager",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "string",
+                                    "value": "npm"
+                                },
+                                {
+                                    "type": "string",
+                                    "value": "yarn"
+                                }
+                            ],
+                            "raw": "'npm'|'yarn'"
+                        },
+                        "description": "Specify the package manager you want to use",
+                        "default": "__SSugarConfig.get('package.manager')",
+                        "defaultStr": "__SSugarConfig.get('package.manager')"
+                    }
+                },
                 "platform": [
                     {
                         "name": "node",
@@ -292,10 +313,13 @@
                 "description": "This class represent a package (with a package.json) file. It let you manage some of your package routine easily like exporting in your package.json the files specified in the\n`package.config.ts` configuration file, renaming your package with ease (folder, package.json, etc...), and more...",
                 "namespace": "@coffeekraken.s-package.node",
                 "status": "beta",
+                "snippet": {
+                    "label": "new __SPackage($1)"
+                },
                 "example": [
                     {
                         "language": "js",
-                        "code": "import SPackage from '@coffeekraken/s-package';\nconst builder = new SPackage({\n     package: {\n         // settings here...\n     }\n});\nawait package.exports();"
+                        "code": "import __SPackage from '@coffeekraken/s-package';\nconst builder = new __SPackage();\nawait package.install();"
                     }
                 ],
                 "since": "2.0.0",
@@ -357,6 +381,17 @@
                                 "defaultStr": "{}"
                             }
                         },
+                        "return": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Promise"
+                                    }
+                                ],
+                                "raw": "Promise"
+                            },
+                            "description": "An Promise instance that need to be resolved at the end of the exports"
+                        },
                         "description": "This method allows you to search for \"exportable\" files defined in params and export them in the package.json file.",
                         "async": "true",
                         "since": "2.0.0",
@@ -395,6 +430,17 @@
                                 "default": {},
                                 "defaultStr": "{}"
                             }
+                        },
+                        "return": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Promise"
+                                    }
+                                ],
+                                "raw": "Promise"
+                            },
+                            "description": "An Promise instance that need to be resolved at the end of the install"
                         },
                         "description": "This method allows you to install dependencies in a package",
                         "async": "true",
@@ -435,6 +481,17 @@
                                 "defaultStr": "{}"
                             }
                         },
+                        "return": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Promise"
+                                    }
+                                ],
+                                "raw": "Promise"
+                            },
+                            "description": "An Promise instance that need to be resolved at the end of the check"
+                        },
                         "description": "This method allows you to check unused, missing dependencies in a package",
                         "async": "true",
                         "since": "2.0.0",
@@ -474,6 +531,17 @@
                                 "defaultStr": "{}"
                             }
                         },
+                        "return": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Promise"
+                                    }
+                                ],
+                                "raw": "Promise"
+                            },
+                            "description": "An Promise instance that need to be resolved at the end of the rename"
+                        },
                         "description": "This method allows you to rename a package (folder, package.json, composer.json, etc...)",
                         "async": "true",
                         "since": "2.0.0",
@@ -512,6 +580,17 @@
                                 "default": {},
                                 "defaultStr": "{}"
                             }
+                        },
+                        "return": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Promise"
+                                    }
+                                ],
+                                "raw": "Promise"
+                            },
+                            "description": "An Promise instance that need to be resolved at the end of the rename"
                         },
                         "description": "This method allows you to apply the default package.json to your package.",
                         "async": "true",
@@ -568,9 +647,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "SPackageAddReadmeParamsInterface.js",
-                "extension": "js",
-                "relPath": "src/node/interface/SPackageAddReadmeParamsInterface.js",
+                "filename": "SPackageAddReadmeParamsInterface.ts",
+                "extension": "ts",
+                "relPath": "src/node/interface/SPackageAddReadmeParamsInterface.ts",
                 "children": {}
             },
             "@coffeekraken.s-package.node.interface.SPackageApplyDefaultPackageJsonParamsInterface": {

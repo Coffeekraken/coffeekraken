@@ -11,6 +11,8 @@ import __SInterface from '@coffeekraken/s-interface';
  *
  * @return        {Css}         The generated css
  *
+ * @snippet         @sugar.truncate($1)
+ * 
  * @example        css
  * .my-cool-element {
  *    \@sugar.truncate(2);

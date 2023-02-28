@@ -132,6 +132,17 @@
                             ],
                             "raw": "Function"
                         },
+                        "return": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Promise"
+                                    }
+                                ],
+                                "raw": "Promise"
+                            },
+                            "description": "The promise through which you will be notified when data are here"
+                        },
                         "description": "Send the request and return a promise that will be resolved once all the requests\nhave been made or rejected if one of the requests has returned an error...",
                         "example": [
                             {

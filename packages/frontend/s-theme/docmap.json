@@ -10261,11 +10261,14 @@
                 ],
                 "description": "This class represent the sugar theme you've passed the name in the constructor.\nOnce you have an instance of this theme you will have access to a lot of utilities\nmethods like \"loopOnColors\", etc...",
                 "namespace": "@coffeekraken.s-theme.js",
-                "status": "beta",
+                "status": "wip",
+                "snippet": {
+                    "label": "new __STheme($1)"
+                },
                 "example": [
                     {
                         "language": "js",
-                        "code": "import STheme from '@coffeekraken/s-theme';\nconst theme = new STheme();\ntheme.loopOnColors(({name, schema, value}) => {\n     // do something...\n});"
+                        "code": "import __STheme from '@coffeekraken/s-theme';\nconst theme = new __STheme();\ntheme.loopOnColors(({name, schema, value}) => {\n     // do something...\n});"
                     }
                 ],
                 "since": "2.0.0",
@@ -10391,6 +10394,17 @@
                                 "defaultStr": "document.querySelector('html')"
                             }
                         },
+                        "return": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "STheme"
+                                    }
+                                ],
+                                "raw": "STheme"
+                            },
+                            "description": "The STheme instance that represent the current applied theme"
+                        },
                         "description": "This method allows you to set the current applied theme and get back an STheme instance",
                         "static": "true",
                         "since": "2.0.0",
@@ -10453,6 +10467,17 @@
                                 "defaultStr": "document.querySelector('html')"
                             }
                         },
+                        "return": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "STheme"
+                                    }
+                                ],
+                                "raw": "STheme"
+                            },
+                            "description": "The STheme instance that represent the current applied theme"
+                        },
                         "description": "This method allows you to apply a theme on a particular $context HTMLElement",
                         "static": "true",
                         "since": "2.0.0",
@@ -10472,6 +10497,17 @@
                                 }
                             ],
                             "raw": "Function"
+                        },
+                        "return": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Boolean"
+                                    }
+                                ],
+                                "raw": "Boolean"
+                            },
+                            "description": "true if prefer dark mode, false if not"
                         },
                         "description": "This method just check if the user prefer the dark mode or not.",
                         "static": "true",
@@ -10522,6 +10558,17 @@
                                 "defaultStr": "document.querySelector('html')"
                             }
                         },
+                        "return": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "STheme"
+                                    }
+                                ],
+                                "raw": "STheme"
+                            },
+                            "description": "The STheme instance that represent the current applied theme"
+                        },
                         "description": "This method allows you to set the current applied theme variant and get back an STheme instance",
                         "static": "true",
                         "since": "2.0.0",
@@ -10541,6 +10588,17 @@
                                 }
                             ],
                             "raw": "Function"
+                        },
+                        "return": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "STheme"
+                                    }
+                                ],
+                                "raw": "STheme"
+                            },
+                            "description": "The STheme instance that represent the current applied theme"
                         },
                         "description": "This method allows you to init the your STheme instance, restore savec updated if their some, etc...",
                         "static": "true",
@@ -10578,6 +10636,17 @@
                                 "defaultStr": "true"
                             }
                         },
+                        "return": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Boolean"
+                                    }
+                                ],
+                                "raw": "Boolean"
+                            },
+                            "description": "True if inited, false if not (and will thro)"
+                        },
                         "description": "This method allows you to make sure the theme has been inited using the `__STheme.init()` static method.\nIf it's not the case, it will throw an error to make sure the developer knows why it's not working...",
                         "static": "true",
                         "since": "2.0.0",
@@ -10614,6 +10683,17 @@
                                 "defaultStr": "document.querySelector('html')"
                             }
                         },
+                        "return": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "any"
+                                    }
+                                ],
+                                "raw": "any"
+                            },
+                            "description": "The theme metas object containing the \"name\", \"theme\" and \"variant\" properties"
+                        },
                         "description": "This method allows you to get the theme metas like \"name\", \"theme\" and \"variant\" from the passed HTMLElement",
                         "static": "true",
                         "since": "2.0.0",
@@ -10633,6 +10713,17 @@
                                 }
                             ],
                             "raw": "Function"
+                        },
+                        "return": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "STheme"
+                                    }
+                                ],
+                                "raw": "STheme"
+                            },
+                            "description": "The STheme instance that represent the current applied theme"
                         },
                         "description": "This method allows you to get the current applied theme STheme instance",
                         "static": "true",
@@ -10816,6 +10907,17 @@
                                 "defaultStr": ""
                             }
                         },
+                        "return": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "STheme"
+                                    }
+                                ],
+                                "raw": "STheme"
+                            },
+                            "description": "The current theme instance"
+                        },
                         "description": "This method allows you to set a value of the current theme.\nSpecify the value you want to set using the dotPath syntax like \"color.accent.color\", etc...",
                         "since": "2.0.0",
                         "author": {
@@ -10878,6 +10980,17 @@
                                 "defaultStr": "document.querySelector('html')"
                             }
                         },
+                        "return": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "SColor"
+                                    }
+                                ],
+                                "raw": "SColor"
+                            },
+                            "description": "An SColor instance that you can make use of"
+                        },
                         "description": "THis method allows you to access a particular theme color in a particular context",
                         "since": "2.0.0",
                         "author": {
@@ -10896,6 +11009,17 @@
                                 }
                             ],
                             "raw": "Function"
+                        },
+                        "return": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Boolean"
+                                    }
+                                ],
+                                "raw": "Boolean"
+                            },
+                            "description": "true if variant is dark, false otherwise"
                         },
                         "description": "This method returns true if the theme variant is dark, false if not",
                         "since": "2.0.0",
@@ -10931,6 +11055,17 @@
                                 "defaultStr": ""
                             }
                         },
+                        "return": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "STheme"
+                                    }
+                                ],
+                                "raw": "STheme"
+                            },
+                            "description": "The current instance"
+                        },
                         "description": "This method allows you to apply the overrided configs on your dom context.",
                         "since": "2.0.0",
                         "author": {
@@ -10949,6 +11084,17 @@
                                 }
                             ],
                             "raw": "Function"
+                        },
+                        "return": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "STheme"
+                                    }
+                                ],
+                                "raw": "STheme"
+                            },
+                            "description": "The current theme instance"
                         },
                         "description": "This method allows you to save locally the current theme with the changes applied using the `set` method.\nThe theme will be savec in localStorage and restored on page load to apply updates correctly",
                         "since": "2.0.0",
@@ -10969,6 +11115,17 @@
                             ],
                             "raw": "Function"
                         },
+                        "return": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "STheme"
+                                    }
+                                ],
+                                "raw": "STheme"
+                            },
+                            "description": "The current theme instance"
+                        },
                         "description": "This method allows you to restore locally the current theme with the changes applied using the `set` method.",
                         "since": "2.0.0",
                         "author": {
@@ -10987,6 +11144,17 @@
                                 }
                             ],
                             "raw": "Function"
+                        },
+                        "return": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "STheme"
+                                    }
+                                ],
+                                "raw": "STheme"
+                            },
+                            "description": "The current theme instance"
                         },
                         "description": "This method allows you to clear locally the current theme with the changes applied using the `set` method.",
                         "since": "2.0.0",
@@ -11099,6 +11267,17 @@
                             ],
                             "raw": "Function"
                         },
+                        "return": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "STheme"
+                                    }
+                                ],
+                                "raw": "STheme"
+                            },
+                            "description": "The STheme instance that represent the current applied theme"
+                        },
                         "description": "This method allows you to get the current applied theme STheme instance",
                         "static": "true",
                         "since": "2.0.0",
@@ -11160,6 +11339,17 @@
                                 "description": "The context in which to get the color",
                                 "defaultStr": "document.body"
                             }
+                        },
+                        "return": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "SColor"
+                                    }
+                                ],
+                                "raw": "SColor"
+                            },
+                            "description": "An SColor instance that you can make use of"
                         },
                         "description": "THis method allows you to access a particular theme color",
                         "since": "2.0.0",
@@ -11251,6 +11441,17 @@
                                 "description": "The media object to process",
                                 "defaultStr": ""
                             }
+                        },
+                        "return": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Object"
+                                    }
+                                ],
+                                "raw": "Object"
+                            },
+                            "description": "THe new media object with queries sorted correctly"
                         },
                         "description": "This function takes as input the \"media\" object of the `frontspec.json` file and sort the \"queries\"\ndepending on the \"defaultAction\" specified.",
                         "static": "true",
@@ -11351,6 +11552,17 @@
                             ],
                             "raw": "Function"
                         },
+                        "return": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Boolean"
+                                    }
+                                ],
+                                "raw": "Boolean"
+                            },
+                            "description": "true if variant is dark, false otherwise"
+                        },
                         "description": "This method returns true if the theme variant is dark, false if not",
                         "static": "true",
                         "since": "2.0.0",
@@ -11371,6 +11583,17 @@
                             ],
                             "raw": "Function"
                         },
+                        "return": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Boolean"
+                                    }
+                                ],
+                                "raw": "Boolean"
+                            },
+                            "description": "true if variant is dark, false otherwise"
+                        },
                         "description": "This method returns true if the theme is configured to be mobile first.\nMobile first is true when the \"config.theme.media.defaultAction\" is set to \"<=\"",
                         "static": "true",
                         "since": "2.0.0",
@@ -11390,6 +11613,17 @@
                                 }
                             ],
                             "raw": "Function"
+                        },
+                        "return": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "any"
+                                    }
+                                ],
+                                "raw": "any"
+                            },
+                            "description": "The theme metas object containing the \"name\", \"theme\" and \"variant\" properties"
                         },
                         "description": "This method allows you to get the theme metas like \"name\", \"theme\" and \"variant\" from the passed HTMLElement",
                         "static": "true",
@@ -11458,6 +11692,17 @@
                                 "defaultStr": ""
                             }
                         },
+                        "return": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "STheme"
+                                    }
+                                ],
+                                "raw": "STheme"
+                            },
+                            "description": "An instance of the STheme class representing the requested theme"
+                        },
                         "description": "This static method allows you to get quicky an STheme instance of the passed theme.\nIt will also check if an instance already exists for this theme and return it if so...",
                         "static": "true",
                         "since": "2.0.0",
@@ -11494,6 +11739,17 @@
                                 "defaultStr": "''"
                             }
                         },
+                        "return": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
+                            "description": "The generated hash for this config"
+                        },
                         "description": "This hash accessor gives you access to the actual theme configuration hash.\nYou can specify a dot path to get the hash of a sub configuration",
                         "since": "2.0.0",
                         "author": {
@@ -11527,6 +11783,17 @@
                                 "description": "The size you want to resolve",
                                 "defaultStr": ""
                             }
+                        },
+                        "return": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "any"
+                                    }
+                                ],
+                                "raw": "any"
+                            },
+                            "description": "The final resolved size"
                         },
                         "description": "This method allows you to get back the actual final font-size value of the passed one",
                         "since": "2.0.0",
@@ -11562,6 +11829,17 @@
                                 "defaultStr": ""
                             }
                         },
+                        "return": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "any"
+                                    }
+                                ],
+                                "raw": "any"
+                            },
+                            "description": "The final resolved size"
+                        },
                         "description": "This method allows you to get back the actual final padding value of the passed one",
                         "since": "2.0.0",
                         "author": {
@@ -11595,6 +11873,17 @@
                                 "description": "The size you want to resolve",
                                 "defaultStr": ""
                             }
+                        },
+                        "return": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "any"
+                                    }
+                                ],
+                                "raw": "any"
+                            },
+                            "description": "The final resolved size"
                         },
                         "description": "This method allows you to get back the actual final margin value of the passed one",
                         "since": "2.0.0",
@@ -11630,6 +11919,17 @@
                                 "defaultStr": ""
                             }
                         },
+                        "return": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "any"
+                                    }
+                                ],
+                                "raw": "any"
+                            },
+                            "description": "The final resolved size"
+                        },
                         "description": "This method allows you to get back the actual final border-radius value of the passed one",
                         "since": "2.0.0",
                         "author": {
@@ -11663,6 +11963,17 @@
                                 "description": "The size you want to resolve",
                                 "defaultStr": ""
                             }
+                        },
+                        "return": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "any"
+                                    }
+                                ],
+                                "raw": "any"
+                            },
+                            "description": "The final resolved size"
                         },
                         "description": "This method allows you to get back the actual final border-radius value of the passed one",
                         "since": "2.0.0",
@@ -11740,6 +12051,17 @@
                                 "defaultStr": "{}"
                             }
                         },
+                        "return": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "any"
+                                    }
+                                ],
+                                "raw": "any"
+                            },
+                            "description": "The final resolved color"
+                        },
                         "setting": {
                             "return": {
                                 "name": "return",
@@ -11795,6 +12117,17 @@
                                 "defaultStr": ""
                             }
                         },
+                        "return": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
+                            "description": "The proper css variable string that represent this value with his fallback just in case"
+                        },
                         "description": "This function take a simple theme dot path and returns the proper\nvariable string with the value fallback.",
                         "example": [
                             {
@@ -11834,6 +12167,17 @@
                                 "description": "The media query you want to build",
                                 "defaultStr": ""
                             }
+                        },
+                        "return": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
+                            "description": "The builded media query (without brackets)"
                         },
                         "platform": [
                             {
@@ -11889,6 +12233,17 @@
                                 "defaultStr": ""
                             }
                         },
+                        "return": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "any"
+                                    }
+                                ],
+                                "raw": "any"
+                            },
+                            "description": "The resolved css value"
+                        },
                         "description": "This static method allows you to pass a css property with a value and get back his final value\nresolved depending on the theme configuration.",
                         "static": "true",
                         "since": "2.0.0",
@@ -11924,6 +12279,17 @@
                                 "defaultStr": ""
                             }
                         },
+                        "return": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Object"
+                                    }
+                                ],
+                                "raw": "Object"
+                            },
+                            "description": "The css properties object with resolved values"
+                        },
                         "description": "This static method allows you to passe a js object with some css properties and to\nresolve each of these properties values using the `resolveCssPropertyValue` method",
                         "static": "true",
                         "since": "2.0.0",
@@ -11958,6 +12324,17 @@
                                 "description": "An object to convert to css string",
                                 "defaultStr": ""
                             }
+                        },
+                        "return": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
+                            "description": "The processed css string"
                         },
                         "description": "This static method allows you to pass a javascript object that contain css properties\nand it will returns the processed css string. Some properties can accept internal theme configuration\nsettings like `font-size`, `color`, etc...:\n\n- `font-family`\n- `font-size`\n- `color`\n- `background-color`\n- `border-radius`: And all border-radius properties like `border-top-left-radius`, etc...\n- `border-width`\n- `transition`\n- `margin`: And all the margins properties like `margin-inline`, etc...\n- `padding`: And all the paddings properties like `padding-block`, etc...\n- `depth`: Special property that will apply nice shadows depending on your theme configuration\n- `default-color`: Apply the default color using `@sugar.color` mixin",
                         "status": "beta",
@@ -12008,6 +12385,17 @@
                                 "defaultStr": ""
                             }
                         },
+                        "return": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
+                            "description": "The generated css variables string"
+                        },
                         "description": "This static method allows you to remap a color to another and returns the needed css\nvariables string.",
                         "status": "beta",
                         "static": "true",
@@ -12057,6 +12445,17 @@
                                 "defaultStr": ""
                             }
                         },
+                        "return": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
+                            "description": "The converted css variables string"
+                        },
                         "description": "This static method allows you to transform a theme/variant into css variables",
                         "static": "true",
                         "since": "2.0.0",
@@ -12092,6 +12491,17 @@
                                 "defaultStr": ""
                             }
                         },
+                        "return": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Any"
+                                    }
+                                ],
+                                "raw": "Any"
+                            },
+                            "description": "The value of the getted configuration"
+                        },
                         "description": "This method allows you to access a value of the current theme\nusing a dot path like \"color.accent\", etc...\nThis method will not throw an error if nothing's found",
                         "since": "2.0.0",
                         "author": {
@@ -12125,6 +12535,17 @@
                                 "description": "The dot path of the config you want to get",
                                 "defaultStr": ""
                             }
+                        },
+                        "return": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Any"
+                                    }
+                                ],
+                                "raw": "Any"
+                            },
+                            "description": "The value of the getted configuration"
                         },
                         "description": "This method allows you to access a value of the current theme\nusing a dot path like \"color.accent\", etc...",
                         "since": "2.0.0",
@@ -12172,6 +12593,17 @@
                                 "description": "The value you want to set",
                                 "defaultStr": ""
                             }
+                        },
+                        "return": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "STheme"
+                                    }
+                                ],
+                                "raw": "STheme"
+                            },
+                            "description": "The current theme instance"
                         },
                         "description": "This method allows you to set a value of the current theme.\nSpecify the value you want to set using the dotPath syntax like \"color.accent.color\", etc...",
                         "since": "2.0.0",
@@ -12226,6 +12658,17 @@
                                 "defaultStr": ""
                             }
                         },
+                        "return": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
+                            "description": "The actual correct dotpath"
+                        },
                         "description": "This method alloes you to get the actual dotpath for the passed one.\nIf you try to get \"ui.range.borderRadius\" and that this config does not exists in the\nthemeUi file(s), it will fallback to \"ui.default.borderRadius\"",
                         "since": "2.0.0",
                         "author": {
@@ -12244,6 +12687,17 @@
                                 }
                             ],
                             "raw": "any"
+                        },
+                        "return": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Any"
+                                    }
+                                ],
+                                "raw": "Any"
+                            },
+                            "description": "The overrided config of the current theme"
                         },
                         "description": "This method allows you to get the overrided config of the current theme.\nThese configs are the ones that are overrided by the use of the `set` method.",
                         "since": "2.0.0",
@@ -12264,6 +12718,17 @@
                             ],
                             "raw": "Function"
                         },
+                        "return": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "STheme"
+                                    }
+                                ],
+                                "raw": "STheme"
+                            },
+                            "description": "The current theme instance"
+                        },
                         "description": "This method simply emit a \"saved\" event on the theme instance with details like the overrifed config.",
                         "since": "2.0.0",
                         "author": {
@@ -12282,6 +12747,17 @@
                                 }
                             ],
                             "raw": "ISThemesConfig"
+                        },
+                        "return": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "ISThemesConfig"
+                                    }
+                                ],
+                                "raw": "ISThemesConfig"
+                            },
+                            "description": "The themes configuration"
                         },
                         "description": "Get access to the themes configuration",
                         "since": "2.0.0",
@@ -12317,6 +12793,17 @@
                                 "defaultStr": ""
                             }
                         },
+                        "return": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "STheme"
+                                    }
+                                ],
+                                "raw": "STheme"
+                            },
+                            "description": "The current theme instance"
+                        },
                         "description": "This method allows you to restore some configs by merging the passed ones with the overrided configs.",
                         "since": "2.0.0",
                         "author": {
@@ -12336,6 +12823,17 @@
                             ],
                             "raw": "Function"
                         },
+                        "return": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "STheme"
+                                    }
+                                ],
+                                "raw": "STheme"
+                            },
+                            "description": "The current theme instance"
+                        },
                         "description": "This method allows you to clear the overrided configs and restore the default ones.",
                         "since": "2.0.0",
                         "author": {
@@ -12354,6 +12852,20 @@
                                 }
                             ],
                             "raw": "Function"
+                        },
+                        "return": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Record",
+                                        "of": [
+                                            "string, ISThemeColor"
+                                        ]
+                                    }
+                                ],
+                                "raw": "Record<string, ISThemeColor>"
+                            },
+                            "description": "The simple base colors map object"
                         },
                         "description": "This function returns a simple object with the base colors and their value\nfrom the theme config.",
                         "since": "2.0.0",

@@ -63,6 +63,10 @@
                 "description": "This class allows you to quickly access/update some configuration depending on the data adapters specified.\nThe base available data adapters are:\n- For node:\n- File system adapter: @coffeekraken/s-config/src/node/adapters/SConfigFsAdapter\n- For js:\n- Localstorage adapter: @coffeekraken/s-config/src/js/adapters/SConfigLsAdapter",
                 "namespace": "@coffeekraken.s-config.shared",
                 "status": "beta",
+                "snippet": {
+                    "label": "__SConfig($1)",
+                    "code": "new __SConfig($1);"
+                },
                 "example": [
                     {
                         "language": "js",
@@ -327,6 +331,17 @@
                                 "defaultStr": "this.settings.defaultAdapter"
                             }
                         },
+                        "return": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Promise"
+                                    }
+                                ],
+                                "raw": "Promise"
+                            },
+                            "description": "A promise that will be resolved with the loaded config"
+                        },
                         "description": "Load the config from the default adapter or from the passed adapter",
                         "example": [
                             {
@@ -351,6 +366,17 @@
                             ],
                             "raw": "Function"
                         },
+                        "return": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Promise"
+                                    }
+                                ],
+                                "raw": "Promise"
+                            },
+                            "description": "A promise resolved once the caching process has been done"
+                        },
                         "description": "Get the config from cache if possible. Otherwise it will resolve to undefined",
                         "example": [
                             {
@@ -374,6 +400,17 @@
                                 }
                             ],
                             "raw": "Function"
+                        },
+                        "return": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Promise"
+                                    }
+                                ],
+                                "raw": "Promise"
+                            },
+                            "description": "A promise resolved once the caching process has been done"
                         },
                         "description": "Save the config in the cache to load it faster next time",
                         "example": [
@@ -427,6 +464,17 @@
                                 "default": {},
                                 "defaultStr": "{}"
                             }
+                        },
+                        "return": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Mixed"
+                                    }
+                                ],
+                                "raw": "Mixed"
+                            },
+                            "description": "The value getted"
                         },
                         "description": "Get a config depending on the dotted object path passed and either using the first registered adapter found, or the passed one",
                         "example": [
@@ -494,6 +542,17 @@
                                 "defaultStr": "{}"
                             }
                         },
+                        "return": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Mixed"
+                                    }
+                                ],
+                                "raw": "Mixed"
+                            },
+                            "description": "The value setted"
+                        },
                         "description": "Set a config depending on the dotted object path passed and the value to set",
                         "example": [
                             {
@@ -518,6 +577,17 @@
                             ],
                             "raw": "Function"
                         },
+                        "return": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Any"
+                                    }
+                                ],
+                                "raw": "Any"
+                            },
+                            "description": "The configuration in object format"
+                        },
                         "description": "This method allows you to get the config in a simple object format",
                         "since": "2.0.0",
                         "author": {
@@ -536,6 +606,17 @@
                                 }
                             ],
                             "raw": "Function"
+                        },
+                        "return": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Any"
+                                    }
+                                ],
+                                "raw": "Any"
+                            },
+                            "description": "The configuration in object format"
                         },
                         "description": "This method allows you to get the config in a simple json object format",
                         "since": "2.0.0",
@@ -571,8 +652,76 @@
                         },
                         "description": "The adapter settings that let you work with the good data storage solution...",
                         "default": {},
-                        "defaultStr": "{}",
-                        "content": "- name (null) {String}: This specify the config name that you want to use.\n- defaultConfig ({}) {Object}: This specify the \"default\" config that you want.\n- appConfig ({}) {Object}: This specify the \"application\" level config that you want.\n- userConfig ({}) {Object}: This specify the \"user\" level config that you want. It's usually this config that is updated"
+                        "defaultStr": "{}"
+                    }
+                },
+                "return": {
+                    "type": {
+                        "types": [
+                            {
+                                "type": "Promise"
+                            }
+                        ],
+                        "raw": "Promise"
+                    },
+                    "description": "A promise that will be resolved once the data has been getted/saved..."
+                },
+                "setting": {
+                    "name": {
+                        "name": "name",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "String"
+                                }
+                            ],
+                            "raw": "String"
+                        },
+                        "description": "Specify the config name that you want to use.",
+                        "default": null,
+                        "defaultStr": "null"
+                    },
+                    "defaultConfig": {
+                        "name": "defaultConfig",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Any"
+                                }
+                            ],
+                            "raw": "Any"
+                        },
+                        "description": "Specify the \"default\" config that you want.",
+                        "default": {},
+                        "defaultStr": "{}"
+                    },
+                    "appConfig": {
+                        "name": "appConfig",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Any"
+                                }
+                            ],
+                            "raw": "Any"
+                        },
+                        "description": "Specify the \"application\" level config that you want.",
+                        "default": {},
+                        "defaultStr": "{}"
+                    },
+                    "userConfig": {
+                        "name": "userConfig",
+                        "type": {
+                            "types": [
+                                {
+                                    "type": "Any"
+                                }
+                            ],
+                            "raw": "Any"
+                        },
+                        "description": "Specify the \"user\" level config that you want. It's usually this config that is updated",
+                        "default": {},
+                        "defaultStr": "{}"
                     }
                 },
                 "platform": [
@@ -584,6 +733,17 @@
                 "description": "This Local Storage adapter for the SConfig class let you define a name for your config and then you can just\nlet the SConfig class do the work for you...",
                 "namespace": "@coffeekraken.s-config.sugar.js.config.adapters",
                 "status": "wip",
+                "snippet": {
+                    "label": "__SConfigLsAdapter($1)",
+                    "code": "new __SConfigLsAdapter($1)"
+                },
+                "example": [
+                    {
+                        "language": "js",
+                        "code": "import __SConfig, { __SConfigLsAdapter } from '@coffeekraken/s-config';\nconst config = new __SConfig($1, new __SConfigLsAdapter($2));"
+                    }
+                ],
+                "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",

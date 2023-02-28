@@ -6,7 +6,7 @@ import __SInterface from '@coffeekraken/s-interface';
  * @type           PostcssMixin
  * @interface   ./mounted
  * @platform      postcss
- * @status        beta
+ * @status        wip
  *
  * This mixin allows you to set some css applied only UNTIL a specific "state" has been
  * reached.

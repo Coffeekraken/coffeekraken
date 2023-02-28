@@ -14,6 +14,8 @@ import __STheme from '@coffeekraken/s-theme';
  * @param       {String}        opacity      The opacity to get
  * @return      {Css}                   The corresponding css
  *
+ * @snippet         sugar.opacity($1)
+ * 
  * @example       css
  * .my-element {
  *      opacity: sugar.opacity(20);

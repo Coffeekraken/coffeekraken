@@ -14,6 +14,8 @@ import { __isValidCssUnitValue } from '@coffeekraken/sugar/css';
  * @param       {String}        name      The font name to get
  * @return      {Css}                   The corresponding css
  *
+ * @snippet         sugar.font.family($1)
+ * 
  * @example       css
  * .my-element {
  *      font-family: sugar.font.family(code);

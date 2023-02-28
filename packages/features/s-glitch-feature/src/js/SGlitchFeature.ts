@@ -17,7 +17,7 @@ import __css from '../../../../src/css/s-glitch-feature.css'; // relative to /di
  * @interface       ./interface/SGlitchFeatureInterface.ts
  * @menu            Styleguide / Effects               /styleguide/effect/s-glitch-feature
  * @platform        js
- * @status          beta
+ * @status          wip
  *
  * This feature allows you to apply some nice glitch effects on any HTMLElement.
  *
@@ -26,6 +26,17 @@ import __css from '../../../../src/css/s-glitch-feature.css'; // relative to /di
  * @support          safari
  * @support          edge
  *
+ * @import          import { define as __SGlitchFeatureDefine } from '@coffeekraken/s-glitch-feature';
+ * 
+ * @snippet         __SGlitchFeatureDefine($1)
+ * 
+ * @install         js
+ * import { define as __SGlitchFeatureDefine } from '@coffeekraken/s-glitch-feature';
+ * __SGlitchFeatureDefine();
+ * 
+ * @install         bash
+ * npm i @coffeekraken/s-form-validate-feature
+ * 
  * @example         html            Highlight
  * <div class="s-radius s-bg:main s-depth s-mbe:30" style="height:100px" s-highlight>
  * </div>

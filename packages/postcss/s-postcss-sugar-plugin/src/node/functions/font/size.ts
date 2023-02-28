@@ -15,6 +15,8 @@ import __STheme from '@coffeekraken/s-theme';
  * @param       {Boolean}       [scalable='theme.scalable.font']      Whether to scale the value or not
  * @return      {Css}                   The corresponding css
  *
+ * @snippet         sugar.font.size($1)
+ * 
  * @example       css
  * .my-element {
  *    font-size: sugar.font.size(20);

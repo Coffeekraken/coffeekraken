@@ -14,6 +14,8 @@ import __SInterface from '@coffeekraken/s-interface';
  * @param           {'square'|'pill'}           $shape      The shape you want for your item
  * @return        {Css}           The generated css
  *
+ * @snippet         @sugar.shape($1)
+ * 
  * @example        css
  * .btn {
  *    @sugar.shape(square);

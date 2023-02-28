@@ -13,9 +13,11 @@ import __STheme from '@coffeekraken/s-theme';
  *
  * @return        {Css}           The generated css
  *
+ * @snippet         @sugar.scrollbar($1, $2, $3)
+ * 
  * @example        css
  * body {
- *    @sugar.scrollbar(accent, 5px);
+ *    @sugar.scrollbar(accent, complementary, 5px);
  * }
  *
  * @since       2.0.0

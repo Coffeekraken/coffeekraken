@@ -22,7 +22,7 @@
                 ],
                 "description": "This class allows you to get the css animation applied to the passed element and to control\nit's duration, state, etc...\nYou will also be able to scrub into your animation by passing a time value or a percentage.",
                 "namespace": "@coffeekraken.s-css-animation.js",
-                "status": "beta",
+                "status": "wip",
                 "example": [
                     {
                         "language": "js",
@@ -160,6 +160,17 @@
                                 "defaultStr": "this._animations[0]?.name"
                             }
                         },
+                        "return": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "SCssAnimation"
+                                    }
+                                ],
+                                "raw": "SCssAnimation"
+                            },
+                            "description": "Return the SCssAnimation instance to maintain chainability"
+                        },
                         "setting": {
                             "easing": {
                                 "name": "easing",
@@ -237,6 +248,17 @@
                             ],
                             "raw": "Function"
                         },
+                        "return": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "SCssAnimation"
+                                    }
+                                ],
+                                "raw": "SCssAnimation"
+                            },
+                            "description": "Return the SCssAnimation instance to maintain chainability"
+                        },
                         "description": "This method allows you to stop the current animation if their's one and seek to 0.",
                         "since": "2.0.0",
                         "author": {
@@ -285,6 +307,17 @@
                                 "defaultStr": "this._animations[0]?.name"
                             }
                         },
+                        "return": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "SCssAnimation"
+                                    }
+                                ],
+                                "raw": "SCssAnimation"
+                            },
+                            "description": "Return the SCssAnimation instance to maintain chainability"
+                        },
                         "description": "This method allows you to seek to a specific percentage of the animation",
                         "since": "2.0.0",
                         "author": {
@@ -318,6 +351,17 @@
                                 "description": "The name of the animation to get",
                                 "defaultStr": ""
                             }
+                        },
+                        "return": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "IGetAnimationsFromElementResult"
+                                    }
+                                ],
+                                "raw": "IGetAnimationsFromElementResult"
+                            },
+                            "description": "The animation corresponding to the passed name"
                         },
                         "description": "This method allows you to get an animation object by it's name",
                         "since": "2.0.0",

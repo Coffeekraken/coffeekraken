@@ -13,8 +13,10 @@ import __SInterface from '@coffeekraken/s-interface';
  * @param       {String[]}              [types=null]            The toggles type you want to generate
  * @return      {Css}                   The corresponding css
  *
+ * @snippet         @sugar.ui.toggle.classes
+ * 
  * @example       css
- * @sugar.ui.toggle.classes();
+ * \@sugar.ui.toggle.classes();
  *
  * @since     2.0.0
  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)

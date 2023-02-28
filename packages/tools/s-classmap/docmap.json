@@ -74,7 +74,7 @@
                 ],
                 "description": "This package allows you to compress your css classes/variables,\nto patch them in your HTML as well as to proxy js native functions\nlike classList.add, style.setProperty, etc, to reflect your minified classnames.",
                 "namespace": "@coffeekraken.s-classmap.js",
-                "status": "beta",
+                "status": "wip",
                 "example": [
                     {
                         "language": "js",
@@ -152,6 +152,20 @@
                                 "defaultStr": ""
                             }
                         },
+                        "return": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Promise",
+                                        "of": [
+                                            "Object"
+                                        ]
+                                    }
+                                ],
+                                "raw": "Promise<Object>"
+                            },
+                            "description": "The loaded classmap"
+                        },
                         "description": "Load a classmap from a url",
                         "async": "true",
                         "since": "2.0.0",
@@ -197,7 +211,7 @@
                 ],
                 "description": "This package allows you to compress your css classes/variables,\nto patch them in your HTML as well as to proxy js native functions\nlike classList.add, style.setProperty, etc, to reflect your minified classnames.",
                 "namespace": "@coffeekraken.s-classmap.node",
-                "status": "beta",
+                "status": "wip",
                 "example": [
                     {
                         "language": "js",
@@ -242,6 +256,17 @@
                             ],
                             "raw": "Function"
                         },
+                        "return": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Object"
+                                    }
+                                ],
+                                "raw": "Object"
+                            },
+                            "description": "The classmap json"
+                        },
                         "description": "This method simply load the classmap.json file at the root of your project",
                         "since": "2.0.0",
                         "author": {
@@ -259,6 +284,20 @@
                                 }
                             ],
                             "raw": "Function"
+                        },
+                        "return": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Promise",
+                                        "of": [
+                                            "Object"
+                                        ]
+                                    }
+                                ],
+                                "raw": "Promise<Object>"
+                            },
+                            "description": "The classmap json"
                         },
                         "description": "This method simply save the classmap.json file at the root of your project",
                         "since": "2.0.0",
@@ -373,7 +412,7 @@
                 ],
                 "description": "This package allows you to compress your css classes/variables,\nto patch them in your HTML as well as to proxy js native functions\nlike classList.add, style.setProperty, etc, to reflect your minified classnames.",
                 "namespace": "@coffeekraken.s-classmap.php",
-                "status": "beta",
+                "status": "wip",
                 "example": [
                     {
                         "language": "php",
@@ -435,6 +474,17 @@
                                 "defaultStr": ""
                             }
                         },
+                        "return": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
+                            "description": "The patched html"
+                        },
                         "platform": [
                             {
                                 "name": "php",
@@ -475,6 +525,17 @@
                                 "description": "The classmap.json file path to read",
                                 "defaultStr": ""
                             }
+                        },
+                        "return": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "Any"
+                                    }
+                                ],
+                                "raw": "Any"
+                            },
+                            "description": "The classmap json"
                         },
                         "platform": [
                             {
@@ -532,7 +593,7 @@
                 ],
                 "description": "This package allows you to compress your css classes/variables,\nto patch them in your HTML as well as to proxy js native functions\nlike classList.add, style.setProperty, etc, to reflect your minified classnames.",
                 "namespace": "@coffeekraken.s-classmap.shared",
-                "status": "beta",
+                "status": "wip",
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
@@ -603,6 +664,17 @@
                                 "description": "The html to patch",
                                 "defaultStr": ""
                             }
+                        },
+                        "return": {
+                            "type": {
+                                "types": [
+                                    {
+                                        "type": "String"
+                                    }
+                                ],
+                                "raw": "String"
+                            },
+                            "description": "The patched html"
                         },
                         "platform": [
                             {

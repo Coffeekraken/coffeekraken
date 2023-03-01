@@ -5,7 +5,7 @@ import { __writeJsonSync } from '@coffeekraken/sugar/fs';
 import { __deepMerge } from '@coffeekraken/sugar/object';
 import {
     __packageJsonSync,
-    __renamePackageSync
+    __renamePackageSync,
 } from '@coffeekraken/sugar/package';
 import { __packageRootDir } from '@coffeekraken/sugar/path';
 import __childProcess from 'child_process';
@@ -41,9 +41,9 @@ import __SPackageSettingsInterface from './interface/SPackageSettingsInterface';
  * @param           {ISPackageSettings}          [settings={}]           Some settings to configure your builder instance
  *
  * @setting         {'npm'|'yarn'}          [manager=__SSugarConfig.get('package.manager')]     Specify the package manager you want to use
- * 
- * @snippet         new __SPackage($1)
- * 
+ *
+ * @snippet          __SPackage($1)
+ *
  * @example         js
  * import __SPackage from '@coffeekraken/s-package';
  * const builder = new __SPackage();

@@ -26,8 +26,8 @@ window._console = {};
  *
  * @param       {String}        [theme=undefined]        The name of the theme you want to instanciate utilities for. If not specified, will take either the "default" theme, or the theme defined in the sugar.json file
  *
- * @snippet         new __STheme($1)
- * 
+ * @snippet          __STheme($1)
+ *
  * @example         js
  * import __STheme from '@coffeekraken/s-theme';
  * const theme = new __STheme();

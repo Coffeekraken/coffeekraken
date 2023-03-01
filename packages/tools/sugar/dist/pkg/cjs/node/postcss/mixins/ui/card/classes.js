@@ -25,8 +25,8 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
     const vars = new CssVars();
     function cardTpl(params) {
         return `*   <div class="${params.class}">
-                *     <div class="s-card_media">
-                *         <img class="s-card_img" src="https://picsum.photos/1600/900" title="..." alt="..." />
+                *     <div class="s-card_media s-media-container">
+                *         <img class="s-card_img s-media" src="https://picsum.photos/1600/900" title="..." alt="..." />
                 *     </div>
                 *     <div class="s-card_content s-spacing:30">
                 *         <h1 class="s-card_title s-typo:h3">

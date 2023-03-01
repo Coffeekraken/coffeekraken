@@ -1,44 +1,49 @@
 <div id="homepage-features" s-deps css="features">
     <div class="_contents">
-        <template s-lazy>
-        {{-- <div s-scope> --}}
-            @include('pages.homepage.features.partials.openSource')
-        {{-- </div> --}}
-        </template>
-        <template s-lazy>
-        {{-- <div s-scope> --}}
-            @include('pages.homepage.features.partials.ui')
-        {{-- </div> --}}
-        </template>
-        <template s-lazy>
-        {{-- <div s-scope> --}}
-            @include('pages.homepage.features.partials.helpers')
-        {{-- </div> --}}
-        </template>
-        <template s-lazy>
-        {{-- <div s-scope> --}}
-            @include('pages.homepage.features.partials.frontend')
-        {{-- </div> --}}
-        </template>
-        <template s-lazy>
-        {{-- <div s-scope> --}}
-            @include('pages.homepage.features.partials.discover')
-        {{-- </div> --}}
-        </template>
-        <template s-lazy>
-        {{-- <div s-scope> --}}
-            @include('pages.homepage.features.partials.sugar')
-        {{-- </div> --}}
-        </template>
-        <template s-lazy>
-        {{-- <div s-scope> --}}
-            @include('pages.homepage.features.partials.development')
-        {{-- </div> --}}
-        </template>
-        <template s-lazy>
-        {{-- <div s-scope> --}}
-            @include('pages.homepage.features.partials.why')
-        {{-- </div> --}}
-        </template>
+        <div s-appear in="bottom" delay="500">
+            <template s-lazy>
+                @include('pages.homepage.features.partials.openSource')
+            </template>
+        </div>
+        <div s-appear in="bottom" delay="500">
+            <template s-lazy>
+                @include('pages.homepage.features.partials.ui')
+            </template>
+        </div>
+        <div s-appear in="bottom" delay="500">
+            <template s-lazy>
+                @include('pages.homepage.features.partials.helpers')
+            </template>
+        </div>
+        <div s-appear in="bottom" delay="500">
+            <template s-lazy>
+                @include('pages.homepage.features.partials.frontend')
+            </template>
+        </div>
+        <div s-appear in="bottom" delay="500">
+            <template s-lazy>
+                @include('pages.homepage.features.partials.discover')
+            </template>
+        </div>
+        <div s-appear in="bottom" delay="500">
+            <template s-lazy>
+                @include('pages.homepage.features.partials.sugar')
+            </template>
+        </div>
+        <div s-appear in="bottom" delay="500">
+            <template s-lazy>
+                @include('pages.homepage.features.partials.vscode')
+            </template>
+        </div>
+        <div s-appear in="bottom" delay="500">
+            <template s-lazy>
+                @include('pages.homepage.features.partials.development')
+            </template>
+        </div>
+        <div s-appear in="bottom" delay="500">
+            <template s-lazy>
+                @include('pages.homepage.features.partials.why')
+            </template>
+        </div>
     </div>
 </div>

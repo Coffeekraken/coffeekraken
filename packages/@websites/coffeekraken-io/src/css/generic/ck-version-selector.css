@@ -2,6 +2,11 @@
     .s-dropdown {
         transform: translateX(calc(sugar.margin(40) * -1));
 
+        @sugar.lod.wireframe {
+            @sugar.wireframe.background;
+            @sugar.wireframe.border;
+        }
+
         &:before {
             content: '';
             @sugar.ui.backdrop;

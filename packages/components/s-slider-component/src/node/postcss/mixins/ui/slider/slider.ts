@@ -31,7 +31,7 @@ export { postcssUiSliderInterface as interface };
  * Apply the slider style to any s-slider element
  *
  * @snippet         @sugar.ui.slider($1);
- * 
+ *
  * @example     css
  * .s-slider {
  *    @sugar.ui.slider;
@@ -131,6 +131,49 @@ export default function ({
 
         `);
     }
+
+    // wireframe
+    vars.push(`
+        @sugar.lod.wireframe {
+
+            > .s-slider_root > .s-slider_slides-wrapper {
+                @sugar.wireframe.background;
+                @sugar.wireframe.border;
+            }
+
+            > .s-slider_root {
+                > .s-slider_ui {
+                    > .s-slider_nav {
+                        > * {
+                            background: rgba(0,0,0,.3);
+                        }
+                    }
+                }
+            }
+
+            > .s-slider_root > .s-slider_ui > .s-slider_progress {
+                &:before {
+                    background: rgba(0,0,0,.05);
+                }
+                > .s-slider_progress-bar {
+                    background: rgba(0,0,0,.1);
+                }
+            }
+
+            > .s-slider_root > .s-slider_ui > .s-slider_controls .s-slider_controls-next-arrow,
+            > .s-slider_root > .s-slider_ui > .s-slider_controls .s-slider_controls-previous-arrow {
+                &:before,
+                &:after {
+                    background: rgba(0,0,0,.3);
+                }
+            }
+
+            .s-media-container:after {
+                display: none;
+            }
+
+        }
+    `);
 
     return vars;
 }

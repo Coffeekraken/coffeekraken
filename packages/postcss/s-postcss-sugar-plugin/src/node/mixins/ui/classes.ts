@@ -16,7 +16,7 @@ export { postcssSugarPluginUiClassesInterface as interface };
  * This mixin allows you to print all the ui classes like button, form, etc...
  *
  * @snippet         @sugar.ui.classes
- * 
+ *
  * @example        css
  * \@sugar.ui.classes;
  *
@@ -46,6 +46,7 @@ export default function ({
         '@sugar.ui.label.classes;',
         '@sugar.ui.list.classes;',
         '@sugar.ui.loader.classes;',
+        '@sugar.ui.media.classes;',
         '@sugar.ui.radio.classes;',
         '@sugar.ui.range.classes;',
         '@sugar.ui.select.classes;',

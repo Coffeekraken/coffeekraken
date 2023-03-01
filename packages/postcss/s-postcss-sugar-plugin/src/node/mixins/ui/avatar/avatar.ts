@@ -14,7 +14,7 @@ import __SInterface from '@coffeekraken/s-interface';
  * @return      {Css}                   The corresponding css
  *
  * @snippet         @sugar.ui.avatar
- * 
+ *
  * @example       css
  * .my-element {
  *      \@sugar.ui.avatar();
@@ -137,6 +137,17 @@ export default function ({
             `);
         }
     }
+
+    // wireframe
+    vars.push(`
+        @sugar.lod.wireframe {
+            @sugar.wireframe.image;
+
+            img {
+                display: none;
+            }
+        }
+    `);
 
     return vars;
 }

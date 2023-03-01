@@ -4,7 +4,7 @@ import { __isNode } from '@coffeekraken/sugar/is';
 import {
     __deepAssign,
     __deepMerge,
-    __deepProxy
+    __deepProxy,
 } from '@coffeekraken/sugar/object';
 import __SStateLsAdapter from '../js/adapters/SStateLsAdapter';
 import __SStateFsAdapter from '../node/adapters/SStateFsAdapter';
@@ -22,7 +22,7 @@ import __SStateFsAdapter from '../node/adapters/SStateFsAdapter';
  *
  * @param           {ISStateSettings}          [settings={}]           Some settings to configure your state instance
  *
- * @snippet         new __SState($1)
+ * @snippet          __SState($1)
  * const state = new __SState($1);
  * state.$set('*', ({
  *    object,
@@ -36,7 +36,7 @@ import __SStateFsAdapter from '../node/adapters/SStateFsAdapter';
  * }) => {
  *    $2
  * });
- * 
+ *
  * @example         js
  * import __SState from '@coffeekraken/s-state';
  * const myState = new __SState({

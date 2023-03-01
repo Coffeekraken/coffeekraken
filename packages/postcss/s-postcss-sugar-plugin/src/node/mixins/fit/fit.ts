@@ -13,7 +13,7 @@ import __SInterface from '@coffeekraken/s-interface';
  * @return        {Css}         The generated css
  *
  * @snippet         @sugar.fix($1)
- * 
+ *
  * @example        css
  * .my-element {
  *    \@sugar.fit(cover);
@@ -28,7 +28,7 @@ class postcssSugarPluginFitInterface extends __SInterface {
         return {
             size: {
                 type: 'String',
-                values: ['fill', 'contain', 'cover', 'none'],
+                values: ['fill', 'contain', 'cover', 'none', 'abs'],
                 default: 'fill',
             },
         };
@@ -36,7 +36,7 @@ class postcssSugarPluginFitInterface extends __SInterface {
 }
 
 export interface IPostcssSugarPluginFitParams {
-    size: 'fill' | 'contain' | 'cover' | 'none';
+    size: 'fill' | 'contain' | 'cover' | 'none' | 'abs';
 }
 
 export { postcssSugarPluginFitInterface as interface };
@@ -81,6 +81,14 @@ export default function ({
                 }
             `);
             break;
+        case 'abs':
+            vars.push(`
+                & {
+                    position: absolute;
+                    top: 0; left: 0;
+                }
+            `);
+            break;
         case 'fill':
         default:
             vars.push(`
@@ -95,12 +103,6 @@ export default function ({
         & {
             width: 100%; height: 100%;
         }
-        &:not(img,video) {
-                    object-fit: none;
-                    position: absolute;
-                    top: 0; left: 0;
-                    width: 100%; height: 100%;
-                }
     `);
 
     return vars;

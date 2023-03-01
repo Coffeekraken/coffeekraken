@@ -17,7 +17,7 @@ import { __deepMerge } from '@coffeekraken/sugar/object';
  *
  * @param           {ISLog}         logObj          A log object to init
  *
- * @snippet         new __SLog($1)
+ * @snippet          __SLog($1)
  *
  * @example         js
  * import __SLog from '@coffeekraken/s-log';

@@ -17,7 +17,7 @@ import __STheme from '@coffeekraken/s-theme';
  * @return      {String}            The generated css
  *
  * @snippet         @sugar.ui.loader.round
- * 
+ *
  * @example     css
  * .my-round {
  *    @sugar.ui.loader.round;
@@ -97,6 +97,13 @@ export default function ({
         }
     }
   `);
+
+    // wireframe
+    vars.push(`
+        @sugar.lod.wireframe {
+           background: rgba(0,0,0,.5);
+        }
+    `);
 
     return vars;
 }

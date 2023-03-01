@@ -8,6 +8,7 @@ export interface IScrollToSettings {
     offsetY: number;
     align: 'start' | 'center' | 'end';
     justify: 'start' | 'center' | 'end';
+    force: boolean;
     onFinish: Function;
 }
 declare function __scrollTo(target: HTMLElement | 'top' | 'bottom' | 'left' | 'right', settings?: Partial<IScrollToSettings>): Promise<any>;

@@ -432,5 +432,20 @@ export default function (api) {
         get typo() {
             return api.config.themeTypo;
         },
+
+        /**
+         * @name            wireframe
+         * @namespace       config.themeBase
+         * @type            Object
+         * @default         {}
+         *
+         * Reference the "themewireframe" config for wireframe elements definition
+         *
+         * @since       2.0.0
+         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+         */
+        get wireframe() {
+            return api.config.themeWireframe;
+        },
     };
 }

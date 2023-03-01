@@ -36,10 +36,10 @@ import __SViewRendererSettingsInterface from './interface/SViewRendererSettingsI
  * @todo      doc
  * @todo      tests
  *
- * @snippet         new __SViewRenderer($1)
+ * @snippet          __SViewRenderer($1)
  * const viewRenderer = new __SViewRenderer($1);
  * const viewRendererResult = await viewRenderer.render($1, $2);
- * 
+ *
  * @example       js
  * import __SViewRenderer from '@coffeekraken/s-view-renderer';
  * const myTemplate = new __SViewRenderer({

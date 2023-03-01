@@ -18,7 +18,7 @@ import __STheme from '@coffeekraken/s-theme';
  * @return      {String}            The generated css
  *
  * @snippet         @sugar.ui.tooltip
- * 
+ *
  * @example     css
  * .my-tooltip {
  *    @sugar.ui.tooltip;
@@ -281,6 +281,14 @@ export default function ({
                 break;
         }
     }
+
+    // wireframe
+    vars.push(`
+        @sugar.lod.wireframe {
+            @sugar.wireframe.background;
+            @sugar.wireframe.border;
+        }
+    `);
 
     return vars;
 }

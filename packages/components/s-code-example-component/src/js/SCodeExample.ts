@@ -72,9 +72,9 @@ export interface ISCodeExampleComponentProps {
  * @support         edge
  *
  * @snippet         __SCodeExampleComponentDefine($1)
- * 
+ *
  * @import      import { define as __SCodeExampleComponentDefine } from '@coffeekraken/s-code-example-component';
- * 
+ *
  * @install           shell
  * npm i @coffeekraken/s-code-example-component
  *
@@ -333,7 +333,10 @@ export default class SCodeExample extends __SLitComponent {
                         ${(this.props.items ?? []).map(
                             (item) => html`
                                 <div
-                                    class="${this.utils.cls('_tab')}"
+                                    class="${this.utils.cls('_tab')} ${this
+                                        .state.activeTabId === item.id
+                                        ? 'active'
+                                        : ''}"
                                     id="${item.id}"
                                     ?active="${this.state.activeTabId ===
                                     item.id}"

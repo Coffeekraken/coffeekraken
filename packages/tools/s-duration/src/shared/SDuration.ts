@@ -24,11 +24,11 @@ import { __deepMerge } from '@coffeekraken/sugar/object';
  * @todo      doc
  * @todo      tests
  *
- * @snippet         new __SDuration()
+ * @snippet          __SDuration()
  * const duration = new __SDuration();
  * // ...
  * console.log(duration.end().formatedDuration);
- * 
+ *
  * @example             js
  * import __SDuration from '@coffeekraken/s-duration';
  * const duration = new __SDuration();

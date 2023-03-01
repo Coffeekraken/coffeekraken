@@ -14,7 +14,7 @@ import __SInterface from '@coffeekraken/s-interface';
  * @return      {String}            The generated css
  *
  * @snippet         @sugar.ui.dropdown
- * 
+ *
  * @example     css
  * .my-dropdown {
  *    @sugar.ui.dropdown;
@@ -206,6 +206,14 @@ export default function ({
                 break;
         }
     }
+
+    // wireframe
+    vars.push(`
+        @sugar.lod.wireframe {
+            @sugar.wireframe.background;
+            @sugar.wireframe.border;
+        }
+    `);
 
     return vars;
 }

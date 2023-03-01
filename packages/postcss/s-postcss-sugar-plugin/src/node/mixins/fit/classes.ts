@@ -12,7 +12,7 @@ import __SInterface from '@coffeekraken/s-interface';
  * @return        {Css}        The generated css
  *
  * @snippet         @sugar.fit.classes
- * 
+ *
  * @example        css
  * \@sugar.fit.classes;
  *
@@ -54,7 +54,7 @@ export default function ({
     };
 
     const vars = new CssVars();
-    const fitSizes = ['fill', 'cover', 'contain', 'none'];
+    const fitSizes = ['fill', 'cover', 'contain', 'none', 'abs'];
 
     vars.comment(
         () => `

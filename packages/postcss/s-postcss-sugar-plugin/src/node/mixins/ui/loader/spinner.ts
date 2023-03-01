@@ -17,7 +17,7 @@ import __STheme from '@coffeekraken/s-theme';
  * @return      {String}            The generated css
  *
  * @snippet         @sugar.ui.loader.spinner
- * 
+ *
  * @example     css
  * .my-spinner {
  *    @sugar.ui.loader.spinner;
@@ -94,6 +94,14 @@ export default function ({
         }
     }
   `);
+
+    // wireframe
+    vars.push(`
+        @sugar.lod.wireframe {
+            border-color: rgba(0,0,0,.5);
+            border-bottom-color: rgba(0, 0, 0, 0);
+        }
+    `);
 
     return vars;
 }

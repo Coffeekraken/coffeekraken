@@ -105,8 +105,6 @@ export default function (api: any): {
                 readonly corsProxy: any;
                 
                 readonly vite: any;
-                
-                readonly format: any;
             };
         };
         prod: {

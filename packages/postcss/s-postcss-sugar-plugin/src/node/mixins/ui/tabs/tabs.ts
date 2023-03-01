@@ -18,7 +18,7 @@ import __STheme from '@coffeekraken/s-theme';
  * @return      {String}            The generated css
  *
  * @snippet     @sugar.ui.tabs
- * 
+ *
  * @example     css
  * .my-tabs {
  *    @sugar.ui.tabs;
@@ -253,6 +253,23 @@ export default function ({
                 `);
         }
     }
+
+    // wireframe
+    vars.push(`
+      & > * {
+        @sugar.lod.wireframe {
+          @sugar.wireframe.border;
+          @sugar.wireframe.background;
+        }
+
+        &.active {
+          @sugar.lod.wireframe {
+            @sugar.wireframe.surface;
+          }
+        }
+
+      }
+    `);
 
     return vars;
 }

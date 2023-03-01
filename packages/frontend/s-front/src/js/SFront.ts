@@ -7,7 +7,7 @@ import { __deepMerge } from '@coffeekraken/sugar/object';
 
 import __SStdio, {
     __SStdioBasicAdapter,
-    __SStdioConsoleSource
+    __SStdioConsoleSource,
 } from '@coffeekraken/s-stdio';
 
 import { __speedIndex } from '@coffeekraken/sugar/perf';
@@ -26,8 +26,8 @@ import __STheme from '@coffeekraken/s-theme';
  *
  * Central class to handle frontend stuffs like theme, google, etc...
  *
- * @snippet             new __SFront($1)
- * 
+ * @snippet              __SFront($1)
+ *
  * @example         js
  * import __SFront from '@coffeekraken/s-front';
  * const front = new __SFront();

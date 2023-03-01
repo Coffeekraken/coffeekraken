@@ -16,7 +16,7 @@ import __STheme from '@coffeekraken/s-theme';
  * @return      {String}            The generated css
  *
  * @snippet         @sugar.ui.switch
- * 
+ *
  * @example     css
  * .my-switch {
  *    @sugar.ui.switch;
@@ -227,6 +227,19 @@ export default function ({
                     }
                 `);
     }
+
+    // wireframe
+    vars.push(`
+        @sugar.lod.wireframe {
+            @sugar.wireframe.background;
+            @sugar.wireframe.border;
+
+            &::before {
+                @sugar.wireframe.background;
+                @sugar.wireframe.border;
+            }
+        }
+    `);
 
     return vars;
 }

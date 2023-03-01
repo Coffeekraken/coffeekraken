@@ -166,7 +166,7 @@ export default function (api) {
                 color: 2,
                 'column-count': 2,
                 'column-fill': 2,
-                'column-gap': 2,
+                'column-gap': 1,
                 'column-rule': 2,
                 'column-rule-color': 2,
                 'column-rule-style': 2,

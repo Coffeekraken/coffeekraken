@@ -17,19 +17,20 @@
 @sugar.ui.googlemap.classes;
 @sugar.ui.googlemapmarker.classes;
 @sugar.ui.themeswitcher.classes;
+@sugar.ui.panel.classes;
 @sugar.platform.classes;
 
 /* mobile specific classes */
 @sugar.media.classes mobile {
-  @sugar.margin.classes;
-  @sugar.padding.classes;
-  @sugar.display.classes;
-  @sugar.layout.classes;
-  @sugar.hide.classes;
-  @sugar.flex.classes;
-  @sugar.text.classes;
-  @sugar.gap.classes;
-  @sugar.ui.button.classes;
+    @sugar.margin.classes;
+    @sugar.padding.classes;
+    @sugar.display.classes;
+    @sugar.layout.classes;
+    @sugar.hide.classes;
+    @sugar.flex.classes;
+    @sugar.text.classes;
+    @sugar.gap.classes;
+    @sugar.ui.button.classes;
 }
 
 /* icons */

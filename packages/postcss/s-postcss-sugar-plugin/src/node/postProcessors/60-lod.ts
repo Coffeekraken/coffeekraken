@@ -354,6 +354,29 @@ export default async function ({ root, sharedData, postcssApi, settings }) {
         );
     });
 
+    // ensure the [theme^="..."] is at start...
+    root.walkRules(/\[theme[\^\$]=\".*\"\]/, (rule) => {
+        rule.selector = rule.selector
+            .split(',')
+            .map((s) => {
+                s = s.trim();
+                const matches = s.match(/\[theme[\^\$]=\".*\"\]/gm);
+
+                if (matches) {
+                    matches.forEach((match) => {
+                        if (s.match(/^\.s-lod--/)) {
+                            s = `${match}${s.replace(match, '')}`;
+                        } else {
+                            s = `${match} ${s.replace(match, '')}`;
+                        }
+                    });
+                }
+
+                return s;
+            })
+            .join(',');
+    });
+
     // // classmap
     // classmap.applyOnAst(root);
     // classmap.save();

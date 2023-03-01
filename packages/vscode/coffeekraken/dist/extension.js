@@ -143,14 +143,16 @@ function jsIntegration(docmapJson) {
                     let codeLines = firstExample.code.split('\n');
                     for (let importStr of codeLines) {
                         if (!importStr.match(/^import\s/)) {
-                            return;
+                            break;
                         }
                         const editor = vscode.window.activeTextEditor, curPos = editor.selection.active;
                         const restorePosition = editor?.selection.active.with(curPos.c + 1, curPos.e);
                         if (editor) {
                             // avoid multiple add
-                            if (editor?.document.getText().includes(importStr)) {
-                                return;
+                            if (editor?.document
+                                .getText()
+                                .includes(importStr)) {
+                                continue;
                             }
                             editor.insertSnippet(new vscode.SnippetString(`${importStr}\n`), new vscode.Position(0, 0));
                             var newSelection = new vscode.Selection(restorePosition, restorePosition);
@@ -168,6 +170,11 @@ function jsIntegration(docmapJson) {
         if (type !== 'function' && type !== 'class') {
             continue;
         }
+        // take the correct kind
+        let kind = vscode.CompletionItemKind.Function;
+        if (type === 'class') {
+            kind = vscode.CompletionItemKind.Class;
+        }
         // handle only js stuff
         let isEligible = false;
         for (let platformObj of docmapObj.platform) {
@@ -181,7 +188,7 @@ function jsIntegration(docmapJson) {
         }
         let str = `__${docmapObj.name}`, label = `${str}`;
         const snippetCompletion = new vscode.CompletionItem(docmapObj.snippet.label);
-        snippetCompletion.kind = vscode.CompletionItemKind.Function;
+        snippetCompletion.kind = kind;
         snippetCompletion.label = docmapObj.snippet.label.split('(')[0];
         snippetCompletion.insertText = new vscode.SnippetString(docmapObj.snippet.code ?? docmapObj.snippet.label);
         snippetCompletion.command = {

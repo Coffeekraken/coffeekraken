@@ -1,149 +1,157 @@
 /* @sugar.partial (iconCard) { */
 
 .ui-card-slider {
-  /* transform: translateX(calc(sugar.margin(30) * -1)); */
-  width: 100%;
-  /* transform: translateX(calc(sugar.margin(30) * -1)); */
+    /* transform: translateX(calc(sugar.margin(30) * -1)); */
+    width: 100%;
+    /* transform: translateX(calc(sugar.margin(30) * -1)); */
 
-  --ui-card-card-width: calc(
-    sugar.container.width() / var(--s-slider-slides-by-page, 1)
-  );
-  @sugar.media wide {
     --ui-card-card-width: calc(
-      sugar.container.width(wide) / var(--s-slider-slides-by-page, 1)
+        sugar.container.width() / var(--s-slider-slides-by-page, 1)
     );
-  }
-  @sugar.media mobile {
-    --ui-card-card-width: calc(100% - sugar.margin(30));
-
-    width: calc(100% + sugar.margin(30) * 2);
-    transform: translateX(calc(sugar.margin(30) * -1));
-  }
-
-  .s-slider_slides-wrapper {
-  }
-
-  .s-slider_slides {
-    display: flex;
-    /* gap: sugar.margin(30); */
-  }
-
-  .s-slider_ui {
-    max-width: 1700px;
-  }
-
-  .s-slider_slide {
-    opacity: 0.05;
-    pointer-events: none;
-    margin-inline-end: sugar.margin(30);
-    @sugar.transition();
-
-    width: calc(var(--ui-card-card-width) - sugar.margin(30) * 0.5) !important;
-
-    @sugar.theme.when dark {
-      opacity: 0.2;
-    }
-
-    &.active {
-      opacity: 1;
-      pointer-events: all;
-    }
-
     @sugar.media wide {
-      max-width: sugar.container.width(wide);
+        --ui-card-card-width: calc(
+            sugar.container.width(wide) / var(--s-slider-slides-by-page, 1)
+        );
     }
     @sugar.media mobile {
-      width: calc(var(--ui-card-card-width) - sugar.margin(30)) !important;
+        --ui-card-card-width: calc(100% - sugar.margin(30));
+
+        width: calc(100% + sugar.margin(30) * 2);
+        transform: translateX(calc(sugar.margin(30) * -1));
     }
-  }
+
+    .s-slider_slides-wrapper {
+    }
+
+    .s-slider_slides {
+        display: flex;
+        /* gap: sugar.margin(30); */
+    }
+
+    .s-slider_ui {
+        max-width: 1700px;
+    }
+
+    .s-slider_slide {
+        opacity: 0.05;
+        pointer-events: none;
+        margin-inline-end: sugar.margin(30);
+        @sugar.transition();
+
+        width: calc(
+            var(--ui-card-card-width) - sugar.margin(30) * 0.5
+        ) !important;
+
+        @sugar.theme.when dark {
+            opacity: 0.2;
+        }
+
+        &.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        @sugar.media wide {
+            max-width: sugar.container.width(wide);
+        }
+        @sugar.media mobile {
+            width: calc(
+                var(--ui-card-card-width) - sugar.margin(30)
+            ) !important;
+        }
+    }
 }
 
 .ui-card {
-  position: relative;
-  aspect-ratio: 16/9;
-  display: block;
-  border-radius: sugar.border.radius();
-  transition: sugar.transition();
-  z-index: 10;
-  background: sugar.color(current);
-  @sugar.border.radius();
-
-  .ui-card_content {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+    position: relative;
+    aspect-ratio: 16/9;
+    display: block;
     border-radius: sugar.border.radius();
-    @sugar.depth (100, $type: text);
-    background-size: cover;
-    background-position: 50% 50%;
-    overflow: hidden;
+    transition: sugar.transition();
+    z-index: 10;
+    background: sugar.color(current);
+    @sugar.border.radius();
 
-    &:before {
-      content: '';
-      display: block;
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      border-radius: sugar.border.radius();
-      background-size: cover;
-      background-position: 50% 50%;
-      filter: grayscale(1);
-      overflow: hidden;
-      background-image: var(--image);
-      opacity: 0.3;
+    @sugar.lod.wireframe {
+        @sugar.wireframe.border;
     }
-    &:after {
-      content: '';
-      display: block;
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      border-radius: sugar.border.radius();
-      background-size: cover;
-      background-position: 50% 50%;
-      background: sugar.color(current);
-      opacity: 0.8;
+
+    .ui-card_content {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border-radius: sugar.border.radius();
+        @sugar.depth (100, $type: text);
+        background-size: cover;
+        background-position: 50% 50%;
+        overflow: hidden;
+
+        &:before {
+            content: '';
+            display: block;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: sugar.border.radius();
+            background-size: cover;
+            background-position: 50% 50%;
+            filter: grayscale(1);
+            overflow: hidden;
+            background-image: var(--image);
+            opacity: 0.3;
+        }
+        &:after {
+            content: '';
+            display: block;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: sugar.border.radius();
+            background-size: cover;
+            background-position: 50% 50%;
+            background: sugar.color(current);
+            opacity: 0.8;
+        }
     }
-  }
 
-  i,
-  p {
-    transition: all 0.3s sugar.theme(easing.default);
-    transform-origin: -100% 100%;
-    text-align: center;
-    color: sugar.color(current, foreground);
-  }
-
-  i {
-    font-size: 100px;
-    position: absolute;
-    z-index: 1;
-    bottom: calc(50% + 20px);
-    left: 50%;
-    transform: translate(-50%, 50%);
-    transform-origin: 0 100%;
-
-    @sugar.media mobile {
-      font-size: 50px;
+    i,
+    p {
+        transition: all 0.3s sugar.theme(easing.default);
+        transform-origin: -100% 100%;
+        text-align: center;
+        color: sugar.color(current, foreground);
     }
-  }
-  p {
-    position: absolute;
-    z-index: 1;
-    top: calc(50% + 50px);
-    left: 50%;
-    transform: translate(-50%, -50%);
-    transition-duration: 0.3s;
-    transition-delay: 0.15s;
 
-    @sugar.media mobile {
-      top: calc(50% + 30px);
+    i {
+        font-size: 100px;
+        position: absolute;
+        z-index: 1;
+        bottom: calc(50% + 20px);
+        left: 50%;
+        transform: translate(-50%, 50%);
+        transform-origin: 0 100%;
+
+        @sugar.media mobile {
+            font-size: 50px;
+        }
     }
-  }
+    p {
+        position: absolute;
+        z-index: 1;
+        top: calc(50% + 50px);
+        left: 50%;
+        transform: translate(-50%, -50%);
+        transition-duration: 0.3s;
+        transition-delay: 0.15s;
+
+        @sugar.media mobile {
+            top: calc(50% + 30px);
+        }
+    }
 }

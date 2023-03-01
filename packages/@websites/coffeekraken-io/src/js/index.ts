@@ -36,7 +36,7 @@ import { define as __CKVersionSelector } from './components/CKVersionSelector';
 
 import {
     __querySelectorLive,
-    __reloadStylesheets
+    __reloadStylesheets,
 } from '@coffeekraken/sugar/dom';
 
 // Libs
@@ -69,7 +69,7 @@ if (import.meta.hot) {
         trigger: ['event:actual', 'anchor', 'history'],
         offsetY: 400,
     });
-    __SFeature.setDefaultProps(['s-parallax', 's-appear'], {
+    __SFeature.setDefaultProps(['s-parallax'], {
         lod: 3,
     });
     __SFeature.setDefaultProps(['s-form-validate'], {

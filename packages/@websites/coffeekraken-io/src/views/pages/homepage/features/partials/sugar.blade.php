@@ -5,7 +5,10 @@
 
             <div class="s-layout:21 s-gap:column:50 @mobile s-layout:1_2">
                 <div>
-                    <img s-inline class="illustration adaptive-color @mobile s-hide" src="/dist/img/illustrations/packages.svg" />
+
+                    <figure class="s-media-container @mobile s-hide">
+                        <img s-inline class="illustration adaptive-color s-media" src="/dist/img/illustrations/packages.svg" />
+                    </figure>
                 </div>
                 <div class="s-mbe:80">
                     <h2 class="s-typo:h2 s-mbe:30">

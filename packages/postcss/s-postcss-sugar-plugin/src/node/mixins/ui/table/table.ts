@@ -15,7 +15,7 @@ import __SInterface from '@coffeekraken/s-interface';
  * @return      {String}            The generated css
  *
  * @snippet         @sugar.ui.table
- * 
+ *
  * @example     css
  * .my-table {
  *    @sugar.ui.table;
@@ -78,7 +78,7 @@ export default function ({
     }
     td, th {
         padding-inline: sugar.padding(ui.table.paddingInline);
-      padding-block: sugar.padding(ui.table.paddingBlock);
+         padding-block: sugar.padding(ui.table.paddingBlock);
 
         @sugar.direction.rtl {
             text-align: right;
@@ -109,6 +109,19 @@ export default function ({
             }
         `);
     }
+
+    // wireframe
+    vars.push(`
+        @sugar.lod.wireframe {
+            @sugar.wireframe.background;
+            @sugar.wireframe.border;
+
+            > tr:nth-child(even),
+            > tbody > tr:nth-child(even) {
+                @sugar.wireframe.surface;
+            }
+        }
+    `);
 
     return vars;
 }

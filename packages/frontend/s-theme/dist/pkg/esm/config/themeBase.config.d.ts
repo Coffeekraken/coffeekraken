@@ -57,4 +57,6 @@ export default function (api: any): {
     readonly ui: any;
     
     readonly typo: any;
+    
+    readonly wireframe: any;
 };

@@ -18,7 +18,7 @@ import { __uniqid } from '@coffeekraken/sugar/string';
  * @return      {String}            The generated css
  *
  * @snippet         @sugar.ui.loader.squareDots
- * 
+ *
  * @example     css
  * .my-squareDots {
  *    @sugar.ui.loader.squareDots;
@@ -111,6 +111,18 @@ export default function ({
         }
     }
   `);
+
+    // wireframe
+    vars.push(`
+   @sugar.lod.wireframe {
+       color: rgba(0,0,0,.5);
+
+       &:before,
+       &:after {
+        color: rgba(0,0,0,.5);
+       }
+   }
+`);
 
     return vars;
 }

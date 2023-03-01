@@ -16,7 +16,7 @@ import __STheme from '@coffeekraken/s-theme';
  * @return      {Css}                   The corresponding css
  *
  * @snippet     @sugar.ui.button
- * 
+ *
  * @example       css
  * .my-element {
  *      \@sugar.ui.button();
@@ -223,6 +223,14 @@ export default function ({
               }
           `);
     }
+
+    // wireframe
+    vars.push(`
+      @sugar.lod.wireframe {
+        @sugar.wireframe.border;
+        @sugar.wireframe.background;
+      }
+    `);
 
     return vars;
 }

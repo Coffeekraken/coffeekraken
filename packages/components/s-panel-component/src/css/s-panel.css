@@ -24,29 +24,11 @@
     left: 0;
 }
 
-.s-panel_backdrop {
-    /* position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 0;
-    width: 100%;
-    height: 100%; */
-    @sugar.ui.backdrop;
-    z-index: 0;
-}
-
 .s-panel_container {
     display: none;
     position: absolute;
     z-index: 1;
     overflow: auto;
-    @sugar.scrollbar;
-
-    @sugar.media <=mobile {
-        width: 90vw;
-        min-width: auto;
-        max-width: auto;
-    }
 
     [mounted] & {
         display: block;
@@ -110,16 +92,10 @@
 
 .s-panel[lnf='default'] {
     .s-panel_backdrop {
-        background: sugar.color(main, surface, --alpha 0.6);
-        transition: sugar.theme(ui.panel.transition);
         opacity: 0;
     }
 
     .s-panel_container {
-        transition: sugar.theme(ui.panel.transition);
-        background: sugar.color(main, background);
-        @sugar.depth (ui.panel.depth);
-        @sugar.border.radius (ui.panel.borderRadius);
         opacity: 0;
     }
 

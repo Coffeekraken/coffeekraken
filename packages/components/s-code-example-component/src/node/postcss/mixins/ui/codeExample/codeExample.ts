@@ -31,7 +31,7 @@ export { postcssUiDatetimePickerInterface as interface };
  * Apply the datetime picker style to any s-datetime-picker element
  *
  * @snippet         @sugar.ui.codeExample($1);
- * 
+ *
  * @example     css
  * .s-code-example {
  *    @sugar.ui.codeExample;
@@ -131,6 +131,16 @@ export default function ({
 
         `);
     }
+
+    // wireframe
+    vars.push(`
+        .s-code-example_content {
+            @sugar.lod.wireframe {
+                @sugar.wireframe.background;
+                @sugar.wireframe.border;    
+            }
+        }
+    `);
 
     if (finalParams.scope.includes('theme')) {
         vars.push(`

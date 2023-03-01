@@ -50,6 +50,7 @@ export interface IScrollToSettings {
     offsetY: number;
     align: 'start' | 'center' | 'end';
     justify: 'start' | 'center' | 'end';
+    force: boolean;
     onFinish: Function;
 }
 
@@ -68,6 +69,7 @@ export default function __scrollTo(
             align: 'start',
             justify: 'start',
             onFinish: null,
+            force: false,
             ...settings,
         };
 
@@ -203,6 +205,7 @@ export default function __scrollTo(
             currentX,
             duration: settings.duration,
             easing: settings.easing,
+            force: settings.force,
             $elm: settings.$elm,
             onFinish() {
                 settings.onFinish && settings.onFinish();
@@ -231,7 +234,7 @@ __scrollTo.step = function () {
 
     $scrollElm.scrollTo(x, y);
 
-    if (__isUserScrolling(this.$elm)) return;
+    if (!this.force && __isUserScrolling(this.$elm)) return;
 
     // Continue animation as long as duration hasn't surpassed
     if (t !== 1) {

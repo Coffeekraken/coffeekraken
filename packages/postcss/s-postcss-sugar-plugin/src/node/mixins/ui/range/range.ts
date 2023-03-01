@@ -16,7 +16,7 @@ import __STheme from '@coffeekraken/s-theme';
  * @return      {String}            The generated css
  *
  * @snippet         @sugar.ui.range
- * 
+ *
  * @example     css
  * .my-range {
  *    @sugar.ui.range;
@@ -264,6 +264,47 @@ export default function ({
                 break;
         }
     }
+
+    // wireframe
+    vars.push(`
+        @sugar.lod.wireframe {
+            &::-webkit-slider-runnable-track {
+                @sugar.wireframe.background;
+                @sugar.wireframe.border;
+            }
+            &::-moz-range-track {
+                @sugar.wireframe.background;
+                @sugar.wireframe.border;
+            }
+            &::-ms-track {
+                @sugar.wireframe.background;
+                @sugar.wireframe.border;
+            }
+
+            &::-ms-fill-lower {
+                @sugar.wireframe.background;
+                @sugar.wireframe.border;
+            }
+
+            &::-ms-fill-upper {
+                @sugar.wireframe.background;
+                @sugar.wireframe.border;
+            }
+
+            &::-webkit-slider-thumb {
+                @sugar.wireframe.background;
+                @sugar.wireframe.border;
+            }
+            &::-moz-range-thumb {
+                @sugar.wireframe.background;
+                @sugar.wireframe.border;
+            }
+            &::-ms-thumb {
+                @sugar.wireframe.background;
+                @sugar.wireframe.border;
+            }
+        }
+    `);
 
     return vars;
 }

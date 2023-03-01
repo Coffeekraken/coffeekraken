@@ -31,7 +31,7 @@ export { postcssUiColorPickerInterface as interface };
  * Apply the color picker style to any s-color-picker element
  *
  * @snippet         @sugar.ui.colorPicker($1);
- * 
+ *
  * @example     css
  * .s-color-picker {
  *    @sugar.ui.colorPicker();
@@ -367,6 +367,16 @@ export default function ({
 
         `);
     }
+
+    // wireframe
+    vars.push(`
+        .s-color-picker_picker {
+            @sugar.lod.wireframe {
+                @sugar.wireframe.background;
+                @sugar.wireframe.border;
+            }
+        }
+    `);
 
     return vars;
 }

@@ -2,8 +2,8 @@
     <div class="s-container">
         <div class="s-layout:21 s-gap:column:50 @mobile s-layout:1_2">
             <div>
-                <div class="adaptive-color @mobile s-hide">
-                    <img s-inline src="/dist/img/illustrations/stack.svg" />
+                <div class="s-media-container adaptive-color @mobile s-hide">
+                    <img class="s-media" s-inline src="/dist/img/illustrations/stack.svg" />
                 </div>
             </div>
             <div class="s-pb:100">
@@ -122,7 +122,7 @@ sugar dev'
         </div>
 
         <div
-            class="s-layout:123 s-gap:50 s-p:80 s-mbe:100 s-bg:main-surface s-radius s-depth @mobile s-layout:1_2_3 s-depth:0 s-osi:30 s-p:50"
+            class="_stack s-layout:123 s-gap:50 s-p:80 s-mbe:100 s-bg:main-surface s-radius s-depth @mobile s-layout:1_2_3 s-depth:0 s-osi:30 s-p:50"
             s-highlight="light" size="2000" intensity="0.2">
             <div>
                 <div class="s-flex s-gap:30 s-mbe:30">

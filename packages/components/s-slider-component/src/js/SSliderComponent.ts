@@ -1,7 +1,7 @@
 // @ts-nocheck
 
 import __SLitComponent, {
-    ISLitComponentDefaultProps
+    ISLitComponentDefaultProps,
 } from '@coffeekraken/s-lit-component';
 import { __onSwipe } from '@coffeekraken/sugar/dom';
 import { __isClass } from '@coffeekraken/sugar/is';
@@ -10,7 +10,7 @@ import { css, html, unsafeCSS } from 'lit';
 // @ts-ignore
 import {
     __querySelectorLive,
-    __querySelectorUp
+    __querySelectorUp,
 } from '@coffeekraken/sugar/dom';
 import { __uniqid } from '@coffeekraken/sugar/string';
 import __css from '../../../../src/css/s-slider-component.css'; // relative to /dist/pkg/esm/js
@@ -58,9 +58,9 @@ import __scrollBehavior from './behaviors/scrollBehavior';
  * @feature         Slideable behavior available
  *
  * @import          import { define as __SSliderComponentDefine } from '@coffeekraken/s-slider-component';
- * 
+ *
  * @snippet         __SSliderComponentDefine($1)
- * 
+ *
  * @install          bash
  * npm i @coffeekraken/s-slider-component
  *
@@ -70,184 +70,195 @@ import __scrollBehavior from './behaviors/scrollBehavior';
  *
  * @example         html        Simple slider
  * <s-slider controls nav responsive='{"mobile":{"lnf":"default-contained"}}'>
- *    <div s-slider-slide class="s-bg--accent">
- *           <h1 class="s-typo:h1">Slide #1</h1>
- *           <p class="s-typo:p">iowfj woijf iowj foiwj fiowjofijw oiefjw </p>
+ *    <div s-slider-slide>
+ *        <div class="s-media-container">
+ *           <img class="s-media" src="https://picsum.photos/1600/900?v1" />
+ *         </div>
+ *    </div>
+ *    <div s-slider-slide>
+ *       <div class="s-media-container">
+ *           <img class="s-media" src="https://picsum.photos/1600/900?v2" />
  *       </div>
- *       <div s-slider-slide class="s-bg:complementary">
- *           <h1 class="s-typo:h1">Slide #2</h1>
- *           <p class="s-typo:p">iowfj woijf iowj foiwj fiowjofijw oiefjw </p>
+ *    </div>
+ *    <div s-slider-slide>
+ *       <div class="s-media-container">
+ *           <img class="s-media" src="https://picsum.photos/1600/900?v3" />
  *       </div>
- *       <div s-slider-slide class="s-bg:info">
- *           <h1 class="s-typo:h1">Slide #3</h1>
- *           <p class="s-typo:p">iowfj woijf iowj foiwj fiowjofijw oiefjw </p>
+ *    </div>
+ *    <div s-slider-slide>
+ *       <div class="s-media-container">
+ *           <img class="s-media" src="https://picsum.photos/1600/900?v4" />
  *       </div>
- *       <div s-slider-slide class="s-bg:error">
- *           <h1 class="s-typo:h1">Slide #4</h1>
- *           <p class="s-typo:p">iowfj woijf iowj foiwj fiowjofijw oiefjw </p>
- *       </div>
- *   </s-slider>
- *
- * @example         html        Slideable slider
- * <s-slider behavior="slideable" controls nav id="coco">
- *      <responsive media="tablet" lnf="default-contained"></responsive>
- *    <div s-slider-slide class="s-bg--accent">
- *           <h1 class="s-typo:h1">Slide #1</h1>
- *           <p class="s-typo:lead">Click and drag</p>
- *       </div>
- *       <div s-slider-slide class="s-bg:complementary">
- *           <h1 class="s-typo:h1">Slide #2</h1>
- *           <p class="s-typo:p">iowfj woijf iowj foiwj fiowjofijw oiefjw </p>
- *       </div>
- *       <div s-slider-slide class="s-bg:info">
- *           <h1 class="s-typo:h1">Slide #3</h1>
- *           <p class="s-typo:p">iowfj woijf iowj foiwj fiowjofijw oiefjw </p>
- *       </div>
- *       <div s-slider-slide class="s-bg:error">
- *           <h1 class="s-typo:h1">Slide #4</h1>
- *           <p class="s-typo:p">iowfj woijf iowj foiwj fiowjofijw oiefjw </p>
- *       </div>
- *   </s-slider>
+ *    </div>
+ * </s-slider>
  *
  * @example         html        Tight slider
- * <s-slider behavior="slideable" lnf="default-tight" controls nav>
- *    <div s-slider-slide class="s-bg--accent">
- *           <h1 class="s-typo:h1">Slide #1</h1>
- *           <p class="s-typo:p">iowfj woijf iowj foiwj fiowjofijw oiefjw </p>
+ * <s-slider lnf="default-tight" controls nav responsive='{"mobile":{"lnf":"default-contained"}}'>
+ *    <div s-slider-slide>
+ *        <div class="s-media-container">
+ *           <img class="s-media" src="https://picsum.photos/1600/900?v1" />
+ *         </div>
+ *    </div>
+ *    <div s-slider-slide>
+ *       <div class="s-media-container">
+ *           <img class="s-media" src="https://picsum.photos/1600/900?v2" />
  *       </div>
- *       <div s-slider-slide class="s-bg:complementary">
- *           <h1 class="s-typo:h1">Slide #2</h1>
- *           <p class="s-typo:p">iowfj woijf iowj foiwj fiowjofijw oiefjw </p>
+ *    </div>
+ *    <div s-slider-slide>
+ *       <div class="s-media-container">
+ *           <img class="s-media" src="https://picsum.photos/1600/900?v3" />
  *       </div>
- *       <div s-slider-slide class="s-bg:info">
- *           <h1 class="s-typo:h1">Slide #3</h1>
- *           <p class="s-typo:p">iowfj woijf iowj foiwj fiowjofijw oiefjw </p>
+ *    </div>
+ *    <div s-slider-slide>
+ *       <div class="s-media-container">
+ *           <img class="s-media" src="https://picsum.photos/1600/900?v4" />
  *       </div>
- *       <div s-slider-slide class="s-bg:error">
- *           <h1 class="s-typo:h1">Slide #4</h1>
- *           <p class="s-typo:p">iowfj woijf iowj foiwj fiowjofijw oiefjw </p>
- *       </div>
- *   </s-slider>
+ *    </div>
+ * </s-slider>
  *
  * @example         html        Contained slider
- * <s-slider behavior="slideable" lnf="default-contained" controls nav>
- *    <div s-slider-slide class="s-bg--accent">
- *           <h1 class="s-typo:h1">Slide #1</h1>
- *           <p class="s-typo:p">iowfj woijf iowj foiwj fiowjofijw oiefjw </p>
+ * <s-slider lnf="default-contain" controls nav responsive='{"mobile":{"lnf":"default-contained"}}'>
+ *    <div s-slider-slide>
+ *        <div class="s-media-container">
+ *           <img class="s-media" src="https://picsum.photos/1600/900?v1" />
+ *         </div>
+ *    </div>
+ *    <div s-slider-slide>
+ *       <div class="s-media-container">
+ *           <img class="s-media" src="https://picsum.photos/1600/900?v2" />
  *       </div>
- *       <div s-slider-slide class="s-bg:complementary">
- *           <h1 class="s-typo:h1">Slide #2</h1>
- *           <p class="s-typo:p">iowfj woijf iowj foiwj fiowjofijw oiefjw </p>
+ *    </div>
+ *    <div s-slider-slide>
+ *       <div class="s-media-container">
+ *           <img class="s-media" src="https://picsum.photos/1600/900?v3" />
  *       </div>
- *       <div s-slider-slide class="s-bg:info">
- *           <h1 class="s-typo:h1">Slide #3</h1>
- *           <p class="s-typo:p">iowfj woijf iowj foiwj fiowjofijw oiefjw </p>
+ *    </div>
+ *    <div s-slider-slide>
+ *       <div class="s-media-container">
+ *           <img class="s-media" src="https://picsum.photos/1600/900?v4" />
  *       </div>
- *       <div s-slider-slide class="s-bg:error">
- *           <h1 class="s-typo:h1">Slide #4</h1>
- *           <p class="s-typo:p">iowfj woijf iowj foiwj fiowjofijw oiefjw </p>
- *       </div>
- *   </s-slider>
+ *    </div>
+ * </s-slider>
  *
  * @example         html        Vertical slider
- * <s-slider behavior="slideable" direction="vertical" controls nav>
- *    <div s-slider-slide class="s-bg--accent">
- *           <h1 class="s-typo:h1">Slide #1</h1>
- *           <p class="s-typo:p">iowfj woijf iowj foiwj fiowjofijw oiefjw </p>
+ * <s-slider controls nav direction="vertical">
+ *    <div s-slider-slide>
+ *        <div class="s-media-container">
+ *           <img class="s-media" src="https://picsum.photos/1600/900?v1" />
+ *         </div>
+ *    </div>
+ *    <div s-slider-slide>
+ *       <div class="s-media-container">
+ *           <img class="s-media" src="https://picsum.photos/1600/900?v2" />
  *       </div>
- *       <div s-slider-slide class="s-bg:complementary">
- *           <h1 class="s-typo:h1">Slide #2</h1>
- *           <p class="s-typo:p">iowfj woijf iowj foiwj fiowjofijw oiefjw </p>
+ *    </div>
+ *    <div s-slider-slide>
+ *       <div class="s-media-container">
+ *           <img class="s-media" src="https://picsum.photos/1600/900?v3" />
  *       </div>
- *       <div s-slider-slide class="s-bg:info">
- *           <h1 class="s-typo:h1">Slide #3</h1>
- *           <p class="s-typo:p">iowfj woijf iowj foiwj fiowjofijw oiefjw </p>
+ *    </div>
+ *    <div s-slider-slide>
+ *       <div class="s-media-container">
+ *           <img class="s-media" src="https://picsum.photos/1600/900?v4" />
  *       </div>
- *       <div s-slider-slide class="s-bg:error">
- *           <h1 class="s-typo:h1">Slide #4</h1>
- *           <p class="s-typo:p">iowfj woijf iowj foiwj fiowjofijw oiefjw </p>
- *       </div>
- *   </s-slider>
+ *    </div>
+ * </s-slider>
  *
  * @example         html        Vertical tight slider
- * <s-slider behavior="slideable" direction="vertical" lnf="default-tight" controls nav>
- *    <div s-slider-slide class="s-bg--accent">
- *           <h1 class="s-typo:h1">Slide #1</h1>
- *           <p class="s-typo:p">iowfj woijf iowj foiwj fiowjofijw oiefjw </p>
+ * <s-slider lnf="default-tight" controls nav direction="vertical">
+ *    <div s-slider-slide>
+ *        <div class="s-media-container">
+ *           <img class="s-media" src="https://picsum.photos/1600/900?v1" />
+ *         </div>
+ *    </div>
+ *    <div s-slider-slide>
+ *       <div class="s-media-container">
+ *           <img class="s-media" src="https://picsum.photos/1600/900?v2" />
  *       </div>
- *       <div s-slider-slide class="s-bg:complementary">
- *           <h1 class="s-typo:h1">Slide #2</h1>
- *           <p class="s-typo:p">iowfj woijf iowj foiwj fiowjofijw oiefjw </p>
+ *    </div>
+ *    <div s-slider-slide>
+ *       <div class="s-media-container">
+ *           <img class="s-media" src="https://picsum.photos/1600/900?v3" />
  *       </div>
- *       <div s-slider-slide class="s-bg:info">
- *           <h1 class="s-typo:h1">Slide #3</h1>
- *           <p class="s-typo:p">iowfj woijf iowj foiwj fiowjofijw oiefjw </p>
+ *    </div>
+ *    <div s-slider-slide>
+ *       <div class="s-media-container">
+ *           <img class="s-media" src="https://picsum.photos/1600/900?v4" />
  *       </div>
- *       <div s-slider-slide class="s-bg:error">
- *           <h1 class="s-typo:h1">Slide #4</h1>
- *           <p class="s-typo:p">iowfj woijf iowj foiwj fiowjofijw oiefjw </p>
- *       </div>
- *   </s-slider>
+ *    </div>
+ * </s-slider>
  *
  * @example         html        Vertical contained slider
- * <s-slider behavior="slideable" direction="vertical" lnf="default-contained" controls nav>
- *    <div s-slider-slide class="s-bg--accent">
- *           <h1 class="s-typo:h1">Slide #1</h1>
- *           <p class="s-typo:p">iowfj woijf iowj foiwj fiowjofijw oiefjw </p>
+ * <s-slider lnf="default-contain" controls nav direction="vertical">
+ *    <div s-slider-slide>
+ *        <div class="s-media-container">
+ *           <img class="s-media" src="https://picsum.photos/1600/900?v1" />
+ *         </div>
+ *    </div>
+ *    <div s-slider-slide>
+ *       <div class="s-media-container">
+ *           <img class="s-media" src="https://picsum.photos/1600/900?v2" />
  *       </div>
- *       <div s-slider-slide class="s-bg:complementary">
- *           <h1 class="s-typo:h1">Slide #2</h1>
- *           <p class="s-typo:p">iowfj woijf iowj foiwj fiowjofijw oiefjw </p>
+ *    </div>
+ *    <div s-slider-slide>
+ *       <div class="s-media-container">
+ *           <img class="s-media" src="https://picsum.photos/1600/900?v3" />
  *       </div>
- *       <div s-slider-slide class="s-bg:info">
- *           <h1 class="s-typo:h1">Slide #3</h1>
- *           <p class="s-typo:p">iowfj woijf iowj foiwj fiowjofijw oiefjw </p>
+ *    </div>
+ *    <div s-slider-slide>
+ *       <div class="s-media-container">
+ *           <img class="s-media" src="https://picsum.photos/1600/900?v4" />
  *       </div>
- *       <div s-slider-slide class="s-bg:error">
- *           <h1 class="s-typo:h1">Slide #4</h1>
- *           <p class="s-typo:p">iowfj woijf iowj foiwj fiowjofijw oiefjw </p>
- *       </div>
- *   </s-slider>
+ *    </div>
+ * </s-slider>
  *
  * @example         html        Slider with progressbar
- * <s-slider behavior="slideable" progress controls nav>
- *    <div s-slider-slide class="s-bg--accent">
- *           <h1 class="s-typo:h1">Slide #1</h1>
- *           <p class="s-typo:p">iowfj woijf iowj foiwj fiowjofijw oiefjw </p>
+ * <s-slider controls nav progress>
+ *    <div s-slider-slide>
+ *        <div class="s-media-container">
+ *           <img class="s-media" src="https://picsum.photos/1600/900?v1" />
+ *         </div>
+ *    </div>
+ *    <div s-slider-slide>
+ *       <div class="s-media-container">
+ *           <img class="s-media" src="https://picsum.photos/1600/900?v2" />
  *       </div>
- *       <div s-slider-slide class="s-bg:complementary">
- *           <h1 class="s-typo:h1">Slide #2</h1>
- *           <p class="s-typo:p">iowfj woijf iowj foiwj fiowjofijw oiefjw </p>
+ *    </div>
+ *    <div s-slider-slide>
+ *       <div class="s-media-container">
+ *           <img class="s-media" src="https://picsum.photos/1600/900?v3" />
  *       </div>
- *       <div s-slider-slide class="s-bg:info">
- *           <h1 class="s-typo:h1">Slide #3</h1>
- *           <p class="s-typo:p">iowfj woijf iowj foiwj fiowjofijw oiefjw </p>
+ *    </div>
+ *    <div s-slider-slide>
+ *       <div class="s-media-container">
+ *           <img class="s-media" src="https://picsum.photos/1600/900?v4" />
  *       </div>
- *       <div s-slider-slide class="s-bg:error">
- *           <h1 class="s-typo:h1">Slide #4</h1>
- *           <p class="s-typo:p">iowfj woijf iowj foiwj fiowjofijw oiefjw </p>
- *       </div>
- *   </s-slider>
+ *    </div>
+ * </s-slider>
  *
  * @example         html        Slider with progressbar, loop and timer
- * <s-slider behavior="slideable" progress loop controls nav timer="2500">
- *    <div s-slider-slide class="s-bg--accent">
- *           <h1 class="s-typo:h1">Slide #1</h1>
- *           <p class="s-typo:p">iowfj woijf iowj foiwj fiowjofijw oiefjw </p>
+ * <s-slider controls nav progress loop timer="2500">
+ *    <div s-slider-slide>
+ *        <div class="s-media-container">
+ *           <img class="s-media" src="https://picsum.photos/1600/900?v1" />
+ *         </div>
+ *    </div>
+ *    <div s-slider-slide>
+ *       <div class="s-media-container">
+ *           <img class="s-media" src="https://picsum.photos/1600/900?v2" />
  *       </div>
- *       <div s-slider-slide class="s-bg:complementary">
- *           <h1 class="s-typo:h1">Slide #2</h1>
- *           <p class="s-typo:p">iowfj woijf iowj foiwj fiowjofijw oiefjw </p>
+ *    </div>
+ *    <div s-slider-slide>
+ *       <div class="s-media-container">
+ *           <img class="s-media" src="https://picsum.photos/1600/900?v3" />
  *       </div>
- *       <div s-slider-slide class="s-bg:info">
- *           <h1 class="s-typo:h1">Slide #3</h1>
- *           <p class="s-typo:p">iowfj woijf iowj foiwj fiowjofijw oiefjw </p>
+ *    </div>
+ *    <div s-slider-slide>
+ *       <div class="s-media-container">
+ *           <img class="s-media" src="https://picsum.photos/1600/900?v4" />
  *       </div>
- *       <div s-slider-slide class="s-bg:error">
- *           <h1 class="s-typo:h1">Slide #4</h1>
- *           <p class="s-typo:p">iowfj woijf iowj foiwj fiowjofijw oiefjw </p>
- *       </div>
- *   </s-slider>
+ *    </div>
+ * </s-slider>
  *
  * @since           2.0.0
  * @author          Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)

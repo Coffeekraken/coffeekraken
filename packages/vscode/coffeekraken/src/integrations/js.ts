@@ -28,26 +28,27 @@ export default function jsIntegration(docmapJson: any): void {
                         let codeLines = firstExample.code.split('\n');
 
                         for (let importStr of codeLines) {
-
                             if (!importStr.match(/^import\s/)) {
-                                return;
+                                break;
                             }
 
-    
                             const editor = vscode.window.activeTextEditor,
                                 curPos = editor.selection.active;
-    
-                            const restorePosition = editor?.selection.active.with(
-                                curPos.c + 1,
-                                curPos.e,
-                            );
-    
+
+                            const restorePosition =
+                                editor?.selection.active.with(
+                                    curPos.c + 1,
+                                    curPos.e,
+                                );
+
                             if (editor) {
                                 // avoid multiple add
                                 if (
-                                    editor?.document.getText().includes(importStr)
+                                    editor?.document
+                                        .getText()
+                                        .includes(importStr)
                                 ) {
-                                    return;
+                                    continue;
                                 }
                                 editor.insertSnippet(
                                     new vscode.SnippetString(`${importStr}\n`),
@@ -59,7 +60,6 @@ export default function jsIntegration(docmapJson: any): void {
                                 );
                                 editor.selection = newSelection;
                             }
-
                         }
                     }
                     break;
@@ -74,6 +74,12 @@ export default function jsIntegration(docmapJson: any): void {
         // handle only class and functions
         if (type !== 'function' && type !== 'class') {
             continue;
+        }
+
+        // take the correct kind
+        let kind = vscode.CompletionItemKind.Function;
+        if (type === 'class') {
+            kind = vscode.CompletionItemKind.Class;
         }
 
         // handle only js stuff
@@ -94,7 +100,7 @@ export default function jsIntegration(docmapJson: any): void {
         const snippetCompletion = new vscode.CompletionItem(
             docmapObj.snippet.label,
         );
-        snippetCompletion.kind = vscode.CompletionItemKind.Function;
+        snippetCompletion.kind = kind;
         snippetCompletion.label = docmapObj.snippet.label.split('(')[0];
         snippetCompletion.insertText = new vscode.SnippetString(
             docmapObj.snippet.code ?? docmapObj.snippet.label,

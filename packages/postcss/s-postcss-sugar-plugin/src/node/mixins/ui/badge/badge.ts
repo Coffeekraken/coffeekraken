@@ -15,7 +15,7 @@ import __STheme from '@coffeekraken/s-theme';
  * @return      {Css}                   The corresponding css
  *
  * @snippet         @sugar.ui.badge
- * 
+ *
  * @example       css
  * .my-element {
  *      \@sugar.ui.badge();
@@ -122,6 +122,14 @@ export default function ({
                 break;
         }
     }
+
+    // wireframe
+    vars.push(`
+        @sugar.lod.wireframe {
+            @sugar.wireframe.background;
+            @sugar.wireframe.border;
+        }
+    `);
 
     return vars;
 }

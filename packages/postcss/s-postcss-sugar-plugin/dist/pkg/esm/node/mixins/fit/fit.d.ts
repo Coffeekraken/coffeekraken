@@ -10,7 +10,7 @@ declare class postcssSugarPluginFitInterface extends __SInterface {
     };
 }
 export interface IPostcssSugarPluginFitParams {
-    size: 'fill' | 'contain' | 'cover' | 'none';
+    size: 'fill' | 'contain' | 'cover' | 'none' | 'abs';
 }
 export { postcssSugarPluginFitInterface as interface };
 export default function ({ params, atRule, CssVars, replaceWith, }: {

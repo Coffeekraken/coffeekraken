@@ -47,9 +47,9 @@ export interface SPanelComponentProps {
  * @event       s-panel.close         Dispatched when the panel is closed
  *
  * @import          import { define as __SPanelComponentDefine } from '@coffeekraken/s-panel-component';
- * 
+ *
  * @snippet         __SPanelComponentDefine($1)
- * 
+ *
  * @install          bash
  * npm i @coffeekraken/s-panel-component
  *
@@ -59,11 +59,13 @@ export interface SPanelComponentProps {
  *
  * @example         html        Simple top panel
  * <s-panel position="top" id="simple-top-panel-open" backdrop>
- *  <div class="s-p:50">
- *      <h1 class="s-typo:h1 s-mbe:30">Hello world</h1>
- *      <p class="s-typo:p s-mbe:30">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc sit amet lectus magna. Ut vehicula eros a sapien egestas, sed ultricies orci lacinia. In hac habitasse platea dictumst. Nulla metus elit, mollis at ante id, varius faucibus nulla. Praesent aliquam justo vel justo accumsan, non dictum lorem porta. Donec varius magna id semper pulvinar. Nunc ultrices pellentesque mollis. Mauris vestibulum justo in facilisis tempor. Nunc gravida dictum ex ut condimentum. Aenean sagittis dignissim semper.</p>
- *      <button class="s-btn s-color:accent s-mie:10" s-panel-close="simple-top-panel-open">Close panel</button> or click outside or use the escape key...
- *  </div>
+ *  <template>
+ *      <div class="s-p:50">
+ *          <h1 class="s-typo:h1 s-mbe:30">Hello world</h1>
+ *          <p class="s-typo:p s-mbe:30">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc sit amet lectus magna. Ut vehicula eros a sapien egestas, sed ultricies orci lacinia. In hac habitasse platea dictumst. Nulla metus elit, mollis at ante id, varius faucibus nulla. Praesent aliquam justo vel justo accumsan, non dictum lorem porta. Donec varius magna id semper pulvinar. Nunc ultrices pellentesque mollis. Mauris vestibulum justo in facilisis tempor. Nunc gravida dictum ex ut condimentum. Aenean sagittis dignissim semper.</p>
+ *          <button class="s-btn s-color:accent s-mie:10" s-panel-close="simple-top-panel-open">Close panel</button> or click outside or use the escape key...
+ *      </div>
+ *  </template>
  * </s-panel>
  * <button class="s-btn s-color:complementary" s-panel-open="simple-top-panel-open">Open top panel</button>
  *
@@ -185,6 +187,11 @@ export default class SPanelComponent extends __SLitComponent {
         // this._$nodes = Array.from(this.children);
     }
     async mount() {
+        // make sure it's in the body
+        if (this.parentElement !== document.body) {
+            document.body.appendChild(this);
+        }
+
         // handle active state at start
         if (this.props.active) {
             this.constructor._activePanels.push(this);
@@ -194,6 +201,11 @@ export default class SPanelComponent extends __SLitComponent {
         if ($tpl) {
             this._template = $tpl.content;
             $tpl.remove();
+        } else {
+            this._template = document.createElement('div');
+            Array.from(this.children).forEach(($child) => {
+                this._template.appendChild($child);
+            });
         }
     }
     isTopPanel() {

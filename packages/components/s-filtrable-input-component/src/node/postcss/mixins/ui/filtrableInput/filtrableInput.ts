@@ -32,7 +32,7 @@ export { postcssUiFiltrableInputInterface as interface };
  * Apply the filtrable input style to any s-filtrable-input element
  *
  * @snippet         @sugar.ui.filtrableInput($1);
- * 
+ *
  * @example     css
  * .s-filtrable-input {
  *    @sugar.ui.filtrableInput;
@@ -127,6 +127,16 @@ export default function ({
                 }
         `);
     }
+
+    // wireframe
+    vars.push(`
+        @sugar.lod.wireframe {
+            .s-filtrable-input_dropdown {
+                @sugar.wireframe.background;
+                @sugar.wireframe.border;
+            }
+        }
+    `);
 
     return vars;
 }

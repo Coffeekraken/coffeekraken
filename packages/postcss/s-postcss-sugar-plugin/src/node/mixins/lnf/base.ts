@@ -27,7 +27,7 @@ export { postcssSugarPluginLiikAndFeelBaseInterface as interface };
  * @return      {Css}                   The corresponding grid css
  *
  * @snippet         @sugar.lnf.base
- * 
+ *
  * @example       css
  * \@sugar.lnf.base;
  *
@@ -50,11 +50,20 @@ export default function ({
     const vars: string[] = [];
 
     const css = `
-    content: 'bbb';
         color: sugar.color(main, text);
         @sugar.font.family(default);
         @sugar.font.size(default);
         --s-scale: sugar.theme(scale.default);
+
+        @sugar.lod.wireframe {
+            color: rgba(0, 0, 0, 0.5);
+            @sugar.wireframe.background;
+
+            @sugar.theme.when dark {
+                color: rgba(255, 255, 255, 0.7);
+            }
+        }       
+
   `;
 
     vars.push(css);

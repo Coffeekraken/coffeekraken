@@ -36,7 +36,7 @@ import { define as __SSugarFeatureDefine } from '@coffeekraken/s-sugar-feature';
  * @todo      doc
  * @todo      tests
  *
- * @snippet         new __SPackEssentials()
+ * @snippet          __SPackEssentials()
  *
  * @example 	js
  * import __SPackEssentials from '@coffeekraken/s-pack-essentials';

@@ -49,7 +49,7 @@ export { postcssSugarPluginMediaMixinInterface as interface };
  * \@sugar.media $1 {
  *      $2
  * }
- * 
+ *
  * @example        css
  * \@sugar.media >=desktop {
  *      // ...

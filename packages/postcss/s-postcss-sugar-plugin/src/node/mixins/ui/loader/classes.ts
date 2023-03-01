@@ -15,7 +15,7 @@ import __camelCase from '@coffeekraken/sugar/shared/string/camelCase';
  * @return      {String}            The generated css
  *
  * @snippet         @sugar.ui.loader.classes
- * 
+ *
  * @example     css
  * \@sugar.ui.loader.classes;
  *
@@ -145,7 +145,9 @@ export default function ({
         ).code(
             `
             .s-loader--${loaderName} {
-                @sugar.ui.loader.${__camelCase(loaderName)}();
+                @sugar.lod.prevent {
+                    @sugar.ui.loader.${__camelCase(loaderName)}();
+                }
             }
             `,
             {

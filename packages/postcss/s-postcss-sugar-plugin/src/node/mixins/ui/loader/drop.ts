@@ -17,7 +17,7 @@ import __STheme from '@coffeekraken/s-theme';
  * @return      {String}            The generated css
  *
  * @snippet         @sugar.ui.loader.drop
- * 
+ *
  * @example     css
  * .my-drop {
  *    @sugar.ui.loader.drop;
@@ -109,6 +109,16 @@ export default function ({
         }
     }
   `);
+
+    // wireframe
+    vars.push(`
+        @sugar.lod.wireframe {
+            &:before,
+            &:after {
+                border-color: rgba(0,0,0,.5);
+            }
+        }
+    `);
 
     return vars;
 }

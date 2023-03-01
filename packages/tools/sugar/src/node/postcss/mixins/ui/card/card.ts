@@ -31,7 +31,7 @@ export { postcssUiCardInterface as interface };
  * Apply the menu lnf to any .s-menu element
  *
  * @snippet         @sugar.ui.card
- * 
+ *
  * @example     css
  * .s-menu {
  *    @sugar.ui.card;
@@ -134,6 +134,14 @@ export default function ({
             }
         `);
     }
+
+    // wireframe
+    vars.push(`
+        @sugar.lod.wireframe {
+            @sugar.wireframe.background;
+            @sugar.wireframe.border;
+        }
+    `);
 
     return vars;
 }

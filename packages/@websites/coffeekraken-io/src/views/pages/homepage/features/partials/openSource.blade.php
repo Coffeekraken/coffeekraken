@@ -32,40 +32,43 @@
 
                     <div class="_illustration">
 
-                        <div class="_desk">
-                            <img s-inline src="/dist/img/illustrations/opensource/desk.svg" />
-                        </div>
+                        <div class="s-media-container s-fit:abs">
+                            <div class="s-media">
+                                <div class="_desk">
+                                    <img s-inline src="/dist/img/illustrations/opensource/desk.svg" />
+                                </div>
 
-                        <div class="_logo-draw" s-parallax amount="0.01">
-                            <img s-inline src="/dist/img/illustrations/opensource/opensource-logo.svg" />
-                        </div>
-                        <div class="_logo-back" s-parallax amount="0.05">
-                            <img s-inline src="/dist/img/illustrations/opensource/opensource-logo.svg" />
-                        </div>
-                        <div class="_logo"  s-parallax amount="0.1">
-                            <img s-inline src="/dist/img/illustrations/opensource/opensource-logo.svg" />
-                        </div>
+                                <div class="_logo-draw" s-parallax amount="0.01">
+                                    <img s-inline src="/dist/img/illustrations/opensource/opensource-logo.svg" />
+                                </div>
+                                <div class="_logo-back" s-parallax amount="0.05">
+                                    <img s-inline src="/dist/img/illustrations/opensource/opensource-logo.svg" />
+                                </div>
+                                <div class="_logo"  s-parallax amount="0.1">
+                                    <img s-inline src="/dist/img/illustrations/opensource/opensource-logo.svg" />
+                                </div>
 
-                        <div class="_bubble-01" s-parallax amount="0.1">
-                            <img s-inline src="/dist/img/illustrations/opensource/bubble-01.svg" />
-                        </div>
-                        <div class="_bubble-02" s-parallax amount="0.2">
-                            <img s-inline src="/dist/img/illustrations/opensource/bubble-02.svg" />
-                        </div>
-                        <div class="_bubble-03" s-parallax amount="0.05">
-                            <img s-inline src="/dist/img/illustrations/opensource/bubble-03.svg" />
-                        </div>
+                                <div class="_bubble-01" s-parallax amount="0.1">
+                                    <img s-inline src="/dist/img/illustrations/opensource/bubble-01.svg" />
+                                </div>
+                                <div class="_bubble-02" s-parallax amount="0.2">
+                                    <img s-inline src="/dist/img/illustrations/opensource/bubble-02.svg" />
+                                </div>
+                                <div class="_bubble-03" s-parallax amount="0.05">
+                                    <img s-inline src="/dist/img/illustrations/opensource/bubble-03.svg" />
+                                </div>
 
-                        <div class="_bubble-emoji-01" s-parallax amount="0.05"> 
-                            <img s-inline src="/dist/img/illustrations/opensource/bubble-emoji-01.svg" />
+                                <div class="_bubble-emoji-01" s-parallax amount="0.05"> 
+                                    <img s-inline src="/dist/img/illustrations/opensource/bubble-emoji-01.svg" />
+                                </div>
+                                <div class="_bubble-emoji-02" s-parallax amount="0.1">
+                                    <img s-inline src="/dist/img/illustrations/opensource/bubble-emoji-02.svg" />
+                                </div>
+                                <div class="_bubble-emoji-03" s-parallax amount="0.2">
+                                    <img s-inline src="/dist/img/illustrations/opensource/bubble-emoji-03.svg" />
+                                </div>
+                            </div>
                         </div>
-                        <div class="_bubble-emoji-02" s-parallax amount="0.1">
-                            <img s-inline src="/dist/img/illustrations/opensource/bubble-emoji-02.svg" />
-                        </div>
-                        <div class="_bubble-emoji-03" s-parallax amount="0.2">
-                            <img s-inline src="/dist/img/illustrations/opensource/bubble-emoji-03.svg" />
-                        </div>
-
                     </div>
 
                     {{-- <div class="_illustration adaptive-color">

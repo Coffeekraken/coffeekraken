@@ -18,6 +18,11 @@
     background: sugar.color(main, background, --alpha 0.9);
     border-bottom: 1px solid sugar.color(base, --alpha 0);
 
+    @sugar.lod.wireframe {
+        @sugar.wireframe.border;
+        @sugar.wireframe.background;
+    }
+
     @sugar.theme.when dark {
         background: linear-gradient(
             90deg,

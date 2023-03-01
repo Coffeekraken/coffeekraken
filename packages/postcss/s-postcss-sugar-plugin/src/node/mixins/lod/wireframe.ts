@@ -25,7 +25,7 @@ export interface postcssSugarPluginScopeWireframeMixinParams {}
  * \@sugar.lod.wireframe {
  *      $1
  * }
- * 
+ *
  * @example        css
  * \@sugar.lod.wireframe() {
  *      // ...

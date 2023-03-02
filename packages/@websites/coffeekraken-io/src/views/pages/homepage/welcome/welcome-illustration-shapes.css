@@ -17,7 +17,7 @@
         fill: url(#gradient-complementary);
     }
     [fill='white'] {
-        fill: sugar.color(base, --alpha 0.2);
+        fill: sugar.color(main, --alpha 0.2);
         mix-blend-mode: multiply !important;
     }
 

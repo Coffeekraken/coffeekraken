@@ -56,14 +56,10 @@ class CkSettings extends s_lit_component_1.default {
     }
     firstUpdated() {
         return __awaiter(this, void 0, void 0, function* () {
-            const $baseColorPicker = this.querySelector('#setting-base-color');
             const $mainColorPicker = this.querySelector('#setting-main-color');
             const $accentColorPicker = this.querySelector('#setting-accent-color');
             const $complementaryColorPicker = this.querySelector('#setting-complementary-color');
             const $fontSizeRange = this.querySelector('#setting-font-size');
-            $baseColorPicker.addEventListener('s-color-picker.change', (e) => {
-                this._front.theme.setColor('base', e.detail.hex);
-            });
             $mainColorPicker.addEventListener('s-color-picker.change', (e) => {
                 this._front.theme.setColor('main', e.detail.hex);
             });
@@ -82,8 +78,10 @@ class CkSettings extends s_lit_component_1.default {
         return __awaiter(this, void 0, void 0, function* () { });
     }
     _setLod(level) {
-        this._front.setWireframe(level <= 1);
+        console.log('SET', level);
+        this._front.setWireframe(level <= 0);
         this._front.setLod(level);
+        this.requestUpdate();
     }
     render() {
         return (0, s_lit_component_1.html) `
@@ -114,7 +112,7 @@ class CkSettings extends s_lit_component_1.default {
                         </li>
             <li class="s-bg:main-surface">
               <label
-                class="s-label:responsive s-pi:50 s-pb:30 @mobile s-pi:40"
+                class="s-label:responsive s-pi:50 s-pbs:30 @mobile s-pi:40"
                 for="setting-font-size"
               >
                 <span>Level of details</span>
@@ -123,34 +121,61 @@ class CkSettings extends s_lit_component_1.default {
                   id="setting-lod"
                   min="0"
                   max="3"
-                  value=${this._front.lod.level - 1}
-                  values='["Wireframe","Low","Medium","High"]'
+                  value=${this._front.lod.level}
+                  values='["Bare","Look and feel","Theme","High"]'
                   tooltip
                   step="1"
-                  @change=${(e) => this._setLod(parseInt(e.target.value) + 1)}
+                  @change=${(e) => this._setLod(parseInt(e.target.value))}
                 >
                 </s-range>
               </label>
-            </li>
-            <li class="s-bg:main-surface">
-              <label
-                class="s-label:responsive s-pi:50 s-pb:30 @mobile s-pi:40"
-                for="setting-base-color"
-              >
-                <span> Base color </span>
-                <s-color-picker id="setting-base-color">
-                  <div class="s-group">
-                    <input
-                      type="text"
-                      class="s-input"
-                      value="${this._front.theme.getColor('base').toHex()}"
-                    />
-                    <button class="s-btn s-color:base">
-                      <i class="s-icon:color"></i>
-                    </button>
-                  </div>
-                </s-color-picker>
-              </label>
+              <div class="s-flex s-text:right s-pi:50 s-pb:30 @mobile s-pi:40">
+                <div class="s-flex-item:grow"></div>
+                ${this._front.lod.level === 0
+            ? (0, s_lit_component_1.html) `
+                              <p class="s-typo:p s-font:25">
+                                  The
+                                  <span class="s-typo:code">bare</span> level
+                                  contains everything about positions, sizes,
+                                  etc... It allows you to have a functional UI
+                                  without the visual styling.
+                              </p>
+                          `
+            : this._front.lod.level === 1
+                ? (0, s_lit_component_1.html) `
+                              <p class="s-typo:p s-font:25">
+                                  The <span class="s-typo:code">lnf</span> level
+                                  contains the basic look and feel provided by
+                                  Coffeekraken. It's usually a good starting
+                                  point for most of your projects and everything
+                                  can be customized.
+                              </p>
+                          `
+                : this._front.lod.level === 2
+                    ? (0, s_lit_component_1.html) `
+                              <p class="s-typo:p s-font:25">
+                                  The
+                                  <span class="s-typo:code">theme</span> level
+                                  contains everything that is custom to this
+                                  particular website.
+                              </p>
+                          `
+                    : this._front.lod.level === 3
+                        ? (0, s_lit_component_1.html) `
+                              <p class="s-typo:p s-font:25">
+                                  The
+                                  <span class="s-typo:code">high</span> level
+                                  can be used to activate heavy things only for
+                                  high performant systems. It can be CSS stuffs
+                                  using the mixin
+                                  <span class="s-typo:code"
+                                      >@sugar.lod high { ... }</span
+                                  >
+                                  or even JS components/features.
+                              </p>
+                          `
+                        : ''}
+              </div>
             </li>
             <li class="s-bg:main-surface">
               <label
@@ -294,4 +319,4 @@ function define(props = {}, tagName = 'ck-settings') {
     s_lit_component_1.default.define(tagName, CkSettings, Object.assign({ id: 'ck-settings' }, props));
 }
 exports.define = define;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztBQUVkLG9FQUE2QztBQUM3QyxpRkFBc0U7QUFDdEUseUZBQXFHO0FBRXJHLElBQUEsbUNBQStCLEdBQUUsQ0FBQztBQUVsQyxNQUFxQixVQUFXLFNBQVEseUJBQWU7SUFHbkQsTUFBTSxLQUFLLFVBQVU7UUFDakIsT0FBTyx5QkFBZSxDQUFDLHVCQUF1QixFQUFFLENBQUM7SUFDckQsQ0FBQztJQUlEO1FBQ0ksS0FBSyxDQUFDO1lBQ0YsU0FBUyxFQUFFLEtBQUs7U0FDbkIsQ0FBQyxDQUFDO1FBWFAsV0FBTSxHQUFHLGlCQUFRLENBQUMsUUFBUSxDQUFDO1FBYXZCLFFBQVEsQ0FBQyxnQkFBZ0IsQ0FBQyxzQkFBc0IsRUFBRSxHQUFHLEVBQUU7WUFDbkQsSUFBSSxDQUFDLGFBQWEsRUFBRSxDQUFDO1FBQ3pCLENBQUMsQ0FBQyxDQUFDO0lBQ1AsQ0FBQztJQUVLLFlBQVk7O1lBQ2QsTUFBTSxnQkFBZ0IsR0FBRyxJQUFJLENBQUMsYUFBYSxDQUFDLHFCQUFxQixDQUFDLENBQUM7WUFDbkUsTUFBTSxnQkFBZ0IsR0FBRyxJQUFJLENBQUMsYUFBYSxDQUFDLHFCQUFxQixDQUFDLENBQUM7WUFDbkUsTUFBTSxrQkFBa0IsR0FBRyxJQUFJLENBQUMsYUFBYSxDQUFDLHVCQUF1QixDQUFDLENBQUM7WUFDdkUsTUFBTSx5QkFBeUIsR0FBRyxJQUFJLENBQUMsYUFBYSxDQUNoRCw4QkFBOEIsQ0FDakMsQ0FBQztZQUVGLE1BQU0sY0FBYyxHQUFHLElBQUksQ0FBQyxhQUFhLENBQUMsb0JBQW9CLENBQUMsQ0FBQztZQUVoRSxnQkFBZ0IsQ0FBQyxnQkFBZ0IsQ0FBQyx1QkFBdUIsRUFBRSxDQUFDLENBQUMsRUFBRSxFQUFFO2dCQUM3RCxJQUFJLENBQUMs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
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztBQUVkLG9FQUE2QztBQUM3QyxpRkFBc0U7QUFDdEUseUZBQXFHO0FBRXJHLElBQUEsbUNBQStCLEdBQUUsQ0FBQztBQUVsQyxNQUFxQixVQUFXLFNBQVEseUJBQWU7SUFHbkQsTUFBTSxLQUFLLFVBQVU7UUFDakIsT0FBTyx5QkFBZSxDQUFDLHVCQUF1QixFQUFFLENBQUM7SUFDckQsQ0FBQztJQUlEO1FBQ0ksS0FBSyxDQUFDO1lBQ0YsU0FBUyxFQUFFLEtBQUs7U0FDbkIsQ0FBQyxDQUFDO1FBWFAsV0FBTSxHQUFHLGlCQUFRLENBQUMsUUFBUSxDQUFDO1FBYXZCLFFBQVEsQ0FBQyxnQkFBZ0IsQ0FBQyxzQkFBc0IsRUFBRSxHQUFHLEVBQUU7WUFDbkQsSUFBSSxDQUFDLGFBQWEsRUFBRSxDQUFDO1FBQ3pCLENBQUMsQ0FBQyxDQUFDO0lBQ1AsQ0FBQztJQUVLLFlBQVk7O1lBQ2QsTUFBTSxnQkFBZ0IsR0FBRyxJQUFJLENBQUMsYUFBYSxDQUFDLHFCQUFxQixDQUFDLENBQUM7WUFDbkUsTUFBTSxrQkFBa0IsR0FBRyxJQUFJLENBQUMsYUFBYSxDQUFDLHVCQUF1QixDQUFDLENBQUM7WUFDdkUsTUFBTSx5QkFBeUIsR0FBRyxJQUFJLENBQUMsYUFBYSxDQUNoRCw4QkFBOEIsQ0FDakMsQ0FBQztZQUVGLE1BQU0sY0FBYyxHQUFHLElBQUksQ0FBQyxhQUFhLENBQUMsb0JBQW9CLENBQUMsQ0FBQztZQUVoRSxnQkFBZ0IsQ0FBQyxnQkFBZ0IsQ0FBQyx1QkFBdUIsRUFBRSxDQUFDLENBQUMsRUFBRSxFQUFFO2dCQUM3RCxJQUFJLENBQUMsTUFBTSxDQUFDLEtBQUssQ0FBQyxRQUFRLENBQUMsTUFBTSxFQUFFLENBQUMsQ0FBQyxNQUFNLENBQUMs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

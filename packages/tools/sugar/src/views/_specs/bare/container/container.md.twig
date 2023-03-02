@@ -16,8 +16,8 @@
  */
 -->
 
-{% set specs = readSpec('sugar.views.bare.container') %}
-{{ specsToMarkdown(specs, {
+{% set specs = __readSpec('sugar.views.bare.container') %}
+{{ __specsToMarkdown(specs, {
     features: {
         type: {
             title: 'Type',

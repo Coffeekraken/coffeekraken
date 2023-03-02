@@ -20,7 +20,7 @@
     }
 
     ._tabs {
-        background-color: sugar.color(base, surface);
+        background-color: sugar.color(main, surface);
         position: relative;
         z-index: 10;
 
@@ -35,8 +35,8 @@
         padding: sugar.padding(30) sugar.padding(50);
         background: linear-gradient(
             90deg,
-            sugar.color(base, surface),
-            sugar.color(base, background)
+            sugar.color(main, surface),
+            sugar.color(main, background)
         );
         font-size: sugar.font.size(50);
         transform: scale(1);
@@ -79,11 +79,11 @@
 
     ._content {
         padding: sugar.padding(50);
-        background-color: sugar.color(base, surface);
+        background-color: sugar.color(main, surface);
         background-image: linear-gradient(
             45deg,
-            sugar.color(base, surface),
-            sugar.color(base, background)
+            sugar.color(main, surface),
+            sugar.color(main, background)
         );
         display: none;
         position: relative;

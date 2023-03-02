@@ -1,5 +1,14 @@
 #features-why {
-  &:after {
-    display: none;
-  }
+    &:after {
+        display: none;
+    }
+
+    img,
+    svg {
+        display: none;
+
+        @sugar.lod theme {
+            display: block;
+        }
+    }
 }

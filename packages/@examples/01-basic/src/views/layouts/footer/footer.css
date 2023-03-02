@@ -1,62 +1,62 @@
 .footer {
-  padding-block: sugar.padding(80);
+    padding-block: sugar.padding(80);
 
-  @sugar.lod.prevent {
-    background-color: rgba(0, 0, 0, 0.01);
-  }
-
-  @sugar.lod (2) {
-    background-color: sugar.color(base, background);
-  }
-
-  .logo {
-    width: 150px;
-  }
-
-  .s-layout {
-    @sugar.layout ('1 2 3 3');
-    gap: sugar.margin(50);
-
-    @sugar.media <=mobile {
-      padding-inline: sugar.padding(30);
-      @sugar.layout ('1 _ 2 _ 3');
-    }
-  }
-
-  .s-menu--level-0 {
-    @sugar.layout ('1 2');
-
-    @sugar.media <=mobile {
-      @sugar.layout ('1 _ 2');
-    }
-  }
-
-  .s-menu_link--level-0 {
-    display: block;
-    font-weight: bold;
-    font-size: sugar.font.size(50);
-    margin-block-end: sugar.margin(50);
-  }
-  .s-menu_item.s-menu_item--level-0:not(:first-child) {
-    @sugar.media <=mobile {
-      margin-block-start: sugar.margin(50);
-    }
-  }
-
-  .s-menu_link--level-1 {
-    display: block;
-    font-size: sugar.font.size(40);
-    margin-block-end: sugar.margin(30);
-
-    &:hover {
-      color: sugar.color(accent);
+    @sugar.lod.prevent {
+        background-color: rgba(0, 0, 0, 0.01);
     }
 
-    &:before {
-      content: '-';
-      color: sugar.color(accent);
-      font-weight: bold;
-      margin-inline-end: sugar.margin(10);
+    @sugar.lod (2) {
+        background-color: sugar.color(main, background);
     }
-  }
+
+    .logo {
+        width: 150px;
+    }
+
+    .s-layout {
+        @sugar.layout ('1 2 3 3');
+        gap: sugar.margin(50);
+
+        @sugar.media <=mobile {
+            padding-inline: sugar.padding(30);
+            @sugar.layout ('1 _ 2 _ 3');
+        }
+    }
+
+    .s-menu--level-0 {
+        @sugar.layout ('1 2');
+
+        @sugar.media <=mobile {
+            @sugar.layout ('1 _ 2');
+        }
+    }
+
+    .s-menu_link--level-0 {
+        display: block;
+        font-weight: bold;
+        font-size: sugar.font.size(50);
+        margin-block-end: sugar.margin(50);
+    }
+    .s-menu_item.s-menu_item--level-0:not(:first-child) {
+        @sugar.media <=mobile {
+            margin-block-start: sugar.margin(50);
+        }
+    }
+
+    .s-menu_link--level-1 {
+        display: block;
+        font-size: sugar.font.size(40);
+        margin-block-end: sugar.margin(30);
+
+        &:hover {
+            color: sugar.color(accent);
+        }
+
+        &:before {
+            content: '-';
+            color: sugar.color(accent);
+            font-weight: bold;
+            margin-inline-end: sugar.margin(10);
+        }
+    }
 }

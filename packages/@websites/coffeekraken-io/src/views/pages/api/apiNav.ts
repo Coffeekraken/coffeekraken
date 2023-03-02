@@ -9,208 +9,215 @@ import { html } from 'lit';
 export interface IApiNavComponentProps {}
 
 export class ApiNav extends __SLitComponent {
-  constructor() {
-    super({
-      shadowDom: false,
-    });
-  }
+    constructor() {
+        super({
+            shadowDom: false,
+        });
+    }
 
-  static state = {
-    loaded: false,
-  };
+    static state = {
+        loaded: false,
+    };
 
-  _openedNamespaces = [];
-  _menuStack = {};
-  _menuStates = {};
+    _openedNamespaces = [];
+    _menuStack = {};
+    _menuStates = {};
 
-  async firstUpdated() {
-    const request = new __SRequest({
-      url: '/docmap.json',
-      method: 'get',
-    });
+    async firstUpdated() {
+        const request = new __SRequest({
+            url: '/docmap.json',
+            method: 'get',
+        });
 
-    let _dispatchTimeout;
-    this.addEventListener('actual', (e) => {
-      for (let [key, value] of Object.entries(this._menuStates)) {
-        if (e.target.getAttribute('namespace').startsWith(key + '.')) {
-          value.opened = true;
-        }
-      }
-      if (_dispatchTimeout) return;
-      _dispatchTimeout = setTimeout(() => {
-        e.target.dispatchEvent(
-          new CustomEvent('actual', {
-            bubbles: true,
-          })
+        let _dispatchTimeout;
+        this.addEventListener('actual', (e) => {
+            for (let [key, value] of Object.entries(this._menuStates)) {
+                if (e.target.getAttribute('namespace').startsWith(key + '.')) {
+                    value.opened = true;
+                }
+            }
+            if (_dispatchTimeout) return;
+            _dispatchTimeout = setTimeout(() => {
+                e.target.dispatchEvent(
+                    new CustomEvent('actual', {
+                        bubbles: true,
+                    }),
+                );
+            }, 1000);
+        });
+
+        // restore state
+        this._menuStates = JSON.parse(
+            window.localStorage.getItem('apiNavStates') ?? '{}',
         );
-      }, 1000);
-    });
 
-    // restore state
-    this._menuStates = JSON.parse(
-      window.localStorage.getItem('apiNavStates') ?? '{}'
-    );
+        // const cachedNav = JSON.parse(
+        //     window.localStorage.getItem('apiNav') ?? '{}',
+        // );
+        const cachedNav = {};
+        if (Object.keys(cachedNav).length) {
+            this._menuStack = cachedNav;
+            this.state.loaded = true;
+        }
 
-    // const cachedNav = JSON.parse(
-    //     window.localStorage.getItem('apiNav') ?? '{}',
-    // );
-    const cachedNav = {};
-    if (Object.keys(cachedNav).length) {
-      this._menuStack = cachedNav;
-      this.state.loaded = true;
+        const res = await request.send();
+        const types = [];
+
+        res.data.map = __filterObject(res.data.map, (key, item) => {
+            const supportedTypes = [
+                'function',
+                'class',
+                // 'cssfontface',
+                'cssmixin',
+                'postcssmixin',
+                'cssfunction',
+                'postcssfunction',
+                'object',
+                // 'cssclass',
+                'customelement',
+                'feature',
+            ];
+
+            let type = item.type?.types?.[0]?.type ?? item.type;
+            if (!type) return false;
+
+            if (types.indexOf(type.toLowerCase()) === -1)
+                types.push(type.toLowerCase());
+
+            if (supportedTypes.indexOf(type.toLowerCase()) === -1) return false;
+            return true;
+        });
+
+        this._menuStack = {};
+        Object.keys(res.data.map).forEach((namespace) => {
+            if (!namespace.match(/^@coffeekraken/)) return;
+            __set(
+                this._menuStack,
+                namespace.replace('@coffeekraken.', ''),
+                res.data.map[namespace],
+            );
+        });
+
+        // save new nav
+        // window.localStorage.setItem('apiNav', JSON.stringify(this._menuStack));
+        this.state.loaded = true;
+
+        this.requestUpdate();
     }
 
-    const res = await request.send();
-    const types = [];
-
-    res.data.map = __filterObject(res.data.map, (key, item) => {
-      const supportedTypes = [
-        'function',
-        'class',
-        // 'cssfontface',
-        'cssmixin',
-        'postcssmixin',
-        'cssfunction',
-        'postcssfunction',
-        'object',
-        // 'cssclass',
-        'customelement',
-        'feature',
-      ];
-
-      let type = item.type?.types?.[0]?.type ?? item.type;
-      if (!type) return false;
-
-      if (types.indexOf(type.toLowerCase()) === -1)
-        types.push(type.toLowerCase());
-
-      if (supportedTypes.indexOf(type.toLowerCase()) === -1) return false;
-      return true;
-    });
-
-    this._menuStack = {};
-    Object.keys(res.data.map).forEach((namespace) => {
-      if (!namespace.match(/^@coffeekraken/)) return;
-      __set(
-        this._menuStack,
-        namespace.replace('@coffeekraken.', ''),
-        res.data.map[namespace]
-      );
-    });
-
-    // save new nav
-    // window.localStorage.setItem('apiNav', JSON.stringify(this._menuStack));
-    this.state.loaded = true;
-
-    this.requestUpdate();
-  }
-
-  _isAcive(namespace) {
-    return this._menuStates[namespace]?.opened;
-  }
-
-  _toggle(namespace) {
-    if (!this._menuStates[namespace]) {
-      this._menuStates[namespace] = {
-        opened: true,
-      };
-    } else {
-      this._menuStates[namespace].opened = !this._menuStates[namespace].opened;
+    _isAcive(namespace) {
+        return this._menuStates[namespace]?.opened;
     }
 
-    // save state
-    window.localStorage.setItem(
-      'apiNavStates',
-      JSON.stringify(this._menuStates)
-    );
+    _toggle(namespace) {
+        if (!this._menuStates[namespace]) {
+            this._menuStates[namespace] = {
+                opened: true,
+            };
+        } else {
+            this._menuStates[namespace].opened =
+                !this._menuStates[namespace].opened;
+        }
 
-    this.requestUpdate();
-  }
+        // save state
+        window.localStorage.setItem(
+            'apiNavStates',
+            JSON.stringify(this._menuStates),
+        );
 
-  _renderList(obj, currentNamespace = '', level = 0) {
-    if (!obj) return '';
+        this.requestUpdate();
+    }
 
-    const itemsKeys = Object.keys(obj);
-    const items = itemsKeys.map((itemName) => {
-      const itemObj = obj[itemName];
-      const itemNamespace = `${
-        currentNamespace ? `${currentNamespace}.` : ''
-      }${itemName}`;
+    _renderList(obj, currentNamespace = '', level = 0) {
+        if (!obj) return '';
 
-      if (!this._menuStates[itemNamespace]) {
-        this._menuStates[itemNamespace] = {
-          opened: false,
-        };
-      }
+        const itemsKeys = Object.keys(obj);
+        const items = itemsKeys.map((itemName) => {
+            const itemObj = obj[itemName];
+            const itemNamespace = `${
+                currentNamespace ? `${currentNamespace}.` : ''
+            }${itemName}`;
 
-      if (itemObj.name && itemObj.namespace) {
+            if (!this._menuStates[itemNamespace]) {
+                this._menuStates[itemNamespace] = {
+                    opened: false,
+                };
+            }
+
+            if (itemObj.name && itemObj.namespace) {
+                return html`
+                    <li>
+                        <div class="s-flex">
+                            <a
+                                href="/api/@coffeekraken.${itemNamespace}"
+                                namespace="${itemNamespace}"
+                                class="s-link:stretch s-order:2"
+                                >${itemObj.name}</a
+                            >
+                            <div
+                                class="s-loader:square-dots s-color:accent s-mie:10 s-float:right s-when:siblings:loading"
+                            ></div>
+                        </div>
+                    </li>
+                `;
+            } else {
+                return html`
+                    <li
+                        class="_folder ${this._isAcive(itemNamespace)
+                            ? 'active'
+                            : ''}"
+                    >
+                        <div
+                            @click=${() => {
+                                this._toggle(itemNamespace);
+                            }}
+                        >
+                            <i
+                                class="s-icon:folder-opened s-mie:10 s-tc:complementary s-when:grandparent:active"
+                            ></i>
+                            <i class="s-icon:folder s-mie:10"></i>
+                            ${itemName}
+                        </div>
+                        ${this._renderList(
+                            __get(this._menuStack, itemNamespace),
+                            itemNamespace,
+                            level + 1,
+                        )}
+                    </li>
+                `;
+            }
+        });
+
         return html`
-          <li>
-            <div class="s-flex">
-              <a
-                href="/api/@coffeekraken.${itemNamespace}"
-                namespace="${itemNamespace}"
-                class="s-link:stretch s-order:2"
-                >${itemObj.name}</a
-              >
-              <div
-                class="s-loader:spinner s-color:accent s-mie:10 s-float:right s-when:siblings:loading"
-              ></div>
-            </div>
-          </li>
+            <ul class="s-fs-tree">
+                ${items}
+            </ul>
         `;
-      } else {
-        return html`
-          <li class="_folder ${this._isAcive(itemNamespace) ? 'active' : ''}">
-            <div
-              @click=${() => {
-                this._toggle(itemNamespace);
-              }}
-            >
-              <i
-                class="s-icon:folder-opened s-mie:10 s-tc:complementary s-when:grandparent:active"
-              ></i>
-              <i class="s-icon:folder s-mie:10"></i>
-              ${itemName}
-            </div>
-            ${this._renderList(
-              __get(this._menuStack, itemNamespace),
-              itemNamespace,
-              level + 1
-            )}
-          </li>
-        `;
-      }
-    });
-
-    return html`
-      <ul class="s-fs-tree">
-        ${items}
-      </ul>
-    `;
-  }
-
-  render() {
-    if (!this.state.loaded) {
-      return html`
-        <div>
-          <i class="s-loader:spinner s-color:accent"></i>
-          &nbsp;
-          <p class="s-typo:p s-display:inline-block">Loading please wait...</p>
-        </div>
-      `;
     }
 
-    return html`
-      <div class="${this.utils.cls('')}">
-        ${this._renderList(this._menuStack)}
-      </div>
-    `;
-  }
+    render() {
+        if (!this.state.loaded) {
+            return html`
+                <div class="sidemenu">
+                    <div class="s-loader:square-dots s-color:accent"></div>
+                    &nbsp;
+                    <p class="s-typo:p s-display:inline-block">
+                        Loading please wait...
+                    </p>
+                </div>
+            `;
+        }
+
+        return html`
+            <div class="sidemenu ${this.utils.cls('')}">
+                ${this._renderList(this._menuStack)}
+            </div>
+        `;
+    }
 }
 
 (() => {
-  if (!customElements.get('api-nav')) {
-    customElements.define('api-nav', ApiNav);
-  }
+    if (!customElements.get('api-nav')) {
+        customElements.define('api-nav', ApiNav);
+    }
 })();

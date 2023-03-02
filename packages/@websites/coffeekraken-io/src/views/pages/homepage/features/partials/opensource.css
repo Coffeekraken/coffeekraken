@@ -25,7 +25,15 @@
         width: 250%;
         position: absolute;
         top: calc(sugar.padding(50) * -1);
-        right: calc(sugar.padding(50) * -1);
+        right: 0;
+
+        .s-media {
+            display: none;
+
+            @sugar.lod theme {
+                display: block;
+            }
+        }
 
         @sugar.wireframe {
             width: 200%;
@@ -83,13 +91,13 @@
             transform-origin: 0% 0%;
 
             path {
-                stroke: sugar.color(base, --alpha 0.05);
+                stroke: sugar.color(main, --alpha 0.05);
                 fill: none;
             }
 
             @sugar.theme.when dark {
                 path {
-                    stroke: sugar.color(base, foreground, --alpha 0.1);
+                    stroke: sugar.color(main, foreground, --alpha 0.1);
                     fill: none;
                 }
             }
@@ -134,7 +142,7 @@
             position: absolute;
 
             path {
-                stroke: sugar.color(base, foreground, --alpha 0.2);
+                stroke: sugar.color(main, foreground, --alpha 0.2);
                 fill: none;
             }
         }
@@ -154,8 +162,11 @@
 
     ._box {
         position: relative;
-        background: sugar.color(main, surface);
-        @sugar.border.radius();
+
+        @sugar.lod theme {
+            background: sugar.color(main, surface);
+            @sugar.border.radius();
+        }
 
         @sugar.wireframe {
             @sugar.wireframe.border;
@@ -166,8 +177,8 @@
             /* background: sugar.color(main, background, --lighten 5%); */
             background-image: linear-gradient(
                 -45deg,
-                sugar.color(base, surface, --alpha 0),
-                sugar.color(base, --alpha 0.2)
+                sugar.color(main, surface, --alpha 0),
+                sugar.color(main, --alpha 0.2)
             );
         }
 

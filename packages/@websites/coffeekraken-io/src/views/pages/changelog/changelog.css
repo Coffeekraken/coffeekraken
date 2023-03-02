@@ -11,7 +11,7 @@
             }
 
             &:hover {
-                background: sugar.color(base, background);
+                background: sugar.color(main, background);
             }
         }
     }

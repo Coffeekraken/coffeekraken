@@ -1,7 +1,18 @@
 #features-development {
     ._stack {
+        background-color: sugar.color(main, surface);
+
         @sugar.wireframe {
             @sugar.wireframe.border;
+        }
+    }
+
+    img,
+    svg {
+        display: none;
+
+        @sugar.lod theme {
+            display: block;
         }
     }
 }

@@ -16,7 +16,7 @@
         transform: translate(-40%, -40%) scale(1.7) rotate(-10deg);
         display: none;
         /* filter: grayscale(100%);
-        opacity: 0.2; */
+            opacity: 0.2; */
 
         img {
             object-fit: cover;

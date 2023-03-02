@@ -4,7 +4,7 @@ import { __deepMerge } from '@coffeekraken/sugar/object';
 import type { ISSitemapBuilderBuildParams } from '../interface/SSitemapBuildIParamsInterface';
 import type { ISSitemapBuilderResultItem } from '../SSitemapBuilder';
 import __SSitemapBuilderSource, {
-    ISSitemapBuilderSourceResult
+    ISSitemapBuilderSourceResult,
 } from '../SSitemapBuilderSource';
 
 /**
@@ -124,7 +124,7 @@ export default class SSitemapBuilderFileSource extends __SSitemapBuilderSource {
                 }
 
                 logs.push(
-                    `<green>[file]</green> "<cyan>${file.relPath}</cyan>" generated <magenta>${itemsCount}</magenta> sitemap entrie(s)`,
+                    `<green>[file]</green> <magenta>${itemsCount}</magenta> sitemap entrie(s) for the file "<cyan>${file.relPath}</cyan>"`,
                 );
             }
 

@@ -27,14 +27,10 @@ export default class CkSettings extends __SLitComponent {
     }
     firstUpdated() {
         return __awaiter(this, void 0, void 0, function* () {
-            const $baseColorPicker = this.querySelector('#setting-base-color');
             const $mainColorPicker = this.querySelector('#setting-main-color');
             const $accentColorPicker = this.querySelector('#setting-accent-color');
             const $complementaryColorPicker = this.querySelector('#setting-complementary-color');
             const $fontSizeRange = this.querySelector('#setting-font-size');
-            $baseColorPicker.addEventListener('s-color-picker.change', (e) => {
-                this._front.theme.setColor('base', e.detail.hex);
-            });
             $mainColorPicker.addEventListener('s-color-picker.change', (e) => {
                 this._front.theme.setColor('main', e.detail.hex);
             });
@@ -53,8 +49,10 @@ export default class CkSettings extends __SLitComponent {
         return __awaiter(this, void 0, void 0, function* () { });
     }
     _setLod(level) {
-        this._front.setWireframe(level <= 1);
+        console.log('SET', level);
+        this._front.setWireframe(level <= 0);
         this._front.setLod(level);
+        this.requestUpdate();
     }
     render() {
         return html `
@@ -85,7 +83,7 @@ export default class CkSettings extends __SLitComponent {
                         </li>
             <li class="s-bg:main-surface">
               <label
-                class="s-label:responsive s-pi:50 s-pb:30 @mobile s-pi:40"
+                class="s-label:responsive s-pi:50 s-pbs:30 @mobile s-pi:40"
                 for="setting-font-size"
               >
                 <span>Level of details</span>
@@ -94,34 +92,61 @@ export default class CkSettings extends __SLitComponent {
                   id="setting-lod"
                   min="0"
                   max="3"
-                  value=${this._front.lod.level - 1}
-                  values='["Wireframe","Low","Medium","High"]'
+                  value=${this._front.lod.level}
+                  values='["Bare","Look and feel","Theme","High"]'
                   tooltip
                   step="1"
-                  @change=${(e) => this._setLod(parseInt(e.target.value) + 1)}
+                  @change=${(e) => this._setLod(parseInt(e.target.value))}
                 >
                 </s-range>
               </label>
-            </li>
-            <li class="s-bg:main-surface">
-              <label
-                class="s-label:responsive s-pi:50 s-pb:30 @mobile s-pi:40"
-                for="setting-base-color"
-              >
-                <span> Base color </span>
-                <s-color-picker id="setting-base-color">
-                  <div class="s-group">
-                    <input
-                      type="text"
-                      class="s-input"
-                      value="${this._front.theme.getColor('base').toHex()}"
-                    />
-                    <button class="s-btn s-color:base">
-                      <i class="s-icon:color"></i>
-                    </button>
-                  </div>
-                </s-color-picker>
-              </label>
+              <div class="s-flex s-text:right s-pi:50 s-pb:30 @mobile s-pi:40">
+                <div class="s-flex-item:grow"></div>
+                ${this._front.lod.level === 0
+            ? html `
+                              <p class="s-typo:p s-font:25">
+                                  The
+                                  <span class="s-typo:code">bare</span> level
+                                  contains everything about positions, sizes,
+                                  etc... It allows you to have a functional UI
+                                  without the visual styling.
+                              </p>
+                          `
+            : this._front.lod.level === 1
+                ? html `
+                              <p class="s-typo:p s-font:25">
+                                  The <span class="s-typo:code">lnf</span> level
+                                  contains the basic look and feel provided by
+                                  Coffeekraken. It's usually a good starting
+                                  point for most of your projects and everything
+                                  can be customized.
+                              </p>
+                          `
+                : this._front.lod.level === 2
+                    ? html `
+                              <p class="s-typo:p s-font:25">
+                                  The
+                                  <span class="s-typo:code">theme</span> level
+                                  contains everything that is custom to this
+                                  particular website.
+                              </p>
+                          `
+                    : this._front.lod.level === 3
+                        ? html `
+                              <p class="s-typo:p s-font:25">
+                                  The
+                                  <span class="s-typo:code">high</span> level
+                                  can be used to activate heavy things only for
+                                  high performant systems. It can be CSS stuffs
+                                  using the mixin
+                                  <span class="s-typo:code"
+                                      >@sugar.lod high { ... }</span
+                                  >
+                                  or even JS components/features.
+                              </p>
+                          `
+                        : ''}
+              </div>
             </li>
             <li class="s-bg:main-surface">
               <label
@@ -263,4 +288,4 @@ CkSettings.state = {};
 export function define(props = {}, tagName = 'ck-settings') {
     __SLitComponent.define(tagName, CkSettings, Object.assign({ id: 'ck-settings' }, props));
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7Ozs7Ozs7Ozs7QUFFZCxPQUFPLFFBQVEsTUFBTSx1QkFBdUIsQ0FBQztBQUM3QyxPQUFPLGVBQWUsRUFBRSxFQUFFLElBQUksRUFBRSxNQUFNLCtCQUErQixDQUFDO0FBQ3RFLE9BQU8sRUFBRSxNQUFNLElBQUksK0JBQStCLEVBQUUsTUFBTSwwQ0FBMEMsQ0FBQztBQUVyRywrQkFBK0IsRUFBRSxDQUFDO0FBRWxDLE1BQU0sQ0FBQyxPQUFPLE9BQU8sVUFBVyxTQUFRLGVBQWU7SUFHbkQsTUFBTSxLQUFLLFVBQVU7UUFDakIsT0FBTyxlQUFlLENBQUMsdUJBQXVCLEVBQUUsQ0FBQztJQUNyRCxDQUFDO0lBSUQ7UUFDSSxLQUFLLENBQUM7WUFDRixTQUFTLEVBQUUsS0FBSztTQUNuQixDQUFDLENBQUM7UUFYUCxXQUFNLEdBQUcsUUFBUSxDQUFDLFFBQVEsQ0FBQztRQWF2QixRQUFRLENBQUMsZ0JBQWdCLENBQUMsc0JBQXNCLEVBQUUsR0FBRyxFQUFFO1lBQ25ELElBQUksQ0FBQyxhQUFhLEVBQUUsQ0FBQztRQUN6QixDQUFDLENBQUMsQ0FBQztJQUNQLENBQUM7SUFFSyxZQUFZOztZQUNkLE1BQU0sZ0JBQWdCLEdBQUcsSUFBSSxDQUFDLGFBQWEsQ0FBQyxxQkFBcUIsQ0FBQyxDQUFDO1lBQ25FLE1BQU0sZ0JBQWdCLEdBQUcsSUFBSSxDQUFDLGFBQWEsQ0FBQyxxQkFBcUIsQ0FBQyxDQUFDO1lBQ25FLE1BQU0sa0JBQWtCLEdBQUcsSUFBSSxDQUFDLGFBQWEsQ0FBQyx1QkFBdUIsQ0FBQyxDQUFDO1lBQ3ZFLE1BQU0seUJBQXlCLEdBQUcsSUFBSSxDQUFDLGFBQWEsQ0FDaEQsOEJBQThCLENBQ2pDLENBQUM7WUFFRixNQUFNLGNBQWMsR0FBRyxJQUFJLENBQUMsYUFBYSxDQUFDLG9CQUFvQixDQUFDLENBQUM7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
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7Ozs7Ozs7Ozs7QUFFZCxPQUFPLFFBQVEsTUFBTSx1QkFBdUIsQ0FBQztBQUM3QyxPQUFPLGVBQWUsRUFBRSxFQUFFLElBQUksRUFBRSxNQUFNLCtCQUErQixDQUFDO0FBQ3RFLE9BQU8sRUFBRSxNQUFNLElBQUksK0JBQStCLEVBQUUsTUFBTSwwQ0FBMEMsQ0FBQztBQUVyRywrQkFBK0IsRUFBRSxDQUFDO0FBRWxDLE1BQU0sQ0FBQyxPQUFPLE9BQU8sVUFBVyxTQUFRLGVBQWU7SUFHbkQsTUFBTSxLQUFLLFVBQVU7UUFDakIsT0FBTyxlQUFlLENBQUMsdUJBQXVCLEVBQUUsQ0FBQztJQUNyRCxDQUFDO0lBSUQ7UUFDSSxLQUFLLENBQUM7WUFDRixTQUFTLEVBQUUsS0FBSztTQUNuQixDQUFDLENBQUM7UUFYUCxXQUFNLEdBQUcsUUFBUSxDQUFDLFFBQVEsQ0FBQztRQWF2QixRQUFRLENBQUMsZ0JBQWdCLENBQUMsc0JBQXNCLEVBQUUsR0FBRyxFQUFFO1lBQ25ELElBQUksQ0FBQyxhQUFhLEVBQUUsQ0FBQztRQUN6QixDQUFDLENBQUMsQ0FBQztJQUNQLENBQUM7SUFFSyxZQUFZOztZQUNkLE1BQU0sZ0JBQWdCLEdBQUcsSUFBSSxDQUFDLGFBQWEsQ0FBQyxxQkFBcUIsQ0FBQyxDQUFDO1lBQ25FLE1BQU0sa0JBQWtCLEdBQUcsSUFBSSxDQUFDLGFBQWEsQ0FBQyx1QkFBdUIsQ0FBQyxDQUFDO1lBQ3ZFLE1BQU0seUJBQXlCLEdBQUcsSUFBSSxDQUFDLGFBQWEsQ0FDaEQsOEJBQThCLENBQ2pDLENBQUM7WUFFRixNQUFNLGNBQWMsR0FBRyxJQUFJLENBQUMsYUFBYSxDQUFDLG9CQUFvQixDQUFDLENBQUM7WUFFaEUsZ0JBQWdCLENBQUMsZ0JBQWdCLENBQUMsdUJBQXVCLEVBQUUsQ0FBQyxDQUFDLEVBQUUsRUFB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

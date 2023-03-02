@@ -16,7 +16,7 @@
  */
 -->
 
-{% set specs = readSpec('sugar.views.components.cta') %}
-{{ specsToMarkdown(specs)|raw }}
+{% set specs = __readSpec('sugar.views.components.cta') %}
+{{ __specsToMarkdown(specs)|raw }}
 
 {% endblock %}

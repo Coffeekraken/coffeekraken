@@ -135,9 +135,15 @@ export default function ({
     // wireframe
     vars.push(`
         @sugar.wireframe {
+            @sugar.wireframe.background;
 
-            > .s-slider_root > .s-slider_slides-wrapper {
-                @sugar.wireframe.background;
+            > .s-slider_root > .s-slider_slides-wrapper:after {
+                content: '';
+                display: block;
+                position: absolute;
+                top: 0; left: 0;
+                width: 100%; height: 100%;
+                pointer-events: none;
                 @sugar.wireframe.border;
             }
 

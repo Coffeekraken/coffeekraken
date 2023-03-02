@@ -10,7 +10,7 @@ s-dashboard-frontend-checker {
     flex-direction: column;
 
     ._header {
-        background: sugar.color(base, background);
+        background: sugar.color(main, background);
         padding: sugar.padding(30);
         @sugar.border.radius (10);
     }

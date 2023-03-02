@@ -31,6 +31,7 @@
         width: 300% !important;
         left: auto !important;
         right: 0 !important;
+        @sugar.depth (100);
 
         @sugar.wireframe {
             @sugar.wireframe.background;

@@ -166,13 +166,13 @@ export default function ({
     if (finalParams.scope.indexOf('lnf') !== -1) {
         vars.push(`
           & > * {
-            color: sugar.color(current, foreground);
-
             @sugar.state.active {
               background-color: sugar.color(current);
+              color: sugar.color(current, foreground);
             }
             @sugar.state.hover {
               background-color: sugar.color(current, --lighten 5);
+              color: sugar.color(current, foreground);
             }       
           }
         `);

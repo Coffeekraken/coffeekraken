@@ -93,7 +93,7 @@
             padding: sugar.padding(20) sugar.padding(30);
             font-size: sugar.font.size(40);
             border-radius: sugar.border.radius();
-            background: sugar.color(base, --alpha 0.3);
+            background: sugar.color(main, --alpha 0.3);
             margin-block-end: sugar.margin(10);
 
             &[active] {

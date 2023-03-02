@@ -42,7 +42,7 @@
         padding: sugar.padding(30);
         top: 0;
         padding-inline: sugar.padding(30);
-        background: sugar.color(base, background);
+        background: sugar.color(main, background);
         height: 80px;
         @sugar.depth (100);
     }
@@ -79,7 +79,7 @@
             right: calc(sugar.margin(30) * -1);
             bottom: 0;
             z-index: -1;
-            background: sugar.color(base, surface);
+            background: sugar.color(main, surface);
             opacity: 0;
             transform: rotateX(-10deg) rotateY(1deg) translateX(2%) scale(1.1);
             @sugar.border.radius();
@@ -88,7 +88,7 @@
 
             body.scrolled & {
                 opacity: 1;
-                background: sugar.color(base, surface, --darken 5%);
+                background: sugar.color(main, surface, --darken 5%);
             }
 
             @sugar.media mobile {

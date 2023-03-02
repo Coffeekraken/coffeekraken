@@ -16,7 +16,7 @@
  */
 -->
 
-{% set specs = readSpec('sugar.views.components.card') %}
-{{ specsToMarkdown(specs)|raw }}
+{% set specs = __readSpec('sugar.views.components.card') %}
+{{ __specsToMarkdown(specs)|raw }}
 
 {% endblock %}

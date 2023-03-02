@@ -151,7 +151,7 @@ function default_1({ params, atRule, sharedData, replaceWith, }) {
 
                     .s-datetime-picker_calendar {
                         margin-block-end: sugar.margin(30);
-                        color: sugar.color(base, text);
+                        color: sugar.color(main, text);
                     }
 
                     .s-datetime-picker_calendar-day {
@@ -164,7 +164,7 @@ function default_1({ params, atRule, sharedData, replaceWith, }) {
                         border-radius: sugar.border.radius(ui.datetimePicker.borderRadius);
                         
                         &.disabled {
-                            color: sugar.color(base, text, --alpha 0.6);
+                            color: sugar.color(main, text, --alpha 0.6);
                             
                             &:after {
                                 content: '';
@@ -257,11 +257,11 @@ function default_1({ params, atRule, sharedData, replaceWith, }) {
                     }
 
                     .s-datetime-picker_selector-item {
-                        color: sugar.color(base, text);
+                        color: sugar.color(main, text);
                         font-weight: bold;
 
                         &.disabled {
-                            color: sugar.color(base, text, --alpha 0.15);
+                            color: sugar.color(main, text, --alpha 0.15);
 
                             span {
                                 position: relative;

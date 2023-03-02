@@ -33,14 +33,14 @@ export default function (api) {
              * @name                background
              * @namespace           config.themeWireframe.light
              * @type                String
-             * @default             rgba(255,255,255)
+             * @default             #ffffff
              *
              * Specify the "background" color for your wireframe
              *
              * @since               2.0.0
              * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            background: 'rgba(255,255,255)',
+            background: '#ffffff',
 
             /**
              * @name                surface
@@ -83,7 +83,7 @@ export default function (api) {
              * @since               2.0.0
              * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            borderColor: 'rgba(255,255,255,0.1)',
+            borderColor: 'rgba(255,255,255,0.2)',
 
             /**
              * @name                background

@@ -34,7 +34,10 @@
         background-position: 50% 50%;
         filter: grayscale(0.1);
         overflow: hidden;
-        background-image: var(--image);
+
+        @sugar.lod theme {
+            background-image: var(--image);
+        }
     }
 
     &:before {
@@ -64,7 +67,10 @@
         transition: all 0.3s sugar.theme(easing.default);
         transform-origin: -100% 100%;
         text-align: center;
-        color: sugar.color(current, foreground);
+
+        @sugar.lod theme {
+            color: sugar.color(current, foreground);
+        }
     }
 
     i {
@@ -106,7 +112,11 @@
             transform-origin: 0 0;
             transform: translateX(30%) translateY(-30%) rotateZ(45deg);
             transition: all 0.3s sugar.theme(easing.default);
-            background-color: sugar.color(current);
+            background-color: sugar.color(main, --alpha 0.02);
+
+            @sugar.lod theme {
+                background-color: sugar.color(current);
+            }
         }
     }
 

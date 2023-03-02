@@ -35,7 +35,7 @@ s-carpenter {
 
 ._navigation {
     flex-grow: 0;
-    background: sugar.color(base, surface);
+    background: sugar.color(main, surface);
     width: clamp(400px, 450px, 550px);
     padding: sugar.padding(50);
     @sugar.color (base, text);
@@ -47,13 +47,13 @@ s-carpenter {
 
 ._editor {
     flex-grow: 0;
-    background: sugar.color(base, surface);
+    background: sugar.color(main, surface);
     width: clamp(400px, 450px, 550px);
     padding: sugar.padding(50);
 }
 
 .fa-solid {
-    color: sugar.color(base, text, --alpha 0.5);
+    color: sugar.color(main, text, --alpha 0.5);
     margin-inline-end: sugar.margin(10);
 }
 .s-tooltip {
@@ -72,7 +72,7 @@ s-carpenter {
 
 .sidebar {
     width: 450px;
-    background: sugar.color(base, surface);
+    background: sugar.color(main, surface);
     padding: sugar.padding(50);
     height: calc(100vh - 42px);
     overflow-y: auto;
@@ -95,7 +95,7 @@ div[component] {
 .s-tabs {
     @sugar.ui.tabs ($scope: 'bare');
     width: 100%;
-    background: sugar.color(base, backgroud, --darken 45%);
+    background: sugar.color(main, backgroud, --darken 45%);
 
     .s-tabs_item {
         padding: sugar.padding(ui.tabs.paddingBlock)
@@ -116,6 +116,6 @@ div[component] {
     padding-block: sugar.padding(20);
 
     &.s-specs-editor_prop-checkbox {
-        border-bottom: 1px solid sugar.color(base, surface, --darken 5%);
+        border-bottom: 1px solid sugar.color(main, surface, --darken 5%);
     }
 }

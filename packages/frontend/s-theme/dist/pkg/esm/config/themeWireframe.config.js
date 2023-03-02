@@ -31,14 +31,14 @@ export default function (api) {
              * @name                background
              * @namespace           config.themeWireframe.light
              * @type                String
-             * @default             rgba(255,255,255)
+             * @default             #ffffff
              *
              * Specify the "background" color for your wireframe
              *
              * @since               2.0.0
              * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            background: 'rgba(255,255,255)',
+            background: '#ffffff',
             /**
              * @name                surface
              * @namespace           config.themeWireframe.light
@@ -78,7 +78,7 @@ export default function (api) {
              * @since               2.0.0
              * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            borderColor: 'rgba(255,255,255,0.1)',
+            borderColor: 'rgba(255,255,255,0.2)',
             /**
              * @name                background
              * @namespace           config.themeWireframe.dark
@@ -106,4 +106,4 @@ export default function (api) {
         },
     };
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE1BQU0sQ0FBQyxPQUFPLFdBQVcsR0FBRztJQUN4QixPQUFPO1FBQ0gsS0FBSyxFQUFFO1lBQ0g7Ozs7Ozs7Ozs7ZUFVRztZQUNILElBQUksTUFBTTtnQkFDTixPQUFPLGFBQWEsSUFBSSxDQUFDLFdBQVcsRUFBRSxDQUFDO1lBQzNDLENBQUM7WUFFRDs7Ozs7Ozs7OztlQVVHO1lBQ0gsV0FBVyxFQUFFLGlCQUFpQjtZQUU5Qjs7Ozs7Ozs7OztlQVVHO1lBQ0gsVUFBVSxFQUFFLG1CQUFtQjtZQUUvQjs7Ozs7Ozs7OztlQVVHO1lBQ0gsT0FBTyxFQUFFLFNBQVM7U0FDckI7UUFFRCxJQUFJLEVBQUU7WUFDRjs7Ozs7Ozs7OztlQVVHO1lBQ0gsSUFBSSxNQUFNO2dCQUNOLE9BQU8sYUFBYSxJQUFJLENBQUMsV0FBVyxFQUFFLENBQUM7WUFDM0MsQ0FBQztZQUVEOzs7Ozs7Ozs7O2VBVUc7WUFDSCxXQUFXLEVBQUUsdUJBQXVCO1lBRXBDOzs7Ozs7Ozs7O2VBVUc7WUFDSCxVQUFVLEVBQUUsU0FBUztZQUVyQjs7Ozs7Ozs7OztlQVVHO1lBQ0gsT0FBTyxFQUFFLFNBQVM7U0FDckI7S0FDSixDQUFDO0FBQ04sQ0FBQyJ9
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE1BQU0sQ0FBQyxPQUFPLFdBQVcsR0FBRztJQUN4QixPQUFPO1FBQ0gsS0FBSyxFQUFFO1lBQ0g7Ozs7Ozs7Ozs7ZUFVRztZQUNILElBQUksTUFBTTtnQkFDTixPQUFPLGFBQWEsSUFBSSxDQUFDLFdBQVcsRUFBRSxDQUFDO1lBQzNDLENBQUM7WUFFRDs7Ozs7Ozs7OztlQVVHO1lBQ0gsV0FBVyxFQUFFLGlCQUFpQjtZQUU5Qjs7Ozs7Ozs7OztlQVVHO1lBQ0gsVUFBVSxFQUFFLFNBQVM7WUFFckI7Ozs7Ozs7Ozs7ZUFVRztZQUNILE9BQU8sRUFBRSxTQUFTO1NBQ3JCO1FBRUQsSUFBSSxFQUFFO1lBQ0Y7Ozs7Ozs7Ozs7ZUFVRztZQUNILElBQUksTUFBTTtnQkFDTixPQUFPLGFBQWEsSUFBSSxDQUFDLFdBQVcsRUFBRSxDQUFDO1lBQzNDLENBQUM7WUFFRDs7Ozs7Ozs7OztlQVVHO1lBQ0gsV0FBVyxFQUFFLHVCQUF1QjtZQUVwQzs7Ozs7Ozs7OztlQVVHO1lBQ0gsVUFBVSxFQUFFLFNBQVM7WUFFckI7Ozs7Ozs7Ozs7ZUFVRztZQUNILE9BQU8sRUFBRSxTQUFTO1NBQ3JCO0tBQ0osQ0FBQztBQUNOLENBQUMifQ==

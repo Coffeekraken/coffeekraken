@@ -1,5 +1,10 @@
 #features-sugar {
-  .illustration {
-    width: 100%;
-  }
+    .illustration {
+        width: 100%;
+        display: none;
+
+        @sugar.lod theme {
+            display: block;
+        }
+    }
 }

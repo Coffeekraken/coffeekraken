@@ -174,7 +174,7 @@ export default function ({ params, atRule, sharedData, replaceWith, }) {
 
                     .s-menu_inner {
                         @sugar.media <=mobile {
-                            background: sugar.color(base, background);
+                            background: sugar.color(main, background);
                             padding-inline: sugar.padding(30);
                             @sugar.transition();
                         }
@@ -229,7 +229,7 @@ export default function ({ params, atRule, sharedData, replaceWith, }) {
                             }
 
                             > .s-menu_children {
-                                background: sugar.color(base, background);
+                                background: sugar.color(main, background);
                                 padding: sugar.padding(20);
                                 @sugar.depth(100);
                                 @sugar.border.radius();

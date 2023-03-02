@@ -120,8 +120,8 @@ function __deepMap(objectOrArray, processor, settings = {}, _path = []) {
 }
 function __unquote(string2, quotesToRemove = ['"', "'", "\u201D", "`"]) {
   string2 = string2.trim();
-  quotesToRemove.forEach((quote) => {
-    if (string2.substr(0, 1) === quote && string2.substr(-1) === quote) {
+  quotesToRemove.forEach((quote2) => {
+    if (string2.substr(0, 1) === quote2 && string2.substr(-1) === quote2) {
       string2 = string2.substr(1);
       string2 = string2.substr(0, string2.length - 1);
       return;
@@ -2026,7 +2026,7 @@ const {
   stringReplaceAll,
   stringEncaseCRLFWithFirstIndex
 } = util$2;
-const { isArray: isArray$6 } = Array;
+const { isArray: isArray$7 } = Array;
 const levelMapping = [
   "ansi",
   "ansi",
@@ -2134,7 +2134,7 @@ const createStyler = (open, close, parent) => {
 };
 const createBuilder = (self2, _styler, _isEmpty) => {
   const builder = (...arguments_) => {
-    if (isArray$6(arguments_[0]) && isArray$6(arguments_[0].raw)) {
+    if (isArray$7(arguments_[0]) && isArray$7(arguments_[0].raw)) {
       return applyStyle(builder, chalkTag(builder, ...arguments_));
     }
     return applyStyle(builder, arguments_.length === 1 ? "" + arguments_[0] : arguments_.join(" "));
@@ -2169,7 +2169,7 @@ const applyStyle = (self2, string2) => {
 let template;
 const chalkTag = (chalk2, ...strings) => {
   const [firstString] = strings;
-  if (!isArray$6(firstString) || !isArray$6(firstString.raw)) {
+  if (!isArray$7(firstString) || !isArray$7(firstString.raw)) {
     return strings.join(" ");
   }
   const arguments_ = strings.slice(1);
@@ -2224,17 +2224,17 @@ function __isObject(value) {
   return value && typeof value === "object" && value.constructor === Object;
 }
 var decycle_1;
-const isArray$5 = (e) => Array.isArray(e), isObject$6 = (e) => "Object" === Object.prototype.toString.call(e).slice(8, -1), validate = (e) => {
+const isArray$6 = (e) => Array.isArray(e), isObject$6 = (e) => "Object" === Object.prototype.toString.call(e).slice(8, -1), validate = (e) => {
   if (void 0 === e)
     throw new Error("This method requires one parameter");
-  if (!isArray$5(e) && !isObject$6(e))
+  if (!isArray$6(e) && !isObject$6(e))
     throw new TypeError("This method only accepts arrays and objects");
 }, findRef = (e, r) => Object.keys(r).find((a3) => r[a3] === e), decycle = (e) => {
   validate(e);
   let r = {};
   const a3 = (e2, c = "$") => {
     const s2 = findRef(e2, r);
-    return s2 ? { $ref: s2 } : isArray$5(e2) || isObject$6(e2) ? (r[c] = e2, isArray$5(e2) ? e2.map((e3, r2) => a3(e3, `${c}[${r2}]`)) : Object.keys(e2).reduce((r2, s3) => (r2[s3] = a3(e2[s3], `${c}.${s3}`), r2), {})) : e2;
+    return s2 ? { $ref: s2 } : isArray$6(e2) || isObject$6(e2) ? (r[c] = e2, isArray$6(e2) ? e2.map((e3, r2) => a3(e3, `${c}[${r2}]`)) : Object.keys(e2).reduce((r2, s3) => (r2[s3] = a3(e2[s3], `${c}.${s3}`), r2), {})) : e2;
   };
   return a3(e);
 };
@@ -2447,15 +2447,6 @@ function __toJson(object) {
   return newObj;
 }
 class SClass {
-  constructor(settings = {}) {
-    this.settings = {};
-    setSettings(this, settings);
-    this.metas = getMetas(this);
-    Object.defineProperty(this, "metas", {
-      enumerable: true,
-      value: getMetas(this)
-    });
-  }
   static extends(Cls) {
     class SClass2 extends Cls {
       constructor(settings, ...args) {
@@ -2477,6 +2468,15 @@ class SClass {
     }
     return SClass2;
   }
+  constructor(settings = {}) {
+    this.settings = {};
+    setSettings(this, settings);
+    this.metas = getMetas(this);
+    Object.defineProperty(this, "metas", {
+      enumerable: true,
+      value: getMetas(this)
+    });
+  }
   expose(instance, settings) {
     return expose(this, instance, settings);
   }
@@ -2485,14 +2485,14 @@ class SClass {
   }
 }
 function getMetas(ctx) {
-  var _a2, _b2, _c2, _d2, _e, _f, _g, _h;
+  var _a2, _b2, _c2, _d2, _e2, _f, _g, _h;
   let name2 = `<yellow>${((_a2 = ctx.settings.metas) === null || _a2 === void 0 ? void 0 : _a2.name) || ""}</yellow>`;
   if ((_b2 = ctx.settings.metas) === null || _b2 === void 0 ? void 0 : _b2.id) {
     name2 += ` <cyan>${ctx.settings.metas.id}</cyan>`;
   }
   const metasObj = {
     id: (_d2 = (_c2 = ctx.settings.metas) === null || _c2 === void 0 ? void 0 : _c2.id) !== null && _d2 !== void 0 ? _d2 : ctx.constructor.name,
-    name: (_f = (_e = ctx.settings.metas) === null || _e === void 0 ? void 0 : _e.name) !== null && _f !== void 0 ? _f : ctx.constructor.name,
+    name: (_f = (_e2 = ctx.settings.metas) === null || _e2 === void 0 ? void 0 : _e2.name) !== null && _f !== void 0 ? _f : ctx.constructor.name,
     formattedName: name2,
     color: (_h = (_g = ctx.settings.metas) === null || _g === void 0 ? void 0 : _g.color) !== null && _h !== void 0 ? _h : "yellow"
   };
@@ -2527,8 +2527,8 @@ function setSettings(ctx, settings = {}) {
     ctx.settings.metas.id = ctx.constructor.name;
   ctx.settings.metas.color = "yellow";
 }
-const PartytownSnippet = `/* Partytown 0.7.4 - MIT builder.io */
-!function(t,e,n,i,r,o,a,d,s,c,p,l){function u(){l||(l=1,"/"==(a=(o.lib||"/~partytown/")+(o.debug?"debug/":""))[0]&&(s=e.querySelectorAll('script[type="text/partytown"]'),i!=t?i.dispatchEvent(new CustomEvent("pt1",{detail:t})):(d=setTimeout(w,1e4),e.addEventListener("pt0",f),r?h(1):n.serviceWorker?n.serviceWorker.register(a+(o.swPath||"partytown-sw.js"),{scope:a}).then((function(t){t.active?h():t.installing&&t.installing.addEventListener("statechange",(function(t){"activated"==t.target.state&&h()}))}),console.error):w())))}function h(t){c=e.createElement(t?"script":"iframe"),t||(c.setAttribute("style","display:block;width:0;height:0;border:0;visibility:hidden"),c.setAttribute("aria-hidden",!0)),c.src=a+"partytown-"+(t?"atomics.js?v=0.7.4":"sandbox-sw.html?"+Date.now()),e.body.appendChild(c)}function w(t,n){for(f(),t=0;t<s.length;t++)(n=e.createElement("script")).innerHTML=s[t].innerHTML,e.head.appendChild(n);c&&c.parentNode.removeChild(c)}function f(){clearTimeout(d)}o=t.partytown||{},i==t&&(o.forward||[]).map((function(e){p=t,e.split(".").map((function(e,n,i){p=p[i[n]]=n+1<i.length?"push"==i[n+1]?[]:p[i[n]]||{}:function(){(t._ptf=t._ptf||[]).push(i,arguments)}}))})),"complete"==e.readyState?u():(t.addEventListener("DOMContentLoaded",u),t.addEventListener("load",u))}(window,document,navigator,top,window.crossOriginIsolated);`;
+const PartytownSnippet = `/* Partytown 0.7.5 - MIT builder.io */
+!function(t,e,n,i,r,o,a,d,s,c,p,l){function u(){l||(l=1,"/"==(a=(o.lib||"/~partytown/")+(o.debug?"debug/":""))[0]&&(s=e.querySelectorAll('script[type="text/partytown"]'),i!=t?i.dispatchEvent(new CustomEvent("pt1",{detail:t})):(d=setTimeout(f,1e4),e.addEventListener("pt0",w),r?h(1):n.serviceWorker?n.serviceWorker.register(a+(o.swPath||"partytown-sw.js"),{scope:a}).then((function(t){t.active?h():t.installing&&t.installing.addEventListener("statechange",(function(t){"activated"==t.target.state&&h()}))}),console.error):f())))}function h(t){c=e.createElement(t?"script":"iframe"),t||(c.setAttribute("style","display:block;width:0;height:0;border:0;visibility:hidden"),c.setAttribute("aria-hidden",!0)),c.src=a+"partytown-"+(t?"atomics.js?v=0.7.5":"sandbox-sw.html?"+Date.now()),e.body.appendChild(c)}function f(n,r){for(w(),i==t&&(o.forward||[]).map((function(e){delete t[e.split(".")[0]]})),n=0;n<s.length;n++)(r=e.createElement("script")).innerHTML=s[n].innerHTML,e.head.appendChild(r);c&&c.parentNode.removeChild(c)}function w(){clearTimeout(d)}o=t.partytown||{},i==t&&(o.forward||[]).map((function(e){p=t,e.split(".").map((function(e,n,i){p=p[i[n]]=n+1<i.length?"push"==i[n+1]?[]:p[i[n]]||{}:function(){(t._ptf=t._ptf||[]).push(i,arguments)}}))})),"complete"==e.readyState?u():(t.addEventListener("DOMContentLoaded",u),t.addEventListener("load",u))}(window,document,navigator,top,window.crossOriginIsolated);`;
 const createSnippet = (config2, snippetCode) => {
   const { forward = [], ...filteredConfig } = config2 || {};
   const configStr = JSON.stringify(filteredConfig, (k2, v) => {
@@ -2680,7 +2680,7 @@ var lodash_clone = { exports: {} };
   }();
   var funcToString = funcProto.toString;
   var hasOwnProperty2 = objectProto.hasOwnProperty;
-  var objectToString = objectProto.toString;
+  var objectToString2 = objectProto.toString;
   var reIsNative = RegExp(
     "^" + funcToString.call(hasOwnProperty2).replace(reRegExpChar, "\\$&").replace(/hasOwnProperty|(function).*?(?=\\\()| for .+?(?=\\\])/g, "$1.*?") + "$"
   );
@@ -2927,7 +2927,7 @@ var lodash_clone = { exports: {} };
     return isArray2(object) ? result2 : arrayPush(result2, symbolsFunc(object));
   }
   function baseGetTag(value) {
-    return objectToString.call(value);
+    return objectToString2.call(value);
   }
   function baseIsNative(value) {
     if (!isObject3(value) || isMasked(value)) {
@@ -3021,7 +3021,7 @@ var lodash_clone = { exports: {} };
   var getTag = baseGetTag;
   if (DataView2 && getTag(new DataView2(new ArrayBuffer(1))) != dataViewTag || Map2 && getTag(new Map2()) != mapTag || Promise2 && getTag(Promise2.resolve()) != promiseTag || Set2 && getTag(new Set2()) != setTag || WeakMap2 && getTag(new WeakMap2()) != weakMapTag) {
     getTag = function(value) {
-      var result2 = objectToString.call(value), Ctor = result2 == objectTag ? value.constructor : void 0, ctorString = Ctor ? toSource(Ctor) : void 0;
+      var result2 = objectToString2.call(value), Ctor = result2 == objectTag ? value.constructor : void 0, ctorString = Ctor ? toSource(Ctor) : void 0;
       if (ctorString) {
         switch (ctorString) {
           case dataViewCtorString:
@@ -3118,7 +3118,7 @@ var lodash_clone = { exports: {} };
     return value === other || value !== value && other !== other;
   }
   function isArguments5(value) {
-    return isArrayLikeObject(value) && hasOwnProperty2.call(value, "callee") && (!propertyIsEnumerable.call(value, "callee") || objectToString.call(value) == argsTag);
+    return isArrayLikeObject(value) && hasOwnProperty2.call(value, "callee") && (!propertyIsEnumerable.call(value, "callee") || objectToString2.call(value) == argsTag);
   }
   var isArray2 = Array.isArray;
   function isArrayLike(value) {
@@ -3129,7 +3129,7 @@ var lodash_clone = { exports: {} };
   }
   var isBuffer2 = nativeIsBuffer || stubFalse;
   function isFunction2(value) {
-    var tag2 = isObject3(value) ? objectToString.call(value) : "";
+    var tag2 = isObject3(value) ? objectToString2.call(value) : "";
     return tag2 == funcTag || tag2 == genTag;
   }
   function isLength(value) {
@@ -3255,7 +3255,7 @@ var lodash_clonedeep = { exports: {} };
   }();
   var funcToString = funcProto.toString;
   var hasOwnProperty2 = objectProto.hasOwnProperty;
-  var objectToString = objectProto.toString;
+  var objectToString2 = objectProto.toString;
   var reIsNative = RegExp(
     "^" + funcToString.call(hasOwnProperty2).replace(reRegExpChar, "\\$&").replace(/hasOwnProperty|(function).*?(?=\\\()| for .+?(?=\\\])/g, "$1.*?") + "$"
   );
@@ -3502,7 +3502,7 @@ var lodash_clonedeep = { exports: {} };
     return isArray2(object) ? result2 : arrayPush(result2, symbolsFunc(object));
   }
   function baseGetTag(value) {
-    return objectToString.call(value);
+    return objectToString2.call(value);
   }
   function baseIsNative(value) {
     if (!isObject3(value) || isMasked(value)) {
@@ -3596,7 +3596,7 @@ var lodash_clonedeep = { exports: {} };
   var getTag = baseGetTag;
   if (DataView2 && getTag(new DataView2(new ArrayBuffer(1))) != dataViewTag || Map2 && getTag(new Map2()) != mapTag || Promise2 && getTag(Promise2.resolve()) != promiseTag || Set2 && getTag(new Set2()) != setTag || WeakMap2 && getTag(new WeakMap2()) != weakMapTag) {
     getTag = function(value) {
-      var result2 = objectToString.call(value), Ctor = result2 == objectTag ? value.constructor : void 0, ctorString = Ctor ? toSource(Ctor) : void 0;
+      var result2 = objectToString2.call(value), Ctor = result2 == objectTag ? value.constructor : void 0, ctorString = Ctor ? toSource(Ctor) : void 0;
       if (ctorString) {
         switch (ctorString) {
           case dataViewCtorString:
@@ -3693,7 +3693,7 @@ var lodash_clonedeep = { exports: {} };
     return value === other || value !== value && other !== other;
   }
   function isArguments5(value) {
-    return isArrayLikeObject(value) && hasOwnProperty2.call(value, "callee") && (!propertyIsEnumerable.call(value, "callee") || objectToString.call(value) == argsTag);
+    return isArrayLikeObject(value) && hasOwnProperty2.call(value, "callee") && (!propertyIsEnumerable.call(value, "callee") || objectToString2.call(value) == argsTag);
   }
   var isArray2 = Array.isArray;
   function isArrayLike(value) {
@@ -3704,7 +3704,7 @@ var lodash_clonedeep = { exports: {} };
   }
   var isBuffer2 = nativeIsBuffer || stubFalse;
   function isFunction2(value) {
-    var tag2 = isObject3(value) ? objectToString.call(value) : "";
+    var tag2 = isObject3(value) ? objectToString2.call(value) : "";
     return tag2 == funcTag || tag2 == genTag;
   }
   function isLength(value) {
@@ -3925,11 +3925,11 @@ function __deepProxy(object, handlerFn, settings = {}) {
 }
 var ERROR_MESSAGE = "Function.prototype.bind called on incompatible ";
 var slice$1 = Array.prototype.slice;
-var toStr$a = Object.prototype.toString;
+var toStr$b = Object.prototype.toString;
 var funcType = "[object Function]";
 var implementation$b = function bind2(that) {
   var target = this;
-  if (typeof target !== "function" || toStr$a.call(target) !== funcType) {
+  if (typeof target !== "function" || toStr$b.call(target) !== funcType) {
     throw new TypeError(ERROR_MESSAGE + target);
   }
   var args = slice$1.call(arguments, 1);
@@ -4017,13 +4017,35 @@ var tryFunctionObject = function tryFunctionToStr(value) {
     return false;
   }
 };
-var toStr$9 = Object.prototype.toString;
+var toStr$a = Object.prototype.toString;
+var objectClass = "[object Object]";
 var fnClass = "[object Function]";
 var genClass = "[object GeneratorFunction]";
+var ddaClass = "[object HTMLAllCollection]";
+var ddaClass2 = "[object HTML document.all class]";
+var ddaClass3 = "[object HTMLCollection]";
 var hasToStringTag$a = typeof Symbol === "function" && !!Symbol.toStringTag;
-var documentDotAll = typeof document === "object" && typeof document.all === "undefined" && document.all !== void 0 ? document.all : {};
+var isIE68 = !(0 in [,]);
+var isDDA = function isDocumentDotAll() {
+  return false;
+};
+if (typeof document === "object") {
+  var all$1 = document.all;
+  if (toStr$a.call(all$1) === toStr$a.call(document.all)) {
+    isDDA = function isDocumentDotAll2(value) {
+      if ((isIE68 || !value) && (typeof value === "undefined" || typeof value === "object")) {
+        try {
+          var str2 = toStr$a.call(value);
+          return (str2 === ddaClass || str2 === ddaClass2 || str2 === ddaClass3 || str2 === objectClass) && value("") == null;
+        } catch (e) {
+        }
+      }
+      return false;
+    };
+  }
+}
 var isCallable$1 = reflectApply ? function isCallable2(value) {
-  if (value === documentDotAll) {
+  if (isDDA(value)) {
     return true;
   }
   if (!value) {
@@ -4031,9 +4053,6 @@ var isCallable$1 = reflectApply ? function isCallable2(value) {
   }
   if (typeof value !== "function" && typeof value !== "object") {
     return false;
-  }
-  if (typeof value === "function" && !value.prototype) {
-    return true;
   }
   try {
     reflectApply(value, null, badArrayLike);
@@ -4042,9 +4061,9 @@ var isCallable$1 = reflectApply ? function isCallable2(value) {
       return false;
     }
   }
-  return !isES6ClassFn(value);
+  return !isES6ClassFn(value) && tryFunctionObject(value);
 } : function isCallable3(value) {
-  if (value === documentDotAll) {
+  if (isDDA(value)) {
     return true;
   }
   if (!value) {
@@ -4053,17 +4072,17 @@ var isCallable$1 = reflectApply ? function isCallable2(value) {
   if (typeof value !== "function" && typeof value !== "object") {
     return false;
   }
-  if (typeof value === "function" && !value.prototype) {
-    return true;
-  }
   if (hasToStringTag$a) {
     return tryFunctionObject(value);
   }
   if (isES6ClassFn(value)) {
     return false;
   }
-  var strClass2 = toStr$9.call(value);
-  return strClass2 === fnClass || strClass2 === genClass;
+  var strClass2 = toStr$a.call(value);
+  if (strClass2 !== fnClass && strClass2 !== genClass && !/^\[object HTML/.test(strClass2)) {
+    return false;
+  }
+  return tryFunctionObject(value);
 };
 var shams$1 = function hasSymbols2() {
   if (typeof Symbol !== "function" || typeof Object.getOwnPropertySymbols !== "function") {
@@ -4130,31 +4149,31 @@ var hasSymbols$4 = function hasNativeSymbols() {
 var undefined$1;
 var $SyntaxError = SyntaxError;
 var $Function = Function;
-var $TypeError$3 = TypeError;
+var $TypeError$5 = TypeError;
 var getEvalledConstructor = function(expressionSyntax) {
   try {
     return $Function('"use strict"; return (' + expressionSyntax + ").constructor;")();
   } catch (e) {
   }
 };
-var $gOPD = Object.getOwnPropertyDescriptor;
-if ($gOPD) {
+var $gOPD$1 = Object.getOwnPropertyDescriptor;
+if ($gOPD$1) {
   try {
-    $gOPD({}, "");
+    $gOPD$1({}, "");
   } catch (e) {
-    $gOPD = null;
+    $gOPD$1 = null;
   }
 }
 var throwTypeError = function() {
-  throw new $TypeError$3();
+  throw new $TypeError$5();
 };
-var ThrowTypeError = $gOPD ? function() {
+var ThrowTypeError = $gOPD$1 ? function() {
   try {
     arguments.callee;
     return throwTypeError;
   } catch (calleeThrows) {
     try {
-      return $gOPD(arguments, "callee").get;
+      return $gOPD$1(arguments, "callee").get;
     } catch (gOPDthrows) {
       return throwTypeError;
     }
@@ -4178,6 +4197,8 @@ var INTRINSICS = {
   "%AsyncIteratorPrototype%": needsEval,
   "%Atomics%": typeof Atomics === "undefined" ? undefined$1 : Atomics,
   "%BigInt%": typeof BigInt === "undefined" ? undefined$1 : BigInt,
+  "%BigInt64Array%": typeof BigInt64Array === "undefined" ? undefined$1 : BigInt64Array,
+  "%BigUint64Array%": typeof BigUint64Array === "undefined" ? undefined$1 : BigUint64Array,
   "%Boolean%": Boolean,
   "%DataView%": typeof DataView === "undefined" ? undefined$1 : DataView,
   "%Date%": Date,
@@ -4222,7 +4243,7 @@ var INTRINSICS = {
   "%SyntaxError%": $SyntaxError,
   "%ThrowTypeError%": ThrowTypeError,
   "%TypedArray%": TypedArray,
-  "%TypeError%": $TypeError$3,
+  "%TypeError%": $TypeError$5,
   "%Uint8Array%": typeof Uint8Array === "undefined" ? undefined$1 : Uint8Array,
   "%Uint8ClampedArray%": typeof Uint8ClampedArray === "undefined" ? undefined$1 : Uint8ClampedArray,
   "%Uint16Array%": typeof Uint16Array === "undefined" ? undefined$1 : Uint16Array,
@@ -4232,6 +4253,12 @@ var INTRINSICS = {
   "%WeakRef%": typeof WeakRef === "undefined" ? undefined$1 : WeakRef,
   "%WeakSet%": typeof WeakSet === "undefined" ? undefined$1 : WeakSet
 };
+try {
+  null.error;
+} catch (e) {
+  var errorProto = getProto$4(getProto$4(e));
+  INTRINSICS["%Error.prototype%"] = errorProto;
+}
 var doEval = function doEval2(name2) {
   var value;
   if (name2 === "%AsyncFunction%") {
@@ -4308,10 +4335,10 @@ var LEGACY_ALIASES = {
   "%WeakSetPrototype%": ["WeakSet", "prototype"]
 };
 var bind$3 = functionBind;
-var hasOwn$2 = src$1;
-var $concat = bind$3.call(Function.call, Array.prototype.concat);
+var hasOwn$3 = src$1;
+var $concat$1 = bind$3.call(Function.call, Array.prototype.concat);
 var $spliceApply = bind$3.call(Function.apply, Array.prototype.splice);
-var $replace = bind$3.call(Function.call, String.prototype.replace);
+var $replace$1 = bind$3.call(Function.call, String.prototype.replace);
 var $strSlice = bind$3.call(Function.call, String.prototype.slice);
 var $exec$1 = bind$3.call(Function.call, RegExp.prototype.exec);
 var rePropName = /[^%.[\]]+|\[(?:(-?\d+(?:\.\d+)?)|(["'])((?:(?!\2)[^\\]|\\.)*?)\2)\]|(?=(?:\.|\[\])(?:\.|\[\]|%$))/g;
@@ -4325,25 +4352,25 @@ var stringToPath = function stringToPath2(string2) {
     throw new $SyntaxError("invalid intrinsic syntax, expected opening `%`");
   }
   var result2 = [];
-  $replace(string2, rePropName, function(match5, number2, quote, subString) {
-    result2[result2.length] = quote ? $replace(subString, reEscapeChar, "$1") : number2 || match5;
+  $replace$1(string2, rePropName, function(match5, number2, quote2, subString) {
+    result2[result2.length] = quote2 ? $replace$1(subString, reEscapeChar, "$1") : number2 || match5;
   });
   return result2;
 };
 var getBaseIntrinsic = function getBaseIntrinsic2(name2, allowMissing) {
   var intrinsicName = name2;
   var alias;
-  if (hasOwn$2(LEGACY_ALIASES, intrinsicName)) {
+  if (hasOwn$3(LEGACY_ALIASES, intrinsicName)) {
     alias = LEGACY_ALIASES[intrinsicName];
     intrinsicName = "%" + alias[0] + "%";
   }
-  if (hasOwn$2(INTRINSICS, intrinsicName)) {
+  if (hasOwn$3(INTRINSICS, intrinsicName)) {
     var value = INTRINSICS[intrinsicName];
     if (value === needsEval) {
       value = doEval(intrinsicName);
     }
     if (typeof value === "undefined" && !allowMissing) {
-      throw new $TypeError$3("intrinsic " + name2 + " exists, but is not available. Please file an issue!");
+      throw new $TypeError$5("intrinsic " + name2 + " exists, but is not available. Please file an issue!");
     }
     return {
       alias,
@@ -4355,12 +4382,12 @@ var getBaseIntrinsic = function getBaseIntrinsic2(name2, allowMissing) {
 };
 var getIntrinsic = function GetIntrinsic2(name2, allowMissing) {
   if (typeof name2 !== "string" || name2.length === 0) {
-    throw new $TypeError$3("intrinsic name must be a non-empty string");
+    throw new $TypeError$5("intrinsic name must be a non-empty string");
   }
   if (arguments.length > 1 && typeof allowMissing !== "boolean") {
-    throw new $TypeError$3('"allowMissing" argument must be a boolean');
+    throw new $TypeError$5('"allowMissing" argument must be a boolean');
   }
-  if ($exec$1(/^%?[^%]*%?$/g, name2) === null) {
+  if ($exec$1(/^%?[^%]*%?$/, name2) === null) {
     throw new $SyntaxError("`%` may not be present anywhere but at the beginning and end of the intrinsic name");
   }
   var parts = stringToPath(name2);
@@ -4372,7 +4399,7 @@ var getIntrinsic = function GetIntrinsic2(name2, allowMissing) {
   var alias = intrinsic.alias;
   if (alias) {
     intrinsicBaseName = alias[0];
-    $spliceApply(parts, $concat([0, 1], alias));
+    $spliceApply(parts, $concat$1([0, 1], alias));
   }
   for (var i = 1, isOwn = true; i < parts.length; i += 1) {
     var part = parts[i];
@@ -4386,17 +4413,17 @@ var getIntrinsic = function GetIntrinsic2(name2, allowMissing) {
     }
     intrinsicBaseName += "." + part;
     intrinsicRealName = "%" + intrinsicBaseName + "%";
-    if (hasOwn$2(INTRINSICS, intrinsicRealName)) {
+    if (hasOwn$3(INTRINSICS, intrinsicRealName)) {
       value = INTRINSICS[intrinsicRealName];
     } else if (value != null) {
       if (!(part in value)) {
         if (!allowMissing) {
-          throw new $TypeError$3("base intrinsic for " + name2 + " exists, but the property is not available.");
+          throw new $TypeError$5("base intrinsic for " + name2 + " exists, but the property is not available.");
         }
         return void 0;
       }
-      if ($gOPD && i + 1 >= parts.length) {
-        var desc = $gOPD(value, part);
+      if ($gOPD$1 && i + 1 >= parts.length) {
+        var desc = $gOPD$1(value, part);
         isOwn = !!desc;
         if (isOwn && "get" in desc && !("originalValue" in desc.get)) {
           value = desc.get;
@@ -4404,7 +4431,7 @@ var getIntrinsic = function GetIntrinsic2(name2, allowMissing) {
           value = value[part];
         }
       } else {
-        isOwn = hasOwn$2(value, part);
+        isOwn = hasOwn$3(value, part);
         value = value[part];
       }
       if (isOwn && !skipFurtherCaching) {
@@ -4454,11 +4481,11 @@ var callBind$3 = { exports: {} };
     module.exports.apply = applyBind;
   }
 })(callBind$3);
-var GetIntrinsic$7 = getIntrinsic;
+var GetIntrinsic$a = getIntrinsic;
 var callBind$2 = callBind$3.exports;
-var $indexOf = callBind$2(GetIntrinsic$7("String.prototype.indexOf"));
-var callBound$9 = function callBoundIntrinsic(name2, allowMissing) {
-  var intrinsic = GetIntrinsic$7(name2, !!allowMissing);
+var $indexOf = callBind$2(GetIntrinsic$a("String.prototype.indexOf"));
+var callBound$a = function callBoundIntrinsic(name2, allowMissing) {
+  var intrinsic = GetIntrinsic$a(name2, !!allowMissing);
   if (typeof intrinsic === "function" && $indexOf(name2, ".prototype.") > -1) {
     return callBind$2(intrinsic);
   }
@@ -4468,9 +4495,9 @@ var hasSymbols$2 = shams$1;
 var shams = function hasToStringTagShams() {
   return hasSymbols$2() && !!Symbol.toStringTag;
 };
-var callBound$8 = callBound$9;
-var $boolToStr = callBound$8("Boolean.prototype.toString");
-var $toString$3 = callBound$8("Object.prototype.toString");
+var callBound$9 = callBound$a;
+var $boolToStr = callBound$9("Boolean.prototype.toString");
+var $toString$3 = callBound$9("Object.prototype.toString");
 var tryBooleanObject = function booleanBrandCheck(value) {
   try {
     $boolToStr(value);
@@ -4499,16 +4526,16 @@ var tryDateObject = function tryDateGetDayCall(value) {
     return false;
   }
 };
-var toStr$8 = Object.prototype.toString;
+var toStr$9 = Object.prototype.toString;
 var dateClass = "[object Date]";
 var hasToStringTag$8 = shams();
 var isDateObject = function isDateObject2(value) {
   if (typeof value !== "object" || value === null) {
     return false;
   }
-  return hasToStringTag$8 ? tryDateObject(value) : toStr$8.call(value) === dateClass;
+  return hasToStringTag$8 ? tryDateObject(value) : toStr$9.call(value) === dateClass;
 };
-var toStr$7 = Object.prototype.toString;
+var toStr$8 = Object.prototype.toString;
 var fnToStr$1 = Function.prototype.toString;
 var isFnRegex$1 = /^\s*(?:function)?\*/;
 var hasToStringTag$7 = shams();
@@ -4531,7 +4558,7 @@ var isGeneratorFunction$1 = function isGeneratorFunction2(fn2) {
     return true;
   }
   if (!hasToStringTag$7) {
-    var str2 = toStr$7.call(fn2);
+    var str2 = toStr$8.call(fn2);
     return str2 === "[object GeneratorFunction]";
   }
   if (!getProto$3) {
@@ -4552,7 +4579,7 @@ var tryNumberObject = function tryNumberObject2(value) {
     return false;
   }
 };
-var toStr$6 = Object.prototype.toString;
+var toStr$7 = Object.prototype.toString;
 var numClass = "[object Number]";
 var hasToStringTag$6 = shams();
 var isNumberObject = function isNumberObject2(value) {
@@ -4562,17 +4589,17 @@ var isNumberObject = function isNumberObject2(value) {
   if (typeof value !== "object") {
     return false;
   }
-  return hasToStringTag$6 ? tryNumberObject(value) : toStr$6.call(value) === numClass;
+  return hasToStringTag$6 ? tryNumberObject(value) : toStr$7.call(value) === numClass;
 };
-var callBound$7 = callBound$9;
+var callBound$8 = callBound$a;
 var hasToStringTag$5 = shams();
-var has$2;
+var has$4;
 var $exec;
 var isRegexMarker;
 var badStringifier;
 if (hasToStringTag$5) {
-  has$2 = callBound$7("Object.prototype.hasOwnProperty");
-  $exec = callBound$7("RegExp.prototype.exec");
+  has$4 = callBound$8("Object.prototype.hasOwnProperty");
+  $exec = callBound$8("RegExp.prototype.exec");
   isRegexMarker = {};
   var throwRegexMarker = function() {
     throw isRegexMarker;
@@ -4585,7 +4612,7 @@ if (hasToStringTag$5) {
     badStringifier[Symbol.toPrimitive] = throwRegexMarker;
   }
 }
-var $toString$2 = callBound$7("Object.prototype.toString");
+var $toString$2 = callBound$8("Object.prototype.toString");
 var gOPD$1 = Object.getOwnPropertyDescriptor;
 var regexClass = "[object RegExp]";
 var isRegex$1 = hasToStringTag$5 ? function isRegex2(value) {
@@ -4593,7 +4620,7 @@ var isRegex$1 = hasToStringTag$5 ? function isRegex2(value) {
     return false;
   }
   var descriptor2 = gOPD$1(value, "lastIndex");
-  var hasLastIndexDataProperty = descriptor2 && has$2(descriptor2, "value");
+  var hasLastIndexDataProperty = descriptor2 && has$4(descriptor2, "value");
   if (!hasLastIndexDataProperty) {
     return false;
   }
@@ -4617,20 +4644,20 @@ var tryStringObject = function tryStringObject2(value) {
     return false;
   }
 };
-var toStr$5 = Object.prototype.toString;
+var toStr$6 = Object.prototype.toString;
 var strClass = "[object String]";
 var hasToStringTag$4 = shams();
-var isString$5 = function isString2(value) {
+var isString$6 = function isString2(value) {
   if (typeof value === "string") {
     return true;
   }
   if (typeof value !== "object") {
     return false;
   }
-  return hasToStringTag$4 ? tryStringObject(value) : toStr$5.call(value) === strClass;
+  return hasToStringTag$4 ? tryStringObject(value) : toStr$6.call(value) === strClass;
 };
-var isSymbol$2 = { exports: {} };
-var toStr$4 = Object.prototype.toString;
+var isSymbol$3 = { exports: {} };
+var toStr$5 = Object.prototype.toString;
 var hasSymbols$1 = hasSymbols$4();
 if (hasSymbols$1) {
   var symToStr = Symbol.prototype.toString;
@@ -4641,11 +4668,11 @@ if (hasSymbols$1) {
     }
     return symStringRegex.test(symToStr.call(value));
   };
-  isSymbol$2.exports = function isSymbol2(value) {
+  isSymbol$3.exports = function isSymbol2(value) {
     if (typeof value === "symbol") {
       return true;
     }
-    if (toStr$4.call(value) !== "[object Symbol]") {
+    if (toStr$5.call(value) !== "[object Symbol]") {
       return false;
     }
     try {
@@ -4655,7 +4682,7 @@ if (hasSymbols$1) {
     }
   };
 } else {
-  isSymbol$2.exports = function isSymbol2(value) {
+  isSymbol$3.exports = function isSymbol2(value) {
     return false;
   };
 }
@@ -4666,10 +4693,10 @@ var hasBigints = function hasNativeBigInts() {
 };
 var hasBigInts = hasBigints();
 if (hasBigInts) {
-  var bigIntValueOf = BigInt.prototype.valueOf;
+  var bigIntValueOf$1 = BigInt.prototype.valueOf;
   var tryBigInt = function tryBigIntObject(value) {
     try {
-      bigIntValueOf.call(value);
+      bigIntValueOf$1.call(value);
       return true;
     } catch (e) {
     }
@@ -4690,8 +4717,8 @@ if (hasBigInts) {
   };
 }
 var hasToStringTag$3 = shams();
-var callBound$6 = callBound$9;
-var $toString$1 = callBound$6("Object.prototype.toString");
+var callBound$7 = callBound$a;
+var $toString$1 = callBound$7("Object.prototype.toString");
 var isStandardArguments = function isArguments2(value) {
   if (hasToStringTag$3 && value && typeof value === "object" && Symbol.toStringTag in value) {
     return false;
@@ -4708,6 +4735,668 @@ var isLegacyArguments = function isArguments3(value) {
   return isStandardArguments(arguments);
 })();
 isStandardArguments.isLegacyArguments = isLegacyArguments;
+var hasMap = typeof Map === "function" && Map.prototype;
+var mapSizeDescriptor = Object.getOwnPropertyDescriptor && hasMap ? Object.getOwnPropertyDescriptor(Map.prototype, "size") : null;
+var mapSize = hasMap && mapSizeDescriptor && typeof mapSizeDescriptor.get === "function" ? mapSizeDescriptor.get : null;
+var mapForEach = hasMap && Map.prototype.forEach;
+var hasSet = typeof Set === "function" && Set.prototype;
+var setSizeDescriptor = Object.getOwnPropertyDescriptor && hasSet ? Object.getOwnPropertyDescriptor(Set.prototype, "size") : null;
+var setSize = hasSet && setSizeDescriptor && typeof setSizeDescriptor.get === "function" ? setSizeDescriptor.get : null;
+var setForEach = hasSet && Set.prototype.forEach;
+var hasWeakMap = typeof WeakMap === "function" && WeakMap.prototype;
+var weakMapHas = hasWeakMap ? WeakMap.prototype.has : null;
+var hasWeakSet = typeof WeakSet === "function" && WeakSet.prototype;
+var weakSetHas = hasWeakSet ? WeakSet.prototype.has : null;
+var hasWeakRef = typeof WeakRef === "function" && WeakRef.prototype;
+var weakRefDeref = hasWeakRef ? WeakRef.prototype.deref : null;
+var booleanValueOf = Boolean.prototype.valueOf;
+var objectToString = Object.prototype.toString;
+var functionToString$1 = Function.prototype.toString;
+var $match = String.prototype.match;
+var $slice$1 = String.prototype.slice;
+var $replace = String.prototype.replace;
+var $toUpperCase = String.prototype.toUpperCase;
+var $toLowerCase = String.prototype.toLowerCase;
+var $test = RegExp.prototype.test;
+var $concat = Array.prototype.concat;
+var $join = Array.prototype.join;
+var $arrSlice = Array.prototype.slice;
+var $floor = Math.floor;
+var bigIntValueOf = typeof BigInt === "function" ? BigInt.prototype.valueOf : null;
+var gOPS = Object.getOwnPropertySymbols;
+var symToString = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? Symbol.prototype.toString : null;
+var hasShammedSymbols = typeof Symbol === "function" && typeof Symbol.iterator === "object";
+var toStringTag$1 = typeof Symbol === "function" && Symbol.toStringTag && (typeof Symbol.toStringTag === hasShammedSymbols ? "object" : "symbol") ? Symbol.toStringTag : null;
+var isEnumerable = Object.prototype.propertyIsEnumerable;
+var gPO = (typeof Reflect === "function" ? Reflect.getPrototypeOf : Object.getPrototypeOf) || ([].__proto__ === Array.prototype ? function(O) {
+  return O.__proto__;
+} : null);
+function addNumericSeparator(num, str2) {
+  if (num === Infinity || num === -Infinity || num !== num || num && num > -1e3 && num < 1e3 || $test.call(/e/, str2)) {
+    return str2;
+  }
+  var sepRegex = /[0-9](?=(?:[0-9]{3})+(?![0-9]))/g;
+  if (typeof num === "number") {
+    var int = num < 0 ? -$floor(-num) : $floor(num);
+    if (int !== num) {
+      var intStr = String(int);
+      var dec = $slice$1.call(str2, intStr.length + 1);
+      return $replace.call(intStr, sepRegex, "$&_") + "." + $replace.call($replace.call(dec, /([0-9]{3})/g, "$&_"), /_$/, "");
+    }
+  }
+  return $replace.call(str2, sepRegex, "$&_");
+}
+var utilInspect = require$$0$5;
+var inspectCustom = utilInspect.custom;
+var inspectSymbol = isSymbol$2(inspectCustom) ? inspectCustom : null;
+var objectInspect = function inspect_(obj2, options, depth, seen2) {
+  var opts = options || {};
+  if (has$3(opts, "quoteStyle") && (opts.quoteStyle !== "single" && opts.quoteStyle !== "double")) {
+    throw new TypeError('option "quoteStyle" must be "single" or "double"');
+  }
+  if (has$3(opts, "maxStringLength") && (typeof opts.maxStringLength === "number" ? opts.maxStringLength < 0 && opts.maxStringLength !== Infinity : opts.maxStringLength !== null)) {
+    throw new TypeError('option "maxStringLength", if provided, must be a positive integer, Infinity, or `null`');
+  }
+  var customInspect = has$3(opts, "customInspect") ? opts.customInspect : true;
+  if (typeof customInspect !== "boolean" && customInspect !== "symbol") {
+    throw new TypeError("option \"customInspect\", if provided, must be `true`, `false`, or `'symbol'`");
+  }
+  if (has$3(opts, "indent") && opts.indent !== null && opts.indent !== "	" && !(parseInt(opts.indent, 10) === opts.indent && opts.indent > 0)) {
+    throw new TypeError('option "indent" must be "\\t", an integer > 0, or `null`');
+  }
+  if (has$3(opts, "numericSeparator") && typeof opts.numericSeparator !== "boolean") {
+    throw new TypeError('option "numericSeparator", if provided, must be `true` or `false`');
+  }
+  var numericSeparator = opts.numericSeparator;
+  if (typeof obj2 === "undefined") {
+    return "undefined";
+  }
+  if (obj2 === null) {
+    return "null";
+  }
+  if (typeof obj2 === "boolean") {
+    return obj2 ? "true" : "false";
+  }
+  if (typeof obj2 === "string") {
+    return inspectString(obj2, opts);
+  }
+  if (typeof obj2 === "number") {
+    if (obj2 === 0) {
+      return Infinity / obj2 > 0 ? "0" : "-0";
+    }
+    var str2 = String(obj2);
+    return numericSeparator ? addNumericSeparator(obj2, str2) : str2;
+  }
+  if (typeof obj2 === "bigint") {
+    var bigIntStr = String(obj2) + "n";
+    return numericSeparator ? addNumericSeparator(obj2, bigIntStr) : bigIntStr;
+  }
+  var maxDepth = typeof opts.depth === "undefined" ? 5 : opts.depth;
+  if (typeof depth === "undefined") {
+    depth = 0;
+  }
+  if (depth >= maxDepth && maxDepth > 0 && typeof obj2 === "object") {
+    return isArray$5(obj2) ? "[Array]" : "[Object]";
+  }
+  var indent = getIndent(opts, depth);
+  if (typeof seen2 === "undefined") {
+    seen2 = [];
+  } else if (indexOf(seen2, obj2) >= 0) {
+    return "[Circular]";
+  }
+  function inspect2(value, from2, noIndent) {
+    if (from2) {
+      seen2 = $arrSlice.call(seen2);
+      seen2.push(from2);
+    }
+    if (noIndent) {
+      var newOpts = {
+        depth: opts.depth
+      };
+      if (has$3(opts, "quoteStyle")) {
+        newOpts.quoteStyle = opts.quoteStyle;
+      }
+      return inspect_(value, newOpts, depth + 1, seen2);
+    }
+    return inspect_(value, opts, depth + 1, seen2);
+  }
+  if (typeof obj2 === "function" && !isRegExp$1(obj2)) {
+    var name2 = nameOf(obj2);
+    var keys3 = arrObjKeys(obj2, inspect2);
+    return "[Function" + (name2 ? ": " + name2 : " (anonymous)") + "]" + (keys3.length > 0 ? " { " + $join.call(keys3, ", ") + " }" : "");
+  }
+  if (isSymbol$2(obj2)) {
+    var symString = hasShammedSymbols ? $replace.call(String(obj2), /^(Symbol\(.*\))_[^)]*$/, "$1") : symToString.call(obj2);
+    return typeof obj2 === "object" && !hasShammedSymbols ? markBoxed(symString) : symString;
+  }
+  if (isElement$1(obj2)) {
+    var s2 = "<" + $toLowerCase.call(String(obj2.nodeName));
+    var attrs = obj2.attributes || [];
+    for (var i = 0; i < attrs.length; i++) {
+      s2 += " " + attrs[i].name + "=" + wrapQuotes(quote(attrs[i].value), "double", opts);
+    }
+    s2 += ">";
+    if (obj2.childNodes && obj2.childNodes.length) {
+      s2 += "...";
+    }
+    s2 += "</" + $toLowerCase.call(String(obj2.nodeName)) + ">";
+    return s2;
+  }
+  if (isArray$5(obj2)) {
+    if (obj2.length === 0) {
+      return "[]";
+    }
+    var xs = arrObjKeys(obj2, inspect2);
+    if (indent && !singleLineValues(xs)) {
+      return "[" + indentedJoin(xs, indent) + "]";
+    }
+    return "[ " + $join.call(xs, ", ") + " ]";
+  }
+  if (isError$1(obj2)) {
+    var parts = arrObjKeys(obj2, inspect2);
+    if (!("cause" in Error.prototype) && "cause" in obj2 && !isEnumerable.call(obj2, "cause")) {
+      return "{ [" + String(obj2) + "] " + $join.call($concat.call("[cause]: " + inspect2(obj2.cause), parts), ", ") + " }";
+    }
+    if (parts.length === 0) {
+      return "[" + String(obj2) + "]";
+    }
+    return "{ [" + String(obj2) + "] " + $join.call(parts, ", ") + " }";
+  }
+  if (typeof obj2 === "object" && customInspect) {
+    if (inspectSymbol && typeof obj2[inspectSymbol] === "function" && utilInspect) {
+      return utilInspect(obj2, { depth: maxDepth - depth });
+    } else if (customInspect !== "symbol" && typeof obj2.inspect === "function") {
+      return obj2.inspect();
+    }
+  }
+  if (isMap$2(obj2)) {
+    var mapParts = [];
+    if (mapForEach) {
+      mapForEach.call(obj2, function(value, key) {
+        mapParts.push(inspect2(key, obj2, true) + " => " + inspect2(value, obj2));
+      });
+    }
+    return collectionOf("Map", mapSize.call(obj2), mapParts, indent);
+  }
+  if (isSet$2(obj2)) {
+    var setParts = [];
+    if (setForEach) {
+      setForEach.call(obj2, function(value) {
+        setParts.push(inspect2(value, obj2));
+      });
+    }
+    return collectionOf("Set", setSize.call(obj2), setParts, indent);
+  }
+  if (isWeakMap$1(obj2)) {
+    return weakCollectionOf("WeakMap");
+  }
+  if (isWeakSet$1(obj2)) {
+    return weakCollectionOf("WeakSet");
+  }
+  if (isWeakRef$1(obj2)) {
+    return weakCollectionOf("WeakRef");
+  }
+  if (isNumber$2(obj2)) {
+    return markBoxed(inspect2(Number(obj2)));
+  }
+  if (isBigInt$1(obj2)) {
+    return markBoxed(inspect2(bigIntValueOf.call(obj2)));
+  }
+  if (isBoolean$1(obj2)) {
+    return markBoxed(booleanValueOf.call(obj2));
+  }
+  if (isString$5(obj2)) {
+    return markBoxed(inspect2(String(obj2)));
+  }
+  if (!isDate$4(obj2) && !isRegExp$1(obj2)) {
+    var ys = arrObjKeys(obj2, inspect2);
+    var isPlainObject3 = gPO ? gPO(obj2) === Object.prototype : obj2 instanceof Object || obj2.constructor === Object;
+    var protoTag = obj2 instanceof Object ? "" : "null prototype";
+    var stringTag = !isPlainObject3 && toStringTag$1 && Object(obj2) === obj2 && toStringTag$1 in obj2 ? $slice$1.call(toStr$4(obj2), 8, -1) : protoTag ? "Object" : "";
+    var constructorTag = isPlainObject3 || typeof obj2.constructor !== "function" ? "" : obj2.constructor.name ? obj2.constructor.name + " " : "";
+    var tag2 = constructorTag + (stringTag || protoTag ? "[" + $join.call($concat.call([], stringTag || [], protoTag || []), ": ") + "] " : "");
+    if (ys.length === 0) {
+      return tag2 + "{}";
+    }
+    if (indent) {
+      return tag2 + "{" + indentedJoin(ys, indent) + "}";
+    }
+    return tag2 + "{ " + $join.call(ys, ", ") + " }";
+  }
+  return String(obj2);
+};
+function wrapQuotes(s2, defaultStyle, opts) {
+  var quoteChar = (opts.quoteStyle || defaultStyle) === "double" ? '"' : "'";
+  return quoteChar + s2 + quoteChar;
+}
+function quote(s2) {
+  return $replace.call(String(s2), /"/g, "&quot;");
+}
+function isArray$5(obj2) {
+  return toStr$4(obj2) === "[object Array]" && (!toStringTag$1 || !(typeof obj2 === "object" && toStringTag$1 in obj2));
+}
+function isDate$4(obj2) {
+  return toStr$4(obj2) === "[object Date]" && (!toStringTag$1 || !(typeof obj2 === "object" && toStringTag$1 in obj2));
+}
+function isRegExp$1(obj2) {
+  return toStr$4(obj2) === "[object RegExp]" && (!toStringTag$1 || !(typeof obj2 === "object" && toStringTag$1 in obj2));
+}
+function isError$1(obj2) {
+  return toStr$4(obj2) === "[object Error]" && (!toStringTag$1 || !(typeof obj2 === "object" && toStringTag$1 in obj2));
+}
+function isString$5(obj2) {
+  return toStr$4(obj2) === "[object String]" && (!toStringTag$1 || !(typeof obj2 === "object" && toStringTag$1 in obj2));
+}
+function isNumber$2(obj2) {
+  return toStr$4(obj2) === "[object Number]" && (!toStringTag$1 || !(typeof obj2 === "object" && toStringTag$1 in obj2));
+}
+function isBoolean$1(obj2) {
+  return toStr$4(obj2) === "[object Boolean]" && (!toStringTag$1 || !(typeof obj2 === "object" && toStringTag$1 in obj2));
+}
+function isSymbol$2(obj2) {
+  if (hasShammedSymbols) {
+    return obj2 && typeof obj2 === "object" && obj2 instanceof Symbol;
+  }
+  if (typeof obj2 === "symbol") {
+    return true;
+  }
+  if (!obj2 || typeof obj2 !== "object" || !symToString) {
+    return false;
+  }
+  try {
+    symToString.call(obj2);
+    return true;
+  } catch (e) {
+  }
+  return false;
+}
+function isBigInt$1(obj2) {
+  if (!obj2 || typeof obj2 !== "object" || !bigIntValueOf) {
+    return false;
+  }
+  try {
+    bigIntValueOf.call(obj2);
+    return true;
+  } catch (e) {
+  }
+  return false;
+}
+var hasOwn$2 = Object.prototype.hasOwnProperty || function(key) {
+  return key in this;
+};
+function has$3(obj2, key) {
+  return hasOwn$2.call(obj2, key);
+}
+function toStr$4(obj2) {
+  return objectToString.call(obj2);
+}
+function nameOf(f) {
+  if (f.name) {
+    return f.name;
+  }
+  var m2 = $match.call(functionToString$1.call(f), /^function\s*([\w$]+)/);
+  if (m2) {
+    return m2[1];
+  }
+  return null;
+}
+function indexOf(xs, x2) {
+  if (xs.indexOf) {
+    return xs.indexOf(x2);
+  }
+  for (var i = 0, l = xs.length; i < l; i++) {
+    if (xs[i] === x2) {
+      return i;
+    }
+  }
+  return -1;
+}
+function isMap$2(x2) {
+  if (!mapSize || !x2 || typeof x2 !== "object") {
+    return false;
+  }
+  try {
+    mapSize.call(x2);
+    try {
+      setSize.call(x2);
+    } catch (s2) {
+      return true;
+    }
+    return x2 instanceof Map;
+  } catch (e) {
+  }
+  return false;
+}
+function isWeakMap$1(x2) {
+  if (!weakMapHas || !x2 || typeof x2 !== "object") {
+    return false;
+  }
+  try {
+    weakMapHas.call(x2, weakMapHas);
+    try {
+      weakSetHas.call(x2, weakSetHas);
+    } catch (s2) {
+      return true;
+    }
+    return x2 instanceof WeakMap;
+  } catch (e) {
+  }
+  return false;
+}
+function isWeakRef$1(x2) {
+  if (!weakRefDeref || !x2 || typeof x2 !== "object") {
+    return false;
+  }
+  try {
+    weakRefDeref.call(x2);
+    return true;
+  } catch (e) {
+  }
+  return false;
+}
+function isSet$2(x2) {
+  if (!setSize || !x2 || typeof x2 !== "object") {
+    return false;
+  }
+  try {
+    setSize.call(x2);
+    try {
+      mapSize.call(x2);
+    } catch (m2) {
+      return true;
+    }
+    return x2 instanceof Set;
+  } catch (e) {
+  }
+  return false;
+}
+function isWeakSet$1(x2) {
+  if (!weakSetHas || !x2 || typeof x2 !== "object") {
+    return false;
+  }
+  try {
+    weakSetHas.call(x2, weakSetHas);
+    try {
+      weakMapHas.call(x2, weakMapHas);
+    } catch (s2) {
+      return true;
+    }
+    return x2 instanceof WeakSet;
+  } catch (e) {
+  }
+  return false;
+}
+function isElement$1(x2) {
+  if (!x2 || typeof x2 !== "object") {
+    return false;
+  }
+  if (typeof HTMLElement !== "undefined" && x2 instanceof HTMLElement) {
+    return true;
+  }
+  return typeof x2.nodeName === "string" && typeof x2.getAttribute === "function";
+}
+function inspectString(str2, opts) {
+  if (str2.length > opts.maxStringLength) {
+    var remaining = str2.length - opts.maxStringLength;
+    var trailer = "... " + remaining + " more character" + (remaining > 1 ? "s" : "");
+    return inspectString($slice$1.call(str2, 0, opts.maxStringLength), opts) + trailer;
+  }
+  var s2 = $replace.call($replace.call(str2, /(['\\])/g, "\\$1"), /[\x00-\x1f]/g, lowbyte);
+  return wrapQuotes(s2, "single", opts);
+}
+function lowbyte(c) {
+  var n = c.charCodeAt(0);
+  var x2 = {
+    8: "b",
+    9: "t",
+    10: "n",
+    12: "f",
+    13: "r"
+  }[n];
+  if (x2) {
+    return "\\" + x2;
+  }
+  return "\\x" + (n < 16 ? "0" : "") + $toUpperCase.call(n.toString(16));
+}
+function markBoxed(str2) {
+  return "Object(" + str2 + ")";
+}
+function weakCollectionOf(type) {
+  return type + " { ? }";
+}
+function collectionOf(type, size, entries, indent) {
+  var joinedEntries = indent ? indentedJoin(entries, indent) : $join.call(entries, ", ");
+  return type + " (" + size + ") {" + joinedEntries + "}";
+}
+function singleLineValues(xs) {
+  for (var i = 0; i < xs.length; i++) {
+    if (indexOf(xs[i], "\n") >= 0) {
+      return false;
+    }
+  }
+  return true;
+}
+function getIndent(opts, depth) {
+  var baseIndent;
+  if (opts.indent === "	") {
+    baseIndent = "	";
+  } else if (typeof opts.indent === "number" && opts.indent > 0) {
+    baseIndent = $join.call(Array(opts.indent + 1), " ");
+  } else {
+    return null;
+  }
+  return {
+    base: baseIndent,
+    prev: $join.call(Array(depth + 1), baseIndent)
+  };
+}
+function indentedJoin(xs, indent) {
+  if (xs.length === 0) {
+    return "";
+  }
+  var lineJoiner = "\n" + indent.prev + indent.base;
+  return lineJoiner + $join.call(xs, "," + lineJoiner) + "\n" + indent.prev;
+}
+function arrObjKeys(obj2, inspect2) {
+  var isArr = isArray$5(obj2);
+  var xs = [];
+  if (isArr) {
+    xs.length = obj2.length;
+    for (var i = 0; i < obj2.length; i++) {
+      xs[i] = has$3(obj2, i) ? inspect2(obj2[i], obj2) : "";
+    }
+  }
+  var syms = typeof gOPS === "function" ? gOPS(obj2) : [];
+  var symMap;
+  if (hasShammedSymbols) {
+    symMap = {};
+    for (var k2 = 0; k2 < syms.length; k2++) {
+      symMap["$" + syms[k2]] = syms[k2];
+    }
+  }
+  for (var key in obj2) {
+    if (!has$3(obj2, key)) {
+      continue;
+    }
+    if (isArr && String(Number(key)) === key && key < obj2.length) {
+      continue;
+    }
+    if (hasShammedSymbols && symMap["$" + key] instanceof Symbol) {
+      continue;
+    } else if ($test.call(/[^\w$]/, key)) {
+      xs.push(inspect2(key, obj2) + ": " + inspect2(obj2[key], obj2));
+    } else {
+      xs.push(key + ": " + inspect2(obj2[key], obj2));
+    }
+  }
+  if (typeof gOPS === "function") {
+    for (var j = 0; j < syms.length; j++) {
+      if (isEnumerable.call(obj2, syms[j])) {
+        xs.push("[" + inspect2(syms[j]) + "]: " + inspect2(obj2[syms[j]], obj2));
+      }
+    }
+  }
+  return xs;
+}
+var GetIntrinsic$9 = getIntrinsic;
+var callBound$6 = callBound$a;
+var inspect = objectInspect;
+var $TypeError$4 = GetIntrinsic$9("%TypeError%");
+var $WeakMap$1 = GetIntrinsic$9("%WeakMap%", true);
+var $Map$3 = GetIntrinsic$9("%Map%", true);
+var $weakMapGet = callBound$6("WeakMap.prototype.get", true);
+var $weakMapSet = callBound$6("WeakMap.prototype.set", true);
+var $weakMapHas = callBound$6("WeakMap.prototype.has", true);
+var $mapGet = callBound$6("Map.prototype.get", true);
+var $mapSet = callBound$6("Map.prototype.set", true);
+var $mapHas$4 = callBound$6("Map.prototype.has", true);
+var listGetNode = function(list2, key) {
+  for (var prev = list2, curr; (curr = prev.next) !== null; prev = curr) {
+    if (curr.key === key) {
+      prev.next = curr.next;
+      curr.next = list2.next;
+      list2.next = curr;
+      return curr;
+    }
+  }
+};
+var listGet = function(objects, key) {
+  var node = listGetNode(objects, key);
+  return node && node.value;
+};
+var listSet = function(objects, key, value) {
+  var node = listGetNode(objects, key);
+  if (node) {
+    node.value = value;
+  } else {
+    objects.next = {
+      key,
+      next: objects.next,
+      value
+    };
+  }
+};
+var listHas = function(objects, key) {
+  return !!listGetNode(objects, key);
+};
+var sideChannel = function getSideChannel() {
+  var $wm;
+  var $m;
+  var $o;
+  var channel2 = {
+    assert: function(key) {
+      if (!channel2.has(key)) {
+        throw new $TypeError$4("Side channel does not contain " + inspect(key));
+      }
+    },
+    get: function(key) {
+      if ($WeakMap$1 && key && (typeof key === "object" || typeof key === "function")) {
+        if ($wm) {
+          return $weakMapGet($wm, key);
+        }
+      } else if ($Map$3) {
+        if ($m) {
+          return $mapGet($m, key);
+        }
+      } else {
+        if ($o) {
+          return listGet($o, key);
+        }
+      }
+    },
+    has: function(key) {
+      if ($WeakMap$1 && key && (typeof key === "object" || typeof key === "function")) {
+        if ($wm) {
+          return $weakMapHas($wm, key);
+        }
+      } else if ($Map$3) {
+        if ($m) {
+          return $mapHas$4($m, key);
+        }
+      } else {
+        if ($o) {
+          return listHas($o, key);
+        }
+      }
+      return false;
+    },
+    set: function(key, value) {
+      if ($WeakMap$1 && key && (typeof key === "object" || typeof key === "function")) {
+        if (!$wm) {
+          $wm = new $WeakMap$1();
+        }
+        $weakMapSet($wm, key, value);
+      } else if ($Map$3) {
+        if (!$m) {
+          $m = new $Map$3();
+        }
+        $mapSet($m, key, value);
+      } else {
+        if (!$o) {
+          $o = { key: {}, next: null };
+        }
+        listSet($o, key, value);
+      }
+    }
+  };
+  return channel2;
+};
+var GetIntrinsic$8 = getIntrinsic;
+var has$2 = src$1;
+var channel = sideChannel();
+var $TypeError$3 = GetIntrinsic$8("%TypeError%");
+var SLOT = {
+  assert: function(O, slot) {
+    if (!O || typeof O !== "object" && typeof O !== "function") {
+      throw new $TypeError$3("`O` is not an object");
+    }
+    if (typeof slot !== "string") {
+      throw new $TypeError$3("`slot` must be a string");
+    }
+    channel.assert(O);
+    if (!SLOT.has(O, slot)) {
+      throw new $TypeError$3("`" + slot + "` is not present on `O`");
+    }
+  },
+  get: function(O, slot) {
+    if (!O || typeof O !== "object" && typeof O !== "function") {
+      throw new $TypeError$3("`O` is not an object");
+    }
+    if (typeof slot !== "string") {
+      throw new $TypeError$3("`slot` must be a string");
+    }
+    var slots = channel.get(O);
+    return slots && slots["$" + slot];
+  },
+  has: function(O, slot) {
+    if (!O || typeof O !== "object" && typeof O !== "function") {
+      throw new $TypeError$3("`O` is not an object");
+    }
+    if (typeof slot !== "string") {
+      throw new $TypeError$3("`slot` must be a string");
+    }
+    var slots = channel.get(O);
+    return !!slots && has$2(slots, "$" + slot);
+  },
+  set: function(O, slot, V) {
+    if (!O || typeof O !== "object" && typeof O !== "function") {
+      throw new $TypeError$3("`O` is not an object");
+    }
+    if (typeof slot !== "string") {
+      throw new $TypeError$3("`slot` must be a string");
+    }
+    var slots = channel.get(O);
+    if (!slots) {
+      slots = {};
+      channel.set(O, slots);
+    }
+    slots["$" + slot] = V;
+  }
+};
+if (Object.freeze) {
+  Object.freeze(SLOT);
+}
+typeof StopIteration === "object" ? StopIteration : null;
 var $Map$2 = typeof Map === "function" && Map.prototype ? Map : null;
 var $Set$2 = typeof Set === "function" && Set.prototype ? Set : null;
 var exported$2;
@@ -4777,10 +5466,10 @@ var isSet$1 = exported$1 || function isSet2(x2) {
 if (hasSymbols$4() || shams$1())
   ;
 else {
-  var GetIntrinsic$6 = getIntrinsic;
-  var $Map = GetIntrinsic$6("%Map%", true);
-  var $Set = GetIntrinsic$6("%Set%", true);
-  var callBound$5 = callBound$9;
+  var GetIntrinsic$7 = getIntrinsic;
+  var $Map = GetIntrinsic$7("%Map%", true);
+  var $Set = GetIntrinsic$7("%Set%", true);
+  var callBound$5 = callBound$a;
   callBound$5("Array.prototype.push");
   callBound$5("String.prototype.charCodeAt");
   callBound$5("String.prototype.slice");
@@ -4831,9 +5520,9 @@ var isWeakmap = exported || function isWeakMap2(x2) {
   return false;
 };
 var isWeakset = { exports: {} };
-var GetIntrinsic$5 = getIntrinsic;
-var callBound$4 = callBound$9;
-var $WeakSet = GetIntrinsic$5("%WeakSet%", true);
+var GetIntrinsic$6 = getIntrinsic;
+var callBound$4 = callBound$a;
+var $WeakSet = GetIntrinsic$6("%WeakSet%", true);
 var $setHas = callBound$4("WeakSet.prototype.has", true);
 if ($setHas) {
   var $mapHas = callBound$4("WeakMap.prototype.has", true);
@@ -4881,10 +5570,10 @@ var whichCollection$1 = function whichCollection2(value) {
   }
   return false;
 };
-var isString$4 = isString$5;
+var isString$4 = isString$6;
 var isNumber$1 = isNumberObject;
 var isBoolean = isBooleanObject;
-var isSymbol$1 = isSymbol$2.exports;
+var isSymbol$1 = isSymbol$3.exports;
 var isBigInt = isBigint.exports;
 var whichBoxedPrimitive$1 = function whichBoxedPrimitive2(value) {
   if (value == null || typeof value !== "object" && typeof value !== "function") {
@@ -4907,8 +5596,8 @@ var whichBoxedPrimitive$1 = function whichBoxedPrimitive2(value) {
   }
 };
 var RequireObjectCoercible$2 = { exports: {} };
-var GetIntrinsic$4 = getIntrinsic;
-var $TypeError$2 = GetIntrinsic$4("%TypeError%");
+var GetIntrinsic$5 = getIntrinsic;
+var $TypeError$2 = GetIntrinsic$5("%TypeError%");
 var CheckObjectCoercible = function CheckObjectCoercible2(value, optMessage) {
   if (value == null) {
     throw new $TypeError$2(optMessage || "Cannot call method on " + value);
@@ -4918,8 +5607,8 @@ var CheckObjectCoercible = function CheckObjectCoercible2(value, optMessage) {
 (function(module) {
   module.exports = CheckObjectCoercible;
 })(RequireObjectCoercible$2);
-var GetIntrinsic$3 = getIntrinsic;
-var $Object$1 = GetIntrinsic$3("%Object%");
+var GetIntrinsic$4 = getIntrinsic;
+var $Object$1 = GetIntrinsic$4("%Object%");
 var RequireObjectCoercible$1 = RequireObjectCoercible$2.exports;
 var ToObject$1 = function ToObject2(value) {
   RequireObjectCoercible$1(value);
@@ -4945,9 +5634,9 @@ function requireImplementation$1() {
     var has2 = Object.prototype.hasOwnProperty;
     var toStr2 = Object.prototype.toString;
     var isArgs2 = isArguments$2;
-    var isEnumerable = Object.prototype.propertyIsEnumerable;
-    var hasDontEnumBug = !isEnumerable.call({ toString: null }, "toString");
-    var hasProtoEnumBug = isEnumerable.call(function() {
+    var isEnumerable2 = Object.prototype.propertyIsEnumerable;
+    var hasDontEnumBug = !isEnumerable2.call({ toString: null }, "toString");
+    var hasProtoEnumBug = isEnumerable2.call(function() {
     }, "prototype");
     var dontEnums = [
       "toString",
@@ -5083,8 +5772,8 @@ keysShim.shim = function shimObjectKeys() {
   return Object.keys || keysShim;
 };
 var objectKeys = keysShim;
-var GetIntrinsic$2 = getIntrinsic;
-var $defineProperty = GetIntrinsic$2("%Object.defineProperty%", true);
+var GetIntrinsic$3 = getIntrinsic;
+var $defineProperty = GetIntrinsic$3("%Object.defineProperty%", true);
 var hasPropertyDescriptors$1 = function hasPropertyDescriptors2() {
   if ($defineProperty) {
     try {
@@ -5118,8 +5807,14 @@ var isFunction$3 = function(fn2) {
 var hasPropertyDescriptors = hasPropertyDescriptors_1();
 var supportsDescriptors$1 = origDefineProperty && hasPropertyDescriptors;
 var defineProperty$2 = function(object, name2, value, predicate) {
-  if (name2 in object && (!isFunction$3(predicate) || !predicate())) {
-    return;
+  if (name2 in object) {
+    if (predicate === true) {
+      if (object[name2] === value) {
+        return;
+      }
+    } else if (!isFunction$3(predicate) || !predicate()) {
+      return;
+    }
   }
   if (supportsDescriptors$1) {
     origDefineProperty(object, name2, {
@@ -5144,10 +5839,10 @@ var defineProperties = function(object, map2) {
 };
 defineProperties.supportsDescriptors = !!supportsDescriptors$1;
 var defineProperties_1 = defineProperties;
-var IsCallable$2 = { exports: {} };
+var IsCallable$3 = { exports: {} };
 (function(module) {
   module.exports = isCallable$1;
-})(IsCallable$2);
+})(IsCallable$3);
 var Type$3 = function Type2(x2) {
   if (x2 === null) {
     return "Null";
@@ -5252,24 +5947,16 @@ var availableTypedArrays$1 = function availableTypedArrays2() {
   }
   return out;
 };
-var getOwnPropertyDescriptor;
-var hasRequiredGetOwnPropertyDescriptor;
-function requireGetOwnPropertyDescriptor() {
-  if (hasRequiredGetOwnPropertyDescriptor)
-    return getOwnPropertyDescriptor;
-  hasRequiredGetOwnPropertyDescriptor = 1;
-  var GetIntrinsic3 = getIntrinsic;
-  var $gOPD2 = GetIntrinsic3("%Object.getOwnPropertyDescriptor%", true);
-  if ($gOPD2) {
-    try {
-      $gOPD2([], "length");
-    } catch (e) {
-      $gOPD2 = null;
-    }
+var GetIntrinsic$2 = getIntrinsic;
+var $gOPD = GetIntrinsic$2("%Object.getOwnPropertyDescriptor%", true);
+if ($gOPD) {
+  try {
+    $gOPD([], "length");
+  } catch (e) {
+    $gOPD = null;
   }
-  getOwnPropertyDescriptor = $gOPD2;
-  return getOwnPropertyDescriptor;
 }
+var gopd = $gOPD;
 var isTypedArray$2;
 var hasRequiredIsTypedArray;
 function requireIsTypedArray() {
@@ -5278,12 +5965,13 @@ function requireIsTypedArray() {
   hasRequiredIsTypedArray = 1;
   var forEach4 = forEach_1;
   var availableTypedArrays3 = availableTypedArrays$1;
-  var callBound2 = callBound$9;
+  var callBound2 = callBound$a;
   var $toString2 = callBound2("Object.prototype.toString");
   var hasToStringTag2 = shams();
+  var gOPD2 = gopd;
   var g2 = typeof globalThis === "undefined" ? commonjsGlobal : globalThis;
   var typedArrays2 = availableTypedArrays3();
-  var $indexOf2 = callBound2("Array.prototype.indexOf", true) || function indexOf(array, value) {
+  var $indexOf2 = callBound2("Array.prototype.indexOf", true) || function indexOf2(array, value) {
     for (var i = 0; i < array.length; i += 1) {
       if (array[i] === value) {
         return i;
@@ -5293,7 +5981,6 @@ function requireIsTypedArray() {
   };
   var $slice2 = callBound2("String.prototype.slice");
   var toStrTags2 = {};
-  var gOPD2 = requireGetOwnPropertyDescriptor();
   var getPrototypeOf7 = Object.getPrototypeOf;
   if (hasToStringTag2 && gOPD2 && getPrototypeOf7) {
     forEach4(typedArrays2, function(typedArray) {
@@ -5338,14 +6025,14 @@ function requireIsTypedArray() {
 }
 var forEach$2 = forEach_1;
 var availableTypedArrays = availableTypedArrays$1;
-var callBound$3 = callBound$9;
+var callBound$3 = callBound$a;
+var gOPD = gopd;
 var $toString = callBound$3("Object.prototype.toString");
 var hasToStringTag$2 = shams();
 var g = typeof globalThis === "undefined" ? commonjsGlobal : globalThis;
 var typedArrays = availableTypedArrays();
 var $slice = callBound$3("String.prototype.slice");
 var toStrTags = {};
-var gOPD = requireGetOwnPropertyDescriptor();
 var getPrototypeOf = Object.getPrototypeOf;
 if (hasToStringTag$2 && gOPD && getPrototypeOf) {
   forEach$2(typedArrays, function(typedArray) {
@@ -5388,7 +6075,7 @@ var whichTypedArray$1 = function whichTypedArray2(value) {
   }
   return tryTypedArrays(value);
 };
-var callBound$2 = callBound$9;
+var callBound$2 = callBound$a;
 var $deref = callBound$2("WeakRef.prototype.deref", true);
 var isWeakref = typeof WeakRef === "undefined" ? function isWeakRef2(value) {
   return false;
@@ -5403,7 +6090,7 @@ var isWeakref = typeof WeakRef === "undefined" ? function isWeakRef2(value) {
     return false;
   }
 };
-var callBound$1 = callBound$9;
+var callBound$1 = callBound$a;
 var $register = callBound$1("FinalizationRegistry.prototype.register", true);
 var isFinalizationregistry = $register ? function isFinalizationRegistry2(value) {
   if (!value || typeof value !== "object") {
@@ -5418,6 +6105,10 @@ var isFinalizationregistry = $register ? function isFinalizationRegistry2(value)
 } : function isFinalizationRegistry3(value) {
   return false;
 };
+var IsCallable$2 = { exports: {} };
+(function(module) {
+  module.exports = isCallable$1;
+})(IsCallable$2);
 var functionsHaveNames_1;
 var hasRequiredFunctionsHaveNames;
 function requireFunctionsHaveNames() {
@@ -5454,7 +6145,7 @@ function requireFunctionsHaveNames() {
 }
 var IsCallable$1 = IsCallable$2.exports;
 var functionsHaveNames$1 = requireFunctionsHaveNames()();
-var callBound = callBound$9;
+var callBound = callBound$a;
 var $functionToString = callBound("Function.prototype.toString");
 var $stringMatch = callBound("String.prototype.match");
 var classRegex = /^class /;
@@ -5652,7 +6343,7 @@ var whichBuiltinType$1 = function whichBuiltinType2(value) {
   return "Object";
 };
 var GetIntrinsic$1 = getIntrinsic;
-var IsCallable = IsCallable$2.exports;
+var IsCallable = IsCallable$3.exports;
 var Type$1 = Type$2;
 var whichBuiltinType = whichBuiltinType$1;
 var $gPO = GetIntrinsic$1("%Object.getPrototypeOf%", true);
@@ -5774,7 +6465,7 @@ polyfill$1();
 shams$1();
 hasBigints();
 requireFunctionsHaveNames()();
-function __filter(object, filter2) {
+function __filterObject$1(object, filter2) {
   const result2 = {};
   Object.keys(object).forEach((propertyName) => {
     if (filter2(propertyName, object[propertyName])) {
@@ -6695,24 +7386,6 @@ function __sort(object, sort) {
   return resultObj;
 }
 class SLog {
-  constructor(logObj) {
-    var _a2;
-    if (!(logObj === null || logObj === void 0 ? void 0 : logObj.value) && !logObj._logObj)
-      ;
-    this._logObj = __deepMerge(
-      {
-        type: SLog.TYPE_LOG,
-        timestamp: Date.now(),
-        decorators: true,
-        time: false,
-        verbose: false,
-        notify: false,
-        metas: {}
-      },
-      this.constructor._defaultLogObj,
-      (_a2 = logObj._logObj) !== null && _a2 !== void 0 ? _a2 : logObj
-    );
-  }
   static filter(types2) {
     this._filteredTypes = types2;
   }
@@ -6733,6 +7406,24 @@ class SLog {
         return false;
     }
     return true;
+  }
+  constructor(logObj) {
+    var _a2;
+    if (!(logObj === null || logObj === void 0 ? void 0 : logObj.value) && !logObj._logObj)
+      ;
+    this._logObj = __deepMerge(
+      {
+        type: SLog.TYPE_LOG,
+        timestamp: Date.now(),
+        decorators: true,
+        time: false,
+        verbose: false,
+        notify: false,
+        metas: {}
+      },
+      this.constructor._defaultLogObj,
+      (_a2 = logObj._logObj) !== null && _a2 !== void 0 ? _a2 : logObj
+    );
   }
   get value() {
     return this._logObj.value;
@@ -6894,6 +7585,32 @@ function getColorFor(ref, settings) {
     }
   }
 }
+function _iterableToArrayLimit$1(arr, i) {
+  var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"];
+  if (null != _i) {
+    var _s, _e2, _x, _r, _arr = [], _n = true, _d2 = false;
+    try {
+      if (_x = (_i = _i.call(arr)).next, 0 === i) {
+        if (Object(_i) !== _i)
+          return;
+        _n = false;
+      } else
+        for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = true)
+          ;
+    } catch (err) {
+      _d2 = true, _e2 = err;
+    } finally {
+      try {
+        if (!_n && null != _i.return && (_r = _i.return(), Object(_r) !== _r))
+          return;
+      } finally {
+        if (_d2)
+          throw _e2;
+      }
+    }
+    return _arr;
+  }
+}
 function _classCallCheck(instance, Constructor) {
   if (!(instance instanceof Constructor)) {
     throw new TypeError("Cannot call a class as a function");
@@ -6906,7 +7623,7 @@ function _defineProperties(target, props) {
     descriptor2.configurable = true;
     if ("value" in descriptor2)
       descriptor2.writable = true;
-    Object.defineProperty(target, descriptor2.key, descriptor2);
+    Object.defineProperty(target, _toPropertyKey(descriptor2.key), descriptor2);
   }
 }
 function _createClass(Constructor, protoProps, staticProps) {
@@ -6920,6 +7637,7 @@ function _createClass(Constructor, protoProps, staticProps) {
   return Constructor;
 }
 function _defineProperty$1(obj2, key, value) {
+  key = _toPropertyKey(key);
   if (key in obj2) {
     Object.defineProperty(obj2, key, {
       value,
@@ -6938,34 +7656,6 @@ function _slicedToArray$1(arr, i) {
 function _arrayWithHoles$1(arr) {
   if (Array.isArray(arr))
     return arr;
-}
-function _iterableToArrayLimit$1(arr, i) {
-  var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"];
-  if (_i == null)
-    return;
-  var _arr = [];
-  var _n = true;
-  var _d2 = false;
-  var _s, _e;
-  try {
-    for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) {
-      _arr.push(_s.value);
-      if (i && _arr.length === i)
-        break;
-    }
-  } catch (err) {
-    _d2 = true;
-    _e = err;
-  } finally {
-    try {
-      if (!_n && _i["return"] != null)
-        _i["return"]();
-    } finally {
-      if (_d2)
-        throw _e;
-    }
-  }
-  return _arr;
 }
 function _unsupportedIterableToArray(o, minLen) {
   if (!o)
@@ -6989,6 +7679,22 @@ function _arrayLikeToArray(arr, len) {
 }
 function _nonIterableRest$1() {
   throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
+}
+function _toPrimitive(input, hint) {
+  if (typeof input !== "object" || input === null)
+    return input;
+  var prim = input[Symbol.toPrimitive];
+  if (prim !== void 0) {
+    var res = prim.call(input, hint || "default");
+    if (typeof res !== "object")
+      return res;
+    throw new TypeError("@@toPrimitive must return a primitive value.");
+  }
+  return (hint === "string" ? String : Number)(input);
+}
+function _toPropertyKey(arg) {
+  var key = _toPrimitive(arg, "string");
+  return typeof key === "symbol" ? key : String(key);
 }
 function _classPrivateFieldGet(receiver, privateMap) {
   var descriptor2 = _classExtractFieldDescriptor(receiver, privateMap, "get");
@@ -7138,6 +7844,7 @@ var list = [
   "client",
   "cloud",
   "crawl",
+  "cryptoapi",
   "dareboost",
   "datanyze",
   "dataprovider",
@@ -7364,7 +8071,7 @@ function __isMobile() {
   return true;
 }
 function __isChildProcess() {
-  return process.send !== void 0 || process.env.IS_CHILD_PROCESS !== void 0;
+  return process.send !== void 0 || {}.IS_CHILD_PROCESS !== void 0;
 }
 var isClass$1 = { exports: {} };
 (function(module, exports) {
@@ -8729,7 +9436,7 @@ var assignSymbols$1 = function(receiver, objects) {
   if (typeof Object.getOwnPropertySymbols !== "function") {
     return receiver;
   }
-  var isEnumerable = Object.prototype.propertyIsEnumerable;
+  var isEnumerable2 = Object.prototype.propertyIsEnumerable;
   var target = Object(receiver);
   var len = arguments.length, i = 0;
   while (++i < len) {
@@ -8737,7 +9444,7 @@ var assignSymbols$1 = function(receiver, objects) {
     var names = Object.getOwnPropertySymbols(provider);
     for (var j = 0; j < names.length; j++) {
       var key = names[j];
-      if (isEnumerable.call(provider, key)) {
+      if (isEnumerable2.call(provider, key)) {
         target[key] = provider[key];
       }
     }
@@ -9312,6 +10019,12 @@ ${settingsArray.join("\n")}
   }
 }
 class SDescriptor extends SClass {
+  static registerRule(rule) {
+    if (rule.id === void 0 || typeof rule.id !== "string") {
+      throw new Error(`Sorry but you try to register a rule that does not fit the ISDescriptionRule interface...`);
+    }
+    this._registeredRules[rule.id] = rule;
+  }
   constructor(settings) {
     super(__deepMerge({
       rules: {},
@@ -9320,12 +10033,6 @@ class SDescriptor extends SClass {
       throwOnMissingRule: false,
       defaults: true
     }, settings !== null && settings !== void 0 ? settings : {}));
-  }
-  static registerRule(rule) {
-    if (rule.id === void 0 || typeof rule.id !== "string") {
-      throw new Error(`Sorry but you try to register a rule that does not fit the ISDescriptionRule interface...`);
-    }
-    this._registeredRules[rule.id] = rule;
   }
   apply(value, settings) {
     const set = __deepMerge(this.settings, settings || {});
@@ -9607,13 +10314,6 @@ try {
 } catch (e) {
 }
 class SInterface extends SClass {
-  constructor(settings) {
-    super(__deepMerge({
-      stripUnkown: false
-    }, settings !== null && settings !== void 0 ? settings : {}));
-    this._definition = {};
-    this._definition = this.constructor.definition;
-  }
   static get definition() {
     var _a2;
     if (this._cachedDefinition)
@@ -9704,6 +10404,13 @@ class SInterface extends SClass {
     }
     const rendererInstance = new this._registeredRenderers[renderer](this, set);
     return rendererInstance.render();
+  }
+  constructor(settings) {
+    super(__deepMerge({
+      stripUnkown: false
+    }, settings !== null && settings !== void 0 ? settings : {}));
+    this._definition = {};
+    this._definition = this.constructor.definition;
   }
   apply(objectOrString, settings) {
     var _a2;
@@ -10020,9 +10727,6 @@ const fn$1 = function(stack, callback, settings = {}) {
   return settings.newStack ? newStack : stack;
 };
 class STypeResult {
-  constructor(data2) {
-    this._data = data2;
-  }
   get typeString() {
     return this._data.typeString;
   }
@@ -10040,6 +10744,9 @@ class STypeResult {
   }
   get settings() {
     return this._data.settings;
+  }
+  constructor(data2) {
+    this._data = data2;
   }
   hasIssues() {
     if (this._data)
@@ -10095,6 +10802,15 @@ ${this.settings.verbose ? settingsArray.join("\n") : ""}
   }
 }
 class SType {
+  static registerType(type) {
+    if (type.id === void 0 || typeof type.id !== "string") {
+      throw new Error(`Sorry but you try to register a type that does not fit the ISTypeDescriptor interface...`);
+    }
+    this._registeredTypes[type.id] = type;
+  }
+  static parseTypeString(typeString) {
+    return __parseTypeString(typeString);
+  }
   constructor(typeString, settings = {}) {
     this.typeString = typeString;
     typeString = typeString.toLowerCase().trim();
@@ -10108,15 +10824,6 @@ class SType {
       interfaces: true
     }, settings);
     this.constructor._instanciatedTypes[typeString] = this;
-  }
-  static registerType(type) {
-    if (type.id === void 0 || typeof type.id !== "string") {
-      throw new Error(`Sorry but you try to register a type that does not fit the ISTypeDescriptor interface...`);
-    }
-    this._registeredTypes[type.id] = type;
-  }
-  static parseTypeString(typeString) {
-    return __parseTypeString(typeString);
   }
   is(value, settings = {}) {
     const res = this.check(value, settings);
@@ -10421,6 +11128,7 @@ const descriptor$a = {
     if (typeof value !== "string" && typeof value !== "number") {
       return new Error(`Sorry but only strings and numbers can be casted to integers... Passed value: ${value}`);
     }
+    console.log("V", value);
     const res = parseInt(value);
     if (isNaN(res))
       return new Error(`Sorry but the conversion of "<yellow>${value}</yellow>" to a <green>Integer</green> does not work...`);
@@ -10453,12 +11161,12 @@ const descriptor$7 = {
   is: (value) => typeof value === "number",
   cast: (value) => {
     if (typeof value !== "string") {
-      console.log("vv", value, typeof value);
       return new Error(`Sorry but only strings can be casted to numbers...`);
     }
     const res = parseFloat(value);
-    if (isNaN(res))
+    if (isNaN(res)) {
       return new Error(`Sorry but the conversion of "<yellow>${value}</yellow>" to a <green>Number</green> does not work...`);
+    }
     return res;
   }
 };
@@ -10667,21 +11375,6 @@ var __awaiter$z = globalThis && globalThis.__awaiter || function(thisArg, _argum
   });
 };
 class SEventEmitter$1 extends SClass {
-  constructor(settings) {
-    super(__deepMerge({
-      asyncStart: false,
-      bufferTimeout: 1e3,
-      defaults: {},
-      castByEvent: {
-        log: SLog
-      },
-      bind: void 0
-    }, settings !== null && settings !== void 0 ? settings : {}));
-    this._asyncStarted = false;
-    this._buffer = [];
-    this._eventsStacks = {};
-    this._onStackById = {};
-  }
   static get global() {
     if (!SEventEmitter$1._globalInstance) {
       SEventEmitter$1._globalInstance = new SEventEmitter$1({
@@ -10698,12 +11391,12 @@ class SEventEmitter$1 extends SClass {
       return sourceSEventEmitter;
     }
     sourceSEventEmitter.on(set.events || "*", (value, metas) => __awaiter$z(this, void 0, void 0, function* () {
-      var _a2, _b2, _c2, _d2, _e, _f, _g;
+      var _a2, _b2, _c2, _d2, _e2, _f, _g;
       if (!metas || !value) {
         return;
       }
       metas.id = (_c2 = (_a2 = metas.id) !== null && _a2 !== void 0 ? _a2 : (_b2 = metas.emitter.metas) === null || _b2 === void 0 ? void 0 : _b2.id) !== null && _c2 !== void 0 ? _c2 : __uniqid();
-      metas.color = (_f = (_d2 = metas.color) !== null && _d2 !== void 0 ? _d2 : (_e = metas.emitter.metas) === null || _e === void 0 ? void 0 : _e.color) !== null && _f !== void 0 ? _f : getColorFor(metas.id);
+      metas.color = (_f = (_d2 = metas.color) !== null && _d2 !== void 0 ? _d2 : (_e2 = metas.emitter.metas) === null || _e2 === void 0 ? void 0 : _e2.color) !== null && _f !== void 0 ? _f : getColorFor(metas.id);
       if (set.exclude && set.exclude.indexOf(metas.event) !== -1)
         return;
       if (set.filter && !set.filter(value, metas))
@@ -10752,6 +11445,21 @@ class SEventEmitter$1 extends SClass {
         }
       }
     }));
+  }
+  constructor(settings) {
+    super(__deepMerge({
+      asyncStart: false,
+      bufferTimeout: 1e3,
+      defaults: {},
+      castByEvent: {
+        log: SLog
+      },
+      bind: void 0
+    }, settings !== null && settings !== void 0 ? settings : {}));
+    this._asyncStarted = false;
+    this._buffer = [];
+    this._eventsStacks = {};
+    this._onStackById = {};
   }
   bind(obj2) {
     this.settings.bind = obj2;
@@ -11157,6 +11865,49 @@ var __awaiter$y = globalThis && globalThis.__awaiter || function(thisArg, _argum
   });
 };
 class SPromise extends SClass.extends(Promise) {
+  static queue(promises, before, after) {
+    return new SPromise(({ resolve, reject, pipe }) => __awaiter$y(this, void 0, void 0, function* () {
+      const results = {};
+      function next() {
+        return __awaiter$y(this, void 0, void 0, function* () {
+          const firstKey = Object.keys(promises)[0];
+          let promise = promises[firstKey];
+          if (typeof promise === "function")
+            promise = promise();
+          try {
+            delete promises[firstKey];
+            if (before)
+              yield before(firstKey, promise);
+            if (promise instanceof SPromise) {
+              pipe(promise);
+            }
+            let res = yield promise;
+            results[firstKey] = res;
+            if (after) {
+              let afterRes = yield after(firstKey, result);
+              if (afterRes !== void 0)
+                result[firstKey] = afterRes;
+            }
+            if (Object.keys(promises).length) {
+              next();
+            } else {
+              resolve(results);
+            }
+          } catch (e) {
+            reject(promise);
+          }
+        });
+      }
+      next();
+    }));
+  }
+  static treatAsValue(promise, settings = {}) {
+    return fn(promise, settings);
+  }
+  get promiseSettings() {
+    var _a2;
+    return (_a2 = this.settings.promise) !== null && _a2 !== void 0 ? _a2 : this.settings;
+  }
   constructor(executorFnOrSettings = {}, settings) {
     var _a2;
     let executorFn, resolvers = {};
@@ -11244,49 +11995,6 @@ class SPromise extends SClass.extends(Promise) {
         this.reject(data2);
       });
     }
-  }
-  static queue(promises, before, after) {
-    return new SPromise(({ resolve, reject, pipe }) => __awaiter$y(this, void 0, void 0, function* () {
-      const results = {};
-      function next() {
-        return __awaiter$y(this, void 0, void 0, function* () {
-          const firstKey = Object.keys(promises)[0];
-          let promise = promises[firstKey];
-          if (typeof promise === "function")
-            promise = promise();
-          try {
-            delete promises[firstKey];
-            if (before)
-              yield before(firstKey, promise);
-            if (promise instanceof SPromise) {
-              pipe(promise);
-            }
-            let res = yield promise;
-            results[firstKey] = res;
-            if (after) {
-              let afterRes = yield after(firstKey, result);
-              if (afterRes !== void 0)
-                result[firstKey] = afterRes;
-            }
-            if (Object.keys(promises).length) {
-              next();
-            } else {
-              resolve(results);
-            }
-          } catch (e) {
-            reject(promise);
-          }
-        });
-      }
-      next();
-    }));
-  }
-  static treatAsValue(promise, settings = {}) {
-    return fn(promise, settings);
-  }
-  get promiseSettings() {
-    var _a2;
-    return (_a2 = this.settings.promise) !== null && _a2 !== void 0 ? _a2 : this.settings;
   }
   static get [Symbol.species]() {
     return Promise;
@@ -11554,6 +12262,7 @@ const __vitePreload = function preload(baseModule, deps, importerUrl) {
   if (!deps || deps.length === 0) {
     return baseModule();
   }
+  const links = document.getElementsByTagName("link");
   return Promise.all(deps.map((dep) => {
     dep = assetsURL(dep);
     if (dep in seen)
@@ -11561,7 +12270,15 @@ const __vitePreload = function preload(baseModule, deps, importerUrl) {
     seen[dep] = true;
     const isCss = dep.endsWith(".css");
     const cssSelector = isCss ? '[rel="stylesheet"]' : "";
-    if (document.querySelector(`link[href="${dep}"]${cssSelector}`)) {
+    const isBaseRelative = !!importerUrl;
+    if (isBaseRelative) {
+      for (let i = links.length - 1; i >= 0; i--) {
+        const link2 = links[i];
+        if (link2.href === dep && (!isCss || link2.rel === "stylesheet")) {
+          return;
+        }
+      }
+    } else if (document.querySelector(`link[href="${dep}"]${cssSelector}`)) {
       return;
     }
     const link = document.createElement("link");
@@ -11632,6 +12349,20 @@ var __awaiter$x = globalThis && globalThis.__awaiter || function(thisArg, _argum
   });
 };
 class SStdio extends SClass {
+  static existingOrNew(id, sources, adapters, settings = {}) {
+    if (this._instanciatedStdio[id])
+      return this._instanciatedStdio[id];
+    return this.new(id, sources, adapters, settings);
+  }
+  static new(id, sources, adapters, settings = {}) {
+    return new Promise((resolve) => __awaiter$x(this, void 0, void 0, function* () {
+      const __new = (yield __vitePreload(() => import("./new.58f7455f.js"), true ? [] : void 0)).default;
+      return __new(id, sources, adapters, settings);
+    }));
+  }
+  get id() {
+    return this._id;
+  }
   constructor(id, sources, adapters, settings) {
     super(__deepMerge(
       SStdioSettingsInterface.defaults(),
@@ -11651,20 +12382,6 @@ class SStdio extends SClass {
     this.sources.forEach((s2) => {
       this.registerSource(s2);
     });
-  }
-  static existingOrNew(id, sources, adapters, settings = {}) {
-    if (this._instanciatedStdio[id])
-      return this._instanciatedStdio[id];
-    return this.new(id, sources, adapters, settings);
-  }
-  static new(id, sources, adapters, settings = {}) {
-    return new Promise((resolve) => __awaiter$x(this, void 0, void 0, function* () {
-      const __new = (yield __vitePreload(() => import("./new.0ed38826.js"), true ? [] : void 0)).default;
-      return __new(id, sources, adapters, settings);
-    }));
-  }
-  get id() {
-    return this._id;
   }
   _logBuffer() {
     this._logsBuffer = this._logsBuffer.filter((log) => {
@@ -11779,10 +12496,10 @@ var __awaiter$w = globalThis && globalThis.__awaiter || function(thisArg, _argum
     step((generator = generator.apply(thisArg, _arguments || [])).next());
   });
 };
-var _a$6;
+var _a$5;
 const _nativeConsole$1 = {};
 for (let key of ["log", "error", "warn", "verbose"]) {
-  _nativeConsole$1[key] = (_a$6 = console[key]) !== null && _a$6 !== void 0 ? _a$6 : console.log;
+  _nativeConsole$1[key] = (_a$5 = console[key]) !== null && _a$5 !== void 0 ? _a$5 : console.log;
 }
 class SStdioBasicAdapter extends SStdioAdapter {
   constructor(settings) {
@@ -11807,7 +12524,7 @@ class SStdioBasicAdapter extends SStdioAdapter {
     return groupObj;
   }
   log(logObj) {
-    var _a2, _b2, _c2, _d2, _e, _f, _g, _h, _j;
+    var _a2, _b2, _c2, _d2, _e2, _f, _g, _h, _j;
     if (!logObj)
       return;
     const logger = (_a2 = logObj.logger) !== null && _a2 !== void 0 ? _a2 : _nativeConsole$1.log;
@@ -11821,7 +12538,7 @@ class SStdioBasicAdapter extends SStdioAdapter {
       console.clear();
     }
     let logLinesCount = 0;
-    if ((_e = logObj.margin) === null || _e === void 0 ? void 0 : _e.top) {
+    if ((_e2 = logObj.margin) === null || _e2 === void 0 ? void 0 : _e2.top) {
       for (let i = 0; i < logObj.margin.top; i++) {
         logger(__parseHtml(`<${groupObj.color}>\u2588</${groupObj.color}>`));
       }
@@ -12044,17 +12761,6 @@ function speedIndex(slow = 1e5, fast = 15e5) {
   return Math.round(index);
 }
 class SFrontspec extends SClass {
-  constructor(frontspec = {}) {
-    var _a2, _b2, _c2, _d2;
-    super(__deepMerge({
-      metas: {
-        id: "SFrontspec"
-      }
-    }));
-    this._frontspec = {};
-    this.constructor._defaultFrontspecInstance = this;
-    this._frontspec = __deepMerge(((_b2 = (_a2 = document.env) === null || _a2 === void 0 ? void 0 : _a2.SUGAR) === null || _b2 === void 0 ? void 0 : _b2.frontspec) && !(document.env.SUGAR.frontspec instanceof SFrontspec) ? document.env.SUGAR.frontspec : {}, (_d2 = (_c2 = document.env) === null || _c2 === void 0 ? void 0 : _c2.FRONTSPEC) !== null && _d2 !== void 0 ? _d2 : {}, frontspec);
-  }
   static init() {
     const finalSettings = {};
     let frontspecInstance = new this(finalSettings);
@@ -12070,6 +12776,17 @@ class SFrontspec extends SClass {
       this._defaultFrontspecInstance = SFrontspec.init();
     }
     return this._defaultFrontspecInstance.get(dotpath);
+  }
+  constructor(frontspec = {}) {
+    var _a2, _b2, _c2, _d2;
+    super(__deepMerge({
+      metas: {
+        id: "SFrontspec"
+      }
+    }));
+    this._frontspec = {};
+    this.constructor._defaultFrontspecInstance = this;
+    this._frontspec = __deepMerge(((_b2 = (_a2 = document.env) === null || _a2 === void 0 ? void 0 : _a2.SUGAR) === null || _b2 === void 0 ? void 0 : _b2.frontspec) && !(document.env.SUGAR.frontspec instanceof SFrontspec) ? document.env.SUGAR.frontspec : {}, (_d2 = (_c2 = document.env) === null || _c2 === void 0 ? void 0 : _c2.FRONTSPEC) !== null && _d2 !== void 0 ? _d2 : {}, frontspec);
   }
   get(dotpath = ".") {
     return get(this._frontspec, dotpath);
@@ -12204,7 +12921,7 @@ function __rgbaToHsla(r, g2, b, a3 = 1) {
   }
   return RGBAToHSLA(r, g2, b, a3);
 }
-function __parse(color2, format2 = "rgba") {
+function __parseColor(color2, format2 = "rgba") {
   color2 = color2.replace(/\s/g, "");
   if (color2.startsWith("rgb")) {
     color2 = __parseRgba(color2);
@@ -12253,7 +12970,7 @@ function __rgbaToHex(r, g2, b, a3 = 1) {
 function __convert(input, format2 = "rgba") {
   let rgbaObj = {};
   if (typeof input === "string") {
-    rgbaObj = __parse(input, "rgba");
+    rgbaObj = __parseColor(input, "rgba");
   } else if (typeof input === "object") {
     if (input.r !== void 0 && input.g !== void 0 && input.b !== void 0) {
       rgbaObj = input;
@@ -13040,11 +13757,11 @@ function __expandPleasantCssClassnamesLive(settings) {
     rootNode: settings === null || settings === void 0 ? void 0 : settings.rootNode
   });
 }
-var _a$5, _b$4;
+var _a$4, _b$4;
 let oldX = 0, oldY = 0;
 const threshold = 0;
 try {
-  (_a$5 = document === null || document === void 0 ? void 0 : document.addEventListener) === null || _a$5 === void 0 ? void 0 : _a$5.call(document, "pointermove", (e) => {
+  (_a$4 = document === null || document === void 0 ? void 0 : document.addEventListener) === null || _a$4 === void 0 ? void 0 : _a$4.call(document, "pointermove", (e) => {
     calculateDirection(e);
   });
   (_b$4 = document === null || document === void 0 ? void 0 : document.addEventListener) === null || _b$4 === void 0 ? void 0 : _b$4.call(document, "pointerdown", (e) => {
@@ -13374,16 +14091,14 @@ function __whenEntersViewport(elm, settings = {}) {
     });
   }));
 }
-function __whenImageLoaded($img, callback = null) {
+function __whenImageLoaded($img) {
   let imgLoadedHandler, imgErrorHandler;
   const pro = new Promise((resolve, reject) => {
     if ($img.hasAttribute("src") && $img.complete) {
       resolve($img);
-      callback && callback($img);
     } else {
       imgLoadedHandler = (e) => {
         resolve($img);
-        callback && callback($img);
       };
       $img.addEventListener("load", imgLoadedHandler);
       imgErrorHandler = (e) => {
@@ -13398,17 +14113,14 @@ function __whenImageLoaded($img, callback = null) {
   });
   return pro;
 }
-function __whenImagesLoaded($imgs, cb = null) {
+function __whenImagesLoaded($imgs) {
   return new SPromise(({ resolve, reject, emit }) => {
     const promises = [], loadedImages = [];
     Array.from($imgs).forEach(($img) => {
       promises.push(__whenImageLoaded($img).then((_$img) => {
         loadedImages.push(_$img);
-        emit("img.loaded", _$img);
+        emit("loaded", _$img);
         if (loadedImages.length === $imgs.length) {
-          emit("loaded", loadedImages);
-          if (cb)
-            cb(loadedImages);
           resolve(loadedImages);
         }
       }).catch((error2) => {
@@ -13719,7 +14431,7 @@ function __whenRemoved($elm) {
     });
   });
 }
-function __whenStylesheetsReady(links = null, cb = null) {
+function __whenStylesheetsReady(links = null) {
   if (!links) {
     links = Array.from(document.querySelectorAll('link[rel="stylesheet"]'));
   }
@@ -13728,9 +14440,6 @@ function __whenStylesheetsReady(links = null, cb = null) {
     promises.push(__whenLinkLoaded($link));
   });
   const allPromises = Promise.all(promises);
-  allPromises.then(() => {
-    cb === null || cb === void 0 ? void 0 : cb();
-  });
   return allPromises;
 }
 function splitIfNeeded(what, separator) {
@@ -14019,10 +14728,10 @@ function __isScrollable($elm, settings) {
     return true;
   return false;
 }
-var _a$4, _b$3;
+var _a$3, _b$3;
 let _isUserScrolling = false, _isUserScrollingTimeout;
 try {
-  (_a$4 = document === null || document === void 0 ? void 0 : document.addEventListener) === null || _a$4 === void 0 ? void 0 : _a$4.call(document, "wheel", (e) => {
+  (_a$3 = document === null || document === void 0 ? void 0 : document.addEventListener) === null || _a$3 === void 0 ? void 0 : _a$3.call(document, "wheel", (e) => {
     _isUserScrolling = true;
     clearTimeout(_isUserScrollingTimeout);
     _isUserScrollingTimeout = setTimeout(() => {
@@ -14110,7 +14819,7 @@ var __awaiter$p = globalThis && globalThis.__awaiter || function(thisArg, _argum
   });
 };
 function __querySelectorLive(selector, cb = null, settings = {}, _isFirstLevel = true) {
-  var _a2, _b2, _c2, _d2, _e;
+  var _a2, _b2, _c2, _d2, _e2;
   let _emit, noScopeSelector, observer, canceled = false;
   __uniqid();
   const selectedNodes = [];
@@ -14263,7 +14972,7 @@ function __querySelectorLive(selector, cb = null, settings = {}, _isFirstLevel =
     }
     observer.observe(settings.rootNode, observeSettings);
     findAndProcess(settings.rootNode, selector);
-    (_e = settings.afterFirst) === null || _e === void 0 ? void 0 : _e.call(settings);
+    (_e2 = settings.afterFirst) === null || _e2 === void 0 ? void 0 : _e2.call(settings);
   }
   pro.on("cancel", () => {
     canceled = true;
@@ -14369,8 +15078,8 @@ try {
 const requestAnimationFrame$2 = requestAnimationFrame$1;
 function __scrollTo(target, settings = {}) {
   return new Promise((resolve, reject) => {
-    var _a2, _b2, _c2, _d2, _e, _f, _g, _h, _j, _k, _l;
-    settings = Object.assign({ $elm: window, duration: 500, easing: __easeInOutQuad, offset: 0, offsetX: void 0, offsetY: void 0, align: "start", justify: "start", onFinish: null }, settings);
+    var _a2, _b2, _c2, _d2, _e2, _f, _g, _h, _j, _k, _l;
+    settings = Object.assign({ $elm: window, duration: 500, easing: __easeInOutQuad, offset: 0, offsetX: void 0, offsetY: void 0, align: "start", justify: "start", onFinish: null, force: false }, settings);
     if (settings.$elm === document.body)
       settings.$elm = window;
     if (settings.$elm === document)
@@ -14405,7 +15114,7 @@ function __scrollTo(target, settings = {}) {
         bottom: 0
       };
     }
-    const offsetY = (_e = settings.offsetY) !== null && _e !== void 0 ? _e : settings.offset;
+    const offsetY = (_e2 = settings.offsetY) !== null && _e2 !== void 0 ? _e2 : settings.offset;
     const offsetX = (_f = settings.offsetX) !== null && _f !== void 0 ? _f : settings.offset;
     if (target === "top") {
       targetY = 0;
@@ -14459,6 +15168,7 @@ function __scrollTo(target, settings = {}) {
       currentX,
       duration: settings.duration,
       easing: settings.easing,
+      force: settings.force,
       $elm: settings.$elm,
       onFinish() {
         settings.onFinish && settings.onFinish();
@@ -14479,7 +15189,7 @@ __scrollTo.step = function() {
   const x2 = this.targetX - (1 - this.easing(t)) * this.deltaX;
   const y = this.targetY - (1 - this.easing(t)) * this.deltaY;
   $scrollElm.scrollTo(x2, y);
-  if (__isUserScrolling(this.$elm))
+  if (!this.force && __isUserScrolling(this.$elm))
     return;
   if (t !== 1) {
     requestAnimationFrame$2(this.step.bind(this));
@@ -14614,9 +15324,6 @@ function translateY(distance) {
   return matrix;
 }
 class SSugarElement {
-  constructor($elm) {
-    this.$elm = $elm;
-  }
   get matrix() {
     var _a2;
     return (_a2 = this._tmpMatrix) !== null && _a2 !== void 0 ? _a2 : fromString(this.matrixStr);
@@ -14624,9 +15331,12 @@ class SSugarElement {
   get matrixStr() {
     return window.getComputedStyle(this.$elm).transform;
   }
+  constructor($elm) {
+    this.$elm = $elm;
+  }
   simulateTransform(transform) {
-    var _a2, _b2, _c2, _d2, _e, _f;
-    const translateMatrix = translate3d((_a2 = transform.translateX) !== null && _a2 !== void 0 ? _a2 : 0, (_b2 = transform.translateY) !== null && _b2 !== void 0 ? _b2 : 0, (_c2 = transform.translateZ) !== null && _c2 !== void 0 ? _c2 : 0), rotateXMatrix = rotateX((_d2 = transform.rotateX) !== null && _d2 !== void 0 ? _d2 : 0), rotateYMatrix = rotateY((_e = transform.rotateY) !== null && _e !== void 0 ? _e : 0), rotateZMatrix = rotateZ((_f = transform.rotateZ) !== null && _f !== void 0 ? _f : 0);
+    var _a2, _b2, _c2, _d2, _e2, _f;
+    const translateMatrix = translate3d((_a2 = transform.translateX) !== null && _a2 !== void 0 ? _a2 : 0, (_b2 = transform.translateY) !== null && _b2 !== void 0 ? _b2 : 0, (_c2 = transform.translateZ) !== null && _c2 !== void 0 ? _c2 : 0), rotateXMatrix = rotateX((_d2 = transform.rotateX) !== null && _d2 !== void 0 ? _d2 : 0), rotateYMatrix = rotateY((_e2 = transform.rotateY) !== null && _e2 !== void 0 ? _e2 : 0), rotateZMatrix = rotateZ((_f = transform.rotateZ) !== null && _f !== void 0 ? _f : 0);
     let newMatrix = this.matrix;
     newMatrix = [newMatrix, translateMatrix, rotateXMatrix, rotateYMatrix, rotateZMatrix].reduce(multiply);
     const newTranslates = this.getTranslates(newMatrix), newRotates = this.getRotates(newMatrix);
@@ -14750,7 +15460,7 @@ function __easeInterval(duration, cb, settings = {}) {
   });
   return pro;
 }
-function __compressVarName(name2) {
+function __compressCssVarName(name2) {
   function compress(varName) {
     const base64 = varName.toLowerCase().replace(/\-/gm, "");
     const dict = "abcdefghijklmnopqrstuvwxyz0123456789=- ";
@@ -16165,21 +16875,21 @@ function __makeFloat($elm, $depending, settings) {
     });
   });
   update();
-  const cleanup = autoUpdate($depending, $elm, () => {
+  const cancel = autoUpdate($depending, $elm, () => {
     update();
   });
   __whenRemoved($elm).then(() => {
-    cleanup();
+    cancel();
   });
   __whenRemoved($depending).then(() => {
-    cleanup();
+    cancel();
   });
   $depending.addEventListener("pointerover", () => {
     update();
   });
   return {
     update,
-    cleanup
+    cancel
   };
 }
 let map$1 = {};
@@ -17507,15 +18217,6 @@ class colorSchemaNameInterface extends SInterface {
   }
 }
 class SThemeBase extends SEventEmitter {
-  constructor(theme, variant, settings) {
-    super(__deepMerge({}, settings !== null && settings !== void 0 ? settings : {}));
-    this._overridedConfig = {};
-    this.theme = theme !== null && theme !== void 0 ? theme : SSugarConfig.get("theme.theme");
-    this.variant = variant !== null && variant !== void 0 ? variant : SSugarConfig.get("theme.variant");
-    if (!SSugarConfig.get(`theme.themes.${this.theme}-${this.variant}`)) {
-      throw new Error(`Sorry but the requested theme "<yellow>${this.theme}-${this.variant}</yellow>" does not exists...`);
-    }
-  }
   static sortMedia(media) {
     var _a2;
     if (!media.defaultAction) {
@@ -17732,7 +18433,7 @@ class SThemeBase extends SEventEmitter {
     return `@media ${currentQueryList.join(" ")}`;
   }
   static resolveCssPropertyValue(property, value, settings) {
-    var _a2, _b2, _c2, _d2, _e, _f, _g, _h, _j;
+    var _a2, _b2, _c2, _d2, _e2, _f, _g, _h, _j;
     const dashProp = __dashCase(property);
     switch (dashProp) {
       case "font-family":
@@ -17755,7 +18456,7 @@ class SThemeBase extends SEventEmitter {
       case "border-bottom-left-radius":
         return (_d2 = this.resolveBorderRadius(value)) !== null && _d2 !== void 0 ? _d2 : value;
       case "border-width":
-        return (_e = this.resolveBorderWidth(value)) !== null && _e !== void 0 ? _e : value;
+        return (_e2 = this.resolveBorderWidth(value)) !== null && _e2 !== void 0 ? _e2 : value;
       case "transition":
         return (_f = this.getSafe(`transition.${value}`)) !== null && _f !== void 0 ? _f : value;
       case "margin-inline":
@@ -17907,7 +18608,7 @@ class SThemeBase extends SEventEmitter {
     if (!((_b2 = (_a2 = this.cssSettings) === null || _a2 === void 0 ? void 0 : _a2.compress) === null || _b2 === void 0 ? void 0 : _b2.variables)) {
       return varname;
     }
-    return __compressVarName(varname);
+    return __compressCssVarName(varname);
   }
   static jsConfigObjectToCssProperties(obj2) {
     let vars = [];
@@ -18053,6 +18754,15 @@ class SThemeBase extends SEventEmitter {
   static set(dotPath, value, settings) {
     const instance = this.getTheme(settings === null || settings === void 0 ? void 0 : settings.theme, settings === null || settings === void 0 ? void 0 : settings.variant);
     return instance.set(dotPath, value);
+  }
+  constructor(theme, variant, settings) {
+    super(__deepMerge({}, settings !== null && settings !== void 0 ? settings : {}));
+    this._overridedConfig = {};
+    this.theme = theme !== null && theme !== void 0 ? theme : SSugarConfig.get("theme.theme");
+    this.variant = variant !== null && variant !== void 0 ? variant : SSugarConfig.get("theme.variant");
+    if (!SSugarConfig.get(`theme.themes.${this.theme}-${this.variant}`)) {
+      throw new Error(`Sorry but the requested theme "<yellow>${this.theme}-${this.variant}</yellow>" does not exists...`);
+    }
   }
   get themes() {
     return SSugarConfig.get("theme.themes");
@@ -18358,19 +19068,6 @@ window._console = {};
   window._console[key] = console[key];
 });
 class STheme extends SThemeBase {
-  constructor(theme, variant, settings) {
-    super(theme, variant, __deepMerge({}, settings !== null && settings !== void 0 ? settings : {}));
-    this.state = {
-      overridedConfigs: {}
-    };
-    if (!SEnv.is("production")) {
-      console.log(`<cyan>[STheme]</cyan> Initializing theme <cyan>${theme}</cyan> in <cyan>${variant}</cyan> variant`);
-    }
-    this.restore();
-    if (!SEnv.is("production")) {
-      console.log(`<cyan>[STheme]</cyan> Theme initialized <green>successfully</green>`);
-    }
-  }
   static get theme() {
     var _a2;
     const themeAttr = (_a2 = document.querySelector("html")) === null || _a2 === void 0 ? void 0 : _a2.getAttribute("theme");
@@ -18507,6 +19204,19 @@ class STheme extends SThemeBase {
       $context.style.setProperty(key, value);
     }
   }
+  constructor(theme, variant, settings) {
+    super(theme, variant, __deepMerge({}, settings !== null && settings !== void 0 ? settings : {}));
+    this.state = {
+      overridedConfigs: {}
+    };
+    if (!SEnv.is("production")) {
+      console.log(`<cyan>[STheme]</cyan> Initializing theme <cyan>${theme}</cyan> in <cyan>${variant}</cyan> variant`);
+    }
+    this.restore();
+    if (!SEnv.is("production")) {
+      console.log(`<cyan>[STheme]</cyan> Theme initialized <green>successfully</green>`);
+    }
+  }
   setColor(color2, value) {
     this.set(`color.${color2}.color`, value);
   }
@@ -18592,8 +19302,31 @@ class STheme extends SThemeBase {
 }
 STheme._defaultThemeMetas = {};
 class SFront extends SClass {
+  static init(settings) {
+    const finalSettings = Object.assign({ id: "default", lod: {}, wireframe: {}, legal: {}, partytown: {}, theme: {} }, settings !== null && settings !== void 0 ? settings : {});
+    let frontInstance = new this(finalSettings);
+    if (!document.env)
+      document.env = {};
+    if (!document.env.SUGAR)
+      document.env.SUGAR = {};
+    document.env.SUGAR.front = frontInstance;
+    return frontInstance;
+  }
+  static ensureIsInited(throwError = true) {
+    var _a2, _b2;
+    if (!((_b2 = (_a2 = document.env) === null || _a2 === void 0 ? void 0 : _a2.SUGAR) === null || _b2 === void 0 ? void 0 : _b2.front)) {
+      if (throwError) {
+        throw new Error(`<red>[SFront]</red> You must init your front using the __SFront.init() static method...`);
+      }
+      return false;
+    }
+    return true;
+  }
+  static get instance() {
+    return this._defaultInstance;
+  }
   constructor(settings) {
-    var _a2, _b2, _c2, _d2;
+    var _a2, _b2, _c2, _d2, _e2;
     new SStdio("default", new SStdioConsoleSource(), new SStdioBasicAdapter());
     if (!SEnv.is("production")) {
       const color2 = SEnv.env.ENV === "production" ? "red" : SEnv.env.ENV === "staging" ? "cyan" : "green";
@@ -18618,6 +19351,9 @@ class SFront extends SClass {
       google: (_b2 = frontspec.get("google")) !== null && _b2 !== void 0 ? _b2 : {},
       partytown: (_c2 = frontspec.get("partytown")) !== null && _c2 !== void 0 ? _c2 : {},
       lod: Object.assign({ stylesheet: "link#global" }, (_d2 = frontspec.get("lod")) !== null && _d2 !== void 0 ? _d2 : {}),
+      wireframe: {
+        enabled: void 0
+      },
       legal: {
         cookieName: "s-legal",
         defaultMetas: {}
@@ -18626,6 +19362,9 @@ class SFront extends SClass {
     this._originalState = {
       lod: {
         level: void 0
+      },
+      wireframe: {
+        enabled: void 0
       }
     };
     this.state = Object.assign({}, this._originalState);
@@ -18647,35 +19386,39 @@ class SFront extends SClass {
     if (this.settings.lod.enabled) {
       this._initLod();
     }
+    if (((_e2 = this.state.wireframe) === null || _e2 === void 0 ? void 0 : _e2.enabled) || this.settings.wireframe.enabled && this.state.wireframe.enabled === void 0) {
+      this.setWireframe(true);
+    }
     this._initTracking();
   }
-  static init(settings) {
-    const finalSettings = Object.assign({ id: "default", lod: {}, legal: {}, partytown: {}, theme: {} }, settings !== null && settings !== void 0 ? settings : {});
-    let frontInstance = new this(finalSettings);
-    if (!document.env)
-      document.env = {};
-    if (!document.env.SUGAR)
-      document.env.SUGAR = {};
-    document.env.SUGAR.front = frontInstance;
-    return frontInstance;
+  get wireframe() {
+    var _a2;
+    return {
+      enabled: ((_a2 = this.state.wireframe) === null || _a2 === void 0 ? void 0 : _a2.enabled) !== void 0 ? this.state.wireframe.enabled : this.settings.wireframe.enabled
+    };
   }
-  static ensureIsInited(throwError = true) {
+  setWireframe(enabled) {
     var _a2, _b2;
-    if (!((_b2 = (_a2 = document.env) === null || _a2 === void 0 ? void 0 : _a2.SUGAR) === null || _b2 === void 0 ? void 0 : _b2.front)) {
-      if (throwError) {
-        throw new Error(`<red>[SFront]</red> You must init your front using the __SFront.init() static method...`);
+    if (((_a2 = this.state.wireframe) === null || _a2 === void 0 ? void 0 : _a2.enabled) !== enabled) {
+      (_b2 = console.verbose) === null || _b2 === void 0 ? void 0 : _b2.call(console, `<yellow>[wireframe]</yellow> ${enabled ? "<green>Activate</green>" : "<red>Desactivate</red>"} the wireframe mode`);
+      if (!this.state.wireframe) {
+        this.state.wireframe = {};
       }
-      return false;
+      this.state.wireframe.enabled = enabled;
+      this.save();
+      document.dispatchEvent(new CustomEvent("s-front.wireframe.change", {
+        detail: {
+          enabled,
+          theme: this
+        }
+      }));
     }
-    return true;
-  }
-  static get instance() {
-    return this._defaultInstance;
+    document.querySelector("html").classList[enabled ? "add" : "remove"]("s-wireframe");
   }
   get lod() {
     var _a2;
     return {
-      level: ((_a2 = this.state.lod) === null || _a2 === void 0 ? void 0 : _a2.level) || this.frontspec.get("lod.defaultLevel")
+      level: ((_a2 = this.state.lod) === null || _a2 === void 0 ? void 0 : _a2.level) !== void 0 ? this.state.lod.level : this.frontspec.get("lod.defaultLevel")
     };
   }
   setLod(level, settings) {
@@ -18741,12 +19484,12 @@ class SFront extends SClass {
     if (isCrawler && this.lodConfig.botLevel !== void 0) {
       this.setLod(this.lodConfig.botLevel);
     }
-    if (this.state.lod.level !== void 0) {
+    if (this.state.lod.level !== void 0 && this.state.lod.level !== null) {
       this.setLod(this.state.lod.level);
       return;
     }
-    this.setLod(this.settings.lod.level);
-    if (!isCrawler && this.state.lod.level === void 0 && this.settings.lod.level === void 0) {
+    this.setLod(this.settings.lod.defaultLevel);
+    if (!isCrawler && this.state.lod.level === void 0 && this.settings.lod.defaultLevel === void 0) {
       const speedIndex$1 = speedIndex();
       let suitedLod = 0;
       for (let [lod, lodObj] of Object.entries((_a2 = this.lodConfig.levels) !== null && _a2 !== void 0 ? _a2 : {})) {
@@ -18870,7 +19613,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     } catch (e) {
       this.state = Object.assign({}, this._originalState);
     }
-    console.log("STate", this.state);
   }
   clear() {
     localStorage.removeItem(`s-front-${this.settings.id}`);
@@ -18926,7 +19668,7 @@ class SStateFsAdapter {
   _init() {
     var _a2, _b2;
     return __awaiter$m(this, void 0, void 0, function* () {
-      const _packageTmpDir = (yield __vitePreload(() => import("./packageTmpDir.90d1ca58.js"), true ? [] : void 0)).default;
+      const _packageTmpDir = (yield __vitePreload(() => import("./packageTmpDir.519c8087.js"), true ? [] : void 0)).default;
       this._statesDir = (_b2 = (_a2 = this._settings) === null || _a2 === void 0 ? void 0 : _a2.folder) !== null && _b2 !== void 0 ? _b2 : `${_packageTmpDir()}/states`;
       this._stateFile = `${this._statesDir}/${this._id}.state.json`;
     });
@@ -19072,7 +19814,7 @@ class SStateManager extends SClass {
     return this[id];
   }
 }
-function __debounce(fn2, delay) {
+function __debounce(delay, fn2) {
   let timer = null;
   return function() {
     const context = this, args = arguments;
@@ -19326,9 +20068,9 @@ function requireShim$1() {
   if (hasRequiredShim$1)
     return shim$1;
   hasRequiredShim$1 = 1;
-  var indexOf = String.prototype.indexOf;
+  var indexOf2 = String.prototype.indexOf;
   shim$1 = function(searchString) {
-    return indexOf.call(this, searchString, arguments[1]) > -1;
+    return indexOf2.call(this, searchString, arguments[1]) > -1;
   };
   return shim$1;
 }
@@ -20086,28 +20828,6 @@ var __awaiter$k = globalThis && globalThis.__awaiter || function(thisArg, _argum
   });
 };
 class SComponentUtils extends SClass {
-  constructor(node, settings) {
-    super(__deepMerge(SComponentUtilsSettingsInterface.defaults(), settings !== null && settings !== void 0 ? settings : {}));
-    this.fastdom = __fastdom;
-    this.state = "pending";
-    this.DefaultPropsInterface = SComponentUtilsDefaultPropsInterface;
-    this._isInViewport = false;
-    this._mediaQueries = {};
-    this.node = node;
-    const whenInViewportPromise = __whenInViewport(this.node, {
-      once: false
-    });
-    whenInViewportPromise.on("in", () => {
-      this._isInViewport = true;
-    }).on("out", () => {
-      this._isInViewport = false;
-    });
-    if (this.props.bare) {
-      this.node.classList.add("s-bare");
-    }
-    const styleStr = this.settings.style;
-    this.injectStyle(styleStr !== null && styleStr !== void 0 ? styleStr : "");
-  }
   get props() {
     var _a2, _b2;
     return (_b2 = (_a2 = this._props) !== null && _a2 !== void 0 ? _a2 : this.node.props) !== null && _b2 !== void 0 ? _b2 : SComponentUtilsDefaultPropsInterface.defaults();
@@ -20129,6 +20849,28 @@ class SComponentUtils extends SClass {
   }
   get componentUtilsSettings() {
     return this.settings.componentUtils;
+  }
+  constructor(node, settings) {
+    super(__deepMerge(SComponentUtilsSettingsInterface.defaults(), settings !== null && settings !== void 0 ? settings : {}));
+    this.fastdom = __fastdom;
+    this.state = "pending";
+    this.DefaultPropsInterface = SComponentUtilsDefaultPropsInterface;
+    this._isInViewport = false;
+    this._mediaQueries = {};
+    this.node = node;
+    const whenInViewportPromise = __whenInViewport(this.node, {
+      once: false
+    });
+    whenInViewportPromise.on("in", () => {
+      this._isInViewport = true;
+    }).on("out", () => {
+      this._isInViewport = false;
+    });
+    if (this.props.bare) {
+      this.node.classList.add("s-bare");
+    }
+    const styleStr = this.settings.style;
+    this.injectStyle(styleStr !== null && styleStr !== void 0 ? styleStr : "");
   }
   setProps(props) {
     this._props = props;
@@ -20273,9 +21015,9 @@ class SComponentUtils extends SClass {
     if (Object.keys(props.responsive).length === 1 && props.responsive.original) {
       return;
     }
-    window.addEventListener("resize", __debounce(() => {
+    window.addEventListener("resize", __debounce(100, () => {
       this._applyResponsiveProps(props);
-    }, 100));
+    }));
     this._applyResponsiveProps(props);
   }
   _applyResponsiveProps(props = {}) {
@@ -20708,7 +21450,9 @@ Object.defineProperty(unescape$1, "all", {
  * Copyright 2019 Google LLC
  * SPDX-License-Identifier: BSD-3-Clause
  */
-const supportsAdoptingStyleSheets = window.ShadowRoot && (window.ShadyCSS === void 0 || window.ShadyCSS.nativeShadow) && "adoptedStyleSheets" in Document.prototype && "replace" in CSSStyleSheet.prototype;
+const NODE_MODE = false;
+const global$4 = window;
+const supportsAdoptingStyleSheets = global$4.ShadowRoot && (global$4.ShadyCSS === void 0 || global$4.ShadyCSS.nativeShadow) && "adoptedStyleSheets" in Document.prototype && "replace" in CSSStyleSheet.prototype;
 const constructionToken = Symbol();
 const cssTagCache = /* @__PURE__ */ new WeakMap();
 class CSSResult {
@@ -20761,7 +21505,7 @@ const adoptStyles = (renderRoot, styles2) => {
   } else {
     styles2.forEach((s2) => {
       const style = document.createElement("style");
-      const nonce = window["litNonce"];
+      const nonce = global$4["litNonce"];
       if (nonce !== void 0) {
         style.setAttribute("nonce", nonce);
       }
@@ -20777,21 +21521,22 @@ const cssResultFromStyleSheet = (sheet) => {
   }
   return unsafeCSS(cssText);
 };
-const getCompatibleStyle = supportsAdoptingStyleSheets ? (s2) => s2 : (s2) => s2 instanceof CSSStyleSheet ? cssResultFromStyleSheet(s2) : s2;
+const getCompatibleStyle = supportsAdoptingStyleSheets || NODE_MODE ? (s2) => s2 : (s2) => s2 instanceof CSSStyleSheet ? cssResultFromStyleSheet(s2) : s2;
 /**
  * @license
  * Copyright 2017 Google LLC
  * SPDX-License-Identifier: BSD-3-Clause
  */
-var _a$3, _b$2, _c$2;
-var _d$1;
+var _b$2, _c$2, _d$1;
+var _e;
+const global$3 = window;
 let requestUpdateThenable;
 let issueWarning$2;
-const trustedTypes$1 = window.trustedTypes;
+const trustedTypes$1 = global$3.trustedTypes;
 const emptyStringForBooleanAttribute$1 = trustedTypes$1 ? trustedTypes$1.emptyScript : "";
-const polyfillSupport$2 = window.reactiveElementPolyfillSupportDevMode;
+const polyfillSupport$2 = global$3.reactiveElementPolyfillSupportDevMode;
 {
-  const issuedWarnings = (_a$3 = globalThis.litIssuedWarnings) !== null && _a$3 !== void 0 ? _a$3 : globalThis.litIssuedWarnings = /* @__PURE__ */ new Set();
+  const issuedWarnings = (_b$2 = global$3.litIssuedWarnings) !== null && _b$2 !== void 0 ? _b$2 : global$3.litIssuedWarnings = /* @__PURE__ */ new Set();
   issueWarning$2 = (code3, warning) => {
     warning += ` See https://lit.dev/msg/${code3} for more information.`;
     if (!issuedWarnings.has(warning)) {
@@ -20800,7 +21545,7 @@ const polyfillSupport$2 = window.reactiveElementPolyfillSupportDevMode;
     }
   };
   issueWarning$2("dev-mode", `Lit is in dev mode. Not recommended for production!`);
-  if (((_b$2 = window.ShadyDOM) === null || _b$2 === void 0 ? void 0 : _b$2.inUse) && polyfillSupport$2 === void 0) {
+  if (((_c$2 = global$3.ShadyDOM) === null || _c$2 === void 0 ? void 0 : _c$2.inUse) && polyfillSupport$2 === void 0) {
     issueWarning$2("polyfill-support-missing", `Shadow DOM is being polyfilled via \`ShadyDOM\` but the \`polyfill-support\` module has not been loaded.`);
   }
   requestUpdateThenable = (name2) => ({
@@ -20813,11 +21558,11 @@ const polyfillSupport$2 = window.reactiveElementPolyfillSupportDevMode;
   });
 }
 const debugLogEvent$1 = (event) => {
-  const shouldEmit = window.emitLitDebugLogEvents;
+  const shouldEmit = global$3.emitLitDebugLogEvents;
   if (!shouldEmit) {
     return;
   }
-  window.dispatchEvent(new CustomEvent("lit-debug", {
+  global$3.dispatchEvent(new CustomEvent("lit-debug", {
     detail: event
   }));
 };
@@ -20878,8 +21623,8 @@ class ReactiveElement extends HTMLElement {
   }
   static addInitializer(initializer) {
     var _a2;
-    (_a2 = this._initializers) !== null && _a2 !== void 0 ? _a2 : this._initializers = [];
-    this._initializers.push(initializer);
+    this.finalize();
+    ((_a2 = this._initializers) !== null && _a2 !== void 0 ? _a2 : this._initializers = []).push(initializer);
   }
   static get observedAttributes() {
     this.finalize();
@@ -20938,6 +21683,9 @@ class ReactiveElement extends HTMLElement {
     this[finalized] = true;
     const superCtor = Object.getPrototypeOf(this);
     superCtor.finalize();
+    if (superCtor._initializers !== void 0) {
+      this._initializers = [...superCtor._initializers];
+    }
     this.elementProperties = new Map(superCtor.elementProperties);
     this.__attributeToPropertyMap = /* @__PURE__ */ new Map();
     if (this.hasOwnProperty(JSCompiler_renameProperty("properties"))) {
@@ -21036,11 +21784,11 @@ class ReactiveElement extends HTMLElement {
     this._$attributeToProperty(name2, value);
   }
   __propertyToAttribute(name2, value, options = defaultPropertyDeclaration) {
-    var _a2, _b2;
+    var _a2;
     const attr = this.constructor.__attributeNameForProperty(name2, options);
     if (attr !== void 0 && options.reflect === true) {
-      const toAttribute = (_b2 = (_a2 = options.converter) === null || _a2 === void 0 ? void 0 : _a2.toAttribute) !== null && _b2 !== void 0 ? _b2 : defaultConverter.toAttribute;
-      const attrValue = toAttribute(value, options.type);
+      const converter = ((_a2 = options.converter) === null || _a2 === void 0 ? void 0 : _a2.toAttribute) !== void 0 ? options.converter : defaultConverter;
+      const attrValue = converter.toAttribute(value, options.type);
       if (this.constructor.enabledWarnings.indexOf("migration") >= 0 && attrValue === void 0) {
         issueWarning$2("undefined-attribute-value", `The attribute value for the ${name2} property is undefined on element ${this.localName}. The attribute will be removed, but in the previous version of \`ReactiveElement\`, the attribute would not have changed.`);
       }
@@ -21054,15 +21802,17 @@ class ReactiveElement extends HTMLElement {
     }
   }
   _$attributeToProperty(name2, value) {
-    var _a2, _b2;
+    var _a2;
     const ctor = this.constructor;
     const propName = ctor.__attributeToPropertyMap.get(name2);
     if (propName !== void 0 && this.__reflectingProperty !== propName) {
       const options = ctor.getPropertyOptions(propName);
-      const converter = options.converter;
-      const fromAttribute = (_b2 = (_a2 = converter === null || converter === void 0 ? void 0 : converter.fromAttribute) !== null && _a2 !== void 0 ? _a2 : typeof converter === "function" ? converter : null) !== null && _b2 !== void 0 ? _b2 : defaultConverter.fromAttribute;
+      const converter = typeof options.converter === "function" ? { fromAttribute: options.converter } : ((_a2 = options.converter) === null || _a2 === void 0 ? void 0 : _a2.fromAttribute) !== void 0 ? options.converter : defaultConverter;
       this.__reflectingProperty = propName;
-      this[propName] = fromAttribute(value, options.type);
+      this[propName] = converter.fromAttribute(
+        value,
+        options.type
+      );
       this.__reflectingProperty = null;
     }
   }
@@ -21195,8 +21945,8 @@ class ReactiveElement extends HTMLElement {
   firstUpdated(_changedProperties) {
   }
 }
-_d$1 = finalized;
-ReactiveElement[_d$1] = true;
+_e = finalized;
+ReactiveElement[_e] = true;
 ReactiveElement.elementProperties = /* @__PURE__ */ new Map();
 ReactiveElement.elementStyles = [];
 ReactiveElement.shadowRootOptions = { mode: "open" };
@@ -21222,8 +21972,8 @@ polyfillSupport$2 === null || polyfillSupport$2 === void 0 ? void 0 : polyfillSu
     }
   };
 }
-((_c$2 = globalThis.reactiveElementVersions) !== null && _c$2 !== void 0 ? _c$2 : globalThis.reactiveElementVersions = []).push("1.3.4");
-if (globalThis.reactiveElementVersions.length > 1) {
+((_d$1 = global$3.reactiveElementVersions) !== null && _d$1 !== void 0 ? _d$1 : global$3.reactiveElementVersions = []).push("1.6.1");
+if (global$3.reactiveElementVersions.length > 1) {
   issueWarning$2("multiple-versions", `Multiple versions of Lit loaded. Loading multiple versions is not recommended.`);
 }
 /**
@@ -21232,30 +21982,31 @@ if (globalThis.reactiveElementVersions.length > 1) {
  * SPDX-License-Identifier: BSD-3-Clause
  */
 var _a$2, _b$1, _c$1, _d;
+const global$2 = window;
 const debugLogEvent = (event) => {
-  const shouldEmit = window.emitLitDebugLogEvents;
+  const shouldEmit = global$2.emitLitDebugLogEvents;
   if (!shouldEmit) {
     return;
   }
-  window.dispatchEvent(new CustomEvent("lit-debug", {
+  global$2.dispatchEvent(new CustomEvent("lit-debug", {
     detail: event
   }));
 };
 let debugLogRenderId = 0;
 let issueWarning$1;
 {
-  (_a$2 = globalThis.litIssuedWarnings) !== null && _a$2 !== void 0 ? _a$2 : globalThis.litIssuedWarnings = /* @__PURE__ */ new Set();
+  (_a$2 = global$2.litIssuedWarnings) !== null && _a$2 !== void 0 ? _a$2 : global$2.litIssuedWarnings = /* @__PURE__ */ new Set();
   issueWarning$1 = (code3, warning) => {
     warning += code3 ? ` See https://lit.dev/msg/${code3} for more information.` : "";
-    if (!globalThis.litIssuedWarnings.has(warning)) {
+    if (!global$2.litIssuedWarnings.has(warning)) {
       console.warn(warning);
-      globalThis.litIssuedWarnings.add(warning);
+      global$2.litIssuedWarnings.add(warning);
     }
   };
   issueWarning$1("dev-mode", `Lit is in dev mode. Not recommended for production!`);
 }
-const wrap = ((_b$1 = window.ShadyDOM) === null || _b$1 === void 0 ? void 0 : _b$1.inUse) && ((_c$1 = window.ShadyDOM) === null || _c$1 === void 0 ? void 0 : _c$1.noPatch) === true ? window.ShadyDOM.wrap : (node) => node;
-const trustedTypes = globalThis.trustedTypes;
+const wrap = ((_b$1 = global$2.ShadyDOM) === null || _b$1 === void 0 ? void 0 : _b$1.inUse) && ((_c$1 = global$2.ShadyDOM) === null || _c$1 === void 0 ? void 0 : _c$1.noPatch) === true ? global$2.ShadyDOM.wrap : (node) => node;
+const trustedTypes = global$2.trustedTypes;
 const policy = trustedTypes ? trustedTypes.createPolicy("lit-html", {
   createHTML: (s2) => s2
 }) : void 0;
@@ -21324,44 +22075,6 @@ const html$1 = tag(HTML_RESULT$1);
 const noChange = Symbol.for("lit-noChange");
 const nothing = Symbol.for("lit-nothing");
 const templateCache = /* @__PURE__ */ new WeakMap();
-const render = (value, container, options) => {
-  var _a2, _b2;
-  if (container == null) {
-    throw new TypeError(`The container to render into may not be ${container}`);
-  }
-  const renderId = debugLogRenderId++;
-  const partOwnerNode = (_a2 = options === null || options === void 0 ? void 0 : options.renderBefore) !== null && _a2 !== void 0 ? _a2 : container;
-  let part = partOwnerNode["_$litPart$"];
-  debugLogEvent === null || debugLogEvent === void 0 ? void 0 : debugLogEvent({
-    kind: "begin render",
-    id: renderId,
-    value,
-    container,
-    options,
-    part
-  });
-  if (part === void 0) {
-    const endNode = (_b2 = options === null || options === void 0 ? void 0 : options.renderBefore) !== null && _b2 !== void 0 ? _b2 : null;
-    partOwnerNode["_$litPart$"] = part = new ChildPart(container.insertBefore(createMarker(), endNode), endNode, void 0, options !== null && options !== void 0 ? options : {});
-  }
-  part._$setValue(value);
-  debugLogEvent === null || debugLogEvent === void 0 ? void 0 : debugLogEvent({
-    kind: "end render",
-    id: renderId,
-    value,
-    container,
-    options,
-    part
-  });
-  return part;
-};
-{
-  render.setSanitizer = setSanitizer;
-  render.createSanitizer = createSanitizer;
-  {
-    render._testOnlyClearSanitizerFactoryDoNotCallOrElse = _testOnlyClearSanitizerFactoryDoNotCallOrElse;
-  }
-}
 const walker = d.createTreeWalker(d, 129, null, false);
 let sanitizerFactoryInternal = noopSanitizer;
 const getTemplateHtml = (strings, type) => {
@@ -21673,6 +22386,7 @@ class ChildPart {
     return this._$endNode;
   }
   _$setValue(value, directiveParent = this) {
+    var _a2;
     if (this.parentNode === null) {
       throw new Error(`This \`ChildPart\` has no \`parentNode\` and therefore cannot accept a value. This likely means the element containing the part was manipulated in an unsupported way outside of Lit's control such that the part's marker nodes were ejected from DOM. For example, setting the element's \`innerHTML\` or \`textContent\` can do this.`);
     }
@@ -21696,6 +22410,11 @@ class ChildPart {
     } else if (value["_$litType$"] !== void 0) {
       this._commitTemplateResult(value);
     } else if (value.nodeType !== void 0) {
+      if (((_a2 = this.options) === null || _a2 === void 0 ? void 0 : _a2.host) === value) {
+        this._commitText(`[probable mistake: rendered a template's host in itself (commonly caused by writing \${this} in a template]`);
+        console.warn(`Attempted to render the template host`, value, `inside itself. This is almost always a mistake, and in dev mode `, `we render some warning text. In production however, we'll `, `render it, which will usually result in an error, and sometimes `, `in the element disappearing from the DOM.`);
+        return;
+      }
       this._commitNode(value);
     } else if (isIterable(value)) {
       this._commitIterable(value);
@@ -22042,11 +22761,49 @@ class ElementPart {
     resolveDirective(this, value);
   }
 }
-const polyfillSupport$1 = window.litHtmlPolyfillSupportDevMode;
+const polyfillSupport$1 = global$2.litHtmlPolyfillSupportDevMode;
 polyfillSupport$1 === null || polyfillSupport$1 === void 0 ? void 0 : polyfillSupport$1(Template, ChildPart);
-((_d = globalThis.litHtmlVersions) !== null && _d !== void 0 ? _d : globalThis.litHtmlVersions = []).push("2.2.7");
-if (globalThis.litHtmlVersions.length > 1) {
+((_d = global$2.litHtmlVersions) !== null && _d !== void 0 ? _d : global$2.litHtmlVersions = []).push("2.6.1");
+if (global$2.litHtmlVersions.length > 1) {
   issueWarning$1("multiple-versions", `Multiple versions of Lit loaded. Loading multiple versions is not recommended.`);
+}
+const render = (value, container, options) => {
+  var _a2, _b2;
+  if (container == null) {
+    throw new TypeError(`The container to render into may not be ${container}`);
+  }
+  const renderId = debugLogRenderId++;
+  const partOwnerNode = (_a2 = options === null || options === void 0 ? void 0 : options.renderBefore) !== null && _a2 !== void 0 ? _a2 : container;
+  let part = partOwnerNode["_$litPart$"];
+  debugLogEvent === null || debugLogEvent === void 0 ? void 0 : debugLogEvent({
+    kind: "begin render",
+    id: renderId,
+    value,
+    container,
+    options,
+    part
+  });
+  if (part === void 0) {
+    const endNode = (_b2 = options === null || options === void 0 ? void 0 : options.renderBefore) !== null && _b2 !== void 0 ? _b2 : null;
+    partOwnerNode["_$litPart$"] = part = new ChildPart(container.insertBefore(createMarker(), endNode), endNode, void 0, options !== null && options !== void 0 ? options : {});
+  }
+  part._$setValue(value);
+  debugLogEvent === null || debugLogEvent === void 0 ? void 0 : debugLogEvent({
+    kind: "end render",
+    id: renderId,
+    value,
+    container,
+    options,
+    part
+  });
+  return part;
+};
+{
+  render.setSanitizer = setSanitizer;
+  render.createSanitizer = createSanitizer;
+  {
+    render._testOnlyClearSanitizerFactoryDoNotCallOrElse = _testOnlyClearSanitizerFactoryDoNotCallOrElse;
+  }
 }
 /**
  * @license
@@ -22158,8 +22915,94 @@ function html(strings, ...values) {
   return html$1(strings, ...values);
 }
 class SLitComponent extends LitElement {
+  get state() {
+    return this._state;
+  }
+  set state(state) {
+    Object.assign(this._state, state);
+  }
+  static define(tagName, Cls, props = {}, settings = {}) {
+    var _a2;
+    const win = (_a2 = settings.window) !== null && _a2 !== void 0 ? _a2 : window;
+    if (win.customElements.get(tagName.toLowerCase())) {
+      return;
+    }
+    SLitComponent.setDefaultProps(tagName, props);
+    win.customElements.define(tagName.toLowerCase(), class extends Cls {
+    });
+  }
+  static setDefaultProps(selector, props) {
+    SComponentUtils.setDefaultProps(selector, props);
+  }
+  static propertiesFromInterface(properties2, int) {
+    var _a2;
+    const propertiesObj = {};
+    class SLitComponentPropsInterface extends SComponentUtilsDefaultPropsInterface {
+    }
+    SLitComponentPropsInterface.definition = Object.assign(Object.assign({}, SLitComponentPropsInterface.definition), (_a2 = int === null || int === void 0 ? void 0 : int.definition) !== null && _a2 !== void 0 ? _a2 : {});
+    Object.keys(SLitComponentPropsInterface.definition).forEach((prop) => {
+      var _a3, _b2, _c2, _d2, _e2, _f, _g, _h, _j, _k, _l, _m, _o;
+      const definition2 = SLitComponentPropsInterface.definition[prop];
+      propertiesObj[prop] = Object.assign({}, (_a3 = definition2.lit) !== null && _a3 !== void 0 ? _a3 : {});
+      let type = String, typeStr = (_c2 = (_b2 = definition2.type) === null || _b2 === void 0 ? void 0 : _b2.type) !== null && _c2 !== void 0 ? _c2 : definition2.type;
+      switch (typeStr.toLowerCase()) {
+        case "boolean":
+          type = Boolean;
+          break;
+        case "object":
+          type = Object;
+          break;
+        case "number":
+          type = Number;
+          break;
+        default:
+          if (typeStr.match(/\[\]$/)) {
+            type = Array;
+          }
+          break;
+      }
+      propertiesObj[prop].type = type;
+      propertiesObj[prop].default = definition2.default;
+      if (definition2.physical || ((_f = (_e2 = (_d2 = definition2.type) === null || _d2 === void 0 ? void 0 : _d2.type) === null || _e2 === void 0 ? void 0 : _e2.toLowerCase) === null || _f === void 0 ? void 0 : _f.call(_e2)) === "boolean" || ((_h = (_g = definition2.type) === null || _g === void 0 ? void 0 : _g.toLowerCase) === null || _h === void 0 ? void 0 : _h.call(_g)) === "boolean" || ((_l = (_k = (_j = definition2.type) === null || _j === void 0 ? void 0 : _j.type) === null || _k === void 0 ? void 0 : _k.toLowerCase) === null || _l === void 0 ? void 0 : _l.call(_k)) === "object" || ((_o = (_m = definition2.type) === null || _m === void 0 ? void 0 : _m.toLowerCase) === null || _o === void 0 ? void 0 : _o.call(_m)) === "object") {
+        propertiesObj[prop].reflect = true;
+        propertiesObj[prop].attribute = __dashCase(prop);
+        propertiesObj[prop].converter = {
+          fromAttribute: (value, type2) => {
+            var _a4, _b3, _c3, _d3;
+            const typeStr2 = (_c3 = (_b3 = (_a4 = definition2.type) === null || _a4 === void 0 ? void 0 : _a4.type) === null || _b3 === void 0 ? void 0 : _b3.toLowerCase()) !== null && _c3 !== void 0 ? _c3 : (_d3 = definition2.type) === null || _d3 === void 0 ? void 0 : _d3.toLowerCase();
+            if (typeStr2 === "object" && typeof value === "string") {
+              try {
+                const json = JSON.parse(value);
+                return json;
+              } catch (e) {
+                console.error(e);
+              }
+            }
+            if (value === "true" || value === "")
+              return true;
+            return value;
+          },
+          toAttribute(value) {
+            if (typeof value !== "string" && typeof value !== "boolean") {
+              try {
+                const jsonStr = JSON.stringify(value);
+                return jsonStr;
+              } catch (e) {
+              }
+            }
+            if (value === "false" || value === false || value === null) {
+              return void 0;
+            }
+            return value;
+          }
+        };
+      }
+    });
+    const props = Object.assign(Object.assign({}, propertiesObj), properties2 !== null && properties2 !== void 0 ? properties2 : {});
+    return props;
+  }
   constructor(settings = {}) {
-    var _a2, _b2, _c2, _d2, _e, _f, _g, _h, _j, _k;
+    var _a2, _b2, _c2, _d2, _e2, _f, _g, _h, _j, _k;
     super();
     this.settings = {};
     this.props = {};
@@ -22213,7 +23056,7 @@ class SLitComponent extends LitElement {
       }
       return this._shouldUpdate;
     };
-    this.utils = new SComponentUtils(this, Object.assign(Object.assign(Object.assign({}, (_d2 = this.settings) !== null && _d2 !== void 0 ? _d2 : {}), (_e = this.settings.componentUtils) !== null && _e !== void 0 ? _e : {}), { style: (_k = (_h = (_g = (_f = this.constructor.styles) === null || _f === void 0 ? void 0 : _f.cssText) !== null && _g !== void 0 ? _g : this.settings.style) !== null && _h !== void 0 ? _h : (_j = this.settings.componentUtils) === null || _j === void 0 ? void 0 : _j.style) !== null && _k !== void 0 ? _k : "" }));
+    this.utils = new SComponentUtils(this, Object.assign(Object.assign(Object.assign({}, (_d2 = this.settings) !== null && _d2 !== void 0 ? _d2 : {}), (_e2 = this.settings.componentUtils) !== null && _e2 !== void 0 ? _e2 : {}), { style: (_k = (_h = (_g = (_f = this.constructor.styles) === null || _f === void 0 ? void 0 : _f.cssText) !== null && _g !== void 0 ? _g : this.settings.style) !== null && _h !== void 0 ? _h : (_j = this.settings.componentUtils) === null || _j === void 0 ? void 0 : _j.style) !== null && _k !== void 0 ? _k : "" }));
     (() => __awaiter$j(this, void 0, void 0, function* () {
       var _l, _m;
       const defaultProps = SComponentUtils.getDefaultProps(this.tagName.toLowerCase());
@@ -22229,92 +23072,6 @@ class SLitComponent extends LitElement {
         this._mount();
       }
     }))();
-  }
-  get state() {
-    return this._state;
-  }
-  set state(state) {
-    Object.assign(this._state, state);
-  }
-  static define(tagName, Cls, props = {}, settings = {}) {
-    var _a2;
-    const win = (_a2 = settings.window) !== null && _a2 !== void 0 ? _a2 : window;
-    if (win.customElements.get(tagName.toLowerCase())) {
-      return;
-    }
-    SLitComponent.setDefaultProps(tagName, props);
-    win.customElements.define(tagName.toLowerCase(), class extends Cls {
-    });
-  }
-  static setDefaultProps(selector, props) {
-    SComponentUtils.setDefaultProps(selector, props);
-  }
-  static propertiesFromInterface(properties2, int) {
-    var _a2;
-    const propertiesObj = {};
-    class SLitComponentPropsInterface extends SComponentUtilsDefaultPropsInterface {
-    }
-    SLitComponentPropsInterface.definition = Object.assign(Object.assign({}, SLitComponentPropsInterface.definition), (_a2 = int === null || int === void 0 ? void 0 : int.definition) !== null && _a2 !== void 0 ? _a2 : {});
-    Object.keys(SLitComponentPropsInterface.definition).forEach((prop) => {
-      var _a3, _b2, _c2, _d2, _e, _f, _g, _h, _j, _k, _l, _m, _o;
-      const definition2 = SLitComponentPropsInterface.definition[prop];
-      propertiesObj[prop] = Object.assign({}, (_a3 = definition2.lit) !== null && _a3 !== void 0 ? _a3 : {});
-      let type = String, typeStr = (_c2 = (_b2 = definition2.type) === null || _b2 === void 0 ? void 0 : _b2.type) !== null && _c2 !== void 0 ? _c2 : definition2.type;
-      switch (typeStr.toLowerCase()) {
-        case "boolean":
-          type = Boolean;
-          break;
-        case "object":
-          type = Object;
-          break;
-        case "number":
-          type = Number;
-          break;
-        default:
-          if (typeStr.match(/\[\]$/)) {
-            type = Array;
-          }
-          break;
-      }
-      propertiesObj[prop].type = type;
-      propertiesObj[prop].default = definition2.default;
-      if (definition2.physical || ((_f = (_e = (_d2 = definition2.type) === null || _d2 === void 0 ? void 0 : _d2.type) === null || _e === void 0 ? void 0 : _e.toLowerCase) === null || _f === void 0 ? void 0 : _f.call(_e)) === "boolean" || ((_h = (_g = definition2.type) === null || _g === void 0 ? void 0 : _g.toLowerCase) === null || _h === void 0 ? void 0 : _h.call(_g)) === "boolean" || ((_l = (_k = (_j = definition2.type) === null || _j === void 0 ? void 0 : _j.type) === null || _k === void 0 ? void 0 : _k.toLowerCase) === null || _l === void 0 ? void 0 : _l.call(_k)) === "object" || ((_o = (_m = definition2.type) === null || _m === void 0 ? void 0 : _m.toLowerCase) === null || _o === void 0 ? void 0 : _o.call(_m)) === "object") {
-        propertiesObj[prop].reflect = true;
-        propertiesObj[prop].attribute = __dashCase(prop);
-        propertiesObj[prop].converter = {
-          fromAttribute: (value, type2) => {
-            var _a4, _b3, _c3, _d3;
-            const typeStr2 = (_c3 = (_b3 = (_a4 = definition2.type) === null || _a4 === void 0 ? void 0 : _a4.type) === null || _b3 === void 0 ? void 0 : _b3.toLowerCase()) !== null && _c3 !== void 0 ? _c3 : (_d3 = definition2.type) === null || _d3 === void 0 ? void 0 : _d3.toLowerCase();
-            if (typeStr2 === "object" && typeof value === "string") {
-              try {
-                const json = JSON.parse(value);
-                return json;
-              } catch (e) {
-                console.error(e);
-              }
-            }
-            if (value === "true" || value === "")
-              return true;
-            return value;
-          },
-          toAttribute(value) {
-            if (typeof value !== "string" && typeof value !== "boolean") {
-              try {
-                const jsonStr = JSON.stringify(value);
-                return jsonStr;
-              } catch (e) {
-              }
-            }
-            if (value === "false" || value === false || value === null) {
-              return void 0;
-            }
-            return value;
-          }
-        };
-      }
-    });
-    const props = Object.assign(Object.assign({}, propertiesObj), properties2 !== null && properties2 !== void 0 ? properties2 : {});
-    return props;
   }
   disconnectedCallback() {
   }
@@ -24045,7 +24802,7 @@ class ApiNav extends SLitComponent {
     }
     const res = await request2.send();
     const types2 = [];
-    res.data.map = __filter(res.data.map, (key, item) => {
+    res.data.map = __filterObject$1(res.data.map, (key, item) => {
       var _a3, _b2, _c2, _d2;
       const supportedTypes = [
         "function",
@@ -24112,64 +24869,68 @@ class ApiNav extends SLitComponent {
       }
       if (itemObj.name && itemObj.namespace) {
         return html$1`
-          <li>
-            <div class="s-flex">
-              <a
-                href="/api/@coffeekraken.${itemNamespace}"
-                namespace="${itemNamespace}"
-                class="s-link:stretch s-order:2"
-                >${itemObj.name}</a
-              >
-              <div
-                class="s-loader:spinner s-color:accent s-mie:10 s-float:right s-when:siblings:loading"
-              ></div>
-            </div>
-          </li>
-        `;
+                    <li>
+                        <div class="s-flex">
+                            <a
+                                href="/api/@coffeekraken.${itemNamespace}"
+                                namespace="${itemNamespace}"
+                                class="s-link:stretch s-order:2"
+                                >${itemObj.name}</a
+                            >
+                            <div
+                                class="s-loader:square-dots s-color:accent s-mie:10 s-float:right s-when:siblings:loading"
+                            ></div>
+                        </div>
+                    </li>
+                `;
       } else {
         return html$1`
-          <li class="_folder ${this._isAcive(itemNamespace) ? "active" : ""}">
-            <div
-              @click=${() => {
+                    <li
+                        class="_folder ${this._isAcive(itemNamespace) ? "active" : ""}"
+                    >
+                        <div
+                            @click=${() => {
           this._toggle(itemNamespace);
         }}
-            >
-              <i
-                class="s-icon:folder-opened s-mie:10 s-tc:complementary s-when:grandparent:active"
-              ></i>
-              <i class="s-icon:folder s-mie:10"></i>
-              ${itemName}
-            </div>
-            ${this._renderList(
+                        >
+                            <i
+                                class="s-icon:folder-opened s-mie:10 s-tc:complementary s-when:grandparent:active"
+                            ></i>
+                            <i class="s-icon:folder s-mie:10"></i>
+                            ${itemName}
+                        </div>
+                        ${this._renderList(
           get(this._menuStack, itemNamespace),
           itemNamespace,
           level + 1
         )}
-          </li>
-        `;
+                    </li>
+                `;
       }
     });
     return html$1`
-      <ul class="s-fs-tree">
-        ${items}
-      </ul>
-    `;
+            <ul class="s-fs-tree">
+                ${items}
+            </ul>
+        `;
   }
   render() {
     if (!this.state.loaded) {
       return html$1`
-        <div>
-          <i class="s-loader:spinner s-color:accent"></i>
-          &nbsp;
-          <p class="s-typo:p s-display:inline-block">Loading please wait...</p>
-        </div>
-      `;
+                <div class="sidemenu">
+                    <div class="s-loader:square-dots s-color:accent"></div>
+                    &nbsp;
+                    <p class="s-typo:p s-display:inline-block">
+                        Loading please wait...
+                    </p>
+                </div>
+            `;
     }
     return html$1`
-      <div class="${this.utils.cls("")}">
-        ${this._renderList(this._menuStack)}
-      </div>
-    `;
+            <div class="sidemenu ${this.utils.cls("")}">
+                ${this._renderList(this._menuStack)}
+            </div>
+        `;
   }
 }
 __publicField(ApiNav, "state", {
@@ -24394,9 +25155,11 @@ function compareArray(a1, a22) {
 }
 var _keyMap = {
   backspace: 8,
+  "\u232B": 8,
   tab: 9,
   clear: 12,
   enter: 13,
+  "\u21A9": 13,
   return: 13,
   esc: 27,
   escape: 27,
@@ -24483,6 +25246,16 @@ var elementHasBindEvent = [];
 var code = function code2(x2) {
   return _keyMap[x2.toLowerCase()] || _modifier[x2.toLowerCase()] || x2.toUpperCase().charCodeAt(0);
 };
+var getKey = function getKey2(x2) {
+  return Object.keys(_keyMap).find(function(k2) {
+    return _keyMap[k2] === x2;
+  });
+};
+var getModifier = function getModifier2(x2) {
+  return Object.keys(_modifier).find(function(k2) {
+    return _modifier[k2] === x2;
+  });
+};
 function setScope(scope) {
   _scope = scope || "all";
 }
@@ -24491,6 +25264,11 @@ function getScope() {
 }
 function getPressedKeyCodes() {
   return _downKeys.slice(0);
+}
+function getPressedKeyString() {
+  return _downKeys.map(function(c) {
+    return getKey(c) || getModifier(c) || String.fromCharCode(c);
+  });
 }
 function filter(event) {
   var target = event.target || event.srcElement;
@@ -24768,15 +25546,18 @@ function hotkeys(key, option, method) {
 function trigger(shortcut) {
   var scope = arguments.length > 1 && arguments[1] !== void 0 ? arguments[1] : "all";
   Object.keys(_handlers).forEach(function(key) {
-    var data2 = _handlers[key].find(function(item) {
+    var dataList = _handlers[key].filter(function(item) {
       return item.scope === scope && item.shortcut === shortcut;
     });
-    if (data2 && data2.method) {
-      data2.method();
-    }
+    dataList.forEach(function(data2) {
+      if (data2 && data2.method) {
+        data2.method();
+      }
+    });
   });
 }
 var _api = {
+  getPressedKeyString,
   setScope,
   getScope,
   deleteScope,
@@ -24899,7 +25680,7 @@ const __css$h = `.s-filtrable-input {
         opacity: 1;
     }body:after {
                     display: none;;
-                    content: '{"lod":{"enabled":true,"defaultLevel":3,"botLevel":1,"levels":{"0":{"name":"bare","speedIndex":0},"1":{"name":"bare+","speedIndex":30},"2":{"name":"low","speedIndex":40},"3":{"name":"medium","speedIndex":50},"4":{"name":"high","speedIndex":60}},"method":"class","defaultAction":">=","cssProperties":{"animation":3,"animation-delay":3,"animation-direction":3,"animation-duration":3,"animation-fill-mode":3,"animation-iteration-count":3,"animation-name":3,"animation-play-state":3,"animation-timing-function":3,"backdrop-filter":3,"background":2,"background-attachment":2,"background-blend-mode":3,"background-clip":2,"background-color":2,"background-image":2,"background-origin":2,"background-position":2,"background-repeat":2,"background-size":2,"border":2,"border-bottom":2,"border-bottom-color":2,"border-bottom-left-radius":2,"border-bottom-right-radius":2,"border-bottom-style":2,"border-bottom-width":2,"border-collapse":2,"border-color":2,"border-image":2,"border-image-outset":2,"border-image-repeat":2,"border-image-slice":2,"border-image-source":2,"border-image-width":2,"border-left":2,"border-left-color":2,"border-left-style":2,"border-left-width":2,"border-radius":2,"border-right":2,"border-right-color":2,"border-right-style":2,"border-right-width":2,"border-spacing":2,"border-style":2,"border-top":2,"border-top-color":2,"border-top-left-radius":2,"border-top-right-radius":2,"border-top-style":2,"border-top-width":2,"border-width":2,"box-shadow":3,"caret-color":1,"color":2,"column-count":2,"column-fill":2,"column-gap":2,"column-rule":2,"column-rule-color":2,"column-rule-style":2,"column-rule-width":2,"counter-increment":2,"counter-reset":2,"filter":3,"font":1,"font-family":1,"font-kerning":1,"font-size":1,"font-stretch":1,"font-style":1,"font-variant":1,"font-weight":1,"gap":1,"letter-spacing":1,"line-height":1,"list-style-image":2,"margin":1,"margin-bottom":1,"margin-left":1,"margin-right":1,"margin-top":1,"margin-inline":1,"margin-inline-start":1,"margin-inline-end":1,"margin-block":1,"margin-block-start":1,"margin-block-end":1,"outline":2,"outline-color":2,"outline-offset":2,"outline-style":2,"outline-width":2,"padding":1,"padding-bottom":1,"padding-left":1,"padding-right":1,"padding-top":1,"padding-inline":1,"padding-inline-start":1,"padding-inline-end":1,"padding-block":1,"padding-block-start":1,"padding-block-end":1,"text-decoration":2,"text-decoration-color":2,"text-decoration-line":2,"text-indent":2,"text-justify":2,"text-overflow":2,"text-shadow":3,"text-transform":2,"transition":3,"transition-delay":3,"transition-duration":3,"transition-property":3,"transition-timing-function":3,"word-break":1,"word-spacing":1,"word-wrap":1}},"clean":{"variables":false},"compress":{"variables":false}}';
+                    content: '{"lod":{"enabled":true,"defaultLevel":3,"botLevel":1,"levels":{"0":{"name":"bare","speedIndex":0},"1":{"name":"lnf","speedIndex":30},"2":{"name":"theme","speedIndex":40},"3":{"name":"high","speedIndex":50},"4":{"name":"ultra","speedIndex":60}},"method":"class","defaultAction":">=","cssProperties":{"animation":2,"animation-delay":2,"animation-direction":2,"animation-duration":2,"animation-fill-mode":2,"animation-iteration-count":2,"animation-name":2,"animation-play-state":2,"animation-timing-function":2,"backdrop-filter":3,"background":1,"background-attachment":1,"background-blend-mode":3,"background-clip":1,"background-color":1,"background-image":1,"background-origin":1,"background-position":1,"background-repeat":1,"background-size":1,"border":1,"border-bottom":1,"border-bottom-color":1,"border-bottom-left-radius":1,"border-bottom-right-radius":1,"border-bottom-style":1,"border-bottom-width":1,"border-collapse":1,"border-color":1,"border-image":1,"border-image-outset":1,"border-image-repeat":1,"border-image-slice":1,"border-image-source":1,"border-image-width":1,"border-left":1,"border-left-color":1,"border-left-style":1,"border-left-width":1,"border-radius":1,"border-right":1,"border-right-color":1,"border-right-style":1,"border-right-width":1,"border-spacing":1,"border-style":1,"border-top":1,"border-top-color":1,"border-top-left-radius":1,"border-top-right-radius":1,"border-top-style":1,"border-top-width":1,"border-width":1,"box-shadow":1,"caret-color":1,"color":1,"column-count":1,"column-fill":1,"column-rule":1,"column-rule-color":1,"column-rule-style":1,"column-rule-width":1,"counter-increment":1,"counter-reset":1,"filter":1,"list-style-image":1,"outline":1,"outline-color":1,"outline-offset":1,"outline-style":1,"outline-width":1,"text-decoration":1,"text-decoration-color":1,"text-decoration-line":1,"text-indent":1,"text-justify":1,"text-overflow":1,"text-shadow":2,"text-transform":1,"transition":1,"transition-delay":1,"transition-duration":1,"transition-property":1,"transition-timing-function":1,"word-break":1,"word-spacing":1,"word-wrap":1}},"clean":{"variables":false},"compress":{"variables":false}}';
 }
 `;
 var __awaiter$i = globalThis && globalThis.__awaiter || function(thisArg, _arguments, P, generator) {
@@ -24930,17 +25711,6 @@ var __awaiter$i = globalThis && globalThis.__awaiter || function(thisArg, _argum
   });
 };
 class SFiltrableInputComponent extends SLitComponent {
-  constructor() {
-    super(__deepMerge({
-      name: "s-filtrable-input",
-      interface: SFiltrableInputComponentInterface
-    }));
-    this.preselectedItems = [];
-    this.selectedItems = [];
-    this.filteredItems = [];
-    this._templatesFromHtml = {};
-    this._baseTemplates = {};
-  }
   static get styles() {
     return css$1`
             ${unsafeCSS(__css$h)}
@@ -24956,6 +25726,17 @@ class SFiltrableInputComponent extends SLitComponent {
       isLoading: false,
       items: []
     };
+  }
+  constructor() {
+    super(__deepMerge({
+      name: "s-filtrable-input",
+      interface: SFiltrableInputComponentInterface
+    }));
+    this.preselectedItems = [];
+    this.selectedItems = [];
+    this.filteredItems = [];
+    this._templatesFromHtml = {};
+    this._baseTemplates = {};
   }
   mount() {
     return __awaiter$i(this, void 0, void 0, function* () {
@@ -25346,7 +26127,7 @@ class SFiltrableInputComponent extends SLitComponent {
     __cursorToEnd(this.$input);
   }
   render() {
-    var _a2, _b2, _c2, _d2, _e, _f, _g, _h;
+    var _a2, _b2, _c2, _d2, _e2, _f, _g, _h;
     return html$1`
             <div class="${this.utils.cls("")}">
                 <div
@@ -25392,7 +26173,7 @@ class SFiltrableInputComponent extends SLitComponent {
                                   <li
                                       class="${this.utils.cls("_list-item")} ${this.props.classes.listItem} ${this.utils.cls("_list-no-item")}"
                                   >
-                                      ${(_f = (_e = (_d2 = this.props).templates) === null || _e === void 0 ? void 0 : _e.call(_d2, {
+                                      ${(_f = (_e2 = (_d2 = this.props).templates) === null || _e2 === void 0 ? void 0 : _e2.call(_d2, {
       type: "empty",
       html: html$1
     })) !== null && _f !== void 0 ? _f : this._baseTemplates({
@@ -25504,6 +26285,15 @@ var __awaiter$h = globalThis && globalThis.__awaiter || function(thisArg, _argum
   });
 };
 class SFeature extends SClass {
+  static setDefaultProps(selector, props) {
+    SComponentUtils.setDefaultProps(selector, props);
+  }
+  static define(name2, featureCls, defaultProps = {}) {
+    this.setDefaultProps(name2, defaultProps);
+    __querySelectorLive(`[${name2}]`, ($elm) => {
+      new featureCls(name2, $elm, SComponentUtils.getDefaultProps(name2));
+    }, {});
+  }
   constructor(name2, node, settings) {
     var _a2, _b2, _c2, _d2;
     super(__deepMerge({}, settings));
@@ -25522,20 +26312,11 @@ class SFeature extends SClass {
     this.utils.waitAndExecute(
       this.props.mountWhen,
       () => __awaiter$h(this, void 0, void 0, function* () {
-        var _e;
-        yield (_e = this.mount) === null || _e === void 0 ? void 0 : _e.call(this);
+        var _e2;
+        yield (_e2 = this.mount) === null || _e2 === void 0 ? void 0 : _e2.call(this);
         this.props.mounted = true;
       })
     );
-  }
-  static setDefaultProps(selector, props) {
-    SComponentUtils.setDefaultProps(selector, props);
-  }
-  static define(name2, featureCls, defaultProps = {}) {
-    this.setDefaultProps(name2, defaultProps);
-    __querySelectorLive(`[${name2}]`, ($elm) => {
-      new featureCls(name2, $elm, SComponentUtils.getDefaultProps(name2));
-    }, {});
   }
 }
 class SActivateFeatureInterface extends SInterface {
@@ -25999,7 +26780,7 @@ const __css$g = `/* [s-appear] {
     }
 } */body:after {
                     display: none;;
-                    content: '{"lod":{"enabled":true,"defaultLevel":3,"botLevel":1,"levels":{"0":{"name":"bare","speedIndex":0},"1":{"name":"bare+","speedIndex":30},"2":{"name":"low","speedIndex":40},"3":{"name":"medium","speedIndex":50},"4":{"name":"high","speedIndex":60}},"method":"class","defaultAction":">=","cssProperties":{"animation":3,"animation-delay":3,"animation-direction":3,"animation-duration":3,"animation-fill-mode":3,"animation-iteration-count":3,"animation-name":3,"animation-play-state":3,"animation-timing-function":3,"backdrop-filter":3,"background":2,"background-attachment":2,"background-blend-mode":3,"background-clip":2,"background-color":2,"background-image":2,"background-origin":2,"background-position":2,"background-repeat":2,"background-size":2,"border":2,"border-bottom":2,"border-bottom-color":2,"border-bottom-left-radius":2,"border-bottom-right-radius":2,"border-bottom-style":2,"border-bottom-width":2,"border-collapse":2,"border-color":2,"border-image":2,"border-image-outset":2,"border-image-repeat":2,"border-image-slice":2,"border-image-source":2,"border-image-width":2,"border-left":2,"border-left-color":2,"border-left-style":2,"border-left-width":2,"border-radius":2,"border-right":2,"border-right-color":2,"border-right-style":2,"border-right-width":2,"border-spacing":2,"border-style":2,"border-top":2,"border-top-color":2,"border-top-left-radius":2,"border-top-right-radius":2,"border-top-style":2,"border-top-width":2,"border-width":2,"box-shadow":3,"caret-color":1,"color":2,"column-count":2,"column-fill":2,"column-gap":2,"column-rule":2,"column-rule-color":2,"column-rule-style":2,"column-rule-width":2,"counter-increment":2,"counter-reset":2,"filter":3,"font":1,"font-family":1,"font-kerning":1,"font-size":1,"font-stretch":1,"font-style":1,"font-variant":1,"font-weight":1,"gap":1,"letter-spacing":1,"line-height":1,"list-style-image":2,"margin":1,"margin-bottom":1,"margin-left":1,"margin-right":1,"margin-top":1,"margin-inline":1,"margin-inline-start":1,"margin-inline-end":1,"margin-block":1,"margin-block-start":1,"margin-block-end":1,"outline":2,"outline-color":2,"outline-offset":2,"outline-style":2,"outline-width":2,"padding":1,"padding-bottom":1,"padding-left":1,"padding-right":1,"padding-top":1,"padding-inline":1,"padding-inline-start":1,"padding-inline-end":1,"padding-block":1,"padding-block-start":1,"padding-block-end":1,"text-decoration":2,"text-decoration-color":2,"text-decoration-line":2,"text-indent":2,"text-justify":2,"text-overflow":2,"text-shadow":3,"text-transform":2,"transition":3,"transition-delay":3,"transition-duration":3,"transition-property":3,"transition-timing-function":3,"word-break":1,"word-spacing":1,"word-wrap":1}},"clean":{"variables":false},"compress":{"variables":false}}';
+                    content: '{"lod":{"enabled":true,"defaultLevel":3,"botLevel":1,"levels":{"0":{"name":"bare","speedIndex":0},"1":{"name":"lnf","speedIndex":30},"2":{"name":"theme","speedIndex":40},"3":{"name":"high","speedIndex":50},"4":{"name":"ultra","speedIndex":60}},"method":"class","defaultAction":">=","cssProperties":{"animation":2,"animation-delay":2,"animation-direction":2,"animation-duration":2,"animation-fill-mode":2,"animation-iteration-count":2,"animation-name":2,"animation-play-state":2,"animation-timing-function":2,"backdrop-filter":3,"background":1,"background-attachment":1,"background-blend-mode":3,"background-clip":1,"background-color":1,"background-image":1,"background-origin":1,"background-position":1,"background-repeat":1,"background-size":1,"border":1,"border-bottom":1,"border-bottom-color":1,"border-bottom-left-radius":1,"border-bottom-right-radius":1,"border-bottom-style":1,"border-bottom-width":1,"border-collapse":1,"border-color":1,"border-image":1,"border-image-outset":1,"border-image-repeat":1,"border-image-slice":1,"border-image-source":1,"border-image-width":1,"border-left":1,"border-left-color":1,"border-left-style":1,"border-left-width":1,"border-radius":1,"border-right":1,"border-right-color":1,"border-right-style":1,"border-right-width":1,"border-spacing":1,"border-style":1,"border-top":1,"border-top-color":1,"border-top-left-radius":1,"border-top-right-radius":1,"border-top-style":1,"border-top-width":1,"border-width":1,"box-shadow":1,"caret-color":1,"color":1,"column-count":1,"column-fill":1,"column-rule":1,"column-rule-color":1,"column-rule-style":1,"column-rule-width":1,"counter-increment":1,"counter-reset":1,"filter":1,"list-style-image":1,"outline":1,"outline-color":1,"outline-offset":1,"outline-style":1,"outline-width":1,"text-decoration":1,"text-decoration-color":1,"text-decoration-line":1,"text-indent":1,"text-justify":1,"text-overflow":1,"text-shadow":2,"text-transform":1,"transition":1,"transition-delay":1,"transition-duration":1,"transition-property":1,"transition-timing-function":1,"word-break":1,"word-spacing":1,"word-wrap":1}},"clean":{"variables":false},"compress":{"variables":false}}';
 }
 `;
 var __awaiter$f = globalThis && globalThis.__awaiter || function(thisArg, _arguments, P, generator) {
@@ -26262,11 +27043,11 @@ const __css$f = `.s-clipboard-copy {
         pointer-events: none;
     }
 
-    .s-lod--2  .s-clipboard-copy svg {
+    .s-lod--1 .s-clipboard-copy svg {
         background-size: contain;
 }body:after {
                     display: none;;
-                    content: '{"lod":{"enabled":true,"defaultLevel":3,"botLevel":1,"levels":{"0":{"name":"bare","speedIndex":0},"1":{"name":"bare+","speedIndex":30},"2":{"name":"low","speedIndex":40},"3":{"name":"medium","speedIndex":50},"4":{"name":"high","speedIndex":60}},"method":"class","defaultAction":">=","cssProperties":{"animation":3,"animation-delay":3,"animation-direction":3,"animation-duration":3,"animation-fill-mode":3,"animation-iteration-count":3,"animation-name":3,"animation-play-state":3,"animation-timing-function":3,"backdrop-filter":3,"background":2,"background-attachment":2,"background-blend-mode":3,"background-clip":2,"background-color":2,"background-image":2,"background-origin":2,"background-position":2,"background-repeat":2,"background-size":2,"border":2,"border-bottom":2,"border-bottom-color":2,"border-bottom-left-radius":2,"border-bottom-right-radius":2,"border-bottom-style":2,"border-bottom-width":2,"border-collapse":2,"border-color":2,"border-image":2,"border-image-outset":2,"border-image-repeat":2,"border-image-slice":2,"border-image-source":2,"border-image-width":2,"border-left":2,"border-left-color":2,"border-left-style":2,"border-left-width":2,"border-radius":2,"border-right":2,"border-right-color":2,"border-right-style":2,"border-right-width":2,"border-spacing":2,"border-style":2,"border-top":2,"border-top-color":2,"border-top-left-radius":2,"border-top-right-radius":2,"border-top-style":2,"border-top-width":2,"border-width":2,"box-shadow":3,"caret-color":1,"color":2,"column-count":2,"column-fill":2,"column-gap":2,"column-rule":2,"column-rule-color":2,"column-rule-style":2,"column-rule-width":2,"counter-increment":2,"counter-reset":2,"filter":3,"font":1,"font-family":1,"font-kerning":1,"font-size":1,"font-stretch":1,"font-style":1,"font-variant":1,"font-weight":1,"gap":1,"letter-spacing":1,"line-height":1,"list-style-image":2,"margin":1,"margin-bottom":1,"margin-left":1,"margin-right":1,"margin-top":1,"margin-inline":1,"margin-inline-start":1,"margin-inline-end":1,"margin-block":1,"margin-block-start":1,"margin-block-end":1,"outline":2,"outline-color":2,"outline-offset":2,"outline-style":2,"outline-width":2,"padding":1,"padding-bottom":1,"padding-left":1,"padding-right":1,"padding-top":1,"padding-inline":1,"padding-inline-start":1,"padding-inline-end":1,"padding-block":1,"padding-block-start":1,"padding-block-end":1,"text-decoration":2,"text-decoration-color":2,"text-decoration-line":2,"text-indent":2,"text-justify":2,"text-overflow":2,"text-shadow":3,"text-transform":2,"transition":3,"transition-delay":3,"transition-duration":3,"transition-property":3,"transition-timing-function":3,"word-break":1,"word-spacing":1,"word-wrap":1}},"clean":{"variables":false},"compress":{"variables":false}}';
+                    content: '{"lod":{"enabled":true,"defaultLevel":3,"botLevel":1,"levels":{"0":{"name":"bare","speedIndex":0},"1":{"name":"lnf","speedIndex":30},"2":{"name":"theme","speedIndex":40},"3":{"name":"high","speedIndex":50},"4":{"name":"ultra","speedIndex":60}},"method":"class","defaultAction":">=","cssProperties":{"animation":2,"animation-delay":2,"animation-direction":2,"animation-duration":2,"animation-fill-mode":2,"animation-iteration-count":2,"animation-name":2,"animation-play-state":2,"animation-timing-function":2,"backdrop-filter":3,"background":1,"background-attachment":1,"background-blend-mode":3,"background-clip":1,"background-color":1,"background-image":1,"background-origin":1,"background-position":1,"background-repeat":1,"background-size":1,"border":1,"border-bottom":1,"border-bottom-color":1,"border-bottom-left-radius":1,"border-bottom-right-radius":1,"border-bottom-style":1,"border-bottom-width":1,"border-collapse":1,"border-color":1,"border-image":1,"border-image-outset":1,"border-image-repeat":1,"border-image-slice":1,"border-image-source":1,"border-image-width":1,"border-left":1,"border-left-color":1,"border-left-style":1,"border-left-width":1,"border-radius":1,"border-right":1,"border-right-color":1,"border-right-style":1,"border-right-width":1,"border-spacing":1,"border-style":1,"border-top":1,"border-top-color":1,"border-top-left-radius":1,"border-top-right-radius":1,"border-top-style":1,"border-top-width":1,"border-width":1,"box-shadow":1,"caret-color":1,"color":1,"column-count":1,"column-fill":1,"column-rule":1,"column-rule-color":1,"column-rule-style":1,"column-rule-width":1,"counter-increment":1,"counter-reset":1,"filter":1,"list-style-image":1,"outline":1,"outline-color":1,"outline-offset":1,"outline-style":1,"outline-width":1,"text-decoration":1,"text-decoration-color":1,"text-decoration-line":1,"text-indent":1,"text-justify":1,"text-overflow":1,"text-shadow":2,"text-transform":1,"transition":1,"transition-delay":1,"transition-duration":1,"transition-property":1,"transition-timing-function":1,"word-break":1,"word-spacing":1,"word-wrap":1}},"clean":{"variables":false},"compress":{"variables":false}}';
 }
 `;
 function define$q(props = {}, tagName = "s-clipboard-copy") {
@@ -26458,7 +27239,7 @@ const __css$e = `.s-floating {
     transform: none;
 }
 
-.s-lod--3  .s-floating {
+.s-lod--1 .s-floating {
     transition: none;
 }
 
@@ -26477,11 +27258,11 @@ const __css$e = `.s-floating {
         transform: rotate(45deg);
     }
 
-    .s-lod--2  .s-floating .s-floating_arrow {
+    .s-lod--1 .s-floating .s-floating_arrow {
         background: hsla(calc(var(--s-theme-color-current-h, 0) + var(--s-theme-color-current-spin ,0)),calc((var(--s-theme-color-current-s, 0)) * 1%),calc((var(--s-theme-color-current-l, 0)) * 1%),var(--s-theme-color-current-a, 1));
 }body:after {
                     display: none;;
-                    content: '{"lod":{"enabled":true,"defaultLevel":3,"botLevel":1,"levels":{"0":{"name":"bare","speedIndex":0},"1":{"name":"bare+","speedIndex":30},"2":{"name":"low","speedIndex":40},"3":{"name":"medium","speedIndex":50},"4":{"name":"high","speedIndex":60}},"method":"class","defaultAction":">=","cssProperties":{"animation":3,"animation-delay":3,"animation-direction":3,"animation-duration":3,"animation-fill-mode":3,"animation-iteration-count":3,"animation-name":3,"animation-play-state":3,"animation-timing-function":3,"backdrop-filter":3,"background":2,"background-attachment":2,"background-blend-mode":3,"background-clip":2,"background-color":2,"background-image":2,"background-origin":2,"background-position":2,"background-repeat":2,"background-size":2,"border":2,"border-bottom":2,"border-bottom-color":2,"border-bottom-left-radius":2,"border-bottom-right-radius":2,"border-bottom-style":2,"border-bottom-width":2,"border-collapse":2,"border-color":2,"border-image":2,"border-image-outset":2,"border-image-repeat":2,"border-image-slice":2,"border-image-source":2,"border-image-width":2,"border-left":2,"border-left-color":2,"border-left-style":2,"border-left-width":2,"border-radius":2,"border-right":2,"border-right-color":2,"border-right-style":2,"border-right-width":2,"border-spacing":2,"border-style":2,"border-top":2,"border-top-color":2,"border-top-left-radius":2,"border-top-right-radius":2,"border-top-style":2,"border-top-width":2,"border-width":2,"box-shadow":3,"caret-color":1,"color":2,"column-count":2,"column-fill":2,"column-gap":2,"column-rule":2,"column-rule-color":2,"column-rule-style":2,"column-rule-width":2,"counter-increment":2,"counter-reset":2,"filter":3,"font":1,"font-family":1,"font-kerning":1,"font-size":1,"font-stretch":1,"font-style":1,"font-variant":1,"font-weight":1,"gap":1,"letter-spacing":1,"line-height":1,"list-style-image":2,"margin":1,"margin-bottom":1,"margin-left":1,"margin-right":1,"margin-top":1,"margin-inline":1,"margin-inline-start":1,"margin-inline-end":1,"margin-block":1,"margin-block-start":1,"margin-block-end":1,"outline":2,"outline-color":2,"outline-offset":2,"outline-style":2,"outline-width":2,"padding":1,"padding-bottom":1,"padding-left":1,"padding-right":1,"padding-top":1,"padding-inline":1,"padding-inline-start":1,"padding-inline-end":1,"padding-block":1,"padding-block-start":1,"padding-block-end":1,"text-decoration":2,"text-decoration-color":2,"text-decoration-line":2,"text-indent":2,"text-justify":2,"text-overflow":2,"text-shadow":3,"text-transform":2,"transition":3,"transition-delay":3,"transition-duration":3,"transition-property":3,"transition-timing-function":3,"word-break":1,"word-spacing":1,"word-wrap":1}},"clean":{"variables":false},"compress":{"variables":false}}';
+                    content: '{"lod":{"enabled":true,"defaultLevel":3,"botLevel":1,"levels":{"0":{"name":"bare","speedIndex":0},"1":{"name":"lnf","speedIndex":30},"2":{"name":"theme","speedIndex":40},"3":{"name":"high","speedIndex":50},"4":{"name":"ultra","speedIndex":60}},"method":"class","defaultAction":">=","cssProperties":{"animation":2,"animation-delay":2,"animation-direction":2,"animation-duration":2,"animation-fill-mode":2,"animation-iteration-count":2,"animation-name":2,"animation-play-state":2,"animation-timing-function":2,"backdrop-filter":3,"background":1,"background-attachment":1,"background-blend-mode":3,"background-clip":1,"background-color":1,"background-image":1,"background-origin":1,"background-position":1,"background-repeat":1,"background-size":1,"border":1,"border-bottom":1,"border-bottom-color":1,"border-bottom-left-radius":1,"border-bottom-right-radius":1,"border-bottom-style":1,"border-bottom-width":1,"border-collapse":1,"border-color":1,"border-image":1,"border-image-outset":1,"border-image-repeat":1,"border-image-slice":1,"border-image-source":1,"border-image-width":1,"border-left":1,"border-left-color":1,"border-left-style":1,"border-left-width":1,"border-radius":1,"border-right":1,"border-right-color":1,"border-right-style":1,"border-right-width":1,"border-spacing":1,"border-style":1,"border-top":1,"border-top-color":1,"border-top-left-radius":1,"border-top-right-radius":1,"border-top-style":1,"border-top-width":1,"border-width":1,"box-shadow":1,"caret-color":1,"color":1,"column-count":1,"column-fill":1,"column-rule":1,"column-rule-color":1,"column-rule-style":1,"column-rule-width":1,"counter-increment":1,"counter-reset":1,"filter":1,"list-style-image":1,"outline":1,"outline-color":1,"outline-offset":1,"outline-style":1,"outline-width":1,"text-decoration":1,"text-decoration-color":1,"text-decoration-line":1,"text-indent":1,"text-justify":1,"text-overflow":1,"text-shadow":2,"text-transform":1,"transition":1,"transition-delay":1,"transition-duration":1,"transition-property":1,"transition-timing-function":1,"word-break":1,"word-spacing":1,"word-wrap":1}},"clean":{"variables":false},"compress":{"variables":false}}';
 }`;
 class SFloatingFeature extends SFeature {
   constructor(name2, node, settings) {
@@ -27094,11 +27875,6 @@ function required(value, settings) {
   };
 }
 class SValidator extends SClass {
-  constructor(settings) {
-    super(__deepMerge({
-      i18n: __en
-    }, settings !== null && settings !== void 0 ? settings : {}));
-  }
   static registerValidator(name2, validator2, settings) {
     SValidator._validators[name2] = {
       validator: validator2,
@@ -27119,6 +27895,11 @@ class SValidator extends SClass {
       definition2[name2] = validatorObj.settings.definition;
     }
     return definition2;
+  }
+  constructor(settings) {
+    super(__deepMerge({
+      i18n: __en
+    }, settings !== null && settings !== void 0 ? settings : {}));
   }
   validate(value, rulesOrPreset, settings) {
     var _a2, _b2, _c2;
@@ -27211,18 +27992,7 @@ SValidator.registerValidator("hex", hex, {
 SValidator.registerValidator("password", password, {
   definition: definition$3
 });
-const __css$d = `@-webkit-keyframes error-message-appear {
-    from {
-        line-height: 1;
-        max-height: 0;
-    }
-    to {
-        max-height: 2em;
-        line-height: 2;
-    }
-}
-
-@keyframes error-message-appear {
+const __css$d = `@keyframes error-message-appear {
     from {
         line-height: 1;
         max-height: 0;
@@ -27237,23 +28007,19 @@ const __css$d = `@-webkit-keyframes error-message-appear {
     text-align: end;
     overflow: hidden;
     max-height: 0;
-}
-
-.s-lod--3  .s-form-validate + .s-form-validate-error-message {
-    -webkit-animation: 0.2s error-message-appear var(--s-theme-easing-default, 0) forwards;
-            animation: 0.2s error-message-appear var(--s-theme-easing-default, 0) forwards;
-}
-
-.s-lod--2  .s-form-validate + .s-form-validate-error-message {
-    color: hsla(calc(var(--s-theme-color-error-h, 0) + var(--s-theme-color-error-spin ,0)),calc((var(--s-theme-color-error-s, 0)) * 1%),calc((var(--s-theme-color-error-l, 0)) * 1%),var(--s-theme-color-error-a, 1));
-}
-
-.s-lod--1  .s-form-validate + .s-form-validate-error-message {
     line-height: 1;
     margin: 0;
+}
+
+.s-lod--2 .s-form-validate + .s-form-validate-error-message {
+    animation: 0.2s error-message-appear var(--s-theme-easing-default, 0) forwards;
+}
+
+.s-lod--1 .s-form-validate + .s-form-validate-error-message {
+    color: hsla(calc(var(--s-theme-color-error-h, 0) + var(--s-theme-color-error-spin ,0)),calc((var(--s-theme-color-error-s, 0)) * 1%),calc((var(--s-theme-color-error-l, 0)) * 1%),var(--s-theme-color-error-a, 1));
 }body:after {
                     display: none;;
-                    content: '{"lod":{"enabled":true,"defaultLevel":3,"botLevel":1,"levels":{"0":{"name":"bare","speedIndex":0},"1":{"name":"bare+","speedIndex":30},"2":{"name":"low","speedIndex":40},"3":{"name":"medium","speedIndex":50},"4":{"name":"high","speedIndex":60}},"method":"class","defaultAction":">=","cssProperties":{"animation":3,"animation-delay":3,"animation-direction":3,"animation-duration":3,"animation-fill-mode":3,"animation-iteration-count":3,"animation-name":3,"animation-play-state":3,"animation-timing-function":3,"backdrop-filter":3,"background":2,"background-attachment":2,"background-blend-mode":3,"background-clip":2,"background-color":2,"background-image":2,"background-origin":2,"background-position":2,"background-repeat":2,"background-size":2,"border":2,"border-bottom":2,"border-bottom-color":2,"border-bottom-left-radius":2,"border-bottom-right-radius":2,"border-bottom-style":2,"border-bottom-width":2,"border-collapse":2,"border-color":2,"border-image":2,"border-image-outset":2,"border-image-repeat":2,"border-image-slice":2,"border-image-source":2,"border-image-width":2,"border-left":2,"border-left-color":2,"border-left-style":2,"border-left-width":2,"border-radius":2,"border-right":2,"border-right-color":2,"border-right-style":2,"border-right-width":2,"border-spacing":2,"border-style":2,"border-top":2,"border-top-color":2,"border-top-left-radius":2,"border-top-right-radius":2,"border-top-style":2,"border-top-width":2,"border-width":2,"box-shadow":3,"caret-color":1,"color":2,"column-count":2,"column-fill":2,"column-gap":2,"column-rule":2,"column-rule-color":2,"column-rule-style":2,"column-rule-width":2,"counter-increment":2,"counter-reset":2,"filter":3,"font":1,"font-family":1,"font-kerning":1,"font-size":1,"font-stretch":1,"font-style":1,"font-variant":1,"font-weight":1,"gap":1,"letter-spacing":1,"line-height":1,"list-style-image":2,"margin":1,"margin-bottom":1,"margin-left":1,"margin-right":1,"margin-top":1,"margin-inline":1,"margin-inline-start":1,"margin-inline-end":1,"margin-block":1,"margin-block-start":1,"margin-block-end":1,"outline":2,"outline-color":2,"outline-offset":2,"outline-style":2,"outline-width":2,"padding":1,"padding-bottom":1,"padding-left":1,"padding-right":1,"padding-top":1,"padding-inline":1,"padding-inline-start":1,"padding-inline-end":1,"padding-block":1,"padding-block-start":1,"padding-block-end":1,"text-decoration":2,"text-decoration-color":2,"text-decoration-line":2,"text-indent":2,"text-justify":2,"text-overflow":2,"text-shadow":3,"text-transform":2,"transition":3,"transition-delay":3,"transition-duration":3,"transition-property":3,"transition-timing-function":3,"word-break":1,"word-spacing":1,"word-wrap":1}},"clean":{"variables":false},"compress":{"variables":false}}';
+                    content: '{"lod":{"enabled":true,"defaultLevel":3,"botLevel":1,"levels":{"0":{"name":"bare","speedIndex":0},"1":{"name":"lnf","speedIndex":30},"2":{"name":"theme","speedIndex":40},"3":{"name":"high","speedIndex":50},"4":{"name":"ultra","speedIndex":60}},"method":"class","defaultAction":">=","cssProperties":{"animation":2,"animation-delay":2,"animation-direction":2,"animation-duration":2,"animation-fill-mode":2,"animation-iteration-count":2,"animation-name":2,"animation-play-state":2,"animation-timing-function":2,"backdrop-filter":3,"background":1,"background-attachment":1,"background-blend-mode":3,"background-clip":1,"background-color":1,"background-image":1,"background-origin":1,"background-position":1,"background-repeat":1,"background-size":1,"border":1,"border-bottom":1,"border-bottom-color":1,"border-bottom-left-radius":1,"border-bottom-right-radius":1,"border-bottom-style":1,"border-bottom-width":1,"border-collapse":1,"border-color":1,"border-image":1,"border-image-outset":1,"border-image-repeat":1,"border-image-slice":1,"border-image-source":1,"border-image-width":1,"border-left":1,"border-left-color":1,"border-left-style":1,"border-left-width":1,"border-radius":1,"border-right":1,"border-right-color":1,"border-right-style":1,"border-right-width":1,"border-spacing":1,"border-style":1,"border-top":1,"border-top-color":1,"border-top-left-radius":1,"border-top-right-radius":1,"border-top-style":1,"border-top-width":1,"border-width":1,"box-shadow":1,"caret-color":1,"color":1,"column-count":1,"column-fill":1,"column-rule":1,"column-rule-color":1,"column-rule-style":1,"column-rule-width":1,"counter-increment":1,"counter-reset":1,"filter":1,"list-style-image":1,"outline":1,"outline-color":1,"outline-offset":1,"outline-style":1,"outline-width":1,"text-decoration":1,"text-decoration-color":1,"text-decoration-line":1,"text-indent":1,"text-justify":1,"text-overflow":1,"text-shadow":2,"text-transform":1,"transition":1,"transition-delay":1,"transition-duration":1,"transition-property":1,"transition-timing-function":1,"word-break":1,"word-spacing":1,"word-wrap":1}},"clean":{"variables":false},"compress":{"variables":false}}';
 }
 `;
 const validatorsDefinition = SValidator.getValidatorsDefinition(), validatorsMessagesDefinition = {};
@@ -27588,7 +28354,7 @@ class SFormValidateFeature extends SFeature {
     return Array.from(this._$field.querySelectorAll("option")).filter(($item) => $item.selected).map(($item) => $item.value);
   }
   _applyResult(res, event) {
-    var _a2, _b2, _c2, _d2, _e, _f;
+    var _a2, _b2, _c2, _d2, _e2, _f;
     return __awaiter$e(this, void 0, void 0, function* () {
       for (let [validator2, definition2] of Object.entries(SValidator.getValidatorsDefinition())) {
         if (!this.props[validator2]) {
@@ -27646,7 +28412,7 @@ class SFormValidateFeature extends SFeature {
           this.node.classList.remove(...this.props.validClass.split(" "));
         }
         this.node.classList.remove(...this.props.errorClass.split(" "));
-        if ((_e = this._$error) === null || _e === void 0 ? void 0 : _e.hasAttribute("s-form-validate-error")) {
+        if ((_e2 = this._$error) === null || _e2 === void 0 ? void 0 : _e2.hasAttribute("s-form-validate-error")) {
           (_f = this._$error) === null || _f === void 0 ? void 0 : _f.remove();
         }
         if (Object.keys(this._nodeByValidator).length) {
@@ -27790,59 +28556,11 @@ const __css$c = `.s-panel {
     left: 0;
 }
 
-.s-panel_backdrop {
-    /* position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 0;
-    width: 100%;
-    height: 100%; */position: fixed;
-        top: 0;
-        left: 0;
-        width: 200vw;
-        height: calc(200 * var(--vh,1vh)) ;
-        z-index: 100;
-        transform: translate(-50%, -50%);
-     
- 
-                    background: hsla(calc(var(--s-theme-color-main-h, 0) + var(--s-theme-color-main-background-spin ,0)),calc((var(--s-theme-color-main-s, 0) + var(--s-theme-color-main-background-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-main-l, 0) + var(--s-theme-color-main-background-lightness-offset, 0)) * 1%),0.7);
-                    -webkit-backdrop-filter: blur(5px);
-                            backdrop-filter: blur(5px);
-    z-index: 0;
-}
-
 .s-panel_container {
     display: none;
     position: absolute;
     z-index: 1;
     overflow: auto;
-}
-
-.s-panel_container::-webkit-scrollbar {
-          width: 2px;
-          height: 2px;
-      }
-
-.s-panel_container::-webkit-scrollbar-track {
-            
-                background-color: hsla(calc(var(--s-theme-color-accent-h, 0) + var(--s-theme-color-accent-spin ,0)),calc((var(--s-theme-color-accent-s, 0)) * 1%),calc((var(--s-theme-color-accent-l, 0)) * 1%),0.1);
-            
-
-      }
-
-.s-panel_container::-webkit-scrollbar-thumb {
-          
-            background-color: hsla(calc(var(--s-theme-color-accent-h, 0) + var(--s-theme-color-accent-spin ,0)),calc((var(--s-theme-color-accent-s, 0)) * 1%),calc((var(--s-theme-color-accent-l, 0)) * 1%),var(--s-theme-color-accent-a, 1));
-          
-      }
-
-@media screen and (max-width: 639px) {
-
-.s-panel_container {
-        width: 90vw;
-        min-width: auto;
-        max-width: auto;
-}
 }
 
 [mounted] .s-panel_container {
@@ -27910,14 +28628,10 @@ const __css$c = `.s-panel {
 }
 
 .s-panel[lnf='default'] .s-panel_backdrop {
-        background: hsla(calc(var(--s-theme-color-main-h, 0) + var(--s-theme-color-main-surface-spin ,0)),calc((var(--s-theme-color-main-s, 0) + var(--s-theme-color-main-surface-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-main-l, 0) + var(--s-theme-color-main-surface-lightness-offset, 0)) * 1%),0.6);
-        transition: var(--s-theme-ui-panel-transition, 0);
         opacity: 0;
     }
 
 .s-panel[lnf='default'] .s-panel_container {
-        transition: var(--s-theme-ui-panel-transition, 0);
-        background: hsla(calc(var(--s-theme-color-main-h, 0) + var(--s-theme-color-main-background-spin ,0)),calc((var(--s-theme-color-main-s, 0) + var(--s-theme-color-main-background-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-main-l, 0) + var(--s-theme-color-main-background-lightness-offset, 0)) * 1%),var(--s-theme-color-main-background-a, 1));box-shadow: var(--s-theme-depth-5, 0);border-radius: calc(calc(var(--s-theme-border-radius-default, 5px) * var(--s-scale, 1) * var(--s-scale-global, 1)) * 1);
         opacity: 0;
     }
 
@@ -27926,7 +28640,7 @@ const __css$c = `.s-panel {
             opacity: 1;
         }body:after {
                     display: none;;
-                    content: '{"lod":{"enabled":true,"defaultLevel":3,"botLevel":1,"levels":{"0":{"name":"bare","speedIndex":0},"1":{"name":"bare+","speedIndex":30},"2":{"name":"low","speedIndex":40},"3":{"name":"medium","speedIndex":50},"4":{"name":"high","speedIndex":60}},"method":"class","defaultAction":">=","cssProperties":{"animation":3,"animation-delay":3,"animation-direction":3,"animation-duration":3,"animation-fill-mode":3,"animation-iteration-count":3,"animation-name":3,"animation-play-state":3,"animation-timing-function":3,"backdrop-filter":3,"background":2,"background-attachment":2,"background-blend-mode":3,"background-clip":2,"background-color":2,"background-image":2,"background-origin":2,"background-position":2,"background-repeat":2,"background-size":2,"border":2,"border-bottom":2,"border-bottom-color":2,"border-bottom-left-radius":2,"border-bottom-right-radius":2,"border-bottom-style":2,"border-bottom-width":2,"border-collapse":2,"border-color":2,"border-image":2,"border-image-outset":2,"border-image-repeat":2,"border-image-slice":2,"border-image-source":2,"border-image-width":2,"border-left":2,"border-left-color":2,"border-left-style":2,"border-left-width":2,"border-radius":2,"border-right":2,"border-right-color":2,"border-right-style":2,"border-right-width":2,"border-spacing":2,"border-style":2,"border-top":2,"border-top-color":2,"border-top-left-radius":2,"border-top-right-radius":2,"border-top-style":2,"border-top-width":2,"border-width":2,"box-shadow":3,"caret-color":1,"color":2,"column-count":2,"column-fill":2,"column-gap":2,"column-rule":2,"column-rule-color":2,"column-rule-style":2,"column-rule-width":2,"counter-increment":2,"counter-reset":2,"filter":3,"font":1,"font-family":1,"font-kerning":1,"font-size":1,"font-stretch":1,"font-style":1,"font-variant":1,"font-weight":1,"gap":1,"letter-spacing":1,"line-height":1,"list-style-image":2,"margin":1,"margin-bottom":1,"margin-left":1,"margin-right":1,"margin-top":1,"margin-inline":1,"margin-inline-start":1,"margin-inline-end":1,"margin-block":1,"margin-block-start":1,"margin-block-end":1,"outline":2,"outline-color":2,"outline-offset":2,"outline-style":2,"outline-width":2,"padding":1,"padding-bottom":1,"padding-left":1,"padding-right":1,"padding-top":1,"padding-inline":1,"padding-inline-start":1,"padding-inline-end":1,"padding-block":1,"padding-block-start":1,"padding-block-end":1,"text-decoration":2,"text-decoration-color":2,"text-decoration-line":2,"text-indent":2,"text-justify":2,"text-overflow":2,"text-shadow":3,"text-transform":2,"transition":3,"transition-delay":3,"transition-duration":3,"transition-property":3,"transition-timing-function":3,"word-break":1,"word-spacing":1,"word-wrap":1}},"clean":{"variables":false},"compress":{"variables":false}}';
+                    content: '{"lod":{"enabled":true,"defaultLevel":3,"botLevel":1,"levels":{"0":{"name":"bare","speedIndex":0},"1":{"name":"lnf","speedIndex":30},"2":{"name":"theme","speedIndex":40},"3":{"name":"high","speedIndex":50},"4":{"name":"ultra","speedIndex":60}},"method":"class","defaultAction":">=","cssProperties":{"animation":2,"animation-delay":2,"animation-direction":2,"animation-duration":2,"animation-fill-mode":2,"animation-iteration-count":2,"animation-name":2,"animation-play-state":2,"animation-timing-function":2,"backdrop-filter":3,"background":1,"background-attachment":1,"background-blend-mode":3,"background-clip":1,"background-color":1,"background-image":1,"background-origin":1,"background-position":1,"background-repeat":1,"background-size":1,"border":1,"border-bottom":1,"border-bottom-color":1,"border-bottom-left-radius":1,"border-bottom-right-radius":1,"border-bottom-style":1,"border-bottom-width":1,"border-collapse":1,"border-color":1,"border-image":1,"border-image-outset":1,"border-image-repeat":1,"border-image-slice":1,"border-image-source":1,"border-image-width":1,"border-left":1,"border-left-color":1,"border-left-style":1,"border-left-width":1,"border-radius":1,"border-right":1,"border-right-color":1,"border-right-style":1,"border-right-width":1,"border-spacing":1,"border-style":1,"border-top":1,"border-top-color":1,"border-top-left-radius":1,"border-top-right-radius":1,"border-top-style":1,"border-top-width":1,"border-width":1,"box-shadow":1,"caret-color":1,"color":1,"column-count":1,"column-fill":1,"column-rule":1,"column-rule-color":1,"column-rule-style":1,"column-rule-width":1,"counter-increment":1,"counter-reset":1,"filter":1,"list-style-image":1,"outline":1,"outline-color":1,"outline-offset":1,"outline-style":1,"outline-width":1,"text-decoration":1,"text-decoration-color":1,"text-decoration-line":1,"text-indent":1,"text-justify":1,"text-overflow":1,"text-shadow":2,"text-transform":1,"transition":1,"transition-delay":1,"transition-duration":1,"transition-property":1,"transition-timing-function":1,"word-break":1,"word-spacing":1,"word-wrap":1}},"clean":{"variables":false},"compress":{"variables":false}}';
 }
 `;
 var __awaiter$c = globalThis && globalThis.__awaiter || function(thisArg, _arguments, P, generator) {
@@ -27957,6 +28671,14 @@ var __awaiter$c = globalThis && globalThis.__awaiter || function(thisArg, _argum
   });
 };
 class SPanelComponent extends SLitComponent {
+  static get properties() {
+    return SLitComponent.propertiesFromInterface({}, SPanelComponentInterface);
+  }
+  static get styles() {
+    return css$1`
+            ${unsafeCSS(__css$c)}
+        `;
+  }
   constructor() {
     super(__deepMerge({
       name: "s-panel",
@@ -27967,16 +28689,11 @@ class SPanelComponent extends SLitComponent {
       $panels.forEach(($panel) => $panel !== this && $panel.remove());
     }
   }
-  static get properties() {
-    return SLitComponent.propertiesFromInterface({}, SPanelComponentInterface);
-  }
-  static get styles() {
-    return css$1`
-            ${unsafeCSS(__css$c)}
-        `;
-  }
   mount() {
     return __awaiter$c(this, void 0, void 0, function* () {
+      if (this.parentElement !== document.body) {
+        document.body.appendChild(this);
+      }
       if (this.props.active) {
         this.constructor._activePanels.push(this);
       }
@@ -27984,6 +28701,11 @@ class SPanelComponent extends SLitComponent {
       if ($tpl) {
         this._template = $tpl.content;
         $tpl.remove();
+      } else {
+        this._template = document.createElement("div");
+        Array.from(this.children).forEach(($child) => {
+          this._template.appendChild($child);
+        });
       }
     });
   }
@@ -28189,15 +28911,14 @@ const __css$b = `.s-range {
     flex-grow: 1;
     opacity: 1 !important;
 }
-.s-range_input:hover + .s-range_tooltip,
-.s-range_input:focus + .s-range_tooltip {
+.s-range_input:hover + .s-range_tooltip,.s-range_input:focus + .s-range_tooltip {
     opacity: 1 !important;
 }
-.s-lod--3  .s-range_tooltip {
+.s-lod--1 .s-range_tooltip {
     transition: none;
 }body:after {
                     display: none;;
-                    content: '{"lod":{"enabled":true,"defaultLevel":3,"botLevel":1,"levels":{"0":{"name":"bare","speedIndex":0},"1":{"name":"bare+","speedIndex":30},"2":{"name":"low","speedIndex":40},"3":{"name":"medium","speedIndex":50},"4":{"name":"high","speedIndex":60}},"method":"class","defaultAction":">=","cssProperties":{"animation":3,"animation-delay":3,"animation-direction":3,"animation-duration":3,"animation-fill-mode":3,"animation-iteration-count":3,"animation-name":3,"animation-play-state":3,"animation-timing-function":3,"backdrop-filter":3,"background":2,"background-attachment":2,"background-blend-mode":3,"background-clip":2,"background-color":2,"background-image":2,"background-origin":2,"background-position":2,"background-repeat":2,"background-size":2,"border":2,"border-bottom":2,"border-bottom-color":2,"border-bottom-left-radius":2,"border-bottom-right-radius":2,"border-bottom-style":2,"border-bottom-width":2,"border-collapse":2,"border-color":2,"border-image":2,"border-image-outset":2,"border-image-repeat":2,"border-image-slice":2,"border-image-source":2,"border-image-width":2,"border-left":2,"border-left-color":2,"border-left-style":2,"border-left-width":2,"border-radius":2,"border-right":2,"border-right-color":2,"border-right-style":2,"border-right-width":2,"border-spacing":2,"border-style":2,"border-top":2,"border-top-color":2,"border-top-left-radius":2,"border-top-right-radius":2,"border-top-style":2,"border-top-width":2,"border-width":2,"box-shadow":3,"caret-color":1,"color":2,"column-count":2,"column-fill":2,"column-gap":2,"column-rule":2,"column-rule-color":2,"column-rule-style":2,"column-rule-width":2,"counter-increment":2,"counter-reset":2,"filter":3,"font":1,"font-family":1,"font-kerning":1,"font-size":1,"font-stretch":1,"font-style":1,"font-variant":1,"font-weight":1,"gap":1,"letter-spacing":1,"line-height":1,"list-style-image":2,"margin":1,"margin-bottom":1,"margin-left":1,"margin-right":1,"margin-top":1,"margin-inline":1,"margin-inline-start":1,"margin-inline-end":1,"margin-block":1,"margin-block-start":1,"margin-block-end":1,"outline":2,"outline-color":2,"outline-offset":2,"outline-style":2,"outline-width":2,"padding":1,"padding-bottom":1,"padding-left":1,"padding-right":1,"padding-top":1,"padding-inline":1,"padding-inline-start":1,"padding-inline-end":1,"padding-block":1,"padding-block-start":1,"padding-block-end":1,"text-decoration":2,"text-decoration-color":2,"text-decoration-line":2,"text-indent":2,"text-justify":2,"text-overflow":2,"text-shadow":3,"text-transform":2,"transition":3,"transition-delay":3,"transition-duration":3,"transition-property":3,"transition-timing-function":3,"word-break":1,"word-spacing":1,"word-wrap":1}},"clean":{"variables":false},"compress":{"variables":false}}';
+                    content: '{"lod":{"enabled":true,"defaultLevel":3,"botLevel":1,"levels":{"0":{"name":"bare","speedIndex":0},"1":{"name":"lnf","speedIndex":30},"2":{"name":"theme","speedIndex":40},"3":{"name":"high","speedIndex":50},"4":{"name":"ultra","speedIndex":60}},"method":"class","defaultAction":">=","cssProperties":{"animation":2,"animation-delay":2,"animation-direction":2,"animation-duration":2,"animation-fill-mode":2,"animation-iteration-count":2,"animation-name":2,"animation-play-state":2,"animation-timing-function":2,"backdrop-filter":3,"background":1,"background-attachment":1,"background-blend-mode":3,"background-clip":1,"background-color":1,"background-image":1,"background-origin":1,"background-position":1,"background-repeat":1,"background-size":1,"border":1,"border-bottom":1,"border-bottom-color":1,"border-bottom-left-radius":1,"border-bottom-right-radius":1,"border-bottom-style":1,"border-bottom-width":1,"border-collapse":1,"border-color":1,"border-image":1,"border-image-outset":1,"border-image-repeat":1,"border-image-slice":1,"border-image-source":1,"border-image-width":1,"border-left":1,"border-left-color":1,"border-left-style":1,"border-left-width":1,"border-radius":1,"border-right":1,"border-right-color":1,"border-right-style":1,"border-right-width":1,"border-spacing":1,"border-style":1,"border-top":1,"border-top-color":1,"border-top-left-radius":1,"border-top-right-radius":1,"border-top-style":1,"border-top-width":1,"border-width":1,"box-shadow":1,"caret-color":1,"color":1,"column-count":1,"column-fill":1,"column-rule":1,"column-rule-color":1,"column-rule-style":1,"column-rule-width":1,"counter-increment":1,"counter-reset":1,"filter":1,"list-style-image":1,"outline":1,"outline-color":1,"outline-offset":1,"outline-style":1,"outline-width":1,"text-decoration":1,"text-decoration-color":1,"text-decoration-line":1,"text-indent":1,"text-justify":1,"text-overflow":1,"text-shadow":2,"text-transform":1,"transition":1,"transition-delay":1,"transition-duration":1,"transition-property":1,"transition-timing-function":1,"word-break":1,"word-spacing":1,"word-wrap":1}},"clean":{"variables":false},"compress":{"variables":false}}';
 }
 `;
 var __awaiter$b = globalThis && globalThis.__awaiter || function(thisArg, _arguments, P, generator) {
@@ -28493,7 +29214,7 @@ class SRefocusFeature extends SFeature {
       }
       $scrollable._sRefocusFeatureCurrentElm = $elm;
       this._currentScrolledTargets.push($elm);
-      yield __scrollTo($elm, Object.assign(Object.assign({}, scrollToSettings), { $elm: $scrollable }));
+      yield __scrollTo($elm, Object.assign(Object.assign({}, scrollToSettings), { $elm: $scrollable, force: true }));
       $scrollable._isScrolling = false;
       if (this.props.focusedClass && $elm !== document.body) {
         $elm.classList.add(this.props.focusedClass);
@@ -28543,7 +29264,7 @@ const __css$a = `s-scroll {
     cursor: pointer;
 }body:after {
                     display: none;;
-                    content: '{"lod":{"enabled":true,"defaultLevel":3,"botLevel":1,"levels":{"0":{"name":"bare","speedIndex":0},"1":{"name":"bare+","speedIndex":30},"2":{"name":"low","speedIndex":40},"3":{"name":"medium","speedIndex":50},"4":{"name":"high","speedIndex":60}},"method":"class","defaultAction":">=","cssProperties":{"animation":3,"animation-delay":3,"animation-direction":3,"animation-duration":3,"animation-fill-mode":3,"animation-iteration-count":3,"animation-name":3,"animation-play-state":3,"animation-timing-function":3,"backdrop-filter":3,"background":2,"background-attachment":2,"background-blend-mode":3,"background-clip":2,"background-color":2,"background-image":2,"background-origin":2,"background-position":2,"background-repeat":2,"background-size":2,"border":2,"border-bottom":2,"border-bottom-color":2,"border-bottom-left-radius":2,"border-bottom-right-radius":2,"border-bottom-style":2,"border-bottom-width":2,"border-collapse":2,"border-color":2,"border-image":2,"border-image-outset":2,"border-image-repeat":2,"border-image-slice":2,"border-image-source":2,"border-image-width":2,"border-left":2,"border-left-color":2,"border-left-style":2,"border-left-width":2,"border-radius":2,"border-right":2,"border-right-color":2,"border-right-style":2,"border-right-width":2,"border-spacing":2,"border-style":2,"border-top":2,"border-top-color":2,"border-top-left-radius":2,"border-top-right-radius":2,"border-top-style":2,"border-top-width":2,"border-width":2,"box-shadow":3,"caret-color":1,"color":2,"column-count":2,"column-fill":2,"column-gap":2,"column-rule":2,"column-rule-color":2,"column-rule-style":2,"column-rule-width":2,"counter-increment":2,"counter-reset":2,"filter":3,"font":1,"font-family":1,"font-kerning":1,"font-size":1,"font-stretch":1,"font-style":1,"font-variant":1,"font-weight":1,"gap":1,"letter-spacing":1,"line-height":1,"list-style-image":2,"margin":1,"margin-bottom":1,"margin-left":1,"margin-right":1,"margin-top":1,"margin-inline":1,"margin-inline-start":1,"margin-inline-end":1,"margin-block":1,"margin-block-start":1,"margin-block-end":1,"outline":2,"outline-color":2,"outline-offset":2,"outline-style":2,"outline-width":2,"padding":1,"padding-bottom":1,"padding-left":1,"padding-right":1,"padding-top":1,"padding-inline":1,"padding-inline-start":1,"padding-inline-end":1,"padding-block":1,"padding-block-start":1,"padding-block-end":1,"text-decoration":2,"text-decoration-color":2,"text-decoration-line":2,"text-indent":2,"text-justify":2,"text-overflow":2,"text-shadow":3,"text-transform":2,"transition":3,"transition-delay":3,"transition-duration":3,"transition-property":3,"transition-timing-function":3,"word-break":1,"word-spacing":1,"word-wrap":1}},"clean":{"variables":false},"compress":{"variables":false}}';
+                    content: '{"lod":{"enabled":true,"defaultLevel":3,"botLevel":1,"levels":{"0":{"name":"bare","speedIndex":0},"1":{"name":"lnf","speedIndex":30},"2":{"name":"theme","speedIndex":40},"3":{"name":"high","speedIndex":50},"4":{"name":"ultra","speedIndex":60}},"method":"class","defaultAction":">=","cssProperties":{"animation":2,"animation-delay":2,"animation-direction":2,"animation-duration":2,"animation-fill-mode":2,"animation-iteration-count":2,"animation-name":2,"animation-play-state":2,"animation-timing-function":2,"backdrop-filter":3,"background":1,"background-attachment":1,"background-blend-mode":3,"background-clip":1,"background-color":1,"background-image":1,"background-origin":1,"background-position":1,"background-repeat":1,"background-size":1,"border":1,"border-bottom":1,"border-bottom-color":1,"border-bottom-left-radius":1,"border-bottom-right-radius":1,"border-bottom-style":1,"border-bottom-width":1,"border-collapse":1,"border-color":1,"border-image":1,"border-image-outset":1,"border-image-repeat":1,"border-image-slice":1,"border-image-source":1,"border-image-width":1,"border-left":1,"border-left-color":1,"border-left-style":1,"border-left-width":1,"border-radius":1,"border-right":1,"border-right-color":1,"border-right-style":1,"border-right-width":1,"border-spacing":1,"border-style":1,"border-top":1,"border-top-color":1,"border-top-left-radius":1,"border-top-right-radius":1,"border-top-style":1,"border-top-width":1,"border-width":1,"box-shadow":1,"caret-color":1,"color":1,"column-count":1,"column-fill":1,"column-rule":1,"column-rule-color":1,"column-rule-style":1,"column-rule-width":1,"counter-increment":1,"counter-reset":1,"filter":1,"list-style-image":1,"outline":1,"outline-color":1,"outline-offset":1,"outline-style":1,"outline-width":1,"text-decoration":1,"text-decoration-color":1,"text-decoration-line":1,"text-indent":1,"text-justify":1,"text-overflow":1,"text-shadow":2,"text-transform":1,"transition":1,"transition-delay":1,"transition-duration":1,"transition-property":1,"transition-timing-function":1,"word-break":1,"word-spacing":1,"word-wrap":1}},"clean":{"variables":false},"compress":{"variables":false}}';
 }
 `;
 var __awaiter$9 = globalThis && globalThis.__awaiter || function(thisArg, _arguments, P, generator) {
@@ -28643,6 +29364,11 @@ const __css$9 = `.s-slider {
     font-size: calc(1rem * var(--s-scale, 1) * var(--s-scale-global, 1));
     --s-slider-space: 20px;
 }
+
+    .s-slider > .s-slider_root,
+    .s-slider > .s-slider_root > .s-slider_slides-wrapper {
+        position: relative;
+    }
 
     .s-slider > .s-slider_root,
     .s-slider > .s-slider_root > .s-slider_slides-wrapper,
@@ -29063,7 +29789,7 @@ const __css$9 = `.s-slider {
         transform: rotate(180deg);
     }body:after {
                     display: none;;
-                    content: '{"lod":{"enabled":true,"defaultLevel":3,"botLevel":1,"levels":{"0":{"name":"bare","speedIndex":0},"1":{"name":"bare+","speedIndex":30},"2":{"name":"low","speedIndex":40},"3":{"name":"medium","speedIndex":50},"4":{"name":"high","speedIndex":60}},"method":"class","defaultAction":">=","cssProperties":{"animation":3,"animation-delay":3,"animation-direction":3,"animation-duration":3,"animation-fill-mode":3,"animation-iteration-count":3,"animation-name":3,"animation-play-state":3,"animation-timing-function":3,"backdrop-filter":3,"background":2,"background-attachment":2,"background-blend-mode":3,"background-clip":2,"background-color":2,"background-image":2,"background-origin":2,"background-position":2,"background-repeat":2,"background-size":2,"border":2,"border-bottom":2,"border-bottom-color":2,"border-bottom-left-radius":2,"border-bottom-right-radius":2,"border-bottom-style":2,"border-bottom-width":2,"border-collapse":2,"border-color":2,"border-image":2,"border-image-outset":2,"border-image-repeat":2,"border-image-slice":2,"border-image-source":2,"border-image-width":2,"border-left":2,"border-left-color":2,"border-left-style":2,"border-left-width":2,"border-radius":2,"border-right":2,"border-right-color":2,"border-right-style":2,"border-right-width":2,"border-spacing":2,"border-style":2,"border-top":2,"border-top-color":2,"border-top-left-radius":2,"border-top-right-radius":2,"border-top-style":2,"border-top-width":2,"border-width":2,"box-shadow":3,"caret-color":1,"color":2,"column-count":2,"column-fill":2,"column-gap":2,"column-rule":2,"column-rule-color":2,"column-rule-style":2,"column-rule-width":2,"counter-increment":2,"counter-reset":2,"filter":3,"font":1,"font-family":1,"font-kerning":1,"font-size":1,"font-stretch":1,"font-style":1,"font-variant":1,"font-weight":1,"gap":1,"letter-spacing":1,"line-height":1,"list-style-image":2,"margin":1,"margin-bottom":1,"margin-left":1,"margin-right":1,"margin-top":1,"margin-inline":1,"margin-inline-start":1,"margin-inline-end":1,"margin-block":1,"margin-block-start":1,"margin-block-end":1,"outline":2,"outline-color":2,"outline-offset":2,"outline-style":2,"outline-width":2,"padding":1,"padding-bottom":1,"padding-left":1,"padding-right":1,"padding-top":1,"padding-inline":1,"padding-inline-start":1,"padding-inline-end":1,"padding-block":1,"padding-block-start":1,"padding-block-end":1,"text-decoration":2,"text-decoration-color":2,"text-decoration-line":2,"text-indent":2,"text-justify":2,"text-overflow":2,"text-shadow":3,"text-transform":2,"transition":3,"transition-delay":3,"transition-duration":3,"transition-property":3,"transition-timing-function":3,"word-break":1,"word-spacing":1,"word-wrap":1}},"clean":{"variables":false},"compress":{"variables":false}}';
+                    content: '{"lod":{"enabled":true,"defaultLevel":3,"botLevel":1,"levels":{"0":{"name":"bare","speedIndex":0},"1":{"name":"lnf","speedIndex":30},"2":{"name":"theme","speedIndex":40},"3":{"name":"high","speedIndex":50},"4":{"name":"ultra","speedIndex":60}},"method":"class","defaultAction":">=","cssProperties":{"animation":2,"animation-delay":2,"animation-direction":2,"animation-duration":2,"animation-fill-mode":2,"animation-iteration-count":2,"animation-name":2,"animation-play-state":2,"animation-timing-function":2,"backdrop-filter":3,"background":1,"background-attachment":1,"background-blend-mode":3,"background-clip":1,"background-color":1,"background-image":1,"background-origin":1,"background-position":1,"background-repeat":1,"background-size":1,"border":1,"border-bottom":1,"border-bottom-color":1,"border-bottom-left-radius":1,"border-bottom-right-radius":1,"border-bottom-style":1,"border-bottom-width":1,"border-collapse":1,"border-color":1,"border-image":1,"border-image-outset":1,"border-image-repeat":1,"border-image-slice":1,"border-image-source":1,"border-image-width":1,"border-left":1,"border-left-color":1,"border-left-style":1,"border-left-width":1,"border-radius":1,"border-right":1,"border-right-color":1,"border-right-style":1,"border-right-width":1,"border-spacing":1,"border-style":1,"border-top":1,"border-top-color":1,"border-top-left-radius":1,"border-top-right-radius":1,"border-top-style":1,"border-top-width":1,"border-width":1,"box-shadow":1,"caret-color":1,"color":1,"column-count":1,"column-fill":1,"column-rule":1,"column-rule-color":1,"column-rule-style":1,"column-rule-width":1,"counter-increment":1,"counter-reset":1,"filter":1,"list-style-image":1,"outline":1,"outline-color":1,"outline-offset":1,"outline-style":1,"outline-width":1,"text-decoration":1,"text-decoration-color":1,"text-decoration-line":1,"text-indent":1,"text-justify":1,"text-overflow":1,"text-shadow":2,"text-transform":1,"transition":1,"transition-delay":1,"transition-duration":1,"transition-property":1,"transition-timing-function":1,"word-break":1,"word-spacing":1,"word-wrap":1}},"clean":{"variables":false},"compress":{"variables":false}}';
 }
 `;
 class SSliderComponentInterface extends SInterface {
@@ -29277,18 +30003,6 @@ var __awaiter$8 = globalThis && globalThis.__awaiter || function(thisArg, _argum
   });
 };
 class SSliderComponent extends SLitComponent {
-  constructor() {
-    super(__deepMerge({
-      name: "s-slider",
-      interface: SSliderComponentInterface
-    }));
-    this._timer = {
-      total: 0,
-      current: 0,
-      percentage: 0
-    };
-    this._bindedBehaviors = {};
-  }
   static get properties() {
     return SLitComponent.propertiesFromInterface({}, SSliderComponentInterface);
   }
@@ -29306,6 +30020,18 @@ class SSliderComponent extends SLitComponent {
       currentSlideIdx: 0,
       playing: true
     };
+  }
+  constructor() {
+    super(__deepMerge({
+      name: "s-slider",
+      interface: SSliderComponentInterface
+    }));
+    this._timer = {
+      total: 0,
+      current: 0,
+      percentage: 0
+    };
+    this._bindedBehaviors = {};
   }
   mount() {
     return __awaiter$8(this, void 0, void 0, function* () {
@@ -29335,7 +30061,7 @@ class SSliderComponent extends SLitComponent {
     });
   }
   firstUpdated() {
-    var _a2, _b2, _c2, _d2, _e, _f, _g;
+    var _a2, _b2, _c2, _d2, _e2, _f, _g;
     return __awaiter$8(this, void 0, void 0, function* () {
       this.$root = this.querySelector(`.${this.utils.uCls("_root")}`);
       this.$slidesWrapper = this.querySelector(`.${this.utils.uCls("_slides-wrapper")}:not(s-slider#${this.id} s-slider .${this.utils.uCls("_slides-wrapper")})`);
@@ -29364,7 +30090,7 @@ class SSliderComponent extends SLitComponent {
         } else {
           throw new Error(`Invalid behavior type, must be a string, an SSliderBehavior extended class or an SSliderBehavior instance`);
         }
-        (_e = (_d2 = this.behavior).firstUpdated) === null || _e === void 0 ? void 0 : _e.call(_d2);
+        (_e2 = (_d2 = this.behavior).firstUpdated) === null || _e2 === void 0 ? void 0 : _e2.call(_d2);
       }
       yield (_g = (_f = this.getBehavior()).setup) === null || _g === void 0 ? void 0 : _g.call(_f);
       this.applyPad();
@@ -31119,7 +31845,7 @@ function expandOrCloneMode(mode) {
   }
   return mode;
 }
-var version = "11.6.0";
+var version = "11.7.0";
 class HTMLInjectionError extends Error {
   constructor(reason, html2) {
     super(reason);
@@ -31810,7 +32536,7 @@ function bash(hljs) {
     end: /'/
   };
   const ARITHMETIC = {
-    begin: /\$\(\(/,
+    begin: /\$?\(\(/,
     end: /\)\)/,
     contains: [
       {
@@ -32890,6 +33616,10 @@ function javascript(hljs) {
       }
       let m2;
       const afterMatch = match5.input.substring(afterMatchIndex);
+      if (m2 = afterMatch.match(/^\s*=/)) {
+        response.ignoreMatch();
+        return;
+      }
       if (m2 = afterMatch.match(/^\s+extends\s+/)) {
         if (m2.index === 0) {
           response.ignoreMatch();
@@ -33014,6 +33744,7 @@ function javascript(hljs) {
     HTML_TEMPLATE,
     CSS_TEMPLATE,
     TEMPLATE_STRING,
+    { match: /\$\d+/ },
     NUMBER
   ];
   SUBST.contains = SUBST_INTERNALS.concat({
@@ -33134,7 +33865,8 @@ function javascript(hljs) {
       /\b/,
       noneOf([
         ...BUILT_IN_GLOBALS,
-        "super"
+        "super",
+        "import"
       ]),
       IDENT_RE$12,
       regex2.lookahead(/\(/)
@@ -33209,6 +33941,7 @@ function javascript(hljs) {
       CSS_TEMPLATE,
       TEMPLATE_STRING,
       COMMENT2,
+      { match: /\$\d+/ },
       NUMBER,
       CLASS_REFERENCE,
       {
@@ -34141,7 +34874,8 @@ function query(selector, cache2) {
  * SPDX-License-Identifier: BSD-3-Clause
  */
 var _a;
-((_a = window.HTMLSlotElement) === null || _a === void 0 ? void 0 : _a.prototype.assignedElements) != null ? (slot, opts) => slot.assignedElements(opts) : (slot, opts) => slot.assignedNodes(opts).filter((node) => node.nodeType === Node.ELEMENT_NODE);
+const global$1 = window;
+((_a = global$1.HTMLSlotElement) === null || _a === void 0 ? void 0 : _a.prototype.assignedElements) != null ? (slot, opts) => slot.assignedElements(opts) : (slot, opts) => slot.assignedNodes(opts).filter((node) => node.nodeType === Node.ELEMENT_NODE);
 class SCodeExampleComponentInterface extends SInterface {
   static get _definition() {
     return {
@@ -34218,9 +34952,9 @@ const __css$8 = `.s-code-example {
     display: block;
     text-align: initial;
 }
-            .s-lod--1  .s-rhythm--vertical > .s-code-example {
+            .s-rhythm--vertical > .s-code-example {
                 margin-bottom: calc(var(--s-theme-margin-default, 1rem) * 4.25);
-}
+            }
 
 .s-code-example > * {
         display: none;
@@ -34301,9 +35035,6 @@ const __css$8 = `.s-code-example {
 
 .s-code-example_code {
     display: none;
-}
-
-.s-lod--1  .s-code-example_code {
     line-height: 0;
 }
 
@@ -34311,9 +35042,9 @@ const __css$8 = `.s-code-example {
         display: block;
     }
 
-.s-lod--1  .s-code-example_code > code {
+.s-code-example_code > code {
         line-height: 1;
-}
+    }
 
 .s-code-example_toolbar {
     position: absolute;
@@ -34321,16 +35052,16 @@ const __css$8 = `.s-code-example {
     top: calc(var(--s-theme-margin-default, 1rem) * 0.75);
 }
 
-.s-lod--1  .s-code-example_toolbar > * {
+.s-code-example_toolbar > * {
         font-size: 20px;
-}
+    }
 
 [toolbar-position='nav'] .s-code-example_toolbar {
     right: calc(var(--s-theme-margin-default, 1rem) * 0.75);
     top: calc(var(--s-theme-margin-default, 1rem) * 0.75);
 }body:after {
                     display: none;;
-                    content: '{"lod":{"enabled":true,"defaultLevel":3,"botLevel":1,"levels":{"0":{"name":"bare","speedIndex":0},"1":{"name":"bare+","speedIndex":30},"2":{"name":"low","speedIndex":40},"3":{"name":"medium","speedIndex":50},"4":{"name":"high","speedIndex":60}},"method":"class","defaultAction":">=","cssProperties":{"animation":3,"animation-delay":3,"animation-direction":3,"animation-duration":3,"animation-fill-mode":3,"animation-iteration-count":3,"animation-name":3,"animation-play-state":3,"animation-timing-function":3,"backdrop-filter":3,"background":2,"background-attachment":2,"background-blend-mode":3,"background-clip":2,"background-color":2,"background-image":2,"background-origin":2,"background-position":2,"background-repeat":2,"background-size":2,"border":2,"border-bottom":2,"border-bottom-color":2,"border-bottom-left-radius":2,"border-bottom-right-radius":2,"border-bottom-style":2,"border-bottom-width":2,"border-collapse":2,"border-color":2,"border-image":2,"border-image-outset":2,"border-image-repeat":2,"border-image-slice":2,"border-image-source":2,"border-image-width":2,"border-left":2,"border-left-color":2,"border-left-style":2,"border-left-width":2,"border-radius":2,"border-right":2,"border-right-color":2,"border-right-style":2,"border-right-width":2,"border-spacing":2,"border-style":2,"border-top":2,"border-top-color":2,"border-top-left-radius":2,"border-top-right-radius":2,"border-top-style":2,"border-top-width":2,"border-width":2,"box-shadow":3,"caret-color":1,"color":2,"column-count":2,"column-fill":2,"column-gap":2,"column-rule":2,"column-rule-color":2,"column-rule-style":2,"column-rule-width":2,"counter-increment":2,"counter-reset":2,"filter":3,"font":1,"font-family":1,"font-kerning":1,"font-size":1,"font-stretch":1,"font-style":1,"font-variant":1,"font-weight":1,"gap":1,"letter-spacing":1,"line-height":1,"list-style-image":2,"margin":1,"margin-bottom":1,"margin-left":1,"margin-right":1,"margin-top":1,"margin-inline":1,"margin-inline-start":1,"margin-inline-end":1,"margin-block":1,"margin-block-start":1,"margin-block-end":1,"outline":2,"outline-color":2,"outline-offset":2,"outline-style":2,"outline-width":2,"padding":1,"padding-bottom":1,"padding-left":1,"padding-right":1,"padding-top":1,"padding-inline":1,"padding-inline-start":1,"padding-inline-end":1,"padding-block":1,"padding-block-start":1,"padding-block-end":1,"text-decoration":2,"text-decoration-color":2,"text-decoration-line":2,"text-indent":2,"text-justify":2,"text-overflow":2,"text-shadow":3,"text-transform":2,"transition":3,"transition-delay":3,"transition-duration":3,"transition-property":3,"transition-timing-function":3,"word-break":1,"word-spacing":1,"word-wrap":1}},"clean":{"variables":false},"compress":{"variables":false}}';
+                    content: '{"lod":{"enabled":true,"defaultLevel":3,"botLevel":1,"levels":{"0":{"name":"bare","speedIndex":0},"1":{"name":"lnf","speedIndex":30},"2":{"name":"theme","speedIndex":40},"3":{"name":"high","speedIndex":50},"4":{"name":"ultra","speedIndex":60}},"method":"class","defaultAction":">=","cssProperties":{"animation":2,"animation-delay":2,"animation-direction":2,"animation-duration":2,"animation-fill-mode":2,"animation-iteration-count":2,"animation-name":2,"animation-play-state":2,"animation-timing-function":2,"backdrop-filter":3,"background":1,"background-attachment":1,"background-blend-mode":3,"background-clip":1,"background-color":1,"background-image":1,"background-origin":1,"background-position":1,"background-repeat":1,"background-size":1,"border":1,"border-bottom":1,"border-bottom-color":1,"border-bottom-left-radius":1,"border-bottom-right-radius":1,"border-bottom-style":1,"border-bottom-width":1,"border-collapse":1,"border-color":1,"border-image":1,"border-image-outset":1,"border-image-repeat":1,"border-image-slice":1,"border-image-source":1,"border-image-width":1,"border-left":1,"border-left-color":1,"border-left-style":1,"border-left-width":1,"border-radius":1,"border-right":1,"border-right-color":1,"border-right-style":1,"border-right-width":1,"border-spacing":1,"border-style":1,"border-top":1,"border-top-color":1,"border-top-left-radius":1,"border-top-right-radius":1,"border-top-style":1,"border-top-width":1,"border-width":1,"box-shadow":1,"caret-color":1,"color":1,"column-count":1,"column-fill":1,"column-rule":1,"column-rule-color":1,"column-rule-style":1,"column-rule-width":1,"counter-increment":1,"counter-reset":1,"filter":1,"list-style-image":1,"outline":1,"outline-color":1,"outline-offset":1,"outline-style":1,"outline-width":1,"text-decoration":1,"text-decoration-color":1,"text-decoration-line":1,"text-indent":1,"text-justify":1,"text-overflow":1,"text-shadow":2,"text-transform":1,"transition":1,"transition-delay":1,"transition-duration":1,"transition-property":1,"transition-timing-function":1,"word-break":1,"word-spacing":1,"word-wrap":1}},"clean":{"variables":false},"compress":{"variables":false}}';
 }
 `;
 var __decorate = globalThis && globalThis.__decorate || function(decorators, target, key, desc) {
@@ -34372,6 +35103,14 @@ var __awaiter$6 = globalThis && globalThis.__awaiter || function(thisArg, _argum
 };
 define$q();
 class SCodeExample extends SLitComponent {
+  static get properties() {
+    return SLitComponent.propertiesFromInterface({}, SCodeExampleComponentInterface);
+  }
+  static get styles() {
+    return css$1`
+            ${unsafeCSS(__css$8)}
+        `;
+  }
   constructor() {
     super(__deepMerge({
       name: "s-code-example",
@@ -34383,14 +35122,6 @@ class SCodeExample extends SLitComponent {
       more: false
     };
   }
-  static get properties() {
-    return SLitComponent.propertiesFromInterface({}, SCodeExampleComponentInterface);
-  }
-  static get styles() {
-    return css$1`
-            ${unsafeCSS(__css$8)}
-        `;
-  }
   mount() {
     var _a2;
     return __awaiter$6(this, void 0, void 0, function* () {
@@ -34400,7 +35131,7 @@ class SCodeExample extends SLitComponent {
       });
       this.$templates = this.querySelectorAll("template,code");
       this.$templates.forEach(($template) => {
-        var _a3, _b2, _c2, _d2, _e, _f, _g;
+        var _a3, _b2, _c2, _d2, _e2, _f, _g;
         if (!$template.getAttribute)
           return;
         switch ((_b2 = (_a3 = $template.getAttribute("id")) !== null && _a3 !== void 0 ? _a3 : $template.getAttribute("language")) !== null && _b2 !== void 0 ? _b2 : $template.getAttribute("lang")) {
@@ -34410,7 +35141,7 @@ class SCodeExample extends SLitComponent {
         this.props.items = [
           ...this.props.items,
           {
-            id: (_e = (_d2 = (_c2 = $template.getAttribute("id")) !== null && _c2 !== void 0 ? _c2 : $template.getAttribute("language")) !== null && _d2 !== void 0 ? _d2 : $template.getAttribute("lang")) !== null && _e !== void 0 ? _e : "html",
+            id: (_e2 = (_d2 = (_c2 = $template.getAttribute("id")) !== null && _c2 !== void 0 ? _c2 : $template.getAttribute("language")) !== null && _d2 !== void 0 ? _d2 : $template.getAttribute("lang")) !== null && _e2 !== void 0 ? _e2 : "html",
             lang: (_g = (_f = $template.getAttribute("language")) !== null && _f !== void 0 ? _f : $template.getAttribute("lang")) !== null && _g !== void 0 ? _g : "html",
             code: formatedCode,
             lines: formatedCode.trim().split("\n").length
@@ -34492,7 +35223,7 @@ class SCodeExample extends SLitComponent {
     this.$copy.copy(item.code);
   }
   render() {
-    var _a2, _b2, _c2, _d2, _e, _f, _g;
+    var _a2, _b2, _c2, _d2, _e2, _f, _g;
     const currentItem = this.currentItem;
     return html$1`
             <div
@@ -34507,7 +35238,7 @@ class SCodeExample extends SLitComponent {
                     <div class="${this.utils.cls("_tabs", "s-tabs")}">
                         ${((_a2 = this.props.items) !== null && _a2 !== void 0 ? _a2 : []).map((item) => html$1`
                                 <div
-                                    class="${this.utils.cls("_tab")}"
+                                    class="${this.utils.cls("_tab")} ${this.state.activeTabId === item.id ? "active" : ""}"
                                     id="${item.id}"
                                     ?active="${this.state.activeTabId === item.id}"
                                     @click="${this.setActiveTabByTab}"
@@ -34558,7 +35289,7 @@ class SCodeExample extends SLitComponent {
                                               ${this.state.more ? html$1`
                                                             ${(_d2 = this.props.lessLabel) !== null && _d2 !== void 0 ? _d2 : "Show less"}
                                                         ` : html$1`
-                                                            ${(_e = this.props.moreLabel) !== null && _e !== void 0 ? _e : "Show more"}
+                                                            ${(_e2 = this.props.moreLabel) !== null && _e2 !== void 0 ? _e2 : "Show more"}
                                                         `}
                                           </a>
                                       ` : html$1`
@@ -34992,7 +35723,7 @@ const __css$7 = `.s-color-picker {
         left: 0;
     }body:after {
                     display: none;;
-                    content: '{"lod":{"enabled":true,"defaultLevel":3,"botLevel":1,"levels":{"0":{"name":"bare","speedIndex":0},"1":{"name":"bare+","speedIndex":30},"2":{"name":"low","speedIndex":40},"3":{"name":"medium","speedIndex":50},"4":{"name":"high","speedIndex":60}},"method":"class","defaultAction":">=","cssProperties":{"animation":3,"animation-delay":3,"animation-direction":3,"animation-duration":3,"animation-fill-mode":3,"animation-iteration-count":3,"animation-name":3,"animation-play-state":3,"animation-timing-function":3,"backdrop-filter":3,"background":2,"background-attachment":2,"background-blend-mode":3,"background-clip":2,"background-color":2,"background-image":2,"background-origin":2,"background-position":2,"background-repeat":2,"background-size":2,"border":2,"border-bottom":2,"border-bottom-color":2,"border-bottom-left-radius":2,"border-bottom-right-radius":2,"border-bottom-style":2,"border-bottom-width":2,"border-collapse":2,"border-color":2,"border-image":2,"border-image-outset":2,"border-image-repeat":2,"border-image-slice":2,"border-image-source":2,"border-image-width":2,"border-left":2,"border-left-color":2,"border-left-style":2,"border-left-width":2,"border-radius":2,"border-right":2,"border-right-color":2,"border-right-style":2,"border-right-width":2,"border-spacing":2,"border-style":2,"border-top":2,"border-top-color":2,"border-top-left-radius":2,"border-top-right-radius":2,"border-top-style":2,"border-top-width":2,"border-width":2,"box-shadow":3,"caret-color":1,"color":2,"column-count":2,"column-fill":2,"column-gap":2,"column-rule":2,"column-rule-color":2,"column-rule-style":2,"column-rule-width":2,"counter-increment":2,"counter-reset":2,"filter":3,"font":1,"font-family":1,"font-kerning":1,"font-size":1,"font-stretch":1,"font-style":1,"font-variant":1,"font-weight":1,"gap":1,"letter-spacing":1,"line-height":1,"list-style-image":2,"margin":1,"margin-bottom":1,"margin-left":1,"margin-right":1,"margin-top":1,"margin-inline":1,"margin-inline-start":1,"margin-inline-end":1,"margin-block":1,"margin-block-start":1,"margin-block-end":1,"outline":2,"outline-color":2,"outline-offset":2,"outline-style":2,"outline-width":2,"padding":1,"padding-bottom":1,"padding-left":1,"padding-right":1,"padding-top":1,"padding-inline":1,"padding-inline-start":1,"padding-inline-end":1,"padding-block":1,"padding-block-start":1,"padding-block-end":1,"text-decoration":2,"text-decoration-color":2,"text-decoration-line":2,"text-indent":2,"text-justify":2,"text-overflow":2,"text-shadow":3,"text-transform":2,"transition":3,"transition-delay":3,"transition-duration":3,"transition-property":3,"transition-timing-function":3,"word-break":1,"word-spacing":1,"word-wrap":1}},"clean":{"variables":false},"compress":{"variables":false}}';
+                    content: '{"lod":{"enabled":true,"defaultLevel":3,"botLevel":1,"levels":{"0":{"name":"bare","speedIndex":0},"1":{"name":"lnf","speedIndex":30},"2":{"name":"theme","speedIndex":40},"3":{"name":"high","speedIndex":50},"4":{"name":"ultra","speedIndex":60}},"method":"class","defaultAction":">=","cssProperties":{"animation":2,"animation-delay":2,"animation-direction":2,"animation-duration":2,"animation-fill-mode":2,"animation-iteration-count":2,"animation-name":2,"animation-play-state":2,"animation-timing-function":2,"backdrop-filter":3,"background":1,"background-attachment":1,"background-blend-mode":3,"background-clip":1,"background-color":1,"background-image":1,"background-origin":1,"background-position":1,"background-repeat":1,"background-size":1,"border":1,"border-bottom":1,"border-bottom-color":1,"border-bottom-left-radius":1,"border-bottom-right-radius":1,"border-bottom-style":1,"border-bottom-width":1,"border-collapse":1,"border-color":1,"border-image":1,"border-image-outset":1,"border-image-repeat":1,"border-image-slice":1,"border-image-source":1,"border-image-width":1,"border-left":1,"border-left-color":1,"border-left-style":1,"border-left-width":1,"border-radius":1,"border-right":1,"border-right-color":1,"border-right-style":1,"border-right-width":1,"border-spacing":1,"border-style":1,"border-top":1,"border-top-color":1,"border-top-left-radius":1,"border-top-right-radius":1,"border-top-style":1,"border-top-width":1,"border-width":1,"box-shadow":1,"caret-color":1,"color":1,"column-count":1,"column-fill":1,"column-rule":1,"column-rule-color":1,"column-rule-style":1,"column-rule-width":1,"counter-increment":1,"counter-reset":1,"filter":1,"list-style-image":1,"outline":1,"outline-color":1,"outline-offset":1,"outline-style":1,"outline-width":1,"text-decoration":1,"text-decoration-color":1,"text-decoration-line":1,"text-indent":1,"text-justify":1,"text-overflow":1,"text-shadow":2,"text-transform":1,"transition":1,"transition-delay":1,"transition-duration":1,"transition-property":1,"transition-timing-function":1,"word-break":1,"word-spacing":1,"word-wrap":1}},"clean":{"variables":false},"compress":{"variables":false}}';
 }
 `;
 var __awaiter$5 = globalThis && globalThis.__awaiter || function(thisArg, _arguments, P, generator) {
@@ -35023,6 +35754,16 @@ var __awaiter$5 = globalThis && globalThis.__awaiter || function(thisArg, _argum
   });
 };
 class SColorPickerComponent extends SLitComponent {
+  static get properties() {
+    return SLitComponent.propertiesFromInterface({}, SColorPickerComponentInterface);
+  }
+  static get styles() {
+    return css$1`
+            ${unsafeCSS(`
+                ${__css$7}
+            `)}
+        `;
+  }
   constructor() {
     var _a2, _b2;
     super(__deepMerge({
@@ -35051,16 +35792,6 @@ class SColorPickerComponent extends SLitComponent {
     (_b2 = this._$button) === null || _b2 === void 0 ? void 0 : _b2.addEventListener("pointerup", (e) => e.preventDefault());
     this._hasButton = this._$button !== null;
   }
-  static get properties() {
-    return SLitComponent.propertiesFromInterface({}, SColorPickerComponentInterface);
-  }
-  static get styles() {
-    return css$1`
-            ${unsafeCSS(`
-                ${__css$7}
-            `)}
-        `;
-  }
   mount() {
     return __awaiter$5(this, void 0, void 0, function* () {
       this._hueColor = new SColor("#000");
@@ -35083,14 +35814,14 @@ class SColorPickerComponent extends SLitComponent {
         this._$input = this.querySelector("input");
       }
       this.utils.fastdom.mutate(() => {
-        var _a2, _b2, _c2, _d2, _e, _f;
+        var _a2, _b2, _c2, _d2, _e2, _f;
         if (!((_a2 = this._$input) === null || _a2 === void 0 ? void 0 : _a2.hasAttribute("name"))) {
           (_b2 = this._$input) === null || _b2 === void 0 ? void 0 : _b2.setAttribute("name", this.props.name);
         }
         if (!((_c2 = this._$input) === null || _c2 === void 0 ? void 0 : _c2.hasAttribute("placeholder"))) {
           (_d2 = this._$input) === null || _d2 === void 0 ? void 0 : _d2.setAttribute("placeholder", this.props.placeholder);
         }
-        if (!((_e = this._$input) === null || _e === void 0 ? void 0 : _e.hasAttribute("autocomplete"))) {
+        if (!((_e2 = this._$input) === null || _e2 === void 0 ? void 0 : _e2.hasAttribute("autocomplete"))) {
           (_f = this._$input) === null || _f === void 0 ? void 0 : _f.setAttribute("autocomplete", "off");
         }
         this._$input.setAttribute("readonly", true);
@@ -35835,7 +36566,7 @@ function _iterableToArrayLimit(arr, i) {
   var _arr = [];
   var _n = true;
   var _d2 = false;
-  var _e = void 0;
+  var _e2 = void 0;
   try {
     for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) {
       _arr.push(_s.value);
@@ -35844,14 +36575,14 @@ function _iterableToArrayLimit(arr, i) {
     }
   } catch (err) {
     _d2 = true;
-    _e = err;
+    _e2 = err;
   } finally {
     try {
       if (!_n && _i["return"] != null)
         _i["return"]();
     } finally {
       if (_d2)
-        throw _e;
+        throw _e2;
     }
   }
   return _arr;
@@ -36433,7 +37164,7 @@ const __css$6 = `.s-datetime-picker {
     .s-datetime-picker .s-datetime-picker_day {
     }body:after {
                     display: none;;
-                    content: '{"lod":{"enabled":true,"defaultLevel":3,"botLevel":1,"levels":{"0":{"name":"bare","speedIndex":0},"1":{"name":"bare+","speedIndex":30},"2":{"name":"low","speedIndex":40},"3":{"name":"medium","speedIndex":50},"4":{"name":"high","speedIndex":60}},"method":"class","defaultAction":">=","cssProperties":{"animation":3,"animation-delay":3,"animation-direction":3,"animation-duration":3,"animation-fill-mode":3,"animation-iteration-count":3,"animation-name":3,"animation-play-state":3,"animation-timing-function":3,"backdrop-filter":3,"background":2,"background-attachment":2,"background-blend-mode":3,"background-clip":2,"background-color":2,"background-image":2,"background-origin":2,"background-position":2,"background-repeat":2,"background-size":2,"border":2,"border-bottom":2,"border-bottom-color":2,"border-bottom-left-radius":2,"border-bottom-right-radius":2,"border-bottom-style":2,"border-bottom-width":2,"border-collapse":2,"border-color":2,"border-image":2,"border-image-outset":2,"border-image-repeat":2,"border-image-slice":2,"border-image-source":2,"border-image-width":2,"border-left":2,"border-left-color":2,"border-left-style":2,"border-left-width":2,"border-radius":2,"border-right":2,"border-right-color":2,"border-right-style":2,"border-right-width":2,"border-spacing":2,"border-style":2,"border-top":2,"border-top-color":2,"border-top-left-radius":2,"border-top-right-radius":2,"border-top-style":2,"border-top-width":2,"border-width":2,"box-shadow":3,"caret-color":1,"color":2,"column-count":2,"column-fill":2,"column-gap":2,"column-rule":2,"column-rule-color":2,"column-rule-style":2,"column-rule-width":2,"counter-increment":2,"counter-reset":2,"filter":3,"font":1,"font-family":1,"font-kerning":1,"font-size":1,"font-stretch":1,"font-style":1,"font-variant":1,"font-weight":1,"gap":1,"letter-spacing":1,"line-height":1,"list-style-image":2,"margin":1,"margin-bottom":1,"margin-left":1,"margin-right":1,"margin-top":1,"margin-inline":1,"margin-inline-start":1,"margin-inline-end":1,"margin-block":1,"margin-block-start":1,"margin-block-end":1,"outline":2,"outline-color":2,"outline-offset":2,"outline-style":2,"outline-width":2,"padding":1,"padding-bottom":1,"padding-left":1,"padding-right":1,"padding-top":1,"padding-inline":1,"padding-inline-start":1,"padding-inline-end":1,"padding-block":1,"padding-block-start":1,"padding-block-end":1,"text-decoration":2,"text-decoration-color":2,"text-decoration-line":2,"text-indent":2,"text-justify":2,"text-overflow":2,"text-shadow":3,"text-transform":2,"transition":3,"transition-delay":3,"transition-duration":3,"transition-property":3,"transition-timing-function":3,"word-break":1,"word-spacing":1,"word-wrap":1}},"clean":{"variables":false},"compress":{"variables":false}}';
+                    content: '{"lod":{"enabled":true,"defaultLevel":3,"botLevel":1,"levels":{"0":{"name":"bare","speedIndex":0},"1":{"name":"lnf","speedIndex":30},"2":{"name":"theme","speedIndex":40},"3":{"name":"high","speedIndex":50},"4":{"name":"ultra","speedIndex":60}},"method":"class","defaultAction":">=","cssProperties":{"animation":2,"animation-delay":2,"animation-direction":2,"animation-duration":2,"animation-fill-mode":2,"animation-iteration-count":2,"animation-name":2,"animation-play-state":2,"animation-timing-function":2,"backdrop-filter":3,"background":1,"background-attachment":1,"background-blend-mode":3,"background-clip":1,"background-color":1,"background-image":1,"background-origin":1,"background-position":1,"background-repeat":1,"background-size":1,"border":1,"border-bottom":1,"border-bottom-color":1,"border-bottom-left-radius":1,"border-bottom-right-radius":1,"border-bottom-style":1,"border-bottom-width":1,"border-collapse":1,"border-color":1,"border-image":1,"border-image-outset":1,"border-image-repeat":1,"border-image-slice":1,"border-image-source":1,"border-image-width":1,"border-left":1,"border-left-color":1,"border-left-style":1,"border-left-width":1,"border-radius":1,"border-right":1,"border-right-color":1,"border-right-style":1,"border-right-width":1,"border-spacing":1,"border-style":1,"border-top":1,"border-top-color":1,"border-top-left-radius":1,"border-top-right-radius":1,"border-top-style":1,"border-top-width":1,"border-width":1,"box-shadow":1,"caret-color":1,"color":1,"column-count":1,"column-fill":1,"column-rule":1,"column-rule-color":1,"column-rule-style":1,"column-rule-width":1,"counter-increment":1,"counter-reset":1,"filter":1,"list-style-image":1,"outline":1,"outline-color":1,"outline-offset":1,"outline-style":1,"outline-width":1,"text-decoration":1,"text-decoration-color":1,"text-decoration-line":1,"text-indent":1,"text-justify":1,"text-overflow":1,"text-shadow":2,"text-transform":1,"transition":1,"transition-delay":1,"transition-duration":1,"transition-property":1,"transition-timing-function":1,"word-break":1,"word-spacing":1,"word-wrap":1}},"clean":{"variables":false},"compress":{"variables":false}}';
 }
 `;
 var __awaiter$4 = globalThis && globalThis.__awaiter || function(thisArg, _arguments, P, generator) {
@@ -36464,22 +37195,6 @@ var __awaiter$4 = globalThis && globalThis.__awaiter || function(thisArg, _argum
   });
 };
 class SDatetimePickerComponent extends SLitComponent {
-  constructor() {
-    var _a2;
-    super(__deepMerge({
-      name: "s-datetime-picker",
-      interface: SDatetimePickerComponentInterface
-    }));
-    this._originalState = {};
-    this._hasInput = false;
-    this._hasButton = false;
-    this._isInInteraction = false;
-    this._$input = this.querySelector("input");
-    this._hasInput = this._$input !== null;
-    this._$button = this.querySelector("button");
-    (_a2 = this._$button) === null || _a2 === void 0 ? void 0 : _a2.addEventListener("click", (e) => e.preventDefault());
-    this._hasButton = this._$button !== null;
-  }
   static get properties() {
     return SLitComponent.propertiesFromInterface({}, SDatetimePickerComponentInterface);
   }
@@ -36502,6 +37217,22 @@ class SDatetimePickerComponent extends SLitComponent {
       format: void 0
     };
   }
+  constructor() {
+    var _a2;
+    super(__deepMerge({
+      name: "s-datetime-picker",
+      interface: SDatetimePickerComponentInterface
+    }));
+    this._originalState = {};
+    this._hasInput = false;
+    this._hasButton = false;
+    this._isInInteraction = false;
+    this._$input = this.querySelector("input");
+    this._hasInput = this._$input !== null;
+    this._$button = this.querySelector("button");
+    (_a2 = this._$button) === null || _a2 === void 0 ? void 0 : _a2.addEventListener("click", (e) => e.preventDefault());
+    this._hasButton = this._$button !== null;
+  }
   mount() {
     return __awaiter$4(this, void 0, void 0, function* () {
       this._restoreState();
@@ -36516,14 +37247,14 @@ class SDatetimePickerComponent extends SLitComponent {
         this._$input = this.querySelector("input");
       }
       this.utils.fastdom.mutate(() => {
-        var _a2, _b2, _c2, _d2, _e, _f;
+        var _a2, _b2, _c2, _d2, _e2, _f;
         if (!((_a2 = this._$input) === null || _a2 === void 0 ? void 0 : _a2.hasAttribute("name"))) {
           (_b2 = this._$input) === null || _b2 === void 0 ? void 0 : _b2.setAttribute("name", this.props.name);
         }
         if (!((_c2 = this._$input) === null || _c2 === void 0 ? void 0 : _c2.hasAttribute("placeholder"))) {
           (_d2 = this._$input) === null || _d2 === void 0 ? void 0 : _d2.setAttribute("placeholder", this.props.placeholder);
         }
-        if (!((_e = this._$input) === null || _e === void 0 ? void 0 : _e.hasAttribute("autocomplete"))) {
+        if (!((_e2 = this._$input) === null || _e2 === void 0 ? void 0 : _e2.hasAttribute("autocomplete"))) {
           (_f = this._$input) === null || _f === void 0 ? void 0 : _f.setAttribute("autocomplete", "off");
         }
         this._$input.setAttribute("readonly", true);
@@ -37130,7 +37861,7 @@ const __css$5 = `.s-google-map {
         font: inherit;
     }body:after {
                     display: none;;
-                    content: '{"lod":{"enabled":true,"defaultLevel":3,"botLevel":1,"levels":{"0":{"name":"bare","speedIndex":0},"1":{"name":"bare+","speedIndex":30},"2":{"name":"low","speedIndex":40},"3":{"name":"medium","speedIndex":50},"4":{"name":"high","speedIndex":60}},"method":"class","defaultAction":">=","cssProperties":{"animation":3,"animation-delay":3,"animation-direction":3,"animation-duration":3,"animation-fill-mode":3,"animation-iteration-count":3,"animation-name":3,"animation-play-state":3,"animation-timing-function":3,"backdrop-filter":3,"background":2,"background-attachment":2,"background-blend-mode":3,"background-clip":2,"background-color":2,"background-image":2,"background-origin":2,"background-position":2,"background-repeat":2,"background-size":2,"border":2,"border-bottom":2,"border-bottom-color":2,"border-bottom-left-radius":2,"border-bottom-right-radius":2,"border-bottom-style":2,"border-bottom-width":2,"border-collapse":2,"border-color":2,"border-image":2,"border-image-outset":2,"border-image-repeat":2,"border-image-slice":2,"border-image-source":2,"border-image-width":2,"border-left":2,"border-left-color":2,"border-left-style":2,"border-left-width":2,"border-radius":2,"border-right":2,"border-right-color":2,"border-right-style":2,"border-right-width":2,"border-spacing":2,"border-style":2,"border-top":2,"border-top-color":2,"border-top-left-radius":2,"border-top-right-radius":2,"border-top-style":2,"border-top-width":2,"border-width":2,"box-shadow":3,"caret-color":1,"color":2,"column-count":2,"column-fill":2,"column-gap":2,"column-rule":2,"column-rule-color":2,"column-rule-style":2,"column-rule-width":2,"counter-increment":2,"counter-reset":2,"filter":3,"font":1,"font-family":1,"font-kerning":1,"font-size":1,"font-stretch":1,"font-style":1,"font-variant":1,"font-weight":1,"gap":1,"letter-spacing":1,"line-height":1,"list-style-image":2,"margin":1,"margin-bottom":1,"margin-left":1,"margin-right":1,"margin-top":1,"margin-inline":1,"margin-inline-start":1,"margin-inline-end":1,"margin-block":1,"margin-block-start":1,"margin-block-end":1,"outline":2,"outline-color":2,"outline-offset":2,"outline-style":2,"outline-width":2,"padding":1,"padding-bottom":1,"padding-left":1,"padding-right":1,"padding-top":1,"padding-inline":1,"padding-inline-start":1,"padding-inline-end":1,"padding-block":1,"padding-block-start":1,"padding-block-end":1,"text-decoration":2,"text-decoration-color":2,"text-decoration-line":2,"text-indent":2,"text-justify":2,"text-overflow":2,"text-shadow":3,"text-transform":2,"transition":3,"transition-delay":3,"transition-duration":3,"transition-property":3,"transition-timing-function":3,"word-break":1,"word-spacing":1,"word-wrap":1}},"clean":{"variables":false},"compress":{"variables":false}}';
+                    content: '{"lod":{"enabled":true,"defaultLevel":3,"botLevel":1,"levels":{"0":{"name":"bare","speedIndex":0},"1":{"name":"lnf","speedIndex":30},"2":{"name":"theme","speedIndex":40},"3":{"name":"high","speedIndex":50},"4":{"name":"ultra","speedIndex":60}},"method":"class","defaultAction":">=","cssProperties":{"animation":2,"animation-delay":2,"animation-direction":2,"animation-duration":2,"animation-fill-mode":2,"animation-iteration-count":2,"animation-name":2,"animation-play-state":2,"animation-timing-function":2,"backdrop-filter":3,"background":1,"background-attachment":1,"background-blend-mode":3,"background-clip":1,"background-color":1,"background-image":1,"background-origin":1,"background-position":1,"background-repeat":1,"background-size":1,"border":1,"border-bottom":1,"border-bottom-color":1,"border-bottom-left-radius":1,"border-bottom-right-radius":1,"border-bottom-style":1,"border-bottom-width":1,"border-collapse":1,"border-color":1,"border-image":1,"border-image-outset":1,"border-image-repeat":1,"border-image-slice":1,"border-image-source":1,"border-image-width":1,"border-left":1,"border-left-color":1,"border-left-style":1,"border-left-width":1,"border-radius":1,"border-right":1,"border-right-color":1,"border-right-style":1,"border-right-width":1,"border-spacing":1,"border-style":1,"border-top":1,"border-top-color":1,"border-top-left-radius":1,"border-top-right-radius":1,"border-top-style":1,"border-top-width":1,"border-width":1,"box-shadow":1,"caret-color":1,"color":1,"column-count":1,"column-fill":1,"column-rule":1,"column-rule-color":1,"column-rule-style":1,"column-rule-width":1,"counter-increment":1,"counter-reset":1,"filter":1,"list-style-image":1,"outline":1,"outline-color":1,"outline-offset":1,"outline-style":1,"outline-width":1,"text-decoration":1,"text-decoration-color":1,"text-decoration-line":1,"text-indent":1,"text-justify":1,"text-overflow":1,"text-shadow":2,"text-transform":1,"transition":1,"transition-delay":1,"transition-duration":1,"transition-property":1,"transition-timing-function":1,"word-break":1,"word-spacing":1,"word-wrap":1}},"clean":{"variables":false},"compress":{"variables":false}}';
 }
 `;
 function define$d(props = {}, tagName = "s-google-map") {
@@ -37164,13 +37895,6 @@ var __awaiter$3 = globalThis && globalThis.__awaiter || function(thisArg, _argum
   });
 };
 class SGoogleMapComponent extends SLitComponent {
-  constructor() {
-    super(__deepMerge({
-      name: "s-google-map",
-      interface: SGoogleMapComponentInterface
-    }));
-    this._markers = this._getMarkers();
-  }
   static get properties() {
     return SLitComponent.propertiesFromInterface({}, SGoogleMapComponentInterface);
   }
@@ -37193,6 +37917,13 @@ class SGoogleMapComponent extends SLitComponent {
       document.head.appendChild($script);
     });
     return this._loadApiPromise;
+  }
+  constructor() {
+    super(__deepMerge({
+      name: "s-google-map",
+      interface: SGoogleMapComponentInterface
+    }));
+    this._markers = this._getMarkers();
   }
   mount() {
     return __awaiter$3(this, void 0, void 0, function* () {
@@ -37364,10 +38095,18 @@ const __css$4 = `.s-rating {
     pointer-events: none;
 }body:after {
                     display: none;;
-                    content: '{"lod":{"enabled":true,"defaultLevel":3,"botLevel":1,"levels":{"0":{"name":"bare","speedIndex":0},"1":{"name":"bare+","speedIndex":30},"2":{"name":"low","speedIndex":40},"3":{"name":"medium","speedIndex":50},"4":{"name":"high","speedIndex":60}},"method":"class","defaultAction":">=","cssProperties":{"animation":3,"animation-delay":3,"animation-direction":3,"animation-duration":3,"animation-fill-mode":3,"animation-iteration-count":3,"animation-name":3,"animation-play-state":3,"animation-timing-function":3,"backdrop-filter":3,"background":2,"background-attachment":2,"background-blend-mode":3,"background-clip":2,"background-color":2,"background-image":2,"background-origin":2,"background-position":2,"background-repeat":2,"background-size":2,"border":2,"border-bottom":2,"border-bottom-color":2,"border-bottom-left-radius":2,"border-bottom-right-radius":2,"border-bottom-style":2,"border-bottom-width":2,"border-collapse":2,"border-color":2,"border-image":2,"border-image-outset":2,"border-image-repeat":2,"border-image-slice":2,"border-image-source":2,"border-image-width":2,"border-left":2,"border-left-color":2,"border-left-style":2,"border-left-width":2,"border-radius":2,"border-right":2,"border-right-color":2,"border-right-style":2,"border-right-width":2,"border-spacing":2,"border-style":2,"border-top":2,"border-top-color":2,"border-top-left-radius":2,"border-top-right-radius":2,"border-top-style":2,"border-top-width":2,"border-width":2,"box-shadow":3,"caret-color":1,"color":2,"column-count":2,"column-fill":2,"column-gap":2,"column-rule":2,"column-rule-color":2,"column-rule-style":2,"column-rule-width":2,"counter-increment":2,"counter-reset":2,"filter":3,"font":1,"font-family":1,"font-kerning":1,"font-size":1,"font-stretch":1,"font-style":1,"font-variant":1,"font-weight":1,"gap":1,"letter-spacing":1,"line-height":1,"list-style-image":2,"margin":1,"margin-bottom":1,"margin-left":1,"margin-right":1,"margin-top":1,"margin-inline":1,"margin-inline-start":1,"margin-inline-end":1,"margin-block":1,"margin-block-start":1,"margin-block-end":1,"outline":2,"outline-color":2,"outline-offset":2,"outline-style":2,"outline-width":2,"padding":1,"padding-bottom":1,"padding-left":1,"padding-right":1,"padding-top":1,"padding-inline":1,"padding-inline-start":1,"padding-inline-end":1,"padding-block":1,"padding-block-start":1,"padding-block-end":1,"text-decoration":2,"text-decoration-color":2,"text-decoration-line":2,"text-indent":2,"text-justify":2,"text-overflow":2,"text-shadow":3,"text-transform":2,"transition":3,"transition-delay":3,"transition-duration":3,"transition-property":3,"transition-timing-function":3,"word-break":1,"word-spacing":1,"word-wrap":1}},"clean":{"variables":false},"compress":{"variables":false}}';
+                    content: '{"lod":{"enabled":true,"defaultLevel":3,"botLevel":1,"levels":{"0":{"name":"bare","speedIndex":0},"1":{"name":"lnf","speedIndex":30},"2":{"name":"theme","speedIndex":40},"3":{"name":"high","speedIndex":50},"4":{"name":"ultra","speedIndex":60}},"method":"class","defaultAction":">=","cssProperties":{"animation":2,"animation-delay":2,"animation-direction":2,"animation-duration":2,"animation-fill-mode":2,"animation-iteration-count":2,"animation-name":2,"animation-play-state":2,"animation-timing-function":2,"backdrop-filter":3,"background":1,"background-attachment":1,"background-blend-mode":3,"background-clip":1,"background-color":1,"background-image":1,"background-origin":1,"background-position":1,"background-repeat":1,"background-size":1,"border":1,"border-bottom":1,"border-bottom-color":1,"border-bottom-left-radius":1,"border-bottom-right-radius":1,"border-bottom-style":1,"border-bottom-width":1,"border-collapse":1,"border-color":1,"border-image":1,"border-image-outset":1,"border-image-repeat":1,"border-image-slice":1,"border-image-source":1,"border-image-width":1,"border-left":1,"border-left-color":1,"border-left-style":1,"border-left-width":1,"border-radius":1,"border-right":1,"border-right-color":1,"border-right-style":1,"border-right-width":1,"border-spacing":1,"border-style":1,"border-top":1,"border-top-color":1,"border-top-left-radius":1,"border-top-right-radius":1,"border-top-style":1,"border-top-width":1,"border-width":1,"box-shadow":1,"caret-color":1,"color":1,"column-count":1,"column-fill":1,"column-rule":1,"column-rule-color":1,"column-rule-style":1,"column-rule-width":1,"counter-increment":1,"counter-reset":1,"filter":1,"list-style-image":1,"outline":1,"outline-color":1,"outline-offset":1,"outline-style":1,"outline-width":1,"text-decoration":1,"text-decoration-color":1,"text-decoration-line":1,"text-indent":1,"text-justify":1,"text-overflow":1,"text-shadow":2,"text-transform":1,"transition":1,"transition-delay":1,"transition-duration":1,"transition-property":1,"transition-timing-function":1,"word-break":1,"word-spacing":1,"word-wrap":1}},"clean":{"variables":false},"compress":{"variables":false}}';
 }
 `;
 class SRatingComponent extends SLitComponent {
+  static get properties() {
+    return SLitComponent.propertiesFromInterface({}, SRatingComponentInterface);
+  }
+  static get styles() {
+    return css$1`
+            ${unsafeCSS(__css$4)}
+        `;
+  }
   constructor() {
     super({
       name: "s-rating",
@@ -37376,14 +38115,6 @@ class SRatingComponent extends SLitComponent {
     this.state = {
       value: 0
     };
-  }
-  static get properties() {
-    return SLitComponent.propertiesFromInterface({}, SRatingComponentInterface);
-  }
-  static get styles() {
-    return css$1`
-            ${unsafeCSS(__css$4)}
-        `;
   }
   mount() {
     this._setRating(this.props.value);
@@ -37468,20 +38199,13 @@ const __css$3 = `.s-theme-switcher {
                 pointer-events: all;
             }body:after {
                     display: none;;
-                    content: '{"lod":{"enabled":true,"defaultLevel":3,"botLevel":1,"levels":{"0":{"name":"bare","speedIndex":0},"1":{"name":"bare+","speedIndex":30},"2":{"name":"low","speedIndex":40},"3":{"name":"medium","speedIndex":50},"4":{"name":"high","speedIndex":60}},"method":"class","defaultAction":">=","cssProperties":{"animation":3,"animation-delay":3,"animation-direction":3,"animation-duration":3,"animation-fill-mode":3,"animation-iteration-count":3,"animation-name":3,"animation-play-state":3,"animation-timing-function":3,"backdrop-filter":3,"background":2,"background-attachment":2,"background-blend-mode":3,"background-clip":2,"background-color":2,"background-image":2,"background-origin":2,"background-position":2,"background-repeat":2,"background-size":2,"border":2,"border-bottom":2,"border-bottom-color":2,"border-bottom-left-radius":2,"border-bottom-right-radius":2,"border-bottom-style":2,"border-bottom-width":2,"border-collapse":2,"border-color":2,"border-image":2,"border-image-outset":2,"border-image-repeat":2,"border-image-slice":2,"border-image-source":2,"border-image-width":2,"border-left":2,"border-left-color":2,"border-left-style":2,"border-left-width":2,"border-radius":2,"border-right":2,"border-right-color":2,"border-right-style":2,"border-right-width":2,"border-spacing":2,"border-style":2,"border-top":2,"border-top-color":2,"border-top-left-radius":2,"border-top-right-radius":2,"border-top-style":2,"border-top-width":2,"border-width":2,"box-shadow":3,"caret-color":1,"color":2,"column-count":2,"column-fill":2,"column-gap":2,"column-rule":2,"column-rule-color":2,"column-rule-style":2,"column-rule-width":2,"counter-increment":2,"counter-reset":2,"filter":3,"font":1,"font-family":1,"font-kerning":1,"font-size":1,"font-stretch":1,"font-style":1,"font-variant":1,"font-weight":1,"gap":1,"letter-spacing":1,"line-height":1,"list-style-image":2,"margin":1,"margin-bottom":1,"margin-left":1,"margin-right":1,"margin-top":1,"margin-inline":1,"margin-inline-start":1,"margin-inline-end":1,"margin-block":1,"margin-block-start":1,"margin-block-end":1,"outline":2,"outline-color":2,"outline-offset":2,"outline-style":2,"outline-width":2,"padding":1,"padding-bottom":1,"padding-left":1,"padding-right":1,"padding-top":1,"padding-inline":1,"padding-inline-start":1,"padding-inline-end":1,"padding-block":1,"padding-block-start":1,"padding-block-end":1,"text-decoration":2,"text-decoration-color":2,"text-decoration-line":2,"text-indent":2,"text-justify":2,"text-overflow":2,"text-shadow":3,"text-transform":2,"transition":3,"transition-delay":3,"transition-duration":3,"transition-property":3,"transition-timing-function":3,"word-break":1,"word-spacing":1,"word-wrap":1}},"clean":{"variables":false},"compress":{"variables":false}}';
+                    content: '{"lod":{"enabled":true,"defaultLevel":3,"botLevel":1,"levels":{"0":{"name":"bare","speedIndex":0},"1":{"name":"lnf","speedIndex":30},"2":{"name":"theme","speedIndex":40},"3":{"name":"high","speedIndex":50},"4":{"name":"ultra","speedIndex":60}},"method":"class","defaultAction":">=","cssProperties":{"animation":2,"animation-delay":2,"animation-direction":2,"animation-duration":2,"animation-fill-mode":2,"animation-iteration-count":2,"animation-name":2,"animation-play-state":2,"animation-timing-function":2,"backdrop-filter":3,"background":1,"background-attachment":1,"background-blend-mode":3,"background-clip":1,"background-color":1,"background-image":1,"background-origin":1,"background-position":1,"background-repeat":1,"background-size":1,"border":1,"border-bottom":1,"border-bottom-color":1,"border-bottom-left-radius":1,"border-bottom-right-radius":1,"border-bottom-style":1,"border-bottom-width":1,"border-collapse":1,"border-color":1,"border-image":1,"border-image-outset":1,"border-image-repeat":1,"border-image-slice":1,"border-image-source":1,"border-image-width":1,"border-left":1,"border-left-color":1,"border-left-style":1,"border-left-width":1,"border-radius":1,"border-right":1,"border-right-color":1,"border-right-style":1,"border-right-width":1,"border-spacing":1,"border-style":1,"border-top":1,"border-top-color":1,"border-top-left-radius":1,"border-top-right-radius":1,"border-top-style":1,"border-top-width":1,"border-width":1,"box-shadow":1,"caret-color":1,"color":1,"column-count":1,"column-fill":1,"column-rule":1,"column-rule-color":1,"column-rule-style":1,"column-rule-width":1,"counter-increment":1,"counter-reset":1,"filter":1,"list-style-image":1,"outline":1,"outline-color":1,"outline-offset":1,"outline-style":1,"outline-width":1,"text-decoration":1,"text-decoration-color":1,"text-decoration-line":1,"text-indent":1,"text-justify":1,"text-overflow":1,"text-shadow":2,"text-transform":1,"transition":1,"transition-delay":1,"transition-duration":1,"transition-property":1,"transition-timing-function":1,"word-break":1,"word-spacing":1,"word-wrap":1}},"clean":{"variables":false},"compress":{"variables":false}}';
 }
 `;
 function define$b(props = {}, tagName = "s-theme-switcher") {
   SThemeSwitcherComponent.define(tagName, SThemeSwitcherComponent, props);
 }
 class SThemeSwitcherComponent extends SLitComponent {
-  constructor() {
-    super({
-      name: "s-theme-switcher",
-      interface: SThemeSwitcherComponentInterface
-    });
-    this._themes = STheme.themes;
-  }
   static get properties() {
     return SLitComponent.propertiesFromInterface({}, SThemeSwitcherComponentInterface);
   }
@@ -37489,6 +38213,13 @@ class SThemeSwitcherComponent extends SLitComponent {
     return css$1`
             ${unsafeCSS(__css$3)}
         `;
+  }
+  constructor() {
+    super({
+      name: "s-theme-switcher",
+      interface: SThemeSwitcherComponentInterface
+    });
+    this._themes = STheme.themes;
   }
   _toggleDarkMode() {
     if (STheme.isDark()) {
@@ -37643,7 +38374,7 @@ const __css$2 = `[s-highlight][type='light'] {
         opacity: var(--s-highlight-intensity, 0.6);
     }body:after {
                     display: none;;
-                    content: '{"lod":{"enabled":true,"defaultLevel":3,"botLevel":1,"levels":{"0":{"name":"bare","speedIndex":0},"1":{"name":"bare+","speedIndex":30},"2":{"name":"low","speedIndex":40},"3":{"name":"medium","speedIndex":50},"4":{"name":"high","speedIndex":60}},"method":"class","defaultAction":">=","cssProperties":{"animation":3,"animation-delay":3,"animation-direction":3,"animation-duration":3,"animation-fill-mode":3,"animation-iteration-count":3,"animation-name":3,"animation-play-state":3,"animation-timing-function":3,"backdrop-filter":3,"background":2,"background-attachment":2,"background-blend-mode":3,"background-clip":2,"background-color":2,"background-image":2,"background-origin":2,"background-position":2,"background-repeat":2,"background-size":2,"border":2,"border-bottom":2,"border-bottom-color":2,"border-bottom-left-radius":2,"border-bottom-right-radius":2,"border-bottom-style":2,"border-bottom-width":2,"border-collapse":2,"border-color":2,"border-image":2,"border-image-outset":2,"border-image-repeat":2,"border-image-slice":2,"border-image-source":2,"border-image-width":2,"border-left":2,"border-left-color":2,"border-left-style":2,"border-left-width":2,"border-radius":2,"border-right":2,"border-right-color":2,"border-right-style":2,"border-right-width":2,"border-spacing":2,"border-style":2,"border-top":2,"border-top-color":2,"border-top-left-radius":2,"border-top-right-radius":2,"border-top-style":2,"border-top-width":2,"border-width":2,"box-shadow":3,"caret-color":1,"color":2,"column-count":2,"column-fill":2,"column-gap":2,"column-rule":2,"column-rule-color":2,"column-rule-style":2,"column-rule-width":2,"counter-increment":2,"counter-reset":2,"filter":3,"font":1,"font-family":1,"font-kerning":1,"font-size":1,"font-stretch":1,"font-style":1,"font-variant":1,"font-weight":1,"gap":1,"letter-spacing":1,"line-height":1,"list-style-image":2,"margin":1,"margin-bottom":1,"margin-left":1,"margin-right":1,"margin-top":1,"margin-inline":1,"margin-inline-start":1,"margin-inline-end":1,"margin-block":1,"margin-block-start":1,"margin-block-end":1,"outline":2,"outline-color":2,"outline-offset":2,"outline-style":2,"outline-width":2,"padding":1,"padding-bottom":1,"padding-left":1,"padding-right":1,"padding-top":1,"padding-inline":1,"padding-inline-start":1,"padding-inline-end":1,"padding-block":1,"padding-block-start":1,"padding-block-end":1,"text-decoration":2,"text-decoration-color":2,"text-decoration-line":2,"text-indent":2,"text-justify":2,"text-overflow":2,"text-shadow":3,"text-transform":2,"transition":3,"transition-delay":3,"transition-duration":3,"transition-property":3,"transition-timing-function":3,"word-break":1,"word-spacing":1,"word-wrap":1}},"clean":{"variables":false},"compress":{"variables":false}}';
+                    content: '{"lod":{"enabled":true,"defaultLevel":3,"botLevel":1,"levels":{"0":{"name":"bare","speedIndex":0},"1":{"name":"lnf","speedIndex":30},"2":{"name":"theme","speedIndex":40},"3":{"name":"high","speedIndex":50},"4":{"name":"ultra","speedIndex":60}},"method":"class","defaultAction":">=","cssProperties":{"animation":2,"animation-delay":2,"animation-direction":2,"animation-duration":2,"animation-fill-mode":2,"animation-iteration-count":2,"animation-name":2,"animation-play-state":2,"animation-timing-function":2,"backdrop-filter":3,"background":1,"background-attachment":1,"background-blend-mode":3,"background-clip":1,"background-color":1,"background-image":1,"background-origin":1,"background-position":1,"background-repeat":1,"background-size":1,"border":1,"border-bottom":1,"border-bottom-color":1,"border-bottom-left-radius":1,"border-bottom-right-radius":1,"border-bottom-style":1,"border-bottom-width":1,"border-collapse":1,"border-color":1,"border-image":1,"border-image-outset":1,"border-image-repeat":1,"border-image-slice":1,"border-image-source":1,"border-image-width":1,"border-left":1,"border-left-color":1,"border-left-style":1,"border-left-width":1,"border-radius":1,"border-right":1,"border-right-color":1,"border-right-style":1,"border-right-width":1,"border-spacing":1,"border-style":1,"border-top":1,"border-top-color":1,"border-top-left-radius":1,"border-top-right-radius":1,"border-top-style":1,"border-top-width":1,"border-width":1,"box-shadow":1,"caret-color":1,"color":1,"column-count":1,"column-fill":1,"column-rule":1,"column-rule-color":1,"column-rule-style":1,"column-rule-width":1,"counter-increment":1,"counter-reset":1,"filter":1,"list-style-image":1,"outline":1,"outline-color":1,"outline-offset":1,"outline-style":1,"outline-width":1,"text-decoration":1,"text-decoration-color":1,"text-decoration-line":1,"text-indent":1,"text-justify":1,"text-overflow":1,"text-shadow":2,"text-transform":1,"transition":1,"transition-delay":1,"transition-duration":1,"transition-property":1,"transition-timing-function":1,"word-break":1,"word-spacing":1,"word-wrap":1}},"clean":{"variables":false},"compress":{"variables":false}}';
 }
 `;
 var __awaiter$2 = globalThis && globalThis.__awaiter || function(thisArg, _arguments, P, generator) {
@@ -37731,7 +38462,7 @@ const __css$1 = `template[s-lazy] {
     height: calc(100 * var(--vh,1vh)) ;
 }body:after {
                     display: none;;
-                    content: '{"lod":{"enabled":true,"defaultLevel":3,"botLevel":1,"levels":{"0":{"name":"bare","speedIndex":0},"1":{"name":"bare+","speedIndex":30},"2":{"name":"low","speedIndex":40},"3":{"name":"medium","speedIndex":50},"4":{"name":"high","speedIndex":60}},"method":"class","defaultAction":">=","cssProperties":{"animation":3,"animation-delay":3,"animation-direction":3,"animation-duration":3,"animation-fill-mode":3,"animation-iteration-count":3,"animation-name":3,"animation-play-state":3,"animation-timing-function":3,"backdrop-filter":3,"background":2,"background-attachment":2,"background-blend-mode":3,"background-clip":2,"background-color":2,"background-image":2,"background-origin":2,"background-position":2,"background-repeat":2,"background-size":2,"border":2,"border-bottom":2,"border-bottom-color":2,"border-bottom-left-radius":2,"border-bottom-right-radius":2,"border-bottom-style":2,"border-bottom-width":2,"border-collapse":2,"border-color":2,"border-image":2,"border-image-outset":2,"border-image-repeat":2,"border-image-slice":2,"border-image-source":2,"border-image-width":2,"border-left":2,"border-left-color":2,"border-left-style":2,"border-left-width":2,"border-radius":2,"border-right":2,"border-right-color":2,"border-right-style":2,"border-right-width":2,"border-spacing":2,"border-style":2,"border-top":2,"border-top-color":2,"border-top-left-radius":2,"border-top-right-radius":2,"border-top-style":2,"border-top-width":2,"border-width":2,"box-shadow":3,"caret-color":1,"color":2,"column-count":2,"column-fill":2,"column-gap":2,"column-rule":2,"column-rule-color":2,"column-rule-style":2,"column-rule-width":2,"counter-increment":2,"counter-reset":2,"filter":3,"font":1,"font-family":1,"font-kerning":1,"font-size":1,"font-stretch":1,"font-style":1,"font-variant":1,"font-weight":1,"gap":1,"letter-spacing":1,"line-height":1,"list-style-image":2,"margin":1,"margin-bottom":1,"margin-left":1,"margin-right":1,"margin-top":1,"margin-inline":1,"margin-inline-start":1,"margin-inline-end":1,"margin-block":1,"margin-block-start":1,"margin-block-end":1,"outline":2,"outline-color":2,"outline-offset":2,"outline-style":2,"outline-width":2,"padding":1,"padding-bottom":1,"padding-left":1,"padding-right":1,"padding-top":1,"padding-inline":1,"padding-inline-start":1,"padding-inline-end":1,"padding-block":1,"padding-block-start":1,"padding-block-end":1,"text-decoration":2,"text-decoration-color":2,"text-decoration-line":2,"text-indent":2,"text-justify":2,"text-overflow":2,"text-shadow":3,"text-transform":2,"transition":3,"transition-delay":3,"transition-duration":3,"transition-property":3,"transition-timing-function":3,"word-break":1,"word-spacing":1,"word-wrap":1}},"clean":{"variables":false},"compress":{"variables":false}}';
+                    content: '{"lod":{"enabled":true,"defaultLevel":3,"botLevel":1,"levels":{"0":{"name":"bare","speedIndex":0},"1":{"name":"lnf","speedIndex":30},"2":{"name":"theme","speedIndex":40},"3":{"name":"high","speedIndex":50},"4":{"name":"ultra","speedIndex":60}},"method":"class","defaultAction":">=","cssProperties":{"animation":2,"animation-delay":2,"animation-direction":2,"animation-duration":2,"animation-fill-mode":2,"animation-iteration-count":2,"animation-name":2,"animation-play-state":2,"animation-timing-function":2,"backdrop-filter":3,"background":1,"background-attachment":1,"background-blend-mode":3,"background-clip":1,"background-color":1,"background-image":1,"background-origin":1,"background-position":1,"background-repeat":1,"background-size":1,"border":1,"border-bottom":1,"border-bottom-color":1,"border-bottom-left-radius":1,"border-bottom-right-radius":1,"border-bottom-style":1,"border-bottom-width":1,"border-collapse":1,"border-color":1,"border-image":1,"border-image-outset":1,"border-image-repeat":1,"border-image-slice":1,"border-image-source":1,"border-image-width":1,"border-left":1,"border-left-color":1,"border-left-style":1,"border-left-width":1,"border-radius":1,"border-right":1,"border-right-color":1,"border-right-style":1,"border-right-width":1,"border-spacing":1,"border-style":1,"border-top":1,"border-top-color":1,"border-top-left-radius":1,"border-top-right-radius":1,"border-top-style":1,"border-top-width":1,"border-width":1,"box-shadow":1,"caret-color":1,"color":1,"column-count":1,"column-fill":1,"column-rule":1,"column-rule-color":1,"column-rule-style":1,"column-rule-width":1,"counter-increment":1,"counter-reset":1,"filter":1,"list-style-image":1,"outline":1,"outline-color":1,"outline-offset":1,"outline-style":1,"outline-width":1,"text-decoration":1,"text-decoration-color":1,"text-decoration-line":1,"text-indent":1,"text-justify":1,"text-overflow":1,"text-shadow":2,"text-transform":1,"transition":1,"transition-delay":1,"transition-duration":1,"transition-property":1,"transition-timing-function":1,"word-break":1,"word-spacing":1,"word-wrap":1}},"clean":{"variables":false},"compress":{"variables":false}}';
 }
 `;
 var __awaiter$1 = globalThis && globalThis.__awaiter || function(thisArg, _arguments, P, generator) {
@@ -37841,7 +38572,7 @@ const __css = `.s-page-transition-source.error [s-page-transition-broken-link-ic
     margin-left: 0.5ch;
 }body:after {
                     display: none;;
-                    content: '{"lod":{"enabled":true,"defaultLevel":3,"botLevel":1,"levels":{"0":{"name":"bare","speedIndex":0},"1":{"name":"bare+","speedIndex":30},"2":{"name":"low","speedIndex":40},"3":{"name":"medium","speedIndex":50},"4":{"name":"high","speedIndex":60}},"method":"class","defaultAction":">=","cssProperties":{"animation":3,"animation-delay":3,"animation-direction":3,"animation-duration":3,"animation-fill-mode":3,"animation-iteration-count":3,"animation-name":3,"animation-play-state":3,"animation-timing-function":3,"backdrop-filter":3,"background":2,"background-attachment":2,"background-blend-mode":3,"background-clip":2,"background-color":2,"background-image":2,"background-origin":2,"background-position":2,"background-repeat":2,"background-size":2,"border":2,"border-bottom":2,"border-bottom-color":2,"border-bottom-left-radius":2,"border-bottom-right-radius":2,"border-bottom-style":2,"border-bottom-width":2,"border-collapse":2,"border-color":2,"border-image":2,"border-image-outset":2,"border-image-repeat":2,"border-image-slice":2,"border-image-source":2,"border-image-width":2,"border-left":2,"border-left-color":2,"border-left-style":2,"border-left-width":2,"border-radius":2,"border-right":2,"border-right-color":2,"border-right-style":2,"border-right-width":2,"border-spacing":2,"border-style":2,"border-top":2,"border-top-color":2,"border-top-left-radius":2,"border-top-right-radius":2,"border-top-style":2,"border-top-width":2,"border-width":2,"box-shadow":3,"caret-color":1,"color":2,"column-count":2,"column-fill":2,"column-gap":2,"column-rule":2,"column-rule-color":2,"column-rule-style":2,"column-rule-width":2,"counter-increment":2,"counter-reset":2,"filter":3,"font":1,"font-family":1,"font-kerning":1,"font-size":1,"font-stretch":1,"font-style":1,"font-variant":1,"font-weight":1,"gap":1,"letter-spacing":1,"line-height":1,"list-style-image":2,"margin":1,"margin-bottom":1,"margin-left":1,"margin-right":1,"margin-top":1,"margin-inline":1,"margin-inline-start":1,"margin-inline-end":1,"margin-block":1,"margin-block-start":1,"margin-block-end":1,"outline":2,"outline-color":2,"outline-offset":2,"outline-style":2,"outline-width":2,"padding":1,"padding-bottom":1,"padding-left":1,"padding-right":1,"padding-top":1,"padding-inline":1,"padding-inline-start":1,"padding-inline-end":1,"padding-block":1,"padding-block-start":1,"padding-block-end":1,"text-decoration":2,"text-decoration-color":2,"text-decoration-line":2,"text-indent":2,"text-justify":2,"text-overflow":2,"text-shadow":3,"text-transform":2,"transition":3,"transition-delay":3,"transition-duration":3,"transition-property":3,"transition-timing-function":3,"word-break":1,"word-spacing":1,"word-wrap":1}},"clean":{"variables":false},"compress":{"variables":false}}';
+                    content: '{"lod":{"enabled":true,"defaultLevel":3,"botLevel":1,"levels":{"0":{"name":"bare","speedIndex":0},"1":{"name":"lnf","speedIndex":30},"2":{"name":"theme","speedIndex":40},"3":{"name":"high","speedIndex":50},"4":{"name":"ultra","speedIndex":60}},"method":"class","defaultAction":">=","cssProperties":{"animation":2,"animation-delay":2,"animation-direction":2,"animation-duration":2,"animation-fill-mode":2,"animation-iteration-count":2,"animation-name":2,"animation-play-state":2,"animation-timing-function":2,"backdrop-filter":3,"background":1,"background-attachment":1,"background-blend-mode":3,"background-clip":1,"background-color":1,"background-image":1,"background-origin":1,"background-position":1,"background-repeat":1,"background-size":1,"border":1,"border-bottom":1,"border-bottom-color":1,"border-bottom-left-radius":1,"border-bottom-right-radius":1,"border-bottom-style":1,"border-bottom-width":1,"border-collapse":1,"border-color":1,"border-image":1,"border-image-outset":1,"border-image-repeat":1,"border-image-slice":1,"border-image-source":1,"border-image-width":1,"border-left":1,"border-left-color":1,"border-left-style":1,"border-left-width":1,"border-radius":1,"border-right":1,"border-right-color":1,"border-right-style":1,"border-right-width":1,"border-spacing":1,"border-style":1,"border-top":1,"border-top-color":1,"border-top-left-radius":1,"border-top-right-radius":1,"border-top-style":1,"border-top-width":1,"border-width":1,"box-shadow":1,"caret-color":1,"color":1,"column-count":1,"column-fill":1,"column-rule":1,"column-rule-color":1,"column-rule-style":1,"column-rule-width":1,"counter-increment":1,"counter-reset":1,"filter":1,"list-style-image":1,"outline":1,"outline-color":1,"outline-offset":1,"outline-style":1,"outline-width":1,"text-decoration":1,"text-decoration-color":1,"text-decoration-line":1,"text-indent":1,"text-justify":1,"text-overflow":1,"text-shadow":2,"text-transform":1,"transition":1,"transition-delay":1,"transition-duration":1,"transition-property":1,"transition-timing-function":1,"word-break":1,"word-spacing":1,"word-wrap":1}},"clean":{"variables":false},"compress":{"variables":false}}';
 }
 `;
 var __awaiter = globalThis && globalThis.__awaiter || function(thisArg, _arguments, P, generator) {
@@ -38059,7 +38790,7 @@ class SPageTransitionFeature extends SFeature {
     }
   }
   _onAfter($source, code3, url, newState) {
-    var _a2, _b2, _c2, _d2, _e;
+    var _a2, _b2, _c2, _d2, _e2;
     if (url === void 0) {
       url = this._currentUrl;
     }
@@ -38091,7 +38822,7 @@ class SPageTransitionFeature extends SFeature {
           $source
         }
       });
-      (_e = (_d2 = this.props).onError) === null || _e === void 0 ? void 0 : _e.call(_d2, {
+      (_e2 = (_d2 = this.props).onError) === null || _e2 === void 0 ? void 0 : _e2.call(_d2, {
         $source
       });
     }
@@ -38216,6 +38947,15 @@ class SParallaxFeature extends SFeature {
     };
   }
 }
+function __filterObject(object, filter2) {
+  const result2 = {};
+  Object.keys(object).forEach((propertyName) => {
+    if (filter2(propertyName, object[propertyName])) {
+      result2[propertyName] = object[propertyName];
+    }
+  });
+  return result2;
+}
 new SStateManager({
   id: "ck-state",
   save: true
@@ -38264,7 +39004,7 @@ class CKDiscover extends SLitComponent {
     this.grabItem();
   }
   async grabItem() {
-    const newMap = __filter(this._docmap.map, (key, item) => {
+    const newMap = __filterObject(this._docmap.map, (key, item) => {
       var _a2, _b2;
       if (!item.platform)
         return false;
@@ -38285,7 +39025,7 @@ class CKDiscover extends SLitComponent {
     }, 200);
   }
   render() {
-    var _a2, _b2, _c2, _d2, _e, _f;
+    var _a2, _b2, _c2, _d2, _e2, _f;
     return html$1`
             <div class="ck-discover">
                 ${!this.item ? html$1`
@@ -38310,7 +39050,7 @@ class CKDiscover extends SLitComponent {
                                 ` : ""}
                           ${((_b2 = (_a2 = this.item.type) == null ? void 0 : _a2.types) == null ? void 0 : _b2[0].type) || this.item.type ? html$1`
                                     <span class="s-badge s-color:complementary"
-                                        >${(_f = (_e = (_d2 = (_c2 = this.item.type) == null ? void 0 : _c2.types) == null ? void 0 : _d2[0]) == null ? void 0 : _e.type) != null ? _f : this.item.type}</span
+                                        >${(_f = (_e2 = (_d2 = (_c2 = this.item.type) == null ? void 0 : _c2.types) == null ? void 0 : _d2[0]) == null ? void 0 : _e2.type) != null ? _f : this.item.type}</span
                                     >
                                 ` : ""}
                           <br />
@@ -38671,7 +39411,7 @@ define$t(
       return value;
     },
     templates: ({ type, item, html: html2, unsafeHTML: unsafeHTML2 }) => {
-      var _a2, _b2, _c2, _d2, _e, _f, _g;
+      var _a2, _b2, _c2, _d2, _e2, _f, _g;
       if (type === "item") {
         switch (item.type) {
           case "category":
@@ -38710,7 +39450,7 @@ define$t(
                                         &nbsp;
                                         <span class="s-badge s-color:main"
                                             >${unsafeHTML2(
-              (_e = (_d2 = (_c2 = item.type) == null ? void 0 : _c2.types) == null ? void 0 : _d2[0].type) != null ? _e : ""
+              (_e2 = (_d2 = (_c2 = item.type) == null ? void 0 : _c2.types) == null ? void 0 : _d2[0].type) != null ? _e2 : ""
             )}</span
                                         >
                                     </div>
@@ -38956,16 +39696,12 @@ class CkSettings extends SLitComponent {
     return SLitComponent.propertiesFromInterface();
   }
   async firstUpdated() {
-    const $baseColorPicker = this.querySelector("#setting-base-color");
     const $mainColorPicker = this.querySelector("#setting-main-color");
     const $accentColorPicker = this.querySelector("#setting-accent-color");
     const $complementaryColorPicker = this.querySelector(
       "#setting-complementary-color"
     );
     const $fontSizeRange = this.querySelector("#setting-font-size");
-    $baseColorPicker.addEventListener("s-color-picker.change", (e) => {
-      this._front.theme.setColor("base", e.detail.hex);
-    });
     $mainColorPicker.addEventListener("s-color-picker.change", (e) => {
       this._front.theme.setColor("main", e.detail.hex);
     });
@@ -38985,7 +39721,10 @@ class CkSettings extends SLitComponent {
   async mount() {
   }
   _setLod(level) {
+    console.log("SET", level);
+    this._front.setWireframe(level <= 0);
     this._front.setLod(level);
+    this.requestUpdate();
   }
   render() {
     return html`
@@ -39016,7 +39755,7 @@ class CkSettings extends SLitComponent {
                         </li>
             <li class="s-bg:main-surface">
               <label
-                class="s-label:responsive s-pi:50 s-pb:30 @mobile s-pi:40"
+                class="s-label:responsive s-pi:50 s-pbs:30 @mobile s-pi:40"
                 for="setting-font-size"
               >
                 <span>Level of details</span>
@@ -39024,35 +39763,54 @@ class CkSettings extends SLitComponent {
                   class="s-color:accent"
                   id="setting-lod"
                   min="0"
-                  max="2"
-                  value=${this._front.lod.level - 2}
-                  values='["Low","Medium","High"]'
+                  max="3"
+                  value=${this._front.lod.level}
+                  values='["Bare","Look and feel","Theme","High"]'
                   tooltip
                   step="1"
-                  @change=${(e) => this._setLod(parseInt(e.target.value) + 2)}
+                  @change=${(e) => this._setLod(parseInt(e.target.value))}
                 >
                 </s-range>
               </label>
-            </li>
-            <li class="s-bg:main-surface">
-              <label
-                class="s-label:responsive s-pi:50 s-pb:30 @mobile s-pi:40"
-                for="setting-base-color"
-              >
-                <span> Base color </span>
-                <s-color-picker id="setting-base-color">
-                  <div class="s-group">
-                    <input
-                      type="text"
-                      class="s-input"
-                      value="${this._front.theme.getColor("base").toHex()}"
-                    />
-                    <button class="s-btn s-color:base">
-                      <i class="s-icon:color"></i>
-                    </button>
-                  </div>
-                </s-color-picker>
-              </label>
+              <div class="s-flex s-text:right s-pi:50 s-pb:30 @mobile s-pi:40">
+                <div class="s-flex-item:grow"></div>
+                ${this._front.lod.level === 0 ? html`
+                              <p class="s-typo:p s-font:25">
+                                  The
+                                  <span class="s-typo:code">bare</span> level
+                                  contains everything about positions, sizes,
+                                  etc... It allows you to have a functional UI
+                                  without the visual styling.
+                              </p>
+                          ` : this._front.lod.level === 1 ? html`
+                              <p class="s-typo:p s-font:25">
+                                  The <span class="s-typo:code">lnf</span> level
+                                  contains the basic look and feel provided by
+                                  Coffeekraken. It's usually a good starting
+                                  point for most of your projects and everything
+                                  can be customized.
+                              </p>
+                          ` : this._front.lod.level === 2 ? html`
+                              <p class="s-typo:p s-font:25">
+                                  The
+                                  <span class="s-typo:code">theme</span> level
+                                  contains everything that is custom to this
+                                  particular website.
+                              </p>
+                          ` : this._front.lod.level === 3 ? html`
+                              <p class="s-typo:p s-font:25">
+                                  The
+                                  <span class="s-typo:code">high</span> level
+                                  can be used to activate heavy things only for
+                                  high performant systems. It can be CSS stuffs
+                                  using the mixin
+                                  <span class="s-typo:code"
+                                      >@sugar.lod high { ... }</span
+                                  >
+                                  or even JS components/features.
+                              </p>
+                          ` : ""}
+              </div>
             </li>
             <li class="s-bg:main-surface">
               <label
@@ -39401,7 +40159,7 @@ if (!window.___deepMerge) {
   };
 }
 document.env = window.___deepMerge(
-  JSON.parse(`{"PLATFORM":"browser","ENV":"development","ENVIRONMENT":"development","SUGAR":{"config":{"datetime":{"dateFormat":"YYYY-MM-DD","timeFormat":"h:mm:ss","i18n":{"previousMonth":"Previous Month","nextMonth":"Next Month","months":["January","February","March","April","May","June","July","August","September","October","November","December"],"weekdays":["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],"weekdaysShort":["Sun","Mon","Tue","Wed","Thu","Fri","Sat"]}},"google":{"gtm":"GTM-K4LMN8Q","map":{"apiKey":"AIzaSyDzFfEzhmYXRTlONUCtMWQ88uHJhsbtXY4"}},"project":{"environments":{"dev":{"branch":"develop","urls":{"website":{"label":"Template","url":"http://localhost:3000"},"admin":{"label":"Admin","url":"http://localhost:3000/admin"}}},"staging":{"branch":"staging","urls":{"website":{"label":"Template","url":"http://staging.localhost:3000"},"admin":{"label":"Admin","url":"http://staging.localhost:3000/admin"}}},"preprod":{"branch":"preprod","urls":{"website":{"label":"Template","url":"http://preprod.localhost:3000"},"admin":{"label":"Admin","url":"http://preprod.localhost:3000/admin"}}},"prod":{"branch":"prod","urls":{"website":{"label":"Template","url":"http://prod.localhost:3000"},"admin":{"label":"Admin","url":"http://prod.localhost:3000/admin"}}}}},"serve":{"img":{"imgPath":"/dist/img"},"js":{"path":"/dist/js"},"css":{"path":"/dist/css"},"icons":{"path":"/dist/icons"},"fonts":{"path":"/dist/fonts"},"cache":{"path":"/cache"}},"dashboard":{"layout":[["s-dashboard-pages"],["s-dashboard-browserstack","s-dashboard-google","s-dashboard-web-vitals","s-dashboard-responsive"],["s-dashboard-project","s-dashboard-frontend-checker"]]},"env":{"envFromLocation":{"development":"https?://(localhost|127.0.0.1|0.0.0.0|192.168.[0-9]{1,3}.[0-9]{1,3})","staging":"https?://([a-zA-Z0-9.-]+)?staging([a-zA-Z0-9.-]+)?","production":"https?://.*"},"git":{"template":{"name":"Template","commit":{}}}},"sitemapBuilder":{"sources":{"docmap":{"active":true}}},"theme":{"theme":"default","variant":"dark","themes":{"default-light":{"defaultColor":"main","color":{"current":"hsla(212,8,50,1)","base":"hsla(212,8,50,1)","main":"hsla(212,8,50,1)","accent":"#ffbb00","complementary":"#5100ff","success":"#91ff00","warning":"#ffd500","error":"#ff003b","info":"#00ffff"},"classmap":{"enabled":true,"url":"/classmap.json"},"lod":{"enabled":true,"defaultLevel":3,"botLevel":1,"levels":{"0":{"name":"bare","speedIndex":0},"1":{"name":"bare+","speedIndex":30},"2":{"name":"low","speedIndex":40},"3":{"name":"medium","speedIndex":50},"4":{"name":"high","speedIndex":60}},"method":"file","defaultAction":">=","cssProperties":{}},"easing":{"default":"cubic-bezier(0.700, 0.000, 0.305, 0.995)"},"scroll":{"duration":300,"offset":0,"offsetX":0,"offsetY":100},"partytown":{"enabled":false,"forward":["dataLayer.push","fbq","freshpaint.addPageviewProperties","freshpaint.identify","freshpaint.track","_hsq.push","Intercom","_learnq.push","ttq.track","ttq.page","ttq.load","mixpanel.track"]},"timing":{"slow":".6s","default":".3s","fast":".1s"},"transition":{"slow":"all .6s cubic-bezier(0.700, 0.000, 0.305, 0.995)","default":"all .3s cubic-bezier(0.700, 0.000, 0.305, 0.995)","fast":"all .1s cubic-bezier(0.700, 0.000, 0.305, 0.995)"},"gradient":{"defaultModifierStart":{},"defaultModifierEnd":{"lighten":20},"defaultX":"50%","defaultY":"50%","defaultAngle":"90deg","defaultTextModifierStart":{"darken":5},"defaultTextModifierEnd":{"lighten":5},"defaultTextAngle":"90deg"},"helpers":{"states":["mounted","active","loading"],"clearfix":{"default":"overflow"},"disabled":{"opacity":0.4},"truncate":{"count":10},"order":{"count":20}},"layout":{"offset":{"top":100,"right":0,"bottom":0,"left":0},"container":{"default":"1280px","wide":"1440px","full":"none"},"grid":{"1":1,"2":2,"3":3,"4":4,"5":5,"6":6,"7":7,"8":8,"9":9,"10":10,"11":11,"12":12},"layout":{"1":"1","12":"1 2","21":"2 1","112":"1 1 2","122":"1 2 2","123":"1 2 3","211":"2 1 1","221":"2 2 1","321":"3 2 1","1112":"1 1 1 2","1222":"1 2 2 2","1234":"1 2 3 4","2221":"2 2 2 1","11112":"1 1 1 1 2","12222":"1 2 2 2 2","12345":"1 2 3 4 5","22221":"2 2 2 2 1","111112":"1 1 1 1 1 2","122222":"1 2 2 2 2 2","123456":"1 2 3 4 5 6","1_2":"1 _ 2","2_1":"2 _ 1","12_33":"1 2 _ 3 3","1_23":"1 _ 2 3","1_2_3":"1 _ 2 _ 3","32_1":"3 2 _ 1","3_21":"3 _ 2 1","12_34":"1 2 _ 3 4","123_4":"1 2 3 _ 4","1_234":"1 _ 2 3 4","1_2_3_4":"1 _ 2 _ 3 _ 4","123_45":"1 2 3 _ 4 5","12_345":"1 2 _ 3 4 5","1_2345":"1 _ 2 3 4 5","1234_5":"1 2 3 4 _ 5","1_2_3_4_5":"1 _ 2 _ 3 _ 4 _ 5"}},"ratio":{"1":1,"21-9":2.3333333333333335,"16-9":1.7777777777777777,"2-3":0.6666666666666666,"4-3":1.3333333333333333,"3-4":0.75},"scalable":{"margin":false,"padding":true,"offsize":false,"font":true},"scale":{"10":1,"11":1.1,"12":1.2,"13":1.3,"14":1.4,"15":1.5,"16":1.6,"17":1.7,"18":1.8,"19":1.9,"20":2,"default":1,"01":0.1,"02":0.2,"03":0.3,"04":0.4,"05":0.5,"06":0.6,"07":0.7,"08":0.8,"09":0.9},"opacity":{"0":0,"10":0.1,"20":0.2,"30":0.3,"40":0.4,"50":0.5,"60":0.6,"70":0.7,"80":0.8,"90":0.9,"100":1},"width":{"0":"0","10":"10%","20":"20%","30":"30%","40":"40%","50":"50%","60":"60%","70":"70%","80":"80%","90":"90%","100":"100%"},"height":{"0":"0","10":"10%","20":"20%","30":"30%","40":"40%","50":"50%","60":"60%","70":"70%","80":"80%","90":"90%","100":"100%"},"depth":{"0":"0","5":"0px 0.6px 0.4px rgba(0, 0, 0, 0.006),\\n  0px 1.3px 1px rgba(0, 0, 0, 0.006),\\n  0px 2.5px 1.5px rgba(0, 0, 0, 0.005),\\n  0px 3.5px 3.4px rgba(0, 0, 0, 0.006),\\n  0px 4.4px 4.3px rgba(0, 0, 0, 0.007),\\n  0px 10px 10px rgba(0, 0, 0, 0.01)","10":"0px 0.6px 0.4px rgba(0, 0, 0, 0.006),\\n  0px 1.3px 1px rgba(0, 0, 0, 0.008),\\n  0px 2.5px 1.9px rgba(0, 0, 0, 0.01),\\n  0px 4.5px 3.4px rgba(0, 0, 0, 0.012),\\n  0px 8.4px 6.3px rgba(0, 0, 0, 0.014),\\n  0px 20px 15px rgba(0, 0, 0, 0.02)","20":"0px 0.6px 0.4px rgba(0, 0, 0, 0.006),\\n  0px 1.3px 1px rgba(0, 0, 0, 0.008),\\n  0px 2.5px 1.9px rgba(0, 0, 0, 0.01),\\n  0px 4.5px 3.4px rgba(0, 0, 0, 0.012),\\n  0px 8.4px 6.3px rgba(0, 0, 0, 0.014),\\n  0px 20px 15px rgba(0, 0, 0, 0.02)","30":"0px 0.6px 0.4px rgba(0, 0, 0, 0.008),\\n  0px 1.3px 1px rgba(0, 0, 0, 0.012),\\n  0px 2.5px 1.9px rgba(0, 0, 0, 0.015),\\n  0px 4.5px 3.4px rgba(0, 0, 0, 0.018),\\n  0px 8.4px 6.3px rgba(0, 0, 0, 0.022),\\n  0px 20px 15px rgba(0, 0, 0, 0.03)","40":"0px 0.8px 0.6px rgba(0, 0, 0, 0.008),\\n  0px 2px 1.3px rgba(0, 0, 0, 0.012),\\n  0px 3.8px 2.5px rgba(0, 0, 0, 0.015),\\n  0px 6.7px 4.5px rgba(0, 0, 0, 0.018),\\n  0px 12.5px 8.4px rgba(0, 0, 0, 0.022),\\n  0px 30px 20px rgba(0, 0, 0, 0.03)","50":"0px 1px 0.8px rgba(0, 0, 0, 0.011),\\n  0px 2.3px 2px rgba(0, 0, 0, 0.016),\\n  0px 4.4px 3.8px rgba(0, 0, 0, 0.02),\\n  0px 7.8px 6.7px rgba(0, 0, 0, 0.024),\\n  0px 14.6px 12.5px rgba(0, 0, 0, 0.029),\\n  0px 35px 30px rgba(0, 0, 0, 0.04)","60":"0px 1px 0.7px rgba(0, 0, 0, 0.011),\\n  0px 2.3px 1.7px rgba(0, 0, 0, 0.016),\\n  0px 4.4px 3.1px rgba(0, 0, 0, 0.02),\\n  0px 7.8px 5.6px rgba(0, 0, 0, 0.024),\\n  0px 14.6px 10.4px rgba(0, 0, 0, 0.029),\\n  0px 35px 25px rgba(0, 0, 0, 0.04)","70":"0px 1.1px 0.8px rgba(0, 0, 0, 0.011),\\n  0px 2.7px 2px rgba(0, 0, 0, 0.016),\\n  0px 5px 3.8px rgba(0, 0, 0, 0.02),\\n  0px 8.9px 6.7px rgba(0, 0, 0, 0.024),\\n  0px 16.7px 12.5px rgba(0, 0, 0, 0.029),\\n  0px 40px 30px rgba(0, 0, 0, 0.04)","80":"0px 1.1px 1px rgba(0, 0, 0, 0.011),\\n  0px 2.7px 2.3px rgba(0, 0, 0, 0.016),\\n  0px 5px 4.4px rgba(0, 0, 0, 0.02),\\n  0px 8.9px 7.8px rgba(0, 0, 0, 0.024),\\n  0px 16.7px 14.6px rgba(0, 0, 0, 0.029),\\n  0px 40px 35px rgba(0, 0, 0, 0.04)","90":"0px 1.4px 1.1px rgba(0, 0, 0, 0.011),\\n  0px 3.3px 2.7px rgba(0, 0, 0, 0.016),\\n  0px 6.1px 5px rgba(0, 0, 0, 0.02),\\n  0px 10.9px 8.9px rgba(0, 0, 0, 0.024),\\n  0px 20.5px 16.7px rgba(0, 0, 0, 0.029),\\n  0px 49px 40px rgba(0, 0, 0, 0.04)","100":"0px 1.4px 1.4px rgba(0, 0, 0, 0.011),\\n  0px 3.3px 3.5px rgba(0, 0, 0, 0.016),\\n  0px 6.1px 6.5px rgba(0, 0, 0, 0.02),\\n  0px 10.9px 11.6px rgba(0, 0, 0, 0.024),\\n  0px 20.5px 21.7px rgba(0, 0, 0, 0.029),\\n  0px 49px 52px rgba(0, 0, 0, 0.04)","default":"0"},"size":{"0":0.25,"5":"0.5","10":0.65,"15":0.7,"20":0.75,"25":0.95,"30":1.1,"40":1.25,"50":1.5,"60":2,"70":2.5,"80":3,"90":4,"100":5,"default":"15px"},"font":{"family":{"default":{"fontFamily":"\\"Roboto\\"","fontWeight":400,"import":"https://fonts.googleapis.com/css2?family=Roboto&display=swap"},"title":{"fontFamily":"\\"Roboto\\"","fontWeight":500,"import":"https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap"},"quote":{"fontFamily":"\\"Palatino, Times, Georgia, serif\\"","fontWeight":"normal","fontStyle":"normal","fontDisplay":"auto","capHeight":0.65},"code":{"fontFamily":"Menlo, Monaco, Consolas, Courier New, monospace","fontWeight":"normal","fontStyle":"normal","fontDisplay":"auto","capHeight":0.65}},"size":{"0":0,"5":"0.5","10":0.65,"15":0.7,"20":0.75,"25":0.95,"30":1.1,"40":1.25,"50":1.5,"60":2,"70":2.5,"80":3,"90":4,"100":5,"default":"15px"}},"border":{"width":{"0":0,"10":1,"20":2,"30":4,"40":6,"50":8,"60":12,"70":16,"80":20,"90":24,"100":30,"default":"1px"},"radius":{"0":0,"10":0.8,"20":1.6,"30":2.4,"40":3.2,"50":4,"60":5.2,"70":6.4,"80":8,"90":10,"100":12,"default":"5px"}},"space":{"0":0,"10":0.375,"20":0.75,"30":1.5,"40":2.25,"50":3.25,"60":4.25,"70":5.5,"80":7,"90":9,"100":11,"default":"1rem"},"margin":{"0":0,"10":0.375,"20":0.75,"30":1.5,"40":2.25,"50":3.25,"60":4.25,"70":5.5,"80":7,"90":9,"100":11,"default":"1rem"},"padding":{"0":0,"10":0.375,"20":0.75,"30":1.5,"40":2.25,"50":3.25,"60":4.25,"70":5.5,"80":7,"90":9,"100":11,"default":"1rem"},"offsize":{"0":0,"10":0.375,"20":0.75,"30":1.5,"40":2.25,"50":3.25,"60":4.25,"70":5.5,"80":7,"90":9,"100":11,"default":"1rem"},"media":{"defaultAction":"<=","defaultMedia":"desktop","defaultQuery":"screen","queries":{"mobile":{"minWidth":0,"maxWidth":639},"tablet":{"minWidth":640,"maxWidth":1279},"desktop":{"minWidth":1280,"maxWidth":2047},"wide":{"minWidth":2048,"maxWidth":null}}},"ui":{"default":{"paddingInline":1.5,"paddingBlock":0.75,"borderRadius":1,"borderWidth":"1px","transition":"all .1s cubic-bezier(0.700, 0.000, 0.305, 0.995)","defaultLnf":"solid","depth":"0","outline":true,"spacing":1.5,"rhythmVertical":{"margin-bottom":60}},"form":{"paddingInline":1,"paddingBlock":0.75,"borderRadius":1,"borderWidth":"1px","transition":"all .1s cubic-bezier(0.700, 0.000, 0.305, 0.995)","outline":true,"depth":"0","rhythmVertical":{"margin-bottom":40}},"outline":{"active":true,"borderWidth":"10px","borderRadius":1,"transition":"all .2s ease-out"},"scrollbar":{"size":"2px","color":"accent"},"label":{"defaultLnf":"inline"},"dropdown":{"paddingInline":0.75,"paddingBlock":0.75,"itemPaddingInline":1.5,"itemPaddingBlock":0.75},"list":{"defaultLnf":"dl","bulletChar":"-"},"fsTree":{"bulletChar":"\u25CF"},"tooltip":{"defaultPosition":"top","arrowSize":"15px"},"loader":{"duration":"1s","easing":"linear"}},"typo":{"h1":{"label":"H1","group":"style","style":{"display":"block","fontFamily":"title","fontSize":80,"lineHeight":1.3,"maxWidth":"55ch","mobile":{"fontSize":70}},"rhythmVertical":{"marginBottom":50}},"h2":{"label":"H2","group":"style","style":{"display":"block","fontFamily":"title","fontSize":70,"lineHeight":1.3,"maxWidth":"55ch","mobile":{"fontSize":60}},"rhythmVertical":{"marginBottom":50}},"h3":{"label":"H3","group":"style","style":{"display":"block","fontFamily":"title","fontSize":60,"lineHeight":1.3,"maxWidth":"55ch","mobile":{"fontSize":50}},"rhythmVertical":{"marginBottom":50}},"h4":{"label":"H4","group":"style","style":{"display":"block","fontFamily":"title","fontSize":50,"lineHeight":1.3,"maxWidth":"55ch","mobile":{"fontSize":40}},"rhythmVertical":{"marginBottom":50}},"h5":{"label":"H5","group":"style","style":{"display":"block","fontFamily":"title","fontSize":40,"lineHeight":1.3,"maxWidth":"55ch","mobile":{"fontSize":30}},"rhythmVertical":{"marginBottom":40}},"h6":{"label":"H6","group":"style","style":{"display":"block","fontFamily":"title","fontSize":30,"lineHeight":1.3,"maxWidth":"55ch","mobile":{"fontSize":30}},"hythmVertical":{"marginBottom":40}},"p":{"label":"Paragraph","group":"style","default":true,"style":{"display":"block","fontFamily":"default","fontSize":30,"lineHeight":1.8,"maxWidth":"55ch"},"rhythmVertical":{"marginBottom":40}},"lead":{"label":"Lead paragraph","group":"style","style":{"display":"block","fontFamily":"default","fontSize":40,"lineHeight":1.6,"maxWidth":"55ch","mobile":{"fontSize":40}},"rhythmVertical":{"marginBottom":40}},"hr":{"label":"--","group":"block","button":{"label":"--"},"style":{"display":"block","color":"hsla(212,8,50,1)","opacity":0.2},"rhythmVertical":{"marginBottom":50}},"pre:not([class])":{"label":"Pre","group":"text","style":{"display":"block","fontFamily":"code","color":["main","text"],"backgroundColor":["main","surface"],"lineHeight":1.5,"paddingInline":1.5,"paddingBlock":0.75,"borderRadius":1,"depth":"0"},"rhythmVertical":{"marginBottom":50}},"code:not(pre > code)":{"label":"Code","group":"text","button":{"label":"</>"},"style":{"display":"inline-block","fontFamily":"code","color":["main","text"],"lineHeight":1.1,"backgroundColor":["accent","surface"],"borderRadius":10,"paddingInline":10,"paddingBlock":0}},"blockquote":{"label":"Blockquote","group":"block","button":{"label":"<svg viewBox=\\"0 0 20 20\\"><path d=\\"M3 10.423a6.5 6.5 0 0 1 6.056-6.408l.038.67C6.448 5.423 5.354 7.663 5.22 10H9c.552 0 .5.432.5.986v4.511c0 .554-.448.503-1 .503h-5c-.552 0-.5-.449-.5-1.003v-4.574zm8 0a6.5 6.5 0 0 1 6.056-6.408l.038.67c-2.646.739-3.74 2.979-3.873 5.315H17c.552 0 .5.432.5.986v4.511c0 .554-.448.503-1 .503h-5c-.552 0-.5-.449-.5-1.003v-4.574z\\"></path></svg>"},"style":{"display":"block","fontFamily":"quote"},"editor":{"style":{"paddingInlineStart":1.5,"borderLeft":"1px solid #000"}},"rhythmVertical":{"marginBottom":50}},"a":{"label":"Link","group":"text","button":{"label":"<svg viewBox=\\"0 0 20 20\\"><path d=\\"m11.077 15 .991-1.416a.75.75 0 1 1 1.229.86l-1.148 1.64a.748.748 0 0 1-.217.206 5.251 5.251 0 0 1-8.503-5.955.741.741 0 0 1 .12-.274l1.147-1.639a.75.75 0 1 1 1.228.86L4.933 10.7l.006.003a3.75 3.75 0 0 0 6.132 4.294l.006.004zm5.494-5.335a.748.748 0 0 1-.12.274l-1.147 1.639a.75.75 0 1 1-1.228-.86l.86-1.23a3.75 3.75 0 0 0-6.144-4.301l-.86 1.229a.75.75 0 0 1-1.229-.86l1.148-1.64a.748.748 0 0 1 .217-.206 5.251 5.251 0 0 1 8.503 5.955zm-4.563-2.532a.75.75 0 0 1 .184 1.045l-3.155 4.505a.75.75 0 1 1-1.229-.86l3.155-4.506a.75.75 0 0 1 1.045-.184z\\"></path></svg>"},"style":{"color":"accent","textDecoration":"underline"}},"quote":{"label":"Quote","group":"text","button":{"label":"<svg viewBox=\\"0 0 20 20\\"><path d=\\"M3 10.423a6.5 6.5 0 0 1 6.056-6.408l.038.67C6.448 5.423 5.354 7.663 5.22 10H9c.552 0 .5.432.5.986v4.511c0 .554-.448.503-1 .503h-5c-.552 0-.5-.449-.5-1.003v-4.574zm8 0a6.5 6.5 0 0 1 6.056-6.408l.038.67c-2.646.739-3.74 2.979-3.873 5.315H17c.552 0 .5.432.5.986v4.511c0 .554-.448.503-1 .503h-5c-.552 0-.5-.449-.5-1.003v-4.574z\\"></path></svg>"},"style":{"fontFamily":"quote"},"rhythmVertical":{"marginBottom":50}},"bold":{"label":"Bold","group":"text","style":{"fontWeight":"bold"},"button":{"label":"B","style":{"fontWeight":"bolder"}}},"italic":{"label":"Italic","group":"text","style":{"fontStyle":"italic"},"button":{"label":"I","style":{"fontStyle":"italic"}}},"large":{"label":"Large","group":"text","style":{"fontSize":"1.1em"},"button":{"label":"A","style":{"fontSize":"1.01em"}}},"larger":{"label":"Larger","group":"text","style":{"fontSize":"1.2em"},"button":{"label":"A","style":{"fontSize":"1.02em"}}},"largest":{"label":"Largest","group":"text","style":{"fontSize":"1.3em"},"button":{"label":"A","style":{"fontSize":"1.03em"}}},"small":{"label":"Small","group":"text","style":{"fontSize":"0.9em"},"button":{"label":"A","style":{"fontSize":"0.99em"}}},"smaller":{"label":"Smaller","group":"text","style":{"fontSize":"0.8em"},"button":{"label":"A","style":{"fontSize":"0.98em"}}},"smallest":{"label":"Smallest","group":"text","style":{"fontSize":"0.7em"},"button":{"label":"A","style":{"fontSize":"0.97em"}}},"mark":{"label":"Mark","group":"text","button":{"label":"M"},"style":{"backgroundColor":"#ffbb00"}},"del":{"label":"Deleted","group":"text","style":{"textDecoration":"line-through"},"button":{"label":"D","style":{"textDecoration":"line-through"}}},"ins":{"label":"Inserted","group":"text","style":{"textDecoration":"underline"},"button":{"label":"U","style":{"textDecoration":"underline"}}},"sub":{"label":"Subscript","group":"text","style":{"verticalAlign":"sub","fontSize":"0.6em"},"button":{"label":"Sub","style":{"verticalAlign":"sub","fontSize":"0.6em"}}},"sup":{"label":"Superscript","group":"text","style":{"verticalAlign":"sup","fontSize":"0.6em"},"button":{"label":"Sup","style":{"verticalAlign":"sup","fontSize":"0.6em"}}},"base":{"label":"Base","group":"color","type":"color","style":{"color":"hsla(212,8,50,1)"}},"baseGradient":{"label":"Base gradient","group":"color","type":"color","style":{"backgroundSize":"100%","-webkitBackgroundClip":"text","-mozBackgroundClip":"text","-webkitTextFillColor":"transparent","-mozTextFillColor":"transparent","backgroundImage":"linear-gradient(90deg, hsla(212,8,50,1) 0%, #838c95 100%)"}},"main":{"label":"Main","group":"color","type":"color","style":{"color":"hsla(212,8,50,1)"}},"mainGradient":{"label":"Main gradient","group":"color","type":"color","style":{"backgroundSize":"100%","-webkitBackgroundClip":"text","-mozBackgroundClip":"text","-webkitTextFillColor":"transparent","-mozTextFillColor":"transparent","backgroundImage":"linear-gradient(90deg, hsla(212,8,50,1) 0%, #838c95 100%)"}},"accent":{"label":"Accent","group":"color","type":"color","style":{"color":"#ffbb00"}},"accentGradient":{"label":"Accent gradient","group":"color","type":"color","style":{"backgroundSize":"100%","-webkitBackgroundClip":"text","-mozBackgroundClip":"text","-webkitTextFillColor":"transparent","-mozTextFillColor":"transparent","backgroundImage":"linear-gradient(90deg, #ffbb00 0%, #ffc21a 100%)"}},"complementary":{"label":"Complementary","group":"color","type":"color","style":{"color":"#5100ff"}},"complementaryGradient":{"label":"Complementary gradient","group":"color","type":"color","style":{"backgroundSize":"100%","-webkitBackgroundClip":"text","-mozBackgroundClip":"text","-webkitTextFillColor":"transparent","-mozTextFillColor":"transparent","backgroundImage":"linear-gradient(90deg, #5100ff 0%, #621aff 100%)"}},"success":{"label":"Success","group":"color","type":"color","style":{"color":"#91ff00"}},"successGradient":{"label":"Success gradient","group":"color","type":"color","style":{"backgroundSize":"100%","-webkitBackgroundClip":"text","-mozBackgroundClip":"text","-webkitTextFillColor":"transparent","-mozTextFillColor":"transparent","backgroundImage":"linear-gradient(90deg, #91ff00 0%, #9cff1a 100%)"}},"warning":{"label":"Warning","group":"color","type":"color","style":{"color":"#ffd500"}},"warningGradient":{"label":"Warning gradient","group":"color","type":"color","style":{"backgroundSize":"100%","-webkitBackgroundClip":"text","-mozBackgroundClip":"text","-webkitTextFillColor":"transparent","-mozTextFillColor":"transparent","backgroundImage":"linear-gradient(90deg, #ffd500 0%, #ffd91a 100%)"}},"error":{"label":"Error","group":"color","type":"color","style":{"color":"#ff003b"}},"errorGradient":{"label":"Error gradient","group":"color","type":"color","style":{"backgroundSize":"100%","-webkitBackgroundClip":"text","-mozBackgroundClip":"text","-webkitTextFillColor":"transparent","-mozTextFillColor":"transparent","backgroundImage":"linear-gradient(90deg, #ff003b 0%, #ff1a4f 100%)"}},"info":{"label":"Info","group":"color","type":"color","style":{"color":"#00ffff"}},"infoGradient":{"label":"Info gradient","group":"color","type":"color","style":{"backgroundSize":"100%","-webkitBackgroundClip":"text","-mozBackgroundClip":"text","-webkitTextFillColor":"transparent","-mozTextFillColor":"transparent","backgroundImage":"linear-gradient(90deg, #00ffff 0%, #1affff 100%)"}}},"metas":{"title":"Default light","description":"Nice and elegant light theme"},"colorSchema":{"text":{"darken":0,"color":{"base":{"darken":5},"main":{"darken":10},"complementary":{"lighten":15},"info":{"darken":10}}},"placeholder":{"darken":0,"alpha":0.4},"foreground":{"lighten":50},"background":{"lighten":50,"color":{"surface":{"darken":20}}},"backgroundForeground":{"darken":45},"surface":{"lighten":40,"color":{"base":{"lighten":49},"main":{"lighten":49}}},"surfaceForeground":{"darken":45},"ui":{"lighten":49},"uiForeground":{"darken":15},"border":{"alpha":0.2},"gradientStart":{"lighten":0},"gradientEnd":{"lighten":20}}},"default-dark":{"defaultColor":"main","color":{"current":"hsla(212,8,50,1)","base":"hsla(212,8,50,1)","main":"hsla(212,8,50,1)","accent":"#ffbb00","complementary":"#5100ff","success":"#91ff00","warning":"#ffd500","error":"#ff003b","info":"#00ffff"},"classmap":{"enabled":true,"url":"/classmap.json"},"lod":{"enabled":true,"defaultLevel":3,"botLevel":1,"levels":{"0":{"name":"bare","speedIndex":0},"1":{"name":"bare+","speedIndex":30},"2":{"name":"low","speedIndex":40},"3":{"name":"medium","speedIndex":50},"4":{"name":"high","speedIndex":60}},"method":"file","defaultAction":">=","cssProperties":{}},"easing":{"default":"cubic-bezier(0.700, 0.000, 0.305, 0.995)"},"scroll":{"duration":300,"offset":0,"offsetX":0,"offsetY":100},"partytown":{"enabled":false,"forward":["dataLayer.push","fbq","freshpaint.addPageviewProperties","freshpaint.identify","freshpaint.track","_hsq.push","Intercom","_learnq.push","ttq.track","ttq.page","ttq.load","mixpanel.track"]},"timing":{"slow":".6s","default":".3s","fast":".1s"},"transition":{"slow":"all .6s cubic-bezier(0.700, 0.000, 0.305, 0.995)","default":"all .3s cubic-bezier(0.700, 0.000, 0.305, 0.995)","fast":"all .1s cubic-bezier(0.700, 0.000, 0.305, 0.995)"},"gradient":{"defaultModifierStart":{},"defaultModifierEnd":{"lighten":20},"defaultX":"50%","defaultY":"50%","defaultAngle":"90deg","defaultTextModifierStart":{"darken":5},"defaultTextModifierEnd":{"lighten":5},"defaultTextAngle":"90deg"},"helpers":{"states":["mounted","active","loading"],"clearfix":{"default":"overflow"},"disabled":{"opacity":0.4},"truncate":{"count":10},"order":{"count":20}},"layout":{"offset":{"top":100,"right":0,"bottom":0,"left":0},"container":{"default":"1280px","wide":"1440px","full":"none"},"grid":{"1":1,"2":2,"3":3,"4":4,"5":5,"6":6,"7":7,"8":8,"9":9,"10":10,"11":11,"12":12},"layout":{"1":"1","12":"1 2","21":"2 1","112":"1 1 2","122":"1 2 2","123":"1 2 3","211":"2 1 1","221":"2 2 1","321":"3 2 1","1112":"1 1 1 2","1222":"1 2 2 2","1234":"1 2 3 4","2221":"2 2 2 1","11112":"1 1 1 1 2","12222":"1 2 2 2 2","12345":"1 2 3 4 5","22221":"2 2 2 2 1","111112":"1 1 1 1 1 2","122222":"1 2 2 2 2 2","123456":"1 2 3 4 5 6","1_2":"1 _ 2","2_1":"2 _ 1","12_33":"1 2 _ 3 3","1_23":"1 _ 2 3","1_2_3":"1 _ 2 _ 3","32_1":"3 2 _ 1","3_21":"3 _ 2 1","12_34":"1 2 _ 3 4","123_4":"1 2 3 _ 4","1_234":"1 _ 2 3 4","1_2_3_4":"1 _ 2 _ 3 _ 4","123_45":"1 2 3 _ 4 5","12_345":"1 2 _ 3 4 5","1_2345":"1 _ 2 3 4 5","1234_5":"1 2 3 4 _ 5","1_2_3_4_5":"1 _ 2 _ 3 _ 4 _ 5"}},"ratio":{"1":1,"21-9":2.3333333333333335,"16-9":1.7777777777777777,"2-3":0.6666666666666666,"4-3":1.3333333333333333,"3-4":0.75},"scalable":{"margin":false,"padding":true,"offsize":false,"font":true},"scale":{"10":1,"11":1.1,"12":1.2,"13":1.3,"14":1.4,"15":1.5,"16":1.6,"17":1.7,"18":1.8,"19":1.9,"20":2,"default":1,"01":0.1,"02":0.2,"03":0.3,"04":0.4,"05":0.5,"06":0.6,"07":0.7,"08":0.8,"09":0.9},"opacity":{"0":0,"10":0.1,"20":0.2,"30":0.3,"40":0.4,"50":0.5,"60":0.6,"70":0.7,"80":0.8,"90":0.9,"100":1},"width":{"0":"0","10":"10%","20":"20%","30":"30%","40":"40%","50":"50%","60":"60%","70":"70%","80":"80%","90":"90%","100":"100%"},"height":{"0":"0","10":"10%","20":"20%","30":"30%","40":"40%","50":"50%","60":"60%","70":"70%","80":"80%","90":"90%","100":"100%"},"depth":{"0":"0","5":"0px 0.6px 0.4px rgba(0, 0, 0, 0.006),\\n  0px 1.3px 1px rgba(0, 0, 0, 0.006),\\n  0px 2.5px 1.5px rgba(0, 0, 0, 0.005),\\n  0px 3.5px 3.4px rgba(0, 0, 0, 0.006),\\n  0px 4.4px 4.3px rgba(0, 0, 0, 0.007),\\n  0px 10px 10px rgba(0, 0, 0, 0.01)","10":"0px 0.6px 0.4px rgba(0, 0, 0, 0.006),\\n  0px 1.3px 1px rgba(0, 0, 0, 0.008),\\n  0px 2.5px 1.9px rgba(0, 0, 0, 0.01),\\n  0px 4.5px 3.4px rgba(0, 0, 0, 0.012),\\n  0px 8.4px 6.3px rgba(0, 0, 0, 0.014),\\n  0px 20px 15px rgba(0, 0, 0, 0.02)","20":"0px 0.6px 0.4px rgba(0, 0, 0, 0.006),\\n  0px 1.3px 1px rgba(0, 0, 0, 0.008),\\n  0px 2.5px 1.9px rgba(0, 0, 0, 0.01),\\n  0px 4.5px 3.4px rgba(0, 0, 0, 0.012),\\n  0px 8.4px 6.3px rgba(0, 0, 0, 0.014),\\n  0px 20px 15px rgba(0, 0, 0, 0.02)","30":"0px 0.6px 0.4px rgba(0, 0, 0, 0.008),\\n  0px 1.3px 1px rgba(0, 0, 0, 0.012),\\n  0px 2.5px 1.9px rgba(0, 0, 0, 0.015),\\n  0px 4.5px 3.4px rgba(0, 0, 0, 0.018),\\n  0px 8.4px 6.3px rgba(0, 0, 0, 0.022),\\n  0px 20px 15px rgba(0, 0, 0, 0.03)","40":"0px 0.8px 0.6px rgba(0, 0, 0, 0.008),\\n  0px 2px 1.3px rgba(0, 0, 0, 0.012),\\n  0px 3.8px 2.5px rgba(0, 0, 0, 0.015),\\n  0px 6.7px 4.5px rgba(0, 0, 0, 0.018),\\n  0px 12.5px 8.4px rgba(0, 0, 0, 0.022),\\n  0px 30px 20px rgba(0, 0, 0, 0.03)","50":"0px 1px 0.8px rgba(0, 0, 0, 0.011),\\n  0px 2.3px 2px rgba(0, 0, 0, 0.016),\\n  0px 4.4px 3.8px rgba(0, 0, 0, 0.02),\\n  0px 7.8px 6.7px rgba(0, 0, 0, 0.024),\\n  0px 14.6px 12.5px rgba(0, 0, 0, 0.029),\\n  0px 35px 30px rgba(0, 0, 0, 0.04)","60":"0px 1px 0.7px rgba(0, 0, 0, 0.011),\\n  0px 2.3px 1.7px rgba(0, 0, 0, 0.016),\\n  0px 4.4px 3.1px rgba(0, 0, 0, 0.02),\\n  0px 7.8px 5.6px rgba(0, 0, 0, 0.024),\\n  0px 14.6px 10.4px rgba(0, 0, 0, 0.029),\\n  0px 35px 25px rgba(0, 0, 0, 0.04)","70":"0px 1.1px 0.8px rgba(0, 0, 0, 0.011),\\n  0px 2.7px 2px rgba(0, 0, 0, 0.016),\\n  0px 5px 3.8px rgba(0, 0, 0, 0.02),\\n  0px 8.9px 6.7px rgba(0, 0, 0, 0.024),\\n  0px 16.7px 12.5px rgba(0, 0, 0, 0.029),\\n  0px 40px 30px rgba(0, 0, 0, 0.04)","80":"0px 1.1px 1px rgba(0, 0, 0, 0.011),\\n  0px 2.7px 2.3px rgba(0, 0, 0, 0.016),\\n  0px 5px 4.4px rgba(0, 0, 0, 0.02),\\n  0px 8.9px 7.8px rgba(0, 0, 0, 0.024),\\n  0px 16.7px 14.6px rgba(0, 0, 0, 0.029),\\n  0px 40px 35px rgba(0, 0, 0, 0.04)","90":"0px 1.4px 1.1px rgba(0, 0, 0, 0.011),\\n  0px 3.3px 2.7px rgba(0, 0, 0, 0.016),\\n  0px 6.1px 5px rgba(0, 0, 0, 0.02),\\n  0px 10.9px 8.9px rgba(0, 0, 0, 0.024),\\n  0px 20.5px 16.7px rgba(0, 0, 0, 0.029),\\n  0px 49px 40px rgba(0, 0, 0, 0.04)","100":"0px 1.4px 1.4px rgba(0, 0, 0, 0.011),\\n  0px 3.3px 3.5px rgba(0, 0, 0, 0.016),\\n  0px 6.1px 6.5px rgba(0, 0, 0, 0.02),\\n  0px 10.9px 11.6px rgba(0, 0, 0, 0.024),\\n  0px 20.5px 21.7px rgba(0, 0, 0, 0.029),\\n  0px 49px 52px rgba(0, 0, 0, 0.04)","default":"0"},"size":{"0":0.25,"5":"0.5","10":0.65,"15":0.7,"20":0.75,"25":0.95,"30":1.1,"40":1.25,"50":1.5,"60":2,"70":2.5,"80":3,"90":4,"100":5,"default":"15px"},"font":{"family":{"default":{"fontFamily":"\\"Roboto\\"","fontWeight":400,"import":"https://fonts.googleapis.com/css2?family=Roboto&display=swap"},"title":{"fontFamily":"\\"Roboto\\"","fontWeight":500,"import":"https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap"},"quote":{"fontFamily":"\\"Palatino, Times, Georgia, serif\\"","fontWeight":"normal","fontStyle":"normal","fontDisplay":"auto","capHeight":0.65},"code":{"fontFamily":"Menlo, Monaco, Consolas, Courier New, monospace","fontWeight":"normal","fontStyle":"normal","fontDisplay":"auto","capHeight":0.65}},"size":{"0":0,"5":"0.5","10":0.65,"15":0.7,"20":0.75,"25":0.95,"30":1.1,"40":1.25,"50":1.5,"60":2,"70":2.5,"80":3,"90":4,"100":5,"default":"15px"}},"border":{"width":{"0":0,"10":1,"20":2,"30":4,"40":6,"50":8,"60":12,"70":16,"80":20,"90":24,"100":30,"default":"1px"},"radius":{"0":0,"10":0.8,"20":1.6,"30":2.4,"40":3.2,"50":4,"60":5.2,"70":6.4,"80":8,"90":10,"100":12,"default":"5px"}},"space":{"0":0,"10":0.375,"20":0.75,"30":1.5,"40":2.25,"50":3.25,"60":4.25,"70":5.5,"80":7,"90":9,"100":11,"default":"1rem"},"margin":{"0":0,"10":0.375,"20":0.75,"30":1.5,"40":2.25,"50":3.25,"60":4.25,"70":5.5,"80":7,"90":9,"100":11,"default":"1rem"},"padding":{"0":0,"10":0.375,"20":0.75,"30":1.5,"40":2.25,"50":3.25,"60":4.25,"70":5.5,"80":7,"90":9,"100":11,"default":"1rem"},"offsize":{"0":0,"10":0.375,"20":0.75,"30":1.5,"40":2.25,"50":3.25,"60":4.25,"70":5.5,"80":7,"90":9,"100":11,"default":"1rem"},"media":{"defaultAction":"<=","defaultMedia":"desktop","defaultQuery":"screen","queries":{"mobile":{"minWidth":0,"maxWidth":639},"tablet":{"minWidth":640,"maxWidth":1279},"desktop":{"minWidth":1280,"maxWidth":2047},"wide":{"minWidth":2048,"maxWidth":null}}},"ui":{"default":{"paddingInline":1.5,"paddingBlock":0.75,"borderRadius":1,"borderWidth":"1px","transition":"all .1s cubic-bezier(0.700, 0.000, 0.305, 0.995)","defaultLnf":"solid","depth":"0","outline":true,"spacing":1.5,"rhythmVertical":{"margin-bottom":60}},"form":{"paddingInline":1,"paddingBlock":0.75,"borderRadius":1,"borderWidth":"1px","transition":"all .1s cubic-bezier(0.700, 0.000, 0.305, 0.995)","outline":true,"depth":"0","rhythmVertical":{"margin-bottom":40}},"outline":{"active":true,"borderWidth":"10px","borderRadius":1,"transition":"all .2s ease-out"},"scrollbar":{"size":"2px","color":"accent"},"label":{"defaultLnf":"inline"},"dropdown":{"paddingInline":0.75,"paddingBlock":0.75,"itemPaddingInline":1.5,"itemPaddingBlock":0.75},"list":{"defaultLnf":"dl","bulletChar":"-"},"fsTree":{"bulletChar":"\u25CF"},"tooltip":{"defaultPosition":"top","arrowSize":"15px"},"loader":{"duration":"1s","easing":"linear"}},"typo":{"h1":{"label":"H1","group":"style","style":{"display":"block","fontFamily":"title","fontSize":80,"lineHeight":1.3,"maxWidth":"55ch","mobile":{"fontSize":70}},"rhythmVertical":{"marginBottom":50}},"h2":{"label":"H2","group":"style","style":{"display":"block","fontFamily":"title","fontSize":70,"lineHeight":1.3,"maxWidth":"55ch","mobile":{"fontSize":60}},"rhythmVertical":{"marginBottom":50}},"h3":{"label":"H3","group":"style","style":{"display":"block","fontFamily":"title","fontSize":60,"lineHeight":1.3,"maxWidth":"55ch","mobile":{"fontSize":50}},"rhythmVertical":{"marginBottom":50}},"h4":{"label":"H4","group":"style","style":{"display":"block","fontFamily":"title","fontSize":50,"lineHeight":1.3,"maxWidth":"55ch","mobile":{"fontSize":40}},"rhythmVertical":{"marginBottom":50}},"h5":{"label":"H5","group":"style","style":{"display":"block","fontFamily":"title","fontSize":40,"lineHeight":1.3,"maxWidth":"55ch","mobile":{"fontSize":30}},"rhythmVertical":{"marginBottom":40}},"h6":{"label":"H6","group":"style","style":{"display":"block","fontFamily":"title","fontSize":30,"lineHeight":1.3,"maxWidth":"55ch","mobile":{"fontSize":30}},"hythmVertical":{"marginBottom":40}},"p":{"label":"Paragraph","group":"style","default":true,"style":{"display":"block","fontFamily":"default","fontSize":30,"lineHeight":1.8,"maxWidth":"55ch"},"rhythmVertical":{"marginBottom":40}},"lead":{"label":"Lead paragraph","group":"style","style":{"display":"block","fontFamily":"default","fontSize":40,"lineHeight":1.6,"maxWidth":"55ch","mobile":{"fontSize":40}},"rhythmVertical":{"marginBottom":40}},"hr":{"label":"--","group":"block","button":{"label":"--"},"style":{"display":"block","color":"hsla(212,8,50,1)","opacity":0.2},"rhythmVertical":{"marginBottom":50}},"pre:not([class])":{"label":"Pre","group":"text","style":{"display":"block","fontFamily":"code","color":["main","text"],"backgroundColor":["main","surface"],"lineHeight":1.5,"paddingInline":1.5,"paddingBlock":0.75,"borderRadius":1,"depth":"0"},"rhythmVertical":{"marginBottom":50}},"code:not(pre > code)":{"label":"Code","group":"text","button":{"label":"</>"},"style":{"display":"inline-block","fontFamily":"code","color":["main","text"],"lineHeight":1.1,"backgroundColor":["accent","surface"],"borderRadius":10,"paddingInline":10,"paddingBlock":0}},"blockquote":{"label":"Blockquote","group":"block","button":{"label":"<svg viewBox=\\"0 0 20 20\\"><path d=\\"M3 10.423a6.5 6.5 0 0 1 6.056-6.408l.038.67C6.448 5.423 5.354 7.663 5.22 10H9c.552 0 .5.432.5.986v4.511c0 .554-.448.503-1 .503h-5c-.552 0-.5-.449-.5-1.003v-4.574zm8 0a6.5 6.5 0 0 1 6.056-6.408l.038.67c-2.646.739-3.74 2.979-3.873 5.315H17c.552 0 .5.432.5.986v4.511c0 .554-.448.503-1 .503h-5c-.552 0-.5-.449-.5-1.003v-4.574z\\"></path></svg>"},"style":{"display":"block","fontFamily":"quote"},"editor":{"style":{"paddingInlineStart":1.5,"borderLeft":"1px solid #000"}},"rhythmVertical":{"marginBottom":50}},"a":{"label":"Link","group":"text","button":{"label":"<svg viewBox=\\"0 0 20 20\\"><path d=\\"m11.077 15 .991-1.416a.75.75 0 1 1 1.229.86l-1.148 1.64a.748.748 0 0 1-.217.206 5.251 5.251 0 0 1-8.503-5.955.741.741 0 0 1 .12-.274l1.147-1.639a.75.75 0 1 1 1.228.86L4.933 10.7l.006.003a3.75 3.75 0 0 0 6.132 4.294l.006.004zm5.494-5.335a.748.748 0 0 1-.12.274l-1.147 1.639a.75.75 0 1 1-1.228-.86l.86-1.23a3.75 3.75 0 0 0-6.144-4.301l-.86 1.229a.75.75 0 0 1-1.229-.86l1.148-1.64a.748.748 0 0 1 .217-.206 5.251 5.251 0 0 1 8.503 5.955zm-4.563-2.532a.75.75 0 0 1 .184 1.045l-3.155 4.505a.75.75 0 1 1-1.229-.86l3.155-4.506a.75.75 0 0 1 1.045-.184z\\"></path></svg>"},"style":{"color":"accent","textDecoration":"underline"}},"quote":{"label":"Quote","group":"text","button":{"label":"<svg viewBox=\\"0 0 20 20\\"><path d=\\"M3 10.423a6.5 6.5 0 0 1 6.056-6.408l.038.67C6.448 5.423 5.354 7.663 5.22 10H9c.552 0 .5.432.5.986v4.511c0 .554-.448.503-1 .503h-5c-.552 0-.5-.449-.5-1.003v-4.574zm8 0a6.5 6.5 0 0 1 6.056-6.408l.038.67c-2.646.739-3.74 2.979-3.873 5.315H17c.552 0 .5.432.5.986v4.511c0 .554-.448.503-1 .503h-5c-.552 0-.5-.449-.5-1.003v-4.574z\\"></path></svg>"},"style":{"fontFamily":"quote"},"rhythmVertical":{"marginBottom":50}},"bold":{"label":"Bold","group":"text","style":{"fontWeight":"bold"},"button":{"label":"B","style":{"fontWeight":"bolder"}}},"italic":{"label":"Italic","group":"text","style":{"fontStyle":"italic"},"button":{"label":"I","style":{"fontStyle":"italic"}}},"large":{"label":"Large","group":"text","style":{"fontSize":"1.1em"},"button":{"label":"A","style":{"fontSize":"1.01em"}}},"larger":{"label":"Larger","group":"text","style":{"fontSize":"1.2em"},"button":{"label":"A","style":{"fontSize":"1.02em"}}},"largest":{"label":"Largest","group":"text","style":{"fontSize":"1.3em"},"button":{"label":"A","style":{"fontSize":"1.03em"}}},"small":{"label":"Small","group":"text","style":{"fontSize":"0.9em"},"button":{"label":"A","style":{"fontSize":"0.99em"}}},"smaller":{"label":"Smaller","group":"text","style":{"fontSize":"0.8em"},"button":{"label":"A","style":{"fontSize":"0.98em"}}},"smallest":{"label":"Smallest","group":"text","style":{"fontSize":"0.7em"},"button":{"label":"A","style":{"fontSize":"0.97em"}}},"mark":{"label":"Mark","group":"text","button":{"label":"M"},"style":{"backgroundColor":"#ffbb00"}},"del":{"label":"Deleted","group":"text","style":{"textDecoration":"line-through"},"button":{"label":"D","style":{"textDecoration":"line-through"}}},"ins":{"label":"Inserted","group":"text","style":{"textDecoration":"underline"},"button":{"label":"U","style":{"textDecoration":"underline"}}},"sub":{"label":"Subscript","group":"text","style":{"verticalAlign":"sub","fontSize":"0.6em"},"button":{"label":"Sub","style":{"verticalAlign":"sub","fontSize":"0.6em"}}},"sup":{"label":"Superscript","group":"text","style":{"verticalAlign":"sup","fontSize":"0.6em"},"button":{"label":"Sup","style":{"verticalAlign":"sup","fontSize":"0.6em"}}},"base":{"label":"Base","group":"color","type":"color","style":{"color":"hsla(212,8,50,1)"}},"baseGradient":{"label":"Base gradient","group":"color","type":"color","style":{"backgroundSize":"100%","-webkitBackgroundClip":"text","-mozBackgroundClip":"text","-webkitTextFillColor":"transparent","-mozTextFillColor":"transparent","backgroundImage":"linear-gradient(90deg, hsla(212,8,50,1) 0%, #838c95 100%)"}},"main":{"label":"Main","group":"color","type":"color","style":{"color":"hsla(212,8,50,1)"}},"mainGradient":{"label":"Main gradient","group":"color","type":"color","style":{"backgroundSize":"100%","-webkitBackgroundClip":"text","-mozBackgroundClip":"text","-webkitTextFillColor":"transparent","-mozTextFillColor":"transparent","backgroundImage":"linear-gradient(90deg, hsla(212,8,50,1) 0%, #838c95 100%)"}},"accent":{"label":"Accent","group":"color","type":"color","style":{"color":"#ffbb00"}},"accentGradient":{"label":"Accent gradient","group":"color","type":"color","style":{"backgroundSize":"100%","-webkitBackgroundClip":"text","-mozBackgroundClip":"text","-webkitTextFillColor":"transparent","-mozTextFillColor":"transparent","backgroundImage":"linear-gradient(90deg, #ffbb00 0%, #ffc21a 100%)"}},"complementary":{"label":"Complementary","group":"color","type":"color","style":{"color":"#5100ff"}},"complementaryGradient":{"label":"Complementary gradient","group":"color","type":"color","style":{"backgroundSize":"100%","-webkitBackgroundClip":"text","-mozBackgroundClip":"text","-webkitTextFillColor":"transparent","-mozTextFillColor":"transparent","backgroundImage":"linear-gradient(90deg, #5100ff 0%, #621aff 100%)"}},"success":{"label":"Success","group":"color","type":"color","style":{"color":"#91ff00"}},"successGradient":{"label":"Success gradient","group":"color","type":"color","style":{"backgroundSize":"100%","-webkitBackgroundClip":"text","-mozBackgroundClip":"text","-webkitTextFillColor":"transparent","-mozTextFillColor":"transparent","backgroundImage":"linear-gradient(90deg, #91ff00 0%, #9cff1a 100%)"}},"warning":{"label":"Warning","group":"color","type":"color","style":{"color":"#ffd500"}},"warningGradient":{"label":"Warning gradient","group":"color","type":"color","style":{"backgroundSize":"100%","-webkitBackgroundClip":"text","-mozBackgroundClip":"text","-webkitTextFillColor":"transparent","-mozTextFillColor":"transparent","backgroundImage":"linear-gradient(90deg, #ffd500 0%, #ffd91a 100%)"}},"error":{"label":"Error","group":"color","type":"color","style":{"color":"#ff003b"}},"errorGradient":{"label":"Error gradient","group":"color","type":"color","style":{"backgroundSize":"100%","-webkitBackgroundClip":"text","-mozBackgroundClip":"text","-webkitTextFillColor":"transparent","-mozTextFillColor":"transparent","backgroundImage":"linear-gradient(90deg, #ff003b 0%, #ff1a4f 100%)"}},"info":{"label":"Info","group":"color","type":"color","style":{"color":"#00ffff"}},"infoGradient":{"label":"Info gradient","group":"color","type":"color","style":{"backgroundSize":"100%","-webkitBackgroundClip":"text","-mozBackgroundClip":"text","-webkitTextFillColor":"transparent","-mozTextFillColor":"transparent","backgroundImage":"linear-gradient(90deg, #00ffff 0%, #1affff 100%)"}}},"metas":{"title":"Default dark","description":"Nice and elegant dark theme"},"colorSchema":{"text":{"lighten":15,"color":{"base":{"lighten":30},"main":{"lighten":46},"complementary":{"lighten":30}}},"placeholder":{"lighten":50,"alpha":0.4},"foreground":{"lighten":50},"background":{"darken":30},"backgroundForeground":{"lighten":50},"surface":{"darken":25},"surfaceForeground":{"lighten":50},"ui":{"darken":28},"uiForeground":{"lighten":45},"border":{"alpha":0.4},"gradientStart":{"lighten":0},"gradientEnd":{"darken":20}}}}}},"frontspec":{"metas":{"lang":"en","title":"Coffeekraken","homepage":"https://coffeekraken.io","description":"The frontend toolkit that works for everyone. Experts, professionals and new-comers","themeColor":"#ffbb00","author":{"name":"Olivier Bossel","email":"olivier.bossel@gmail.com","url":"https://coffeekraken.io"},"og":{"title":"Coffeekraken","description":"The frontend toolkit that works for everyone. Experts, professionals and new-comers","type":"website","url":"https://coffeekraken.io","image":"https://cdnv2.coffeekraken.io/coffeekraken-og.png"}},"theme":{"theme":"default","variant":"dark","themes":{"default-light":{"title":"Default light","description":"Nice and elegant light theme"},"default-dark":{"title":"Default dark","description":"Nice and elegant dark theme"}}},"media":{"defaultAction":"<=","defaultMedia":"desktop","defaultQuery":"screen","queries":{"wide":{"minWidth":2048,"maxWidth":null},"desktop":{"minWidth":1280,"maxWidth":2047},"tablet":{"minWidth":640,"maxWidth":1279},"mobile":{"minWidth":0,"maxWidth":639}}},"google":{"gtm":"GTM-K4LMN8Q","map":{"apiKey":"AIzaSyDzFfEzhmYXRTlONUCtMWQ88uHJhsbtXY4"}},"lod":{"enabled":true,"defaultLevel":3,"botLevel":1,"levels":{"0":{"name":"bare","speedIndex":0},"1":{"name":"bare+","speedIndex":30},"2":{"name":"low","speedIndex":40},"3":{"name":"medium","speedIndex":50},"4":{"name":"high","speedIndex":60}},"method":"file","defaultAction":">="},"partytown":{"enabled":false,"forward":["dataLayer.push","fbq","freshpaint.addPageviewProperties","freshpaint.identify","freshpaint.track","_hsq.push","Intercom","_learnq.push","ttq.track","ttq.page","ttq.load","mixpanel.track"]},"font":{"family":{"default":{"fontFamily":"\\"Roboto\\"","fontWeight":400,"import":"https://fonts.googleapis.com/css2?family=Roboto&display=swap"},"title":{"fontFamily":"\\"Roboto\\"","fontWeight":500,"import":"https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap"},"quote":{"fontFamily":"\\"Palatino, Times, Georgia, serif\\"","fontWeight":"normal","fontStyle":"normal","fontDisplay":"auto","capHeight":0.65},"code":{"fontFamily":"Menlo, Monaco, Consolas, Courier New, monospace","fontWeight":"normal","fontStyle":"normal","fontDisplay":"auto","capHeight":0.65}},"size":{"0":0,"5":"0.5","10":0.65,"15":0.7,"20":0.75,"25":0.95,"30":1.1,"40":1.25,"50":1.5,"60":2,"70":2.5,"80":3,"90":4,"100":5,"default":"15px"}},"typo":{"h1":{"label":"H1","group":"style","button":{},"editor":{},"style":{"display":"block","fontFamily":"\\"Roboto\\"","fontSize":"45px","lineHeight":1.3,"maxWidth":"55ch","marginBottom":"3.25rem"}},"h2":{"label":"H2","group":"style","button":{},"editor":{},"style":{"display":"block","fontFamily":"\\"Roboto\\"","fontSize":"37.5px","lineHeight":1.3,"maxWidth":"55ch","marginBottom":"3.25rem"}},"h3":{"label":"H3","group":"style","button":{},"editor":{},"style":{"display":"block","fontFamily":"\\"Roboto\\"","fontSize":"30px","lineHeight":1.3,"maxWidth":"55ch","marginBottom":"3.25rem"}},"h4":{"label":"H4","group":"style","button":{},"editor":{},"style":{"display":"block","fontFamily":"\\"Roboto\\"","fontSize":"22.5px","lineHeight":1.3,"maxWidth":"55ch","marginBottom":"3.25rem"}},"h5":{"label":"H5","group":"style","button":{},"editor":{},"style":{"display":"block","fontFamily":"\\"Roboto\\"","fontSize":"18.75px","lineHeight":1.3,"maxWidth":"55ch","marginBottom":"2.25rem"}},"h6":{"label":"H6","group":"style","button":{},"editor":{},"style":{"display":"block","fontFamily":"\\"Roboto\\"","fontSize":"16.5px","lineHeight":1.3,"maxWidth":"55ch"}},"p":{"label":"Paragraph","group":"style","button":{},"editor":{},"style":{"display":"block","fontFamily":"\\"Roboto\\"","fontSize":"16.5px","lineHeight":1.8,"maxWidth":"55ch","marginBottom":"2.25rem"},"default":true},"lead":{"label":"Lead paragraph","group":"style","button":{},"editor":{},"style":{"display":"block","fontFamily":"\\"Roboto\\"","fontSize":"18.75px","lineHeight":1.6,"maxWidth":"55ch","marginBottom":"2.25rem"}},"hr":{"label":"--","group":"block","button":{"label":"--"},"editor":{},"style":{"display":"block","color":"hsla(212,8,50,1)","opacity":0.2,"marginBottom":"3.25rem"}},"pre":{"label":"Pre","group":"text","button":{},"editor":{},"style":{"display":"block","fontFamily":"Menlo, Monaco, Consolas, Courier New, monospace","color":"#f4f5f6","backgroundColor":"#3b4045","lineHeight":1.5,"paddingInline":"1.5rem","paddingBlock":"0.75rem","borderRadius":"5px","depth":"0","marginBottom":"3.25rem"}},"code":{"label":"Code","group":"text","button":{"label":"</>"},"editor":{},"style":{"display":"inline-block","fontFamily":"Menlo, Monaco, Consolas, Courier New, monospace","color":"#f4f5f6","lineHeight":1.1,"backgroundColor":"#805e00","borderRadius":"4px","paddingInline":"0.375rem","paddingBlock":"0rem"}},"blockquote":{"label":"Blockquote","group":"block","button":{"label":"<svg viewBox=\\"0 0 20 20\\"><path d=\\"M3 10.423a6.5 6.5 0 0 1 6.056-6.408l.038.67C6.448 5.423 5.354 7.663 5.22 10H9c.552 0 .5.432.5.986v4.511c0 .554-.448.503-1 .503h-5c-.552 0-.5-.449-.5-1.003v-4.574zm8 0a6.5 6.5 0 0 1 6.056-6.408l.038.67c-2.646.739-3.74 2.979-3.873 5.315H17c.552 0 .5.432.5.986v4.511c0 .554-.448.503-1 .503h-5c-.552 0-.5-.449-.5-1.003v-4.574z\\"></path></svg>"},"editor":{"style":{"paddingInlineStart":1.5,"borderLeft":"1px solid #000"}},"style":{"display":"block","fontFamily":"\\"Palatino, Times, Georgia, serif\\"","marginBottom":"3.25rem"}},"a":{"label":"Link","group":"text","button":{"label":"<svg viewBox=\\"0 0 20 20\\"><path d=\\"m11.077 15 .991-1.416a.75.75 0 1 1 1.229.86l-1.148 1.64a.748.748 0 0 1-.217.206 5.251 5.251 0 0 1-8.503-5.955.741.741 0 0 1 .12-.274l1.147-1.639a.75.75 0 1 1 1.228.86L4.933 10.7l.006.003a3.75 3.75 0 0 0 6.132 4.294l.006.004zm5.494-5.335a.748.748 0 0 1-.12.274l-1.147 1.639a.75.75 0 1 1-1.228-.86l.86-1.23a3.75 3.75 0 0 0-6.144-4.301l-.86 1.229a.75.75 0 0 1-1.229-.86l1.148-1.64a.748.748 0 0 1 .217-.206 5.251 5.251 0 0 1 8.503 5.955zm-4.563-2.532a.75.75 0 0 1 .184 1.045l-3.155 4.505a.75.75 0 1 1-1.229-.86l3.155-4.506a.75.75 0 0 1 1.045-.184z\\"></path></svg>"},"editor":{},"style":{"color":"#ffbb00","textDecoration":"underline"}},"quote":{"label":"Quote","group":"text","button":{"label":"<svg viewBox=\\"0 0 20 20\\"><path d=\\"M3 10.423a6.5 6.5 0 0 1 6.056-6.408l.038.67C6.448 5.423 5.354 7.663 5.22 10H9c.552 0 .5.432.5.986v4.511c0 .554-.448.503-1 .503h-5c-.552 0-.5-.449-.5-1.003v-4.574zm8 0a6.5 6.5 0 0 1 6.056-6.408l.038.67c-2.646.739-3.74 2.979-3.873 5.315H17c.552 0 .5.432.5.986v4.511c0 .554-.448.503-1 .503h-5c-.552 0-.5-.449-.5-1.003v-4.574z\\"></path></svg>"},"editor":{},"style":{"fontFamily":"\\"Palatino, Times, Georgia, serif\\"","marginBottom":"3.25rem"}},"bold":{"label":"Bold","group":"text","button":{"label":"B","style":{"fontWeight":"bolder"}},"editor":{},"style":{"fontWeight":"bold"}},"italic":{"label":"Italic","group":"text","button":{"label":"I","style":{"fontStyle":"italic"}},"editor":{},"style":{"fontStyle":"italic"}},"large":{"label":"Large","group":"text","button":{"label":"A","style":{"fontSize":"1.01em"}},"editor":{},"style":{"fontSize":"1.1em"}},"larger":{"label":"Larger","group":"text","button":{"label":"A","style":{"fontSize":"1.02em"}},"editor":{},"style":{"fontSize":"1.2em"}},"largest":{"label":"Largest","group":"text","button":{"label":"A","style":{"fontSize":"1.03em"}},"editor":{},"style":{"fontSize":"1.3em"}},"small":{"label":"Small","group":"text","button":{"label":"A","style":{"fontSize":"0.99em"}},"editor":{},"style":{"fontSize":"0.9em"}},"smaller":{"label":"Smaller","group":"text","button":{"label":"A","style":{"fontSize":"0.98em"}},"editor":{},"style":{"fontSize":"0.8em"}},"smallest":{"label":"Smallest","group":"text","button":{"label":"A","style":{"fontSize":"0.97em"}},"editor":{},"style":{"fontSize":"0.7em"}},"mark":{"label":"Mark","group":"text","button":{"label":"M"},"editor":{},"style":{"backgroundColor":"#ffbb00"}},"del":{"label":"Deleted","group":"text","button":{"label":"D","style":{"textDecoration":"line-through"}},"editor":{},"style":{"textDecoration":"line-through"}},"ins":{"label":"Inserted","group":"text","button":{"label":"U","style":{"textDecoration":"underline"}},"editor":{},"style":{"textDecoration":"underline"}},"sub":{"label":"Subscript","group":"text","button":{"label":"Sub","style":{"verticalAlign":"sub","fontSize":"0.6em"}},"editor":{},"style":{"verticalAlign":"sub","fontSize":"0.6em"}},"sup":{"label":"Superscript","group":"text","button":{"label":"Sup","style":{"verticalAlign":"sup","fontSize":"0.6em"}},"editor":{},"style":{"verticalAlign":"sup","fontSize":"0.6em"}},"base":{"label":"Base","group":"color","type":"color","button":{},"editor":{},"style":{"color":"hsla(212,8,50,1)"}},"baseGradient":{"label":"Base gradient","group":"color","type":"color","button":{},"editor":{},"style":{"backgroundSize":"100%","-webkitBackgroundClip":"text","-mozBackgroundClip":"text","-webkitTextFillColor":"transparent","-mozTextFillColor":"transparent","backgroundImage":"linear-gradient(90deg, hsla(212,8,50,1) 0%, #838c95 100%)"}},"main":{"label":"Main","group":"color","type":"color","button":{},"editor":{},"style":{"color":"hsla(212,8,50,1)"}},"mainGradient":{"label":"Main gradient","group":"color","type":"color","button":{},"editor":{},"style":{"backgroundSize":"100%","-webkitBackgroundClip":"text","-mozBackgroundClip":"text","-webkitTextFillColor":"transparent","-mozTextFillColor":"transparent","backgroundImage":"linear-gradient(90deg, hsla(212,8,50,1) 0%, #838c95 100%)"}},"accent":{"label":"Accent","group":"color","type":"color","button":{},"editor":{},"style":{"color":"#ffbb00"}},"accentGradient":{"label":"Accent gradient","group":"color","type":"color","button":{},"editor":{},"style":{"backgroundSize":"100%","-webkitBackgroundClip":"text","-mozBackgroundClip":"text","-webkitTextFillColor":"transparent","-mozTextFillColor":"transparent","backgroundImage":"linear-gradient(90deg, #ffbb00 0%, #ffc21a 100%)"}},"complementary":{"label":"Complementary","group":"color","type":"color","button":{},"editor":{},"style":{"color":"#5100ff"}},"complementaryGradient":{"label":"Complementary gradient","group":"color","type":"color","button":{},"editor":{},"style":{"backgroundSize":"100%","-webkitBackgroundClip":"text","-mozBackgroundClip":"text","-webkitTextFillColor":"transparent","-mozTextFillColor":"transparent","backgroundImage":"linear-gradient(90deg, #5100ff 0%, #621aff 100%)"}},"success":{"label":"Success","group":"color","type":"color","button":{},"editor":{},"style":{"color":"#91ff00"}},"successGradient":{"label":"Success gradient","group":"color","type":"color","button":{},"editor":{},"style":{"backgroundSize":"100%","-webkitBackgroundClip":"text","-mozBackgroundClip":"text","-webkitTextFillColor":"transparent","-mozTextFillColor":"transparent","backgroundImage":"linear-gradient(90deg, #91ff00 0%, #9cff1a 100%)"}},"warning":{"label":"Warning","group":"color","type":"color","button":{},"editor":{},"style":{"color":"#ffd500"}},"warningGradient":{"label":"Warning gradient","group":"color","type":"color","button":{},"editor":{},"style":{"backgroundSize":"100%","-webkitBackgroundClip":"text","-mozBackgroundClip":"text","-webkitTextFillColor":"transparent","-mozTextFillColor":"transparent","backgroundImage":"linear-gradient(90deg, #ffd500 0%, #ffd91a 100%)"}},"error":{"label":"Error","group":"color","type":"color","button":{},"editor":{},"style":{"color":"#ff003c"}},"errorGradient":{"label":"Error gradient","group":"color","type":"color","button":{},"editor":{},"style":{"backgroundSize":"100%","-webkitBackgroundClip":"text","-mozBackgroundClip":"text","-webkitTextFillColor":"transparent","-mozTextFillColor":"transparent","backgroundImage":"linear-gradient(90deg, #ff003b 0%, #ff1a4f 100%)"}},"info":{"label":"Info","group":"color","type":"color","button":{},"editor":{},"style":{"color":"#00ffff"}},"infoGradient":{"label":"Info gradient","group":"color","type":"color","button":{},"editor":{},"style":{"backgroundSize":"100%","-webkitBackgroundClip":"text","-mozBackgroundClip":"text","-webkitTextFillColor":"transparent","-mozTextFillColor":"transparent","backgroundImage":"linear-gradient(90deg, #00ffff 0%, #1affff 100%)"}}},"layout":{"offset":{"top":100,"right":0,"bottom":0,"left":0},"container":{"default":"1280px","wide":"1440px","full":"none"},"grid":{"1":1,"2":2,"3":3,"4":4,"5":5,"6":6,"7":7,"8":8,"9":9,"10":10,"11":11,"12":12},"layout":{"1":"1","12":"1 2","21":"2 1","112":"1 1 2","122":"1 2 2","123":"1 2 3","211":"2 1 1","221":"2 2 1","321":"3 2 1","1112":"1 1 1 2","1222":"1 2 2 2","1234":"1 2 3 4","2221":"2 2 2 1","11112":"1 1 1 1 2","12222":"1 2 2 2 2","12345":"1 2 3 4 5","22221":"2 2 2 2 1","111112":"1 1 1 1 1 2","122222":"1 2 2 2 2 2","123456":"1 2 3 4 5 6","1_2":"1 _ 2","2_1":"2 _ 1","12_33":"1 2 _ 3 3","1_23":"1 _ 2 3","1_2_3":"1 _ 2 _ 3","32_1":"3 2 _ 1","3_21":"3 _ 2 1","12_34":"1 2 _ 3 4","123_4":"1 2 3 _ 4","1_234":"1 _ 2 3 4","1_2_3_4":"1 _ 2 _ 3 _ 4","123_45":"1 2 3 _ 4 5","12_345":"1 2 _ 3 4 5","1_2345":"1 _ 2 3 4 5","1234_5":"1 2 3 4 _ 5","1_2_3_4_5":"1 _ 2 _ 3 _ 4 _ 5"}}}},"PACKAGE":{"name":"@website/coffeekraken-io","title":"Coffeekraken","version":"2.0.0-alpha.25","description":"The frontend toolkit that works for everyone. Experts, professionals and new-comers","type":"module","private":true,"scripts":{"dev":"sugard kitchen.run dev","prod":"sugard kitchen.run prod","build":"sugard kitchen.run build","static":"live-server static","static.build":"sugard static.build --clean --env production --target production","deploy":"rsync -avzh --delete --progress --stats ./static fe0mt_coffeekraken@fe0mt.ftp.infomaniak.com:~/sites/coffeekraken.io","deploy.bogdanov":"rsync -avzh --delete --progress --stats ./static fe0mt_bogdanov_ssh@fe0mt.ftp.infomaniak.com:~/sites/bogdanov.coffeekraken.io"},"repository":{"type":"git","url":"https://olivierbossel.com"},"author":"Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)","license":"MIT","dependencies":{"@coffeekraken/cli":"^2.0.0-alpha.25","@coffeekraken/s-activate-feature":"^2.0.0-alpha.25","@coffeekraken/s-appear-feature":"^2.0.0-alpha.25","@coffeekraken/s-bench":"^2.0.0-alpha.25","@coffeekraken/s-builder":"^2.0.0-alpha.25","@coffeekraken/s-carpenter":"^2.0.0-alpha.25","@coffeekraken/s-class":"^2.0.0-alpha.25","@coffeekraken/s-clipboard-copy-component":"^2.0.0-alpha.25","@coffeekraken/s-code-example-component":"^2.0.0-alpha.25","@coffeekraken/s-color":"^2.0.0-alpha.25","@coffeekraken/s-color-picker-component":"^2.0.0-alpha.25","@coffeekraken/s-component-utils":"^2.0.0-alpha.25","@coffeekraken/s-conductor":"^2.0.0-alpha.25","@coffeekraken/s-config":"^2.0.0-alpha.25","@coffeekraken/s-dashboard":"^2.0.0-alpha.25","@coffeekraken/s-datetime-picker-component":"^2.0.0-alpha.25","@coffeekraken/s-descriptor":"^2.0.0-alpha.25","@coffeekraken/s-docblock":"^2.0.0-alpha.25","@coffeekraken/s-docmap":"^2.0.0-alpha.25","@coffeekraken/s-duration":"^2.0.0-alpha.25","@coffeekraken/s-env":"^2.0.0-alpha.25","@coffeekraken/s-event-emitter":"^2.0.0-alpha.25","@coffeekraken/s-favicon-builder":"^2.0.0-alpha.25","@coffeekraken/s-feature":"^2.0.0-alpha.25","@coffeekraken/s-file":"^2.0.0-alpha.25","@coffeekraken/s-filtrable-input-component":"^2.0.0-alpha.25","@coffeekraken/s-floating-feature":"^2.0.0-alpha.25","@coffeekraken/s-form-validate-feature":"^2.0.0-alpha.25","@coffeekraken/s-front":"^2.0.0-alpha.25","@coffeekraken/s-frontend-server":"^2.0.0-alpha.25","@coffeekraken/s-frontspec":"^2.0.0-alpha.25","@coffeekraken/s-glitch-feature":"^2.0.0-alpha.25","@coffeekraken/s-glob":"^2.0.0-alpha.25","@coffeekraken/s-google-map-component":"^2.0.0-alpha.25","@coffeekraken/s-handlebars":"^2.0.0-alpha.25","@coffeekraken/s-highlight-feature":"^2.0.0-alpha.25","@coffeekraken/s-images-builder":"^2.0.0-alpha.25","@coffeekraken/s-inline-feature":"^2.0.0-alpha.25","@coffeekraken/s-interface":"^2.0.0-alpha.25","@coffeekraken/s-kitchen":"^2.0.0-alpha.25","@coffeekraken/s-lazy-feature":"^2.0.0-alpha.25","@coffeekraken/s-lit-component":"^2.0.0-alpha.25","@coffeekraken/s-log":"^2.0.0-alpha.25","@coffeekraken/s-markdown-builder":"^2.0.0-alpha.25","@coffeekraken/s-pack-essentials":"^2.0.0-alpha.25","@coffeekraken/s-page-transition-feature":"^2.0.0-alpha.25","@coffeekraken/s-panel-component":"^2.0.0-alpha.25","@coffeekraken/s-parallax-feature":"^2.0.0-alpha.25","@coffeekraken/s-postcss-sugar-plugin":"^2.0.0-alpha.25","@coffeekraken/s-process":"^2.0.0-alpha.25","@coffeekraken/s-promise":"^2.0.0-alpha.25","@coffeekraken/s-range-component":"^2.0.0-alpha.25","@coffeekraken/s-rating-component":"^2.0.0-alpha.25","@coffeekraken/s-refocus-feature":"^2.0.0-alpha.25","@coffeekraken/s-request":"^2.0.0-alpha.25","@coffeekraken/s-scroll-component":"^2.0.0-alpha.25","@coffeekraken/s-sitemap-builder":"^2.0.0-alpha.25","@coffeekraken/s-slider-component":"^2.0.0-alpha.25","@coffeekraken/s-state":"^2.0.0-alpha.25","@coffeekraken/s-static-builder":"^2.0.0-alpha.25","@coffeekraken/s-stdio":"^2.0.0-alpha.25","@coffeekraken/s-sugar-config":"^2.0.0-alpha.25","@coffeekraken/s-sugar-feature":"^2.0.0-alpha.25","@coffeekraken/s-sugar-json":"^2.0.0-alpha.25","@coffeekraken/s-theme":"^2.0.0-alpha.25","@coffeekraken/s-theme-switcher-component":"^2.0.0-alpha.25","@coffeekraken/s-timer":"^2.0.0-alpha.25","@coffeekraken/s-type":"^2.0.0-alpha.25","@coffeekraken/s-typescript-builder":"^2.0.0-alpha.25","@coffeekraken/s-url":"^2.0.0-alpha.25","@coffeekraken/s-view-renderer":"^2.0.0-alpha.25","@coffeekraken/s-vite":"^2.0.0-alpha.25","@coffeekraken/s-vite-postcss-plugin":"^2.0.0-alpha.25","@coffeekraken/s-vite-sugar-plugin":"^2.0.0-alpha.25","@coffeekraken/sugar":"^2.0.0-alpha.25","firebase":"^9.9.1","lit":"^2.2.8","lit-element":"^2.5.1","minisearch":"^3.3.0","three":"^0.143.0"},"devDependencies":{"esbuild":"^0.14.53"},"exports":{"./shared/*":{"require":"./dist/pkg/cjs/shared/*.js","import":"./dist/pkg/esm/shared/*.js"},"./node/*":{"require":"./dist/pkg/cjs/node/*.js","import":"./dist/pkg/esm/node/*.js"},"./js/*":{"require":"./dist/pkg/cjs/js/*.js","import":"./dist/pkg/esm/js/*.js"}},"homepage":"https://coffeekraken.io"}}`),
+  JSON.parse(`{"PLATFORM":"browser","ENV":"development","ENVIRONMENT":"development","SUGAR":{"config":{"datetime":{"dateFormat":"YYYY-MM-DD","timeFormat":"h:mm:ss","i18n":{"previousMonth":"Previous Month","nextMonth":"Next Month","months":["January","February","March","April","May","June","July","August","September","October","November","December"],"weekdays":["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],"weekdaysShort":["Sun","Mon","Tue","Wed","Thu","Fri","Sat"]}},"google":{"gtm":"GTM-K4LMN8Q","map":{"apiKey":"AIzaSyDzFfEzhmYXRTlONUCtMWQ88uHJhsbtXY4"}},"project":{"environments":{"dev":{"branch":"develop","urls":{"website":{"label":"Template","url":"http://localhost:3000"},"admin":{"label":"Admin","url":"http://localhost:3000/admin"}}},"staging":{"branch":"staging","urls":{"website":{"label":"Template","url":"http://staging.localhost:3000"},"admin":{"label":"Admin","url":"http://staging.localhost:3000/admin"}}},"preprod":{"branch":"preprod","urls":{"website":{"label":"Template","url":"http://preprod.localhost:3000"},"admin":{"label":"Admin","url":"http://preprod.localhost:3000/admin"}}},"prod":{"branch":"prod","urls":{"website":{"label":"Template","url":"http://prod.localhost:3000"},"admin":{"label":"Admin","url":"http://prod.localhost:3000/admin"}}}}},"serve":{"img":{"imgPath":"/dist/img"},"js":{"path":"/dist/js"},"css":{"path":"/dist/css"},"icons":{"path":"/dist/icons"},"fonts":{"path":"/dist/fonts"},"cache":{"path":"/cache"}},"dashboard":{"layout":[["s-dashboard-pages"],["s-dashboard-browserstack","s-dashboard-google","s-dashboard-web-vitals","s-dashboard-responsive"],["s-dashboard-project","s-dashboard-frontend-checker"]]},"env":{"envFromLocation":{"development":"https?://(localhost|127.0.0.1|0.0.0.0|192.168.[0-9]{1,3}.[0-9]{1,3})","staging":"https?://([a-zA-Z0-9.-]+)?staging([a-zA-Z0-9.-]+)?","production":"https?://.*"},"git":{"template":{"name":"Template","commit":{}}}},"sitemapBuilder":{"sources":{"docmap":{"active":true}}},"theme":{"theme":"default","variant":"dark","themes":{"default-light":{"defaultColor":"main","color":{"current":"hsla(212,6,50,1)","main":"hsla(212,6,50,1)","accent":"#ffbb00","complementary":"#5100ff","success":"#91ff00","warning":"#ffd500","error":"#ff003b","info":"#00ffff"},"classmap":{"enabled":true,"url":"/classmap.json"},"lod":{"enabled":true,"defaultLevel":3,"botLevel":1,"levels":{"0":{"name":"bare","speedIndex":0},"1":{"name":"lnf","speedIndex":30},"2":{"name":"theme","speedIndex":40},"3":{"name":"high","speedIndex":50},"4":{"name":"ultra","speedIndex":60}},"method":"file","defaultAction":">=","cssProperties":{}},"easing":{"default":"cubic-bezier(0.700, 0.000, 0.305, 0.995)"},"scroll":{"duration":300,"offset":0,"offsetX":0,"offsetY":100},"partytown":{"enabled":false,"forward":["dataLayer.push","fbq","freshpaint.addPageviewProperties","freshpaint.identify","freshpaint.track","_hsq.push","Intercom","_learnq.push","ttq.track","ttq.page","ttq.load","mixpanel.track"]},"timing":{"slow":".6s","default":".3s","fast":".1s"},"transition":{"slow":"all .6s cubic-bezier(0.700, 0.000, 0.305, 0.995)","default":"all .3s cubic-bezier(0.700, 0.000, 0.305, 0.995)","fast":"all .1s cubic-bezier(0.700, 0.000, 0.305, 0.995)"},"gradient":{"defaultModifierStart":{},"defaultModifierEnd":{"lighten":20},"defaultX":"50%","defaultY":"50%","defaultAngle":"90deg","defaultTextModifierStart":{"darken":5},"defaultTextModifierEnd":{"lighten":5},"defaultTextAngle":"90deg"},"helpers":{"states":["mounted","active","loading"],"clearfix":{"default":"overflow"},"disabled":{"opacity":0.4},"truncate":{"count":10},"order":{"count":20}},"layout":{"offset":{"top":100,"right":0,"bottom":0,"left":0},"container":{"default":"1280px","wide":"1440px","full":"none"},"grid":{"1":1,"2":2,"3":3,"4":4,"5":5,"6":6,"7":7,"8":8,"9":9,"10":10,"11":11,"12":12},"layout":{"1":"1","12":"1 2","21":"2 1","112":"1 1 2","122":"1 2 2","123":"1 2 3","211":"2 1 1","221":"2 2 1","321":"3 2 1","1112":"1 1 1 2","1222":"1 2 2 2","1234":"1 2 3 4","2221":"2 2 2 1","11112":"1 1 1 1 2","12222":"1 2 2 2 2","12345":"1 2 3 4 5","22221":"2 2 2 2 1","111112":"1 1 1 1 1 2","122222":"1 2 2 2 2 2","123456":"1 2 3 4 5 6","1_2":"1 _ 2","2_1":"2 _ 1","12_33":"1 2 _ 3 3","1_23":"1 _ 2 3","1_2_3":"1 _ 2 _ 3","32_1":"3 2 _ 1","3_21":"3 _ 2 1","12_34":"1 2 _ 3 4","123_4":"1 2 3 _ 4","1_234":"1 _ 2 3 4","1_2_3_4":"1 _ 2 _ 3 _ 4","123_45":"1 2 3 _ 4 5","12_345":"1 2 _ 3 4 5","1_2345":"1 _ 2 3 4 5","1234_5":"1 2 3 4 _ 5","1_2_3_4_5":"1 _ 2 _ 3 _ 4 _ 5"}},"ratio":{"1":1,"21-9":2.3333333333333335,"16-9":1.7777777777777777,"2-3":0.6666666666666666,"4-3":1.3333333333333333,"3-4":0.75},"scalable":{"margin":false,"padding":true,"offsize":false,"font":true},"scale":{"10":1,"11":1.1,"12":1.2,"13":1.3,"14":1.4,"15":1.5,"16":1.6,"17":1.7,"18":1.8,"19":1.9,"20":2,"default":1,"01":0.1,"02":0.2,"03":0.3,"04":0.4,"05":0.5,"06":0.6,"07":0.7,"08":0.8,"09":0.9},"opacity":{"0":0,"10":0.1,"20":0.2,"30":0.3,"40":0.4,"50":0.5,"60":0.6,"70":0.7,"80":0.8,"90":0.9,"100":1},"width":{"0":"0","10":"10%","20":"20%","30":"30%","40":"40%","50":"50%","60":"60%","70":"70%","80":"80%","90":"90%","100":"100%"},"height":{"0":"0","10":"10%","20":"20%","30":"30%","40":"40%","50":"50%","60":"60%","70":"70%","80":"80%","90":"90%","100":"100%"},"depth":{"0":"0","5":"0px 0.6px 0.4px rgba(0, 0, 0, 0.006),\\n  0px 1.3px 1px rgba(0, 0, 0, 0.006),\\n  0px 2.5px 1.5px rgba(0, 0, 0, 0.005),\\n  0px 3.5px 3.4px rgba(0, 0, 0, 0.006),\\n  0px 4.4px 4.3px rgba(0, 0, 0, 0.007),\\n  0px 10px 10px rgba(0, 0, 0, 0.01)","10":"0px 0.6px 0.4px rgba(0, 0, 0, 0.006),\\n  0px 1.3px 1px rgba(0, 0, 0, 0.008),\\n  0px 2.5px 1.9px rgba(0, 0, 0, 0.01),\\n  0px 4.5px 3.4px rgba(0, 0, 0, 0.012),\\n  0px 8.4px 6.3px rgba(0, 0, 0, 0.014),\\n  0px 20px 15px rgba(0, 0, 0, 0.02)","20":"0px 0.6px 0.4px rgba(0, 0, 0, 0.006),\\n  0px 1.3px 1px rgba(0, 0, 0, 0.008),\\n  0px 2.5px 1.9px rgba(0, 0, 0, 0.01),\\n  0px 4.5px 3.4px rgba(0, 0, 0, 0.012),\\n  0px 8.4px 6.3px rgba(0, 0, 0, 0.014),\\n  0px 20px 15px rgba(0, 0, 0, 0.02)","30":"0px 0.6px 0.4px rgba(0, 0, 0, 0.008),\\n  0px 1.3px 1px rgba(0, 0, 0, 0.012),\\n  0px 2.5px 1.9px rgba(0, 0, 0, 0.015),\\n  0px 4.5px 3.4px rgba(0, 0, 0, 0.018),\\n  0px 8.4px 6.3px rgba(0, 0, 0, 0.022),\\n  0px 20px 15px rgba(0, 0, 0, 0.03)","40":"0px 0.8px 0.6px rgba(0, 0, 0, 0.008),\\n  0px 2px 1.3px rgba(0, 0, 0, 0.012),\\n  0px 3.8px 2.5px rgba(0, 0, 0, 0.015),\\n  0px 6.7px 4.5px rgba(0, 0, 0, 0.018),\\n  0px 12.5px 8.4px rgba(0, 0, 0, 0.022),\\n  0px 30px 20px rgba(0, 0, 0, 0.03)","50":"0px 1px 0.8px rgba(0, 0, 0, 0.011),\\n  0px 2.3px 2px rgba(0, 0, 0, 0.016),\\n  0px 4.4px 3.8px rgba(0, 0, 0, 0.02),\\n  0px 7.8px 6.7px rgba(0, 0, 0, 0.024),\\n  0px 14.6px 12.5px rgba(0, 0, 0, 0.029),\\n  0px 35px 30px rgba(0, 0, 0, 0.04)","60":"0px 1px 0.7px rgba(0, 0, 0, 0.011),\\n  0px 2.3px 1.7px rgba(0, 0, 0, 0.016),\\n  0px 4.4px 3.1px rgba(0, 0, 0, 0.02),\\n  0px 7.8px 5.6px rgba(0, 0, 0, 0.024),\\n  0px 14.6px 10.4px rgba(0, 0, 0, 0.029),\\n  0px 35px 25px rgba(0, 0, 0, 0.04)","70":"0px 1.1px 0.8px rgba(0, 0, 0, 0.011),\\n  0px 2.7px 2px rgba(0, 0, 0, 0.016),\\n  0px 5px 3.8px rgba(0, 0, 0, 0.02),\\n  0px 8.9px 6.7px rgba(0, 0, 0, 0.024),\\n  0px 16.7px 12.5px rgba(0, 0, 0, 0.029),\\n  0px 40px 30px rgba(0, 0, 0, 0.04)","80":"0px 1.1px 1px rgba(0, 0, 0, 0.011),\\n  0px 2.7px 2.3px rgba(0, 0, 0, 0.016),\\n  0px 5px 4.4px rgba(0, 0, 0, 0.02),\\n  0px 8.9px 7.8px rgba(0, 0, 0, 0.024),\\n  0px 16.7px 14.6px rgba(0, 0, 0, 0.029),\\n  0px 40px 35px rgba(0, 0, 0, 0.04)","90":"0px 1.4px 1.1px rgba(0, 0, 0, 0.011),\\n  0px 3.3px 2.7px rgba(0, 0, 0, 0.016),\\n  0px 6.1px 5px rgba(0, 0, 0, 0.02),\\n  0px 10.9px 8.9px rgba(0, 0, 0, 0.024),\\n  0px 20.5px 16.7px rgba(0, 0, 0, 0.029),\\n  0px 49px 40px rgba(0, 0, 0, 0.04)","100":"0px 1.4px 1.4px rgba(0, 0, 0, 0.011),\\n  0px 3.3px 3.5px rgba(0, 0, 0, 0.016),\\n  0px 6.1px 6.5px rgba(0, 0, 0, 0.02),\\n  0px 10.9px 11.6px rgba(0, 0, 0, 0.024),\\n  0px 20.5px 21.7px rgba(0, 0, 0, 0.029),\\n  0px 49px 52px rgba(0, 0, 0, 0.04)","default":"0"},"size":{"0":0.25,"5":"0.5","10":0.65,"15":0.7,"20":0.75,"25":0.95,"30":1.1,"40":1.25,"50":1.5,"60":2,"70":2.5,"80":3,"90":4,"100":5,"default":"15px"},"font":{"family":{"default":{"fontFamily":"\\"Roboto\\"","fontWeight":400,"import":"https://fonts.googleapis.com/css2?family=Roboto&display=swap"},"title":{"fontFamily":"\\"Roboto\\"","fontWeight":500,"import":"https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap"},"quote":{"fontFamily":"\\"Palatino, Times, Georgia, serif\\"","fontWeight":"normal","fontStyle":"normal","fontDisplay":"auto","capHeight":0.65},"code":{"fontFamily":"Menlo, Monaco, Consolas, Courier New, monospace","fontWeight":"normal","fontStyle":"normal","fontDisplay":"auto","capHeight":0.65}},"size":{"0":0,"5":"0.5","10":0.65,"15":0.7,"20":0.75,"25":0.95,"30":1.1,"40":1.25,"50":1.5,"60":2,"70":2.5,"80":3,"90":4,"100":5,"default":"15px"}},"border":{"width":{"0":0,"10":1,"20":2,"30":4,"40":6,"50":8,"60":12,"70":16,"80":20,"90":24,"100":30,"default":"1px"},"radius":{"0":0,"10":0.8,"20":1.6,"30":2.4,"40":3.2,"50":4,"60":5.2,"70":6.4,"80":8,"90":10,"100":12,"default":"5px"}},"space":{"0":0,"10":0.375,"20":0.75,"30":1.5,"40":2.25,"50":3.25,"60":4.25,"70":5.5,"80":7,"90":9,"100":11,"default":"1rem"},"margin":{"0":0,"10":0.375,"20":0.75,"30":1.5,"40":2.25,"50":3.25,"60":4.25,"70":5.5,"80":7,"90":9,"100":11,"default":"1rem"},"padding":{"0":0,"10":0.375,"20":0.75,"30":1.5,"40":2.25,"50":3.25,"60":4.25,"70":5.5,"80":7,"90":9,"100":11,"default":"1rem"},"offsize":{"0":0,"10":0.375,"20":0.75,"30":1.5,"40":2.25,"50":3.25,"60":4.25,"70":5.5,"80":7,"90":9,"100":11,"default":"1rem"},"media":{"defaultAction":"<=","defaultMedia":"desktop","defaultQuery":"screen","queries":{"mobile":{"minWidth":0,"maxWidth":639},"tablet":{"minWidth":640,"maxWidth":1279},"desktop":{"minWidth":1280,"maxWidth":2047},"wide":{"minWidth":2048,"maxWidth":null}}},"ui":{"default":{"paddingInline":1.5,"paddingBlock":0.75,"borderRadius":1,"borderWidth":"1px","transition":"all .1s cubic-bezier(0.700, 0.000, 0.305, 0.995)","defaultLnf":"solid","depth":"0","outline":true,"spacing":1.5,"rhythmVertical":{"margin-bottom":60}},"form":{"paddingInline":1,"paddingBlock":0.75,"borderRadius":1,"borderWidth":"1px","transition":"all .1s cubic-bezier(0.700, 0.000, 0.305, 0.995)","outline":true,"depth":"0","rhythmVertical":{"margin-bottom":40}},"outline":{"active":true,"borderWidth":"10px","borderRadius":1,"transition":"all .2s ease-out"},"scrollbar":{"size":"2px","color":"accent"},"label":{"defaultLnf":"inline"},"dropdown":{"paddingInline":0.75,"paddingBlock":0.75,"itemPaddingInline":1.5,"itemPaddingBlock":0.75},"list":{"defaultLnf":"dl","bulletChar":"-"},"fsTree":{"bulletChar":"\u25CF"},"tooltip":{"defaultPosition":"top","arrowSize":"15px"},"loader":{"duration":"1s","easing":"linear"}},"typo":{"h1":{"label":"H1","group":"style","style":{"display":"block","fontFamily":"title","fontSize":80,"lineHeight":1.3,"maxWidth":"55ch","mobile":{"fontSize":70}},"rhythmVertical":{"marginBottom":50}},"h2":{"label":"H2","group":"style","style":{"display":"block","fontFamily":"title","fontSize":70,"lineHeight":1.3,"maxWidth":"55ch","mobile":{"fontSize":60}},"rhythmVertical":{"marginBottom":50}},"h3":{"label":"H3","group":"style","style":{"display":"block","fontFamily":"title","fontSize":60,"lineHeight":1.3,"maxWidth":"55ch","mobile":{"fontSize":50}},"rhythmVertical":{"marginBottom":50}},"h4":{"label":"H4","group":"style","style":{"display":"block","fontFamily":"title","fontSize":50,"lineHeight":1.3,"maxWidth":"55ch","mobile":{"fontSize":40}},"rhythmVertical":{"marginBottom":50}},"h5":{"label":"H5","group":"style","style":{"display":"block","fontFamily":"title","fontSize":40,"lineHeight":1.3,"maxWidth":"55ch","mobile":{"fontSize":30}},"rhythmVertical":{"marginBottom":40}},"h6":{"label":"H6","group":"style","style":{"display":"block","fontFamily":"title","fontSize":30,"lineHeight":1.3,"maxWidth":"55ch","mobile":{"fontSize":30}},"hythmVertical":{"marginBottom":40}},"p":{"label":"Paragraph","group":"style","default":true,"style":{"display":"block","fontFamily":"default","fontSize":30,"lineHeight":1.8,"maxWidth":"55ch"},"rhythmVertical":{"marginBottom":40}},"lead":{"label":"Lead paragraph","group":"style","style":{"display":"block","fontFamily":"default","fontSize":40,"lineHeight":1.6,"maxWidth":"55ch","mobile":{"fontSize":40}},"rhythmVertical":{"marginBottom":40}},"hr":{"label":"--","group":"block","button":{"label":"--"},"style":{"display":"block","color":"hsla(212,6,50,1)","opacity":0.2},"rhythmVertical":{"marginBottom":50}},"pre:not([class])":{"label":"Pre","group":"text","style":{"display":"block","fontFamily":"code","color":["main","text"],"backgroundColor":["main","surface"],"lineHeight":1.5,"paddingInline":1.5,"paddingBlock":0.75,"borderRadius":1,"depth":"0"},"rhythmVertical":{"marginBottom":50}},"code:not(pre > code)":{"label":"Code","group":"text","button":{"label":"</>"},"style":{"display":"inline-block","fontFamily":"code","color":["main","text"],"lineHeight":1.1,"backgroundColor":["accent","surface"],"borderRadius":10,"paddingInline":10,"paddingBlock":0}},"blockquote":{"label":"Blockquote","group":"block","button":{"label":"<svg viewBox=\\"0 0 20 20\\"><path d=\\"M3 10.423a6.5 6.5 0 0 1 6.056-6.408l.038.67C6.448 5.423 5.354 7.663 5.22 10H9c.552 0 .5.432.5.986v4.511c0 .554-.448.503-1 .503h-5c-.552 0-.5-.449-.5-1.003v-4.574zm8 0a6.5 6.5 0 0 1 6.056-6.408l.038.67c-2.646.739-3.74 2.979-3.873 5.315H17c.552 0 .5.432.5.986v4.511c0 .554-.448.503-1 .503h-5c-.552 0-.5-.449-.5-1.003v-4.574z\\"></path></svg>"},"style":{"display":"block","fontFamily":"quote"},"editor":{"style":{"paddingInlineStart":1.5,"borderLeft":"1px solid #000"}},"rhythmVertical":{"marginBottom":50}},"a":{"label":"Link","group":"text","button":{"label":"<svg viewBox=\\"0 0 20 20\\"><path d=\\"m11.077 15 .991-1.416a.75.75 0 1 1 1.229.86l-1.148 1.64a.748.748 0 0 1-.217.206 5.251 5.251 0 0 1-8.503-5.955.741.741 0 0 1 .12-.274l1.147-1.639a.75.75 0 1 1 1.228.86L4.933 10.7l.006.003a3.75 3.75 0 0 0 6.132 4.294l.006.004zm5.494-5.335a.748.748 0 0 1-.12.274l-1.147 1.639a.75.75 0 1 1-1.228-.86l.86-1.23a3.75 3.75 0 0 0-6.144-4.301l-.86 1.229a.75.75 0 0 1-1.229-.86l1.148-1.64a.748.748 0 0 1 .217-.206 5.251 5.251 0 0 1 8.503 5.955zm-4.563-2.532a.75.75 0 0 1 .184 1.045l-3.155 4.505a.75.75 0 1 1-1.229-.86l3.155-4.506a.75.75 0 0 1 1.045-.184z\\"></path></svg>"},"style":{"color":"accent","textDecoration":"underline"}},"quote":{"label":"Quote","group":"text","button":{"label":"<svg viewBox=\\"0 0 20 20\\"><path d=\\"M3 10.423a6.5 6.5 0 0 1 6.056-6.408l.038.67C6.448 5.423 5.354 7.663 5.22 10H9c.552 0 .5.432.5.986v4.511c0 .554-.448.503-1 .503h-5c-.552 0-.5-.449-.5-1.003v-4.574zm8 0a6.5 6.5 0 0 1 6.056-6.408l.038.67c-2.646.739-3.74 2.979-3.873 5.315H17c.552 0 .5.432.5.986v4.511c0 .554-.448.503-1 .503h-5c-.552 0-.5-.449-.5-1.003v-4.574z\\"></path></svg>"},"style":{"fontFamily":"quote"},"rhythmVertical":{"marginBottom":50}},"bold":{"label":"Bold","group":"text","style":{"fontWeight":"bold"},"button":{"label":"B","style":{"fontWeight":"bolder"}}},"italic":{"label":"Italic","group":"text","style":{"fontStyle":"italic"},"button":{"label":"I","style":{"fontStyle":"italic"}}},"large":{"label":"Large","group":"text","style":{"fontSize":"1.1em"},"button":{"label":"A","style":{"fontSize":"1.01em"}}},"larger":{"label":"Larger","group":"text","style":{"fontSize":"1.2em"},"button":{"label":"A","style":{"fontSize":"1.02em"}}},"largest":{"label":"Largest","group":"text","style":{"fontSize":"1.3em"},"button":{"label":"A","style":{"fontSize":"1.03em"}}},"small":{"label":"Small","group":"text","style":{"fontSize":"0.9em"},"button":{"label":"A","style":{"fontSize":"0.99em"}}},"smaller":{"label":"Smaller","group":"text","style":{"fontSize":"0.8em"},"button":{"label":"A","style":{"fontSize":"0.98em"}}},"smallest":{"label":"Smallest","group":"text","style":{"fontSize":"0.7em"},"button":{"label":"A","style":{"fontSize":"0.97em"}}},"mark":{"label":"Mark","group":"text","button":{"label":"M"},"style":{"backgroundColor":"#ffbb00"}},"del":{"label":"Deleted","group":"text","style":{"textDecoration":"line-through"},"button":{"label":"D","style":{"textDecoration":"line-through"}}},"ins":{"label":"Inserted","group":"text","style":{"textDecoration":"underline"},"button":{"label":"U","style":{"textDecoration":"underline"}}},"sub":{"label":"Subscript","group":"text","style":{"verticalAlign":"sub","fontSize":"0.6em"},"button":{"label":"Sub","style":{"verticalAlign":"sub","fontSize":"0.6em"}}},"sup":{"label":"Superscript","group":"text","style":{"verticalAlign":"sup","fontSize":"0.6em"},"button":{"label":"Sup","style":{"verticalAlign":"sup","fontSize":"0.6em"}}},"main":{"label":"Main","group":"color","type":"color","style":{"color":"hsla(212,6,50,1)"}},"mainGradient":{"label":"Main gradient","group":"color","type":"color","style":{"backgroundSize":"100%","-webkitBackgroundClip":"text","-mozBackgroundClip":"text","-webkitTextFillColor":"transparent","-mozTextFillColor":"transparent","backgroundImage":"linear-gradient(90deg, hsla(212,6,50,1) 0%, #878c92 100%)"}},"accent":{"label":"Accent","group":"color","type":"color","style":{"color":"#ffbb00"}},"accentGradient":{"label":"Accent gradient","group":"color","type":"color","style":{"backgroundSize":"100%","-webkitBackgroundClip":"text","-mozBackgroundClip":"text","-webkitTextFillColor":"transparent","-mozTextFillColor":"transparent","backgroundImage":"linear-gradient(90deg, #ffbb00 0%, #ffc21a 100%)"}},"complementary":{"label":"Complementary","group":"color","type":"color","style":{"color":"#5100ff"}},"complementaryGradient":{"label":"Complementary gradient","group":"color","type":"color","style":{"backgroundSize":"100%","-webkitBackgroundClip":"text","-mozBackgroundClip":"text","-webkitTextFillColor":"transparent","-mozTextFillColor":"transparent","backgroundImage":"linear-gradient(90deg, #5100ff 0%, #621aff 100%)"}},"success":{"label":"Success","group":"color","type":"color","style":{"color":"#91ff00"}},"successGradient":{"label":"Success gradient","group":"color","type":"color","style":{"backgroundSize":"100%","-webkitBackgroundClip":"text","-mozBackgroundClip":"text","-webkitTextFillColor":"transparent","-mozTextFillColor":"transparent","backgroundImage":"linear-gradient(90deg, #91ff00 0%, #9cff1a 100%)"}},"warning":{"label":"Warning","group":"color","type":"color","style":{"color":"#ffd500"}},"warningGradient":{"label":"Warning gradient","group":"color","type":"color","style":{"backgroundSize":"100%","-webkitBackgroundClip":"text","-mozBackgroundClip":"text","-webkitTextFillColor":"transparent","-mozTextFillColor":"transparent","backgroundImage":"linear-gradient(90deg, #ffd500 0%, #ffd91a 100%)"}},"error":{"label":"Error","group":"color","type":"color","style":{"color":"#ff003b"}},"errorGradient":{"label":"Error gradient","group":"color","type":"color","style":{"backgroundSize":"100%","-webkitBackgroundClip":"text","-mozBackgroundClip":"text","-webkitTextFillColor":"transparent","-mozTextFillColor":"transparent","backgroundImage":"linear-gradient(90deg, #ff003b 0%, #ff1a4f 100%)"}},"info":{"label":"Info","group":"color","type":"color","style":{"color":"#00ffff"}},"infoGradient":{"label":"Info gradient","group":"color","type":"color","style":{"backgroundSize":"100%","-webkitBackgroundClip":"text","-mozBackgroundClip":"text","-webkitTextFillColor":"transparent","-mozTextFillColor":"transparent","backgroundImage":"linear-gradient(90deg, #00ffff 0%, #1affff 100%)"}}},"wireframe":{"light":{"border":"1px solid rgba(0,0,0,0.1)","borderColor":"rgba(0,0,0,0.1)","background":"#ffffff","surface":"#fafafa"},"dark":{"border":"1px solid rgba(255,255,255,0.2)","borderColor":"rgba(255,255,255,0.2)","background":"#2D323A","surface":"#3B424C"}},"metas":{"title":"Default light","description":"Nice and elegant light theme"},"colorSchema":{"text":{"darken":0,"color":{"base":{"darken":5},"main":{"darken":10},"complementary":{"lighten":15},"info":{"darken":10}}},"placeholder":{"darken":0,"alpha":0.4},"foreground":{"lighten":50},"background":{"lighten":50,"color":{"surface":{"darken":20}}},"backgroundForeground":{"darken":45},"surface":{"lighten":40,"color":{"base":{"lighten":49},"main":{"lighten":49}}},"surfaceForeground":{"darken":45},"ui":{"lighten":49},"uiForeground":{"darken":15},"border":{"alpha":0.2},"gradientStart":{"lighten":0},"gradientEnd":{"lighten":20}}},"default-dark":{"defaultColor":"main","color":{"current":"hsla(212,6,50,1)","main":"hsla(212,6,50,1)","accent":"#ffbb00","complementary":"#5100ff","success":"#91ff00","warning":"#ffd500","error":"#ff003b","info":"#00ffff"},"classmap":{"enabled":true,"url":"/classmap.json"},"lod":{"enabled":true,"defaultLevel":3,"botLevel":1,"levels":{"0":{"name":"bare","speedIndex":0},"1":{"name":"lnf","speedIndex":30},"2":{"name":"theme","speedIndex":40},"3":{"name":"high","speedIndex":50},"4":{"name":"ultra","speedIndex":60}},"method":"file","defaultAction":">=","cssProperties":{}},"easing":{"default":"cubic-bezier(0.700, 0.000, 0.305, 0.995)"},"scroll":{"duration":300,"offset":0,"offsetX":0,"offsetY":100},"partytown":{"enabled":false,"forward":["dataLayer.push","fbq","freshpaint.addPageviewProperties","freshpaint.identify","freshpaint.track","_hsq.push","Intercom","_learnq.push","ttq.track","ttq.page","ttq.load","mixpanel.track"]},"timing":{"slow":".6s","default":".3s","fast":".1s"},"transition":{"slow":"all .6s cubic-bezier(0.700, 0.000, 0.305, 0.995)","default":"all .3s cubic-bezier(0.700, 0.000, 0.305, 0.995)","fast":"all .1s cubic-bezier(0.700, 0.000, 0.305, 0.995)"},"gradient":{"defaultModifierStart":{},"defaultModifierEnd":{"lighten":20},"defaultX":"50%","defaultY":"50%","defaultAngle":"90deg","defaultTextModifierStart":{"darken":5},"defaultTextModifierEnd":{"lighten":5},"defaultTextAngle":"90deg"},"helpers":{"states":["mounted","active","loading"],"clearfix":{"default":"overflow"},"disabled":{"opacity":0.4},"truncate":{"count":10},"order":{"count":20}},"layout":{"offset":{"top":100,"right":0,"bottom":0,"left":0},"container":{"default":"1280px","wide":"1440px","full":"none"},"grid":{"1":1,"2":2,"3":3,"4":4,"5":5,"6":6,"7":7,"8":8,"9":9,"10":10,"11":11,"12":12},"layout":{"1":"1","12":"1 2","21":"2 1","112":"1 1 2","122":"1 2 2","123":"1 2 3","211":"2 1 1","221":"2 2 1","321":"3 2 1","1112":"1 1 1 2","1222":"1 2 2 2","1234":"1 2 3 4","2221":"2 2 2 1","11112":"1 1 1 1 2","12222":"1 2 2 2 2","12345":"1 2 3 4 5","22221":"2 2 2 2 1","111112":"1 1 1 1 1 2","122222":"1 2 2 2 2 2","123456":"1 2 3 4 5 6","1_2":"1 _ 2","2_1":"2 _ 1","12_33":"1 2 _ 3 3","1_23":"1 _ 2 3","1_2_3":"1 _ 2 _ 3","32_1":"3 2 _ 1","3_21":"3 _ 2 1","12_34":"1 2 _ 3 4","123_4":"1 2 3 _ 4","1_234":"1 _ 2 3 4","1_2_3_4":"1 _ 2 _ 3 _ 4","123_45":"1 2 3 _ 4 5","12_345":"1 2 _ 3 4 5","1_2345":"1 _ 2 3 4 5","1234_5":"1 2 3 4 _ 5","1_2_3_4_5":"1 _ 2 _ 3 _ 4 _ 5"}},"ratio":{"1":1,"21-9":2.3333333333333335,"16-9":1.7777777777777777,"2-3":0.6666666666666666,"4-3":1.3333333333333333,"3-4":0.75},"scalable":{"margin":false,"padding":true,"offsize":false,"font":true},"scale":{"10":1,"11":1.1,"12":1.2,"13":1.3,"14":1.4,"15":1.5,"16":1.6,"17":1.7,"18":1.8,"19":1.9,"20":2,"default":1,"01":0.1,"02":0.2,"03":0.3,"04":0.4,"05":0.5,"06":0.6,"07":0.7,"08":0.8,"09":0.9},"opacity":{"0":0,"10":0.1,"20":0.2,"30":0.3,"40":0.4,"50":0.5,"60":0.6,"70":0.7,"80":0.8,"90":0.9,"100":1},"width":{"0":"0","10":"10%","20":"20%","30":"30%","40":"40%","50":"50%","60":"60%","70":"70%","80":"80%","90":"90%","100":"100%"},"height":{"0":"0","10":"10%","20":"20%","30":"30%","40":"40%","50":"50%","60":"60%","70":"70%","80":"80%","90":"90%","100":"100%"},"depth":{"0":"0","5":"0px 0.6px 0.4px rgba(0, 0, 0, 0.006),\\n  0px 1.3px 1px rgba(0, 0, 0, 0.006),\\n  0px 2.5px 1.5px rgba(0, 0, 0, 0.005),\\n  0px 3.5px 3.4px rgba(0, 0, 0, 0.006),\\n  0px 4.4px 4.3px rgba(0, 0, 0, 0.007),\\n  0px 10px 10px rgba(0, 0, 0, 0.01)","10":"0px 0.6px 0.4px rgba(0, 0, 0, 0.006),\\n  0px 1.3px 1px rgba(0, 0, 0, 0.008),\\n  0px 2.5px 1.9px rgba(0, 0, 0, 0.01),\\n  0px 4.5px 3.4px rgba(0, 0, 0, 0.012),\\n  0px 8.4px 6.3px rgba(0, 0, 0, 0.014),\\n  0px 20px 15px rgba(0, 0, 0, 0.02)","20":"0px 0.6px 0.4px rgba(0, 0, 0, 0.006),\\n  0px 1.3px 1px rgba(0, 0, 0, 0.008),\\n  0px 2.5px 1.9px rgba(0, 0, 0, 0.01),\\n  0px 4.5px 3.4px rgba(0, 0, 0, 0.012),\\n  0px 8.4px 6.3px rgba(0, 0, 0, 0.014),\\n  0px 20px 15px rgba(0, 0, 0, 0.02)","30":"0px 0.6px 0.4px rgba(0, 0, 0, 0.008),\\n  0px 1.3px 1px rgba(0, 0, 0, 0.012),\\n  0px 2.5px 1.9px rgba(0, 0, 0, 0.015),\\n  0px 4.5px 3.4px rgba(0, 0, 0, 0.018),\\n  0px 8.4px 6.3px rgba(0, 0, 0, 0.022),\\n  0px 20px 15px rgba(0, 0, 0, 0.03)","40":"0px 0.8px 0.6px rgba(0, 0, 0, 0.008),\\n  0px 2px 1.3px rgba(0, 0, 0, 0.012),\\n  0px 3.8px 2.5px rgba(0, 0, 0, 0.015),\\n  0px 6.7px 4.5px rgba(0, 0, 0, 0.018),\\n  0px 12.5px 8.4px rgba(0, 0, 0, 0.022),\\n  0px 30px 20px rgba(0, 0, 0, 0.03)","50":"0px 1px 0.8px rgba(0, 0, 0, 0.011),\\n  0px 2.3px 2px rgba(0, 0, 0, 0.016),\\n  0px 4.4px 3.8px rgba(0, 0, 0, 0.02),\\n  0px 7.8px 6.7px rgba(0, 0, 0, 0.024),\\n  0px 14.6px 12.5px rgba(0, 0, 0, 0.029),\\n  0px 35px 30px rgba(0, 0, 0, 0.04)","60":"0px 1px 0.7px rgba(0, 0, 0, 0.011),\\n  0px 2.3px 1.7px rgba(0, 0, 0, 0.016),\\n  0px 4.4px 3.1px rgba(0, 0, 0, 0.02),\\n  0px 7.8px 5.6px rgba(0, 0, 0, 0.024),\\n  0px 14.6px 10.4px rgba(0, 0, 0, 0.029),\\n  0px 35px 25px rgba(0, 0, 0, 0.04)","70":"0px 1.1px 0.8px rgba(0, 0, 0, 0.011),\\n  0px 2.7px 2px rgba(0, 0, 0, 0.016),\\n  0px 5px 3.8px rgba(0, 0, 0, 0.02),\\n  0px 8.9px 6.7px rgba(0, 0, 0, 0.024),\\n  0px 16.7px 12.5px rgba(0, 0, 0, 0.029),\\n  0px 40px 30px rgba(0, 0, 0, 0.04)","80":"0px 1.1px 1px rgba(0, 0, 0, 0.011),\\n  0px 2.7px 2.3px rgba(0, 0, 0, 0.016),\\n  0px 5px 4.4px rgba(0, 0, 0, 0.02),\\n  0px 8.9px 7.8px rgba(0, 0, 0, 0.024),\\n  0px 16.7px 14.6px rgba(0, 0, 0, 0.029),\\n  0px 40px 35px rgba(0, 0, 0, 0.04)","90":"0px 1.4px 1.1px rgba(0, 0, 0, 0.011),\\n  0px 3.3px 2.7px rgba(0, 0, 0, 0.016),\\n  0px 6.1px 5px rgba(0, 0, 0, 0.02),\\n  0px 10.9px 8.9px rgba(0, 0, 0, 0.024),\\n  0px 20.5px 16.7px rgba(0, 0, 0, 0.029),\\n  0px 49px 40px rgba(0, 0, 0, 0.04)","100":"0px 1.4px 1.4px rgba(0, 0, 0, 0.011),\\n  0px 3.3px 3.5px rgba(0, 0, 0, 0.016),\\n  0px 6.1px 6.5px rgba(0, 0, 0, 0.02),\\n  0px 10.9px 11.6px rgba(0, 0, 0, 0.024),\\n  0px 20.5px 21.7px rgba(0, 0, 0, 0.029),\\n  0px 49px 52px rgba(0, 0, 0, 0.04)","default":"0"},"size":{"0":0.25,"5":"0.5","10":0.65,"15":0.7,"20":0.75,"25":0.95,"30":1.1,"40":1.25,"50":1.5,"60":2,"70":2.5,"80":3,"90":4,"100":5,"default":"15px"},"font":{"family":{"default":{"fontFamily":"\\"Roboto\\"","fontWeight":400,"import":"https://fonts.googleapis.com/css2?family=Roboto&display=swap"},"title":{"fontFamily":"\\"Roboto\\"","fontWeight":500,"import":"https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap"},"quote":{"fontFamily":"\\"Palatino, Times, Georgia, serif\\"","fontWeight":"normal","fontStyle":"normal","fontDisplay":"auto","capHeight":0.65},"code":{"fontFamily":"Menlo, Monaco, Consolas, Courier New, monospace","fontWeight":"normal","fontStyle":"normal","fontDisplay":"auto","capHeight":0.65}},"size":{"0":0,"5":"0.5","10":0.65,"15":0.7,"20":0.75,"25":0.95,"30":1.1,"40":1.25,"50":1.5,"60":2,"70":2.5,"80":3,"90":4,"100":5,"default":"15px"}},"border":{"width":{"0":0,"10":1,"20":2,"30":4,"40":6,"50":8,"60":12,"70":16,"80":20,"90":24,"100":30,"default":"1px"},"radius":{"0":0,"10":0.8,"20":1.6,"30":2.4,"40":3.2,"50":4,"60":5.2,"70":6.4,"80":8,"90":10,"100":12,"default":"5px"}},"space":{"0":0,"10":0.375,"20":0.75,"30":1.5,"40":2.25,"50":3.25,"60":4.25,"70":5.5,"80":7,"90":9,"100":11,"default":"1rem"},"margin":{"0":0,"10":0.375,"20":0.75,"30":1.5,"40":2.25,"50":3.25,"60":4.25,"70":5.5,"80":7,"90":9,"100":11,"default":"1rem"},"padding":{"0":0,"10":0.375,"20":0.75,"30":1.5,"40":2.25,"50":3.25,"60":4.25,"70":5.5,"80":7,"90":9,"100":11,"default":"1rem"},"offsize":{"0":0,"10":0.375,"20":0.75,"30":1.5,"40":2.25,"50":3.25,"60":4.25,"70":5.5,"80":7,"90":9,"100":11,"default":"1rem"},"media":{"defaultAction":"<=","defaultMedia":"desktop","defaultQuery":"screen","queries":{"mobile":{"minWidth":0,"maxWidth":639},"tablet":{"minWidth":640,"maxWidth":1279},"desktop":{"minWidth":1280,"maxWidth":2047},"wide":{"minWidth":2048,"maxWidth":null}}},"ui":{"default":{"paddingInline":1.5,"paddingBlock":0.75,"borderRadius":1,"borderWidth":"1px","transition":"all .1s cubic-bezier(0.700, 0.000, 0.305, 0.995)","defaultLnf":"solid","depth":"0","outline":true,"spacing":1.5,"rhythmVertical":{"margin-bottom":60}},"form":{"paddingInline":1,"paddingBlock":0.75,"borderRadius":1,"borderWidth":"1px","transition":"all .1s cubic-bezier(0.700, 0.000, 0.305, 0.995)","outline":true,"depth":"0","rhythmVertical":{"margin-bottom":40}},"outline":{"active":true,"borderWidth":"10px","borderRadius":1,"transition":"all .2s ease-out"},"scrollbar":{"size":"2px","color":"accent"},"label":{"defaultLnf":"inline"},"dropdown":{"paddingInline":0.75,"paddingBlock":0.75,"itemPaddingInline":1.5,"itemPaddingBlock":0.75},"list":{"defaultLnf":"dl","bulletChar":"-"},"fsTree":{"bulletChar":"\u25CF"},"tooltip":{"defaultPosition":"top","arrowSize":"15px"},"loader":{"duration":"1s","easing":"linear"}},"typo":{"h1":{"label":"H1","group":"style","style":{"display":"block","fontFamily":"title","fontSize":80,"lineHeight":1.3,"maxWidth":"55ch","mobile":{"fontSize":70}},"rhythmVertical":{"marginBottom":50}},"h2":{"label":"H2","group":"style","style":{"display":"block","fontFamily":"title","fontSize":70,"lineHeight":1.3,"maxWidth":"55ch","mobile":{"fontSize":60}},"rhythmVertical":{"marginBottom":50}},"h3":{"label":"H3","group":"style","style":{"display":"block","fontFamily":"title","fontSize":60,"lineHeight":1.3,"maxWidth":"55ch","mobile":{"fontSize":50}},"rhythmVertical":{"marginBottom":50}},"h4":{"label":"H4","group":"style","style":{"display":"block","fontFamily":"title","fontSize":50,"lineHeight":1.3,"maxWidth":"55ch","mobile":{"fontSize":40}},"rhythmVertical":{"marginBottom":50}},"h5":{"label":"H5","group":"style","style":{"display":"block","fontFamily":"title","fontSize":40,"lineHeight":1.3,"maxWidth":"55ch","mobile":{"fontSize":30}},"rhythmVertical":{"marginBottom":40}},"h6":{"label":"H6","group":"style","style":{"display":"block","fontFamily":"title","fontSize":30,"lineHeight":1.3,"maxWidth":"55ch","mobile":{"fontSize":30}},"hythmVertical":{"marginBottom":40}},"p":{"label":"Paragraph","group":"style","default":true,"style":{"display":"block","fontFamily":"default","fontSize":30,"lineHeight":1.8,"maxWidth":"55ch"},"rhythmVertical":{"marginBottom":40}},"lead":{"label":"Lead paragraph","group":"style","style":{"display":"block","fontFamily":"default","fontSize":40,"lineHeight":1.6,"maxWidth":"55ch","mobile":{"fontSize":40}},"rhythmVertical":{"marginBottom":40}},"hr":{"label":"--","group":"block","button":{"label":"--"},"style":{"display":"block","color":"hsla(212,6,50,1)","opacity":0.2},"rhythmVertical":{"marginBottom":50}},"pre:not([class])":{"label":"Pre","group":"text","style":{"display":"block","fontFamily":"code","color":["main","text"],"backgroundColor":["main","surface"],"lineHeight":1.5,"paddingInline":1.5,"paddingBlock":0.75,"borderRadius":1,"depth":"0"},"rhythmVertical":{"marginBottom":50}},"code:not(pre > code)":{"label":"Code","group":"text","button":{"label":"</>"},"style":{"display":"inline-block","fontFamily":"code","color":["main","text"],"lineHeight":1.1,"backgroundColor":["accent","surface"],"borderRadius":10,"paddingInline":10,"paddingBlock":0}},"blockquote":{"label":"Blockquote","group":"block","button":{"label":"<svg viewBox=\\"0 0 20 20\\"><path d=\\"M3 10.423a6.5 6.5 0 0 1 6.056-6.408l.038.67C6.448 5.423 5.354 7.663 5.22 10H9c.552 0 .5.432.5.986v4.511c0 .554-.448.503-1 .503h-5c-.552 0-.5-.449-.5-1.003v-4.574zm8 0a6.5 6.5 0 0 1 6.056-6.408l.038.67c-2.646.739-3.74 2.979-3.873 5.315H17c.552 0 .5.432.5.986v4.511c0 .554-.448.503-1 .503h-5c-.552 0-.5-.449-.5-1.003v-4.574z\\"></path></svg>"},"style":{"display":"block","fontFamily":"quote"},"editor":{"style":{"paddingInlineStart":1.5,"borderLeft":"1px solid #000"}},"rhythmVertical":{"marginBottom":50}},"a":{"label":"Link","group":"text","button":{"label":"<svg viewBox=\\"0 0 20 20\\"><path d=\\"m11.077 15 .991-1.416a.75.75 0 1 1 1.229.86l-1.148 1.64a.748.748 0 0 1-.217.206 5.251 5.251 0 0 1-8.503-5.955.741.741 0 0 1 .12-.274l1.147-1.639a.75.75 0 1 1 1.228.86L4.933 10.7l.006.003a3.75 3.75 0 0 0 6.132 4.294l.006.004zm5.494-5.335a.748.748 0 0 1-.12.274l-1.147 1.639a.75.75 0 1 1-1.228-.86l.86-1.23a3.75 3.75 0 0 0-6.144-4.301l-.86 1.229a.75.75 0 0 1-1.229-.86l1.148-1.64a.748.748 0 0 1 .217-.206 5.251 5.251 0 0 1 8.503 5.955zm-4.563-2.532a.75.75 0 0 1 .184 1.045l-3.155 4.505a.75.75 0 1 1-1.229-.86l3.155-4.506a.75.75 0 0 1 1.045-.184z\\"></path></svg>"},"style":{"color":"accent","textDecoration":"underline"}},"quote":{"label":"Quote","group":"text","button":{"label":"<svg viewBox=\\"0 0 20 20\\"><path d=\\"M3 10.423a6.5 6.5 0 0 1 6.056-6.408l.038.67C6.448 5.423 5.354 7.663 5.22 10H9c.552 0 .5.432.5.986v4.511c0 .554-.448.503-1 .503h-5c-.552 0-.5-.449-.5-1.003v-4.574zm8 0a6.5 6.5 0 0 1 6.056-6.408l.038.67c-2.646.739-3.74 2.979-3.873 5.315H17c.552 0 .5.432.5.986v4.511c0 .554-.448.503-1 .503h-5c-.552 0-.5-.449-.5-1.003v-4.574z\\"></path></svg>"},"style":{"fontFamily":"quote"},"rhythmVertical":{"marginBottom":50}},"bold":{"label":"Bold","group":"text","style":{"fontWeight":"bold"},"button":{"label":"B","style":{"fontWeight":"bolder"}}},"italic":{"label":"Italic","group":"text","style":{"fontStyle":"italic"},"button":{"label":"I","style":{"fontStyle":"italic"}}},"large":{"label":"Large","group":"text","style":{"fontSize":"1.1em"},"button":{"label":"A","style":{"fontSize":"1.01em"}}},"larger":{"label":"Larger","group":"text","style":{"fontSize":"1.2em"},"button":{"label":"A","style":{"fontSize":"1.02em"}}},"largest":{"label":"Largest","group":"text","style":{"fontSize":"1.3em"},"button":{"label":"A","style":{"fontSize":"1.03em"}}},"small":{"label":"Small","group":"text","style":{"fontSize":"0.9em"},"button":{"label":"A","style":{"fontSize":"0.99em"}}},"smaller":{"label":"Smaller","group":"text","style":{"fontSize":"0.8em"},"button":{"label":"A","style":{"fontSize":"0.98em"}}},"smallest":{"label":"Smallest","group":"text","style":{"fontSize":"0.7em"},"button":{"label":"A","style":{"fontSize":"0.97em"}}},"mark":{"label":"Mark","group":"text","button":{"label":"M"},"style":{"backgroundColor":"#ffbb00"}},"del":{"label":"Deleted","group":"text","style":{"textDecoration":"line-through"},"button":{"label":"D","style":{"textDecoration":"line-through"}}},"ins":{"label":"Inserted","group":"text","style":{"textDecoration":"underline"},"button":{"label":"U","style":{"textDecoration":"underline"}}},"sub":{"label":"Subscript","group":"text","style":{"verticalAlign":"sub","fontSize":"0.6em"},"button":{"label":"Sub","style":{"verticalAlign":"sub","fontSize":"0.6em"}}},"sup":{"label":"Superscript","group":"text","style":{"verticalAlign":"sup","fontSize":"0.6em"},"button":{"label":"Sup","style":{"verticalAlign":"sup","fontSize":"0.6em"}}},"main":{"label":"Main","group":"color","type":"color","style":{"color":"hsla(212,6,50,1)"}},"mainGradient":{"label":"Main gradient","group":"color","type":"color","style":{"backgroundSize":"100%","-webkitBackgroundClip":"text","-mozBackgroundClip":"text","-webkitTextFillColor":"transparent","-mozTextFillColor":"transparent","backgroundImage":"linear-gradient(90deg, hsla(212,6,50,1) 0%, #878c92 100%)"}},"accent":{"label":"Accent","group":"color","type":"color","style":{"color":"#ffbb00"}},"accentGradient":{"label":"Accent gradient","group":"color","type":"color","style":{"backgroundSize":"100%","-webkitBackgroundClip":"text","-mozBackgroundClip":"text","-webkitTextFillColor":"transparent","-mozTextFillColor":"transparent","backgroundImage":"linear-gradient(90deg, #ffbb00 0%, #ffc21a 100%)"}},"complementary":{"label":"Complementary","group":"color","type":"color","style":{"color":"#5100ff"}},"complementaryGradient":{"label":"Complementary gradient","group":"color","type":"color","style":{"backgroundSize":"100%","-webkitBackgroundClip":"text","-mozBackgroundClip":"text","-webkitTextFillColor":"transparent","-mozTextFillColor":"transparent","backgroundImage":"linear-gradient(90deg, #5100ff 0%, #621aff 100%)"}},"success":{"label":"Success","group":"color","type":"color","style":{"color":"#91ff00"}},"successGradient":{"label":"Success gradient","group":"color","type":"color","style":{"backgroundSize":"100%","-webkitBackgroundClip":"text","-mozBackgroundClip":"text","-webkitTextFillColor":"transparent","-mozTextFillColor":"transparent","backgroundImage":"linear-gradient(90deg, #91ff00 0%, #9cff1a 100%)"}},"warning":{"label":"Warning","group":"color","type":"color","style":{"color":"#ffd500"}},"warningGradient":{"label":"Warning gradient","group":"color","type":"color","style":{"backgroundSize":"100%","-webkitBackgroundClip":"text","-mozBackgroundClip":"text","-webkitTextFillColor":"transparent","-mozTextFillColor":"transparent","backgroundImage":"linear-gradient(90deg, #ffd500 0%, #ffd91a 100%)"}},"error":{"label":"Error","group":"color","type":"color","style":{"color":"#ff003b"}},"errorGradient":{"label":"Error gradient","group":"color","type":"color","style":{"backgroundSize":"100%","-webkitBackgroundClip":"text","-mozBackgroundClip":"text","-webkitTextFillColor":"transparent","-mozTextFillColor":"transparent","backgroundImage":"linear-gradient(90deg, #ff003b 0%, #ff1a4f 100%)"}},"info":{"label":"Info","group":"color","type":"color","style":{"color":"#00ffff"}},"infoGradient":{"label":"Info gradient","group":"color","type":"color","style":{"backgroundSize":"100%","-webkitBackgroundClip":"text","-mozBackgroundClip":"text","-webkitTextFillColor":"transparent","-mozTextFillColor":"transparent","backgroundImage":"linear-gradient(90deg, #00ffff 0%, #1affff 100%)"}}},"wireframe":{"light":{"border":"1px solid rgba(0,0,0,0.1)","borderColor":"rgba(0,0,0,0.1)","background":"#ffffff","surface":"#fafafa"},"dark":{"border":"1px solid rgba(255,255,255,0.2)","borderColor":"rgba(255,255,255,0.2)","background":"#2D323A","surface":"#3B424C"}},"metas":{"title":"Default dark","description":"Nice and elegant dark theme"},"colorSchema":{"text":{"lighten":15,"color":{"base":{"lighten":30},"main":{"lighten":46},"complementary":{"lighten":30}}},"placeholder":{"lighten":50,"alpha":0.4},"foreground":{"lighten":50},"background":{"darken":30},"backgroundForeground":{"lighten":50},"surface":{"darken":25},"surfaceForeground":{"lighten":50},"ui":{"darken":28},"uiForeground":{"lighten":45},"border":{"alpha":0.4},"gradientStart":{"lighten":0},"gradientEnd":{"darken":20}}}}}},"frontspec":{"metas":{"lang":"en","title":"Coffeekraken","homepage":"https://coffeekraken.io","description":"The frontend toolkit that works for everyone. Experts, professionals and new-comers","themeColor":"#ffbb00","author":{"name":"Olivier Bossel","email":"olivier.bossel@gmail.com","url":"https://coffeekraken.io"},"og":{"title":"Coffeekraken","description":"The frontend toolkit that works for everyone. Experts, professionals and new-comers","type":"website","url":"https://coffeekraken.io","image":"https://cdnv2.coffeekraken.io/coffeekraken-og.png"}},"theme":{"theme":"default","variant":"dark","themes":{"default-light":{"title":"Default light","description":"Nice and elegant light theme"},"default-dark":{"title":"Default dark","description":"Nice and elegant dark theme"}}},"media":{"defaultAction":"<=","defaultMedia":"desktop","defaultQuery":"screen","queries":{"wide":{"minWidth":2048,"maxWidth":null},"desktop":{"minWidth":1280,"maxWidth":2047},"tablet":{"minWidth":640,"maxWidth":1279},"mobile":{"minWidth":0,"maxWidth":639}}},"google":{"gtm":"GTM-K4LMN8Q","map":{"apiKey":"AIzaSyDzFfEzhmYXRTlONUCtMWQ88uHJhsbtXY4"}},"lod":{"enabled":true,"defaultLevel":3,"botLevel":1,"levels":{"0":{"name":"bare","speedIndex":0},"1":{"name":"bare+","speedIndex":30},"2":{"name":"low","speedIndex":40},"3":{"name":"medium","speedIndex":50},"4":{"name":"high","speedIndex":60}},"method":"file","defaultAction":">="},"partytown":{"enabled":false,"forward":["dataLayer.push","fbq","freshpaint.addPageviewProperties","freshpaint.identify","freshpaint.track","_hsq.push","Intercom","_learnq.push","ttq.track","ttq.page","ttq.load","mixpanel.track"]},"font":{"family":{"default":{"fontFamily":"\\"Roboto\\"","fontWeight":400,"import":"https://fonts.googleapis.com/css2?family=Roboto&display=swap"},"title":{"fontFamily":"\\"Roboto\\"","fontWeight":500,"import":"https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap"},"quote":{"fontFamily":"\\"Palatino, Times, Georgia, serif\\"","fontWeight":"normal","fontStyle":"normal","fontDisplay":"auto","capHeight":0.65},"code":{"fontFamily":"Menlo, Monaco, Consolas, Courier New, monospace","fontWeight":"normal","fontStyle":"normal","fontDisplay":"auto","capHeight":0.65}},"size":{"0":0,"5":"0.5","10":0.65,"15":0.7,"20":0.75,"25":0.95,"30":1.1,"40":1.25,"50":1.5,"60":2,"70":2.5,"80":3,"90":4,"100":5,"default":"15px"}},"typo":{"h1":{"label":"H1","group":"style","button":{},"editor":{},"style":{"display":"block","fontFamily":"\\"Roboto\\"","fontSize":"45px","lineHeight":1.3,"maxWidth":"55ch","marginBottom":"3.25rem"}},"h2":{"label":"H2","group":"style","button":{},"editor":{},"style":{"display":"block","fontFamily":"\\"Roboto\\"","fontSize":"37.5px","lineHeight":1.3,"maxWidth":"55ch","marginBottom":"3.25rem"}},"h3":{"label":"H3","group":"style","button":{},"editor":{},"style":{"display":"block","fontFamily":"\\"Roboto\\"","fontSize":"30px","lineHeight":1.3,"maxWidth":"55ch","marginBottom":"3.25rem"}},"h4":{"label":"H4","group":"style","button":{},"editor":{},"style":{"display":"block","fontFamily":"\\"Roboto\\"","fontSize":"22.5px","lineHeight":1.3,"maxWidth":"55ch","marginBottom":"3.25rem"}},"h5":{"label":"H5","group":"style","button":{},"editor":{},"style":{"display":"block","fontFamily":"\\"Roboto\\"","fontSize":"18.75px","lineHeight":1.3,"maxWidth":"55ch","marginBottom":"2.25rem"}},"h6":{"label":"H6","group":"style","button":{},"editor":{},"style":{"display":"block","fontFamily":"\\"Roboto\\"","fontSize":"16.5px","lineHeight":1.3,"maxWidth":"55ch"}},"p":{"label":"Paragraph","group":"style","button":{},"editor":{},"style":{"display":"block","fontFamily":"\\"Roboto\\"","fontSize":"16.5px","lineHeight":1.8,"maxWidth":"55ch","marginBottom":"2.25rem"},"default":true},"lead":{"label":"Lead paragraph","group":"style","button":{},"editor":{},"style":{"display":"block","fontFamily":"\\"Roboto\\"","fontSize":"18.75px","lineHeight":1.6,"maxWidth":"55ch","marginBottom":"2.25rem"}},"hr":{"label":"--","group":"block","button":{"label":"--"},"editor":{},"style":{"display":"block","color":"hsla(212,8,50,1)","opacity":0.2,"marginBottom":"3.25rem"}},"pre":{"label":"Pre","group":"text","button":{},"editor":{},"style":{"display":"block","fontFamily":"Menlo, Monaco, Consolas, Courier New, monospace","color":"#f4f5f6","backgroundColor":"#3b4045","lineHeight":1.5,"paddingInline":"1.5rem","paddingBlock":"0.75rem","borderRadius":"5px","depth":"0","marginBottom":"3.25rem"}},"code":{"label":"Code","group":"text","button":{"label":"</>"},"editor":{},"style":{"display":"inline-block","fontFamily":"Menlo, Monaco, Consolas, Courier New, monospace","color":"#f4f5f6","lineHeight":1.1,"backgroundColor":"#805e00","borderRadius":"4px","paddingInline":"0.375rem","paddingBlock":"0rem"}},"blockquote":{"label":"Blockquote","group":"block","button":{"label":"<svg viewBox=\\"0 0 20 20\\"><path d=\\"M3 10.423a6.5 6.5 0 0 1 6.056-6.408l.038.67C6.448 5.423 5.354 7.663 5.22 10H9c.552 0 .5.432.5.986v4.511c0 .554-.448.503-1 .503h-5c-.552 0-.5-.449-.5-1.003v-4.574zm8 0a6.5 6.5 0 0 1 6.056-6.408l.038.67c-2.646.739-3.74 2.979-3.873 5.315H17c.552 0 .5.432.5.986v4.511c0 .554-.448.503-1 .503h-5c-.552 0-.5-.449-.5-1.003v-4.574z\\"></path></svg>"},"editor":{"style":{"paddingInlineStart":1.5,"borderLeft":"1px solid #000"}},"style":{"display":"block","fontFamily":"\\"Palatino, Times, Georgia, serif\\"","marginBottom":"3.25rem"}},"a":{"label":"Link","group":"text","button":{"label":"<svg viewBox=\\"0 0 20 20\\"><path d=\\"m11.077 15 .991-1.416a.75.75 0 1 1 1.229.86l-1.148 1.64a.748.748 0 0 1-.217.206 5.251 5.251 0 0 1-8.503-5.955.741.741 0 0 1 .12-.274l1.147-1.639a.75.75 0 1 1 1.228.86L4.933 10.7l.006.003a3.75 3.75 0 0 0 6.132 4.294l.006.004zm5.494-5.335a.748.748 0 0 1-.12.274l-1.147 1.639a.75.75 0 1 1-1.228-.86l.86-1.23a3.75 3.75 0 0 0-6.144-4.301l-.86 1.229a.75.75 0 0 1-1.229-.86l1.148-1.64a.748.748 0 0 1 .217-.206 5.251 5.251 0 0 1 8.503 5.955zm-4.563-2.532a.75.75 0 0 1 .184 1.045l-3.155 4.505a.75.75 0 1 1-1.229-.86l3.155-4.506a.75.75 0 0 1 1.045-.184z\\"></path></svg>"},"editor":{},"style":{"color":"#ffbb00","textDecoration":"underline"}},"quote":{"label":"Quote","group":"text","button":{"label":"<svg viewBox=\\"0 0 20 20\\"><path d=\\"M3 10.423a6.5 6.5 0 0 1 6.056-6.408l.038.67C6.448 5.423 5.354 7.663 5.22 10H9c.552 0 .5.432.5.986v4.511c0 .554-.448.503-1 .503h-5c-.552 0-.5-.449-.5-1.003v-4.574zm8 0a6.5 6.5 0 0 1 6.056-6.408l.038.67c-2.646.739-3.74 2.979-3.873 5.315H17c.552 0 .5.432.5.986v4.511c0 .554-.448.503-1 .503h-5c-.552 0-.5-.449-.5-1.003v-4.574z\\"></path></svg>"},"editor":{},"style":{"fontFamily":"\\"Palatino, Times, Georgia, serif\\"","marginBottom":"3.25rem"}},"bold":{"label":"Bold","group":"text","button":{"label":"B","style":{"fontWeight":"bolder"}},"editor":{},"style":{"fontWeight":"bold"}},"italic":{"label":"Italic","group":"text","button":{"label":"I","style":{"fontStyle":"italic"}},"editor":{},"style":{"fontStyle":"italic"}},"large":{"label":"Large","group":"text","button":{"label":"A","style":{"fontSize":"1.01em"}},"editor":{},"style":{"fontSize":"1.1em"}},"larger":{"label":"Larger","group":"text","button":{"label":"A","style":{"fontSize":"1.02em"}},"editor":{},"style":{"fontSize":"1.2em"}},"largest":{"label":"Largest","group":"text","button":{"label":"A","style":{"fontSize":"1.03em"}},"editor":{},"style":{"fontSize":"1.3em"}},"small":{"label":"Small","group":"text","button":{"label":"A","style":{"fontSize":"0.99em"}},"editor":{},"style":{"fontSize":"0.9em"}},"smaller":{"label":"Smaller","group":"text","button":{"label":"A","style":{"fontSize":"0.98em"}},"editor":{},"style":{"fontSize":"0.8em"}},"smallest":{"label":"Smallest","group":"text","button":{"label":"A","style":{"fontSize":"0.97em"}},"editor":{},"style":{"fontSize":"0.7em"}},"mark":{"label":"Mark","group":"text","button":{"label":"M"},"editor":{},"style":{"backgroundColor":"#ffbb00"}},"del":{"label":"Deleted","group":"text","button":{"label":"D","style":{"textDecoration":"line-through"}},"editor":{},"style":{"textDecoration":"line-through"}},"ins":{"label":"Inserted","group":"text","button":{"label":"U","style":{"textDecoration":"underline"}},"editor":{},"style":{"textDecoration":"underline"}},"sub":{"label":"Subscript","group":"text","button":{"label":"Sub","style":{"verticalAlign":"sub","fontSize":"0.6em"}},"editor":{},"style":{"verticalAlign":"sub","fontSize":"0.6em"}},"sup":{"label":"Superscript","group":"text","button":{"label":"Sup","style":{"verticalAlign":"sup","fontSize":"0.6em"}},"editor":{},"style":{"verticalAlign":"sup","fontSize":"0.6em"}},"base":{"label":"Base","group":"color","type":"color","button":{},"editor":{},"style":{"color":"hsla(212,8,50,1)"}},"baseGradient":{"label":"Base gradient","group":"color","type":"color","button":{},"editor":{},"style":{"backgroundSize":"100%","-webkitBackgroundClip":"text","-mozBackgroundClip":"text","-webkitTextFillColor":"transparent","-mozTextFillColor":"transparent","backgroundImage":"linear-gradient(90deg, hsla(212,8,50,1) 0%, #838c95 100%)"}},"main":{"label":"Main","group":"color","type":"color","button":{},"editor":{},"style":{"color":"hsla(212,8,50,1)"}},"mainGradient":{"label":"Main gradient","group":"color","type":"color","button":{},"editor":{},"style":{"backgroundSize":"100%","-webkitBackgroundClip":"text","-mozBackgroundClip":"text","-webkitTextFillColor":"transparent","-mozTextFillColor":"transparent","backgroundImage":"linear-gradient(90deg, hsla(212,8,50,1) 0%, #838c95 100%)"}},"accent":{"label":"Accent","group":"color","type":"color","button":{},"editor":{},"style":{"color":"#ffbb00"}},"accentGradient":{"label":"Accent gradient","group":"color","type":"color","button":{},"editor":{},"style":{"backgroundSize":"100%","-webkitBackgroundClip":"text","-mozBackgroundClip":"text","-webkitTextFillColor":"transparent","-mozTextFillColor":"transparent","backgroundImage":"linear-gradient(90deg, #ffbb00 0%, #ffc21a 100%)"}},"complementary":{"label":"Complementary","group":"color","type":"color","button":{},"editor":{},"style":{"color":"#5100ff"}},"complementaryGradient":{"label":"Complementary gradient","group":"color","type":"color","button":{},"editor":{},"style":{"backgroundSize":"100%","-webkitBackgroundClip":"text","-mozBackgroundClip":"text","-webkitTextFillColor":"transparent","-mozTextFillColor":"transparent","backgroundImage":"linear-gradient(90deg, #5100ff 0%, #621aff 100%)"}},"success":{"label":"Success","group":"color","type":"color","button":{},"editor":{},"style":{"color":"#91ff00"}},"successGradient":{"label":"Success gradient","group":"color","type":"color","button":{},"editor":{},"style":{"backgroundSize":"100%","-webkitBackgroundClip":"text","-mozBackgroundClip":"text","-webkitTextFillColor":"transparent","-mozTextFillColor":"transparent","backgroundImage":"linear-gradient(90deg, #91ff00 0%, #9cff1a 100%)"}},"warning":{"label":"Warning","group":"color","type":"color","button":{},"editor":{},"style":{"color":"#ffd500"}},"warningGradient":{"label":"Warning gradient","group":"color","type":"color","button":{},"editor":{},"style":{"backgroundSize":"100%","-webkitBackgroundClip":"text","-mozBackgroundClip":"text","-webkitTextFillColor":"transparent","-mozTextFillColor":"transparent","backgroundImage":"linear-gradient(90deg, #ffd500 0%, #ffd91a 100%)"}},"error":{"label":"Error","group":"color","type":"color","button":{},"editor":{},"style":{"color":"#ff003c"}},"errorGradient":{"label":"Error gradient","group":"color","type":"color","button":{},"editor":{},"style":{"backgroundSize":"100%","-webkitBackgroundClip":"text","-mozBackgroundClip":"text","-webkitTextFillColor":"transparent","-mozTextFillColor":"transparent","backgroundImage":"linear-gradient(90deg, #ff003b 0%, #ff1a4f 100%)"}},"info":{"label":"Info","group":"color","type":"color","button":{},"editor":{},"style":{"color":"#00ffff"}},"infoGradient":{"label":"Info gradient","group":"color","type":"color","button":{},"editor":{},"style":{"backgroundSize":"100%","-webkitBackgroundClip":"text","-mozBackgroundClip":"text","-webkitTextFillColor":"transparent","-mozTextFillColor":"transparent","backgroundImage":"linear-gradient(90deg, #00ffff 0%, #1affff 100%)"}}},"layout":{"offset":{"top":100,"right":0,"bottom":0,"left":0},"container":{"default":"1280px","wide":"1440px","full":"none"},"grid":{"1":1,"2":2,"3":3,"4":4,"5":5,"6":6,"7":7,"8":8,"9":9,"10":10,"11":11,"12":12},"layout":{"1":"1","12":"1 2","21":"2 1","112":"1 1 2","122":"1 2 2","123":"1 2 3","211":"2 1 1","221":"2 2 1","321":"3 2 1","1112":"1 1 1 2","1222":"1 2 2 2","1234":"1 2 3 4","2221":"2 2 2 1","11112":"1 1 1 1 2","12222":"1 2 2 2 2","12345":"1 2 3 4 5","22221":"2 2 2 2 1","111112":"1 1 1 1 1 2","122222":"1 2 2 2 2 2","123456":"1 2 3 4 5 6","1_2":"1 _ 2","2_1":"2 _ 1","12_33":"1 2 _ 3 3","1_23":"1 _ 2 3","1_2_3":"1 _ 2 _ 3","32_1":"3 2 _ 1","3_21":"3 _ 2 1","12_34":"1 2 _ 3 4","123_4":"1 2 3 _ 4","1_234":"1 _ 2 3 4","1_2_3_4":"1 _ 2 _ 3 _ 4","123_45":"1 2 3 _ 4 5","12_345":"1 2 _ 3 4 5","1_2345":"1 _ 2 3 4 5","1234_5":"1 2 3 4 _ 5","1_2_3_4_5":"1 _ 2 _ 3 _ 4 _ 5"}}}},"PACKAGE":{"name":"@website/coffeekraken-io","title":"Coffeekraken","version":"2.0.0-alpha.25","description":"The frontend toolkit that works for everyone. Experts, professionals and new-comers","type":"module","private":true,"scripts":{"dev":"sugard kitchen.run dev","prod":"sugard kitchen.run prod","build":"sugard kitchen.run build","static":"live-server static","static.build":"sugard static.build --clean --env production --target production","deploy":"rsync -avzh --delete --progress --stats ./static fe0mt_coffeekraken@fe0mt.ftp.infomaniak.com:~/sites/coffeekraken.io","deploy.bogdanov":"rsync -avzh --delete --progress --stats ./static fe0mt_bogdanov_ssh@fe0mt.ftp.infomaniak.com:~/sites/bogdanov.coffeekraken.io"},"repository":{"type":"git","url":"https://olivierbossel.com"},"author":"Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)","license":"MIT","dependencies":{"@coffeekraken/cli":"^2.0.0-alpha.25","@coffeekraken/s-activate-feature":"^2.0.0-alpha.25","@coffeekraken/s-appear-feature":"^2.0.0-alpha.25","@coffeekraken/s-bench":"^2.0.0-alpha.25","@coffeekraken/s-builder":"^2.0.0-alpha.25","@coffeekraken/s-carpenter":"^2.0.0-alpha.25","@coffeekraken/s-class":"^2.0.0-alpha.25","@coffeekraken/s-clipboard-copy-component":"^2.0.0-alpha.25","@coffeekraken/s-code-example-component":"^2.0.0-alpha.25","@coffeekraken/s-color":"^2.0.0-alpha.25","@coffeekraken/s-color-picker-component":"^2.0.0-alpha.25","@coffeekraken/s-component-utils":"^2.0.0-alpha.25","@coffeekraken/s-conductor":"^2.0.0-alpha.25","@coffeekraken/s-config":"^2.0.0-alpha.25","@coffeekraken/s-dashboard":"^2.0.0-alpha.25","@coffeekraken/s-datetime-picker-component":"^2.0.0-alpha.25","@coffeekraken/s-descriptor":"^2.0.0-alpha.25","@coffeekraken/s-docblock":"^2.0.0-alpha.25","@coffeekraken/s-docmap":"^2.0.0-alpha.25","@coffeekraken/s-duration":"^2.0.0-alpha.25","@coffeekraken/s-env":"^2.0.0-alpha.25","@coffeekraken/s-event-emitter":"^2.0.0-alpha.25","@coffeekraken/s-favicon-builder":"^2.0.0-alpha.25","@coffeekraken/s-feature":"^2.0.0-alpha.25","@coffeekraken/s-file":"^2.0.0-alpha.25","@coffeekraken/s-filtrable-input-component":"^2.0.0-alpha.25","@coffeekraken/s-floating-feature":"^2.0.0-alpha.25","@coffeekraken/s-form-validate-feature":"^2.0.0-alpha.25","@coffeekraken/s-front":"^2.0.0-alpha.25","@coffeekraken/s-frontend-server":"^2.0.0-alpha.25","@coffeekraken/s-frontspec":"^2.0.0-alpha.25","@coffeekraken/s-glitch-feature":"^2.0.0-alpha.25","@coffeekraken/s-glob":"^2.0.0-alpha.25","@coffeekraken/s-google-map-component":"^2.0.0-alpha.25","@coffeekraken/s-handlebars":"^2.0.0-alpha.25","@coffeekraken/s-highlight-feature":"^2.0.0-alpha.25","@coffeekraken/s-images-builder":"^2.0.0-alpha.25","@coffeekraken/s-inline-feature":"^2.0.0-alpha.25","@coffeekraken/s-interface":"^2.0.0-alpha.25","@coffeekraken/s-kitchen":"^2.0.0-alpha.25","@coffeekraken/s-lazy-feature":"^2.0.0-alpha.25","@coffeekraken/s-lit-component":"^2.0.0-alpha.25","@coffeekraken/s-log":"^2.0.0-alpha.25","@coffeekraken/s-markdown-builder":"^2.0.0-alpha.25","@coffeekraken/s-pack-essentials":"^2.0.0-alpha.25","@coffeekraken/s-page-transition-feature":"^2.0.0-alpha.25","@coffeekraken/s-panel-component":"^2.0.0-alpha.25","@coffeekraken/s-parallax-feature":"^2.0.0-alpha.25","@coffeekraken/s-postcss-sugar-plugin":"^2.0.0-alpha.25","@coffeekraken/s-process":"^2.0.0-alpha.25","@coffeekraken/s-promise":"^2.0.0-alpha.25","@coffeekraken/s-range-component":"^2.0.0-alpha.25","@coffeekraken/s-rating-component":"^2.0.0-alpha.25","@coffeekraken/s-refocus-feature":"^2.0.0-alpha.25","@coffeekraken/s-request":"^2.0.0-alpha.25","@coffeekraken/s-scroll-component":"^2.0.0-alpha.25","@coffeekraken/s-sitemap-builder":"^2.0.0-alpha.25","@coffeekraken/s-slider-component":"^2.0.0-alpha.25","@coffeekraken/s-state":"^2.0.0-alpha.25","@coffeekraken/s-static-builder":"^2.0.0-alpha.25","@coffeekraken/s-stdio":"^2.0.0-alpha.25","@coffeekraken/s-sugar-config":"^2.0.0-alpha.25","@coffeekraken/s-sugar-feature":"^2.0.0-alpha.25","@coffeekraken/s-sugar-json":"^2.0.0-alpha.25","@coffeekraken/s-theme":"^2.0.0-alpha.25","@coffeekraken/s-theme-switcher-component":"^2.0.0-alpha.25","@coffeekraken/s-timer":"^2.0.0-alpha.25","@coffeekraken/s-type":"^2.0.0-alpha.25","@coffeekraken/s-typescript-builder":"^2.0.0-alpha.25","@coffeekraken/s-url":"^2.0.0-alpha.25","@coffeekraken/s-view-renderer":"^2.0.0-alpha.25","@coffeekraken/s-vite":"^2.0.0-alpha.25","@coffeekraken/s-vite-postcss-plugin":"^2.0.0-alpha.25","@coffeekraken/s-vite-sugar-plugin":"^2.0.0-alpha.25","@coffeekraken/sugar":"^2.0.0-alpha.25","firebase":"^9.9.1","lit":"^2.2.8","lit-element":"^2.5.1","minisearch":"^3.3.0","three":"^0.143.0"},"devDependencies":{"esbuild":"^0.14.53"},"exports":{"./shared/*":{"require":"./dist/pkg/cjs/shared/*.js","import":"./dist/pkg/esm/shared/*.js"},"./node/*":{"require":"./dist/pkg/cjs/node/*.js","import":"./dist/pkg/esm/node/*.js"},"./js/*":{"require":"./dist/pkg/cjs/js/*.js","import":"./dist/pkg/esm/js/*.js"}},"homepage":"https://coffeekraken.io"}}`),
   document.env || {}
 );
 (async () => {
@@ -39416,7 +40174,7 @@ document.env = window.___deepMerge(
     trigger: ["event:actual", "anchor", "history"],
     offsetY: 400
   });
-  SFeature.setDefaultProps(["s-parallax", "s-appear"], {
+  SFeature.setDefaultProps(["s-parallax"], {
     lod: 3
   });
   SFeature.setDefaultProps(["s-form-validate"], {

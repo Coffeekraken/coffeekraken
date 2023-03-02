@@ -46,14 +46,14 @@
 
     .s-specs-editor_repeatable {
         /* background: red; */
-        background: sugar.color(base, background, --darken 5%);
+        background: sugar.color(main, background, --darken 5%);
     }
     .s-specs-editor_repeatable-title {
-        background: sugar.color(base, surface);
+        background: sugar.color(main, surface);
         background-image: linear-gradient(
             -25deg,
-            sugar.color(base, background),
-            sugar.color(base, background, --lighten 5%)
+            sugar.color(main, background),
+            sugar.color(main, background, --lighten 5%)
         );
         padding: sugar.padding(30) sugar.padding(40);
         cursor: pointer;
@@ -102,7 +102,7 @@
     .s-specs-editor_repeatable-item-actions {
         text-align: end;
         padding: sugar.padding(30) sugar.padding(40);
-        background: sugar.color(base, background, --darken 5%);
+        background: sugar.color(main, background, --darken 5%);
     }
 
     .s-specs-editor_repeatable-item-props {

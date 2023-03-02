@@ -44,7 +44,7 @@ export { postcssUiDatetimePickerInterface as interface };
  * Apply the menu lnf to any .s-menu element
  *
  * @snippet         @sugar.ui.menu
- * 
+ *
  * @example     css
  * .s-menu {
  *    @sugar.ui.menu;
@@ -205,7 +205,7 @@ export default function ({
 
                     .s-menu_inner {
                         @sugar.media <=mobile {
-                            background: sugar.color(base, background);
+                            background: sugar.color(main, background);
                             padding-inline: sugar.padding(30);
                             @sugar.transition();
                         }
@@ -260,7 +260,7 @@ export default function ({
                             }
 
                             > .s-menu_children {
-                                background: sugar.color(base, background);
+                                background: sugar.color(main, background);
                                 padding: sugar.padding(20);
                                 @sugar.depth(100);
                                 @sugar.border.radius();

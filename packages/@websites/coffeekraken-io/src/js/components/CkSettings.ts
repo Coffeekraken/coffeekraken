@@ -26,7 +26,6 @@ export default class CkSettings extends __SLitComponent {
     }
 
     async firstUpdated() {
-        const $baseColorPicker = this.querySelector('#setting-base-color');
         const $mainColorPicker = this.querySelector('#setting-main-color');
         const $accentColorPicker = this.querySelector('#setting-accent-color');
         const $complementaryColorPicker = this.querySelector(
@@ -35,9 +34,6 @@ export default class CkSettings extends __SLitComponent {
 
         const $fontSizeRange = this.querySelector('#setting-font-size');
 
-        $baseColorPicker.addEventListener('s-color-picker.change', (e) => {
-            this._front.theme.setColor('base', e.detail.hex);
-        });
         $mainColorPicker.addEventListener('s-color-picker.change', (e) => {
             this._front.theme.setColor('main', e.detail.hex);
         });
@@ -58,8 +54,11 @@ export default class CkSettings extends __SLitComponent {
     async mount() {}
 
     _setLod(level: number) {
-        this._front.setWireframe(level <= 1);
+        console.log('SET', level);
+
+        this._front.setWireframe(level <= 0);
         this._front.setLod(level);
+        this.requestUpdate();
     }
 
     render() {
@@ -91,7 +90,7 @@ export default class CkSettings extends __SLitComponent {
                         </li>
             <li class="s-bg:main-surface">
               <label
-                class="s-label:responsive s-pi:50 s-pb:30 @mobile s-pi:40"
+                class="s-label:responsive s-pi:50 s-pbs:30 @mobile s-pi:40"
                 for="setting-font-size"
               >
                 <span>Level of details</span>
@@ -100,34 +99,63 @@ export default class CkSettings extends __SLitComponent {
                   id="setting-lod"
                   min="0"
                   max="3"
-                  value=${this._front.lod.level - 1}
-                  values='["Wireframe","Low","Medium","High"]'
+                  value=${this._front.lod.level}
+                  values='["Bare","Look and feel","Theme","High"]'
                   tooltip
                   step="1"
-                  @change=${(e) => this._setLod(parseInt(e.target.value) + 1)}
+                  @change=${(e) => this._setLod(parseInt(e.target.value))}
                 >
                 </s-range>
               </label>
-            </li>
-            <li class="s-bg:main-surface">
-              <label
-                class="s-label:responsive s-pi:50 s-pb:30 @mobile s-pi:40"
-                for="setting-base-color"
-              >
-                <span> Base color </span>
-                <s-color-picker id="setting-base-color">
-                  <div class="s-group">
-                    <input
-                      type="text"
-                      class="s-input"
-                      value="${this._front.theme.getColor('base').toHex()}"
-                    />
-                    <button class="s-btn s-color:base">
-                      <i class="s-icon:color"></i>
-                    </button>
-                  </div>
-                </s-color-picker>
-              </label>
+              <div class="s-flex s-text:right s-pi:50 s-pb:30 @mobile s-pi:40">
+                <div class="s-flex-item:grow"></div>
+                ${
+                    this._front.lod.level === 0
+                        ? html`
+                              <p class="s-typo:p s-font:25">
+                                  The
+                                  <span class="s-typo:code">bare</span> level
+                                  contains everything about positions, sizes,
+                                  etc... It allows you to have a functional UI
+                                  without the visual styling.
+                              </p>
+                          `
+                        : this._front.lod.level === 1
+                        ? html`
+                              <p class="s-typo:p s-font:25">
+                                  The <span class="s-typo:code">lnf</span> level
+                                  contains the basic look and feel provided by
+                                  Coffeekraken. It's usually a good starting
+                                  point for most of your projects and everything
+                                  can be customized.
+                              </p>
+                          `
+                        : this._front.lod.level === 2
+                        ? html`
+                              <p class="s-typo:p s-font:25">
+                                  The
+                                  <span class="s-typo:code">theme</span> level
+                                  contains everything that is custom to this
+                                  particular website.
+                              </p>
+                          `
+                        : this._front.lod.level === 3
+                        ? html`
+                              <p class="s-typo:p s-font:25">
+                                  The
+                                  <span class="s-typo:code">high</span> level
+                                  can be used to activate heavy things only for
+                                  high performant systems. It can be CSS stuffs
+                                  using the mixin
+                                  <span class="s-typo:code"
+                                      >@sugar.lod high { ... }</span
+                                  >
+                                  or even JS components/features.
+                              </p>
+                          `
+                        : ''
+                }
+              </div>
             </li>
             <li class="s-bg:main-surface">
               <label

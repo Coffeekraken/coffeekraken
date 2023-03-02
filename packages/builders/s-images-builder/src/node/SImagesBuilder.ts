@@ -9,7 +9,7 @@ import {
     __copySync,
     __ensureDirSync,
     __folderPath,
-    __removeSync
+    __removeSync,
 } from '@coffeekraken/sugar/fs';
 import { __deepMerge } from '@coffeekraken/sugar/object';
 import { __packageRootDir } from '@coffeekraken/sugar/path';
@@ -49,7 +49,7 @@ import __SImagesBuilderSettingsInterface from './interface/SImagesBuilderSetting
  *      clear: false
  *      specificParams: {}
  * });
- * 
+ *
  * @example         js
  * import __SImagesBuilder from '@coffeekraken/s-image-builder';
  * const imagesBuilder = new __SImagesBuilder({
@@ -259,7 +259,7 @@ export default class SImagesBuilder extends __SBuilder {
 
             // resolving globs
             await __SGlob
-                .resolve(`${params.inDir}/${params.glob}`, {
+                .resolveSync(`${params.inDir}/${params.glob}`, {
                     ...(finalSettings.resolveGlob ?? {}),
                     cwd: params.inDir,
                 })

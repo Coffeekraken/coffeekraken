@@ -24,7 +24,7 @@
 
     .chart {
         position: absolute;
-        background: sugar.color(base, background);
+        background: sugar.color(main, background);
         display: flex;
         top: 100px;
         left: sugar.margin(70);
@@ -132,7 +132,7 @@
     ._why-not {
         width: 100%;
         height: 100%;
-        background: sugar.color(base, background, --darken 10);
+        background: sugar.color(main, background, --darken 10);
         opacity: 0.1;
     }
 
@@ -185,7 +185,7 @@
             width: 150px;
 
             &:hover {
-                background: sugar.color(base, background, --darken 2);
+                background: sugar.color(main, background, --darken 2);
             }
         }
     }
@@ -218,24 +218,24 @@
         width: 150px;
 
         &:nth-child(odd) {
-            background: sugar.color(base, background, --darken 1%);
+            background: sugar.color(main, background, --darken 1%);
         }
     }
     ._body ._features ._feature {
-        background: sugar.color(base, background, --darken 1);
+        background: sugar.color(main, background, --darken 1);
         justify-content: end;
         .s-tooltip-container {
             justify-content: end;
         }
 
         &:nth-child(odd) {
-            background: sugar.color(base, background, --darken 2);
+            background: sugar.color(main, background, --darken 2);
         }
     }
 
     ._body ._systems ._system {
         &:hover ._feature {
-            background: sugar.color(base, background, --darken 2) !important;
+            background: sugar.color(main, background, --darken 2) !important;
         }
 
         ._feature {
@@ -258,9 +258,9 @@
                 left: 0;
                 width: 100%;
                 height: 100%;
-                border-left: 1px solid sugar.color(base, background, --darken 5);
+                border-left: 1px solid sugar.color(main, background, --darken 5);
                 border-right: 1px solid
-                    sugar.color(base, background, --darken 5);
+                    sugar.color(main, background, --darken 5);
             }
         }
     }

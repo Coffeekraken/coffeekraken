@@ -16,7 +16,7 @@ import __SInterface from '@coffeekraken/s-interface';
  * \@sugar.lod($1) {
  *      $2
  * }
- * 
+ *
  * @example        css
  * \@sugar.lod(4) {
  *      .myElement {
@@ -70,6 +70,31 @@ export default function ({
         method: settings.lod.method ?? 'class',
         ...(params ?? {}),
     };
+
+    // link text level to actual level number
+    if (typeof finalParams.level === 'string') {
+        for (let [level, levelObj] of Object.entries(settings.lod.levels)) {
+            if (finalParams.level === levelObj.name) {
+                finalParams.level = parseInt(level);
+                break;
+            }
+        }
+    }
+
+    // make sure we have a valid number level
+    if (typeof finalParams.level !== 'number') {
+        throw new Error(
+            `<red>[lod]</red> Sorry but the passed "${
+                finalParams.level
+            }" level does not exists. Here's the available ones:\n- ${Object.keys(
+                settings.lod.levels,
+            )
+                .map((l) => {
+                    return `${l}:${settings.lod.levels[l].name}`;
+                })
+                .join('\n- ')}`,
+        );
+    }
 
     // check if the lod feature is enabled or not
     if (!settings.lod?.enabled) {

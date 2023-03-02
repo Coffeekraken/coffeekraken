@@ -116,7 +116,7 @@ export default function ({
     // lnf
     if (finalParams.scope.includes('lnf')) {
         vars.push(`
-            background: sugar.color(base, surface);
+            background: sugar.color(main, surface);
             @sugar.border.radius(ui.card.borderRadius);
             @sugar.depth (ui.card.depth);
 

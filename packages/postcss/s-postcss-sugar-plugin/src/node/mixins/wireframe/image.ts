@@ -54,12 +54,17 @@ export default function ({
 
     const vars: string[] = [];
     vars.push(`
+        
         position: relative;
         background-position: 50% 50%;
         background-repeat: no-repeat;
         background-size: 50%;
         @sugar.wireframe.background;
         
+        & > * {
+            display: block !important;
+        }
+
         &:after {
             content: '';
             position: absolute;

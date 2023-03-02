@@ -5,7 +5,7 @@
 @sugar.import ('./generic/**/*.css');
 
 body {
-    background: sugar.color(base, background);
+    background: sugar.color(main, background);
     overflow-x: hidden;
 }
 

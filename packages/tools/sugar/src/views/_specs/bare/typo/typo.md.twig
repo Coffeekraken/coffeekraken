@@ -16,12 +16,12 @@
  */
 -->
 
-{% set specs = readSpec('sugar.views.bare.typo') %}
-{{ specsToMarkdown(specs, {
+{% set specs = __readSpec('sugar.views.bare.typo') %}
+{{ __specsToMarkdown(specs, {
     features: {
         type: {
             title: 'Type',
-            description: 'Specify the type of typo you want. Can be one of these: **' ~ props(theme.typo)|join(', ') ~ '**'
+            description: 'Specify the type of typo you want. Can be one of these: **' ~ __props(theme.typo)|join(', ') ~ '**'
         }
     }
 })|raw }}

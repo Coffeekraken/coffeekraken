@@ -16,7 +16,7 @@
  */
 -->
 
-{% set specs = readSpec('sugar.views.components.slide') %}
-{{ specsToMarkdown(specs, {})|raw }}
+{% set specs = __readSpec('sugar.views.components.slide') %}
+{{ __specsToMarkdown(specs, {})|raw }}
 
 {% endblock %}

@@ -77,10 +77,10 @@ export default function ({ params, atRule, sharedData, replaceWith, }) {
                     @sugar.wireframe.border;
                 }
             .s-panel_backdrop {
-                background: rgba(255,255,255,.7);
+                background: sugar.color(sugar.wireframe.background(light), --alpha 0.7);
 
                 @sugar.theme.when dark {
-                    @sugar.wireframe.background;
+                    background: sugar.color(sugar.wireframe.background(dark), --alpha 0.7);
                 }
             }
         }

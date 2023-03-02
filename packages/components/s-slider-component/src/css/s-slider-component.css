@@ -4,6 +4,11 @@
     --s-slider-space: 20px;
 
     > .s-slider_root,
+    > .s-slider_root > .s-slider_slides-wrapper {
+        position: relative;
+    }
+
+    > .s-slider_root,
     > .s-slider_root > .s-slider_slides-wrapper,
     > .s-slider_root > .s-slider_slides-wrapper > .s-slider_slides {
         height: 100%;

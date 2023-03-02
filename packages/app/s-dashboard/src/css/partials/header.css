@@ -1,7 +1,7 @@
 .s-dashboard {
     .header {
         /* padding-block: sugar.padding(100) sugar.padding(100); */
-        background: sugar.color(base, background, --alpha 0.7);
+        background: sugar.color(main, background, --alpha 0.7);
         /* padding: sugar.padding(30); */
         display: flex;
         align-items: center;
@@ -41,7 +41,7 @@
 
             [fill='white'],
             .main {
-                fill: sugar.color(base);
+                fill: sugar.color(main);
             }
             [fill='#FFBB01'],
             [fill='#FEBD0F'],

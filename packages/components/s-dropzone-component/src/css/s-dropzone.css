@@ -64,7 +64,7 @@
 
 .s-dropzone {
     aspect-ratio: 16/9;
-    background: sugar.color(base, surface);
+    background: sugar.color(main, surface);
     border: solid 1px sugar.color(accent, border);
     @sugar.transition (fast);
     @sugar.border.radius();
@@ -142,7 +142,7 @@
     }
 
     .s-dropzone_text {
-        color: sugar.color(base, text, --alpha 0.5);
+        color: sugar.color(main, text, --alpha 0.5);
     }
 
     .s-dropzone_droped {

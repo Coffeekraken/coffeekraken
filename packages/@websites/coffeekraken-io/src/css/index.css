@@ -9,13 +9,19 @@ html {
 
 body {
     width: 100vw;
-    background-color: sugar.color(main, background);
 
-    @sugar.theme.when (dark) {
-    }
+    @sugar.lod theme {
+        /* --s-theme-color-main-h: 357;
+        --s-theme-color-main-s: 80;
+        --s-theme-color-main-l: 50; */
 
-    @sugar.media mobile {
-        background-image: none !important;
+        /* --s-theme-color-main-text-lightness-offset: 100; */
+
+        background-color: sugar.color(main, background) !important;
+
+        @sugar.theme.when (dark) {
+            background-color: sugar.color(main);
+        }
     }
 }
 

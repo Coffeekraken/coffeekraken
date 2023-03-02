@@ -335,7 +335,6 @@ export default class SFront extends __SClass {
             (this.settings.wireframe.enabled &&
                 this.state.wireframe.enabled === undefined)
         ) {
-            console.log('Activate');
             this.setWireframe(true);
         }
 
@@ -423,7 +422,9 @@ export default class SFront extends __SClass {
     } {
         return {
             level:
-                this.state.lod?.level || this.frontspec.get('lod.defaultLevel'),
+                this.state.lod?.level !== undefined
+                    ? this.state.lod.level
+                    : this.frontspec.get('lod.defaultLevel'),
         };
     }
 
@@ -571,13 +572,16 @@ export default class SFront extends __SClass {
         }
 
         // is a lod is saved in state
-        if (this.state.lod.level !== undefined) {
+        if (
+            this.state.lod.level !== undefined &&
+            this.state.lod.level !== null
+        ) {
             this.setLod(this.state.lod.level);
             return;
         }
 
         // set lod level
-        this.setLod(this.settings.lod.level);
+        this.setLod(this.settings.lod.defaultLevel);
 
         // if the user does not have selected a specific lod
         // we check which lod is the most suited for his
@@ -585,7 +589,7 @@ export default class SFront extends __SClass {
         if (
             !isCrawler &&
             this.state.lod.level === undefined &&
-            this.settings.lod.level === undefined
+            this.settings.lod.defaultLevel === undefined
         ) {
             const speedIndex = __speedIndex();
             let suitedLod = 0;
@@ -902,7 +906,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         } catch (e) {
             this.state = Object.assign({}, this._originalState);
         }
-        console.log('STate', this.state);
     }
 
     /**

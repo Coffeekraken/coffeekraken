@@ -116,10 +116,19 @@ export default function ({
     vars.push(`
    @sugar.wireframe {
        color: rgba(0,0,0,.5);
-
+       
        &:before,
        &:after {
         color: rgba(0,0,0,.5);
+       }
+
+       @sugar.theme.when dark {
+            color: rgba(255,255,255,.5);
+        
+        &:before,
+        &:after {
+            color: rgba(255,255,255,.5);
+        }
        }
    }
 `);

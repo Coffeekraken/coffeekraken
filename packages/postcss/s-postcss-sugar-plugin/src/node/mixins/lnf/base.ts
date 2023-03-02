@@ -51,6 +51,7 @@ export default function ({
 
     const css = `
         color: sugar.color(main, text);
+        background-color: sugar.color(main, background);
         @sugar.font.family(default);
         @sugar.font.size(default);
         --s-scale: sugar.theme(scale.default);

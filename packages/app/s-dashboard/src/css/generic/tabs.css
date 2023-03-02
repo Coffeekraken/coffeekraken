@@ -25,7 +25,7 @@
         justify-content: center;
         flex-grow: 1;
         height: 60px;
-        background: sugar.color(base, background);
+        background: sugar.color(main, background);
         cursor: pointer;
         @sugar.border.radius (10);
 

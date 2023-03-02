@@ -21,7 +21,7 @@
     }
 
     ._new {
-        background: sugar.color(base, background, --lighten 10);
+        background: sugar.color(main, background, --lighten 10);
 
         span {
             font-weight: bold;
@@ -31,8 +31,8 @@
     ._codename {
         background-image: linear-gradient(
             90deg,
-            sugar.color(base, background),
-            sugar.color(base, background, --darken 5)
+            sugar.color(main, background),
+            sugar.color(main, background, --darken 5)
         );
 
         padding: sugar.padding(40);
@@ -45,19 +45,19 @@
         padding: sugar.padding(30) sugar.padding(30);
         border-top-left-radius: sugar.border.radius();
         border-top-right-radius: sugar.border.radius();
-        background-color: sugar.color(base, --lighten 50);
+        background-color: sugar.color(main, --lighten 50);
         background-position: 50% 50%;
         background-size: cover;
 
         @sugar.theme.when dark {
             background-image: url('/dist/img/discord-illustration-bkg.png');
             background-color: sugar.color(complementary, --lighten 10);
-            background-color: sugar.color(base, --darken 10);
+            background-color: sugar.color(main, --darken 10);
         }
     }
     ._footer {
         /* background: sugar.color(complementary); */
-        background-color: sugar.color(base, --lighten 50);
+        background-color: sugar.color(main, --lighten 50);
         padding: sugar.padding(30) sugar.padding(30);
         border-bottom-left-radius: sugar.border.radius();
         border-bottom-right-radius: sugar.border.radius();
@@ -66,7 +66,7 @@
         font-size: sugar.font.size(25);
 
         @sugar.theme.when dark {
-            background-color: sugar.color(base, --darken 17);
+            background-color: sugar.color(main, --darken 17);
         }
 
         display: flex;
@@ -80,13 +80,13 @@
 
     ._versions {
         max-height: calc(100vh - 300px);
-        background: sugar.color(base, surface, --darken 1);
+        background: sugar.color(main, surface, --darken 1);
         /* overflow-y: auto; */
         min-width: 200px;
         @sugar.scrollbar;
 
         @sugar.theme.when dark {
-            background: sugar.color(base, surface);
+            background: sugar.color(main, surface);
         }
 
         ._version {
@@ -96,13 +96,13 @@
 
             &:not(:last-child) {
                 border-bottom: 1px solid
-                    sugar.color(base, background, --lighten 5);
+                    sugar.color(main, background, --lighten 5);
             }
 
             &:hover {
-                background: sugar.color(base, surface, --darken 3);
+                background: sugar.color(main, surface, --darken 3);
                 @sugar.theme.when dark {
-                    background: sugar.color(base, surface, --lighten 5);
+                    background: sugar.color(main, surface, --lighten 5);
                 }
             }
 

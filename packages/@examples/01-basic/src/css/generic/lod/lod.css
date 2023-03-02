@@ -5,7 +5,7 @@
     z-index: 101;
     overflow: hidden;
     @sugar.border.radius;
-    background: sugar.color(base, background, --darken 5);
+    background: sugar.color(main, background, --darken 5);
 
     @sugar.media mobile {
         display: none;

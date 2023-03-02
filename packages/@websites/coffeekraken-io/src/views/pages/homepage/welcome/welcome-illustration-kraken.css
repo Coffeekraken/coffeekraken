@@ -41,6 +41,14 @@
     /* user-select: none; */
     z-index: 10;
 
+    .s-media {
+        display: none;
+
+        @sugar.lod theme {
+            display: block;
+        }
+    }
+
     @sugar.media mobile {
         display: none;
     }
@@ -58,7 +66,7 @@
     ._tentacule-07 {
         pointer-events: none;
         path {
-            stroke: sugar.color(base, --alpha 0.2);
+            stroke: sugar.color(main, --alpha 0.2);
             fill: none;
         }
 
@@ -72,7 +80,7 @@
     ._tentacule-06 {
         pointer-events: none;
         path {
-            stroke: sugar.color(base, --alpha 0.08);
+            stroke: sugar.color(main, --alpha 0.08);
             fill: none;
         }
         @sugar.lod (4) {
@@ -88,7 +96,7 @@
         ._tentacule-05,
         ._tentacule-07 {
             path {
-                stroke: sugar.color(base, foreground, --alpha 0.2);
+                stroke: sugar.color(main, foreground, --alpha 0.2);
                 fill: none;
             }
 
@@ -101,7 +109,7 @@
         ._tentacule-04,
         ._tentacule-06 {
             path {
-                stroke: sugar.color(base, foreground, --alpha 0.08);
+                stroke: sugar.color(main, foreground, --alpha 0.08);
                 fill: none;
             }
             @sugar.lod (4) {

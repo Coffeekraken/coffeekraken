@@ -2,7 +2,7 @@
     background-color: sugar.color(main, surface);
     position: relative;
     z-index: 20;
-    border-top: 1px solid sugar.color(base, --alpha 0.05);
+    border-top: 1px solid sugar.color(main, --alpha 0.05);
 
     @sugar.wireframe {
         @sugar.wireframe.border;
@@ -53,7 +53,7 @@
     }
 
     ._collab {
-        background: sugar.color(base, background);
+        background: sugar.color(main, background);
         padding-block: sugar.margin(50);
         overflow: hidden;
         position: relative;

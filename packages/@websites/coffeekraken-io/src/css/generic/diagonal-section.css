@@ -1,55 +1,68 @@
 .section--diagonal {
-  background: sugar.color(base, surface, --alpha 0.5);
-  position: relative;
-  z-index: 0;
-
-  & + section {
+    /* background: sugar.color(main, surface, --alpha 0.5); */
     position: relative;
-    z-index: 1;
-  }
+    z-index: 0;
 
-  /* background: sugar.color(base, surface, --alpha 1); */
-  background: sugar.color(base, --alpha 0.01);
+    & + section {
+        position: relative;
+        z-index: 1;
+    }
 
-  @sugar.theme.when dark {
-    background: sugar.color(base, surface, --alpha 0.3);
-  }
+    /* background: sugar.color(main, surface, --alpha 1); */
 
-  &:before {
-    content: '';
-    position: absolute;
-    bottom: 100%;
-    left: 0;
-    width: 100%;
-    height: 500px;
-    background: sugar.color(base, --alpha 0.01);
-    clip-path: polygon(0 100%, 100% 0, 100% 100%, 0 100%);
-    z-index: -1;
-  }
-  @sugar.theme.when dark {
+    @sugar.lod theme {
+        background: sugar.color(main, --alpha 0.01);
+    }
+
+    @sugar.theme.when dark {
+        background: sugar.color(main, surface, --alpha 0.3);
+    }
+
     &:before {
-      background: sugar.color(base, surface, --alpha 0.3);
-    }
-  }
+        content: '';
+        position: absolute;
+        bottom: 100%;
+        left: 0;
+        width: 100%;
+        height: 500px;
+        background: sugar.color(main, --alpha 0.01);
+        clip-path: polygon(0 100%, 100% 0, 100% 100%, 0 100%);
+        z-index: -1;
+        display: none;
 
-  &:after {
-    content: '';
-    position: absolute;
-    top: 100%;
-    left: 0;
-    width: 100%;
-    height: 500px;
-    background: sugar.color(base, --alpha 0.01);
-    clip-path: polygon(0 0, 100% 0, 100% 0, 0 100%);
-    z-index: -1;
-  }
-  @sugar.theme.when dark {
+        @sugar.lod theme {
+            display: block;
+        }
+    }
+    @sugar.theme.when dark {
+        &:before {
+            background: sugar.color(main, surface, --alpha 0.3);
+        }
+    }
+
     &:after {
-      background: sugar.color(base, surface, --alpha 0.3);
-    }
-  }
+        content: '';
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        height: 500px;
+        background: sugar.color(main, --alpha 0.01);
+        clip-path: polygon(0 0, 100% 0, 100% 0, 0 100%);
+        z-index: -1;
+        display: none;
 
-  &--no-after:after {
-    display: none;
-  }
+        @sugar.lod theme {
+            display: block;
+        }
+    }
+    @sugar.theme.when dark {
+        &:after {
+            background: sugar.color(main, surface, --alpha 0.3);
+        }
+    }
+
+    &--no-after:after {
+        display: none;
+    }
 }

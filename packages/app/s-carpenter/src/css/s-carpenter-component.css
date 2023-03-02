@@ -21,7 +21,7 @@ body.s-carpenter--in-iframe {
     @sugar.scrollbar();
 }
 body:not(.s-carpenter--in-iframe) {
-    background: sugar.color(base, surface);
+    background: sugar.color(main, surface);
 }
 
 .s-carpenter--editor {
@@ -51,7 +51,7 @@ body:not(.s-carpenter--in-iframe) {
         right: 0;
         width: var(--s-carpenter-editor-width);
         height: 100%;
-        background: sugar.color(base, background);
+        background: sugar.color(main, background);
         transform: translateX(100%);
         opacity: 0;
         padding-block-end: sugar.padding(50);
@@ -76,7 +76,7 @@ body:not(.s-carpenter--in-iframe) {
         right: auto;
         left: 0;
         width: 300px;
-        background: sugar.color(base, background, --darken 2%);
+        background: sugar.color(main, background, --darken 2%);
         transform: translateX(0);
         opacity: 1;
         pointer-events: all;
@@ -95,8 +95,8 @@ body:not(.s-carpenter--in-iframe) {
             margin-block-end: sugar.margin(30);
             background-image: linear-gradient(
                 -45deg,
-                sugar.color(base, background),
-                sugar.color(base, background, --lighten 5%)
+                sugar.color(main, background),
+                sugar.color(main, background, --lighten 5%)
             );
             @sugar.depth (100);
         }
@@ -144,8 +144,8 @@ body:not(.s-carpenter--in-iframe) {
         margin-block-end: sugar.margin(30);
         background-image: linear-gradient(
             45deg,
-            sugar.color(base, background),
-            sugar.color(base, background, --lighten 5%)
+            sugar.color(main, background),
+            sugar.color(main, background, --lighten 5%)
         );
         @sugar.depth (100);
 
@@ -156,7 +156,7 @@ body:not(.s-carpenter--in-iframe) {
 
     .s-specs-editor_child {
         /* padding: sugar.padding(40); */
-        /* background: sugar.color(base, background, --darken 5% --alpha 0.3); */
+        /* background: sugar.color(main, background, --darken 5% --alpha 0.3); */
 
         &:not(:first-child) {
             margin-block-start: sugar.margin(40);
@@ -181,7 +181,7 @@ body:not(.s-carpenter--in-iframe) {
     @sugar.transition();
 
     .s-carpenter_queries {
-        background: sugar.color(base, background);
+        background: sugar.color(main, background);
         border-bottom-left-radius: sugar.border.radius();
         @sugar.depth (100);
 
@@ -190,7 +190,7 @@ body:not(.s-carpenter--in-iframe) {
         }
 
         /* .s-carpenter_query {
-            background: sugar.color(base, surface);
+            background: sugar.color(main, surface);
             padding: sugar.padding(30) sugar.padding(40);
             @sugar.transition (fast);
 

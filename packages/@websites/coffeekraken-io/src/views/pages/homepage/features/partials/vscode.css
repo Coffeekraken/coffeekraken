@@ -1,0 +1,10 @@
+#features-vscode {
+    img,
+    svg {
+        display: none;
+
+        @sugar.lod theme {
+            display: block;
+        }
+    }
+}

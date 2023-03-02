@@ -1,4 +1,4 @@
-<section id="features-ui" class="section:diagonal">
+<section id="features-vscode" class="section:diagonal">
     <div class="s-container">
 
         <div class="s-layout:112">

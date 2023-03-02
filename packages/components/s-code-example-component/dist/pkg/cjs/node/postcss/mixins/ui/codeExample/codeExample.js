@@ -115,7 +115,7 @@ function default_1({ params, atRule, sharedData, replaceWith, }) {
     // wireframe
     vars.push(`
         .s-code-example_content {
-            @sugar.lod.wireframe {
+            @sugar.wireframe {
                 @sugar.wireframe.background;
                 @sugar.wireframe.border;    
             }

@@ -8,7 +8,7 @@
     transition: sugar.transition();
     z-index: 10;
 
-    @sugar.lod.wireframe {
+    @sugar.wireframe {
         @sugar.wireframe.border;
     }
 

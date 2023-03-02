@@ -154,21 +154,13 @@ export default function ({
             `
           .s-media-container {
 
-            @sugar.lod.wireframe {
+            @sugar.wireframe {
                 @sugar.wireframe.image;
         
                 &:has(.s-media--map) {
                     @sugar.wireframe.image(map);
                 }
             }
-        
-            @sugar.lod (2) {
-                background-image: none;
-                background-color: none;
-                border: none;
-                border-radius: 0;
-            }
-
           }
       `,
             { type: 'CssClass' },

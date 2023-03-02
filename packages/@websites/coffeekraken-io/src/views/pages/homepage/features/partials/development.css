@@ -1,6 +1,6 @@
 #features-development {
     ._stack {
-        @sugar.lod.wireframe {
+        @sugar.wireframe {
             @sugar.wireframe.border;
         }
     }

@@ -86,7 +86,7 @@ export default function ({ params, atRule, replaceWith, }) {
   `);
     // wireframe
     vars.push(`
-        @sugar.lod.wireframe {
+        @sugar.wireframe {
             &:before,
             &:after {
                 border-color: rgba(0,0,0,.5);

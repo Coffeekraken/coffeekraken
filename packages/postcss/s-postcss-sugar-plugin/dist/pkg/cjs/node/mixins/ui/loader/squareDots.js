@@ -95,7 +95,7 @@ function default_1({ params, atRule, replaceWith, }) {
   `);
     // wireframe
     vars.push(`
-   @sugar.lod.wireframe {
+   @sugar.wireframe {
        color: rgba(0,0,0,.5);
 
        &:before,

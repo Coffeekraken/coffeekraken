@@ -107,7 +107,7 @@ export default function ({
 
     // wireframe
     vars.push(`
-        @sugar.lod.wireframe {
+        @sugar.wireframe {
             &::-webkit-scrollbar-track {
                 background-color: rgba(0, 0, 0, .03);
             }

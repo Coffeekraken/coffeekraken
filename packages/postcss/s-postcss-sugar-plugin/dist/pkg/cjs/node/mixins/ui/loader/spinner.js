@@ -77,7 +77,7 @@ function default_1({ params, atRule, replaceWith, }) {
   `);
     // wireframe
     vars.push(`
-        @sugar.lod.wireframe {
+        @sugar.wireframe {
             border-color: rgba(0,0,0,.5);
             border-bottom-color: rgba(0, 0, 0, 0);
         }

@@ -20,27 +20,27 @@ export default function (api) {
              * @name                borderColor
              * @namespace           config.themeWireframe.light
              * @type                String
-             * @default             rgba(255,255,255,0.1)
+             * @default             rgba(0,0,0,0.1)
              *
              * Specify the "borderColor" for your wireframe
              *
              * @since               2.0.0
              * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            borderColor: 'rgba(255,255,255,0.1)',
+            borderColor: 'rgba(0,0,0,0.1)',
 
             /**
              * @name                background
              * @namespace           config.themeWireframe.light
              * @type                String
-             * @default             rgba(0,0,0)
+             * @default             rgba(255,255,255)
              *
              * Specify the "background" color for your wireframe
              *
              * @since               2.0.0
              * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            background: 'rgba(0,0,0)',
+            background: 'rgba(255,255,255)',
 
             /**
              * @name                surface

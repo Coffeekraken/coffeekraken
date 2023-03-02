@@ -63,14 +63,14 @@ export default function ({
     // bare
     if (finalParams.scope.indexOf('bare') !== -1) {
         vars.push(`
-            opacity: 0;
-            pointer-events: none;
-            width: 100%;
-
-            @sugar.lod (2) {
-                opacity: 1;
-                pointer-events: all;
+            @sugar.wireframe {
+                opacity: 0;
+                pointer-events: none;
+                width: 100%;
             }
+                
+            opacity: 1;
+            pointer-events: all;
         `);
     }
 

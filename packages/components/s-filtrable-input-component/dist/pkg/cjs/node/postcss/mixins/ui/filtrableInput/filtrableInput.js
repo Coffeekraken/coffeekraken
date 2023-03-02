@@ -110,7 +110,7 @@ function default_1({ params, atRule, sharedData, replaceWith, }) {
     }
     // wireframe
     vars.push(`
-        @sugar.lod.wireframe {
+        @sugar.wireframe {
             .s-filtrable-input_dropdown {
                 @sugar.wireframe.background;
                 @sugar.wireframe.border;

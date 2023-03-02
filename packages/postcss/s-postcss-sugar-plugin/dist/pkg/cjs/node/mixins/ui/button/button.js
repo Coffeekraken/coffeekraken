@@ -201,7 +201,7 @@ function default_1({ params, atRule, sharedData, replaceWith, }) {
     }
     // wireframe
     vars.push(`
-      @sugar.lod.wireframe {
+      @sugar.wireframe {
         @sugar.wireframe.border;
         @sugar.wireframe.background;
       }

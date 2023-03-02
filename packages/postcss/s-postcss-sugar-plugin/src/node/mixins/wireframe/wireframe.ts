@@ -1,5 +1,5 @@
 import __SInterface from '@coffeekraken/s-interface';
-import { IPostcssSugarPluginColorParams } from '../../functions/color/color';
+import { IPostcssSugarPluginWireframeParams } from '../../functions/color/color';
 
 class postcssSugarPluginScopeWireframeMixinInterface extends __SInterface {
     static get _definition() {
@@ -8,26 +8,25 @@ class postcssSugarPluginScopeWireframeMixinInterface extends __SInterface {
 }
 export { postcssSugarPluginScopeWireframeMixinInterface as interface };
 
-export interface postcssSugarPluginScopeWireframeMixinParams {}
+export interface postcssSugarPluginWireframeMixinParams {}
 
 /**
  * @name           wireframe
- * @namespace      node.mixin.scope
+ * @namespace      node.mixin.wireframe
  * @type           PostcssMixin
  * @platform        css
  * @status        beta
  *
- * This mixin allows you to specify some css used only for wireframe. Basically it's the same as
- * calling the mixin @sugar.lod (<2, false); that mean "less than 2 and don't keep when lod is disabled".
+ * This mixin allows you to specify some css used only for wireframe.
  * It also prevent the lod to be applied inside the atRule.
  *
  * @snippet         @sugar.lod.wireframe
- * \@sugar.lod.wireframe {
+ * \@sugar.wireframe {
  *      $1
  * }
  *
  * @example        css
- * \@sugar.lod.wireframe() {
+ * \@sugar.wireframe() {
  *      // ...
  * }
  *
@@ -41,20 +40,18 @@ export default function ({
     settings,
     postcssApi,
 }: {
-    params: Partial<IPostcssSugarPluginColorParams>;
+    params: Partial<IPostcssSugarPluginWireframeParams>;
     sharedData: any;
     atRule: any;
     settings: any;
     postcssApi: any;
 }) {
-    const finalParams = <postcssSugarPluginScopeWireframeMixinParams>{
-        scopes: [],
+    const finalParams = <postcssSugarPluginWireframeMixinParams>{
         ...(params ?? {}),
     };
 
-    const newRule = postcssApi.atRule({
-        name: `sugar.lod`,
-        params: `(<2, $keepWhenLodDisabled: false)`,
+    const newRule = postcssApi.rule({
+        selector: '.s-wireframe &',
         nodes: atRule.nodes,
     });
 

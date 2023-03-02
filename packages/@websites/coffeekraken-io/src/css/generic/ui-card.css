@@ -72,7 +72,7 @@
     background: sugar.color(current);
     @sugar.border.radius();
 
-    @sugar.lod.wireframe {
+    @sugar.wireframe {
         @sugar.wireframe.border;
     }
 

@@ -346,6 +346,24 @@ export default async function ({ root, sharedData, postcssApi, settings }) {
         });
     });
 
+    // ensure the [theme^="..."] is at start...
+    root.walkRules(/\.s-wireframe\s/, (rule) => {
+        rule.selector = rule.selector
+            .split(',')
+            .map((s) => {
+                s = s.trim();
+
+                if (s.match(/^\.s-lod--/)) {
+                    s = `${'.s-wireframe'}${s.replace('.s-wireframe', '')}`;
+                } else {
+                    s = `${'.s-wireframe'} ${s.replace('.s-wireframe', '')}`;
+                }
+
+                return s;
+            })
+            .join(',');
+    });
+
     // ensure the .s-lod--... [theme^="..."] are put together without space...
     root.walkRules(/\.s-lod--[0-9]{1,2}\s\[theme[\^\$]=/, (rule) => {
         rule.selector = rule.selector.replace(
@@ -364,7 +382,10 @@ export default async function ({ root, sharedData, postcssApi, settings }) {
 
                 if (matches) {
                     matches.forEach((match) => {
-                        if (s.match(/^\.s-lod--/)) {
+                        if (
+                            s.match(/^\.s-lod--/) ||
+                            s.match(/^\.s-wireframe/)
+                        ) {
                             s = `${match}${s.replace(match, '')}`;
                         } else {
                             s = `${match} ${s.replace(match, '')}`;
@@ -372,6 +393,27 @@ export default async function ({ root, sharedData, postcssApi, settings }) {
                     });
                 }
 
+                return s;
+            })
+            .join(',');
+    });
+
+    // ensure that .s-wireframe selectors does not have any .s-lod---
+    root.walkRules(/\.s-wireframe/, (rule) => {
+        rule.selector = rule.selector
+            .split(',')
+            .map((s) => {
+                return s.replace(/\.s-lod--[0-9]+/gm, '');
+            })
+            .join(',');
+    });
+
+    root.walkRules((rule) => {
+        rule.selector = rule.selector
+            .split(',')
+            .map((s) => {
+                s = s.trim();
+                s = s.replace(/\s{2,999}/gm, ' ');
                 return s;
             })
             .join(',');

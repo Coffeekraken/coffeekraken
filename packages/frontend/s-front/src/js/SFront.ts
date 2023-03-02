@@ -36,6 +36,8 @@ import __STheme from '@coffeekraken/s-theme';
  * @event       s-front.legal.agree         Dispatched when the user has agree the legal terms throug the `front.agreeLegal` method
  * @event       s-front.legal.disagree         Dispatched when the user has disagree the legal terms throug the `front.disagreeLegal` method
  * @event       s-front.legal.change             Dispatched when the user legal has been changed
+ * @event       s-front.lod.change          Dispatched when the lod leven has been changed
+ * @event       s-front.wireframe.change        Dispatched when the wireframe mode has been activated or desactivated
  *
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -51,10 +53,15 @@ export interface ISFrontPartytownSettings {
     [key: string]: any;
 }
 
+export interface ISFrontWireframeSettings {
+    enabled: boolean;
+}
+
 export interface ISFrontInitSettings {
     id: string;
     gtm: string;
     lod: Partial<ISFrontLodSettings>;
+    wireframe: Partial<ISFrontWireframeSettings>;
     partytown: Partial<ISFrontPartytownSettings>;
     legal: Partial<ISFrontLegalSettings>;
     theme: __STheme | Partial<ISThemeInitSettings>;
@@ -103,6 +110,7 @@ export default class SFront extends __SClass {
         const finalSettings = <ISFrontInitSettings>{
             id: 'default',
             lod: {},
+            wireframe: {},
             legal: {},
             partytown: {},
             theme: {},
@@ -196,6 +204,9 @@ export default class SFront extends __SClass {
         lod: {
             level: undefined,
         },
+        wireframe: {
+            enabled: undefined,
+        },
     };
     state = Object.assign({}, this._originalState);
 
@@ -278,6 +289,9 @@ export default class SFront extends __SClass {
                         stylesheet: 'link#global',
                         ...(frontspec.get('lod') ?? {}),
                     },
+                    wireframe: {
+                        enabled: undefined,
+                    },
                     legal: {
                         cookieName: 's-legal',
                         defaultMetas: {},
@@ -315,8 +329,84 @@ export default class SFront extends __SClass {
             this._initLod();
         }
 
+        // handle wireframe
+        if (
+            this.state.wireframe?.enabled ||
+            (this.settings.wireframe.enabled &&
+                this.state.wireframe.enabled === undefined)
+        ) {
+            console.log('Activate');
+            this.setWireframe(true);
+        }
+
         // init the tracking
         this._initTracking();
+    }
+
+    /**
+     * @name      wireframe
+     * @type      { active: boolean }
+     *
+     * Get the current wireframe state
+     *
+     * @since     2.0.0
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    get wireframe(): {
+        enabled: boolean;
+    } {
+        return {
+            enabled:
+                this.state.wireframe?.enabled !== undefined
+                    ? this.state.wireframe.enabled
+                    : this.settings.wireframe.enabled,
+        };
+    }
+
+    /**
+     * @name            setWireframe
+     * @type            Function
+     *
+     * This method allows you to apply the wireframe mode
+     *
+     * @param              {Boolean}            enabled              true if want to activate the wireframe mode, false if want to desactivate it
+     * @return          {STheme}                                    The STheme instance that represent the current applied theme
+     *
+     * @since           2.0.0
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    setWireframe(enabled: boolean): void {
+        if (this.state.wireframe?.enabled !== enabled) {
+            console.verbose?.(
+                `<yellow>[wireframe]</yellow> ${
+                    enabled
+                        ? '<green>Activate</green>'
+                        : '<red>Desactivate</red>'
+                } the wireframe mode`,
+            );
+
+            // save in state
+            if (!this.state.wireframe) {
+                this.state.wireframe = {};
+            }
+            this.state.wireframe.enabled = enabled;
+            this.save();
+
+            // dispatch a change event
+            document.dispatchEvent(
+                new CustomEvent('s-front.wireframe.change', {
+                    detail: {
+                        enabled,
+                        theme: this,
+                    },
+                }),
+            );
+        }
+
+        // update the dom
+        document
+            .querySelector('html')
+            .classList[enabled ? 'add' : 'remove']('s-wireframe');
     }
 
     /**

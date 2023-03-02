@@ -27,7 +27,7 @@
         top: calc(sugar.padding(50) * -1);
         right: calc(sugar.padding(50) * -1);
 
-        @sugar.lod.wireframe {
+        @sugar.wireframe {
             width: 200%;
         }
 
@@ -157,7 +157,7 @@
         background: sugar.color(main, surface);
         @sugar.border.radius();
 
-        @sugar.lod.wireframe {
+        @sugar.wireframe {
             @sugar.wireframe.border;
         }
 

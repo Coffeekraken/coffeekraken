@@ -12,7 +12,7 @@
         min-width: 80%;
     }
 
-    @sugar.lod.wireframe {
+    @sugar.wireframe {
         @sugar.wireframe.background;
         @sugar.wireframe.border;
     }

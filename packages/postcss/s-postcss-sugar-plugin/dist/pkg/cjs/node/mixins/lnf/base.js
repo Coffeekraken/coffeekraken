@@ -44,7 +44,7 @@ function default_1({ params, atRule, replaceWith, }) {
         @sugar.font.size(default);
         --s-scale: sugar.theme(scale.default);
 
-        @sugar.lod.wireframe {
+        @sugar.wireframe {
             color: rgba(0, 0, 0, 0.5);
             @sugar.wireframe.background;
 

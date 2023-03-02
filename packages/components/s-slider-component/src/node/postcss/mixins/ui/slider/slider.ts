@@ -134,7 +134,7 @@ export default function ({
 
     // wireframe
     vars.push(`
-        @sugar.lod.wireframe {
+        @sugar.wireframe {
 
             > .s-slider_root > .s-slider_slides-wrapper {
                 @sugar.wireframe.background;

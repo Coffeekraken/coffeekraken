@@ -289,7 +289,7 @@ export default function ({ params, atRule, sharedData, replaceWith, }) {
     // wireframe
     vars.push(`
         .s-datetime-picker_picker {
-            @sugar.lod.wireframe {
+            @sugar.wireframe {
                 @sugar.wireframe.background;
                 @sugar.wireframe.border;
             }

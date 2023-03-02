@@ -267,7 +267,7 @@ export default function ({
 
     // wireframe
     vars.push(`
-        @sugar.lod.wireframe {
+        @sugar.wireframe {
             &::-webkit-slider-runnable-track {
                 @sugar.wireframe.background;
                 @sugar.wireframe.border;

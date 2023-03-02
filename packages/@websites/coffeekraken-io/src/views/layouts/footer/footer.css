@@ -4,7 +4,7 @@
     z-index: 20;
     border-top: 1px solid sugar.color(base, --alpha 0.05);
 
-    @sugar.lod.wireframe {
+    @sugar.wireframe {
         @sugar.wireframe.border;
     }
 
@@ -58,7 +58,7 @@
         overflow: hidden;
         position: relative;
 
-        @sugar.lod.wireframe {
+        @sugar.wireframe {
             @sugar.wireframe.border;
         }
 

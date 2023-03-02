@@ -32,7 +32,7 @@
         left: auto !important;
         right: 0 !important;
 
-        @sugar.lod.wireframe {
+        @sugar.wireframe {
             @sugar.wireframe.background;
             @sugar.wireframe.border;
         }

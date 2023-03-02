@@ -71,7 +71,7 @@ export default function ({ params, atRule, sharedData, replaceWith, }) {
     }
     // wireframe
     vars.push(`
-        @sugar.lod.wireframe {
+        @sugar.wireframe {
             .s-panel_container {
                     @sugar.wireframe.background;
                     @sugar.wireframe.border;

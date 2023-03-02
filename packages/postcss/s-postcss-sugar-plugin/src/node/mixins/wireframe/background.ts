@@ -44,10 +44,10 @@ export default function ({
 
     const vars: string[] = [];
     vars.push(`
-        background: sugar.wireframe.background(light);
+        background-color: sugar.wireframe.background(light);
 
         @sugar.theme.when dark {
-            background: sugar.wireframe.background(dark);
+            background-color: sugar.wireframe.background(dark);
         }
     `);
     return vars;

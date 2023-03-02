@@ -257,13 +257,13 @@ export default function ({
     // wireframe
     vars.push(`
       & > * {
-        @sugar.lod.wireframe {
+        @sugar.wireframe {
           @sugar.wireframe.border;
           @sugar.wireframe.background;
         }
 
         &.active {
-          @sugar.lod.wireframe {
+          @sugar.wireframe {
             @sugar.wireframe.surface;
           }
         }

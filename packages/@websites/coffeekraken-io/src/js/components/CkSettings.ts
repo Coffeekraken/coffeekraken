@@ -58,6 +58,7 @@ export default class CkSettings extends __SLitComponent {
     async mount() {}
 
     _setLod(level: number) {
+        this._front.setWireframe(level <= 1);
         this._front.setLod(level);
     }
 

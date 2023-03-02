@@ -100,7 +100,7 @@ export default function ({
 
     // wireframe
     vars.push(`
-        @sugar.lod.wireframe {
+        @sugar.wireframe {
            background: rgba(0,0,0,.5);
         }
     `);

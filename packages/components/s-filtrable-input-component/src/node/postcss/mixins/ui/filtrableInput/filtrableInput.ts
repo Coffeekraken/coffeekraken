@@ -130,7 +130,7 @@ export default function ({
 
     // wireframe
     vars.push(`
-        @sugar.lod.wireframe {
+        @sugar.wireframe {
             .s-filtrable-input_dropdown {
                 @sugar.wireframe.background;
                 @sugar.wireframe.border;

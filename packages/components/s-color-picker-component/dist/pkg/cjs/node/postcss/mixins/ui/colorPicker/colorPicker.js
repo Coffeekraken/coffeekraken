@@ -351,7 +351,7 @@ function default_1({ params, atRule, sharedData, replaceWith, }) {
     // wireframe
     vars.push(`
         .s-color-picker_picker {
-            @sugar.lod.wireframe {
+            @sugar.wireframe {
                 @sugar.wireframe.background;
                 @sugar.wireframe.border;
             }

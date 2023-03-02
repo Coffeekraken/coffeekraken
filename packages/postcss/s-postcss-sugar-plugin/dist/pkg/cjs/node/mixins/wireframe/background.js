@@ -35,10 +35,10 @@ function default_1({ params, atRule, replaceWith, }) {
     const finalParams = Object.assign({}, (params !== null && params !== void 0 ? params : {}));
     const vars = [];
     vars.push(`
-        background: sugar.wireframe.background(light);
+        background-color: sugar.wireframe.background(light);
 
         @sugar.theme.when dark {
-            background: sugar.wireframe.background(dark);
+            background-color: sugar.wireframe.background(dark);
         }
     `);
     return vars;

@@ -3,7 +3,7 @@
 }
 
 .s-label--float {
-    @sugar.lod.wireframe {
+    @sugar.wireframe {
         pointer-events: none;
 
         ::placeholder {
@@ -12,7 +12,7 @@
     }
 }
 .s-input {
-    @sugar.lod.wireframe {
+    @sugar.wireframe {
         border: solid 1px rgba(0, 0, 0, 0.1);
     }
 }
@@ -33,7 +33,7 @@
         pointer-events: all;
     }
 
-    @sugar.lod.wireframe {
+    @sugar.wireframe {
         background: white;
         border-bottom: 1px solid rgba(0, 0, 0, 0.1);
     }

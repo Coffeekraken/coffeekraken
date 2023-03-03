@@ -10,7 +10,7 @@
         sugar.color(main, --lighten 50)
     );
 
-    @sugar.theme.when dark {
+    @sugar.theme dark {
         background: radial-gradient(
             ellipse at top left,
             sugar.color(main, --darken 35 --alpha 0.7),

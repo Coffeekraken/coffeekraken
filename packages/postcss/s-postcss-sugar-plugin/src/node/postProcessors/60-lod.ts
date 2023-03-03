@@ -59,7 +59,7 @@ export default async function ({ root, sharedData, postcssApi, settings }) {
             const selParts = sel.split(' '),
                 newSelParts = [];
 
-            // theme attribute (@sugar.theme.when)
+            // theme attribute (@sugar.theme)
             if (selParts[0].startsWith('[theme')) {
                 theme = selParts[0];
                 selParts.shift();
@@ -119,11 +119,13 @@ export default async function ({ root, sharedData, postcssApi, settings }) {
             return;
         }
 
-        // support for @sugar.lod.only mixin
-        const onlyLevelMatch = rule.selector.match(/\.s-lod-only--([0-9\-]+)/);
-        if (onlyLevelMatch?.[1]) {
-            const onlyLevels = onlyLevelMatch[1].split('-');
-            if (!onlyLevels.includes(levelStr)) {
+        // support for @sugar.lod.filter mixin
+        const filterLevelMatch = rule.selector.match(
+            /\.s-lod-filter--([0-9\-]+)/,
+        );
+        if (filterLevelMatch?.[1]) {
+            const filterLevels = filterLevelMatch[1].split('-');
+            if (!filterLevels.includes(levelStr)) {
                 // remove the declaration and stop here
                 decl.remove();
                 return;
@@ -301,10 +303,10 @@ export default async function ({ root, sharedData, postcssApi, settings }) {
         }
     });
 
-    // remove .s-lod-only-... in selectors
-    root.walkRules(/\.s-lod-only--[0-9\-]+/, (rule) => {
+    // remove .s-lod-filter-... in selectors
+    root.walkRules(/\.s-lod-filter--[0-9\-]+/, (rule) => {
         rule.selectors = rule.selectors.map((sel) => {
-            return sel.replace(/\.s-lod-only--[0-9\-]+\s?/gm, '');
+            return sel.replace(/\.s-lod-filter--[0-9\-]+\s?/gm, '');
         });
     });
 

@@ -3,7 +3,7 @@
         <div class="s-layout:11112:align-center s-pb:70">
             <div>
                 <h3 class="s-typo:h3 s-mbe:30">
-                    We are <span class="s-gradient:text:accent">transparent</span>!
+                    We are <span class="s-tc:accent">transparent</span>!
                 </h3>
                 <p class="s-typo:lead s-mbe:20">
                     With this little anoying panel (sorry for that), we just want you to know that we make use of optional analytics tools on this website.

@@ -6,7 +6,7 @@
 
                 <div class="s-layout:1112 s-position:relative @mobile s-layout:2_1">
                     <div class="@mobile s-text:center">
-                        <h3 class="s-typo:h2 s-mbe:30"><span class="s-gradient:text:accent">Open</span> Source</h3>
+                        <h3 class="s-typo:h2 s-mbe:30"><span class="s-tc:accent">Open</span> Source</h3>
                         <p class="s-typo:lead s-mbe:50 @mobile s-typo:p">
                             Note that this project is all open sourced. This mean <span class="s-tc:complementary">it
                                 needs your support</span> as well as <span class="s-tc:accent">your good

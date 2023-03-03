@@ -19,7 +19,7 @@ body {
 
         background-color: sugar.color(main, background) !important;
 
-        @sugar.theme.when (dark) {
+        @sugar.theme (dark) {
             background-color: sugar.color(main);
         }
     }

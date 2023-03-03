@@ -5,7 +5,7 @@ import __STheme from '@coffeekraken/s-theme';
  * @namespace     node.function.wireframe
  * @type          PostcssFunction
  * @platform      postcss
- * @interface    ./wireframe
+ * @interface    ./background
  * @status        beta
  *
  * This function allows you to get a background value for your wireframe depending on your theme config

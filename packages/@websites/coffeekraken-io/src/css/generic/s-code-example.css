@@ -26,7 +26,7 @@
         color: rgba(0, 0, 0, 0.3);
         top: calc(sugar.margin(10) * -1) !important;
 
-        @sugar.theme.when (dark) {
+        @sugar.theme (dark) {
             color: rgba(255, 255, 255, 0.3);
         }
     }
@@ -34,7 +34,7 @@
     .s-code-example .s-clipboard-copy {
         opacity: 0.2;
 
-        @sugar.theme.when dark {
+        @sugar.theme dark {
             opacity: 0.6;
         }
 
@@ -55,7 +55,7 @@
         background-color: sugar.color(main, surface, --darken 1) !important;
         border: 1px solid sugar.color(main, border, --alpha 0.1);
 
-        @sugar.theme.when dark {
+        @sugar.theme dark {
             border-color: sugar.color(main, border, --alpha 0.3);
         }
     }

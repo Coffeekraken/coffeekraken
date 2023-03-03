@@ -46,7 +46,7 @@ export default function ({
     vars.push(`
         background: sugar.wireframe.surface(light);
     
-        @sugar.theme.when dark {
+        @sugar.theme dark {
             background: sugar.wireframe.surface(dark);
         }
     `);

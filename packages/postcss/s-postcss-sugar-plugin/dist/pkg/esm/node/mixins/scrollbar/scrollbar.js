@@ -82,14 +82,14 @@ export default function ({ params, atRule, replaceWith, }) {
             &::-webkit-scrollbar-track {
                 background-color: rgba(0,0,0,0.05);
                 
-                @sugar.theme.when dark {
+                @sugar.theme dark {
                     background-color: rgba(255,255,255,0.05);
                 }
             }
             &::-webkit-scrollbar-thumb {
                 background-color: rgba(0,0,0,0.1);
                 
-                @sugar.theme.when dark {
+                @sugar.theme dark {
                     background-color: rgba(255,255,255,0.1);
                 }
             }

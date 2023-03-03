@@ -85,7 +85,7 @@ function default_1({ params, atRule, sharedData, replaceWith, }) {
             .s-panel_backdrop {
                 background: sugar.color(sugar.wireframe.background(light), --alpha 0.7);
 
-                @sugar.theme.when dark {
+                @sugar.theme dark {
                     background: sugar.color(sugar.wireframe.background(dark), --alpha 0.7);
                 }
             }

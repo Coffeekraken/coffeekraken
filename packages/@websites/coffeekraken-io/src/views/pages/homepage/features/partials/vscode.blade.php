@@ -5,7 +5,7 @@
 
             <div>
 
-                <h3 class="s-typo:h2 s-mbe:30 @mobile s-typo:h4">Nicely integrated<br> into <span class="s-gradient:text:accent">VSCode</span></h3>
+                <h3 class="s-typo:h2 s-mbe:30 @mobile s-typo:h4">Nicely integrated<br> into <span class="s-tc:accent">VSCode</span></h3>
                 <p class="s-typo:lead s-mbe:50">
                     We provide a <span class="s-tc:complementary">VSCode extension</span> that let you enjoy the power of our tools like:
                 </p>

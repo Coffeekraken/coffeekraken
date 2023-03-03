@@ -1,30 +1,5 @@
 import __SInterface from '@coffeekraken/s-interface';
-import __STheme from '@coffeekraken/s-theme';
-/**
- * @name           theme
- * @namespace      node.mixin.theme
- * @type           PostcssMixin
- * @platform      postcss
- * @status        beta
- *
- * This mixin simply generate all the css needed for a theme to be applied
- * in any scope. It will print all the theme variables like colors, etc, as well
- * as set the correct font style and some other small things...
- *
- * @return        {Css}         The generated css
- *
- * @snippet         @sugar.theme($1)
- *
- * @example        css
- * \@sugar.theme(light);
- * .my-cool-element {
- *    \@sugar.theme(dark);
- * }
- *
- * @since       2.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
-class postcssSugarPluginThemeinInterface extends __SInterface {
+class postcssSugarPluginThemeMixinInterface extends __SInterface {
     static get _definition() {
         return {
             variant: {
@@ -33,38 +8,70 @@ class postcssSugarPluginThemeinInterface extends __SInterface {
             theme: {
                 type: 'String',
             },
-            scope: {
-                type: 'Boolean',
-                default: false,
-            },
         };
     }
 }
-export { postcssSugarPluginThemeinInterface as interface };
-export default function ({ params, atRule, replaceWith, }) {
-    const finalParams = Object.assign({ variant: undefined, theme: undefined, scope: false }, params);
-    const vars = __STheme.toCssVars({
-        theme: finalParams.theme,
-        variant: finalParams.variant,
+export { postcssSugarPluginThemeMixinInterface as interface };
+/**
+ * @name           theme
+ * @namespace      node.mixin.theme
+ * @type           PostcssMixin
+ * @platform      postcss
+ * @status        beta
+ *
+ * This mixin allows you to scope some css for a particular theme.
+ *
+ * @return      {Css}         The generated css
+ *
+ * @snippet         @sugar.theme($1)
+ * \@sugar.theme $1 {
+ *      $2
+ * }
+ *
+ * @example        css
+ * .my-cool-element {
+ *    \@sugar.theme(dark) {
+ *      margin-bottom: 50px;
+ *    }
+ * }
+ *
+ * @example       html
+ * <h1 class="my-cool-element">Hello world</h1>
+ * <div theme="default-dark">
+ *     <h1 class="my-cool-element">Hello world</h1>
+ * </div>
+ *
+ * @since       2.0.0
+ * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+ */
+export default function ({ params, atRule, postcssApi, }) {
+    const finalParams = Object.assign({}, (params !== null && params !== void 0 ? params : {}));
+    if (!atRule.nodes) {
+        throw new Error(`<red>[@sugar.theme]</red> The <yellow>@sugar.theme(...)</yellow> mixin MUST contain some children...`);
+    }
+    let theme = finalParams.theme, variant = finalParams.variant;
+    let container;
+    if (theme && variant) {
+        container = new postcssApi.Rule({
+            selectors: [
+                `[theme^="${theme}"][theme$="${variant}"] &`,
+                `&[theme^="${theme}"][theme$="${variant}"]`,
+            ],
+        });
+    }
+    else if (theme) {
+        container = new postcssApi.Rule({
+            selectors: [`[theme^="${theme}"] &`, `&[theme^="${theme}"]`],
+        });
+    }
+    else if (variant) {
+        container = new postcssApi.Rule({
+            selectors: [`[theme$="${variant}"] &`, `&[theme$="${variant}"]`],
+        });
+    }
+    atRule.nodes.forEach((n) => {
+        container.append(n.clone());
     });
-    const selectors = [];
-    if (finalParams.theme)
-        selectors.push(`[theme^="${finalParams.theme}"]`);
-    if (finalParams.variant)
-        selectors.push(`[theme$="${finalParams.variant}"]`);
-    if (finalParams.scope) {
-        vars.unshift(`${selectors.join('')} body {`);
-        vars.push(`@sugar.lnf.base;`);
-        vars.push('}');
-    }
-    else if (atRule.parent.type === 'root') {
-        vars.unshift('body {');
-        vars.push(`@sugar.lnf.base;`);
-        vars.push('}');
-    }
-    else {
-        vars.push(`@sugar.lnf.base;`);
-    }
-    return vars;
+    atRule.replaceWith(container);
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sWUFBWSxNQUFNLDJCQUEyQixDQUFDO0FBQ3JELE9BQU8sUUFBUSxNQUFNLHVCQUF1QixDQUFDO0FBRTdDOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQXVCRztBQUVILE1BQU0sa0NBQW1DLFNBQVEsWUFBWTtJQUN6RCxNQUFNLEtBQUssV0FBVztRQUNsQixPQUFPO1lBQ0gsT0FBTyxFQUFFO2dCQUNMLElBQUksRUFBRSxRQUFRO2FBQ2pCO1lBQ0QsS0FBSyxFQUFFO2dCQUNILElBQUksRUFBRSxRQUFRO2FBQ2pCO1lBQ0QsS0FBSyxFQUFFO2dCQUNILElBQUksRUFBRSxTQUFTO2dCQUNmLE9BQU8sRUFBRSxLQUFLO2FBQ2pCO1NBQ0osQ0FBQztJQUNOLENBQUM7Q0FDSjtBQVFELE9BQU8sRUFBRSxrQ0FBa0MsSUFBSSxTQUFTLEVBQUUsQ0FBQztBQUMzRCxNQUFNLENBQUMsT0FBTyxXQUFXLEVBQ3JCLE1BQU0sRUFDTixNQUFNLEVBQ04sV0FBVyxHQUtkO0lBQ0csTUFBTSxXQUFXLG1CQUNiLE9BQU8sRUFBRSxTQUFTLEVBQ2xCLEtBQUssRUFBRSxTQUFTLEVBQ2hCLEtBQUssRUFBRSxLQUFLLElBQ1QsTUFBTSxDQUNaLENBQUM7SUFFRixNQUFNLElBQUksR0FBRyxRQUFRLENBQUMsU0FBUyxDQUFDO1FBQzVCLEtBQUssRUFBRSxXQUFXLENBQUMsS0FBSztRQUN4QixPQUFPLEVBQUUsV0FBVyxDQUFDLE9BQU87S0FDL0IsQ0FBQyxDQUFDO0lBRUgsTUFBTSxTQUFTLEdBQWEsRUFBRSxDQUFDO0lBQy9CLElBQUksV0FBVyxDQUFDLEtBQUs7UUFBRSxTQUFTLENBQUMsSUFBSSxDQUFDLFlBQVksV0FBVyxDQUFDLEtBQUssSUFBSSxDQUFDLENBQUM7SUFDekUsSUFBSSxXQUFXLENBQUMsT0FBTztRQUNuQixTQUFTLENBQUMsSUFBSSxDQUFDLFlBQVksV0FBVyxDQUFDLE9BQU8sSUFBSSxDQUFDLENBQUM7SUFFeEQsSUFBSSxXQUFXLENBQUMsS0FBSyxFQUFFO1FBQ25CLElBQUksQ0FBQyxPQUFPLENBQUMsR0FBRyxTQUFTLENBQUMsSUFBSSxDQUFDLEVBQUUsQ0FBQyxTQUFTLENBQUMsQ0FBQztRQUM3QyxJQUFJLENBQUMsSUFBSSxDQUFDLGtCQUFrQixDQUFDLENBQUM7UUFDOUIsSUFBSSxDQUFDLElBQUksQ0FBQyxHQUFHLENBQUMsQ0FBQztLQUNsQjtTQUFNLElBQUksTUFBTSxDQUFDLE1BQU0sQ0FBQyxJQUFJLEtBQUssTUFBTSxFQUFFO1FBQ3RDLElBQUksQ0FBQyxPQUFPLENBQUMsUUFBUSxDQUFDLENBQUM7UUFDdkIsSUFBSSxDQUFDLElBQUksQ0FBQyxrQkFBa0IsQ0FBQyxDQUFDO1FBQzlCLElBQUksQ0FBQyxJQUFJLENBQUMsR0FBRyxDQUFDLENBQUM7S0FDbEI7U0FBTTtRQUNILElBQUksQ0FBQyxJQUFJLENBQUMsa0JBQWtCLENBQUMsQ0FBQztLQUNqQztJQUVELE9BQU8sSUFBSSxDQUFDO0FBQ2hCLENBQUMifQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sWUFBWSxNQUFNLDJCQUEyQixDQUFDO0FBRXJELE1BQU0scUNBQXNDLFNBQVEsWUFBWTtJQUM1RCxNQUFNLEtBQUssV0FBVztRQUNsQixPQUFPO1lBQ0gsT0FBTyxFQUFFO2dCQUNMLElBQUksRUFBRSxRQUFRO2FBQ2pCO1lBQ0QsS0FBSyxFQUFFO2dCQUNILElBQUksRUFBRSxRQUFRO2FBQ2pCO1NBQ0osQ0FBQztJQUNOLENBQUM7Q0FDSjtBQUNELE9BQU8sRUFBRSxxQ0FBcUMsSUFBSSxTQUFTLEVBQUUsQ0FBQztBQU85RDs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQStCRztBQUNILE1BQU0sQ0FBQyxPQUFPLFdBQVcsRUFDckIsTUFBTSxFQUNOLE1BQU0sRUFDTixVQUFVLEdBS2I7SUFDRyxNQUFNLFdBQVcsR0FBRyxrQkFDYixDQUFDLE1BQU0sYUFBTixNQUFNLGNBQU4sTUFBTSxHQUFJLEVBQUUsQ0FBQyxDQUNwQixDQUFDO0lBRUYsSUFBSSxDQUFDLE1BQU0sQ0FBQyxLQUFLLEVBQUU7UUFDZixNQUFNLElBQUksS0FBSyxDQUNYLHNHQUFzRyxDQUN6RyxDQUFDO0tBQ0w7SUFFRCxJQUFJLEtBQUssR0FBRyxXQUFXLENBQUMsS0FBSyxFQUN6QixPQUFPLEdBQUcsV0FBVyxDQUFDLE9BQU8sQ0FBQztJQUVsQyxJQUFJLFNBQVMsQ0FBQztJQUVkLElBQUksS0FBSyxJQUFJLE9BQU8sRUFBRTtRQUNsQixTQUFTLEdBQUcsSUFBSSxVQUFVLENBQUMsSUFBSSxDQUFDO1lBQzVCLFNBQVMsRUFBRTtnQkFDUCxZQUFZLEtBQUssY0FBYyxPQUFPLE1BQU07Z0JBQzVDLGFBQWEsS0FBSyxjQUFjLE9BQU8sSUFBSTthQUM5QztTQUNKLENBQUMsQ0FBQztLQUNOO1NBQU0sSUFBSSxLQUFLLEVBQUU7UUFDZCxTQUFTLEdBQUcsSUFBSSxVQUFVLENBQUMsSUFBSSxDQUFDO1lBQzVCLFNBQVMsRUFBRSxDQUFDLFlBQVksS0FBSyxNQUFNLEVBQUUsYUFBYSxLQUFLLElBQUksQ0FBQztTQUMvRCxDQUFDLENBQUM7S0FDTjtTQUFNLElBQUksT0FBTyxFQUFFO1FBQ2hCLFNBQVMsR0FBRyxJQUFJLFVBQVUsQ0FBQyxJQUFJLENBQUM7WUFDNUIsU0FBUyxFQUFFLENBQUMsWUFBWSxPQUFPLE1BQU0sRUFBRSxhQUFhLE9BQU8sSUFBSSxDQUFDO1NBQ25FLENBQUMsQ0FBQztLQUNOO0lBRUQsTUFBTSxDQUFDLEtBQUssQ0FBQyxPQUFPLENBQUMsQ0FBQyxDQUFDLEVBQUUsRUFBRTtRQUN2QixTQUFTLENBQUMsTUFBTSxDQUFDLENBQUMsQ0FBQyxLQUFLLEVBQUUsQ0FBQyxDQUFDO0lBQ2hDLENBQUMsQ0FBQyxDQUFDO0lBQ0gsTUFBTSxDQUFDLFdBQVcsQ0FBQyxTQUFTLENBQUMsQ0FBQztBQUNsQyxDQUFDIn0=

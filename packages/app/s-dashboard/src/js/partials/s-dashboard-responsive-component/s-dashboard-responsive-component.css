@@ -12,7 +12,7 @@
         font-family: sugar.font.family(code);
         background: sugar.color(main, background, --darken 2);
 
-        @sugar.theme.when dark {
+        @sugar.theme dark {
             background: sugar.color(main, background, --lighten 5);
         }
     }

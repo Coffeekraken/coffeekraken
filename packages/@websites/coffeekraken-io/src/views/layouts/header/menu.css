@@ -99,7 +99,7 @@
             background: sugar.color(main, --lighten 43);
             padding: sugar.padding(30);
 
-            @sugar.theme.when (dark) {
+            @sugar.theme (dark) {
                 background: sugar.color(main, --darken 33);
             }
         }

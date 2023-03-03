@@ -22,7 +22,7 @@ s-dashboard-frontend-checker {
         margin-block-end: sugar.margin(20);
         background: sugar.color(main, --alpha 0.05);
 
-        @sugar.theme.when dark {
+        @sugar.theme dark {
             background: sugar.color(main, --alpha 0.1);
         }
     }

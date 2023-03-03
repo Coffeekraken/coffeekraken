@@ -8,7 +8,7 @@
         @sugar.wireframe.border;
     }
 
-    @sugar.theme.when dark {
+    @sugar.theme dark {
         background-color: sugar.color(main, surface);
     }
 
@@ -27,7 +27,7 @@
         }
     }
 
-    @sugar.theme.when (dark) {
+    @sugar.theme (dark) {
         svg .main {
             fill: sugar.color(main, text);
         }

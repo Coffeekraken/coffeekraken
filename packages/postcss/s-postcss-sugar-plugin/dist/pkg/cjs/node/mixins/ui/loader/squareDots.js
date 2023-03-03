@@ -103,7 +103,7 @@ function default_1({ params, atRule, replaceWith, }) {
         color: rgba(0,0,0,.5);
        }
 
-       @sugar.theme.when dark {
+       @sugar.theme dark {
             color: rgba(255,255,255,.5);
         
         &:before,

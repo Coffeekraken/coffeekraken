@@ -2,7 +2,7 @@ import __SInterface from '@coffeekraken/s-interface';
 import { __fromQuantifier } from '@coffeekraken/sugar/array';
 
 /**
- * @name           only
+ * @name           filter
  * @namespace      node.mixin.lod
  * @type           PostcssMixin
  * @platform      postcss
@@ -10,19 +10,19 @@ import { __fromQuantifier } from '@coffeekraken/sugar/array';
  * @status        beta
  *
  * This mixin allows you to specify which lod you want to keep from the enclosed css.
- * This is useful for example if you want to start with some sugar classes but ONLY
+ * This is useful for example if you want to start with some sugar classes but filter
  * certain levels.
  *
- * @param           {Number|String}         level           The level of details you want to keep. "2" will mean 0, 1 and 2. "=2" will mean only the level 2. ">=2" will mean 2 and greater, etc...
+ * @param           {Number|String}         level           The level of details you want to keep. "2" will mean 0, 1 and 2. "=2" will mean filter the level 2. ">=2" will mean 2 and greater, etc...
  * @return        {Css}         The generated css
  *
- * @snippet         @sugar.lod.only($1)
- * \@sugar.lod.only($1) {
+ * @snippet         @sugar.lod.filter($1)
+ * \@sugar.lod.filter($1) {
  *      $2
  * }
- * 
+ *
  * @example        css
- * \@sugar.lod.only(2) {
+ * \@sugar.lod.filter(2) {
  *      \@sugar.ui.button.classes;
  * }
  *
@@ -30,7 +30,7 @@ import { __fromQuantifier } from '@coffeekraken/sugar/array';
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 
-class postcssSugarPluginLodOnlyMixinInterface extends __SInterface {
+class postcssSugarPluginLodFilterMixinInterface extends __SInterface {
     static get _definition() {
         return {
             level: {
@@ -40,9 +40,9 @@ class postcssSugarPluginLodOnlyMixinInterface extends __SInterface {
         };
     }
 }
-export { postcssSugarPluginLodOnlyMixinInterface as interface };
+export { postcssSugarPluginLodFilterMixinInterface as interface };
 
-export interface postcssSugarPluginLodOnlyMixinParams {
+export interface postcssSugarPluginLodFilterMixinParams {
     level: number | string;
 }
 export default function ({
@@ -51,12 +51,12 @@ export default function ({
     settings,
     postcssApi,
 }: {
-    params: Partial<postcssSugarPluginLodOnlyMixinParams>;
+    params: Partial<postcssSugarPluginLodFilterMixinParams>;
     atRule: any;
     settings: any;
     postcssApi: any;
 }) {
-    const finalParams = <postcssSugarPluginLodOnlyMixinParams>{
+    const finalParams = <postcssSugarPluginLodFilterMixinParams>{
         level: 0,
         ...(params ?? {}),
     };
@@ -73,7 +73,7 @@ export default function ({
     });
 
     const newRule = postcssApi.rule({
-        selector: `.s-lod-only--${levels.join('-')}`,
+        selector: `.s-lod-filter--${levels.join('-')}`,
         nodes: atRule.nodes,
     });
 

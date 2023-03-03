@@ -11,7 +11,7 @@ const s_theme_1 = __importDefault(require("@coffeekraken/s-theme"));
  * @namespace     node.function.wireframe
  * @type          PostcssFunction
  * @platform      postcss
- * @interface    ./wireframe
+ * @interface    ./surface
  * @status        beta
  *
  * This function allows you to get a surface value for your wireframe depending on your theme config

@@ -1,6 +1,5 @@
 import __SInterface from '@coffeekraken/s-interface';
-
-declare class postcssSugarPluginThemeinInterface extends __SInterface {
+declare class postcssSugarPluginThemeMixinInterface extends __SInterface {
     static get _definition(): {
         variant: {
             type: string;
@@ -8,20 +7,16 @@ declare class postcssSugarPluginThemeinInterface extends __SInterface {
         theme: {
             type: string;
         };
-        scope: {
-            type: string;
-            default: boolean;
-        };
     };
 }
-export interface IPostcssSugarPluginThemeParams {
-    variant: string | undefined;
-    theme: string | undefined;
-    scope: boolean;
+export { postcssSugarPluginThemeMixinInterface as interface };
+export interface postcssSugarPluginThemeMixinParams {
+    variant?: string;
+    theme?: string;
 }
-export { postcssSugarPluginThemeinInterface as interface };
-export default function ({ params, atRule, replaceWith, }: {
-    params: Partial<IPostcssSugarPluginThemeParams>;
+
+export default function ({ params, atRule, postcssApi, }: {
+    params: Partial<postcssSugarPluginThemeMixinParams>;
     atRule: any;
-    replaceWith: Function;
-}): any;
+    postcssApi: any;
+}): void;

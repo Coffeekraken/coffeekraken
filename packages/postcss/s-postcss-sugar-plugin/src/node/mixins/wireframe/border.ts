@@ -46,7 +46,7 @@ export default function ({
     vars.push(`
         border: sugar.wireframe.border(light);
 
-        @sugar.theme.when dark {
+        @sugar.theme dark {
             border: sugar.wireframe.border(dark);
         }
     `);

@@ -45,7 +45,7 @@
             color: sugar.color(accent, foreground);
         }
 
-        @sugar.theme.when dark {
+        @sugar.theme dark {
             &:hover {
                 background: sugar.color(accent, --alpha 0.3);
             }

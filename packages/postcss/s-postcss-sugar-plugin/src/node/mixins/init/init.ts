@@ -34,7 +34,7 @@ export { postcssSugarPluginMediaMixinInterface as interface };
  * @param       {String}        query       The query string like ">tablet", "<=desktop", etc...
  *
  * @snippet         @sugar.init
- * 
+ *
  * @example        css
  * \@sugar.init;
  *
@@ -58,7 +58,7 @@ export default function ({
 
     const cssArray = [
         '@sugar.reset;',
-        `@sugar.theme(${finalParams.variant}, ${finalParams.theme});`,
+        `@sugar.theme.apply(${finalParams.variant}, ${finalParams.theme});`,
         '@sugar.font.faces;',
         '@sugar.lnf.selection;',
         // '@sugar.autoload;', // Check if it's a good idea or not...

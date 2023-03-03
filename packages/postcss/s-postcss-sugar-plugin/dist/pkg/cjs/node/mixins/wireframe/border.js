@@ -37,7 +37,7 @@ function default_1({ params, atRule, replaceWith, }) {
     vars.push(`
         border: sugar.wireframe.border(light);
 
-        @sugar.theme.when dark {
+        @sugar.theme dark {
             border: sugar.wireframe.border(dark);
         }
     `);

@@ -73,7 +73,7 @@
                 transform-origin: 50% 50%;
                 transform: scale(0.9);
 
-                @sugar.theme.when dark {
+                @sugar.theme dark {
                     opacity: 1;
                     fill: sugar.color(main, background);
                 }
@@ -95,7 +95,7 @@
                 fill: none;
             }
 
-            @sugar.theme.when dark {
+            @sugar.theme dark {
                 path {
                     stroke: sugar.color(main, foreground, --alpha 0.1);
                     fill: none;
@@ -172,7 +172,7 @@
             @sugar.wireframe.border;
         }
 
-        @sugar.theme.when dark {
+        @sugar.theme dark {
             @sugar.depth (100);
             /* background: sugar.color(main, background, --lighten 5%); */
             background-image: linear-gradient(

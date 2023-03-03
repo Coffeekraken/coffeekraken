@@ -1,6 +1,8 @@
 /* init theme */
 @sugar.init ($variant: dark);
-@sugar.theme ($variant: light, $scope: true);
+@sugar.theme.import ($variant: light);
+
+/* @sugar.utils.removeprops 'border-radius' { */
 
 /* main sugar classes */
 @sugar.classes;
@@ -19,6 +21,8 @@
 @sugar.ui.themeswitcher.classes;
 @sugar.ui.panel.classes;
 @sugar.platform.classes;
+
+/* } */
 
 /* mobile specific classes */
 @sugar.media.classes mobile {

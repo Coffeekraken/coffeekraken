@@ -49,7 +49,7 @@
         background-position: 50% 50%;
         background-size: cover;
 
-        @sugar.theme.when dark {
+        @sugar.theme dark {
             background-image: url('/dist/img/discord-illustration-bkg.png');
             background-color: sugar.color(complementary, --lighten 10);
             background-color: sugar.color(main, --darken 10);
@@ -65,7 +65,7 @@
         background-size: cover;
         font-size: sugar.font.size(25);
 
-        @sugar.theme.when dark {
+        @sugar.theme dark {
             background-color: sugar.color(main, --darken 17);
         }
 
@@ -85,7 +85,7 @@
         min-width: 200px;
         @sugar.scrollbar;
 
-        @sugar.theme.when dark {
+        @sugar.theme dark {
             background: sugar.color(main, surface);
         }
 
@@ -101,7 +101,7 @@
 
             &:hover {
                 background: sugar.color(main, surface, --darken 3);
-                @sugar.theme.when dark {
+                @sugar.theme dark {
                     background: sugar.color(main, surface, --lighten 5);
                 }
             }

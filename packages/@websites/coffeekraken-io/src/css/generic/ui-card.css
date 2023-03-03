@@ -43,7 +43,7 @@
             var(--ui-card-card-width) - sugar.margin(30) * 0.5
         ) !important;
 
-        @sugar.theme.when dark {
+        @sugar.theme dark {
             opacity: 0.2;
         }
 

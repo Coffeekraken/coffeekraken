@@ -208,7 +208,7 @@ export default function ({
                     background-color: sugar.color(current, --darken 6);
                     color: sugar.color(current, foreground) !important;
 
-                    @sugar.theme.when(dark) {
+                    @sugar.theme(dark) {
                       background-color: sugar.color(current, --lighten 6);
                     }
                   }

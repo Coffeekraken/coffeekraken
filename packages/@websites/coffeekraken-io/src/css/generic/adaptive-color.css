@@ -23,7 +23,7 @@
         stroke: sugar.color(complementary);
     }
 
-    @sugar.theme.when (dark) {
+    @sugar.theme (dark) {
         [fill='white'],
         .main {
             fill: sugar.color(main, text);

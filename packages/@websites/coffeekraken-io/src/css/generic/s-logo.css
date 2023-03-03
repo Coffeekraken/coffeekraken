@@ -6,7 +6,7 @@
         fill: sugar.color(main, --darken 10);
         stroke: sugar.color(main, --darken 10);
 
-        @sugar.theme.when dark {
+        @sugar.theme dark {
             fill: white;
             stroke: white;
         }

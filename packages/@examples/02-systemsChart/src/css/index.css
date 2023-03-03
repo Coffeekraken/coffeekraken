@@ -48,7 +48,7 @@ body {
         fill: sugar.color(accent);
     }
 
-    @sugar.theme.when (dark) {
+    @sugar.theme (dark) {
         svg [fill='white'] {
             fill: sugar.color(main, text);
         }

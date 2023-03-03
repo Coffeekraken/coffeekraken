@@ -14,7 +14,7 @@
         background: sugar.color(main, --alpha 0.01);
     }
 
-    @sugar.theme.when dark {
+    @sugar.theme dark {
         background: sugar.color(main, surface, --alpha 0.3);
     }
 
@@ -34,7 +34,7 @@
             display: block;
         }
     }
-    @sugar.theme.when dark {
+    @sugar.theme dark {
         &:before {
             background: sugar.color(main, surface, --alpha 0.3);
         }
@@ -56,7 +56,7 @@
             display: block;
         }
     }
-    @sugar.theme.when dark {
+    @sugar.theme dark {
         &:after {
             background: sugar.color(main, surface, --alpha 0.3);
         }

@@ -2,7 +2,7 @@
 <section id="features-frontend" class="section:diagonal">
     <div class="s-container">
 
-        <h3 class="s-typo:h2 s-mbe:30 @mobile s-typo:h4">Frontend<br><span class="s-gradient:text:accent">Sugar</span></h3>
+        <h3 class="s-typo:h2 s-mbe:30 @mobile s-typo:h4">Frontend<br><span class="s-tc:accent">Sugar</span></h3>
         <p class="s-typo:lead s-mbe:80 @mobile s-mbe:30">
             The goal of Coffeekraken is to help having a <span class="s-tc:complementary">better development
                 experience</span>
@@ -13,7 +13,7 @@
             <div>
                 <h3 class="s-typo:h3 s-mbe:30 s-pbs:30">
                     CSS made<br>
-                    <span class="s-gradient:text:accent">pleasant</span> again
+                    <span class="s-tc:accent">pleasant</span> again
                 </h3>
                 <ol class="s-list:ol s-color:accent">
                     <li>
@@ -90,7 +90,7 @@
         <div class="code-example-section:right" ">
             <div>
                 <h3 class="s-typo:h3 s-mbe:30 s-pbs:30">
-                    <span class="s-gradient:text:accent">Theming</span> made<br>
+                    <span class="s-tc:accent">Theming</span> made<br>
                     As tasty as a donut
                 </h3>
                 <ol class="s-list:ol s-color:accent">
@@ -136,7 +136,7 @@
         <div class="code-example-section" ">
             <div>
                 <h3 class="s-typo:h3 s-mbe:30 s-pbs:30">
-                    <span class="s-gradient:text:accent">Layout</span> finally<br>
+                    <span class="s-tc:accent">Layout</span> finally<br>
                     Nice to work with
                 </h3>
                 <ol class="s-list:ol s-color:accent">

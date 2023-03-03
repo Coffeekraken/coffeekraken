@@ -37,7 +37,7 @@ function default_1({ params, atRule, replaceWith, }) {
     vars.push(`
         background-color: sugar.wireframe.background(light);
 
-        @sugar.theme.when dark {
+        @sugar.theme dark {
             background-color: sugar.wireframe.background(dark);
         }
     `);

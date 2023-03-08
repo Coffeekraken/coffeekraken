@@ -35,6 +35,13 @@ export default class SFaviconBuilderBuildParamsInterface extends __SInterface {
                 required: true,
                 default: __SSugarConfig.get('faviconBuilder.outDir'),
             },
+            outFileName: {
+                description:
+                    'Specify the output file name you want for the html file',
+                type: 'String',
+                required: true,
+                default: __SSugarConfig.get('faviconBuilder.outFileName'),
+            },
             settings: {
                 description:
                     'Specify some settings to override and pass to the [favicons](https://www.npmjs.com/package/favicons) builder',

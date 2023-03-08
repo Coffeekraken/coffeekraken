@@ -63,6 +63,9 @@ $frontspec->metas->og = $ogObj;
     @endphp
     {!! \Sugar\frontspec\assets($frontspec, $cacheBuster) !!}
 
+    <!-- favicon -->
+    {!! \Sugar\frontspec\favicon($frontspec) !!}
+
     @yield('head')
 
 </head>

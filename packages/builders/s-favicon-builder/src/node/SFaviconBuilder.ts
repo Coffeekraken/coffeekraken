@@ -30,7 +30,7 @@ import __SFaviconBuilderBuildParamsInterface from './interface/SFaviconBuilderBu
  *      input: $1,
  *      outDir: $2
  * });
- * 
+ *
  * @example         js
  * import _SFaviconBuilder from '@coffeekraken/s-favicon-builder';
  * const builder = new _SFaviconBuilder({
@@ -53,6 +53,7 @@ export interface ISFaviconBuilderSettings extends ISBuilderSettings {
 export interface ISFaviconBuilderBuildParams {
     input: string;
     outDir: string;
+    outFileName: string;
     settings: any;
 }
 
@@ -225,10 +226,10 @@ export default class SFaviconBuilder extends __SBuilder {
                     `<yellow>[build]</yellow> Saving file "<cyan>${__path.relative(
                         __packageRootDir(),
                         params.outDir,
-                    )}/favicon.html</cyan>"`,
+                    )}/${params.outFileName}</cyan>"`,
                 );
                 __writeFileSync(
-                    `${params.outDir}/favicon.html`,
+                    `${params.outDir}/${params.outFileName}`,
                     response.html.join('\n'),
                 );
 

@@ -1,7 +1,7 @@
 import __SColor from '@coffeekraken/s-color';
 import __SEnv from '@coffeekraken/s-env';
 import __SFrontspec from '@coffeekraken/s-frontspec';
-import { __clearTransmations } from '@coffeekraken/sugar/dom';
+import { __clearTransmations, __isInIframe } from '@coffeekraken/sugar/dom';
 import { __deepMerge } from '@coffeekraken/sugar/object';
 import __fastdom from 'fastdom';
 import type { ISThemeSettings as __ISThemeSettings } from '../shared/SThemeBase';
@@ -471,7 +471,7 @@ export default class STheme extends __SThemeBase {
     ) {
         super(theme, variant, __deepMerge({}, settings ?? {}));
 
-        if (!__SEnv.is('production')) {
+        if (!__SEnv.is('production') && !__isInIframe()) {
             console.log(
                 `<cyan>[STheme]</cyan> Initializing theme <cyan>${theme}</cyan> in <cyan>${variant}</cyan> variant`,
             );
@@ -480,7 +480,7 @@ export default class STheme extends __SThemeBase {
         // restore the theme
         this.restore();
 
-        if (!__SEnv.is('production')) {
+        if (!__SEnv.is('production') && !__isInIframe()) {
             console.log(
                 `<cyan>[STheme]</cyan> Theme initialized <green>successfully</green>`,
             );

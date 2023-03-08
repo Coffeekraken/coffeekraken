@@ -8,6 +8,7 @@ export default function (api: any): {
     
     readonly staticDirs: {
         '/tmp': string;
+        '/dist/favicon': string;
         '/dist/css/lod': string;
         '/dist/css/partials': string;
         '/dist': any;

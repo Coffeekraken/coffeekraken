@@ -14,7 +14,7 @@ import __faker from 'faker';
  * @return        {Css}         The generated css
  *
  * @snippet         @sugar.text.classes
- * 
+ *
  * @example        css
  * \@sugar.text.classes;
  *
@@ -77,6 +77,7 @@ export default function ({
         * @cssClass             s-text:start             Align the text to the start (rtl aware)
         * @cssClass             s-text:end             Align the text to the end (rtl aware)
         * @cssClass             s-text:justify             Align the text to the justify
+        * @cssClass             s-text:decoration:none                  Apply the none text decoration
         * @cssClass             s-text:overline             Apply the overline text decoration
         * @cssClass             s-text:line-through             Apply the line-through text decoration
         * @cssClass             s-text:underline             Apply the underline text decoration
@@ -288,6 +289,33 @@ export default function ({
         `
         .s-text--justify {
             text-align: justify;
+        }
+        `,
+        { type: 'CssClass' },
+    );
+
+    vars.comment(
+        () => `
+        /**
+         * @name            s-text:decoration:none
+         * @namespace          sugar.style.mixins.text
+         * @type            CssClass
+         * @platform      css
+         * @status        beta
+         * 
+         * This class allows you to remove any text decoration on the text
+         * 
+         * @example     html
+         * <div class="s-text:none">Hello world</div>
+         * 
+         * @since       2.0.0
+         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+         */
+        `,
+    ).code(
+        `
+        .s-text--decoration.s-text--none {
+            text-decoration: none !important;
         }
         `,
         { type: 'CssClass' },

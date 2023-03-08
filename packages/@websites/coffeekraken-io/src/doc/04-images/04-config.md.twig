@@ -20,7 +20,7 @@
 `imagesBuilder.config.ts`
 
 {% include 'sugar/config/fromDocmap/fromDocmap.twig' with {
-  docmapItems: filter(docmap.map, '^@coffeekraken.s-images-builder.config.imagesBuilder')
+  docmapItems: __filter(docmap.map, '^@coffeekraken.s-images-builder.config.imagesBuilder')
 } only %}
 
 {% endblock %}

@@ -9,6 +9,7 @@ export interface ISFaviconBuilderSettings extends ISBuilderSettings {
 export interface ISFaviconBuilderBuildParams {
     input: string;
     outDir: string;
+    outFileName: string;
     settings: any;
 }
 export interface ISFaviconBuilderImageResult {

@@ -8,7 +8,7 @@ import __path from 'path';
 export default function apiSitemap() {
     return new Promise(async (resolve) => {
         // temporary disabled
-        return resolve([]);
+        // return resolve([]);
 
         const docmap = new __SDocmap();
         const docmapJson = await docmap.read();

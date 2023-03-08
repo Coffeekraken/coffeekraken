@@ -17,7 +17,7 @@
                 <a class="s-btn s-color:error s-display:block s-mbe:20 s-depth:50"
                     href="https://github.com/Coffeekraken/coffeekraken/issues" title="Declare my issue on Github"
                     target="_blank">
-                    <i class="s-icon:github s-mie:10"></i> Declare my issue on Github
+                    <i class="s-icon:github s-mie:10"></i> Declare an issue on Github
                 </a>
                 <a class="s-btn s-color:complementary s-display:block"
                     href="https://discord.com/channels/940362961682333767/940362962223378494"

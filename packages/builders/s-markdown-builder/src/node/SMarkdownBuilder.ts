@@ -20,7 +20,7 @@ import {
     __folderPath,
     __readJsonSync,
     __writeFileSync,
-    __writeTmpFileSync
+    __writeTmpFileSync,
 } from '@coffeekraken/sugar/fs';
 import { __deepMerge, __objectHash } from '@coffeekraken/sugar/object';
 import __fs from 'fs';
@@ -501,7 +501,11 @@ export default class SMarkdownBuilder extends __SBuilder {
                     currentTransformedString = viewRendererRes.value ?? '';
 
                     // format codes
-                    const codeFormatter = new __SCodeFormatter();
+                    const codeFormatter = new __SCodeFormatter({
+                        log: {
+                            summary: false,
+                        },
+                    });
                     const codeMatches = currentTransformedString.match(
                         /```[a-zA-Z0-9]+[^```]*```/gm,
                     );

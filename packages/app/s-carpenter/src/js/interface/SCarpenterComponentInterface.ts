@@ -21,6 +21,20 @@ import __SInterface from '@coffeekraken/s-interface';
 export default class SCarpenterComponentInterface extends __SInterface {
     static get _definition() {
         return {
+            src: {
+                type: 'String',
+                description:
+                    'Specify the url where to load the actual Carpenter script',
+                default: '/dist/js/carpenter.ts',
+                required: true,
+            },
+            window: {
+                type: 'Object',
+                description:
+                    'Specify the window in which the carpenter will work',
+                default: document,
+                required: true,
+            },
             specs: {
                 type: 'String',
                 description:

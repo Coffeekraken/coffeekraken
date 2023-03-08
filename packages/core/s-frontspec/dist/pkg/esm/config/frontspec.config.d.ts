@@ -18,6 +18,16 @@ export default function (api: any): {
                 type: string;
                 config: string;
             };
+            favicon: {
+                title: string;
+                description: string;
+                type: string;
+                readonly value: {
+                    rootDir: string;
+                    filename: any;
+                    filePath: string;
+                };
+            };
             theme: {
                 title: string;
                 description: string;

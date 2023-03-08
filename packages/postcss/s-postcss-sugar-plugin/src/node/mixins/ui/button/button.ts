@@ -96,6 +96,7 @@ export default function ({
         vars.push(`
         font-size: sugar.scalable(1rem);
         line-height: 1;
+        text-decoration: none !important;
         position: relative;
         display: inline-flex;
         cursor: pointer;

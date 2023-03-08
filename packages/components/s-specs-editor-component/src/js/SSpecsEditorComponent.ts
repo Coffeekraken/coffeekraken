@@ -2,7 +2,6 @@ import __SLitComponent from '@coffeekraken/s-lit-component';
 
 import { __deleteProperty, __get, __set } from '@coffeekraken/sugar/object';
 
-import { define as __SAssetPickerComponentDefine } from '@coffeekraken/s-asset-picker-component';
 import { define as __SDropzoneComponentDefine } from '@coffeekraken/s-dropzone-component';
 
 import __STheme from '@coffeekraken/s-theme';
@@ -22,7 +21,6 @@ import __define from './define';
 import __imageWidget from './widgets/imageWidget';
 
 // components
-__SAssetPickerComponentDefine();
 __SDropzoneComponentDefine();
 
 export interface ISSpecsEditorComponentIconsProp {
@@ -50,7 +48,7 @@ export interface ISSpecsEditorComponentProps {
  * @platform            html
  * @status              beta
  * @private
- * 
+ *
  * This component represent a simple, fully features "specs" (properties) editor. With it you will be able to pass it a `.spec.json` object
  * and it will build for you a complete editor
  *
@@ -70,9 +68,9 @@ export interface ISSpecsEditorComponentProps {
  * @todo            documentation
  *
  * @import          import { define as __SSpecsEditorComponentDefine } from '@coffeekraken/s-clipboard-copy-component';
- * 
+ *
  * @snippet         __SSpecsEditorComponentDegine($1)
- * 
+ *
  * @install           shell
  * npm i @coffeekraken/s-clipboard-copy-component
  *
@@ -241,7 +239,10 @@ export default class SSpecsEditorComponent extends __SLitComponent {
                 media: this.props.media,
                 ...(settings ?? {}),
             });
-            __deleteProperty(this.props.specs.values ?? {}, valuePath.join('.'));
+            __deleteProperty(
+                this.props.specs.values ?? {},
+                valuePath.join('.'),
+            );
         } else {
             const valuePath = path.filter((p) => p !== 'props').join('.');
             __deleteProperty(this.props.specs.values, valuePath);
@@ -746,20 +747,20 @@ export default class SSpecsEditorComponent extends __SLitComponent {
                               <div class="${this.utils.cls('_metas')}">
                                   <h3
                                       class="${this.utils.cls(
-                                          '_child-title',
+                                          '_metas-title',
                                           's-typo--h3',
                                       )}"
                                   >
                                       ${this.props.specs.title}
                                   </h3>
-                                  <p
+                                  <!-- <p
                                       class="${this.utils.cls(
-                                          '_child-description',
-                                          's-typo--p',
-                                      )}"
+                                      '_child-description',
+                                      's-typo--p',
+                                  )}"
                                   >
                                       ${this.props.specs.description}
-                                  </p>
+                                  </p> -->
                               </div>
                               ${this._renderElements(this.props.specs, [])}
                           </div>

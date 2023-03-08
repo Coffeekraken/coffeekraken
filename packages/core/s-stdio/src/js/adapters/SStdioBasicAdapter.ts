@@ -137,7 +137,7 @@ export default class SStdioBasicAdapter
             logLinesCount += logObj.margin.top;
         }
 
-        const logValue = logObj.value?.value ?? logObj.value ?? logObj;
+        const logValue = logObj.value?.value ?? logObj.value;
 
         let log = logValue;
         if (typeof logValue === 'string') {

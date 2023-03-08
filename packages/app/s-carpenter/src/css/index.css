@@ -1,16 +1,30 @@
 @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css');
 
-@sugar.init();
-/* @sugar.theme(); */
+@import './s-carpenter-app-component.css';
+
+@sugar.init ($variant: light);
+
+@sugar.typo.classes;
+@sugar.margin.classes;
+@sugar.padding.classes;
+
 @sugar.ui.specsEditor.classes();
 @sugar.ui.input.classes();
+@sugar.ui.button.classes();
 @sugar.ui.label.classes();
 @sugar.ui.select.classes();
 @sugar.ui.switch.classes();
 @sugar.ui.fsTree.classes();
 @sugar.ui.tooltip.classes();
 
-@sugar.ui.slider.classes();
+body {
+    /* pointer-events: none; */
+    background: none !important;
+}
+
+.s-carpenter-app {
+    pointer-events: all;
+}
 
 @sugar.icon.classes (
     fab:github
@@ -27,7 +41,7 @@ s-slider {
     aspect-ratio: 16/9;
 }
 
-s-carpenter {
+s-carpenter-app {
     margin: 0;
     display: flex;
     overflow: hidden;

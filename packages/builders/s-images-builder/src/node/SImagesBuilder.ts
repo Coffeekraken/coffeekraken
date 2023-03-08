@@ -46,7 +46,7 @@ import __SImagesBuilderSettingsInterface from './interface/SImagesBuilderSetting
  *      width: 1280,
  *      height: 1280,
  *      resolution: [1,2],
- *      clear: false
+ *      clear: false,
  *      specificParams: {}
  * });
  *
@@ -64,7 +64,7 @@ import __SImagesBuilderSettingsInterface from './interface/SImagesBuilderSetting
  *      width: 1280,
  *      height: 1280,
  *      resolution: [1,2],
- *      clear: false
+ *      clear: false,
  *      specificParams: {}
  * });
  *

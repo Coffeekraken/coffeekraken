@@ -2,6 +2,18 @@ import __SInterface from '@coffeekraken/s-interface';
 
 export default class SCarpenterComponentInterface extends __SInterface {
     static get _definition(): {
+        src: {
+            type: string;
+            description: string;
+            default: string;
+            required: boolean;
+        };
+        window: {
+            type: string;
+            description: string;
+            default: Document;
+            required: boolean;
+        };
         specs: {
             type: string;
             description: string;

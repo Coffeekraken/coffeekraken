@@ -63,6 +63,7 @@ export default function (api) {
         get staticDirs() {
             return {
                 '/tmp': `${__packageTmpDir()}`,
+                '/dist/favicon': `${api.config.faviconBuilder.outDir}`,
                 '/dist/css/lod': `${api.config.storage.dist.cssDir}/lod`,
                 '/dist/css/partials': `${api.config.storage.dist.cssDir}/partials`,
                 '/dist':

@@ -33,6 +33,21 @@ export default function (api) {
         },
 
         /**
+         * @name            outFileName
+         * @namespace       config.faviconBuilder
+         * @type            String
+         * @default         favicon.html
+         *
+         * Specify the filename of the html file that contains all the favicon code
+         *
+         * @since         2.0.0
+         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+         */
+        get outFileName() {
+            return `favicon.html`;
+        },
+
+        /**
          * @name            settings
          * @namespace       config.faviconBuilder
          * @type            String

@@ -43,6 +43,11 @@
             "src": "/dist/css/index.css"
         }
     },
+    "favicon": {
+        "rootDir": "./dist/favicon",
+        "filename": "favicon.html",
+        "filePath": "./dist/favicon/favicon.html"
+    },
     "theme": {
         "theme": "default",
         "variant": "dark",
@@ -174,19 +179,19 @@
                 "speedIndex": 0
             },
             "1": {
-                "name": "bare+",
+                "name": "lnf",
                 "speedIndex": 30
             },
             "2": {
-                "name": "low",
+                "name": "theme",
                 "speedIndex": 40
             },
             "3": {
-                "name": "medium",
+                "name": "high",
                 "speedIndex": 50
             },
             "4": {
-                "name": "high",
+                "name": "ultra",
                 "speedIndex": 60
             }
         },
@@ -377,7 +382,7 @@
             "editor": {},
             "style": {
                 "display": "block",
-                "color": "hsla(212,8,50,1)",
+                "color": "hsla(212,6,50,1)",
                 "opacity": 0.2,
                 "marginBottom": "3.25rem"
             }
@@ -390,8 +395,8 @@
             "style": {
                 "display": "block",
                 "fontFamily": "Menlo, Monaco, Consolas, Courier New, monospace",
-                "color": "#f4f5f6",
-                "backgroundColor": "#3b4045",
+                "color": "#f4f5f5",
+                "backgroundColor": "#3d4043",
                 "lineHeight": 1.5,
                 "paddingInline": "1.5rem",
                 "paddingBlock": "0.75rem",
@@ -410,7 +415,7 @@
             "style": {
                 "display": "inline-block",
                 "fontFamily": "Menlo, Monaco, Consolas, Courier New, monospace",
-                "color": "#f4f5f6",
+                "color": "#f4f5f5",
                 "lineHeight": 1.1,
                 "backgroundColor": "#805e00",
                 "borderRadius": "4px",
@@ -643,31 +648,6 @@
                 "fontSize": "0.6em"
             }
         },
-        "base": {
-            "label": "Base",
-            "group": "color",
-            "type": "color",
-            "button": {},
-            "editor": {},
-            "style": {
-                "color": "hsla(212,8,50,1)"
-            }
-        },
-        "baseGradient": {
-            "label": "Base gradient",
-            "group": "color",
-            "type": "color",
-            "button": {},
-            "editor": {},
-            "style": {
-                "backgroundSize": "100%",
-                "-webkitBackgroundClip": "text",
-                "-mozBackgroundClip": "text",
-                "-webkitTextFillColor": "transparent",
-                "-mozTextFillColor": "transparent",
-                "backgroundImage": "linear-gradient(90deg, hsla(212,8,50,1) 0%, #838c95 100%)"
-            }
-        },
         "main": {
             "label": "Main",
             "group": "color",
@@ -675,7 +655,7 @@
             "button": {},
             "editor": {},
             "style": {
-                "color": "hsla(212,8,50,1)"
+                "color": "hsla(212,6,50,1)"
             }
         },
         "mainGradient": {
@@ -690,7 +670,7 @@
                 "-mozBackgroundClip": "text",
                 "-webkitTextFillColor": "transparent",
                 "-mozTextFillColor": "transparent",
-                "backgroundImage": "linear-gradient(90deg, hsla(212,8,50,1) 0%, #838c95 100%)"
+                "backgroundImage": "linear-gradient(90deg, hsla(212,6,50,1) 0%, #878c92 100%)"
             }
         },
         "accent": {

@@ -8,7 +8,7 @@
     "scripts": {
         "dev": "sugard kitchen.run dev",
         "prod": "sugard kitchen.run prod",
-        "build": "sugard kitchen.run build",
+        "build": "sugard kitchen.run build --target production",
         "static": "live-server static",
         "static.build": "sugard static.build --clean --env production --target production",
         "deploy": "rsync -avzh --delete --progress --stats ./static fe0mt_coffeekraken@fe0mt.ftp.infomaniak.com:~/sites/coffeekraken.io",

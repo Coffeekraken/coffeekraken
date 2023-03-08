@@ -15,7 +15,7 @@ import __STheme from '@coffeekraken/s-theme';
  * @return        {Css}         The generated css
  *
  * @snippet         @sugar.width.classes
- * 
+ *
  * @example        css
  * \@sugar.width.classes;
  *
@@ -118,6 +118,7 @@ export default function ({
         position: relative;
         left: 50%;
         width: 100vw;
+        max-width: none;
         transform: translate(-50%);
    }`,
         { type: 'CssClass' },
@@ -150,6 +151,8 @@ export default function ({
             `
       .s-width--${name} {
             width: ${widthObj[name]};
+            max-width: none;
+            min-width: none;
       }`,
             { type: 'CssClass' },
         );

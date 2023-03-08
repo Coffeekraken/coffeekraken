@@ -4,5 +4,7 @@ export default function (api: any): {
     
     readonly outDir: string;
     
+    readonly outFileName: string;
+    
     settings: {};
 };

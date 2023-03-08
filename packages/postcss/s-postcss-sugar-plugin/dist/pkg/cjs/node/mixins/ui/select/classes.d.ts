@@ -22,8 +22,8 @@ declare class postcssSugarPluginUiFormSelectClassesInterface extends __SInterfac
     };
 }
 export interface IPostcssSugarPluginUiFormSelectClassesParams {
-    lnfs: ('default' | 'underline')[];
-    defaultLnf: 'default';
+    lnfs: ('solid' | 'underline')[];
+    defaultLnf: 'solid';
     scope: ('bare' | 'lnf' | 'tf' | 'vr')[];
 }
 export { postcssSugarPluginUiFormSelectClassesInterface as interface };

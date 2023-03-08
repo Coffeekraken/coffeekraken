@@ -2,6 +2,7 @@ import { partytownSnippet } from '@builder.io/partytown/integration';
 import __SClass from '@coffeekraken/s-class';
 import __SEnv from '@coffeekraken/s-env';
 import { __getCookie, __setCookie } from '@coffeekraken/sugar/cookie';
+import { __isInIframe } from '@coffeekraken/sugar/dom';
 import { __isCrawler } from '@coffeekraken/sugar/is';
 import { __deepMerge } from '@coffeekraken/sugar/object';
 
@@ -46,6 +47,18 @@ import __STheme from '@coffeekraken/s-theme';
 export interface ISFrontLegalSettings {
     cookieName: string;
     defaultMetas: any;
+}
+
+export interface ISFrontLodSettingsLevel {
+    name: string;
+    speedIndex?: number;
+}
+
+export interface ISFrontLodSettings {
+    enabled: boolean;
+    defaultLevel: number;
+    botLevel: number;
+    levels: Record<string, ISFrontLodSettingsLevel>;
 }
 
 export interface ISFrontPartytownSettings {
@@ -243,7 +256,7 @@ export default class SFront extends __SClass {
             new __SStdioBasicAdapter(),
         );
 
-        if (!__SEnv.is('production')) {
+        if (!__SEnv.is('production') && !__isInIframe()) {
             const color =
                 __SEnv.env.ENV === 'production'
                     ? 'red'
@@ -463,12 +476,14 @@ export default class SFront extends __SClass {
         this.state.lod.level = level;
         this.save();
 
+        let lodStylesheets = [],
+            $stylesheet;
+
         if (cssSettings.lod?.method === 'file') {
-            const lodStylesheets = Array.from(
+            lodStylesheets = Array.from(
                 document.querySelectorAll('link[s-lod]'),
             );
 
-            let $stylesheet;
             if (this.settings.lod.stylesheet instanceof HTMLLinkElement) {
                 $stylesheet = this.settings.lod.stylesheet;
             } else if (typeof this.settings.lod.stylesheet === 'string') {
@@ -497,8 +512,7 @@ export default class SFront extends __SClass {
         for (let i = 0; i <= level; i++) {
             finalSettings.$context.classList.add('s-lod', `s-lod--${i}`);
 
-            if (cssSettings.lod?.method === 'file') {
-                // check if already have the stylesheet in the dom
+            if (cssSettings.lod?.method === 'file' && $stylesheet) {
                 if (
                     i > 0 &&
                     !lodStylesheets.filter(($link) => {
@@ -556,7 +570,7 @@ export default class SFront extends __SClass {
      */
     private _initLod() {
         // setTimeout(() => {
-        if (!__SEnv.is('production')) {
+        if (!__SEnv.is('production') && !__isInIframe()) {
             console.log(
                 '<yellow>[SFront]</yellow> Initializing <magenta>lod</magenta> (level of details) with these settings',
                 this.settings.lod,
@@ -624,7 +638,7 @@ export default class SFront extends __SClass {
     private _initTracking() {
         // make sure the user has agreed the legal terms
         if (!this.isLegalAgree()) {
-            if (!__SEnv.is('production')) {
+            if (!__SEnv.is('production') && !__isInIframe()) {
                 console.log(
                     `<yellow>[SFront]</yellow> You have a <magenta>google tag manager (gtm)</magenta> setted but the <cyan>legal terms</cyan> are not agreed. Tracking <red>disabled</red>.`,
                 );
@@ -633,7 +647,7 @@ export default class SFront extends __SClass {
         }
 
         if (this._isTrackingInited()) {
-            if (!__SEnv.is('production')) {
+            if (!__SEnv.is('production') && !__isInIframe()) {
                 console.log(
                     `<yellow>[SFront]</yellow> Tracking <magenta>google tag manager</magenta> already inited.`,
                 );
@@ -656,7 +670,7 @@ export default class SFront extends __SClass {
      * Init google tag manager
      */
     private _initGtm() {
-        if (!__SEnv.is('production')) {
+        if (!__SEnv.is('production') && !__isInIframe()) {
             console.log(
                 `<yellow>[SFront]</yellow> Initializing tracking through the <magenta>google tag manager</magenta> with this id "<cyan>${this.settings.google.gtm}</cyan>"`,
             );
@@ -688,7 +702,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     private _initPartytown() {
         // make sure we have all we need for partytown
         if (!this.settings.google.gtm) {
-            if (!__SEnv.is('production')) {
+            if (!__SEnv.is('production') && !__isInIframe()) {
                 console.log(
                     `<yellow>[SFront]</yellow> You have enabled <magenta>partytown</magenta> but you don't have specified any "<cyan>settings.google.gtm</cyan>" tag manager id...'`,
                 );
@@ -700,7 +714,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         // @ts-ignore
         window.partytown = this.settings.partytown;
 
-        if (!__SEnv.is('production')) {
+        if (!__SEnv.is('production') && !__isInIframe()) {
             console.log(
                 '<yellow>[SFront]</yellow> Initializing <magenta>partytown</magenta> with these settings',
                 this.settings.partytown,

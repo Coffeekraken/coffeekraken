@@ -41,49 +41,58 @@ export default class SComponentUtilsDefaultPropsInterface extends __SInterface {
                 default: 'direct',
             },
             activeWhen: {
-                description: 'Specify when your component is active and when it is not',
+                description:
+                    'Specify when your component is active and when it is not',
                 type: 'String[]',
                 values: ['inViewport', 'lod'],
                 default: ['inViewport', 'lod'],
             },
             lod: {
-                description: 'Specify the minimum lod (level of details) from when this component is active',
+                description:
+                    'Specify the minimum lod (level of details) from when this component is active',
                 type: 'Number',
             },
             adoptStyle: {
-                description: 'Specify if your component adopt the style of the global DOM. This worts only if you are using a shadowRoot element',
+                description:
+                    'Specify if your component adopt the style of the global DOM. This worts only if you are using a shadowRoot element',
                 type: 'Boolean',
                 default: true,
                 // physical: true,
             },
             saveState: {
-                description: 'Specify if you want to save the state of your component',
+                description:
+                    'Specify if you want to save the state of your component',
                 type: 'Boolean',
                 default: false,
             },
             lnf: {
-                description: 'Specify the lnf (look-and-feel) of your component. This is used by the css to style your component',
+                description:
+                    'Specify the lnf (look-and-feel) of your component. This is used by the css to style your component',
                 type: 'String',
                 default: 'default',
                 physical: true,
             },
             bare: {
-                description: 'Specify if you want your component with only the bare styling. It just add the "s-bare" class on the component itself',
+                description:
+                    'Specify if you want your component with only the bare styling. It just add the "s-bare" class on the component itself',
                 type: 'Boolean',
                 default: false,
             },
             responsive: {
-                description: 'Specify some responsive properties. A "media" property is required and has to be either a media query, or a media query name defined in the config.themeMedia.queries theme setting',
+                description:
+                    'Specify some responsive properties. A "media" property is required and has to be either a media query, or a media query name defined in the config.themeMedia.queries theme setting',
                 type: 'Object',
                 default: {},
             },
             prefixEvent: {
-                description: 'Specify if you want the emitted events to be prefixed by the name of the feature/component like "s-slider.change" or not',
+                description:
+                    'Specify if you want the emitted events to be prefixed by the name of the feature/component like "s-slider.change" or not',
                 type: 'Boolean',
                 default: true,
             },
             verbose: {
-                description: 'Specify if you want this component/feature to log informations about activity or not',
+                description:
+                    'Specify if you want this component/feature to log informations about activity or not',
                 type: 'Boolean',
                 default: false,
             },

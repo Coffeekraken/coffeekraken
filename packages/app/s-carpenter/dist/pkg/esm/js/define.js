@@ -1,5 +1,11 @@
+import { __isInIframe } from '@coffeekraken/sugar/dom';
 import __SCarpenterComponent from './SCarpenterComponent';
 export default function define(props = {}, tagName = 's-carpenter') {
+    // carpenter cannot be inited into an iframe
+    if (__isInIframe()) {
+        console.log(`<yellow>[SCarpenterComponent]</yellow> Carpenter component will not be registered into an iframe...`);
+        return;
+    }
     __SCarpenterComponent.define(tagName, __SCarpenterComponent, props);
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUNBLE9BQU8scUJBQXFCLE1BQU0sdUJBQXVCLENBQUM7QUFFMUQsTUFBTSxDQUFDLE9BQU8sVUFBVSxNQUFNLENBQzFCLFFBQTRDLEVBQUUsRUFDOUMsT0FBTyxHQUFHLGFBQWE7SUFFdkIscUJBQXFCLENBQUMsTUFBTSxDQUFDLE9BQU8sRUFBRSxxQkFBcUIsRUFBRSxLQUFLLENBQUMsQ0FBQztBQUN4RSxDQUFDIn0=
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sRUFBRSxZQUFZLEVBQUUsTUFBTSx5QkFBeUIsQ0FBQztBQUV2RCxPQUFPLHFCQUFxQixNQUFNLHVCQUF1QixDQUFDO0FBRTFELE1BQU0sQ0FBQyxPQUFPLFVBQVUsTUFBTSxDQUMxQixRQUE0QyxFQUFFLEVBQzlDLE9BQU8sR0FBRyxhQUFhO0lBRXZCLDRDQUE0QztJQUM1QyxJQUFJLFlBQVksRUFBRSxFQUFFO1FBQ2hCLE9BQU8sQ0FBQyxHQUFHLENBQ1AscUdBQXFHLENBQ3hHLENBQUM7UUFDRixPQUFPO0tBQ1Y7SUFFRCxxQkFBcUIsQ0FBQyxNQUFNLENBQUMsT0FBTyxFQUFFLHFCQUFxQixFQUFFLEtBQUssQ0FBQyxDQUFDO0FBQ3hFLENBQUMifQ==

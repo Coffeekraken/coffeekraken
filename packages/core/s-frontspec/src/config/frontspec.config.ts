@@ -4,6 +4,7 @@ import { __ipAddress } from '@coffeekraken/sugar/network';
 import { __deepMerge } from '@coffeekraken/sugar/object';
 import { __packageRootDir } from '@coffeekraken/sugar/path';
 import __fs from 'fs';
+import __path from 'path';
 
 export async function prepare(config) {
     const potentialFrontspecJsonFilePath = `${__packageRootDir()}/frontspec.json`;
@@ -56,6 +57,26 @@ export default function (api) {
                         'Specify the assets to load like the css, js, etc...',
                     type: 'config',
                     config: 'assets',
+                },
+                favicon: {
+                    title: 'Favicon',
+                    description: 'Specify where to find the favicon html file',
+                    type: 'object',
+                    get value() {
+                        const packageRootDir = __packageRootDir();
+
+                        return {
+                            rootDir: `./${__path.relative(
+                                packageRootDir,
+                                api.config.faviconBuilder.outDir,
+                            )}`,
+                            filename: api.config.faviconBuilder.outFileName,
+                            filePath: `./${__path.relative(
+                                packageRootDir,
+                                api.config.faviconBuilder.outDir,
+                            )}/${api.config.faviconBuilder.outFileName}`,
+                        };
+                    },
                 },
                 theme: {
                     title: 'Theme',

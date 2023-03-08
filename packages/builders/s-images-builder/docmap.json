@@ -354,12 +354,12 @@
                 "status": "beta",
                 "snippet": {
                     "label": "__SImagesBuilder($1)",
-                    "code": "const imagesBuilder = new __SImagesBuilder();\nconst imagesBuilderResult = await imagesBuilder.build({\n     glob: $1,\n     inDir: $2,\n     outDir: $3,\n     quality: 80,\n     webp: true,\n     width: 1280,\n     height: 1280,\n     resolution: [1,2],\n     clear: false\n     specificParams: {}\n});"
+                    "code": "const imagesBuilder = new __SImagesBuilder();\nconst imagesBuilderResult = await imagesBuilder.build({\n     glob: $1,\n     inDir: $2,\n     outDir: $3,\n     quality: 80,\n     webp: true,\n     width: 1280,\n     height: 1280,\n     resolution: [1,2],\n     clear: false.\n     specificParams: {}\n});"
                 },
                 "example": [
                     {
                         "language": "js",
-                        "code": "import __SImagesBuilder from '@coffeekraken/s-image-builder';\nconst imagesBuilder = new __SImagesBuilder({\n    // some settings...\n});\nconst imagesBuilderResult = await imagesBuilder.build({\n     glob: '* /*.jpg',\n     inDir: 'src/img',\n     outDir: 'dist/img',\n     quality: 80,\n     webp: true,\n     width: 1280,\n     height: 1280,\n     resolution: [1,2],\n     clear: false\n     specificParams: {}\n});"
+                        "code": "import __SImagesBuilder from '@coffeekraken/s-image-builder';\nconst imagesBuilder = new __SImagesBuilder({\n    // some settings...\n});\nconst imagesBuilderResult = await imagesBuilder.build({\n     glob: '* /*.jpg',\n     inDir: 'src/img',\n     outDir: 'dist/img',\n     quality: 80,\n     webp: true,\n     width: 1280,\n     height: 1280,\n     resolution: [1,2],\n     clear: false,\n     specificParams: {}\n});"
                     }
                 ],
                 "interface": {

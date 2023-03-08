@@ -1,14 +1,14 @@
 import __SClass from '@coffeekraken/s-class';
 import {
     __cssEasingStrToJsFunction,
-    __parseTransformRule
+    __parseTransformRule,
 } from '@coffeekraken/sugar/css';
 import { __easeInterval } from '@coffeekraken/sugar/function';
 import __getAnimationsFromElement, {
-    IGetAnimationsFromElementResult
+    IGetAnimationsFromElementResult,
 } from '@coffeekraken/sugar/js/dom/style/getAnimationsFromElement';
 import __getKeyframesFromStylesheets, {
-    IKeyframe
+    IKeyframe,
 } from '@coffeekraken/sugar/js/dom/style/getKeyframesFromStylesheets';
 import { __deepMerge, __flatten, __get } from '@coffeekraken/sugar/object';
 import __set from '@coffeekraken/sugar/shared/object/set';
@@ -418,8 +418,6 @@ export default class SCssAnimation extends __SClass {
         }
 
         // console.log('new', newRules);
-
-        console.log('SET', newRules);
         Object.assign(newRules, objStrs);
         for (let [key, value] of Object.entries(newRules)) {
             this.$elm.style[key] = value;

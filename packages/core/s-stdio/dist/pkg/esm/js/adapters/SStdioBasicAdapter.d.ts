@@ -1,4 +1,5 @@
 import type { ISLog } from '@coffeekraken/s-log';
+import __SPromise from '@coffeekraken/s-promise';
 import __SStdioAdapter from '../../shared/SStdioAdapter';
 
 export interface ISStdioBasicAdapterLogsContainer {
@@ -19,5 +20,5 @@ export default class SStdioBasicAdapter extends __SStdioAdapter implements ISBas
     _logsStack: ISStdioBasicAdapterLogsContainer[];
     log(logObj: ISLog): void;
     
-    _ask(askObj: any): any;
+    _ask(askObj: any): __SPromise;
 }

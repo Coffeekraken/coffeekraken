@@ -14,6 +14,12 @@ export default class SFaviconBuilderBuildParamsInterface extends __SInterface {
             required: boolean;
             default: any;
         };
+        outFileName: {
+            description: string;
+            type: string;
+            required: boolean;
+            default: any;
+        };
         settings: {
             description: string;
             type: string;

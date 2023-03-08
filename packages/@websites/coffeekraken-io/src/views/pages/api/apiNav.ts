@@ -198,7 +198,7 @@ export class ApiNav extends __SLitComponent {
     render() {
         if (!this.state.loaded) {
             return html`
-                <div class="sidemenu">
+                <div>
                     <div class="s-loader:square-dots s-color:accent"></div>
                     &nbsp;
                     <p class="s-typo:p s-display:inline-block">
@@ -209,7 +209,7 @@ export class ApiNav extends __SLitComponent {
         }
 
         return html`
-            <div class="sidemenu ${this.utils.cls('')}">
+            <div class="${this.utils.cls('')}">
                 ${this._renderList(this._menuStack)}
             </div>
         `;

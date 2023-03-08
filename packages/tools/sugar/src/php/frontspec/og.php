@@ -31,11 +31,11 @@ function og($frontspec)
 
     $frontspec = \Sugar\convert\toObject($frontspec);
 
-    if (!isset($frontspec->og)) {
+    if (!isset($frontspec->metas->og)) {
         return '';
     }
 
-    $og = $frontspec->og;
+    $og = $frontspec->metas->og;
     $ogStr = [];
     $props = array_keys((array) $og);
     foreach ($props as $prop) {

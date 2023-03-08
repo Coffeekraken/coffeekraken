@@ -18,7 +18,7 @@ import __faker from 'faker';
  * @return      {String}            The generated css
  *
  * @snippet         @sugar.ui.select.classes
- * 
+ *
  * @example     css
  * \@sugar.ui.form.classes;
  *
@@ -31,11 +31,11 @@ class postcssSugarPluginUiFormSelectClassesInterface extends __SInterface {
         return {
             lnfs: {
                 type: 'String[]',
-                default: ['default', 'underline'],
+                default: ['solid', 'underline'],
             },
             defaultLnf: {
                 type: 'String',
-                values: ['default'],
+                values: ['solid'],
                 default: __STheme.get('ui.form.defaultLnf'),
             },
             scope: {
@@ -51,8 +51,8 @@ class postcssSugarPluginUiFormSelectClassesInterface extends __SInterface {
 }
 
 export interface IPostcssSugarPluginUiFormSelectClassesParams {
-    lnfs: ('default' | 'underline')[];
-    defaultLnf: 'default';
+    lnfs: ('solid' | 'underline')[];
+    defaultLnf: 'solid';
     scope: ('bare' | 'lnf' | 'tf' | 'vr')[];
 }
 
@@ -71,7 +71,7 @@ export default function ({
 }) {
     const finalParams: IPostcssSugarPluginUiFormSelectClassesParams = {
         lnfs: [],
-        defaultLnf: 'default',
+        defaultLnf: 'solid',
         scope: [],
         ...params,
     };

@@ -67,7 +67,7 @@ export default function (api) {
          * @namespace         config.themeLod
          * @type              String
          * @values            class,file
-         * @default           file
+         * @default           class
          *
          * Specify the method to generate the lod (level of details).
          * The "class" one let all the css in the same output file and scope each lod things (properties, rules, etc...) into
@@ -78,7 +78,7 @@ export default function (api) {
          * @since       2.0.0
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
-        method: 'file',
+        method: 'class',
 
         /**
          * @name              defaultAction

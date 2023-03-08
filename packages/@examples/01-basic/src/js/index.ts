@@ -1,11 +1,3 @@
-import { __matchGlob } from '@coffeekraken/sugar/glob';
-import { __whenDomReady } from '@coffeekraken/sugar/dom';
-import { __matches } from '@coffeekraken/sugar/dom';
-import { __querySelectorUp } from '@coffeekraken/sugar/dom';
-import { __querySelectorAll } from '@coffeekraken/sugar/dom';
-import { __isCrawler } from '@coffeekraken/sugar/is';
-import { __querySelectorLive } from '@coffeekraken/sugar/dom';
-
 // import __SDashboard from '@coffeekraken/s-dashboard';
 import __SFront from '@coffeekraken/s-front';
 import __SPackEssentials from '@coffeekraken/s-pack-essentials';
@@ -24,9 +16,7 @@ import { define as __sGoogleMapComponentDefine } from '@coffeekraken/s-google-ma
 import __SLitComponent from '@coffeekraken/s-lit-component';
 import { define as __SSliderComponentDefine } from '@coffeekraken/s-slider-component';
 
-// import __SCarpenterComponent, {
-// define as __sCarpenterComponentDefine,
-// } from '@coffeekraken/s-carpenter';
+import { define as __sCarpenterComponentDefine } from '@coffeekraken/s-carpenter';
 
 // Views related
 const viewsRelated = import.meta.globEager('../views/**/*.ts');
@@ -64,7 +54,7 @@ if (import.meta.hot) {
     // Components
     __SSliderComponentDefine();
     __sGoogleMapComponentDefine();
-    // __sCarpenterComponentDefine();
+    __sCarpenterComponentDefine();
 
     // __SCarpenterComponent.create();
 

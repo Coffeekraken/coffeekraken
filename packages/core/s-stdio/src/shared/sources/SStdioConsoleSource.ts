@@ -76,10 +76,21 @@ export default class SStdioConsoleSource
         ]) {
             _nativeConsole[key] = console[key] ?? _nativeConsole.log;
             console[key] = (...args) => {
-                args.forEach((log) => {
-                    if (log.toString().match(/[a-zA-Z0-9]Error\:/)) {
-                        _nativeConsole.error(log);
+                args = args.filter((log) => {
+                    // // do not use this in iframe
+                    // if (__isInIframe()) {
+                    //     return;
+                    // }
+
+                    if (!log === null || log === undefined) {
+                        _nativeConsole.log(log);
+                        return false;
                     }
+                    if (log?.toString?.().match(/[a-zA-Z0-9]Error\:/)) {
+                        _nativeConsole.error(log);
+                        return false;
+                    }
+                    return true;
                 });
 
                 const e = new Error();
@@ -105,13 +116,14 @@ export default class SStdioConsoleSource
 
                 args = args.map((log) => {
                     // if (!log) return;
+
                     return new __SLog({
-                        type: log.type ?? __SLog.TYPE_LOG,
-                        value: log.value ?? log,
-                        group: log.group ?? group,
-                        notify: key === 'notify' || log.notify,
-                        verbose: key === 'verbose' || log.verbose,
-                        metas: log.metas ?? {},
+                        type: log?.type ?? __SLog.TYPE_LOG,
+                        value: log?.value ?? log,
+                        group: log?.group ?? group,
+                        notify: key === 'notify' || log?.notify,
+                        verbose: key === 'verbose' || log?.verbose,
+                        metas: log?.metas ?? {},
                         // @ts-ignore
                         logger: _nativeConsole[key],
                     });

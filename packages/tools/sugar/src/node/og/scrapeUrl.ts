@@ -30,7 +30,7 @@ import __deepMerge from '../../shared/object/deepMerge';
  *
  * @snippet         __scrapUrl($1)
  * await __scrapUrl($1)
- * 
+ *
  * @example         js
  * import { __scrapeUrl } from '@coffeekraken/sugar/og';
  * await __scrapeUrl('https://www.npmjs.com/package/open-graph-scraper');
@@ -94,6 +94,10 @@ export default function srapeUrl(
                 return resolve(cacheJson[url]);
             }
         }
+
+        console.log(
+            `<yellow>[SMarkdownBuilder]</yellow> Scraping the opengraph metas from the url "<cyan>${url}</cyan>"`,
+        );
 
         // init timeout
         if (finalSettings.timeout) {

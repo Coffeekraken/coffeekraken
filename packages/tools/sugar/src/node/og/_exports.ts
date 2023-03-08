@@ -1,3 +1,3 @@
-import __scrapUrl from './scrapeUrl';
+import __scrapeUrl from './scrapeUrl';
 
-export { __scrapUrl };
+export { __scrapeUrl };

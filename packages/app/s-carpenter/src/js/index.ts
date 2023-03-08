@@ -1,11 +1,17 @@
-import { define as __sActivateFeature } from '@coffeekraken/s-activate-feature';
-import { define as _sCarpenterComponentDefine } from './SCarpenterComponent';
+import { __reloadStylesheets } from '@coffeekraken/sugar/dom';
+import __SCarpenter from './SCarpenter';
 
-(async () => {
-    // features
-    __sActivateFeature();
+if (import.meta.hot) {
+    import.meta.hot.on('sugar.update.css', (data) => {
+        console.log('RELOADASSS', data);
+        // perform custom update
 
-    // components
-    console.log(_sCarpenterComponentDefine);
-    _sCarpenterComponentDefine();
-})();
+        console.log(window.document);
+
+        __reloadStylesheets();
+        const $iframe = document.querySelector('iframe.s-carpenter_iframe');
+        console.log('IFF', $iframe);
+    });
+}
+
+new __SCarpenter();

@@ -16,7 +16,9 @@ namespace Sugar\css;
  * @param       {Array}         [$settings=[]]      Some settings to configure your layout generation
  * @return      {String}                         The resulting css
  *
- * @setting        {String}         [selector='#layout']       A css selector used to target the correct section/div...
+ * @setting         {String}        [method='container']        The method to use. By default, it will use the @container query over the @media one cause it offers more possibilities like resizing the ".s-viewport" element
+ * @setting         {String}        [containerName='viewport']    The container name on which the @container query will refer to.
+ * @setting         {String}        [selector='#layout']       A css selector used to target the correct section/div...
  * @setting         {String}        [gap=null]                 A gap value to apply on your layout
  * @setting         {Boolean}       [gapBetween=true]           Specify if you want the gap only between the cells or all around
  * @setting         {String}        [align='stretch']           The "align-items" value for your grid layout
@@ -47,6 +49,8 @@ function layoutCss($layout, $settings = [])
 
     $finalParams = (object) array_merge(
         [
+            'method' => 'container',
+            'containerName' => 'viewport',
             'selector' => '#layout',
             'gap' => null,
             'gapBetween' => true,

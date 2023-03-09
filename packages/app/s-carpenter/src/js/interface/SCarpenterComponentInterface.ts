@@ -32,8 +32,14 @@ export default class SCarpenterComponentInterface extends __SInterface {
                 type: 'Object',
                 description:
                     'Specify the window in which the carpenter will work',
-                default: document,
+                default: window,
                 required: true,
+            },
+            viewportElm: {
+                type: 'String|HTMLElement',
+                description:
+                    'Specify the "viewport" element (or a css selector) that will be resized in your website when editing with carpenter. This will be used ONLY if you make use of container queries in your codebase instead of the plain old media queries. When using media queries, the editor will wrap your website into an iframe and resitze this iframe instead.',
+                default: '.s-viewport',
             },
             specs: {
                 type: 'String',
@@ -60,12 +66,6 @@ export default class SCarpenterComponentInterface extends __SInterface {
                 description:
                     'Specify the link to use to change page. You have access to the %dotpath token that will be replaced by the actual component/section specs dotpath',
                 default: '/carpenter/%dotpath',
-            },
-            iframe: {
-                type: 'Boolean|String',
-                description:
-                    'Specify if you want to put the page content inside an iframe to allow responsive resizing of your viewport. Can be either a boolean in which an iframe will be created automatically, or an iframe id to use',
-                default: false,
             },
             logo: {
                 type: 'String',

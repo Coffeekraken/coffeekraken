@@ -4,7 +4,9 @@ export default function (api: any): {
     
     readonly defaultMedia: "mobile" | "desktop";
     
-    defaultQuery: string;
+    method: string;
+    
+    containerName: string;
     queries: {
         
         mobile: {

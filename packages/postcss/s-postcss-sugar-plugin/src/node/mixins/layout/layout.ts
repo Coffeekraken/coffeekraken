@@ -25,7 +25,7 @@ import __SInterface from '@coffeekraken/s-interface';
  * @return        {Css}         The generated css
  *
  * @snippet         @sugar.layout($1)
- * 
+ *
  * @example        css
  * .my-element {
  *    \@sugar.layout(
@@ -101,10 +101,12 @@ export { postcssSugarPluginLayoutInterface as interface };
 export default function ({
     params,
     atRule,
+    postcssApi,
     replaceWith,
 }: {
     params: IPostcssSugarPluginLayoutParams;
     atRule: any;
+    postcssApi: any;
     replaceWith: Function;
 }) {
     const finalParams: IPostcssSugarPluginLayoutParams = {
@@ -240,19 +242,6 @@ export default function ({
     `);
     }
 
-    if (finalParams.scope.indexOf('bare') !== -1) {
-        areas.forEach((areaId) => {
-            vars.push(`
-          .area-${areaId}, & > *:nth-child(${areaId}) {
-              grid-column-start: ${colsStartByArea[areaId]};
-              grid-column-end: ${colsEndByArea[areaId] + 1};
-              grid-row-start: ${rowsStartByArea[areaId]};
-              grid-row-end: ${rowsEndByArea[areaId] + 1};
-          }
-        `);
-        });
-    }
-
     if (finalParams.scope.indexOf('gap') !== -1) {
         if (finalParams.gap) {
             vars.push(`
@@ -271,5 +260,51 @@ export default function ({
         }
     }
 
-    return vars;
+    const decls = postcssApi.parse(vars.join('\n'));
+
+    let parentWithSelector = atRule.parent;
+    if (!parentWithSelector.selector) {
+        while (!parentWithSelector.selector) {
+            parentWithSelector = parentWithSelector.parent;
+        }
+    }
+    const parentNode = atRule.parent;
+
+    atRule.append(decls);
+
+    // atRule.replaceWith(decls);
+
+    if (finalParams.scope.indexOf('bare') !== -1) {
+        areas.forEach((areaId) => {
+            let selector = `& > *:nth-child(${areaId})`;
+
+            const newSelectors: string[] = [];
+
+            const rule = new postcssApi.Rule({
+                selector: selector,
+                nodes: postcssApi.parse(`
+                    grid-column-start: ${colsStartByArea[areaId]};
+                    grid-column-end: ${colsEndByArea[areaId] + 1};
+                    grid-row-start: ${rowsStartByArea[areaId]};
+                    grid-row-end: ${rowsEndByArea[areaId] + 1};
+                `).nodes,
+            });
+
+            // if the parent node is not a simple rule with selector
+            // we handle the "&" inside the selector cause it will not being processed...
+            // @todo            Find a better solution for that...
+            // if (!parentNode.selector) {
+            // parentWithSelector.selector.split(',').forEach((parentSel) => {
+            //     if (!parentSel) return;
+            //     rule.selector = rule.selector.split(',').forEach((sel) => {
+            //         newSelectors.push(sel.replace(/\&/gm, parentSel));
+            //     });
+            // });
+            // rule.selector = newSelectors.join(',');
+            // // }
+
+            // add the new rule
+            atRule.append(rule);
+        });
+    }
 }

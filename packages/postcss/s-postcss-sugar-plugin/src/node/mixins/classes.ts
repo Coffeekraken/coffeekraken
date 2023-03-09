@@ -13,7 +13,7 @@ import __SInterface from '@coffeekraken/s-interface';
  * @return        {Css}         The generated css
  *
  * @snippet         @sugar.classes
- * 
+ *
  * @example        css
  * \@sugar.classes;
  *

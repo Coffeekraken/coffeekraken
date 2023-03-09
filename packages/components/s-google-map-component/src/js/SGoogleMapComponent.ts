@@ -61,9 +61,9 @@ export interface ISGoogleMapComponentProps {
  * @support         edge
  *
  * @import          import { define as __SGoogleMapComponentDefine } from '@coffeekraken/s-google-map-component';
- * 
+ *
  * @snippet         __SGoogleMapComponentDefine($1)
- * 
+ *
  * @install           shell
  * npm i @coffeekraken/s-google-map-component
  *
@@ -153,6 +153,7 @@ export default class SGoogleMapComponent extends __SLitComponent {
         }
         this._loadApiPromise = new Promise((resolve) => {
             const $script = document.createElement('script');
+            $script.setAttribute('id', 's-google-map-component');
             $script.src = `https://maps.googleapis.com/maps/api/js?key=${apiKey}&v=beta&libraries=marker&callback=_initMap`;
             $script.async = true;
 

@@ -11,8 +11,13 @@ export default class SCarpenterComponentInterface extends __SInterface {
         window: {
             type: string;
             description: string;
-            default: Document;
+            default: Window & typeof globalThis;
             required: boolean;
+        };
+        viewportElm: {
+            type: string;
+            description: string;
+            default: string;
         };
         specs: {
             type: string;
@@ -35,11 +40,6 @@ export default class SCarpenterComponentInterface extends __SInterface {
             type: string;
             description: string;
             default: string;
-        };
-        iframe: {
-            type: string;
-            description: string;
-            default: boolean;
         };
         logo: {
             type: string;

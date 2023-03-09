@@ -113,10 +113,13 @@ export default class SCarpenterComponent extends __SLitComponent {
         `;
 
         // add the correct class on the iframe
-        this._$iframe.classList.add(this.utils.cls('_iframe'));
+        this._$iframe.classList.add(this.utils.cls('_editor-iframe'));
 
         // make sure we don't have any src on the iframe
         this._$iframe.setAttribute('src', 'about:blank');
+
+        // set a name to the iframe
+        this._$iframe.setAttribute('name', 's-carpenter-editor');
 
         // manage to add the iframe inside the body
         // alongside with the s-carpenter component

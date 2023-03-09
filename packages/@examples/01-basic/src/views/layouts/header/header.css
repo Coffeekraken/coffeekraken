@@ -18,7 +18,7 @@
 }
 
 .header {
-    position: fixed !important;
+    position: sticky !important;
     top: sugar.margin(30);
     width: 100%;
     z-index: 100;

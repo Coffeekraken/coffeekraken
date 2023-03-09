@@ -11,6 +11,7 @@
 @sugar.ui.specsEditor.classes();
 @sugar.ui.input.classes();
 @sugar.ui.button.classes();
+@sugar.ui.tabs.classes();
 @sugar.ui.label.classes();
 @sugar.ui.select.classes();
 @sugar.ui.switch.classes();

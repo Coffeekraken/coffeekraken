@@ -9,6 +9,7 @@ import __whenAttribute from './whenAttribute';
 import __whenBackgroundImageLoaded from './whenBackgroundImageLoaded';
 import __whenDomReady from './whenDomReady';
 import __whenEntersViewport from './whenEntersViewport';
+import __whenIframeReady from './whenIframeReady';
 import __whenImageLoaded from './whenImageLoaded';
 import __whenImagesLoaded from './whenImagesLoaded';
 import __whenInteract from './whenInteract';
@@ -34,6 +35,7 @@ export {
     __whenBackgroundImageLoaded,
     __whenDomReady,
     __whenEntersViewport,
+    __whenIframeReady,
     __whenImageLoaded,
     __whenImagesLoaded,
     __whenInteract,

@@ -421,6 +421,104 @@ export default async function ({ root, sharedData, postcssApi, settings }) {
             .join(',');
     });
 
+    // remove the @sugar.layout purposly lefted atRule
+    root.walkAtRules((atRule) => {
+        if (atRule.name !== 'sugar.layout') {
+            return;
+        }
+        atRule.parent.append(atRule.nodes);
+        atRule.remove();
+    });
+
+    root.walkAtRules((container) => {
+        if (container.name !== 'container' || container._sMediaProcessed) {
+            return;
+        }
+        if (container.parent.type === 'root') {
+            return;
+        }
+
+        let toCheckNode = container,
+            rootContainerNode = container;
+        while (toCheckNode !== root) {
+            toCheckNode = toCheckNode.parent;
+            if (toCheckNode !== root) {
+                rootContainerNode = toCheckNode;
+            }
+        }
+
+        const newContainer = new postcssApi.AtRule({
+            name: 'container',
+            params: container.params,
+        });
+        newContainer._sMediaProcessed = true;
+
+        const newRule = new postcssApi.Rule({
+            selector: container.parent.selector,
+            nodes: [],
+        });
+
+        const newNodes: any[] = [newRule];
+        container.nodes.forEach((n) => {
+            if (!n.selector) {
+                return newRule.push(n);
+            }
+            const newNode = n.clone();
+
+            // const newSelectors: string[] = [];
+            // container.parent.selector.split(',').forEach((parentSel) => {
+            //     newNode.selector = newNode.selector
+            //         .split(',')
+            //         .forEach((sel) => {
+            //             newSelectors.push(sel.replace(/\&/gm), parentSel);
+            //         });
+            // });
+            // newNode.selector = newSelectors.join(',');
+            newNodes.push(newNode);
+        });
+
+        container.remove();
+
+        // container.replaceWith(container.nodes);
+
+        rootContainerNode.after(newContainer);
+        newContainer.append(newNodes);
+
+        let $parent = container.parent;
+        // while ($parent !== root) {
+        //     const newContainer = new postcssApi.AtRule({
+        //         name: 'container',
+        //         params: container.params
+        //     });
+        //     newContainer.append($parent);
+        //     $parent = container.parent;
+        // }
+
+        // const $containerRule = new postcssApi.Rule({
+        //     // _selector: container.parent.selector,
+        //     selector: container.parent.selector,
+        // });
+        // container.prepend($containerRule);
+
+        // const scopedNodes: any[] = [$containerRule];
+
+        // container.nodes.forEach((node) => {
+        //     $containerRule.append(node);
+        //     // if (!node.selector) {
+        //     //     $containerRule.append(node);
+        //     // } else {
+        //     //     scopedNodes.push(node);
+        //     //     node.remove();
+        //     // }
+        // });
+
+        // rootContainerNode.after(container);
+
+        // container.nodes.forEach((node) => {
+        //     console.log('d', node.selector);
+        // });
+    });
+
     // // classmap
     // classmap.applyOnAst(root);
     // classmap.save();

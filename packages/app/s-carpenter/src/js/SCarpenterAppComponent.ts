@@ -10,12 +10,17 @@ import { css, html, unsafeCSS } from 'lit';
 import { unsafeHTML } from 'lit/directives/unsafe-html.js';
 import __SCarpenterComponentInterface from './interface/SCarpenterComponentInterface';
 
-import { __querySelectorLive } from '@coffeekraken/sugar/dom';
+import {
+    __injectStyle,
+    __querySelectorLive,
+    __whenIframeReady,
+} from '@coffeekraken/sugar/dom';
 
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
 
 import __define from './defineApp';
 
+import { __injectIframeContent } from '@coffeekraken/sugar/dom';
 import __ajaxAdapter from './adapters/ajaxAdapter';
 
 // @ts-ignore
@@ -35,6 +40,7 @@ export interface ISCarpenterAèèComponentProps {
     window: Window;
     specs: string;
     adapter: 'ajax';
+    viewportElm: HTMLElement;
     nav: boolean;
     pagesLink: string;
     iframe: boolean;
@@ -150,10 +156,12 @@ export default class SCarpenterComponent extends __SLitComponent {
 
     _data;
     _$document;
-    _$editor;
+    _$editor; // store the actual editor "window"
+    _$viewport; // store the viewport element in the website that will be used to resize it with media
+    _$editorIframe; // store the iframe in which the carpenter is inited if is one
+    _$websiteIframe; // store the website iframe if the "media" method stored in the frontspec.json file is not set to "container". In this case, we must wrap the website into a proper iframe for the @media queries to work
+    _$toolbar; // store the toolbar displayed on the website elements when hovering them
     _window;
-    _$iframe; // store the iframe in which the carpenter is inited if is one
-    _$toolbar;
 
     constructor() {
         super(
@@ -163,8 +171,8 @@ export default class SCarpenterComponent extends __SLitComponent {
                 carpenter: __SSugarConfig.get('carpenter'),
             }),
         );
-        this._$iframe = window.top?.document?.querySelector(
-            'iframe.s-carpenter_iframe',
+        this._$editorIframe = window.top?.document?.querySelector(
+            'iframe.s-carpenter_editor-iframe',
         );
 
         const $style = document.createElement('link');
@@ -184,7 +192,7 @@ export default class SCarpenterComponent extends __SLitComponent {
 
         // active the default media if not set
         if (!this.state.activeMedia) {
-            this.state.activeMedia = this._data.frontspec.media.defaultMedia;
+            this.state.activeMedia = this._data.frontspec?.media?.defaultMedia;
         }
 
         // check the specified adapter
@@ -207,16 +215,239 @@ export default class SCarpenterComponent extends __SLitComponent {
             $firstSpecsElement = this._$document.body.children[0];
         }
         this.state.$currentElement = $firstSpecsElement;
+    }
+
+    async firstUpdated() {
+        // getting the editor element
+        this._$editor = document.querySelector(`.${this.utils.cls('_editor')}`);
+        if (!this._$editor) {
+            throw new Error(
+                `<red>[SCarpenterAppComponent]</red> Something goes wrong. No ".${this.utils.cls(
+                    '_editor',
+                )}" element found...`,
+            );
+        }
+
+        // const $backdrop = document.createElement('div');
+        // $backdrop.classList.add(this.utils.cls('_backdrop'));
+        // this.prepend($backdrop);
+        // $backdrop.addEventListener('pointerover', (e) => {
+        //     console.log('SS', e);
+        // });
+        // $backdrop.addEventListener('pointerout', (e) => {
+        //     console.log('OUT', e);
+        // });
+
+        // handle media method
+        await this._handleMediaMethod();
+
+        // create the toolbar element
+        this._initToolbar();
 
         // listen for escape key press to close editor
         __hotkey('escape').on('press', () => {
             this._closeEditor();
         });
+        __hotkey('escape', {
+            // from the website itself
+            element: this._$document,
+        }).on('press', () => {
+            this._closeEditor();
+        });
 
-        // create the toolbar element
-        this._getToolbarElement();
+        // listen for toolbar actions
+        this._listenToolbarActions();
 
         // watch for hover on carpenter elements
+        this._watchHoverOnSpecElements();
+
+        // listen spec editor update
+        this._listenSpecsEditorUpdate();
+
+        // handle popstate
+        this._window.addEventListener('popstate', (e) => {
+            this._changePage(e.state.dotpath, false);
+        });
+
+        // handle "scrolled" class on the editor
+        this._handleScrolledClassOnEditor();
+
+        // Create UI placeholders
+        setTimeout(() => {
+            this._updateUiPlaceholders();
+        }, 200);
+    }
+
+    /**
+     * Create some "placeholders" of the editor UI to inject them into the actual website.
+     * This is used to detect when the user is overing an actual UI and remove the "pointer-events: none"
+     * on the editor iframe
+     * If someone has a better idea.... :)
+     */
+    _$uiPlaceholders;
+    _updateUiPlaceholders() {
+        if (!this._$uiPlaceholders) {
+            this._$uiPlaceholders = document.createElement('div');
+            this._$uiPlaceholders.classList.add(
+                's-carpenter_ui-placeholders',
+                'active',
+            );
+            let outTimeout,
+                isActive = false;
+            this._$uiPlaceholders.addEventListener('pointermove', (e) => {
+                if (isActive) return;
+                isActive = true;
+                clearTimeout(outTimeout);
+                this._$editorIframe.classList.add('active');
+                this._$uiPlaceholders.classList.remove('active');
+            });
+            this.addEventListener('pointerout', (e) => {
+                if (!isActive) return;
+                isActive = false;
+                outTimeout = setTimeout(() => {
+                    this._$editorIframe.classList.remove('active');
+                    this._$uiPlaceholders.classList.add('active');
+                }, 100);
+            });
+        }
+
+        const $uis = this.querySelectorAll('[s-ui]');
+        Array.from($uis).forEach(($ui) => {
+            // create if needed
+            if (!$ui._placeholder) {
+                $ui._placeholder = document.createElement('div');
+                $ui._placeholder.classList.add('s-carpenter_ui-placeholder');
+                this._$uiPlaceholders.appendChild($ui._placeholder);
+            }
+
+            // set position
+            const uiBounds = $ui.getBoundingClientRect();
+            $ui._placeholder.style.top = `${uiBounds.top}px`;
+            $ui._placeholder.style.left = `${uiBounds.left}px`;
+            $ui._placeholder.style.width = `${uiBounds.width}px`;
+            $ui._placeholder.style.height = `${uiBounds.height}px`;
+        });
+
+        // add the placeholders into the website
+        if (!this._$uiPlaceholders.parent) {
+            window.top.document.body.appendChild(this._$uiPlaceholders);
+        }
+    }
+
+    /**
+     * Handle media method.
+     * Media is the media queries and his method is either "container" (@container queries), or "media" (plain old media queries).
+     * It the method is "media", we need to wrap the website into an iframe to make the responsive preview work fine.
+     */
+    async _handleMediaMethod(): Promise<void> {
+        const mediaMethod = this._data.frontspec?.media?.method;
+        if (mediaMethod === 'container') {
+            // getting the viewport element
+            if (typeof this.props.viewportElm === HTMLElement) {
+                this._$viewport = this.props.viewportElm;
+            } else if (typeof this.props.viewportElm === 'string') {
+                this._$viewport = this._window.document.querySelector(
+                    this.props.viewportElm,
+                );
+            }
+        } else if (this._data.frontspec?.media?.queries) {
+            // create the wrapping iframe
+            this._$websiteIframe = document.createElement('iframe');
+            this._$websiteIframe.classList.add('s-carpenter_website-iframe');
+
+            // get the actual page html to inject into the iframe
+            const html = this._$document.documentElement.innerHTML;
+
+            // prepend the website iframe in the body
+            this._$document.body.prepend(this._$websiteIframe);
+
+            // wait until the iframe is ready
+            await __whenIframeReady(this._$websiteIframe);
+
+            // injecting the whole website into the iframe
+            __injectIframeContent(this._$websiteIframe, html);
+
+            // wait until the iframe is ready
+            await __whenIframeReady(this._$websiteIframe);
+
+            // empty the document of all the nodes
+            // unless the iframes
+            ['body'].forEach((container) => {
+                Array.from(
+                    this._$document.querySelectorAll(`${container} > *`),
+                ).forEach((node) => {
+                    if (node.tagName?.toLowerCase?.() === 'iframe') {
+                        return;
+                    }
+                    node.remove();
+                });
+            });
+
+            // reset the _window and _$document references
+            this._window = this._$websiteIframe.contentWindow;
+            this._$document = this._$websiteIframe.contentWindow.document;
+
+            // the "viewport" is not the website iframe
+            this._$viewport = this._$websiteIframe;
+
+            // inject the scrollbat styling
+            __injectStyle(
+                `
+                body::-webkit-scrollbar {
+                    width: 2px;
+                    height: 2px;
+                }
+                body::-webkit-scrollbar-track {                
+                    background-color: hsla(calc(var(--s-theme-color-accent-h, 0) + var(--s-theme-color-accent-spin ,0)),calc((var(--s-theme-color-accent-s, 0)) * 1%),calc((var(--s-theme-color-accent-l, 0)) * 1%),0.1);                                        
+                }
+                body::-webkit-scrollbar-thumb {
+                    background-color: hsla(calc(var(--s-theme-color-accent-h, 0) + var(--s-theme-color-accent-spin ,0)),calc((var(--s-theme-color-accent-s, 0)) * 1%),calc((var(--s-theme-color-accent-l, 0)) * 1%),var(--s-theme-color-accent-a, 1));            
+                }
+                .s-wireframe body::-webkit-scrollbar-track{
+                    background-color: rgba(0,0,0,0.05);
+                }    
+            `,
+                {
+                    rootNode: this._$document.body,
+                },
+            );
+        }
+    }
+
+    /**
+     * Listen for specs editor updates
+     */
+    _listenSpecsEditorUpdate() {
+        // listen for actual updated
+        this.addEventListener('s-specs-editor.update', async (e) => {
+            // make use of the specified adapter to update the component/section/etc...
+            const adapterResult = await SCarpenterComponent._registeredAdapters[
+                this.props.adapter
+            ].setProps({
+                $elm: this.state.$currentElement,
+                props: e.detail.values ?? {},
+                component: this,
+            });
+
+            // save current values in "_values" stack
+            this._values[this.state.$currentElement.id] = e.detail.values ?? {};
+
+            if (adapterResult) {
+                this.state.$currentElement = adapterResult;
+            }
+        });
+
+        // listen for media change in the specs editor
+        this.addEventListener('s-specs-editor.changeMedia', (e) => {
+            // change the media internaly
+            this._activateMedia(e.detail);
+        });
+    }
+
+    /**
+     * Watch hover on specs element to position the toolbar
+     */
+    _watchHoverOnSpecElements() {
         __querySelectorLive(
             `[s-specs]`,
             ($elm) => {
@@ -249,33 +480,68 @@ export default class SCarpenterComponent extends __SLitComponent {
                 rootNode: this._$document.body,
             },
         );
+    }
 
-        // listen spec editor update
-        this.addEventListener('s-specs-editor.update', async (e) => {
-            // make use of the specified adapter to update the component/section/etc...
-            const adapterResult = await SCarpenterComponent._registeredAdapters[
-                this.props.adapter
-            ].setProps({
-                $elm: this.state.$currentElement,
-                props: e.detail.values ?? {},
-                component: this,
-            });
-
-            // save current values in "_values" stack
-            this._values[this.state.$currentElement.id] = e.detail.values ?? {};
-
-            if (adapterResult) {
-                this.state.$currentElement = adapterResult;
+    /**
+     * Handle "scrolled" class on the editor
+     */
+    _handleScrolledClassOnEditor() {
+        this._$editor.addEventListener('scroll', (e) => {
+            if (Math.abs(this._$editor.scrollTop) >= 100) {
+                this._$editor.classList.add('scrolled');
+            } else {
+                this._$editor.classList.remove('scrolled');
             }
         });
+    }
 
-        // listen for media change in the specs editor
-        this.addEventListener('s-specs-editor.changeMedia', (e) => {
-            // change the media internaly
-            this._activateMedia(e.detail);
-        });
+    /**
+     * open the editor
+     */
+    _openEditor() {
+        document.body.classList.add('s-carpenter-app--open');
+        this._$editorIframe?.classList.add('s-carpenter--open');
+        setTimeout(() => {
+            this._updateUiPlaceholders();
+        }, 400);
+    }
 
-        // listen on click
+    /**
+     * close the editor
+     */
+    _closeEditor() {
+        document.body.classList.remove('s-carpenter-app--open');
+        this._$editorIframe?.classList.remove('s-carpenter--open');
+        setTimeout(() => {
+            this._updateUiPlaceholders();
+        }, 400);
+    }
+
+    /**
+     * Create the toolbar element
+     */
+    _initToolbar(): HTMLElement {
+        if (this._$toolbar) {
+            return this._$toolbar;
+        }
+        const $toolbar = this._$document.createElement('div');
+        $toolbar.classList.add('s-carpenter-toolbar');
+        this._$toolbar = $toolbar;
+
+        const $i = this._$document.createElement('i');
+        $i.classList.add('fa-regular', 'fa-pen-to-square');
+        $toolbar.appendChild($i);
+
+        // append toolbar to viewport
+        this._$document.body.appendChild($toolbar);
+
+        return this._$toolbar;
+    }
+
+    /**
+     * Listen for toolbar actions
+     */
+    _listenToolbarActions() {
         this._$toolbar.addEventListener('pointerup', async (e) => {
             // do not activate 2 times the same element
             if (
@@ -317,77 +583,6 @@ export default class SCarpenterComponent extends __SLitComponent {
             // request new UI update
             this.requestUpdate();
         });
-
-        // handle popstate
-        this._window.addEventListener('popstate', (e) => {
-            this._changePage(e.state.dotpath, false);
-        });
-    }
-
-    firstUpdated() {
-        this._$editor = document.querySelector(`.${this.utils.cls('_editor')}`);
-
-        if (!this._$editor) {
-            throw new Error(
-                `<red>[SCarpenterAppComponent]</red> Something goes wrong. No ".${this.utils.cls(
-                    '_editor',
-                )}" element found...`,
-            );
-        }
-
-        // handle "scrolled" class on the editor
-        this._handleScrolledClassOnEditor();
-    }
-
-    /**
-     * Handle "scrolled" class on the editor
-     */
-    _handleScrolledClassOnEditor() {
-        this._$editor.addEventListener('scroll', (e) => {
-            if (Math.abs(this._$editor.scrollTop) >= 100) {
-                this._$editor.classList.add('scrolled');
-            } else {
-                this._$editor.classList.remove('scrolled');
-            }
-        });
-    }
-
-    /**
-     * open the editor
-     */
-    _openEditor() {
-        document.body.classList.add('s-carpenter-app--open');
-        this._$iframe?.classList.add('s-carpenter--open');
-    }
-
-    /**
-     * close the editor
-     */
-    _closeEditor() {
-        document.body.classList.remove('s-carpenter-app--open');
-        this._$iframe?.classList.remove('s-carpenter--open');
-    }
-
-    /**
-     * Create the toolbar element
-     */
-    _getToolbarElement(): HTMLElement {
-        if (this._$toolbar) {
-            return this._$toolbar;
-        }
-        const $toolbar = document.createElement('div');
-        $toolbar.classList.add('s-carpenter-toolbar');
-        this._$toolbar = $toolbar;
-
-        const $i = document.createElement('i');
-        $i.classList.add('fa-regular', 'fa-pen-to-square');
-        $toolbar.appendChild($i);
-
-        // append toolbar to viewport
-        this._$document.body.appendChild($toolbar);
-
-        // return the created toolbar
-        return $toolbar;
     }
 
     /**
@@ -442,10 +637,9 @@ export default class SCarpenterComponent extends __SLitComponent {
      * Set the toolbar position
      */
     _setToolbarPosition($from) {
-        const $toolbar = this._getToolbarElement();
         const targetRect = $from.getBoundingClientRect();
-        $toolbar.style.top = `${targetRect.top + this._window.scrollY}px`;
-        $toolbar.style.left = `${
+        this._$toolbar.style.top = `${targetRect.top + this._window.scrollY}px`;
+        this._$toolbar.style.left = `${
             targetRect.left + targetRect.width + this._window.scrollX
         }px`;
     }
@@ -455,6 +649,25 @@ export default class SCarpenterComponent extends __SLitComponent {
      */
     _activateMedia(media) {
         this.state.activeMedia = media;
+        this._setViewportSize();
+    }
+
+    /**
+     * Set the "viewport" his correct size
+     */
+    _setViewportSize() {
+        const width = `${
+            this._data.frontspec.media.queries[this.state.activeMedia].maxWidth
+                ? `${
+                      (this._data.frontspec.media.queries[
+                          this.state.activeMedia
+                      ].maxWidth /
+                          100) *
+                      75
+                  }px`
+                : '100vw'
+        }`;
+        this._$viewport.style.width = width;
     }
 
     /**
@@ -657,6 +870,7 @@ export default class SCarpenterComponent extends __SLitComponent {
                 class="${this.utils.cls('_editor')} ${this.currentSpecs
                     ? 'active'
                     : ''}"
+                s-ui
             >
                 ${this.currentSpecs
                     ? html`
@@ -672,25 +886,9 @@ export default class SCarpenterComponent extends __SLitComponent {
                     : ''}
             </nav>
 
-            ${this._data.frontspec?.media?.queries && this.props.iframe
+            ${this._data.frontspec?.media?.queries
                 ? html`
-                      <style>
-                          :root {
-                              --s-carpenter-content-width: ${this._data
-                                  .frontspec.media.queries[
-                                  this.state.activeMedia
-                              ].maxWidth
-                                  ? `${
-                                        (this._data.frontspec.media.queries[
-                                            this.state.activeMedia
-                                        ].maxWidth /
-                                            100) *
-                                        75
-                                    }px`
-                                  : '100vw'};
-                          }
-                      </style>
-                      <nav class="${this.utils.cls('_media')}">
+                      <nav class="${this.utils.cls('_media')}" s-ui>
                           <ul
                               class="${this.utils.cls(
                                   '_queries',
@@ -699,7 +897,7 @@ export default class SCarpenterComponent extends __SLitComponent {
                               )}"
                           >
                               ${Object.keys(
-                                  this._data.frontspec.media.queries,
+                                  this._data.frontspec?.media?.queries ?? {},
                               ).map((query) => {
                                   return html`
                                       <li

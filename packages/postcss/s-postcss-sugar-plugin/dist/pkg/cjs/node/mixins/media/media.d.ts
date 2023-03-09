@@ -1,27 +1,18 @@
 import __SInterface from '@coffeekraken/s-interface';
 declare class postcssSugarPluginMediaMixinInterface extends __SInterface {
     static get _definition(): {
-        query1: {
+        query: {
             type: string;
             required: boolean;
         };
-        query2: {
+        containerName: {
             type: string;
+            default: string;
         };
-        query3: {
+        method: {
             type: string;
-        };
-        query4: {
-            type: string;
-        };
-        query5: {
-            type: string;
-        };
-        query6: {
-            type: string;
-        };
-        query7: {
-            type: string;
+            values: string[];
+            default: string;
         };
     };
 }

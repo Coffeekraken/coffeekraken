@@ -51,7 +51,7 @@ function _deepMerge($obj1, $obj2)
         }
     } elseif (is_array($obj2)) {
         if (is_array($obj1) && is_array($obj2)) {
-            $obj1 = array_merge_recursive($obj1, $obj2);
+            // $obj1 = array_merge_recursive($obj1, $obj2);
         } else {
             $obj1 = $obj2;
         }

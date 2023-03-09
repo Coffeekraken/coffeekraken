@@ -23,8 +23,9 @@ namespace Sugar\css;
  * @param       {String}        $media          The media query definition you want like "mobile", ">mobile", etc...
  * @param       {Array}         [$settings=[]]      Some settings to configure your media query css generation
  *
+ * @setting         {String}        [method='container']        The method to use. By default, it will use the @container query over the @media one cause it offers more possibilities like resizing the ".s-viewport" element
+ * @setting         {String}        [containerName='viewport']    The container name on which the @container query will refer to.
  * @setting         {String}        [defaultAction='>=']        Specify the default action you want when none is passed in the $media parameter. Can be "<", ">", "=", "<=" or ">=".
- * @setting         {String}        [defaultQuery='screen']         A default query to always use in the generation
  * @setting         {Array}         [queries=['mobile'=>[],'tablet'=>[],'desktop'=>[],'wide'=>[],'dwarf'=>[]]]      All the available queries you want to support with for each the "min-width|height" and "max-width|height" values in integer (used as px)
  *
  * @snippet         \Sugar\css\buildMediaQuery($1);
@@ -45,11 +46,12 @@ namespace Sugar\css;
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-function buildMediaQuery($media, $frontspecMedia = null)
+function buildMediaQuery($media, $frontspecMedia = [])
 {
-    $finalParams = (object) [
+    $defaultParams = (object) [
         'defaultAction' => '<=',
-        'defaultQuery' => 'screen',
+        'method' => 'container',
+        'containerName' => 'viewport',
         'queries' => [
             'mobile' => [
                 'minWidth' => 0,
@@ -70,7 +72,10 @@ function buildMediaQuery($media, $frontspecMedia = null)
         ],
     ];
 
-    $finalParams = (object) $frontspecMedia;
+    $finalParams = (object) \Sugar\object\deepMerge(
+        $defaultParams,
+        $frontspecMedia
+    );
     $finalParams = (object) \Sugar\convert\toArray($finalParams);
 
     // sort the media
@@ -214,10 +219,12 @@ function buildMediaQuery($media, $frontspecMedia = null)
         return trim($l) !== '';
     });
 
-    if (count($fullQueriesList)) {
-        array_unshift($fullQueriesList, 'and');
+    if ($finalParams->method == 'container') {
+        return '@container ' .
+            $finalParams->containerName .
+            ' ' .
+            implode(' ', $fullQueriesList);
+    } else {
+        return '@media ' . implode(' ', $fullQueriesList);
     }
-    array_unshift($fullQueriesList, $finalParams->defaultQuery);
-
-    return '@media ' . implode(' ', $fullQueriesList);
 }

@@ -88,7 +88,7 @@ export default function ({
         : Object.keys(mediaConfig.queries);
 
     const sortedMedias = [];
-    Object.keys(mediaConfig.queries ?? {}).forEach(m => {
+    Object.keys(mediaConfig.queries ?? {}).forEach((m) => {
         if (medias.includes(m)) {
             sortedMedias.push(m);
         }
@@ -99,38 +99,45 @@ export default function ({
             if (node._sMediaRule) {
                 // node.remove();
             }
-            if (node.name === 'media' && node._sMedia) {
-                node.nodes = [...node.nodes.map(n => {
-                    if (!n.selector) {
-                        return n;
-                    }
-                    let sels = n.selector.split(',').map((l) => l.trim());
-                    sels = sels.map((sel) => {
-                        const selectors = sel.match(/\.[a-zA-Z0-9_-]+/gm);
-                        if (!selectors) return sel;
-                        selectors.forEach((selector) => {
-                            sel = sel.replace(
-                                selector,
-                                `${selector}___${node._sMedia}`,
-                            );
+            if (
+                (node.name === 'media' || node.name === 'container') &&
+                node._sMedia
+            ) {
+                node.nodes = [
+                    ...node.nodes.map((n) => {
+                        if (!n.selector) {
+                            return n;
+                        }
+                        let sels = n.selector.split(',').map((l) => l.trim());
+                        sels = sels.map((sel) => {
+                            const selectors = sel.match(/\.[a-zA-Z0-9_-]+/gm);
+                            if (!selectors) return sel;
+                            selectors.forEach((selector) => {
+                                sel = sel.replace(
+                                    selector,
+                                    `${selector}___${node._sMedia}`,
+                                );
+                            });
+                            return sel;
                         });
-                        return sel;
-                    });
-                    n.selector = sels.join(',');
-                    return n;
-                })]
+                        n.selector = sels.join(',');
+                        return n;
+                    }),
+                ];
             }
-        }
+        });
     });
 
     let refNode = atRule;
     atRule._sMediaRule = true;
 
     sortedMedias.forEach((media) => {
-
         const newRule = refNode.clone();
-        newRule.name = 'media';
-        newRule.params = __STheme.buildMediaQuery(media).replace('@media ', '');
+        newRule.name = 'container';
+        newRule.params = `viewport ${__STheme
+            .buildMediaQuery(media)
+            .replace('@media ', '')
+            .replace('@container', '')}`;
         newRule._sMedia = media;
         refNode.parent.insertAfter(refNode, newRule);
         if (refNode.name.startsWith('sugar')) {

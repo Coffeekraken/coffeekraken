@@ -1,26 +1,27 @@
 :root {
     --s-carpenter-navigation-width: 300px;
-    --s-carpenter-editor-width: 0px;
-    --s-carpenter-content-margin-inline: sugar.margin(50);
-    --s-carpenter-content-margin-block: sugar.margin(50);
-    --s-carpenter-offset-top: sugar.margin(50);
 
-    --s-carpenter-content-max-width: calc(
-        100vw - var(--s-carpenter-navigation-width) -
-            var(--s-carpenter-editor-width) -
-            var(--s-carpenter-content-margin-inline) * 2
-    );
+    --s-carpenter-editor-width: 500px;
+    --s-carpenter-editor-margin: sugar.margin(30);
+    --s-carpenter-editor-bottom: var(--s-carpenter-editor-margin);
+
+    --s-carpenter-media-bottom: sugar.margin(50);
+    --s-carpenter-media-left: 50vw;
 }
 
 .s-carpenter-app--open {
     --s-carpenter-navigation-width: 300px;
-    --s-carpenter-editor-width: 500px;
 
-    --s-carpenter-content-max-width: calc(
-        100vw - var(--s-carpenter-navigation-width) -
-            var(--s-carpenter-editor-width) -
-            var(--s-carpenter-content-margin-inline) * 2
+    --s-carpenter-media-left: calc(
+        50vw - var(--s-carpenter-editor-width) * 0.5
     );
+
+    @media (max-width: 550px) {
+        --s-carpenter-editor-width: calc(100vw - sugar.margin(30) * 2);
+        --s-carpenter-editor-bottom: 140px;
+
+        --s-carpenter-media-left: 50%;
+    }
 }
 
 .s-carpenter-app {
@@ -30,14 +31,13 @@
     z-index: 500;
     width: 100vw;
     height: 100vh;
-    pointer-events: none;
 
     .s-carpenter-app_navigation,
     .s-carpenter-app_editor {
         position: absolute;
-        top: sugar.margin(30);
-        right: sugar.margin(30);
-        bottom: sugar.margin(30);
+        top: var(--s-carpenter-editor-margin);
+        right: var(--s-carpenter-editor-margin);
+        bottom: var(--s-carpenter-editor-bottom);
         width: var(--s-carpenter-editor-width);
         background: sugar.color(main, background);
         transform: translateX(100%);
@@ -181,16 +181,22 @@
     }
 }
 
+.s-carpenter-app_backdrop {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: transparent;
+}
+
 .s-carpenter-app_media {
     position: absolute;
-    bottom: var(--s-carpenter-offset-top);
-    left: calc(
-        var(--s-carpenter-navigation-width) +
-            var(--s-carpenter-content-margin-inline) +
-            var(--s-carpenter-content-max-width) * 0.5
-    );
+    bottom: var(--s-carpenter-media-bottom);
+    background: blue;
+    left: var(--s-carpenter-media-left);
     transform: translateX(-50%);
-    pointer-events: all;
+    pointer-events: all !important;
     @sugar.depth (100);
     @sugar.transition();
 

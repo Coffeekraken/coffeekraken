@@ -5,27 +5,18 @@ import { __dashCase } from '@coffeekraken/sugar/string';
 class postcssSugarPluginMediaMixinInterface extends __SInterface {
     static get _definition() {
         return {
-            query1: {
+            query: {
                 type: 'String',
                 required: true,
             },
-            query2: {
+            containerName: {
                 type: 'String',
+                default: 'viewport',
             },
-            query3: {
+            method: {
                 type: 'String',
-            },
-            query4: {
-                type: 'String',
-            },
-            query5: {
-                type: 'String',
-            },
-            query6: {
-                type: 'String',
-            },
-            query7: {
-                type: 'String',
+                values: ['container', 'media'],
+                default: 'container',
             },
         };
     }
@@ -74,13 +65,30 @@ export default function ({
 }) {
     const mediaConfig = __STheme.get('media');
 
+    const finalParams = {
+        containerName: mediaConfig.containerName,
+        method: mediaConfig.method,
+        ...(params ?? {}),
+    };
+
+    // if we have a containerName, it means that we want the container method
+    if (
+        finalParams.containerName &&
+        finalParams.containerName !== mediaConfig.containerName
+    ) {
+        finalParams.method = 'container';
+    }
+
     const queries: string[] = [];
 
-    Object.keys(params).forEach((queryId) => {
-        const query = params[queryId].trim();
-        query.split(',').forEach((q) => {
-            queries.push(q.trim());
-        });
+    if (!finalParams.query) {
+        throw new Error(
+            `<red>[@sugar.media]</red> You MUST provide a query in order to use the <yellow>@sugar.media</yellow> mixin...`,
+        );
+    }
+
+    finalParams.query.split(',').forEach((q) => {
+        queries.push(q.trim());
     });
 
     let fullQueriesList: string[] = [];
@@ -188,20 +196,20 @@ export default function ({
 
     fullQueriesList = fullQueriesList.filter((l) => l.trim() !== '');
 
-    if (fullQueriesList.length) {
-        fullQueriesList.unshift('and');
+    if (finalParams.method === 'container') {
+        fullQueriesList.unshift(finalParams.containerName);
     }
-    fullQueriesList.unshift(mediaConfig.defaultQuery);
 
     const mediaRule = new postcssApi.AtRule({
-        name: 'media',
+        name: finalParams.method,
         params: fullQueriesList.join(' '),
+        nodes: atRule.nodes,
     });
 
-    atRule.nodes?.forEach((node) => {
-        mediaRule.append(node.clone());
-        node.remove();
-    });
+    // atRule.nodes?.forEach((node) => {
+    //     mediaRule.append(node.clone());
+    //     node.remove();
+    // });
 
     atRule.replaceWith(mediaRule);
 }

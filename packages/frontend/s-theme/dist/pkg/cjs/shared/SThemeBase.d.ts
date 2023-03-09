@@ -20,6 +20,10 @@ export interface ISThemeDefaultStaticSettings {
 export interface ISThemeResolveColorSettings extends ISThemeDefaultStaticSettings {
     return: 'value' | 'var';
 }
+export interface ISThemeBuildMediaQuerySettings {
+    method: 'container' | 'media';
+    containerName: string;
+}
 export interface ISThemeFontFamilyStack {
     [key: string]: ISThemeFontFamily;
 }
@@ -82,7 +86,8 @@ export interface ISThemeMediaQueries {
 }
 export interface ISThemeMedia {
     defaultAction: '>' | '<' | '=' | '>=' | '<=';
-    defaultQuery: string;
+    method: 'container' | 'media';
+    containerName: string;
     queries: ISThemeMediaQueries;
 }
 export interface IJsObjectToCssProperties {
@@ -187,7 +192,7 @@ export default class SThemeBase extends __SEventEmitter {
     
     static cssVar(dotPath: string, fallback?: boolean, settings?: Partial<ISThemeDefaultStaticSettings>): string;
     
-    static buildMediaQuery(queryString: string): string;
+    static buildMediaQuery(queryString: string, settings?: Partial<ISThemeBuildMediaQuerySettings>): string;
     
     static resolveCssPropertyValue(property: string, value: any, settings?: Partial<ISThemeDefaultStaticSettings>): any;
     

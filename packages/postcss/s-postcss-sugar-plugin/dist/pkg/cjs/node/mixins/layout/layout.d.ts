@@ -47,8 +47,9 @@ export interface IPostcssSugarPluginLayoutParams {
     scope: string[];
 }
 export { postcssSugarPluginLayoutInterface as interface };
-export default function ({ params, atRule, replaceWith, }: {
+export default function ({ params, atRule, postcssApi, replaceWith, }: {
     params: IPostcssSugarPluginLayoutParams;
     atRule: any;
+    postcssApi: any;
     replaceWith: Function;
-}): string[];
+}): void;

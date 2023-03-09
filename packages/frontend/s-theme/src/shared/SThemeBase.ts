@@ -10,7 +10,7 @@ import { __isColor } from '@coffeekraken/sugar/is';
 import {
     __deepMerge,
     __flatten,
-    __objectHash
+    __objectHash,
 } from '@coffeekraken/sugar/object';
 import __dashCase from '@coffeekraken/sugar/shared/string/dashCase';
 import __knownCssProperties from 'known-css-properties';
@@ -99,6 +99,11 @@ export interface ISThemeResolveColorSettings
     return: 'value' | 'var';
 }
 
+export interface ISThemeBuildMediaQuerySettings {
+    method: 'container' | 'media';
+    containerName: string;
+}
+
 export interface ISThemeFontFamilyStack {
     [key: string]: ISThemeFontFamily;
 }
@@ -168,7 +173,8 @@ export interface ISThemeMediaQueries {
 
 export interface ISThemeMedia {
     defaultAction: '>' | '<' | '=' | '>=' | '<=';
-    defaultQuery: string;
+    method: 'container' | 'media';
+    containerName: string;
     queries: ISThemeMediaQueries;
 }
 
@@ -749,11 +755,19 @@ export default class SThemeBase extends __SEventEmitter {
      * @since               2.0.0
      *
      */
-    static buildMediaQuery(queryString: string): string {
+    static buildMediaQuery(
+        queryString: string,
+        settings?: Partial<ISThemeBuildMediaQuerySettings>,
+    ): string {
         let currentQueryList: string[] = [];
 
         const mediaConfig = this.sortMedia(this.get('media')),
             sortedMedia = Object.keys(mediaConfig.queries);
+
+        const finalSettings: ISThemeBuildMediaQuerySettings = {
+            method: mediaConfig.method ?? 'container',
+            containerName: mediaConfig.containerName ?? 'viewport',
+        };
 
         const queryAr = queryString
             .split(' ')
@@ -865,10 +879,11 @@ export default class SThemeBase extends __SEventEmitter {
 
         currentQueryList = currentQueryList.filter((l) => l.trim() !== '');
 
-        if (currentQueryList.length) {
-            currentQueryList.unshift('and');
+        if (finalSettings.method === 'container') {
+            return `@container ${
+                finalSettings.containerName
+            } ${currentQueryList.join(' ')}`;
         }
-        currentQueryList.unshift(this.get('media.defaultQuery'));
 
         return `@media ${currentQueryList.join(' ')}`;
     }

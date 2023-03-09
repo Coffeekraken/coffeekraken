@@ -34,17 +34,35 @@ export default function (api) {
         },
 
         /**
-         * @name              defaultQuery
+         * @name              method
          * @namespace         config.themeMedia
          * @type              String
-         * @default           screen
+         * @default           container
          *
-         * Specify the default query to base all the generated ones upon
+         * Specify the method to use for media queries. By default it will use the @container query solution
+         * that will refer to the "viewport" container-name.
+         * The easiest way to start is to use the ".s-viewport" class that is generated through the `@sugar.init` mixin
+         * and to wrap your whole body content into it.
+         * This way you will be able to resize this container and keep the queries to work without resizing the window.
+         * You can also set this to "media" if you prefer the plain old media queries.
          *
          * @since       2.0.0
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
-        defaultQuery: 'screen',
+        method: 'container',
+
+        /**
+         * @name              containerName
+         * @namespace         config.themeMedia
+         * @type              String
+         * @default           viewport
+         *
+         * Specify the `container-name` used for the @container queries to refer to.
+         *
+         * @since       2.0.0
+         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+         */
+        containerName: 'viewport',
 
         queries: {
             /**

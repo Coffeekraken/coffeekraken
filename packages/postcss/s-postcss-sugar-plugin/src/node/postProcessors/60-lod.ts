@@ -2,6 +2,9 @@ import __SFile from '@coffeekraken/s-file';
 import { __distCssDir, __srcCssDir } from '@coffeekraken/sugar/path';
 import * as __csso from 'csso';
 
+import __cloneNodes from '../utils/cloneNodes';
+import __higherRule from '../utils/higherRule';
+
 import { __writeFileSync } from '@coffeekraken/sugar/fs';
 
 interface IScopesPostProcessorNodeToTreatLods {
@@ -421,102 +424,56 @@ export default async function ({ root, sharedData, postcssApi, settings }) {
             .join(',');
     });
 
-    // remove the @sugar.layout purposly lefted atRule
+    // // remove the @sugar.layout purposly lefted atRule
+    // root.walkAtRules((atRule) => {
+    //     if (atRule.name !== 'sugar.layout') {
+    //         return;
+    //     }
+
+    //     atRule.parent.append(atRule.nodes);
+    //     atRule.remove();
+    // });
+
     root.walkAtRules((atRule) => {
-        if (atRule.name !== 'sugar.layout') {
-            return;
-        }
-        atRule.parent.append(atRule.nodes);
-        atRule.remove();
-    });
-
-    root.walkAtRules((container) => {
-        if (container.name !== 'container' || container._sMediaProcessed) {
-            return;
-        }
-        if (container.parent.type === 'root') {
+        if (atRule.name !== 'media') {
             return;
         }
 
-        let toCheckNode = container,
-            rootContainerNode = container;
-        while (toCheckNode !== root) {
-            toCheckNode = toCheckNode.parent;
-            if (toCheckNode !== root) {
-                rootContainerNode = toCheckNode;
-            }
+        if (atRule.params.startsWith('container')) {
+            atRule.name = 'container';
+            atRule.params = atRule.params.replace(/^container\s/, '');
         }
+
+        return;
 
         const newContainer = new postcssApi.AtRule({
             name: 'container',
             params: container.params,
         });
-        newContainer._sMediaProcessed = true;
 
         const newRule = new postcssApi.Rule({
-            selector: container.parent.selector,
+            selector: `${container.parent.selector}`,
             nodes: [],
         });
+        newRule.append(__cloneNodes(container.nodes));
 
-        const newNodes: any[] = [newRule];
-        container.nodes.forEach((n) => {
-            if (!n.selector) {
-                return newRule.push(n);
-            }
-            const newNode = n.clone();
-
-            // const newSelectors: string[] = [];
-            // container.parent.selector.split(',').forEach((parentSel) => {
-            //     newNode.selector = newNode.selector
-            //         .split(',')
-            //         .forEach((sel) => {
-            //             newSelectors.push(sel.replace(/\&/gm), parentSel);
-            //         });
-            // });
-            // newNode.selector = newSelectors.join(',');
-            newNodes.push(newNode);
+        container.nodes.forEach((node) => {
+            node.remove();
         });
 
-        container.remove();
-
-        // container.replaceWith(container.nodes);
-
-        rootContainerNode.after(newContainer);
-        newContainer.append(newNodes);
-
-        let $parent = container.parent;
-        // while ($parent !== root) {
-        //     const newContainer = new postcssApi.AtRule({
-        //         name: 'container',
-        //         params: container.params
-        //     });
-        //     newContainer.append($parent);
-        //     $parent = container.parent;
-        // }
-
-        // const $containerRule = new postcssApi.Rule({
-        //     // _selector: container.parent.selector,
-        //     selector: container.parent.selector,
-        // });
-        // container.prepend($containerRule);
-
-        // const scopedNodes: any[] = [$containerRule];
+        newRule.append(__cloneNodes(container.nodes));
+        newContainer.append(newRule);
 
         // container.nodes.forEach((node) => {
-        //     $containerRule.append(node);
-        //     // if (!node.selector) {
-        //     //     $containerRule.append(node);
-        //     // } else {
-        //     //     scopedNodes.push(node);
-        //     //     node.remove();
+        //     // if (node.prop) {
+        //     node.remove();
         //     // }
         // });
 
-        // rootContainerNode.after(container);
+        const higherRule = __higherRule(container);
+        higherRule.after(newContainer);
 
-        // container.nodes.forEach((node) => {
-        //     console.log('d', node.selector);
-        // });
+        container.remove();
     });
 
     // // classmap

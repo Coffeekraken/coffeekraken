@@ -112,7 +112,6 @@ export default function ({
     const finalParams: IPostcssSugarPluginLayoutParams = {
         ...params,
     };
-
     const areas: string[] = [];
 
     const colsCountByArea = {};
@@ -270,18 +269,18 @@ export default function ({
     }
     const parentNode = atRule.parent;
 
-    atRule.append(decls);
+    // const higherRule = __higherRule(atRule);
 
-    // atRule.replaceWith(decls);
+    // atRule.append(decls);
+
+    atRule.replaceWith(decls);
 
     if (finalParams.scope.indexOf('bare') !== -1) {
         areas.forEach((areaId) => {
-            let selector = `& > *:nth-child(${areaId})`;
-
-            const newSelectors: string[] = [];
-
-            const rule = new postcssApi.Rule({
-                selector: selector,
+            // let selector = `.coco:nth-child(${areaId})`;
+            // const newSelectors: string[] = [];
+            const newRule = new postcssApi.Rule({
+                selector: `> *:nth-child(${areaId})`,
                 nodes: postcssApi.parse(`
                     grid-column-start: ${colsStartByArea[areaId]};
                     grid-column-end: ${colsEndByArea[areaId] + 1};
@@ -290,6 +289,21 @@ export default function ({
                 `).nodes,
             });
 
+            parentNode.prepend(newRule);
+
+            // const newTree = __cloneTree(parentNode, {
+            //     empty: true,
+            // });
+            // higherRule.after(newTree);
+            // const rule = new postcssApi.Rule({
+            //     selectors: [selector],
+            //     nodes: postcssApi.parse(`
+            //         grid-column-start: ${colsStartByArea[areaId]};
+            //         grid-column-end: ${colsEndByArea[areaId] + 1};
+            //         grid-row-start: ${rowsStartByArea[areaId]};
+            //         grid-row-end: ${rowsEndByArea[areaId] + 1};
+            //     `).nodes,
+            // });
             // if the parent node is not a simple rule with selector
             // we handle the "&" inside the selector cause it will not being processed...
             // @todo            Find a better solution for that...
@@ -302,9 +316,8 @@ export default function ({
             // });
             // rule.selector = newSelectors.join(',');
             // // }
-
             // add the new rule
-            atRule.append(rule);
+            // parentNode.append(rule);
         });
     }
 }

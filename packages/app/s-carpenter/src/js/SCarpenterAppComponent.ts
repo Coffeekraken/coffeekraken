@@ -155,13 +155,17 @@ export default class SCarpenterComponent extends __SLitComponent {
     _values = {};
 
     _data;
-    _$document;
-    _$editor; // store the actual editor "window"
-    _$viewport; // store the viewport element in the website that will be used to resize it with media
-    _$editorIframe; // store the iframe in which the carpenter is inited if is one
+    _websiteWindow;
+    _$websiteDocument; // store the document
     _$websiteIframe; // store the website iframe if the "media" method stored in the frontspec.json file is not set to "container". In this case, we must wrap the website into a proper iframe for the @media queries to work
+    _$websiteViewport; // store the viewport element in the website that will be used to resize it with media
+
+    _$editor; // store the actual editor "panel"
+    _$editorIframe; // store the iframe in which the carpenter is inited if is one
     _$toolbar; // store the toolbar displayed on the website elements when hovering them
-    _window;
+
+    _rootWindow;
+    _$rootDocument;
 
     constructor() {
         super(
@@ -202,17 +206,22 @@ export default class SCarpenterComponent extends __SLitComponent {
             );
         }
 
+        // set the root document and window
+        this._$rootDocument = this.props.window.document;
+        this._rootWindow = this.props.window;
+
         // set the document in which to search for items (s-specs) etc...
-        this._$document = this.props.window.document;
-        this._window = this.props.window;
+        this._$websiteDocument = this.props.window.document;
+        this._websiteWindow = this.props.window;
 
         // get the first s-spec element that we can find
         // or get the first item in the body
         // and set it to the state.$currentElement to be sure we have something to
         // work with in the adapter, etc...
-        let $firstSpecsElement = this._$document.querySelector('[s-specs]');
+        let $firstSpecsElement =
+            this._$websiteDocument.querySelector('[s-specs]');
         if (!$firstSpecsElement) {
-            $firstSpecsElement = this._$document.body.children[0];
+            $firstSpecsElement = this._$websiteDocument.body.children[0];
         }
         this.state.$currentElement = $firstSpecsElement;
     }
@@ -250,7 +259,7 @@ export default class SCarpenterComponent extends __SLitComponent {
         });
         __hotkey('escape', {
             // from the website itself
-            element: this._$document,
+            element: this._$websiteDocument,
         }).on('press', () => {
             this._closeEditor();
         });
@@ -265,7 +274,7 @@ export default class SCarpenterComponent extends __SLitComponent {
         this._listenSpecsEditorUpdate();
 
         // handle popstate
-        this._window.addEventListener('popstate', (e) => {
+        this._websiteWindow.addEventListener('popstate', (e) => {
             this._changePage(e.state.dotpath, false);
         });
 
@@ -344,11 +353,12 @@ export default class SCarpenterComponent extends __SLitComponent {
         if (mediaMethod === 'container') {
             // getting the viewport element
             if (typeof this.props.viewportElm === HTMLElement) {
-                this._$viewport = this.props.viewportElm;
+                this._$websiteViewport = this.props.viewportElm;
             } else if (typeof this.props.viewportElm === 'string') {
-                this._$viewport = this._window.document.querySelector(
-                    this.props.viewportElm,
-                );
+                this._$websiteViewport =
+                    this._websiteWindow.document.querySelector(
+                        this.props.viewportElm,
+                    );
             }
         } else if (this._data.frontspec?.media?.queries) {
             // create the wrapping iframe
@@ -356,10 +366,10 @@ export default class SCarpenterComponent extends __SLitComponent {
             this._$websiteIframe.classList.add('s-carpenter_website-iframe');
 
             // get the actual page html to inject into the iframe
-            const html = this._$document.documentElement.innerHTML;
+            const html = this._$websiteDocument.documentElement.innerHTML;
 
             // prepend the website iframe in the body
-            this._$document.body.prepend(this._$websiteIframe);
+            this._$websiteDocument.body.prepend(this._$websiteIframe);
 
             // wait until the iframe is ready
             await __whenIframeReady(this._$websiteIframe);
@@ -374,7 +384,7 @@ export default class SCarpenterComponent extends __SLitComponent {
             // unless the iframes
             ['body'].forEach((container) => {
                 Array.from(
-                    this._$document.querySelectorAll(`${container} > *`),
+                    this._$websiteDocument.querySelectorAll(`${container} > *`),
                 ).forEach((node) => {
                     if (node.tagName?.toLowerCase?.() === 'iframe') {
                         return;
@@ -383,12 +393,13 @@ export default class SCarpenterComponent extends __SLitComponent {
                 });
             });
 
-            // reset the _window and _$document references
-            this._window = this._$websiteIframe.contentWindow;
-            this._$document = this._$websiteIframe.contentWindow.document;
+            // reset the _window and _$websiteDocument references
+            this._websiteWindow = this._$websiteIframe.contentWindow;
+            this._$websiteDocument =
+                this._$websiteIframe.contentWindow.document;
 
             // the "viewport" is not the website iframe
-            this._$viewport = this._$websiteIframe;
+            this._$websiteViewport = this._$websiteIframe;
 
             // inject the scrollbat styling
             __injectStyle(
@@ -408,7 +419,7 @@ export default class SCarpenterComponent extends __SLitComponent {
                 }    
             `,
                 {
-                    rootNode: this._$document.body,
+                    rootNode: this._$websiteDocument.body,
                 },
             );
         }
@@ -477,7 +488,7 @@ export default class SCarpenterComponent extends __SLitComponent {
                 });
             },
             {
-                rootNode: this._$document.body,
+                rootNode: this._$websiteDocument.body,
             },
         );
     }
@@ -501,6 +512,7 @@ export default class SCarpenterComponent extends __SLitComponent {
     _openEditor() {
         document.body.classList.add('s-carpenter-app--open');
         this._$editorIframe?.classList.add('s-carpenter--open');
+        this._$rootDocument.body.classList.add('s-carpenter--open');
         setTimeout(() => {
             this._updateUiPlaceholders();
         }, 400);
@@ -512,6 +524,7 @@ export default class SCarpenterComponent extends __SLitComponent {
     _closeEditor() {
         document.body.classList.remove('s-carpenter-app--open');
         this._$editorIframe?.classList.remove('s-carpenter--open');
+        this._$rootDocument.body.classList.remove('s-carpenter--open');
         setTimeout(() => {
             this._updateUiPlaceholders();
         }, 400);
@@ -524,16 +537,16 @@ export default class SCarpenterComponent extends __SLitComponent {
         if (this._$toolbar) {
             return this._$toolbar;
         }
-        const $toolbar = this._$document.createElement('div');
+        const $toolbar = this._$websiteDocument.createElement('div');
         $toolbar.classList.add('s-carpenter-toolbar');
         this._$toolbar = $toolbar;
 
-        const $i = this._$document.createElement('i');
+        const $i = this._$websiteDocument.createElement('i');
         $i.classList.add('fa-regular', 'fa-pen-to-square');
         $toolbar.appendChild($i);
 
         // append toolbar to viewport
-        this._$document.body.appendChild($toolbar);
+        this._$websiteDocument.body.appendChild($toolbar);
 
         return this._$toolbar;
     }
@@ -638,9 +651,11 @@ export default class SCarpenterComponent extends __SLitComponent {
      */
     _setToolbarPosition($from) {
         const targetRect = $from.getBoundingClientRect();
-        this._$toolbar.style.top = `${targetRect.top + this._window.scrollY}px`;
+        this._$toolbar.style.top = `${
+            targetRect.top + this._websiteWindow.scrollY
+        }px`;
         this._$toolbar.style.left = `${
-            targetRect.left + targetRect.width + this._window.scrollX
+            targetRect.left + targetRect.width + this._websiteWindow.scrollX
         }px`;
     }
 
@@ -667,7 +682,7 @@ export default class SCarpenterComponent extends __SLitComponent {
                   }px`
                 : '100vw'
         }`;
-        this._$viewport.style.width = width;
+        this._$websiteViewport.style.width = width;
     }
 
     /**
@@ -679,7 +694,7 @@ export default class SCarpenterComponent extends __SLitComponent {
         ].change({
             dotpath,
             $elm: this.props.specs
-                ? this._$document.body.children[0]
+                ? this._$websiteDocument.body.children[0]
                 : this.state.$currentElement,
             props: this.props,
             component: this,
@@ -690,7 +705,7 @@ export default class SCarpenterComponent extends __SLitComponent {
 
         // save arrival state
         if (pushState) {
-            this._window.history.pushState(
+            this._websiteWindow.history.pushState(
                 {
                     dotpath,
                 },

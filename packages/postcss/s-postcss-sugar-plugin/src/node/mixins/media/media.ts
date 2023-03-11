@@ -201,8 +201,10 @@ export default function ({
     }
 
     const mediaRule = new postcssApi.AtRule({
-        name: finalParams.method,
-        params: fullQueriesList.join(' '),
+        name: 'media',
+        params: `${
+            finalParams.method === 'container' ? 'container' : ''
+        } ${fullQueriesList.join(' ')}`.trim(),
         nodes: atRule.nodes,
     });
 

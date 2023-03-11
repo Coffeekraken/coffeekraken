@@ -1,0 +1,26 @@
+:root {
+    --s-carpenter-navigation-width: 300px;
+
+    --s-carpenter-editor-width: 500px;
+    --s-carpenter-editor-margin: sugar.margin(30);
+    --s-carpenter-editor-bottom: var(--s-carpenter-editor-margin);
+
+    --s-carpenter-media-bottom: sugar.margin(50);
+    --s-carpenter-media-left: 50vw;
+}
+
+.s-carpenter--open,
+.s-carpenter-app--open {
+    --s-carpenter-navigation-width: 300px;
+
+    --s-carpenter-media-left: calc(
+        50vw - var(--s-carpenter-editor-width) * 0.5
+    );
+
+    @media (max-width: 550px) {
+        --s-carpenter-editor-width: calc(100vw - sugar.margin(30) * 2);
+        --s-carpenter-editor-bottom: 140px;
+
+        --s-carpenter-media-left: 50%;
+    }
+}

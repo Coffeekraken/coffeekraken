@@ -42,11 +42,17 @@ export default function ({
 
     const vars = [
         `
+        body:has(.s-viewport) {
+            overflow: hidden;
+        }
         .s-viewport {
             container-type: inline-size;
             container-name: ${
                 __STheme.get('media.containerName') ?? 'viewport'
             };
+            height: 100vh;
+            overflow-y: auto;
+            overflow-x: hidden;
         }
         body:has(iframe.s-carpenter_editor-iframe) .s-viewport {
             @sugar.transition;
@@ -55,7 +61,7 @@ export default function ({
             transform: translateX(-50%);
             border-left: solid 1px rgba(134, 134, 134, 0.3);
             border-right: solid 1px rgba(134, 134, 134, 0.3);
-            overflow-x: hidden;
+            @sugar.scrollbar(accent);
         }
     `,
     ];

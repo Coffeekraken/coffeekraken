@@ -6,10 +6,14 @@ export default function ({
     cacheDir,
     classmap,
 }) {
+    return;
+
     root.walkRules(/\& \> \*/, (rule) => {
         if (!rule.selector) {
             return;
         }
+
+        let needToMoveAtRoot = true;
 
         let higherRule = rule.parent;
         while (true) {
@@ -17,6 +21,9 @@ export default function ({
                 break;
             }
             higherRule = higherRule.parent;
+            if (higherRule.type === 'atrule') {
+                needToMoveAtRoot = false;
+            }
         }
 
         let parentWithSelector = rule.parent;
@@ -38,13 +45,8 @@ export default function ({
         });
         rule.selector = newSelectors.join(',');
 
-        if (rule.selector.includes('section-heading')) {
-            global._console.log(higherRule.type);
+        if (needToMoveAtRoot) {
+            higherRule.parent.insertBefore(higherRule, rule);
         }
-        if (higherRule.type === 'atrule') {
-            return;
-        }
-
-        higherRule.parent.insertAfter(higherRule, rule);
     });
 }

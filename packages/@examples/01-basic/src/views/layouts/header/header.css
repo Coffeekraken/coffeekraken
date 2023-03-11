@@ -56,7 +56,7 @@
     }
 
     ._menu-toggle {
-        position: fixed;
+        position: absolute;
         top: calc(40px - 0.35em);
         right: 0;
         font-size: 30px;

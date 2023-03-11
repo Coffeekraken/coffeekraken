@@ -85,16 +85,15 @@ export default function ({
             case 'primary':
             default:
                 vars.push(`
-
                     position: relative;
                     user-select: none;
 
                     @sugar.media <=mobile {
-                        position: fixed;
+                        position: absolute;
                         top: 0; left: 0;
                         height: 100vh;
-                        width: 100vw;
-                        transform: translateX(100vw);
+                        width: 100%;
+                        transform: translateX(120%);
                         pointer-events: none;
 
                         input[type="checkbox"]:checked + & {

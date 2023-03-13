@@ -1,9 +1,5 @@
 @import './vars.css';
 
-.s-viewport {
-    left: var(--s-carpenter-media-left) !important;
-}
-
 .s-carpenter {
 }
 .s-carpenter_website-iframe,
@@ -30,6 +26,9 @@
     left: 50%;
     transform: translateX(-50%);
     @sugar.scrollbar (accent);
+    border-left: 1px solid sugar.color(main, --alpha 0.2);
+    border-right: 1px solid sugar.color(main, --alpha 0.2);
+    @sugar.depth (100);
 }
 
 .s-carpenter_ui-placeholders {
@@ -53,30 +52,122 @@
     }
 }
 
-.s-carpenter-toolbar {
-    position: absolute;
-    z-index: 90000;
-    background: sugar.color(accent);
-    color: sugar.color(accent, foreground);
-    display: inline-block;
-    padding: sugar.padding(30);
-    transform: translateX(calc(-100% + sugar.margin(10)))
-        translateY(calc(sugar.margin(10) * -1)) scale(1);
-    pointer-events: none;
-    opacity: 0;
-    cursor: pointer;
-    text-shadow: 1px 2px 3px rgba(0, 0, 0, 0.1);
-    font-size: sugar.font.size(50);
-    @sugar.depth (100);
-    @sugar.transition (fast);
+.s-carpenter_open-btn {
+    @sugar.ui.button();
+    @sugar.color (complementary);
+    position: fixed !important;
+    z-index: 99999;
+    top: 30px;
+    right: 30px;
 
-    &:hover {
-        transform: translateX(calc(-100% + sugar.margin(10)))
-            translateY(calc(sugar.margin(10) * -1)) scale(1.2);
+    svg {
+        width: 1em;
+        height: 1em;
+
+        * {
+            fill: white;
+        }
+    }
+
+    &.loading {
+        @sugar.ui.button ($lnf: 'loading');
     }
 }
-body:has([s-specs]:hover) .s-carpenter-toolbar,
-.s-carpenter-toolbar:hover {
-    opacity: 1;
-    pointer-events: all;
+
+@keyframes s-carpenter-popin-in {
+    from {
+        opacity: 0;
+        transform: scale(0) translate(-50%, -50%);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1) translate(-50%, -50%);
+    }
+}
+
+@keyframes s-carpenter-logo {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.s-carpenter_loading,
+.s-carpenter_ready {
+    position: fixed;
+    z-index: 99999;
+    top: 50%;
+    left: 50%;
+    transform: scale(1) translate(-50%, -50%);
+    transform-origin: 0 0;
+    animation: s-carpenter-popin-in 0.3s cubic-bezier(0.705, 0, 0.54, 1.27)
+        forwards;
+
+    ._inner {
+        background-color: #2c3138;
+        background-image: url('https://cdnv2.coffeekraken.io/carpenter-loading-bkg.png');
+        background-position: 50% 50%;
+        background-size: cover;
+        color: white;
+        padding: sugar.padding(50) sugar.padding(70);
+        text-align: center;
+        @sugar.border.radius;
+        @sugar.depth (100);
+    }
+
+    ._logo {
+        margin-block-end: sugar.margin(30);
+        position: relative;
+        left: 20px;
+
+        svg {
+            display: inline-block;
+            height: 150px;
+            width: 150px;
+            animation: s-carpenter-logo 1s linear infinite;
+            transform-origin: 40% 55%;
+
+            * {
+                fill: white;
+            }
+        }
+    }
+
+    ._title {
+        font-size: 28px;
+        margin-block-end: sugar.margin(30);
+
+        span {
+            color: sugar.color(accent);
+        }
+    }
+    ._text {
+        font-size: 16px;
+        line-height: 1.5;
+    }
+    /* ._cancel-btn {
+        @sugar.ui.button;
+        @sugar.color (error);
+    } */
+}
+.s-carpenter_ready {
+    ._logo {
+        left: 10px;
+
+        svg {
+            animation: none !important;
+        }
+    }
+
+    ._inner {
+        background-image: url('https://cdnv2.coffeekraken.io/carpenter-ready-bkg.png');
+    }
+
+    ._title {
+        span {
+            color: sugar.color(success);
+        }
+    }
 }

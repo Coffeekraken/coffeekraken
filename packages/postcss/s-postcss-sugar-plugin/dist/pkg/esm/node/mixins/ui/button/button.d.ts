@@ -18,14 +18,15 @@ declare class postcssSugarPluginUiButtonInterface extends __SInterface {
     };
 }
 export interface IPostcssSugarPluginUiButtonParams {
-    lnf: 'default' | 'gradient' | 'outline' | 'text';
+    lnf: 'default' | 'gradient' | 'outline' | 'text' | 'loading';
     scope: ('bare' | 'lnf')[];
 }
 export { postcssSugarPluginUiButtonInterface as interface };
 
-export default function ({ params, atRule, sharedData, replaceWith, }: {
+export default function ({ params, atRule, postcssApi, sharedData, replaceWith, }: {
     params: Partial<IPostcssSugarPluginUiButtonParams>;
     atRule: any;
+    postcssApi: any;
     sharedData: any;
     replaceWith: Function;
 }): string[];

@@ -1,5 +1,4 @@
 import __SInterface from '@coffeekraken/s-interface';
-import __STheme from '@coffeekraken/s-theme';
 
 class postcssSugarPluginMediaInitMixinInterface extends __SInterface {
     static get _definition() {
@@ -40,31 +39,31 @@ export default function ({
         ...(params ?? {}),
     };
 
-    const vars = [
-        `
-        body:has(.s-viewport) {
-            overflow: hidden;
-        }
-        .s-viewport {
-            container-type: inline-size;
-            container-name: ${
-                __STheme.get('media.containerName') ?? 'viewport'
-            };
-            height: 100vh;
-            overflow-y: auto;
-            overflow-x: hidden;
-        }
-        body:has(iframe.s-carpenter_editor-iframe) .s-viewport {
-            @sugar.transition;
-            position: relative;
-            left: 50%;
-            transform: translateX(-50%);
-            border-left: solid 1px rgba(134, 134, 134, 0.3);
-            border-right: solid 1px rgba(134, 134, 134, 0.3);
-            @sugar.scrollbar(accent);
-        }
-    `,
-    ];
+    // const vars = [
+    //     `
+    //     body:has(.s-viewport) {
+    //         overflow: hidden;
+    //     }
+    //     .s-viewport {
+    //         container-type: inline-size;
+    //         container-name: ${
+    //             __STheme.get('media.containerName') ?? 'viewport'
+    //         };
+    //         height: 100vh;
+    //         overflow-y: auto;
+    //         overflow-x: hidden;
+    //     }
+    //     body:has(iframe.s-carpenter_editor-iframe) .s-viewport {
+    //         @sugar.transition;
+    //         position: relative;
+    //         left: 50%;
+    //         transform: translateX(-50%);
+    //         border-left: solid 1px rgba(134, 134, 134, 0.3);
+    //         border-right: solid 1px rgba(134, 134, 134, 0.3);
+    //         @sugar.scrollbar(accent);
+    //     }
+    // `,
+    // ];
 
-    replaceWith(vars);
+    replaceWith('');
 }

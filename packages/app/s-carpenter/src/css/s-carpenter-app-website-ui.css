@@ -1,0 +1,64 @@
+[s-carpenter-website-ui] {
+    @sugar.theme.apply ($variant: light);
+}
+
+.s-carpenter-toolbar {
+    position: absolute;
+    z-index: 90000;
+    background: sugar.color(main, background);
+    color: sugar.color(main, text);
+    display: inline-flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    transform: translateX(-100%) translateY(-50%) scale(1);
+    pointer-events: none;
+    opacity: 0;
+    cursor: pointer;
+    user-select: none;
+    @sugar.border.radius();
+    @sugar.depth (100);
+    @sugar.transition (fast);
+
+    /* &:hover {
+        transform: translateX(calc(-100% + sugar.margin(10)))
+            translateY(calc(sugar.margin(10) * -1)) scale(1.2);
+    } */
+
+    button {
+        padding-inline: sugar.padding(20);
+        padding-block: sugar.padding(20);
+        white-space: nowrap;
+        @sugar.border.radius;
+
+        &:not(:has(span)) i {
+            font-size: 1.15em;
+        }
+
+        &:last-child {
+            border-top-left-radius: 0 !important;
+            border-bottom-left-radius: 0 !important;
+        }
+        &:first-child {
+            border-top-right-radius: 0 !important;
+            border-bottom-right-radius: 0 !important;
+        }
+
+        &:hover {
+            background-color: sugar.color(main);
+            color: sugar.color(main, foreground);
+        }
+
+        &:not(:last-child) {
+            border-right: 1px solid sugar.color(main, border);
+        }
+
+        * {
+            pointer-events: none;
+        }
+    }
+}
+body:has([s-specs]:hover) .s-carpenter-toolbar,
+.s-carpenter-toolbar:hover {
+    opacity: 1;
+    pointer-events: all;
+}

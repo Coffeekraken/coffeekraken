@@ -1,5 +1,6 @@
 import __SInterface from '@coffeekraken/s-interface';
 import __STheme from '@coffeekraken/s-theme';
+import __getRoot from '../../../utils/getRoot';
 
 /**
  * @name          blockquote
@@ -11,7 +12,7 @@ import __STheme from '@coffeekraken/s-theme';
  *
  * This mixin allows you to generate the "button" UI component css.
  *
- * @param       {'default'|'gradient'|'outline'|'text'}                           [style='theme.ui.button.defaultLnf']         The style you want to generate
+ * @param       {'default'|'gradient'|'outline'|'text'|'loading'}                           [style='theme.ui.button.defaultLnf']         The style you want to generate
  * @param       {('bare'|'lnf')[]}        [scope=['bare', 'lnf']]      The scope you want to generate
  * @return      {Css}                   The corresponding css
  *
@@ -31,7 +32,7 @@ class postcssSugarPluginUiButtonInterface extends __SInterface {
         return {
             lnf: {
                 type: 'String',
-                values: ['default', 'gradient', 'outline', 'text'],
+                values: ['default', 'gradient', 'outline', 'text', 'loading'],
                 default: __STheme.get('ui.button.defaultLnf'),
             },
             scope: {
@@ -47,7 +48,7 @@ class postcssSugarPluginUiButtonInterface extends __SInterface {
 }
 
 export interface IPostcssSugarPluginUiButtonParams {
-    lnf: 'default' | 'gradient' | 'outline' | 'text';
+    lnf: 'default' | 'gradient' | 'outline' | 'text' | 'loading';
     scope: ('bare' | 'lnf')[];
 }
 
@@ -75,11 +76,13 @@ export { postcssSugarPluginUiButtonInterface as interface };
 export default function ({
     params,
     atRule,
+    postcssApi,
     sharedData,
     replaceWith,
 }: {
     params: Partial<IPostcssSugarPluginUiButtonParams>;
     atRule: any;
+    postcssApi: any;
     sharedData: any;
     replaceWith: Function;
 }) {
@@ -108,6 +111,9 @@ export default function ({
         gap: sugar.margin(20);
         align-items: center;
         justify-content: center;
+
+        --s-btn-padding-inline: sugar.padding(ui.button.paddingInline);
+        --s-btn-padding-block: sugar.padding(ui.button.paddingBlock);
 
         & > * {
           pointer-events: none;
@@ -196,6 +202,43 @@ export default function ({
 
                   @sugar.state.disabled {
                     transform: scale(1) !important;
+                  }
+                `);
+                break;
+            case 'loading':
+                const root = __getRoot(atRule);
+                root.append(
+                    postcssApi.parse(`
+                      @keyframes s-btn-loading {
+                        from {
+                            transform: rotate(0deg);
+                        }
+                        to {
+                            transform: rotate(360deg);
+                        }
+                    }
+                  `),
+                );
+
+                vars.push(`
+                  position: relative;
+                  pointer-events: none !important;
+          
+                  img,
+                  .s-icon,
+                  svg {
+                      display: none;
+                  }
+          
+                  &:before {
+                      content: '';
+                      display: block;
+                      width: 1em;
+                      height: 1em;
+                      border-radius: 50%;
+                      border: 3px solid currentColor;
+                      border-bottom: none;
+                      animation: s-btn-loading 0.4s linear infinite;
                   }
                 `);
                 break;

@@ -41,6 +41,12 @@ export default class SCarpenterComponentInterface extends __SInterface {
                     'Specify the "viewport" element (or a css selector) that will be resized in your website when editing with carpenter. This will be used ONLY if you make use of container queries in your codebase instead of the plain old media queries. When using media queries, the editor will wrap your website into an iframe and resitze this iframe instead.',
                 default: '.s-viewport',
             },
+            autoInit: {
+                type: 'Boolean',
+                description:
+                    'Specify if you want the editor to be automatically inited when adding the "s-carpenter" component. If not, the user will have to click on a "Carpenter" button',
+                default: document.location.hash === '#carpenter',
+            },
             specs: {
                 type: 'String',
                 description:

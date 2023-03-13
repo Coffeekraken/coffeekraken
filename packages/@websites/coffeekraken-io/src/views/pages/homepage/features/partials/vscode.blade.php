@@ -1,7 +1,7 @@
 <section id="features-vscode" class="section:diagonal">
     <div class="s-container">
 
-        <div class="s-layout:112">
+        <div class="s-layout:112 @mobile s-layout:2_1">
 
             <div>
 

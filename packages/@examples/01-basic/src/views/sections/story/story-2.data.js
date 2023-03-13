@@ -7,8 +7,7 @@ export default {
         color: 'accent',
         link: {
             text: 'CTA label...',
-            url: 'https://apple.com',
-            target: '_blank',
+            url: '/contact',
             title: 'Discover more on apple.com',
         },
     },

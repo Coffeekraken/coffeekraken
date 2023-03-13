@@ -1,12 +1,16 @@
 <section class="section-card {{ __paddingClasses(padding) }} {{ __marginClasses(margin) }}">
     <div class="s-container:wide">
         <div class="s-layout">
-            <div>
-                {% include 'sugar/components/card/card.twig' with cardOne only %}
-            </div>
-            <div>
-                {% include 'sugar/components/card/card.twig' with cardTwo only %}
-            </div>
+            {% if cardOne %}
+                <div>
+                    {% include 'sugar/components/card/card.twig' with cardOne only %}
+                </div>
+            {% endif %}
+            {% if cardTwo %}
+                <div>
+                    {% include 'sugar/components/card/card.twig' with cardTwo only %}
+                </div>
+            {% endif %}
         </div>
     </div>
 </section>

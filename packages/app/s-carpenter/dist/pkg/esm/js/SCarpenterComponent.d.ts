@@ -22,12 +22,15 @@ export interface ISCarpenterComponentProps {
 export default class SCarpenterComponent extends __SLitComponent {
     static get properties(): any;
     static get styles(): import("lit").CSSResult;
-    _data: any;
-    _$document: any;
-    _$iframe: any;
-    _$toolbar: any;
+    static state: {
+        status: string;
+    };
+    _$editorIframe: any;
+    _$openBtn: any;
     constructor();
     mount(): Promise<void>;
-    render(): string;
+    _initEditor(): void;
+    _carpenterLogo(): import("lit-html").TemplateResult<1>;
+    render(): import("lit-html").TemplateResult<1>;
 }
 export { __define as define };

@@ -96,13 +96,7 @@ export default function ({
 
     registerPostProcessor((root) => {
         root.nodes.forEach((node) => {
-            if (node._sMediaRule) {
-                // node.remove();
-            }
-            if (
-                (node.name === 'media' || node.name === 'container') &&
-                node._sMedia
-            ) {
+            if (node.name === 'media' && node._sMedia) {
                 node.nodes = [
                     ...node.nodes.map((n) => {
                         if (!n.selector) {
@@ -133,11 +127,12 @@ export default function ({
 
     sortedMedias.forEach((media) => {
         const newRule = refNode.clone();
-        newRule.name = 'container';
-        newRule.params = `viewport ${__STheme
-            .buildMediaQuery(media)
-            .replace('@media ', '')
-            .replace('@container', '')}`;
+        newRule.name = 'media';
+        newRule.params = `${__STheme
+            .buildMediaQuery(media, {
+                method: 'media',
+            })
+            .replace('@media ', '')}`;
         newRule._sMedia = media;
         refNode.parent.insertAfter(refNode, newRule);
         if (refNode.name.startsWith('sugar')) {

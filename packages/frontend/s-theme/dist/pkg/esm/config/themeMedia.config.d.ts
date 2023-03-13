@@ -3,10 +3,6 @@ export default function (api: any): {
     defaultAction: string;
     
     readonly defaultMedia: "mobile" | "desktop";
-    
-    method: string;
-    
-    containerName: string;
     queries: {
         
         mobile: {

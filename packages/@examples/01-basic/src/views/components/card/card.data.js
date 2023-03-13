@@ -18,8 +18,7 @@ export default {
         color: 'accent',
         link: {
             text: 'Discover more...',
-            url: 'https://apple.com',
-            target: '_blank',
+            url: '/contact',
             title: 'Discover more on apple.com',
         },
     },

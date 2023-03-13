@@ -1,6 +1,5 @@
 import __SInterface from '@coffeekraken/s-interface';
 import __STheme from '@coffeekraken/s-theme';
-import { __dashCase } from '@coffeekraken/sugar/string';
 
 class postcssSugarPluginMediaMixinInterface extends __SInterface {
     static get _definition() {
@@ -8,15 +7,6 @@ class postcssSugarPluginMediaMixinInterface extends __SInterface {
             query: {
                 type: 'String',
                 required: true,
-            },
-            containerName: {
-                type: 'String',
-                default: 'viewport',
-            },
-            method: {
-                type: 'String',
-                values: ['container', 'media'],
-                default: 'container',
             },
         };
     }
@@ -63,155 +53,19 @@ export default function ({
     postcssApi: any;
     registerPostProcessor: Function;
 }) {
-    const mediaConfig = __STheme.get('media');
-
     const finalParams = {
-        containerName: mediaConfig.containerName,
-        method: mediaConfig.method,
         ...(params ?? {}),
     };
 
-    // if we have a containerName, it means that we want the container method
-    if (
-        finalParams.containerName &&
-        finalParams.containerName !== mediaConfig.containerName
-    ) {
-        finalParams.method = 'container';
-    }
-
-    const queries: string[] = [];
-
-    if (!finalParams.query) {
-        throw new Error(
-            `<red>[@sugar.media]</red> You MUST provide a query in order to use the <yellow>@sugar.media</yellow> mixin...`,
-        );
-    }
-
-    finalParams.query.split(',').forEach((q) => {
-        queries.push(q.trim());
+    const buildedQuery = __STheme.buildMediaQuery(finalParams.query, {
+        method: 'media',
     });
-
-    let fullQueriesList: string[] = [];
-
-    queries.forEach((query) => {
-        const currentQueryList: string[] = [];
-
-        if (query === 'and' || query === 'or') {
-            currentQueryList.push(query);
-            return;
-        }
-
-        const firstChar = query.slice(0, 1);
-        const firstTwoChar = query.slice(0, 2);
-        const lastChar = query.slice(-1);
-        let action = mediaConfig.defaultAction;
-        let mediaName = query;
-
-        if (lastChar === '-' || lastChar === '|')
-            mediaName = mediaName.slice(0, -1);
-
-        if (
-            firstTwoChar === '>=' ||
-            firstTwoChar === '<=' ||
-            firstTwoChar === '=='
-        ) {
-            mediaName = mediaName.slice(2);
-            action = firstTwoChar;
-        } else if (
-            firstChar === '<' ||
-            firstChar === '>' ||
-            firstChar === '='
-        ) {
-            mediaName = mediaName.slice(1);
-            action = firstChar;
-        }
-
-        const mediaQueryConfig = mediaConfig.queries[mediaName];
-        if (!mediaQueryConfig)
-            throw new Error(
-                `<red>[postcssSugarPlugin.media]</red> Sorry but the requested media "<yellow>${mediaName}</yellow>" does not exists in the config. Here's the available medias: ${Object.keys(
-                    mediaConfig.queries,
-                )
-                    .map((l) => `<green>${l}</green>`)
-                    .join(',')}`,
-            );
-
-        const queryList: string[] = [];
-
-        Object.keys(mediaQueryConfig).forEach((prop) => {
-            const value = mediaQueryConfig[prop];
-            prop = __dashCase(prop);
-            if (!value) return;
-
-            if (
-                [
-                    'min-width',
-                    'max-width',
-                    'min-device-width',
-                    'max-device-width',
-                ].indexOf(prop) !== -1
-            ) {
-                if (action === '>') {
-                    if (prop === 'max-width' || prop === 'max-device-width') {
-                        let argName = 'min-width';
-                        if (prop.includes('-device'))
-                            argName = 'min-device-width';
-                        queryList.push(`(${argName}: ${value + 1}px)`);
-                    }
-                } else if (action === '<') {
-                    if (prop === 'min-width' || prop === 'min-device-width') {
-                        let argName = 'max-width';
-                        if (prop.includes('-device'))
-                            argName = 'max-device-width';
-                        queryList.push(`(${argName}: ${value}px)`);
-                    }
-                } else if (action === '=') {
-                    queryList.push(`(${prop}: ${value}px)`);
-                } else if (action === '>=') {
-                    if (prop === 'min-width' || prop === 'min-device-width') {
-                        queryList.push(`(${prop}: ${value}px)`);
-                    }
-                } else if (action === '<=') {
-                    if (prop === 'max-width' || prop === 'max-device-width') {
-                        queryList.push(`(${prop}: ${value}px)`);
-                    }
-                } else {
-                    queryList.push(`(${prop}: ${value}px)`);
-                }
-            } else {
-                queryList.push(`(${prop}: ${value}px)`);
-            }
-        });
-
-        if (lastChar === '-') {
-            queryList.push('(orientation: landscape)');
-        } else if (lastChar === '|') {
-            queryList.push('(orientation: portrait)');
-        }
-
-        currentQueryList.push(queryList.join(' and '));
-
-        fullQueriesList.push(currentQueryList.join(' '));
-    });
-
-    fullQueriesList = fullQueriesList.filter((l) => l.trim() !== '');
-
-    if (finalParams.method === 'container') {
-        fullQueriesList.unshift(finalParams.containerName);
-    }
 
     const mediaRule = new postcssApi.AtRule({
         name: 'media',
-        params: `${
-            finalParams.method === 'container' ? 'container' : ''
-        } ${fullQueriesList.join(' ')}`.trim(),
+        params: buildedQuery.replace(/^\@media\s/, ''),
         nodes: atRule.nodes,
     });
-
-    // atRule.nodes?.forEach((node) => {
-    //     mediaRule.append(node.clone());
-    //     node.remove();
-    // });
 
     atRule.replaceWith(mediaRule);
 }

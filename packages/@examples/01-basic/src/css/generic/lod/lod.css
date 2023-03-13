@@ -1,11 +1,13 @@
 .lod {
     position: fixed !important;
-    top: sugar.margin(40);
+    top: calc(100px);
     right: sugar.margin(30);
     z-index: 101;
     overflow: hidden;
     @sugar.border.radius;
     background: sugar.color(main, background, --darken 5);
+
+    display: none;
 
     @sugar.media mobile {
         display: none;

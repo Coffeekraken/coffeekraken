@@ -5,15 +5,6 @@ declare class postcssSugarPluginMediaMixinInterface extends __SInterface {
             type: string;
             required: boolean;
         };
-        containerName: {
-            type: string;
-            default: string;
-        };
-        method: {
-            type: string;
-            values: string[];
-            default: string;
-        };
     };
 }
 export { postcssSugarPluginMediaMixinInterface as interface };

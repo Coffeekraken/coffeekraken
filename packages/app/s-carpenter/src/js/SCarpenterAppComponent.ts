@@ -13,6 +13,7 @@ import __SCarpenterComponentInterface from './interface/SCarpenterComponentInter
 import {
     __injectStyle,
     __querySelectorLive,
+    __traverseUp,
     __whenIframeReady,
 } from '@coffeekraken/sugar/dom';
 
@@ -24,6 +25,7 @@ import { __injectIframeContent } from '@coffeekraken/sugar/dom';
 import __ajaxAdapter from './adapters/ajaxAdapter';
 
 // @ts-ignore
+import __websiteUiCss from '../css/s-carpenter-app-website-ui.css';
 // import __css from '../css/index.css';
 // import __css from '../../../../src/css/s-carpenter-component.css'; // relative to /dist/pkg/esm/js
 
@@ -164,6 +166,8 @@ export default class SCarpenterComponent extends __SLitComponent {
     _$editorIframe; // store the iframe in which the carpenter is inited if is one
     _$toolbar; // store the toolbar displayed on the website elements when hovering them
 
+    _$carpenterComponent; // store the reference to the "s-carpenter" component in the initial page
+
     _rootWindow;
     _$rootDocument;
 
@@ -214,6 +218,11 @@ export default class SCarpenterComponent extends __SLitComponent {
         this._$websiteDocument = this.props.window.document;
         this._websiteWindow = this.props.window;
 
+        // get the initial carpenter component
+        this._$carpenterComponent =
+            this._$rootDocument.querySelector('s-carpenter');
+        console.log('Carp', this._$carpenterComponent);
+
         // get the first s-spec element that we can find
         // or get the first item in the body
         // and set it to the state.$currentElement to be sure we have something to
@@ -237,38 +246,13 @@ export default class SCarpenterComponent extends __SLitComponent {
             );
         }
 
-        // const $backdrop = document.createElement('div');
-        // $backdrop.classList.add(this.utils.cls('_backdrop'));
-        // this.prepend($backdrop);
-        // $backdrop.addEventListener('pointerover', (e) => {
-        //     console.log('SS', e);
-        // });
-        // $backdrop.addEventListener('pointerout', (e) => {
-        //     console.log('OUT', e);
-        // });
-
         // handle media method
         await this._handleMediaMethod();
-
-        // create the toolbar element
-        this._initToolbar();
 
         // listen for escape key press to close editor
         __hotkey('escape').on('press', () => {
             this._closeEditor();
         });
-        __hotkey('escape', {
-            // from the website itself
-            element: this._$websiteDocument,
-        }).on('press', () => {
-            this._closeEditor();
-        });
-
-        // listen for toolbar actions
-        this._listenToolbarActions();
-
-        // watch for hover on carpenter elements
-        this._watchHoverOnSpecElements();
 
         // listen spec editor update
         this._listenSpecsEditorUpdate();
@@ -281,10 +265,89 @@ export default class SCarpenterComponent extends __SLitComponent {
         // handle "scrolled" class on the editor
         this._handleScrolledClassOnEditor();
 
+        await __wait(200);
+
         // Create UI placeholders
-        setTimeout(() => {
-            this._updateUiPlaceholders();
-        }, 200);
+        this._updateUiPlaceholders();
+
+        await __wait(2000);
+
+        // remove the "scrolling='no'" attribute on website iframe
+        this._$websiteIframe.removeAttribute('scrolling');
+
+        // reset the activate media
+        this.state.activeMedia && this._activateMedia(this.state.activeMedia);
+
+        // emit the "s-carpenter-app.ready" event in the root document
+        this._$rootDocument.dispatchEvent(
+            new CustomEvent('s-carpenter-app.ready', {
+                bubbles: true,
+                detail: this,
+            }),
+        );
+    }
+
+    /**
+     * Init the interactivity things on the iframed website.
+     * This contains things like the toolbar, the hover to display it, etc...
+     */
+    _initWebsiteIframeContent() {
+        // inject the scrollbat styling
+        __injectStyle(
+            `
+            body::-webkit-scrollbar {
+                width: 2px;
+                height: 2px;
+            }
+            body::-webkit-scrollbar-track {                
+                background-color: hsla(calc(var(--s-theme-color-accent-h, 0) + var(--s-theme-color-accent-spin ,0)),calc((var(--s-theme-color-accent-s, 0)) * 1%),calc((var(--s-theme-color-accent-l, 0)) * 1%),0.1);                                        
+            }
+            body::-webkit-scrollbar-thumb {
+                background-color: hsla(calc(var(--s-theme-color-accent-h, 0) + var(--s-theme-color-accent-spin ,0)),calc((var(--s-theme-color-accent-s, 0)) * 1%),calc((var(--s-theme-color-accent-l, 0)) * 1%),var(--s-theme-color-accent-a, 1));            
+            }
+            .s-wireframe body::-webkit-scrollbar-track{
+                background-color: rgba(0,0,0,0.05);
+            }  
+            ${__websiteUiCss}  
+        `,
+            {
+                rootNode: this._$websiteDocument.body,
+            },
+        );
+
+        // create the toolbar element
+        this._initToolbar();
+
+        // listen for toolbar actions
+        this._listenToolbarActions();
+
+        // watch for hover on carpenter elements
+        this._watchHoverOnSpecElements();
+
+        // listen for click on links in the iframe to close the editor
+        this._$websiteDocument.addEventListener('click', (e) => {
+            // check the clicked item
+            if (e.target.tagName === 'A' && e.target.hasAttribute('href')) {
+                this._closeEditor();
+                return;
+            }
+
+            // traverse up to see if clicked element is in a link
+            const $link = __traverseUp(
+                e.target,
+                ($elm) => $elm.tagName === 'A' && $elm.hasAttribute('href'),
+            );
+            if ($link) {
+                this._closeEditor();
+            }
+        });
+
+        __hotkey('escape', {
+            // from the website itself
+            element: this._$websiteDocument,
+        }).on('press', () => {
+            this._closeEditor();
+        });
     }
 
     /**
@@ -303,7 +366,7 @@ export default class SCarpenterComponent extends __SLitComponent {
             );
             let outTimeout,
                 isActive = false;
-            this._$uiPlaceholders.addEventListener('pointermove', (e) => {
+            this._$uiPlaceholders.addEventListener('pointerover', (e) => {
                 if (isActive) return;
                 isActive = true;
                 clearTimeout(outTimeout);
@@ -349,80 +412,86 @@ export default class SCarpenterComponent extends __SLitComponent {
      * It the method is "media", we need to wrap the website into an iframe to make the responsive preview work fine.
      */
     async _handleMediaMethod(): Promise<void> {
-        const mediaMethod = this._data.frontspec?.media?.method;
-        if (mediaMethod === 'container') {
-            // getting the viewport element
-            if (typeof this.props.viewportElm === HTMLElement) {
-                this._$websiteViewport = this.props.viewportElm;
-            } else if (typeof this.props.viewportElm === 'string') {
-                this._$websiteViewport =
-                    this._websiteWindow.document.querySelector(
-                        this.props.viewportElm,
-                    );
-            }
-        } else if (this._data.frontspec?.media?.queries) {
-            // create the wrapping iframe
-            this._$websiteIframe = document.createElement('iframe');
-            this._$websiteIframe.classList.add('s-carpenter_website-iframe');
+        // const mediaMethod = this._data.frontspec?.media?.method;
+        // if (fmediaMethod === 'container') {
+        //     // getting the viewport element
+        //     if (typeof this.props.viewportElm === HTMLElement) {
+        //         this._$websiteViewport = this.props.viewportElm;
+        //     } else if (typeof this.props.viewportElm === 'string') {
+        //         this._$websiteViewport =
+        //             this._websiteWindow.document.querySelector(
+        //                 this.props.viewportElm,
+        //             );
+        //     }
+        // } else if (this._data.frontspec?.media?.queries) {
+        // create the wrapping iframe
+        this._$websiteIframe = document.createElement('iframe');
+        this._$websiteIframe.classList.add('s-carpenter_website-iframe');
+        this._$websiteIframe.setAttribute('src', 'about:blank');
+        this._$websiteIframe.setAttribute('scrolling', 'no');
 
-            // get the actual page html to inject into the iframe
-            const html = this._$websiteDocument.documentElement.innerHTML;
+        // set the website viewport to be able to resize it using the media controls
+        this._$websiteViewport = this._$websiteIframe;
 
-            // prepend the website iframe in the body
-            this._$websiteDocument.body.prepend(this._$websiteIframe);
+        // get the actual page html to inject into the iframe
+        const html = this._$websiteDocument.documentElement.innerHTML;
+        const parser = new DOMParser();
+        const $html = parser.parseFromString(html, 'text/html');
 
-            // wait until the iframe is ready
+        // remove initial carpenter component
+        $html.querySelector('s-carpenter')?.remove?.();
+
+        // prepend the website iframe in the body
+        this._$websiteDocument.body.prepend(this._$websiteIframe);
+
+        // wait until the iframe is ready
+        await __whenIframeReady(this._$websiteIframe);
+
+        // injecting the whole website into the iframe
+        __injectIframeContent(
+            this._$websiteIframe,
+            $html.documentElement.innerHTML,
+        );
+
+        this._$websiteIframe.addEventListener('load', async (e) => {
             await __whenIframeReady(this._$websiteIframe);
 
-            // injecting the whole website into the iframe
-            __injectIframeContent(this._$websiteIframe, html);
+            // reset the toolbar
+            this._$toolbar = null;
 
-            // wait until the iframe is ready
-            await __whenIframeReady(this._$websiteIframe);
-
-            // empty the document of all the nodes
-            // unless the iframes
-            ['body'].forEach((container) => {
-                Array.from(
-                    this._$websiteDocument.querySelectorAll(`${container} > *`),
-                ).forEach((node) => {
-                    if (node.tagName?.toLowerCase?.() === 'iframe') {
-                        return;
-                    }
-                    node.remove();
-                });
-            });
+            // reset state
+            this.state.$currentElement = null;
+            this.state.$hoveredElement = null;
 
             // reset the _window and _$websiteDocument references
             this._websiteWindow = this._$websiteIframe.contentWindow;
             this._$websiteDocument =
                 this._$websiteIframe.contentWindow.document;
 
-            // the "viewport" is not the website iframe
-            this._$websiteViewport = this._$websiteIframe;
+            // init the interactivity in the website iframe
+            this._initWebsiteIframeContent();
+        });
 
-            // inject the scrollbat styling
-            __injectStyle(
-                `
-                body::-webkit-scrollbar {
-                    width: 2px;
-                    height: 2px;
+        // wait until the iframe is ready
+        await __whenIframeReady(this._$websiteIframe);
+
+        // empty the document of all the nodes
+        // unless the iframes
+        ['body'].forEach((container) => {
+            Array.from(
+                this._$websiteDocument.querySelectorAll(`${container} > *`),
+            ).forEach((node) => {
+                if (
+                    node.tagName?.toLowerCase?.() === 'iframe' ||
+                    node.tagName?.toLowerCase?.() === 's-carpenter'
+                ) {
+                    return;
                 }
-                body::-webkit-scrollbar-track {                
-                    background-color: hsla(calc(var(--s-theme-color-accent-h, 0) + var(--s-theme-color-accent-spin ,0)),calc((var(--s-theme-color-accent-s, 0)) * 1%),calc((var(--s-theme-color-accent-l, 0)) * 1%),0.1);                                        
-                }
-                body::-webkit-scrollbar-thumb {
-                    background-color: hsla(calc(var(--s-theme-color-accent-h, 0) + var(--s-theme-color-accent-spin ,0)),calc((var(--s-theme-color-accent-s, 0)) * 1%),calc((var(--s-theme-color-accent-l, 0)) * 1%),var(--s-theme-color-accent-a, 1));            
-                }
-                .s-wireframe body::-webkit-scrollbar-track{
-                    background-color: rgba(0,0,0,0.05);
-                }    
-            `,
-                {
-                    rootNode: this._$websiteDocument.body,
-                },
-            );
-        }
+                node.remove();
+            });
+        });
+
+        // }
     }
 
     /**
@@ -481,7 +550,7 @@ export default class SCarpenterComponent extends __SLitComponent {
                     this._positionToolbarOnElement(e.currentTarget);
 
                     // set the "pre" activate element
-                    this.state.hoveredElement = $elm;
+                    this.state.$hoveredElement = $elm;
 
                     // set the hovered dotpath
                     this.state.hoveredDotpath = $elm.getAttribute('s-specs');
@@ -539,11 +608,19 @@ export default class SCarpenterComponent extends __SLitComponent {
         }
         const $toolbar = this._$websiteDocument.createElement('div');
         $toolbar.classList.add('s-carpenter-toolbar');
+        $toolbar.setAttribute('s-carpenter-website-ui', 'true');
         this._$toolbar = $toolbar;
 
-        const $i = this._$websiteDocument.createElement('i');
-        $i.classList.add('fa-regular', 'fa-pen-to-square');
-        $toolbar.appendChild($i);
+        const html = `
+            <button s-carpenter-app-action="edit" class="s-carpenter-toolbar_edit">
+                <i class="fa-regular fa-pen-to-square"></i> <span>Edit</span>
+            </button>
+            <button s-carpenter-app-action="remove" class="s-carpenter-toolbar_remove">
+                <i class="fa-regular fa-trash-can"></i>
+            </button>
+        `;
+
+        this._$toolbar.innerHTML = html;
 
         // append toolbar to viewport
         this._$websiteDocument.body.appendChild($toolbar);
@@ -556,46 +633,60 @@ export default class SCarpenterComponent extends __SLitComponent {
      */
     _listenToolbarActions() {
         this._$toolbar.addEventListener('pointerup', async (e) => {
-            // do not activate 2 times the same element
-            if (
-                this.state.$currentElement.id?.trim() &&
-                this.state.$currentElement.id === this.state.$hoveredElement.id
-            ) {
-                this._openEditor();
-                return;
+            const action = e.target.getAttribute('s-carpenter-app-action');
+            switch (action) {
+                case 'edit':
+                    this._edit();
+                    break;
+                case 'remove':
+                    break;
             }
+        });
+    }
 
-            // force reset the specs editor
-            this.currentSpecs = null;
-            this.requestUpdate();
-            await __wait();
+    /**
+     * Edit an item
+     */
+    async _edit() {
+        // do not activate 2 times the same element
+        if (
+            this.state.$currentElement?.id?.trim() &&
+            this.state.$currentElement?.id === this.state.$hoveredElement?.id
+        ) {
+            this._openEditor();
+            return;
+        }
 
-            // try to get the spec from the data fetched at start
-            let potentialDotpath = this.state.hoveredDotpath;
+        // force reset the specs editor
+        this.currentSpecs = null;
+        this.requestUpdate();
+        await __wait();
+
+        // try to get the spec from the data fetched at start
+        let potentialDotpath = this.state.hoveredDotpath;
+        if (this._data.specsMap[potentialDotpath]) {
+            this.currentSpecs = this._data.specsMap[potentialDotpath];
+        } else {
+            potentialDotpath = `${potentialDotpath}.${
+                potentialDotpath.split('.').slice(-1)[0]
+            }`;
             if (this._data.specsMap[potentialDotpath]) {
                 this.currentSpecs = this._data.specsMap[potentialDotpath];
-            } else {
-                potentialDotpath = `${potentialDotpath}.${
-                    potentialDotpath.split('.').slice(-1)[0]
-                }`;
-                if (this._data.specsMap[potentialDotpath]) {
-                    this.currentSpecs = this._data.specsMap[potentialDotpath];
-                }
             }
+        }
 
-            if (!this.currentSpecs) {
-                return;
-            }
+        if (!this.currentSpecs) {
+            return;
+        }
 
-            // set the current element
-            this._setCurrentElement(this.state.$hoveredElement);
+        // set the current element
+        this._setCurrentElement(this.state.$hoveredElement);
 
-            // open the editor
-            this._openEditor();
+        // open the editor
+        this._openEditor();
 
-            // request new UI update
-            this.requestUpdate();
-        });
+        // request new UI update
+        this.requestUpdate();
     }
 
     /**
@@ -608,7 +699,7 @@ export default class SCarpenterComponent extends __SLitComponent {
         }
 
         // do not activate 2 times the same element
-        if (this.state.$currentElement.id === $elm.id) {
+        if (this.state.$currentElement?.id === $elm.id) {
             return;
         }
 
@@ -654,9 +745,19 @@ export default class SCarpenterComponent extends __SLitComponent {
         this._$toolbar.style.top = `${
             targetRect.top + this._websiteWindow.scrollY
         }px`;
-        this._$toolbar.style.left = `${
-            targetRect.left + targetRect.width + this._websiteWindow.scrollX
-        }px`;
+
+        let left =
+            targetRect.left + targetRect.width + this._websiteWindow.scrollX;
+        if (
+            targetRect.width >=
+            this._$rootDocument.documentElement.clientWidth - 20
+        ) {
+            left -= 300;
+        }
+
+        left -= 50;
+
+        this._$toolbar.style.left = `${left}px`;
     }
 
     /**

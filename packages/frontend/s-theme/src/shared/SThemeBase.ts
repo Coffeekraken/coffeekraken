@@ -13,6 +13,7 @@ import {
     __objectHash,
 } from '@coffeekraken/sugar/object';
 import __dashCase from '@coffeekraken/sugar/shared/string/dashCase';
+import { __parse } from '@coffeekraken/sugar/string';
 import __knownCssProperties from 'known-css-properties';
 
 /**
@@ -765,8 +766,9 @@ export default class SThemeBase extends __SEventEmitter {
             sortedMedia = Object.keys(mediaConfig.queries);
 
         const finalSettings: ISThemeBuildMediaQuerySettings = {
-            method: mediaConfig.method ?? 'container',
-            containerName: mediaConfig.containerName ?? 'viewport',
+            method: settings?.method ?? mediaConfig.method ?? 'media',
+            containerName:
+                settings?.containerName ?? mediaConfig.containerName ?? '',
         };
 
         const queryAr = queryString
@@ -806,15 +808,43 @@ export default class SThemeBase extends __SEventEmitter {
                 action = firstChar;
             }
 
-            const mediaQueryConfig = this.get('media.queries')[mediaName];
-            if (!mediaQueryConfig)
-                throw new Error(
-                    `<red>[postcssSugarPlugin.media]</red> Sorry but the requested media "<yellow>${mediaName}</yellow>" does not exists in the config. Here's the available medias: ${Object.keys(
-                        this.get('media.queries'),
-                    )
-                        .map((l) => `<green>${l}</green>`)
-                        .join(',')}`,
-                );
+            let mediaQueryConfig;
+
+            // parse the mediaName to check if it's a number
+            if (typeof __parse(mediaName) === 'number') {
+                switch (action) {
+                    case '>':
+                    case '>=':
+                        mediaQueryConfig = {
+                            minWidth: mediaName,
+                            maxWidth: null,
+                        };
+                        break;
+                    case '<':
+                    case '<=':
+                        mediaQueryConfig = {
+                            minWidth: null,
+                            maxWidth: mediaName,
+                        };
+                        break;
+                    case '=':
+                        mediaQueryConfig = {
+                            minWidth: mediaName,
+                            maxWidth: mediaName,
+                        };
+                        break;
+                }
+            } else {
+                mediaQueryConfig = this.get('media.queries')[mediaName];
+                if (!mediaQueryConfig)
+                    throw new Error(
+                        `<red>[postcssSugarPlugin.media]</red> Sorry but the requested media "<yellow>${mediaName}</yellow>" does not exists in the config. Here's the available medias: ${Object.keys(
+                            this.get('media.queries'),
+                        )
+                            .map((l) => `<green>${l}</green>`)
+                            .join(',')}`,
+                    );
+            }
 
             const queryList: string[] = [];
 

@@ -49,6 +49,10 @@
 
     .s-code-example_content {
         @sugar.depth (100);
+
+        @sugar.media.container '<=550' {
+            background: red !important;
+        }
     }
 
     .s-code-example_content .hljs {

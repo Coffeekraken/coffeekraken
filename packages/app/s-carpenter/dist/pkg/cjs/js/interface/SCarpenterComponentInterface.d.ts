@@ -19,6 +19,11 @@ export default class SCarpenterComponentInterface extends __SInterface {
             description: string;
             default: string;
         };
+        autoInit: {
+            type: string;
+            description: string;
+            default: boolean;
+        };
         specs: {
             type: string;
             description: string;

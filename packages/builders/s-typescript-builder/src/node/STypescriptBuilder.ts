@@ -8,7 +8,7 @@ import { __deepMerge } from '@coffeekraken/sugar/object';
 import {
     __packageCacheDir,
     __packageRootDir,
-    __srcRootDir
+    __srcRootDir,
 } from '@coffeekraken/sugar/path';
 import { __onProcessExit } from '@coffeekraken/sugar/process';
 import __currentModuleSystem from '@coffeekraken/sugar/shared/module/currentModuleSystem';
@@ -29,7 +29,7 @@ import * as __tsMorph from 'ts-morph';
  * @platform            node
  * @status              beta
  * @private
- * 
+ *
  * This class represent the typescript builder that you can use to build your .ts|js files
  * with a simple and efficient API.
  *
@@ -155,7 +155,9 @@ export default class STypescriptBuilder extends __SBuilder {
     ): Promise<ISTypescriptBuildTemporaryResult> {
         return new Promise(async (resolve) => {
             if (path.match(/\.ts$/)) {
-                const builder = new STypescriptBuilder(settings ?? {});
+                const builder = new STypescriptBuilder({
+                    ...(settings ?? {}),
+                });
 
                 let res;
 
@@ -529,17 +531,19 @@ export default class STypescriptBuilder extends __SBuilder {
                 filePath = __path.relative(packageRoot, file.path);
             }
 
-            // if (!params.silent) {
-            if (console.log !== global._console.log) {
-                console.log(
-                    `<yellow>[${
-                        new Date().toLocaleTimeString().split(' ')[0]
-                    }]</yellow> Compiling "<cyan>${filePath}</cyan>" to <yellow>${
-                        file.format
-                    }</yellow>:<magenta>${tsconfig.module ?? module}</magenta>`,
-                );
+            if (!params.silent) {
+                if (console.log !== global._console.log) {
+                    console.log(
+                        `<yellow>[${
+                            new Date().toLocaleTimeString().split(' ')[0]
+                        }]</yellow> Compiling "<cyan>${filePath}</cyan>" to <yellow>${
+                            file.format
+                        }</yellow>:<magenta>${
+                            tsconfig.module ?? module
+                        }</magenta>`,
+                    );
+                }
             }
-            // }
 
             let result = __ts.transpileModule(
                 source,

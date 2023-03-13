@@ -441,7 +441,7 @@ export default async function ({ root, sharedData, postcssApi, settings }) {
 
         if (atRule.params.startsWith('container')) {
             atRule.name = 'container';
-            atRule.params = atRule.params.replace(/^container\s/, '');
+            atRule.params = atRule.params.replace(/^container\s{1,99}/, '');
         }
 
         return;

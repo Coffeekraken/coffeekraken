@@ -269,10 +269,6 @@ export default function ({
     }
     const parentNode = atRule.parent;
 
-    // const higherRule = __higherRule(atRule);
-
-    // atRule.append(decls);
-
     atRule.replaceWith(decls);
 
     if (finalParams.scope.indexOf('bare') !== -1) {
@@ -286,38 +282,11 @@ export default function ({
                     grid-column-end: ${colsEndByArea[areaId] + 1};
                     grid-row-start: ${rowsStartByArea[areaId]};
                     grid-row-end: ${rowsEndByArea[areaId] + 1};
+
                 `).nodes,
             });
 
             parentNode.prepend(newRule);
-
-            // const newTree = __cloneTree(parentNode, {
-            //     empty: true,
-            // });
-            // higherRule.after(newTree);
-            // const rule = new postcssApi.Rule({
-            //     selectors: [selector],
-            //     nodes: postcssApi.parse(`
-            //         grid-column-start: ${colsStartByArea[areaId]};
-            //         grid-column-end: ${colsEndByArea[areaId] + 1};
-            //         grid-row-start: ${rowsStartByArea[areaId]};
-            //         grid-row-end: ${rowsEndByArea[areaId] + 1};
-            //     `).nodes,
-            // });
-            // if the parent node is not a simple rule with selector
-            // we handle the "&" inside the selector cause it will not being processed...
-            // @todo            Find a better solution for that...
-            // if (!parentNode.selector) {
-            // parentWithSelector.selector.split(',').forEach((parentSel) => {
-            //     if (!parentSel) return;
-            //     rule.selector = rule.selector.split(',').forEach((sel) => {
-            //         newSelectors.push(sel.replace(/\&/gm, parentSel));
-            //     });
-            // });
-            // rule.selector = newSelectors.join(',');
-            // // }
-            // add the new rule
-            // parentNode.append(rule);
         });
     }
 }

@@ -1,13 +1,7 @@
 import __SInterface from '@coffeekraken/s-interface';
 class postcssSugarPluginStateOutlineMixinInterface extends __SInterface {
     static get _definition() {
-        return {
-            where: {
-                type: 'String',
-                values: ['after', 'before', 'element'],
-                default: 'after',
-            },
-        };
+        return {};
     }
 }
 export { postcssSugarPluginStateOutlineMixinInterface as interface };
@@ -35,39 +29,21 @@ export { postcssSugarPluginStateOutlineMixinInterface as interface };
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 export default function ({ params, atRule, replaceWith, }) {
-    const finalParams = Object.assign({ where: 'after' }, (params !== null && params !== void 0 ? params : {}));
+    const finalParams = Object.assign({}, (params !== null && params !== void 0 ? params : {}));
     const vars = [];
-    let sel = `&:${finalParams.where}`;
-    if (finalParams.where === 'element')
-        sel = '&';
     vars.push(`
 
         @keyframes s-outline-in {
             from {
-                box-shadow: 0 0 0 0 sugar.color(current, --alpha 0.3);
+                outline: 0px solid sugar.color(current, --alpha 0);
             }
             to {
-                box-shadow: 0 0 0 sugar.theme(ui.outline.borderWidth) sugar.color(current, --alpha 0.3);
+                outline: 10px solid sugar.color(current, --alpha 0.1);
             }
         }
 
-        position: relative;
-        
-        ${sel} {
-            animation: s-outline-in sugar.theme(timing.default) sugar.theme(easing.default) forwards;
-            box-shadow: 0 0 0 0 sugar.color(current, --alpha 0.3);
-            
-            ${finalParams.where !== 'element'
-        ? `
-                border-radius: sugar.border.radius(ui.outline.borderRadius);
-                content: '';
-                position: absolute;
-                top: 0; left: 0;
-                width: 100%; height: 100%;
-            `
-        : ''}
-        }
+        animation: s-outline-in .1s ease-out forwards;    
     `);
     return vars;
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sWUFBWSxNQUFNLDJCQUEyQixDQUFDO0FBRXJELE1BQU0sNENBQTZDLFNBQVEsWUFBWTtJQUNuRSxNQUFNLEtBQUssV0FBVztRQUNsQixPQUFPO1lBQ0gsS0FBSyxFQUFFO2dCQUNILElBQUksRUFBRSxRQUFRO2dCQUNkLE1BQU0sRUFBRSxDQUFDLE9BQU8sRUFBRSxRQUFRLEVBQUUsU0FBUyxDQUFDO2dCQUN0QyxPQUFPLEVBQUUsT0FBTzthQUNuQjtTQUNKLENBQUM7SUFDTixDQUFDO0NBQ0o7QUFDRCxPQUFPLEVBQUUsNENBQTRDLElBQUksU0FBUyxFQUFFLENBQUM7QUFNckU7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0FzQkc7QUFDSCxNQUFNLENBQUMsT0FBTyxXQUFXLEVBQ3JCLE1BQU0sRUFDTixNQUFNLEVBQ04sV0FBVyxHQUtkO0lBQ0csTUFBTSxXQUFXLEdBQUcsZ0JBQ2hCLEtBQUssRUFBRSxPQUFPLElBQ1gsQ0FBQyxNQUFNLGFBQU4sTUFBTSxjQUFOLE1BQU0sR0FBSSxFQUFFLENBQUMsQ0FDcEIsQ0FBQztJQUVGLE1BQU0sSUFBSSxHQUFhLEVBQUUsQ0FBQztJQUUxQixJQUFJLEdBQUcsR0FBRyxLQUFLLFdBQVcsQ0FBQyxLQUFLLEVBQUUsQ0FBQztJQUNuQyxJQUFJLFdBQVcsQ0FBQyxLQUFLLEtBQUssU0FBUztRQUFFLEdBQUcsR0FBRyxHQUFHLENBQUM7SUFFL0MsSUFBSSxDQUFDLElBQUksQ0FBQzs7Ozs7Ozs7Ozs7OztVQWFKLEdBQUc7Ozs7Y0FLRyxXQUFXLENBQUMsS0FBSyxLQUFLLFNBQVM7UUFDM0IsQ0FBQyxDQUFDOzs7Ozs7YUFNVDtRQUNPLENBQUMsQ0FBQyxFQUNWOztLQUVQLENBQUMsQ0FBQztJQUVILE9BQU8sSUFBSSxDQUFDO0FBQ2hCLENBQUMifQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sWUFBWSxNQUFNLDJCQUEyQixDQUFDO0FBRXJELE1BQU0sNENBQTZDLFNBQVEsWUFBWTtJQUNuRSxNQUFNLEtBQUssV0FBVztRQUNsQixPQUFPLEVBQUUsQ0FBQztJQUNkLENBQUM7Q0FDSjtBQUNELE9BQU8sRUFBRSw0Q0FBNEMsSUFBSSxTQUFTLEVBQUUsQ0FBQztBQUlyRTs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQXNCRztBQUNILE1BQU0sQ0FBQyxPQUFPLFdBQVcsRUFDckIsTUFBTSxFQUNOLE1BQU0sRUFDTixXQUFXLEdBS2Q7SUFDRyxNQUFNLFdBQVcsR0FBRyxrQkFDYixDQUFDLE1BQU0sYUFBTixNQUFNLGNBQU4sTUFBTSxHQUFJLEVBQUUsQ0FBQyxDQUNwQixDQUFDO0lBRUYsTUFBTSxJQUFJLEdBQWEsRUFBRSxDQUFDO0lBRTFCLElBQUksQ0FBQyxJQUFJLENBQUM7Ozs7Ozs7Ozs7OztLQVlULENBQUMsQ0FBQztJQUVILE9BQU8sSUFBSSxDQUFDO0FBQ2hCLENBQUMifQ==

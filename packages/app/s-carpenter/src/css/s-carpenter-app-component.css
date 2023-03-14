@@ -73,87 +73,14 @@
             @sugar.scrollbar();
         }
     }
+}
 
-    .s-specs-editor_prop:not(.s-specs-editor_child .s-specs-editor_prop) {
-        /* padding-inline: sugar.padding(40); */
-    }
+.s-carpenter-app_editor.scrolled .s-specs-editor_metas {
+    padding-block: sugar.padding(20);
+    padding-inline: sugar.padding(20);
 
-    .s-specs-editor_prop {
-        padding-inline: sugar.padding(40);
-    }
-    .s-specs-editor_child-title {
-        padding-block-start: sugar.padding(30);
-        padding-inline: sugar.padding(40);
-        color: sugar.color(accent);
-    }
-    .s-specs-editor_child-description {
-        padding-block-end: sugar.padding(30);
-        padding-inline: sugar.padding(40);
-    }
-
-    .s-specs-editor_label {
-        margin-block-end: sugar.margin(20);
-
-        i {
-            opacity: 0.4;
-            @sugar.transition (fast);
-
-            &:hover {
-                opacity: 0.8;
-            }
-        }
-    }
-
-    .s-specs-editor_metas {
-        position: sticky;
-        z-index: 10;
-        top: 0;
-        left: 0;
-        width: 100%;
-        padding-block: sugar.padding(30);
-        margin-block-end: sugar.margin(30);
-        background-image: linear-gradient(
-            45deg,
-            sugar.color(main, background),
-            sugar.color(main, background, --lighten 5%)
-        );
-        @sugar.transition;
-        @sugar.depth (50);
-
-        &-title {
-            color: sugar.color(accent);
-            padding-inline: sugar.padding(30);
-        }
-
-        * {
-            @sugar.transition;
-            overflow: hidden;
-            opacity: 1;
-        }
-    }
-    .s-carpenter-app_editor.scrolled .s-specs-editor_metas {
-        padding-block: sugar.padding(20);
-
-        &-title {
-            font-size: sugar.font.size(40);
-        }
-
-        *:not(.s-typo--h3) {
-            opacity: 0;
-            height: 0;
-        }
-    }
-
-    .s-specs-editor_child {
-        /* padding: sugar.padding(40); */
-        /* background: sugar.color(main, background, --darken 5% --alpha 0.3); */
-
-        &:not(:first-child) {
-            margin-block-start: sugar.margin(40);
-        }
-        &:not(:last-child) {
-            margin-block-end: sugar.margin(40);
-        }
+    * {
+        @sugar.scale (0.8);
     }
 }
 

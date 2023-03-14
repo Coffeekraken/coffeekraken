@@ -52,6 +52,12 @@ export default class SSugarFeatureInterface extends __SInterface {
                 type: 'Boolean',
                 default: true,
             },
+            confirmBtn: {
+                description:
+                    'Specify if you want the "confirm button" feature to be enabled',
+                type: 'Boolean',
+                default: true,
+            },
             inputAdditionalAttributes: {
                 description:
                     'Specify if you want to have the additional attributes on inputs like "has-value", "empty" and "dirty" or not',

@@ -3,11 +3,12 @@ import __SFeature from '@coffeekraken/s-feature';
 import {
     __clearTransmations,
     __expandPleasantCssClassnamesLive,
-    __preventScrollRestoration
+    __preventScrollRestoration,
+    __querySelectorLive,
 } from '@coffeekraken/sugar/dom';
 import {
     __inputAdditionalAttributes,
-    __linksStateAttributes
+    __linksStateAttributes,
 } from '@coffeekraken/sugar/feature';
 import { __deepMerge } from '@coffeekraken/sugar/object';
 import __SSugarFeatureInterface from './interface/SSugarFeatureInterface';
@@ -67,16 +68,16 @@ export interface ISSugarFeatureProps {
  * @feature         Proxy the `history.pushState` method to make it dispatch an "pushstate" event with the actual state as detail
  *
  * @import          import { define as __SSugarFeatureDefine } from '@coffeekraken/s-sugar-feature';
- * 
+ *
  * @snippet         __SSugarFeatureDefine($1)
- * 
+ *
  * @install         js
  * import { define as __SSugarFeatureDefine } from '@coffeekraken/s-sugar-feature';
  * __SSugarFeatureDefine();
- * 
+ *
  * @install         bash
  * npm i @coffeekraken/s-form-validate-feature
- * 
+ *
  * @example         html        Simple usage        Simply add the `s-sugar` property on your body tag
  * <bodyTag s-sugar>
  *
@@ -133,6 +134,8 @@ export default class SSugarFeature extends __SFeature implements ISFeature {
         if (this.props.scrolled) this._scrolled();
         // vhvar
         if (this.props.vhvar) this._vhvar();
+        // confirm button
+        if (this.props.confirmBtn) this._confirmBtn();
         // resizeTransmations
         if (this.props.resizeTransmations) this._clearTransmationsOnResize();
         // inputAdditionalAttributes
@@ -202,6 +205,61 @@ export default class SSugarFeature extends __SFeature implements ISFeature {
         window.addEventListener('resize', () => {
             vh = window.innerHeight * 0.01;
             document.documentElement.style.setProperty('--vh', `${vh}px`);
+        });
+    }
+    _confirmBtn() {
+        __querySelectorLive('[confirm]', ($btn) => {
+            if ($btn.isConfirmed) {
+                return;
+            }
+
+            const confirmElmStyle = window.getComputedStyle($btn, ':after'),
+                confirmWidth = confirmElmStyle.width,
+                buttonElmStyle = window.getComputedStyle($btn),
+                buttonWidth = buttonElmStyle.width;
+
+            // set size
+            $btn.style.setProperty('--s-btn-confirm-width', buttonWidth);
+
+            $btn._isConfirmedStatus = undefined;
+            $btn.isConfirmed = () => {
+                return $btn._isConfirmedStatus === true;
+            };
+
+            $btn.addEventListener('pointerdown', (e) => {
+                if ($btn._isConfirmedStatus === undefined) {
+                    $btn._isConfirmedStatus = false;
+                    $btn.style.setProperty(
+                        '--s-btn-confirm-width',
+                        confirmWidth,
+                    );
+                } else if ($btn._isConfirmedStatus === false) {
+                    setTimeout(() => {
+                        $btn.style.setProperty(
+                            '--s-btn-confirm-width',
+                            buttonWidth,
+                        );
+                    }, 100);
+                    $btn._isConfirmedStatus = true;
+                }
+            });
+            $btn.addEventListener('blur', (e) => {
+                setTimeout(() => {
+                    $btn.style.setProperty(
+                        '--s-btn-confirm-width',
+                        buttonWidth,
+                    );
+                }, 100);
+                $btn._isConfirmedStatus = undefined;
+            });
+            $btn.addEventListener('pointerup', (e) => {
+                setTimeout(() => {
+                    if ($btn._isConfirmedStatus === true) {
+                        $btn.blur();
+                        $btn._isConfirmedStatus = undefined;
+                    }
+                });
+            });
         });
     }
 }

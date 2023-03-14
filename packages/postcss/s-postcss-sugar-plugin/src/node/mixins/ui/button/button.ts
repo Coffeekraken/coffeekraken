@@ -97,27 +97,59 @@ export default function ({
     // bare
     if (finalParams.scope.indexOf('bare') !== -1) {
         vars.push(`
-        font-size: sugar.scalable(1rem);
-        line-height: 1;
-        text-decoration: none !important;
-        position: relative;
-        display: inline-flex;
-        cursor: pointer;
-        user-select: none;
-        white-space: nowrap;
-        vertical-align: middle;
-        padding-inline: sugar.padding(ui.button.paddingInline);
-        padding-block: sugar.padding(ui.button.paddingBlock);
-        gap: sugar.margin(20);
-        align-items: center;
-        justify-content: center;
+          --s-btn-padding-inline: sugar.padding(ui.button.paddingInline);
+          --s-btn-padding-block: sugar.padding(ui.button.paddingBlock);
+          
+          --s-btn-confirm-width: auto;
 
-        --s-btn-padding-inline: sugar.padding(ui.button.paddingInline);
-        --s-btn-padding-block: sugar.padding(ui.button.paddingBlock);
+          font-size: sugar.scalable(1rem);
+          line-height: 1;
+          text-decoration: none !important;
+          position: relative;
+          display: inline-flex;
+          
+          cursor: pointer;
+          user-select: none;
+          white-space: nowrap;
+          vertical-align: middle;
+          padding-inline: sugar.padding(ui.button.paddingInline);
+          padding-block: sugar.padding(ui.button.paddingBlock);
+          gap: sugar.margin(20);
+          align-items: center;
+          justify-content: center;
 
-        & > * {
-          pointer-events: none;
-        }
+          & > * {
+            pointer-events: none;
+          }
+
+          &[confirm] {
+            width: var(--s-btn-confirm-width);
+
+            &:after {
+              content: attr(confirm);
+              position: absolute;
+              top: 0; left: 0;
+              width: var(--s-btn-confirm-width); height: 0;
+              overflow: hidden;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              @sugar.color(error);
+              transform: translateY(100%);
+              padding-inline: var(--s-btn-padding-inline);
+            }
+
+            &:focus,
+            &:focus-within {
+
+              &:after {
+                height: 100%;
+                transform: translateY(0);
+              }
+            }
+
+          }
+
     `);
     }
 
@@ -127,6 +159,10 @@ export default function ({
           font-size: sugar.scalable(1rem);
           text-decoration: none;
           @sugar.shape;
+
+          &:after {
+            @sugar.shape;
+          }
         `);
 
         switch (finalParams.lnf) {
@@ -247,8 +283,11 @@ export default function ({
                   background-color: sugar.color(current);
                   border: sugar.color(current, border) solid sugar.theme(ui.button.borderWidth);
                   color: sugar.color(current, foreground) !important;
+                  @sugar.transition (fast);
 
-                  &:hover, &:focus {
+                  &:hover,
+                  &:focus,
+                  &:focus-within {
                     background-color: sugar.color(current, --darken 6);
                     color: sugar.color(current, foreground) !important;
 
@@ -256,16 +295,36 @@ export default function ({
                       background-color: sugar.color(current, --lighten 6);
                     }
                   }
+
+                  &[confirm] {
+
+                    &:after {
+                      background-color: sugar.color(current);
+                      color: sugar.color(current, foreground) !important;
+                      @sugar.transition (fast);
+                      color: white !important;
+                    }
+
+                    &:hover,
+                    &:focus,
+                    &:focus-within {
+
+                      &:after {
+                        color: sugar.color(current, foreground) !important;
+                      }
+                    }
+
+                  }
         `);
                 break;
         }
 
         // outline
-        vars.push(`
-              &:focus:not(:hover) {
-                @sugar.outline;
-              }
-          `);
+        // vars.push(`
+        //       &:focus:not(:hover) {
+        //         @sugar.outline;
+        //       }
+        //   `);
     }
 
     // wireframe

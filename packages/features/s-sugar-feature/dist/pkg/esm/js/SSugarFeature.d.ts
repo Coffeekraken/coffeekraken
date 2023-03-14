@@ -23,5 +23,6 @@ export default class SSugarFeature extends __SFeature implements ISFeature {
     _pleasantCss(): void;
     _scrolled(): void;
     _vhvar(): void;
+    _confirmBtn(): void;
 }
 export { __define as define };

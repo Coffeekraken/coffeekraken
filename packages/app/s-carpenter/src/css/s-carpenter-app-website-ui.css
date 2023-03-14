@@ -8,6 +8,7 @@
     background: sugar.color(main, background);
     color: sugar.color(main, text);
     display: inline-flex;
+    padding: sugar.padding(20);
     flex-wrap: nowrap;
     align-items: center;
     transform: translateX(-100%) translateY(-50%) scale(1);
@@ -15,7 +16,7 @@
     opacity: 0;
     cursor: pointer;
     user-select: none;
-    @sugar.border.radius();
+    @sugar.border.radius (30);
     @sugar.depth (100);
     @sugar.transition (fast);
 
@@ -29,27 +30,36 @@
         padding-block: sugar.padding(20);
         white-space: nowrap;
         @sugar.border.radius;
+        @sugar.ui.button();
 
-        &:not(:has(span)) i {
-            font-size: 1.15em;
+        color: sugar.color(main, text) !important;
+        background-color: transparent;
+        border-width: 0;
+
+        &:not(:hover):not(:last-child) {
+            border-right: solid 1px sugar.color(main, border);
         }
 
-        &:last-child {
+        /* &:not(:has(span)) i {
+            font-size: 1.15em;
+        } */
+
+        /* &:last-child {
             border-top-left-radius: 0 !important;
             border-bottom-left-radius: 0 !important;
         }
         &:first-child {
             border-top-right-radius: 0 !important;
             border-bottom-right-radius: 0 !important;
-        }
+        } */
 
-        &:hover {
+        /* &:hover {
             background-color: sugar.color(main);
             color: sugar.color(main, foreground);
-        }
+        } */
 
         &:not(:last-child) {
-            border-right: 1px solid sugar.color(main, border);
+            /* border-right: 1px solid sugar.color(main, border); */
         }
 
         * {

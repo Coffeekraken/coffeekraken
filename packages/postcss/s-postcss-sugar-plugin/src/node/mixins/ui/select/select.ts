@@ -16,7 +16,7 @@ import __STheme from '@coffeekraken/s-theme';
  * @return      {String}            The generated css
  *
  * @snippet         @sugar.ui.select
- * 
+ *
  * @example     css
  * .my-select {
  *    @sugar.ui.select;
@@ -82,6 +82,14 @@ export default function ({
     }
 
     if (finalParams.scope.indexOf('lnf') !== -1) {
+        if (finalParams.outline) {
+            vars.push(`
+                &:focus:not(:hover) {
+                    @sugar.outline;
+                }
+            `);
+        }
+
         vars.push(`
             @sugar.ui.base(select, $scope: lnf);
             @sugar.shape();

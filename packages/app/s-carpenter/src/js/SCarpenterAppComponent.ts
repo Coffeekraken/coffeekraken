@@ -615,7 +615,7 @@ export default class SCarpenterComponent extends __SLitComponent {
             <button s-carpenter-app-action="edit" class="s-carpenter-toolbar_edit">
                 <i class="fa-regular fa-pen-to-square"></i> <span>Edit</span>
             </button>
-            <button s-carpenter-app-action="remove" class="s-carpenter-toolbar_remove">
+            <button s-carpenter-app-action="remove" class="s-carpenter-toolbar_remove" confirm="Confirm?">
                 <i class="fa-regular fa-trash-can"></i>
             </button>
         `;
@@ -634,6 +634,9 @@ export default class SCarpenterComponent extends __SLitComponent {
     _listenToolbarActions() {
         this._$toolbar.addEventListener('pointerup', async (e) => {
             const action = e.target.getAttribute('s-carpenter-app-action');
+            if (e.target.isConfirmed && !e.target.isConfirmed()) {
+                return;
+            }
             switch (action) {
                 case 'edit':
                     this._edit();

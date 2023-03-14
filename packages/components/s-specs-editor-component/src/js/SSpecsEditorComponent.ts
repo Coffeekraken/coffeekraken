@@ -297,6 +297,20 @@ export default class SSpecsEditorComponent extends __SLitComponent {
         return this._widgets[type];
     }
 
+    /**
+     * Save the data.
+     * This will dispatch en event "s-specs-editor.save" with as detail the current values object
+     */
+    save(): void {
+        this.utils.dispatchEvent('save', {
+            bubbles: true,
+            detail: {
+                propsSpecs: Object.assign({}, this.props.specs),
+                values: Object.assign({}, this.props.specs.values),
+            },
+        });
+    }
+
     _update(path: string[], propSpecs: any = null, e: any = null) {
         // value path
         const valuePath = path.filter((v) => v !== 'props').join('.');
@@ -443,9 +457,7 @@ export default class SSpecsEditorComponent extends __SLitComponent {
                                                             )}"
                                                         >
                                                             <button
-                                                                class="${this.utils.cls(
-                                                                    '_action',
-                                                                )}"
+                                                                class="_action"
                                                                 @pointerup=${() =>
                                                                     this.clearValueFromPath(
                                                                         path,
@@ -745,12 +757,7 @@ export default class SSpecsEditorComponent extends __SLitComponent {
                     ? html`
                           <div class="${this.utils.cls('_root')}">
                               <div class="${this.utils.cls('_metas')}">
-                                  <h3
-                                      class="${this.utils.cls(
-                                          '_metas-title',
-                                          's-typo--h3',
-                                      )}"
-                                  >
+                                  <h3 class="_title s-typo--h3">
                                       ${this.props.specs.title}
                                   </h3>
                                   <!-- <p
@@ -761,6 +768,28 @@ export default class SSpecsEditorComponent extends __SLitComponent {
                                   >
                                       ${this.props.specs.description}
                                   </p> -->
+
+                                  <nav class="_actions">
+                                      <button
+                                          class="_action _action-save"
+                                          @click=${() => {
+                                              this.save();
+                                          }}
+                                      >
+                                          Save
+                                      </button>
+                                      <button
+                                          class="_action _action-delete"
+                                          confirm="Confirm?"
+                                          @click=${() => {
+                                              this.save();
+                                          }}
+                                      >
+                                          <i
+                                              class="fa-regular fa-trash-can"
+                                          ></i>
+                                      </button>
+                                  </nav>
                               </div>
                               ${this._renderElements(this.props.specs, [])}
                           </div>

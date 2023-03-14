@@ -16,7 +16,7 @@ import __STheme from '@coffeekraken/s-theme';
  * @return      {String}            The generated css
  *
  * @snippet         @sugar.ui.input
- * 
+ *
  * @example     css
  * .my-input {
  *    @sugar.ui.input;
@@ -79,8 +79,10 @@ export default function ({
     if (finalParams.scope.indexOf('lnf') !== -1) {
         if (finalParams.outline) {
             vars.push(`
-            @sugar.outline;
-`);
+                &:focus:not(:hover) {
+                    @sugar.outline;
+                }
+            `);
         }
 
         vars.push(`

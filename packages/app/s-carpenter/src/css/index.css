@@ -126,11 +126,3 @@ div[component] {
         }
     }
 }
-
-.s-specs-editor_prop:has(> div) {
-    padding-block: sugar.padding(20);
-
-    &.s-specs-editor_prop-checkbox {
-        border-bottom: 1px solid sugar.color(main, surface, --darken 5%);
-    }
-}

@@ -7,13 +7,7 @@ exports.interface = void 0;
 const s_interface_1 = __importDefault(require("@coffeekraken/s-interface"));
 class postcssSugarPluginStateOutlineMixinInterface extends s_interface_1.default {
     static get _definition() {
-        return {
-            where: {
-                type: 'String',
-                values: ['after', 'before', 'element'],
-                default: 'after',
-            },
-        };
+        return {};
     }
 }
 exports.interface = postcssSugarPluginStateOutlineMixinInterface;
@@ -41,40 +35,22 @@ exports.interface = postcssSugarPluginStateOutlineMixinInterface;
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 function default_1({ params, atRule, replaceWith, }) {
-    const finalParams = Object.assign({ where: 'after' }, (params !== null && params !== void 0 ? params : {}));
+    const finalParams = Object.assign({}, (params !== null && params !== void 0 ? params : {}));
     const vars = [];
-    let sel = `&:${finalParams.where}`;
-    if (finalParams.where === 'element')
-        sel = '&';
     vars.push(`
 
         @keyframes s-outline-in {
             from {
-                box-shadow: 0 0 0 0 sugar.color(current, --alpha 0.3);
+                outline: 0px solid sugar.color(current, --alpha 0);
             }
             to {
-                box-shadow: 0 0 0 sugar.theme(ui.outline.borderWidth) sugar.color(current, --alpha 0.3);
+                outline: 10px solid sugar.color(current, --alpha 0.1);
             }
         }
 
-        position: relative;
-        
-        ${sel} {
-            animation: s-outline-in sugar.theme(timing.default) sugar.theme(easing.default) forwards;
-            box-shadow: 0 0 0 0 sugar.color(current, --alpha 0.3);
-            
-            ${finalParams.where !== 'element'
-        ? `
-                border-radius: sugar.border.radius(ui.outline.borderRadius);
-                content: '';
-                position: absolute;
-                top: 0; left: 0;
-                width: 100%; height: 100%;
-            `
-        : ''}
-        }
+        animation: s-outline-in .1s ease-out forwards;    
     `);
     return vars;
 }
 exports.default = default_1;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7OztBQUFBLDRFQUFxRDtBQUVyRCxNQUFNLDRDQUE2QyxTQUFRLHFCQUFZO0lBQ25FLE1BQU0sS0FBSyxXQUFXO1FBQ2xCLE9BQU87WUFDSCxLQUFLLEVBQUU7Z0JBQ0gsSUFBSSxFQUFFLFFBQVE7Z0JBQ2QsTUFBTSxFQUFFLENBQUMsT0FBTyxFQUFFLFFBQVEsRUFBRSxTQUFTLENBQUM7Z0JBQ3RDLE9BQU8sRUFBRSxPQUFPO2FBQ25CO1NBQ0osQ0FBQztJQUNOLENBQUM7Q0FDSjtBQUN3RCxpRUFBUztBQU1sRTs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQXNCRztBQUNILG1CQUF5QixFQUNyQixNQUFNLEVBQ04sTUFBTSxFQUNOLFdBQVcsR0FLZDtJQUNHLE1BQU0sV0FBVyxHQUFHLGdCQUNoQixLQUFLLEVBQUUsT0FBTyxJQUNYLENBQUMsTUFBTSxhQUFOLE1BQU0sY0FBTixNQUFNLEdBQUksRUFBRSxDQUFDLENBQ3BCLENBQUM7SUFFRixNQUFNLElBQUksR0FBYSxFQUFFLENBQUM7SUFFMUIsSUFBSSxHQUFHLEdBQUcsS0FBSyxXQUFXLENBQUMsS0FBSyxFQUFFLENBQUM7SUFDbkMsSUFBSSxXQUFXLENBQUMsS0FBSyxLQUFLLFNBQVM7UUFBRSxHQUFHLEdBQUcsR0FBRyxDQUFDO0lBRS9DLElBQUksQ0FBQyxJQUFJLENBQUM7Ozs7Ozs7Ozs7Ozs7VUFhSixHQUFHOzs7O2NBS0csV0FBVyxDQUFDLEtBQUssS0FBSyxTQUFTO1FBQzNCLENBQUMsQ0FBQzs7Ozs7O2FBTVQ7UUFDTyxDQUFDLENBQUMsRUFDVjs7S0FFUCxDQUFDLENBQUM7SUFFSCxPQUFPLElBQUksQ0FBQztBQUNoQixDQUFDO0FBbkRELDRCQW1EQyJ9
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7OztBQUFBLDRFQUFxRDtBQUVyRCxNQUFNLDRDQUE2QyxTQUFRLHFCQUFZO0lBQ25FLE1BQU0sS0FBSyxXQUFXO1FBQ2xCLE9BQU8sRUFBRSxDQUFDO0lBQ2QsQ0FBQztDQUNKO0FBQ3dELGlFQUFTO0FBSWxFOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBc0JHO0FBQ0gsbUJBQXlCLEVBQ3JCLE1BQU0sRUFDTixNQUFNLEVBQ04sV0FBVyxHQUtkO0lBQ0csTUFBTSxXQUFXLEdBQUcsa0JBQ2IsQ0FBQyxNQUFNLGFBQU4sTUFBTSxjQUFOLE1BQU0sR0FBSSxFQUFFLENBQUMsQ0FDcEIsQ0FBQztJQUVGLE1BQU0sSUFBSSxHQUFhLEVBQUUsQ0FBQztJQUUxQixJQUFJLENBQUMsSUFBSSxDQUFDOzs7Ozs7Ozs7Ozs7S0FZVCxDQUFDLENBQUM7SUFFSCxPQUFPLElBQUksQ0FBQztBQUNoQixDQUFDO0FBOUJELDRCQThCQyJ9

@@ -1,24 +1,10 @@
 {
     "type": "Object",
+    "widget": "Spaces",
     "title": "Padding",
     "description": "Specify the paddings you want around your layout",
     "responsive": true,
     "props": {
-        "all": {
-            "extends": "sugar.views.props.space",
-            "title": "All sides",
-            "description": "Specify the margin (top, bottom, right and left)"
-        },
-        "block": {
-            "extends": "sugar.views.props.space",
-            "title": "Block",
-            "description": "Specify the padding block (top, bottom)"
-        },
-        "inline": {
-            "extends": "sugar.views.props.space",
-            "title": "Inline",
-            "description": "Specify the padding inkine (left, right)"
-        },
         "blockStart": {
             "extends": "sugar.views.props.space",
             "title": "Block start",

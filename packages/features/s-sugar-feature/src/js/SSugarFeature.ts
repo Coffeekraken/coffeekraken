@@ -1,5 +1,6 @@
 import type { ISFeature } from '@coffeekraken/s-feature';
 import __SFeature from '@coffeekraken/s-feature';
+import { __wait } from '@coffeekraken/sugar/datetime';
 import {
     __clearTransmations,
     __expandPleasantCssClassnamesLive,
@@ -208,23 +209,27 @@ export default class SSugarFeature extends __SFeature implements ISFeature {
         });
     }
     _confirmBtn() {
-        __querySelectorLive('[confirm]', ($btn) => {
+        __querySelectorLive('[confirm]', async ($btn) => {
             if ($btn.isConfirmed) {
                 return;
             }
-
-            const confirmElmStyle = window.getComputedStyle($btn, ':after'),
-                confirmWidth = confirmElmStyle.width,
-                buttonElmStyle = window.getComputedStyle($btn),
-                buttonWidth = buttonElmStyle.width;
-
-            // set size
-            $btn.style.setProperty('--s-btn-confirm-width', buttonWidth);
-
             $btn._isConfirmedStatus = undefined;
             $btn.isConfirmed = () => {
                 return $btn._isConfirmedStatus === true;
             };
+
+            let isFirstClick = true;
+
+            await __wait(100); // avoid css issues
+
+            const buttonElmStyle = window.getComputedStyle($btn),
+                buttonWidth = buttonElmStyle.width;
+
+            const confirmElmStyle = window.getComputedStyle($btn, ':after'),
+                confirmWidth = `${parseInt(confirmElmStyle.width) + 10}px`; // add 4 just in case
+
+            // set size
+            $btn.style.setProperty('--s-btn-confirm-width', buttonWidth);
 
             $btn.addEventListener('pointerdown', (e) => {
                 if ($btn._isConfirmedStatus === undefined) {

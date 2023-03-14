@@ -19,6 +19,7 @@ import __css from '../../../../src/css/s-specs-editor-component.css'; // relativ
 import __define from './define';
 
 import __imageWidget from './widgets/imageWidget';
+import __spacesWidget from './widgets/spacesWidget';
 
 // components
 __SDropzoneComponentDefine();
@@ -115,6 +116,7 @@ export default class SSpecsEditorComponent extends __SLitComponent {
 
     static widgetMap = {
         image: __imageWidget,
+        spaces: __spacesWidget,
     };
 
     static get styles() {
@@ -579,13 +581,17 @@ export default class SSpecsEditorComponent extends __SLitComponent {
     /**
      * Render the proper widget depending on the "type" propObj property
      */
-    _renderEditWidget(propObj, path) {
-        const type = propObj.type.toLowerCase(),
+    _getRenderedWidget(propObj, path) {
+        const type =
+                propObj.widget?.toLowerCase?.() ?? propObj.type.toLowerCase(),
             widget = this.getWidget(type);
         if (!widget) {
-            return '';
+            return;
         }
-        return widget.html(propObj, this.getValueFromPath(path) ?? {});
+        return {
+            hideOriginals: widget.hideOriginals,
+            html: widget.html(propObj, this.getValueFromPath(path) ?? {}),
+        };
     }
 
     _renderElement(propObj, path) {
@@ -695,6 +701,11 @@ export default class SSpecsEditorComponent extends __SLitComponent {
                 ${Object.keys(_specs.props).map((prop) => {
                     const propObj = _specs.props[prop];
                     if (propObj.props) {
+                        const renderedWidget = this._getRenderedWidget(
+                            propObj,
+                            !forceNoRepeat ? [...path, 'props', prop] : path,
+                        );
+
                         return html`
                             <div class="${this.utils.cls('_child')}">
                                 <h3
@@ -714,17 +725,21 @@ export default class SSpecsEditorComponent extends __SLitComponent {
                                     ${propObj.description}
                                 </p>
 
-                                ${this._renderEditWidget(
-                                    propObj,
-                                    !forceNoRepeat
-                                        ? [...path, 'props', prop]
-                                        : path,
-                                )}
-                                ${this._renderElements(
-                                    propObj,
-                                    [...path, 'props', prop],
-                                    forceNoRepeat,
-                                )}
+                                ${renderedWidget
+                                    ? html` ${renderedWidget.html} `
+                                    : ''}
+
+                                <div
+                                    style="display: ${renderedWidget?.hideOriginals
+                                        ? 'none'
+                                        : 'block'}"
+                                >
+                                    ${this._renderElements(
+                                        propObj,
+                                        [...path, 'props', prop],
+                                        forceNoRepeat,
+                                    )}
+                                </div>
                             </div>
                         `;
                     } else {

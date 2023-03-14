@@ -93,34 +93,60 @@
     background: transparent;
 }
 
-.s-carpenter-app_media {
+@keyframes s-carpenter-controls-in {
+    from {
+        opacity: 0;
+        transform: translate(
+            -50%,
+            calc(var(--s-carpenter-media-bottom) + 100%)
+        );
+    }
+    to {
+        opacity: 1;
+        transform: translate(-50%, 0);
+    }
+}
+
+.s-carpenter-app_controls {
     position: absolute;
+    z-index: 99999;
     bottom: var(--s-carpenter-media-bottom);
-    background: blue;
     left: var(--s-carpenter-media-left);
     transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    gap: sugar.margin(30);
+    background: sugar.color(main, background);
+    padding: sugar.padding(20);
     pointer-events: all !important;
+    animation: s-carpenter-controls-in 0.3s ease-out forwards;
+    @sugar.border.radius (30);
     @sugar.depth (100);
-    @sugar.transition();
 
-    .s-carpenter-app_queries {
-        background: sugar.color(main, background);
-        border-bottom-left-radius: sugar.border.radius();
+    ._save {
+        @sugar.ui.button();
+        @sugar.color (complementary);
         @sugar.depth (100);
-
-        .s-carpenter-app_query i {
-            margin-inline-end: sugar.margin(10);
-        }
-
-        /* .s-carpenter-app_query {
-            background: sugar.color(main, surface);
-            padding: sugar.padding(30) sugar.padding(40);
-            @sugar.transition (fast);
-
-            &:hover {
-                background: sugar.color(accent);
-                color: sugar.color(accent, foreground);
-            }
-        } */
     }
+}
+
+.s-carpenter-app_queries {
+    background: sugar.color(main, background) !important;
+    border-bottom-left-radius: sugar.border.radius();
+    @sugar.depth (100);
+
+    ._query i {
+        margin-inline-end: sugar.margin(10);
+    }
+
+    /* .s-carpenter-app_query {
+        background: sugar.color(main, surface);
+        padding: sugar.padding(30) sugar.padding(40);
+        @sugar.transition (fast);
+
+        &:hover {
+            background: sugar.color(accent);
+            color: sugar.color(accent, foreground);
+        }
+    } */
 }

@@ -27,13 +27,13 @@
 
         ._actions {
             display: flex;
-            /* gap: sugar.margin(10); */
+            gap: sugar.margin(10);
 
             ._action {
             }
             ._action-save {
                 @sugar.ui.button();
-                @sugar.color (accent);
+                @sugar.color (complementary);
             }
             ._action-delete {
                 @sugar.ui.button ($lnf: text);

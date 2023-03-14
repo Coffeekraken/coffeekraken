@@ -111,7 +111,7 @@ export default class SCarpenterComponent extends __SLitComponent {
             this.state.status = 'ready';
             setTimeout(() => {
                 this.remove();
-            }, 3000);
+            }, 1000);
         });
 
         // manage to add the iframe inside the body

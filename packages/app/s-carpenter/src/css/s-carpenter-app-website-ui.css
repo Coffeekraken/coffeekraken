@@ -25,6 +25,19 @@
             translateY(calc(sugar.margin(10) * -1)) scale(1.2);
     } */
 
+    &:after {
+        content: ' ';
+        position: absolute;
+        border-style: default;
+        border-color: sugar.color(main, background) transparent transparent
+            transparent;
+        top: 100%;
+        left: 35%;
+        margin-left: calc(25px * -1 / 2);
+        border-width: calc(25px / 2);
+        transform: skewX(-30deg);
+    }
+
     button {
         padding-inline: sugar.padding(20);
         padding-block: sugar.padding(20);

@@ -20,6 +20,7 @@
         "@coffeekraken/s-specs": "^2.0.0-alpha.25",
         "@coffeekraken/s-specs-editor-component": "^2.0.0-alpha.25",
         "@coffeekraken/s-sugar-config": "^2.0.0-alpha.25",
+        "@coffeekraken/s-sugar-feature": "^2.0.0-alpha.25",
         "@coffeekraken/s-view-renderer": "^2.0.0-alpha.25",
         "@coffeekraken/sugar": "^2.0.0-alpha.25",
         "@vitejs/plugin-vue": "^3.1.2",

@@ -87,7 +87,7 @@ class SCarpenterComponent extends s_lit_component_1.default {
                 this.state.status = 'ready';
                 setTimeout(() => {
                     this.remove();
-                }, 3000);
+                }, 1000);
             });
             // manage to add the iframe inside the body
             // alongside with the s-carpenter component

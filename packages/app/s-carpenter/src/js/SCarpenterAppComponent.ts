@@ -1,6 +1,7 @@
 import __SLitComponent from '@coffeekraken/s-lit-component';
 
 import { define as __sSpecsEditorComponentDefine } from '@coffeekraken/s-specs-editor-component';
+import { define as __sSugarFeatureDefine } from '@coffeekraken/s-sugar-feature';
 
 import { __wait } from '@coffeekraken/sugar/datetime';
 import { __hotkey } from '@coffeekraken/sugar/keyboard';
@@ -50,8 +51,10 @@ export interface ISCarpenterAèèComponentProps {
     icons: ISCarpenterAppComponentIconsProp;
 }
 
-// define components
+// define components/features
 __sSpecsEditorComponentDefine();
+document.body.setAttribute('s-sugar', 'true');
+__sSugarFeatureDefine();
 
 /**
  * @name                SCarpenterComponent
@@ -265,12 +268,10 @@ export default class SCarpenterComponent extends __SLitComponent {
         // handle "scrolled" class on the editor
         this._handleScrolledClassOnEditor();
 
-        await __wait(200);
+        await __wait(2000);
 
         // Create UI placeholders
         this._updateUiPlaceholders();
-
-        await __wait(2000);
 
         // remove the "scrolling='no'" attribute on website iframe
         this._$websiteIframe.removeAttribute('scrolling');
@@ -576,6 +577,13 @@ export default class SCarpenterComponent extends __SLitComponent {
     }
 
     /**
+     * Check if editor is opened
+     */
+    isEditorOpen(): boolean {
+        return document.body.classList.contains('s-carpenter-app--open');
+    }
+
+    /**
      * open the editor
      */
     _openEditor() {
@@ -634,6 +642,9 @@ export default class SCarpenterComponent extends __SLitComponent {
     _listenToolbarActions() {
         this._$toolbar.addEventListener('pointerup', async (e) => {
             const action = e.target.getAttribute('s-carpenter-app-action');
+            if (e.target.isConfirmed) {
+                console.log('Confirmeeeeee', e.target.isConfirmed());
+            }
             if (e.target.isConfirmed && !e.target.isConfirmed()) {
                 return;
             }
@@ -751,9 +762,15 @@ export default class SCarpenterComponent extends __SLitComponent {
 
         let left =
             targetRect.left + targetRect.width + this._websiteWindow.scrollX;
+
         if (
-            targetRect.width >=
-            this._$rootDocument.documentElement.clientWidth - 20
+            this.isEditorOpen() &&
+            left >= this._$rootDocument.documentElement.clientWidth - 400
+        ) {
+            left -= 500;
+        } else if (
+            targetRect.left + targetRect.width >=
+            this._$rootDocument.documentElement.clientWidth - 50
         ) {
             left -= 300;
         }
@@ -1007,7 +1024,7 @@ export default class SCarpenterComponent extends __SLitComponent {
 
             ${this._data.frontspec?.media?.queries
                 ? html`
-                      <nav class="${this.utils.cls('_media')}" s-ui>
+                      <nav class="${this.utils.cls('_controls')}" s-ui>
                           <ul
                               class="${this.utils.cls(
                                   '_queries',
@@ -1025,9 +1042,7 @@ export default class SCarpenterComponent extends __SLitComponent {
                                           class="s-color s-color--accent ${query ===
                                           this.state.activeMedia
                                               ? 'active'
-                                              : ''} ${this.utils.cls(
-                                              '_query _item',
-                                          )}"
+                                              : ''} _query _item"
                                       >
                                           ${unsafeHTML(this.props.specs[query])}
                                           ${__upperFirst(query)}
@@ -1035,6 +1050,8 @@ export default class SCarpenterComponent extends __SLitComponent {
                                   `;
                               })}
                           </ul>
+
+                          <button class="_save">Save page</button>
                       </nav>
                   `
                 : ''}

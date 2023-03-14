@@ -123,19 +123,20 @@ export default function ({
           }
 
           &[confirm] {
-            width: var(--s-btn-confirm-width);
+            width: calc(var(--s-btn-confirm-width) * var(--s-scale, 1));
 
             &:after {
               content: attr(confirm);
               position: absolute;
               top: 0; left: 0;
-              width: var(--s-btn-confirm-width); height: 0;
+              width: calc(var(--s-btn-confirm-width) * var(--s-scale, 1));
+              height: 0;
               overflow: hidden;
               display: flex;
               align-items: center;
               justify-content: center;
-              @sugar.color(error);
               transform: translateY(100%);
+              pointer-events: none;
               padding-inline: var(--s-btn-padding-inline);
             }
 
@@ -283,7 +284,6 @@ export default function ({
                   background-color: sugar.color(current);
                   border: sugar.color(current, border) solid sugar.theme(ui.button.borderWidth);
                   color: sugar.color(current, foreground) !important;
-                  @sugar.transition (fast);
 
                   &:hover,
                   &:focus,
@@ -295,36 +295,40 @@ export default function ({
                       background-color: sugar.color(current, --lighten 6);
                     }
                   }
-
-                  &[confirm] {
-
-                    &:after {
-                      background-color: sugar.color(current);
-                      color: sugar.color(current, foreground) !important;
-                      @sugar.transition (fast);
-                      color: white !important;
-                    }
-
-                    &:hover,
-                    &:focus,
-                    &:focus-within {
-
-                      &:after {
-                        color: sugar.color(current, foreground) !important;
-                      }
-                    }
-
-                  }
         `);
                 break;
         }
 
+        // confirm
+        vars.push(`
+          &[confirm] {
+            @sugar.transition (fast);
+
+            &:after {
+              background-color: sugar.color(current);
+              color: sugar.color(current, foreground) !important;
+              @sugar.transition (fast);
+              @sugar.color(error);
+            }
+
+            &:hover,
+            &:focus,
+            &:focus-within {
+
+              &:after {
+                color: sugar.color(current, foreground) !important;
+              }
+            }
+
+          }
+        `);
+
         // outline
-        // vars.push(`
-        //       &:focus:not(:hover) {
-        //         @sugar.outline;
-        //       }
-        //   `);
+        vars.push(`
+              &:focus:not(:hover) {
+                @sugar.outline;
+              }
+          `);
     }
 
     // wireframe

@@ -481,12 +481,12 @@ export default class SComponentUtils extends __SClass {
     makePropsResponsive(props: any) {
         if (
             !this._isFrontAvailable() ||
-            !document.env.SUGAR.frontspec.get('media.queries')
+            !document.env?.SUGAR?.frontspec?.get?.('media.queries')
         ) {
-            console.log(document.env.SUGAR.frontspec._frontspec);
-            console.log(
+            console.warn(
                 `<red>[SComponentUtils]</red> To use responsive props on components and features, you MUST call the SFront.init() method in your main entry file...`,
             );
+            return;
         }
 
         // ensure we have a responsive object

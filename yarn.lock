@@ -1369,7 +1369,6 @@ __metadata:
   dependencies:
     "@coffeekraken/s-activate-feature": ^2.0.0-alpha.25
     "@coffeekraken/s-appear-feature": ^2.0.0-alpha.25
-    "@coffeekraken/s-asset-picker-component": ^2.0.0-alpha.25
     "@coffeekraken/s-bench": ^2.0.0-alpha.25
     "@coffeekraken/s-builder": ^2.0.0-alpha.25
     "@coffeekraken/s-carpenter": ^2.0.0-alpha.25
@@ -1411,7 +1410,6 @@ __metadata:
     "@coffeekraken/s-frontspec": ^2.0.0-alpha.25
     "@coffeekraken/s-glob": ^2.0.0-alpha.25
     "@coffeekraken/s-google-map-component": ^2.0.0-alpha.25
-    "@coffeekraken/s-handlebars": ^2.0.0-alpha.25
     "@coffeekraken/s-highlight-feature": ^2.0.0-alpha.25
     "@coffeekraken/s-images-builder": ^2.0.0-alpha.25
     "@coffeekraken/s-inline-feature": ^2.0.0-alpha.25
@@ -1545,17 +1543,6 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/s-asset-picker-component@^2.0.0-alpha.25, @coffeekraken/s-asset-picker-component@workspace:packages/components/s-asset-picker-component":
-  version: 0.0.0-use.local
-  resolution: "@coffeekraken/s-asset-picker-component@workspace:packages/components/s-asset-picker-component"
-  dependencies:
-    "@coffeekraken/s-interface": ^2.0.0-alpha.25
-    "@coffeekraken/s-lit-component": ^2.0.0-alpha.25
-    "@coffeekraken/sugar": ^2.0.0-alpha.25
-    lit: ^2.2.8
-  languageName: unknown
-  linkType: soft
-
 "@coffeekraken/s-bench@^2.0.0-alpha.25, @coffeekraken/s-bench@workspace:packages/tools/s-bench":
   version: 0.0.0-use.local
   resolution: "@coffeekraken/s-bench@workspace:packages/tools/s-bench"
@@ -1588,6 +1575,7 @@ __metadata:
   resolution: "@coffeekraken/s-carpenter@workspace:packages/app/s-carpenter"
   dependencies:
     "@coffeekraken/s-activate-feature": ^2.0.0-alpha.25
+    "@coffeekraken/s-class": ^2.0.0-alpha.25
     "@coffeekraken/s-interface": ^2.0.0-alpha.25
     "@coffeekraken/s-log": ^2.0.0-alpha.25
     "@coffeekraken/s-postcss-builder": ^2.0.0-alpha.25
@@ -1595,6 +1583,7 @@ __metadata:
     "@coffeekraken/s-specs": ^2.0.0-alpha.25
     "@coffeekraken/s-specs-editor-component": ^2.0.0-alpha.25
     "@coffeekraken/s-sugar-config": ^2.0.0-alpha.25
+    "@coffeekraken/s-sugar-feature": ^2.0.0-alpha.25
     "@coffeekraken/s-view-renderer": ^2.0.0-alpha.25
     "@coffeekraken/sugar": ^2.0.0-alpha.25
     "@vitejs/plugin-vue": ^3.1.2
@@ -2186,19 +2175,6 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/s-handlebars@^2.0.0-alpha.25, @coffeekraken/s-handlebars@workspace:packages/tools/s-handlebars":
-  version: 0.0.0-use.local
-  resolution: "@coffeekraken/s-handlebars@workspace:packages/tools/s-handlebars"
-  dependencies:
-    "@coffeekraken/s-file": ^2.0.0-alpha.25
-    "@coffeekraken/s-frontspec": ^2.0.0-alpha.25
-    "@coffeekraken/s-promise": ^2.0.0-alpha.25
-    "@coffeekraken/s-specs": ^2.0.0-alpha.25
-    "@coffeekraken/s-sugar-config": ^2.0.0-alpha.25
-    "@coffeekraken/sugar": ^2.0.0-alpha.25
-  languageName: unknown
-  linkType: soft
-
 "@coffeekraken/s-highlight-feature@^2.0.0-alpha.25, @coffeekraken/s-highlight-feature@workspace:packages/features/s-highlight-feature":
   version: 0.0.0-use.local
   resolution: "@coffeekraken/s-highlight-feature@workspace:packages/features/s-highlight-feature"
@@ -2330,7 +2306,6 @@ __metadata:
     "@coffeekraken/s-file": ^2.0.0-alpha.25
     "@coffeekraken/s-frontspec": ^2.0.0-alpha.25
     "@coffeekraken/s-glob": ^2.0.0-alpha.25
-    "@coffeekraken/s-handlebars": ^2.0.0-alpha.25
     "@coffeekraken/s-interface": ^2.0.0-alpha.25
     "@coffeekraken/s-log": ^2.0.0-alpha.25
     "@coffeekraken/s-postcss-sugar-plugin": ^2.0.0-alpha.25
@@ -2661,11 +2636,21 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@coffeekraken/s-spaces-selector-component@workspace:packages/components/s-spaces-selector-component":
+  version: 0.0.0-use.local
+  resolution: "@coffeekraken/s-spaces-selector-component@workspace:packages/components/s-spaces-selector-component"
+  dependencies:
+    "@coffeekraken/s-interface": ^2.0.0-alpha.25
+    "@coffeekraken/s-lit-component": ^2.0.0-alpha.25
+    "@coffeekraken/sugar": ^2.0.0-alpha.25
+    lit: ^2.2.8
+  languageName: unknown
+  linkType: soft
+
 "@coffeekraken/s-specs-editor-component@^2.0.0-alpha.25, @coffeekraken/s-specs-editor-component@workspace:packages/components/s-specs-editor-component":
   version: 0.0.0-use.local
   resolution: "@coffeekraken/s-specs-editor-component@workspace:packages/components/s-specs-editor-component"
   dependencies:
-    "@coffeekraken/s-asset-picker-component": ^2.0.0-alpha.25
     "@coffeekraken/s-clipboard-copy-component": ^2.0.0-alpha.25
     "@coffeekraken/s-dropzone-component": ^2.0.0-alpha.25
     "@coffeekraken/s-interface": ^2.0.0-alpha.25
@@ -3213,6 +3198,7 @@ __metadata:
     "@coffeekraken/s-carpenter": ^2.0.0-alpha.25
     "@coffeekraken/s-front": ^2.0.0-alpha.25
     "@coffeekraken/s-google-map-component": ^2.0.0-alpha.25
+    "@coffeekraken/s-log": ^2.0.0-alpha.25
     "@coffeekraken/s-postcss-sugar-plugin": ^2.0.0-alpha.25
     "@coffeekraken/s-sugar-feature": ^2.0.0-alpha.25
     "@coffeekraken/sugar": ^2.0.0-alpha.25
@@ -6348,7 +6334,6 @@ __metadata:
     "@coffeekraken/s-glitch-feature": ^2.0.0-alpha.25
     "@coffeekraken/s-glob": ^2.0.0-alpha.25
     "@coffeekraken/s-google-map-component": ^2.0.0-alpha.25
-    "@coffeekraken/s-handlebars": ^2.0.0-alpha.25
     "@coffeekraken/s-highlight-feature": ^2.0.0-alpha.25
     "@coffeekraken/s-images-builder": ^2.0.0-alpha.25
     "@coffeekraken/s-inline-feature": ^2.0.0-alpha.25

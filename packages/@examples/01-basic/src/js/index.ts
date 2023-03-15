@@ -4,6 +4,8 @@ import __SPackEssentials from '@coffeekraken/s-pack-essentials';
 
 import { define as __sugarFeatureDefine } from '@coffeekraken/s-sugar-feature';
 
+import { define as __SSpacesSelectorComponentDefine } from '@coffeekraken/s-spaces-selector-component';
+
 import { __reloadStylesheets } from '@coffeekraken/sugar/dom';
 
 // import { define as __sFloatingFeature } from '@coffeekraken/s-floating-feature';
@@ -55,6 +57,7 @@ if (import.meta.hot) {
     __SSliderComponentDefine();
     __sGoogleMapComponentDefine();
     __sCarpenterComponentDefine();
+    __SSpacesSelectorComponentDefine();
 
     // __SCarpenterComponent.create();
 

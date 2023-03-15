@@ -1,4 +1,8 @@
+@import './components/spaces-widget.css';
+@import './components/child.css';
+
 .s-specs-editor {
+    --s-specs-editor-padding-inline: sugar.padding(40);
     user-select: none;
 
     .s-specs-editor_dropzone {
@@ -18,7 +22,7 @@
     .s-specs-editor_metas {
         display: flex;
         align-items: center;
-        padding-inline-start: sugar.padding(40);
+        padding-inline-start: var(--s-specs-editor-padding-inline);
         padding-inline-end: sugar.padding(10);
 
         ._title {
@@ -93,7 +97,7 @@
             sugar.color(main, background),
             sugar.color(main, background, --lighten 5%)
         );
-        padding: sugar.padding(30) sugar.padding(40);
+        padding: sugar.padding(30) var(--s-specs-editor-padding-inline);
         cursor: pointer;
         @sugar.depth (100);
 
@@ -139,7 +143,7 @@
 
     .s-specs-editor_repeatable-item-actions {
         text-align: end;
-        padding: sugar.padding(30) sugar.padding(40);
+        padding: sugar.padding(30) var(--s-specs-editor-padding-inline);
         background: sugar.color(main, background, --darken 5%);
     }
 
@@ -165,10 +169,17 @@
     }
     .s-specs-editor_media-icon {
         padding-inline: sugar.padding(10);
+        cursor: pointer;
 
-        &.active {
+        i {
+            opacity: 0.3;
+        }
+
+        &.active i {
             color: sugar.color(accent);
         }
+
+        &:hover i,
         &.current i {
             opacity: 1;
         }
@@ -179,16 +190,7 @@
     }
 
     .s-specs-editor_prop {
-        padding-inline: sugar.padding(40);
-    }
-    .s-specs-editor_child-title {
-        padding-block-start: sugar.padding(30);
-        padding-inline: sugar.padding(40);
-        color: sugar.color(accent);
-    }
-    .s-specs-editor_child-description {
-        padding-block-end: sugar.padding(30);
-        padding-inline: sugar.padding(40);
+        padding-inline: var(--s-specs-editor-padding-inline);
     }
 
     .s-specs-editor_label {

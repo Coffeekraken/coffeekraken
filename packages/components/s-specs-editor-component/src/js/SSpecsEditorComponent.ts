@@ -146,9 +146,7 @@ export default class SSpecsEditorComponent extends __SLitComponent {
         }
     }
 
-    mount() {}
-
-    isPathResponsive(path: string): any {
+    isPathResponsive(path: string[]): any {
         const currentPath = [];
 
         for (let i = 0; i < path.length; i++) {
@@ -163,7 +161,11 @@ export default class SSpecsEditorComponent extends __SLitComponent {
         return false;
     }
 
-    getValuePathFromPath(path: string, settings?: any): string[] {
+    getValuePath(path: string | string[], settings?: any): string[] {
+        if (!Array.isArray(path)) {
+            path = path.split('.');
+        }
+
         const finalSettings = {
             media: null,
             force: false,
@@ -216,28 +218,28 @@ export default class SSpecsEditorComponent extends __SLitComponent {
         }
     }
 
-    getValueFromPath(path: string, settings?: any): any {
+    getValue(path: string[], settings?: any): any {
         if (this.isPathResponsive(path)) {
             const finalSettings = {
                 media: this.props.media,
                 ...(settings ?? {}),
             };
-            const valuePath = this.getValuePathFromPath(path, finalSettings);
+            const valuePath = this.getValuePath(path, finalSettings);
             if (valuePath !== undefined) {
                 return __get(this.props.specs.values, valuePath.join('.'));
             }
         } else {
-            const valuePath = this.getValuePathFromPath(path, settings);
+            const valuePath = this.getValuePath(path, settings);
             if (valuePath !== undefined) {
                 return __get(this.props.specs.values, valuePath.join('.'));
             }
         }
     }
 
-    clearValueFromPath(path: string, settings?: any): any {
+    clearValue(path: string[], settings?: any): any {
         // handle responsive values
         if (this.isPathResponsive(path)) {
-            const valuePath = this.getValuePathFromPath(path, {
+            const valuePath = this.getValuePath(path, {
                 media: this.props.media,
                 ...(settings ?? {}),
             });
@@ -255,10 +257,14 @@ export default class SSpecsEditorComponent extends __SLitComponent {
         this.requestUpdate();
     }
 
-    setValueFromPath(path: string, value: any, settings?: any): any {
+    setValue(path: string | string[], value: any, settings?: any): any {
+        if (!Array.isArray(path)) {
+            path = path.split('.');
+        }
+
         // handle responsive values
         if (this.isPathResponsive(path)) {
-            const valuePath = this.getValuePathFromPath(path, {
+            const valuePath = this.getValuePath(path, {
                 media: this.props.media,
                 force: true,
                 ...(settings ?? {}),
@@ -300,6 +306,20 @@ export default class SSpecsEditorComponent extends __SLitComponent {
     }
 
     /**
+     * Apply updates
+     */
+    apply() {
+        this.utils.dispatchEvent('update', {
+            bubbles: true,
+            detail: {
+                propsSpecs: Object.assign({}, this.props.specs),
+                values: Object.assign({}, this.props.specs.values),
+            },
+        });
+        this.requestUpdate();
+    }
+
+    /**
      * Save the data.
      * This will dispatch en event "s-specs-editor.save" with as detail the current values object
      */
@@ -329,20 +349,13 @@ export default class SSpecsEditorComponent extends __SLitComponent {
                     // if (finalValue === propSpecs.default) {
                     //     __deleteProperty(this.props.specs.values, valuePath);
                     // } else {
-                    this.setValueFromPath(path, finalValue);
+                    this.setValue(path, finalValue);
                     // }
                     break;
             }
         }
 
-        this.utils.dispatchEvent('update', {
-            detail: {
-                propsSpecs: Object.assign({}, this.props.specs),
-                values: Object.assign({}, this.props.specs.values),
-            },
-        });
-
-        this.requestUpdate();
+        this.apply();
     }
 
     _toggle(id: string): void {
@@ -392,6 +405,65 @@ export default class SSpecsEditorComponent extends __SLitComponent {
         this.utils.dispatchEvent('changeMedia', {
             detail: media,
         });
+        this.requestUpdate();
+    }
+
+    /**
+     * Render the media selector
+     */
+    _renderMediaSelector(path: string[]) {
+        return html`
+            <div class="${this.utils.cls('_media-icons')}">
+                ${Object.keys(
+                    __STheme.sortMedia(this.props.frontspec.media).queries,
+                )
+                    .reverse()
+                    .map((media) => {
+                        const mediaValue = this.getValue(path, {
+                            media,
+                        });
+                        return html`
+                            <span
+                                class="${this.utils.cls(
+                                    '_media-icon',
+                                )} ${mediaValue !== undefined &&
+                                mediaValue !== null
+                                    ? 'active'
+                                    : ''} ${this.props.media === media
+                                    ? 'current'
+                                    : ''} s-tooltip-container"
+                            >
+                                <span
+                                    @pointerup=${() => this._changeMedia(media)}
+                                >
+                                    ${unsafeHTML(this.props.icons[media])}
+                                </span>
+                                ${mediaValue !== undefined
+                                    ? html`
+                                          <div
+                                              class="s-tooltip s-tooltip--interactive s-color s-color--accent ${this.utils.cls(
+                                                  '_actions',
+                                              )}"
+                                          >
+                                              <button
+                                                  class="_action"
+                                                  @pointerup=${() =>
+                                                      this.clearValue(path, {
+                                                          media,
+                                                      })}
+                                              >
+                                                  ${unsafeHTML(
+                                                      this.props.icons.clear,
+                                                  )}
+                                              </button>
+                                          </div>
+                                      `
+                                    : ''}
+                            </span>
+                        `;
+                    })}
+            </div>
+        `;
     }
 
     /**
@@ -417,78 +489,14 @@ export default class SSpecsEditorComponent extends __SLitComponent {
                 ${propObj.title ?? propObj.id}
                 ${this.props.frontspec?.media?.queries &&
                 this.isPathResponsive(path)
-                    ? html`
-                          <div class="${this.utils.cls('_media-icons')}">
-                              ${Object.keys(
-                                  __STheme.sortMedia(this.props.frontspec.media)
-                                      .queries,
-                              )
-                                  .reverse()
-                                  .map((media) => {
-                                      const mediaValue = this.getValueFromPath(
-                                          path,
-                                          {
-                                              media,
-                                          },
-                                      );
-                                      return html`
-                                          <span
-                                              class="${this.utils.cls(
-                                                  '_media-icon',
-                                              )} ${mediaValue !== undefined &&
-                                              mediaValue !== null
-                                                  ? 'active'
-                                                  : ''} ${this.props.media ===
-                                              media
-                                                  ? 'current'
-                                                  : ''} s-tooltip-container"
-                                          >
-                                              <span
-                                                  @pointerup=${() =>
-                                                      this._changeMedia(media)}
-                                              >
-                                                  ${unsafeHTML(
-                                                      this.props.icons[media],
-                                                  )}
-                                              </span>
-                                              ${mediaValue !== undefined
-                                                  ? html`
-                                                        <div
-                                                            class="s-tooltip s-tooltip--interactive s-color s-color--accent ${this.utils.cls(
-                                                                '_actions',
-                                                            )}"
-                                                        >
-                                                            <button
-                                                                class="_action"
-                                                                @pointerup=${() =>
-                                                                    this.clearValueFromPath(
-                                                                        path,
-                                                                        {
-                                                                            media,
-                                                                        },
-                                                                    )}
-                                                            >
-                                                                ${unsafeHTML(
-                                                                    this.props
-                                                                        .icons
-                                                                        .clear,
-                                                                )}
-                                                            </button>
-                                                        </div>
-                                                    `
-                                                  : ''}
-                                          </span>
-                                      `;
-                                  })}
-                          </div>
-                      `
+                    ? this._renderMediaSelector(path)
                     : ''}
             </span>
         `;
     }
 
     _renderSelectElement(propObj, path) {
-        const value = this.getValueFromPath(path) ?? propObj.default;
+        const value = this.getValue(path) ?? propObj.default;
         return html`
             <div class="${this.utils.cls('_prop--select')}">
                 <label
@@ -530,7 +538,7 @@ export default class SSpecsEditorComponent extends __SLitComponent {
     }
 
     _renderCheckboxElement(propObj, path) {
-        const value = this.getValueFromPath(path) ?? propObj.default;
+        const value = this.getValue(path) ?? propObj.default;
         return html`
             <div class="${this.utils.cls('_prop--checkbox')}">
                 <label class="${this.utils.cls('_label', 's-label')}">
@@ -552,7 +560,7 @@ export default class SSpecsEditorComponent extends __SLitComponent {
     }
 
     _renderTextElement(propObj, path) {
-        const value = this.getValueFromPath(path) ?? propObj.default;
+        const value = this.getValue(path) ?? propObj.default;
         return html`
             <div class="${this.utils.cls('_prop--text')}">
                 <label
@@ -590,7 +598,14 @@ export default class SSpecsEditorComponent extends __SLitComponent {
         }
         return {
             hideOriginals: widget.hideOriginals,
-            html: widget.html(propObj, this.getValueFromPath(path) ?? {}),
+            html: widget.html(
+                {
+                    values: this.getValue(path),
+                    path,
+                    propObj,
+                },
+                this.getValue(path) ?? {},
+            ),
         };
     }
 
@@ -610,7 +625,7 @@ export default class SSpecsEditorComponent extends __SLitComponent {
         // const _specs = __get(specs, path.join('.'));
         const _specs = specs;
         if (!forceNoRepeat && _specs.type.match(/(\{\}|\[\])/)) {
-            const loopOn = this.getValueFromPath(path) ?? [];
+            const loopOn = this.getValue(path) ?? [];
 
             return html`
                 <div class="${this.utils.cls('_repeatable')}">
@@ -708,23 +723,45 @@ export default class SSpecsEditorComponent extends __SLitComponent {
 
                         return html`
                             <div class="${this.utils.cls('_child')}">
-                                <h3
-                                    class="${this.utils.cls(
-                                        '_child-title',
-                                        's-typo--h5',
-                                    )}"
-                                >
-                                    ${propObj.title}
-                                </h3>
-                                <p
-                                    class="${this.utils.cls(
-                                        '_child-description',
-                                        's-typo--p',
-                                    )}"
-                                >
-                                    ${propObj.description}
-                                </p>
-
+                                <div class="${this.utils.cls('_child-metas')}">
+                                    <div
+                                        class="${this.utils.cls(
+                                            '_child-heading',
+                                        )}"
+                                    >
+                                        <h3
+                                            class="${this.utils.cls(
+                                                '_child-title',
+                                            )}"
+                                        >
+                                            ${propObj.title}
+                                        </h3>
+                                        <div
+                                            class="${this.utils.cls(
+                                                '_child-media',
+                                            )}"
+                                        >
+                                            ${this.isPathResponsive([
+                                                ...path,
+                                                'props',
+                                                prop,
+                                            ])
+                                                ? this._renderMediaSelector([
+                                                      ...path,
+                                                      'props',
+                                                      prop,
+                                                  ])
+                                                : ''}
+                                        </div>
+                                    </div>
+                                    <p
+                                        class="${this.utils.cls(
+                                            '_child-description',
+                                        )}"
+                                    >
+                                        ${propObj.description}
+                                    </p>
+                                </div>
                                 ${renderedWidget
                                     ? html` ${renderedWidget.html} `
                                     : ''}

@@ -8,7 +8,7 @@
     mediaSettings: frontspec.media|__toObject
 })|raw }}
 </style>
-<div id="{{ finalId }}" class="{{ attributes.class }} {{ __paddingClasses(padding) }} {{ __marginClasses(margin) }}" {{ __attrs(attributes, ['class'])|raw }}>
+<div id="{{ finalId }}" class="{{ attributes.class }} {{ __spacesClasses(spaces, frontspec) }}" {{ __attrs(attributes, ['class'])|raw }}>
     {% if container %}
         <div class="s-container:{{ container }}">
     {% endif %}

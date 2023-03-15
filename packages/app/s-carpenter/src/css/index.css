@@ -7,7 +7,10 @@
 @sugar.typo.classes;
 @sugar.margin.classes;
 @sugar.padding.classes;
+@sugar.flex.classes;
+@sugar.color.classes;
 
+@sugar.ui.spacesSelector.classes();
 @sugar.ui.specsEditor.classes();
 @sugar.ui.input.classes();
 @sugar.ui.button.classes();

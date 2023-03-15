@@ -2,7 +2,7 @@ import { html } from 'lit';
 
 export default function (component) {
     return {
-        html(props: any, values: any) {
+        html({ propObj, values }) {
             return html`
                 <div class="${component.utils.cls('_dropzone')}">
                     <s-dropzone

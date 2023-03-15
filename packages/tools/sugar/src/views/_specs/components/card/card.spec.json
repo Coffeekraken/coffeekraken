@@ -45,8 +45,7 @@
         "image": "@sugar.views.props.image",
         "cta": "@sugar.views.components.cta",
         "attributes": "@sugar.views.props.attributes",
-        "margin": "@sugar.views.props.margin",
-        "padding": "@sugar.views.props.padding"
+        "spaces": "@sugar.views.props.spaces"
     },
     "examples": {
         "twig": {

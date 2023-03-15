@@ -623,7 +623,7 @@ export default class SCarpenterComponent extends __SLitComponent {
             <button s-carpenter-app-action="edit" class="s-carpenter-toolbar_edit">
                 <i class="fa-regular fa-pen-to-square"></i> <span>Edit</span>
             </button>
-            <button s-carpenter-app-action="remove" class="s-carpenter-toolbar_remove" confirm="Confirm?">
+            <button s-carpenter-app-action="delete" class="s-carpenter-toolbar_delete" confirm="Confirm?">
                 <i class="fa-regular fa-trash-can"></i>
             </button>
         `;
@@ -645,14 +645,15 @@ export default class SCarpenterComponent extends __SLitComponent {
             if (e.target.isConfirmed) {
                 console.log('Confirmeeeeee', e.target.isConfirmed());
             }
-            if (e.target.isConfirmed && !e.target.isConfirmed()) {
+            if (e.target.needConfirmation) {
                 return;
             }
             switch (action) {
                 case 'edit':
                     this._edit();
                     break;
-                case 'remove':
+                case 'delete':
+                    console.log('DELETE');
                     break;
             }
         });
@@ -1039,7 +1040,7 @@ export default class SCarpenterComponent extends __SLitComponent {
                                       <li
                                           @pointerup=${() =>
                                               this._activateMedia(query)}
-                                          class="s-color s-color--accent ${query ===
+                                          class="${query ===
                                           this.state.activeMedia
                                               ? 'active'
                                               : ''} _query _item"

@@ -12,7 +12,6 @@
     "dependencies": {
         "@coffeekraken/s-activate-feature": "^2.0.0-alpha.25",
         "@coffeekraken/s-appear-feature": "^2.0.0-alpha.25",
-        "@coffeekraken/s-asset-picker-component": "^2.0.0-alpha.25",
         "@coffeekraken/s-bench": "^2.0.0-alpha.25",
         "@coffeekraken/s-builder": "^2.0.0-alpha.25",
         "@coffeekraken/s-carpenter": "^2.0.0-alpha.25",
@@ -54,7 +53,6 @@
         "@coffeekraken/s-frontspec": "^2.0.0-alpha.25",
         "@coffeekraken/s-glob": "^2.0.0-alpha.25",
         "@coffeekraken/s-google-map-component": "^2.0.0-alpha.25",
-        "@coffeekraken/s-handlebars": "^2.0.0-alpha.25",
         "@coffeekraken/s-highlight-feature": "^2.0.0-alpha.25",
         "@coffeekraken/s-images-builder": "^2.0.0-alpha.25",
         "@coffeekraken/s-inline-feature": "^2.0.0-alpha.25",

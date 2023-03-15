@@ -1,0 +1,4 @@
+import __SSpacesSelector from './SSpacesSelectorComponent';
+export * from './SSpacesSelectorComponent';
+export default __SSpacesSelector;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8saUJBQWlCLE1BQU0sNEJBQTRCLENBQUM7QUFDM0QsY0FBYyw0QkFBNEIsQ0FBQztBQUMzQyxlQUFlLGlCQUFpQixDQUFDIn0=

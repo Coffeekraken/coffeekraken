@@ -15,8 +15,7 @@
             "description": "Specify the html tu put in the container",
             "required": true
         },
-        "margin": "@sugar.views.props.margin",
-        "padding": "@sugar.views.props.padding"
+        "spaces": "@sugar.views.props.spaces"
     },
     "examples": {
         "twig": {

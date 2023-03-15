@@ -451,6 +451,10 @@ export default class SLitComponent extends LitElement {
         // this.props stack
         let finalProps = {};
         for (let [prop, obj] of Object.entries(properties)) {
+            if (this[prop] !== undefined) {
+                finalProps[prop] = this[prop];
+            }
+
             Object.defineProperty(this.props, prop, {
                 enumerable: true,
                 get() {

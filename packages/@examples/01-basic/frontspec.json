@@ -79,7 +79,6 @@
     "media": {
         "defaultAction": "<=",
         "defaultMedia": "desktop",
-        "method": "container",
         "queries": {
             "wide": {
                 "minWidth": 2048,

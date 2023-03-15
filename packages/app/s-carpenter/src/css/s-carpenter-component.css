@@ -43,12 +43,12 @@
 .s-carpenter_ui-placeholder {
     position: absolute;
     pointer-events: none;
-    /* background: rgba(255, 0, 0, 0.3); */
-    background: transparent;
+    background: rgba(255, 0, 0, 0.3);
+    /* background: transparent; */
 
     .active > & {
         pointer-events: all;
-        /* background: rgba(0, 255, 0, 0.3); */
+        background: rgba(0, 255, 0, 0.3);
     }
 }
 
@@ -98,11 +98,14 @@
 }
 
 @keyframes s-carpenter-logo {
-    from {
-        transform: rotate(0deg);
+    0% {
+        transform: scale(0.6) rotate(0deg);
     }
-    to {
-        transform: rotate(360deg);
+    50% {
+        transform: scale(1) rotate(360deg);
+    }
+    100% {
+        transform: scale(0.6) rotate(0deg);
     }
 }
 
@@ -114,7 +117,7 @@
     left: 50%;
     transform: scale(1) translate(-50%, -50%);
     transform-origin: 0 0;
-    animation: s-carpenter-popin-in 0.3s cubic-bezier(0.705, 0, 0.54, 1.27)
+    animation: s-carpenter-popin-in 0.3s cubic-bezier(0.725, -0.21, 0.055, 1.26)
         forwards;
 
     ._inner {
@@ -138,7 +141,8 @@
             display: inline-block;
             height: 150px;
             width: 150px;
-            animation: s-carpenter-logo 1s linear infinite;
+            animation: s-carpenter-logo 2s cubic-bezier(0.84, 0, 0.115, 1)
+                infinite;
             transform-origin: 40% 55%;
 
             * {

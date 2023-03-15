@@ -10,13 +10,12 @@ namespace Sugar\css;
  * @status          beta
  *
  * This function takes an object|array of margins issued from the themeMargin.config.ts configuration file like:
- * - "blockStart" => 10
- * - "inlineEnd" => 30
- * - "block" => 10
+ * - "marginTop" => 10
+ * - "marginLeft" => 30
  * - etc...
  * This function will returns you the classes like "s-mbs:10" that you can apply where you want in your views.
  *
- * @param       {Array|Object}         $margins           Some margins like "block" => 10, etc...
+ * @param       {Array|Object}         $margins           Some margins like "marginTop" => 10, etc...
  * @param       {Array|Object}          [$frontspec=[]]     The frontspec json to handle things like defaultMedia, etc...
  * @return      {String}                         The resulting css classes
  *
@@ -58,28 +57,28 @@ function marginClasses($margins = [], $frontspec = [])
             }
         }
     } else {
-        if (isset($margins['all'])) {
+        if (isset($margins['margin'])) {
             array_push($classes, 's-m--' . $margins['all']);
         }
 
-        if (isset($margins['block'])) {
+        if (isset($margins['marginBlock'])) {
             array_push($classes, 's-mb--' . $margins['block']);
         }
-        if (isset($margins['inline'])) {
+        if (isset($margins['marginInline'])) {
             array_push($classes, 's-mi--' . $margins['inline']);
         }
 
-        if (isset($margins['blockStart'])) {
-            array_push($classes, 's-mbs--' . $margins['blockStart']);
+        if (isset($margins['marginTop'])) {
+            array_push($classes, 's-mbs--' . $margins['marginTop']);
         }
-        if (isset($margins['blockEnd'])) {
-            array_push($classes, 's-mbe--' . $margins['blockEnd']);
+        if (isset($margins['marginRight'])) {
+            array_push($classes, 's-mie--' . $margins['marginRight']);
         }
-        if (isset($margins['inlineStart'])) {
-            array_push($classes, 's-mis--' . $margins['inlineStart']);
+        if (isset($margins['marginBottom'])) {
+            array_push($classes, 's-mbe--' . $margins['marginBottom']);
         }
-        if (isset($margins['inlineEnd'])) {
-            array_push($classes, 's-mie--' . $margins['inlineEnd']);
+        if (isset($margins['marginLeft'])) {
+            array_push($classes, 's-mis--' . $margins['marginLeft']);
         }
     }
 

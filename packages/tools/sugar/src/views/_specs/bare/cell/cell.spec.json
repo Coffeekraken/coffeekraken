@@ -9,8 +9,7 @@
             "description": "The html to print in the cell",
             "required": true
         },
-        "margin": "@sugar.views.props.margin",
-        "padding": "@sugar.views.props.padding"
+        "spaces": "@sugar.views.props.spaces"
     },
     "examples": {
         "twig": {

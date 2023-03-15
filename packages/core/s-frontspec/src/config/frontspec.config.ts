@@ -33,14 +33,7 @@ export default function (api) {
          * @since       2.0.0
          * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
-        removeForFrontend: [
-            'frontspec',
-            'assets',
-            'views',
-            'specs',
-            'margin',
-            'padding',
-        ],
+        removeForFrontend: ['frontspec', 'assets', 'views', 'specs'],
 
         build: {
             sources: {
@@ -132,6 +125,46 @@ export default function (api) {
                     type: 'config',
                     config: 'google',
                 },
+                // spaces: {
+                //     title: 'Spaces',
+                //     description:
+                //         'Specify the spaces (margin, padding) available in the project.',
+                //     type: 'object',
+                //     get value() {
+                //         const result = {},
+                //             padding = api.theme.padding,
+                //             margin = api.theme.margin;
+
+                //         [
+                //             'paddingTop',
+                //             'paddingRight',
+                //             'paddingBottom',
+                //             'paddingLeft',
+                //         ].forEach((side) => {
+                //             result[side] = {};
+
+                //             Object.keys(padding).forEach((paddingName) => {
+                //                 result[side][paddingName] =
+                //                     padding[paddingName];
+                //             });
+                //         });
+
+                //         [
+                //             'marginTop',
+                //             'marginRight',
+                //             'marginBottom',
+                //             'marginLeft',
+                //         ].forEach((side) => {
+                //             result[side] = {};
+
+                //             Object.keys(margin).forEach((marginName) => {
+                //                 result[side][marginName] = margin[marginName];
+                //             });
+                //         });
+
+                //         return result;
+                //     },
+                // },
                 margin: {
                     title: 'Margin',
                     description:

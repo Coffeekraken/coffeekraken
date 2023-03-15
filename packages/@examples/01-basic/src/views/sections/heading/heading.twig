@@ -1,4 +1,4 @@
-<section class="section-heading {{ __paddingClasses(padding) }} {{ __marginClasses(margin) }}"
+<section class="section-heading {{ __spacesClasses(spaces, frontspec) }}"
     s-specs="views.sections.heading"
     {{ __specsValues(_context)|raw }}
 >
@@ -31,6 +31,10 @@
                         </div>
                     {% endif %}
                 </div>
+
+                {# <div style="width:400px">
+                    <s-spaces-selector values='{"marginTop":40}'></s-spaces-selector>
+                </div> #}
 
                 {# <pre>
                 {{ dump(readSpec('views.sections.heading')) }}

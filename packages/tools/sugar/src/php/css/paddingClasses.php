@@ -10,17 +10,16 @@ namespace Sugar\css;
  * @status          beta
  *
  * This function takes an object|array of paddings issued from the themePadding.config.ts configuration file like:
- * - "blockStart" => 10
- * - "inlineEnd" => 30
- * - "block" => 10
+ * - "paddingTop" => 10
+ * - "paddingLeft" => 30
  * - etc...
  * This function will returns you the classes like "s-pbs:10" that you can apply where you want in your views.
  *
- * @param       {Array|Object}         $paddings           Some paddings like "block" => 10, etc...
+ * @param       {Array|Object}         $paddings           Some paddings like "paddingBlock" => 10, etc...
  * @param       {Array|Object}          [$frontspec=[]]     The frontspec json to handle things like defaultMedia, etc...
  * @return      {String}                         The resulting css classes
  *
- * @snippet         \Sugar\css\marginClasses($1);
+ * @snippet         \Sugar\css\paddingClasses($1);
  *
  * @example         php
  * \Sugar\css\paddingClasses([
@@ -61,28 +60,28 @@ function paddingClasses($paddings = [], $frontspec = [])
             }
         }
     } else {
-        if (isset($paddings['all'])) {
+        if (isset($paddings['padding'])) {
             array_push($classes, 's-p--' . $paddings['all']);
         }
 
-        if (isset($paddings['block'])) {
+        if (isset($paddings['paddingBlock'])) {
             array_push($classes, 's-pb--' . $paddings['block']);
         }
-        if (isset($paddings['inline'])) {
+        if (isset($paddings['paddingInline'])) {
             array_push($classes, 's-pi--' . $paddings['inline']);
         }
 
-        if (isset($paddings['blockStart'])) {
-            array_push($classes, 's-pbs--' . $paddings['blockStart']);
+        if (isset($paddings['paddingTop'])) {
+            array_push($classes, 's-pbs--' . $paddings['paddingTop']);
         }
-        if (isset($paddings['blockEnd'])) {
-            array_push($classes, 's-pbe--' . $paddings['blockEnd']);
+        if (isset($paddings['paddingRight'])) {
+            array_push($classes, 's-pie--' . $paddings['paddingRight']);
         }
-        if (isset($paddings['inlineStart'])) {
-            array_push($classes, 's-pis--' . $paddings['inlineStart']);
+        if (isset($paddings['paddingBottom'])) {
+            array_push($classes, 's-pbe--' . $paddings['paddingBottom']);
         }
-        if (isset($paddings['inlineEnd'])) {
-            array_push($classes, 's-pie--' . $paddings['inlineEnd']);
+        if (isset($paddings['paddingLeft'])) {
+            array_push($classes, 's-pis--' . $paddings['paddingLeft']);
         }
     }
 

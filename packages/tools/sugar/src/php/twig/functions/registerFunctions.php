@@ -42,6 +42,9 @@ function registerFunctions($twig)
     $paddingClasses = require __DIR__ . '/css/paddingClasses.php';
     $twig->addFunction($paddingClasses);
 
+    $spacesClasses = require __DIR__ . '/css/spacesClasses.php';
+    $twig->addFunction($spacesClasses);
+
     // Frontspec
     $frontspecAssets = require __DIR__ . '/frontspec/assets.php';
     $twig->addFunction($frontspecAssets);

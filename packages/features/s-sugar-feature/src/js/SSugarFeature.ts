@@ -210,22 +210,17 @@ export default class SSugarFeature extends __SFeature implements ISFeature {
     }
     _confirmBtn() {
         __querySelectorLive('[confirm]', async ($btn) => {
-            if ($btn.isConfirmed) {
+            if ($btn.needConfirmation !== undefined) {
                 return;
             }
             $btn._isConfirmedStatus = undefined;
-            $btn.isConfirmed = () => {
-                return $btn._isConfirmedStatus === true;
-            };
-
-            let isFirstClick = true;
+            $btn.needConfirmation = true;
 
             await __wait(100); // avoid css issues
 
             const buttonElmStyle = window.getComputedStyle($btn),
-                buttonWidth = buttonElmStyle.width;
-
-            const confirmElmStyle = window.getComputedStyle($btn, ':after'),
+                buttonWidth = buttonElmStyle.width,
+                confirmElmStyle = window.getComputedStyle($btn, ':after'),
                 confirmWidth = `${parseInt(confirmElmStyle.width) + 10}px`; // add 4 just in case
 
             // set size
@@ -246,6 +241,7 @@ export default class SSugarFeature extends __SFeature implements ISFeature {
                         );
                     }, 100);
                     $btn._isConfirmedStatus = true;
+                    $btn.needConfirmation = false;
                 }
             });
             $btn.addEventListener('blur', (e) => {
@@ -262,6 +258,7 @@ export default class SSugarFeature extends __SFeature implements ISFeature {
                     if ($btn._isConfirmedStatus === true) {
                         $btn.blur();
                         $btn._isConfirmedStatus = undefined;
+                        $btn.needConfirmation = true;
                     }
                 });
             });

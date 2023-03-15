@@ -2,7 +2,12 @@
     "type": "Select",
     "title": "Spaces",
     "description": "The available spaces option.",
+    "default": null,
     "options": [
+        {
+            "name": "---",
+            "value": null
+        },
         {
             "name": "10",
             "value": "10"

@@ -1,41 +1,45 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const lit_1 = require("lit");
+const s_spaces_selector_component_1 = require("@coffeekraken/s-spaces-selector-component");
+(0, s_spaces_selector_component_1.define)();
 function default_1(component) {
     return {
         hideOriginals: true,
-        html(props, values) {
+        html({ propObj, values, path }) {
+            const spaces = {
+                padding: [],
+                margin: [],
+            };
+            propObj.props.paddingTop.options.forEach((option) => {
+                spaces.padding.push(Object.assign(Object.assign({}, option), { default: option.value == propObj.props.paddingTop.default }));
+            });
+            propObj.props.marginTop.options.forEach((option) => {
+                spaces.margin.push(Object.assign(Object.assign({}, option), { default: option.value == propObj.props.marginTop.default }));
+            });
+            console.log('SPA', spaces);
             return (0, lit_1.html) `
-                <div class="${component.utils.cls('_spaces')}">Spaces</div>
+                <div
+                    class="${component.utils.cls('_spaces')}"
+                    @s-spaces-selector.change=${(e) => {
+                var _a;
+                Object.keys((_a = e.detail) !== null && _a !== void 0 ? _a : {}).forEach((key) => {
+                    const value = e.detail[key];
+                    const setPath = `${path.join('.')}.props.${key}`;
+                    component.setValue(setPath, value);
+                });
+                component.apply();
+            }}
+                >
+                    <s-spaces-selector
+                        .spaces=${spaces}
+                        .values=${Object.assign({}, values !== null && values !== void 0 ? values : {})}
+                    ></s-spaces-selector>
+                </div>
             `;
         },
-        events: {
-        // 's-dropzone.clear': (e) => {
-        //     const $url = e.$scope.querySelector(`input[name="url"]`);
-        //     if ($url) {
-        //         $url.removeAttribute('value');
-        //         $url.value = '';
-        //         $url.dispatchEvent(
-        //             new CustomEvent('change', {
-        //                 bubbles: true,
-        //             }),
-        //         );
-        //     }
-        // },
-        // 's-dropzone.file': (e) => {
-        //     const $url = e.$scope.querySelector(`input[name="url"]`);
-        //     if ($url) {
-        //         // $url.setAttribute('value', e.detail[0].url);
-        //         $url.value = e.detail[0].url;
-        //         $url.dispatchEvent(
-        //             new CustomEvent('change', {
-        //                 bubbles: true,
-        //             }),
-        //         );
-        //     }
-        // },
-        },
+        events: {},
     };
 }
 exports.default = default_1;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7O0FBQUEsNkJBQTJCO0FBRTNCLG1CQUF5QixTQUFTO0lBQzlCLE9BQU87UUFDSCxhQUFhLEVBQUUsSUFBSTtRQUNuQixJQUFJLENBQUMsS0FBVSxFQUFFLE1BQVc7WUFDeEIsT0FBTyxJQUFBLFVBQUksRUFBQTs4QkFDTyxTQUFTLENBQUMsS0FBSyxDQUFDLEdBQUcsQ0FBQyxTQUFTLENBQUM7YUFDL0MsQ0FBQztRQUNOLENBQUM7UUFDRCxNQUFNLEVBQUU7UUFDSiwrQkFBK0I7UUFDL0IsZ0VBQWdFO1FBQ2hFLGtCQUFrQjtRQUNsQix5Q0FBeUM7UUFDekMsMkJBQTJCO1FBQzNCLDhCQUE4QjtRQUM5QiwwQ0FBMEM7UUFDMUMsaUNBQWlDO1FBQ2pDLGtCQUFrQjtRQUNsQixhQUFhO1FBQ2IsUUFBUTtRQUNSLEtBQUs7UUFDTCw4QkFBOEI7UUFDOUIsZ0VBQWdFO1FBQ2hFLGtCQUFrQjtRQUNsQiwwREFBMEQ7UUFDMUQsd0NBQXdDO1FBQ3hDLDhCQUE4QjtRQUM5QiwwQ0FBMEM7UUFDMUMsaUNBQWlDO1FBQ2pDLGtCQUFrQjtRQUNsQixhQUFhO1FBQ2IsUUFBUTtRQUNSLEtBQUs7U0FDUjtLQUNKLENBQUM7QUFDTixDQUFDO0FBbkNELDRCQW1DQyJ9
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7O0FBQUEsNkJBQTJCO0FBRTNCLDJGQUF1RztBQUV2RyxJQUFBLG9DQUFnQyxHQUFFLENBQUM7QUFFbkMsbUJBQXlCLFNBQVM7SUFDOUIsT0FBTztRQUNILGFBQWEsRUFBRSxJQUFJO1FBQ25CLElBQUksQ0FBQyxFQUFFLE9BQU8sRUFBRSxNQUFNLEVBQUUsSUFBSSxFQUFFO1lBQzFCLE1BQU0sTUFBTSxHQUFHO2dCQUNYLE9BQU8sRUFBRSxFQUFFO2dCQUNYLE1BQU0sRUFBRSxFQUFFO2FBQ2IsQ0FBQztZQUVGLE9BQU8sQ0FBQyxLQUFLLENBQUMsVUFBVSxDQUFDLE9BQU8sQ0FBQyxPQUFPLENBQUMsQ0FBQyxNQUFNLEVBQUUsRUFBRTtnQkFDaEQsTUFBTSxDQUFDLE9BQU8sQ0FBQyxJQUFJLGlDQUNaLE1BQU0sS0FDVCxPQUFPLEVBQUUsTUFBTSxDQUFDLEtBQUssSUFBSSxPQUFPLENBQUMsS0FBSyxDQUFDLFVBQVUsQ0FBQyxPQUFPLElBQzNELENBQUM7WUFDUCxDQUFDLENBQUMsQ0FBQztZQUNILE9BQU8sQ0FBQyxLQUFLLENBQUMsU0FBUyxDQUFDLE9BQU8sQ0FBQyxPQUFPLENBQUMsQ0FBQyxNQUFNLEVBQUUsRUFBRTtnQkFDL0MsTUFBTSxDQUFDLE1BQU0sQ0FBQyxJQUFJLGlDQUNYLE1BQU0sS0FDVCxPQUFPLEVBQUUsTUFBTSxDQUFDLEtBQUssSUFBSSxPQUFPLENBQUMsS0FBSyxDQUFDLFNBQVMsQ0FBQyxPQUFPLElBQzFELENBQUM7WUFDUCxDQUFDLENBQUMsQ0FBQztZQUVILE9BQU8sQ0FBQyxHQUFHLENBQUMsS0FBSyxFQUFFLE1BQU0sQ0FBQyxDQUFDO1lBRTNCLE9BQU8sSUFBQSxVQUFJLEVBQUE7OzZCQUVNLFNBQVMsQ0FBQyxLQUFLLENBQUMsR0FBRyxDQUFDLFNBQVMsQ0FBQztnREFDWCxDQUFDLENBQUMsRUFBRSxFQUFFOztnQkFDOUIsTUFBTSxDQUFDLElBQUksQ0FBQyxNQUFBLENBQUMsQ0FBQyxNQUFNLG1DQUFJLEVBQUUsQ0FBQyxDQUFDLE9BQU8sQ0FBQyxDQUFDLEdBQUcsRUFBRSxFQUFFO29CQUN4QyxNQUFNLEtBQUssR0FBRyxDQUFDLENBQUMsTUFBTSxDQUFDLEdBQUcsQ0FBQyxDQUFDO29CQUM1QixNQUFNLE9BQU8sR0FBRyxHQUFHLElBQUksQ0FBQyxJQUFJLENBQUMsR0FBRyxDQUFDLFVBQVUsR0FBRyxFQUFFLENBQUM7b0JBQ2pELFNBQVMsQ0FBQyxRQUFRLENBQUMsT0FBTyxFQUFFLEtBQUssQ0FBQyxDQUFDO2dCQUN2QyxDQUFDLENBQUMsQ0FBQztnQkFDSCxTQUFTLENBQUMsS0FBSyxFQUFFLENBQUM7WUFDdEIsQ0FBQzs7O2tDQUdhLE1BQU07a0NBQ04sTUFBTSxDQUFDLE1BQU0sQ0FBQyxFQUFFLEVBQUUsTUFBTSxhQUFOLE1BQU0sY0FBTixNQUFNLEdBQUksRUFBRSxDQUFDOzs7YUFHcEQsQ0FBQztRQUNOLENBQUM7UUFDRCxNQUFNLEVBQUUsRUFBRTtLQUNiLENBQUM7QUFDTixDQUFDO0FBN0NELDRCQTZDQyJ9

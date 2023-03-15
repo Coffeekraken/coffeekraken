@@ -1,4 +1,4 @@
-<div class="s-card {{ attributes.class }} {{ direction ? 's-card--' ~ direction : '' }} {{ __paddingClasses(padding, frontspec) }} {{ __marginClasses(margin, frontspec) }}" {{ __attrs(attributes, ['class'])|raw }}
+<div class="s-card {{ attributes.class }} {{ direction ? 's-card--' ~ direction : '' }} {{ __spacesClasses(spaces, frontspec) }}" {{ __attrs(attributes, ['class'])|raw }}
     s-specs="views.components.card"
     {{ __specsValues(_context)|raw }}
 >

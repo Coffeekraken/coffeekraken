@@ -26,17 +26,12 @@ export default function (component) {
                 });
             });
 
-            console.log('SPA', spaces);
-
             return html`
                 <div
                     class="${component.utils.cls('_spaces')}"
                     @s-spaces-selector.change=${(e) => {
-                        Object.keys(e.detail ?? {}).forEach((key) => {
-                            const value = e.detail[key];
-                            const setPath = `${path.join('.')}.props.${key}`;
-                            component.setValue(setPath, value);
-                        });
+                        const setPath = `${path.join('.')}`;
+                        component.setValue(setPath, e.detail);
                         component.apply();
                     }}
                 >

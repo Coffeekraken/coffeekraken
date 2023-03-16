@@ -31,7 +31,7 @@ export default function carpenterHandler({ req, res, pageConfig }) {
             layout: undefined,
         };
 
-        let layoutPath = pageConfig.layout ?? 'sugar.layouts.carpenter';
+        let layoutPath = pageConfig.layout ?? 'sugar.layouts.nude';
         const layoutData = Object.assign({}, res.templateData ?? {});
         let finalResult;
 

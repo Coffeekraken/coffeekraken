@@ -1,13 +1,18 @@
 import __SClass from '@coffeekraken/s-class';
 import __SSpecs from '@coffeekraken/s-specs';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
+import __SVite from '@coffeekraken/s-vite';
 import { __dirname } from '@coffeekraken/sugar/fs';
 import { __deepMerge } from '@coffeekraken/sugar/object';
-import { __packageRootDir } from '@coffeekraken/sugar/path';
 import { __onProcessExit } from '@coffeekraken/sugar/process';
 import __express from 'express';
-import __fs from 'fs';
 import __SCarpenterStartParamsInterface from './interface/SCarpenterStartParamsInterface';
+
+import __expressHttpProxy from 'express-http-proxy';
+
+import { __packageRootDir } from '@coffeekraken/sugar/path';
+
+import __carpenterViewHandler from './handlers/carpenterViewHandler';
 
 /**
  * @name                SCarpenter
@@ -29,7 +34,7 @@ import __SCarpenterStartParamsInterface from './interface/SCarpenterStartParamsI
  * @snippet         __SCarpenter($1)
  * const carpenter = new __SCarpenter($1);
  * carpenter.start();
- * 
+ *
  * @example             js
  * import SCarpenter from '@coffeekraken/s-carpenter';
  * const carpenter = new SCarpenter();
@@ -41,6 +46,9 @@ import __SCarpenterStartParamsInterface from './interface/SCarpenterStartParamsI
 
 export interface ISCarpenterStartParams {
     port: number;
+    vitePort: number;
+    dev: boolean;
+    env: 'development' | 'production';
 }
 
 export interface ISCarpenterSettingsSource {
@@ -148,48 +156,79 @@ class SCarpenter extends __SClass {
                 `<yellow>[start]</yellow> Starting a new carpenter server...`,
             );
 
-            const app: any = __express(),
-                watchers = {};
+            if (finalParams.dev) {
+                const vite = new __SVite({
+                    processConfig(viteConfig) {
+                        delete viteConfig.server.proxy;
+                        viteConfig.server.proxy = {
+                            get '^(?!\\/carpenter).*'() {
+                                return {
+                                    target: `http://localhost:3000`,
+                                    changeOrigin: true,
+                                    rewrite: (path) => {
+                                        return path;
+                                    },
+                                };
+                            },
+                        };
+                        return viteConfig;
+                    },
+                });
+                await vite.start({
+                    port: finalParams.vitePort,
+                });
+            }
 
-            const { specsMap, specsBySources } = await this.loadSpecs();
+            const app: any = __express();
+
+            const specs = await this.loadSpecs();
 
             // listen for requesting the global data like specs by sources, etc...
-            app.get(`/carpenter`, async (req, res) => {
+            app.get(`/carpenter.json`, async (req, res) => {
                 res.type('application/json');
-                res.send({
-                    specsMap,
-                    specsBySources,
-                });
+                res.send(specs);
             });
 
-            app.get('/', async (req, res) => {
-                // load html here to have updated html without reloading the server
-                const html = __fs
-                    .readFileSync(
-                        `${__packageRootDir(__dirname())}/src/views/index.html`,
-                    )
-                    .toString();
-
-                res.type('text/html');
-                res.send(html);
-            });
-            app.get('/dist/css/index.css', async (req, res) => {
+            app.get('/carpenter/index.css', async (req, res) => {
                 const cssFilePath = `${__packageRootDir(
                     __dirname(),
                 )}/dist/css/index.css`;
                 res.sendFile(cssFilePath);
             });
-            app.get('/dist/js/index.esm.js', async (req, res) => {
+            app.get('/carpenter/index.esm.js', async (req, res) => {
                 const jsFilePath = `${__packageRootDir(
                     __dirname(),
                 )}/dist/js/index.esm.js`;
                 res.sendFile(jsFilePath);
             });
 
+            app.get('/favicon.ico', (req, res) => {
+                res.send(null);
+            });
+            // app.use(
+            //     '/dist',
+            //     __express.static(__path.join(__dirname(), 'dist')),
+            // );
+
+            app.get('/carpenter/:dotpath', (req, res) => {
+                __carpenterViewHandler({
+                    req,
+                    res,
+                    specs,
+                    params: finalParams,
+                });
+            });
+
+            // proxy all non carpenter to the main vite server
+            app.get(
+                /^(?!\/carpenter).*/,
+                __expressHttpProxy('http://0.0.0.0:3000'),
+            );
+
             let server;
             await new Promise((_resolve) => {
                 server = app.listen(finalParams.port, () => {
-                    _resolve();
+                    _resolve(null);
                 });
             });
 
@@ -202,10 +241,16 @@ class SCarpenter extends __SClass {
 
             __onProcessExit(() => {
                 console.log(
-                    `<red>[kill]</red> Gracefully killing the <cyan>mitosis server</cyan>...`,
+                    `<red>[kill]</red> Gracefully killing the <cyan>Carpenter server</cyan>...`,
                 );
                 return new Promise((resolve) => {
-                    server.close(async () => {
+                    setTimeout(() => {
+                        console.warn(
+                            `<yellow>[kill]</yellow> The server take times to shutdown. It will be killed.`,
+                        );
+                        process.kill(0);
+                    }, 3000);
+                    server.close(() => {
                         // @ts-ignore
                         resolve();
                     });

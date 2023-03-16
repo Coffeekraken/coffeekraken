@@ -18,7 +18,7 @@ export default class SStdioBasicAdapter extends __SStdioAdapter implements ISBas
     _lastLogObj: any;
     _loggedGroups: any;
     _logsStack: ISStdioBasicAdapterLogsContainer[];
-    log(logObj: ISLog): void;
+    log(logObj: ISLog): any;
     
     _ask(askObj: any): __SPromise;
 }

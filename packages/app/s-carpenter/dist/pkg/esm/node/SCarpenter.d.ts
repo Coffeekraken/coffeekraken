@@ -2,6 +2,9 @@ import __SClass from '@coffeekraken/s-class';
 
 export interface ISCarpenterStartParams {
     port: number;
+    vitePort: number;
+    dev: boolean;
+    env: 'development' | 'production';
 }
 export interface ISCarpenterSettingsSource {
     title: string;

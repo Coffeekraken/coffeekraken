@@ -11,7 +11,8 @@ export default function kill(params) {
             });
         } else if (params.port) {
             try {
-                __childProcess.execSync(`kill -9 $(lsof -ti:${params.port})`);
+                __childProcess.execSync(`npx kill-port ${params.port}`);
+                // __childProcess.execSync(`kill -9 $(lsof -ti:${params.port})`);
                 emit('log', {
                     value: `<green>[process.kill]</green> The process running on the port <yellow>${params.port}</yellow> has been <green>successfully</green> killed`,
                 });

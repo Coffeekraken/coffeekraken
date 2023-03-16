@@ -1,7 +1,5 @@
-<section class="section-heading {{ __spacesClasses(spaces, frontspec) }}"
-    s-specs="views.sections.heading"
-    {{ __specsValues(_context)|raw }}
->
+<section class="section-heading {{ __spacesClasses(spaces, frontspec) }}" s-specs="views.sections.heading">
+    {{ __specsValuesTemplate(_context)|raw }}
 
     <div class="_bkg">
         {# <video autoplay loop>

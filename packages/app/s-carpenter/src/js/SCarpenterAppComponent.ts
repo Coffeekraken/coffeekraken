@@ -500,7 +500,7 @@ export default class SCarpenterComponent extends __SLitComponent {
      */
     _listenSpecsEditorUpdate() {
         // listen for actual updated
-        this.addEventListener('s-specs-editor.update', async (e) => {
+        this.addEventListener('s-specs-editor.change', async (e) => {
             // make use of the specified adapter to update the component/section/etc...
             const adapterResult = await SCarpenterComponent._registeredAdapters[
                 this.props.adapter

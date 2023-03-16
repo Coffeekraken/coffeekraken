@@ -82,7 +82,7 @@ export default class SStdioConsoleSource
                     //     return;
                     // }
 
-                    if (!log === null || log === undefined) {
+                    if (log === null || log === undefined) {
                         _nativeConsole.log(log);
                         return false;
                     }
@@ -116,10 +116,9 @@ export default class SStdioConsoleSource
 
                 args = args.map((log) => {
                     // if (!log) return;
-
                     return new __SLog({
                         type: log?.type ?? __SLog.TYPE_LOG,
-                        value: log?.value ?? log,
+                        value: log,
                         group: log?.group ?? group,
                         notify: key === 'notify' || log?.notify,
                         verbose: key === 'verbose' || log?.verbose,
@@ -130,7 +129,6 @@ export default class SStdioConsoleSource
                 });
 
                 args.forEach((log) => {
-                    // global._console.log(log);
                     this.log(log);
                 });
             };

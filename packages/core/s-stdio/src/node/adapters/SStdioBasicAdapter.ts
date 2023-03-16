@@ -104,15 +104,17 @@ export default class SStdioBasicAdapter
     _loggedGroups: any = {};
     _logsStack: ISStdioBasicAdapterLogsContainer[] = [];
     log(logObj: ISLog) {
+        const logger = logObj.logger ?? _nativeConsole.log;
+
         // handle empty logs
-        if (!logObj) return;
+        if (!logObj) {
+            return logger(logObj);
+        }
 
         // filter out the verbose logs
         if (logObj.verbose && !__SEnv.is('verbose')) {
             return;
         }
-
-        const logger = logObj.logger ?? _nativeConsole.log;
 
         const groupObj = this._getGroupObj(logObj.group);
 
@@ -173,6 +175,7 @@ export default class SStdioBasicAdapter
         }
 
         let toLog = logObj.value?.value ?? logObj.value ?? logObj;
+
         if (typeof toLog === 'string') {
             toLog = __parseHtml(
                 `<${groupObj.color}>█</${groupObj.color}>   ${toLog}`,

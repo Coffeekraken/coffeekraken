@@ -6,7 +6,17 @@
 
 {% block body %}
 
-    {{ body|raw }}
-    <s-carpenter id="carpenter" save sidebar iframe></s-carpenter>
+    <style>
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    </style>
+    <div class="s-carpenter_body">
+        {{ body|raw }}
+    </div>
+    
+    <s-carpenter id="carpenter" auto-init></s-carpenter>
 
 {% endblock %}

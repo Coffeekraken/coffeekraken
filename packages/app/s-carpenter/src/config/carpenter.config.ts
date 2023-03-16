@@ -7,6 +7,9 @@ export default function (api) {
         server: {
             port: 3001,
         },
+        vite: {
+            port: 3003,
+        },
         sources: {
             components: {
                 title: 'Components',

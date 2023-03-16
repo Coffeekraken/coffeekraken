@@ -209,7 +209,7 @@ export default class SSpecs extends __SClass {
      * @since       2.0.0
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    constructor(settings: Partial<ISSpecsSettings>) {
+    constructor(settings?: Partial<ISSpecsSettings>) {
         super(
             __deepMerge(
                 __toPlainObject(__SSugarConfig.get('specs') ?? {}),

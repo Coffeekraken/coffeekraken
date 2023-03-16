@@ -29,7 +29,7 @@ export interface ISSpacesSelectorComponentProps {}
  * @support         safari
  * @support         edge
  *
- * @event           s-spaces-selector.update                Dispatched when a value has been updated with the new values in the `detail`
+ * @event           s-spaces-selector.change                Dispatched when a value has been updated with the new values in the `detail`
  *
  * @import          import { define as __SSpacesSelectorComponentDefine } from '@coffeekraken/s-spaces-selector-component';
  *
@@ -94,6 +94,17 @@ export default class SSpacesSelectorComponent extends __SLitComponent {
         );
     }
 
+    clear() {
+        // reset the values
+        this.props.values = {};
+
+        // dispatch a new update event
+        this.utils.dispatchEvent('change', {
+            bubbles: true,
+            detail: Object.assign({}, this.props.values),
+        });
+    }
+
     _updateSelect(e) {
         const propertyName = __camelCase(e.target.name);
 
@@ -103,13 +114,11 @@ export default class SSpacesSelectorComponent extends __SLitComponent {
         // dispatch a new update event
         this.utils.dispatchEvent('change', {
             bubbles: true,
-            detail: this.props.values,
+            detail: Object.assign({}, this.props.values),
         });
     }
 
     render() {
-        console.log('render', this.props.spaces, this.props.values);
-
         return html`
             <div class="${this.utils.cls('_inner')}">
                 ${this._spacesNames.map(
@@ -145,7 +154,7 @@ export default class SSpacesSelectorComponent extends __SLitComponent {
                                             `_select-${spaceName}-${side}`,
                                         )}"
                                         name="${spaceName}-${side}"
-                                        value="${value}"
+                                        .value=${value}
                                         @change=${(e) => {
                                             this._updateSelect(e);
                                         }}
@@ -156,8 +165,8 @@ export default class SSpacesSelectorComponent extends __SLitComponent {
                                                     value="${option[
                                                         this.props.valueProp
                                                     ]}"
-                                                    ?selected=${selected !==
-                                                        null ||
+                                                    ?selected=${selected ===
+                                                        option ||
                                                     (selected === null &&
                                                         option.default)}
                                                 >
@@ -171,6 +180,15 @@ export default class SSpacesSelectorComponent extends __SLitComponent {
                         </div>
                     `,
                 )}
+
+                <button
+                    class="${this.utils.cls('_clear')}"
+                    @pointerup=${() => {
+                        this.clear();
+                    }}
+                >
+                    Clear
+                </button>
             </div>
         `;
     }

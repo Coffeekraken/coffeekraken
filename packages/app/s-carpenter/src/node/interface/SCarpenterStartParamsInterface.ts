@@ -26,6 +26,31 @@ class SCarpenterStartParamsInterface extends __SInterface {
                 description:
                     'Specify the server port you want for your carpenter environment',
                 default: __SSugarConfig.get('carpenter.server.port'),
+                alias: 'p',
+            },
+            vitePort: {
+                type: 'String',
+                description:
+                    'Specify the vite server port you want when the "dev" mode is on',
+                default: __SSugarConfig.get('carpenter.vite.port'),
+            },
+            cssPath: {
+                type: 'String',
+                description: 'Specify the path to the main css entry point',
+                required: true,
+                default: '/dist/css/index.css',
+            },
+            jsPath: {
+                type: 'String',
+                description: 'Specify the path to the main js entry point',
+                required: true,
+                default: '/dist/js/index.esm.js',
+            },
+            dev: {
+                type: 'Boolean',
+                description:
+                    'Specify if you want to launch carpenter in dev mode to work on it',
+                default: false,
             },
         };
     }

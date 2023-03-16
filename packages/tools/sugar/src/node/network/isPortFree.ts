@@ -20,7 +20,7 @@ import __tcpPortUsed from 'tcp-port-used';
  *
  * @snippet         __isPortFree($1)
  * await __isPortFree($1)
- * 
+ *
  * @example         js
  * import { __isPortFree } from '@coffeekraken/sugar/network';
  * await __isPortFree(22000); // => true
@@ -35,7 +35,7 @@ export default function __isPortFree(port) {
             function (inUse) {
                 resolve(!inUse);
             },
-            function () {
+            function (e) {
                 resolve(false);
             },
         );

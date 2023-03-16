@@ -42,12 +42,41 @@ export default {
     },
 
     async getProps({ $elm }): Promise<any> {
-        if ($elm.hasAttribute('s-specs-values')) {
-            const data = JSON.parse($elm.getAttribute('s-specs-values'));
-            return data;
+        let raw = $elm.getAttribute('s-specs-values');
+        let props;
+
+        // try json
+        if (raw) {
+            try {
+                props = JSON.parse(raw);
+            } catch (e) {}
         }
 
-        return {};
+        // ajax call
+        if (!props && raw?.match(/^(https?\:\/\/|\/)/)) {
+            const rawResponse = await fetch(raw, {
+                method: 'GET',
+            });
+            props = await rawResponse.json();
+        }
+
+        // template in the dom
+        if (!props) {
+            for (let i = 0; i < $elm.children.length; i++) {
+                const $child = $elm.children[i];
+                if (
+                    $child.tagName === 'TEMPLATE' &&
+                    $child.hasAttribute('s-specs-values')
+                ) {
+                    try {
+                        props = JSON.parse($child.content.textContent);
+                    } catch (e) {}
+                    break;
+                }
+            }
+        }
+
+        return props;
     },
 
     async setProps({ $elm, props, component }): Promise<HTMLElement> {

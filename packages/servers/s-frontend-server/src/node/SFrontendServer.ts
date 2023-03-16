@@ -150,16 +150,18 @@ export default class SFrontendServer extends __SClass {
      * start a server using these parameters and returns an SPromise instance
      * through which you can subscribe for events, etc...
      *
+     * @return      Promise<Function>           A promise that will be resolved when the server has started with a function to stop it
+     *
      * @since       2.0.0
      * @author					Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     start(
         params: Partial<ISFrontendServerStartParams> | string,
-    ): Promise<void | any> {
+    ): Promise<any | Function> {
         const finalParams: ISFrontendServerStartParams =
             __SFrontendServerStartParamsInterface.apply(params);
 
-        return new Promise(async (resolve) => {
+        return new Promise(async (resolve, reject) => {
             this._express.use(__compression());
 
             // save metas
@@ -353,7 +355,7 @@ export default class SFrontendServer extends __SClass {
                 console.log(
                     `Port <yellow>${this._frontendServerConfig.port}</yellow> already in use. Please make sure to make it free before retrying...`,
                 );
-                process.kill(1);
+                return reject();
             }
 
             if (!finalParams.listen) {
@@ -362,7 +364,7 @@ export default class SFrontendServer extends __SClass {
                     `<yellow>Frontend server</yellow> started <green>successfully</green>`,
                 );
                 // when no listen, we just resolve the promise to say that the server has started
-                resolve();
+                reject();
             } else {
                 const server = this._express.listen(
                     this._frontendServerConfig.port,
@@ -389,6 +391,14 @@ export default class SFrontendServer extends __SClass {
                         console.verbose?.(
                             `Log level: <yellow>${finalParams.logLevel}</yellow>`,
                         );
+
+                        resolve(() => {
+                            return new Promise((_resolve) => {
+                                server.close(() => {
+                                    _resolve(null);
+                                });
+                            });
+                        });
                     },
                 );
 
@@ -396,10 +406,10 @@ export default class SFrontendServer extends __SClass {
                     console.log(
                         `<red>[kill]</red> Gracefully killing the <cyan>frontend server</cyan>...`,
                     );
-                    return new Promise((resolve) => {
+                    return new Promise((_resolve) => {
                         server.close(() => {
                             // @ts-ignore
-                            resolve();
+                            _resolve();
                         });
                     });
                 });

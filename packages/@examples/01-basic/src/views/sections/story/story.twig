@@ -1,7 +1,6 @@
-<section class="section-story {{ __spacesClasses(spaces, frontspec) }}" layout="{{ layout }}" s-appear in="bottom" delay="500"
-    s-specs="views.sections.story"
-    {{ __specsValues(_context)|raw }}
-    >
+<section class="section-story {{ __spacesClasses(spaces, frontspec) }}" layout="{{ layout }}" s-appear in="bottom" delay="500" s-specs="views.sections.story">
+    {{ __specsValuesTemplate(_context)|raw }}
+    
     <div class="s-container">
         <div class="s-layout:{{ layout }} @mobile s-layout:1_2">
             <div>

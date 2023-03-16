@@ -26,13 +26,18 @@ import __SViteTestParamsInterface from './interface/SViteTestParamsInterface';
 import __sInternalWatcherReloadVitePlugin from './plugins/internalWatcherReloadPlugin';
 import __rewritesPlugin from './plugins/rewritesPlugin';
 
-export interface ISViteSettings {}
+export interface ISViteSettings {
+    processConfig: Function;
+}
 
 export interface ISViteTestParams {
     dir: string;
     watch: boolean;
 }
-export interface ISViteStartParams {}
+export interface ISViteStartParams {
+    host: string;
+    port: number;
+}
 export interface ISViteBuildParams {
     input: string;
     noWrite: boolean;
@@ -81,7 +86,7 @@ export default class SVite extends __SClass {
      * @since       2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    constructor(settings?: ISViteSettings) {
+    constructor(settings?: Partial<ISViteSettings>) {
         super(__deepMerge({}, settings ?? {}));
     }
 
@@ -92,19 +97,22 @@ export default class SVite extends __SClass {
      * Start the vite service with the server and the compilers
      *
      * @param         {ISViteStartParams}         [params={}]             Some parameters to customize your process
+     * @return      Promise<Function>           A promise that will be resolved when the server has started with a function to stop it
      *
      * @since         2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    start(params: Partial<ISViteStartParams>) {
+    start(params?: Partial<ISViteStartParams>): Promise<Function> {
         return new Promise(async (resolve, reject) => {
-            const finalParams = __SViteStartParamsInterface.apply(params);
+            const finalParams = __SViteStartParamsInterface.apply(params ?? {});
 
-            const config = {
+            let config = {
                 configFile: false,
                 // logLevel: 'silent',
                 ...__SugarConfig.get('vite'),
             };
+            config.server.host = finalParams.host;
+            config.server.port = finalParams.port;
 
             if (!config.plugins) config.plugins = [];
             config.plugins.unshift(__rewritesPlugin(config.rewrites ?? []));
@@ -130,17 +138,21 @@ export default class SVite extends __SClass {
 
             config.plugins = plugins;
 
-            if (!(await __isPortFree(config.server.port))) {
+            if (!(await __isPortFree(finalParams.port))) {
                 console.log(
-                    `Port <yellow>${config.server.port}</yellow> already in use. Please make sure to make it free before retrying...`,
+                    `Port <yellow>${finalParams.port}</yellow> already in use. Please make sure to make it free before retrying...`,
                 );
-                process.exit(1);
+                return reject();
+            }
+
+            // process config is passed
+            if (this.settings.processConfig) {
+                config = this.settings.processConfig(config);
             }
 
             const server = await __viteServer(config);
-            let listen;
             try {
-                listen = await server.listen();
+                await server.listen();
             } catch (e) {
                 console.error(e);
             }
@@ -163,14 +175,22 @@ export default class SVite extends __SClass {
                 console.log({
                     type: __SLog.TYPE_SUCCESS,
                     value: [
-                        `<yellow>http://${config.server.host}</yellow>:<cyan>${config.server.port}</cyan>`,
+                        `<yellow>http://${finalParams.host}</yellow>:<cyan>${finalParams.port}</cyan>`,
                     ].join('\n'),
                     notify: true,
                     metas: {
                         title: 'Coffeekraken',
                         subtitle: 'Server ready at:',
-                        open: `http://${config.server.host}:${config.server.port}`,
+                        open: `http://${finalParams.host}:${finalParams.port}`,
                     },
+                });
+
+                // resolve
+                resolve(() => {
+                    return new Promise(async (_resolve) => {
+                        await server.close();
+                        _resolve();
+                    });
                 });
             }, 1000);
         });

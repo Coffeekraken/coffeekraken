@@ -312,7 +312,7 @@ class SCarpenterComponent extends s_lit_component_1.default {
      */
     _listenSpecsEditorUpdate() {
         // listen for actual updated
-        this.addEventListener('s-specs-editor.update', (e) => __awaiter(this, void 0, void 0, function* () {
+        this.addEventListener('s-specs-editor.change', (e) => __awaiter(this, void 0, void 0, function* () {
             var _a, _b;
             // make use of the specified adapter to update the component/section/etc...
             const adapterResult = yield SCarpenterComponent._registeredAdapters[this.props.adapter].setProps({

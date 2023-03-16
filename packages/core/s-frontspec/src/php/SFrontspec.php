@@ -37,15 +37,14 @@ class SFrontspec
     /**
      * Constructor
      */
-    public function __construct($settings)
+    public function __construct($settings = [])
     {
         $this->settings = (object) array_merge_recursive(
             [
-                'path' => isset($_ENV['S_FRONTSPEC_PATH']) 
-                        ? $_ENV['S_FRONTSPEC_PATH']
-                        : ((
-                            isset($_ENV['S_FRONTEND_PATH'])
-                        ) ? $_ENV['S_FRONTEND_PATH'] . '/frontspec.json'
+                'path' => isset($_ENV['S_FRONTSPEC_PATH'])
+                    ? $_ENV['S_FRONTSPEC_PATH']
+                    : (isset($_ENV['S_FRONTEND_PATH'])
+                        ? $_ENV['S_FRONTEND_PATH'] . '/frontspec.json'
                         : null),
             ],
             (array) $settings

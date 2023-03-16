@@ -12,6 +12,7 @@
     "license": "MIT",
     "dependencies": {
         "@coffeekraken/s-activate-feature": "^2.0.0-alpha.25",
+        "@coffeekraken/s-bench": "^2.0.0-alpha.25",
         "@coffeekraken/s-class": "^2.0.0-alpha.25",
         "@coffeekraken/s-interface": "^2.0.0-alpha.25",
         "@coffeekraken/s-log": "^2.0.0-alpha.25",
@@ -22,10 +23,12 @@
         "@coffeekraken/s-sugar-config": "^2.0.0-alpha.25",
         "@coffeekraken/s-sugar-feature": "^2.0.0-alpha.25",
         "@coffeekraken/s-view-renderer": "^2.0.0-alpha.25",
+        "@coffeekraken/s-vite": "^2.0.0-alpha.25",
         "@coffeekraken/sugar": "^2.0.0-alpha.25",
         "@vitejs/plugin-vue": "^3.1.2",
         "chokidar": "^3.5.3",
         "express": "^4.18.2",
+        "express-http-proxy": "^1.6.3",
         "glob": "^8.0.3",
         "vite": "^3.1.7",
         "vite-plugin-dynamic-import": "^1.2.2"
@@ -54,14 +57,6 @@
         "./js/*": {
             "require": "./dist/pkg/cjs/js/*.js",
             "import": "./dist/pkg/esm/js/*.js"
-        },
-        "node": {
-            "require": "./dist/pkg/cjs/node/exports.js",
-            "import": "./dist/pkg/esm/node/exports.js"
-        },
-        "default": {
-            "require": "./dist/pkg/cjs/js/exports.js",
-            "import": "./dist/pkg/esm/js/exports.js"
         }
     }
 }

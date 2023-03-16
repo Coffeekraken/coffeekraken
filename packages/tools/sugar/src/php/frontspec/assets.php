@@ -26,7 +26,7 @@ namespace Sugar\frontspec;
 function assets($frontspec = null, $cacheBuster = '')
 {
     if (!$frontspec) {
-        $frontspecInstance = new SFrontspec();
+        $frontspecInstance = new \SFrontspec();
         $frontspec = $frontspecInstance->read();
     }
 
@@ -42,6 +42,15 @@ function assets($frontspec = null, $cacheBuster = '')
     foreach ($assets as $name => $asset) {
         $extension = \Sugar\path\extension($asset->src);
         if (!$extension) {
+            continue;
+        }
+
+        // filter by environment
+        if (
+            isset($_ENV['ENV']) &&
+            isset($asset->env) &&
+            $_ENV['ENV'] != $asset->env
+        ) {
             continue;
         }
 

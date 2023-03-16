@@ -1,4 +1,5 @@
 import __SClass from '@coffeekraken/s-class';
+import __SPromise from '@coffeekraken/s-promise';
 import __express from 'express';
 
 export interface ISFrontendServerStartParams {
@@ -51,8 +52,8 @@ export default class SFrontendServer extends __SClass {
     constructor();
     _config: any;
     
-    start(params: Partial<ISFrontendServerStartParams> | string): Promise<void | any>;
-    request(url: string): any;
+    start(params: Partial<ISFrontendServerStartParams> | string): Promise<any | Function>;
+    request(url: string): __SPromise;
     corsProxy(params: Partial<ISFrontendServerCorsProxyParams> | string): Promise<any>;
     
     _getHandlerFn(handlerNameOrPath: string): Promise<any>;

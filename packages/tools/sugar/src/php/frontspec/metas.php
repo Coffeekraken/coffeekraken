@@ -26,7 +26,7 @@ namespace Sugar\frontspec;
 function metas($frontspec, $env = 'development')
 {
     if (!$frontspec) {
-        $frontspecInstance = new SFrontspec();
+        $frontspecInstance = new \SFrontspec();
         $frontspec = $frontspecInstance->read();
     }
 

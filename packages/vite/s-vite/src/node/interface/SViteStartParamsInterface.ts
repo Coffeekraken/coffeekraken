@@ -1,4 +1,5 @@
 import __SInterface from '@coffeekraken/s-interface';
+import __SSugarConfig from '@coffeekraken/s-sugar-config';
 
 /**
  * @name                SViteStartParamsInterface
@@ -20,7 +21,24 @@ import __SInterface from '@coffeekraken/s-interface';
  */
 class SViteStartParamsInterface extends __SInterface {
     static get _definition() {
-        return {};
+        return {
+            host: {
+                type: 'String',
+                description:
+                    'Specify the host on which to launch the vite server',
+                required: true,
+                default: __SSugarConfig.get('vite.server.host'),
+                alias: 'h',
+            },
+            port: {
+                type: 'Number',
+                description:
+                    'Specify the port on which to launch the vite server',
+                required: true,
+                default: __SSugarConfig.get('vite.server.port'),
+                alias: 'p',
+            },
+        };
     }
 }
 

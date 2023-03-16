@@ -1,8 +1,7 @@
 <div class="{{ attributes.class }} {{ container ? 's-container:' ~ container : '' }} {{ __marginClasses(margin, frontspec) }} {{ __paddingClasses(padding, frontspec) }}"
-    {{ __attrs(attributes, ['class'])|raw }}
-    s-specs="views.components.slider"
-    {{ __specsValues(_context)|raw }}
->
+    {{ __attrs(attributes, ['class'])|raw }} s-specs="views.components.slider">
+    
+    {{ __specsValuesTemplate(_context)|raw }}
 
 <s-slider 
     class="{{ ratio ? 's-ratio--' ~ ratio|replace('/','-') : '' }}"

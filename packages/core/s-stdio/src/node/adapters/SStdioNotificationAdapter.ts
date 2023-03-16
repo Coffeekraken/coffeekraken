@@ -97,7 +97,7 @@ export default class SStdioBasicAdapter
 
         __notifier.notify({
             title: __stripTags(logObj.group ?? 'Sugar ♥'),
-            message: __stripTags(logObj.value ?? '...'),
+            message: __stripTags(logObj.value?.value ?? logObj.value ?? '...'),
             icon: false,
             timeout: 10,
             contentImage: icons[logObj.type] ?? icons.log,

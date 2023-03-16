@@ -185,7 +185,8 @@ export default class SCarpenterComponent extends __SLitComponent {
 
     render() {
         return html`
-            ${this.state.status === 'idle' || this.state.status === 'loading'
+            ${!this.props.autoInit &&
+            (this.state.status === 'idle' || this.state.status === 'loading')
                 ? html`
                       <button
                           s-carpenter-initial-ui

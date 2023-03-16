@@ -393,7 +393,7 @@ export default class SStdio extends __SClass {
         for (let i = 0; i < logObj.length; i++) {
             let log = <ISLog>logObj[i];
 
-            if (!log || !log.active) continue;
+            if (!log?.active) continue;
 
             // put in buffer if not displayed
             if (!this.isDisplayed() || this._isClearing) {

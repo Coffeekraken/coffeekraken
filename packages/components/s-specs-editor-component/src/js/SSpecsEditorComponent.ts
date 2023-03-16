@@ -62,7 +62,7 @@ export interface ISSpecsEditorComponentProps {
  * @support         safari
  * @support         edge
  *
- * @event           s-specs-editor.update               Dispatched when the user has updated some properties
+ * @event           s-specs-editor.change               Dispatched when the user has changed some properties
  * @event           s-specs-editor.changeMedia         Dispatched when the user has changed the media from the UI
  * @event           s-specs-editor                      Dispatched at any events. Check the "eventType" property for the event name
  *
@@ -306,10 +306,10 @@ export default class SSpecsEditorComponent extends __SLitComponent {
     }
 
     /**
-     * Apply updates
+     * Apply changes
      */
     apply() {
-        this.utils.dispatchEvent('update', {
+        this.utils.dispatchEvent('change', {
             bubbles: true,
             detail: {
                 propsSpecs: Object.assign({}, this.props.specs),
@@ -412,6 +412,9 @@ export default class SSpecsEditorComponent extends __SLitComponent {
      * Render the media selector
      */
     _renderMediaSelector(path: string[]) {
+        if (!this.props.frontspec?.media) {
+            return '';
+        }
         return html`
             <div class="${this.utils.cls('_media-icons')}">
                 ${Object.keys(
@@ -431,34 +434,13 @@ export default class SSpecsEditorComponent extends __SLitComponent {
                                     ? 'active'
                                     : ''} ${this.props.media === media
                                     ? 'current'
-                                    : ''} s-tooltip-container"
+                                    : ''}"
                             >
                                 <span
                                     @pointerup=${() => this._changeMedia(media)}
                                 >
                                     ${unsafeHTML(this.props.icons[media])}
                                 </span>
-                                ${mediaValue !== undefined
-                                    ? html`
-                                          <div
-                                              class="s-tooltip s-tooltip--interactive s-color s-color--accent ${this.utils.cls(
-                                                  '_actions',
-                                              )}"
-                                          >
-                                              <button
-                                                  class="_action"
-                                                  @pointerup=${() =>
-                                                      this.clearValue(path, {
-                                                          media,
-                                                      })}
-                                              >
-                                                  ${unsafeHTML(
-                                                      this.props.icons.clear,
-                                                  )}
-                                              </button>
-                                          </div>
-                                      `
-                                    : ''}
                             </span>
                         `;
                     })}

@@ -11,6 +11,13 @@
     margin-left: var(--s-spaces-selector-offset-x, 0);
 }
 
+.s-spaces-selector_clear {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
 .s-spaces-selector_space {
     position: absolute;
     top: 0;

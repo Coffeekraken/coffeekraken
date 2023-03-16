@@ -74,6 +74,10 @@ export default function ({
                 @sugar.border.radius;
             }
 
+            .s-spaces-selector_clear {
+                @sugar.ui.button ($lnf: outline);
+            }
+
             .s-spaces-selector_space {
                 @sugar.transition (fast);
 
@@ -97,7 +101,7 @@ export default function ({
 
             .s-spaces-selector_select {
                 padding: sugar.padding(20) sugar.padding(10) !important;
-                padding-inline-end: sugar.padding(30) !important;
+                padding-inline-end: sugar.padding(40) !important;
                 @sugar.ui.select();
                 @sugar.scale (0.9);
 

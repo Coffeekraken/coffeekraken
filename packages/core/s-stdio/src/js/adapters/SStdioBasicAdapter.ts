@@ -98,10 +98,12 @@ export default class SStdioBasicAdapter
     _loggedGroups: any = {};
     _logsStack: ISStdioBasicAdapterLogsContainer[] = [];
     log(logObj: ISLog) {
-        // handle empty logs
-        if (!logObj) return;
+        const logger = logObj?.logger ?? _nativeConsole.log;
 
-        const logger = logObj.logger ?? _nativeConsole.log;
+        // handle empty logs
+        if (!logObj) {
+            return logger(logObj);
+        }
 
         const groupObj = this._getGroupObj(logObj.group);
 
@@ -137,7 +139,7 @@ export default class SStdioBasicAdapter
             logLinesCount += logObj.margin.top;
         }
 
-        const logValue = logObj.value?.value ?? logObj.value;
+        const logValue = logObj.value?.value ?? logObj.value ?? logObj;
 
         let log = logValue;
         if (typeof logValue === 'string') {

@@ -93,8 +93,11 @@ function registerFunctions($twig)
     $specsToMarkdown = require __DIR__ . '/specs/specsToMarkdown.php';
     $twig->addFunction($specsToMarkdown);
 
-    $specsValues = require __DIR__ . '/specs/specsValues.php';
-    $twig->addFunction($specsValues);
+    $specsValuesAttribute = require __DIR__ . '/specs/specsValuesAttribute.php';
+    $twig->addFunction($specsValuesAttribute);
+
+    $specsValuesTemplate = require __DIR__ . '/specs/specsValuesTemplate.php';
+    $twig->addFunction($specsValuesTemplate);
 
     // String
     $idCompliant = require __DIR__ . '/string/idCompliant.php';

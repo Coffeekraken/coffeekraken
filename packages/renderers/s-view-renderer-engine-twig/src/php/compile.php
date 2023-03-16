@@ -6,6 +6,7 @@ require_once $nodeModulesVendorsPath;
 
 // set some environment variables
 $_ENV['S_SPECS_VALUES'] = true;
+$_ENV['ENV'] = 'development';
 
 $params = [];
 
@@ -41,9 +42,6 @@ $twig = \Sugar\twig\initTwig($twig, $loader);
 
 // ensure we send an array to the renderer
 $data = \Sugar\convert\toArray($data);
-
-// print '<pre>';
-// print_r($params->viewPath);
 
 try {
     $html = \Sugar\html\expandPleasantCssClassnames(

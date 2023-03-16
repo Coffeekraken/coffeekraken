@@ -1,11 +1,15 @@
 import __SClass from '@coffeekraken/s-class';
+import __SPromise from '@coffeekraken/s-promise';
 export interface ISViteSettings {
+    processConfig: Function;
 }
 export interface ISViteTestParams {
     dir: string;
     watch: boolean;
 }
 export interface ISViteStartParams {
+    host: string;
+    port: number;
 }
 export interface ISViteBuildParams {
     input: string;
@@ -42,13 +46,13 @@ export interface ISViteBuildParamsInternal extends ISViteBuildParams {
 }
 export default class SVite extends __SClass {
     
-    constructor(settings?: ISViteSettings);
+    constructor(settings?: Partial<ISViteSettings>);
     
-    start(params: Partial<ISViteStartParams>): Promise<unknown>;
+    start(params?: Partial<ISViteStartParams>): Promise<Function>;
     
     rebuildTimeoutByPath: {};
     build(params: ISViteBuildParams | String): Promise<unknown>;
     _handleBuildResult(buildResult: ISViteBuildResult, buildParams: ISViteBuildParamsInternal): Promise<ISViteBuildResult>;
     
-    test(params: ISViteTestParams | String): any;
+    test(params: ISViteTestParams | String): __SPromise;
 }

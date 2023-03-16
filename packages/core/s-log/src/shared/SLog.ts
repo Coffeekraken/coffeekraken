@@ -447,6 +447,12 @@ export default class SLog {
             return true;
         }
 
+        // if the passed type is not a known type in the SLog class,
+        // we assume it's not a log type but a proper value in the value object
+        if (!this.constructor.TYPES.includes(this._logObj.type)) {
+            return true;
+        }
+
         // check type
         // @ts-ignore
         if (!this.constructor._filteredTypes.includes(this._logObj.type))

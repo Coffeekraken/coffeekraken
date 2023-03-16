@@ -22,7 +22,7 @@ export default class SSpecs extends __SClass {
     
     static applyValuesToSpecs(values: any, specs: any): any;
     
-    constructor(settings: Partial<ISSpecsSettings>);
+    constructor(settings?: Partial<ISSpecsSettings>);
     
     read(specDotPath: string, settings?: Partial<ISSpecsReadSettings>): any;
     

@@ -10,6 +10,7 @@ export default class SSpacesSelectorComponent extends __SLitComponent {
     _spacesNames: string[];
     constructor();
     firstUpdated(): void;
+    clear(): void;
     _updateSelect(e: any): void;
     render(): import("lit-html").TemplateResult<1>;
 }

@@ -20,6 +20,12 @@
     }
 }
 
+body:has(.s-carpenter_body) {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 .s-carpenter_website-iframe {
     pointer-events: all;
     @sugar.transition;
@@ -43,12 +49,12 @@
 .s-carpenter_ui-placeholder {
     position: absolute;
     pointer-events: none;
-    background: rgba(255, 0, 0, 0.3);
-    /* background: transparent; */
+    /* background: rgba(255, 0, 0, 0.3); */
+    background: transparent;
 
     .active > & {
         pointer-events: all;
-        background: rgba(0, 255, 0, 0.3);
+        /* background: rgba(0, 255, 0, 0.3); */
     }
 }
 

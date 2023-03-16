@@ -8,7 +8,7 @@ import { __getColorFor } from '@coffeekraken/sugar/dev';
 import { __deepMerge } from '@coffeekraken/sugar/object';
 import __SProcess from './SProcess';
 import __SProcessManagerProcessWrapper, {
-    ISProcessManagerProcessWrapperSettings
+    ISProcessManagerProcessWrapperSettings,
 } from './SProcessManagerProcessWrapper';
 
 /**
@@ -19,7 +19,7 @@ import __SProcessManagerProcessWrapper, {
  * @platform        node
  * @status              beta
  * @private
- * 
+ *
  * This class represent a process handler class that will fire up some SProcess processes
  *
  * @param         {Object}          [settings={}]           An object of settings to configure your process instance:

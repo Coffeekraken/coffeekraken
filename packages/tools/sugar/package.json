@@ -385,6 +385,12 @@
             "require": "./dist/pkg/cjs/shared/perf/_exports.js",
             "import": "./dist/pkg/esm/shared/perf/_exports.js"
         },
+        "./php": {
+            "node": {
+                "require": "./dist/pkg/cjs/node/php/_exports.js",
+                "import": "./dist/pkg/esm/node/php/_exports.js"
+            }
+        },
         "./process": {
             "node": {
                 "require": "./dist/pkg/cjs/node/process/_exports.js",

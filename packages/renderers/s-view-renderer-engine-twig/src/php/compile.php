@@ -15,12 +15,22 @@ if (file_exists($argv[1])) {
 }
 
 // prepare data to pass it to the template engine
-$data = (object) $params->data;
+$data = \Sugar\convert\toArray($params->data);
 
 // shared data file path
-if ($data->_sharedDataFilePath) {
-    $sharedData = json_decode(file_get_contents($data->_sharedDataFilePath));
+if (isset($data['_sharedDataFilePath'])) {
+    $sharedData = json_decode(file_get_contents($data['_sharedDataFilePath']));
     $data = array_merge((array) $sharedData, (array) $data);
+}
+
+// $_SERVER data
+if (isset($data['$_SERVER'])) {
+    $_SERVER = array_merge($_SERVER, $data['$_SERVER']);
+}
+
+// $_ENV data
+if (isset($data['$_ENV'])) {
+    $_ENV = array_merge($_ENV, $data['$_ENV']);
 }
 
 $loader = new \Twig\Loader\FilesystemLoader();

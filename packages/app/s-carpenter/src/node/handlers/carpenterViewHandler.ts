@@ -1,6 +1,7 @@
 import __SBench from '@coffeekraken/s-bench';
 import __SSpecs from '@coffeekraken/s-specs';
 import __SViewRenderer from '@coffeekraken/s-view-renderer';
+import { __serverObjectFromExpressRequest } from '@coffeekraken/sugar/php';
 
 export default async function carpenterViewHandler({
     req,
@@ -12,6 +13,8 @@ export default async function carpenterViewHandler({
 
     bench.step('beforeSpecsRead');
 
+    const isRequestFromIframe = req.query.iframe !== undefined;
+
     // load current component/section/... specs
     const specsInstance = new __SSpecs();
     const currentSpecs = await specsInstance.read(req.params.dotpath);
@@ -22,15 +25,30 @@ export default async function carpenterViewHandler({
         );
     }
 
-    const viewPath =
-        currentSpecs.viewPath ?? req.params.dotpath.replace(/^views\./, '');
+    let viewPath =
+            currentSpecs.viewPath ?? req.params.dotpath.replace(/^views\./, ''),
+        viewData = currentSpecs.metas.path; // path to the data file
+
+    // if the method is "POST",
+    // meaning that it's a component update
+    // with some component data passed.
+    // we use these instead of the default ones
+    if (req.method === 'POST' && req.body) {
+        viewData = req.body;
+    }
 
     // render the current component/section, etc...
     const renderer = new __SViewRenderer();
-    const currentViewResult = await renderer.render(
-        viewPath,
-        currentSpecs.metas.path,
-    );
+    const currentViewResult = await renderer.render(viewPath, viewData);
+
+    // if the request if made with a POST method
+    // this mean that it's just a component update
+    // we don't need to render le layout, etc...
+    if (req.method === 'POST') {
+        res.status(200);
+        res.type('text/html');
+        return res.send(currentViewResult.value);
+    }
 
     const errors = {
         views: [],
@@ -44,6 +62,7 @@ export default async function carpenterViewHandler({
     try {
         const layoutPromise = renderer.render(layoutPath, {
             carpenter: specs,
+            $_SERVER: __serverObjectFromExpressRequest(req),
             frontspec: {
                 assets: {
                     carpenterModule: {
@@ -53,21 +72,27 @@ export default async function carpenterViewHandler({
                             ? `http://0.0.0.0:${params.vitePort}/src/js/index.ts`
                             : '/carpenter/index.esm.js',
                     },
-                    // carpenterStyle: {
-                    //     id: 'carpenter',
-                    //     defer: true,
-                    //     src: '/carpenter/index.css',
-                    // },
-                    module: {
-                        type: 'module',
+                    carpenterStyle: {
+                        id: 'carpenter',
                         defer: true,
-                        src: params.jsPath,
+                        src: params.dev
+                            ? `http://0.0.0.0:${params.vitePort}/src/css/index.css`
+                            : '/carpenter/index.css',
                     },
-                    style: {
-                        id: 'global',
-                        defer: true,
-                        src: params.cssPath,
-                    },
+                    ...(isRequestFromIframe
+                        ? {
+                              module: {
+                                  type: 'module',
+                                  defer: true,
+                                  src: params.jsPath,
+                              },
+                              style: {
+                                  id: 'global',
+                                  defer: true,
+                                  src: params.cssPath,
+                              },
+                          }
+                        : {}),
                 },
             },
             body: currentViewResult.value,

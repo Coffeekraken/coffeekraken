@@ -8,6 +8,8 @@ import { __onProcessExit } from '@coffeekraken/sugar/process';
 import __express from 'express';
 import __SCarpenterStartParamsInterface from './interface/SCarpenterStartParamsInterface';
 
+import __bodyParser from 'body-parser';
+
 import __expressHttpProxy from 'express-http-proxy';
 
 import { __packageRootDir } from '@coffeekraken/sugar/path';
@@ -179,8 +181,11 @@ class SCarpenter extends __SClass {
                 });
             }
 
+            // init the express app
             const app: any = __express();
+            app.use(__bodyParser.json({ limit: '120mb' }));
 
+            // load the specs files
             const specs = await this.loadSpecs();
 
             // listen for requesting the global data like specs by sources, etc...
@@ -205,17 +210,15 @@ class SCarpenter extends __SClass {
             app.get('/favicon.ico', (req, res) => {
                 res.send(null);
             });
-            // app.use(
-            //     '/dist',
-            //     __express.static(__path.join(__dirname(), 'dist')),
-            // );
 
-            app.get('/carpenter/:dotpath', (req, res) => {
-                __carpenterViewHandler({
-                    req,
-                    res,
-                    specs,
-                    params: finalParams,
+            ['get', 'post'].forEach((method) => {
+                app[method]('/carpenter/:dotpath', (req, res) => {
+                    __carpenterViewHandler({
+                        req,
+                        res,
+                        specs,
+                        params: finalParams,
+                    });
                 });
             });
 

@@ -62,6 +62,10 @@ function registerFunctions($twig)
     $attrs = require __DIR__ . '/html/attrs.php';
     $twig->addFunction($attrs);
 
+    // Is
+    $requestFromIframe = require __DIR__ . '/is/requestFromIframe.php';
+    $twig->addFunction($requestFromIframe);
+
     // json
     $jsonDecode = require __DIR__ . '/json/jsonDecode.php';
     $twig->addFunction($jsonDecode);
@@ -108,6 +112,10 @@ function registerFunctions($twig)
 
     $uniqid = require __DIR__ . '/string/uniqid.php';
     $twig->addFunction($uniqid);
+
+    // Url
+    $currentUrl = require __DIR__ . '/url/currentUrl.php';
+    $twig->addFunction($currentUrl);
 
     return $twig;
 }

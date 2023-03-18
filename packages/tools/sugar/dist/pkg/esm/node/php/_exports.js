@@ -1,0 +1,3 @@
+import __serverObjectFromExpressRequest from './serverObjectFromExpressRequest';
+export { __serverObjectFromExpressRequest };
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sZ0NBQWdDLE1BQU0sa0NBQWtDLENBQUM7QUFDaEYsT0FBTyxFQUFFLGdDQUFnQyxFQUFFLENBQUMifQ==

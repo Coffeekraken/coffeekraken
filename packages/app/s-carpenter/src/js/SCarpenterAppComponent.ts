@@ -27,8 +27,6 @@ import __ajaxAdapter from './adapters/ajaxAdapter';
 
 // @ts-ignore
 import __websiteUiCss from '../css/s-carpenter-app-website-ui.css';
-// import __css from '../css/index.css';
-// import __css from '../../../../src/css/s-carpenter-component.css'; // relative to /dist/pkg/esm/js
 
 export interface ISCarpenterAppComponentIconsProp {
     mobile: string;
@@ -224,7 +222,6 @@ export default class SCarpenterComponent extends __SLitComponent {
         // get the initial carpenter component
         this._$carpenterComponent =
             this._$rootDocument.querySelector('s-carpenter');
-        console.log('Carp', this._$carpenterComponent);
 
         // get the first s-spec element that we can find
         // or get the first item in the body
@@ -250,7 +247,7 @@ export default class SCarpenterComponent extends __SLitComponent {
         }
 
         // handle media method
-        await this._handleMediaMethod();
+        await this._init();
 
         // listen for escape key press to close editor
         __hotkey('escape').on('press', () => {
@@ -412,24 +409,23 @@ export default class SCarpenterComponent extends __SLitComponent {
      * Media is the media queries and his method is either "container" (@container queries), or "media" (plain old media queries).
      * It the method is "media", we need to wrap the website into an iframe to make the responsive preview work fine.
      */
-    async _handleMediaMethod(): Promise<void> {
-        // const mediaMethod = this._data.frontspec?.media?.method;
-        // if (fmediaMethod === 'container') {
-        //     // getting the viewport element
-        //     if (typeof this.props.viewportElm === HTMLElement) {
-        //         this._$websiteViewport = this.props.viewportElm;
-        //     } else if (typeof this.props.viewportElm === 'string') {
-        //         this._$websiteViewport =
-        //             this._websiteWindow.document.querySelector(
-        //                 this.props.viewportElm,
-        //             );
-        //     }
-        // } else if (this._data.frontspec?.media?.queries) {
-        // create the wrapping iframe
-        this._$websiteIframe = document.createElement('iframe');
-        this._$websiteIframe.classList.add('s-carpenter_website-iframe');
-        this._$websiteIframe.setAttribute('src', 'about:blank');
-        this._$websiteIframe.setAttribute('scrolling', 'no');
+    async _init(): Promise<void> {
+        // track if the iframe has already been filled.
+        // this is when the "iframe.s-carpenter_website-iframe" iframe
+        // is already in the document and has already loaded his content
+        let isIframeAlreadyFilled = true;
+
+        // create the wrapping iframe or get it from the content directly
+        this._$websiteIframe = this._$websiteDocument.querySelector(
+            'iframe.s-carpenter_website-iframe',
+        );
+        if (!this._$websiteIframe) {
+            this._$websiteIframe = document.createElement('iframe');
+            this._$websiteIframe.classList.add('s-carpenter_website-iframe');
+            this._$websiteIframe.setAttribute('src', 'about:blank');
+            this._$websiteIframe.setAttribute('scrolling', 'no');
+            isIframeAlreadyFilled = false;
+        }
 
         // set the website viewport to be able to resize it using the media controls
         this._$websiteViewport = this._$websiteIframe;
@@ -443,17 +439,23 @@ export default class SCarpenterComponent extends __SLitComponent {
         $html.querySelector('s-carpenter')?.remove?.();
 
         // prepend the website iframe in the body
-        this._$websiteDocument.body.prepend(this._$websiteIframe);
+        if (!isIframeAlreadyFilled) {
+            this._$websiteDocument.body.prepend(this._$websiteIframe);
+        }
 
         // wait until the iframe is ready
         await __whenIframeReady(this._$websiteIframe);
 
         // injecting the whole website into the iframe
-        __injectIframeContent(
-            this._$websiteIframe,
-            $html.documentElement.innerHTML,
-        );
+        if (!isIframeAlreadyFilled) {
+            __injectIframeContent(
+                this._$websiteIframe,
+                $html.documentElement.innerHTML,
+            );
+        }
 
+        // listen when the iframe is loaded to init correctly the
+        // carpenter stuffs like _websiteWindow, _$websiteDocument, etc...
         this._$websiteIframe.addEventListener('load', async (e) => {
             await __whenIframeReady(this._$websiteIframe);
 
@@ -473,24 +475,33 @@ export default class SCarpenterComponent extends __SLitComponent {
             this._initWebsiteIframeContent();
         });
 
+        // if the iframe is already filled with the content
+        // the "load" event will not bein fired, so we
+        // dispatch it ourself
+        if (isIframeAlreadyFilled) {
+            this._$websiteIframe.dispatchEvent(new CustomEvent('load'));
+        }
+
         // wait until the iframe is ready
         await __whenIframeReady(this._$websiteIframe);
 
         // empty the document of all the nodes
         // unless the iframes
-        ['body'].forEach((container) => {
-            Array.from(
-                this._$websiteDocument.querySelectorAll(`${container} > *`),
-            ).forEach((node) => {
-                if (
-                    node.tagName?.toLowerCase?.() === 'iframe' ||
-                    node.tagName?.toLowerCase?.() === 's-carpenter'
-                ) {
-                    return;
-                }
-                node.remove();
+        if (!isIframeAlreadyFilled) {
+            ['body'].forEach((container) => {
+                Array.from(
+                    this._$websiteDocument.querySelectorAll(`${container} > *`),
+                ).forEach((node) => {
+                    if (
+                        node.tagName?.toLowerCase?.() === 'iframe' ||
+                        node.tagName?.toLowerCase?.() === 's-carpenter'
+                    ) {
+                        return;
+                    }
+                    node.remove();
+                });
             });
-        });
+        }
 
         // }
     }

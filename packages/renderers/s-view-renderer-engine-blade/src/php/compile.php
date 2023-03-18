@@ -14,18 +14,26 @@ if (file_exists($argv[1])) {
 }
 
 // prepare data to pass it to the template engine
-$data = (object) $params->data;
+$data = \Sugar\convert\toArray($params->data);
 
 // shared data file path
-if ($data->_sharedDataFilePath && file_exists($data->_sharedDataFilePath)) {
-    $sharedData = json_decode(file_get_contents($data->_sharedDataFilePath));
+if (isset($data['_sharedDataFilePath'])) {
+    $sharedData = json_decode(file_get_contents($data['_sharedDataFilePath']));
     $data = array_merge((array) $sharedData, (array) $data);
+}
+
+// $_ENV data
+if (isset($data['$_ENV'])) {
+    $_ENV = array_merge($_ENV, $data['$_ENV']);
+}
+
+// $_SERVER data
+if (isset($data['$_SERVER'])) {
+    $_SERVER = array_merge($_SERVER, $data['$_SERVER']);
 }
 
 // preparing the paths
 $viewName = str_replace('.blade.php', '', $params->viewDotPath);
-
-// print $params->cacheDir;
 
 // add the default sugar views path
 $params->rootDirs = array_merge(
@@ -40,9 +48,11 @@ $blade = new eftec\bladeone\BladeOne(
 );
 // $blade->setMode(BladeOne::MODE_DEBUG);
 
+// ensure we send an array to the renderer
+$data = \Sugar\convert\toArray($data);
+
 $html = \Sugar\html\expandPleasantCssClassnames(
     $blade->run($viewName, (array) $data)
 );
-// $html = $blade->run($viewName, (array) $data);
 // $html = \Sugar\classname\patchHtml($html);
 print $html;

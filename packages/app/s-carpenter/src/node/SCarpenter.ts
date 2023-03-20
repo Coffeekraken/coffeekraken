@@ -1,4 +1,5 @@
 import __SClass from '@coffeekraken/s-class';
+import __SFrontspec from '@coffeekraken/s-frontspec';
 import __SSpecs from '@coffeekraken/s-specs';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
 import __SVite from '@coffeekraken/s-vite';
@@ -185,43 +186,6 @@ class SCarpenter extends __SClass {
             const app: any = __express();
             app.use(__bodyParser.json({ limit: '120mb' }));
 
-            // load the specs files
-            const specs = await this.loadSpecs();
-
-            // listen for requesting the global data like specs by sources, etc...
-            app.get(`/carpenter.json`, async (req, res) => {
-                res.type('application/json');
-                res.send(specs);
-            });
-
-            app.get('/carpenter/index.css', async (req, res) => {
-                const cssFilePath = `${__packageRootDir(
-                    __dirname(),
-                )}/dist/css/index.css`;
-                res.sendFile(cssFilePath);
-            });
-            app.get('/carpenter/index.esm.js', async (req, res) => {
-                const jsFilePath = `${__packageRootDir(
-                    __dirname(),
-                )}/dist/js/index.esm.js`;
-                res.sendFile(jsFilePath);
-            });
-
-            app.get('/favicon.ico', (req, res) => {
-                res.send(null);
-            });
-
-            ['get', 'post'].forEach((method) => {
-                app[method]('/carpenter/:dotpath', (req, res) => {
-                    __carpenterViewHandler({
-                        req,
-                        res,
-                        specs,
-                        params: finalParams,
-                    });
-                });
-            });
-
             // proxy all non carpenter to the main vite server
             app.get(
                 /^(?!\/carpenter).*/,
@@ -257,6 +221,66 @@ class SCarpenter extends __SClass {
                         // @ts-ignore
                         resolve();
                     });
+                });
+            });
+        });
+    }
+
+    /**
+     * @name            initOnExpressServer
+     * @type            Function
+     * @async
+     *
+     * This method allows you to init the carpenter handlers on an existing express server
+     *
+     * @param       {Express}           expressServer       The express server on which to init the carpenter handlers
+     *
+     * @since       2.0.0
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    async initOnExpressServer(
+        expressServer: any,
+        params?: Partial<ISCarpenterStartParams>,
+    ): void {
+        // const finalParams = <ISCarpenterStartParams>(
+        //     __deepMerge(__SCarpenterStartParamsInterface.defaults(), params)
+        // );
+
+        const frontspec = new __SFrontspec(),
+            frontspecJson = await frontspec.read();
+
+        // load the specs files
+        const specs = await this.loadSpecs();
+
+        // listen for requesting the global data like specs by sources, etc...
+        expressServer.get(`/carpenter.json`, async (req, res) => {
+            res.type('application/json');
+            res.send({
+                frontspec: frontspecJson,
+                ...specs,
+            });
+        });
+
+        expressServer.get('/carpenter.css', async (req, res) => {
+            const cssFilePath = `${__packageRootDir(
+                __dirname(),
+            )}/dist/css/index.css`;
+            res.sendFile(cssFilePath);
+        });
+        expressServer.get('/carpenter.js', async (req, res) => {
+            const jsFilePath = `${__packageRootDir(
+                __dirname(),
+            )}/dist/js/index.esm.js`;
+            res.sendFile(jsFilePath);
+        });
+
+        ['get', 'post'].forEach((method) => {
+            expressServer[method]('/carpenter/:dotpath', (req, res) => {
+                __carpenterViewHandler({
+                    req,
+                    res,
+                    specs,
+                    // params: finalParams,
                 });
             });
         });

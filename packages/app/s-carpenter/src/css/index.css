@@ -1,6 +1,15 @@
 @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css');
 
-@import './s-carpenter-app-component.css';
+@import './vars.css';
+
+@import './generic/carpenter-loader.css';
+@import './generic/s-fs-tree.css';
+
+@import './components/app.css';
+@import './components/controls.css';
+@import './components/editor.css';
+@import './components/loading.css';
+@import './components/sidebar.css';
 
 @sugar.init ($variant: light);
 
@@ -20,9 +29,9 @@
 @sugar.ui.switch.classes();
 @sugar.ui.fsTree.classes();
 @sugar.ui.tooltip.classes();
+@sugar.ui.loader.classes ('squareDots,spinner');
 
 body {
-    /* pointer-events: none; */
     background: none !important;
 }
 
@@ -50,64 +59,12 @@ s-carpenter-app {
     display: flex;
     overflow: hidden;
 }
-
-._navigation {
-    flex-grow: 0;
-    background: sugar.color(main, surface);
-    width: clamp(400px, 450px, 550px);
-    padding: sugar.padding(50);
-    @sugar.color (base, text);
-}
-
-._content {
-    flex-grow: 1;
-}
-
-._editor {
-    flex-grow: 0;
-    background: sugar.color(main, surface);
-    width: clamp(400px, 450px, 550px);
-    padding: sugar.padding(50);
-}
-
 .fa-solid {
     color: sugar.color(main, text, --alpha 0.5);
     margin-inline-end: sugar.margin(10);
 }
 .s-tooltip {
     width: 300px;
-}
-
-.component {
-    display: none;
-    height: calc(100vh - 42px);
-
-    &.active {
-        display: flex;
-        width: 100%;
-    }
-}
-
-.sidebar {
-    width: 450px;
-    background: sugar.color(main, surface);
-    padding: sugar.padding(50);
-    height: calc(100vh - 42px);
-    overflow-y: auto;
-    @sugar.scrollbar();
-}
-
-.content {
-    flex-grow: 1;
-}
-
-div[component] {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: calc(100vh - 42px);
-    overflow-y: auto;
-    @sugar.scrollbar();
 }
 
 .s-tabs {

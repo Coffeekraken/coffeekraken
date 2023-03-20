@@ -2,7 +2,14 @@ import { html } from 'lit';
 
 export default function (component) {
     return {
+        isActive() {
+            return component.props.features?.upload;
+        },
         html({ propObj, values }) {
+            if (!values) {
+                values = {};
+            }
+
             return html`
                 <div class="${component.utils.cls('_dropzone')}">
                     <s-dropzone

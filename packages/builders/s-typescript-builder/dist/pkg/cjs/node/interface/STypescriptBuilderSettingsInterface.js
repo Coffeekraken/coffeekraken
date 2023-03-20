@@ -21,8 +21,17 @@ const s_interface_1 = __importDefault(require("@coffeekraken/s-interface"));
  */
 class STypescriptBuilderSettingsInterface extends s_interface_1.default {
     static get _definition() {
-        return {};
+        return {
+            log: {
+                type: 'Object',
+                description: 'Specify the logs you want. THis is an object with properties "summary" and "compile".',
+                default: {
+                    summary: true,
+                    compile: true,
+                },
+            },
+        };
     }
 }
 exports.default = STypescriptBuilderSettingsInterface;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOzs7OztBQUVkLDRFQUFxRDtBQUVyRDs7Ozs7Ozs7Ozs7OztHQWFHO0FBQ0gsTUFBcUIsbUNBQW9DLFNBQVEscUJBQVk7SUFDekUsTUFBTSxLQUFLLFdBQVc7UUFDbEIsT0FBTyxFQUFFLENBQUM7SUFDZCxDQUFDO0NBQ0o7QUFKRCxzREFJQyJ9
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOzs7OztBQUVkLDRFQUFxRDtBQUVyRDs7Ozs7Ozs7Ozs7OztHQWFHO0FBQ0gsTUFBcUIsbUNBQW9DLFNBQVEscUJBQVk7SUFDekUsTUFBTSxLQUFLLFdBQVc7UUFDbEIsT0FBTztZQUNILEdBQUcsRUFBRTtnQkFDRCxJQUFJLEVBQUUsUUFBUTtnQkFDZCxXQUFXLEVBQ1AsdUZBQXVGO2dCQUMzRixPQUFPLEVBQUU7b0JBQ0wsT0FBTyxFQUFFLElBQUk7b0JBQ2IsT0FBTyxFQUFFLElBQUk7aUJBQ2hCO2FBQ0o7U0FDSixDQUFDO0lBQ04sQ0FBQztDQUNKO0FBZEQsc0RBY0MifQ==

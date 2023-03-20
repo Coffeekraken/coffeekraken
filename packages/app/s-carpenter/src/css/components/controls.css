@@ -1,0 +1,50 @@
+.s-carpenter-app_controls {
+    position: absolute;
+    z-index: 99999;
+    bottom: var(--s-carpenter-media-bottom);
+    left: var(--s-carpenter-media-left);
+    transform: translate(-50%, 200%);
+    display: flex;
+    align-items: center;
+    gap: sugar.margin(30);
+    background: sugar.color(main, background);
+    padding: sugar.padding(20);
+    opacity: 0;
+    pointer-events: none;
+    @sugar.transition();
+    @sugar.border.radius (30);
+    @sugar.depth (100);
+
+    .s-carpenter-app--open & {
+        transform: translate(-50%, 0);
+        opacity: 1;
+        pointer-events: all !important;
+    }
+
+    ._save {
+        @sugar.ui.button();
+        @sugar.color (complementary);
+        @sugar.depth (100);
+    }
+}
+
+.s-carpenter-app_queries {
+    background: sugar.color(main, background) !important;
+    border-bottom-left-radius: sugar.border.radius();
+    @sugar.depth (100);
+
+    ._query i {
+        margin-inline-end: sugar.margin(10);
+    }
+
+    /* .s-carpenter-app_query {
+        background: sugar.color(main, surface);
+        padding: sugar.padding(30) sugar.padding(40);
+        @sugar.transition (fast);
+
+        &:hover {
+            background: sugar.color(accent);
+            color: sugar.color(accent, foreground);
+        }
+    } */
+}

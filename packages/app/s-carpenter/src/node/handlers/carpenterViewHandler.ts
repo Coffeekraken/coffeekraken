@@ -7,18 +7,15 @@ export default async function carpenterViewHandler({
     req,
     res,
     specs,
-    params,
+    // params,
 }) {
     const bench = new __SBench('data.carpenterViewHandler');
 
     bench.step('beforeSpecsRead');
 
-    const isRequestFromIframe = req.query.iframe !== undefined;
-
     // load current component/section/... specs
     const specsInstance = new __SSpecs();
     const currentSpecs = await specsInstance.read(req.params.dotpath);
-
     if (!currentSpecs) {
         return res.send(
             `The requested spec "${req.params.dotpath}" does not exists...`,
@@ -38,7 +35,9 @@ export default async function carpenterViewHandler({
     }
 
     // render the current component/section, etc...
-    const renderer = new __SViewRenderer();
+    const renderer = new __SViewRenderer({
+        sharedData: res.templateData.shared ?? {},
+    });
     const currentViewResult = await renderer.render(viewPath, viewData);
 
     // if the request if made with a POST method
@@ -61,40 +60,9 @@ export default async function carpenterViewHandler({
     // rendering layout using data
     try {
         const layoutPromise = renderer.render(layoutPath, {
-            carpenter: specs,
             $_SERVER: __serverObjectFromExpressRequest(req),
-            frontspec: {
-                assets: {
-                    carpenterModule: {
-                        type: 'module',
-                        defer: true,
-                        src: params.dev
-                            ? `http://0.0.0.0:${params.vitePort}/src/js/index.ts`
-                            : '/carpenter/index.esm.js',
-                    },
-                    carpenterStyle: {
-                        id: 'carpenter',
-                        defer: true,
-                        src: params.dev
-                            ? `http://0.0.0.0:${params.vitePort}/src/css/index.css`
-                            : '/carpenter/index.css',
-                    },
-                    ...(isRequestFromIframe
-                        ? {
-                              module: {
-                                  type: 'module',
-                                  defer: true,
-                                  src: params.jsPath,
-                              },
-                              style: {
-                                  id: 'global',
-                                  defer: true,
-                                  src: params.cssPath,
-                              },
-                          }
-                        : {}),
-                },
-            },
+            ...(res.templateData ?? {}),
+            carpenter: specs,
             body: currentViewResult.value,
         });
         const layoutRes = await layoutPromise;

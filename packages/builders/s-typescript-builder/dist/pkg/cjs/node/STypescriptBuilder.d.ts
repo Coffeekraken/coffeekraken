@@ -5,6 +5,7 @@ import __ts from 'typescript';
 import * as __tsMorph from 'ts-morph';
 
 export interface ISTypescriptBuilderSettings extends ISBuilderSettings {
+    log: Partial<ISTypescriptBuilderLogParams>;
 }
 export interface ISTypescriptBuilderFileToBuild {
     cwd: string;
@@ -42,6 +43,10 @@ export interface ISTypescriptBuilderCustomSettingsItem {
 }
 export interface ISTypescriptBuilderCustomSettings {
     [key: string]: ISTypescriptBuilderCustomSettingsItem;
+}
+export interface ISTypescriptBuilderLogParams {
+    summary: boolean;
+    compile: boolean;
 }
 export interface ISTypescriptBuilderBuildParams {
     glob: string[] | string;

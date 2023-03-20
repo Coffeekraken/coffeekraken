@@ -24,6 +24,11 @@ export default class SCarpenterComponentInterface extends __SInterface {
             description: string;
             default: boolean;
         };
+        autoEdit: {
+            type: string;
+            description: string;
+            default: boolean;
+        };
         specs: {
             type: string;
             description: string;
@@ -45,6 +50,17 @@ export default class SCarpenterComponentInterface extends __SInterface {
             type: string;
             description: string;
             default: string;
+        };
+        features: {
+            type: string;
+            description: string;
+            default: {
+                save: boolean;
+                delete: boolean;
+                upload: boolean;
+                nav: boolean;
+                media: boolean;
+            };
         };
         logo: {
             type: string;

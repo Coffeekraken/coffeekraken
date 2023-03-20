@@ -1,0 +1,40 @@
+.s-carpenter-app_editor {
+    position: absolute;
+    top: var(--s-carpenter-editor-margin);
+    right: var(--s-carpenter-editor-margin);
+    bottom: var(--s-carpenter-editor-bottom);
+    width: var(--s-carpenter-editor-width);
+    overflow-y: auto;
+    background: sugar.color(main, background);
+    transform: translateX(100%);
+    opacity: 0;
+    padding-block-end: sugar.padding(50);
+    pointer-events: none;
+    @sugar.scrollbar();
+    @sugar.border.radius();
+    @sugar.depth (100);
+    @sugar.transition();
+
+    .s-carpenter-app--open & {
+        transform: translateX(0);
+        opacity: 1;
+        pointer-events: all;
+    }
+
+    ._loader {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 30px;
+    }
+}
+
+.s-carpenter-app_editor.scrolled .s-specs-editor_metas {
+    padding-block: sugar.padding(20);
+    padding-inline: sugar.padding(20);
+
+    * {
+        @sugar.scale (0.8);
+    }
+}

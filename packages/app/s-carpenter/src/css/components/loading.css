@@ -1,0 +1,38 @@
+@keyframes s-carpenter-loading-in {
+    from {
+        transform: scale(0);
+    }
+    to {
+        transform: scale(1);
+    }
+}
+
+.s-carpenter-app_loading {
+    position: absolute;
+    top: 45%;
+    left: var(--s-carpenter-media-left);
+    transform: translate(-50%, -50%);
+
+    background: sugar.color(main, background);
+    border-radius: 50%;
+    animation: s-carpenter-loading-in 0.1s
+        cubic-bezier(0.56, -0.005, 0.46, 1.505) forwards;
+    @sugar.transition;
+    @sugar.depth (100);
+    @sugar.color (complementary);
+
+    width: 1em;
+    height: 1em;
+    font-size: 100px;
+
+    ._loader {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-40%, -55%);
+    }
+
+    svg {
+        font-size: 60px;
+    }
+}

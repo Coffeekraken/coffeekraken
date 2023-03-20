@@ -100,6 +100,12 @@ export default class SComponentUtils extends __SClass {
     }
 
     /**
+     * Track if the responsive props warning has been logged to avoid
+     * continusly log it
+     */
+    static _isResponsivePropsWarningLogged = false;
+
+    /**
      * @name            node
      * @type            Object
      *
@@ -483,9 +489,12 @@ export default class SComponentUtils extends __SClass {
             !this._isFrontAvailable() ||
             !document.env?.SUGAR?.frontspec?.get?.('media.queries')
         ) {
-            console.warn(
-                `<red>[SComponentUtils]</red> To use responsive props on components and features, you MUST call the SFront.init() method in your main entry file...`,
-            );
+            if (!this.constructor._isResponsivePropsWarningLogged) {
+                this.constructor._isResponsivePropsWarningLogged = true;
+                console.warn(
+                    `<red>[SComponentUtils]</red> To use responsive props on components and features, you MUST call the SFront.init() method in your main entry file...`,
+                );
+            }
             return;
         }
 

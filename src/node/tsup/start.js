@@ -369,7 +369,7 @@ function chokidarJsCallback(path) {
     // processPath(path, 'node');
     processPath(path, 'browser');
 }
-chokidarJs.on('add', chokidarJsCallback);
+// chokidarJs.on('add', chokidarJsCallback);
 chokidarJs.on('change', chokidarJsCallback);
 
 // node, shared, etc...
@@ -377,7 +377,7 @@ const chokidarNode = __chokidar.watch(
     'packages/*/*/src/(node|shared|config|views|pages|cli)/**/*.ts',
     // 'packages/*/*/src/(node|shared|config|views|pages|cli)/**/vite.config.ts',
     {
-        // ignoreInitial: true,
+        ignoreInitial: true,
         ignored: ['**/node_modules'],
     },
 );
@@ -385,5 +385,5 @@ function chokidarNodeCallback(path) {
     processPath(path, 'node');
     processPath(path, 'browser');
 }
-chokidarNode.on('add', chokidarNodeCallback);
+// chokidarNode.on('add', chokidarNodeCallback);
 chokidarNode.on('change', chokidarNodeCallback);

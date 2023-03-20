@@ -6,28 +6,16 @@
 
 {% block body %}
 
-    {% if __requestFromIframe() %}
-        <style>
-            body {
-                display: flex;
-                align-items: center;
-                justify-content: center;
-            }
-        </style>
-        <div class="s-carpenter_body">
-            {{ body|raw }}
-        </div>
-    {% else %}
-        <iframe class="s-carpenter_website-iframe" style="
-            position: absolute;
-            top: 0;
-            left: 50%;
-            width:100%;
-            height:100%;
-            transform: translateX(-50%);
-        " src="{{ __currentUrl() }}?iframe" scrolling="no"></iframe>
-        <s-carpenter id="carpenter" auto-init></s-carpenter>
-    {% endif %}
-
+    <style>
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    </style>
+    <div class="s-carpenter_body">
+        {{ body|raw }}
+    </div>
+    <s-carpenter id="carpenter" auto-init auto-edit sidebar features='{"save":false,"delete":false}'></s-carpenter>
 
 {% endblock %}

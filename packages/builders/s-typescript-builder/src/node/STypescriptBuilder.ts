@@ -18,7 +18,7 @@ import __ts from 'typescript';
 
 import * as __tsMorph from 'ts-morph';
 
-// import __STypescriptBuilderSettingsInterface from './interface/STypescriptBuilderSettingsInterface';
+import __STypescriptBuilderSettingsInterface from './interface/STypescriptBuilderSettingsInterface';
 // import __STypescriptBuilderBuildParamsInterface from './interface/STypescriptBuilderBuildParamsInterface';
 
 /**
@@ -53,7 +53,9 @@ import * as __tsMorph from 'ts-morph';
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 
-export interface ISTypescriptBuilderSettings extends ISBuilderSettings {}
+export interface ISTypescriptBuilderSettings extends ISBuilderSettings {
+    log: Partial<ISTypescriptBuilderLogParams>;
+}
 
 export interface ISTypescriptBuilderFileToBuild {
     cwd: string;
@@ -106,6 +108,11 @@ export interface ISTypescriptBuilderCustomSettingsItem {
 
 export interface ISTypescriptBuilderCustomSettings {
     [key: string]: ISTypescriptBuilderCustomSettingsItem;
+}
+
+export interface ISTypescriptBuilderLogParams {
+    summary: boolean;
+    compile: boolean;
 }
 
 export interface ISTypescriptBuilderBuildParams {
@@ -208,11 +215,8 @@ export default class STypescriptBuilder extends __SBuilder {
     constructor(settings?: Partial<ISTypescriptBuilderSettings>) {
         super(
             __deepMerge(
-                {
-                    // @ts-ignore
-                    // @TODO        integrate the settings interface
-                    // __STypescriptBuilderSettingsInterface.default(),
-                },
+                // @ts-ignore
+                __STypescriptBuilderSettingsInterface.defaults(),
                 settings ?? {},
             ),
         );
@@ -264,7 +268,8 @@ export default class STypescriptBuilder extends __SBuilder {
                 ? finalParams.glob
                 : [finalParams.glob];
 
-            if (!finalParams.silent) {
+            // @ts-ignore
+            if (!finalParams.silent && this.settings.log?.summary) {
                 console.log(
                     `<yellow>○</yellow> Globs              : <yellow>${globs.join(
                         ',',
@@ -531,7 +536,7 @@ export default class STypescriptBuilder extends __SBuilder {
                 filePath = __path.relative(packageRoot, file.path);
             }
 
-            if (!params.silent) {
+            if (!params.silent && this.settings.log?.compile) {
                 if (console.log !== global._console.log) {
                     console.log(
                         `<yellow>[${

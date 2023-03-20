@@ -18,6 +18,16 @@ import __SInterface from '@coffeekraken/s-interface';
  */
 export default class STypescriptBuilderSettingsInterface extends __SInterface {
     static get _definition() {
-        return {};
+        return {
+            log: {
+                type: 'Object',
+                description:
+                    'Specify the logs you want. THis is an object with properties "summary" and "compile".',
+                default: {
+                    summary: true,
+                    compile: true,
+                },
+            },
+        };
     }
 }

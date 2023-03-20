@@ -1,4 +1,5 @@
 @import './vars.css';
+@import './generic/carpenter-loader.css';
 
 .s-carpenter {
 }
@@ -28,12 +29,16 @@ body:has(.s-carpenter_body) {
 
 .s-carpenter_website-iframe {
     pointer-events: all;
-    @sugar.transition;
     left: 50%;
+    position: absolute;
+    top: 0;
+    left: var(--s-carpenter-media-left);
+    width: var(--s-carpenter-viewport-width, 100%);
     transform: translateX(-50%);
+    border-left: 1px solid sugar.color(main, --alpha 0.6);
+    border-right: 1px solid sugar.color(main, --alpha 0.6);
+    @sugar.transition;
     @sugar.scrollbar (accent);
-    border-left: 1px solid sugar.color(main, --alpha 0.2);
-    border-right: 1px solid sugar.color(main, --alpha 0.2);
     @sugar.depth (100);
 }
 
@@ -49,12 +54,12 @@ body:has(.s-carpenter_body) {
 .s-carpenter_ui-placeholder {
     position: absolute;
     pointer-events: none;
-    /* background: rgba(255, 0, 0, 0.3); */
     background: transparent;
+    /* background: rgba(255, 0, 0, 0.1); */
 
     .active > & {
         pointer-events: all;
-        /* background: rgba(0, 255, 0, 0.3); */
+        /* background: rgba(0, 255, 0, 0.1); */
     }
 }
 
@@ -103,18 +108,6 @@ body:has(.s-carpenter_body) {
     }
 }
 
-@keyframes s-carpenter-logo {
-    0% {
-        transform: scale(0.6) rotate(0deg);
-    }
-    50% {
-        transform: scale(1) rotate(360deg);
-    }
-    100% {
-        transform: scale(0.6) rotate(0deg);
-    }
-}
-
 .s-carpenter_loading,
 .s-carpenter_ready {
     position: fixed;
@@ -138,23 +131,9 @@ body:has(.s-carpenter_body) {
         @sugar.depth (100);
     }
 
-    ._logo {
-        margin-block-end: sugar.margin(30);
-        position: relative;
-        left: 20px;
-
-        svg {
-            display: inline-block;
-            height: 150px;
-            width: 150px;
-            animation: s-carpenter-logo 2s cubic-bezier(0.84, 0, 0.115, 1)
-                infinite;
-            transform-origin: 40% 55%;
-
-            * {
-                fill: white;
-            }
-        }
+    ._loader {
+        font-size: 150px;
+        @sugar.color (#fff);
     }
 
     ._title {

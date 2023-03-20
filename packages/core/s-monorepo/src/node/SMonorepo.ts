@@ -628,9 +628,12 @@ export default class SMonorepo extends __SClass {
                     const inDir = `${packageObj.path}/${srcRelDir}`,
                         outDir = `${packageObj.path}/${distRelDir}`;
 
-                    const builder = new __STypescriptBuilder();
+                    const builder = new __STypescriptBuilder({
+                        log: {
+                            summary: false,
+                        },
+                    });
                     builder.build({
-                        silent: true, // @TODO      find a way more elegant to avoid settings displays
                         inDir,
                         outDir,
                         packageRoot: packageObj.path,

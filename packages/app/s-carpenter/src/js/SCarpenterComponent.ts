@@ -10,7 +10,6 @@ import __SSugarConfig from '@coffeekraken/s-sugar-config';
 import __define from './define';
 
 // @ts-ignore
-import { __wait } from '@coffeekraken/sugar/datetime';
 import { __injectIframeContent } from '@coffeekraken/sugar/dom';
 import __css from '../../../../src/css/s-carpenter-component.css'; // relative to /dist/pkg/esm/js
 
@@ -108,25 +107,16 @@ export default class SCarpenterComponent extends __SLitComponent {
 
         // listen for the s-carpenter-app.ready event
         document.addEventListener('s-carpenter-app.ready', (e) => {
-            this.state.status = 'ready';
-            setTimeout(() => {
-                this.remove();
-            }, 1000);
+            this.remove();
+            // this.state.status = 'ready';
+            // setTimeout(() => {
+            //     this.remove();
+            // }, 1000);
         });
-
-        // manage to add the iframe inside the body
-        // alongside with the s-carpenter component
-        // this.remove();
-
-        // const $cancelBtn = document.querySelector('.s-carpenter_loading ._cancel-btn');
-        // $cancelBtn.addEventListener('click')
 
         // auto init when the props.autoInit is set to true
         // or that the document.location.hash is "#carpenter"
         if (this.props.autoInit) {
-            // wait for the iframe to be ready
-            // @TODO        check for better solution
-            await __wait(500);
             return this._initEditor();
         }
     }
@@ -134,9 +124,6 @@ export default class SCarpenterComponent extends __SLitComponent {
     _initEditor() {
         // update status to loading
         this.state.status = 'loading';
-
-        // remove the openButton if needed
-        // this._$openBtn?.remove?.();
 
         // create the iframe that will contain the actual editor
         this._$editorIframe = document.createElement('iframe');
@@ -151,7 +138,13 @@ export default class SCarpenterComponent extends __SLitComponent {
             <script type="module" defer src="${this.props.src}"></script>
             <s-carpenter-app id="${
                 this.props.id ?? 's-carpenter'
-            }" save-state></s-caprenter-app>    
+            }" save-state ${this.props.sidebar ? 'sidebar' : ''} ${
+            this.props.autoEdit ? 'auto-edit' : ''
+        } ${
+            this.props.features
+                ? `features='${JSON.stringify(this.props.features)}'`
+                : ''
+        }></s-caprenter-app>    
         `;
 
         // inject the iframe content
@@ -204,10 +197,13 @@ export default class SCarpenterComponent extends __SLitComponent {
                 ? html`
                       <div
                           s-carpenter-initial-ui
+                          style="opacity: 0"
                           class="${this.utils.cls('_loading')}"
                       >
                           <div class="_inner">
-                              <div class="_logo">${this._carpenterLogo()}</div>
+                              <div class="_loader carpenter-loader">
+                                  ${this._carpenterLogo()}
+                              </div>
                               <h1 class="_title">
                                   Loading <span>Carpenter</span>
                               </h1>

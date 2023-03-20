@@ -156,14 +156,6 @@
         text-align: end;
     }
 
-    .s-specs-editor_help-icon {
-        margin-inline-start: sugar.margin(10);
-
-        .s-tooltip {
-            min-width: 200px;
-        }
-    }
-
     .s-specs-editor_media-icons {
         float: right;
     }
@@ -195,6 +187,23 @@
 
     .s-specs-editor_label {
         margin-block-end: sugar.margin(20);
+
+        > span {
+            display: flex;
+        }
+
+        ._title {
+            opacity: 0.5;
+            flex-grow: 1;
+        }
+
+        ._help-icon {
+            margin-inline-start: sugar.margin(10);
+
+            .s-tooltip {
+                min-width: 200px;
+            }
+        }
 
         i {
             opacity: 0.4;

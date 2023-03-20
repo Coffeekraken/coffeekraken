@@ -32,7 +32,7 @@ export default {
             in: 'right',
             delay: '300-600',
         },
-        title: 'Card title!',
+        title: 'Card title #1!',
         intro: 'Awesome card component',
         text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
         cta: {

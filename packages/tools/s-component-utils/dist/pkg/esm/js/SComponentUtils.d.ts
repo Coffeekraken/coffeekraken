@@ -43,6 +43,8 @@ export default class SComponentUtils extends __SClass {
     _props: any;
     get props(): any;
     
+    static _isResponsivePropsWarningLogged: boolean;
+    
     node: HTMLElement;
     
     fastdom: {

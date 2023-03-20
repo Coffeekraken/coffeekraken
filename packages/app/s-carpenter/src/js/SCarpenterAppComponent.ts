@@ -26,6 +26,7 @@ import { __injectIframeContent } from '@coffeekraken/sugar/dom';
 import __ajaxAdapter from './adapters/ajaxAdapter';
 
 // @ts-ignore
+import __indexCss from '../css/index.css';
 import __websiteUiCss from '../css/s-carpenter-app-website-ui.css';
 
 export interface ISCarpenterAppComponentIconsProp {
@@ -37,9 +38,17 @@ export interface ISCarpenterAppComponentIconsProp {
     folderClose: string;
 }
 
-export interface ISCarpenterAèèComponentProps {
+export interface ISCarpenterAppComponentFeatures {
+    save: boolean;
+    upload: boolean;
+    nav: boolean;
+    media: boolean;
+}
+
+export interface ISCarpenterComponentProps {
     window: Window;
     specs: string;
+    features: ISCarpenterAppComponentFeatures;
     adapter: 'ajax';
     viewportElm: HTMLElement;
     nav: boolean;
@@ -55,7 +64,7 @@ document.body.setAttribute('s-sugar', 'true');
 __sSugarFeatureDefine();
 
 /**
- * @name                SCarpenterComponent
+ * @name                SCarpenterAppComponent
  * @as                  Carpenter
  * @namespace           js
  * @type                CustomElement
@@ -76,16 +85,6 @@ __sSugarFeatureDefine();
  * @install           shell
  * npm i @coffeekraken/s-carpenter
  *
- * @snippet             __defineSCarpenterComponent()
- *
- * @example           js
- * import { define as __defineSCarpenterComponent } from '@coffeekraken/s-carpenter';
- * __defineSCarpenterComponent();
- *
- * @install           js
- * import { define as __defineSCarpenterComponent } from '@coffeekraken/s-carpenter';
- * __defineSCarpenterComponent();
- *
  * @since           2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
@@ -102,20 +101,7 @@ export interface ISCarpenterComponentAdapter {
     change(params: ISCarpenterComponentAdapterParams): Promise<HTMLElement>;
 }
 
-export default class SCarpenterComponent extends __SLitComponent {
-    static create(attributes: any = {}, to: HTMLElement = document.body) {
-        const domParser = new DOMParser(),
-            $carpenter = domParser.parseFromString(
-                `<s-carpenter ${Object.keys(attributes).map((attr) => {
-                    const value = attributes[attr];
-                    return ` ${attr}="${value}" `;
-                })}></s-carpenter>`,
-                'text/html',
-            );
-
-        to.appendChild($carpenter.body.children[0]);
-    }
-
+export default class SCarpenterAppComponent extends __SLitComponent {
     static get properties() {
         return __SLitComponent.propertiesFromInterface(
             {},
@@ -124,7 +110,9 @@ export default class SCarpenterComponent extends __SLitComponent {
     }
 
     static get styles() {
-        return css``;
+        return css`
+            ${unsafeCSS(__indexCss)}
+        `;
         return css`
             ${unsafeCSS(__css)}
         `;
@@ -137,20 +125,21 @@ export default class SCarpenterComponent extends __SLitComponent {
         id: string,
         adapter: ISCarpenterComponentAdapter,
     ): void {
-        if (SCarpenterComponent._registeredAdapters[id]) {
+        if (SCarpenterAppComponent._registeredAdapters[id]) {
             throw new Error(
-                `[SCarpenterComponent] Sorry but the "${id}" adapter already exists...`,
+                `[SCarpenterAppComponent] Sorry but the "${id}" adapter already exists...`,
             );
         }
-        SCarpenterComponent._registeredAdapters[id] = adapter;
+        SCarpenterAppComponent._registeredAdapters[id] = adapter;
     }
 
     static state = {
         activeNavigationFolders: [],
-        hoveredDotpath: null,
-        $currentElement: null,
-        $hoveredElement: null,
+        $currentElm: null,
+        $preselectedElm: null,
         activeMedia: null,
+        isLoading: true,
+        loadingStack: {},
     };
 
     currentSpecs = null;
@@ -164,6 +153,8 @@ export default class SCarpenterComponent extends __SLitComponent {
     _$websiteViewport; // store the viewport element in the website that will be used to resize it with media
 
     _$editor; // store the actual editor "panel"
+    _editorWindow;
+    _$editorDocument;
     _$editorIframe; // store the iframe in which the carpenter is inited if is one
     _$toolbar; // store the toolbar displayed on the website elements when hovering them
 
@@ -183,6 +174,8 @@ export default class SCarpenterComponent extends __SLitComponent {
         this._$editorIframe = window.top?.document?.querySelector(
             'iframe.s-carpenter_editor-iframe',
         );
+        this._editorWindow = window;
+        this._$editorDocument = document;
 
         const $style = document.createElement('link');
         $style.rel = 'stylesheet';
@@ -205,9 +198,9 @@ export default class SCarpenterComponent extends __SLitComponent {
         }
 
         // check the specified adapter
-        if (!SCarpenterComponent._registeredAdapters[this.props.adapter]) {
+        if (!SCarpenterAppComponent._registeredAdapters[this.props.adapter]) {
             throw new Error(
-                `[SCarpenterComponent] Sorry but the specified "${this.props.adapter}" is not registered...`,
+                `[SCarpenterAppComponent] Sorry but the specified "${this.props.adapter}" is not registered...`,
             );
         }
 
@@ -222,17 +215,6 @@ export default class SCarpenterComponent extends __SLitComponent {
         // get the initial carpenter component
         this._$carpenterComponent =
             this._$rootDocument.querySelector('s-carpenter');
-
-        // get the first s-spec element that we can find
-        // or get the first item in the body
-        // and set it to the state.$currentElement to be sure we have something to
-        // work with in the adapter, etc...
-        let $firstSpecsElement =
-            this._$websiteDocument.querySelector('[s-specs]');
-        if (!$firstSpecsElement) {
-            $firstSpecsElement = this._$websiteDocument.body.children[0];
-        }
-        this.state.$currentElement = $firstSpecsElement;
     }
 
     async firstUpdated() {
@@ -252,6 +234,23 @@ export default class SCarpenterComponent extends __SLitComponent {
         // listen for escape key press to close editor
         __hotkey('escape').on('press', () => {
             this._closeEditor();
+        });
+
+        let isEditorHided = false;
+        [this._$websiteDocument, this._$editorDocument].forEach(($scope) => {
+            $scope.addEventListener('keydown', (e) => {
+                if (isEditorHided) return;
+                if (!this.isEditorOpen()) return;
+                if (e.key === '§') {
+                    isEditorHided = true;
+                    this._closeEditor();
+                }
+            });
+            $scope.addEventListener('keyup', (e) => {
+                if (!isEditorHided) return;
+                isEditorHided = false;
+                this._openEditor();
+            });
         });
 
         // listen spec editor update
@@ -381,7 +380,7 @@ export default class SCarpenterComponent extends __SLitComponent {
             });
         }
 
-        const $uis = this.querySelectorAll('[s-ui]');
+        const $uis = this.querySelectorAll('[s-carpenter-ui]');
         Array.from($uis).forEach(($ui) => {
             // create if needed
             if (!$ui._placeholder) {
@@ -409,101 +408,107 @@ export default class SCarpenterComponent extends __SLitComponent {
      * Media is the media queries and his method is either "container" (@container queries), or "media" (plain old media queries).
      * It the method is "media", we need to wrap the website into an iframe to make the responsive preview work fine.
      */
-    async _init(): Promise<void> {
-        // track if the iframe has already been filled.
-        // this is when the "iframe.s-carpenter_website-iframe" iframe
-        // is already in the document and has already loaded his content
-        let isIframeAlreadyFilled = true;
-
-        // create the wrapping iframe or get it from the content directly
-        this._$websiteIframe = this._$websiteDocument.querySelector(
-            'iframe.s-carpenter_website-iframe',
-        );
-        if (!this._$websiteIframe) {
+    _init(): Promise<void> {
+        return new Promise(async (resolve) => {
+            // create the wrapping iframe or get it from the content directly
             this._$websiteIframe = document.createElement('iframe');
             this._$websiteIframe.classList.add('s-carpenter_website-iframe');
             this._$websiteIframe.setAttribute('src', 'about:blank');
             this._$websiteIframe.setAttribute('scrolling', 'no');
-            isIframeAlreadyFilled = false;
-        }
+            this._$websiteIframe.style.opacity = 0;
 
-        // set the website viewport to be able to resize it using the media controls
-        this._$websiteViewport = this._$websiteIframe;
+            // set the website viewport to be able to resize it using the media controls
+            this._$websiteViewport = this._$websiteIframe;
 
-        // get the actual page html to inject into the iframe
-        const html = this._$websiteDocument.documentElement.innerHTML;
-        const parser = new DOMParser();
-        const $html = parser.parseFromString(html, 'text/html');
+            // get the actual page html to inject into the iframe
+            const html = this._$websiteDocument.documentElement.innerHTML;
+            const parser = new DOMParser();
+            const $html = parser.parseFromString(html, 'text/html');
 
-        // remove initial carpenter component
-        $html.querySelector('s-carpenter')?.remove?.();
+            // remove initial carpenter component
+            $html.querySelector('s-carpenter')?.remove?.();
 
-        // prepend the website iframe in the body
-        if (!isIframeAlreadyFilled) {
+            // prepend the website iframe in the body
             this._$websiteDocument.body.prepend(this._$websiteIframe);
-        }
 
-        // wait until the iframe is ready
-        await __whenIframeReady(this._$websiteIframe);
+            // wait until the iframe is ready
+            await __whenIframeReady(this._$websiteIframe);
 
-        // injecting the whole website into the iframe
-        if (!isIframeAlreadyFilled) {
+            // injecting the whole website into the iframe
             __injectIframeContent(
                 this._$websiteIframe,
                 $html.documentElement.innerHTML,
             );
-        }
 
-        // listen when the iframe is loaded to init correctly the
-        // carpenter stuffs like _websiteWindow, _$websiteDocument, etc...
-        this._$websiteIframe.addEventListener('load', async (e) => {
+            // listen when the iframe is loaded to init correctly the
+            // carpenter stuffs like _websiteWindow, _$websiteDocument, etc...
+            this._$websiteIframe.addEventListener('load', async (e) => {
+                // clean the root document body
+                this._cleanRootDocument();
+
+                // reset the loading state
+                this.state.loadingStack = {};
+                this.state.isLoading = false;
+
+                // reset the toolbar
+                this._$toolbar = null;
+
+                // reset state
+                this.state.$preselectedElm = null;
+
+                // wait until iframe is ready
+                await __whenIframeReady(this._$websiteIframe);
+
+                // reset the _window and _$websiteDocument references
+                this._websiteWindow = this._$websiteIframe.contentWindow;
+                this._$websiteDocument =
+                    this._$websiteIframe.contentWindow.document;
+
+                // get the first element in the iframe
+                const $firstElm =
+                    this._$websiteDocument.querySelector('[s-specs]');
+                if ($firstElm) {
+                    await this._setCurrentElement($firstElm);
+                }
+
+                // init the interactivity in the website iframe
+                this._initWebsiteIframeContent();
+
+                // "auto-edit" property
+                if (this.props.autoEdit) {
+                    this._edit($firstElm);
+                }
+
+                this._$websiteIframe.style.opacity = 1;
+
+                // resolve only if is the first init
+                resolve();
+            });
+
+            // wait until the iframe is ready
             await __whenIframeReady(this._$websiteIframe);
-
-            // reset the toolbar
-            this._$toolbar = null;
-
-            // reset state
-            this.state.$currentElement = null;
-            this.state.$hoveredElement = null;
-
-            // reset the _window and _$websiteDocument references
-            this._websiteWindow = this._$websiteIframe.contentWindow;
-            this._$websiteDocument =
-                this._$websiteIframe.contentWindow.document;
-
-            // init the interactivity in the website iframe
-            this._initWebsiteIframeContent();
         });
+    }
 
-        // if the iframe is already filled with the content
-        // the "load" event will not bein fired, so we
-        // dispatch it ourself
-        if (isIframeAlreadyFilled) {
-            this._$websiteIframe.dispatchEvent(new CustomEvent('load'));
-        }
-
-        // wait until the iframe is ready
-        await __whenIframeReady(this._$websiteIframe);
-
+    /**
+     * Clean root document body
+     */
+    _cleanRootDocument() {
         // empty the document of all the nodes
         // unless the iframes
-        if (!isIframeAlreadyFilled) {
-            ['body'].forEach((container) => {
-                Array.from(
-                    this._$websiteDocument.querySelectorAll(`${container} > *`),
-                ).forEach((node) => {
-                    if (
-                        node.tagName?.toLowerCase?.() === 'iframe' ||
-                        node.tagName?.toLowerCase?.() === 's-carpenter'
-                    ) {
-                        return;
-                    }
-                    node.remove();
-                });
+        ['body'].forEach((container) => {
+            Array.from(
+                this._$rootDocument.querySelectorAll(`${container} > *`),
+            ).forEach((node) => {
+                if (
+                    node.tagName?.toLowerCase?.() === 'iframe' ||
+                    node.tagName?.toLowerCase?.() === 's-carpenter'
+                ) {
+                    return;
+                }
+                node.remove();
             });
-        }
-
-        // }
+        });
     }
 
     /**
@@ -513,19 +518,20 @@ export default class SCarpenterComponent extends __SLitComponent {
         // listen for actual updated
         this.addEventListener('s-specs-editor.change', async (e) => {
             // make use of the specified adapter to update the component/section/etc...
-            const adapterResult = await SCarpenterComponent._registeredAdapters[
-                this.props.adapter
-            ].setProps({
-                $elm: this.state.$currentElement,
-                props: e.detail.values ?? {},
-                component: this,
-            });
+            const adapterResult =
+                await SCarpenterAppComponent._registeredAdapters[
+                    this.props.adapter
+                ].setProps({
+                    $elm: this.state.$currentElm,
+                    props: e.detail.values ?? {},
+                    component: this,
+                });
 
             // save current values in "_values" stack
-            this._values[this.state.$currentElement.id] = e.detail.values ?? {};
+            this._values[this.state.$currentElm.id] = e.detail.values ?? {};
 
             if (adapterResult) {
-                this.state.$currentElement = adapterResult;
+                this.state.$currentElm = adapterResult;
             }
         });
 
@@ -550,7 +556,7 @@ export default class SCarpenterComponent extends __SLitComponent {
                     // do nothing more if already activated
                     if (
                         e.currentTarget.id &&
-                        e.currentTarget.id === this.state.$currentElement?.id
+                        e.currentTarget.id === this.state.$currentElm?.id
                     ) {
                         return;
                     }
@@ -562,10 +568,7 @@ export default class SCarpenterComponent extends __SLitComponent {
                     this._positionToolbarOnElement(e.currentTarget);
 
                     // set the "pre" activate element
-                    this.state.$hoveredElement = $elm;
-
-                    // set the hovered dotpath
-                    this.state.hoveredDotpath = $elm.getAttribute('s-specs');
+                    this.state.$preselectedElm = $elm;
                 });
             },
             {
@@ -630,14 +633,20 @@ export default class SCarpenterComponent extends __SLitComponent {
         $toolbar.setAttribute('s-carpenter-website-ui', 'true');
         this._$toolbar = $toolbar;
 
-        const html = `
+        const html: string[] = [];
+
+        html.push(`
             <button s-carpenter-app-action="edit" class="s-carpenter-toolbar_edit">
                 <i class="fa-regular fa-pen-to-square"></i> <span>Edit</span>
             </button>
-            <button s-carpenter-app-action="delete" class="s-carpenter-toolbar_delete" confirm="Confirm?">
-                <i class="fa-regular fa-trash-can"></i>
-            </button>
-        `;
+        `);
+        if (this.props.features?.delete) {
+            html.push(`
+                <button s-carpenter-app-action="delete" class="s-carpenter-toolbar_delete" confirm="Confirm?">
+                    <i class="fa-regular fa-trash-can"></i>
+                </button>
+            `);
+        }
 
         this._$toolbar.innerHTML = html;
 
@@ -653,9 +662,6 @@ export default class SCarpenterComponent extends __SLitComponent {
     _listenToolbarActions() {
         this._$toolbar.addEventListener('pointerup', async (e) => {
             const action = e.target.getAttribute('s-carpenter-app-action');
-            if (e.target.isConfirmed) {
-                console.log('Confirmeeeeee', e.target.isConfirmed());
-            }
             if (e.target.needConfirmation) {
                 return;
             }
@@ -673,40 +679,11 @@ export default class SCarpenterComponent extends __SLitComponent {
     /**
      * Edit an item
      */
-    async _edit() {
-        // do not activate 2 times the same element
-        if (
-            this.state.$currentElement?.id?.trim() &&
-            this.state.$currentElement?.id === this.state.$hoveredElement?.id
-        ) {
-            this._openEditor();
-            return;
-        }
-
-        // force reset the specs editor
-        this.currentSpecs = null;
-        this.requestUpdate();
-        await __wait();
-
-        // try to get the spec from the data fetched at start
-        let potentialDotpath = this.state.hoveredDotpath;
-        if (this._data.specsMap[potentialDotpath]) {
-            this.currentSpecs = this._data.specsMap[potentialDotpath];
-        } else {
-            potentialDotpath = `${potentialDotpath}.${
-                potentialDotpath.split('.').slice(-1)[0]
-            }`;
-            if (this._data.specsMap[potentialDotpath]) {
-                this.currentSpecs = this._data.specsMap[potentialDotpath];
-            }
-        }
-
-        if (!this.currentSpecs) {
-            return;
-        }
-
+    async _edit($elm?: HTMLElement) {
         // set the current element
-        this._setCurrentElement(this.state.$hoveredElement);
+        if ($elm || this.state.$preselectedElm) {
+            await this._setCurrentElement($elm ?? this.state.$preselectedElm);
+        }
 
         // open the editor
         this._openEditor();
@@ -719,23 +696,59 @@ export default class SCarpenterComponent extends __SLitComponent {
      * Activate the element when toolbar has been clicked
      */
     async _setCurrentElement($elm: HTMLElement): void {
+        if (!$elm) {
+            throw new Error(
+                `<red>[SCarpenterAppComponent]</red> Cannot call _setCurrentElement without any args...`,
+            );
+        }
+
         // ensure we have an id
-        if (!$elm.id.trim()) {
+        if (!$elm.id?.trim?.()) {
             $elm.setAttribute('id', __uniqid());
         }
 
         // do not activate 2 times the same element
-        if (this.state.$currentElement?.id === $elm.id) {
+        if (this.state.$currentElm?.id === $elm.id) {
             return;
+        }
+
+        // remove the preselected element
+        this.state.$preselectedElm = null;
+
+        // set the current element
+        this.state.$currentElm = $elm;
+
+        // force reset the specs editor
+        this.currentSpecs = null;
+        this.requestUpdate();
+        await __wait();
+
+        // try to get the spec from the data fetched at start
+        let potentialDotpath = $elm.getAttribute('s-specs');
+        if (this._data.specsMap[potentialDotpath]) {
+            this.currentSpecs = this._data.specsMap[potentialDotpath];
+        } else {
+            potentialDotpath = `${potentialDotpath}.${
+                potentialDotpath.split('.').slice(-1)[0]
+            }`;
+            if (this._data.specsMap[potentialDotpath]) {
+                this.currentSpecs = this._data.specsMap[potentialDotpath];
+            }
+        }
+
+        if (!this.currentSpecs) {
+            throw new Error(
+                `<red>[SCarpenterAppComponent]</red> Sorry but the requested "${potentialDotpath}" specs dotpath does not exists...`,
+            );
         }
 
         // get values
         const values =
-            this._values[$elm.id] ??
-            (await SCarpenterComponent._registeredAdapters[
+            this._values[this.state.$currentElm.id] ??
+            (await SCarpenterAppComponent._registeredAdapters[
                 this.props.adapter
             ].getProps({
-                $elm,
+                $elm: this.state.$currentElm,
                 component: this,
             }));
 
@@ -743,21 +756,15 @@ export default class SCarpenterComponent extends __SLitComponent {
         if (values) {
             this.currentSpecs.values = values;
         }
-
-        // set the current element
-        this.state.$currentElement = $elm;
     }
 
     /**
      * Add the "editor" micro menu to the element
      */
     _positionToolbarOnElement($elm: HTMLElement): void {
-        if ($elm.id && this.state.$currentElement?.id === $elm.id) {
+        if ($elm.id && this.state.$currentElm?.id === $elm.id) {
             return;
         }
-
-        // set the hovered element
-        this.state.$hoveredElement = $elm;
 
         // position toolbar
         this._setToolbarPosition($elm);
@@ -815,30 +822,46 @@ export default class SCarpenterComponent extends __SLitComponent {
                   }px`
                 : '100vw'
         }`;
-        this._$websiteViewport.style.width = width;
+        this._$websiteViewport.style.setProperty(
+            '--s-carpenter-viewport-width',
+            width,
+        );
     }
 
     /**
      * Change page with the dotpath
      */
-    async _changePage(dotpath: string, pushState: boolean = true): void {
-        const adapterResult = await SCarpenterComponent._registeredAdapters[
-            this.props.adapter
-        ].change({
+    async _changePage(
+        dotpath: string,
+        pushState: boolean = true,
+    ): Promise<void> {
+        // update the loading state
+        this.state.loadingStack[dotpath] = true;
+        this.state.isLoading = true;
+
+        // change the iframe source
+        this._$websiteIframe.src = this.props.pagesLink.replace(
+            '%dotpath',
             dotpath,
-            $elm: this.props.specs
-                ? this._$websiteDocument.body.children[0]
-                : this.state.$currentElement,
-            props: this.props,
-            component: this,
-        });
-        if (adapterResult) {
-            this.state.$currentElement = adapterResult;
-        }
+        );
+
+        // const adapterResult = await SCarpenterComponent._registeredAdapters[
+        //     this.props.adapter
+        // ].change({
+        //     dotpath,
+        //     $elm: this.props.specs
+        //         ? this._$websiteDocument.body.children[0]
+        //         : this.state.$currentElm,
+        //     props: this.props,
+        //     component: this,
+        // });
+        // if (adapterResult) {
+        //     this.state.$currentElm = adapterResult;
+        // }
 
         // save arrival state
         if (pushState) {
-            this._websiteWindow.history.pushState(
+            this._rootWindow.history.pushState(
                 {
                     dotpath,
                 },
@@ -847,15 +870,18 @@ export default class SCarpenterComponent extends __SLitComponent {
             );
         }
 
-        // update the currentSpecs
-        const newSpecs = this._data.specsMap[dotpath];
-        if (newSpecs !== this.currentSpecs) {
-            this.currentSpecs = null;
-            this.requestUpdate();
-            await __wait();
-            this.currentSpecs = newSpecs;
-            this.requestUpdate();
-        }
+        // update UI
+        this.requestUpdate();
+
+        // // update the currentSpecs
+        // const newSpecs = this._data.specsMap[dotpath];
+        // if (newSpecs !== this.currentSpecs) {
+        //     this.currentSpecs = null;
+        //     this.requestUpdate();
+        //     await __wait();
+        //     this.currentSpecs = newSpecs;
+        //     this.requestUpdate();
+        // }
     }
 
     _toggleNavigationFolder(folderId) {
@@ -887,10 +913,11 @@ export default class SCarpenterComponent extends __SLitComponent {
             ) {
                 data = await fetch(source).then((response) => response.json());
             } else {
-                const $template = document.querySelectorAll(
-                    `template#${source}`,
+                const $template = document.querySelector(
+                    `template#${source}, template${source}`,
                 );
                 if ($template) {
+                    // @ts-ignore
                     data = JSON.parse($template.content.textContent);
                 }
             }
@@ -899,11 +926,36 @@ export default class SCarpenterComponent extends __SLitComponent {
         // warn if no data
         if (!data) {
             throw new Error(
-                `[SCarpenterComponent] The passed source "${source}" does not provide any valid data...`,
+                `[SCarpenterAppComponent] The passed source "${source}" does not provide any valid data...`,
             );
         }
 
         return data;
+    }
+
+    _carpenterLogo() {
+        return html`
+            <svg
+                width="62"
+                height="64"
+                viewBox="0 0 62 64"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+            >
+                <path
+                    d="M13.7641 10.3858V1.70592C13.7641 0.941977 14.5861 0.460164 15.2527 0.833363L36.9359 12.9732C37.2517 13.15 37.4473 13.4837 37.4473 13.8457V38.8719C37.4473 39.6456 36.6064 40.1262 35.9397 39.7335L28.0526 35.0868C27.7475 34.907 27.5602 34.5793 27.5602 34.2252V19.5822C27.5602 19.2266 27.3713 18.8977 27.0641 18.7185L14.2603 11.2496C13.953 11.0704 13.7641 10.7415 13.7641 10.3858Z"
+                    fill="black"
+                />
+                <path
+                    d="M9.07011 58.8847L1.48646 63.1071C0.819001 63.4787 -0.00179823 62.995 2.95924e-06 62.231L0.058594 37.3808C0.0594475 37.0188 0.25586 36.6856 0.572132 36.5095L22.4376 24.3353C23.1136 23.9589 23.9426 24.4599 23.9238 25.2334L23.7007 34.3848C23.6921 34.7388 23.4968 35.0619 23.1875 35.2342L10.3939 42.3574C10.0831 42.5304 9.88765 42.8554 9.88052 43.211L9.58345 58.031C9.57632 58.3866 9.38086 58.7117 9.07011 58.8847Z"
+                    fill="black"
+                />
+                <path
+                    d="M53.4768 38.5712L60.9938 42.9112C61.6554 43.2931 61.6617 44.2458 61.0052 44.6365L39.6502 57.3448C39.3392 57.53 38.9523 57.5325 38.6388 57.3515L16.9655 44.8384C16.2955 44.4516 16.2997 43.483 16.9732 43.102L24.9409 38.5949C25.2492 38.4205 25.6266 38.4222 25.9333 38.5993L38.6144 45.9207C38.9225 46.0986 39.3018 46.0994 39.6106 45.923L52.4807 38.569C52.7895 38.3925 53.1688 38.3934 53.4768 38.5712Z"
+                    fill="black"
+                />
+            </svg>
+        `;
     }
 
     render() {
@@ -914,7 +966,7 @@ export default class SCarpenterComponent extends __SLitComponent {
         return html`
             ${this.props.sidebar
                 ? html`
-                      <nav class="${this.utils.cls('_sidebar')}">
+                      <nav class="${this.utils.cls('_sidebar')}" s-carpenter-ui>
                           <div class="${this.utils.cls('_logo')}">
                               ${unsafeHTML(this.props.logo)}
                           </div>
@@ -966,7 +1018,7 @@ export default class SCarpenterComponent extends __SLitComponent {
                                                           sourceId}</span
                                                       >
                                                   </div>
-                                                  <ul>
+                                                  <ul class="s-fs-tree">
                                                       ${Object.keys(
                                                           sourceObj.specs,
                                                       ).map((dotpath) => {
@@ -974,12 +1026,29 @@ export default class SCarpenterComponent extends __SLitComponent {
                                                               sourceObj.specs[
                                                                   dotpath
                                                               ];
+                                                          let last;
+                                                          const checkDotPath =
+                                                              specObj.metas.dotpath
+                                                                  .split('.')
+                                                                  .filter(
+                                                                      (p) => {
+                                                                          if (
+                                                                              last &&
+                                                                              p ===
+                                                                                  last
+                                                                          ) {
+                                                                              return false;
+                                                                          }
+                                                                          last =
+                                                                              p;
+                                                                          return true;
+                                                                      },
+                                                                  )
+                                                                  .join('.');
                                                           return html`
                                                               <li
-                                                                  class="${document.location.href.includes(
-                                                                      specObj
-                                                                          .metas
-                                                                          .dotpath,
+                                                                  class="_item ${this._$rootDocument.location.href.includes(
+                                                                      checkDotPath,
                                                                   )
                                                                       ? 'active'
                                                                       : ''}"
@@ -992,13 +1061,27 @@ export default class SCarpenterComponent extends __SLitComponent {
                                                                       )}
                                                               >
                                                                   <div>
-                                                                      <i
-                                                                          class="fa-regular fa-file"
-                                                                      ></i>
-                                                                      <a
-                                                                          >${specObj.title ??
-                                                                          specObj.name}</a
-                                                                      >
+                                                                      ${this
+                                                                          .state
+                                                                          .loadingStack[
+                                                                          specObj
+                                                                              .metas
+                                                                              .dotpath
+                                                                      ]
+                                                                          ? html`
+                                                                                <span
+                                                                                    class="s-loader:spinner"
+                                                                                ></span>
+                                                                            `
+                                                                          : html`
+                                                                                <i
+                                                                                    class="fa-regular fa-file"
+                                                                                ></i>
+                                                                            `}
+                                                                      <span>
+                                                                          ${specObj.title ??
+                                                                          specObj.name}
+                                                                      </span>
                                                                   </div>
                                                               </li>
                                                           `;
@@ -1018,25 +1101,33 @@ export default class SCarpenterComponent extends __SLitComponent {
                 class="${this.utils.cls('_editor')} ${this.currentSpecs
                     ? 'active'
                     : ''}"
-                s-ui
+                s-carpenter-ui
             >
-                ${this.currentSpecs
+                ${this.currentSpecs && !this.state.isLoading
                     ? html`
                           <s-specs-editor
                               media="${this.state.activeMedia}"
                               specs="${JSON.stringify(this.currentSpecs)}"
+                              features="${JSON.stringify(this.props.features)}"
                               frontspec="${JSON.stringify(
                                   this._data.frontspec ?? {},
                               )}"
                           >
                           </s-specs-editor>
                       `
-                    : ''}
+                    : html`
+                          <div class="_loader carpenter-loader">
+                              ${this._carpenterLogo()}
+                          </div>
+                      `}
             </nav>
 
             ${this._data.frontspec?.media?.queries
                 ? html`
-                      <nav class="${this.utils.cls('_controls')}" s-ui>
+                      <nav
+                          class="${this.utils.cls('_controls')}"
+                          s-carpenter-ui
+                      >
                           <ul
                               class="${this.utils.cls(
                                   '_queries',
@@ -1063,8 +1154,19 @@ export default class SCarpenterComponent extends __SLitComponent {
                               })}
                           </ul>
 
-                          <button class="_save">Save page</button>
+                          ${this.props.features?.save
+                              ? html` <button class="_save">Save page</button> `
+                              : ''}
                       </nav>
+                  `
+                : ''}
+            ${this.state.isLoading
+                ? html`
+                      <div class="${this.utils.cls('_loading')}">
+                          <div class="_loader carpenter-loader">
+                              ${this._carpenterLogo()}
+                          </div>
+                      </div>
                   `
                 : ''}
         `;

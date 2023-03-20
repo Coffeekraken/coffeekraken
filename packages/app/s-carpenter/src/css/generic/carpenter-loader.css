@@ -1,0 +1,30 @@
+@keyframes s-carpenter-loader {
+    0% {
+        transform: scale(0.6) rotate(0deg);
+    }
+    50% {
+        transform: scale(1) rotate(360deg);
+    }
+    100% {
+        transform: scale(0.6) rotate(0deg);
+    }
+}
+
+.carpenter-loader {
+    margin-block-end: sugar.margin(30);
+    position: relative;
+    left: 0.1em;
+
+    svg {
+        display: inline-block;
+        height: 1em;
+        width: 1em;
+        animation: s-carpenter-loader 2s cubic-bezier(0.84, 0, 0.115, 1)
+            infinite;
+        transform-origin: 40% 55%;
+
+        * {
+            fill: sugar.color(current);
+        }
+    }
+}

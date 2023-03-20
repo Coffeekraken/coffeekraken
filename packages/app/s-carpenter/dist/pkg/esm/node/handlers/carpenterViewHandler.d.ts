@@ -1,6 +1,5 @@
-export default function carpenterViewHandler({ req, res, specs, params, }: {
+export default function carpenterViewHandler({ req, res, specs, }: {
     req: any;
     res: any;
     specs: any;
-    params: any;
 }): Promise<any>;

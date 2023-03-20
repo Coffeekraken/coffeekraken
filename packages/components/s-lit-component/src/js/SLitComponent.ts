@@ -258,12 +258,17 @@ export default class SLitComponent extends LitElement {
                         if (typeStr === 'object' && typeof value === 'string') {
                             try {
                                 const json = JSON.parse(value);
-                                return json;
+                                const finalJson = __deepMerge(
+                                    definition.default ?? {},
+                                    json,
+                                );
+                                return finalJson;
                             } catch (e) {
                                 console.error(e);
                             }
                         }
                         if (value === 'true' || value === '') return true;
+                        if (value === 'false') return false;
                         return value;
                     },
                     toAttribute(value) {
@@ -443,6 +448,8 @@ export default class SLitComponent extends LitElement {
                 this.tagName.toLowerCase(),
             );
 
+        const defaultFromInterface = this.settings.interface?.defaults() ?? {};
+
         let properties = this.constructor.properties;
         if (!properties) {
             properties = this.constructor.propertiesFromInterface();
@@ -474,13 +481,6 @@ export default class SLitComponent extends LitElement {
                     _this[prop] = value;
                 },
             });
-
-            let attrValue = this.getAttribute(__dashCase(prop));
-            if (attrValue !== null) {
-                if (attrValue === 'false') attrValue = false;
-                if (attrValue === '') attrValue = true;
-                finalProps[prop] = attrValue;
-            }
 
             // default props
             if (finalProps[prop] === undefined && this[prop] === undefined) {

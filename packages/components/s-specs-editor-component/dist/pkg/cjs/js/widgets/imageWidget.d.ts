@@ -1,4 +1,5 @@
 export default function (component: any): {
+    isActive(): any;
     html({ propObj, values }: {
         propObj: any;
         values: any;

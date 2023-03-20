@@ -507,20 +507,22 @@ export default class SFrontendServer extends __SClass {
      * Get the handler function for the given handler name or directly a path
      */
     async _getHandlerFn(handlerNameOrPath: string) {
+        if (typeof handlerNameOrPath === 'function') {
+            return handlerNameOrPath;
+        }
         if (__fs.existsSync(handlerNameOrPath)) {
             // @ts-ignore
             return (await import(pageConfig.handler)).default;
-        } else {
-            const handlersInConfig = this._frontendServerConfig.handlers;
-            if (!handlersInConfig[handlerNameOrPath]) {
-                throw new Error(
-                    `[SFrontendServer] Sorry but the handler named "<yellow>${handlerNameOrPath}</yellow>" seems to not exists or is missconfigured...`,
-                );
-            }
-            // @ts-ignore
-            return (await import(handlersInConfig[handlerNameOrPath].path))
-                .default;
         }
+
+        const handlersInConfig = this._frontendServerConfig.handlers;
+        if (!handlersInConfig[handlerNameOrPath]) {
+            throw new Error(
+                `[SFrontendServer] Sorry but the handler named "<yellow>${handlerNameOrPath}</yellow>" seems to not exists or is missconfigured...`,
+            );
+        }
+        // @ts-ignore
+        return (await import(handlersInConfig[handlerNameOrPath].path)).default;
     }
 
     /**

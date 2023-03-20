@@ -206,7 +206,7 @@ export default class SSugarCli {
 
         if (process.env.TREAT_AS_MAIN) {
             this._treatAsMain = true;
-            process.env.TREAT_AS_MAIN = false;
+            process.enrestav.TREAT_AS_MAIN = false;
         }
 
         this.packageJson = __packageJsonSync();

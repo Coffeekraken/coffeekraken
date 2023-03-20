@@ -1,20 +1,21 @@
 :root {
-    --s-carpenter-navigation-width: 300px;
+    --s-carpenter-sidebar-width: 230px;
+    --s-carpenter-sidebar-margin: sugar.margin(30);
+    --s-carpenter-sidebar-bottom: var(--s-carpenter-sidebar-margin);
 
     --s-carpenter-editor-width: 500px;
     --s-carpenter-editor-margin: sugar.margin(30);
     --s-carpenter-editor-bottom: var(--s-carpenter-editor-margin);
 
-    --s-carpenter-media-bottom: sugar.margin(50);
+    --s-carpenter-media-bottom: sugar.margin(30);
     --s-carpenter-media-left: 50vw;
 }
 
 .s-carpenter--open,
 .s-carpenter-app--open {
-    --s-carpenter-navigation-width: 300px;
-
     --s-carpenter-media-left: calc(
-        50vw - var(--s-carpenter-editor-width) * 0.5
+        50vw - var(--s-carpenter-editor-width) * 0.5 +
+            var(--s-carpenter-sidebar-width) * 0.5
     );
 
     @media (max-width: 550px) {

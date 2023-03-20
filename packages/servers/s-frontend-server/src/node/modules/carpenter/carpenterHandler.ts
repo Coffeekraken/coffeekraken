@@ -8,6 +8,8 @@ export default function carpenterHandler({ req, res, pageConfig }) {
 
         bench.step('beforeSitemapRead');
 
+        console.log('Params', req.params);
+
         // load current component/section/... specs
         const specsInstance = new __SSpecs();
         const currentSpecs = await specsInstance.read(req.params.dotpath);

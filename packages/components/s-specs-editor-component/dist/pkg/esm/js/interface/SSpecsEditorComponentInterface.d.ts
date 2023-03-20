@@ -23,6 +23,16 @@ export default class SSpecsEditorComponentInterface extends __SInterface {
             title: string;
             description: string;
         };
+        features: {
+            type: string;
+            description: string;
+            default: {
+                save: boolean;
+                delete: boolean;
+                upload: boolean;
+                media: boolean;
+            };
+        };
         icons: {
             type: string;
             title: string;

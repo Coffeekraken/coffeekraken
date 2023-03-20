@@ -32,11 +32,19 @@ export interface ISSpecsEditorComponentIconsProp {
     collapse: string;
 }
 
+export interface ISSpecsEditorComponentFeatures {
+    save: boolean;
+    upload: boolean;
+    media: boolean;
+}
+
 export interface ISSpecsEditorComponentProps {
     id: string;
     specs: any;
-    icons: ISSpecsEditorComponentIconsProp;
+    frontspec: any;
     media: string;
+    features: ISSpecsEditorComponentFeatures;
+    icons: ISSpecsEditorComponentIconsProp;
 }
 
 /**
@@ -454,24 +462,20 @@ export default class SSpecsEditorComponent extends __SLitComponent {
     _renderLabel(propObj: any, path: string[]) {
         return html`
             <span>
+                <h3 class="_title">${propObj.title ?? propObj.id}</h3>
+                ${this.props.frontspec?.media?.queries &&
+                this.isPathResponsive(path)
+                    ? this._renderMediaSelector(path)
+                    : ''}
                 ${propObj.description
                     ? html`
-                          <span
-                              class="${this.utils.cls(
-                                  '_help-icon',
-                              )} s-tooltip-container"
-                          >
+                          <span class="_help-icon s-tooltip-container">
                               <i class="fa-solid fa-circle-question"></i>
                               <div class="s-tooltip s-tooltip--left">
                                   ${propObj.description}
                               </div>
                           </span>
                       `
-                    : ''}
-                ${propObj.title ?? propObj.id}
-                ${this.props.frontspec?.media?.queries &&
-                this.isPathResponsive(path)
-                    ? this._renderMediaSelector(path)
                     : ''}
             </span>
         `;
@@ -578,11 +582,26 @@ export default class SSpecsEditorComponent extends __SLitComponent {
         if (!widget) {
             return;
         }
+
+        const values = this.getValue(path);
+
+        // check if the widget is active
+        if (
+            widget.isActive &&
+            !widget.isActive({
+                values,
+                path,
+                propObj,
+            })
+        ) {
+            return;
+        }
+
         return {
             hideOriginals: widget.hideOriginals,
             html: widget.html(
                 {
-                    values: this.getValue(path),
+                    values,
                     path,
                     propObj,
                 },
@@ -804,25 +823,33 @@ export default class SSpecsEditorComponent extends __SLitComponent {
                                   </p> -->
 
                                   <nav class="_actions">
-                                      <button
-                                          class="_action _action-save"
-                                          @click=${() => {
-                                              this.save();
-                                          }}
-                                      >
-                                          Save
-                                      </button>
-                                      <button
-                                          class="_action _action-delete"
-                                          confirm="Confirm?"
-                                          @click=${() => {
-                                              this.save();
-                                          }}
-                                      >
-                                          <i
-                                              class="fa-regular fa-trash-can"
-                                          ></i>
-                                      </button>
+                                      ${this.props.features?.delete
+                                          ? html`
+                                                <button
+                                                    class="_action _action-delete"
+                                                    confirm="Confirm?"
+                                                    @click=${() => {
+                                                        this.save();
+                                                    }}
+                                                >
+                                                    <i
+                                                        class="fa-regular fa-trash-can"
+                                                    ></i>
+                                                </button>
+                                            `
+                                          : ''}
+                                      ${this.props.features?.save
+                                          ? html`
+                                                <button
+                                                    class="_action _action-save"
+                                                    @click=${() => {
+                                                        this.save();
+                                                    }}
+                                                >
+                                                    Save
+                                                </button>
+                                            `
+                                          : ''}
                                   </nav>
                               </div>
                               ${this._renderElements(this.props.specs, [])}

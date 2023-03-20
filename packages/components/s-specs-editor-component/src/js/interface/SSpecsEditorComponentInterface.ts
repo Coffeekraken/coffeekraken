@@ -47,6 +47,17 @@ export default class SSpecsEditorComponentInterface extends __SInterface {
                 description:
                     'Specify the media on which the specs editor is currently working',
             },
+            features: {
+                type: 'Object',
+                description:
+                    'Specify which features you want in your specs editor. Available features are: "save", "delete", "upload", and "media".',
+                default: {
+                    save: true,
+                    delete: true,
+                    upload: true,
+                    media: true,
+                },
+            },
             icons: {
                 type: 'Object',
                 title: 'Icons',

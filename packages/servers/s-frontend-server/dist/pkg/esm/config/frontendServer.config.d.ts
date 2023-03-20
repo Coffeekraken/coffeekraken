@@ -97,13 +97,6 @@ export default function (api: any): {
             path: string;
             settings: {};
         };
-        carpenter: {
-            
-            description: string;
-            
-            path: string;
-            settings: {};
-        };
         redirect: {
             
             description: string;
@@ -126,6 +119,13 @@ export default function (api: any): {
             settings: {};
         };
         404: {
+            
+            description: string;
+            
+            path: string;
+            settings: {};
+        };
+        carpenter: {
             
             description: string;
             

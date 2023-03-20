@@ -34,7 +34,7 @@ import __deepMerge from '../../shared/object/deepMerge';
  *
  * @snippet         __spawn($1)
  * await __spawn($1)
- * 
+ *
  * @example       js
  * import { __spawn } from '@coffeekraken/sugar/process';
  * const pro = __spawn('echo "hello world");
@@ -137,7 +137,7 @@ export default function spawn(
             new Promise((resolve) => {
                 childProcessExitPromiseResolve = resolve;
                 console.log(
-                    `<red>[kill]</red> Gracefully killing child process "<cyan>${command}</cyan>"`,
+                    `<red>[kill]</red> Gracefully killing process "<cyan>${command}</cyan>"`,
                 );
                 childProcess.kill('SIGINT');
             });

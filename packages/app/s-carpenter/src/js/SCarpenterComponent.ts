@@ -201,9 +201,14 @@ export default class SCarpenterComponent extends __SLitComponent {
                           class="${this.utils.cls('_loading')}"
                       >
                           <div class="_inner">
-                              <div class="_loader carpenter-loader">
-                                  ${this._carpenterLogo()}
+                              <div class="_loader carpenter-loader-blocks">
+                                  <div class="_block-1"></div>
+                                  <div class="_block-2"></div>
+                                  <div class="_block-3"></div>
                               </div>
+                              <!-- <div class="_loader carpenter-loader">
+                                  ${this._carpenterLogo()}
+                              </div> -->
                               <h1 class="_title">
                                   Loading <span>Carpenter</span>
                               </h1>

@@ -10,6 +10,10 @@
     .s-fs-tree {
         font-size: sugar.font.size(20);
 
+        li {
+            position: relative;
+        }
+
         li:before {
             content: '';
             position: absolute;
@@ -18,6 +22,10 @@
             width: 1px;
             height: 100%;
             background: sugar.color(main, border);
+            opacity: 0.4;
+        }
+        li:hover:before {
+            opacity: 0.1;
         }
 
         .s-fs-tree:before {

@@ -1,3 +1,15 @@
+@keyframes s-carpenter-editor-loader-color {
+    0% {
+        @sugar.color (complementary);
+    }
+    50% {
+        @sugar.color (accent);
+    }
+    100% {
+        @sugar.color (complementary);
+    }
+}
+
 .s-carpenter-app_editor {
     position: absolute;
     top: var(--s-carpenter-editor-margin);
@@ -27,12 +39,16 @@
         left: 50%;
         transform: translate(-50%, -50%);
         font-size: 30px;
+        @sugar.color (main);
+        animation: s-carpenter-editor-loader-color 0.5s
+            cubic-bezier(0.56, -0.005, 0.46, 1.505) infinite;
+        opacity: 0.3;
     }
 }
 
 .s-carpenter-app_editor.scrolled .s-specs-editor_metas {
     padding-block: sugar.padding(20);
-    padding-inline: sugar.padding(20);
+    padding-inline: sugar.padding(30);
 
     * {
         @sugar.scale (0.8);

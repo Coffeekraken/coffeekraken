@@ -108,31 +108,20 @@ class SCarpenter extends __SClass {
         const finalSettings = __deepMerge(this.settings, settings ?? {});
 
         return new Promise((resolve) => {
-            const specsMap = {},
-                specsBySources = {};
+            const finalSpecs = {};
 
             for (let [key, source] of Object.entries(finalSettings.sources)) {
-                if (!specsBySources[key]) {
-                    specsBySources[key] = {
-                        // @ts-ignore
-                        ...source,
-                        specs: {},
-                    };
-                }
-
                 const specsInstance = new __SSpecs();
                 const specsArray = specsInstance.list(source.specsNamespaces);
 
                 specsArray.forEach((specs) => {
                     const specsJson = specs.read();
-                    specsBySources[key].specs[specs.dotpath] = specsJson;
-                    specsMap[specs.dotpath] = specsJson;
+                    finalSpecs[specs.dotpath] = specsJson;
                 });
             }
 
             resolve({
-                specsMap,
-                specsBySources,
+                specs: finalSpecs,
             });
         });
     }

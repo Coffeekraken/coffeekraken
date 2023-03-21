@@ -113,9 +113,6 @@ export default class SCarpenterAppComponent extends __SLitComponent {
         return css`
             ${unsafeCSS(__indexCss)}
         `;
-        return css`
-            ${unsafeCSS(__css)}
-        `;
     }
 
     static _registeredAdapters: Record<string, ISCarpenterComponentAdapter> = {
@@ -135,8 +132,6 @@ export default class SCarpenterAppComponent extends __SLitComponent {
 
     static state = {
         activeNavigationFolders: [],
-        $currentElm: null,
-        $preselectedElm: null,
         activeMedia: null,
         isLoading: true,
         loadingStack: {},
@@ -145,6 +140,9 @@ export default class SCarpenterAppComponent extends __SLitComponent {
     currentSpecs = null;
 
     _values = {};
+
+    _$currentElm;
+    _$preselectedElm;
 
     _data;
     _websiteWindow;
@@ -236,22 +234,8 @@ export default class SCarpenterAppComponent extends __SLitComponent {
             this._closeEditor();
         });
 
-        let isEditorHided = false;
-        [this._$websiteDocument, this._$editorDocument].forEach(($scope) => {
-            $scope.addEventListener('keydown', (e) => {
-                if (isEditorHided) return;
-                if (!this.isEditorOpen()) return;
-                if (e.key === '§') {
-                    isEditorHided = true;
-                    this._closeEditor();
-                }
-            });
-            $scope.addEventListener('keyup', (e) => {
-                if (!isEditorHided) return;
-                isEditorHided = false;
-                this._openEditor();
-            });
-        });
+        // register shortcuts in the editor iframe
+        this._registerShortcuts(this._$editorDocument);
 
         // listen spec editor update
         this._listenSpecsEditorUpdate();
@@ -282,6 +266,28 @@ export default class SCarpenterAppComponent extends __SLitComponent {
                 detail: this,
             }),
         );
+    }
+
+    /**
+     * Reguster keyboard shortcuts in a particular "scope".
+     * The "scope" is the different document like the _$websiteDocument,
+     * _$rootDocument, etc...
+     */
+    _registerShortcuts($scope: Document): void {
+        let isEditorHided = false;
+        $scope.addEventListener('keydown', (e) => {
+            if (isEditorHided) return;
+            if (!this.isEditorOpen()) return;
+            if (e.key === '§') {
+                isEditorHided = true;
+                this._closeEditor();
+            }
+        });
+        $scope.addEventListener('keyup', (e) => {
+            if (!isEditorHided) return;
+            isEditorHided = false;
+            this._openEditor();
+        });
     }
 
     /**
@@ -454,7 +460,7 @@ export default class SCarpenterAppComponent extends __SLitComponent {
                 this._$toolbar = null;
 
                 // reset state
-                this.state.$preselectedElm = null;
+                this._$preselectedElm = null;
 
                 // wait until iframe is ready
                 await __whenIframeReady(this._$websiteIframe);
@@ -471,6 +477,9 @@ export default class SCarpenterAppComponent extends __SLitComponent {
                     await this._setCurrentElement($firstElm);
                 }
 
+                // register shortcuts in the website iframe
+                this._registerShortcuts(this._$websiteDocument);
+
                 // init the interactivity in the website iframe
                 this._initWebsiteIframeContent();
 
@@ -479,6 +488,7 @@ export default class SCarpenterAppComponent extends __SLitComponent {
                     this._edit($firstElm);
                 }
 
+                // show the iframe again (just to avoid weird visual effects...)
                 this._$websiteIframe.style.opacity = 1;
 
                 // resolve only if is the first init
@@ -499,13 +509,14 @@ export default class SCarpenterAppComponent extends __SLitComponent {
         ['body'].forEach((container) => {
             Array.from(
                 this._$rootDocument.querySelectorAll(`${container} > *`),
-            ).forEach((node) => {
+            ).forEach((node: HTMLElement) => {
                 if (
                     node.tagName?.toLowerCase?.() === 'iframe' ||
                     node.tagName?.toLowerCase?.() === 's-carpenter'
                 ) {
                     return;
                 }
+                // @ts-ignore
                 node.remove();
             });
         });
@@ -522,16 +533,16 @@ export default class SCarpenterAppComponent extends __SLitComponent {
                 await SCarpenterAppComponent._registeredAdapters[
                     this.props.adapter
                 ].setProps({
-                    $elm: this.state.$currentElm,
+                    $elm: this._$currentElm,
                     props: e.detail.values ?? {},
                     component: this,
                 });
 
             // save current values in "_values" stack
-            this._values[this.state.$currentElm.id] = e.detail.values ?? {};
+            this._values[this._$currentElm.id] = e.detail.values ?? {};
 
             if (adapterResult) {
-                this.state.$currentElm = adapterResult;
+                this._$currentElm = adapterResult;
             }
         });
 
@@ -556,7 +567,7 @@ export default class SCarpenterAppComponent extends __SLitComponent {
                     // do nothing more if already activated
                     if (
                         e.currentTarget.id &&
-                        e.currentTarget.id === this.state.$currentElm?.id
+                        e.currentTarget.id === this._$currentElm?.id
                     ) {
                         return;
                     }
@@ -568,7 +579,7 @@ export default class SCarpenterAppComponent extends __SLitComponent {
                     this._positionToolbarOnElement(e.currentTarget);
 
                     // set the "pre" activate element
-                    this.state.$preselectedElm = $elm;
+                    this._$preselectedElm = $elm;
                 });
             },
             {
@@ -681,8 +692,8 @@ export default class SCarpenterAppComponent extends __SLitComponent {
      */
     async _edit($elm?: HTMLElement) {
         // set the current element
-        if ($elm || this.state.$preselectedElm) {
-            await this._setCurrentElement($elm ?? this.state.$preselectedElm);
+        if ($elm || this._$preselectedElm) {
+            await this._setCurrentElement($elm ?? this._$preselectedElm);
         }
 
         // open the editor
@@ -708,15 +719,15 @@ export default class SCarpenterAppComponent extends __SLitComponent {
         }
 
         // do not activate 2 times the same element
-        if (this.state.$currentElm?.id === $elm.id) {
+        if (this._$currentElm?.id === $elm.id) {
             return;
         }
 
         // remove the preselected element
-        this.state.$preselectedElm = null;
+        this._$preselectedElm = null;
 
         // set the current element
-        this.state.$currentElm = $elm;
+        this._$currentElm = $elm;
 
         // force reset the specs editor
         this.currentSpecs = null;
@@ -725,14 +736,14 @@ export default class SCarpenterAppComponent extends __SLitComponent {
 
         // try to get the spec from the data fetched at start
         let potentialDotpath = $elm.getAttribute('s-specs');
-        if (this._data.specsMap[potentialDotpath]) {
-            this.currentSpecs = this._data.specsMap[potentialDotpath];
+        if (this._data.specs[potentialDotpath]) {
+            this.currentSpecs = this._data.specs[potentialDotpath];
         } else {
             potentialDotpath = `${potentialDotpath}.${
                 potentialDotpath.split('.').slice(-1)[0]
             }`;
-            if (this._data.specsMap[potentialDotpath]) {
-                this.currentSpecs = this._data.specsMap[potentialDotpath];
+            if (this._data.specs[potentialDotpath]) {
+                this.currentSpecs = this._data.specs[potentialDotpath];
             }
         }
 
@@ -744,11 +755,11 @@ export default class SCarpenterAppComponent extends __SLitComponent {
 
         // get values
         const values =
-            this._values[this.state.$currentElm.id] ??
+            this._values[this._$currentElm.id] ??
             (await SCarpenterAppComponent._registeredAdapters[
                 this.props.adapter
             ].getProps({
-                $elm: this.state.$currentElm,
+                $elm: this._$currentElm,
                 component: this,
             }));
 
@@ -762,7 +773,7 @@ export default class SCarpenterAppComponent extends __SLitComponent {
      * Add the "editor" micro menu to the element
      */
     _positionToolbarOnElement($elm: HTMLElement): void {
-        if ($elm.id && this.state.$currentElm?.id === $elm.id) {
+        if ($elm.id && this._$currentElm?.id === $elm.id) {
             return;
         }
 
@@ -851,12 +862,12 @@ export default class SCarpenterAppComponent extends __SLitComponent {
         //     dotpath,
         //     $elm: this.props.specs
         //         ? this._$websiteDocument.body.children[0]
-        //         : this.state.$currentElm,
+        //         : this._$currentElm,
         //     props: this.props,
         //     component: this,
         // });
         // if (adapterResult) {
-        //     this.state.$currentElm = adapterResult;
+        //     this._$currentElm = adapterResult;
         // }
 
         // save arrival state
@@ -874,7 +885,7 @@ export default class SCarpenterAppComponent extends __SLitComponent {
         this.requestUpdate();
 
         // // update the currentSpecs
-        // const newSpecs = this._data.specsMap[dotpath];
+        // const newSpecs = this._data.specs[dotpath];
         // if (newSpecs !== this.currentSpecs) {
         //     this.currentSpecs = null;
         //     this.requestUpdate();
@@ -930,6 +941,22 @@ export default class SCarpenterAppComponent extends __SLitComponent {
             );
         }
 
+        data.specsByTypes = {};
+
+        for (let [namespace, specObj] of Object.entries(data.specs)) {
+            const parts = namespace.split('.');
+            let type;
+            parts.forEach((part) => {
+                if (type) return;
+                if (part !== 'views') {
+                    type = part;
+                }
+            });
+            if (!data.specsByTypes[type]) {
+                data.specsByTypes[type] = {};
+            }
+            data.specsByTypes[type][namespace] = specObj;
+        }
         return data;
     }
 
@@ -973,19 +1000,14 @@ export default class SCarpenterAppComponent extends __SLitComponent {
 
                           <div class="${this.utils.cls('_navigation')}">
                               <ul class="s-fs-tree">
-                                  ${Object.keys(this._data.specsBySources).map(
-                                      (sourceId) => {
-                                          const sourceObj =
-                                              this._data.specsBySources[
-                                                  sourceId
-                                              ];
-                                          if (typeof sourceObj === 'function') {
-                                              return '';
-                                          }
+                                  ${Object.keys(this._data.specsByTypes).map(
+                                      (type) => {
+                                          const specsObj =
+                                              this._data.specsByTypes[type];
                                           return html`
                                               <li
                                                   class="${this.state.activeNavigationFolders.includes(
-                                                      sourceId,
+                                                      type,
                                                   )
                                                       ? 'active'
                                                       : ''}"
@@ -993,11 +1015,11 @@ export default class SCarpenterAppComponent extends __SLitComponent {
                                                   <div
                                                       @pointerup=${() =>
                                                           this._toggleNavigationFolder(
-                                                              sourceId,
+                                                              type,
                                                           )}
                                                   >
                                                       ${this.state.activeNavigationFolders.includes(
-                                                          sourceId,
+                                                          type,
                                                       )
                                                           ? html`
                                                                 ${unsafeHTML(
@@ -1014,18 +1036,17 @@ export default class SCarpenterAppComponent extends __SLitComponent {
                                                                 )}
                                                             `}
                                                       <span tabindex="0"
-                                                          >${sourceObj.title ??
-                                                          sourceId}</span
+                                                          >${__upperFirst(
+                                                              type,
+                                                          )}</span
                                                       >
                                                   </div>
                                                   <ul class="s-fs-tree">
                                                       ${Object.keys(
-                                                          sourceObj.specs,
+                                                          specsObj,
                                                       ).map((dotpath) => {
                                                           const specObj =
-                                                              sourceObj.specs[
-                                                                  dotpath
-                                                              ];
+                                                              specsObj[dotpath];
                                                           let last;
                                                           const checkDotPath =
                                                               specObj.metas.dotpath
@@ -1069,9 +1090,19 @@ export default class SCarpenterAppComponent extends __SLitComponent {
                                                                               .dotpath
                                                                       ]
                                                                           ? html`
-                                                                                <span
-                                                                                    class="s-loader:spinner"
-                                                                                ></span>
+                                                                                <div
+                                                                                    class="_loader carpenter-loader-blocks"
+                                                                                >
+                                                                                    <div
+                                                                                        class="_block-1"
+                                                                                    ></div>
+                                                                                    <div
+                                                                                        class="_block-2"
+                                                                                    ></div>
+                                                                                    <div
+                                                                                        class="_block-3"
+                                                                                    ></div>
+                                                                                </div>
                                                                             `
                                                                           : html`
                                                                                 <i
@@ -1116,8 +1147,10 @@ export default class SCarpenterAppComponent extends __SLitComponent {
                           </s-specs-editor>
                       `
                     : html`
-                          <div class="_loader carpenter-loader">
-                              ${this._carpenterLogo()}
+                          <div class="_loader carpenter-loader-blocks">
+                              <div class="_block-1"></div>
+                              <div class="_block-2"></div>
+                              <div class="_block-3"></div>
                           </div>
                       `}
             </nav>
@@ -1163,8 +1196,10 @@ export default class SCarpenterAppComponent extends __SLitComponent {
             ${this.state.isLoading
                 ? html`
                       <div class="${this.utils.cls('_loading')}">
-                          <div class="_loader carpenter-loader">
-                              ${this._carpenterLogo()}
+                          <div class="_loader carpenter-loader-blocks">
+                              <div class="_block-1"></div>
+                              <div class="_block-2"></div>
+                              <div class="_block-3"></div>
                           </div>
                       </div>
                   `

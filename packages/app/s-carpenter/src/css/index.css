@@ -27,7 +27,7 @@
 @sugar.ui.label.classes();
 @sugar.ui.select.classes();
 @sugar.ui.switch.classes();
-@sugar.ui.fsTree.classes();
+@sugar.ui.fstree.classes ($scope: bare);
 @sugar.ui.tooltip.classes();
 @sugar.ui.loader.classes ('squareDots,spinner');
 

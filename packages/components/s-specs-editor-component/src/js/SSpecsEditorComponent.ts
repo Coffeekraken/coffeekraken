@@ -161,7 +161,7 @@ export default class SSpecsEditorComponent extends __SLitComponent {
             const part = path[i];
             currentPath.push(part);
             const propObj = __get(this.props.specs, currentPath.join('.'));
-            if (propObj.responsive) {
+            if (propObj?.responsive) {
                 return true;
             }
         }

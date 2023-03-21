@@ -13,18 +13,9 @@ export default function carpenterJsonHandler({ req, res, pageConfig }) {
         const frontspec = new __SFrontspec(),
             frontspecJson = await frontspec.read();
 
-        const specsMap = {},
-            specsBySources = {};
+        const finalSpecs = {};
 
         for (let [key, source] of Object.entries(carpenterSources)) {
-            if (!specsBySources[key]) {
-                specsBySources[key] = {
-                    // @ts-ignore
-                    ...source,
-                    specs: {},
-                };
-            }
-
             const specsInstance = new __SSpecs();
             const specsArray = specsInstance.list(source.specsNamespaces);
 
@@ -38,8 +29,7 @@ export default function carpenterJsonHandler({ req, res, pageConfig }) {
 
                 __SSpecs.applyValuesToSpecs(data, specsJson);
 
-                specsBySources[key].specs[specs.dotpath] = specsJson;
-                specsMap[specs.dotpath] = specsJson;
+                finalSpecs[specs.dotpath] = specsJson;
             }
         }
 
@@ -49,13 +39,11 @@ export default function carpenterJsonHandler({ req, res, pageConfig }) {
         res.status(200);
         res.type('application/json');
         res.send({
-            specsMap,
-            specsBySources,
+            specs: finalSpecs,
             frontspec: frontspecJson,
         });
         resolve({
-            specsMap,
-            specsBySources,
+            specs: finalSpecs,
             frontspec: frontspecJson,
         });
     });

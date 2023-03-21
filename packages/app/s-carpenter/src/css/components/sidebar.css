@@ -1,3 +1,18 @@
+@keyframes s-carpenter-sidebar-loading-bkg {
+    0% {
+        @sugar.color (complementary);
+        /* background: sugar.color(complementary, --alpha 0.5); */
+    }
+    50% {
+        @sugar.color (accent);
+        /* background: sugar.color(accent, --alpha 0.5); */
+    }
+    100% {
+        @sugar.color (complementary);
+        /* background: sugar.color(complementary, --alpha 0.5); */
+    }
+}
+
 .s-carpenter-app_sidebar {
     position: absolute;
     top: var(--s-carpenter-sidebar-margin);
@@ -19,10 +34,15 @@
         pointer-events: all;
     }
 
-    i,
-    .s-loader {
+    ._loader {
+        opacity: 0.5;
         margin-inline-end: sugar.margin(10);
-        @sugar.color (accent);
+        @sugar.color (#fff);
+    }
+
+    i {
+        margin-inline-end: sugar.margin(10);
+        @sugar.color (#fff);
     }
     .active > div > i {
         color: sugar.color(accent);
@@ -37,20 +57,31 @@
         opacity: 0.5;
     }
 
-    ._item.active > div {
-        background: sugar.color(complementary, --alpha 0.5) !important;
-        color: sugar.color(complementary, foreground) !important;
-        opacity: 1 !important;
+    ._item:not(.active):hover > div {
+        background: sugar.color(main, --alpha 0.05);
+    }
+
+    ._item.active:not(:has(._loader)) > div,
+    ._item.active:hover:not(:has(._loader)) > div {
+        background: sugar.color(complementary, --alpha 0.5);
+        color: sugar.color(complementary, foreground);
+        /* opacity: 1 !important; */
     }
     ._item.active:before {
         display: none;
+    }
+
+    ._item:has(._loader) > div > ._loader {
+        animation: s-carpenter-sidebar-loading-bkg 0.5s
+            cubic-bezier(0.56, -0.005, 0.46, 1.505) infinite !important;
     }
 
     .s-carpenter-app_logo {
         flex-grow: 0;
         padding: sugar.padding(30);
         margin-block-end: sugar.margin(30);
-        @sugar.depth (100);
+        /* @sugar.depth (100); */
+        border-bottom: 1px solid sugar.color(main, border);
 
         svg {
             *[fill='#FECE0F'] {
@@ -59,11 +90,14 @@
             *[fill='black'] {
                 fill: sugar.color(main, text);
             }
+            *[fill='#4900E6'] {
+                full: sugar.color(complementary);
+            }
 
             display: inline-block;
             width: auto !important;
             height: autp !important;
-            max-height: 50px !important;
+            max-width: 100% !important;
         }
     }
 

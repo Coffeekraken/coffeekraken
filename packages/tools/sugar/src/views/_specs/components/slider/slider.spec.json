@@ -10,6 +10,7 @@
         },
         "html": {
             "type": "Html",
+            "title": "Html",
             "description": "The slider content to print. Used only if no 'slides' have been provided"
         },
         "lnf": {
@@ -26,8 +27,12 @@
                     "value": "default-tight"
                 },
                 {
-                    "name": "Contained",
-                    "value": "default-contained"
+                    "name": "Contain",
+                    "value": "default-contain"
+                },
+                {
+                    "name": "Contight",
+                    "value": "default-contight"
                 }
             ],
             "default": "default",

@@ -35,6 +35,8 @@ export interface ISComponentUtilsDefaultProps {
 }
 export default class SComponentUtils extends __SClass {
     
+    static _$carpenter: any;
+    
     static fastdom: {
         mutate: Function;
         measure: Function;

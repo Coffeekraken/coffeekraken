@@ -12,6 +12,9 @@
             align-items: center;
             justify-content: center;
         }
+        body:has(s-carpenter) .s-carpenter_body {
+            opacity: 0;
+        }
     </style>
     <div class="s-carpenter_body">
         {{ body|raw }}

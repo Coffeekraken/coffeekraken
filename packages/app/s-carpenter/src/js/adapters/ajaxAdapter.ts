@@ -1,3 +1,5 @@
+import { __unescapeHtml } from '@coffeekraken/sugar/html';
+
 export default {
     async load({ dotpath, props, component }): Promise<HTMLElement> {
         const rawResponse = await fetch(
@@ -69,8 +71,11 @@ export default {
                     $child.hasAttribute('s-specs-values')
                 ) {
                     try {
-                        props = JSON.parse($child.content.textContent);
-                    } catch (e) {}
+                        props = JSON.parse(__unescapeHtml($child.innerHTML));
+                    } catch (e) {
+                        console.log($child.innerHTML);
+                        console.error(e.message);
+                    }
                     break;
                 }
             }

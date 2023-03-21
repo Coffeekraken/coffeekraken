@@ -193,7 +193,7 @@ export default class SSpecsEditorComponent extends __SLitComponent {
             }
             currentPath.push(part);
             const propObj = __get(this.props.specs, currentPath.join('.'));
-            if (propObj.responsive) {
+            if (propObj?.responsive) {
                 if (finalSettings.media) {
                     mediaValuePath.push('media');
                     mediaValuePath.push(finalSettings.media);
@@ -572,6 +572,34 @@ export default class SSpecsEditorComponent extends __SLitComponent {
         `;
     }
 
+    _renderHtmlElement(propObj, path) {
+        const value = this.getValue(path) ?? propObj.default;
+        return html`
+            <div class="${this.utils.cls('_prop--html')}">
+                <label
+                    class="${this.utils.cls(
+                        '_label',
+                        's-label s-label--block',
+                    )}"
+                >
+                    <textarea
+                        rows="5"
+                        @change=${(e) => this._update(path, propObj, e)}
+                        name="${path.at(-1)}"
+                        class="${this.utils.cls('_input', 's-input')}"
+                        placeholder="${propObj.default ??
+                        propObj.title ??
+                        propObj.id}"
+                        path="${path.join('.')}"
+                    >
+${value}</textarea
+                    >
+                    ${this._renderLabel(propObj, path)}
+                </label>
+            </div>
+        `;
+    }
+
     /**
      * Render the proper widget depending on the "type" propObj property
      */
@@ -611,111 +639,123 @@ export default class SSpecsEditorComponent extends __SLitComponent {
     }
 
     _renderElement(propObj, path) {
+        const typeLower = propObj.type.toLowerCase();
+
+        if (typeLower.match(/(\{\}|\[\])/)) {
+            return this._renderRepeatableElements(propObj, path);
+        }
+
         return html`
-            ${propObj.type.toLowerCase() === 'text'
+            ${typeLower === 'text'
                 ? this._renderTextElement(propObj, path)
-                : propObj.type.toLowerCase() === 'select'
+                : typeLower === 'select'
                 ? this._renderSelectElement(propObj, path)
-                : propObj.type.toLowerCase() === 'checkbox'
+                : typeLower === 'checkbox'
                 ? this._renderCheckboxElement(propObj, path)
+                : typeLower === 'html'
+                ? this._renderHtmlElement(propObj, path)
                 : ''}
         `;
     }
 
-    _renderElements(specs: any, path: string[] = [], forceNoRepeat = false) {
-        // const _specs = __get(specs, path.join('.'));
-        const _specs = specs;
-        if (!forceNoRepeat && _specs.type.match(/(\{\}|\[\])/)) {
-            const loopOn = this.getValue(path) ?? [];
+    _renderRepeatableElements(propObj, path) {
+        const loopOn = this.getValue(path) ?? [];
+        return html` <div class="${this.utils.cls('_repeatable')}">
+            ${loopOn.map(
+                (v, i) => html`
+                    <div
+                        tabindex="0"
+                        @pointerup=${(e) => {
+                            this._toggle(`${path.join('.')}-${i}`);
+                        }}
+                        class="${this.utils.cls(
+                            '_repeatable-title',
+                        )} ${this._isActive(`${path.join('.')}-${i}`)
+                            ? 'active'
+                            : ''}"
+                    >
+                        <span>
+                            ${v.title ??
+                            v.name ??
+                            v.id ??
+                            `${propObj.title} #${i}`}
+                        </span>
 
-            return html`
-                <div class="${this.utils.cls('_repeatable')}">
-                    ${loopOn.map(
-                        (v, i) => html`
-                            <div
-                                tabindex="0"
-                                @pointerup=${() =>
-                                    this._toggle(`${path.join('.')}-${i}`)}
-                                class="${this.utils.cls(
-                                    '_repeatable-title',
-                                )} ${this._isActive(`${path.join('.')}-${i}`)
-                                    ? 'active'
-                                    : ''}"
-                            >
-                                ${v.title ??
-                                v.name ??
-                                v.id ??
-                                `${_specs.title} #${i}`}
-                                ${this._isActive(`${path.join('.')}-${i}`)
-                                    ? html`
-                                          ${unsafeHTML(
-                                              this.props.icons.collapse,
-                                          )}
-                                      `
-                                    : html`
-                                          ${unsafeHTML(this.props.icons.expand)}
-                                      `}
-                            </div>
-                            <div
-                                tabindex="0"
-                                class="${this.utils.cls(
-                                    '_repeatable-item',
-                                )} ${this._isActive(`${path.join('.')}-${i}`)
-                                    ? 'active'
-                                    : ''}"
-                            >
-                                <div
-                                    class="${this.utils.cls(
-                                        '_repeatable-item-actions',
-                                    )} ${this._isActive(
-                                        `${path.join('.')}-${i}`,
-                                    )
-                                        ? 'active'
-                                        : ''}"
-                                >
-                                    <button
-                                        @pointerup=${() =>
-                                            this._removeItem(loopOn, v, _specs)}
-                                        class="${this.utils.cls(
-                                            '_repeatable-remove',
-                                            's-badge s-color s-color--error',
-                                        )}"
-                                    >
-                                        Remove
-                                    </button>
-                                </div>
-
-                                <div
-                                    class="${this.utils.cls(
-                                        '_repeatable-item-props',
-                                    )}"
-                                >
-                                    ${this._renderElements(
-                                        specs,
-                                        [...path, i],
-                                        true,
-                                    )}
-                                </div>
-                            </div>
-                        `,
-                    )}
-
-                    <div class="${this.utils.cls('_repeatable-actions')}">
                         <button
-                            @pointerup=${() => this._addItem(loopOn, _specs)}
-                            class="${this.utils.cls('_btn', 's-btn')}"
+                            confirm="Confirm!"
+                            @pointerup=${(e) => {
+                                e.preventDefault();
+                                e.stopPropagation();
+                                if (e.currentTarget.needConfirmation) return;
+                                this._removeItem(loopOn, v, propObj);
+                            }}
+                            class="_remove"
                         >
-                            Add a
-                            ${__lowerFirst(_specs.title).replace(/s$/, '')}
-                            ${unsafeHTML(this.props.icons.add)}
+                            <i class="fa-regular fa-trash-can"></i>
                         </button>
+
+                        ${this._isActive(`${path.join('.')}-${i}`)
+                            ? html` ${unsafeHTML(this.props.icons.collapse)} `
+                            : html` ${unsafeHTML(this.props.icons.expand)} `}
                     </div>
-                </div>
-            `;
+                    <div
+                        tabindex="0"
+                        class="${this.utils.cls(
+                            '_repeatable-item',
+                        )} ${this._isActive(`${path.join('.')}-${i}`)
+                            ? 'active'
+                            : ''}"
+                    >
+                        <div
+                            class="${this.utils.cls('_repeatable-item-props')}"
+                        >
+                            ${this._renderElements(
+                                {
+                                    ...propObj,
+                                    type: propObj.type.replace(
+                                        /(\{\}|\[\])$/,
+                                        '',
+                                    ),
+                                },
+                                [...path, i],
+                                true,
+                            )}
+                        </div>
+                    </div>
+                `,
+            )}
+
+            <div class="${this.utils.cls('_repeatable-actions')}">
+                <button
+                    @pointerup=${() => this._addItem(loopOn, propObj)}
+                    class="_add"
+                >
+                    Add a ${__lowerFirst(propObj.title).replace(/s$/, '')}
+                    ${unsafeHTML(this.props.icons.add)}
+                </button>
+            </div>
+        </div>`;
+    }
+
+    _renderPropObj(propObj, path) {
+        return html`
+            <div prop="${propObj.id}" class="${this.utils.cls('_prop')}">
+                ${this._renderElement(propObj, path)}
+            </div>
+        `;
+    }
+
+    _renderElements(specs: any, path: string[] = [], forceNoRepeat = false) {
+        if (!forceNoRepeat && specs.type.match(/(\{\}|\[\])/)) {
+            return this._renderRepeatableElements(specs, path);
         } else {
+            if (!specs.props) {
+                return this._renderPropObj(specs, path);
+            }
+
             return html`
-                ${Object.keys(_specs.props).map((prop) => {
-                    const propObj = _specs.props[prop];
+                ${Object.keys(specs.props).map((prop) => {
+                    const propObj = specs.props[prop];
                     if (propObj.props) {
                         const renderedWidget = this._getRenderedWidget(
                             propObj,
@@ -781,18 +821,11 @@ export default class SSpecsEditorComponent extends __SLitComponent {
                             </div>
                         `;
                     } else {
-                        return html`
-                            <div
-                                prop="${propObj.id}"
-                                class="${this.utils.cls('_prop')}"
-                            >
-                                ${this._renderElement(propObj, [
-                                    ...path,
-                                    'props',
-                                    prop,
-                                ])}
-                            </div>
-                        `;
+                        return this._renderPropObj(propObj, [
+                            ...path,
+                            'props',
+                            prop,
+                        ]);
                     }
                 })}
             `;

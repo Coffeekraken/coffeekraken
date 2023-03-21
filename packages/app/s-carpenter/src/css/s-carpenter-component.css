@@ -1,6 +1,10 @@
 @import './vars.css';
 @import './generic/carpenter-loader.css';
 
+[s-carpenter-initial-ui] {
+    @sugar.theme.apply (light);
+}
+
 .s-carpenter {
 }
 .s-carpenter_website-iframe,
@@ -108,39 +112,48 @@ body:has(.s-carpenter_body) {
     }
 }
 
-.s-carpenter_loading,
-.s-carpenter_ready {
+.s-carpenter_loading {
     position: fixed;
     z-index: 99999;
     top: 50%;
     left: 50%;
     transform: scale(1) translate(-50%, -50%);
     transform-origin: 0 0;
+    background: none;
     animation: s-carpenter-popin-in 0.3s cubic-bezier(0.725, -0.21, 0.055, 1.26)
         forwards;
 
     ._inner {
-        background-color: #2c3138;
-        background-color: sugar.color(complementary);
-        /* background-image: url('https://cdnv2.coffeekraken.io/carpenter-loading-bkg.png'); */
-        background-position: 50% 50%;
-        background-size: cover;
-        color: white;
-        padding: sugar.padding(50) sugar.padding(70);
+        background-color: sugar.color(main, background);
+        padding: sugar.padding(50) sugar.padding(60);
         text-align: center;
-        @sugar.border.radius;
+        border-radius: 10px;
         @sugar.depth (100);
     }
 
+    ._logo {
+        display: flex;
+        align-items: start;
+        gap: sugar.margin(20);
+
+        svg {
+            height: 60px;
+            width: auto;
+        }
+    }
+
     ._loader {
-        font-size: 60px;
-        @sugar.color (#fff);
+        font-size: 44px;
         margin-block-end: sugar.margin(30);
+        animation: s-carpenter-loader-color 0.5s
+            cubic-bezier(0.56, -0.005, 0.46, 1.505) infinite !important;
+        opacity: 0.3;
     }
 
     ._title {
         font-size: 28px;
         margin-block-end: sugar.margin(30);
+        display: none;
 
         span {
             color: sugar.color(accent);
@@ -149,30 +162,9 @@ body:has(.s-carpenter_body) {
     ._text {
         font-size: 16px;
         line-height: 1.5;
-    }
-    /* ._cancel-btn {
-        @sugar.ui.button;
-        @sugar.color (error);
-    } */
-}
-.s-carpenter_ready {
-    animation: none;
 
-    ._logo {
-        left: 10px;
-
-        svg {
-            animation: none !important;
-        }
-    }
-
-    ._inner {
-        background-image: url('https://cdnv2.coffeekraken.io/carpenter-ready-bkg.png');
-    }
-
-    ._title {
         span {
-            color: sugar.color(success);
+            color: sugar.color(accent);
         }
     }
 }

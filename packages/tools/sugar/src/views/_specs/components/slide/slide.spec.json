@@ -1,6 +1,7 @@
 {
     "type": "Bare",
     "title": "Slide",
+    "ghost": true,
     "description": "Simple slide usable in a slider",
     "props": {
         "attributes": "@sugar.views.props.attributes",

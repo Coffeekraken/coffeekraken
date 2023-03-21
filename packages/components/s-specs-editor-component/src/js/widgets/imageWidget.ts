@@ -9,12 +9,11 @@ export default function (component) {
             if (!values) {
                 values = {};
             }
-
             return html`
                 <div class="${component.utils.cls('_dropzone')}">
                     <s-dropzone
                         accept="image/*"
-                        files="${values.url}"
+                        .files="${values.url}"
                         upload
                     ></s-dropzone>
                 </div>

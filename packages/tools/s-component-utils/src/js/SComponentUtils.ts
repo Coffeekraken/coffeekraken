@@ -67,6 +67,14 @@ export interface ISComponentUtilsDefaultProps {
 
 export default class SComponentUtils extends __SClass {
     /**
+     * Store a reference to the "s-carpenter" component in the dom.
+     * If it's present, mean that we need to not execute the features/component
+     * cause the HTML of the page will be injected into an iframe where
+     * these will be executed normally
+     */
+    static _$carpenter;
+
+    /**
      * @name            fastdom
      * @type            Object
      * @static
@@ -658,6 +666,16 @@ export default class SComponentUtils extends __SClass {
             //     await __whenAttribute($closestCustomElement, 'mounted');
             // }
 
+            // make sure to not init components that are in
+            if (this.node.tagName.toLowerCase() !== 's-carpenter') {
+                const $carpenter =
+                    this.constructor._$carpenter ??
+                    document.querySelector('s-carpenter');
+                if ($carpenter) {
+                    return;
+                }
+            }
+
             if (!Array.isArray(when)) {
                 when = [when];
             }
@@ -668,7 +686,9 @@ export default class SComponentUtils extends __SClass {
             }
 
             // wait
-            await __when(this.node, when);
+            if (!when.includes('direct') && !when.includes('directly')) {
+                await __when(this.node, when);
+            }
 
             callback?.(this.node);
             resolve(this.node);

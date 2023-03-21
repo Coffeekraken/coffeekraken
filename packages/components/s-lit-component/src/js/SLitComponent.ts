@@ -415,14 +415,10 @@ export default class SLitComponent extends LitElement {
 
             await __wait();
             await __wait();
-            if (!mountWhen.match(/^direct(ly)?$/)) {
-                // wait until mount
-                await this.utils.waitAndExecute(mountWhen, () => {
-                    this._mount();
-                });
-            } else {
+            // wait until mount
+            await this.utils.waitAndExecute(mountWhen, () => {
                 this._mount();
-            }
+            });
         })();
     }
 

@@ -7,21 +7,6 @@
     }
 }
 
-@keyframes s-carpenter-loading-bkg {
-    0% {
-        @sugar.color (complementary);
-        /* background: sugar.color(complementary); */
-    }
-    50% {
-        @sugar.color (accent);
-        /* background: sugar.color(accent); */
-    }
-    100% {
-        @sugar.color (complementary);
-        /* background: sugar.color(complementary); */
-    }
-}
-
 .s-carpenter-app_loading {
     position: absolute;
     top: 45%;
@@ -47,7 +32,8 @@
         transform: translate(-50%, -50%);
         @sugar.color (#fff);
         font-size: 40px;
-        animation: s-carpenter-loading-bkg 0.5s
+        animation: s-carpenter-loader-color 0.5s
             cubic-bezier(0.56, -0.005, 0.46, 1.505) infinite;
+        opacity: 0.3;
     }
 }

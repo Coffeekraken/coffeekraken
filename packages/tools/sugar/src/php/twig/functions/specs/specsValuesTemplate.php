@@ -41,5 +41,7 @@ return new \Twig\TwigFunction('__specsValuesTemplate', function ($values) {
     unset($values['request']);
 
     // return ready to attr JSON
-    return '<template s-specs-values>' . json_encode($values) . '</template>';
+    return '<template s-specs-values>' .
+        json_encode($values, JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_QUOT) .
+        '</template>';
 });

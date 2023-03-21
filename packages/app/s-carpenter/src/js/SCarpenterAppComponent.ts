@@ -5,7 +5,7 @@ import { define as __sSugarFeatureDefine } from '@coffeekraken/s-sugar-feature';
 
 import { __wait } from '@coffeekraken/sugar/datetime';
 import { __hotkey } from '@coffeekraken/sugar/keyboard';
-import { __deepMerge } from '@coffeekraken/sugar/object';
+import { __deepMerge, __filterObject } from '@coffeekraken/sugar/object';
 import { __uniqid, __upperFirst } from '@coffeekraken/sugar/string';
 import { css, html, unsafeCSS } from 'lit';
 import { unsafeHTML } from 'lit/directives/unsafe-html.js';
@@ -54,6 +54,7 @@ export interface ISCarpenterComponentProps {
     nav: boolean;
     pagesLink: string;
     iframe: boolean;
+    ghostSpecs: boolean;
     logo: string;
     icons: ISCarpenterAppComponentIconsProp;
 }
@@ -941,6 +942,13 @@ export default class SCarpenterAppComponent extends __SLitComponent {
             );
         }
 
+        // filter the "ghosts"
+        if (!this.props.ghostSpecs) {
+            data.specs = __filterObject(data.specs, (key, item) => {
+                return !item.ghost;
+            });
+        }
+
         data.specsByTypes = {};
 
         for (let [namespace, specObj] of Object.entries(data.specs)) {
@@ -1138,11 +1146,9 @@ export default class SCarpenterAppComponent extends __SLitComponent {
                     ? html`
                           <s-specs-editor
                               media="${this.state.activeMedia}"
-                              specs="${JSON.stringify(this.currentSpecs)}"
-                              features="${JSON.stringify(this.props.features)}"
-                              frontspec="${JSON.stringify(
-                                  this._data.frontspec ?? {},
-                              )}"
+                              .specs=${this.currentSpecs}
+                              .features=${this.props.features}
+                              .frontspec=${this._data.frontspec ?? {}}
                           >
                           </s-specs-editor>
                       `

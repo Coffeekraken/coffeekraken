@@ -1,4 +1,3 @@
-import { define as __sActivateFeature } from '@coffeekraken/s-activate-feature';
 import __SClass from '@coffeekraken/s-class';
 import { __deepMerge } from '@coffeekraken/sugar/object';
 import { define as _sCarpenterAppComponentDefine } from './SCarpenterAppComponent';
@@ -30,7 +29,7 @@ export default class SCarpenter extends __SClass {
         front.setLod(5);
 
         // features
-        __sActivateFeature();
+        // __sActivateFeature();
 
         // components
         _sCarpenterAppComponentDefine({

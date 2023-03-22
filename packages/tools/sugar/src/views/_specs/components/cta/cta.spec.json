@@ -4,8 +4,8 @@
     "description": "Display a call to action",
     "props": {
         "color": "@sugar.views.props.color",
-        "attributes": "@sugar.views.props.attributes",
-        "link": "@sugar.views.props.link"
+        "link": "@sugar.views.props.link",
+        "attributes": "@sugar.views.props.attributes"
     },
     "examples": {
         "twig": {

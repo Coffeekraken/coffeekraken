@@ -35,6 +35,11 @@
 
     ._item {
         @sugar.transition (fast);
+
+        > div {
+            border: 1px solid transparent;
+            @sugar.transition (fast);
+        }
     }
 
     ._item:not(.active):not(:hover) > div > span,
@@ -53,6 +58,10 @@
     }
     ._item.active:before {
         display: none;
+    }
+
+    ._item:has(._loader) > div {
+        border: 1px solid sugar.color(main, border);
     }
 
     ._item:has(._loader) > div > ._loader {

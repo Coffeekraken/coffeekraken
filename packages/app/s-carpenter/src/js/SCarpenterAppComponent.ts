@@ -434,6 +434,7 @@ export default class SCarpenterAppComponent extends __SLitComponent {
 
             // remove initial carpenter component
             $html.querySelector('s-carpenter')?.remove?.();
+            $html.querySelector('.s-carpenter_editor-iframe')?.remove?.();
 
             // prepend the website iframe in the body
             this._$websiteDocument.body.prepend(this._$websiteIframe);
@@ -470,6 +471,9 @@ export default class SCarpenterAppComponent extends __SLitComponent {
                 this._websiteWindow = this._$websiteIframe.contentWindow;
                 this._$websiteDocument =
                     this._$websiteIframe.contentWindow.document;
+
+                // remove the "s-carpenter" in the iframe
+                this._$websiteDocument.querySelector('s-carpenter')?.remove?.();
 
                 // get the first element in the iframe
                 const $firstElm =
@@ -529,6 +533,8 @@ export default class SCarpenterAppComponent extends __SLitComponent {
     _listenSpecsEditorUpdate() {
         // listen for actual updated
         this.addEventListener('s-specs-editor.change', async (e) => {
+            console.log('CURRENT', this._$currentElm);
+
             // make use of the specified adapter to update the component/section/etc...
             const adapterResult =
                 await SCarpenterAppComponent._registeredAdapters[

@@ -2,6 +2,8 @@ import { __unescapeHtml } from '@coffeekraken/sugar/html';
 
 export default {
     async load({ dotpath, props, component }): Promise<HTMLElement> {
+        console.log('LOA', dotpath, props, component.props);
+
         const rawResponse = await fetch(
             component.props.pagesLink.replace('%dotpath', dotpath),
             {
@@ -47,6 +49,8 @@ export default {
         let raw = $elm.getAttribute('s-specs-values');
         let props;
 
+        console.log('GET', $elm);
+
         // try json
         if (raw) {
             try {
@@ -91,6 +95,8 @@ export default {
             props,
             component,
         });
+
+        console.log('SET', $elm);
 
         // keep the element id
         $newComponent.id = $elm.id;

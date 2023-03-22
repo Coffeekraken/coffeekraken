@@ -127,16 +127,24 @@ body:has(.s-carpenter_body) {
         background-color: sugar.color(main, background);
         padding: sugar.padding(50) sugar.padding(60);
         text-align: center;
-        border-radius: 10px;
+        border-radius: 20px;
         @sugar.depth (100);
+        perspective: 1200px;
+    }
+
+    ._picto {
+        transform-origin: 50% 50%;
+        /* animation: s-carpenter-loader-skew 4s linear infinite; */
     }
 
     ._logo {
         display: flex;
         align-items: start;
         gap: sugar.margin(20);
+        margin-block-end: sugar.margin(30);
 
         svg {
+            opacity: 0.5;
             height: 60px;
             width: auto;
         }
@@ -144,9 +152,9 @@ body:has(.s-carpenter_body) {
 
     ._loader {
         font-size: 44px;
-        margin-block-end: sugar.margin(30);
-        animation: s-carpenter-loader-color 0.5s
-            cubic-bezier(0.56, -0.005, 0.46, 1.505) infinite !important;
+        /* margin-block-end: sugar.margin(30); */
+        /* animation: s-carpenter-loader-color 0.5s
+            cubic-bezier(0.56, -0.005, 0.46, 1.505) infinite !important; */
         opacity: 0.3;
     }
 
@@ -162,6 +170,7 @@ body:has(.s-carpenter_body) {
     ._text {
         font-size: 16px;
         line-height: 1.5;
+        opacity: 0.6;
 
         span {
             color: sugar.color(accent);

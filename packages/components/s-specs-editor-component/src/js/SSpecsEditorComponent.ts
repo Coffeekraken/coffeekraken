@@ -44,6 +44,7 @@ export interface ISSpecsEditorComponentProps {
     frontspec: any;
     media: string;
     features: ISSpecsEditorComponentFeatures;
+    ghostSpecs: boolean;
     icons: ISSpecsEditorComponentIconsProp;
 }
 
@@ -227,21 +228,27 @@ export default class SSpecsEditorComponent extends __SLitComponent {
     }
 
     getValue(path: string[], settings?: any): any {
+        const finalSettings = {
+            default: undefined,
+            ...(settings ?? {}),
+        };
         if (this.isPathResponsive(path)) {
-            const finalSettings = {
-                media: this.props.media,
-                ...(settings ?? {}),
-            };
-            const valuePath = this.getValuePath(path, finalSettings);
-            if (valuePath !== undefined) {
-                return __get(this.props.specs.values, valuePath.join('.'));
-            }
-        } else {
-            const valuePath = this.getValuePath(path, settings);
-            if (valuePath !== undefined) {
-                return __get(this.props.specs.values, valuePath.join('.'));
-            }
+            finalSettings.media = this.props.media;
         }
+        let valuePath = this.getValuePath(path, finalSettings);
+        if (!valuePath) {
+            valuePath = path.filter((p) => p !== 'props');
+        }
+
+        let value = __get(this.props.specs.values, valuePath.join('.'));
+        if (value === undefined && finalSettings.default !== undefined) {
+            value = __set(
+                this.props.specs.values,
+                valuePath.join('.'),
+                finalSettings.default,
+            );
+        }
+        return value;
     }
 
     clearValue(path: string[], settings?: any): any {
@@ -389,7 +396,6 @@ export default class SSpecsEditorComponent extends __SLitComponent {
                 break;
         }
 
-        // @ts-ignore
         this.requestUpdate();
     }
 
@@ -401,8 +407,7 @@ export default class SSpecsEditorComponent extends __SLitComponent {
             stack.splice(stack.indexOf(item), 1);
         }
 
-        // @ts-ignore
-        this.requestUpdate();
+        this.apply();
     }
 
     /**
@@ -627,14 +632,11 @@ ${value}</textarea
 
         return {
             hideOriginals: widget.hideOriginals,
-            html: widget.html(
-                {
-                    values,
-                    path,
-                    propObj,
-                },
-                this.getValue(path) ?? {},
-            ),
+            html: widget.html({
+                values,
+                path,
+                propObj,
+            }),
         };
     }
 
@@ -659,7 +661,10 @@ ${value}</textarea
     }
 
     _renderRepeatableElements(propObj, path) {
-        const loopOn = this.getValue(path) ?? [];
+        const loopOn = this.getValue(path, {
+            default: [],
+        });
+
         return html` <div class="${this.utils.cls('_repeatable')}">
             ${loopOn.map(
                 (v, i) => html`
@@ -712,10 +717,6 @@ ${value}</textarea
                             ${this._renderElements(
                                 {
                                     ...propObj,
-                                    type: propObj.type.replace(
-                                        /(\{\}|\[\])$/,
-                                        '',
-                                    ),
                                 },
                                 [...path, i],
                                 true,
@@ -738,6 +739,10 @@ ${value}</textarea
     }
 
     _renderPropObj(propObj, path) {
+        if (propObj.ghost && !this.props.ghostSpecs) {
+            return '';
+        }
+
         return html`
             <div prop="${propObj.id}" class="${this.utils.cls('_prop')}">
                 ${this._renderElement(propObj, path)}
@@ -759,7 +764,7 @@ ${value}</textarea
                     if (propObj.props) {
                         const renderedWidget = this._getRenderedWidget(
                             propObj,
-                            !forceNoRepeat ? [...path, 'props', prop] : path,
+                            [...path, 'props', prop],
                         );
 
                         return html`
@@ -803,11 +808,20 @@ ${value}</textarea
                                         ${propObj.description}
                                     </p>
                                 </div>
-                                ${renderedWidget
-                                    ? html` ${renderedWidget.html} `
-                                    : ''}
 
+                                ${renderedWidget
+                                    ? html` <div
+                                          class="${this.utils.cls(
+                                              '_child-widget',
+                                          )}"
+                                      >
+                                          ${renderedWidget.html}
+                                      </div>`
+                                    : ''}
                                 <div
+                                    class="${this.utils.cls(
+                                        '_child-widget-originals',
+                                    )}"
                                     style="display: ${renderedWidget?.hideOriginals
                                         ? 'none'
                                         : 'block'}"
@@ -815,7 +829,7 @@ ${value}</textarea
                                     ${this._renderElements(
                                         propObj,
                                         [...path, 'props', prop],
-                                        forceNoRepeat,
+                                        // false,
                                     )}
                                 </div>
                             </div>

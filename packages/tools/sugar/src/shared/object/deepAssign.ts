@@ -20,7 +20,7 @@ import __clone from './clone';
  * @return      {Object}                                Return the reference to the first passed object
  *
  * @snippet         __deepAssign($1, $2)
- * 
+ *
  * @example         js
  * import { __deepAssign } from '@coffeekraken/sugar/object';
  * const obj1 = { something: 'cool' };
@@ -39,7 +39,7 @@ export default function __deepAssign(referenceObj, ...objects) {
     // return referenceObj;
 
     const settings = {
-        array: false,
+        array: true,
         object: true,
         cloneChilds: true,
     };

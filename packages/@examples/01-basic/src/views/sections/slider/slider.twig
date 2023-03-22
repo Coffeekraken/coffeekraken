@@ -5,8 +5,8 @@
         <s-slider controls loop>
             {% for slide in slides %}
                 <div s-slider-slide>
-                    <div class="s-media-container">
-                        <img class="s-media" src="{{ slide.url }}" />
+                    <div class="s-slider_media-container s-media-container">
+                        <img class="s-slider_media s-media s-media--img" src="{{ slide.image.url }}" />
                     </div>
                 </div>
             {% endfor %}

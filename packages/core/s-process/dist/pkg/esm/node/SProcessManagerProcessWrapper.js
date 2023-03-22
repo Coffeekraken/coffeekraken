@@ -204,7 +204,7 @@ class SProcessManagerProcessWrapper extends __SEventEmitter {
             }
         }), {
             metas: {
-                id: typeof paramsOrStringArgs === 'String'
+                id: typeof paramsOrStringArgs === 'string'
                     ? paramsOrStringArgs
                     : this.constructor.name,
             },

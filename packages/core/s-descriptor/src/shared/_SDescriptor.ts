@@ -6,7 +6,7 @@ import { __typeof } from '@coffeekraken/sugar/type';
 import __SDescriptorResult, {
     ISDescriptorResult,
     ISDescriptorResultObj,
-    ISDescriptorResultRule
+    ISDescriptorResultRule,
 } from './SDescriptorResult';
 
 /**

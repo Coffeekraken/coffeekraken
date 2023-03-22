@@ -2,7 +2,7 @@
 
 import type { ISDurationObject } from '@coffeekraken/s-duration';
 import __SEventEmitter, {
-    ISEventEmitterPipeSettingsFilterFn
+    ISEventEmitterPipeSettingsFilterFn,
 } from '@coffeekraken/s-event-emitter';
 import __SPromise from '@coffeekraken/s-promise';
 import { __wait } from '@coffeekraken/sugar/datetime';
@@ -334,7 +334,7 @@ class SProcessManagerProcessWrapper extends __SEventEmitter {
             {
                 metas: {
                     id:
-                        typeof paramsOrStringArgs === 'String'
+                        typeof paramsOrStringArgs === 'string'
                             ? paramsOrStringArgs
                             : this.constructor.name,
                 },

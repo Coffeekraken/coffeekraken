@@ -8,7 +8,7 @@ export default {
             // state.currentSlideIdx at scroll end
             let scrollTimeout,
                 isScrollFromUser = false;
-            this.$slidesWrapper.addEventListener('scroll', (e) => {
+            this.$slidesWrapper?.addEventListener('scroll', (e) => {
                 // if (
                 //     !isScrollFromUser &&
                 //     __isUserScrolling(this.$slidesWrapper)

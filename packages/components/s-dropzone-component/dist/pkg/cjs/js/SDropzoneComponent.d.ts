@@ -25,14 +25,14 @@ export interface ISDropzoneFile {
 export default class SDropzoneComponent extends __SLitComponent {
     static get properties(): any;
     static get styles(): import("lit").CSSResult;
-    state: {
+    static get state(): {
         files: any[];
         uploadPercent: number;
         uploadTotalPercent: number;
     };
     _$input: any;
     constructor();
-    firstUpdated(): Promise<void>;
+    firstUpdated(): void;
     
     clear(dispatchEvent?: boolean): void;
     

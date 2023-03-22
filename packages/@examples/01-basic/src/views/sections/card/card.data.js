@@ -7,11 +7,20 @@ export default {
             alt: '',
             title: '',
         },
-        attributes: {
-            's-appear': true,
-            in: 'left',
-            delay: '300-600',
-        },
+        attributes: [
+            {
+                name: 's-appear',
+                value: true,
+            },
+            {
+                name: 'in',
+                value: 'right',
+            },
+            {
+                name: 'delay',
+                value: '300-600',
+            },
+        ],
         title: 'Card title!',
         intro: 'Awesome card component',
         text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas nec vestibulum mi. Etiam nec arcu ante.',
@@ -27,11 +36,20 @@ export default {
     },
     cardTwo: {
         image: null,
-        attributes: {
-            's-appear': true,
-            in: 'right',
-            delay: '300-600',
-        },
+        attributes: [
+            {
+                name: 's-appear',
+                value: true,
+            },
+            {
+                name: 'in',
+                value: 'right',
+            },
+            {
+                name: 'delay',
+                value: '300-600',
+            },
+        ],
         title: 'Card title #1!',
         intro: 'Awesome card component',
         text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',

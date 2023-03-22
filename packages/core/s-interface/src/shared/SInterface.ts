@@ -2,7 +2,7 @@ import __SClass from '@coffeekraken/s-class';
 import __SDescriptor, {
     ISDescriptorResult,
     ISDescriptorRules,
-    ISDescriptorSettings
+    ISDescriptorSettings,
 } from '@coffeekraken/s-descriptor';
 import { __parseArgs } from '@coffeekraken/sugar/cli';
 import { __deepMerge } from '@coffeekraken/sugar/object';
@@ -72,8 +72,8 @@ try {
  *              $2
  *          }
  *      }
- * } 
- * 
+ * }
+ *
  * @example         js
  * import __SInterface from '@coffeekraken/s-interface';
  * class MyCoolInterface extends SInterface {
@@ -122,6 +122,29 @@ export default class SInterface extends __SClass implements ISInterfaceCtor {
     static get definition() {
         if (this._cachedDefinition) return this._cachedDefinition;
         this._cachedDefinition = this._definition ?? {};
+
+        // Make sure the type are note "String[]" but "Array<String>".
+        // @TODO        Move this code elsewhere or simply add support for ...[] notation
+        for (let [prop, value] of Object.entries(this._cachedDefinition)) {
+            if (typeof value.type?.type === 'string') {
+                if (value.type.type.match(/\[\]/)) {
+                    this._cachedDefinition[prop].type.type =
+                        value.type.type.replace(
+                            /([a-zA-Z0-9-_]+)\[\]/gm,
+                            'Array<$1>',
+                        );
+                    continue;
+                }
+            }
+            if (typeof value.type === 'string') {
+                if (value.type.match(/\[\]/)) {
+                    this._cachedDefinition[prop].type = value.type.replace(
+                        /([a-zA-Z0-9-_]+)\[\]/gm,
+                        'Array<$1>',
+                    );
+                }
+            }
+        }
         return this._cachedDefinition;
     }
     static set definition(value) {
@@ -481,14 +504,15 @@ export default class SInterface extends __SClass implements ISInterfaceCtor {
                             ` ${objectOrString} `.match(
                                 new RegExp(`\\s-${obj.alias}\\s`),
                             )
-                        )
+                        ) {
                             return;
-                        else if (
+                        } else if (
                             ` ${objectOrString} `.match(
                                 new RegExp(`\\s--${argName}\\s`),
                             )
-                        )
+                        ) {
                             return;
+                        }
                         delete objectOnWhichToApplyInterface[argName];
                     }
                 }

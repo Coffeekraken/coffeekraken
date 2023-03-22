@@ -209,7 +209,7 @@ class SProcessManagerProcessWrapper extends s_event_emitter_1.default {
             }
         }), {
             metas: {
-                id: typeof paramsOrStringArgs === 'String'
+                id: typeof paramsOrStringArgs === 'string'
                     ? paramsOrStringArgs
                     : this.constructor.name,
             },

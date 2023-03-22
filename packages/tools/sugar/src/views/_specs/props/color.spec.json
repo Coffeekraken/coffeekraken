@@ -4,10 +4,6 @@
     "description": "List of available colors",
     "options": [
         {
-            "name": "Base",
-            "value": "base"
-        },
-        {
             "name": "Main",
             "value": "main"
         },

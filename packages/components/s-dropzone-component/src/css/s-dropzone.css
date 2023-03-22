@@ -19,6 +19,7 @@
         gap: sugar.margin(20);
         align-items: center;
         justify-content: center;
+        cursor: pointer;
     }
 
     .s-dropzone_text {

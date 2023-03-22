@@ -92,11 +92,13 @@ export default class SDropzoneComponent extends __SLitComponent {
         `;
     }
 
-    state = {
-        files: [],
-        uploadPercent: 0,
-        uploadTotalPercent: 0,
-    };
+    static get state() {
+        return {
+            files: [],
+            uploadPercent: 0,
+            uploadTotalPercent: 0,
+        };
+    }
 
     _$input;
 
@@ -109,10 +111,11 @@ export default class SDropzoneComponent extends __SLitComponent {
         );
     }
 
-    async firstUpdated() {
+    firstUpdated() {
         // select the file input
-        this._$input = this.querySelector('input[type="file"]');
-        if (this.props.files) {
+        this._$input = this.querySelector('input');
+
+        if (this.props.files.length) {
             for (let url of this.props.files) {
                 this.state.files.push({
                     type: 'url',
@@ -121,10 +124,12 @@ export default class SDropzoneComponent extends __SLitComponent {
             }
 
             // dispatch an update
-            this.utils.dispatchEvent('change', {
-                detail: [...this.state.files],
-            });
+            // this.utils.dispatchEvent('change', {
+            //     detail: [...this.state.files],
+            // });
             this.requestUpdate();
+        } else {
+            this.state.files = [];
         }
     }
 
@@ -298,10 +303,11 @@ export default class SDropzoneComponent extends __SLitComponent {
      * Handle droped file(s)
      */
     async _handleDropedFiles(files: any[], filesList: FileList): Promise<void> {
+        // reset files list in state
+        this.state.files = [];
+
         // remove classname
         this.classList.remove(this.utils.cls('--over'));
-
-        // add the loading classname
         this.classList.add(this.utils.cls('--loading'));
 
         // wait until all the file(s) have been processed
@@ -410,7 +416,10 @@ export default class SDropzoneComponent extends __SLitComponent {
                 ${!this.state.files.length
                     ? html`
                           <label
-                              for="${this.props.name}"
+                              @click=${(e) => {
+                                  this.clear();
+                                  this._$input.click();
+                              }}
                               class="${this.utils.cls('_drop')}"
                           >
                               ${unsafeHTML(this.props.dropFileIcon)}
@@ -475,8 +484,8 @@ export default class SDropzoneComponent extends __SLitComponent {
                               type="file"
                               id="${this.props.name}"
                               name="${this.props.name}[]"
-                              hidden
                               accept=${this.props.accept ?? '*'}
+                              hidden
                               ?multiple=${this.props.maxFiles > 1}
                           />
                       `

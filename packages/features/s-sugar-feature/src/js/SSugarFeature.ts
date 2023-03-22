@@ -1,13 +1,12 @@
 import type { ISFeature } from '@coffeekraken/s-feature';
 import __SFeature from '@coffeekraken/s-feature';
-import { __wait } from '@coffeekraken/sugar/datetime';
 import {
     __clearTransmations,
     __expandPleasantCssClassnamesLive,
     __preventScrollRestoration,
-    __querySelectorLive,
 } from '@coffeekraken/sugar/dom';
 import {
+    __confirmButton,
     __inputAdditionalAttributes,
     __linksStateAttributes,
 } from '@coffeekraken/sugar/feature';
@@ -209,60 +208,7 @@ export default class SSugarFeature extends __SFeature implements ISFeature {
         });
     }
     _confirmBtn() {
-        __querySelectorLive('[confirm]', async ($btn) => {
-            if ($btn.needConfirmation !== undefined) {
-                return;
-            }
-            $btn._isConfirmedStatus = undefined;
-            $btn.needConfirmation = true;
-
-            await __wait(100); // avoid css issues
-
-            const buttonElmStyle = window.getComputedStyle($btn),
-                buttonWidth = buttonElmStyle.width,
-                confirmElmStyle = window.getComputedStyle($btn, ':after'),
-                confirmWidth = `${parseInt(confirmElmStyle.width) + 10}px`; // add 4 just in case
-
-            // set size
-            $btn.style.setProperty('--s-btn-confirm-width', buttonWidth);
-
-            $btn.addEventListener('pointerdown', (e) => {
-                if ($btn._isConfirmedStatus === undefined) {
-                    $btn._isConfirmedStatus = false;
-                    $btn.style.setProperty(
-                        '--s-btn-confirm-width',
-                        confirmWidth,
-                    );
-                } else if ($btn._isConfirmedStatus === false) {
-                    setTimeout(() => {
-                        $btn.style.setProperty(
-                            '--s-btn-confirm-width',
-                            buttonWidth,
-                        );
-                    }, 100);
-                    $btn._isConfirmedStatus = true;
-                    $btn.needConfirmation = false;
-                }
-            });
-            $btn.addEventListener('blur', (e) => {
-                setTimeout(() => {
-                    $btn.style.setProperty(
-                        '--s-btn-confirm-width',
-                        buttonWidth,
-                    );
-                }, 100);
-                $btn._isConfirmedStatus = undefined;
-            });
-            $btn.addEventListener('pointerup', (e) => {
-                setTimeout(() => {
-                    if ($btn._isConfirmedStatus === true) {
-                        $btn.blur();
-                        $btn._isConfirmedStatus = undefined;
-                        $btn.needConfirmation = true;
-                    }
-                });
-            });
-        });
+        __confirmButton();
     }
 }
 

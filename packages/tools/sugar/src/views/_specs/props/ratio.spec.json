@@ -4,7 +4,7 @@
     "description": "The available ratios",
     "options": [
         {
-            "name": "None",
+            "name": "---",
             "value": false
         },
         {
@@ -16,12 +16,32 @@
             "value": "16/10"
         },
         {
+            "name": "21/9",
+            "value": "21/9"
+        },
+        {
+            "name": "1/2",
+            "value": "1/2"
+        },
+        {
+            "name": "2/1",
+            "value": "2/1"
+        },
+        {
             "name": "1",
             "value": "1"
         },
         {
+            "name": "2/3",
+            "value": "2/3"
+        },
+        {
             "name": "3/2",
             "value": "3/2"
+        },
+        {
+            "name": "3/4",
+            "value": "3/4"
         },
         {
             "name": "4/3",

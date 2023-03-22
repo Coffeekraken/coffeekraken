@@ -100,6 +100,11 @@ export default class SStdioBasicAdapter
     log(logObj: ISLog) {
         const logger = logObj?.logger ?? _nativeConsole.log;
 
+        // handle special types like HTMLElement
+        if (logObj.value instanceof HTMLElement) {
+            return logger(logObj.value);
+        }
+
         // handle empty logs
         if (!logObj) {
             return logger(logObj);
@@ -139,7 +144,7 @@ export default class SStdioBasicAdapter
             logLinesCount += logObj.margin.top;
         }
 
-        const logValue = logObj.value?.value ?? logObj.value ?? logObj;
+        let logValue = logObj.value?.value ?? logObj.value ?? logObj;
 
         let log = logValue;
         if (typeof logValue === 'string') {

@@ -6,7 +6,7 @@ import { __parseHtml } from '@coffeekraken/sugar/console';
 import { __map } from '@coffeekraken/sugar/iterable';
 import { __deepMerge } from '@coffeekraken/sugar/object';
 import __parseTypeString, {
-    IParseTypeStringResultObj
+    IParseTypeStringResultObj,
 } from '@coffeekraken/sugar/shared/type/parseTypeString';
 import __typeOf from '@coffeekraken/sugar/shared/type/typeof';
 import __STypeResult from './STypeResult';
@@ -227,7 +227,14 @@ class SType implements ISType {
         if (this.constructor._instanciatedTypes[typeString] !== undefined)
             return this.constructor._instanciatedTypes[typeString];
         // parse the typeString
+        if (typeString.includes('[]')) {
+            console.log(typeString);
+        }
         this.types = __parseTypeString(typeString);
+
+        if (typeString.includes('[]')) {
+            console.log(this.types);
+        }
         // save the settings
         this.settings = __deepMerge(
             {

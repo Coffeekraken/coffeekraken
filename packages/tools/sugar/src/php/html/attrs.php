@@ -31,11 +31,13 @@ function attrs($attributes, $exclude = [])
     if (!isset($attributes)) {
         return '';
     }
-    foreach ($attributes as $attr => $value) {
-        if (in_array($attr, $exclude)) {
+    foreach ($attributes as $attr) {
+        $attr = (object) $attr;
+
+        if (in_array($attr->name, $exclude)) {
             continue;
         }
-        array_push($attrsAr, $attr . '="' . $value . '"');
+        array_push($attrsAr, $attr->name . '="' . $attr->value . '"');
     }
     return implode(' ', $attrsAr);
 }

@@ -1,12 +1,15 @@
 {
-  "type": "Section",
-  "title": "Slider",
-  "description": "Slider section",
-  "props": {
-    "slides": {
-      "type": "Image[]",
-      "title": "Slides",
-      "description": "Slider slides"
+    "type": "Section",
+    "title": "Slider",
+    "description": "Slider section",
+    "props": {
+        "slides": {
+            "type": "Object[]",
+            "title": "Slides",
+            "description": "Slider slides",
+            "props": {
+                "image": "@sugar.views.props.image"
+            }
+        }
     }
-  }
 }

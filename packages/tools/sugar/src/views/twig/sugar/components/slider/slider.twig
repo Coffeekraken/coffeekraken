@@ -4,10 +4,9 @@
     {{ __specsValuesTemplate(_context)|raw }}
 
 <s-slider 
-    class="{{ ratio ? 's-ratio--' ~ ratio|replace('/','-') : '' }}"
+    class="{{ ratio ? 's-ratio--' ~ ratio|__replace('/','-') : '' }}"
     direction="{{ direction ? direction : 'horizontal' }}"
     {{ lnf ? 'lnf=' ~ lnf : '' }}
-    {{ behavior ? 'behavior=' ~ behavior : '' }}
     pad="{{ pad ? 'true' : 'false' }}"
     {{ controls ? 'controls' : '' }}
     {{ nav ? 'nav' : '' }}
@@ -23,12 +22,53 @@
 >
     {% if slides and slides|length > 0 %}
         {% for slide in slides %}
-            <div s-slider-slide>
-                {{ slide|raw }}
+            <div class="s-slider_slide" s-slider-slide>
+                {% if slide.raw %}
+                    {{ slide.raw|raw }}
+                {% else %}
+                    
+                    {% if slide.image %}
+                        <div class="s-media-container s-slider_media-container">
+                            <img class="s-media--img s-slider_media s-slider_media-img" src="{{ slide.image.url }}" title="{{ slide.image.title }}" alt="{{ slide.image.alt }}" />
+                        </div>
+                    {% endif %}
+
+                    {% if slide.title or slide.intro or slide.text or slide.cta %}
+                        <article class="s-slider_body">
+                            {% if slide.title %}
+                                <h1 class="s-slider_title">
+                                    {{ slide.title }}
+                                </h1>
+                            {% endif %}
+                            {% if slide.intro %}
+                                <p class="s-slider_intro">
+                                    {{ slide.intro }}
+                                </p>
+                            {% endif %}
+                            {% if slide.text %}
+                                <p class="s-slider_text">
+                                    {{ slide.text }}
+                                </p>
+                            {% endif %}
+                            {% if slide.cta %}
+                                <div class="s-slider_cta">
+                                    {% set override = {} %}
+                                    {% if color and not slide.cta.color %}
+                                        {% set override = {
+                                            color: color
+                                        } %}
+                                    {% endif %}
+                                    {% include 'sugar/components/cta/cta.twig' with slide.cta|merge(override) only %}
+                                </div>
+                            {% endif %}
+                        </article>
+                    {% endif %}
+
+                {% endif %}
             </div>
         {% endfor %}
     {% else %}
-        {{ html|raw }}
+        {{ raw|raw }}
     {% endif %}
 
 </s-slider>

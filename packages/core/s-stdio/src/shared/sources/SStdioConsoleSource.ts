@@ -81,7 +81,6 @@ export default class SStdioConsoleSource
                     // if (__isInIframe()) {
                     //     return;
                     // }
-
                     if (log === null || log === undefined) {
                         _nativeConsole.log(log);
                         return false;

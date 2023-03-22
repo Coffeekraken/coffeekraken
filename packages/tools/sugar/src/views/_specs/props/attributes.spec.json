@@ -3,6 +3,20 @@
     "title": "Attributes",
     "description": "Specify some attributes to be applied on the layout itself in key=>pairs format",
     "default": {},
+    "props": {
+        "name": {
+            "type": "Text",
+            "title": "Name",
+            "description": "Specify the name of the attribute",
+            "required": true
+        },
+        "value": {
+            "type": "Text",
+            "title": "Value",
+            "description": "Specify the value of the attribute",
+            "required": true
+        }
+    },
     "examples": {
         "js": {
             "code": [

@@ -4,11 +4,38 @@
     "description": "Display a nice slider with a multitude of options like the direction, autoplay, etc...",
     "props": {
         "slides": {
-            "type": "Html[]",
+            "type": "Object[]",
             "title": "Slides",
-            "description": "The slider slides"
+            "description": "The slider slides",
+            "props": {
+                "title": {
+                    "type": "Text",
+                    "title": "Title",
+                    "description": "The slide title"
+                },
+                "intro": {
+                    "type": "Text",
+                    "title": "Intro",
+                    "description": "The card intro"
+                },
+                "text": {
+                    "type": "Text",
+                    "title": "Text",
+                    "description": "The card text"
+                },
+                "image": "@sugar.views.props.image",
+                "cta": "@sugar.views.components.cta",
+                "attributes": "@sugar.views.props.attributes",
+                "raw": {
+                    "type": "Html",
+                    "ghost": true,
+                    "title": "Raw HTML",
+                    "description": "Some HTML to use in the slide"
+                }
+            }
         },
-        "html": {
+        "raw": {
+            "ghost": true,
             "type": "Html",
             "title": "Html",
             "description": "The slider content to print. Used only if no 'slides' have been provided"
@@ -36,23 +63,6 @@
                 }
             ],
             "default": "default",
-            "required": true
-        },
-        "behavior": {
-            "type": "Select",
-            "title": "Behavior",
-            "description": "Specify the behavior of the slider",
-            "options": [
-                {
-                    "name": "Scroll",
-                    "value": "scroll"
-                },
-                {
-                    "name": "Transform",
-                    "value": "transform"
-                }
-            ],
-            "default": "scroll",
             "required": true
         },
         "direction": {

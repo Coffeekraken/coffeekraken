@@ -4,7 +4,7 @@ import __STheme from '@coffeekraken/s-theme';
 import {
     __injectStyle,
     __whenImageLoaded,
-    __whenImagesLoaded
+    __whenImagesLoaded,
 } from '@coffeekraken/sugar/dom';
 import { __deepMerge } from '@coffeekraken/sugar/object';
 import { __uniqid } from '@coffeekraken/sugar/string';
@@ -34,16 +34,16 @@ import __css from '../../../../src/css/s-appear-feature.css'; // relative to /di
  * @support          edge
  *
  * @import          import { define as __SAppearFeatureDefine } from '@coffeekraken/s-appear-feature';
- * 
+ *
  * @snippet         __SAppearFeatureDefine($1)
- * 
+ *
  * @install         js
  * import { define as __SAppearFeatureDefine } from '@coffeekraken/s-activate-feature';
  * __SAppearFeatureDefine();
- * 
+ *
  * @install         bash
  * npm i @coffeekraken/s-appear-feature
- * 
+ *
  * @example         html            Bottom
  * <div class="s-ratio:16-9 s-width:50 s-bg:main-surface s-p:30 s-mbe:50">
  *   <div class="s-ratio:16-9 s-bg:accent s-color:accent s-radius s-p:30" s-appear in="bottom">
@@ -107,9 +107,13 @@ export default class SAppearFeature extends __SFeature {
                 this.node.setAttribute('s-appear', true);
             }
         });
+
+        console.log('THi', this.props.mountWhen);
     }
 
     async mount() {
+        console.log('MOUNT', this.node);
+
         // check if the element is fully loaded (for images)
         switch (this.node.tagName.toLowerCase()) {
             case 'img':

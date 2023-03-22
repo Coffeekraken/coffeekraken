@@ -33,6 +33,11 @@ export default class SSpecsEditorComponentInterface extends __SInterface {
                 media: boolean;
             };
         };
+        ghostSpecs: {
+            type: string;
+            description: string;
+            default: boolean;
+        };
         icons: {
             type: string;
             title: string;

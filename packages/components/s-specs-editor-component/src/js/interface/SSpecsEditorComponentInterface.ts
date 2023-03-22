@@ -58,6 +58,12 @@ export default class SSpecsEditorComponentInterface extends __SInterface {
                     media: true,
                 },
             },
+            ghostSpecs: {
+                type: 'Boolean',
+                description:
+                    'Specify if you want to display the specs that are marked as `"ghost":true` or not.',
+                default: false,
+            },
             icons: {
                 type: 'Object',
                 title: 'Icons',

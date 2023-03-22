@@ -23,9 +23,10 @@
             height: 100%;
             background: sugar.color(main, border);
             opacity: 0.4;
+            @sugar.transition (fast);
         }
         li:hover:before {
-            opacity: 0.1;
+            opacity: 0;
         }
 
         .s-fs-tree:before {

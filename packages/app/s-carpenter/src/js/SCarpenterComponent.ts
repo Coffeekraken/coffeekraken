@@ -202,10 +202,14 @@ export default class SCarpenterComponent extends __SLitComponent {
                       >
                           <div class="_inner">
                               <div class="_logo">
-                                  <div class="_loader carpenter-loader-blocks">
-                                      <div class="_block-1"></div>
-                                      <div class="_block-2"></div>
-                                      <div class="_block-3"></div>
+                                  <div class="_picto">
+                                      <div
+                                          class="_loader carpenter-loader-blocks"
+                                      >
+                                          <div class="_block-1"></div>
+                                          <div class="_block-2"></div>
+                                          <div class="_block-3"></div>
+                                      </div>
                                   </div>
 
                                   <svg

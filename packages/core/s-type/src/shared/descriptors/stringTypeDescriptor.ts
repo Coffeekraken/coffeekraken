@@ -30,7 +30,9 @@ import type { ISTypeDescriptor } from '../SType';
 const descriptor: ISTypeDescriptor = {
     name: 'String',
     id: 'string',
-    is: (value: any) => __isString(value),
+    is: (value: any) => {
+        return __isString(value);
+    },
     cast: (value: any) =>
         __toString(value, {
             beautify: true,

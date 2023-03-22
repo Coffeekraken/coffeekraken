@@ -1,3 +1,4 @@
+import { __isInIframe } from '@coffeekraken/sugar/dom';
 // @ts-nocheck
 // @TODO            check how to override private static methods
 
@@ -671,7 +672,7 @@ export default class SComponentUtils extends __SClass {
                 const $carpenter =
                     this.constructor._$carpenter ??
                     document.querySelector('s-carpenter');
-                if ($carpenter) {
+                if ($carpenter && !__isInIframe()) {
                     return;
                 }
             }

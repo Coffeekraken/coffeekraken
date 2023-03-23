@@ -1,6 +1,6 @@
 <a class="s-cta s-btn s-color:{{ color }} {{ attributes.class }}" {{ __attrs(attributes, ['class'])|raw }}
     href="{{ link.url }}"
-    target="{{ link.target }}"
+    {% if link.newWindow %} target="_blank" {% endif %}
     color="{{ color }}"
 >
     {{ label ? label : link.text }}

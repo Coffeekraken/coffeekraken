@@ -652,7 +652,7 @@ ${value}</textarea
                 ? this._renderTextElement(propObj, path)
                 : typeLower === 'select'
                 ? this._renderSelectElement(propObj, path)
-                : typeLower === 'checkbox'
+                : typeLower === 'checkbox' || typeLower === 'boolean'
                 ? this._renderCheckboxElement(propObj, path)
                 : typeLower === 'html'
                 ? this._renderHtmlElement(propObj, path)

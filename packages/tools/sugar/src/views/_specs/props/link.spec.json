@@ -15,26 +15,16 @@
             "description": "Specify the url of the link",
             "required": true
         },
-        "target": {
-            "type": "Select",
-            "title": "Target",
-            "description": "Specify the target of the link",
-            "options": [
-                {
-                    "name": "Same window (tab)",
-                    "value": "__self"
-                },
-                {
-                    "name": "New window (tab)",
-                    "value": "__blank"
-                }
-            ],
-            "default": "__self"
-        },
         "title": {
             "type": "Text",
             "title": "Title",
             "description": "Specify a title to be used on the link"
+        },
+        "newWindow": {
+            "type": "Boolean",
+            "title": "Open in new window?",
+            "description": "If active, the link will open a new window (tab) on click",
+            "default": false
         }
     }
 }

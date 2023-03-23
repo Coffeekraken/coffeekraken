@@ -17,18 +17,22 @@ export default function upload({ express, settings, config }) {
             // The name of the input field (i.e. "sampleFile") is used to retrieve the uploaded file
             for (let [fileId, file] of Object.entries(req.files)) {
                 const file = req.files[fileId],
-                    filePath = `${__packageTmpDir()}/upload/${file.name}`;
+                    id = `${file.name.split('.')[0]}-${Math.round(
+                        Math.random() * 9999,
+                    )}`,
+                    extension = file.name.split('.').pop(),
+                    filePath = `${__packageTmpDir()}/upload/${id}.${extension}`;
 
                 // move the file
                 file.mv(filePath);
 
                 // log
                 console.log(
-                    `[SFrontendServer] File "<yellow>${file.name}</yellow>" uploaded <green>successfully</green> and available at url "<cyan>/tmp/upload/${file.name}</cyan>"`,
+                    `[SFrontendServer] File "<yellow>${file.name}</yellow>" uploaded <green>successfully</green> and available at url "<cyan>/tmp/upload/${id}.${extension}</cyan>"`,
                 );
 
                 uploadResult.push({
-                    url: `/tmp/upload/${file.name}`,
+                    url: `/tmp/upload/${id}.${extension}`,
                 });
             }
 

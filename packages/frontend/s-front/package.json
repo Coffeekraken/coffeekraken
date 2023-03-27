@@ -10,6 +10,7 @@
         "@coffeekraken/s-class": "^2.0.0-alpha.25",
         "@coffeekraken/s-classmap": "^2.0.0-alpha.25",
         "@coffeekraken/s-color": "^2.0.0-alpha.25",
+        "@coffeekraken/s-log": "^2.0.0-alpha.25",
         "@coffeekraken/s-env": "^2.0.0-alpha.25",
         "@coffeekraken/s-event-emitter": "^2.0.0-alpha.25",
         "@coffeekraken/s-frontspec": "^2.0.0-alpha.25",

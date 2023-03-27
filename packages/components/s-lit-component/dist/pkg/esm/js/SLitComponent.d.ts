@@ -39,7 +39,6 @@ export default class SLitComponent extends LitElement {
     static propertiesFromInterface(properties: any, int: __SInterface): any;
     
     constructor(settings?: Partial<ISLitComponentSettings>);
-    disconnectedCallback(): void;
     
     _mount(): Promise<boolean>;
 }

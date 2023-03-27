@@ -217,7 +217,17 @@ export default class SLog {
      * @since       2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    static PRESETS: String[] = ['silent', 'default', 'warn', 'error'];
+    static PRESETS: string[] = ['silent', 'default', 'warn', 'error'];
+
+    /**
+     * Store the filtered types
+     */
+    static _filteredTypes: string[] = [];
+
+    /**
+     * Store the filter functions
+     */
+    static _filterFunctions: Function[] = [];
 
     /**
      * @name            filter
@@ -230,7 +240,7 @@ export default class SLog {
      * These filters will have as consequence to set the "active" property of each logs to
      * true or false.
      *
-     * @param       {ISLogType[]}           types               The types you want to keep
+     * @param       {ISLogType[]|Function}           filter               The types you want to keep of a function used to filter the logs that will be called for each log
      *
      * @example         js
      * SLog.filter([SLog.TYPE_WARN, SLog.TYPE_ERROR]);
@@ -239,8 +249,12 @@ export default class SLog {
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     static _filteredTypes: ISLogType[] = [];
-    static filter(types: ISLogType[]): void {
-        this._filteredTypes = types;
+    static filter(filter: ISLogType[] | Function): void {
+        if (typeof filter === 'function') {
+            this._filterFunctions = [...this._filterFunctions, filter];
+        } else {
+            this._filteredTypes = filter;
+        }
     }
 
     /**
@@ -255,6 +269,7 @@ export default class SLog {
      */
     static clearFilters(): void {
         this._filteredTypes = [];
+        this._filterFunctions = []M
     }
 
     /**
@@ -438,6 +453,14 @@ export default class SLog {
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     get active(): boolean {
+        // filter functions
+        // @ts-ignore
+        for (let [idx, fn] of this.constructor._filterFunctions.entries()) {
+            if (!fn(this)) {
+                return false;
+            }
+        }
+
         // logs that does not have types are always active
         if (!this._logObj.type) return true;
 
@@ -449,6 +472,7 @@ export default class SLog {
 
         // if the passed type is not a known type in the SLog class,
         // we assume it's not a log type but a proper value in the value object
+        // @ts-ignore
         if (!this.constructor.TYPES.includes(this._logObj.type)) {
             return true;
         }

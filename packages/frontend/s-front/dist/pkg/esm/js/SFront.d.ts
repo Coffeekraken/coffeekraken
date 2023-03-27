@@ -31,6 +31,7 @@ export interface ISFrontInitSettings {
     partytown: Partial<ISFrontPartytownSettings>;
     legal: Partial<ISFrontLegalSettings>;
     theme: __STheme | Partial<ISThemeInitSettings>;
+    logs: undefined | boolean;
 }
 export interface ISFrontSettings extends ISFrontInitSettings {
 }

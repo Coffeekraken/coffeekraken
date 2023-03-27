@@ -15,6 +15,7 @@ import __fastdom from 'fastdom';
 
 import { __adoptStyleInShadowRoot } from '@coffeekraken/sugar/dom';
 
+import { __wait } from '@coffeekraken/sugar/datetime';
 import { __when, __whenInViewport } from '@coffeekraken/sugar/dom';
 import { __debounce } from '@coffeekraken/sugar/function';
 import __injectStyle from '@coffeekraken/sugar/js/dom/inject/injectStyle';
@@ -689,6 +690,8 @@ export default class SComponentUtils extends __SClass {
             // wait
             if (!when.includes('direct') && !when.includes('directly')) {
                 await __when(this.node, when);
+            } else {
+                await __wait();
             }
 
             callback?.(this.node);

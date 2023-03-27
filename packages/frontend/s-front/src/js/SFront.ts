@@ -1,6 +1,7 @@
 import { partytownSnippet } from '@builder.io/partytown/integration';
 import __SClass from '@coffeekraken/s-class';
 import __SEnv from '@coffeekraken/s-env';
+import __SLog from '@coffeekraken/s-log';
 import { __getCookie, __setCookie } from '@coffeekraken/sugar/cookie';
 import { __isInIframe } from '@coffeekraken/sugar/dom';
 import { __isCrawler } from '@coffeekraken/sugar/is';
@@ -78,6 +79,7 @@ export interface ISFrontInitSettings {
     partytown: Partial<ISFrontPartytownSettings>;
     legal: Partial<ISFrontLegalSettings>;
     theme: __STheme | Partial<ISThemeInitSettings>;
+    logs: undefined | boolean;
     // classmap: Partial<ISFrontClassmapSettings>;
 }
 
@@ -249,6 +251,14 @@ export default class SFront extends __SClass {
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     constructor(settings?: Partial<ISFrontSettings>) {
+        // filter logs
+        __SLog.filter((log) => {
+            if (settings.logs) return true;
+            if (settings.logs === false) return false;
+            if (__isInIframe()) return false;
+            return true;
+        });
+
         // Stdio
         const stdio = new __SStdio(
             'default',

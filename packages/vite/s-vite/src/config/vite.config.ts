@@ -247,7 +247,7 @@ export default function (api) {
                 'Cross-Origin-Opener-Policy': 'same-origin',
             },
             proxy: {
-                // all exported css in the /css/exports folder
+                // all exported css in the /css/(partials|lod) folder
                 // @TODO            find a better way...
                 '^\\/dist\\/css\\/(partials|lod)\\/.*\\.css(\\?.*)?$': {
                     target: `http://${api.config.frontendServer.hostname}:${api.config.frontendServer.port}`,

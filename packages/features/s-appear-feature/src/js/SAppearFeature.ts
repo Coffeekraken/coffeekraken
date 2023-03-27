@@ -104,16 +104,12 @@ export default class SAppearFeature extends __SFeature {
         // add the s-appear attribute if not present
         this.utils.fastdom.mutate(() => {
             if (!this.node.hasAttribute('s-appear')) {
-                this.node.setAttribute('s-appear', true);
+                this.node.setAttribute('s-appear', 'true');
             }
         });
-
-        console.log('THi', this.props.mountWhen);
     }
 
     async mount() {
-        console.log('MOUNT', this.node);
-
         // check if the element is fully loaded (for images)
         switch (this.node.tagName.toLowerCase()) {
             case 'img':

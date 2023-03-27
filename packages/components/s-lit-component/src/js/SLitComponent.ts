@@ -6,7 +6,6 @@ import __SComponentUtils, {
     SComponentUtilsDefaultPropsInterface,
 } from '@coffeekraken/s-component-utils';
 import __SInterface from '@coffeekraken/s-interface';
-import { __wait } from '@coffeekraken/sugar/datetime';
 import { __querySelectorLive } from '@coffeekraken/sugar/dom';
 import { __expandPleasantCssClassnames } from '@coffeekraken/sugar/html';
 import { __deepMerge } from '@coffeekraken/sugar/object';
@@ -126,20 +125,6 @@ export default class SLitComponent extends LitElement {
         Object.assign(this._state, state);
     }
 
-    // static expand(tpl) {
-    //     // console.log('PL', `${tpl}`);
-
-    //     console.log(tpl);
-
-    //     for (let [key, str] of Object.entries(tpl.strings)) {
-    //         console.log('jey', key);
-
-    //         tpl.strings[key] = 'coco';
-    //     }
-
-    //     return tpl;
-    // }
-
     /**
      * @name            define
      * @type            Function
@@ -239,6 +224,9 @@ export default class SLitComponent extends LitElement {
             // set the default value
             propertiesObj[prop].default = definition.default;
 
+            // set the attribute to check on the element
+            propertiesObj[prop].attribute = __dashCase(prop);
+
             // handle physical and boolean attributes
             if (
                 definition.physical ||
@@ -248,51 +236,54 @@ export default class SLitComponent extends LitElement {
                 definition.type?.toLowerCase?.() === 'object'
             ) {
                 propertiesObj[prop].reflect = true;
-                propertiesObj[prop].attribute = __dashCase(prop);
-                propertiesObj[prop].converter = {
-                    fromAttribute: (value, type) => {
-                        const typeStr =
-                            definition.type?.type?.toLowerCase() ??
-                            definition.type?.toLowerCase();
-
-                        if (typeStr === 'object' && typeof value === 'string') {
-                            try {
-                                const json = JSON.parse(value);
-                                const finalJson = __deepMerge(
-                                    definition.default ?? {},
-                                    json,
-                                );
-                                return finalJson;
-                            } catch (e) {
-                                console.error(e);
-                            }
-                        }
-                        if (value === 'true' || value === '') return true;
-                        if (value === 'false') return false;
-                        return value;
-                    },
-                    toAttribute(value) {
-                        if (
-                            typeof value !== 'string' &&
-                            typeof value !== 'boolean'
-                        ) {
-                            try {
-                                const jsonStr = JSON.stringify(value);
-                                return jsonStr;
-                            } catch (e) {}
-                        }
-
-                        if (
-                            value === 'false' ||
-                            value === false ||
-                            value === null
-                        ) {
-                            return undefined;
-                        }
-                        return value;
-                    },
-                };
             }
+
+            // converter
+            propertiesObj[prop].converter = {
+                fromAttribute: (value, type) => {
+                    const typeStr =
+                        definition.type?.type?.toLowerCase() ??
+                        definition.type?.toLowerCase();
+
+                    if (typeStr === 'object' && typeof value === 'string') {
+                        try {
+                            const json = JSON.parse(value);
+                            const finalJson = __deepMerge(
+                                definition.default ?? {},
+                                json,
+                            );
+                            return finalJson;
+                        } catch (e) {
+                            console.error(e);
+                        }
+                    }
+                    if (value === 'true' || value === '') return true;
+                    if (value === 'null') return null;
+                    if (value === 'undefined') return undefined;
+                    if (value === 'false') return false;
+                    return value;
+                },
+                toAttribute(value) {
+                    if (
+                        value === 'false' ||
+                        value === false ||
+                        value === null
+                    ) {
+                        return undefined;
+                    }
+
+                    if (
+                        typeof value !== 'string' &&
+                        typeof value !== 'boolean'
+                    ) {
+                        try {
+                            const jsonStr = JSON.stringify(value);
+                            return jsonStr;
+                        } catch (e) {}
+                    }
+                    return value;
+                },
+            };
         });
 
         const props = {
@@ -413,17 +404,11 @@ export default class SLitComponent extends LitElement {
             // component class
             this.classList.add(...this.utils.cls('').split(' '));
 
-            await __wait();
-            await __wait();
             // wait until mount
             await this.utils.waitAndExecute(mountWhen, () => {
                 this._mount();
             });
         })();
-    }
-
-    disconnectedCallback() {
-        // this.state?.revoke?.();
     }
 
     /**
@@ -444,7 +429,7 @@ export default class SLitComponent extends LitElement {
                 this.tagName.toLowerCase(),
             );
 
-        const defaultFromInterface = this.settings.interface?.defaults() ?? {};
+        // const defaultFromInterface = this.settings.interface?.defaults() ?? {};
 
         let properties = this.constructor.properties;
         if (!properties) {
@@ -530,7 +515,7 @@ export default class SLitComponent extends LitElement {
             this.constructor.styles?.cssText ?? '',
             this.tagName,
         );
-        await __wait();
+        // await __wait();
         if (this.props.adoptStyle && this.shadowRoot) {
             await this.utils.adoptStyleInShadowRoot(this.shadowRoot);
         }

@@ -25,10 +25,14 @@ export default class SLog {
     
     static PRESET_VERBOSE: ISLogType[];
     
-    static PRESETS: String[];
+    static PRESETS: string[];
+    
+    static _filteredTypes: string[];
+    
+    static _filterFunctions: Function[];
     
     static _filteredTypes: ISLogType[];
-    static filter(types: ISLogType[]): void;
+    static filter(filter: ISLogType[] | Function): void;
     
     static clearFilters(): void;
     

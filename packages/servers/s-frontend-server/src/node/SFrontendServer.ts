@@ -17,7 +17,7 @@ import __SDuration from '@coffeekraken/s-duration';
 import __STypescriptBuilder from '@coffeekraken/s-typescript-builder';
 import { __pool } from '@coffeekraken/sugar/fs';
 import { __onProcessExit } from '@coffeekraken/sugar/process';
-import __autoCast from '@coffeekraken/sugar/shared/string/autoCast';
+import { __parse } from '@coffeekraken/sugar/string';
 import __fileUpload from 'express-fileupload';
 import __runMiddleware from 'run-middleware';
 
@@ -728,7 +728,7 @@ export default class SFrontendServer extends __SClass {
                                     req.params,
                                 )) {
                                     // do not process non "number" keys
-                                    if (typeof __autoCast(key) !== 'number') {
+                                    if (typeof __parse(key) !== 'number') {
                                         continue;
                                     }
                                     const paramKey = Object.keys(

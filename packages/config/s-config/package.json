@@ -1,15 +1,15 @@
 {
     "name": "@coffeekraken/s-config",
-    "version": "2.0.0-alpha.25",
+    "version": "2.0.0-alpha.26",
     "description": "Simple and powerful config loading|management|access class. Support adapters like @coffeekraken/s-config-folder-adapter, and more...",
     "type": "module",
     "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)",
     "license": "MIT",
     "dependencies": {
-        "@coffeekraken/s-duration": "^2.0.0-alpha.25",
-        "@coffeekraken/s-env": "^2.0.0-alpha.25",
-        "@coffeekraken/s-typescript-builder": "^2.0.0-alpha.25",
-        "@coffeekraken/sugar": "^2.0.0-alpha.25"
+        "@coffeekraken/s-duration": "^2.0.0-alpha.26",
+        "@coffeekraken/s-env": "^2.0.0-alpha.26",
+        "@coffeekraken/s-typescript-builder": "^2.0.0-alpha.26",
+        "@coffeekraken/sugar": "^2.0.0-alpha.26"
     },
     "main": "dist/pkg/cjs/js/exports.js",
     "module": "dist/pkg/esm/js/exports.js",

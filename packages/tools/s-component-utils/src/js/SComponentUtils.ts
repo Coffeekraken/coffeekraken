@@ -317,8 +317,9 @@ export default class SComponentUtils extends __SClass {
             PropsInterface.definition,
         )) {
             const camelProp = __camelCase(prop),
-                dashProp = __dashCase(prop);
-            if (this.node.getAttribute(dashProp) !== null) {
+                dashProp = __dashCase(prop),
+                attrValue = this.node.getAttribute(dashProp);
+            if (attrValue !== null) {
                 let rawValue = this.node.getAttribute(dashProp),
                     value = rawValue;
                 if (rawValue === null || rawValue.trim() === '') {

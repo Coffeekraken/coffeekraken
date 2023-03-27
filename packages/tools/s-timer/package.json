@@ -1,13 +1,13 @@
 {
     "name": "@coffeekraken/s-timer",
-    "version": "2.0.0-alpha.25",
+    "version": "2.0.0-alpha.26",
     "description": "Simple class to handle timers.",
     "type": "module",
     "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)",
     "license": "MIT",
     "dependencies": {
-        "@coffeekraken/s-promise": "^2.0.0-alpha.25",
-        "@coffeekraken/sugar": "^2.0.0-alpha.25"
+        "@coffeekraken/s-promise": "^2.0.0-alpha.26",
+        "@coffeekraken/sugar": "^2.0.0-alpha.26"
     },
     "main": "dist/pkg/cjs/shared/exports.js",
     "module": "dist/pkg/esm/shared/exports.js",

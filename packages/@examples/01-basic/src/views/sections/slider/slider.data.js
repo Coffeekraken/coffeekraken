@@ -7,19 +7,19 @@ export default {
                 alt: '',
             },
         },
-        // {
-        //     image: {
-        //         url: '/dist/img/slider/slide-02.jpg',
-        //         title: '',
-        //         alt: '',
-        //     },
-        // },
-        // {
-        //     image: {
-        //         url: '/dist/img/slider/slide-03.jpg',
-        //         title: '',
-        //         alt: '',
-        //     },
-        // },
+        {
+            image: {
+                url: '/dist/img/slider/slide-02.jpg',
+                title: '',
+                alt: '',
+            },
+        },
+        {
+            image: {
+                url: '/dist/img/slider/slide-03.jpg',
+                title: '',
+                alt: '',
+            },
+        },
     ],
 };

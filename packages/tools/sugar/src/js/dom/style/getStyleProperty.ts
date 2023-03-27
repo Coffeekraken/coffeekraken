@@ -1,7 +1,6 @@
 // @ts-nocheck
 
-import autoCast from '../../../shared/string/autoCast';
-import camelize from '../../../shared/string/camelize';
+import { __camelize, __parse } from '@coffeekraken/sugar/string';
 
 /**
  * @name      getStyleProperty
@@ -46,8 +45,8 @@ export default function __getStyleProperty(
     const prefixes = ['', 'webkit-', 'moz-', 'ms-', 'o-', 'khtml-'];
     for (let i = 0; i < prefixes.length; i++) {
         const prefix = prefixes[i];
-        const value = computed[camelize(`${prefix}${property}`)];
-        if (value && value.trim() !== '') return autoCast(value);
+        const value = computed[__camelize(`${prefix}${property}`)];
+        if (value && value.trim() !== '') return __parse(value);
     }
     return null;
 }

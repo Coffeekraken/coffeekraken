@@ -18,26 +18,53 @@ namespace Sugar\html;
  * @snippet             \Sugar\html\attrs($1);
  *
  * @example         twig
- * <div <?php print \Sugar\attrs(attributes) ?>></div>
+ * <div <?php print \Sugar\attrs((object) [
+ *      'my-attr' => 'something'
+ * ]) ?>></div>
+ *
+ * <div <?php print \Sugar\attrs([
+ *      (object) [
+ *          'name' => 'my-attr',
+ *          'value' => 'something
+ *      ]
+ * ]) ?>></div>
  *
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 function attrs($attributes, $exclude = [])
 {
-    $attributes = (array) $attributes;
-
-    $attrsAr = [];
     if (!isset($attributes)) {
         return '';
     }
-    foreach ($attributes as $attr) {
-        $attr = (object) $attr;
 
-        if (in_array($attr->name, $exclude)) {
+    $attributes = (array) $attributes;
+
+    // store the final attributes array
+    $attrsAr = [];
+
+    foreach ($attributes as $key => $value) {
+        $attrName = $key;
+        if (isset($value['name'])) {
+            $attrName = $value['name'];
+        }
+
+        // handle exclude
+        if (in_array($attrName, $exclude)) {
             continue;
         }
-        array_push($attrsAr, $attr->name . '="' . $attr->value . '"');
+
+        if (isset($value['name'])) {
+            array_push($attrsAr, $value['name'] . '="' . $value['value'] . '"');
+        } else {
+            if (is_bool($value) && $value == true) {
+                array_push($attrsAr, $key);
+            } else {
+                array_push($attrsAr, $key . '="' . $value . '"');
+            }
+        }
     }
+
+    // return the new attribute string
     return implode(' ', $attrsAr);
 }

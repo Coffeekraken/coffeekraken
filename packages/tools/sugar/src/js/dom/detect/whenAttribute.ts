@@ -1,7 +1,7 @@
 // @ts-nocheck
 
 import { __observeAttributes } from '@coffeekraken/sugar/dom';
-import __autoCast from '../../../shared/string/autoCast';
+import { __parse } from '@coffeekraken/sugar/string';
 
 /**
  * @name      whenAttribute
@@ -67,7 +67,7 @@ export default function __whenAttribute(
         };
 
         if (elm.hasAttribute(attrName)) {
-            const value = __autoCast(elm.getAttribute(attrName));
+            const value = __parse(elm.getAttribute(attrName));
             if (finalSettings.check && finalSettings.check(value, value)) {
                 resolve(value);
                 return;
@@ -81,7 +81,7 @@ export default function __whenAttribute(
 
         obs.on('attribute', (mutation) => {
             if (mutation.attributeName === attrName) {
-                const value = __autoCast(
+                const value = __parse(
                     mutation.target.getAttribute(mutation.attributeName),
                 );
                 if (

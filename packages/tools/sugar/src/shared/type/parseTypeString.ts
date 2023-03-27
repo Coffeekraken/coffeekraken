@@ -1,5 +1,5 @@
-import __deepMap from '../object/deepMap';
-import __autoCast from '../string/autoCast';
+import { __deepMap } from '@coffeekraken/sugar/object';
+import { __parse } from '@coffeekraken/sugar/string';
 
 /**
  * @name            parseTypeString
@@ -16,7 +16,7 @@ import __autoCast from '../string/autoCast';
  * @return    {ITypeStringObject[]}             An array of object(s) describing the type string passed
  *
  * @snippet         __parseTypeString($1)
- * 
+ *
  * @example       js
  * import { __parseTypeString } from '@coffeekraken/sugar/type';
  * __parseTypeString('string|number');
@@ -54,7 +54,7 @@ function parseSingleTypeString(typeString: string): ITypeStringObject {
         };
     }
     // number value
-    const autoCastedValue = __autoCast(typeStr);
+    const autoCastedValue = __parse(typeStr);
     if (typeof autoCastedValue === 'number') {
         return {
             type: 'number',
@@ -82,11 +82,11 @@ function parseSingleTypeString(typeString: string): ITypeStringObject {
 
     // values in "of"
     // ofStr.split('|').forEach((of) => {
-    //     if (typeof __autoCast(of) !== 'string') {
+    //     if (typeof __parse(of) !== 'string') {
     //         console.log('NO string', of);
     //     }
     // });
-    // values = typeString.split(/\|/).map((v) => __autoCast(v));
+    // values = typeString.split(/\|/).map((v) => __parse(v));
 
     const result = {
         type: typeStr,

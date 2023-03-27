@@ -1,7 +1,6 @@
 // @ts-nocheck
 
-import __autoCast from '../../../shared/string/autoCast';
-import __camelize from '../../../shared/string/camelize';
+import { __camelize, __parse } from '@coffeekraken/sugar/string';
 
 /**
  * @name      styleString2Object
@@ -20,7 +19,7 @@ import __camelize from '../../../shared/string/camelize';
  * @todo      tests
  *
  * @snippet         __styleStringToObject($1)
- * 
+ *
  * @example 	js
  * import { __styleStringToObject } from '@coffeekraken/sugar/css'
  * const styleString =  __styleStringToObject('padding-left:20px; display:block;');
@@ -42,7 +41,7 @@ export default function __styleStringToObject(style: string): any {
             key = __camelize(spl[0]),
             value = spl[1];
         // add element into object
-        obj[key] = __autoCast(value);
+        obj[key] = __parse(value);
     });
     // return the style object
     return obj;

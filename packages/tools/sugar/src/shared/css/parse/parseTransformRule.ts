@@ -1,4 +1,4 @@
-import __autoCast from '../../../shared/string/autoCast';
+import { __parse } from '@coffeekraken/sugar/string';
 
 /**
  * @name      parseTransformRule
@@ -7,7 +7,7 @@ import __autoCast from '../../../shared/string/autoCast';
  * @platform          js
  * @status          wip
  * @private
- * 
+ *
  * Parse the transform rule of an element and returns a simple object with each properties separated.
  *
  * @param 		 {string}		 transformStr	            The transform string to parse
@@ -76,9 +76,9 @@ export default function __parseTransformRule(
             value = parts[1].trim();
 
         if (prop.match(/(X|Y|Z)$/)) {
-            result[prop] = __autoCast(value);
+            result[prop] = __parse(value);
         } else {
-            const vals = value.split(',').map((v) => __autoCast(v.trim()));
+            const vals = value.split(',').map((v) => __parse(v.trim()));
 
             if (vals.length === 1 && prop === 'scale') {
                 result.scale = parseFloat(value);

@@ -34,10 +34,7 @@ import { define as __CKVersionSelector } from './components/CKVersionSelector';
 
 // import { __isMobile } from '@coffeekraken/sugar/is';
 
-import {
-    __querySelectorLive,
-    __reloadStylesheets,
-} from '@coffeekraken/sugar/dom';
+import { __querySelectorLive } from '@coffeekraken/sugar/dom';
 
 // Libs
 
@@ -48,13 +45,6 @@ const viewsRelated = import.meta.globEager('../views/**/*.ts');
 // For doc specific
 // @ts-ignore
 const forDocRelated = import.meta.globEager('./forDoc/**/*.ts');
-
-if (import.meta.hot) {
-    import.meta.hot.on('sugar.update.css', (data) => {
-        // perform custom update
-        __reloadStylesheets();
-    });
-}
 
 (async () => {
     __SFeature.setDefaultProps('*', {

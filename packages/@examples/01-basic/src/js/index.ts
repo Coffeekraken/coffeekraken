@@ -6,10 +6,7 @@ import { define as __sugarFeatureDefine } from '@coffeekraken/s-sugar-feature';
 
 import { define as __SSpacesSelectorComponentDefine } from '@coffeekraken/s-spaces-selector-component';
 
-import { __reloadStylesheets } from '@coffeekraken/sugar/dom';
-
 // import { define as __sFloatingFeature } from '@coffeekraken/s-floating-feature';
-import { define as __sFormValidateFeature } from '@coffeekraken/s-form-validate-feature';
 // import { define as __sInlineFeature } from '@coffeekraken/s-inline-feature';
 // import { define as __sPageTransitionFeature } from '@coffeekraken/s-page-transition-feature';
 // import { define as __sRefocusFeature } from '@coffeekraken/s-refocus-feature';
@@ -18,18 +15,8 @@ import { define as __sGoogleMapComponentDefine } from '@coffeekraken/s-google-ma
 import __SLitComponent from '@coffeekraken/s-lit-component';
 import { define as __SSliderComponentDefine } from '@coffeekraken/s-slider-component';
 
-import { define as __sCarpenterComponentDefine } from '@coffeekraken/s-carpenter';
-
 // Views related
 const viewsRelated = import.meta.globEager('../views/**/*.ts');
-
-if (import.meta.hot) {
-    import.meta.hot.on('sugar.update.css', (data) => {
-        console.log('RELOAD', data);
-        // perform custom update
-        __reloadStylesheets();
-    });
-}
 
 // Init script
 (async () => {
@@ -48,7 +35,6 @@ if (import.meta.hot) {
     __SPackEssentials();
 
     // features
-    __sFormValidateFeature({});
 
     // Project related components
     // ...
@@ -56,7 +42,7 @@ if (import.meta.hot) {
     // Components
     __SSliderComponentDefine();
     __sGoogleMapComponentDefine();
-    __sCarpenterComponentDefine();
+    // __sCarpenterComponentDefine();
     __SSpacesSelectorComponentDefine();
 
     // __SCarpenterComponent.create();

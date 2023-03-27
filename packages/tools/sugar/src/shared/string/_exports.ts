@@ -1,4 +1,3 @@
-import __autoCast from './autoCast';
 import __camelCase from './camelCase';
 import __camelize from './camelize';
 import __countLineChars from './countLineChars';
@@ -32,7 +31,6 @@ import __upperFirst from './upperFirst';
 import __urlCompliant from './urlCompliant';
 
 export {
-    __autoCast,
     __camelCase,
     __camelize,
     __countLineChars,

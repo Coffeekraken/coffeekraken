@@ -5,8 +5,8 @@ import { __deepMerge } from '@coffeekraken/sugar/object';
 // @ts-ignore
 import __SValidator from '@coffeekraken/s-validator';
 import { __querySelectorLive } from '@coffeekraken/sugar/dom';
-import __autoCast from '@coffeekraken/sugar/shared/string/autoCast';
-import __camelCase from '@coffeekraken/sugar/shared/string/camelCase';
+import { __camelCase, __parse } from '@coffeekraken/sugar/string';
+
 import __css from '../../../../src/css/s-form-validate.css'; // relative to /dist/pkg/esm/js
 import __SFormValidateFeatureInterface from './interface/SFormValidateFeatureInterface';
 
@@ -43,13 +43,13 @@ import __define from './define';
  * @event           valid               Dispatched when a validation pass correctly
  *
  * @import          import { define as __SFormValidateFeatureDefine } from '@coffeekraken/s-form-validate-feature';
- * 
+ *
  * @snippet         __SFormValidateFeatureDefine($1)
- * 
+ *
  * @install         js
  * import { define as __SFormValidateFeatureDefine } from '@coffeekraken/s-form-validate-feature';
  * __SFormValidateFeatureDefine();
- * 
+ *
  * @install         bash
  * npm i @coffeekraken/s-form-validate-feature
  *
@@ -326,7 +326,7 @@ export default class SFormValidateFeature extends __SFeature {
                 for (let i = 0; i < $node.attributes.length; i++) {
                     const attr = $node.attributes[i];
                     if (attr.name in this.props) {
-                        this.props[__camelCase(attr.name)] = __autoCast(
+                        this.props[__camelCase(attr.name)] = __parse(
                             attr.value,
                         );
                         this._nodeByValidator[__camelCase(attr.name)] = $node;
@@ -381,18 +381,11 @@ export default class SFormValidateFeature extends __SFeature {
         if ($insideField) this._$field = $insideField;
 
         // add the "novalidate" attribute on the field cause we take care
-        this.utils.fastdom.mutate(() => {
-            this._$field.setAttribute('novalidate', 'true');
+        this._$field.setAttribute('novalidate', 'true');
 
-            // get some validations directly from the $field
-            [
-                'required',
-                'maxlength',
-                'minlength',
-                'max',
-                'min',
-                'pattern',
-            ].forEach((type) => {
+        // get some validations directly from the $field
+        ['required', 'maxlength', 'minlength', 'max', 'min', 'pattern'].forEach(
+            (type) => {
                 if (this._$field.hasAttribute(type)) {
                     if (this.props[type]) return;
                     this.props[type] = this._$field.getAttribute(type);
@@ -400,8 +393,8 @@ export default class SFormValidateFeature extends __SFeature {
                         this._$field.removeAttribute(type);
                     }
                 }
-            });
-        });
+            },
+        );
 
         // format the value if needed
         ['keydown', 'change'].forEach((eventType) => {

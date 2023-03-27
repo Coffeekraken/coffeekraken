@@ -3,7 +3,7 @@ import __SClass from '@coffeekraken/s-class';
 import __SEnv from '@coffeekraken/s-env';
 import __SLog from '@coffeekraken/s-log';
 import { __getCookie, __setCookie } from '@coffeekraken/sugar/cookie';
-import { __isInIframe } from '@coffeekraken/sugar/dom';
+import { __isInIframe, __reloadStylesheets } from '@coffeekraken/sugar/dom';
 import { __isCrawler } from '@coffeekraken/sugar/is';
 import { __deepMerge } from '@coffeekraken/sugar/object';
 
@@ -17,6 +17,16 @@ import { __speedIndex } from '@coffeekraken/sugar/perf';
 import __SFrontspec from '@coffeekraken/s-frontspec';
 import type { ISThemeInitSettings } from '@coffeekraken/s-theme';
 import __STheme from '@coffeekraken/s-theme';
+
+// @ts-ignore
+if (import.meta?.hot) {
+    // @ts-ignore
+    import.meta.hot.on('sugar.update.css', (data) => {
+        console.log('RELOAD', data);
+        // perform custom update
+        __reloadStylesheets();
+    });
+}
 
 /**
  * @name            SFront

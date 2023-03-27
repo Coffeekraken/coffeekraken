@@ -1,5 +1,4 @@
-import __autoCast from '@coffeekraken/sugar/shared/string/autoCast';
-import __snakeCase from '@coffeekraken/sugar/shared/string/snakeCase';
+import { __parse, __snakeCase } from '@coffeekraken/sugar/string';
 
 // @ts-ignore
 try {
@@ -30,7 +29,7 @@ try {
  *
  * @snippet         __SEnv.get($1)
  * @snippet         __SEnv.is($1)
- * 
+ *
  * @example         js
  * import __SEnv from '@coffeekraken/s-env';
  * __SEnv.get('something');
@@ -107,7 +106,7 @@ export default class SEnv {
      */
     static get(name: string): any {
         // @ts-ignore
-        return __autoCast(this.env[__snakeCase(name).toUpperCase()]);
+        return __parse(this.env[__snakeCase(name).toUpperCase()]);
     }
 
     /**

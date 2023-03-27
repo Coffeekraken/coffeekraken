@@ -1,6 +1,6 @@
 {
     "name": "@coffeekraken/s-refocus-feature",
-    "version": "2.0.0-alpha.25",
+    "version": "2.0.0-alpha.26",
     "description": "Small feature that you can apply on your scroll elements and will refocus it depending on triggers like an event, the url anchor, etc...",
     "type": "module",
     "scripts": {
@@ -11,10 +11,10 @@
     "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)",
     "license": "MIT",
     "dependencies": {
-        "@coffeekraken/s-class": "^2.0.0-alpha.25",
-        "@coffeekraken/s-feature": "^2.0.0-alpha.25",
-        "@coffeekraken/s-interface": "^2.0.0-alpha.25",
-        "@coffeekraken/sugar": "^2.0.0-alpha.25"
+        "@coffeekraken/s-class": "^2.0.0-alpha.26",
+        "@coffeekraken/s-feature": "^2.0.0-alpha.26",
+        "@coffeekraken/s-interface": "^2.0.0-alpha.26",
+        "@coffeekraken/sugar": "^2.0.0-alpha.26"
     },
     "main": "dist/pkg/cjs/js/exports.js",
     "module": "dist/pkg/esm/js/exports.js",

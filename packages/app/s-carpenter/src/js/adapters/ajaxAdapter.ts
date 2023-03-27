@@ -32,6 +32,8 @@ export default {
             component,
         });
 
+        _console.log('new', $newComponent, $elm);
+
         // @ts-ignore
         if ($elm) {
             // add the new component after the current one
@@ -48,8 +50,6 @@ export default {
     async getProps({ $elm }): Promise<any> {
         let raw = $elm.getAttribute('s-specs-values');
         let props;
-
-        console.log('GET', $elm);
 
         // try json
         if (raw) {
@@ -96,7 +96,7 @@ export default {
             component,
         });
 
-        console.log('SET', $elm);
+        _console.log('SET', $newComponent, $elm);
 
         // keep the element id
         $newComponent.id = $elm.id;

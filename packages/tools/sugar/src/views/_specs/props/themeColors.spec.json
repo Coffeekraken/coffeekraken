@@ -1,0 +1,37 @@
+{
+    "type": "Select",
+    "title": "Theme color",
+    "description": "List of available theme colors",
+    "options": [
+        {
+            "name": "Main",
+            "value": "main"
+        },
+        {
+            "name": "Accent",
+            "value": "accent"
+        },
+        {
+            "name": "Complementary",
+            "value": "complementary"
+        },
+        {
+            "name": "Success",
+            "value": "success"
+        },
+        {
+            "name": "Info",
+            "value": "info"
+        },
+        {
+            "name": "Warning",
+            "value": "warning"
+        },
+        {
+            "name": "Error",
+            "value": "error"
+        }
+    ],
+    "default": "accent",
+    "required": true
+}

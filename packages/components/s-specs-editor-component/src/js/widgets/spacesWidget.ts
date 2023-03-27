@@ -6,7 +6,7 @@ __SSpacesSelectorComponentDefine();
 
 export default function (component) {
     return {
-        hideOriginals: true,
+        keepOriginals: false,
         html({ propObj, values, path }) {
             const spaces = {
                 padding: [],

@@ -3,47 +3,40 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const lit_1 = require("lit");
 function default_1(component) {
     return {
+        keepOriginals: true,
         isActive() {
             var _a;
             return (_a = component.props.features) === null || _a === void 0 ? void 0 : _a.upload;
         },
-        html({ propObj, values }) {
+        html({ propObj, values, path }) {
             if (!values) {
                 values = {};
             }
             return (0, lit_1.html) `
                 <div class="${component.utils.cls('_dropzone')}">
+                    <label
+                        class="${component.utils.cls('_label', 's-label s-label--block')}"
+                        @click=${(e) => e.preventDefault()}
+                    >
+                        ${component._renderLabel(propObj, path)}
+                    </label>
                     <s-dropzone
                         accept="image/*"
                         files="${values.url}"
                         upload
+                        @s-dropzone.clear=${(e) => {
+                component.clearValue([...path, 'url']);
+                component.apply();
+            }}
+                        @s-dropzone.file=${(e) => {
+                component.setValue([...path, 'url'], e.detail[0].url);
+                component.apply();
+            }}
                     ></s-dropzone>
                 </div>
             `;
         },
-        events: {
-            's-dropzone.clear': (e) => {
-                const $url = e.$scope.querySelector(`input[name="url"]`);
-                if ($url) {
-                    $url.removeAttribute('value');
-                    $url.value = '';
-                    $url.dispatchEvent(new CustomEvent('change', {
-                        bubbles: true,
-                    }));
-                }
-            },
-            's-dropzone.file': (e) => {
-                const $url = e.$scope.querySelector(`input[name="url"]`);
-                if ($url) {
-                    // $url.setAttribute('value', e.detail[0].url);
-                    $url.value = e.detail[0].url;
-                    $url.dispatchEvent(new CustomEvent('change', {
-                        bubbles: true,
-                    }));
-                }
-            },
-        },
     };
 }
 exports.default = default_1;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7O0FBQUEsNkJBQTJCO0FBRTNCLG1CQUF5QixTQUFTO0lBQzlCLE9BQU87UUFDSCxRQUFROztZQUNKLE9BQU8sTUFBQSxTQUFTLENBQUMsS0FBSyxDQUFDLFFBQVEsMENBQUUsTUFBTSxDQUFDO1FBQzVDLENBQUM7UUFDRCxJQUFJLENBQUMsRUFBRSxPQUFPLEVBQUUsTUFBTSxFQUFFO1lBQ3BCLElBQUksQ0FBQyxNQUFNLEVBQUU7Z0JBQ1QsTUFBTSxHQUFHLEVBQUUsQ0FBQzthQUNmO1lBRUQsT0FBTyxJQUFBLFVBQUksRUFBQTs4QkFDTyxTQUFTLENBQUMsS0FBSyxDQUFDLEdBQUcsQ0FBQyxXQUFXLENBQUM7OztpQ0FHN0IsTUFBTSxDQUFDLEdBQUc7Ozs7YUFJOUIsQ0FBQztRQUNOLENBQUM7UUFDRCxNQUFNLEVBQUU7WUFDSixrQkFBa0IsRUFBRSxDQUFDLENBQUMsRUFBRSxFQUFFO2dCQUN0QixNQUFNLElBQUksR0FBRyxDQUFDLENBQUMsTUFBTSxDQUFDLGFBQWEsQ0FBQyxtQkFBbUIsQ0FBQyxDQUFDO2dCQUV6RCxJQUFJLElBQUksRUFBRTtvQkFDTixJQUFJLENBQUMsZUFBZSxDQUFDLE9BQU8sQ0FBQyxDQUFDO29CQUM5QixJQUFJLENBQUMsS0FBSyxHQUFHLEVBQUUsQ0FBQztvQkFDaEIsSUFBSSxDQUFDLGFBQWEsQ0FDZCxJQUFJLFdBQVcsQ0FBQyxRQUFRLEVBQUU7d0JBQ3RCLE9BQU8sRUFBRSxJQUFJO3FCQUNoQixDQUFDLENBQ0wsQ0FBQztpQkFDTDtZQUNMLENBQUM7WUFDRCxpQkFBaUIsRUFBRSxDQUFDLENBQUMsRUFBRSxFQUFFO2dCQUNyQixNQUFNLElBQUksR0FBRyxDQUFDLENBQUMsTUFBTSxDQUFDLGFBQWEsQ0FBQyxtQkFBbUIsQ0FBQyxDQUFDO2dCQUN6RCxJQUFJLElBQUksRUFBRTtvQkFDTiwrQ0FBK0M7b0JBQy9DLElBQUksQ0FBQyxLQUFLLEdBQUcsQ0FBQyxDQUFDLE1BQU0sQ0FBQyxDQUFDLENBQUMsQ0FBQyxHQUFHLENBQUM7b0JBQzdCLElBQUksQ0FBQyxhQUFhLENBQ2QsSUFBSSxXQUFXLENBQUMsUUFBUSxFQUFFO3dCQUN0QixPQUFPLEVBQUUsSUFBSTtxQkFDaEIsQ0FBQyxDQUNMLENBQUM7aUJBQ0w7WUFDTCxDQUFDO1NBQ0o7S0FDSixDQUFDO0FBQ04sQ0FBQztBQWhERCw0QkFnREMifQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7O0FBQUEsNkJBQTJCO0FBRTNCLG1CQUF5QixTQUFTO0lBQzlCLE9BQU87UUFDSCxhQUFhLEVBQUUsSUFBSTtRQUNuQixRQUFROztZQUNKLE9BQU8sTUFBQSxTQUFTLENBQUMsS0FBSyxDQUFDLFFBQVEsMENBQUUsTUFBTSxDQUFDO1FBQzVDLENBQUM7UUFDRCxJQUFJLENBQUMsRUFBRSxPQUFPLEVBQUUsTUFBTSxFQUFFLElBQUksRUFBRTtZQUMxQixJQUFJLENBQUMsTUFBTSxFQUFFO2dCQUNULE1BQU0sR0FBRyxFQUFFLENBQUM7YUFDZjtZQUVELE9BQU8sSUFBQSxVQUFJLEVBQUE7OEJBQ08sU0FBUyxDQUFDLEtBQUssQ0FBQyxHQUFHLENBQUMsV0FBVyxDQUFDOztpQ0FFN0IsU0FBUyxDQUFDLEtBQUssQ0FBQyxHQUFHLENBQ3hCLFFBQVEsRUFDUix3QkFBd0IsQ0FDM0I7aUNBQ1EsQ0FBQyxDQUFDLEVBQUUsRUFBRSxDQUFDLENBQUMsQ0FBQyxjQUFjLEVBQUU7OzBCQUVoQyxTQUFTLENBQUMsWUFBWSxDQUFDLE9BQU8sRUFBRSxJQUFJLENBQUM7Ozs7aUNBSTlCLE1BQU0sQ0FBQyxHQUFHOzs0Q0FFQyxDQUFDLENBQUMsRUFBRSxFQUFFO2dCQUN0QixTQUFTLENBQUMsVUFBVSxDQUFDLENBQUMsR0FBRyxJQUFJLEVBQUUsS0FBSyxDQUFDLENBQUMsQ0FBQztnQkFDdkMsU0FBUyxDQUFDLEtBQUssRUFBRSxDQUFDO1lBQ3RCLENBQUM7MkNBQ2tCLENBQUMsQ0FBQyxFQUFFLEVBQUU7Z0JBQ3JCLFNBQVMsQ0FBQyxRQUFRLENBQ2QsQ0FBQyxHQUFHLElBQUksRUFBRSxLQUFLLENBQUMsRUFDaEIsQ0FBQyxDQUFDLE1BQU0sQ0FBQyxDQUFDLENBQUMsQ0FBQyxHQUFHLENBQ2xCLENBQUM7Z0JBQ0YsU0FBUyxDQUFDLEtBQUssRUFBRSxDQUFDO1lBQ3RCLENBQUM7OzthQUdaLENBQUM7UUFDTixDQUFDO0tBQ0osQ0FBQztBQUNOLENBQUM7QUExQ0QsNEJBMENDIn0=

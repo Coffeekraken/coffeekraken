@@ -4,6 +4,11 @@ export default {
         title: 'Macbook air',
         alt: 'Macbook air',
     },
+    color: '#ff0000',
+    date: {
+        value: '2023-11-10',
+        format: 'YYYY-MM-DD',
+    },
     image: {
         url: '/dist/img/macbookair.png',
         title: 'Macbook air',

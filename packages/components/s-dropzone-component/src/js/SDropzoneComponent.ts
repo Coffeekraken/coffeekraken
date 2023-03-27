@@ -417,7 +417,7 @@ export default class SDropzoneComponent extends __SLitComponent {
                     ? html`
                           <label
                               @click=${(e) => {
-                                  this.clear();
+                                  this.clear(false);
                                   this._$input.click();
                               }}
                               class="${this.utils.cls('_drop')}"

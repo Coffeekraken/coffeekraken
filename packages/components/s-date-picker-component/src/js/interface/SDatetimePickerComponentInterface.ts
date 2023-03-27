@@ -44,7 +44,7 @@ export default class SDatetimePickerComponentInterface extends __SInterface {
             },
             format: {
                 description:
-                    'Specify the format of the color you want as end in the input value. Can be "hex", "hexa", "rgb", "rgba", "hsl" or "hsla"',
+                    'Specify thr format you want for the date(time). See this (https://www.npmjs.com/package/date-format-parse) for formating possibilities',
                 type: 'String',
                 default: 'YYYY-MM-DD',
             },

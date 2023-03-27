@@ -15,6 +15,8 @@ import { define as __sGoogleMapComponentDefine } from '@coffeekraken/s-google-ma
 import __SLitComponent from '@coffeekraken/s-lit-component';
 import { define as __SSliderComponentDefine } from '@coffeekraken/s-slider-component';
 
+import { define as __sCarpenterComponentDefine } from '@coffeekraken/s-carpenter';
+
 // Views related
 const viewsRelated = import.meta.globEager('../views/**/*.ts');
 
@@ -42,7 +44,7 @@ const viewsRelated = import.meta.globEager('../views/**/*.ts');
     // Components
     __SSliderComponentDefine();
     __sGoogleMapComponentDefine();
-    // __sCarpenterComponentDefine();
+    __sCarpenterComponentDefine();
     __SSpacesSelectorComponentDefine();
 
     // __SCarpenterComponent.create();

@@ -1,11 +1,9 @@
 export default function (component: any): {
+    keepOriginals: boolean;
     isActive(): any;
-    html({ propObj, values }: {
+    html({ propObj, values, path }: {
         propObj: any;
         values: any;
+        path: any;
     }): import("lit-html").TemplateResult<1>;
-    events: {
-        's-dropzone.clear': (e: any) => void;
-        's-dropzone.file': (e: any) => void;
-    };
 };

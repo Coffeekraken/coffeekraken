@@ -187,7 +187,7 @@ export default function __querySelectorLive(
     if (
         settings.scopes &&
         (settings.rootNode === document ||
-            !settings.rootNode?.hasAttribute('s-scope'))
+            !settings.rootNode?.hasAttribute?.('s-scope'))
     ) {
         let isAfterCalledByScopeId = {};
 

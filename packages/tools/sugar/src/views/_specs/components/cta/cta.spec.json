@@ -3,7 +3,7 @@
     "title": "Cta",
     "description": "Display a call to action",
     "props": {
-        "color": "@sugar.views.props.color",
+        "color": "@sugar.views.props.themeColors",
         "link": "@sugar.views.props.link",
         "attributes": "@sugar.views.props.attributes"
     },

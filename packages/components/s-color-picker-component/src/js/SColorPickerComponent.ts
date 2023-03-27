@@ -5,12 +5,12 @@ import __SLitComponent from '@coffeekraken/s-lit-component';
 import { __copy } from '@coffeekraken/sugar/clipboard';
 import {
     __makeFloat,
-    __preventViewportMovement
+    __preventViewportMovement,
 } from '@coffeekraken/sugar/dom';
 import { __isMobile } from '@coffeekraken/sugar/is';
 import type {
     IFloatApi,
-    IFloatSettings
+    IFloatSettings,
 } from '@coffeekraken/sugar/js/dom/ui/makeFloat';
 import { __deepMerge } from '@coffeekraken/sugar/object';
 import { css, html, unsafeCSS } from 'lit';
@@ -77,9 +77,9 @@ export interface ISColorPickerComponentProps {
  * @support         edge
  *
  * @import          import { define as __SColorPickerComponentDefine } from '@coffeekraken/s-color-picker-component';
- * 
+ *
  * @snippet         __SColorPickerComponentDefine($1)
- * 
+ *
  * @install         bash
  * npm i @coffeekraken/s-color-picker-component
  *
@@ -359,7 +359,6 @@ export default class SColorPickerComponent extends __SLitComponent {
 
         // dispatch a "change" event
         if (step !== 'init') {
-            console.log('Dispa', this._color.toObject());
             this.utils.dispatchEvent('change', {
                 detail: this._color.toObject(),
             });
@@ -490,8 +489,8 @@ export default class SColorPickerComponent extends __SLitComponent {
         }
         // set the actual color
         this._color.h = h;
-        // set the css variable
-        this.style.setProperty('--s-color-picker-h', h);
+        // apply the css variables
+        this._applyCssVariables();
         // update the shade canvas with the new color
         this._updateShadeCanvas();
         // update the alpha selector
@@ -532,18 +531,48 @@ export default class SColorPickerComponent extends __SLitComponent {
         // set the actual color values
         this._color.s = saturation;
         this._color.l = lightness;
-        // apply the --s-color-picker-a css variable
-        this.style.setProperty('--s-color-picker-shade-x', s);
-        this.style.setProperty(
-            '--s-color-picker-shade-y',
-            l * 2 > 100 ? 100 : l * 2,
-        );
-        this.style.setProperty('--s-color-picker-s', saturation);
-        this.style.setProperty('--s-color-picker-l', lightness);
+        // apply the color in css variables
+        this._applyCssVariables();
         // update the shade canvas with the new color
         this._updateShadeCanvas();
         // update the component
         this.requestUpdate();
+    }
+
+    /**
+     * Apply the current color to css variables through the element style
+     */
+    _applyCssVariables() {
+        // shade
+        this.style.setProperty('--s-color-picker-shade-x', this._color.s);
+        this.style.setProperty(
+            '--s-color-picker-shade-y',
+            this._color.l * 2 > 100 ? 100 : this._color.l * 2,
+        );
+
+        // hue
+        this.style.setProperty('--s-color-picker-h', this._color.h);
+
+        // saturation and lightness
+        this.style.setProperty('--s-color-picker-s', this._color.s);
+        this.style.setProperty('--s-color-picker-l', this._color.l);
+
+        // alpha
+        this.style.setProperty('--s-color-picker-a', this._color.a);
+
+        // string values
+        this.style.setProperty(
+            '--s-color-picker-hsla',
+            this._color.toHslaString(),
+        );
+        this.style.setProperty(
+            '--s-color-picker-rgba',
+            this._color.toRgbaString(),
+        );
+        this.style.setProperty(
+            '--s-color-picker-hexa',
+            this._color.toHexaString(),
+        );
     }
 
     /**
@@ -568,8 +597,8 @@ export default class SColorPickerComponent extends __SLitComponent {
         }
         // set the actual color value
         this._color.a = a;
-        // apply the --s-color-picker-a css variable
-        this.style.setProperty('--s-color-picker-a', a);
+        // apply the variables on the element
+        this._applyCssVariables();
         // update the alpha selector
         this._updateAlphaSelector();
         // update the component

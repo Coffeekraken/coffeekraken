@@ -225,7 +225,7 @@ export default class SCarpenterComponent extends __SLitComponent {
                                   Loading <span>Carpenter</span>
                               </h1>
                               <p class="_text">
-                                  Carpenter is loading.
+                                  Loading.
                                   <span>Please wait....</span>
                               </p>
                               <!-- <button class="_cancel-btn">Cancel</button> -->

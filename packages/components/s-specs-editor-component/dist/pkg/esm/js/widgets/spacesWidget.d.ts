@@ -1,5 +1,5 @@
 export default function (component: any): {
-    hideOriginals: boolean;
+    keepOriginals: boolean;
     html({ propObj, values, path }: {
         propObj: any;
         values: any;

@@ -4,12 +4,12 @@ import __SLitComponent from '@coffeekraken/s-lit-component';
 import { __isUserScrolling, __makeFloat } from '@coffeekraken/sugar/dom';
 import type {
     IFloatApi,
-    IFloatSettings
+    IFloatSettings,
 } from '@coffeekraken/sugar/js/dom/ui/makeFloat';
 import { __deepMerge } from '@coffeekraken/sugar/object';
 import {
     format as __formatDate,
-    parse as __parseDate
+    parse as __parseDate,
 } from 'date-format-parse';
 import { css, html, unsafeCSS } from 'lit';
 import __SDatetimePickerComponentInterface from './interface/SDatetimePickerComponentInterface';
@@ -30,7 +30,7 @@ export interface ISDatetimePickerComponentProps {
         | 'validate'
         | 'close'
     )[];
-    format: 'hex' | 'hexa' | 'rgb' | 'rgba' | 'hsl' | 'hsla';
+    format: string;
     inline: boolean;
     calendar: boolean;
     floatSettings: Partial<IFloatSettings>;
@@ -70,9 +70,9 @@ export interface ISDatetimePickerComponentProps {
  * @event           s-datetime-picker                       Dispatched for every events of this component. Check the detail.eventType prop for event type
  *
  * @import          import { define as __SDatetimePickerComponentDefine } from '@coffeekraken/s-datetime-picker-component';
- * 
+ *
  * @snippet         __SDatetimePickerComponentDefine($1)
- * 
+ *
  * @install         bash
  * npm i @coffeekraken/s-datetime-picker-component
  *

@@ -328,22 +328,32 @@ export default class SCarpenterAppComponent extends __SLitComponent {
         // watch for hover on carpenter elements
         this._watchHoverOnSpecElements();
 
+        // prevent default links behaviors
+        this._preventExternalLinksBehaviors();
+
         // listen for click on links in the iframe to close the editor
         this._$websiteDocument.addEventListener('click', (e) => {
-            // check the clicked item
-            if (e.target.tagName === 'A' && e.target.hasAttribute('href')) {
-                this._closeEditor();
+            let $link = e.target;
+            if (e.target.tagName !== 'A') {
+                $link = __traverseUp(
+                    e.target,
+                    ($elm) => $elm.tagName === 'A' && $elm.hasAttribute('href'),
+                );
+            }
+
+            if (!$link) {
                 return;
             }
 
-            // traverse up to see if clicked element is in a link
-            const $link = __traverseUp(
-                e.target,
-                ($elm) => $elm.tagName === 'A' && $elm.hasAttribute('href'),
-            );
-            if ($link) {
-                this._closeEditor();
+            if (
+                $link.hasAttribute('target') &&
+                $link.getAttribute('target') === '_blank'
+            ) {
+                return;
             }
+
+            // close the editor
+            this._closeEditor();
         });
 
         __hotkey('escape', {
@@ -352,6 +362,24 @@ export default class SCarpenterAppComponent extends __SLitComponent {
         }).on('press', () => {
             this._closeEditor();
         });
+    }
+
+    /**
+     * Prevent external links in the website iframe
+     */
+    _preventExternalLinksBehaviors() {
+        __querySelectorLive(
+            'a[href]:not([target="_blank"])',
+            ($link) => {
+                $link.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    e.preventDefault();
+                });
+            },
+            {
+                rootNode: this._$websiteDocument,
+            },
+        );
     }
 
     /**
@@ -533,7 +561,7 @@ export default class SCarpenterAppComponent extends __SLitComponent {
     _listenSpecsEditorUpdate() {
         // listen for actual updated
         this.addEventListener('s-specs-editor.change', async (e) => {
-            console.log('CURRENT', this._$currentElm);
+            _console.log('CURRENT', this._$currentElm);
 
             // make use of the specified adapter to update the component/section/etc...
             const adapterResult =
@@ -1192,7 +1220,7 @@ export default class SCarpenterAppComponent extends __SLitComponent {
                                               ? 'active'
                                               : ''} _query _item"
                                       >
-                                          ${unsafeHTML(this.props.specs[query])}
+                                          ${unsafeHTML(this.props.icons[query])}
                                           ${__upperFirst(query)}
                                       </li>
                                   `;

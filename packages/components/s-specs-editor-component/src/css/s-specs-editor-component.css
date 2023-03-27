@@ -1,13 +1,11 @@
-@import './components/spaces-widget.css';
 @import './components/child.css';
+@import './components/color-picker-widget.css';
+@import './components/datetime-picker-widget.css';
+@import './components/spaces-widget.css';
 
 .s-specs-editor {
     --s-specs-editor-padding-inline: sugar.padding(40);
     user-select: none;
-
-    .s-specs-editor_dropzone {
-        padding-inline: sugar.padding(40);
-    }
 
     .s-tooltip-container {
         float: right;
@@ -79,7 +77,7 @@
         padding: 0;
     }
 
-    .s-specs-editor_prop--checkbox {
+    .s-specs-editor_prop-checkbox {
         margin-block-start: sugar.margin(30);
 
         .s-specs-editor_label {
@@ -253,6 +251,7 @@
         left: 0;
         width: 100%;
         padding-block: sugar.padding(30);
+        margin-block-end: sugar.margin(30);
         border-bottom: 1px solid sugar.color(main, border);
         background-image: linear-gradient(
             45deg,

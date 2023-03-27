@@ -232,7 +232,7 @@ class SCarpenterComponent extends s_lit_component_1.default {
                                   Loading <span>Carpenter</span>
                               </h1>
                               <p class="_text">
-                                  Carpenter is loading.
+                                  Loading.
                                   <span>Please wait....</span>
                               </p>
                               <!-- <button class="_cancel-btn">Cancel</button> -->

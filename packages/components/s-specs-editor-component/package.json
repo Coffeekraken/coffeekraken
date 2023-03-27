@@ -13,6 +13,8 @@
     "dependencies": {
         "@coffeekraken/s-clipboard-copy-component": "^2.0.0-alpha.26",
         "@coffeekraken/s-dropzone-component": "^2.0.0-alpha.26",
+        "@coffeekraken/s-datetime-picker-component": "^2.0.0-alpha.26",
+        "@coffeekraken/s-color-picker-component": "^2.0.0-alpha.26",
         "@coffeekraken/s-interface": "^2.0.0-alpha.26",
         "@coffeekraken/s-spaces-selector-component": "^2.0.0-alpha.26",
         "@coffeekraken/s-theme": "^2.0.0-alpha.26",

@@ -1,0 +1,19 @@
+{
+    "type": "Time",
+    "title": "Time",
+    "description": "Choose a custom time",
+    "props": {
+        "value": {
+            "type": "Text",
+            "title": "The time value",
+            "description": "The time value in the requested format"
+        },
+        "format": {
+            "ghost": true,
+            "type": "Text",
+            "title": "time format",
+            "description": "The time format wanted. Check out https://www.npmjs.com/package/date-format-parse for supported formats",
+            "default": "HH:mm"
+        }
+    }
+}

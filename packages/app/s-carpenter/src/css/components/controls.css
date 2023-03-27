@@ -31,7 +31,6 @@
 .s-carpenter-app_queries {
     background: sugar.color(main, background) !important;
     border-bottom-left-radius: sugar.border.radius();
-    @sugar.depth (100);
 
     ._query i {
         margin-inline-end: sugar.margin(10);

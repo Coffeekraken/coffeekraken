@@ -66,6 +66,8 @@ export default class SColorPickerComponent extends __SLitComponent {
     _setShadeFromEvent(e: any, saveState?: boolean): void;
     _setShade(s: number, l: number, saveState?: boolean): void;
     
+    _applyCssVariables(): void;
+    
     _setAlphaFromEvent(e: any, saveState?: boolean): void;
     _setAlpha(a: number, saveState?: boolean): void;
     _copy(): void;

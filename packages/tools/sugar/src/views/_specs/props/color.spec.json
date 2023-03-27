@@ -1,37 +1,19 @@
 {
-    "type": "Select",
+    "type": "Color",
     "title": "Color",
-    "description": "List of available colors",
-    "options": [
-        {
-            "name": "Main",
-            "value": "main"
+    "description": "Choose a custom color",
+    "props": {
+        "value": {
+            "type": "Text",
+            "title": "The color value",
+            "description": "The color value in hexadecimal format"
         },
-        {
-            "name": "Accent",
-            "value": "accent"
-        },
-        {
-            "name": "Complementary",
-            "value": "complementary"
-        },
-        {
-            "name": "Success",
-            "value": "success"
-        },
-        {
-            "name": "Info",
-            "value": "info"
-        },
-        {
-            "name": "Warning",
-            "value": "warning"
-        },
-        {
-            "name": "Error",
-            "value": "error"
+        "format": {
+            "ghost": true,
+            "type": "Text",
+            "title": "Color format",
+            "description": "The color format wanted, Can be \"hex\", \"hexa\", \"hsl\", \"hsla\", \"rgb\" or \"rgba\"",
+            "default": "hexa"
         }
-    ],
-    "default": "accent",
-    "required": true
+    }
 }

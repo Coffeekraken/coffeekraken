@@ -1,7 +1,9 @@
 import __SLitComponent from '@coffeekraken/s-lit-component';
 
-import { __deleteProperty, __get, __set } from '@coffeekraken/sugar/object';
+import { __get, __set } from '@coffeekraken/sugar/object';
 
+import { define as __SColorPickerComponentDefine } from '@coffeekraken/s-color-picker-component';
+import { define as __SDatetimePickerComponentDefine } from '@coffeekraken/s-datetime-picker-component';
 import { define as __SDropzoneComponentDefine } from '@coffeekraken/s-dropzone-component';
 
 import __STheme from '@coffeekraken/s-theme';
@@ -18,11 +20,20 @@ import __css from '../../../../src/css/s-specs-editor-component.css'; // relativ
 
 import __define from './define';
 
+import __colorPickerWidget from './widgets/colorPickerWidget';
+import __datetimePickerWidget from './widgets/datetimePickerWidget';
 import __imageWidget from './widgets/imageWidget';
 import __spacesWidget from './widgets/spacesWidget';
 
 // components
 __SDropzoneComponentDefine();
+__SColorPickerComponentDefine();
+__SDatetimePickerComponentDefine();
+
+export interface ISSpecsEditorRenderSettings {
+    repeatable: boolean;
+    widgets: boolean;
+}
 
 export interface ISSpecsEditorComponentIconsProp {
     clear: string;
@@ -126,6 +137,10 @@ export default class SSpecsEditorComponent extends __SLitComponent {
     static widgetMap = {
         image: __imageWidget,
         spaces: __spacesWidget,
+        color: __colorPickerWidget,
+        date: __datetimePickerWidget,
+        datetime: __datetimePickerWidget,
+        time: __datetimePickerWidget,
     };
 
     static get styles() {
@@ -258,16 +273,11 @@ export default class SSpecsEditorComponent extends __SLitComponent {
                 media: this.props.media,
                 ...(settings ?? {}),
             });
-            __deleteProperty(
-                this.props.specs.values ?? {},
-                valuePath.join('.'),
-            );
+            __set(this.props.specs.values ?? {}, valuePath, null);
         } else {
             const valuePath = path.filter((p) => p !== 'props').join('.');
-            __deleteProperty(this.props.specs.values, valuePath);
+            __set(this.props.specs.values ?? {}, valuePath, null);
         }
-
-        this._update(path);
 
         this.requestUpdate();
     }
@@ -324,14 +334,16 @@ export default class SSpecsEditorComponent extends __SLitComponent {
      * Apply changes
      */
     apply() {
-        this.utils.dispatchEvent('change', {
-            bubbles: true,
-            detail: {
-                propsSpecs: Object.assign({}, this.props.specs),
-                values: Object.assign({}, this.props.specs.values),
-            },
+        setTimeout(() => {
+            this.utils.dispatchEvent('change', {
+                bubbles: true,
+                detail: {
+                    propsSpecs: Object.assign({}, this.props.specs),
+                    values: Object.assign({}, this.props.specs.values),
+                },
+            });
+            this.requestUpdate();
         });
-        this.requestUpdate();
     }
 
     /**
@@ -388,14 +400,13 @@ export default class SSpecsEditorComponent extends __SLitComponent {
     /**
      * Add an item in a repeatable one
      */
-    _addItem(stack, specs) {
+    _addItem(stack, specs, path) {
         switch (specs.type.toLowerCase()) {
             case 'object{}':
             default:
                 stack.push({});
                 break;
         }
-
         this.requestUpdate();
     }
 
@@ -447,13 +458,14 @@ export default class SSpecsEditorComponent extends __SLitComponent {
                                     ? 'active'
                                     : ''} ${this.props.media === media
                                     ? 'current'
-                                    : ''}"
+                                    : ''} s-tooltip-container"
                             >
                                 <span
                                     @pointerup=${() => this._changeMedia(media)}
                                 >
                                     ${unsafeHTML(this.props.icons[media])}
                                 </span>
+                                <span class="s-tooltip">${media}</span>
                             </span>
                         `;
                     })}
@@ -489,7 +501,7 @@ export default class SSpecsEditorComponent extends __SLitComponent {
     _renderSelectElement(propObj, path) {
         const value = this.getValue(path) ?? propObj.default;
         return html`
-            <div class="${this.utils.cls('_prop--select')}">
+            <div class="${this.utils.cls('_prop-select')}">
                 <label
                     class="${this.utils.cls(
                         '_label',
@@ -497,7 +509,10 @@ export default class SSpecsEditorComponent extends __SLitComponent {
                     )}"
                 >
                     <select
-                        @change=${(e) => this._update(path, propObj, e)}
+                        @change=${(e) => {
+                            this._update(path, propObj, e);
+                            this.apply();
+                        }}
                         name="${path.at(-1)}"
                         class="${this.utils.cls('_select', 's-select')}"
                         placeholder="${propObj.default ??
@@ -531,10 +546,13 @@ export default class SSpecsEditorComponent extends __SLitComponent {
     _renderCheckboxElement(propObj, path) {
         const value = this.getValue(path) ?? propObj.default;
         return html`
-            <div class="${this.utils.cls('_prop--checkbox')}">
+            <div class="${this.utils.cls('_prop-checkbox')}">
                 <label class="${this.utils.cls('_label', 's-label')}">
                     <input
-                        @change=${(e) => this._update(path, propObj, e)}
+                        @change=${(e) => {
+                            this._update(path, propObj, e);
+                            this.apply();
+                        }}
                         type="checkbox"
                         name="${path.at(-1)}"
                         class="${this.utils.cls('_checkbox', 's-switch')}"
@@ -553,7 +571,7 @@ export default class SSpecsEditorComponent extends __SLitComponent {
     _renderTextElement(propObj, path) {
         const value = this.getValue(path) ?? propObj.default;
         return html`
-            <div class="${this.utils.cls('_prop--text')}">
+            <div class="${this.utils.cls('_prop-text')}">
                 <label
                     class="${this.utils.cls(
                         '_label',
@@ -561,7 +579,10 @@ export default class SSpecsEditorComponent extends __SLitComponent {
                     )}"
                 >
                     <input
-                        @change=${(e) => this._update(path, propObj, e)}
+                        @change=${(e) => {
+                            this._update(path, propObj, e);
+                            this.apply();
+                        }}
                         type="text"
                         name="${path.at(-1)}"
                         class="${this.utils.cls('_input', 's-input')}"
@@ -580,7 +601,7 @@ export default class SSpecsEditorComponent extends __SLitComponent {
     _renderHtmlElement(propObj, path) {
         const value = this.getValue(path) ?? propObj.default;
         return html`
-            <div class="${this.utils.cls('_prop--html')}">
+            <div class="${this.utils.cls('_prop-html')}">
                 <label
                     class="${this.utils.cls(
                         '_label',
@@ -631,7 +652,7 @@ ${value}</textarea
         }
 
         return {
-            hideOriginals: widget.hideOriginals,
+            keepOriginals: widget.keepOriginals,
             html: widget.html({
                 values,
                 path,
@@ -640,23 +661,57 @@ ${value}</textarea
         };
     }
 
-    _renderElement(propObj, path) {
+    _renderWidget(propObj, path) {
+        const widget = this._getRenderedWidget(propObj, path);
+
+        return html`
+            ${widget
+                ? html` <div class="${this.utils.cls('_widget')}">
+                      ${widget.html}
+                  </div>`
+                : ''}
+        `;
+    }
+
+    _renderElement(
+        propObj,
+        path,
+        settings: Partial<ISSpecsEditorRenderSettings>,
+    ) {
         const typeLower = propObj.type.toLowerCase();
 
         if (typeLower.match(/(\{\}|\[\])/)) {
             return this._renderRepeatableElements(propObj, path);
         }
 
+        let widget;
+        if (settings.widgets) {
+            widget = this._getRenderedWidget(propObj, path);
+        }
+
         return html`
-            ${typeLower === 'text'
-                ? this._renderTextElement(propObj, path)
-                : typeLower === 'select'
-                ? this._renderSelectElement(propObj, path)
-                : typeLower === 'checkbox' || typeLower === 'boolean'
-                ? this._renderCheckboxElement(propObj, path)
-                : typeLower === 'html'
-                ? this._renderHtmlElement(propObj, path)
-                : ''}
+            <div
+                prop="${propObj.id}"
+                class="${this.utils.cls('_prop')} ${this.utils.cls(
+                    '_prop-${typeLower}',
+                )}"
+            >
+                ${widget ? html` ${this._renderWidget(propObj, path)} ` : ''}
+                ${!widget || widget.keepOriginals
+                    ? html`
+                          ${typeLower === 'text'
+                              ? this._renderTextElement(propObj, path)
+                              : typeLower === 'select'
+                              ? this._renderSelectElement(propObj, path)
+                              : typeLower === 'checkbox' ||
+                                typeLower === 'boolean'
+                              ? this._renderCheckboxElement(propObj, path)
+                              : typeLower === 'html'
+                              ? this._renderHtmlElement(propObj, path)
+                              : ''}
+                      `
+                    : ''}
+            </div>
         `;
     }
 
@@ -719,7 +774,9 @@ ${value}</textarea
                                     ...propObj,
                                 },
                                 [...path, i],
-                                true,
+                                {
+                                    repeatable: false,
+                                },
                             )}
                         </div>
                     </div>
@@ -728,7 +785,11 @@ ${value}</textarea
 
             <div class="${this.utils.cls('_repeatable-actions')}">
                 <button
-                    @pointerup=${() => this._addItem(loopOn, propObj)}
+                    @pointerup=${() =>
+                        this._addItem(loopOn, propObj, [
+                            ...path,
+                            loopOn.length,
+                        ])}
                     class="_add"
                 >
                     Add a ${__lowerFirst(propObj.title).replace(/s$/, '')}
@@ -738,35 +799,46 @@ ${value}</textarea
         </div>`;
     }
 
-    _renderPropObj(propObj, path) {
+    _renderPropObj(
+        propObj,
+        path,
+        settings: Partial<ISSpecsEditorRenderSettings>,
+    ) {
         if (propObj.ghost && !this.props.ghostSpecs) {
             return '';
         }
 
-        return html`
-            <div prop="${propObj.id}" class="${this.utils.cls('_prop')}">
-                ${this._renderElement(propObj, path)}
-            </div>
-        `;
+        return html` ${this._renderElement(propObj, path, settings)} `;
     }
 
-    _renderElements(specs: any, path: string[] = [], forceNoRepeat = false) {
-        if (!forceNoRepeat && specs.type.match(/(\{\}|\[\])/)) {
+    _renderElements(specs: any, path: string[] = [], settings?: any) {
+        const finalSettings = {
+            repeatable: true,
+            widgets: true,
+            ...(settings ?? {}),
+        };
+
+        if (finalSettings.repeatable && specs.type.match(/(\{\}|\[\])/)) {
             return this._renderRepeatableElements(specs, path);
         } else {
             if (!specs.props) {
-                return this._renderPropObj(specs, path);
+                return this._renderPropObj(specs, path, finalSettings);
             }
 
             return html`
                 ${Object.keys(specs.props).map((prop) => {
                     const propObj = specs.props[prop];
-                    if (propObj.props) {
-                        const renderedWidget = this._getRenderedWidget(
-                            propObj,
-                            [...path, 'props', prop],
-                        );
 
+                    let widget;
+                    if (finalSettings.widgets) {
+                        widget = this._getRenderedWidget(propObj, [
+                            ...path,
+                            'props',
+                            prop,
+                        ]);
+                    }
+
+                    if (propObj.props) {
                         return html`
                             <div class="${this.utils.cls('_child')}">
                                 <div class="${this.utils.cls('_child-metas')}">
@@ -800,46 +872,45 @@ ${value}</textarea
                                                 : ''}
                                         </div>
                                     </div>
-                                    <p
+                                    <!-- <p
                                         class="${this.utils.cls(
-                                            '_child-description',
-                                        )}"
+                                        '_child-description',
+                                    )}"
                                     >
                                         ${propObj.description}
-                                    </p>
+                                    </p> -->
                                 </div>
-
-                                ${renderedWidget
-                                    ? html` <div
-                                          class="${this.utils.cls(
-                                              '_child-widget',
-                                          )}"
-                                      >
-                                          ${renderedWidget.html}
-                                      </div>`
+                                ${widget
+                                    ? html`
+                                          <div
+                                              prop="${propObj.id}"
+                                              class="${this.utils.cls('_prop')}"
+                                          >
+                                              ${this._renderWidget(propObj, [
+                                                  ...path,
+                                                  'props',
+                                                  prop,
+                                              ])}
+                                          </div>
+                                      `
                                     : ''}
-                                <div
-                                    class="${this.utils.cls(
-                                        '_child-widget-originals',
-                                    )}"
-                                    style="display: ${renderedWidget?.hideOriginals
-                                        ? 'none'
-                                        : 'block'}"
-                                >
-                                    ${this._renderElements(
-                                        propObj,
-                                        [...path, 'props', prop],
-                                        // false,
-                                    )}
-                                </div>
+                                ${!widget || widget.keepOriginals
+                                    ? html`
+                                          ${this._renderElements(
+                                              propObj,
+                                              [...path, 'props', prop],
+                                              finalSettings,
+                                          )}
+                                      `
+                                    : ''}
                             </div>
                         `;
                     } else {
-                        return this._renderPropObj(propObj, [
-                            ...path,
-                            'props',
-                            prop,
-                        ]);
+                        return this._renderPropObj(
+                            propObj,
+                            [...path, 'props', prop],
+                            finalSettings,
+                        );
                     }
                 })}
             `;

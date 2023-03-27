@@ -21,6 +21,8 @@
 
 @sugar.ui.spacesSelector.classes();
 @sugar.ui.specsEditor.classes();
+@sugar.ui.datetimePicker.classes();
+@sugar.ui.colorPicker.classes();
 @sugar.ui.input.classes();
 @sugar.ui.button.classes();
 @sugar.ui.tabs.classes();
@@ -64,7 +66,7 @@ s-carpenter-app {
     margin-inline-end: sugar.margin(10);
 }
 .s-tooltip {
-    width: 300px;
+    max-width: 300px;
 }
 
 .s-tabs {

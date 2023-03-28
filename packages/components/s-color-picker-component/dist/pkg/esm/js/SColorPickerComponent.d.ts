@@ -5,11 +5,11 @@ export interface ISColorPickerComponentProps {
     name: string;
     value: string;
     placeholder: string;
-    updateInput: ('pointerdown' | 'pointerup' | 'pointermove' | 'validate' | 'eyedropper' | 'reset' | 'clear' | 'close')[];
+    updateInput: ('pointerdown' | 'pointerup' | 'pointermove' | 'validate' | 'eyedropper' | 'reset' | 'close')[];
     format: 'hex' | 'hexa' | 'rgb' | 'rgba' | 'hsl' | 'hsla';
     inline: boolean;
     eyeDropper: boolean;
-    actions: ('clear' | 'reset' | 'validate')[];
+    actions: ('reset' | 'validate')[];
     backdrop: boolean;
     floatSettings: Partial<IFloatSettings>;
     copyIconClass: string;
@@ -24,7 +24,19 @@ export interface ISColorPickerComponentProps {
 export default class SColorPickerComponent extends __SLitComponent {
     static get properties(): any;
     static get styles(): import("lit").CSSResult;
-    state: {};
+    static get state(): {
+        h: number;
+        s: number;
+        l: number;
+        r: number;
+        g: number;
+        b: number;
+        a: number;
+        hex: string;
+        hexa: string;
+        format: any;
+        value: any;
+    };
     _originalState: {};
     _floatApi: IFloatApi;
     _hasInput: boolean;
@@ -50,11 +62,10 @@ export default class SColorPickerComponent extends __SLitComponent {
     mount(): Promise<void>;
     firstUpdated(): Promise<void>;
     _initColor(): void;
-    _updateInput(step: 'init' | 'pointerdown' | 'pointerup' | 'pointermove' | 'validate' | 'eyedropper' | 'reset' | 'clear' | 'close'): void;
+    _updateInput(step: 'init' | 'pointerdown' | 'pointerup' | 'pointermove' | 'validate' | 'eyedropper' | 'reset' | 'close' | 'format'): void;
     _restoreState(): void;
-    _setMetasFormat(format: 'hex' | 'rgb' | 'hsl'): void;
+    setFormat(format: 'hex' | 'hexa' | 'rgb' | 'rgba' | 'hsl' | 'hsla'): void;
     _validate(): void;
-    _clear(): void;
     _reset(): void;
     _isAlphaWanted(): any;
     

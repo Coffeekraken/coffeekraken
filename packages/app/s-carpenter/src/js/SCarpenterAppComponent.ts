@@ -561,8 +561,6 @@ export default class SCarpenterAppComponent extends __SLitComponent {
     _listenSpecsEditorUpdate() {
         // listen for actual updated
         this.addEventListener('s-specs-editor.change', async (e) => {
-            _console.log('CURRENT', this._$currentElm);
-
             // make use of the specified adapter to update the component/section/etc...
             const adapterResult =
                 await SCarpenterAppComponent._registeredAdapters[

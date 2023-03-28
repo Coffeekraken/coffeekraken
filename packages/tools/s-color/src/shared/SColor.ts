@@ -284,6 +284,9 @@ class SColor extends __SClass {
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     _parse(color) {
+        // give "%"" away from hsl values
+        color = color.replace(/\%/gm, '');
+
         // parse the color
         color = __convert(color, 'hsla');
 
@@ -942,13 +945,13 @@ class SColor extends __SClass {
      */
     toObject() {
         return {
+            h: this.h,
+            l: this.l,
+            s: this.s,
             r: this.r,
             g: this.b,
             b: this.b,
             a: this.a,
-            h: this.h,
-            s: this.s,
-            l: this.l,
             hex: this.toHexString(),
             hexa: this.toHexaString(),
             rgb: this.toRgbString(),

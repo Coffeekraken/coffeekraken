@@ -96,8 +96,6 @@ export default {
             component,
         });
 
-        _console.log('SET', $newComponent, $elm);
-
         // keep the element id
         $newComponent.id = $elm.id;
 

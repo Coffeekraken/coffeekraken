@@ -14,6 +14,8 @@ import {
 import { css, html, unsafeCSS } from 'lit';
 import __SDatetimePickerComponentInterface from './interface/SDatetimePickerComponentInterface';
 
+import type { __ISDatetime } from '@coffeekraken/sugar';
+
 // @ts-ignore
 import __css from '../../../../src/css/s-datetime-picker.css'; // relative to /dist/pkg/esm/js
 // import __css from '../css/s-datetime-picker.css'; // for dev
@@ -38,7 +40,7 @@ export interface ISDatetimePickerComponentProps {
     copiedIconClass: string;
     buttonIconClass: string;
     backdropClass: string;
-    actions: ('clear' | 'reset' | 'validate')[];
+    actions: ('reset' | 'validate')[];
     position: 'top' | 'bottom';
     backdrop: boolean;
     disabled: boolean;
@@ -66,7 +68,7 @@ export interface ISDatetimePickerComponentProps {
  * @support         safari
  * @support         edge
  *
- * @event           s-datetime-picker.change                                  Dispatched when the datepicker change value
+ * @event           s-datetime-picker.change                                  Dispatched when the datepicker change value with an __ISDatetime object in detail
  * @event           s-datetime-picker                       Dispatched for every events of this component. Check the detail.eventType prop for event type
  *
  * @import          import { define as __SDatetimePickerComponentDefine } from '@coffeekraken/s-datetime-picker-component';
@@ -528,42 +530,29 @@ export default class SDatetimePickerComponent extends __SLitComponent {
         }
     }
 
-    _updateInput(
-        step:
-            | 'init'
-            | 'pointerdown'
-            | 'pointerup'
-            | 'pointermove'
-            | 'validate'
-            | 'reset'
-            | 'clear'
-            | 'close',
-    ) {
+    _updateInput(step: 'init' | 'validate' | 'reset' | 'close') {
         if (step !== 'init' && !this.props.updateInput.includes(step)) {
             return;
         }
 
-        this._$input.value = __formatDate(
-            new Date(
-                this.state.year,
-                this.state.month,
-                this.state.day,
-                this.state.hour,
-                this.state.minutes,
-                0,
-            ),
-            this.props.format,
+        const date = new Date(
+            this.state.year,
+            this.state.month,
+            this.state.day,
+            this.state.hour,
+            this.state.minutes,
+            0,
         );
 
-        // if (this._$input && this._$input.value !== this.state.value) {
-        //     this._$input.value = this.state.value;
-        // }
+        this._$input.value = __formatDate(date, this.props.format);
 
         // dispatch a "change" event
         if (step !== 'init') {
-            this.utils.dispatchEvent('change', {
-                detail: {
-                    // something...
+            this.utils.dispatchEvent(step === 'validate' ? 'change' : step, {
+                detail: <__ISDatetime>{
+                    iso: date.toISOString(),
+                    value: this._$input.value,
+                    format: this.props.format,
                 },
             });
         }
@@ -602,22 +591,8 @@ export default class SDatetimePickerComponent extends __SLitComponent {
         this._updateInput('validate');
         document.activeElement?.blur?.();
     }
-    _clear() {
-        // if (this._inputColor) {
-        //     this._setAlpha(this._inputColor.a);
-        //     this._setHue(this._inputColor.h);
-        //     this._setShade(this._inputColor.s, this._inputColor.l);
-        // } else {
-        //     this._setAlpha(1);
-        //     this._setHue(0);
-        //     this._setShade(0, 0);
-        // }
-        this._updateInput('clear');
-    }
     _reset() {
-        // this._setAlpha(this._originalState.a);
-        // this._setHue(this._originalState.h);
-        // this._setShade(this._originalState.s, this._originalState.l);
+        Object.assign(this.state, this._originalState);
         this._updateInput('reset');
     }
 
@@ -989,23 +964,6 @@ export default class SDatetimePickerComponent extends __SLitComponent {
                     ${this.props.actions.length
                         ? html`
                               <div class="${this.utils.cls('_actions')}">
-                                  ${this.props.actions.includes('clear')
-                                      ? html`
-                                            <button
-                                                class="${this.utils.cls(
-                                                    '_clear',
-                                                    's-btn s-color--error',
-                                                )}"
-                                                @click=${(e) => {
-                                                    e.preventDefault();
-                                                    this._clear();
-                                                }}
-                                            >
-                                                ${this.props.i18n.clear ??
-                                                'Clear'}
-                                            </button>
-                                        `
-                                      : ''}
                                   ${this.props.actions.includes('reset')
                                       ? html`
                                             <button
@@ -1015,6 +973,7 @@ export default class SDatetimePickerComponent extends __SLitComponent {
                                                 )}"
                                                 @click=${(e) => {
                                                     e.preventDefault();
+                                                    e.stopPropagation();
                                                     this._reset();
                                                 }}
                                             >

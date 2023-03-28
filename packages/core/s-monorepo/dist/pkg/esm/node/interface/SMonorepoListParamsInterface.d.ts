@@ -8,7 +8,7 @@ export default class SMonorepoListParamsInterface extends __SInterface {
             default: any;
             alias: string;
         };
-        json: {
+        asJson: {
             description: string;
             type: string;
             default: boolean;
@@ -17,6 +17,12 @@ export default class SMonorepoListParamsInterface extends __SInterface {
         publish: {
             description: string;
             type: string;
+            alias: string;
+        };
+        independent: {
+            description: string;
+            type: string;
+            default: boolean;
             alias: string;
         };
     };

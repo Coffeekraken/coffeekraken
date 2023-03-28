@@ -1,3 +1,5 @@
+import __SColor from '@coffeekraken/s-color';
+import type { ISColor } from '@specimen/types';
 import { html } from 'lit';
 
 export default function (component) {
@@ -8,8 +10,16 @@ export default function (component) {
         },
         html({ propObj, values, path }) {
             if (!values) {
-                values = {};
+                const color = new __SColor(propObj.default ?? '#ff0000', {
+                    defaultFormat: propObj.format ?? 'hexa',
+                });
+                values = <ISColor>{
+                    ...color.toObject(),
+                    format: propObj.format ?? 'hexa',
+                    value: propObj.default ?? color.toString(),
+                };
             }
+            _console.log('Values', values);
 
             return html`
                 <div class="${component.utils.cls('_color-picker')}">
@@ -20,13 +30,10 @@ export default function (component) {
                         )}"
                     >
                         <s-color-picker
-                            value="${values.value ?? '#ff0000'}"
-                            format="${values.format ?? 'hexa'}"
+                            value="${values.value}"
+                            format="${values.format}"
                             @s-color-picker.change=${(e) => {
-                                component.setValue(path, {
-                                    ...values,
-                                    value: e.detail[values.format ?? 'hexa'],
-                                });
+                                component.setValue(path, <ISColor>e.detail);
                                 component.apply();
                             }}
                         >
@@ -38,7 +45,7 @@ export default function (component) {
                             />
                             <div class="_color-preview"></div>
                         </s-color-picker>
-                        ${component._renderLabel(propObj, path)}
+                        ${component.renderLabel(propObj, path)}
                     </label>
                 </div>
             `;

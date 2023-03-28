@@ -15,21 +15,6 @@
             "description": "Heading title",
             "required": true
         },
-        "text": {
-            "type": "Wysiwyg",
-            "title": "Text",
-            "description": "Heading text",
-            "required": true
-        },
-        "color": {
-            "type": "Color",
-            "title": "Color",
-            "description": "Choose a cool color!",
-            "required": true
-        },
-        "date": "@sugar.views.props.date",
-        "datetime": "@sugar.views.props.datetime",
-        "time": "@sugar.views.props.time",
         "image": "@sugar.views.props.image",
         "cta": {
             "extends": "sugar.views.components.cta",

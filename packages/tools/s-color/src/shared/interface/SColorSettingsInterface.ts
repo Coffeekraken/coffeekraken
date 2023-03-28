@@ -31,7 +31,7 @@ class SColorSettingsInterface extends __SInterface {
             defaultFormat: {
                 description: 'Specify the default format of the color',
                 type: 'String',
-                values: ['hex', 'rgb', 'rgba', 'hsl', 'hsla'],
+                values: ['hex', 'hexa', 'rgb', 'rgba', 'hsl', 'hsla'],
                 default: 'hex',
             },
         };

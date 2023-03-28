@@ -1,5 +1,7 @@
 import { html } from 'lit';
 
+import type { ISImage } from '@specimen/types';
+
 export default function (component) {
     return {
         keepOriginals: true,
@@ -20,7 +22,7 @@ export default function (component) {
                         )}"
                         @click=${(e) => e.preventDefault()}
                     >
-                        ${component._renderLabel(propObj, path)}
+                        ${component.renderLabel(propObj, path)}
                     </label>
                     <s-dropzone
                         accept="image/*"
@@ -31,10 +33,7 @@ export default function (component) {
                             component.apply();
                         }}
                         @s-dropzone.file=${(e) => {
-                            component.setValue(
-                                [...path, 'url'],
-                                e.detail[0].url,
-                            );
+                            component.setValue(path, <ISImage>e.detail[0]);
                             component.apply();
                         }}
                     ></s-dropzone>

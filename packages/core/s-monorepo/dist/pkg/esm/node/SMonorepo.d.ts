@@ -11,13 +11,15 @@ export interface ISMonorepoRunResult {
 }
 export interface ISMonorepoListParams {
     packagesGlob: string;
-    json: boolean;
+    asJson: boolean;
     publish: undefined | boolean;
+    independent: boolean;
 }
 export interface ISMonorepoListResult {
     name: string;
     version: string;
     private: boolean;
+    independent: boolean;
     path: string;
     relPath: string;
 }

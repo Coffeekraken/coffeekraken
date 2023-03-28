@@ -37,7 +37,6 @@ export default class SColorPickerComponentInterface extends __SInterface {
             type: string;
             default: {
                 reset: string;
-                clear: string;
                 validate: string;
             };
         };

@@ -24,6 +24,8 @@ import __colorPickerWidget from './widgets/colorPickerWidget';
 import __datetimePickerWidget from './widgets/datetimePickerWidget';
 import __imageWidget from './widgets/imageWidget';
 import __spacesWidget from './widgets/spacesWidget';
+import __switchWidget from './widgets/switchWidget';
+import __textWidget from './widgets/textWidget';
 
 // components
 __SDropzoneComponentDefine();
@@ -135,12 +137,16 @@ export default class SSpecsEditorComponent extends __SLitComponent {
     }
 
     static widgetMap = {
+        boolean: __switchWidget,
         image: __imageWidget,
         spaces: __spacesWidget,
+        switch: __switchWidget,
         color: __colorPickerWidget,
         date: __datetimePickerWidget,
         datetime: __datetimePickerWidget,
         time: __datetimePickerWidget,
+        string: __textWidget,
+        text: __textWidget,
     };
 
     static get styles() {
@@ -334,16 +340,17 @@ export default class SSpecsEditorComponent extends __SLitComponent {
      * Apply changes
      */
     apply() {
-        setTimeout(() => {
-            this.utils.dispatchEvent('change', {
-                bubbles: true,
-                detail: {
-                    propsSpecs: Object.assign({}, this.props.specs),
-                    values: Object.assign({}, this.props.specs.values),
-                },
-            });
-            this.requestUpdate();
+        this.utils.dispatchEvent('change', {
+            bubbles: true,
+            detail: {
+                propsSpecs: Object.assign({}, this.props.specs),
+                values: Object.assign({}, this.props.specs.values),
+            },
         });
+
+        _console.log('Apply', Object.assign({}, this.props.specs.values));
+
+        this.requestUpdate();
     }
 
     /**
@@ -476,7 +483,7 @@ export default class SSpecsEditorComponent extends __SLitComponent {
     /**
      * Render the field label with the responsive icons if needed, etc...
      */
-    _renderLabel(propObj: any, path: string[]) {
+    renderLabel(propObj: any, path: string[]) {
         return html`
             <span>
                 <h3 class="_title">${propObj.title ?? propObj.id}</h3>
@@ -537,62 +544,7 @@ export default class SSpecsEditorComponent extends __SLitComponent {
                         )}
                     </select>
 
-                    ${this._renderLabel(propObj, path)}
-                </label>
-            </div>
-        `;
-    }
-
-    _renderCheckboxElement(propObj, path) {
-        const value = this.getValue(path) ?? propObj.default;
-        return html`
-            <div class="${this.utils.cls('_prop-checkbox')}">
-                <label class="${this.utils.cls('_label', 's-label')}">
-                    <input
-                        @change=${(e) => {
-                            this._update(path, propObj, e);
-                            this.apply();
-                        }}
-                        type="checkbox"
-                        name="${path.at(-1)}"
-                        class="${this.utils.cls('_checkbox', 's-switch')}"
-                        path="${path.join('.')}"
-                        ?checked=${value !== false &&
-                        value !== null &&
-                        value !== undefined}
-                    />
-
-                    ${this._renderLabel(propObj, path)}
-                </label>
-            </div>
-        `;
-    }
-
-    _renderTextElement(propObj, path) {
-        const value = this.getValue(path) ?? propObj.default;
-        return html`
-            <div class="${this.utils.cls('_prop-text')}">
-                <label
-                    class="${this.utils.cls(
-                        '_label',
-                        's-label s-label--block',
-                    )}"
-                >
-                    <input
-                        @change=${(e) => {
-                            this._update(path, propObj, e);
-                            this.apply();
-                        }}
-                        type="text"
-                        name="${path.at(-1)}"
-                        class="${this.utils.cls('_input', 's-input')}"
-                        placeholder="${propObj.default ??
-                        propObj.title ??
-                        propObj.id}"
-                        path="${path.join('.')}"
-                        value="${value}"
-                    />
-                    ${this._renderLabel(propObj, path)}
+                    ${this.renderLabel(propObj, path)}
                 </label>
             </div>
         `;
@@ -620,7 +572,7 @@ export default class SSpecsEditorComponent extends __SLitComponent {
                     >
 ${value}</textarea
                     >
-                    ${this._renderLabel(propObj, path)}
+                    ${this.renderLabel(propObj, path)}
                 </label>
             </div>
         `;
@@ -661,7 +613,7 @@ ${value}</textarea
         };
     }
 
-    _renderWidget(propObj, path) {
+    renderWidget(propObj, path) {
         const widget = this._getRenderedWidget(propObj, path);
 
         return html`
@@ -673,15 +625,11 @@ ${value}</textarea
         `;
     }
 
-    _renderElement(
-        propObj,
-        path,
-        settings: Partial<ISSpecsEditorRenderSettings>,
-    ) {
+    renderProp(propObj, path, settings: Partial<ISSpecsEditorRenderSettings>) {
         const typeLower = propObj.type.toLowerCase();
 
         if (typeLower.match(/(\{\}|\[\])/)) {
-            return this._renderRepeatableElements(propObj, path);
+            return this._renderRepeatableProps(propObj, path);
         }
 
         let widget;
@@ -696,16 +644,11 @@ ${value}</textarea
                     '_prop-${typeLower}',
                 )}"
             >
-                ${widget ? html` ${this._renderWidget(propObj, path)} ` : ''}
+                ${widget ? html` ${this.renderWidget(propObj, path)} ` : ''}
                 ${!widget || widget.keepOriginals
                     ? html`
-                          ${typeLower === 'text'
-                              ? this._renderTextElement(propObj, path)
-                              : typeLower === 'select'
+                          ${typeLower === 'select'
                               ? this._renderSelectElement(propObj, path)
-                              : typeLower === 'checkbox' ||
-                                typeLower === 'boolean'
-                              ? this._renderCheckboxElement(propObj, path)
                               : typeLower === 'html'
                               ? this._renderHtmlElement(propObj, path)
                               : ''}
@@ -715,7 +658,7 @@ ${value}</textarea
         `;
     }
 
-    _renderRepeatableElements(propObj, path) {
+    _renderRepeatableProps(propObj, path) {
         const loopOn = this.getValue(path, {
             default: [],
         });
@@ -769,7 +712,7 @@ ${value}</textarea
                         <div
                             class="${this.utils.cls('_repeatable-item-props')}"
                         >
-                            ${this._renderElements(
+                            ${this.renderProps(
                                 {
                                     ...propObj,
                                 },
@@ -808,10 +751,10 @@ ${value}</textarea
             return '';
         }
 
-        return html` ${this._renderElement(propObj, path, settings)} `;
+        return html` ${this.renderProp(propObj, path, settings)} `;
     }
 
-    _renderElements(specs: any, path: string[] = [], settings?: any) {
+    renderProps(specs: any, path: string[] = [], settings?: any) {
         const finalSettings = {
             repeatable: true,
             widgets: true,
@@ -819,7 +762,7 @@ ${value}</textarea
         };
 
         if (finalSettings.repeatable && specs.type.match(/(\{\}|\[\])/)) {
-            return this._renderRepeatableElements(specs, path);
+            return this._renderRepeatableProps(specs, path);
         } else {
             if (!specs.props) {
                 return this._renderPropObj(specs, path, finalSettings);
@@ -886,7 +829,7 @@ ${value}</textarea
                                               prop="${propObj.id}"
                                               class="${this.utils.cls('_prop')}"
                                           >
-                                              ${this._renderWidget(propObj, [
+                                              ${this.renderWidget(propObj, [
                                                   ...path,
                                                   'props',
                                                   prop,
@@ -896,7 +839,7 @@ ${value}</textarea
                                     : ''}
                                 ${!widget || widget.keepOriginals
                                     ? html`
-                                          ${this._renderElements(
+                                          ${this.renderProps(
                                               propObj,
                                               [...path, 'props', prop],
                                               finalSettings,
@@ -970,7 +913,7 @@ ${value}</textarea
                                           : ''}
                                   </nav>
                               </div>
-                              ${this._renderElements(this.props.specs, [])}
+                              ${this.renderProps(this.props.specs, [])}
                           </div>
                       `
                     : ''}

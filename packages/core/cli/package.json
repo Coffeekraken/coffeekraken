@@ -80,6 +80,7 @@
         "@coffeekraken/s-scroll-component": "^2.0.0-alpha.26",
         "@coffeekraken/s-sitemap-builder": "^2.0.0-alpha.26",
         "@coffeekraken/s-slider-component": "^2.0.0-alpha.26",
+        "@coffeekraken/s-spaces-selector-component": "^2.0.0-alpha.26",
         "@coffeekraken/s-specs": "^2.0.0-alpha.26",
         "@coffeekraken/s-specs-editor-component": "^2.0.0-alpha.26",
         "@coffeekraken/s-state": "^2.0.0-alpha.26",
@@ -107,8 +108,7 @@
         "chalk": "^5.1.2",
         "dotenv": "^16.0.1",
         "enquire": "^0.0.2",
-        "fs-extra": "^10.1.0",
-        "@coffeekraken/s-spaces-selector-component": "^2.0.0-alpha.26"
+        "fs-extra": "^10.1.0"
     },
     "main": "dist/pkg/cjs/node/exports.js",
     "module": "dist/pkg/esm/node/exports.js",

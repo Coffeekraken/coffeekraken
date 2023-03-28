@@ -87,6 +87,10 @@
         }
     }
 
+    .s-specs-editor_switch {
+        @sugar.color (accent);
+    }
+
     .s-specs-editor_repeatable {
         /* background: red; */
         background: sugar.color(main, background);

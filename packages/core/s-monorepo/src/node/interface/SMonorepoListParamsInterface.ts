@@ -27,17 +27,25 @@ export default class SMonorepoListParamsInterface extends __SInterface {
                 default: __SSugarConfig.get('monorepo.packagesGlob'),
                 alias: 'g',
             },
-            json: {
+            asJson: {
                 description: 'Specify if you want the list into a json object',
                 type: 'Boolean',
                 default: false,
                 alias: 'j',
             },
-            publish: {
+            private: {
                 description:
-                    'Specigy if you want the packages that will be published, not published or both by letting this undefined',
+                    'Specify if you want the packages that are flagged as "private" or not',
                 type: 'Boolean',
+                default: false,
                 alias: 'p',
+            },
+            independent: {
+                description:
+                    'Specify if you want in the result the packages flagged as "indenpendent" or not',
+                type: 'Boolean',
+                default: false,
+                alias: 'i',
             },
         };
     }

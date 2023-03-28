@@ -3,6 +3,7 @@ import { __uniqid } from '@coffeekraken/sugar/string';
 export default {
     views: [
         'sections.heading.heading',
+        'sections.sandbox.sandbox',
         {
             path: 'sugar.bare.layout.layout',
             async data({ res, viewRenderer }) {

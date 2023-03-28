@@ -39,8 +39,8 @@ export default class SDatetimePickerComponentInterface extends __SInterface {
                     type: 'Array<String>',
                     splitChars: [','],
                 },
-                values: ['select', 'validate', 'reset', 'clear', 'close'],
-                default: ['select', 'validate', 'reset', 'clear', 'close'],
+                values: ['validate', 'reset'],
+                default: ['validate', 'reset'],
             },
             format: {
                 description:

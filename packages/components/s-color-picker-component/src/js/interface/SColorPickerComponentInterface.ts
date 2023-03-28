@@ -46,16 +46,16 @@ export default class SColorPickerComponentInterface extends __SInterface {
                     'validate',
                     'eyedropper',
                     'reset',
-                    'clear',
                     'close',
+                    'format',
                 ],
                 default: [
                     'pointerup',
                     'validate',
                     'eyedropper',
                     'reset',
-                    'clear',
                     'close',
+                    'format',
                 ],
             },
             format: {
@@ -74,11 +74,10 @@ export default class SColorPickerComponentInterface extends __SInterface {
             },
             i18n: {
                 description:
-                    'Specify some translations for the color picker. You can translate the "reset", "clear" and "validate" buttons',
+                    'Specify some translations for the color picker. You can translate the "reset" and "validate" buttons',
                 type: 'Object',
                 default: {
                     reset: 'Reset',
-                    clear: 'Clear',
                     validate: 'Validate',
                 },
             },
@@ -107,7 +106,7 @@ export default class SColorPickerComponentInterface extends __SInterface {
                     type: 'Array<String>',
                     splitChars: [',', ' '],
                 },
-                values: ['clear', 'reset', 'validate'],
+                values: ['reset', 'validate'],
                 default: ['reset', 'validate'],
             },
             floatSettings: {

@@ -8,7 +8,7 @@ function default_1(component) {
             return true;
         },
         html({ propObj, values, path }) {
-            var _a, _b;
+            var _a, _b, _c, _d;
             if (!values) {
                 values = {};
             }
@@ -18,17 +18,16 @@ function default_1(component) {
                         class="${component.utils.cls('_label', 's-label s-label--block')}"
                     >
                         <s-datetime-picker
-                            value="${(_a = values.value) !== null && _a !== void 0 ? _a : new Date().toISOString()}"
-                            format="${(_b = values.format) !== null && _b !== void 0 ? _b : 'YYYY-MM-DD'}"
+                            value="${(_b = (_a = values.value) !== null && _a !== void 0 ? _a : propObj.default) !== null && _b !== void 0 ? _b : new Date().toISOString()}"
+                            ?calendar=${propObj.calendar}
+                            format="${(_d = (_c = values.format) !== null && _c !== void 0 ? _c : propObj.format) !== null && _d !== void 0 ? _d : 'YYYY-MM-DD'}"
                             @s-datetime-picker.change=${(e) => {
-                _console.log('e', e);
-                // component.setValue(path, {
-                //     ...values,
-                //     value: e.detail[
-                //         values.format ?? 'hexa'
-                //     ],
-                // });
-                // component.apply();
+                component.setValue(path, e.detail);
+                component.apply();
+            }}
+                            @s-datetime-picker.reset=${(e) => {
+                component.setValue(path, e.detail);
+                component.apply();
             }}
                         >
                             <input
@@ -38,7 +37,7 @@ function default_1(component) {
                                 placeholder="Choose a datetime"
                             />
                         </s-datetime-picker>
-                        ${component._renderLabel(propObj, path)}
+                        ${component.renderLabel(propObj, path)}
                     </label>
                 </div>
             `;
@@ -46,4 +45,4 @@ function default_1(component) {
     };
 }
 exports.default = default_1;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7O0FBQUEsNkJBQTJCO0FBRTNCLG1CQUF5QixTQUFTO0lBQzlCLE9BQU87UUFDSCxhQUFhLEVBQUUsS0FBSztRQUNwQixRQUFRO1lBQ0osT0FBTyxJQUFJLENBQUM7UUFDaEIsQ0FBQztRQUNELElBQUksQ0FBQyxFQUFFLE9BQU8sRUFBRSxNQUFNLEVBQUUsSUFBSSxFQUFFOztZQUMxQixJQUFJLENBQUMsTUFBTSxFQUFFO2dCQUNULE1BQU0sR0FBRyxFQUFFLENBQUM7YUFDZjtZQUNELE9BQU8sSUFBQSxVQUFJLEVBQUE7OEJBQ08sU0FBUyxDQUFDLEtBQUssQ0FBQyxHQUFHLENBQUMsa0JBQWtCLENBQUM7O2lDQUVwQyxTQUFTLENBQUMsS0FBSyxDQUFDLEdBQUcsQ0FDeEIsUUFBUSxFQUNSLHdCQUF3QixDQUMzQjs7O3FDQUdZLE1BQUEsTUFBTSxDQUFDLEtBQUssbUNBQUksSUFBSSxJQUFJLEVBQUUsQ0FBQyxXQUFXLEVBQUU7c0NBQ3ZDLE1BQUEsTUFBTSxDQUFDLE1BQU0sbUNBQUksWUFBWTt3REFDWCxDQUFDLENBQUMsRUFBRSxFQUFFO2dCQUM5QixRQUFRLENBQUMsR0FBRyxDQUFDLEdBQUcsRUFBRSxDQUFDLENBQUMsQ0FBQztnQkFFckIsNkJBQTZCO2dCQUM3QixpQkFBaUI7Z0JBQ2pCLHVCQUF1QjtnQkFDdkIsa0NBQWtDO2dCQUNsQyxTQUFTO2dCQUNULE1BQU07Z0JBQ04scUJBQXFCO1lBQ3pCLENBQUM7Ozs7Ozs7OzswQkFTSCxTQUFTLENBQUMsWUFBWSxDQUFDLE9BQU8sRUFBRSxJQUFJLENBQUM7OzthQUdsRCxDQUFDO1FBQ04sQ0FBQztLQUNKLENBQUM7QUFDTixDQUFDO0FBOUNELDRCQThDQyJ9
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7O0FBQ0EsNkJBQTJCO0FBRTNCLG1CQUF5QixTQUFTO0lBQzlCLE9BQU87UUFDSCxhQUFhLEVBQUUsS0FBSztRQUNwQixRQUFRO1lBQ0osT0FBTyxJQUFJLENBQUM7UUFDaEIsQ0FBQztRQUNELElBQUksQ0FBQyxFQUFFLE9BQU8sRUFBRSxNQUFNLEVBQUUsSUFBSSxFQUFFOztZQUMxQixJQUFJLENBQUMsTUFBTSxFQUFFO2dCQUNULE1BQU0sR0FBRyxFQUFFLENBQUM7YUFDZjtZQUNELE9BQU8sSUFBQSxVQUFJLEVBQUE7OEJBQ08sU0FBUyxDQUFDLEtBQUssQ0FBQyxHQUFHLENBQUMsa0JBQWtCLENBQUM7O2lDQUVwQyxTQUFTLENBQUMsS0FBSyxDQUFDLEdBQUcsQ0FDeEIsUUFBUSxFQUNSLHdCQUF3QixDQUMzQjs7O3FDQUdZLE1BQUEsTUFBQSxNQUFNLENBQUMsS0FBSyxtQ0FDckIsT0FBTyxDQUFDLE9BQU8sbUNBQ2YsSUFBSSxJQUFJLEVBQUUsQ0FBQyxXQUFXLEVBQUU7d0NBQ1osT0FBTyxDQUFDLFFBQVE7c0NBQ2xCLE1BQUEsTUFBQSxNQUFNLENBQUMsTUFBTSxtQ0FDdkIsT0FBTyxDQUFDLE1BQU0sbUNBQ2QsWUFBWTt3REFDZ0IsQ0FBQyxDQUFDLEVBQUUsRUFBRTtnQkFDOUIsU0FBUyxDQUFDLFFBQVEsQ0FDZCxJQUFJLEVBQ1UsQ0FBQyxDQUFDLE1BQU0sQ0FDekIsQ0FBQztnQkFDRixTQUFTLENBQUMsS0FBSyxFQUFFLENBQUM7WUFDdEIsQ0FBQzt1REFDMEIsQ0FBQyxDQUFDLEVBQUUsRUFBRTtnQkFDN0IsU0FBUyxDQUFDLFFBQVEsQ0FDZCxJQUFJLEVBQ1UsQ0FBQyxDQUFDLE1BQU0sQ0FDekIsQ0FBQztnQkFDRixTQUFTLENBQUMsS0FBSyxFQUFFLENBQUM7WUFDdEIsQ0FBQzs7Ozs7Ozs7OzBCQVNILFNBQVMsQ0FBQyxXQUFXLENBQUMsT0FBTyxFQUFFLElBQUksQ0FBQzs7O2FBR2pELENBQUM7UUFDTixDQUFDO0tBQ0osQ0FBQztBQUNOLENBQUM7QUF0REQsNEJBc0RDIn0=

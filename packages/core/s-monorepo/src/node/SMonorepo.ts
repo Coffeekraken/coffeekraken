@@ -71,13 +71,15 @@ export interface ISMonorepoRunResult {}
 
 export interface ISMonorepoListParams {
     packagesGlob: string;
-    json: boolean;
-    publish: undefined | boolean;
+    asJson: boolean;
+    private: undefined | boolean;
+    independent: boolean;
 }
 export interface ISMonorepoListResult {
     name: string;
     version: string;
     private: boolean;
+    independent: boolean;
     path: string;
     relPath: string;
 }
@@ -324,13 +326,13 @@ export default class SMonorepo extends __SClass {
                 version = json.version;
                 name = json.name;
 
-                // check if we want this package in the list
-                if (finalParams.publish && json.private) {
+                // check for "independent" packages
+                if (!finalParams.independent && json.independent) {
                     return;
-                } else if (
-                    finalParams.publish === false &&
-                    json.private !== true
-                ) {
+                }
+
+                // check if we want this package in the list
+                if (!finalParams.private && json.private) {
                     return;
                 }
 
@@ -338,6 +340,7 @@ export default class SMonorepo extends __SClass {
                     name,
                     version,
                     private: json.private,
+                    independent: json.independent === true,
                     relPath: __path.dirname(file.relPath),
                     path: __path.dirname(file.path),
                 });
@@ -346,11 +349,15 @@ export default class SMonorepo extends __SClass {
             });
 
             result.forEach((packageObj) => {
-                if (!finalParams.json) {
+                if (!finalParams.asJson) {
                     console.log(
                         `${
                             packageObj.private
                                 ? '<magenta>[private]</magenta> '
+                                : ''
+                        }${
+                            packageObj.independent
+                                ? '<cyan>[independent]</cyan> '
                                 : ''
                         }<yellow>${packageObj.name}</yellow> (<${
                             packageObj.version === rootPackageJson.version
@@ -369,7 +376,7 @@ export default class SMonorepo extends __SClass {
                 `<yellow>[list]</yellow> <cyan>${result.length}</cyan> packages found`,
             );
 
-            if (finalParams.json) {
+            if (finalParams.asJson) {
                 const jsonStr = JSON.stringify(jsonResult, null, 4);
                 __copy(jsonStr);
                 console.log(
@@ -377,7 +384,7 @@ export default class SMonorepo extends __SClass {
                 );
             }
 
-            resolve(finalParams.json ? jsonResult : result);
+            resolve(finalParams.asJson ? jsonResult : result);
         });
     }
 
@@ -422,7 +429,8 @@ export default class SMonorepo extends __SClass {
             // loop on all packages to publish them once at a time
             const packages = await this.list({
                 packagesGlob: finalParams.packagesGlob,
-                publish: true,
+                private: false,
+                independent: false,
             });
 
             console.log(
@@ -577,6 +585,8 @@ export default class SMonorepo extends __SClass {
 
             const packages = await this.list({
                 packagesGlob: finalParams.packagesGlob,
+                independent: true,
+                private: true,
             });
             const srcRelDir = __path.relative(
                     this._rootDir,
@@ -690,8 +700,9 @@ export default class SMonorepo extends __SClass {
             // get the packages as json list
             const packagesListJson = await this.list({
                 packagesGlob: finalParams.packagesGlob,
-                json: true,
-                publish: true,
+                asJson: true,
+                private: false,
+                independent: false,
             });
 
             // adding the root package

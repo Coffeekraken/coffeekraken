@@ -1,3 +1,4 @@
+import type { __ISDatetime } from '@coffeekraken/sugar';
 import { html } from 'lit';
 
 export default function (component) {
@@ -19,18 +20,26 @@ export default function (component) {
                         )}"
                     >
                         <s-datetime-picker
-                            value="${values.value ?? new Date().toISOString()}"
-                            format="${values.format ?? 'YYYY-MM-DD'}"
+                            value="${values.value ??
+                            propObj.default ??
+                            new Date().toISOString()}"
+                            ?calendar=${propObj.calendar}
+                            format="${values.format ??
+                            propObj.format ??
+                            'YYYY-MM-DD'}"
                             @s-datetime-picker.change=${(e) => {
-                                _console.log('e', e);
-
-                                // component.setValue(path, {
-                                //     ...values,
-                                //     value: e.detail[
-                                //         values.format ?? 'hexa'
-                                //     ],
-                                // });
-                                // component.apply();
+                                component.setValue(
+                                    path,
+                                    <__ISDatetime>e.detail,
+                                );
+                                component.apply();
+                            }}
+                            @s-datetime-picker.reset=${(e) => {
+                                component.setValue(
+                                    path,
+                                    <__ISDatetime>e.detail,
+                                );
+                                component.apply();
                             }}
                         >
                             <input
@@ -40,7 +49,7 @@ export default function (component) {
                                 placeholder="Choose a datetime"
                             />
                         </s-datetime-picker>
-                        ${component._renderLabel(propObj, path)}
+                        ${component.renderLabel(propObj, path)}
                     </label>
                 </div>
             `;

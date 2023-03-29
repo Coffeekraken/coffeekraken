@@ -22,7 +22,7 @@ export default function (component) {
             _console.log('Values', values);
 
             return html`
-                <div class="${component.utils.cls('_color-picker')}">
+                <div class="${component.utils.cls('_color-picker-widget')}">
                     <label
                         class="${component.utils.cls(
                             '_label',

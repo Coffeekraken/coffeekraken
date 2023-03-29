@@ -28,7 +28,7 @@ export default function (component) {
 
             return html`
                 <div
-                    class="${component.utils.cls('_spaces')}"
+                    class="${component.utils.cls('_spaces-widget')}"
                     @s-spaces-selector.change=${(e) => {
                         const setPath = `${path.join('.')}`;
                         component.setValue(setPath, e.detail);

@@ -12,7 +12,7 @@ export default function (component) {
                 values = {};
             }
             return html`
-                <div class="${component.utils.cls('_datetime-picker')}">
+                <div class="${component.utils.cls('_datetime-picker-widget')}">
                     <label
                         class="${component.utils.cls(
                             '_label',

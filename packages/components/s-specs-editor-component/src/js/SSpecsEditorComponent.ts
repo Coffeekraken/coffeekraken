@@ -22,7 +22,9 @@ import __define from './define';
 
 import __colorPickerWidget from './widgets/colorPickerWidget';
 import __datetimePickerWidget from './widgets/datetimePickerWidget';
+import __htmlWidget from './widgets/htmlWidget';
 import __imageWidget from './widgets/imageWidget';
+import __selectWidget from './widgets/selectWidget';
 import __spacesWidget from './widgets/spacesWidget';
 import __switchWidget from './widgets/switchWidget';
 import __textWidget from './widgets/textWidget';
@@ -137,6 +139,7 @@ export default class SSpecsEditorComponent extends __SLitComponent {
     }
 
     static widgetMap = {
+        html: __htmlWidget,
         boolean: __switchWidget,
         image: __imageWidget,
         spaces: __spacesWidget,
@@ -147,6 +150,7 @@ export default class SSpecsEditorComponent extends __SLitComponent {
         time: __datetimePickerWidget,
         string: __textWidget,
         text: __textWidget,
+        select: __selectWidget,
     };
 
     static get styles() {
@@ -505,79 +509,6 @@ export default class SSpecsEditorComponent extends __SLitComponent {
         `;
     }
 
-    _renderSelectElement(propObj, path) {
-        const value = this.getValue(path) ?? propObj.default;
-        return html`
-            <div class="${this.utils.cls('_prop-select')}">
-                <label
-                    class="${this.utils.cls(
-                        '_label',
-                        's-label s-label--block',
-                    )}"
-                >
-                    <select
-                        @change=${(e) => {
-                            this._update(path, propObj, e);
-                            this.apply();
-                        }}
-                        name="${path.at(-1)}"
-                        class="${this.utils.cls('_select', 's-select')}"
-                        placeholder="${propObj.default ??
-                        propObj.title ??
-                        propObj.id}"
-                        path="${path.join('.')}"
-                        .value="${value}"
-                        value="${value}"
-                    >
-                        ${propObj.options.map(
-                            (option) => html`
-                                <option
-                                    .value="${option.value}"
-                                    value="${option.value}"
-                                    ?selected=${(!value &&
-                                        option.value === null) ||
-                                    option.value === String(value)}
-                                >
-                                    ${option.name}
-                                </option>
-                            `,
-                        )}
-                    </select>
-
-                    ${this.renderLabel(propObj, path)}
-                </label>
-            </div>
-        `;
-    }
-
-    _renderHtmlElement(propObj, path) {
-        const value = this.getValue(path) ?? propObj.default;
-        return html`
-            <div class="${this.utils.cls('_prop-html')}">
-                <label
-                    class="${this.utils.cls(
-                        '_label',
-                        's-label s-label--block',
-                    )}"
-                >
-                    <textarea
-                        rows="5"
-                        @change=${(e) => this._update(path, propObj, e)}
-                        name="${path.at(-1)}"
-                        class="${this.utils.cls('_input', 's-input')}"
-                        placeholder="${propObj.default ??
-                        propObj.title ??
-                        propObj.id}"
-                        path="${path.join('.')}"
-                    >
-${value}</textarea
-                    >
-                    ${this.renderLabel(propObj, path)}
-                </label>
-            </div>
-        `;
-    }
-
     /**
      * Render the proper widget depending on the "type" propObj property
      */
@@ -628,13 +559,20 @@ ${value}</textarea
     renderProp(propObj, path, settings: Partial<ISSpecsEditorRenderSettings>) {
         const typeLower = propObj.type.toLowerCase();
 
+        // handle repeatable props
         if (typeLower.match(/(\{\}|\[\])/)) {
             return this._renderRepeatableProps(propObj, path);
         }
 
-        let widget;
-        if (settings.widgets) {
-            widget = this._getRenderedWidget(propObj, path);
+        const widget = this._getRenderedWidget(propObj, path);
+
+        if (!widget) {
+            return html`
+                <p class="s-typo:p">
+                    Sorry but no widget is registered to handle the
+                    "${propObj.type}" type...
+                </p>
+            `;
         }
 
         return html`
@@ -644,16 +582,7 @@ ${value}</textarea
                     '_prop-${typeLower}',
                 )}"
             >
-                ${widget ? html` ${this.renderWidget(propObj, path)} ` : ''}
-                ${!widget || widget.keepOriginals
-                    ? html`
-                          ${typeLower === 'select'
-                              ? this._renderSelectElement(propObj, path)
-                              : typeLower === 'html'
-                              ? this._renderHtmlElement(propObj, path)
-                              : ''}
-                      `
-                    : ''}
+                ${this.renderWidget(propObj, path)}
             </div>
         `;
     }

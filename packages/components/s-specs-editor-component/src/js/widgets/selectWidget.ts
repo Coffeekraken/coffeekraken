@@ -16,29 +16,47 @@ export default function (component) {
             }
 
             return html`
-                <div class="${component.utils.cls('_text-widget')}">
+                <div class="${component.utils.cls('_select-widget')}">
                     <label
                         class="${component.utils.cls(
                             '_label',
                             's-label s-label--block',
                         )}"
                     >
-                        <input
+                        <select
                             @change=${(e) => {
-                                component.setValue(path, {
+                                component.apply(path, {
                                     value: e.target.value,
                                 });
                                 component.apply();
                             }}
-                            type="text"
                             name="${path.at(-1)}"
-                            class="${component.utils.cls('_input', 's-input')}"
+                            class="${component.utils.cls(
+                                '_select',
+                                's-select',
+                            )}"
                             placeholder="${propObj.default ??
                             propObj.title ??
                             propObj.id}"
                             path="${path.join('.')}"
+                            .value="${values.value}"
                             value="${values.value}"
-                        />
+                        >
+                            ${propObj.options.map(
+                                (option) => html`
+                                    <option
+                                        .value="${option.value}"
+                                        value="${option.value}"
+                                        ?selected=${(!values.value &&
+                                            option.value === null) ||
+                                        option.value === String(values.value)}
+                                    >
+                                        ${option.name}
+                                    </option>
+                                `,
+                            )}
+                        </select>
+
                         ${component.renderLabel(propObj, path)}
                     </label>
                 </div>

@@ -1,0 +1,3 @@
+[submodule "packages/@specimen/types"]
+	path = packages/@specimen/types
+	url = https://github.com/specim3n/types

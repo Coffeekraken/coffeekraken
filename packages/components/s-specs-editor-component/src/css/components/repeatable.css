@@ -1,0 +1,96 @@
+.s-specs-editor_repeatable {
+    /* background: red; */
+    background: sugar.color(main, background);
+    /* margin-inline: calc(sugar.margin(40) * -1); */
+}
+.s-specs-editor_repeatable-title {
+    display: flex;
+    align-items: center;
+    background: sugar.color(main, surface);
+    padding: sugar.padding(30) var(--s-specs-editor-padding-inline);
+    border-top: 1px solid sugar.color(main, --alpha 0.1);
+    cursor: pointer;
+
+    &,
+    * {
+        @sugar.transition (fast);
+    }
+
+    > span {
+        flex-grow: 1;
+    }
+
+    &.active,
+    &:hover {
+        background: sugar.color(complementary, --alpha 0.05);
+    }
+
+    &.active {
+        background: sugar.color(complementary, --alpha 0.5);
+        color: white;
+        font-weight: bold;
+
+        * {
+            color: white;
+        }
+    }
+
+    &.active,
+    &:has(
+            + .s-specs-editor_repeatable-item
+                + .s-specs-editor_repeatable-actions:last-child
+        ) {
+        border-bottom: 1px solid sugar.color(main, --alpha 0.1);
+    }
+
+    ._remove {
+        @sugar.ui.button ($lnf: text);
+        @sugar.color (error);
+        @sugar.scale (0.9);
+        /* display: none; */
+        margin-inline-end: sugar.margin(10);
+
+        &:focus {
+            margin-inline-end: sugar.margin(30);
+        }
+    }
+    &:hover ._remove {
+        display: inline-block;
+    }
+}
+.s-specs-editor_repeatable-item {
+    overflow: hidden;
+    max-height: 0;
+    border-left: sugar.margin(10) solid sugar.color(complementary, --alpha 0.5);
+    @sugar.transition;
+}
+.s-specs-editor_repeatable-item.active {
+    display: block;
+    max-height: 4000px;
+}
+
+.s-specs-editor_repeatable-item-actions {
+    text-align: end;
+    padding: sugar.padding(30) var(--s-specs-editor-padding-inline);
+    background: sugar.color(main, background, --darken 5%);
+}
+
+.s-specs-editor_repeatable-item-props {
+    padding-block: sugar.padding(30);
+    /* padding: sugar.padding(30) 0; */
+}
+
+.s-specs-editor_repeatable-actions {
+    padding: sugar.padding(30) sugar.padding(40);
+    text-align: end;
+
+    ._add {
+        @sugar.ui.button ($lnf: outline);
+        @sugar.color (accent);
+
+        i {
+            color: currentColor;
+            margin: 0;
+        }
+    }
+}

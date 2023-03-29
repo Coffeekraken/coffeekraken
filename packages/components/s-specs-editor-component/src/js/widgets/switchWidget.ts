@@ -14,7 +14,7 @@ export default function (component) {
             }
 
             return html`
-                <div class="${component.utils.cls('_prop-switch')}">
+                <div class="${component.utils.cls('_switch-widget')}">
                     <label class="${component.utils.cls('_label', 's-label')}">
                         <input
                             @change=${(e) => {

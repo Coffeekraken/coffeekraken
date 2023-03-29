@@ -1,12 +1,38 @@
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
+var __awaiter =
+    (this && this.__awaiter) ||
+    function (thisArg, _arguments, P, generator) {
+        function adopt(value) {
+            return value instanceof P
+                ? value
+                : new P(function (resolve) {
+                      resolve(value);
+                  });
+        }
+        return new (P || (P = Promise))(function (resolve, reject) {
+            function fulfilled(value) {
+                try {
+                    step(generator.next(value));
+                } catch (e) {
+                    reject(e);
+                }
+            }
+            function rejected(value) {
+                try {
+                    step(generator['throw'](value));
+                } catch (e) {
+                    reject(e);
+                }
+            }
+            function step(result) {
+                result.done
+                    ? resolve(result.value)
+                    : adopt(result.value).then(fulfilled, rejected);
+            }
+            step(
+                (generator = generator.apply(thisArg, _arguments || [])).next(),
+            );
+        });
+    };
 import { __uniqid } from '@coffeekraken/sugar/string';
 export default {
     views: [
@@ -45,10 +71,18 @@ export default {
                     const cardsHtml = [];
                     for (let i = 0; i < 3; i++) {
                         cardData.image.url = imgPath.replace('%i', i + 1);
-                        const result = yield viewRenderer.render('sugar.components.card.card', Object.assign(Object.assign({}, cardData), { title: `Card title #${i + 1}` }));
-                        const cellResult = yield viewRenderer.render('sugar.bare.cell.cell', {
-                            html: result.value,
-                        });
+                        const result = yield viewRenderer.render(
+                            'sugar.components.card.card',
+                            Object.assign(Object.assign({}, cardData), {
+                                title: `Card title #${i + 1}`,
+                            }),
+                        );
+                        const cellResult = yield viewRenderer.render(
+                            'sugar.bare.cell.cell',
+                            {
+                                html: result.value,
+                            },
+                        );
                         cardsHtml.push(cellResult.value);
                     }
                     return {
@@ -80,7 +114,9 @@ export default {
             path: 'sections.story.story',
             data() {
                 return __awaiter(this, void 0, void 0, function* () {
-                    const d = (yield import(`../views/sections/story/story-1.data.js?${__uniqid()}`)).default;
+                    const d = (yield import(
+                        `../views/sections/story/story-1.data.js?${__uniqid()}`
+                    )).default;
                     return d;
                 });
             },
@@ -89,7 +125,9 @@ export default {
             path: 'sections.card.card',
             data() {
                 return __awaiter(this, void 0, void 0, function* () {
-                    const d = (yield import(`../views/sections/card/card.data.js?${__uniqid()}`)).default;
+                    const d = (yield import(
+                        `../views/sections/card/card.data.js?${__uniqid()}`
+                    )).default;
                     return d;
                 });
             },
@@ -98,7 +136,9 @@ export default {
             path: 'sections.story.story',
             data() {
                 return __awaiter(this, void 0, void 0, function* () {
-                    const d = (yield import(`../views/sections/story/story-2.data.js?${__uniqid()}`)).default;
+                    const d = (yield import(
+                        `../views/sections/story/story-2.data.js?${__uniqid()}`
+                    )).default;
                     return d;
                 });
             },
@@ -107,7 +147,9 @@ export default {
             path: 'sections.slider.slider',
             data() {
                 return __awaiter(this, void 0, void 0, function* () {
-                    const d = (yield import(`../views/sections/slider/slider.data.js?${__uniqid()}`)).default;
+                    const d = (yield import(
+                        `../views/sections/slider/slider.data.js?${__uniqid()}`
+                    )).default;
                     return d;
                 });
             },

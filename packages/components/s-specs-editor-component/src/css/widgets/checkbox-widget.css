@@ -1,0 +1,9 @@
+.s-specs-editor_checkbox-widget {
+    margin-block-start: sugar.margin(30);
+
+    .s-specs-editor_label {
+        > span {
+            flex-grow: 1;
+        }
+    }
+}

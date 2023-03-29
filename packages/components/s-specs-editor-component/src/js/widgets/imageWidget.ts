@@ -14,7 +14,7 @@ export default function (component) {
             }
 
             return html`
-                <div class="${component.utils.cls('_dropzone')}">
+                <div class="${component.utils.cls('_image-widget')}">
                     <label
                         class="${component.utils.cls(
                             '_label',

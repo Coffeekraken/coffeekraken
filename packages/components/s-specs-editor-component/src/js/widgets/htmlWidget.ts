@@ -16,29 +16,26 @@ export default function (component) {
             }
 
             return html`
-                <div class="${component.utils.cls('_text-widget')}">
+                <div class="${component.utils.cls('_html-widget')}">
                     <label
                         class="${component.utils.cls(
                             '_label',
                             's-label s-label--block',
                         )}"
                     >
-                        <input
-                            @change=${(e) => {
-                                component.setValue(path, {
-                                    value: e.target.value,
-                                });
-                                component.apply();
-                            }}
-                            type="text"
+                        <textarea
+                            rows="5"
+                            @change=${(e) =>
+                                component._update(path, propObj, e)}
                             name="${path.at(-1)}"
                             class="${component.utils.cls('_input', 's-input')}"
                             placeholder="${propObj.default ??
                             propObj.title ??
                             propObj.id}"
                             path="${path.join('.')}"
-                            value="${values.value}"
-                        />
+                        >
+${values.value}</textarea
+                        >
                         ${component.renderLabel(propObj, path)}
                     </label>
                 </div>

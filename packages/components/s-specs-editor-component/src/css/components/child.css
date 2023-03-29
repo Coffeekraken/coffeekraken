@@ -1,4 +1,21 @@
 .s-specs-editor_child {
+    padding-block-start: sugar.margin(40);
+    padding-block-end: sugar.margin(40);
+
+    &:has(.s-specs-editor_child) {
+        position: relative;
+        padding-block-end: 0;
+        border-left: sugar.margin(10) solid
+            sugar.color(complementary, --alpha 0.5);
+    }
+
+    .s-specs-editor_child {
+        border-left: sugar.margin(10) solid
+            sugar.color(complementary, --alpha 0.5);
+    }
+    .s-specs-editor_prop + .s-specs-editor_child {
+        margin-block-start: sugar.margin(40);
+    }
 }
 .s-specs-editor_child-metas {
     padding-block-start: sugar.padding(30);

@@ -1,0 +1,5 @@
+.s-specs-editor_switch-widget {
+    .s-specs-editor_switch {
+        @sugar.color (accent);
+    }
+}

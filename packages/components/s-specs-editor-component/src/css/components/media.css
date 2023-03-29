@@ -1,0 +1,22 @@
+.s-specs-editor_media {
+    .s-specs-editor_media-icons {
+        float: right;
+    }
+    .s-specs-editor_media-icon {
+        padding-inline: sugar.padding(10);
+        cursor: pointer;
+
+        i {
+            opacity: 0.3;
+        }
+
+        &.active i {
+            color: sugar.color(accent);
+        }
+
+        &:hover i,
+        &.current i {
+            opacity: 1;
+        }
+    }
+}

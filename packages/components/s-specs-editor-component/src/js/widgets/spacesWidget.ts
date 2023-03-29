@@ -5,9 +5,10 @@ import { define as __SSpacesSelectorComponentDefine } from '@coffeekraken/s-spac
 __SSpacesSelectorComponentDefine();
 
 export default function (component) {
+    let error, warning;
+
     return {
-        keepOriginals: false,
-        html({ propObj, values, path }) {
+        render({ propObj, values, path }) {
             const spaces = {
                 padding: [],
                 margin: [],
@@ -26,22 +27,25 @@ export default function (component) {
                 });
             });
 
-            return html`
-                <div
-                    class="${component.utils.cls('_spaces-widget')}"
-                    @s-spaces-selector.change=${(e) => {
-                        const setPath = `${path.join('.')}`;
-                        component.setValue(setPath, e.detail);
-                        component.apply();
-                    }}
-                >
-                    <s-spaces-selector
-                        .spaces=${spaces}
-                        .values=${Object.assign({}, values ?? {})}
-                    ></s-spaces-selector>
-                </div>
-            `;
+            return {
+                error,
+                warning,
+                html: html`
+                    <div
+                        class="${component.utils.cls('_spaces-widget')}"
+                        @s-spaces-selector.change=${(e) => {
+                            const setPath = `${path.join('.')}`;
+                            component.setValue(setPath, e.detail);
+                            component.apply();
+                        }}
+                    >
+                        <s-spaces-selector
+                            .spaces=${spaces}
+                            .values=${Object.assign({}, values ?? {})}
+                        ></s-spaces-selector>
+                    </div>
+                `,
+            };
         },
-        events: {},
     };
 }

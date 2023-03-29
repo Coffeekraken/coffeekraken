@@ -1,8 +1,7 @@
 .s-specs-editor_metas {
     display: flex;
     align-items: center;
-    padding-inline-start: var(--s-specs-editor-padding-inline);
-    padding-inline-end: sugar.padding(10);
+    padding-inline: var(--s-specs-editor-padding-inline);
     position: sticky;
     z-index: 10;
     top: 0;
@@ -20,7 +19,6 @@
 
     &-title {
         color: sugar.color(accent);
-        padding-inline: sugar.padding(30);
     }
 
     * {

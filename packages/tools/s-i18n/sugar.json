@@ -1,0 +1,24 @@
+{
+    "config": {
+        "folders": [
+            {
+                "path": "./dist/pkg/%moduleSystem/config"
+            }
+        ]
+    },
+    "cli": [
+        {
+            "stack": "i18n",
+            "description": "I18n API",
+            "defaultAction": "extract",
+            "actions": {
+                "extract": {
+                    "scope": "package",
+                    "description": "Extract the __i18n statements from your codebase",
+                    "interface": "./dist/pkg/esm/node/interface/SI18nExtractParamsInterface.js",
+                    "process": "./dist/pkg/esm/cli/extract.cli.js"
+                }
+            }
+        }
+    ]
+}

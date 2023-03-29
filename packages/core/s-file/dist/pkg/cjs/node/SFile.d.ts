@@ -30,6 +30,8 @@ export interface ISFileObject {
     exists: string;
     cwd: string;
     path: string;
+    data: any;
+    raw: string;
     relPath: string;
     name: string;
     extension: string;
@@ -38,7 +40,7 @@ export interface ISFileObject {
     content: string;
 }
 export interface ISFileToObjectFn {
-    (readContent: boolean): ISFileObject;
+    (readData: boolean): ISFileObject;
 }
 export interface ISFileUpdateFn {
     (): void;
@@ -70,8 +72,9 @@ export interface ISFile extends ISEventEmitter {
     dirPath: string;
     extension: string;
     exists: boolean;
-    _content?: string;
     content: string;
+    raw: string;
+    data: string;
     toObject: ISFileToObjectFn;
     update(): void;
     watch(): void;
@@ -122,14 +125,14 @@ declare class SFile extends __SClass implements ISFile {
     _raw?: string;
     get raw(): any;
     
-    _content?: string;
-    get content(): any;
-    set content(value: any);
+    _data?: string;
+    get data(): any;
+    set data(value: any);
     
     _commits: ISFileCommit[];
     get commits(): ISFileCommit[];
     
-    toObject(readContent?: boolean): ISFileObject;
+    toObject(readData?: boolean): ISFileObject;
     
     update(): void;
     

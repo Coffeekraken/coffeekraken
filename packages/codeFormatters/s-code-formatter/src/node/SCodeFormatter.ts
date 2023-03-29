@@ -31,7 +31,7 @@ import __SCodeFormatterFormatParamsInterface from './interface/SCodeFormatterFor
  * @snippet         __SCodeFormatter($1)
  * const codeFormatter = new __SCodeFormatter();
  * const codeFormatterResult = await codeFormatter.format($1);
- * 
+ *
  * @example         js
  * import __SCodeFormatter from '@coffeekraken/s-code-formatter';
  * const formatter = new __SCodeFormatter();
@@ -233,7 +233,7 @@ class SCodeFormatter extends __SClass {
 
             // resolve with formatted code
             // @ts-ignore
-            resolve(formatResult[0].content);
+            resolve(formatResult[0].raw);
         });
     }
 

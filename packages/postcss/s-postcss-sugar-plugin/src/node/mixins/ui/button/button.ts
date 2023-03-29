@@ -299,6 +299,14 @@ export default function ({
                 break;
         }
 
+        // disabled
+        vars.push(`
+          &:disabled {
+            opacity: 0.3;
+            pointer-events: none;
+          }
+        `);
+
         // confirm
         vars.push(`
           &[confirm] {

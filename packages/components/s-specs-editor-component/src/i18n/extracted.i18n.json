@@ -1,0 +1,15 @@
+{
+    "s-specs-editor.actions.save": "Save",
+    "s-specs-editor.widget.checkbox.max": "You must select at most %s item(s)",
+    "s-specs-editor.widget.checkbox.min": "You must select at least %s item(s)",
+    "s-specs-editor.widget.integer.invalid": "Passed value \"%s\" is not a valid integer",
+    "s-specs-editor.widget.integer.max": "The value must be lower or equal to %s",
+    "s-specs-editor.widget.integer.min": "The value must be greater or equal to %s",
+    "s-specs-editor.widget.no": "Sorry but no widget is registered to handle the \"%s\" type...",
+    "s-specs-editor.widget.number.invalid": "Passed value \"%s\" is not a valid number",
+    "s-specs-editor.widget.number.max": "The value must be lower or equal to %s",
+    "s-specs-editor.widget.number.min": "The value must be greater or equal to %s",
+    "s-specs-editor.widget.required": "This property is required",
+    "s-specs-editor.widget.select.max": "You must select at most %s item(s)",
+    "s-specs-editor.widget.select.min": "You must select at least %s item(s)"
+}

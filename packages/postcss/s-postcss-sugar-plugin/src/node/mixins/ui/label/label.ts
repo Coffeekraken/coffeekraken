@@ -16,7 +16,7 @@ import __STheme from '@coffeekraken/s-theme';
  * @return      {String}            The generated css
  *
  * @snippet     @sugar.ui.label
- * 
+ *
  * @example     css
  * .my-label {
  *    @sugar.ui.label;
@@ -183,9 +183,10 @@ export default function ({
                 vars.push(`
                   display: flex;
                   justify-content: space-between;
+                  align-items: initial !important;
                   gap: sugar.margin(20);
                   flex-direction: column;
-                  
+
                   & input:not([type="checkbox"]):not([type="radio"]),
                   & select,
                   & textarea {
@@ -200,7 +201,11 @@ export default function ({
                   justify-content: space-between;
                   gap: sugar.margin(20);
 
-                  > span {
+                  &:not(:has(textarea)) {
+                    align-items: center;
+                  }
+
+                  &:has(textarea) > span {
                     padding-block-start: sugar.padding(sugar.theme(ui.form.paddingBlock));
                   }
 

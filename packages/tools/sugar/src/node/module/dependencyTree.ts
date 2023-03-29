@@ -24,7 +24,7 @@ import __extractImport from './extractImport';
  *
  * @snippet     __dependencyTree($1)
  * await __dependencyTree($1)
- * 
+ *
  * @example         js
  * import { __dependencyTree } from '@coffeekraken/sugar/module';
  * await __dependencyTree('/something/cool.js', {
@@ -135,7 +135,7 @@ export default function __dependencyTree(
         // create an SFile instance
         const file = __SFile.new(filePath);
 
-        const imports = __extractImport(file.content);
+        const imports = __extractImport(file.data);
 
         emit('log', {
             group: `s-dependency-tree`,

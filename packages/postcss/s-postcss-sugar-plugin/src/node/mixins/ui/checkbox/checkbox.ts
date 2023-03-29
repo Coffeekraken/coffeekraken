@@ -16,7 +16,7 @@ import __STheme from '@coffeekraken/s-theme';
  * @return      {String}            The generated css
  *
  * @snippet         @sugar.ui.checkbox
- * 
+ *
  * @example     css
  * .my-checkbox {
  *    @sugar.ui.form;
@@ -31,7 +31,7 @@ class postcssSugarPluginUiCheckboxInterface extends __SInterface {
         return {
             lnf: {
                 type: 'String',
-                values: ['default'],
+                values: ['solid'],
                 default: __STheme.get('ui.form.defaultLnf'),
             },
             scope: {
@@ -47,7 +47,7 @@ class postcssSugarPluginUiCheckboxInterface extends __SInterface {
 }
 
 export interface IPostcssSugarPluginUiCheckboxParams {
-    lnf: 'default';
+    lnf: 'solid';
     scope: ('bare' | 'lnf')[];
 }
 
@@ -62,7 +62,7 @@ export default function ({
     replaceWith: Function;
 }) {
     const finalParams: IPostcssSugarPluginUiCheckboxParams = {
-        lnf: 'default',
+        lnf: 'solid',
         scope: ['bare', 'lnf'],
         ...params,
     };
@@ -79,10 +79,9 @@ export default function ({
                 -moz-appearance: none !important;
                 -webkit-appearance: none !important;
                 position: relative;
-                width: 1.4em;
-                height: 1.4em;
+                width: 1.2em;
+                height: 1.2em;
                 font-size: sugar.scalable(1rem);
-                margin-block: 0.7em 0.9em;
 
                 &:disabled {
                     @sugar.disabled;
@@ -105,7 +104,7 @@ export default function ({
                         content: '';
                         position: absolute;
                         top: 50%; left: 50%;
-                        width: 0.4em; height: 0.4em;
+                        width: 0.6em; height: 0.6em;
                         transform: translate(-50%, -50%);
                         background: sugar.color(current);
                         opacity: 0;

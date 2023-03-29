@@ -250,6 +250,21 @@ export default function (api): IStorageConfig {
             },
 
             /**
+             * @name            i18nDir
+             * @namespace       config.storage.src
+             * @type            String
+             * @default         [config.storage.src.rootDir]/i18n
+             *
+             * Configure where is located the i18n source files
+             *
+             * @since         2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+             */
+            get i18nDir() {
+                return `${this.rootDir}/i18n`;
+            },
+
+            /**
              * @name            imgDir
              * @namespace       config.storage.src
              * @type            String
@@ -414,6 +429,21 @@ export default function (api): IStorageConfig {
              */
             get iconsDir() {
                 return `${this.rootDir}/icons`;
+            },
+
+            /**
+             * @name            i18nDir
+             * @namespace       config.storage.dist
+             * @type            String
+             * @default         [config.storage.dist.rootDir]/i18n
+             *
+             * Configure where is located the i18n distribution files
+             *
+             * @since         2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+             */
+            get i18nDir() {
+                return `${this.rootDir}/i18n`;
             },
 
             /**

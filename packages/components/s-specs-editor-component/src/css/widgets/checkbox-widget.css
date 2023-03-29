@@ -2,8 +2,17 @@
     margin-block-start: sugar.margin(30);
 
     .s-specs-editor_label {
+        margin-block-end: sugar.margin(30);
+
         > span {
             flex-grow: 1;
+        }
+
+        ._option {
+            font-size: sugar.font.size(30);
+            opacity: 0.5;
+            text-align: right;
+            display: block;
         }
     }
 }

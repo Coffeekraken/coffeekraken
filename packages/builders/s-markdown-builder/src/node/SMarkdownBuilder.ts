@@ -464,7 +464,7 @@ export default class SMarkdownBuilder extends __SBuilder {
                         const res: ISMarkdownBuilderResult = {
                             inputFile: __SFile.new(filePath),
                             outputFile: __SFile.new(buildObj.outPath),
-                            code: outputFile.content,
+                            code: outputFile.raw,
                         };
 
                         // add the file in the builded stack

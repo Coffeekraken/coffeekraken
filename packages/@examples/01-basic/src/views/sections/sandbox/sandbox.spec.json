@@ -13,12 +13,21 @@
             "type": "Checkbox",
             "title": "Checkboxed",
             "description": "A nice checkbox",
+            "default": {
+                "id": "value-2",
+                "name": "Option #2",
+                "value": "value 2"
+            },
+            "min": 1,
+            "max": 2,
             "options": [
                 {
+                    "id": "value-1",
                     "name": "Option #1",
                     "value": "value 1"
                 },
                 {
+                    "id": "value-2",
                     "name": "Option #2",
                     "value": "value 2"
                 }
@@ -66,6 +75,8 @@
             "title": "Integer",
             "description": "Simple integer",
             "default": 10,
+            "min": 10,
+            "max": 120,
             "required": true
         },
         "number": {
@@ -73,19 +84,27 @@
             "title": "Number",
             "description": "Simple number",
             "default": 12.4,
+            "min": 10,
+            "max": 120,
             "required": true
         },
         "select": {
             "type": "Select",
             "title": "Select",
             "description": "My cool select",
-            "default": "value 2",
+            "default": {
+                "id": "value-2",
+                "name": "Option #2",
+                "value": "value 2"
+            },
             "options": [
                 {
+                    "id": "value-1",
                     "name": "Option #1",
                     "value": "value 1"
                 },
                 {
+                    "id": "value-2",
                     "name": "Option #2",
                     "value": "value 2"
                 }

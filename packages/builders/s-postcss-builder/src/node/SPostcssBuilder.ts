@@ -43,7 +43,7 @@ import __SPostcssBuilderSettingsInterface from './interface/SPostcssBuilderSetti
  *      minify: true,
  *      target: 'production'
  * });
- * 
+ *
  * @example         js
  * import __SPostcssBuilder from '@coffeekraken/s-postcss-builder';
  * const postcssBuilder = new __SPostcssBuilder({
@@ -424,7 +424,7 @@ export default class SPostcssBuilder extends __SBuilder {
                 files.forEach((file) => {
                     content.push({
                         extension: file.extension,
-                        raw: __expandPleasantCssClassnames(file.content),
+                        raw: __expandPleasantCssClassnames(file.raw),
                     });
                 });
 

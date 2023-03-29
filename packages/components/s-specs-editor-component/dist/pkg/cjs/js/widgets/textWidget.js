@@ -1,44 +1,56 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const lit_1 = require("lit");
+const s_i18n_1 = require("@coffeekraken/s-i18n");
 function default_1(component) {
+    let error, warning;
     return {
-        keepOriginals: false,
         isActive() {
             return true;
         },
-        html({ propObj, values, path }) {
-            var _a, _b;
+        render({ propObj, values, path }) {
             if (!values) {
                 values = {
                     value: propObj.default,
                 };
             }
-            return (0, lit_1.html) `
-                <div class="${component.utils.cls('_text-widget')}">
-                    <label
-                        class="${component.utils.cls('_label', 's-label s-label--block')}"
-                    >
-                        <input
-                            @change=${(e) => {
-                component.setValue(path, {
-                    value: e.target.value,
-                });
-                component.apply();
-            }}
-                            type="text"
-                            name="${path.at(-1)}"
-                            class="${component.utils.cls('_input', 's-input')}"
-                            placeholder="${(_b = (_a = propObj.default) !== null && _a !== void 0 ? _a : propObj.title) !== null && _b !== void 0 ? _b : propObj.id}"
-                            path="${path.join('.')}"
-                            value="${values.value}"
-                        />
-                        ${component.renderLabel(propObj, path)}
-                    </label>
-                </div>
-            `;
+            return {
+                error,
+                warning,
+                html: (0, lit_1.html) `
+                    <div class="${component.utils.cls('_text-widget')}">
+                        <label
+                            class="${component.utils.cls('_label', 's-label s-label--block')}"
+                        >
+                            <input
+                                @change=${(e) => {
+                    if (propObj.required && !e.target.value) {
+                        error = (0, s_i18n_1.__i18n)(`This property is required`, {
+                            id: 's-specs-editor.widget.required',
+                        });
+                        return component.requestUpdate();
+                    }
+                    error = null;
+                    warning = null;
+                    component.setValue(path, {
+                        value: e.target.value,
+                    });
+                    component.apply();
+                }}
+                                type="text"
+                                name="${path.at(-1)}"
+                                class="${component.utils.cls('_input', 's-input')}"
+                                placeholder="${propObj.pladeholder}"
+                                path="${path.join('.')}"
+                                value="${values.value}"
+                            />
+                            ${component.renderLabel(propObj, path)}
+                        </label>
+                    </div>
+                `,
+            };
         },
     };
 }
 exports.default = default_1;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7O0FBQUEsNkJBQTJCO0FBSTNCLG1CQUF5QixTQUFTO0lBQzlCLE9BQU87UUFDSCxhQUFhLEVBQUUsS0FBSztRQUNwQixRQUFRO1lBQ0osT0FBTyxJQUFJLENBQUM7UUFDaEIsQ0FBQztRQUNELElBQUksQ0FBQyxFQUFFLE9BQU8sRUFBRSxNQUFNLEVBQUUsSUFBSSxFQUFFOztZQUMxQixJQUFJLENBQUMsTUFBTSxFQUFFO2dCQUNULE1BQU0sR0FBYTtvQkFDZixLQUFLLEVBQUUsT0FBTyxDQUFDLE9BQU87aUJBQ3pCLENBQUM7YUFDTDtZQUVELE9BQU8sSUFBQSxVQUFJLEVBQUE7OEJBQ08sU0FBUyxDQUFDLEtBQUssQ0FBQyxHQUFHLENBQUMsY0FBYyxDQUFDOztpQ0FFaEMsU0FBUyxDQUFDLEtBQUssQ0FBQyxHQUFHLENBQ3hCLFFBQVEsRUFDUix3QkFBd0IsQ0FDM0I7OztzQ0FHYSxDQUFDLENBQUMsRUFBRSxFQUFFO2dCQUNaLFNBQVMsQ0FBQyxRQUFRLENBQUMsSUFBSSxFQUFFO29CQUNyQixLQUFLLEVBQUUsQ0FBQyxDQUFDLE1BQU0sQ0FBQyxLQUFLO2lCQUN4QixDQUFDLENBQUM7Z0JBQ0gsU0FBUyxDQUFDLEtBQUssRUFBRSxDQUFDO1lBQ3RCLENBQUM7O29DQUVPLElBQUksQ0FBQyxFQUFFLENBQUMsQ0FBQyxDQUFDLENBQUM7cUNBQ1YsU0FBUyxDQUFDLEtBQUssQ0FBQyxHQUFHLENBQUMsUUFBUSxFQUFFLFNBQVMsQ0FBQzsyQ0FDbEMsTUFBQSxNQUFBLE9BQU8sQ0FBQyxPQUFPLG1DQUM5QixPQUFPLENBQUMsS0FBSyxtQ0FDYixPQUFPLENBQUMsRUFBRTtvQ0FDRixJQUFJLENBQUMsSUFBSSxDQUFDLEdBQUcsQ0FBQztxQ0FDYixNQUFNLENBQUMsS0FBSzs7MEJBRXZCLFNBQVMsQ0FBQyxXQUFXLENBQUMsT0FBTyxFQUFFLElBQUksQ0FBQzs7O2FBR2pELENBQUM7UUFDTixDQUFDO0tBQ0osQ0FBQztBQUNOLENBQUM7QUEzQ0QsNEJBMkNDIn0=
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7O0FBQUEsNkJBQTJCO0FBRTNCLGlEQUE4QztBQUk5QyxtQkFBeUIsU0FBUztJQUM5QixJQUFJLEtBQUssRUFBRSxPQUFPLENBQUM7SUFFbkIsT0FBTztRQUNILFFBQVE7WUFDSixPQUFPLElBQUksQ0FBQztRQUNoQixDQUFDO1FBQ0QsTUFBTSxDQUFDLEVBQUUsT0FBTyxFQUFFLE1BQU0sRUFBRSxJQUFJLEVBQUU7WUFDNUIsSUFBSSxDQUFDLE1BQU0sRUFBRTtnQkFDVCxNQUFNLEdBQWE7b0JBQ2YsS0FBSyxFQUFFLE9BQU8sQ0FBQyxPQUFPO2lCQUN6QixDQUFDO2FBQ0w7WUFFRCxPQUFPO2dCQUNILEtBQUs7Z0JBQ0wsT0FBTztnQkFDUCxJQUFJLEVBQUUsSUFBQSxVQUFJLEVBQUE7a0NBQ1EsU0FBUyxDQUFDLEtBQUssQ0FBQyxHQUFHLENBQUMsY0FBYyxDQUFDOztxQ0FFaEMsU0FBUyxDQUFDLEtBQUssQ0FBQyxHQUFHLENBQ3hCLFFBQVEsRUFDUix3QkFBd0IsQ0FDM0I7OzswQ0FHYSxDQUFDLENBQUMsRUFBRSxFQUFFO29CQUNaLElBQUksT0FBTyxDQUFDLFFBQVEsSUFBSSxDQUFDLENBQUMsQ0FBQyxNQUFNLENBQUMsS0FBSyxFQUFFO3dCQUNyQyxLQUFLLEdBQUcsSUFBQSxlQUFNLEVBQ1YsMkJBQTJCLEVBQzNCOzRCQUNJLEVBQUUsRUFBRSxnQ0FBZ0M7eUJBQ3ZDLENBQ0osQ0FBQzt3QkFDRixPQUFPLFNBQVMsQ0FBQyxhQUFhLEVBQUUsQ0FBQztxQkFDcEM7b0JBRUQsS0FBSyxHQUFHLElBQUksQ0FBQztvQkFDYixPQUFPLEdBQUcsSUFBSSxDQUFDO29CQUVmLFNBQVMsQ0FBQyxRQUFRLENBQUMsSUFBSSxFQUFFO3dCQUNyQixLQUFLLEVBQUUsQ0FBQyxDQUFDLE1BQU0sQ0FBQyxLQUFLO3FCQUN4QixDQUFDLENBQUM7b0JBQ0gsU0FBUyxDQUFDLEtBQUssRUFBRSxDQUFDO2dCQUN0QixDQUFDOzt3Q0FFTyxJQUFJLENBQUMsRUFBRSxDQUFDLENBQUMsQ0FBQyxDQUFDO3lDQUNWLFNBQVMsQ0FBQyxLQUFLLENBQUMsR0FBRyxDQUN4QixRQUFRLEVBQ1IsU0FBUyxDQUNaOytDQUNjLE9BQU8sQ0FBQyxXQUFXO3dDQUMxQixJQUFJLENBQUMsSUFBSSxDQUFDLEdBQUcsQ0FBQzt5Q0FDYixNQUFNLENBQUMsS0FBSzs7OEJBRXZCLFNBQVMsQ0FBQyxXQUFXLENBQUMsT0FBTyxFQUFFLElBQUksQ0FBQzs7O2lCQUdqRDthQUNKLENBQUM7UUFDTixDQUFDO0tBQ0osQ0FBQztBQUNOLENBQUM7QUE5REQsNEJBOERDIn0=

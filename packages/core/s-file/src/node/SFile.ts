@@ -7,7 +7,7 @@ import {
     __fileName,
     __readJsonSync,
     __writeFile,
-    __writeFileSync
+    __writeFileSync,
 } from '@coffeekraken/sugar/fs';
 import { __deepMerge } from '@coffeekraken/sugar/object';
 import { __toString } from '@coffeekraken/sugar/string';
@@ -26,7 +26,7 @@ import __path from 'path';
  *
  * This class represent a file in the filesystem. With it you can simply instanciate one by passing the file path,
  * and get access to all the nice meta data like the ones listed in the feature section
- * 
+ *
  * @feature         `name`: The file name
  * @feature         `path`: The full path to the file
  * @feature         `cwd`: The root directory specified through the settings.cwd property
@@ -48,7 +48,7 @@ import __path from 'path';
  *
  * @snippet         __SFile($1)
  * new __SFile($1)
- * 
+ *
  * @example           js
  * import __SFile from '@coffeekraken/s-file';
  * const file = new __SFile('something/cool/sugar.json');
@@ -115,6 +115,8 @@ export interface ISFileObject {
     exists: string;
     cwd: string;
     path: string;
+    data: any;
+    raw: string;
     relPath: string;
     name: string;
     extension: string;
@@ -123,7 +125,7 @@ export interface ISFileObject {
     content: string;
 }
 export interface ISFileToObjectFn {
-    (readContent: boolean): ISFileObject;
+    (readData: boolean): ISFileObject;
 }
 export interface ISFileUpdateFn {
     (): void;
@@ -160,8 +162,9 @@ export interface ISFile extends ISEventEmitter {
     dirPath: string;
     extension: string;
     exists: boolean;
-    _content?: string;
     content: string;
+    raw: string;
+    data: string;
     toObject: ISFileToObjectFn;
     update(): void;
     watch(): void;
@@ -430,7 +433,7 @@ class SFile extends __SClass implements ISFile {
                         cast: true,
                     },
                     processors: {
-                        content: [],
+                        data: [],
                         save: [],
                     },
                 },
@@ -496,7 +499,7 @@ class SFile extends __SClass implements ISFile {
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     get hash() {
-        return __md5.encrypt(this.content);
+        return __md5.encrypt(this.raw);
     }
 
     /**
@@ -542,21 +545,21 @@ class SFile extends __SClass implements ISFile {
      * @since     2.0.0
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    _content?: string;
-    get content(): any {
-        if (this._content) return this._content;
-        this._content = this.readSync();
-        for (let i = 0; i < this.settings.processors.content.length; i++) {
-            this._content = this.settings.processors.content[i](this._content);
+    _data?: string;
+    get data(): any {
+        if (this._data) return this._data;
+        this._data = this.readSync();
+        for (let i = 0; i < this.settings.processors.data.length; i++) {
+            this._data = this.settings.processors.data[i](this._data);
         }
-        return this._content;
+        return this._data;
     }
-    set content(value) {
+    set data(value) {
         this._commits.push({
             time: Date.now(),
             data: value,
         });
-        this._content = value;
+        this._data = value;
     }
 
     /**
@@ -584,7 +587,7 @@ class SFile extends __SClass implements ISFile {
      * @since       2.0.0
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    toObject(readContent = true): ISFileObject {
+    toObject(readData = true): ISFileObject {
         const obj = <ISFileObject>{
             exists: this.exists,
             cwd: this.cwd,
@@ -595,7 +598,10 @@ class SFile extends __SClass implements ISFile {
             dirPath: this.dirPath,
             stats: this.stats,
         };
-        if (readContent) obj.content = this.readSync();
+        if (readData) {
+            obj.data = this.readSync();
+            obj.raw = this.raw;
+        }
         return obj;
     }
 
@@ -816,7 +822,7 @@ class SFile extends __SClass implements ISFile {
         // check if some commits are waiting to be saved
         if (!this.commits.length) return this;
         // save the last commit
-        let toSave = this.content;
+        let toSave = this.data;
         if (this.settings.processors.save.length) {
             for (let i = 0; i < this.settings.processors.save.length; i++) {
                 toSave = this.settings.processors.save[i](toSave);
@@ -841,7 +847,7 @@ class SFile extends __SClass implements ISFile {
         __fs.writeFileSync(this.path, toSave);
         // reset content and commits
         this._commits = [];
-        this._content = undefined;
+        this._data = undefined;
         // return instance
         return this;
     }

@@ -67,8 +67,8 @@ function default_1({ params, atRule, replaceWith, }) {
 
         --track-size: calc(var(--thumb-size) * 2);
         --track-padding: 0.2em;
-        --track-color-active: sugar.color(current);
-        --track-color-inactive: sugar.color(current, --alpha 0.1);
+        --track-color-active: sugar.color(accent);
+        --track-color-inactive: sugar.color(current, --alpha 0);
 
         --isLTR: 1;
 
@@ -155,7 +155,7 @@ function default_1({ params, atRule, replaceWith, }) {
                     font-size: sugar.scalable(0.8rem);        
                     background: var(--track-color-inactive);
 
-                    border: sugar.color(current, border) solid sugar.border.width(ui.form.borderWidth);
+                    border: sugar.color(main, border) solid sugar.border.width(ui.form.borderWidth);
                     outline-offset: 5px;
                     
                     transition: sugar.theme(ui.form.transition);

@@ -11,7 +11,7 @@
  * Sort an object properties the same way as the Array.sort do it
  *
  * @param                 {Object}                  object                The object to sort
- * @param                 {Function}                sort                  The sort function to use
+ * @param                 {Function}                [sort=null]                  The sort function to use. If not specified, will sort the items by key alphabetically
  * @return                {Object}                                        The sorted object
  *
  * @todo      interface
@@ -22,7 +22,7 @@
  * __sort($1, (a, b) => {
  *      $2
  * })
- * 
+ *
  * @example               js
  * import { __sort } from '@coffeekraken/sugar/object';
  * __sort({
@@ -41,12 +41,22 @@
  * @since       2.0.0
  * @author  Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-export default function __sort(object, sort) {
+export default function __sort(object: any, sort?: Function): any {
     // get the object keys
     const keys = Object.keys(object);
 
     // sort the keys
     const sortedKeys = keys.sort((a, b) => {
+        if (!sort) {
+            if (a < b) {
+                return -1;
+            }
+            if (a > b) {
+                return 1;
+            }
+            return 0;
+        }
+
         // call the sort function passed as parameter
         return sort({ key: a, value: object[a] }, { key: b, value: object[b] });
     });

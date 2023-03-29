@@ -162,6 +162,8 @@ export default class SCarpenterAppComponent extends __SLitComponent {
     _rootWindow;
     _$rootDocument;
 
+    _isSpecsEditorValid = true;
+
     constructor() {
         super(
             __deepMerge({
@@ -1181,6 +1183,14 @@ export default class SCarpenterAppComponent extends __SLitComponent {
                               .specs=${this.currentSpecs}
                               .features=${this.props.features}
                               .frontspec=${this._data.frontspec ?? {}}
+                              @s-specs-editor.error=${(e) => {
+                                  this._isSpecsEditorValid = false;
+                                  this.requestUpdate();
+                              }}
+                              @s-specs-editor.valid=${(e) => {
+                                  this._isSpecsEditorValid = true;
+                                  this.requestUpdate();
+                              }}
                           >
                           </s-specs-editor>
                       `
@@ -1226,7 +1236,14 @@ export default class SCarpenterAppComponent extends __SLitComponent {
                           </ul>
 
                           ${this.props.features?.save
-                              ? html` <button class="_save">Save page</button> `
+                              ? html`
+                                    <button
+                                        ?disabled=${!this._isSpecsEditorValid}
+                                        class="_save"
+                                    >
+                                        Save page
+                                    </button>
+                                `
                               : ''}
                       </nav>
                   `

@@ -24,6 +24,7 @@
 @sugar.ui.datetimePicker.classes();
 @sugar.ui.colorPicker.classes();
 @sugar.ui.input.classes();
+@sugar.ui.checkbox.classes();
 @sugar.ui.button.classes();
 @sugar.ui.tabs.classes();
 @sugar.ui.label.classes();
@@ -32,6 +33,10 @@
 @sugar.ui.fstree.classes ($scope: bare);
 @sugar.ui.tooltip.classes();
 @sugar.ui.loader.classes ('squareDots,spinner');
+
+.s-checkbox {
+    @sugar.color (accent);
+}
 
 body {
     background: none !important;
@@ -63,7 +68,7 @@ s-carpenter-app {
 }
 .fa-solid {
     color: sugar.color(main, text, --alpha 0.5);
-    margin-inline-end: sugar.margin(10);
+    /* margin-inline-end: sugar.margin(10); */
 }
 .s-tooltip {
     max-width: 300px;

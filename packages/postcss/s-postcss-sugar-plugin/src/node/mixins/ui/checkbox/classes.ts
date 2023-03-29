@@ -18,7 +18,7 @@ import __faker from 'faker';
  * @return      {Css}                   The corresponding css
  *
  * @snippet         @sugar.checkbox.classes
- * 
+ *
  * @example       css
  * \@sugar.ui.form.classes();
  *
@@ -31,12 +31,12 @@ class postcssSugarPluginUiCheckboxClassesInterface extends __SInterface {
         return {
             lnfs: {
                 type: 'String[]',
-                values: ['default'],
-                default: ['default'],
+                values: ['solid'],
+                default: ['solid'],
             },
             defaultLnf: {
                 type: 'String',
-                values: ['default'],
+                values: ['solid'],
                 default: __STheme.get('ui.form.defaultLnf'),
             },
             scope: {
@@ -52,8 +52,8 @@ class postcssSugarPluginUiCheckboxClassesInterface extends __SInterface {
 }
 
 export interface IPostcssSugarPluginUiCheckboxClassesParams {
-    lnfs: 'default'[];
-    defaultLnf: 'default';
+    lnfs: 'solid'[];
+    defaultLnf: 'solid';
     scope: ('bare' | 'lnf' | 'tf' | 'vr')[];
 }
 
@@ -71,8 +71,8 @@ export default function ({
     replaceWith: Function;
 }) {
     const finalParams: IPostcssSugarPluginUiCheckboxClassesParams = {
-        lnfs: ['default'],
-        defaultLnf: 'default',
+        lnfs: ['solid'],
+        defaultLnf: 'solid',
         scope: [],
         ...params,
     };

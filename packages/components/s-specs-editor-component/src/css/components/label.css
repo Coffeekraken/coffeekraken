@@ -10,6 +10,10 @@
         flex-grow: 1;
     }
 
+    ._required {
+        color: sugar.color(error);
+    }
+
     ._help-icon {
         margin-inline-start: sugar.margin(10);
 

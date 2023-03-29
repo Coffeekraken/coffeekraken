@@ -18,7 +18,7 @@ declare class postcssSugarPluginUiCheckboxInterface extends __SInterface {
     };
 }
 export interface IPostcssSugarPluginUiCheckboxParams {
-    lnf: 'default';
+    lnf: 'solid';
     scope: ('bare' | 'lnf')[];
 }
 export { postcssSugarPluginUiCheckboxInterface as interface };

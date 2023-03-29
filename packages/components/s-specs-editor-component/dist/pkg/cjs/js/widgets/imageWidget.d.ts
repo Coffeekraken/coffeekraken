@@ -1,9 +1,12 @@
 export default function (component: any): {
-    keepOriginals: boolean;
     isActive(): any;
-    html({ propObj, values, path }: {
+    render({ propObj, values, path }: {
         propObj: any;
         values: any;
         path: any;
-    }): import("lit-html").TemplateResult<1>;
+    }): {
+        error: any;
+        warning: any;
+        html: import("lit-html").TemplateResult<1>;
+    };
 };

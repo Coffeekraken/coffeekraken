@@ -1,0 +1,7 @@
+.s-specs-editor_warning {
+    padding: sugar.padding(30);
+    border: 1px solid sugar.color(warning, --lighten 35);
+    background: sugar.color(warning, --lighten 45);
+    color: sugar.color(warning, --darken 10);
+    @sugar.border.radius;
+}

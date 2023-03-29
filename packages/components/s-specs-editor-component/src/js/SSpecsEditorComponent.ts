@@ -1,5 +1,7 @@
 import __SLitComponent from '@coffeekraken/s-lit-component';
 
+import { __i18n } from '@coffeekraken/s-i18n';
+
 import { __get, __set } from '@coffeekraken/sugar/object';
 
 import { define as __SColorPickerComponentDefine } from '@coffeekraken/s-color-picker-component';
@@ -20,10 +22,13 @@ import __css from '../../../../src/css/s-specs-editor-component.css'; // relativ
 
 import __define from './define';
 
+import __checkboxWidget from './widgets/checkboxWidget';
 import __colorPickerWidget from './widgets/colorPickerWidget';
 import __datetimePickerWidget from './widgets/datetimePickerWidget';
 import __htmlWidget from './widgets/htmlWidget';
 import __imageWidget from './widgets/imageWidget';
+import __integerWidget from './widgets/integerWidget';
+import __numberWidget from './widgets/numberWidget';
 import __selectWidget from './widgets/selectWidget';
 import __spacesWidget from './widgets/spacesWidget';
 import __switchWidget from './widgets/switchWidget';
@@ -87,6 +92,9 @@ export interface ISSpecsEditorComponentProps {
  * @support         edge
  *
  * @event           s-specs-editor.change               Dispatched when the user has changed some properties
+ * @event           s-specs-editor.error                Dispatched when an error has occured in any widget
+ * @event           s-specs-editor.warning                Dispatched when a warning has occured in any widget
+ * @event           s-spect-editor.valid                Dispathched when theirs no more errors in the editor
  * @event           s-specs-editor.changeMedia         Dispatched when the user has changed the media from the UI
  * @event           s-specs-editor                      Dispatched at any events. Check the "eventType" property for the event name
  *
@@ -139,9 +147,12 @@ export default class SSpecsEditorComponent extends __SLitComponent {
     }
 
     static widgetMap = {
+        checkbox: __checkboxWidget,
         html: __htmlWidget,
         boolean: __switchWidget,
         image: __imageWidget,
+        integer: __integerWidget,
+        number: __numberWidget,
         spaces: __spacesWidget,
         switch: __switchWidget,
         color: __colorPickerWidget,
@@ -163,6 +174,8 @@ export default class SSpecsEditorComponent extends __SLitComponent {
         actives: {},
     };
 
+    _isValid = true;
+    _errors = [];
     _widgets = {};
 
     constructor() {
@@ -172,12 +185,6 @@ export default class SSpecsEditorComponent extends __SLitComponent {
                 interface: __SSpecsEditorComponentInterface,
             }),
         );
-    }
-
-    updated(changedProperties: Map<string, unknown>) {
-        if (changedProperties.has('media')) {
-            this.requestUpdate();
-        }
     }
 
     isPathResponsive(path: string[]): any {
@@ -352,8 +359,6 @@ export default class SSpecsEditorComponent extends __SLitComponent {
             },
         });
 
-        _console.log('Apply', Object.assign({}, this.props.specs.values));
-
         this.requestUpdate();
     }
 
@@ -362,6 +367,9 @@ export default class SSpecsEditorComponent extends __SLitComponent {
      * This will dispatch en event "s-specs-editor.save" with as detail the current values object
      */
     save(): void {
+        if (!this._isValid) {
+            return;
+        }
         this.utils.dispatchEvent('save', {
             bubbles: true,
             detail: {
@@ -369,31 +377,6 @@ export default class SSpecsEditorComponent extends __SLitComponent {
                 values: Object.assign({}, this.props.specs.values),
             },
         });
-    }
-
-    _update(path: string[], propSpecs: any = null, e: any = null) {
-        // value path
-        const valuePath = path.filter((v) => v !== 'props').join('.');
-
-        if (e) {
-            let finalValue = e.target.value;
-            if (e.currentTarget.type === 'checkbox') {
-                finalValue = e.currentTarget.checked;
-            }
-
-            switch (e.target.tagName.toLowerCase()) {
-                default:
-                    // @TODO            check to handle "default" in render part and not here...
-                    // if (finalValue === propSpecs.default) {
-                    //     __deleteProperty(this.props.specs.values, valuePath);
-                    // } else {
-                    this.setValue(path, finalValue);
-                    // }
-                    break;
-            }
-        }
-
-        this.apply();
     }
 
     _toggle(id: string): void {
@@ -485,12 +468,45 @@ export default class SSpecsEditorComponent extends __SLitComponent {
     }
 
     /**
+     * Render an error inside the specs editor
+     */
+    renderError(propObj: any, path: string[], message: string) {
+        if (!message) {
+            return '';
+        }
+        return html`
+            <div class="${this.utils.cls('_error')}">
+                <p class="_message">${message}</p>
+            </div>
+        `;
+    }
+
+    /**
+     * Render a warning inside the specs editor
+     */
+    renderWarning(propObj: any, path: string[], message: string) {
+        if (!message) {
+            return '';
+        }
+        return html`
+            <div class="${this.utils.cls('_warning')}">
+                <p class="_message">${message}</p>
+            </div>
+        `;
+    }
+
+    /**
      * Render the field label with the responsive icons if needed, etc...
      */
     renderLabel(propObj: any, path: string[]) {
         return html`
             <span>
-                <h3 class="_title">${propObj.title ?? propObj.id}</h3>
+                <h3 class="_title">
+                    ${propObj.title ?? propObj.id}
+                    ${propObj.required
+                        ? html` <span class="_required">*</span> `
+                        : ''}
+                </h3>
                 ${this.props.frontspec?.media?.queries &&
                 this.isPathResponsive(path)
                     ? this._renderMediaSelector(path)
@@ -507,6 +523,36 @@ export default class SSpecsEditorComponent extends __SLitComponent {
                     : ''}
             </span>
         `;
+    }
+
+    updated(changedProperties: Map<string, unknown>) {
+        // handle errors events, etc...
+        if (this._errors.length) {
+            this.utils.dispatchEvent('error', {
+                detail: {
+                    errors: this._errors,
+                },
+            });
+            if (this._isValid) {
+                this._isValid = false;
+                this.requestUpdate();
+            }
+        } else {
+            this.utils.dispatchEvent('valid', {
+                detail: {},
+            });
+            if (!this._isValid) {
+                this._isValid = true;
+                this.requestUpdate();
+            }
+        }
+
+        // reset errors
+        this._errors = [];
+
+        if (changedProperties.has('media')) {
+            this.requestUpdate();
+        }
     }
 
     /**
@@ -534,24 +580,59 @@ export default class SSpecsEditorComponent extends __SLitComponent {
             return;
         }
 
+        const widgetResult = widget.render({
+            values,
+            path,
+            propObj,
+        });
+
+        if (widgetResult.error) {
+            this._errors.push(widgetResult.error);
+        }
+        if (widgetResult.warning) {
+            this.utils.dispatchEvent('warning', {
+                detail: {
+                    warning: widgetResult.warning,
+                    widget,
+                },
+            });
+        }
+
         return {
-            keepOriginals: widget.keepOriginals,
-            html: widget.html({
-                values,
-                path,
-                propObj,
-            }),
+            error: widgetResult.error,
+            warning: widgetResult.warning,
+            html: html` ${widgetResult.html} `,
         };
     }
 
     renderWidget(propObj, path) {
         const widget = this._getRenderedWidget(propObj, path);
 
+        if (!widget) {
+            return html`
+                <p class="s-typo:p">
+                    ${__i18n(
+                        'Sorry but no widget is registered to handle the "%s" type...',
+                        {
+                            id: 's-specs-editor.widget.no',
+                            tokens: {
+                                '%s': propObj.type,
+                            },
+                        },
+                    )}
+                </p>
+            `;
+        }
+
         return html`
             ${widget
                 ? html` <div class="${this.utils.cls('_widget')}">
                       ${widget.html}
                   </div>`
+                : ''}
+            ${widget.error ? this.renderError(propObj, path, widget.error) : ''}
+            ${widget.warning
+                ? this.renderWarning(propObj, path, widget.warning)
                 : ''}
         `;
     }
@@ -564,22 +645,11 @@ export default class SSpecsEditorComponent extends __SLitComponent {
             return this._renderRepeatableProps(propObj, path);
         }
 
-        const widget = this._getRenderedWidget(propObj, path);
-
-        if (!widget) {
-            return html`
-                <p class="s-typo:p">
-                    Sorry but no widget is registered to handle the
-                    "${propObj.type}" type...
-                </p>
-            `;
-        }
-
         return html`
             <div
                 prop="${propObj.id}"
                 class="${this.utils.cls('_prop')} ${this.utils.cls(
-                    '_prop-${typeLower}',
+                    `_prop-${typeLower}`,
                 )}"
             >
                 ${this.renderWidget(propObj, path)}
@@ -671,18 +741,6 @@ export default class SSpecsEditorComponent extends __SLitComponent {
         </div>`;
     }
 
-    _renderPropObj(
-        propObj,
-        path,
-        settings: Partial<ISSpecsEditorRenderSettings>,
-    ) {
-        if (propObj.ghost && !this.props.ghostSpecs) {
-            return '';
-        }
-
-        return html` ${this.renderProp(propObj, path, settings)} `;
-    }
-
     renderProps(specs: any, path: string[] = [], settings?: any) {
         const finalSettings = {
             repeatable: true,
@@ -694,21 +752,12 @@ export default class SSpecsEditorComponent extends __SLitComponent {
             return this._renderRepeatableProps(specs, path);
         } else {
             if (!specs.props) {
-                return this._renderPropObj(specs, path, finalSettings);
+                return this.renderProp(specs, path, finalSettings);
             }
 
             return html`
                 ${Object.keys(specs.props).map((prop) => {
                     const propObj = specs.props[prop];
-
-                    let widget;
-                    if (finalSettings.widgets) {
-                        widget = this._getRenderedWidget(propObj, [
-                            ...path,
-                            'props',
-                            prop,
-                        ]);
-                    }
 
                     if (propObj.props) {
                         return html`
@@ -752,33 +801,20 @@ export default class SSpecsEditorComponent extends __SLitComponent {
                                         ${propObj.description}
                                     </p> -->
                                 </div>
-                                ${widget
-                                    ? html`
-                                          <div
-                                              prop="${propObj.id}"
-                                              class="${this.utils.cls('_prop')}"
-                                          >
-                                              ${this.renderWidget(propObj, [
-                                                  ...path,
-                                                  'props',
-                                                  prop,
-                                              ])}
-                                          </div>
-                                      `
-                                    : ''}
-                                ${!widget || widget.keepOriginals
-                                    ? html`
-                                          ${this.renderProps(
-                                              propObj,
-                                              [...path, 'props', prop],
-                                              finalSettings,
-                                          )}
-                                      `
-                                    : ''}
+                                <div
+                                    prop="${propObj.id}"
+                                    class="${this.utils.cls('_prop')}"
+                                >
+                                    ${this.renderProp(
+                                        propObj,
+                                        [...path, 'props', prop],
+                                        finalSettings,
+                                    )}
+                                </div>
                             </div>
                         `;
                     } else {
-                        return this._renderPropObj(
+                        return this.renderProp(
                             propObj,
                             [...path, 'props', prop],
                             finalSettings,
@@ -811,7 +847,6 @@ export default class SSpecsEditorComponent extends __SLitComponent {
                                   >
                                       ${this.props.specs.description}
                                   </p> -->
-
                                   <nav class="_actions">
                                       ${this.props.features?.delete
                                           ? html`
@@ -833,10 +868,14 @@ export default class SSpecsEditorComponent extends __SLitComponent {
                                                 <button
                                                     class="_action _action-save"
                                                     @click=${() => {
+                                                        _console.log('^SAVE');
                                                         this.save();
                                                     }}
+                                                    ?disabled=${!this._isValid}
                                                 >
-                                                    Save
+                                                    ${__i18n('Save', {
+                                                        id: 's-specs-editor.actions.save',
+                                                    })}
                                                 </button>
                                             `
                                           : ''}

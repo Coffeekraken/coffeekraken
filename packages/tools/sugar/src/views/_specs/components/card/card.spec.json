@@ -24,18 +24,22 @@
             "description": "Specify the direction of the card. Horizontal, vertical, etc...",
             "options": [
                 {
+                    "id": "vertical",
                     "name": "Vertical",
                     "value": "vertical"
                 },
                 {
+                    "id": "horizontal",
                     "name": "Horizontal",
                     "value": "horizontal"
                 },
                 {
+                    "id": "vertical-reverse",
                     "name": "Vertical reversed",
                     "value": "vertical-reverse"
                 },
                 {
+                    "id": "horizontal-reverse",
                     "name": "Horizontal reversed",
                     "value": "horizontal-reverse"
                 }

@@ -1,7 +1,9 @@
 import { __i18n } from '@coffeekraken/s-i18n';
 import { html } from 'lit';
 
-import type { ISSelect } from '@specimen/types';
+import { __SSelect } from '@specimen/types/utils';
+
+import type { ISSelectData } from '@specimen/types';
 
 export default function (component) {
     let error, warning;
@@ -11,39 +13,15 @@ export default function (component) {
             return true;
         },
         render({ propObj, values, path }) {
-            if (!values) {
-                values = <ISSelect>{
-                    value:
-                        propObj.default && !Array.isArray(propObj.default)
-                            ? [propObj.default]
-                            : !propObj.default
-                            ? []
-                            : propObj.default,
+            if (!values?.value) {
+                values = <ISSelectData>{
+                    value: [],
                 };
             }
 
-            function getValueById(id) {
-                for (let [i, valueObj] of values.value.entries()) {
-                    if (valueObj.id === id) {
-                        return valueObj;
-                    }
-                }
-            }
-            function addValue(option) {
-                // value already in values
-                if (getValueById(option.id)) {
-                    return;
-                }
-                values.value.push(option);
-            }
-            function removeValue(option) {
-                const valueObj = getValueById(option.id);
-                // value not in values
-                if (!valueObj) {
-                    return;
-                }
-                values.value.splice(values.value.indexOf(valueObj), 1);
-            }
+            const select = new __SSelect(propObj, values);
+
+            _console.log('sel', select.getSelected());
 
             return {
                 error,
@@ -68,18 +46,15 @@ export default function (component) {
                                             if (option.id !== $option.id) {
                                                 continue;
                                             }
-
                                             if ($option.selected) {
-                                                addValue(option);
+                                                select.select(option.id);
                                             } else {
-                                                removeValue(option);
+                                                select.unselect(option.id);
                                             }
                                         }
                                     }
 
-                                    const itemsCount = Object.keys(
-                                        values.value,
-                                    ).length;
+                                    const itemsCount = values.value.length;
 
                                     // min
                                     if (
@@ -88,11 +63,11 @@ export default function (component) {
                                         itemsCount < propObj.min
                                     ) {
                                         error = __i18n(
-                                            'You must select at least %s item(s)',
+                                            'You must select at least %s item__(s)__',
                                             {
                                                 id: 's-specs-editor.widget.select.min',
                                                 tokens: {
-                                                    '%s': propObj.min,
+                                                    s: propObj.min,
                                                 },
                                             },
                                         );
@@ -106,11 +81,11 @@ export default function (component) {
                                         itemsCount > propObj.max
                                     ) {
                                         error = __i18n(
-                                            'You must select at most %s item(s)',
+                                            'You must select at most %s item__(s)__',
                                             {
                                                 id: 's-specs-editor.widget.select.max',
                                                 tokens: {
-                                                    '%s': propObj.max,
+                                                    s: propObj.max,
                                                 },
                                             },
                                         );
@@ -139,10 +114,12 @@ export default function (component) {
                                             .value="${option.value}"
                                             value="${option.value}"
                                             id="${option.id ?? `option-${i}`}"
-                                            ?selected=${getValueById(option.id)}
-                                            .selected=${getValueById(
+                                            ?selected=${select.isSelected(
                                                 option.id,
-                                            ) !== undefined}
+                                            )}
+                                            .selected=${select.isSelected(
+                                                option.id,
+                                            )}
                                         >
                                             ${option.name}
                                         </option>

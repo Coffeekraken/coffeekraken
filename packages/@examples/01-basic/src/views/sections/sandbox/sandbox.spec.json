@@ -92,11 +92,8 @@
             "type": "Select",
             "title": "Select",
             "description": "My cool select",
-            "default": {
-                "id": "value-2",
-                "name": "Option #2",
-                "value": "value 2"
-            },
+            "default": "value-2",
+            "multiple": true,
             "options": [
                 {
                     "id": "value-1",
@@ -107,6 +104,11 @@
                     "id": "value-2",
                     "name": "Option #2",
                     "value": "value 2"
+                },
+                {
+                    "id": "value-3",
+                    "name": "Option #3",
+                    "value": "value 3"
                 }
             ],
             "required": true

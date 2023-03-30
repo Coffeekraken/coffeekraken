@@ -87,11 +87,11 @@ export default function (component) {
                                                 itemsCount < propObj.min
                                             ) {
                                                 error = __i18n(
-                                                    'You must select at least %s item(s)',
+                                                    'You must select at least %s item__(s)__',
                                                     {
                                                         id: 's-specs-editor.widget.checkbox.min',
                                                         tokens: {
-                                                            '%s': propObj.min,
+                                                            s: propObj.min,
                                                         },
                                                     },
                                                 );
@@ -104,7 +104,7 @@ export default function (component) {
                                                 itemsCount > propObj.max
                                             ) {
                                                 error = __i18n(
-                                                    'You must select at most %s item(s)',
+                                                    'You must select at most %s item__(s)__',
                                                     {
                                                         id: 's-specs-editor.widget.checkbox.max',
                                                         tokens: {

@@ -4,18 +4,22 @@
     "description": "The available containers",
     "options": [
         {
+            "id": "none",
             "name": "None",
             "value": false
         },
         {
+            "id": "default",
             "name": "Default",
             "value": "default"
         },
         {
+            "id": "wide",
             "name": "Wide",
             "value": "wide"
         },
         {
+            "id": "full",
             "name": "Full",
             "value": "full"
         }

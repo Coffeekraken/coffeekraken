@@ -5,18 +5,22 @@
     "required": true,
     "options": [
         {
+            "id": "wide",
             "name": "Wide",
             "value": "wide"
         },
         {
+            "id": "desktop",
             "name": "desktop",
             "value": "desktop"
         },
         {
+            "id": "tablet",
             "name": "tablet",
             "value": "tablet"
         },
         {
+            "id": "mobile",
             "name": "mobile",
             "value": "mobile"
         }

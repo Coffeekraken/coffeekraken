@@ -606,32 +606,32 @@ export default class SSpecsEditorComponent extends __SLitComponent {
     }
 
     renderWidget(propObj, path) {
-        const widget = this._getRenderedWidget(propObj, path);
+        let widget = this._getRenderedWidget(propObj, path);
 
         if (!widget) {
-            return html`
-                <p class="s-typo:p">
-                    ${__i18n(
-                        'Sorry but no widget is registered to handle the "%s" type...',
-                        {
-                            id: 's-specs-editor.widget.no',
-                            tokens: {
-                                '%s': propObj.type,
-                            },
+            widget = {
+                error: __i18n(
+                    'Sorry but no widget is registered to handle the "%s" type...',
+                    {
+                        id: 's-specs-editor.widget.no',
+                        tokens: {
+                            '%s': propObj.type,
                         },
-                    )}
-                </p>
-            `;
+                    },
+                ),
+            };
         }
 
         return html`
-            ${widget
+            ${widget?.html
                 ? html` <div class="${this.utils.cls('_widget')}">
                       ${widget.html}
                   </div>`
                 : ''}
-            ${widget.error ? this.renderError(propObj, path, widget.error) : ''}
-            ${widget.warning
+            ${widget?.error
+                ? this.renderError(propObj, path, widget.error)
+                : ''}
+            ${widget?.warning
                 ? this.renderWarning(propObj, path, widget.warning)
                 : ''}
         `;

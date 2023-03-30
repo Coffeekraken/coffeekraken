@@ -4,34 +4,45 @@
     "description": "List of available theme colors",
     "options": [
         {
+            "id": "main",
             "name": "Main",
             "value": "main"
         },
         {
+            "id": "accent",
             "name": "Accent",
             "value": "accent"
         },
         {
+            "id": "complementary",
             "name": "Complementary",
             "value": "complementary"
         },
         {
+            "id": "success",
             "name": "Success",
             "value": "success"
         },
         {
+            "id": "info",
             "name": "Info",
             "value": "info"
         },
         {
+            "id": "warning",
             "name": "Warning",
             "value": "warning"
         },
         {
+            "id": "error",
             "name": "Error",
             "value": "error"
         }
     ],
-    "default": "accent",
+    "default": {
+        "id": "accent",
+        "name": "Accent",
+        "value": "accent"
+    },
     "required": true
 }

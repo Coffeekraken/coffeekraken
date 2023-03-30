@@ -26,13 +26,21 @@ export default {
         text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas nec vestibulum mi. Etiam nec arcu ante.',
         cta: {
             label: 'CTA label...',
-            color: 'accent',
+            color: {
+                id: 'accent',
+                name: 'Accent',
+                value: 'accent',
+            },
             link: {
                 url: '/contact',
                 title: 'Discover more on apple.com',
             },
         },
-        direction: 'horizontal',
+        direction: {
+            id: 'horizontal',
+            name: 'Horizontal',
+            value: 'horizontal',
+        },
     },
     cardTwo: {
         image: null,
@@ -55,12 +63,20 @@ export default {
         text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
         cta: {
             label: 'CTA label...',
-            color: 'accent',
+            color: {
+                id: 'accent',
+                name: 'Accent',
+                value: 'accent',
+            },
             link: {
                 url: '/contact',
                 title: 'Discover more on apple.com',
             },
         },
-        direction: 'horizontal',
+        direction: {
+            id: 'horizontal',
+            name: 'Horizontal',
+            value: 'horizontal',
+        },
     },
 };

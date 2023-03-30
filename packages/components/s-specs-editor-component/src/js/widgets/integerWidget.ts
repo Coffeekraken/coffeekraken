@@ -41,7 +41,7 @@ export default function (component) {
                                             {
                                                 id: 's-specs-editor.widget.integer.invalid',
                                                 tokens: {
-                                                    '%s': value,
+                                                    s: value,
                                                 },
                                             },
                                         );
@@ -69,7 +69,7 @@ export default function (component) {
                                             {
                                                 id: 's-specs-editor.widget.integer.min',
                                                 tokens: {
-                                                    '%s': propObj.min,
+                                                    s: propObj.min,
                                                 },
                                             },
                                         );
@@ -88,7 +88,7 @@ export default function (component) {
                                             {
                                                 id: 's-specs-editor.widget.integer.max',
                                                 tokens: {
-                                                    '%s': propObj.max,
+                                                    s: propObj.max,
                                                 },
                                             },
                                         );

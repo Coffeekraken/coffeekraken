@@ -111,8 +111,6 @@ export default function (component) {
                                 ${propObj.options.map(
                                     (option, i) => html`
                                         <option
-                                            .value="${option.value}"
-                                            value="${option.value}"
                                             id="${option.id ?? `option-${i}`}"
                                             ?selected=${select.isSelected(
                                                 option.id,

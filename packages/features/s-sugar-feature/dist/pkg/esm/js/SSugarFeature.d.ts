@@ -6,6 +6,7 @@ export interface ISSugarFeatureProps {
     scrolledDelta: number;
     vhvar: boolean;
     inputAdditionalAttributes: boolean;
+    autoResize: boolean;
     linksStateAttributes: boolean;
     preventScrollRestoration: boolean;
     containerQuery: boolean;
@@ -23,6 +24,7 @@ export default class SSugarFeature extends __SFeature implements ISFeature {
     _pleasantCss(): void;
     _scrolled(): void;
     _vhvar(): void;
+    _autoResize(): void;
     _confirmBtn(): void;
 }
 export { __define as define };

@@ -19,14 +19,14 @@ export default (api) => {
          * @name                main
          * @namespace            config.themeColor
          * @type                Color
-         * @default             hsla(212,6,50,1)
+         * @default             hsla(212,6%,50%,1)
          *
          * Specify the "main" color value.
          *
          * @since             2.0.0
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
-        main: 'hsla(212,6,50,1)',
+        main: 'hsla(212,6%,50%,1)',
 
         /**
          * @name                accent

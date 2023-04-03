@@ -34,6 +34,10 @@ export default class SSpecsEditorComponentWysiwygWidget {
         __querySelectorLive('.ce-block__content', ($elm) => {
             $elm.classList.add('s-rhythm', 's-rhythm--vertical');
         });
+
+        __querySelectorLive('.ce-block__content textarea', ($textarea) => {
+            $textarea.addEventListener('keyup', (e) => {});
+        });
     }
 
     async firstUpdated() {
@@ -54,6 +58,12 @@ export default class SSpecsEditorComponentWysiwygWidget {
 
         this._editorJs = new __EditorJS({
             holder: `editor-js-${this._path.join('-')}`,
+            onChange: async (api, event) => {
+                const result = await this._editorJs.save();
+                _console.log('SAVED', result);
+                // const result = await api.saver.save();
+                // _console.log('SAVC', result);
+            },
             tools,
         });
         await this._editorJs.isReady;
@@ -62,6 +72,10 @@ export default class SSpecsEditorComponentWysiwygWidget {
     _createEditorJsBlockClass(typo: string, typoObj: any): class {
         if (typoObj.style?.display === 'block') {
             return class EditorJsBlockClass {
+                static get isInline() {
+                    return false;
+                }
+
                 static get toolbox() {
                     return {
                         title: typo,
@@ -69,24 +83,44 @@ export default class SSpecsEditorComponentWysiwygWidget {
                     };
                 }
 
-                _tag = 'span';
+                _isTypoTag = false;
+                _tag = 'SPAN';
 
-                constructor() {
-                    this._tag =
-                        __htmlTagToHtmlClassMap[typo] !== undefined
-                            ? typo
-                            : 'span';
+                state = false;
+                api;
+
+                constructor({ api }) {
+                    this.api = api;
+                    this._isTypoTag =
+                        __htmlTagToHtmlClassMap[typo] !== undefined;
+                    this._tag = this._isTypoTag
+                        ? typo.toUpperCase()
+                        : this._tag;
                 }
 
                 render() {
-                    const $input = document.createElement('input');
-                    $input.classList.add(`s-typo`, `s-typo--${typo}`, typo);
-                    return $input;
+                    const $div = document.createElement(this._tag);
+                    $div.contentEditable = true;
+                    $div.innerHTML = '';
+                    $div.setAttribute('wysiwyg-typo', typo);
+                    $div.classList.add('s-typo', `s-typo--${typo}`);
+                    return $div;
+
+                    // return this.wrapper;
+
+                    // const $input = document.createElement('input');
+                    // $input.classList.add(`s-typo`, `s-typo--${typo}`, typo);
+                    // // __autoResize($input);
+                    // return $input;
                 }
 
                 save(blockContent) {
+                    Array.from(blockContent.children).forEach(($child) => {
+                        _console.log('Chilf', $child);
+                    });
+
                     return {
-                        value: blockContent.value,
+                        value: blockContent,
                     };
                 }
             };
@@ -96,11 +130,27 @@ export default class SSpecsEditorComponentWysiwygWidget {
                     return true;
                 }
 
-                save(blockContent) {
-                    return {
-                        value: blockContent.value,
-                    };
+                _isTypoTag = false;
+                _tag = 'SPAN';
+
+                state = false;
+                api;
+
+                constructor({ api }) {
+                    this.api = api;
+                    this._isTypoTag =
+                        __htmlTagToHtmlClassMap[typo] !== undefined;
+                    this._tag = this._isTypoTag
+                        ? typo.toUpperCase()
+                        : this._tag;
                 }
+
+                // save(blockContent) {
+                //     _console.log('COntent', blockContent);
+                //     return {
+                //         value: blockContent.value,
+                //     };
+                // }
 
                 render() {
                     const $button = document.createElement('button');
@@ -108,9 +158,16 @@ export default class SSpecsEditorComponentWysiwygWidget {
 
                     if (typoObj.type === 'color') {
                         $button.classList.add('_color');
-                        $button.style.backgroundColor =
-                            typoObj.style.backgroundImage ??
-                            typoObj.style.color;
+                        $button.textContent = 'Ab';
+                        $button.classList.add('s-typo', `s-typo--${typo}`);
+                        $button.style.setProperty(
+                            '--s-wysiwyg-color',
+                            typoObj.style.color,
+                        );
+                        $button.style.fontWeight = 'bold';
+                        // $button.style.color =
+                        //     typoObj.style.backgroundImage ??
+                        //     typoObj.style.color;
                     } else {
                         const label = typoObj.button?.label ?? typo;
                         if (label.match(/^\<[a-zA-Z0-9]/)) {
@@ -128,37 +185,58 @@ export default class SSpecsEditorComponentWysiwygWidget {
                 }
 
                 surround(range) {
-                    if (this.state) {
-                        // If highlights is already applied, do nothing for now
+                    if (!range) {
                         return;
                     }
 
-                    const selectedText = range.extractContents();
+                    let termWrapper = this.api.selection.findParentTag(
+                        this._tag,
+                    );
 
-                    const isTypoATag =
-                        __htmlTagToHtmlClassMap[typo] !== undefined;
+                    _console.log('Wrapper', termWrapper);
 
-                    _console.log('a', typo, isTypoATag);
-
-                    // Create MARK element
-                    const $tag = document.createElement('span');
-                    $tag.classList.add(`s-typo`, `s-typo--${typo}`);
-
-                    // Append to the MARK element selected TextNode
-                    $tag.appendChild(selectedText);
-
-                    // Insert new element
-                    range.insertNode($tag);
+                    if (termWrapper) {
+                        this.unwrap(termWrapper);
+                    } else {
+                        this.wrap(range);
+                    }
                 }
 
-                checkState(selection) {
-                    const text = selection.anchorNode;
-                    if (!text) {
-                        return;
-                    }
-                    const anchorElement =
-                        text instanceof Element ? text : text.parentElement;
-                    this.state = !!anchorElement.closest('MARK');
+                wrap(range) {
+                    let span = document.createElement(this._tag);
+                    span.classList.add('s-typo', `s-typo--${typo}`);
+                    span.appendChild(range.extractContents());
+                    range.insertNode(span);
+                    this.api.selection.expandToTag(span);
+                }
+
+                unwrap(termWrapper) {
+                    this.api.selection.expandToTag(termWrapper);
+
+                    let sel = window.getSelection();
+                    let range = sel.getRangeAt(0);
+
+                    let unwrappedContent = range.extractContents();
+
+                    termWrapper.parentNode.removeChild(termWrapper);
+
+                    range.insertNode(unwrappedContent);
+
+                    sel.removeAllRanges();
+                    sel.addRange(range);
+                }
+
+                /**
+                 * Check and change Term's state for current selection
+                 */
+                checkState() {
+                    _console.log('Check', typo);
+
+                    const termTag = this.api.selection.findParentTag(this._tag);
+
+                    this.state = !!termTag;
+
+                    // this.button.classList.toggle(this.iconClasses.active, !!termTag);
                 }
             };
         }

@@ -3,7 +3,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.__videosLazySrcAttribute = exports.__smoothScrollOnPageLoad = exports.__smoothScrollOnHashChange = exports.__smoothScrollOnAnchorLinks = exports.__smoothScroll = exports.__linksStateAttributes = exports.__inputAdditionalEvents = exports.__inputAdditionalAttributes = exports.__imagesLoadedAttribute = exports.__imagesLazySrcAttribute = exports.__confirmButton = void 0;
+exports.__videosLazySrcAttribute = exports.__smoothScrollOnPageLoad = exports.__smoothScrollOnHashChange = exports.__smoothScrollOnAnchorLinks = exports.__smoothScroll = exports.__linksStateAttributes = exports.__inputAdditionalEvents = exports.__inputAdditionalAttributes = exports.__imagesLoadedAttribute = exports.__imagesLazySrcAttribute = exports.__confirmButton = exports.__autoResize = void 0;
+const autoResize_1 = __importDefault(require("./autoResize"));
+exports.__autoResize = autoResize_1.default;
 const confirmButton_1 = __importDefault(require("./confirmButton"));
 exports.__confirmButton = confirmButton_1.default;
 const imagesLazySrcAttribute_1 = __importDefault(require("./imagesLazySrcAttribute"));
@@ -26,4 +28,4 @@ const smoothScrollOnPageLoad_1 = __importDefault(require("./smoothScrollOnPageLo
 exports.__smoothScrollOnPageLoad = smoothScrollOnPageLoad_1.default;
 const videosLazySrcAttribute_1 = __importDefault(require("./videosLazySrcAttribute"));
 exports.__videosLazySrcAttribute = videosLazySrcAttribute_1.default;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7OztBQUFBLG9FQUE4QztBQWExQywwQkFiRyx1QkFBZSxDQWFIO0FBWm5CLHNGQUFnRTtBQWE1RCxtQ0FiRyxnQ0FBd0IsQ0FhSDtBQVo1QixvRkFBOEQ7QUFhMUQsa0NBYkcsK0JBQXVCLENBYUg7QUFaM0IsNEZBQXNFO0FBYWxFLHNDQWJHLG1DQUEyQixDQWFIO0FBWi9CLG9GQUE4RDtBQWExRCxrQ0FiRywrQkFBdUIsQ0FhSDtBQVozQixrRkFBNEQ7QUFheEQsaUNBYkcsOEJBQXNCLENBYUg7QUFaMUIsa0VBQTRDO0FBYXhDLHlCQWJHLHNCQUFjLENBYUg7QUFabEIsNEZBQXNFO0FBYWxFLHNDQWJHLG1DQUEyQixDQWFIO0FBWi9CLDBGQUFvRTtBQWFoRSxxQ0FiRyxrQ0FBMEIsQ0FhSDtBQVo5QixzRkFBZ0U7QUFhNUQsbUNBYkcsZ0NBQXdCLENBYUg7QUFaNUIsc0ZBQWdFO0FBYTVELG1DQWJHLGdDQUF3QixDQWFIIn0=
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7OztBQUFBLDhEQUF3QztBQWNwQyx1QkFkRyxvQkFBWSxDQWNIO0FBYmhCLG9FQUE4QztBQWMxQywwQkFkRyx1QkFBZSxDQWNIO0FBYm5CLHNGQUFnRTtBQWM1RCxtQ0FkRyxnQ0FBd0IsQ0FjSDtBQWI1QixvRkFBOEQ7QUFjMUQsa0NBZEcsK0JBQXVCLENBY0g7QUFiM0IsNEZBQXNFO0FBY2xFLHNDQWRHLG1DQUEyQixDQWNIO0FBYi9CLG9GQUE4RDtBQWMxRCxrQ0FkRywrQkFBdUIsQ0FjSDtBQWIzQixrRkFBNEQ7QUFjeEQsaUNBZEcsOEJBQXNCLENBY0g7QUFiMUIsa0VBQTRDO0FBY3hDLHlCQWRHLHNCQUFjLENBY0g7QUFibEIsNEZBQXNFO0FBY2xFLHNDQWRHLG1DQUEyQixDQWNIO0FBYi9CLDBGQUFvRTtBQWNoRSxxQ0FkRyxrQ0FBMEIsQ0FjSDtBQWI5QixzRkFBZ0U7QUFjNUQsbUNBZEcsZ0NBQXdCLENBY0g7QUFiNUIsc0ZBQWdFO0FBYzVELG1DQWRHLGdDQUF3QixDQWNIIn0=

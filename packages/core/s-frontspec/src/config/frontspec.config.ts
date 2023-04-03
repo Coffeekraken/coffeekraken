@@ -240,6 +240,12 @@ export default function (api) {
                         for (let [key, value] of Object.entries(
                             api.theme.typo,
                         )) {
+                            // exclude "gradient" for now...
+                            // @TODO        check to add theme back
+                            if (key.toLowerCase().includes('gradient')) {
+                                continue;
+                            }
+
                             const finalStyle = Object.assign(
                                 {},
                                 value.style ?? {},

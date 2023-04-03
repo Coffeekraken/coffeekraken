@@ -27,6 +27,11 @@ export default class SSugarFeatureInterface extends __SInterface {
             type: string;
             default: boolean;
         };
+        autoResize: {
+            description: string;
+            type: string;
+            default: boolean;
+        };
         confirmBtn: {
             description: string;
             type: string;

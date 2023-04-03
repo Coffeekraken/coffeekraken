@@ -6,6 +6,7 @@ import {
     __preventScrollRestoration,
 } from '@coffeekraken/sugar/dom';
 import {
+    __autoResize,
     __confirmButton,
     __inputAdditionalAttributes,
     __linksStateAttributes,
@@ -20,6 +21,7 @@ export interface ISSugarFeatureProps {
     scrolledDelta: number;
     vhvar: boolean;
     inputAdditionalAttributes: boolean;
+    autoResize: boolean;
     linksStateAttributes: boolean;
     preventScrollRestoration: boolean;
     containerQuery: boolean;
@@ -134,6 +136,8 @@ export default class SSugarFeature extends __SFeature implements ISFeature {
         if (this.props.scrolled) this._scrolled();
         // vhvar
         if (this.props.vhvar) this._vhvar();
+        // auto resize
+        if (this.props.autoResize) this._autoResize();
         // confirm button
         if (this.props.confirmBtn) this._confirmBtn();
         // resizeTransmations
@@ -206,6 +210,9 @@ export default class SSugarFeature extends __SFeature implements ISFeature {
             vh = window.innerHeight * 0.01;
             document.documentElement.style.setProperty('--vh', `${vh}px`);
         });
+    }
+    _autoResize() {
+        __autoResize();
     }
     _confirmBtn() {
         __confirmButton();

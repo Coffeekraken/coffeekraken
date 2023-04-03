@@ -4,48 +4,60 @@ import { define as __SSpacesSelectorComponentDefine } from '@coffeekraken/s-spac
 
 __SSpacesSelectorComponentDefine();
 
-export default function (component) {
-    let error, warning;
+export default class SSpecsEditorComponentSpacesWidget {
+    _error;
+    _warning;
+    _component;
+    _propObj;
+    _path;
 
-    return {
-        render({ propObj, values, path }) {
-            const spaces = {
-                padding: [],
-                margin: [],
-            };
+    static isActive() {
+        return true;
+    }
 
-            propObj.props.paddingTop.options.forEach((option) => {
-                spaces.padding.push({
-                    ...option,
-                    default: option.value == propObj.props.paddingTop.default,
-                });
+    constructor({ component, propObj, path }) {
+        this._component = component;
+        this._propObj = propObj;
+        this._path = path;
+    }
+
+    render({ propObj, values, path }) {
+        const spaces = {
+            padding: [],
+            margin: [],
+        };
+
+        propObj.props.paddingTop.options.forEach((option) => {
+            spaces.padding.push({
+                ...option,
+                default: option.value == propObj.props.paddingTop.default,
             });
-            propObj.props.marginTop.options.forEach((option) => {
-                spaces.margin.push({
-                    ...option,
-                    default: option.value == propObj.props.marginTop.default,
-                });
+        });
+        propObj.props.marginTop.options.forEach((option) => {
+            spaces.margin.push({
+                ...option,
+                default: option.value == propObj.props.marginTop.default,
             });
+        });
 
-            return {
-                error,
-                warning,
-                html: html`
-                    <div
-                        class="${component.utils.cls('_spaces-widget')}"
-                        @s-spaces-selector.change=${(e) => {
-                            const setPath = `${path.join('.')}`;
-                            component.setValue(setPath, e.detail);
-                            component.apply();
-                        }}
-                    >
-                        <s-spaces-selector
-                            .spaces=${spaces}
-                            .values=${Object.assign({}, values ?? {})}
-                        ></s-spaces-selector>
-                    </div>
-                `,
-            };
-        },
-    };
+        return {
+            error: this._error,
+            warning: this._warning,
+            html: html`
+                <div
+                    class="${this._component.utils.cls('_spaces-widget')}"
+                    @s-spaces-selector.change=${(e) => {
+                        const setPath = `${path.join('.')}`;
+                        this._component.setValue(setPath, e.detail);
+                        this._component.apply();
+                    }}
+                >
+                    <s-spaces-selector
+                        .spaces=${spaces}
+                        .values=${Object.assign({}, values ?? {})}
+                    ></s-spaces-selector>
+                </div>
+            `,
+        };
+    }
 }

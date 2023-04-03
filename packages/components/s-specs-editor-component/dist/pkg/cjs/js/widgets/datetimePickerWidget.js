@@ -1,54 +1,61 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const lit_1 = require("lit");
-function default_1(component) {
-    let error, warning;
-    return {
-        isActive() {
-            return true;
-        },
-        render({ propObj, values, path }) {
-            var _a, _b, _c, _d;
-            if (!values) {
-                values = {};
-            }
-            return {
-                error,
-                warning,
-                html: (0, lit_1.html) `
-                    <div
-                        class="${component.utils.cls('_datetime-picker-widget')}"
-                    >
-                        <label
-                            class="${component.utils.cls('_label', 's-label s-label--block')}"
-                        >
-                            <s-datetime-picker
-                                value="${(_b = (_a = values.value) !== null && _a !== void 0 ? _a : propObj.default) !== null && _b !== void 0 ? _b : new Date().toISOString()}"
-                                ?calendar=${propObj.calendar}
-                                format="${(_d = (_c = values.format) !== null && _c !== void 0 ? _c : propObj.format) !== null && _d !== void 0 ? _d : 'YYYY-MM-DD'}"
-                                @s-datetime-picker.change=${(e) => {
-                    component.setValue(path, e.detail);
-                    component.apply();
-                }}
-                                @s-datetime-picker.reset=${(e) => {
-                    component.setValue(path, e.detail);
-                    component.apply();
-                }}
-                            >
-                                <input
-                                    type="text"
-                                    name="datetime"
-                                    class="s-input"
-                                    placeholder=${propObj.placeholder}
-                                />
-                            </s-datetime-picker>
-                            ${component.renderLabel(propObj, path)}
-                        </label>
-                    </div>
-                `,
+const utils_1 = require("@specimen/types/utils");
+class SSpecsEditorComponentDatetimePickerWidget {
+    static isActive() {
+        return true;
+    }
+    constructor({ component, propObj, path }) {
+        this._component = component;
+        this._propObj = propObj;
+        this._path = path;
+    }
+    render({ propObj, values, path }) {
+        var _a;
+        if (!values) {
+            values = {
+                value: propObj.default,
+                format: (_a = propObj.format) !== null && _a !== void 0 ? _a : 'YYYY-MM-DD',
             };
-        },
-    };
+        }
+        const datetime = new utils_1.__SDatetime(propObj, values);
+        return {
+            error: this._error,
+            warning: this._warning,
+            html: (0, lit_1.html) `
+                <div
+                    class="${this._component.utils.cls('_datetime-picker-widget')}"
+                >
+                    <label
+                        class="${this._component.utils.cls('_label', 's-label s-label--block')}"
+                    >
+                        <s-datetime-picker
+                            value="${values.value}"
+                            ?calendar=${propObj.calendar}
+                            format="${values.format}"
+                            @s-datetime-picker.change=${(e) => {
+                this._component.setValue(path, e.detail);
+                this._component.apply();
+            }}
+                            @s-datetime-picker.reset=${(e) => {
+                this._component.setValue(path, e.detail);
+                this._component.apply();
+            }}
+                        >
+                            <input
+                                type="text"
+                                name="datetime"
+                                class="s-input"
+                                placeholder=${propObj.placeholder}
+                            />
+                        </s-datetime-picker>
+                        ${this._component.renderLabel(propObj, path)}
+                    </label>
+                </div>
+            `,
+        };
+    }
 }
-exports.default = default_1;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7O0FBQ0EsNkJBQTJCO0FBRTNCLG1CQUF5QixTQUFTO0lBQzlCLElBQUksS0FBSyxFQUFFLE9BQU8sQ0FBQztJQUVuQixPQUFPO1FBQ0gsUUFBUTtZQUNKLE9BQU8sSUFBSSxDQUFDO1FBQ2hCLENBQUM7UUFDRCxNQUFNLENBQUMsRUFBRSxPQUFPLEVBQUUsTUFBTSxFQUFFLElBQUksRUFBRTs7WUFDNUIsSUFBSSxDQUFDLE1BQU0sRUFBRTtnQkFDVCxNQUFNLEdBQUcsRUFBRSxDQUFDO2FBQ2Y7WUFDRCxPQUFPO2dCQUNILEtBQUs7Z0JBQ0wsT0FBTztnQkFDUCxJQUFJLEVBQUUsSUFBQSxVQUFJLEVBQUE7O2lDQUVPLFNBQVMsQ0FBQyxLQUFLLENBQUMsR0FBRyxDQUN4Qix5QkFBeUIsQ0FDNUI7OztxQ0FHWSxTQUFTLENBQUMsS0FBSyxDQUFDLEdBQUcsQ0FDeEIsUUFBUSxFQUNSLHdCQUF3QixDQUMzQjs7O3lDQUdZLE1BQUEsTUFBQSxNQUFNLENBQUMsS0FBSyxtQ0FDckIsT0FBTyxDQUFDLE9BQU8sbUNBQ2YsSUFBSSxJQUFJLEVBQUUsQ0FBQyxXQUFXLEVBQUU7NENBQ1osT0FBTyxDQUFDLFFBQVE7MENBQ2xCLE1BQUEsTUFBQSxNQUFNLENBQUMsTUFBTSxtQ0FDdkIsT0FBTyxDQUFDLE1BQU0sbUNBQ2QsWUFBWTs0REFDZ0IsQ0FBQyxDQUFDLEVBQUUsRUFBRTtvQkFDOUIsU0FBUyxDQUFDLFFBQVEsQ0FDZCxJQUFJLEVBQ1UsQ0FBQyxDQUFDLE1BQU0sQ0FDekIsQ0FBQztvQkFDRixTQUFTLENBQUMsS0FBSyxFQUFFLENBQUM7Z0JBQ3RCLENBQUM7MkRBQzBCLENBQUMsQ0FBQyxFQUFFLEVBQUU7b0JBQzdCLFNBQVMsQ0FBQyxRQUFRLENBQ2QsSUFBSSxFQUNVLENBQUMsQ0FBQyxNQUFNLENBQ3pCLENBQUM7b0JBQ0YsU0FBUyxDQUFDLEtBQUssRUFBRSxDQUFDO2dCQUN0QixDQUFDOzs7Ozs7a0RBTWlCLE9BQU8sQ0FBQyxXQUFXOzs7OEJBR3ZDLFNBQVMsQ0FBQyxXQUFXLENBQUMsT0FBTyxFQUFFLElBQUksQ0FBQzs7O2lCQUdqRDthQUNKLENBQUM7UUFDTixDQUFDO0tBQ0osQ0FBQztBQUNOLENBQUM7QUEvREQsNEJBK0RDIn0=
+exports.default = SSpecsEditorComponentDatetimePickerWidget;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7O0FBQ0EsNkJBQTJCO0FBRTNCLGlEQUFvRDtBQUlwRCxNQUFxQix5Q0FBeUM7SUFPMUQsTUFBTSxDQUFDLFFBQVE7UUFDWCxPQUFPLElBQUksQ0FBQztJQUNoQixDQUFDO0lBRUQsWUFBWSxFQUFFLFNBQVMsRUFBRSxPQUFPLEVBQUUsSUFBSSxFQUFFO1FBQ3BDLElBQUksQ0FBQyxVQUFVLEdBQUcsU0FBUyxDQUFDO1FBQzVCLElBQUksQ0FBQyxRQUFRLEdBQUcsT0FBTyxDQUFDO1FBQ3hCLElBQUksQ0FBQyxLQUFLLEdBQUcsSUFBSSxDQUFDO0lBQ3RCLENBQUM7SUFFRCxNQUFNLENBQUMsRUFBRSxPQUFPLEVBQUUsTUFBTSxFQUFFLElBQUksRUFBRTs7UUFDNUIsSUFBSSxDQUFDLE1BQU0sRUFBRTtZQUNULE1BQU0sR0FBbUI7Z0JBQ3JCLEtBQUssRUFBRSxPQUFPLENBQUMsT0FBTztnQkFDdEIsTUFBTSxFQUFFLE1BQUEsT0FBTyxDQUFDLE1BQU0sbUNBQUksWUFBWTthQUN6QyxDQUFDO1NBQ0w7UUFFRCxNQUFNLFFBQVEsR0FBRyxJQUFJLG1CQUFXLENBQUMsT0FBTyxFQUFFLE1BQU0sQ0FBQyxDQUFDO1FBRWxELE9BQU87WUFDSCxLQUFLLEVBQUUsSUFBSSxDQUFDLE1BQU07WUFDbEIsT0FBTyxFQUFFLElBQUksQ0FBQyxRQUFRO1lBQ3RCLElBQUksRUFBRSxJQUFBLFVBQUksRUFBQTs7NkJBRU8sSUFBSSxDQUFDLFVBQVUsQ0FBQyxLQUFLLENBQUMsR0FBRyxDQUM5Qix5QkFBeUIsQ0FDNUI7OztpQ0FHWSxJQUFJLENBQUMsVUFBVSxDQUFDLEtBQUssQ0FBQyxHQUFHLENBQzlCLFFBQVEsRUFDUix3QkFBd0IsQ0FDM0I7OztxQ0FHWSxNQUFNLENBQUMsS0FBSzt3Q0FDVCxPQUFPLENBQUMsUUFBUTtzQ0FDbEIsTUFBTSxDQUFDLE1BQU07d0RBQ0ssQ0FBQyxDQUFDLEVBQUUsRUFBRTtnQkFDOUIsSUFBSSxDQUFDLFVBQVUsQ0FBQyxRQUFRLENBQ3BCLElBQUksRUFDVSxDQUFDLENBQUMsTUFBTSxDQUN6QixDQUFDO2dCQUNGLElBQUksQ0FBQyxVQUFVLENBQUMsS0FBSyxFQUFFLENBQUM7WUFDNUIsQ0FBQzt1REFDMEIsQ0FBQyxDQUFDLEVBQUUsRUFBRTtnQkFDN0IsSUFBSSxDQUFDLFVBQVUsQ0FBQyxRQUFRLENBQ3BCLElBQUksRUFDVSxDQUFDLENBQUMsTUFBTSxDQUN6QixDQUFDO2dCQUNGLElBQUksQ0FBQyxVQUFVLENBQUMsS0FBSyxFQUFFLENBQUM7WUFDNUIsQ0FBQzs7Ozs7OzhDQU1pQixPQUFPLENBQUMsV0FBVzs7OzBCQUd2QyxJQUFJLENBQUMsVUFBVSxDQUFDLFdBQVcsQ0FBQyxPQUFPLEVBQUUsSUFBSSxDQUFDOzs7YUFHdkQ7U0FDSixDQUFDO0lBQ04sQ0FBQztDQUNKO0FBMUVELDREQTBFQyJ9

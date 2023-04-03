@@ -21,6 +21,7 @@
         "@coffeekraken/s-spaces-selector-component": "^2.0.0-alpha.26",
         "@coffeekraken/s-theme": "^2.0.0-alpha.26",
         "@coffeekraken/sugar": "^2.0.0-alpha.26",
+        "@editorjs/editorjs": "^2.26.5",
         "html-tags": "^3.2.0",
         "known-css-properties": "^0.25.0"
     },

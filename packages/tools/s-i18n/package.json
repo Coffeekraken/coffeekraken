@@ -6,10 +6,10 @@
     "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)",
     "license": "MIT",
     "dependencies": {
+        "@coffeekraken/s-duration": "^2.0.0-alpha.26",
         "@coffeekraken/s-env": "^2.0.0-alpha.26",
         "@coffeekraken/s-glob": "^2.0.0-alpha.26",
         "@coffeekraken/sugar": "^2.0.0-alpha.26",
-        "@coffeekraken/s-duration": "^2.0.0-alpha.26",
         "@ts-ast-parser/core": "^0.2.0",
         "@ts-ast-parser/readers": "^0.2.0",
         "ntypescript": "^1.201706190042.1",

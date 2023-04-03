@@ -18,7 +18,7 @@ import __SEnv from '../shared/SEnv';
  *
  * @snippet         __SEnv.get($1)
  * @snippet         __SEnv.is($1)
- * 
+ *
  * @example         js
  * import __SEnv from '@coffeekraken/s-env';
  * __SEnv.get('something');
@@ -45,8 +45,7 @@ export default class SEnv extends __SEnv {
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     static get env() {
-        process.env.ENVIRONMENT = process.env.NODE_ENV;
-        process.env.ENV = process.env.ENVIRONMENT;
+        process.env.ENV = process.env.NODE_ENV;
         process.env.PLATFORM = 'node';
         // TARGET: 'development' | 'production'
         return process.env;

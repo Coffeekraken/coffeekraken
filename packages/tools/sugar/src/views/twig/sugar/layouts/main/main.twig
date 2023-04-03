@@ -59,17 +59,26 @@
     {% endif %}
     {{ __frontspecAssets(frontspec, cacheBuster)|raw }}
         
+    <!-- favicon -->
+    {{ __frontspecFavicon(frontspec)|raw }}
+
     {% block head %}{% endblock %}
 
 </head>
 
 <body class="{{ bodyAttributes.class }} initial-loading loading" s-sugar {{ __attrs(bodyAttributes, ['class'])|raw }}>
 
-    {% if SUGAR or frontspec %}
+    {% if sugar or frontspec or env %}
     <script id="sugar-override">
         if (!document.env) document.env = {};
-        {% if SUGAR %}
-            document.env.SUGAR = {{ SUGAR|json_encode()|raw }};
+        {% if env %}
+            document.env = {
+                ...document.env,
+                ...{{ env|json_encode()|raw }}
+            };
+        {% endif %}
+        {% if sugar %}
+            document.env.SUGAR = {{ sugar|json_encode()|raw }};
         {% endif %}
         {% if frontspec %}
             document.env.FRONTSPEC = {{ __deepDiff(__readFrontspec(), frontspec)|json_encode()|raw }};

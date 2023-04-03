@@ -92,8 +92,10 @@
             "type": "Select",
             "title": "Select",
             "description": "My cool select",
-            "default": "value-2",
-            "multiple": true,
+            "default": {
+                "id": "value-3"
+            },
+            "multiple": false,
             "options": [
                 {
                     "id": "value-1",
@@ -137,7 +139,8 @@
             "type": "Wysiwyg",
             "title": "Wysiwyg",
             "description": "Simple wysiwyg",
-            "required": true
+            "required": true,
+            "frontspec": true
         }
     }
 }

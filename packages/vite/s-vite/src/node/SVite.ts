@@ -613,10 +613,13 @@ export default class SVite extends __SClass {
                     if (buildFileResult.isEntry) {
                         buildFileResult.fileName = buildFileResult.fileName
                             .replace(
+                                /([a-zA-Z0-9]+)\-[a-zA-Z0-9]+\.js/,
+                                '$1.js',
+                            )
+                            .replace(
                                 /^index\./,
                                 `index.${buildFileResult.format}.`,
-                            )
-                            .replace(/\.[a-zA-Z0-9]+\.js/, '.js');
+                            );
                     }
 
                     // write the file on the disk

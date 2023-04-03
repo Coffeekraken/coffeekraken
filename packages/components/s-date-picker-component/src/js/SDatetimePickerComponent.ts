@@ -16,6 +16,8 @@ import __SDatetimePickerComponentInterface from './interface/SDatetimePickerComp
 
 import type { __ISDatetime } from '@coffeekraken/sugar';
 
+import { __SDatetime } from '@specimen/types/utils';
+
 // @ts-ignore
 import __css from '../../../../src/css/s-datetime-picker.css'; // relative to /dist/pkg/esm/js
 // import __css from '../css/s-datetime-picker.css'; // for dev
@@ -267,13 +269,6 @@ export default class SDatetimePickerComponent extends __SLitComponent {
 
         // init interactions
         this._initInteractions();
-    }
-
-    _isDateNeeded(): boolean {
-        return this.props.format.match(/(d{1,4}|D{1,2}|M{1,4}|Y{2,4})/);
-    }
-    _isTimeNeeded(): boolean {
-        return this.props.format.match(/(h{1,2}|H{1,2}|m{1,2}|s{1,2}|S{1,3})/);
     }
 
     _isSelectedDatetimeValid(): boolean {
@@ -676,7 +671,8 @@ export default class SDatetimePickerComponent extends __SLitComponent {
                     <div
                         class="${this.utils.cls(
                             '_calendar',
-                        )} ${this._isDateNeeded() && this.props.calendar
+                        )} ${__SDatetime.isDateNeeded(this.props.format) &&
+                        this.props.calendar
                             ? 'active'
                             : ''}"
                     >
@@ -830,7 +826,9 @@ export default class SDatetimePickerComponent extends __SLitComponent {
                     <div
                         class="${this.utils.cls(
                             '_date-selectors',
-                        )} ${this._isDateNeeded() ? 'active' : ''}"
+                        )} ${__SDatetime.isDateNeeded(this.props.format)
+                            ? 'active'
+                            : ''}"
                     >
                         <div
                             class="${this.utils.cls(
@@ -912,7 +910,9 @@ export default class SDatetimePickerComponent extends __SLitComponent {
                     <div
                         class="${this.utils.cls(
                             '_time-selectors',
-                        )} ${this._isTimeNeeded() ? 'active' : ''}"
+                        )} ${__SDatetime.isTimeNeeded(this.props.format)
+                            ? 'active'
+                            : ''}"
                     >
                         <div
                             class="${this.utils.cls(

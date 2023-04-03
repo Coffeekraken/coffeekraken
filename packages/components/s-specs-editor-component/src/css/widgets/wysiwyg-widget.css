@@ -1,0 +1,48 @@
+.s-specs-editor_wysiwyg-widget {
+    ._editor {
+        @sugar.ui.input();
+    }
+
+    .ce-inline-toolbar {
+        @sugar.depth (100);
+        padding: sugar.padding(10);
+        @sugar.border.radius();
+    }
+
+    .ce-inline-toolbar__toggler-and-button-wrapper {
+        padding: 0;
+    }
+
+    .ce-inline-toolbar__buttons {
+        max-width: 100%;
+        flex-wrap: wrap;
+
+        button {
+            padding: sugar.padding(10) sugar.padding(20);
+            background: sugar.color(accent, --alpha 0);
+            @sugar.transition (fast);
+            @sugar.border.radius;
+
+            &._color {
+                width: 1em;
+                height: 1em;
+            }
+
+            svg {
+                height: 1em;
+            }
+
+            &:hover {
+                background: sugar.color(accent);
+                color: sugar.color(accent, foreground);
+
+                * {
+                    fill: sugar.color(accent, foreground);
+                }
+                *[stroke] {
+                    stroke: sugar.color(accent, foreground);
+                }
+            }
+        }
+    }
+}

@@ -54,11 +54,10 @@ export default function sVitePluginSugar(settings: any = {}) {
             // @ts-ignore
             PLATFORM: 'browser',
             ENV: __SEnv.get('env'),
-            ENVIRONMENT: __SEnv.get('env'),
             SUGAR: {
                 config: browserConfig,
-                frontspec: frontspecJson,
             },
+            FRONTSPEC: frontspecJson,
             PACKAGE: __packageJsonSync(),
         });
 

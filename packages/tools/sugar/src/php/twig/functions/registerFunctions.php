@@ -49,6 +49,9 @@ function registerFunctions($twig)
     $frontspecAssets = require __DIR__ . '/frontspec/assets.php';
     $twig->addFunction($frontspecAssets);
 
+    $frontspecFavicon = require __DIR__ . '/frontspec/favicon.php';
+    $twig->addFunction($frontspecFavicon);
+
     $frontspecOg = require __DIR__ . '/frontspec/og.php';
     $twig->addFunction($frontspecOg);
 

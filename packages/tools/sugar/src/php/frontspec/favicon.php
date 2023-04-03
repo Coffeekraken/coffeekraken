@@ -25,7 +25,7 @@ namespace Sugar\frontspec;
 function favicon($frontspec)
 {
     if (!$frontspec) {
-        $frontspecInstance = new SFrontspec();
+        $frontspecInstance = new \SFrontspec();
         $frontspec = $frontspecInstance->read();
     }
 
@@ -35,15 +35,10 @@ function favicon($frontspec)
         return '<!-- No favicon has been found -->';
     }
 
-    $htmlPath =
-        $frontspec->frontspec->folderPath .
-        '/' .
-        str_replace('./', '', $frontspec->favicon->filePath);
-
-    if (!file_exists($htmlPath)) {
+    if (!file_exists($frontspec->favicon->filePath)) {
         return '<!-- No favicon has been found -->';
     }
 
-    $html = file_get_contents($htmlPath);
+    $html = file_get_contents($frontspec->favicon->filePath);
     return $html;
 }

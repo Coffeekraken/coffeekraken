@@ -18,7 +18,7 @@ import __SEnv from '../shared/SEnv';
  *
  * @snippet         __SEnv.get($1)
  * @snippet         __SEnv.is($1)
- * 
+ *
  * @example         js
  * import __SEnv from '@coffeekraken/s-env';
  * __SEnv.get('something');
@@ -73,7 +73,6 @@ export default class SEnv extends __SEnv {
             );
         }
 
-        document.env.ENVIRONMENT = finalEnv;
         document.env.ENV = finalEnv;
         document.env.PLATFORM = 'browser';
         document.env.DEVS_CUT = queryStringObj.devsCut !== undefined;

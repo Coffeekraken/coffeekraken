@@ -1,58 +1,71 @@
-import __SColor from '@coffeekraken/s-color';
-import type { ISColor } from '@specimen/types';
 import { html } from 'lit';
 
-export default function (component) {
-    let error, warning;
+import type { ISColorData } from '@specimen/types';
+import { __SColor } from '@specimen/types/utils';
 
-    return {
-        isActive() {
-            return true;
-        },
-        render({ propObj, values, path }) {
-            if (!values) {
-                const color = new __SColor(propObj.default ?? '#ff0000', {
-                    defaultFormat: propObj.format ?? 'hexa',
-                });
-                values = <ISColor>{
-                    ...color.toObject(),
-                    format: propObj.format ?? 'hexa',
-                    value: propObj.default ?? color.toString(),
-                };
-            }
+export default class SSpecsEditorComponentColorPickerWidget {
+    _error;
+    _warning;
+    _component;
+    _propObj;
+    _path;
 
-            return {
-                error,
-                warning,
-                html: html`
-                    <div class="${component.utils.cls('_color-picker-widget')}">
-                        <label
-                            class="${component.utils.cls(
-                                '_label',
-                                's-label s-label--block',
-                            )}"
-                        >
-                            <s-color-picker
-                                value="${values.value}"
-                                format="${values.format}"
-                                @s-color-picker.change=${(e) => {
-                                    component.setValue(path, <ISColor>e.detail);
-                                    component.apply();
-                                }}
-                            >
-                                <input
-                                    type="text"
-                                    name="color"
-                                    class="s-input"
-                                    placeholder=${propObj.placeholder}
-                                />
-                                <div class="_color-preview"></div>
-                            </s-color-picker>
-                            ${component.renderLabel(propObj, path)}
-                        </label>
-                    </div>
-                `,
+    static isActive() {
+        return true;
+    }
+
+    constructor({ component, propObj, path }) {
+        this._component = component;
+        this._propObj = propObj;
+        this._path = path;
+    }
+
+    render({ propObj, values, path }) {
+        if (!values) {
+            values = <ISColorData>{
+                format: propObj.format ?? 'hexa',
+                value: propObj.default ?? '#ff0000ff',
             };
-        },
-    };
+        }
+
+        const color = new __SColor(propObj, values);
+
+        return {
+            error: this._error,
+            warning: this._warning,
+            html: html`
+                <div
+                    class="${this._component.utils.cls('_color-picker-widget')}"
+                >
+                    <label
+                        class="${this._component.utils.cls(
+                            '_label',
+                            's-label s-label--block',
+                        )}"
+                    >
+                        <s-color-picker
+                            value="${color.toString()}"
+                            format="${propObj.format}"
+                            @s-color-picker.change=${(e) => {
+                                this._component.setValue(
+                                    path,
+                                    <ISColorData>e.detail,
+                                );
+                                this._component.apply();
+                            }}
+                        >
+                            <input
+                                type="text"
+                                name="color"
+                                class="s-input"
+                                placeholder=${propObj.placeholder}
+                            />
+                            <div class="_color-preview"></div>
+                        </s-color-picker>
+                        ${this._component.renderLabel(propObj, path)}
+                    </label>
+                </div>
+            `,
+        };
+    }
 }

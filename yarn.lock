@@ -1347,6 +1347,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@codexteam/icons@npm:0.1.0":
+  version: 0.1.0
+  resolution: "@codexteam/icons@npm:0.1.0"
+  checksum: df50a6606aed5e4375ca2c7c21da7bb91877022793a2362bc37135309d92c86695619887160416db64d9e1fb1c063761e6aacebe1ce478ef43e59ca75d8f6ab5
+  languageName: node
+  linkType: hard
+
 "@coffeekraken/aa@workspace:packages/@tests/aa":
   version: 0.0.0-use.local
   resolution: "@coffeekraken/aa@workspace:packages/@tests/aa"
@@ -1848,6 +1855,7 @@ __metadata:
     "@coffeekraken/s-lit-component": ^2.0.0-alpha.26
     "@coffeekraken/s-theme": ^2.0.0-alpha.26
     "@coffeekraken/sugar": ^2.0.0-alpha.26
+    "@specimen/types": ^1.0.0-alpha.1
     date-format-parse: ^0.2.7
     dateformat: ^5.0.3
     lit: ^2.2.8
@@ -2202,6 +2210,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@coffeekraken/s-i18n@workspace:packages/tools/s-i18n"
   dependencies:
+    "@coffeekraken/s-duration": ^2.0.0-alpha.26
     "@coffeekraken/s-env": ^2.0.0-alpha.26
     "@coffeekraken/s-glob": ^2.0.0-alpha.26
     "@coffeekraken/sugar": ^2.0.0-alpha.26
@@ -2684,6 +2693,7 @@ __metadata:
     "@coffeekraken/s-spaces-selector-component": ^2.0.0-alpha.26
     "@coffeekraken/s-theme": ^2.0.0-alpha.26
     "@coffeekraken/sugar": ^2.0.0-alpha.26
+    "@editorjs/editorjs": ^2.26.5
     html-tags: ^3.2.0
     known-css-properties: ^0.25.0
   languageName: unknown
@@ -3177,6 +3187,19 @@ __metadata:
   version: 0.5.7
   resolution: "@discoveryjs/json-ext@npm:0.5.7"
   checksum: 2176d301cc258ea5c2324402997cf8134ebb212469c0d397591636cea8d3c02f2b3cf9fd58dcb748c7a0dade77ebdc1b10284fa63e608c033a1db52fddc69918
+  languageName: node
+  linkType: hard
+
+"@editorjs/editorjs@npm:^2.26.5":
+  version: 2.26.5
+  resolution: "@editorjs/editorjs@npm:2.26.5"
+  dependencies:
+    "@codexteam/icons": 0.1.0
+    codex-notifier: ^1.1.2
+    codex-tooltip: ^1.0.5
+    html-janitor: ^2.0.4
+    nanoid: ^3.1.22
+  checksum: 899741482b421ca8ca0f6662e9a446043a255e607b39f08394a669c0f5efa68590197dd4f740ada47ba3a72fb830c3e7e7efca0a2680338ec1a240e509f1acd4
   languageName: node
   linkType: hard
 
@@ -5466,6 +5489,8 @@ __metadata:
 "@specimen/types@^1.0.0-alpha.1, @specimen/types@workspace:packages/@specimen/types":
   version: 0.0.0-use.local
   resolution: "@specimen/types@workspace:packages/@specimen/types"
+  dependencies:
+    "@coffeekraken/s-color": ^2.0.0-alpha.26
   languageName: unknown
   linkType: soft
 
@@ -8402,6 +8427,20 @@ __metadata:
   version: 1.1.0
   resolution: "code-point-at@npm:1.1.0"
   checksum: 17d5666611f9b16d64fdf48176d9b7fb1c7d1c1607a189f7e600040a11a6616982876af148230336adb7d8fe728a559f743a4e29db3747e3b1a32fa7f4529681
+  languageName: node
+  linkType: hard
+
+"codex-notifier@npm:^1.1.2":
+  version: 1.1.2
+  resolution: "codex-notifier@npm:1.1.2"
+  checksum: 2130f5b1ff2a55417cb40132b8fa220139e761f95b9183a3616cf595c4d9cb1777a0e90675ac69a5c22253013f65ae76428f09946c69b08b11b846b1f849e461
+  languageName: node
+  linkType: hard
+
+"codex-tooltip@npm:^1.0.5":
+  version: 1.0.5
+  resolution: "codex-tooltip@npm:1.0.5"
+  checksum: 8ea91ce69853b7054f7379710ce03163fc1262db20f4e56a38d4eb946ece37fa18b07d13df6fb72d3b7fce768af26c8af169766b0aed1f9625210fe05e182f20
   languageName: node
   linkType: hard
 
@@ -12804,6 +12843,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"html-janitor@npm:^2.0.4":
+  version: 2.0.4
+  resolution: "html-janitor@npm:2.0.4"
+  checksum: e571c8d75363a2c448507dff7654bbe35cf66755295a71e20289d1374d73786430ff2525b742d69adabeb6697c90c17d9b04fb70ce8de14b2ef635b4e06d0161
+  languageName: node
+  linkType: hard
+
 "html-tags@npm:^3.2.0":
   version: 3.2.0
   resolution: "html-tags@npm:3.2.0"
@@ -16334,6 +16380,15 @@ __metadata:
   bin:
     nanoid: bin/nanoid.cjs
   checksum: ada019402a07464a694553c61d2dca8a4353645a7d92f2830f0d487fedff403678a0bee5323a46522752b2eab95a0bc3da98b6cccaa7c0c55cd9975130e6d6f0
+  languageName: node
+  linkType: hard
+
+"nanoid@npm:^3.1.22":
+  version: 3.3.6
+  resolution: "nanoid@npm:3.3.6"
+  bin:
+    nanoid: bin/nanoid.cjs
+  checksum: 7d0eda657002738aa5206107bd0580aead6c95c460ef1bdd0b1a87a9c7ae6277ac2e9b945306aaa5b32c6dcb7feaf462d0f552e7f8b5718abfc6ead5c94a71b3
   languageName: node
   linkType: hard
 

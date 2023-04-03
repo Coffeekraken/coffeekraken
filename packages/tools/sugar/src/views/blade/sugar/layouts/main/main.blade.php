@@ -72,11 +72,17 @@ $frontspec->metas->og = $ogObj;
 
 <body class="{{ isset($bodyAttributes['class']) ? $bodyAttributes['class'] : '' }} initial-loading loading" s-sugar {!! \Sugar\html\attrs($bodyAttributes, ['class']) !!}>
 
-    @if (isset($SUGAR) || isset($frontspec))
+    @if (isset($sugar) || isset($frontspec) || isset($env))
     <script id="sugar-override">
         if (!document.env) document.env = {};
-        @if (isset($SUGAR))
-            document.env.SUGAR = {!! json_encode($SUGAR) !!};
+        @if (isset($env))
+            document.env = {
+                ...document.env,
+                ...{!! json_encode($env) !!}
+            };
+        @endif
+        @if (isset($sugar))
+            document.env.SUGAR = {!! json_encode($sugar) !!};
         @endif
         @if (isset($frontspec))
             document.env.FRONTSPEC = {!! json_encode(\Sugar\object\deepDiff(\Sugar\frontspec\readFrontspec(), $frontspec)) !!};

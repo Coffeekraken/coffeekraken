@@ -10,7 +10,6 @@ import { define as __SDropzoneComponentDefine } from '@coffeekraken/s-dropzone-c
 
 import __STheme from '@coffeekraken/s-theme';
 
-import { __querySelectorUp } from '@coffeekraken/sugar/dom';
 import { __deepMerge } from '@coffeekraken/sugar/object';
 import { __lowerFirst } from '@coffeekraken/sugar/string';
 import { css, html, unsafeCSS } from 'lit';
@@ -33,6 +32,7 @@ import __selectWidget from './widgets/selectWidget';
 import __spacesWidget from './widgets/spacesWidget';
 import __switchWidget from './widgets/switchWidget';
 import __textWidget from './widgets/textWidget';
+import __wysiwygWidget from './widgets/wysiwygWidget';
 
 // components
 __SDropzoneComponentDefine();
@@ -162,6 +162,7 @@ export default class SSpecsEditorComponent extends __SLitComponent {
         string: __textWidget,
         text: __textWidget,
         select: __selectWidget,
+        wysiwyg: __wysiwygWidget,
     };
 
     static get styles() {
@@ -185,6 +186,12 @@ export default class SSpecsEditorComponent extends __SLitComponent {
                 interface: __SSpecsEditorComponentInterface,
             }),
         );
+    }
+
+    firstUpdated() {
+        for (let [dotPath, widget] of Object.entries(this._widgets)) {
+            widget.firstUpdated?.();
+        }
     }
 
     isPathResponsive(path: string[]): any {
@@ -320,31 +327,21 @@ export default class SSpecsEditorComponent extends __SLitComponent {
         this.requestUpdate();
     }
 
-    getWidget(type: string): any {
+    getWidget(type: string, path: string[], propObj: any): any {
+        const dotPath = path.join('.');
+        if (this._widgets[dotPath]) {
+            return this._widgets[dotPath];
+        }
+
         if (!SSpecsEditorComponent.widgetMap[type]) {
             return;
         }
-        if (!this._widgets[type]) {
-            this._widgets[type] = SSpecsEditorComponent.widgetMap[type](this);
-        }
-
-        if (!this._widgets[type]._eventsInited && this._widgets[type].events) {
-            for (let [event, cb] of Object.entries(
-                this._widgets[type].events,
-            )) {
-                this.addEventListener(event, (e) => {
-                    e.$scope = __querySelectorUp(e.target, ($elm) => {
-                        return $elm.classList.contains(
-                            this.utils.cls('_child'),
-                        );
-                    });
-                    this._widgets[type].events[event](e);
-                });
-            }
-            this._widgets[type]._eventsInited = true;
-        }
-
-        return this._widgets[type];
+        this._widgets[dotPath] = new SSpecsEditorComponent.widgetMap[type]({
+            component: this,
+            propObj,
+            path,
+        });
+        return this._widgets[dotPath];
     }
 
     /**
@@ -561,7 +558,7 @@ export default class SSpecsEditorComponent extends __SLitComponent {
     _getRenderedWidget(propObj, path) {
         const type =
                 propObj.widget?.toLowerCase?.() ?? propObj.type.toLowerCase(),
-            widget = this.getWidget(type);
+            widget = this.getWidget(type, path, propObj);
         if (!widget) {
             return;
         }

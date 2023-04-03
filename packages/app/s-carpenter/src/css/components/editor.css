@@ -5,6 +5,7 @@
     bottom: var(--s-carpenter-editor-bottom);
     width: var(--s-carpenter-editor-width);
     overflow-y: auto;
+    overflow-x: hidden;
     background: sugar.color(main, background);
     transform: translateX(100%);
     opacity: 0;

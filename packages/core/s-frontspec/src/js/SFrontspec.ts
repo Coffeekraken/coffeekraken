@@ -24,7 +24,7 @@ import { __deepMerge, __get } from '@coffeekraken/sugar/object';
  * @todo      tests
  *
  * @snippet        __SFrontspec.get($1)
- * 
+ *
  * @example             js
  * import __SFrontspec from '@coffeekraken/s-frontspec';
  * const frontspec = new SFrontspec();
@@ -119,11 +119,7 @@ export default class SFrontspec extends __SClass {
 
         this.constructor._defaultFrontspecInstance = this;
         this._frontspec = __deepMerge(
-            document.env?.SUGAR?.frontspec &&
-                !(document.env.SUGAR.frontspec instanceof SFrontspec)
-                ? document.env.SUGAR.frontspec
-                : {},
-            document.env?.FRONTSPEC ?? {},
+            document.env?.FRONTSPEC ? document.env.FRONTSPEC : {},
             frontspec,
         );
     }

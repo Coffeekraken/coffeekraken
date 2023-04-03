@@ -1,67 +1,82 @@
 import type { __ISDatetime } from '@coffeekraken/sugar';
 import { html } from 'lit';
 
-export default function (component) {
-    let error, warning;
+import { __SDatetime } from '@specimen/types/utils';
 
-    return {
-        isActive() {
-            return true;
-        },
-        render({ propObj, values, path }) {
-            if (!values) {
-                values = {};
-            }
-            return {
-                error,
-                warning,
-                html: html`
-                    <div
-                        class="${component.utils.cls(
-                            '_datetime-picker-widget',
+import type { ISDatetimeData } from '@specimen/types';
+
+export default class SSpecsEditorComponentDatetimePickerWidget {
+    _error;
+    _warning;
+    _component;
+    _propObj;
+    _path;
+
+    static isActive() {
+        return true;
+    }
+
+    constructor({ component, propObj, path }) {
+        this._component = component;
+        this._propObj = propObj;
+        this._path = path;
+    }
+
+    render({ propObj, values, path }) {
+        if (!values) {
+            values = <ISDatetimeData>{
+                value: propObj.default,
+                format: propObj.format ?? 'YYYY-MM-DD',
+            };
+        }
+
+        const datetime = new __SDatetime(propObj, values);
+
+        return {
+            error: this._error,
+            warning: this._warning,
+            html: html`
+                <div
+                    class="${this._component.utils.cls(
+                        '_datetime-picker-widget',
+                    )}"
+                >
+                    <label
+                        class="${this._component.utils.cls(
+                            '_label',
+                            's-label s-label--block',
                         )}"
                     >
-                        <label
-                            class="${component.utils.cls(
-                                '_label',
-                                's-label s-label--block',
-                            )}"
+                        <s-datetime-picker
+                            value="${values.value}"
+                            ?calendar=${propObj.calendar}
+                            format="${values.format}"
+                            @s-datetime-picker.change=${(e) => {
+                                this._component.setValue(
+                                    path,
+                                    <__ISDatetime>e.detail,
+                                );
+                                this._component.apply();
+                            }}
+                            @s-datetime-picker.reset=${(e) => {
+                                this._component.setValue(
+                                    path,
+                                    <__ISDatetime>e.detail,
+                                );
+                                this._component.apply();
+                            }}
                         >
-                            <s-datetime-picker
-                                value="${values.value ??
-                                propObj.default ??
-                                new Date().toISOString()}"
-                                ?calendar=${propObj.calendar}
-                                format="${values.format ??
-                                propObj.format ??
-                                'YYYY-MM-DD'}"
-                                @s-datetime-picker.change=${(e) => {
-                                    component.setValue(
-                                        path,
-                                        <__ISDatetime>e.detail,
-                                    );
-                                    component.apply();
-                                }}
-                                @s-datetime-picker.reset=${(e) => {
-                                    component.setValue(
-                                        path,
-                                        <__ISDatetime>e.detail,
-                                    );
-                                    component.apply();
-                                }}
-                            >
-                                <input
-                                    type="text"
-                                    name="datetime"
-                                    class="s-input"
-                                    placeholder=${propObj.placeholder}
-                                />
-                            </s-datetime-picker>
-                            ${component.renderLabel(propObj, path)}
-                        </label>
-                    </div>
-                `,
-            };
-        },
-    };
+                            <input
+                                type="text"
+                                name="datetime"
+                                class="s-input"
+                                placeholder=${propObj.placeholder}
+                            />
+                        </s-datetime-picker>
+                        ${this._component.renderLabel(propObj, path)}
+                    </label>
+                </div>
+            `,
+        };
+    }
 }

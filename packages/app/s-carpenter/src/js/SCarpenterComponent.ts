@@ -140,7 +140,7 @@ export default class SCarpenterComponent extends __SLitComponent {
                 this.props.id ?? 's-carpenter'
             }" save-state ${this.props.sidebar ? 'sidebar' : ''} ${
             this.props.autoEdit ? 'auto-edit' : ''
-        } ${
+        } ${this.props.escape ? 'escape' : ''} ${
             this.props.features
                 ? `features='${JSON.stringify(this.props.features)}'`
                 : ''

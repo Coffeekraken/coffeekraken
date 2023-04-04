@@ -47,6 +47,12 @@ export default class SCarpenterComponentInterface extends __SInterface {
                     'Specify if you want the editor to be automatically inited when adding the "s-carpenter" component. If not, the user will have to click on a "Carpenter" button',
                 default: document.location.hash === '#carpenter',
             },
+            escape: {
+                type: 'Boolean',
+                description:
+                    'Specify if you want to enable the "escape" key to exit the editor',
+                default: false,
+            },
             autoEdit: {
                 type: 'Boolean',
                 description:

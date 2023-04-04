@@ -1,0 +1,63 @@
+.s-wysiwyg {
+}
+
+.s-wysiwyg {
+    display: block;
+    width: 100%;
+
+    &:not([mounted]) > * {
+        display: none;
+    }
+
+    &[disabled] {
+        pointer-events: none;
+    }
+
+    [placeholder]:empty::before {
+        content: attr(placeholder);
+        opacity: 0.3;
+        pointer-events: none;
+    }
+
+    [placeholder]:empty:focus::before {
+        content: '';
+    }
+
+    .ce-inline-toolbar__toggler-and-button-wrapper {
+        padding: 0;
+    }
+
+    .codex-editor__redactor {
+        margin: 0;
+    }
+
+    .ce-toolbar__actions {
+        right: auto;
+        left: 0;
+        pointer-events: none;
+
+        > *:not(.ce-toolbox) {
+            opacity: 0;
+            pointer-events: none;
+        }
+    }
+
+    .ce-toolbox,
+    .ce-popover {
+        pointer-events: all;
+        left: 0;
+        right: auto;
+    }
+
+    .ce-inline-toolbar__buttons {
+        max-width: 100%;
+        flex-wrap: wrap;
+        justify-content: space-between;
+
+        button {
+            svg {
+                height: 1em;
+            }
+        }
+    }
+}

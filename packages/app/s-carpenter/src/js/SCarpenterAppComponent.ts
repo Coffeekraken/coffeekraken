@@ -52,6 +52,7 @@ export interface ISCarpenterComponentProps {
     adapter: 'ajax';
     viewportElm: HTMLElement;
     nav: boolean;
+    escape: boolean;
     pagesLink: string;
     iframe: boolean;
     ghostSpecs: boolean;
@@ -233,9 +234,11 @@ export default class SCarpenterAppComponent extends __SLitComponent {
         await this._init();
 
         // listen for escape key press to close editor
-        __hotkey('escape').on('press', () => {
-            this._closeEditor();
-        });
+        if (this.props.escape) {
+            __hotkey('escape').on('press', () => {
+                this._closeEditor();
+            });
+        }
 
         // register shortcuts in the editor iframe
         this._registerShortcuts(this._$editorDocument);
@@ -358,12 +361,14 @@ export default class SCarpenterAppComponent extends __SLitComponent {
             this._closeEditor();
         });
 
-        __hotkey('escape', {
-            // from the website itself
-            element: this._$websiteDocument,
-        }).on('press', () => {
-            this._closeEditor();
-        });
+        if (this.props.escape) {
+            __hotkey('escape', {
+                // from the website itself
+                element: this._$websiteDocument,
+            }).on('press', () => {
+                this._closeEditor();
+            });
+        }
     }
 
     /**

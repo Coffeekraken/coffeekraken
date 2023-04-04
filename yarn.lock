@@ -1596,6 +1596,7 @@ __metadata:
     "@coffeekraken/s-sugar-feature": ^2.0.0-alpha.26
     "@coffeekraken/s-view-renderer": ^2.0.0-alpha.26
     "@coffeekraken/s-vite": ^2.0.0-alpha.26
+    "@coffeekraken/s-wysiwyg-component": ^2.0.0-alpha.26
     "@coffeekraken/sugar": ^2.0.0-alpha.26
     "@specimen/types": ^1.0.0-alpha.1
     "@vitejs/plugin-vue": ^3.1.2
@@ -2692,6 +2693,7 @@ __metadata:
     "@coffeekraken/s-interface": ^2.0.0-alpha.26
     "@coffeekraken/s-spaces-selector-component": ^2.0.0-alpha.26
     "@coffeekraken/s-theme": ^2.0.0-alpha.26
+    "@coffeekraken/s-wysiwyg-component": ^2.0.0-alpha.26
     "@coffeekraken/sugar": ^2.0.0-alpha.26
     "@editorjs/editorjs": ^2.26.5
     html-tags: ^3.2.0
@@ -3040,6 +3042,20 @@ __metadata:
     vite-plugin-compress: ^2.1.1
     vite-plugin-compression2: ^0.4.3
     vitest: ^0.20.3
+  languageName: unknown
+  linkType: soft
+
+"@coffeekraken/s-wysiwyg-component@^2.0.0-alpha.26, @coffeekraken/s-wysiwyg-component@workspace:packages/components/s-wysiwyg-component":
+  version: 0.0.0-use.local
+  resolution: "@coffeekraken/s-wysiwyg-component@workspace:packages/components/s-wysiwyg-component"
+  dependencies:
+    "@coffeekraken/s-frontspec": ^2.0.0-alpha.26
+    "@coffeekraken/s-interface": ^2.0.0-alpha.26
+    "@coffeekraken/s-lit-component": ^2.0.0-alpha.26
+    "@coffeekraken/s-theme": ^2.0.0-alpha.26
+    "@coffeekraken/sugar": ^2.0.0-alpha.26
+    "@specimen/types": ^1.0.0-alpha.1
+    lit: ^2.2.8
   languageName: unknown
   linkType: soft
 

@@ -1,0 +1,4 @@
+import __SWysiwygComponent from './SWysiwygComponent';
+export * from './SWysiwygComponent';
+export default __SWysiwygComponent;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sbUJBQW1CLE1BQU0scUJBQXFCLENBQUM7QUFDdEQsY0FBYyxxQkFBcUIsQ0FBQztBQUNwQyxlQUFlLG1CQUFtQixDQUFDIn0=

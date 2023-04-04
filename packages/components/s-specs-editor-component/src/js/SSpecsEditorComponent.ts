@@ -7,6 +7,7 @@ import { __get, __set } from '@coffeekraken/sugar/object';
 import { define as __SColorPickerComponentDefine } from '@coffeekraken/s-color-picker-component';
 import { define as __SDatetimePickerComponentDefine } from '@coffeekraken/s-datetime-picker-component';
 import { define as __SDropzoneComponentDefine } from '@coffeekraken/s-dropzone-component';
+import { define as __SWysiwygComponentDefine } from '@coffeekraken/s-wysiwyg-component';
 
 import __STheme from '@coffeekraken/s-theme';
 
@@ -38,6 +39,7 @@ import __wysiwygWidget from './widgets/wysiwygWidget';
 __SDropzoneComponentDefine();
 __SColorPickerComponentDefine();
 __SDatetimePickerComponentDefine();
+__SWysiwygComponentDefine();
 
 export interface ISSpecsEditorRenderSettings {
     repeatable: boolean;

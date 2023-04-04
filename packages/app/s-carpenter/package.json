@@ -25,6 +25,7 @@
         "@coffeekraken/s-sugar-feature": "^2.0.0-alpha.26",
         "@coffeekraken/s-view-renderer": "^2.0.0-alpha.26",
         "@coffeekraken/s-vite": "^2.0.0-alpha.26",
+        "@coffeekraken/s-wysiwyg-component": "^2.0.0-alpha.26",
         "@coffeekraken/sugar": "^2.0.0-alpha.26",
         "@specimen/types": "^1.0.0-alpha.1",
         "@vitejs/plugin-vue": "^3.1.2",

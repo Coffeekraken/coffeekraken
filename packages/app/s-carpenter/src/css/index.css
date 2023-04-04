@@ -19,6 +19,7 @@
 @sugar.flex.classes;
 @sugar.color.classes;
 
+@sugar.ui.wysiwyg.classes();
 @sugar.ui.spacesSelector.classes();
 @sugar.ui.specsEditor.classes();
 @sugar.ui.datetimePicker.classes();

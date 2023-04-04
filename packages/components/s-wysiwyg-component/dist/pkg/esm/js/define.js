@@ -1,0 +1,5 @@
+import __SWysiwygComponent from './SWysiwygComponent';
+export default function define(props = {}, tagName = 's-wysiwyg') {
+    __SWysiwygComponent.define(tagName, __SWysiwygComponent, props);
+}
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUNBLE9BQU8sbUJBQW1CLE1BQU0scUJBQXFCLENBQUM7QUFFdEQsTUFBTSxDQUFDLE9BQU8sVUFBVSxNQUFNLENBQzFCLFFBQTBDLEVBQUUsRUFDNUMsT0FBTyxHQUFHLFdBQVc7SUFFckIsbUJBQW1CLENBQUMsTUFBTSxDQUFDLE9BQU8sRUFBRSxtQkFBbUIsRUFBRSxLQUFLLENBQUMsQ0FBQztBQUNwRSxDQUFDIn0=

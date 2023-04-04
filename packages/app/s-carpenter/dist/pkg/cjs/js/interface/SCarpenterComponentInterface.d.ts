@@ -24,6 +24,11 @@ export default class SCarpenterComponentInterface extends __SInterface {
             description: string;
             default: boolean;
         };
+        escape: {
+            type: string;
+            description: string;
+            default: boolean;
+        };
         autoEdit: {
             type: string;
             description: string;

@@ -26,9 +26,9 @@ export default class SDropzoneComponent extends __SLitComponent {
     static get properties(): any;
     static get styles(): import("lit").CSSResult;
     static get state(): {
-        files: any[];
         uploadPercent: number;
         uploadTotalPercent: number;
+        isDrag: boolean;
     };
     _$input: any;
     constructor();
@@ -38,7 +38,7 @@ export default class SDropzoneComponent extends __SLitComponent {
     
     _uploadFile(file: File): Promise<ISDropzoneComponentUploadResult>;
     
-    _onDragover(e: any): void;
+    _onDragenter(e: any): void;
     
     _onDragleave(e: any): void;
     

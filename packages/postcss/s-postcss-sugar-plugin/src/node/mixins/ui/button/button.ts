@@ -129,29 +129,33 @@ export default function ({
               content: attr(confirm);
               position: absolute;
               top: 0; left: 0;
+              opacity: 0;
               width: calc(var(--s-btn-confirm-width) * var(--s-scale, 1));
-              height: 0;
+              height: 100%;
               overflow: hidden;
               display: flex;
               align-items: center;
               justify-content: center;
-              transform: translateY(100%);
               pointer-events: none;
-              padding-inline: var(--s-btn-padding-inline);
+              padding-inline: calc(var(--s-btn-padding-inline) * 0.5);
             }
 
-            &:focus,
-            &:focus-within {
-
-              &:after {
-                height: 100%;
-                transform: translateY(0);
-              }
+            &:focus:after,
+            &:focus-within:after {
+                opacity: 1;
             }
 
           }
 
     `);
+
+        switch (finalParams.lnf) {
+            case 'text':
+                vars.push(`
+              padding-inline: calc(sugar.padding(ui.button.paddingInline) * 0.5);
+              `);
+                break;
+        }
     }
 
     // lnf

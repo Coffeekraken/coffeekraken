@@ -23,6 +23,11 @@ export default class SSpecsEditorComponentInterface extends __SInterface {
             title: string;
             description: string;
         };
+        defaultMedia: {
+            type: string;
+            title: string;
+            description: string;
+        };
         features: {
             type: string;
             description: string;
@@ -45,6 +50,7 @@ export default class SSpecsEditorComponentInterface extends __SInterface {
             default: {
                 clear: string;
                 add: string;
+                delete: string;
                 expand: string;
                 remove: string;
                 collapse: string;

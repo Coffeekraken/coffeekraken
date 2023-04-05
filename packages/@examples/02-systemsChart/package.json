@@ -1,6 +1,6 @@
 {
     "name": "@example/02-systemsChart",
-    "version": "2.0.0-alpha.26",
+    "version": "2.0.0-alpha.27",
     "description": "",
     "main": "index.js",
     "type": "module",
@@ -32,13 +32,13 @@
         "deploy": "rsync -avzh --delete --progress --stats ./static fe0mt_coffeekraken@fe0mt.ftp.infomaniak.com:~/sites/design-systems-overview.coffeekraken.io"
     },
     "dependencies": {
-        "@coffeekraken/s-activate-feature": "^2.0.0-alpha.26",
-        "@coffeekraken/s-carpenter": "^2.0.0-alpha.26",
-        "@coffeekraken/s-front": "^2.0.0-alpha.26",
-        "@coffeekraken/s-google-map-component": "^2.0.0-alpha.26",
-        "@coffeekraken/s-postcss-sugar-plugin": "^2.0.0-alpha.26",
-        "@coffeekraken/s-sugar-feature": "^2.0.0-alpha.26",
-        "@coffeekraken/sugar": "^2.0.0-alpha.26",
+        "@coffeekraken/s-activate-feature": "^2.0.0-alpha.27",
+        "@coffeekraken/s-carpenter": "^2.0.0-alpha.27",
+        "@coffeekraken/s-front": "^2.0.0-alpha.27",
+        "@coffeekraken/s-google-map-component": "^2.0.0-alpha.27",
+        "@coffeekraken/s-postcss-sugar-plugin": "^2.0.0-alpha.27",
+        "@coffeekraken/s-sugar-feature": "^2.0.0-alpha.27",
+        "@coffeekraken/sugar": "^2.0.0-alpha.27",
         "autoprefixer": "^10.4.12",
         "postcss": "^8.4.17",
         "postcss-atroot": "^0.2.3",

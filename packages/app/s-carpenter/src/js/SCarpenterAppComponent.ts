@@ -1185,6 +1185,7 @@ export default class SCarpenterAppComponent extends __SLitComponent {
                     ? html`
                           <s-specs-editor
                               media="${this.state.activeMedia}"
+                              default-media="${this.props.defaultMedia}"
                               .specs=${this.currentSpecs}
                               .features=${this.props.features}
                               .frontspec=${this._data.frontspec ?? {}}

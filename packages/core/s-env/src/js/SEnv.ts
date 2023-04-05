@@ -48,7 +48,7 @@ export default class SEnv extends __SEnv {
     static get env() {
         if (this._env) return this._env;
 
-        const envConfig = __SSugarConfig.get('env');
+        const envConfig = __SSugarConfig.get('env') ?? {};
 
         const queryStringObj = __queryStringToObject(document.location.search);
 

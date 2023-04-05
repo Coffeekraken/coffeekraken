@@ -2,8 +2,6 @@ import { html } from 'lit';
 
 import type { ISWysiwygData } from '@specimen/types';
 
-import { __SWysiwyg } from '@specimen/types/utils';
-
 export default class SSpecsEditorComponentWysiwygWidget {
     _error;
     _warning;
@@ -40,22 +38,26 @@ export default class SSpecsEditorComponentWysiwygWidget {
                 <div
                     class="${this._component.utils.cls('_wysiwyg-widget')}"
                     @s-wysiwyg.change=${(e) => {
-                        const $preview = document.querySelector('._preview');
-                        const wysiwyg = new __SWysiwyg(propObj, e.detail ?? {});
-                        $preview.innerHTML = wysiwyg.toString(
-                            ({ type, content, isBlock }) => {
-                                switch (type) {
-                                    case 'root':
-                                        return `<div>\n${content}\n</div>`;
-                                    case 'text':
-                                        return content;
-                                    case 'br':
-                                        return '\n<br />\n';
-                                    default:
-                                        return `<${type} class="s-typo s-typo--${type}">${content}</${type}>`;
-                                }
-                            },
-                        );
+                        _console.log('Path', this._path);
+                        this._component.setValue(this._path, e.detail);
+                        this._component.apply();
+
+                        // const $preview = document.querySelector('._preview');
+                        // const wysiwyg = new __SWysiwyg(propObj, e.detail ?? {});
+                        // $preview.innerHTML = wysiwyg.toString(
+                        //     ({ type, content, isBlock }) => {
+                        //         switch (type) {
+                        //             case 'root':
+                        //                 return `<div>\n${content}\n</div>`;
+                        //             case 'text':
+                        //                 return content;
+                        //             case 'br':
+                        //                 return '\n<br />\n';
+                        //             default:
+                        //                 return `<${type} class="s-typo s-typo--${type}">${content}</${type}>`;
+                        //         }
+                        //     },
+                        // );
                     }}
                 >
                     <label

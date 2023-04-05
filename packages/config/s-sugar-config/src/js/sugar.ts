@@ -14,7 +14,7 @@ import type { ISSugarConfig } from '../shared/types';
  * injected into the page by the @coffeekraken/s-vite-sugar-plugin
  *
  * @snippet         __SSugarConfig.get($1)
- * 
+ *
  * @example         js
  * import __SSugarConfig from '@coffeekraken/s-sugar-config';
  * __SSugarConfig.get('something.cool');
@@ -28,7 +28,9 @@ export default class SSugarConfig {
         if (SSugarConfig._finalConfig) return SSugarConfig._finalConfig;
         SSugarConfig._finalConfig = __deepMerge(
             // @ts-ignore
-            document.env?.SUGAR?.config ?? {},
+            document.env?.SUGAR?.config ??
+                window.top?.document?.env?.SUGAR?.config ??
+                {},
         );
         return SSugarConfig._finalConfig;
     }

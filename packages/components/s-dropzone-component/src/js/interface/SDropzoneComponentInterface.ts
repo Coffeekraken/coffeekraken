@@ -1,3 +1,4 @@
+import { __i18n } from '@coffeekraken/s-i18n';
 import __SInterface from '@coffeekraken/s-interface';
 
 /**
@@ -92,8 +93,9 @@ export default class SDropzoneComponentInterface extends __SInterface {
                 type: 'Object',
                 description: 'Specify some words/sentences to be translated',
                 default: {
-                    clear: 'Clear',
-                    clickOrDrag: 'Click or drag file(s) here...',
+                    clickOrDrag: __i18n('Click or drag file(s) here...', {
+                        id: 's-dropzone.label',
+                    }),
                 },
             },
         };

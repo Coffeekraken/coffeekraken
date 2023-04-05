@@ -46,6 +46,18 @@ export interface ISSpecsEditorRenderSettings {
     widgets: boolean;
 }
 
+export interface ISSpecsEditorComponentGetValuePathSettings {
+    media?: string;
+    noneResponsive?: boolean;
+    force?: boolean;
+}
+
+export interface ISSpecsEditorComponentSetValueSettings {
+    media?: string;
+    noneResponsive?: boolean;
+    merge?: boolean;
+}
+
 export interface ISSpecsEditorComponentIconsProp {
     clear: string;
     add: string;
@@ -211,27 +223,28 @@ export default class SSpecsEditorComponent extends __SLitComponent {
         return false;
     }
 
-    getValuePath(path: string | string[], settings?: any): string[] {
+    getValuePath(
+        path: string | string[],
+        settings?: ISSpecsEditorComponentGetValuePathSettings,
+    ): string[] {
         if (!Array.isArray(path)) {
             path = path.split('.');
         }
 
         const finalSettings = {
-            media: null,
+            media: undefined,
             force: false,
             ...(settings ?? {}),
         };
 
-        const currentPath = [],
+        let currentPath = [],
             noneMediaValuePath = [],
-            mediaValuePath = [],
-            defaultMediaValuePath = [];
+            mediaValuePath = [];
         for (let i = 0; i < path.length; i++) {
             const part = path[i];
             if (part !== 'props') {
                 noneMediaValuePath.push(part);
                 mediaValuePath.push(part);
-                defaultMediaValuePath.push(part);
             }
             currentPath.push(part);
             const propObj = __get(this.props.specs, currentPath.join('.'));
@@ -240,19 +253,23 @@ export default class SSpecsEditorComponent extends __SLitComponent {
                     mediaValuePath.push('media');
                     mediaValuePath.push(finalSettings.media);
                 }
-                defaultMediaValuePath.push('media');
-                defaultMediaValuePath.push(
-                    this.props.frontspec?.media?.defaultMedia ?? 'desktop',
-                );
             }
+        }
+
+        noneMediaValuePath = noneMediaValuePath.filter((p) => p !== 'props');
+        mediaValuePath = mediaValuePath.filter((p) => p !== 'props');
+
+        if (finalSettings.noneResponsive) {
+            return noneMediaValuePath;
         }
 
         // current media value
         if (finalSettings.media) {
             const mediaScopedValue = __get(
                 this.props.specs.values,
-                mediaValuePath.join('.'),
+                mediaValuePath,
             );
+
             if (finalSettings.force || mediaScopedValue !== undefined) {
                 return mediaValuePath;
             }
@@ -260,69 +277,75 @@ export default class SSpecsEditorComponent extends __SLitComponent {
             // non media "responsive"
             const noneMediaValue = __get(
                 this.props.specs.values,
-                noneMediaValuePath.join('.'),
+                noneMediaValuePath,
             );
+
             if (finalSettings.force || noneMediaValue !== undefined) {
                 return noneMediaValuePath;
             }
         }
     }
 
-    getValue(path: string[], settings?: any): any {
+    getValue(
+        path: string[],
+        settings?: ISSpecsEditorComponentValueSettings,
+    ): any {
         const finalSettings = {
             default: undefined,
+            media: undefined,
             ...(settings ?? {}),
         };
-        if (this.isPathResponsive(path)) {
+        if (!finalSettings.media && this.isPathResponsive(path)) {
             finalSettings.media = this.props.media;
         }
+
         let valuePath = this.getValuePath(path, finalSettings);
         if (!valuePath) {
-            valuePath = path.filter((p) => p !== 'props');
+            return;
         }
 
-        let value = __get(this.props.specs.values, valuePath.join('.'));
-        if (value === undefined && finalSettings.default !== undefined) {
-            value = __set(
-                this.props.specs.values,
-                valuePath.join('.'),
-                finalSettings.default,
-            );
-        }
+        let value = __get(this.props.specs.values, valuePath);
         return value;
     }
 
     clearValue(path: string[], settings?: any): any {
-        // handle responsive values
-        if (this.isPathResponsive(path)) {
-            const valuePath = this.getValuePath(path, {
-                media: this.props.media,
-                ...(settings ?? {}),
-            });
-            __set(this.props.specs.values ?? {}, valuePath, null);
-        } else {
-            const valuePath = path.filter((p) => p !== 'props').join('.');
-            __set(this.props.specs.values ?? {}, valuePath, null);
-        }
-
+        this.setValue(path, null, settings);
         this.requestUpdate();
     }
 
-    setValue(path: string | string[], value: any, settings?: any): any {
+    setValue(
+        path: string | string[],
+        value: any,
+        settings?: ISSpecsEditorComponentSetValueSettings,
+    ): any {
         if (!Array.isArray(path)) {
             path = path.split('.');
         }
 
+        const finalSettings: ISSpecsEditorComponentSetValueSettings = {
+            media: undefined,
+            ...(settings ?? {}),
+        };
+
+        if (!finalSettings?.media && this.isPathResponsive(path)) {
+            finalSettings.media = this.props.media;
+        }
+
         // handle responsive values
-        if (this.isPathResponsive(path)) {
-            const valuePath = this.getValuePath(path, {
-                media: this.props.media,
-                force: true,
-                ...(settings ?? {}),
-            });
-            __set(this.props.specs.values ?? {}, valuePath.join('.'), value);
+        const valuePath = this.getValuePath(path, {
+            media: this.props.media,
+            force: true,
+            ...finalSettings,
+        });
+
+        if (finalSettings?.merge) {
+            const currentValue = __get(this.props.specs.values, valuePath);
+            __set(
+                this.props.specs.values,
+                valuePath,
+                __deepMerge(currentValue, value),
+            );
         } else {
-            const valuePath = path.filter((p) => p !== 'props').join('.');
             __set(this.props.specs.values, valuePath, value);
         }
 
@@ -376,6 +399,13 @@ export default class SSpecsEditorComponent extends __SLitComponent {
                 values: Object.assign({}, this.props.specs.values),
             },
         });
+    }
+
+    /**
+     * Check if the passed media is the default one specified in the props.defaultMedia
+     */
+    isDefaultMedia(media: string = this.props.media): boolean {
+        return media === this.props.defaultMedia;
     }
 
     _toggle(id: string): void {
@@ -432,6 +462,7 @@ export default class SSpecsEditorComponent extends __SLitComponent {
         if (!this.props.frontspec?.media) {
             return '';
         }
+
         return html`
             <div class="${this.utils.cls('_media-icons')}">
                 ${Object.keys(
@@ -442,6 +473,7 @@ export default class SSpecsEditorComponent extends __SLitComponent {
                         const mediaValue = this.getValue(path, {
                             media,
                         });
+
                         return html`
                             <span
                                 class="${this.utils.cls(
@@ -856,9 +888,9 @@ export default class SSpecsEditorComponent extends __SLitComponent {
                                                         this.save();
                                                     }}
                                                 >
-                                                    <i
-                                                        class="fa-regular fa-trash-can"
-                                                    ></i>
+                                                    ${unsafeHTML(
+                                                        this.props.icons.delete,
+                                                    )}
                                                 </button>
                                             `
                                           : ''}
@@ -867,7 +899,6 @@ export default class SSpecsEditorComponent extends __SLitComponent {
                                                 <button
                                                     class="_action _action-save"
                                                     @click=${() => {
-                                                        _console.log('^SAVE');
                                                         this.save();
                                                     }}
                                                     ?disabled=${!this._isValid}

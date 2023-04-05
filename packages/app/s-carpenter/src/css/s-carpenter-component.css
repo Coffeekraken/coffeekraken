@@ -5,6 +5,20 @@
     @sugar.theme.apply (light);
 }
 
+/* body {
+}
+body:before {
+    content: ' ';
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    z-index: 9999;
+} */
+
 .s-carpenter {
 }
 .s-carpenter_website-iframe,

@@ -65,6 +65,7 @@
             "required": true
         },
         "image": {
+            "responsive": true,
             "type": "Image",
             "title": "Simple image",
             "description": "Simple image",

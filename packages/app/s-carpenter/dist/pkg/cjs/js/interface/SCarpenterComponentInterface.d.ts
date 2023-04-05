@@ -67,6 +67,12 @@ export default class SCarpenterComponentInterface extends __SInterface {
                 media: boolean;
             };
         };
+        defaultMedia: {
+            type: string;
+            title: string;
+            description: string;
+            default: Any;
+        };
         ghostSpecs: {
             type: string;
             description: string;

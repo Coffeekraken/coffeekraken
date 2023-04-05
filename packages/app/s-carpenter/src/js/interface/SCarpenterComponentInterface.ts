@@ -1,3 +1,4 @@
+import __SFrontspec from '@coffeekraken/s-frontspec';
 import __SInterface from '@coffeekraken/s-interface';
 
 /**
@@ -96,6 +97,12 @@ export default class SCarpenterComponentInterface extends __SInterface {
                     nav: true,
                     media: true,
                 },
+            },
+            defaultMedia: {
+                type: 'String',
+                title: 'Default media',
+                description: 'Specify the default media',
+                default: __SFrontspec.get('media.defaultMedia'),
             },
             ghostSpecs: {
                 type: 'Boolean',

@@ -1,17 +1,17 @@
 {
     "name": "@coffeekraken/s-state",
-    "version": "2.0.0-alpha.26",
+    "version": "2.0.0-alpha.27",
     "description": "Simple and convinient state management class that let you subscribe to updates a global or specific level of your state, and more...",
     "type": "module",
     "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)",
     "license": "MIT",
     "dependencies": {
-        "@coffeekraken/s-class": "^2.0.0-alpha.26",
-        "@coffeekraken/s-interface": "^2.0.0-alpha.26",
-        "@coffeekraken/s-log": "^2.0.0-alpha.26",
-        "@coffeekraken/s-promise": "^2.0.0-alpha.26",
-        "@coffeekraken/s-sugar-config": "^2.0.0-alpha.26",
-        "@coffeekraken/sugar": "^2.0.0-alpha.26"
+        "@coffeekraken/s-class": "^2.0.0-alpha.27",
+        "@coffeekraken/s-interface": "^2.0.0-alpha.27",
+        "@coffeekraken/s-log": "^2.0.0-alpha.27",
+        "@coffeekraken/s-promise": "^2.0.0-alpha.27",
+        "@coffeekraken/s-sugar-config": "^2.0.0-alpha.27",
+        "@coffeekraken/sugar": "^2.0.0-alpha.27"
     },
     "main": "dist/pkg/cjs/shared/exports.js",
     "module": "dist/pkg/esm/shared/exports.js",

@@ -39,6 +39,9 @@ function registerFunctions($twig)
     $marginClasses = require __DIR__ . '/css/marginClasses.php';
     $twig->addFunction($marginClasses);
 
+    $mediaQuery = require __DIR__ . '/css/mediaQuery.php';
+    $twig->addFunction($mediaQuery);
+
     $paddingClasses = require __DIR__ . '/css/paddingClasses.php';
     $twig->addFunction($paddingClasses);
 
@@ -89,6 +92,11 @@ function registerFunctions($twig)
 
     $props = require __DIR__ . '/object/props.php';
     $twig->addFunction($props);
+
+    // picture
+    $pictureSourcesFromMedia = require __DIR__ .
+        '/picture/pictureSourcesFromMedia.php';
+    $twig->addFunction($pictureSourcesFromMedia);
 
     // specs
     $markdownSpecsList = require __DIR__ . '/specs/markdownSpecsList.php';

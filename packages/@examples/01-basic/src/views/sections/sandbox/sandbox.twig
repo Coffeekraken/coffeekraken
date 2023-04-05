@@ -42,9 +42,10 @@
             <div>
                 {% if image.url %}
                     <div s-appear in="right" delay="600">
-                        <div class="s-media-container">
+                        <picture class="s-media-container">
+                            {{ __pictureSourcesFromMedia(image.media)|raw }}
                             <img class="_img s-media" src="{{ image.url }}" title="{{ image.title }}" alt="{{ image.alt }}" />
-                        </div>
+                        </picture>
                     </div>
                 {% endif %}
             </div>

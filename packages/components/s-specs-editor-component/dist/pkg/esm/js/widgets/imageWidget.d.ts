@@ -19,4 +19,5 @@ export default class SSpecsEditorComponentImageWidget {
         warning: any;
         html: import("lit-html").TemplateResult<1>;
     };
+    _renderImage(url: string, media: string, path: string[]): any;
 }

@@ -12,6 +12,14 @@ export default {
         url: '/dist/img/macbookair.png',
         title: 'Macbook air',
         alt: 'Macbook air',
+        media: {
+            desktop: {
+                url: '/dist/img/macbookair.png',
+            },
+            mobile: {
+                url: '/tmp/upload/Screenshot 2022-12-14 at 17.55.05.png',
+            },
+        },
     },
     title: 'Heading<br /><span class="s-tc:accent">Title</span>!',
     text: `<p class="s-typo--lead">

@@ -133,6 +133,8 @@ export default class SCarpenterComponent extends __SLitComponent {
         this._$editorIframe.setAttribute('scrolling', 'no');
         document.body.appendChild(this._$editorIframe);
 
+        _console.log('_', this.props.defaultMedia);
+
         // inject the current page content inside the iframe
         const iframeHtml = `
             <script type="module" defer src="${this.props.src}"></script>
@@ -143,6 +145,10 @@ export default class SCarpenterComponent extends __SLitComponent {
         } ${this.props.escape ? 'escape' : ''} ${
             this.props.features
                 ? `features='${JSON.stringify(this.props.features)}'`
+                : ''
+        } ${
+            this.props.defaultMedia
+                ? `default-media="${this.props.defaultMedia}"`
                 : ''
         }></s-caprenter-app>    
         `;

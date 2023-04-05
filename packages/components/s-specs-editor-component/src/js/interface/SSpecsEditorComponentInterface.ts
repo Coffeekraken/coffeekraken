@@ -43,9 +43,14 @@ export default class SSpecsEditorComponentInterface extends __SInterface {
             },
             media: {
                 type: 'String',
-                title: 'Specs',
+                title: 'Media',
                 description:
                     'Specify the media on which the specs editor is currently working',
+            },
+            defaultMedia: {
+                type: 'String',
+                title: 'Default media',
+                description: 'Specify the default media',
             },
             features: {
                 type: 'Object',
@@ -72,6 +77,7 @@ export default class SSpecsEditorComponentInterface extends __SInterface {
                 default: {
                     clear: '<i class="fa-solid fa-xmark"></i>',
                     add: '<i class="fa-solid fa-plus"></i>',
+                    delete: '<i class="fa-regular fa-trash-can"></i>',
                     expand: '<i class="fa-solid fa-plus"></i>',
                     remove: '<i class="fa-solid fa-minus"></i>',
                     collapse: '<i class="fa-solid fa-minus"></i>',

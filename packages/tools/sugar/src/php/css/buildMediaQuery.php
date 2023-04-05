@@ -50,7 +50,8 @@ function buildMediaQuery($media, $frontspecMedia = [])
 {
     $defaultParams = (object) [
         'defaultAction' => '<=',
-        'method' => 'container',
+        'defaultMedia' => 'desktop',
+        'method' => 'media',
         'containerName' => 'viewport',
         'queries' => [
             'mobile' => [
@@ -72,11 +73,22 @@ function buildMediaQuery($media, $frontspecMedia = [])
         ],
     ];
 
+    // get the current frontspec
+    $frontspec = \Sugar\frontspec\readFrontspec();
+
+    // merge all these into the finalParams
     $finalParams = (object) \Sugar\object\deepMerge(
         $defaultParams,
+        isset($frontspec->media) ? $frontspec->media : [],
         $frontspecMedia
     );
     $finalParams = (object) \Sugar\convert\toArray($finalParams);
+
+    // check if the requested media exists.
+    // otherwise, return the passedmedia
+    if (!isset($finalParams->queries[$media])) {
+        return $media;
+    }
 
     // sort the media
     $finalParams = \Sugar\frontspec\sortMedia($finalParams);

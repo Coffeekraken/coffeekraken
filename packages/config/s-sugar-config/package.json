@@ -1,17 +1,17 @@
 {
     "name": "@coffeekraken/s-sugar-config",
-    "version": "2.0.0-alpha.26",
+    "version": "2.0.0-alpha.27",
     "description": "Powerful config management class that let you access the .config.(j|t)s files stored either at (mono)repo, package (.sugar/*) or user (.local/.sugar/*) level.",
     "type": "module",
     "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)",
     "license": "MIT",
     "dependencies": {
-        "@coffeekraken/s-class": "^2.0.0-alpha.26",
-        "@coffeekraken/s-config": "^2.0.0-alpha.26",
-        "@coffeekraken/s-config-folder-adapter": "^2.0.0-alpha.26",
-        "@coffeekraken/s-docblock": "^2.0.0-alpha.26",
-        "@coffeekraken/s-sugar-json": "^2.0.0-alpha.26",
-        "@coffeekraken/sugar": "^2.0.0-alpha.26"
+        "@coffeekraken/s-class": "^2.0.0-alpha.27",
+        "@coffeekraken/s-config": "^2.0.0-alpha.27",
+        "@coffeekraken/s-config-folder-adapter": "^2.0.0-alpha.27",
+        "@coffeekraken/s-docblock": "^2.0.0-alpha.27",
+        "@coffeekraken/s-sugar-json": "^2.0.0-alpha.27",
+        "@coffeekraken/sugar": "^2.0.0-alpha.27"
     },
     "types": "./dist/pkg/esm/shared/types.d.ts",
     "main": "dist/pkg/cjs/js/exports.js",

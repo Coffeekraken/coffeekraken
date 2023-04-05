@@ -64,7 +64,6 @@ export default class SDropzoneComponentInterface extends __SInterface {
             type: string;
             description: string;
             default: {
-                clear: string;
                 clickOrDrag: string;
             };
         };

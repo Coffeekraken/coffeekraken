@@ -2,10 +2,8 @@ import __SLitComponent from '@coffeekraken/s-lit-component';
 
 import __SPromise from '@coffeekraken/s-promise';
 import { __isFileAccepted, __resetFileInput } from '@coffeekraken/sugar/dom';
-import { __isImageUrl } from '@coffeekraken/sugar/is';
 import { __deepMerge } from '@coffeekraken/sugar/object';
 import { css, html, unsafeCSS } from 'lit';
-import { unsafeHTML } from 'lit/directives/unsafe-html.js';
 import __SDropzoneComponentInterface from './interface/SDropzoneComponentInterface';
 
 // @ts-ignore
@@ -94,9 +92,9 @@ export default class SDropzoneComponent extends __SLitComponent {
 
     static get state() {
         return {
-            files: [],
             uploadPercent: 0,
             uploadTotalPercent: 0,
+            isDrag: false,
         };
     }
 
@@ -115,22 +113,34 @@ export default class SDropzoneComponent extends __SLitComponent {
         // select the file input
         this._$input = this.querySelector('input');
 
-        if (this.props.files.length) {
-            for (let url of this.props.files) {
-                this.state.files.push({
-                    type: 'url',
-                    src: url,
-                });
-            }
+        // const from = window.top?.document.body ?? document.body;
 
-            // dispatch an update
-            // this.utils.dispatchEvent('change', {
-            //     detail: [...this.state.files],
-            // });
-            this.requestUpdate();
-        } else {
-            this.state.files = [];
-        }
+        // from.addEventListener('dragenter', (e) => {
+        //     setTimeout(() => {
+        //         this.classList.add('drag');
+        //     });
+        // });
+        // from.addEventListener('dragleave', (e) => {
+        //     this.classList.remove('drag');
+        // });
+        // from.addEventListener('dragover', (e) => {
+        //     e.preventDefault();
+        // });
+        // from.addEventListener('drop', (e) => {
+        //     _console.log('drop', e);
+        //     e.preventDefault();
+        // });
+
+        this.addEventListener('dragenter', (e) => {
+            this._onDragenter(e);
+        });
+        this.addEventListener('dragleave', (e) => {
+            this._onDragleave(e);
+        });
+        this.addEventListener('dragover', (e) => e.preventDefault());
+        this.addEventListener('drop', (e) => {
+            this._onDrop(e);
+        });
     }
 
     /**
@@ -196,12 +206,12 @@ export default class SDropzoneComponent extends __SLitComponent {
     /**
      * When drag over
      */
-    _onDragover(e) {
+    _onDragenter(e) {
         // prevent default open behavior
         e.preventDefault();
 
         // add classname
-        this.classList.add(this.utils.cls('--over'));
+        this.classList.add('dragover');
     }
 
     /**
@@ -212,7 +222,7 @@ export default class SDropzoneComponent extends __SLitComponent {
         e.preventDefault();
 
         // remove classname
-        this.classList.remove(this.utils.cls('--over'));
+        this.classList.remove('dragover');
     }
 
     /**
@@ -221,6 +231,8 @@ export default class SDropzoneComponent extends __SLitComponent {
     _onDrop(e) {
         // prevent default open behavior
         e.preventDefault();
+
+        this.classList.remove('drag', 'dragover');
 
         // clear the input
         this.clear(false);
@@ -267,7 +279,7 @@ export default class SDropzoneComponent extends __SLitComponent {
             this.state.uploadTotalPercent = 0;
 
             //  put the component in "upload" state
-            this.classList.add(this.utils.cls('--upload'));
+            this.classList.add('upload');
 
             for (let [idx, file] of files.entries()) {
                 const uploadResultPromise = this._uploadFile(file);
@@ -292,7 +304,7 @@ export default class SDropzoneComponent extends __SLitComponent {
             }
 
             // put the component in "upload" state
-            this.classList.remove(this.utils.cls('--upload'));
+            this.classList.remove('upload');
 
             // resolve the upload process with all the uploaded files
             resolve(uploadedFilesResults);
@@ -307,8 +319,8 @@ export default class SDropzoneComponent extends __SLitComponent {
         this.state.files = [];
 
         // remove classname
-        this.classList.remove(this.utils.cls('--over'));
-        this.classList.add(this.utils.cls('--loading'));
+        this.classList.remove('dragover', 'error');
+        this.classList.add('loading');
 
         // wait until all the file(s) have been processed
         await new Promise((resolve, reject) => {
@@ -379,13 +391,14 @@ export default class SDropzoneComponent extends __SLitComponent {
         });
 
         // handle upload
-        this._handleUpload(files);
+        await this._handleUpload(files);
+
+        // remove the loading class
+        this.classList.remove('loading');
 
         if (this.state.files.length) {
             // set the files in the input field
             this._$input.files = filesList;
-            // add classname
-            this.classList.add(this.utils.cls('--files'));
 
             // dispatch an update
             this.utils.dispatchEvent('change', {
@@ -393,9 +406,9 @@ export default class SDropzoneComponent extends __SLitComponent {
             });
         } else {
             // add error class
-            this.classList.add(this.utils.cls('--error'));
+            this.classList.add('error');
             setTimeout(() => {
-                this.classList.remove(this.utils.cls('--error'));
+                this.classList.remove('error');
             }, this.props.errorTimeout);
 
             // dispatch an error
@@ -408,75 +421,13 @@ export default class SDropzoneComponent extends __SLitComponent {
     render() {
         return html`
             <div
-                class="${this.utils.cls('_root')}"
-                @dragover=${(e) => this._onDragover(e)}
-                @dragleave=${(e) => this._onDragleave(e)}
-                @drop=${(e) => this._onDrop(e)}
+                class="_root"
+                @click=${(e) => {
+                    this.clear(false);
+                    this._$input.click();
+                }}
             >
-                ${!this.state.files.length
-                    ? html`
-                          <label
-                              @click=${(e) => {
-                                  this.clear(false);
-                                  this._$input.click();
-                              }}
-                              class="${this.utils.cls('_drop')}"
-                          >
-                              ${unsafeHTML(this.props.dropFileIcon)}
-                              <p class="${this.utils.cls('_text')}">
-                                  ${this.props.i18n.clickOrDrag}
-                              </p>
-                          </label>
-                      `
-                    : html`
-                          <div class="${this.utils.cls('_droped')}">
-                              <div class="${this.utils.cls('_files')}">
-                                  ${this.state.files.map(
-                                      (file) => html`
-                                          <div
-                                              class="${this.utils.cls(
-                                                  `__file __file--image __file--${
-                                                      file.type?.replace?.(
-                                                          '/',
-                                                          '-',
-                                                      ) ?? 'unknown'
-                                                  }`,
-                                              )}"
-                                          >
-                                              ${file.type?.match?.(/^image\//)
-                                                  ? html`
-                                                        <img
-                                                            src="${file.src}"
-                                                            alt="${file.alt}"
-                                                        />
-                                                    `
-                                                  : file.type === 'url' &&
-                                                    __isImageUrl(file.src)
-                                                  ? html`
-                                                        <img
-                                                            src="${file.src}"
-                                                        />
-                                                    `
-                                                  : ``}
-                                          </div>
-                                      `,
-                                  )}
-                              </div>
-                              ${this.state.status !== 'upload'
-                                  ? html`
-                                        <button
-                                            class="${this.utils.cls(
-                                                '_clear-btn',
-                                                's-btn s-color s-color--error',
-                                            )}"
-                                            @click=${() => this.clear()}
-                                        >
-                                            ${this.props.i18n.clear}
-                                        </button>
-                                    `
-                                  : ''}
-                          </div>
-                      `}
+                <label class="_label">${this.props.i18n.clickOrDrag}</label>
                 ${this.props.input
                     ? html`
                           <input
@@ -488,28 +439,6 @@ export default class SDropzoneComponent extends __SLitComponent {
                               hidden
                               ?multiple=${this.props.maxFiles > 1}
                           />
-                      `
-                    : ''}
-                ${this.props.accept ?? this.props.help
-                    ? html`
-                          <div
-                              class="${this.utils.cls(
-                                  '_help',
-                                  's-tooltip-container',
-                              )}"
-                          >
-                              ${unsafeHTML(this.props.helpIcon)}
-                              <div
-                                  class="${this.utils.cls(
-                                      '_tooltip',
-                                      's-tooltip s-tooltip--left s-color s-color--accent',
-                                  )}"
-                              >
-                                  ${this.props.help ??
-                                  unsafeHTML(this.props.accept.join('<br />'))}
-                                  <div></div>
-                              </div>
-                          </div>
                       `
                     : ''}
             </div>

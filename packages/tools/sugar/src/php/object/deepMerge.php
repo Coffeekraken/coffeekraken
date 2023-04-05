@@ -30,31 +30,37 @@ namespace Sugar\object;
  */
 function _deepMerge($obj1, $obj2)
 {
-    if (is_object($obj2)) {
-        $keys = array_keys(get_object_vars($obj2));
-        foreach ($keys as $key) {
-            if (
-                isset($obj1->{$key}) &&
-                is_object($obj1->{$key}) &&
-                is_object($obj2->{$key})
-            ) {
-                $obj1->{$key} = deepMerge($obj1->{$key}, $obj2->{$key});
-            } elseif (
-                isset($obj1->{$key}) &&
-                is_array($obj1->{$key}) &&
-                is_array($obj2->{$key})
-            ) {
-                $obj1->{$key} = deepMerge($obj1->{$key}, $obj2->{$key});
-            } else {
-                $obj1->{$key} = $obj2->{$key};
-            }
+    $wasObj1Array = is_array($obj1);
+
+    $obj1 = (array) $obj1;
+    $obj2 = (array) $obj2;
+
+    foreach ($obj2 as $key => $value) {
+        if (!isset($obj1[$key])) {
+            $obj1[$key] = $value;
+            continue;
         }
-    } elseif (is_array($obj2)) {
-        if (is_array($obj1) && is_array($obj2)) {
-            // $obj1 = array_merge_recursive($obj1, $obj2);
-        } else {
-            $obj1 = $obj2;
+
+        $isSourceMergeable =
+            is_object($obj1[$key]) || \Sugar\is\assocArray($obj1[$key]);
+        if (!$isSourceMergeable) {
+            $obj1[$key] = $value;
+            continue;
         }
+
+        if (is_object($value) || \Sugar\is\assocArray($value)) {
+            // var_dump($obj1[$key], $value);
+
+            $obj1[$key] = _deepMerge($obj1[$key], $value);
+        }
+
+        // if (is_object($value) || \Sugar\is\assocArray($value)) {
+        //     $obj1[$key] = _deepMerge($obj1[$key], $value);
+        // }
+    }
+
+    if ($wasObj1Array) {
+        $obj1 = (array) $obj1;
     }
 
     return $obj1;
@@ -66,7 +72,7 @@ function deepMerge(...$args)
 
     for ($i = 1; $i < count($args); $i++) {
         $current = _deepMerge($current, $obj2);
-        $obj2 = $args[1];
+        $obj2 = $args[$i];
     }
 
     return $current;

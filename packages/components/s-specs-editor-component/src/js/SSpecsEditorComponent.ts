@@ -4,6 +4,9 @@ import { __i18n } from '@coffeekraken/s-i18n';
 
 import { __get, __set } from '@coffeekraken/sugar/object';
 
+import { __copy } from '@coffeekraken/sugar/clipboard';
+import { __addClassTimeout } from '@coffeekraken/sugar/dom';
+
 import { define as __SColorPickerComponentDefine } from '@coffeekraken/s-color-picker-component';
 import { define as __SDatetimePickerComponentDefine } from '@coffeekraken/s-datetime-picker-component';
 import { define as __SDropzoneComponentDefine } from '@coffeekraken/s-dropzone-component';
@@ -33,6 +36,7 @@ import __selectWidget from './widgets/selectWidget';
 import __spacesWidget from './widgets/spacesWidget';
 import __switchWidget from './widgets/switchWidget';
 import __textWidget from './widgets/textWidget';
+import __videoWidget from './widgets/videoWidget';
 import __wysiwygWidget from './widgets/wysiwygWidget';
 
 // components
@@ -44,6 +48,10 @@ __SWysiwygComponentDefine();
 export interface ISSpecsEditorRenderSettings {
     repeatable: boolean;
     widgets: boolean;
+}
+
+export interface ISSpecsEditorComponentRenderLabelSettings {
+    tooltip?: 'top' | 'left' | 'right' | 'bottom';
 }
 
 export interface ISSpecsEditorComponentGetValuePathSettings {
@@ -177,6 +185,7 @@ export default class SSpecsEditorComponent extends __SLitComponent {
         text: __textWidget,
         select: __selectWidget,
         wysiwyg: __wysiwygWidget,
+        video: __videoWidget,
     };
 
     static get styles() {
@@ -190,6 +199,7 @@ export default class SSpecsEditorComponent extends __SLitComponent {
     };
 
     _isValid = true;
+    _isPristine = true;
     _errors = [];
     _widgets = {};
 
@@ -206,6 +216,7 @@ export default class SSpecsEditorComponent extends __SLitComponent {
         for (let [dotPath, widget] of Object.entries(this._widgets)) {
             widget.firstUpdated?.();
         }
+        this._isPristine = false;
     }
 
     isPathResponsive(path: string[]): any {
@@ -389,15 +400,22 @@ export default class SSpecsEditorComponent extends __SLitComponent {
      * This will dispatch en event "s-specs-editor.save" with as detail the current values object
      */
     save(): void {
+        this.requestUpdate();
+
         if (!this._isValid) {
             return;
         }
+
+        const data = {
+            specs: Object.assign({}, this.props.specs),
+            values: Object.assign({}, this.props.specs.values),
+        };
+
+        _console.log('SAVE', data);
+
         this.utils.dispatchEvent('save', {
             bubbles: true,
-            detail: {
-                propsSpecs: Object.assign({}, this.props.specs),
-                values: Object.assign({}, this.props.specs.values),
-            },
+            detail: data,
         });
     }
 
@@ -527,9 +545,43 @@ export default class SSpecsEditorComponent extends __SLitComponent {
     }
 
     /**
+     * Render a copy button
+     */
+    renderCopyButton(text, tooltip = 'Copy'): any {
+        return html`
+            <button
+                class="copy-btn s-tooltip-container"
+                @pointerup=${(e) => {
+                    // copy url
+                    __copy(text);
+                    __addClassTimeout('success', e.currentTarget, 1000);
+                }}
+            >
+                <span class="_pending"
+                    >${unsafeHTML(this.props.icons.copy)}</span
+                >
+                <span class="_success"
+                    >${unsafeHTML(this.props.icons.success)}</span
+                >
+                ${tooltip
+                    ? html` <div class="s-tooltip">${tooltip}</div> `
+                    : ''}
+            </button>
+        `;
+    }
+
+    /**
      * Render the field label with the responsive icons if needed, etc...
      */
-    renderLabel(propObj: any, path: string[]) {
+    renderLabel(
+        propObj: any,
+        path: string[],
+        settings?: ISSpecsEditorComponentRenderLabelSettings,
+    ) {
+        const finalSettings: ISSpecsEditorComponentRenderLabelSettings = {
+            tooltip: 'left',
+            ...(settings ?? {}),
+        };
         return html`
             <span>
                 <h3 class="_title">
@@ -546,7 +598,9 @@ export default class SSpecsEditorComponent extends __SLitComponent {
                     ? html`
                           <span class="_help-icon s-tooltip-container">
                               <i class="fa-solid fa-circle-question"></i>
-                              <div class="s-tooltip s-tooltip--left">
+                              <div
+                                  class="s-tooltip s-tooltip--${finalSettings.tooltip}"
+                              >
                                   ${propObj.description}
                               </div>
                           </span>
@@ -587,6 +641,32 @@ export default class SSpecsEditorComponent extends __SLitComponent {
     }
 
     /**
+     * Validate a widget
+     */
+    _validateWidget(widget, propObj, path, values) {
+        let widgetValidateResult;
+        if (!this._isPristine) {
+            widgetValidateResult = widget.validate?.({
+                propObj,
+                path,
+                values,
+            });
+            if (widgetValidateResult?.error) {
+                this._errors.push(widgetValidateResult.error);
+            }
+            if (widgetValidateResult?.warning) {
+                this.utils.dispatchEvent('warning', {
+                    detail: {
+                        warning: widgetValidateResult.warning,
+                        widget,
+                    },
+                });
+            }
+        }
+        return widgetValidateResult;
+    }
+
+    /**
      * Render the proper widget depending on the "type" propObj property
      */
     _getRenderedWidget(propObj, path) {
@@ -598,6 +678,13 @@ export default class SSpecsEditorComponent extends __SLitComponent {
         }
 
         const values = this.getValue(path);
+
+        const widgetValidateResult = this._validateWidget(
+            widget,
+            propObj,
+            path,
+            values,
+        );
 
         // check if the widget is active
         if (
@@ -611,28 +698,15 @@ export default class SSpecsEditorComponent extends __SLitComponent {
             return;
         }
 
-        const widgetResult = widget.render({
+        const widgetRenderResult = widget.render({
             values,
             path,
             propObj,
         });
 
-        if (widgetResult.error) {
-            this._errors.push(widgetResult.error);
-        }
-        if (widgetResult.warning) {
-            this.utils.dispatchEvent('warning', {
-                detail: {
-                    warning: widgetResult.warning,
-                    widget,
-                },
-            });
-        }
-
         return {
-            error: widgetResult.error,
-            warning: widgetResult.warning,
-            html: html` ${widgetResult.html} `,
+            ...(widgetValidateResult ?? {}),
+            html: widgetRenderResult,
         };
     }
 

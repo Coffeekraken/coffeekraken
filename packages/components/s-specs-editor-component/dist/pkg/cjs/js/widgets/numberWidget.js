@@ -11,89 +11,85 @@ class SSpecsEditorComponentNumberWidget {
         this._propObj = propObj;
         this._path = path;
     }
+    validate({ values, propObj }) {
+        if (!values) {
+            return;
+        }
+        let value = values.value;
+        // letters in value
+        if (Number.isNaN(parseFloat(value))) {
+            return {
+                error: (0, s_i18n_1.__i18n)(`Passed value "%s" is not a valid number`, {
+                    id: 's-specs-editor.widget.number.invalid',
+                    tokens: {
+                        s: value,
+                    },
+                }),
+            };
+        }
+        // letters in value
+        if (`${parseFloat(value)}`.length !== value.length) {
+            value = parseFloat(value);
+        }
+        // min
+        if (propObj.min !== undefined && value < propObj.min) {
+            value = propObj.min;
+            return {
+                error: (0, s_i18n_1.__i18n)(`The value must be greater or equal to %s`, {
+                    id: 's-specs-editor.widget.integer.min',
+                    tokens: {
+                        s: propObj.min,
+                    },
+                }),
+            };
+        }
+        // max
+        if (propObj.max !== undefined && value > propObj.max) {
+            value = propObj.max;
+            return {
+                error: (0, s_i18n_1.__i18n)(`The value must be lower or equal to %s`, {
+                    id: 's-specs-editor.widget.integer.max',
+                    tokens: {
+                        s: propObj.max,
+                    },
+                }),
+            };
+        }
+    }
     render({ propObj, values, path }) {
         if (!values) {
             values = {
                 value: propObj.default,
             };
         }
-        return {
-            error: this._error,
-            warning: this._warning,
-            html: (0, lit_1.html) `
-                <div class="${this._component.utils.cls('_number-widget')}">
-                    <label
-                        class="${this._component.utils.cls('_label', 's-label s-label--block')}"
-                    >
-                        <input
-                            @change=${(e) => {
-                let value = e.target.value;
-                // letters in value
-                if (Number.isNaN(parseFloat(value))) {
-                    e.target.value = 0;
-                    this._error = (0, s_i18n_1.__i18n)(`Passed value "%s" is not a valid number`, {
-                        id: 's-specs-editor.widget.number.invalid',
-                        tokens: {
-                            s: value,
-                        },
-                    });
-                    return this._component.requestUpdate();
-                }
-                // letters in value
-                if (`${parseFloat(value)}`.length !==
-                    value.length) {
-                    value = parseFloat(value);
-                    e.target.value = value;
-                }
-                // min
-                if (propObj.min !== undefined &&
-                    value < propObj.min) {
-                    value = propObj.min;
-                    e.target.value = value;
-                    this._warning = (0, s_i18n_1.__i18n)(`The value must be greater or equal to %s`, {
-                        id: 's-specs-editor.widget.number.min',
-                        tokens: {
-                            s: propObj.min,
-                        },
-                    });
-                    return this._component.requestUpdate();
-                }
-                // max
-                if (propObj.max !== undefined &&
-                    value > propObj.max) {
-                    value = propObj.max;
-                    e.target.value = value;
-                    this._warning = (0, s_i18n_1.__i18n)('The value must be lower or equal to %s', {
-                        id: 's-specs-editor.widget.number.max',
-                        tokens: {
-                            s: propObj.max,
-                        },
-                    });
-                    return this._component.requestUpdate();
-                }
-                this._error = null;
-                this._warning = null;
-                this._component.setValue(path, {
-                    value,
-                });
-                this._component.apply();
-            }}
-                            type="number"
-                            step="0.1"
-                            min=${propObj.min}
-                            max=${propObj.max}
-                            name="${path.at(-1)}"
-                            class="${this._component.utils.cls('_input', 's-input')}"
-                            placeholder="${propObj.placeholder}"
-                            path="${path.join('.')}"
-                            value="${values.value}"
-                        />
-                        ${this._component.renderLabel(propObj, path)}
-                    </label>
-                </div>
-            `,
-        };
+        return (0, lit_1.html) `
+            <div class="${this._component.utils.cls('_number-widget')}">
+                <label
+                    class="${this._component.utils.cls('_label', 's-label s-label--block')}"
+                >
+                    <input
+                        @change=${(e) => {
+            let value = e.target.value;
+            this._component.setValue(path, {
+                value,
+            });
+            this._component.apply();
+        }}
+                        type="number"
+                        step="0.1"
+                        min=${propObj.min}
+                        max=${propObj.max}
+                        name="${path.at(-1)}"
+                        class="${this._component.utils.cls('_input', 's-input')}"
+                        placeholder="${propObj.placeholder}"
+                        path="${path.join('.')}"
+                        value="${values.value}"
+                    />
+                    ${this._component.renderLabel(propObj, path)}
+                </label>
+            </div>
+        `;
     }
 }
 exports.default = SSpecsEditorComponentNumberWidget;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7O0FBQUEsaURBQThDO0FBQzlDLDZCQUEyQjtBQUkzQixNQUFxQixpQ0FBaUM7SUFPbEQsTUFBTSxDQUFDLFFBQVE7UUFDWCxPQUFPLElBQUksQ0FBQztJQUNoQixDQUFDO0lBRUQsWUFBWSxFQUFFLFNBQVMsRUFBRSxPQUFPLEVBQUUsSUFBSSxFQUFFO1FBQ3BDLElBQUksQ0FBQyxVQUFVLEdBQUcsU0FBUyxDQUFDO1FBQzVCLElBQUksQ0FBQyxRQUFRLEdBQUcsT0FBTyxDQUFDO1FBQ3hCLElBQUksQ0FBQyxLQUFLLEdBQUcsSUFBSSxDQUFDO0lBQ3RCLENBQUM7SUFFRCxNQUFNLENBQUMsRUFBRSxPQUFPLEVBQUUsTUFBTSxFQUFFLElBQUksRUFBRTtRQUM1QixJQUFJLENBQUMsTUFBTSxFQUFFO1lBQ1QsTUFBTSxHQUFhO2dCQUNmLEtBQUssRUFBRSxPQUFPLENBQUMsT0FBTzthQUN6QixDQUFDO1NBQ0w7UUFFRCxPQUFPO1lBQ0gsS0FBSyxFQUFFLElBQUksQ0FBQyxNQUFNO1lBQ2xCLE9BQU8sRUFBRSxJQUFJLENBQUMsUUFBUTtZQUN0QixJQUFJLEVBQUUsSUFBQSxVQUFJLEVBQUE7OEJBQ1EsSUFBSSxDQUFDLFVBQVUsQ0FBQyxLQUFLLENBQUMsR0FBRyxDQUFDLGdCQUFnQixDQUFDOztpQ0FFeEMsSUFBSSxDQUFDLFVBQVUsQ0FBQyxLQUFLLENBQUMsR0FBRyxDQUM5QixRQUFRLEVBQ1Isd0JBQXdCLENBQzNCOzs7c0NBR2EsQ0FBQyxDQUFDLEVBQUUsRUFBRTtnQkFDWixJQUFJLEtBQUssR0FBRyxDQUFDLENBQUMsTUFBTSxDQUFDLEtBQUssQ0FBQztnQkFFM0IsbUJBQW1CO2dCQUNuQixJQUFJLE1BQU0sQ0FBQyxLQUFLLENBQUMsVUFBVSxDQUFDLEtBQUssQ0FBQyxDQUFDLEVBQUU7b0JBQ2pDLENBQUMsQ0FBQyxN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
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7O0FBQUEsaURBQThDO0FBQzlDLDZCQUEyQjtBQUkzQixNQUFxQixpQ0FBaUM7SUFLbEQsTUFBTSxDQUFDLFFBQVE7UUFDWCxPQUFPLElBQUksQ0FBQztJQUNoQixDQUFDO0lBRUQsWUFBWSxFQUFFLFNBQVMsRUFBRSxPQUFPLEVBQUUsSUFBSSxFQUFFO1FBQ3BDLElBQUksQ0FBQyxVQUFVLEdBQUcsU0FBUyxDQUFDO1FBQzVCLElBQUksQ0FBQyxRQUFRLEdBQUcsT0FBTyxDQUFDO1FBQ3hCLElBQUksQ0FBQyxLQUFLLEdBQUcsSUFBSSxDQUFDO0lBQ3RCLENBQUM7SUFFRCxRQUFRLENBQUMsRUFBRSxNQUFNLEVBQUUsT0FBTyxFQUFFO1FBQ3hCLElBQUksQ0FBQyxNQUFNLEVBQUU7WUFDVCxPQUFPO1NBQ1Y7UUFFRCxJQUFJLEtBQUssR0FBRyxNQUFNLENBQUMsS0FBSyxDQUFDO1FBRXpCLG1CQUFtQjtRQUNuQixJQUFJLE1BQU0sQ0FBQyxLQUFLLENBQUMsVUFBVSxDQUFDLEtBQUssQ0FBQyxDQUFDLEVBQUU7WUFDakMsT0FBTztnQkFDSCxLQUFLLEVBQUUsSUFBQSxlQUFNLEVBQUMseUNBQXlDLEVBQUU7b0JBQ3JELEVBQUUsRUFBRSxzQ0FBc0M7b0JBQzFDLE1BQU0sRUFBRTt3QkFDSixDQUFDLEVBQUUsS0FBSztxQkFDWDtpQkFDSixDQUFDO2FBQ0wsQ0FBQztTQUNMO1FBRUQsbUJBQW1CO1FBQ25CLElBQUksR0FBRyxVQUFVLENBQUMsS0FBSyxDQUFDLEVBQUUsQ0FBQyxNQUFNLEtBQUssS0FBSyxDQUFDLE1BQU0sRUFBRTtZQUNoRCxLQUFLLEdBQUcsVUFBVSxDQUFDLEtBQUssQ0FBQyxDQUFDO1NBQzdCO1FBRUQsTUFBTTtRQUNOLElBQUksT0FBTyxDQUFDLEdBQUcsS0FBSyxTQUFTLElBQUksS0FBSyxHQUFHLE9BQU8sQ0FBQyxHQUFHLEVBQUU7WUFDbEQsS0FBSyxHQUFHLE9BQU8sQ0FBQyxHQUFHLENBQUM7WUFDcEIsT0FBTztnQkFDSCxLQUFLLEVBQUUsSUFBQSxlQUFNLEVBQUMsMENBQTBDLEVBQUU7b0JBQ3RELEVBQUUsRUFBRSxtQ0FBbUM7b0JBQ3ZDLE1BQU0sRUFBRTt3QkFDSixDQUFDLEVBQUUsT0FBTyxDQUFDLEdBQUc7cUJBQ2pCO2lCQUNKLENBQUM7YUFDTCxDQUFDO1NBQ0w7UUFFRCxNQUFNO1FBQ04sSUFBSSxPQUFPLENBQUMsR0FBRyxLQUFLLFNBQVMsSUFBSSxLQUFLLEdBQUcsT0FBTyxDQUFDLEdBQUcsRUFBRTtZQUNsRCxLQUFLLEdBQUcsT0FBTyxDQUFDLEdBQUcsQ0FBQztZQUNwQixPQUFPO2dCQUNILEtBQUssRUFBRSxJQUFBLGVBQU0sRUFBQyx3Q0FBd0MsRUFBRTtvQkFDcEQsRUFBRSxFQUFFLG1DQUFtQztvQkFDdkMsTUFBTSxFQUFFO3dCQUNKLENBQUMsRUFBRSxPQUFPLENBQUMsR0FBRztxQkFDakI7aUJBQ0osQ0FBQzthQUNMLENBQUM7U0FDTDtJQUNMLENBQUM7SUFFRCxNQUFNLENBQUMsRUFBRSxPQUFPLEVBQUUsTUFBTSxFQUFFLElBQUksRUFBRTtRQUM1QixJQUFJLENBQUMsTUFBTSxFQUFFO1lBQ1QsTUFBTSxHQUFhO2dCQUNmLEtBQUssRUFBRSxPQUFPLENBQUMsT0FBTzthQUN6QixDQUFDO1NBQ0w7UUFFRCxPQUFPLElBQUEsVUFBSSxFQUFBOzBCQUNPLElBQUksQ0FBQyxVQUFVLENBQUMsS0FBSyxDQUFDLEdBQUcsQ0FBQyxnQkFBZ0IsQ0FBQzs7NkJBRXhDLElBQUksQ0FBQyxVQUFVLENBQUMsS0FBSyxDQUFDLEdBQUcsQ0FDOUIsUUFBUSxFQUNSLHdCQUF3QixDQUMzQjs7O2tDQUdhLENBQUMsQ0FBQyxFQUFFLEVBQUU7WUFDWixJQUFJLEtBQUssR0FBRyxDQUFDLENBQUMsTUFBTSxDQUFDLEtBQUssQ0FBQztZQUMzQixJQUFJLENBQUMsVUFBVSxDQUFDLFFBQVEsQ0FBQyxJQUFJLEVBQUU7Z0JBQzNCLEtBQUs7YUFDUixDQUFDLENBQUM7WUFDSCxJQUFJLENBQUMsVUFBVSxDQUFDLEtBQUssRUFBRSxDQUFDO1FBQzVCLENBQUM7Ozs4QkFHSyxPQUFPLENBQUMsR0FBRzs4QkFDWCxPQUFPLENBQUMsR0FBRztnQ0FDVCxJQUFJLENBQUMsRUFBRSxDQUFDLENBQUMsQ0FBQyxDQUFDO2lDQUNWLElBQUksQ0FBQyxVQUFVLENBQUMsS0FBSyxDQUFDLEdBQUcsQ0FDOUIsUUFBUSxFQUNSLFNBQVMsQ0FDWjt1Q0FDYyxPQUFPLENBQUMsV0FBVztnQ0FDMUIsSUFBSSxDQUFDLElBQUksQ0FBQyxHQUFHLENBQUM7aUNBQ2IsTUFBTSxDQUFDLEtBQUs7O3NCQUV2QixJQUFJLENBQUMsVUFBVSxDQUFDLFdBQVcsQ0FBQyxPQUFPLEVBQUUsSUFBSSxDQUFDOzs7U0FHdkQsQ0FBQztJQUNOLENBQUM7Q0FDSjtBQTNHRCxvREEyR0MifQ==

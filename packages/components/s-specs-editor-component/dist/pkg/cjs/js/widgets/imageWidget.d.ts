@@ -1,6 +1,4 @@
 export default class SSpecsEditorComponentImageWidget {
-    _error: any;
-    _warning: any;
     _component: any;
     _propObj: any;
     _path: any;
@@ -10,14 +8,13 @@ export default class SSpecsEditorComponentImageWidget {
         propObj: any;
         path: any;
     });
+    validate({ values }: {
+        values: any;
+    }): void;
     render({ propObj, values, path }: {
         propObj: any;
         values: any;
         path: any;
-    }): {
-        error: any;
-        warning: any;
-        html: import("lit-html").TemplateResult<1>;
-    };
+    }): import("lit-html").TemplateResult<1>;
     _renderImage(url: string, media: string, path: string[]): any;
 }

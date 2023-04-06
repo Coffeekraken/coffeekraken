@@ -3,7 +3,7 @@ import __define from './define';
 export interface ISDropzoneComponentProps {
     maxFiles: number;
     maxSize: number;
-    files: string[];
+    multiple: boolean;
     input: boolean;
     name: string;
     upload: boolean;

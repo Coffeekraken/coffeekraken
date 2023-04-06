@@ -11,55 +11,59 @@ class SSpecsEditorComponentImageWidget {
         this._propObj = propObj;
         this._path = path;
     }
+    validate({ values }) {
+        if (!values.urlee) {
+            // return {
+            //     error: 'hello',
+            // };
+        }
+    }
     render({ propObj, values, path }) {
         if (!values) {
             values = {};
         }
-        return {
-            error: this._error,
-            warning: this._warning,
-            html: (0, lit_1.html) `
-                <div class="${this._component.utils.cls('_image-widget')}">
-                    <label
-                        class="${this._component.utils.cls('_label', 's-label s-label--block')}"
-                        @click=${(e) => e.preventDefault()}
-                    >
-                        ${this._component.renderLabel(propObj, path)}
-                    </label>
+        values = values;
+        return (0, lit_1.html) `
+            <div class="${this._component.utils.cls('_image-widget')}">
+                <label
+                    class="${this._component.utils.cls('_label', 's-label s-label--block')}"
+                    @click=${(e) => e.preventDefault()}
+                >
+                    ${this._component.renderLabel(propObj, path)}
+                </label>
 
-                    <div class="_drop">
-                        ${!values.url
-                ? (0, lit_1.html) `
-                                  <s-dropzone
-                                      accept="image/*"
-                                      upload
-                                      class="s-bare"
-                                      @s-dropzone.file=${(e) => {
-                    // responsive item
-                    this._component.setValue(path, {
-                        url: e.detail[0].url,
+                <div class="_drop">
+                    ${!values.url
+            ? (0, lit_1.html) `
+                              <s-dropzone
+                                  accept="image/*"
+                                  upload
+                                  class="s-bare"
+                                  @s-dropzone.file=${(e) => {
+                // responsive item
+                this._component.setValue(path, {
+                    url: e.detail[0].url,
+                });
+                if (this._component.isPathResponsive(path) &&
+                    this._component.isDefaultMedia()) {
+                    this._component.setValue([...path, 'url'], e.detail[0].url, {
+                        noneResponsive: true,
                     });
-                    if (this._component.isPathResponsive(path) &&
-                        this._component.isDefaultMedia()) {
-                        this._component.setValue([...path, 'url'], e.detail[0].url, {
-                            noneResponsive: true,
-                        });
-                    }
-                    this._component.apply();
-                }}
-                                  ></s-dropzone>
-                              `
-                : (0, lit_1.html) `
-                                  <ul
-                                      class="${this._component.utils.cls('_images')}"
-                                  >
-                                      ${this._renderImage(values.url, this._component.props.media, path)}
-                                  </ul>
-                              `}
-                    </div>
+                }
+                this._component.apply();
+            }}
+                              ></s-dropzone>
+                          `
+            : (0, lit_1.html) `
+                              <ul
+                                  class="${this._component.utils.cls('_images')}"
+                              >
+                                  ${this._renderImage(values.url, this._component.props.media, path)}
+                              </ul>
+                          `}
                 </div>
-            `,
-        };
+            </div>
+        `;
     }
     _renderImage(url, media, path) {
         return (0, lit_1.html) `
@@ -70,6 +74,7 @@ class SSpecsEditorComponentImageWidget {
                 <div class="_name">${url.split('/').pop()}</div>
                 <div class="_spacer"></div>
                 <div class="_actions">
+                    ${this._component.renderCopyButton(`${document.location.origin}/${url}`, this._component.props.i18n.image.copyUrl)}
                     <button
                         class="_delete"
                         @pointerup=${(e) => {
@@ -90,4 +95,4 @@ class SSpecsEditorComponentImageWidget {
     }
 }
 exports.default = SSpecsEditorComponentImageWidget;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7O0FBQUEsNkJBQTJCO0FBQzNCLGtFQUEyRDtBQUkzRCxNQUFxQixnQ0FBZ0M7SUFPakQsTUFBTSxDQUFDLFFBQVE7UUFDWCxPQUFPLElBQUksQ0FBQztJQUNoQixDQUFDO0lBRUQsWUFBWSxFQUFFLFNBQVMsRUFBRSxPQUFPLEVBQUUsSUFBSSxFQUFFO1FBQ3BDLElBQUksQ0FBQyxVQUFVLEdBQUcsU0FBUyxDQUFDO1FBQzVCLElBQUksQ0FBQyxRQUFRLEdBQUcsT0FBTyxDQUFDO1FBQ3hCLElBQUksQ0FBQyxLQUFLLEdBQUcsSUFBSSxDQUFDO0lBQ3RCLENBQUM7SUFFRCxNQUFNLENBQUMsRUFBRSxPQUFPLEVBQUUsTUFBTSxFQUFFLElBQUksRUFBRTtRQUM1QixJQUFJLENBQUMsTUFBTSxFQUFFO1lBQ1QsTUFBTSxHQUFHLEVBQUUsQ0FBQztTQUNmO1FBRUQsT0FBTztZQUNILEtBQUssRUFBRSxJQUFJLENBQUMsTUFBTTtZQUNsQixPQUFPLEVBQUUsSUFBSSxDQUFDLFFBQVE7WUFDdEIsSUFBSSxFQUFFLElBQUEsVUFBSSxFQUFBOzhCQUNRLElBQUksQ0FBQyxVQUFVLENBQUMsS0FBSyxDQUFDLEdBQUcsQ0FBQyxlQUFlLENBQUM7O2lDQUV2QyxJQUFJLENBQUMsVUFBVSxDQUFDLEtBQUssQ0FBQyxHQUFHLENBQzlCLFFBQVEsRUFDUix3QkFBd0IsQ0FDM0I7aUNBQ1EsQ0FBQyxDQUFDLEVBQUUsRUFBRSxDQUFDLENBQUMsQ0FBQyxjQUFjLEVBQUU7OzBCQUVoQyxJQUFJLENBQUMsVUFBVSxDQUFDLFdBQVcsQ0FBQyxPQUFPLEVBQUUsSUFBSSxDQUFDOzs7OzBCQUkxQyxDQUFDLE1BQU0sQ0FBQyxHQUFHO2dCQUNULENBQUMsQ0FBQyxJQUFBLFVBQUksRUFBQTs7Ozs7eURBS3VCLENBQUMsQ0FBQyxFQUFFLEVBQUU7b0JBQ3JCLGtCQUFrQjtvQkFDbEIsSUFBSSxDQUFDLFVBQVUsQ0FBQyxRQUFRLENBQUMsSUFBSSxFQUFFO3dCQUMzQixHQUFHLEVBQVcsQ0FBQyxDQUFDLE1BQU0sQ0FBQyxDQUFDLENBQUMsQ0FBQyxHQUFHO3FCQUNoQyxDQUFDLENBQUM7b0JBQ0gsSUFDSSxJQUFJLENBQUMsVUFBVSxDQUFDLGdCQUFnQixDQUM1QixJQUFJLENBQ1A7d0JBQ0QsSUFBSSxDQUFDLFVBQVUsQ0FBQyxjQUFjLEVBQUUsRUFDbEM7d0JBQ0UsSUFBSSxDQUFDLFVBQVUsQ0FBQyxRQUFRLENBQ3BCLENBQUMsR0FBRyxJQUFJLEVBQUUsS0FBSyxDQUFDLEVBQ1AsQ0FBQyxDQUFDLE1BQU0sQ0FBQyxDQUFDLENBQUMsQ0FBQyxHQUFHLEVBQ3hCOzRCQUNJLGNBQWMsRUFBRSxJQUFJO3lCQUN2QixDQUNKLENBQUM7cUJBQ0w7b0JBQ0QsSUFBSSxDQUFDLFVBQVUsQ0FBQyxLQUFLLEVBQUUsQ0FBQztnQkFDNUIsQ0FBQzs7K0JBRVI7Z0JBQ0gsQ0FBQyxDQUFDLElBQUEsVUFBSSxFQUFBOzsrQ0FFYSxJQUFJLENBQUMsVUFBVSxDQUFDLEtBQUssQ0FBQyxHQUFHLENBQzlCLFNBQVMsQ0FDWjs7d0NBRUMsSUFBSSxDQUFDLFlBQVksQ0FDZixNQUFNLENBQUMsR0FBRyxFQUNWLElBQUksQ0FBQyxVQUFVLENBQUMsS0FBSyxDQUFDLEtBQUssRUFDM0IsSUFBSSxDQUNQOzsrQkFFUjs7O2FBR2xCO1NBQ0osQ0FBQztJQUNOLENBQUM7SUFDRCxZQUFZLENBQUMsR0FBVyxFQUFFLEtBQWEsRUFBRSxJQUFjO1FBQ25ELE9BQU8sSUFBQSxVQUFJLEVBQUE7OztnREFHNkIsR0FBRzs7cUNBRWQsR0FBRyxDQUFDLEtBQUssQ0FBQyxHQUFHLENBQUMsQ0FBQyxHQUFHLEVBQUU7Ozs7O3FDQUtwQixDQUFDLENBQUMsRUFBRSxFQUFFO1lBQ2YsSUFBSSxDQUFDLENBQUMsYUFBYSxDQUFDLGdCQUFnQjtnQkFBRSxPQUFPO1lBQzdDLElBQUksQ0FBQyxVQUFVLENBQUMsVUFBVSxDQUFDLElBQUksRUFBRTtnQkFDN0IsS0FBSzthQUNSLENBQUMsQ0FBQztZQUNILElBQUksQ0FBQyxVQUFVLENBQUMsS0FBSyxFQUFFLENBQUM7UUFDNUIsQ0FBQzs7OzBCQUdDLElBQUEsMkJBQVUsRUFBQyxJQUFJLENBQUMsVUFBVSxDQUFDLEtBQUssQ0FBQyxLQUFLLENBQUMsTUFBTSxDQUFDOzs7O1NBSS9ELENBQUM7SUFDTixDQUFDO0NBQ0o7QUEvR0QsbURBK0dDIn0=
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7O0FBQUEsNkJBQTJCO0FBQzNCLGtFQUEyRDtBQUkzRCxNQUFxQixnQ0FBZ0M7SUFLakQsTUFBTSxDQUFDLFFBQVE7UUFDWCxPQUFPLElBQUksQ0FBQztJQUNoQixDQUFDO0lBRUQsWUFBWSxFQUFFLFNBQVMsRUFBRSxPQUFPLEVBQUUsSUFBSSxFQUFFO1FBQ3BDLElBQUksQ0FBQyxVQUFVLEdBQUcsU0FBUyxDQUFDO1FBQzVCLElBQUksQ0FBQyxRQUFRLEdBQUcsT0FBTyxDQUFDO1FBQ3hCLElBQUksQ0FBQyxLQUFLLEdBQUcsSUFBSSxDQUFDO0lBQ3RCLENBQUM7SUFFRCxRQUFRLENBQUMsRUFBRSxNQUFNLEVBQUU7UUFDZixJQUFJLENBQUMsTUFBTSxDQUFDLEtBQUssRUFBRTtZQUNmLFdBQVc7WUFDWCxzQkFBc0I7WUFDdEIsS0FBSztTQUNSO0lBQ0wsQ0FBQztJQUVELE1BQU0sQ0FBQyxFQUFFLE9BQU8sRUFBRSxNQUFNLEVBQUUsSUFBSSxFQUFFO1FBQzVCLElBQUksQ0FBQyxNQUFNLEVBQUU7WUFDVCxNQUFNLEdBQUcsRUFBRSxDQUFDO1NBQ2Y7UUFDRCxNQUFNLEdBQWdCLE1BQU0sQ0FBQztRQUU3QixPQUFPLElBQUEsVUFBSSxFQUFBOzBCQUNPLElBQUksQ0FBQyxVQUFVLENBQUMsS0FBSyxDQUFDLEdBQUcsQ0FBQyxlQUFlLENBQUM7OzZCQUV2QyxJQUFJLENBQUMsVUFBVSxDQUFDLEtBQUssQ0FBQyxHQUFHLENBQzlCLFFBQVEsRUFDUix3QkFBd0IsQ0FDM0I7NkJBQ1EsQ0FBQyxDQUFDLEVBQUUsRUFBRSxDQUFDLENBQUMsQ0FBQyxjQUFjLEVBQUU7O3NCQUVoQyxJQUFJLENBQUMsVUFBVSxDQUFDLFdBQVcsQ0FBQyxPQUFPLEVBQUUsSUFBSSxDQUFDOzs7O3NCQUkxQyxDQUFDLE1BQU0sQ0FBQyxHQUFHO1lBQ1QsQ0FBQyxDQUFDLElBQUEsVUFBSSxFQUFBOzs7OztxREFLdUIsQ0FBQyxDQUFDLEVBQUUsRUFBRTtnQkFDckIsa0JBQWtCO2dCQUNsQixJQUFJLENBQUMsVUFBVSxDQUFDLFFBQVEsQ0FBQyxJQUFJLEVBQUU7b0JBQzNCLEdBQUcsRUFBZSxDQUFDLENBQUMsTUFBTSxDQUFDLENBQUMsQ0FBQyxDQUFDLEdBQUc7aUJBQ3BDLENBQUMsQ0FBQztnQkFDSCxJQUNJLElBQUksQ0FBQyxVQUFVLENBQUMsZ0JBQWdCLENBQzVCLElBQUksQ0FDUDtvQkFDRCxJQUFJLENBQUMsVUFBVSxDQUFDLGNBQWMsRUFBRSxFQUNsQztvQkFDRSxJQUFJLENBQUMsVUFBVSxDQUFDLFFBQVEsQ0FDcEIsQ0FBQyxHQUFHLElBQUksRUFBRSxLQUFLLENBQUMsRUFDSCxDQUFDLENBQUMsTUFBTSxDQUFDLENBQUMsQ0FBQyxDQUFDLEdBQUcsRUFDNUI7d0JBQ0ksY0FBYyxFQUFFLElBQUk7cUJBQ3ZCLENBQ0osQ0FBQztpQkFDTDtnQkFDRCxJQUFJLENBQUMsVUFBVSxDQUFDLEtBQUssRUFBRSxDQUFDO1lBQzVCLENBQUM7OzJCQUVSO1lBQ0gsQ0FBQyxDQUFDLElBQUEsVUFBSSxFQUFBOzsyQ0FFYSxJQUFJLENBQUMsVUFBVSxDQUFDLEtBQUssQ0FBQyxHQUFHLENBQzlCLFNBQVMsQ0FDWjs7b0NBRUMsSUFBSSxDQUFDLFlBQVksQ0FDZixNQUFNLENBQUMsR0FBRyxFQUNWLElBQUksQ0FBQyxVQUFVLENBQUMsS0FBSyxDQUFDLEtBQUssRUFDM0IsSUFBSSxDQUNQOzsyQkFFUjs7O1NBR2xCLENBQUM7SUFDTixDQUFDO0lBQ0QsWUFBWSxDQUFDLEdBQVcsRUFBRSxLQUFhLEVBQUUsSUFBYztRQUNuRCxPQUFPLElBQUEsVUFBSSxFQUFBOzs7Z0RBRzZCLEdBQUc7O3FDQUVkLEdBQUcsQ0FBQyxLQUFLLENBQUMsR0FBRyxDQUFDLENBQUMsR0FBRyxFQUFFOzs7c0JBR25DLElBQUksQ0FBQyxVQUFVLENBQUMsZ0JBQWdCLENBQzlCLEdBQUcsUUFBUSxDQUFDLFFBQVEsQ0FBQyxNQUFNLElBQUksR0FBRyxFQUFFLEVBQ3BDLElBQUksQ0FBQyxVQUFVLENBQUMsS0FBSyxDQUFDLElBQUksQ0FBQyxLQUFLLENBQUMsT0FBTyxDQUMzQzs7O3FDQUdnQixDQUFDLENBQUMsRUFBRSxFQUFFO1lBQ2YsSUFBSSxDQUFDLENBQUMsYUFBYSxDQUFDLGdCQUFnQjtnQkFBRSxPQUFPO1lBQzdDLElBQUksQ0FBQyxVQUFVLENBQUMsVUFBVSxDQUFDLElBQUksRUFBRTtnQkFDN0IsS0FBSzthQUNSLENBQUMsQ0FBQztZQUNILElBQUksQ0FBQyxVQUFVLENBQUMsS0FBSyxFQUFFLENBQUM7UUFDNUIsQ0FBQzs7OzBCQUdDLElBQUEsMkJBQVUsRUFBQyxJQUFJLENBQUMsVUFBVSxDQUFDLEtBQUssQ0FBQyxLQUFLLENBQUMsTUFBTSxDQUFDOzs7O1NBSS9ELENBQUM7SUFDTixDQUFDO0NBQ0o7QUF0SEQsbURBc0hDIn0=

@@ -12,8 +12,21 @@
         opacity: 0.3;
     }
 
-    &.active i {
-        color: sugar.color(accent);
+    &.active {
+        position: relative;
+        /* color: sugar.color(accent); */
+
+        &:after {
+            content: '';
+            display: block;
+            position: absolute;
+            top: -0.25em;
+            right: 0;
+            width: 0.5em;
+            height: 0.5em;
+            background: sugar.color(accent);
+            border-radius: 50%;
+        }
     }
 
     &:hover i,

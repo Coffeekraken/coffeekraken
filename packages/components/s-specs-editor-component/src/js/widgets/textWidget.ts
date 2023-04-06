@@ -1,12 +1,10 @@
 import { html } from 'lit';
 
-import { __i18n } from '@coffeekraken/s-i18n';
-
 import type { ISString } from '@specimen/types';
 
+import { __i18n } from '@coffeekraken/s-i18n';
+
 export default class SSpecsEditorComponentTextWidget {
-    _error;
-    _warning;
     _component;
     _propObj;
     _path;
@@ -21,57 +19,50 @@ export default class SSpecsEditorComponentTextWidget {
         this._path = path;
     }
 
+    validate({ propObj, values }) {
+        if (propObj.required && !values?.value) {
+            return {
+                error: __i18n(`This property is required`, {
+                    id: 's-specs-editor.widget.required',
+                }),
+            };
+        }
+    }
+
     render({ propObj, values, path }) {
         if (!values) {
             values = <ISString>{
                 value: propObj.default,
             };
         }
-        return {
-            error: this._error,
-            warning: this._warning,
-            html: html`
-                <div class="${this._component.utils.cls('_text-widget')}">
-                    <label
+        return html`
+            <div class="${this._component.utils.cls('_text-widget')}">
+                <label
+                    class="${this._component.utils.cls(
+                        '_label',
+                        's-label s-label--block',
+                    )}"
+                >
+                    <input
+                        @change=${(e) => {
+                            this._component.setValue(path, {
+                                value: e.target.value,
+                            });
+                            this._component.apply();
+                        }}
+                        type="text"
+                        name="${path.at(-1)}"
                         class="${this._component.utils.cls(
-                            '_label',
-                            's-label s-label--block',
+                            '_input',
+                            's-input',
                         )}"
-                    >
-                        <input
-                            @change=${(e) => {
-                                if (propObj.required && !e.target.value) {
-                                    this._error = __i18n(
-                                        `This property is required`,
-                                        {
-                                            id: 's-specs-editor.widget.required',
-                                        },
-                                    );
-                                    return this._component.requestUpdate();
-                                }
-
-                                this._error = null;
-                                this._warning = null;
-
-                                this._component.setValue(path, {
-                                    value: e.target.value,
-                                });
-                                this._component.apply();
-                            }}
-                            type="text"
-                            name="${path.at(-1)}"
-                            class="${this._component.utils.cls(
-                                '_input',
-                                's-input',
-                            )}"
-                            placeholder="${propObj.pladeholder}"
-                            path="${path.join('.')}"
-                            value="${values.value}"
-                        />
-                        ${this._component.renderLabel(propObj, path)}
-                    </label>
-                </div>
-            `,
-        };
+                        placeholder="${propObj.pladeholder}"
+                        path="${path.join('.')}"
+                        value="${values.value}"
+                    />
+                    ${this._component.renderLabel(propObj, path)}
+                </label>
+            </div>
+        `;
     }
 }

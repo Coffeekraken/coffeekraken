@@ -1,0 +1,21 @@
+.copy-btn {
+    @sugar.ui.button ($lnf: text);
+
+    ._pending {
+    }
+    ._success {
+        display: none;
+        i {
+            color: sugar.color(success);
+        }
+    }
+
+    &.success {
+        ._pending {
+            display: none;
+        }
+        ._success {
+            display: inline;
+        }
+    }
+}

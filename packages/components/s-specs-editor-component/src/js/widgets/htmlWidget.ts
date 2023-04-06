@@ -3,8 +3,6 @@ import { html } from 'lit';
 import type { ISString } from '@specimen/types';
 
 export default class SSpecsEditorComponentHtmlWidget {
-    _error;
-    _warning;
     _component;
     _propObj;
     _path;
@@ -26,37 +24,33 @@ export default class SSpecsEditorComponentHtmlWidget {
             };
         }
 
-        return {
-            error: this._error,
-            warning: this._warning,
-            html: html`
-                <div class="${this._component.utils.cls('_html-widget')}">
-                    <label
+        return html`
+            <div class="${this._component.utils.cls('_html-widget')}">
+                <label
+                    class="${this._component.utils.cls(
+                        '_label',
+                        's-label s-label--block',
+                    )}"
+                >
+                    <textarea
+                        rows="5"
+                        @change=${(e) =>
+                            this._component._update(path, propObj, e)}
+                        name="${path.at(-1)}"
                         class="${this._component.utils.cls(
-                            '_label',
-                            's-label s-label--block',
+                            '_input',
+                            's-input',
                         )}"
+                        placeholder="${propObj.default ??
+                        propObj.title ??
+                        propObj.id}"
+                        path="${path.join('.')}"
                     >
-                        <textarea
-                            rows="5"
-                            @change=${(e) =>
-                                this._component._update(path, propObj, e)}
-                            name="${path.at(-1)}"
-                            class="${this._component.utils.cls(
-                                '_input',
-                                's-input',
-                            )}"
-                            placeholder="${propObj.default ??
-                            propObj.title ??
-                            propObj.id}"
-                            path="${path.join('.')}"
-                        >
 ${values.value}</textarea
-                        >
-                        ${this._component.renderLabel(propObj, path)}
-                    </label>
-                </div>
-            `,
-        };
+                    >
+                    ${this._component.renderLabel(propObj, path)}
+                </label>
+            </div>
+        `;
     }
 }

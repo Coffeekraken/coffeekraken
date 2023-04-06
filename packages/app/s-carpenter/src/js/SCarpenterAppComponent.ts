@@ -1224,21 +1224,25 @@ export default class SCarpenterAppComponent extends __SLitComponent {
                           >
                               ${Object.keys(
                                   this._data.frontspec?.media?.queries ?? {},
-                              ).map((query) => {
-                                  return html`
-                                      <li
-                                          @pointerup=${() =>
-                                              this._activateMedia(query)}
-                                          class="${query ===
-                                          this.state.activeMedia
-                                              ? 'active'
-                                              : ''} _query _item"
-                                      >
-                                          ${unsafeHTML(this.props.icons[query])}
-                                          ${__upperFirst(query)}
-                                      </li>
-                                  `;
-                              })}
+                              )
+                                  .reverse()
+                                  .map((query) => {
+                                      return html`
+                                          <li
+                                              @pointerup=${() =>
+                                                  this._activateMedia(query)}
+                                              class="${query ===
+                                              this.state.activeMedia
+                                                  ? 'active'
+                                                  : ''} _query _item"
+                                          >
+                                              ${unsafeHTML(
+                                                  this.props.icons[query],
+                                              )}
+                                              ${__upperFirst(query)}
+                                          </li>
+                                      `;
+                                  })}
                           </ul>
 
                           ${this.props.features?.save

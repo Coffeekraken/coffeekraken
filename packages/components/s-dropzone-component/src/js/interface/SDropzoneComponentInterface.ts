@@ -34,13 +34,11 @@ export default class SDropzoneComponentInterface extends __SInterface {
                 description:
                     'Specify the maximum file size accepted by the dropzone',
             },
-            files: {
-                type: {
-                    type: 'String[]',
-                    splitChars: [',', ' '],
-                },
+            multiple: {
+                type: 'Boolean',
                 description:
-                    'Specify some initial file(s) to be used and displayed in the UI. MUST contain at least a "src" attribute by file passed',
+                    'Specify if you want to accept multiple files at once',
+                default: false,
             },
             accept: {
                 type: {

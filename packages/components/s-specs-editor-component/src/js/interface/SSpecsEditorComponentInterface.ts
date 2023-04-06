@@ -1,3 +1,4 @@
+import { __i18n } from '@coffeekraken/s-i18n';
 import __SInterface from '@coffeekraken/s-interface';
 
 /**
@@ -69,6 +70,24 @@ export default class SSpecsEditorComponentInterface extends __SInterface {
                     'Specify if you want to display the specs that are marked as `"ghost":true` or not.',
                 default: false,
             },
+            i18n: {
+                type: 'Object',
+                title: 'i18n',
+                description:
+                    'Specify all the words/sentences that are used in the UI',
+                default: {
+                    image: {
+                        copyUrl: __i18n('Copy image url', {
+                            id: 's-specs-editor.image.copyUrl',
+                        }),
+                    },
+                    video: {
+                        copyUrl: __i18n('Copy video url', {
+                            id: 's-specs-editor.video.copyUrl',
+                        }),
+                    },
+                },
+            },
             icons: {
                 type: 'Object',
                 title: 'Icons',
@@ -79,7 +98,9 @@ export default class SSpecsEditorComponentInterface extends __SInterface {
                     add: '<i class="fa-solid fa-plus"></i>',
                     delete: '<i class="fa-regular fa-trash-can"></i>',
                     expand: '<i class="fa-solid fa-plus"></i>',
+                    copy: '<i class="fa-regular fa-copy"></i>',
                     remove: '<i class="fa-solid fa-minus"></i>',
+                    success: '<i class="fa-solid fa-check"></i>',
                     collapse: '<i class="fa-solid fa-minus"></i>',
                     mobile: '<i class="fa-solid fa-mobile-screen-button"></i>',
                     tablet: '<i class="fa-solid fa-tablet-screen-button"></i>',

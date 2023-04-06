@@ -5,8 +5,6 @@ import { define as __SSpacesSelectorComponentDefine } from '@coffeekraken/s-spac
 __SSpacesSelectorComponentDefine();
 
 export default class SSpecsEditorComponentSpacesWidget {
-    _error;
-    _warning;
     _component;
     _propObj;
     _path;
@@ -40,24 +38,20 @@ export default class SSpecsEditorComponentSpacesWidget {
             });
         });
 
-        return {
-            error: this._error,
-            warning: this._warning,
-            html: html`
-                <div
-                    class="${this._component.utils.cls('_spaces-widget')}"
-                    @s-spaces-selector.change=${(e) => {
-                        const setPath = `${path.join('.')}`;
-                        this._component.setValue(setPath, e.detail);
-                        this._component.apply();
-                    }}
-                >
-                    <s-spaces-selector
-                        .spaces=${spaces}
-                        .values=${Object.assign({}, values ?? {})}
-                    ></s-spaces-selector>
-                </div>
-            `,
-        };
+        return html`
+            <div
+                class="${this._component.utils.cls('_spaces-widget')}"
+                @s-spaces-selector.change=${(e) => {
+                    const setPath = `${path.join('.')}`;
+                    this._component.setValue(setPath, e.detail);
+                    this._component.apply();
+                }}
+            >
+                <s-spaces-selector
+                    .spaces=${spaces}
+                    .values=${Object.assign({}, values ?? {})}
+                ></s-spaces-selector>
+            </div>
+        `;
     }
 }

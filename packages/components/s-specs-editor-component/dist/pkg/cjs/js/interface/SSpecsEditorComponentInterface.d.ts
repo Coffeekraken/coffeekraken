@@ -43,6 +43,19 @@ export default class SSpecsEditorComponentInterface extends __SInterface {
             description: string;
             default: boolean;
         };
+        i18n: {
+            type: string;
+            title: string;
+            description: string;
+            default: {
+                image: {
+                    copyUrl: string;
+                };
+                video: {
+                    copyUrl: string;
+                };
+            };
+        };
         icons: {
             type: string;
             title: string;
@@ -52,7 +65,9 @@ export default class SSpecsEditorComponentInterface extends __SInterface {
                 add: string;
                 delete: string;
                 expand: string;
+                copy: string;
                 remove: string;
+                success: string;
                 collapse: string;
                 mobile: string;
                 tablet: string;

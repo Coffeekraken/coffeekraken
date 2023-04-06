@@ -1,6 +1,4 @@
 export default class SSpecsEditorComponentWysiwygWidget {
-    _error: any;
-    _warning: any;
     _component: any;
     _propObj: any;
     _path: any;
@@ -18,9 +16,5 @@ export default class SSpecsEditorComponentWysiwygWidget {
         propObj: any;
         values: any;
         path: any;
-    }): {
-        error: any;
-        warning: any;
-        html: import("lit-html").TemplateResult<1>;
-    };
+    }): import("lit-html").TemplateResult<1>;
 }

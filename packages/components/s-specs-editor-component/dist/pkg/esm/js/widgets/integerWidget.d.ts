@@ -1,6 +1,4 @@
 export default class SSpecsEditorComponentIntegerWidget {
-    _error: any;
-    _warning: any;
     _component: any;
     _propObj: any;
     _path: any;
@@ -10,13 +8,15 @@ export default class SSpecsEditorComponentIntegerWidget {
         propObj: any;
         path: any;
     });
+    validate({ values, propObj }: {
+        values: any;
+        propObj: any;
+    }): {
+        error: string;
+    };
     render({ propObj, values, path }: {
         propObj: any;
         values: any;
         path: any;
-    }): {
-        error: any;
-        warning: any;
-        html: import("lit-html").TemplateResult<1>;
-    };
+    }): import("lit-html").TemplateResult<1>;
 }

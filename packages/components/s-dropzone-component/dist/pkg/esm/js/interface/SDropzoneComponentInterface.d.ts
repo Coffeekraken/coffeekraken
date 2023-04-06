@@ -11,12 +11,10 @@ export default class SDropzoneComponentInterface extends __SInterface {
             type: string;
             description: string;
         };
-        files: {
-            type: {
-                type: string;
-                splitChars: string[];
-            };
+        multiple: {
+            type: string;
             description: string;
+            default: boolean;
         };
         accept: {
             type: {

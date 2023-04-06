@@ -14,7 +14,7 @@ import __define from './define';
 export interface ISDropzoneComponentProps {
     maxFiles: number;
     maxSize: number;
-    files: string[];
+    multiple: boolean;
     input: boolean;
     name: string;
     upload: boolean;
@@ -437,7 +437,8 @@ export default class SDropzoneComponent extends __SLitComponent {
                               name="${this.props.name}[]"
                               accept=${this.props.accept ?? '*'}
                               hidden
-                              ?multiple=${this.props.maxFiles > 1}
+                              ?multiple=${this.props.multiple ??
+                              this.props.maxFiles > 1}
                           />
                       `
                     : ''}

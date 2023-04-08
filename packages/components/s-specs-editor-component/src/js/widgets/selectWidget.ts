@@ -3,41 +3,36 @@ import { html } from 'lit';
 
 import { __SSelect } from '@specimen/types/utils';
 
-import type { ISSelectData } from '@specimen/types';
+import type { ISSpecsEditorWidgetDeps } from '../SSpecsEditorWidget';
+import __SSpecsEditorWidget from '../SSpecsEditorWidget';
 
-export default class SSpecsEditorComponentSelectWidget {
-    _component;
-    _propObj;
-    _path;
-
+export default class SSpecsEditorComponentSelectWidget extends __SSpecsEditorWidget {
     static isActive() {
         return true;
     }
 
-    constructor({ component, propObj, path }) {
-        this._component = component;
-        this._propObj = propObj;
-        this._path = path;
+    constructor(deps: ISSpecsEditorWidgetDeps) {
+        super(deps);
+
+        if (!this.values?.value) {
+            this.values.value = [];
+        }
     }
 
-    validate({ propObj, values }) {
-        if (!values) {
-            return;
-        }
-
-        const itemsCount = values.value.length;
+    validate(newValues) {
+        const itemsCount = newValues.value.length;
 
         // min
         if (
-            propObj.multiple &&
-            propObj.min !== undefined &&
-            itemsCount < propObj.min
+            this.propObj.multiple &&
+            this.propObj.min !== undefined &&
+            itemsCount < this.propObj.min
         ) {
             return {
                 error: __i18n('You must select at least %s item__(s)__', {
                     id: 's-specs-editor.widget.select.min',
                     tokens: {
-                        s: propObj.min,
+                        s: this.propObj.min,
                     },
                 }),
             };
@@ -45,41 +40,38 @@ export default class SSpecsEditorComponentSelectWidget {
 
         // max
         if (
-            propObj.multiple &&
-            propObj.max !== undefined &&
-            itemsCount > propObj.max
+            this.propObj.multiple &&
+            this.propObj.max !== undefined &&
+            itemsCount > this.propObj.max
         ) {
             return {
                 error: __i18n('You must select at most %s item__(s)__', {
                     id: 's-specs-editor.widget.select.max',
                     tokens: {
-                        s: propObj.max,
+                        s: this.propObj.max,
                     },
                 }),
             };
         }
     }
 
-    render({ propObj, values, path }) {
-        if (!values?.value) {
-            values = <ISSelectData>{
-                value: [],
-            };
-        }
-
-        const select = new __SSelect(propObj, values);
+    render() {
+        const select = new __SSelect(this.propObj, this.values);
 
         return html`
-            <div class="${this._component.utils.cls('_select-widget')}">
+            <div class="${this.editor.utils.cls('_select-widget')}">
                 <label
-                    class="${this._component.utils.cls(
+                    class="${this.editor.utils.cls(
                         '_label',
                         's-label s-label--block',
                     )}"
                 >
                     <select
                         @change=${(e) => {
-                            for (let [i, option] of propObj.options.entries()) {
+                            for (let [
+                                i,
+                                option,
+                            ] of this.propObj.options.entries()) {
                                 for (let [j, $option] of [
                                     ...e.target.options,
                                 ].entries()) {
@@ -95,19 +87,16 @@ export default class SSpecsEditorComponentSelectWidget {
                             }
 
                             // apply changes
-                            this._component.setValue(path, values);
-                            this._component.apply();
+                            this.setValue(this.values);
+                            this.editor.apply();
                         }}
-                        name="${path.at(-1)}"
-                        class="${this._component.utils.cls(
-                            '_select',
-                            's-select',
-                        )}"
-                        ?multiple=${propObj.multiple}
-                        placeholder="${propObj.placeholder}"
-                        path="${path.join('.')}"
+                        name="${this.path.at(-1)}"
+                        class="${this.editor.utils.cls('_select', 's-select')}"
+                        ?multiple=${this.propObj.multiple}
+                        placeholder="${this.propObj.placeholder}"
+                        path="${this.path.join('.')}"
                     >
-                        ${propObj.options.map(
+                        ${this.propObj.options.map(
                             (option, i) => html`
                                 <option
                                     id="${option.id ?? `option-${i}`}"
@@ -120,7 +109,7 @@ export default class SSpecsEditorComponentSelectWidget {
                         )}
                     </select>
 
-                    ${this._component.renderLabel(propObj, path)}
+                    ${this.editor.renderLabel(this.propObj, this.path)}
                 </label>
             </div>
         `;

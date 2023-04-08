@@ -1,20 +1,11 @@
-export default class SSpecsEditorComponentWysiwygWidget {
-    _component: any;
-    _propObj: any;
-    _path: any;
+import type { ISSpecsEditorWidgetDeps } from '../SSpecsEditorWidget';
+import __SSpecsEditorWidget from '../SSpecsEditorWidget';
+export default class SSpecsEditorComponentWysiwygWidget extends __SSpecsEditorWidget {
     _editorJs: any;
     _frontspec: any;
     _$holder: any;
     _$add: any;
     static isActive(): boolean;
-    constructor({ component, propObj, path }: {
-        component: any;
-        propObj: any;
-        path: any;
-    });
-    render({ propObj, values, path }: {
-        propObj: any;
-        values: any;
-        path: any;
-    }): import("lit-html").TemplateResult<1>;
+    constructor(deps: ISSpecsEditorWidgetDeps);
+    render(): import("lit-html").TemplateResult<1>;
 }

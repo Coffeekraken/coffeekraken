@@ -1,19 +1,23 @@
 import { html } from 'lit';
 import { __i18n } from '@coffeekraken/s-i18n';
-export default class SSpecsEditorComponentIntegerWidget {
+import __SSpecsEditorWidget from '../SSpecsEditorWidget';
+export default class SSpecsEditorComponentIntegerWidget extends __SSpecsEditorWidget {
     static isActive() {
         return true;
     }
-    constructor({ component, propObj, path }) {
-        this._component = component;
-        this._propObj = propObj;
-        this._path = path;
+    constructor(deps) {
+        super(deps);
+        if (!this.values) {
+            this.values = {
+                value: this.propObj.default,
+            };
+        }
     }
-    validate({ values, propObj }) {
-        if (!values) {
+    validate(newValues) {
+        if (!newValues) {
             return;
         }
-        let value = values.value;
+        let value = newValues.value;
         // letters in value
         if (Number.isNaN(parseInt(value))) {
             return {
@@ -30,63 +34,56 @@ export default class SSpecsEditorComponentIntegerWidget {
             value = parseInt(value);
         }
         // min
-        if (propObj.min !== undefined && value < propObj.min) {
-            value = propObj.min;
+        if (this.propObj.min !== undefined && value < this.propObj.min) {
+            value = this.propObj.min;
             return {
                 error: __i18n(`The value must be greater or equal to %s`, {
                     id: 's-specs-editor.widget.integer.min',
                     tokens: {
-                        s: propObj.min,
+                        s: this.propObj.min,
                     },
                 }),
             };
         }
         // max
-        if (propObj.max !== undefined && value > propObj.max) {
-            value = propObj.max;
+        if (this.propObj.max !== undefined && value > this.propObj.max) {
+            value = this.propObj.max;
             return {
                 error: __i18n(`The value must be lower or equal to %s`, {
                     id: 's-specs-editor.widget.integer.max',
                     tokens: {
-                        s: propObj.max,
+                        s: this.propObj.max,
                     },
                 }),
             };
         }
     }
-    render({ propObj, values, path }) {
-        if (!values) {
-            values = {
-                value: propObj.default,
-            };
-        }
+    render() {
         return html `
-            <div class="${this._component.utils.cls('_integer-widget')}">
+            <div class="${this.editor.utils.cls('_integer-widget')}">
                 <label
-                    class="${this._component.utils.cls('_label', 's-label s-label--block')}"
+                    class="${this.editor.utils.cls('_label', 's-label s-label--block')}"
                 >
                     <input
                         @change=${(e) => {
             let value = e.target.value;
-            this._component.setValue(path, {
-                value,
-            });
-            this._component.apply();
+            this.setValue(value);
+            this.editor.apply();
         }}
                         type="number"
                         step="1"
-                        min=${propObj.min}
-                        max=${propObj.max}
-                        name="${path.at(-1)}"
-                        class="${this._component.utils.cls('_input', 's-input')}"
-                        placeholder="${propObj.placeholder}"
-                        path="${path.join('.')}"
-                        value="${values.value}"
+                        min=${this.propObj.min}
+                        max=${this.propObj.max}
+                        name="${this.path.at(-1)}"
+                        class="${this.editor.utils.cls('_input', 's-input')}"
+                        placeholder="${this.propObj.placeholder}"
+                        path="${this.path.join('.')}"
+                        value="${this.values.value}"
                     />
-                    ${this._component.renderLabel(propObj, path)}
+                    ${this.editor.renderLabel(this.propObj, this.path)}
                 </label>
             </div>
         `;
     }
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sRUFBRSxJQUFJLEVBQUUsTUFBTSxLQUFLLENBQUM7QUFJM0IsT0FBTyxFQUFFLE1BQU0sRUFBRSxNQUFNLHNCQUFzQixDQUFDO0FBRTlDLE1BQU0sQ0FBQyxPQUFPLE9BQU8sa0NBQWtDO0lBS25ELE1BQU0sQ0FBQyxRQUFRO1FBQ1gsT0FBTyxJQUFJLENBQUM7SUFDaEIsQ0FBQztJQUVELFlBQVksRUFBRSxTQUFTLEVBQUUsT0FBTyxFQUFFLElBQUksRUFBRTtRQUNwQyxJQUFJLENBQUMsVUFBVSxHQUFHLFNBQVMsQ0FBQztRQUM1QixJQUFJLENBQUMsUUFBUSxHQUFHLE9BQU8sQ0FBQztRQUN4QixJQUFJLENBQUMsS0FBSyxHQUFHLElBQUksQ0FBQztJQUN0QixDQUFDO0lBRUQsUUFBUSxDQUFDLEVBQUUsTUFBTSxFQUFFLE9BQU8sRUFBRTtRQUN4QixJQUFJLENBQUMsTUFBTSxFQUFFO1lBQ1QsT0FBTztTQUNWO1FBRUQsSUFBSSxLQUFLLEdBQUcsTUFBTSxDQUFDLEtBQUssQ0FBQztRQUV6QixtQkFBbUI7UUFDbkIsSUFBSSxNQUFNLENBQUMsS0FBSyxDQUFDLFFBQVEsQ0FBQyxLQUFLLENBQUMsQ0FBQyxFQUFFO1lBQy9CLE9BQU87Z0JBQ0gsS0FBSyxFQUFFLE1BQU0sQ0FBQywwQ0FBMEMsRUFBRTtvQkFDdEQsRUFBRSxFQUFFLHVDQUF1QztvQkFDM0MsTUFBTSxFQUFFO3dCQUNKLENBQUMsRUFBRSxLQUFLO3FCQUNYO2lCQUNKLENBQUM7YUFDTCxDQUFDO1NBQ0w7UUFFRCxtQkFBbUI7UUFDbkIsSUFBSSxHQUFHLFFBQVEsQ0FBQyxLQUFLLENBQUMsRUFBRSxDQUFDLE1BQU0sS0FBSyxLQUFLLENBQUMsTUFBTSxFQUFFO1lBQzlDLEtBQUssR0FBRyxRQUFRLENBQUMsS0FBSyxDQUFDLENBQUM7U0FDM0I7UUFFRCxNQUFNO1FBQ04sSUFBSSxPQUFPLENBQUMsR0FBRyxLQUFLLFNBQVMsSUFBSSxLQUFLLEdBQUcsT0FBTyxDQUFDLEdBQUcsRUFBRTtZQUNsRCxLQUFLLEdBQUcsT0FBTyxDQUFDLEdBQUcsQ0FBQztZQUNwQixPQUFPO2dCQUNILEtBQUssRUFBRSxNQUFNLENBQUMsMENBQTBDLEVBQUU7b0JBQ3RELEVBQUUsRUFBRSxtQ0FBbUM7b0JBQ3ZDLE1BQU0sRUFBRTt3QkFDSixDQUFDLEVBQUUsT0FBTyxDQUFDLEdBQUc7cUJBQ2pCO2lCQUNKLENBQUM7YUFDTCxDQUFDO1NBQ0w7UUFFRCxNQUFNO1FBQ04sSUFBSSxPQUFPLENBQUMsR0FBRyxLQUFLLFNBQVMsSUFBSSxLQUFLLEdBQUcsT0FBTyxDQUFDLEdBQUcsRUFBRTtZQUNsRCxLQUFLLEdBQUcsT0FBTyxDQUFDLEdBQUcsQ0FBQztZQUNwQixPQUFPO2dCQUNILEtBQUssRUFBRSxNQUFNLENBQUMsd0NBQXdDLEVBQUU7b0JBQ3BELEVBQUUsRUFBRSxtQ0FBbUM7b0JBQ3ZDLE1BQU0sRUFBRTt3QkFDSixDQUFDLEVBQUUsT0FBTyxDQUFDLEdBQUc7cUJBQ2pCO2lCQUNKLENBQUM7YUFDTCxDQUFDO1NBQ0w7SUFDTCxDQUFDO0lBRUQsTUFBTSxDQUFDLEVBQUUsT0FBTyxFQUFFLE1BQU0sRUFBRSxJQUFJLEVBQUU7UUFDNUIsSUFBSSxDQUFDLE1BQU0sRUFBRTtZQUNULE1BQU0sR0FBYztnQkFDaEIsS0FBSyxFQUFFLE9BQU8sQ0FBQyxPQUFPO2FBQ3pCLENBQUM7U0FDTDtRQUVELE9BQU8sSUFBSSxDQUFBOzBCQUNPLElBQUksQ0FBQyxVQUFVLENBQUMsS0FBSyxDQUFDLEdBQUcsQ0FBQyxpQkFBaUIsQ0FBQzs7NkJBRXpDLElBQUksQ0FBQyxVQUFVLENBQUMsS0FBSyxDQUFDLEdBQUcsQ0FDOUIsUUFBUSxFQUNSLHdCQUF3QixDQUMzQjs7O2tDQUdhLENBQUMsQ0FBQyxFQUFFLEVBQUU7WUFDWixJQUFJLEtBQUssR0FBRyxDQUFDLENBQUMsTUFBTSxDQUFDLEtBQUssQ0FBQztZQUMzQixJQUFJLENBQUMsVUFBVSxDQUFDLFFBQVEsQ0FBQyxJQUFJLEVBQUU7Z0JBQzNCLEtBQUs7YUFDUixDQUFDLENBQUM7WUFDSCxJQUFJLENBQUMsVUFBVSxDQUFDLEtBQUssRUFBRSxDQUFDO1FBQzVCLENBQUM7Ozs4QkFHSyxPQUFPLENBQUMsR0FBRzs4QkFDWCxPQUFPLENBQUMsR0FBRztnQ0FDVCxJQUFJLENBQUMsRUFBRSxDQUFDLENBQUMsQ0FBQyxDQUFDO2lDQUNWLElBQUksQ0FBQyxVQUFVLENBQUMsS0FBSyxDQUFDLEdBQUcsQ0FDOUIsUUFBUSxFQUNSLFNBQVMsQ0FDWjt1Q0FDYyxPQUFPLENBQUMsV0FBVztnQ0FDMUIsSUFBSSxDQUFDLElBQUksQ0FBQyxHQUFHLENBQUM7aUNBQ2IsTUFBTSxDQUFDLEtBQUs7O3NCQUV2QixJQUFJLENBQUMsVUFBVSxDQUFDLFdBQVcsQ0FBQyxPQUFPLEVBQUUsSUFBSSxDQUFDOzs7U0FHdkQsQ0FBQztJQUNOLENBQUM7Q0FDSiJ9
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sRUFBRSxJQUFJLEVBQUUsTUFBTSxLQUFLLENBQUM7QUFJM0IsT0FBTyxFQUFFLE1BQU0sRUFBRSxNQUFNLHNCQUFzQixDQUFDO0FBRzlDLE9BQU8sb0JBQW9CLE1BQU0sdUJBQXVCLENBQUM7QUFFekQsTUFBTSxDQUFDLE9BQU8sT0FBTyxrQ0FBbUMsU0FBUSxvQkFBb0I7SUFDaEYsTUFBTSxDQUFDLFFBQVE7UUFDWCxPQUFPLElBQUksQ0FBQztJQUNoQixDQUFDO0lBRUQsWUFBWSxJQUE2QjtRQUNyQyxLQUFLLENBQUMsSUFBSSxDQUFDLENBQUM7UUFFWixJQUFJLENBQUMsSUFBSSxDQUFDLE1BQU0sRUFBRTtZQUNkLElBQUksQ0FBQyxNQUFNLEdBQWM7Z0JBQ3JCLEtBQUssRUFBRSxJQUFJLENBQUMsT0FBTyxDQUFDLE9BQU87YUFDOUIsQ0FBQztTQUNMO0lBQ0wsQ0FBQztJQUVELFFBQVEsQ0FBQyxTQUFTO1FBQ2QsSUFBSSxDQUFDLFNBQVMsRUFBRTtZQUNaLE9BQU87U0FDVjtRQUVELElBQUksS0FBSyxHQUFHLFNBQVMsQ0FBQyxLQUFLLENBQUM7UUFFNUIsbUJBQW1CO1FBQ25CLElBQUksTUFBTSxDQUFDLEtBQUssQ0FBQyxRQUFRLENBQUMsS0FBSyxDQUFDLENBQUMsRUFBRTtZQUMvQixPQUFPO2dCQUNILEtBQUssRUFBRSxNQUFNLENBQUMsMENBQTBDLEVBQUU7b0JBQ3RELEVBQUUsRUFBRSx1Q0FBdUM7b0JBQzNDLE1BQU0sRUFBRTt3QkFDSixDQUFDLEVBQUUsS0FBSztxQkFDWDtpQkFDSixDQUFDO2FBQ0wsQ0FBQztTQUNMO1FBRUQsbUJBQW1CO1FBQ25CLElBQUksR0FBRyxRQUFRLENBQUMsS0FBSyxDQUFDLEVBQUUsQ0FBQyxNQUFNLEtBQUssS0FBSyxDQUFDLE1BQU0sRUFBRTtZQUM5QyxLQUFLLEdBQUcsUUFBUSxDQUFDLEtBQUssQ0FBQyxDQUFDO1NBQzNCO1FBRUQsTUFBTTtRQUNOLElBQUksSUFBSSxDQUFDLE9BQU8sQ0FBQyxHQUFHLEtBQUssU0FBUyxJQUFJLEtBQUssR0FBRyxJQUFJLENBQUMsT0FBTyxDQUFDLEdBQUcsRUFBRTtZQUM1RCxLQUFLLEdBQUcsSUFBSSxDQUFDLE9BQU8sQ0FBQyxHQUFHLENBQUM7WUFDekIsT0FBTztnQkFDSCxLQUFLLEVBQUUsTUFBTSxDQUFDLDBDQUEwQyxFQUFFO29CQUN0RCxFQUFFLEVBQUUsbUNBQW1DO29CQUN2QyxNQUFNLEVBQUU7d0JBQ0osQ0FBQyxFQUFFLElBQUksQ0FBQyxPQUFPLENBQUMsR0FBRztxQkFDdEI7aUJBQ0osQ0FBQzthQUNMLENBQUM7U0FDTDtRQUVELE1BQU07UUFDTixJQUFJLElBQUksQ0FBQyxPQUFPLENBQUMsR0FBRyxLQUFLLFNBQVMsSUFBSSxLQUFLLEdBQUcsSUFBSSxDQUFDLE9BQU8sQ0FBQyxHQUFHLEVBQUU7WUFDNUQsS0FBSyxHQUFHLElBQUksQ0FBQyxPQUFPLENBQUMsR0FBRyxDQUFDO1lBQ3pCLE9BQU87Z0JBQ0gsS0FBSyxFQUFFLE1BQU0sQ0FBQyx3Q0FBd0MsRUFBRTtvQkFDcEQsRUFBRSxFQUFFLG1DQUFtQztvQkFDdkMsTUFBTSxFQUFFO3dCQUNKLENBQUMsRUFBRSxJQUFJLENBQUMsT0FBTyxDQUFDLEdBQUc7cUJBQ3RCO2lCQUNKLENBQUM7YUFDTCxDQUFDO1NBQ0w7SUFDTCxDQUFDO0lBRUQsTUFBTTtRQUNGLE9BQU8sSUFBSSxDQUFBOzBCQUNPLElBQUksQ0FBQyxNQUFNLENBQUMsS0FBSyxDQUFDLEdBQUcsQ0FBQyxpQkFBaUIsQ0FBQzs7NkJBRXJDLElBQUksQ0FBQyxNQUFNLENBQUMsS0FBSyxDQUFDLEdBQUcsQ0FDMUIsUUFBUSxFQUNSLHdCQUF3QixDQUMzQjs7O2tDQUdhLENBQUMsQ0FBQyxFQUFFLEVBQUU7WUFDWixJQUFJLEtBQUssR0FBRyxDQUFDLENBQUMsTUFBTSxDQUFDLEtBQUssQ0FBQztZQUMzQixJQUFJLENBQUMsUUFBUSxDQUFDLEtBQUssQ0FBQyxDQUFDO1lBQ3JCLElBQUksQ0FBQyxNQUFNLENBQUMsS0FBSyxFQUFFLENBQUM7UUFDeEIsQ0FBQzs7OzhCQUdLLElBQUksQ0FBQyxPQUFPLENBQUMsR0FBRzs4QkFDaEIsSUFBSSxDQUFDLE9BQU8sQ0FBQyxHQUFHO2dDQUNkLElBQUksQ0FBQyxJQUFJLENBQUMsRUFBRSxDQUFDLENBQUMsQ0FBQyxDQUFDO2lDQUNmLElBQUksQ0FBQyxNQUFNLENBQUMsS0FBSyxDQUFDLEdBQUcsQ0FBQyxRQUFRLEVBQUUsU0FBUyxDQUFDO3VDQUNwQyxJQUFJLENBQUMsT0FBTyxDQUFDLFdBQVc7Z0NBQy9CLElBQUksQ0FBQyxJQUFJLENBQUMsSUFBSSxDQUFDLEdBQUcsQ0FBQztpQ0FDbEIsSUFBSSxDQUFDLE1BQU0sQ0FBQyxLQUFLOztzQkFFNUIsSUFBSSxDQUFDLE1BQU0sQ0FBQyxXQUFXLENBQUMsSUFBSSxDQUFDLE9BQU8sRUFBRSxJQUFJLENBQUMsSUFBSSxDQUFDOzs7U0FHN0QsQ0FBQztJQUNOLENBQUM7Q0FDSiJ9

@@ -4,52 +4,49 @@ import { define as __SSpacesSelectorComponentDefine } from '@coffeekraken/s-spac
 
 __SSpacesSelectorComponentDefine();
 
-export default class SSpecsEditorComponentSpacesWidget {
-    _component;
-    _propObj;
-    _path;
+import type { ISSpecsEditorWidgetDeps } from '../SSpecsEditorWidget';
+import __SSpecsEditorWidget from '../SSpecsEditorWidget';
 
+export default class SSpecsEditorComponentSpacesWidget extends __SSpecsEditorWidget {
     static isActive() {
         return true;
     }
 
-    constructor({ component, propObj, path }) {
-        this._component = component;
-        this._propObj = propObj;
-        this._path = path;
+    constructor(deps: ISSpecsEditorWidgetDeps) {
+        super(deps);
     }
 
-    render({ propObj, values, path }) {
+    render() {
         const spaces = {
             padding: [],
             margin: [],
         };
 
-        propObj.props.paddingTop.options.forEach((option) => {
+        this.propObj.props.paddingTop.options.forEach((option) => {
             spaces.padding.push({
                 ...option,
-                default: option.value == propObj.props.paddingTop.default,
+                default: option.value == this.propObj.props.paddingTop.default,
             });
         });
-        propObj.props.marginTop.options.forEach((option) => {
+        this.propObj.props.marginTop.options.forEach((option) => {
             spaces.margin.push({
                 ...option,
-                default: option.value == propObj.props.marginTop.default,
+                default: option.value == this.propObj.props.marginTop.default,
             });
         });
 
         return html`
             <div
-                class="${this._component.utils.cls('_spaces-widget')}"
+                class="${this.editor.utils.cls('_spaces-widget')}"
                 @s-spaces-selector.change=${(e) => {
-                    const setPath = `${path.join('.')}`;
-                    this._component.setValue(setPath, e.detail);
-                    this._component.apply();
+                    const setPath = `${this.path.join('.')}`;
+                    this.setValue(e.detail);
+                    this.editor.apply();
                 }}
             >
                 <s-spaces-selector
                     .spaces=${spaces}
-                    .values=${Object.assign({}, values ?? {})}
+                    .values=${Object.assign({}, this.values ?? {})}
                 ></s-spaces-selector>
             </div>
         `;

@@ -1,42 +1,42 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 const lit_1 = require("lit");
-class SSpecsEditorComponentHtmlWidget {
+const SSpecsEditorWidget_1 = __importDefault(require("../SSpecsEditorWidget"));
+class SSpecsEditorComponentHtmlWidget extends SSpecsEditorWidget_1.default {
     static isActive() {
         return true;
     }
-    constructor({ component, propObj, path }) {
-        this._component = component;
-        this._propObj = propObj;
-        this._path = path;
-    }
-    render({ propObj, values, path }) {
-        var _a, _b;
-        if (!values) {
-            values = {
-                value: propObj.default,
-            };
+    constructor(deps) {
+        super(deps);
+        if (!this.values.value) {
+            this.values.value = this.propObj.default;
         }
+    }
+    render() {
+        var _a, _b;
         return (0, lit_1.html) `
-            <div class="${this._component.utils.cls('_html-widget')}">
+            <div class="${this.editor.utils.cls('_html-widget')}">
                 <label
-                    class="${this._component.utils.cls('_label', 's-label s-label--block')}"
+                    class="${this.editor.utils.cls('_label', 's-label s-label--block')}"
                 >
                     <textarea
                         rows="5"
-                        @change=${(e) => this._component._update(path, propObj, e)}
-                        name="${path.at(-1)}"
-                        class="${this._component.utils.cls('_input', 's-input')}"
-                        placeholder="${(_b = (_a = propObj.default) !== null && _a !== void 0 ? _a : propObj.title) !== null && _b !== void 0 ? _b : propObj.id}"
-                        path="${path.join('.')}"
+                        @change=${(e) => this.editor._update(this.path, this.propObj, e)}
+                        name="${this.path.at(-1)}"
+                        class="${this.editor.utils.cls('_input', 's-input')}"
+                        placeholder="${(_b = (_a = this.propObj.default) !== null && _a !== void 0 ? _a : this.propObj.title) !== null && _b !== void 0 ? _b : this.propObj.id}"
+                        path="${(this, path.join('.'))}"
                     >
-${values.value}</textarea
+${this.values.value}</textarea
                     >
-                    ${this._component.renderLabel(propObj, path)}
+                    ${this.editor.renderLabel(this.propObj, this.path)}
                 </label>
             </div>
         `;
     }
 }
 exports.default = SSpecsEditorComponentHtmlWidget;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7O0FBQUEsNkJBQTJCO0FBSTNCLE1BQXFCLCtCQUErQjtJQUtoRCxNQUFNLENBQUMsUUFBUTtRQUNYLE9BQU8sSUFBSSxDQUFDO0lBQ2hCLENBQUM7SUFFRCxZQUFZLEVBQUUsU0FBUyxFQUFFLE9BQU8sRUFBRSxJQUFJLEVBQUU7UUFDcEMsSUFBSSxDQUFDLFVBQVUsR0FBRyxTQUFTLENBQUM7UUFDNUIsSUFBSSxDQUFDLFFBQVEsR0FBRyxPQUFPLENBQUM7UUFDeEIsSUFBSSxDQUFDLEtBQUssR0FBRyxJQUFJLENBQUM7SUFDdEIsQ0FBQztJQUVELE1BQU0sQ0FBQyxFQUFFLE9BQU8sRUFBRSxNQUFNLEVBQUUsSUFBSSxFQUFFOztRQUM1QixJQUFJLENBQUMsTUFBTSxFQUFFO1lBQ1QsTUFBTSxHQUFhO2dCQUNmLEtBQUssRUFBRSxPQUFPLENBQUMsT0FBTzthQUN6QixDQUFDO1NBQ0w7UUFFRCxPQUFPLElBQUEsVUFBSSxFQUFBOzBCQUNPLElBQUksQ0FBQyxVQUFVLENBQUMsS0FBSyxDQUFDLEdBQUcsQ0FBQyxjQUFjLENBQUM7OzZCQUV0QyxJQUFJLENBQUMsVUFBVSxDQUFDLEtBQUssQ0FBQyxHQUFHLENBQzlCLFFBQVEsRUFDUix3QkFBd0IsQ0FDM0I7Ozs7a0NBSWEsQ0FBQyxDQUFDLEVBQUUsRUFBRSxDQUNaLElBQUksQ0FBQyxVQUFVLENBQUMsT0FBTyxDQUFDLElBQUksRUFBRSxPQUFPLEVBQUUsQ0FBQyxDQUFDO2dDQUNyQyxJQUFJLENBQUMsRUFBRSxDQUFDLENBQUMsQ0FBQyxDQUFDO2lDQUNWLElBQUksQ0FBQyxVQUFVLENBQUMsS0FBSyxDQUFDLEdBQUcsQ0FDOUIsUUFBUSxFQUNSLFNBQVMsQ0FDWjt1Q0FDYyxNQUFBLE1BQUEsT0FBTyxDQUFDLE9BQU8sbUNBQzlCLE9BQU8sQ0FBQyxLQUFLLG1DQUNiLE9BQU8sQ0FBQyxFQUFFO2dDQUNGLElBQUksQ0FBQyxJQUFJLENBQUMsR0FBRyxDQUFDOztFQUU1QyxNQUFNLENBQUMsS0FBSzs7c0JBRVEsSUFBSSxDQUFDLFVBQVUsQ0FBQyxXQUFXLENBQUMsT0FBTyxFQUFFLElBQUksQ0FBQzs7O1NBR3ZELENBQUM7SUFDTixDQUFDO0NBQ0o7QUFuREQsa0RBbURDIn0=
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7O0FBQUEsNkJBQTJCO0FBSTNCLCtFQUF5RDtBQUV6RCxNQUFxQiwrQkFBZ0MsU0FBUSw0QkFBb0I7SUFDN0UsTUFBTSxDQUFDLFFBQVE7UUFDWCxPQUFPLElBQUksQ0FBQztJQUNoQixDQUFDO0lBRUQsWUFBWSxJQUE2QjtRQUNyQyxLQUFLLENBQUMsSUFBSSxDQUFDLENBQUM7UUFFWixJQUFJLENBQUMsSUFBSSxDQUFDLE1BQU0sQ0FBQyxLQUFLLEVBQUU7WUFDcEIsSUFBSSxDQUFDLE1BQU0sQ0FBQyxLQUFLLEdBQUcsSUFBSSxDQUFDLE9BQU8sQ0FBQyxPQUFPLENBQUM7U0FDNUM7SUFDTCxDQUFDO0lBRUQsTUFBTTs7UUFDRixPQUFPLElBQUEsVUFBSSxFQUFBOzBCQUNPLElBQUksQ0FBQyxNQUFNLENBQUMsS0FBSyxDQUFDLEdBQUcsQ0FBQyxjQUFjLENBQUM7OzZCQUVsQyxJQUFJLENBQUMsTUFBTSxDQUFDLEtBQUssQ0FBQyxHQUFHLENBQzFCLFFBQVEsRUFDUix3QkFBd0IsQ0FDM0I7Ozs7a0NBSWEsQ0FBQyxDQUFDLEVBQUUsRUFBRSxDQUNaLElBQUksQ0FBQyxNQUFNLENBQUMsT0FBTyxDQUFDLElBQUksQ0FBQyxJQUFJLEVBQUUsSUFBSSxDQUFDLE9BQU8sRUFBRSxDQUFDLENBQUM7Z0NBQzNDLElBQUksQ0FBQyxJQUFJLENBQUMsRUFBRSxDQUFDLENBQUMsQ0FBQyxDQUFDO2lDQUNmLElBQUksQ0FBQyxNQUFNLENBQUMsS0FBSyxDQUFDLEdBQUcsQ0FBQyxRQUFRLEVBQUUsU0FBUyxDQUFDO3VDQUNwQyxNQUFBLE1BQUEsSUFBSSxDQUFDLE9BQU8sQ0FBQyxPQUFPLG1DQUNuQyxJQUFJLENBQUMsT0FBTyxDQUFDLEtBQUssbUNBQ2xCLElBQUksQ0FBQyxPQUFPLENBQUMsRUFBRTtnQ0FDUCxDQUFDLElBQUksRUFBRSxJQUFJLENBQUMsSUFBSSxDQUFDLEdBQUcsQ0FBQyxDQUFDOztFQUVwRCxJQUFJLENBQUMsTUFBTSxDQUFDLEtBQUs7O3NCQUVHLElBQUksQ0FBQyxNQUFNLENBQUMsV0FBVyxDQUFDLElBQUksQ0FBQyxPQUFPLEVBQUUsSUFBSSxDQUFDLElBQUksQ0FBQzs7O1NBRzdELENBQUM7SUFDTixDQUFDO0NBQ0o7QUF4Q0Qsa0RBd0NDIn0=

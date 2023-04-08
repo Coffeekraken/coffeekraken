@@ -3,45 +3,33 @@ import { unsafeHTML } from 'lit/directives/unsafe-html.js';
 
 import type { ISImageData } from '@specimen/types';
 
-export default class SSpecsEditorComponentImageWidget {
-    _component;
-    _propObj;
-    _path;
+import type { ISSpecsEditorWidgetDeps } from '../SSpecsEditorWidget';
+import __SSpecsEditorWidget from '../SSpecsEditorWidget';
 
+export default class SSpecsEditorComponentImageWidget extends __SSpecsEditorWidget {
     static isActive() {
         return true;
     }
 
-    constructor({ component, propObj, path }) {
-        this._component = component;
-        this._propObj = propObj;
-        this._path = path;
+    constructor(deps: ISSpecsEditorWidgetDeps) {
+        super(deps);
     }
 
-    validate({ values }) {
-        if (!values.urlee) {
-            // return {
-            //     error: 'hello',
-            // };
-        }
-    }
+    // validate({ values }) {}
 
-    render({ propObj, values, path }) {
-        if (!values) {
-            values = {};
-        }
-        values = <ISImageData>values;
+    render() {
+        const values = <ISImageData>this.values;
 
         return html`
-            <div class="${this._component.utils.cls('_image-widget')}">
+            <div class="${this.editor.utils.cls('_image-widget')}">
                 <label
-                    class="${this._component.utils.cls(
+                    class="${this.editor.utils.cls(
                         '_label',
                         's-label s-label--block',
                     )}"
                     @click=${(e) => e.preventDefault()}
                 >
-                    ${this._component.renderLabel(propObj, path)}
+                    ${this.editor.renderLabel(this.propObj, this.path)}
                 </label>
 
                 <div class="_drop">
@@ -52,46 +40,40 @@ export default class SSpecsEditorComponentImageWidget {
                                   upload
                                   class="s-bare"
                                   @s-dropzone.file=${(e) => {
-                                      // responsive item
-                                      this._component.setValue(path, {
-                                          url: <ISImageData>e.detail[0].url,
+                                      this.setValue({
+                                          url: e.detail[0].url,
                                       });
-                                      if (
-                                          this._component.isPathResponsive(
-                                              path,
-                                          ) &&
-                                          this._component.isDefaultMedia()
-                                      ) {
-                                          this._component.setValue(
-                                              [...path, 'url'],
-                                              <ISImageData>e.detail[0].url,
-                                              {
-                                                  noneResponsive: true,
-                                              },
-                                          );
-                                      }
-                                      this._component.apply();
+
+                                      //   // responsive item
+                                      //   this.editor.setValue(path, {
+                                      //       url: <ISImageData>e.detail[0].url,
+                                      //   });
+                                      //   if (
+                                      //       this.editor.isPathResponsive(path) &&
+                                      //       this.editor.isDefaultMedia()
+                                      //   ) {
+                                      //       this.editor.setValue(
+                                      //           [...path, 'url'],
+                                      //           <ISImageData>e.detail[0].url,
+                                      //           {
+                                      //               noneResponsive: true,
+                                      //           },
+                                      //       );
+                                      //   }
+                                      this.editor.apply();
                                   }}
                               ></s-dropzone>
                           `
                         : html`
-                              <ul
-                                  class="${this._component.utils.cls(
-                                      '_images',
-                                  )}"
-                              >
-                                  ${this._renderImage(
-                                      values.url,
-                                      this._component.props.media,
-                                      path,
-                                  )}
+                              <ul class="${this.editor.utils.cls('_images')}">
+                                  ${this._renderImage(values.url)}
                               </ul>
                           `}
                 </div>
             </div>
         `;
     }
-    _renderImage(url: string, media: string, path: string[]): any {
+    _renderImage(url: string): any {
         return html`
             <li class="_image">
                 <figure class="_preview s-media-container">
@@ -100,22 +82,22 @@ export default class SSpecsEditorComponentImageWidget {
                 <div class="_name">${url.split('/').pop()}</div>
                 <div class="_spacer"></div>
                 <div class="_actions">
-                    ${this._component.renderCopyButton(
+                    ${this.editor.renderCopyButton(
                         `${document.location.origin}/${url}`,
-                        this._component.props.i18n.image.copyUrl,
+                        this.editor.props.i18n.image.copyUrl,
                     )}
                     <button
                         class="_delete"
                         @pointerup=${(e) => {
                             if (e.currentTarget.needConfirmation) return;
-                            this._component.clearValue(path, {
-                                media,
+                            this.editor.clearValue(this.path, {
+                                media: this.editor.props.media,
                             });
-                            this._component.apply();
+                            this.editor.apply();
                         }}
                         confirm="Confirm?"
                     >
-                        ${unsafeHTML(this._component.props.icons.delete)}
+                        ${unsafeHTML(this.editor.props.icons.delete)}
                     </button>
                 </div>
             </li>

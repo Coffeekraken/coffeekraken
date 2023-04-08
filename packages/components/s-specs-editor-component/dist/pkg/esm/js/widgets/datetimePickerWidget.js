@@ -1,54 +1,51 @@
 import { html } from 'lit';
 import { __SDatetime } from '@specimen/types/utils';
-export default class SSpecsEditorComponentDatetimePickerWidget {
+import __SSpecsEditorWidget from '../SSpecsEditorWidget';
+export default class SSpecsEditorComponentDatetimePickerWidget extends __SSpecsEditorWidget {
     static isActive() {
         return true;
     }
-    constructor({ component, propObj, path }) {
-        this._component = component;
-        this._propObj = propObj;
-        this._path = path;
-    }
-    render({ propObj, values, path }) {
+    constructor(deps) {
         var _a;
-        if (!values) {
-            values = {
-                value: propObj.default,
-                format: (_a = propObj.format) !== null && _a !== void 0 ? _a : 'YYYY-MM-DD',
-            };
+        super(deps);
+        if (!this.values.value) {
+            Object.assign(this.values, {
+                value: this.propObj.default,
+                format: (_a = this.propObj.format) !== null && _a !== void 0 ? _a : 'YYYY-MM-DD',
+            });
         }
-        const datetime = new __SDatetime(propObj, values);
+    }
+    render() {
+        const datetime = new __SDatetime(this.propObj, this.values);
         return html `
-            <div
-                class="${this._component.utils.cls('_datetime-picker-widget')}"
-            >
+            <div class="${this.editor.utils.cls('_datetime-picker-widget')}">
                 <label
-                    class="${this._component.utils.cls('_label', 's-label s-label--block')}"
+                    class="${this.editor.utils.cls('_label', 's-label s-label--block')}"
                 >
                     <s-datetime-picker
-                        value="${values.value}"
-                        ?calendar=${propObj.calendar}
-                        format="${values.format}"
+                        value="${this.values.value}"
+                        ?calendar=${this.propObj.calendar}
+                        format="${this.values.format}"
                         @s-datetime-picker.change=${(e) => {
-            this._component.setValue(path, e.detail);
-            this._component.apply();
+            this.setValue(e.detail);
+            this.editor.apply();
         }}
                         @s-datetime-picker.reset=${(e) => {
-            this._component.setValue(path, e.detail);
-            this._component.apply();
+            this.setValue(e.detail);
+            this.editor.apply();
         }}
                     >
                         <input
                             type="text"
                             name="datetime"
                             class="s-input"
-                            placeholder=${propObj.placeholder}
+                            placeholder=${this.propObj.placeholder}
                         />
                     </s-datetime-picker>
-                    ${this._component.renderLabel(propObj, path)}
+                    ${this.editor.renderLabel(this.propObj, this.path)}
                 </label>
             </div>
         `;
     }
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUNBLE9BQU8sRUFBRSxJQUFJLEVBQUUsTUFBTSxLQUFLLENBQUM7QUFFM0IsT0FBTyxFQUFFLFdBQVcsRUFBRSxNQUFNLHVCQUF1QixDQUFDO0FBSXBELE1BQU0sQ0FBQyxPQUFPLE9BQU8seUNBQXlDO0lBSzFELE1BQU0sQ0FBQyxRQUFRO1FBQ1gsT0FBTyxJQUFJLENBQUM7SUFDaEIsQ0FBQztJQUVELFlBQVksRUFBRSxTQUFTLEVBQUUsT0FBTyxFQUFFLElBQUksRUFBRTtRQUNwQyxJQUFJLENBQUMsVUFBVSxHQUFHLFNBQVMsQ0FBQztRQUM1QixJQUFJLENBQUMsUUFBUSxHQUFHLE9BQU8sQ0FBQztRQUN4QixJQUFJLENBQUMsS0FBSyxHQUFHLElBQUksQ0FBQztJQUN0QixDQUFDO0lBRUQsTUFBTSxDQUFDLEVBQUUsT0FBTyxFQUFFLE1BQU0sRUFBRSxJQUFJLEVBQUU7O1FBQzVCLElBQUksQ0FBQyxNQUFNLEVBQUU7WUFDVCxNQUFNLEdBQW1CO2dCQUNyQixLQUFLLEVBQUUsT0FBTyxDQUFDLE9BQU87Z0JBQ3RCLE1BQU0sRUFBRSxNQUFBLE9BQU8sQ0FBQyxNQUFNLG1DQUFJLFlBQVk7YUFDekMsQ0FBQztTQUNMO1FBRUQsTUFBTSxRQUFRLEdBQUcsSUFBSSxXQUFXLENBQUMsT0FBTyxFQUFFLE1BQU0sQ0FBQyxDQUFDO1FBRWxELE9BQU8sSUFBSSxDQUFBOzt5QkFFTSxJQUFJLENBQUMsVUFBVSxDQUFDLEtBQUssQ0FBQyxHQUFHLENBQUMseUJBQXlCLENBQUM7Ozs2QkFHaEQsSUFBSSxDQUFDLFVBQVUsQ0FBQyxLQUFLLENBQUMsR0FBRyxDQUM5QixRQUFRLEVBQ1Isd0JBQXdCLENBQzNCOzs7aUNBR1ksTUFBTSxDQUFDLEtBQUs7b0NBQ1QsT0FBTyxDQUFDLFFBQVE7a0NBQ2xCLE1BQU0sQ0FBQyxNQUFNO29EQUNLLENBQUMsQ0FBQyxFQUFFLEVBQUU7WUFDOUIsSUFBSSxDQUFDLFVBQVUsQ0FBQyxRQUFRLENBQ3BCLElBQUksRUFDVSxDQUFDLENBQUMsTUFBTSxDQUN6QixDQUFDO1lBQ0YsSUFBSSxDQUFDLFVBQVUsQ0FBQyxLQUFLLEVBQUUsQ0FBQztRQUM1QixDQUFDO21EQUMwQixDQUFDLENBQUMsRUFBRSxFQUFFO1lBQzdCLElBQUksQ0FBQyxVQUFVLENBQUMsUUFBUSxDQUNwQixJQUFJLEVBQ1UsQ0FBQyxDQUFDLE1BQU0sQ0FDekIsQ0FBQztZQUNGLElBQUksQ0FBQyxVQUFVLENBQUMsS0FBSyxFQUFFLENBQUM7UUFDNUIsQ0FBQzs7Ozs7OzBDQU1pQixPQUFPLENBQUMsV0FBVzs7O3NCQUd2QyxJQUFJLENBQUMsVUFBVSxDQUFDLFdBQVcsQ0FBQyxPQUFPLEVBQUUsSUFBSSxDQUFDOzs7U0FHdkQsQ0FBQztJQUNOLENBQUM7Q0FDSiJ9
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUNBLE9BQU8sRUFBRSxJQUFJLEVBQUUsTUFBTSxLQUFLLENBQUM7QUFFM0IsT0FBTyxFQUFFLFdBQVcsRUFBRSxNQUFNLHVCQUF1QixDQUFDO0FBR3BELE9BQU8sb0JBQW9CLE1BQU0sdUJBQXVCLENBQUM7QUFFekQsTUFBTSxDQUFDLE9BQU8sT0FBTyx5Q0FBMEMsU0FBUSxvQkFBb0I7SUFDdkYsTUFBTSxDQUFDLFFBQVE7UUFDWCxPQUFPLElBQUksQ0FBQztJQUNoQixDQUFDO0lBRUQsWUFBWSxJQUE2Qjs7UUFDckMsS0FBSyxDQUFDLElBQUksQ0FBQyxDQUFDO1FBRVosSUFBSSxDQUFDLElBQUksQ0FBQyxNQUFNLENBQUMsS0FBSyxFQUFFO1lBQ3BCLE1BQU0sQ0FBQyxNQUFNLENBQUMsSUFBSSxDQUFDLE1BQU0sRUFBRTtnQkFDdkIsS0FBSyxFQUFFLElBQUksQ0FBQyxPQUFPLENBQUMsT0FBTztnQkFDM0IsTUFBTSxFQUFFLE1BQUEsSUFBSSxDQUFDLE9BQU8sQ0FBQyxNQUFNLG1DQUFJLFlBQVk7YUFDOUMsQ0FBQyxDQUFDO1NBQ047SUFDTCxDQUFDO0lBRUQsTUFBTTtRQUNGLE1BQU0sUUFBUSxHQUFHLElBQUksV0FBVyxDQUFDLElBQUksQ0FBQyxPQUFPLEVBQUUsSUFBSSxDQUFDLE1BQU0sQ0FBQyxDQUFDO1FBRTVELE9BQU8sSUFBSSxDQUFBOzBCQUNPLElBQUksQ0FBQyxNQUFNLENBQUMsS0FBSyxDQUFDLEdBQUcsQ0FBQyx5QkFBeUIsQ0FBQzs7NkJBRTdDLElBQUksQ0FBQyxNQUFNLENBQUMsS0FBSyxDQUFDLEdBQUcsQ0FDMUIsUUFBUSxFQUNSLHdCQUF3QixDQUMzQjs7O2lDQUdZLElBQUksQ0FBQyxNQUFNLENBQUMsS0FBSztvQ0FDZCxJQUFJLENBQUMsT0FBTyxDQUFDLFFBQVE7a0NBQ3ZCLElBQUksQ0FBQyxNQUFNLENBQUMsTUFBTTtvREFDQSxDQUFDLENBQUMsRUFBRSxFQUFFO1lBQzlCLElBQUksQ0FBQyxRQUFRLENBQWUsQ0FBQyxDQUFDLE1BQU0sQ0FBQyxDQUFDO1lBQ3RDLElBQUksQ0FBQyxNQUFNLENBQUMsS0FBSyxFQUFFLENBQUM7UUFDeEIsQ0FBQzttREFDMEIsQ0FBQyxDQUFDLEVBQUUsRUFBRTtZQUM3QixJQUFJLENBQUMsUUFBUSxDQUFlLENBQUMsQ0FBQyxNQUFNLENBQUMsQ0FBQztZQUN0QyxJQUFJLENBQUMsTUFBTSxDQUFDLEtBQUssRUFBRSxDQUFDO1FBQ3hCLENBQUM7Ozs7OzswQ0FNaUIsSUFBSSxDQUFDLE9BQU8sQ0FBQyxXQUFXOzs7c0JBRzVDLElBQUksQ0FBQyxNQUFNLENBQUMsV0FBVyxDQUFDLElBQUksQ0FBQyxPQUFPLEVBQUUsSUFBSSxDQUFDLElBQUksQ0FBQzs7O1NBRzdELENBQUM7SUFDTixDQUFDO0NBQ0oifQ==

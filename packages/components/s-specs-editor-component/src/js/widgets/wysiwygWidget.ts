@@ -1,12 +1,9 @@
 import { html } from 'lit';
 
-import type { ISWysiwygData } from '@specimen/types';
+import type { ISSpecsEditorWidgetDeps } from '../SSpecsEditorWidget';
+import __SSpecsEditorWidget from '../SSpecsEditorWidget';
 
-export default class SSpecsEditorComponentWysiwygWidget {
-    _component;
-    _propObj;
-    _path;
-
+export default class SSpecsEditorComponentWysiwygWidget extends __SSpecsEditorWidget {
     _editorJs;
     _frontspec;
     _$holder;
@@ -16,26 +13,21 @@ export default class SSpecsEditorComponentWysiwygWidget {
         return true;
     }
 
-    constructor({ component, propObj, path }) {
-        this._component = component;
-        this._propObj = propObj;
-        this._path = path;
+    constructor(deps: ISSpecsEditorWidgetDeps) {
+        super(deps);
+
+        if (!this.values.value) {
+            this.values.value = this.propObj.default;
+        }
     }
 
-    render({ propObj, values, path }) {
-        if (!values) {
-            values = <ISWysiwygData>{
-                value: propObj.default,
-            };
-        }
-
+    render() {
         return html`
             <div
-                class="${this._component.utils.cls('_wysiwyg-widget')}"
+                class="${this.editor.utils.cls('_wysiwyg-widget')}"
                 @s-wysiwyg.change=${(e) => {
-                    _console.log('Path', this._path);
-                    this._component.setValue(this._path, e.detail);
-                    this._component.apply();
+                    this.setValue(e.detail);
+                    this.editor.apply();
 
                     // const $preview = document.querySelector('._preview');
                     // const wysiwyg = new __SWysiwyg(propObj, e.detail ?? {});
@@ -56,12 +48,12 @@ export default class SSpecsEditorComponentWysiwygWidget {
                 }}
             >
                 <label
-                    class="${this._component.utils.cls(
+                    class="${this.editor.utils.cls(
                         '_label',
                         's-label s-label--block',
                     )}"
                 >
-                    ${this._component.renderLabel(propObj, path)}
+                    ${this.editor.renderLabel(this.propObj, this.path)}
                 </label>
 
                 <s-wysiwyg frontspec></s-wysiwyg>

@@ -1,22 +1,10 @@
-export default class SSpecsEditorComponentTextWidget {
-    _component: any;
-    _propObj: any;
-    _path: any;
+import type { ISSpecsEditorWidgetDeps } from '../SSpecsEditorWidget';
+import __SSpecsEditorWidget from '../SSpecsEditorWidget';
+export default class SSpecsEditorComponentTextWidget extends __SSpecsEditorWidget {
     static isActive(): boolean;
-    constructor({ component, propObj, path }: {
-        component: any;
-        propObj: any;
-        path: any;
-    });
-    validate({ propObj, values }: {
-        propObj: any;
-        values: any;
-    }): {
+    constructor(deps: ISSpecsEditorWidgetDeps);
+    validate(newValues: any): {
         error: string;
     };
-    render({ propObj, values, path }: {
-        propObj: any;
-        values: any;
-        path: any;
-    }): import("lit-html").TemplateResult<1>;
+    render(): import("lit-html").TemplateResult<1>;
 }

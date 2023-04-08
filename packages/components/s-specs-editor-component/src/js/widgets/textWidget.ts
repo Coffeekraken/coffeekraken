@@ -1,26 +1,25 @@
 import { html } from 'lit';
 
-import type { ISString } from '@specimen/types';
-
 import { __i18n } from '@coffeekraken/s-i18n';
 
-export default class SSpecsEditorComponentTextWidget {
-    _component;
-    _propObj;
-    _path;
+import type { ISSpecsEditorWidgetDeps } from '../SSpecsEditorWidget';
+import __SSpecsEditorWidget from '../SSpecsEditorWidget';
 
+export default class SSpecsEditorComponentTextWidget extends __SSpecsEditorWidget {
     static isActive() {
         return true;
     }
 
-    constructor({ component, propObj, path }) {
-        this._component = component;
-        this._propObj = propObj;
-        this._path = path;
+    constructor(deps: ISSpecsEditorWidgetDeps) {
+        super(deps);
+
+        if (!this.values.value) {
+            this.values.value = this.propObj.default;
+        }
     }
 
-    validate({ propObj, values }) {
-        if (propObj.required && !values?.value) {
+    validate(newValues) {
+        if (this.propObj.required && !newValues?.value) {
             return {
                 error: __i18n(`This property is required`, {
                     id: 's-specs-editor.widget.required',
@@ -29,38 +28,30 @@ export default class SSpecsEditorComponentTextWidget {
         }
     }
 
-    render({ propObj, values, path }) {
-        if (!values) {
-            values = <ISString>{
-                value: propObj.default,
-            };
-        }
+    render() {
         return html`
-            <div class="${this._component.utils.cls('_text-widget')}">
+            <div class="${this.editor.utils.cls('_text-widget')}">
                 <label
-                    class="${this._component.utils.cls(
+                    class="${this.editor.utils.cls(
                         '_label',
                         's-label s-label--block',
                     )}"
                 >
                     <input
                         @change=${(e) => {
-                            this._component.setValue(path, {
+                            this.setValue({
                                 value: e.target.value,
                             });
-                            this._component.apply();
+                            this.editor.apply();
                         }}
                         type="text"
-                        name="${path.at(-1)}"
-                        class="${this._component.utils.cls(
-                            '_input',
-                            's-input',
-                        )}"
-                        placeholder="${propObj.pladeholder}"
-                        path="${path.join('.')}"
-                        value="${values.value}"
+                        name="${this.path.at(-1)}"
+                        class="${this.editor.utils.cls('_input', 's-input')}"
+                        placeholder="${this.propObj.pladeholder}"
+                        path="${this.path.join('.')}"
+                        value="${this.values.value}"
                     />
-                    ${this._component.renderLabel(propObj, path)}
+                    ${this.editor.renderLabel(this.propObj, this.path)}
                 </label>
             </div>
         `;

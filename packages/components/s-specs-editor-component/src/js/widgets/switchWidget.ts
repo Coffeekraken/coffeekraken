@@ -1,51 +1,43 @@
 import { html } from 'lit';
 
-export default class SSpecsEditorComponentSwitchWidget {
-    _component;
-    _propObj;
-    _path;
+import type { ISSpecsEditorWidgetDeps } from '../SSpecsEditorWidget';
+import __SSpecsEditorWidget from '../SSpecsEditorWidget';
 
+export default class SSpecsEditorComponentSwitchWidget extends __SSpecsEditorWidget {
     static isActive() {
         return true;
     }
 
-    constructor({ component, propObj, path }) {
-        this._component = component;
-        this._propObj = propObj;
-        this._path = path;
+    constructor(deps: ISSpecsEditorWidgetDeps) {
+        super(deps);
+
+        _console.log('S', this.values);
+
+        if (!this.values.value) {
+            this.values.value = this.propObj.default ?? false;
+        }
     }
 
-    render({ propObj, values, path }) {
-        if (!values) {
-            values = {
-                value: propObj.default ?? false,
-            };
-        }
-
+    render() {
         return html`
-            <div class="${this._component.utils.cls('_switch-widget')}">
-                <label
-                    class="${this._component.utils.cls('_label', 's-label')}"
-                >
+            <div class="${this.editor.utils.cls('_switch-widget')}">
+                <label class="${this.editor.utils.cls('_label', 's-label')}">
                     <input
                         @change=${(e) => {
-                            this._component.setValue(path, {
+                            this.setValue({
                                 value: e.target.checked,
                             });
-                            this._component.apply();
+                            this.editor.apply();
                         }}
                         type="checkbox"
-                        name="${path.at(-1)}"
-                        class="${this._component.utils.cls(
-                            '_switch',
-                            's-switch',
-                        )}"
-                        path="${path.join('.')}"
-                        ?checked=${values.value !== false &&
-                        values.value !== null &&
-                        values.value !== undefined}
+                        name="${this.path.at(-1)}"
+                        class="${this.editor.utils.cls('_switch', 's-switch')}"
+                        path="${this.path.join('.')}"
+                        ?checked=${this.values.value !== false &&
+                        this.values.value !== null &&
+                        this.values.value !== undefined}
                     />
-                    ${this._component.renderLabel(propObj, path, {
+                    ${this.editor.renderLabel(this.propObj, this.path, {
                         tooltip: 'right',
                     })}
                 </label>

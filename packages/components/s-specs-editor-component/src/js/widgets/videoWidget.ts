@@ -3,37 +3,30 @@ import { unsafeHTML } from 'lit/directives/unsafe-html.js';
 
 import type { ISVideoData, ISVideoFormat } from '@specimen/types';
 
-export default class SSpecsEditorComponentVideoWidget {
-    _component;
-    _propObj;
-    _path;
+import type { ISSpecsEditorWidgetDeps } from '../SSpecsEditorWidget';
+import __SSpecsEditorWidget from '../SSpecsEditorWidget';
 
+export default class SSpecsEditorComponentVideoWidget extends __SSpecsEditorWidget {
     static isActive() {
         return true;
     }
 
-    constructor({ component, propObj, path }) {
-        this._component = component;
-        this._propObj = propObj;
-        this._path = path;
+    constructor(deps: ISSpecsEditorWidgetDeps) {
+        super(deps);
     }
-
-    render({ propObj, values, path }) {
-        if (!values) {
-            values = {};
-        }
-        values = <ISVideoData>values;
+    render() {
+        const values = <ISVideoData>this.values;
 
         return html`
-            <div class="${this._component.utils.cls('_video-widget')}">
+            <div class="${this.editor.utils.cls('_video-widget')}">
                 <label
-                    class="${this._component.utils.cls(
+                    class="${this.editor.utils.cls(
                         '_label',
                         's-label s-label--block',
                     )}"
                     @click=${(e) => e.preventDefault()}
                 >
-                    ${this._component.renderLabel(propObj, path)}
+                    ${this.editor.renderLabel(this.propObj, this.path)}
                 </label>
 
                 <div class="_drop">
@@ -54,17 +47,15 @@ export default class SSpecsEditorComponentVideoWidget {
                                     url,
                                 };
                             }
-
-                            this._component.setValue(
-                                [...path, 'sources'],
-                                newSources,
-                            );
-                            this._component.apply();
+                            this.setValue(newSources, {
+                                path: 'sources',
+                            });
+                            this.editor.apply();
                         }}
                     ></s-dropzone>
                 </div>
 
-                ${this._renderVideos(values, path)}
+                ${this._renderVideos(this.values, this.path)}
             </div>
         `;
     }
@@ -96,25 +87,25 @@ export default class SSpecsEditorComponentVideoWidget {
                 <div class="_format">${format}</div>
                 <div class="_spacer"></div>
                 <div class="_actions">
-                    ${this._component.renderCopyButton(
+                    ${this.editor.renderCopyButton(
                         `${document.location.origin}/${url}`,
-                        this._component.props.i18n.video.copyUrl,
+                        this.editor.props.i18n.video.copyUrl,
                     )}
                     <button
                         class="_delete"
                         @pointerup=${(e) => {
                             if (e.currentTarget.needConfirmation) return;
-                            const values = this._component.getValue(path);
+                            const values = this.editor.getValue(path);
                             delete values.sources[format];
-                            this._component.setValue(
+                            this.editor.setValue(
                                 [...path, 'sources'],
                                 values.sources,
                             );
-                            this._component.apply();
+                            this.editor.apply();
                         }}
                         confirm="Confirm?"
                     >
-                        ${unsafeHTML(this._component.props.icons.delete)}
+                        ${unsafeHTML(this.editor.props.icons.delete)}
                     </button>
                 </div>
             </li>

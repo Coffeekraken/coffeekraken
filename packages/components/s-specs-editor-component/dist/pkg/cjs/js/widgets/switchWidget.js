@@ -1,43 +1,42 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 const lit_1 = require("lit");
-class SSpecsEditorComponentSwitchWidget {
+const SSpecsEditorWidget_1 = __importDefault(require("../SSpecsEditorWidget"));
+class SSpecsEditorComponentSwitchWidget extends SSpecsEditorWidget_1.default {
     static isActive() {
         return true;
     }
-    constructor({ component, propObj, path }) {
-        this._component = component;
-        this._propObj = propObj;
-        this._path = path;
-    }
-    render({ propObj, values, path }) {
+    constructor(deps) {
         var _a;
-        if (!values) {
-            values = {
-                value: (_a = propObj.default) !== null && _a !== void 0 ? _a : false,
-            };
+        super(deps);
+        _console.log('S', this.values);
+        if (!this.values.value) {
+            this.values.value = (_a = this.propObj.default) !== null && _a !== void 0 ? _a : false;
         }
+    }
+    render() {
         return (0, lit_1.html) `
-            <div class="${this._component.utils.cls('_switch-widget')}">
-                <label
-                    class="${this._component.utils.cls('_label', 's-label')}"
-                >
+            <div class="${this.editor.utils.cls('_switch-widget')}">
+                <label class="${this.editor.utils.cls('_label', 's-label')}">
                     <input
                         @change=${(e) => {
-            this._component.setValue(path, {
+            this.setValue({
                 value: e.target.checked,
             });
-            this._component.apply();
+            this.editor.apply();
         }}
                         type="checkbox"
-                        name="${path.at(-1)}"
-                        class="${this._component.utils.cls('_switch', 's-switch')}"
-                        path="${path.join('.')}"
-                        ?checked=${values.value !== false &&
-            values.value !== null &&
-            values.value !== undefined}
+                        name="${this.path.at(-1)}"
+                        class="${this.editor.utils.cls('_switch', 's-switch')}"
+                        path="${this.path.join('.')}"
+                        ?checked=${this.values.value !== false &&
+            this.values.value !== null &&
+            this.values.value !== undefined}
                     />
-                    ${this._component.renderLabel(propObj, path, {
+                    ${this.editor.renderLabel(this.propObj, this.path, {
             tooltip: 'right',
         })}
                 </label>
@@ -46,4 +45,4 @@ class SSpecsEditorComponentSwitchWidget {
     }
 }
 exports.default = SSpecsEditorComponentSwitchWidget;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7O0FBQUEsNkJBQTJCO0FBRTNCLE1BQXFCLGlDQUFpQztJQUtsRCxNQUFNLENBQUMsUUFBUTtRQUNYLE9BQU8sSUFBSSxDQUFDO0lBQ2hCLENBQUM7SUFFRCxZQUFZLEVBQUUsU0FBUyxFQUFFLE9BQU8sRUFBRSxJQUFJLEVBQUU7UUFDcEMsSUFBSSxDQUFDLFVBQVUsR0FBRyxTQUFTLENBQUM7UUFDNUIsSUFBSSxDQUFDLFFBQVEsR0FBRyxPQUFPLENBQUM7UUFDeEIsSUFBSSxDQUFDLEtBQUssR0FBRyxJQUFJLENBQUM7SUFDdEIsQ0FBQztJQUVELE1BQU0sQ0FBQyxFQUFFLE9BQU8sRUFBRSxNQUFNLEVBQUUsSUFBSSxFQUFFOztRQUM1QixJQUFJLENBQUMsTUFBTSxFQUFFO1lBQ1QsTUFBTSxHQUFHO2dCQUNMLEtBQUssRUFBRSxNQUFBLE9BQU8sQ0FBQyxPQUFPLG1DQUFJLEtBQUs7YUFDbEMsQ0FBQztTQUNMO1FBRUQsT0FBTyxJQUFBLFVBQUksRUFBQTswQkFDTyxJQUFJLENBQUMsVUFBVSxDQUFDLEtBQUssQ0FBQyxHQUFHLENBQUMsZ0JBQWdCLENBQUM7OzZCQUV4QyxJQUFJLENBQUMsVUFBVSxDQUFDLEtBQUssQ0FBQyxHQUFHLENBQUMsUUFBUSxFQUFFLFNBQVMsQ0FBQzs7O2tDQUd6QyxDQUFDLENBQUMsRUFBRSxFQUFFO1lBQ1osSUFBSSxDQUFDLFVBQVUsQ0FBQyxRQUFRLENBQUMsSUFBSSxFQUFFO2dCQUMzQixLQUFLLEVBQUUsQ0FBQyxDQUFDLE1BQU0sQ0FBQyxPQUFPO2FBQzFCLENBQUMsQ0FBQztZQUNILElBQUksQ0FBQyxVQUFVLENBQUMsS0FBSyxFQUFFLENBQUM7UUFDNUIsQ0FBQzs7Z0NBRU8sSUFBSSxDQUFDLEVBQUUsQ0FBQyxDQUFDLENBQUMsQ0FBQztpQ0FDVixJQUFJLENBQUMsVUFBVSxDQUFDLEtBQUssQ0FBQyxHQUFHLENBQzlCLFNBQVMsRUFDVCxVQUFVLENBQ2I7Z0NBQ08sSUFBSSxDQUFDLElBQUksQ0FBQyxHQUFHLENBQUM7bUNBQ1gsTUFBTSxDQUFDLEtBQUssS0FBSyxLQUFLO1lBQ2pDLE1BQU0sQ0FBQyxLQUFLLEtBQUssSUFBSTtZQUNyQixNQUFNLENBQUMsS0FBSyxLQUFLLFNBQVM7O3NCQUU1QixJQUFJLENBQUMsVUFBVSxDQUFDLFdBQVcsQ0FBQyxPQUFPLEVBQUUsSUFBSSxFQUFFO1lBQ3pDLE9BQU8sRUFBRSxPQUFPO1NBQ25CLENBQUM7OztTQUdiLENBQUM7SUFDTixDQUFDO0NBQ0o7QUFwREQsb0RBb0RDIn0=
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7O0FBQUEsNkJBQTJCO0FBRzNCLCtFQUF5RDtBQUV6RCxNQUFxQixpQ0FBa0MsU0FBUSw0QkFBb0I7SUFDL0UsTUFBTSxDQUFDLFFBQVE7UUFDWCxPQUFPLElBQUksQ0FBQztJQUNoQixDQUFDO0lBRUQsWUFBWSxJQUE2Qjs7UUFDckMsS0FBSyxDQUFDLElBQUksQ0FBQyxDQUFDO1FBRVosUUFBUSxDQUFDLEdBQUcsQ0FBQyxHQUFHLEVBQUUsSUFBSSxDQUFDLE1BQU0sQ0FBQyxDQUFDO1FBRS9CLElBQUksQ0FBQyxJQUFJLENBQUMsTUFBTSxDQUFDLEtBQUssRUFBRTtZQUNwQixJQUFJLENBQUMsTUFBTSxDQUFDLEtBQUssR0FBRyxNQUFBLElBQUksQ0FBQyxPQUFPLENBQUMsT0FBTyxtQ0FBSSxLQUFLLENBQUM7U0FDckQ7SUFDTCxDQUFDO0lBRUQsTUFBTTtRQUNGLE9BQU8sSUFBQSxVQUFJLEVBQUE7MEJBQ08sSUFBSSxDQUFDLE1BQU0sQ0FBQyxLQUFLLENBQUMsR0FBRyxDQUFDLGdCQUFnQixDQUFDO2dDQUNqQyxJQUFJLENBQUMsTUFBTSxDQUFDLEtBQUssQ0FBQyxHQUFHLENBQUMsUUFBUSxFQUFFLFNBQVMsQ0FBQzs7a0NBRXhDLENBQUMsQ0FBQyxFQUFFLEVBQUU7WUFDWixJQUFJLENBQUMsUUFBUSxDQUFDO2dCQUNWLEtBQUssRUFBRSxDQUFDLENBQUMsTUFBTSxDQUFDLE9BQU87YUFDMUIsQ0FBQyxDQUFDO1lBQ0gsSUFBSSxDQUFDLE1BQU0sQ0FBQyxLQUFLLEVBQUUsQ0FBQztRQUN4QixDQUFDOztnQ0FFTyxJQUFJLENBQUMsSUFBSSxDQUFDLEVBQUUsQ0FBQyxDQUFDLENBQUMsQ0FBQztpQ0FDZixJQUFJLENBQUMsTUFBTSxDQUFDLEtBQUssQ0FBQyxHQUFHLENBQUMsU0FBUyxFQUFFLFVBQVUsQ0FBQztnQ0FDN0MsSUFBSSxDQUFDLElBQUksQ0FBQyxJQUFJLENBQUMsR0FBRyxDQUFDO21DQUNoQixJQUFJLENBQUMsTUFBTSxDQUFDLEtBQUssS0FBSyxLQUFLO1lBQ3RDLElBQUksQ0FBQyxNQUFNLENBQUMsS0FBSyxLQUFLLElBQUk7WUFDMUIsSUFBSSxDQUFDLE1BQU0sQ0FBQyxLQUFLLEtBQUssU0FBUzs7c0JBRWpDLElBQUksQ0FBQyxNQUFNLENBQUMsV0FBVyxDQUFDLElBQUksQ0FBQyxPQUFPLEVBQUUsSUFBSSxDQUFDLElBQUksRUFBRTtZQUMvQyxPQUFPLEVBQUUsT0FBTztTQUNuQixDQUFDOzs7U0FHYixDQUFDO0lBQ04sQ0FBQztDQUNKO0FBekNELG9EQXlDQyJ9

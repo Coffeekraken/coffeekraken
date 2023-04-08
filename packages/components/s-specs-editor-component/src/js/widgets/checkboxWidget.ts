@@ -1,80 +1,74 @@
 import { html } from 'lit';
 
+import type { ISSpecsEditorWidgetDeps } from '../SSpecsEditorWidget';
+import __SSpecsEditorWidget from '../SSpecsEditorWidget';
+
 import { __i18n } from '@coffeekraken/s-i18n';
 
-import type { ISCheckboxData } from '@specimen/types';
 import { __SCheckbox } from '@specimen/types/utils';
 
-export default class SSpecsEditorComponentCheckboxWidget {
-    _component;
-    _propObj;
-    _path;
-
+export default class SSpecsEditorComponentCheckboxWidget extends __SSpecsEditorWidget {
     static isActive() {
         return true;
     }
 
-    constructor({ component, propObj, path }) {
-        this._component = component;
-        this._propObj = propObj;
-        this._path = path;
+    constructor(deps: ISSpecsEditorWidgetDeps) {
+        super(deps);
+
+        if (!this.values.value) {
+            this.values.value = [];
+        }
     }
 
-    validate({ values, propObj }) {
-        if (!values) {
+    validate(newValues) {
+        if (!newValues) {
             return;
         }
 
-        const itemsCount = Object.keys(values.value).length;
+        const itemsCount = Object.keys(newValues.value).length;
 
         // min
-        if (propObj.min !== undefined && itemsCount < propObj.min) {
+        if (this.propObj.min !== undefined && itemsCount < this.propObj.min) {
             return {
                 error: __i18n('You must select at least %s item__(s)__', {
                     id: 's-specs-editor.widget.checkbox.min',
                     tokens: {
-                        s: propObj.min,
+                        s: this.propObj.min,
                     },
                 }),
             };
         }
 
         // max
-        if (propObj.max !== undefined && itemsCount > propObj.max) {
+        if (this.propObj.max !== undefined && itemsCount > this.propObj.max) {
             return {
                 error: __i18n('You must select at most %s item__(s)__', {
                     id: 's-specs-editor.widget.checkbox.max',
                     tokens: {
-                        '%s': propObj.max,
+                        '%s': this.propObj.max,
                     },
                 }),
             };
         }
     }
 
-    render({ propObj, values, path }) {
-        if (!values) {
-            values = <ISCheckboxData>{
-                value: [],
-            };
-        }
-
-        const checkbox = new __SCheckbox(propObj, values);
+    render() {
+        const checkbox = new __SCheckbox(this.propObj, this.values);
 
         return html`
-            <div class="${this._component.utils.cls('_checkbox-widget')}">
+            <div class="${this.editor.utils.cls('_checkbox-widget')}">
                 <label
-                    class="${this._component.utils.cls(
+                    class="${this.editor.utils.cls(
                         '_label',
                         's-label s-label--block',
                     )}"
                 >
-                    ${this._component.renderLabel(propObj, path)}
+                    ${this.editor.renderLabel(this.propObj, this.path)}
                 </label>
-                ${propObj.options.map(
+                ${this.propObj.options.map(
                     (option, i) => html`
                         <label
-                            class="${this._component.utils.cls(
+                            class="${this.editor.utils.cls(
                                 '_label',
                                 's-label',
                             )}"
@@ -89,11 +83,14 @@ export default class SSpecsEditorComponentCheckboxWidget {
                                         checkbox.uncheck(option);
                                     }
 
-                                    this._component.setValue(path, values);
-                                    this._component.apply();
+                                    this.editor.setValue(
+                                        this.path,
+                                        this.values,
+                                    );
+                                    this.editor.apply();
                                 }}
-                                name="${path.at(-1)}"
-                                class="${this._component.utils.cls(
+                                name="${this.path.at(-1)}"
+                                class="${this.editor.utils.cls(
                                     '_checkbox',
                                     's-checkbox',
                                 )}"

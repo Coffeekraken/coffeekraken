@@ -1,33 +1,23 @@
 import { html } from 'lit';
 import { unsafeHTML } from 'lit/directives/unsafe-html.js';
-export default class SSpecsEditorComponentImageWidget {
+import __SSpecsEditorWidget from '../SSpecsEditorWidget';
+export default class SSpecsEditorComponentImageWidget extends __SSpecsEditorWidget {
     static isActive() {
         return true;
     }
-    constructor({ component, propObj, path }) {
-        this._component = component;
-        this._propObj = propObj;
-        this._path = path;
+    constructor(deps) {
+        super(deps);
     }
-    validate({ values }) {
-        if (!values.urlee) {
-            // return {
-            //     error: 'hello',
-            // };
-        }
-    }
-    render({ propObj, values, path }) {
-        if (!values) {
-            values = {};
-        }
-        values = values;
+    // validate({ values }) {}
+    render() {
+        const values = this.values;
         return html `
-            <div class="${this._component.utils.cls('_image-widget')}">
+            <div class="${this.editor.utils.cls('_image-widget')}">
                 <label
-                    class="${this._component.utils.cls('_label', 's-label s-label--block')}"
+                    class="${this.editor.utils.cls('_label', 's-label s-label--block')}"
                     @click=${(e) => e.preventDefault()}
                 >
-                    ${this._component.renderLabel(propObj, path)}
+                    ${this.editor.renderLabel(this.propObj, this.path)}
                 </label>
 
                 <div class="_drop">
@@ -38,32 +28,39 @@ export default class SSpecsEditorComponentImageWidget {
                                   upload
                                   class="s-bare"
                                   @s-dropzone.file=${(e) => {
-                // responsive item
-                this._component.setValue(path, {
+                this.setValue({
                     url: e.detail[0].url,
                 });
-                if (this._component.isPathResponsive(path) &&
-                    this._component.isDefaultMedia()) {
-                    this._component.setValue([...path, 'url'], e.detail[0].url, {
-                        noneResponsive: true,
-                    });
-                }
-                this._component.apply();
+                //   // responsive item
+                //   this.editor.setValue(path, {
+                //       url: <ISImageData>e.detail[0].url,
+                //   });
+                //   if (
+                //       this.editor.isPathResponsive(path) &&
+                //       this.editor.isDefaultMedia()
+                //   ) {
+                //       this.editor.setValue(
+                //           [...path, 'url'],
+                //           <ISImageData>e.detail[0].url,
+                //           {
+                //               noneResponsive: true,
+                //           },
+                //       );
+                //   }
+                this.editor.apply();
             }}
                               ></s-dropzone>
                           `
             : html `
-                              <ul
-                                  class="${this._component.utils.cls('_images')}"
-                              >
-                                  ${this._renderImage(values.url, this._component.props.media, path)}
+                              <ul class="${this.editor.utils.cls('_images')}">
+                                  ${this._renderImage(values.url)}
                               </ul>
                           `}
                 </div>
             </div>
         `;
     }
-    _renderImage(url, media, path) {
+    _renderImage(url) {
         return html `
             <li class="_image">
                 <figure class="_preview s-media-container">
@@ -72,24 +69,24 @@ export default class SSpecsEditorComponentImageWidget {
                 <div class="_name">${url.split('/').pop()}</div>
                 <div class="_spacer"></div>
                 <div class="_actions">
-                    ${this._component.renderCopyButton(`${document.location.origin}/${url}`, this._component.props.i18n.image.copyUrl)}
+                    ${this.editor.renderCopyButton(`${document.location.origin}/${url}`, this.editor.props.i18n.image.copyUrl)}
                     <button
                         class="_delete"
                         @pointerup=${(e) => {
             if (e.currentTarget.needConfirmation)
                 return;
-            this._component.clearValue(path, {
-                media,
+            this.editor.clearValue(this.path, {
+                media: this.editor.props.media,
             });
-            this._component.apply();
+            this.editor.apply();
         }}
                         confirm="Confirm?"
                     >
-                        ${unsafeHTML(this._component.props.icons.delete)}
+                        ${unsafeHTML(this.editor.props.icons.delete)}
                     </button>
                 </div>
             </li>
         `;
     }
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sRUFBRSxJQUFJLEVBQUUsTUFBTSxLQUFLLENBQUM7QUFDM0IsT0FBTyxFQUFFLFVBQVUsRUFBRSxNQUFNLCtCQUErQixDQUFDO0FBSTNELE1BQU0sQ0FBQyxPQUFPLE9BQU8sZ0NBQWdDO0lBS2pELE1BQU0sQ0FBQyxRQUFRO1FBQ1gsT0FBTyxJQUFJLENBQUM7SUFDaEIsQ0FBQztJQUVELFlBQVksRUFBRSxTQUFTLEVBQUUsT0FBTyxFQUFFLElBQUksRUFBRTtRQUNwQyxJQUFJLENBQUMsVUFBVSxHQUFHLFNBQVMsQ0FBQztRQUM1QixJQUFJLENBQUMsUUFBUSxHQUFHLE9BQU8sQ0FBQztRQUN4QixJQUFJLENBQUMsS0FBSyxHQUFHLElBQUksQ0FBQztJQUN0QixDQUFDO0lBRUQsUUFBUSxDQUFDLEVBQUUsTUFBTSxFQUFFO1FBQ2YsSUFBSSxDQUFDLE1BQU0sQ0FBQyxLQUFLLEVBQUU7WUFDZixXQUFXO1lBQ1gsc0JBQXNCO1lBQ3RCLEtBQUs7U0FDUjtJQUNMLENBQUM7SUFFRCxNQUFNLENBQUMsRUFBRSxPQUFPLEVBQUUsTUFBTSxFQUFFLElBQUksRUFBRTtRQUM1QixJQUFJLENBQUMsTUFBTSxFQUFFO1lBQ1QsTUFBTSxHQUFHLEVBQUUsQ0FBQztTQUNmO1FBQ0QsTUFBTSxHQUFnQixNQUFNLENBQUM7UUFFN0IsT0FBTyxJQUFJLENBQUE7MEJBQ08sSUFBSSxDQUFDLFVBQVUsQ0FBQyxLQUFLLENBQUMsR0FBRyxDQUFDLGVBQWUsQ0FBQzs7NkJBRXZDLElBQUksQ0FBQyxVQUFVLENBQUMsS0FBSyxDQUFDLEdBQUcsQ0FDOUIsUUFBUSxFQUNSLHdCQUF3QixDQUMzQjs2QkFDUSxDQUFDLENBQUMsRUFBRSxFQUFFLENBQUMsQ0FBQyxDQUFDLGNBQWMsRUFBRTs7c0JBRWhDLElBQUksQ0FBQyxVQUFVLENBQUMsV0FBVyxDQUFDLE9BQU8sRUFBRSxJQUFJLENBQUM7Ozs7c0JBSTFDLENBQUMsTUFBTSxDQUFDLEdBQUc7WUFDVCxDQUFDLENBQUMsSUFBSSxDQUFBOzs7OztxREFLdUIsQ0FBQyxDQUFDLEVBQUUsRUFBRTtnQkFDckIsa0JBQWtCO2dCQUNsQixJQUFJLENBQUMsVUFBVSxDQUFDLFFBQVEsQ0FBQyxJQUFJLEVBQUU7b0JBQzNCLEdBQUcsRUFBZSxDQUFDLENBQUMsTUFBTSxDQUFDLENBQUMsQ0FBQyxDQUFDLEdBQUc7aUJBQ3BDLENBQUMsQ0FBQztnQkFDSCxJQUNJLElBQUksQ0FBQyxVQUFVLENBQUMsZ0JBQWdCLENBQzVCLElBQUksQ0FDUDtvQkFDRCxJQUFJLENBQUMsVUFBVSxDQUFDLGNBQWMsRUFBRSxFQUNsQztvQkFDRSxJQUFJLENBQUMsVUFBVSxDQUFDLFFBQVEsQ0FDcEIsQ0FBQyxHQUFHLElBQUksRUFBRSxLQUFLLENBQUMsRUFDSCxDQUFDLENBQUMsTUFBTSxDQUFDLENBQUMsQ0FBQyxDQUFDLEdBQUcsRUFDNUI7d0JBQ0ksY0FBYyxFQUFFLElBQUk7cUJBQ3ZCLENBQ0osQ0FBQztpQkFDTDtnQkFDRCxJQUFJLENBQUMsVUFBVSxDQUFDLEtBQUssRUFBRSxDQUFDO1lBQzVCLENBQUM7OzJCQUVSO1lBQ0gsQ0FBQyxDQUFDLElBQUksQ0FBQTs7MkNBRWEsSUFBSSxDQUFDLFVBQVUsQ0FBQyxLQUFLLENBQUMsR0FBRyxDQUM5QixTQUFTLENBQ1o7O29DQUVDLElBQUksQ0FBQyxZQUFZLENBQ2YsTUFBTSxDQUFDLEdBQUcsRUFDVixJQUFJLENBQUMsVUFBVSxDQUFDLEtBQUssQ0FBQyxLQUFLLEVBQzNCLElBQUksQ0FDUDs7MkJBRVI7OztTQUdsQixDQUFDO0lBQ04sQ0FBQztJQUNELFlBQVksQ0FBQyxHQUFXLEVBQUUsS0FBYSxFQUFFLElBQWM7UUFDbkQsT0FBTyxJQUFJLENBQUE7OztnREFHNkIsR0FBRzs7cUNBRWQsR0FBRyxDQUFDLEtBQUssQ0FBQyxHQUFHLENBQUMsQ0FBQyxHQUFHLEVBQUU7OztzQkFHbkMsSUFBSSxDQUFDLFVBQVUsQ0FBQyxnQkFBZ0IsQ0FDOUIsR0FBRyxRQUFRLENBQUMsUUFBUSxDQUFDLE1BQU0sSUFBSSxHQUFHLEVBQUUsRUFDcEMsSUFBSSxDQUFDLFVBQVUsQ0FBQyxLQUFLLENBQUMsSUFBSSxDQUFDLEtBQUssQ0FBQyxPQUFPLENBQzNDOzs7cUNBR2dCLENBQUMsQ0FBQyxFQUFFLEVBQUU7WUFDZixJQUFJLENBQUMsQ0FBQyxhQUFhLENBQUMsZ0JBQWdCO2dCQUFFLE9BQU87WUFDN0MsSUFBSSxDQUFDLFVBQVUsQ0FBQyxVQUFVLENBQUMsSUFBSSxFQUFFO2dCQUM3QixLQUFLO2FBQ1IsQ0FBQyxDQUFDO1lBQ0gsSUFBSSxDQUFDLFVBQVUsQ0FBQyxLQUFLLEVBQUUsQ0FBQztRQUM1QixDQUFDOzs7MEJBR0MsVUFBVSxDQUFDLElBQUksQ0FBQyxVQUFVLENBQUMsS0FBSyxDQUFDLEtBQUssQ0FBQyxNQUFNLENBQUM7Ozs7U0FJL0QsQ0FBQztJQUNOLENBQUM7Q0FDSiJ9
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sRUFBRSxJQUFJLEVBQUUsTUFBTSxLQUFLLENBQUM7QUFDM0IsT0FBTyxFQUFFLFVBQVUsRUFBRSxNQUFNLCtCQUErQixDQUFDO0FBSzNELE9BQU8sb0JBQW9CLE1BQU0sdUJBQXVCLENBQUM7QUFFekQsTUFBTSxDQUFDLE9BQU8sT0FBTyxnQ0FBaUMsU0FBUSxvQkFBb0I7SUFDOUUsTUFBTSxDQUFDLFFBQVE7UUFDWCxPQUFPLElBQUksQ0FBQztJQUNoQixDQUFDO0lBRUQsWUFBWSxJQUE2QjtRQUNyQyxLQUFLLENBQUMsSUFBSSxDQUFDLENBQUM7SUFDaEIsQ0FBQztJQUVELDBCQUEwQjtJQUUxQixNQUFNO1FBQ0YsTUFBTSxNQUFNLEdBQWdCLElBQUksQ0FBQyxNQUFNLENBQUM7UUFFeEMsT0FBTyxJQUFJLENBQUE7MEJBQ08sSUFBSSxDQUFDLE1BQU0sQ0FBQyxLQUFLLENBQUMsR0FBRyxDQUFDLGVBQWUsQ0FBQzs7NkJBRW5DLElBQUksQ0FBQyxNQUFNLENBQUMsS0FBSyxDQUFDLEdBQUcsQ0FDMUIsUUFBUSxFQUNSLHdCQUF3QixDQUMzQjs2QkFDUSxDQUFDLENBQUMsRUFBRSxFQUFFLENBQUMsQ0FBQyxDQUFDLGNBQWMsRUFBRTs7c0JBRWhDLElBQUksQ0FBQyxNQUFNLENBQUMsV0FBVyxDQUFDLElBQUksQ0FBQyxPQUFPLEVBQUUsSUFBSSxDQUFDLElBQUksQ0FBQzs7OztzQkFJaEQsQ0FBQyxNQUFNLENBQUMsR0FBRztZQUNULENBQUMsQ0FBQyxJQUFJLENBQUE7Ozs7O3FEQUt1QixDQUFDLENBQUMsRUFBRSxFQUFFO2dCQUNyQixJQUFJLENBQUMsUUFBUSxDQUFDO29CQUNWLEdBQUcsRUFBRSxDQUFDLENBQUMsTUFBTSxDQUFDLENBQUMsQ0FBQyxDQUFDLEdBQUc7aUJBQ3ZCLENBQUMsQ0FBQztnQkFFSCx1QkFBdUI7Z0JBQ3ZCLGlDQUFpQztnQkFDakMsMkNBQTJDO2dCQUMzQyxRQUFRO2dCQUNSLFNBQVM7Z0JBQ1QsOENBQThDO2dCQUM5QyxxQ0FBcUM7Z0JBQ3JDLFFBQVE7Z0JBQ1IsOEJBQThCO2dCQUM5Qiw4QkFBOEI7Z0JBQzlCLDBDQUEwQztnQkFDMUMsY0FBYztnQkFDZCxzQ0FBc0M7Z0JBQ3RDLGVBQWU7Z0JBQ2YsV0FBVztnQkFDWCxNQUFNO2dCQUNOLElBQUksQ0FBQyxNQUFNLENBQUMsS0FBSyxFQUFFLENBQUM7WUFDeEIsQ0FBQzs7MkJBRVI7WUFDSCxDQUFDLENBQUMsSUFBSSxDQUFBOzJDQUNhLElBQUksQ0FBQyxNQUFNLENBQUMsS0FBSyxDQUFDLEdBQUcsQ0FBQyxTQUFTLENBQUM7b0NBQ3ZDLElBQUksQ0FBQyxZQUFZLENBQUMsTUFBTSxDQUFDLEdBQUcsQ0FBQzs7MkJBRXRDOzs7U0FHbEIsQ0FBQztJQUNOLENBQUM7SUFDRCxZQUFZLENBQUMsR0FBVztRQUNwQixPQUFPLElBQUksQ0FBQTs7O2dEQUc2QixHQUFHOztxQ0FFZCxHQUFHLENBQUMsS0FBSyxDQUFDLEdBQUcsQ0FBQyxDQUFDLEdBQUcsRUFBRTs7O3NCQUduQyxJQUFJLENBQUMsTUFBTSxDQUFDLGdCQUFnQixDQUMxQixHQUFHLFFBQVEsQ0FBQyxRQUFRLENBQUMsTUFBTSxJQUFJLEdBQUcsRUFBRSxFQUNwQyxJQUFJLENBQUMsTUFBTSxDQUFDLEtBQUssQ0FBQyxJQUFJLENBQUMsS0FBSyxDQUFDLE9BQU8sQ0FDdkM7OztxQ0FHZ0IsQ0FBQyxDQUFDLEVBQUUsRUFBRTtZQUNmLElBQUksQ0FBQyxDQUFDLGFBQWEsQ0FBQyxnQkFBZ0I7Z0JBQUUsT0FBTztZQUM3QyxJQUFJLENBQUMsTUFBTSxDQUFDLFVBQVUsQ0FBQyxJQUFJLENBQUMsSUFBSSxFQUFFO2dCQUM5QixLQUFLLEVBQUUsSUFBSSxDQUFDLE1BQU0sQ0FBQyxLQUFLLENBQUMsS0FBSzthQUNqQyxDQUFDLENBQUM7WUFDSCxJQUFJLENBQUMsTUFBTSxDQUFDLEtBQUssRUFBRSxDQUFDO1FBQ3hCLENBQUM7OzswQkFHQyxVQUFVLENBQUMsSUFBSSxDQUFDLE1BQU0sQ0FBQyxLQUFLLENBQUMsS0FBSyxDQUFDLE1BQU0sQ0FBQzs7OztTQUkzRCxDQUFDO0lBQ04sQ0FBQztDQUNKIn0=

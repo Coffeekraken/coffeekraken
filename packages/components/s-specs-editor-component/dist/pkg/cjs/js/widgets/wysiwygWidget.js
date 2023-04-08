@@ -1,28 +1,27 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 const lit_1 = require("lit");
-class SSpecsEditorComponentWysiwygWidget {
+const SSpecsEditorWidget_1 = __importDefault(require("../SSpecsEditorWidget"));
+class SSpecsEditorComponentWysiwygWidget extends SSpecsEditorWidget_1.default {
     static isActive() {
         return true;
     }
-    constructor({ component, propObj, path }) {
-        this._component = component;
-        this._propObj = propObj;
-        this._path = path;
-    }
-    render({ propObj, values, path }) {
-        if (!values) {
-            values = {
-                value: propObj.default,
-            };
+    constructor(deps) {
+        super(deps);
+        if (!this.values.value) {
+            this.values.value = this.propObj.default;
         }
+    }
+    render() {
         return (0, lit_1.html) `
             <div
-                class="${this._component.utils.cls('_wysiwyg-widget')}"
+                class="${this.editor.utils.cls('_wysiwyg-widget')}"
                 @s-wysiwyg.change=${(e) => {
-            _console.log('Path', this._path);
-            this._component.setValue(this._path, e.detail);
-            this._component.apply();
+            this.setValue(e.detail);
+            this.editor.apply();
             // const $preview = document.querySelector('._preview');
             // const wysiwyg = new __SWysiwyg(propObj, e.detail ?? {});
             // $preview.innerHTML = wysiwyg.toString(
@@ -42,9 +41,9 @@ class SSpecsEditorComponentWysiwygWidget {
         }}
             >
                 <label
-                    class="${this._component.utils.cls('_label', 's-label s-label--block')}"
+                    class="${this.editor.utils.cls('_label', 's-label s-label--block')}"
                 >
-                    ${this._component.renderLabel(propObj, path)}
+                    ${this.editor.renderLabel(this.propObj, this.path)}
                 </label>
 
                 <s-wysiwyg frontspec></s-wysiwyg>
@@ -55,4 +54,4 @@ class SSpecsEditorComponentWysiwygWidget {
     }
 }
 exports.default = SSpecsEditorComponentWysiwygWidget;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7O0FBQUEsNkJBQTJCO0FBSTNCLE1BQXFCLGtDQUFrQztJQVVuRCxNQUFNLENBQUMsUUFBUTtRQUNYLE9BQU8sSUFBSSxDQUFDO0lBQ2hCLENBQUM7SUFFRCxZQUFZLEVBQUUsU0FBUyxFQUFFLE9BQU8sRUFBRSxJQUFJLEVBQUU7UUFDcEMsSUFBSSxDQUFDLFVBQVUsR0FBRyxTQUFTLENBQUM7UUFDNUIsSUFBSSxDQUFDLFFBQVEsR0FBRyxPQUFPLENBQUM7UUFDeEIsSUFBSSxDQUFDLEtBQUssR0FBRyxJQUFJLENBQUM7SUFDdEIsQ0FBQztJQUVELE1BQU0sQ0FBQyxFQUFFLE9BQU8sRUFBRSxNQUFNLEVBQUUsSUFBSSxFQUFFO1FBQzVCLElBQUksQ0FBQyxNQUFNLEVBQUU7WUFDVCxNQUFNLEdBQWtCO2dCQUNwQixLQUFLLEVBQUUsT0FBTyxDQUFDLE9BQU87YUFDekIsQ0FBQztTQUNMO1FBRUQsT0FBTyxJQUFBLFVBQUksRUFBQTs7eUJBRU0sSUFBSSxDQUFDLFVBQVUsQ0FBQyxLQUFLLENBQUMsR0FBRyxDQUFDLGlCQUFpQixDQUFDO29DQUNqQyxDQUFDLENBQUMsRUFBRSxFQUFFO1lBQ3RCLFFBQVEsQ0FBQyxHQUFHLENBQUMsTUFBTSxFQUFFLElBQUksQ0FBQyxLQUFLLENBQUMsQ0FBQztZQUNqQyxJQUFJLENBQUMsVUFBVSxDQUFDLFFBQVEsQ0FBQyxJQUFJLENBQUMsS0FBSyxFQUFFLENBQUMsQ0FBQyxNQUFNLENBQUMsQ0FBQztZQUMvQyxJQUFJLENBQUMsVUFBVSxDQUFDLEtBQUssRUFBRSxDQUFDO1lBRXhCLHdEQUF3RDtZQUN4RCwyREFBMkQ7WUFDM0QseUNBQXlDO1lBQ3pDLHdDQUF3QztZQUN4QywwQkFBMEI7WUFDMUIsMkJBQTJCO1lBQzNCLHNEQUFzRDtZQUN0RCwyQkFBMkI7WUFDM0Isa0NBQWtDO1lBQ2xDLHlCQUF5QjtZQUN6Qix1Q0FBdUM7WUFDdkMsdUJBQXVCO1lBQ3ZCLHlGQUF5RjtZQUN6RixZQUFZO1lBQ1osU0FBUztZQUNULEtBQUs7UUFDVCxDQUFDOzs7NkJBR1ksSUFBSSxDQUFDLFVBQVUsQ0FBQyxLQUFLLENBQUMsR0FBRyxDQUM5QixRQUFRLEVBQ1Isd0JBQXdCLENBQzNCOztzQkFFQyxJQUFJLENBQUMsVUFBVSxDQUFDLFdBQVcsQ0FBQyxPQUFPLEVBQUUsSUFBSSxDQUFDOzs7Ozs7O1NBT3ZELENBQUM7SUFDTixDQUFDO0NBQ0o7QUFwRUQscURBb0VDIn0=
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7O0FBQUEsNkJBQTJCO0FBRzNCLCtFQUF5RDtBQUV6RCxNQUFxQixrQ0FBbUMsU0FBUSw0QkFBb0I7SUFNaEYsTUFBTSxDQUFDLFFBQVE7UUFDWCxPQUFPLElBQUksQ0FBQztJQUNoQixDQUFDO0lBRUQsWUFBWSxJQUE2QjtRQUNyQyxLQUFLLENBQUMsSUFBSSxDQUFDLENBQUM7UUFFWixJQUFJLENBQUMsSUFBSSxDQUFDLE1BQU0sQ0FBQyxLQUFLLEVBQUU7WUFDcEIsSUFBSSxDQUFDLE1BQU0sQ0FBQyxLQUFLLEdBQUcsSUFBSSxDQUFDLE9BQU8sQ0FBQyxPQUFPLENBQUM7U0FDNUM7SUFDTCxDQUFDO0lBRUQsTUFBTTtRQUNGLE9BQU8sSUFBQSxVQUFJLEVBQUE7O3lCQUVNLElBQUksQ0FBQyxNQUFNLENBQUMsS0FBSyxDQUFDLEdBQUcsQ0FBQyxpQkFBaUIsQ0FBQztvQ0FDN0IsQ0FBQyxDQUFDLEVBQUUsRUFBRTtZQUN0QixJQUFJLENBQUMsUUFBUSxDQUFDLENBQUMsQ0FBQyxNQUFNLENBQUMsQ0FBQztZQUN4QixJQUFJLENBQUMsTUFBTSxDQUFDLEtBQUssRUFBRSxDQUFDO1lBRXBCLHdEQUF3RDtZQUN4RCwyREFBMkQ7WUFDM0QseUNBQXlDO1lBQ3pDLHdDQUF3QztZQUN4QywwQkFBMEI7WUFDMUIsMkJBQTJCO1lBQzNCLHNEQUFzRDtZQUN0RCwyQkFBMkI7WUFDM0Isa0NBQWtDO1lBQ2xDLHlCQUF5QjtZQUN6Qix1Q0FBdUM7WUFDdkMsdUJBQXVCO1lBQ3ZCLHlGQUF5RjtZQUN6RixZQUFZO1lBQ1osU0FBUztZQUNULEtBQUs7UUFDVCxDQUFDOzs7NkJBR1ksSUFBSSxDQUFDLE1BQU0sQ0FBQyxLQUFLLENBQUMsR0FBRyxDQUMxQixRQUFRLEVBQ1Isd0JBQXdCLENBQzNCOztzQkFFQyxJQUFJLENBQUMsTUFBTSxDQUFDLFdBQVcsQ0FBQyxJQUFJLENBQUMsT0FBTyxFQUFFLElBQUksQ0FBQyxJQUFJLENBQUM7Ozs7Ozs7U0FPN0QsQ0FBQztJQUNOLENBQUM7Q0FDSjtBQTNERCxxREEyREMifQ==

@@ -1,33 +1,27 @@
 import { html } from 'lit';
 
-import type { ISString } from '@specimen/types';
+import type { ISSpecsEditorWidgetDeps } from '../SSpecsEditorWidget';
 
-export default class SSpecsEditorComponentHtmlWidget {
-    _component;
-    _propObj;
-    _path;
+import __SSpecsEditorWidget from '../SSpecsEditorWidget';
 
+export default class SSpecsEditorComponentHtmlWidget extends __SSpecsEditorWidget {
     static isActive() {
         return true;
     }
 
-    constructor({ component, propObj, path }) {
-        this._component = component;
-        this._propObj = propObj;
-        this._path = path;
+    constructor(deps: ISSpecsEditorWidgetDeps) {
+        super(deps);
+
+        if (!this.values.value) {
+            this.values.value = this.propObj.default;
+        }
     }
 
-    render({ propObj, values, path }) {
-        if (!values) {
-            values = <ISString>{
-                value: propObj.default,
-            };
-        }
-
+    render() {
         return html`
-            <div class="${this._component.utils.cls('_html-widget')}">
+            <div class="${this.editor.utils.cls('_html-widget')}">
                 <label
-                    class="${this._component.utils.cls(
+                    class="${this.editor.utils.cls(
                         '_label',
                         's-label s-label--block',
                     )}"
@@ -35,20 +29,17 @@ export default class SSpecsEditorComponentHtmlWidget {
                     <textarea
                         rows="5"
                         @change=${(e) =>
-                            this._component._update(path, propObj, e)}
-                        name="${path.at(-1)}"
-                        class="${this._component.utils.cls(
-                            '_input',
-                            's-input',
-                        )}"
-                        placeholder="${propObj.default ??
-                        propObj.title ??
-                        propObj.id}"
-                        path="${path.join('.')}"
+                            this.editor._update(this.path, this.propObj, e)}
+                        name="${this.path.at(-1)}"
+                        class="${this.editor.utils.cls('_input', 's-input')}"
+                        placeholder="${this.propObj.default ??
+                        this.propObj.title ??
+                        this.propObj.id}"
+                        path="${(this, path.join('.'))}"
                     >
-${values.value}</textarea
+${this.values.value}</textarea
                     >
-                    ${this._component.renderLabel(propObj, path)}
+                    ${this.editor.renderLabel(this.propObj, this.path)}
                 </label>
             </div>
         `;

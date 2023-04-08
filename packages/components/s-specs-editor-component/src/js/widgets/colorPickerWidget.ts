@@ -3,59 +3,53 @@ import { html } from 'lit';
 import type { ISColorData } from '@specimen/types';
 import { __SColor } from '@specimen/types/utils';
 
-export default class SSpecsEditorComponentColorPickerWidget {
-    _component;
-    _propObj;
-    _path;
+import type { ISSpecsEditorWidgetDeps } from '../SSpecsEditorWidget';
+import __SSpecsEditorWidget from '../SSpecsEditorWidget';
 
+export default class SSpecsEditorComponentColorPickerWidget extends __SSpecsEditorWidget {
     static isActive() {
         return true;
     }
 
-    constructor({ component, propObj, path }) {
-        this._component = component;
-        this._propObj = propObj;
-        this._path = path;
+    constructor(deps: ISSpecsEditorWidgetDeps) {
+        super(deps);
+
+        if (!this.values.value) {
+            Object.assign(this.values, {
+                format: this.propObj.format ?? 'hexa',
+                value: this.propObj.default ?? '#ff0000ff',
+            });
+        }
     }
 
-    render({ propObj, values, path }) {
-        if (!values) {
-            values = <ISColorData>{
-                format: propObj.format ?? 'hexa',
-                value: propObj.default ?? '#ff0000ff',
-            };
-        }
-
-        const color = new __SColor(propObj, values);
+    render() {
+        const color = new __SColor(this.propObj, this.values);
 
         return html`
-            <div class="${this._component.utils.cls('_color-picker-widget')}">
+            <div class="${this.editor.utils.cls('_color-picker-widget')}">
                 <label
-                    class="${this._component.utils.cls(
+                    class="${this.editor.utils.cls(
                         '_label',
                         's-label s-label--block',
                     )}"
                 >
                     <s-color-picker
                         value="${color.toString()}"
-                        format="${propObj.format}"
+                        format="${this.propObj.format}"
                         @s-color-picker.change=${(e) => {
-                            this._component.setValue(
-                                path,
-                                <ISColorData>e.detail,
-                            );
-                            this._component.apply();
+                            this.setValue(<ISColorData>e.detail);
+                            this.editor.apply();
                         }}
                     >
                         <input
                             type="text"
                             name="color"
                             class="s-input"
-                            placeholder=${propObj.placeholder}
+                            placeholder=${this.propObj.placeholder}
                         />
                         <div class="_color-preview"></div>
                     </s-color-picker>
-                    ${this._component.renderLabel(propObj, path)}
+                    ${this.editor.renderLabel(this.propObj, this.path)}
                 </label>
             </div>
         `;

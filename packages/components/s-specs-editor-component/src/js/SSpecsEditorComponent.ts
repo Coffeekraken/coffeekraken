@@ -54,10 +54,9 @@ export interface ISSpecsEditorComponentRenderLabelSettings {
     tooltip?: 'top' | 'left' | 'right' | 'bottom';
 }
 
-export interface ISSpecsEditorComponentGetValuePathSettings {
+export interface ISSpecsEditorComponentGetValueSettings {
     media?: string;
     noneResponsive?: boolean;
-    force?: boolean;
 }
 
 export interface ISSpecsEditorComponentSetValueSettings {
@@ -202,6 +201,7 @@ export default class SSpecsEditorComponent extends __SLitComponent {
     _isPristine = true;
     _errors = [];
     _widgets = {};
+    _values;
 
     constructor() {
         super(
@@ -210,6 +210,12 @@ export default class SSpecsEditorComponent extends __SLitComponent {
                 interface: __SSpecsEditorComponentInterface,
             }),
         );
+    }
+
+    mount() {
+        if (!this._values) {
+            this._values = Object.assign({}, this.props.specs.values ?? {});
+        }
     }
 
     firstUpdated() {
@@ -236,7 +242,7 @@ export default class SSpecsEditorComponent extends __SLitComponent {
 
     getValuePath(
         path: string | string[],
-        settings?: ISSpecsEditorComponentGetValuePathSettings,
+        settings?: ISSpecsEditorComponentGetValueSettings,
     ): string[] {
         if (!Array.isArray(path)) {
             path = path.split('.');
@@ -244,7 +250,6 @@ export default class SSpecsEditorComponent extends __SLitComponent {
 
         const finalSettings = {
             media: undefined,
-            force: false,
             ...(settings ?? {}),
         };
 
@@ -274,32 +279,12 @@ export default class SSpecsEditorComponent extends __SLitComponent {
             return noneMediaValuePath;
         }
 
-        // current media value
-        if (finalSettings.media) {
-            const mediaScopedValue = __get(
-                this.props.specs.values,
-                mediaValuePath,
-            );
-
-            if (finalSettings.force || mediaScopedValue !== undefined) {
-                return mediaValuePath;
-            }
-        } else {
-            // non media "responsive"
-            const noneMediaValue = __get(
-                this.props.specs.values,
-                noneMediaValuePath,
-            );
-
-            if (finalSettings.force || noneMediaValue !== undefined) {
-                return noneMediaValuePath;
-            }
-        }
+        return mediaValuePath ?? noneMediaValuePath;
     }
 
     getValue(
         path: string[],
-        settings?: ISSpecsEditorComponentValueSettings,
+        settings?: ISSpecsEditorComponentGetValueSettings,
     ): any {
         const finalSettings = {
             default: undefined,
@@ -311,11 +296,12 @@ export default class SSpecsEditorComponent extends __SLitComponent {
         }
 
         let valuePath = this.getValuePath(path, finalSettings);
-        if (!valuePath) {
-            return;
+        let value = __get(this._values, valuePath);
+        if (!value) {
+            value = {};
+            __set(this._values, valuePath, value);
         }
 
-        let value = __get(this.props.specs.values, valuePath);
         return value;
     }
 
@@ -345,19 +331,16 @@ export default class SSpecsEditorComponent extends __SLitComponent {
         // handle responsive values
         const valuePath = this.getValuePath(path, {
             media: this.props.media,
-            force: true,
             ...finalSettings,
         });
 
+        const currentValue = __get(this._values, valuePath);
         if (finalSettings?.merge) {
-            const currentValue = __get(this.props.specs.values, valuePath);
-            __set(
-                this.props.specs.values,
-                valuePath,
-                __deepMerge(currentValue, value),
-            );
+            __set(this._values, valuePath, __deepMerge(currentValue, value));
         } else {
-            __set(this.props.specs.values, valuePath, value);
+            __set(this._values, valuePath, value, {
+                preferAssign: true,
+            });
         }
 
         this.requestUpdate();
@@ -372,8 +355,12 @@ export default class SSpecsEditorComponent extends __SLitComponent {
         if (!SSpecsEditorComponent.widgetMap[type]) {
             return;
         }
+
         this._widgets[dotPath] = new SSpecsEditorComponent.widgetMap[type]({
-            component: this,
+            editor: this,
+            values: this.getValue(path, {
+                noneResponsive: true,
+            }),
             propObj,
             path,
         });
@@ -388,7 +375,7 @@ export default class SSpecsEditorComponent extends __SLitComponent {
             bubbles: true,
             detail: {
                 propsSpecs: Object.assign({}, this.props.specs),
-                values: Object.assign({}, this.props.specs.values),
+                values: Object.assign({}, this._values),
             },
         });
 
@@ -408,7 +395,7 @@ export default class SSpecsEditorComponent extends __SLitComponent {
 
         const data = {
             specs: Object.assign({}, this.props.specs),
-            values: Object.assign({}, this.props.specs.values),
+            values: Object.assign({}, this._values),
         };
 
         _console.log('SAVE', data);
@@ -467,6 +454,11 @@ export default class SSpecsEditorComponent extends __SLitComponent {
      */
     _changeMedia(media: string): void {
         this.props.media = media;
+
+        // for (let [path, widget] of Object.entries(this._widgets)) {
+        //     widget.setCurrentMedia(media);
+        // }
+
         this.utils.dispatchEvent('changeMedia', {
             detail: media,
         });
@@ -481,6 +473,8 @@ export default class SSpecsEditorComponent extends __SLitComponent {
             return '';
         }
 
+        const widget = this._widgets[path.join('.')];
+
         return html`
             <div class="${this.utils.cls('_media-icons')}">
                 ${Object.keys(
@@ -488,16 +482,11 @@ export default class SSpecsEditorComponent extends __SLitComponent {
                 )
                     .reverse()
                     .map((media) => {
-                        const mediaValue = this.getValue(path, {
-                            media,
-                        });
-
                         return html`
                             <span
                                 class="${this.utils.cls(
                                     '_media-icon',
-                                )} ${mediaValue !== undefined &&
-                                mediaValue !== null
+                                )} ${widget.hasValuesForMedia(media)
                                     ? 'active'
                                     : ''} ${this.props.media === media
                                     ? 'current'
@@ -651,9 +640,9 @@ export default class SSpecsEditorComponent extends __SLitComponent {
                 path,
                 values,
             });
-            if (widgetValidateResult?.error) {
-                this._errors.push(widgetValidateResult.error);
-            }
+            // if (widgetValidateResult?.error) {
+            //     this._errors.push(widgetValidateResult.error);
+            // }
             if (widgetValidateResult?.warning) {
                 this.utils.dispatchEvent('warning', {
                     detail: {
@@ -666,78 +655,24 @@ export default class SSpecsEditorComponent extends __SLitComponent {
         return widgetValidateResult;
     }
 
-    /**
-     * Render the proper widget depending on the "type" propObj property
-     */
-    _getRenderedWidget(propObj, path) {
+    renderWidget(propObj, path) {
         const type =
                 propObj.widget?.toLowerCase?.() ?? propObj.type.toLowerCase(),
             widget = this.getWidget(type, path, propObj);
-        if (!widget) {
-            return;
-        }
 
-        const values = this.getValue(path);
-
-        const widgetValidateResult = this._validateWidget(
-            widget,
-            propObj,
-            path,
-            values,
-        );
-
-        // check if the widget is active
-        if (
-            widget.isActive &&
-            !widget.isActive({
-                values,
-                path,
-                propObj,
-            })
-        ) {
-            return;
-        }
-
-        const widgetRenderResult = widget.render({
-            values,
-            path,
-            propObj,
-        });
-
-        return {
-            ...(widgetValidateResult ?? {}),
-            html: widgetRenderResult,
-        };
-    }
-
-    renderWidget(propObj, path) {
-        let widget = this._getRenderedWidget(propObj, path);
-
-        if (!widget) {
-            widget = {
-                error: __i18n(
-                    'Sorry but no widget is registered to handle the "%s" type...',
-                    {
-                        id: 's-specs-editor.widget.no',
-                        tokens: {
-                            '%s': propObj.type,
-                        },
-                    },
-                ),
-            };
-        }
+        _console.log('path', path, widget?.hasErrors());
 
         return html`
-            ${widget?.html
+            ${widget?.render
                 ? html` <div class="${this.utils.cls('_widget')}">
-                      ${widget.html}
+                      ${widget.render()}
                   </div>`
                 : ''}
-            ${widget?.error
-                ? this.renderError(propObj, path, widget.error)
+            ${widget?.hasErrors()
+                ? this.renderError(propObj, path, widget.lastError)
                 : ''}
-            ${widget?.warning
-                ? this.renderWarning(propObj, path, widget.warning)
+            ${widget?.hasWarnings()
+                ? this.renderWarning(propObj, path, widget.lastWarning)
                 : ''}
         `;
     }

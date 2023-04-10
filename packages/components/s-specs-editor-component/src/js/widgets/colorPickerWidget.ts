@@ -7,10 +7,6 @@ import type { ISSpecsEditorWidgetDeps } from '../SSpecsEditorWidget';
 import __SSpecsEditorWidget from '../SSpecsEditorWidget';
 
 export default class SSpecsEditorComponentColorPickerWidget extends __SSpecsEditorWidget {
-    static isActive() {
-        return true;
-    }
-
     constructor(deps: ISSpecsEditorWidgetDeps) {
         super(deps);
 
@@ -27,30 +23,22 @@ export default class SSpecsEditorComponentColorPickerWidget extends __SSpecsEdit
 
         return html`
             <div class="${this.editor.utils.cls('_color-picker-widget')}">
-                <label
-                    class="${this.editor.utils.cls(
-                        '_label',
-                        's-label s-label--block',
-                    )}"
+                ${this.renderLabel()}
+                <s-color-picker
+                    value="${color.toString()}"
+                    format="${this.propObj.format}"
+                    @s-color-picker.change=${(e) => {
+                        this.setValue(<ISColorData>e.detail);
+                    }}
                 >
-                    <s-color-picker
-                        value="${color.toString()}"
-                        format="${this.propObj.format}"
-                        @s-color-picker.change=${(e) => {
-                            this.setValue(<ISColorData>e.detail);
-                            this.editor.apply();
-                        }}
-                    >
-                        <input
-                            type="text"
-                            name="color"
-                            class="s-input"
-                            placeholder=${this.propObj.placeholder}
-                        />
-                        <div class="_color-preview"></div>
-                    </s-color-picker>
-                    ${this.editor.renderLabel(this.propObj, this.path)}
-                </label>
+                    <input
+                        type="text"
+                        name="color"
+                        class="s-input"
+                        placeholder=${this.propObj.placeholder}
+                    />
+                    <div class="_color-preview"></div>
+                </s-color-picker>
             </div>
         `;
     }

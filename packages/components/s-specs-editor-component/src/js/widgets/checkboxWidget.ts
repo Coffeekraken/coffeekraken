@@ -8,10 +8,6 @@ import { __i18n } from '@coffeekraken/s-i18n';
 import { __SCheckbox } from '@specimen/types/utils';
 
 export default class SSpecsEditorComponentCheckboxWidget extends __SSpecsEditorWidget {
-    static isActive() {
-        return true;
-    }
-
     constructor(deps: ISSpecsEditorWidgetDeps) {
         super(deps);
 
@@ -21,9 +17,7 @@ export default class SSpecsEditorComponentCheckboxWidget extends __SSpecsEditorW
     }
 
     validate(newValues) {
-        if (!newValues) {
-            return;
-        }
+        _console.log('S', newValues);
 
         const itemsCount = Object.keys(newValues.value).length;
 
@@ -57,14 +51,7 @@ export default class SSpecsEditorComponentCheckboxWidget extends __SSpecsEditorW
 
         return html`
             <div class="${this.editor.utils.cls('_checkbox-widget')}">
-                <label
-                    class="${this.editor.utils.cls(
-                        '_label',
-                        's-label s-label--block',
-                    )}"
-                >
-                    ${this.editor.renderLabel(this.propObj, this.path)}
-                </label>
+                ${this.renderLabel()}
                 ${this.propObj.options.map(
                     (option, i) => html`
                         <label
@@ -82,12 +69,7 @@ export default class SSpecsEditorComponentCheckboxWidget extends __SSpecsEditorW
                                     } else {
                                         checkbox.uncheck(option);
                                     }
-
-                                    this.editor.setValue(
-                                        this.path,
-                                        this.values,
-                                    );
-                                    this.editor.apply();
+                                    this.setValue(this.values);
                                 }}
                                 name="${this.path.at(-1)}"
                                 class="${this.editor.utils.cls(

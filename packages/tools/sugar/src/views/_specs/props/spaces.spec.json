@@ -1,49 +1,7 @@
 {
-    "type": "Object",
-    "widget": "Spaces",
+    "type": "Spaces",
     "title": "Spaces",
     "description": "Specify the spaces you want around your layout",
     "responsive": true,
-    "props": {
-        "paddingTop": {
-            "extends": "sugar.views.props.space",
-            "title": "Padding top",
-            "description": "Specify the padding top"
-        },
-        "paddingRight": {
-            "extends": "sugar.views.props.space",
-            "title": "Padding right",
-            "description": "Specify the padding right"
-        },
-        "paddingBottom": {
-            "extends": "sugar.views.props.space",
-            "title": "Padding bottom",
-            "description": "Specify the padding bottom"
-        },
-        "paddingLeft": {
-            "extends": "sugar.views.props.space",
-            "title": "Padding left",
-            "description": "Specify the padding left"
-        },
-        "marginTop": {
-            "extends": "sugar.views.props.space",
-            "title": "Margin top",
-            "description": "Specify the margin top"
-        },
-        "marginRight": {
-            "extends": "sugar.views.props.space",
-            "title": "Margin right",
-            "description": "Specify the margin right"
-        },
-        "marginBottom": {
-            "extends": "sugar.views.props.space",
-            "title": "Margin bottom",
-            "description": "Specify the margin bottom"
-        },
-        "marginLeft": {
-            "extends": "sugar.views.props.space",
-            "title": "Margin left",
-            "description": "Specify the margin left"
-        }
-    }
+    "options": "@sugar.views.props.space:options"
 }

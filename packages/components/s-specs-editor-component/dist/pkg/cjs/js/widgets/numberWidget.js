@@ -5,27 +5,22 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const s_i18n_1 = require("@coffeekraken/s-i18n");
 const lit_1 = require("lit");
+const is_1 = require("@coffeekraken/sugar/is");
 const SSpecsEditorWidget_1 = __importDefault(require("../SSpecsEditorWidget"));
 class SSpecsEditorComponentNumberWidget extends SSpecsEditorWidget_1.default {
-    static isActive() {
-        return true;
-    }
     constructor(deps) {
         super(deps);
-        if (!this.values.value) {
+        if (this.values.value === undefined) {
             this.values.value = this.propObj.default;
         }
     }
     validate(newValues) {
         let value = newValues.value;
         // letters in value
-        if (Number.isNaN(parseFloat(value))) {
+        if (this.propObj.required && !(0, is_1.__isValidNumber)(value)) {
             return {
-                error: (0, s_i18n_1.__i18n)(`Passed value "%s" is not a valid number`, {
-                    id: 's-specs-editor.widget.number.invalid',
-                    tokens: {
-                        s: value,
-                    },
+                error: (0, s_i18n_1.__i18n)(`This property is required`, {
+                    id: 's-specs-editor.widget.required',
                 }),
             };
         }
@@ -35,10 +30,9 @@ class SSpecsEditorComponentNumberWidget extends SSpecsEditorWidget_1.default {
         }
         // min
         if (this.propObj.min !== undefined && value < this.propObj.min) {
-            value = this.propObj.min;
             return {
                 error: (0, s_i18n_1.__i18n)(`The value must be greater or equal to %s`, {
-                    id: 's-specs-editor.widget.integer.min',
+                    id: 's-specs-editor.widget.number.min',
                     tokens: {
                         s: this.propObj.min,
                     },
@@ -47,10 +41,9 @@ class SSpecsEditorComponentNumberWidget extends SSpecsEditorWidget_1.default {
         }
         // max
         if (this.propObj.max !== undefined && value > this.propObj.max) {
-            value = this.propObj.max;
             return {
                 error: (0, s_i18n_1.__i18n)(`The value must be lower or equal to %s`, {
-                    id: 's-specs-editor.widget.integer.max',
+                    id: 's-specs-editor.widget.number.max',
                     tokens: {
                         s: this.propObj.max,
                     },
@@ -61,30 +54,27 @@ class SSpecsEditorComponentNumberWidget extends SSpecsEditorWidget_1.default {
     render() {
         return (0, lit_1.html) `
             <div class="${this.editor.utils.cls('_number-widget')}">
-                <label
-                    class="${this.editor.utils.cls('_label', 's-label s-label--block')}"
-                >
-                    <input
-                        @change=${(e) => {
-            let value = e.target.value;
-            this.setValue(value);
-            this.editor.apply();
+                ${this.renderLabel()}
+                <input
+                    @change=${(e) => {
+            let value = parseFloat(e.target.value);
+            this.setValue({
+                value,
+            });
         }}
-                        type="number"
-                        step="0.1"
-                        min=${this.propObj.min}
-                        max=${this.propObj.max}
-                        name="${this.path.at(-1)}"
-                        class="${this.editor.utils.cls('_input', 's-input')}"
-                        placeholder="${this.propObj.placeholder}"
-                        path="${this.path.join('.')}"
-                        value="${this.values.value}"
-                    />
-                    ${this.editor.renderLabel(this.propObj, this.path)}
-                </label>
+                    type="number"
+                    step="0.1"
+                    min=${this.propObj.min}
+                    max=${this.propObj.max}
+                    name="${this.path.at(-1)}"
+                    class="${this.editor.utils.cls('_input', 's-input')}"
+                    placeholder="${this.propObj.placeholder}"
+                    path="${this.path.join('.')}"
+                    value="${this.values.value}"
+                />
             </div>
         `;
     }
 }
 exports.default = SSpecsEditorComponentNumberWidget;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7O0FBQUEsaURBQThDO0FBQzlDLDZCQUEyQjtBQUczQiwrRUFBeUQ7QUFFekQsTUFBcUIsaUNBQWtDLFNBQVEsNEJBQW9CO0lBQy9FLE1BQU0sQ0FBQyxRQUFRO1FBQ1gsT0FBTyxJQUFJLENBQUM7SUFDaEIsQ0FBQztJQUVELFlBQVksSUFBNkI7UUFDckMsS0FBSyxDQUFDLElBQUksQ0FBQyxDQUFDO1FBRVosSUFBSSxDQUFDLElBQUksQ0FBQyxNQUFNLENBQUMsS0FBSyxFQUFFO1lBQ3BCLElBQUksQ0FBQyxNQUFNLENBQUMsS0FBSyxHQUFHLElBQUksQ0FBQyxPQUFPLENBQUMsT0FBTyxDQUFDO1NBQzVDO0lBQ0wsQ0FBQztJQUVELFFBQVEsQ0FBQyxTQUFTO1FBQ2QsSUFBSSxLQUFLLEdBQUcsU0FBUyxDQUFDLEtBQUssQ0FBQztRQUU1QixtQkFBbUI7UUFDbkIsSUFBSSxNQUFNLENBQUMsS0FBSyxDQUFDLFVBQVUsQ0FBQyxLQUFLLENBQUMsQ0FBQyxFQUFFO1lBQ2pDLE9BQU87Z0JBQ0gsS0FBSyxFQUFFLElBQUEsZUFBTSxFQUFDLHlDQUF5QyxFQUFFO29CQUNyRCxFQUFFLEVBQUUsc0NBQXNDO29CQUMxQyxNQUFNLEVBQUU7d0JBQ0osQ0FBQyxFQUFFLEtBQUs7cUJBQ1g7aUJBQ0osQ0FBQzthQUNMLENBQUM7U0FDTDtRQUVELG1CQUFtQjtRQUNuQixJQUFJLEdBQUcsVUFBVSxDQUFDLEtBQUssQ0FBQyxFQUFFLENBQUMsTUFBTSxLQUFLLEtBQUssQ0FBQyxNQUFNLEVBQUU7WUFDaEQsS0FBSyxHQUFHLFVBQVUsQ0FBQyxLQUFLLENBQUMsQ0FBQztTQUM3QjtRQUVELE1BQU07UUFDTixJQUFJLElBQUksQ0FBQyxPQUFPLENBQUMsR0FBRyxLQUFLLFNBQVMsSUFBSSxLQUFLLEdBQUcsSUFBSSxDQUFDLE9BQU8sQ0FBQyxHQUFHLEVBQUU7WUFDNUQsS0FBSyxHQUFHLElBQUksQ0FBQyxPQUFPLENBQUMsR0FBRyxDQUFDO1lBQ3pCLE9BQU87Z0JBQ0gsS0FBSyxFQUFFLElBQUEsZUFBTSxFQUFDLDBDQUEwQyxFQUFFO29CQUN0RCxFQUFFLEVBQUUsbUNBQW1DO29CQUN2QyxNQUFNLEVBQUU7d0JBQ0osQ0FBQyxFQUFFLElBQUksQ0FBQyxPQUFPLENBQUMsR0FBRztxQkFDdEI7aUJBQ0osQ0FBQzthQUNMLENBQUM7U0FDTDtRQUVELE1BQU07UUFDTixJQUFJLElBQUksQ0FBQyxPQUFPLENBQUMsR0FBRyxLQUFLLFNBQVMsSUFBSSxLQUFLLEdBQUcsSUFBSSxDQUFDLE9BQU8sQ0FBQyxHQUFHLEVBQUU7WUFDNUQsS0FBSyxHQUFHLElBQUksQ0FBQyxPQUFPLENBQUMsR0FBRyxDQUFDO1lBQ3pCLE9BQU87Z0JBQ0gsS0FBSyxFQUFFLElBQUEsZUFBTSxFQUFDLHdDQUF3QyxFQUFFO29CQUNwRCxFQUFFLEVBQUUsbUNBQW1DO29CQUN2QyxNQUFNLEVBQUU7d0JBQ0osQ0FBQyxFQUFFLElBQUksQ0FBQyxPQUFPLENBQUMsR0FBRztxQkFDdEI7aUJBQ0osQ0FBQzthQUNMLENBQUM7U0FDTDtJQUNMLENBQUM7SUFFRCxNQUFNO1FBQ0YsT0FBTyxJQUFBLFVBQUksRUFBQTswQkFDTyxJQUFJLENBQUMsTUFBTSxDQUFDLEtBQUssQ0FBQyxHQUFHLENBQUMsZ0JBQWdCLENBQUM7OzZCQUVwQyxJQUFJLENBQUMsTUFBTSxDQUFDLEtBQUssQ0FBQyxHQUFHLENBQzFCLFFBQVEsRUFDUix3QkFBd0IsQ0FDM0I7OztrQ0FHYSxDQUFDLENBQUMsRUFBRSxFQUFFO1lBQ1osSUFBSSxLQUFLLEdBQUcsQ0FBQyxDQUFDLE1BQU0sQ0FBQyxLQUFLLENBQUM7WUFDM0IsSUFBSSxDQUFDLFFBQVEsQ0FBQyxLQUFLLENBQUMsQ0FBQztZQUNyQixJQUFJLENBQUMsTUFBTSxDQUFDLEtBQUssRUFBRSxDQUFDO1FBQ3hCLENBQUM7Ozs4QkFHSyxJQUFJLENBQUMsT0FBTyxDQUFDLEdBQUc7OEJBQ2hCLElBQUksQ0FBQyxPQUFPLENBQUMsR0FBRztnQ0FDZCxJQUFJLENBQUMsSUFBSSxDQUFDLEVBQUUsQ0FBQyxDQUFDLENBQUMsQ0FBQztpQ0FDZixJQUFJLENBQUMsTUFBTSxDQUFDLEtBQUssQ0FBQyxHQUFHLENBQUMsUUFBUSxFQUFFLFNBQVMsQ0FBQzt1Q0FDcEMsSUFBSSxDQUFDLE9BQU8sQ0FBQyxXQUFXO2dDQUMvQixJQUFJLENBQUMsSUFBSSxDQUFDLElBQUksQ0FBQyxHQUFHLENBQUM7aUNBQ2xCLElBQUksQ0FBQyxNQUFNLENBQUMsS0FBSzs7c0JBRTVCLElBQUksQ0FBQyxNQUFNLENBQUMsV0FBVyxDQUFDLElBQUksQ0FBQyxPQUFPLEVBQUUsSUFBSSxDQUFDLElBQUksQ0FBQzs7O1NBRzdELENBQUM7SUFDTixDQUFDO0NBQ0o7QUExRkQsb0RBMEZDIn0=
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7O0FBQUEsaURBQThDO0FBQzlDLDZCQUEyQjtBQUUzQiwrQ0FBeUQ7QUFHekQsK0VBQXlEO0FBRXpELE1BQXFCLGlDQUFrQyxTQUFRLDRCQUFvQjtJQUMvRSxZQUFZLElBQTZCO1FBQ3JDLEtBQUssQ0FBQyxJQUFJLENBQUMsQ0FBQztRQUVaLElBQUksSUFBSSxDQUFDLE1BQU0sQ0FBQyxLQUFLLEtBQUssU0FBUyxFQUFFO1lBQ2pDLElBQUksQ0FBQyxNQUFNLENBQUMsS0FBSyxHQUFHLElBQUksQ0FBQyxPQUFPLENBQUMsT0FBTyxDQUFDO1NBQzVDO0lBQ0wsQ0FBQztJQUVELFFBQVEsQ0FBQyxTQUFTO1FBQ2QsSUFBSSxLQUFLLEdBQUcsU0FBUyxDQUFDLEtBQUssQ0FBQztRQUU1QixtQkFBbUI7UUFDbkIsSUFBSSxJQUFJLENBQUMsT0FBTyxDQUFDLFFBQVEsSUFBSSxDQUFDLElBQUEsb0JBQWUsRUFBQyxLQUFLLENBQUMsRUFBRTtZQUNsRCxPQUFPO2dCQUNILEtBQUssRUFBRSxJQUFBLGVBQU0sRUFBQywyQkFBMkIsRUFBRTtvQkFDdkMsRUFBRSxFQUFFLGdDQUFnQztpQkFDdkMsQ0FBQzthQUNMLENBQUM7U0FDTDtRQUVELG1CQUFtQjtRQUNuQixJQUFJLEdBQUcsVUFBVSxDQUFDLEtBQUssQ0FBQyxFQUFFLENBQUMsTUFBTSxLQUFLLEtBQUssQ0FBQyxNQUFNLEVBQUU7WUFDaEQsS0FBSyxHQUFHLFVBQVUsQ0FBQyxLQUFLLENBQUMsQ0FBQztTQUM3QjtRQUVELE1BQU07UUFDTixJQUFJLElBQUksQ0FBQyxPQUFPLENBQUMsR0FBRyxLQUFLLFNBQVMsSUFBSSxLQUFLLEdBQUcsSUFBSSxDQUFDLE9BQU8sQ0FBQyxHQUFHLEVBQUU7WUFDNUQsT0FBTztnQkFDSCxLQUFLLEVBQUUsSUFBQSxlQUFNLEVBQUMsMENBQTBDLEVBQUU7b0JBQ3RELEVBQUUsRUFBRSxrQ0FBa0M7b0JBQ3RDLE1BQU0sRUFBRTt3QkFDSixDQUFDLEVBQUUsSUFBSSxDQUFDLE9BQU8sQ0FBQyxHQUFHO3FCQUN0QjtpQkFDSixDQUFDO2FBQ0wsQ0FBQztTQUNMO1FBRUQsTUFBTTtRQUNOLElBQUksSUFBSSxDQUFDLE9BQU8sQ0FBQyxHQUFHLEtBQUssU0FBUyxJQUFJLEtBQUssR0FBRyxJQUFJLENBQUMsT0FBTyxDQUFDLEdBQUcsRUFBRTtZQUM1RCxPQUFPO2dCQUNILEtBQUssRUFBRSxJQUFBLGVBQU0sRUFBQyx3Q0FBd0MsRUFBRTtvQkFDcEQsRUFBRSxFQUFFLGtDQUFrQztvQkFDdEMsTUFBTSxFQUFFO3dCQUNKLENBQUMsRUFBRSxJQUFJLENBQUMsT0FBTyxDQUFDLEdBQUc7cUJBQ3RCO2lCQUNKLENBQUM7YUFDTCxDQUFDO1NBQ0w7SUFDTCxDQUFDO0lBRUQsTUFBTTtRQUNGLE9BQU8sSUFBQSxVQUFJLEVBQUE7MEJBQ08sSUFBSSxDQUFDLE1BQU0sQ0FBQyxLQUFLLENBQUMsR0FBRyxDQUFDLGdCQUFnQixDQUFDO2tCQUMvQyxJQUFJLENBQUMsV0FBVyxFQUFFOzs4QkFFTixDQUFDLENBQUMsRUFBRSxFQUFFO1lBQ1osSUFBSSxLQUFLLEdBQUcsVUFBVSxDQUFDLENBQUMsQ0FBQyxNQUFNLENBQUMsS0FBSyxDQUFDLENBQUM7WUFDdkMsSUFBSSxDQUFDLFFBQVEsQ0FBQztnQkFDVixLQUFLO2FBQ1IsQ0FBQyxDQUFDO1FBQ1AsQ0FBQzs7OzBCQUdLLElBQUksQ0FBQyxPQUFPLENBQUMsR0FBRzswQkFDaEIsSUFBSSxDQUFDLE9BQU8sQ0FBQyxHQUFHOzRCQUNkLElBQUksQ0FBQyxJQUFJLENBQUMsRUFBRSxDQUFDLENBQUMsQ0FBQyxDQUFDOzZCQUNmLElBQUksQ0FBQyxNQUFNLENBQUMsS0FBSyxDQUFDLEdBQUcsQ0FBQyxRQUFRLEVBQUUsU0FBUyxDQUFDO21DQUNwQyxJQUFJLENBQUMsT0FBTyxDQUFDLFdBQVc7NEJBQy9CLElBQUksQ0FBQyxJQUFJLENBQUMsSUFBSSxDQUFDLEdBQUcsQ0FBQzs2QkFDbEIsSUFBSSxDQUFDLE1BQU0sQ0FBQyxLQUFLOzs7U0FHckMsQ0FBQztJQUNOLENBQUM7Q0FDSjtBQTNFRCxvREEyRUMifQ==

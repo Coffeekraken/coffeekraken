@@ -45,8 +45,12 @@
                 }
             ]
         },
+        "image": {
+            "type": "Image",
+            "title": "Card image",
+            "description": "Card image"
+        },
         "spacing": "@sugar.views.props.spacing",
-        "image": "@sugar.views.props.image",
         "cta": "@sugar.views.components.cta",
         "attributes": "@sugar.views.props.attributes",
         "spaces": "@sugar.views.props.spaces"

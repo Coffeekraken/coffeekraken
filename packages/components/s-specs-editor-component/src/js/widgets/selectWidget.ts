@@ -7,13 +7,8 @@ import type { ISSpecsEditorWidgetDeps } from '../SSpecsEditorWidget';
 import __SSpecsEditorWidget from '../SSpecsEditorWidget';
 
 export default class SSpecsEditorComponentSelectWidget extends __SSpecsEditorWidget {
-    static isActive() {
-        return true;
-    }
-
     constructor(deps: ISSpecsEditorWidgetDeps) {
         super(deps);
-
         if (!this.values?.value) {
             this.values.value = [];
         }
@@ -60,57 +55,48 @@ export default class SSpecsEditorComponentSelectWidget extends __SSpecsEditorWid
 
         return html`
             <div class="${this.editor.utils.cls('_select-widget')}">
-                <label
-                    class="${this.editor.utils.cls(
-                        '_label',
-                        's-label s-label--block',
-                    )}"
-                >
-                    <select
-                        @change=${(e) => {
-                            for (let [
-                                i,
-                                option,
-                            ] of this.propObj.options.entries()) {
-                                for (let [j, $option] of [
-                                    ...e.target.options,
-                                ].entries()) {
-                                    if (option.id !== $option.id) {
-                                        continue;
-                                    }
-                                    if ($option.selected) {
-                                        select.select(option.id);
-                                    } else {
-                                        select.unselect(option.id);
-                                    }
+                ${this.renderLabel()}
+                <select
+                    @change=${(e) => {
+                        for (let [
+                            i,
+                            option,
+                        ] of this.propObj.options.entries()) {
+                            for (let [j, $option] of [
+                                ...e.target.options,
+                            ].entries()) {
+                                if (option.id !== $option.id) {
+                                    continue;
+                                }
+                                if ($option.selected) {
+                                    select.select(option.id);
+                                } else {
+                                    select.unselect(option.id);
                                 }
                             }
+                        }
 
-                            // apply changes
-                            this.setValue(this.values);
-                            this.editor.apply();
-                        }}
-                        name="${this.path.at(-1)}"
-                        class="${this.editor.utils.cls('_select', 's-select')}"
-                        ?multiple=${this.propObj.multiple}
-                        placeholder="${this.propObj.placeholder}"
-                        path="${this.path.join('.')}"
-                    >
-                        ${this.propObj.options.map(
-                            (option, i) => html`
-                                <option
-                                    id="${option.id ?? `option-${i}`}"
-                                    ?selected=${select.isSelected(option.id)}
-                                    .selected=${select.isSelected(option.id)}
-                                >
-                                    ${option.name}
-                                </option>
-                            `,
-                        )}
-                    </select>
-
-                    ${this.editor.renderLabel(this.propObj, this.path)}
-                </label>
+                        // apply changes
+                        this.setValue(this.values);
+                    }}
+                    name="${this.path.at(-1)}"
+                    class="${this.editor.utils.cls('_select', 's-select')}"
+                    ?multiple=${this.propObj.multiple}
+                    placeholder="${this.propObj.placeholder}"
+                    path="${this.path.join('.')}"
+                >
+                    ${this.propObj.options.map(
+                        (option, i) => html`
+                            <option
+                                id="${option.id ?? `option-${i}`}"
+                                ?selected=${select.isSelected(option.id)}
+                                .selected=${select.isSelected(option.id)}
+                            >
+                                ${option.name}
+                            </option>
+                        `,
+                    )}
+                </select>
             </div>
         `;
     }

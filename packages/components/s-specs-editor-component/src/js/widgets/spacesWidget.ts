@@ -8,10 +8,6 @@ import type { ISSpecsEditorWidgetDeps } from '../SSpecsEditorWidget';
 import __SSpecsEditorWidget from '../SSpecsEditorWidget';
 
 export default class SSpecsEditorComponentSpacesWidget extends __SSpecsEditorWidget {
-    static isActive() {
-        return true;
-    }
-
     constructor(deps: ISSpecsEditorWidgetDeps) {
         super(deps);
     }
@@ -22,16 +18,12 @@ export default class SSpecsEditorComponentSpacesWidget extends __SSpecsEditorWid
             margin: [],
         };
 
-        this.propObj.props.paddingTop.options.forEach((option) => {
+        this.propObj.options.forEach((option) => {
             spaces.padding.push({
                 ...option,
-                default: option.value == this.propObj.props.paddingTop.default,
             });
-        });
-        this.propObj.props.marginTop.options.forEach((option) => {
             spaces.margin.push({
                 ...option,
-                default: option.value == this.propObj.props.marginTop.default,
             });
         });
 
@@ -39,11 +31,10 @@ export default class SSpecsEditorComponentSpacesWidget extends __SSpecsEditorWid
             <div
                 class="${this.editor.utils.cls('_spaces-widget')}"
                 @s-spaces-selector.change=${(e) => {
-                    const setPath = `${this.path.join('.')}`;
                     this.setValue(e.detail);
-                    this.editor.apply();
                 }}
             >
+                ${this.renderLabel()}
                 <s-spaces-selector
                     .spaces=${spaces}
                     .values=${Object.assign({}, this.values ?? {})}

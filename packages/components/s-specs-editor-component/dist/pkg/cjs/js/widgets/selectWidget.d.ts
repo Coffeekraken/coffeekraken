@@ -1,7 +1,6 @@
 import type { ISSpecsEditorWidgetDeps } from '../SSpecsEditorWidget';
 import __SSpecsEditorWidget from '../SSpecsEditorWidget';
 export default class SSpecsEditorComponentSelectWidget extends __SSpecsEditorWidget {
-    static isActive(): boolean;
     constructor(deps: ISSpecsEditorWidgetDeps);
     validate(newValues: any): {
         error: string;

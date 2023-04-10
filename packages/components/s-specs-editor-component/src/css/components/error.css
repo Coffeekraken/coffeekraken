@@ -3,5 +3,6 @@
     border: 1px solid sugar.color(error, border);
     background: sugar.color(error, --lighten 48);
     color: sugar.color(error);
+    margin-block-start: sugar.margin(20);
     @sugar.border.radius;
 }

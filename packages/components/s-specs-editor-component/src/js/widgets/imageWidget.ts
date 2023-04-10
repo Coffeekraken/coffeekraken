@@ -7,31 +7,16 @@ import type { ISSpecsEditorWidgetDeps } from '../SSpecsEditorWidget';
 import __SSpecsEditorWidget from '../SSpecsEditorWidget';
 
 export default class SSpecsEditorComponentImageWidget extends __SSpecsEditorWidget {
-    static isActive() {
-        return true;
-    }
-
     constructor(deps: ISSpecsEditorWidgetDeps) {
         super(deps);
     }
-
-    // validate({ values }) {}
 
     render() {
         const values = <ISImageData>this.values;
 
         return html`
             <div class="${this.editor.utils.cls('_image-widget')}">
-                <label
-                    class="${this.editor.utils.cls(
-                        '_label',
-                        's-label s-label--block',
-                    )}"
-                    @click=${(e) => e.preventDefault()}
-                >
-                    ${this.editor.renderLabel(this.propObj, this.path)}
-                </label>
-
+                ${this.renderLabel()}
                 <div class="_drop">
                     ${!values.url
                         ? html`
@@ -44,23 +29,19 @@ export default class SSpecsEditorComponentImageWidget extends __SSpecsEditorWidg
                                           url: e.detail[0].url,
                                       });
 
-                                      //   // responsive item
-                                      //   this.editor.setValue(path, {
-                                      //       url: <ISImageData>e.detail[0].url,
-                                      //   });
                                       //   if (
-                                      //       this.editor.isPathResponsive(path) &&
+                                      //       this.isResponsive() &&
                                       //       this.editor.isDefaultMedia()
                                       //   ) {
-                                      //       this.editor.setValue(
-                                      //           [...path, 'url'],
+                                      //       _console.log('SET');
+                                      //       this.setValue(
                                       //           <ISImageData>e.detail[0].url,
                                       //           {
+                                      //               path: 'url',
                                       //               noneResponsive: true,
                                       //           },
                                       //       );
                                       //   }
-                                      this.editor.apply();
                                   }}
                               ></s-dropzone>
                           `

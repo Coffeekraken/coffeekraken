@@ -14,8 +14,10 @@ import { define as __SWysiwygComponentDefine } from '@coffeekraken/s-wysiwyg-com
 
 import __STheme from '@coffeekraken/s-theme';
 
+import type { ISSpeceEditorWidgetSettings } from './SSpecsEditorWidget';
+
 import { __deepMerge } from '@coffeekraken/sugar/object';
-import { __lowerFirst } from '@coffeekraken/sugar/string';
+import { __lowerFirst, __upperFirst } from '@coffeekraken/sugar/string';
 import { css, html, unsafeCSS } from 'lit';
 import { unsafeHTML } from 'lit/directives/unsafe-html.js';
 import __SSpecsEditorComponentInterface from './interface/SSpecsEditorComponentInterface';
@@ -46,6 +48,7 @@ __SDatetimePickerComponentDefine();
 __SWysiwygComponentDefine();
 
 export interface ISSpecsEditorRenderSettings {
+    label: boolean;
     repeatable: boolean;
     widgets: boolean;
 }
@@ -55,6 +58,7 @@ export interface ISSpecsEditorComponentRenderLabelSettings {
 }
 
 export interface ISSpecsEditorComponentGetValueSettings {
+    default?: any;
     media?: string;
     noneResponsive?: boolean;
 }
@@ -63,6 +67,11 @@ export interface ISSpecsEditorComponentSetValueSettings {
     media?: string;
     noneResponsive?: boolean;
     merge?: boolean;
+}
+
+export interface ISSpecsEditorStatus {
+    pristine: boolean;
+    valid: boolean;
 }
 
 export interface ISSpecsEditorComponentIconsProp {
@@ -197,9 +206,13 @@ export default class SSpecsEditorComponent extends __SLitComponent {
         actives: {},
     };
 
+    status: ISSpecsEditorStatus = {
+        pristine: true,
+        valid: true,
+    };
+
     _isValid = true;
     _isPristine = true;
-    _errors = [];
     _widgets = {};
     _values;
 
@@ -216,13 +229,21 @@ export default class SSpecsEditorComponent extends __SLitComponent {
         if (!this._values) {
             this._values = Object.assign({}, this.props.specs.values ?? {});
         }
+        for (let [key, propObj] of Object.entries(this.props.specs.props)) {
+            if (this._values[key] === undefined) {
+                if (propObj.type?.match(/\[\]$/)) {
+                    this._values[key] = [];
+                } else {
+                    this._values[key] = {};
+                }
+            }
+        }
     }
 
     firstUpdated() {
         for (let [dotPath, widget] of Object.entries(this._widgets)) {
             widget.firstUpdated?.();
         }
-        this._isPristine = false;
     }
 
     isPathResponsive(path: string[]): any {
@@ -238,6 +259,29 @@ export default class SSpecsEditorComponent extends __SLitComponent {
         }
 
         return false;
+    }
+
+    isPathRepeatable(path: string[]): any {
+        const propObj = __get(this.props.specs, path.join('.'));
+        if (!propObj?.type) {
+            return false;
+        }
+        return propObj.type.match(/\[\]$/) !== null;
+    }
+
+    hasErrors(): boolean {
+        if (this.status.pristine) {
+            _console.log('Pristing');
+            return false;
+        }
+
+        let hasErrors = false;
+        for (let [dotpath, widget] of Object.entries(this._widgets)) {
+            if (widget.hasErrors()) {
+                hasErrors = true;
+            }
+        }
+        return hasErrors;
     }
 
     getValuePath(
@@ -264,6 +308,15 @@ export default class SSpecsEditorComponent extends __SLitComponent {
             }
             currentPath.push(part);
             const propObj = __get(this.props.specs, currentPath.join('.'));
+
+            if (typeof path[i + 1] === 'number') {
+                // repeatable
+                mediaValuePath.push(path[i + 1]);
+                currentPath.push(path[i + 1]);
+                // skip the repeatable number path part
+                i++;
+            }
+
             if (propObj?.responsive) {
                 if (finalSettings.media) {
                     mediaValuePath.push('media');
@@ -291,15 +344,35 @@ export default class SSpecsEditorComponent extends __SLitComponent {
             media: undefined,
             ...(settings ?? {}),
         };
+
+        let value;
+
+        // specify the media if the path is responsive
         if (!finalSettings.media && this.isPathResponsive(path)) {
             finalSettings.media = this.props.media;
         }
 
         let valuePath = this.getValuePath(path, finalSettings);
-        let value = __get(this._values, valuePath);
-        if (!value) {
-            value = {};
-            __set(this._values, valuePath, value);
+
+        // if (path.includes('images')) {
+        //     _console.log('AAA', path, valuePath, finalSettings);
+        // }
+
+        if (this.isPathRepeatable(path)) {
+            value = __get(this._values, valuePath);
+            if (value === undefined && finalSettings.default) {
+                value = __set(this._values, valuePath, finalSettings.default);
+            }
+            return value;
+        }
+
+        // if (path.includes('images')) {
+        //     _console.log('value path', path, valuePath);
+        // }
+
+        value = __get(this._values, valuePath);
+        if (value === undefined && finalSettings.default) {
+            value = __set(this._values, valuePath, finalSettings.default);
         }
 
         return value;
@@ -334,10 +407,15 @@ export default class SSpecsEditorComponent extends __SLitComponent {
             ...finalSettings,
         });
 
+        // _console.log('SET', value, path, valuePath, finalSettings);
+
         const currentValue = __get(this._values, valuePath);
         if (finalSettings?.merge) {
-            __set(this._values, valuePath, __deepMerge(currentValue, value));
+            __set(this._values, valuePath, __deepMerge(currentValue, value), {
+                preferAssign: true,
+            });
         } else {
+            // _console.log('SSSSSSSSS', this._values, valuePath, value);
             __set(this._values, valuePath, value, {
                 preferAssign: true,
             });
@@ -346,8 +424,14 @@ export default class SSpecsEditorComponent extends __SLitComponent {
         this.requestUpdate();
     }
 
-    getWidget(type: string, path: string[], propObj: any): any {
-        const dotPath = path.join('.');
+    getWidget(
+        type: string,
+        path: string[],
+        propObj: any,
+        settings?: ISSpeceEditorWidgetSettings,
+    ): any {
+        const dotPath = path.filter((l) => l !== 'props').join('.');
+
         if (this._widgets[dotPath]) {
             return this._widgets[dotPath];
         }
@@ -356,13 +440,18 @@ export default class SSpecsEditorComponent extends __SLitComponent {
             return;
         }
 
+        const finalSettings = {
+            label: !propObj.repeatable || propObj.type?.match(/\[\]$/) !== null,
+            ...(settings ?? {}),
+        };
+
+        const values = __get(this._values, dotPath);
         this._widgets[dotPath] = new SSpecsEditorComponent.widgetMap[type]({
             editor: this,
-            values: this.getValue(path, {
-                noneResponsive: true,
-            }),
+            values,
             propObj,
             path,
+            settings: finalSettings,
         });
         return this._widgets[dotPath];
     }
@@ -387,10 +476,13 @@ export default class SSpecsEditorComponent extends __SLitComponent {
      * This will dispatch en event "s-specs-editor.save" with as detail the current values object
      */
     save(): void {
+        // no more pristine....
+        this.status.pristine = false;
+
         this.requestUpdate();
 
-        if (!this._isValid) {
-            return;
+        if (this.hasErrors()) {
+            return this.requestUpdate();
         }
 
         const data = {
@@ -429,12 +521,13 @@ export default class SSpecsEditorComponent extends __SLitComponent {
      * Add an item in a repeatable one
      */
     _addItem(stack, specs, path) {
+        _console.log('add', stack, specs, path);
         switch (specs.type.toLowerCase()) {
-            case 'object{}':
             default:
                 stack.push({});
                 break;
         }
+
         this.requestUpdate();
     }
 
@@ -455,10 +548,6 @@ export default class SSpecsEditorComponent extends __SLitComponent {
     _changeMedia(media: string): void {
         this.props.media = media;
 
-        // for (let [path, widget] of Object.entries(this._widgets)) {
-        //     widget.setCurrentMedia(media);
-        // }
-
         this.utils.dispatchEvent('changeMedia', {
             detail: media,
         });
@@ -473,8 +562,8 @@ export default class SSpecsEditorComponent extends __SLitComponent {
             return '';
         }
 
-        const widget = this._widgets[path.join('.')];
-
+        const widget =
+            this._widgets[path.filter((l) => l !== 'props').join('.')];
         return html`
             <div class="${this.utils.cls('_media-icons')}">
                 ${Object.keys(
@@ -486,7 +575,7 @@ export default class SSpecsEditorComponent extends __SLitComponent {
                             <span
                                 class="${this.utils.cls(
                                     '_media-icon',
-                                )} ${widget.hasValuesForMedia(media)
+                                )} ${widget?.hasValuesForMedia(media)
                                     ? 'active'
                                     : ''} ${this.props.media === media
                                     ? 'current'
@@ -497,7 +586,9 @@ export default class SSpecsEditorComponent extends __SLitComponent {
                                 >
                                     ${unsafeHTML(this.props.icons[media])}
                                 </span>
-                                <span class="s-tooltip">${media}</span>
+                                <span class="s-tooltip"
+                                    >${__upperFirst(media)}</span
+                                >
                             </span>
                         `;
                     })}
@@ -600,18 +691,17 @@ export default class SSpecsEditorComponent extends __SLitComponent {
     }
 
     updated(changedProperties: Map<string, unknown>) {
-        // handle errors events, etc...
-        if (this._errors.length) {
+        if (this.hasErrors()) {
+            this.classList.add('error');
             this.utils.dispatchEvent('error', {
-                detail: {
-                    errors: this._errors,
-                },
+                detail: {},
             });
             if (this._isValid) {
                 this._isValid = false;
                 this.requestUpdate();
             }
         } else {
+            this.classList.remove('error');
             this.utils.dispatchEvent('valid', {
                 detail: {},
             });
@@ -621,46 +711,15 @@ export default class SSpecsEditorComponent extends __SLitComponent {
             }
         }
 
-        // reset errors
-        this._errors = [];
-
         if (changedProperties.has('media')) {
             this.requestUpdate();
         }
     }
 
-    /**
-     * Validate a widget
-     */
-    _validateWidget(widget, propObj, path, values) {
-        let widgetValidateResult;
-        if (!this._isPristine) {
-            widgetValidateResult = widget.validate?.({
-                propObj,
-                path,
-                values,
-            });
-            // if (widgetValidateResult?.error) {
-            //     this._errors.push(widgetValidateResult.error);
-            // }
-            if (widgetValidateResult?.warning) {
-                this.utils.dispatchEvent('warning', {
-                    detail: {
-                        warning: widgetValidateResult.warning,
-                        widget,
-                    },
-                });
-            }
-        }
-        return widgetValidateResult;
-    }
-
-    renderWidget(propObj, path) {
+    renderWidget(propObj, path, settings?: ISSpecsEditorRenderSettings) {
         const type =
                 propObj.widget?.toLowerCase?.() ?? propObj.type.toLowerCase(),
-            widget = this.getWidget(type, path, propObj);
-
-        _console.log('path', path, widget?.hasErrors());
+            widget = this.getWidget(type, path, propObj, {});
 
         return html`
             ${widget?.render
@@ -685,6 +744,8 @@ export default class SSpecsEditorComponent extends __SLitComponent {
             return this._renderRepeatableProps(propObj, path);
         }
 
+        // _console.log('p', path, propObj.responsive);
+
         return html`
             <div
                 prop="${propObj.id}"
@@ -692,7 +753,7 @@ export default class SSpecsEditorComponent extends __SLitComponent {
                     `_prop-${typeLower}`,
                 )}"
             >
-                ${this.renderWidget(propObj, path)}
+                ${this.renderWidget(propObj, path, settings)}
             </div>
         `;
     }
@@ -700,85 +761,107 @@ export default class SSpecsEditorComponent extends __SLitComponent {
     _renderRepeatableProps(propObj, path) {
         const loopOn = this.getValue(path, {
             default: [],
+            noneResponsive: true,
         });
 
-        return html` <div class="${this.utils.cls('_repeatable')}">
-            ${loopOn.map(
-                (v, i) => html`
-                    <div
-                        tabindex="0"
-                        @pointerup=${(e) => {
-                            this._toggle(`${path.join('.')}-${i}`);
-                        }}
-                        class="${this.utils.cls(
-                            '_repeatable-title',
-                        )} ${this._isActive(`${path.join('.')}-${i}`)
-                            ? 'active'
-                            : ''}"
-                    >
-                        <span>
-                            ${v.title ??
-                            v.name ??
-                            v.id ??
-                            `${propObj.title} #${i}`}
-                        </span>
-
-                        <button
-                            confirm="Confirm!"
-                            @pointerup=${(e) => {
-                                e.preventDefault();
-                                e.stopPropagation();
-                                if (e.currentTarget.needConfirmation) return;
-                                this._removeItem(loopOn, v, propObj);
-                            }}
-                            class="_remove"
-                        >
-                            <i class="fa-regular fa-trash-can"></i>
-                        </button>
-
-                        ${this._isActive(`${path.join('.')}-${i}`)
-                            ? html` ${unsafeHTML(this.props.icons.collapse)} `
-                            : html` ${unsafeHTML(this.props.icons.expand)} `}
-                    </div>
-                    <div
-                        tabindex="0"
-                        class="${this.utils.cls(
-                            '_repeatable-item',
-                        )} ${this._isActive(`${path.join('.')}-${i}`)
-                            ? 'active'
-                            : ''}"
-                    >
-                        <div
-                            class="${this.utils.cls('_repeatable-item-props')}"
-                        >
-                            ${this.renderProps(
-                                {
-                                    ...propObj,
-                                },
-                                [...path, i],
-                                {
-                                    repeatable: false,
-                                },
-                            )}
-                        </div>
-                    </div>
-                `,
-            )}
-
-            <div class="${this.utils.cls('_repeatable-actions')}">
-                <button
-                    @pointerup=${() =>
-                        this._addItem(loopOn, propObj, [
-                            ...path,
-                            loopOn.length,
-                        ])}
-                    class="_add"
+        return html`
+            <div class="${this.utils.cls('_repeatable')}">
+                <label
+                    class="${this.utils.cls(
+                        '_label',
+                        's-label s-label--block',
+                    )}"
+                    @click=${(e) => e.preventDefault()}
                 >
-                    Add a ${__lowerFirst(propObj.title).replace(/s$/, '')}
-                    ${unsafeHTML(this.props.icons.add)}
-                </button>
+                    ${this.renderLabel(propObj, path)}
+                </label>
+
+                ${loopOn.map(
+                    (v, i) => html`
+                        <div
+                            tabindex="0"
+                            @pointerup=${(e) => {
+                                this._toggle(`${path.join('.')}-${i}`);
+                            }}
+                            class="${this.utils.cls(
+                                '_repeatable-title',
+                            )} ${this._isActive(`${path.join('.')}-${i}`)
+                                ? 'active'
+                                : ''}"
+                        >
+                            <span>
+                                ${v.title ??
+                                v.name ??
+                                v.id ??
+                                `${propObj.title} #${i}`}
+                            </span>
+
+                            <button
+                                confirm="Confirm!"
+                                @pointerup=${(e) => {
+                                    e.preventDefault();
+                                    e.stopPropagation();
+                                    if (e.currentTarget.needConfirmation)
+                                        return;
+                                    this._removeItem(loopOn, v, propObj);
+                                }}
+                                class="_remove"
+                            >
+                                <i class="fa-regular fa-trash-can"></i>
+                            </button>
+
+                            ${this._isActive(`${path.join('.')}-${i}`)
+                                ? html`
+                                      ${unsafeHTML(this.props.icons.collapse)}
+                                  `
+                                : html`
+                                      ${unsafeHTML(this.props.icons.expand)}
+                                  `}
+                        </div>
+                        <div
+                            tabindex="0"
+                            class="${this.utils.cls(
+                                '_repeatable-item',
+                            )} ${this._isActive(`${path.join('.')}-${i}`)
+                                ? 'active'
+                                : ''}"
+                        >
+                            <div
+                                class="${this.utils.cls(
+                                    '_repeatable-item-props',
+                                )}"
+                            >
+                                ${this.renderProps(
+                                    {
+                                        ...propObj,
+                                        repeatable: true,
+                                        type: propObj.type.replace(/\[\]$/, ''),
+                                    },
+                                    [...path, i],
+                                    {
+                                        repeatable: false,
+                                    },
+                                )}
+                            </div>
+                        </div>
+                    `,
+                )}
+
+                <div class="${this.utils.cls('_repeatable-actions')}">
+                    <button
+                        @pointerup=${() =>
+                            this._addItem(loopOn, propObj, [
+                                ...path,
+                                loopOn.length,
+                            ])}
+                        class="_add"
+                    >
+                        Add a ${__lowerFirst(propObj.title).replace(/s$/, '')}
+                        ${unsafeHTML(this.props.icons.add)}
+                    </button>
+                </div>
             </div>
-        </div>`;
+        `;
     }
 
     renderProps(specs: any, path: string[] = [], settings?: any) {
@@ -788,7 +871,7 @@ export default class SSpecsEditorComponent extends __SLitComponent {
             ...(settings ?? {}),
         };
 
-        if (finalSettings.repeatable && specs.type.match(/(\{\}|\[\])/)) {
+        if (finalSettings.repeatable && specs.type.match(/(\[\])/)) {
             return this._renderRepeatableProps(specs, path);
         } else {
             if (!specs.props) {
@@ -867,64 +950,60 @@ export default class SSpecsEditorComponent extends __SLitComponent {
 
     render() {
         return html`
-            <div
-                class="${this.cu?.cls('', null, 's-bare')}"
-                id="${this.props.id}"
-                status="${this.state.status}"
-            >
-                ${this.props.specs
-                    ? html`
-                          <div class="${this.utils.cls('_root')}">
-                              <div class="${this.utils.cls('_metas')}">
-                                  <h3 class="_title s-typo--h3">
-                                      ${this.props.specs.title}
-                                  </h3>
-                                  <!-- <p
+            ${this.props.specs
+                ? html`
+                      <div class="${this.utils.cls('_root')}">
+                          <div class="${this.utils.cls('_metas')}">
+                              <h3 class="_title s-typo--h3">
+                                  ${this.props.specs.title}
+                              </h3>
+                              <!-- <p
                                       class="${this.utils.cls(
-                                      '_child-description',
-                                      's-typo--p',
-                                  )}"
+                                  '_child-description',
+                                  's-typo--p',
+                              )}"
                                   >
                                       ${this.props.specs.description}
                                   </p> -->
-                                  <nav class="_actions">
-                                      ${this.props.features?.delete
-                                          ? html`
-                                                <button
-                                                    class="_action _action-delete"
-                                                    confirm="Confirm?"
-                                                    @click=${() => {
-                                                        this.save();
-                                                    }}
-                                                >
-                                                    ${unsafeHTML(
-                                                        this.props.icons.delete,
-                                                    )}
-                                                </button>
-                                            `
-                                          : ''}
-                                      ${this.props.features?.save
-                                          ? html`
-                                                <button
-                                                    class="_action _action-save"
-                                                    @click=${() => {
-                                                        this.save();
-                                                    }}
-                                                    ?disabled=${!this._isValid}
-                                                >
-                                                    ${__i18n('Save', {
-                                                        id: 's-specs-editor.actions.save',
-                                                    })}
-                                                </button>
-                                            `
-                                          : ''}
-                                  </nav>
-                              </div>
-                              ${this.renderProps(this.props.specs, [])}
+                              <nav class="_actions">
+                                  ${this.props.features?.delete
+                                      ? html`
+                                            <button
+                                                class="_action _action-delete"
+                                                confirm="Confirm?"
+                                                @click=${() => {
+                                                    this.save();
+                                                }}
+                                            >
+                                                ${unsafeHTML(
+                                                    this.props.icons.delete,
+                                                )}
+                                            </button>
+                                        `
+                                      : ''}
+                                  ${this.props.features?.save
+                                      ? html`
+                                            <button
+                                                class="_action _action-save ${this.hasErrors()
+                                                    ? 'error'
+                                                    : ''}"
+                                                @click=${() => {
+                                                    this.save();
+                                                }}
+                                                ?disabled=${!this._isValid}
+                                            >
+                                                ${__i18n('Save', {
+                                                    id: 's-specs-editor.actions.save',
+                                                })}
+                                            </button>
+                                        `
+                                      : ''}
+                              </nav>
                           </div>
-                      `
-                    : ''}
-            </div>
+                          ${this.renderProps(this.props.specs, [])}
+                      </div>
+                  `
+                : ''}
         `;
     }
 }

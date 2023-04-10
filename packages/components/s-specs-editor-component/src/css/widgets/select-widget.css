@@ -1,2 +1,5 @@
 .s-specs-editor_select-widget {
+    select {
+        width: 100%;
+    }
 }

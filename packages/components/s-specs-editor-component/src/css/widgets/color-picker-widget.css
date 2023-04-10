@@ -1,6 +1,7 @@
 .s-specs-editor_color-picker-widget {
     s-color-picker {
         position: relative;
+        width: 100%;
     }
 
     ._color-preview {

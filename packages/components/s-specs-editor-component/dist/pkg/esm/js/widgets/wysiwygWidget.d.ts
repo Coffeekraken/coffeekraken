@@ -5,7 +5,6 @@ export default class SSpecsEditorComponentWysiwygWidget extends __SSpecsEditorWi
     _frontspec: any;
     _$holder: any;
     _$add: any;
-    static isActive(): boolean;
     constructor(deps: ISSpecsEditorWidgetDeps);
     render(): import("lit-html").TemplateResult<1>;
 }

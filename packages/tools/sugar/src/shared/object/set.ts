@@ -54,6 +54,10 @@ export default function __set(
     let o = obj,
         a;
 
+    if (Array.isArray(path) && path.length === 1) {
+        path = path[0];
+    }
+
     if (typeof path === 'string') {
         if (!path || path === '' || path === '.') {
             Object.assign(obj, value);

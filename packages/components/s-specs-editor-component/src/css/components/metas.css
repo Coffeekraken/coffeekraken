@@ -40,6 +40,10 @@
         ._action-save {
             @sugar.ui.button();
             @sugar.color (complementary);
+
+            &.error {
+                @sugar.color (error);
+            }
         }
         ._action-delete {
             @sugar.ui.button ($lnf: text);

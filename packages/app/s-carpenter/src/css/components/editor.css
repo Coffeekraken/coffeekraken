@@ -4,14 +4,10 @@
     right: var(--s-carpenter-editor-margin);
     bottom: var(--s-carpenter-editor-bottom);
     width: var(--s-carpenter-editor-width);
-    overflow-y: auto;
-    overflow-x: hidden;
     background: sugar.color(main, background);
     transform: translateX(100%);
     opacity: 0;
-    padding-block-end: sugar.padding(50);
     pointer-events: none;
-    @sugar.scrollbar();
     @sugar.border.radius();
     @sugar.depth (100);
     @sugar.transition();
@@ -20,6 +16,37 @@
         transform: translateX(0);
         opacity: 1;
         pointer-events: all;
+    }
+}
+
+.s-carpenter-app_editor-wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding-block-end: sugar.padding(50);
+    @sugar.scrollbar();
+    @sugar.border.radius();
+
+    &:after {
+        content: '';
+        display: block;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 999;
+        pointer-events: none;
+        border: 0 solid sugar.color(error);
+        @sugar.transition fast;
+    }
+
+    &:has(s-specs-editor.error):after {
+        border: 4px solid sugar.color(error);
     }
 
     ._loader {

@@ -1,4 +1,12 @@
 .s-specs-editor_switch-widget {
+    display: flex;
+    align-items: center;
+    gap: sugar.margin(20);
+
+    .s-label {
+        margin-block-end: 0;
+    }
+
     .s-specs-editor_switch {
         @sugar.color (accent);
     }

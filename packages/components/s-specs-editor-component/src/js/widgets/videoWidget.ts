@@ -1,34 +1,37 @@
 import { html } from 'lit';
 import { unsafeHTML } from 'lit/directives/unsafe-html.js';
 
+import { __i18n } from '@coffeekraken/s-i18n';
+
 import type { ISVideoData, ISVideoFormat } from '@specimen/types';
 
 import type { ISSpecsEditorWidgetDeps } from '../SSpecsEditorWidget';
 import __SSpecsEditorWidget from '../SSpecsEditorWidget';
 
 export default class SSpecsEditorComponentVideoWidget extends __SSpecsEditorWidget {
-    static isActive() {
-        return true;
-    }
-
     constructor(deps: ISSpecsEditorWidgetDeps) {
         super(deps);
     }
+
+    validate(newValues) {
+        if (
+            this.propObj.required &&
+            !Object.keys(newValues?.sources ?? {}).length
+        ) {
+            return {
+                error: __i18n(`This property is required`, {
+                    id: 's-specs-editor.widget.required',
+                }),
+            };
+        }
+    }
+
     render() {
         const values = <ISVideoData>this.values;
 
         return html`
             <div class="${this.editor.utils.cls('_video-widget')}">
-                <label
-                    class="${this.editor.utils.cls(
-                        '_label',
-                        's-label s-label--block',
-                    )}"
-                    @click=${(e) => e.preventDefault()}
-                >
-                    ${this.editor.renderLabel(this.propObj, this.path)}
-                </label>
-
+                ${this.renderLabel()}
                 <div class="_drop">
                     <s-dropzone
                         accept="video/webm,video/mp4,video/ogg"
@@ -37,20 +40,19 @@ export default class SSpecsEditorComponentVideoWidget extends __SSpecsEditorWidg
                         multiple
                         class="s-bare"
                         @s-dropzone.file=${(e) => {
-                            const newSources = values.sources ?? {};
-
+                            const newValue = {
+                                sources: {},
+                            };
                             for (let [i, video] of e.detail.entries()) {
                                 const url = video.url ?? '',
                                     format = url.split('.').pop();
 
-                                newSources[format] = {
+                                newValue.sources[format] = {
                                     url,
                                 };
                             }
-                            this.setValue(newSources, {
-                                path: 'sources',
-                            });
-                            this.editor.apply();
+
+                            this.setValue(newValue, {});
                         }}
                     ></s-dropzone>
                 </div>

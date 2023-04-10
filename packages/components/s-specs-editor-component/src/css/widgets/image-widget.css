@@ -17,6 +17,7 @@
     ._image {
         display: flex;
         align-items: center;
+        flex-wrap: nowrap;
     }
 
     ._preview {
@@ -29,6 +30,11 @@
 
     ._spacer {
         flex-grow: 1;
+    }
+
+    ._actions {
+        display: flex;
+        flex-wrap: nowrap;
     }
 
     ._delete {

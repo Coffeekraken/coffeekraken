@@ -2,6 +2,11 @@
     /* background: red; */
     background: sugar.color(main, background);
     /* margin-inline: calc(sugar.margin(40) * -1); */
+
+    .s-label {
+        padding-block: sugar.padding(50) sugar.padding(20);
+        padding-inline: var(--s-specs-editor-padding-inline);
+    }
 }
 .s-specs-editor_repeatable-title {
     display: flex;

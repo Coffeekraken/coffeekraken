@@ -1183,22 +1183,24 @@ export default class SCarpenterAppComponent extends __SLitComponent {
             >
                 ${this.currentSpecs && !this.state.isLoading
                     ? html`
-                          <s-specs-editor
-                              media="${this.state.activeMedia}"
-                              default-media="${this.props.defaultMedia}"
-                              .specs=${this.currentSpecs}
-                              .features=${this.props.features}
-                              .frontspec=${this._data.frontspec ?? {}}
-                              @s-specs-editor.error=${(e) => {
-                                  this._isSpecsEditorValid = false;
-                                  this.requestUpdate();
-                              }}
-                              @s-specs-editor.valid=${(e) => {
-                                  this._isSpecsEditorValid = true;
-                                  this.requestUpdate();
-                              }}
-                          >
-                          </s-specs-editor>
+                          <div class="${this.utils.cls('_editor-wrapper')}">
+                              <s-specs-editor
+                                  media="${this.state.activeMedia}"
+                                  default-media="${this.props.defaultMedia}"
+                                  .specs=${this.currentSpecs}
+                                  .features=${this.props.features}
+                                  .frontspec=${this._data.frontspec ?? {}}
+                                  @s-specs-editor.error=${(e) => {
+                                      this._isSpecsEditorValid = false;
+                                      this.requestUpdate();
+                                  }}
+                                  @s-specs-editor.valid=${(e) => {
+                                      this._isSpecsEditorValid = true;
+                                      this.requestUpdate();
+                                  }}
+                              >
+                              </s-specs-editor>
+                          </div>
                       `
                     : html`
                           <div class="_loader carpenter-loader-blocks">

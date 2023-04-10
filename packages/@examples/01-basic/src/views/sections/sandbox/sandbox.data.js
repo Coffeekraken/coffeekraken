@@ -4,6 +4,7 @@ export default {
         title: 'Macbook air',
         alt: 'Macbook air',
     },
+    spaces: {},
     date: {
         value: '2023-11-10',
         format: 'YYYY-MM-DD',
@@ -34,6 +35,14 @@ export default {
         link: {
             url: '/contact',
             title: 'Discover more on apple.com',
+        },
+    },
+    spaces: {
+        media: {
+            desktop: {
+                paddingTop: 40,
+                marginRight: 20,
+            },
         },
     },
 };

@@ -75,7 +75,7 @@ export default function ({
             }
 
             .s-spaces-selector_clear {
-                @sugar.ui.button ($lnf: outline);
+                @sugar.ui.button ($lnf: text);
             }
 
             .s-spaces-selector_space {

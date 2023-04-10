@@ -133,8 +133,6 @@ export default class SCarpenterComponent extends __SLitComponent {
         this._$editorIframe.setAttribute('scrolling', 'no');
         document.body.appendChild(this._$editorIframe);
 
-        _console.log('_', this.props.defaultMedia);
-
         // inject the current page content inside the iframe
         const iframeHtml = `
             <script type="module" defer src="${this.props.src}"></script>
@@ -269,13 +267,13 @@ export default class SCarpenterComponent extends __SLitComponent {
                               <!-- <div class="_loader carpenter-loader">
                                   ${this._carpenterLogo()}
                               </div> -->
-                              <h1 class="_title">
+                              <!-- <h1 class="_title">
                                   Loading <span>Carpenter</span>
                               </h1>
                               <p class="_text">
                                   Loading.
                                   <span>Please wait....</span>
-                              </p>
+                              </p> -->
                               <!-- <button class="_cancel-btn">Cancel</button> -->
                           </div>
                       </div>

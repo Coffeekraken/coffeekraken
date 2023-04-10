@@ -9,10 +9,6 @@ export default class SSpecsEditorComponentWysiwygWidget extends __SSpecsEditorWi
     _$holder;
     _$add;
 
-    static isActive() {
-        return true;
-    }
-
     constructor(deps: ISSpecsEditorWidgetDeps) {
         super(deps);
 
@@ -27,7 +23,6 @@ export default class SSpecsEditorComponentWysiwygWidget extends __SSpecsEditorWi
                 class="${this.editor.utils.cls('_wysiwyg-widget')}"
                 @s-wysiwyg.change=${(e) => {
                     this.setValue(e.detail);
-                    this.editor.apply();
 
                     // const $preview = document.querySelector('._preview');
                     // const wysiwyg = new __SWysiwyg(propObj, e.detail ?? {});
@@ -47,14 +42,7 @@ export default class SSpecsEditorComponentWysiwygWidget extends __SSpecsEditorWi
                     // );
                 }}
             >
-                <label
-                    class="${this.editor.utils.cls(
-                        '_label',
-                        's-label s-label--block',
-                    )}"
-                >
-                    ${this.editor.renderLabel(this.propObj, this.path)}
-                </label>
+                ${this.renderLabel()}
 
                 <s-wysiwyg frontspec></s-wysiwyg>
 

@@ -1,14 +1,17 @@
 .s-spaces-selector {
+    display: block;
+    aspect-ratio: 16/10;
+    position: relative;
+    width: 100%;
 }
 
 .s-spaces-selector_inner {
-    aspect-ratio: 16/10;
-    position: relative;
+    position: absolute;
 
-    margin-top: var(--s-spaces-selector-offset-y, 0);
-    margin-right: var(--s-spaces-selector-offset-x, 0);
-    margin-bottom: var(--s-spaces-selector-offset-y, 0);
-    margin-left: var(--s-spaces-selector-offset-x, 0);
+    top: var(--s-spaces-selector-offset-y, 0);
+    right: var(--s-spaces-selector-offset-x, 0);
+    bottom: var(--s-spaces-selector-offset-y, 0);
+    left: var(--s-spaces-selector-offset-x, 0);
 }
 
 .s-spaces-selector_clear {

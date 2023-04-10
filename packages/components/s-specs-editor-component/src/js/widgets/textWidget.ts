@@ -6,12 +6,10 @@ import type { ISSpecsEditorWidgetDeps } from '../SSpecsEditorWidget';
 import __SSpecsEditorWidget from '../SSpecsEditorWidget';
 
 export default class SSpecsEditorComponentTextWidget extends __SSpecsEditorWidget {
-    static isActive() {
-        return true;
-    }
-
     constructor(deps: ISSpecsEditorWidgetDeps) {
         super(deps);
+
+        _console.log('RRR', this.values);
 
         if (!this.values.value) {
             this.values.value = this.propObj.default;
@@ -19,6 +17,8 @@ export default class SSpecsEditorComponentTextWidget extends __SSpecsEditorWidge
     }
 
     validate(newValues) {
+        _console.log('validate', newValues);
+
         if (this.propObj.required && !newValues?.value) {
             return {
                 error: __i18n(`This property is required`, {
@@ -31,28 +31,20 @@ export default class SSpecsEditorComponentTextWidget extends __SSpecsEditorWidge
     render() {
         return html`
             <div class="${this.editor.utils.cls('_text-widget')}">
-                <label
-                    class="${this.editor.utils.cls(
-                        '_label',
-                        's-label s-label--block',
-                    )}"
-                >
-                    <input
-                        @change=${(e) => {
-                            this.setValue({
-                                value: e.target.value,
-                            });
-                            this.editor.apply();
-                        }}
-                        type="text"
-                        name="${this.path.at(-1)}"
-                        class="${this.editor.utils.cls('_input', 's-input')}"
-                        placeholder="${this.propObj.pladeholder}"
-                        path="${this.path.join('.')}"
-                        value="${this.values.value}"
-                    />
-                    ${this.editor.renderLabel(this.propObj, this.path)}
-                </label>
+                ${this.renderLabel()}
+                <input
+                    @change=${(e) => {
+                        this.setValue({
+                            value: e.target.value,
+                        });
+                    }}
+                    type="text"
+                    name="${this.path.at(-1)}"
+                    class="${this.editor.utils.cls('_input', 's-input')}"
+                    placeholder="${this.propObj.pladeholder}"
+                    path="${this.path.join('.')}"
+                    value="${this.values.value}"
+                />
             </div>
         `;
     }

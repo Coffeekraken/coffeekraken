@@ -236,14 +236,6 @@ export default function ({
                   border: rgba(0,0,0,0) solid sugar.theme(ui.button.borderWidth);
                   color: sugar.color(current) !important;
                   box-shadow: none !important;
-
-                  &:hover, &:focus {
-                    transform: scale(1.1);
-                  }
-
-                  @sugar.state.disabled {
-                    transform: scale(1) !important;
-                  }
                 `);
                 break;
             case 'loading':

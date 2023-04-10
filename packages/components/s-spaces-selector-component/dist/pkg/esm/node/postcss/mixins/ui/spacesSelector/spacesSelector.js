@@ -51,7 +51,7 @@ export default function ({ params, atRule, sharedData, replaceWith, }) {
             }
 
             .s-spaces-selector_clear {
-                @sugar.ui.button ($lnf: outline);
+                @sugar.ui.button ($lnf: text);
             }
 
             .s-spaces-selector_space {

@@ -2,9 +2,11 @@
 @import './child.css';
 @import './copy-button.css';
 @import './error.css';
+@import './inline-input.css';
 @import './label.css';
 @import './media.css';
 @import './metas.css';
 @import './prop.css';
 @import './repeatable.css';
 @import './warning.css';
+@import './widget.css';

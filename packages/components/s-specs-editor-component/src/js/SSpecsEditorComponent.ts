@@ -53,6 +53,13 @@ export interface ISSpecsEditorRenderSettings {
     widgets: boolean;
 }
 
+export interface ISSpecsEditorComponentSource {
+    title: string;
+    description: string;
+    url: string;
+    values: any;
+}
+
 export interface ISSpecsEditorComponentRenderLabelSettings {
     tooltip?: 'top' | 'left' | 'right' | 'bottom';
 }
@@ -227,7 +234,7 @@ export default class SSpecsEditorComponent extends __SLitComponent {
 
     mount() {
         if (!this._values) {
-            this._values = Object.assign({}, this.props.specs.values ?? {});
+            this._values = Object.assign({}, this.props.values ?? {});
         }
         for (let [key, propObj] of Object.entries(this.props.specs.props)) {
             if (this._values[key] === undefined) {
@@ -271,7 +278,6 @@ export default class SSpecsEditorComponent extends __SLitComponent {
 
     hasErrors(): boolean {
         if (this.status.pristine) {
-            _console.log('Pristing');
             return false;
         }
 
@@ -378,52 +384,6 @@ export default class SSpecsEditorComponent extends __SLitComponent {
         return value;
     }
 
-    clearValue(path: string[], settings?: any): any {
-        this.setValue(path, null, settings);
-        this.requestUpdate();
-    }
-
-    setValue(
-        path: string | string[],
-        value: any,
-        settings?: ISSpecsEditorComponentSetValueSettings,
-    ): any {
-        if (!Array.isArray(path)) {
-            path = path.split('.');
-        }
-
-        const finalSettings: ISSpecsEditorComponentSetValueSettings = {
-            media: undefined,
-            ...(settings ?? {}),
-        };
-
-        if (!finalSettings?.media && this.isPathResponsive(path)) {
-            finalSettings.media = this.props.media;
-        }
-
-        // handle responsive values
-        const valuePath = this.getValuePath(path, {
-            media: this.props.media,
-            ...finalSettings,
-        });
-
-        // _console.log('SET', value, path, valuePath, finalSettings);
-
-        const currentValue = __get(this._values, valuePath);
-        if (finalSettings?.merge) {
-            __set(this._values, valuePath, __deepMerge(currentValue, value), {
-                preferAssign: true,
-            });
-        } else {
-            // _console.log('SSSSSSSSS', this._values, valuePath, value);
-            __set(this._values, valuePath, value, {
-                preferAssign: true,
-            });
-        }
-
-        this.requestUpdate();
-    }
-
     getWidget(
         type: string,
         path: string[],
@@ -449,6 +409,7 @@ export default class SSpecsEditorComponent extends __SLitComponent {
         this._widgets[dotPath] = new SSpecsEditorComponent.widgetMap[type]({
             editor: this,
             values,
+            source: __get(this.props.source?.values ?? {}, dotPath),
             propObj,
             path,
             settings: finalSettings,
@@ -725,6 +686,30 @@ export default class SSpecsEditorComponent extends __SLitComponent {
             ${widget?.render
                 ? html` <div class="${this.utils.cls('_widget')}">
                       ${widget.render()}
+                      ${widget.canBeOverride()
+                          ? html`
+                                <div class="_override">
+                                    <button
+                                        class="_override-btn"
+                                        confirm="Are you sure?"
+                                        @pointerup=${(e) => {
+                                            if (e.target.needConfirmation) {
+                                                return;
+                                            }
+                                            widget.override();
+                                            this.requestUpdate();
+                                        }}
+                                    >
+                                        ${__i18n('Override %s', {
+                                            id: 's-specs-editor.override.button',
+                                            tokens: {
+                                                s: __lowerFirst(propObj.title),
+                                            },
+                                        })}
+                                    </button>
+                                </div>
+                            `
+                          : ''}
                   </div>`
                 : ''}
             ${widget?.hasErrors()
@@ -954,51 +939,88 @@ export default class SSpecsEditorComponent extends __SLitComponent {
                 ? html`
                       <div class="${this.utils.cls('_root')}">
                           <div class="${this.utils.cls('_metas')}">
-                              <h3 class="_title s-typo--h3">
-                                  ${this.props.specs.title}
-                              </h3>
-                              <!-- <p
-                                      class="${this.utils.cls(
-                                  '_child-description',
-                                  's-typo--p',
-                              )}"
-                                  >
-                                      ${this.props.specs.description}
-                                  </p> -->
-                              <nav class="_actions">
-                                  ${this.props.features?.delete
-                                      ? html`
-                                            <button
-                                                class="_action _action-delete"
-                                                confirm="Confirm?"
-                                                @click=${() => {
-                                                    this.save();
-                                                }}
-                                            >
+                              <div class="${this.utils.cls('_metas-heading')}">
+                                  <h3 class="_title s-typo--h3">
+                                      ${this.props.specs.title}
+                                  </h3>
+                                  <!-- <p
+                                        class="${this.utils.cls(
+                                      '_child-description',
+                                      's-typo--p',
+                                  )}"
+                                    >
+                                        ${this.props.specs.description}
+                                    </p> -->
+                                  <nav class="_actions">
+                                      ${this.props.features?.delete
+                                          ? html`
+                                                <button
+                                                    class="_action _action-delete"
+                                                    confirm="Confirm?"
+                                                    @click=${() => {
+                                                        this.save();
+                                                    }}
+                                                >
+                                                    ${unsafeHTML(
+                                                        this.props.icons.delete,
+                                                    )}
+                                                </button>
+                                            `
+                                          : ''}
+                                      ${this.props.features?.save
+                                          ? html`
+                                                <button
+                                                    class="_action _action-save ${this.hasErrors()
+                                                        ? 'error'
+                                                        : ''}"
+                                                    @click=${() => {
+                                                        this.save();
+                                                    }}
+                                                    ?disabled=${!this._isValid}
+                                                >
+                                                    ${__i18n('Save', {
+                                                        id: 's-specs-editor.actions.save',
+                                                    })}
+                                                </button>
+                                            `
+                                          : ''}
+                                  </nav>
+                              </div>
+                              ${this.props.source
+                                  ? html`
+                                        <div
+                                            class="${this.utils.cls(
+                                                '_metas-source',
+                                            )}"
+                                        >
+                                            ${this.props.source.url
+                                                ? html`
+                                                      <a
+                                                          href="${this.props
+                                                              .source.url}"
+                                                          target="_blank"
+                                                          title="${this.props
+                                                              .source.title}"
+                                                      >
+                                                      </a>
+                                                  `
+                                                : ''}
+                                            <p class="_text">
                                                 ${unsafeHTML(
-                                                    this.props.icons.delete,
+                                                    __i18n(
+                                                        'This content is linked to the %s one...',
+                                                        {
+                                                            id: 's-specs-editor.source.link',
+                                                            tokens: {
+                                                                s: `<a class="_link" href="${this.props.source.url}" target="_blank">${this.props.source.title}</a>`,
+                                                            },
+                                                        },
+                                                    ),
                                                 )}
-                                            </button>
-                                        `
-                                      : ''}
-                                  ${this.props.features?.save
-                                      ? html`
-                                            <button
-                                                class="_action _action-save ${this.hasErrors()
-                                                    ? 'error'
-                                                    : ''}"
-                                                @click=${() => {
-                                                    this.save();
-                                                }}
-                                                ?disabled=${!this._isValid}
-                                            >
-                                                ${__i18n('Save', {
-                                                    id: 's-specs-editor.actions.save',
-                                                })}
-                                            </button>
-                                        `
-                                      : ''}
-                              </nav>
+                                            </p>
+                                        </div>
+                                    `
+                                  : ''}
                           </div>
                           ${this.renderProps(this.props.specs, [])}
                       </div>

@@ -3,6 +3,13 @@ import __SSpecsEditorComponent from './SSpecsEditorComponent';
 export interface ISSpeceEditorWidgetStatus {
     pristine: boolean;
 }
+export interface ISSpecsEditorWidgetInlineLabel {
+    label: string;
+    description?: string;
+    value?: string;
+    placeholder?: string;
+    onChange?: Function;
+}
 export interface ISSpecsEditorWidgetSetValueSettings {
     media?: string;
     path?: string;
@@ -21,6 +28,7 @@ export interface ISSpecsEditorWidgetDeps {
     editor: __SSpecsEditorComponent;
     path: string[];
     values: any;
+    source: any;
     propObj: any;
     settings: ISSpecsEditorWidgetSettings;
 }
@@ -31,15 +39,22 @@ export default class SSpecsEditorWidget {
     valuePath: string[];
     settings: ISSpecsEditorWidgetSettings;
     status: ISSpeceEditorWidgetStatus;
+    _overrided: any;
+    _source: any;
     _values: any;
     _errors: string[];
     _warnings: string[];
     constructor(deps: ISSpecsEditorWidgetDeps, settings?: ISSpecsEditorWidgetSettings);
     get values(): any;
+    get noneResponsiveValue(): any;
     resetValue(value: any): void;
+    mergeValue(value: any, settings?: ISSpecsEditorWidgetSetValueSettings): void;
+    override(): void;
+    canBeOverride(): boolean;
     setValue(value: any, settings?: ISSpecsEditorWidgetSetValueSettings): void;
     _validate(values?: any): ISSpecsEditorWidgetValidateResult;
     renderLabel(settings?: ISSpecsEditorComponentRenderLabelSettings): any;
+    renderInlineInput(settings: ISSpecsEditorWidgetInlineLabel): any;
     validate(values: any): ISSpecsEditorWidgetValidateResult;
     hasValuesForMedia(media: string): boolean;
     isResponsive(): boolean;

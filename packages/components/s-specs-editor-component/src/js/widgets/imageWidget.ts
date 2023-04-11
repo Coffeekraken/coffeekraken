@@ -3,6 +3,7 @@ import { unsafeHTML } from 'lit/directives/unsafe-html.js';
 
 import type { ISImageData } from '@specimen/types';
 
+import { __i18n } from '@coffeekraken/s-i18n';
 import type { ISSpecsEditorWidgetDeps } from '../SSpecsEditorWidget';
 import __SSpecsEditorWidget from '../SSpecsEditorWidget';
 
@@ -13,6 +14,8 @@ export default class SSpecsEditorComponentImageWidget extends __SSpecsEditorWidg
 
     render() {
         const values = <ISImageData>this.values;
+
+        _console.log('Val', this.noneResponsiveValue);
 
         return html`
             <div class="${this.editor.utils.cls('_image-widget')}">
@@ -51,6 +54,42 @@ export default class SSpecsEditorComponentImageWidget extends __SSpecsEditorWidg
                               </ul>
                           `}
                 </div>
+                ${this.renderInlineInput({
+                    label: 'Alt',
+                    description: '',
+                    placeholder: __i18n('Image alternative text', {
+                        id: 'global.image.alt',
+                    }),
+                    value: this.noneResponsiveValue.alt,
+                    onChange: (e) => {
+                        this.mergeValue(
+                            {
+                                alt: e.target.value,
+                            },
+                            {
+                                noneResponsive: true,
+                            },
+                        );
+                    },
+                })}
+                ${this.renderInlineInput({
+                    label: 'Title',
+                    description: '',
+                    placeholder: __i18n('Image title', {
+                        id: 'global.image.title',
+                    }),
+                    value: this.noneResponsiveValue.title,
+                    onChange: (e) => {
+                        this.mergeValue(
+                            {
+                                title: e.target.value,
+                            },
+                            {
+                                noneResponsive: true,
+                            },
+                        );
+                    },
+                })}
             </div>
         `;
     }

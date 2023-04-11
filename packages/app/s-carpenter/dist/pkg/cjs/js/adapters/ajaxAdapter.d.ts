@@ -1,21 +1,22 @@
 declare const _default: {
-    load({ dotpath, props, component }: {
+    load({ dotpath, values, component }: {
         dotpath: any;
-        props: any;
+        values: any;
         component: any;
     }): Promise<HTMLElement>;
-    change({ dotpath, props, component, $elm }: {
+    change({ dotpath, values, component, $elm }: {
         dotpath: any;
-        props: any;
+        values: any;
         component: any;
         $elm: any;
     }): Promise<HTMLElement>;
-    getProps({ $elm }: {
+    getData({ $elm }: {
         $elm: any;
     }): Promise<any>;
-    setProps({ $elm, props, component }: {
+    setValues({ $elm, values, dotpath, component, }: {
         $elm: any;
-        props: any;
+        values: any;
+        dotpath: any;
         component: any;
     }): Promise<HTMLElement>;
 };

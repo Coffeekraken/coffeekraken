@@ -20,6 +20,8 @@ import {
 
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
 
+import type { ISSpecsEditorComponentSource } from '@coffeekraken/s-specs-editor-component';
+
 import __define from './defineApp';
 
 import { __injectIframeContent } from '@coffeekraken/sugar/dom';
@@ -45,16 +47,24 @@ export interface ISCarpenterAppComponentFeatures {
     media: boolean;
 }
 
+export interface ISCarpenterAppComponentData {
+    values?: any;
+    specs: any;
+    source?: ISSpecsEditorComponentSource;
+    specsByTypes: Record<string, any>;
+}
+
 export interface ISCarpenterComponentProps {
     window: Window;
-    specs: string;
     features: ISCarpenterAppComponentFeatures;
     adapter: 'ajax';
+    data: ISCarpenterAppComponentData;
     viewportElm: HTMLElement;
     nav: boolean;
     escape: boolean;
     pagesLink: string;
     iframe: boolean;
+    frontspec: any;
     ghostSpecs: boolean;
     logo: string;
     icons: ISCarpenterAppComponentIconsProp;
@@ -94,12 +104,13 @@ __sSugarFeatureDefine();
 export interface ISCarpenterComponentAdapterParams {
     $elm?: HTMLElement;
     dotpath?: string;
-    props: specs;
-    component: SCarpenterComponent;
+    values: any;
+    component: SCarpenterAppComponent;
 }
 
 export interface ISCarpenterComponentAdapter {
-    setProps(params: ISCarpenterComponentAdapterParams): Promise<HTMLElement>;
+    getData($elm: HTMLElement): Promise<any>;
+    setValues(params: ISCarpenterComponentAdapterParams): Promise<HTMLElement>;
     change(params: ISCarpenterComponentAdapterParams): Promise<HTMLElement>;
 }
 
@@ -141,12 +152,12 @@ export default class SCarpenterAppComponent extends __SLitComponent {
 
     currentSpecs = null;
 
-    _values = {};
-
     _$currentElm;
     _$preselectedElm;
 
-    _data;
+    _data: ISCarpenterAppComponentData;
+    _cachedData: Record<string, ISCarpenterAppComponentData> = {};
+
     _websiteWindow;
     _$websiteDocument; // store the document
     _$websiteIframe; // store the website iframe if the "media" method stored in the frontspec.json file is not set to "container". In this case, we must wrap the website into a proper iframe for the @media queries to work
@@ -183,11 +194,13 @@ export default class SCarpenterAppComponent extends __SLitComponent {
         $style.rel = 'stylesheet';
         $style.href = '/dist/css/carpenter.css';
         document.body.appendChild($style);
+
+        _console.log('Hello');
     }
 
     async mount() {
         // get the data
-        this._data = await this._getData(this.props.specs);
+        this._data = await this._getData(this.props.data);
         if (!this._data) {
             throw new Error(
                 `[SCarpenter] Sorry but no valid specs have been specified...`,
@@ -196,7 +209,7 @@ export default class SCarpenterAppComponent extends __SLitComponent {
 
         // active the default media if not set
         if (!this.state.activeMedia) {
-            this.state.activeMedia = this._data.frontspec?.media?.defaultMedia;
+            this.state.activeMedia = this.props.frontspec?.media?.defaultMedia;
         }
 
         // check the specified adapter
@@ -220,6 +233,8 @@ export default class SCarpenterAppComponent extends __SLitComponent {
     }
 
     async firstUpdated() {
+        await __wait(1000);
+
         // getting the editor element
         this._$editor = document.querySelector(`.${this.utils.cls('_editor')}`);
         if (!this._$editor) {
@@ -251,10 +266,10 @@ export default class SCarpenterAppComponent extends __SLitComponent {
             this._changePage(e.state.dotpath, false);
         });
 
+        await __wait(2000);
+
         // handle "scrolled" class on the editor
         this._handleScrolledClassOnEditor();
-
-        await __wait(2000);
 
         // Create UI placeholders
         this._updateUiPlaceholders();
@@ -572,14 +587,15 @@ export default class SCarpenterAppComponent extends __SLitComponent {
             const adapterResult =
                 await SCarpenterAppComponent._registeredAdapters[
                     this.props.adapter
-                ].setProps({
+                ].setValues({
                     $elm: this._$currentElm,
-                    props: e.detail.values ?? {},
+                    values: e.detail.values ?? {},
+                    dotpath: this._data.specs.metas.dotpath,
                     component: this,
                 });
 
-            // save current values in "_values" stack
-            this._values[this._$currentElm.id] = e.detail.values ?? {};
+            // save current values in "_data" stack
+            this._data[this._$currentElm.id] = e.detail.values ?? {};
 
             if (adapterResult) {
                 this._$currentElm = adapterResult;
@@ -632,8 +648,11 @@ export default class SCarpenterAppComponent extends __SLitComponent {
      * Handle "scrolled" class on the editor
      */
     _handleScrolledClassOnEditor() {
-        this._$editor.addEventListener('scroll', (e) => {
-            if (Math.abs(this._$editor.scrollTop) >= 100) {
+        const $editorWrapper = document.querySelector(
+            `.${this.utils.cls('_editor-wrapper')}`,
+        );
+        $editorWrapper.addEventListener('scroll', (e) => {
+            if (Math.abs($editorWrapper.scrollTop) >= 100) {
                 this._$editor.classList.add('scrolled');
             } else {
                 this._$editor.classList.remove('scrolled');
@@ -770,42 +789,32 @@ export default class SCarpenterAppComponent extends __SLitComponent {
         this._$currentElm = $elm;
 
         // force reset the specs editor
-        this.currentSpecs = null;
+        Object.assign(this._data, {
+            values: null,
+            specs: null,
+            source: null,
+        });
         this.requestUpdate();
         await __wait();
 
+        // let dotpath = `${$elm.getAttribute('s-specs')}`;
+
         // try to get the spec from the data fetched at start
-        let potentialDotpath = $elm.getAttribute('s-specs');
-        if (this._data.specs[potentialDotpath]) {
-            this.currentSpecs = this._data.specs[potentialDotpath];
-        } else {
-            potentialDotpath = `${potentialDotpath}.${
-                potentialDotpath.split('.').slice(-1)[0]
-            }`;
-            if (this._data.specs[potentialDotpath]) {
-                this.currentSpecs = this._data.specs[potentialDotpath];
-            }
+        if (this._cachedData[$elm.id]) {
+            Object.assign(this._data, this._cachedData[$elm.id]);
         }
 
-        if (!this.currentSpecs) {
-            throw new Error(
-                `<red>[SCarpenterAppComponent]</red> Sorry but the requested "${potentialDotpath}" specs dotpath does not exists...`,
-            );
-        }
-
-        // get values
-        const values =
-            this._values[this._$currentElm.id] ??
-            (await SCarpenterAppComponent._registeredAdapters[
+        if (!this._data.specs) {
+            const data = await SCarpenterAppComponent._registeredAdapters[
                 this.props.adapter
-            ].getProps({
+            ].getData({
                 $elm: this._$currentElm,
                 component: this,
-            }));
-
-        // save the getted values
-        if (values) {
-            this.currentSpecs.values = values;
+            });
+            if (data) {
+                Object.assign(this._data, data);
+                this._cachedData[$elm.id] = data;
+            }
         }
     }
 
@@ -926,11 +935,11 @@ export default class SCarpenterAppComponent extends __SLitComponent {
 
         // // update the currentSpecs
         // const newSpecs = this._data.specs[dotpath];
-        // if (newSpecs !== this.currentSpecs) {
-        //     this.currentSpecs = null;
+        // if (newSpecs !== this._data) {
+        //     this._data = null;
         //     this.requestUpdate();
         //     await __wait();
-        //     this.currentSpecs = newSpecs;
+        //     this._data = newSpecs;
         //     this.requestUpdate();
         // }
     }
@@ -952,17 +961,18 @@ export default class SCarpenterAppComponent extends __SLitComponent {
      * Can be a url where to fetch the data or an id pointing to an HTMLTemplateElement that
      * store the JSON data
      */
-    async _getData(source: string): any {
+    async _getData(source: string | ISCarpenterAppComponentData): any {
         let data;
-
         try {
-            if (source.startsWith('{')) {
-                data = JSON.parse(source);
+            if ((<any>source).startsWith('{')) {
+                data = JSON.parse(<string>source);
             } else if (
-                source.startsWith('/') ||
-                source.match(/^https?\:\/\//)
+                (<any>source).startsWith('/') ||
+                (<any>source).match(/^https?\:\/\//)
             ) {
-                data = await fetch(source).then((response) => response.json());
+                data = await fetch(<string>source).then((response) =>
+                    response.json(),
+                );
             } else {
                 const $template = document.querySelector(
                     `template#${source}, template${source}`,
@@ -982,14 +992,13 @@ export default class SCarpenterAppComponent extends __SLitComponent {
         }
 
         // filter the "ghosts"
-        if (!this.props.ghostSpecs) {
+        if (!this.props.ghostSpecs && data.specs) {
             data.specs = __filterObject(data.specs, (key, item) => {
                 return !item.ghost;
             });
         }
 
         data.specsByTypes = {};
-
         for (let [namespace, specObj] of Object.entries(data.specs)) {
             const parts = namespace.split('.');
             let type;
@@ -1033,10 +1042,6 @@ export default class SCarpenterAppComponent extends __SLitComponent {
     }
 
     render() {
-        if (!this._data) {
-            return '';
-        }
-
         return html`
             ${this.props.sidebar
                 ? html`
@@ -1046,160 +1051,185 @@ export default class SCarpenterAppComponent extends __SLitComponent {
                           </div>
 
                           <div class="${this.utils.cls('_navigation')}">
-                              <ul class="s-fs-tree">
-                                  ${Object.keys(this._data.specsByTypes).map(
-                                      (type) => {
-                                          const specsObj =
-                                              this._data.specsByTypes[type];
-                                          return html`
-                                              <li
-                                                  class="${this.state.activeNavigationFolders.includes(
-                                                      type,
-                                                  )
-                                                      ? 'active'
-                                                      : ''}"
-                                              >
-                                                  <div
-                                                      @pointerup=${() =>
-                                                          this._toggleNavigationFolder(
-                                                              type,
-                                                          )}
-                                                  >
-                                                      ${this.state.activeNavigationFolders.includes(
-                                                          type,
-                                                      )
-                                                          ? html`
-                                                                ${unsafeHTML(
-                                                                    this.props
-                                                                        .icons
-                                                                        .folderOpen,
+                              ${!this._data.specsByTypes
+                                  ? html` <p>Loading...</p> `
+                                  : html`
+                                        <ul class="s-fs-tree">
+                                            ${Object.keys(
+                                                this._data.specsByTypes,
+                                            ).map((type) => {
+                                                const specsObj =
+                                                    this._data.specsByTypes[
+                                                        type
+                                                    ];
+                                                return html`
+                                                    <li
+                                                        class="${this.state.activeNavigationFolders.includes(
+                                                            type,
+                                                        )
+                                                            ? 'active'
+                                                            : ''}"
+                                                    >
+                                                        <div
+                                                            @pointerup=${() =>
+                                                                this._toggleNavigationFolder(
+                                                                    type,
                                                                 )}
-                                                            `
-                                                          : html`
-                                                                ${unsafeHTML(
-                                                                    this.props
-                                                                        .icons
-                                                                        .folderClose,
-                                                                )}
-                                                            `}
-                                                      <span tabindex="0"
-                                                          >${__upperFirst(
-                                                              type,
-                                                          )}</span
-                                                      >
-                                                  </div>
-                                                  <ul class="s-fs-tree">
-                                                      ${Object.keys(
-                                                          specsObj,
-                                                      ).map((dotpath) => {
-                                                          const specObj =
-                                                              specsObj[dotpath];
-                                                          let last;
-                                                          const checkDotPath =
-                                                              specObj.metas.dotpath
-                                                                  .split('.')
-                                                                  .filter(
-                                                                      (p) => {
-                                                                          if (
-                                                                              last &&
-                                                                              p ===
-                                                                                  last
-                                                                          ) {
-                                                                              return false;
-                                                                          }
-                                                                          last =
-                                                                              p;
-                                                                          return true;
-                                                                      },
-                                                                  )
-                                                                  .join('.');
-                                                          return html`
-                                                              <li
-                                                                  class="_item ${this._$rootDocument.location.href.includes(
-                                                                      checkDotPath,
-                                                                  )
-                                                                      ? 'active'
-                                                                      : ''}"
-                                                                  tabindex="0"
-                                                                  @pointerup=${() =>
-                                                                      this._changePage(
-                                                                          specObj
-                                                                              .metas
-                                                                              .dotpath,
+                                                        >
+                                                            ${this.state.activeNavigationFolders.includes(
+                                                                type,
+                                                            )
+                                                                ? html`
+                                                                      ${unsafeHTML(
+                                                                          this
+                                                                              .props
+                                                                              .icons
+                                                                              .folderOpen,
                                                                       )}
-                                                              >
-                                                                  <div>
-                                                                      ${this
-                                                                          .state
-                                                                          .loadingStack[
-                                                                          specObj
-                                                                              .metas
-                                                                              .dotpath
-                                                                      ]
-                                                                          ? html`
-                                                                                <div
-                                                                                    class="_loader carpenter-loader-blocks"
-                                                                                >
-                                                                                    <div
-                                                                                        class="_block-1"
-                                                                                    ></div>
-                                                                                    <div
-                                                                                        class="_block-2"
-                                                                                    ></div>
-                                                                                    <div
-                                                                                        class="_block-3"
-                                                                                    ></div>
-                                                                                </div>
-                                                                            `
-                                                                          : html`
-                                                                                <i
-                                                                                    class="fa-regular fa-file"
-                                                                                ></i>
-                                                                            `}
-                                                                      <span>
-                                                                          ${specObj.title ??
-                                                                          specObj.name}
-                                                                      </span>
-                                                                  </div>
-                                                              </li>
-                                                          `;
-                                                      })}
-                                                  </ul>
-                                              </li>
-                                          `;
-                                      },
-                                  )}
-                              </ul>
+                                                                  `
+                                                                : html`
+                                                                      ${unsafeHTML(
+                                                                          this
+                                                                              .props
+                                                                              .icons
+                                                                              .folderClose,
+                                                                      )}
+                                                                  `}
+                                                            <span tabindex="0"
+                                                                >${__upperFirst(
+                                                                    type,
+                                                                )}</span
+                                                            >
+                                                        </div>
+                                                        <ul class="s-fs-tree">
+                                                            ${Object.keys(
+                                                                specsObj,
+                                                            ).map((dotpath) => {
+                                                                const specObj =
+                                                                    specsObj[
+                                                                        dotpath
+                                                                    ];
+                                                                let last;
+                                                                const checkDotPath =
+                                                                    specObj.metas.dotpath
+                                                                        .split(
+                                                                            '.',
+                                                                        )
+                                                                        .filter(
+                                                                            (
+                                                                                p,
+                                                                            ) => {
+                                                                                if (
+                                                                                    last &&
+                                                                                    p ===
+                                                                                        last
+                                                                                ) {
+                                                                                    return false;
+                                                                                }
+                                                                                last =
+                                                                                    p;
+                                                                                return true;
+                                                                            },
+                                                                        )
+                                                                        .join(
+                                                                            '.',
+                                                                        );
+                                                                return html`
+                                                                    <li
+                                                                        class="_item ${this._$rootDocument.location.href.includes(
+                                                                            checkDotPath,
+                                                                        )
+                                                                            ? 'active'
+                                                                            : ''}"
+                                                                        tabindex="0"
+                                                                        @pointerup=${() =>
+                                                                            this._changePage(
+                                                                                specObj
+                                                                                    .metas
+                                                                                    .dotpath,
+                                                                            )}
+                                                                    >
+                                                                        <div>
+                                                                            ${this
+                                                                                .state
+                                                                                .loadingStack[
+                                                                                specObj
+                                                                                    .metas
+                                                                                    .dotpath
+                                                                            ]
+                                                                                ? html`
+                                                                                      <div
+                                                                                          class="_loader carpenter-loader-blocks"
+                                                                                      >
+                                                                                          <div
+                                                                                              class="_block-1"
+                                                                                          ></div>
+                                                                                          <div
+                                                                                              class="_block-2"
+                                                                                          ></div>
+                                                                                          <div
+                                                                                              class="_block-3"
+                                                                                          ></div>
+                                                                                      </div>
+                                                                                  `
+                                                                                : html`
+                                                                                      <i
+                                                                                          class="fa-regular fa-file"
+                                                                                      ></i>
+                                                                                  `}
+                                                                            <span>
+                                                                                ${specObj.title ??
+                                                                                specObj.name}
+                                                                            </span>
+                                                                        </div>
+                                                                    </li>
+                                                                `;
+                                                            })}
+                                                        </ul>
+                                                    </li>
+                                                `;
+                                            })}
+                                        </ul>
+                                    `}
                           </div>
                       </nav>
                   `
                 : ''}
 
             <nav
-                class="${this.utils.cls('_editor')} ${this.currentSpecs
+                class="${this.utils.cls('_editor')} ${this._data
                     ? 'active'
                     : ''}"
                 s-carpenter-ui
             >
-                ${this.currentSpecs && !this.state.isLoading
+                ${this._data.specs && !this.state.isLoading
                     ? html`
                           <div class="${this.utils.cls('_editor-wrapper')}">
-                              <s-specs-editor
-                                  media="${this.state.activeMedia}"
-                                  default-media="${this.props.defaultMedia}"
-                                  .specs=${this.currentSpecs}
-                                  .features=${this.props.features}
-                                  .frontspec=${this._data.frontspec ?? {}}
-                                  @s-specs-editor.error=${(e) => {
-                                      this._isSpecsEditorValid = false;
-                                      this.requestUpdate();
-                                  }}
-                                  @s-specs-editor.valid=${(e) => {
-                                      this._isSpecsEditorValid = true;
-                                      this.requestUpdate();
-                                  }}
-                              >
-                              </s-specs-editor>
+                              ${!this._data.specs || !this._data.values
+                                  ? html` <p>Loading...</p> `
+                                  : html`
+                                        <s-specs-editor
+                                            media="${this.state.activeMedia}"
+                                            default-media="${this.props
+                                                .defaultMedia}"
+                                            .source=${this._data.source}
+                                            .specs=${this._data.specs}
+                                            .values=${this._data.values}
+                                            .features=${this.props.features}
+                                            .frontspec=${this.props.frontspec ??
+                                            {}}
+                                            @s-specs-editor.error=${(e) => {
+                                                this._isSpecsEditorValid =
+                                                    false;
+                                                this.requestUpdate();
+                                            }}
+                                            @s-specs-editor.valid=${(e) => {
+                                                this._isSpecsEditorValid = true;
+                                                this.requestUpdate();
+                                            }}
+                                        >
+                                        </s-specs-editor>
+                                    `}
                           </div>
                       `
                     : html`
@@ -1211,7 +1241,7 @@ export default class SCarpenterAppComponent extends __SLitComponent {
                       `}
             </nav>
 
-            ${this._data.frontspec?.media?.queries
+            ${this.props.frontspec?.media?.queries
                 ? html`
                       <nav
                           class="${this.utils.cls('_controls')}"
@@ -1225,7 +1255,7 @@ export default class SCarpenterAppComponent extends __SLitComponent {
                               )}"
                           >
                               ${Object.keys(
-                                  this._data.frontspec?.media?.queries ?? {},
+                                  this.props.frontspec?.media?.queries ?? {},
                               )
                                   .reverse()
                                   .map((query) => {

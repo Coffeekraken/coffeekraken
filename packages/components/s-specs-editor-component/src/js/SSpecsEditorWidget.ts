@@ -1,4 +1,10 @@
-import { __clone, __deepMerge, __get, __set } from '@coffeekraken/sugar/object';
+import {
+    __clone,
+    __deepClean,
+    __deepMerge,
+    __get,
+    __set,
+} from '@coffeekraken/sugar/object';
 import type { ISSpecsEditorComponentRenderLabelSettings } from './SSpecsEditorComponent';
 import __SSpecsEditorComponent from './SSpecsEditorComponent';
 
@@ -6,6 +12,14 @@ import { html } from 'lit';
 
 export interface ISSpeceEditorWidgetStatus {
     pristine: boolean;
+}
+
+export interface ISSpecsEditorWidgetInlineLabel {
+    label: string;
+    description?: string;
+    value?: string;
+    placeholder?: string;
+    onChange?: Function;
 }
 
 export interface ISSpecsEditorWidgetSetValueSettings {
@@ -29,6 +43,7 @@ export interface ISSpecsEditorWidgetDeps {
     editor: __SSpecsEditorComponent;
     path: string[];
     values: any;
+    source: any;
     propObj: any;
     settings: ISSpecsEditorWidgetSettings;
 }
@@ -43,6 +58,9 @@ export default class SSpecsEditorWidget {
         pristine: true,
     };
 
+    _overrided;
+
+    _source: any;
     _values: any;
     _errors: string[] = [];
     _warnings: string[] = [];
@@ -51,37 +69,31 @@ export default class SSpecsEditorWidget {
         deps: ISSpecsEditorWidgetDeps,
         settings?: ISSpecsEditorWidgetSettings,
     ) {
-        this.editor = deps.editor;
-        this.propObj = deps.propObj;
-        this.path = deps.path;
-        this.valuePath = this.path.filter((l) => l !== 'props');
-        this._values = deps.values;
-
         this.settings = {
             label: true,
             ...(deps.settings ?? {}),
         };
 
-        // if (this._values === undefined) {
-        //     if (this.propObj.type?.match(/\[\]$/)) {
-        //         this._values = [];
-        //     } else {
-        //         this._values = {};
-        //     }
-        // }
+        this.editor = deps.editor;
+        this.propObj = deps.propObj;
+        this.path = deps.path;
+        this.valuePath = this.path.filter((l) => l !== 'props');
+        this._source = __deepClean(deps.source ?? {});
+        this._values = __deepClean(deps.values ?? {});
+
+        // merge the values and the source together
+        this._values = __deepMerge(this._source, this._values);
     }
 
     get values(): any {
         if (this.isResponsive()) {
-            if (!this._values.media) {
-                this._values.media = {};
-            }
-            if (!this._values.media[this.editor.props.media]) {
-                this._values.media[this.editor.props.media] = {};
-            }
-            return this._values.media[this.editor.props.media];
+            return this._values.media?.[this.editor.props.media] ?? {};
         }
-        return this._values;
+        return this._values ?? {};
+    }
+
+    get noneResponsiveValue(): any {
+        return this._values ?? {};
     }
 
     resetValue(value: any): void {
@@ -90,11 +102,35 @@ export default class SSpecsEditorWidget {
         });
     }
 
+    mergeValue(
+        value: any,
+        settings?: ISSpecsEditorWidgetSetValueSettings,
+    ): void {
+        this.setValue(value, {
+            ...(settings ?? {}),
+            merge: true,
+        });
+    }
+
+    override(): void {
+        this._overrided = true;
+    }
+
+    canBeOverride(): boolean {
+        if (this._overrided) {
+            return false;
+        }
+        if (!this._source) {
+            return false;
+        }
+        return JSON.stringify(this._values) === JSON.stringify(this._source);
+    }
+
     setValue(value: any, settings?: ISSpecsEditorWidgetSetValueSettings): void {
         const finalSettings: ISSpecsEditorWidgetSetValueSettings = {
             media: null,
             path: '.',
-            merge: true,
+            merge: false,
             validate: true,
             ...(settings ?? {}),
         };
@@ -131,7 +167,7 @@ export default class SSpecsEditorWidget {
         // if no error, set the new value
         if (!validateResult.error) {
             let path = finalSettings.path;
-            if (this.isResponsive()) {
+            if (this.isResponsive() && !finalSettings.noneResponsive) {
                 path =
                     `media.${this.editor.props.media}.${finalSettings.path}`.replace(
                         /\.{2}/gm,
@@ -139,9 +175,13 @@ export default class SSpecsEditorWidget {
                     );
             }
 
+            // set the new value(s)
             __set(this._values, path, newValues, {
                 preferAssign: true,
             });
+
+            // clean the values
+            __deepClean(this._values);
 
             // apply the changes in the editor
             this.editor.apply();
@@ -186,6 +226,22 @@ export default class SSpecsEditorWidget {
         >
             ${this.editor.renderLabel(this.propObj, this.path, settings)}
         </label>`;
+    }
+
+    renderInlineInput(settings: ISSpecsEditorWidgetInlineLabel): any {
+        return html`
+            <label class="_alt inline-input">
+                <div class="_label">${settings.label}</div>
+                <input
+                    class="_input"
+                    type="text"
+                    name="alt"
+                    placeholder="${settings.placeholder}"
+                    value="${settings.value}"
+                    @change=${settings.onChange ?? function () {}}
+                />
+            </label>
+        `;
     }
 
     validate(values: any): ISSpecsEditorWidgetValidateResult {

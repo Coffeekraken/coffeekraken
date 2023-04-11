@@ -6,6 +6,6 @@
     }
 
     &:has(> div) {
-        padding-block: sugar.padding(30);
+        padding-block: var(--s-specs-editor-padding-block);
     }
 }

@@ -60,8 +60,8 @@ export default class SCarpenterComponentInterface extends __SInterface {
                     'Specify if you want the editor to automatically open the first editable found in the HTML',
                 default: false,
             },
-            specs: {
-                type: 'String',
+            data: {
+                type: 'String|Object',
                 description:
                     'Specify a url from where to get the carpenter data back, directly the JSON data or a simple id pointing to a HTMLTemplate tag that host the JSON data',
                 default: '/carpenter.json',
@@ -97,6 +97,12 @@ export default class SCarpenterComponentInterface extends __SInterface {
                     nav: true,
                     media: true,
                 },
+            },
+            frontspec: {
+                type: 'Object',
+                title: 'Frontspec',
+                description: 'Specify a custom frontspec object',
+                default: __SFrontspec.get('.'),
             },
             defaultMedia: {
                 type: 'String',

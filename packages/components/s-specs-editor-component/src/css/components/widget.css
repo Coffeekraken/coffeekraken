@@ -1,0 +1,20 @@
+.s-specs-editor_widget {
+    position: relative;
+
+    ._override {
+        position: absolute;
+        top: calc(var(--s-specs-editor-padding-block) * -1);
+        bottom: calc(var(--s-specs-editor-padding-block) * -1);
+        left: calc(var(--s-specs-editor-padding-inline) * -1);
+        right: calc(var(--s-specs-editor-padding-inline) * -1);
+        background: sugar.color(main, surface, --alpha 0.7);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    ._override-btn {
+        @sugar.ui.button();
+        @sugar.color (accent);
+    }
+}

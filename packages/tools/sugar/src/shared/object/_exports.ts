@@ -3,6 +3,7 @@ import __camelCaseProps from './camelCaseProps';
 import __clone from './clone';
 import __decycle from './decycle';
 import __deepAssign from './deepAssign';
+import __deepClean from './deepClean';
 import __deepize from './deepize';
 import __deepMap from './deepMap';
 import __deepMerge from './deepMerge';
@@ -35,6 +36,7 @@ export {
     __clone,
     __decycle,
     __deepAssign,
+    __deepClean,
     __deepize,
     __deepMap,
     __deepMerge,

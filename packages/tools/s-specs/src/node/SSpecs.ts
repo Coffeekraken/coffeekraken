@@ -165,42 +165,6 @@ export default class SSpecs extends __SClass {
     }
 
     /**
-     * @name            applyValuesToSpecs
-     * @type            Function
-     * @status          beta
-     * @static
-     *
-     * This method allows you to apply an object of value directly on a specs object.
-     * It will apply each values to the "value" property of each props
-     *
-     * @param       {SInterface}        int             The SInterface class you want to use for your spec object
-     * @return      {Any}                               The requested spec object
-     *
-     * @since       2.0.0
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-     */
-    static applyValuesToSpecs(values: any = {}, specs: any): any {
-        specs.values = values;
-
-        // __deepMap(values, ({ object, prop, value, path }) => {
-        //     // const valuePath = path
-        //     //     .replace(/\.props/gm, '')
-        //     //     .split('.')
-        //     //     .slice(0, -1)
-        //     //     .join('.');
-
-        //     console.log(path);
-
-        //     // const v = __get(values, valuePath);
-        //     // if (v !== undefined && !object.props) {
-        //     //     object.value = v;
-        //     // }
-        //     return value;
-        // });
-        return specs;
-    }
-
-    /**
      * @name        constructor
      * @type        Function
      *

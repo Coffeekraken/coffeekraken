@@ -62,7 +62,8 @@
     }
 }
 
-.s-carpenter-app_editor.scrolled .s-specs-editor_metas {
+.s-carpenter-app_editor.scrolled .s-specs-editor_metas-heading,
+.s-carpenter-app_editor.scrolled .s-specs-editor_metas-source {
     padding-block: sugar.padding(20);
     padding-inline: sugar.padding(30);
 

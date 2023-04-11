@@ -34,7 +34,7 @@ export default class SCarpenterComponentInterface extends __SInterface {
             description: string;
             default: boolean;
         };
-        specs: {
+        data: {
             type: string;
             description: string;
             default: string;
@@ -66,6 +66,12 @@ export default class SCarpenterComponentInterface extends __SInterface {
                 nav: boolean;
                 media: boolean;
             };
+        };
+        frontspec: {
+            type: string;
+            title: string;
+            description: string;
+            default: Any;
         };
         defaultMedia: {
             type: string;

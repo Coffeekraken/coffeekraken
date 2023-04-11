@@ -1,4 +1,5 @@
 import __SBench from '@coffeekraken/s-bench';
+import __SDataFileGeneric from '@coffeekraken/s-data-file-generic';
 import __SSpecs from '@coffeekraken/s-specs';
 import __SViewRenderer from '@coffeekraken/s-view-renderer';
 import { __serverObjectFromExpressRequest } from '@coffeekraken/sugar/php';
@@ -24,15 +25,30 @@ export default async function carpenterViewHandler({
 
     let viewPath =
             currentSpecs.viewPath ?? req.params.dotpath.replace(/^views\./, ''),
-        viewData = currentSpecs.metas.path; // path to the data file
+        viewData = {
+            $specs: currentSpecs,
+            $source: {},
+            values: {},
+        };
 
     // if the method is "POST",
     // meaning that it's a component update
     // with some component data passed.
     // we use these instead of the default ones
     if (req.method === 'POST' && req.body) {
-        viewData = req.body;
+        viewData.values = req.body;
+    } else {
+        // load the actual view values
+        viewData.values = await __SDataFileGeneric.load(
+            currentSpecs.metas.path,
+        );
     }
+
+    // load the "...Source.data.js" data file to simulate a source
+    // in the editor
+    viewData.$source = await __SDataFileGeneric.load(
+        currentSpecs.metas.path.replace('.spec.json', 'Source.json'),
+    );
 
     // render the current component/section, etc...
     const renderer = new __SViewRenderer({

@@ -20,8 +20,6 @@ export default class SSpecs extends __SClass {
     
     static fromInterface(int: __SInterface, settings?: Partial<ISSpecsSettings>): any;
     
-    static applyValuesToSpecs(values: any, specs: any): any;
-    
     constructor(settings?: Partial<ISSpecsSettings>);
     
     read(specDotPath: string, settings?: Partial<ISSpecsReadSettings>): any;

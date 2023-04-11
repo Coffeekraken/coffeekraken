@@ -1,9 +1,7 @@
 import { __unescapeHtml } from '@coffeekraken/sugar/html';
 
 export default {
-    async load({ dotpath, props, component }): Promise<HTMLElement> {
-        console.log('LOA', dotpath, props, component.props);
-
+    async load({ dotpath, values, component }): Promise<HTMLElement> {
         const rawResponse = await fetch(
             component.props.pagesLink.replace('%dotpath', dotpath),
             {
@@ -12,7 +10,7 @@ export default {
                     Accept: 'application/json',
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify(props),
+                body: JSON.stringify(values),
             },
         );
 
@@ -24,15 +22,13 @@ export default {
         return $newComponent;
     },
 
-    async change({ dotpath, props, component, $elm }): Promise<HTMLElement> {
+    async change({ dotpath, values, component, $elm }): Promise<HTMLElement> {
         // load the new component
         const $newComponent = await this.load({
             dotpath,
-            props,
+            values,
             component,
         });
-
-        _console.log('new', $newComponent, $elm);
 
         // @ts-ignore
         if ($elm) {
@@ -47,35 +43,35 @@ export default {
         return $newComponent;
     },
 
-    async getProps({ $elm }): Promise<any> {
-        let raw = $elm.getAttribute('s-specs-values');
-        let props;
+    async getData({ $elm }): Promise<any> {
+        let raw = $elm.getAttribute('s-specs-data');
+        let data;
 
         // try json
         if (raw) {
             try {
-                props = JSON.parse(raw);
+                data = JSON.parse(raw);
             } catch (e) {}
         }
 
         // ajax call
-        if (!props && raw?.match(/^(https?\:\/\/|\/)/)) {
+        if (!data && raw?.match(/^(https?\:\/\/|\/)/)) {
             const rawResponse = await fetch(raw, {
                 method: 'GET',
             });
-            props = await rawResponse.json();
+            data = await rawResponse.json();
         }
 
         // template in the dom
-        if (!props) {
+        if (!data) {
             for (let i = 0; i < $elm.children.length; i++) {
                 const $child = $elm.children[i];
                 if (
                     $child.tagName === 'TEMPLATE' &&
-                    $child.hasAttribute('s-specs-values')
+                    $child.hasAttribute('s-specs-data')
                 ) {
                     try {
-                        props = JSON.parse(__unescapeHtml($child.innerHTML));
+                        data = JSON.parse(__unescapeHtml($child.innerHTML));
                     } catch (e) {
                         console.log($child.innerHTML);
                         console.error(e.message);
@@ -85,14 +81,19 @@ export default {
             }
         }
 
-        return props;
+        return data;
     },
 
-    async setProps({ $elm, props, component }): Promise<HTMLElement> {
+    async setValues({
+        $elm,
+        values,
+        dotpath,
+        component,
+    }): Promise<HTMLElement> {
         // load the new component
         const $newComponent = await this.load({
-            dotpath: component.currentSpecs.metas.dotpath,
-            props,
+            dotpath,
+            values,
             component,
         });
 

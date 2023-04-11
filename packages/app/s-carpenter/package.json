@@ -19,6 +19,7 @@
         "@coffeekraken/s-log": "^2.0.0-alpha.27",
         "@coffeekraken/s-postcss-builder": "^2.0.0-alpha.27",
         "@coffeekraken/s-promise": "^2.0.0-alpha.27",
+        "@coffeekraken/s-data-file-generic": "^2.0.0-alpha.27",
         "@coffeekraken/s-specs": "^2.0.0-alpha.27",
         "@coffeekraken/s-specs-editor-component": "^2.0.0-alpha.27",
         "@coffeekraken/s-sugar-config": "^2.0.0-alpha.27",

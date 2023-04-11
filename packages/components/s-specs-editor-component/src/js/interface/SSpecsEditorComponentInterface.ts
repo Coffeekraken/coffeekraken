@@ -29,12 +29,23 @@ export default class SSpecsEditorComponentInterface extends __SInterface {
                 description:
                     'Specify an id for your specs editor to be able to save his state',
             },
+            values: {
+                type: 'Object',
+                title: 'Values',
+                description: 'Values that match with the passed specs',
+                required: true,
+            },
             specs: {
                 type: 'Object',
                 title: 'Specs',
                 description:
                     'Specify the SSpecs resulting json to use for the editor',
                 required: true,
+            },
+            source: {
+                type: 'Object',
+                description:
+                    'Specify a source that will act as a "master". You will be then able to override some values of this master using the normal editor. This is useful when you just want to specify some values to override and not all of them.',
             },
             frontspec: {
                 type: 'Object',

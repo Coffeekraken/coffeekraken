@@ -7,11 +7,21 @@ export default class SSpecsEditorComponentInterface extends __SInterface {
             title: string;
             description: string;
         };
+        values: {
+            type: string;
+            title: string;
+            description: string;
+            required: boolean;
+        };
         specs: {
             type: string;
             title: string;
             description: string;
             required: boolean;
+        };
+        source: {
+            type: string;
+            description: string;
         };
         frontspec: {
             type: string;

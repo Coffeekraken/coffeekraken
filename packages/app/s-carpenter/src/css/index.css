@@ -25,6 +25,7 @@
 @sugar.ui.datetimePicker.classes();
 @sugar.ui.colorPicker.classes();
 @sugar.ui.input.classes();
+@sugar.ui.inputContainer.classes();
 @sugar.ui.checkbox.classes();
 @sugar.ui.button.classes();
 @sugar.ui.tabs.classes();

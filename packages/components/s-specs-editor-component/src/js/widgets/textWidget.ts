@@ -8,17 +8,12 @@ import __SSpecsEditorWidget from '../SSpecsEditorWidget';
 export default class SSpecsEditorComponentTextWidget extends __SSpecsEditorWidget {
     constructor(deps: ISSpecsEditorWidgetDeps) {
         super(deps);
-
-        _console.log('RRR', this.values);
-
         if (!this.values.value) {
             this.values.value = this.propObj.default;
         }
     }
 
     validate(newValues) {
-        _console.log('validate', newValues);
-
         if (this.propObj.required && !newValues?.value) {
             return {
                 error: __i18n(`This property is required`, {

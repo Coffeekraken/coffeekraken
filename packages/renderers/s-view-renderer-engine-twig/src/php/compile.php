@@ -5,7 +5,7 @@ $nodeModulesVendorsPath = realpath(__DIR__ . '/../../../../../autoload.php');
 require_once $nodeModulesVendorsPath;
 
 // set some environment variables
-$_ENV['S_SPECS_VALUES'] = true;
+$_ENV['S_SPECS_DATA'] = true;
 $_ENV['ENV'] = 'development';
 
 $params = [];

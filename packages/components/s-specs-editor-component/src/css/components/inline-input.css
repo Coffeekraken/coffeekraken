@@ -1,0 +1,16 @@
+.inline-input {
+    display: flex;
+    margin-block-start: sugar.margin(30);
+
+    ._label {
+        width: 33%;
+        white-space: nowrap;
+        text-elipsis: elipsis;
+        padding: sugar.padding(20);
+        opacity: 0.5;
+    }
+
+    ._input {
+        @sugar.ui.input();
+    }
+}

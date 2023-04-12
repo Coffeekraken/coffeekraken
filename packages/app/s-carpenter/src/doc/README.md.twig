@@ -99,7 +99,12 @@ export default {
             description: 'Card text',
             required: true
         },
-        image: '@sugar.views.props.image', // make use of pre-written specs from the @coffeekraken/sugar package
+        "image": {
+            "type": "Image",
+            "title": "Image",
+            "description": "Card image",
+            "required": true
+        }
         cta: '@sugar.views.components.cta'
     }
 }

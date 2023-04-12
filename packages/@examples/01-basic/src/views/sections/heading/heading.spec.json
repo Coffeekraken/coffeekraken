@@ -15,7 +15,12 @@
             "description": "Heading title",
             "required": true
         },
-        "image": "@sugar.views.props.image",
+        "image": {
+            "type": "Image",
+            "title": "Image",
+            "description": "Heading image",
+            "required": true
+        },
         "cta": {
             "extends": "sugar.views.components.cta",
             "title": "Heading Cta",

@@ -24,7 +24,7 @@ import __unquote from '../string/unquote';
  * @todo      tests
  *
  * @snippet         __get($1, $2)
- * 
+ *
  * @example             js
  * import { __get } from '@coffeekraken/sugar/object';
  * __get(myObject, 'my.cool.value'); // => 'Hello world'
@@ -99,6 +99,10 @@ function __get(obj, path, settings = {}) {
             return;
         }
         o = o[n];
+    }
+
+    if (path.includes('images')) {
+        _console.log('GET', path, o);
     }
 
     return o;

@@ -7,15 +7,28 @@ import type { ISSpecsEditorWidgetDeps } from '../SSpecsEditorWidget';
 import __SSpecsEditorWidget from '../SSpecsEditorWidget';
 
 export default class SSpecsEditorComponentSelectWidget extends __SSpecsEditorWidget {
+    _select: __SSelect;
+
     constructor(deps: ISSpecsEditorWidgetDeps) {
         super(deps);
         if (!this.values?.value) {
             this.values.value = [];
         }
+
+        this._select = new __SSelect(this.propObj, this.values);
     }
 
     validate(newValues) {
         const itemsCount = newValues.value.length;
+
+        // required
+        if (this.propObj.required && this._select.isEmpty()) {
+            return {
+                error: __i18n(`This property is required`, {
+                    id: 's-specs-editor.widget.required',
+                }),
+            };
+        }
 
         // min
         if (
@@ -51,8 +64,6 @@ export default class SSpecsEditorComponentSelectWidget extends __SSpecsEditorWid
     }
 
     render() {
-        const select = new __SSelect(this.propObj, this.values);
-
         return html`
             <div class="${this.editor.utils.cls('_select-widget')}">
                 ${this.renderLabel()}
@@ -69,9 +80,9 @@ export default class SSpecsEditorComponentSelectWidget extends __SSpecsEditorWid
                                     continue;
                                 }
                                 if ($option.selected) {
-                                    select.select(option.id);
+                                    this._select.select(option.id);
                                 } else {
-                                    select.unselect(option.id);
+                                    this._select.unselect(option.id);
                                 }
                             }
                         }
@@ -80,17 +91,36 @@ export default class SSpecsEditorComponentSelectWidget extends __SSpecsEditorWid
                         this.setValue(this.values);
                     }}
                     name="${this.path.at(-1)}"
-                    class="${this.editor.utils.cls('_select', 's-select')}"
+                    class="${this.editor.utils.cls(
+                        '_select',
+                        's-select',
+                    )} ${!this.propObj.required &&
+                    this._select.isEmpty() &&
+                    this.propObj.placeholder
+                        ? 'placeholder'
+                        : ''}"
                     ?multiple=${this.propObj.multiple}
                     placeholder="${this.propObj.placeholder}"
                     path="${this.path.join('.')}"
+                    ?required=${this.propObj.required}
                 >
+                    ${this.propObj.placeholder
+                        ? html`
+                              <option
+                                  value=""
+                                  disabled
+                                  ?selected=${this._select.isEmpty()}
+                              >
+                                  ${this.propObj.placeholder}
+                              </option>
+                          `
+                        : ''}
                     ${this.propObj.options.map(
                         (option, i) => html`
                             <option
                                 id="${option.id ?? `option-${i}`}"
-                                ?selected=${select.isSelected(option.id)}
-                                .selected=${select.isSelected(option.id)}
+                                ?selected=${this._select.isSelected(option.id)}
+                                .selected=${this._select.isSelected(option.id)}
                             >
                                 ${option.name}
                             </option>

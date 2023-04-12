@@ -3,6 +3,6 @@
 
 .s-specs-editor {
     --s-specs-editor-padding-inline: sugar.padding(40);
-    --s-specs-editor-padding-block: sugar.padding(30);
+    --s-specs-editor-padding-block: sugar.padding(40);
     user-select: none;
 }

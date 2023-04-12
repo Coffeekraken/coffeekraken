@@ -32,9 +32,7 @@
             "type": "Select",
             "title": "Select",
             "description": "My cool select",
-            "default": {
-                "id": "value-3"
-            },
+            "placeholder": "Choose something...",
             "multiple": false,
             "options": [
                 {
@@ -59,11 +57,6 @@
             "type": "Checkbox",
             "title": "Checkboxed",
             "description": "A nice checkbox",
-            "default": {
-                "id": "value-2",
-                "name": "Option #2",
-                "value": "value 2"
-            },
             "min": 1,
             "max": 2,
             "options": [
@@ -83,15 +76,13 @@
         "boolean": {
             "type": "Boolean",
             "title": "Bool",
-            "description": "A nice boolean",
-            "required": true
+            "description": "A nice boolean"
         },
         "switch": {
             "type": "Switch",
             "title": "Switch",
             "description": "A nice switch",
-            "default": true,
-            "required": true
+            "default": true
         },
         "color": {
             "type": "Color",
@@ -126,8 +117,9 @@
         "image": {
             "responsive": true,
             "type": "Image",
-            "title": "Simple image",
-            "description": "Simple image",
+            "title": "Image",
+            "alt": true,
+            "description": "Image file",
             "required": true
         },
         "images": {
@@ -149,6 +141,11 @@
             "description": "Simple wysiwyg",
             "required": true,
             "frontspec": true
+        },
+        "cta": {
+            "extends": "sugar.views.components.cta",
+            "title": "Heading Cta",
+            "required": true
         },
         "spaces": {
             "extends": "sugar.views.props.spaces"

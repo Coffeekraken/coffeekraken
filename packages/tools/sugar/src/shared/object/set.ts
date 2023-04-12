@@ -91,7 +91,9 @@ export default function __set(
     }
 
     if (typeof a[0] === 'string' && a[0].match(/^\[[0-9]+\]$/)) {
-        if (!Array.isArray(o)) o = [];
+        if (!Array.isArray(o)) {
+            o = [];
+        }
         o.push(value);
     } else {
         if (

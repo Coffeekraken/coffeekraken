@@ -1,16 +1,33 @@
 .s-specs-editor_widget {
     position: relative;
+    @sugar.transition fast;
+
+    &:has(._override) {
+        /* padding-block: var(--s-specs-editor-padding-block); */
+    }
 
     ._override {
         position: absolute;
+        z-index: 100;
         top: calc(var(--s-specs-editor-padding-block) * -1);
         bottom: calc(var(--s-specs-editor-padding-block) * -1);
         left: calc(var(--s-specs-editor-padding-inline) * -1);
         right: calc(var(--s-specs-editor-padding-inline) * -1);
+        padding-inline: var(--s-specs-editor-padding-inline);
         background: sugar.color(main, surface, --alpha 0.7);
+
+        border-top: 1px solid sugar.color(main, --alpha 0.05);
+        border-bottom: 1px solid sugar.color(main, --alpha 0.05);
+
+        /* background-image: linear-gradient(
+            -90deg,
+            sugar.color(accent, --desaturate 60% --alpha 0.02),
+            sugar.color(accent, --desaturate 60% --alpha 0.01)
+        ); */
+
         display: flex;
         align-items: center;
-        justify-content: center;
+        justify-content: end;
     }
 
     ._override-btn {

@@ -223,6 +223,8 @@ export default class SSpecsEditorComponent extends __SLitComponent {
     _widgets = {};
     _values;
 
+    _toggleStack: string[] = [];
+
     constructor() {
         super(
             __deepMerge({
@@ -239,6 +241,7 @@ export default class SSpecsEditorComponent extends __SLitComponent {
         for (let [key, propObj] of Object.entries(this.props.specs.props)) {
             if (this._values[key] === undefined) {
                 if (propObj.type?.match(/\[\]$/)) {
+                    _console.log('ddd', key);
                     this._values[key] = [];
                 } else {
                     this._values[key] = {};
@@ -283,7 +286,7 @@ export default class SSpecsEditorComponent extends __SLitComponent {
 
         let hasErrors = false;
         for (let [dotpath, widget] of Object.entries(this._widgets)) {
-            if (widget.hasErrors()) {
+            if (widget.hasErrors() && !widget.canBeOverride()) {
                 hasErrors = true;
             }
         }
@@ -364,19 +367,20 @@ export default class SSpecsEditorComponent extends __SLitComponent {
         //     _console.log('AAA', path, valuePath, finalSettings);
         // }
 
-        if (this.isPathRepeatable(path)) {
-            value = __get(this._values, valuePath);
-            if (value === undefined && finalSettings.default) {
-                value = __set(this._values, valuePath, finalSettings.default);
-            }
-            return value;
-        }
-
-        // if (path.includes('images')) {
-        //     _console.log('value path', path, valuePath);
+        // if (this.isPathRepeatable(path)) {
+        //     value = __get(this._values, valuePath);
+        //     if (value === undefined && finalSettings.default) {
+        //         value = __set(this._values, valuePath, finalSettings.default);
+        //     }
+        //     return value;
         // }
 
         value = __get(this._values, valuePath);
+
+        if (path.includes('images')) {
+            _console.log('value path', path, valuePath, value, this._values);
+        }
+
         if (value === undefined && finalSettings.default) {
             value = __set(this._values, valuePath, finalSettings.default);
         }
@@ -400,12 +404,23 @@ export default class SSpecsEditorComponent extends __SLitComponent {
             return;
         }
 
+        const isRepeatable =
+            !propObj.repeatable || propObj.type?.match(/\[\]$/) !== null;
+
         const finalSettings = {
-            label: !propObj.repeatable || propObj.type?.match(/\[\]$/) !== null,
+            label: isRepeatable,
             ...(settings ?? {}),
         };
+        // if (isRepeatable) {
+        //     finalSettings.default = [];
+        // }
 
         const values = __get(this._values, dotPath);
+
+        if (path.includes('images')) {
+            _console.log('widget', values);
+        }
+
         this._widgets[dotPath] = new SSpecsEditorComponent.widgetMap[type]({
             editor: this,
             values,
@@ -482,10 +497,11 @@ export default class SSpecsEditorComponent extends __SLitComponent {
      * Add an item in a repeatable one
      */
     _addItem(stack, specs, path) {
-        _console.log('add', stack, specs, path);
         switch (specs.type.toLowerCase()) {
             default:
-                stack.push({});
+                stack.push({
+                    coco: 'plop',
+                });
                 break;
         }
 
@@ -543,7 +559,10 @@ export default class SSpecsEditorComponent extends __SLitComponent {
                                     : ''} s-tooltip-container"
                             >
                                 <span
-                                    @pointerup=${() => this._changeMedia(media)}
+                                    @pointerup=${(e) => {
+                                        e.stopPropagation();
+                                        this._changeMedia(media);
+                                    }}
                                 >
                                     ${unsafeHTML(this.props.icons[media])}
                                 </span>
@@ -700,7 +719,7 @@ export default class SSpecsEditorComponent extends __SLitComponent {
                                             this.requestUpdate();
                                         }}
                                     >
-                                        ${__i18n('Override %s', {
+                                        ${__i18n('Override', {
                                             id: 's-specs-editor.override.button',
                                             tokens: {
                                                 s: __lowerFirst(propObj.title),
@@ -712,7 +731,7 @@ export default class SSpecsEditorComponent extends __SLitComponent {
                           : ''}
                   </div>`
                 : ''}
-            ${widget?.hasErrors()
+            ${widget?.hasErrors() && !widget.canBeOverride()
                 ? this.renderError(propObj, path, widget.lastError)
                 : ''}
             ${widget?.hasWarnings()
@@ -729,11 +748,14 @@ export default class SSpecsEditorComponent extends __SLitComponent {
             return this._renderRepeatableProps(propObj, path);
         }
 
+        if (typeLower === 'object' && propObj.props) {
+            return this.renderProps(propObj, path, settings);
+        }
+
         // _console.log('p', path, propObj.responsive);
 
         return html`
             <div
-                prop="${propObj.id}"
                 class="${this.utils.cls('_prop')} ${this.utils.cls(
                     `_prop-${typeLower}`,
                 )}"
@@ -743,11 +765,39 @@ export default class SSpecsEditorComponent extends __SLitComponent {
         `;
     }
 
+    moveElement(arr, fromIndex, toIndex) {
+        const element = arr.splice(fromIndex, 1)[0];
+
+        console.log(element);
+
+        arr.splice(toIndex, 0, element);
+
+        return arr;
+    }
+
     _renderRepeatableProps(propObj, path) {
-        const loopOn = this.getValue(path, {
+        let loopOn = this.getValue(path, {
             default: [],
             noneResponsive: true,
         });
+
+        let dropIndex;
+
+        const reorder = (item, index) => {
+            return;
+
+            const oldIndex = loopOn.indexOf(item);
+
+            propObj._loopOn = this.moveElement(loopOn, oldIndex, index);
+            loopOn = propObj._loopOn;
+
+            _console.log('LOO', loopOn);
+
+            _console.log('reortder', item, 'from', oldIndex, 'to', index);
+
+            // loopOn.splice(index, 0, loopOn.splice(oldIndex, 1)[0]);
+            this.requestUpdate();
+        };
 
         return html`
             <div class="${this.utils.cls('_repeatable')}">
@@ -761,76 +811,159 @@ export default class SSpecsEditorComponent extends __SLitComponent {
                     ${this.renderLabel(propObj, path)}
                 </label>
 
-                ${loopOn.map(
-                    (v, i) => html`
-                        <div
-                            tabindex="0"
-                            @pointerup=${(e) => {
-                                this._toggle(`${path.join('.')}-${i}`);
-                            }}
-                            class="${this.utils.cls(
-                                '_repeatable-title',
-                            )} ${this._isActive(`${path.join('.')}-${i}`)
-                                ? 'active'
-                                : ''}"
-                        >
-                            <span>
-                                ${v.title ??
-                                v.name ??
-                                v.id ??
-                                `${propObj.title} #${i}`}
-                            </span>
+                ${loopOn.length
+                    ? html`
+                          ${loopOn.map((v, i) => {
+                              return html`
+                                  <div
+                                      class="${this.utils.cls(
+                                          '_repeatable-item',
+                                      )}"
+                                      draggable="true"
+                                      @drag=${(e) => {
+                                          e.target.parentNode.classList.add(
+                                              'sort',
+                                          );
+                                          e.target.classList.add('sorting');
+                                      }}
+                                      @dragend=${(e) => {
+                                          e.target.parentNode.classList.remove(
+                                              'sort',
+                                          );
+                                          e.target.classList.remove('sorting');
 
-                            <button
-                                confirm="Confirm!"
-                                @pointerup=${(e) => {
-                                    e.preventDefault();
-                                    e.stopPropagation();
-                                    if (e.currentTarget.needConfirmation)
-                                        return;
-                                    this._removeItem(loopOn, v, propObj);
-                                }}
-                                class="_remove"
-                            >
-                                <i class="fa-regular fa-trash-can"></i>
-                            </button>
+                                          reorder(v, dropIndex);
+                                      }}
+                                  >
+                                      <div
+                                          tabindex="0"
+                                          @pointerup=${(e) => {
+                                              this._toggle(
+                                                  `${path.join('.')}-${i}`,
+                                              );
+                                          }}
+                                          class="${this.utils.cls(
+                                              '_repeatable-title',
+                                          )} ${this._isActive(
+                                              `${path.join('.')}-${i}`,
+                                          )
+                                              ? 'active'
+                                              : ''}"
+                                      >
+                                          ${this._isActive(
+                                              `${path.join('.')}-${i}`,
+                                          )
+                                              ? html`
+                                                    ${unsafeHTML(
+                                                        this.props.icons.down,
+                                                    )}
+                                                `
+                                              : html`
+                                                    ${unsafeHTML(
+                                                        this.props.icons.right,
+                                                    )}
+                                                `}
 
-                            ${this._isActive(`${path.join('.')}-${i}`)
-                                ? html`
-                                      ${unsafeHTML(this.props.icons.collapse)}
-                                  `
-                                : html`
-                                      ${unsafeHTML(this.props.icons.expand)}
-                                  `}
-                        </div>
-                        <div
-                            tabindex="0"
-                            class="${this.utils.cls(
-                                '_repeatable-item',
-                            )} ${this._isActive(`${path.join('.')}-${i}`)
-                                ? 'active'
-                                : ''}"
-                        >
-                            <div
-                                class="${this.utils.cls(
-                                    '_repeatable-item-props',
-                                )}"
-                            >
-                                ${this.renderProps(
-                                    {
-                                        ...propObj,
-                                        repeatable: true,
-                                        type: propObj.type.replace(/\[\]$/, ''),
-                                    },
-                                    [...path, i],
-                                    {
-                                        repeatable: false,
-                                    },
-                                )}
-                            </div>
-                        </div>
-                    `,
-                )}
+                                          <span>
+                                              ${v.title ??
+                                              v.name ??
+                                              v.id ??
+                                              `${propObj.title} #${i}`}
+                                          </span>
+
+                                          <button
+                                              confirm="Confirm!"
+                                              @pointerup=${(e) => {
+                                                  e.preventDefault();
+                                                  e.stopPropagation();
+                                                  if (
+                                                      e.currentTarget
+                                                          .needConfirmation
+                                                  )
+                                                      return;
+                                                  this._removeItem(
+                                                      loopOn,
+                                                      v,
+                                                      propObj,
+                                                  );
+                                              }}
+                                              class="_remove"
+                                          >
+                                              <i
+                                                  class="fa-regular fa-trash-can"
+                                              ></i>
+                                          </button>
+                                          <button class="_reorder">
+                                              ${unsafeHTML(
+                                                  this.props.icons.reorder,
+                                              )}
+                                          </button>
+                                      </div>
+                                      <div
+                                          tabindex="0"
+                                          class="${this.utils.cls(
+                                              '_repeatable-body',
+                                          )} ${this._isActive(
+                                              `${path.join('.')}-${i}`,
+                                          )
+                                              ? 'active'
+                                              : ''}"
+                                      >
+                                          <div
+                                              class="${this.utils.cls(
+                                                  '_repeatable-item-props',
+                                              )}"
+                                          >
+                                              ${this.renderProps(
+                                                  {
+                                                      ...propObj,
+                                                      repeatable: true,
+                                                      type: propObj.type.replace(
+                                                          /\[\]$/,
+                                                          '',
+                                                      ),
+                                                  },
+                                                  [...path, i],
+                                                  {
+                                                      repeatable: false,
+                                                  },
+                                              )}
+                                          </div>
+                                      </div>
+                                  </div>
+                                  <div
+                                      @dragleave=${(e) => {
+                                          const $target = e.currentTarget;
+                                          $target.classList.remove('sort-over');
+                                          //   setTimeout(() => {
+                                          //       dropIndex = undefined;
+                                          //   }, 2000);
+                                      }}
+                                      @dragover=${(e) => {
+                                          const $target = e.currentTarget;
+                                          $target.classList.add('sort-over');
+                                          dropIndex = i;
+                                      }}
+                                      class="${this.utils.cls(
+                                          '_repeatable-drop',
+                                      )}"
+                                  ></div>
+                              `;
+                          })}
+                      `
+                    : html`
+                          <div class="${this.utils.cls('_repeatable-empty')}">
+                              ${unsafeHTML(this.props.icons.repeatableEmpty)}
+                              <p class="_text">
+                                  ${__i18n(
+                                      'No item currently. Add some by clicking on the button bellow...',
+                                      {
+                                          id: 's-specs-editor.repeatable.empty',
+                                      },
+                                  )}
+                              </p>
+                          </div>
+                      `}
 
                 <div class="${this.utils.cls('_repeatable-actions')}">
                     <button
@@ -865,53 +998,93 @@ export default class SSpecsEditorComponent extends __SLitComponent {
 
             return html`
                 ${Object.keys(specs.props).map((prop) => {
-                    const propObj = specs.props[prop];
+                    const propObj = specs.props[prop],
+                        propId = [...path, 'props', prop]
+                            .filter((l) => l !== 'props')
+                            .join('-');
 
                     if (propObj.props) {
                         return html`
                             <div class="${this.utils.cls('_child')}">
                                 <div class="${this.utils.cls('_child-metas')}">
-                                    <div
+                                    <a
                                         class="${this.utils.cls(
-                                            '_child-heading',
-                                        )}"
+                                            '_child-toggle',
+                                        )} ${this._toggleStack.includes(propId)
+                                            ? 'active'
+                                            : ''}"
+                                        @pointerup=${(e) => {
+                                            if (
+                                                this._toggleStack.includes(
+                                                    propId,
+                                                )
+                                            ) {
+                                                this._toggleStack.splice(
+                                                    this._toggleStack.indexOf(
+                                                        propId,
+                                                    ),
+                                                    1,
+                                                );
+                                            } else {
+                                                this._toggleStack.push(propId);
+                                            }
+                                            this.requestUpdate();
+                                        }}
                                     >
-                                        <h3
-                                            class="${this.utils.cls(
-                                                '_child-title',
-                                            )}"
-                                        >
-                                            ${propObj.title}
-                                        </h3>
                                         <div
                                             class="${this.utils.cls(
-                                                '_child-media',
+                                                '_child-heading',
                                             )}"
                                         >
-                                            ${this.isPathResponsive([
-                                                ...path,
-                                                'props',
-                                                prop,
-                                            ])
-                                                ? this._renderMediaSelector([
-                                                      ...path,
-                                                      'props',
-                                                      prop,
-                                                  ])
-                                                : ''}
+                                            ${this._toggleStack.includes(propId)
+                                                ? html`
+                                                      ${unsafeHTML(
+                                                          this.props.icons.down,
+                                                      )}
+                                                  `
+                                                : html`
+                                                      ${unsafeHTML(
+                                                          this.props.icons
+                                                              .right,
+                                                      )}
+                                                  `}
+                                            <h3
+                                                class="${this.utils.cls(
+                                                    '_child-title',
+                                                )}"
+                                            >
+                                                ${propObj.title}
+                                            </h3>
+                                            <div
+                                                class="${this.utils.cls(
+                                                    '_child-media',
+                                                )}"
+                                            >
+                                                ${this.isPathResponsive([
+                                                    ...path,
+                                                    'props',
+                                                    prop,
+                                                ])
+                                                    ? this._renderMediaSelector(
+                                                          [
+                                                              ...path,
+                                                              'props',
+                                                              prop,
+                                                          ],
+                                                      )
+                                                    : ''}
+                                            </div>
                                         </div>
-                                    </div>
-                                    <!-- <p
-                                        class="${this.utils.cls(
-                                        '_child-description',
-                                    )}"
-                                    >
-                                        ${propObj.description}
-                                    </p> -->
+                                    </a>
                                 </div>
                                 <div
-                                    prop="${propObj.id}"
-                                    class="${this.utils.cls('_prop')}"
+                                    class="${this.utils.cls(
+                                        '_child-prop',
+                                    )} ${this._toggleStack.includes(propId)
+                                        ? 'active'
+                                        : ''}"
+                                    prop="${propId}"
+                                    id="prop-${propId}"
                                 >
                                     ${this.renderProp(
                                         propObj,

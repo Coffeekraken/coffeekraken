@@ -27,7 +27,6 @@
     bottom: 0;
     overflow-y: auto;
     overflow-x: hidden;
-    padding-block-end: sugar.padding(50);
     @sugar.scrollbar();
     @sugar.border.radius();
 

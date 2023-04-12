@@ -4,9 +4,9 @@
     "description": "The available containers",
     "options": [
         {
-            "id": "none",
-            "name": "None",
-            "value": false
+            "id": "---",
+            "name": "---",
+            "value": null
         },
         {
             "id": "default",

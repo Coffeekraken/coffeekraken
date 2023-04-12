@@ -8,18 +8,29 @@ import { __i18n } from '@coffeekraken/s-i18n';
 import { __SCheckbox } from '@specimen/types/utils';
 
 export default class SSpecsEditorComponentCheckboxWidget extends __SSpecsEditorWidget {
+    _checkbox: __SCheckbox;
+
     constructor(deps: ISSpecsEditorWidgetDeps) {
         super(deps);
 
         if (!this.values.value) {
             this.values.value = [];
         }
+
+        this._checkbox = new __SCheckbox(this.propObj, this.values);
     }
 
     validate(newValues) {
-        _console.log('S', newValues);
-
         const itemsCount = Object.keys(newValues.value).length;
+
+        // required
+        if (this.propObj.required && this._checkbox.isEmpty()) {
+            return {
+                error: __i18n(`This property is required`, {
+                    id: 's-specs-editor.widget.required',
+                }),
+            };
+        }
 
         // min
         if (this.propObj.min !== undefined && itemsCount < this.propObj.min) {
@@ -47,8 +58,6 @@ export default class SSpecsEditorComponentCheckboxWidget extends __SSpecsEditorW
     }
 
     render() {
-        const checkbox = new __SCheckbox(this.propObj, this.values);
-
         return html`
             <div class="${this.editor.utils.cls('_checkbox-widget')}">
                 ${this.renderLabel()}
@@ -65,9 +74,9 @@ export default class SSpecsEditorComponentCheckboxWidget extends __SSpecsEditorW
                                 type="checkbox"
                                 @change=${(e) => {
                                     if (e.target.checked) {
-                                        checkbox.check(option);
+                                        this._checkbox.check(option);
                                     } else {
-                                        checkbox.uncheck(option);
+                                        this._checkbox.uncheck(option);
                                     }
                                     this.setValue(this.values);
                                 }}
@@ -76,7 +85,7 @@ export default class SSpecsEditorComponentCheckboxWidget extends __SSpecsEditorW
                                     '_checkbox',
                                     's-checkbox',
                                 )}"
-                                ?checked=${checkbox.isChecked(option)}
+                                ?checked=${this._checkbox.isChecked(option)}
                                 id="${option.id ?? `option-${i}`}"
                                 .value=${option.value}
                             />

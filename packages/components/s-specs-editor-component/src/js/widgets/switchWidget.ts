@@ -6,7 +6,7 @@ import __SSpecsEditorWidget from '../SSpecsEditorWidget';
 export default class SSpecsEditorComponentSwitchWidget extends __SSpecsEditorWidget {
     constructor(deps: ISSpecsEditorWidgetDeps) {
         super(deps);
-        if (!this.values.value) {
+        if (this.values.value === undefined) {
             this.values.value = this.propObj.default ?? false;
         }
     }

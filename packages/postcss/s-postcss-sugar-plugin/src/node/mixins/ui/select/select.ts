@@ -95,6 +95,11 @@ export default function ({
             @sugar.shape();
             overflow: hidden;
 
+            &.placeholder,
+            &:invalid {
+                color: sugar.color(main, text, --alpha 0.3);
+            }
+
             &[multiple] option:checked,
             &[multiple] option[selected] {
                 -moz-appearance: none;

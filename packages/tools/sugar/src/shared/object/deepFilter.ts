@@ -21,20 +21,15 @@ import __isPlainObject from '../is/isPlainObject';
  * @todo      doc
  * @todo      tests
  *
- * @snippet         __deepFilter($1, $2)
- * __deepFilter($1, ({value, key}) => {
- *      $2
- * })
- *
  * @example           js
- * import { __deepFilter } from '@coffeekraken/sugar/object';
- * __deepFilter ({
+ * import { __deepFilter } from '@coffeekraken/sugar/object';
+ * __deepFilter ({
  *    coco: 'hello',
  *    plop: true,
  *    sub: {
  *      property: 'world'
  *    }
- * }, ({key, value}) => typeof value === 'string');
+ * }, ({key, item}) => typeof item === 'string');
  * // { coco: 'hello' }
  *
  * @since         2.0.0
@@ -42,8 +37,7 @@ import __isPlainObject from '../is/isPlainObject';
  */
 
 export interface IDeepFilterSettings {
-    cloneFirst?: boolean;
-    array?: boolean;
+    cloneFirst: boolean;
 }
 
 export interface IDeepFilterFilter {
@@ -56,40 +50,14 @@ export interface IDeepFilterItem {
     isObject: boolean;
 }
 
-function processValue(
-    key: any,
-    value: any,
-    filter: IDeepFilterFilter,
-    settings: IDeepFilterSettings,
-): any {
+function processObj(object: any, filter: IDeepFilterFilter, settings): any {
     const newObj = {},
         keys = Object.keys(object);
-
-    if (settings.array && Array.isArray(value)) {
-        for (let [i, item] of value.entries()) {
-            processValue(i, item);
-        }
-    } else if (__isPlainObject(value)) {
-        for (let [k, v] of Object.entries(value)) {
-            processValue(k, v);
-        }
-    } else {
-        // pass the property in the filter function
-        const res = filter({
-            key,
-            value,
-        });
-    }
 
     // loop on the object keys
     for (let i = 0; i < keys.length; i++) {
         const key = keys[i];
-        let value = object[key];
-
-        if (__isPlainObject(value)) {
-            processValue(value, filter, settings);
-        } else if (settings.array && Array.isArray(value)) {
-        }
+        const value = object[key];
 
         // pass the property in the filter function
         const res = filter({
@@ -112,8 +80,8 @@ function processValue(
         } else if (res === undefined) {
             if (__isPlainObject(value)) {
                 newObj[key] = settings.cloneFirst
-                    ? processValue(Object.assign({}, value), filter, settings)
-                    : processValue(value, filter, settings);
+                    ? processObj(Object.assign({}, value), filter, settings)
+                    : processObj(value, filter, settings);
             } else {
                 newObj[key] = value;
             }
@@ -136,7 +104,7 @@ export default function __deepFilter(
         cloneFirst: true,
         ...(settings ?? {}),
     };
-    return processValue(
+    return processObj(
         settings.cloneFirst ? Object.assign({}, object) : object,
         filter,
         settings,

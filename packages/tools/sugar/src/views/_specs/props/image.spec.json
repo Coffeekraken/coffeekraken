@@ -1,25 +1,24 @@
 {
-    "type": "Image",
+    "type": "Object",
     "title": "Image",
-    "description": "A simple image with title and alt properties",
+    "description": "Describe an image with his alt and title attributes",
     "props": {
-        "url": {
-            "type": "Text",
-            "title": "Url",
-            "description": "The image url",
+        "image": {
+            "responsive": true,
+            "type": "Image",
+            "title": "Image",
+            "description": "Image file",
             "required": true
         },
         "title": {
             "type": "Text",
             "title": "Title",
-            "description": "The image title",
-            "required": true
+            "description": "Image title"
         },
         "alt": {
             "type": "Text",
-            "title": "Alternative text",
-            "description": "The image alternative text",
-            "required": true
+            "title": "Alt",
+            "description": "Image alternative text"
         }
     }
 }

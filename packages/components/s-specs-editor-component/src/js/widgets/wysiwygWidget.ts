@@ -12,7 +12,7 @@ export default class SSpecsEditorComponentWysiwygWidget extends __SSpecsEditorWi
     constructor(deps: ISSpecsEditorWidgetDeps) {
         super(deps);
 
-        if (!this.values.value) {
+        if (!this.values.value && this.propObj.default) {
             this.values.value = this.propObj.default;
         }
     }
@@ -23,7 +23,6 @@ export default class SSpecsEditorComponentWysiwygWidget extends __SSpecsEditorWi
                 class="${this.editor.utils.cls('_wysiwyg-widget')}"
                 @s-wysiwyg.change=${(e) => {
                     this.setValue(e.detail);
-
                     // const $preview = document.querySelector('._preview');
                     // const wysiwyg = new __SWysiwyg(propObj, e.detail ?? {});
                     // $preview.innerHTML = wysiwyg.toString(

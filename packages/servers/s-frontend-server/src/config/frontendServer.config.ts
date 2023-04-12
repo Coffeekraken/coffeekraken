@@ -32,7 +32,7 @@ export default function (api) {
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         // hostname: __ipAddress(),
-        hostname: '127.0.0.1',
+        hostname: '0.0.0.0',
 
         /**
          * @name              rootDir

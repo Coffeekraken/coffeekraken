@@ -130,9 +130,16 @@ export default class SWysiwygComponent extends __SLitComponent {
 
         this._$editor = this.querySelector(`.${this.utils.cls('_editor')}`);
 
+        let _isFirstChange = true;
         this._editorJs = new __EditorJS({
             holder: this._$editor,
             onChange: async (api, event) => {
+                // avoid first change event
+                if (_isFirstChange) {
+                    _isFirstChange = false;
+                    return;
+                }
+
                 const result = await this._editorJs.save();
 
                 const finalData = {
@@ -242,7 +249,7 @@ export default class SWysiwygComponent extends __SLitComponent {
                                 });
                             } else {
                                 const newNode = {
-                                    typo: $node.getAttribute('wysiwyg-type'),
+                                    type: $node.getAttribute('wysiwyg-type'),
                                     nodes: [],
                                 };
 

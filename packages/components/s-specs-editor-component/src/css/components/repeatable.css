@@ -1,19 +1,64 @@
 .s-specs-editor_repeatable {
     /* background: red; */
-    background: sugar.color(main, background);
+    /* background: sugar.color(main, background); */
     /* margin-inline: calc(sugar.margin(40) * -1); */
+    position: relative;
 
-    .s-label {
-        padding-block: sugar.padding(50) sugar.padding(20);
+    > .s-label {
         padding-inline: var(--s-specs-editor-padding-inline);
+        padding-block-start: var(--s-specs-editor-padding-block);
     }
 }
+
+.s-specs-editor_repeatable-item {
+    position: relative;
+    @sugar.transition;
+
+    &.sorting {
+        opacity: 0.3;
+    }
+}
+
+.s-specs-editor_repeatable-drop {
+    position: relative;
+    height: 0;
+    background: sugar.color(complementary, --alpha 0.3);
+    @sugar.transition fast;
+
+    &:after {
+        content: '';
+        display: block;
+        position: absolute;
+        top: 50%;
+        left: 0;
+        width: 100%;
+        height: 0;
+        transform: translateY(-50%);
+        background: sugar.color(error, --alpha 0.2);
+        pointer-events: none;
+    }
+
+    .s-specs-editor_repeatable.sort > & {
+        z-index: 100;
+
+        &:after {
+            height: sugar.margin(50);
+            pointer-events: all;
+        }
+        &.sort-over {
+            height: sugar.margin(100);
+        }
+    }
+}
+
 .s-specs-editor_repeatable-title {
     display: flex;
     align-items: center;
-    background: sugar.color(main, surface);
-    padding: sugar.padding(30) var(--s-specs-editor-padding-inline);
-    border-top: 1px solid sugar.color(main, --alpha 0.1);
+    gap: sugar.margin(20);
+    background: sugar.color(accent, --alpha 0.05);
+    padding: var(--s-specs-editor-padding-block)
+        var(--s-specs-editor-padding-inline);
+    border-top: 1px solid sugar.color(accent, --alpha 0.2);
     cursor: pointer;
 
     &,
@@ -27,66 +72,77 @@
 
     &.active,
     &:hover {
-        background: sugar.color(complementary, --alpha 0.05);
-    }
-
-    &.active {
-        background: sugar.color(complementary, --alpha 0.5);
-        color: white;
-        font-weight: bold;
-
-        * {
-            color: white;
-        }
+        background: sugar.color(accent, --alpha 0.05);
     }
 
     &.active,
     &:has(
-            + .s-specs-editor_repeatable-item
+            + .s-specs-editor_repeatable-body
                 + .s-specs-editor_repeatable-actions:last-child
         ) {
-        border-bottom: 1px solid sugar.color(main, --alpha 0.1);
+        border-bottom: 1px solid sugar.color(accent, --alpha 0.2);
+    }
+
+    ._reorder {
+        @sugar.ui.button ( $lnf: text);
+        box-shadow: none !important;
     }
 
     ._remove {
         @sugar.ui.button ($lnf: text);
         @sugar.color (error);
         @sugar.scale (0.9);
-        /* display: none; */
-        margin-inline-end: sugar.margin(10);
-
-        &:focus {
-            margin-inline-end: sugar.margin(30);
-        }
     }
     &:hover ._remove {
         display: inline-block;
     }
 }
-.s-specs-editor_repeatable-item {
-    overflow: hidden;
-    max-height: 0;
-    border-left: sugar.margin(10) solid sugar.color(complementary, --alpha 0.5);
-    @sugar.transition;
+
+.s-specs-editor_repeatable-empty {
+    padding-inline: var(--s-specs-editor-padding-inline);
+    padding-block: sugar.padding(10);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: sugar.margin(30);
+
+    i {
+        opacity: 0.1;
+        font-size: sugar.font.size(100);
+    }
+
+    ._text {
+        @sugar.typo p;
+        @sugar.font.size (25);
+        opacity: 0.5;
+    }
 }
-.s-specs-editor_repeatable-item.active {
+
+.s-specs-editor_repeatable-body {
+    /* overflow: hidden;
+    max-height: 0; */
+    border-left: sugar.margin(10) solid sugar.color(accent, --alpha 0.05);
+    display: none;
+    /* @sugar.transition; */
+}
+.s-specs-editor_repeatable-body.active {
     display: block;
-    max-height: 4000px;
 }
 
 .s-specs-editor_repeatable-item-actions {
     text-align: end;
-    padding: sugar.padding(30) var(--s-specs-editor-padding-inline);
-    background: sugar.color(main, background, --darken 5%);
+    /* padding: sugar.padding(30) var(--s-specs-editor-padding-inline);
+    background: sugar.color(main, background, --darken 5%); */
 }
 
 .s-specs-editor_repeatable-item-props {
-    padding-block: sugar.padding(30);
+    /* padding-block: sugar.padding(30); */
     /* padding: sugar.padding(30) 0; */
 }
 
 .s-specs-editor_repeatable-actions {
-    padding: sugar.padding(30) sugar.padding(40);
+    padding-inline: var(--s-specs-editor-padding-inline);
+    padding-block: var(--s-specs-editor-padding-block);
     text-align: end;
 
     ._add {

@@ -10,10 +10,6 @@ import __SSpecsEditorWidget from '../SSpecsEditorWidget';
 export default class SSpecsEditorComponentIntegerWidget extends __SSpecsEditorWidget {
     constructor(deps: ISSpecsEditorWidgetDeps) {
         super(deps);
-
-        if (this.values.value === undefined) {
-            // this.values.value = this.propObj.default;
-        }
     }
 
     validate(newValues) {
@@ -77,7 +73,8 @@ export default class SSpecsEditorComponentIntegerWidget extends __SSpecsEditorWi
                     max=${this.propObj.max}
                     name="${this.path.at(-1)}"
                     class="${this.editor.utils.cls('_input', 's-input')}"
-                    placeholder="${this.propObj.placeholder}"
+                    placeholder="${this.propObj.default ??
+                    this.propObj.placeholder}"
                     path="${this.path.join('.')}"
                     value="${this.values.value}"
                 />

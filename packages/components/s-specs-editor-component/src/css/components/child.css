@@ -1,39 +1,81 @@
 .s-specs-editor_child {
-    padding-block-start: sugar.margin(40);
-    padding-block-end: sugar.margin(40);
+    position: relative;
+    padding-block-end: 0;
+    border-left: sugar.margin(10) solid sugar.color(complementary, --alpha 0.5);
 
-    &:has(.s-specs-editor_child) {
-        position: relative;
-        padding-block-end: 0;
-        border-left: sugar.margin(10) solid
-            sugar.color(complementary, --alpha 0.5);
+    &:has(+ .s-specs-editor_child) .s-specs-editor_child-metas {
+        border-bottom: 1px solid sugar.color(main, --alpha 0.1);
     }
 
     .s-specs-editor_child {
         border-left: sugar.margin(10) solid
-            sugar.color(complementary, --alpha 0.5);
+            sugar.color(complementary, --alpha 0.05);
     }
     .s-specs-editor_prop + .s-specs-editor_child {
-        margin-block-start: sugar.margin(40);
+        /* margin-block-start: sugar.margin(40); */
     }
 }
 .s-specs-editor_child-metas {
-    padding-block-start: sugar.padding(30);
-    padding-inline: var(--s-specs-editor-padding-inline);
 }
 .s-specs-editor_child-heading {
     display: flex;
     align-items: center;
-    margin-block-end: sugar.margin(30);
+    gap: sugar.margin(20);
+    padding-inline: var(--s-specs-editor-padding-inline);
+    padding-block: var(--s-specs-editor-padding-block);
 }
+
+.s-specs-editor_child-toggle {
+    cursor: pointer;
+    display: block;
+
+    &,
+    * {
+        @sugar.transition fast;
+    }
+
+    &:hover {
+        background: sugar.color(complementary, --alpha 0.05);
+    }
+    &.active {
+        background: sugar.color(complementary, --alpha 0.5);
+
+        &:not(.s-specs-editor_child-prop .s-specs-editor_child-toggle),
+        *:not(.s-specs-editor_child-prop .s-specs-editor_child-toggle *) {
+            color: sugar.color(complementary, foreground) !important;
+        }
+    }
+}
+.s-specs-editor_child-prop .s-specs-editor_child-toggle.active {
+    background: sugar.color(complementary, --alpha 0.05);
+}
+
 .s-specs-editor_child-title {
     flex-grow: 1;
-    font-size: sugar.font.size(50);
-    color: sugar.color(accent);
+    font-size: sugar.font.size(40);
+
+    &:not(
+            .s-specs-editor_child
+                .s-specs-editor_child
+                .s-specs-editor_child-title
+        ) {
+        color: sugar.color(accent);
+    }
 }
 .s-specs-editor_child-media {
 }
 .s-specs-editor_child-description {
     padding-block-end: sugar.padding(30);
     color: sugar.color(main, text, --alpha 0.4);
+}
+
+.s-specs-editor_child-prop {
+    overflow: hidden;
+    height: 0;
+
+    &.active {
+        height: auto;
+        border-bottom: sugar.margin(10) solid
+            sugar.color(complementary, --alpha 0.05);
+    }
 }

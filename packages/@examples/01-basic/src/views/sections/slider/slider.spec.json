@@ -8,7 +8,12 @@
             "title": "Slides",
             "description": "Slider slides",
             "props": {
-                "image": "@sugar.views.props.image"
+                "image": {
+                    "type": "Image",
+                    "title": "Image",
+                    "description": "Slide image",
+                    "required": true
+                }
             }
         }
     }

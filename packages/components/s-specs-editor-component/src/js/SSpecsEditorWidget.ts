@@ -74,6 +74,10 @@ export default class SSpecsEditorWidget {
             ...(deps.settings ?? {}),
         };
 
+        if (deps.path.includes('images')) {
+            _console.log('C', deps.values);
+        }
+
         this.editor = deps.editor;
         this.propObj = deps.propObj;
         this.path = deps.path;
@@ -123,6 +127,7 @@ export default class SSpecsEditorWidget {
         if (!this._source) {
             return false;
         }
+
         return JSON.stringify(this._values) === JSON.stringify(this._source);
     }
 
@@ -173,6 +178,10 @@ export default class SSpecsEditorWidget {
                         /\.{2}/gm,
                         '',
                     );
+            }
+
+            if (this.path.includes('images')) {
+                _console.log('ADDDDDD', path, newValues, this._values);
             }
 
             // set the new value(s)

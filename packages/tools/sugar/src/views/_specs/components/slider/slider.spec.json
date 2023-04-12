@@ -23,7 +23,12 @@
                     "title": "Text",
                     "description": "The card text"
                 },
-                "image": "@sugar.views.props.image",
+                "image": {
+                    "type": "Image",
+                    "title": "Image",
+                    "description": "Slide image",
+                    "required": true
+                },
                 "cta": "@sugar.views.components.cta",
                 "attributes": "@sugar.views.props.attributes",
                 "raw": {

@@ -12,15 +12,47 @@ export default {
                 },
             },
         },
-        bkg: {
-            url: '/dist/img/macos-wallpaper-01.jpg',
-            title: 'Macbook air',
-            alt: 'Macbook air',
+        select: {
+            value: {
+                id: 'value-3',
+            },
         },
-        spaces: {},
-        date: {
-            value: '2023-11-10',
-            format: 'YYYY-MM-DD',
+        checkbox: {
+            value: [
+                {
+                    id: 'value-2',
+                },
+            ],
+        },
+        boolean: {
+            value: true,
+        },
+        switch: {
+            value: false,
+        },
+        integer: {
+            value: 3,
+        },
+        color: {
+            value: '#ff0000',
+            format: 'hex',
+        },
+        wysiwyg: {
+            value: {
+                type: 'root',
+                nodes: [
+                    {
+                        type: 'h1',
+                        block: true,
+                        nodes: [{ type: 'text', text: 'Hello World' }],
+                    },
+                    {
+                        type: 'p',
+                        block: true,
+                        nodes: [{ type: 'text', text: 'How arey ou?' }],
+                    },
+                ],
+            },
         },
         image: {
             url: '/dist/img/macbookair.png',

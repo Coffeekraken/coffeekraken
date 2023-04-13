@@ -11,6 +11,10 @@ import __SSpecsEditorWidget from '../SSpecsEditorWidget';
 export default class SSpecsEditorComponentImageWidget extends __SSpecsEditorWidget {
     constructor(deps: ISSpecsEditorWidgetDeps) {
         super(deps);
+
+        if (!this.values.url && this.propObj.default) {
+            this.setValue(this.propObj.default);
+        }
     }
 
     render() {
@@ -71,24 +75,6 @@ export default class SSpecsEditorComponentImageWidget extends __SSpecsEditorWidg
                           },
                       })
                     : ''}
-                <!-- ${this.propObj.title
-                    ? this.renderInlineInput({
-                          label: 'Title',
-                          description: '',
-                          placeholder: __i18n('Image title', {
-                              id: 'global.image.title',
-                          }),
-                          value: this.noneResponsiveValue.title,
-                          onChange: (e) => {
-                              this.mergeValue(
-                                  { title: e.target.value },
-                                  {
-                                      noneResponsive: true,
-                                  },
-                              );
-                          },
-                      })
-                    : ''} -->
             </div>
         `;
     }
@@ -109,9 +95,7 @@ export default class SSpecsEditorComponentImageWidget extends __SSpecsEditorWidg
                         class="_delete"
                         @pointerup=${(e) => {
                             if (e.currentTarget.needConfirmation) return;
-                            this.editor.clearValue(this.path, {
-                                media: this.editor.props.media,
-                            });
+                            this.resetValue();
                             this.editor.apply();
                         }}
                         confirm="Confirm?"

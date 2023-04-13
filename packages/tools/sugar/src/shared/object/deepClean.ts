@@ -1,7 +1,6 @@
 // @ts-nocheck
 
 import { __isPlainObject } from '@coffeekraken/sugar/is';
-import __deepMerge from '../object/deepMerge';
 
 /**
  * @name            deepClean
@@ -17,11 +16,11 @@ import __deepMerge from '../object/deepMerge';
  * The default cleaner function remove all that is either null, "" or undefined.
  *
  * @param         {Object}        object          The object you want to map through
- * @param         {Function}      cleaner       The cleaner function that take as parameter the actual property value, the current property name and the full dotted path to the current property
  * @param         {Object}        [settings={}]     An object of settings to configure your deepMap process:
  *
+ * @setting         {Function}      [cleaner=null]       The cleaner function that take as parameter the actual property value, the current property name and the full dotted path to the current property
  * @setting         {Boolean}       [array=true]                    Specify if we want to process also arrays or not
- * @setting         {Boolean}       [cloneFirst=false]          Specify if you want to clone the object passed before cleaning it
+ * @setting         {Boolean}       [clone=false]          Specify if you want to clone the object passed before cleaning it
  *
  * @todo      interface
  * @todo      doc
@@ -43,33 +42,17 @@ import __deepMerge from '../object/deepMerge';
 
 export interface IDeepCleanSettings {
     array?: boolean;
-    cloneFirst?: boolean;
+    clone?: boolean;
 }
 
 export default function __deepClean(
     objectOrArray: any,
-    cleaner?: Function,
     settings?: IDeepCleanSettings,
 ) {
-    settings = __deepMerge(
-        {
-            array: true,
-            cloneFirst: false,
-        },
-        settings ?? {},
-    );
-
-    let workingObj;
-    if (settings.cloneFirst) {
-        workingObj = Array.isArray(objectOrArray)
-            ? [...objectOrArray]
-            : Object.assign({}, objectOrArray);
-    } else {
-        workingObj = objectOrArray;
-    }
-
-    if (!cleaner) {
-        cleaner = function (value) {
+    settings = {
+        array: true,
+        clone: false,
+        cleaner(value) {
             if (value === undefined || value === null || value === '') {
                 return false;
             }
@@ -77,30 +60,38 @@ export default function __deepClean(
                 return false;
             }
             return true;
-        };
+        },
+        ...(settings ?? {}),
+    };
+
+    let workingObj;
+    if (settings.clone) {
+        workingObj = Array.isArray(objectOrArray)
+            ? [...objectOrArray]
+            : Object.assign({}, objectOrArray);
+    } else {
+        workingObj = objectOrArray;
     }
 
     if (settings.array && Array.isArray(objectOrArray)) {
         for (let [i, v] of objectOrArray.entries()) {
             if (__isPlainObject(v) || Array.isArray(v)) {
-                workingObj[i] = __deepClean(v, cleaner, settings);
+                workingObj[i] = __deepClean(v, settings);
             }
-            if (!cleaner(workingObj[i])) {
+            if (!settings.cleaner(workingObj[i])) {
                 workingObj.splice(workingObj.indexOf(v), 1);
             }
         }
     } else if (__isPlainObject(objectOrArray)) {
         for (let [k, v] of Object.entries(objectOrArray)) {
             if (__isPlainObject(v) || Array.isArray(v)) {
-                workingObj[k] = __deepClean(v, cleaner, settings);
+                workingObj[k] = __deepClean(v, settings);
             }
-            if (!cleaner(workingObj[k])) {
+            if (!settings.cleaner(workingObj[k])) {
                 delete workingObj[k];
             }
         }
     }
 
     return workingObj;
-
-    // return __deepMap(objectOrArray, cleaner, settings);
 }

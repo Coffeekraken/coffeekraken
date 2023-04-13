@@ -40,6 +40,7 @@ export default class SSpecsEditorWidget {
     settings: ISSpecsEditorWidgetSettings;
     status: ISSpeceEditorWidgetStatus;
     _overrided: any;
+    _canBeOverride: any;
     _source: any;
     _values: any;
     _errors: string[];
@@ -47,11 +48,11 @@ export default class SSpecsEditorWidget {
     constructor(deps: ISSpecsEditorWidgetDeps, settings?: ISSpecsEditorWidgetSettings);
     get values(): any;
     get noneResponsiveValue(): any;
-    resetValue(value: any): void;
+    resetValue(): void;
     mergeValue(value: any, settings?: ISSpecsEditorWidgetSetValueSettings): void;
     override(): void;
     canBeOverride(): boolean;
-    setValue(value: any, settings?: ISSpecsEditorWidgetSetValueSettings): void;
+    setValue(value: any, settings?: ISSpecsEditorWidgetSetValueSettings): Promise<void>;
     _validate(values?: any): ISSpecsEditorWidgetValidateResult;
     renderLabel(settings?: ISSpecsEditorComponentRenderLabelSettings): any;
     renderInlineInput(settings: ISSpecsEditorWidgetInlineLabel): any;

@@ -17,12 +17,16 @@
     &.sorting {
         opacity: 0.3;
     }
+
+    &.sorted {
+        background: sugar.color(complementary, --alpha 0.1);
+    }
 }
 
 .s-specs-editor_repeatable-drop {
     position: relative;
     height: 0;
-    background: sugar.color(complementary, --alpha 0.3);
+    background: sugar.color(complementary, --alpha 0.1);
     @sugar.transition fast;
 
     &:after {
@@ -34,19 +38,30 @@
         width: 100%;
         height: 0;
         transform: translateY(-50%);
-        background: sugar.color(error, --alpha 0.2);
         pointer-events: none;
+        @sugar.transition fast;
+    }
+
+    &:has(+ .s-specs-editor_repeatable-item.sorting),
+    .s-specs-editor_repeatable-item.sorting + & {
+        display: none;
     }
 
     .s-specs-editor_repeatable.sort > & {
         z-index: 100;
+        height: sugar.margin(10);
 
         &:after {
             height: sugar.margin(50);
             pointer-events: all;
         }
         &.sort-over {
-            height: sugar.margin(100);
+            background: sugar.color(complementary, --alpha 0.3);
+            height: sugar.margin(50);
+
+            &:after {
+                height: sugar.margin(100);
+            }
         }
     }
 }
@@ -56,8 +71,7 @@
     align-items: center;
     gap: sugar.margin(20);
     background: sugar.color(accent, --alpha 0.05);
-    padding: var(--s-specs-editor-padding-block)
-        var(--s-specs-editor-padding-inline);
+    padding: sugar.padding(20) var(--s-specs-editor-padding-inline);
     border-top: 1px solid sugar.color(accent, --alpha 0.2);
     cursor: pointer;
 

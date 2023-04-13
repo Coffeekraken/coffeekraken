@@ -20,7 +20,7 @@ import __deepMerge from '../object/deepMerge';
  *
  * @setting    {Boolean}              [classInstances=false]            Specify if you want the objects to be processed the same as other values
  * @setting         {Boolean}       [array=true]                    Specify if we want to process also arrays or not
- * @setting         {Boolean}       [cloneFirst=false]          Specify if you want to clone the object passed before cleaning it
+ * @setting         {Boolean}       [clone=false]          Specify if you want to clone the object passed before cleaning it
  * @setting         {Boolean}      [privateProps=true]     Specify if you want to clean also the private properties that starts with "_"
  *
  * @todo      interface
@@ -47,7 +47,7 @@ import __deepMerge from '../object/deepMerge';
 export interface IDeepMapSettings {
     classInstances?: boolean;
     array?: boolean;
-    cloneFirst?: boolean;
+    clone?: boolean;
     privateProps?: boolean;
 }
 
@@ -61,7 +61,7 @@ export default function __deepMap(
         {
             classInstances: false,
             array: true,
-            cloneFirst: false,
+            clone: false,
             privateProps: true,
         },
         settings,
@@ -71,7 +71,7 @@ export default function __deepMap(
 
     let newObject = isArray
         ? []
-        : settings.cloneFirst
+        : settings.clone
         ? Object.assign({}, objectOrArray)
         : objectOrArray;
 

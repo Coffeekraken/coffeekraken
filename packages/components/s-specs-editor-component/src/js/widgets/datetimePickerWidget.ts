@@ -11,9 +11,12 @@ export default class SSpecsEditorComponentDatetimePickerWidget extends __SSpecsE
         super(deps);
 
         if (!this.values.value) {
-            Object.assign(this.values, {
-                value: this.propObj.default,
-                format: this.propObj.format ?? 'YYYY-MM-DD',
+            this.setValue({
+                format:
+                    this.propObj.default?.format ??
+                    this.propObj.format ??
+                    'YYYY-MM-DD',
+                value: this.propObj.default?.value,
             });
         }
     }

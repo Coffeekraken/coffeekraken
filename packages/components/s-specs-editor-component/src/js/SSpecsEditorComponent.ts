@@ -2,7 +2,8 @@ import __SLitComponent from '@coffeekraken/s-lit-component';
 
 import { __i18n } from '@coffeekraken/s-i18n';
 
-import { __get, __set } from '@coffeekraken/sugar/object';
+import { __moveItem } from '@coffeekraken/sugar/array';
+import { __delete, __get, __set } from '@coffeekraken/sugar/object';
 
 import { __copy } from '@coffeekraken/sugar/clipboard';
 import { __addClassTimeout } from '@coffeekraken/sugar/dom';
@@ -14,9 +15,11 @@ import { define as __SWysiwygComponentDefine } from '@coffeekraken/s-wysiwyg-com
 
 import __STheme from '@coffeekraken/s-theme';
 
+import { __uniqid } from '@coffeekraken/sugar/string';
+
 import type { ISSpeceEditorWidgetSettings } from './SSpecsEditorWidget';
 
-import { __deepMerge } from '@coffeekraken/sugar/object';
+import { __deepClean, __deepMerge } from '@coffeekraken/sugar/object';
 import { __lowerFirst, __upperFirst } from '@coffeekraken/sugar/string';
 import { css, html, unsafeCSS } from 'lit';
 import { unsafeHTML } from 'lit/directives/unsafe-html.js';
@@ -241,7 +244,6 @@ export default class SSpecsEditorComponent extends __SLitComponent {
         for (let [key, propObj] of Object.entries(this.props.specs.props)) {
             if (this._values[key] === undefined) {
                 if (propObj.type?.match(/\[\]$/)) {
-                    _console.log('ddd', key);
                     this._values[key] = [];
                 } else {
                     this._values[key] = {};
@@ -344,6 +346,10 @@ export default class SSpecsEditorComponent extends __SLitComponent {
         return mediaValuePath ?? noneMediaValuePath;
     }
 
+    deleteValue(path: string[]): void {
+        __delete(this._values, path);
+    }
+
     getValue(
         path: string[],
         settings?: ISSpecsEditorComponentGetValueSettings,
@@ -362,24 +368,7 @@ export default class SSpecsEditorComponent extends __SLitComponent {
         }
 
         let valuePath = this.getValuePath(path, finalSettings);
-
-        // if (path.includes('images')) {
-        //     _console.log('AAA', path, valuePath, finalSettings);
-        // }
-
-        // if (this.isPathRepeatable(path)) {
-        //     value = __get(this._values, valuePath);
-        //     if (value === undefined && finalSettings.default) {
-        //         value = __set(this._values, valuePath, finalSettings.default);
-        //     }
-        //     return value;
-        // }
-
         value = __get(this._values, valuePath);
-
-        if (path.includes('images')) {
-            _console.log('value path', path, valuePath, value, this._values);
-        }
 
         if (value === undefined && finalSettings.default) {
             value = __set(this._values, valuePath, finalSettings.default);
@@ -394,10 +383,32 @@ export default class SSpecsEditorComponent extends __SLitComponent {
         propObj: any,
         settings?: ISSpeceEditorWidgetSettings,
     ): any {
-        const dotPath = path.filter((l) => l !== 'props').join('.');
+        const valuePath = path.filter((l) => l !== 'props');
 
-        if (this._widgets[dotPath]) {
-            return this._widgets[dotPath];
+        let values = __get(this._values, valuePath);
+        if (!values) {
+            values = __set(
+                this._values,
+                valuePath,
+                {},
+                {
+                    preferAssign: true,
+                },
+            );
+        }
+
+        let widgetId = values._id;
+        if (!widgetId) {
+            Object.defineProperty(values, '_id', {
+                value: __uniqid(),
+                writable: true,
+                enumerable: false,
+            });
+            widgetId = values._id;
+        }
+
+        if (this._widgets[widgetId]) {
+            return this._widgets[widgetId];
         }
 
         if (!SSpecsEditorComponent.widgetMap[type]) {
@@ -411,25 +422,17 @@ export default class SSpecsEditorComponent extends __SLitComponent {
             label: isRepeatable,
             ...(settings ?? {}),
         };
-        // if (isRepeatable) {
-        //     finalSettings.default = [];
-        // }
 
-        const values = __get(this._values, dotPath);
-
-        if (path.includes('images')) {
-            _console.log('widget', values);
-        }
-
-        this._widgets[dotPath] = new SSpecsEditorComponent.widgetMap[type]({
+        this._widgets[widgetId] = new SSpecsEditorComponent.widgetMap[type]({
             editor: this,
             values,
-            source: __get(this.props.source?.values ?? {}, dotPath),
+            source: __get(this.props.source?.values ?? {}, valuePath),
             propObj,
             path,
+            valuePath,
             settings: finalSettings,
         });
-        return this._widgets[dotPath];
+        return this._widgets[widgetId];
     }
 
     /**
@@ -454,19 +457,19 @@ export default class SSpecsEditorComponent extends __SLitComponent {
     save(): void {
         // no more pristine....
         this.status.pristine = false;
+        const data = {
+            specs: Object.assign({}, this.props.specs),
+            values: __deepClean(this._values, {
+                clone: true,
+            }),
+        };
+        _console.log('SAVE', data);
 
         this.requestUpdate();
 
         if (this.hasErrors()) {
             return this.requestUpdate();
         }
-
-        const data = {
-            specs: Object.assign({}, this.props.specs),
-            values: Object.assign({}, this._values),
-        };
-
-        _console.log('SAVE', data);
 
         this.utils.dispatchEvent('save', {
             bubbles: true,
@@ -496,15 +499,14 @@ export default class SSpecsEditorComponent extends __SLitComponent {
     /**
      * Add an item in a repeatable one
      */
-    _addItem(stack, specs, path) {
-        switch (specs.type.toLowerCase()) {
-            default:
-                stack.push({
-                    coco: 'plop',
-                });
-                break;
-        }
-
+    _addItem(stack, propObj, path) {
+        const newValue = {};
+        Object.defineProperty(newValue, '_id', {
+            value: __uniqid(),
+            writable: true,
+            enumerable: false,
+        });
+        stack.push(newValue);
         this.requestUpdate();
     }
 
@@ -515,7 +517,6 @@ export default class SSpecsEditorComponent extends __SLitComponent {
         if (Array.isArray(stack)) {
             stack.splice(stack.indexOf(item), 1);
         }
-
         this.apply();
     }
 
@@ -752,8 +753,6 @@ export default class SSpecsEditorComponent extends __SLitComponent {
             return this.renderProps(propObj, path, settings);
         }
 
-        // _console.log('p', path, propObj.responsive);
-
         return html`
             <div
                 class="${this.utils.cls('_prop')} ${this.utils.cls(
@@ -765,16 +764,6 @@ export default class SSpecsEditorComponent extends __SLitComponent {
         `;
     }
 
-    moveElement(arr, fromIndex, toIndex) {
-        const element = arr.splice(fromIndex, 1)[0];
-
-        console.log(element);
-
-        arr.splice(toIndex, 0, element);
-
-        return arr;
-    }
-
     _renderRepeatableProps(propObj, path) {
         let loopOn = this.getValue(path, {
             default: [],
@@ -783,20 +772,12 @@ export default class SSpecsEditorComponent extends __SLitComponent {
 
         let dropIndex;
 
-        const reorder = (item, index) => {
-            return;
-
-            const oldIndex = loopOn.indexOf(item);
-
-            propObj._loopOn = this.moveElement(loopOn, oldIndex, index);
-            loopOn = propObj._loopOn;
-
-            _console.log('LOO', loopOn);
-
-            _console.log('reortder', item, 'from', oldIndex, 'to', index);
-
-            // loopOn.splice(index, 0, loopOn.splice(oldIndex, 1)[0]);
+        const _reorder = (item, to, callback?) => {
+            __moveItem(loopOn, item, to);
             this.requestUpdate();
+            setTimeout(() => {
+                callback?.();
+            }, 100);
         };
 
         return html`
@@ -819,39 +800,61 @@ export default class SSpecsEditorComponent extends __SLitComponent {
                                       class="${this.utils.cls(
                                           '_repeatable-item',
                                       )}"
+                                      id="${v._id ?? i}"
                                       draggable="true"
-                                      @drag=${(e) => {
+                                      @dragstart=${(e) => {
+                                          e.target._isSorting = true;
+                                          if (!e.target._sortable) {
+                                              e.preventDefault();
+                                              e.stopPropagation();
+                                              return;
+                                          }
                                           e.target.parentNode.classList.add(
                                               'sort',
                                           );
                                           e.target.classList.add('sorting');
                                       }}
                                       @dragend=${(e) => {
+                                          e.target._isSorting = false;
+                                          if (!e.target._sortable) {
+                                              e.preventDefault();
+                                              e.stopPropagation();
+                                              return;
+                                          }
                                           e.target.parentNode.classList.remove(
                                               'sort',
                                           );
                                           e.target.classList.remove('sorting');
-
-                                          reorder(v, dropIndex);
+                                          _reorder(v, dropIndex, () => {
+                                              __addClassTimeout(
+                                                  'sorted',
+                                                  this.querySelector(
+                                                      `#${v._id}`,
+                                                  ),
+                                                  300,
+                                              );
+                                          });
                                       }}
                                   >
                                       <div
                                           tabindex="0"
                                           @pointerup=${(e) => {
                                               this._toggle(
-                                                  `${path.join('.')}-${i}`,
+                                                  `${path.join('.')}-${
+                                                      v._id ?? i
+                                                  }`,
                                               );
                                           }}
                                           class="${this.utils.cls(
                                               '_repeatable-title',
                                           )} ${this._isActive(
-                                              `${path.join('.')}-${i}`,
+                                              `${path.join('.')}-${v._id ?? i}`,
                                           )
                                               ? 'active'
                                               : ''}"
                                       >
                                           ${this._isActive(
-                                              `${path.join('.')}-${i}`,
+                                              `${path.join('.')}-${v._id ?? i}`,
                                           )
                                               ? html`
                                                     ${unsafeHTML(
@@ -868,6 +871,7 @@ export default class SSpecsEditorComponent extends __SLitComponent {
                                               ${v.title ??
                                               v.name ??
                                               v.id ??
+                                              v.value ??
                                               `${propObj.title} #${i}`}
                                           </span>
 
@@ -893,7 +897,25 @@ export default class SSpecsEditorComponent extends __SLitComponent {
                                                   class="fa-regular fa-trash-can"
                                               ></i>
                                           </button>
-                                          <button class="_reorder">
+                                          <button
+                                              class="_reorder"
+                                              @pointerover=${(e) => {
+                                                  const $sortable =
+                                                      e.target.parentNode
+                                                          .parentNode;
+                                                  if ($sortable._isSorting)
+                                                      return;
+                                                  $sortable._sortable = true;
+                                              }}
+                                              @pointerout=${(e) => {
+                                                  const $sortable =
+                                                      e.target.parentNode
+                                                          .parentNode;
+                                                  if ($sortable._isSorting)
+                                                      return;
+                                                  $sortable._sortable = false;
+                                              }}
+                                          >
                                               ${unsafeHTML(
                                                   this.props.icons.reorder,
                                               )}
@@ -904,7 +926,7 @@ export default class SSpecsEditorComponent extends __SLitComponent {
                                           class="${this.utils.cls(
                                               '_repeatable-body',
                                           )} ${this._isActive(
-                                              `${path.join('.')}-${i}`,
+                                              `${path.join('.')}-${v._id ?? i}`,
                                           )
                                               ? 'active'
                                               : ''}"

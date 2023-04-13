@@ -101,9 +101,9 @@ function __get(obj, path, settings = {}) {
         o = o[n];
     }
 
-    if (path.includes('images')) {
-        _console.log('GET', path, o);
-    }
+    // if (path.includes('images')) {
+    //     _console.log('GET', path, o);
+    // }
 
     return o;
 }

@@ -13,14 +13,17 @@ import __isPlainObject from '../is/isPlainObject';
  * Deep merge one object with another and return the merged object result. This merging implementation support:
  * - Merging object with getters/setters
  * - n numbers of objects as arguments
+ * - Choose beetween cloning first (default) the object or keeping the first passed object as result
+ * Note that by default the resulting object is a clone and do not have the same reference that the first passed object.
  *
  * @param           {Object}            args...        Pass all the objects you want to merge
- * @param           {Object}            [settings={}]       Pass as last object the settings one that can contain these properties:
+ * @param           {IDeepMergeSettings}            [settings={}]       Pass as last object the settings one that can contain these properties:
  * @return          {Object}                              The merged object result
  *
- * @setting         {Boolean}           [mergeArray=false]      Merge or not arrays
+ * @setting         {Boolean}           [array=false]      Merge or not arrays
+ * @setting         {Boolean}           [clone=true]            Specify if you want the result object to be a clone or the same first passed object
  *
- * @feature         Support array merging by passing the last parameter as the { mergeArray: true } object
+ * @feature         Support array merging by passing the last parameter as the { array: true } object
  * @feature         Support merging object with getters. Can access the source object from the second object property getter using the `this.$source` property
  *
  * @todo      interface
@@ -28,7 +31,7 @@ import __isPlainObject from '../is/isPlainObject';
  * @todo      tests
  *
  * @snippet         __deepMerge($1, $2)
- * 
+ *
  * @example           js
  * import { __deepMerge } from '@coffeekraken/sugar/object';
  * __deepMerge({a: {b: {c: 'c', d: 'd'}}}, {a: {b: {e: 'e', f: 'f'}}});
@@ -38,32 +41,33 @@ import __isPlainObject from '../is/isPlainObject';
  * @author  Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 export interface IDeepMergeSettings {
-    mergeArray?: boolean;
-    // mergeGetterSource: boolean;
+    array?: boolean;
+    clone?: boolean;
 }
 
-export default function __deepMerge(...args) {
+export default function __deepMerge(...args: any[]): any {
+    let settings: IDeepMergeSettings = {},
+        hasSettings = false;
+    const potentialSettings = args[args.length - 1] ?? {};
+    if (
+        potentialSettings &&
+        Object.keys(potentialSettings).length <= 2 &&
+        (potentialSettings.array !== undefined ||
+            potentialSettings.clone !== undefined)
+    ) {
+        hasSettings = true;
+        settings = potentialSettings;
+    }
+
     let finalSettings: IDeepMergeSettings = {
-        mergeArray: false,
+        array: false,
+        clone: true,
+        ...settings,
     };
-    // const potentialSettings = args[args.length - 1];
-    // if (
-    //     potentialSettings?.mergeArray !== undefined ||
-    //     potentialSettings?.mergeGetterSource !== undefined
-    // ) {
-    //     finalSettings = {
-    //         ...finalSettings,
-    //         ...potentialSettings,
-    //     };
-    //     // remove the settings object from the merge process
-    //     args = args.slice(0, -1);
-    // }
 
     function merge(firstObj, secondObj) {
-        const newObj = {};
-        if (!firstObj && secondObj) return secondObj;
-        if (!secondObj && firstObj) return firstObj;
-        if (!firstObj && !secondObj) return {};
+        const newObj = finalSettings.clone ? {} : firstObj;
+        if (!secondObj) return firstObj;
 
         const firstProps = Object.getOwnPropertyNames(firstObj);
         firstProps.forEach((key) => {
@@ -75,65 +79,17 @@ export default function __deepMerge(...args) {
             }
         });
 
-        // delete newObj.$source;
-        // if (!newObj.$source) {
-        //     Object.defineProperty(newObj, '$source', {
-        //         enumerable: false,
-        //         configurable: false,
-        //         value: firstObj,
-        //     });
-        // }
-        // Object.defineProperty(secondObj, 'plop', {
-        //     value: 'yop',
-        // });
-
         const secondProps = Object.getOwnPropertyNames(secondObj);
         secondProps.forEach((key) => {
-            // if (finalSettings.mergeGetterSource && key === '$source') {
-            //     return;
-            // }
-
             const secondObjDesc = Object.getOwnPropertyDescriptor(
                 secondObj,
                 key,
             );
 
-            // const secondObjValue = secondObj[key];
-
-            // delete secondObj[key];
-            // Object.defineProperty(secondObj, key, {
-            //     configurable: true,
-            //     writable: true,
-            //     value: secondObjValue,
-            //     // get() {
-            //     //     console.log('GET', key);
-            //     //     return secondObjValue;
-            //     // },
-            // });
-
-            // secondObjDesc.$source = secondObj.$source;
-
             if (secondObjDesc.set || secondObjDesc.get) {
-                // const v = secondObj[key];
-                // Object.defineProperty(newObj, key, {
-                //     enumerable: true,
-                //     writable: true,
-                //     get() {
-                //         console.log('GET', key, v);
-                //         return v;
-                //     },
-                // });
-
-                // if (finalSettings.mergeGetterSource) {
-                //     Object.defineProperty(newObj, '$source', {
-                //         enumerable: false,
-                //         value: firstObj,
-                //     });
-                // }
-
                 Object.defineProperty(newObj, key, secondObjDesc);
             } else if (
-                finalSettings.mergeArray &&
+                finalSettings.array &&
                 Array.isArray(firstObj[key]) &&
                 Array.isArray(secondObj[key])
             ) {
@@ -151,7 +107,11 @@ export default function __deepMerge(...args) {
         return newObj;
     }
 
-    let currentObj = {};
+    if (hasSettings) {
+        args.pop();
+    }
+
+    let currentObj = finalSettings.clone ? {} : args[0];
     for (let i = 0; i < args.length; i++) {
         const toMergeObj = args[i];
         currentObj = merge(currentObj, toMergeObj);

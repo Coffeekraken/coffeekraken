@@ -5,12 +5,6 @@ export default {
     values: {
         string: {
             value: 'From source',
-            cool: null,
-            media: {
-                desktop: {
-                    value: null,
-                },
-            },
         },
         select: {
             value: {

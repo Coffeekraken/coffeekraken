@@ -343,7 +343,7 @@ export default class SSpecs extends __SClass {
                 return value;
             },
             {
-                cloneFirst: false,
+                clone: false,
             },
         );
 

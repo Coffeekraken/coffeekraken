@@ -1,6 +1,6 @@
 
 export interface IDeepFilterSettings {
-    cloneFirst: boolean;
+    clone: boolean;
 }
 export interface IDeepFilterFilter {
     (item: IDeepFilterItem): undefined | boolean;

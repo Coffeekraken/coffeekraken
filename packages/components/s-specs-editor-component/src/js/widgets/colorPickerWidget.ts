@@ -9,11 +9,13 @@ import __SSpecsEditorWidget from '../SSpecsEditorWidget';
 export default class SSpecsEditorComponentColorPickerWidget extends __SSpecsEditorWidget {
     constructor(deps: ISSpecsEditorWidgetDeps) {
         super(deps);
-
         if (!this.values.value) {
-            Object.assign(this.values, {
-                format: this.propObj.format ?? 'hexa',
-                value: this.propObj.default ?? '#ff0000ff',
+            this.setValue({
+                format:
+                    this.propObj.default?.format ??
+                    this.propObj.format ??
+                    'hexa',
+                value: this.propObj.default?.value ?? '#ff0000ff',
             });
         }
     }

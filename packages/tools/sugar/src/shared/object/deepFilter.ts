@@ -17,6 +17,8 @@ import __isPlainObject from '../is/isPlainObject';
  * @param               {Function}              filter                The filter function that take as parameter the property itself, and the property name
  * @return              {Object}                                      The filtered object
  *
+ * @setting             {Boolean}           [clone=true]            Specify if you want to clone the object before filter it
+ *
  * @todo      interface
  * @todo      doc
  * @todo      tests
@@ -37,7 +39,7 @@ import __isPlainObject from '../is/isPlainObject';
  */
 
 export interface IDeepFilterSettings {
-    cloneFirst: boolean;
+    clone: boolean;
 }
 
 export interface IDeepFilterFilter {
@@ -69,7 +71,7 @@ function processObj(object: any, filter: IDeepFilterFilter, settings): any {
         // true mean: we keep this totally
         if (res === true) {
             if (__isPlainObject(value)) {
-                (newObj[key] = settings.cloneFirst
+                (newObj[key] = settings.clone
                     ? Object.assign({}, value)
                     : value),
                     filter,
@@ -79,7 +81,7 @@ function processObj(object: any, filter: IDeepFilterFilter, settings): any {
             }
         } else if (res === undefined) {
             if (__isPlainObject(value)) {
-                newObj[key] = settings.cloneFirst
+                newObj[key] = settings.clone
                     ? processObj(Object.assign({}, value), filter, settings)
                     : processObj(value, filter, settings);
             } else {
@@ -101,11 +103,11 @@ export default function __deepFilter(
     settings?: Partial<IDeepFilterSettings>,
 ) {
     settings = {
-        cloneFirst: true,
+        clone: true,
         ...(settings ?? {}),
     };
     return processObj(
-        settings.cloneFirst ? Object.assign({}, object) : object,
+        settings.clone ? Object.assign({}, object) : object,
         filter,
         settings,
     );

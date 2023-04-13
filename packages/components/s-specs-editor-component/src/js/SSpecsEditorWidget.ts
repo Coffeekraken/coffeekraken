@@ -8,6 +8,8 @@ import {
 import type { ISSpecsEditorComponentRenderLabelSettings } from './SSpecsEditorComponent';
 import __SSpecsEditorComponent from './SSpecsEditorComponent';
 
+import { __wait } from '@coffeekraken/sugar/datetime';
+
 import { html } from 'lit';
 
 export interface ISSpeceEditorWidgetStatus {
@@ -59,6 +61,7 @@ export default class SSpecsEditorWidget {
     };
 
     _overrided;
+    _canBeOverride;
 
     _source: any;
     _values: any;
@@ -74,36 +77,41 @@ export default class SSpecsEditorWidget {
             ...(deps.settings ?? {}),
         };
 
-        if (deps.path.includes('images')) {
-            _console.log('C', deps.values);
-        }
-
         this.editor = deps.editor;
         this.propObj = deps.propObj;
         this.path = deps.path;
         this.valuePath = this.path.filter((l) => l !== 'props');
+        this._values = deps.values;
         this._source = __deepClean(deps.source ?? {});
-        this._values = __deepClean(deps.values ?? {});
 
         // merge the values and the source together
-        this._values = __deepMerge(this._source, this._values);
+        // Note that we do not clone the object to keep reference to the _values one
+        __deepMerge(this._values, this._source, {
+            clone: false,
+        });
     }
 
     get values(): any {
         if (this.isResponsive()) {
-            return this._values.media?.[this.editor.props.media] ?? {};
+            if (!this._values.media) {
+                this._values.media = {};
+            }
+            if (!this._values.media[this.editor.props.media]) {
+                this._values.media[this.editor.props.media] = {};
+            }
+            return this._values.media[this.editor.props.media];
         }
-        return this._values ?? {};
+        return this._values;
     }
 
     get noneResponsiveValue(): any {
         return this._values ?? {};
     }
 
-    resetValue(value: any): void {
-        this.setValue(value, {
-            validate: false,
-        });
+    resetValue(): void {
+        for (let [key, value] of Object.entries(this._values)) {
+            delete this._values[key];
+        }
     }
 
     mergeValue(
@@ -128,10 +136,23 @@ export default class SSpecsEditorWidget {
             return false;
         }
 
-        return JSON.stringify(this._values) === JSON.stringify(this._source);
+        if (this._canBeOverride === undefined) {
+            const cleanedValues = __deepClean(
+                __clone(this._values, {
+                    deep: true,
+                }),
+            );
+            this._canBeOverride =
+                JSON.stringify(cleanedValues) === JSON.stringify(this._source);
+        }
+
+        return this._canBeOverride;
     }
 
-    setValue(value: any, settings?: ISSpecsEditorWidgetSetValueSettings): void {
+    async setValue(
+        value: any,
+        settings?: ISSpecsEditorWidgetSetValueSettings,
+    ): Promise<void> {
         const finalSettings: ISSpecsEditorWidgetSetValueSettings = {
             media: null,
             path: '.',
@@ -180,17 +201,16 @@ export default class SSpecsEditorWidget {
                     );
             }
 
-            if (this.path.includes('images')) {
-                _console.log('ADDDDDD', path, newValues, this._values);
-            }
-
             // set the new value(s)
             __set(this._values, path, newValues, {
                 preferAssign: true,
             });
 
-            // clean the values
-            __deepClean(this._values);
+            // reset the canBeOverride status
+            this._canBeOverride = undefined;
+
+            // ugly hack to avoid issue in repeatable display...
+            await __wait();
 
             // apply the changes in the editor
             this.editor.apply();

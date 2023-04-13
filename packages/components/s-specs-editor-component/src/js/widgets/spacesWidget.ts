@@ -10,6 +10,10 @@ import __SSpecsEditorWidget from '../SSpecsEditorWidget';
 export default class SSpecsEditorComponentSpacesWidget extends __SSpecsEditorWidget {
     constructor(deps: ISSpecsEditorWidgetDeps) {
         super(deps);
+
+        if (!this.values.value && this.propObj.default) {
+            this.setValue(this.propObj.default);
+        }
     }
 
     render() {

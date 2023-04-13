@@ -1,56 +1,54 @@
 // @ts-nocheck
-import __set from './set';
 /**
- * @name                      delete
+ * @name                          delete
  * @namespace            shared.object
- * @type                      Function
+ * @type                          Function
  * @platform          js
  * @platform          node
  * @status        beta
  *
- * Delete an object property using a dotPath like "something.else"
+ * Delete an object/array property by passing a dotpath to the element you want to remove.
  *
- * @param         {Object}          object            The object on which you want to delete the property
- * @param         {String}          dotPath           The dotpath to the property you want to delete
+ * @param               {Object}                 obj                The object in which to set the value
+ * @param               {String|String[]}                dotpath                The dotted object/array path to delete
  *
  * @todo      interface
  * @todo      doc
  * @todo      tests
  *
- * @snippet         __delete($1, $2)
+ * @snippet         __get($1, $2)
  *
- * @example         js
+ * @example             js
  * import { __delete } from '@coffeekraken/sugar/object';
- * const myObject = {
- *    hello: 'world',
- *    plop: 'yop'
- * };
- * __delete(myObject, 'plop');
+ * __delete(myObject, 'my.cool.value');
+ * __delete(myObject, 'my.cool.value.0');
  *
  * @since     2.0.0
  * @author  Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-export default function del(object, dotPath) {
-    const parentDotPath = dotPath.split('.').slice(0, -1).join('.');
-    if (!dotPath || dotPath === '' || dotPath === '.')
+export default function __delete(object, dotpath) {
+    // const parentdotpath = dotpath.split('.').slice(0, -1).join('.');
+    if (Array.isArray(dotpath)) {
+        dotpath = dotpath.join('.');
+    }
+    p;
+    if (!dotpath || dotpath === '' || dotpath === '.')
         return object;
-    dotPath = dotPath.replace(/\[(\w+)\]/g, '.$1');
-    dotPath = dotPath.replace(/^\./, '');
-    const a = dotPath.split('.');
+    dotpath = dotpath.replace(/\[(\w+)\]/g, '.$1');
+    dotpath = dotpath.replace(/^\./, '');
+    const a = dotpath.split('.');
     let o = object;
     while (a.length) {
         const n = a.shift();
         if (a.length < 1) {
             if (Array.isArray(o)) {
-                const valueToDelete = o[n];
-                o = o.filter((v) => {
-                    return v !== valueToDelete;
-                });
+                const idx = parseInt(n);
+                o.splice(idx, 1);
             }
             else {
                 delete o[n];
             }
-            __set(object, parentDotPath, o);
+            // __set(object, parentdotpath, o);
         }
         else {
             o = o[n];
@@ -58,4 +56,4 @@ export default function del(object, dotPath) {
     }
     return object;
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7QUFFZCxPQUFPLEtBQUssTUFBTSxPQUFPLENBQUM7QUFFMUI7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBNkJHO0FBQ0gsTUFBTSxDQUFDLE9BQU8sVUFBVSxHQUFHLENBQUMsTUFBTSxFQUFFLE9BQU87SUFDdkMsTUFBTSxhQUFhLEdBQUcsT0FBTyxDQUFDLEtBQUssQ0FBQyxHQUFHLENBQUMsQ0FBQyxLQUFLLENBQUMsQ0FBQyxFQUFFLENBQUMsQ0FBQyxDQUFDLENBQUMsSUFBSSxDQUFDLEdBQUcsQ0FBQyxDQUFDO0lBRWhFLElBQUksQ0FBQyxPQUFPLElBQUksT0FBTyxLQUFLLEVBQUUsSUFBSSxPQUFPLEtBQUssR0FBRztRQUFFLE9BQU8sTUFBTSxDQUFDO0lBQ2pFLE9BQU8sR0FBRyxPQUFPLENBQUMsT0FBTyxDQUFDLFlBQVksRUFBRSxLQUFLLENBQUMsQ0FBQztJQUMvQyxPQUFPLEdBQUcsT0FBTyxDQUFDLE9BQU8sQ0FBQyxLQUFLLEVBQUUsRUFBRSxDQUFDLENBQUM7SUFDckMsTUFBTSxDQUFDLEdBQUcsT0FBTyxDQUFDLEtBQUssQ0FBQyxHQUFHLENBQUMsQ0FBQztJQUM3QixJQUFJLENBQUMsR0FBRyxNQUFNLENBQUM7SUFDZixPQUFPLENBQUMsQ0FBQyxNQUFNLEVBQUU7UUFDYixNQUFNLENBQUMsR0FBRyxDQUFDLENBQUMsS0FBSyxFQUFFLENBQUM7UUFDcEIsSUFBSSxDQUFDLENBQUMsTUFBTSxHQUFHLENBQUMsRUFBRTtZQUNkLElBQUksS0FBSyxDQUFDLE9BQU8sQ0FBQyxDQUFDLENBQUMsRUFBRTtnQkFDbEIsTUFBTSxhQUFhLEdBQUcsQ0FBQyxDQUFDLENBQUMsQ0FBQyxDQUFDO2dCQUMzQixDQUFDLEdBQUcsQ0FBQyxDQUFDLE1BQU0sQ0FBQyxDQUFDLENBQUMsRUFBRSxFQUFFO29CQUNmLE9BQU8sQ0FBQyxLQUFLLGFBQWEsQ0FBQztnQkFDL0IsQ0FBQyxDQUFDLENBQUM7YUFDTjtpQkFBTTtnQkFDSCxPQUFPLENBQUMsQ0FBQyxDQUFDLENBQUMsQ0FBQzthQUNmO1lBQ0QsS0FBSyxDQUFDLE1BQU0sRUFBRSxhQUFhLEVBQUUsQ0FBQyxDQUFDLENBQUM7U0FDbkM7YUFBTTtZQUNILENBQUMsR0FBRyxDQUFDLENBQUMsQ0FBQyxDQUFDLENBQUM7U0FDWjtLQUNKO0lBQ0QsT0FBTyxNQUFNLENBQUM7QUFDbEIsQ0FBQyJ9
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7QUFFZDs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0EwQkc7QUFDSCxNQUFNLENBQUMsT0FBTyxVQUFVLFFBQVEsQ0FDNUIsTUFBVyxFQUNYLE9BQTBCO0lBRTFCLG1FQUFtRTtJQUVuRSxJQUFJLEtBQUssQ0FBQyxPQUFPLENBQUMsT0FBTyxDQUFDLEVBQUU7UUFDeEIsT0FBTyxHQUFHLE9BQU8sQ0FBQyxJQUFJLENBQUMsR0FBRyxDQUFDLENBQUM7S0FDL0I7SUFDRCxDQUFDLENBQUM7SUFFRixJQUFJLENBQUMsT0FBTyxJQUFJLE9BQU8sS0FBSyxFQUFFLElBQUksT0FBTyxLQUFLLEdBQUc7UUFBRSxPQUFPLE1BQU0sQ0FBQztJQUNqRSxPQUFPLEdBQUcsT0FBTyxDQUFDLE9BQU8sQ0FBQyxZQUFZLEVBQUUsS0FBSyxDQUFDLENBQUM7SUFDL0MsT0FBTyxHQUFHLE9BQU8sQ0FBQyxPQUFPLENBQUMsS0FBSyxFQUFFLEVBQUUsQ0FBQyxDQUFDO0lBQ3JDLE1BQU0sQ0FBQyxHQUFHLE9BQU8sQ0FBQyxLQUFLLENBQUMsR0FBRyxDQUFDLENBQUM7SUFDN0IsSUFBSSxDQUFDLEdBQUcsTUFBTSxDQUFDO0lBQ2YsT0FBTyxDQUFDLENBQUMsTUFBTSxFQUFFO1FBQ2IsTUFBTSxDQUFDLEdBQUcsQ0FBQyxDQUFDLEtBQUssRUFBRSxDQUFDO1FBQ3BCLElBQUksQ0FBQyxDQUFDLE1BQU0sR0FBRyxDQUFDLEVBQUU7WUFDZCxJQUFJLEtBQUssQ0FBQyxPQUFPLENBQUMsQ0FBQyxDQUFDLEVBQUU7Z0JBQ2xCLE1BQU0sR0FBRyxHQUFHLFFBQVEsQ0FBQyxDQUFDLENBQUMsQ0FBQztnQkFDeEIsQ0FBQyxDQUFDLE1BQU0sQ0FBQyxHQUFHLEVBQUUsQ0FBQyxDQUFDLENBQUM7YUFDcEI7aUJBQU07Z0JBQ0gsT0FBTyxDQUFDLENBQUMsQ0FBQyxDQUFDLENBQUM7YUFDZjtZQUNELG1DQUFtQztTQUN0QzthQUFNO1lBQ0gsQ0FBQyxHQUFHLENBQUMsQ0FBQyxDQUFDLENBQUMsQ0FBQztTQUNaO0tBQ0o7SUFDRCxPQUFPLE1BQU0sQ0FBQztBQUNsQixDQUFDIn0=

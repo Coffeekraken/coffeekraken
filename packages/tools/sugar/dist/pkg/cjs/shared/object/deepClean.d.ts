@@ -1,6 +1,6 @@
 
 export interface IDeepCleanSettings {
     array?: boolean;
-    cloneFirst?: boolean;
+    clone?: boolean;
 }
-export default function __deepClean(objectOrArray: any, cleaner?: Function, settings?: IDeepCleanSettings): any;
+export default function __deepClean(objectOrArray: any, settings?: IDeepCleanSettings): any;

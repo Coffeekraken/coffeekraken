@@ -8,6 +8,7 @@ import __deepize from './deepize';
 import __deepMap from './deepMap';
 import __deepMerge from './deepMerge';
 import __deepProxy from './deepProxy';
+import __delete from './delete';
 import __deleteProperty from './deleteProperty';
 import __diff from './diff';
 import __ensurePropertyExists from './ensurePropertyExists';
@@ -41,6 +42,7 @@ export {
     __deepMap,
     __deepMerge,
     __deepProxy,
+    __delete,
     __deleteProperty,
     __diff,
     __ensurePropertyExists,

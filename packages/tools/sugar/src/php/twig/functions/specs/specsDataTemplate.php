@@ -20,6 +20,18 @@
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
+
+function array_filter_recursive($input)
+{
+    foreach ($input as &$value) {
+        if (is_array($value)) {
+            $value = array_filter_recursive($value);
+        }
+    }
+
+    return array_filter($input);
+}
+
 return new \Twig\TwigFunction('__specsDataTemplate', function ($data) {
     // check if the $_ENV['S_SPECS_DATA'] is set to true
     if (!isset($_ENV['S_SPECS_DATA']) || $_ENV['S_SPECS_DATA'] == false) {
@@ -60,7 +72,10 @@ return new \Twig\TwigFunction('__specsDataTemplate', function ($data) {
         json_encode($source, JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_QUOT) .
         ',
         "values": ' .
-        json_encode($data, JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_QUOT) .
+        json_encode(
+            array_filter_recursive($data),
+            JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_QUOT
+        ) .
         ',
         "specs": ' .
         json_encode($specs, JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_QUOT) .

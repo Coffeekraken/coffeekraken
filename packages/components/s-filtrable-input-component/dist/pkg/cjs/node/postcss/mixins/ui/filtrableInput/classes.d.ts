@@ -15,6 +15,7 @@ export interface IPostcssUiFiltrableInputClassesParams {
     scope: ('bare' | 'lnf' | 'vr')[];
 }
 export { postcssUiFiltrableInputClassesInterface as interface };
+
 export default function ({ params, atRule, CssVars, replaceWith, }: {
     params: Partial<IPostcssUiFiltrableInputClassesParams>;
     atRule: any;

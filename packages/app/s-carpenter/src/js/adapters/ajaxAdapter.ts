@@ -44,6 +44,10 @@ export default {
     },
 
     async getData({ $elm }): Promise<any> {
+        // if ($elm._sCarpenterData) {
+        //     return $elm._sCarpenterData;
+        // }
+
         let raw = $elm.getAttribute('s-specs-data');
         let data;
 
@@ -81,6 +85,9 @@ export default {
             }
         }
 
+        // save in element
+        // $elm._sCarpenterData = data;
+
         return data;
     },
 
@@ -97,8 +104,11 @@ export default {
             component,
         });
 
-        // keep the element id
+        // keep the element id and the s-specs
         $newComponent.id = $elm.id;
+        if (!$newComponent.hasAttribute('s-specs')) {
+            $newComponent.setAttribute('s-specs', dotpath);
+        }
 
         // @ts-ignore
         $elm.after($newComponent);

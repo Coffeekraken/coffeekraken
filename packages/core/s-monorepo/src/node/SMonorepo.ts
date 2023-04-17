@@ -725,10 +725,23 @@ export default class SMonorepo extends __SClass {
                 });
             });
 
+            const processedPackages: string[] = [];
+
             files.forEach((file) => {
                 let isUpgraded = false;
 
                 const packageJson = __readJsonSync(file);
+
+                // make sure the processed packlage is in the list
+                if (
+                    !packagesListJson[packageJson.name] ||
+                    processedPackages.includes(packageJson.name)
+                ) {
+                    return;
+                }
+
+                // add the package in the processed stack
+                processedPackages.push(packageJson.name);
 
                 finalParams.files.forEach((fileName) => {
                     if (!fileName.match(/\.json$/)) {

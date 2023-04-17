@@ -69,7 +69,7 @@ return new \Twig\TwigFunction('__specsDataAttribute', function ($data) {
                 json_encode($specs) .
                 '
     }',
-            ENT_QUOTES,
+            ENT_QUOTES | JSON_FORCE_OBJECT,
             'UTF-8'
         ) .
         '"';

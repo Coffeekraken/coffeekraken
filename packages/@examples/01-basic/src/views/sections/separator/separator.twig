@@ -1,4 +1,5 @@
-<section class="section-separator {{ __spacesClasses(spaces, frontspec) }}">
+<section class="section-separator {{ __spacesClasses(spaces, frontspec) }}" s-specs="views.sections.separator.separator">
+    {{ __specsDataTemplate(_context)|raw }}
     <div class="_bkg">
         {% if image %}
             <img class="_img" src="{{ image.url }}" alt="{{ image.alt }}" />
@@ -6,9 +7,9 @@
     </div>
     <div class="_content">
         <div class="s-container">
-            {% if title %}
+            {% if title.value %}
                 <h1 class="s-typo:h2">
-                    {{ title|raw }}
+                    {{ title.value|raw }}
                 </h1>
             {% endif %}
         </div>

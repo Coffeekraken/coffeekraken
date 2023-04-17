@@ -12,7 +12,7 @@ export default class SSpecsEditorComponentIntegerWidget extends __SSpecsEditorWi
         super(deps);
 
         if (this.values.value === undefined && this.propObj.default) {
-            this.setValue(this.propObj.default);
+            this.setDefault(this.propObj.default);
         }
     }
 

@@ -1,4 +1,5 @@
 import __SFrontspec from '@coffeekraken/s-frontspec';
+import { __i18n } from '@coffeekraken/s-i18n';
 import __SInterface from '@coffeekraken/s-interface';
 
 /**
@@ -138,10 +139,20 @@ export default class SCarpenterComponentInterface extends __SInterface {
                 </svg>
                 `,
             },
+            i18n: {
+                type: 'Object',
+                description: 'Specify all the UI text that can be translated',
+                default: {
+                    addComponent: __i18n('Add a component', {
+                        id: 's-carpenter.components.add',
+                    }),
+                },
+            },
             icons: {
                 type: 'Object',
                 description: 'Specify some icons html to be used across the UI',
                 default: {
+                    add: '<i class="fa-solid fa-plus"></i>',
                     mobile: '<i class="fa-solid fa-mobile-screen-button"></i>',
                     tablet: '<i class="fa-solid fa-tablet-screen-button"></i>',
                     desktop: '<i class="fa-solid fa-desktop"></i>',

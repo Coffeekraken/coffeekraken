@@ -40,7 +40,7 @@ import __deepMerge from '../object/deepMerge';
  * @todo      interface
  * @todo      doc
  * @todo      tests
- * 
+ *
  * @example           js
  * import { __deepProxy } from '@coffeekraken/sugar/object';
  * const a = __deepProxy({
@@ -61,7 +61,7 @@ export interface IDeepProxyActionObj {
     target: string;
     key: string;
     path: string;
-    action: 'set'|'get'|'delete';
+    action: 'set' | 'get' | 'delete';
     fullAction: string;
     oldValue: any;
     value: any;
@@ -96,18 +96,20 @@ export default function __deepProxy(
         return {
             set(target, key, value) {
                 // protect agains set loop
-                if (!_loopTimeout.has(target)) {
-                    _loopTimeout.set(target, {});
-                }
-                const dotpath = [...path, key].join('.');
-                const timeouts = _loopTimeout.get(target);
-                if (timeouts[dotpath]) {
-                    return true;
-                }
-                timeouts[dotpath] = true;
-                setTimeout(() => {
-                    delete timeouts[dotpath];
-                });
+                // if (!_loopTimeout.has(target)) {
+                //     _loopTimeout.set(target, {});
+                // }
+
+                // const dotpath = [...path, key].join('.');
+                // const timeouts = _loopTimeout.get(target);
+                // if (timeouts[dotpath]) {
+                //     _console.log('Timeout', dotpath);
+                //     return true;
+                // }
+                // timeouts[dotpath] = true;
+                // setTimeout(() => {
+                //     delete timeouts[dotpath];
+                // });
 
                 // stop here if revoked of does not handle set
                 if (isRevoked || !settings.handleSet) return true;

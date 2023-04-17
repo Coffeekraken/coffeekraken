@@ -1,5 +1,5 @@
 import __SRangeComponent from './SRangeComponent';
-export default function define(props = {}, tagName = 's-range') {
-    __SRangeComponent.define(tagName, __SRangeComponent, props);
+export default function define(props = {}, tagName = 's-range', settings) {
+    __SRangeComponent.define(tagName, __SRangeComponent, props, settings);
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUNBLE9BQU8saUJBQWlCLE1BQU0sbUJBQW1CLENBQUM7QUFFbEQsTUFBTSxDQUFDLE9BQU8sVUFBVSxNQUFNLENBQzFCLFFBQXdDLEVBQUUsRUFDMUMsT0FBTyxHQUFHLFNBQVM7SUFFbkIsaUJBQWlCLENBQUMsTUFBTSxDQUFDLE9BQU8sRUFBRSxpQkFBaUIsRUFBRSxLQUFLLENBQUMsQ0FBQztBQUNoRSxDQUFDIn0=
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUVBLE9BQU8saUJBQWlCLE1BQU0sbUJBQW1CLENBQUM7QUFFbEQsTUFBTSxDQUFDLE9BQU8sVUFBVSxNQUFNLENBQzFCLFFBQXdDLEVBQUUsRUFDMUMsT0FBTyxHQUFHLFNBQVMsRUFDbkIsUUFBdUM7SUFFdkMsaUJBQWlCLENBQUMsTUFBTSxDQUFDLE9BQU8sRUFBRSxpQkFBaUIsRUFBRSxLQUFLLEVBQUUsUUFBUSxDQUFDLENBQUM7QUFDMUUsQ0FBQyJ9

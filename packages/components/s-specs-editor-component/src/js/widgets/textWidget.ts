@@ -9,7 +9,7 @@ export default class SSpecsEditorComponentTextWidget extends __SSpecsEditorWidge
     constructor(deps: ISSpecsEditorWidgetDeps) {
         super(deps);
         if (!this.values.value) {
-            this.setValue(
+            this.setDefault(
                 this.propObj.default ?? {
                     value: '',
                 },

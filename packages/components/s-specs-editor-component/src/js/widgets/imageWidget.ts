@@ -13,7 +13,7 @@ export default class SSpecsEditorComponentImageWidget extends __SSpecsEditorWidg
         super(deps);
 
         if (!this.values.url && this.propObj.default) {
-            this.setValue(this.propObj.default);
+            this.setDefault(this.propObj.default);
         }
     }
 

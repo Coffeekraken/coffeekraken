@@ -15,6 +15,12 @@
             "description": "Heading title",
             "required": true
         },
+        "text": {
+            "type": "Text",
+            "title": "Text",
+            "description": "Heading text",
+            "required": true
+        },
         "image": {
             "type": "Image",
             "title": "Image",

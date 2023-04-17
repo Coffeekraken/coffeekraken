@@ -54,6 +54,7 @@
         "@coffeekraken/s-glob": "^2.0.0-alpha.27",
         "@coffeekraken/s-google-map-component": "^2.0.0-alpha.27",
         "@coffeekraken/s-highlight-feature": "^2.0.0-alpha.27",
+        "@coffeekraken/s-i18n": "^2.0.0-alpha.27",
         "@coffeekraken/s-images-builder": "^2.0.0-alpha.27",
         "@coffeekraken/s-inline-feature": "^2.0.0-alpha.27",
         "@coffeekraken/s-interface": "^2.0.0-alpha.27",
@@ -104,13 +105,12 @@
         "@coffeekraken/s-vite": "^2.0.0-alpha.27",
         "@coffeekraken/s-vite-postcss-plugin": "^2.0.0-alpha.27",
         "@coffeekraken/s-vite-sugar-plugin": "^2.0.0-alpha.27",
+        "@coffeekraken/s-wysiwyg-component": "^2.0.0-alpha.27",
         "@coffeekraken/sugar": "^2.0.0-alpha.27",
         "chalk": "^5.1.2",
         "dotenv": "^16.0.1",
         "enquire": "^0.0.2",
-        "fs-extra": "^10.1.0",
-        "@coffeekraken/s-wysiwyg-component": "^2.0.0-alpha.27",
-        "@coffeekraken/s-i18n": "^2.0.0-alpha.27"
+        "fs-extra": "^10.1.0"
     },
     "main": "dist/pkg/cjs/node/exports.js",
     "module": "dist/pkg/esm/node/exports.js",

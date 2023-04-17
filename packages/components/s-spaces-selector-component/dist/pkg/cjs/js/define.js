@@ -4,8 +4,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const SSpacesSelectorComponent_1 = __importDefault(require("./SSpacesSelectorComponent"));
-function define(props = {}, tagName = 's-spaces-selector') {
-    SSpacesSelectorComponent_1.default.define(tagName, SSpacesSelectorComponent_1.default, props);
+function define(props = {}, tagName = 's-spaces-selector', settings) {
+    SSpacesSelectorComponent_1.default.define(tagName, SSpacesSelectorComponent_1.default, props, settings);
 }
 exports.default = define;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7O0FBQ0EsMEZBQW9FO0FBRXBFLFNBQXdCLE1BQU0sQ0FDMUIsUUFBaUQsRUFBRSxFQUNuRCxPQUFPLEdBQUcsbUJBQW1CO0lBRTdCLGtDQUEwQixDQUFDLE1BQU0sQ0FDN0IsT0FBTyxFQUNQLGtDQUEwQixFQUMxQixLQUFLLENBQ1IsQ0FBQztBQUNOLENBQUM7QUFURCx5QkFTQyJ9
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7O0FBRUEsMEZBQW9FO0FBRXBFLFNBQXdCLE1BQU0sQ0FDMUIsUUFBaUQsRUFBRSxFQUNuRCxPQUFPLEdBQUcsbUJBQW1CLEVBQzdCLFFBQXVDO0lBRXZDLGtDQUEwQixDQUFDLE1BQU0sQ0FDN0IsT0FBTyxFQUNQLGtDQUEwQixFQUMxQixLQUFLLEVBQ0wsUUFBUSxDQUNYLENBQUM7QUFDTixDQUFDO0FBWEQseUJBV0MifQ==

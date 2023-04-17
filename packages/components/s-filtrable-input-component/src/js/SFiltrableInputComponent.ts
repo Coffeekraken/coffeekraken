@@ -13,7 +13,7 @@ import {
     __distanceFromElementTopToViewportBottom,
     __distanceFromElementTopToViewportTop,
     __getStyleProperty,
-    __onScrollEnd
+    __onScrollEnd,
 } from '@coffeekraken/sugar/dom';
 import __stripTags from '@coffeekraken/sugar/js/dom/manipulate/stripTags';
 import { __hotkey } from '@coffeekraken/sugar/keyboard';
@@ -75,9 +75,9 @@ export interface ISFiltrableInputState {
  * @support         edge
  *
  * @import          import { define as __SFiltrableInputComponentDefine } from '@coffeekraken/s-filtrable-input-component';
- * 
+ *
  * @snippet         __SFiltrableInputComponentDefine($1)
- * 
+ *
  * @install           shell
  * npm i @coffeekraken/s-filtrable-input-component
  *
@@ -157,9 +157,8 @@ export default class SFiltrableInputComponent extends __SLitComponent {
     static get state() {
         return {
             displayedMaxItems: 0,
-            value: '',
-            isLoading: false,
-            items: []
+            searchValue: '',
+            items: [],
         };
     }
 
@@ -182,6 +181,7 @@ export default class SFiltrableInputComponent extends __SLitComponent {
     _templatesFromHtml;
     _baseTemplates;
     _items;
+    _isLoading: boolean = false;
 
     constructor() {
         super(
@@ -199,14 +199,22 @@ export default class SFiltrableInputComponent extends __SLitComponent {
     async mount() {
         this.state.displayedMaxItems = this.props.maxItems;
 
-        if (this.props.items && typeof this.props.items === 'string') {
-            try {
-                this.state.items = JSON.parse(this.props.items);
-            } catch (e) {
-                const $itemsElm = document.querySelector(this.props.items);
-                if ($itemsElm) {
-                    this.state.items = JSON.parse($itemsElm.innerHTML.trim());
+        if (this.props.items) {
+            if (typeof this.props.items === 'string') {
+                try {
+                    this.state.items = JSON.parse(this.props.items);
+                } catch (e) {
+                    const $itemsElm = document.querySelector(this.props.items);
+                    if ($itemsElm) {
+                        this.state.items = JSON.parse(
+                            $itemsElm.innerHTML.trim(),
+                        );
+                    }
                 }
+            } else if (typeof this.props.items === 'function') {
+                this.state.items = await this.props.items();
+            } else {
+                this.state.items = this.props.items;
             }
 
             this.requestUpdate();
@@ -233,20 +241,14 @@ export default class SFiltrableInputComponent extends __SLitComponent {
                     break;
                 case 'empty':
                     return html`
-                        <div
-                            class="${this.utils.cls('_empty')}"
-                        >
+                        <div class="${this.utils.cls('_empty')}">
                             ${this.props.emptyText}
                         </div>
                     `;
                     break;
                 case 'loading':
                     return html`
-                        <div
-                            class="${this.utils.cls(
-                                '_loading',
-                            )}"
-                        >
+                        <div class="${this.utils.cls('_loading')}">
                             ${this.props.loadingText}
                         </div>
                     `;
@@ -254,8 +256,8 @@ export default class SFiltrableInputComponent extends __SLitComponent {
             }
         };
 
-         // if we have the focus in the
-         if (__isFocusWithin(this)) {
+        // if we have the focus in the
+        if (__isFocusWithin(this)) {
             setTimeout(() => {
                 this.$input.focus();
             });
@@ -264,11 +266,13 @@ export default class SFiltrableInputComponent extends __SLitComponent {
 
     async firstUpdated() {
         // input
-        this.$input = <any>this.querySelector('input');
-        this.utils.fastdom.mutate(() => {
-            this.$input.setAttribute('autocomplete', 'off');
-        });
-        
+        this.$input =
+            <any>this.querySelector('input') ?? document.createElement('input');
+        if (!this.$input?.parentElement) {
+            this.appendChild(this.$input);
+        }
+        this.$input.setAttribute('autocomplete', 'off');
+
         // @ts-ignore
         this.$form = this.$input.form;
         // prevent from sending form if search is opened
@@ -293,7 +297,7 @@ export default class SFiltrableInputComponent extends __SLitComponent {
             }
             // @ts-ignore
             const value = e.target.value;
-            this.state.value = value;
+            this.state.searchValue = value;
             this.state.displayedMaxItems = this.props.maxItems;
             this.filterItems();
         });
@@ -303,24 +307,20 @@ export default class SFiltrableInputComponent extends __SLitComponent {
             }
             // @ts-ignore
             const value = e.target.value;
-            this.state.value = value;
+            this.state.searchValue = value;
             this.filterItems();
             this._updateListSizeAndPosition();
         });
 
         // @ts-ignore
-        this.$input.classList.add(
-            ...this.utils.cls('_input').split(' '),
-        );
+        this.$input.classList.add(...this.utils.cls('_input').split(' '));
         if (this.props.classes.input) {
             this.$input.classList.add(this.props.classes.input);
         }
 
         this.$container = this;
         this.$container.classList.add('s-filtrable-input');
-        this.$container.classList.add(
-            ...this.utils.cls().split(' '),
-        );
+        this.$container.classList.add(...this.utils.cls().split(' '));
         if (this.props.classes.container) {
             this.$container.classList.add(this.props.classes.container);
         }
@@ -332,13 +332,9 @@ export default class SFiltrableInputComponent extends __SLitComponent {
         this.prepend(this.$input);
         this.filterItems();
 
-        document.addEventListener(
-            'scroll',
-            () => {
-                this._updateListSizeAndPosition();
-            },
-            ,
-        );
+        document.addEventListener('scroll', () => {
+            this._updateListSizeAndPosition();
+        });
         this._updateListSizeAndPosition();
 
         __onScrollEnd(this.$list, () => {
@@ -424,13 +420,13 @@ export default class SFiltrableInputComponent extends __SLitComponent {
         });
 
         // restore value from state
-        if (this.state.value) {
-            this.$input.value = this.state.value;
+        if (this.state.searchValue) {
+            this.$input.value = this.state.searchValue;
         }
 
         // open if a value exists
         if (this.$input.value) {
-            this.state.value = this.$input.value;
+            this.state.searchValue = this.$input.value;
             // __cursorToEnd(this.$input);
             this.filterItems(true);
         }
@@ -519,7 +515,7 @@ export default class SFiltrableInputComponent extends __SLitComponent {
             },
         });
         // @ts-ignore
-        this.state.value = this.$input.value;
+        this.state.searchValue = this.$input.value;
         // @ts-ignore
         this.requestUpdate();
         // close on select if needed
@@ -529,7 +525,6 @@ export default class SFiltrableInputComponent extends __SLitComponent {
         // reset on select
         if (this.props.resetOnSelect && !item.preventReset) {
             this.reset();
-            this.filterItems();
         }
     }
     validateAndClose() {
@@ -545,6 +540,8 @@ export default class SFiltrableInputComponent extends __SLitComponent {
     reset() {
         this.resetSelected();
         this.$input.value = '';
+        this.state.searchValue = '';
+        this.filterItems();
     }
     close() {
         __cursorToEnd(this.$input);
@@ -552,7 +549,7 @@ export default class SFiltrableInputComponent extends __SLitComponent {
     }
     async refreshItems() {
         if (typeof this.props.items === 'function') {
-            this.state.isLoading = true;
+            this._isLoading = true;
             this.requestUpdate();
             const items = await this.props.items({
                 value: (<HTMLInputElement>this.$input).value,
@@ -582,7 +579,7 @@ export default class SFiltrableInputComponent extends __SLitComponent {
 
         let items = this.state.items;
 
-        let searchValue = this.state.value;
+        let searchValue = this.state.searchValue;
         if (this.props.searchValuePreprocess) {
             searchValue = this.props.searchValuePreprocess(searchValue);
         }
@@ -649,7 +646,7 @@ export default class SFiltrableInputComponent extends __SLitComponent {
 
         // @ts-ignore
         this.filteredItems = filteredItems;
-        this.state.isLoading = false;
+        this._isLoading = false;
         // @ts-ignore
         this.requestUpdate();
     }
@@ -677,8 +674,8 @@ export default class SFiltrableInputComponent extends __SLitComponent {
         if (!this.utils.isActive() || this.props.inline) return;
 
         const marginTop = __getStyleProperty(this.$dropdown, 'marginTop'),
-            marginLeft = __getStyleProperty(this.$dropdown, 'marginLeft'),
-            marginRight = __getStyleProperty(this.$dropdown, 'marginRight'),
+            // marginLeft = __getStyleProperty(this.$dropdown, 'marginLeft'),
+            // marginRight = __getStyleProperty(this.$dropdown, 'marginRight'),
             marginBottom = __getStyleProperty(this.$dropdown, 'marginBottom');
         const distanceTop = __distanceFromElementTopToViewportTop(this.$input);
         const distanceBottom =
@@ -705,172 +702,153 @@ export default class SFiltrableInputComponent extends __SLitComponent {
      * This function just remove a keyword from the input and filter the items again
      */
     _removeKeyword(keyword: string): void {
-        const newValue = this.state.value
+        const newValue = this.state.searchValue
             .split(' ')
             .filter((k) => k !== keyword)
             .join(' ');
         this.$input.value = newValue;
-        this.state.value = newValue;
+        this.state.searchValue = newValue;
         this.filterItems();
         __cursorToEnd(this.$input);
     }
 
     render() {
         return html`
-            <div class="${this.utils.cls('')}">
+            <div
+                class="${this.utils.cls('_dropdown')} ${this.props.classes
+                    .dropdown}"
+            >
                 <div
-                    class="${this.utils.cls('_dropdown')} ${this
-                        .props.classes.dropdown}"
+                    class="${this.utils.cls('_before')} ${this.props.classes
+                        .before}"
+                    tabindex="-1"
                 >
-                    <div
-                        class="${this.utils.cls(
-                            '_before',
-                        )} ${this.props.classes.before}"
-                        tabindex="-1"
-                    >
-                        ${this._getTemplate('before')}
-                    </div>
-                    ${this.$input &&
-                    this.$input.value &&
-                    this.props.showKeywords
+                    ${this._getTemplate('before')}
+                </div>
+                ${this.$input && this.$input.value && this.props.showKeywords
+                    ? html`
+                          <div
+                              tabindex="-1"
+                              class="${this.utils.cls('_keywords')} ${this.props
+                                  .classes.keywords}"
+                          >
+                              ${this.$input.value
+                                  .split(' ')
+                                  .filter((s) => s !== '')
+                                  .map(
+                                      (keyword) => html`
+                                          <span
+                                              tabindex="-1"
+                                              @click=${() =>
+                                                  this._removeKeyword(keyword)}
+                                              class="${this.utils.cls(
+                                                  '_keyword',
+                                                  's-badge',
+                                              )}"
+                                              >${keyword}</span
+                                          >
+                                      `,
+                                  )}
+                          </div>
+                      `
+                    : ''}
+                <ul
+                    class="${this.utils.cls('_list')} ${this.props.classes
+                        .list}"
+                >
+                    ${this._isLoading
                         ? html`
-                              <div
-                                  tabindex="-1"
-                                  class="${this.utils.cls(
-                                      '_keywords',
-                                  )} ${this.props.classes.keywords}"
+                              <li
+                                  class="${this.utils.cls('_list-item')} ${this
+                                      .props.classes.listItem} ${this.utils.cls(
+                                      '_list-loading',
+                                  )}"
                               >
-                                  ${this.$input.value
-                                      .split(' ')
-                                      .filter((s) => s !== '')
-                                      .map(
-                                          (keyword) => html`
-                                              <span
-                                                  tabindex="-1"
-                                                  @click=${() =>
-                                                      this._removeKeyword(
-                                                          keyword,
-                                                      )}
-                                                  class="${this.utils.cls(
-                                                      '_keyword',
-                                                      's-badge',
-                                                  )}"
-                                                  >${keyword}</span
-                                              >
-                                          `,
-                                      )}
-                              </div>
+                                  ${this.props.templates?.({
+                                      type: 'loading',
+                                      html,
+                                  }) ??
+                                  // @ts-ignore
+                                  this._baseTemplates({
+                                      type: 'loading',
+                                      html,
+                                  })}
+                              </li>
                           `
+                        : !this._isLoading && this.filteredItems.length <= 0
+                        ? html`
+                              <li
+                                  class="${this.utils.cls('_list-item')} ${this
+                                      .props.classes.listItem} ${this.utils.cls(
+                                      '_list-no-item',
+                                  )}"
+                              >
+                                  ${this.props.templates?.({
+                                      type: 'empty',
+                                      html,
+                                  }) ??
+                                  // @ts-ignore
+                                  this._baseTemplates({
+                                      type: 'empty',
+                                      html,
+                                  })}
+                              </li>
+                          `
+                        : !this._isLoading && this.filteredItems.length
+                        ? this.filteredItems.map((item, idx) =>
+                              idx < this.state.displayedMaxItems
+                                  ? html`
+                                        <li
+                                            @click=${() =>
+                                                this.preselectAndValidate(item)}
+                                            @dblclick=${() =>
+                                                this.preselectValidateAndClose(
+                                                    item,
+                                                )}
+                                            @focus=${() =>
+                                                this._setPreselectedItem(item)}
+                                            style="z-index: ${999999999 - idx}"
+                                            tabindex="-1"
+                                            class="${this.utils.cls(
+                                                '_list-item',
+                                            )} ${this.props.classes
+                                                .listItem} ${this.selectedItems.includes(
+                                                item,
+                                            )
+                                                ? 'active'
+                                                : ''}"
+                                            hoverable
+                                        >
+                                            ${this.props.templates?.({
+                                                type: 'item',
+                                                html,
+                                                unsafeHTML,
+                                                item,
+                                                idx,
+                                            }) ??
+                                            // @ts-ignore
+                                            this._baseTemplates({
+                                                type: 'item',
+                                                html,
+                                                unsafeHTML,
+                                                item,
+                                                idx,
+                                            })}
+                                        </li>
+                                    `
+                                  : '',
+                          )
                         : ''}
-                    <ul
-                        class="${this.utils.cls('_list')} ${this
-                            .props.classes.list}"
-                    >
-                        ${this.state.isLoading
-                            ? html`
-                                  <li
-                                      class="${this.utils.cls(
-                                          '_list-item',
-                                      )} ${this.props.classes
-                                          .listItem} ${this.utils.cls(
-                                          '_list-loading',
-                                      )}"
-                                  >
-                                      ${this.props.templates?.({
-                                          type: 'loading',
-                                          html,
-                                      }) ??
-                                      // @ts-ignore
-                                      this._baseTemplates({
-                                          type: 'loading',
-                                          html,
-                                      })}
-                                  </li>
-                              `
-                            : !this.state.isLoading &&
-                              this.filteredItems.length <= 0
-                            ? html`
-                                  <li
-                                      class="${this.utils.cls(
-                                          '_list-item',
-                                      )} ${this.props.classes
-                                          .listItem} ${this.utils.cls(
-                                          '_list-no-item',
-                                      )}"
-                                  >
-                                      ${this.props.templates?.({
-                                          type: 'empty',
-                                          html,
-                                      }) ??
-                                      // @ts-ignore
-                                      this._baseTemplates({
-                                          type: 'empty',
-                                          html,
-                                      })}
-                                  </li>
-                              `
-                            : !this.state.isLoading && this.filteredItems.length
-                            ? this.filteredItems.map((item, idx) =>
-                                  idx < this.state.displayedMaxItems
-                                      ? html`
-                                            <li
-                                                @click=${() =>
-                                                    this.preselectAndValidate(
-                                                        item,
-                                                    )}
-                                                @dblclick=${() =>
-                                                    this.preselectValidateAndClose(
-                                                        item,
-                                                    )}
-                                                @focus=${() =>
-                                                    this._setPreselectedItem(
-                                                        item,
-                                                    )}
-                                                style="z-index: ${999999999 -
-                                                idx}"
-                                                tabindex="-1"
-                                                class="${this.utils.cls(
-                                                    '_list-item',
-                                                )} ${this.props.classes
-                                                    .listItem} ${this.selectedItems.includes(
-                                                    item,
-                                                )
-                                                    ? 'active'
-                                                    : ''}"
-                                                hoverable
-                                            >
-                                                ${this.props.templates?.({
-                                                    type: 'item',
-                                                    html,
-                                                    unsafeHTML,
-                                                    item,
-                                                    idx,
-                                                }) ??
-                                                // @ts-ignore
-                                                this._baseTemplates({
-                                                    type: 'item',
-                                                    html,
-                                                    unsafeHTML,
-                                                    item,
-                                                    idx,
-                                                })}
-                                            </li>
-                                        `
-                                      : '',
-                              )
-                            : ''}
-                    </ul>
-                    <div
-                        class="${this.utils.cls(
-                            '_after',
-                        )} ${this.props.classes.after}"
-                        tabindex="-1"
-                    >
-                        ${this.props.templates?.({
-                            type: 'after',
-                            html,
-                        })}
-                    </div>
+                </ul>
+                <div
+                    class="${this.utils.cls('_after')} ${this.props.classes
+                        .after}"
+                    tabindex="-1"
+                >
+                    ${this.props.templates?.({
+                        type: 'after',
+                        html,
+                    })}
                 </div>
             </div>
         `;

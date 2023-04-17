@@ -68,28 +68,28 @@
                     <h4 class="s-typo:h5 s-mbe:30">
                         Contact
                     </h4>
-                    <p class="s-typo:p s-tc:accent s-mbe:10">{{ name }}</p>
-                    <p class="s-typo:p s-mbe:10">{{ street }}</p>
-                    <p class="s-typo:p s-mbe:10">{{ city }}</p>
-                    {% if phone %}
-                        <a href="tel: {{ phone }}" class="s-typo:a:p s-mbe:10">{{ phone }}</a>
+                    <p class="s-typo:p s-tc:accent s-mbe:10">{{ name.value }}</p>
+                    <p class="s-typo:p s-mbe:10">{{ street.value }}</p>
+                    <p class="s-typo:p s-mbe:10">{{ city.value }}</p>
+                    {% if phone.value %}
+                        <a href="tel: {{ phone.value }}" class="s-typo:a:p s-mbe:10">{{ phone.value }}</a>
                     {% endif %}
-                    {% if email %}
-                        <a href="mailto: {{ email }}" class="s-typo:a:p s-mbe:10">{{ email }}</a>
+                    {% if email.value %}
+                        <a href="mailto: {{ email.value }}" class="s-typo:a:p s-mbe:10">{{ email.value }}</a>
                     {% endif %}
                     <div class="_socials">
-                        {% if facebookUrl %}
-                            <a href="{{ facebookUrl }}" title="Facebook" target="_blank">
+                        {% if facebookUrl.value %}
+                            <a href="{{ facebookUrl.value }}" title="Facebook" target="_blank">
                                 <i class="s-icon:facebook"></i>
                             </a>
                         {% endif %}
-                        {% if twitterUrl %}
-                            <a href="{{ twitterUrl }}" title="Twitter" target="_blank">
+                        {% if twitterUrl.value %}
+                            <a href="{{ twitterUrl.value }}" title="Twitter" target="_blank">
                                 <i class="s-icon:twitter"></i>
                             </a>
                         {% endif %}
-                        {% if instagramUrl %}
-                            <a href="{{ instagramUrl }}" title="Instagram" target="_blank">
+                        {% if instagramUrl.value %}
+                            <a href="{{ instagramUrl.value }}" title="Instagram" target="_blank">
                                 <i class="s-icon:instagram"></i>
                             </a>
                         {% endif %}

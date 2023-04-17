@@ -116,7 +116,7 @@ export default class SStdioConsoleSource
                 args = args.map((log) => {
                     // if (!log) return;
                     return new __SLog({
-                        type: log?.type ?? __SLog.TYPE_LOG,
+                        type: log?.type ?? key ?? __SLog.TYPE_LOG,
                         value: log,
                         group: log?.group ?? group,
                         notify: key === 'notify' || log?.notify,

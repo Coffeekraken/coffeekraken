@@ -489,6 +489,9 @@ export default class SMarkdownBuilder extends __SBuilder {
                     const viewRendererRes = await viewRenderer.render(
                         filePath,
                         viewData,
+                        {
+                            dataFile: true,
+                        },
                     );
 
                     // handle error in render

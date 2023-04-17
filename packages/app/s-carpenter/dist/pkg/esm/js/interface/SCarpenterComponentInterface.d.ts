@@ -89,10 +89,18 @@ export default class SCarpenterComponentInterface extends __SInterface {
             description: string;
             default: string;
         };
+        i18n: {
+            type: string;
+            description: string;
+            default: {
+                addComponent: string;
+            };
+        };
         icons: {
             type: string;
             description: string;
             default: {
+                add: string;
                 mobile: string;
                 tablet: string;
                 desktop: string;

@@ -8,7 +8,7 @@ export default class SSpecsEditorComponentSwitchWidget extends __SSpecsEditorWid
         super(deps);
 
         if (this.values.value === undefined) {
-            this.setValue(
+            this.setDefault(
                 this.propObj.default ?? {
                     value: false,
                 },

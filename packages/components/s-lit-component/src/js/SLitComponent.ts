@@ -6,7 +6,7 @@ import __SComponentUtils, {
     SComponentUtilsDefaultPropsInterface,
 } from '@coffeekraken/s-component-utils';
 import __SInterface from '@coffeekraken/s-interface';
-import { __querySelectorLive } from '@coffeekraken/sugar/dom';
+import { __injectStyle, __querySelectorLive } from '@coffeekraken/sugar/dom';
 import { __expandPleasantCssClassnames } from '@coffeekraken/sugar/html';
 import { __deepMerge } from '@coffeekraken/sugar/object';
 import __dashCase from '@coffeekraken/sugar/shared/string/dashCase';
@@ -77,7 +77,7 @@ export interface ISLitComponentSettings extends ISComponentUtilsSettings {
 }
 
 export interface ISLitComponentDefineSettings {
-    window: any;
+    window?: any;
 }
 
 export interface ISLitComponentDefaultProps {
@@ -335,6 +335,15 @@ export default class SLitComponent extends LitElement {
             };
         }
 
+        // check if we need to inject the css into the
+        // document that is not the same as the app one
+        const doc = this._getDocumentFromElement(this);
+        if (document !== doc && this.constructor.styles) {
+            __injectStyle(this.constructor.styles, {
+                rootNode: doc,
+            });
+        }
+
         // make sure the injected styles stays BEFORE the link[rel="stylesheet"]
         // to avoid style override
         if (!SLitComponent._keepInjectedCssBeforeStylesheetLinksInited) {
@@ -409,6 +418,13 @@ export default class SLitComponent extends LitElement {
                 this._mount();
             });
         })();
+    }
+
+    _getDocumentFromElement($elm) {
+        while ($elm.parentNode) {
+            $elm = $elm.parentNode;
+        }
+        return $elm;
     }
 
     /**

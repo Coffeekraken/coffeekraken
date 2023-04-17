@@ -1,0 +1,89 @@
+[s-carpenter-container] {
+    position: relative;
+
+    .s-carpenter-app_website-container {
+        height: 0;
+        position: relative;
+        display: flex;
+        z-index: 5000;
+        align-items: center;
+        background: sugar.color(accent, --alpha 0.1);
+        @sugar.transition;
+        border: 0px dashed sugar.color(accent, border);
+        height: 200px;
+        margin: sugar.margin(50);
+        border-width: 1px;
+
+        &:after {
+            /* height: 300px; */
+            /* transform: translateY(calc(-50% - 100px)); */
+        }
+
+        &:hover {
+            > * {
+                opacity: 1;
+                pointer-events: all;
+            }
+        }
+
+        &:after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            width: 100%;
+            /* height: 200px; */
+            /* transform: translateY(-50%); */
+            background: transparent;
+            @sugar.transition;
+        }
+    }
+
+    .s-carpenter-app_website-container-toolbar {
+        position: absolute;
+        z-index: 9999;
+        left: 50%;
+        transform: translate(-50%, 0);
+        background: sugar.color(main, background);
+        color: sugar.color(main, text);
+        display: flex;
+        padding: sugar.padding(20);
+        flex-wrap: nowrap;
+        align-items: center;
+        cursor: pointer;
+        user-select: none;
+        pointer-events: none;
+        opacity: 0;
+        @sugar.border.radius (30);
+        @sugar.depth (100);
+        @sugar.transition;
+
+        &:after {
+            content: ' ';
+            position: absolute;
+            border-style: default;
+            border-color: sugar.color(main, background) transparent transparent
+                transparent;
+            bottom: 100%;
+            left: calc(50% - 12.5px);
+            border-width: calc(25px / 2);
+            transform: rotate(180deg);
+        }
+    }
+
+    .s-carpenter-app_website-container-add {
+        @sugar.ui.button();
+    }
+
+    .s-carpenter-app-add-component {
+        @sugar.ui.filtrableInput();
+
+        ._item {
+            font-weight: bold;
+            white-space: nowrap;
+        }
+        ._type {
+            font-weight: initial;
+        }
+    }
+}

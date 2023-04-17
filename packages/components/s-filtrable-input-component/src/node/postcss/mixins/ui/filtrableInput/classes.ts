@@ -28,14 +28,14 @@ export { postcssUiFiltrableInputClassesInterface as interface };
  * @type                 PostcssMixin
  * @platform            css
  * @status              beta
- * 
+ *
  * This mixin represent a filtrable input
  *
  * @snippet      @sugar.ui.filtrableInput.classes($1);
  *
  * @example        css
  * \@sugar.ui.filtrableInput.classes;
- * 
+ *
  * @since    2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
@@ -60,7 +60,7 @@ export default function ({
 
     vars.code(
         `
-        [lnf="default"] > .s-filtrable-input {
+        .s-filtrable-input[lnf="default"] {
             @sugar.ui.filtrableInput($scope: bare);
         }
         `,
@@ -72,7 +72,7 @@ export default function ({
     // @TODO            example
     vars.comment(
         `/**
-            * @name           [lnf="default"] > .s-filtrable-input
+            * @name           .s-filtrable-input[lnf="default"]
             * @namespace          sugar.style.ui.filtrableInput
             * @type           CssClass
             * 
@@ -86,7 +86,7 @@ export default function ({
         */`,
     ).code(
         `
-                [lnf="default"]:not(.s-bare) > .s-filtrable-input {
+                .s-filtrable-input[lnf="default"]:not(.s-bare) {
                     @sugar.ui.filtrableInput($lnf: solid, $scope: lnf);
                 }`,
         {

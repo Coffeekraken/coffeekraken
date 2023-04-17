@@ -3,6 +3,7 @@ import __SLitComponent from '@coffeekraken/s-lit-component';
 import { __i18n } from '@coffeekraken/s-i18n';
 
 import { __moveItem } from '@coffeekraken/sugar/array';
+import { __isPlainObject } from '@coffeekraken/sugar/is';
 import { __delete, __get, __set } from '@coffeekraken/sugar/object';
 
 import { __copy } from '@coffeekraken/sugar/clipboard';
@@ -241,8 +242,10 @@ export default class SSpecsEditorComponent extends __SLitComponent {
         if (!this._values) {
             this._values = Object.assign({}, this.props.values ?? {});
         }
+
         for (let [key, propObj] of Object.entries(this.props.specs.props)) {
             if (this._values[key] === undefined) {
+                _console.log('set', key, propObj.type);
                 if (propObj.type?.match(/\[\]$/)) {
                     this._values[key] = [];
                 } else {
@@ -395,6 +398,15 @@ export default class SSpecsEditorComponent extends __SLitComponent {
                     preferAssign: true,
                 },
             );
+        } else if (!__isPlainObject(values)) {
+            _console.log('SS', values);
+            console.error(
+                `<red>[SSpecsEditorComponent]</red> It seems that your value "<cyan>${valuePath.join(
+                    '.',
+                )}</cyan>" is a <yellow>${typeof values}</yellow> but it MUST be an object according to the following specs:`,
+            );
+            console.warn(propObj);
+            return;
         }
 
         let widgetId = values._id;
@@ -1181,7 +1193,7 @@ export default class SSpecsEditorComponent extends __SLitComponent {
                                           : ''}
                                   </nav>
                               </div>
-                              ${this.props.source
+                              ${Object.keys(this.props.source ?? {}).length
                                   ? html`
                                         <div
                                             class="${this.utils.cls(

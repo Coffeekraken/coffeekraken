@@ -77,6 +77,9 @@ export default function markdown(req, res, settings = {}) {
             {
                 body: html,
             },
+            {
+                dataFile: true,
+            },
         );
 
         res.status(200);

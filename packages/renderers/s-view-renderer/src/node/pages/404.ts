@@ -34,6 +34,8 @@ export default function page404(
     renderer: any,
     data: I404Data,
 ): Promise<ISViewRendererRenderResult> {
-    const result = renderer.render('pages.error.404', data);
+    const result = renderer.render('pages.error.404', data, {
+        dataFile: true,
+    });
     return result;
 }

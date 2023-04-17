@@ -1,4 +1,4 @@
-<div class="s-card {{ attributes.class }} {{ direction ? 's-card--' ~ direction : '' }} {{ __spacesClasses(spaces, frontspec) }}" {{ __attrs(attributes, ['class'])|raw }}
+<div class="s-card {{ attributes.class }} {{ direction.value ? 's-card--' ~ direction.value : '' }} {{ __spacesClasses(spaces, frontspec) }}" {{ __attrs(attributes, ['class'])|raw }}
     s-specs="views.components.card"
 >
 {{ __specsDataTemplate(_context)|raw }}
@@ -10,19 +10,19 @@
     {% endif %}
 
     <div class="s-card_content s-spacing:{{ spacing ? spacing : '30' }}">
-        {% if title %}
-            <h1 class="s-card_title s-typo:h3">{{ title|raw }}</h1>
+        {% if title.value %}
+            <h1 class="s-card_title s-typo:h3">{{ title.value|raw }}</h1>
         {% endif %}
-        {% if intro %}
-            <p class="s-card_lead s-typo:lead s-tc:{{ color ? color : 'accent' }}">{{ intro|raw }}</p>
+        {% if intro.value %}
+            <p class="s-card_lead s-typo:lead s-tc:{{ color.value ? color.value : 'accent' }}">{{ intro.value|raw }}</p>
         {% endif %}
-        {% if text %}
-            <p class="s-card_text s-typo:p">{{ text|raw }}</p>
+        {% if text.value %}
+            <p class="s-card_text s-typo:p">{{ text.value|raw }}</p>
         {% endif %}
         {% if cta %}
             <div class="s-card_cta">
                 {% set override = {} %}
-                {% if color and not cta.color %}
+                {% if color.value and not cta.color.value %}
                     {% set override = {
                         color: color
                     } %}

@@ -4,6 +4,12 @@ import __SSpecs from '@coffeekraken/s-specs';
 import __SViewRenderer from '@coffeekraken/s-view-renderer';
 import { __serverObjectFromExpressRequest } from '@coffeekraken/sugar/php';
 
+export interface ICarpenterViewHandlerViewData {
+    $specs?: any;
+    $source?: any;
+    [key: string]: any;
+}
+
 export default async function carpenterViewHandler({
     req,
     res,
@@ -25,24 +31,21 @@ export default async function carpenterViewHandler({
 
     let viewPath =
             currentSpecs.viewPath ?? req.params.dotpath.replace(/^views\./, ''),
-        viewData = {
-            $specs: currentSpecs,
-            $source: {},
-            values: {},
-        };
+        viewData: ICarpenterViewHandlerViewData = {};
 
     // if the method is "POST",
     // meaning that it's a component update
     // with some component data passed.
     // we use these instead of the default ones
     if (req.method === 'POST' && req.body) {
-        viewData.values = req.body;
+        viewData = req.body;
     } else {
         // load the actual view values
-        viewData.values = await __SDataFileGeneric.load(
-            currentSpecs.metas.path,
-        );
+        viewData = await __SDataFileGeneric.load(currentSpecs.metas.path);
     }
+
+    // set the $specs in the view data
+    viewData.$specs = currentSpecs;
 
     // load the "...Source.data.js" data file to simulate a source
     // in the editor
@@ -54,6 +57,7 @@ export default async function carpenterViewHandler({
     const renderer = new __SViewRenderer({
         sharedData: res.templateData.shared ?? {},
     });
+
     const currentViewResult = await renderer.render(viewPath, viewData);
 
     // if the request if made with a POST method

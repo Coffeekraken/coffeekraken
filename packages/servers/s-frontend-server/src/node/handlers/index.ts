@@ -23,9 +23,14 @@
 export default function doc(req, res, settings = {}) {
     return new Promise(async (resolve) => {
         // render the proper template
-        const pageHtml = await res.viewRenderer.render({
-            body: 'Hello world',
-        });
+        const pageHtml = await res.viewRenderer.render(
+            {
+                body: 'Hello world',
+            },
+            {
+                dataFile: true,
+            },
+        );
 
         // _console.log(req);
         res.type('text/html');

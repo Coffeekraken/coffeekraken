@@ -9,7 +9,7 @@ export default class SSpecsEditorComponentHtmlWidget extends __SSpecsEditorWidge
         super(deps);
 
         if (!this.values.value) {
-            this.setValue(
+            this.setDefault(
                 this.propObj.default ?? {
                     value: '',
                 },

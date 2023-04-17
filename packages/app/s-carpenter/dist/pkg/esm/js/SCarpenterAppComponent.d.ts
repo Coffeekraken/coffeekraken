@@ -15,8 +15,13 @@ export interface ISCarpenterAppComponentFeatures {
     nav: boolean;
     media: boolean;
 }
+export interface ISCarpenterAppComponentAddComponent {
+    namespace: string;
+    $after: HTMLElement;
+}
 export interface ISCarpenterAppComponentData {
     values?: any;
+    currentSpecs: any;
     specs: any;
     source?: ISSpecsEditorComponentSource;
     specsByTypes: Record<string, any>;
@@ -63,7 +68,6 @@ export default class SCarpenterAppComponent extends __SLitComponent {
     _$currentElm: any;
     _$preselectedElm: any;
     _data: ISCarpenterAppComponentData;
-    _cachedData: Record<string, ISCarpenterAppComponentData>;
     _websiteWindow: any;
     _$websiteDocument: any;
     _$websiteIframe: any;
@@ -81,6 +85,8 @@ export default class SCarpenterAppComponent extends __SLitComponent {
     mount(): Promise<void>;
     firstUpdated(): Promise<void>;
     
+    _initWebsiteContainers(): void;
+    
     _registerShortcuts($scope: Document): void;
     
     _initWebsiteIframeContent(): void;
@@ -93,6 +99,10 @@ export default class SCarpenterAppComponent extends __SLitComponent {
     _init(): Promise<void>;
     
     _cleanRootDocument(): void;
+    
+    _defineAddComponentFiltrableInput(): void;
+     _addComponent(specs: ISCarpenterAppComponentAddComponent): Promise<void>;
+    applyComponent(values?: any): Promise<void>;
     
     _listenSpecsEditorUpdate(): void;
     

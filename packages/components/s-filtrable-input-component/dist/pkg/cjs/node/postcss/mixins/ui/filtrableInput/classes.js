@@ -42,7 +42,7 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
     const finalParams = Object.assign({ scope: ['bare', 'lnf', 'vr'] }, params);
     const vars = new CssVars();
     vars.code(`
-        [lnf="default"] > .s-filtrable-input {
+        .s-filtrable-input[lnf="default"] {
             @sugar.ui.filtrableInput($scope: bare);
         }
         `, {
@@ -50,7 +50,7 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
     });
     // @TODO            example
     vars.comment(`/**
-            * @name           [lnf="default"] > .s-filtrable-input
+            * @name           .s-filtrable-input[lnf="default"]
             * @namespace          sugar.style.ui.filtrableInput
             * @type           CssClass
             * 
@@ -62,7 +62,7 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
             * @since    2.0.0
             * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */`).code(`
-                [lnf="default"]:not(.s-bare) > .s-filtrable-input {
+                .s-filtrable-input[lnf="default"]:not(.s-bare) {
                     @sugar.ui.filtrableInput($lnf: solid, $scope: lnf);
                 }`, {
         type: 'CssClass',

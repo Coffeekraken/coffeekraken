@@ -57,6 +57,7 @@ export interface ISViewRendererSettings {
     cacheDir: string;
     defaultEngine: 'twig' | 'blade';
     enginesSettings?: any;
+    dataFile?: boolean;
     sharedData?: any;
     sharedDataFiles?: string[];
     sharedJsonDataFiles?: string[];
@@ -473,12 +474,10 @@ class SViewRenderer extends __SClass implements ISViewRenderer {
                 .replace(/\//gm, '.');
 
             // get the final settings
-            const viewRendererSettings = Object.assign(
-                {},
-                <ISViewRendererSettings>(
-                    __deepMerge(this.settings, settings || {})
-                ),
-            );
+            const viewRendererSettings: ISViewRendererSettings = {
+                dataFile: false,
+                ...__deepMerge(this.settings, settings ?? {}),
+            };
 
             let RendererEngineClass,
                 engine = viewRendererSettings.defaultEngine;
@@ -542,7 +541,9 @@ class SViewRenderer extends __SClass implements ISViewRenderer {
 
             // load the .data.... view neighbour file
             data = __deepMerge(
-                (await __SDataFileGeneric.load(finalViewPath)) ?? {},
+                viewRendererSettings.dataFile
+                    ? (await __SDataFileGeneric.load(finalViewPath)) ?? {}
+                    : {},
                 data ?? {},
             );
 
@@ -555,7 +556,6 @@ class SViewRenderer extends __SClass implements ISViewRenderer {
             );
 
             const rendererInstance = new RendererEngineClass(engineSettings);
-
             let renderPromise, result, error;
             renderPromise = rendererInstance.render(
                 finalViewRelPath ?? viewDotPath,

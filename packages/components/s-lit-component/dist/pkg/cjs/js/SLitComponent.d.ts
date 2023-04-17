@@ -11,7 +11,7 @@ export interface ISLitComponentSettings extends ISComponentUtilsSettings {
     componentUtils: Partial<ISComponentUtilsSettings>;
 }
 export interface ISLitComponentDefineSettings {
-    window: any;
+    window?: any;
 }
 export interface ISLitComponentDefaultProps {
     id: string;
@@ -39,6 +39,7 @@ export default class SLitComponent extends LitElement {
     static propertiesFromInterface(properties: any, int: __SInterface): any;
     
     constructor(settings?: Partial<ISLitComponentSettings>);
+    _getDocumentFromElement($elm: any): any;
     
     _mount(): Promise<boolean>;
 }

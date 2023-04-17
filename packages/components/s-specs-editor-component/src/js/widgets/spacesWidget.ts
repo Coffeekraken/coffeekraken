@@ -12,7 +12,7 @@ export default class SSpecsEditorComponentSpacesWidget extends __SSpecsEditorWid
         super(deps);
 
         if (!this.values.value && this.propObj.default) {
-            this.setValue(this.propObj.default);
+            this.setDefault(this.propObj.default);
         }
     }
 

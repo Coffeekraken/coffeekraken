@@ -22,7 +22,6 @@ export interface ISFiltrableInputComponentProps {
 export interface ISFiltrableInputState {
     displayedMaxItems: number;
     value: string;
-    isActive: boolean;
     isLoading: boolean;
 }
 
@@ -31,9 +30,7 @@ export default class SFiltrableInputComponent extends __SLitComponent {
     static get properties(): any;
     static get state(): {
         displayedMaxItems: number;
-        value: string;
-        isActive: boolean;
-        isLoading: boolean;
+        searchValue: string;
         items: any[];
     };
     $container: HTMLElement;
@@ -47,6 +44,7 @@ export default class SFiltrableInputComponent extends __SLitComponent {
     _templatesFromHtml: any;
     _baseTemplates: any;
     _items: any;
+    _isLoading: boolean;
     constructor();
     mount(): Promise<void>;
     firstUpdated(): Promise<void>;

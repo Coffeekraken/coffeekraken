@@ -14,9 +14,12 @@ export default class SSpecsEditorComponentCheckboxWidget extends __SSpecsEditorW
         super(deps);
 
         if (!this.values.value) {
-            this.setValue(
+            this.setDefault(
                 this.propObj.default ?? {
                     value: [],
+                },
+                {
+                    validate: false,
                 },
             );
         }

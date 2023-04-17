@@ -12,7 +12,7 @@ export interface ISMonorepoRunResult {
 export interface ISMonorepoListParams {
     packagesGlob: string;
     asJson: boolean;
-    publish: undefined | boolean;
+    private: undefined | boolean;
     independent: boolean;
 }
 export interface ISMonorepoListResult {

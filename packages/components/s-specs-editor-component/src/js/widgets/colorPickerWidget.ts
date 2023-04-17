@@ -10,7 +10,7 @@ export default class SSpecsEditorComponentColorPickerWidget extends __SSpecsEdit
     constructor(deps: ISSpecsEditorWidgetDeps) {
         super(deps);
         if (!this.values.value) {
-            this.setValue({
+            this.setDefault({
                 format:
                     this.propObj.default?.format ??
                     this.propObj.format ??

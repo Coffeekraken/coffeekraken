@@ -21,7 +21,10 @@ export default {
         value: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas nec vestibulum mi. Etiam nec arcu ante.',
     },
     cta: {
-        color: 'accent',
+        color: {
+            id: 'accent',
+            value: 'accent',
+        },
         link: {
             text: 'Discover more...',
             url: '/contact',
@@ -29,10 +32,8 @@ export default {
         },
     },
     direction: {
-        value: {
-            id: 'horizontal',
-            value: 'horizontal',
-        },
+        id: 'horizontal',
+        value: 'horizontal',
     },
     margin: {
         media: {

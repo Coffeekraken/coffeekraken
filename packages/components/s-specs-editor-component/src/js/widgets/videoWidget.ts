@@ -27,8 +27,6 @@ export default class SSpecsEditorComponentVideoWidget extends __SSpecsEditorWidg
     }
 
     render() {
-        const values = <ISVideoData>this.values;
-
         return html`
             <div class="${this.editor.utils.cls('_video-widget')}">
                 ${this.renderLabel()}

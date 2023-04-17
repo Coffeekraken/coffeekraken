@@ -52,6 +52,7 @@ export default class SSpecsEditorWidget {
     mergeValue(value: any, settings?: ISSpecsEditorWidgetSetValueSettings): void;
     override(): void;
     canBeOverride(): boolean;
+    setDefault(value: any, settings?: ISSpecsEditorWidgetSetValueSettings): Promise<void>;
     setValue(value: any, settings?: ISSpecsEditorWidgetSetValueSettings): Promise<void>;
     _validate(values?: any): ISSpecsEditorWidgetValidateResult;
     renderLabel(settings?: ISSpecsEditorComponentRenderLabelSettings): any;

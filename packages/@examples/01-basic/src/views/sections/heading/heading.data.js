@@ -4,29 +4,38 @@ export default {
         title: 'Macbook air',
         alt: 'Macbook air',
     },
-    color: '#ff0000',
-    date: {
-        value: '2023-11-10',
-        format: 'YYYY-MM-DD',
-    },
     image: {
         url: '/dist/img/macbookair.png',
         title: 'Macbook air',
         alt: 'Macbook air',
     },
-    title: 'Heading<br /><span class="s-tc:accent">Title</span>!',
-    text: `<p class="s-typo--lead">
+    title: {
+        value: 'Heading<br /><span class="s-tc:accent">Title</span>!',
+    },
+    text: {
+        value: `<p class="s-typo--lead">
     Lorem ipsum dolor sit amet consectetur adipiscing elit congue eu urna etiam, dignitant magnis ultrices ornare.
 </p>
 <p class="s-typo--p">
   Metus lobortis aptent senectus hendrerit convallis porttitor montes ligula inceptos, ridiculus curaempus vehicula duis lacus neque sed, quisque etiam fringilla.
 </p>`,
+    },
     cta: {
         label: 'CTA label...',
-        color: 'accent',
+        color: {
+            id: 'accent',
+            value: 'accent',
+        },
         link: {
-            url: '/contact',
-            title: 'Discover more on apple.com',
+            text: {
+                value: 'Discover more!',
+            },
+            url: {
+                value: '/contact',
+            },
+            title: {
+                value: 'Discover more on apple.com',
+            },
         },
     },
 };

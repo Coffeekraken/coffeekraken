@@ -265,7 +265,8 @@ export default class SFront extends __SClass {
         __SLog.filter((log) => {
             if (settings.logs) return true;
             if (settings.logs === false) return false;
-            if (__isInIframe()) return false;
+            if (__isInIframe() && ['log', 'verbose'].includes(log.type))
+                return false;
             return true;
         });
 

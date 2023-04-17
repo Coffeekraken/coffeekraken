@@ -21,10 +21,12 @@
 
     {% include 'layouts/header/header.twig' %}
 
-    <div class="content">
+    <div class="content" s-carpenter-container="main">
         {{ body|raw }}
     </div>
 
     {% include 'layouts/footer/footer.twig' %}
+
+    <s-carpenter id="carpenter" auto-init escape features='{"save":true,"delete":true}'></s-carpenter>
 
 {% endblock %}

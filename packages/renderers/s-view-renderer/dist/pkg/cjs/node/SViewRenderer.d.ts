@@ -8,6 +8,7 @@ export interface ISViewRendererSettings {
     cacheDir: string;
     defaultEngine: 'twig' | 'blade';
     enginesSettings?: any;
+    dataFile?: boolean;
     sharedData?: any;
     sharedDataFiles?: string[];
     sharedJsonDataFiles?: string[];

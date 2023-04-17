@@ -102,9 +102,15 @@ export default function doc(req, res, settings = {}) {
         });
 
         // render the proper template
-        const pageHtml = await res.viewRenderer.render('pages.doc.doc', {
-            docblocks,
-        });
+        const pageHtml = await res.viewRenderer.render(
+            'pages.doc.doc',
+            {
+                docblocks,
+            },
+            {
+                dataFile: true,
+            },
+        );
 
         res.type('text/html');
         res.status(200);

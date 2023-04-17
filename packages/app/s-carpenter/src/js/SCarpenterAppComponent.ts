@@ -1,5 +1,6 @@
 import __SLitComponent from '@coffeekraken/s-lit-component';
 
+import { define as __SFiltrableInputComponent } from '@coffeekraken/s-filtrable-input-component';
 import { define as __sSpecsEditorComponentDefine } from '@coffeekraken/s-specs-editor-component';
 import { define as __sSugarFeatureDefine } from '@coffeekraken/s-sugar-feature';
 
@@ -47,8 +48,14 @@ export interface ISCarpenterAppComponentFeatures {
     media: boolean;
 }
 
+export interface ISCarpenterAppComponentAddComponent {
+    namespace: string;
+    $after: HTMLElement;
+}
+
 export interface ISCarpenterAppComponentData {
     values?: any;
+    currentSpecs: any;
     specs: any;
     source?: ISSpecsEditorComponentSource;
     specsByTypes: Record<string, any>;
@@ -156,7 +163,7 @@ export default class SCarpenterAppComponent extends __SLitComponent {
     _$preselectedElm;
 
     _data: ISCarpenterAppComponentData;
-    _cachedData: Record<string, ISCarpenterAppComponentData> = {};
+    // _cachedData: Record<string, ISCarpenterAppComponentData> = {};
 
     _websiteWindow;
     _$websiteDocument; // store the document
@@ -194,8 +201,6 @@ export default class SCarpenterAppComponent extends __SLitComponent {
         $style.rel = 'stylesheet';
         $style.href = '/dist/css/carpenter.css';
         document.body.appendChild($style);
-
-        _console.log('Hello');
     }
 
     async mount() {
@@ -266,16 +271,19 @@ export default class SCarpenterAppComponent extends __SLitComponent {
             this._changePage(e.state.dotpath, false);
         });
 
-        await __wait(2000);
-
         // handle "scrolled" class on the editor
         this._handleScrolledClassOnEditor();
+
+        await __wait(2000);
 
         // Create UI placeholders
         this._updateUiPlaceholders();
 
         // remove the "scrolling='no'" attribute on website iframe
         this._$websiteIframe.removeAttribute('scrolling');
+
+        // init the "container" feature to add new content into them
+        this._initWebsiteContainers();
 
         // reset the activate media
         this.state.activeMedia && this._activateMedia(this.state.activeMedia);
@@ -286,6 +294,76 @@ export default class SCarpenterAppComponent extends __SLitComponent {
                 bubbles: true,
                 detail: this,
             }),
+        );
+    }
+
+    /**
+     * Init the containers marked by a "s-carpenter-container" attribute
+     * to allow adding new content into the page
+     */
+    _initWebsiteContainers(): void {
+        __querySelectorLive(
+            '[s-carpenter-container]',
+            ($elm) => {
+                const $container = document.createElement('div');
+                $container.classList.add(this.utils.cls('_website-container'));
+
+                const $toolbar = document.createElement('div');
+                $toolbar.setAttribute('s-carpenter-website-ui', 'true');
+                $toolbar.classList.add(
+                    this.utils.cls('_website-container-toolbar'),
+                );
+
+                // const $add = document.createElement('button');
+                // $add.classList.add(this.utils.cls('_website-container-add'));
+                // $add.innerHTML = `${this.props.icons.add} ${this.props.i18n.addComponent}`;
+
+                const $addFiltrableInputContainer =
+                    document.createElement('label');
+                $addFiltrableInputContainer.innerHTML = `<s-carpenter-app-add-component>
+                    <input type="text" placeholder="${
+                        this.props.i18n.addComponent
+                    }" class="${this.utils.cls('_add-component-input')}" />
+                </s-carpenter-app-add-component>`;
+
+                // $toolbar.appendChild($add);
+                $toolbar.appendChild($addFiltrableInputContainer);
+                $container.appendChild($toolbar);
+                $elm.appendChild($container);
+
+                $elm._sCarpenterContainer = $container;
+            },
+            {
+                rootNode: this._$websiteDocument,
+            },
+        );
+
+        __querySelectorLive(
+            `[s-carpenter-container] > *:not(.${this.utils.cls(
+                '_website-container',
+            )})`,
+            ($child) => {
+                const $container = $child.parentNode;
+                if (!$container._sCarpenterContainer) {
+                    return;
+                }
+
+                let timeout;
+                $child.addEventListener('pointerenter', (e) => {
+                    if ($container._$current === $child) {
+                        return;
+                    }
+                    $container._$current = $child;
+
+                    clearTimeout(timeout);
+                    timeout = setTimeout(() => {
+                        $child.after($container._sCarpenterContainer);
+                    }, 300);
+                });
+            },
+            {
+                rootNode: this._$websiteDocument,
+            },
         );
     }
 
@@ -522,6 +600,9 @@ export default class SCarpenterAppComponent extends __SLitComponent {
                 this._$websiteDocument =
                     this._$websiteIframe.contentWindow.document;
 
+                // define the filtrable input for the add component
+                this._defineAddComponentFiltrableInput();
+
                 // remove the "s-carpenter" in the iframe
                 this._$websiteDocument.querySelector('s-carpenter')?.remove?.();
 
@@ -578,28 +659,118 @@ export default class SCarpenterAppComponent extends __SLitComponent {
     }
 
     /**
+     * Define the add component filtrable input
+     */
+    _defineAddComponentFiltrableInput() {
+        const items: any[] = [];
+        for (let [type, typesObj] of Object.entries(this._data.specsByTypes)) {
+            for (let [namespace, specs] of Object.entries(typesObj)) {
+                items.push({
+                    name: specs.title,
+                    type,
+                    namespace,
+                });
+            }
+        }
+
+        __querySelectorLive(
+            's-carpenter-app-add-component',
+            ($elm) => {
+                $elm.addEventListener('s-filtrable-input.select', (e) => {
+                    this._addComponent({
+                        namespace: e.detail.item.namespace,
+                        $after: __traverseUp(e.target, ($elm) =>
+                            $elm.classList.contains(
+                                's-carpenter-app_website-container',
+                            ),
+                        ),
+                    });
+                });
+            },
+            {
+                rootNode: this._$websiteDocument,
+            },
+        );
+
+        __SFiltrableInputComponent(
+            {
+                value: 'namespace',
+                placeholder: this.props.i18n.addComponent,
+                label(item) {
+                    return item.name;
+                },
+                closeOnSelect: true,
+                resetOnSelect: true,
+                showKeywords: true,
+                filtrable: ['name', 'type'],
+                templates: ({ type, item, html, unsafeHTML }) => {
+                    if (type === 'item') {
+                        return html`
+                            <div class="_item">
+                                ${unsafeHTML(item.name)}
+                                <span class="_type" :
+                                    >(${unsafeHTML(item.type)})</span
+                                >
+                            </div>
+                        `;
+                    }
+                },
+                items: async () => {
+                    return items;
+                },
+            },
+            's-carpenter-app-add-component',
+            {
+                window: this._websiteWindow,
+            },
+        );
+    }
+
+    /**
+     * Add a component into a container
+     */ async _addComponent(
+        specs: ISCarpenterAppComponentAddComponent,
+    ): Promise<void> {
+        const $newComponent = document.createElement('div');
+        $newComponent.setAttribute('s-specs', specs.namespace);
+        $newComponent.innerHTML = `
+            <template s-specs-data>${JSON.stringify({
+                values: {},
+                $specs: this._data.specs[specs.namespace],
+            })}</template>
+        `;
+        specs.$after.before($newComponent);
+        await this._setCurrentElement($newComponent);
+        await this.applyComponent();
+        this._edit(this._$currentElm);
+    }
+
+    async applyComponent(values?: any): Promise<void> {
+        // make use of the specified adapter to update the component/section/etc...
+        const adapterResult = await SCarpenterAppComponent._registeredAdapters[
+            this.props.adapter
+        ].setValues({
+            $elm: this._$currentElm,
+            values: values ?? this._data.values ?? {},
+            dotpath: this._data.currentSpecs.metas.dotpath,
+            component: this,
+        });
+
+        // save current values in "_data" stack
+        // this._data[this._$currentElm.id] = values ?? {};
+
+        if (adapterResult) {
+            this._$currentElm = adapterResult;
+        }
+    }
+
+    /**
      * Listen for specs editor updates
      */
     _listenSpecsEditorUpdate() {
         // listen for actual updated
         this.addEventListener('s-specs-editor.change', async (e) => {
-            // make use of the specified adapter to update the component/section/etc...
-            const adapterResult =
-                await SCarpenterAppComponent._registeredAdapters[
-                    this.props.adapter
-                ].setValues({
-                    $elm: this._$currentElm,
-                    values: e.detail.values ?? {},
-                    dotpath: this._data.specs.metas.dotpath,
-                    component: this,
-                });
-
-            // save current values in "_data" stack
-            this._data[this._$currentElm.id] = e.detail.values ?? {};
-
-            if (adapterResult) {
-                this._$currentElm = adapterResult;
-            }
+            this.applyComponent(e.detail.values);
         });
 
         // listen for media change in the specs editor
@@ -648,16 +819,18 @@ export default class SCarpenterAppComponent extends __SLitComponent {
      * Handle "scrolled" class on the editor
      */
     _handleScrolledClassOnEditor() {
-        const $editorWrapper = document.querySelector(
+        __querySelectorLive(
             `.${this.utils.cls('_editor-wrapper')}`,
+            ($wrapper) => {
+                $wrapper.addEventListener('scroll', (e) => {
+                    if (Math.abs($wrapper.scrollTop) >= 100) {
+                        this._$editor.classList.add('scrolled');
+                    } else {
+                        this._$editor.classList.remove('scrolled');
+                    }
+                });
+            },
         );
-        $editorWrapper.addEventListener('scroll', (e) => {
-            if (Math.abs($editorWrapper.scrollTop) >= 100) {
-                this._$editor.classList.add('scrolled');
-            } else {
-                this._$editor.classList.remove('scrolled');
-            }
-        });
     }
 
     /**
@@ -699,20 +872,20 @@ export default class SCarpenterAppComponent extends __SLitComponent {
             return this._$toolbar;
         }
         const $toolbar = this._$websiteDocument.createElement('div');
-        $toolbar.classList.add('s-carpenter-toolbar');
+        $toolbar.classList.add('s-carpenter-website-toolbar');
         $toolbar.setAttribute('s-carpenter-website-ui', 'true');
         this._$toolbar = $toolbar;
 
         const html: string[] = [];
 
         html.push(`
-            <button s-carpenter-app-action="edit" class="s-carpenter-toolbar_edit">
+            <button s-carpenter-app-action="edit" class="s-carpenter-website-toolbar_edit">
                 <i class="fa-regular fa-pen-to-square"></i> <span>Edit</span>
             </button>
         `);
         if (this.props.features?.delete) {
             html.push(`
-                <button s-carpenter-app-action="delete" class="s-carpenter-toolbar_delete" confirm="Confirm?">
+                <button s-carpenter-app-action="delete" class="s-carpenter-website-toolbar_delete" confirm="Confirm?">
                     <i class="fa-regular fa-trash-can"></i>
                 </button>
             `);
@@ -751,7 +924,7 @@ export default class SCarpenterAppComponent extends __SLitComponent {
      */
     async _edit($elm?: HTMLElement) {
         // set the current element
-        if ($elm || this._$preselectedElm) {
+        if ($elm ?? this._$preselectedElm) {
             await this._setCurrentElement($elm ?? this._$preselectedElm);
         }
 
@@ -791,30 +964,36 @@ export default class SCarpenterAppComponent extends __SLitComponent {
         // force reset the specs editor
         Object.assign(this._data, {
             values: null,
-            specs: null,
+            currentSpecs: null,
             source: null,
         });
         this.requestUpdate();
         await __wait();
 
-        // let dotpath = `${$elm.getAttribute('s-specs')}`;
-
         // try to get the spec from the data fetched at start
-        if (this._cachedData[$elm.id]) {
-            Object.assign(this._data, this._cachedData[$elm.id]);
-        }
+        // if (this._cachedData[$elm.id]) {
+        //     _console.log('cachec', this._cachedData[$elm.id]);
+        //     Object.assign(this._data, this._cachedData[$elm.id]);
+        // }
 
-        if (!this._data.specs) {
-            const data = await SCarpenterAppComponent._registeredAdapters[
-                this.props.adapter
-            ].getData({
-                $elm: this._$currentElm,
-                component: this,
-            });
-            if (data) {
-                Object.assign(this._data, data);
-                this._cachedData[$elm.id] = data;
-            }
+        let data = await SCarpenterAppComponent._registeredAdapters[
+            this.props.adapter
+        ].getData({
+            $elm: this._$currentElm,
+            component: this,
+        });
+
+        _console.log('DDD', Object.assign({}, data));
+
+        if (data) {
+            data = JSON.parse(JSON.stringify(data));
+
+            // remap the specs
+            data.currentSpecs = data.$specs ?? data.specs;
+            delete data.specs;
+            Object.assign(this._data, data);
+            _console.log('NEW', this._data);
+            // this._cachedData[$elm.id] = data;
         }
     }
 
@@ -1202,10 +1381,10 @@ export default class SCarpenterAppComponent extends __SLitComponent {
                     : ''}"
                 s-carpenter-ui
             >
-                ${this._data.specs && !this.state.isLoading
+                ${this._data.currentSpecs && !this.state.isLoading
                     ? html`
                           <div class="${this.utils.cls('_editor-wrapper')}">
-                              ${!this._data.specs || !this._data.values
+                              ${!this._data.currentSpecs || !this._data.values
                                   ? html` <p>Loading...</p> `
                                   : html`
                                         <s-specs-editor
@@ -1213,7 +1392,7 @@ export default class SCarpenterAppComponent extends __SLitComponent {
                                             default-media="${this.props
                                                 .defaultMedia}"
                                             .source=${this._data.source}
-                                            .specs=${this._data.specs}
+                                            .specs=${this._data.currentSpecs}
                                             .values=${this._data.values}
                                             .features=${this.props.features}
                                             .frontspec=${this.props.frontspec ??

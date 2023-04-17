@@ -13,10 +13,10 @@
     "license": "MIT",
     "dependencies": {
         "@coffeekraken/s-frontspec": "^2.0.0-alpha.27",
+        "@coffeekraken/s-i18n": "^2.0.0-alpha.27",
         "@coffeekraken/s-interface": "^2.0.0-alpha.27",
         "@coffeekraken/s-lit-component": "^2.0.0-alpha.27",
         "@coffeekraken/s-theme": "^2.0.0-alpha.27",
-        "@coffeekraken/s-i18n": "^2.0.0-alpha.27",
         "@coffeekraken/sugar": "^2.0.0-alpha.27",
         "@specimen/types": "^1.0.0-alpha.1",
         "lit": "^2.2.8"

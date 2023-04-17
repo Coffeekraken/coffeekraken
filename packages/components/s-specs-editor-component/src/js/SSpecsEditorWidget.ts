@@ -132,7 +132,7 @@ export default class SSpecsEditorWidget {
         if (this._overrided) {
             return false;
         }
-        if (!this._source) {
+        if (!Object.keys(this._source).length) {
             return false;
         }
 
@@ -147,6 +147,16 @@ export default class SSpecsEditorWidget {
         }
 
         return this._canBeOverride;
+    }
+
+    async setDefault(
+        value: any,
+        settings?: ISSpecsEditorWidgetSetValueSettings,
+    ) {
+        return this.setValue(value, {
+            ...(settings ?? {}),
+            validate: false,
+        });
     }
 
     async setValue(

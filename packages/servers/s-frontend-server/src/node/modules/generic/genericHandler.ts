@@ -2,6 +2,7 @@
 
 import __SBench from '@coffeekraken/s-bench';
 import __SDuration from '@coffeekraken/s-duration';
+import __SSpecs from '@coffeekraken/s-specs';
 import __STheme from '@coffeekraken/s-theme';
 import { __isPlainObject } from '@coffeekraken/sugar/is';
 import { __deepMerge } from '@coffeekraken/sugar/object';
@@ -66,20 +67,35 @@ export default function genericHandler({
 
         for (let [idx, viewObj] of pageConfig.views.entries()) {
             let data = Object.assign({}, res.templateData ?? {}, {
-                    theme: theme.get('.'),
+                    // theme: theme.get('.'),
                 }),
                 viewPath = viewObj.path;
 
             const duration = new __SDuration();
+            let currentSpecs = {};
 
             const viewBench = new __SBench(
                 `handlers.generic.${viewObj.path ?? viewObj}`,
             );
 
+            // init a SSpecs instance to load the specs depending on the viewObj
+            const specsInstance = new __SSpecs();
+
             if (typeof viewObj === 'string') {
+                // load the specs alongside the view
+                currentSpecs = await specsInstance.read(`views.${viewObj}`);
+                // set the view path
                 viewPath = viewObj;
             } else if (viewObj?.data) {
                 let dataHandlerStr;
+
+                // load the specs if "path" exists
+                if (viewObj.path) {
+                    // load the specs alongside the view
+                    currentSpecs = await specsInstance.read(
+                        `views.${viewObj.path}`,
+                    );
+                }
 
                 let dataSettings = viewObj.data?.settings ?? {},
                     dataParams = viewObj.data?.params ?? {},
@@ -164,7 +180,16 @@ export default function genericHandler({
             );
 
             // rendering view using data
-            const viewResPro = res.viewRenderer.render(viewPath, data);
+            const viewResPro = res.viewRenderer.render(
+                viewPath,
+                {
+                    $specs: currentSpecs,
+                    ...data,
+                },
+                {
+                    dataFile: true,
+                },
+            );
             let viewRes = await viewResPro;
 
             if (viewRes.error) {
@@ -199,10 +224,16 @@ export default function genericHandler({
 
         // rendering layout using data
         try {
-            const layoutPromise = res.viewRenderer.render(layoutPath, {
-                ...layoutData,
-                body: renderedViews.join('\n'),
-            });
+            const layoutPromise = res.viewRenderer.render(
+                layoutPath,
+                {
+                    ...layoutData,
+                    body: renderedViews.join('\n'),
+                },
+                {
+                    dataFile: true,
+                },
+            );
             const layoutRes = await layoutPromise;
 
             if (layoutRes.error) {

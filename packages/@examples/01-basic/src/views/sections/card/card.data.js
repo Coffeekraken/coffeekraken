@@ -21,9 +21,15 @@ export default {
                 value: '300-600',
             },
         ],
-        title: 'Card title!',
-        intro: 'Awesome card component',
-        text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas nec vestibulum mi. Etiam nec arcu ante.',
+        title: {
+            value: 'Card title!',
+        },
+        intro: {
+            value: 'Awesome card component',
+        },
+        text: {
+            value: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas nec vestibulum mi. Etiam nec arcu ante.',
+        },
         cta: {
             label: 'CTA label...',
             color: {
@@ -58,9 +64,15 @@ export default {
                 value: '300-600',
             },
         ],
-        title: 'Card title #1!',
-        intro: 'Awesome card component',
-        text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+        title: {
+            value: 'Card title #1!',
+        },
+        intro: {
+            value: 'Awesome card component',
+        },
+        text: {
+            value: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+        },
         cta: {
             label: 'CTA label...',
             color: {

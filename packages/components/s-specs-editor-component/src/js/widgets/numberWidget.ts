@@ -11,7 +11,7 @@ export default class SSpecsEditorComponentNumberWidget extends __SSpecsEditorWid
         super(deps);
 
         if (this.values.value === undefined && this.propObj.default) {
-            this.setValue(this.propObj.default);
+            this.setDefault(this.propObj.default);
         }
     }
 

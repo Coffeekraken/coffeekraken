@@ -19,6 +19,7 @@ export interface ISSpecsListResult {
 export default class SSpecs extends __SClass {
     
     static fromInterface(int: __SInterface, settings?: Partial<ISSpecsSettings>): any;
+    static extractDefaults(specs: any): any;
     
     constructor(settings?: Partial<ISSpecsSettings>);
     

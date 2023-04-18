@@ -110,6 +110,8 @@ export default {
             $newComponent.setAttribute('s-specs', dotpath);
         }
 
+        _console.log('Add', $newComponent, $elm);
+
         // @ts-ignore
         $elm.after($newComponent);
 

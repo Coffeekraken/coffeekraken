@@ -6,6 +6,7 @@ import {
     __deepMap,
     __deepMerge,
     __get,
+    __set,
     __toPlainObject,
 } from '@coffeekraken/sugar/object';
 import { __packageRootDir } from '@coffeekraken/sugar/path';
@@ -162,6 +163,33 @@ export default class SSpecs extends __SClass {
 
         // return the new spec json
         return specJson;
+    }
+
+    static extractDefaults(specs: any): any {
+        let defaults = {};
+
+        function processProps(props: any, path: string[]): any {
+            for (let [prop, propObj] of Object.entries(props)) {
+                if (propObj.default !== undefined) {
+                    __set(
+                        defaults,
+                        [...path, prop].filter((l) => l !== 'props'),
+                        propObj.default,
+                    );
+                }
+                if (propObj.props) {
+                    processProps(propObj.props, [...path, prop, 'props']);
+                }
+            }
+        }
+
+        processProps(specs.props ?? {}, []);
+
+        if (specs.default) {
+            defaults = __deepMerge(defaults, specs.default);
+        }
+
+        return defaults;
     }
 
     /**

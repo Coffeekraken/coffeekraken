@@ -1,23 +1,41 @@
 [s-carpenter-container] {
     position: relative;
 
-    .s-carpenter-app_website-container {
-        height: 0;
-        position: relative;
-        display: flex;
-        z-index: 5000;
-        align-items: center;
-        background: sugar.color(accent, --alpha 0.1);
-        @sugar.transition;
-        border: 0px dashed sugar.color(accent, border);
-        height: 200px;
-        margin: sugar.margin(50);
-        border-width: 1px;
+    /* > *:not(.s-carpenter-app_website-container, svg):not(
+            :has(+ .s-carpenter-app_website-container)
+        ) { */
+
+    > *:not(.s-carpenter-app_website-container, svg):not(
+            :has(+ .s-carpenter-app_website-container)
+        ) {
+        margin-bottom: 0;
+        transition: margin-bottom 0.3s ease-in-out;
 
         &:after {
-            /* height: 300px; */
-            /* transform: translateY(calc(-50% - 100px)); */
+            content: '';
+            position: absolute;
+            top: calc(100% + 80px);
+            left: 50%;
+            background: transparent;
+            width: calc(100% - 40px);
+            max-width: sugar.container.width();
+            height: 0;
+            opacity: 0;
+            transform: translateX(-50%);
+            border: 1px dashed sugar.color(main, border);
+            background: sugar.color(main, --alpha 0.1);
+            @sugar.transition;
         }
+    }
+
+    .s-carpenter-app_website-container {
+        position: relative;
+        display: flex;
+        z-index: 50;
+        align-items: center;
+        height: 0;
+        pointer-events: none;
+        @sugar.transition;
 
         &:hover {
             > * {
@@ -27,15 +45,22 @@
         }
 
         &:after {
+            opacity: 0;
             content: '';
             position: absolute;
             top: 50%;
-            left: 0;
-            width: 100%;
-            /* height: 200px; */
-            /* transform: translateY(-50%); */
-            background: transparent;
+            left: 50%;
+            width: calc(100% - 40px);
+            max-width: sugar.container.width();
+            height: 0;
+            transform: translate(-50%, -50%);
+            border: 1px dashed sugar.color(main, border);
+            background: sugar.color(main, --alpha 0.1);
             @sugar.transition;
+        }
+        &:hover:after {
+            border: 1px dashed sugar.color(accent, border);
+            background: sugar.color(accent, --alpha 0.1);
         }
     }
 
@@ -57,18 +82,6 @@
         @sugar.border.radius (30);
         @sugar.depth (100);
         @sugar.transition;
-
-        &:after {
-            content: ' ';
-            position: absolute;
-            border-style: default;
-            border-color: sugar.color(main, background) transparent transparent
-                transparent;
-            bottom: 100%;
-            left: calc(50% - 12.5px);
-            border-width: calc(25px / 2);
-            transform: rotate(180deg);
-        }
     }
 
     .s-carpenter-app_website-container-add {
@@ -78,12 +91,46 @@
     .s-carpenter-app-add-component {
         @sugar.ui.filtrableInput();
 
+        ._group {
+            @sugar.ui.inputcontainer ($lnf: group);
+        }
+        ._icon {
+            background: sugar.color(main, surface, --darken 3);
+            border: 1px solid sugar.color(main, border);
+            border-right: none;
+            padding: sugar.padding(30);
+        }
+
         ._item {
             font-weight: bold;
             white-space: nowrap;
         }
         ._type {
             font-weight: initial;
+        }
+    }
+}
+
+.s-carpenter-app--insert [s-carpenter-container] {
+    > *:not(.s-carpenter-app_website-container, svg):not(
+            :has(+ .s-carpenter-app_website-container)
+        ) {
+        margin-bottom: 200px;
+
+        &:after {
+            height: calc(100px - 40px);
+            opacity: 1;
+        }
+    }
+
+    .s-carpenter-app_website-container {
+        height: 200px;
+        pointer-events: all;
+
+        &:after {
+            opacity: 1;
+            position: absolute;
+            height: calc(100px - 40px);
         }
     }
 }

@@ -57,7 +57,8 @@
     },
 } %}
 
-<section class="section-contact" s-appear in="bottom" delay="600">
+<section class="section-contact" s-specs="views.sections.contact.contact" s-appear in="bottom" delay="600">
+    {{ __specsDataTemplate(_context)|raw }}
     <div class="s-container">
         <div class="_layout">
             <div s-appear in="left" delay="500">

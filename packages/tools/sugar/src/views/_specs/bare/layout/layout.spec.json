@@ -1,44 +1,54 @@
 {
-    "type": "Bare",
+    "type": "Layout",
     "title": "Layout",
-    "description": "Allows you to display a layout section driven by the layout string notaiton like \"1 1 2 _ 3 3 2\"",
-    "props": {
-        "frontspec": {
-            "type": "Object",
-            "description": "The frontspec.json that you must have at your project root",
-            "required": true
-        },
-        "id": {
-            "type": "Text",
-            "description": "Specify a uniqid to apply to the layout"
-        },
-        "layout": {
-            "type": "Text{}",
-            "description": "Specify the layout you want in layout string notation by media (mobile, etc...). Default layout must be stored under the \"default\" media",
-            "required": true,
-            "responsive": true,
-            "examples": {
-                "js": {
-                    "code": [
-                        "const viewData = {",
-                        "   // other view data...",
-                        "   layout: {",
-                        "       desktop: '1 2 _ 3 4',",
-                        "       mobile: '1 _ 2 _ 3 _ 4'",
-                        "   }",
-                        "};"
-                    ]
-                }
-            }
-        },
-        "html": {
-            "type": "Html",
-            "description": "The grid html to print. Must have the same count of div(s) as your layout cells",
-            "required": true
-        },
-        "gap": "@sugar.views.props.spacing",
-        "attributes": "@sugar.views.props.attributes",
-        "spaces": "@sugar.views.props.spaces"
+    "description": "Specify a custom layout where to put some components",
+    "responsive": true,
+    "default": {
+        "container": true,
+        "layout": "1 2",
+        "cells": ["", ""],
+        "gap": 30,
+        "media": {
+            "desktop": "1 2"
+        }
+    },
+    "layouts": {
+        "1": "1",
+        "12": "1 2",
+        "21": "2 1",
+        "112": "1 1 2",
+        "122": "1 2 2",
+        "123": "1 2 3",
+        "211": "2 1 1",
+        "221": "2 2 1",
+        "321": "3 2 1",
+        "1112": "1 1 1 2",
+        "1222": "1 2 2 2",
+        "1234": "1 2 3 4",
+        "2221": "2 2 2 1",
+        "11112": "1 1 1 1 2",
+        "12222": "1 2 2 2 2",
+        "12345": "1 2 3 4 5",
+        "22221": "2 2 2 2 1",
+        "111112": "1 1 1 1 1 2",
+        "122222": "1 2 2 2 2 2",
+        "123456": "1 2 3 4 5 6",
+        "1_2": "1 _ 2",
+        "2_1": "2 _ 1",
+        "12_33": "1 2 _ 3 3",
+        "1_23": "1 _ 2 3",
+        "1_2_3": "1 _ 2 _ 3",
+        "32_1": "3 2 _ 1",
+        "3_21": "3 _ 2 1",
+        "12_34": "1 2 _ 3 4",
+        "123_4": "1 2 3 _ 4",
+        "1_234": "1 _ 2 3 4",
+        "1_2_3_4": "1 _ 2 _ 3 _ 4",
+        "123_45": "1 2 3 _ 4 5",
+        "12_345": "1 2 _ 3 4 5",
+        "1_2345": "1 _ 2 3 4 5",
+        "1234_5": "1 2 3 4 _ 5",
+        "1_2_3_4_5": "1 _ 2 _ 3 _ 4 _ 5"
     },
     "examples": {
         "twig": {

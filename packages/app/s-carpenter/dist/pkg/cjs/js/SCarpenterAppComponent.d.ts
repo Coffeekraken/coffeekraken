@@ -63,6 +63,7 @@ export default class SCarpenterAppComponent extends __SLitComponent {
         activeMedia: any;
         isLoading: boolean;
         loadingStack: {};
+        mode: string;
     };
     currentSpecs: any;
     _$currentElm: any;
@@ -101,6 +102,8 @@ export default class SCarpenterAppComponent extends __SLitComponent {
     _cleanRootDocument(): void;
     
     _defineAddComponentFiltrableInput(): void;
+    
+    _setMode(mode: 'edit' | 'insert'): void;
      _addComponent(specs: ISCarpenterAppComponentAddComponent): Promise<void>;
     applyComponent(values?: any): Promise<void>;
     

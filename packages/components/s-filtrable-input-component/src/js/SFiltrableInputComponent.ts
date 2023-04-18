@@ -269,6 +269,7 @@ export default class SFiltrableInputComponent extends __SLitComponent {
         this.$input =
             <any>this.querySelector('input') ?? document.createElement('input');
         if (!this.$input?.parentElement) {
+            _console.log('Append');
             this.appendChild(this.$input);
         }
         this.$input.setAttribute('autocomplete', 'off');
@@ -329,7 +330,7 @@ export default class SFiltrableInputComponent extends __SLitComponent {
         // @ts-ignore
         this.$dropdown = this.querySelector(`.s-filtrable-input_dropdown`);
 
-        this.prepend(this.$input);
+        // this.prepend(this.$input);
         this.filterItems();
 
         document.addEventListener('scroll', () => {

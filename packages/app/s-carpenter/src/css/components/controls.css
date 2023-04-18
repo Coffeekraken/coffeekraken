@@ -1,3 +1,14 @@
+@keyframes s-carpenter-app-controls-in {
+    from {
+        opacity: 0;
+        transform: translate(-50%, 200%);
+    }
+    to {
+        opacity: 1;
+        transform: translate(-50%, 0);
+    }
+}
+
 .s-carpenter-app_controls {
     position: absolute;
     z-index: 99999;
@@ -9,22 +20,34 @@
     gap: sugar.margin(30);
     background: sugar.color(main, background);
     padding: sugar.padding(20);
-    opacity: 0;
-    pointer-events: none;
-    @sugar.transition();
+    opacity: 1;
+    pointer-events: all;
+    animation: s-carpenter-app-controls-in 0.3s ease-out forwards;
+    /* @sugar.transition(); */
     @sugar.border.radius (30);
     @sugar.depth (100);
 
-    .s-carpenter-app--open & {
+    /* .s-carpenter-app--open & {
         transform: translate(-50%, 0);
         opacity: 1;
         pointer-events: all !important;
-    }
+    } */
 
     ._save {
         @sugar.ui.button();
         @sugar.color (complementary);
         @sugar.depth (100);
+    }
+
+    ._modes {
+        display: flex;
+        align-items: center;
+        gap: sugar.margin(10);
+        user-select: none;
+    }
+    ._switch {
+        @sugar.ui.switch;
+        @sugar.color (accent);
     }
 }
 

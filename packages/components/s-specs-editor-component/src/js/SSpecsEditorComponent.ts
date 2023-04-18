@@ -399,13 +399,12 @@ export default class SSpecsEditorComponent extends __SLitComponent {
                 },
             );
         } else if (!__isPlainObject(values)) {
-            _console.log('SS', values);
             console.error(
                 `<red>[SSpecsEditorComponent]</red> It seems that your value "<cyan>${valuePath.join(
                     '.',
-                )}</cyan>" is a <yellow>${typeof values}</yellow> but it MUST be an object according to the following specs:`,
+                )}</cyan>" is a <yellow>${typeof values}</yellow> but it MUST be an object according to the following specs and values:`,
             );
-            console.warn(propObj);
+            console.warn(propObj, values);
             return;
         }
 
@@ -450,16 +449,19 @@ export default class SSpecsEditorComponent extends __SLitComponent {
     /**
      * Apply changes
      */
+    _applyTimeout;
     apply() {
-        this.utils.dispatchEvent('change', {
-            bubbles: true,
-            detail: {
-                propsSpecs: Object.assign({}, this.props.specs),
-                values: Object.assign({}, this._values),
-            },
+        clearTimeout(this._applyTimeout);
+        this._applyTimeout = setTimeout(() => {
+            this.utils.dispatchEvent('change', {
+                bubbles: true,
+                detail: {
+                    propsSpecs: Object.assign({}, this.props.specs),
+                    values: Object.assign({}, this._values),
+                },
+            });
+            this.requestUpdate();
         });
-
-        this.requestUpdate();
     }
 
     /**

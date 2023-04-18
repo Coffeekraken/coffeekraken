@@ -30,6 +30,7 @@ export interface ISSpecsEditorWidgetSetValueSettings {
     merge?: boolean;
     noneResponsive?: boolean;
     validate?: boolean;
+    apply?: boolean;
 }
 
 export interface ISSpecsEditorWidgetSettings {
@@ -156,6 +157,7 @@ export default class SSpecsEditorWidget {
         return this.setValue(value, {
             ...(settings ?? {}),
             validate: false,
+            apply: false,
         });
     }
 
@@ -168,6 +170,7 @@ export default class SSpecsEditorWidget {
             path: '.',
             merge: false,
             validate: true,
+            apply: true,
             ...(settings ?? {}),
         };
 
@@ -223,7 +226,9 @@ export default class SSpecsEditorWidget {
             await __wait();
 
             // apply the changes in the editor
-            this.editor.apply();
+            if (finalSettings.apply) {
+                this.editor.apply();
+            }
         } else {
             // update the UI to display errors
             this.editor.requestUpdate();

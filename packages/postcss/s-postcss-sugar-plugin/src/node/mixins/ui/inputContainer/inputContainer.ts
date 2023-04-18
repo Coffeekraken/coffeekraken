@@ -15,7 +15,7 @@ import __SInterface from '@coffeekraken/s-interface';
  * @return      {String}            The generated css
  *
  * @snippet         @sugar.ui.inputContainer
- * 
+ *
  * @example     css
  * .my-input-container {
  *    @sugar.ui.inputContainer(group);
@@ -71,7 +71,6 @@ export default function ({
 
     if (finalParams.scope.includes('bare')) {
         vars.push(`
-            display: block;
             width: 100%;
         `);
     }
@@ -80,6 +79,7 @@ export default function ({
         case 'addon':
             if (finalParams.scope.includes('bare')) {
                 vars.push(`
+                    display: block;
                     position: relative;
 
                     & > *:first-child {

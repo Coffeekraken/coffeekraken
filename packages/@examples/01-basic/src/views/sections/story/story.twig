@@ -1,8 +1,7 @@
 <section class="section-story {{ __spacesClasses(spaces, frontspec) }}" layout="{{ layout }}" s-appear in="bottom" delay="500" s-specs="views.sections.story">
     {{ __specsDataTemplate(_context)|raw }}
-    
     <div class="s-container">
-        <div class="s-layout:{{ layout }} @mobile s-layout:1_2">
+        <div class="s-layout:{{ layout.value[0].value }} @mobile s-layout:1_2">
             <div>
                 <h1 class="s-typo:h2 s-mbe:40">
                     {{ title.value|raw }}
@@ -10,8 +9,8 @@
                 <p class="s-typo:p">
                     {{ text.value|raw }}
                 </p>
-                <a class="s-btn s-mbs:40 s-color:{{ cta.color.value }}" href="{{ cta.link.url }}" target="{{ cta.link.target }}">
-                    {{ cta.link.text }}
+                <a class="s-btn s-mbs:40 s-color:{{ cta.color.value }}" href="{{ cta.link.url.value }}" target="{{ cta.link.target }}">
+                    {{ cta.link.text.value }}
                 </a>
             </div>
             <div>

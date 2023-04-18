@@ -4,7 +4,7 @@
     perspective: 800px;
 
     @sugar.lod (3) {
-        margin-block-start: -30px;
+        /* margin-block-start: -30px; */
     }
 
     .nude & {
@@ -26,7 +26,7 @@
 
         @sugar.lod (3) {
             transform: rotateX(-5deg) rotateY(15deg) translateX(0%)
-                translateY(-10%);
+                translateY(0);
         }
     }
 

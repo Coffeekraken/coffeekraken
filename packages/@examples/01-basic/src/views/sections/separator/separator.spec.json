@@ -7,6 +7,9 @@
             "type": "Text",
             "title": "Title",
             "description": "Separator title",
+            "default": {
+                "value": "Separator title"
+            },
             "required": true
         },
         "image": {

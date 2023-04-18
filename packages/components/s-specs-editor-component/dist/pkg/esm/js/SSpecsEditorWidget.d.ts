@@ -16,6 +16,7 @@ export interface ISSpecsEditorWidgetSetValueSettings {
     merge?: boolean;
     noneResponsive?: boolean;
     validate?: boolean;
+    apply?: boolean;
 }
 export interface ISSpecsEditorWidgetSettings {
     label?: boolean;

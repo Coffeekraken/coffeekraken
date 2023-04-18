@@ -2,20 +2,30 @@
 {% if not id  %}
     {% set finalId = 's-layout-' ~ __uniqid() %}
 {% endif %}
-<style>
-{{ __layoutCss(layout.media, {
-    selector: '#' ~ finalId ~ '-layout',
-    mediaSettings: frontspec.media|__toObject
-})|raw }}
-</style>
-<div id="{{ finalId }}" class="{{ attributes.class }} {{ __spacesClasses(spaces, frontspec) }}" {{ __attrs(attributes, ['class'])|raw }}>
+<div id="{{ finalId }}" s-specs class="{{ attributes.class }} {{ __spacesClasses(spaces, frontspec) }}" {{ __attrs(attributes, ['class'])|raw }}>
+    {{ __specsDataTemplate(_context)|raw }}
+    <style>
+        {{ __layoutCss(media ? media : '1', {
+            selector: '#' ~ finalId ~ '-layout'
+        })|raw }}
+    </style>
     {% if container %}
         <div class="s-container:{{ container }}">
     {% endif %}
-    <div class="s-layout {{ gap ? 's-gap:' ~ gap : '' }}" id="{{ finalId }}-layout">
-        {{ html|raw }}
-    </div>
+        <div class="s-layout {{ gap ? 's-gap:' ~ gap : '' }}" id="{{ finalId }}-layout">
+            {% if html %}
+                {{ html|raw }}
+            {% elseif cells %}
+                {% for cell in cells %}
+                    <div s-carpenter-container>
+                        {{ cell|raw }}
+                    </div>
+                {% endfor %}
+            {% else %}
+                <p>You MUST pass at least some "cells" or raw "html" for your layout...</p>
+            {% endif %}        
+        </div>
     {% if container %}
-    </div>
+        </div>
     {% endif %}
 </div>

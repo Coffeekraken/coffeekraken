@@ -97,6 +97,7 @@ export default class SCarpenterComponentInterface extends __SInterface {
                     upload: true,
                     nav: true,
                     media: true,
+                    insert: false,
                 },
             },
             frontspec: {
@@ -152,6 +153,7 @@ export default class SCarpenterComponentInterface extends __SInterface {
                 type: 'Object',
                 description: 'Specify some icons html to be used across the UI',
                 default: {
+                    component: '<i class="fa-solid fa-puzzle-piece"></i>',
                     add: '<i class="fa-solid fa-plus"></i>',
                     mobile: '<i class="fa-solid fa-mobile-screen-button"></i>',
                     tablet: '<i class="fa-solid fa-tablet-screen-button"></i>',

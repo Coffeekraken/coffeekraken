@@ -42,10 +42,10 @@ function layoutCss($layout, $settings = [])
 {
     $settings = (object) $settings;
 
-    if (!isset($settings->mediaSettings)) {
-        $frontspecJson = \Sugar\frontspec\readFrontspec();
-        $settings->mediaSettings = $frontspecJson->media;
-    }
+    // if (!isset($settings->mediaSettings)) {
+    $frontspecJson = \Sugar\frontspec\readFrontspec();
+    $settings->mediaSettings = $frontspecJson->media;
+    // }
 
     $finalParams = (object) array_merge(
         [

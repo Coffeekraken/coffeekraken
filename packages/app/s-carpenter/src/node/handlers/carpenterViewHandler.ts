@@ -37,8 +37,10 @@ export default async function carpenterViewHandler({
     // meaning that it's a component update
     // with some component data passed.
     // we use these instead of the default ones
-    if (req.method === 'POST' && req.body) {
+    if (req.method === 'POST' && req.body && Object.keys(req.body).length > 0) {
         viewData = req.body;
+    } else if (req.method === 'POST') {
+        viewData = __SSpecs.extractDefaults(currentSpecs);
     } else {
         // load the actual view values
         viewData = await __SDataFileGeneric.load(currentSpecs.metas.path);

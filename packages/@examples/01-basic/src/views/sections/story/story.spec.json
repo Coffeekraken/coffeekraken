@@ -7,12 +7,19 @@
             "type": "Select",
             "title": "Layout",
             "description": "Section layout",
+            "default": {
+                "id": "right",
+                "name": "Image right",
+                "value": "12"
+            },
             "options": [
                 {
+                    "id": "right",
                     "name": "Image right",
                     "value": "12"
                 },
                 {
+                    "id": "left",
                     "name": "Image left",
                     "value": "21"
                 }
@@ -22,18 +29,27 @@
             "type": "Text",
             "title": "Title",
             "description": "Story title",
+            "default": {
+                "value": "Story title"
+            },
             "required": true
         },
         "intro": {
             "type": "Text",
             "title": "Intro",
             "description": "Story intro",
+            "default": {
+                "value": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+            },
             "required": true
         },
         "text": {
             "type": "Text",
             "title": "Text",
             "description": "Story text",
+            "default": {
+                "value": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. In hendrerit gravida rutrum quisque non tellus orci. Ac orci phasellus egestas tellus rutrum. Maecenas pharetra convallis posuere morbi leo urna molestie. Felis eget nunc lobortis mattis aliquam faucibus. Eros donec ac odio tempor orci dapibus ultrices in. A erat nam at lectus. Tellus id interdum velit laoreet id donec. Enim ut tellus elementum sagittis vitae et leo duis. In est ante in nibh mauris. Lectus magna fringilla urna porttitor rhoncus dolor purus. Tortor pretium viverra suspendisse potenti nullam ac tortor vitae purus. Pellentesque elit eget gravida cum sociis natoque penatibus. Egestas fringilla phasellus faucibus scelerisque eleifend donec pretium vulputate. Risus sed vulputate odio ut enim. Arcu bibendum at varius vel pharetra vel turpis nunc eget."
+            },
             "required": true
         },
         "cta": {

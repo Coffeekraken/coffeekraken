@@ -65,6 +65,7 @@ export default class SCarpenterComponentInterface extends __SInterface {
                 upload: boolean;
                 nav: boolean;
                 media: boolean;
+                insert: boolean;
             };
         };
         frontspec: {
@@ -100,6 +101,7 @@ export default class SCarpenterComponentInterface extends __SInterface {
             type: string;
             description: string;
             default: {
+                component: string;
                 add: string;
                 mobile: string;
                 tablet: string;

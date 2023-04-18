@@ -155,6 +155,7 @@ export default class SCarpenterAppComponent extends __SLitComponent {
         activeMedia: null,
         isLoading: true,
         loadingStack: {},
+        mode: 'edit',
     };
 
     currentSpecs = null;
@@ -314,19 +315,22 @@ export default class SCarpenterAppComponent extends __SLitComponent {
                     this.utils.cls('_website-container-toolbar'),
                 );
 
-                // const $add = document.createElement('button');
-                // $add.classList.add(this.utils.cls('_website-container-add'));
-                // $add.innerHTML = `${this.props.icons.add} ${this.props.i18n.addComponent}`;
-
                 const $addFiltrableInputContainer =
                     document.createElement('label');
-                $addFiltrableInputContainer.innerHTML = `<s-carpenter-app-add-component>
-                    <input type="text" placeholder="${
-                        this.props.i18n.addComponent
-                    }" class="${this.utils.cls('_add-component-input')}" />
-                </s-carpenter-app-add-component>`;
+                $addFiltrableInputContainer.innerHTML = `
+                    <s-carpenter-app-add-component>
+                        <div class="_group">
+                            <span class="_icon">${
+                                this.props.icons.component
+                            }</span>
+                            <input type="text" id="s-carpenter-app-add-component" placeholder="${
+                                this.props.i18n.addComponent
+                            }" class="${this.utils.cls(
+                    '_add-component-input',
+                )}" />
+                        </div>
+                    </s-carpenter-app-add-component>`;
 
-                // $toolbar.appendChild($add);
                 $toolbar.appendChild($addFiltrableInputContainer);
                 $container.appendChild($toolbar);
                 $elm.appendChild($container);
@@ -349,7 +353,7 @@ export default class SCarpenterAppComponent extends __SLitComponent {
                 }
 
                 let timeout;
-                $child.addEventListener('pointerenter', (e) => {
+                $child.addEventListener('pointerover', (e) => {
                     if ($container._$current === $child) {
                         return;
                     }
@@ -462,6 +466,9 @@ export default class SCarpenterAppComponent extends __SLitComponent {
                 this._closeEditor();
             });
         }
+
+        // mode
+        this._setMode(this.state.mode);
     }
 
     /**
@@ -727,6 +734,20 @@ export default class SCarpenterAppComponent extends __SLitComponent {
     }
 
     /**
+     * Set the edit/insert mode
+     */
+    _setMode(mode: 'edit' | 'insert'): void {
+        // apply the mode on the website body inside the iframe
+        this._$websiteDocument.body.classList.remove(
+            this.utils.cls(`--${this.state.mode}`),
+        );
+        this._$websiteDocument.body.classList.add(this.utils.cls(`--${mode}`));
+
+        // set the mode in state
+        this.state.mode = mode;
+    }
+
+    /**
      * Add a component into a container
      */ async _addComponent(
         specs: ISCarpenterAppComponentAddComponent,
@@ -746,6 +767,13 @@ export default class SCarpenterAppComponent extends __SLitComponent {
     }
 
     async applyComponent(values?: any): Promise<void> {
+        _console.log(
+            'Apl___',
+            values,
+            this._$currentElm,
+            this._data.currentSpecs,
+        );
+
         // make use of the specified adapter to update the component/section/etc...
         const adapterResult = await SCarpenterAppComponent._registeredAdapters[
             this.props.adapter
@@ -755,9 +783,6 @@ export default class SCarpenterAppComponent extends __SLitComponent {
             dotpath: this._data.currentSpecs.metas.dotpath,
             component: this,
         });
-
-        // save current values in "_data" stack
-        // this._data[this._$currentElm.id] = values ?? {};
 
         if (adapterResult) {
             this._$currentElm = adapterResult;
@@ -879,19 +904,19 @@ export default class SCarpenterAppComponent extends __SLitComponent {
         const html: string[] = [];
 
         html.push(`
-            <button s-carpenter-app-action="edit" class="s-carpenter-website-toolbar_edit">
+            <button s-carpenter-app-action="edit" class="_edit">
                 <i class="fa-regular fa-pen-to-square"></i> <span>Edit</span>
             </button>
         `);
         if (this.props.features?.delete) {
             html.push(`
-                <button s-carpenter-app-action="delete" class="s-carpenter-website-toolbar_delete" confirm="Confirm?">
+                <button s-carpenter-app-action="delete" class="_delete" confirm="Confirm?">
                     <i class="fa-regular fa-trash-can"></i>
                 </button>
             `);
         }
 
-        this._$toolbar.innerHTML = html;
+        this._$toolbar.innerHTML = html.join('');
 
         // append toolbar to viewport
         this._$websiteDocument.body.appendChild($toolbar);
@@ -970,20 +995,12 @@ export default class SCarpenterAppComponent extends __SLitComponent {
         this.requestUpdate();
         await __wait();
 
-        // try to get the spec from the data fetched at start
-        // if (this._cachedData[$elm.id]) {
-        //     _console.log('cachec', this._cachedData[$elm.id]);
-        //     Object.assign(this._data, this._cachedData[$elm.id]);
-        // }
-
         let data = await SCarpenterAppComponent._registeredAdapters[
             this.props.adapter
         ].getData({
             $elm: this._$currentElm,
             component: this,
         });
-
-        _console.log('DDD', Object.assign({}, data));
 
         if (data) {
             data = JSON.parse(JSON.stringify(data));
@@ -992,8 +1009,6 @@ export default class SCarpenterAppComponent extends __SLitComponent {
             data.currentSpecs = data.$specs ?? data.specs;
             delete data.specs;
             Object.assign(this._data, data);
-            _console.log('NEW', this._data);
-            // this._cachedData[$elm.id] = data;
         }
     }
 
@@ -1456,6 +1471,27 @@ export default class SCarpenterAppComponent extends __SLitComponent {
                                   })}
                           </ul>
 
+                          ${this.props.features?.insert
+                              ? html`
+                                    <label class="_modes">
+                                        <span class="_edit"> Edit </span>
+                                        <input
+                                            type="checkbox"
+                                            class="_switch"
+                                            .checked=${this.state.insertMode}
+                                            ?checked=${this.state.insertMode}
+                                            @change=${(e) => {
+                                                this._setMode(
+                                                    e.target.checked
+                                                        ? 'insert'
+                                                        : 'edit',
+                                                );
+                                            }}
+                                        />
+                                        <span class="_insert"> Insert </span>
+                                    </label>
+                                `
+                              : ''}
                           ${this.props.features?.save
                               ? html`
                                     <button

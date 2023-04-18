@@ -13,12 +13,10 @@ export default class SSpecsEditorComponentSelectWidget extends __SSpecsEditorWid
         super(deps);
 
         if (!this.values.value) {
+            _console.log('not', this.propObj);
             this.setDefault(
                 this.propObj.default ?? {
                     value: [],
-                },
-                {
-                    validate: false,
                 },
             );
         }
@@ -123,8 +121,9 @@ export default class SSpecsEditorComponentSelectWidget extends __SSpecsEditorWid
                               </option>
                           `
                         : ''}
-                    ${this.propObj.options.map(
-                        (option, i) => html`
+                    ${this.propObj.options.map((option, i) => {
+                        _console.log(this.propObj.options, option);
+                        return html`
                             <option
                                 id="${option.id ?? `option-${i}`}"
                                 ?selected=${this._select.isSelected(option.id)}
@@ -132,8 +131,8 @@ export default class SSpecsEditorComponentSelectWidget extends __SSpecsEditorWid
                             >
                                 ${option.name}
                             </option>
-                        `,
-                    )}
+                        `;
+                    })}
                 </select>
             </div>
         `;

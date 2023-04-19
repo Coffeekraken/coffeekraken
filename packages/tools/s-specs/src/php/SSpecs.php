@@ -20,7 +20,7 @@
  * @snippet         new SSpecs($1);
  * $specs = new SSpecs($1);
  * $spec = $specs->read('sugar.views.components.card');
- * 
+ *
  * @example         php
  * $spec = new SSpecs([
  *   'namespaces' => [
@@ -307,14 +307,24 @@ class SSpecs
                 $extendsJson = $this->read($value);
                 $extendsJson = \Sugar\convert\toObject($extendsJson);
 
-                $keys = array_keys(get_object_vars($extendsJson));
                 $object_vars = get_object_vars($extendsJson);
+                $keys = array_keys($object_vars);
                 foreach ($object_vars as $propertyName => $propertyValue) {
                     if (property_exists($object, $propertyName)) {
-                        $object->$propertyName = \Sugar\object\deepMerge(
-                            $extendsJson->$propertyName,
-                            $object->$propertyName
-                        );
+                        $fromValueMergeable =
+                            is_object($extendsJson->$propertyName) ||
+                            is_array($extendsJson->$propertyName);
+                        $toValueMergeable =
+                            is_object($object->$propertyName) ||
+                            is_array($object->$propertyName);
+
+                        if ($fromValueMergeable && $toValueMergeable) {
+                            $object->$propertyName = \Sugar\object\deepMerge(
+                                $extendsJson->$propertyName,
+                                $object->$propertyName
+                            );
+                        } else {
+                        }
                     } elseif ($propertyName != 'extends') {
                         $object->$propertyName = $propertyValue;
                     } else {

@@ -37,6 +37,7 @@ import __datetimePickerWidget from './widgets/datetimePickerWidget';
 import __htmlWidget from './widgets/htmlWidget';
 import __imageWidget from './widgets/imageWidget';
 import __integerWidget from './widgets/integerWidget';
+import __layoutWidget from './widgets/layoutWidget';
 import __numberWidget from './widgets/numberWidget';
 import __selectWidget from './widgets/selectWidget';
 import __spacesWidget from './widgets/spacesWidget';
@@ -66,6 +67,8 @@ export interface ISSpecsEditorComponentSource {
 
 export interface ISSpecsEditorComponentRenderLabelSettings {
     tooltip?: 'top' | 'left' | 'right' | 'bottom';
+    title?: string;
+    description?: string;
 }
 
 export interface ISSpecsEditorComponentGetValueSettings {
@@ -205,6 +208,7 @@ export default class SSpecsEditorComponent extends __SLitComponent {
         select: __selectWidget,
         wysiwyg: __wysiwygWidget,
         video: __videoWidget,
+        layout: __layoutWidget,
     };
 
     static get styles() {
@@ -243,9 +247,10 @@ export default class SSpecsEditorComponent extends __SLitComponent {
             this._values = Object.assign({}, this.props.values ?? {});
         }
 
-        for (let [key, propObj] of Object.entries(this.props.specs.props)) {
+        for (let [key, propObj] of Object.entries(
+            this.props.specs.props ?? {},
+        )) {
             if (this._values[key] === undefined) {
-                _console.log('set', key, propObj.type);
                 if (propObj.type?.match(/\[\]$/)) {
                     this._values[key] = [];
                 } else {
@@ -263,7 +268,6 @@ export default class SSpecsEditorComponent extends __SLitComponent {
 
     isPathResponsive(path: string[]): any {
         const currentPath = [];
-
         for (let i = 0; i < path.length; i++) {
             const part = path[i];
             currentPath.push(part);
@@ -660,7 +664,7 @@ export default class SSpecsEditorComponent extends __SLitComponent {
         return html`
             <span>
                 <h3 class="_title">
-                    ${propObj.title ?? propObj.id}
+                    ${settings.title ?? propObj.title ?? propObj.id}
                     ${propObj.required
                         ? html` <span class="_required">*</span> `
                         : ''}
@@ -669,14 +673,14 @@ export default class SSpecsEditorComponent extends __SLitComponent {
                 this.isPathResponsive(path)
                     ? this._renderMediaSelector(path)
                     : ''}
-                ${propObj.description
+                ${settings.description ?? propObj.description
                     ? html`
                           <span class="_help-icon s-tooltip-container">
                               <i class="fa-solid fa-circle-question"></i>
                               <div
                                   class="s-tooltip s-tooltip--${finalSettings.tooltip}"
                               >
-                                  ${propObj.description}
+                                  ${settings.description ?? propObj.description}
                               </div>
                           </span>
                       `

@@ -9,19 +9,24 @@
             :has(+ .s-carpenter-app_website-container)
         ) {
         margin-bottom: 0;
-        transition: margin-bottom 0.3s ease-in-out;
+        position: relative;
+        /* transition: margin-bottom 0.3s ease-in-out; */
 
         &:after {
-            content: '';
+            content: 'Add components/sections here...';
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: sugar.color(main, text, --alpha 0.4);
             position: absolute;
-            top: calc(100% + 80px);
+            z-index: -1;
+            bottom: 0;
             left: 50%;
             background: transparent;
             width: calc(100% - 40px);
             max-width: sugar.container.width();
-            height: 0;
             opacity: 0;
-            transform: translateX(-50%);
+            transform: translate(-50%, calc(100% + 80px));
             border: 1px dashed sugar.color(main, border);
             background: sugar.color(main, --alpha 0.1);
             @sugar.transition;
@@ -31,13 +36,16 @@
     .s-carpenter-app_website-container {
         position: relative;
         display: flex;
-        z-index: 50;
+        z-index: 100;
         align-items: center;
-        height: 0;
         pointer-events: none;
         @sugar.transition;
 
-        &:hover {
+        &:hover,
+        &:focus,
+        &:focus-within {
+            z-index: 101;
+
             > * {
                 opacity: 1;
                 pointer-events: all;
@@ -45,20 +53,24 @@
         }
 
         &:after {
+            content: 'Add components/sections here...';
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: sugar.color(main, text, --alpha 0.4);
             opacity: 0;
-            content: '';
             position: absolute;
-            top: 50%;
+            top: 80px;
             left: 50%;
             width: calc(100% - 40px);
             max-width: sugar.container.width();
-            height: 0;
-            transform: translate(-50%, -50%);
+            transform: translate(-50%, 0);
             border: 1px dashed sugar.color(main, border);
             background: sugar.color(main, --alpha 0.1);
             @sugar.transition;
         }
         &:hover:after {
+            color: sugar.color(main, text, --alpha 0);
             border: 1px dashed sugar.color(accent, border);
             background: sugar.color(accent, --alpha 0.1);
         }
@@ -68,6 +80,7 @@
         position: absolute;
         z-index: 9999;
         left: 50%;
+        top: 0;
         transform: translate(-50%, 0);
         background: sugar.color(main, background);
         color: sugar.color(main, text);
@@ -82,6 +95,18 @@
         @sugar.border.radius (30);
         @sugar.depth (100);
         @sugar.transition;
+
+        &:after {
+            content: ' ';
+            position: absolute;
+            border-style: default;
+            border-color: sugar.color(main, background) transparent transparent
+                transparent;
+            top: 100%;
+            left: 50%;
+            margin-left: -12.5px;
+            border-width: calc(25px / 2);
+        }
     }
 
     .s-carpenter-app_website-container-add {
@@ -111,6 +136,29 @@
     }
 }
 
+.s-carpenter-app--edit [s-carpenter-container] {
+    > *:not(.s-carpenter-app_website-container, svg):not(
+            :has(+ .s-carpenter-app_website-container)
+        ) {
+        margin-bottom: 0;
+
+        &:after {
+            height: 0;
+            opacity: 0;
+        }
+    }
+
+    .s-carpenter-app_website-container {
+        height: 0;
+        pointer-events: none;
+
+        &:after {
+            opacity: 0;
+            height: 0;
+        }
+    }
+}
+
 .s-carpenter-app--insert [s-carpenter-container] {
     > *:not(.s-carpenter-app_website-container, svg):not(
             :has(+ .s-carpenter-app_website-container)
@@ -129,7 +177,6 @@
 
         &:after {
             opacity: 1;
-            position: absolute;
             height: calc(100px - 40px);
         }
     }

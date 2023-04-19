@@ -46,5 +46,7 @@ return new \Twig\TwigFunction('__layoutCss', function (
     $layout,
     $settings = []
 ) {
-    return \Sugar\css\layoutCss($layout, $settings);
+    $media = new \SMedia();
+    $res = $media->layoutCss($layout, $settings);
+    return $res;
 });

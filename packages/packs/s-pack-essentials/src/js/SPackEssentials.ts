@@ -1,14 +1,14 @@
 import { define as __SActivateFeatureDefine } from '@coffeekraken/s-activate-feature';
 import { define as __SAppearFeatureDefine } from '@coffeekraken/s-appear-feature';
-import { define as __SClipboardCopyComponentDefine } from '@coffeekraken/s-clipboard-copy-component';
-import { define as __SFloatingFeatureDefine } from '@coffeekraken/s-floating-feature';
-import { define as __SFormValidateFeatureDefine } from '@coffeekraken/s-form-validate-feature';
+import { define as __SClipboardCopyComponentDefine } from '@coffeekraken/s-clipboard-copy-component/lazy';
+import { define as __SFloatingFeatureDefine } from '@coffeekraken/s-floating-feature/lazy';
+import { define as __SFormValidateFeatureDefine } from '@coffeekraken/s-form-validate-feature/lazy';
 import { define as __SInlineFeatureDefine } from '@coffeekraken/s-inline-feature';
 import { define as __SPanelComponentDefine } from '@coffeekraken/s-panel-component';
-import { define as __SRangeComponentDefine } from '@coffeekraken/s-range-component';
+import { define as __SRangeComponentDefine } from '@coffeekraken/s-range-component/lazy';
 import { define as __SRefocusFeatureDefine } from '@coffeekraken/s-refocus-feature';
 import { define as __SScrollComponentDefine } from '@coffeekraken/s-scroll-component';
-import { define as __SSliderComponentDefine } from '@coffeekraken/s-slider-component';
+import { define as __SSliderComponentDefine } from '@coffeekraken/s-slider-component/lazy';
 import { define as __SSugarFeatureDefine } from '@coffeekraken/s-sugar-feature';
 
 /**

@@ -2,15 +2,15 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const s_activate_feature_1 = require("@coffeekraken/s-activate-feature");
 const s_appear_feature_1 = require("@coffeekraken/s-appear-feature");
-const s_clipboard_copy_component_1 = require("@coffeekraken/s-clipboard-copy-component");
-const s_floating_feature_1 = require("@coffeekraken/s-floating-feature");
-const s_form_validate_feature_1 = require("@coffeekraken/s-form-validate-feature");
+const lazy_1 = require("@coffeekraken/s-clipboard-copy-component/lazy");
+const lazy_2 = require("@coffeekraken/s-floating-feature/lazy");
+const lazy_3 = require("@coffeekraken/s-form-validate-feature/lazy");
 const s_inline_feature_1 = require("@coffeekraken/s-inline-feature");
 const s_panel_component_1 = require("@coffeekraken/s-panel-component");
-const s_range_component_1 = require("@coffeekraken/s-range-component");
+const lazy_4 = require("@coffeekraken/s-range-component/lazy");
 const s_refocus_feature_1 = require("@coffeekraken/s-refocus-feature");
 const s_scroll_component_1 = require("@coffeekraken/s-scroll-component");
-const s_slider_component_1 = require("@coffeekraken/s-slider-component");
+const lazy_5 = require("@coffeekraken/s-slider-component/lazy");
 const s_sugar_feature_1 = require("@coffeekraken/s-sugar-feature");
 /**
  * @name 		                    SPackEssentials
@@ -49,19 +49,19 @@ const s_sugar_feature_1 = require("@coffeekraken/s-sugar-feature");
  */
 function SPackEssentials() {
     // Components
-    (0, s_clipboard_copy_component_1.define)();
+    (0, lazy_1.define)();
     (0, s_panel_component_1.define)();
-    (0, s_range_component_1.define)();
+    (0, lazy_4.define)();
     (0, s_scroll_component_1.define)();
-    (0, s_slider_component_1.define)();
+    (0, lazy_5.define)();
     // Features
     (0, s_sugar_feature_1.define)();
     (0, s_activate_feature_1.define)();
     (0, s_appear_feature_1.define)();
-    (0, s_floating_feature_1.define)();
-    (0, s_form_validate_feature_1.define)();
+    (0, lazy_2.define)();
+    (0, lazy_3.define)();
     (0, s_inline_feature_1.define)();
     (0, s_refocus_feature_1.define)();
 }
 exports.default = SPackEssentials;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7O0FBQUEseUVBQXNGO0FBQ3RGLHFFQUFrRjtBQUNsRix5RkFBcUc7QUFDckcseUVBQXNGO0FBQ3RGLG1GQUErRjtBQUMvRixxRUFBa0Y7QUFDbEYsdUVBQW9GO0FBQ3BGLHVFQUFvRjtBQUNwRix1RUFBb0Y7QUFDcEYseUVBQXNGO0FBQ3RGLHlFQUFzRjtBQUN0RixtRUFBZ0Y7QUFFaEY7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0FrQ0c7QUFDSCxTQUF3QixlQUFlO0lBQ25DLGFBQWE7SUFDYixJQUFBLG1DQUErQixHQUFFLENBQUM7SUFDbEMsSUFBQSwwQkFBdUIsR0FBRSxDQUFDO0lBQzFCLElBQUEsMEJBQXVCLEdBQUUsQ0FBQztJQUMxQixJQUFBLDJCQUF3QixHQUFFLENBQUM7SUFDM0IsSUFBQSwyQkFBd0IsR0FBRSxDQUFDO0lBRTNCLFdBQVc7SUFDWCxJQUFBLHdCQUFxQixHQUFFLENBQUM7SUFDeEIsSUFBQSwyQkFBd0IsR0FBRSxDQUFDO0lBQzNCLElBQUEseUJBQXNCLEdBQUUsQ0FBQztJQUN6QixJQUFBLDJCQUF3QixHQUFFLENBQUM7SUFDM0IsSUFBQSxnQ0FBNEIsR0FBRSxDQUFDO0lBQy9CLElBQUEseUJBQXNCLEdBQUUsQ0FBQztJQUN6QixJQUFBLDBCQUF1QixHQUFFLENBQUM7QUFDOUIsQ0FBQztBQWhCRCxrQ0FnQkMifQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7O0FBQUEseUVBQXNGO0FBQ3RGLHFFQUFrRjtBQUNsRix3RUFBMEc7QUFDMUcsZ0VBQTJGO0FBQzNGLHFFQUFvRztBQUNwRyxxRUFBa0Y7QUFDbEYsdUVBQW9GO0FBQ3BGLCtEQUF5RjtBQUN6Rix1RUFBb0Y7QUFDcEYseUVBQXNGO0FBQ3RGLGdFQUEyRjtBQUMzRixtRUFBZ0Y7QUFFaEY7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0FrQ0c7QUFDSCxTQUF3QixlQUFlO0lBQ25DLGFBQWE7SUFDYixJQUFBLGFBQStCLEdBQUUsQ0FBQztJQUNsQyxJQUFBLDBCQUF1QixHQUFFLENBQUM7SUFDMUIsSUFBQSxhQUF1QixHQUFFLENBQUM7SUFDMUIsSUFBQSwyQkFBd0IsR0FBRSxDQUFDO0lBQzNCLElBQUEsYUFBd0IsR0FBRSxDQUFDO0lBRTNCLFdBQVc7SUFDWCxJQUFBLHdCQUFxQixHQUFFLENBQUM7SUFDeEIsSUFBQSwyQkFBd0IsR0FBRSxDQUFDO0lBQzNCLElBQUEseUJBQXNCLEdBQUUsQ0FBQztJQUN6QixJQUFBLGFBQXdCLEdBQUUsQ0FBQztJQUMzQixJQUFBLGFBQTRCLEdBQUUsQ0FBQztJQUMvQixJQUFBLHlCQUFzQixHQUFFLENBQUM7SUFDekIsSUFBQSwwQkFBdUIsR0FBRSxDQUFDO0FBQzlCLENBQUM7QUFoQkQsa0NBZ0JDIn0=

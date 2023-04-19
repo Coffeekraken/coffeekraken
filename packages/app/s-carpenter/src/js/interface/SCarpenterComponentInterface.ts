@@ -147,6 +147,18 @@ export default class SCarpenterComponentInterface extends __SInterface {
                     addComponent: __i18n('Add a component', {
                         id: 's-carpenter.components.add',
                     }),
+                    modeInsert: __i18n('Insert', {
+                        id: 's-carpenter.mode.insert',
+                    }),
+                    modeEdit: __i18n('Edit', {
+                        id: 's-carpenter.mode.edit',
+                    }),
+                    modeToggle: __i18n('%s to toggle modes', {
+                        id: 's-carpenter.mode.insert',
+                        tokens: {
+                            '%s': `<span style="font-weight: bold">ctrl+i</span>`,
+                        },
+                    }),
                 },
             },
             icons: {

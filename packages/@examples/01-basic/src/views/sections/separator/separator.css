@@ -1,10 +1,9 @@
 .section-separator {
     position: relative;
     width: 100%;
-    margin-bottom: -50px;
 
     @sugar.lod (3) {
-        transform: skewY(1deg);
+        /* transform: skewY(1deg); */
     }
 
     ._bkg {

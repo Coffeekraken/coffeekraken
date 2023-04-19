@@ -377,6 +377,7 @@ export default class SCarpenterAppComponent extends __SLitComponent {
      * _$rootDocument, etc...
      */
     _registerShortcuts($scope: Document): void {
+        // "§" key to hide the editor
         let isEditorHided = false;
         $scope.addEventListener('keydown', (e) => {
             if (isEditorHided) return;
@@ -390,6 +391,13 @@ export default class SCarpenterAppComponent extends __SLitComponent {
             if (!isEditorHided) return;
             isEditorHided = false;
             this._openEditor();
+        });
+
+        // "ctrl+m" to change mode
+        $scope.addEventListener('keyup', (e) => {
+            if (e.key === 'i' && e.ctrlKey) {
+                this._setMode(this.state.mode === 'insert' ? 'edit' : 'insert');
+            }
         });
     }
 
@@ -1473,13 +1481,19 @@ export default class SCarpenterAppComponent extends __SLitComponent {
 
                           ${this.props.features?.insert
                               ? html`
-                                    <label class="_modes">
-                                        <span class="_edit"> Edit </span>
+                                    <label class="_modes s-tooltip-container">
+                                        <span class="_edit">
+                                            ${unsafeHTML(
+                                                this.props.i18n.modeEdit,
+                                            )}
+                                        </span>
                                         <input
                                             type="checkbox"
                                             class="_switch"
-                                            .checked=${this.state.insertMode}
-                                            ?checked=${this.state.insertMode}
+                                            .checked=${this.state.mode ===
+                                            'insert'}
+                                            ?checked=${this.state.mode ===
+                                            'insert'}
                                             @change=${(e) => {
                                                 this._setMode(
                                                     e.target.checked
@@ -1488,7 +1502,18 @@ export default class SCarpenterAppComponent extends __SLitComponent {
                                                 );
                                             }}
                                         />
-                                        <span class="_insert"> Insert </span>
+                                        <span class="_insert">
+                                            ${unsafeHTML(
+                                                this.props.i18n.modeInsert,
+                                            )}
+                                        </span>
+                                        <div
+                                            class="s-tooltip s-color:accent s-white-space:nowrap"
+                                        >
+                                            ${unsafeHTML(
+                                                this.props.i18n.modeToggle,
+                                            )}
+                                        </div>
                                     </label>
                                 `
                               : ''}

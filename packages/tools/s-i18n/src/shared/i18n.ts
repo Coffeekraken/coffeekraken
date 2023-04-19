@@ -108,7 +108,9 @@ export default function __i18n(
     }
 
     // get all the tokens in the translation
-    const tokens = translation.match(/(__\([^__\)]*\)__|(?!\|)%[a-zA-Z0-9])/gm);
+    const tokens = ` ${translation} `.match(
+        /(__\([^__\)]*\)__|(?!\|)%[a-zA-Z0-9])/gm,
+    );
 
     // if no tokens, return the translation directly
     if (!tokens) {
@@ -129,7 +131,7 @@ export default function __i18n(
             currentToken = token;
             const tokenValue = getTokenValue(token);
             translation = translation.replaceAll(
-                new RegExp(`([^\(])${token}`, 'g'),
+                new RegExp(`([^\(])?${token}`, 'g'),
                 `$1${tokenValue}`,
             );
         } else {

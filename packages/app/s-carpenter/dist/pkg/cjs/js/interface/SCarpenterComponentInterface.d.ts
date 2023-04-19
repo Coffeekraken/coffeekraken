@@ -95,6 +95,9 @@ export default class SCarpenterComponentInterface extends __SInterface {
             description: string;
             default: {
                 addComponent: string;
+                modeInsert: string;
+                modeEdit: string;
+                modeToggle: string;
             };
         };
         icons: {

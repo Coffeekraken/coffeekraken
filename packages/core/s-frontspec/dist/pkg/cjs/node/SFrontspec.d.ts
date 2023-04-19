@@ -20,8 +20,14 @@ export interface ISFrontspecAssetToServe {
 }
 export default class SFrontspec extends __SClass {
     static _cachesStack: {};
+    static _defaultFrontspecInstance: any;
+    _frontspec: any;
+    
+    static get(dotpath?: string): any;
     
     constructor(settings?: {});
+    
+    get(dotpath?: string): any;
     
     read(): any;
     

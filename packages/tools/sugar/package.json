@@ -28,6 +28,7 @@
         "@coffeekraken/s-theme": "^2.0.0-alpha.27",
         "@coffeekraken/sugar": "^2.0.0-alpha.27",
         "@floating-ui/dom": "^0.5.4",
+        "@specimen/types": "^1.0.0-alpha.1",
         "@types/blessed": "^0.1.19",
         "abstract-syntax-tree": "^2.20.6",
         "acorn-loose": "^8.3.0",

@@ -1730,6 +1730,7 @@ __metadata:
     "@coffeekraken/s-front": ^2.0.0-alpha.27
     "@coffeekraken/s-frontspec": ^2.0.0-alpha.27
     "@coffeekraken/s-interface": ^2.0.0-alpha.27
+    "@coffeekraken/s-media": ^2.0.0-alpha.27
     "@coffeekraken/s-promise": ^2.0.0-alpha.27
     "@coffeekraken/s-state": ^2.0.0-alpha.27
     "@coffeekraken/s-theme": ^2.0.0-alpha.27
@@ -2361,6 +2362,24 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@coffeekraken/s-media@^2.0.0-alpha.27, @coffeekraken/s-media@workspace:packages/tools/s-media":
+  version: 0.0.0-use.local
+  resolution: "@coffeekraken/s-media@workspace:packages/tools/s-media"
+  dependencies:
+    "@coffeekraken/s-class": ^2.0.0-alpha.27
+    "@coffeekraken/s-env": ^2.0.0-alpha.27
+    "@coffeekraken/s-interface": ^2.0.0-alpha.27
+    "@coffeekraken/s-log": ^2.0.0-alpha.27
+    "@coffeekraken/s-process": ^2.0.0-alpha.27
+    "@coffeekraken/s-promise": ^2.0.0-alpha.27
+    "@coffeekraken/s-stdio": ^2.0.0-alpha.27
+    "@coffeekraken/s-sugar-config": ^2.0.0-alpha.27
+    "@coffeekraken/s-theme": ^2.0.0-alpha.27
+    "@coffeekraken/sugar": ^2.0.0-alpha.27
+    glob: ^7.2.3
+  languageName: unknown
+  linkType: soft
+
 "@coffeekraken/s-monorepo@^2.0.0-alpha.27, @coffeekraken/s-monorepo@workspace:packages/core/s-monorepo":
   version: 0.0.0-use.local
   resolution: "@coffeekraken/s-monorepo@workspace:packages/core/s-monorepo"
@@ -2532,6 +2551,7 @@ __metadata:
     "@coffeekraken/s-frontspec": ^2.0.0-alpha.27
     "@coffeekraken/s-glob": ^2.0.0-alpha.27
     "@coffeekraken/s-interface": ^2.0.0-alpha.27
+    "@coffeekraken/s-media": ^2.0.0-alpha.27
     "@coffeekraken/s-process": ^2.0.0-alpha.27
     "@coffeekraken/s-promise": ^2.0.0-alpha.27
     "@coffeekraken/s-request": ^2.0.0-alpha.27
@@ -3084,6 +3104,7 @@ __metadata:
     "@coffeekraken/s-theme": ^2.0.0-alpha.27
     "@coffeekraken/sugar": ^2.0.0-alpha.27
     "@floating-ui/dom": ^0.5.4
+    "@specimen/types": ^1.0.0-alpha.1
     "@types/blessed": ^0.1.19
     abstract-syntax-tree: ^2.20.6
     acorn-loose: ^8.3.0

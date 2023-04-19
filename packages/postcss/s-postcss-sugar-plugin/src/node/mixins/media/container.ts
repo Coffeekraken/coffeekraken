@@ -1,4 +1,5 @@
 import __SInterface from '@coffeekraken/s-interface';
+import __SMedia from '@coffeekraken/s-media';
 import __STheme from '@coffeekraken/s-theme';
 
 class postcssSugarPluginMediaContainerMixinInterface extends __SInterface {
@@ -69,7 +70,9 @@ export default function ({
         );
     }
 
-    const buildedQuery = __STheme.buildMediaQuery(finalParams.query, {
+    const media = new __SMedia();
+
+    const buildedQuery = media.buildQuery(finalParams.query, {
         method: 'container',
         containerName: finalParams.containerName,
     });

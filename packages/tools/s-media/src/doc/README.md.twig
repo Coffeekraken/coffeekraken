@@ -1,0 +1,65 @@
+{% extends 'sugar/readme/layouts/main/main.twig' %}
+{% block body %}
+
+<!--
+/**
+ * @name            README
+ * @namespace       doc
+ * @type            Markdown
+ * @platform        md
+ * @status          wip
+ * @menu            Documentation           /doc/readme
+ *
+ * @since           2.0.0
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+ */
+-->
+
+## SMedia
+
+A simple class to handle the media (queries) like methods like buildMediaQuery, layoutCss, etc... All of this on top of the @specimen/types ISMedia type and the @coffeekraken/s-frontspec package
+
+## Features
+
+-   Access the "media" either specified in the frontspec.json or directly passed as parameter
+- Build a media query from the ISMedia configuration object (usually taken from the frontspec.json)
+- Build a full responsive css layout CSS to apply on your HTML
+-   And more...
+
+## What is a media?
+
+A media is a specific display size defined by a min/max-width.
+On top of a defined media configuration like this:
+
+```json
+{
+    "defaultAction": "<=",
+    "defaultMedia": "desktop",
+    "queries": {
+        "wide": {
+            "minWidth": 2048,
+            "maxWidth": null
+        },
+        "desktop": {
+            "minWidth": 1280,
+            "maxWidth": 2047
+        },
+        "tablet": {
+            "minWidth": 640,
+            "maxWidth": 1279
+        },
+        "mobile": {
+            "minWidth": 0,
+            "maxWidth": 639
+        }
+    }
+}
+```
+
+This package allows you to create queries, layout, and more with ease.
+
+## API
+
+For more information about the API, please check out [the API documentation](/api/@coffeekraken.s-media.shared.SMedia)
+
+{% endblock %}

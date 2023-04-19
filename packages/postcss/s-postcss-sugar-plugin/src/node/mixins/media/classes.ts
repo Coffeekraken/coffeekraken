@@ -1,4 +1,5 @@
 import __SInterface from '@coffeekraken/s-interface';
+import __SMedia from '@coffeekraken/s-media';
 import __STheme from '@coffeekraken/s-theme';
 
 /**
@@ -125,11 +126,13 @@ export default function ({
     let refNode = atRule;
     atRule._sMediaRule = true;
 
+    const mediaInstance = new __SMedia();
+
     sortedMedias.forEach((media) => {
         const newRule = refNode.clone();
         newRule.name = 'media';
-        newRule.params = `${__STheme
-            .buildMediaQuery(media, {
+        newRule.params = `${mediaInstance
+            .buildQuery(media, {
                 method: 'media',
             })
             .replace('@media ', '')}`;

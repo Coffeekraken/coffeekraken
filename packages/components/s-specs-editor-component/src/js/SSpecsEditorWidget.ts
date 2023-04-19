@@ -197,6 +197,9 @@ export default class SSpecsEditorWidget {
             __set(newValues, finalSettings.path, value);
         }
 
+        _console.log('setted', value);
+        _console.log('new', newValues);
+
         // validate
         let validateResult: ISSpecsEditorWidgetValidateResult = {};
         if (finalSettings.validate) {

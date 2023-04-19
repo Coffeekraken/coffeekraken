@@ -1,0 +1,34 @@
+{
+    "name": "@coffeekraken/s-media",
+    "version": "2.0.0-alpha.27",
+    "description": "A simple class to handle the media (queries) like methods like buildMediaQuery, layoutCss, etc... All of this on top of the @specimen/types ISMedia type and the @coffeekraken/s-frontspec package",
+    "type": "module",
+    "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)",
+    "license": "MIT",
+    "dependencies": {
+        "@coffeekraken/s-class": "^2.0.0-alpha.27",
+        "@coffeekraken/s-env": "^2.0.0-alpha.27",
+        "@coffeekraken/s-interface": "^2.0.0-alpha.27",
+        "@coffeekraken/s-log": "^2.0.0-alpha.27",
+        "@coffeekraken/s-process": "^2.0.0-alpha.27",
+        "@coffeekraken/s-promise": "^2.0.0-alpha.27",
+        "@coffeekraken/s-stdio": "^2.0.0-alpha.27",
+        "@coffeekraken/s-sugar-config": "^2.0.0-alpha.27",
+        "@coffeekraken/s-theme": "^2.0.0-alpha.27",
+        "@coffeekraken/sugar": "^2.0.0-alpha.27",
+        "glob": "^7.2.3"
+    },
+    "main": "dist/pkg/cjs/js/exports.js",
+    "module": "dist/pkg/esm/js/exports.js",
+    "exports": {
+        "node": {
+            "require": "./dist/pkg/cjs/node/exports.js",
+            "import": "./dist/pkg/esm/node/exports.js"
+        },
+        "default": {
+            "require": "./dist/pkg/cjs/js/exports.js",
+            "import": "./dist/pkg/esm/js/exports.js"
+        }
+    },
+    "homepage": "https://coffeekraken.io"
+}

@@ -18,6 +18,7 @@
 @sugar.padding.classes;
 @sugar.flex.classes;
 @sugar.color.classes;
+@sugar.whitespace.classes;
 
 @sugar.ui.wysiwyg.classes();
 @sugar.ui.spacesSelector.classes();

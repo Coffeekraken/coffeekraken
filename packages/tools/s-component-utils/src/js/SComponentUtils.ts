@@ -6,8 +6,8 @@ import __SClass from '@coffeekraken/s-class';
 import __SFront from '@coffeekraken/s-front';
 import __SFrontspec from '@coffeekraken/s-frontspec';
 import __SInterface from '@coffeekraken/s-interface';
+import __SMedia from '@coffeekraken/s-media';
 import __SState from '@coffeekraken/s-state';
-import __STheme from '@coffeekraken/s-theme';
 
 import { __camelCase } from '@coffeekraken/sugar/string';
 
@@ -583,6 +583,8 @@ export default class SComponentUtils extends __SClass {
 
         const responsiveObj = Object.assign({}, props.responsive);
 
+        const mediaInstance = new __SMedia();
+
         // search for the good media
         for (let [media, responsiveProps] of Object.entries(props.responsive)) {
             // media query name
@@ -605,7 +607,7 @@ export default class SComponentUtils extends __SClass {
             if (media.match(/[a-zA-Z0-9<>=]/) && queries[media]) {
                 let mediaQuery = this._mediaQueries[media];
                 if (!mediaQuery) {
-                    this._mediaQueries[media] = __STheme.buildMediaQuery(media);
+                    this._mediaQueries[media] = mediaInstance.buildQuery(media);
                     mediaQuery = this._mediaQueries[media];
                 }
                 if (

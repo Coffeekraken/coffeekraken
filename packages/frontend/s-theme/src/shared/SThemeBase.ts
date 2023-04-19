@@ -13,7 +13,6 @@ import {
     __objectHash,
 } from '@coffeekraken/sugar/object';
 import __dashCase from '@coffeekraken/sugar/shared/string/dashCase';
-import { __parse } from '@coffeekraken/sugar/string';
 import __knownCssProperties from 'known-css-properties';
 
 /**
@@ -98,11 +97,6 @@ export interface ISThemeDefaultStaticSettings {
 export interface ISThemeResolveColorSettings
     extends ISThemeDefaultStaticSettings {
     return: 'value' | 'var';
-}
-
-export interface ISThemeBuildMediaQuerySettings {
-    method: 'container' | 'media';
-    containerName: string;
 }
 
 export interface ISThemeFontFamilyStack {
@@ -738,184 +732,6 @@ export default class SThemeBase extends __SEventEmitter {
                 .replace(/--/gm, '-')}`,
         )}, ${fb})`;
         return v;
-    }
-
-    /**
-     * @name                buildMediaQuery
-     * @type                Function
-     * @status              beta
-     * @platform            js
-     * @platform            node
-     * @static
-     *
-     * This static method allows you to built a media query by passing args like "mobile", ">tablet", etc...
-     *
-     * @param               {String}    query    The media query you want to build
-     * @return              {String}                The builded media query (without brackets)
-     *
-     * @since               2.0.0
-     *
-     */
-    static buildMediaQuery(
-        queryString: string,
-        settings?: Partial<ISThemeBuildMediaQuerySettings>,
-    ): string {
-        let currentQueryList: string[] = [];
-
-        const mediaConfig = this.sortMedia(this.get('media')),
-            sortedMedia = Object.keys(mediaConfig.queries);
-
-        const finalSettings: ISThemeBuildMediaQuerySettings = {
-            method: settings?.method ?? mediaConfig.method ?? 'media',
-            containerName:
-                settings?.containerName ?? mediaConfig.containerName ?? '',
-        };
-
-        const queryAr = queryString
-            .split(' ')
-            .map((l) => l.trim())
-            .filter((l) => l !== '');
-
-        queryAr.forEach((query, i) => {
-            if (query === 'and' || query === 'or') {
-                currentQueryList.push(query);
-                return;
-            }
-
-            const firstChar = query.slice(0, 1);
-            const firstTwoChar = query.slice(0, 2);
-            const lastChar = query.slice(-1);
-            let action = this.get('media.defaultAction');
-
-            let mediaName = query;
-
-            if (lastChar === '-' || lastChar === '|')
-                mediaName = mediaName.slice(0, -1);
-
-            if (
-                firstTwoChar === '>=' ||
-                firstTwoChar === '<=' ||
-                firstTwoChar === '=='
-            ) {
-                mediaName = mediaName.slice(2);
-                action = firstTwoChar;
-            } else if (
-                firstChar === '<' ||
-                firstChar === '>' ||
-                firstChar === '='
-            ) {
-                mediaName = mediaName.slice(1);
-                action = firstChar;
-            }
-
-            let mediaQueryConfig;
-
-            // parse the mediaName to check if it's a number
-            if (typeof __parse(mediaName) === 'number') {
-                switch (action) {
-                    case '>':
-                    case '>=':
-                        mediaQueryConfig = {
-                            minWidth: mediaName,
-                            maxWidth: null,
-                        };
-                        break;
-                    case '<':
-                    case '<=':
-                        mediaQueryConfig = {
-                            minWidth: null,
-                            maxWidth: mediaName,
-                        };
-                        break;
-                    case '=':
-                        mediaQueryConfig = {
-                            minWidth: mediaName,
-                            maxWidth: mediaName,
-                        };
-                        break;
-                }
-            } else {
-                mediaQueryConfig = this.get('media.queries')[mediaName];
-                if (!mediaQueryConfig)
-                    throw new Error(
-                        `<red>[postcssSugarPlugin.media]</red> Sorry but the requested media "<yellow>${mediaName}</yellow>" does not exists in the config. Here's the available medias: ${Object.keys(
-                            this.get('media.queries'),
-                        )
-                            .map((l) => `<green>${l}</green>`)
-                            .join(',')}`,
-                    );
-            }
-
-            const queryList: string[] = [];
-
-            Object.keys(mediaQueryConfig).forEach((prop) => {
-                // dash case
-                const dashProp = __dashCase(prop);
-
-                let value = mediaQueryConfig[prop];
-                if (!value) {
-                    if (prop === 'minWidth') {
-                        value = 0;
-                    } else if (prop === 'maxWidth') {
-                        value = 99999;
-                    }
-                }
-
-                if (['min-width', 'max-width'].indexOf(dashProp) !== -1) {
-                    if (action === '>') {
-                        if (dashProp === 'max-width') {
-                            let argName = 'min-width';
-                            queryList.push(`(${argName}: ${value + 1}px)`);
-                        }
-                    } else if (action === '<') {
-                        if (dashProp === 'min-width') {
-                            let argName = 'max-width';
-                            queryList.push(`(${argName}: ${value}px)`);
-                        }
-                    } else if (action === '=') {
-                        queryList.push(`(${dashProp}: ${value}px)`);
-                    } else if (action === '>=') {
-                        if (sortedMedia.at(-1) === mediaName) {
-                            return;
-                        }
-
-                        if (dashProp === 'min-width') {
-                            queryList.push(`(${dashProp}: ${value}px)`);
-                        }
-                    } else if (action === '<=') {
-                        if (sortedMedia[0] === mediaName) {
-                            return;
-                        }
-
-                        if (dashProp === 'max-width') {
-                            queryList.push(`(${dashProp}: ${value}px)`);
-                        }
-                    } else {
-                        queryList.push(`(${dashProp}: ${value}px)`);
-                    }
-                } else {
-                    queryList.push(`(${dashProp}: ${value}px)`);
-                }
-            });
-
-            if (lastChar === '-') {
-                queryList.push('(orientation: landscape)');
-            } else if (lastChar === '|') {
-                queryList.push('(orientation: portrait)');
-            }
-
-            currentQueryList.push(queryList.join(' and '));
-        });
-
-        currentQueryList = currentQueryList.filter((l) => l.trim() !== '');
-
-        if (finalSettings.method === 'container') {
-            return `@container ${
-                finalSettings.containerName
-            } ${currentQueryList.join(' ')}`;
-        }
-
-        return `@media ${currentQueryList.join(' ')}`;
     }
 
     /**

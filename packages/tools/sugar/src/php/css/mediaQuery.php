@@ -27,7 +27,8 @@ namespace Sugar\css;
  */
 function mediaQuery($media)
 {
-    $query = \Sugar\css\buildMediaQuery($media);
+    $mediaInstance = new SMedia();
+    $query = $mediaInstance->buildQuery($media);
     $query = str_replace('@media', '', $query);
     $query = str_replace('@container', '', $query);
     return trim($query);

@@ -16,6 +16,7 @@
         "@coffeekraken/s-frontspec": "^2.0.0-alpha.27",
         "@coffeekraken/s-glob": "^2.0.0-alpha.27",
         "@coffeekraken/s-interface": "^2.0.0-alpha.27",
+        "@coffeekraken/s-media": "^2.0.0-alpha.27",
         "@coffeekraken/s-process": "^2.0.0-alpha.27",
         "@coffeekraken/s-promise": "^2.0.0-alpha.27",
         "@coffeekraken/s-request": "^2.0.0-alpha.27",

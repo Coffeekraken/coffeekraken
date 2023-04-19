@@ -6,7 +6,7 @@ import __SFile from '@coffeekraken/s-file';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
 import { __folderPath, __readJsonSync } from '@coffeekraken/sugar/fs';
 import __packageRootDir from '@coffeekraken/sugar/node/path/packageRootDir';
-import { __deepMerge } from '@coffeekraken/sugar/object';
+import { __deepMerge, __get } from '@coffeekraken/sugar/object';
 import __fs from 'fs';
 import __path from 'path';
 import __SFrontspecBuildParamsInterface from './interface/SFrontspecBuildParamsInterface';
@@ -28,7 +28,7 @@ import __SFrontspecBuildParamsInterface from './interface/SFrontspecBuildParamsI
  * @todo      tests
  *
  * @snippet         __SFrontspec.get($1)
- * 
+ *
  * @example             js
  * import __SFrontspec from '@coffeekraken/s-frontspec';
  * const frontspec = new __SFrontspec();
@@ -63,6 +63,29 @@ export interface ISFrontspecAssetToServe {}
 
 export default class SFrontspec extends __SClass {
     static _cachesStack = {};
+    static _defaultFrontspecInstance;
+
+    _frontspec;
+
+    /**
+     * @name        get
+     * @type        Function
+     * @static
+     *
+     * Access a frontspec value by passing a dotpath like "partytown.enabled", or by accessing the full frontspec object by using `.get()` call.
+     *
+     * @param       {String}        [dotpah="."]            The dotpath of the frontspec value you want to access
+     * @return      {Any}                                   The getted frontspec value
+     *
+     * @since       2.0.0
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    static get(dotpath: string = '.'): any {
+        if (!this._defaultFrontspecInstance) {
+            this._defaultFrontspecInstance = new SFrontspec();
+        }
+        return this._defaultFrontspecInstance.get(dotpath);
+    }
 
     /**
      * @name            constructor
@@ -88,6 +111,23 @@ export default class SFrontspec extends __SClass {
     }
 
     /**
+     * @name        get
+     * @type        Function
+     *
+     * Access a frontspec value by passing a dotpath like "partytown.enabled", or by accessing the full frontspec object by using `.get()` call.
+     *
+     * @param       {String}        [dotpah="."]            The dotpath of the frontspec value you want to access
+     * @return      {Any}                                   The getted frontspec value
+     *
+     * @since       2.0.0
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    get(dotpath: string = '.'): any {
+        this.read(); // make sure we have the content
+        return __get(this._frontspec, dotpath);
+    }
+
+    /**
      * @name          read
      * @type          Function
      *
@@ -102,6 +142,11 @@ export default class SFrontspec extends __SClass {
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     read() {
+        // cached
+        if (this._frontspec) {
+            return this._frontspec;
+        }
+
         const frontspecPath = `${__packageRootDir()}/frontspec.json`;
 
         if (!__fs.existsSync(frontspecPath)) {
@@ -133,6 +178,9 @@ export default class SFrontspec extends __SClass {
                 }
             });
         }
+
+        // cache the frontspec
+        this._frontspec = res;
 
         return res;
     }

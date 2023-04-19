@@ -4,10 +4,28 @@
 {% endif %}
 <div id="{{ finalId }}" s-specs class="{{ attributes.class }} {{ __spacesClasses(spaces, frontspec) }}" {{ __attrs(attributes, ['class'])|raw }}>
     {{ __specsDataTemplate(_context)|raw }}
+    {% set layoutCssRes = __layoutCss(media ? media : '1', {
+        selector: '#' ~ finalId ~ '-layout'
+    }) %}
+    {% set layoutAreasCount = layoutCssRes.areas|length %}
+    {% set finalCells = [] %}
+
+    {% if layoutAreasCount < cells|length %}
+        {% for i, cell in cells %}
+            {% if i > layoutAreasCount - 1 %}
+                {% set finalCells = finalCells|merge({ (layoutAreasCount - 1): finalCells[layoutAreasCount - 1] ~ cell}) %}
+            {% else %}
+                {% set finalCells = finalCells|merge([cell]) %}
+            {% endif %}
+        {% endfor %}
+    {% else %}
+        {% for i in 0..(layoutAreasCount - 1) %}
+            {% set finalCells = finalCells|merge([cells[i]]) %}
+        {% endfor %}
+    {% endif %}
+
     <style>
-        {{ __layoutCss(media ? media : '1', {
-            selector: '#' ~ finalId ~ '-layout'
-        })|raw }}
+        {{ layoutCssRes.css|raw }}
     </style>
     {% if container %}
         <div class="s-container:{{ container }}">
@@ -15,10 +33,12 @@
         <div class="s-layout {{ gap ? 's-gap:' ~ gap : '' }}" id="{{ finalId }}-layout">
             {% if html %}
                 {{ html|raw }}
-            {% elseif cells %}
-                {% for cell in cells %}
+            {% elseif finalCells %}
+                {% for cell in finalCells %}
                     <div s-carpenter-container>
-                        {{ cell|raw }}
+                        {% if cell %}
+                            {{ cell|raw }}
+                        {% endif %}
                     </div>
                 {% endfor %}
             {% else %}

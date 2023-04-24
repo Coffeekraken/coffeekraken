@@ -132,6 +132,16 @@ export default function (api: any): {
             path: string;
             settings: {};
         };
+        store: {
+            
+            description: string;
+            
+            path: string;
+            settings: {
+                
+                rootDir: string;
+            };
+        };
     };
     pages: {};
     handlers: {};

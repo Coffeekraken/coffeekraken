@@ -68,6 +68,7 @@ export interface ISCarpenterComponentProps {
     data: ISCarpenterAppComponentData;
     viewportElm: HTMLElement;
     nav: boolean;
+    savePageUrl: string;
     escape: boolean;
     pagesLink: string;
     iframe: boolean;
@@ -78,7 +79,6 @@ export interface ISCarpenterComponentProps {
 }
 
 // define components/features
-__sSpecsEditorComponentDefine();
 document.body.setAttribute('s-sugar', 'true');
 __sSugarFeatureDefine();
 
@@ -205,6 +205,16 @@ export default class SCarpenterAppComponent extends __SLitComponent {
     }
 
     async mount() {
+        // define the s-specs-editor component
+        __sSpecsEditorComponentDefine({
+            features: {
+                delete: this.props.features.delete,
+                upload: this.props.features.upload,
+                save: this.props.features.saveComponent,
+                media: this.props.features.media,
+            },
+        });
+
         // get the data
         this._data = await this._getData(this.props.data);
         if (!this._data) {
@@ -264,8 +274,8 @@ export default class SCarpenterAppComponent extends __SLitComponent {
         // register shortcuts in the editor iframe
         this._registerShortcuts(this._$editorDocument);
 
-        // listen spec editor update
-        this._listenSpecsEditorUpdate();
+        // listen spec editor events like save, change, etc...
+        this._listenSpecsEditorEvents();
 
         // handle popstate
         this._websiteWindow.addEventListener('popstate', (e) => {
@@ -441,6 +451,9 @@ export default class SCarpenterAppComponent extends __SLitComponent {
         // prevent default links behaviors
         this._preventExternalLinksBehaviors();
 
+        // ensure s-specs components have an id
+        this._ensureSpecsComponentsHaveId();
+
         // listen for click on links in the iframe to close the editor
         this._$websiteDocument.addEventListener('click', (e) => {
             let $link = e.target;
@@ -477,6 +490,23 @@ export default class SCarpenterAppComponent extends __SLitComponent {
 
         // mode
         this._setMode(this.state.mode);
+    }
+
+    /**
+     * ensure every "s-specs" components have a proper "id"
+     */
+    _ensureSpecsComponentsHaveId() {
+        __querySelectorLive(
+            '[s-specs]',
+            ($elm) => {
+                if (!$elm.id) {
+                    $elm.setAttribute('id', __uniqid());
+                }
+            },
+            {
+                rootNode: this._$websiteDocument,
+            },
+        );
     }
 
     /**
@@ -757,7 +787,8 @@ export default class SCarpenterAppComponent extends __SLitComponent {
 
     /**
      * Add a component into a container
-     */ async _addComponent(
+     */
+    async _addComponent(
         specs: ISCarpenterAppComponentAddComponent,
     ): Promise<void> {
         const $newComponent = document.createElement('div');
@@ -775,13 +806,6 @@ export default class SCarpenterAppComponent extends __SLitComponent {
     }
 
     async applyComponent(values?: any): Promise<void> {
-        _console.log(
-            'Apl___',
-            values,
-            this._$currentElm,
-            this._data.currentSpecs,
-        );
-
         // make use of the specified adapter to update the component/section/etc...
         const adapterResult = await SCarpenterAppComponent._registeredAdapters[
             this.props.adapter
@@ -798,9 +822,14 @@ export default class SCarpenterAppComponent extends __SLitComponent {
     }
 
     /**
-     * Listen for specs editor updates
+     * Listen for specs editor events like save, change, etc...
      */
-    _listenSpecsEditorUpdate() {
+    _listenSpecsEditorEvents() {
+        // listen for save
+        this.addEventListener('s-specs-editor.save', (e) => {
+            this._saveComponent(e.detail);
+        });
+
         // listen for actual updated
         this.addEventListener('s-specs-editor.change', async (e) => {
             this.applyComponent(e.detail.values);
@@ -821,22 +850,18 @@ export default class SCarpenterAppComponent extends __SLitComponent {
             `[s-specs]`,
             ($elm) => {
                 $elm.addEventListener('pointerover', (e) => {
+                    e.stopPropagation();
+
                     // position toolbar
                     this._setToolbarPosition(e.currentTarget);
 
                     // do nothing more if already activated
                     if (
                         e.currentTarget.id &&
-                        e.currentTarget.id === this._$currentElm?.id
+                        e.currentTarget.id === this._$preselectedElm?.id
                     ) {
                         return;
                     }
-                    if (this._$toolbar?.parent) {
-                        return;
-                    }
-
-                    // activate the element if needed
-                    this._positionToolbarOnElement(e.currentTarget);
 
                     // set the "pre" activate element
                     this._$preselectedElm = $elm;
@@ -956,6 +981,8 @@ export default class SCarpenterAppComponent extends __SLitComponent {
      * Edit an item
      */
     async _edit($elm?: HTMLElement) {
+        _console.log('edit', $elm, this._$preselectedElm, this._$currentElm);
+
         // set the current element
         if ($elm ?? this._$preselectedElm) {
             await this._setCurrentElement($elm ?? this._$preselectedElm);
@@ -1018,18 +1045,6 @@ export default class SCarpenterAppComponent extends __SLitComponent {
             delete data.specs;
             Object.assign(this._data, data);
         }
-    }
-
-    /**
-     * Add the "editor" micro menu to the element
-     */
-    _positionToolbarOnElement($elm: HTMLElement): void {
-        if ($elm.id && this._$currentElm?.id === $elm.id) {
-            return;
-        }
-
-        // position toolbar
-        this._setToolbarPosition($elm);
     }
 
     /**
@@ -1156,6 +1171,103 @@ export default class SCarpenterAppComponent extends __SLitComponent {
             this.state.activeNavigationFolders.push(folderId);
         }
         this.requestUpdate();
+    }
+
+    /**
+     * This method takes all the content from the page and save it through the adapter(s)
+     * by respecting the ISPage interface available in the @specimen/types package.
+     */
+    async _savePage(): Promise<void> {
+        // go grab all the s-carpenter-container elements in the website
+        const $components = this._$websiteDocument.querySelectorAll(
+            '[s-carpenter-container], [s-specs][id]',
+        );
+        if (!$components) {
+            return;
+        }
+
+        const data = {
+                id: 'my-page',
+                type: 'root',
+                nodes: {},
+            },
+            flatData = {};
+
+        Array.from($components).forEach(($component) => {
+            const componentId =
+                $component.getAttribute('s-carpenter-container') ??
+                $component.id;
+            flatData[componentId] = {
+                id: componentId,
+                type: $component.hasAttribute('s-specs')
+                    ? 'component'
+                    : 'container',
+            };
+
+            const $belong = __traverseUp($component, ($elm) => {
+                return (
+                    $elm.hasAttribute('s-specs') ||
+                    $elm.hasAttribute('s-carpenter-container')
+                );
+            });
+
+            // if not belong to any other components,
+            // mean it's a root node
+            if (!$belong) {
+                if (!data.nodes) {
+                    data.nodes = {};
+                }
+                data.nodes[componentId] = flatData[componentId];
+                return;
+            }
+
+            const belongId =
+                $belong.getAttribute('s-carpenter-container') ?? $belong.id;
+            if (!belongId) {
+                _console.log($belong);
+                throw new Error(
+                    '<red>[SCarpenter]</red> The component logged bellow does not have any "s-carpenter-container" id or any "id" attribute...',
+                );
+            }
+
+            if (!flatData[belongId].nodes) {
+                flatData[belongId].nodes = {};
+            }
+            flatData[belongId].nodes[componentId] = flatData[componentId];
+        });
+
+        const response = await fetch(this.props.savePageUrl, {
+            method: 'POST',
+            mode: 'cors',
+            cache: 'no-cache',
+            credentials: 'same-origin',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            referrerPolicy: 'no-referrer',
+            body: JSON.stringify(data),
+        });
+    }
+
+    /**
+     * Save a component
+     */
+    async _saveComponent(data: any): Promise<void> {
+        const response = await fetch(this.props.saveComponentUrl, {
+            method: 'POST',
+            mode: 'cors',
+            cache: 'no-cache',
+            credentials: 'same-origin',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            referrerPolicy: 'no-referrer',
+            body: JSON.stringify({
+                id: data.id ?? __uniqid(),
+                ...data,
+                specs: this._$currentElm.getAttribute('s-specs'),
+            }),
+        });
     }
 
     /**
@@ -1417,7 +1529,6 @@ export default class SCarpenterAppComponent extends __SLitComponent {
                                             .source=${this._data.source}
                                             .specs=${this._data.currentSpecs}
                                             .values=${this._data.values}
-                                            .features=${this.props.features}
                                             .frontspec=${this.props.frontspec ??
                                             {}}
                                             @s-specs-editor.error=${(e) => {
@@ -1517,11 +1628,14 @@ export default class SCarpenterAppComponent extends __SLitComponent {
                                     </label>
                                 `
                               : ''}
-                          ${this.props.features?.save
+                          ${this.props.features?.savePage
                               ? html`
                                     <button
                                         ?disabled=${!this._isSpecsEditorValid}
                                         class="_save"
+                                        @click=${(e) => {
+                                            this._savePage();
+                                        }}
                                     >
                                         Save page
                                     </button>

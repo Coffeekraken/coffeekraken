@@ -21,15 +21,17 @@
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 
-function array_filter_recursive($input)
-{
-    foreach ($input as &$value) {
-        if (is_array($value)) {
-            $value = array_filter_recursive($value);
+if (!function_exists('__sArrayFilterRecursive')) {
+    function __sArrayFilterRecursive($input)
+    {
+        foreach ($input as &$value) {
+            if (is_array($value)) {
+                $value = __sArrayFilterRecursive($value);
+            }
         }
-    }
 
-    return array_filter($input);
+        return array_filter($input);
+    }
 }
 
 return new \Twig\TwigFunction('__specsDataTemplate', function ($data) {
@@ -73,7 +75,7 @@ return new \Twig\TwigFunction('__specsDataTemplate', function ($data) {
         ',
         "values": ' .
         json_encode(
-            array_filter_recursive($data),
+            __sArrayFilterRecursive($data),
             JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_QUOT
         ) .
         ',

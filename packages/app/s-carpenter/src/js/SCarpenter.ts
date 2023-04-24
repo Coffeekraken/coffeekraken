@@ -1,4 +1,5 @@
 import __SClass from '@coffeekraken/s-class';
+import __SComponentUtils from '@coffeekraken/s-component-utils';
 import { __deepMerge } from '@coffeekraken/sugar/object';
 import { define as _sCarpenterAppComponentDefine } from './SCarpenterAppComponent';
 
@@ -28,11 +29,11 @@ export default class SCarpenter extends __SClass {
         });
         front.setLod(5);
 
-        // features
-        // __sActivateFeature();
+        _console.log('A', __SComponentUtils.getDefaultProps('s-carpenter'));
 
         // components
         _sCarpenterAppComponentDefine({
+            ...(__SComponentUtils.getDefaultProps('s-carpenter') ?? {}),
             window: window.top ?? window,
         });
     }

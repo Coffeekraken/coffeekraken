@@ -42,9 +42,9 @@ export default class SSpecsEditorComponentInterface extends __SInterface {
             type: string;
             description: string;
             default: {
-                save: boolean;
                 delete: boolean;
                 upload: boolean;
+                save: boolean;
                 media: boolean;
             };
         };

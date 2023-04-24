@@ -11,10 +11,6 @@ export default class SSpecsEditorComponentWysiwygWidget extends __SSpecsEditorWi
 
     constructor(deps: ISSpecsEditorWidgetDeps) {
         super(deps);
-
-        if (!this.values.value && this.propObj.default) {
-            this.values.value = this.propObj.default;
-        }
     }
 
     render() {

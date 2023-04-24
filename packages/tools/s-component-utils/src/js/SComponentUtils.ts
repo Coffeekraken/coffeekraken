@@ -67,6 +67,9 @@ export interface ISComponentUtilsDefaultProps {
     verbose: boolean;
 }
 
+// ensure we keep the same default for nested contents like iframe, etc...
+document._sDefaultProps = window.top?.document?._sDefaultProps ?? {};
+
 export default class SComponentUtils extends __SClass {
     /**
      * Store a reference to the "s-carpenter" component in the dom.
@@ -188,12 +191,11 @@ export default class SComponentUtils extends __SClass {
      * @since       2.0.0
      * @author 		Olivier Bossel<olivier.bossel@gmail.com>
      */
-    static _defaultProps: any = {};
     static setDefaultProps(selector: string | string[], props: any): void {
         selector = Array.isArray(selector) ? selector : [selector];
         selector.forEach((sel) => {
-            this._defaultProps[sel] = {
-                ...(this._defaultProps[sel] ?? {}),
+            document._sDefaultProps[sel] = {
+                ...(document._sDefaultProps[sel] ?? {}),
                 ...props,
             };
         });
@@ -213,9 +215,15 @@ export default class SComponentUtils extends __SClass {
      * @author 		Olivier Bossel<olivier.bossel@gmail.com>
      */
     static getDefaultProps(selector: string): any {
+        if (selector === 's-specs-editor') {
+            _console.log('__', {
+                ...(document._sDefaultProps['*'] ?? {}),
+                ...(document._sDefaultProps[selector] ?? {}),
+            });
+        }
         return {
-            ...(this._defaultProps['*'] ?? {}),
-            ...(this._defaultProps[selector] ?? {}),
+            ...(document._sDefaultProps['*'] ?? {}),
+            ...(document._sDefaultProps[selector] ?? {}),
         };
     }
 

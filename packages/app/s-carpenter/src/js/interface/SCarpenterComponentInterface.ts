@@ -68,6 +68,20 @@ export default class SCarpenterComponentInterface extends __SInterface {
                 default: '/carpenter.json',
                 required: true,
             },
+            saveComponentUrl: {
+                type: 'String',
+                description:
+                    'Specify the url where to POST the component json when clicking on the "save" button on top of the editor',
+                default: '/carpenter',
+                required: true,
+            },
+            savePageUrl: {
+                type: 'String',
+                description:
+                    'Specify the url where to POST the page json when clicking on the "save page" button',
+                default: '/carpenter',
+                required: true,
+            },
             adapter: {
                 type: 'String',
                 description:
@@ -92,12 +106,15 @@ export default class SCarpenterComponentInterface extends __SInterface {
                 description:
                     'Specify which features you want in your carpenter editor. Available features are: "save", "delete", "upload", "nav" and "media". Note that these features can be specified also in the "carpenter.json" usually returned by the server. These will be propritary on the ones you specified here cause the server may not support "upload", etc...',
                 default: {
-                    save: true,
+                    insert: true,
+                    edit: true,
                     delete: true,
+                    move: true,
                     upload: true,
-                    nav: true,
+                    savePage: true,
+                    saveComponent: true,
                     media: true,
-                    insert: false,
+                    nav: true,
                 },
             },
             frontspec: {

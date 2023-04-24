@@ -582,6 +582,47 @@ export default function (api) {
                 path: `${__dirname()}/../node/modules/carpenter/carpenter`,
                 settings: {},
             },
+
+            store: {
+                /**
+                 * @name            description
+                 * @namespace       config.frontendServer.modules.store
+                 * @type            String
+                 *
+                 * Specify the module description
+                 *
+                 * @since           2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+                 */
+                description:
+                    'This module gives you access to data by either a POST on /store with an object that has an id, or access the data using a GET on /store/:id',
+                /**
+                 * @name            path
+                 * @namespace       config.frontendServer.modules.store
+                 * @type            String
+                 * @default             ${__dirname()}/../node/modules/carpenter/carpenter
+                 *
+                 * Specify where to find the "store" module
+                 *
+                 * @since           2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+                 */
+                path: `${__dirname()}/../node/modules/store/store`,
+                settings: {
+                    /**
+                     * @name            rootDir
+                     * @namespace       config.frontendServer.modules.store.settings
+                     * @type            String
+                     * @default             ${__packageTmpDir()}/store
+                     *
+                     * Specify where to store the "store" data
+                     *
+                     * @since           2.0.0
+                     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+                     */
+                    rootDir: `${__packageTmpDir()}/store`,
+                },
+            },
         },
 
         pages: {},

@@ -2,7 +2,9 @@ export default {
     title: 'Expect more!',
     tabs: [
         {
-            id: 'tab-1',
+            id: {
+                value: 'tab-1',
+            },
             title: {
                 value: 'Tab #1!',
             },
@@ -25,7 +27,9 @@ export default {
             },
         },
         {
-            id: 'tab-2',
+            id: {
+                value: 'tab-2',
+            },
             title: {
                 value: 'Tab #2!',
             },
@@ -48,7 +52,9 @@ export default {
             },
         },
         {
-            id: 'tab-3',
+            id: {
+                value: 'tab-3',
+            },
             title: {
                 value: 'Tab #3!',
             },

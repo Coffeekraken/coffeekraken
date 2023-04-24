@@ -59,7 +59,6 @@ export default class SComponentUtils extends __SClass {
     state: string;
     DefaultPropsInterface: __SInterface;
     
-    static _defaultProps: any;
     static setDefaultProps(selector: string | string[], props: any): void;
     
     static getDefaultProps(selector: string): any;

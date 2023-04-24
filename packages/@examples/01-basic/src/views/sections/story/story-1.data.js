@@ -15,15 +15,9 @@ export default {
             value: 'accent',
         },
         link: {
-            text: {
-                value: 'CTA label...',
-            },
-            url: {
-                value: '/contact',
-            },
-            title: {
-                value: 'Discover more on apple.com',
-            },
+            text: 'CTA label...',
+            url: '/contact',
+            title: 'Discover more on apple.com',
         },
     },
     image: {

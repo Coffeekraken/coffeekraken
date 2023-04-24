@@ -13,12 +13,7 @@ export default class SSpecsEditorComponentSelectWidget extends __SSpecsEditorWid
         super(deps);
 
         if (!this.values.value) {
-            _console.log('not', this.propObj);
-            this.setDefault(
-                this.propObj.default ?? {
-                    value: [],
-                },
-            );
+            this.values.value = [];
         }
 
         this._select = new __SSelect(this.propObj, this.values);

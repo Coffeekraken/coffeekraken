@@ -11,10 +11,6 @@ import __SSpecsEditorWidget from '../SSpecsEditorWidget';
 export default class SSpecsEditorComponentImageWidget extends __SSpecsEditorWidget {
     constructor(deps: ISSpecsEditorWidgetDeps) {
         super(deps);
-
-        if (!this.values.url && this.propObj.default) {
-            this.setDefault(this.propObj.default);
-        }
     }
 
     render() {

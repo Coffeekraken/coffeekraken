@@ -27,6 +27,7 @@ import __SViewRendererSettingsInterface from './interface/SViewRendererSettingsI
  * This class represent a template that can be rendered using all the supported render engines listed in the features bellow.
  *
  * @feature       2.0.0         Support for ```bladePhp``` render engine
+ * @feature       2.0.0         Support for ```twig``` render engine
  * @feature       2.0.0         Simply render your template using the ```render``` method that returns you back a nice SPromise instance resolved once the template has been rendered correctly
  *
  * @param       {String}        viewPath      The view doted file path relative to the ```rootDir``` setting, or directly a template string to render using the engine specify in ```engine``` setting...

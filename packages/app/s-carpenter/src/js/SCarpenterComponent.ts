@@ -138,9 +138,7 @@ export default class SCarpenterComponent extends __SLitComponent {
             <script type="module" defer src="${this.props.src}"></script>
             <s-carpenter-app id="${
                 this.props.id ?? 's-carpenter'
-            }" save-state ${this.props.sidebar ? 'sidebar' : ''} ${
-            this.props.autoEdit ? 'auto-edit' : ''
-        } ${
+            }" save-state ${
             this.props.values
                 ? `values='${JSON.stringify(this.props.values)}'`
                 : ''
@@ -151,14 +149,6 @@ export default class SCarpenterComponent extends __SLitComponent {
         } ${
             this.props.source
                 ? `source='${JSON.stringify(this.props.source)}'`
-                : ''
-        } ${this.props.escape ? 'escape' : ''} ${
-            this.props.features
-                ? `features='${JSON.stringify(this.props.features)}'`
-                : ''
-        } ${
-            this.props.defaultMedia
-                ? `default-media="${this.props.defaultMedia}"`
                 : ''
         }></s-caprenter-app>    
         `;

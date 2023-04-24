@@ -21,21 +21,14 @@ export default {
 </p>`,
     },
     cta: {
-        label: 'CTA label...',
         color: {
             id: 'accent',
             value: 'accent',
         },
         link: {
-            text: {
-                value: 'Discover more!',
-            },
-            url: {
-                value: '/contact',
-            },
-            title: {
-                value: 'Discover more on apple.com',
-            },
+            text: 'Discover more!',
+            url: '/contact',
+            title: 'Discover more on apple.com',
         },
     },
 };

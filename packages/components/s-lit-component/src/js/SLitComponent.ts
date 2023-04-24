@@ -10,7 +10,7 @@ import { __injectStyle, __querySelectorLive } from '@coffeekraken/sugar/dom';
 import { __expandPleasantCssClassnames } from '@coffeekraken/sugar/html';
 import { __deepMerge } from '@coffeekraken/sugar/object';
 import __dashCase from '@coffeekraken/sugar/shared/string/dashCase';
-import { html as __html, LitElement } from 'lit';
+import { LitElement, html as __html } from 'lit';
 
 export function html(strings, ...values) {
     return __html(strings, ...values);
@@ -148,14 +148,14 @@ export default class SLitComponent extends LitElement {
         props: any = {},
         settings: Partial<ISLitComponentDefineSettings> = {},
     ) {
-        const win = settings.window ?? window;
+        // set the default props
+        SLitComponent.setDefaultProps(tagName, props);
 
+        const win = settings.window ?? window;
         if (win.customElements.get(tagName.toLowerCase())) {
             return;
         }
 
-        // set the default props
-        SLitComponent.setDefaultProps(tagName, props);
         win.customElements.define(tagName.toLowerCase(), class extends Cls {});
     }
 
@@ -405,6 +405,7 @@ export default class SLitComponent extends LitElement {
             const defaultProps = __SComponentUtils.getDefaultProps(
                 this.tagName.toLowerCase(),
             );
+
             const mountWhen =
                 this.getAttribute('mount-when') ??
                 defaultProps.mountWhen ??

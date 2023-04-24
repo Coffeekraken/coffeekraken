@@ -1,5 +1,5 @@
-<div class="s-card {{ attributes.class }} {{ direction.value ? 's-card--' ~ direction.value : '' }} {{ __spacesClasses(spaces, frontspec) }}" {{ __attrs(attributes, ['class'])|raw }}
-    s-specs="views.components.card"
+<div id="{{ id }}" s-specs="views.components.card"
+    class="s-card {{ attributes.class }} {{ direction.value ? 's-card--' ~ direction.value : '' }} {{ __spacesClasses(spaces, frontspec) }}" {{ __attrs(attributes, ['class'])|raw }}
 >
 {{ __specsDataTemplate(_context)|raw }}
 
@@ -9,7 +9,7 @@
         </div>
     {% endif %}
 
-    <div class="s-card_content s-spacing:{{ spacing ? spacing : '30' }}">
+    <div class="s-card_content s-spacing:{{ spacing.value ? spacing.value : '30' }}">
         {% if title.value %}
             <h1 class="s-card_title s-typo:h3">{{ title.value|raw }}</h1>
         {% endif %}

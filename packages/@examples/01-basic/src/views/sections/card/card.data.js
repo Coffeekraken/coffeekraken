@@ -31,13 +31,13 @@ export default {
             value: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas nec vestibulum mi. Etiam nec arcu ante.',
         },
         cta: {
-            label: 'CTA label...',
             color: {
                 id: 'accent',
                 name: 'Accent',
                 value: 'accent',
             },
             link: {
+                text: 'Click me!',
                 url: '/contact',
                 title: 'Discover more on apple.com',
             },
@@ -74,13 +74,13 @@ export default {
             value: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
         },
         cta: {
-            label: 'CTA label...',
             color: {
                 id: 'accent',
                 name: 'Accent',
                 value: 'accent',
             },
             link: {
+                text: 'Click me!',
                 url: '/contact',
                 title: 'Discover more on apple.com',
             },

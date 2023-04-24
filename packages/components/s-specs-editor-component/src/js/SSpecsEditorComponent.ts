@@ -38,6 +38,7 @@ import __htmlWidget from './widgets/htmlWidget';
 import __imageWidget from './widgets/imageWidget';
 import __integerWidget from './widgets/integerWidget';
 import __layoutWidget from './widgets/layoutWidget';
+import __linkWidget from './widgets/linkWidget';
 import __numberWidget from './widgets/numberWidget';
 import __selectWidget from './widgets/selectWidget';
 import __spacesWidget from './widgets/spacesWidget';
@@ -135,6 +136,7 @@ export interface ISSpecsEditorComponentProps {
  * @support         safari
  * @support         edge
  *
+ * @event           s-specs-editor.save                 Dispatched when the user has clicked on the "Save" button on top of the editor
  * @event           s-specs-editor.change               Dispatched when the user has changed some properties
  * @event           s-specs-editor.error                Dispatched when an error has occured in any widget
  * @event           s-specs-editor.warning                Dispatched when a warning has occured in any widget
@@ -204,6 +206,7 @@ export default class SSpecsEditorComponent extends __SLitComponent {
         datetime: __datetimePickerWidget,
         time: __datetimePickerWidget,
         string: __textWidget,
+        link: __linkWidget,
         text: __textWidget,
         select: __selectWidget,
         wysiwyg: __wysiwygWidget,
@@ -245,6 +248,11 @@ export default class SSpecsEditorComponent extends __SLitComponent {
     mount() {
         if (!this._values) {
             this._values = Object.assign({}, this.props.values ?? {});
+        }
+
+        // make sure we have an id
+        if (!this._values.id) {
+            this._values.id = __uniqid();
         }
 
         for (let [key, propObj] of Object.entries(
@@ -412,14 +420,14 @@ export default class SSpecsEditorComponent extends __SLitComponent {
             return;
         }
 
-        let widgetId = values._id;
+        let widgetId = values.id;
         if (!widgetId) {
-            Object.defineProperty(values, '_id', {
+            Object.defineProperty(values, 'id', {
                 value: __uniqid(),
                 writable: true,
                 enumerable: false,
             });
-            widgetId = values._id;
+            widgetId = values.id;
         }
 
         if (this._widgets[widgetId]) {
@@ -481,17 +489,19 @@ export default class SSpecsEditorComponent extends __SLitComponent {
                 clone: true,
             }),
         };
-        _console.log('SAVE', data);
+
+        // if (this.hasErrors()) {
+        //     return this.requestUpdate();
+        // }
 
         this.requestUpdate();
 
-        if (this.hasErrors()) {
-            return this.requestUpdate();
-        }
-
         this.utils.dispatchEvent('save', {
             bubbles: true,
-            detail: data,
+            detail: {
+                id: this._values.id,
+                values: data.values,
+            },
         });
     }
 
@@ -519,7 +529,7 @@ export default class SSpecsEditorComponent extends __SLitComponent {
      */
     _addItem(stack, propObj, path) {
         const newValue = {};
-        Object.defineProperty(newValue, '_id', {
+        Object.defineProperty(newValue, 'id', {
             value: __uniqid(),
             writable: true,
             enumerable: false,
@@ -664,7 +674,7 @@ export default class SSpecsEditorComponent extends __SLitComponent {
         return html`
             <span>
                 <h3 class="_title">
-                    ${settings.title ?? propObj.title ?? propObj.id}
+                    ${finalSettings.title ?? propObj.title ?? propObj.id}
                     ${propObj.required
                         ? html` <span class="_required">*</span> `
                         : ''}
@@ -673,14 +683,15 @@ export default class SSpecsEditorComponent extends __SLitComponent {
                 this.isPathResponsive(path)
                     ? this._renderMediaSelector(path)
                     : ''}
-                ${settings.description ?? propObj.description
+                ${finalSettings.description ?? propObj.description
                     ? html`
                           <span class="_help-icon s-tooltip-container">
                               <i class="fa-solid fa-circle-question"></i>
                               <div
                                   class="s-tooltip s-tooltip--${finalSettings.tooltip}"
                               >
-                                  ${settings.description ?? propObj.description}
+                                  ${finalSettings.description ??
+                                  propObj.description}
                               </div>
                           </span>
                       `
@@ -818,7 +829,7 @@ export default class SSpecsEditorComponent extends __SLitComponent {
                                       class="${this.utils.cls(
                                           '_repeatable-item',
                                       )}"
-                                      id="${v._id ?? i}"
+                                      id="${v.id ?? i}"
                                       draggable="true"
                                       @dragstart=${(e) => {
                                           e.target._isSorting = true;
@@ -847,7 +858,7 @@ export default class SSpecsEditorComponent extends __SLitComponent {
                                               __addClassTimeout(
                                                   'sorted',
                                                   this.querySelector(
-                                                      `#${v._id}`,
+                                                      `#${v.id}`,
                                                   ),
                                                   300,
                                               );
@@ -859,20 +870,20 @@ export default class SSpecsEditorComponent extends __SLitComponent {
                                           @pointerup=${(e) => {
                                               this._toggle(
                                                   `${path.join('.')}-${
-                                                      v._id ?? i
+                                                      v.id ?? i
                                                   }`,
                                               );
                                           }}
                                           class="${this.utils.cls(
                                               '_repeatable-title',
                                           )} ${this._isActive(
-                                              `${path.join('.')}-${v._id ?? i}`,
+                                              `${path.join('.')}-${v.id ?? i}`,
                                           )
                                               ? 'active'
                                               : ''}"
                                       >
                                           ${this._isActive(
-                                              `${path.join('.')}-${v._id ?? i}`,
+                                              `${path.join('.')}-${v.id ?? i}`,
                                           )
                                               ? html`
                                                     ${unsafeHTML(
@@ -886,8 +897,8 @@ export default class SSpecsEditorComponent extends __SLitComponent {
                                                 `}
 
                                           <span>
-                                              ${v.title ??
-                                              v.name ??
+                                              ${v.title?.value ??
+                                              v.name?.value ??
                                               v.id ??
                                               v.value ??
                                               `${propObj.title} #${i}`}
@@ -944,7 +955,7 @@ export default class SSpecsEditorComponent extends __SLitComponent {
                                           class="${this.utils.cls(
                                               '_repeatable-body',
                                           )} ${this._isActive(
-                                              `${path.join('.')}-${v._id ?? i}`,
+                                              `${path.join('.')}-${v.id ?? i}`,
                                           )
                                               ? 'active'
                                               : ''}"

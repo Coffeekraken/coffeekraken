@@ -40,6 +40,18 @@ export default class SCarpenterComponentInterface extends __SInterface {
             default: string;
             required: boolean;
         };
+        saveComponentUrl: {
+            type: string;
+            description: string;
+            default: string;
+            required: boolean;
+        };
+        savePageUrl: {
+            type: string;
+            description: string;
+            default: string;
+            required: boolean;
+        };
         adapter: {
             type: string;
             description: string;
@@ -60,12 +72,15 @@ export default class SCarpenterComponentInterface extends __SInterface {
             type: string;
             description: string;
             default: {
-                save: boolean;
-                delete: boolean;
-                upload: boolean;
-                nav: boolean;
-                media: boolean;
                 insert: boolean;
+                edit: boolean;
+                delete: boolean;
+                move: boolean;
+                upload: boolean;
+                savePage: boolean;
+                saveComponent: boolean;
+                media: boolean;
+                nav: boolean;
             };
         };
         frontspec: {

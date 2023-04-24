@@ -9,10 +9,6 @@ import __SSpecsEditorWidget from '../SSpecsEditorWidget';
 export default class SSpecsEditorComponentNumberWidget extends __SSpecsEditorWidget {
     constructor(deps: ISSpecsEditorWidgetDeps) {
         super(deps);
-
-        if (this.values.value === undefined && this.propObj.default) {
-            this.setDefault(this.propObj.default);
-        }
     }
 
     validate(newValues) {

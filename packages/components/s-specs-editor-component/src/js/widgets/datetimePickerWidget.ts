@@ -9,16 +9,6 @@ import __SSpecsEditorWidget from '../SSpecsEditorWidget';
 export default class SSpecsEditorComponentDatetimePickerWidget extends __SSpecsEditorWidget {
     constructor(deps: ISSpecsEditorWidgetDeps) {
         super(deps);
-
-        if (!this.values.value) {
-            this.setDefault({
-                format:
-                    this.propObj.default?.format ??
-                    this.propObj.format ??
-                    'YYYY-MM-DD',
-                value: this.propObj.default?.value,
-            });
-        }
     }
 
     render() {

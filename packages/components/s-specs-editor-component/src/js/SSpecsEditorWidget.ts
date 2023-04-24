@@ -90,6 +90,11 @@ export default class SSpecsEditorWidget {
         __deepMerge(this._values, this._source, {
             clone: false,
         });
+
+        // handle default
+        if (!Object.keys(this._values).length && this.propObj.default) {
+            Object.assign(this._values, this.propObj.default);
+        }
     }
 
     get values(): any {
@@ -102,6 +107,7 @@ export default class SSpecsEditorWidget {
             }
             return this._values.media[this.editor.props.media];
         }
+
         return this._values;
     }
 
@@ -196,9 +202,6 @@ export default class SSpecsEditorWidget {
         } else {
             __set(newValues, finalSettings.path, value);
         }
-
-        _console.log('setted', value);
-        _console.log('new', newValues);
 
         // validate
         let validateResult: ISSpecsEditorWidgetValidateResult = {};

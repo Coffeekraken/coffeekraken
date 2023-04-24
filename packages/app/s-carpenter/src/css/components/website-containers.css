@@ -19,7 +19,7 @@
             justify-content: center;
             color: sugar.color(main, text, --alpha 0.4);
             position: absolute;
-            z-index: -1;
+            /* z-index: -1; */
             bottom: 0;
             left: 50%;
             background: transparent;
@@ -30,6 +30,10 @@
             border: 1px dashed sugar.color(main, border);
             background: sugar.color(main, --alpha 0.1);
             @sugar.transition;
+
+            [s-carpenter-container] & {
+                width: 100%;
+            }
         }
     }
 
@@ -68,6 +72,10 @@
             border: 1px dashed sugar.color(main, border);
             background: sugar.color(main, --alpha 0.1);
             @sugar.transition;
+
+            [s-carpenter-container] & {
+                width: 100%;
+            }
         }
         &:hover:after {
             color: sugar.color(main, text, --alpha 0);

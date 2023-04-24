@@ -6,11 +6,26 @@
         width: 33%;
         white-space: nowrap;
         text-elipsis: elipsis;
-        padding: sugar.padding(20);
+        padding: sugar.padding(20) 0;
         opacity: 0.5;
     }
 
-    ._input {
+    &:has(input[type='checkbox']) {
+        ._label {
+            width: auto;
+            flex-grow: 1;
+        }
+    }
+
+    ._required {
+        color: sugar.color(error);
+    }
+
+    ._input[type='text'] {
         @sugar.ui.input();
+    }
+    ._input[type='checkbox'] {
+        @sugar.ui.switch();
+        @sugar.color (accent);
     }
 }

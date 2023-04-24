@@ -33,6 +33,7 @@ export interface ISCarpenterComponentProps {
     data: ISCarpenterAppComponentData;
     viewportElm: HTMLElement;
     nav: boolean;
+    savePageUrl: string;
     escape: boolean;
     pagesLink: string;
     iframe: boolean;
@@ -92,6 +93,8 @@ export default class SCarpenterAppComponent extends __SLitComponent {
     
     _initWebsiteIframeContent(): void;
     
+    _ensureSpecsComponentsHaveId(): void;
+    
     _preventExternalLinksBehaviors(): void;
     
     _$uiPlaceholders: any;
@@ -104,10 +107,11 @@ export default class SCarpenterAppComponent extends __SLitComponent {
     _defineAddComponentFiltrableInput(): void;
     
     _setMode(mode: 'edit' | 'insert'): void;
-     _addComponent(specs: ISCarpenterAppComponentAddComponent): Promise<void>;
+    
+    _addComponent(specs: ISCarpenterAppComponentAddComponent): Promise<void>;
     applyComponent(values?: any): Promise<void>;
     
-    _listenSpecsEditorUpdate(): void;
+    _listenSpecsEditorEvents(): void;
     
     _watchHoverOnSpecElements(): void;
     
@@ -127,8 +131,6 @@ export default class SCarpenterAppComponent extends __SLitComponent {
     
     _setCurrentElement($elm: HTMLElement): void;
     
-    _positionToolbarOnElement($elm: HTMLElement): void;
-    
     _setToolbarPosition($from: any): void;
     
     _activateMedia(media: any): void;
@@ -137,6 +139,10 @@ export default class SCarpenterAppComponent extends __SLitComponent {
     
     _changePage(dotpath: string, pushState?: boolean): Promise<void>;
     _toggleNavigationFolder(folderId: any): void;
+    
+    _savePage(): Promise<void>;
+    
+    _saveComponent(data: any): Promise<void>;
     
     _getData(source: string | ISCarpenterAppComponentData): any;
     _carpenterLogo(): import("lit-html").TemplateResult<1>;

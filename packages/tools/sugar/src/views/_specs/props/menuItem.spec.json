@@ -11,6 +11,17 @@
             "type": "Html",
             "description": "Specify some raw html to be used for the menu. If specified, will be used instead of the \"label\" property"
         },
+        "link": {
+            "type": "Link",
+            "title": "Menu item link",
+            "description": "Menu item link",
+            "default": {
+                "text": "Click me!",
+                "url": "https://google.com",
+                "title": "Click me!",
+                "newWindow": false
+            }
+        },
         "link": "@sugar.views.props.link",
         "children": {
             "type": "Object[]",

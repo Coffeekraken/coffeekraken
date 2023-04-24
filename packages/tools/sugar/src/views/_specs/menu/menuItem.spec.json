@@ -6,7 +6,18 @@
             "description": "The menu item label",
             "required": true
         },
-        "link": "@sugar.views.props.link",
+        "link": {
+            "type": "Link",
+            "title": "Menu item link",
+            "description": "Menu item link",
+            "default": {
+                "text": "Click me!",
+                "url": "https://google.com",
+                "title": "Click me!",
+                "newWindow": false
+            },
+            "required": true
+        },
         "raw": {
             "type": "Html",
             "description": "Some raw html for the menu item"

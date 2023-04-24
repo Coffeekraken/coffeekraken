@@ -4,7 +4,18 @@
     "description": "Display a call to action",
     "props": {
         "color": "@sugar.views.props.themeColors",
-        "link": "@sugar.views.props.link",
+        "link": {
+            "type": "Link",
+            "title": "Cta link",
+            "description": "Call to action link",
+            "default": {
+                "text": "Click me!",
+                "url": "https://google.com",
+                "title": "Click me!",
+                "newWindow": false
+            },
+            "required": true
+        },
         "attributes": "@sugar.views.props.attributes"
     },
     "examples": {

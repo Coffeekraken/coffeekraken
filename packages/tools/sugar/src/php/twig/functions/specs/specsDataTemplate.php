@@ -68,8 +68,20 @@ return new \Twig\TwigFunction('__specsDataTemplate', function ($data) {
         unset($data['$source']);
     }
 
+    // uniquid
+    $uid = 's-' . uniqid();
+    if (isset($data['uid'])) {
+        $uid = $data['uid'];
+        unset($data['uid']);
+    }
+
     // return ready to template JSON
-    return '<template s-specs-data>{
+    return '<template uid="' .
+        $uid .
+        '" s-specs-data>{
+        "uid": "' .
+        $uid .
+        '",
         "source": ' .
         json_encode($source, JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_QUOT) .
         ',

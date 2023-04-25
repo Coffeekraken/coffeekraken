@@ -2,7 +2,9 @@ import __SBench from '@coffeekraken/s-bench';
 import __SDataFileGeneric from '@coffeekraken/s-data-file-generic';
 import __SSpecs from '@coffeekraken/s-specs';
 import __SViewRenderer from '@coffeekraken/s-view-renderer';
+import { __deepMerge } from '@coffeekraken/sugar/object';
 import { __serverObjectFromExpressRequest } from '@coffeekraken/sugar/php';
+import { __uniqid } from '@coffeekraken/sugar/string';
 
 export interface ICarpenterViewHandlerViewData {
     $specs?: any;
@@ -32,6 +34,7 @@ export default async function carpenterViewHandler({
     let viewPath =
             currentSpecs.viewPath ?? req.params.dotpath.replace(/^views\./, ''),
         viewData: ICarpenterViewHandlerViewData = {};
+    const defaults = __SSpecs.extractDefaults(currentSpecs);
 
     // if the method is "POST",
     // meaning that it's a component update
@@ -40,10 +43,13 @@ export default async function carpenterViewHandler({
     if (req.method === 'POST' && req.body && Object.keys(req.body).length > 0) {
         viewData = req.body;
     } else if (req.method === 'POST') {
-        viewData = __SSpecs.extractDefaults(currentSpecs);
+        // new component
+        viewData = defaults;
+        viewData.uid = __uniqid();
     } else {
         // load the actual view values
-        viewData = await __SDataFileGeneric.load(currentSpecs.metas.path);
+        const data = await __SDataFileGeneric.load(currentSpecs.metas.path);
+        viewData = __deepMerge(defaults, data);
     }
 
     // set the $specs in the view data

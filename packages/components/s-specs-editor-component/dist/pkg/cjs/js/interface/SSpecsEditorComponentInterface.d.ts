@@ -2,10 +2,11 @@ import __SInterface from '@coffeekraken/s-interface';
 
 export default class SSpecsEditorComponentInterface extends __SInterface {
     static get _definition(): {
-        id: {
+        uid: {
             type: string;
             title: string;
             description: string;
+            required: boolean;
         };
         values: {
             type: string;

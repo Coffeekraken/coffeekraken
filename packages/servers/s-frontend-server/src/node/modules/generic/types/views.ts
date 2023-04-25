@@ -6,6 +6,7 @@ import __SSpecs from '@coffeekraken/s-specs';
 import __STheme from '@coffeekraken/s-theme';
 import { __isPlainObject } from '@coffeekraken/sugar/is';
 import { __deepMerge } from '@coffeekraken/sugar/object';
+import { __uniqid } from '@coffeekraken/sugar/string';
 import __fs from 'fs';
 
 export default function views({
@@ -156,6 +157,11 @@ export default function views({
             console.verbose?.(
                 `<yellow>[genericHandler]</yellow> Rendering the view "<cyan>${viewPath}</cyan>"`,
             );
+
+            // ensure uid
+            if (!data.uid) {
+                data.uid = __uniqid();
+            }
 
             // rendering view using data
             const viewResPro = res.viewRenderer.render(

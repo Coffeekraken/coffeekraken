@@ -10,45 +10,52 @@ require_once $nodeModulesVendorsPath;
 $_ENV['S_SPECS_DATA'] = true;
 $_ENV['ENV'] = 'development';
 
+$params = [];
+if (file_exists($argv[1])) {
+    $params = json_decode(file_get_contents($argv[1]), true);
+}
+
 // $_SERVER data
-if (isset($data['$_SERVER'])) {
-    $_SERVER = array_merge($_SERVER, $data['$_SERVER']);
+if (isset($params['$_SERVER'])) {
+    $_SERVER = array_merge($_SERVER, $params['$_SERVER']);
 }
 
 // $_ENV data
-if (isset($data['$_ENV'])) {
-    $_ENV = array_merge($_ENV, $data['$_ENV']);
+if (isset($params['$_ENV'])) {
+    $_ENV = array_merge($_ENV, $params['$_ENV']);
 }
 
-// process the passed args... can be a lot better I know...
-$pageFilePath = str_replace('"', '', explode(':', $argv[1])[1]);
-$documentRoot = str_replace('"', '', explode(':', $argv[2])[1]);
-$storeDir = str_replace('"', '', explode(':', $argv[3])[1]);
-
-$_SERVER['DOCUMENT_ROOT'] = $documentRoot;
-
 // handle if page file does not exists
-if (!file_exists($pageFilePath)) {
+if (!file_exists($params['pageFilePath'])) {
     print 'The passed page file path "' .
-        $pageFilePath .
+        $params['pageFilePath'] .
         '" does not exists...';
     return;
 }
 
-// read the page json
-$pageFileJson = json_decode(file_get_contents($pageFilePath));
+$storeDir = $params['storeDir'];
 
-$viewRenderer = new SViewRenderer();
+// read the page json
+$pageFileJson = json_decode(file_get_contents($params['pageFilePath']));
+
+$viewRenderer = new SViewRenderer([
+    'sharedData' => ['something' => 'cool'],
+]);
 $renderRes = $viewRenderer->renderPage($pageFileJson, function (
     $component
 ) use ($storeDir) {
-    $data = json_decode(
-        file_get_contents($storeDir . '/' . $component->id . '.json')
-    );
+    $filePath = $storeDir . '/' . $component->uid . '.json';
+
+    if (!file_exists($filePath)) {
+        var_dump($filePath);
+        return;
+    }
+
+    $data = json_decode(file_get_contents($filePath));
     return $data;
 });
 
-print $renderRes;
+print \Sugar\html\expandPleasantCssClassnames($renderRes);
 
 // $loader = new \Twig\Loader\FilesystemLoader();
 // foreach ($params->rootDirs as $dir) {

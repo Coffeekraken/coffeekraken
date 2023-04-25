@@ -61,7 +61,6 @@ export interface ISViewRendererSettings {
     dataFile?: boolean;
     sharedData?: any;
     sharedDataFiles?: string[];
-    sharedJsonDataFiles?: string[];
 }
 
 export interface ISViewViewMetas extends ISFileObject {}
@@ -214,7 +213,7 @@ class SViewRenderer extends __SClass implements ISViewRenderer {
 
     /**
      * @name        _sharedData
-     * @type        String
+     * @type        Object
      * @private
      *
      * Store the shared data coming from the viewRendererSettings.sharedData as well as the loaded sharedDataFiles

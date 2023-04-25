@@ -23,11 +23,12 @@ import __SInterface from '@coffeekraken/s-interface';
 export default class SSpecsEditorComponentInterface extends __SInterface {
     static get _definition() {
         return {
-            id: {
+            uid: {
                 type: 'String',
-                title: 'Id',
+                title: 'UID',
                 description:
-                    'Specify an id for your specs editor to be able to save his state',
+                    'Specify a unique id for your specs editor to be able to save his state',
+                required: true,
             },
             values: {
                 type: 'Object',

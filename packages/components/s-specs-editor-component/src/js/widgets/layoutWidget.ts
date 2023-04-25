@@ -18,11 +18,9 @@ export default class SSpecsEditorComponentLayoutWidget extends __SSpecsEditorWid
 
     constructor(deps: ISSpecsEditorWidgetDeps) {
         super(deps);
-
-        if (!this.values.layou?.layout && this.propObj.default) {
+        if (!this.values.media && this.propObj.default) {
             this.setDefault(this.propObj.default);
         }
-
         this._sMedia = new __SMedia();
     }
 
@@ -35,6 +33,10 @@ export default class SSpecsEditorComponentLayoutWidget extends __SSpecsEditorWid
 
     render() {
         const values = <ISLayoutData>this.values;
+        const defaultLayout = {
+            id: '1',
+            layout: '1',
+        };
 
         return html`
             <div class="${this.editor.utils.cls('_layout-widget')}">
@@ -45,7 +47,9 @@ export default class SSpecsEditorComponentLayoutWidget extends __SSpecsEditorWid
                         })}
                         <div class="custom-select" tabindex="0">
                             <div class="custom-select_value">
-                                ${this._renderLayout(values.layout, media)}
+                                ${this._renderLayout(
+                                    values.media[media] ?? defaultLayout,
+                                )}
                             </div>
                             <div class="custom-select_dropdown">
                                 ${this.propObj.layouts.map(
@@ -89,7 +93,8 @@ export default class SSpecsEditorComponentLayoutWidget extends __SSpecsEditorWid
         `;
     }
 
-    _renderLayout(layoutObj: any, media: string): any {
+    _renderLayout(layoutObj: any): any {
+        _console.log('dl', layoutObj);
         if (!this._renderedLayouts[layoutObj.id]) {
             this._renderedLayouts[layoutObj.id] = this._sMedia.layoutCss(
                 layoutObj.layout,

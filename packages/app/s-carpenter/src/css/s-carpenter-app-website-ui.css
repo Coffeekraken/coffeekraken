@@ -4,3 +4,31 @@
 [s-carpenter-website-ui] {
     @sugar.theme.apply ($variant: light);
 }
+
+[s-specs]:not(:has(> [uid])) {
+    position: relative;
+
+    &:before {
+        content: '';
+        position: absolute;
+        z-index: 200;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border: 4px solid sugar.color(error);
+    }
+
+    &:after {
+        content: 'This component does not have an "id" specified and will not be available in the carpenter editor...';
+        position: absolute;
+        z-index: 200;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: sugar.color(error);
+        color: sugar.color(error, foreground);
+        padding: sugar.padding(30);
+        @sugar.border.radius;
+    }
+}

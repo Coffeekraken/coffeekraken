@@ -42,6 +42,7 @@ import __linkWidget from './widgets/linkWidget';
 import __numberWidget from './widgets/numberWidget';
 import __selectWidget from './widgets/selectWidget';
 import __spacesWidget from './widgets/spacesWidget';
+import __stringWidget from './widgets/stringWidget';
 import __switchWidget from './widgets/switchWidget';
 import __textWidget from './widgets/textWidget';
 import __videoWidget from './widgets/videoWidget';
@@ -136,6 +137,7 @@ export interface ISSpecsEditorComponentProps {
  * @support         safari
  * @support         edge
  *
+ * @event           s-specs-editor.ready                Dispatched when the editor is ready with the editor values
  * @event           s-specs-editor.save                 Dispatched when the user has clicked on the "Save" button on top of the editor
  * @event           s-specs-editor.change               Dispatched when the user has changed some properties
  * @event           s-specs-editor.error                Dispatched when an error has occured in any widget
@@ -205,7 +207,7 @@ export default class SSpecsEditorComponent extends __SLitComponent {
         date: __datetimePickerWidget,
         datetime: __datetimePickerWidget,
         time: __datetimePickerWidget,
-        string: __textWidget,
+        string: __stringWidget,
         link: __linkWidget,
         text: __textWidget,
         select: __selectWidget,
@@ -252,7 +254,9 @@ export default class SSpecsEditorComponent extends __SLitComponent {
 
         // make sure we have an id
         if (!this._values.id) {
-            this._values.id = __uniqid();
+            this._values.id = {
+                value: __uniqid(),
+            };
         }
 
         for (let [key, propObj] of Object.entries(
@@ -272,6 +276,9 @@ export default class SSpecsEditorComponent extends __SLitComponent {
         for (let [dotPath, widget] of Object.entries(this._widgets)) {
             widget.firstUpdated?.();
         }
+
+        // notify that the editor is ready
+        this._ready();
     }
 
     isPathResponsive(path: string[]): any {
@@ -465,11 +472,17 @@ export default class SSpecsEditorComponent extends __SLitComponent {
     apply() {
         clearTimeout(this._applyTimeout);
         this._applyTimeout = setTimeout(() => {
+            const data = {
+                values: __deepClean(this._values, {
+                    clone: true,
+                }),
+            };
+
             this.utils.dispatchEvent('change', {
                 bubbles: true,
                 detail: {
-                    propsSpecs: Object.assign({}, this.props.specs),
-                    values: Object.assign({}, this._values),
+                    uid: this.props.uid,
+                    values: data.values,
                 },
             });
             this.requestUpdate();
@@ -477,20 +490,38 @@ export default class SSpecsEditorComponent extends __SLitComponent {
     }
 
     /**
-     * Save the data.
-     * This will dispatch en event "s-specs-editor.save" with as detail the current values object
+     * Notify through an event that the editor is ready
      */
-    save(): void {
-        // no more pristine....
-        this.status.pristine = false;
+    _ready(): void {
         const data = {
-            specs: Object.assign({}, this.props.specs),
             values: __deepClean(this._values, {
                 clone: true,
             }),
         };
 
-        // if (this.hasErrors()) {
+        this.utils.dispatchEvent('ready', {
+            bubbles: true,
+            detail: {
+                uid: this.props.uid,
+                values: data.values,
+            },
+        });
+    }
+
+    /**
+     * Save the data.
+     * This will dispatch en event "s-specs-editor.save" with as detail the current values object
+     */
+    save(force: boolean = false): void {
+        // no more pristine....
+        this.status.pristine = false;
+        const data = {
+            values: __deepClean(this._values, {
+                clone: true,
+            }),
+        };
+
+        // if (!force && this.hasErrors()) {
         //     return this.requestUpdate();
         // }
 
@@ -499,7 +530,7 @@ export default class SSpecsEditorComponent extends __SLitComponent {
         this.utils.dispatchEvent('save', {
             bubbles: true,
             detail: {
-                id: this._values.id,
+                uid: this.props.uid,
                 values: data.values,
             },
         });

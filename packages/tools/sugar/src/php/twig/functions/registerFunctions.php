@@ -68,6 +68,9 @@ function registerFunctions($twig)
     $attrs = require __DIR__ . '/html/attrs.php';
     $twig->addFunction($attrs);
 
+    $id = require __DIR__ . '/html/id.php';
+    $twig->addFunction($id);
+
     // Is
     $requestFromIframe = require __DIR__ . '/is/requestFromIframe.php';
     $twig->addFunction($requestFromIframe);

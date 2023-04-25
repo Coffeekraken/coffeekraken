@@ -22,20 +22,24 @@ export default function store({ express, settings, config }) {
 
             // check if it's a json payload
             if (!req.files || Object.keys(req.files).length === 0) {
-                if (!req.body.id) {
+                if (!req.body.id && !req.body.uid) {
                     console.error(
-                        `To save a json into the store, it MUST have a proper "id"`,
+                        `To save a json into the store, it MUST have a proper "(u)id"`,
                     );
                 }
 
                 __fs.writeFileSync(
-                    `${settings.rootDir}/${req.body.id}.json`,
+                    `${settings.rootDir}/${req.body.uid || req.body.id}.json`,
                     JSON.stringify(req.body, null, 4),
                 );
 
                 // log
                 console.log(
-                    `[SFrontendServer] File "<yellow>${req.body.id}.json</yellow>" stored <green>successfully</green> and available at url "<cyan>/store/${req.body.id}</cyan>"`,
+                    `[SFrontendServer] File "<yellow>${
+                        req.body.uid ?? req.body.id
+                    }.json</yellow>" stored <green>successfully</green> and available at url "<cyan>/store/${
+                        req.body.id
+                    }</cyan>"`,
                 );
 
                 res.status(200);

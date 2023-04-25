@@ -54,6 +54,7 @@ export interface ISCarpenterAppComponentAddComponent {
 }
 
 export interface ISCarpenterAppComponentData {
+    uid: string;
     values?: any;
     currentSpecs: any;
     specs: any;
@@ -182,6 +183,7 @@ export default class SCarpenterAppComponent extends __SLitComponent {
     _rootWindow;
     _$rootDocument;
 
+    _addingNew = false; // track when we add a new component until the editor is actually ready
     _isSpecsEditorValid = true;
 
     constructor() {
@@ -451,9 +453,6 @@ export default class SCarpenterAppComponent extends __SLitComponent {
         // prevent default links behaviors
         this._preventExternalLinksBehaviors();
 
-        // ensure s-specs components have an id
-        this._ensureSpecsComponentsHaveId();
-
         // listen for click on links in the iframe to close the editor
         this._$websiteDocument.addEventListener('click', (e) => {
             let $link = e.target;
@@ -490,23 +489,6 @@ export default class SCarpenterAppComponent extends __SLitComponent {
 
         // mode
         this._setMode(this.state.mode);
-    }
-
-    /**
-     * ensure every "s-specs" components have a proper "id"
-     */
-    _ensureSpecsComponentsHaveId() {
-        __querySelectorLive(
-            '[s-specs]',
-            ($elm) => {
-                if (!$elm.id) {
-                    $elm.setAttribute('id', __uniqid());
-                }
-            },
-            {
-                rootNode: this._$websiteDocument,
-            },
-        );
     }
 
     /**
@@ -652,8 +634,9 @@ export default class SCarpenterAppComponent extends __SLitComponent {
                 this._$websiteDocument.querySelector('s-carpenter')?.remove?.();
 
                 // get the first element in the iframe
-                const $firstElm =
-                    this._$websiteDocument.querySelector('[s-specs]');
+                const $firstElm = this._$websiteDocument.querySelector(
+                    '[s-specs]:has(> [uid])',
+                );
                 if ($firstElm) {
                     await this._setCurrentElement($firstElm);
                 }
@@ -791,13 +774,16 @@ export default class SCarpenterAppComponent extends __SLitComponent {
     async _addComponent(
         specs: ISCarpenterAppComponentAddComponent,
     ): Promise<void> {
+        this._addingNew = true;
+        const uid = __uniqid();
         const $newComponent = document.createElement('div');
         $newComponent.setAttribute('s-specs', specs.namespace);
         $newComponent.innerHTML = `
-            <template s-specs-data>${JSON.stringify({
-                values: {},
-                $specs: this._data.specs[specs.namespace],
-            })}</template>
+            <template uid="${uid}" s-specs-data>${JSON.stringify({
+            uid,
+            values: {},
+            $specs: this._data.specs[specs.namespace],
+        })}</template>
         `;
         specs.$after.before($newComponent);
         await this._setCurrentElement($newComponent);
@@ -826,12 +812,21 @@ export default class SCarpenterAppComponent extends __SLitComponent {
      */
     _listenSpecsEditorEvents() {
         // listen for save
+        this.addEventListener('s-specs-editor.ready', (e) => {
+            if (this._addingNew) {
+                this._saveComponent(e.detail);
+                this._addingNew = false;
+            }
+        });
+
+        // listen for save
         this.addEventListener('s-specs-editor.save', (e) => {
             this._saveComponent(e.detail);
         });
 
         // listen for actual updated
         this.addEventListener('s-specs-editor.change', async (e) => {
+            _console.log('CHange', e.detail);
             this.applyComponent(e.detail.values);
         });
 
@@ -847,7 +842,7 @@ export default class SCarpenterAppComponent extends __SLitComponent {
      */
     _watchHoverOnSpecElements() {
         __querySelectorLive(
-            `[s-specs]`,
+            `[s-specs]:has(> [uid])`,
             ($elm) => {
                 $elm.addEventListener('pointerover', (e) => {
                     e.stopPropagation();
@@ -1180,7 +1175,7 @@ export default class SCarpenterAppComponent extends __SLitComponent {
     async _savePage(): Promise<void> {
         // go grab all the s-carpenter-container elements in the website
         const $components = this._$websiteDocument.querySelectorAll(
-            '[s-carpenter-container], [s-specs][id]',
+            '[s-carpenter-container], [s-specs]:has(> [uid])',
         );
         if (!$components) {
             return;
@@ -1194,11 +1189,11 @@ export default class SCarpenterAppComponent extends __SLitComponent {
             flatData = {};
 
         Array.from($components).forEach(($component) => {
-            const componentId =
+            const componentUid =
                 $component.getAttribute('s-carpenter-container') ??
-                $component.id;
-            flatData[componentId] = {
-                id: componentId,
+                $component.children[0].getAttribute('uid');
+            flatData[componentUid] = {
+                uid: componentUid,
                 type: $component.hasAttribute('s-specs')
                     ? 'component'
                     : 'container',
@@ -1217,14 +1212,14 @@ export default class SCarpenterAppComponent extends __SLitComponent {
                 if (!data.nodes) {
                     data.nodes = {};
                 }
-                data.nodes[componentId] = flatData[componentId];
+                data.nodes[componentUid] = flatData[componentUid];
                 return;
             }
 
             const belongId =
-                $belong.getAttribute('s-carpenter-container') ?? $belong.id;
+                $belong.getAttribute('s-carpenter-container') ??
+                $belong.children[0].getAttribute('uid');
             if (!belongId) {
-                _console.log($belong);
                 throw new Error(
                     '<red>[SCarpenter]</red> The component logged bellow does not have any "s-carpenter-container" id or any "id" attribute...',
                 );
@@ -1233,7 +1228,7 @@ export default class SCarpenterAppComponent extends __SLitComponent {
             if (!flatData[belongId].nodes) {
                 flatData[belongId].nodes = {};
             }
-            flatData[belongId].nodes[componentId] = flatData[componentId];
+            flatData[belongId].nodes[componentUid] = flatData[componentUid];
         });
 
         const response = await fetch(this.props.savePageUrl, {
@@ -1263,7 +1258,6 @@ export default class SCarpenterAppComponent extends __SLitComponent {
             },
             referrerPolicy: 'no-referrer',
             body: JSON.stringify({
-                id: data.id ?? __uniqid(),
                 ...data,
                 specs: this._$currentElm.getAttribute('s-specs'),
             }),
@@ -1523,6 +1517,7 @@ export default class SCarpenterAppComponent extends __SLitComponent {
                                   ? html` <p>Loading...</p> `
                                   : html`
                                         <s-specs-editor
+                                            uid="${this._data.uid}"
                                             media="${this.state.activeMedia}"
                                             default-media="${this.props
                                                 .defaultMedia}"

@@ -1,4 +1,4 @@
-<section id="{{ id }}" s-specs="views.sections.separator.separator" class="section-separator {{ __spacesClasses(spaces, frontspec) }}">
+<section {{ __id(id) }} s-specs="views.sections.separator.separator" class="section-separator {{ __spacesClasses(spaces, frontspec) }}">
     {{ __specsDataTemplate(_context)|raw }}
     <div class="_bkg">
         {% if image %}

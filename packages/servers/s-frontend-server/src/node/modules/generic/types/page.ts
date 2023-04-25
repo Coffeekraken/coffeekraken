@@ -2,6 +2,7 @@ import { __execPhp } from '@coffeekraken/sugar/exec';
 import { __dirname } from '@coffeekraken/sugar/fs';
 import { __hashFromSync } from '@coffeekraken/sugar/hash';
 import { __packageRootDir, __packageTmpDir } from '@coffeekraken/sugar/path';
+import { __serverObjectFromExpressRequest } from '@coffeekraken/sugar/php';
 import __fs from 'fs';
 import __path from 'path';
 
@@ -41,13 +42,14 @@ export default function page({
                 __packageRootDir(__dirname()),
                 'src/node/modules/generic/php/renderPage.php',
             ),
-            JSON.stringify({
+            {
+                $_SERVER: __serverObjectFromExpressRequest(req),
                 pageFilePath,
                 documentRoot: __packageRootDir(),
                 storeDir: `${__packageTmpDir()}/store`,
-            }),
+            },
             {
-                // paramsThroughFile: true,
+                paramsThroughFile: true,
             },
         );
 

@@ -1,4 +1,4 @@
-<section id="{{ id }}" s-specs="views.sections.story" class="section-story {{ __spacesClasses(spaces, frontspec) }}" layout="{{ layout }}" s-appear in="bottom" delay="500">
+<section {{ __id(id) }} s-specs="views.sections.story" class="section-story {{ __spacesClasses(spaces, frontspec) }}" layout="{{ layout }}" s-appear in="bottom" delay="500">
     {{ __specsDataTemplate(_context)|raw }}
     <div class="s-container">
         <div class="s-layout:{{ layout.value[0].value }} @mobile s-layout:1_2">

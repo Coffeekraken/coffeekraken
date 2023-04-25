@@ -105,6 +105,8 @@ export default class SCarpenterComponent extends __SLitComponent {
             return;
         }
 
+        __SLitComponent.setDefaultProps('s-carpenter-app', this.props);
+
         // listen for the s-carpenter-app.ready event
         document.addEventListener('s-carpenter-app.ready', (e) => {
             this.remove();

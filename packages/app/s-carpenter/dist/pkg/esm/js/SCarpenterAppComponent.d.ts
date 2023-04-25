@@ -20,6 +20,7 @@ export interface ISCarpenterAppComponentAddComponent {
     $after: HTMLElement;
 }
 export interface ISCarpenterAppComponentData {
+    uid: string;
     values?: any;
     currentSpecs: any;
     specs: any;
@@ -82,6 +83,7 @@ export default class SCarpenterAppComponent extends __SLitComponent {
     _$carpenterComponent: any;
     _rootWindow: any;
     _$rootDocument: any;
+    _addingNew: boolean;
     _isSpecsEditorValid: boolean;
     constructor();
     mount(): Promise<void>;
@@ -92,8 +94,6 @@ export default class SCarpenterAppComponent extends __SLitComponent {
     _registerShortcuts($scope: Document): void;
     
     _initWebsiteIframeContent(): void;
-    
-    _ensureSpecsComponentsHaveId(): void;
     
     _preventExternalLinksBehaviors(): void;
     

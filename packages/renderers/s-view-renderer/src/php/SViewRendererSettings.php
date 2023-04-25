@@ -16,6 +16,7 @@ class SViewRendererSettings
     /**
      * @name           cacheDir
      * @type            String[]
+     * @default         $_SERVER['DOCUMENT_ROOT'] . '/.local/cache/views'
      *
      * Specify the folder where to store the cache.
      *
@@ -26,14 +27,15 @@ class SViewRendererSettings
 
     /**
      * @name           defaultEngine
-     * @type            String[]
+     * @type            String
+     * @default         twig
      *
      * Specify the default engine to use when not any is specified at the dotpath start like "twig://...", etc...
      *
      * @since       2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    public $defaultEngine = ['twig', 'blade'];
+    public $defaultEngine = 'twig';
 
     /**
      * @name           enginesSettings
@@ -47,15 +49,39 @@ class SViewRendererSettings
     public $enginesSettings = [];
 
     /**
-     * @name           defaultData
-     * @type            String[]
+     * @name           dataFile
+     * @type            Boolean
+     * @default         false
      *
-     * Specify some default data to pass to the view
+     * Specify if you want to make use of .data.json/php files alongside the views or not
      *
      * @since       2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    public $defaultData = [];
+    public $dataFile = false;
+
+    /**
+     * @name           dataFunction
+     * @type            Boolean
+     * @default         false
+     *
+     * Specify a function that will be called for each render to provide some data if wanted
+     *
+     * @since       2.0.0
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    public $dataFunction;
+
+    /**
+     * @name           sharedData
+     * @type            String[]
+     *
+     * Specify some shared data to pass to each views
+     *
+     * @since       2.0.0
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    public $sharedData = [];
 
     /**
      * @name           sharedDataFiles

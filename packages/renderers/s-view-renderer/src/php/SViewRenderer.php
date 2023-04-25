@@ -36,8 +36,22 @@
 class SViewRenderer
 {
     /**
+     * @name       engines
+     * @type      Array
+     * @static
+     *
+     * Store the registered engines
+     *
+     * @since     2.0.0
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    public static $engines = [
+        'twig' => 'SViewRendererEngineTwig',
+    ];
+
+    /**
      * @name        $settings
-     * @type        Object
+     * @type        SViewRendererSettings
      * @private
      *
      * Store the passed settings
@@ -59,160 +73,220 @@ class SViewRenderer
         }
     }
 
-    public function renderPage($pageJson, $loadComponent = null)
+    /**
+     * Load the shared datas
+     */
+    private function _getSharedData()
     {
-        $loader = new \Twig\Loader\FilesystemLoader($this->settings->rootDirs);
-        $twig = new \Twig\Environment($loader, [
-            'cache' => $this->settings->cacheDir,
-        ]);
+        // shared data from the settings
+        $sharedData = $this->settings->sharedData;
 
-        \Sugar\twig\initTwig($twig);
+        // shared data from files
+        if (count($this->settings->sharedDataFiles)) {
+            foreach ($this->settings->sharedDataFiles as $filePath) {
+                $parts = explode('.', $filePath);
+                $extension = array_pop($parts);
+                $data = [];
+                switch ($extension) {
+                    case 'php':
+                        $data = require $filePath;
+                        break;
+                    case 'json':
+                        $data = json_decode(file_get_contents($filePath), true);
+                        break;
+                    default:
+                        throw new Exception(
+                            'The data file "' .
+                                $filePath .
+                                '" is not a supported format, at least for now...'
+                        );
+                }
+                // merge the data
+                $sharedData = array_merge_recursive($sharedData, $data);
+            }
+        }
+        return $sharedData;
+    }
 
+    /**
+     * Get the engine instance back from the passed extension.
+     */
+    private $_enginesInstances = [];
+    private function _getEngineInstance($extension)
+    {
+        // from cache
+        if (isset($this->_enginesInstances[$extension])) {
+            return $this->_enginesInstances[$extension];
+        }
+
+        // make sure we have an engine for this view
+        if (!isset(SViewRenderer::$engines[$extension])) {
+            throw new Exception(
+                'The view extension "' .
+                    $extension .
+                    '" does not have any suitable engine to render it...'
+            );
+        }
+
+        $engine = SViewRenderer::$engines[$extension];
+        $this->_enginesInstances[$extension] = new $engine($this->settings);
+        return $this->_enginesInstances[$extension];
+    }
+
+    public function render($viewDotPath, $data = [])
+    {
+    }
+
+    public function renderPage($pageJson, $nodeLoader = null)
+    {
+        print '<pre>';
+        var_dump($pageJson);
+
+        // make sure we have a layout
         if (!isset($pageJson->layout)) {
             $pageJson->layout = 'main';
         }
 
-        // print '<pre>';
-        // var_dump($pageJson);
+        // get the shared data
+        $sharedData = $this->_getSharedData();
 
-        $renderNodes = function ($nodes, $renderNodes) use (
-            $twig,
-            $loadComponent
+        // recursive render function
+        $renderNodes = function ($nodes, $renderNodes = null) use (
+            $nodeLoader,
+            $sharedData
         ) {
             $html = [];
 
             foreach ($nodes as $id => $node) {
-                if (isset($node->nodes)) {
-                    return $renderNodes($node->nodes, $renderNodes);
-                } else {
-                    // render the node
-                    if (is_callable($loadComponent)) {
-                        $data = $loadComponent($node);
-                        $viewName = array_pop(explode('.', $data->specs));
-                        $viewPath = preg_replace(
-                            '/^views\./',
-                            '',
-                            $data->specs
-                        );
-                        $viewPath = str_replace('.', '/', $viewPath);
-                        $viewPath = $viewPath . '/' . $viewName . '.twig';
-                        $twig->render(
-                            $viewPath,
-                            \Sugar\convert\toArray($data->values)
-                        );
-                    }
-
-                    array_push($html, $node->id);
+                if ($node->type == 'root') {
+                    continue;
                 }
+
+                $contentHtml = '';
+                if (isset($node->nodes)) {
+                    $contentHtml = $renderNodes($node->nodes, $renderNodes);
+                }
+
+                if ($node->type == 'container') {
+                    array_push($html, '<div>' . $contentHtml . '</div>');
+                    continue;
+                }
+
+                // load the node data. See @specimen/specimen ISRenderableNode type
+                if (is_callable($nodeLoader)) {
+                    $renderableNode = $nodeLoader($node);
+                }
+
+                continue;
+
+                // render the node
+                $parts = explode('.', $renderableNode->specs);
+                $viewName = array_pop($parts);
+                $viewPath = $this->_getFinalViewPath($renderableNode->specs);
+
+                print '<pre>';
+                var_dump($viewPath);
+
+                $parts = explode('.', $viewPath);
+                $extension = array_pop($parts);
+                $engineInstance = $this->_getEngineInstance($extension);
+                $renderResult = $engineInstance->render(
+                    $viewPath,
+                    array_merge_recursive(
+                        $sharedData,
+                        \Sugar\convert\toArray($renderableNode->values)
+                    )
+                );
+
+                array_push($html, $renderResult);
             }
 
             return implode(PHP_EOL, $html);
         };
 
-        print '<pre>';
-        var_dump($renderNodes($pageJson->nodes, $renderNodes));
-
-        // return $_SERVER['DOCUMENT_ROOT'];
+        return $renderNodes($pageJson->nodes, $renderNodes);
     }
 
-    public function _getFinalViewPath($viewDotPath) {
+    /**
+     * Get the final absolute view path from the dotpath
+     */
+    public function _getFinalViewPath($viewDotPath)
+    {
+        // remove the "views.*" in the
+        $viewDotPath = preg_replace('/^views\./', '', $viewDotPath);
 
-        $finalViewPath;
-
-
-
-        const handledViewsExtensions: string[] = Object.keys(
-            SViewRenderer.engines,
-        );
+        $finalViewPath = $viewDotPath;
+        $handledViewsExtensions = array_keys((array) SViewRenderer::$engines);
 
         // direct view path
-        if (__fs.existsSync(viewDotPath)) {
-            return viewDotPath;
+        if (file_exists($viewDotPath)) {
+            return $viewDotPath;
         }
 
         // direct from the rootDirs
-        for (let i = 0; i < this.settings.rootDirs.length; i++) {
-            const rootDir = this.settings.rootDirs[i];
-            if (__fs.existsSync(`${rootDir}/${viewDotPath}`)) {
-                return `${rootDir}/${viewDotPath}`;
+        for ($i = 0; $i < count($this->settings->rootDirs); $i++) {
+            $rootDir = $this->settings->rootDirs[$i];
+            if (file_exists($rootDir . '/' . $viewDotPath)) {
+                return $rootDir . '/' . $viewDotPath;
             }
         }
 
         // doted path
-        for (let i = 0; i < this.settings.rootDirs.length; i++) {
-            const rootDir = this.settings.rootDirs[i],
-                viewName = viewDotPath.split('.').slice(-1)[0],
-                viewPath = viewDotPath.replace(/\./gm, '/'),
-                globPart = `@(${handledViewsExtensions.join('|')})`;
+        for ($i = 0; $i < count($this->settings->rootDirs); $i++) {
+            $rootDir = $this->settings->rootDirs[$i];
+            $parts = explode('.', $viewDotPath);
+            $viewName = array_pop($parts);
+            $viewPath = preg_replace('/\./', '/', $viewDotPath);
+            $globPart = '{' . implode('|', $handledViewsExtensions) . '}';
 
-            const potentialViewGlob1 = `${rootDir}/${viewPath}.${globPart}`,
-                potentialViewGlob2 = `${rootDir}/${viewPath}/${viewName}.${globPart}`;
+            $potentialViewGlob1 = $rootDir . '/' . $viewPath . '.' . $globPart;
+            $potentialViewGlob2 =
+                $rootDir . '/' . $viewPath . '/' . $viewName . '.' . $globPart;
 
-            let potentialPath;
-            let matches = __glob.sync(potentialViewGlob1);
-
-            if (matches && matches.length) {
-                for (let j = 0; j < matches.length; j++) {
-                    potentialPath = matches[j];
-                    // exclude .data files
-                    if (potentialPath.match(/\.data\.[a-zA-Z0-9]+/)) {
+            $matches = glob($potentialViewGlob1, GLOB_BRACE);
+            if ($matches) {
+                for ($j = 0; $j < count($matches); $j++) {
+                    $potentialPath = $matches[$j];
+                    if (preg_match('/\.data\.[a-zA-Z0-9]+/', $potentialPath)) {
                         continue;
                     }
-                    finalViewPath = potentialPath;
+                    $finalViewPath = $potentialPath;
                     break;
                 }
             } else {
-                // try to add the name of the view again like
-                // if it is stored in a folder with the same name
-                // retry again with new glob string
-                matches = __glob.sync(potentialViewGlob2);
-                if (matches && matches.length) {
-                    for (let j = 0; j < matches.length; j++) {
-                        potentialPath = matches[j];
-                        // exclude .data files
-                        if (potentialPath.match(/\.data\.[a-zA-Z0-9]+/)) {
+                $matches = glob($potentialViewGlob2, GLOB_BRACE);
+                if ($matches) {
+                    for ($j = 0; $j < count($matches); $j++) {
+                        $potentialPath = $matches[$j];
+                        if (
+                            preg_match('/\.data\.[a-zA-Z0-9]+/', $potentialPath)
+                        ) {
                             continue;
                         }
-                        finalViewPath = potentialPath;
+                        $finalViewPath = $potentialPath;
                         break;
                     }
                 }
             }
 
-            // @ts-ignore
-            if (finalViewPath) {
+            if ($finalViewPath) {
                 break;
             }
         }
 
-        // // remove all the engines extensions from the viewPath
-        // Object.keys(SViewRenderer.engines).forEach((ext) => {
-        //     viewDotPath = viewDotPath.replace(`.${ext}`, '');
-        // });
-
         // detect and save the view doted path or the view template string
         if (
-            viewDotPath.split(' ').length === 1 &&
-            viewDotPath.trim() === viewDotPath
+            count(explode(' ', $viewDotPath)) == 1 &&
+            trim($viewDotPath) == $viewDotPath
         ) {
             // check if we can find the view path passed
-            if (__path.isAbsolute(viewDotPath)) {
-                if (__fs.existsSync(viewDotPath)) {
-                    // throw new Error(
-                    //   `Sorry but the absolute path to the view "<cyan>${viewDotPath}</cyan>" does not exist...`
-                    // );
-                    finalViewPath = viewDotPath;
+            if (\Sugar\is\absolutePath($viewDotPath)) {
+                if (file_exists($viewDotPath)) {
+                    $finalViewPath = $viewDotPath;
                 }
-            } else {
             }
-        } else {
-            // throw new Error(
-            //   `<red>[SView]</red> It seems that the passed viewPath "<yellow>${viewPath}</yellow>" argument is not a valid path`
-            // );
         }
 
-        // @ts-ignore
-        return finalViewPath;
+        return $finalViewPath;
     }
-
 }

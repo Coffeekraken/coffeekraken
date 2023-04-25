@@ -5,45 +5,24 @@
         padding-inline: sugar.padding(30);
     }
 
-    ._bkg {
-        pointer-events: none;
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        width: 1280px;
-        height: 900px;
-        clip-path: url(#clip);
-        transform: translate(-40%, -40%) scale(1.7) rotate(-10deg);
-        display: none;
-        /* filter: grayscale(100%);
-            opacity: 0.2; */
-
-        img {
-            object-fit: cover;
-            width: 100%;
-            height: 100%;
-        }
-
-        @sugar.media mobile {
-            display: none;
-        }
-
-        @sugar.lod (2) {
-            display: block;
-        }
+    ._type {
+        width: sugar.container.width();
+        margin-block: sugar.margin(50);
     }
 
-    ._layout {
-        @sugar.layout ('1 2');
-        position: relative;
-        z-index: 10;
-        min-height: 80vh;
-        align-items: center;
+    ._title {
+        @sugar.typo (h1);
+    }
+    ._value {
+        background: sugar.color(main, surface);
+        padding: sugar.padding(30);
+        @sugar.border.radius;
+    }
 
-        @sugar.media mobile {
-            @sugar.layout ('2 _ 1');
-            padding-block: sugar.padding(100);
-            gap: sugar.margin(50);
-        }
+    ._video,
+    ._img {
+        width: 450px;
+        aspect-ratio: 16/9;
+        object-fit: cover;
     }
 }

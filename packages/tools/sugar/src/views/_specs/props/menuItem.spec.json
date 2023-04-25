@@ -4,7 +4,7 @@
     "description": "Describe a menu item with props like url, target, etc...",
     "props": {
         "label": {
-            "type": "Text",
+            "type": "String",
             "description": "Specify the label to display"
         },
         "raw": {

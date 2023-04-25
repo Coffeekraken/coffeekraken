@@ -11,12 +11,12 @@
             "required": true
         },
         "title": {
-            "type": "Text",
+            "type": "String",
             "title": "Title",
             "description": "Image title"
         },
         "alt": {
-            "type": "Text",
+            "type": "String",
             "title": "Alt",
             "description": "Image alternative text"
         }

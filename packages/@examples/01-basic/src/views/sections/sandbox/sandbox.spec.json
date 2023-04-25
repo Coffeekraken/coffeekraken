@@ -6,14 +6,28 @@
         "string": {
             "type": "String",
             "title": "String",
+            "default": {
+                "value": "IO iwj oj woifj woiejéfoijwp eoijf poij oij poij oiweofij woiefj"
+            },
             "description": "Simple string",
+            "required": true
+        },
+        "text": {
+            "type": "Text",
+            "title": "Text",
+            "description": "Simple text",
+            "default": {
+                "value": "IO iwj oj woifj woiejéfoijwp eoijf poij oij poij oiweofij woiefj"
+            },
             "required": true
         },
         "integer": {
             "type": "Integer",
             "title": "Integer",
             "description": "Simple integer",
-            "default": 10,
+            "default": {
+                "value": 10
+            },
             "min": 10,
             "max": 120,
             "required": true
@@ -22,7 +36,9 @@
             "type": "Number",
             "title": "Number",
             "description": "Simple number",
-            "default": 12.4,
+            "default": {
+                "value": 12.4
+            },
             "min": 10,
             "max": 120,
             "required": true
@@ -33,6 +49,15 @@
             "description": "My cool select",
             "placeholder": "Choose something...",
             "multiple": false,
+            "default": {
+                "value": [
+                    {
+                        "id": "value-2",
+                        "name": "Option #2",
+                        "value": "value 2"
+                    }
+                ]
+            },
             "options": [
                 {
                     "id": "value-1",
@@ -58,6 +83,15 @@
             "description": "A nice checkbox",
             "min": 1,
             "max": 2,
+            "default": {
+                "value": [
+                    {
+                        "id": "value-2",
+                        "name": "Option #2",
+                        "value": "value 2"
+                    }
+                ]
+            },
             "options": [
                 {
                     "id": "value-1",
@@ -75,6 +109,9 @@
         "boolean": {
             "type": "Boolean",
             "title": "Bool",
+            "default": {
+                "value": true
+            },
             "description": "A nice boolean"
         },
         "switch": {
@@ -101,6 +138,11 @@
             "description": "Choose a datetime",
             "format": "YYYY-MM-DD HH:mm",
             "calendar": true,
+            "default": {
+                "iso": "2023-04-27T10:00:00.000Z",
+                "value": "2023-04-27 12:00",
+                "format": "YYYY-MM-DD HH:mm"
+            },
             "required": true
         },
         "date": {
@@ -108,6 +150,11 @@
             "title": "Date",
             "description": "Choose a date",
             "format": "YYYY-MM-DD",
+            "default": {
+                "iso": "2023-04-25T10:00:00.000Z",
+                "value": "2023-04-25",
+                "format": "YYYY-MM-DD"
+            },
             "required": true
         },
         "time": {
@@ -115,6 +162,11 @@
             "title": "Time",
             "description": "Choose a time",
             "format": "HH:mm",
+            "default": {
+                "iso": "2023-04-25T10:00:00.000Z",
+                "value": "12:00",
+                "format": "HH:mm"
+            },
             "required": true
         },
         "image": {
@@ -123,6 +175,21 @@
             "title": "Image",
             "alt": true,
             "description": "Image file",
+            "default": {
+                "url": "https://picsum.photos/200/300",
+                "alt": "Hello world",
+                "media": {
+                    "desktop": {
+                        "url": "https://picsum.photos/200/300?desktop"
+                    },
+                    "tablet": {
+                        "url": "https://picsum.photos/200/300?tablet"
+                    },
+                    "mobile": {
+                        "url": "https://picsum.photos/200/300?mobile"
+                    }
+                }
+            },
             "required": true
         },
         "images": {
@@ -130,12 +197,39 @@
             "type": "Image[]",
             "title": "Multiple images",
             "description": "Multiple images",
+            "default": [
+                {
+                    "url": "https://picsum.photos/200/300",
+                    "alt": "Hello world",
+                    "media": {
+                        "desktop": {
+                            "url": "https://picsum.photos/200/300?desktop"
+                        },
+                        "tablet": {
+                            "url": "https://picsum.photos/200/300?tablet"
+                        },
+                        "mobile": {
+                            "url": "https://picsum.photos/200/300?mobile"
+                        }
+                    }
+                }
+            ],
             "required": true
         },
         "video": {
             "type": "Video",
             "title": "Video",
             "description": "Simple video",
+            "default": {
+                "sources": {
+                    "mp4": {
+                        "url": "https://download.samplelib.com/mp4/sample-10s.mp4"
+                    }
+                },
+                "controls": true,
+                "autoplay": false,
+                "muted": false
+            },
             "required": true
         },
         "wysiwyg": {

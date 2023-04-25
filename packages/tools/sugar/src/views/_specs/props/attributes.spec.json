@@ -5,13 +5,13 @@
     "default": {},
     "props": {
         "name": {
-            "type": "Text",
+            "type": "String",
             "title": "Name",
             "description": "Specify the name of the attribute",
             "required": true
         },
         "value": {
-            "type": "Text",
+            "type": "String",
             "title": "Value",
             "description": "Specify the value of the attribute",
             "required": true

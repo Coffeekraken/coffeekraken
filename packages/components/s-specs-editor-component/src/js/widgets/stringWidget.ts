@@ -5,7 +5,7 @@ import { __i18n } from '@coffeekraken/s-i18n';
 import type { ISSpecsEditorWidgetDeps } from '../SSpecsEditorWidget';
 import __SSpecsEditorWidget from '../SSpecsEditorWidget';
 
-export default class SSpecsEditorComponentTextWidget extends __SSpecsEditorWidget {
+export default class SSpecsEditorComponentStringWidget extends __SSpecsEditorWidget {
     constructor(deps: ISSpecsEditorWidgetDeps) {
         super(deps);
         if (!this.values.value) {
@@ -16,7 +16,7 @@ export default class SSpecsEditorComponentTextWidget extends __SSpecsEditorWidge
     validate(newValues) {
         if (this.propObj.required && !newValues?.value) {
             return {
-                error: __i18n(`This property is required`, {
+                error: __i18n(`This pro perty is required`, {
                     id: 's-specs-editor.widget.required',
                 }),
             };
@@ -25,22 +25,22 @@ export default class SSpecsEditorComponentTextWidget extends __SSpecsEditorWidge
 
     render() {
         return html`
-            <div class="${this.editor.utils.cls('_text-widget')}">
+            <div class="${this.editor.utils.cls('_string-widget')}">
                 ${this.renderLabel()}
-                <textarea
+                <input
                     @change=${(e) => {
                         this.setValue({
                             value: e.target.value,
                         });
                     }}
-                    rows="3"
+                    type="text"
                     name="${this.path.at(-1)}"
                     class="${this.editor.utils.cls('_input', 's-input')}"
                     placeholder="${this.propObj.pladeholder}"
                     path="${this.path.join('.')}"
-                >
-${this.values.value}</textarea
-                >
+                    value="${this.values.value}"
+                    .value=${this.values.value}
+                />
             </div>
         `;
     }

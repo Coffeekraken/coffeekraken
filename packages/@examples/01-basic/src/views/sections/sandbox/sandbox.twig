@@ -1,3 +1,144 @@
-<section s-specs="views.sections.sandbox">
+<section class="section-sandbox" s-specs="views.sections.sandbox">
     {{ __specsDataTemplate(_context)|raw }}   
+
+    <div class="_type">
+        <h1 class="_title">String</h1>
+        <div class="_value">
+            <p class="s-typo:p">{{ string.value }}</p>
+        </div>
+    </div>
+
+    <div class="_type">
+        <h1 class="_title">Text</h1>
+        <div class="_value">
+            <p class="s-typo:p">{{ text.value }}</p>
+        </div>
+    </div>
+
+    <div class="_type">
+        <h1 class="_title">Integer</h1>
+        <div class="_value">
+            <p class="s-typo:p">{{ integer.value }}</p>
+        </div>
+    </div>
+
+    <div class="_type">
+        <h1 class="_title">Number</h1>
+        <div class="_value">
+            <p class="s-typo:p">{{ number.value }}</p>
+        </div>
+    </div>
+
+    <div class="_type">
+        <h1 class="_title">Select</h1>
+        <div class="_value">
+            {% for value in select.value %}
+                <dl class="_list">
+                    <dt>Id: {{ value.id }}</dt>
+                    <dt>Name: {{ value.name }}</dt>
+                    <dt>Value: {{ value.value }}</dt>
+                </dl>
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class="_type">
+        <h1 class="_title">Checkbox</h1>
+        <div class="_value">
+            {% for value in checkbox.value %}
+                <dl class="_list">
+                    <dt>Id: {{ value.id }}</dt>
+                    <dt>Name: {{ value.name }}</dt>
+                    <dt>Value: {{ value.value }}</dt>
+                </dl>
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class="_type">
+        <h1 class="_title">Boolean</h1>
+        <div class="_value">
+            <p class="s-typo:p">{{ boolean.value ? 'true' : 'false' }}</p>
+        </div>
+    </div>
+
+    <div class="_type">
+        <h1 class="_title">Switch</h1>
+        <div class="_value">
+            <p class="s-typo:p">{{ switch.value ? 'true' : 'false' }}</p>
+        </div>
+    </div>
+
+    <div class="_type">
+        <h1 class="_title">Color</h1>
+        <div class="_value">
+            <p class="s-typo:p">{{ color.value }}</p>
+        </div>
+    </div>
+
+    <div class="_type">
+        <h1 class="_title">Datetime</h1>
+        <div class="_value">
+            <dl class="_list">
+                <dt>Format: {{ datetime.format }}</dt>
+                <dt>Value: {{ datetime.value }}</dt>
+                <dt>ISO: {{ datetime.iso }}</dt>
+            </dl>
+        </div>
+    </div>
+
+    <div class="_type">
+        <h1 class="_title">Date</h1>
+        <div class="_value">
+            <dl class="_list">
+                <dt>Format: {{ date.format }}</dt>
+                <dt>Value: {{ date.value }}</dt>
+                <dt>ISO: {{ date.iso }}</dt>
+            </dl>
+        </div>
+    </div>
+
+    <div class="_type">
+        <h1 class="_title">Time</h1>
+        <div class="_value">
+            <dl class="_list">
+                <dt>Format: {{ time.format }}</dt>
+                <dt>Value: {{ time.value }}</dt>
+                <dt>ISO: {{ time.iso }}</dt>
+            </dl>
+        </div>
+    </div>
+
+    <div class="_type">
+        <h1 class="_title">Image</h1>
+        <div class="_value">
+            {% if image.url %}
+                <picture class="s-media-container">
+                    {% for media, image in image.media %}
+                        <source srcset="{{ image.url }}" media="{{ media }}">
+                    {% endfor %}
+                    <img class="_img s-media" src="{{ image.url }}" title="{{ image.title }}" alt="{{ image.alt }}" />
+                </picture>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="_type">
+        <h1 class="_title">Video</h1>
+        <div class="_value">
+            {% if video.sources %}
+                <div class="s-media-container">
+                    <video class="_video s-media" {{ video.controls ? 'controls' : '' }}
+                        {{ video.autoplay ? 'autoplay' : '' }}
+                        {{ video.muted ? 'muted' : '' }}
+                    >
+                        {% for format, video in video.sources %}
+                            <source src="{{ video.url }}" format="{{ format }}">
+                        {% endfor %}
+                    </video>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+
 </section>

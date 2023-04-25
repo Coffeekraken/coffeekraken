@@ -4,45 +4,45 @@
     "description": "Display a contact section with a form and a google map",
     "props": {
         "name": {
-            "type": "Text",
+            "type": "String",
             "title": "Name",
             "description": "Address name",
             "required": true
         },
         "street": {
-            "type": "Text",
+            "type": "String",
             "title": "Street",
             "description": "Address street with number",
             "required": true
         },
         "city": {
-            "type": "Text",
+            "type": "String",
             "title": "City",
             "description": "Address city with postcode",
             "required": true
         },
         "phone": {
-            "type": "Text",
+            "type": "String",
             "title": "Phone",
             "description": "Phone number"
         },
         "email": {
-            "type": "Text",
+            "type": "String",
             "title": "Email",
             "description": "Email address"
         },
         "facebookUrl": {
-            "type": "Text",
+            "type": "String",
             "title": "Facebook URL",
             "description": "Facebook URL"
         },
         "twitterUrl": {
-            "type": "Text",
+            "type": "String",
             "title": "Twitter URL",
             "description": "Twitter URL"
         },
         "instagramUrl": {
-            "type": "Text",
+            "type": "String",
             "title": "Instagram URL",
             "description": "Instagram URL"
         },

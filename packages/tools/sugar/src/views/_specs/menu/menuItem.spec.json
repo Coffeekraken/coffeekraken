@@ -2,7 +2,7 @@
     "type": "MenuItem",
     "props": {
         "label": {
-            "type": "Text",
+            "type": "String",
             "description": "The menu item label",
             "required": true
         },

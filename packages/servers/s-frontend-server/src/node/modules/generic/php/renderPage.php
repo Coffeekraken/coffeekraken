@@ -47,7 +47,6 @@ $renderRes = $viewRenderer->renderPage($pageFileJson, function (
     $filePath = $storeDir . '/' . $component->uid . '.json';
 
     if (!file_exists($filePath)) {
-        var_dump($filePath);
         return;
     }
 

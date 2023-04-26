@@ -54,13 +54,6 @@ return new \Twig\TwigFunction('__specsDataTemplate', function ($data) {
     unset($data['shared']);
     unset($data['request']);
 
-    // handle the "$specs" property
-    $specs = (object) [];
-    if (isset($data['$specs'])) {
-        $specs = $data['$specs'];
-        unset($data['$specs']);
-    }
-
     // handle the "$source" property
     $source = (object) [];
     if (isset($data['$source'])) {
@@ -68,17 +61,22 @@ return new \Twig\TwigFunction('__specsDataTemplate', function ($data) {
         unset($data['$source']);
     }
 
-    // uniquid
-    $uid = 's-' . uniqid();
+    // uid
+    $uid = null;
     if (isset($data['uid'])) {
         $uid = $data['uid'];
+        $uidAttr = 'uid="' . $uid . '"';
         unset($data['uid']);
     }
 
+    if ($uid == null) {
+        return '<!-- In order to print the s-specs-data, you MUST pass a "uid".. -->';
+    }
+
     // return ready to template JSON
-    return '<template uid="' .
-        $uid .
-        '" s-specs-data>{
+    return '<template ' .
+        $uidAttr .
+        ' s-specs-data>{
         "uid": "' .
         $uid .
         '",
@@ -90,9 +88,6 @@ return new \Twig\TwigFunction('__specsDataTemplate', function ($data) {
             __sArrayFilterRecursive($data),
             JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_QUOT
         ) .
-        ',
-        "specs": ' .
-        json_encode($specs, JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_QUOT) .
         '
     }</template>';
 });

@@ -137,14 +137,36 @@ class SViewRenderer
     {
     }
 
+    private function getViewMetas($viewDotPath)
+    {
+        $parts = explode('.', $viewDotPath);
+        $viewName = array_pop($parts);
+        $viewPath = $this->_getFinalViewPath($viewDotPath);
+        $parts = explode('.', $viewPath);
+        $extension = array_pop($parts);
+        $engineInstance = $this->_getEngineInstance($extension);
+
+        if (!isset($viewPath)) {
+            throw new Exception(
+                'The passed viewDotPath "' .
+                    $viewDotPath .
+                    '" does not resolve to any view file...'
+            );
+        }
+
+        return [
+            'name' => $viewName,
+            'path' => $viewPath,
+            'extension' => $extension,
+            'engineInstance' => $engineInstance,
+        ];
+    }
+
     public function renderPage($pageJson, $nodeLoader = null)
     {
-        print '<pre>';
-        var_dump($pageJson);
-
         // make sure we have a layout
         if (!isset($pageJson->layout)) {
-            $pageJson->layout = 'main';
+            $pageJson->layout = 'layouts.main';
         }
 
         // get the shared data
@@ -157,18 +179,23 @@ class SViewRenderer
         ) {
             $html = [];
 
-            foreach ($nodes as $id => $node) {
+            foreach ($nodes as $uid => $node) {
                 if ($node->type == 'root') {
                     continue;
                 }
 
-                $contentHtml = '';
+                // add the "uid" as a node property
+                $node->uid = $uid;
+
+                $nodes = [];
                 if (isset($node->nodes)) {
-                    $contentHtml = $renderNodes($node->nodes, $renderNodes);
+                    foreach ($node->nodes as $i => $n) {
+                        $nodes[$i] = $renderNodes([$i => $n], $renderNodes);
+                    }
                 }
 
                 if ($node->type == 'container') {
-                    array_push($html, '<div>' . $contentHtml . '</div>');
+                    return implode(PHP_EOL, $nodes);
                     continue;
                 }
 
@@ -177,22 +204,28 @@ class SViewRenderer
                     $renderableNode = $nodeLoader($node);
                 }
 
-                continue;
+                if (!isset($renderableNode->specs)) {
+                    array_push(
+                        $html,
+                        '<div class="s-carpenter-app_error">Your "' .
+                            $uid .
+                            '" (' .
+                            $node->type .
+                            ') node does not have any data attached...</div>'
+                    );
+                    continue;
+                }
 
                 // render the node
-                $parts = explode('.', $renderableNode->specs);
-                $viewName = array_pop($parts);
-                $viewPath = $this->_getFinalViewPath($renderableNode->specs);
+                $viewMetas = $this->getViewMetas($renderableNode->specs);
 
-                print '<pre>';
-                var_dump($viewPath);
-
-                $parts = explode('.', $viewPath);
-                $extension = array_pop($parts);
-                $engineInstance = $this->_getEngineInstance($extension);
-                $renderResult = $engineInstance->render(
-                    $viewPath,
+                $renderResult = $viewMetas['engineInstance']->render(
+                    $viewMetas['path'],
                     array_merge_recursive(
+                        [
+                            'nodes' => $nodes,
+                            'uid' => $uid,
+                        ],
                         $sharedData,
                         \Sugar\convert\toArray($renderableNode->values)
                     )
@@ -204,7 +237,22 @@ class SViewRenderer
             return implode(PHP_EOL, $html);
         };
 
-        return $renderNodes($pageJson->nodes, $renderNodes);
+        // render the content
+        $contentHtml = $renderNodes($pageJson->nodes, $renderNodes);
+
+        // render the layout with the content rendered above
+        $viewMetas = $this->getViewMetas($pageJson->layout);
+        $layoutRenderResult = $viewMetas['engineInstance']->render(
+            $viewMetas['path'],
+            array_merge_recursive(
+                [
+                    'body' => $contentHtml,
+                ],
+                $sharedData
+            )
+        );
+
+        return $layoutRenderResult;
     }
 
     /**
@@ -213,7 +261,7 @@ class SViewRenderer
     public function _getFinalViewPath($viewDotPath)
     {
         // remove the "views.*" in the
-        $viewDotPath = preg_replace('/^views\./', '', $viewDotPath);
+        $viewDotPath = preg_replace('/views\./', '', $viewDotPath);
 
         $finalViewPath = $viewDotPath;
         $handledViewsExtensions = array_keys((array) SViewRenderer::$engines);
@@ -250,8 +298,10 @@ class SViewRenderer
                     if (preg_match('/\.data\.[a-zA-Z0-9]+/', $potentialPath)) {
                         continue;
                     }
-                    $finalViewPath = $potentialPath;
-                    break;
+                    if (file_exists($potentialPath)) {
+                        $finalViewPath = $potentialPath;
+                        break;
+                    }
                 }
             } else {
                 $matches = glob($potentialViewGlob2, GLOB_BRACE);
@@ -263,14 +313,12 @@ class SViewRenderer
                         ) {
                             continue;
                         }
-                        $finalViewPath = $potentialPath;
-                        break;
+                        if (file_exists($potentialPath)) {
+                            $finalViewPath = $potentialPath;
+                            break;
+                        }
                     }
                 }
-            }
-
-            if ($finalViewPath) {
-                break;
             }
         }
 

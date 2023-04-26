@@ -11,7 +11,6 @@ export interface ISViewRendererSettings {
     dataFile?: boolean;
     sharedData?: any;
     sharedDataFiles?: string[];
-    sharedJsonDataFiles?: string[];
 }
 export interface ISViewViewMetas extends ISFileObject {
 }

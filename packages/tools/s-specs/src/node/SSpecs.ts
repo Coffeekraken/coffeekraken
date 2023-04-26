@@ -55,7 +55,9 @@ export interface ISSpecsSettings {
     read: Partial<ISSpecsReadSettings>;
 }
 
-export interface ISSpecsReadSettings {}
+export interface ISSpecsReadSettings {
+    metas: boolean;
+}
 
 export interface ISSpecsListResult {
     name: string;
@@ -270,6 +272,9 @@ export default class SSpecs extends __SClass {
         }
 
         const finalSettings: ISSpecsReadSettings = __deepMerge(
+            {
+                metas: true,
+            },
             // @ts-ignore
             this.settings,
             settings,
@@ -352,7 +357,7 @@ export default class SSpecs extends __SClass {
 
         // traverse each values to resolve them if needed
         specJson = __deepMap(specJson, ({ object, prop, value, path }) => {
-            return this.resolve(value, object);
+            return this.resolve(value, object, finalSettings);
         });
 
         specJson = __deepMap(
@@ -364,7 +369,7 @@ export default class SSpecs extends __SClass {
                             `The "extends": "${value}" property cannot start with an "@"`,
                         );
                     }
-                    let extendsJson = this.read(value);
+                    let extendsJson = this.read(value, finalSettings);
                     const newObj = __deepMerge(extendsJson, object);
                     Object.assign(object, newObj);
                 }
@@ -381,11 +386,13 @@ export default class SSpecs extends __SClass {
         }
 
         // add metas about the spec file read
-        specJson.metas = {
-            dotpath: specDotPath,
-            path: finalSpecFilePath,
-            settings: finalSettings,
-        };
+        if (finalSettings.metas) {
+            specJson.metas = {
+                dotpath: specDotPath,
+                path: finalSpecFilePath,
+                settings: finalSettings,
+            };
+        }
 
         // return the getted specJson
         return specJson;
@@ -471,7 +478,7 @@ export default class SSpecs extends __SClass {
      * @since       2.0.0
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    resolve(value: any, specJson: any): any {
+    resolve(value: any, specJson: any, settings?: ISSpecsReadSettings): any {
         let newValue = value;
 
         if (typeof value === 'string') {
@@ -480,7 +487,7 @@ export default class SSpecs extends __SClass {
                 newValue = __get(specJson, internalDotPath);
                 if (Array.isArray(newValue) || __isPlainObject(newValue)) {
                     newValue = __deepMap(newValue, ({ value: v }) => {
-                        return this.resolve(v, newValue);
+                        return this.resolve(v, newValue, settings);
                     });
                 }
             } else if (value.startsWith('@config.')) {
@@ -489,7 +496,7 @@ export default class SSpecs extends __SClass {
                 newValue = config;
             } else if (value.startsWith('@')) {
                 const dotPath = value.replace('@', ''),
-                    spec = this.read(dotPath);
+                    spec = this.read(dotPath, settings);
                 newValue = spec;
             }
         }

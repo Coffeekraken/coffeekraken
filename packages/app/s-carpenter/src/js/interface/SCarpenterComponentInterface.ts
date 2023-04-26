@@ -61,11 +61,11 @@ export default class SCarpenterComponentInterface extends __SInterface {
                     'Specify if you want the editor to automatically open the first editable found in the HTML',
                 default: false,
             },
-            data: {
-                type: 'String|Object',
+            specsObjUrl: {
+                type: 'String',
                 description:
-                    'Specify a url from where to get the carpenter data back, directly the JSON data or a simple id pointing to a HTMLTemplate tag that host the JSON data',
-                default: '/carpenter.json',
+                    'Specify the url where to get back the specs object for a particular spec. Note that you can/must use the :specs token in your url',
+                default: '/carpenter/specs/:specs',
                 required: true,
             },
             saveComponentUrl: {
@@ -73,6 +73,13 @@ export default class SCarpenterComponentInterface extends __SInterface {
                 description:
                     'Specify the url where to POST the component json when clicking on the "save" button on top of the editor',
                 default: '/carpenter',
+                required: true,
+            },
+            deleteComponentUrl: {
+                type: 'String',
+                description:
+                    'Specify the url where to DELETE the component json when clicking on the "delete" button on top of the editor. The %uid is available',
+                default: '/carpenter/:uid',
                 required: true,
             },
             savePageUrl: {
@@ -98,8 +105,8 @@ export default class SCarpenterComponentInterface extends __SInterface {
             pagesLink: {
                 type: 'String',
                 description:
-                    'Specify the link to use to change page. You have access to the %dotpath token that will be replaced by the actual component/section specs dotpath',
-                default: '/carpenter/%dotpath',
+                    'Specify the link to use to change page. You have access to the %specs token that will be replaced by the actual component/section specs dotpath',
+                default: '/carpenter/%specs',
             },
             features: {
                 type: 'Object',
@@ -183,6 +190,9 @@ export default class SCarpenterComponentInterface extends __SInterface {
                 description: 'Specify some icons html to be used across the UI',
                 default: {
                     component: '<i class="fa-solid fa-puzzle-piece"></i>',
+                    delete: '<i class="fa-regular fa-trash-can"></i>',
+                    edit: '<i class="fa-regular fa-pen-to-square"></i>',
+                    save: '<i class="fa-solid fa-floppy-disk"></i>',
                     add: '<i class="fa-solid fa-plus"></i>',
                     mobile: '<i class="fa-solid fa-mobile-screen-button"></i>',
                     tablet: '<i class="fa-solid fa-tablet-screen-button"></i>',

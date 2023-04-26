@@ -6,6 +6,7 @@ export interface ISSpecsSettings {
     read: Partial<ISSpecsReadSettings>;
 }
 export interface ISSpecsReadSettings {
+    metas: boolean;
 }
 export interface ISSpecsListResult {
     name: string;
@@ -27,5 +28,5 @@ export default class SSpecs extends __SClass {
     
     list(namespaces?: any[]): ISSpecsListResult[];
     
-    resolve(value: any, specJson: any): any;
+    resolve(value: any, specJson: any, settings?: ISSpecsReadSettings): any;
 }

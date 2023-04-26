@@ -41,7 +41,6 @@ foreach ($params->rootDirs as $dir) {
 }
 $loader->addPath('/');
 $twig = new \Twig\Environment($loader, [
-    // 'cache' => $params->cacheDir . '/twig',
     'debug' => true,
     'cache' => false,
 ]);
@@ -55,7 +54,7 @@ $data = \Sugar\convert\toArray($data);
 
 try {
     $html = \Sugar\html\expandPleasantCssClassnames(
-        $twig->render($params->viewPath, $data)
+        $twig->render($params->viewRelPath, $data)
     );
     // $html = \Sugar\classname\patchHtml($html);
     print $html;

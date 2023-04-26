@@ -2,6 +2,7 @@ import type { ISSpecsEditorComponentRenderLabelSettings } from './SSpecsEditorCo
 import __SSpecsEditorComponent from './SSpecsEditorComponent';
 export interface ISSpeceEditorWidgetStatus {
     pristine: boolean;
+    unsaved: boolean;
 }
 export interface ISSpecsEditorWidgetInlineLabel {
     label: string;
@@ -49,6 +50,7 @@ export default class SSpecsEditorWidget {
     constructor(deps: ISSpecsEditorWidgetDeps, settings?: ISSpecsEditorWidgetSettings);
     get values(): any;
     get noneResponsiveValue(): any;
+    saved(): void;
     resetValue(): void;
     mergeValue(value: any, settings?: ISSpecsEditorWidgetSetValueSettings): void;
     override(): void;
@@ -59,6 +61,7 @@ export default class SSpecsEditorWidget {
     renderLabel(settings?: ISSpecsEditorComponentRenderLabelSettings): any;
     renderInlineInput(settings: ISSpecsEditorWidgetInlineLabel): any;
     validate(values: any): ISSpecsEditorWidgetValidateResult;
+    hasUnsavedChanges(): boolean;
     hasValuesForMedia(media: string): boolean;
     isResponsive(): boolean;
     hasErrors(): boolean;

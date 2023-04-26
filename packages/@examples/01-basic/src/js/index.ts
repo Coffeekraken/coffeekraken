@@ -26,6 +26,7 @@ const viewsRelated = import.meta.globEager('../views/**/*.ts');
         __sCarpenterComponentDefine({
             savePageUrl: '/store',
             saveComponentUrl: '/store',
+            deleteComponentUrl: '/store/%uid',
         });
         return;
     }

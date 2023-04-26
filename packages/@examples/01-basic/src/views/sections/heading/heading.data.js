@@ -1,4 +1,6 @@
 export default {
+    uid: 'coco-123',
+    coco: 'plop',
     bkg: {
         url: '/dist/img/macos-wallpaper-01.jpg',
         title: 'Macbook air',

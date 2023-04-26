@@ -5,14 +5,25 @@ import __fs from 'fs';
 export default function store({ express, settings, config }) {
     return new Promise(async (resolve) => {
         // listen for requesting the global data like specs by sources, etc...
-        express.get(`/store/:id`, async (req, res) => {
-            let potentialPath = `${settings.rootDir}/${req.params.id}.json`;
+        express.get(`/store/:uid`, async (req, res) => {
+            let potentialPath = `${settings.rootDir}/${req.params.uid}.json`;
             if (__fs.existsSync(potentialPath)) {
                 const json = __fs.readFileSync(potentialPath, 'utf-8');
                 res.status(200);
                 res.type('application/json');
                 res.send(json);
             }
+        });
+
+        // delete
+        express.delete('/store/:uid', async (req, res) => {
+            let potentialPath = `${settings.rootDir}/${req.params.uid}.json`;
+            if (__fs.existsSync(potentialPath)) {
+                // __fs.unlinkSync(potentialPath);
+            }
+            res.status(200);
+            res.type('application/json');
+            res.send({});
         });
 
         // register the "upload" post handler

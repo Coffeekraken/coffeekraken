@@ -34,13 +34,19 @@ export default class SCarpenterComponentInterface extends __SInterface {
             description: string;
             default: boolean;
         };
-        data: {
+        specsObjUrl: {
             type: string;
             description: string;
             default: string;
             required: boolean;
         };
         saveComponentUrl: {
+            type: string;
+            description: string;
+            default: string;
+            required: boolean;
+        };
+        deleteComponentUrl: {
             type: string;
             description: string;
             default: string;
@@ -120,6 +126,9 @@ export default class SCarpenterComponentInterface extends __SInterface {
             description: string;
             default: {
                 component: string;
+                delete: string;
+                edit: string;
+                save: string;
                 add: string;
                 mobile: string;
                 tablet: string;

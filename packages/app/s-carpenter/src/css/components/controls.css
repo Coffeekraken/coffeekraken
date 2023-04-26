@@ -37,6 +37,10 @@
         @sugar.ui.button();
         @sugar.color (complementary);
         @sugar.depth (100);
+
+        i {
+            color: sugar.color(complementary, foreground);
+        }
     }
 
     ._modes {

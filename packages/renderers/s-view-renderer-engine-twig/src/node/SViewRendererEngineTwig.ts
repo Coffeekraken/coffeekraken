@@ -1,4 +1,3 @@
-import { ISViewRendererSettings } from '@coffeekraken/s-view-renderer';
 import { __unique } from '@coffeekraken/sugar/array';
 import { __execPhp } from '@coffeekraken/sugar/exec';
 import { __dirname } from '@coffeekraken/sugar/fs';
@@ -34,12 +33,14 @@ export default class SViewRendererEngineTwig {
         this.settings = settings ?? {};
     }
 
-    render(
-        viewPath: string,
-        data: any = {},
-        sharedDataFilePath: string,
-        viewRendererSettings: ISViewRendererSettings,
-    ) {
+    render({
+        viewDotPath,
+        viewRelPath,
+        viewPath,
+        data,
+        sharedDataFilePath,
+        viewRendererSettings,
+    }) {
         return new Promise(async (resolve) => {
             if (!__fs.existsSync(viewRendererSettings.cacheDir)) {
                 __fs.mkdirSync(viewRendererSettings.cacheDir, {
@@ -47,16 +48,12 @@ export default class SViewRendererEngineTwig {
                 });
             }
 
-            if (!viewPath.includes('/')) {
-                viewPath = viewPath.replace(/\.(?!md|twig)/gm, '/');
+            if (!viewRelPath.includes('/')) {
+                viewRelPath = viewRelPath.replace(/\.(?!md|twig)/gm, '/');
             }
-            if (!viewPath.match(/\.twig$/)) {
-                viewPath += '.twig';
+            if (!viewRelPath.match(/\.twig$/)) {
+                viewRelPath += '.twig';
             }
-
-            __unique([...viewRendererSettings.rootDirs]).forEach((path) => {
-                viewPath = viewPath.replace(`${path}/`, '');
-            });
 
             // pass the shared data file path through the data
             data._sharedDataFilePath = sharedDataFilePath;
@@ -68,7 +65,7 @@ export default class SViewRendererEngineTwig {
                 ),
                 {
                     rootDirs: __unique([...viewRendererSettings.rootDirs]),
-                    viewPath,
+                    viewRelPath,
                     data,
                     cacheDir: viewRendererSettings.cacheDir,
                 },

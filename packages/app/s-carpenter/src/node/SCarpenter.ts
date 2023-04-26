@@ -1,5 +1,4 @@
 import __SClass from '@coffeekraken/s-class';
-import __SFrontspec from '@coffeekraken/s-frontspec';
 import __SSpecs from '@coffeekraken/s-specs';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
 import __SVite from '@coffeekraken/s-vite';
@@ -115,14 +114,14 @@ class SCarpenter extends __SClass {
                 const specsArray = specsInstance.list(source.specsNamespaces);
 
                 specsArray.forEach((specs) => {
-                    const specsJson = specs.read();
+                    const specsJson = specs.read({
+                        metas: false,
+                    });
                     finalSpecs[specs.dotpath] = specsJson;
                 });
             }
 
-            resolve({
-                specs: finalSpecs,
-            });
+            resolve(finalSpecs);
         });
     }
 
@@ -227,27 +226,30 @@ class SCarpenter extends __SClass {
      * @since       2.0.0
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    async initOnExpressServer(
-        expressServer: any,
-        params?: Partial<ISCarpenterStartParams>,
-    ): void {
-        // const finalParams = <ISCarpenterStartParams>(
-        //     __deepMerge(__SCarpenterStartParamsInterface.defaults(), params)
-        // );
-
-        const frontspec = new __SFrontspec(),
-            frontspecJson = await frontspec.read();
-
+    async initOnExpressServer(expressServer: any): Promise<void> {
         // load the specs files
-        const specs = await this.loadSpecs();
+        const allSpecs = await this.loadSpecs();
 
-        // listen for requesting the global data like specs by sources, etc...
-        expressServer.get(`/carpenter.json`, async (req, res) => {
+        expressServer.get('/carpenter/specs/:specs', async (req, res) => {
+            const specs = req.params.specs;
+            let finalSpecs;
+
+            // try with the passed specs
+            if (allSpecs[specs]) {
+                finalSpecs = allSpecs[specs];
+            }
+
+            // try by adding the name at the end
+            if (!finalSpecs) {
+                const longSpecs = `${specs}.${specs.split('.').pop()}`;
+                finalSpecs = allSpecs[longSpecs];
+            }
+
+            if (finalSpecs) {
+                delete finalSpecs.metas;
+            }
             res.type('application/json');
-            res.send({
-                frontspec: frontspecJson,
-                ...specs,
-            });
+            res.send(finalSpecs ?? {});
         });
 
         expressServer.get('/carpenter.css', async (req, res) => {
@@ -263,12 +265,14 @@ class SCarpenter extends __SClass {
             res.sendFile(jsFilePath);
         });
 
+        expressServer.delete('/carpenter/:uid', (req, res) => {});
+
         ['get', 'post'].forEach((method) => {
-            expressServer[method]('/carpenter/:dotpath', (req, res) => {
+            expressServer[method]('/carpenter/:specs', (req, res) => {
                 __carpenterViewHandler({
                     req,
                     res,
-                    specs,
+                    specs: allSpecs,
                     // params: finalParams,
                 });
             });

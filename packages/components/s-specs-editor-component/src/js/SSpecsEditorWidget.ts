@@ -14,6 +14,7 @@ import { html } from 'lit';
 
 export interface ISSpeceEditorWidgetStatus {
     pristine: boolean;
+    unsaved: boolean;
 }
 
 export interface ISSpecsEditorWidgetInlineLabel {
@@ -59,6 +60,7 @@ export default class SSpecsEditorWidget {
     settings: ISSpecsEditorWidgetSettings;
     status: ISSpeceEditorWidgetStatus = {
         pristine: true,
+        unsaved: false,
     };
 
     _overrided;
@@ -113,6 +115,11 @@ export default class SSpecsEditorWidget {
 
     get noneResponsiveValue(): any {
         return this._values ?? {};
+    }
+
+    saved(): void {
+        _console.log('saved');
+        this.status.unsaved = false;
     }
 
     resetValue(): void {
@@ -182,6 +189,7 @@ export default class SSpecsEditorWidget {
 
         // not so much pristine...
         this.status.pristine = false;
+        this.status.unsaved = true;
 
         const sourceValues = finalSettings.noneResponsive
             ? this._values
@@ -296,6 +304,10 @@ export default class SSpecsEditorWidget {
 
     validate(values: any): ISSpecsEditorWidgetValidateResult {
         return {};
+    }
+
+    hasUnsavedChanges(): boolean {
+        return !this.status.pristine && this.status.unsaved;
     }
 
     hasValuesForMedia(media: string): boolean {

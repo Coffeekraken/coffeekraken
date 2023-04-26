@@ -1,6 +1,6 @@
 export default {
-    // type: 'page',
-    // page: 'my-page',
+    type: 'page',
+    page: 'my-page',
 
     views: [
         'sections.heading.heading',

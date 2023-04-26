@@ -335,8 +335,10 @@ class SViewRenderer extends __SClass implements ISViewRenderer {
                     if (potentialPath.match(/\.data\.[a-zA-Z0-9]+/)) {
                         continue;
                     }
-                    finalViewPath = potentialPath;
-                    break;
+                    if (__fs.existsSync(potentialPath)) {
+                        finalViewPath = potentialPath;
+                        break;
+                    }
                 }
             } else {
                 // try to add the name of the view again like
@@ -350,8 +352,10 @@ class SViewRenderer extends __SClass implements ISViewRenderer {
                         if (potentialPath.match(/\.data\.[a-zA-Z0-9]+/)) {
                             continue;
                         }
-                        finalViewPath = potentialPath;
-                        break;
+                        if (__fs.existsSync(potentialPath)) {
+                            finalViewPath = potentialPath;
+                            break;
+                        }
                     }
                 }
             }
@@ -448,7 +452,7 @@ class SViewRenderer extends __SClass implements ISViewRenderer {
         settings?: Partial<ISViewRendererSettings>,
     ): Promise<ISViewRendererRenderResult> {
         return new Promise(async (resolve, reject) => {
-            let finalViewPath, finalViewRelPath;
+            let finalViewPath;
 
             // ensure all is loaded
             await this._load();
@@ -459,13 +463,8 @@ class SViewRenderer extends __SClass implements ISViewRenderer {
             if (__fs.existsSync(viewDotPath)) {
                 // absolute view path
                 finalViewPath = viewDotPath;
-                finalViewRelPath = __path.basename(viewDotPath);
-                // finalViewRelPath = viewDotPath.replace(
-                //     `${__packageRootDir()}/`,
-                //     '',
-                // );
                 // add a rootDir to handle absolute path
-                this.settings.rootDirs.unshift(__path.dirname(viewDotPath));
+                this.settings.rootDirs.unshift(__path.dirname(finalViewPath));
             }
 
             // ensure viewDotPath is a dotPath and not something line path/my/view.twig
@@ -494,14 +493,8 @@ class SViewRenderer extends __SClass implements ISViewRenderer {
                 finalViewPath = this._getFinalViewPath(viewDotPath);
             }
 
-            if (!__fs.existsSync(finalViewPath)) {
-                return reject(
-                    `It seems that the view you passed "<cyan>${finalViewPath}</cyan>" does not exists...`,
-                );
-            }
-
             // make sure the view has been found
-            if (!finalViewPath) {
+            if (!__fs.existsSync(finalViewPath)) {
                 throw new Error(
                     `<red>[SViewRenderer]</red> Sorry but the requested view "<cyan>${viewDotPath}</cyan>" does not exists in any of these folders:\n${this.settings.rootDirs
                         .map((dir) => `- <cyan>${dir}</cyan>`)
@@ -555,14 +548,22 @@ class SViewRenderer extends __SClass implements ISViewRenderer {
                     {},
             );
 
+            let finalViewRelPath = finalViewPath;
+            __unique([...viewRendererSettings.rootDirs]).forEach((path) => {
+                finalViewRelPath = finalViewRelPath.replace(`${path}/`, '');
+            });
+
             const rendererInstance = new RendererEngineClass(engineSettings);
             let renderPromise, result, error;
-            renderPromise = rendererInstance.render(
-                finalViewRelPath ?? viewDotPath,
-                Object.assign({}, data),
-                this._sharedDataFilePath,
+
+            renderPromise = rendererInstance.render({
+                viewDotPath,
+                viewPath: finalViewPath,
+                viewRelPath: finalViewRelPath,
+                data: Object.assign({}, data),
+                sharedDataFilePath: this._sharedDataFilePath,
                 viewRendererSettings,
-            );
+            });
             result = await renderPromise;
 
             // stringify js errors

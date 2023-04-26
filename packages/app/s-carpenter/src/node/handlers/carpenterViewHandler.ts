@@ -4,7 +4,6 @@ import __SSpecs from '@coffeekraken/s-specs';
 import __SViewRenderer from '@coffeekraken/s-view-renderer';
 import { __deepMerge } from '@coffeekraken/sugar/object';
 import { __serverObjectFromExpressRequest } from '@coffeekraken/sugar/php';
-import { __uniqid } from '@coffeekraken/sugar/string';
 
 export interface ICarpenterViewHandlerViewData {
     $specs?: any;
@@ -12,27 +11,27 @@ export interface ICarpenterViewHandlerViewData {
     [key: string]: any;
 }
 
-export default async function carpenterViewHandler({
-    req,
-    res,
-    specs,
-    // params,
-}) {
+export default async function carpenterViewHandler({ req, res }) {
     const bench = new __SBench('data.carpenterViewHandler');
 
     bench.step('beforeSpecsRead');
 
+    // // handle DELETE
+    // if (req.method === 'DELETE') {
+
+    // }
+
     // load current component/section/... specs
     const specsInstance = new __SSpecs();
-    const currentSpecs = await specsInstance.read(req.params.dotpath);
+    const currentSpecs = await specsInstance.read(req.params.specs);
     if (!currentSpecs) {
         return res.send(
-            `The requested spec "${req.params.dotpath}" does not exists...`,
+            `The requested spec "${req.params.specs}" does not exists...`,
         );
     }
 
     let viewPath =
-            currentSpecs.viewPath ?? req.params.dotpath.replace(/^views\./, ''),
+            currentSpecs.viewPath ?? req.params.specs.replace(/^views\./, ''),
         viewData: ICarpenterViewHandlerViewData = {};
     const defaults = __SSpecs.extractDefaults(currentSpecs);
 
@@ -40,20 +39,22 @@ export default async function carpenterViewHandler({
     // meaning that it's a component update
     // with some component data passed.
     // we use these instead of the default ones
-    if (req.method === 'POST' && req.body && Object.keys(req.body).length > 0) {
-        viewData = req.body;
+    if (
+        req.method === 'POST' &&
+        Object.keys(req.body?.values ?? {}).length > 0
+    ) {
+        viewData = req.body.values;
     } else if (req.method === 'POST') {
         // new component
         viewData = defaults;
-        viewData.uid = __uniqid();
     } else {
         // load the actual view values
         const data = await __SDataFileGeneric.load(currentSpecs.metas.path);
         viewData = __deepMerge(defaults, data);
     }
 
-    // set the $specs in the view data
-    viewData.$specs = currentSpecs;
+    // set the uid in the data
+    viewData.uid = req.body.uid;
 
     // load the "...Source.data.js" data file to simulate a source
     // in the editor
@@ -90,7 +91,6 @@ export default async function carpenterViewHandler({
         const layoutPromise = renderer.render(layoutPath, {
             $_SERVER: __serverObjectFromExpressRequest(req),
             ...(res.templateData ?? {}),
-            carpenter: specs,
             body: currentViewResult.value,
         });
         const layoutRes = await layoutPromise;

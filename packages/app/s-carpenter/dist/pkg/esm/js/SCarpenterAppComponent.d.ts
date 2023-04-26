@@ -1,4 +1,6 @@
 import __SLitComponent from '@coffeekraken/s-lit-component';
+import __SCarpenterAdapter from './SCarpenterAdapter';
+import __SCarpenterElement from './SCarpenterElement';
 import type { ISSpecsEditorComponentSource } from '@coffeekraken/s-specs-editor-component';
 import __define from './defineApp';
 export interface ISCarpenterAppComponentIconsProp {
@@ -16,7 +18,7 @@ export interface ISCarpenterAppComponentFeatures {
     media: boolean;
 }
 export interface ISCarpenterAppComponentAddComponent {
-    namespace: string;
+    specs: string;
     $after: HTMLElement;
 }
 export interface ISCarpenterAppComponentData {
@@ -51,15 +53,14 @@ export interface ISCarpenterComponentAdapterParams {
     component: SCarpenterAppComponent;
 }
 export interface ISCarpenterComponentAdapter {
-    getData($elm: HTMLElement): Promise<any>;
-    setValues(params: ISCarpenterComponentAdapterParams): Promise<HTMLElement>;
-    change(params: ISCarpenterComponentAdapterParams): Promise<HTMLElement>;
+    getData(): Promise<any>;
+    setValues(values: any): Promise<HTMLElement>;
 }
 export default class SCarpenterAppComponent extends __SLitComponent {
     static get properties(): any;
     static get styles(): import("lit").CSSResult;
-    static _registeredAdapters: Record<string, ISCarpenterComponentAdapter>;
-    static registerAdapter(id: string, adapter: ISCarpenterComponentAdapter): void;
+    static _registeredAdapters: Record<string, __SCarpenterAdapter>;
+    static registerAdapter(id: string, adapter: __SCarpenterAdapter): void;
     static state: {
         activeNavigationFolders: any[];
         activeMedia: any;
@@ -68,13 +69,15 @@ export default class SCarpenterAppComponent extends __SLitComponent {
         mode: string;
     };
     currentSpecs: any;
-    _$currentElm: any;
-    _$preselectedElm: any;
+    _currentElm: any;
+    _preselectedElm: any;
+    _elementsStack: Record<string, __SCarpenterElement>;
     _data: ISCarpenterAppComponentData;
     _websiteWindow: any;
     _$websiteDocument: any;
     _$websiteIframe: any;
     _$websiteViewport: any;
+    _$specsEditor: any;
     _$editor: any;
     _editorWindow: any;
     _$editorDocument: any;
@@ -83,8 +86,8 @@ export default class SCarpenterAppComponent extends __SLitComponent {
     _$carpenterComponent: any;
     _rootWindow: any;
     _$rootDocument: any;
-    _addingNew: boolean;
     _isSpecsEditorValid: boolean;
+    _media: any;
     constructor();
     mount(): Promise<void>;
     firstUpdated(): Promise<void>;
@@ -94,6 +97,8 @@ export default class SCarpenterAppComponent extends __SLitComponent {
     _registerShortcuts($scope: Document): void;
     
     _initWebsiteIframeContent(): void;
+    
+    _updateCarpenterElementsStack(): void;
     
     _preventExternalLinksBehaviors(): void;
     
@@ -107,6 +112,8 @@ export default class SCarpenterAppComponent extends __SLitComponent {
     _defineAddComponentFiltrableInput(): void;
     
     _setMode(mode: 'edit' | 'insert'): void;
+    
+    getElementFromDomNode($node: HTMLElement): __SCarpenterElement;
     
     _addComponent(specs: ISCarpenterAppComponentAddComponent): Promise<void>;
     applyComponent(values?: any): Promise<void>;
@@ -127,9 +134,9 @@ export default class SCarpenterAppComponent extends __SLitComponent {
     
     _listenToolbarActions(): void;
     
-    _edit($elm?: HTMLElement): Promise<void>;
+    _edit(uid?: string): Promise<void>;
     
-    _setCurrentElement($elm: HTMLElement): void;
+    _setCurrentElement(uid: string): void;
     
     _setToolbarPosition($from: any): void;
     
@@ -141,8 +148,6 @@ export default class SCarpenterAppComponent extends __SLitComponent {
     _toggleNavigationFolder(folderId: any): void;
     
     _savePage(): Promise<void>;
-    
-    _saveComponent(data: any): Promise<void>;
     
     _getData(source: string | ISCarpenterAppComponentData): any;
     _carpenterLogo(): import("lit-html").TemplateResult<1>;

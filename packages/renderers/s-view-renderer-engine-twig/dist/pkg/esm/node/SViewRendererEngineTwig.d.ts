@@ -1,4 +1,3 @@
-import { ISViewRendererSettings } from '@coffeekraken/s-view-renderer';
 import __SViewRendererTwigEngineSettingsInterface from './interface/SViewRendererEngineTwigSettingsInterface';
 
 export interface ISViewRendererEngineTwigSettings {
@@ -9,5 +8,12 @@ export default class SViewRendererEngineTwig {
     static settingsInterface: typeof __SViewRendererTwigEngineSettingsInterface;
     settings: ISViewRendererEngineTwigSettings;
     constructor(settings?: Partial<ISViewRendererEngineTwigSettings>);
-    render(viewPath: string, data: any, sharedDataFilePath: string, viewRendererSettings: ISViewRendererSettings): any;
+    render({ viewDotPath, viewRelPath, viewPath, data, sharedDataFilePath, viewRendererSettings, }: {
+        viewDotPath: any;
+        viewRelPath: any;
+        viewPath: any;
+        data: any;
+        sharedDataFilePath: any;
+        viewRendererSettings: any;
+    }): any;
 }

@@ -7,22 +7,23 @@
     {% set layoutCssRes = __layoutCss(media ? media : '1', {
         selector: '#' ~ finalId ~ '-layout'
     }) %}
-    {% set layoutAreasCount = layoutCssRes.areas|length %}
-    {% set finalCells = [] %}
+    
+    {# {% set layoutAreasCount = layoutCssRes.areas|length %}
+    {% set finalNodes = [] %}
 
-    {% if layoutAreasCount < cells|length %}
-        {% for i, cell in cells %}
+    {% if layoutAreasCount < nodes|length %}
+        {% for i, node in nodes %}
             {% if i > layoutAreasCount - 1 %}
-                {% set finalCells = finalCells|merge({ (layoutAreasCount - 1): finalCells[layoutAreasCount - 1] ~ cell}) %}
+                {% set finalNodes = finalNodes|merge({ (layoutAreasCount - 1): finalNodes[layoutAreasCount - 1] ~ node}) %}
             {% else %}
-                {% set finalCells = finalCells|merge([cell]) %}
+                {% set finalNodes = finalNodes|merge([node]) %}
             {% endif %}
         {% endfor %}
     {% else %}
         {% for i in 0..(layoutAreasCount - 1) %}
-            {% set finalCells = finalCells|merge([cells[i]]) %}
+            {% set finalNodes = finalNodes|merge([nodes[i]]) %}
         {% endfor %}
-    {% endif %}
+    {% endif %} #}
 
     <style>
         {{ layoutCssRes.css|raw }}
@@ -33,16 +34,16 @@
         <div class="s-layout {{ gap ? 's-gap:' ~ gap : '' }}" id="{{ finalId }}-layout">
             {% if html %}
                 {{ html|raw }}
-            {% elseif finalCells %}
-                {% for cell in finalCells %}
+            {% elseif nodes %}
+                {% for node in nodes %}
                     <div s-carpenter-container="area-{{ loop.index }}">
-                        {% if cell %}
-                            {{ cell|raw }}
+                        {% if node %}
+                            {{ node|raw }}
                         {% endif %}
                     </div>
                 {% endfor %}
             {% else %}
-                <p>You MUST pass at least some "cells" or raw "html" for your layout...</p>
+                <p>You MUST pass at least some "nodes" or raw "html" for your layout...</p>
             {% endif %}        
         </div>
     {% if container %}

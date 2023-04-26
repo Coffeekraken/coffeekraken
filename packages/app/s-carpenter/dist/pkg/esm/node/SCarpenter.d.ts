@@ -25,6 +25,6 @@ declare class SCarpenter extends __SClass {
     
     start(params: Partial<ISCarpenterStartParams>): Promise<any>;
     
-    initOnExpressServer(expressServer: any, params?: Partial<ISCarpenterStartParams>): void;
+    initOnExpressServer(expressServer: any): Promise<void>;
 }
 export default SCarpenter;

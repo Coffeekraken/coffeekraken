@@ -4,7 +4,12 @@ import { __i18n } from '@coffeekraken/s-i18n';
 
 import { __moveItem } from '@coffeekraken/sugar/array';
 import { __isPlainObject } from '@coffeekraken/sugar/is';
-import { __delete, __get, __set } from '@coffeekraken/sugar/object';
+import {
+    __deepClean,
+    __delete,
+    __get,
+    __set,
+} from '@coffeekraken/sugar/object';
 
 import { __copy } from '@coffeekraken/sugar/clipboard';
 import { __addClassTimeout } from '@coffeekraken/sugar/dom';
@@ -20,7 +25,7 @@ import { __uniqid } from '@coffeekraken/sugar/string';
 
 import type { ISSpeceEditorWidgetSettings } from './SSpecsEditorWidget';
 
-import { __deepClean, __deepMerge } from '@coffeekraken/sugar/object';
+import { __deepMerge } from '@coffeekraken/sugar/object';
 import { __lowerFirst, __upperFirst } from '@coffeekraken/sugar/string';
 import { css, html, unsafeCSS } from 'lit';
 import { unsafeHTML } from 'lit/directives/unsafe-html.js';
@@ -88,6 +93,7 @@ export interface ISSpecsEditorComponentSetValueSettings {
 export interface ISSpecsEditorStatus {
     pristine: boolean;
     valid: boolean;
+    unsaved: boolean;
 }
 
 export interface ISSpecsEditorComponentIconsProp {
@@ -229,6 +235,7 @@ export default class SSpecsEditorComponent extends __SLitComponent {
     status: ISSpecsEditorStatus = {
         pristine: true,
         valid: true,
+        unsaved: false,
     };
 
     _isValid = true;
@@ -237,6 +244,28 @@ export default class SSpecsEditorComponent extends __SLitComponent {
     _values;
 
     _toggleStack: string[] = [];
+
+    /**
+     * @name            data
+     * @type            Object
+     * @get
+     *
+     * Get the current editor values
+     *
+     * @since       2.0.0
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    get data(): any {
+        const data = {
+            values: __deepClean(this._values, {
+                clone: true,
+            }),
+        };
+        return {
+            uid: this.props.uid,
+            values: data.values,
+        };
+    }
 
     constructor() {
         super(
@@ -303,6 +332,19 @@ export default class SSpecsEditorComponent extends __SLitComponent {
         return propObj.type.match(/\[\]$/) !== null;
     }
 
+    hasUnsavedChanges(): boolean {
+        let hasUnsaved = false;
+        for (let [dotpath, widget] of Object.entries(this._widgets)) {
+            if (hasUnsaved) {
+                break;
+            }
+            if (widget.hasUnsavedChanges()) {
+                hasUnsaved = true;
+            }
+        }
+        return hasUnsaved;
+    }
+
     hasErrors(): boolean {
         if (this.status.pristine) {
             return false;
@@ -310,6 +352,9 @@ export default class SSpecsEditorComponent extends __SLitComponent {
 
         let hasErrors = false;
         for (let [dotpath, widget] of Object.entries(this._widgets)) {
+            if (hasErrors) {
+                break;
+            }
             if (widget.hasErrors() && !widget.canBeOverride()) {
                 hasErrors = true;
             }
@@ -472,18 +517,9 @@ export default class SSpecsEditorComponent extends __SLitComponent {
     apply() {
         clearTimeout(this._applyTimeout);
         this._applyTimeout = setTimeout(() => {
-            const data = {
-                values: __deepClean(this._values, {
-                    clone: true,
-                }),
-            };
-
             this.utils.dispatchEvent('change', {
                 bubbles: true,
-                detail: {
-                    uid: this.props.uid,
-                    values: data.values,
-                },
+                detail: this.data,
             });
             this.requestUpdate();
         });
@@ -493,18 +529,9 @@ export default class SSpecsEditorComponent extends __SLitComponent {
      * Notify through an event that the editor is ready
      */
     _ready(): void {
-        const data = {
-            values: __deepClean(this._values, {
-                clone: true,
-            }),
-        };
-
         this.utils.dispatchEvent('ready', {
             bubbles: true,
-            detail: {
-                uid: this.props.uid,
-                values: data.values,
-            },
+            detail: this.data,
         });
     }
 
@@ -515,24 +542,20 @@ export default class SSpecsEditorComponent extends __SLitComponent {
     save(force: boolean = false): void {
         // no more pristine....
         this.status.pristine = false;
-        const data = {
-            values: __deepClean(this._values, {
-                clone: true,
-            }),
-        };
 
         // if (!force && this.hasErrors()) {
         //     return this.requestUpdate();
         // }
 
+        for (let [dotpath, widget] of Object.entries(this._widgets)) {
+            widget.saved();
+        }
+
         this.requestUpdate();
 
         this.utils.dispatchEvent('save', {
             bubbles: true,
-            detail: {
-                uid: this.props.uid,
-                values: data.values,
-            },
+            detail: this.data,
         });
     }
 
@@ -750,6 +773,18 @@ export default class SSpecsEditorComponent extends __SLitComponent {
                 this._isValid = true;
                 this.requestUpdate();
             }
+        }
+
+        if (this.hasUnsavedChanges()) {
+            this.classList.add('unsaved');
+            this.utils.dispatchEvent('unsaved', {
+                detail: {},
+            });
+        } else {
+            this.classList.remove('unsaved');
+            this.utils.dispatchEvent('unsaved', {
+                detail: {},
+            });
         }
 
         if (changedProperties.has('media')) {

@@ -3,8 +3,7 @@ export interface ICarpenterViewHandlerViewData {
     $source?: any;
     [key: string]: any;
 }
-export default function carpenterViewHandler({ req, res, specs, }: {
+export default function carpenterViewHandler({ req, res }: {
     req: any;
     res: any;
-    specs: any;
 }): Promise<any>;

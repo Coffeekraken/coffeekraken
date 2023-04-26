@@ -117,7 +117,6 @@ export default class SSpecsEditorComponentSelectWidget extends __SSpecsEditorWid
                           `
                         : ''}
                     ${this.propObj.options.map((option, i) => {
-                        _console.log(this.propObj.options, option);
                         return html`
                             <option
                                 id="${option.id ?? `option-${i}`}"

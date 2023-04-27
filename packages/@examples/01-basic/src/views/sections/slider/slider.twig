@@ -1,5 +1,5 @@
-<section {{ __id(id) }} s-specs="views.sections.slider" class="section-slider {{ __spacesClasses(spaces, frontspec) }}">
-    {{ __specsDataTemplate(_context)|raw }}
+<section {{ __id(id) }} class="section-slider {{ __spacesClasses(spaces, frontspec) }}">
+    {{ __nodeDataTemplate('views.sections.slider', _context)|raw }}
     
     <div class="s-container">
         <s-slider controls loop>

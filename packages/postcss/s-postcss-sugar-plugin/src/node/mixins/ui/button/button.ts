@@ -208,7 +208,7 @@ export default function ({
                       transition: sugar.theme(ui.button.transition);
                     }
 
-                    &:hover, &:focus {
+                    &:hover {
                       color: sugar.color(current, foreground) !important;
 
                       &:after {
@@ -224,7 +224,7 @@ export default function ({
                 border: sugar.color(current) solid sugar.theme(ui.button.borderWidth);
                 color: sugar.color(current) !important;
 
-                &:hover, &:focus {
+                &:hover {
                   background-color: sugar.color(current);
                   color: sugar.color(current, foreground) !important;
                 }
@@ -281,14 +281,20 @@ export default function ({
                   border: sugar.color(current, border) solid sugar.theme(ui.button.borderWidth);
                   color: sugar.color(current, foreground) !important;
 
-                  &:hover,
-                  &:focus,
-                  &:focus-within {
+                  &:hover {
                     background-color: sugar.color(current, --darken 6);
                     color: sugar.color(current, foreground) !important;
 
                     @sugar.theme(dark) {
                       background-color: sugar.color(current, --lighten 6);
+                    }
+                  }
+
+                  &:active {
+                    background-color: sugar.color(current, --darken 10);
+
+                    @sugar.theme(dark) {
+                      background-color: sugar.color(current, --lighten 10);
                     }
                   }
         `);

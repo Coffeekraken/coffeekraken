@@ -76,7 +76,8 @@
         }
     }
 }
-body:has([s-specs]:hover) .s-carpenter-website-toolbar,
+
+body:has(.s-carpenter-app_node.hover) .s-carpenter-website-toolbar,
 .s-carpenter-website-toolbar:hover {
     opacity: 1;
     pointer-events: all;

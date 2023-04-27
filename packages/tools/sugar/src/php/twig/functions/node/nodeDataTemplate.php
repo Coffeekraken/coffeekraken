@@ -1,21 +1,21 @@
 <?php
 
 /**
- * @name            specsDataTemplate
- * @namespace            php.twig.functions.specs
+ * @name            nodeDataTemplate
+ * @namespace            php.twig.functions.nodes
  * @type            Function
  * @platform        twig
  * @status          beta
  *
- * This function allows you to print the `<template s-specs-values>...</template>` template only if the $_ENV['S_SPECS_DATA'] is setted to true.
+ * This function allows you to print the `<template s-node="...">...</template>` template only if the $_ENV['S_NODES_DATA'] is setted to true.
  *
  * @param      {String}            $data              The data to print in the attribute. Can contain "values", "specs" and "source"
  * @return      {String}                                The `<template>` tag containing your data
  *
- * @snippet             __specsDataTemplate($1)
+ * @snippet             __nodeDataTemplate($1)
  *
  * @example         twig
- * {{ __specsDataTemplate(_context) }}
+ * {{ __nodeDataTemplate(_context) }}
  *
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -34,9 +34,9 @@ if (!function_exists('__sArrayFilterRecursive')) {
     }
 }
 
-return new \Twig\TwigFunction('__specsDataTemplate', function ($data) {
-    // check if the $_ENV['S_SPECS_DATA'] is set to true
-    if (!isset($_ENV['S_SPECS_DATA']) || $_ENV['S_SPECS_DATA'] == false) {
+return new \Twig\TwigFunction('__nodeDataTemplate', function ($specs, $data) {
+    // check if the $_ENV['S_NODES_DATA'] is set to true
+    if (!isset($_ENV['S_NODES_DATA']) || $_ENV['S_NODES_DATA'] == false) {
         return '';
     }
 
@@ -65,20 +65,24 @@ return new \Twig\TwigFunction('__specsDataTemplate', function ($data) {
     $uid = null;
     if (isset($data['uid'])) {
         $uid = $data['uid'];
-        $uidAttr = 'uid="' . $uid . '"';
         unset($data['uid']);
     }
 
     if ($uid == null) {
-        return '<!-- In order to print the s-specs-data, you MUST pass a "uid".. -->';
+        return '<!-- In order to print the s-node, you MUST pass a "uid".. -->';
     }
 
     // return ready to template JSON
-    return '<template ' .
-        $uidAttr .
-        ' s-specs-data>{
+    return '<template s-node="' .
+        $uid .
+        '" s-specs="' .
+        $specs .
+        '">{
         "uid": "' .
         $uid .
+        '",
+        "specs": "' .
+        $specs .
         '",
         "source": ' .
         json_encode($source, JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_QUOT) .

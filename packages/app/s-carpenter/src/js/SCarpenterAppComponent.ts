@@ -5,7 +5,7 @@ import __SCarpenterAjaxAdapter from './adapters/SCarpenterAjaxAdapter';
 
 import __SFrontspec from '@coffeekraken/s-frontspec';
 
-import __SCarpenterElement from './SCarpenterElement';
+import __SCarpenterNode from './SCarpenterNode';
 
 import { define as __SFiltrableInputComponent } from '@coffeekraken/s-filtrable-input-component';
 import { define as __sSpecsEditorComponentDefine } from '@coffeekraken/s-specs-editor-component';
@@ -77,7 +77,7 @@ export interface ISCarpenterComponentProps {
     nav: boolean;
     savePageUrl: string;
     escape: boolean;
-    pagesLink: string;
+    pagesUrl: string;
     iframe: boolean;
     frontspec: any;
     ghostSpecs: boolean;
@@ -163,10 +163,10 @@ export default class SCarpenterAppComponent extends __SLitComponent {
 
     currentSpecs = null;
 
-    _currentElm;
-    _preselectedElm;
+    _currentNode;
+    _preselectedNode;
 
-    _elementsStack: Record<string, __SCarpenterElement>;
+    _nodesStack: Record<string, __SCarpenterNode>;
 
     _data: ISCarpenterAppComponentData;
     // _cachedData: Record<string, ISCarpenterAppComponentData> = {};
@@ -321,12 +321,12 @@ export default class SCarpenterAppComponent extends __SLitComponent {
     }
 
     /**
-     * Init the containers marked by a "s-carpenter-container" attribute
+     * Init the containers marked by a "s-container" attribute
      * to allow adding new content into the page
      */
     _initWebsiteContainers(): void {
         __querySelectorLive(
-            '[s-carpenter-container]',
+            '[s-container]',
             ($elm) => {
                 const $container = document.createElement('div');
                 $container.classList.add(this.utils.cls('_website-container'));
@@ -365,9 +365,7 @@ export default class SCarpenterAppComponent extends __SLitComponent {
         );
 
         __querySelectorLive(
-            `[s-carpenter-container] > *:not(.${this.utils.cls(
-                '_website-container',
-            )})`,
+            `[s-container] > *:not(.${this.utils.cls('_website-container')})`,
             ($child) => {
                 const $container = $child.parentNode;
                 if (!$container._sCarpenterContainer) {
@@ -429,7 +427,7 @@ export default class SCarpenterAppComponent extends __SLitComponent {
      */
     _initWebsiteIframeContent() {
         // update the element stack
-        this._updateCarpenterElementsStack();
+        this._updateCarpenterNodesStack();
 
         // inject the scrollbat styling
         __injectStyle(
@@ -461,7 +459,7 @@ export default class SCarpenterAppComponent extends __SLitComponent {
         this._listenToolbarActions();
 
         // watch for hover on carpenter elements
-        this._watchHoverOnSpecElements();
+        this._watchHoverOnNodes();
 
         // prevent default links behaviors
         this._preventExternalLinksBehaviors();
@@ -507,24 +505,24 @@ export default class SCarpenterAppComponent extends __SLitComponent {
     /**
      * Update the element stack
      */
-    _updateCarpenterElementsStack() {
+    _updateCarpenterNodesStack() {
         // reset stack
-        this._elementsStack = {};
+        this._nodesStack = {};
 
         // search for elements
-        const $elms = this._$websiteDocument.querySelectorAll(
-            '[s-specs]:has(> [uid])',
-        );
+        const $nodes =
+            this._$websiteDocument.querySelectorAll('[s-node][s-specs]');
 
         // assign each element in the stack
-        Array.from($elms).forEach(($elm) => {
-            const uid = $elm.children[0].getAttribute('uid');
-            if ($elm._sCarpenterElement) {
-                this._elementsStack[uid] = $elm._sCarpenterElement;
+        Array.from($nodes).forEach(($node) => {
+            const $elm = $node.parentNode;
+            const uid = $node.getAttribute('s-node');
+            if ($elm._sCarpenterNode) {
+                this._nodesStack[uid] = $elm._sCarpenterNode;
                 return;
             }
-            $elm._sCarpenterElement = new __SCarpenterElement($elm, this);
-            this._elementsStack[uid] = $elm._sCarpenterElement;
+            $elm._sCarpenterNode = new __SCarpenterNode($node, this);
+            this._nodesStack[uid] = $elm._sCarpenterNode;
         });
     }
 
@@ -654,7 +652,7 @@ export default class SCarpenterAppComponent extends __SLitComponent {
                 this._$toolbar = null;
 
                 // reset state
-                this._preselectedElm = null;
+                this._preselectedNode = null;
 
                 // wait until iframe is ready
                 await __whenIframeReady(this._$websiteIframe);
@@ -676,19 +674,18 @@ export default class SCarpenterAppComponent extends __SLitComponent {
                 // init the interactivity in the website iframe
                 this._initWebsiteIframeContent();
 
-                // get the first element in the iframe
-                const $firstElm = this._$websiteDocument.querySelector(
-                    '[s-specs]:has(> [uid])',
-                );
-                if ($firstElm) {
-                    await this._setCurrentElement(
-                        $firstElm.children[0].getAttribute('uid'),
-                    );
-                }
-
                 // "auto-edit" property
                 if (this.props.autoEdit) {
-                    this._edit();
+                    // get the first element in the iframe
+                    const $firstNode =
+                        this._$websiteDocument.querySelector(
+                            '[s-node][s-specs]',
+                        );
+                    if ($firstNode) {
+                        const uid = $firstNode.getAttribute('s-node');
+                        await this._setCurrentNode(uid);
+                        this._edit();
+                    }
                 }
 
                 // show the iframe again (just to avoid weird visual effects...)
@@ -810,8 +807,8 @@ export default class SCarpenterAppComponent extends __SLitComponent {
     /**
      * Get the SCarpenterElement instance from a standard HTMLElement
      */
-    getElementFromDomNode($node: HTMLElement): __SCarpenterElement {
-        return this._elementsStack[$node.children[0].getAttribute('uid')];
+    getElementFromDomNode($node: HTMLElement): __SCarpenterNode {
+        return this._nodesStack[$node.children[0].getAttribute('s-node')];
     }
 
     /**
@@ -822,23 +819,23 @@ export default class SCarpenterAppComponent extends __SLitComponent {
     ): Promise<void> {
         const uid = __uniqid();
         const $newComponent = document.createElement('div');
-        $newComponent.setAttribute('s-specs', specs.specs);
-        $newComponent.setAttribute('is-new', 'true');
         $newComponent.innerHTML = `
-            <template uid="${uid}" s-specs-data>${JSON.stringify({
+        <template s-node="${uid}">${JSON.stringify({
             uid,
-            values: {},
             specs: specs.specs,
+            values: {},
         })}</template>
         `;
-        this._elementsStack[uid] = new __SCarpenterElement($newComponent, this);
+        const $node = $newComponent.querySelector('[s-node]');
+        $node.setAttribute('is-new', 'true');
+        this._nodesStack[uid] = new __SCarpenterNode($node, this);
         specs.$after.before($newComponent);
         await this.applyComponent();
         this._edit();
     }
 
     async applyComponent(values?: any): Promise<void> {
-        await this._currentElm.setValues(values);
+        await this._currentNode.setValues(values);
     }
 
     /**
@@ -853,7 +850,7 @@ export default class SCarpenterAppComponent extends __SLitComponent {
 
         // listen for save
         this.addEventListener('s-specs-editor.save', (e) => {
-            this._currentElm.save();
+            this._currentNode.save();
         });
 
         // listen for actual updated
@@ -871,11 +868,17 @@ export default class SCarpenterAppComponent extends __SLitComponent {
     /**
      * Watch hover on specs element to position the toolbar
      */
-    _watchHoverOnSpecElements() {
+    _watchHoverOnNodes() {
         __querySelectorLive(
-            `[s-specs]:has(> [uid])`,
-            ($elm) => {
-                $elm.addEventListener('pointerover', (e) => {
+            `[s-node][s-specs]`,
+            ($node) => {
+                // add node class
+                $node.parentNode.classList.add(this.utils.cls('_node'));
+
+                $node.parentNode.addEventListener('pointerover', (e) => {
+                    // add hover class
+                    e.currentTarget.classList.add('hover');
+
                     e.stopPropagation();
 
                     // position toolbar
@@ -884,12 +887,16 @@ export default class SCarpenterAppComponent extends __SLitComponent {
                     const element = this.getElementFromDomNode(e.currentTarget);
 
                     // do nothing more if already activated
-                    if (element.uid === this._preselectedElm?.uid) {
+                    if (element.uid === this._preselectedNode?.uid) {
                         return;
                     }
 
                     // set the "pre" activate element
-                    this._preselectedElm = element;
+                    this._preselectedNode = element;
+                });
+                $node.parentNode.addEventListener('pointerout', (e) => {
+                    // remove hover class
+                    e.currentTarget.classList.remove('hover');
                 });
             },
             {
@@ -1001,13 +1008,14 @@ export default class SCarpenterAppComponent extends __SLitComponent {
             }
             switch (action) {
                 case 'edit':
-                    this._edit(this._preselectedElm?.uid);
+                    document.activeElement?.blur?.();
+                    this._edit(this._preselectedNode?.uid);
                     break;
                 case 'save':
-                    this._preselectedElm?.save();
+                    this._preselectedNode?.save();
                     break;
                 case 'delete':
-                    this._preselectedElm?.delete();
+                    this._preselectedNode?.delete();
                     break;
             }
         });
@@ -1018,9 +1026,8 @@ export default class SCarpenterAppComponent extends __SLitComponent {
      */
     async _edit(uid?: string) {
         // set the current element
-        if (uid && uid !== this._currentElm.uid) {
-            _console.log('edit', uid);
-            await this._setCurrentElement(uid);
+        if (uid && uid !== this._currentNode?.uid) {
+            await this._setCurrentNode(uid);
         }
 
         // open the editor
@@ -1033,35 +1040,35 @@ export default class SCarpenterAppComponent extends __SLitComponent {
     /**
      * Activate the element when toolbar has been clicked
      */
-    async _setCurrentElement(uid: string): void {
+    async _setCurrentNode(uid: string): void {
         if (!uid) {
             throw new Error(
-                `<red>[SCarpenter]</red> Cannot call _setCurrentElement without any args...`,
+                `<red>[SCarpenter]</red> Cannot call _setCurrentNode without any args...`,
             );
         }
 
-        if (!this._elementsStack[uid]) {
+        if (!this._nodesStack[uid]) {
             throw new Error(
                 `<red>[SCarpenter]</red> The passed "${uid}" does not exists in the elements stacks...`,
             );
         }
 
         // do not activate 2 times the same element
-        if (this._currentElm?.uid === uid) {
+        if (this._currentNode?.uid === uid) {
             return;
         }
 
         // remove the preselected element
-        this._preselectedElm = null;
+        this._preselectedNode = null;
 
         // force UI to refresh
-        this._currentElm = null;
+        this._currentNode = null;
         this.requestUpdate();
         await __wait();
 
         // set the current element
-        this._currentElm = this._elementsStack[uid];
-        await this._currentElm.getData();
+        this._currentNode = this._nodesStack[uid];
+        await this._currentNode.getData();
         this.requestUpdate();
     }
 
@@ -1124,28 +1131,22 @@ export default class SCarpenterAppComponent extends __SLitComponent {
     /**
      * Change page with the dotpath
      */
-    async _changePage(
-        dotpath: string,
-        pushState: boolean = true,
-    ): Promise<void> {
+    async _changePage(specs: string, pushState: boolean = true): Promise<void> {
         // update the loading state
-        this.state.loadingStack[dotpath] = true;
+        this.state.loadingStack[specs] = true;
         this.state.isLoading = true;
 
         // change the iframe source
-        this._$websiteIframe.src = this.props.pagesLink.replace(
-            '%dotpath',
-            dotpath,
-        );
+        this._$websiteIframe.src = this.props.pagesUrl.replace('%specs', specs);
 
         // save arrival state
         if (pushState) {
             this._rootWindow.history.pushState(
                 {
-                    dotpath,
+                    specs,
                 },
                 document.title,
-                this.props.pagesLink.replace('%dotpath', dotpath),
+                this.props.pagesUrl.replace('%specs', specs),
             );
         }
 
@@ -1170,11 +1171,11 @@ export default class SCarpenterAppComponent extends __SLitComponent {
      * by respecting the ISPage interface available in the @specimen/types package.
      */
     async _savePage(): Promise<void> {
-        // go grab all the s-carpenter-container elements in the website
-        const $components = this._$websiteDocument.querySelectorAll(
-            '[s-carpenter-container], [s-specs]:has(> [uid])',
+        // go grab all the s-container elements in the website
+        const $nodes = this._$websiteDocument.querySelectorAll(
+            '[s-container], [s-node][s-specs]',
         );
-        if (!$components) {
+        if (!$nodes) {
             return;
         }
 
@@ -1185,22 +1186,24 @@ export default class SCarpenterAppComponent extends __SLitComponent {
             },
             flatData = {};
 
-        Array.from($components).forEach(($component) => {
+        Array.from($nodes).forEach(($node) => {
             const componentUid =
-                $component.getAttribute('s-carpenter-container') ??
-                $component.children[0].getAttribute('uid');
+                $node.getAttribute('s-container') ??
+                $node.getAttribute('s-node');
             flatData[componentUid] = {
                 uid: componentUid,
-                type: $component.hasAttribute('s-specs')
-                    ? 'component'
-                    : 'container',
+                type: $node.hasAttribute('s-container')
+                    ? 'container'
+                    : 'component',
             };
 
-            const $belong = __traverseUp($component, ($elm) => {
-                return (
-                    $elm.hasAttribute('s-specs') ||
-                    $elm.hasAttribute('s-carpenter-container')
-                );
+            const $belong = __traverseUp($node, ($elm) => {
+                if ($elm.hasAttribute('s-container')) {
+                    return true;
+                }
+                if ($elm.children[0]?.hasAttribute('s-node')) {
+                    return true;
+                }
             });
 
             // if not belong to any other components,
@@ -1214,11 +1217,11 @@ export default class SCarpenterAppComponent extends __SLitComponent {
             }
 
             const belongId =
-                $belong.getAttribute('s-carpenter-container') ??
-                $belong.children[0].getAttribute('uid');
+                $belong.getAttribute('s-container') ??
+                $belong.children[0].getAttribute('s-node');
             if (!belongId) {
                 throw new Error(
-                    '<red>[SCarpenter]</red> The component logged bellow does not have any "s-carpenter-container" id or any "id" attribute...',
+                    '<red>[SCarpenter]</red> The component logged bellow does not have any "s-container" id or any "id" attribute...',
                 );
             }
 
@@ -1327,6 +1330,8 @@ export default class SCarpenterAppComponent extends __SLitComponent {
     }
 
     render() {
+        _console.log(this._currentNode, this._currentNode?.isReady());
+
         return html`
             ${this.props.sidebar
                 ? html`
@@ -1472,7 +1477,7 @@ export default class SCarpenterAppComponent extends __SLitComponent {
                 : ''}
 
             <nav
-                class="${this.utils.cls('_editor')} ${this._currentElm
+                class="${this.utils.cls('_editor')} ${this._currentNode
                     ? 'active'
                     : ''}"
                 s-carpenter-ui
@@ -1480,16 +1485,16 @@ export default class SCarpenterAppComponent extends __SLitComponent {
                 ${!this.state.isLoading
                     ? html`
                           <div class="${this.utils.cls('_editor-wrapper')}">
-                              ${this._currentElm?.isReady()
+                              ${this._currentNode?.isReady()
                                   ? html`
                                         <s-specs-editor
-                                            uid="${this._currentElm.uid}"
+                                            uid="${this._currentNode.uid}"
                                             media="${this.state.activeMedia}"
                                             default-media="${this.props
                                                 .defaultMedia}"
-                                            .source=${this._currentElm.source}
-                                            .specs=${this._currentElm.specsObj}
-                                            .values=${this._currentElm.values}
+                                            .source=${this._currentNode.source}
+                                            .specs=${this._currentNode.specsObj}
+                                            .values=${this._currentNode.values}
                                             .frontspec=${this.props.frontspec ??
                                             {}}
                                             @s-specs-editor.error=${(e) => {

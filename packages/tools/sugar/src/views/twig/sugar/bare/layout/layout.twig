@@ -2,8 +2,8 @@
 {% if not id  %}
     {% set finalId = 's-layout-' ~ __uniqid() %}
 {% endif %}
-<div id="{{ finalId }}" s-specs="sugar.views.bare.layout" class="{{ attributes.class }} {{ __spacesClasses(spaces, frontspec) }}" {{ __attrs(attributes, ['class'])|raw }}>
-    {{ __specsDataTemplate(_context)|raw }}
+<div id="{{ finalId }}" class="{{ attributes.class }} {{ __spacesClasses(spaces, frontspec) }}" {{ __attrs(attributes, ['class'])|raw }}>
+    {{ __nodeDataTemplate('sugar.views.bare.layout', _context)|raw }}
     {% set layoutCssRes = __layoutCss(media ? media : '1', {
         selector: '#' ~ finalId ~ '-layout'
     }) %}

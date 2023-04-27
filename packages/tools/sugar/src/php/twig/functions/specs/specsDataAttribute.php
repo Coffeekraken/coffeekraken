@@ -7,7 +7,7 @@
  * @platform        twig
  * @status          beta
  *
- * This function allows you to print the `s-specs-data="{...}"` attribute only if the $_ENV['S_SPECS_DATA'] is setted to true.
+ * This function allows you to print the `s-specs-data="{...}"` attribute only if the $_ENV['S_NODES_DATA'] is setted to true.
  *
  * @param      {String}            $data              The values to print in the attribute
  * @return      {String}                                The `s-specs-values="{...}"` attribute containing your values
@@ -22,8 +22,8 @@
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 return new \Twig\TwigFunction('__specsDataAttribute', function ($data) {
-    // check if the $_ENV['S_SPECS_DATA'] is set to true
-    if (!isset($_ENV['S_SPECS_DATA']) || $_ENV['S_SPECS_DATA'] == false) {
+    // check if the $_ENV['S_NODES_DATA'] is set to true
+    if (!isset($_ENV['S_NODES_DATA']) || $_ENV['S_NODES_DATA'] == false) {
         return '';
     }
 

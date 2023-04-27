@@ -1,9 +1,9 @@
 import __SCarpenterAdapter from './SCarpenterAdapter';
 import __SCarpenterAppComponent from './SCarpenterAppComponent';
 
-export interface ISCarpenterElementSettings {}
+export interface ISCarpenterNodeSettings {}
 
-export interface ISCarpenterElementData {
+export interface ISCarpenterNodeData {
     uid: string;
     source: any;
     specs: string;
@@ -11,27 +11,31 @@ export interface ISCarpenterElementData {
     values: any;
 }
 
-export interface ISCarpenterElementStatus {
+export interface ISCarpenterNodeStatus {
     unsaved: boolean;
     ready: boolean;
 }
 
-export default class SCarpenterElement {
-    $elm: HTMLElement;
+export default class SCarpenterNode {
+    $node: HTMLElement;
     carpenter: __SCarpenterAppComponent;
-    settings: ISCarpenterElementSettings;
+    settings: ISCarpenterNodeSettings;
 
-    _status: ISCarpenterElementStatus = {
+    _status: ISCarpenterNodeStatus = {
         ready: false,
         unsaved: false,
     };
+
+    get $elm(): HTMLElement {
+        return this.$node.parentElement;
+    }
 
     _uid: string;
     get uid(): string {
         if (this._uid) {
             return this._uid;
         }
-        this._uid = this.$elm.children[0].getAttribute('uid');
+        this._uid = this.$node.getAttribute('s-node');
         return this._uid;
     }
 
@@ -62,7 +66,7 @@ export default class SCarpenterElement {
     }
 
     get specs(): string {
-        return this.$elm.getAttribute('s-specs');
+        return this.$node.getAttribute('s-specs');
     }
 
     _specsObj: any;
@@ -81,19 +85,19 @@ export default class SCarpenterElement {
     }
 
     constructor(
-        $elm: HTMLElement,
+        $node: HTMLTemplateElement,
         carpenter: __SCarpenterAppComponent,
-        settings?: ISCarpenterElementSettings,
+        settings?: ISCarpenterNodeSettings,
     ) {
         this.settings = {
             ...(settings ?? {}),
         };
-        this.$elm = $elm;
+        this.$node = $node;
         this.carpenter = carpenter;
 
         // check if the element is a new one
-        if ($elm.hasAttribute('is-new')) {
-            $elm.removeAttribute('is-new');
+        if ($node.hasAttribute('is-new')) {
+            $node.removeAttribute('is-new');
             this.save();
         }
     }
@@ -123,7 +127,6 @@ export default class SCarpenterElement {
     async delete(): Promise<void> {
         const deletePromise = this.adapter.delete();
         deletePromise.then(() => {
-            _console.log('DELE');
             this.$elm.remove();
         });
         return deletePromise;
@@ -144,8 +147,8 @@ export default class SCarpenterElement {
         return savePromise;
     }
 
-    _data: ISCarpenterElementData;
-    async getData(): Promise<ISCarpenterElementData> {
+    _data: ISCarpenterNodeData;
+    async getData(): Promise<ISCarpenterNodeData> {
         // cache the data
         if (this._data) {
             return this._data;
@@ -182,13 +185,13 @@ export default class SCarpenterElement {
         // track the unsaved status
         this._status.unsaved = true;
         // set the new data through the adapter
-        const $newElm = await this.adapter.setData({
+        const $newNode = await this.adapter.setData({
             uid: this.uid,
             specs: this.specs,
             values,
         });
         // save the new element
-        this.$elm = $newElm;
+        this.$node = $newNode;
 
         // update the classes
         this._updateElementClasses();

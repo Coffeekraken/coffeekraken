@@ -1,6 +1,6 @@
 import __SLitComponent from '@coffeekraken/s-lit-component';
 import __SCarpenterAdapter from './SCarpenterAdapter';
-import __SCarpenterElement from './SCarpenterElement';
+import __SCarpenterNode from './SCarpenterNode';
 import type { ISSpecsEditorComponentSource } from '@coffeekraken/s-specs-editor-component';
 import __define from './defineApp';
 export interface ISCarpenterAppComponentIconsProp {
@@ -38,7 +38,7 @@ export interface ISCarpenterComponentProps {
     nav: boolean;
     savePageUrl: string;
     escape: boolean;
-    pagesLink: string;
+    pagesUrl: string;
     iframe: boolean;
     frontspec: any;
     ghostSpecs: boolean;
@@ -69,9 +69,9 @@ export default class SCarpenterAppComponent extends __SLitComponent {
         mode: string;
     };
     currentSpecs: any;
-    _currentElm: any;
-    _preselectedElm: any;
-    _elementsStack: Record<string, __SCarpenterElement>;
+    _currentNode: any;
+    _preselectedNode: any;
+    _nodesStack: Record<string, __SCarpenterNode>;
     _data: ISCarpenterAppComponentData;
     _websiteWindow: any;
     _$websiteDocument: any;
@@ -98,7 +98,7 @@ export default class SCarpenterAppComponent extends __SLitComponent {
     
     _initWebsiteIframeContent(): void;
     
-    _updateCarpenterElementsStack(): void;
+    _updateCarpenterNodesStack(): void;
     
     _preventExternalLinksBehaviors(): void;
     
@@ -113,14 +113,14 @@ export default class SCarpenterAppComponent extends __SLitComponent {
     
     _setMode(mode: 'edit' | 'insert'): void;
     
-    getElementFromDomNode($node: HTMLElement): __SCarpenterElement;
+    getElementFromDomNode($node: HTMLElement): __SCarpenterNode;
     
     _addComponent(specs: ISCarpenterAppComponentAddComponent): Promise<void>;
     applyComponent(values?: any): Promise<void>;
     
     _listenSpecsEditorEvents(): void;
     
-    _watchHoverOnSpecElements(): void;
+    _watchHoverOnNodes(): void;
     
     _handleScrolledClassOnEditor(): void;
     
@@ -136,7 +136,7 @@ export default class SCarpenterAppComponent extends __SLitComponent {
     
     _edit(uid?: string): Promise<void>;
     
-    _setCurrentElement(uid: string): void;
+    _setCurrentNode(uid: string): void;
     
     _setToolbarPosition($from: any): void;
     
@@ -144,7 +144,7 @@ export default class SCarpenterAppComponent extends __SLitComponent {
     
     _setViewportSize(): void;
     
-    _changePage(dotpath: string, pushState?: boolean): Promise<void>;
+    _changePage(specs: string, pushState?: boolean): Promise<void>;
     _toggleNavigationFolder(folderId: any): void;
     
     _savePage(): Promise<void>;

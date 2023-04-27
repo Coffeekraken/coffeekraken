@@ -1,5 +1,5 @@
-<section {{ __id(id) }} s-specs="views.sections.heading.heading" class="section-heading {{ __spacesClasses(spaces, frontspec) }}">
-    {{ __specsDataTemplate(_context)|raw }}
+<section {{ __id(id) }} class="section-heading {{ __spacesClasses(spaces, frontspec) }}">
+    {{ __nodeDataTemplate('views.sections.heading', _context)|raw }}
 
     <div class="_bkg">
         {# <video autoplay loop>

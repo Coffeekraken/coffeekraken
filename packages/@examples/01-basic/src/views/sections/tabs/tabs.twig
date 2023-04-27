@@ -1,5 +1,5 @@
-<section {{ __id(id) }} s-specs="views.sections.tabs" class="section-tabs {{ __spacesClasses(spaces, frontspec) }}">
-    {{ __specsDataTemplate(_context)|raw }}
+<section {{ __id(id) }} class="section-tabs {{ __spacesClasses(spaces, frontspec) }}">
+    {{ __nodeDataTemplate('views.sections.tabs', _context)|raw }}
     
     <div class="s-container">
         <div class="_layout">

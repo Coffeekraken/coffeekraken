@@ -69,7 +69,7 @@ export default class SCarpenterComponentInterface extends __SInterface {
             description: string;
             default: boolean;
         };
-        pagesLink: {
+        pagesUrl: {
             type: string;
             description: string;
             default: string;

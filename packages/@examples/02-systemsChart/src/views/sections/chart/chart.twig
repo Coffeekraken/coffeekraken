@@ -1,5 +1,5 @@
-<section class="section-chart {{ __spacesClasses(spaces, frontspec) }}" s-specs="views.sections.chart">
-    {{ __specsDataTemplate(_context)|raw }}
+<section class="section-chart {{ __spacesClasses(spaces, frontspec) }}">
+    {{ __nodeDataTemplate('views.sections.chart', _context)|raw }}
     <div class="_bkg">
         <img src="{{ bkg.url }}" />
     </div>

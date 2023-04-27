@@ -102,7 +102,7 @@ export default class SCarpenterComponentInterface extends __SInterface {
                     'Specify if you want the left sidebar to jump across all the components/sections/etc...',
                 default: false,
             },
-            pagesLink: {
+            pagesUrl: {
                 type: 'String',
                 description:
                     'Specify the link to use to change page. You have access to the %specs token that will be replaced by the actual component/section specs dotpath',

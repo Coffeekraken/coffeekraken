@@ -83,6 +83,10 @@ function registerFunctions($twig)
     $lodClasses = require __DIR__ . '/lod/lodClasses.php';
     $twig->addFunction($lodClasses);
 
+    // node
+    $nodeDataTemplate = require __DIR__ . '/node/nodeDataTemplate.php';
+    $twig->addFunction($nodeDataTemplate);
+
     // Object
     $deepDiff = require __DIR__ . '/object/deepDiff.php';
     $twig->addFunction($deepDiff);
@@ -113,9 +117,6 @@ function registerFunctions($twig)
 
     $specsDataAttribute = require __DIR__ . '/specs/specsDataAttribute.php';
     $twig->addFunction($specsDataAttribute);
-
-    $specsDataTemplate = require __DIR__ . '/specs/specsDataTemplate.php';
-    $twig->addFunction($specsDataTemplate);
 
     // String
     $idCompliant = require __DIR__ . '/string/idCompliant.php';

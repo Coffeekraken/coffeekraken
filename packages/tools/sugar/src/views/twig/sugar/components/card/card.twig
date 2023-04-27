@@ -1,7 +1,6 @@
-<div id="{{ id.value }}" s-specs="views.components.card"
-    class="s-card {{ attributes.class }} {{ direction.value ? 's-card--' ~ direction.value : '' }} {{ __spacesClasses(spaces, frontspec) }}" {{ __attrs(attributes, ['class'])|raw }}
+<div id="{{ id.value }}" class="s-card {{ attributes.class }} {{ direction.value ? 's-card--' ~ direction.value : '' }} {{ __spacesClasses(spaces, frontspec) }}" {{ __attrs(attributes, ['class'])|raw }}
 >
-{{ __specsDataTemplate(_context)|raw }}
+{{ __nodeDataTemplate('views.components.card', _context)|raw }}
 
     {% if image and image.url %}
         <div class="s-card_media s-media-container">

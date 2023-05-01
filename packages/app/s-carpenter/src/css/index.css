@@ -3,11 +3,14 @@
 @import './vars.css';
 
 @import './generic/carpenter-loader.css';
+@import './generic/dropdown-menu.css';
 @import './generic/s-fs-tree.css';
 
 @import './components/app.css';
 @import './components/controls.css';
+@import './components/ask.css';
 @import './components/editor.css';
+@import './components/error.css';
 @import './components/loading.css';
 @import './components/sidebar.css';
 
@@ -45,8 +48,13 @@ body {
     background: none !important;
 }
 
-.s-carpenter-app {
-    pointer-events: all;
+.s-carpenter_editor-bkg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: transparent;
 }
 
 @sugar.icon.classes (

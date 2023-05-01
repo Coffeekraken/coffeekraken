@@ -14,6 +14,8 @@ import __expressHttpProxy from 'express-http-proxy';
 
 import { __packageRootDir } from '@coffeekraken/sugar/path';
 
+import __carpenterNodesHandler from './handlers/carpenterNodesHandler';
+import __carpenterPagesHandler from './handlers/carpenterPagesHandler';
 import __carpenterViewHandler from './handlers/carpenterViewHandler';
 
 /**
@@ -230,7 +232,28 @@ class SCarpenter extends __SClass {
         // load the specs files
         const allSpecs = await this.loadSpecs();
 
-        expressServer.get('/carpenter/specs/:specs', async (req, res) => {
+        // Retrieve all the specs
+        expressServer.get('/carpenter/api/specs', async (req, res) => {
+            res.type('application/json');
+            res.send(allSpecs ?? {});
+        });
+
+        // retrieve the available scopes
+        expressServer.get('/carpenter/api/scopes', (req, res) => {
+            res.status(200);
+            res.type('application/json');
+            res.send(__SSugarConfig.get('carpenter.scopes'));
+        });
+
+        // retrieve the available categories
+        expressServer.get('/carpenter/api/categories', (req, res) => {
+            res.status(200);
+            res.type('application/json');
+            res.send(__SSugarConfig.get('carpenter.categories'));
+        });
+
+        // Retrieve a specific spec
+        expressServer.get('/carpenter/api/specs/:specs', async (req, res) => {
             const specs = req.params.specs;
             let finalSpecs;
 
@@ -265,16 +288,42 @@ class SCarpenter extends __SClass {
             res.sendFile(jsFilePath);
         });
 
-        expressServer.delete('/carpenter/:uid', (req, res) => {});
-
-        ['get', 'post'].forEach((method) => {
-            expressServer[method]('/carpenter/:specs', (req, res) => {
-                __carpenterViewHandler({
+        [
+            'put', // update a node HTML
+            'post', // save a node
+            'delete', // delete a node
+            'get', // get a node json
+        ].forEach((method) => {
+            expressServer[method]('/carpenter/api/nodes/:uid?', (req, res) => {
+                __carpenterNodesHandler({
                     req,
                     res,
-                    specs: allSpecs,
-                    // params: finalParams,
+                    allSpecs,
                 });
+            });
+        });
+
+        [
+            'put', // update a page HTML
+            'post', // save/create a page
+            'delete', // delete a page
+            'get', // get a page json
+        ].forEach((method) => {
+            expressServer[method]('/carpenter/api/pages/:uid?', (req, res) => {
+                __carpenterPagesHandler({
+                    req,
+                    res,
+                    allSpecs,
+                });
+            });
+        });
+
+        // render a default node
+        expressServer.get('/carpenter/:specs', (req, res) => {
+            __carpenterViewHandler({
+                req,
+                res,
+                allSpecs,
             });
         });
     }

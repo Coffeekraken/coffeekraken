@@ -1,4 +1,4 @@
-[s-carpenter-container] {
+[s-container] {
     position: relative;
 
     /* > *:not(.s-carpenter-app_website-container, svg):not(
@@ -31,7 +31,7 @@
             background: sugar.color(main, --alpha 0.1);
             @sugar.transition;
 
-            [s-carpenter-container] & {
+            [s-container] & {
                 width: 100%;
             }
         }
@@ -73,7 +73,7 @@
             background: sugar.color(main, --alpha 0.1);
             @sugar.transition;
 
-            [s-carpenter-container] & {
+            [s-container] & {
                 width: 100%;
             }
         }
@@ -138,13 +138,23 @@
             font-weight: bold;
             white-space: nowrap;
         }
+
+        ._title {
+            margin-block-end: sugar.margin(10);
+        }
+
+        ._description {
+            font-size: sugar.font.size(20);
+            opacity: 0.5;
+        }
+
         ._type {
             font-weight: initial;
         }
     }
 }
 
-.s-carpenter-app--edit [s-carpenter-container] {
+.s-carpenter-app--edit [s-container] {
     > *:not(.s-carpenter-app_website-container, svg):not(
             :has(+ .s-carpenter-app_website-container)
         ) {
@@ -167,7 +177,7 @@
     }
 }
 
-.s-carpenter-app--insert [s-carpenter-container] {
+.s-carpenter-app--insert [s-container] {
     > *:not(.s-carpenter-app_website-container, svg):not(
             :has(+ .s-carpenter-app_website-container)
         ) {

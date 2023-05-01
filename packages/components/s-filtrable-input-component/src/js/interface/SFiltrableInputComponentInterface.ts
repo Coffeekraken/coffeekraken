@@ -95,13 +95,13 @@ export default class SFiltrableInputComponentInterface extends __SInterface {
             },
             closeOnSelect: {
                 description:
-                    'Specify if you wantr to close the list when selecting an item',
+                    'Specify if you want to close the list when selecting an item. You can also specify in each item the "preventClose" property for a per item configuration',
                 type: 'Boolean',
-                default: false,
+                default: true,
             },
             resetOnSelect: {
                 description:
-                    'Specify if you want your filtrable input to be reseted on select',
+                    'Specify if you want your filtrable input to be reseted on select. You can also specify in each item the "preventReset" property for a per item configuration',
                 type: 'Boolean',
                 default: true,
             },

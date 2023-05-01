@@ -1,0 +1,12 @@
+.s-carpenter-app_ask {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    min-width: 450px;
+    padding: sugar.padding(40);
+    background: sugar.color(main, background);
+    @sugar.transition;
+    @sugar.border.radius;
+    @sugar.depth (100);
+}

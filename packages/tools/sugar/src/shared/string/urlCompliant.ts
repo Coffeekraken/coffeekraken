@@ -16,7 +16,7 @@ import __simplifySpecialChars from './simplifySpecialChars';
  * @return      {String}                        The processed string
  *
  * @snippet         __urlCompliant($1)
- * 
+ *
  * @example         php
  * import { __urlCompliant } from '@coffeekraken/sugar/string';
  * __urlCompliant('Hello world'); // => hello-world
@@ -39,7 +39,8 @@ export default function __urlCompliant(
     };
 
     // spaces
-    str = str.replace(' ', '-');
+    str = str.replace(/\s/gm, '-');
+
     // special characters
     str = __simplifySpecialChars(str);
     // replace characters like /, etc...
@@ -66,6 +67,9 @@ export default function __urlCompliant(
     str = str.replace(/^-{1,999}/gm, '');
     str = str.replace(/-{1,999}$/gm, '');
     str = str.replace(/-{2,999}/gm, '-');
+
+    // lowercase
+    str = str.toLowerCase();
 
     return str;
 }

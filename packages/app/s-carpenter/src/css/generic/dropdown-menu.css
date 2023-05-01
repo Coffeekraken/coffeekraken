@@ -1,0 +1,47 @@
+.dropup-menu,
+.dropdown-menu {
+    position: relative;
+
+    ._dropdown {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        background: sugar.color(main, background);
+        opacity: 0;
+        pointer-events: none;
+        @sugar.transition fast;
+        @sugar.border.radius();
+        @sugar.depth (100);
+    }
+
+    &:focus,
+    &:focus-within {
+        ._dropdown {
+            opacity: 1;
+            pointer-events: all;
+        }
+    }
+
+    ._menu {
+    }
+
+    ._menu-item {
+        padding: sugar.padding(20) sugar.padding(30);
+        white-space: nowrap;
+        @sugar.transition fast;
+
+        &:hover {
+            background: sugar.color(main, --alpha 0.1);
+        }
+        &:active {
+            background: sugar.color(main, --alpha 0.2);
+        }
+    }
+}
+
+.dropup-menu {
+    ._dropdown {
+        top: auto;
+        bottom: 100%;
+    }
+}

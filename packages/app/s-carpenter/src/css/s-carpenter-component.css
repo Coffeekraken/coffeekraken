@@ -46,7 +46,6 @@ body:has(.s-carpenter_body) {
 }
 
 .s-carpenter_website-iframe {
-    pointer-events: all;
     left: 50%;
     position: absolute;
     top: 0;
@@ -58,6 +57,7 @@ body:has(.s-carpenter_body) {
     @sugar.transition;
     @sugar.scrollbar (accent);
     @sugar.depth (100);
+    pointer-events: all;
 }
 
 .s-carpenter_ui-placeholders {

@@ -55,6 +55,10 @@
     }
 }
 
+.s-carpenter-app_menu {
+    @sugar.ui.button ($lnf: text);
+}
+
 .s-carpenter-app_queries {
     background: sugar.color(main, background) !important;
     border-bottom-left-radius: sugar.border.radius();

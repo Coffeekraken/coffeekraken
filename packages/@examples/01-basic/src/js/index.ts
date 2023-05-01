@@ -24,9 +24,15 @@ const viewsRelated = import.meta.globEager('../views/**/*.ts');
 (async () => {
     if (document.querySelector('s-carpenter')) {
         __sCarpenterComponentDefine({
-            savePageUrl: '/store',
-            saveComponentUrl: '/store',
-            deleteComponentUrl: '/store/%uid',
+            autoInit: true,
+            escape: true,
+            features: {
+                newPage: true,
+                savePage: true,
+                delete: true,
+                insert: true,
+                scopes: true,
+            },
         });
         return;
     }

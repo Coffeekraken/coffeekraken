@@ -3,6 +3,7 @@
 import __isClassInstance from '../is/isClassInstance';
 import __isPlainObject from '../is/isPlainObject';
 import __deepMerge from '../object/deepMerge';
+import __clone from './clone';
 
 /**
  * @name            deepMap
@@ -72,7 +73,7 @@ export default function __deepMap(
     let newObject = isArray
         ? []
         : settings.clone
-        ? Object.assign({}, objectOrArray)
+        ? __clone(objectOrArray, { deep: true })
         : objectOrArray;
 
     Object.keys(objectOrArray).forEach((prop) => {
@@ -84,10 +85,15 @@ export default function __deepMap(
                 settings.classInstances) ||
             (Array.isArray(objectOrArray[prop]) && settings.array)
         ) {
-            const res = __deepMap(objectOrArray[prop], processor, settings, [
-                ..._path,
-                prop,
-            ]);
+            const res = __deepMap(
+                objectOrArray[prop],
+                processor,
+                {
+                    ...settings,
+                    clone: false,
+                },
+                [..._path, prop],
+            );
 
             if (isArray) {
                 newObject.push(res);

@@ -17,6 +17,7 @@ import __isEsm from './isEsm';
 import __isEven from './isEven';
 import __isFunction from './isFunction';
 import __isGlob from './isGlob';
+import __isIdCompliant from './isIdCompliant';
 import __isImageUrl from './isImageUrl';
 import __isInteger from './isInteger';
 import __isIsoDate from './isIsoDate';
@@ -40,6 +41,7 @@ import __isString from './isString';
 import __isTerminal from './isTerminal';
 import __isTestEnv from './isTestEnv';
 import __isUrl from './isUrl';
+import __isUrlCompliant from './isUrlCompliant';
 import __isValidNumber from './isValidNumber';
 import __isWindows from './isWindows';
 import __isYyyymmddDate from './isYyyymmddDate';
@@ -64,6 +66,7 @@ export {
     __isEven,
     __isFunction,
     __isGlob,
+    __isIdCompliant,
     __isImageUrl,
     __isInteger,
     __isIsoDate,
@@ -87,6 +90,7 @@ export {
     __isTerminal,
     __isTestEnv,
     __isUrl,
+    __isUrlCompliant,
     __isWindows,
     __isYyyymmddDate,
     __isValidNumber,

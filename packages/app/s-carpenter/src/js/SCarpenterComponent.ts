@@ -138,6 +138,7 @@ export default class SCarpenterComponent extends __SLitComponent {
         // inject the current page content inside the iframe
         const iframeHtml = `
             <script type="module" defer src="${this.props.src}"></script>
+            <div class="s-carpenter_editor-bkg"></div>
             <s-carpenter-app id="${
                 this.props.id ?? 's-carpenter'
             }" save-state ${

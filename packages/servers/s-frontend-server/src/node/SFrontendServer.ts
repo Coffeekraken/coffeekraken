@@ -535,7 +535,7 @@ export default class SFrontendServer extends __SClass {
             const pagesFilesPaths: string[] = [];
             let _404PageFile;
 
-            const pool = __pool(`${pagesFolder}/**/*.{ts,js}`, {
+            const pool = __pool(`${pagesFolder}/**/*.{json,ts,js}`, {
                 cwd: pagesFolder,
                 watch: true,
             });
@@ -581,14 +581,21 @@ export default class SFrontendServer extends __SClass {
                     finalPagePath = buildedFileRes.path;
                 }
 
-                // @ts-ignore
-                const { default: pageConfig } = await import(
-                    `${finalPagePath}?${__uniqid()}`
-                );
-                if (!pageConfig) {
-                    throw new Error(
-                        `[frontendServer] Sorry but the given "<cyan>${finalPagePath}</cyan>" page file seems to be broken. Make sure to export the page config correctly from this file...`,
+                let pageConfig;
+
+                if (file.extension === 'json') {
+                    pageConfig = file.data;
+                } else {
+                    // @ts-ignore
+                    const { default: importedPageConfig } = await import(
+                        `${finalPagePath}?${__uniqid()}`
                     );
+                    if (!importedPageConfig) {
+                        throw new Error(
+                            `[frontendServer] Sorry but the given "<cyan>${finalPagePath}</cyan>" page file seems to be broken. Make sure to export the page config correctly from this file...`,
+                        );
+                    }
+                    pageConfig = importedPageConfig;
                 }
                 await this._registerPageConfig(pageConfig, file);
             });
@@ -638,6 +645,8 @@ export default class SFrontendServer extends __SClass {
             if (!Array.isArray(pageConfig)) {
                 pageConfig = [pageConfig];
             }
+
+            _console.log('ss', pageConfig);
 
             for (let pageConfigObj of pageConfig) {
                 let slug = '',

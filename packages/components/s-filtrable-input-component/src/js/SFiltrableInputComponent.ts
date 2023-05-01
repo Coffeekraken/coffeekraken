@@ -212,7 +212,7 @@ export default class SFiltrableInputComponent extends __SLitComponent {
                     }
                 }
             } else if (typeof this.props.items === 'function') {
-                this.state.items = await this.props.items();
+                this.state.items = await this.props.items({});
             } else {
                 this.state.items = this.props.items;
             }
@@ -508,21 +508,27 @@ export default class SFiltrableInputComponent extends __SLitComponent {
         const $selectedItem = this.$list.children[selectedItemItem];
 
         // dispatch an event
-        this.utils.dispatchEvent('select', {
-            detail: {
-                item: this.selectedItems[0],
-                items: this.selectedItems,
-                $elm: $selectedItem,
-            },
-        });
+        if (!item.preventSelect) {
+            this.utils.dispatchEvent('select', {
+                detail: {
+                    item: this.selectedItems[0],
+                    items: this.selectedItems,
+                    $elm: $selectedItem,
+                },
+            });
+        }
+
         // @ts-ignore
         this.state.searchValue = this.$input.value;
+
         // @ts-ignore
         this.requestUpdate();
+
         // close on select if needed
         if (this.props.closeOnSelect && !item.preventClose) {
             this.close();
         }
+
         // reset on select
         if (this.props.resetOnSelect && !item.preventReset) {
             this.reset();
@@ -614,27 +620,28 @@ export default class SFiltrableInputComponent extends __SLitComponent {
                     // check if the current propName is specified in the filtrable list
                     if (this.props.filtrable.indexOf(propName) !== -1) {
                         const reg = new RegExp(
-                            searchValue.split(' ').join('|'),
+                            `${searchValue}`.split(' ').join('|'),
                             'gi',
                         );
+
                         if (propValue.match(reg)) {
                             matchFilter = true;
-                            if (searchValue && searchValue !== '') {
-                                const reg = new RegExp(
-                                    searchValue.split(' ').join('|'),
-                                    'gi',
-                                );
-                                const finalString = propValue.replace(
-                                    reg,
-                                    (str) => {
-                                        return `<span class="${this.utils.cls(
-                                            '_list-item-highlight',
-                                        )} s-highlight"
-                                                    >${str}</span>`;
-                                    },
-                                );
-                                item[propName] = finalString;
-                            }
+                            // if (searchValue && searchValue !== '') {
+                            //     const reg = new RegExp(
+                            //         searchValue.split(' ').join('|'),
+                            //         'gi',
+                            //     );
+                            //     const finalString = propValue.replace(
+                            //         reg,
+                            //         (str) => {
+                            //             return `<span class="${this.utils.cls(
+                            //                 '_list-item-highlight',
+                            //             )} s-highlight"
+                            //                         >${str}</span>`;
+                            //         },
+                            //     );
+                            //     item[propName] = finalString;
+                            // }
                         }
                     }
                 }

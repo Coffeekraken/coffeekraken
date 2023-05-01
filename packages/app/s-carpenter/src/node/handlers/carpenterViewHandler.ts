@@ -16,11 +16,6 @@ export default async function carpenterViewHandler({ req, res }) {
 
     bench.step('beforeSpecsRead');
 
-    // // handle DELETE
-    // if (req.method === 'DELETE') {
-
-    // }
-
     // load current component/section/... specs
     const specsInstance = new __SSpecs();
     const currentSpecs = await specsInstance.read(req.params.specs);
@@ -35,23 +30,9 @@ export default async function carpenterViewHandler({ req, res }) {
         viewData: ICarpenterViewHandlerViewData = {};
     const defaults = __SSpecs.extractDefaults(currentSpecs);
 
-    // if the method is "POST",
-    // meaning that it's a component update
-    // with some component data passed.
-    // we use these instead of the default ones
-    if (
-        req.method === 'POST' &&
-        Object.keys(req.body?.values ?? {}).length > 0
-    ) {
-        viewData = req.body.values;
-    } else if (req.method === 'POST') {
-        // new component
-        viewData = defaults;
-    } else {
-        // load the actual view values
-        const data = await __SDataFileGeneric.load(currentSpecs.metas.path);
-        viewData = __deepMerge(defaults, data);
-    }
+    // load the actual view values
+    const data = await __SDataFileGeneric.load(currentSpecs.metas.path);
+    viewData = __deepMerge(defaults, data);
 
     // set the uid in the data
     viewData.uid = req.body.uid;
@@ -68,15 +49,6 @@ export default async function carpenterViewHandler({ req, res }) {
     });
 
     const currentViewResult = await renderer.render(viewPath, viewData);
-
-    // if the request if made with a POST method
-    // this mean that it's just a component update
-    // we don't need to render le layout, etc...
-    if (req.method === 'POST') {
-        res.status(200);
-        res.type('text/html');
-        return res.send(currentViewResult.value);
-    }
 
     const errors = {
         views: [],

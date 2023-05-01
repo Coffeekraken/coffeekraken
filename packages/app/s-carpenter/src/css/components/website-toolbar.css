@@ -34,6 +34,12 @@
         transform: skewX(-30deg);
     }
 
+    ._title {
+        font-weight: bold;
+        padding-inline: sugar.padding(20);
+        border-right: 1px solid sugar.color(main, border);
+    }
+
     button {
         padding-inline: sugar.padding(20);
         padding-block: sugar.padding(20);

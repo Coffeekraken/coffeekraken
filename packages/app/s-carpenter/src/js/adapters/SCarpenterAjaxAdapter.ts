@@ -12,10 +12,9 @@ export default class SCarpenterAjaxAdapter extends __SCarpenterAdapter {
 
     async delete(): Promise<any> {
         const response = await fetch(
-            this.carpenter.props.deleteComponentUrl.replace(
-                '%uid',
-                this.element.uid,
-            ),
+            this.carpenter.props.endpoints.nodes
+                .replace('%base', this.carpenter.props.endpoints.base)
+                .replace('%uid', this.element.uid),
             {
                 method: 'DELETE',
                 mode: 'cors',
@@ -64,7 +63,9 @@ export default class SCarpenterAjaxAdapter extends __SCarpenterAdapter {
         // specs object
         if (!data.specsObj) {
             const response = await fetch(
-                this.carpenter.props.specsObjUrl.replace(':specs', this.specs),
+                this.carpenter.props.endpoints.specs
+                    .replace('%base', this.carpenter.props.endpoints.base)
+                    .replace('%specs', this.specs),
                 {
                     method: 'GET',
                     mode: 'cors',
@@ -85,24 +86,31 @@ export default class SCarpenterAjaxAdapter extends __SCarpenterAdapter {
     }
 
     async save(data: ISRenderableNode): Promise<void> {
-        const response = await fetch(this.carpenter.props.saveComponentUrl, {
-            method: 'POST',
-            mode: 'cors',
-            cache: 'no-cache',
-            credentials: 'same-origin',
-            headers: {
-                'Content-Type': 'application/json',
+        const response = await fetch(
+            this.carpenter.props.endpoints.nodes
+                .replace('%base', this.carpenter.props.endpoints.base)
+                .replace('%uid', data.uid),
+            {
+                method: 'POST',
+                mode: 'cors',
+                cache: 'no-cache',
+                credentials: 'same-origin',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                referrerPolicy: 'no-referrer',
+                body: JSON.stringify(data),
             },
-            referrerPolicy: 'no-referrer',
-            body: JSON.stringify(data),
-        });
+        );
     }
 
     async setData(data): Promise<HTMLElement> {
         const rawResponse = await fetch(
-            this.carpenter.props.pagesUrl.replace('%specs', this.specs),
+            this.carpenter.props.endpoints.nodes
+                .replace('%base', this.carpenter.props.endpoints.base)
+                .replace('%uid', data.uid),
             {
-                method: 'POST',
+                method: 'PUT',
                 headers: {
                     Accept: 'application/json',
                     'Content-Type': 'application/json',
@@ -111,8 +119,8 @@ export default class SCarpenterAjaxAdapter extends __SCarpenterAdapter {
             },
         );
 
-        const responseHtml = await rawResponse.text();
-        const doc = new DOMParser().parseFromString(responseHtml, 'text/html'),
+        const response = await rawResponse.json();
+        const doc = new DOMParser().parseFromString(response.html, 'text/html'),
             // @ts-ignore
             $newComponent: HTMLElement = doc.body.firstChild,
             $newNode: HTMLTemplateElement =

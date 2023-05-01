@@ -34,29 +34,17 @@ export default class SCarpenterComponentInterface extends __SInterface {
             description: string;
             default: boolean;
         };
-        specsObjUrl: {
+        endpoints: {
             type: string;
             description: string;
-            default: string;
-            required: boolean;
-        };
-        saveComponentUrl: {
-            type: string;
-            description: string;
-            default: string;
-            required: boolean;
-        };
-        deleteComponentUrl: {
-            type: string;
-            description: string;
-            default: string;
-            required: boolean;
-        };
-        savePageUrl: {
-            type: string;
-            description: string;
-            default: string;
-            required: boolean;
+            default: {
+                base: string;
+                specs: string;
+                nodes: string;
+                pages: string;
+                scopes: string;
+                categories: string;
+            };
         };
         adapter: {
             type: string;
@@ -78,11 +66,13 @@ export default class SCarpenterComponentInterface extends __SInterface {
             type: string;
             description: string;
             default: {
+                scope: boolean;
                 insert: boolean;
                 edit: boolean;
                 delete: boolean;
                 move: boolean;
                 upload: boolean;
+                newPage: boolean;
                 savePage: boolean;
                 saveComponent: boolean;
                 media: boolean;
@@ -115,6 +105,18 @@ export default class SCarpenterComponentInterface extends __SInterface {
             type: string;
             description: string;
             default: {
+                scopeSelectorTitle: string;
+                scopeSelectorLabel: string;
+                scopeSelectorButton: string;
+                newPageTitle: string;
+                newPageNameLabel: string;
+                newPageNamePlaceholder: string;
+                newPageSlugLabel: string;
+                newPageSlugPlaceholder: string;
+                newPageUidLabel: string;
+                newPageUidPlaceholder: string;
+                newPageButton: string;
+                newPageUidError: string;
                 addComponent: string;
                 modeInsert: string;
                 modeEdit: string;
@@ -125,6 +127,7 @@ export default class SCarpenterComponentInterface extends __SInterface {
             type: string;
             description: string;
             default: {
+                menu: string;
                 component: string;
                 delete: string;
                 edit: string;

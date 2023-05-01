@@ -16,7 +16,7 @@ import __simplifySpecialChars from './simplifySpecialChars';
  * @return      {String}                        The processed string
  *
  * @snippet         __idCompliant($1)
- * 
+ *
  * @example         php
  * import { __idCompliant } from '@coffeekraken/sugar/string';
  * __idCompliant('Hello world'); // => hello-world
@@ -39,7 +39,7 @@ export default function __idCompliant(
     };
 
     // spaces
-    str = str.replace(' ', '-');
+    str = str.replace(/\s/gm, '-');
     // special characters
     str = __simplifySpecialChars(str);
     // replace characters like /, etc...

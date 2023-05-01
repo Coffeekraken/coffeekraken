@@ -3,6 +3,10 @@ import __SLitComponent from '@coffeekraken/s-lit-component';
 import __SCarpenterAdapter from './SCarpenterAdapter';
 import __SCarpenterAjaxAdapter from './adapters/SCarpenterAjaxAdapter';
 
+import { __whenRemoved } from '@coffeekraken/sugar/dom';
+
+import { __idCompliant, __urlCompliant } from '@coffeekraken/sugar/string';
+
 import __SFrontspec from '@coffeekraken/s-frontspec';
 
 import __SCarpenterNode from './SCarpenterNode';
@@ -68,6 +72,13 @@ export interface ISCarpenterAppComponentData {
     specsByTypes: Record<string, any>;
 }
 
+export interface ISCarpenterComponentEnpoints {
+    base: string;
+    specs: string;
+    nodes: string;
+    pages: string;
+}
+
 export interface ISCarpenterComponentProps {
     window: Window;
     features: ISCarpenterAppComponentFeatures;
@@ -75,7 +86,7 @@ export interface ISCarpenterComponentProps {
     data: ISCarpenterAppComponentData;
     viewportElm: HTMLElement;
     nav: boolean;
-    savePageUrl: string;
+    endpoints: ISCarpenterComponentEnpoints;
     escape: boolean;
     pagesUrl: string;
     iframe: boolean;
@@ -191,6 +202,9 @@ export default class SCarpenterAppComponent extends __SLitComponent {
 
     _isSpecsEditorValid = true;
 
+    _scopes;
+    _categories;
+    _specs;
     _media;
 
     constructor() {
@@ -227,13 +241,16 @@ export default class SCarpenterAppComponent extends __SLitComponent {
             },
         });
 
-        // get the data
-        // this._data = await this._getData(this.props.data);
-        // if (!this._data) {
-        //     throw new Error(
-        //         `[SCarpenter] Sorry but no valid specs have been specified...`,
-        //     );
-        // }
+        // if the "scopes" feature is enabled
+        if (this.props.features.scopes) {
+            await this._loadScopes();
+        }
+
+        // "categories"
+        await this._loadCategories();
+
+        // Specs (all the specs)
+        await this._loadSpecs();
 
         // active the default media if not set
         if (!this.state.activeMedia) {
@@ -258,6 +275,57 @@ export default class SCarpenterAppComponent extends __SLitComponent {
         // get the initial carpenter component
         this._$carpenterComponent =
             this._$rootDocument.querySelector('s-carpenter');
+    }
+
+    /**
+     * Load the scopes
+     */
+    async _loadScopes(): Promise<void> {
+        const response = await fetch(
+            this.props.endpoints.scopes.replace(
+                '%base',
+                this.props.endpoints.base,
+            ),
+            {
+                method: 'GET',
+            },
+        );
+        const scopes = await response.json();
+        this._scopes = scopes;
+    }
+
+    /**
+     * Load the scopes
+     */
+    async _loadSpecs(): Promise<void> {
+        const response = await fetch(
+            this.props.endpoints.specs
+                .replace('%base', this.props.endpoints.base)
+                .replace('/%specs', ''),
+            {
+                method: 'GET',
+            },
+        );
+        const specs = await response.json();
+        _console.log('specs', specs);
+        this._specs = specs;
+    }
+
+    /**
+     * Load the categories
+     */
+    async _loadCategories(): Promise<void> {
+        const response = await fetch(
+            this.props.endpoints.categories.replace(
+                '%base',
+                this.props.endpoints.base,
+            ),
+            {
+                method: 'GET',
+            },
+        );
+        const categories = await response.json();
+        this._categories = categories;
     }
 
     async firstUpdated() {
@@ -567,14 +635,15 @@ export default class SCarpenterAppComponent extends __SLitComponent {
                 this._$editorIframe.classList.add('active');
                 this._$uiPlaceholders.classList.remove('active');
             });
-            this.addEventListener('pointerout', (e) => {
-                if (!isActive) return;
-                isActive = false;
-                outTimeout = setTimeout(() => {
+
+            this._$editorDocument
+                .querySelector('.s-carpenter_editor-bkg')
+                .addEventListener('pointerover', (e) => {
+                    if (!isActive) return;
+                    isActive = false;
                     this._$editorIframe.classList.remove('active');
                     this._$uiPlaceholders.classList.add('active');
-                }, 100);
-            });
+                });
         }
 
         const $uis = this.querySelectorAll('[s-carpenter-ui]');
@@ -584,6 +653,9 @@ export default class SCarpenterAppComponent extends __SLitComponent {
                 $ui._placeholder = document.createElement('div');
                 $ui._placeholder.classList.add('s-carpenter_ui-placeholder');
                 this._$uiPlaceholders.appendChild($ui._placeholder);
+                __whenRemoved($ui).then(() => {
+                    $ui._placeholder?.remove?.();
+                });
             }
 
             // set position
@@ -727,22 +799,20 @@ export default class SCarpenterAppComponent extends __SLitComponent {
      */
     _defineAddComponentFiltrableInput() {
         const items: any[] = [];
-        // for (let [type, typesObj] of Object.entries(this._data.specsByTypes)) {
-        //     for (let [namespace, specs] of Object.entries(typesObj)) {
-        //         items.push({
-        //             name: specs.title,
-        //             type,
-        //             namespace,
-        //         });
-        //     }
-        // }
+        for (let [specs, specsObj] of Object.entries(this._specs ?? {})) {
+            items.push({
+                ...specsObj,
+                specs,
+            });
+        }
 
         __querySelectorLive(
             's-carpenter-app-add-component',
             ($elm) => {
                 $elm.addEventListener('s-filtrable-input.select', (e) => {
+                    _console.log('sss', e.detail);
                     this._addComponent({
-                        namespace: e.detail.item.namespace,
+                        specs: e.detail.item.specs,
                         $after: __traverseUp(e.target, ($elm) =>
                             $elm.classList.contains(
                                 's-carpenter-app_website-container',
@@ -758,28 +828,76 @@ export default class SCarpenterAppComponent extends __SLitComponent {
 
         __SFiltrableInputComponent(
             {
-                value: 'namespace',
+                value: 'specs',
                 placeholder: this.props.i18n.addComponent,
                 label(item) {
                     return item.name;
                 },
-                closeOnSelect: true,
-                resetOnSelect: true,
-                showKeywords: true,
-                filtrable: ['name', 'type'],
+                filtrable: ['title', 'type'],
                 templates: ({ type, item, html, unsafeHTML }) => {
                     if (type === 'item') {
-                        return html`
-                            <div class="_item">
-                                ${unsafeHTML(item.name)}
-                                <span class="_type" :
-                                    >(${unsafeHTML(item.type)})</span
-                                >
-                            </div>
-                        `;
+                        switch (item.type) {
+                            case 'category':
+                                return html`
+                                    <div class="_item _item-category">
+                                        <h3 class="_title">
+                                            ${unsafeHTML(item.title)}
+                                        </h3>
+                                        <p class="_description">
+                                            ${item.description}
+                                        </p>
+                                    </div>
+                                `;
+                                break;
+                            default:
+                                return html`
+                                    <div class="_item _item-component">
+                                        <h3 class="_title">
+                                            ${unsafeHTML(item.title)}
+                                        </h3>
+                                        <span class="_description"
+                                            >${unsafeHTML(
+                                                item.description,
+                                            )}</span
+                                        >
+                                    </div>
+                                `;
+                                break;
+                        }
                     }
                 },
-                items: async () => {
+                items: async ({ value }) => {
+                    if (!value) {
+                        const categoriesItems = [];
+                        for (let [id, categoryObj] of Object.entries(
+                            this._categories ?? {},
+                        )) {
+                            categoriesItems.push({
+                                title: categoryObj.name,
+                                description: categoryObj.description,
+                                type: 'category',
+                                value: `/${id}`,
+                                preventClose: true,
+                                preventReset: true,
+                                preventSelect: true,
+                                props: {
+                                    value: 'value',
+                                },
+                            });
+                        }
+
+                        return categoriesItems;
+                    }
+
+                    if (value.match(/^\/[a-zA-Z0-9]+/)) {
+                        const category = value.trim().replace(/^\//, '');
+                        let filteredItems = items.filter((item) => {
+                            if (!category) return true;
+                            return item.specs.includes(`.${category}.`);
+                        });
+                        return filteredItems;
+                    }
+
                     return items;
                 },
             },
@@ -820,7 +938,7 @@ export default class SCarpenterAppComponent extends __SLitComponent {
         const uid = __uniqid();
         const $newComponent = document.createElement('div');
         $newComponent.innerHTML = `
-        <template s-node="${uid}">${JSON.stringify({
+        <template s-node="${uid}" s-specs="${specs.specs}">${JSON.stringify({
             uid,
             specs: specs.specs,
             values: {},
@@ -830,6 +948,7 @@ export default class SCarpenterAppComponent extends __SLitComponent {
         $node.setAttribute('is-new', 'true');
         this._nodesStack[uid] = new __SCarpenterNode($node, this);
         specs.$after.before($newComponent);
+        await this._setCurrentNode(uid);
         await this.applyComponent();
         this._edit();
     }
@@ -881,15 +1000,18 @@ export default class SCarpenterAppComponent extends __SLitComponent {
 
                     e.stopPropagation();
 
-                    // position toolbar
-                    this._setToolbarPosition(e.currentTarget);
-
                     const element = this.getElementFromDomNode(e.currentTarget);
 
                     // do nothing more if already activated
                     if (element.uid === this._preselectedNode?.uid) {
                         return;
                     }
+
+                    // position toolbar
+                    this._setToolbarTitleAndPosition(
+                        e.currentTarget,
+                        __upperFirst(element.specs.split('.').pop()),
+                    );
 
                     // set the "pre" activate element
                     this._preselectedNode = element;
@@ -967,6 +1089,10 @@ export default class SCarpenterAppComponent extends __SLitComponent {
         this._$toolbar = $toolbar;
 
         const html: string[] = [];
+
+        html.push(`
+            <div class="_title"></div>
+        `);
 
         if (this.props.features?.saveComponent) {
             html.push(`
@@ -1060,22 +1186,25 @@ export default class SCarpenterAppComponent extends __SLitComponent {
 
         // remove the preselected element
         this._preselectedNode = null;
+        this._currentNode = null;
 
         // force UI to refresh
-        this._currentNode = null;
         this.requestUpdate();
         await __wait();
 
         // set the current element
         this._currentNode = this._nodesStack[uid];
-        await this._currentNode.getData();
+
+        _console.log('cu', uid, this._currentNode);
+
+        // await this._currentNode.getData();
         this.requestUpdate();
     }
 
     /**
      * Set the toolbar position
      */
-    _setToolbarPosition($from) {
+    _setToolbarTitleAndPosition($from: HTMLElement, title: string = ''): void {
         const targetRect = $from.getBoundingClientRect();
         this._$toolbar.style.top = `${
             targetRect.top + this._websiteWindow.scrollY
@@ -1097,6 +1226,9 @@ export default class SCarpenterAppComponent extends __SLitComponent {
         }
 
         left -= 50;
+
+        const $title = this._$toolbar.querySelector('._title');
+        $title.innerHTML = title;
 
         this._$toolbar.style.left = `${left}px`;
     }
@@ -1167,6 +1299,250 @@ export default class SCarpenterAppComponent extends __SLitComponent {
     }
 
     /**
+     * Render an error
+     */
+    _renderError(error: string): any {
+        return html`
+            <div class="${this.utils.cls('_error')}">
+                <p class="_text">${error}</p>
+            </div>
+        `;
+    }
+
+    /**
+     * Render the "scope selector"
+     */
+    _renderScopeSelector(callback?: Function): any {
+        let selectedScope = Object.keys(this._scopes)[0];
+        return html`
+            <div class="${this.utils.cls('_scope-selector')}">
+                <h1 class="s-typo:h1 s-mbe:30">
+                    ${this.props.i18n.scopeSelectorTitle}
+                </h1>
+
+                <label class="s-label:block s-mbe:30">
+                    <span>${this.props.i18n.scopeSelectorLabel}</span>
+                    <select
+                        class="s-select"
+                        @change=${(e) => {
+                            selectedScope = e.target.value;
+                        }}
+                    >
+                        ${Object.keys(this._scopes).map(
+                            (scope) => html`
+                                <option id="${scope}" value="${scope}">
+                                    ${this._scopes[scope].name} |
+                                    ${this._scopes[scope].description}
+                                </option>
+                            `,
+                        )}
+                    </select>
+                </label>
+                <label class="s-label">
+                    <span></span>
+                    <button
+                        class="s-btn s-color:accent"
+                        @pointerup=${(e) => {
+                            callback?.(selectedScope);
+                            this._askCallback?.(selectedScope);
+                        }}
+                    >
+                        ${this.props.i18n.scopeSelectorButton}
+                    </button>
+                </label>
+            </div>
+        `;
+    }
+
+    /**
+     * Render the "new page" form
+     */
+    _renderNewPageForm(callback?: Function): any {
+        return html`
+            <div class="${this.utils.cls('_page-name-form')}">
+                <h1 class="s-typo:h1 s-mbe:30">
+                    ${this.props.i18n.newPageTitle}
+                </h1>
+
+                <label class="s-label:block s-mbe:30">
+                    <span>${this.props.i18n.newPageNameLabel}</span>
+                    <input
+                        type="text"
+                        class="s-input"
+                        maxlength="50"
+                        required
+                        placeholder="${this.props.i18n.newPageNamePlaceholder}"
+                        @change=${(e) => {
+                            this._askData.name = e.target.value;
+                            this._askData.slug = `/${__urlCompliant(
+                                e.target.value,
+                            )}`;
+                            this._askData.uid = __idCompliant(
+                                this._askData.name,
+                            );
+                            this._askErrors = {};
+                            this.requestUpdate();
+                        }}
+                    />
+                    ${this._askErrors?.name
+                        ? html` ${this._renderError(this._askErrors.name)} `
+                        : ''}
+                </label>
+                <label class="s-label:block s-mbe:30">
+                    <span>${this.props.i18n.newPageSlugLabel}</span>
+                    <input
+                        type="text"
+                        class="s-input"
+                        maxlength="100"
+                        required
+                        .value=${this._askData.slug ?? ''}
+                        value="${this._askData.slug ?? ''}"
+                        placeholder="${this.props.i18n.newPageSlugPlaceholder}"
+                        @change=${(e) => {
+                            this._askData.slug = e.target.value;
+                            this._askData.slug = __urlCompliant(
+                                this._askData.slug,
+                            );
+                            delete this._askErrors.slug;
+                            this.requestUpdate();
+                        }}
+                    />
+                    ${this._askErrors?.slug
+                        ? html` ${this._renderError(this._askErrors.slug)} `
+                        : ''}
+                </label>
+                <label class="s-label:block s-mbe:30">
+                    <span>${this.props.i18n.newPageUidLabel}</span>
+                    <input
+                        type="text"
+                        class="s-input"
+                        maxlength="100"
+                        .value=${this._askData.uid ?? ''}
+                        value="${this._askData.uid ?? ''}"
+                        placeholder="${this.props.i18n.newPageUidPlaceholder}"
+                        @change=${(e) => {
+                            this._askData.uid = __idCompliant(e.target.value);
+                            delete this._askErrors.uid;
+                            this.requestUpdate();
+                        }}
+                    />
+                    ${this._askErrors?.uid
+                        ? html` ${this._renderError(this._askErrors.uid)} `
+                        : ''}
+                </label>
+                <label class="s-label">
+                    <span></span>
+                    <button
+                        class="s-btn s-color:accent"
+                        ?disabled=${!this._askData.name ||
+                        !this._askData.uid ||
+                        this._askErrors.name ||
+                        this._askErrors.uid}
+                        @pointerup=${async (e) => {
+                            const createResult = await this._createPage(
+                                this._askData,
+                            );
+
+                            if (createResult.error) {
+                                this._askErrors.uid = createResult.error;
+                                this.requestUpdate();
+                            } else {
+                                callback?.(this._askData);
+                                this._askCallback?.(this._askData);
+                            }
+                        }}
+                    >
+                        ${this.props.i18n.newPageButton}
+                    </button>
+                </label>
+            </div>
+        `;
+    }
+
+    async _createPage(pageMetas: any): Promise<any> {
+        // set loading state
+        this.state.isLoading = true;
+
+        // send the new page request
+        const response = await fetch(
+            this.props.endpoints.pages
+                .replace('%base', this.props.endpoints.base)
+                .replace('%uid', pageMetas.uid),
+            {
+                method: 'POST',
+                mode: 'cors',
+                cache: 'no-cache',
+                credentials: 'same-origin',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                referrerPolicy: 'no-referrer',
+                body: JSON.stringify({
+                    scope: pageMetas.scope,
+                    name: pageMetas.name,
+                    uid: pageMetas.uid,
+                    slug: pageMetas.slug,
+                }),
+            },
+        );
+        const result = await response.json();
+
+        // set loading state
+        this.state.isLoading = false;
+
+        return result;
+    }
+
+    /**
+     * This method allows you to ask for things like:
+     * - scope: A scope generali between user and repo
+     */
+    _askFor;
+    _askErrors: Record<string, string> = {};
+    _askData: any = {};
+    _askCallback;
+    _ask(what: 'scope' | 'pageMetas', initialData: any = {}): Promise<any> {
+        this._askErrors = {};
+        this._askData = initialData;
+        return new Promise(async (resolve, reject) => {
+            this._askFor = what;
+            this._askCallback = (result) => {
+                resolve(result);
+                this._askFor = undefined;
+                this._askErrors = {};
+                this._askData = {};
+                this.requestUpdate();
+            };
+            this.requestUpdate();
+            setTimeout(() => {
+                this._updateUiPlaceholders();
+            }, 50);
+        });
+    }
+
+    /**
+     * This method will create a new page
+     */
+    async newPage(): Promise<void> {
+        let scope;
+
+        // ask for the "scope" if the scope feature is enabled
+        if (
+            this.props.features.scopes &&
+            Object.keys(this._scopes ?? {}).length
+        ) {
+            // ask for the page scope
+            scope = await this._ask('scope');
+        }
+
+        const result = await this._ask('pageMetas', {
+            scope,
+        });
+
+        _console.log('COCO', result);
+    }
+
+    /**
      * This method takes all the content from the page and save it through the adapter(s)
      * by respecting the ISPage interface available in the @specimen/types package.
      */
@@ -1180,18 +1556,18 @@ export default class SCarpenterAppComponent extends __SLitComponent {
         }
 
         const data = {
-                id: 'my-page',
+                uid: 'my-page',
                 type: 'root',
                 nodes: {},
             },
             flatData = {};
 
         Array.from($nodes).forEach(($node) => {
-            const componentUid =
+            const nodeUid =
                 $node.getAttribute('s-container') ??
                 $node.getAttribute('s-node');
-            flatData[componentUid] = {
-                uid: componentUid,
+            flatData[nodeUid] = {
+                uid: nodeUid,
                 type: $node.hasAttribute('s-container')
                     ? 'container'
                     : 'component',
@@ -1212,7 +1588,7 @@ export default class SCarpenterAppComponent extends __SLitComponent {
                 if (!data.nodes) {
                     data.nodes = {};
                 }
-                data.nodes[componentUid] = flatData[componentUid];
+                data.nodes[nodeUid] = flatData[nodeUid];
                 return;
             }
 
@@ -1228,20 +1604,25 @@ export default class SCarpenterAppComponent extends __SLitComponent {
             if (!flatData[belongId].nodes) {
                 flatData[belongId].nodes = {};
             }
-            flatData[belongId].nodes[componentUid] = flatData[componentUid];
+            flatData[belongId].nodes[nodeUid] = flatData[nodeUid];
         });
 
-        const response = await fetch(this.props.savePageUrl, {
-            method: 'POST',
-            mode: 'cors',
-            cache: 'no-cache',
-            credentials: 'same-origin',
-            headers: {
-                'Content-Type': 'application/json',
+        const response = await fetch(
+            this.props.endpoints.pages
+                .replace('%base', this.props.endpoints.base)
+                .replace('%uid', data.uid),
+            {
+                method: 'POST',
+                mode: 'cors',
+                cache: 'no-cache',
+                credentials: 'same-origin',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                referrerPolicy: 'no-referrer',
+                body: JSON.stringify(data),
             },
-            referrerPolicy: 'no-referrer',
-            body: JSON.stringify(data),
-        });
+        );
     }
 
     /**
@@ -1521,12 +1902,36 @@ export default class SCarpenterAppComponent extends __SLitComponent {
                       `}
             </nav>
 
-            ${this.props.frontspec?.media?.queries
-                ? html`
-                      <nav
-                          class="${this.utils.cls('_controls')}"
-                          s-carpenter-ui
-                      >
+            <nav class="${this.utils.cls('_controls')}" s-carpenter-ui>
+                <div class="${this.utils.cls('_logo')}">
+                    ${unsafeHTML(this.props.logo)}
+                </div>
+
+                <div
+                    class="${this.utils.cls('_menu')} dropup-menu"
+                    tabindex="0"
+                >
+                    ${unsafeHTML(this.props.icons.menu)}
+                    <div class="_dropdown">
+                        <ol class="_menu">
+                            ${this.props.features.newPage
+                                ? html`
+                                      <li
+                                          class="_menu-item"
+                                          @pointerup=${(e) => {
+                                              this.newPage();
+                                          }}
+                                      >
+                                          New page
+                                      </li>
+                                  `
+                                : ''}
+                        </ol>
+                    </div>
+                </div>
+
+                ${this.props.frontspec?.media?.queries
+                    ? html`
                           <ul
                               class="${this.utils.cls(
                                   '_queries',
@@ -1556,62 +1961,50 @@ export default class SCarpenterAppComponent extends __SLitComponent {
                                       `;
                                   })}
                           </ul>
-
-                          ${this.props.features?.insert
-                              ? html`
-                                    <label class="_modes s-tooltip-container">
-                                        <span class="_edit">
-                                            ${unsafeHTML(
-                                                this.props.i18n.modeEdit,
-                                            )}
-                                        </span>
-                                        <input
-                                            type="checkbox"
-                                            class="_switch"
-                                            .checked=${this.state.mode ===
-                                            'insert'}
-                                            ?checked=${this.state.mode ===
-                                            'insert'}
-                                            @change=${(e) => {
-                                                this._setMode(
-                                                    e.target.checked
-                                                        ? 'insert'
-                                                        : 'edit',
-                                                );
-                                            }}
-                                        />
-                                        <span class="_insert">
-                                            ${unsafeHTML(
-                                                this.props.i18n.modeInsert,
-                                            )}
-                                        </span>
-                                        <div
-                                            class="s-tooltip s-color:accent s-white-space:nowrap"
-                                        >
-                                            ${unsafeHTML(
-                                                this.props.i18n.modeToggle,
-                                            )}
-                                        </div>
-                                    </label>
-                                `
-                              : ''}
-                          ${this.props.features?.savePage
-                              ? html`
-                                    <button
-                                        ?disabled=${!this._isSpecsEditorValid}
-                                        class="_save"
-                                        @click=${(e) => {
-                                            this._savePage();
-                                        }}
-                                    >
-                                        ${unsafeHTML(this.props.icons.save)}
-                                        Save page
-                                    </button>
-                                `
-                              : ''}
-                      </nav>
-                  `
-                : ''}
+                      `
+                    : ''}
+                ${this.props.features?.insert
+                    ? html`
+                          <label class="_modes s-tooltip-container">
+                              <span class="_edit">
+                                  ${unsafeHTML(this.props.i18n.modeEdit)}
+                              </span>
+                              <input
+                                  type="checkbox"
+                                  class="_switch"
+                                  .checked=${this.state.mode === 'insert'}
+                                  ?checked=${this.state.mode === 'insert'}
+                                  @change=${(e) => {
+                                      this._setMode(
+                                          e.target.checked ? 'insert' : 'edit',
+                                      );
+                                  }}
+                              />
+                              <span class="_insert">
+                                  ${unsafeHTML(this.props.i18n.modeInsert)}
+                              </span>
+                              <div
+                                  class="s-tooltip s-color:accent s-white-space:nowrap"
+                              >
+                                  ${unsafeHTML(this.props.i18n.modeToggle)}
+                              </div>
+                          </label>
+                      `
+                    : ''}
+                ${this.props.features?.savePage
+                    ? html`
+                          <button
+                              ?disabled=${!this._isSpecsEditorValid}
+                              class="_save"
+                              @click=${(e) => {
+                                  this._savePage();
+                              }}
+                          >
+                              ${unsafeHTML(this.props.icons.save)} Save page
+                          </button>
+                      `
+                    : ''}
+            </nav>
             ${this.state.isLoading
                 ? html`
                       <div class="${this.utils.cls('_loading')}">
@@ -1620,6 +2013,17 @@ export default class SCarpenterAppComponent extends __SLitComponent {
                               <div class="_block-2"></div>
                               <div class="_block-3"></div>
                           </div>
+                      </div>
+                  `
+                : ''}
+            ${this._askFor
+                ? html`
+                      <div class="${this.utils.cls('_ask')}" s-carpenter-ui>
+                          ${this._askFor === 'scope'
+                              ? html` ${this._renderScopeSelector()} `
+                              : this._askFor === 'pageMetas'
+                              ? html` ${this._renderNewPageForm()} `
+                              : ''}
                       </div>
                   `
                 : ''}

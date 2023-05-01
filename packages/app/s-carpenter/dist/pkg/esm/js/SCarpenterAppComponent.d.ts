@@ -29,6 +29,12 @@ export interface ISCarpenterAppComponentData {
     source?: ISSpecsEditorComponentSource;
     specsByTypes: Record<string, any>;
 }
+export interface ISCarpenterComponentEnpoints {
+    base: string;
+    specs: string;
+    nodes: string;
+    pages: string;
+}
 export interface ISCarpenterComponentProps {
     window: Window;
     features: ISCarpenterAppComponentFeatures;
@@ -36,7 +42,7 @@ export interface ISCarpenterComponentProps {
     data: ISCarpenterAppComponentData;
     viewportElm: HTMLElement;
     nav: boolean;
-    savePageUrl: string;
+    endpoints: ISCarpenterComponentEnpoints;
     escape: boolean;
     pagesUrl: string;
     iframe: boolean;
@@ -87,9 +93,18 @@ export default class SCarpenterAppComponent extends __SLitComponent {
     _rootWindow: any;
     _$rootDocument: any;
     _isSpecsEditorValid: boolean;
+    _scopes: any;
+    _categories: any;
+    _specs: any;
     _media: any;
     constructor();
     mount(): Promise<void>;
+    
+    _loadScopes(): Promise<void>;
+    
+    _loadSpecs(): Promise<void>;
+    
+    _loadCategories(): Promise<void>;
     firstUpdated(): Promise<void>;
     
     _initWebsiteContainers(): void;
@@ -138,7 +153,7 @@ export default class SCarpenterAppComponent extends __SLitComponent {
     
     _setCurrentNode(uid: string): void;
     
-    _setToolbarPosition($from: any): void;
+    _setToolbarTitleAndPosition($from: HTMLElement, title?: string): void;
     
     _activateMedia(media: any): void;
     
@@ -146,6 +161,21 @@ export default class SCarpenterAppComponent extends __SLitComponent {
     
     _changePage(specs: string, pushState?: boolean): Promise<void>;
     _toggleNavigationFolder(folderId: any): void;
+    
+    _renderError(error: string): any;
+    
+    _renderScopeSelector(callback?: Function): any;
+    
+    _renderNewPageForm(callback?: Function): any;
+    _createPage(pageMetas: any): Promise<any>;
+    
+    _askFor: any;
+    _askErrors: Record<string, string>;
+    _askData: any;
+    _askCallback: any;
+    _ask(what: 'scope' | 'pageMetas', initialData?: any): Promise<any>;
+    
+    newPage(): Promise<void>;
     
     _savePage(): Promise<void>;
     

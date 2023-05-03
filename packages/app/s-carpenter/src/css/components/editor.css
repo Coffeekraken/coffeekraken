@@ -12,7 +12,7 @@
     @sugar.depth (100);
     @sugar.transition();
 
-    .s-carpenter-app--open & {
+    body:not(.s-carpenter--preview).s-carpenter--open & {
         transform: translateX(0);
         opacity: 1;
         pointer-events: all;

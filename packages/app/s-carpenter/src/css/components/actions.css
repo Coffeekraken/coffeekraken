@@ -1,0 +1,16 @@
+.s-carpenter-app_actions {
+    position: absolute;
+    bottom: var(--s-carpenter-editor-bottom);
+    right: 50%;
+    transform: translateX(50%);
+
+    ._save {
+        @sugar.ui.button();
+        @sugar.color (complementary);
+        @sugar.depth (100);
+
+        i {
+            color: sugar.color(complementary, foreground);
+        }
+    }
+}

@@ -1,46 +1,42 @@
 @keyframes s-carpenter-app-controls-in {
     from {
         opacity: 0;
-        transform: translate(-50%, 200%);
+        transform: translate(-200%, 0);
     }
     to {
         opacity: 1;
-        transform: translate(-50%, 0);
+        transform: translate(0, 0);
     }
 }
 
 .s-carpenter-app_controls {
     position: absolute;
     z-index: 99999;
-    bottom: var(--s-carpenter-media-bottom);
-    left: var(--s-carpenter-media-left);
-    transform: translate(-50%, 200%);
+    left: var(--s-carpenter-media-bottom);
+    top: var(--s-carpenter-media-bottom);
+    width: 80px;
+    transform: translate(0, 0);
     display: flex;
+    flex-direction: column;
     align-items: center;
     gap: sugar.margin(30);
     background: sugar.color(main, background);
     padding: sugar.padding(20);
     opacity: 1;
     pointer-events: all;
-    animation: s-carpenter-app-controls-in 0.3s ease-out forwards;
-    /* @sugar.transition(); */
+    /* animation: s-carpenter-app-controls-in 0.3s ease-out forwards; */
+    @sugar.transition();
     @sugar.border.radius (30);
     @sugar.depth (100);
 
-    /* .s-carpenter-app--open & {
-        transform: translate(-50%, 0);
-        opacity: 1;
-        pointer-events: all !important;
-    } */
+    .s-carpenter--preview & {
+        transform: translate(-200%, 0);
+        opacity: 0;
+        pointer-events: none;
+    }
 
-    ._save {
-        @sugar.ui.button();
-        @sugar.color (complementary);
-        @sugar.depth (100);
-
-        i {
-            color: sugar.color(complementary, foreground);
-        }
+    ._logo {
+        width: 100%;
     }
 
     ._modes {
@@ -62,19 +58,33 @@
 .s-carpenter-app_queries {
     background: sugar.color(main, background) !important;
     border-bottom-left-radius: sugar.border.radius();
+    display: flex;
+    flex-direction: column;
+    width: 100%;
 
-    ._query i {
-        margin-inline-end: sugar.margin(10);
-    }
+    ._query {
+        aspect-ratio: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        @sugar.border.radius;
+        @sugar.transition fast;
 
-    /* .s-carpenter-app_query {
-        background: sugar.color(main, surface);
-        padding: sugar.padding(30) sugar.padding(40);
-        @sugar.transition (fast);
-
-        &:hover {
-            background: sugar.color(accent);
-            color: sugar.color(accent, foreground);
+        &:hover,
+        &.is-active {
+            i {
+                color: sugar.color(complementary, foreground);
+            }
         }
-    } */
+        &:hover {
+            background: sugar.color(complementary, hover);
+        }
+        &:active {
+            background: sugar.color(complementary, active);
+        }
+        &.is-active {
+            background: sugar.color(complementary);
+        }
+    }
 }

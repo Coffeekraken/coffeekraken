@@ -3,9 +3,10 @@
 @import './vars.css';
 
 @import './generic/carpenter-loader.css';
-@import './generic/dropdown-menu.css';
+@import './generic/drop-menu.css';
 @import './generic/s-fs-tree.css';
 
+@import './components/actions.css';
 @import './components/app.css';
 @import './components/controls.css';
 @import './components/ask.css';

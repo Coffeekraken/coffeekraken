@@ -466,19 +466,19 @@ export default class SCarpenterAppComponent extends __SLitComponent {
      */
     _registerShortcuts($scope: Document): void {
         // "§" key to hide the editor
-        let isEditorHided = false;
         $scope.addEventListener('keydown', (e) => {
-            if (isEditorHided) return;
-            if (!this.isEditorOpen()) return;
             if (e.key === '§') {
-                isEditorHided = true;
-                this._closeEditor();
+                this._$editorDocument?.body?.classList.add(
+                    's-carpenter--preview',
+                );
             }
         });
         $scope.addEventListener('keyup', (e) => {
-            if (!isEditorHided) return;
-            isEditorHided = false;
-            this._openEditor();
+            if (e.key === '§') {
+                this._$editorDocument?.body?.classList.remove(
+                    's-carpenter--preview',
+                );
+            }
         });
 
         // "ctrl+m" to change mode
@@ -1049,14 +1049,14 @@ export default class SCarpenterAppComponent extends __SLitComponent {
      * Check if editor is opened
      */
     isEditorOpen(): boolean {
-        return document.body.classList.contains('s-carpenter-app--open');
+        return document.body.classList.contains('s-carpenter--open');
     }
 
     /**
      * open the editor
      */
     _openEditor() {
-        document.body.classList.add('s-carpenter-app--open');
+        document.body.classList.add('s-carpenter--open');
         this._$editorIframe?.classList.add('s-carpenter--open');
         this._$rootDocument.body.classList.add('s-carpenter--open');
         setTimeout(() => {
@@ -1068,7 +1068,7 @@ export default class SCarpenterAppComponent extends __SLitComponent {
      * close the editor
      */
     _closeEditor() {
-        document.body.classList.remove('s-carpenter-app--open');
+        document.body.classList.remove('s-carpenter--open');
         this._$editorIframe?.classList.remove('s-carpenter--open');
         this._$rootDocument.body.classList.remove('s-carpenter--open');
         setTimeout(() => {
@@ -1908,11 +1908,11 @@ export default class SCarpenterAppComponent extends __SLitComponent {
                 </div>
 
                 <div
-                    class="${this.utils.cls('_menu')} dropup-menu"
+                    class="${this.utils.cls('_menu')} drop-menu:right"
                     tabindex="0"
                 >
                     ${unsafeHTML(this.props.icons.menu)}
-                    <div class="_dropdown">
+                    <div class="_drop">
                         <ol class="_menu">
                             ${this.props.features.newPage
                                 ? html`
@@ -1922,6 +1922,7 @@ export default class SCarpenterAppComponent extends __SLitComponent {
                                               this.newPage();
                                           }}
                                       >
+                                          ${unsafeHTML(this.props.icons.page)}
                                           New page
                                       </li>
                                   `
@@ -1932,43 +1933,33 @@ export default class SCarpenterAppComponent extends __SLitComponent {
 
                 ${this.props.frontspec?.media?.queries
                     ? html`
-                          <ul
-                              class="${this.utils.cls(
-                                  '_queries',
-                                  's-tabs',
-                                  's-bare',
-                              )}"
-                          >
+                          <ul class="${this.utils.cls('_queries')}">
                               ${Object.keys(
                                   this.props.frontspec?.media?.queries ?? {},
-                              )
-                                  .reverse()
-                                  .map((query) => {
-                                      return html`
-                                          <li
-                                              @pointerup=${() =>
-                                                  this._activateMedia(query)}
-                                              class="${query ===
-                                              this.state.activeMedia
-                                                  ? 'active'
-                                                  : ''} _query _item"
-                                          >
-                                              ${unsafeHTML(
-                                                  this.props.icons[query],
-                                              )}
+                              ).map((query) => {
+                                  return html`
+                                      <li
+                                          tabindex="0"
+                                          @pointerup=${() =>
+                                              this._activateMedia(query)}
+                                          class="s-tooltip-container ${query ===
+                                          this.state.activeMedia
+                                              ? 'is-active'
+                                              : ''} _query"
+                                      >
+                                          ${unsafeHTML(this.props.icons[query])}
+                                          <div class="s-tooltip:right">
                                               ${__upperFirst(query)}
-                                          </li>
-                                      `;
-                                  })}
+                                          </div>
+                                      </li>
+                                  `;
+                              })}
                           </ul>
                       `
                     : ''}
                 ${this.props.features?.insert
                     ? html`
                           <label class="_modes s-tooltip-container">
-                              <span class="_edit">
-                                  ${unsafeHTML(this.props.i18n.modeEdit)}
-                              </span>
                               <input
                                   type="checkbox"
                                   class="_switch"
@@ -1980,31 +1971,39 @@ export default class SCarpenterAppComponent extends __SLitComponent {
                                       );
                                   }}
                               />
-                              <span class="_insert">
+                              <!-- <span class="_insert">
                                   ${unsafeHTML(this.props.i18n.modeInsert)}
-                              </span>
-                              <div
+                              </span> -->
+                              <!-- <div
                                   class="s-tooltip s-color:accent s-white-space:nowrap"
                               >
                                   ${unsafeHTML(this.props.i18n.modeToggle)}
-                              </div>
+                              </div> -->
                           </label>
                       `
                     : ''}
-                ${this.props.features?.savePage
-                    ? html`
-                          <button
-                              ?disabled=${!this._isSpecsEditorValid}
-                              class="_save"
-                              @click=${(e) => {
-                                  this._savePage();
-                              }}
-                          >
-                              ${unsafeHTML(this.props.icons.save)} Save page
-                          </button>
-                      `
-                    : ''}
             </nav>
+
+            ${this.props.features?.savePage
+                ? html`
+                      <div class="${this.utils.cls('_actions')}">
+                          ${this.props.features?.savePage
+                              ? html`
+                                    <button
+                                        ?disabled=${!this._isSpecsEditorValid}
+                                        class="_save"
+                                        @click=${(e) => {
+                                            this._savePage();
+                                        }}
+                                    >
+                                        ${unsafeHTML(this.props.icons.save)}
+                                        Save page
+                                    </button>
+                                `
+                              : ''}
+                      </div>
+                  `
+                : ''}
             ${this.state.isLoading
                 ? html`
                       <div class="${this.utils.cls('_loading')}">

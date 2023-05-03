@@ -133,6 +133,7 @@ export default class SCarpenterComponentInterface extends __SInterface {
                 edit: string;
                 save: string;
                 add: string;
+                page: string;
                 mobile: string;
                 tablet: string;
                 desktop: string;

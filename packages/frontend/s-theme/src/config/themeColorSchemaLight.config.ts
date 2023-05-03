@@ -182,6 +182,34 @@ export default (api) => {
              */
             alpha: 0.2,
         },
+        hover: {
+            /**
+             * @name          lighten
+             * @namespace     config.themeColorSchemaDark.hover
+             * @type          Number
+             * @default      0.3
+             *
+             * Specify the lightness value for the "hover" color variant
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+             */
+            lighten: 40,
+        },
+        active: {
+            /**
+             * @name          darken
+             * @namespace     config.themeColorSchemaDark.active
+             * @type          Number
+             * @default      darken
+             *
+             * Specify the lightness value for the "active" color variant
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+             */
+            darken: 10,
+        },
         gradientStart: {
             /**
              * @name          lighten

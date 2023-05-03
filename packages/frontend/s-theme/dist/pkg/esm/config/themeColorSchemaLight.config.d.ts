@@ -68,6 +68,14 @@ declare const _default: (api: any) => {
         
         alpha: number;
     };
+    hover: {
+        
+        lighten: number;
+    };
+    active: {
+        
+        darken: number;
+    };
     gradientStart: {
         
         lighten: number;

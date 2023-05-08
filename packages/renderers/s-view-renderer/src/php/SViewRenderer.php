@@ -179,24 +179,16 @@ class SViewRenderer
         ) {
             $html = [];
 
-            foreach ($nodes as $uid => $node) {
+            foreach ($nodes as $idx => $node) {
                 if ($node->type == 'root') {
                     continue;
                 }
-
-                // add the "uid" as a node property
-                $node->uid = $uid;
 
                 $nodes = [];
                 if (isset($node->nodes)) {
                     foreach ($node->nodes as $i => $n) {
                         $nodes[$i] = $renderNodes([$i => $n], $renderNodes);
                     }
-                }
-
-                if ($node->type == 'container') {
-                    return implode(PHP_EOL, $nodes);
-                    continue;
                 }
 
                 // load the node data. See @specimen/specimen ISRenderableNode type
@@ -208,7 +200,7 @@ class SViewRenderer
                     array_push(
                         $html,
                         '<div class="s-carpenter-app_error">Your "' .
-                            $uid .
+                            $node->uid .
                             '" (' .
                             $node->type .
                             ') node does not have any data attached...</div>'
@@ -224,7 +216,7 @@ class SViewRenderer
                     array_merge_recursive(
                         [
                             'nodes' => $nodes,
-                            'uid' => $uid,
+                            'uid' => $node->uid,
                         ],
                         $sharedData,
                         \Sugar\convert\toArray($renderableNode->values)

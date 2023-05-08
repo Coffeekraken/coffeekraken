@@ -4,5 +4,10 @@
     "name": "index",
     "slug": ["/"],
     "scope": "repo",
-    "nodes": []
+    "nodes": [
+        {
+            "uid": "main",
+            "type": "container"
+        }
+    ]
 }

@@ -1,7 +1,7 @@
 <div s-container="{{ uid }}" class="s-container:{{ type }} {{ attributes.class }} {{ __spacesClasses(spaces, frontspec) }}" {{ __attrs(attributes, ['class'])|raw }}>
     {{ __nodeDataTemplate('views.bare.container', _context)|raw }}
-    {% if nodee %}
-        {{ html|raw }}
+    {% if nodes %}
+        {{ nodes|join()|raw }}
     {% else %}
         {{ html|raw }}
     {% endif %}

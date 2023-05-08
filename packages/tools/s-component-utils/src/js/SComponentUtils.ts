@@ -215,12 +215,6 @@ export default class SComponentUtils extends __SClass {
      * @author 		Olivier Bossel<olivier.bossel@gmail.com>
      */
     static getDefaultProps(selector: string): any {
-        if (selector === 's-specs-editor') {
-            _console.log('__', {
-                ...(document._sDefaultProps['*'] ?? {}),
-                ...(document._sDefaultProps[selector] ?? {}),
-            });
-        }
         return {
             ...(document._sDefaultProps['*'] ?? {}),
             ...(document._sDefaultProps[selector] ?? {}),

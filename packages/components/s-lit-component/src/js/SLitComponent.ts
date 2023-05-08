@@ -406,8 +406,6 @@ export default class SLitComponent extends LitElement {
                 this.tagName.toLowerCase(),
             );
 
-            _console.log('default', defaultProps, this.props);
-
             const mountWhen =
                 this.getAttribute('mount-when') ??
                 defaultProps.mountWhen ??

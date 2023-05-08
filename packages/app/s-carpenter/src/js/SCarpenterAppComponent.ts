@@ -1708,8 +1708,6 @@ export default class SCarpenterAppComponent extends __SLitComponent {
             },
             flatData = {};
 
-        _console.log('nodes', $nodes);
-
         Array.from($nodes).forEach(($node) => {
             const nodeUid =
                 $node.getAttribute('s-container') ??
@@ -1717,8 +1715,6 @@ export default class SCarpenterAppComponent extends __SLitComponent {
             flatData[nodeUid] = {
                 uid: nodeUid,
             };
-
-            _console.log('Node', $node, nodeUid);
 
             if ($node.getAttribute('s-node')) {
                 flatData[nodeUid].type = 'node';
@@ -1729,6 +1725,12 @@ export default class SCarpenterAppComponent extends __SLitComponent {
             }
 
             const $belong = __traverseUp($node, ($elm) => {
+                if (
+                    $node.tagName === 'TEMPLATE' &&
+                    $node.parentElement === $elm
+                ) {
+                    return;
+                }
                 if ($elm.hasAttribute('s-container')) {
                     return true;
                 }
@@ -1756,18 +1758,11 @@ export default class SCarpenterAppComponent extends __SLitComponent {
                 );
             }
 
-            _console.log('be', belongId, nodeUid);
-
             if (!flatData[belongId].nodes) {
                 flatData[belongId].nodes = [];
             }
             flatData[belongId].nodes.push(flatData[nodeUid]);
         });
-
-        _console.log('flat', flatData);
-        _console.log('page', data);
-
-        return;
 
         const response = await fetch(
             this.props.endpoints.pages

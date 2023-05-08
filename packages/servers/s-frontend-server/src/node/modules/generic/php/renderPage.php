@@ -43,13 +43,19 @@ $viewRenderer = new SViewRenderer([
         'page' => $params['page'],
     ],
 ]);
-$renderRes = $viewRenderer->renderPage($pageFileJson, function (
-    $component
-) use ($nodesDir) {
-    $filePath = $nodesDir . '/' . $component->uid . '.json';
+$renderRes = $viewRenderer->renderPage($pageFileJson, function ($node) use (
+    $nodesDir
+) {
+    $filePath = $nodesDir . '/' . $node->uid . '.json';
+
+    // print '<pre>';
+    // print_r($node);
 
     if (!file_exists($filePath)) {
-        return;
+        return (object) [
+            'specs' => 'views.bare.container',
+            'values' => [],
+        ];
     }
 
     $data = json_decode(file_get_contents($filePath));

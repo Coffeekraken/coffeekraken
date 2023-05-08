@@ -37,6 +37,16 @@
 
     ._logo {
         width: 100%;
+        transform: scale(0.8);
+        @sugar.transition fast;
+
+        svg {
+            width: 100%;
+        }
+
+        &:hover {
+            transform: scale(1);
+        }
     }
 
     ._modes {

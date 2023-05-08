@@ -5,6 +5,7 @@ import __SDescriptor, {
     ISDescriptorSettings,
 } from '@coffeekraken/s-descriptor';
 import { __parseArgs } from '@coffeekraken/sugar/cli';
+import { __isPlainObject } from '@coffeekraken/sugar/is';
 import { __deepMerge } from '@coffeekraken/sugar/object';
 import __getAvailableInterfaceTypes from './getAvailableInterfaceTypes';
 import type { ISInterfaceRendererSettings } from './renderers/ISInterfaceRenderer';
@@ -559,6 +560,19 @@ export default class SInterface extends __SClass implements ISInterfaceCtor {
                 set.baseObj,
                 objectOnWhichToApplyInterface,
             );
+        }
+
+        // extend object props
+        for (let [key, value] of Object.entries(this._definition)) {
+            if (
+                __isPlainObject(value.default) &&
+                __isPlainObject(objectOnWhichToApplyInterface[key])
+            ) {
+                objectOnWhichToApplyInterface[key] = __deepMerge(
+                    value.default,
+                    objectOnWhichToApplyInterface[key],
+                );
+            }
         }
 
         const descriptorResult: ISDescriptorResult = descriptor.apply(

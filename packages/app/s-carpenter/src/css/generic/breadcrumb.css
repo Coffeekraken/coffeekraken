@@ -1,0 +1,24 @@
+.breadcrumb {
+    display: inline-flex;
+    gap: sugar.margin(20);
+    color: sugar.color(main, text);
+    user-select: none;
+    padding: sugar.padding(10) sugar.padding(20);
+
+    ._item {
+        font-weight: bold;
+
+        &:not(:last-child):after {
+            padding-inline-start: sugar.margin(20);
+            content: '>';
+            opacity: 0.3;
+        }
+    }
+    ._label {
+        opacity: 0.4;
+        font-weight: normal;
+        &:after {
+            content: ':';
+        }
+    }
+}

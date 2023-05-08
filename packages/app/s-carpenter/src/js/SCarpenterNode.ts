@@ -1,7 +1,12 @@
-import __SCarpenterAdapter from './SCarpenterAdapter';
+import { __deepMerge } from '@coffeekraken/sugar/object';
 import __SCarpenterAppComponent from './SCarpenterAppComponent';
+import __SCarpenterNodeAdapter from './SCarpenterNodeAdapter';
 
 export interface ISCarpenterNodeSettings {}
+
+export interface ISCarpenterNodeStatus {
+    exists: boolean;
+}
 
 export interface ISCarpenterNodeData {
     uid: string;
@@ -30,17 +35,21 @@ export default class SCarpenterNode {
         return this.$node.parentElement;
     }
 
-    _uid: string;
+    _uid: string; // store a uid to override the one in the data
     get uid(): string {
-        if (this._uid) {
-            return this._uid;
-        }
-        this._uid = this.$node.getAttribute('s-node');
-        return this._uid;
+        return (
+            this._uid ?? this._data?.uid ?? this.$node.getAttribute('s-node')
+        );
+
+        // if (this._uid) {
+        //     return this._uid;
+        // }
+        // this._uid = this.$node.getAttribute('s-node');
+        // return this._uid;
     }
 
-    _adapter: __SCarpenterAdapter;
-    get adapter(): __SCarpenterAdapter {
+    _adapter: __SCarpenterNodeAdapter;
+    get adapter(): __SCarpenterNodeAdapter {
         if (this._adapter) {
             return this._adapter;
         }
@@ -48,7 +57,7 @@ export default class SCarpenterNode {
             this.$elm.getAttribute('s-carpenter-adapter') ??
             this.carpenter.props.adapter;
 
-        if (!this.carpenter.constructor._registeredAdapters[adapterName]) {
+        if (!this.carpenter.constructor._registeredAdapters[adapterName].node) {
             throw new Error(
                 `<red>[SCarpenter]</red> No "${adapterName}" adapter registered...`,
             );
@@ -56,7 +65,7 @@ export default class SCarpenterNode {
 
         const adapter = new this.carpenter.constructor._registeredAdapters[
             adapterName
-        ]({
+        ].node({
             carpenter: this.carpenter,
             element: this,
             specs: this.specs,
@@ -124,6 +133,11 @@ export default class SCarpenterNode {
         return this._status.ready;
     }
 
+    setUid(uid: string): void {
+        this._uid = uid;
+        this.$node.setAttribute('s-node', uid);
+    }
+
     async delete(): Promise<void> {
         const deletePromise = this.adapter.delete();
         deletePromise.then(() => {
@@ -132,11 +146,16 @@ export default class SCarpenterNode {
         return deletePromise;
     }
 
+    status(uid: string): Promise<ISCarpenterNodeStatus> {
+        return this.adapter.status(uid ?? this.uid);
+    }
+
     async save(): Promise<void> {
         const data = await this.getData();
         delete data.source;
         delete data.specsObj;
         data.specs = this.specs;
+        data.uid = this.uid;
         const savePromise = this.adapter.save(data);
         savePromise.then(() => {
             // track the unsaved status
@@ -149,11 +168,6 @@ export default class SCarpenterNode {
 
     _data: ISCarpenterNodeData;
     async getData(): Promise<ISCarpenterNodeData> {
-        // cache the data
-        if (this._data) {
-            return this._data;
-        }
-
         // get the data from the adapter
         const data = await this.adapter.getData();
         this._specsObj = data.specsObj;
@@ -192,6 +206,9 @@ export default class SCarpenterNode {
         });
         // save the new element
         this.$node = $newNode;
+
+        // update values
+        this._values = __deepMerge(this._values, values ?? {});
 
         // update the classes
         this._updateElementClasses();

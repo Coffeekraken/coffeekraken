@@ -293,7 +293,6 @@ class SDescriptor extends __SClass implements ISDescriptor {
                 // interface
                 if (ruleObj.interface !== undefined) {
                     const interfaceValue = valuesObjToProcess[propName];
-                    // _console.log('VAL', valuesObjToProcess[propName], propName);
                     valuesObjToProcess[propName] = ruleObj.interface.apply(
                         interfaceValue || {},
                         {},

@@ -1,7 +1,15 @@
 import __SLitComponent from '@coffeekraken/s-lit-component';
 
-import __SCarpenterAdapter from './SCarpenterAdapter';
-import __SCarpenterAjaxAdapter from './adapters/SCarpenterAjaxAdapter';
+import __SCarpenterPage from './SCarpenterPage';
+
+import __SCarpenterNodeAdapter from './SCarpenterNodeAdapter';
+import __SCarpenterPageAdapter from './SCarpenterPageAdapter';
+import __SCarpenterNodeAjaxAdapter from './adapters/SCarpenterNodeAjaxAdapter';
+import __SCarpenterPageAjaxAdapter from './adapters/SCarpenterPageAjaxAdapter';
+
+import { __debounce } from '@coffeekraken/sugar/function';
+
+import { __escapeQueue } from '@coffeekraken/sugar/keyboard';
 
 import { __whenRemoved } from '@coffeekraken/sugar/dom';
 
@@ -51,6 +59,11 @@ export interface ISCarpenterAppComponentIconsProp {
     folderClose: string;
 }
 
+export interface ISCarpenterAdapter {
+    node: __SCarpenterNodeAdapter;
+    page: __SCarpenterPageAdapter;
+}
+
 export interface ISCarpenterAppComponentFeatures {
     save: boolean;
     upload: boolean;
@@ -59,6 +72,7 @@ export interface ISCarpenterAppComponentFeatures {
 }
 
 export interface ISCarpenterAppComponentAddComponent {
+    uid: string;
     specs: string;
     $after: HTMLElement;
 }
@@ -152,10 +166,13 @@ export default class SCarpenterAppComponent extends __SLitComponent {
         `;
     }
 
-    static _registeredAdapters: Record<string, __SCarpenterAdapter> = {
-        ajax: __SCarpenterAjaxAdapter,
+    static _registeredAdapters: Record<string, ISCarpenterAdapter> = {
+        ajax: {
+            node: __SCarpenterNodeAjaxAdapter,
+            page: __SCarpenterPageAjaxAdapter,
+        },
     };
-    static registerAdapter(id: string, adapter: __SCarpenterAdapter): void {
+    static registerAdapter(id: string, adapter: ISCarpenterAdapter): void {
         if (SCarpenterAppComponent._registeredAdapters[id]) {
             throw new Error(
                 `[SCarpenter] Sorry but the "${id}" adapter already exists...`,
@@ -177,6 +194,7 @@ export default class SCarpenterAppComponent extends __SLitComponent {
     _currentNode;
     _preselectedNode;
 
+    _page: __SCarpenterPage;
     _nodesStack: Record<string, __SCarpenterNode>;
 
     _data: ISCarpenterAppComponentData;
@@ -307,7 +325,6 @@ export default class SCarpenterAppComponent extends __SLitComponent {
             },
         );
         const specs = await response.json();
-        _console.log('specs', specs);
         this._specs = specs;
     }
 
@@ -494,6 +511,9 @@ export default class SCarpenterAppComponent extends __SLitComponent {
      * This contains things like the toolbar, the hover to display it, etc...
      */
     _initWebsiteIframeContent() {
+        // create page from html
+        this._updateCarpenterPage();
+
         // update the element stack
         this._updateCarpenterNodesStack();
 
@@ -571,9 +591,23 @@ export default class SCarpenterAppComponent extends __SLitComponent {
     }
 
     /**
+     * Update the current page from the website HTML
+     */
+    _updateCarpenterPage(): void {
+        // get the page
+        const $page = this._$websiteDocument.querySelector('[s-page]');
+
+        // if a page has been found, create a new instance of it
+        if ($page) {
+            this._page = new __SCarpenterPage($page, this);
+            this.requestUpdate();
+        }
+    }
+
+    /**
      * Update the element stack
      */
-    _updateCarpenterNodesStack() {
+    _updateCarpenterNodesStack(): void {
         // reset stack
         this._nodesStack = {};
 
@@ -809,9 +843,13 @@ export default class SCarpenterAppComponent extends __SLitComponent {
         __querySelectorLive(
             's-carpenter-app-add-component',
             ($elm) => {
-                $elm.addEventListener('s-filtrable-input.select', (e) => {
-                    _console.log('sss', e.detail);
+                $elm.addEventListener('s-filtrable-input.select', async (e) => {
+                    // get a proper uniqid
+                    const nodeMetas = await this._ask('nodeMetas');
+
+                    // add the component
                     this._addComponent({
+                        uid: nodeMetas.uid,
                         specs: e.detail.item.specs,
                         $after: __traverseUp(e.target, ($elm) =>
                             $elm.classList.contains(
@@ -935,7 +973,7 @@ export default class SCarpenterAppComponent extends __SLitComponent {
     async _addComponent(
         specs: ISCarpenterAppComponentAddComponent,
     ): Promise<void> {
-        const uid = __uniqid();
+        const uid = specs.uid ?? __uniqid();
         const $newComponent = document.createElement('div');
         $newComponent.innerHTML = `
         <template s-node="${uid}" s-specs="${specs.specs}">${JSON.stringify({
@@ -955,6 +993,8 @@ export default class SCarpenterAppComponent extends __SLitComponent {
 
     async applyComponent(values?: any): Promise<void> {
         await this._currentNode.setValues(values);
+        await this._currentNode.save();
+        this.requestUpdate();
     }
 
     /**
@@ -962,18 +1002,19 @@ export default class SCarpenterAppComponent extends __SLitComponent {
      */
     _listenSpecsEditorEvents() {
         // listen for save
-        this.addEventListener('s-specs-editor.ready', (e) => {
+        this.addEventListener('s-specs-editor.ready', async (e) => {
             // store the specs editor reference
             this._$specsEditor = e.target;
         });
 
         // listen for save
-        this.addEventListener('s-specs-editor.save', (e) => {
+        this.addEventListener('s-specs-editor.save', async (e) => {
             this._currentNode.save();
         });
 
         // listen for actual updated
         this.addEventListener('s-specs-editor.change', async (e) => {
+            // apply the component
             this.applyComponent(e.detail.values);
         });
 
@@ -1195,8 +1236,6 @@ export default class SCarpenterAppComponent extends __SLitComponent {
         // set the current element
         this._currentNode = this._nodesStack[uid];
 
-        _console.log('cu', uid, this._currentNode);
-
         // await this._currentNode.getData();
         this.requestUpdate();
     }
@@ -1231,6 +1270,28 @@ export default class SCarpenterAppComponent extends __SLitComponent {
         $title.innerHTML = title;
 
         this._$toolbar.style.left = `${left}px`;
+    }
+
+    /**
+     * Get a node status
+     */
+    async getStatus(of: 'node' | 'page', uid: string): Promise<void> {
+        const response = await fetch(
+            `${this.props.endpoints[`${of}s`]
+                .replace('%base', this.props.endpoints.base)
+                .replace('%uid', uid)}/status`,
+            {
+                method: 'GET',
+                mode: 'cors',
+                cache: 'no-cache',
+                credentials: 'same-origin',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                referrerPolicy: 'no-referrer',
+            },
+        );
+        return await response.json();
     }
 
     /**
@@ -1324,6 +1385,7 @@ export default class SCarpenterAppComponent extends __SLitComponent {
                     <span>${this.props.i18n.scopeSelectorLabel}</span>
                     <select
                         class="s-select"
+                        autofocus
                         @change=${(e) => {
                             selectedScope = e.target.value;
                         }}
@@ -1357,9 +1419,9 @@ export default class SCarpenterAppComponent extends __SLitComponent {
     /**
      * Render the "new page" form
      */
-    _renderNewPageForm(callback?: Function): any {
+    _renderPageMetasForm(callback?: Function): any {
         return html`
-            <div class="${this.utils.cls('_page-name-form')}">
+            <div class="${this.utils.cls('_page-metas-form')}">
                 <h1 class="s-typo:h1 s-mbe:30">
                     ${this.props.i18n.newPageTitle}
                 </h1>
@@ -1394,6 +1456,7 @@ export default class SCarpenterAppComponent extends __SLitComponent {
                         type="text"
                         class="s-input"
                         maxlength="100"
+                        autofocus
                         required
                         .value=${this._askData.slug ?? ''}
                         value="${this._askData.slug ?? ''}"
@@ -1459,6 +1522,73 @@ export default class SCarpenterAppComponent extends __SLitComponent {
         `;
     }
 
+    /**
+     * Render the "new node" form
+     */
+    _renderNodeMetasForm(callback?: Function): any {
+        return html`
+            <div class="${this.utils.cls('_node-metas-form')}">
+                <h1 class="s-typo:h1 s-mbe:30">
+                    ${this.props.i18n.newNodeTitle}
+                </h1>
+
+                <p class="s-typo:p s-mbe:30">
+                    ${this.props.i18n.newNodeDescription}
+                </p>
+
+                <label class="s-label:block s-mbe:30">
+                    <span>${this.props.i18n.newNodeUidLabel}</span>
+                    <input
+                        type="text"
+                        class="s-input"
+                        maxlength="100"
+                        autofocus
+                        required
+                        .value=${this._askData.uid ?? ''}
+                        value="${this._askData.uid ?? ''}"
+                        placeholder="${this.props.i18n.newNodeUidPlaceholder}"
+                        @keyup=${__debounce(100, async (e) => {
+                            if (!e.target.value) {
+                                this._askErrors.uid =
+                                    this.props.i18n.newNodeUidRequired;
+                                return this.requestUpdate();
+                            }
+
+                            this._askData.uid = __idCompliant(e.target.value);
+                            const nodeStatus = await this.getStatus(
+                                'node',
+                                this._askData.uid,
+                            );
+                            if (nodeStatus.exists) {
+                                this._askErrors.uid =
+                                    this.props.i18n.newNodeUidAlreadyTaken;
+                            } else {
+                                delete this._askErrors.uid;
+                            }
+                            this.requestUpdate();
+                        })}
+                    />
+                    ${this._askErrors?.uid
+                        ? html` ${this._renderError(this._askErrors.uid)} `
+                        : ''}
+                </label>
+                <label class="s-label">
+                    <span></span>
+                    <button
+                        class="s-btn s-color:accent"
+                        ?disabled=${!this._askData.uid || this._askErrors.uid}
+                        @pointerup=${async (e) => {
+                            callback?.(this._askData);
+                            this._askCallback?.(this._askData);
+                        }}
+                    >
+                        ${this.props.i18n.newNodeButton}
+                    </button>
+                </label>
+            </div>
+        `;
+    }
+
     async _createPage(pageMetas: any): Promise<any> {
         // set loading state
         this.state.isLoading = true;
@@ -1501,7 +1631,10 @@ export default class SCarpenterAppComponent extends __SLitComponent {
     _askErrors: Record<string, string> = {};
     _askData: any = {};
     _askCallback;
-    _ask(what: 'scope' | 'pageMetas', initialData: any = {}): Promise<any> {
+    _ask(
+        what: 'scope' | 'pageMetas' | 'nodeMetas',
+        initialData: any = {},
+    ): Promise<any> {
         this._askErrors = {};
         this._askData = initialData;
         return new Promise(async (resolve, reject) => {
@@ -1517,6 +1650,16 @@ export default class SCarpenterAppComponent extends __SLitComponent {
             setTimeout(() => {
                 this._updateUiPlaceholders();
             }, 50);
+
+            const escapePromise = __escapeQueue(null, {
+                rootNode: [this._$editorDocument, this._$websiteDocument],
+            });
+            escapePromise.then(() => {
+                this._askFor = undefined;
+                this._askErrors = {};
+                this._askData = {};
+                this.requestUpdate();
+            });
         });
     }
 
@@ -1556,11 +1699,16 @@ export default class SCarpenterAppComponent extends __SLitComponent {
         }
 
         const data = {
-                uid: 'my-page',
+                uid: this._page.uid,
+                name: this._page.name,
+                scope: this._page.scope,
+                slug: this._page.slug,
                 type: 'root',
-                nodes: {},
+                nodes: [],
             },
             flatData = {};
+
+        _console.log('nodes', $nodes);
 
         Array.from($nodes).forEach(($node) => {
             const nodeUid =
@@ -1568,10 +1716,17 @@ export default class SCarpenterAppComponent extends __SLitComponent {
                 $node.getAttribute('s-node');
             flatData[nodeUid] = {
                 uid: nodeUid,
-                type: $node.hasAttribute('s-container')
-                    ? 'container'
-                    : 'component',
             };
+
+            _console.log('Node', $node, nodeUid);
+
+            if ($node.getAttribute('s-node')) {
+                flatData[nodeUid].type = 'node';
+            } else if ($node.getAttribute('s-container')) {
+                flatData[nodeUid].type = 'container';
+            } else {
+                flatData[nodeUid].type = 'unknown';
+            }
 
             const $belong = __traverseUp($node, ($elm) => {
                 if ($elm.hasAttribute('s-container')) {
@@ -1586,9 +1741,9 @@ export default class SCarpenterAppComponent extends __SLitComponent {
             // mean it's a root node
             if (!$belong) {
                 if (!data.nodes) {
-                    data.nodes = {};
+                    data.nodes = [];
                 }
-                data.nodes[nodeUid] = flatData[nodeUid];
+                data.nodes.push(flatData[nodeUid]);
                 return;
             }
 
@@ -1601,11 +1756,18 @@ export default class SCarpenterAppComponent extends __SLitComponent {
                 );
             }
 
+            _console.log('be', belongId, nodeUid);
+
             if (!flatData[belongId].nodes) {
-                flatData[belongId].nodes = {};
+                flatData[belongId].nodes = [];
             }
-            flatData[belongId].nodes[nodeUid] = flatData[nodeUid];
+            flatData[belongId].nodes.push(flatData[nodeUid]);
         });
+
+        _console.log('flat', flatData);
+        _console.log('page', data);
+
+        return;
 
         const response = await fetch(
             this.props.endpoints.pages
@@ -1711,8 +1873,6 @@ export default class SCarpenterAppComponent extends __SLitComponent {
     }
 
     render() {
-        _console.log(this._currentNode, this._currentNode?.isReady());
-
         return html`
             ${this.props.sidebar
                 ? html`
@@ -1903,9 +2063,7 @@ export default class SCarpenterAppComponent extends __SLitComponent {
             </nav>
 
             <nav class="${this.utils.cls('_controls')}" s-carpenter-ui>
-                <div class="${this.utils.cls('_logo')}">
-                    ${unsafeHTML(this.props.logo)}
-                </div>
+                <div class="_logo">${unsafeHTML(this.props.logo)}</div>
 
                 <div
                     class="${this.utils.cls('_menu')} drop-menu:right"
@@ -1971,26 +2129,46 @@ export default class SCarpenterAppComponent extends __SLitComponent {
                                       );
                                   }}
                               />
-                              <!-- <span class="_insert">
-                                  ${unsafeHTML(this.props.i18n.modeInsert)}
-                              </span> -->
-                              <!-- <div
-                                  class="s-tooltip s-color:accent s-white-space:nowrap"
-                              >
+                              <div class="s-tooltip:right s-white-space:nowrap">
                                   ${unsafeHTML(this.props.i18n.modeToggle)}
-                              </div> -->
+                              </div>
                           </label>
                       `
                     : ''}
             </nav>
 
+            ${this._page
+                ? html`
+                      <div class="${this.utils.cls('_metas')}" s-carpenter-ui>
+                          <ol class="breadcrumb">
+                              <li class="_item">
+                                  <span class="_label">Page</span>
+                                  ${this._page.name}
+                              </li>
+                              ${this._currentNode
+                                  ? html`
+                                        <li class="_item">
+                                            <span class="_label">Node</span>
+                                            ${this._currentNode.values?.name
+                                                ?.value ??
+                                            this._currentNode.values?.title
+                                                ?.value ??
+                                            this._currentNode.uid}
+                                        </li>
+                                    `
+                                  : ''}
+                          </ol>
+                      </div>
+                  `
+                : ''}.
             ${this.props.features?.savePage
                 ? html`
-                      <div class="${this.utils.cls('_actions')}">
-                          ${this.props.features?.savePage
+                      <div class="${this.utils.cls('_actions')}" s-carpenter-ui>
+                          ${this.props.features?.savePage && this._page
                               ? html`
                                     <button
-                                        ?disabled=${!this._isSpecsEditorValid}
+                                        ?disabled=${!this._isSpecsEditorValid ||
+                                        !this._page.isReady()}
                                         class="_save"
                                         @click=${(e) => {
                                             this._savePage();
@@ -2003,7 +2181,7 @@ export default class SCarpenterAppComponent extends __SLitComponent {
                               : ''}
                       </div>
                   `
-                : ''}
+                : ''}.
             ${this.state.isLoading
                 ? html`
                       <div class="${this.utils.cls('_loading')}">
@@ -2019,9 +2197,11 @@ export default class SCarpenterAppComponent extends __SLitComponent {
                 ? html`
                       <div class="${this.utils.cls('_ask')}" s-carpenter-ui>
                           ${this._askFor === 'scope'
-                              ? html` ${this._renderScopeSelector()} `
+                              ? this._renderScopeSelector()
                               : this._askFor === 'pageMetas'
-                              ? html` ${this._renderNewPageForm()} `
+                              ? this._renderPageMetasForm()
+                              : this._askFor === 'nodeMetas'
+                              ? this._renderNodeMetasForm()
                               : ''}
                       </div>
                   `

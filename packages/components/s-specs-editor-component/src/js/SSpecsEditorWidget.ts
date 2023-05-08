@@ -118,7 +118,6 @@ export default class SSpecsEditorWidget {
     }
 
     saved(): void {
-        _console.log('saved');
         this.status.unsaved = false;
     }
 

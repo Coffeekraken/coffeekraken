@@ -1,12 +1,12 @@
 import { __unescapeHtml } from '@coffeekraken/sugar/html';
 
-import type { ISRenderableNode } from '@specimen/types';
+import type { ISCarpenterNodeAdapterDeps } from '../SCarpenterNodeAdapter';
+import __SCarpenterNodeAdapter from '../SCarpenterNodeAdapter';
 
-import type { ISCarpenterAdapterDeps } from '../SCarpenterAdapter';
-import __SCarpenterAdapter from '../SCarpenterAdapter';
+import type { ISCarpenterNode } from '../../types/_exports';
 
-export default class SCarpenterAjaxAdapter extends __SCarpenterAdapter {
-    constructor(deps: ISCarpenterAdapterDeps) {
+export default class SCarpenterNodeAjaxAdapter extends __SCarpenterNodeAdapter {
+    constructor(deps: ISCarpenterNodeAdapterDeps) {
         super(deps);
     }
 
@@ -85,7 +85,26 @@ export default class SCarpenterAjaxAdapter extends __SCarpenterAdapter {
         return data;
     }
 
-    async save(data: ISRenderableNode): Promise<void> {
+    async status(uid: string): Promise<void> {
+        const response = await fetch(
+            `${this.carpenter.props.endpoints.nodes
+                .replace('%base', this.carpenter.props.endpoints.base)
+                .replace('%uid', uid)}/status`,
+            {
+                method: 'GET',
+                mode: 'cors',
+                cache: 'no-cache',
+                credentials: 'same-origin',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                referrerPolicy: 'no-referrer',
+            },
+        );
+        return await response.json();
+    }
+
+    async save(data: ISCarpenterNode): Promise<void> {
         const response = await fetch(
             this.carpenter.props.endpoints.nodes
                 .replace('%base', this.carpenter.props.endpoints.base)

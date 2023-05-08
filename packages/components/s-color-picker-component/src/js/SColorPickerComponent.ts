@@ -384,7 +384,6 @@ export default class SColorPickerComponent extends __SLitComponent {
 
     setFormat(format: 'hex' | 'hexa' | 'rgb' | 'rgba' | 'hsl' | 'hsla'): void {
         this.state.format = format;
-        _console.log('Update format', this.state.format);
         this._updateInput('format');
         return false;
     }

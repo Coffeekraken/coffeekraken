@@ -9,14 +9,17 @@ export default function (api: any): {
         bare: {
             name: string;
             description: string;
+            specsNamespaces: string[];
         };
         sections: {
             name: string;
             description: string;
+            specsNamespaces: string[];
         };
         components: {
             name: string;
             description: string;
+            specsNamespaces: string[];
         };
     };
     scopes: {
@@ -29,16 +32,6 @@ export default function (api: any): {
             name: string;
             description: string;
             readonly rootDir: string;
-        };
-    };
-    sources: {
-        components: {
-            title: string;
-            specsNamespaces: string[];
-        };
-        sections: {
-            title: string;
-            specsNamespaces: string[];
         };
     };
 };

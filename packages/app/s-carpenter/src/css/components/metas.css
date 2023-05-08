@@ -1,0 +1,16 @@
+.s-carpenter-app_metas {
+    position: absolute;
+    z-index: 99999;
+    left: var(--s-carpenter-media-bottom);
+    bottom: var(--s-carpenter-media-bottom);
+    display: flex;
+    align-items: center;
+    gap: sugar.margin(30);
+    background: sugar.color(main, background);
+    padding: sugar.padding(20);
+    opacity: 1;
+    pointer-events: all;
+    @sugar.transition();
+    @sugar.border.radius (30);
+    @sugar.depth (100);
+}

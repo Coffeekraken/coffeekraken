@@ -32,7 +32,6 @@ export default function doc(req, res, settings = {}) {
             },
         );
 
-        // _console.log(req);
         res.type('text/html');
         res.status(200);
         res.send(pageHtml.value);

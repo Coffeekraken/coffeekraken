@@ -6,6 +6,7 @@ import {
     __preventScrollRestoration,
 } from '@coffeekraken/sugar/dom';
 import {
+    __autoFocus,
     __autoResize,
     __confirmButton,
     __inputAdditionalAttributes,
@@ -59,6 +60,7 @@ export interface ISSugarFeatureProps {
  * define();
  *
  * @feature         Support for "pleasant css" syntax like "s-btn:outline"
+ * @feature         Make sure your "autofocus" fields works as expected
  * @feature         Polyfill for container queries if needed
  * @feature        `scrolled` class applied on the body when the user has scrolled the page
  * @feature         Access to a `--vh` css variable that represent the exact viewport innerHeight and avoid having issues with mobile different viewport height values
@@ -132,6 +134,8 @@ export default class SSugarFeature extends __SFeature implements ISFeature {
 
         // pleasant css
         if (this.props.pleasantCss) this._pleasantCss();
+        // autofocus
+        if (this.props.autofocus) this._autofocus();
         // scrolled
         if (this.props.scrolled) this._scrolled();
         // vhvar
@@ -190,6 +194,11 @@ export default class SSugarFeature extends __SFeature implements ISFeature {
             },
         });
     }
+
+    _autofocus() {
+        __autoFocus();
+    }
+
     _scrolled() {
         document.addEventListener('scroll', (e) => {
             if (window.scrollY >= this.props.scrolledDelta) {

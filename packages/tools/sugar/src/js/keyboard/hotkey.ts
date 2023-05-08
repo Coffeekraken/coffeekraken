@@ -55,7 +55,7 @@ hotkeys.filter = function () {
  */
 
 export interface IHotkeySettings {
-    element: HTMLElement;
+    element: HTMLElemen | Document;
     keyup: boolean;
     keydown: boolean;
     once: boolean;

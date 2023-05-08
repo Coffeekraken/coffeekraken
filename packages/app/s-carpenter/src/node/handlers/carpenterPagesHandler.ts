@@ -1,4 +1,3 @@
-import { __i18n } from '@coffeekraken/s-i18n';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
 import __fs from 'fs';
 import __glob from 'glob';
@@ -47,26 +46,27 @@ export default async function carpenterPagesHandler({ req, res }) {
         case 'POST':
             let pageJson = {
                 type: 'page',
-                name: req.body.name,
                 uid: req.body.uid,
-                slugs: [req.body.slug],
-                nodes: [],
+                name: req.body.name,
+                slug: req.body.slug,
+                scope: req.body.scope,
+                nodes: req.body.nodes,
             };
 
-            // check if the page already exists
-            const existingPage = _getPageJsonByUid(req.body.uid);
-            if (existingPage) {
-                res.status(406);
-                res.type('application/json');
-                res.send({
-                    error: __i18n('The page "%s" already exists', {
-                        id: 's-carpenter.page.alreadyExists',
-                        tokens: {
-                            s: req.body.uid,
-                        },
-                    }),
-                });
-            }
+            // // check if the page already exists
+            // const existingPage = _getPageJsonByUid(req.body.uid);
+            // if (existingPage) {
+            //     res.status(406);
+            //     res.type('application/json');
+            //     res.send({
+            //         error: __i18n('The page "%s" already exists', {
+            //             id: 's-carpenter.page.alreadyExists',
+            //             tokens: {
+            //                 s: req.body.uid,
+            //             },
+            //         }),
+            //     });
+            // }
 
             // check scope
             const rootPath = _getScopeRootPath(req.body.scope);

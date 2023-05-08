@@ -234,6 +234,7 @@ export default (api) => {
                 fontSize: 30,
                 lineHeight: 1.8,
                 maxWidth: '55ch',
+                opacity: 0.6,
             },
             rhythmVertical: {
                 marginBottom: 40,

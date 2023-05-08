@@ -283,7 +283,7 @@ export default function (api): IStorageConfig {
              * @name            pagesDir
              * @namespace       config.storage.src
              * @type            String
-             * @default         [config.storage.src.rootDir]/views
+             * @default         [config.storage.src.rootDir]/pages
              *
              * Configure where is located the pages definition source files
              *
@@ -292,6 +292,21 @@ export default function (api): IStorageConfig {
              */
             get pagesDir() {
                 return `${this.rootDir}/pages`;
+            },
+
+            /**
+             * @name            nodesDir
+             * @namespace       config.storage.src
+             * @type            String
+             * @default         [config.storage.src.rootDir]/nodes
+             *
+             * Configure where is located the nodes definition source files
+             *
+             * @since         2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+             */
+            get nodesDir() {
+                return `${this.rootDir}/node`;
             },
 
             /**
@@ -474,6 +489,21 @@ export default function (api): IStorageConfig {
              */
             get pagesDir() {
                 return `${this.rootDir}/pages`;
+            },
+
+            /**
+             * @name            nodesDir
+             * @namespace       config.storage.dist
+             * @type            String
+             * @default         [config.storage.dist.rootDir]/nodes
+             *
+             * Configure where is located the nodes definition source files
+             *
+             * @since         2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+             */
+            get nodesDir() {
+                return `${this.rootDir}/node`;
             },
 
             /**

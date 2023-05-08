@@ -1,8 +1,15 @@
 .s-carpenter-app_actions {
     position: absolute;
     bottom: var(--s-carpenter-editor-bottom);
-    right: 50%;
-    transform: translateX(50%);
+    right: var(--s-carpenter-editor-margin);
+    @sugar.transition();
+
+    .s-carpenter--open & {
+        right: calc(
+            var(--s-carpenter-editor-width) + var(--s-carpenter-editor-margin) *
+                2
+        );
+    }
 
     ._save {
         @sugar.ui.button();

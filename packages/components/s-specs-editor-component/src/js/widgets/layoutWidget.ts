@@ -24,13 +24,6 @@ export default class SSpecsEditorComponentLayoutWidget extends __SSpecsEditorWid
         this._sMedia = new __SMedia();
     }
 
-    firstUpdated() {
-        // _console.log('d');
-        // const $select = this.editor.querySelector('.custom-select'),
-        //     $dropdown = $select.querySelector('.custom-select_dropdown');
-        // __makeFloat($dropdown, $select);
-    }
-
     render() {
         const values = <ISLayoutData>this.values;
         const defaultLayout = {
@@ -94,7 +87,6 @@ export default class SSpecsEditorComponentLayoutWidget extends __SSpecsEditorWid
     }
 
     _renderLayout(layoutObj: any): any {
-        _console.log('dl', layoutObj);
         if (!this._renderedLayouts[layoutObj.id]) {
             this._renderedLayouts[layoutObj.id] = this._sMedia.layoutCss(
                 layoutObj.layout,

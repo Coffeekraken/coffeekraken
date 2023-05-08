@@ -1,7 +1,10 @@
 import __SDataFileGeneric from '@coffeekraken/s-data-file-generic';
 import __SSpecs from '@coffeekraken/s-specs';
+import __SSugarConfig from '@coffeekraken/s-sugar-config';
 import __SViewRenderer from '@coffeekraken/s-view-renderer';
+import { __ensureDirSync } from '@coffeekraken/sugar/fs';
 import { __deepMerge } from '@coffeekraken/sugar/object';
+import __fs from 'fs';
 
 export interface ICarpenterViewHandlerViewData {
     $specs?: any;
@@ -20,7 +23,6 @@ export default async function carpenterNodesHandler({ req, res }) {
     if (req.body.specs && (req.method === 'PUT' || req.method === 'POST')) {
         // load current component/section/... specs
         const specsInstance = new __SSpecs();
-        _console.log('READY', req.body);
         currentSpecs = await specsInstance.read(req.body.specs);
         if (!currentSpecs) {
             return res.send(
@@ -64,6 +66,20 @@ export default async function carpenterNodesHandler({ req, res }) {
             break;
     }
 
+    // handle saving data
+    switch (req.method) {
+        case 'POST':
+            // save the new node
+            const nodesDir = __SSugarConfig.get('storage.src.nodesDir');
+            __ensureDirSync(nodesDir);
+            __fs.writeFileSync(
+                `${nodesDir}/${req.body.uid}.json`,
+                JSON.stringify(req.body, null, 4),
+            );
+            break;
+    }
+
+    // handle view data
     switch (req.method) {
         case 'PUT': // update node html
             const currentViewResult = await renderer.render(viewPath, viewData);

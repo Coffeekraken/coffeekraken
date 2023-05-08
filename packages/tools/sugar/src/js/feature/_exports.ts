@@ -1,3 +1,4 @@
+import __autoFocus from './autoFocus';
 import __autoResize from './autoResize';
 import __confirmButton from './confirmButton';
 import __imagesLazySrcAttribute from './imagesLazySrcAttribute';
@@ -12,6 +13,7 @@ import __smoothScrollOnPageLoad from './smoothScrollOnPageLoad';
 import __videosLazySrcAttribute from './videosLazySrcAttribute';
 
 export {
+    __autoFocus,
     __autoResize,
     __confirmButton,
     __imagesLazySrcAttribute,

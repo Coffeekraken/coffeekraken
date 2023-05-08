@@ -1,6 +1,9 @@
-import __SCarpenterAdapter from './SCarpenterAdapter';
 import __SCarpenterAppComponent from './SCarpenterAppComponent';
+import __SCarpenterNodeAdapter from './SCarpenterNodeAdapter';
 export interface ISCarpenterNodeSettings {
+}
+export interface ISCarpenterNodeStatus {
+    exists: boolean;
 }
 export interface ISCarpenterNodeData {
     uid: string;
@@ -21,8 +24,8 @@ export default class SCarpenterNode {
     get $elm(): HTMLElement;
     _uid: string;
     get uid(): string;
-    _adapter: __SCarpenterAdapter;
-    get adapter(): __SCarpenterAdapter;
+    _adapter: __SCarpenterNodeAdapter;
+    get adapter(): __SCarpenterNodeAdapter;
     get specs(): string;
     _specsObj: any;
     get specsObj(): any;
@@ -34,7 +37,9 @@ export default class SCarpenterNode {
     _updateElementClasses(): void;
     hasUnsavedChanges(): boolean;
     isReady(): boolean;
+    setUid(uid: string): void;
     delete(): Promise<void>;
+    status(uid: string): Promise<ISCarpenterNodeStatus>;
     save(): Promise<void>;
     _data: ISCarpenterNodeData;
     getData(): Promise<ISCarpenterNodeData>;

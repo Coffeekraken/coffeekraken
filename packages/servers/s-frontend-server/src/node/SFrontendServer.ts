@@ -646,8 +646,6 @@ export default class SFrontendServer extends __SClass {
                 pageConfig = [pageConfig];
             }
 
-            _console.log('ss', pageConfig);
-
             for (let pageConfigObj of pageConfig) {
                 let slug = '',
                     slugs: string[] = pageConfigObj.slugs ?? [];

@@ -100,6 +100,10 @@ function registerFunctions($twig)
     $props = require __DIR__ . '/object/props.php';
     $twig->addFunction($props);
 
+    // page
+    $pageDataTemplate = require __DIR__ . '/page/pageDataTemplate.php';
+    $twig->addFunction($pageDataTemplate);
+
     // picture
     $pictureSourcesFromMedia = require __DIR__ .
         '/picture/pictureSourcesFromMedia.php';

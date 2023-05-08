@@ -108,6 +108,13 @@ export default class SCarpenterComponentInterface extends __SInterface {
                 scopeSelectorTitle: string;
                 scopeSelectorLabel: string;
                 scopeSelectorButton: string;
+                newNodeTitle: string;
+                newNodeDescription: string;
+                newNodeUidLabel: string;
+                newNodeUidPlaceholder: string;
+                newNodeButton: string;
+                newNodeUidAlreadyTaken: string;
+                newNodeUidRequired: string;
                 newPageTitle: string;
                 newPageNameLabel: string;
                 newPageNamePlaceholder: string;

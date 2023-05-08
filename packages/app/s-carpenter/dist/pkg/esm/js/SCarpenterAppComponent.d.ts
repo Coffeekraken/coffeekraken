@@ -1,5 +1,7 @@
 import __SLitComponent from '@coffeekraken/s-lit-component';
-import __SCarpenterAdapter from './SCarpenterAdapter';
+import __SCarpenterPage from './SCarpenterPage';
+import __SCarpenterNodeAdapter from './SCarpenterNodeAdapter';
+import __SCarpenterPageAdapter from './SCarpenterPageAdapter';
 import __SCarpenterNode from './SCarpenterNode';
 import type { ISSpecsEditorComponentSource } from '@coffeekraken/s-specs-editor-component';
 import __define from './defineApp';
@@ -11,6 +13,10 @@ export interface ISCarpenterAppComponentIconsProp {
     folderOpen: string;
     folderClose: string;
 }
+export interface ISCarpenterAdapter {
+    node: __SCarpenterNodeAdapter;
+    page: __SCarpenterPageAdapter;
+}
 export interface ISCarpenterAppComponentFeatures {
     save: boolean;
     upload: boolean;
@@ -18,6 +24,7 @@ export interface ISCarpenterAppComponentFeatures {
     media: boolean;
 }
 export interface ISCarpenterAppComponentAddComponent {
+    uid: string;
     specs: string;
     $after: HTMLElement;
 }
@@ -65,8 +72,8 @@ export interface ISCarpenterComponentAdapter {
 export default class SCarpenterAppComponent extends __SLitComponent {
     static get properties(): any;
     static get styles(): import("lit").CSSResult;
-    static _registeredAdapters: Record<string, __SCarpenterAdapter>;
-    static registerAdapter(id: string, adapter: __SCarpenterAdapter): void;
+    static _registeredAdapters: Record<string, ISCarpenterAdapter>;
+    static registerAdapter(id: string, adapter: ISCarpenterAdapter): void;
     static state: {
         activeNavigationFolders: any[];
         activeMedia: any;
@@ -77,6 +84,7 @@ export default class SCarpenterAppComponent extends __SLitComponent {
     currentSpecs: any;
     _currentNode: any;
     _preselectedNode: any;
+    _page: __SCarpenterPage;
     _nodesStack: Record<string, __SCarpenterNode>;
     _data: ISCarpenterAppComponentData;
     _websiteWindow: any;
@@ -112,6 +120,8 @@ export default class SCarpenterAppComponent extends __SLitComponent {
     _registerShortcuts($scope: Document): void;
     
     _initWebsiteIframeContent(): void;
+    
+    _updateCarpenterPage(): void;
     
     _updateCarpenterNodesStack(): void;
     
@@ -155,6 +165,8 @@ export default class SCarpenterAppComponent extends __SLitComponent {
     
     _setToolbarTitleAndPosition($from: HTMLElement, title?: string): void;
     
+    getStatus(of: 'node' | 'page', uid: string): Promise<void>;
+    
     _activateMedia(media: any): void;
     
     _setViewportSize(): void;
@@ -166,14 +178,16 @@ export default class SCarpenterAppComponent extends __SLitComponent {
     
     _renderScopeSelector(callback?: Function): any;
     
-    _renderNewPageForm(callback?: Function): any;
+    _renderPageMetasForm(callback?: Function): any;
+    
+    _renderNodeMetasForm(callback?: Function): any;
     _createPage(pageMetas: any): Promise<any>;
     
     _askFor: any;
     _askErrors: Record<string, string>;
     _askData: any;
     _askCallback: any;
-    _ask(what: 'scope' | 'pageMetas', initialData?: any): Promise<any>;
+    _ask(what: 'scope' | 'pageMetas' | 'nodeMetas', initialData?: any): Promise<any>;
     
     newPage(): Promise<void>;
     

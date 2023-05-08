@@ -35,14 +35,18 @@ function __isPlainObject(object) {
   return true;
 }
 function __deepMerge(...args) {
+  var _a2;
+  let settings = {}, hasSettings = false;
+  const potentialSettings = (_a2 = args[args.length - 1]) !== null && _a2 !== void 0 ? _a2 : {};
+  if (potentialSettings && Object.keys(potentialSettings).length <= 2 && (potentialSettings.array !== void 0 || potentialSettings.clone !== void 0)) {
+    hasSettings = true;
+    settings = potentialSettings;
+  }
+  let finalSettings = Object.assign({ array: false, clone: true }, settings);
   function merge(firstObj, secondObj) {
-    const newObj = {};
-    if (!firstObj && secondObj)
-      return secondObj;
-    if (!secondObj && firstObj)
+    const newObj = finalSettings.clone ? {} : firstObj;
+    if (!secondObj)
       return firstObj;
-    if (!firstObj && !secondObj)
-      return {};
     const firstProps = Object.getOwnPropertyNames(firstObj);
     firstProps.forEach((key) => {
       const desc = Object.getOwnPropertyDescriptor(firstObj, key);
@@ -57,6 +61,8 @@ function __deepMerge(...args) {
       const secondObjDesc = Object.getOwnPropertyDescriptor(secondObj, key);
       if (secondObjDesc.set || secondObjDesc.get) {
         Object.defineProperty(newObj, key, secondObjDesc);
+      } else if (finalSettings.array && Array.isArray(firstObj[key]) && Array.isArray(secondObj[key])) {
+        newObj[key] = [...firstObj[key], ...secondObj[key]];
       } else if (__isPlainObject(newObj[key]) && __isPlainObject(secondObj[key])) {
         newObj[key] = merge(newObj[key], secondObj[key]);
       } else {
@@ -65,7 +71,10 @@ function __deepMerge(...args) {
     });
     return newObj;
   }
-  let currentObj = {};
+  if (hasSettings) {
+    args.pop();
+  }
+  let currentObj = finalSettings.clone ? {} : args[0];
   for (let i = 0; i < args.length; i++) {
     const toMergeObj = args[i];
     currentObj = merge(currentObj, toMergeObj);
@@ -85,23 +94,1223 @@ function __isClassInstance(object) {
     return false;
   return true;
 }
-function __deepMap(objectOrArray, processor, settings = {}, _path = []) {
+var commonjsGlobal = typeof globalThis !== "undefined" ? globalThis : typeof window !== "undefined" ? window : typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : {};
+function getAugmentedNamespace(n) {
+  if (n.__esModule)
+    return n;
+  var f = n.default;
+  if (typeof f == "function") {
+    var a = function a2() {
+      if (this instanceof a2) {
+        var args = [null];
+        args.push.apply(args, arguments);
+        var Ctor = Function.bind.apply(f, args);
+        return new Ctor();
+      }
+      return f.apply(this, arguments);
+    };
+    a.prototype = f.prototype;
+  } else
+    a = {};
+  Object.defineProperty(a, "__esModule", { value: true });
+  Object.keys(n).forEach(function(k) {
+    var d2 = Object.getOwnPropertyDescriptor(n, k);
+    Object.defineProperty(a, k, d2.get ? d2 : {
+      enumerable: true,
+      get: function() {
+        return n[k];
+      }
+    });
+  });
+  return a;
+}
+var lodash_cloneExports = {};
+var lodash_clone = {
+  get exports() {
+    return lodash_cloneExports;
+  },
+  set exports(v) {
+    lodash_cloneExports = v;
+  }
+};
+(function(module, exports) {
+  var LARGE_ARRAY_SIZE = 200;
+  var HASH_UNDEFINED = "__lodash_hash_undefined__";
+  var MAX_SAFE_INTEGER = 9007199254740991;
+  var argsTag = "[object Arguments]", arrayTag = "[object Array]", boolTag = "[object Boolean]", dateTag = "[object Date]", errorTag = "[object Error]", funcTag = "[object Function]", genTag = "[object GeneratorFunction]", mapTag = "[object Map]", numberTag = "[object Number]", objectTag = "[object Object]", promiseTag = "[object Promise]", regexpTag = "[object RegExp]", setTag = "[object Set]", stringTag = "[object String]", symbolTag = "[object Symbol]", weakMapTag = "[object WeakMap]";
+  var arrayBufferTag = "[object ArrayBuffer]", dataViewTag = "[object DataView]", float32Tag = "[object Float32Array]", float64Tag = "[object Float64Array]", int8Tag = "[object Int8Array]", int16Tag = "[object Int16Array]", int32Tag = "[object Int32Array]", uint8Tag = "[object Uint8Array]", uint8ClampedTag = "[object Uint8ClampedArray]", uint16Tag = "[object Uint16Array]", uint32Tag = "[object Uint32Array]";
+  var reRegExpChar = /[\\^$.*+?()[\]{}|]/g;
+  var reFlags = /\w*$/;
+  var reIsHostCtor = /^\[object .+?Constructor\]$/;
+  var reIsUint = /^(?:0|[1-9]\d*)$/;
+  var cloneableTags = {};
+  cloneableTags[argsTag] = cloneableTags[arrayTag] = cloneableTags[arrayBufferTag] = cloneableTags[dataViewTag] = cloneableTags[boolTag] = cloneableTags[dateTag] = cloneableTags[float32Tag] = cloneableTags[float64Tag] = cloneableTags[int8Tag] = cloneableTags[int16Tag] = cloneableTags[int32Tag] = cloneableTags[mapTag] = cloneableTags[numberTag] = cloneableTags[objectTag] = cloneableTags[regexpTag] = cloneableTags[setTag] = cloneableTags[stringTag] = cloneableTags[symbolTag] = cloneableTags[uint8Tag] = cloneableTags[uint8ClampedTag] = cloneableTags[uint16Tag] = cloneableTags[uint32Tag] = true;
+  cloneableTags[errorTag] = cloneableTags[funcTag] = cloneableTags[weakMapTag] = false;
+  var freeGlobal = typeof commonjsGlobal == "object" && commonjsGlobal && commonjsGlobal.Object === Object && commonjsGlobal;
+  var freeSelf = typeof self == "object" && self && self.Object === Object && self;
+  var root = freeGlobal || freeSelf || Function("return this")();
+  var freeExports = exports && !exports.nodeType && exports;
+  var freeModule = freeExports && true && module && !module.nodeType && module;
+  var moduleExports = freeModule && freeModule.exports === freeExports;
+  function addMapEntry(map2, pair) {
+    map2.set(pair[0], pair[1]);
+    return map2;
+  }
+  function addSetEntry(set, value) {
+    set.add(value);
+    return set;
+  }
+  function arrayEach(array, iteratee) {
+    var index = -1, length = array ? array.length : 0;
+    while (++index < length) {
+      if (iteratee(array[index], index, array) === false) {
+        break;
+      }
+    }
+    return array;
+  }
+  function arrayPush(array, values) {
+    var index = -1, length = values.length, offset2 = array.length;
+    while (++index < length) {
+      array[offset2 + index] = values[index];
+    }
+    return array;
+  }
+  function arrayReduce(array, iteratee, accumulator, initAccum) {
+    var index = -1, length = array ? array.length : 0;
+    if (initAccum && length) {
+      accumulator = array[++index];
+    }
+    while (++index < length) {
+      accumulator = iteratee(accumulator, array[index], index, array);
+    }
+    return accumulator;
+  }
+  function baseTimes(n, iteratee) {
+    var index = -1, result2 = Array(n);
+    while (++index < n) {
+      result2[index] = iteratee(index);
+    }
+    return result2;
+  }
+  function getValue(object, key) {
+    return object == null ? void 0 : object[key];
+  }
+  function isHostObject(value) {
+    var result2 = false;
+    if (value != null && typeof value.toString != "function") {
+      try {
+        result2 = !!(value + "");
+      } catch (e) {
+      }
+    }
+    return result2;
+  }
+  function mapToArray(map2) {
+    var index = -1, result2 = Array(map2.size);
+    map2.forEach(function(value, key) {
+      result2[++index] = [key, value];
+    });
+    return result2;
+  }
+  function overArg(func, transform) {
+    return function(arg) {
+      return func(transform(arg));
+    };
+  }
+  function setToArray(set) {
+    var index = -1, result2 = Array(set.size);
+    set.forEach(function(value) {
+      result2[++index] = value;
+    });
+    return result2;
+  }
+  var arrayProto = Array.prototype, funcProto = Function.prototype, objectProto = Object.prototype;
+  var coreJsData = root["__core-js_shared__"];
+  var maskSrcKey = function() {
+    var uid = /[^.]+$/.exec(coreJsData && coreJsData.keys && coreJsData.keys.IE_PROTO || "");
+    return uid ? "Symbol(src)_1." + uid : "";
+  }();
+  var funcToString = funcProto.toString;
+  var hasOwnProperty2 = objectProto.hasOwnProperty;
+  var objectToString = objectProto.toString;
+  var reIsNative = RegExp(
+    "^" + funcToString.call(hasOwnProperty2).replace(reRegExpChar, "\\$&").replace(/hasOwnProperty|(function).*?(?=\\\()| for .+?(?=\\\])/g, "$1.*?") + "$"
+  );
+  var Buffer = moduleExports ? root.Buffer : void 0, Symbol2 = root.Symbol, Uint8Array2 = root.Uint8Array, getPrototype = overArg(Object.getPrototypeOf, Object), objectCreate = Object.create, propertyIsEnumerable = objectProto.propertyIsEnumerable, splice = arrayProto.splice;
+  var nativeGetSymbols = Object.getOwnPropertySymbols, nativeIsBuffer = Buffer ? Buffer.isBuffer : void 0, nativeKeys = overArg(Object.keys, Object);
+  var DataView2 = getNative(root, "DataView"), Map2 = getNative(root, "Map"), Promise2 = getNative(root, "Promise"), Set2 = getNative(root, "Set"), WeakMap2 = getNative(root, "WeakMap"), nativeCreate = getNative(Object, "create");
+  var dataViewCtorString = toSource(DataView2), mapCtorString = toSource(Map2), promiseCtorString = toSource(Promise2), setCtorString = toSource(Set2), weakMapCtorString = toSource(WeakMap2);
+  var symbolProto = Symbol2 ? Symbol2.prototype : void 0, symbolValueOf = symbolProto ? symbolProto.valueOf : void 0;
+  function Hash(entries) {
+    var index = -1, length = entries ? entries.length : 0;
+    this.clear();
+    while (++index < length) {
+      var entry = entries[index];
+      this.set(entry[0], entry[1]);
+    }
+  }
+  function hashClear() {
+    this.__data__ = nativeCreate ? nativeCreate(null) : {};
+  }
+  function hashDelete(key) {
+    return this.has(key) && delete this.__data__[key];
+  }
+  function hashGet(key) {
+    var data = this.__data__;
+    if (nativeCreate) {
+      var result2 = data[key];
+      return result2 === HASH_UNDEFINED ? void 0 : result2;
+    }
+    return hasOwnProperty2.call(data, key) ? data[key] : void 0;
+  }
+  function hashHas(key) {
+    var data = this.__data__;
+    return nativeCreate ? data[key] !== void 0 : hasOwnProperty2.call(data, key);
+  }
+  function hashSet(key, value) {
+    var data = this.__data__;
+    data[key] = nativeCreate && value === void 0 ? HASH_UNDEFINED : value;
+    return this;
+  }
+  Hash.prototype.clear = hashClear;
+  Hash.prototype["delete"] = hashDelete;
+  Hash.prototype.get = hashGet;
+  Hash.prototype.has = hashHas;
+  Hash.prototype.set = hashSet;
+  function ListCache(entries) {
+    var index = -1, length = entries ? entries.length : 0;
+    this.clear();
+    while (++index < length) {
+      var entry = entries[index];
+      this.set(entry[0], entry[1]);
+    }
+  }
+  function listCacheClear() {
+    this.__data__ = [];
+  }
+  function listCacheDelete(key) {
+    var data = this.__data__, index = assocIndexOf(data, key);
+    if (index < 0) {
+      return false;
+    }
+    var lastIndex = data.length - 1;
+    if (index == lastIndex) {
+      data.pop();
+    } else {
+      splice.call(data, index, 1);
+    }
+    return true;
+  }
+  function listCacheGet(key) {
+    var data = this.__data__, index = assocIndexOf(data, key);
+    return index < 0 ? void 0 : data[index][1];
+  }
+  function listCacheHas(key) {
+    return assocIndexOf(this.__data__, key) > -1;
+  }
+  function listCacheSet(key, value) {
+    var data = this.__data__, index = assocIndexOf(data, key);
+    if (index < 0) {
+      data.push([key, value]);
+    } else {
+      data[index][1] = value;
+    }
+    return this;
+  }
+  ListCache.prototype.clear = listCacheClear;
+  ListCache.prototype["delete"] = listCacheDelete;
+  ListCache.prototype.get = listCacheGet;
+  ListCache.prototype.has = listCacheHas;
+  ListCache.prototype.set = listCacheSet;
+  function MapCache(entries) {
+    var index = -1, length = entries ? entries.length : 0;
+    this.clear();
+    while (++index < length) {
+      var entry = entries[index];
+      this.set(entry[0], entry[1]);
+    }
+  }
+  function mapCacheClear() {
+    this.__data__ = {
+      "hash": new Hash(),
+      "map": new (Map2 || ListCache)(),
+      "string": new Hash()
+    };
+  }
+  function mapCacheDelete(key) {
+    return getMapData(this, key)["delete"](key);
+  }
+  function mapCacheGet(key) {
+    return getMapData(this, key).get(key);
+  }
+  function mapCacheHas(key) {
+    return getMapData(this, key).has(key);
+  }
+  function mapCacheSet(key, value) {
+    getMapData(this, key).set(key, value);
+    return this;
+  }
+  MapCache.prototype.clear = mapCacheClear;
+  MapCache.prototype["delete"] = mapCacheDelete;
+  MapCache.prototype.get = mapCacheGet;
+  MapCache.prototype.has = mapCacheHas;
+  MapCache.prototype.set = mapCacheSet;
+  function Stack(entries) {
+    this.__data__ = new ListCache(entries);
+  }
+  function stackClear() {
+    this.__data__ = new ListCache();
+  }
+  function stackDelete(key) {
+    return this.__data__["delete"](key);
+  }
+  function stackGet(key) {
+    return this.__data__.get(key);
+  }
+  function stackHas(key) {
+    return this.__data__.has(key);
+  }
+  function stackSet(key, value) {
+    var cache2 = this.__data__;
+    if (cache2 instanceof ListCache) {
+      var pairs = cache2.__data__;
+      if (!Map2 || pairs.length < LARGE_ARRAY_SIZE - 1) {
+        pairs.push([key, value]);
+        return this;
+      }
+      cache2 = this.__data__ = new MapCache(pairs);
+    }
+    cache2.set(key, value);
+    return this;
+  }
+  Stack.prototype.clear = stackClear;
+  Stack.prototype["delete"] = stackDelete;
+  Stack.prototype.get = stackGet;
+  Stack.prototype.has = stackHas;
+  Stack.prototype.set = stackSet;
+  function arrayLikeKeys(value, inherited) {
+    var result2 = isArray2(value) || isArguments5(value) ? baseTimes(value.length, String) : [];
+    var length = result2.length, skipIndexes = !!length;
+    for (var key in value) {
+      if ((inherited || hasOwnProperty2.call(value, key)) && !(skipIndexes && (key == "length" || isIndex(key, length)))) {
+        result2.push(key);
+      }
+    }
+    return result2;
+  }
+  function assignValue(object, key, value) {
+    var objValue = object[key];
+    if (!(hasOwnProperty2.call(object, key) && eq(objValue, value)) || value === void 0 && !(key in object)) {
+      object[key] = value;
+    }
+  }
+  function assocIndexOf(array, key) {
+    var length = array.length;
+    while (length--) {
+      if (eq(array[length][0], key)) {
+        return length;
+      }
+    }
+    return -1;
+  }
+  function baseAssign(object, source2) {
+    return object && copyObject(source2, keys3(source2), object);
+  }
+  function baseClone(value, isDeep, isFull, customizer, key, object, stack) {
+    var result2;
+    if (customizer) {
+      result2 = object ? customizer(value, key, object, stack) : customizer(value);
+    }
+    if (result2 !== void 0) {
+      return result2;
+    }
+    if (!isObject3(value)) {
+      return value;
+    }
+    var isArr = isArray2(value);
+    if (isArr) {
+      result2 = initCloneArray(value);
+      if (!isDeep) {
+        return copyArray(value, result2);
+      }
+    } else {
+      var tag2 = getTag(value), isFunc = tag2 == funcTag || tag2 == genTag;
+      if (isBuffer2(value)) {
+        return cloneBuffer(value, isDeep);
+      }
+      if (tag2 == objectTag || tag2 == argsTag || isFunc && !object) {
+        if (isHostObject(value)) {
+          return object ? value : {};
+        }
+        result2 = initCloneObject(isFunc ? {} : value);
+        if (!isDeep) {
+          return copySymbols(value, baseAssign(result2, value));
+        }
+      } else {
+        if (!cloneableTags[tag2]) {
+          return object ? value : {};
+        }
+        result2 = initCloneByTag(value, tag2, baseClone, isDeep);
+      }
+    }
+    stack || (stack = new Stack());
+    var stacked = stack.get(value);
+    if (stacked) {
+      return stacked;
+    }
+    stack.set(value, result2);
+    if (!isArr) {
+      var props = isFull ? getAllKeys(value) : keys3(value);
+    }
+    arrayEach(props || value, function(subValue, key2) {
+      if (props) {
+        key2 = subValue;
+        subValue = value[key2];
+      }
+      assignValue(result2, key2, baseClone(subValue, isDeep, isFull, customizer, key2, value, stack));
+    });
+    return result2;
+  }
+  function baseCreate(proto2) {
+    return isObject3(proto2) ? objectCreate(proto2) : {};
+  }
+  function baseGetAllKeys(object, keysFunc, symbolsFunc) {
+    var result2 = keysFunc(object);
+    return isArray2(object) ? result2 : arrayPush(result2, symbolsFunc(object));
+  }
+  function baseGetTag(value) {
+    return objectToString.call(value);
+  }
+  function baseIsNative(value) {
+    if (!isObject3(value) || isMasked(value)) {
+      return false;
+    }
+    var pattern = isFunction2(value) || isHostObject(value) ? reIsNative : reIsHostCtor;
+    return pattern.test(toSource(value));
+  }
+  function baseKeys(object) {
+    if (!isPrototype2(object)) {
+      return nativeKeys(object);
+    }
+    var result2 = [];
+    for (var key in Object(object)) {
+      if (hasOwnProperty2.call(object, key) && key != "constructor") {
+        result2.push(key);
+      }
+    }
+    return result2;
+  }
+  function cloneBuffer(buffer, isDeep) {
+    if (isDeep) {
+      return buffer.slice();
+    }
+    var result2 = new buffer.constructor(buffer.length);
+    buffer.copy(result2);
+    return result2;
+  }
+  function cloneArrayBuffer(arrayBuffer) {
+    var result2 = new arrayBuffer.constructor(arrayBuffer.byteLength);
+    new Uint8Array2(result2).set(new Uint8Array2(arrayBuffer));
+    return result2;
+  }
+  function cloneDataView(dataView, isDeep) {
+    var buffer = isDeep ? cloneArrayBuffer(dataView.buffer) : dataView.buffer;
+    return new dataView.constructor(buffer, dataView.byteOffset, dataView.byteLength);
+  }
+  function cloneMap(map2, isDeep, cloneFunc) {
+    var array = isDeep ? cloneFunc(mapToArray(map2), true) : mapToArray(map2);
+    return arrayReduce(array, addMapEntry, new map2.constructor());
+  }
+  function cloneRegExp(regexp) {
+    var result2 = new regexp.constructor(regexp.source, reFlags.exec(regexp));
+    result2.lastIndex = regexp.lastIndex;
+    return result2;
+  }
+  function cloneSet(set, isDeep, cloneFunc) {
+    var array = isDeep ? cloneFunc(setToArray(set), true) : setToArray(set);
+    return arrayReduce(array, addSetEntry, new set.constructor());
+  }
+  function cloneSymbol(symbol) {
+    return symbolValueOf ? Object(symbolValueOf.call(symbol)) : {};
+  }
+  function cloneTypedArray(typedArray, isDeep) {
+    var buffer = isDeep ? cloneArrayBuffer(typedArray.buffer) : typedArray.buffer;
+    return new typedArray.constructor(buffer, typedArray.byteOffset, typedArray.length);
+  }
+  function copyArray(source2, array) {
+    var index = -1, length = source2.length;
+    array || (array = Array(length));
+    while (++index < length) {
+      array[index] = source2[index];
+    }
+    return array;
+  }
+  function copyObject(source2, props, object, customizer) {
+    object || (object = {});
+    var index = -1, length = props.length;
+    while (++index < length) {
+      var key = props[index];
+      var newValue = customizer ? customizer(object[key], source2[key], key, object, source2) : void 0;
+      assignValue(object, key, newValue === void 0 ? source2[key] : newValue);
+    }
+    return object;
+  }
+  function copySymbols(source2, object) {
+    return copyObject(source2, getSymbols(source2), object);
+  }
+  function getAllKeys(object) {
+    return baseGetAllKeys(object, keys3, getSymbols);
+  }
+  function getMapData(map2, key) {
+    var data = map2.__data__;
+    return isKeyable(key) ? data[typeof key == "string" ? "string" : "hash"] : data.map;
+  }
+  function getNative(object, key) {
+    var value = getValue(object, key);
+    return baseIsNative(value) ? value : void 0;
+  }
+  var getSymbols = nativeGetSymbols ? overArg(nativeGetSymbols, Object) : stubArray;
+  var getTag = baseGetTag;
+  if (DataView2 && getTag(new DataView2(new ArrayBuffer(1))) != dataViewTag || Map2 && getTag(new Map2()) != mapTag || Promise2 && getTag(Promise2.resolve()) != promiseTag || Set2 && getTag(new Set2()) != setTag || WeakMap2 && getTag(new WeakMap2()) != weakMapTag) {
+    getTag = function(value) {
+      var result2 = objectToString.call(value), Ctor = result2 == objectTag ? value.constructor : void 0, ctorString = Ctor ? toSource(Ctor) : void 0;
+      if (ctorString) {
+        switch (ctorString) {
+          case dataViewCtorString:
+            return dataViewTag;
+          case mapCtorString:
+            return mapTag;
+          case promiseCtorString:
+            return promiseTag;
+          case setCtorString:
+            return setTag;
+          case weakMapCtorString:
+            return weakMapTag;
+        }
+      }
+      return result2;
+    };
+  }
+  function initCloneArray(array) {
+    var length = array.length, result2 = array.constructor(length);
+    if (length && typeof array[0] == "string" && hasOwnProperty2.call(array, "index")) {
+      result2.index = array.index;
+      result2.input = array.input;
+    }
+    return result2;
+  }
+  function initCloneObject(object) {
+    return typeof object.constructor == "function" && !isPrototype2(object) ? baseCreate(getPrototype(object)) : {};
+  }
+  function initCloneByTag(object, tag2, cloneFunc, isDeep) {
+    var Ctor = object.constructor;
+    switch (tag2) {
+      case arrayBufferTag:
+        return cloneArrayBuffer(object);
+      case boolTag:
+      case dateTag:
+        return new Ctor(+object);
+      case dataViewTag:
+        return cloneDataView(object, isDeep);
+      case float32Tag:
+      case float64Tag:
+      case int8Tag:
+      case int16Tag:
+      case int32Tag:
+      case uint8Tag:
+      case uint8ClampedTag:
+      case uint16Tag:
+      case uint32Tag:
+        return cloneTypedArray(object, isDeep);
+      case mapTag:
+        return cloneMap(object, isDeep, cloneFunc);
+      case numberTag:
+      case stringTag:
+        return new Ctor(object);
+      case regexpTag:
+        return cloneRegExp(object);
+      case setTag:
+        return cloneSet(object, isDeep, cloneFunc);
+      case symbolTag:
+        return cloneSymbol(object);
+    }
+  }
+  function isIndex(value, length) {
+    length = length == null ? MAX_SAFE_INTEGER : length;
+    return !!length && (typeof value == "number" || reIsUint.test(value)) && (value > -1 && value % 1 == 0 && value < length);
+  }
+  function isKeyable(value) {
+    var type = typeof value;
+    return type == "string" || type == "number" || type == "symbol" || type == "boolean" ? value !== "__proto__" : value === null;
+  }
+  function isMasked(func) {
+    return !!maskSrcKey && maskSrcKey in func;
+  }
+  function isPrototype2(value) {
+    var Ctor = value && value.constructor, proto2 = typeof Ctor == "function" && Ctor.prototype || objectProto;
+    return value === proto2;
+  }
+  function toSource(func) {
+    if (func != null) {
+      try {
+        return funcToString.call(func);
+      } catch (e) {
+      }
+      try {
+        return func + "";
+      } catch (e) {
+      }
+    }
+    return "";
+  }
+  function clone2(value) {
+    return baseClone(value, false, true);
+  }
+  function eq(value, other) {
+    return value === other || value !== value && other !== other;
+  }
+  function isArguments5(value) {
+    return isArrayLikeObject(value) && hasOwnProperty2.call(value, "callee") && (!propertyIsEnumerable.call(value, "callee") || objectToString.call(value) == argsTag);
+  }
+  var isArray2 = Array.isArray;
+  function isArrayLike(value) {
+    return value != null && isLength(value.length) && !isFunction2(value);
+  }
+  function isArrayLikeObject(value) {
+    return isObjectLike(value) && isArrayLike(value);
+  }
+  var isBuffer2 = nativeIsBuffer || stubFalse;
+  function isFunction2(value) {
+    var tag2 = isObject3(value) ? objectToString.call(value) : "";
+    return tag2 == funcTag || tag2 == genTag;
+  }
+  function isLength(value) {
+    return typeof value == "number" && value > -1 && value % 1 == 0 && value <= MAX_SAFE_INTEGER;
+  }
+  function isObject3(value) {
+    var type = typeof value;
+    return !!value && (type == "object" || type == "function");
+  }
+  function isObjectLike(value) {
+    return !!value && typeof value == "object";
+  }
+  function keys3(object) {
+    return isArrayLike(object) ? arrayLikeKeys(object) : baseKeys(object);
+  }
+  function stubArray() {
+    return [];
+  }
+  function stubFalse() {
+    return false;
+  }
+  module.exports = clone2;
+})(lodash_clone, lodash_cloneExports);
+const __clone = lodash_cloneExports;
+var lodash_clonedeepExports = {};
+var lodash_clonedeep = {
+  get exports() {
+    return lodash_clonedeepExports;
+  },
+  set exports(v) {
+    lodash_clonedeepExports = v;
+  }
+};
+(function(module, exports) {
+  var LARGE_ARRAY_SIZE = 200;
+  var HASH_UNDEFINED = "__lodash_hash_undefined__";
+  var MAX_SAFE_INTEGER = 9007199254740991;
+  var argsTag = "[object Arguments]", arrayTag = "[object Array]", boolTag = "[object Boolean]", dateTag = "[object Date]", errorTag = "[object Error]", funcTag = "[object Function]", genTag = "[object GeneratorFunction]", mapTag = "[object Map]", numberTag = "[object Number]", objectTag = "[object Object]", promiseTag = "[object Promise]", regexpTag = "[object RegExp]", setTag = "[object Set]", stringTag = "[object String]", symbolTag = "[object Symbol]", weakMapTag = "[object WeakMap]";
+  var arrayBufferTag = "[object ArrayBuffer]", dataViewTag = "[object DataView]", float32Tag = "[object Float32Array]", float64Tag = "[object Float64Array]", int8Tag = "[object Int8Array]", int16Tag = "[object Int16Array]", int32Tag = "[object Int32Array]", uint8Tag = "[object Uint8Array]", uint8ClampedTag = "[object Uint8ClampedArray]", uint16Tag = "[object Uint16Array]", uint32Tag = "[object Uint32Array]";
+  var reRegExpChar = /[\\^$.*+?()[\]{}|]/g;
+  var reFlags = /\w*$/;
+  var reIsHostCtor = /^\[object .+?Constructor\]$/;
+  var reIsUint = /^(?:0|[1-9]\d*)$/;
+  var cloneableTags = {};
+  cloneableTags[argsTag] = cloneableTags[arrayTag] = cloneableTags[arrayBufferTag] = cloneableTags[dataViewTag] = cloneableTags[boolTag] = cloneableTags[dateTag] = cloneableTags[float32Tag] = cloneableTags[float64Tag] = cloneableTags[int8Tag] = cloneableTags[int16Tag] = cloneableTags[int32Tag] = cloneableTags[mapTag] = cloneableTags[numberTag] = cloneableTags[objectTag] = cloneableTags[regexpTag] = cloneableTags[setTag] = cloneableTags[stringTag] = cloneableTags[symbolTag] = cloneableTags[uint8Tag] = cloneableTags[uint8ClampedTag] = cloneableTags[uint16Tag] = cloneableTags[uint32Tag] = true;
+  cloneableTags[errorTag] = cloneableTags[funcTag] = cloneableTags[weakMapTag] = false;
+  var freeGlobal = typeof commonjsGlobal == "object" && commonjsGlobal && commonjsGlobal.Object === Object && commonjsGlobal;
+  var freeSelf = typeof self == "object" && self && self.Object === Object && self;
+  var root = freeGlobal || freeSelf || Function("return this")();
+  var freeExports = exports && !exports.nodeType && exports;
+  var freeModule = freeExports && true && module && !module.nodeType && module;
+  var moduleExports = freeModule && freeModule.exports === freeExports;
+  function addMapEntry(map2, pair) {
+    map2.set(pair[0], pair[1]);
+    return map2;
+  }
+  function addSetEntry(set, value) {
+    set.add(value);
+    return set;
+  }
+  function arrayEach(array, iteratee) {
+    var index = -1, length = array ? array.length : 0;
+    while (++index < length) {
+      if (iteratee(array[index], index, array) === false) {
+        break;
+      }
+    }
+    return array;
+  }
+  function arrayPush(array, values) {
+    var index = -1, length = values.length, offset2 = array.length;
+    while (++index < length) {
+      array[offset2 + index] = values[index];
+    }
+    return array;
+  }
+  function arrayReduce(array, iteratee, accumulator, initAccum) {
+    var index = -1, length = array ? array.length : 0;
+    if (initAccum && length) {
+      accumulator = array[++index];
+    }
+    while (++index < length) {
+      accumulator = iteratee(accumulator, array[index], index, array);
+    }
+    return accumulator;
+  }
+  function baseTimes(n, iteratee) {
+    var index = -1, result2 = Array(n);
+    while (++index < n) {
+      result2[index] = iteratee(index);
+    }
+    return result2;
+  }
+  function getValue(object, key) {
+    return object == null ? void 0 : object[key];
+  }
+  function isHostObject(value) {
+    var result2 = false;
+    if (value != null && typeof value.toString != "function") {
+      try {
+        result2 = !!(value + "");
+      } catch (e) {
+      }
+    }
+    return result2;
+  }
+  function mapToArray(map2) {
+    var index = -1, result2 = Array(map2.size);
+    map2.forEach(function(value, key) {
+      result2[++index] = [key, value];
+    });
+    return result2;
+  }
+  function overArg(func, transform) {
+    return function(arg) {
+      return func(transform(arg));
+    };
+  }
+  function setToArray(set) {
+    var index = -1, result2 = Array(set.size);
+    set.forEach(function(value) {
+      result2[++index] = value;
+    });
+    return result2;
+  }
+  var arrayProto = Array.prototype, funcProto = Function.prototype, objectProto = Object.prototype;
+  var coreJsData = root["__core-js_shared__"];
+  var maskSrcKey = function() {
+    var uid = /[^.]+$/.exec(coreJsData && coreJsData.keys && coreJsData.keys.IE_PROTO || "");
+    return uid ? "Symbol(src)_1." + uid : "";
+  }();
+  var funcToString = funcProto.toString;
+  var hasOwnProperty2 = objectProto.hasOwnProperty;
+  var objectToString = objectProto.toString;
+  var reIsNative = RegExp(
+    "^" + funcToString.call(hasOwnProperty2).replace(reRegExpChar, "\\$&").replace(/hasOwnProperty|(function).*?(?=\\\()| for .+?(?=\\\])/g, "$1.*?") + "$"
+  );
+  var Buffer = moduleExports ? root.Buffer : void 0, Symbol2 = root.Symbol, Uint8Array2 = root.Uint8Array, getPrototype = overArg(Object.getPrototypeOf, Object), objectCreate = Object.create, propertyIsEnumerable = objectProto.propertyIsEnumerable, splice = arrayProto.splice;
+  var nativeGetSymbols = Object.getOwnPropertySymbols, nativeIsBuffer = Buffer ? Buffer.isBuffer : void 0, nativeKeys = overArg(Object.keys, Object);
+  var DataView2 = getNative(root, "DataView"), Map2 = getNative(root, "Map"), Promise2 = getNative(root, "Promise"), Set2 = getNative(root, "Set"), WeakMap2 = getNative(root, "WeakMap"), nativeCreate = getNative(Object, "create");
+  var dataViewCtorString = toSource(DataView2), mapCtorString = toSource(Map2), promiseCtorString = toSource(Promise2), setCtorString = toSource(Set2), weakMapCtorString = toSource(WeakMap2);
+  var symbolProto = Symbol2 ? Symbol2.prototype : void 0, symbolValueOf = symbolProto ? symbolProto.valueOf : void 0;
+  function Hash(entries) {
+    var index = -1, length = entries ? entries.length : 0;
+    this.clear();
+    while (++index < length) {
+      var entry = entries[index];
+      this.set(entry[0], entry[1]);
+    }
+  }
+  function hashClear() {
+    this.__data__ = nativeCreate ? nativeCreate(null) : {};
+  }
+  function hashDelete(key) {
+    return this.has(key) && delete this.__data__[key];
+  }
+  function hashGet(key) {
+    var data = this.__data__;
+    if (nativeCreate) {
+      var result2 = data[key];
+      return result2 === HASH_UNDEFINED ? void 0 : result2;
+    }
+    return hasOwnProperty2.call(data, key) ? data[key] : void 0;
+  }
+  function hashHas(key) {
+    var data = this.__data__;
+    return nativeCreate ? data[key] !== void 0 : hasOwnProperty2.call(data, key);
+  }
+  function hashSet(key, value) {
+    var data = this.__data__;
+    data[key] = nativeCreate && value === void 0 ? HASH_UNDEFINED : value;
+    return this;
+  }
+  Hash.prototype.clear = hashClear;
+  Hash.prototype["delete"] = hashDelete;
+  Hash.prototype.get = hashGet;
+  Hash.prototype.has = hashHas;
+  Hash.prototype.set = hashSet;
+  function ListCache(entries) {
+    var index = -1, length = entries ? entries.length : 0;
+    this.clear();
+    while (++index < length) {
+      var entry = entries[index];
+      this.set(entry[0], entry[1]);
+    }
+  }
+  function listCacheClear() {
+    this.__data__ = [];
+  }
+  function listCacheDelete(key) {
+    var data = this.__data__, index = assocIndexOf(data, key);
+    if (index < 0) {
+      return false;
+    }
+    var lastIndex = data.length - 1;
+    if (index == lastIndex) {
+      data.pop();
+    } else {
+      splice.call(data, index, 1);
+    }
+    return true;
+  }
+  function listCacheGet(key) {
+    var data = this.__data__, index = assocIndexOf(data, key);
+    return index < 0 ? void 0 : data[index][1];
+  }
+  function listCacheHas(key) {
+    return assocIndexOf(this.__data__, key) > -1;
+  }
+  function listCacheSet(key, value) {
+    var data = this.__data__, index = assocIndexOf(data, key);
+    if (index < 0) {
+      data.push([key, value]);
+    } else {
+      data[index][1] = value;
+    }
+    return this;
+  }
+  ListCache.prototype.clear = listCacheClear;
+  ListCache.prototype["delete"] = listCacheDelete;
+  ListCache.prototype.get = listCacheGet;
+  ListCache.prototype.has = listCacheHas;
+  ListCache.prototype.set = listCacheSet;
+  function MapCache(entries) {
+    var index = -1, length = entries ? entries.length : 0;
+    this.clear();
+    while (++index < length) {
+      var entry = entries[index];
+      this.set(entry[0], entry[1]);
+    }
+  }
+  function mapCacheClear() {
+    this.__data__ = {
+      "hash": new Hash(),
+      "map": new (Map2 || ListCache)(),
+      "string": new Hash()
+    };
+  }
+  function mapCacheDelete(key) {
+    return getMapData(this, key)["delete"](key);
+  }
+  function mapCacheGet(key) {
+    return getMapData(this, key).get(key);
+  }
+  function mapCacheHas(key) {
+    return getMapData(this, key).has(key);
+  }
+  function mapCacheSet(key, value) {
+    getMapData(this, key).set(key, value);
+    return this;
+  }
+  MapCache.prototype.clear = mapCacheClear;
+  MapCache.prototype["delete"] = mapCacheDelete;
+  MapCache.prototype.get = mapCacheGet;
+  MapCache.prototype.has = mapCacheHas;
+  MapCache.prototype.set = mapCacheSet;
+  function Stack(entries) {
+    this.__data__ = new ListCache(entries);
+  }
+  function stackClear() {
+    this.__data__ = new ListCache();
+  }
+  function stackDelete(key) {
+    return this.__data__["delete"](key);
+  }
+  function stackGet(key) {
+    return this.__data__.get(key);
+  }
+  function stackHas(key) {
+    return this.__data__.has(key);
+  }
+  function stackSet(key, value) {
+    var cache2 = this.__data__;
+    if (cache2 instanceof ListCache) {
+      var pairs = cache2.__data__;
+      if (!Map2 || pairs.length < LARGE_ARRAY_SIZE - 1) {
+        pairs.push([key, value]);
+        return this;
+      }
+      cache2 = this.__data__ = new MapCache(pairs);
+    }
+    cache2.set(key, value);
+    return this;
+  }
+  Stack.prototype.clear = stackClear;
+  Stack.prototype["delete"] = stackDelete;
+  Stack.prototype.get = stackGet;
+  Stack.prototype.has = stackHas;
+  Stack.prototype.set = stackSet;
+  function arrayLikeKeys(value, inherited) {
+    var result2 = isArray2(value) || isArguments5(value) ? baseTimes(value.length, String) : [];
+    var length = result2.length, skipIndexes = !!length;
+    for (var key in value) {
+      if ((inherited || hasOwnProperty2.call(value, key)) && !(skipIndexes && (key == "length" || isIndex(key, length)))) {
+        result2.push(key);
+      }
+    }
+    return result2;
+  }
+  function assignValue(object, key, value) {
+    var objValue = object[key];
+    if (!(hasOwnProperty2.call(object, key) && eq(objValue, value)) || value === void 0 && !(key in object)) {
+      object[key] = value;
+    }
+  }
+  function assocIndexOf(array, key) {
+    var length = array.length;
+    while (length--) {
+      if (eq(array[length][0], key)) {
+        return length;
+      }
+    }
+    return -1;
+  }
+  function baseAssign(object, source2) {
+    return object && copyObject(source2, keys3(source2), object);
+  }
+  function baseClone(value, isDeep, isFull, customizer, key, object, stack) {
+    var result2;
+    if (customizer) {
+      result2 = object ? customizer(value, key, object, stack) : customizer(value);
+    }
+    if (result2 !== void 0) {
+      return result2;
+    }
+    if (!isObject3(value)) {
+      return value;
+    }
+    var isArr = isArray2(value);
+    if (isArr) {
+      result2 = initCloneArray(value);
+      if (!isDeep) {
+        return copyArray(value, result2);
+      }
+    } else {
+      var tag2 = getTag(value), isFunc = tag2 == funcTag || tag2 == genTag;
+      if (isBuffer2(value)) {
+        return cloneBuffer(value, isDeep);
+      }
+      if (tag2 == objectTag || tag2 == argsTag || isFunc && !object) {
+        if (isHostObject(value)) {
+          return object ? value : {};
+        }
+        result2 = initCloneObject(isFunc ? {} : value);
+        if (!isDeep) {
+          return copySymbols(value, baseAssign(result2, value));
+        }
+      } else {
+        if (!cloneableTags[tag2]) {
+          return object ? value : {};
+        }
+        result2 = initCloneByTag(value, tag2, baseClone, isDeep);
+      }
+    }
+    stack || (stack = new Stack());
+    var stacked = stack.get(value);
+    if (stacked) {
+      return stacked;
+    }
+    stack.set(value, result2);
+    if (!isArr) {
+      var props = isFull ? getAllKeys(value) : keys3(value);
+    }
+    arrayEach(props || value, function(subValue, key2) {
+      if (props) {
+        key2 = subValue;
+        subValue = value[key2];
+      }
+      assignValue(result2, key2, baseClone(subValue, isDeep, isFull, customizer, key2, value, stack));
+    });
+    return result2;
+  }
+  function baseCreate(proto2) {
+    return isObject3(proto2) ? objectCreate(proto2) : {};
+  }
+  function baseGetAllKeys(object, keysFunc, symbolsFunc) {
+    var result2 = keysFunc(object);
+    return isArray2(object) ? result2 : arrayPush(result2, symbolsFunc(object));
+  }
+  function baseGetTag(value) {
+    return objectToString.call(value);
+  }
+  function baseIsNative(value) {
+    if (!isObject3(value) || isMasked(value)) {
+      return false;
+    }
+    var pattern = isFunction2(value) || isHostObject(value) ? reIsNative : reIsHostCtor;
+    return pattern.test(toSource(value));
+  }
+  function baseKeys(object) {
+    if (!isPrototype2(object)) {
+      return nativeKeys(object);
+    }
+    var result2 = [];
+    for (var key in Object(object)) {
+      if (hasOwnProperty2.call(object, key) && key != "constructor") {
+        result2.push(key);
+      }
+    }
+    return result2;
+  }
+  function cloneBuffer(buffer, isDeep) {
+    if (isDeep) {
+      return buffer.slice();
+    }
+    var result2 = new buffer.constructor(buffer.length);
+    buffer.copy(result2);
+    return result2;
+  }
+  function cloneArrayBuffer(arrayBuffer) {
+    var result2 = new arrayBuffer.constructor(arrayBuffer.byteLength);
+    new Uint8Array2(result2).set(new Uint8Array2(arrayBuffer));
+    return result2;
+  }
+  function cloneDataView(dataView, isDeep) {
+    var buffer = isDeep ? cloneArrayBuffer(dataView.buffer) : dataView.buffer;
+    return new dataView.constructor(buffer, dataView.byteOffset, dataView.byteLength);
+  }
+  function cloneMap(map2, isDeep, cloneFunc) {
+    var array = isDeep ? cloneFunc(mapToArray(map2), true) : mapToArray(map2);
+    return arrayReduce(array, addMapEntry, new map2.constructor());
+  }
+  function cloneRegExp(regexp) {
+    var result2 = new regexp.constructor(regexp.source, reFlags.exec(regexp));
+    result2.lastIndex = regexp.lastIndex;
+    return result2;
+  }
+  function cloneSet(set, isDeep, cloneFunc) {
+    var array = isDeep ? cloneFunc(setToArray(set), true) : setToArray(set);
+    return arrayReduce(array, addSetEntry, new set.constructor());
+  }
+  function cloneSymbol(symbol) {
+    return symbolValueOf ? Object(symbolValueOf.call(symbol)) : {};
+  }
+  function cloneTypedArray(typedArray, isDeep) {
+    var buffer = isDeep ? cloneArrayBuffer(typedArray.buffer) : typedArray.buffer;
+    return new typedArray.constructor(buffer, typedArray.byteOffset, typedArray.length);
+  }
+  function copyArray(source2, array) {
+    var index = -1, length = source2.length;
+    array || (array = Array(length));
+    while (++index < length) {
+      array[index] = source2[index];
+    }
+    return array;
+  }
+  function copyObject(source2, props, object, customizer) {
+    object || (object = {});
+    var index = -1, length = props.length;
+    while (++index < length) {
+      var key = props[index];
+      var newValue = customizer ? customizer(object[key], source2[key], key, object, source2) : void 0;
+      assignValue(object, key, newValue === void 0 ? source2[key] : newValue);
+    }
+    return object;
+  }
+  function copySymbols(source2, object) {
+    return copyObject(source2, getSymbols(source2), object);
+  }
+  function getAllKeys(object) {
+    return baseGetAllKeys(object, keys3, getSymbols);
+  }
+  function getMapData(map2, key) {
+    var data = map2.__data__;
+    return isKeyable(key) ? data[typeof key == "string" ? "string" : "hash"] : data.map;
+  }
+  function getNative(object, key) {
+    var value = getValue(object, key);
+    return baseIsNative(value) ? value : void 0;
+  }
+  var getSymbols = nativeGetSymbols ? overArg(nativeGetSymbols, Object) : stubArray;
+  var getTag = baseGetTag;
+  if (DataView2 && getTag(new DataView2(new ArrayBuffer(1))) != dataViewTag || Map2 && getTag(new Map2()) != mapTag || Promise2 && getTag(Promise2.resolve()) != promiseTag || Set2 && getTag(new Set2()) != setTag || WeakMap2 && getTag(new WeakMap2()) != weakMapTag) {
+    getTag = function(value) {
+      var result2 = objectToString.call(value), Ctor = result2 == objectTag ? value.constructor : void 0, ctorString = Ctor ? toSource(Ctor) : void 0;
+      if (ctorString) {
+        switch (ctorString) {
+          case dataViewCtorString:
+            return dataViewTag;
+          case mapCtorString:
+            return mapTag;
+          case promiseCtorString:
+            return promiseTag;
+          case setCtorString:
+            return setTag;
+          case weakMapCtorString:
+            return weakMapTag;
+        }
+      }
+      return result2;
+    };
+  }
+  function initCloneArray(array) {
+    var length = array.length, result2 = array.constructor(length);
+    if (length && typeof array[0] == "string" && hasOwnProperty2.call(array, "index")) {
+      result2.index = array.index;
+      result2.input = array.input;
+    }
+    return result2;
+  }
+  function initCloneObject(object) {
+    return typeof object.constructor == "function" && !isPrototype2(object) ? baseCreate(getPrototype(object)) : {};
+  }
+  function initCloneByTag(object, tag2, cloneFunc, isDeep) {
+    var Ctor = object.constructor;
+    switch (tag2) {
+      case arrayBufferTag:
+        return cloneArrayBuffer(object);
+      case boolTag:
+      case dateTag:
+        return new Ctor(+object);
+      case dataViewTag:
+        return cloneDataView(object, isDeep);
+      case float32Tag:
+      case float64Tag:
+      case int8Tag:
+      case int16Tag:
+      case int32Tag:
+      case uint8Tag:
+      case uint8ClampedTag:
+      case uint16Tag:
+      case uint32Tag:
+        return cloneTypedArray(object, isDeep);
+      case mapTag:
+        return cloneMap(object, isDeep, cloneFunc);
+      case numberTag:
+      case stringTag:
+        return new Ctor(object);
+      case regexpTag:
+        return cloneRegExp(object);
+      case setTag:
+        return cloneSet(object, isDeep, cloneFunc);
+      case symbolTag:
+        return cloneSymbol(object);
+    }
+  }
+  function isIndex(value, length) {
+    length = length == null ? MAX_SAFE_INTEGER : length;
+    return !!length && (typeof value == "number" || reIsUint.test(value)) && (value > -1 && value % 1 == 0 && value < length);
+  }
+  function isKeyable(value) {
+    var type = typeof value;
+    return type == "string" || type == "number" || type == "symbol" || type == "boolean" ? value !== "__proto__" : value === null;
+  }
+  function isMasked(func) {
+    return !!maskSrcKey && maskSrcKey in func;
+  }
+  function isPrototype2(value) {
+    var Ctor = value && value.constructor, proto2 = typeof Ctor == "function" && Ctor.prototype || objectProto;
+    return value === proto2;
+  }
+  function toSource(func) {
+    if (func != null) {
+      try {
+        return funcToString.call(func);
+      } catch (e) {
+      }
+      try {
+        return func + "";
+      } catch (e) {
+      }
+    }
+    return "";
+  }
+  function cloneDeep(value) {
+    return baseClone(value, true, true);
+  }
+  function eq(value, other) {
+    return value === other || value !== value && other !== other;
+  }
+  function isArguments5(value) {
+    return isArrayLikeObject(value) && hasOwnProperty2.call(value, "callee") && (!propertyIsEnumerable.call(value, "callee") || objectToString.call(value) == argsTag);
+  }
+  var isArray2 = Array.isArray;
+  function isArrayLike(value) {
+    return value != null && isLength(value.length) && !isFunction2(value);
+  }
+  function isArrayLikeObject(value) {
+    return isObjectLike(value) && isArrayLike(value);
+  }
+  var isBuffer2 = nativeIsBuffer || stubFalse;
+  function isFunction2(value) {
+    var tag2 = isObject3(value) ? objectToString.call(value) : "";
+    return tag2 == funcTag || tag2 == genTag;
+  }
+  function isLength(value) {
+    return typeof value == "number" && value > -1 && value % 1 == 0 && value <= MAX_SAFE_INTEGER;
+  }
+  function isObject3(value) {
+    var type = typeof value;
+    return !!value && (type == "object" || type == "function");
+  }
+  function isObjectLike(value) {
+    return !!value && typeof value == "object";
+  }
+  function keys3(object) {
+    return isArrayLike(object) ? arrayLikeKeys(object) : baseKeys(object);
+  }
+  function stubArray() {
+    return [];
+  }
+  function stubFalse() {
+    return false;
+  }
+  module.exports = cloneDeep;
+})(lodash_clonedeep, lodash_clonedeepExports);
+const __deepClone = lodash_clonedeepExports;
+function clone(object, settings = {}) {
+  settings = Object.assign({ deep: false }, settings);
+  if (settings.deep) {
+    return __deepClone(object);
+  }
+  return __clone(object);
+}
+function __deepMap(objectOrArray, processor, settings, _path = []) {
   settings = __deepMerge({
     classInstances: false,
     array: true,
-    privateProps: false,
-    cloneFirst: false
+    clone: false,
+    privateProps: true
   }, settings);
   const isArray2 = Array.isArray(objectOrArray);
-  let newObject = isArray2 ? [] : settings.cloneFirst ? Object.assign({}, objectOrArray) : objectOrArray;
+  let newObject = isArray2 ? [] : settings.clone ? clone(objectOrArray, { deep: true }) : objectOrArray;
   Object.keys(objectOrArray).forEach((prop) => {
     if (!settings.privateProps && prop.match(/^_/))
       return;
     if (__isPlainObject(objectOrArray[prop]) || __isClassInstance(objectOrArray[prop]) && settings.classInstances || Array.isArray(objectOrArray[prop]) && settings.array) {
-      const res2 = __deepMap(objectOrArray[prop], processor, settings, [
-        ..._path,
-        prop
-      ]);
+      const res2 = __deepMap(objectOrArray[prop], processor, Object.assign(Object.assign({}, settings), { clone: false }), [..._path, prop]);
       if (isArray2) {
         newObject.push(res2);
       } else {
@@ -120,7 +1329,7 @@ function __deepMap(objectOrArray, processor, settings = {}, _path = []) {
       path: [..._path, prop].join(".")
     });
     if (res === -1) {
-      delete objectOrArray[prop];
+      delete newObject[prop];
       return;
     }
     if (isArray2) {
@@ -270,36 +1479,6 @@ function __proxyArray(array) {
     }
   });
   return array;
-}
-var commonjsGlobal = typeof globalThis !== "undefined" ? globalThis : typeof window !== "undefined" ? window : typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : {};
-function getAugmentedNamespace(n) {
-  if (n.__esModule)
-    return n;
-  var f = n.default;
-  if (typeof f == "function") {
-    var a = function a2() {
-      if (this instanceof a2) {
-        var args = [null];
-        args.push.apply(args, arguments);
-        var Ctor = Function.bind.apply(f, args);
-        return new Ctor();
-      }
-      return f.apply(this, arguments);
-    };
-    a.prototype = f.prototype;
-  } else
-    a = {};
-  Object.defineProperty(a, "__esModule", { value: true });
-  Object.keys(n).forEach(function(k) {
-    var d2 = Object.getOwnPropertyDescriptor(n, k);
-    Object.defineProperty(a, k, d2.get ? d2 : {
-      enumerable: true,
-      get: function() {
-        return n[k];
-      }
-    });
-  });
-  return a;
 }
 var md5Exports = {};
 var md5$1 = {
@@ -1746,18 +2925,18 @@ function requireConversions() {
     return ansi;
   };
   convert2.ansi16.rgb = function(args) {
-    let color2 = args % 10;
-    if (color2 === 0 || color2 === 7) {
+    let color = args % 10;
+    if (color === 0 || color === 7) {
       if (args > 50) {
-        color2 += 3.5;
+        color += 3.5;
       }
-      color2 = color2 / 10.5 * 255;
-      return [color2, color2, color2];
+      color = color / 10.5 * 255;
+      return [color, color, color];
     }
     const mult = (~~(args > 50) + 1) * 0.5;
-    const r = (color2 & 1) * mult * 255;
-    const g2 = (color2 >> 1 & 1) * mult * 255;
-    const b = (color2 >> 2 & 1) * mult * 255;
+    const r = (color & 1) * mult * 255;
+    const g2 = (color >> 1 & 1) * mult * 255;
+    const b = (color >> 2 & 1) * mult * 255;
     return [r, g2, b];
   };
   convert2.ansi256.rgb = function(args) {
@@ -1773,8 +2952,8 @@ function requireConversions() {
     return [r, g2, b];
   };
   convert2.rgb.hex = function(args) {
-    const integer2 = ((Math.round(args[0]) & 255) << 16) + ((Math.round(args[1]) & 255) << 8) + (Math.round(args[2]) & 255);
-    const string = integer2.toString(16).toUpperCase();
+    const integer = ((Math.round(args[0]) & 255) << 16) + ((Math.round(args[1]) & 255) << 8) + (Math.round(args[2]) & 255);
+    const string = integer.toString(16).toUpperCase();
     return "000000".substring(string.length) + string;
   };
   convert2.hex.rgb = function(args) {
@@ -1788,10 +2967,10 @@ function requireConversions() {
         return char + char;
       }).join("");
     }
-    const integer2 = parseInt(colorString, 16);
-    const r = integer2 >> 16 & 255;
-    const g2 = integer2 >> 8 & 255;
-    const b = integer2 & 255;
+    const integer = parseInt(colorString, 16);
+    const r = integer >> 16 & 255;
+    const g2 = integer >> 8 & 255;
+    const b = integer & 255;
     return [r, g2, b];
   };
   convert2.rgb.hcg = function(rgb) {
@@ -1954,8 +3133,8 @@ function requireConversions() {
   };
   convert2.gray.hex = function(gray) {
     const val = Math.round(gray[0] / 100 * 255) & 255;
-    const integer2 = (val << 16) + (val << 8) + val;
-    const string = integer2.toString(16).toUpperCase();
+    const integer = (val << 16) + (val << 8) + val;
+    const string = integer.toString(16).toUpperCase();
     return "000000".substring(string.length) + string;
   };
   convert2.rgb.gray = function(rgb) {
@@ -2310,9 +3489,9 @@ function requireTemplates() {
     const chunks = arguments_.trim().split(/\s*,\s*/g);
     let matches;
     for (const chunk of chunks) {
-      const number2 = Number(chunk);
-      if (!Number.isNaN(number2)) {
-        results.push(number2);
+      const number = Number(chunk);
+      if (!Number.isNaN(number)) {
+        results.push(number);
       } else if (matches = chunk.match(STRING_REGEX)) {
         results.push(matches[2].replace(ESCAPE_REGEX, (m, escape2, character) => escape2 ? unescape2(escape2) : character));
       } else {
@@ -2785,12 +3964,15 @@ function __get(obj, path2, settings = {}) {
   }
   return o;
 }
-function __set(obj, path2, value, settings = {}) {
-  settings = Object.assign({}, settings);
+function __set(obj, path2, value, settings) {
+  const finalSettings = Object.assign({ preferAssign: false }, settings !== null && settings !== void 0 ? settings : {});
   let o = obj, a;
+  if (Array.isArray(path2) && path2.length === 1) {
+    path2 = path2[0];
+  }
   if (typeof path2 === "string") {
     if (!path2 || path2 === "" || path2 === ".") {
-      obj = value;
+      Object.assign(obj, value);
       return;
     }
     path2 = path2.replace(/\[(\w+)\]/g, ".[$1]");
@@ -2816,11 +3998,19 @@ function __set(obj, path2, value, settings = {}) {
     o = o[n];
   }
   if (typeof a[0] === "string" && a[0].match(/^\[[0-9]+\]$/)) {
-    if (!Array.isArray(o))
+    if (!Array.isArray(o)) {
       o = [];
+    }
     o.push(value);
   } else {
-    o[a[0]] = value;
+    if (__isPlainObject(o[a[0]]) && __isPlainObject(value) && finalSettings.preferAssign) {
+      for (const key in o[a[0]]) {
+        delete o[a[0]][key];
+      }
+      Object.assign(o[a[0]], value);
+    } else {
+      o[a[0]] = value;
+    }
   }
   return get(obj, path2);
 }
@@ -2955,1179 +4145,6 @@ function __camelCaseProps(object, settings) {
   }
   return object;
 }
-var lodash_cloneExports = {};
-var lodash_clone = {
-  get exports() {
-    return lodash_cloneExports;
-  },
-  set exports(v) {
-    lodash_cloneExports = v;
-  }
-};
-(function(module, exports) {
-  var LARGE_ARRAY_SIZE = 200;
-  var HASH_UNDEFINED = "__lodash_hash_undefined__";
-  var MAX_SAFE_INTEGER = 9007199254740991;
-  var argsTag = "[object Arguments]", arrayTag = "[object Array]", boolTag = "[object Boolean]", dateTag = "[object Date]", errorTag = "[object Error]", funcTag = "[object Function]", genTag = "[object GeneratorFunction]", mapTag = "[object Map]", numberTag = "[object Number]", objectTag = "[object Object]", promiseTag = "[object Promise]", regexpTag = "[object RegExp]", setTag = "[object Set]", stringTag = "[object String]", symbolTag = "[object Symbol]", weakMapTag = "[object WeakMap]";
-  var arrayBufferTag = "[object ArrayBuffer]", dataViewTag = "[object DataView]", float32Tag = "[object Float32Array]", float64Tag = "[object Float64Array]", int8Tag = "[object Int8Array]", int16Tag = "[object Int16Array]", int32Tag = "[object Int32Array]", uint8Tag = "[object Uint8Array]", uint8ClampedTag = "[object Uint8ClampedArray]", uint16Tag = "[object Uint16Array]", uint32Tag = "[object Uint32Array]";
-  var reRegExpChar = /[\\^$.*+?()[\]{}|]/g;
-  var reFlags = /\w*$/;
-  var reIsHostCtor = /^\[object .+?Constructor\]$/;
-  var reIsUint = /^(?:0|[1-9]\d*)$/;
-  var cloneableTags = {};
-  cloneableTags[argsTag] = cloneableTags[arrayTag] = cloneableTags[arrayBufferTag] = cloneableTags[dataViewTag] = cloneableTags[boolTag] = cloneableTags[dateTag] = cloneableTags[float32Tag] = cloneableTags[float64Tag] = cloneableTags[int8Tag] = cloneableTags[int16Tag] = cloneableTags[int32Tag] = cloneableTags[mapTag] = cloneableTags[numberTag] = cloneableTags[objectTag] = cloneableTags[regexpTag] = cloneableTags[setTag] = cloneableTags[stringTag] = cloneableTags[symbolTag] = cloneableTags[uint8Tag] = cloneableTags[uint8ClampedTag] = cloneableTags[uint16Tag] = cloneableTags[uint32Tag] = true;
-  cloneableTags[errorTag] = cloneableTags[funcTag] = cloneableTags[weakMapTag] = false;
-  var freeGlobal = typeof commonjsGlobal == "object" && commonjsGlobal && commonjsGlobal.Object === Object && commonjsGlobal;
-  var freeSelf = typeof self == "object" && self && self.Object === Object && self;
-  var root = freeGlobal || freeSelf || Function("return this")();
-  var freeExports = exports && !exports.nodeType && exports;
-  var freeModule = freeExports && true && module && !module.nodeType && module;
-  var moduleExports = freeModule && freeModule.exports === freeExports;
-  function addMapEntry(map2, pair) {
-    map2.set(pair[0], pair[1]);
-    return map2;
-  }
-  function addSetEntry(set, value) {
-    set.add(value);
-    return set;
-  }
-  function arrayEach(array, iteratee) {
-    var index = -1, length = array ? array.length : 0;
-    while (++index < length) {
-      if (iteratee(array[index], index, array) === false) {
-        break;
-      }
-    }
-    return array;
-  }
-  function arrayPush(array, values) {
-    var index = -1, length = values.length, offset2 = array.length;
-    while (++index < length) {
-      array[offset2 + index] = values[index];
-    }
-    return array;
-  }
-  function arrayReduce(array, iteratee, accumulator, initAccum) {
-    var index = -1, length = array ? array.length : 0;
-    if (initAccum && length) {
-      accumulator = array[++index];
-    }
-    while (++index < length) {
-      accumulator = iteratee(accumulator, array[index], index, array);
-    }
-    return accumulator;
-  }
-  function baseTimes(n, iteratee) {
-    var index = -1, result2 = Array(n);
-    while (++index < n) {
-      result2[index] = iteratee(index);
-    }
-    return result2;
-  }
-  function getValue(object, key) {
-    return object == null ? void 0 : object[key];
-  }
-  function isHostObject(value) {
-    var result2 = false;
-    if (value != null && typeof value.toString != "function") {
-      try {
-        result2 = !!(value + "");
-      } catch (e) {
-      }
-    }
-    return result2;
-  }
-  function mapToArray(map2) {
-    var index = -1, result2 = Array(map2.size);
-    map2.forEach(function(value, key) {
-      result2[++index] = [key, value];
-    });
-    return result2;
-  }
-  function overArg(func, transform) {
-    return function(arg) {
-      return func(transform(arg));
-    };
-  }
-  function setToArray(set) {
-    var index = -1, result2 = Array(set.size);
-    set.forEach(function(value) {
-      result2[++index] = value;
-    });
-    return result2;
-  }
-  var arrayProto = Array.prototype, funcProto = Function.prototype, objectProto = Object.prototype;
-  var coreJsData = root["__core-js_shared__"];
-  var maskSrcKey = function() {
-    var uid = /[^.]+$/.exec(coreJsData && coreJsData.keys && coreJsData.keys.IE_PROTO || "");
-    return uid ? "Symbol(src)_1." + uid : "";
-  }();
-  var funcToString = funcProto.toString;
-  var hasOwnProperty2 = objectProto.hasOwnProperty;
-  var objectToString = objectProto.toString;
-  var reIsNative = RegExp(
-    "^" + funcToString.call(hasOwnProperty2).replace(reRegExpChar, "\\$&").replace(/hasOwnProperty|(function).*?(?=\\\()| for .+?(?=\\\])/g, "$1.*?") + "$"
-  );
-  var Buffer = moduleExports ? root.Buffer : void 0, Symbol2 = root.Symbol, Uint8Array2 = root.Uint8Array, getPrototype = overArg(Object.getPrototypeOf, Object), objectCreate = Object.create, propertyIsEnumerable = objectProto.propertyIsEnumerable, splice = arrayProto.splice;
-  var nativeGetSymbols = Object.getOwnPropertySymbols, nativeIsBuffer = Buffer ? Buffer.isBuffer : void 0, nativeKeys = overArg(Object.keys, Object);
-  var DataView2 = getNative(root, "DataView"), Map2 = getNative(root, "Map"), Promise2 = getNative(root, "Promise"), Set2 = getNative(root, "Set"), WeakMap2 = getNative(root, "WeakMap"), nativeCreate = getNative(Object, "create");
-  var dataViewCtorString = toSource(DataView2), mapCtorString = toSource(Map2), promiseCtorString = toSource(Promise2), setCtorString = toSource(Set2), weakMapCtorString = toSource(WeakMap2);
-  var symbolProto = Symbol2 ? Symbol2.prototype : void 0, symbolValueOf = symbolProto ? symbolProto.valueOf : void 0;
-  function Hash(entries) {
-    var index = -1, length = entries ? entries.length : 0;
-    this.clear();
-    while (++index < length) {
-      var entry = entries[index];
-      this.set(entry[0], entry[1]);
-    }
-  }
-  function hashClear() {
-    this.__data__ = nativeCreate ? nativeCreate(null) : {};
-  }
-  function hashDelete(key) {
-    return this.has(key) && delete this.__data__[key];
-  }
-  function hashGet(key) {
-    var data = this.__data__;
-    if (nativeCreate) {
-      var result2 = data[key];
-      return result2 === HASH_UNDEFINED ? void 0 : result2;
-    }
-    return hasOwnProperty2.call(data, key) ? data[key] : void 0;
-  }
-  function hashHas(key) {
-    var data = this.__data__;
-    return nativeCreate ? data[key] !== void 0 : hasOwnProperty2.call(data, key);
-  }
-  function hashSet(key, value) {
-    var data = this.__data__;
-    data[key] = nativeCreate && value === void 0 ? HASH_UNDEFINED : value;
-    return this;
-  }
-  Hash.prototype.clear = hashClear;
-  Hash.prototype["delete"] = hashDelete;
-  Hash.prototype.get = hashGet;
-  Hash.prototype.has = hashHas;
-  Hash.prototype.set = hashSet;
-  function ListCache(entries) {
-    var index = -1, length = entries ? entries.length : 0;
-    this.clear();
-    while (++index < length) {
-      var entry = entries[index];
-      this.set(entry[0], entry[1]);
-    }
-  }
-  function listCacheClear() {
-    this.__data__ = [];
-  }
-  function listCacheDelete(key) {
-    var data = this.__data__, index = assocIndexOf(data, key);
-    if (index < 0) {
-      return false;
-    }
-    var lastIndex = data.length - 1;
-    if (index == lastIndex) {
-      data.pop();
-    } else {
-      splice.call(data, index, 1);
-    }
-    return true;
-  }
-  function listCacheGet(key) {
-    var data = this.__data__, index = assocIndexOf(data, key);
-    return index < 0 ? void 0 : data[index][1];
-  }
-  function listCacheHas(key) {
-    return assocIndexOf(this.__data__, key) > -1;
-  }
-  function listCacheSet(key, value) {
-    var data = this.__data__, index = assocIndexOf(data, key);
-    if (index < 0) {
-      data.push([key, value]);
-    } else {
-      data[index][1] = value;
-    }
-    return this;
-  }
-  ListCache.prototype.clear = listCacheClear;
-  ListCache.prototype["delete"] = listCacheDelete;
-  ListCache.prototype.get = listCacheGet;
-  ListCache.prototype.has = listCacheHas;
-  ListCache.prototype.set = listCacheSet;
-  function MapCache(entries) {
-    var index = -1, length = entries ? entries.length : 0;
-    this.clear();
-    while (++index < length) {
-      var entry = entries[index];
-      this.set(entry[0], entry[1]);
-    }
-  }
-  function mapCacheClear() {
-    this.__data__ = {
-      "hash": new Hash(),
-      "map": new (Map2 || ListCache)(),
-      "string": new Hash()
-    };
-  }
-  function mapCacheDelete(key) {
-    return getMapData(this, key)["delete"](key);
-  }
-  function mapCacheGet(key) {
-    return getMapData(this, key).get(key);
-  }
-  function mapCacheHas(key) {
-    return getMapData(this, key).has(key);
-  }
-  function mapCacheSet(key, value) {
-    getMapData(this, key).set(key, value);
-    return this;
-  }
-  MapCache.prototype.clear = mapCacheClear;
-  MapCache.prototype["delete"] = mapCacheDelete;
-  MapCache.prototype.get = mapCacheGet;
-  MapCache.prototype.has = mapCacheHas;
-  MapCache.prototype.set = mapCacheSet;
-  function Stack(entries) {
-    this.__data__ = new ListCache(entries);
-  }
-  function stackClear() {
-    this.__data__ = new ListCache();
-  }
-  function stackDelete(key) {
-    return this.__data__["delete"](key);
-  }
-  function stackGet(key) {
-    return this.__data__.get(key);
-  }
-  function stackHas(key) {
-    return this.__data__.has(key);
-  }
-  function stackSet(key, value) {
-    var cache2 = this.__data__;
-    if (cache2 instanceof ListCache) {
-      var pairs = cache2.__data__;
-      if (!Map2 || pairs.length < LARGE_ARRAY_SIZE - 1) {
-        pairs.push([key, value]);
-        return this;
-      }
-      cache2 = this.__data__ = new MapCache(pairs);
-    }
-    cache2.set(key, value);
-    return this;
-  }
-  Stack.prototype.clear = stackClear;
-  Stack.prototype["delete"] = stackDelete;
-  Stack.prototype.get = stackGet;
-  Stack.prototype.has = stackHas;
-  Stack.prototype.set = stackSet;
-  function arrayLikeKeys(value, inherited) {
-    var result2 = isArray2(value) || isArguments5(value) ? baseTimes(value.length, String) : [];
-    var length = result2.length, skipIndexes = !!length;
-    for (var key in value) {
-      if ((inherited || hasOwnProperty2.call(value, key)) && !(skipIndexes && (key == "length" || isIndex(key, length)))) {
-        result2.push(key);
-      }
-    }
-    return result2;
-  }
-  function assignValue(object, key, value) {
-    var objValue = object[key];
-    if (!(hasOwnProperty2.call(object, key) && eq(objValue, value)) || value === void 0 && !(key in object)) {
-      object[key] = value;
-    }
-  }
-  function assocIndexOf(array, key) {
-    var length = array.length;
-    while (length--) {
-      if (eq(array[length][0], key)) {
-        return length;
-      }
-    }
-    return -1;
-  }
-  function baseAssign(object, source2) {
-    return object && copyObject(source2, keys3(source2), object);
-  }
-  function baseClone(value, isDeep, isFull, customizer, key, object, stack) {
-    var result2;
-    if (customizer) {
-      result2 = object ? customizer(value, key, object, stack) : customizer(value);
-    }
-    if (result2 !== void 0) {
-      return result2;
-    }
-    if (!isObject3(value)) {
-      return value;
-    }
-    var isArr = isArray2(value);
-    if (isArr) {
-      result2 = initCloneArray(value);
-      if (!isDeep) {
-        return copyArray(value, result2);
-      }
-    } else {
-      var tag2 = getTag(value), isFunc = tag2 == funcTag || tag2 == genTag;
-      if (isBuffer2(value)) {
-        return cloneBuffer(value, isDeep);
-      }
-      if (tag2 == objectTag || tag2 == argsTag || isFunc && !object) {
-        if (isHostObject(value)) {
-          return object ? value : {};
-        }
-        result2 = initCloneObject(isFunc ? {} : value);
-        if (!isDeep) {
-          return copySymbols(value, baseAssign(result2, value));
-        }
-      } else {
-        if (!cloneableTags[tag2]) {
-          return object ? value : {};
-        }
-        result2 = initCloneByTag(value, tag2, baseClone, isDeep);
-      }
-    }
-    stack || (stack = new Stack());
-    var stacked = stack.get(value);
-    if (stacked) {
-      return stacked;
-    }
-    stack.set(value, result2);
-    if (!isArr) {
-      var props = isFull ? getAllKeys(value) : keys3(value);
-    }
-    arrayEach(props || value, function(subValue, key2) {
-      if (props) {
-        key2 = subValue;
-        subValue = value[key2];
-      }
-      assignValue(result2, key2, baseClone(subValue, isDeep, isFull, customizer, key2, value, stack));
-    });
-    return result2;
-  }
-  function baseCreate(proto2) {
-    return isObject3(proto2) ? objectCreate(proto2) : {};
-  }
-  function baseGetAllKeys(object, keysFunc, symbolsFunc) {
-    var result2 = keysFunc(object);
-    return isArray2(object) ? result2 : arrayPush(result2, symbolsFunc(object));
-  }
-  function baseGetTag(value) {
-    return objectToString.call(value);
-  }
-  function baseIsNative(value) {
-    if (!isObject3(value) || isMasked(value)) {
-      return false;
-    }
-    var pattern2 = isFunction2(value) || isHostObject(value) ? reIsNative : reIsHostCtor;
-    return pattern2.test(toSource(value));
-  }
-  function baseKeys(object) {
-    if (!isPrototype2(object)) {
-      return nativeKeys(object);
-    }
-    var result2 = [];
-    for (var key in Object(object)) {
-      if (hasOwnProperty2.call(object, key) && key != "constructor") {
-        result2.push(key);
-      }
-    }
-    return result2;
-  }
-  function cloneBuffer(buffer, isDeep) {
-    if (isDeep) {
-      return buffer.slice();
-    }
-    var result2 = new buffer.constructor(buffer.length);
-    buffer.copy(result2);
-    return result2;
-  }
-  function cloneArrayBuffer(arrayBuffer) {
-    var result2 = new arrayBuffer.constructor(arrayBuffer.byteLength);
-    new Uint8Array2(result2).set(new Uint8Array2(arrayBuffer));
-    return result2;
-  }
-  function cloneDataView(dataView, isDeep) {
-    var buffer = isDeep ? cloneArrayBuffer(dataView.buffer) : dataView.buffer;
-    return new dataView.constructor(buffer, dataView.byteOffset, dataView.byteLength);
-  }
-  function cloneMap(map2, isDeep, cloneFunc) {
-    var array = isDeep ? cloneFunc(mapToArray(map2), true) : mapToArray(map2);
-    return arrayReduce(array, addMapEntry, new map2.constructor());
-  }
-  function cloneRegExp(regexp) {
-    var result2 = new regexp.constructor(regexp.source, reFlags.exec(regexp));
-    result2.lastIndex = regexp.lastIndex;
-    return result2;
-  }
-  function cloneSet(set, isDeep, cloneFunc) {
-    var array = isDeep ? cloneFunc(setToArray(set), true) : setToArray(set);
-    return arrayReduce(array, addSetEntry, new set.constructor());
-  }
-  function cloneSymbol(symbol) {
-    return symbolValueOf ? Object(symbolValueOf.call(symbol)) : {};
-  }
-  function cloneTypedArray(typedArray, isDeep) {
-    var buffer = isDeep ? cloneArrayBuffer(typedArray.buffer) : typedArray.buffer;
-    return new typedArray.constructor(buffer, typedArray.byteOffset, typedArray.length);
-  }
-  function copyArray(source2, array) {
-    var index = -1, length = source2.length;
-    array || (array = Array(length));
-    while (++index < length) {
-      array[index] = source2[index];
-    }
-    return array;
-  }
-  function copyObject(source2, props, object, customizer) {
-    object || (object = {});
-    var index = -1, length = props.length;
-    while (++index < length) {
-      var key = props[index];
-      var newValue = customizer ? customizer(object[key], source2[key], key, object, source2) : void 0;
-      assignValue(object, key, newValue === void 0 ? source2[key] : newValue);
-    }
-    return object;
-  }
-  function copySymbols(source2, object) {
-    return copyObject(source2, getSymbols(source2), object);
-  }
-  function getAllKeys(object) {
-    return baseGetAllKeys(object, keys3, getSymbols);
-  }
-  function getMapData(map2, key) {
-    var data = map2.__data__;
-    return isKeyable(key) ? data[typeof key == "string" ? "string" : "hash"] : data.map;
-  }
-  function getNative(object, key) {
-    var value = getValue(object, key);
-    return baseIsNative(value) ? value : void 0;
-  }
-  var getSymbols = nativeGetSymbols ? overArg(nativeGetSymbols, Object) : stubArray;
-  var getTag = baseGetTag;
-  if (DataView2 && getTag(new DataView2(new ArrayBuffer(1))) != dataViewTag || Map2 && getTag(new Map2()) != mapTag || Promise2 && getTag(Promise2.resolve()) != promiseTag || Set2 && getTag(new Set2()) != setTag || WeakMap2 && getTag(new WeakMap2()) != weakMapTag) {
-    getTag = function(value) {
-      var result2 = objectToString.call(value), Ctor = result2 == objectTag ? value.constructor : void 0, ctorString = Ctor ? toSource(Ctor) : void 0;
-      if (ctorString) {
-        switch (ctorString) {
-          case dataViewCtorString:
-            return dataViewTag;
-          case mapCtorString:
-            return mapTag;
-          case promiseCtorString:
-            return promiseTag;
-          case setCtorString:
-            return setTag;
-          case weakMapCtorString:
-            return weakMapTag;
-        }
-      }
-      return result2;
-    };
-  }
-  function initCloneArray(array) {
-    var length = array.length, result2 = array.constructor(length);
-    if (length && typeof array[0] == "string" && hasOwnProperty2.call(array, "index")) {
-      result2.index = array.index;
-      result2.input = array.input;
-    }
-    return result2;
-  }
-  function initCloneObject(object) {
-    return typeof object.constructor == "function" && !isPrototype2(object) ? baseCreate(getPrototype(object)) : {};
-  }
-  function initCloneByTag(object, tag2, cloneFunc, isDeep) {
-    var Ctor = object.constructor;
-    switch (tag2) {
-      case arrayBufferTag:
-        return cloneArrayBuffer(object);
-      case boolTag:
-      case dateTag:
-        return new Ctor(+object);
-      case dataViewTag:
-        return cloneDataView(object, isDeep);
-      case float32Tag:
-      case float64Tag:
-      case int8Tag:
-      case int16Tag:
-      case int32Tag:
-      case uint8Tag:
-      case uint8ClampedTag:
-      case uint16Tag:
-      case uint32Tag:
-        return cloneTypedArray(object, isDeep);
-      case mapTag:
-        return cloneMap(object, isDeep, cloneFunc);
-      case numberTag:
-      case stringTag:
-        return new Ctor(object);
-      case regexpTag:
-        return cloneRegExp(object);
-      case setTag:
-        return cloneSet(object, isDeep, cloneFunc);
-      case symbolTag:
-        return cloneSymbol(object);
-    }
-  }
-  function isIndex(value, length) {
-    length = length == null ? MAX_SAFE_INTEGER : length;
-    return !!length && (typeof value == "number" || reIsUint.test(value)) && (value > -1 && value % 1 == 0 && value < length);
-  }
-  function isKeyable(value) {
-    var type = typeof value;
-    return type == "string" || type == "number" || type == "symbol" || type == "boolean" ? value !== "__proto__" : value === null;
-  }
-  function isMasked(func) {
-    return !!maskSrcKey && maskSrcKey in func;
-  }
-  function isPrototype2(value) {
-    var Ctor = value && value.constructor, proto2 = typeof Ctor == "function" && Ctor.prototype || objectProto;
-    return value === proto2;
-  }
-  function toSource(func) {
-    if (func != null) {
-      try {
-        return funcToString.call(func);
-      } catch (e) {
-      }
-      try {
-        return func + "";
-      } catch (e) {
-      }
-    }
-    return "";
-  }
-  function clone2(value) {
-    return baseClone(value, false, true);
-  }
-  function eq(value, other) {
-    return value === other || value !== value && other !== other;
-  }
-  function isArguments5(value) {
-    return isArrayLikeObject(value) && hasOwnProperty2.call(value, "callee") && (!propertyIsEnumerable.call(value, "callee") || objectToString.call(value) == argsTag);
-  }
-  var isArray2 = Array.isArray;
-  function isArrayLike(value) {
-    return value != null && isLength(value.length) && !isFunction2(value);
-  }
-  function isArrayLikeObject(value) {
-    return isObjectLike(value) && isArrayLike(value);
-  }
-  var isBuffer2 = nativeIsBuffer || stubFalse;
-  function isFunction2(value) {
-    var tag2 = isObject3(value) ? objectToString.call(value) : "";
-    return tag2 == funcTag || tag2 == genTag;
-  }
-  function isLength(value) {
-    return typeof value == "number" && value > -1 && value % 1 == 0 && value <= MAX_SAFE_INTEGER;
-  }
-  function isObject3(value) {
-    var type = typeof value;
-    return !!value && (type == "object" || type == "function");
-  }
-  function isObjectLike(value) {
-    return !!value && typeof value == "object";
-  }
-  function keys3(object) {
-    return isArrayLike(object) ? arrayLikeKeys(object) : baseKeys(object);
-  }
-  function stubArray() {
-    return [];
-  }
-  function stubFalse() {
-    return false;
-  }
-  module.exports = clone2;
-})(lodash_clone, lodash_cloneExports);
-const __clone = lodash_cloneExports;
-var lodash_clonedeepExports = {};
-var lodash_clonedeep = {
-  get exports() {
-    return lodash_clonedeepExports;
-  },
-  set exports(v) {
-    lodash_clonedeepExports = v;
-  }
-};
-(function(module, exports) {
-  var LARGE_ARRAY_SIZE = 200;
-  var HASH_UNDEFINED = "__lodash_hash_undefined__";
-  var MAX_SAFE_INTEGER = 9007199254740991;
-  var argsTag = "[object Arguments]", arrayTag = "[object Array]", boolTag = "[object Boolean]", dateTag = "[object Date]", errorTag = "[object Error]", funcTag = "[object Function]", genTag = "[object GeneratorFunction]", mapTag = "[object Map]", numberTag = "[object Number]", objectTag = "[object Object]", promiseTag = "[object Promise]", regexpTag = "[object RegExp]", setTag = "[object Set]", stringTag = "[object String]", symbolTag = "[object Symbol]", weakMapTag = "[object WeakMap]";
-  var arrayBufferTag = "[object ArrayBuffer]", dataViewTag = "[object DataView]", float32Tag = "[object Float32Array]", float64Tag = "[object Float64Array]", int8Tag = "[object Int8Array]", int16Tag = "[object Int16Array]", int32Tag = "[object Int32Array]", uint8Tag = "[object Uint8Array]", uint8ClampedTag = "[object Uint8ClampedArray]", uint16Tag = "[object Uint16Array]", uint32Tag = "[object Uint32Array]";
-  var reRegExpChar = /[\\^$.*+?()[\]{}|]/g;
-  var reFlags = /\w*$/;
-  var reIsHostCtor = /^\[object .+?Constructor\]$/;
-  var reIsUint = /^(?:0|[1-9]\d*)$/;
-  var cloneableTags = {};
-  cloneableTags[argsTag] = cloneableTags[arrayTag] = cloneableTags[arrayBufferTag] = cloneableTags[dataViewTag] = cloneableTags[boolTag] = cloneableTags[dateTag] = cloneableTags[float32Tag] = cloneableTags[float64Tag] = cloneableTags[int8Tag] = cloneableTags[int16Tag] = cloneableTags[int32Tag] = cloneableTags[mapTag] = cloneableTags[numberTag] = cloneableTags[objectTag] = cloneableTags[regexpTag] = cloneableTags[setTag] = cloneableTags[stringTag] = cloneableTags[symbolTag] = cloneableTags[uint8Tag] = cloneableTags[uint8ClampedTag] = cloneableTags[uint16Tag] = cloneableTags[uint32Tag] = true;
-  cloneableTags[errorTag] = cloneableTags[funcTag] = cloneableTags[weakMapTag] = false;
-  var freeGlobal = typeof commonjsGlobal == "object" && commonjsGlobal && commonjsGlobal.Object === Object && commonjsGlobal;
-  var freeSelf = typeof self == "object" && self && self.Object === Object && self;
-  var root = freeGlobal || freeSelf || Function("return this")();
-  var freeExports = exports && !exports.nodeType && exports;
-  var freeModule = freeExports && true && module && !module.nodeType && module;
-  var moduleExports = freeModule && freeModule.exports === freeExports;
-  function addMapEntry(map2, pair) {
-    map2.set(pair[0], pair[1]);
-    return map2;
-  }
-  function addSetEntry(set, value) {
-    set.add(value);
-    return set;
-  }
-  function arrayEach(array, iteratee) {
-    var index = -1, length = array ? array.length : 0;
-    while (++index < length) {
-      if (iteratee(array[index], index, array) === false) {
-        break;
-      }
-    }
-    return array;
-  }
-  function arrayPush(array, values) {
-    var index = -1, length = values.length, offset2 = array.length;
-    while (++index < length) {
-      array[offset2 + index] = values[index];
-    }
-    return array;
-  }
-  function arrayReduce(array, iteratee, accumulator, initAccum) {
-    var index = -1, length = array ? array.length : 0;
-    if (initAccum && length) {
-      accumulator = array[++index];
-    }
-    while (++index < length) {
-      accumulator = iteratee(accumulator, array[index], index, array);
-    }
-    return accumulator;
-  }
-  function baseTimes(n, iteratee) {
-    var index = -1, result2 = Array(n);
-    while (++index < n) {
-      result2[index] = iteratee(index);
-    }
-    return result2;
-  }
-  function getValue(object, key) {
-    return object == null ? void 0 : object[key];
-  }
-  function isHostObject(value) {
-    var result2 = false;
-    if (value != null && typeof value.toString != "function") {
-      try {
-        result2 = !!(value + "");
-      } catch (e) {
-      }
-    }
-    return result2;
-  }
-  function mapToArray(map2) {
-    var index = -1, result2 = Array(map2.size);
-    map2.forEach(function(value, key) {
-      result2[++index] = [key, value];
-    });
-    return result2;
-  }
-  function overArg(func, transform) {
-    return function(arg) {
-      return func(transform(arg));
-    };
-  }
-  function setToArray(set) {
-    var index = -1, result2 = Array(set.size);
-    set.forEach(function(value) {
-      result2[++index] = value;
-    });
-    return result2;
-  }
-  var arrayProto = Array.prototype, funcProto = Function.prototype, objectProto = Object.prototype;
-  var coreJsData = root["__core-js_shared__"];
-  var maskSrcKey = function() {
-    var uid = /[^.]+$/.exec(coreJsData && coreJsData.keys && coreJsData.keys.IE_PROTO || "");
-    return uid ? "Symbol(src)_1." + uid : "";
-  }();
-  var funcToString = funcProto.toString;
-  var hasOwnProperty2 = objectProto.hasOwnProperty;
-  var objectToString = objectProto.toString;
-  var reIsNative = RegExp(
-    "^" + funcToString.call(hasOwnProperty2).replace(reRegExpChar, "\\$&").replace(/hasOwnProperty|(function).*?(?=\\\()| for .+?(?=\\\])/g, "$1.*?") + "$"
-  );
-  var Buffer = moduleExports ? root.Buffer : void 0, Symbol2 = root.Symbol, Uint8Array2 = root.Uint8Array, getPrototype = overArg(Object.getPrototypeOf, Object), objectCreate = Object.create, propertyIsEnumerable = objectProto.propertyIsEnumerable, splice = arrayProto.splice;
-  var nativeGetSymbols = Object.getOwnPropertySymbols, nativeIsBuffer = Buffer ? Buffer.isBuffer : void 0, nativeKeys = overArg(Object.keys, Object);
-  var DataView2 = getNative(root, "DataView"), Map2 = getNative(root, "Map"), Promise2 = getNative(root, "Promise"), Set2 = getNative(root, "Set"), WeakMap2 = getNative(root, "WeakMap"), nativeCreate = getNative(Object, "create");
-  var dataViewCtorString = toSource(DataView2), mapCtorString = toSource(Map2), promiseCtorString = toSource(Promise2), setCtorString = toSource(Set2), weakMapCtorString = toSource(WeakMap2);
-  var symbolProto = Symbol2 ? Symbol2.prototype : void 0, symbolValueOf = symbolProto ? symbolProto.valueOf : void 0;
-  function Hash(entries) {
-    var index = -1, length = entries ? entries.length : 0;
-    this.clear();
-    while (++index < length) {
-      var entry = entries[index];
-      this.set(entry[0], entry[1]);
-    }
-  }
-  function hashClear() {
-    this.__data__ = nativeCreate ? nativeCreate(null) : {};
-  }
-  function hashDelete(key) {
-    return this.has(key) && delete this.__data__[key];
-  }
-  function hashGet(key) {
-    var data = this.__data__;
-    if (nativeCreate) {
-      var result2 = data[key];
-      return result2 === HASH_UNDEFINED ? void 0 : result2;
-    }
-    return hasOwnProperty2.call(data, key) ? data[key] : void 0;
-  }
-  function hashHas(key) {
-    var data = this.__data__;
-    return nativeCreate ? data[key] !== void 0 : hasOwnProperty2.call(data, key);
-  }
-  function hashSet(key, value) {
-    var data = this.__data__;
-    data[key] = nativeCreate && value === void 0 ? HASH_UNDEFINED : value;
-    return this;
-  }
-  Hash.prototype.clear = hashClear;
-  Hash.prototype["delete"] = hashDelete;
-  Hash.prototype.get = hashGet;
-  Hash.prototype.has = hashHas;
-  Hash.prototype.set = hashSet;
-  function ListCache(entries) {
-    var index = -1, length = entries ? entries.length : 0;
-    this.clear();
-    while (++index < length) {
-      var entry = entries[index];
-      this.set(entry[0], entry[1]);
-    }
-  }
-  function listCacheClear() {
-    this.__data__ = [];
-  }
-  function listCacheDelete(key) {
-    var data = this.__data__, index = assocIndexOf(data, key);
-    if (index < 0) {
-      return false;
-    }
-    var lastIndex = data.length - 1;
-    if (index == lastIndex) {
-      data.pop();
-    } else {
-      splice.call(data, index, 1);
-    }
-    return true;
-  }
-  function listCacheGet(key) {
-    var data = this.__data__, index = assocIndexOf(data, key);
-    return index < 0 ? void 0 : data[index][1];
-  }
-  function listCacheHas(key) {
-    return assocIndexOf(this.__data__, key) > -1;
-  }
-  function listCacheSet(key, value) {
-    var data = this.__data__, index = assocIndexOf(data, key);
-    if (index < 0) {
-      data.push([key, value]);
-    } else {
-      data[index][1] = value;
-    }
-    return this;
-  }
-  ListCache.prototype.clear = listCacheClear;
-  ListCache.prototype["delete"] = listCacheDelete;
-  ListCache.prototype.get = listCacheGet;
-  ListCache.prototype.has = listCacheHas;
-  ListCache.prototype.set = listCacheSet;
-  function MapCache(entries) {
-    var index = -1, length = entries ? entries.length : 0;
-    this.clear();
-    while (++index < length) {
-      var entry = entries[index];
-      this.set(entry[0], entry[1]);
-    }
-  }
-  function mapCacheClear() {
-    this.__data__ = {
-      "hash": new Hash(),
-      "map": new (Map2 || ListCache)(),
-      "string": new Hash()
-    };
-  }
-  function mapCacheDelete(key) {
-    return getMapData(this, key)["delete"](key);
-  }
-  function mapCacheGet(key) {
-    return getMapData(this, key).get(key);
-  }
-  function mapCacheHas(key) {
-    return getMapData(this, key).has(key);
-  }
-  function mapCacheSet(key, value) {
-    getMapData(this, key).set(key, value);
-    return this;
-  }
-  MapCache.prototype.clear = mapCacheClear;
-  MapCache.prototype["delete"] = mapCacheDelete;
-  MapCache.prototype.get = mapCacheGet;
-  MapCache.prototype.has = mapCacheHas;
-  MapCache.prototype.set = mapCacheSet;
-  function Stack(entries) {
-    this.__data__ = new ListCache(entries);
-  }
-  function stackClear() {
-    this.__data__ = new ListCache();
-  }
-  function stackDelete(key) {
-    return this.__data__["delete"](key);
-  }
-  function stackGet(key) {
-    return this.__data__.get(key);
-  }
-  function stackHas(key) {
-    return this.__data__.has(key);
-  }
-  function stackSet(key, value) {
-    var cache2 = this.__data__;
-    if (cache2 instanceof ListCache) {
-      var pairs = cache2.__data__;
-      if (!Map2 || pairs.length < LARGE_ARRAY_SIZE - 1) {
-        pairs.push([key, value]);
-        return this;
-      }
-      cache2 = this.__data__ = new MapCache(pairs);
-    }
-    cache2.set(key, value);
-    return this;
-  }
-  Stack.prototype.clear = stackClear;
-  Stack.prototype["delete"] = stackDelete;
-  Stack.prototype.get = stackGet;
-  Stack.prototype.has = stackHas;
-  Stack.prototype.set = stackSet;
-  function arrayLikeKeys(value, inherited) {
-    var result2 = isArray2(value) || isArguments5(value) ? baseTimes(value.length, String) : [];
-    var length = result2.length, skipIndexes = !!length;
-    for (var key in value) {
-      if ((inherited || hasOwnProperty2.call(value, key)) && !(skipIndexes && (key == "length" || isIndex(key, length)))) {
-        result2.push(key);
-      }
-    }
-    return result2;
-  }
-  function assignValue(object, key, value) {
-    var objValue = object[key];
-    if (!(hasOwnProperty2.call(object, key) && eq(objValue, value)) || value === void 0 && !(key in object)) {
-      object[key] = value;
-    }
-  }
-  function assocIndexOf(array, key) {
-    var length = array.length;
-    while (length--) {
-      if (eq(array[length][0], key)) {
-        return length;
-      }
-    }
-    return -1;
-  }
-  function baseAssign(object, source2) {
-    return object && copyObject(source2, keys3(source2), object);
-  }
-  function baseClone(value, isDeep, isFull, customizer, key, object, stack) {
-    var result2;
-    if (customizer) {
-      result2 = object ? customizer(value, key, object, stack) : customizer(value);
-    }
-    if (result2 !== void 0) {
-      return result2;
-    }
-    if (!isObject3(value)) {
-      return value;
-    }
-    var isArr = isArray2(value);
-    if (isArr) {
-      result2 = initCloneArray(value);
-      if (!isDeep) {
-        return copyArray(value, result2);
-      }
-    } else {
-      var tag2 = getTag(value), isFunc = tag2 == funcTag || tag2 == genTag;
-      if (isBuffer2(value)) {
-        return cloneBuffer(value, isDeep);
-      }
-      if (tag2 == objectTag || tag2 == argsTag || isFunc && !object) {
-        if (isHostObject(value)) {
-          return object ? value : {};
-        }
-        result2 = initCloneObject(isFunc ? {} : value);
-        if (!isDeep) {
-          return copySymbols(value, baseAssign(result2, value));
-        }
-      } else {
-        if (!cloneableTags[tag2]) {
-          return object ? value : {};
-        }
-        result2 = initCloneByTag(value, tag2, baseClone, isDeep);
-      }
-    }
-    stack || (stack = new Stack());
-    var stacked = stack.get(value);
-    if (stacked) {
-      return stacked;
-    }
-    stack.set(value, result2);
-    if (!isArr) {
-      var props = isFull ? getAllKeys(value) : keys3(value);
-    }
-    arrayEach(props || value, function(subValue, key2) {
-      if (props) {
-        key2 = subValue;
-        subValue = value[key2];
-      }
-      assignValue(result2, key2, baseClone(subValue, isDeep, isFull, customizer, key2, value, stack));
-    });
-    return result2;
-  }
-  function baseCreate(proto2) {
-    return isObject3(proto2) ? objectCreate(proto2) : {};
-  }
-  function baseGetAllKeys(object, keysFunc, symbolsFunc) {
-    var result2 = keysFunc(object);
-    return isArray2(object) ? result2 : arrayPush(result2, symbolsFunc(object));
-  }
-  function baseGetTag(value) {
-    return objectToString.call(value);
-  }
-  function baseIsNative(value) {
-    if (!isObject3(value) || isMasked(value)) {
-      return false;
-    }
-    var pattern2 = isFunction2(value) || isHostObject(value) ? reIsNative : reIsHostCtor;
-    return pattern2.test(toSource(value));
-  }
-  function baseKeys(object) {
-    if (!isPrototype2(object)) {
-      return nativeKeys(object);
-    }
-    var result2 = [];
-    for (var key in Object(object)) {
-      if (hasOwnProperty2.call(object, key) && key != "constructor") {
-        result2.push(key);
-      }
-    }
-    return result2;
-  }
-  function cloneBuffer(buffer, isDeep) {
-    if (isDeep) {
-      return buffer.slice();
-    }
-    var result2 = new buffer.constructor(buffer.length);
-    buffer.copy(result2);
-    return result2;
-  }
-  function cloneArrayBuffer(arrayBuffer) {
-    var result2 = new arrayBuffer.constructor(arrayBuffer.byteLength);
-    new Uint8Array2(result2).set(new Uint8Array2(arrayBuffer));
-    return result2;
-  }
-  function cloneDataView(dataView, isDeep) {
-    var buffer = isDeep ? cloneArrayBuffer(dataView.buffer) : dataView.buffer;
-    return new dataView.constructor(buffer, dataView.byteOffset, dataView.byteLength);
-  }
-  function cloneMap(map2, isDeep, cloneFunc) {
-    var array = isDeep ? cloneFunc(mapToArray(map2), true) : mapToArray(map2);
-    return arrayReduce(array, addMapEntry, new map2.constructor());
-  }
-  function cloneRegExp(regexp) {
-    var result2 = new regexp.constructor(regexp.source, reFlags.exec(regexp));
-    result2.lastIndex = regexp.lastIndex;
-    return result2;
-  }
-  function cloneSet(set, isDeep, cloneFunc) {
-    var array = isDeep ? cloneFunc(setToArray(set), true) : setToArray(set);
-    return arrayReduce(array, addSetEntry, new set.constructor());
-  }
-  function cloneSymbol(symbol) {
-    return symbolValueOf ? Object(symbolValueOf.call(symbol)) : {};
-  }
-  function cloneTypedArray(typedArray, isDeep) {
-    var buffer = isDeep ? cloneArrayBuffer(typedArray.buffer) : typedArray.buffer;
-    return new typedArray.constructor(buffer, typedArray.byteOffset, typedArray.length);
-  }
-  function copyArray(source2, array) {
-    var index = -1, length = source2.length;
-    array || (array = Array(length));
-    while (++index < length) {
-      array[index] = source2[index];
-    }
-    return array;
-  }
-  function copyObject(source2, props, object, customizer) {
-    object || (object = {});
-    var index = -1, length = props.length;
-    while (++index < length) {
-      var key = props[index];
-      var newValue = customizer ? customizer(object[key], source2[key], key, object, source2) : void 0;
-      assignValue(object, key, newValue === void 0 ? source2[key] : newValue);
-    }
-    return object;
-  }
-  function copySymbols(source2, object) {
-    return copyObject(source2, getSymbols(source2), object);
-  }
-  function getAllKeys(object) {
-    return baseGetAllKeys(object, keys3, getSymbols);
-  }
-  function getMapData(map2, key) {
-    var data = map2.__data__;
-    return isKeyable(key) ? data[typeof key == "string" ? "string" : "hash"] : data.map;
-  }
-  function getNative(object, key) {
-    var value = getValue(object, key);
-    return baseIsNative(value) ? value : void 0;
-  }
-  var getSymbols = nativeGetSymbols ? overArg(nativeGetSymbols, Object) : stubArray;
-  var getTag = baseGetTag;
-  if (DataView2 && getTag(new DataView2(new ArrayBuffer(1))) != dataViewTag || Map2 && getTag(new Map2()) != mapTag || Promise2 && getTag(Promise2.resolve()) != promiseTag || Set2 && getTag(new Set2()) != setTag || WeakMap2 && getTag(new WeakMap2()) != weakMapTag) {
-    getTag = function(value) {
-      var result2 = objectToString.call(value), Ctor = result2 == objectTag ? value.constructor : void 0, ctorString = Ctor ? toSource(Ctor) : void 0;
-      if (ctorString) {
-        switch (ctorString) {
-          case dataViewCtorString:
-            return dataViewTag;
-          case mapCtorString:
-            return mapTag;
-          case promiseCtorString:
-            return promiseTag;
-          case setCtorString:
-            return setTag;
-          case weakMapCtorString:
-            return weakMapTag;
-        }
-      }
-      return result2;
-    };
-  }
-  function initCloneArray(array) {
-    var length = array.length, result2 = array.constructor(length);
-    if (length && typeof array[0] == "string" && hasOwnProperty2.call(array, "index")) {
-      result2.index = array.index;
-      result2.input = array.input;
-    }
-    return result2;
-  }
-  function initCloneObject(object) {
-    return typeof object.constructor == "function" && !isPrototype2(object) ? baseCreate(getPrototype(object)) : {};
-  }
-  function initCloneByTag(object, tag2, cloneFunc, isDeep) {
-    var Ctor = object.constructor;
-    switch (tag2) {
-      case arrayBufferTag:
-        return cloneArrayBuffer(object);
-      case boolTag:
-      case dateTag:
-        return new Ctor(+object);
-      case dataViewTag:
-        return cloneDataView(object, isDeep);
-      case float32Tag:
-      case float64Tag:
-      case int8Tag:
-      case int16Tag:
-      case int32Tag:
-      case uint8Tag:
-      case uint8ClampedTag:
-      case uint16Tag:
-      case uint32Tag:
-        return cloneTypedArray(object, isDeep);
-      case mapTag:
-        return cloneMap(object, isDeep, cloneFunc);
-      case numberTag:
-      case stringTag:
-        return new Ctor(object);
-      case regexpTag:
-        return cloneRegExp(object);
-      case setTag:
-        return cloneSet(object, isDeep, cloneFunc);
-      case symbolTag:
-        return cloneSymbol(object);
-    }
-  }
-  function isIndex(value, length) {
-    length = length == null ? MAX_SAFE_INTEGER : length;
-    return !!length && (typeof value == "number" || reIsUint.test(value)) && (value > -1 && value % 1 == 0 && value < length);
-  }
-  function isKeyable(value) {
-    var type = typeof value;
-    return type == "string" || type == "number" || type == "symbol" || type == "boolean" ? value !== "__proto__" : value === null;
-  }
-  function isMasked(func) {
-    return !!maskSrcKey && maskSrcKey in func;
-  }
-  function isPrototype2(value) {
-    var Ctor = value && value.constructor, proto2 = typeof Ctor == "function" && Ctor.prototype || objectProto;
-    return value === proto2;
-  }
-  function toSource(func) {
-    if (func != null) {
-      try {
-        return funcToString.call(func);
-      } catch (e) {
-      }
-      try {
-        return func + "";
-      } catch (e) {
-      }
-    }
-    return "";
-  }
-  function cloneDeep(value) {
-    return baseClone(value, true, true);
-  }
-  function eq(value, other) {
-    return value === other || value !== value && other !== other;
-  }
-  function isArguments5(value) {
-    return isArrayLikeObject(value) && hasOwnProperty2.call(value, "callee") && (!propertyIsEnumerable.call(value, "callee") || objectToString.call(value) == argsTag);
-  }
-  var isArray2 = Array.isArray;
-  function isArrayLike(value) {
-    return value != null && isLength(value.length) && !isFunction2(value);
-  }
-  function isArrayLikeObject(value) {
-    return isObjectLike(value) && isArrayLike(value);
-  }
-  var isBuffer2 = nativeIsBuffer || stubFalse;
-  function isFunction2(value) {
-    var tag2 = isObject3(value) ? objectToString.call(value) : "";
-    return tag2 == funcTag || tag2 == genTag;
-  }
-  function isLength(value) {
-    return typeof value == "number" && value > -1 && value % 1 == 0 && value <= MAX_SAFE_INTEGER;
-  }
-  function isObject3(value) {
-    var type = typeof value;
-    return !!value && (type == "object" || type == "function");
-  }
-  function isObjectLike(value) {
-    return !!value && typeof value == "object";
-  }
-  function keys3(object) {
-    return isArrayLike(object) ? arrayLikeKeys(object) : baseKeys(object);
-  }
-  function stubArray() {
-    return [];
-  }
-  function stubFalse() {
-    return false;
-  }
-  module.exports = cloneDeep;
-})(lodash_clonedeep, lodash_clonedeepExports);
-const __deepClone = lodash_clonedeepExports;
-function clone(object, settings = {}) {
-  settings = Object.assign({ deep: false }, settings);
-  if (settings.deep) {
-    return __deepClone(object);
-  }
-  return __clone(object);
-}
 function __deepAssign(referenceObj, ...objects) {
   const settings = {
     array: true,
@@ -4168,3440 +4185,6 @@ function __deepAssign(referenceObj, ...objects) {
     merge(referenceObj, toMergeObj);
   }
   return referenceObj;
-}
-function __isDomElement(element) {
-  return typeof HTMLElement === "object" ? element instanceof HTMLElement : element && typeof element === "object" && element !== null && element.nodeType === 1 && typeof element.nodeName === "string";
-}
-const _loopTimeout = /* @__PURE__ */ new WeakMap();
-function __deepProxy(object, handlerFn, settings = {}) {
-  let isRevoked = false;
-  settings = __deepMerge({
-    deep: true,
-    handleSet: true,
-    handleGet: false,
-    handleDelete: true,
-    domElements: false
-  }, settings);
-  function makeHandler(path2) {
-    return {
-      set(target, key, value) {
-        if (!_loopTimeout.has(target)) {
-          _loopTimeout.set(target, {});
-        }
-        const dotpath = [...path2, key].join(".");
-        const timeouts = _loopTimeout.get(target);
-        if (timeouts[dotpath]) {
-          return true;
-        }
-        timeouts[dotpath] = true;
-        setTimeout(() => {
-          delete timeouts[dotpath];
-        });
-        if (isRevoked || !settings.handleSet)
-          return true;
-        if (value === target[key])
-          return true;
-        if (settings.deep && typeof value === "object") {
-          value = proxify(value, [...path2, key]);
-        }
-        const oldValue = target[key];
-        target[key] = value;
-        handlerFn({
-          object,
-          target,
-          key,
-          path: [...path2, key].join("."),
-          action: "set",
-          fullAction: `Object.set`,
-          oldValue,
-          value
-        });
-        return true;
-      },
-      get(target, key, receiver) {
-        if (Reflect.has(target, key)) {
-          if (!settings.handleGet)
-            return target[key];
-          const value = handlerFn({
-            object,
-            target,
-            key,
-            path: [...path2, key].join("."),
-            action: "get",
-            fullAction: "Object.get"
-          });
-          if (key === "revoke")
-            return receiver.revoke;
-          if (value === void 0)
-            return target[key];
-          return value;
-        }
-        return void 0;
-      },
-      deleteProperty(target, key) {
-        if (isRevoked || !settings.handleDelete)
-          return true;
-        if (Reflect.has(target, key)) {
-          const oldValue = target[key];
-          const deleted = Reflect.deleteProperty(target, key);
-          if (deleted) {
-            handlerFn({
-              object,
-              target,
-              key,
-              path: [...path2, key].join("."),
-              action: "delete",
-              fullAction: "Object.delete",
-              oldValue
-            });
-          }
-          return deleted;
-        }
-        return false;
-      }
-    };
-  }
-  function proxify(obj, path2) {
-    if (obj === null)
-      return obj;
-    if (!settings.domElements && __isDomElement(obj)) {
-      return obj;
-    }
-    if (settings.deep) {
-      for (const key of Object.keys(obj)) {
-        if (Array.isArray(obj[key])) {
-          obj[key] = __proxyArray(obj[key]);
-          obj[key].watch(Object.getOwnPropertyNames(Array.prototype), (watchObj) => {
-            handlerFn(Object.assign({ path: [...path2, key].join(".") }, watchObj));
-          });
-        } else if (typeof obj[key] === "object") {
-          obj[key] = proxify(obj[key], [...path2, key]);
-        }
-      }
-    }
-    const p = Proxy.revocable(obj, makeHandler(path2));
-    const revokePropertyObj = {
-      writable: true,
-      configurable: false,
-      enumerable: false,
-      value: () => {
-        let __copy = clone(p.proxy, { deep: true });
-        isRevoked = true;
-        __copy = __deepMap(__copy, ({ value, prop }) => {
-          if (prop === "revoke" && typeof value === "function") {
-            return -1;
-          }
-          return value;
-        });
-        setTimeout(() => {
-          __deepMap(p.proxy, ({ value, prop }) => {
-            if (prop === "revoke" && typeof value === "function") {
-              value();
-            }
-          }, {});
-          p.revoke();
-        });
-        return __copy;
-      }
-    };
-    if (Array.isArray(p.proxy)) {
-      p.proxy.revoke = revokePropertyObj.value;
-    } else {
-      Object.defineProperties(p.proxy, {
-        revoke: revokePropertyObj
-      });
-    }
-    return p.proxy;
-  }
-  return proxify(object, []);
-}
-var ERROR_MESSAGE = "Function.prototype.bind called on incompatible ";
-var slice$1 = Array.prototype.slice;
-var toStr$a = Object.prototype.toString;
-var funcType = "[object Function]";
-var implementation$b = function bind(that) {
-  var target = this;
-  if (typeof target !== "function" || toStr$a.call(target) !== funcType) {
-    throw new TypeError(ERROR_MESSAGE + target);
-  }
-  var args = slice$1.call(arguments, 1);
-  var bound2;
-  var binder = function() {
-    if (this instanceof bound2) {
-      var result2 = target.apply(
-        this,
-        args.concat(slice$1.call(arguments))
-      );
-      if (Object(result2) === result2) {
-        return result2;
-      }
-      return this;
-    } else {
-      return target.apply(
-        that,
-        args.concat(slice$1.call(arguments))
-      );
-    }
-  };
-  var boundLength = Math.max(0, target.length - args.length);
-  var boundArgs = [];
-  for (var i = 0; i < boundLength; i++) {
-    boundArgs.push("$" + i);
-  }
-  bound2 = Function("binder", "return function (" + boundArgs.join(",") + "){ return binder.apply(this,arguments); }")(binder);
-  if (target.prototype) {
-    var Empty = function Empty2() {
-    };
-    Empty.prototype = target.prototype;
-    bound2.prototype = new Empty();
-    Empty.prototype = null;
-  }
-  return bound2;
-};
-var implementation$a = implementation$b;
-var functionBind = Function.prototype.bind || implementation$a;
-var bind$1 = functionBind;
-var src$1 = bind$1.call(Function.call, Object.prototype.hasOwnProperty);
-var toString$3 = {}.toString;
-var isarray = Array.isArray || function(arr) {
-  return toString$3.call(arr) == "[object Array]";
-};
-var fnToStr$2 = Function.prototype.toString;
-var reflectApply = typeof Reflect === "object" && Reflect !== null && Reflect.apply;
-var badArrayLike;
-var isCallableMarker;
-if (typeof reflectApply === "function" && typeof Object.defineProperty === "function") {
-  try {
-    badArrayLike = Object.defineProperty({}, "length", {
-      get: function() {
-        throw isCallableMarker;
-      }
-    });
-    isCallableMarker = {};
-    reflectApply(function() {
-      throw 42;
-    }, null, badArrayLike);
-  } catch (_) {
-    if (_ !== isCallableMarker) {
-      reflectApply = null;
-    }
-  }
-} else {
-  reflectApply = null;
-}
-var constructorRegex = /^\s*class\b/;
-var isES6ClassFn = function isES6ClassFunction(value) {
-  try {
-    var fnStr = fnToStr$2.call(value);
-    return constructorRegex.test(fnStr);
-  } catch (e) {
-    return false;
-  }
-};
-var tryFunctionObject = function tryFunctionToStr(value) {
-  try {
-    if (isES6ClassFn(value)) {
-      return false;
-    }
-    fnToStr$2.call(value);
-    return true;
-  } catch (e) {
-    return false;
-  }
-};
-var toStr$9 = Object.prototype.toString;
-var objectClass = "[object Object]";
-var fnClass = "[object Function]";
-var genClass = "[object GeneratorFunction]";
-var ddaClass = "[object HTMLAllCollection]";
-var ddaClass2 = "[object HTML document.all class]";
-var ddaClass3 = "[object HTMLCollection]";
-var hasToStringTag$a = typeof Symbol === "function" && !!Symbol.toStringTag;
-var isIE68 = !(0 in [,]);
-var isDDA = function isDocumentDotAll() {
-  return false;
-};
-if (typeof document === "object") {
-  var all$1 = document.all;
-  if (toStr$9.call(all$1) === toStr$9.call(document.all)) {
-    isDDA = function isDocumentDotAll2(value) {
-      if ((isIE68 || !value) && (typeof value === "undefined" || typeof value === "object")) {
-        try {
-          var str2 = toStr$9.call(value);
-          return (str2 === ddaClass || str2 === ddaClass2 || str2 === ddaClass3 || str2 === objectClass) && value("") == null;
-        } catch (e) {
-        }
-      }
-      return false;
-    };
-  }
-}
-var isCallable$1 = reflectApply ? function isCallable(value) {
-  if (isDDA(value)) {
-    return true;
-  }
-  if (!value) {
-    return false;
-  }
-  if (typeof value !== "function" && typeof value !== "object") {
-    return false;
-  }
-  try {
-    reflectApply(value, null, badArrayLike);
-  } catch (e) {
-    if (e !== isCallableMarker) {
-      return false;
-    }
-  }
-  return !isES6ClassFn(value) && tryFunctionObject(value);
-} : function isCallable2(value) {
-  if (isDDA(value)) {
-    return true;
-  }
-  if (!value) {
-    return false;
-  }
-  if (typeof value !== "function" && typeof value !== "object") {
-    return false;
-  }
-  if (hasToStringTag$a) {
-    return tryFunctionObject(value);
-  }
-  if (isES6ClassFn(value)) {
-    return false;
-  }
-  var strClass2 = toStr$9.call(value);
-  if (strClass2 !== fnClass && strClass2 !== genClass && !/^\[object HTML/.test(strClass2)) {
-    return false;
-  }
-  return tryFunctionObject(value);
-};
-var shams$1 = function hasSymbols() {
-  if (typeof Symbol !== "function" || typeof Object.getOwnPropertySymbols !== "function") {
-    return false;
-  }
-  if (typeof Symbol.iterator === "symbol") {
-    return true;
-  }
-  var obj = {};
-  var sym = Symbol("test");
-  var symObj = Object(sym);
-  if (typeof sym === "string") {
-    return false;
-  }
-  if (Object.prototype.toString.call(sym) !== "[object Symbol]") {
-    return false;
-  }
-  if (Object.prototype.toString.call(symObj) !== "[object Symbol]") {
-    return false;
-  }
-  var symVal = 42;
-  obj[sym] = symVal;
-  for (sym in obj) {
-    return false;
-  }
-  if (typeof Object.keys === "function" && Object.keys(obj).length !== 0) {
-    return false;
-  }
-  if (typeof Object.getOwnPropertyNames === "function" && Object.getOwnPropertyNames(obj).length !== 0) {
-    return false;
-  }
-  var syms = Object.getOwnPropertySymbols(obj);
-  if (syms.length !== 1 || syms[0] !== sym) {
-    return false;
-  }
-  if (!Object.prototype.propertyIsEnumerable.call(obj, sym)) {
-    return false;
-  }
-  if (typeof Object.getOwnPropertyDescriptor === "function") {
-    var descriptor2 = Object.getOwnPropertyDescriptor(obj, sym);
-    if (descriptor2.value !== symVal || descriptor2.enumerable !== true) {
-      return false;
-    }
-  }
-  return true;
-};
-var origSymbol = typeof Symbol !== "undefined" && Symbol;
-var hasSymbolSham = shams$1;
-var hasSymbols$4 = function hasNativeSymbols() {
-  if (typeof origSymbol !== "function") {
-    return false;
-  }
-  if (typeof Symbol !== "function") {
-    return false;
-  }
-  if (typeof origSymbol("foo") !== "symbol") {
-    return false;
-  }
-  if (typeof Symbol("bar") !== "symbol") {
-    return false;
-  }
-  return hasSymbolSham();
-};
-var undefined$1;
-var $SyntaxError = SyntaxError;
-var $Function = Function;
-var $TypeError$3 = TypeError;
-var getEvalledConstructor = function(expressionSyntax) {
-  try {
-    return $Function('"use strict"; return (' + expressionSyntax + ").constructor;")();
-  } catch (e) {
-  }
-};
-var $gOPD$1 = Object.getOwnPropertyDescriptor;
-if ($gOPD$1) {
-  try {
-    $gOPD$1({}, "");
-  } catch (e) {
-    $gOPD$1 = null;
-  }
-}
-var throwTypeError = function() {
-  throw new $TypeError$3();
-};
-var ThrowTypeError = $gOPD$1 ? function() {
-  try {
-    arguments.callee;
-    return throwTypeError;
-  } catch (calleeThrows) {
-    try {
-      return $gOPD$1(arguments, "callee").get;
-    } catch (gOPDthrows) {
-      return throwTypeError;
-    }
-  }
-}() : throwTypeError;
-var hasSymbols$3 = hasSymbols$4();
-var getProto$4 = Object.getPrototypeOf || function(x) {
-  return x.__proto__;
-};
-var needsEval = {};
-var TypedArray = typeof Uint8Array === "undefined" ? undefined$1 : getProto$4(Uint8Array);
-var INTRINSICS = {
-  "%AggregateError%": typeof AggregateError === "undefined" ? undefined$1 : AggregateError,
-  "%Array%": Array,
-  "%ArrayBuffer%": typeof ArrayBuffer === "undefined" ? undefined$1 : ArrayBuffer,
-  "%ArrayIteratorPrototype%": hasSymbols$3 ? getProto$4([][Symbol.iterator]()) : undefined$1,
-  "%AsyncFromSyncIteratorPrototype%": undefined$1,
-  "%AsyncFunction%": needsEval,
-  "%AsyncGenerator%": needsEval,
-  "%AsyncGeneratorFunction%": needsEval,
-  "%AsyncIteratorPrototype%": needsEval,
-  "%Atomics%": typeof Atomics === "undefined" ? undefined$1 : Atomics,
-  "%BigInt%": typeof BigInt === "undefined" ? undefined$1 : BigInt,
-  "%BigInt64Array%": typeof BigInt64Array === "undefined" ? undefined$1 : BigInt64Array,
-  "%BigUint64Array%": typeof BigUint64Array === "undefined" ? undefined$1 : BigUint64Array,
-  "%Boolean%": Boolean,
-  "%DataView%": typeof DataView === "undefined" ? undefined$1 : DataView,
-  "%Date%": Date,
-  "%decodeURI%": decodeURI,
-  "%decodeURIComponent%": decodeURIComponent,
-  "%encodeURI%": encodeURI,
-  "%encodeURIComponent%": encodeURIComponent,
-  "%Error%": Error,
-  "%eval%": eval,
-  // eslint-disable-line no-eval
-  "%EvalError%": EvalError,
-  "%Float32Array%": typeof Float32Array === "undefined" ? undefined$1 : Float32Array,
-  "%Float64Array%": typeof Float64Array === "undefined" ? undefined$1 : Float64Array,
-  "%FinalizationRegistry%": typeof FinalizationRegistry === "undefined" ? undefined$1 : FinalizationRegistry,
-  "%Function%": $Function,
-  "%GeneratorFunction%": needsEval,
-  "%Int8Array%": typeof Int8Array === "undefined" ? undefined$1 : Int8Array,
-  "%Int16Array%": typeof Int16Array === "undefined" ? undefined$1 : Int16Array,
-  "%Int32Array%": typeof Int32Array === "undefined" ? undefined$1 : Int32Array,
-  "%isFinite%": isFinite,
-  "%isNaN%": isNaN,
-  "%IteratorPrototype%": hasSymbols$3 ? getProto$4(getProto$4([][Symbol.iterator]())) : undefined$1,
-  "%JSON%": typeof JSON === "object" ? JSON : undefined$1,
-  "%Map%": typeof Map === "undefined" ? undefined$1 : Map,
-  "%MapIteratorPrototype%": typeof Map === "undefined" || !hasSymbols$3 ? undefined$1 : getProto$4((/* @__PURE__ */ new Map())[Symbol.iterator]()),
-  "%Math%": Math,
-  "%Number%": Number,
-  "%Object%": Object,
-  "%parseFloat%": parseFloat,
-  "%parseInt%": parseInt,
-  "%Promise%": typeof Promise === "undefined" ? undefined$1 : Promise,
-  "%Proxy%": typeof Proxy === "undefined" ? undefined$1 : Proxy,
-  "%RangeError%": RangeError,
-  "%ReferenceError%": ReferenceError,
-  "%Reflect%": typeof Reflect === "undefined" ? undefined$1 : Reflect,
-  "%RegExp%": RegExp,
-  "%Set%": typeof Set === "undefined" ? undefined$1 : Set,
-  "%SetIteratorPrototype%": typeof Set === "undefined" || !hasSymbols$3 ? undefined$1 : getProto$4((/* @__PURE__ */ new Set())[Symbol.iterator]()),
-  "%SharedArrayBuffer%": typeof SharedArrayBuffer === "undefined" ? undefined$1 : SharedArrayBuffer,
-  "%String%": String,
-  "%StringIteratorPrototype%": hasSymbols$3 ? getProto$4(""[Symbol.iterator]()) : undefined$1,
-  "%Symbol%": hasSymbols$3 ? Symbol : undefined$1,
-  "%SyntaxError%": $SyntaxError,
-  "%ThrowTypeError%": ThrowTypeError,
-  "%TypedArray%": TypedArray,
-  "%TypeError%": $TypeError$3,
-  "%Uint8Array%": typeof Uint8Array === "undefined" ? undefined$1 : Uint8Array,
-  "%Uint8ClampedArray%": typeof Uint8ClampedArray === "undefined" ? undefined$1 : Uint8ClampedArray,
-  "%Uint16Array%": typeof Uint16Array === "undefined" ? undefined$1 : Uint16Array,
-  "%Uint32Array%": typeof Uint32Array === "undefined" ? undefined$1 : Uint32Array,
-  "%URIError%": URIError,
-  "%WeakMap%": typeof WeakMap === "undefined" ? undefined$1 : WeakMap,
-  "%WeakRef%": typeof WeakRef === "undefined" ? undefined$1 : WeakRef,
-  "%WeakSet%": typeof WeakSet === "undefined" ? undefined$1 : WeakSet
-};
-try {
-  null.error;
-} catch (e) {
-  var errorProto = getProto$4(getProto$4(e));
-  INTRINSICS["%Error.prototype%"] = errorProto;
-}
-var doEval = function doEval2(name2) {
-  var value;
-  if (name2 === "%AsyncFunction%") {
-    value = getEvalledConstructor("async function () {}");
-  } else if (name2 === "%GeneratorFunction%") {
-    value = getEvalledConstructor("function* () {}");
-  } else if (name2 === "%AsyncGeneratorFunction%") {
-    value = getEvalledConstructor("async function* () {}");
-  } else if (name2 === "%AsyncGenerator%") {
-    var fn2 = doEval2("%AsyncGeneratorFunction%");
-    if (fn2) {
-      value = fn2.prototype;
-    }
-  } else if (name2 === "%AsyncIteratorPrototype%") {
-    var gen = doEval2("%AsyncGenerator%");
-    if (gen) {
-      value = getProto$4(gen.prototype);
-    }
-  }
-  INTRINSICS[name2] = value;
-  return value;
-};
-var LEGACY_ALIASES = {
-  "%ArrayBufferPrototype%": ["ArrayBuffer", "prototype"],
-  "%ArrayPrototype%": ["Array", "prototype"],
-  "%ArrayProto_entries%": ["Array", "prototype", "entries"],
-  "%ArrayProto_forEach%": ["Array", "prototype", "forEach"],
-  "%ArrayProto_keys%": ["Array", "prototype", "keys"],
-  "%ArrayProto_values%": ["Array", "prototype", "values"],
-  "%AsyncFunctionPrototype%": ["AsyncFunction", "prototype"],
-  "%AsyncGenerator%": ["AsyncGeneratorFunction", "prototype"],
-  "%AsyncGeneratorPrototype%": ["AsyncGeneratorFunction", "prototype", "prototype"],
-  "%BooleanPrototype%": ["Boolean", "prototype"],
-  "%DataViewPrototype%": ["DataView", "prototype"],
-  "%DatePrototype%": ["Date", "prototype"],
-  "%ErrorPrototype%": ["Error", "prototype"],
-  "%EvalErrorPrototype%": ["EvalError", "prototype"],
-  "%Float32ArrayPrototype%": ["Float32Array", "prototype"],
-  "%Float64ArrayPrototype%": ["Float64Array", "prototype"],
-  "%FunctionPrototype%": ["Function", "prototype"],
-  "%Generator%": ["GeneratorFunction", "prototype"],
-  "%GeneratorPrototype%": ["GeneratorFunction", "prototype", "prototype"],
-  "%Int8ArrayPrototype%": ["Int8Array", "prototype"],
-  "%Int16ArrayPrototype%": ["Int16Array", "prototype"],
-  "%Int32ArrayPrototype%": ["Int32Array", "prototype"],
-  "%JSONParse%": ["JSON", "parse"],
-  "%JSONStringify%": ["JSON", "stringify"],
-  "%MapPrototype%": ["Map", "prototype"],
-  "%NumberPrototype%": ["Number", "prototype"],
-  "%ObjectPrototype%": ["Object", "prototype"],
-  "%ObjProto_toString%": ["Object", "prototype", "toString"],
-  "%ObjProto_valueOf%": ["Object", "prototype", "valueOf"],
-  "%PromisePrototype%": ["Promise", "prototype"],
-  "%PromiseProto_then%": ["Promise", "prototype", "then"],
-  "%Promise_all%": ["Promise", "all"],
-  "%Promise_reject%": ["Promise", "reject"],
-  "%Promise_resolve%": ["Promise", "resolve"],
-  "%RangeErrorPrototype%": ["RangeError", "prototype"],
-  "%ReferenceErrorPrototype%": ["ReferenceError", "prototype"],
-  "%RegExpPrototype%": ["RegExp", "prototype"],
-  "%SetPrototype%": ["Set", "prototype"],
-  "%SharedArrayBufferPrototype%": ["SharedArrayBuffer", "prototype"],
-  "%StringPrototype%": ["String", "prototype"],
-  "%SymbolPrototype%": ["Symbol", "prototype"],
-  "%SyntaxErrorPrototype%": ["SyntaxError", "prototype"],
-  "%TypedArrayPrototype%": ["TypedArray", "prototype"],
-  "%TypeErrorPrototype%": ["TypeError", "prototype"],
-  "%Uint8ArrayPrototype%": ["Uint8Array", "prototype"],
-  "%Uint8ClampedArrayPrototype%": ["Uint8ClampedArray", "prototype"],
-  "%Uint16ArrayPrototype%": ["Uint16Array", "prototype"],
-  "%Uint32ArrayPrototype%": ["Uint32Array", "prototype"],
-  "%URIErrorPrototype%": ["URIError", "prototype"],
-  "%WeakMapPrototype%": ["WeakMap", "prototype"],
-  "%WeakSetPrototype%": ["WeakSet", "prototype"]
-};
-var bind2 = functionBind;
-var hasOwn$2 = src$1;
-var $concat = bind2.call(Function.call, Array.prototype.concat);
-var $spliceApply = bind2.call(Function.apply, Array.prototype.splice);
-var $replace = bind2.call(Function.call, String.prototype.replace);
-var $strSlice = bind2.call(Function.call, String.prototype.slice);
-var $exec$1 = bind2.call(Function.call, RegExp.prototype.exec);
-var rePropName = /[^%.[\]]+|\[(?:(-?\d+(?:\.\d+)?)|(["'])((?:(?!\2)[^\\]|\\.)*?)\2)\]|(?=(?:\.|\[\])(?:\.|\[\]|%$))/g;
-var reEscapeChar = /\\(\\)?/g;
-var stringToPath = function stringToPath2(string) {
-  var first = $strSlice(string, 0, 1);
-  var last = $strSlice(string, -1);
-  if (first === "%" && last !== "%") {
-    throw new $SyntaxError("invalid intrinsic syntax, expected closing `%`");
-  } else if (last === "%" && first !== "%") {
-    throw new $SyntaxError("invalid intrinsic syntax, expected opening `%`");
-  }
-  var result2 = [];
-  $replace(string, rePropName, function(match2, number2, quote, subString) {
-    result2[result2.length] = quote ? $replace(subString, reEscapeChar, "$1") : number2 || match2;
-  });
-  return result2;
-};
-var getBaseIntrinsic = function getBaseIntrinsic2(name2, allowMissing) {
-  var intrinsicName = name2;
-  var alias;
-  if (hasOwn$2(LEGACY_ALIASES, intrinsicName)) {
-    alias = LEGACY_ALIASES[intrinsicName];
-    intrinsicName = "%" + alias[0] + "%";
-  }
-  if (hasOwn$2(INTRINSICS, intrinsicName)) {
-    var value = INTRINSICS[intrinsicName];
-    if (value === needsEval) {
-      value = doEval(intrinsicName);
-    }
-    if (typeof value === "undefined" && !allowMissing) {
-      throw new $TypeError$3("intrinsic " + name2 + " exists, but is not available. Please file an issue!");
-    }
-    return {
-      alias,
-      name: intrinsicName,
-      value
-    };
-  }
-  throw new $SyntaxError("intrinsic " + name2 + " does not exist!");
-};
-var getIntrinsic = function GetIntrinsic(name2, allowMissing) {
-  if (typeof name2 !== "string" || name2.length === 0) {
-    throw new $TypeError$3("intrinsic name must be a non-empty string");
-  }
-  if (arguments.length > 1 && typeof allowMissing !== "boolean") {
-    throw new $TypeError$3('"allowMissing" argument must be a boolean');
-  }
-  if ($exec$1(/^%?[^%]*%?$/, name2) === null) {
-    throw new $SyntaxError("`%` may not be present anywhere but at the beginning and end of the intrinsic name");
-  }
-  var parts = stringToPath(name2);
-  var intrinsicBaseName = parts.length > 0 ? parts[0] : "";
-  var intrinsic = getBaseIntrinsic("%" + intrinsicBaseName + "%", allowMissing);
-  var intrinsicRealName = intrinsic.name;
-  var value = intrinsic.value;
-  var skipFurtherCaching = false;
-  var alias = intrinsic.alias;
-  if (alias) {
-    intrinsicBaseName = alias[0];
-    $spliceApply(parts, $concat([0, 1], alias));
-  }
-  for (var i = 1, isOwn = true; i < parts.length; i += 1) {
-    var part = parts[i];
-    var first = $strSlice(part, 0, 1);
-    var last = $strSlice(part, -1);
-    if ((first === '"' || first === "'" || first === "`" || (last === '"' || last === "'" || last === "`")) && first !== last) {
-      throw new $SyntaxError("property names with quotes must have matching quotes");
-    }
-    if (part === "constructor" || !isOwn) {
-      skipFurtherCaching = true;
-    }
-    intrinsicBaseName += "." + part;
-    intrinsicRealName = "%" + intrinsicBaseName + "%";
-    if (hasOwn$2(INTRINSICS, intrinsicRealName)) {
-      value = INTRINSICS[intrinsicRealName];
-    } else if (value != null) {
-      if (!(part in value)) {
-        if (!allowMissing) {
-          throw new $TypeError$3("base intrinsic for " + name2 + " exists, but the property is not available.");
-        }
-        return void 0;
-      }
-      if ($gOPD$1 && i + 1 >= parts.length) {
-        var desc = $gOPD$1(value, part);
-        isOwn = !!desc;
-        if (isOwn && "get" in desc && !("originalValue" in desc.get)) {
-          value = desc.get;
-        } else {
-          value = value[part];
-        }
-      } else {
-        isOwn = hasOwn$2(value, part);
-        value = value[part];
-      }
-      if (isOwn && !skipFurtherCaching) {
-        INTRINSICS[intrinsicRealName] = value;
-      }
-    }
-  }
-  return value;
-};
-var callBindExports = {};
-var callBind$3 = {
-  get exports() {
-    return callBindExports;
-  },
-  set exports(v) {
-    callBindExports = v;
-  }
-};
-(function(module) {
-  var bind3 = functionBind;
-  var GetIntrinsic3 = getIntrinsic;
-  var $apply = GetIntrinsic3("%Function.prototype.apply%");
-  var $call = GetIntrinsic3("%Function.prototype.call%");
-  var $reflectApply = GetIntrinsic3("%Reflect.apply%", true) || bind3.call($call, $apply);
-  var $gOPD2 = GetIntrinsic3("%Object.getOwnPropertyDescriptor%", true);
-  var $defineProperty2 = GetIntrinsic3("%Object.defineProperty%", true);
-  var $max = GetIntrinsic3("%Math.max%");
-  if ($defineProperty2) {
-    try {
-      $defineProperty2({}, "a", { value: 1 });
-    } catch (e) {
-      $defineProperty2 = null;
-    }
-  }
-  module.exports = function callBind2(originalFunction) {
-    var func = $reflectApply(bind3, $call, arguments);
-    if ($gOPD2 && $defineProperty2) {
-      var desc = $gOPD2(func, "length");
-      if (desc.configurable) {
-        $defineProperty2(
-          func,
-          "length",
-          { value: 1 + $max(0, originalFunction.length - (arguments.length - 1)) }
-        );
-      }
-    }
-    return func;
-  };
-  var applyBind = function applyBind2() {
-    return $reflectApply(bind3, $apply, arguments);
-  };
-  if ($defineProperty2) {
-    $defineProperty2(module.exports, "apply", { value: applyBind });
-  } else {
-    module.exports.apply = applyBind;
-  }
-})(callBind$3);
-var GetIntrinsic$a = getIntrinsic;
-var callBind$2 = callBindExports;
-var $indexOf = callBind$2(GetIntrinsic$a("String.prototype.indexOf"));
-var callBound$a = function callBoundIntrinsic(name2, allowMissing) {
-  var intrinsic = GetIntrinsic$a(name2, !!allowMissing);
-  if (typeof intrinsic === "function" && $indexOf(name2, ".prototype.") > -1) {
-    return callBind$2(intrinsic);
-  }
-  return intrinsic;
-};
-var hasSymbols$2 = shams$1;
-var shams = function hasToStringTagShams() {
-  return hasSymbols$2() && !!Symbol.toStringTag;
-};
-var callBound$9 = callBound$a;
-var $boolToStr = callBound$9("Boolean.prototype.toString");
-var $toString$3 = callBound$9("Object.prototype.toString");
-var tryBooleanObject = function booleanBrandCheck(value) {
-  try {
-    $boolToStr(value);
-    return true;
-  } catch (e) {
-    return false;
-  }
-};
-var boolClass = "[object Boolean]";
-var hasToStringTag$9 = shams();
-var isBooleanObject = function isBoolean(value) {
-  if (typeof value === "boolean") {
-    return true;
-  }
-  if (value === null || typeof value !== "object") {
-    return false;
-  }
-  return hasToStringTag$9 && Symbol.toStringTag in value ? tryBooleanObject(value) : $toString$3(value) === boolClass;
-};
-var getDay = Date.prototype.getDay;
-var tryDateObject = function tryDateGetDayCall(value) {
-  try {
-    getDay.call(value);
-    return true;
-  } catch (e) {
-    return false;
-  }
-};
-var toStr$8 = Object.prototype.toString;
-var dateClass = "[object Date]";
-var hasToStringTag$8 = shams();
-var isDateObject = function isDateObject2(value) {
-  if (typeof value !== "object" || value === null) {
-    return false;
-  }
-  return hasToStringTag$8 ? tryDateObject(value) : toStr$8.call(value) === dateClass;
-};
-var toStr$7 = Object.prototype.toString;
-var fnToStr$1 = Function.prototype.toString;
-var isFnRegex$1 = /^\s*(?:function)?\*/;
-var hasToStringTag$7 = shams();
-var getProto$3 = Object.getPrototypeOf;
-var getGeneratorFunc = function() {
-  if (!hasToStringTag$7) {
-    return false;
-  }
-  try {
-    return Function("return function*() {}")();
-  } catch (e) {
-  }
-};
-var GeneratorFunction;
-var isGeneratorFunction$1 = function isGeneratorFunction(fn2) {
-  if (typeof fn2 !== "function") {
-    return false;
-  }
-  if (isFnRegex$1.test(fnToStr$1.call(fn2))) {
-    return true;
-  }
-  if (!hasToStringTag$7) {
-    var str2 = toStr$7.call(fn2);
-    return str2 === "[object GeneratorFunction]";
-  }
-  if (!getProto$3) {
-    return false;
-  }
-  if (typeof GeneratorFunction === "undefined") {
-    var generatorFunc = getGeneratorFunc();
-    GeneratorFunction = generatorFunc ? getProto$3(generatorFunc) : false;
-  }
-  return getProto$3(fn2) === GeneratorFunction;
-};
-var numToStr = Number.prototype.toString;
-var tryNumberObject = function tryNumberObject2(value) {
-  try {
-    numToStr.call(value);
-    return true;
-  } catch (e) {
-    return false;
-  }
-};
-var toStr$6 = Object.prototype.toString;
-var numClass = "[object Number]";
-var hasToStringTag$6 = shams();
-var isNumberObject = function isNumberObject2(value) {
-  if (typeof value === "number") {
-    return true;
-  }
-  if (typeof value !== "object") {
-    return false;
-  }
-  return hasToStringTag$6 ? tryNumberObject(value) : toStr$6.call(value) === numClass;
-};
-var callBound$8 = callBound$a;
-var hasToStringTag$5 = shams();
-var has$2;
-var $exec;
-var isRegexMarker;
-var badStringifier;
-if (hasToStringTag$5) {
-  has$2 = callBound$8("Object.prototype.hasOwnProperty");
-  $exec = callBound$8("RegExp.prototype.exec");
-  isRegexMarker = {};
-  var throwRegexMarker = function() {
-    throw isRegexMarker;
-  };
-  badStringifier = {
-    toString: throwRegexMarker,
-    valueOf: throwRegexMarker
-  };
-  if (typeof Symbol.toPrimitive === "symbol") {
-    badStringifier[Symbol.toPrimitive] = throwRegexMarker;
-  }
-}
-var $toString$2 = callBound$8("Object.prototype.toString");
-var gOPD$1 = Object.getOwnPropertyDescriptor;
-var regexClass = "[object RegExp]";
-var isRegex$1 = hasToStringTag$5 ? function isRegex(value) {
-  if (!value || typeof value !== "object") {
-    return false;
-  }
-  var descriptor2 = gOPD$1(value, "lastIndex");
-  var hasLastIndexDataProperty = descriptor2 && has$2(descriptor2, "value");
-  if (!hasLastIndexDataProperty) {
-    return false;
-  }
-  try {
-    $exec(value, badStringifier);
-  } catch (e) {
-    return e === isRegexMarker;
-  }
-} : function isRegex2(value) {
-  if (!value || typeof value !== "object" && typeof value !== "function") {
-    return false;
-  }
-  return $toString$2(value) === regexClass;
-};
-var strValue = String.prototype.valueOf;
-var tryStringObject = function tryStringObject2(value) {
-  try {
-    strValue.call(value);
-    return true;
-  } catch (e) {
-    return false;
-  }
-};
-var toStr$5 = Object.prototype.toString;
-var strClass = "[object String]";
-var hasToStringTag$4 = shams();
-var isString$4 = function isString(value) {
-  if (typeof value === "string") {
-    return true;
-  }
-  if (typeof value !== "object") {
-    return false;
-  }
-  return hasToStringTag$4 ? tryStringObject(value) : toStr$5.call(value) === strClass;
-};
-var isSymbolExports = {};
-var isSymbol$2 = {
-  get exports() {
-    return isSymbolExports;
-  },
-  set exports(v) {
-    isSymbolExports = v;
-  }
-};
-var toStr$4 = Object.prototype.toString;
-var hasSymbols$1 = hasSymbols$4();
-if (hasSymbols$1) {
-  var symToStr = Symbol.prototype.toString;
-  var symStringRegex = /^Symbol\(.*\)$/;
-  var isSymbolObject = function isRealSymbolObject(value) {
-    if (typeof value.valueOf() !== "symbol") {
-      return false;
-    }
-    return symStringRegex.test(symToStr.call(value));
-  };
-  isSymbol$2.exports = function isSymbol2(value) {
-    if (typeof value === "symbol") {
-      return true;
-    }
-    if (toStr$4.call(value) !== "[object Symbol]") {
-      return false;
-    }
-    try {
-      return isSymbolObject(value);
-    } catch (e) {
-      return false;
-    }
-  };
-} else {
-  isSymbol$2.exports = function isSymbol2(value) {
-    return false;
-  };
-}
-var isBigintExports = {};
-var isBigint = {
-  get exports() {
-    return isBigintExports;
-  },
-  set exports(v) {
-    isBigintExports = v;
-  }
-};
-var $BigInt = typeof BigInt !== "undefined" && BigInt;
-var hasBigints = function hasNativeBigInts() {
-  return typeof $BigInt === "function" && typeof BigInt === "function" && typeof $BigInt(42) === "bigint" && typeof BigInt(42) === "bigint";
-};
-var hasBigInts = hasBigints();
-if (hasBigInts) {
-  var bigIntValueOf = BigInt.prototype.valueOf;
-  var tryBigInt = function tryBigIntObject(value) {
-    try {
-      bigIntValueOf.call(value);
-      return true;
-    } catch (e) {
-    }
-    return false;
-  };
-  isBigint.exports = function isBigInt2(value) {
-    if (value === null || typeof value === "undefined" || typeof value === "boolean" || typeof value === "string" || typeof value === "number" || typeof value === "symbol" || typeof value === "function") {
-      return false;
-    }
-    if (typeof value === "bigint") {
-      return true;
-    }
-    return tryBigInt(value);
-  };
-} else {
-  isBigint.exports = function isBigInt2(value) {
-    return false;
-  };
-}
-var hasToStringTag$3 = shams();
-var callBound$7 = callBound$a;
-var $toString$1 = callBound$7("Object.prototype.toString");
-var isStandardArguments = function isArguments(value) {
-  if (hasToStringTag$3 && value && typeof value === "object" && Symbol.toStringTag in value) {
-    return false;
-  }
-  return $toString$1(value) === "[object Arguments]";
-};
-var isLegacyArguments = function isArguments2(value) {
-  if (isStandardArguments(value)) {
-    return true;
-  }
-  return value !== null && typeof value === "object" && typeof value.length === "number" && value.length >= 0 && $toString$1(value) !== "[object Array]" && $toString$1(value.callee) === "[object Function]";
-};
-(function() {
-  return isStandardArguments(arguments);
-})();
-isStandardArguments.isLegacyArguments = isLegacyArguments;
-var GetIntrinsic$9 = getIntrinsic;
-var callBound$6 = callBound$a;
-GetIntrinsic$9("%TypeError%");
-GetIntrinsic$9("%WeakMap%", true);
-GetIntrinsic$9("%Map%", true);
-callBound$6("WeakMap.prototype.get", true);
-callBound$6("WeakMap.prototype.set", true);
-callBound$6("WeakMap.prototype.has", true);
-callBound$6("Map.prototype.get", true);
-callBound$6("Map.prototype.set", true);
-callBound$6("Map.prototype.has", true);
-var GetIntrinsic$8 = getIntrinsic;
-GetIntrinsic$8("%TypeError%");
-typeof StopIteration === "object" ? StopIteration : null;
-var $Map$2 = typeof Map === "function" && Map.prototype ? Map : null;
-var $Set$2 = typeof Set === "function" && Set.prototype ? Set : null;
-var exported$2;
-if (!$Map$2) {
-  exported$2 = function isMap3(x) {
-    return false;
-  };
-}
-var $mapHas$3 = $Map$2 ? Map.prototype.has : null;
-var $setHas$3 = $Set$2 ? Set.prototype.has : null;
-if (!exported$2 && !$mapHas$3) {
-  exported$2 = function isMap3(x) {
-    return false;
-  };
-}
-var isMap$1 = exported$2 || function isMap(x) {
-  if (!x || typeof x !== "object") {
-    return false;
-  }
-  try {
-    $mapHas$3.call(x);
-    if ($setHas$3) {
-      try {
-        $setHas$3.call(x);
-      } catch (e) {
-        return true;
-      }
-    }
-    return x instanceof $Map$2;
-  } catch (e) {
-  }
-  return false;
-};
-var $Map$1 = typeof Map === "function" && Map.prototype ? Map : null;
-var $Set$1 = typeof Set === "function" && Set.prototype ? Set : null;
-var exported$1;
-if (!$Set$1) {
-  exported$1 = function isSet3(x) {
-    return false;
-  };
-}
-var $mapHas$2 = $Map$1 ? Map.prototype.has : null;
-var $setHas$2 = $Set$1 ? Set.prototype.has : null;
-if (!exported$1 && !$setHas$2) {
-  exported$1 = function isSet3(x) {
-    return false;
-  };
-}
-var isSet$1 = exported$1 || function isSet(x) {
-  if (!x || typeof x !== "object") {
-    return false;
-  }
-  try {
-    $setHas$2.call(x);
-    if ($mapHas$2) {
-      try {
-        $mapHas$2.call(x);
-      } catch (e) {
-        return true;
-      }
-    }
-    return x instanceof $Set$1;
-  } catch (e) {
-  }
-  return false;
-};
-if (hasSymbols$4() || shams$1())
-  ;
-else {
-  var GetIntrinsic$7 = getIntrinsic;
-  var $Map = GetIntrinsic$7("%Map%", true);
-  var $Set = GetIntrinsic$7("%Set%", true);
-  var callBound$5 = callBound$a;
-  callBound$5("Array.prototype.push");
-  callBound$5("String.prototype.charCodeAt");
-  callBound$5("String.prototype.slice");
-  if (!$Map && !$Set)
-    ;
-  else {
-    callBound$5("Map.prototype.forEach", true);
-    callBound$5("Set.prototype.forEach", true);
-    if (typeof process === "undefined" || !process.versions || !process.versions.node) {
-      callBound$5("Map.prototype.iterator", true);
-      callBound$5("Set.prototype.iterator", true);
-    }
-    callBound$5("Map.prototype.@@iterator", true) || callBound$5("Map.prototype._es6-shim iterator_", true);
-    callBound$5("Set.prototype.@@iterator", true) || callBound$5("Set.prototype._es6-shim iterator_", true);
-  }
-}
-var $WeakMap = typeof WeakMap === "function" && WeakMap.prototype ? WeakMap : null;
-var $WeakSet$1 = typeof WeakSet === "function" && WeakSet.prototype ? WeakSet : null;
-var exported;
-if (!$WeakMap) {
-  exported = function isWeakMap3(x) {
-    return false;
-  };
-}
-var $mapHas$1 = $WeakMap ? $WeakMap.prototype.has : null;
-var $setHas$1 = $WeakSet$1 ? $WeakSet$1.prototype.has : null;
-if (!exported && !$mapHas$1) {
-  exported = function isWeakMap3(x) {
-    return false;
-  };
-}
-var isWeakmap = exported || function isWeakMap(x) {
-  if (!x || typeof x !== "object") {
-    return false;
-  }
-  try {
-    $mapHas$1.call(x, $mapHas$1);
-    if ($setHas$1) {
-      try {
-        $setHas$1.call(x, $setHas$1);
-      } catch (e) {
-        return true;
-      }
-    }
-    return x instanceof $WeakMap;
-  } catch (e) {
-  }
-  return false;
-};
-var isWeaksetExports = {};
-var isWeakset = {
-  get exports() {
-    return isWeaksetExports;
-  },
-  set exports(v) {
-    isWeaksetExports = v;
-  }
-};
-var GetIntrinsic$6 = getIntrinsic;
-var callBound$4 = callBound$a;
-var $WeakSet = GetIntrinsic$6("%WeakSet%", true);
-var $setHas = callBound$4("WeakSet.prototype.has", true);
-if ($setHas) {
-  var $mapHas = callBound$4("WeakMap.prototype.has", true);
-  isWeakset.exports = function isWeakSet2(x) {
-    if (!x || typeof x !== "object") {
-      return false;
-    }
-    try {
-      $setHas(x, $setHas);
-      if ($mapHas) {
-        try {
-          $mapHas(x, $mapHas);
-        } catch (e) {
-          return true;
-        }
-      }
-      return x instanceof $WeakSet;
-    } catch (e) {
-    }
-    return false;
-  };
-} else {
-  isWeakset.exports = function isWeakSet2(x) {
-    return false;
-  };
-}
-var isMap2 = isMap$1;
-var isSet2 = isSet$1;
-var isWeakMap2 = isWeakmap;
-var isWeakSet = isWeaksetExports;
-var whichCollection$1 = function whichCollection(value) {
-  if (value && typeof value === "object") {
-    if (isMap2(value)) {
-      return "Map";
-    }
-    if (isSet2(value)) {
-      return "Set";
-    }
-    if (isWeakMap2(value)) {
-      return "WeakMap";
-    }
-    if (isWeakSet(value)) {
-      return "WeakSet";
-    }
-  }
-  return false;
-};
-var isString$3 = isString$4;
-var isNumber = isNumberObject;
-var isBoolean2 = isBooleanObject;
-var isSymbol$1 = isSymbolExports;
-var isBigInt = isBigintExports;
-var whichBoxedPrimitive$1 = function whichBoxedPrimitive(value) {
-  if (value == null || typeof value !== "object" && typeof value !== "function") {
-    return null;
-  }
-  if (isString$3(value)) {
-    return "String";
-  }
-  if (isNumber(value)) {
-    return "Number";
-  }
-  if (isBoolean2(value)) {
-    return "Boolean";
-  }
-  if (isSymbol$1(value)) {
-    return "Symbol";
-  }
-  if (isBigInt(value)) {
-    return "BigInt";
-  }
-};
-var RequireObjectCoercibleExports = {};
-var RequireObjectCoercible$2 = {
-  get exports() {
-    return RequireObjectCoercibleExports;
-  },
-  set exports(v) {
-    RequireObjectCoercibleExports = v;
-  }
-};
-var GetIntrinsic$5 = getIntrinsic;
-var $TypeError$2 = GetIntrinsic$5("%TypeError%");
-var CheckObjectCoercible = function CheckObjectCoercible2(value, optMessage) {
-  if (value == null) {
-    throw new $TypeError$2(optMessage || "Cannot call method on " + value);
-  }
-  return value;
-};
-(function(module) {
-  module.exports = CheckObjectCoercible;
-})(RequireObjectCoercible$2);
-var GetIntrinsic$4 = getIntrinsic;
-var $Object$1 = GetIntrinsic$4("%Object%");
-var RequireObjectCoercible$1 = RequireObjectCoercibleExports;
-var ToObject$1 = function ToObject(value) {
-  RequireObjectCoercible$1(value);
-  return $Object$1(value);
-};
-var toStr$3 = Object.prototype.toString;
-var isArguments$2 = function isArguments3(value) {
-  var str2 = toStr$3.call(value);
-  var isArgs2 = str2 === "[object Arguments]";
-  if (!isArgs2) {
-    isArgs2 = str2 !== "[object Array]" && value !== null && typeof value === "object" && typeof value.length === "number" && value.length >= 0 && toStr$3.call(value.callee) === "[object Function]";
-  }
-  return isArgs2;
-};
-var implementation$9;
-var hasRequiredImplementation$1;
-function requireImplementation$1() {
-  if (hasRequiredImplementation$1)
-    return implementation$9;
-  hasRequiredImplementation$1 = 1;
-  var keysShim2;
-  if (!Object.keys) {
-    var has2 = Object.prototype.hasOwnProperty;
-    var toStr2 = Object.prototype.toString;
-    var isArgs2 = isArguments$2;
-    var isEnumerable = Object.prototype.propertyIsEnumerable;
-    var hasDontEnumBug = !isEnumerable.call({ toString: null }, "toString");
-    var hasProtoEnumBug = isEnumerable.call(function() {
-    }, "prototype");
-    var dontEnums = [
-      "toString",
-      "toLocaleString",
-      "valueOf",
-      "hasOwnProperty",
-      "isPrototypeOf",
-      "propertyIsEnumerable",
-      "constructor"
-    ];
-    var equalsConstructorPrototype = function(o) {
-      var ctor = o.constructor;
-      return ctor && ctor.prototype === o;
-    };
-    var excludedKeys = {
-      $applicationCache: true,
-      $console: true,
-      $external: true,
-      $frame: true,
-      $frameElement: true,
-      $frames: true,
-      $innerHeight: true,
-      $innerWidth: true,
-      $onmozfullscreenchange: true,
-      $onmozfullscreenerror: true,
-      $outerHeight: true,
-      $outerWidth: true,
-      $pageXOffset: true,
-      $pageYOffset: true,
-      $parent: true,
-      $scrollLeft: true,
-      $scrollTop: true,
-      $scrollX: true,
-      $scrollY: true,
-      $self: true,
-      $webkitIndexedDB: true,
-      $webkitStorageInfo: true,
-      $window: true
-    };
-    var hasAutomationEqualityBug = function() {
-      if (typeof window === "undefined") {
-        return false;
-      }
-      for (var k in window) {
-        try {
-          if (!excludedKeys["$" + k] && has2.call(window, k) && window[k] !== null && typeof window[k] === "object") {
-            try {
-              equalsConstructorPrototype(window[k]);
-            } catch (e) {
-              return true;
-            }
-          }
-        } catch (e) {
-          return true;
-        }
-      }
-      return false;
-    }();
-    var equalsConstructorPrototypeIfNotBuggy = function(o) {
-      if (typeof window === "undefined" || !hasAutomationEqualityBug) {
-        return equalsConstructorPrototype(o);
-      }
-      try {
-        return equalsConstructorPrototype(o);
-      } catch (e) {
-        return false;
-      }
-    };
-    keysShim2 = function keys3(object) {
-      var isObject3 = object !== null && typeof object === "object";
-      var isFunction2 = toStr2.call(object) === "[object Function]";
-      var isArguments5 = isArgs2(object);
-      var isString3 = isObject3 && toStr2.call(object) === "[object String]";
-      var theKeys = [];
-      if (!isObject3 && !isFunction2 && !isArguments5) {
-        throw new TypeError("Object.keys called on a non-object");
-      }
-      var skipProto = hasProtoEnumBug && isFunction2;
-      if (isString3 && object.length > 0 && !has2.call(object, 0)) {
-        for (var i = 0; i < object.length; ++i) {
-          theKeys.push(String(i));
-        }
-      }
-      if (isArguments5 && object.length > 0) {
-        for (var j = 0; j < object.length; ++j) {
-          theKeys.push(String(j));
-        }
-      } else {
-        for (var name2 in object) {
-          if (!(skipProto && name2 === "prototype") && has2.call(object, name2)) {
-            theKeys.push(String(name2));
-          }
-        }
-      }
-      if (hasDontEnumBug) {
-        var skipConstructor = equalsConstructorPrototypeIfNotBuggy(object);
-        for (var k = 0; k < dontEnums.length; ++k) {
-          if (!(skipConstructor && dontEnums[k] === "constructor") && has2.call(object, dontEnums[k])) {
-            theKeys.push(dontEnums[k]);
-          }
-        }
-      }
-      return theKeys;
-    };
-  }
-  implementation$9 = keysShim2;
-  return implementation$9;
-}
-var slice = Array.prototype.slice;
-var isArgs = isArguments$2;
-var origKeys = Object.keys;
-var keysShim = origKeys ? function keys(o) {
-  return origKeys(o);
-} : requireImplementation$1();
-var originalKeys = Object.keys;
-keysShim.shim = function shimObjectKeys() {
-  if (Object.keys) {
-    var keysWorksWithArguments = function() {
-      var args = Object.keys(arguments);
-      return args && args.length === arguments.length;
-    }(1, 2);
-    if (!keysWorksWithArguments) {
-      Object.keys = function keys3(object) {
-        if (isArgs(object)) {
-          return originalKeys(slice.call(object));
-        }
-        return originalKeys(object);
-      };
-    }
-  } else {
-    Object.keys = keysShim;
-  }
-  return Object.keys || keysShim;
-};
-var objectKeys = keysShim;
-var GetIntrinsic$3 = getIntrinsic;
-var $defineProperty = GetIntrinsic$3("%Object.defineProperty%", true);
-var hasPropertyDescriptors$1 = function hasPropertyDescriptors() {
-  if ($defineProperty) {
-    try {
-      $defineProperty({}, "a", { value: 1 });
-      return true;
-    } catch (e) {
-      return false;
-    }
-  }
-  return false;
-};
-hasPropertyDescriptors$1.hasArrayLengthDefineBug = function hasArrayLengthDefineBug() {
-  if (!hasPropertyDescriptors$1()) {
-    return null;
-  }
-  try {
-    return $defineProperty([], "length", { value: 1 }).length !== 1;
-  } catch (e) {
-    return true;
-  }
-};
-var hasPropertyDescriptors_1 = hasPropertyDescriptors$1;
-var keys$1 = objectKeys;
-var hasSymbols2 = typeof Symbol === "function" && typeof Symbol("foo") === "symbol";
-var toStr$2 = Object.prototype.toString;
-var concat = Array.prototype.concat;
-var origDefineProperty = Object.defineProperty;
-var isFunction$2 = function(fn2) {
-  return typeof fn2 === "function" && toStr$2.call(fn2) === "[object Function]";
-};
-var hasPropertyDescriptors2 = hasPropertyDescriptors_1();
-var supportsDescriptors$1 = origDefineProperty && hasPropertyDescriptors2;
-var defineProperty$2 = function(object, name2, value, predicate) {
-  if (name2 in object) {
-    if (predicate === true) {
-      if (object[name2] === value) {
-        return;
-      }
-    } else if (!isFunction$2(predicate) || !predicate()) {
-      return;
-    }
-  }
-  if (supportsDescriptors$1) {
-    origDefineProperty(object, name2, {
-      configurable: true,
-      enumerable: false,
-      value,
-      writable: true
-    });
-  } else {
-    object[name2] = value;
-  }
-};
-var defineProperties = function(object, map2) {
-  var predicates = arguments.length > 2 ? arguments[2] : {};
-  var props = keys$1(map2);
-  if (hasSymbols2) {
-    props = concat.call(props, Object.getOwnPropertySymbols(map2));
-  }
-  for (var i = 0; i < props.length; i += 1) {
-    defineProperty$2(object, props[i], map2[props[i]], predicates[props[i]]);
-  }
-};
-defineProperties.supportsDescriptors = !!supportsDescriptors$1;
-var defineProperties_1 = defineProperties;
-var IsCallableExports$1 = {};
-var IsCallable$3 = {
-  get exports() {
-    return IsCallableExports$1;
-  },
-  set exports(v) {
-    IsCallableExports$1 = v;
-  }
-};
-(function(module) {
-  module.exports = isCallable$1;
-})(IsCallable$3);
-var Type$3 = function Type(x) {
-  if (x === null) {
-    return "Null";
-  }
-  if (typeof x === "undefined") {
-    return "Undefined";
-  }
-  if (typeof x === "function" || typeof x === "object") {
-    return "Object";
-  }
-  if (typeof x === "number") {
-    return "Number";
-  }
-  if (typeof x === "boolean") {
-    return "Boolean";
-  }
-  if (typeof x === "string") {
-    return "String";
-  }
-};
-var ES5Type = Type$3;
-var Type$2 = function Type2(x) {
-  if (typeof x === "symbol") {
-    return "Symbol";
-  }
-  if (typeof x === "bigint") {
-    return "BigInt";
-  }
-  return ES5Type(x);
-};
-var isCallable3 = isCallable$1;
-var toStr$1 = Object.prototype.toString;
-var hasOwnProperty$1 = Object.prototype.hasOwnProperty;
-var forEachArray = function forEachArray2(array, iterator, receiver) {
-  for (var i = 0, len = array.length; i < len; i++) {
-    if (hasOwnProperty$1.call(array, i)) {
-      if (receiver == null) {
-        iterator(array[i], i, array);
-      } else {
-        iterator.call(receiver, array[i], i, array);
-      }
-    }
-  }
-};
-var forEachString = function forEachString2(string, iterator, receiver) {
-  for (var i = 0, len = string.length; i < len; i++) {
-    if (receiver == null) {
-      iterator(string.charAt(i), i, string);
-    } else {
-      iterator.call(receiver, string.charAt(i), i, string);
-    }
-  }
-};
-var forEachObject = function forEachObject2(object, iterator, receiver) {
-  for (var k in object) {
-    if (hasOwnProperty$1.call(object, k)) {
-      if (receiver == null) {
-        iterator(object[k], k, object);
-      } else {
-        iterator.call(receiver, object[k], k, object);
-      }
-    }
-  }
-};
-var forEach$2 = function forEach(list2, iterator, thisArg) {
-  if (!isCallable3(iterator)) {
-    throw new TypeError("iterator must be a function");
-  }
-  var receiver;
-  if (arguments.length >= 3) {
-    receiver = thisArg;
-  }
-  if (toStr$1.call(list2) === "[object Array]") {
-    forEachArray(list2, iterator, receiver);
-  } else if (typeof list2 === "string") {
-    forEachString(list2, iterator, receiver);
-  } else {
-    forEachObject(list2, iterator, receiver);
-  }
-};
-var forEach_1 = forEach$2;
-var possibleNames = [
-  "BigInt64Array",
-  "BigUint64Array",
-  "Float32Array",
-  "Float64Array",
-  "Int16Array",
-  "Int32Array",
-  "Int8Array",
-  "Uint16Array",
-  "Uint32Array",
-  "Uint8Array",
-  "Uint8ClampedArray"
-];
-var g$1 = typeof globalThis === "undefined" ? commonjsGlobal : globalThis;
-var availableTypedArrays$1 = function availableTypedArrays() {
-  var out = [];
-  for (var i = 0; i < possibleNames.length; i++) {
-    if (typeof g$1[possibleNames[i]] === "function") {
-      out[out.length] = possibleNames[i];
-    }
-  }
-  return out;
-};
-var GetIntrinsic$2 = getIntrinsic;
-var $gOPD = GetIntrinsic$2("%Object.getOwnPropertyDescriptor%", true);
-if ($gOPD) {
-  try {
-    $gOPD([], "length");
-  } catch (e) {
-    $gOPD = null;
-  }
-}
-var gopd = $gOPD;
-var isTypedArray$1;
-var hasRequiredIsTypedArray;
-function requireIsTypedArray() {
-  if (hasRequiredIsTypedArray)
-    return isTypedArray$1;
-  hasRequiredIsTypedArray = 1;
-  var forEach3 = forEach_1;
-  var availableTypedArrays3 = availableTypedArrays$1;
-  var callBound2 = callBound$a;
-  var $toString2 = callBound2("Object.prototype.toString");
-  var hasToStringTag2 = shams();
-  var gOPD2 = gopd;
-  var g2 = typeof globalThis === "undefined" ? commonjsGlobal : globalThis;
-  var typedArrays2 = availableTypedArrays3();
-  var $indexOf2 = callBound2("Array.prototype.indexOf", true) || function indexOf(array, value) {
-    for (var i = 0; i < array.length; i += 1) {
-      if (array[i] === value) {
-        return i;
-      }
-    }
-    return -1;
-  };
-  var $slice2 = callBound2("String.prototype.slice");
-  var toStrTags2 = {};
-  var getPrototypeOf7 = Object.getPrototypeOf;
-  if (hasToStringTag2 && gOPD2 && getPrototypeOf7) {
-    forEach3(typedArrays2, function(typedArray) {
-      var arr = new g2[typedArray]();
-      if (Symbol.toStringTag in arr) {
-        var proto2 = getPrototypeOf7(arr);
-        var descriptor2 = gOPD2(proto2, Symbol.toStringTag);
-        if (!descriptor2) {
-          var superProto = getPrototypeOf7(proto2);
-          descriptor2 = gOPD2(superProto, Symbol.toStringTag);
-        }
-        toStrTags2[typedArray] = descriptor2.get;
-      }
-    });
-  }
-  var tryTypedArrays2 = function tryAllTypedArrays2(value) {
-    var anyTrue = false;
-    forEach3(toStrTags2, function(getter, typedArray) {
-      if (!anyTrue) {
-        try {
-          anyTrue = getter.call(value) === typedArray;
-        } catch (e) {
-        }
-      }
-    });
-    return anyTrue;
-  };
-  isTypedArray$1 = function isTypedArray2(value) {
-    if (!value || typeof value !== "object") {
-      return false;
-    }
-    if (!hasToStringTag2 || !(Symbol.toStringTag in value)) {
-      var tag2 = $slice2($toString2(value), 8, -1);
-      return $indexOf2(typedArrays2, tag2) > -1;
-    }
-    if (!gOPD2) {
-      return false;
-    }
-    return tryTypedArrays2(value);
-  };
-  return isTypedArray$1;
-}
-var forEach$1 = forEach_1;
-var availableTypedArrays2 = availableTypedArrays$1;
-var callBound$3 = callBound$a;
-var gOPD = gopd;
-var $toString = callBound$3("Object.prototype.toString");
-var hasToStringTag$2 = shams();
-var g = typeof globalThis === "undefined" ? commonjsGlobal : globalThis;
-var typedArrays = availableTypedArrays2();
-var $slice = callBound$3("String.prototype.slice");
-var toStrTags = {};
-var getPrototypeOf = Object.getPrototypeOf;
-if (hasToStringTag$2 && gOPD && getPrototypeOf) {
-  forEach$1(typedArrays, function(typedArray) {
-    if (typeof g[typedArray] === "function") {
-      var arr = new g[typedArray]();
-      if (Symbol.toStringTag in arr) {
-        var proto2 = getPrototypeOf(arr);
-        var descriptor2 = gOPD(proto2, Symbol.toStringTag);
-        if (!descriptor2) {
-          var superProto = getPrototypeOf(proto2);
-          descriptor2 = gOPD(superProto, Symbol.toStringTag);
-        }
-        toStrTags[typedArray] = descriptor2.get;
-      }
-    }
-  });
-}
-var tryTypedArrays = function tryAllTypedArrays(value) {
-  var foundName = false;
-  forEach$1(toStrTags, function(getter, typedArray) {
-    if (!foundName) {
-      try {
-        var name2 = getter.call(value);
-        if (name2 === typedArray) {
-          foundName = name2;
-        }
-      } catch (e) {
-      }
-    }
-  });
-  return foundName;
-};
-var isTypedArray = requireIsTypedArray();
-var whichTypedArray$1 = function whichTypedArray(value) {
-  if (!isTypedArray(value)) {
-    return false;
-  }
-  if (!hasToStringTag$2 || !(Symbol.toStringTag in value)) {
-    return $slice($toString(value), 8, -1);
-  }
-  return tryTypedArrays(value);
-};
-var callBound$2 = callBound$a;
-var $deref = callBound$2("WeakRef.prototype.deref", true);
-var isWeakref = typeof WeakRef === "undefined" ? function isWeakRef(value) {
-  return false;
-} : function isWeakRef2(value) {
-  if (!value || typeof value !== "object") {
-    return false;
-  }
-  try {
-    $deref(value);
-    return true;
-  } catch (e) {
-    return false;
-  }
-};
-var callBound$1 = callBound$a;
-var $register = callBound$1("FinalizationRegistry.prototype.register", true);
-var isFinalizationregistry = $register ? function isFinalizationRegistry(value) {
-  if (!value || typeof value !== "object") {
-    return false;
-  }
-  try {
-    $register(value, {});
-    return true;
-  } catch (e) {
-    return false;
-  }
-} : function isFinalizationRegistry2(value) {
-  return false;
-};
-var IsCallableExports = {};
-var IsCallable$2 = {
-  get exports() {
-    return IsCallableExports;
-  },
-  set exports(v) {
-    IsCallableExports = v;
-  }
-};
-(function(module) {
-  module.exports = isCallable$1;
-})(IsCallable$2);
-var functionsHaveNames_1;
-var hasRequiredFunctionsHaveNames;
-function requireFunctionsHaveNames() {
-  if (hasRequiredFunctionsHaveNames)
-    return functionsHaveNames_1;
-  hasRequiredFunctionsHaveNames = 1;
-  var functionsHaveNames2 = function functionsHaveNames3() {
-    return typeof function f() {
-    }.name === "string";
-  };
-  var gOPD2 = Object.getOwnPropertyDescriptor;
-  if (gOPD2) {
-    try {
-      gOPD2([], "length");
-    } catch (e) {
-      gOPD2 = null;
-    }
-  }
-  functionsHaveNames2.functionsHaveConfigurableNames = function functionsHaveConfigurableNames() {
-    if (!functionsHaveNames2() || !gOPD2) {
-      return false;
-    }
-    var desc = gOPD2(function() {
-    }, "name");
-    return !!desc && !!desc.configurable;
-  };
-  var $bind = Function.prototype.bind;
-  functionsHaveNames2.boundFunctionsHaveNames = function boundFunctionsHaveNames() {
-    return functionsHaveNames2() && typeof $bind === "function" && function f() {
-    }.bind().name !== "";
-  };
-  functionsHaveNames_1 = functionsHaveNames2;
-  return functionsHaveNames_1;
-}
-var IsCallable$1 = IsCallableExports;
-var functionsHaveNames$1 = requireFunctionsHaveNames()();
-var callBound = callBound$a;
-var $functionToString = callBound("Function.prototype.toString");
-var $stringMatch = callBound("String.prototype.match");
-var classRegex = /^class /;
-var isClass$2 = function isClassConstructor(fn2) {
-  if (IsCallable$1(fn2)) {
-    return false;
-  }
-  if (typeof fn2 !== "function") {
-    return false;
-  }
-  try {
-    var match2 = $stringMatch($functionToString(fn2), classRegex);
-    return !!match2;
-  } catch (e) {
-  }
-  return false;
-};
-var regex = /\s*function\s+([^(\s]*)\s*/;
-var functionProto = Function.prototype;
-var implementation$8 = function getName() {
-  if (!isClass$2(this) && !IsCallable$1(this)) {
-    throw new TypeError("Function.prototype.name sham getter called on non-function");
-  }
-  if (functionsHaveNames$1) {
-    return this.name;
-  }
-  if (this === functionProto) {
-    return "";
-  }
-  var str2 = $functionToString(this);
-  var match2 = $stringMatch(str2, regex);
-  var name2 = match2 && match2[1];
-  return name2;
-};
-var implementation$7 = implementation$8;
-var polyfill$3 = function getPolyfill() {
-  return implementation$7;
-};
-var supportsDescriptors = defineProperties_1.supportsDescriptors;
-var functionsHaveNames = requireFunctionsHaveNames()();
-var getPolyfill$3 = polyfill$3;
-var defineProperty$1 = Object.defineProperty;
-var TypeErr = TypeError;
-var shim$8 = function shimName() {
-  var polyfill2 = getPolyfill$3();
-  if (functionsHaveNames) {
-    return polyfill2;
-  }
-  if (!supportsDescriptors) {
-    throw new TypeErr("Shimming Function.prototype.name support requires ES5 property descriptor support.");
-  }
-  var functionProto2 = Function.prototype;
-  defineProperty$1(functionProto2, "name", {
-    configurable: true,
-    enumerable: false,
-    get: function() {
-      var name2 = polyfill2.call(this);
-      if (this !== functionProto2) {
-        defineProperty$1(this, "name", {
-          configurable: true,
-          enumerable: false,
-          value: name2,
-          writable: false
-        });
-      }
-      return name2;
-    }
-  });
-  return polyfill2;
-};
-var define$j = defineProperties_1;
-var callBind$1 = callBindExports;
-var implementation$6 = implementation$8;
-var getPolyfill$2 = polyfill$3;
-var shim$7 = shim$8;
-var bound$1 = callBind$1(implementation$6);
-define$j(bound$1, {
-  getPolyfill: getPolyfill$2,
-  implementation: implementation$6,
-  shim: shim$7
-});
-var function_prototype_name = bound$1;
-var toStr = Object.prototype.toString;
-var fnToStr = Function.prototype.toString;
-var isFnRegex = /^\s*async(?:\s+function(?:\s+|\()|\s*\()/;
-var hasToStringTag$1 = shams();
-var getProto$2 = Object.getPrototypeOf;
-var getAsyncFunc = function() {
-  if (!hasToStringTag$1) {
-    return false;
-  }
-  try {
-    return Function("return async function () {}")();
-  } catch (e) {
-  }
-};
-var AsyncFunction;
-var isAsyncFunction$1 = function isAsyncFunction(fn2) {
-  if (typeof fn2 !== "function") {
-    return false;
-  }
-  if (isFnRegex.test(fnToStr.call(fn2))) {
-    return true;
-  }
-  if (!hasToStringTag$1) {
-    var str2 = toStr.call(fn2);
-    return str2 === "[object AsyncFunction]";
-  }
-  if (!getProto$2) {
-    return false;
-  }
-  if (typeof AsyncFunction === "undefined") {
-    var asyncFunc = getAsyncFunc();
-    AsyncFunction = asyncFunc ? getProto$2(asyncFunc) : false;
-  }
-  return getProto$2(fn2) === AsyncFunction;
-};
-var whichBoxedPrimitive2 = whichBoxedPrimitive$1;
-var whichCollection2 = whichCollection$1;
-var whichTypedArray2 = whichTypedArray$1;
-var isArray$3 = isarray;
-var isDate$1 = isDateObject;
-var isRegex3 = isRegex$1;
-var isWeakRef3 = isWeakref;
-var isFinalizationRegistry3 = isFinalizationregistry;
-var name$1 = function_prototype_name;
-var isGeneratorFunction2 = isGeneratorFunction$1;
-var isAsyncFunction2 = isAsyncFunction$1;
-var hasToStringTag = shams();
-var toStringTag = hasToStringTag && Symbol.toStringTag;
-var $Object = Object;
-var promiseThen = typeof Promise === "function" && Promise.prototype.then;
-var isPromise = function isPromise2(value) {
-  if (!value || typeof value !== "object" || !promiseThen) {
-    return false;
-  }
-  try {
-    promiseThen.call(value, null, function() {
-    });
-    return true;
-  } catch (e) {
-  }
-  return false;
-};
-var isKnownBuiltin = function isKnownBuiltin2(builtinName) {
-  return builtinName && builtinName !== "BigInt" && builtinName !== "Boolean" && builtinName !== "Null" && builtinName !== "Number" && builtinName !== "String" && builtinName !== "Symbol" && builtinName !== "Undefined" && builtinName !== "Math" && builtinName !== "JSON" && builtinName !== "Reflect" && builtinName !== "Atomics" && builtinName !== "Map" && builtinName !== "Set" && builtinName !== "WeakMap" && builtinName !== "WeakSet" && builtinName !== "BigInt64Array" && builtinName !== "BigUint64Array" && builtinName !== "Float32Array" && builtinName !== "Float64Array" && builtinName !== "Int16Array" && builtinName !== "Int32Array" && builtinName !== "Int8Array" && builtinName !== "Uint16Array" && builtinName !== "Uint32Array" && builtinName !== "Uint8Array" && builtinName !== "Uint8ClampedArray" && builtinName !== "Array" && builtinName !== "Date" && builtinName !== "FinalizationRegistry" && builtinName !== "Promise" && builtinName !== "RegExp" && builtinName !== "WeakRef" && builtinName !== "Function" && builtinName !== "GeneratorFunction" && builtinName !== "AsyncFunction";
-};
-var whichBuiltinType$1 = function whichBuiltinType(value) {
-  if (value == null) {
-    return value;
-  }
-  var which = whichBoxedPrimitive2($Object(value)) || whichCollection2(value) || whichTypedArray2(value);
-  if (which) {
-    return which;
-  }
-  if (isArray$3(value)) {
-    return "Array";
-  }
-  if (isDate$1(value)) {
-    return "Date";
-  }
-  if (isRegex3(value)) {
-    return "RegExp";
-  }
-  if (isWeakRef3(value)) {
-    return "WeakRef";
-  }
-  if (isFinalizationRegistry3(value)) {
-    return "FinalizationRegistry";
-  }
-  if (typeof value === "function") {
-    if (isGeneratorFunction2(value)) {
-      return "GeneratorFunction";
-    }
-    if (isAsyncFunction2(value)) {
-      return "AsyncFunction";
-    }
-    return "Function";
-  }
-  if (isPromise(value)) {
-    return "Promise";
-  }
-  if (toStringTag && toStringTag in value) {
-    var tag2 = value[toStringTag];
-    if (isKnownBuiltin(tag2)) {
-      return tag2;
-    }
-  }
-  if (typeof value.constructor === "function") {
-    var constructorName = name$1(value.constructor);
-    if (isKnownBuiltin(constructorName)) {
-      return constructorName;
-    }
-  }
-  return "Object";
-};
-var GetIntrinsic$1 = getIntrinsic;
-var IsCallable = IsCallableExports$1;
-var Type$1 = Type$2;
-var whichBuiltinType2 = whichBuiltinType$1;
-var $gPO = GetIntrinsic$1("%Object.getPrototypeOf%", true);
-var $ObjectPrototype = GetIntrinsic$1("%Object.prototype%");
-var $TypeError$1 = GetIntrinsic$1("%TypeError%");
-var hasProto$2 = [].__proto__ === Array.prototype;
-var implementation$5 = function getPrototypeOf2(O) {
-  if (Type$1(O) !== "Object") {
-    throw new $TypeError$1("Reflect.getPrototypeOf called on non-object");
-  }
-  if ($gPO) {
-    return $gPO(O);
-  }
-  if (hasProto$2) {
-    var proto2 = O.__proto__;
-    if (proto2 || proto2 === null) {
-      return proto2;
-    }
-  }
-  var type = whichBuiltinType2(O);
-  if (type) {
-    var intrinsic = GetIntrinsic$1("%" + type + "%.prototype", true);
-    if (intrinsic) {
-      return intrinsic;
-    }
-  }
-  if (IsCallable(O.constructor)) {
-    return O.constructor.prototype;
-  }
-  if (O instanceof Object) {
-    return $ObjectPrototype;
-  }
-  return null;
-};
-var Type3 = Type$2;
-var GetIntrinsic2 = getIntrinsic;
-var $TypeError = GetIntrinsic2("%TypeError%");
-var implementation$4 = implementation$5;
-var hasProto$1 = [].__proto__ === Array.prototype;
-var getProto$1 = function getPrototypeOf3(value) {
-  if (Type3(value) !== "Object") {
-    throw new $TypeError("Reflect.getPrototypeOf called on non-object");
-  }
-  return value.__proto__;
-};
-var polyfill$2 = function getPolyfill2() {
-  if (typeof Reflect === "object" && Reflect && Reflect.getPrototypeOf) {
-    return Reflect.getPrototypeOf;
-  }
-  if (hasProto$1) {
-    return getProto$1;
-  }
-  return implementation$4;
-};
-var define$i = defineProperties_1;
-var getPolyfill$1 = polyfill$2;
-var shim$6 = function shimGetPrototypeOf() {
-  define$i(
-    commonjsGlobal,
-    { Reflect: {} },
-    { Reflect: function() {
-      return typeof Reflect !== "object" || !Reflect;
-    } }
-  );
-  var polyfill2 = getPolyfill$1();
-  define$i(
-    Reflect,
-    { getPrototypeOf: polyfill2 },
-    { getPrototypeOf: function() {
-      return Reflect.getPrototypeOf !== polyfill2;
-    } }
-  );
-  return polyfill2;
-};
-var callBind = callBindExports;
-var define$h = defineProperties_1;
-var implementation$3 = implementation$5;
-var getPolyfill3 = polyfill$2;
-var shim$5 = shim$6;
-var bound = callBind(getPolyfill3(), typeof Reflect === "object" ? Reflect : Object);
-define$h(bound, {
-  getPolyfill: getPolyfill3,
-  implementation: implementation$3,
-  shim: shim$5
-});
-var reflect_getprototypeof = bound;
-var ToObject2 = ToObject$1;
-var ReflectGetPrototypeOf = reflect_getprototypeof;
-var implementation$2 = function getPrototypeOf4(O) {
-  return ReflectGetPrototypeOf(ToObject2(O));
-};
-var RequireObjectCoercible = RequireObjectCoercibleExports;
-var implementation$1 = implementation$2;
-var hasProto = [].__proto__ === Array.prototype;
-var getProto = function getPrototypeOf5(value) {
-  RequireObjectCoercible(value);
-  return value.__proto__;
-};
-var $getPrototypeOf = Object.getPrototypeOf;
-var getPrototypeOfPrimitivesToo = function getPrototypeOf6(value) {
-  RequireObjectCoercible(value);
-  return $getPrototypeOf(Object(value));
-};
-var polyfill$1 = function getPolyfill4() {
-  if ($getPrototypeOf) {
-    try {
-      $getPrototypeOf(true);
-    } catch (e) {
-      return getPrototypeOfPrimitivesToo;
-    }
-    return $getPrototypeOf;
-  }
-  if (hasProto) {
-    return getProto;
-  }
-  return implementation$1;
-};
-polyfill$1();
-shams$1();
-hasBigints();
-requireFunctionsHaveNames()();
-function __flatten(object, settings = {}) {
-  const toReturn = {};
-  if (!Array.isArray(object) && !__isPlainObject(object))
-    return object;
-  settings = Object.assign({ separator: ".", array: false, quoteSeparatedProperties: true, quoteCharacter: '"', excludeProps: [], keepLastIntact: false }, settings);
-  for (const key in object) {
-    if (object[key] === void 0)
-      continue;
-    if (object[key] === null) {
-      toReturn[key] = null;
-      continue;
-    }
-    if (settings.excludeProps.indexOf(key) !== -1) {
-      toReturn[key] = object[key];
-      continue;
-    }
-    if (Array.isArray(object[key]) && settings.array || (!Array.isArray(object[key]) && typeof object[key]) == "object") {
-      const isArray2 = Array.isArray(object[key]);
-      const flatObject = __flatten(object[key], Object.assign(Object.assign({}, settings), { keepLastIntact: false }));
-      for (const x in flatObject) {
-        if (flatObject[x] === void 0)
-          continue;
-        if (isArray2) {
-          toReturn[`${key}[${x}]`] = flatObject[x];
-        } else {
-          const part = key;
-          if (settings.quoteSeparatedProperties && part.includes(settings.separator)) {
-            toReturn[`${settings.quoteCharacter}${key}${settings.quoteCharacter}` + settings.separator + x] = flatObject[x];
-          } else {
-            toReturn[key + settings.separator + x] = flatObject[x];
-          }
-        }
-      }
-      continue;
-    }
-    toReturn[key] = object[key];
-  }
-  return toReturn;
-}
-const __viteBrowserExternal_path = new Proxy({}, {
-  get(_, key) {
-    throw new Error(`Module "path" has been externalized for browser compatibility. Cannot access "path.${key}" in client code.  See http://vitejs.dev/guide/troubleshooting.html#module-externalized-for-browser-compatibility for more details.`);
-  }
-});
-const __viteBrowserExternal_path$1 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
-  __proto__: null,
-  default: __viteBrowserExternal_path
-}, Symbol.toStringTag, { value: "Module" }));
-const require$$0$2 = /* @__PURE__ */ getAugmentedNamespace(__viteBrowserExternal_path$1);
-var concatMap$1 = function(xs, fn2) {
-  var res = [];
-  for (var i = 0; i < xs.length; i++) {
-    var x = fn2(xs[i], i);
-    if (isArray$2(x))
-      res.push.apply(res, x);
-    else
-      res.push(x);
-  }
-  return res;
-};
-var isArray$2 = Array.isArray || function(xs) {
-  return Object.prototype.toString.call(xs) === "[object Array]";
-};
-var balancedMatch = balanced$1;
-function balanced$1(a, b, str2) {
-  if (a instanceof RegExp)
-    a = maybeMatch(a, str2);
-  if (b instanceof RegExp)
-    b = maybeMatch(b, str2);
-  var r = range(a, b, str2);
-  return r && {
-    start: r[0],
-    end: r[1],
-    pre: str2.slice(0, r[0]),
-    body: str2.slice(r[0] + a.length, r[1]),
-    post: str2.slice(r[1] + b.length)
-  };
-}
-function maybeMatch(reg, str2) {
-  var m = str2.match(reg);
-  return m ? m[0] : null;
-}
-balanced$1.range = range;
-function range(a, b, str2) {
-  var begs, beg, left, right, result2;
-  var ai = str2.indexOf(a);
-  var bi = str2.indexOf(b, ai + 1);
-  var i = ai;
-  if (ai >= 0 && bi > 0) {
-    if (a === b) {
-      return [ai, bi];
-    }
-    begs = [];
-    left = str2.length;
-    while (i >= 0 && !result2) {
-      if (i == ai) {
-        begs.push(i);
-        ai = str2.indexOf(a, i + 1);
-      } else if (begs.length == 1) {
-        result2 = [begs.pop(), bi];
-      } else {
-        beg = begs.pop();
-        if (beg < left) {
-          left = beg;
-          right = bi;
-        }
-        bi = str2.indexOf(b, i + 1);
-      }
-      i = ai < bi && ai >= 0 ? ai : bi;
-    }
-    if (begs.length) {
-      result2 = [left, right];
-    }
-  }
-  return result2;
-}
-var concatMap = concatMap$1;
-var balanced = balancedMatch;
-var braceExpansion = expandTop;
-var escSlash = "\0SLASH" + Math.random() + "\0";
-var escOpen = "\0OPEN" + Math.random() + "\0";
-var escClose = "\0CLOSE" + Math.random() + "\0";
-var escComma = "\0COMMA" + Math.random() + "\0";
-var escPeriod = "\0PERIOD" + Math.random() + "\0";
-function numeric(str2) {
-  return parseInt(str2, 10) == str2 ? parseInt(str2, 10) : str2.charCodeAt(0);
-}
-function escapeBraces(str2) {
-  return str2.split("\\\\").join(escSlash).split("\\{").join(escOpen).split("\\}").join(escClose).split("\\,").join(escComma).split("\\.").join(escPeriod);
-}
-function unescapeBraces(str2) {
-  return str2.split(escSlash).join("\\").split(escOpen).join("{").split(escClose).join("}").split(escComma).join(",").split(escPeriod).join(".");
-}
-function parseCommaParts(str2) {
-  if (!str2)
-    return [""];
-  var parts = [];
-  var m = balanced("{", "}", str2);
-  if (!m)
-    return str2.split(",");
-  var pre = m.pre;
-  var body = m.body;
-  var post = m.post;
-  var p = pre.split(",");
-  p[p.length - 1] += "{" + body + "}";
-  var postParts = parseCommaParts(post);
-  if (post.length) {
-    p[p.length - 1] += postParts.shift();
-    p.push.apply(p, postParts);
-  }
-  parts.push.apply(parts, p);
-  return parts;
-}
-function expandTop(str2) {
-  if (!str2)
-    return [];
-  if (str2.substr(0, 2) === "{}") {
-    str2 = "\\{\\}" + str2.substr(2);
-  }
-  return expand$1(escapeBraces(str2), true).map(unescapeBraces);
-}
-function embrace(str2) {
-  return "{" + str2 + "}";
-}
-function isPadded(el) {
-  return /^-?0\d/.test(el);
-}
-function lte(i, y) {
-  return i <= y;
-}
-function gte(i, y) {
-  return i >= y;
-}
-function expand$1(str2, isTop) {
-  var expansions = [];
-  var m = balanced("{", "}", str2);
-  if (!m || /\$$/.test(m.pre))
-    return [str2];
-  var isNumericSequence = /^-?\d+\.\.-?\d+(?:\.\.-?\d+)?$/.test(m.body);
-  var isAlphaSequence = /^[a-zA-Z]\.\.[a-zA-Z](?:\.\.-?\d+)?$/.test(m.body);
-  var isSequence = isNumericSequence || isAlphaSequence;
-  var isOptions = m.body.indexOf(",") >= 0;
-  if (!isSequence && !isOptions) {
-    if (m.post.match(/,.*\}/)) {
-      str2 = m.pre + "{" + m.body + escClose + m.post;
-      return expand$1(str2);
-    }
-    return [str2];
-  }
-  var n;
-  if (isSequence) {
-    n = m.body.split(/\.\./);
-  } else {
-    n = parseCommaParts(m.body);
-    if (n.length === 1) {
-      n = expand$1(n[0], false).map(embrace);
-      if (n.length === 1) {
-        var post = m.post.length ? expand$1(m.post, false) : [""];
-        return post.map(function(p) {
-          return m.pre + n[0] + p;
-        });
-      }
-    }
-  }
-  var pre = m.pre;
-  var post = m.post.length ? expand$1(m.post, false) : [""];
-  var N;
-  if (isSequence) {
-    var x = numeric(n[0]);
-    var y = numeric(n[1]);
-    var width = Math.max(n[0].length, n[1].length);
-    var incr = n.length == 3 ? Math.abs(numeric(n[2])) : 1;
-    var test2 = lte;
-    var reverse = y < x;
-    if (reverse) {
-      incr *= -1;
-      test2 = gte;
-    }
-    var pad2 = n.some(isPadded);
-    N = [];
-    for (var i = x; test2(i, y); i += incr) {
-      var c;
-      if (isAlphaSequence) {
-        c = String.fromCharCode(i);
-        if (c === "\\")
-          c = "";
-      } else {
-        c = String(i);
-        if (pad2) {
-          var need = width - c.length;
-          if (need > 0) {
-            var z = new Array(need + 1).join("0");
-            if (i < 0)
-              c = "-" + z + c.slice(1);
-            else
-              c = z + c;
-          }
-        }
-      }
-      N.push(c);
-    }
-  } else {
-    N = concatMap(n, function(el) {
-      return expand$1(el, false);
-    });
-  }
-  for (var j = 0; j < N.length; j++) {
-    for (var k = 0; k < post.length; k++) {
-      var expansion = pre + N[j] + post[k];
-      if (!isTop || isSequence || expansion)
-        expansions.push(expansion);
-    }
-  }
-  return expansions;
-}
-minimatch.Minimatch = Minimatch;
-var path = function() {
-  try {
-    return require$$0$2;
-  } catch (e) {
-  }
-}() || {
-  sep: "/"
-};
-minimatch.sep = path.sep;
-var GLOBSTAR = minimatch.GLOBSTAR = Minimatch.GLOBSTAR = {};
-var expand = braceExpansion;
-var plTypes = {
-  "!": { open: "(?:(?!(?:", close: "))[^/]*?)" },
-  "?": { open: "(?:", close: ")?" },
-  "+": { open: "(?:", close: ")+" },
-  "*": { open: "(?:", close: ")*" },
-  "@": { open: "(?:", close: ")" }
-};
-var qmark = "[^/]";
-var star = qmark + "*?";
-var twoStarDot = "(?:(?!(?:\\/|^)(?:\\.{1,2})($|\\/)).)*?";
-var twoStarNoDot = "(?:(?!(?:\\/|^)\\.).)*?";
-var reSpecials = charSet("().*{}+?[]^$\\!");
-function charSet(s) {
-  return s.split("").reduce(function(set, c) {
-    set[c] = true;
-    return set;
-  }, {});
-}
-var slashSplit = /\/+/;
-minimatch.filter = filter$1;
-function filter$1(pattern2, options) {
-  options = options || {};
-  return function(p, i, list2) {
-    return minimatch(p, pattern2, options);
-  };
-}
-function ext(a, b) {
-  b = b || {};
-  var t = {};
-  Object.keys(a).forEach(function(k) {
-    t[k] = a[k];
-  });
-  Object.keys(b).forEach(function(k) {
-    t[k] = b[k];
-  });
-  return t;
-}
-minimatch.defaults = function(def) {
-  if (!def || typeof def !== "object" || !Object.keys(def).length) {
-    return minimatch;
-  }
-  var orig = minimatch;
-  var m = function minimatch2(p, pattern2, options) {
-    return orig(p, pattern2, ext(def, options));
-  };
-  m.Minimatch = function Minimatch2(pattern2, options) {
-    return new orig.Minimatch(pattern2, ext(def, options));
-  };
-  m.Minimatch.defaults = function defaults(options) {
-    return orig.defaults(ext(def, options)).Minimatch;
-  };
-  m.filter = function filter2(pattern2, options) {
-    return orig.filter(pattern2, ext(def, options));
-  };
-  m.defaults = function defaults(options) {
-    return orig.defaults(ext(def, options));
-  };
-  m.makeRe = function makeRe2(pattern2, options) {
-    return orig.makeRe(pattern2, ext(def, options));
-  };
-  m.braceExpand = function braceExpand2(pattern2, options) {
-    return orig.braceExpand(pattern2, ext(def, options));
-  };
-  m.match = function(list2, pattern2, options) {
-    return orig.match(list2, pattern2, ext(def, options));
-  };
-  return m;
-};
-Minimatch.defaults = function(def) {
-  return minimatch.defaults(def).Minimatch;
-};
-function minimatch(p, pattern2, options) {
-  assertValidPattern(pattern2);
-  if (!options)
-    options = {};
-  if (!options.nocomment && pattern2.charAt(0) === "#") {
-    return false;
-  }
-  return new Minimatch(pattern2, options).match(p);
-}
-function Minimatch(pattern2, options) {
-  if (!(this instanceof Minimatch)) {
-    return new Minimatch(pattern2, options);
-  }
-  assertValidPattern(pattern2);
-  if (!options)
-    options = {};
-  pattern2 = pattern2.trim();
-  if (!options.allowWindowsEscape && path.sep !== "/") {
-    pattern2 = pattern2.split(path.sep).join("/");
-  }
-  this.options = options;
-  this.set = [];
-  this.pattern = pattern2;
-  this.regexp = null;
-  this.negate = false;
-  this.comment = false;
-  this.empty = false;
-  this.partial = !!options.partial;
-  this.make();
-}
-Minimatch.prototype.debug = function() {
-};
-Minimatch.prototype.make = make;
-function make() {
-  var pattern2 = this.pattern;
-  var options = this.options;
-  if (!options.nocomment && pattern2.charAt(0) === "#") {
-    this.comment = true;
-    return;
-  }
-  if (!pattern2) {
-    this.empty = true;
-    return;
-  }
-  this.parseNegate();
-  var set = this.globSet = this.braceExpand();
-  if (options.debug)
-    this.debug = function debug() {
-      console.error.apply(console, arguments);
-    };
-  this.debug(this.pattern, set);
-  set = this.globParts = set.map(function(s) {
-    return s.split(slashSplit);
-  });
-  this.debug(this.pattern, set);
-  set = set.map(function(s, si, set2) {
-    return s.map(this.parse, this);
-  }, this);
-  this.debug(this.pattern, set);
-  set = set.filter(function(s) {
-    return s.indexOf(false) === -1;
-  });
-  this.debug(this.pattern, set);
-  this.set = set;
-}
-Minimatch.prototype.parseNegate = parseNegate;
-function parseNegate() {
-  var pattern2 = this.pattern;
-  var negate = false;
-  var options = this.options;
-  var negateOffset = 0;
-  if (options.nonegate)
-    return;
-  for (var i = 0, l = pattern2.length; i < l && pattern2.charAt(i) === "!"; i++) {
-    negate = !negate;
-    negateOffset++;
-  }
-  if (negateOffset)
-    this.pattern = pattern2.substr(negateOffset);
-  this.negate = negate;
-}
-minimatch.braceExpand = function(pattern2, options) {
-  return braceExpand(pattern2, options);
-};
-Minimatch.prototype.braceExpand = braceExpand;
-function braceExpand(pattern2, options) {
-  if (!options) {
-    if (this instanceof Minimatch) {
-      options = this.options;
-    } else {
-      options = {};
-    }
-  }
-  pattern2 = typeof pattern2 === "undefined" ? this.pattern : pattern2;
-  assertValidPattern(pattern2);
-  if (options.nobrace || !/\{(?:(?!\{).)*\}/.test(pattern2)) {
-    return [pattern2];
-  }
-  return expand(pattern2);
-}
-var MAX_PATTERN_LENGTH = 1024 * 64;
-var assertValidPattern = function(pattern2) {
-  if (typeof pattern2 !== "string") {
-    throw new TypeError("invalid pattern");
-  }
-  if (pattern2.length > MAX_PATTERN_LENGTH) {
-    throw new TypeError("pattern is too long");
-  }
-};
-Minimatch.prototype.parse = parse$1;
-var SUBPARSE = {};
-function parse$1(pattern2, isSub) {
-  assertValidPattern(pattern2);
-  var options = this.options;
-  if (pattern2 === "**") {
-    if (!options.noglobstar)
-      return GLOBSTAR;
-    else
-      pattern2 = "*";
-  }
-  if (pattern2 === "")
-    return "";
-  var re = "";
-  var hasMagic = !!options.nocase;
-  var escaping = false;
-  var patternListStack = [];
-  var negativeLists = [];
-  var stateChar;
-  var inClass = false;
-  var reClassStart = -1;
-  var classStart = -1;
-  var patternStart = pattern2.charAt(0) === "." ? "" : options.dot ? "(?!(?:^|\\/)\\.{1,2}(?:$|\\/))" : "(?!\\.)";
-  var self2 = this;
-  function clearStateChar() {
-    if (stateChar) {
-      switch (stateChar) {
-        case "*":
-          re += star;
-          hasMagic = true;
-          break;
-        case "?":
-          re += qmark;
-          hasMagic = true;
-          break;
-        default:
-          re += "\\" + stateChar;
-          break;
-      }
-      self2.debug("clearStateChar %j %j", stateChar, re);
-      stateChar = false;
-    }
-  }
-  for (var i = 0, len = pattern2.length, c; i < len && (c = pattern2.charAt(i)); i++) {
-    this.debug("%s	%s %s %j", pattern2, i, re, c);
-    if (escaping && reSpecials[c]) {
-      re += "\\" + c;
-      escaping = false;
-      continue;
-    }
-    switch (c) {
-      case "/": {
-        return false;
-      }
-      case "\\":
-        clearStateChar();
-        escaping = true;
-        continue;
-      case "?":
-      case "*":
-      case "+":
-      case "@":
-      case "!":
-        this.debug("%s	%s %s %j <-- stateChar", pattern2, i, re, c);
-        if (inClass) {
-          this.debug("  in class");
-          if (c === "!" && i === classStart + 1)
-            c = "^";
-          re += c;
-          continue;
-        }
-        self2.debug("call clearStateChar %j", stateChar);
-        clearStateChar();
-        stateChar = c;
-        if (options.noext)
-          clearStateChar();
-        continue;
-      case "(":
-        if (inClass) {
-          re += "(";
-          continue;
-        }
-        if (!stateChar) {
-          re += "\\(";
-          continue;
-        }
-        patternListStack.push({
-          type: stateChar,
-          start: i - 1,
-          reStart: re.length,
-          open: plTypes[stateChar].open,
-          close: plTypes[stateChar].close
-        });
-        re += stateChar === "!" ? "(?:(?!(?:" : "(?:";
-        this.debug("plType %j %j", stateChar, re);
-        stateChar = false;
-        continue;
-      case ")":
-        if (inClass || !patternListStack.length) {
-          re += "\\)";
-          continue;
-        }
-        clearStateChar();
-        hasMagic = true;
-        var pl = patternListStack.pop();
-        re += pl.close;
-        if (pl.type === "!") {
-          negativeLists.push(pl);
-        }
-        pl.reEnd = re.length;
-        continue;
-      case "|":
-        if (inClass || !patternListStack.length || escaping) {
-          re += "\\|";
-          escaping = false;
-          continue;
-        }
-        clearStateChar();
-        re += "|";
-        continue;
-      case "[":
-        clearStateChar();
-        if (inClass) {
-          re += "\\" + c;
-          continue;
-        }
-        inClass = true;
-        classStart = i;
-        reClassStart = re.length;
-        re += c;
-        continue;
-      case "]":
-        if (i === classStart + 1 || !inClass) {
-          re += "\\" + c;
-          escaping = false;
-          continue;
-        }
-        var cs = pattern2.substring(classStart + 1, i);
-        try {
-          RegExp("[" + cs + "]");
-        } catch (er) {
-          var sp = this.parse(cs, SUBPARSE);
-          re = re.substr(0, reClassStart) + "\\[" + sp[0] + "\\]";
-          hasMagic = hasMagic || sp[1];
-          inClass = false;
-          continue;
-        }
-        hasMagic = true;
-        inClass = false;
-        re += c;
-        continue;
-      default:
-        clearStateChar();
-        if (escaping) {
-          escaping = false;
-        } else if (reSpecials[c] && !(c === "^" && inClass)) {
-          re += "\\";
-        }
-        re += c;
-    }
-  }
-  if (inClass) {
-    cs = pattern2.substr(classStart + 1);
-    sp = this.parse(cs, SUBPARSE);
-    re = re.substr(0, reClassStart) + "\\[" + sp[0];
-    hasMagic = hasMagic || sp[1];
-  }
-  for (pl = patternListStack.pop(); pl; pl = patternListStack.pop()) {
-    var tail = re.slice(pl.reStart + pl.open.length);
-    this.debug("setting tail", re, pl);
-    tail = tail.replace(/((?:\\{2}){0,64})(\\?)\|/g, function(_, $1, $2) {
-      if (!$2) {
-        $2 = "\\";
-      }
-      return $1 + $1 + $2 + "|";
-    });
-    this.debug("tail=%j\n   %s", tail, tail, pl, re);
-    var t = pl.type === "*" ? star : pl.type === "?" ? qmark : "\\" + pl.type;
-    hasMagic = true;
-    re = re.slice(0, pl.reStart) + t + "\\(" + tail;
-  }
-  clearStateChar();
-  if (escaping) {
-    re += "\\\\";
-  }
-  var addPatternStart = false;
-  switch (re.charAt(0)) {
-    case "[":
-    case ".":
-    case "(":
-      addPatternStart = true;
-  }
-  for (var n = negativeLists.length - 1; n > -1; n--) {
-    var nl = negativeLists[n];
-    var nlBefore = re.slice(0, nl.reStart);
-    var nlFirst = re.slice(nl.reStart, nl.reEnd - 8);
-    var nlLast = re.slice(nl.reEnd - 8, nl.reEnd);
-    var nlAfter = re.slice(nl.reEnd);
-    nlLast += nlAfter;
-    var openParensBefore = nlBefore.split("(").length - 1;
-    var cleanAfter = nlAfter;
-    for (i = 0; i < openParensBefore; i++) {
-      cleanAfter = cleanAfter.replace(/\)[+*?]?/, "");
-    }
-    nlAfter = cleanAfter;
-    var dollar = "";
-    if (nlAfter === "" && isSub !== SUBPARSE) {
-      dollar = "$";
-    }
-    var newRe = nlBefore + nlFirst + nlAfter + dollar + nlLast;
-    re = newRe;
-  }
-  if (re !== "" && hasMagic) {
-    re = "(?=.)" + re;
-  }
-  if (addPatternStart) {
-    re = patternStart + re;
-  }
-  if (isSub === SUBPARSE) {
-    return [re, hasMagic];
-  }
-  if (!hasMagic) {
-    return globUnescape(pattern2);
-  }
-  var flags2 = options.nocase ? "i" : "";
-  try {
-    var regExp = new RegExp("^" + re + "$", flags2);
-  } catch (er) {
-    return new RegExp("$.");
-  }
-  regExp._glob = pattern2;
-  regExp._src = re;
-  return regExp;
-}
-minimatch.makeRe = function(pattern2, options) {
-  return new Minimatch(pattern2, options || {}).makeRe();
-};
-Minimatch.prototype.makeRe = makeRe$1;
-function makeRe$1() {
-  if (this.regexp || this.regexp === false)
-    return this.regexp;
-  var set = this.set;
-  if (!set.length) {
-    this.regexp = false;
-    return this.regexp;
-  }
-  var options = this.options;
-  var twoStar = options.noglobstar ? star : options.dot ? twoStarDot : twoStarNoDot;
-  var flags2 = options.nocase ? "i" : "";
-  var re = set.map(function(pattern2) {
-    return pattern2.map(function(p) {
-      return p === GLOBSTAR ? twoStar : typeof p === "string" ? regExpEscape(p) : p._src;
-    }).join("\\/");
-  }).join("|");
-  re = "^(?:" + re + ")$";
-  if (this.negate)
-    re = "^(?!" + re + ").*$";
-  try {
-    this.regexp = new RegExp(re, flags2);
-  } catch (ex) {
-    this.regexp = false;
-  }
-  return this.regexp;
-}
-minimatch.match = function(list2, pattern2, options) {
-  options = options || {};
-  var mm = new Minimatch(pattern2, options);
-  list2 = list2.filter(function(f) {
-    return mm.match(f);
-  });
-  if (mm.options.nonull && !list2.length) {
-    list2.push(pattern2);
-  }
-  return list2;
-};
-Minimatch.prototype.match = function match(f, partial) {
-  if (typeof partial === "undefined")
-    partial = this.partial;
-  this.debug("match", f, this.pattern);
-  if (this.comment)
-    return false;
-  if (this.empty)
-    return f === "";
-  if (f === "/" && partial)
-    return true;
-  var options = this.options;
-  if (path.sep !== "/") {
-    f = f.split(path.sep).join("/");
-  }
-  f = f.split(slashSplit);
-  this.debug(this.pattern, "split", f);
-  var set = this.set;
-  this.debug(this.pattern, "set", set);
-  var filename;
-  var i;
-  for (i = f.length - 1; i >= 0; i--) {
-    filename = f[i];
-    if (filename)
-      break;
-  }
-  for (i = 0; i < set.length; i++) {
-    var pattern2 = set[i];
-    var file = f;
-    if (options.matchBase && pattern2.length === 1) {
-      file = [filename];
-    }
-    var hit = this.matchOne(file, pattern2, partial);
-    if (hit) {
-      if (options.flipNegate)
-        return true;
-      return !this.negate;
-    }
-  }
-  if (options.flipNegate)
-    return false;
-  return this.negate;
-};
-Minimatch.prototype.matchOne = function(file, pattern2, partial) {
-  var options = this.options;
-  this.debug(
-    "matchOne",
-    { "this": this, file, pattern: pattern2 }
-  );
-  this.debug("matchOne", file.length, pattern2.length);
-  for (var fi = 0, pi = 0, fl = file.length, pl = pattern2.length; fi < fl && pi < pl; fi++, pi++) {
-    this.debug("matchOne loop");
-    var p = pattern2[pi];
-    var f = file[fi];
-    this.debug(pattern2, p, f);
-    if (p === false)
-      return false;
-    if (p === GLOBSTAR) {
-      this.debug("GLOBSTAR", [pattern2, p, f]);
-      var fr = fi;
-      var pr = pi + 1;
-      if (pr === pl) {
-        this.debug("** at the end");
-        for (; fi < fl; fi++) {
-          if (file[fi] === "." || file[fi] === ".." || !options.dot && file[fi].charAt(0) === ".")
-            return false;
-        }
-        return true;
-      }
-      while (fr < fl) {
-        var swallowee = file[fr];
-        this.debug("\nglobstar while", file, fr, pattern2, pr, swallowee);
-        if (this.matchOne(file.slice(fr), pattern2.slice(pr), partial)) {
-          this.debug("globstar found match!", fr, fl, swallowee);
-          return true;
-        } else {
-          if (swallowee === "." || swallowee === ".." || !options.dot && swallowee.charAt(0) === ".") {
-            this.debug("dot detected!", file, fr, pattern2, pr);
-            break;
-          }
-          this.debug("globstar swallow a segment, and continue");
-          fr++;
-        }
-      }
-      if (partial) {
-        this.debug("\n>>> no match, partial?", file, fr, pattern2, pr);
-        if (fr === fl)
-          return true;
-      }
-      return false;
-    }
-    var hit;
-    if (typeof p === "string") {
-      hit = f === p;
-      this.debug("string match", p, f, hit);
-    } else {
-      hit = f.match(p);
-      this.debug("pattern match", p, f, hit);
-    }
-    if (!hit)
-      return false;
-  }
-  if (fi === fl && pi === pl) {
-    return true;
-  } else if (fi === fl) {
-    return partial;
-  } else if (pi === pl) {
-    return fi === fl - 1 && file[fi] === "";
-  }
-  throw new Error("wtf?");
-};
-function globUnescape(s) {
-  return s.replace(/\\(.)/g, "$1");
-}
-function regExpEscape(s) {
-  return s.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
-}
-function pad(hash2, len) {
-  while (hash2.length < len) {
-    hash2 = "0" + hash2;
-  }
-  return hash2;
-}
-function fold(hash2, text) {
-  var i;
-  var chr;
-  var len;
-  if (text.length === 0) {
-    return hash2;
-  }
-  for (i = 0, len = text.length; i < len; i++) {
-    chr = text.charCodeAt(i);
-    hash2 = (hash2 << 5) - hash2 + chr;
-    hash2 |= 0;
-  }
-  return hash2 < 0 ? hash2 * -2 : hash2;
-}
-function foldObject(hash2, o, seen2) {
-  return Object.keys(o).sort().reduce(foldKey, hash2);
-  function foldKey(hash3, key) {
-    return foldValue(hash3, o[key], key, seen2);
-  }
-}
-function foldValue(input, value, key, seen2) {
-  var hash2 = fold(fold(fold(input, key), toString$2(value)), typeof value);
-  if (value === null) {
-    return fold(hash2, "null");
-  }
-  if (value === void 0) {
-    return fold(hash2, "undefined");
-  }
-  if (typeof value === "object" || typeof value === "function") {
-    if (seen2.indexOf(value) !== -1) {
-      return fold(hash2, "[Circular]" + key);
-    }
-    seen2.push(value);
-    var objHash = foldObject(hash2, value, seen2);
-    if (!("valueOf" in value) || typeof value.valueOf !== "function") {
-      return objHash;
-    }
-    try {
-      return fold(objHash, String(value.valueOf()));
-    } catch (err) {
-      return fold(objHash, "[valueOf exception]" + (err.stack || err.message));
-    }
-  }
-  return fold(hash2, value.toString());
-}
-function toString$2(o) {
-  return Object.prototype.toString.call(o);
-}
-function sum(o) {
-  return pad(foldValue(0, o, "", []).toString(16), 8);
-}
-var hashSum = sum;
-function objectHash(obj, settings = {}) {
-  settings = Object.assign({}, settings);
-  return hashSum(obj);
-}
-function __sort(object, sort) {
-  const keys3 = Object.keys(object);
-  const sortedKeys = keys3.sort((a, b) => {
-    if (!sort) {
-      if (a < b) {
-        return -1;
-      }
-      if (a > b) {
-        return 1;
-      }
-      return 0;
-    }
-    return sort({ key: a, value: object[a] }, { key: b, value: object[b] });
-  });
-  const resultObj = {};
-  sortedKeys.forEach((k) => {
-    resultObj[k] = object[k];
-  });
-  return resultObj;
-}
-class SLog {
-  static filter(filter2) {
-    if (typeof filter2 === "function") {
-      this._filterFunctions = [...this._filterFunctions, filter2];
-    } else {
-      this._filteredTypes = filter2;
-    }
-  }
-  /**
-   * @name            clearFilters
-   * @type            Function
-   * @static
-   *
-   * This static method allows you to reset all the filters applied
-   *
-   * @since           2.0.0
-   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-   */
-  static clearFilters() {
-    this._filteredTypes = [];
-    this._filterFunctions = [];
-    M;
-  }
-  static setDefaultLogObj(logObj) {
-    this._defaultLogObj = logObj;
-  }
-  /**
-   * @name            isTypeEnabled
-   * @type            Function
-   * @static
-   *
-   * This static method allows you Check if a particular log type is enabled or not.
-   * You can pass as well multiple log types as an array.
-   *
-   * @param       {ISLogType|ISLogType[]}             types      The log type(s) you want to check
-   * @return      {Boolean}                              True if the log type is enabled, false otherwise
-   *
-   * @since       2.0.0
-   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-   */
-  static isTypeEnabled(types2) {
-    if (!this._filteredTypes.length) {
-      return true;
-    }
-    if (!Array.isArray(types2))
-      types2 = [types2];
-    for (const type of types2) {
-      if (!this._filteredTypes.includes(type))
-        return false;
-    }
-    return true;
-  }
-  /**
-   * @name        constructor
-   * @type        Function
-   * @constructor
-   *
-   * Constructor
-   *
-   * @since       2.0.0
-   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-   */
-  constructor(logObj) {
-    var _a2;
-    if (!(logObj === null || logObj === void 0 ? void 0 : logObj.value) && !logObj._logObj)
-      ;
-    this._logObj = __deepMerge(
-      {
-        type: SLog.TYPE_LOG,
-        timestamp: Date.now(),
-        decorators: true,
-        time: false,
-        verbose: false,
-        notify: false,
-        metas: {}
-      },
-      // @ts-ignore
-      this.constructor._defaultLogObj,
-      // @ts-ignore
-      (_a2 = logObj._logObj) !== null && _a2 !== void 0 ? _a2 : logObj
-    );
-  }
-  /**
-   * @name        value
-   * @type        Any
-   * @get
-   * @set
-   *
-   * Access the "value" property of the SLog object
-   *
-   * @since           2.0.0
-   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-   */
-  get value() {
-    return this._logObj.value;
-  }
-  set value(value) {
-    this._logObj.value = value;
-  }
-  /**
-   * @name        metas
-   * @type        Any
-   * @get
-   * @set
-   *
-   * Access the "metas" property of the SLog object
-   *
-   * @since           2.0.0
-   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-   */
-  get metas() {
-    var _a2;
-    return (_a2 = this._logObj.metas) !== null && _a2 !== void 0 ? _a2 : {};
-  }
-  set metas(value) {
-    this._logObj.metas = value;
-  }
-  /**
-   * @name        type
-   * @type        String
-   * @get
-   *
-   * Access the "type" property of the SLog object
-   * This specify which type if the log. LOG, INFO, WARN, ERROR or VERBODE
-   *
-   * @since           2.0.0
-   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-   */
-  get type() {
-    return this._logObj.type;
-  }
-  /**
-   * @name        group
-   * @type        String
-   * @get
-   *
-   * Access the "group" property of the SLog object
-   * The group can be used to display logs in a stack or whatever...
-   *
-   * @since           2.0.0
-   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-   */
-  get group() {
-    return this._logObj.group;
-  }
-  set group(value) {
-    if (typeof value !== "string") {
-      throw new Error(`<red>[SLog]</red> The "<cyan>group</cyan>" property MUST be a string. You've passed a "${typeof value}"...`);
-    }
-    this._logObj.group = value;
-  }
-  /**
-   * @name        active
-   * @type        Boolean
-   * @get
-   *
-   * Access the "active" property of the SLog object
-   * This specify if the log is active depending on parameters like `SLog.filter`.
-   * Check the documentation of this static method for more info.
-   *
-   * @since           2.0.0
-   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-   */
-  get active() {
-    for (let [idx, fn2] of this.constructor._filterFunctions.entries()) {
-      if (!fn2(this)) {
-        return false;
-      }
-    }
-    if (!this._logObj.type)
-      return true;
-    if (!this.constructor._filteredTypes.length) {
-      return true;
-    }
-    if (!this.constructor.TYPES.includes(this._logObj.type)) {
-      return true;
-    }
-    if (!this.constructor._filteredTypes.includes(this._logObj.type))
-      return false;
-    return true;
-  }
-  /**
-   * @name        decorators
-   * @type        Boolean
-   * @get
-   * @set
-   *
-   * Access the "decorators" property of the SLog object.
-   * This specify if the log has to be printed with decorators or not
-   *
-   * @since           2.0.0
-   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-   */
-  get decorators() {
-    return this._logObj.decorators;
-  }
-  set decorators(value) {
-    this._logObj.decorators = value;
-  }
-  /**
-   * @name        time
-   * @type        Boolean
-   * @get
-   *
-   * Access the "time" property of the SLog object.
-   * This specify if the log has to be printed with his time or not
-   *
-   * @since           2.0.0
-   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-   */
-  get time() {
-    return this._logObj.time;
-  }
-  /**
-   * @name        timestamp
-   * @type        String
-   * @get
-   *
-   * Access the "timestamp" property of the SLog object
-   *
-   * @since           2.0.0
-   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-   */
-  get timestamp() {
-    return this._logObj.timestamp;
-  }
-  /**
-   * @name        clear
-   * @type        Boolean
-   * @get
-   *
-   * Access the "clear" property of the SLog object.
-   * This specify if the previous logs have to be cleared before printing this one
-   *
-   * @since           2.0.0
-   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-   */
-  get clear() {
-    return this._logObj.clear;
-  }
-  /**
-   * @name        margin
-   * @type        ISLogMargin
-   * @get
-   *
-   * Access the "margin" property of the SLog object.
-   *
-   * @since           2.0.0
-   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-   */
-  get margin() {
-    var _a2;
-    return (_a2 = this._logObj.margin) !== null && _a2 !== void 0 ? _a2 : {
-      top: 0,
-      bottom: 0
-    };
-  }
-  /**
-   * @name        temp
-   * @type        Boolean
-   * @get
-   *
-   * Access the "temp" property of the SLog object.
-   * This specify if this log is a temporary one and if it has to be deleted
-   * when the next log appear.
-   *
-   * @since           2.0.0
-   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-   */
-  get temp() {
-    return this._logObj.temp;
-  }
-  /**
-   * @name        as
-   * @type        String
-   * @get
-   *
-   * Access the "as" property of the SLog object.
-   * This specify the optimal way the log has to be displayed.
-   * This depends on the logger you use and how it can display logs.
-   *
-   * @since           2.0.0
-   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-   */
-  get as() {
-    return this._logObj.as;
-  }
-  /**
-   * @name        verbose
-   * @type        Boolean
-   * @get
-   *
-   * Access the "verbose" property of the SLog object
-   *
-   * @since           2.0.0
-   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-   */
-  get verbose() {
-    return this._logObj.verbose;
-  }
-  set verbose(value) {
-    this._logObj.verbose = value;
-  }
-  /**
-   * @name        notify
-   * @type        Boolean
-   * @get
-   *
-   * Access the "notify" property of the SLog object
-   *
-   * @since           2.0.0
-   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-   */
-  get notify() {
-    return this._logObj.notify;
-  }
-  set notify(value) {
-    this._logObj.notify = value;
-  }
-  /**
-   * @name        logger
-   * @type        Function
-   * @get
-   *
-   * Access the "logger" property of the SLog object.
-   * This represent a function that will be used to actually log the message.
-   *
-   * @since           2.0.0
-   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-   */
-  get logger() {
-    return this._logObj.logger;
-  }
-}
-SLog.TYPE_LOG = "log";
-SLog.TYPE_INFO = "info";
-SLog.TYPE_WARN = "warn";
-SLog.TYPE_ERROR = "error";
-SLog.TYPE_SUCCESS = "success";
-SLog.TYPES = [
-  SLog.TYPE_LOG,
-  SLog.TYPE_INFO,
-  SLog.TYPE_WARN,
-  SLog.TYPE_ERROR,
-  SLog.TYPE_SUCCESS
-];
-SLog.PRESET_SILENT = [];
-SLog.PRESET_DEFAULT = [
-  SLog.TYPE_LOG,
-  SLog.TYPE_INFO,
-  SLog.TYPE_WARN,
-  SLog.TYPE_ERROR,
-  SLog.TYPE_SUCCESS
-];
-SLog.PRESET_WARN = [SLog.TYPE_WARN, SLog.TYPE_ERROR];
-SLog.PRESET_ERROR = [SLog.TYPE_ERROR];
-SLog.PRESET_VERBOSE = [
-  SLog.TYPE_LOG,
-  SLog.TYPE_INFO,
-  SLog.TYPE_WARN,
-  SLog.TYPE_ERROR,
-  SLog.TYPE_SUCCESS
-];
-SLog.PRESETS = ["silent", "default", "warn", "error"];
-SLog._filteredTypes = [];
-SLog._filterFunctions = [];
-SLog._filteredTypes = [];
-SLog._defaultLogObj = {};
-function availableColors(settings) {
-  settings = Object.assign({ excludeBasics: false }, settings !== null && settings !== void 0 ? settings : {});
-  const _colors = [
-    "yellow",
-    "cyan",
-    "green",
-    "magenta",
-    "blue",
-    "red",
-    "grey",
-    "gray"
-  ];
-  let colors = _colors;
-  if (settings.excludeBasics) {
-    colors = _colors.filter((c) => {
-      return c !== "white" && c !== "black" && c !== "grey" && c !== "gray";
-    });
-  }
-  return colors;
-}
-let _colorsStack = {};
-let _colorUsedByScope = {};
-function getColorFor(ref, settings) {
-  settings = __deepMerge({
-    scope: "default",
-    excludeBasics: true
-  }, settings !== null && settings !== void 0 ? settings : {});
-  const availableColors$1 = availableColors(settings);
-  const scopeId = __md5.encrypt(settings.scope);
-  const refId = __md5.encrypt(ref);
-  if (_colorsStack[`${scopeId}.${refId}`]) {
-    return _colorsStack[`${scopeId}.${refId}`];
-  }
-  if (!_colorUsedByScope[scopeId])
-    _colorUsedByScope[scopeId] = [];
-  if (_colorUsedByScope[scopeId].length >= availableColors$1.length) {
-    const color2 = __pickRandom(availableColors$1);
-    _colorsStack[`${scopeId}.${refId}`] = color2;
-    return color2;
-  } else {
-    for (let i = 0; i < availableColors$1.length; i++) {
-      if (_colorUsedByScope[scopeId].indexOf(availableColors$1[i]) === -1) {
-        _colorUsedByScope[scopeId].push(availableColors$1[i]);
-        _colorsStack[`${scopeId}.${refId}`] = availableColors$1[i];
-        return availableColors$1[i];
-      }
-    }
-  }
 }
 function _iterableToArrayLimit(arr, i) {
   var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"];
@@ -8124,7 +4707,7 @@ function __isChildProcess() {
   return process.send !== void 0 || {}.IS_CHILD_PROCESS !== void 0;
 }
 var isClassExports = {};
-var isClass$1 = {
+var isClass$2 = {
   get exports() {
     return isClassExports;
   },
@@ -8155,9 +4738,9 @@ var isClass$1 = {
       exports.isClass = isClass2;
     }
   })();
-})(isClass$1, isClassExports);
+})(isClass$2, isClassExports);
 const __isClass = isClassExports;
-function isClass(cls) {
+function isClass$1(cls) {
   if (!Array.isArray(cls))
     cls = [cls];
   for (let i = 0; i < cls.length; i++) {
@@ -8177,13 +4760,8 @@ function __isColor(value) {
     return false;
   return value.match(/^#[a-zA-Z0-9]{3,6}$/) || value.match(/^rgba\([0-9]{1,3}(\s+)?,(\s+)?[0-9]{1,3}(\s+)?,(\s+)?[0-9]{1,3}(\s+)?,(\s+)?[0-9]{1,3}\)$/) || value.match(/^rgb\([0-9]{1,3}(\s+)?,(\s+)?[0-9]{1,3}(\s+)?,(\s+)?[0-9]{1,3}\)$/) || value.match(/^hsl\([0-9]{1,3}%?(\s+)?,(\s+)?[0-9]{1,3}%?(\s+)?,(\s+)?[0-9]{1,3}%?(\s+)?\)$/) || value.match(/^hsv\([0-9]{1,3}%?(\s+)?,(\s+)?[0-9]{1,3}%?(\s+)?,(\s+)?[0-9]{1,3}%?(\s+)?\)$/);
 }
-function __isCreditCard(value) {
-  const re = /^(?:(4[0-9]{12}(?:[0-9]{3})?)|(5[1-5][0-9]{14})|(6(?:011|5[0-9]{2})[0-9]{12})|(3[47][0-9]{13})|(3(?:0[0-5]|[68][0-9])[0-9]{11})|((?:2131|1800|35[0-9]{3})[0-9]{11}))$/;
-  return re.test(value);
-}
-function __isEmail(value) {
-  const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-  return re.test(value.toLowerCase());
+function __isDomElement(element) {
+  return typeof HTMLElement === "object" ? element instanceof HTMLElement : element && typeof element === "object" && element !== null && element.nodeType === 1 && typeof element.nodeName === "string";
 }
 /*!
  * is-extglob <https://github.com/jonschlinkert/is-extglob>
@@ -8341,15 +4919,6 @@ function __isInteger(data) {
   return typeof data === "number" && !isNaN(data) && function(x) {
     return (x | 0) === x;
   }(parseFloat(data));
-}
-function __isIsoDate(value) {
-  return value.match(/^([0-9]{4})-(1[0-2]|0[1-9])$/) || value.match(/^([0-9]{4})-?(1[0-2]|0[1-9])-?(3[01]|0[1-9]|[12][0-9])$/) || value.match(/^([0-9]{4})(-?)(1[0-2]|0[1-9])\2(3[01]|0[1-9]|[12][0-9])$/) || value.match(/^([0-9]{4})-?(36[0-6]|3[0-5][0-9]|[12][0-9]{2}|0[1-9][0-9]|00[1-9])$/);
-}
-function __isIsoDateTime(value) {
-  return value.match(/^([0-9]{4})-?(1[0-2]|0[1-9])-?(3[01]|0[1-9]|[12][0-9])↵\s(2[0-3]|[01][0-9]):?([0-5][0-9]):?([0-5][0-9])$/) || value.match(/^(?:([0-9]{4})-?(1[0-2]|0[1-9])-?(3[01]|0[1-9]|[12][0-9])\s(2[0-3]|[01][0-9]):?([0-5][0-9]):?([0-5][0-9])|([0-9]{4})(1[0-2]|0[1-9])(3[01]|0[1-9]|[12][0-9])\s(2[0-3]|[01][0-9])([0-5][0-9])([0-5][0-9]))$/);
-}
-function __isIsoTime(value) {
-  return value.match(/^(2[0-3]|[01][0-9]):?([0-5][0-9])$/) || value.match(/^(2[0-3]|[01][0-9]):?([0-5][0-9]):?([0-5][0-9])$/) || value.match(/^(Z|[+-](?:2[0-3]|[01][0-9])(?::?(?:[0-5][0-9]))?)$/) || value.match(/^(2[0-3]|[01][0-9]):?([0-5][0-9]):?([0-5][0-9])(Z|[+-](?:2[0-3]|[01][0-9])(?::?(?:[0-5][0-9]))?)$/);
 }
 function __isNode() {
   return typeof process !== "undefined" && process.release && process.release.name === "node";
@@ -8851,8 +5420,8 @@ lib.exports = function(regexpStr) {
   return start;
 };
 libExports.types = types$1;
-var parse = libExports;
-var types = parse.types;
+var parse$1 = libExports;
+var types = parse$1.types;
 var safeRegex = function(re, opts) {
   if (!opts)
     opts = {};
@@ -8862,7 +5431,7 @@ var safeRegex = function(re, opts) {
   else if (typeof re !== "string")
     re = String(re);
   try {
-    re = parse(re);
+    re = parse$1(re);
   } catch (err) {
     return false;
   }
@@ -8906,7 +5475,7 @@ function isRegExp(x) {
 var isobject$1 = function isObject(val) {
   return val != null && typeof val === "object" && Array.isArray(val) === false;
 };
-var toString$1 = Object.prototype.toString;
+var toString$3 = Object.prototype.toString;
 var kindOf = function kindOf2(val) {
   if (val === void 0)
     return "undefined";
@@ -8924,13 +5493,13 @@ var kindOf = function kindOf2(val) {
   if (type === "function") {
     return isGeneratorFn(val) ? "generatorfunction" : "function";
   }
-  if (isArray$1(val))
+  if (isArray$3(val))
     return "array";
   if (isBuffer(val))
     return "buffer";
-  if (isArguments$1(val))
+  if (isArguments$2(val))
     return "arguments";
-  if (isDate(val))
+  if (isDate$1(val))
     return "date";
   if (isError(val))
     return "error";
@@ -8971,7 +5540,7 @@ var kindOf = function kindOf2(val) {
   if (isGeneratorObj(val)) {
     return "generator";
   }
-  type = toString$1.call(val);
+  type = toString$3.call(val);
   switch (type) {
     case "[object Object]":
       return "object";
@@ -8989,7 +5558,7 @@ var kindOf = function kindOf2(val) {
 function ctorName(val) {
   return typeof val.constructor === "function" ? val.constructor.name : null;
 }
-function isArray$1(val) {
+function isArray$3(val) {
   if (Array.isArray)
     return Array.isArray(val);
   return val instanceof Array;
@@ -8997,7 +5566,7 @@ function isArray$1(val) {
 function isError(val) {
   return val instanceof Error || typeof val.message === "string" && val.constructor && typeof val.constructor.stackTraceLimit === "number";
 }
-function isDate(val) {
+function isDate$1(val) {
   if (val instanceof Date)
     return true;
   return typeof val.toDateString === "function" && typeof val.getDate === "function" && typeof val.setDate === "function";
@@ -9013,7 +5582,7 @@ function isGeneratorFn(name2, val) {
 function isGeneratorObj(val) {
   return typeof val.throw === "function" && typeof val.return === "function" && typeof val.next === "function";
 }
-function isArguments$1(val) {
+function isArguments$2(val) {
   try {
     if (typeof val.length === "number" && typeof val.callee === "function") {
       return true;
@@ -9052,13 +5621,13 @@ function isAccessorDescriptor(obj, prop) {
   if (typeOf$2(obj) !== "object") {
     return false;
   }
-  if (has$1(obj, "value") || has$1(obj, "writable")) {
+  if (has$2(obj, "value") || has$2(obj, "writable")) {
     return false;
   }
-  if (!has$1(obj, "get") || typeof obj.get !== "function") {
+  if (!has$2(obj, "get") || typeof obj.get !== "function") {
     return false;
   }
-  if (has$1(obj, "set") && typeof obj[key] !== "function" && typeof obj[key] !== "undefined") {
+  if (has$2(obj, "set") && typeof obj[key] !== "function" && typeof obj[key] !== "undefined") {
     return false;
   }
   for (var key in obj) {
@@ -9074,7 +5643,7 @@ function isAccessorDescriptor(obj, prop) {
   }
   return true;
 }
-function has$1(obj, key) {
+function has$2(obj, key) {
   return {}.hasOwnProperty.call(obj, key);
 }
 var isAccessorDescriptor_1 = isAccessorDescriptor;
@@ -9142,8 +5711,8 @@ var isDescriptor$1 = function isDescriptor(obj, key) {
  */
 var isobject = isobject$1;
 var isDescriptor2 = isDescriptor$1;
-var define$g = typeof Reflect !== "undefined" && Reflect.defineProperty ? Reflect.defineProperty : Object.defineProperty;
-var defineProperty = function defineProperty2(obj, key, val) {
+var define$l = typeof Reflect !== "undefined" && Reflect.defineProperty ? Reflect.defineProperty : Object.defineProperty;
+var defineProperty$2 = function defineProperty(obj, key, val) {
   if (!isobject(obj) && typeof obj !== "function" && !Array.isArray(obj)) {
     throw new TypeError("expected an object, function, or array");
   }
@@ -9151,10 +5720,10 @@ var defineProperty = function defineProperty2(obj, key, val) {
     throw new TypeError('expected "key" to be a string');
   }
   if (isDescriptor2(val)) {
-    define$g(obj, key, val);
+    define$l(obj, key, val);
     return obj;
   }
-  define$g(obj, key, {
+  define$l(obj, key, {
     configurable: true,
     enumerable: false,
     writable: true,
@@ -9239,7 +5808,7 @@ var extendShallow$1 = Object.assign || function(obj) {
   }
   for (var i = 1; i < arguments.length; i++) {
     var val = arguments[i];
-    if (isString$2(val)) {
+    if (isString$4(val)) {
       val = toObject(val);
     }
     if (isObject$3(val)) {
@@ -9251,12 +5820,12 @@ var extendShallow$1 = Object.assign || function(obj) {
 };
 function assign$3(a, b) {
   for (var key in b) {
-    if (hasOwn$1(b, key)) {
+    if (hasOwn$2(b, key)) {
       a[key] = b[key];
     }
   }
 }
-function isString$2(val) {
+function isString$4(val) {
   return val && typeof val === "string";
 }
 function toObject(str2) {
@@ -9269,16 +5838,16 @@ function toObject(str2) {
 function isObject$3(val) {
   return val && typeof val === "object" || isExtendable$1(val);
 }
-function hasOwn$1(obj, key) {
+function hasOwn$2(obj, key) {
   return Object.prototype.hasOwnProperty.call(obj, key);
 }
 var extend$2 = extendShallow$1;
 var safe$1 = safeRegex;
-function toRegex$1(pattern2, options) {
-  return new RegExp(toRegex$1.create(pattern2, options));
+function toRegex$1(pattern, options) {
+  return new RegExp(toRegex$1.create(pattern, options));
 }
-toRegex$1.create = function(pattern2, options) {
-  if (typeof pattern2 !== "string") {
+toRegex$1.create = function(pattern, options) {
+  if (typeof pattern !== "string") {
     throw new TypeError("expected a string");
   }
   var opts = extend$2({}, options);
@@ -9288,11 +5857,11 @@ toRegex$1.create = function(pattern2, options) {
   var open = opts.strictOpen !== false ? "^" : "";
   var close = opts.strictClose !== false ? "$" : "";
   var endChar = opts.endChar ? opts.endChar : "+";
-  var str2 = pattern2;
+  var str2 = pattern;
   if (opts.strictNegate === false) {
-    str2 = "(?:(?!(?:" + pattern2 + ")).)" + endChar;
+    str2 = "(?:(?!(?:" + pattern + ")).)" + endChar;
   } else {
-    str2 = "(?:(?!^(?:" + pattern2 + ")$).)" + endChar;
+    str2 = "(?:(?!^(?:" + pattern + ")$).)" + endChar;
   }
   var res = open + str2 + close;
   if (opts.safe === true && safe$1(res) === false) {
@@ -9302,30 +5871,30 @@ toRegex$1.create = function(pattern2, options) {
 };
 var regexNot = toRegex$1;
 var safe = safeRegex;
-var define$f = defineProperty;
+var define$k = defineProperty$2;
 var extend$1 = extendShallow$1;
 var not = regexNot;
 var MAX_LENGTH = 1024 * 64;
 var cache = {};
 toRegex$2.exports = function(patterns, options) {
   if (!Array.isArray(patterns)) {
-    return makeRe(patterns, options);
+    return makeRe$1(patterns, options);
   }
-  return makeRe(patterns.join("|"), options);
+  return makeRe$1(patterns.join("|"), options);
 };
-function makeRe(pattern2, options) {
-  if (pattern2 instanceof RegExp) {
-    return pattern2;
+function makeRe$1(pattern, options) {
+  if (pattern instanceof RegExp) {
+    return pattern;
   }
-  if (typeof pattern2 !== "string") {
+  if (typeof pattern !== "string") {
     throw new TypeError("expected a string");
   }
-  if (pattern2.length > MAX_LENGTH) {
+  if (pattern.length > MAX_LENGTH) {
     throw new Error("expected pattern to be less than " + MAX_LENGTH + " characters");
   }
-  var key = pattern2;
+  var key = pattern;
   if (!options || options && options.cache !== false) {
-    key = createKey(pattern2, options);
+    key = createKey(pattern, options);
     if (cache.hasOwnProperty(key)) {
       return cache[key];
     }
@@ -9351,9 +5920,9 @@ function makeRe(pattern2, options) {
   }
   try {
     if (opts.negate || typeof opts.strictNegate === "boolean") {
-      pattern2 = not.create(pattern2, opts);
+      pattern = not.create(pattern, opts);
     }
-    var str2 = open + "(?:" + pattern2 + ")" + close;
+    var str2 = open + "(?:" + pattern + ")" + close;
     regex2 = new RegExp(str2, flags2);
     if (opts.safe === true && safe(regex2) === false) {
       throw new Error("potentially unsafe regular expression: " + regex2.source);
@@ -9361,33 +5930,33 @@ function makeRe(pattern2, options) {
   } catch (err) {
     if (opts.strictErrors === true || opts.safe === true) {
       err.key = key;
-      err.pattern = pattern2;
+      err.pattern = pattern;
       err.originalOptions = options;
       err.createdOptions = opts;
       throw err;
     }
     try {
-      regex2 = new RegExp("^" + pattern2.replace(/(\W)/g, "\\$1") + "$");
+      regex2 = new RegExp("^" + pattern.replace(/(\W)/g, "\\$1") + "$");
     } catch (err2) {
       regex2 = /.^/;
     }
   }
   if (opts.cache !== false) {
-    memoize(regex2, key, pattern2, opts);
+    memoize(regex2, key, pattern, opts);
   }
   return regex2;
 }
-function memoize(regex2, key, pattern2, options) {
-  define$f(regex2, "cached", true);
-  define$f(regex2, "pattern", pattern2);
-  define$f(regex2, "options", options);
-  define$f(regex2, "key", key);
+function memoize(regex2, key, pattern, options) {
+  define$k(regex2, "cached", true);
+  define$k(regex2, "pattern", pattern);
+  define$k(regex2, "options", options);
+  define$k(regex2, "key", key);
   cache[key] = regex2;
 }
-function createKey(pattern2, options) {
+function createKey(pattern, options) {
   if (!options)
-    return pattern2;
-  var key = pattern2;
+    return pattern;
+  var key = pattern;
   for (var prop in options) {
     if (options.hasOwnProperty(prop)) {
       key += ";" + prop + "=" + String(options[prop]);
@@ -9395,7 +5964,7 @@ function createKey(pattern2, options) {
   }
   return key;
 }
-toRegexExports.makeRe = makeRe;
+toRegexExports.makeRe = makeRe$1;
 function format$1(string, format2) {
   var _a2;
   let schema = [];
@@ -9865,11 +6434,11 @@ function __typeof(value, settings = {}) {
     type = "Boolean";
   else if (value instanceof RegExp)
     type = "RegExp";
-  else if (settings.customClass === true && isClass(value) && value.name !== void 0) {
+  else if (settings.customClass === true && isClass$1(value) && value.name !== void 0) {
     type = __upperFirst(value.name);
   } else if (settings.customClass === true && value.constructor !== void 0 && value.constructor.name !== void 0) {
     type = __upperFirst(value.constructor.name);
-  } else if (settings.customClass === false && isClass(value)) {
+  } else if (settings.customClass === false && isClass$1(value)) {
     type = "Class";
   } else if (typeof value === "function")
     type = "Function";
@@ -10530,12 +7099,12 @@ class SInterface extends SClass {
    * @since     2.0.0
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
    */
-  static override(definition2) {
+  static override(definition) {
     const _this = this;
     class SInterfaceOverrided extends this {
     }
     SInterfaceOverrided.overridedName = `${_this.name} (overrided)`;
-    SInterfaceOverrided.definition = __deepMerge(_this.definition, definition2);
+    SInterfaceOverrided.definition = __deepMerge(_this.definition, definition);
     return SInterfaceOverrided;
   }
   /**
@@ -10774,6 +7343,11 @@ class SInterface extends SClass {
     if (set.baseObj) {
       objectOnWhichToApplyInterface = __deepMerge(set.baseObj, objectOnWhichToApplyInterface);
     }
+    for (let [key, value] of Object.entries(this._definition)) {
+      if (__isPlainObject(value.default) && __isPlainObject(objectOnWhichToApplyInterface[key])) {
+        objectOnWhichToApplyInterface[key] = __deepMerge(value.default, objectOnWhichToApplyInterface[key]);
+      }
+    }
     const descriptorResult = descriptor2.apply(objectOnWhichToApplyInterface);
     if (descriptorResult.hasIssues()) {
       throw new Error(descriptorResult.toString());
@@ -10787,9 +7361,9 @@ class SInterface extends SClass {
 }
 SInterface.description = "";
 SInterface._registeredRenderers = {};
-var src = {};
+var src$1 = {};
 var config = {};
-const name = "clone-class";
+const name$1 = "clone-class";
 const version = "0.6.20";
 const description = "Clone an ES6 Class as Another Class Name for Isolating Class Static Properties.";
 const main = "src/index.js";
@@ -10842,8 +7416,8 @@ const publishConfig = {
   access: "public",
   tag: "latest"
 };
-const require$$0$1 = {
-  name,
+const require$$0$2 = {
+  name: name$1,
   version,
   description,
   main,
@@ -10860,7 +7434,7 @@ const require$$0$1 = {
   publishConfig
 };
 Object.defineProperty(config, "__esModule", { value: true });
-config.VERSION = require$$0$1.version;
+config.VERSION = require$$0$2.version;
 var instanceToClass$1 = {};
 Object.defineProperty(instanceToClass$1, "__esModule", { value: true });
 function instanceToClass(instance, baseClass) {
@@ -10891,17 +7465,17 @@ function cloneClass(OriginalClass) {
 }
 cloneClass$1.cloneClass = cloneClass;
 cloneClass$1.default = cloneClass;
-Object.defineProperty(src, "__esModule", { value: true });
+Object.defineProperty(src$1, "__esModule", { value: true });
 var config_1 = config;
-src.VERSION = config_1.VERSION;
+src$1.VERSION = config_1.VERSION;
 var instance_to_class_1 = instanceToClass$1;
-src.instanceToClass = instance_to_class_1.instanceToClass;
+src$1.instanceToClass = instance_to_class_1.instanceToClass;
 const clone_class_1 = cloneClass$1;
-src.cloneClass = clone_class_1.cloneClass;
-src.default = clone_class_1.cloneClass;
+src$1.cloneClass = clone_class_1.cloneClass;
+src$1.default = clone_class_1.cloneClass;
 const fn$2 = function(cls, settings = {}) {
   const stack = {};
-  if (!isClass(cls)) {
+  if (!isClass$1(cls)) {
     cls = cls.constructor;
   }
   if (settings.includeBaseClass === true) {
@@ -11631,7 +8205,7 @@ const descriptor$e = {
 const descriptor$d = {
   name: "Class",
   id: "class",
-  is: (value) => isClass(value),
+  is: (value) => isClass$1(value),
   cast: (value) => {
     return new Error(`Sorry but nothing is castable to a Class`);
   }
@@ -11827,6 +8401,3424 @@ function __isOfType(value, typeString, settings = {}) {
 function __isString(value) {
   return typeof value === "string" || value instanceof String;
 }
+function __deepProxy(object, handlerFn, settings = {}) {
+  let isRevoked = false;
+  settings = __deepMerge({
+    deep: true,
+    handleSet: true,
+    handleGet: false,
+    handleDelete: true,
+    domElements: false
+  }, settings);
+  function makeHandler(path2) {
+    return {
+      set(target, key, value) {
+        if (isRevoked || !settings.handleSet)
+          return true;
+        if (value === target[key])
+          return true;
+        if (settings.deep && typeof value === "object") {
+          value = proxify(value, [...path2, key]);
+        }
+        const oldValue = target[key];
+        target[key] = value;
+        handlerFn({
+          object,
+          target,
+          key,
+          path: [...path2, key].join("."),
+          action: "set",
+          fullAction: `Object.set`,
+          oldValue,
+          value
+        });
+        return true;
+      },
+      get(target, key, receiver) {
+        if (Reflect.has(target, key)) {
+          if (!settings.handleGet)
+            return target[key];
+          const value = handlerFn({
+            object,
+            target,
+            key,
+            path: [...path2, key].join("."),
+            action: "get",
+            fullAction: "Object.get"
+          });
+          if (key === "revoke")
+            return receiver.revoke;
+          if (value === void 0)
+            return target[key];
+          return value;
+        }
+        return void 0;
+      },
+      deleteProperty(target, key) {
+        if (isRevoked || !settings.handleDelete)
+          return true;
+        if (Reflect.has(target, key)) {
+          const oldValue = target[key];
+          const deleted = Reflect.deleteProperty(target, key);
+          if (deleted) {
+            handlerFn({
+              object,
+              target,
+              key,
+              path: [...path2, key].join("."),
+              action: "delete",
+              fullAction: "Object.delete",
+              oldValue
+            });
+          }
+          return deleted;
+        }
+        return false;
+      }
+    };
+  }
+  function proxify(obj, path2) {
+    if (obj === null)
+      return obj;
+    if (!settings.domElements && __isDomElement(obj)) {
+      return obj;
+    }
+    if (settings.deep) {
+      for (const key of Object.keys(obj)) {
+        if (Array.isArray(obj[key])) {
+          obj[key] = __proxyArray(obj[key]);
+          obj[key].watch(Object.getOwnPropertyNames(Array.prototype), (watchObj) => {
+            handlerFn(Object.assign({ path: [...path2, key].join(".") }, watchObj));
+          });
+        } else if (typeof obj[key] === "object") {
+          obj[key] = proxify(obj[key], [...path2, key]);
+        }
+      }
+    }
+    const p = Proxy.revocable(obj, makeHandler(path2));
+    const revokePropertyObj = {
+      writable: true,
+      configurable: false,
+      enumerable: false,
+      value: () => {
+        let __copy = clone(p.proxy, { deep: true });
+        isRevoked = true;
+        __copy = __deepMap(__copy, ({ value, prop }) => {
+          if (prop === "revoke" && typeof value === "function") {
+            return -1;
+          }
+          return value;
+        });
+        setTimeout(() => {
+          __deepMap(p.proxy, ({ value, prop }) => {
+            if (prop === "revoke" && typeof value === "function") {
+              value();
+            }
+          }, {});
+          p.revoke();
+        });
+        return __copy;
+      }
+    };
+    if (Array.isArray(p.proxy)) {
+      p.proxy.revoke = revokePropertyObj.value;
+    } else {
+      Object.defineProperties(p.proxy, {
+        revoke: revokePropertyObj
+      });
+    }
+    return p.proxy;
+  }
+  return proxify(object, []);
+}
+var ERROR_MESSAGE = "Function.prototype.bind called on incompatible ";
+var slice$1 = Array.prototype.slice;
+var toStr$a = Object.prototype.toString;
+var funcType = "[object Function]";
+var implementation$b = function bind(that) {
+  var target = this;
+  if (typeof target !== "function" || toStr$a.call(target) !== funcType) {
+    throw new TypeError(ERROR_MESSAGE + target);
+  }
+  var args = slice$1.call(arguments, 1);
+  var bound2;
+  var binder = function() {
+    if (this instanceof bound2) {
+      var result2 = target.apply(
+        this,
+        args.concat(slice$1.call(arguments))
+      );
+      if (Object(result2) === result2) {
+        return result2;
+      }
+      return this;
+    } else {
+      return target.apply(
+        that,
+        args.concat(slice$1.call(arguments))
+      );
+    }
+  };
+  var boundLength = Math.max(0, target.length - args.length);
+  var boundArgs = [];
+  for (var i = 0; i < boundLength; i++) {
+    boundArgs.push("$" + i);
+  }
+  bound2 = Function("binder", "return function (" + boundArgs.join(",") + "){ return binder.apply(this,arguments); }")(binder);
+  if (target.prototype) {
+    var Empty = function Empty2() {
+    };
+    Empty.prototype = target.prototype;
+    bound2.prototype = new Empty();
+    Empty.prototype = null;
+  }
+  return bound2;
+};
+var implementation$a = implementation$b;
+var functionBind = Function.prototype.bind || implementation$a;
+var bind$1 = functionBind;
+var src = bind$1.call(Function.call, Object.prototype.hasOwnProperty);
+var toString$2 = {}.toString;
+var isarray = Array.isArray || function(arr) {
+  return toString$2.call(arr) == "[object Array]";
+};
+var fnToStr$2 = Function.prototype.toString;
+var reflectApply = typeof Reflect === "object" && Reflect !== null && Reflect.apply;
+var badArrayLike;
+var isCallableMarker;
+if (typeof reflectApply === "function" && typeof Object.defineProperty === "function") {
+  try {
+    badArrayLike = Object.defineProperty({}, "length", {
+      get: function() {
+        throw isCallableMarker;
+      }
+    });
+    isCallableMarker = {};
+    reflectApply(function() {
+      throw 42;
+    }, null, badArrayLike);
+  } catch (_) {
+    if (_ !== isCallableMarker) {
+      reflectApply = null;
+    }
+  }
+} else {
+  reflectApply = null;
+}
+var constructorRegex = /^\s*class\b/;
+var isES6ClassFn = function isES6ClassFunction(value) {
+  try {
+    var fnStr = fnToStr$2.call(value);
+    return constructorRegex.test(fnStr);
+  } catch (e) {
+    return false;
+  }
+};
+var tryFunctionObject = function tryFunctionToStr(value) {
+  try {
+    if (isES6ClassFn(value)) {
+      return false;
+    }
+    fnToStr$2.call(value);
+    return true;
+  } catch (e) {
+    return false;
+  }
+};
+var toStr$9 = Object.prototype.toString;
+var objectClass = "[object Object]";
+var fnClass = "[object Function]";
+var genClass = "[object GeneratorFunction]";
+var ddaClass = "[object HTMLAllCollection]";
+var ddaClass2 = "[object HTML document.all class]";
+var ddaClass3 = "[object HTMLCollection]";
+var hasToStringTag$a = typeof Symbol === "function" && !!Symbol.toStringTag;
+var isIE68 = !(0 in [,]);
+var isDDA = function isDocumentDotAll() {
+  return false;
+};
+if (typeof document === "object") {
+  var all$1 = document.all;
+  if (toStr$9.call(all$1) === toStr$9.call(document.all)) {
+    isDDA = function isDocumentDotAll2(value) {
+      if ((isIE68 || !value) && (typeof value === "undefined" || typeof value === "object")) {
+        try {
+          var str2 = toStr$9.call(value);
+          return (str2 === ddaClass || str2 === ddaClass2 || str2 === ddaClass3 || str2 === objectClass) && value("") == null;
+        } catch (e) {
+        }
+      }
+      return false;
+    };
+  }
+}
+var isCallable$1 = reflectApply ? function isCallable(value) {
+  if (isDDA(value)) {
+    return true;
+  }
+  if (!value) {
+    return false;
+  }
+  if (typeof value !== "function" && typeof value !== "object") {
+    return false;
+  }
+  try {
+    reflectApply(value, null, badArrayLike);
+  } catch (e) {
+    if (e !== isCallableMarker) {
+      return false;
+    }
+  }
+  return !isES6ClassFn(value) && tryFunctionObject(value);
+} : function isCallable2(value) {
+  if (isDDA(value)) {
+    return true;
+  }
+  if (!value) {
+    return false;
+  }
+  if (typeof value !== "function" && typeof value !== "object") {
+    return false;
+  }
+  if (hasToStringTag$a) {
+    return tryFunctionObject(value);
+  }
+  if (isES6ClassFn(value)) {
+    return false;
+  }
+  var strClass2 = toStr$9.call(value);
+  if (strClass2 !== fnClass && strClass2 !== genClass && !/^\[object HTML/.test(strClass2)) {
+    return false;
+  }
+  return tryFunctionObject(value);
+};
+var shams$1 = function hasSymbols() {
+  if (typeof Symbol !== "function" || typeof Object.getOwnPropertySymbols !== "function") {
+    return false;
+  }
+  if (typeof Symbol.iterator === "symbol") {
+    return true;
+  }
+  var obj = {};
+  var sym = Symbol("test");
+  var symObj = Object(sym);
+  if (typeof sym === "string") {
+    return false;
+  }
+  if (Object.prototype.toString.call(sym) !== "[object Symbol]") {
+    return false;
+  }
+  if (Object.prototype.toString.call(symObj) !== "[object Symbol]") {
+    return false;
+  }
+  var symVal = 42;
+  obj[sym] = symVal;
+  for (sym in obj) {
+    return false;
+  }
+  if (typeof Object.keys === "function" && Object.keys(obj).length !== 0) {
+    return false;
+  }
+  if (typeof Object.getOwnPropertyNames === "function" && Object.getOwnPropertyNames(obj).length !== 0) {
+    return false;
+  }
+  var syms = Object.getOwnPropertySymbols(obj);
+  if (syms.length !== 1 || syms[0] !== sym) {
+    return false;
+  }
+  if (!Object.prototype.propertyIsEnumerable.call(obj, sym)) {
+    return false;
+  }
+  if (typeof Object.getOwnPropertyDescriptor === "function") {
+    var descriptor2 = Object.getOwnPropertyDescriptor(obj, sym);
+    if (descriptor2.value !== symVal || descriptor2.enumerable !== true) {
+      return false;
+    }
+  }
+  return true;
+};
+var origSymbol = typeof Symbol !== "undefined" && Symbol;
+var hasSymbolSham = shams$1;
+var hasSymbols$4 = function hasNativeSymbols() {
+  if (typeof origSymbol !== "function") {
+    return false;
+  }
+  if (typeof Symbol !== "function") {
+    return false;
+  }
+  if (typeof origSymbol("foo") !== "symbol") {
+    return false;
+  }
+  if (typeof Symbol("bar") !== "symbol") {
+    return false;
+  }
+  return hasSymbolSham();
+};
+var undefined$1;
+var $SyntaxError = SyntaxError;
+var $Function = Function;
+var $TypeError$3 = TypeError;
+var getEvalledConstructor = function(expressionSyntax) {
+  try {
+    return $Function('"use strict"; return (' + expressionSyntax + ").constructor;")();
+  } catch (e) {
+  }
+};
+var $gOPD$1 = Object.getOwnPropertyDescriptor;
+if ($gOPD$1) {
+  try {
+    $gOPD$1({}, "");
+  } catch (e) {
+    $gOPD$1 = null;
+  }
+}
+var throwTypeError = function() {
+  throw new $TypeError$3();
+};
+var ThrowTypeError = $gOPD$1 ? function() {
+  try {
+    arguments.callee;
+    return throwTypeError;
+  } catch (calleeThrows) {
+    try {
+      return $gOPD$1(arguments, "callee").get;
+    } catch (gOPDthrows) {
+      return throwTypeError;
+    }
+  }
+}() : throwTypeError;
+var hasSymbols$3 = hasSymbols$4();
+var getProto$4 = Object.getPrototypeOf || function(x) {
+  return x.__proto__;
+};
+var needsEval = {};
+var TypedArray = typeof Uint8Array === "undefined" ? undefined$1 : getProto$4(Uint8Array);
+var INTRINSICS = {
+  "%AggregateError%": typeof AggregateError === "undefined" ? undefined$1 : AggregateError,
+  "%Array%": Array,
+  "%ArrayBuffer%": typeof ArrayBuffer === "undefined" ? undefined$1 : ArrayBuffer,
+  "%ArrayIteratorPrototype%": hasSymbols$3 ? getProto$4([][Symbol.iterator]()) : undefined$1,
+  "%AsyncFromSyncIteratorPrototype%": undefined$1,
+  "%AsyncFunction%": needsEval,
+  "%AsyncGenerator%": needsEval,
+  "%AsyncGeneratorFunction%": needsEval,
+  "%AsyncIteratorPrototype%": needsEval,
+  "%Atomics%": typeof Atomics === "undefined" ? undefined$1 : Atomics,
+  "%BigInt%": typeof BigInt === "undefined" ? undefined$1 : BigInt,
+  "%BigInt64Array%": typeof BigInt64Array === "undefined" ? undefined$1 : BigInt64Array,
+  "%BigUint64Array%": typeof BigUint64Array === "undefined" ? undefined$1 : BigUint64Array,
+  "%Boolean%": Boolean,
+  "%DataView%": typeof DataView === "undefined" ? undefined$1 : DataView,
+  "%Date%": Date,
+  "%decodeURI%": decodeURI,
+  "%decodeURIComponent%": decodeURIComponent,
+  "%encodeURI%": encodeURI,
+  "%encodeURIComponent%": encodeURIComponent,
+  "%Error%": Error,
+  "%eval%": eval,
+  // eslint-disable-line no-eval
+  "%EvalError%": EvalError,
+  "%Float32Array%": typeof Float32Array === "undefined" ? undefined$1 : Float32Array,
+  "%Float64Array%": typeof Float64Array === "undefined" ? undefined$1 : Float64Array,
+  "%FinalizationRegistry%": typeof FinalizationRegistry === "undefined" ? undefined$1 : FinalizationRegistry,
+  "%Function%": $Function,
+  "%GeneratorFunction%": needsEval,
+  "%Int8Array%": typeof Int8Array === "undefined" ? undefined$1 : Int8Array,
+  "%Int16Array%": typeof Int16Array === "undefined" ? undefined$1 : Int16Array,
+  "%Int32Array%": typeof Int32Array === "undefined" ? undefined$1 : Int32Array,
+  "%isFinite%": isFinite,
+  "%isNaN%": isNaN,
+  "%IteratorPrototype%": hasSymbols$3 ? getProto$4(getProto$4([][Symbol.iterator]())) : undefined$1,
+  "%JSON%": typeof JSON === "object" ? JSON : undefined$1,
+  "%Map%": typeof Map === "undefined" ? undefined$1 : Map,
+  "%MapIteratorPrototype%": typeof Map === "undefined" || !hasSymbols$3 ? undefined$1 : getProto$4((/* @__PURE__ */ new Map())[Symbol.iterator]()),
+  "%Math%": Math,
+  "%Number%": Number,
+  "%Object%": Object,
+  "%parseFloat%": parseFloat,
+  "%parseInt%": parseInt,
+  "%Promise%": typeof Promise === "undefined" ? undefined$1 : Promise,
+  "%Proxy%": typeof Proxy === "undefined" ? undefined$1 : Proxy,
+  "%RangeError%": RangeError,
+  "%ReferenceError%": ReferenceError,
+  "%Reflect%": typeof Reflect === "undefined" ? undefined$1 : Reflect,
+  "%RegExp%": RegExp,
+  "%Set%": typeof Set === "undefined" ? undefined$1 : Set,
+  "%SetIteratorPrototype%": typeof Set === "undefined" || !hasSymbols$3 ? undefined$1 : getProto$4((/* @__PURE__ */ new Set())[Symbol.iterator]()),
+  "%SharedArrayBuffer%": typeof SharedArrayBuffer === "undefined" ? undefined$1 : SharedArrayBuffer,
+  "%String%": String,
+  "%StringIteratorPrototype%": hasSymbols$3 ? getProto$4(""[Symbol.iterator]()) : undefined$1,
+  "%Symbol%": hasSymbols$3 ? Symbol : undefined$1,
+  "%SyntaxError%": $SyntaxError,
+  "%ThrowTypeError%": ThrowTypeError,
+  "%TypedArray%": TypedArray,
+  "%TypeError%": $TypeError$3,
+  "%Uint8Array%": typeof Uint8Array === "undefined" ? undefined$1 : Uint8Array,
+  "%Uint8ClampedArray%": typeof Uint8ClampedArray === "undefined" ? undefined$1 : Uint8ClampedArray,
+  "%Uint16Array%": typeof Uint16Array === "undefined" ? undefined$1 : Uint16Array,
+  "%Uint32Array%": typeof Uint32Array === "undefined" ? undefined$1 : Uint32Array,
+  "%URIError%": URIError,
+  "%WeakMap%": typeof WeakMap === "undefined" ? undefined$1 : WeakMap,
+  "%WeakRef%": typeof WeakRef === "undefined" ? undefined$1 : WeakRef,
+  "%WeakSet%": typeof WeakSet === "undefined" ? undefined$1 : WeakSet
+};
+try {
+  null.error;
+} catch (e) {
+  var errorProto = getProto$4(getProto$4(e));
+  INTRINSICS["%Error.prototype%"] = errorProto;
+}
+var doEval = function doEval2(name2) {
+  var value;
+  if (name2 === "%AsyncFunction%") {
+    value = getEvalledConstructor("async function () {}");
+  } else if (name2 === "%GeneratorFunction%") {
+    value = getEvalledConstructor("function* () {}");
+  } else if (name2 === "%AsyncGeneratorFunction%") {
+    value = getEvalledConstructor("async function* () {}");
+  } else if (name2 === "%AsyncGenerator%") {
+    var fn2 = doEval2("%AsyncGeneratorFunction%");
+    if (fn2) {
+      value = fn2.prototype;
+    }
+  } else if (name2 === "%AsyncIteratorPrototype%") {
+    var gen = doEval2("%AsyncGenerator%");
+    if (gen) {
+      value = getProto$4(gen.prototype);
+    }
+  }
+  INTRINSICS[name2] = value;
+  return value;
+};
+var LEGACY_ALIASES = {
+  "%ArrayBufferPrototype%": ["ArrayBuffer", "prototype"],
+  "%ArrayPrototype%": ["Array", "prototype"],
+  "%ArrayProto_entries%": ["Array", "prototype", "entries"],
+  "%ArrayProto_forEach%": ["Array", "prototype", "forEach"],
+  "%ArrayProto_keys%": ["Array", "prototype", "keys"],
+  "%ArrayProto_values%": ["Array", "prototype", "values"],
+  "%AsyncFunctionPrototype%": ["AsyncFunction", "prototype"],
+  "%AsyncGenerator%": ["AsyncGeneratorFunction", "prototype"],
+  "%AsyncGeneratorPrototype%": ["AsyncGeneratorFunction", "prototype", "prototype"],
+  "%BooleanPrototype%": ["Boolean", "prototype"],
+  "%DataViewPrototype%": ["DataView", "prototype"],
+  "%DatePrototype%": ["Date", "prototype"],
+  "%ErrorPrototype%": ["Error", "prototype"],
+  "%EvalErrorPrototype%": ["EvalError", "prototype"],
+  "%Float32ArrayPrototype%": ["Float32Array", "prototype"],
+  "%Float64ArrayPrototype%": ["Float64Array", "prototype"],
+  "%FunctionPrototype%": ["Function", "prototype"],
+  "%Generator%": ["GeneratorFunction", "prototype"],
+  "%GeneratorPrototype%": ["GeneratorFunction", "prototype", "prototype"],
+  "%Int8ArrayPrototype%": ["Int8Array", "prototype"],
+  "%Int16ArrayPrototype%": ["Int16Array", "prototype"],
+  "%Int32ArrayPrototype%": ["Int32Array", "prototype"],
+  "%JSONParse%": ["JSON", "parse"],
+  "%JSONStringify%": ["JSON", "stringify"],
+  "%MapPrototype%": ["Map", "prototype"],
+  "%NumberPrototype%": ["Number", "prototype"],
+  "%ObjectPrototype%": ["Object", "prototype"],
+  "%ObjProto_toString%": ["Object", "prototype", "toString"],
+  "%ObjProto_valueOf%": ["Object", "prototype", "valueOf"],
+  "%PromisePrototype%": ["Promise", "prototype"],
+  "%PromiseProto_then%": ["Promise", "prototype", "then"],
+  "%Promise_all%": ["Promise", "all"],
+  "%Promise_reject%": ["Promise", "reject"],
+  "%Promise_resolve%": ["Promise", "resolve"],
+  "%RangeErrorPrototype%": ["RangeError", "prototype"],
+  "%ReferenceErrorPrototype%": ["ReferenceError", "prototype"],
+  "%RegExpPrototype%": ["RegExp", "prototype"],
+  "%SetPrototype%": ["Set", "prototype"],
+  "%SharedArrayBufferPrototype%": ["SharedArrayBuffer", "prototype"],
+  "%StringPrototype%": ["String", "prototype"],
+  "%SymbolPrototype%": ["Symbol", "prototype"],
+  "%SyntaxErrorPrototype%": ["SyntaxError", "prototype"],
+  "%TypedArrayPrototype%": ["TypedArray", "prototype"],
+  "%TypeErrorPrototype%": ["TypeError", "prototype"],
+  "%Uint8ArrayPrototype%": ["Uint8Array", "prototype"],
+  "%Uint8ClampedArrayPrototype%": ["Uint8ClampedArray", "prototype"],
+  "%Uint16ArrayPrototype%": ["Uint16Array", "prototype"],
+  "%Uint32ArrayPrototype%": ["Uint32Array", "prototype"],
+  "%URIErrorPrototype%": ["URIError", "prototype"],
+  "%WeakMapPrototype%": ["WeakMap", "prototype"],
+  "%WeakSetPrototype%": ["WeakSet", "prototype"]
+};
+var bind2 = functionBind;
+var hasOwn$1 = src;
+var $concat = bind2.call(Function.call, Array.prototype.concat);
+var $spliceApply = bind2.call(Function.apply, Array.prototype.splice);
+var $replace = bind2.call(Function.call, String.prototype.replace);
+var $strSlice = bind2.call(Function.call, String.prototype.slice);
+var $exec$1 = bind2.call(Function.call, RegExp.prototype.exec);
+var rePropName = /[^%.[\]]+|\[(?:(-?\d+(?:\.\d+)?)|(["'])((?:(?!\2)[^\\]|\\.)*?)\2)\]|(?=(?:\.|\[\])(?:\.|\[\]|%$))/g;
+var reEscapeChar = /\\(\\)?/g;
+var stringToPath = function stringToPath2(string) {
+  var first = $strSlice(string, 0, 1);
+  var last = $strSlice(string, -1);
+  if (first === "%" && last !== "%") {
+    throw new $SyntaxError("invalid intrinsic syntax, expected closing `%`");
+  } else if (last === "%" && first !== "%") {
+    throw new $SyntaxError("invalid intrinsic syntax, expected opening `%`");
+  }
+  var result2 = [];
+  $replace(string, rePropName, function(match2, number, quote, subString) {
+    result2[result2.length] = quote ? $replace(subString, reEscapeChar, "$1") : number || match2;
+  });
+  return result2;
+};
+var getBaseIntrinsic = function getBaseIntrinsic2(name2, allowMissing) {
+  var intrinsicName = name2;
+  var alias;
+  if (hasOwn$1(LEGACY_ALIASES, intrinsicName)) {
+    alias = LEGACY_ALIASES[intrinsicName];
+    intrinsicName = "%" + alias[0] + "%";
+  }
+  if (hasOwn$1(INTRINSICS, intrinsicName)) {
+    var value = INTRINSICS[intrinsicName];
+    if (value === needsEval) {
+      value = doEval(intrinsicName);
+    }
+    if (typeof value === "undefined" && !allowMissing) {
+      throw new $TypeError$3("intrinsic " + name2 + " exists, but is not available. Please file an issue!");
+    }
+    return {
+      alias,
+      name: intrinsicName,
+      value
+    };
+  }
+  throw new $SyntaxError("intrinsic " + name2 + " does not exist!");
+};
+var getIntrinsic = function GetIntrinsic(name2, allowMissing) {
+  if (typeof name2 !== "string" || name2.length === 0) {
+    throw new $TypeError$3("intrinsic name must be a non-empty string");
+  }
+  if (arguments.length > 1 && typeof allowMissing !== "boolean") {
+    throw new $TypeError$3('"allowMissing" argument must be a boolean');
+  }
+  if ($exec$1(/^%?[^%]*%?$/, name2) === null) {
+    throw new $SyntaxError("`%` may not be present anywhere but at the beginning and end of the intrinsic name");
+  }
+  var parts = stringToPath(name2);
+  var intrinsicBaseName = parts.length > 0 ? parts[0] : "";
+  var intrinsic = getBaseIntrinsic("%" + intrinsicBaseName + "%", allowMissing);
+  var intrinsicRealName = intrinsic.name;
+  var value = intrinsic.value;
+  var skipFurtherCaching = false;
+  var alias = intrinsic.alias;
+  if (alias) {
+    intrinsicBaseName = alias[0];
+    $spliceApply(parts, $concat([0, 1], alias));
+  }
+  for (var i = 1, isOwn = true; i < parts.length; i += 1) {
+    var part = parts[i];
+    var first = $strSlice(part, 0, 1);
+    var last = $strSlice(part, -1);
+    if ((first === '"' || first === "'" || first === "`" || (last === '"' || last === "'" || last === "`")) && first !== last) {
+      throw new $SyntaxError("property names with quotes must have matching quotes");
+    }
+    if (part === "constructor" || !isOwn) {
+      skipFurtherCaching = true;
+    }
+    intrinsicBaseName += "." + part;
+    intrinsicRealName = "%" + intrinsicBaseName + "%";
+    if (hasOwn$1(INTRINSICS, intrinsicRealName)) {
+      value = INTRINSICS[intrinsicRealName];
+    } else if (value != null) {
+      if (!(part in value)) {
+        if (!allowMissing) {
+          throw new $TypeError$3("base intrinsic for " + name2 + " exists, but the property is not available.");
+        }
+        return void 0;
+      }
+      if ($gOPD$1 && i + 1 >= parts.length) {
+        var desc = $gOPD$1(value, part);
+        isOwn = !!desc;
+        if (isOwn && "get" in desc && !("originalValue" in desc.get)) {
+          value = desc.get;
+        } else {
+          value = value[part];
+        }
+      } else {
+        isOwn = hasOwn$1(value, part);
+        value = value[part];
+      }
+      if (isOwn && !skipFurtherCaching) {
+        INTRINSICS[intrinsicRealName] = value;
+      }
+    }
+  }
+  return value;
+};
+var callBindExports = {};
+var callBind$3 = {
+  get exports() {
+    return callBindExports;
+  },
+  set exports(v) {
+    callBindExports = v;
+  }
+};
+(function(module) {
+  var bind3 = functionBind;
+  var GetIntrinsic3 = getIntrinsic;
+  var $apply = GetIntrinsic3("%Function.prototype.apply%");
+  var $call = GetIntrinsic3("%Function.prototype.call%");
+  var $reflectApply = GetIntrinsic3("%Reflect.apply%", true) || bind3.call($call, $apply);
+  var $gOPD2 = GetIntrinsic3("%Object.getOwnPropertyDescriptor%", true);
+  var $defineProperty2 = GetIntrinsic3("%Object.defineProperty%", true);
+  var $max = GetIntrinsic3("%Math.max%");
+  if ($defineProperty2) {
+    try {
+      $defineProperty2({}, "a", { value: 1 });
+    } catch (e) {
+      $defineProperty2 = null;
+    }
+  }
+  module.exports = function callBind2(originalFunction) {
+    var func = $reflectApply(bind3, $call, arguments);
+    if ($gOPD2 && $defineProperty2) {
+      var desc = $gOPD2(func, "length");
+      if (desc.configurable) {
+        $defineProperty2(
+          func,
+          "length",
+          { value: 1 + $max(0, originalFunction.length - (arguments.length - 1)) }
+        );
+      }
+    }
+    return func;
+  };
+  var applyBind = function applyBind2() {
+    return $reflectApply(bind3, $apply, arguments);
+  };
+  if ($defineProperty2) {
+    $defineProperty2(module.exports, "apply", { value: applyBind });
+  } else {
+    module.exports.apply = applyBind;
+  }
+})(callBind$3);
+var GetIntrinsic$a = getIntrinsic;
+var callBind$2 = callBindExports;
+var $indexOf = callBind$2(GetIntrinsic$a("String.prototype.indexOf"));
+var callBound$a = function callBoundIntrinsic(name2, allowMissing) {
+  var intrinsic = GetIntrinsic$a(name2, !!allowMissing);
+  if (typeof intrinsic === "function" && $indexOf(name2, ".prototype.") > -1) {
+    return callBind$2(intrinsic);
+  }
+  return intrinsic;
+};
+var hasSymbols$2 = shams$1;
+var shams = function hasToStringTagShams() {
+  return hasSymbols$2() && !!Symbol.toStringTag;
+};
+var callBound$9 = callBound$a;
+var $boolToStr = callBound$9("Boolean.prototype.toString");
+var $toString$3 = callBound$9("Object.prototype.toString");
+var tryBooleanObject = function booleanBrandCheck(value) {
+  try {
+    $boolToStr(value);
+    return true;
+  } catch (e) {
+    return false;
+  }
+};
+var boolClass = "[object Boolean]";
+var hasToStringTag$9 = shams();
+var isBooleanObject = function isBoolean(value) {
+  if (typeof value === "boolean") {
+    return true;
+  }
+  if (value === null || typeof value !== "object") {
+    return false;
+  }
+  return hasToStringTag$9 && Symbol.toStringTag in value ? tryBooleanObject(value) : $toString$3(value) === boolClass;
+};
+var getDay = Date.prototype.getDay;
+var tryDateObject = function tryDateGetDayCall(value) {
+  try {
+    getDay.call(value);
+    return true;
+  } catch (e) {
+    return false;
+  }
+};
+var toStr$8 = Object.prototype.toString;
+var dateClass = "[object Date]";
+var hasToStringTag$8 = shams();
+var isDateObject = function isDateObject2(value) {
+  if (typeof value !== "object" || value === null) {
+    return false;
+  }
+  return hasToStringTag$8 ? tryDateObject(value) : toStr$8.call(value) === dateClass;
+};
+var toStr$7 = Object.prototype.toString;
+var fnToStr$1 = Function.prototype.toString;
+var isFnRegex$1 = /^\s*(?:function)?\*/;
+var hasToStringTag$7 = shams();
+var getProto$3 = Object.getPrototypeOf;
+var getGeneratorFunc = function() {
+  if (!hasToStringTag$7) {
+    return false;
+  }
+  try {
+    return Function("return function*() {}")();
+  } catch (e) {
+  }
+};
+var GeneratorFunction;
+var isGeneratorFunction$1 = function isGeneratorFunction(fn2) {
+  if (typeof fn2 !== "function") {
+    return false;
+  }
+  if (isFnRegex$1.test(fnToStr$1.call(fn2))) {
+    return true;
+  }
+  if (!hasToStringTag$7) {
+    var str2 = toStr$7.call(fn2);
+    return str2 === "[object GeneratorFunction]";
+  }
+  if (!getProto$3) {
+    return false;
+  }
+  if (typeof GeneratorFunction === "undefined") {
+    var generatorFunc = getGeneratorFunc();
+    GeneratorFunction = generatorFunc ? getProto$3(generatorFunc) : false;
+  }
+  return getProto$3(fn2) === GeneratorFunction;
+};
+var numToStr = Number.prototype.toString;
+var tryNumberObject = function tryNumberObject2(value) {
+  try {
+    numToStr.call(value);
+    return true;
+  } catch (e) {
+    return false;
+  }
+};
+var toStr$6 = Object.prototype.toString;
+var numClass = "[object Number]";
+var hasToStringTag$6 = shams();
+var isNumberObject = function isNumberObject2(value) {
+  if (typeof value === "number") {
+    return true;
+  }
+  if (typeof value !== "object") {
+    return false;
+  }
+  return hasToStringTag$6 ? tryNumberObject(value) : toStr$6.call(value) === numClass;
+};
+var callBound$8 = callBound$a;
+var hasToStringTag$5 = shams();
+var has$1;
+var $exec;
+var isRegexMarker;
+var badStringifier;
+if (hasToStringTag$5) {
+  has$1 = callBound$8("Object.prototype.hasOwnProperty");
+  $exec = callBound$8("RegExp.prototype.exec");
+  isRegexMarker = {};
+  var throwRegexMarker = function() {
+    throw isRegexMarker;
+  };
+  badStringifier = {
+    toString: throwRegexMarker,
+    valueOf: throwRegexMarker
+  };
+  if (typeof Symbol.toPrimitive === "symbol") {
+    badStringifier[Symbol.toPrimitive] = throwRegexMarker;
+  }
+}
+var $toString$2 = callBound$8("Object.prototype.toString");
+var gOPD$1 = Object.getOwnPropertyDescriptor;
+var regexClass = "[object RegExp]";
+var isRegex$1 = hasToStringTag$5 ? function isRegex(value) {
+  if (!value || typeof value !== "object") {
+    return false;
+  }
+  var descriptor2 = gOPD$1(value, "lastIndex");
+  var hasLastIndexDataProperty = descriptor2 && has$1(descriptor2, "value");
+  if (!hasLastIndexDataProperty) {
+    return false;
+  }
+  try {
+    $exec(value, badStringifier);
+  } catch (e) {
+    return e === isRegexMarker;
+  }
+} : function isRegex2(value) {
+  if (!value || typeof value !== "object" && typeof value !== "function") {
+    return false;
+  }
+  return $toString$2(value) === regexClass;
+};
+var strValue = String.prototype.valueOf;
+var tryStringObject = function tryStringObject2(value) {
+  try {
+    strValue.call(value);
+    return true;
+  } catch (e) {
+    return false;
+  }
+};
+var toStr$5 = Object.prototype.toString;
+var strClass = "[object String]";
+var hasToStringTag$4 = shams();
+var isString$3 = function isString(value) {
+  if (typeof value === "string") {
+    return true;
+  }
+  if (typeof value !== "object") {
+    return false;
+  }
+  return hasToStringTag$4 ? tryStringObject(value) : toStr$5.call(value) === strClass;
+};
+var isSymbolExports = {};
+var isSymbol$2 = {
+  get exports() {
+    return isSymbolExports;
+  },
+  set exports(v) {
+    isSymbolExports = v;
+  }
+};
+var toStr$4 = Object.prototype.toString;
+var hasSymbols$1 = hasSymbols$4();
+if (hasSymbols$1) {
+  var symToStr = Symbol.prototype.toString;
+  var symStringRegex = /^Symbol\(.*\)$/;
+  var isSymbolObject = function isRealSymbolObject(value) {
+    if (typeof value.valueOf() !== "symbol") {
+      return false;
+    }
+    return symStringRegex.test(symToStr.call(value));
+  };
+  isSymbol$2.exports = function isSymbol2(value) {
+    if (typeof value === "symbol") {
+      return true;
+    }
+    if (toStr$4.call(value) !== "[object Symbol]") {
+      return false;
+    }
+    try {
+      return isSymbolObject(value);
+    } catch (e) {
+      return false;
+    }
+  };
+} else {
+  isSymbol$2.exports = function isSymbol2(value) {
+    return false;
+  };
+}
+var isBigintExports = {};
+var isBigint = {
+  get exports() {
+    return isBigintExports;
+  },
+  set exports(v) {
+    isBigintExports = v;
+  }
+};
+var $BigInt = typeof BigInt !== "undefined" && BigInt;
+var hasBigints = function hasNativeBigInts() {
+  return typeof $BigInt === "function" && typeof BigInt === "function" && typeof $BigInt(42) === "bigint" && typeof BigInt(42) === "bigint";
+};
+var hasBigInts = hasBigints();
+if (hasBigInts) {
+  var bigIntValueOf = BigInt.prototype.valueOf;
+  var tryBigInt = function tryBigIntObject(value) {
+    try {
+      bigIntValueOf.call(value);
+      return true;
+    } catch (e) {
+    }
+    return false;
+  };
+  isBigint.exports = function isBigInt2(value) {
+    if (value === null || typeof value === "undefined" || typeof value === "boolean" || typeof value === "string" || typeof value === "number" || typeof value === "symbol" || typeof value === "function") {
+      return false;
+    }
+    if (typeof value === "bigint") {
+      return true;
+    }
+    return tryBigInt(value);
+  };
+} else {
+  isBigint.exports = function isBigInt2(value) {
+    return false;
+  };
+}
+var hasToStringTag$3 = shams();
+var callBound$7 = callBound$a;
+var $toString$1 = callBound$7("Object.prototype.toString");
+var isStandardArguments = function isArguments(value) {
+  if (hasToStringTag$3 && value && typeof value === "object" && Symbol.toStringTag in value) {
+    return false;
+  }
+  return $toString$1(value) === "[object Arguments]";
+};
+var isLegacyArguments = function isArguments2(value) {
+  if (isStandardArguments(value)) {
+    return true;
+  }
+  return value !== null && typeof value === "object" && typeof value.length === "number" && value.length >= 0 && $toString$1(value) !== "[object Array]" && $toString$1(value.callee) === "[object Function]";
+};
+(function() {
+  return isStandardArguments(arguments);
+})();
+isStandardArguments.isLegacyArguments = isLegacyArguments;
+var GetIntrinsic$9 = getIntrinsic;
+var callBound$6 = callBound$a;
+GetIntrinsic$9("%TypeError%");
+GetIntrinsic$9("%WeakMap%", true);
+GetIntrinsic$9("%Map%", true);
+callBound$6("WeakMap.prototype.get", true);
+callBound$6("WeakMap.prototype.set", true);
+callBound$6("WeakMap.prototype.has", true);
+callBound$6("Map.prototype.get", true);
+callBound$6("Map.prototype.set", true);
+callBound$6("Map.prototype.has", true);
+var GetIntrinsic$8 = getIntrinsic;
+GetIntrinsic$8("%TypeError%");
+typeof StopIteration === "object" ? StopIteration : null;
+var $Map$2 = typeof Map === "function" && Map.prototype ? Map : null;
+var $Set$2 = typeof Set === "function" && Set.prototype ? Set : null;
+var exported$2;
+if (!$Map$2) {
+  exported$2 = function isMap3(x) {
+    return false;
+  };
+}
+var $mapHas$3 = $Map$2 ? Map.prototype.has : null;
+var $setHas$3 = $Set$2 ? Set.prototype.has : null;
+if (!exported$2 && !$mapHas$3) {
+  exported$2 = function isMap3(x) {
+    return false;
+  };
+}
+var isMap$1 = exported$2 || function isMap(x) {
+  if (!x || typeof x !== "object") {
+    return false;
+  }
+  try {
+    $mapHas$3.call(x);
+    if ($setHas$3) {
+      try {
+        $setHas$3.call(x);
+      } catch (e) {
+        return true;
+      }
+    }
+    return x instanceof $Map$2;
+  } catch (e) {
+  }
+  return false;
+};
+var $Map$1 = typeof Map === "function" && Map.prototype ? Map : null;
+var $Set$1 = typeof Set === "function" && Set.prototype ? Set : null;
+var exported$1;
+if (!$Set$1) {
+  exported$1 = function isSet3(x) {
+    return false;
+  };
+}
+var $mapHas$2 = $Map$1 ? Map.prototype.has : null;
+var $setHas$2 = $Set$1 ? Set.prototype.has : null;
+if (!exported$1 && !$setHas$2) {
+  exported$1 = function isSet3(x) {
+    return false;
+  };
+}
+var isSet$1 = exported$1 || function isSet(x) {
+  if (!x || typeof x !== "object") {
+    return false;
+  }
+  try {
+    $setHas$2.call(x);
+    if ($mapHas$2) {
+      try {
+        $mapHas$2.call(x);
+      } catch (e) {
+        return true;
+      }
+    }
+    return x instanceof $Set$1;
+  } catch (e) {
+  }
+  return false;
+};
+if (hasSymbols$4() || shams$1())
+  ;
+else {
+  var GetIntrinsic$7 = getIntrinsic;
+  var $Map = GetIntrinsic$7("%Map%", true);
+  var $Set = GetIntrinsic$7("%Set%", true);
+  var callBound$5 = callBound$a;
+  callBound$5("Array.prototype.push");
+  callBound$5("String.prototype.charCodeAt");
+  callBound$5("String.prototype.slice");
+  if (!$Map && !$Set)
+    ;
+  else {
+    callBound$5("Map.prototype.forEach", true);
+    callBound$5("Set.prototype.forEach", true);
+    if (typeof process === "undefined" || !process.versions || !process.versions.node) {
+      callBound$5("Map.prototype.iterator", true);
+      callBound$5("Set.prototype.iterator", true);
+    }
+    callBound$5("Map.prototype.@@iterator", true) || callBound$5("Map.prototype._es6-shim iterator_", true);
+    callBound$5("Set.prototype.@@iterator", true) || callBound$5("Set.prototype._es6-shim iterator_", true);
+  }
+}
+var $WeakMap = typeof WeakMap === "function" && WeakMap.prototype ? WeakMap : null;
+var $WeakSet$1 = typeof WeakSet === "function" && WeakSet.prototype ? WeakSet : null;
+var exported;
+if (!$WeakMap) {
+  exported = function isWeakMap3(x) {
+    return false;
+  };
+}
+var $mapHas$1 = $WeakMap ? $WeakMap.prototype.has : null;
+var $setHas$1 = $WeakSet$1 ? $WeakSet$1.prototype.has : null;
+if (!exported && !$mapHas$1) {
+  exported = function isWeakMap3(x) {
+    return false;
+  };
+}
+var isWeakmap = exported || function isWeakMap(x) {
+  if (!x || typeof x !== "object") {
+    return false;
+  }
+  try {
+    $mapHas$1.call(x, $mapHas$1);
+    if ($setHas$1) {
+      try {
+        $setHas$1.call(x, $setHas$1);
+      } catch (e) {
+        return true;
+      }
+    }
+    return x instanceof $WeakMap;
+  } catch (e) {
+  }
+  return false;
+};
+var isWeaksetExports = {};
+var isWeakset = {
+  get exports() {
+    return isWeaksetExports;
+  },
+  set exports(v) {
+    isWeaksetExports = v;
+  }
+};
+var GetIntrinsic$6 = getIntrinsic;
+var callBound$4 = callBound$a;
+var $WeakSet = GetIntrinsic$6("%WeakSet%", true);
+var $setHas = callBound$4("WeakSet.prototype.has", true);
+if ($setHas) {
+  var $mapHas = callBound$4("WeakMap.prototype.has", true);
+  isWeakset.exports = function isWeakSet2(x) {
+    if (!x || typeof x !== "object") {
+      return false;
+    }
+    try {
+      $setHas(x, $setHas);
+      if ($mapHas) {
+        try {
+          $mapHas(x, $mapHas);
+        } catch (e) {
+          return true;
+        }
+      }
+      return x instanceof $WeakSet;
+    } catch (e) {
+    }
+    return false;
+  };
+} else {
+  isWeakset.exports = function isWeakSet2(x) {
+    return false;
+  };
+}
+var isMap2 = isMap$1;
+var isSet2 = isSet$1;
+var isWeakMap2 = isWeakmap;
+var isWeakSet = isWeaksetExports;
+var whichCollection$1 = function whichCollection(value) {
+  if (value && typeof value === "object") {
+    if (isMap2(value)) {
+      return "Map";
+    }
+    if (isSet2(value)) {
+      return "Set";
+    }
+    if (isWeakMap2(value)) {
+      return "WeakMap";
+    }
+    if (isWeakSet(value)) {
+      return "WeakSet";
+    }
+  }
+  return false;
+};
+var isString$2 = isString$3;
+var isNumber = isNumberObject;
+var isBoolean2 = isBooleanObject;
+var isSymbol$1 = isSymbolExports;
+var isBigInt = isBigintExports;
+var whichBoxedPrimitive$1 = function whichBoxedPrimitive(value) {
+  if (value == null || typeof value !== "object" && typeof value !== "function") {
+    return null;
+  }
+  if (isString$2(value)) {
+    return "String";
+  }
+  if (isNumber(value)) {
+    return "Number";
+  }
+  if (isBoolean2(value)) {
+    return "Boolean";
+  }
+  if (isSymbol$1(value)) {
+    return "Symbol";
+  }
+  if (isBigInt(value)) {
+    return "BigInt";
+  }
+};
+var RequireObjectCoercibleExports = {};
+var RequireObjectCoercible$2 = {
+  get exports() {
+    return RequireObjectCoercibleExports;
+  },
+  set exports(v) {
+    RequireObjectCoercibleExports = v;
+  }
+};
+var GetIntrinsic$5 = getIntrinsic;
+var $TypeError$2 = GetIntrinsic$5("%TypeError%");
+var CheckObjectCoercible = function CheckObjectCoercible2(value, optMessage) {
+  if (value == null) {
+    throw new $TypeError$2(optMessage || "Cannot call method on " + value);
+  }
+  return value;
+};
+(function(module) {
+  module.exports = CheckObjectCoercible;
+})(RequireObjectCoercible$2);
+var GetIntrinsic$4 = getIntrinsic;
+var $Object$1 = GetIntrinsic$4("%Object%");
+var RequireObjectCoercible$1 = RequireObjectCoercibleExports;
+var ToObject$1 = function ToObject(value) {
+  RequireObjectCoercible$1(value);
+  return $Object$1(value);
+};
+var toStr$3 = Object.prototype.toString;
+var isArguments$1 = function isArguments3(value) {
+  var str2 = toStr$3.call(value);
+  var isArgs2 = str2 === "[object Arguments]";
+  if (!isArgs2) {
+    isArgs2 = str2 !== "[object Array]" && value !== null && typeof value === "object" && typeof value.length === "number" && value.length >= 0 && toStr$3.call(value.callee) === "[object Function]";
+  }
+  return isArgs2;
+};
+var implementation$9;
+var hasRequiredImplementation$1;
+function requireImplementation$1() {
+  if (hasRequiredImplementation$1)
+    return implementation$9;
+  hasRequiredImplementation$1 = 1;
+  var keysShim2;
+  if (!Object.keys) {
+    var has2 = Object.prototype.hasOwnProperty;
+    var toStr2 = Object.prototype.toString;
+    var isArgs2 = isArguments$1;
+    var isEnumerable = Object.prototype.propertyIsEnumerable;
+    var hasDontEnumBug = !isEnumerable.call({ toString: null }, "toString");
+    var hasProtoEnumBug = isEnumerable.call(function() {
+    }, "prototype");
+    var dontEnums = [
+      "toString",
+      "toLocaleString",
+      "valueOf",
+      "hasOwnProperty",
+      "isPrototypeOf",
+      "propertyIsEnumerable",
+      "constructor"
+    ];
+    var equalsConstructorPrototype = function(o) {
+      var ctor = o.constructor;
+      return ctor && ctor.prototype === o;
+    };
+    var excludedKeys = {
+      $applicationCache: true,
+      $console: true,
+      $external: true,
+      $frame: true,
+      $frameElement: true,
+      $frames: true,
+      $innerHeight: true,
+      $innerWidth: true,
+      $onmozfullscreenchange: true,
+      $onmozfullscreenerror: true,
+      $outerHeight: true,
+      $outerWidth: true,
+      $pageXOffset: true,
+      $pageYOffset: true,
+      $parent: true,
+      $scrollLeft: true,
+      $scrollTop: true,
+      $scrollX: true,
+      $scrollY: true,
+      $self: true,
+      $webkitIndexedDB: true,
+      $webkitStorageInfo: true,
+      $window: true
+    };
+    var hasAutomationEqualityBug = function() {
+      if (typeof window === "undefined") {
+        return false;
+      }
+      for (var k in window) {
+        try {
+          if (!excludedKeys["$" + k] && has2.call(window, k) && window[k] !== null && typeof window[k] === "object") {
+            try {
+              equalsConstructorPrototype(window[k]);
+            } catch (e) {
+              return true;
+            }
+          }
+        } catch (e) {
+          return true;
+        }
+      }
+      return false;
+    }();
+    var equalsConstructorPrototypeIfNotBuggy = function(o) {
+      if (typeof window === "undefined" || !hasAutomationEqualityBug) {
+        return equalsConstructorPrototype(o);
+      }
+      try {
+        return equalsConstructorPrototype(o);
+      } catch (e) {
+        return false;
+      }
+    };
+    keysShim2 = function keys3(object) {
+      var isObject3 = object !== null && typeof object === "object";
+      var isFunction2 = toStr2.call(object) === "[object Function]";
+      var isArguments5 = isArgs2(object);
+      var isString3 = isObject3 && toStr2.call(object) === "[object String]";
+      var theKeys = [];
+      if (!isObject3 && !isFunction2 && !isArguments5) {
+        throw new TypeError("Object.keys called on a non-object");
+      }
+      var skipProto = hasProtoEnumBug && isFunction2;
+      if (isString3 && object.length > 0 && !has2.call(object, 0)) {
+        for (var i = 0; i < object.length; ++i) {
+          theKeys.push(String(i));
+        }
+      }
+      if (isArguments5 && object.length > 0) {
+        for (var j = 0; j < object.length; ++j) {
+          theKeys.push(String(j));
+        }
+      } else {
+        for (var name2 in object) {
+          if (!(skipProto && name2 === "prototype") && has2.call(object, name2)) {
+            theKeys.push(String(name2));
+          }
+        }
+      }
+      if (hasDontEnumBug) {
+        var skipConstructor = equalsConstructorPrototypeIfNotBuggy(object);
+        for (var k = 0; k < dontEnums.length; ++k) {
+          if (!(skipConstructor && dontEnums[k] === "constructor") && has2.call(object, dontEnums[k])) {
+            theKeys.push(dontEnums[k]);
+          }
+        }
+      }
+      return theKeys;
+    };
+  }
+  implementation$9 = keysShim2;
+  return implementation$9;
+}
+var slice = Array.prototype.slice;
+var isArgs = isArguments$1;
+var origKeys = Object.keys;
+var keysShim = origKeys ? function keys(o) {
+  return origKeys(o);
+} : requireImplementation$1();
+var originalKeys = Object.keys;
+keysShim.shim = function shimObjectKeys() {
+  if (Object.keys) {
+    var keysWorksWithArguments = function() {
+      var args = Object.keys(arguments);
+      return args && args.length === arguments.length;
+    }(1, 2);
+    if (!keysWorksWithArguments) {
+      Object.keys = function keys3(object) {
+        if (isArgs(object)) {
+          return originalKeys(slice.call(object));
+        }
+        return originalKeys(object);
+      };
+    }
+  } else {
+    Object.keys = keysShim;
+  }
+  return Object.keys || keysShim;
+};
+var objectKeys = keysShim;
+var GetIntrinsic$3 = getIntrinsic;
+var $defineProperty = GetIntrinsic$3("%Object.defineProperty%", true);
+var hasPropertyDescriptors$1 = function hasPropertyDescriptors() {
+  if ($defineProperty) {
+    try {
+      $defineProperty({}, "a", { value: 1 });
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+  return false;
+};
+hasPropertyDescriptors$1.hasArrayLengthDefineBug = function hasArrayLengthDefineBug() {
+  if (!hasPropertyDescriptors$1()) {
+    return null;
+  }
+  try {
+    return $defineProperty([], "length", { value: 1 }).length !== 1;
+  } catch (e) {
+    return true;
+  }
+};
+var hasPropertyDescriptors_1 = hasPropertyDescriptors$1;
+var keys$1 = objectKeys;
+var hasSymbols2 = typeof Symbol === "function" && typeof Symbol("foo") === "symbol";
+var toStr$2 = Object.prototype.toString;
+var concat = Array.prototype.concat;
+var origDefineProperty = Object.defineProperty;
+var isFunction$2 = function(fn2) {
+  return typeof fn2 === "function" && toStr$2.call(fn2) === "[object Function]";
+};
+var hasPropertyDescriptors2 = hasPropertyDescriptors_1();
+var supportsDescriptors$1 = origDefineProperty && hasPropertyDescriptors2;
+var defineProperty$1 = function(object, name2, value, predicate) {
+  if (name2 in object) {
+    if (predicate === true) {
+      if (object[name2] === value) {
+        return;
+      }
+    } else if (!isFunction$2(predicate) || !predicate()) {
+      return;
+    }
+  }
+  if (supportsDescriptors$1) {
+    origDefineProperty(object, name2, {
+      configurable: true,
+      enumerable: false,
+      value,
+      writable: true
+    });
+  } else {
+    object[name2] = value;
+  }
+};
+var defineProperties = function(object, map2) {
+  var predicates = arguments.length > 2 ? arguments[2] : {};
+  var props = keys$1(map2);
+  if (hasSymbols2) {
+    props = concat.call(props, Object.getOwnPropertySymbols(map2));
+  }
+  for (var i = 0; i < props.length; i += 1) {
+    defineProperty$1(object, props[i], map2[props[i]], predicates[props[i]]);
+  }
+};
+defineProperties.supportsDescriptors = !!supportsDescriptors$1;
+var defineProperties_1 = defineProperties;
+var IsCallableExports$1 = {};
+var IsCallable$3 = {
+  get exports() {
+    return IsCallableExports$1;
+  },
+  set exports(v) {
+    IsCallableExports$1 = v;
+  }
+};
+(function(module) {
+  module.exports = isCallable$1;
+})(IsCallable$3);
+var Type$3 = function Type(x) {
+  if (x === null) {
+    return "Null";
+  }
+  if (typeof x === "undefined") {
+    return "Undefined";
+  }
+  if (typeof x === "function" || typeof x === "object") {
+    return "Object";
+  }
+  if (typeof x === "number") {
+    return "Number";
+  }
+  if (typeof x === "boolean") {
+    return "Boolean";
+  }
+  if (typeof x === "string") {
+    return "String";
+  }
+};
+var ES5Type = Type$3;
+var Type$2 = function Type2(x) {
+  if (typeof x === "symbol") {
+    return "Symbol";
+  }
+  if (typeof x === "bigint") {
+    return "BigInt";
+  }
+  return ES5Type(x);
+};
+var isCallable3 = isCallable$1;
+var toStr$1 = Object.prototype.toString;
+var hasOwnProperty$1 = Object.prototype.hasOwnProperty;
+var forEachArray = function forEachArray2(array, iterator, receiver) {
+  for (var i = 0, len = array.length; i < len; i++) {
+    if (hasOwnProperty$1.call(array, i)) {
+      if (receiver == null) {
+        iterator(array[i], i, array);
+      } else {
+        iterator.call(receiver, array[i], i, array);
+      }
+    }
+  }
+};
+var forEachString = function forEachString2(string, iterator, receiver) {
+  for (var i = 0, len = string.length; i < len; i++) {
+    if (receiver == null) {
+      iterator(string.charAt(i), i, string);
+    } else {
+      iterator.call(receiver, string.charAt(i), i, string);
+    }
+  }
+};
+var forEachObject = function forEachObject2(object, iterator, receiver) {
+  for (var k in object) {
+    if (hasOwnProperty$1.call(object, k)) {
+      if (receiver == null) {
+        iterator(object[k], k, object);
+      } else {
+        iterator.call(receiver, object[k], k, object);
+      }
+    }
+  }
+};
+var forEach$2 = function forEach(list2, iterator, thisArg) {
+  if (!isCallable3(iterator)) {
+    throw new TypeError("iterator must be a function");
+  }
+  var receiver;
+  if (arguments.length >= 3) {
+    receiver = thisArg;
+  }
+  if (toStr$1.call(list2) === "[object Array]") {
+    forEachArray(list2, iterator, receiver);
+  } else if (typeof list2 === "string") {
+    forEachString(list2, iterator, receiver);
+  } else {
+    forEachObject(list2, iterator, receiver);
+  }
+};
+var forEach_1 = forEach$2;
+var possibleNames = [
+  "BigInt64Array",
+  "BigUint64Array",
+  "Float32Array",
+  "Float64Array",
+  "Int16Array",
+  "Int32Array",
+  "Int8Array",
+  "Uint16Array",
+  "Uint32Array",
+  "Uint8Array",
+  "Uint8ClampedArray"
+];
+var g$1 = typeof globalThis === "undefined" ? commonjsGlobal : globalThis;
+var availableTypedArrays$1 = function availableTypedArrays() {
+  var out = [];
+  for (var i = 0; i < possibleNames.length; i++) {
+    if (typeof g$1[possibleNames[i]] === "function") {
+      out[out.length] = possibleNames[i];
+    }
+  }
+  return out;
+};
+var GetIntrinsic$2 = getIntrinsic;
+var $gOPD = GetIntrinsic$2("%Object.getOwnPropertyDescriptor%", true);
+if ($gOPD) {
+  try {
+    $gOPD([], "length");
+  } catch (e) {
+    $gOPD = null;
+  }
+}
+var gopd = $gOPD;
+var isTypedArray$1;
+var hasRequiredIsTypedArray;
+function requireIsTypedArray() {
+  if (hasRequiredIsTypedArray)
+    return isTypedArray$1;
+  hasRequiredIsTypedArray = 1;
+  var forEach3 = forEach_1;
+  var availableTypedArrays3 = availableTypedArrays$1;
+  var callBound2 = callBound$a;
+  var $toString2 = callBound2("Object.prototype.toString");
+  var hasToStringTag2 = shams();
+  var gOPD2 = gopd;
+  var g2 = typeof globalThis === "undefined" ? commonjsGlobal : globalThis;
+  var typedArrays2 = availableTypedArrays3();
+  var $indexOf2 = callBound2("Array.prototype.indexOf", true) || function indexOf(array, value) {
+    for (var i = 0; i < array.length; i += 1) {
+      if (array[i] === value) {
+        return i;
+      }
+    }
+    return -1;
+  };
+  var $slice2 = callBound2("String.prototype.slice");
+  var toStrTags2 = {};
+  var getPrototypeOf7 = Object.getPrototypeOf;
+  if (hasToStringTag2 && gOPD2 && getPrototypeOf7) {
+    forEach3(typedArrays2, function(typedArray) {
+      var arr = new g2[typedArray]();
+      if (Symbol.toStringTag in arr) {
+        var proto2 = getPrototypeOf7(arr);
+        var descriptor2 = gOPD2(proto2, Symbol.toStringTag);
+        if (!descriptor2) {
+          var superProto = getPrototypeOf7(proto2);
+          descriptor2 = gOPD2(superProto, Symbol.toStringTag);
+        }
+        toStrTags2[typedArray] = descriptor2.get;
+      }
+    });
+  }
+  var tryTypedArrays2 = function tryAllTypedArrays2(value) {
+    var anyTrue = false;
+    forEach3(toStrTags2, function(getter, typedArray) {
+      if (!anyTrue) {
+        try {
+          anyTrue = getter.call(value) === typedArray;
+        } catch (e) {
+        }
+      }
+    });
+    return anyTrue;
+  };
+  isTypedArray$1 = function isTypedArray2(value) {
+    if (!value || typeof value !== "object") {
+      return false;
+    }
+    if (!hasToStringTag2 || !(Symbol.toStringTag in value)) {
+      var tag2 = $slice2($toString2(value), 8, -1);
+      return $indexOf2(typedArrays2, tag2) > -1;
+    }
+    if (!gOPD2) {
+      return false;
+    }
+    return tryTypedArrays2(value);
+  };
+  return isTypedArray$1;
+}
+var forEach$1 = forEach_1;
+var availableTypedArrays2 = availableTypedArrays$1;
+var callBound$3 = callBound$a;
+var gOPD = gopd;
+var $toString = callBound$3("Object.prototype.toString");
+var hasToStringTag$2 = shams();
+var g = typeof globalThis === "undefined" ? commonjsGlobal : globalThis;
+var typedArrays = availableTypedArrays2();
+var $slice = callBound$3("String.prototype.slice");
+var toStrTags = {};
+var getPrototypeOf = Object.getPrototypeOf;
+if (hasToStringTag$2 && gOPD && getPrototypeOf) {
+  forEach$1(typedArrays, function(typedArray) {
+    if (typeof g[typedArray] === "function") {
+      var arr = new g[typedArray]();
+      if (Symbol.toStringTag in arr) {
+        var proto2 = getPrototypeOf(arr);
+        var descriptor2 = gOPD(proto2, Symbol.toStringTag);
+        if (!descriptor2) {
+          var superProto = getPrototypeOf(proto2);
+          descriptor2 = gOPD(superProto, Symbol.toStringTag);
+        }
+        toStrTags[typedArray] = descriptor2.get;
+      }
+    }
+  });
+}
+var tryTypedArrays = function tryAllTypedArrays(value) {
+  var foundName = false;
+  forEach$1(toStrTags, function(getter, typedArray) {
+    if (!foundName) {
+      try {
+        var name2 = getter.call(value);
+        if (name2 === typedArray) {
+          foundName = name2;
+        }
+      } catch (e) {
+      }
+    }
+  });
+  return foundName;
+};
+var isTypedArray = requireIsTypedArray();
+var whichTypedArray$1 = function whichTypedArray(value) {
+  if (!isTypedArray(value)) {
+    return false;
+  }
+  if (!hasToStringTag$2 || !(Symbol.toStringTag in value)) {
+    return $slice($toString(value), 8, -1);
+  }
+  return tryTypedArrays(value);
+};
+var callBound$2 = callBound$a;
+var $deref = callBound$2("WeakRef.prototype.deref", true);
+var isWeakref = typeof WeakRef === "undefined" ? function isWeakRef(value) {
+  return false;
+} : function isWeakRef2(value) {
+  if (!value || typeof value !== "object") {
+    return false;
+  }
+  try {
+    $deref(value);
+    return true;
+  } catch (e) {
+    return false;
+  }
+};
+var callBound$1 = callBound$a;
+var $register = callBound$1("FinalizationRegistry.prototype.register", true);
+var isFinalizationregistry = $register ? function isFinalizationRegistry(value) {
+  if (!value || typeof value !== "object") {
+    return false;
+  }
+  try {
+    $register(value, {});
+    return true;
+  } catch (e) {
+    return false;
+  }
+} : function isFinalizationRegistry2(value) {
+  return false;
+};
+var IsCallableExports = {};
+var IsCallable$2 = {
+  get exports() {
+    return IsCallableExports;
+  },
+  set exports(v) {
+    IsCallableExports = v;
+  }
+};
+(function(module) {
+  module.exports = isCallable$1;
+})(IsCallable$2);
+var functionsHaveNames_1;
+var hasRequiredFunctionsHaveNames;
+function requireFunctionsHaveNames() {
+  if (hasRequiredFunctionsHaveNames)
+    return functionsHaveNames_1;
+  hasRequiredFunctionsHaveNames = 1;
+  var functionsHaveNames2 = function functionsHaveNames3() {
+    return typeof function f() {
+    }.name === "string";
+  };
+  var gOPD2 = Object.getOwnPropertyDescriptor;
+  if (gOPD2) {
+    try {
+      gOPD2([], "length");
+    } catch (e) {
+      gOPD2 = null;
+    }
+  }
+  functionsHaveNames2.functionsHaveConfigurableNames = function functionsHaveConfigurableNames() {
+    if (!functionsHaveNames2() || !gOPD2) {
+      return false;
+    }
+    var desc = gOPD2(function() {
+    }, "name");
+    return !!desc && !!desc.configurable;
+  };
+  var $bind = Function.prototype.bind;
+  functionsHaveNames2.boundFunctionsHaveNames = function boundFunctionsHaveNames() {
+    return functionsHaveNames2() && typeof $bind === "function" && function f() {
+    }.bind().name !== "";
+  };
+  functionsHaveNames_1 = functionsHaveNames2;
+  return functionsHaveNames_1;
+}
+var IsCallable$1 = IsCallableExports;
+var functionsHaveNames$1 = requireFunctionsHaveNames()();
+var callBound = callBound$a;
+var $functionToString = callBound("Function.prototype.toString");
+var $stringMatch = callBound("String.prototype.match");
+var classRegex = /^class /;
+var isClass = function isClassConstructor(fn2) {
+  if (IsCallable$1(fn2)) {
+    return false;
+  }
+  if (typeof fn2 !== "function") {
+    return false;
+  }
+  try {
+    var match2 = $stringMatch($functionToString(fn2), classRegex);
+    return !!match2;
+  } catch (e) {
+  }
+  return false;
+};
+var regex = /\s*function\s+([^(\s]*)\s*/;
+var functionProto = Function.prototype;
+var implementation$8 = function getName() {
+  if (!isClass(this) && !IsCallable$1(this)) {
+    throw new TypeError("Function.prototype.name sham getter called on non-function");
+  }
+  if (functionsHaveNames$1) {
+    return this.name;
+  }
+  if (this === functionProto) {
+    return "";
+  }
+  var str2 = $functionToString(this);
+  var match2 = $stringMatch(str2, regex);
+  var name2 = match2 && match2[1];
+  return name2;
+};
+var implementation$7 = implementation$8;
+var polyfill$3 = function getPolyfill() {
+  return implementation$7;
+};
+var supportsDescriptors = defineProperties_1.supportsDescriptors;
+var functionsHaveNames = requireFunctionsHaveNames()();
+var getPolyfill$3 = polyfill$3;
+var defineProperty2 = Object.defineProperty;
+var TypeErr = TypeError;
+var shim$8 = function shimName() {
+  var polyfill2 = getPolyfill$3();
+  if (functionsHaveNames) {
+    return polyfill2;
+  }
+  if (!supportsDescriptors) {
+    throw new TypeErr("Shimming Function.prototype.name support requires ES5 property descriptor support.");
+  }
+  var functionProto2 = Function.prototype;
+  defineProperty2(functionProto2, "name", {
+    configurable: true,
+    enumerable: false,
+    get: function() {
+      var name2 = polyfill2.call(this);
+      if (this !== functionProto2) {
+        defineProperty2(this, "name", {
+          configurable: true,
+          enumerable: false,
+          value: name2,
+          writable: false
+        });
+      }
+      return name2;
+    }
+  });
+  return polyfill2;
+};
+var define$j = defineProperties_1;
+var callBind$1 = callBindExports;
+var implementation$6 = implementation$8;
+var getPolyfill$2 = polyfill$3;
+var shim$7 = shim$8;
+var bound$1 = callBind$1(implementation$6);
+define$j(bound$1, {
+  getPolyfill: getPolyfill$2,
+  implementation: implementation$6,
+  shim: shim$7
+});
+var function_prototype_name = bound$1;
+var toStr = Object.prototype.toString;
+var fnToStr = Function.prototype.toString;
+var isFnRegex = /^\s*async(?:\s+function(?:\s+|\()|\s*\()/;
+var hasToStringTag$1 = shams();
+var getProto$2 = Object.getPrototypeOf;
+var getAsyncFunc = function() {
+  if (!hasToStringTag$1) {
+    return false;
+  }
+  try {
+    return Function("return async function () {}")();
+  } catch (e) {
+  }
+};
+var AsyncFunction;
+var isAsyncFunction$1 = function isAsyncFunction(fn2) {
+  if (typeof fn2 !== "function") {
+    return false;
+  }
+  if (isFnRegex.test(fnToStr.call(fn2))) {
+    return true;
+  }
+  if (!hasToStringTag$1) {
+    var str2 = toStr.call(fn2);
+    return str2 === "[object AsyncFunction]";
+  }
+  if (!getProto$2) {
+    return false;
+  }
+  if (typeof AsyncFunction === "undefined") {
+    var asyncFunc = getAsyncFunc();
+    AsyncFunction = asyncFunc ? getProto$2(asyncFunc) : false;
+  }
+  return getProto$2(fn2) === AsyncFunction;
+};
+var whichBoxedPrimitive2 = whichBoxedPrimitive$1;
+var whichCollection2 = whichCollection$1;
+var whichTypedArray2 = whichTypedArray$1;
+var isArray$2 = isarray;
+var isDate = isDateObject;
+var isRegex3 = isRegex$1;
+var isWeakRef3 = isWeakref;
+var isFinalizationRegistry3 = isFinalizationregistry;
+var name = function_prototype_name;
+var isGeneratorFunction2 = isGeneratorFunction$1;
+var isAsyncFunction2 = isAsyncFunction$1;
+var hasToStringTag = shams();
+var toStringTag = hasToStringTag && Symbol.toStringTag;
+var $Object = Object;
+var promiseThen = typeof Promise === "function" && Promise.prototype.then;
+var isPromise = function isPromise2(value) {
+  if (!value || typeof value !== "object" || !promiseThen) {
+    return false;
+  }
+  try {
+    promiseThen.call(value, null, function() {
+    });
+    return true;
+  } catch (e) {
+  }
+  return false;
+};
+var isKnownBuiltin = function isKnownBuiltin2(builtinName) {
+  return builtinName && builtinName !== "BigInt" && builtinName !== "Boolean" && builtinName !== "Null" && builtinName !== "Number" && builtinName !== "String" && builtinName !== "Symbol" && builtinName !== "Undefined" && builtinName !== "Math" && builtinName !== "JSON" && builtinName !== "Reflect" && builtinName !== "Atomics" && builtinName !== "Map" && builtinName !== "Set" && builtinName !== "WeakMap" && builtinName !== "WeakSet" && builtinName !== "BigInt64Array" && builtinName !== "BigUint64Array" && builtinName !== "Float32Array" && builtinName !== "Float64Array" && builtinName !== "Int16Array" && builtinName !== "Int32Array" && builtinName !== "Int8Array" && builtinName !== "Uint16Array" && builtinName !== "Uint32Array" && builtinName !== "Uint8Array" && builtinName !== "Uint8ClampedArray" && builtinName !== "Array" && builtinName !== "Date" && builtinName !== "FinalizationRegistry" && builtinName !== "Promise" && builtinName !== "RegExp" && builtinName !== "WeakRef" && builtinName !== "Function" && builtinName !== "GeneratorFunction" && builtinName !== "AsyncFunction";
+};
+var whichBuiltinType$1 = function whichBuiltinType(value) {
+  if (value == null) {
+    return value;
+  }
+  var which = whichBoxedPrimitive2($Object(value)) || whichCollection2(value) || whichTypedArray2(value);
+  if (which) {
+    return which;
+  }
+  if (isArray$2(value)) {
+    return "Array";
+  }
+  if (isDate(value)) {
+    return "Date";
+  }
+  if (isRegex3(value)) {
+    return "RegExp";
+  }
+  if (isWeakRef3(value)) {
+    return "WeakRef";
+  }
+  if (isFinalizationRegistry3(value)) {
+    return "FinalizationRegistry";
+  }
+  if (typeof value === "function") {
+    if (isGeneratorFunction2(value)) {
+      return "GeneratorFunction";
+    }
+    if (isAsyncFunction2(value)) {
+      return "AsyncFunction";
+    }
+    return "Function";
+  }
+  if (isPromise(value)) {
+    return "Promise";
+  }
+  if (toStringTag && toStringTag in value) {
+    var tag2 = value[toStringTag];
+    if (isKnownBuiltin(tag2)) {
+      return tag2;
+    }
+  }
+  if (typeof value.constructor === "function") {
+    var constructorName = name(value.constructor);
+    if (isKnownBuiltin(constructorName)) {
+      return constructorName;
+    }
+  }
+  return "Object";
+};
+var GetIntrinsic$1 = getIntrinsic;
+var IsCallable = IsCallableExports$1;
+var Type$1 = Type$2;
+var whichBuiltinType2 = whichBuiltinType$1;
+var $gPO = GetIntrinsic$1("%Object.getPrototypeOf%", true);
+var $ObjectPrototype = GetIntrinsic$1("%Object.prototype%");
+var $TypeError$1 = GetIntrinsic$1("%TypeError%");
+var hasProto$2 = [].__proto__ === Array.prototype;
+var implementation$5 = function getPrototypeOf2(O) {
+  if (Type$1(O) !== "Object") {
+    throw new $TypeError$1("Reflect.getPrototypeOf called on non-object");
+  }
+  if ($gPO) {
+    return $gPO(O);
+  }
+  if (hasProto$2) {
+    var proto2 = O.__proto__;
+    if (proto2 || proto2 === null) {
+      return proto2;
+    }
+  }
+  var type = whichBuiltinType2(O);
+  if (type) {
+    var intrinsic = GetIntrinsic$1("%" + type + "%.prototype", true);
+    if (intrinsic) {
+      return intrinsic;
+    }
+  }
+  if (IsCallable(O.constructor)) {
+    return O.constructor.prototype;
+  }
+  if (O instanceof Object) {
+    return $ObjectPrototype;
+  }
+  return null;
+};
+var Type3 = Type$2;
+var GetIntrinsic2 = getIntrinsic;
+var $TypeError = GetIntrinsic2("%TypeError%");
+var implementation$4 = implementation$5;
+var hasProto$1 = [].__proto__ === Array.prototype;
+var getProto$1 = function getPrototypeOf3(value) {
+  if (Type3(value) !== "Object") {
+    throw new $TypeError("Reflect.getPrototypeOf called on non-object");
+  }
+  return value.__proto__;
+};
+var polyfill$2 = function getPolyfill2() {
+  if (typeof Reflect === "object" && Reflect && Reflect.getPrototypeOf) {
+    return Reflect.getPrototypeOf;
+  }
+  if (hasProto$1) {
+    return getProto$1;
+  }
+  return implementation$4;
+};
+var define$i = defineProperties_1;
+var getPolyfill$1 = polyfill$2;
+var shim$6 = function shimGetPrototypeOf() {
+  define$i(
+    commonjsGlobal,
+    { Reflect: {} },
+    { Reflect: function() {
+      return typeof Reflect !== "object" || !Reflect;
+    } }
+  );
+  var polyfill2 = getPolyfill$1();
+  define$i(
+    Reflect,
+    { getPrototypeOf: polyfill2 },
+    { getPrototypeOf: function() {
+      return Reflect.getPrototypeOf !== polyfill2;
+    } }
+  );
+  return polyfill2;
+};
+var callBind = callBindExports;
+var define$h = defineProperties_1;
+var implementation$3 = implementation$5;
+var getPolyfill3 = polyfill$2;
+var shim$5 = shim$6;
+var bound = callBind(getPolyfill3(), typeof Reflect === "object" ? Reflect : Object);
+define$h(bound, {
+  getPolyfill: getPolyfill3,
+  implementation: implementation$3,
+  shim: shim$5
+});
+var reflect_getprototypeof = bound;
+var ToObject2 = ToObject$1;
+var ReflectGetPrototypeOf = reflect_getprototypeof;
+var implementation$2 = function getPrototypeOf4(O) {
+  return ReflectGetPrototypeOf(ToObject2(O));
+};
+var RequireObjectCoercible = RequireObjectCoercibleExports;
+var implementation$1 = implementation$2;
+var hasProto = [].__proto__ === Array.prototype;
+var getProto = function getPrototypeOf5(value) {
+  RequireObjectCoercible(value);
+  return value.__proto__;
+};
+var $getPrototypeOf = Object.getPrototypeOf;
+var getPrototypeOfPrimitivesToo = function getPrototypeOf6(value) {
+  RequireObjectCoercible(value);
+  return $getPrototypeOf(Object(value));
+};
+var polyfill$1 = function getPolyfill4() {
+  if ($getPrototypeOf) {
+    try {
+      $getPrototypeOf(true);
+    } catch (e) {
+      return getPrototypeOfPrimitivesToo;
+    }
+    return $getPrototypeOf;
+  }
+  if (hasProto) {
+    return getProto;
+  }
+  return implementation$1;
+};
+polyfill$1();
+shams$1();
+hasBigints();
+requireFunctionsHaveNames()();
+function __flatten(object, settings = {}) {
+  const toReturn = {};
+  if (!Array.isArray(object) && !__isPlainObject(object))
+    return object;
+  settings = Object.assign({ separator: ".", array: false, quoteSeparatedProperties: true, quoteCharacter: '"', excludeProps: [], keepLastIntact: false }, settings);
+  for (const key in object) {
+    if (object[key] === void 0)
+      continue;
+    if (object[key] === null) {
+      toReturn[key] = null;
+      continue;
+    }
+    if (settings.excludeProps.indexOf(key) !== -1) {
+      toReturn[key] = object[key];
+      continue;
+    }
+    if (Array.isArray(object[key]) && settings.array || (!Array.isArray(object[key]) && typeof object[key]) == "object") {
+      const isArray2 = Array.isArray(object[key]);
+      const flatObject = __flatten(object[key], Object.assign(Object.assign({}, settings), { keepLastIntact: false }));
+      for (const x in flatObject) {
+        if (flatObject[x] === void 0)
+          continue;
+        if (isArray2) {
+          toReturn[`${key}[${x}]`] = flatObject[x];
+        } else {
+          const part = key;
+          if (settings.quoteSeparatedProperties && part.includes(settings.separator)) {
+            toReturn[`${settings.quoteCharacter}${key}${settings.quoteCharacter}` + settings.separator + x] = flatObject[x];
+          } else {
+            toReturn[key + settings.separator + x] = flatObject[x];
+          }
+        }
+      }
+      continue;
+    }
+    toReturn[key] = object[key];
+  }
+  return toReturn;
+}
+const __viteBrowserExternal_path = new Proxy({}, {
+  get(_, key) {
+    throw new Error(`Module "path" has been externalized for browser compatibility. Cannot access "path.${key}" in client code.  See http://vitejs.dev/guide/troubleshooting.html#module-externalized-for-browser-compatibility for more details.`);
+  }
+});
+const __viteBrowserExternal_path$1 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+  __proto__: null,
+  default: __viteBrowserExternal_path
+}, Symbol.toStringTag, { value: "Module" }));
+const require$$0$1 = /* @__PURE__ */ getAugmentedNamespace(__viteBrowserExternal_path$1);
+var concatMap$1 = function(xs, fn2) {
+  var res = [];
+  for (var i = 0; i < xs.length; i++) {
+    var x = fn2(xs[i], i);
+    if (isArray$1(x))
+      res.push.apply(res, x);
+    else
+      res.push(x);
+  }
+  return res;
+};
+var isArray$1 = Array.isArray || function(xs) {
+  return Object.prototype.toString.call(xs) === "[object Array]";
+};
+var balancedMatch = balanced$1;
+function balanced$1(a, b, str2) {
+  if (a instanceof RegExp)
+    a = maybeMatch(a, str2);
+  if (b instanceof RegExp)
+    b = maybeMatch(b, str2);
+  var r = range(a, b, str2);
+  return r && {
+    start: r[0],
+    end: r[1],
+    pre: str2.slice(0, r[0]),
+    body: str2.slice(r[0] + a.length, r[1]),
+    post: str2.slice(r[1] + b.length)
+  };
+}
+function maybeMatch(reg, str2) {
+  var m = str2.match(reg);
+  return m ? m[0] : null;
+}
+balanced$1.range = range;
+function range(a, b, str2) {
+  var begs, beg, left, right, result2;
+  var ai = str2.indexOf(a);
+  var bi = str2.indexOf(b, ai + 1);
+  var i = ai;
+  if (ai >= 0 && bi > 0) {
+    if (a === b) {
+      return [ai, bi];
+    }
+    begs = [];
+    left = str2.length;
+    while (i >= 0 && !result2) {
+      if (i == ai) {
+        begs.push(i);
+        ai = str2.indexOf(a, i + 1);
+      } else if (begs.length == 1) {
+        result2 = [begs.pop(), bi];
+      } else {
+        beg = begs.pop();
+        if (beg < left) {
+          left = beg;
+          right = bi;
+        }
+        bi = str2.indexOf(b, i + 1);
+      }
+      i = ai < bi && ai >= 0 ? ai : bi;
+    }
+    if (begs.length) {
+      result2 = [left, right];
+    }
+  }
+  return result2;
+}
+var concatMap = concatMap$1;
+var balanced = balancedMatch;
+var braceExpansion = expandTop;
+var escSlash = "\0SLASH" + Math.random() + "\0";
+var escOpen = "\0OPEN" + Math.random() + "\0";
+var escClose = "\0CLOSE" + Math.random() + "\0";
+var escComma = "\0COMMA" + Math.random() + "\0";
+var escPeriod = "\0PERIOD" + Math.random() + "\0";
+function numeric(str2) {
+  return parseInt(str2, 10) == str2 ? parseInt(str2, 10) : str2.charCodeAt(0);
+}
+function escapeBraces(str2) {
+  return str2.split("\\\\").join(escSlash).split("\\{").join(escOpen).split("\\}").join(escClose).split("\\,").join(escComma).split("\\.").join(escPeriod);
+}
+function unescapeBraces(str2) {
+  return str2.split(escSlash).join("\\").split(escOpen).join("{").split(escClose).join("}").split(escComma).join(",").split(escPeriod).join(".");
+}
+function parseCommaParts(str2) {
+  if (!str2)
+    return [""];
+  var parts = [];
+  var m = balanced("{", "}", str2);
+  if (!m)
+    return str2.split(",");
+  var pre = m.pre;
+  var body = m.body;
+  var post = m.post;
+  var p = pre.split(",");
+  p[p.length - 1] += "{" + body + "}";
+  var postParts = parseCommaParts(post);
+  if (post.length) {
+    p[p.length - 1] += postParts.shift();
+    p.push.apply(p, postParts);
+  }
+  parts.push.apply(parts, p);
+  return parts;
+}
+function expandTop(str2) {
+  if (!str2)
+    return [];
+  if (str2.substr(0, 2) === "{}") {
+    str2 = "\\{\\}" + str2.substr(2);
+  }
+  return expand$1(escapeBraces(str2), true).map(unescapeBraces);
+}
+function embrace(str2) {
+  return "{" + str2 + "}";
+}
+function isPadded(el) {
+  return /^-?0\d/.test(el);
+}
+function lte(i, y) {
+  return i <= y;
+}
+function gte(i, y) {
+  return i >= y;
+}
+function expand$1(str2, isTop) {
+  var expansions = [];
+  var m = balanced("{", "}", str2);
+  if (!m || /\$$/.test(m.pre))
+    return [str2];
+  var isNumericSequence = /^-?\d+\.\.-?\d+(?:\.\.-?\d+)?$/.test(m.body);
+  var isAlphaSequence = /^[a-zA-Z]\.\.[a-zA-Z](?:\.\.-?\d+)?$/.test(m.body);
+  var isSequence = isNumericSequence || isAlphaSequence;
+  var isOptions = m.body.indexOf(",") >= 0;
+  if (!isSequence && !isOptions) {
+    if (m.post.match(/,.*\}/)) {
+      str2 = m.pre + "{" + m.body + escClose + m.post;
+      return expand$1(str2);
+    }
+    return [str2];
+  }
+  var n;
+  if (isSequence) {
+    n = m.body.split(/\.\./);
+  } else {
+    n = parseCommaParts(m.body);
+    if (n.length === 1) {
+      n = expand$1(n[0], false).map(embrace);
+      if (n.length === 1) {
+        var post = m.post.length ? expand$1(m.post, false) : [""];
+        return post.map(function(p) {
+          return m.pre + n[0] + p;
+        });
+      }
+    }
+  }
+  var pre = m.pre;
+  var post = m.post.length ? expand$1(m.post, false) : [""];
+  var N;
+  if (isSequence) {
+    var x = numeric(n[0]);
+    var y = numeric(n[1]);
+    var width = Math.max(n[0].length, n[1].length);
+    var incr = n.length == 3 ? Math.abs(numeric(n[2])) : 1;
+    var test2 = lte;
+    var reverse = y < x;
+    if (reverse) {
+      incr *= -1;
+      test2 = gte;
+    }
+    var pad2 = n.some(isPadded);
+    N = [];
+    for (var i = x; test2(i, y); i += incr) {
+      var c;
+      if (isAlphaSequence) {
+        c = String.fromCharCode(i);
+        if (c === "\\")
+          c = "";
+      } else {
+        c = String(i);
+        if (pad2) {
+          var need = width - c.length;
+          if (need > 0) {
+            var z = new Array(need + 1).join("0");
+            if (i < 0)
+              c = "-" + z + c.slice(1);
+            else
+              c = z + c;
+          }
+        }
+      }
+      N.push(c);
+    }
+  } else {
+    N = concatMap(n, function(el) {
+      return expand$1(el, false);
+    });
+  }
+  for (var j = 0; j < N.length; j++) {
+    for (var k = 0; k < post.length; k++) {
+      var expansion = pre + N[j] + post[k];
+      if (!isTop || isSequence || expansion)
+        expansions.push(expansion);
+    }
+  }
+  return expansions;
+}
+minimatch.Minimatch = Minimatch;
+var path = function() {
+  try {
+    return require$$0$1;
+  } catch (e) {
+  }
+}() || {
+  sep: "/"
+};
+minimatch.sep = path.sep;
+var GLOBSTAR = minimatch.GLOBSTAR = Minimatch.GLOBSTAR = {};
+var expand = braceExpansion;
+var plTypes = {
+  "!": { open: "(?:(?!(?:", close: "))[^/]*?)" },
+  "?": { open: "(?:", close: ")?" },
+  "+": { open: "(?:", close: ")+" },
+  "*": { open: "(?:", close: ")*" },
+  "@": { open: "(?:", close: ")" }
+};
+var qmark = "[^/]";
+var star = qmark + "*?";
+var twoStarDot = "(?:(?!(?:\\/|^)(?:\\.{1,2})($|\\/)).)*?";
+var twoStarNoDot = "(?:(?!(?:\\/|^)\\.).)*?";
+var reSpecials = charSet("().*{}+?[]^$\\!");
+function charSet(s) {
+  return s.split("").reduce(function(set, c) {
+    set[c] = true;
+    return set;
+  }, {});
+}
+var slashSplit = /\/+/;
+minimatch.filter = filter$1;
+function filter$1(pattern, options) {
+  options = options || {};
+  return function(p, i, list2) {
+    return minimatch(p, pattern, options);
+  };
+}
+function ext(a, b) {
+  b = b || {};
+  var t = {};
+  Object.keys(a).forEach(function(k) {
+    t[k] = a[k];
+  });
+  Object.keys(b).forEach(function(k) {
+    t[k] = b[k];
+  });
+  return t;
+}
+minimatch.defaults = function(def) {
+  if (!def || typeof def !== "object" || !Object.keys(def).length) {
+    return minimatch;
+  }
+  var orig = minimatch;
+  var m = function minimatch2(p, pattern, options) {
+    return orig(p, pattern, ext(def, options));
+  };
+  m.Minimatch = function Minimatch2(pattern, options) {
+    return new orig.Minimatch(pattern, ext(def, options));
+  };
+  m.Minimatch.defaults = function defaults(options) {
+    return orig.defaults(ext(def, options)).Minimatch;
+  };
+  m.filter = function filter2(pattern, options) {
+    return orig.filter(pattern, ext(def, options));
+  };
+  m.defaults = function defaults(options) {
+    return orig.defaults(ext(def, options));
+  };
+  m.makeRe = function makeRe2(pattern, options) {
+    return orig.makeRe(pattern, ext(def, options));
+  };
+  m.braceExpand = function braceExpand2(pattern, options) {
+    return orig.braceExpand(pattern, ext(def, options));
+  };
+  m.match = function(list2, pattern, options) {
+    return orig.match(list2, pattern, ext(def, options));
+  };
+  return m;
+};
+Minimatch.defaults = function(def) {
+  return minimatch.defaults(def).Minimatch;
+};
+function minimatch(p, pattern, options) {
+  assertValidPattern(pattern);
+  if (!options)
+    options = {};
+  if (!options.nocomment && pattern.charAt(0) === "#") {
+    return false;
+  }
+  return new Minimatch(pattern, options).match(p);
+}
+function Minimatch(pattern, options) {
+  if (!(this instanceof Minimatch)) {
+    return new Minimatch(pattern, options);
+  }
+  assertValidPattern(pattern);
+  if (!options)
+    options = {};
+  pattern = pattern.trim();
+  if (!options.allowWindowsEscape && path.sep !== "/") {
+    pattern = pattern.split(path.sep).join("/");
+  }
+  this.options = options;
+  this.set = [];
+  this.pattern = pattern;
+  this.regexp = null;
+  this.negate = false;
+  this.comment = false;
+  this.empty = false;
+  this.partial = !!options.partial;
+  this.make();
+}
+Minimatch.prototype.debug = function() {
+};
+Minimatch.prototype.make = make;
+function make() {
+  var pattern = this.pattern;
+  var options = this.options;
+  if (!options.nocomment && pattern.charAt(0) === "#") {
+    this.comment = true;
+    return;
+  }
+  if (!pattern) {
+    this.empty = true;
+    return;
+  }
+  this.parseNegate();
+  var set = this.globSet = this.braceExpand();
+  if (options.debug)
+    this.debug = function debug() {
+      console.error.apply(console, arguments);
+    };
+  this.debug(this.pattern, set);
+  set = this.globParts = set.map(function(s) {
+    return s.split(slashSplit);
+  });
+  this.debug(this.pattern, set);
+  set = set.map(function(s, si, set2) {
+    return s.map(this.parse, this);
+  }, this);
+  this.debug(this.pattern, set);
+  set = set.filter(function(s) {
+    return s.indexOf(false) === -1;
+  });
+  this.debug(this.pattern, set);
+  this.set = set;
+}
+Minimatch.prototype.parseNegate = parseNegate;
+function parseNegate() {
+  var pattern = this.pattern;
+  var negate = false;
+  var options = this.options;
+  var negateOffset = 0;
+  if (options.nonegate)
+    return;
+  for (var i = 0, l = pattern.length; i < l && pattern.charAt(i) === "!"; i++) {
+    negate = !negate;
+    negateOffset++;
+  }
+  if (negateOffset)
+    this.pattern = pattern.substr(negateOffset);
+  this.negate = negate;
+}
+minimatch.braceExpand = function(pattern, options) {
+  return braceExpand(pattern, options);
+};
+Minimatch.prototype.braceExpand = braceExpand;
+function braceExpand(pattern, options) {
+  if (!options) {
+    if (this instanceof Minimatch) {
+      options = this.options;
+    } else {
+      options = {};
+    }
+  }
+  pattern = typeof pattern === "undefined" ? this.pattern : pattern;
+  assertValidPattern(pattern);
+  if (options.nobrace || !/\{(?:(?!\{).)*\}/.test(pattern)) {
+    return [pattern];
+  }
+  return expand(pattern);
+}
+var MAX_PATTERN_LENGTH = 1024 * 64;
+var assertValidPattern = function(pattern) {
+  if (typeof pattern !== "string") {
+    throw new TypeError("invalid pattern");
+  }
+  if (pattern.length > MAX_PATTERN_LENGTH) {
+    throw new TypeError("pattern is too long");
+  }
+};
+Minimatch.prototype.parse = parse;
+var SUBPARSE = {};
+function parse(pattern, isSub) {
+  assertValidPattern(pattern);
+  var options = this.options;
+  if (pattern === "**") {
+    if (!options.noglobstar)
+      return GLOBSTAR;
+    else
+      pattern = "*";
+  }
+  if (pattern === "")
+    return "";
+  var re = "";
+  var hasMagic = !!options.nocase;
+  var escaping = false;
+  var patternListStack = [];
+  var negativeLists = [];
+  var stateChar;
+  var inClass = false;
+  var reClassStart = -1;
+  var classStart = -1;
+  var patternStart = pattern.charAt(0) === "." ? "" : options.dot ? "(?!(?:^|\\/)\\.{1,2}(?:$|\\/))" : "(?!\\.)";
+  var self2 = this;
+  function clearStateChar() {
+    if (stateChar) {
+      switch (stateChar) {
+        case "*":
+          re += star;
+          hasMagic = true;
+          break;
+        case "?":
+          re += qmark;
+          hasMagic = true;
+          break;
+        default:
+          re += "\\" + stateChar;
+          break;
+      }
+      self2.debug("clearStateChar %j %j", stateChar, re);
+      stateChar = false;
+    }
+  }
+  for (var i = 0, len = pattern.length, c; i < len && (c = pattern.charAt(i)); i++) {
+    this.debug("%s	%s %s %j", pattern, i, re, c);
+    if (escaping && reSpecials[c]) {
+      re += "\\" + c;
+      escaping = false;
+      continue;
+    }
+    switch (c) {
+      case "/": {
+        return false;
+      }
+      case "\\":
+        clearStateChar();
+        escaping = true;
+        continue;
+      case "?":
+      case "*":
+      case "+":
+      case "@":
+      case "!":
+        this.debug("%s	%s %s %j <-- stateChar", pattern, i, re, c);
+        if (inClass) {
+          this.debug("  in class");
+          if (c === "!" && i === classStart + 1)
+            c = "^";
+          re += c;
+          continue;
+        }
+        self2.debug("call clearStateChar %j", stateChar);
+        clearStateChar();
+        stateChar = c;
+        if (options.noext)
+          clearStateChar();
+        continue;
+      case "(":
+        if (inClass) {
+          re += "(";
+          continue;
+        }
+        if (!stateChar) {
+          re += "\\(";
+          continue;
+        }
+        patternListStack.push({
+          type: stateChar,
+          start: i - 1,
+          reStart: re.length,
+          open: plTypes[stateChar].open,
+          close: plTypes[stateChar].close
+        });
+        re += stateChar === "!" ? "(?:(?!(?:" : "(?:";
+        this.debug("plType %j %j", stateChar, re);
+        stateChar = false;
+        continue;
+      case ")":
+        if (inClass || !patternListStack.length) {
+          re += "\\)";
+          continue;
+        }
+        clearStateChar();
+        hasMagic = true;
+        var pl = patternListStack.pop();
+        re += pl.close;
+        if (pl.type === "!") {
+          negativeLists.push(pl);
+        }
+        pl.reEnd = re.length;
+        continue;
+      case "|":
+        if (inClass || !patternListStack.length || escaping) {
+          re += "\\|";
+          escaping = false;
+          continue;
+        }
+        clearStateChar();
+        re += "|";
+        continue;
+      case "[":
+        clearStateChar();
+        if (inClass) {
+          re += "\\" + c;
+          continue;
+        }
+        inClass = true;
+        classStart = i;
+        reClassStart = re.length;
+        re += c;
+        continue;
+      case "]":
+        if (i === classStart + 1 || !inClass) {
+          re += "\\" + c;
+          escaping = false;
+          continue;
+        }
+        var cs = pattern.substring(classStart + 1, i);
+        try {
+          RegExp("[" + cs + "]");
+        } catch (er) {
+          var sp = this.parse(cs, SUBPARSE);
+          re = re.substr(0, reClassStart) + "\\[" + sp[0] + "\\]";
+          hasMagic = hasMagic || sp[1];
+          inClass = false;
+          continue;
+        }
+        hasMagic = true;
+        inClass = false;
+        re += c;
+        continue;
+      default:
+        clearStateChar();
+        if (escaping) {
+          escaping = false;
+        } else if (reSpecials[c] && !(c === "^" && inClass)) {
+          re += "\\";
+        }
+        re += c;
+    }
+  }
+  if (inClass) {
+    cs = pattern.substr(classStart + 1);
+    sp = this.parse(cs, SUBPARSE);
+    re = re.substr(0, reClassStart) + "\\[" + sp[0];
+    hasMagic = hasMagic || sp[1];
+  }
+  for (pl = patternListStack.pop(); pl; pl = patternListStack.pop()) {
+    var tail = re.slice(pl.reStart + pl.open.length);
+    this.debug("setting tail", re, pl);
+    tail = tail.replace(/((?:\\{2}){0,64})(\\?)\|/g, function(_, $1, $2) {
+      if (!$2) {
+        $2 = "\\";
+      }
+      return $1 + $1 + $2 + "|";
+    });
+    this.debug("tail=%j\n   %s", tail, tail, pl, re);
+    var t = pl.type === "*" ? star : pl.type === "?" ? qmark : "\\" + pl.type;
+    hasMagic = true;
+    re = re.slice(0, pl.reStart) + t + "\\(" + tail;
+  }
+  clearStateChar();
+  if (escaping) {
+    re += "\\\\";
+  }
+  var addPatternStart = false;
+  switch (re.charAt(0)) {
+    case "[":
+    case ".":
+    case "(":
+      addPatternStart = true;
+  }
+  for (var n = negativeLists.length - 1; n > -1; n--) {
+    var nl = negativeLists[n];
+    var nlBefore = re.slice(0, nl.reStart);
+    var nlFirst = re.slice(nl.reStart, nl.reEnd - 8);
+    var nlLast = re.slice(nl.reEnd - 8, nl.reEnd);
+    var nlAfter = re.slice(nl.reEnd);
+    nlLast += nlAfter;
+    var openParensBefore = nlBefore.split("(").length - 1;
+    var cleanAfter = nlAfter;
+    for (i = 0; i < openParensBefore; i++) {
+      cleanAfter = cleanAfter.replace(/\)[+*?]?/, "");
+    }
+    nlAfter = cleanAfter;
+    var dollar = "";
+    if (nlAfter === "" && isSub !== SUBPARSE) {
+      dollar = "$";
+    }
+    var newRe = nlBefore + nlFirst + nlAfter + dollar + nlLast;
+    re = newRe;
+  }
+  if (re !== "" && hasMagic) {
+    re = "(?=.)" + re;
+  }
+  if (addPatternStart) {
+    re = patternStart + re;
+  }
+  if (isSub === SUBPARSE) {
+    return [re, hasMagic];
+  }
+  if (!hasMagic) {
+    return globUnescape(pattern);
+  }
+  var flags2 = options.nocase ? "i" : "";
+  try {
+    var regExp = new RegExp("^" + re + "$", flags2);
+  } catch (er) {
+    return new RegExp("$.");
+  }
+  regExp._glob = pattern;
+  regExp._src = re;
+  return regExp;
+}
+minimatch.makeRe = function(pattern, options) {
+  return new Minimatch(pattern, options || {}).makeRe();
+};
+Minimatch.prototype.makeRe = makeRe;
+function makeRe() {
+  if (this.regexp || this.regexp === false)
+    return this.regexp;
+  var set = this.set;
+  if (!set.length) {
+    this.regexp = false;
+    return this.regexp;
+  }
+  var options = this.options;
+  var twoStar = options.noglobstar ? star : options.dot ? twoStarDot : twoStarNoDot;
+  var flags2 = options.nocase ? "i" : "";
+  var re = set.map(function(pattern) {
+    return pattern.map(function(p) {
+      return p === GLOBSTAR ? twoStar : typeof p === "string" ? regExpEscape(p) : p._src;
+    }).join("\\/");
+  }).join("|");
+  re = "^(?:" + re + ")$";
+  if (this.negate)
+    re = "^(?!" + re + ").*$";
+  try {
+    this.regexp = new RegExp(re, flags2);
+  } catch (ex) {
+    this.regexp = false;
+  }
+  return this.regexp;
+}
+minimatch.match = function(list2, pattern, options) {
+  options = options || {};
+  var mm = new Minimatch(pattern, options);
+  list2 = list2.filter(function(f) {
+    return mm.match(f);
+  });
+  if (mm.options.nonull && !list2.length) {
+    list2.push(pattern);
+  }
+  return list2;
+};
+Minimatch.prototype.match = function match(f, partial) {
+  if (typeof partial === "undefined")
+    partial = this.partial;
+  this.debug("match", f, this.pattern);
+  if (this.comment)
+    return false;
+  if (this.empty)
+    return f === "";
+  if (f === "/" && partial)
+    return true;
+  var options = this.options;
+  if (path.sep !== "/") {
+    f = f.split(path.sep).join("/");
+  }
+  f = f.split(slashSplit);
+  this.debug(this.pattern, "split", f);
+  var set = this.set;
+  this.debug(this.pattern, "set", set);
+  var filename;
+  var i;
+  for (i = f.length - 1; i >= 0; i--) {
+    filename = f[i];
+    if (filename)
+      break;
+  }
+  for (i = 0; i < set.length; i++) {
+    var pattern = set[i];
+    var file = f;
+    if (options.matchBase && pattern.length === 1) {
+      file = [filename];
+    }
+    var hit = this.matchOne(file, pattern, partial);
+    if (hit) {
+      if (options.flipNegate)
+        return true;
+      return !this.negate;
+    }
+  }
+  if (options.flipNegate)
+    return false;
+  return this.negate;
+};
+Minimatch.prototype.matchOne = function(file, pattern, partial) {
+  var options = this.options;
+  this.debug(
+    "matchOne",
+    { "this": this, file, pattern }
+  );
+  this.debug("matchOne", file.length, pattern.length);
+  for (var fi = 0, pi = 0, fl = file.length, pl = pattern.length; fi < fl && pi < pl; fi++, pi++) {
+    this.debug("matchOne loop");
+    var p = pattern[pi];
+    var f = file[fi];
+    this.debug(pattern, p, f);
+    if (p === false)
+      return false;
+    if (p === GLOBSTAR) {
+      this.debug("GLOBSTAR", [pattern, p, f]);
+      var fr = fi;
+      var pr = pi + 1;
+      if (pr === pl) {
+        this.debug("** at the end");
+        for (; fi < fl; fi++) {
+          if (file[fi] === "." || file[fi] === ".." || !options.dot && file[fi].charAt(0) === ".")
+            return false;
+        }
+        return true;
+      }
+      while (fr < fl) {
+        var swallowee = file[fr];
+        this.debug("\nglobstar while", file, fr, pattern, pr, swallowee);
+        if (this.matchOne(file.slice(fr), pattern.slice(pr), partial)) {
+          this.debug("globstar found match!", fr, fl, swallowee);
+          return true;
+        } else {
+          if (swallowee === "." || swallowee === ".." || !options.dot && swallowee.charAt(0) === ".") {
+            this.debug("dot detected!", file, fr, pattern, pr);
+            break;
+          }
+          this.debug("globstar swallow a segment, and continue");
+          fr++;
+        }
+      }
+      if (partial) {
+        this.debug("\n>>> no match, partial?", file, fr, pattern, pr);
+        if (fr === fl)
+          return true;
+      }
+      return false;
+    }
+    var hit;
+    if (typeof p === "string") {
+      hit = f === p;
+      this.debug("string match", p, f, hit);
+    } else {
+      hit = f.match(p);
+      this.debug("pattern match", p, f, hit);
+    }
+    if (!hit)
+      return false;
+  }
+  if (fi === fl && pi === pl) {
+    return true;
+  } else if (fi === fl) {
+    return partial;
+  } else if (pi === pl) {
+    return fi === fl - 1 && file[fi] === "";
+  }
+  throw new Error("wtf?");
+};
+function globUnescape(s) {
+  return s.replace(/\\(.)/g, "$1");
+}
+function regExpEscape(s) {
+  return s.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
+}
+function pad(hash2, len) {
+  while (hash2.length < len) {
+    hash2 = "0" + hash2;
+  }
+  return hash2;
+}
+function fold(hash2, text) {
+  var i;
+  var chr;
+  var len;
+  if (text.length === 0) {
+    return hash2;
+  }
+  for (i = 0, len = text.length; i < len; i++) {
+    chr = text.charCodeAt(i);
+    hash2 = (hash2 << 5) - hash2 + chr;
+    hash2 |= 0;
+  }
+  return hash2 < 0 ? hash2 * -2 : hash2;
+}
+function foldObject(hash2, o, seen2) {
+  return Object.keys(o).sort().reduce(foldKey, hash2);
+  function foldKey(hash3, key) {
+    return foldValue(hash3, o[key], key, seen2);
+  }
+}
+function foldValue(input, value, key, seen2) {
+  var hash2 = fold(fold(fold(input, key), toString$1(value)), typeof value);
+  if (value === null) {
+    return fold(hash2, "null");
+  }
+  if (value === void 0) {
+    return fold(hash2, "undefined");
+  }
+  if (typeof value === "object" || typeof value === "function") {
+    if (seen2.indexOf(value) !== -1) {
+      return fold(hash2, "[Circular]" + key);
+    }
+    seen2.push(value);
+    var objHash = foldObject(hash2, value, seen2);
+    if (!("valueOf" in value) || typeof value.valueOf !== "function") {
+      return objHash;
+    }
+    try {
+      return fold(objHash, String(value.valueOf()));
+    } catch (err) {
+      return fold(objHash, "[valueOf exception]" + (err.stack || err.message));
+    }
+  }
+  return fold(hash2, value.toString());
+}
+function toString$1(o) {
+  return Object.prototype.toString.call(o);
+}
+function sum(o) {
+  return pad(foldValue(0, o, "", []).toString(16), 8);
+}
+var hashSum = sum;
+function objectHash(obj, settings = {}) {
+  settings = Object.assign({}, settings);
+  return hashSum(obj);
+}
+function __sort(object, sort) {
+  const keys3 = Object.keys(object);
+  const sortedKeys = keys3.sort((a, b) => {
+    if (!sort) {
+      if (a < b) {
+        return -1;
+      }
+      if (a > b) {
+        return 1;
+      }
+      return 0;
+    }
+    return sort({ key: a, value: object[a] }, { key: b, value: object[b] });
+  });
+  const resultObj = {};
+  sortedKeys.forEach((k) => {
+    resultObj[k] = object[k];
+  });
+  return resultObj;
+}
+class SLog {
+  static filter(filter2) {
+    if (typeof filter2 === "function") {
+      this._filterFunctions = [...this._filterFunctions, filter2];
+    } else {
+      this._filteredTypes = filter2;
+    }
+  }
+  /**
+   * @name            clearFilters
+   * @type            Function
+   * @static
+   *
+   * This static method allows you to reset all the filters applied
+   *
+   * @since           2.0.0
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+   */
+  static clearFilters() {
+    this._filteredTypes = [];
+    this._filterFunctions = [];
+    M;
+  }
+  static setDefaultLogObj(logObj) {
+    this._defaultLogObj = logObj;
+  }
+  /**
+   * @name            isTypeEnabled
+   * @type            Function
+   * @static
+   *
+   * This static method allows you Check if a particular log type is enabled or not.
+   * You can pass as well multiple log types as an array.
+   *
+   * @param       {ISLogType|ISLogType[]}             types      The log type(s) you want to check
+   * @return      {Boolean}                              True if the log type is enabled, false otherwise
+   *
+   * @since       2.0.0
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+   */
+  static isTypeEnabled(types2) {
+    if (!this._filteredTypes.length) {
+      return true;
+    }
+    if (!Array.isArray(types2))
+      types2 = [types2];
+    for (const type of types2) {
+      if (!this._filteredTypes.includes(type))
+        return false;
+    }
+    return true;
+  }
+  /**
+   * @name        constructor
+   * @type        Function
+   * @constructor
+   *
+   * Constructor
+   *
+   * @since       2.0.0
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+   */
+  constructor(logObj) {
+    var _a2;
+    if (!(logObj === null || logObj === void 0 ? void 0 : logObj.value) && !logObj._logObj)
+      ;
+    this._logObj = __deepMerge(
+      {
+        type: SLog.TYPE_LOG,
+        timestamp: Date.now(),
+        decorators: true,
+        time: false,
+        verbose: false,
+        notify: false,
+        metas: {}
+      },
+      // @ts-ignore
+      this.constructor._defaultLogObj,
+      // @ts-ignore
+      (_a2 = logObj._logObj) !== null && _a2 !== void 0 ? _a2 : logObj
+    );
+  }
+  /**
+   * @name        value
+   * @type        Any
+   * @get
+   * @set
+   *
+   * Access the "value" property of the SLog object
+   *
+   * @since           2.0.0
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+   */
+  get value() {
+    return this._logObj.value;
+  }
+  set value(value) {
+    this._logObj.value = value;
+  }
+  /**
+   * @name        metas
+   * @type        Any
+   * @get
+   * @set
+   *
+   * Access the "metas" property of the SLog object
+   *
+   * @since           2.0.0
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+   */
+  get metas() {
+    var _a2;
+    return (_a2 = this._logObj.metas) !== null && _a2 !== void 0 ? _a2 : {};
+  }
+  set metas(value) {
+    this._logObj.metas = value;
+  }
+  /**
+   * @name        type
+   * @type        String
+   * @get
+   *
+   * Access the "type" property of the SLog object
+   * This specify which type if the log. LOG, INFO, WARN, ERROR or VERBODE
+   *
+   * @since           2.0.0
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+   */
+  get type() {
+    return this._logObj.type;
+  }
+  /**
+   * @name        group
+   * @type        String
+   * @get
+   *
+   * Access the "group" property of the SLog object
+   * The group can be used to display logs in a stack or whatever...
+   *
+   * @since           2.0.0
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+   */
+  get group() {
+    return this._logObj.group;
+  }
+  set group(value) {
+    if (typeof value !== "string") {
+      throw new Error(`<red>[SLog]</red> The "<cyan>group</cyan>" property MUST be a string. You've passed a "${typeof value}"...`);
+    }
+    this._logObj.group = value;
+  }
+  /**
+   * @name        active
+   * @type        Boolean
+   * @get
+   *
+   * Access the "active" property of the SLog object
+   * This specify if the log is active depending on parameters like `SLog.filter`.
+   * Check the documentation of this static method for more info.
+   *
+   * @since           2.0.0
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+   */
+  get active() {
+    for (let [idx, fn2] of this.constructor._filterFunctions.entries()) {
+      if (!fn2(this)) {
+        return false;
+      }
+    }
+    if (!this._logObj.type)
+      return true;
+    if (!this.constructor._filteredTypes.length) {
+      return true;
+    }
+    if (!this.constructor.TYPES.includes(this._logObj.type)) {
+      return true;
+    }
+    if (!this.constructor._filteredTypes.includes(this._logObj.type))
+      return false;
+    return true;
+  }
+  /**
+   * @name        decorators
+   * @type        Boolean
+   * @get
+   * @set
+   *
+   * Access the "decorators" property of the SLog object.
+   * This specify if the log has to be printed with decorators or not
+   *
+   * @since           2.0.0
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+   */
+  get decorators() {
+    return this._logObj.decorators;
+  }
+  set decorators(value) {
+    this._logObj.decorators = value;
+  }
+  /**
+   * @name        time
+   * @type        Boolean
+   * @get
+   *
+   * Access the "time" property of the SLog object.
+   * This specify if the log has to be printed with his time or not
+   *
+   * @since           2.0.0
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+   */
+  get time() {
+    return this._logObj.time;
+  }
+  /**
+   * @name        timestamp
+   * @type        String
+   * @get
+   *
+   * Access the "timestamp" property of the SLog object
+   *
+   * @since           2.0.0
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+   */
+  get timestamp() {
+    return this._logObj.timestamp;
+  }
+  /**
+   * @name        clear
+   * @type        Boolean
+   * @get
+   *
+   * Access the "clear" property of the SLog object.
+   * This specify if the previous logs have to be cleared before printing this one
+   *
+   * @since           2.0.0
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+   */
+  get clear() {
+    return this._logObj.clear;
+  }
+  /**
+   * @name        margin
+   * @type        ISLogMargin
+   * @get
+   *
+   * Access the "margin" property of the SLog object.
+   *
+   * @since           2.0.0
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+   */
+  get margin() {
+    var _a2;
+    return (_a2 = this._logObj.margin) !== null && _a2 !== void 0 ? _a2 : {
+      top: 0,
+      bottom: 0
+    };
+  }
+  /**
+   * @name        temp
+   * @type        Boolean
+   * @get
+   *
+   * Access the "temp" property of the SLog object.
+   * This specify if this log is a temporary one and if it has to be deleted
+   * when the next log appear.
+   *
+   * @since           2.0.0
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+   */
+  get temp() {
+    return this._logObj.temp;
+  }
+  /**
+   * @name        as
+   * @type        String
+   * @get
+   *
+   * Access the "as" property of the SLog object.
+   * This specify the optimal way the log has to be displayed.
+   * This depends on the logger you use and how it can display logs.
+   *
+   * @since           2.0.0
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+   */
+  get as() {
+    return this._logObj.as;
+  }
+  /**
+   * @name        verbose
+   * @type        Boolean
+   * @get
+   *
+   * Access the "verbose" property of the SLog object
+   *
+   * @since           2.0.0
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+   */
+  get verbose() {
+    return this._logObj.verbose;
+  }
+  set verbose(value) {
+    this._logObj.verbose = value;
+  }
+  /**
+   * @name        notify
+   * @type        Boolean
+   * @get
+   *
+   * Access the "notify" property of the SLog object
+   *
+   * @since           2.0.0
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+   */
+  get notify() {
+    return this._logObj.notify;
+  }
+  set notify(value) {
+    this._logObj.notify = value;
+  }
+  /**
+   * @name        logger
+   * @type        Function
+   * @get
+   *
+   * Access the "logger" property of the SLog object.
+   * This represent a function that will be used to actually log the message.
+   *
+   * @since           2.0.0
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+   */
+  get logger() {
+    return this._logObj.logger;
+  }
+}
+SLog.TYPE_LOG = "log";
+SLog.TYPE_INFO = "info";
+SLog.TYPE_WARN = "warn";
+SLog.TYPE_ERROR = "error";
+SLog.TYPE_SUCCESS = "success";
+SLog.TYPES = [
+  SLog.TYPE_LOG,
+  SLog.TYPE_INFO,
+  SLog.TYPE_WARN,
+  SLog.TYPE_ERROR,
+  SLog.TYPE_SUCCESS
+];
+SLog.PRESET_SILENT = [];
+SLog.PRESET_DEFAULT = [
+  SLog.TYPE_LOG,
+  SLog.TYPE_INFO,
+  SLog.TYPE_WARN,
+  SLog.TYPE_ERROR,
+  SLog.TYPE_SUCCESS
+];
+SLog.PRESET_WARN = [SLog.TYPE_WARN, SLog.TYPE_ERROR];
+SLog.PRESET_ERROR = [SLog.TYPE_ERROR];
+SLog.PRESET_VERBOSE = [
+  SLog.TYPE_LOG,
+  SLog.TYPE_INFO,
+  SLog.TYPE_WARN,
+  SLog.TYPE_ERROR,
+  SLog.TYPE_SUCCESS
+];
+SLog.PRESETS = ["silent", "default", "warn", "error"];
+SLog._filteredTypes = [];
+SLog._filterFunctions = [];
+SLog._filteredTypes = [];
+SLog._defaultLogObj = {};
+function availableColors(settings) {
+  settings = Object.assign({ excludeBasics: false }, settings !== null && settings !== void 0 ? settings : {});
+  const _colors = [
+    "yellow",
+    "cyan",
+    "green",
+    "magenta",
+    "blue",
+    "red",
+    "grey",
+    "gray"
+  ];
+  let colors = _colors;
+  if (settings.excludeBasics) {
+    colors = _colors.filter((c) => {
+      return c !== "white" && c !== "black" && c !== "grey" && c !== "gray";
+    });
+  }
+  return colors;
+}
+let _colorsStack = {};
+let _colorUsedByScope = {};
+function getColorFor(ref, settings) {
+  settings = __deepMerge({
+    scope: "default",
+    excludeBasics: true
+  }, settings !== null && settings !== void 0 ? settings : {});
+  const availableColors$1 = availableColors(settings);
+  const scopeId = __md5.encrypt(settings.scope);
+  const refId = __md5.encrypt(ref);
+  if (_colorsStack[`${scopeId}.${refId}`]) {
+    return _colorsStack[`${scopeId}.${refId}`];
+  }
+  if (!_colorUsedByScope[scopeId])
+    _colorUsedByScope[scopeId] = [];
+  if (_colorUsedByScope[scopeId].length >= availableColors$1.length) {
+    const color = __pickRandom(availableColors$1);
+    _colorsStack[`${scopeId}.${refId}`] = color;
+    return color;
+  } else {
+    for (let i = 0; i < availableColors$1.length; i++) {
+      if (_colorUsedByScope[scopeId].indexOf(availableColors$1[i]) === -1) {
+        _colorUsedByScope[scopeId].push(availableColors$1[i]);
+        _colorsStack[`${scopeId}.${refId}`] = availableColors$1[i];
+        return availableColors$1[i];
+      }
+    }
+  }
+}
 var globToRegexp = function(glob, opts) {
   if (typeof glob !== "string") {
     throw new TypeError("Expected a string");
@@ -11912,7 +11904,7 @@ var globToRegexp = function(glob, opts) {
   }
   return new RegExp(reStr, flags2);
 };
-var __awaiter$u = globalThis && globalThis.__awaiter || function(thisArg, _arguments, P, generator) {
+var __awaiter$z = globalThis && globalThis.__awaiter || function(thisArg, _arguments, P, generator) {
   function adopt(value) {
     return value instanceof P ? value : new P(function(resolve) {
       resolve(value);
@@ -11972,7 +11964,7 @@ let SEventEmitter$1 = class SEventEmitter extends SClass {
     if (!sourceSEventEmitter || !sourceSEventEmitter.on || typeof sourceSEventEmitter.on !== "function") {
       return sourceSEventEmitter;
     }
-    sourceSEventEmitter.on(set.events || "*", (value, metas) => __awaiter$u(this, void 0, void 0, function* () {
+    sourceSEventEmitter.on(set.events || "*", (value, metas) => __awaiter$z(this, void 0, void 0, function* () {
       var _a2, _b2, _c2, _d2, _e2, _f, _g;
       if (!metas || !value) {
         return;
@@ -12175,7 +12167,7 @@ let SEventEmitter$1 = class SEventEmitter extends SClass {
     }, metas !== null && metas !== void 0 ? metas : {});
   }
   emit(event, value, metas) {
-    return new Promise((resolve, reject) => __awaiter$u(this, void 0, void 0, function* () {
+    return new Promise((resolve, reject) => __awaiter$z(this, void 0, void 0, function* () {
       let metasObj = this._createMetas(event, metas);
       const isFirstLevel = !metasObj.level;
       if (__isPlainObject(value)) {
@@ -12188,7 +12180,7 @@ let SEventEmitter$1 = class SEventEmitter extends SClass {
         });
       }
       const CastClass = this.settings.castByEvent[event];
-      if (CastClass && isClass(CastClass) && !(value instanceof CastClass) && !value._sEventEmitterPreprocessed) {
+      if (CastClass && isClass$1(CastClass) && !(value instanceof CastClass) && !value._sEventEmitterPreprocessed) {
         value = new CastClass(value);
       }
       if (event === "ask") {
@@ -12216,7 +12208,7 @@ let SEventEmitter$1 = class SEventEmitter extends SClass {
     }));
   }
   _emit(logObj) {
-    return __awaiter$u(this, void 0, void 0, function* () {
+    return __awaiter$z(this, void 0, void 0, function* () {
       logObj.metas.uid = __uniqid();
       if (logObj.event === "ask") {
         this.constructor.global.on(`answer.${logObj.metas.askId}`, (answer, metas) => {
@@ -12329,7 +12321,7 @@ let SEventEmitter$1 = class SEventEmitter extends SClass {
    * @author 		Olivier Bossel<olivier.bossel@gmail.com>
    */
   _emitEventStack(event, initialValue, metasObj) {
-    return __awaiter$u(this, void 0, void 0, function* () {
+    return __awaiter$z(this, void 0, void 0, function* () {
       let currentCallbackReturnedValue = initialValue;
       if (!this._eventsStacks || Object.keys(this._eventsStacks).length === 0)
         return currentCallbackReturnedValue;
@@ -12406,7 +12398,7 @@ let SEventEmitter$1 = class SEventEmitter extends SClass {
    * @author 		Olivier Bossel<olivier.bossel@gmail.com>
    */
   _emitEvents(events, initialValue, metas) {
-    return new Promise((resolve, reject) => __awaiter$u(this, void 0, void 0, function* () {
+    return new Promise((resolve, reject) => __awaiter$z(this, void 0, void 0, function* () {
       if (!events)
         return this;
       if (typeof events === "string")
@@ -12615,7 +12607,7 @@ const fn = function treatAsValue(promise, settings = {}) {
     return promise;
   }
 };
-var __awaiter$t = globalThis && globalThis.__awaiter || function(thisArg, _arguments, P, generator) {
+var __awaiter$y = globalThis && globalThis.__awaiter || function(thisArg, _arguments, P, generator) {
   function adopt(value) {
     return value instanceof P ? value : new P(function(resolve) {
       resolve(value);
@@ -12661,10 +12653,10 @@ class SPromise extends SClass.extends(Promise) {
    * @author 		Olivier Bossel<olivier.bossel@gmail.com>
    */
   static queue(promises, before, after) {
-    return new SPromise(({ resolve, reject, pipe }) => __awaiter$t(this, void 0, void 0, function* () {
+    return new SPromise(({ resolve, reject, pipe }) => __awaiter$y(this, void 0, void 0, function* () {
       const results = {};
       function next() {
-        return __awaiter$t(this, void 0, void 0, function* () {
+        return __awaiter$y(this, void 0, void 0, function* () {
           const firstKey = Object.keys(promises)[0];
           let promise = promises[firstKey];
           if (typeof promise === "function")
@@ -12810,7 +12802,7 @@ class SPromise extends SClass.extends(Promise) {
           return;
         api[func] = this[func].bind(this);
       });
-      (() => __awaiter$t(this, void 0, void 0, function* () {
+      (() => __awaiter$y(this, void 0, void 0, function* () {
         yield __wait$1(0);
         try {
           yield executorFn(api);
@@ -13016,7 +13008,7 @@ class SPromise extends SClass.extends(Promise) {
    * @author 		Olivier Bossel<olivier.bossel@gmail.com>
    */
   _resolve(arg, stacksOrder = "resolve,finally") {
-    return __awaiter$t(this, void 0, void 0, function* () {
+    return __awaiter$y(this, void 0, void 0, function* () {
       if (this._promiseState === "destroyed")
         return;
       this._promiseState = "resolved";
@@ -13063,7 +13055,7 @@ class SPromise extends SClass.extends(Promise) {
    * @author 		Olivier Bossel<olivier.bossel@gmail.com>
    */
   _reject(arg, stacksOrder = `catch,reject,finally`) {
-    return __awaiter$t(this, void 0, void 0, function* () {
+    return __awaiter$y(this, void 0, void 0, function* () {
       if (this._promiseState === "destroyed")
         return;
       this._promiseState = "rejected";
@@ -13112,7 +13104,7 @@ class SPromise extends SClass.extends(Promise) {
   _cancel(arg, stacksOrder = "cancel,finally") {
     if (this._promiseState === "destroyed")
       return;
-    return new Promise((resolve, reject) => __awaiter$t(this, void 0, void 0, function* () {
+    return new Promise((resolve, reject) => __awaiter$y(this, void 0, void 0, function* () {
       this._promiseState = "canceled";
       const stacksOrderArray = stacksOrder.split(",").map((l) => l.trim());
       for (let i = 0; i < stacksOrderArray.length; i++) {
@@ -13196,12 +13188,12 @@ class SPromise extends SClass.extends(Promise) {
 }
 class SSugarConfig {
   static get finalConfig() {
-    var _a2, _b2, _c2;
+    var _a2, _b2, _c2, _d2, _e2, _f, _g, _h;
     if (SSugarConfig._finalConfig)
       return SSugarConfig._finalConfig;
     SSugarConfig._finalConfig = __deepMerge(
       // @ts-ignore
-      (_c2 = (_b2 = (_a2 = document.env) === null || _a2 === void 0 ? void 0 : _a2.SUGAR) === null || _b2 === void 0 ? void 0 : _b2.config) !== null && _c2 !== void 0 ? _c2 : {}
+      (_h = (_c2 = (_b2 = (_a2 = document.env) === null || _a2 === void 0 ? void 0 : _a2.SUGAR) === null || _b2 === void 0 ? void 0 : _b2.config) !== null && _c2 !== void 0 ? _c2 : (_g = (_f = (_e2 = (_d2 = window.top) === null || _d2 === void 0 ? void 0 : _d2.document) === null || _e2 === void 0 ? void 0 : _e2.env) === null || _f === void 0 ? void 0 : _f.SUGAR) === null || _g === void 0 ? void 0 : _g.config) !== null && _h !== void 0 ? _h : {}
     );
     return SSugarConfig._finalConfig;
   }
@@ -13374,9 +13366,10 @@ let SEnv$1 = class SEnv {
 };
 class SEnv2 extends SEnv$1 {
   static get env() {
+    var _a2;
     if (this._env)
       return this._env;
-    const envConfig = SSugarConfig.get("env");
+    const envConfig = (_a2 = SSugarConfig.get("env")) !== null && _a2 !== void 0 ? _a2 : {};
     const queryStringObj = __queryStringToObject(document.location.search);
     let finalEnv = "development";
     if (envConfig.env) {
@@ -13457,7 +13450,34 @@ globalThis && globalThis.__awaiter || function(thisArg, _arguments, P, generator
     step((generator = generator.apply(thisArg, _arguments || [])).next());
   });
 };
-var __awaiter$s = globalThis && globalThis.__awaiter || function(thisArg, _arguments, P, generator) {
+globalThis && globalThis.__awaiter || function(thisArg, _arguments, P, generator) {
+  function adopt(value) {
+    return value instanceof P ? value : new P(function(resolve) {
+      resolve(value);
+    });
+  }
+  return new (P || (P = Promise))(function(resolve, reject) {
+    function fulfilled(value) {
+      try {
+        step(generator.next(value));
+      } catch (e) {
+        reject(e);
+      }
+    }
+    function rejected(value) {
+      try {
+        step(generator["throw"](value));
+      } catch (e) {
+        reject(e);
+      }
+    }
+    function step(result2) {
+      result2.done ? resolve(result2.value) : adopt(result2.value).then(fulfilled, rejected);
+    }
+    step((generator = generator.apply(thisArg, _arguments || [])).next());
+  });
+};
+var __awaiter$x = globalThis && globalThis.__awaiter || function(thisArg, _arguments, P, generator) {
   function adopt(value) {
     return value instanceof P ? value : new P(function(resolve) {
       resolve(value);
@@ -13485,10 +13505,10 @@ var __awaiter$s = globalThis && globalThis.__awaiter || function(thisArg, _argum
   });
 };
 function __adoptStyleInShadowRoot($shadowRoot, $context = document) {
-  return __awaiter$s(this, void 0, void 0, function* () {
+  return __awaiter$x(this, void 0, void 0, function* () {
     const $links = $context.querySelectorAll('link[rel="stylesheet"]');
     if ($links && $shadowRoot) {
-      Array.from($links).forEach(($link) => __awaiter$s(this, void 0, void 0, function* () {
+      Array.from($links).forEach(($link) => __awaiter$x(this, void 0, void 0, function* () {
         $shadowRoot === null || $shadowRoot === void 0 ? void 0 : $shadowRoot.appendChild($link.cloneNode());
       }));
     }
@@ -13715,14 +13735,14 @@ function reloadStylesheets(settings) {
     link.href = link.href.replace(/\?.*|$/, "?" + Date.now());
   }
 }
-var _a$5, _b$4;
+var _a$6, _b$5;
 let oldX = 0, oldY = 0;
 const threshold = 0;
 try {
-  (_a$5 = document === null || document === void 0 ? void 0 : document.addEventListener) === null || _a$5 === void 0 ? void 0 : _a$5.call(document, "pointermove", (e) => {
+  (_a$6 = document === null || document === void 0 ? void 0 : document.addEventListener) === null || _a$6 === void 0 ? void 0 : _a$6.call(document, "pointermove", (e) => {
     calculateDirection(e);
   });
-  (_b$4 = document === null || document === void 0 ? void 0 : document.addEventListener) === null || _b$4 === void 0 ? void 0 : _b$4.call(document, "pointerdown", (e) => {
+  (_b$5 = document === null || document === void 0 ? void 0 : document.addEventListener) === null || _b$5 === void 0 ? void 0 : _b$5.call(document, "pointerdown", (e) => {
     calculateDirection(e);
   });
 } catch (e) {
@@ -13743,45 +13763,7 @@ function calculateDirection(e) {
     oldY = e.pageY;
   }
 }
-function __onSwipe(elm, cb, settings = {}) {
-  settings = Object.assign({ threshold: 100 }, settings);
-  let touchstartX = 0;
-  let touchstartY = 0;
-  let touchendX = 0;
-  let touchendY = 0;
-  const gesuredZone = elm;
-  gesuredZone.addEventListener("touchstart", function(event) {
-    touchstartX = event.changedTouches[0].screenX;
-    touchstartY = event.changedTouches[0].screenY;
-  }, false);
-  gesuredZone.addEventListener("touchend", function(event) {
-    touchendX = event.changedTouches[0].screenX;
-    touchendY = event.changedTouches[0].screenY;
-    handleGesure();
-  }, false);
-  function handleGesure() {
-    const swipeNfo = {
-      distanceX: Math.abs(touchendX - touchstartX),
-      distanceY: Math.abs(touchendY - touchstartY)
-    };
-    if (touchendX + settings.threshold < touchstartX) {
-      swipeNfo.left = true;
-    }
-    if (touchendX - settings.threshold > touchstartX) {
-      swipeNfo.right = true;
-    }
-    if (touchendY + settings.threshold < touchstartY) {
-      swipeNfo.up = true;
-    }
-    if (touchendY - settings.threshold > touchstartY) {
-      swipeNfo.down = true;
-    }
-    if (swipeNfo.left || swipeNfo.right || swipeNfo.down || swipeNfo.up) {
-      cb(swipeNfo);
-    }
-  }
-}
-var __awaiter$r = globalThis && globalThis.__awaiter || function(thisArg, _arguments, P, generator) {
+var __awaiter$w = globalThis && globalThis.__awaiter || function(thisArg, _arguments, P, generator) {
   function adopt(value) {
     return value instanceof P ? value : new P(function(resolve) {
       resolve(value);
@@ -13828,7 +13810,7 @@ const triggers = [
 ];
 function __when($elm, trigger2, settings) {
   const finalSettings = Object.assign({ whenInViewport: {}, whenNearViewport: {}, whenOutOfViewport: {}, whenInteract: {}, whenVisible: {}, whenStylesheetsReady: {} }, settings !== null && settings !== void 0 ? settings : {});
-  return new Promise((resolve, reject) => __awaiter$r(this, void 0, void 0, function* () {
+  return new Promise((resolve, reject) => __awaiter$w(this, void 0, void 0, function* () {
     if (!Array.isArray(trigger2))
       trigger2 = trigger2.split(",").map((t) => t.trim());
     const promises = [];
@@ -13936,7 +13918,7 @@ function __whenDomReady() {
     }
   });
 }
-var __awaiter$q = globalThis && globalThis.__awaiter || function(thisArg, _arguments, P, generator) {
+var __awaiter$v = globalThis && globalThis.__awaiter || function(thisArg, _arguments, P, generator) {
   function adopt(value) {
     return value instanceof P ? value : new P(function(resolve) {
       resolve(value);
@@ -13974,7 +13956,7 @@ function __whenEntersViewport(elm, settings = {}) {
   }
   settings = Object.assign({}, settings);
   let observer, resizeTimeout;
-  return new Promise((resolve) => __awaiter$q(this, void 0, void 0, function* () {
+  return new Promise((resolve) => __awaiter$v(this, void 0, void 0, function* () {
     var _a2;
     const options = {
       root: null,
@@ -14232,7 +14214,7 @@ function whenLod(level) {
     });
   });
 }
-var __awaiter$p = globalThis && globalThis.__awaiter || function(thisArg, _arguments, P, generator) {
+var __awaiter$u = globalThis && globalThis.__awaiter || function(thisArg, _arguments, P, generator) {
   function adopt(value) {
     return value instanceof P ? value : new P(function(resolve) {
       resolve(value);
@@ -14273,7 +14255,7 @@ function __whenNearViewport(elm, settings = {}) {
   let $closest = __closestScrollable(elm);
   if (($closest === null || $closest === void 0 ? void 0 : $closest.tagName) === "HTML")
     $closest = null;
-  return new Promise((resolve) => __awaiter$p(this, void 0, void 0, function* () {
+  return new Promise((resolve) => __awaiter$u(this, void 0, void 0, function* () {
     var _a2;
     const options = {
       root: $closest,
@@ -14429,78 +14411,6 @@ function __whenVisible($elm, settings) {
     return pro;
   });
 }
-function __scrollLeft() {
-  return window.pageXOffset || document.scrollLeft || document.body.scrollLeft;
-}
-function scrollTop() {
-  return window.pageYOffset || document.scrollTop || document.body.scrollTop;
-}
-function __elementAreaStats($elm, settings) {
-  const finalSettings = Object.assign({ relativeTo: "visible" }, settings !== null && settings !== void 0 ? settings : {});
-  if (finalSettings.relativeTo === "visible") {
-    finalSettings.relativeTo = __traverseUp($elm, ($item) => {
-      const style = window.getComputedStyle($item);
-      if (style.overflow === "hidden")
-        return $item;
-      return false;
-    });
-  }
-  let rootBoundingRect;
-  if ((finalSettings === null || finalSettings === void 0 ? void 0 : finalSettings.relativeTo) && finalSettings.relativeTo instanceof HTMLElement) {
-    rootBoundingRect = finalSettings === null || finalSettings === void 0 ? void 0 : finalSettings.relativeTo.getBoundingClientRect();
-  } else {
-    rootBoundingRect = {
-      top: scrollTop(),
-      left: __scrollLeft(),
-      width: Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0),
-      height: Math.max(document.documentElement.clientHeight || 0, window.innerHeight || 0)
-    };
-  }
-  const boundingRect = $elm.getBoundingClientRect();
-  const left = boundingRect.left - rootBoundingRect.left, top = boundingRect.top - rootBoundingRect.top;
-  let percentageX, percentageY;
-  if (boundingRect.left + boundingRect.width < rootBoundingRect.left) {
-    percentageX = 0;
-  } else if (boundingRect.left > rootBoundingRect.left + rootBoundingRect.width) {
-    percentageX = 0;
-  } else if (boundingRect.left >= rootBoundingRect.left && boundingRect.left + boundingRect.width <= rootBoundingRect.left + rootBoundingRect.width) {
-    percentageX = 100;
-  } else if (boundingRect.left < rootBoundingRect.left && boundingRect.left + boundingRect.width > rootBoundingRect.left + rootBoundingRect.width) {
-    percentageX = 100 / boundingRect.width * rootBoundingRect.width;
-  } else if (boundingRect.left < rootBoundingRect.left && boundingRect.left + boundingRect.width <= rootBoundingRect.left + rootBoundingRect.width) {
-    percentageX = 100 / boundingRect.width * (boundingRect.left + boundingRect.width - rootBoundingRect.left);
-  } else if (boundingRect.left < rootBoundingRect.left + rootBoundingRect.width && boundingRect.left + boundingRect.width > rootBoundingRect.left + rootBoundingRect.width) {
-    percentageX = 100 / boundingRect.width * (boundingRect.width - (boundingRect.left + boundingRect.width - (rootBoundingRect.left + rootBoundingRect.width)));
-  }
-  if (boundingRect.left + boundingRect.height < rootBoundingRect.top) {
-    percentageY = 0;
-  } else if (boundingRect.top > rootBoundingRect.top + rootBoundingRect.height) {
-    percentageY = 0;
-  } else if (boundingRect.top >= rootBoundingRect.top && boundingRect.top + boundingRect.height <= rootBoundingRect.top + rootBoundingRect.height) {
-    percentageY = 100;
-  } else if (boundingRect.top < rootBoundingRect.top && boundingRect.top + boundingRect.height > rootBoundingRect.top + rootBoundingRect.height) {
-    percentageY = 100 / boundingRect.height * rootBoundingRect.height;
-  } else if (boundingRect.top < rootBoundingRect.top && boundingRect.top + boundingRect.height <= rootBoundingRect.top + rootBoundingRect.height) {
-    percentageY = 100 / boundingRect.height * (boundingRect.top + boundingRect.height - rootBoundingRect.top);
-  } else if (boundingRect.top < rootBoundingRect.top + rootBoundingRect.height && boundingRect.top + boundingRect.height > rootBoundingRect.top + rootBoundingRect.height) {
-    percentageY = 100 / boundingRect.height * (boundingRect.height - (boundingRect.top + boundingRect.height - (rootBoundingRect.top + rootBoundingRect.height)));
-  }
-  const surfaceX = boundingRect.width / 100 * percentageX, surfaceY = boundingRect.height / 100 * percentageY;
-  const percentage = percentageX > 0 && percentageY > 0 ? 100 / 200 * (percentageX + percentageY) : 0;
-  return {
-    percentage,
-    percentageX: percentageY > 0 ? percentageX : 0,
-    percentageY: percentageX > 0 ? percentageY : 0,
-    centerOffsetX: (rootBoundingRect.width * 0.5 - left - boundingRect.width * 0.5) * -1,
-    centerOffsetY: (rootBoundingRect.height * 0.5 - top - boundingRect.height * 0.5) * -1,
-    width: percentageX > 0 && percentageY > 0 ? surfaceX : 0,
-    height: percentageY > 0 && percentageX > 0 ? surfaceY : 0,
-    left: boundingRect.left,
-    relLeft: left,
-    top: boundingRect.top,
-    relTop: top
-  };
-}
 function __addEventListener($elm, eventNames, callback = null, useCapture = false) {
   if (!Array.isArray(eventNames))
     eventNames = eventNames.split(",").map((e) => e.trim());
@@ -14584,6 +14494,14 @@ function __injectStyle(style, settings) {
   }
   return $tag;
 }
+function autoResize($textarea) {
+  $textarea.style.boxSizing = "border-box";
+  var offset2 = $textarea.offsetHeight - $textarea.clientHeight;
+  $textarea.addEventListener("input", function(event) {
+    event.target.style.height = "auto";
+    event.target.style.height = event.target.scrollHeight + offset2 + "px";
+  });
+}
 function __isInIframe() {
   try {
     return window.self !== window.top;
@@ -14593,9 +14511,9 @@ function __isInIframe() {
 }
 function __isInViewport(elm, settings = {}) {
   settings = Object.assign({}, settings);
-  const scrollTop2 = document.documentElement.scrollTop || document.body.scrollTop, scrollLeft = document.documentElement.scrollLeft || document.body.scrollLeft;
+  const scrollTop = document.documentElement.scrollTop || document.body.scrollTop, scrollLeft = document.documentElement.scrollLeft || document.body.scrollLeft;
   const containerHeight = window.innerHeight || document.documentElement.clientHeight, containerWidth = window.innerWidth || document.documentElement.clientWidth, rect = elm.getBoundingClientRect();
-  const top = rect.top - scrollTop2, left = rect.left - scrollLeft, right = rect.right - scrollLeft, bottom = rect.bottom - scrollTop2;
+  const top = rect.top - scrollTop, left = rect.left - scrollLeft, right = rect.right - scrollLeft, bottom = rect.bottom - scrollTop;
   const isTopIn = top - containerHeight <= 0, isBottomIn = bottom <= containerHeight, isLeftIn = left >= 0 && left <= containerWidth, isRightIn = right >= 0 && right <= containerWidth;
   if ((isTopIn || isBottomIn) && (isLeftIn || isRightIn)) {
     return true;
@@ -14632,17 +14550,17 @@ function __isScrollable($elm, settings) {
     return true;
   return false;
 }
-var _a$4, _b$3;
+var _a$5, _b$4;
 let _isUserScrolling = false, _isUserScrollingTimeout;
 try {
-  (_a$4 = document === null || document === void 0 ? void 0 : document.addEventListener) === null || _a$4 === void 0 ? void 0 : _a$4.call(document, "wheel", (e) => {
+  (_a$5 = document === null || document === void 0 ? void 0 : document.addEventListener) === null || _a$5 === void 0 ? void 0 : _a$5.call(document, "wheel", (e) => {
     _isUserScrolling = true;
     clearTimeout(_isUserScrollingTimeout);
     _isUserScrollingTimeout = setTimeout(() => {
       _isUserScrolling = false;
     }, 200);
   });
-  (_b$3 = document === null || document === void 0 ? void 0 : document.addEventListener) === null || _b$3 === void 0 ? void 0 : _b$3.call(document, "touchmove", (e) => {
+  (_b$4 = document === null || document === void 0 ? void 0 : document.addEventListener) === null || _b$4 === void 0 ? void 0 : _b$4.call(document, "touchmove", (e) => {
     _isUserScrolling = true;
     clearTimeout(_isUserScrollingTimeout);
     _isUserScrollingTimeout = setTimeout(() => {
@@ -14673,17 +14591,7 @@ function __closestScrollable($elm, selector) {
   const res = __traverseUp($elm, ($e) => __isScrollable($e));
   return res;
 }
-function __matches(el, selector) {
-  if (el.nodeName == "#comment" || el.nodeName == "#text") {
-    return false;
-  }
-  const p = Element.prototype;
-  const f = p.matches || p.webkitMatchesSelector || p.mozMatchesSelector || p.msMatchesSelector || function(s) {
-    return [].indexOf.call(document.querySelectorAll(s), this) !== -1;
-  };
-  return f.call(el, selector);
-}
-var __awaiter$o = globalThis && globalThis.__awaiter || function(thisArg, _arguments, P, generator) {
+var __awaiter$t = globalThis && globalThis.__awaiter || function(thisArg, _arguments, P, generator) {
   function adopt(value) {
     return value instanceof P ? value : new P(function(resolve) {
       resolve(value);
@@ -14762,7 +14670,7 @@ function __querySelectorLive(selector, cb = null, settings = {}, _isFirstLevel =
     }
   }
   function processNode(node, sel) {
-    return __awaiter$o(this, void 0, void 0, function* () {
+    return __awaiter$t(this, void 0, void 0, function* () {
       if (!node.matches || isCanceled()) {
         return;
       }
@@ -14791,7 +14699,7 @@ function __querySelectorLive(selector, cb = null, settings = {}, _isFirstLevel =
   }
   if (settings.scopes && (settings.rootNode === document || !((_b2 = (_a2 = settings.rootNode) === null || _a2 === void 0 ? void 0 : _a2.hasAttribute) === null || _b2 === void 0 ? void 0 : _b2.call(_a2, "s-scope")))) {
     let isAfterCalledByScopeId = {};
-    innerPromises.push(__querySelectorLive("[s-scope]", ($scope) => __awaiter$o(this, void 0, void 0, function* () {
+    innerPromises.push(__querySelectorLive("[s-scope]", ($scope) => __awaiter$t(this, void 0, void 0, function* () {
       const scopeId = $scope.id || `s-scope-${__uniqid()}`;
       if ($scope.id !== scopeId) {
         $scope.setAttribute("id", scopeId);
@@ -14874,20 +14782,6 @@ function __querySelectorLive(selector, cb = null, settings = {}, _isFirstLevel =
     observer === null || observer === void 0 ? void 0 : observer.disconnect();
   });
   return pro;
-}
-function __querySelectorUp($elm, selector) {
-  const originalElm = $elm;
-  $elm = $elm.parentNode;
-  while ($elm && $elm != originalElm.ownerDocument) {
-    if (typeof selector === "function") {
-      if (selector($elm))
-        return $elm;
-    } else if (typeof selector === "string" && __matches($elm, selector)) {
-      return $elm;
-    }
-    $elm = $elm.parentNode;
-  }
-  return null;
 }
 function __preventScrollRestoration() {
   if ("scrollRestoration" in history) {
@@ -15447,41 +15341,6 @@ class SSugarElement {
     return this.overrideMatrix(newMatrix);
   }
 }
-function __easeOutQuad(t) {
-  return t * (2 - t);
-}
-function __easeInOutQuart(t) {
-  return t < 0.5 ? 8 * t * t * t * t : 1 - 8 * --t * t * t * t;
-}
-function __easeInterval(duration, cb, settings = {}) {
-  let cleared = false, animationFrame;
-  const pro = new SPromise(({ resolve, reject, emit, on }) => {
-    settings = Object.assign({ interval: 1e3 / 25, easing: __easeInOutQuart, from: 0, to: 100, onEnd: void 0 }, settings);
-    const startTime = Date.now();
-    on("cancel", () => {
-      cleared = true;
-      cancelAnimationFrame(animationFrame);
-    });
-    function animate() {
-      var _a2;
-      if (cleared)
-        return;
-      const percent = 100 / duration * (Date.now() - startTime);
-      const easedPercent = settings.easing(percent / 100) * 100;
-      cb(easedPercent);
-      if (percent < 100) {
-        if (cleared)
-          return;
-        animationFrame = requestAnimationFrame(animate);
-      } else {
-        (_a2 = settings.onEnd) === null || _a2 === void 0 ? void 0 : _a2.call(settings);
-        resolve(easedPercent);
-      }
-    }
-    animate();
-  });
-  return pro;
-}
 function __compressCssVarName(name2) {
   function compress(varName) {
     const base64 = varName.toLowerCase().replace(/\-/gm, "");
@@ -15817,10 +15676,10 @@ async function detectOverflow(middlewareArguments, options) {
     right: elementClientRect.right - clippingClientRect.right + paddingObject.right
   };
 }
-const min$2 = Math.min;
-const max$3 = Math.max;
-function within(min$12, value, max$12) {
-  return max$3(min$12, min$2(value, max$12));
+const min$1 = Math.min;
+const max$2 = Math.max;
+function within(min$1$1, value, max$12) {
+  return max$2(min$1$1, min$1(value, max$12));
 }
 const arrow = (options) => ({
   name: "arrow",
@@ -16282,8 +16141,8 @@ const inline = function(options) {
             };
           }
           const isLeftSide = getSide(placement) === "left";
-          const maxRight = max$3(...clientRects.map((rect) => rect.right));
-          const minLeft = min$2(...clientRects.map((rect) => rect.left));
+          const maxRight = max$2(...clientRects.map((rect) => rect.right));
+          const minLeft = min$1(...clientRects.map((rect) => rect.left));
           const measureRects = clientRects.filter((rect) => isLeftSide ? rect.left === minLeft : rect.right === maxRight);
           const top = measureRects[0].top;
           const bottom = measureRects[measureRects.length - 1].bottom;
@@ -16384,8 +16243,8 @@ function isContainingBlock(element) {
 function isLayoutViewport() {
   return !/^((?!chrome|android).)*safari/i.test(getUAString());
 }
-const min$1 = Math.min;
-const max$2 = Math.max;
+const min = Math.min;
+const max$1 = Math.max;
 const round = Math.round;
 function getBoundingClientRect(element, includeScale, isFixedStrategy) {
   var _win$visualViewport$o, _win$visualViewport, _win$visualViewport$o2, _win$visualViewport2;
@@ -16598,12 +16457,12 @@ function getDocumentRect(element) {
   const html2 = getDocumentElement(element);
   const scroll = getNodeScroll(element);
   const body = (_element$ownerDocumen = element.ownerDocument) == null ? void 0 : _element$ownerDocumen.body;
-  const width = max$2(html2.scrollWidth, html2.clientWidth, body ? body.scrollWidth : 0, body ? body.clientWidth : 0);
-  const height = max$2(html2.scrollHeight, html2.clientHeight, body ? body.scrollHeight : 0, body ? body.clientHeight : 0);
+  const width = max$1(html2.scrollWidth, html2.clientWidth, body ? body.scrollWidth : 0, body ? body.clientWidth : 0);
+  const height = max$1(html2.scrollHeight, html2.clientHeight, body ? body.scrollHeight : 0, body ? body.clientHeight : 0);
   let x = -scroll.scrollLeft + getWindowScrollBarX(element);
   const y = -scroll.scrollTop;
   if (getComputedStyle$1(body || html2).direction === "rtl") {
-    x += max$2(html2.clientWidth, body ? body.clientWidth : 0) - width;
+    x += max$1(html2.clientWidth, body ? body.clientWidth : 0) - width;
   }
   return {
     width,
@@ -16697,10 +16556,10 @@ function getClippingRect(_ref) {
   const firstClippingAncestor = clippingAncestors[0];
   const clippingRect = clippingAncestors.reduce((accRect, clippingAncestor) => {
     const rect = getClientRectFromClippingAncestor(element, clippingAncestor, strategy);
-    accRect.top = max$2(rect.top, accRect.top);
-    accRect.right = min$1(rect.right, accRect.right);
-    accRect.bottom = min$1(rect.bottom, accRect.bottom);
-    accRect.left = max$2(rect.left, accRect.left);
+    accRect.top = max$1(rect.top, accRect.top);
+    accRect.right = min(rect.right, accRect.right);
+    accRect.bottom = min(rect.bottom, accRect.bottom);
+    accRect.left = max$1(rect.left, accRect.left);
     return accRect;
   }, getClientRectFromClippingAncestor(element, firstClippingAncestor, strategy));
   return {
@@ -16797,7 +16656,7 @@ const computePosition = (reference, floating, options) => computePosition$1(refe
   platform,
   ...options
 });
-var __awaiter$n = globalThis && globalThis.__awaiter || function(thisArg, _arguments, P, generator) {
+var __awaiter$s = globalThis && globalThis.__awaiter || function(thisArg, _arguments, P, generator) {
   function adopt(value) {
     return value instanceof P ? value : new P(function(resolve) {
       resolve(value);
@@ -16852,7 +16711,7 @@ function __makeFloat($elm, $depending, settings) {
   if (finalSettings.arrowSize) {
     $elm.style.setProperty(`--arrow-size`, `${finalSettings.arrowSize}px`);
   }
-  const update = () => __awaiter$n(this, void 0, void 0, function* () {
+  const update = () => __awaiter$s(this, void 0, void 0, function* () {
     yield computePosition($depending, $elm, {
       // @ts-ignore
       placement: finalSettings.position,
@@ -17052,7 +16911,7 @@ class SStdioSettingsInterface extends SInterface {
     };
   }
 }
-var __awaiter$m = globalThis && globalThis.__awaiter || function(thisArg, _arguments, P, generator) {
+var __awaiter$r = globalThis && globalThis.__awaiter || function(thisArg, _arguments, P, generator) {
   function adopt(value) {
     return value instanceof P ? value : new P(function(resolve) {
       resolve(value);
@@ -17136,8 +16995,8 @@ class SStdio extends SClass {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
    */
   static new(id, sources, adapters, settings = {}) {
-    return new Promise((resolve) => __awaiter$m(this, void 0, void 0, function* () {
-      const __new = (yield __vitePreload(() => import("./new-5d8ade04.js"), true ? [] : void 0)).default;
+    return new Promise((resolve) => __awaiter$r(this, void 0, void 0, function* () {
+      const __new = (yield __vitePreload(() => import("./new-5c9f7bdd.js"), true ? [] : void 0)).default;
       return __new(id, sources, adapters, settings);
     }));
   }
@@ -17255,7 +17114,7 @@ class SStdio extends SClass {
       if (this._lastLogObj && this._lastLogObj.temp) {
         if (!this.clearLast || typeof this.clearLast !== "function")
           throw new Error(`You try to clear the last log but it does not implements the "<cyan>clearLast</cyan>" method`);
-        (() => __awaiter$m(this, void 0, void 0, function* () {
+        (() => __awaiter$r(this, void 0, void 0, function* () {
           if (!this.clearLast)
             return;
           this._applyOnAdapters((adapter) => {
@@ -17269,7 +17128,7 @@ class SStdio extends SClass {
         this._isClearing = true;
         if (!this.clear || typeof this.clear !== "function")
           throw new Error(`You try to clear the "<yellow>${this.constructor.name}</yellow>" stdio but it does not implements the "<cyan>clear</cyan>" method`);
-        (() => __awaiter$m(this, void 0, void 0, function* () {
+        (() => __awaiter$r(this, void 0, void 0, function* () {
           this._applyOnAdapters((adapter) => {
             var _a2;
             (_a2 = adapter.clear) === null || _a2 === void 0 ? void 0 : _a2.call(adapter);
@@ -17303,7 +17162,7 @@ class SStdio extends SClass {
    */
   // _isCleared = true;
   ask(askObj) {
-    return __awaiter$m(this, void 0, void 0, function* () {
+    return __awaiter$r(this, void 0, void 0, function* () {
       let ask = __deepMerge(this.settings.defaultAskObj, askObj);
       const answer = yield this.adapters[0].ask(ask);
       return answer;
@@ -17328,7 +17187,7 @@ class SStdioAdapter extends SClass {
     super(settings);
   }
 }
-var __awaiter$l = globalThis && globalThis.__awaiter || function(thisArg, _arguments, P, generator) {
+var __awaiter$q = globalThis && globalThis.__awaiter || function(thisArg, _arguments, P, generator) {
   function adopt(value) {
     return value instanceof P ? value : new P(function(resolve) {
       resolve(value);
@@ -17355,10 +17214,10 @@ var __awaiter$l = globalThis && globalThis.__awaiter || function(thisArg, _argum
     step((generator = generator.apply(thisArg, _arguments || [])).next());
   });
 };
-var _a$3;
+var _a$4;
 const _nativeConsole$1 = {};
 for (let key of ["log", "error", "warn", "verbose"]) {
-  _nativeConsole$1[key] = (_a$3 = console[key]) !== null && _a$3 !== void 0 ? _a$3 : console.log;
+  _nativeConsole$1[key] = (_a$4 = console[key]) !== null && _a$4 !== void 0 ? _a$4 : console.log;
 }
 class SStdioBasicAdapter extends SStdioAdapter {
   /**
@@ -17447,12 +17306,12 @@ class SStdioBasicAdapter extends SStdioAdapter {
    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
    */
   _ask(askObj) {
-    return new SPromise(({ resolve, reject, emit }) => __awaiter$l(this, void 0, void 0, function* () {
+    return new SPromise(({ resolve, reject, emit }) => __awaiter$q(this, void 0, void 0, function* () {
       throw new Error(`<red>[SStdioBasicAdapter]</red> The "ask" feature has not been implemented yet in the browser environment...`);
     }));
   }
 }
-var __awaiter$k = globalThis && globalThis.__awaiter || function(thisArg, _arguments, P, generator) {
+var __awaiter$p = globalThis && globalThis.__awaiter || function(thisArg, _arguments, P, generator) {
   function adopt(value) {
     return value instanceof P ? value : new P(function(resolve) {
       resolve(value);
@@ -17491,7 +17350,7 @@ class SStdioSource extends SClass {
     });
   }
   ask(askObj) {
-    return new Promise((resolve, reject) => __awaiter$k(this, void 0, void 0, function* () {
+    return new Promise((resolve, reject) => __awaiter$p(this, void 0, void 0, function* () {
       let answer;
       for (let [key, fn2] of this._callbacks.ask.entries()) {
         answer = yield fn2(askObj);
@@ -17524,7 +17383,7 @@ class SStdioSource extends SClass {
     this._callbacks[event].splice(this._callbacks[event].indexOf(callback, 1));
   }
 }
-var __awaiter$j = globalThis && globalThis.__awaiter || function(thisArg, _arguments, P, generator) {
+var __awaiter$o = globalThis && globalThis.__awaiter || function(thisArg, _arguments, P, generator) {
   function adopt(value) {
     return value instanceof P ? value : new P(function(resolve) {
       resolve(value);
@@ -17560,7 +17419,7 @@ class SStdioConsoleSource extends SStdioSource {
     super(settings);
     this._tmpPrintedLogs = [];
     this._overrideNativeConsole();
-    console.ask = (askObj) => __awaiter$j(this, void 0, void 0, function* () {
+    console.ask = (askObj) => __awaiter$o(this, void 0, void 0, function* () {
       this._restoreNativeConsole();
       yield __wait(100);
       const res = yield this.ask(askObj);
@@ -17625,14 +17484,14 @@ class SStdioConsoleSource extends SStdioSource {
           group = group.trim().split("/").pop();
         }
         args = args.map((log) => {
-          var _a4, _b2, _c2;
+          var _a4, _b2, _c2, _d2;
           return new SLog({
-            type: (_a4 = log === null || log === void 0 ? void 0 : log.type) !== null && _a4 !== void 0 ? _a4 : SLog.TYPE_LOG,
+            type: (_b2 = (_a4 = log === null || log === void 0 ? void 0 : log.type) !== null && _a4 !== void 0 ? _a4 : key) !== null && _b2 !== void 0 ? _b2 : SLog.TYPE_LOG,
             value: log,
-            group: (_b2 = log === null || log === void 0 ? void 0 : log.group) !== null && _b2 !== void 0 ? _b2 : group,
+            group: (_c2 = log === null || log === void 0 ? void 0 : log.group) !== null && _c2 !== void 0 ? _c2 : group,
             notify: key === "notify" || (log === null || log === void 0 ? void 0 : log.notify),
             verbose: key === "verbose" || (log === null || log === void 0 ? void 0 : log.verbose),
-            metas: (_c2 = log === null || log === void 0 ? void 0 : log.metas) !== null && _c2 !== void 0 ? _c2 : {},
+            metas: (_d2 = log === null || log === void 0 ? void 0 : log.metas) !== null && _d2 !== void 0 ? _d2 : {},
             // @ts-ignore
             logger: _nativeConsole[key]
           });
@@ -17817,8 +17676,8 @@ function hexToRGBA(h) {
   }
   return { r, g: g2, b, a: 1 };
 }
-function __hexToRgba(hex2) {
-  return hexToRGBA(hex2);
+function __hexToRgba(hex) {
+  return hexToRGBA(hex);
 }
 function __parseRgba(rgbaString) {
   rgbaString = rgbaString.toLowerCase();
@@ -17868,24 +17727,24 @@ function __rgbaToHsla(r, g2, b, a = 1) {
   }
   return RGBAToHSLA(r, g2, b, a);
 }
-function __parseColor(color2, format2 = "rgba") {
-  color2 = color2.replace(/\s/g, "");
-  if (color2.startsWith("rgb")) {
-    color2 = __parseRgba(color2);
-  } else if (color2.startsWith("hsl")) {
-    color2 = __parseHsla(color2);
-    color2 = __hslaToRgba(color2.h, color2.s, color2.l);
-  } else if (color2.startsWith("#")) {
-    color2 = __hexToRgba(color2);
+function __parseColor(color, format2 = "rgba") {
+  color = color.replace(/\s/g, "");
+  if (color.startsWith("rgb")) {
+    color = __parseRgba(color);
+  } else if (color.startsWith("hsl")) {
+    color = __parseHsla(color);
+    color = __hslaToRgba(color.h, color.s, color.l);
+  } else if (color.startsWith("#")) {
+    color = __hexToRgba(color);
   }
   switch (format2) {
     case "hsla":
     case "hsl":
-      return __rgbaToHsla(color2);
+      return __rgbaToHsla(color);
     case "rgba":
     case "rgb":
     default:
-      return color2;
+      return color;
   }
 }
 function RGBToHex(r, g2, b) {
@@ -18149,7 +18008,7 @@ class SColor extends SClass {
    *
    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
    */
-  constructor(color2, settings) {
+  constructor(color, settings) {
     var _c2, _d2;
     super(__deepMerge(
       // @ts-ignore
@@ -18165,27 +18024,27 @@ class SColor extends SClass {
     this._b = 0;
     this._a = 1;
     this._format = "hexa";
-    color2 = this.getColor(color2);
-    this._originalSColor = color2;
-    if (typeof color2 === "string") {
+    color = this.getColor(color);
+    this._originalSColor = color;
+    if (typeof color === "string") {
       try {
-        this._parse(color2);
+        this._parse(color);
       } catch (e) {
       }
     } else {
-      if (color2.h !== void 0 && color2.s !== void 0 && color2.l !== void 0) {
-        this._h = color2.h;
-        this._s = color2.s;
-        this._l = color2.l;
-        this._a = (_c2 = color2.a) !== null && _c2 !== void 0 ? _c2 : 1;
-      } else if (color2.r !== void 0 && color2.g !== void 0 && color2.b !== void 0) {
-        const converted = __rgbaToHsla(color2.r, color2.g, color2.b, (_d2 = color2.a) !== null && _d2 !== void 0 ? _d2 : 1);
+      if (color.h !== void 0 && color.s !== void 0 && color.l !== void 0) {
+        this._h = color.h;
+        this._s = color.s;
+        this._l = color.l;
+        this._a = (_c2 = color.a) !== null && _c2 !== void 0 ? _c2 : 1;
+      } else if (color.r !== void 0 && color.g !== void 0 && color.b !== void 0) {
+        const converted = __rgbaToHsla(color.r, color.g, color.b, (_d2 = color.a) !== null && _d2 !== void 0 ? _d2 : 1);
         this._h = converted.h;
         this._s = converted.s;
         this._l = converted.l;
         this._a = converted.a;
       } else {
-        console.error(color2);
+        console.error(color);
         throw new Error("Sorry but this passed value is not a valid color object or string...");
       }
     }
@@ -18198,11 +18057,11 @@ class SColor extends SClass {
    * actual real color like color from the static colors listed in the SColor class or maybe
    * from the Sugar configured colors
    */
-  getColor(color2) {
-    if (typeof color2 == "string" && SColor.colors[color2.toLowerCase()]) {
-      return SColor.colors[color2.toLowerCase()];
+  getColor(color) {
+    if (typeof color == "string" && SColor.colors[color.toLowerCase()]) {
+      return SColor.colors[color.toLowerCase()];
     }
-    return color2;
+    return color;
   }
   /**
    * @name            _parse
@@ -18216,14 +18075,14 @@ class SColor extends SClass {
    *
    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
    */
-  _parse(color2) {
-    color2 = color2.replace(/\%/gm, "");
-    color2 = __convert(color2, "hsla");
-    this.h = color2.h;
-    this.s = color2.s;
-    this.l = color2.l;
-    this.a = color2.a;
-    return color2;
+  _parse(color) {
+    color = color.replace(/\%/gm, "");
+    color = __convert(color, "hsla");
+    this.h = color.h;
+    this.s = color.s;
+    this.l = color.l;
+    this.a = color.a;
+    return color;
   }
   /**
    * @name              convert2
@@ -20105,7 +19964,7 @@ const require$$0 = {
   properties
 };
 knownCssProperties.all = require$$0.properties;
-var __awaiter$i = globalThis && globalThis.__awaiter || function(thisArg, _arguments, P, generator) {
+var __awaiter$n = globalThis && globalThis.__awaiter || function(thisArg, _arguments, P, generator) {
   function adopt(value) {
     return value instanceof P ? value : new P(function(resolve) {
       resolve(value);
@@ -20480,9 +20339,9 @@ class SThemeBase extends SEventEmitter2 {
    * @since       2.0.0
    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
    */
-  static resolveColor(color2, schema, modifier, settings) {
+  static resolveColor(color, schema, modifier, settings) {
     const theme = this.getTheme(settings === null || settings === void 0 ? void 0 : settings.theme, settings === null || settings === void 0 ? void 0 : settings.variant);
-    return theme.resolveColor(color2, schema, modifier, settings);
+    return theme.resolveColor(color, schema, modifier, settings);
   }
   /**
    * @name        cssVar
@@ -20511,137 +20370,6 @@ class SThemeBase extends SEventEmitter2 {
     return v;
   }
   /**
-   * @name                buildMediaQuery
-   * @type                Function
-   * @status              beta
-   * @platform            js
-   * @platform            node
-   * @static
-   *
-   * This static method allows you to built a media query by passing args like "mobile", ">tablet", etc...
-   *
-   * @param               {String}    query    The media query you want to build
-   * @return              {String}                The builded media query (without brackets)
-   *
-   * @since               2.0.0
-   *
-   */
-  static buildMediaQuery(queryString, settings) {
-    var _a2, _b2, _c2, _d2;
-    let currentQueryList = [];
-    const mediaConfig = this.sortMedia(this.get("media")), sortedMedia = Object.keys(mediaConfig.queries);
-    const finalSettings = {
-      method: (_b2 = (_a2 = settings === null || settings === void 0 ? void 0 : settings.method) !== null && _a2 !== void 0 ? _a2 : mediaConfig.method) !== null && _b2 !== void 0 ? _b2 : "media",
-      containerName: (_d2 = (_c2 = settings === null || settings === void 0 ? void 0 : settings.containerName) !== null && _c2 !== void 0 ? _c2 : mediaConfig.containerName) !== null && _d2 !== void 0 ? _d2 : ""
-    };
-    const queryAr = queryString.split(" ").map((l) => l.trim()).filter((l) => l !== "");
-    queryAr.forEach((query, i) => {
-      if (query === "and" || query === "or") {
-        currentQueryList.push(query);
-        return;
-      }
-      const firstChar = query.slice(0, 1);
-      const firstTwoChar = query.slice(0, 2);
-      const lastChar = query.slice(-1);
-      let action = this.get("media.defaultAction");
-      let mediaName = query;
-      if (lastChar === "-" || lastChar === "|")
-        mediaName = mediaName.slice(0, -1);
-      if (firstTwoChar === ">=" || firstTwoChar === "<=" || firstTwoChar === "==") {
-        mediaName = mediaName.slice(2);
-        action = firstTwoChar;
-      } else if (firstChar === "<" || firstChar === ">" || firstChar === "=") {
-        mediaName = mediaName.slice(1);
-        action = firstChar;
-      }
-      let mediaQueryConfig;
-      if (typeof __parse(mediaName) === "number") {
-        switch (action) {
-          case ">":
-          case ">=":
-            mediaQueryConfig = {
-              minWidth: mediaName,
-              maxWidth: null
-            };
-            break;
-          case "<":
-          case "<=":
-            mediaQueryConfig = {
-              minWidth: null,
-              maxWidth: mediaName
-            };
-            break;
-          case "=":
-            mediaQueryConfig = {
-              minWidth: mediaName,
-              maxWidth: mediaName
-            };
-            break;
-        }
-      } else {
-        mediaQueryConfig = this.get("media.queries")[mediaName];
-        if (!mediaQueryConfig)
-          throw new Error(`<red>[postcssSugarPlugin.media]</red> Sorry but the requested media "<yellow>${mediaName}</yellow>" does not exists in the config. Here's the available medias: ${Object.keys(this.get("media.queries")).map((l) => `<green>${l}</green>`).join(",")}`);
-      }
-      const queryList = [];
-      Object.keys(mediaQueryConfig).forEach((prop) => {
-        const dashProp = __dashCase(prop);
-        let value = mediaQueryConfig[prop];
-        if (!value) {
-          if (prop === "minWidth") {
-            value = 0;
-          } else if (prop === "maxWidth") {
-            value = 99999;
-          }
-        }
-        if (["min-width", "max-width"].indexOf(dashProp) !== -1) {
-          if (action === ">") {
-            if (dashProp === "max-width") {
-              let argName = "min-width";
-              queryList.push(`(${argName}: ${value + 1}px)`);
-            }
-          } else if (action === "<") {
-            if (dashProp === "min-width") {
-              let argName = "max-width";
-              queryList.push(`(${argName}: ${value}px)`);
-            }
-          } else if (action === "=") {
-            queryList.push(`(${dashProp}: ${value}px)`);
-          } else if (action === ">=") {
-            if (sortedMedia.at(-1) === mediaName) {
-              return;
-            }
-            if (dashProp === "min-width") {
-              queryList.push(`(${dashProp}: ${value}px)`);
-            }
-          } else if (action === "<=") {
-            if (sortedMedia[0] === mediaName) {
-              return;
-            }
-            if (dashProp === "max-width") {
-              queryList.push(`(${dashProp}: ${value}px)`);
-            }
-          } else {
-            queryList.push(`(${dashProp}: ${value}px)`);
-          }
-        } else {
-          queryList.push(`(${dashProp}: ${value}px)`);
-        }
-      });
-      if (lastChar === "-") {
-        queryList.push("(orientation: landscape)");
-      } else if (lastChar === "|") {
-        queryList.push("(orientation: portrait)");
-      }
-      currentQueryList.push(queryList.join(" and "));
-    });
-    currentQueryList = currentQueryList.filter((l) => l.trim() !== "");
-    if (finalSettings.method === "container") {
-      return `@container ${finalSettings.containerName} ${currentQueryList.join(" ")}`;
-    }
-    return `@media ${currentQueryList.join(" ")}`;
-  }
-  /**
    * @name                resolveCssPropertyValue
    * @type                Function
    * @static
@@ -20667,12 +20395,12 @@ class SThemeBase extends SEventEmitter2 {
         return (_b2 = this.resolveFontSize(value, settings)) !== null && _b2 !== void 0 ? _b2 : value;
       case "color":
       case "background-color":
-        let color2 = value, schema;
+        let color = value, schema;
         if (Array.isArray(value) && value.length === 2) {
-          color2 = value[0];
+          color = value[0];
           schema = value[1];
         }
-        return (_c2 = this.resolveColor(color2, schema, null, Object.assign(Object.assign({}, settings !== null && settings !== void 0 ? settings : {}), { return: "value" }))) !== null && _c2 !== void 0 ? _c2 : value;
+        return (_c2 = this.resolveColor(color, schema, null, Object.assign(Object.assign({}, settings !== null && settings !== void 0 ? settings : {}), { return: "value" }))) !== null && _c2 !== void 0 ? _c2 : value;
       case "border-radius":
       case "border-top-left-radius":
       case "border-top-right-radius":
@@ -20781,7 +20509,7 @@ class SThemeBase extends SEventEmitter2 {
       const value = jsObject[originalProp];
       if (!value)
         return;
-      let color2, schema;
+      let color, schema;
       const medias = Object.keys(this.get("media.queries"));
       if (medias.includes(originalProp)) {
         propsStack.push(`@sugar.media(${prop.replace(/^@/, "")}) {`);
@@ -20796,22 +20524,22 @@ class SThemeBase extends SEventEmitter2 {
             propsStack.push(`@sugar.font.size(${value});`);
             break;
           case "color":
-            color2 = value;
+            color = value;
             schema = "";
             if (Array.isArray(value)) {
-              color2 = value[0];
+              color = value[0];
               schema = value[1];
             }
-            propsStack.push(`color: sugar.color(${color2}, ${schema});`);
+            propsStack.push(`color: sugar.color(${color}, ${schema});`);
             break;
           case "background-color":
-            color2 = value;
+            color = value;
             schema = "";
             if (Array.isArray(value)) {
-              color2 = value[0];
+              color = value[0];
               schema = value[1];
             }
-            propsStack.push(`background-color: sugar.color(${color2}, ${schema});`);
+            propsStack.push(`background-color: sugar.color(${color}, ${schema});`);
             break;
           case "border-radius":
           case "border-top-left-radius":
@@ -20880,10 +20608,10 @@ class SThemeBase extends SEventEmitter2 {
     let vars = [];
     for (let [key, value] of Object.entries(__flatten(obj))) {
       if (__isColor(value)) {
-        const color2 = key.match(/^color\.([a-zA-Z0-9]+)\./);
-        if (!(color2 === null || color2 === void 0 ? void 0 : color2[1]))
+        const color = key.match(/^color\.([a-zA-Z0-9]+)\./);
+        if (!(color === null || color === void 0 ? void 0 : color[1]))
           continue;
-        const props = this.remapCssColor(color2[1], value);
+        const props = this.remapCssColor(color[1], value);
         vars = [...vars, ...props.vars];
       }
       const varKey = key.replace(/\./gm, "-").replace(/:/gm, "-").replace(/\?/gm, "").replace(/--/gm, "-");
@@ -20918,17 +20646,17 @@ class SThemeBase extends SEventEmitter2 {
       properties: {}
     };
     if (__isColor(to)) {
-      const color2 = new SColor(to);
+      const color = new SColor(to);
       result2.vars = [
-        `${this.compressVarName(`--s-theme-color-${from2}-h`)}: ${color2.h};`,
-        `${this.compressVarName(`--s-theme-color-${from2}-s`)}: ${color2.s};`,
-        `${this.compressVarName(`--s-theme-color-${from2}-l`)}: ${color2.l};`,
-        `${this.compressVarName(`--s-theme-color-${from2}-a`)}: ${color2.a};`
+        `${this.compressVarName(`--s-theme-color-${from2}-h`)}: ${color.h};`,
+        `${this.compressVarName(`--s-theme-color-${from2}-s`)}: ${color.s};`,
+        `${this.compressVarName(`--s-theme-color-${from2}-l`)}: ${color.l};`,
+        `${this.compressVarName(`--s-theme-color-${from2}-a`)}: ${color.a};`
       ];
-      result2.properties[this.compressVarName(`--s-theme-color-${from2}-h`)] = color2.h;
-      result2.properties[this.compressVarName(`--s-theme-color-${from2}-s`)] = color2.s;
-      result2.properties[this.compressVarName(`--s-theme-color-${from2}-l`)] = color2.l;
-      result2.properties[this.compressVarName(`--s-theme-color-${from2}-a`)] = color2.a;
+      result2.properties[this.compressVarName(`--s-theme-color-${from2}-h`)] = color.h;
+      result2.properties[this.compressVarName(`--s-theme-color-${from2}-s`)] = color.s;
+      result2.properties[this.compressVarName(`--s-theme-color-${from2}-l`)] = color.l;
+      result2.properties[this.compressVarName(`--s-theme-color-${from2}-a`)] = color.a;
     } else {
       const toColorName = to.split("-").slice(0, 1)[0], fromColorName = from2.split("-").slice(0, 1)[0];
       let toColorVariant = to.split("-").pop();
@@ -21476,14 +21204,14 @@ class SThemeBase extends SEventEmitter2 {
    * @since       2.0.0
    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
    */
-  resolveColor(color2, schema, modifier, settings) {
+  resolveColor(color, schema, modifier, settings) {
     var _a2, _b2;
-    if (color2.match(/^(hsla?|rgba?|hsv)\(/))
-      return color2;
-    if (color2.match(/^var\(--/))
-      return color2;
+    if (color.match(/^(hsla?|rgba?|hsv)\(/))
+      return color;
+    if (color.match(/^var\(--/))
+      return color;
     const finalSettings = Object.assign({ return: "value" }, settings !== null && settings !== void 0 ? settings : {});
-    let colorName2 = color2;
+    let colorName2 = color;
     let colorSchemaName = schema !== null && schema !== void 0 ? schema : "";
     let colorModifier = modifier !== null && modifier !== void 0 ? modifier : "";
     if (colorSchemaName.match(/^--[a-z]+/)) {
@@ -21496,11 +21224,11 @@ class SThemeBase extends SEventEmitter2 {
     }
     let finalValue;
     if (__isColor(colorName2)) {
-      const color3 = new SColor(colorName2);
+      const color2 = new SColor(colorName2);
       if (colorModifier) {
-        color3.apply(colorModifier);
+        color2.apply(colorModifier);
       }
-      return color3.toString();
+      return color2.toString();
     } else {
       switch (finalSettings.return) {
         case "var":
@@ -21548,7 +21276,7 @@ class SThemeBase extends SEventEmitter2 {
           break;
         case "value":
         default:
-          const colorValue = (_b2 = this.getSafe(`color.${color2}`)) !== null && _b2 !== void 0 ? _b2 : color2;
+          const colorValue = (_b2 = this.getSafe(`color.${color}`)) !== null && _b2 !== void 0 ? _b2 : color;
           if (!schema && !modifier) {
             finalValue = colorValue;
           }
@@ -21556,7 +21284,7 @@ class SThemeBase extends SEventEmitter2 {
           if (schema) {
             let finalSchema = schema;
             if (typeof schema === "string") {
-              finalSchema = this.getSafe(`colorSchema.${schema}.color.${color2}`);
+              finalSchema = this.getSafe(`colorSchema.${schema}.color.${color}`);
               if (!finalSchema) {
                 finalSchema = this.getSafe(`colorSchema.${schema}`);
               }
@@ -21591,7 +21319,7 @@ class SThemeBase extends SEventEmitter2 {
    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
    */
   loopOnColors(callback) {
-    return __awaiter$i(this, void 0, void 0, function* () {
+    return __awaiter$n(this, void 0, void 0, function* () {
       const colorsObj = this.get("color"), colorSchemasObj = this.get("colorSchema");
       for (let [colorName2, colorValue] of Object.entries(colorsObj)) {
         const c = new SColor(colorValue);
@@ -21919,8 +21647,8 @@ class STheme extends SThemeBase {
    * @since       2.0.0
    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
    */
-  static applyCurrentColor(color2, $context = document.querySelector("html")) {
-    const vars = this.remapCssColor("current", color2);
+  static applyCurrentColor(color, $context = document.querySelector("html")) {
+    const vars = this.remapCssColor("current", color);
     for (let [key, value] of Object.entries(vars.properties)) {
       $context.style.setProperty(key, value);
     }
@@ -21960,8 +21688,8 @@ class STheme extends SThemeBase {
    * @since           2.0.0
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
    */
-  setColor(color2, value) {
-    this.set(`color.${color2}.color`, value);
+  setColor(color, value) {
+    this.set(`color.${color}.color`, value);
   }
   /**
    * @name            set
@@ -22006,9 +21734,9 @@ class STheme extends SThemeBase {
     $wrapper.appendChild($elm);
     $context.appendChild($wrapper);
     const style = getComputedStyle($elm);
-    const color2 = new SColor(style.backgroundColor);
+    const color = new SColor(style.backgroundColor);
     $wrapper.remove();
-    return color2;
+    return color;
   }
   /**
    * @name            isDarkMode
@@ -22121,8 +21849,8 @@ class STheme extends SThemeBase {
   }
 }
 STheme._defaultThemeMetas = {};
-var _a$2;
-if ((_a$2 = import.meta) === null || _a$2 === void 0 ? void 0 : _a$2.hot) {
+var _a$3;
+if ((_a$3 = import.meta) === null || _a$3 === void 0 ? void 0 : _a$3.hot) {
   (void 0).on("sugar.update.css", (data) => {
     console.log("RELOAD", data);
     reloadStylesheets();
@@ -22205,14 +21933,14 @@ class SFront extends SClass {
         return true;
       if (settings.logs === false)
         return false;
-      if (__isInIframe())
+      if (__isInIframe() && ["log", "verbose"].includes(log.type))
         return false;
       return true;
     });
     new SStdio("default", new SStdioConsoleSource(), new SStdioBasicAdapter());
     if (!SEnv2.is("production") && !__isInIframe()) {
-      const color2 = SEnv2.env.ENV === "production" ? "red" : SEnv2.env.ENV === "staging" ? "cyan" : "green";
-      console.log(`<yellow>[SFront]</yellow> Current environment is "<${color2}>${SEnv2.env.ENV}</${color2}>"`);
+      const color = SEnv2.env.ENV === "production" ? "red" : SEnv2.env.ENV === "staging" ? "cyan" : "green";
+      console.log(`<yellow>[SFront]</yellow> Current environment is "<${color}>${SEnv2.env.ENV}</${color}>"`);
       if ((_a2 = document.env) === null || _a2 === void 0 ? void 0 : _a2.PACKAGE) {
         console.log(`<yellow>[SFront]</yellow> Project "<cyan>${document.env.PACKAGE.name}</cyan>" in version "<yellow>${document.env.PACKAGE.version}</yellow>"`);
       }
@@ -22646,6 +22374,426 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     this.state = Object.assign({}, this._originalState);
   }
 }
+let SMedia$1 = class SMedia extends SClass {
+  get defaultAction() {
+    return this._media.defaultAction;
+  }
+  get defaultMedia() {
+    var _a2;
+    return (_a2 = this._media.defaultMedia) !== null && _a2 !== void 0 ? _a2 : "desktop";
+  }
+  get medias() {
+    return Object.keys(this._media.queries);
+  }
+  /**
+   * @name            constructor
+   * @type            Function
+   * @constructor
+   *
+   * Constructor
+   *
+   * @since       2.0.0
+   * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+   */
+  constructor(settings = {}) {
+    super(__deepMerge({}, settings));
+  }
+  /**
+   * @name            countAreas
+   * @type            Function
+   *
+   * This method allows you to count the number of area from a layout string like "1 2 _ 3 3"
+   *
+   * @param               {String}    layout      The layout string you want to count areas from
+   * @return              {Number}                The count of areas in the passed layout string
+   *
+   * @since               2.0.0
+   * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+   */
+  countAreas(layout) {
+    const areas = [];
+    layout.split(/(\\n|\s)/).map((l) => l.trim()).filter((l) => l !== "_" && l !== "").forEach((areaId) => {
+      if (!areas.includes(areaId)) {
+        areas.push(areaId);
+      }
+    });
+    return areas.length;
+  }
+  /**
+   * @name                buildMediaQuery
+   * @type                Function
+   *
+   * This static method allows you to built a media query by passing args like "mobile", ">tablet", etc...
+   *
+   * @param               {String}    query    The media query you want to build
+   * @return              {String}                The builded media query (without brackets)
+   *
+   * @since               2.0.0
+   * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+   */
+  buildQuery(queryString, settings) {
+    var _a2;
+    let currentQueryList = [];
+    const finalSettings = {
+      method: (_a2 = settings === null || settings === void 0 ? void 0 : settings.method) !== null && _a2 !== void 0 ? _a2 : "media",
+      containerName: settings === null || settings === void 0 ? void 0 : settings.containerName
+    };
+    const queryAr = queryString.split(" ").map((l) => l.trim()).filter((l) => l !== "");
+    queryAr.forEach((query, i) => {
+      if (query === "and" || query === "or") {
+        currentQueryList.push(query);
+        return;
+      }
+      const firstChar = query.slice(0, 1);
+      const firstTwoChar = query.slice(0, 2);
+      const lastChar = query.slice(-1);
+      let action = this._media.defaultAction;
+      let mediaName = query;
+      if (lastChar === "-" || lastChar === "|")
+        mediaName = mediaName.slice(0, -1);
+      if (firstTwoChar === ">=" || firstTwoChar === "<=" || firstTwoChar === "==") {
+        mediaName = mediaName.slice(2);
+        action = firstTwoChar;
+      } else if (firstChar === "<" || firstChar === ">" || firstChar === "=") {
+        mediaName = mediaName.slice(1);
+        action = firstChar;
+      }
+      let mediaQueryConfig = this._media, sortedMedia2 = Object.keys(this._media.queries);
+      if (typeof __parse(mediaName) === "number") {
+        switch (action) {
+          case ">":
+          case ">=":
+            mediaQueryConfig = {
+              minWidth: mediaName,
+              maxWidth: null
+            };
+            break;
+          case "<":
+          case "<=":
+            mediaQueryConfig = {
+              minWidth: null,
+              maxWidth: mediaName
+            };
+            break;
+          case "=":
+            mediaQueryConfig = {
+              minWidth: mediaName,
+              maxWidth: mediaName
+            };
+            break;
+        }
+      } else {
+        mediaQueryConfig = this._media.queries[mediaName];
+        if (!mediaQueryConfig)
+          throw new Error(`<red>[postcssSugarPlugin.media]</red> Sorry but the requested media "<yellow>${mediaName}</yellow>" does not exists in the config. Here's the available medias: ${Object.keys(this._media.queries).map((l) => `<green>${l}</green>`).join(",")}`);
+      }
+      const queryList = [];
+      Object.keys(mediaQueryConfig).forEach((prop) => {
+        const dashProp = __dashCase(prop);
+        let value = mediaQueryConfig[prop];
+        if (!value) {
+          if (prop === "minWidth") {
+            value = 0;
+          } else if (prop === "maxWidth") {
+            value = 99999;
+          }
+        }
+        if (["min-width", "max-width"].indexOf(dashProp) !== -1) {
+          if (action === ">") {
+            if (dashProp === "max-width") {
+              let argName = "min-width";
+              queryList.push(`(${argName}: ${value + 1}px)`);
+            }
+          } else if (action === "<") {
+            if (dashProp === "min-width") {
+              let argName = "max-width";
+              queryList.push(`(${argName}: ${value}px)`);
+            }
+          } else if (action === "=") {
+            queryList.push(`(${dashProp}: ${value}px)`);
+          } else if (action === ">=") {
+            if (sortedMedia2.at(-1) === mediaName) {
+              return;
+            }
+            if (dashProp === "min-width") {
+              queryList.push(`(${dashProp}: ${value}px)`);
+            }
+          } else if (action === "<=") {
+            if (sortedMedia2[0] === mediaName) {
+              return;
+            }
+            if (dashProp === "max-width") {
+              queryList.push(`(${dashProp}: ${value}px)`);
+            }
+          } else {
+            queryList.push(`(${dashProp}: ${value}px)`);
+          }
+        } else {
+          queryList.push(`(${dashProp}: ${value}px)`);
+        }
+      });
+      if (lastChar === "-") {
+        queryList.push("(orientation: landscape)");
+      } else if (lastChar === "|") {
+        queryList.push("(orientation: portrait)");
+      }
+      currentQueryList.push(queryList.join(" and "));
+    });
+    currentQueryList = currentQueryList.filter((l) => l.trim() !== "");
+    if (finalSettings.method === "container") {
+      return `@container ${finalSettings.containerName} ${currentQueryList.join(" ")}`;
+    }
+    return `@media ${currentQueryList.join(" ")}`;
+  }
+  /**
+   * @name            layoutCss
+   * @type            Function
+   *
+   * This function takes a layout definition like "1 2 _ 3 3" and generate the css that will handle this layout.
+   * You can as well pass some informations the gap wanted, the alignement, etc...
+   *
+   * @param       {String|Array}         layout            The layout string defintion you want to generate the css for like "1 2 _ 3 3". It can also be an associative array like ["desktop" : "1 2", "mobile" : "1 _ 2"]
+   * @param       {Array}         [settings=null]      Some settings to configure your layout generation
+   * @return      {String}                         The resulting css
+   *
+   * @setting         {String}        [method='container']        The method to use. By default, it will use the @container query over the @media one cause it offers more possibilities like resizing the ".s-viewport" element
+   * @setting         {String}        [containerName='viewport']    The container name on which the @container query will refer to.
+   * @setting         {String}        [selector='#layout']       A css selector used to target the correct section/div...
+   * @setting         {String}        [gap=null]                 A gap value to apply on your layout
+   * @setting         {Boolean}       [gapBetween=true]           Specify if you want the gap only between the cells or all around
+   * @setting         {String}        [align='stretch']           The "align-items" value for your grid layout
+   * @setting         {String}        [justify='stretch']         The "justify-items" value for your grid layout
+   * @setting         {Boolean}       [minify=true]             Minify the output css or not
+   * @setting         {Array}         [scope=['bare','lnf','gap','align','justify']]             The scope(s) you want to generate
+   *
+   * @since       2.0.0
+   * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+   */
+  layoutCss(layout, settings) {
+    const finalSettings = Object.assign({ method: "container", containerName: "viewport", selector: "#layout", gap: null, gapBetween: true, align: "stretch", justify: "stretch", minify: false, scope: ["bare", "lnf", "gap", "align", "justify"] }, settings !== null && settings !== void 0 ? settings : {});
+    if (typeof layout !== "string") {
+      const finalCss = [];
+      let defaultAction = "<=";
+      if (this._media.defaultAction) {
+        defaultAction = this._media.defaultAction;
+      }
+      const queries = sortedMedia.queries;
+      const keys3 = Object.keys(queries);
+      const orderedLayouts = [];
+      keys3.forEach((media) => {
+        if (layout[media]) {
+          let lay = layout[media];
+          if (typeof lay !== "string") {
+            lay = lay.layout;
+          }
+          orderedLayouts[media] = lay;
+        }
+      });
+      let i = 0;
+      for (let [media, lay] of Object.entries(orderedLayouts)) {
+        if (defaultAction == ">=" && i >= keys3.length - 1) {
+          media = null;
+        } else if (defaultAction == "<=" && i == 0) {
+          media = null;
+        }
+        i++;
+        finalCss.push(__layoutCss(lay, Object.assign(Object.assign({}, finalSettings), { media })));
+      }
+      return finalCss.join("\n");
+    }
+    if (finalSettings.media == "default") {
+      finalSettings.media = null;
+    }
+    const areas = [];
+    const colsCountByArea = [];
+    const rowsCountByArea = [];
+    const areasCountedByLine = [];
+    const areasCountedByCol = [];
+    const colsStartByArea = [];
+    const rowsStartByArea = [];
+    const colsEndByArea = [];
+    const rowsEndByArea = [];
+    const rows = layout.split(/(\\n|_)/).map((l) => l.trim()).filter((l) => l !== "_" && l !== "");
+    rows.length;
+    let colsCount = 0;
+    rows.forEach((row) => {
+      const rowsCols = row.split(" ").map((l) => l.trim());
+      if (rowsCols.length > colsCount) {
+        colsCount = rowsCols.length;
+      }
+    });
+    let currentCol = 0, currentRow = 0;
+    rows.forEach((row) => {
+      currentRow++;
+      currentCol = 0;
+      const rowCols = row.split(" ").map((l) => l.trim());
+      rowCols.forEach((areaId) => {
+        currentCol++;
+        if (!areas.includes(areaId)) {
+          areas.push(areaId);
+        }
+        if (!areasCountedByCol[`${currentCol}-${areaId}`]) {
+          areasCountedByCol[`${currentCol}-${areaId}`] = true;
+          const current = colsCountByArea[areaId] ? colsCountByArea[areaId] : 0;
+          colsCountByArea[areaId] = current + 1;
+        }
+        if (!areasCountedByLine[`${currentRow}-${areaId}`]) {
+          areasCountedByLine[`${currentRow}-${areaId}`] = true;
+          const current = rowsCountByArea[areaId] ? rowsCountByArea[areaId] : 0;
+          rowsCountByArea[areaId] = current + 1;
+        }
+      });
+    });
+    currentCol = 0;
+    currentRow = 0;
+    rows.forEach((row) => {
+      currentRow++;
+      currentCol = 0;
+      const rowCols = row.split(" ").map((l) => l.trim());
+      rowCols.forEach((areaId) => {
+        currentCol++;
+        if (!colsStartByArea[areaId]) {
+          colsStartByArea[areaId] = currentCol;
+        }
+        if (!rowsStartByArea[areaId]) {
+          rowsStartByArea[areaId] = currentRow;
+        }
+        colsEndByArea[areaId] = currentCol;
+        rowsEndByArea[areaId] = currentRow;
+      });
+    });
+    const colsStatement = [];
+    for (let i = 0; i < colsCount; i++) {
+      if (colsCount <= 1) {
+        colsStatement.push("100%");
+      } else {
+        colsStatement.push("1fr");
+      }
+    }
+    const vars = [`${finalSettings.selector} {`];
+    if (finalSettings.scope.includes("bare")) {
+      vars.push(`display: grid;`);
+      vars.push(`grid-template-columns: ${colsStatement.join(" ")};`);
+      vars.push(`grid-template-rows: auto;`);
+    }
+    if (finalSettings.scope.includes("align")) {
+      vars.push(`align-items: ${finalSettings.align};`);
+    }
+    if (finalSettings.scope.includes("justify")) {
+      vars.push(`justify-content: ${finalSettings.justify};`);
+    }
+    if (finalSettings.gap && finalSettings.scope.includes("gap")) {
+      vars.push(`gap: ${finalSettings.gap};`);
+    }
+    vars.push("}");
+    if (finalSettings.scope.includes("bare")) {
+      areas.forEach((areaId, i) => {
+        vars.push(`${finalSettings.selector} > *:nth-child(${i + 1}) {
+                grid-column-start: ${colsStartByArea[areaId]};
+                grid-column-end: ${colsEndByArea[areaId] + 1};
+                grid-row-start: ${rowsStartByArea[areaId]};
+                grid-row-end: ${rowsEndByArea[areaId] + 1};
+
+            }`);
+      });
+    }
+    if (finalSettings.media) {
+      const query = this.buildQuery(this._media);
+      vars.unshift(`${query} {`);
+      vars.push("}");
+    }
+    let css2 = vars.join(finalSettings.minify ? " " : "\n");
+    if (finalSettings.minify) {
+      css2 = css2.replace(/\n/gm, " ").replace(/\s{2,999}/gm, " ");
+    }
+    return {
+      css: css2,
+      areas
+    };
+  }
+  /**
+   * @name            sortQueries
+   * @type            Function
+   *
+   * This function take as input the "media" property of the `frontspec.json` file and return
+   * a new object mostly the same but with the "queries" object|array sorted depending on the
+   * "defaultAction" property.
+   *
+   * @param     {Object}      media                      The frontspec "media" object
+   * @return    {Object}                                  The same object with the "queries" sorted correctly
+   *
+   * @since       2.0.0
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+   */
+  sortQueries(media = null) {
+    if (media == null) {
+      media = this.media;
+    }
+    if (!media.defaultAction) {
+      return media;
+    }
+    const queries = __sort(media.queries, (a, b) => {
+      if (media.defaultAction == "<=") {
+        return a.value.minWidth < b.value.minWidth ? 1 : -1;
+      } else if (media.defaultAction == ">=") {
+        return a.value.minWidth > b.value.minWidth ? 1 : -1;
+      }
+      return 0;
+    });
+    const sortedQueries = {};
+    for (let [m, query] of Object.entries(queries)) {
+      sortedQueries[m] = query;
+    }
+    media.queries = sortedQueries;
+    return media;
+  }
+};
+class SMedia2 extends SMedia$1 {
+  /**
+   * @name            constructor
+   * @type            Function
+   * @constructor
+   *
+   * Constructor
+   *
+   * @since       2.0.0
+   * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+   */
+  constructor(media = "frontspec", settings = {}) {
+    super(__deepMerge({}, settings));
+    if (media === "frontspec") {
+      this._media = SFrontspec.get("media");
+    } else if (media) {
+      this._media = media;
+    } else {
+      this._media = {
+        defaultAction: "<=",
+        defaultMedia: "desktop",
+        method: "media",
+        containerName: "viewport",
+        queries: {
+          mobile: {
+            minWidth: 0,
+            maxWidth: 639
+          },
+          tablet: {
+            minWidth: 640,
+            maxWidth: 1279
+          },
+          desktop: {
+            minWidth: 1280,
+            maxWidth: 2047
+          },
+          wide: {
+            minWidth: 2048,
+            maxWidth: null
+          }
+        }
+      };
+    }
+    this._media = this.sortQueries(this._media);
+  }
+}
 class SStateLsAdapter {
   constructor(id) {
     this.async = false;
@@ -22659,7 +22807,7 @@ class SStateLsAdapter {
     return JSON.parse((_a2 = window.localStorage.getItem(`state-${this._id}`)) !== null && _a2 !== void 0 ? _a2 : "{}");
   }
 }
-var __awaiter$h = globalThis && globalThis.__awaiter || function(thisArg, _arguments, P, generator) {
+var __awaiter$m = globalThis && globalThis.__awaiter || function(thisArg, _arguments, P, generator) {
   function adopt(value) {
     return value instanceof P ? value : new P(function(resolve) {
       resolve(value);
@@ -22694,14 +22842,14 @@ class SStateFsAdapter {
   }
   _init() {
     var _a2, _b2;
-    return __awaiter$h(this, void 0, void 0, function* () {
-      const _packageTmpDir = (yield __vitePreload(() => import("./packageTmpDir-a71c1a7a.js"), true ? [] : void 0)).default;
+    return __awaiter$m(this, void 0, void 0, function* () {
+      const _packageTmpDir = (yield __vitePreload(() => import("./packageTmpDir-80ca2d0f.js"), true ? [] : void 0)).default;
       this._statesDir = (_b2 = (_a2 = this._settings) === null || _a2 === void 0 ? void 0 : _a2.folder) !== null && _b2 !== void 0 ? _b2 : `${_packageTmpDir()}/states`;
       this._stateFile = `${this._statesDir}/${this._id}.state.json`;
     });
   }
   save(state) {
-    return new Promise((resolve) => __awaiter$h(this, void 0, void 0, function* () {
+    return new Promise((resolve) => __awaiter$m(this, void 0, void 0, function* () {
       const _fs = yield __vitePreload(() => import("./__vite-browser-external_fs-a96bcace.js"), true ? [] : void 0);
       yield this._init();
       if (!_fs.existsSync(this._statesDir)) {
@@ -22715,7 +22863,7 @@ class SStateFsAdapter {
     }));
   }
   load() {
-    return new Promise((resolve) => __awaiter$h(this, void 0, void 0, function* () {
+    return new Promise((resolve) => __awaiter$m(this, void 0, void 0, function* () {
       const _fs = yield __vitePreload(() => import("./__vite-browser-external_fs-a96bcace.js"), true ? [] : void 0);
       yield this._init();
       let fileContent = "{}";
@@ -22726,7 +22874,7 @@ class SStateFsAdapter {
     }));
   }
 }
-var __awaiter$g = globalThis && globalThis.__awaiter || function(thisArg, _arguments, P, generator) {
+var __awaiter$l = globalThis && globalThis.__awaiter || function(thisArg, _arguments, P, generator) {
   function adopt(value) {
     return value instanceof P ? value : new P(function(resolve) {
       resolve(value);
@@ -22828,7 +22976,7 @@ class SState extends SClass {
     });
     if (this.settings.save) {
       if (this.settings.adapter.async) {
-        (() => __awaiter$g(this, void 0, void 0, function* () {
+        (() => __awaiter$l(this, void 0, void 0, function* () {
           const restoredState = yield this.settings.adapter.load();
           __deepAssign(proxy, restoredState);
         }))();
@@ -22903,9 +23051,9 @@ var toInteger$1 = function(value) {
     return value;
   return sign(value) * floor(abs(value));
 };
-var toInteger = toInteger$1, max$1 = Math.max;
+var toInteger = toInteger$1, max = Math.max;
 var toPosInteger = function(value) {
-  return max$1(0, toInteger(value));
+  return max(0, toInteger(value));
 };
 var validCallable = function(fn2) {
   if (typeof fn2 !== "function")
@@ -23867,7 +24015,7 @@ class SComponentUtilsSettingsInterface extends SInterface {
     };
   }
 }
-var __awaiter$f = globalThis && globalThis.__awaiter || function(thisArg, _arguments, P, generator) {
+var __awaiter$k = globalThis && globalThis.__awaiter || function(thisArg, _arguments, P, generator) {
   function adopt(value) {
     return value instanceof P ? value : new P(function(resolve) {
       resolve(value);
@@ -23894,6 +24042,8 @@ var __awaiter$f = globalThis && globalThis.__awaiter || function(thisArg, _argum
     step((generator = generator.apply(thisArg, _arguments || [])).next());
   });
 };
+var _a$2, _b$3, _c$3;
+document._sDefaultProps = (_c$3 = (_b$3 = (_a$2 = window.top) === null || _a$2 === void 0 ? void 0 : _a$2.document) === null || _b$3 === void 0 ? void 0 : _b$3._sDefaultProps) !== null && _c$3 !== void 0 ? _c$3 : {};
 class SComponentUtils extends SClass {
   get props() {
     var _a2, _b2;
@@ -23914,11 +24064,27 @@ class SComponentUtils extends SClass {
     var _a2;
     return (_a2 = this.settings.name) !== null && _a2 !== void 0 ? _a2 : this.node.tagName.toLowerCase();
   }
+  /**
+   * @name            setDefaultProps
+   * @type            Function
+   * @static
+   *
+   * This static method allows you to set some default props for some particular
+   * component(s). You can target components using simple css selectorl like "my-component#cool".
+   * Once the component is instanciated, it will check if some defaults are specified and
+   * extends them with the passed props.
+   *
+   * @param     {String|String[]}      selector      The selector to use to target elements on which these props will be applied
+   * @param     {Any}         props         An object of props you want to set defaults for
+   *
+   * @since       2.0.0
+   * @author 		Olivier Bossel<olivier.bossel@gmail.com>
+   */
   static setDefaultProps(selector, props) {
     selector = Array.isArray(selector) ? selector : [selector];
     selector.forEach((sel) => {
       var _a2;
-      this._defaultProps[sel] = Object.assign(Object.assign({}, (_a2 = this._defaultProps[sel]) !== null && _a2 !== void 0 ? _a2 : {}), props);
+      document._sDefaultProps[sel] = Object.assign(Object.assign({}, (_a2 = document._sDefaultProps[sel]) !== null && _a2 !== void 0 ? _a2 : {}), props);
     });
   }
   /**
@@ -23935,8 +24101,11 @@ class SComponentUtils extends SClass {
    * @author 		Olivier Bossel<olivier.bossel@gmail.com>
    */
   static getDefaultProps(selector) {
-    var _a2, _b2;
-    return Object.assign(Object.assign({}, (_a2 = this._defaultProps["*"]) !== null && _a2 !== void 0 ? _a2 : {}), (_b2 = this._defaultProps[selector]) !== null && _b2 !== void 0 ? _b2 : {});
+    var _a2, _b2, _c2, _d2;
+    if (selector === "s-specs-editor") {
+      _console.log("__", Object.assign(Object.assign({}, (_a2 = document._sDefaultProps["*"]) !== null && _a2 !== void 0 ? _a2 : {}), (_b2 = document._sDefaultProps[selector]) !== null && _b2 !== void 0 ? _b2 : {}));
+    }
+    return Object.assign(Object.assign({}, (_c2 = document._sDefaultProps["*"]) !== null && _c2 !== void 0 ? _c2 : {}), (_d2 = document._sDefaultProps[selector]) !== null && _d2 !== void 0 ? _d2 : {});
   }
   /**
    * @name        componentUtilsSettings
@@ -24011,7 +24180,7 @@ class SComponentUtils extends SClass {
    */
   initProps(props, settings) {
     let finalProps = {}, PropsInterface = this.PropsInterface(settings.interface);
-    for (let [prop, definition2] of Object.entries(PropsInterface.definition)) {
+    for (let [prop, definition] of Object.entries(PropsInterface.definition)) {
       const camelProp = __camelCase(prop), dashProp = __dashCase(prop), attrValue = this.node.getAttribute(dashProp);
       if (attrValue !== null) {
         let rawValue = this.node.getAttribute(dashProp), value = rawValue;
@@ -24024,7 +24193,7 @@ class SComponentUtils extends SClass {
       } else if (props[camelProp] !== void 0) {
         finalProps[camelProp] = props[camelProp];
       } else {
-        finalProps[camelProp] = definition2.default;
+        finalProps[camelProp] = definition.default;
       }
     }
     finalProps = PropsInterface.apply(finalProps);
@@ -24196,6 +24365,7 @@ class SComponentUtils extends SClass {
     var _a2;
     let matchedMedia = [];
     const responsiveObj = Object.assign({}, props.responsive);
+    const mediaInstance = new SMedia2();
     for (let [media, responsiveProps] of Object.entries(props.responsive)) {
       let applyProps = function() {
         for (let [key, value] of Object.entries(responsiveProps)) {
@@ -24211,7 +24381,7 @@ class SComponentUtils extends SClass {
       if (media.match(/[a-zA-Z0-9<>=]/) && queries[media]) {
         let mediaQuery = this._mediaQueries[media];
         if (!mediaQuery) {
-          this._mediaQueries[media] = STheme.buildMediaQuery(media);
+          this._mediaQueries[media] = mediaInstance.buildQuery(media);
           mediaQuery = this._mediaQueries[media];
         }
         if (window.matchMedia(mediaQuery.replace(/^@media\s/, "")).matches) {
@@ -24250,7 +24420,7 @@ class SComponentUtils extends SClass {
    * @author 		Olivier Bossel<olivier.bossel@gmail.com>
    */
   waitAndExecute(when, callback) {
-    return new Promise((resolve, reject) => __awaiter$f(this, void 0, void 0, function* () {
+    return new Promise((resolve, reject) => __awaiter$k(this, void 0, void 0, function* () {
       var _a2;
       if (this.node.tagName.toLowerCase() !== "s-carpenter") {
         const $carpenter = (_a2 = this.constructor._$carpenter) !== null && _a2 !== void 0 ? _a2 : document.querySelector("s-carpenter");
@@ -24479,9 +24649,8 @@ class SComponentUtils extends SClass {
 }
 SComponentUtils.fastdom = fastdomExports;
 SComponentUtils._isResponsivePropsWarningLogged = false;
-SComponentUtils._defaultProps = {};
 SComponentUtils._injectedStyles = [];
-var __awaiter$e = globalThis && globalThis.__awaiter || function(thisArg, _arguments, P, generator) {
+var __awaiter$j = globalThis && globalThis.__awaiter || function(thisArg, _arguments, P, generator) {
   function adopt(value) {
     return value instanceof P ? value : new P(function(resolve) {
       resolve(value);
@@ -24579,7 +24748,7 @@ class SFeature extends SClass {
     this.utils.waitAndExecute(
       this.props.mountWhen,
       // @ts-ignore
-      () => __awaiter$e(this, void 0, void 0, function* () {
+      () => __awaiter$j(this, void 0, void 0, function* () {
         var _e2;
         yield (_e2 = this.mount) === null || _e2 === void 0 ? void 0 : _e2.call(this);
         this.props.mounted = true;
@@ -24679,10 +24848,10 @@ class SActivateFeatureInterface extends SInterface {
     };
   }
 }
-function define$e(props = {}, name2 = "s-activate") {
+function define$g(props = {}, name2 = "s-activate") {
   SActivateFeature.define(name2, SActivateFeature, props);
 }
-var __awaiter$d = globalThis && globalThis.__awaiter || function(thisArg, _arguments, P, generator) {
+var __awaiter$i = globalThis && globalThis.__awaiter || function(thisArg, _arguments, P, generator) {
   function adopt(value) {
     return value instanceof P ? value : new P(function(resolve) {
       resolve(value);
@@ -24866,7 +25035,7 @@ class SActivateFeature extends SFeature {
         }
       });
     }
-    setTimeout(() => __awaiter$d(this, void 0, void 0, function* () {
+    setTimeout(() => __awaiter$i(this, void 0, void 0, function* () {
       if (this.props.saveState) {
         this._restoreState();
       } else if (this.props.active) {
@@ -24933,7 +25102,7 @@ class SActivateFeature extends SFeature {
    * @author 		Olivier Bossel<olivier.bossel@gmail.com>
    */
   activate(params) {
-    return __awaiter$d(this, void 0, void 0, function* () {
+    return __awaiter$i(this, void 0, void 0, function* () {
       const finalParams = Object.assign({ force: false, preventSave: false }, params !== null && params !== void 0 ? params : {});
       clearTimeout(this._unactivateTimeout);
       if (!finalParams.force && this.isActive())
@@ -24992,7 +25161,7 @@ class SActivateFeature extends SFeature {
    * @author 		Olivier Bossel<olivier.bossel@gmail.com>
    */
   unactivate(params) {
-    return __awaiter$d(this, void 0, void 0, function* () {
+    return __awaiter$i(this, void 0, void 0, function* () {
       const finalParams = Object.assign({ force: false, preventSave: false }, params !== null && params !== void 0 ? params : {});
       if (!finalParams.force && !this.isActive())
         return;
@@ -25066,10 +25235,10 @@ class SAppearFeatureInterface extends SInterface {
     };
   }
 }
-function define$d(props = {}, name2 = "s-appear") {
+function define$f(props = {}, name2 = "s-appear") {
   SAppearFeature.define(name2, SAppearFeature, Object.assign({ mountWhen: "entersViewport" }, props));
 }
-const __css$a = `/* [s-appear] {
+const __css$3 = `/* [s-appear] {
     opacity: 0;
 
     &[appear] {
@@ -25080,7 +25249,7 @@ const __css$a = `/* [s-appear] {
                     content: '{"lod":{"enabled":true,"defaultLevel":3,"botLevel":1,"levels":{"0":{"name":"bare","speedIndex":0},"1":{"name":"lnf","speedIndex":30},"2":{"name":"theme","speedIndex":40},"3":{"name":"high","speedIndex":50},"4":{"name":"ultra","speedIndex":60}},"method":"class","defaultAction":">=","cssProperties":{"animation":2,"animation-delay":2,"animation-direction":2,"animation-duration":2,"animation-fill-mode":2,"animation-iteration-count":2,"animation-name":2,"animation-play-state":2,"animation-timing-function":2,"backdrop-filter":3,"background":1,"background-attachment":1,"background-blend-mode":3,"background-clip":1,"background-color":1,"background-image":1,"background-origin":1,"background-position":1,"background-repeat":1,"background-size":1,"border":1,"border-bottom":1,"border-bottom-color":1,"border-bottom-left-radius":1,"border-bottom-right-radius":1,"border-bottom-style":1,"border-bottom-width":1,"border-collapse":1,"border-color":1,"border-image":1,"border-image-outset":1,"border-image-repeat":1,"border-image-slice":1,"border-image-source":1,"border-image-width":1,"border-left":1,"border-left-color":1,"border-left-style":1,"border-left-width":1,"border-radius":1,"border-right":1,"border-right-color":1,"border-right-style":1,"border-right-width":1,"border-spacing":1,"border-style":1,"border-top":1,"border-top-color":1,"border-top-left-radius":1,"border-top-right-radius":1,"border-top-style":1,"border-top-width":1,"border-width":1,"box-shadow":1,"caret-color":1,"color":1,"column-count":1,"column-fill":1,"column-rule":1,"column-rule-color":1,"column-rule-style":1,"column-rule-width":1,"counter-increment":1,"counter-reset":1,"filter":1,"list-style-image":1,"outline":1,"outline-color":1,"outline-offset":1,"outline-style":1,"outline-width":1,"text-decoration":1,"text-decoration-color":1,"text-decoration-line":1,"text-indent":1,"text-justify":1,"text-overflow":1,"text-shadow":2,"text-transform":1,"transition":1,"transition-delay":1,"transition-duration":1,"transition-property":1,"transition-timing-function":1,"word-break":1,"word-spacing":1,"word-wrap":1}},"clean":{"variables":false},"compress":{"variables":false}}';
 }
 `;
-var __awaiter$c = globalThis && globalThis.__awaiter || function(thisArg, _arguments, P, generator) {
+var __awaiter$h = globalThis && globalThis.__awaiter || function(thisArg, _arguments, P, generator) {
   function adopt(value) {
     return value instanceof P ? value : new P(function(resolve) {
       resolve(value);
@@ -25113,7 +25282,7 @@ class SAppearFeature extends SFeature {
     super(name2, node, __deepMerge({
       name: "s-appear",
       interface: SAppearFeatureInterface,
-      style: __css$a
+      style: __css$3
     }, settings !== null && settings !== void 0 ? settings : {}));
     this.utils.fastdom.mutate(() => {
       if (!this.node.hasAttribute("s-appear")) {
@@ -25122,7 +25291,7 @@ class SAppearFeature extends SFeature {
     });
   }
   mount() {
-    return __awaiter$c(this, void 0, void 0, function* () {
+    return __awaiter$h(this, void 0, void 0, function* () {
       switch (this.node.tagName.toLowerCase()) {
         case "img":
           yield __whenImageLoaded(this.node);
@@ -25199,6 +25368,183 @@ class SAppearFeature extends SFeature {
         $style.remove();
       }, duration);
     }, delay);
+  }
+}
+var __awaiter$g = globalThis && globalThis.__awaiter || function(thisArg, _arguments, P, generator) {
+  function adopt(value) {
+    return value instanceof P ? value : new P(function(resolve) {
+      resolve(value);
+    });
+  }
+  return new (P || (P = Promise))(function(resolve, reject) {
+    function fulfilled(value) {
+      try {
+        step(generator.next(value));
+      } catch (e) {
+        reject(e);
+      }
+    }
+    function rejected(value) {
+      try {
+        step(generator["throw"](value));
+      } catch (e) {
+        reject(e);
+      }
+    }
+    function step(result2) {
+      result2.done ? resolve(result2.value) : adopt(result2.value).then(fulfilled, rejected);
+    }
+    step((generator = generator.apply(thisArg, _arguments || [])).next());
+  });
+};
+function define$e(props, tagName = "s-clipboard-copy", settings = {}) {
+  var _a2;
+  __querySelectorLive(tagName, ($elm) => __awaiter$g(this, void 0, void 0, function* () {
+    const define2 = yield __vitePreload(() => import("./define-cfb53195.js"), true ? [] : void 0);
+    define2.default(props, tagName, settings);
+  }), {
+    when: (_a2 = settings.when) !== null && _a2 !== void 0 ? _a2 : "nearViewport",
+    firstOnly: true
+  });
+}
+var __awaiter$f = globalThis && globalThis.__awaiter || function(thisArg, _arguments, P, generator) {
+  function adopt(value) {
+    return value instanceof P ? value : new P(function(resolve) {
+      resolve(value);
+    });
+  }
+  return new (P || (P = Promise))(function(resolve, reject) {
+    function fulfilled(value) {
+      try {
+        step(generator.next(value));
+      } catch (e) {
+        reject(e);
+      }
+    }
+    function rejected(value) {
+      try {
+        step(generator["throw"](value));
+      } catch (e) {
+        reject(e);
+      }
+    }
+    function step(result2) {
+      result2.done ? resolve(result2.value) : adopt(result2.value).then(fulfilled, rejected);
+    }
+    step((generator = generator.apply(thisArg, _arguments || [])).next());
+  });
+};
+function define$d(props, name2 = "s-floating", settings = {}) {
+  var _a2;
+  __querySelectorLive(`[${name2}]`, ($elm) => __awaiter$f(this, void 0, void 0, function* () {
+    const define2 = yield __vitePreload(() => import("./define-ce5fc71d.js"), true ? [] : void 0);
+    define2.default(props, name2);
+  }), {
+    when: (_a2 = settings.when) !== null && _a2 !== void 0 ? _a2 : "nearViewport",
+    firstOnly: true
+  });
+}
+var __awaiter$e = globalThis && globalThis.__awaiter || function(thisArg, _arguments, P, generator) {
+  function adopt(value) {
+    return value instanceof P ? value : new P(function(resolve) {
+      resolve(value);
+    });
+  }
+  return new (P || (P = Promise))(function(resolve, reject) {
+    function fulfilled(value) {
+      try {
+        step(generator.next(value));
+      } catch (e) {
+        reject(e);
+      }
+    }
+    function rejected(value) {
+      try {
+        step(generator["throw"](value));
+      } catch (e) {
+        reject(e);
+      }
+    }
+    function step(result2) {
+      result2.done ? resolve(result2.value) : adopt(result2.value).then(fulfilled, rejected);
+    }
+    step((generator = generator.apply(thisArg, _arguments || [])).next());
+  });
+};
+function define$c(props, name2 = "s-form-validate", settings = {}) {
+  var _a2;
+  __querySelectorLive(`[${name2}]`, ($elm) => __awaiter$e(this, void 0, void 0, function* () {
+    const define2 = yield __vitePreload(() => import("./define-1d3f0fb9.js"), true ? ["define-1d3f0fb9.js","querySelectorUp-0290440e.js"] : void 0);
+    define2.default(props, name2);
+  }), {
+    when: (_a2 = settings.when) !== null && _a2 !== void 0 ? _a2 : "nearViewport",
+    firstOnly: true
+  });
+}
+class SInlineFeatureInterface extends SInterface {
+  static get _definition() {
+    return {};
+  }
+}
+function define$b(props = {}, name2 = "s-inline") {
+  SInlineFeature.define(name2, SInlineFeature, props);
+}
+const sInlineFeature = "";
+var __awaiter$d = globalThis && globalThis.__awaiter || function(thisArg, _arguments, P, generator) {
+  function adopt(value) {
+    return value instanceof P ? value : new P(function(resolve) {
+      resolve(value);
+    });
+  }
+  return new (P || (P = Promise))(function(resolve, reject) {
+    function fulfilled(value) {
+      try {
+        step(generator.next(value));
+      } catch (e) {
+        reject(e);
+      }
+    }
+    function rejected(value) {
+      try {
+        step(generator["throw"](value));
+      } catch (e) {
+        reject(e);
+      }
+    }
+    function step(result2) {
+      result2.done ? resolve(result2.value) : adopt(result2.value).then(fulfilled, rejected);
+    }
+    step((generator = generator.apply(thisArg, _arguments || [])).next());
+  });
+};
+class SInlineFeature extends SFeature {
+  constructor(name2, node, settings) {
+    super(name2, node, __deepMerge({
+      name: "s-inline",
+      interface: SInlineFeatureInterface
+    }, settings !== null && settings !== void 0 ? settings : {}));
+  }
+  mount() {
+    if (this.node.tagName === "IMG") {
+      const src2 = this.node.src;
+      this._inlineImg(src2);
+    } else {
+      throw new Error(`Sorry but your s-inline marked Element cannot be inlined. At least for now...`);
+    }
+  }
+  /**
+   * Inline image like SVG
+   */
+  _inlineImg(src2) {
+    return __awaiter$d(this, void 0, void 0, function* () {
+      const r = yield fetch(src2);
+      const text = yield r.text();
+      const parser = new DOMParser();
+      const $svg = parser.parseFromString(text, "text/html").body.firstChild;
+      $svg.setAttribute("class", this.node.getAttribute("class"));
+      this.node.after($svg);
+      this.node.remove();
+    });
   }
 }
 var striptagsExports = {};
@@ -27411,7 +27757,7 @@ polyfillSupport === null || polyfillSupport === void 0 ? void 0 : polyfillSuppor
 if (globalThis.litElementVersions.length > 1) {
   issueWarning("multiple-versions", `Multiple versions of Lit loaded. Loading multiple versions is not recommended.`);
 }
-var __awaiter$b = globalThis && globalThis.__awaiter || function(thisArg, _arguments, P, generator) {
+var __awaiter$c = globalThis && globalThis.__awaiter || function(thisArg, _arguments, P, generator) {
   function adopt(value) {
     return value instanceof P ? value : new P(function(resolve) {
       resolve(value);
@@ -27464,11 +27810,11 @@ class SLitComponent extends LitElement {
    */
   static define(tagName, Cls, props = {}, settings = {}) {
     var _a2;
+    SLitComponent.setDefaultProps(tagName, props);
     const win = (_a2 = settings.window) !== null && _a2 !== void 0 ? _a2 : window;
     if (win.customElements.get(tagName.toLowerCase())) {
       return;
     }
-    SLitComponent.setDefaultProps(tagName, props);
     win.customElements.define(tagName.toLowerCase(), class extends Cls {
     });
   }
@@ -27499,9 +27845,9 @@ class SLitComponent extends LitElement {
     SLitComponentPropsInterface.definition = Object.assign(Object.assign({}, SLitComponentPropsInterface.definition), (_a2 = int === null || int === void 0 ? void 0 : int.definition) !== null && _a2 !== void 0 ? _a2 : {});
     Object.keys(SLitComponentPropsInterface.definition).forEach((prop) => {
       var _a3, _b2, _c2, _d2, _e2, _f, _g, _h, _j, _k, _l, _m, _o;
-      const definition2 = SLitComponentPropsInterface.definition[prop];
-      propertiesObj[prop] = Object.assign({}, (_a3 = definition2.lit) !== null && _a3 !== void 0 ? _a3 : {});
-      let type = String, typeStr = (_c2 = (_b2 = definition2.type) === null || _b2 === void 0 ? void 0 : _b2.type) !== null && _c2 !== void 0 ? _c2 : definition2.type;
+      const definition = SLitComponentPropsInterface.definition[prop];
+      propertiesObj[prop] = Object.assign({}, (_a3 = definition.lit) !== null && _a3 !== void 0 ? _a3 : {});
+      let type = String, typeStr = (_c2 = (_b2 = definition.type) === null || _b2 === void 0 ? void 0 : _b2.type) !== null && _c2 !== void 0 ? _c2 : definition.type;
       switch (typeStr.toLowerCase()) {
         case "boolean":
           type = Boolean;
@@ -27519,19 +27865,19 @@ class SLitComponent extends LitElement {
           break;
       }
       propertiesObj[prop].type = type;
-      propertiesObj[prop].default = definition2.default;
+      propertiesObj[prop].default = definition.default;
       propertiesObj[prop].attribute = __dashCase(prop);
-      if (definition2.physical || ((_f = (_e2 = (_d2 = definition2.type) === null || _d2 === void 0 ? void 0 : _d2.type) === null || _e2 === void 0 ? void 0 : _e2.toLowerCase) === null || _f === void 0 ? void 0 : _f.call(_e2)) === "boolean" || ((_h = (_g = definition2.type) === null || _g === void 0 ? void 0 : _g.toLowerCase) === null || _h === void 0 ? void 0 : _h.call(_g)) === "boolean" || ((_l = (_k = (_j = definition2.type) === null || _j === void 0 ? void 0 : _j.type) === null || _k === void 0 ? void 0 : _k.toLowerCase) === null || _l === void 0 ? void 0 : _l.call(_k)) === "object" || ((_o = (_m = definition2.type) === null || _m === void 0 ? void 0 : _m.toLowerCase) === null || _o === void 0 ? void 0 : _o.call(_m)) === "object") {
+      if (definition.physical || ((_f = (_e2 = (_d2 = definition.type) === null || _d2 === void 0 ? void 0 : _d2.type) === null || _e2 === void 0 ? void 0 : _e2.toLowerCase) === null || _f === void 0 ? void 0 : _f.call(_e2)) === "boolean" || ((_h = (_g = definition.type) === null || _g === void 0 ? void 0 : _g.toLowerCase) === null || _h === void 0 ? void 0 : _h.call(_g)) === "boolean" || ((_l = (_k = (_j = definition.type) === null || _j === void 0 ? void 0 : _j.type) === null || _k === void 0 ? void 0 : _k.toLowerCase) === null || _l === void 0 ? void 0 : _l.call(_k)) === "object" || ((_o = (_m = definition.type) === null || _m === void 0 ? void 0 : _m.toLowerCase) === null || _o === void 0 ? void 0 : _o.call(_m)) === "object") {
         propertiesObj[prop].reflect = true;
       }
       propertiesObj[prop].converter = {
         fromAttribute: (value, type2) => {
           var _a4, _b3, _c3, _d3, _e3;
-          const typeStr2 = (_c3 = (_b3 = (_a4 = definition2.type) === null || _a4 === void 0 ? void 0 : _a4.type) === null || _b3 === void 0 ? void 0 : _b3.toLowerCase()) !== null && _c3 !== void 0 ? _c3 : (_d3 = definition2.type) === null || _d3 === void 0 ? void 0 : _d3.toLowerCase();
+          const typeStr2 = (_c3 = (_b3 = (_a4 = definition.type) === null || _a4 === void 0 ? void 0 : _a4.type) === null || _b3 === void 0 ? void 0 : _b3.toLowerCase()) !== null && _c3 !== void 0 ? _c3 : (_d3 = definition.type) === null || _d3 === void 0 ? void 0 : _d3.toLowerCase();
           if (typeStr2 === "object" && typeof value === "string") {
             try {
               const json = JSON.parse(value);
-              const finalJson = __deepMerge((_e3 = definition2.default) !== null && _e3 !== void 0 ? _e3 : {}, json);
+              const finalJson = __deepMerge((_e3 = definition.default) !== null && _e3 !== void 0 ? _e3 : {}, json);
               return finalJson;
             } catch (e) {
               console.error(e);
@@ -27603,6 +27949,12 @@ class SLitComponent extends LitElement {
         return this;
       };
     }
+    const doc = this._getDocumentFromElement(this);
+    if (document !== doc && this.constructor.styles) {
+      __injectStyle(this.constructor.styles, {
+        rootNode: doc
+      });
+    }
     if (!SLitComponent._keepInjectedCssBeforeStylesheetLinksInited) {
       const $firstStylesheetLink = document.head.querySelector('link[rel="stylesheet"]');
       __querySelectorLive("style", ($style) => {
@@ -27615,7 +27967,7 @@ class SLitComponent extends LitElement {
       SLitComponent._keepInjectedCssBeforeStylesheetLinksInited = true;
     }
     const nodeFirstUpdated = (_b2 = this.firstUpdated) === null || _b2 === void 0 ? void 0 : _b2.bind(this);
-    this.firstUpdated = () => __awaiter$b(this, void 0, void 0, function* () {
+    this.firstUpdated = () => __awaiter$c(this, void 0, void 0, function* () {
       if (nodeFirstUpdated) {
         yield nodeFirstUpdated();
       }
@@ -27631,15 +27983,22 @@ class SLitComponent extends LitElement {
       return this._shouldUpdate;
     };
     this.utils = new SComponentUtils(this, Object.assign(Object.assign(Object.assign({}, (_d2 = this.settings) !== null && _d2 !== void 0 ? _d2 : {}), (_e2 = this.settings.componentUtils) !== null && _e2 !== void 0 ? _e2 : {}), { style: (_k = (_h = (_g = (_f = this.constructor.styles) === null || _f === void 0 ? void 0 : _f.cssText) !== null && _g !== void 0 ? _g : this.settings.style) !== null && _h !== void 0 ? _h : (_j = this.settings.componentUtils) === null || _j === void 0 ? void 0 : _j.style) !== null && _k !== void 0 ? _k : "" }));
-    (() => __awaiter$b(this, void 0, void 0, function* () {
+    (() => __awaiter$c(this, void 0, void 0, function* () {
       var _l, _m;
       const defaultProps = SComponentUtils.getDefaultProps(this.tagName.toLowerCase());
+      _console.log("default", defaultProps, this.props);
       const mountWhen = (_m = (_l = this.getAttribute("mount-when")) !== null && _l !== void 0 ? _l : defaultProps.mountWhen) !== null && _m !== void 0 ? _m : "direct";
       this.classList.add(...this.utils.cls("").split(" "));
       yield this.utils.waitAndExecute(mountWhen, () => {
         this._mount();
       });
     }))();
+  }
+  _getDocumentFromElement($elm) {
+    while ($elm.parentNode) {
+      $elm = $elm.parentNode;
+    }
+    return $elm;
   }
   /**
    * @name            mount
@@ -27654,7 +28013,7 @@ class SLitComponent extends LitElement {
    */
   _mount() {
     var _a2, _b2, _c2;
-    return __awaiter$b(this, void 0, void 0, function* () {
+    return __awaiter$c(this, void 0, void 0, function* () {
       const _this = this, defaultProps = SComponentUtils.getDefaultProps(this.tagName.toLowerCase());
       let properties2 = this.constructor.properties;
       if (!properties2) {
@@ -27723,1691 +28082,6 @@ class SLitComponent extends LitElement {
   }
 }
 SLitComponent._keepInjectedCssBeforeStylesheetLinksInited = false;
-/*! clipboard-copy. MIT License. Feross Aboukhadijeh <https://feross.org/opensource> */
-var clipboardCopy_1 = clipboardCopy;
-function makeError() {
-  return new DOMException("The request is not allowed", "NotAllowedError");
-}
-async function copyClipboardApi(text) {
-  if (!navigator.clipboard) {
-    throw makeError();
-  }
-  return navigator.clipboard.writeText(text);
-}
-async function copyExecCommand(text) {
-  const span = document.createElement("span");
-  span.textContent = text;
-  span.style.whiteSpace = "pre";
-  span.style.webkitUserSelect = "auto";
-  span.style.userSelect = "all";
-  document.body.appendChild(span);
-  const selection = window.getSelection();
-  const range2 = window.document.createRange();
-  selection.removeAllRanges();
-  range2.selectNode(span);
-  selection.addRange(range2);
-  let success = false;
-  try {
-    success = window.document.execCommand("copy");
-  } finally {
-    selection.removeAllRanges();
-    window.document.body.removeChild(span);
-  }
-  if (!success)
-    throw makeError();
-}
-async function clipboardCopy(text) {
-  try {
-    await copyClipboardApi(text);
-  } catch (err) {
-    try {
-      await copyExecCommand(text);
-    } catch (err2) {
-      throw err2 || err || makeError();
-    }
-  }
-}
-function copy(text) {
-  return clipboardCopy_1(text);
-}
-globalThis && globalThis.__awaiter || function(thisArg, _arguments, P, generator) {
-  function adopt(value) {
-    return value instanceof P ? value : new P(function(resolve) {
-      resolve(value);
-    });
-  }
-  return new (P || (P = Promise))(function(resolve, reject) {
-    function fulfilled(value) {
-      try {
-        step(generator.next(value));
-      } catch (e) {
-        reject(e);
-      }
-    }
-    function rejected(value) {
-      try {
-        step(generator["throw"](value));
-      } catch (e) {
-        reject(e);
-      }
-    }
-    function step(result2) {
-      result2.done ? resolve(result2.value) : adopt(result2.value).then(fulfilled, rejected);
-    }
-    step((generator = generator.apply(thisArg, _arguments || [])).next());
-  });
-};
-class SClipboardCopyComponentInterface extends SInterface {
-  static get _definition() {
-    return {
-      from: {
-        description: 'Specify the element you want to copy from with a simple css selector. Try to get "value" first, then "innerHTML"',
-        type: "String"
-      },
-      successTimeout: {
-        description: 'Specify the duration for displaying the "success" icon',
-        type: "Number",
-        default: 1500
-      },
-      errorTimeout: {
-        description: 'Specify the duration for displaying the "error" icon',
-        type: "Number",
-        default: 3e3
-      }
-    };
-  }
-}
-const __css$9 = `.s-clipboard-copy {
-    display: inline-block;
-    width: 1em;
-    height: 1em;
-    position: relative;
-    cursor: pointer;
-}
-
-    .s-clipboard-copy:not([mounted]) > * {
-        opacity: 0.001;
-        pointer-events: none;
-    }
-
-    .s-clipboard-copy .s-clipboard-copy_root {
-        width: 100%;
-        height: 100%;
-    }
-
-    .s-clipboard-copy .s-clipboard-copy_root[state='pending'] .icon-copy {
-            opacity: 1;
-        }
-
-    .s-clipboard-copy .s-clipboard-copy_root[state='copy'] .icon-copy {
-            opacity: 1;
-        }
-
-    .s-clipboard-copy .s-clipboard-copy_root[state='success'] .icon-success {
-            opacity: 1;
-        }
-
-    .s-clipboard-copy .s-clipboard-copy_root[state='error'] .icon-error {
-            opacity: 1;
-        }
-
-    .s-clipboard-copy svg {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        display: block;
-        width: 1em;
-        height: 1em;
-        opacity: 0;
-        pointer-events: none;
-    }
-
-    .s-lod--1 .s-clipboard-copy svg {
-        background-size: contain;
-}body:after {
-                    display: none;;
-                    content: '{"lod":{"enabled":true,"defaultLevel":3,"botLevel":1,"levels":{"0":{"name":"bare","speedIndex":0},"1":{"name":"lnf","speedIndex":30},"2":{"name":"theme","speedIndex":40},"3":{"name":"high","speedIndex":50},"4":{"name":"ultra","speedIndex":60}},"method":"class","defaultAction":">=","cssProperties":{"animation":2,"animation-delay":2,"animation-direction":2,"animation-duration":2,"animation-fill-mode":2,"animation-iteration-count":2,"animation-name":2,"animation-play-state":2,"animation-timing-function":2,"backdrop-filter":3,"background":1,"background-attachment":1,"background-blend-mode":3,"background-clip":1,"background-color":1,"background-image":1,"background-origin":1,"background-position":1,"background-repeat":1,"background-size":1,"border":1,"border-bottom":1,"border-bottom-color":1,"border-bottom-left-radius":1,"border-bottom-right-radius":1,"border-bottom-style":1,"border-bottom-width":1,"border-collapse":1,"border-color":1,"border-image":1,"border-image-outset":1,"border-image-repeat":1,"border-image-slice":1,"border-image-source":1,"border-image-width":1,"border-left":1,"border-left-color":1,"border-left-style":1,"border-left-width":1,"border-radius":1,"border-right":1,"border-right-color":1,"border-right-style":1,"border-right-width":1,"border-spacing":1,"border-style":1,"border-top":1,"border-top-color":1,"border-top-left-radius":1,"border-top-right-radius":1,"border-top-style":1,"border-top-width":1,"border-width":1,"box-shadow":1,"caret-color":1,"color":1,"column-count":1,"column-fill":1,"column-rule":1,"column-rule-color":1,"column-rule-style":1,"column-rule-width":1,"counter-increment":1,"counter-reset":1,"filter":1,"list-style-image":1,"outline":1,"outline-color":1,"outline-offset":1,"outline-style":1,"outline-width":1,"text-decoration":1,"text-decoration-color":1,"text-decoration-line":1,"text-indent":1,"text-justify":1,"text-overflow":1,"text-shadow":2,"text-transform":1,"transition":1,"transition-delay":1,"transition-duration":1,"transition-property":1,"transition-timing-function":1,"word-break":1,"word-spacing":1,"word-wrap":1}},"clean":{"variables":false},"compress":{"variables":false}}';
-}
-`;
-function define$c(props = {}, tagName = "s-clipboard-copy") {
-  SClipboardCopyComponent.define(tagName, SClipboardCopyComponent, props);
-}
-class SClipboardCopyComponent extends SLitComponent {
-  static get properties() {
-    return SLitComponent.propertiesFromInterface({}, SClipboardCopyComponentInterface);
-  }
-  static get styles() {
-    return css`
-            ${unsafeCSS(__css$9)}
-        `;
-  }
-  static get state() {
-    return {
-      status: "pending"
-    };
-  }
-  constructor() {
-    super(__deepMerge({
-      name: "s-clipboard-copy",
-      interface: SClipboardCopyComponentInterface
-    }));
-  }
-  _copyFromTarget() {
-    var _a2;
-    if (!this.props.from)
-      return;
-    let $elm = document.querySelector(this.props.from);
-    if (!$elm) {
-      $elm = document.querySelector(`#${this.props.from}`);
-    }
-    if (!$elm) {
-      throw new Error(`[SClipboardCopy] The target element "${this.props.from}" does not exist`);
-    }
-    const text = (_a2 = $elm.value) !== null && _a2 !== void 0 ? _a2 : $elm.innerHTML;
-    this.copy(text);
-  }
-  /**
-   * @name                copy
-   * @type                Function
-   *
-   * This method allows you to copy some text through the s-clipboard-copy component that will
-   * update itself to display the copy state.
-   *
-   * @param       {String}            text            The text you want to copy
-   *
-   * @since           2.0.0
-   * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-   */
-  copy(text) {
-    this.state.status = "copy";
-    setTimeout(() => {
-      copy(text).then(() => {
-        this.state.status = "success";
-        setTimeout(() => {
-          this.state.status = "pending";
-        }, this.props.successTimeout);
-      }).catch((e) => {
-        this.state.status = "error";
-        setTimeout(() => {
-          this.state.status = "pending";
-        }, this.props.errorTimeout);
-      });
-    });
-  }
-  render() {
-    return html`
-            <div
-                @click=${() => {
-      this._copyFromTarget();
-    }}
-                class="${this.utils.cls("_root")}"
-                state="${this.state.status}"
-            >
-                <svg
-                    ref="svg"
-                    class="icon-copy"
-                    width="20"
-                    height="20"
-                    viewBox="0 0 20 20"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                >
-                    <g clip-path="url(#clip0)">
-                        <path
-                            d="M4.55512 0.00402832L2.07324 2.4859H4.55512V0.00402832Z"
-                            fill="currentColor"
-                        />
-                        <path
-                            d="M14.9937 0H5.72598V3.65762H2.06836V17.0624H14.9937V0H14.9937ZM12.5801 11.3218H4.48195V10.1499H12.5801V11.3218ZM12.5801 8.83219H4.48195V7.66031H12.5801V8.83219ZM12.5801 6.34254H4.48195V5.17066H12.5801V6.34254Z"
-                            fill="currentColor"
-                        />
-                        <path
-                            d="M16.1655 2.93762V18.2343H5.00586V20H17.9312V2.93762H16.1655Z"
-                            fill="currentColor"
-                        />
-                    </g>
-                    <defs>
-                        <clipPath id="clip0">
-                            <rect width="20" height="20" fill="currentColor" />
-                        </clipPath>
-                    </defs>
-                </svg>
-                <svg
-                    class="icon-success"
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                >
-                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
-                    <polyline points="22 4 12 14.01 9 11.01"></polyline>
-                </svg>
-                <svg
-                    class="icon-error"
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                >
-                    <polygon
-                        points="7.86 2 16.14 2 22 7.86 22 16.14 16.14 22 7.86 22 2 16.14 2 7.86 7.86 2"
-                    ></polygon>
-                    <line x1="15" y1="9" x2="9" y2="15"></line>
-                    <line x1="9" y1="9" x2="15" y2="15"></line>
-                </svg>
-            </div>
-        `;
-  }
-}
-class SFloatingFeatureInterface extends SInterface {
-  static get _definition() {
-    return {
-      ref: {
-        description: "Specify the reference HTMLElement from which to position the floating one. If not specified, will take the previous element in the DOM",
-        type: "String"
-      },
-      position: {
-        description: "Specify the placement of your floating element. By default it will try to be placed as good as possible.",
-        type: "String",
-        values: [
-          "top",
-          "right",
-          "bottom",
-          "left",
-          "top-start",
-          "top-end",
-          "right-start",
-          "right-end",
-          "bottom-start",
-          "bottom-end",
-          "left-start",
-          "left-end",
-          "auto"
-        ],
-        default: "auto"
-      },
-      shift: {
-        description: "Specify a space between the floating element and the viewport side to respect",
-        type: "Number",
-        default: 10
-      },
-      offset: {
-        description: "Specify a space between the floating element and the reference one to respect",
-        type: "Number"
-      },
-      arrow: {
-        description: "Specify if you want an arrow or not",
-        type: "Boolean",
-        default: true
-      },
-      arrowSize: {
-        description: "Specify the size of the arrow in px",
-        type: "Number",
-        default: 15
-      },
-      arrowPadding: {
-        description: "Specify the padding of the arrow in px",
-        type: "Number",
-        default: 10
-      }
-    };
-  }
-}
-function define$b(props = {}, name2 = "s-floating") {
-  SFloatingFeature.define(name2, SFloatingFeature, Object.assign({}, props));
-}
-const __css$8 = `.s-floating {
-    transform: none;
-}
-
-.s-lod--1 .s-floating {
-    transition: none;
-}
-
-    .s-floating:before {
-        content: none;
-    }
-
-    .s-floating:after {
-        content: none;
-    }
-
-    .s-floating .s-floating_arrow {
-        position: absolute;
-        width: var(--arrow-size, 8px);
-        height: var(--arrow-size, 8px);
-        transform: rotate(45deg);
-    }
-
-    .s-lod--1 .s-floating .s-floating_arrow {
-        background: hsla(calc(var(--s-theme-color-current-h, 0) + var(--s-theme-color-current-spin ,0)),calc((var(--s-theme-color-current-s, 0)) * 1%),calc((var(--s-theme-color-current-l, 0)) * 1%),var(--s-theme-color-current-a, 1));
-}body:after {
-                    display: none;;
-                    content: '{"lod":{"enabled":true,"defaultLevel":3,"botLevel":1,"levels":{"0":{"name":"bare","speedIndex":0},"1":{"name":"lnf","speedIndex":30},"2":{"name":"theme","speedIndex":40},"3":{"name":"high","speedIndex":50},"4":{"name":"ultra","speedIndex":60}},"method":"class","defaultAction":">=","cssProperties":{"animation":2,"animation-delay":2,"animation-direction":2,"animation-duration":2,"animation-fill-mode":2,"animation-iteration-count":2,"animation-name":2,"animation-play-state":2,"animation-timing-function":2,"backdrop-filter":3,"background":1,"background-attachment":1,"background-blend-mode":3,"background-clip":1,"background-color":1,"background-image":1,"background-origin":1,"background-position":1,"background-repeat":1,"background-size":1,"border":1,"border-bottom":1,"border-bottom-color":1,"border-bottom-left-radius":1,"border-bottom-right-radius":1,"border-bottom-style":1,"border-bottom-width":1,"border-collapse":1,"border-color":1,"border-image":1,"border-image-outset":1,"border-image-repeat":1,"border-image-slice":1,"border-image-source":1,"border-image-width":1,"border-left":1,"border-left-color":1,"border-left-style":1,"border-left-width":1,"border-radius":1,"border-right":1,"border-right-color":1,"border-right-style":1,"border-right-width":1,"border-spacing":1,"border-style":1,"border-top":1,"border-top-color":1,"border-top-left-radius":1,"border-top-right-radius":1,"border-top-style":1,"border-top-width":1,"border-width":1,"box-shadow":1,"caret-color":1,"color":1,"column-count":1,"column-fill":1,"column-rule":1,"column-rule-color":1,"column-rule-style":1,"column-rule-width":1,"counter-increment":1,"counter-reset":1,"filter":1,"list-style-image":1,"outline":1,"outline-color":1,"outline-offset":1,"outline-style":1,"outline-width":1,"text-decoration":1,"text-decoration-color":1,"text-decoration-line":1,"text-indent":1,"text-justify":1,"text-overflow":1,"text-shadow":2,"text-transform":1,"transition":1,"transition-delay":1,"transition-duration":1,"transition-property":1,"transition-timing-function":1,"word-break":1,"word-spacing":1,"word-wrap":1}},"clean":{"variables":false},"compress":{"variables":false}}';
-}`;
-class SFloatingFeature extends SFeature {
-  // @ts-ignore
-  constructor(name2, node, settings) {
-    super(name2, node, __deepMerge({
-      name: "s-floating",
-      interface: SFloatingFeatureInterface,
-      style: __css$8
-    }, settings !== null && settings !== void 0 ? settings : {}));
-    if (!this.props.ref) {
-      this._$ref = this.node.parentElement;
-    } else {
-      this._$ref = document.querySelector(this.props.ref);
-    }
-  }
-  mount() {
-    if (this.props.offset === void 0 && this.props.arrow) {
-      this.props.offset = this.props.arrowSize;
-    }
-    __makeFloat(this.node, this._$ref, this.props);
-  }
-}
-const __en = {
-  min: {
-    string: "Must have at least %n characters",
-    object: "Must have at least %n properties",
-    number: "Must be greater than %n",
-    array: "Must have at least %n items"
-  },
-  max: {
-    string: "Must have at max %n characters",
-    object: "Must have at max %n properties",
-    number: "Must be lower than %n",
-    array: "Must have at max %n items"
-  },
-  email: {
-    string: "Must be a valid email address"
-  },
-  required: {
-    default: "This is required"
-  },
-  isoDate: {
-    string: "Must be a valid ISO date"
-  },
-  isoTime: {
-    string: "Must be a valid ISO time"
-  },
-  isoDateTime: {
-    string: "Must be a valid ISO date time"
-  },
-  integer: {
-    string: "Must be an integer"
-  },
-  number: {
-    string: "Must be an number"
-  },
-  negative: {
-    string: "Must be a negative number"
-  },
-  positive: {
-    string: "Must be a positive number"
-  },
-  pattern: {
-    string: "Must match the pattern %pattern"
-  },
-  alphanum: {
-    string: "Must contain only alphanumeric characters"
-  },
-  creditCard: {
-    string: "Must be a valid credit card number"
-  },
-  color: {
-    string: "Must be a valid color (hex, rgb, rgba, hsl, hsla)"
-  },
-  hex: {
-    string: "Must be a valid hex color"
-  },
-  password: {
-    weak: "",
-    medium: "Must be >=6 characters, at least 1 lowercase/uppercase/special character",
-    strong: "Must be >=8 characters, at least 1 lowercase/uppercase/digit/special character"
-  }
-};
-const definition$g = {
-  description: "Validate an alphanum string",
-  type: "String"
-};
-function alphanum(value, settings) {
-  var _a2;
-  let message, valid;
-  const finalSettings = __deepMerge({
-    i18n: __en.alphanum,
-    trim: true
-  }, settings !== null && settings !== void 0 ? settings : {});
-  if (typeof value !== "string") {
-    throw new Error(`Sorry but the "alphanum" validation only works with string`);
-  }
-  if (finalSettings.trim) {
-    value = value.trim();
-  }
-  valid = value.match(/^[a-z0-9]+$/i);
-  if (!valid) {
-    message = (_a2 = finalSettings.i18n) === null || _a2 === void 0 ? void 0 : _a2.string;
-  }
-  return {
-    valid,
-    message
-  };
-}
-const definition$f = {
-  description: "Validate a color string",
-  type: "String"
-};
-function color(value, settings) {
-  var _a2;
-  let message, valid;
-  const finalSettings = __deepMerge({
-    i18n: __en.color,
-    trim: true
-  }, settings !== null && settings !== void 0 ? settings : {});
-  if (typeof value !== "string") {
-    throw new Error(`Sorry but the "color" validation only works with string`);
-  }
-  if (finalSettings.trim) {
-    value = value.trim();
-  }
-  valid = __isColor(value);
-  if (!valid) {
-    message = (_a2 = finalSettings.i18n) === null || _a2 === void 0 ? void 0 : _a2.string;
-  }
-  return {
-    valid,
-    message
-  };
-}
-const definition$e = {
-  description: "Validate a credit card string",
-  type: "String"
-};
-function creditCard(value, settings) {
-  var _a2;
-  let message, valid;
-  const finalSettings = __deepMerge({
-    i18n: __en.creditCard,
-    trim: true
-  }, settings !== null && settings !== void 0 ? settings : {});
-  if (typeof value !== "string") {
-    throw new Error(`Sorry but the "creditCard" validation only works with string`);
-  }
-  if (finalSettings.trim) {
-    value = value.trim();
-  }
-  valid = __isCreditCard(value);
-  if (!valid) {
-    message = (_a2 = finalSettings.i18n) === null || _a2 === void 0 ? void 0 : _a2.string;
-  }
-  return {
-    valid,
-    message
-  };
-}
-const definition$d = {
-  description: "Validate an email string",
-  type: "String"
-};
-function email(value, settings) {
-  var _a2;
-  let message, valid;
-  const finalSettings = __deepMerge({
-    i18n: __en.email,
-    trim: true
-  }, settings !== null && settings !== void 0 ? settings : {});
-  if (typeof value !== "string") {
-    throw new Error(`Sorry but the "email" validation only works with string`);
-  }
-  if (finalSettings.trim) {
-    value = value.trim();
-  }
-  valid = __isEmail(value);
-  if (!valid) {
-    message = (_a2 = finalSettings.i18n) === null || _a2 === void 0 ? void 0 : _a2.string;
-  }
-  return {
-    valid,
-    message
-  };
-}
-const definition$c = {
-  description: "Validate a hexadecimal string",
-  type: "String"
-};
-function hex(value, settings) {
-  var _a2;
-  let message, valid;
-  const finalSettings = __deepMerge({
-    i18n: __en.hex,
-    trim: true
-  }, settings !== null && settings !== void 0 ? settings : {});
-  if (typeof value !== "string") {
-    throw new Error(`Sorry but the "hex" validation only works with string`);
-  }
-  if (finalSettings.trim) {
-    value = value.trim();
-  }
-  valid = value.match(/^#[a-zA-Z0-9]{3,6}$/);
-  if (!valid) {
-    message = (_a2 = finalSettings.i18n) === null || _a2 === void 0 ? void 0 : _a2.string;
-  }
-  return {
-    valid,
-    message
-  };
-}
-const definition$b = {
-  description: "Validate an integer",
-  type: "number"
-};
-function integer(value, settings) {
-  var _a2;
-  let message, valid;
-  const finalSettings = __deepMerge({
-    i18n: __en.integer,
-    cast: true,
-    trim: true
-  }, settings !== null && settings !== void 0 ? settings : {});
-  if (typeof value !== "string" && typeof value !== "number") {
-    throw new Error(`Sorry but the "integer" validation only works with string and number`);
-  }
-  if (typeof value === "string" && finalSettings.trim) {
-    value = value.trim();
-  }
-  if (typeof value === "string" && finalSettings.cast) {
-    value = Number(value);
-  }
-  if (isNaN(value)) {
-    valid = false;
-  } else {
-    valid = Number.isInteger(value);
-  }
-  if (!valid) {
-    message = (_a2 = finalSettings.i18n) === null || _a2 === void 0 ? void 0 : _a2.string;
-  }
-  return {
-    valid,
-    message
-  };
-}
-const definition$a = {
-  description: "Validate an iso date string",
-  type: "String"
-};
-function isoDate(value, settings) {
-  var _a2;
-  let message, valid;
-  const finalSettings = __deepMerge({
-    i18n: __en.isoDate,
-    trim: true
-  }, settings !== null && settings !== void 0 ? settings : {});
-  if (typeof value !== "string") {
-    throw new Error(`Sorry but the "isoDate" validation only works with string`);
-  }
-  if (finalSettings.trim) {
-    value = value.trim();
-  }
-  valid = __isIsoDate(value);
-  if (!valid) {
-    message = (_a2 = finalSettings.i18n) === null || _a2 === void 0 ? void 0 : _a2.string;
-  }
-  return {
-    valid,
-    message
-  };
-}
-const definition$9 = {
-  description: "Validate an iso date string",
-  type: "String"
-};
-function isoDateTime(value, settings) {
-  var _a2;
-  let message, valid;
-  const finalSettings = __deepMerge({
-    i18n: __en.isoDateTime,
-    trim: true
-  }, settings !== null && settings !== void 0 ? settings : {});
-  if (typeof value !== "string") {
-    throw new Error(`Sorry but the "isoDateTime" validation only works with string`);
-  }
-  if (finalSettings.trim) {
-    value = value.trim();
-  }
-  valid = __isIsoDateTime(value);
-  if (!valid) {
-    message = (_a2 = finalSettings.i18n) === null || _a2 === void 0 ? void 0 : _a2.string;
-  }
-  return {
-    valid,
-    message
-  };
-}
-const definition$8 = {
-  description: "Validate an iso time string",
-  type: "String"
-};
-function isoTime(value, settings) {
-  var _a2;
-  let message, valid;
-  const finalSettings = __deepMerge({
-    i18n: __en.isoTime,
-    trim: true
-  }, settings !== null && settings !== void 0 ? settings : {});
-  if (typeof value !== "string") {
-    throw new Error(`Sorry but the "isoTime" validation only works with string`);
-  }
-  if (finalSettings.trim) {
-    value = value.trim();
-  }
-  valid = __isIsoTime(value);
-  if (!valid) {
-    message = (_a2 = finalSettings.i18n) === null || _a2 === void 0 ? void 0 : _a2.string;
-  }
-  return {
-    valid,
-    message
-  };
-}
-const definition$7 = {
-  description: 'Validate string, array, object and number using the "max" rule',
-  type: "String|Array|Object|Number"
-};
-function max(value, n, settings) {
-  var _a2, _b2, _c2, _d2;
-  let message, valid;
-  const finalSettings = __deepMerge({
-    i18n: __en.max,
-    trim: true
-  }, settings !== null && settings !== void 0 ? settings : {});
-  switch (true) {
-    case typeof value === "string":
-      if (finalSettings.trim) {
-        value = value.trim();
-      }
-      valid = value.length <= n;
-      message = (_a2 = finalSettings.i18n) === null || _a2 === void 0 ? void 0 : _a2.string.replace("%n", n);
-      break;
-    case typeof value === "number":
-      valid = value <= n;
-      message = (_b2 = finalSettings.i18n) === null || _b2 === void 0 ? void 0 : _b2.number.replace("%n", n);
-      break;
-    case Array.isArray(value):
-      valid = value.length <= n;
-      message = (_c2 = finalSettings.i18n) === null || _c2 === void 0 ? void 0 : _c2.array.replace("%n", n);
-      break;
-    case typeof value === "object":
-      valid = Object.keys(value).length <= n;
-      message = (_d2 = finalSettings.i18n) === null || _d2 === void 0 ? void 0 : _d2.object.replace("%n", n);
-      break;
-    default:
-      throw new Error(`Sorry but the "max" validation only works with string, number, array or object values.`);
-  }
-  return {
-    valid,
-    message
-  };
-}
-const definition$6 = {
-  description: 'Validate string, array, object and number using the "min" rule',
-  type: "String|Array|Object|Number"
-};
-function min(value, n, settings) {
-  var _a2, _b2, _c2, _d2;
-  let message, valid;
-  const finalSettings = __deepMerge({
-    i18n: __en.min,
-    trim: true
-  }, settings !== null && settings !== void 0 ? settings : {});
-  switch (true) {
-    case typeof value === "string":
-      if (finalSettings.trim) {
-        value = value.trim();
-      }
-      valid = value.length >= n;
-      message = (_a2 = finalSettings.i18n) === null || _a2 === void 0 ? void 0 : _a2.string.replace("%n", n);
-      break;
-    case typeof value === "number":
-      valid = value >= n;
-      message = (_b2 = finalSettings.i18n) === null || _b2 === void 0 ? void 0 : _b2.number.replace("%n", n);
-      break;
-    case Array.isArray(value):
-      valid = value.length >= n;
-      message = (_c2 = finalSettings.i18n) === null || _c2 === void 0 ? void 0 : _c2.array.replace("%n", n);
-      break;
-    case typeof value === "object":
-      valid = Object.keys(value).length >= n;
-      message = (_d2 = finalSettings.i18n) === null || _d2 === void 0 ? void 0 : _d2.object.replace("%n", n);
-      break;
-    default:
-      throw new Error(`Sorry but the "min" validation only works with string, number, array or object values.`);
-  }
-  return {
-    valid,
-    message
-  };
-}
-const definition$5 = {
-  description: "Validate an negative number",
-  type: "number"
-};
-function negative(value, settings) {
-  var _a2;
-  let message, valid;
-  const finalSettings = __deepMerge({
-    i18n: __en.negative,
-    cast: true,
-    trim: true
-  }, settings !== null && settings !== void 0 ? settings : {});
-  if (typeof value !== "string" && typeof value !== "number") {
-    throw new Error(`Sorry but the "negative" validation only works with string and number`);
-  }
-  if (typeof value === "string" && finalSettings.trim) {
-    value = value.trim();
-  }
-  if (typeof value === "string" && finalSettings.cast) {
-    value = Number(value);
-  }
-  if (isNaN(value)) {
-    valid = false;
-  } else {
-    valid = value < 0;
-  }
-  if (!valid) {
-    message = (_a2 = finalSettings.i18n) === null || _a2 === void 0 ? void 0 : _a2.string;
-  }
-  return {
-    valid,
-    message
-  };
-}
-const definition$4 = {
-  description: "Validate an number",
-  type: "number"
-};
-function number(value, settings) {
-  var _a2;
-  let message, valid;
-  const finalSettings = __deepMerge({
-    i18n: __en.number,
-    cast: true,
-    trim: true
-  }, settings !== null && settings !== void 0 ? settings : {});
-  if (typeof value !== "string" && typeof value !== "number") {
-    throw new Error(`Sorry but the "number" validation only works with string and number`);
-  }
-  if (typeof value === "string" && finalSettings.trim) {
-    value = value.trim();
-  }
-  if (typeof value === "string" && finalSettings.cast) {
-    value = Number(value);
-  }
-  if (isNaN(value)) {
-    valid = false;
-  } else {
-    valid = true;
-  }
-  if (!valid) {
-    message = (_a2 = finalSettings.i18n) === null || _a2 === void 0 ? void 0 : _a2.string;
-  }
-  return {
-    valid,
-    message
-  };
-}
-const definition$3 = {
-  description: "Validate a password string",
-  type: "String"
-};
-function password(value, level, settings) {
-  var _a2;
-  let message, valid = false;
-  const finalSettings = __deepMerge({
-    i18n: __en.password,
-    trim: true,
-    weakReg: /.*/,
-    mediumReg: /((?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[^A-Za-z0-9])(?=.{6,}))|((?=.*[a-z])(?=.*[A-Z])(?=.*[^A-Za-z0-9])(?=.{8,}))/,
-    strongReg: /(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[^A-Za-z0-9])(?=.{8,})/
-  }, settings !== null && settings !== void 0 ? settings : {});
-  if (typeof value !== "string") {
-    throw new Error(`Sorry but the "password" validation only works with string`);
-  }
-  if (finalSettings.trim) {
-    value = value.trim();
-  }
-  let validLevels = [];
-  if (finalSettings.weakReg.test(value)) {
-    if (value) {
-      validLevels.push("weak");
-    }
-    if (level === "weak") {
-      valid = true;
-    }
-  }
-  if (finalSettings.mediumReg.test(value)) {
-    if (value) {
-      validLevels.push("medium");
-    }
-    if (level === "medium") {
-      valid = true;
-    }
-  }
-  if (finalSettings.strongReg.test(value)) {
-    if (value) {
-      validLevels.push("strong");
-    }
-    if (level === "strong") {
-      valid = true;
-    }
-  }
-  if (!valid) {
-    message = (_a2 = finalSettings.i18n) === null || _a2 === void 0 ? void 0 : _a2[level];
-  }
-  return {
-    valid,
-    message,
-    metas: {
-      levels: ["weak", "medium", "strong"],
-      validLevels
-    }
-  };
-}
-const definition$2 = {
-  description: "Validate a string using a regex pattern",
-  type: "String"
-};
-function pattern(value, pattern2, settings) {
-  var _a2;
-  let message, valid;
-  const finalSettings = __deepMerge({
-    i18n: __en.pattern,
-    trim: true
-  }, settings !== null && settings !== void 0 ? settings : {});
-  if (typeof value !== "string") {
-    throw new Error(`Sorry but the "pattern" validation only works with string`);
-  }
-  if (finalSettings.trim) {
-    value = value.trim();
-  }
-  const reg = new RegExp(pattern2);
-  valid = reg.test(value);
-  if (!valid) {
-    message = (_a2 = finalSettings.i18n) === null || _a2 === void 0 ? void 0 : _a2.string.replace("%pattern", pattern2);
-  }
-  return {
-    valid,
-    message
-  };
-}
-const definition$1 = {
-  description: "Validate an positive number",
-  type: "number"
-};
-function positive(value, settings) {
-  var _a2;
-  let message, valid;
-  const finalSettings = __deepMerge({
-    i18n: __en.positive,
-    cast: true,
-    trim: true
-  }, settings !== null && settings !== void 0 ? settings : {});
-  if (typeof value !== "string" && typeof value !== "number") {
-    throw new Error(`Sorry but the "positive" validation only works with string and number`);
-  }
-  if (typeof value === "string" && finalSettings.trim) {
-    value = value.trim();
-  }
-  if (typeof value === "string" && finalSettings.cast) {
-    value = Number(value);
-  }
-  if (isNaN(value)) {
-    valid = false;
-  } else {
-    valid = value >= 0;
-  }
-  if (!valid) {
-    message = (_a2 = finalSettings.i18n) === null || _a2 === void 0 ? void 0 : _a2.string;
-  }
-  return {
-    valid,
-    message
-  };
-}
-const definition = {
-  description: "Make sure a value has been provided",
-  type: "Boolean"
-};
-function required(value, settings) {
-  var _a2;
-  let message, valid;
-  const finalSettings = __deepMerge({
-    i18n: __en.required,
-    trim: true
-  }, settings !== null && settings !== void 0 ? settings : {});
-  if (typeof value === "string" && finalSettings.trim) {
-    value = value.trim();
-  }
-  valid = value !== void 0 && value !== null && value !== "";
-  if (!valid) {
-    message = (_a2 = finalSettings.i18n) === null || _a2 === void 0 ? void 0 : _a2.default;
-  }
-  return {
-    valid,
-    message
-  };
-}
-class SValidator extends SClass {
-  /**
-   * @name            registerValidator
-   * @type            Function
-   * @static
-   *
-   * This static method allows you to register a new validator
-   *
-   * @param       {}
-   */
-  static registerValidator(name2, validator, settings) {
-    SValidator._validators[name2] = {
-      validator,
-      settings
-    };
-  }
-  /**
-   * @name            registerPreset
-   * @type            Function
-   * @static
-   *
-   * This static method allows you to register a new validator
-   *
-   * @param       {}
-   */
-  static registerPreset(name2, rules, settings) {
-    SValidator._presets[name2] = {
-      rules,
-      settings
-    };
-  }
-  /**
-   * @name         getValidatorsDefinition
-   * @type        Function
-   * @static
-   *
-   * Get back an definition of the validators in the SValidator class
-   *
-   * @since           2.0.0
-   * @author 		Olivier Bossel<olivier.bossel@gmail.com>
-   */
-  static getValidatorsDefinition() {
-    const definition2 = {};
-    for (let [name2, validatorObj] of Object.entries(SValidator._validators)) {
-      if (!validatorObj.settings.definition)
-        continue;
-      definition2[name2] = validatorObj.settings.definition;
-    }
-    return definition2;
-  }
-  /**
-   * @name                    constructor
-   * @type                    Function
-   *
-   * Constructor
-   *
-   * @since       2.0.0
-   * @author 		Olivier Bossel<olivier.bossel@gmail.com>
-   */
-  constructor(settings) {
-    super(__deepMerge({
-      i18n: __en
-    }, settings !== null && settings !== void 0 ? settings : {}));
-  }
-  /**
-   * @name            validate
-   * @type            Function
-   *
-   * This method allows you to validate any data using a lot of validators like "email", "url", "min", "max", etc...
-   * The passed rules have to be an object with one or multiple properties representing the validations you want to make on your passed value.
-   *
-   * @param       {any}             value        The value to validate
-   * @param       {ISValidatorRules}      rules        The rules to validate the value with
-   * @param       {Partial<ISValidatorSettings>}         [settings={}]          Some settings to override from the constructor passed ones
-   * @return      {ISValidatorValidateResult}                         The result object
-   *
-   * @example         js
-   * import __SValidator from '@coffeekraken/s-validation';
-   * const validator = new __SValidator();
-   *
-   * // min 2
-   * validator.validate('Hello World Plop', {
-   *      min: 2
-   * });
-   *
-   * // email
-   * validator.validate('plop', {
-   *     email: true
-   * });
-   *
-   * // with some custom settings
-   * validator.validate('Hello World Plop', {
-   *    min: {
-   *       value: 2,
-   *       settings: {
-   *          i18n: {
-   *             string: 'Something goes wrong'
-   *          }
-   *       }
-   *    },
-   * });
-   *
-   * // multiple rules
-   * validator.validate('Hello World Plop', {
-   *      min: 2,
-   *      max: 10,
-   *     email: true
-   * });
-   *
-   * @since       2.0.0
-   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-   */
-  validate(value, rulesOrPreset, settings) {
-    var _a2, _b2, _c2;
-    let result2 = {
-      valid: true,
-      rules: {},
-      messages: []
-    };
-    let rules = rulesOrPreset;
-    if (typeof rulesOrPreset === "string") {
-      if (!SValidator._presets[rulesOrPreset]) {
-        throw new Error(`Sorry but the preset "${rulesOrPreset}" is not registered`);
-      }
-      rules = SValidator._presets[rulesOrPreset].rules;
-    }
-    for (let [validator, valueOrObj] of Object.entries(rules)) {
-      let validatorSettings = (_a2 = valueOrObj.settings) !== null && _a2 !== void 0 ? _a2 : {}, validatorValue = (_b2 = valueOrObj.value) !== null && _b2 !== void 0 ? _b2 : valueOrObj, res;
-      const validatorObj = SValidator._validators[validator];
-      if (!validatorObj) {
-        throw new Error(`Sorry but the validator "${validator}" is not registered`);
-      }
-      const finalValidatorSettings = Object.assign(Object.assign({}, validatorSettings), { i18n: (_c2 = this.settings.i18n[validator]) !== null && _c2 !== void 0 ? _c2 : {} });
-      if (typeof rulesOrPreset === "boolean") {
-        res = validatorObj.validator(value, finalValidatorSettings);
-      } else {
-        res = validatorObj.validator(value, validatorValue, finalValidatorSettings);
-      }
-      if (!res.valid) {
-        res.message = res.message.replace("%value", value).replace("%validator", validator);
-        result2.valid = false;
-        result2.rules[validator] = res;
-        result2.messages.push(res.message);
-      } else {
-        result2.rules[validator] = res;
-      }
-    }
-    return result2;
-  }
-}
-SValidator._validators = {};
-SValidator._presets = {};
-SValidator.registerValidator("min", min, {
-  definition: definition$6
-});
-SValidator.registerValidator("max", max, {
-  definition: definition$7
-});
-SValidator.registerValidator("email", email, {
-  definition: definition$d
-});
-SValidator.registerValidator("required", required, {
-  definition
-});
-SValidator.registerValidator("isoDate", isoDate, {
-  definition: definition$a
-});
-SValidator.registerValidator("isoTime", isoTime, {
-  definition: definition$8
-});
-SValidator.registerValidator("isoDateTime", isoDateTime, {
-  definition: definition$9
-});
-SValidator.registerValidator("integer", integer, {
-  definition: definition$b
-});
-SValidator.registerValidator("number", number, {
-  definition: definition$4
-});
-SValidator.registerValidator("negative", negative, {
-  definition: definition$5
-});
-SValidator.registerValidator("positive", positive, {
-  definition: definition$1
-});
-SValidator.registerValidator("pattern", pattern, {
-  definition: definition$2
-});
-SValidator.registerValidator("alphanum", alphanum, {
-  definition: definition$g
-});
-SValidator.registerValidator("creditCard", creditCard, {
-  definition: definition$e
-});
-SValidator.registerValidator("color", color, {
-  definition: definition$f
-});
-SValidator.registerValidator("hex", hex, {
-  definition: definition$c
-});
-SValidator.registerValidator("password", password, {
-  definition: definition$3
-});
-const __css$7 = `@keyframes error-message-appear {
-    from {
-        line-height: 1;
-        max-height: 0;
-    }
-    to {
-        max-height: 2em;
-        line-height: 2;
-    }
-}
-
-.s-form-validate + .s-form-validate-error-message {
-    text-align: end;
-    overflow: hidden;
-    max-height: 0;
-    line-height: 1;
-    margin: 0;
-}
-
-.s-lod--2 .s-form-validate + .s-form-validate-error-message {
-    animation: 0.2s error-message-appear var(--s-theme-easing-default, 0) forwards;
-}
-
-.s-lod--1 .s-form-validate + .s-form-validate-error-message {
-    color: hsla(calc(var(--s-theme-color-error-h, 0) + var(--s-theme-color-error-spin ,0)),calc((var(--s-theme-color-error-s, 0)) * 1%),calc((var(--s-theme-color-error-l, 0)) * 1%),var(--s-theme-color-error-a, 1));
-}body:after {
-                    display: none;;
-                    content: '{"lod":{"enabled":true,"defaultLevel":3,"botLevel":1,"levels":{"0":{"name":"bare","speedIndex":0},"1":{"name":"lnf","speedIndex":30},"2":{"name":"theme","speedIndex":40},"3":{"name":"high","speedIndex":50},"4":{"name":"ultra","speedIndex":60}},"method":"class","defaultAction":">=","cssProperties":{"animation":2,"animation-delay":2,"animation-direction":2,"animation-duration":2,"animation-fill-mode":2,"animation-iteration-count":2,"animation-name":2,"animation-play-state":2,"animation-timing-function":2,"backdrop-filter":3,"background":1,"background-attachment":1,"background-blend-mode":3,"background-clip":1,"background-color":1,"background-image":1,"background-origin":1,"background-position":1,"background-repeat":1,"background-size":1,"border":1,"border-bottom":1,"border-bottom-color":1,"border-bottom-left-radius":1,"border-bottom-right-radius":1,"border-bottom-style":1,"border-bottom-width":1,"border-collapse":1,"border-color":1,"border-image":1,"border-image-outset":1,"border-image-repeat":1,"border-image-slice":1,"border-image-source":1,"border-image-width":1,"border-left":1,"border-left-color":1,"border-left-style":1,"border-left-width":1,"border-radius":1,"border-right":1,"border-right-color":1,"border-right-style":1,"border-right-width":1,"border-spacing":1,"border-style":1,"border-top":1,"border-top-color":1,"border-top-left-radius":1,"border-top-right-radius":1,"border-top-style":1,"border-top-width":1,"border-width":1,"box-shadow":1,"caret-color":1,"color":1,"column-count":1,"column-fill":1,"column-rule":1,"column-rule-color":1,"column-rule-style":1,"column-rule-width":1,"counter-increment":1,"counter-reset":1,"filter":1,"list-style-image":1,"outline":1,"outline-color":1,"outline-offset":1,"outline-style":1,"outline-width":1,"text-decoration":1,"text-decoration-color":1,"text-decoration-line":1,"text-indent":1,"text-justify":1,"text-overflow":1,"text-shadow":2,"text-transform":1,"transition":1,"transition-delay":1,"transition-duration":1,"transition-property":1,"transition-timing-function":1,"word-break":1,"word-spacing":1,"word-wrap":1}},"clean":{"variables":false},"compress":{"variables":false}}';
-}
-`;
-const validatorsDefinition = SValidator.getValidatorsDefinition(), validatorsMessagesDefinition = {};
-for (let [validator, definition2] of Object.entries(validatorsDefinition)) {
-  validatorsMessagesDefinition[`${validator}Message`] = {
-    description: `The message to display when the validator "${validator}" fails`,
-    type: "String"
-  };
-}
-class SFormValidateFeatureInterface extends SInterface {
-  static get _definition() {
-    return Object.assign(Object.assign(Object.assign({}, validatorsDefinition), validatorsMessagesDefinition), { type: {
-      description: "Specify the validation type. Usually automatically detected depending on the field type",
-      type: "String",
-      default: "text"
-    }, on: {
-      description: 'Specify when to trigger a validation. Can be "change","submit","enter" and/or "reset"',
-      type: "Array<String>",
-      values: ["keyup", "change", "submit", "enter", "reset"],
-      default: ["keyup", "change", "submit", "enter", "reset"]
-    }, format: {
-      description: 'Specify if you want your value to be formatted a certain way. You can specify every "import { __format } from `@coffeekraken/sugar/string`" supported formats',
-      type: "String",
-      values: format$1.formats
-    }, errorClass: {
-      description: "Specify the class to apply when theres an error",
-      type: "String",
-      default: "s-form-validate--error s-color--error"
-    }, validClass: {
-      description: "Specify the class to apply on your s-form-validate element when validation is passed successfully",
-      type: "String",
-      default: "s-form-validate--valid s-color--success"
-    }, handlers: {
-      description: 'Specify some custom handlers by validator that will be executed in addition to the default validate behavior. The handler will take as argument an object containing the "result" SValidator result, the "$feature" that represent the s-validate node, the "$form" node if exists, the "$node" attached node if using the "nodes" property, the "$field" that represent the input field handled and the "props" that represent the feature properties',
-      type: "Object",
-      default: {}
-    }, nodes: {
-      description: 'Specify a css selector that target some HTMLElements used for the validation. Every HTMLElement has to specify 1 validator by using element attributes (same as on the feature itself). Classes are applied on each "node" to specify if the validator is valid or not',
-      type: "String"
-    }, language: {
-      description: "Specify the language you want to use for messages",
-      type: "String",
-      default: "en"
-    }, displayError: {
-      description: "Specify if you want to display the error messages or not",
-      type: "Boolean",
-      default: true
-    }, errorContainerAttr: {
-      description: "Specify the attribute to search for the error container. If not found, a default container will be created and inserted after your s-form-validate element",
-      type: "String",
-      default: "s-form-validate-error"
-    } });
-  }
-}
-function define$a(props = {}, name2 = "s-form-validate") {
-  SFormValidateFeature.define(name2, SFormValidateFeature, Object.assign({ mountWhen: "inViewport" }, props));
-}
-var __awaiter$a = globalThis && globalThis.__awaiter || function(thisArg, _arguments, P, generator) {
-  function adopt(value) {
-    return value instanceof P ? value : new P(function(resolve) {
-      resolve(value);
-    });
-  }
-  return new (P || (P = Promise))(function(resolve, reject) {
-    function fulfilled(value) {
-      try {
-        step(generator.next(value));
-      } catch (e) {
-        reject(e);
-      }
-    }
-    function rejected(value) {
-      try {
-        step(generator["throw"](value));
-      } catch (e) {
-        reject(e);
-      }
-    }
-    function step(result2) {
-      result2.done ? resolve(result2.value) : adopt(result2.value).then(fulfilled, rejected);
-    }
-    step((generator = generator.apply(thisArg, _arguments || [])).next());
-  });
-};
-class SFormValidateFeature extends SFeature {
-  // @ts-ignore
-  constructor(name2, node, settings) {
-    var _a2, _b2, _c2, _d2;
-    Object.keys((_b2 = (_a2 = SComponentUtils.getDefaultProps(name2)) === null || _a2 === void 0 ? void 0 : _a2.customValidations) !== null && _b2 !== void 0 ? _b2 : {}).forEach((validationName) => {
-      if (SFormValidateFeatureInterface.definition[validationName])
-        return;
-      SFormValidateFeatureInterface.definition[validationName] = {
-        type: "String|Boolean"
-      };
-    });
-    super(name2, node, __deepMerge({
-      name: "s-form-validate",
-      interface: SFormValidateFeatureInterface,
-      style: __css$7
-    }, settings !== null && settings !== void 0 ? settings : {}));
-    this._nodeByValidator = {};
-    this._isDirty = false;
-    this._isValidating = false;
-    if (!((_c2 = this.props.handlers) === null || _c2 === void 0 ? void 0 : _c2.password)) {
-      (_d2 = this.props.handlers) === null || _d2 === void 0 ? void 0 : _d2.password = this._passwordDefaultHandler;
-    }
-    this._validator = new SValidator();
-    this._$form = __querySelectorUp(this.node, "form");
-    if (this._$form) {
-      this._$form.addEventListener("submit", (e) => {
-        var _a3;
-        if (!this._$form._submitHandler) {
-          this._$form._submitHandler = true;
-          const collectedErrors = [];
-          const errorHandler = (e2) => {
-            collectedErrors.push(e2.detail);
-          };
-          this._$form.addEventListener("s-form-validate.error", errorHandler);
-          e.preventDefault();
-          if (e instanceof CustomEvent && !((_a3 = e.detail) === null || _a3 === void 0 ? void 0 : _a3.internal))
-            ;
-          else {
-            e.stopPropagation();
-          }
-          setTimeout(() => {
-            delete this._$form._submitHandler;
-            this._$form.removeEventListener("s-form-validate.error", errorHandler);
-            if (!collectedErrors.length) {
-              this._$form.submit();
-              if (e instanceof CustomEvent)
-                ;
-              else {
-                this._$form.dispatchEvent(new CustomEvent("submit", {
-                  bubbles: true,
-                  cancelable: true
-                }));
-              }
-            }
-          });
-        }
-      });
-    }
-    this.utils.exposeApi({
-      validate: this.validate
-    }, this);
-    if (this.props.nodes) {
-      this._$nodes = this.node.querySelectorAll(this.props.nodes);
-      this._$nodes.forEach(($node) => {
-        for (let i = 0; i < $node.attributes.length; i++) {
-          const attr = $node.attributes[i];
-          if (attr.name in this.props) {
-            this.props[__camelCase(attr.name)] = __parse(attr.value);
-            this._nodeByValidator[__camelCase(attr.name)] = $node;
-          }
-        }
-      });
-    }
-  }
-  mount() {
-    __querySelectorLive("input,textarea,select", ($field) => {
-      this._initField($field);
-    }, {
-      rootNode: this.node,
-      scopes: false
-    });
-    if (this.props.type) {
-      if (this.props.type === "text")
-        this._validationType = "string";
-      else
-        this._validationType = this.props.type;
-    }
-  }
-  _passwordDefaultHandler({ result: result2, $feature }) {
-    var _a2;
-    if (result2.valid) {
-      $feature.classList.remove(`password-weak`);
-      $feature.classList.remove(`password-medium`);
-      $feature.classList.remove(`password-strong`);
-    } else if ((_a2 = result2.metas) === null || _a2 === void 0 ? void 0 : _a2.levels) {
-      result2.metas.levels.forEach((level) => {
-        if (level !== result2.metas.validLevels.slice(-1)[0]) {
-          $feature.classList.remove(`password-${level}`);
-        } else {
-          $feature.classList.add(`password-${level}`);
-        }
-      });
-    }
-  }
-  _initField($field) {
-    this._$field = $field;
-    this._$field = this.node;
-    const $insideField = this.node.querySelector("input,textarea,select");
-    if ($insideField)
-      this._$field = $insideField;
-    this._$field.setAttribute("novalidate", "true");
-    ["required", "maxlength", "minlength", "max", "min", "pattern"].forEach((type) => {
-      if (this._$field.hasAttribute(type)) {
-        if (this.props[type])
-          return;
-        this.props[type] = this._$field.getAttribute(type);
-        if (type !== "maxlength" && type !== "minlength") {
-          this._$field.removeAttribute(type);
-        }
-      }
-    });
-    ["keydown", "change"].forEach((eventType) => {
-      this._$field.addEventListener(eventType, (e) => {
-        if (this.props.format && (e.target.type === "text" || e.target.tagName.toLowerCase() === "textarea")) {
-          setTimeout(() => {
-            var _a2;
-            const newValue = this.format((_a2 = e.target.value) !== null && _a2 !== void 0 ? _a2 : "", this.props.format);
-            if (newValue !== e.target.value) {
-              this._$field.value = newValue;
-            }
-          });
-        }
-      });
-    });
-    this.props.on.forEach((on) => {
-      var _a2, _b2;
-      if (on === "enter") {
-        this._$field.addEventListener("keyup", (e) => {
-          if (e.keyCode !== 13)
-            return;
-          if (this._$form) {
-            this._$form.dispatchEvent(new CustomEvent("submit", {
-              bubbles: false,
-              detail: {
-                internal: true
-                // internal marker to let the validation be made globally on all the validators
-              }
-            }));
-          } else {
-            this.validate(e);
-          }
-        });
-      } else if (on === "reset") {
-        (_a2 = this._$field.form) === null || _a2 === void 0 ? void 0 : _a2.addEventListener(on, (e) => {
-          setTimeout(() => {
-            this.validate(e);
-          });
-        });
-      } else if (on === "submit") {
-        (_b2 = this._$field.form) === null || _b2 === void 0 ? void 0 : _b2.addEventListener(on, (e) => {
-          var _a3;
-          e.preventDefault();
-          if (e instanceof CustomEvent && !((_a3 = e.detail) === null || _a3 === void 0 ? void 0 : _a3.internal))
-            return;
-          e.stopPropagation();
-          this.validate(e);
-        });
-      } else if (on === "keyup") {
-        this.node.addEventListener(on, (e) => {
-          if (!this._isDirty)
-            return;
-          this.validate(e);
-        });
-      } else {
-        this.node.addEventListener(on, (e) => {
-          this.validate(e);
-        });
-      }
-    });
-  }
-  format(value, format2) {
-    const newValue = format$1(value, format2);
-    return newValue;
-  }
-  validate(event) {
-    var _a2;
-    if (!this._$field) {
-      throw new Error(`No $field has been found to be validated...`);
-    }
-    let value = this._getFieldValue();
-    if (((_a2 = event === null || event === void 0 ? void 0 : event.currentTarget) === null || _a2 === void 0 ? void 0 : _a2.tagName.toLowerCase()) === "form" && event.type !== "reset") {
-      event.preventDefault();
-    }
-    if (this._isValidating)
-      return;
-    this._isValidating = true;
-    setTimeout(() => {
-      this._isValidating = false;
-    });
-    let resultObj;
-    const validatorRules = {};
-    for (let [validator, definition2] of Object.entries(SValidator.getValidatorsDefinition())) {
-      if (this.props[validator] !== void 0) {
-        validatorRules[validator] = this.props[validator];
-      }
-    }
-    resultObj = this._validator.validate(value, validatorRules);
-    if (event.type === "reset") {
-      resultObj = {
-        valid: true
-      };
-    }
-    this._applyResult(resultObj, event);
-  }
-  _getFieldValue() {
-    switch (true) {
-      case this._$field.type === "checkbox":
-        return this._getCheckboxValues();
-      case this._$field.type === "range":
-        return this._getRangeValue();
-      case this._$field.tagName.toLowerCase() === "select":
-        return this._getSelectValues();
-      case this._$field.type === "radio":
-        return this._getRadioValue();
-      default:
-        return this._$field.value;
-    }
-  }
-  _getCheckboxValues() {
-    return Array.from(
-      // @ts-ignore
-      this.node.querySelectorAll('input[type="checkbox"]:checked')
-    ).map(($item) => $item.value);
-  }
-  _getRadioValue() {
-    return this.node.querySelector('input[type="radio"]:checked').value;
-  }
-  _getRangeValue() {
-    return parseFloat(this._$field.value);
-  }
-  _getSelectValues() {
-    return Array.from(this._$field.querySelectorAll("option")).filter(($item) => $item.selected).map(($item) => $item.value);
-  }
-  _applyResult(res, event) {
-    var _a2, _b2, _c2, _d2, _e2, _f;
-    return __awaiter$a(this, void 0, void 0, function* () {
-      for (let [validator, definition2] of Object.entries(SValidator.getValidatorsDefinition())) {
-        if (!this.props[validator]) {
-          continue;
-        }
-        if (this.props.handlers[validator]) {
-          yield this.props.handlers[validator]({
-            result: Object.assign({}, (_b2 = (_a2 = res.rules) === null || _a2 === void 0 ? void 0 : _a2[validator]) !== null && _b2 !== void 0 ? _b2 : res),
-            props: this.props,
-            $feature: this.node,
-            $form: this._$form,
-            $field: this._$field,
-            $node: (_c2 = this._nodeByValidator) === null || _c2 === void 0 ? void 0 : _c2[validator]
-          });
-        }
-      }
-      if (!res.valid) {
-        this._isDirty = true;
-        this.node.classList.add(...this.props.errorClass.split(" "));
-        this.node.classList.remove(...this.props.validClass.split(" "));
-        const firstInvalidValidator = Object.keys(res.rules)[0];
-        if (!Object.keys(this._nodeByValidator).length) {
-          const finalMessage = this.props[`${firstInvalidValidator}Message`] || res.messages[0];
-          if (this.props.displayError) {
-            this._$error = (_d2 = this.node.querySelector(`[${this.props.errorContainerAttr}]`)) !== null && _d2 !== void 0 ? _d2 : this.node.nextElementSibling;
-            if (!this._$error || !this._$error.hasAttribute("s-form-validate-error")) {
-              this._$error = document.createElement("p");
-              this._$error.setAttribute("s-form-validate-error", "true");
-              this._$error.classList.add("s-form-validate-error-message");
-              this.node.parentNode.insertBefore(this._$error, this.node.nextSibling);
-            }
-            this._$error.innerHTML = finalMessage;
-          }
-        } else {
-          for (let [validator, validationObj] of Object.entries(res.rules)) {
-            if (!this._nodeByValidator[validator])
-              continue;
-            if (validationObj.valid) {
-              this._nodeByValidator[validator].classList.remove(...this.props.errorClass.split(" "));
-              this._nodeByValidator[validator].classList.add(...this.props.validClass.split(" "));
-            } else {
-              this._nodeByValidator[validator].classList.remove(...this.props.validClass.split(" "));
-              this._nodeByValidator[validator].classList.add(...this.props.errorClass.split(" "));
-            }
-          }
-        }
-        this.utils.dispatchEvent("error", {
-          detail: res
-        });
-      } else {
-        this._isDirty = false;
-        if (event.type !== "reset") {
-          this.node.classList.add(...this.props.validClass.split(" "));
-        } else {
-          this.node.classList.remove(...this.props.validClass.split(" "));
-        }
-        this.node.classList.remove(...this.props.errorClass.split(" "));
-        if ((_e2 = this._$error) === null || _e2 === void 0 ? void 0 : _e2.hasAttribute("s-form-validate-error")) {
-          (_f = this._$error) === null || _f === void 0 ? void 0 : _f.remove();
-        }
-        if (Object.keys(this._nodeByValidator).length) {
-          for (let [validator, validationObj] of Object.entries(res.rules)) {
-            if (!this._nodeByValidator[validator])
-              continue;
-            this._nodeByValidator[validator].classList.remove(...this.props.errorClass.split(" "));
-            this._nodeByValidator[validator].classList.add(...this.props.validClass.split(" "));
-          }
-        }
-        this.utils.dispatchEvent("valid", {
-          detail: res
-        });
-      }
-    });
-  }
-}
-class SInlineFeatureInterface extends SInterface {
-  static get _definition() {
-    return {};
-  }
-}
-function define$9(props = {}, name2 = "s-inline") {
-  SInlineFeature.define(name2, SInlineFeature, props);
-}
-const sInlineFeature = "";
-var __awaiter$9 = globalThis && globalThis.__awaiter || function(thisArg, _arguments, P, generator) {
-  function adopt(value) {
-    return value instanceof P ? value : new P(function(resolve) {
-      resolve(value);
-    });
-  }
-  return new (P || (P = Promise))(function(resolve, reject) {
-    function fulfilled(value) {
-      try {
-        step(generator.next(value));
-      } catch (e) {
-        reject(e);
-      }
-    }
-    function rejected(value) {
-      try {
-        step(generator["throw"](value));
-      } catch (e) {
-        reject(e);
-      }
-    }
-    function step(result2) {
-      result2.done ? resolve(result2.value) : adopt(result2.value).then(fulfilled, rejected);
-    }
-    step((generator = generator.apply(thisArg, _arguments || [])).next());
-  });
-};
-class SInlineFeature extends SFeature {
-  constructor(name2, node, settings) {
-    super(name2, node, __deepMerge({
-      name: "s-inline",
-      interface: SInlineFeatureInterface
-    }, settings !== null && settings !== void 0 ? settings : {}));
-  }
-  mount() {
-    if (this.node.tagName === "IMG") {
-      const src2 = this.node.src;
-      this._inlineImg(src2);
-    } else {
-      throw new Error(`Sorry but your s-inline marked Element cannot be inlined. At least for now...`);
-    }
-  }
-  /**
-   * Inline image like SVG
-   */
-  _inlineImg(src2) {
-    return __awaiter$9(this, void 0, void 0, function* () {
-      const r = yield fetch(src2);
-      const text = yield r.text();
-      const parser = new DOMParser();
-      const $svg = parser.parseFromString(text, "text/html").body.firstChild;
-      $svg.setAttribute("class", this.node.getAttribute("class"));
-      this.node.after($svg);
-      this.node.remove();
-    });
-  }
-}
 var isff = typeof navigator !== "undefined" ? navigator.userAgent.toLowerCase().indexOf("firefox") > 0 : false;
 function addEvent(object, event, method, useCapture) {
   if (object.addEventListener) {
@@ -29939,7 +28613,7 @@ class SPanelComponentInterface extends SInterface {
     };
   }
 }
-const __css$6 = `.s-panel {
+const __css$2 = `.s-panel {
     display: block;
     position: fixed;
     top: 0;
@@ -30051,7 +28725,7 @@ const __css$6 = `.s-panel {
                     content: '{"lod":{"enabled":true,"defaultLevel":3,"botLevel":1,"levels":{"0":{"name":"bare","speedIndex":0},"1":{"name":"lnf","speedIndex":30},"2":{"name":"theme","speedIndex":40},"3":{"name":"high","speedIndex":50},"4":{"name":"ultra","speedIndex":60}},"method":"class","defaultAction":">=","cssProperties":{"animation":2,"animation-delay":2,"animation-direction":2,"animation-duration":2,"animation-fill-mode":2,"animation-iteration-count":2,"animation-name":2,"animation-play-state":2,"animation-timing-function":2,"backdrop-filter":3,"background":1,"background-attachment":1,"background-blend-mode":3,"background-clip":1,"background-color":1,"background-image":1,"background-origin":1,"background-position":1,"background-repeat":1,"background-size":1,"border":1,"border-bottom":1,"border-bottom-color":1,"border-bottom-left-radius":1,"border-bottom-right-radius":1,"border-bottom-style":1,"border-bottom-width":1,"border-collapse":1,"border-color":1,"border-image":1,"border-image-outset":1,"border-image-repeat":1,"border-image-slice":1,"border-image-source":1,"border-image-width":1,"border-left":1,"border-left-color":1,"border-left-style":1,"border-left-width":1,"border-radius":1,"border-right":1,"border-right-color":1,"border-right-style":1,"border-right-width":1,"border-spacing":1,"border-style":1,"border-top":1,"border-top-color":1,"border-top-left-radius":1,"border-top-right-radius":1,"border-top-style":1,"border-top-width":1,"border-width":1,"box-shadow":1,"caret-color":1,"color":1,"column-count":1,"column-fill":1,"column-rule":1,"column-rule-color":1,"column-rule-style":1,"column-rule-width":1,"counter-increment":1,"counter-reset":1,"filter":1,"list-style-image":1,"outline":1,"outline-color":1,"outline-offset":1,"outline-style":1,"outline-width":1,"text-decoration":1,"text-decoration-color":1,"text-decoration-line":1,"text-indent":1,"text-justify":1,"text-overflow":1,"text-shadow":2,"text-transform":1,"transition":1,"transition-delay":1,"transition-duration":1,"transition-property":1,"transition-timing-function":1,"word-break":1,"word-spacing":1,"word-wrap":1}},"clean":{"variables":false},"compress":{"variables":false}}';
 }
 `;
-var __awaiter$8 = globalThis && globalThis.__awaiter || function(thisArg, _arguments, P, generator) {
+var __awaiter$b = globalThis && globalThis.__awaiter || function(thisArg, _arguments, P, generator) {
   function adopt(value) {
     return value instanceof P ? value : new P(function(resolve) {
       resolve(value);
@@ -30084,7 +28758,7 @@ class SPanelComponent extends SLitComponent {
   }
   static get styles() {
     return css`
-            ${unsafeCSS(__css$6)}
+            ${unsafeCSS(__css$2)}
         `;
   }
   constructor() {
@@ -30098,7 +28772,7 @@ class SPanelComponent extends SLitComponent {
     }
   }
   mount() {
-    return __awaiter$8(this, void 0, void 0, function* () {
+    return __awaiter$b(this, void 0, void 0, function* () {
       if (this.parentElement !== document.body) {
         document.body.appendChild(this);
       }
@@ -30252,86 +28926,10 @@ class SPanelComponent extends SLitComponent {
   }
 }
 SPanelComponent._activePanels = [];
-function define$8(props = {}, tagName = "s-panel") {
+function define$a(props = {}, tagName = "s-panel") {
   SLitComponent.define(tagName, SPanelComponent, props);
 }
-class SRangeComponentInterface extends SInterface {
-  static get _definition() {
-    return {
-      name: {
-        type: "String",
-        description: 'Specify the name to assign to the internal input[type="range"]'
-      },
-      value: {
-        type: "Number",
-        description: "Specify the initial range value"
-      },
-      values: {
-        type: "Object",
-        description: 'Specify some values in array like ["hello","world"] that will be used for tooltip. Your range steps MUST be integers for this to work properly'
-      },
-      min: {
-        type: "Number",
-        description: "Specify the minimal value or the range",
-        default: 0
-      },
-      max: {
-        type: "Number",
-        description: "Specify the maximal value of the range",
-        default: 100
-      },
-      step: {
-        type: "Number",
-        description: "Specify the steps between each values"
-      },
-      target: {
-        type: "String",
-        description: "Specify a css selector of any HTMLElement or HTMLInputElement in which to inject the value when the range is updated"
-      },
-      tooltip: {
-        type: "Boolean",
-        description: "Specify if you want to display the value inside a tooltip on top of the thumb",
-        default: false
-      },
-      disabled: {
-        type: "Boolean",
-        description: "Specify if this range is disabled",
-        default: false
-      }
-    };
-  }
-}
-const __css$5 = `.s-range {
-    display: block;
-    width: 100%;
-}
-
-    .s-range:not([mounted]) > * {
-        display: none;
-    }
-
-    .s-range[disabled] {
-        pointer-events: none;
-    }
-.s-range_root {
-    display: flex;
-    width: 100%;
-}
-.s-range_input {
-    flex-grow: 1;
-    opacity: 1 !important;
-}
-.s-range_input:hover + .s-range_tooltip,.s-range_input:focus + .s-range_tooltip {
-    opacity: 1 !important;
-}
-.s-lod--1 .s-range_tooltip {
-    transition: none;
-}body:after {
-                    display: none;;
-                    content: '{"lod":{"enabled":true,"defaultLevel":3,"botLevel":1,"levels":{"0":{"name":"bare","speedIndex":0},"1":{"name":"lnf","speedIndex":30},"2":{"name":"theme","speedIndex":40},"3":{"name":"high","speedIndex":50},"4":{"name":"ultra","speedIndex":60}},"method":"class","defaultAction":">=","cssProperties":{"animation":2,"animation-delay":2,"animation-direction":2,"animation-duration":2,"animation-fill-mode":2,"animation-iteration-count":2,"animation-name":2,"animation-play-state":2,"animation-timing-function":2,"backdrop-filter":3,"background":1,"background-attachment":1,"background-blend-mode":3,"background-clip":1,"background-color":1,"background-image":1,"background-origin":1,"background-position":1,"background-repeat":1,"background-size":1,"border":1,"border-bottom":1,"border-bottom-color":1,"border-bottom-left-radius":1,"border-bottom-right-radius":1,"border-bottom-style":1,"border-bottom-width":1,"border-collapse":1,"border-color":1,"border-image":1,"border-image-outset":1,"border-image-repeat":1,"border-image-slice":1,"border-image-source":1,"border-image-width":1,"border-left":1,"border-left-color":1,"border-left-style":1,"border-left-width":1,"border-radius":1,"border-right":1,"border-right-color":1,"border-right-style":1,"border-right-width":1,"border-spacing":1,"border-style":1,"border-top":1,"border-top-color":1,"border-top-left-radius":1,"border-top-right-radius":1,"border-top-style":1,"border-top-width":1,"border-width":1,"box-shadow":1,"caret-color":1,"color":1,"column-count":1,"column-fill":1,"column-rule":1,"column-rule-color":1,"column-rule-style":1,"column-rule-width":1,"counter-increment":1,"counter-reset":1,"filter":1,"list-style-image":1,"outline":1,"outline-color":1,"outline-offset":1,"outline-style":1,"outline-width":1,"text-decoration":1,"text-decoration-color":1,"text-decoration-line":1,"text-indent":1,"text-justify":1,"text-overflow":1,"text-shadow":2,"text-transform":1,"transition":1,"transition-delay":1,"transition-duration":1,"transition-property":1,"transition-timing-function":1,"word-break":1,"word-spacing":1,"word-wrap":1}},"clean":{"variables":false},"compress":{"variables":false}}';
-}
-`;
-var __awaiter$7 = globalThis && globalThis.__awaiter || function(thisArg, _arguments, P, generator) {
+var __awaiter$a = globalThis && globalThis.__awaiter || function(thisArg, _arguments, P, generator) {
   function adopt(value) {
     return value instanceof P ? value : new P(function(resolve) {
       resolve(value);
@@ -30358,94 +28956,15 @@ var __awaiter$7 = globalThis && globalThis.__awaiter || function(thisArg, _argum
     step((generator = generator.apply(thisArg, _arguments || [])).next());
   });
 };
-class SRangeComponent extends SLitComponent {
-  static get properties() {
-    return SLitComponent.propertiesFromInterface({}, SRangeComponentInterface);
-  }
-  static get styles() {
-    return css`
-            ${unsafeCSS(`
-                ${__css$5}
-            `)}
-        `;
-  }
-  constructor() {
-    super(__deepMerge({
-      name: "s-range",
-      interface: SRangeComponentInterface
-    }));
-  }
-  firstUpdated() {
-    var _a2;
-    return __awaiter$7(this, void 0, void 0, function* () {
-      this._$input = this.querySelector("input");
-      this._$tooltip = this.querySelector(".s-range_tooltip");
-      this._$input.addEventListener("input", (e) => {
-        this._handleTooltip();
-        this._handleTarget();
-      });
-      if (this.props.target) {
-        this._$targets = Array.from(document.querySelectorAll(this.props.target));
-      }
-      this._$input.value = this.props.value;
-      if ((_a2 = this._$input) === null || _a2 === void 0 ? void 0 : _a2.form) {
-        this._$input.form.addEventListener("reset", () => {
-          setTimeout(() => {
-            this._handleTooltip();
-            this._handleTarget();
-          });
-        });
-      }
-      this._handleTooltip();
-      this._handleTarget();
-    });
-  }
-  _handleTarget() {
-    if (!this._$targets)
-      return;
-    this._$targets.forEach(($target) => {
-      $target.innerHTML = this._$input.value;
-      $target.value = this._$input.value;
-    });
-  }
-  _handleTooltip() {
-    if (!this._$tooltip)
-      return;
-    const val = this._$input.value;
-    const min2 = this._$input.min ? this._$input.min : 0;
-    const max2 = this._$input.max ? this._$input.max : 100;
-    const newVal = Number((val - min2) * 100 / (max2 - min2));
-    this._$tooltip.style.left = `calc(${newVal}% + (${8 - newVal * 0.15}px))`;
-    let tooltipValue = val;
-    if (this.props.values && this.props.values[val]) {
-      tooltipValue = this.props.values[val];
-    }
-    this._$tooltip.innerHTML = tooltipValue;
-  }
-  render() {
-    return html`
-            <div class="${this.utils.cls("_root", "s-tooltip-container")}">
-                <input
-                    class="${this.utils.cls("_input", "s-range")}"
-                    type="range"
-                    ?disabled="${this.props.disabled}"
-                    name="${this.props.name}"
-                    value="${this.props.value}"
-                    min="${this.props.min}"
-                    max="${this.props.max}"
-                    step="${this.props.step}"
-                />
-                ${this.props.tooltip ? html`
-                          <div
-                              class="${this.utils.cls("_tooltip", "s-tooltip")}"
-                          ></div>
-                      ` : ""}
-            </div>
-        `;
-  }
-}
-function define$7(props = {}, tagName = "s-range") {
-  SLitComponent.define(tagName, SRangeComponent, props);
+function define$9(props, tagName = "s-range", settings = {}) {
+  var _a2;
+  __querySelectorLive(tagName, ($elm) => __awaiter$a(this, void 0, void 0, function* () {
+    const define2 = yield __vitePreload(() => import("./define-28541058.js"), true ? [] : void 0);
+    define2.default(props, tagName, settings);
+  }), {
+    when: (_a2 = settings.when) !== null && _a2 !== void 0 ? _a2 : "direct",
+    firstOnly: true
+  });
 }
 class SRefocusFeatureInterface extends SInterface {
   static get _definition() {
@@ -30513,10 +29032,10 @@ class SRefocusFeatureInterface extends SInterface {
     };
   }
 }
-function define$6(props = {}, name2 = "s-refocus") {
+function define$8(props = {}, name2 = "s-refocus") {
   SRefocusFeature.define(name2, SRefocusFeature, Object.assign({}, props));
 }
-var __awaiter$6 = globalThis && globalThis.__awaiter || function(thisArg, _arguments, P, generator) {
+var __awaiter$9 = globalThis && globalThis.__awaiter || function(thisArg, _arguments, P, generator) {
   function adopt(value) {
     return value instanceof P ? value : new P(function(resolve) {
       resolve(value);
@@ -30596,7 +29115,7 @@ class SRefocusFeature extends SFeature {
     });
   }
   _scrollTo($elm) {
-    return __awaiter$6(this, void 0, void 0, function* () {
+    return __awaiter$9(this, void 0, void 0, function* () {
       if (this._currentScrolledTargets.includes($elm)) {
         return;
       }
@@ -30672,10 +29191,10 @@ class SScrollComponentInterface extends SInterface {
     };
   }
 }
-function define$5(props = {}, tagName = "s-scroll") {
-  SScrollComponent.define(tagName, SScrollComponent, props);
+function define$7(props = {}, tagName = "s-scroll", settings) {
+  SScrollComponent.define(tagName, SScrollComponent, props, settings);
 }
-const __css$4 = `s-scroll {
+const __css$1 = `s-scroll {
     display: inline-block;
     cursor: pointer;
 }body:after {
@@ -30683,7 +29202,7 @@ const __css$4 = `s-scroll {
                     content: '{"lod":{"enabled":true,"defaultLevel":3,"botLevel":1,"levels":{"0":{"name":"bare","speedIndex":0},"1":{"name":"lnf","speedIndex":30},"2":{"name":"theme","speedIndex":40},"3":{"name":"high","speedIndex":50},"4":{"name":"ultra","speedIndex":60}},"method":"class","defaultAction":">=","cssProperties":{"animation":2,"animation-delay":2,"animation-direction":2,"animation-duration":2,"animation-fill-mode":2,"animation-iteration-count":2,"animation-name":2,"animation-play-state":2,"animation-timing-function":2,"backdrop-filter":3,"background":1,"background-attachment":1,"background-blend-mode":3,"background-clip":1,"background-color":1,"background-image":1,"background-origin":1,"background-position":1,"background-repeat":1,"background-size":1,"border":1,"border-bottom":1,"border-bottom-color":1,"border-bottom-left-radius":1,"border-bottom-right-radius":1,"border-bottom-style":1,"border-bottom-width":1,"border-collapse":1,"border-color":1,"border-image":1,"border-image-outset":1,"border-image-repeat":1,"border-image-slice":1,"border-image-source":1,"border-image-width":1,"border-left":1,"border-left-color":1,"border-left-style":1,"border-left-width":1,"border-radius":1,"border-right":1,"border-right-color":1,"border-right-style":1,"border-right-width":1,"border-spacing":1,"border-style":1,"border-top":1,"border-top-color":1,"border-top-left-radius":1,"border-top-right-radius":1,"border-top-style":1,"border-top-width":1,"border-width":1,"box-shadow":1,"caret-color":1,"color":1,"column-count":1,"column-fill":1,"column-rule":1,"column-rule-color":1,"column-rule-style":1,"column-rule-width":1,"counter-increment":1,"counter-reset":1,"filter":1,"list-style-image":1,"outline":1,"outline-color":1,"outline-offset":1,"outline-style":1,"outline-width":1,"text-decoration":1,"text-decoration-color":1,"text-decoration-line":1,"text-indent":1,"text-justify":1,"text-overflow":1,"text-shadow":2,"text-transform":1,"transition":1,"transition-delay":1,"transition-duration":1,"transition-property":1,"transition-timing-function":1,"word-break":1,"word-spacing":1,"word-wrap":1}},"clean":{"variables":false},"compress":{"variables":false}}';
 }
 `;
-var __awaiter$5 = globalThis && globalThis.__awaiter || function(thisArg, _arguments, P, generator) {
+var __awaiter$8 = globalThis && globalThis.__awaiter || function(thisArg, _arguments, P, generator) {
   function adopt(value) {
     return value instanceof P ? value : new P(function(resolve) {
       resolve(value);
@@ -30717,7 +29236,7 @@ class SScrollComponent extends SLitComponent {
   static get styles() {
     return css`
             ${unsafeCSS(`
-                ${__css$4}
+                ${__css$1}
             `)}
         `;
   }
@@ -30728,7 +29247,7 @@ class SScrollComponent extends SLitComponent {
     }));
   }
   firstUpdated() {
-    return __awaiter$5(this, void 0, void 0, function* () {
+    return __awaiter$8(this, void 0, void 0, function* () {
       this.addEventListener("click", (e) => {
         e.preventDefault();
         this._scrollTo(this.props.to);
@@ -30775,692 +29294,7 @@ class SScrollComponent extends SLitComponent {
     return html``;
   }
 }
-const __css$3 = `.s-slider {
-    display: block;
-    font-size: calc(1rem * var(--s-scale, 1) * var(--s-scale-global, 1));
-    --s-slider-space: 20px;
-}
-
-    .s-slider > .s-slider_root,
-    .s-slider > .s-slider_root > .s-slider_slides-wrapper {
-        position: relative;
-    }
-
-    .s-slider > .s-slider_root,
-    .s-slider > .s-slider_root > .s-slider_slides-wrapper,
-    .s-slider > .s-slider_root > .s-slider_slides-wrapper > .s-slider_slides {
-        height: 100%;
-        width: 100%;
-    }
-
-    .s-slider > .s-slider_root
-        > .s-slider_slides-wrapper
-        > .s-slider_slides
-        > .s-slider_slide {
-        position: relative;
-    }
-
-    .s-slider[direction='vertical'][pad] > .s-slider_root > .s-slider_slides-wrapper > .s-slider_slides > .s-slider_pad-start {
-                    height: var(--s-slider-pad-start, 0);
-                }
-
-    .s-slider[direction='vertical'][pad] > .s-slider_root > .s-slider_slides-wrapper > .s-slider_slides > .s-slider_pad-end {
-                    height: var(--s-slider-pad-end, 0);
-                }
-
-    .s-slider[direction='horizontal'][pad] > .s-slider_root > .s-slider_slides-wrapper > .s-slider_slides > .s-slider_pad-start {
-                    width: var(--s-slider-pad-start, 0);
-                }
-
-    .s-slider[direction='horizontal'][pad] > .s-slider_root > .s-slider_slides-wrapper > .s-slider_slides > .s-slider_pad-end {
-                    width: var(--s-slider-pad-end, 0);
-                }
-
-.s-slider_media-container {
-}
-
-.s-slider_media {
-    width: 100%;
-    height: 100%;
-    -o-object-fit: cover;
-       object-fit: cover;
-}
-
-.s-slider_body {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    background: hsla(calc(var(--s-theme-color-main-h, 0) + var(--s-theme-color-main-background-spin ,0)),calc((var(--s-theme-color-main-s, 0) + var(--s-theme-color-main-background-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-main-l, 0) + var(--s-theme-color-main-background-lightness-offset, 0)) * 1%),0.3);
-    padding: calc(calc(var(--s-theme-padding-default, 1rem) * var(--s-scale, 1) * var(--s-scale-global, 1)) * 3.25);
-    display: flex;
-    flex-direction: column;
-    gap: calc(var(--s-theme-margin-default, 1rem) * 1.5);
-}
-
-.s-slider_title {display: block;font-family: var(--s-theme-font-family-title-font-family, "Roboto"); 
- font-weight: var(--s-theme-font-family-title-font-weight, 500);font-size: calc(var(--s-theme-font-size-default, 15px) * calc(var(--s-theme-font-size-80, 3) * var(--s-scale, 1) * var(--s-scale-global, 1)));
-line-height: 1.3;
-max-width: 55ch;
-}
-
-@media (max-width: 639px) {
-
-.s-slider_title {font-size: calc(var(--s-theme-font-size-default, 15px) * calc(var(--s-theme-font-size-70, 2.5) * var(--s-scale, 1) * var(--s-scale-global, 1)));
-}
-}
-
-.s-slider_title {
-    color: hsla(calc(var(--s-theme-color-accent-h, 0) + var(--s-theme-color-accent-spin ,0)),calc((var(--s-theme-color-accent-s, 0)) * 1%),calc((var(--s-theme-color-accent-l, 0)) * 1%),var(--s-theme-color-accent-a, 1));
-}
-
-.s-slider_intro {display: block;font-family: var(--s-theme-font-family-default-font-family, "Roboto"); 
- font-weight: var(--s-theme-font-family-default-font-weight, 400);font-size: calc(var(--s-theme-font-size-default, 15px) * calc(var(--s-theme-font-size-40, 1.25) * var(--s-scale, 1) * var(--s-scale-global, 1)));
-line-height: 1.6;
-max-width: 55ch;
-}
-
-@media (max-width: 639px) {
-
-.s-slider_intro {font-size: calc(var(--s-theme-font-size-default, 15px) * calc(var(--s-theme-font-size-40, 1.25) * var(--s-scale, 1) * var(--s-scale-global, 1)));
-}
-}
-
-.s-slider_intro {
-    max-width: 100%;
-}
-
-.s-slider_text {display: block;font-family: var(--s-theme-font-family-default-font-family, "Roboto"); 
- font-weight: var(--s-theme-font-family-default-font-weight, 400);font-size: calc(var(--s-theme-font-size-default, 15px) * calc(var(--s-theme-font-size-30, 1.1) * var(--s-scale, 1) * var(--s-scale-global, 1)));
-line-height: 1.8;
-max-width: 55ch;
-    max-width: 100%;
-}
-
-.s-slider[behavior='scroll'] > .s-slider_root > .s-slider_slides-wrapper {
-            overflow: auto;
-            overflow-y: hidden;
-            scroll-snap-type: x mandatory;
-
-            /* hide scrollbar */
-            -ms-overflow-style: none;
-            scrollbar-width: none;
-        }
-
-.s-slider[behavior='scroll'] > .s-slider_root > .s-slider_slides-wrapper::-webkit-scrollbar {
-                display: none;
-            }
-
-.s-slider[behavior='scroll'] > .s-slider_root > .s-slider_slides-wrapper > .s-slider_slides > .s-slider_slide {
-                    scroll-snap-align: center;
-                }
-
-.s-slider[behavior='scroll'][direction='vertical'] > .s-slider_root > .s-slider_slides-wrapper {
-                overflow-x: hidden;
-                overflow-y: auto;
-                scroll-snap-type: y mandatory;
-            }
-
-.s-slider[lnf^='default'] {
-    position: relative;
-    --s-slider-space: 20px;
-}
-
-.s-slider[lnf^='default']:not([class*='s-ratio']) {
-        aspect-ratio: 16/9;
-    }
-
-.s-slider[lnf^='default']:not([mounted]) {
-        opacity: 0;
-    }
-
-.s-slider[lnf^='default'] .s-slider_ui {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        width: 100%;
-        height: 100%;
-        transform: translate(-50%, -50%);
-        pointer-events: none;
-        z-index: 10;
-    }
-
-.s-slider[lnf^='default'] .s-slider_ui * {
-            pointer-events: all;
-        }
-
-.s-slider[lnf^='default'][pad] > .s-slider_root > .s-slider_slides-wrapper > .s-slider_slides > .s-slider_pad {
-                    flex-shrink: 0;
-                    flex-grow: 0;
-                }
-
-.s-slider[lnf^='default'] > .s-slider_root {
-        position: relative;
-    }
-
-.s-slider[lnf^='default'] > .s-slider_root > .s-slider_slides-wrapper {
-            /* position: absolute;
-            top: 0;
-            left: 0; */
-            width: 100%;
-            height: 100%;
-        }
-
-.s-slider[lnf^='default'] > .s-slider_root > .s-slider_slides-wrapper > .s-slider_slides {
-                display: inline-flex;
-                -webkit-user-select: none;
-                   -moz-user-select: none;
-                        user-select: none;
-                height: 100%;
-            }
-
-/* white-space: nowrap; */
-
-.s-slider[lnf^='default'] > .s-slider_root > .s-slider_slides-wrapper > .s-slider_slides > .s-slider_slide {
-                    display: block;
-                    flex-shrink: 0;
-                    flex-grow: 0;
-                    width: 100%;
-                    height: 100%;
-                    scroll-snap-align: center;
-
-                    /* &:nth-child(1) {
-                        background: red;
-                        width: 500px !important;
-                    }
-                    &:nth-child(2) {
-                        background: yellow;
-                        width: 800px !important;
-                    }
-                    &:nth-child(3) {
-                        background: blue;
-                        width: 80vw !important;
-                    } */
-                }
-
-.s-slider[lnf^='default'] > .s-slider_root > .s-slider_ui > .s-slider_nav {
-                position: absolute;
-                top: calc(100% + var(--s-slider-space));
-                left: 50%;
-                transform: translate(-50%);
-                display: flex;
-                gap: calc(var(--s-slider-space) * 0.5);
-            }
-
-.s-slider[lnf^='default'] > .s-slider_root > .s-slider_ui > .s-slider_nav > * {
-                    border-radius: 50%;
-                    display: block;
-                    width: 0.5em;
-                    height: 0.5em;
-                    background: currentColor;
-                    opacity: 0.2;
-                    cursor: pointer;
-                }
-
-.s-slider[lnf^='default'] > .s-slider_root > .s-slider_ui > .s-slider_nav > *:hover {
-                        opacity: 0.5;
-                    }
-
-.s-slider[lnf^='default'] > .s-slider_root > .s-slider_ui > .s-slider_nav > *.active {
-                        opacity: 1;
-                    }
-
-.s-slider[lnf^='default'][direction='vertical']
-        > .s-slider_root
-        > .s-slider_slides-wrapper
-        > .s-slider_slides {
-        display: block;
-        width: 100%;
-        height: auto;
-    }
-
-.s-slider[lnf^='default'][direction='vertical']
-        > .s-slider_root
-        > .s-slider_slides-wrapper
-        > .s-slider_slides > .s-slider_slide {
-            display: block;
-            width: 100% !important;
-
-            /* &:nth-child(1) {
-                background: red;
-                height: 500px !important;
-            }
-            &:nth-child(2) {
-                background: yellow;
-                height: 800px !important;
-            }
-            &:nth-child(3) {
-                background: blue;
-                height: 400px !important;
-            } */
-        }
-
-.s-slider[lnf^='default'][lnf$='-contain'] .s-slider_root > .s-slider_ui > .s-slider_nav {
-        top: auto;
-        bottom: calc(var(--s-slider-space) - 0.5em);
-        transform: translate(-50%, -100%);
-    }
-
-.s-slider[lnf^='default'][direction='vertical'] .s-slider_root > .s-slider_ui > .s-slider_nav {
-        top: 50%;
-        left: calc(100% + var(--s-slider-space));
-        transform: translate(0, -50%);
-        flex-direction: column;
-    }
-
-.s-slider[lnf^='default'][lnf$='-contain'][direction='vertical']
-        .s-slider_root
-        > .s-slider_ui
-        > .s-slider_nav {
-        bottom: auto;
-        left: auto;
-        right: calc(var(--s-slider-space));
-        transform: translate(0, -50%);
-    }
-
-.s-slider[lnf^='default'][lnf$='-tight'][direction='horizontal'][controls] {
-        padding-left: calc(var(--s-slider-space) + 1em);
-        padding-right: calc(var(--s-slider-space) + 1em);
-    }
-
-.s-slider[lnf^='default'][lnf$='-tight'][direction='horizontal'][nav] {
-        padding-bottom: calc(var(--s-slider-space) + 1em);
-    }
-
-.s-slider[lnf^='default'][lnf$='-tight'][direction='vertical'][controls] {
-        padding-top: calc(var(--s-slider-space) + 1em);
-        padding-bottom: calc(var(--s-slider-space) + 1em);
-    }
-
-.s-slider[lnf^='default'][lnf$='-tight'][direction='vertical'][nav] {
-        padding-right: calc(var(--s-slider-space) + 1em);
-    }
-
-.s-slider[lnf^='default'] > .s-slider_root > .s-slider_ui > .s-slider_progress {
-        position: absolute;
-        bottom: var(--s-slider-space);
-        left: var(--s-slider-space);
-        right: var(--s-slider-space);
-        height: 0.5em;
-    }
-
-.s-slider[lnf^='default'] > .s-slider_root > .s-slider_ui > .s-slider_progress:before {
-            content: '';
-            display: block;
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: currentColor;
-            opacity: 0.2;
-        }
-
-.s-slider[lnf^='default'] > .s-slider_root > .s-slider_ui > .s-slider_progress > .s-slider_progress-bar {
-            position: absolute;
-            top: 0;
-            left: 0;
-            height: 100%;
-            width: calc(
-                100% / (var(--s-slider-total-pages)) *
-                    (var(--s-slider-page) + 1)
-            );
-            background: currentColor;
-        }
-
-.s-slider[lnf^='default'][lnf$='-contain'] .s-slider_root > .s-slider_ui > .s-slider_progress {
-        bottom: calc(var(--s-slider-space) * 2);
-    }
-
-.s-slider[lnf^='default'] > .s-slider_root > .s-slider_ui > .s-slider_controls .s-slider_controls-next,
-        .s-slider[lnf^='default'] > .s-slider_root > .s-slider_ui > .s-slider_controls .s-slider_controls-previous {
-            width: 1em;
-            height: 1em;
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            cursor: pointer;
-            opacity: 0.2;
-            pointer-events: none;
-            color: currentColor;
-        }
-
-.s-slider[lnf^='default'] > .s-slider_root > .s-slider_ui > .s-slider_controls .s-slider_controls-next.active, .s-slider[lnf^='default'] > .s-slider_root > .s-slider_ui > .s-slider_controls .s-slider_controls-previous.active {
-                pointer-events: all;
-                opacity: 1;
-            }
-
-.s-slider[lnf^='default'] > .s-slider_root > .s-slider_ui > .s-slider_controls .s-slider_controls-previous {
-            right: calc(100% + var(--s-slider-space));
-        }
-
-.s-slider[lnf^='default'] > .s-slider_root > .s-slider_ui > .s-slider_controls .s-slider_controls-next {
-            left: calc(100% + var(--s-slider-space));
-        }
-
-.s-slider[lnf^='default'][lnf$='-contight'] > .s-slider_root
-            > .s-slider_ui
-            > .s-slider_controls
-            .s-slider_controls-previous, .s-slider[lnf^='default'][lnf$='-contain'] > .s-slider_root
-            > .s-slider_ui
-            > .s-slider_controls
-            .s-slider_controls-previous {
-            left: var(--s-slider-space);
-            transform: translate(0, -50%);
-        }
-
-.s-slider[lnf^='default'][lnf$='-contight'] > .s-slider_root
-            > .s-slider_ui
-            > .s-slider_controls
-            .s-slider_controls-next, .s-slider[lnf^='default'][lnf$='-contain'] > .s-slider_root
-            > .s-slider_ui
-            > .s-slider_controls
-            .s-slider_controls-next {
-            left: auto;
-            right: var(--s-slider-space);
-            transform: translate(0, -50%);
-        }
-
-.s-slider[lnf^='default'][direction='vertical']
-        > .s-slider_root
-        > .s-slider_ui
-        > .s-slider_controls
-        .s-slider_controls-next {
-        left: 50%;
-        top: calc(100% + var(--s-slider-space));
-        transform: translate(-50%, 0) rotate(90deg);
-    }
-
-.s-slider[lnf^='default'][direction='vertical']
-        > .s-slider_root
-        > .s-slider_ui
-        > .s-slider_controls
-        .s-slider_controls-previous {
-        left: 50%;
-        bottom: calc(100% + var(--s-slider-space));
-        top: auto;
-        transform: translate(-50%, 0) rotate(90deg);
-    }
-
-.s-slider[lnf^='default'][direction='vertical'][lnf$='-contight'] > .s-slider_root
-            > .s-slider_ui
-            > .s-slider_controls
-            .s-slider_controls-previous, .s-slider[lnf^='default'][direction='vertical'][lnf$='-contain'] > .s-slider_root
-            > .s-slider_ui
-            > .s-slider_controls
-            .s-slider_controls-previous {
-            top: calc(var(--s-slider-space));
-        }
-
-.s-slider[lnf^='default'][direction='vertical'][lnf$='-contight'] > .s-slider_root
-            > .s-slider_ui
-            > .s-slider_controls
-            .s-slider_controls-next, .s-slider[lnf^='default'][direction='vertical'][lnf$='-contain'] > .s-slider_root
-            > .s-slider_ui
-            > .s-slider_controls
-            .s-slider_controls-next {
-            top: auto;
-            bottom: calc(var(--s-slider-space));
-        }
-
-.s-slider[lnf^='default'] > .s-slider_root
-        > .s-slider_ui
-        > .s-slider_controls
-        .s-slider_controls-next-arrow,
-    .s-slider[lnf^='default'] > .s-slider_root
-        > .s-slider_ui
-        > .s-slider_controls
-        .s-slider_controls-previous-arrow {
-        width: 1em;
-        height: 1em;
-        position: absolute;
-        top: 0;
-        left: 0;
-    }
-
-.s-slider[lnf^='default'] > .s-slider_root
-        > .s-slider_ui
-        > .s-slider_controls
-        .s-slider_controls-next-arrow:before,
-        .s-slider[lnf^='default'] > .s-slider_root
-        > .s-slider_ui
-        > .s-slider_controls
-        .s-slider_controls-next-arrow:after,
-        .s-slider[lnf^='default'] > .s-slider_root
-        > .s-slider_ui
-        > .s-slider_controls
-        .s-slider_controls-previous-arrow:before,
-        .s-slider[lnf^='default'] > .s-slider_root
-        > .s-slider_ui
-        > .s-slider_controls
-        .s-slider_controls-previous-arrow:after {
-            display: block;
-            content: '';
-            position: absolute;
-            top: calc(50% - 0.1em);
-            left: 0;
-            background: currentColor;
-            width: 100%;
-            height: 0.2em;
-        }
-
-.s-slider[lnf^='default'] > .s-slider_root
-        > .s-slider_ui
-        > .s-slider_controls
-        .s-slider_controls-next-arrow:before, .s-slider[lnf^='default'] > .s-slider_root
-        > .s-slider_ui
-        > .s-slider_controls
-        .s-slider_controls-previous-arrow:before {
-            transform-origin: 0 0;
-            transform: rotate(45deg);
-        }
-
-.s-slider[lnf^='default'] > .s-slider_root
-        > .s-slider_ui
-        > .s-slider_controls
-        .s-slider_controls-next-arrow:after, .s-slider[lnf^='default'] > .s-slider_root
-        > .s-slider_ui
-        > .s-slider_controls
-        .s-slider_controls-previous-arrow:after {
-            transform-origin: 0 100%;
-            transform: rotate(-45deg);
-        }
-
-.s-slider[lnf^='default'] > .s-slider_root
-        > .s-slider_ui
-        > .s-slider_controls
-        .s-slider_controls-next-arrow {
-        transform: rotate(180deg);
-    }body:after {
-                    display: none;;
-                    content: '{"lod":{"enabled":true,"defaultLevel":3,"botLevel":1,"levels":{"0":{"name":"bare","speedIndex":0},"1":{"name":"lnf","speedIndex":30},"2":{"name":"theme","speedIndex":40},"3":{"name":"high","speedIndex":50},"4":{"name":"ultra","speedIndex":60}},"method":"class","defaultAction":">=","cssProperties":{"animation":2,"animation-delay":2,"animation-direction":2,"animation-duration":2,"animation-fill-mode":2,"animation-iteration-count":2,"animation-name":2,"animation-play-state":2,"animation-timing-function":2,"backdrop-filter":3,"background":1,"background-attachment":1,"background-blend-mode":3,"background-clip":1,"background-color":1,"background-image":1,"background-origin":1,"background-position":1,"background-repeat":1,"background-size":1,"border":1,"border-bottom":1,"border-bottom-color":1,"border-bottom-left-radius":1,"border-bottom-right-radius":1,"border-bottom-style":1,"border-bottom-width":1,"border-collapse":1,"border-color":1,"border-image":1,"border-image-outset":1,"border-image-repeat":1,"border-image-slice":1,"border-image-source":1,"border-image-width":1,"border-left":1,"border-left-color":1,"border-left-style":1,"border-left-width":1,"border-radius":1,"border-right":1,"border-right-color":1,"border-right-style":1,"border-right-width":1,"border-spacing":1,"border-style":1,"border-top":1,"border-top-color":1,"border-top-left-radius":1,"border-top-right-radius":1,"border-top-style":1,"border-top-width":1,"border-width":1,"box-shadow":1,"caret-color":1,"color":1,"column-count":1,"column-fill":1,"column-rule":1,"column-rule-color":1,"column-rule-style":1,"column-rule-width":1,"counter-increment":1,"counter-reset":1,"filter":1,"list-style-image":1,"outline":1,"outline-color":1,"outline-offset":1,"outline-style":1,"outline-width":1,"text-decoration":1,"text-decoration-color":1,"text-decoration-line":1,"text-indent":1,"text-justify":1,"text-overflow":1,"text-shadow":2,"text-transform":1,"transition":1,"transition-delay":1,"transition-duration":1,"transition-property":1,"transition-timing-function":1,"word-break":1,"word-spacing":1,"word-wrap":1}},"clean":{"variables":false},"compress":{"variables":false}}';
-}
-`;
-class SSliderComponentInterface extends SInterface {
-  static get _definition() {
-    return {
-      direction: {
-        description: "Specify the slider direction. Can be `horizontal` or `vertical`",
-        values: ["horizontal", "vertical"],
-        type: "String",
-        physical: true,
-        default: "horizontal"
-      },
-      behaviors: {
-        description: "Specify the available behaviors for the slider",
-        type: "Object",
-        default: {}
-      },
-      behavior: {
-        description: 'Specify which behavior your want to use for your slider. Behavior are like "presets" with different animations, etc...',
-        values: ["none", "scroll", "transform"],
-        type: "String",
-        default: "scroll",
-        physical: true
-      },
-      pad: {
-        type: "Boolean",
-        description: "Specify if you want to pad the slides if for example the first slide does not take the while width of the slider, a padding-(block|inline)-start will be applied to center this first slide. Same for the last one",
-        default: false
-      },
-      nextIconClass: {
-        description: "Specify the class of the next icon",
-        type: "String"
-      },
-      previousIconClass: {
-        description: "Specify the class of the previous icon",
-        type: "String"
-      },
-      uiContainer: {
-        description: 'Specify if you want an "s-container:..." class applied on the .s-slider_ui element',
-        type: "String|Boolean"
-      },
-      controls: {
-        description: "Specify if you want to display the controls or not. Controls are the previous and next icons",
-        type: "Boolean",
-        default: false
-      },
-      nav: {
-        description: "Specify if you want to display the nav or not. Nav are the dots",
-        type: "Boolean",
-        default: false
-      },
-      swipe: {
-        description: "Specify if you want your slider to support swipe navigation or not",
-        type: "Boolean",
-        default: false
-      },
-      mousewheel: {
-        description: "Specify if you want to enable the mousewheel event on the slider or not",
-        type: "Boolean",
-        default: false
-      },
-      clickOnSlide: {
-        description: "Specify if you want to enable the click on the slides to navigate or not",
-        type: "Boolean",
-        default: false
-      },
-      loop: {
-        description: "Specify if you want to enable the loop behavior or not",
-        type: "Boolean",
-        default: false
-      },
-      slide: {
-        description: "Specify the active slide id",
-        type: "Number",
-        default: 0,
-        physical: true
-      },
-      slidesByPage: {
-        description: 'Specify how many slides you want by page. Pages are what is used to construct the dot nav and will determine how many slides will be passed on "next" and "previous"',
-        type: "Number",
-        default: 1
-      },
-      progress: {
-        description: "Specify if you want to display the progress bar or not",
-        type: "Boolean",
-        default: false
-      },
-      timer: {
-        description: 'Specify a timer that will be applied on each slides and go to the next one after the timer is over. For custom timer by slide, specify the `timer="1200"` attribute on the slides you want',
-        type: "Number"
-      },
-      autoplay: {
-        description: "Specify if you want the slider to auto play itself when some timer(s) has been set",
-        type: "Boolean",
-        default: true
-      },
-      intersectionClasses: {
-        description: 'Specify if you want the classes that describe each slide intersection classes like "in-10", "in-20", etc...',
-        type: "Boolean",
-        default: false
-      },
-      transitionDuration: {
-        description: "Specify the transition duration of the slider in ms",
-        type: "Number",
-        default: 500
-      },
-      transitionEasing: {
-        description: "Specify the transition easing of the slider",
-        type: "Function",
-        default: __easeOutQuad
-      },
-      transitionHandler: {
-        description: "Specify a function that will take care of transitioning the slider from the current item to the next/previous",
-        type: "Function"
-      }
-    };
-  }
-}
-const __scrollBehavior = {
-  setup() {
-    return new Promise((resolve, reject) => {
-      var _a2;
-      let scrollTimeout;
-      (_a2 = this.$slidesWrapper) === null || _a2 === void 0 ? void 0 : _a2.addEventListener("scroll", (e) => {
-        clearTimeout(scrollTimeout);
-        scrollTimeout = setTimeout(() => {
-          if (this.props.slidesByPage > 1) {
-            return;
-          }
-          let $elm, lowerToCenter = 999999999999;
-          for (let [key, $slide] of this.$slides.entries()) {
-            const stats = __elementAreaStats($slide, {
-              relativeTo: this.$slidesWrapper
-            });
-            if (this.props.direction === "vertical" && Math.abs(stats.centerOffsetY) <= lowerToCenter) {
-              lowerToCenter = Math.abs(stats.centerOffsetY);
-              $elm = $slide;
-            } else if (this.props.direction === "horizontal" && Math.abs(stats.centerOffsetX) <= lowerToCenter) {
-              lowerToCenter = Math.abs(stats.centerOffsetX);
-              $elm = $slide;
-            }
-          }
-          if ($elm) {
-            const slideObj = this.getSlide($elm);
-            this.setCurrentSlideByIdx(slideObj.idx);
-          }
-        }, 200);
-      });
-      resolve();
-    });
-  },
-  transition($from, $to) {
-    return new Promise((resolve, reject) => {
-      this.$slidesWrapper.style.scrollSnapType = "none";
-      const toRect = this.getPageRect($to), fromRect = this.getPageRect($from), sliderRect = this.getBoundingClientRect(), _this = this;
-      let startX = this.$slidesWrapper.scrollLeft, startY = this.$slidesWrapper.scrollTop, fromOffset, toOffset, dist = 0;
-      if (this.props.direction === "vertical") {
-        fromOffset = (sliderRect.height - fromRect.height) * 0.5;
-        toOffset = (sliderRect.height - toRect.height) * 0.5;
-        dist = toRect.y - fromRect.y - toOffset + fromOffset;
-      } else {
-        fromOffset = (sliderRect.width - fromRect.width) * 0.5;
-        toOffset = (sliderRect.width - toRect.width) * 0.5;
-        dist = toRect.x - fromRect.x - toOffset + fromOffset;
-      }
-      __easeInterval(this.props.transitionDuration, (percentage) => {
-        const offset2 = dist / 100 * percentage;
-        if (_this.props.direction === "vertical") {
-          _this.$slidesWrapper.scroll(0, Math.round(startY + offset2));
-        } else {
-          _this.$slidesWrapper.scroll(Math.round(startX + offset2), 0);
-        }
-      }, {
-        easing: _this.props.transitionEasing,
-        onEnd() {
-          if (_this.props.direction === "vertical") {
-            _this.$slidesWrapper.style.scrollSnapType = "y mandatory";
-          } else {
-            _this.$slidesWrapper.style.scrollSnapType = "x mandatory";
-          }
-          resolve();
-        }
-      });
-    });
-  }
-};
-var __awaiter$4 = globalThis && globalThis.__awaiter || function(thisArg, _arguments, P, generator) {
+var __awaiter$7 = globalThis && globalThis.__awaiter || function(thisArg, _arguments, P, generator) {
   function adopt(value) {
     return value instanceof P ? value : new P(function(resolve) {
       resolve(value);
@@ -31487,1164 +29321,58 @@ var __awaiter$4 = globalThis && globalThis.__awaiter || function(thisArg, _argum
     step((generator = generator.apply(thisArg, _arguments || [])).next());
   });
 };
-class SSliderComponent extends SLitComponent {
-  static get properties() {
-    return SLitComponent.propertiesFromInterface({}, SSliderComponentInterface);
-  }
-  static get styles() {
-    return css`
-            ${unsafeCSS(`
-                ${__css$3}
-            `)}
-        `;
-  }
-  static get state() {
-    return {
-      currentPage: 0,
-      previousSlideIdx: 0,
-      currentSlideIdx: 0,
-      playing: true
-    };
-  }
-  constructor() {
-    super(__deepMerge({
-      name: "s-slider",
-      interface: SSliderComponentInterface
-    }));
-    this._timer = {
-      total: 0,
-      current: 0,
-      percentage: 0
-    };
-    this._bindedBehaviors = {};
-  }
-  mount() {
-    return __awaiter$4(this, void 0, void 0, function* () {
-      this.props.behaviors.scroll = __scrollBehavior;
-      if (!this.id) {
-        this.setAttribute("id", `s-slider-${__uniqid()}`);
-      }
-      this.$slides = Array.from(this.querySelectorAll(`[s-slider-slide],s-slider-slide`)).filter(($slide) => {
-        const $parentSlider = __querySelectorUp($slide, ".s-slider");
-        if (!$parentSlider || $parentSlider === this) {
-          $slide.classList.add(...this.utils.cls("_slide").split(" "));
-          return true;
-        }
-        return false;
-      });
-      if (this.props.slide) {
-        this.setCurrentSlide(this.props.slide);
-      }
-      let resizeTimeout;
-      window.addEventListener("resize", (e) => {
-        clearTimeout(resizeTimeout);
-        resizeTimeout = setTimeout(() => __awaiter$4(this, void 0, void 0, function* () {
-          yield this.applyPad();
-          this.goTo(this.getCurrentSlideIdx(), true);
-        }), 200);
-      });
-    });
-  }
-  firstUpdated() {
-    var _a2, _b2, _c2, _d2, _e2, _f, _g;
-    return __awaiter$4(this, void 0, void 0, function* () {
-      this.$root = this.querySelector(`.${this.utils.uCls("_root")}`);
-      this.$slidesWrapper = this.querySelector(`.${this.utils.uCls("_slides-wrapper")}:not(s-slider#${this.id} s-slider .${this.utils.uCls("_slides-wrapper")})`);
-      this.$slidesContainer = this.querySelector(`.${this.utils.uCls("_slides")}:not(s-slider#${this.id} s-slider .${this.utils.uCls("_slides")})`);
-      if (this.props.behavior && this.props.behavior !== "scroll" && this.props.behavior !== "transform") {
-        if (typeof this.props.behavior === "string") {
-          let behavior;
-          for (let [behaviorId, behaviorObj] of Object.entries(this.props.behaviors)) {
-            const id = (_b2 = (_a2 = behaviorObj.class) === null || _a2 === void 0 ? void 0 : _a2.id) !== null && _b2 !== void 0 ? _b2 : behaviorObj.id;
-            if (id === this.props.behavior) {
-              behavior = behaviorObj;
-              break;
-            }
-          }
-          if (!behavior) {
-            throw new Error(`The behavior "${this.props.behavior}" is not available`);
-          }
-          if (!behavior.class) {
-            throw new Error(`The behavior "${this.props.behavior}" is not valid. You must provide the "<yellow>class</yellow>" property and an optional "<yellow>settings</yellow>" one...`);
-          }
-          this.behavior = new behavior.class((_c2 = behavior.settings) !== null && _c2 !== void 0 ? _c2 : {});
-        } else if (isClass(this.props.behavior)) {
-          this.behavior = new this.props.behavior({});
-        } else if (this.props.behavior instanceof __SSliderBehavior) {
-          this.behavior = this.props.behavior;
-        } else {
-          throw new Error(`Invalid behavior type, must be a string, an SSliderBehavior extended class or an SSliderBehavior instance`);
-        }
-        (_e2 = (_d2 = this.behavior).firstUpdated) === null || _e2 === void 0 ? void 0 : _e2.call(_d2);
-      }
-      yield (_g = (_f = this.getBehavior()).setup) === null || _g === void 0 ? void 0 : _g.call(_f);
-      this.applyPad();
-      this._preventUserScrollForDefaultBehavior();
-      this.props.intersectionClasses && this._handleIntersections();
-      this._handleMousewheel();
-      this.props.clickOnSlide && this._handleClickOnSlide();
-      this.props.swipe && this._handleSwipe();
-      this._initAttributesActions();
-      this.goTo(this.props.slide, true);
-      if (this.props.autoplay && this.props.timer) {
-        this.play();
-      }
-    });
-  }
-  /**
-   * @name        applyPad
-   * @type        Function
-   * @async
-   *
-   * This method apply the "pad" start and end on the slides wrapper
-   *
-   * @since       2.0.0
-   * @author          Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-   */
-  applyPad() {
-    return __awaiter$4(this, void 0, void 0, function* () {
-      setTimeout(() => __awaiter$4(this, void 0, void 0, function* () {
-        if (this.getBehavior().pad) {
-          yield this.getBehavior().pad();
-        } else {
-          yield this._pad();
-        }
-      }), 20);
-    });
-  }
-  /**
-   * Default pad function if not specified in the behavior
-   */
-  _pad() {
-    const sliderRect = this.getBoundingClientRect(), firstPageRect = this.getFirstPageRect(), lastPageRect = this.getLastPageRect();
-    let padStart = 0, padEnd = 0;
-    if (this.props.direction === "vertical") {
-      padStart = (sliderRect.height - firstPageRect.height) * 0.5;
-      padEnd = (sliderRect.height - lastPageRect.height) * 0.5;
-    } else {
-      padStart = (sliderRect.width - firstPageRect.width) * 0.5;
-      padEnd = (sliderRect.width - lastPageRect.width) * 0.5;
-    }
-    this.style.setProperty("--s-slider-pad-start", `${Math.round(padStart)}px`);
-    this.style.setProperty("--s-slider-pad-end", `${Math.round(padEnd)}px`);
-  }
-  /**
-   * This function init the swipe listener to pass from slides to slides
-   */
-  _handleSwipe() {
-    __onSwipe(this.$root, (swipe) => {
-      if (this.props.direction === "horizontal") {
-        if (swipe.left) {
-          this.next();
-        } else if (swipe.right) {
-          this.previous();
-        }
-      } else if (this.props.direction === "vertical") {
-        if (swipe.top) {
-          this.next();
-        } else if (swipe.down) {
-          this.previous();
-        }
-      }
-    });
-  }
-  /**
-   * This function prevent user scroll when using the "default" behavior
-   */
-  _preventUserScrollForDefaultBehavior() {
-    return;
-  }
-  /**
-   * This function listen for mousewheel events and will handle the scroll
-   */
-  _handleMousewheel() {
-    this.$slidesWrapper.addEventListener("wheel", (e) => {
-      if (!this.props.mousewheel) {
-        if (this.props.direction === "horizontal" && Math.abs(e.deltaX) > 0) {
-          e.preventDefault();
-        } else if (this.props.direction === "vertical" && Math.abs(e.deltaY) > 0) {
-          e.preventDefault();
-        }
-      }
-    });
-  }
-  /**
-   * This function listen for click on slides and navigate to it
-   */
-  _handleClickOnSlide() {
-    this.$slidesContainer.addEventListener("pointerup", (e) => {
-      for (let [i, $slide] of this.$slides.entries()) {
-        if ($slide.contains(e.target) || $slide === e.target) {
-          if (this.currentSlide !== $slide) {
-            const slide = this.getSlide($slide);
-            this.goTo(slide.idx);
-          }
-        }
-      }
-    });
-  }
-  /**
-   * This function listen for intersection changes on slides and apply classes depending on this
-   */
-  _handleIntersections() {
-    var _a2;
-    (_a2 = this.$slides) === null || _a2 === void 0 ? void 0 : _a2.forEach(($slide) => {
-      function buildThresholdList() {
-        let thresholds = [];
-        let numSteps = 10;
-        for (let i = 1; i <= numSteps; i++) {
-          let ratio = i / numSteps;
-          thresholds.push(ratio);
-        }
-        thresholds.push(0);
-        return thresholds;
-      }
-      function handleIntersect(entries, observer2) {
-        let highestRatio = 0;
-        entries.forEach((entry) => {
-          if (entry.intersectionRatio > highestRatio) {
-            highestRatio = entry.intersectionRatio;
-          }
-        });
-        [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1].forEach((threshold2, idx) => {
-          if (highestRatio >= threshold2) {
-            $slide.classList.add(`in-${threshold2 * 100}`);
-          } else {
-            $slide.classList.remove(`in-${threshold2 * 100}`);
-          }
-        });
-      }
-      let observer;
-      let options = {
-        root: this.$root,
-        rootMargin: "0px",
-        threshold: buildThresholdList()
-      };
-      observer = new IntersectionObserver(handleIntersect, options);
-      observer.observe($slide);
-    });
-  }
-  /**
-   * This function grab the elements that have attributes like "s-slider-next", "s-slider-previous", "s-slider-goto", etc...
-   * and init them to process the action
-   */
-  _initAttributesActions() {
-    ["next", "previous"].forEach((action) => {
-      __querySelectorLive(`[s-slider-${action}]:not(s-slider#${this.id} s-slider [s-slider-${action}])`, ($elm) => {
-        $elm.addEventListener("pointerup", (e) => {
-          e.preventDefault();
-          this[action](true);
-        });
-      }, {
-        scopes: false,
-        rootNode: this
-      });
-    });
-    __querySelectorLive(`[s-slider-goto]:not(s-slider#${this.id} .s-slider [s-slider-goto])`, ($elm) => {
-      $elm.addEventListener("pointerup", (e) => {
-        var _a2;
-        const slideIdx = (_a2 = parseInt($elm.getAttribute("s-slider-goto"))) !== null && _a2 !== void 0 ? _a2 : 0;
-        this.goTo(slideIdx, true);
-      });
-    }, {
-      scopes: false,
-      rootNode: this
-    });
-  }
-  /**
-   * This function is just to dispatch event easier with just the name and the details you want...
-   */
-  _dispatch(name2, detail = {}) {
-    this.utils.dispatchEvent(name2, {
-      detail
-    });
-  }
-  /**
-   * @name        isSlideInPage
-   * @type        Function
-   *
-   * This method allows you to check if the passed slide is in the current "page" or not
-   *
-   * @param       {String|HTMLElement}        slide           A slide idx of the slide element
-   * @param       {Number}                [page=this.state.currentPage]       The page to check the slide against
-   * @return      {Boolean}           true if the actual slide is the last one, false otherwise
-   *
-   * @since       2.0.0
-   * @author          Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-   */
-  isSlideInPage(slide, page = this.state.currentPage) {
-    const slideObj = this.getSlide(slide);
-    return slideObj.idx >= page * this.props.slidesByPage && slideObj.idx < (page + 1) * this.props.slidesByPage;
-  }
-  /**
-   * @name        isLast
-   * @type        Function
-   *
-   * This method allows you to check if the actual slide is the last one
-   *
-   * @return      {Boolean}           true if the actual slide is the last one, false otherwise
-   *
-   * @since       2.0.0
-   * @author          Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-   */
-  isLast() {
-    return this.state.currentSlideIdx >= this.$slides.length - 1;
-  }
-  /**
-   * @name        isFirst
-   * @type        Function
-   *
-   * This method allows you to check if the actual slide is the first one
-   *
-   * @return      {Boolean}           true if the actual slide is the first one, false otherwise
-   *
-   * @since       2.0.0
-   * @author          Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-   */
-  isFirst() {
-    return this.state.currentSlideIdx <= 0;
-  }
-  /**
-   * @name        getCurrentSlideIdx
-   * @type    Function
-   *
-   * Access the current slide idx. Begin from 0...
-   *
-   * @return      {Number}        The current slide idx
-   *
-   * @since       2.0.0
-   * @author          Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-   */
-  getCurrentSlideIdx() {
-    return this.state.currentSlideIdx;
-  }
-  /**
-   * @name        setCurrentSlideByIdx
-   * @type    Function
-   *
-   * Set the current slide idx.
-   *
-   * @param       {Number}        idx         The current slide idx
-   *
-   * @since       2.0.0
-   * @author          Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-   */
-  setCurrentSlideByIdx(idx) {
-    if (idx === this.state.currentSlideIdx) {
-      return;
-    }
-    this.state.previousSlideIdx = this.state.currentSlideIdx;
-    this.props.slide = idx;
-    this.state.currentSlideIdx = idx;
-    this.state.currentPage = Math.ceil(idx / this.props.slidesByPage);
-    this.updateSlidesClasses();
-  }
-  /**
-   * @name       setCurrentSlide
-   * @type        Function
-   *
-   * This method allows you to get the current clide using an id or an idx.
-   *
-   * @param       {String|Number|HTMLElement}    idIdxOrElement    The slide id or idx or the slide HTMLElement
-   * @return      {SSLiderComponent}              The slider component to maintain chainability
-   *
-   * @since       2.0.0
-   * @author          Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-   */
-  setCurrentSlide(idIdxOrElement) {
-    const slide = this.getSlide(idIdxOrElement);
-    this.setCurrentSlideByIdx(slide.idx);
-    return this;
-  }
-  /**
-   * @name        currentSlideIdx
-   * @type        Number
-   *
-   * Access the current slide idx. Begin from 0...
-   *
-   * @since       2.0.0
-   * @author          Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-   */
-  get currentSlideIdx() {
-    return this.getCurrentSlideIdx();
-  }
-  /**
-   * @name        getCurrentSlideElement
-   * @type    Function
-   *
-   * Access the current slide item.
-   *
-   * @return      {HTMLElement}           The current slide element
-   *
-   * @since       2.0.0
-   * @author          Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-   */
-  getCurrentSlideElement() {
-    return this.$slides[this.state.currentSlideIdx];
-  }
-  /**
-   * @name        currentSlideElement
-   * @type    HTMLElement
-   *
-   * Access the current slide item.
-   *
-   * @since       2.0.0
-   * @author          Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-   */
-  get currentSlideElement() {
-    return this.getCurrentSlideElement();
-  }
-  /**
-   * @name        getNextSlideIdx
-   * @type    HTMLElement
-   *
-   * Access the next slide idx.
-   *
-   * @return      {Number}        The next slide idx
-   *
-   * @since       2.0.0
-   * @author          Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-   */
-  getNextSlideIdx() {
-    const nextSlideIdx = this.state.currentSlideIdx + this.props.slidesByPage;
-    if (nextSlideIdx >= this.$slides.length - 1)
-      return this.$slides.length - 1;
-    return nextSlideIdx;
-  }
-  /**
-   * @name        nextSlideIdx
-   * @type    Number
-   *
-   * Access the next slide idx.
-   *
-   * @since       2.0.0
-   * @author          Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-   */
-  get nextSlideIdx() {
-    return this.getNextSlideIdx();
-  }
-  /**
-   * @name        getNextSlideElement
-   * @type    Function
-   *
-   * Access the next slide idx.
-   *
-   * @return      {HTMLElement}           The next slide element
-   *
-   * @since       2.0.0
-   * @author          Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-   */
-  getNextSlideElement() {
-    return this.$slides[this.getNextSlideIdx()];
-  }
-  /**
-   * @name        nextSlideElement
-   * @type    Function
-   *
-   * Access the next slide idx.
-   *
-   * @since       2.0.0
-   * @author          Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-   */
-  get nextSlideElement() {
-    return this.getNextSlideElement();
-  }
-  /**
-   * @name        getPreviousSlideIdx
-   * @type    Function
-   *
-   * Access the previous slide idx.
-   *
-   * @return      {HTMLElement}           The previous slide idx
-   *
-   * @since       2.0.0
-   * @author          Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-   */
-  getPreviousSlideIdx() {
-    const previousSlideIdx = this.state.currentSlideIdx - this.props.slidesByPage;
-    if (previousSlideIdx <= 0)
-      return 0;
-    return previousSlideIdx;
-  }
-  /**
-   * @name        previousSlideIdx
-   * @type    Number
-   * @get
-   *
-   * Access the previous slide idx.
-   *
-   * @return      {HTMLElement}           The previous slide idx
-   *
-   * @since       2.0.0
-   * @author          Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-   */
-  get previousSlideIdx() {
-    return this.getPreviousSlideIdx();
-  }
-  /**
-   * @name        getPreviousSlideElement
-   * @type    Function
-   *
-   * Access the previous slide element.
-   *
-   * @return      {HTMLElement}           The previous slide element
-   *
-   * @since       2.0.0
-   * @author          Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-   */
-  getPreviousSlideElement() {
-    return this.$slides[this.getPreviousSlideIdx()];
-  }
-  /**
-   * @name        previousSlideElement
-   * @type    Function
-   *
-   * Access the previous slide element.
-   *
-   * @since       2.0.0
-   * @author          Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-   */
-  get previousSlideItem() {
-    return this.$slides[this.getPreviousSlideIdx()];
-  }
-  /**
-   * @name        getSlideIdxById
-   * @type        Function
-   *
-   * This method allows you to get back the slide idx by its id.
-   *
-   * @param       {String}    id     The slide id
-   * @return      {Number}        The slide idx
-   *
-   * @since       2.0.0
-   * @author          Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-   */
-  getSlideIdxById(id) {
-    for (let i = 0; i < this.$slides.length; i++) {
-      if (this.$slides[i].getAttribute("s-slider-slide") === id)
-        return i;
-    }
-  }
-  /**
-   * @name        getSlideElementByIdx
-   * @type        Function
-   *
-   * This method allows you to get back a slide HTMLElement by its index.
-   *
-   * @param       {Number}    idx    The slide idx
-   * @return      {HTMLElement}        The slide HTMLElement
-   *
-   * @since       2.0.0
-   * @author          Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-   */
-  getSlideElementByIdx(idx) {
-    return this.$slides[idx];
-  }
-  /**
-   * @name        getCurrentSlide
-   * @type        Function
-   *
-   * This method allows you to get back the current slide object <ISSliderComponentSlide> either by it's id, or by it's idx.
-   *
-   * @return      {ISSliderComponentSlide}        The slide object
-   *
-   * @since       2.0.0
-   * @author          Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-   */
-  getCurrentSlide() {
-    return this.getSlide(this.state.currentSlideIdx);
-  }
-  /**
-   * @name            currentSlide
-   * @type            ISSliderComponentSlide
-   *
-   * Access the current slide object
-   *
-   * @since       2.0.0
-   * @author          Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-   */
-  get currentSlide() {
-    return this.getCurrentSlide();
-  }
-  /**
-   * @name            getLastPage
-   * @type            Function
-   *
-   * Get the last page idx
-   *
-   * @return      {Number}            The last page idx
-   *
-   * @since       2.0.0
-   * @author          Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-   */
-  getLastPage() {
-    return Math.ceil(this.$slides.length / this.props.slidesByPage) - 1;
-  }
-  /**
-   * @name        getFirstPageSlides
-   * @type        Function
-   *
-   * This method allows you to get all first page slides.
-   *
-   * @return      {ISSliderComponentSlide[]}          An array of slides
-   *
-   * @since       2.0.0
-   * @author          Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-   */
-  getFirstPageSlides() {
-    return this.getPageSlides(0);
-  }
-  /**
-   * @name        getLastPageSlides
-   * @type        Function
-   *
-   * This method allows you to get all last page slides.
-   *
-   * @return      {ISSliderComponentSlide[]}          An array of slides
-   *
-   * @since       2.0.0
-   * @author          Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-   */
-  getLastPageSlides() {
-    return this.getPageSlides(this.getLastPage());
-  }
-  /**
-   * @name        getPageRect
-   * @type        Function
-   *
-   * This method allows you to get a page rect just like the getBoundingClientRect native function
-   *
-   * @param       {Number}               [pageOrSlideElement=this.state.currentPage]        The page you want the rect object from
-   * @return      {ISSliderPageRect}          The page rect object
-   *
-   * @since       2.0.0
-   * @author          Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-   */
-  getPageRect(pageOrSlideElement = this.state.currentPage) {
-    let page = pageOrSlideElement;
-    if (pageOrSlideElement instanceof HTMLElement) {
-      const slide = this.getSlide(pageOrSlideElement);
-      page = slide.page;
-    }
-    const slides = this.getPageSlides(page);
-    const rect = {
-      top: -1,
-      left: -1,
-      right: -1,
-      bottom: -1,
-      width: -1,
-      height: -1,
-      x: -1,
-      y: -1
-    };
-    slides.forEach((slide) => {
-      const slideRect = slide.$slide.getBoundingClientRect();
-      if (rect.top === -1 || slideRect.top < rect.top) {
-        rect.top = slideRect.top;
-      }
-      if (rect.left === -1 || slideRect.left < rect.left) {
-        rect.left = slideRect.left;
-      }
-      if (rect.right === -1 || slideRect.right > rect.right) {
-        rect.right = slideRect.right;
-      }
-      if (rect.bottom === -1 || slideRect.bottom > rect.bottom) {
-        rect.bottom = slideRect.bottom;
-      }
-    });
-    rect.width = rect.right - rect.left;
-    rect.height = rect.bottom - rect.top;
-    rect.x = rect.left;
-    rect.y = rect.top;
-    return rect;
-  }
-  /**
-   * @name        getFirstPageRect
-   * @type        Function
-   *
-   * This method allows you to get the first page rect just like the getBoundingClientRect native function
-   *
-   * @return      {ISSliderPageRect}          The page rect object
-   *
-   * @since       2.0.0
-   * @author          Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-   */
-  getFirstPageRect() {
-    return this.getPageRect(0);
-  }
-  /**
-   * @name        getLastPageRect
-   * @type        Function
-   *
-   * This method allows you to get the last page rect just like the getBoundingClientRect native function
-   *
-   * @return      {ISSliderPageRect}          The page rect object
-   *
-   * @since       2.0.0
-   * @author          Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-   */
-  getLastPageRect() {
-    return this.getPageRect(this.getLastPage());
-  }
-  /**
-   * @name        getPageSlides
-   * @type        Function
-   *
-   * This method allows you to get all the slides in a particular "page".
-   *
-   * @param       {Number}        page        The page you want to get slides from
-   * @return      {ISSliderComponentSlide[]}          An array of slides
-   *
-   * @since       2.0.0
-   * @author          Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-   */
-  getPageSlides(page) {
-    const slides = [];
-    for (let i = page * this.props.slidesByPage; i < (page + 1) * this.props.slidesByPage; i++) {
-      if (i < this.$slides.length) {
-        slides.push(this.getSlide(i));
-      }
-    }
-    return slides;
-  }
-  /**
-   * @name        getSlide
-   * @type        Function
-   *
-   * This method allows you to get back a slide object <ISSliderComponentSlide> either by it's id, or by it's idx.
-   *
-   * @param       {String|Number}    idIdxOrElement    The slide id or idx
-   * @return      {ISSliderComponentSlide}        The slide object
-   *
-   * @since       2.0.0
-   * @author          Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-   */
-  getSlide(idIdxOrElement) {
+function define$6(props, tagName = "s-slider", settings = {}) {
+  var _a2;
+  __querySelectorLive(tagName, ($elm) => __awaiter$7(this, void 0, void 0, function* () {
+    const define2 = yield __vitePreload(() => import("./define-14a9f3eb.js"), true ? ["define-14a9f3eb.js","querySelectorUp-0290440e.js"] : void 0);
+    define2.default(props, tagName, settings);
+  }), {
+    when: (_a2 = settings.when) !== null && _a2 !== void 0 ? _a2 : "nearViewport",
+    firstOnly: true
+  });
+}
+function autoFocusFeature() {
+  __querySelectorLive("[autofocus]", ($elm) => {
     var _a2, _b2;
-    let $slide, id, idx, timer;
-    if (idIdxOrElement instanceof HTMLElement) {
-      const id2 = idIdxOrElement.getAttribute("s-slider-slide");
-      if (id2)
-        return this.getSlide(id2);
-      return this.getSlide(Array.from(this.$slides).indexOf(idIdxOrElement));
-    } else if (typeof idIdxOrElement === "number") {
-      idx = idIdxOrElement;
-      $slide = this.getSlideElementByIdx(idx);
-      id = $slide.getAttribute("s-slider-slide");
-      timer = $slide._sSliderComponentTimer;
-      if (!timer) {
-        timer = {
-          total: (_a2 = $slide.getAttribute("timer")) !== null && _a2 !== void 0 ? _a2 : this.props.timer,
-          current: 0,
-          percentage: 0
-        };
-        $slide._sSliderComponentTimer = timer;
-      }
-    } else if (typeof idIdxOrElement === "string") {
-      idx = this.getSlideIdxById(idIdxOrElement);
-      id = idIdxOrElement;
-      $slide = this.getSlideElementByIdx(idx);
-      timer = $slide._sSliderComponentTimer;
-      if (!timer) {
-        timer = {
-          total: (_b2 = $slide.getAttribute("timer")) !== null && _b2 !== void 0 ? _b2 : this.props.timer,
-          current: 0,
-          percentage: 0
-        };
-        $slide._sSliderComponentTimer = timer;
-      }
-    }
-    if (!$slide)
-      return;
-    return {
-      id,
-      idx,
-      page: Math.ceil(idx / this.props.slidesByPage),
-      $slide,
-      timer
-    };
-  }
-  /**
-   * @name            getFirstSlide
-   * @type           Function
-   *
-   * This method allows you to get the first slide of the slider
-   *
-   * @return      {ISSliderComponentSlide}       The first slide object
-   *
-   * @since      2.0.0
-   * @author          Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-   */
-  getFirstSlide() {
-    return this.getSlide(0);
-  }
-  /**
-   * @name            getLastSlide
-   * @type           Function
-   *
-   * This method allows you to get the last slide of the slider
-   *
-   * @return      {ISSliderComponentSlide}       The last slide object
-   *
-   * @since      2.0.0
-   * @author          Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-   */
-  getLastSlide() {
-    return this.getSlide(this.$slides.length - 1);
-  }
-  getBehavior() {
-    if (this._bindedBehaviors[this.props.behavior]) {
-      return this._bindedBehaviors[this.props.behavior];
-    }
-    const behavior = Object.assign({}, this.props.behaviors[this.props.behavior]);
-    if (!behavior) {
-      throw new Error(`[SSliderComponent] The requested "${this.props.behavior}" does not exists. Here's the available ones:
-${Object.keys(this.props.behaviors).map((b) => `
-- ${b}`)}`);
-    }
-    Object.keys(behavior).forEach((fnName) => {
-      if (typeof behavior[fnName] === "function") {
-        behavior[fnName] = behavior[fnName].bind(this);
-      }
+    (_b2 = (_a2 = document.activeElement) === null || _a2 === void 0 ? void 0 : _a2.blur) === null || _b2 === void 0 ? void 0 : _b2.call(_a2);
+    setTimeout(() => {
+      $elm.focus();
     });
-    this._bindedBehaviors[this.props.behavior] = behavior;
-    return behavior;
-  }
-  /**
-   * @name        updateSlidesClasses
-   * @type        Function
-   *
-   * This method allows you to update the slides "active" class accordingly to the
-   * slider state. This can be used inside of a custom behavior for example.
-   *
-   * @since       2.0.0
-   * @author          Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-   */
-  updateSlidesClasses() {
-    const currentSlide = this.getCurrentSlide();
-    this.$slides.forEach(($slide, i) => {
-      if (this.props.slidesByPage > 1 && this.isSlideInPage($slide)) {
-        $slide.classList.add("active");
-      } else if ($slide === currentSlide.$slide) {
-        $slide.classList.add("active");
-      } else {
-        $slide.classList.remove("active");
-      }
-    });
-  }
-  /**
-   * @name        goTo
-   * @type    Function
-   *
-   * Go to a specific slide.
-   *
-   * @param       {Number|String}    slideIdIdxOrElement    The slide idx, id or HTMLElement to go to
-   * @return      {SSliderComponent}          The slider element to maintain chainability
-   *
-   * @since       2.0.0
-   * @author          Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-   */
-  goTo(slideIdIdxOrElement, force = false) {
-    return __awaiter$4(this, void 0, void 0, function* () {
-      const nextSlide = this.getSlide(slideIdIdxOrElement);
-      if (!force && (!nextSlide || nextSlide.idx === this.currentSlide.idx)) {
-        return;
-      }
-      const currentSlide = this.getCurrentSlide();
-      this.setCurrentSlideByIdx(nextSlide.idx);
-      this.props.slide = nextSlide.idx;
-      if (currentSlide.idx + 1 === nextSlide.idx) {
-        this._dispatch("next", {
-          currentSlide,
-          nextSlide
-        });
-      } else if (currentSlide.idx - 1 === nextSlide.idx) {
-        this._dispatch("previous", {
-          currentSlide,
-          nextSlide
-        });
-      }
-      this._dispatch("goto", {
-        currentSlide,
-        nextSlide
-      });
-      this.updateSlidesClasses();
-      currentSlide.$slide.classList.add("post-active");
-      currentSlide.$slide.classList.remove("active");
-      nextSlide.$slide.classList.add("pre-active");
-      yield this._transitionHandler(currentSlide.$slide, nextSlide.$slide);
-      currentSlide.$slide.classList.remove("post-active");
-      nextSlide.$slide.classList.remove("pre-active");
-      nextSlide.$slide.classList.add("active");
-      this._dispatch("goto-end", {
-        currentSlide,
-        nextSlide
-      });
-      if (this.isPlaying()) {
-        this._playSlide(this.state.currentSlideIdx);
-      }
-      return this;
-    });
-  }
-  /**
-   * @name        next
-   * @type    Function
-   *
-   * Go to the next slide
-   *
-   * @return      {SSliderComponent}          The slider element to maintain chainability
-   *
-   * @since       2.0.0
-   * @author          Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-   */
-  next() {
-    if (this.props.loop && this.isLast()) {
-      return this.goTo(0);
-    }
-    return this.goTo(this.getNextSlideIdx());
-  }
-  /**
-   * @name        previous
-   * @type    Function
-   *
-   * Go to the previous slide
-   *
-   * @return      {SSliderComponent}          The slider element to maintain chainability
-   *
-   * @since       2.0.0
-   * @author          Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-   */
-  previous() {
-    if (this.props.loop && this.isFirst()) {
-      return this.goTo(this.getLastSlide().idx);
-    }
-    return this.goTo(this.getPreviousSlideIdx());
-  }
-  /**
-   * @name        getTimer
-   * @type        Function
-   *
-   * This method allows you to get back the timer object
-   *
-   * @return      {ISSliderComponentTimer}      The timer object
-   *
-   * @since       2.0.0
-   * @author          Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-   */
-  getTimer(slideIdIdxOrElement) {
-    var _a2;
-    if (!slideIdIdxOrElement) {
-      let total = 0, current = 0;
-      for (let i = 0; i < this.$slides.length; i++) {
-        const slide2 = this.getSlide(i);
-        if (i < this.state.currentSlideIdx) {
-          current += slide2.timer.total;
-        } else if (i === this.state.currentSlideIdx) {
-          current += slide2.timer.current;
-        }
-        total += (_a2 = slide2.timer.total) !== null && _a2 !== void 0 ? _a2 : 0;
-      }
-      this._timer.total = total;
-      this._timer.current = current;
-      this._timer.percentage = Math.round(100 / total * current);
-      return this._timer;
-    }
-    const slide = this.getSlide(slideIdIdxOrElement);
-    return slide.timer;
-  }
-  /**
-   * @name        isPlaying
-   * @type    Function
-   *
-   * This method allows you to know if the slider is currently playing or not
-   *
-   * @return      {Boolean}           trie if the slider is playing or not
-   *
-   * @since       2.0.0
-   * @author          Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-   */
-  isPlaying() {
-    if (!this.state.playing)
-      return false;
-    return this.props.timer !== void 0;
-  }
-  /**
-   * @name        play
-   * @type    Function
-   *
-   * This method allows you to play the slider when a `timer` has been defined
-   *
-   * @return      {SSliderComponent}          The slider element to maintain chainability
-   *
-   * @since       2.0.0
-   * @author          Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-   */
-  play() {
-    if (!this.props.timer)
-      return;
-    this.utils.dispatchEvent("play", {
-      detail: this
-    });
-    this.state.playing = true;
-    this._playSlide(this.currentSlide.idx);
-    return this;
-  }
-  /**
-   * @name        stop
-   * @type    Function
-   *
-   * This method allows you to stop the slider
-   *
-   * @return      {SSliderComponent}          The slider element to maintain chainability
-   *
-   * @since       2.0.0
-   * @author          Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-   */
-  stop() {
-    this.utils.dispatchEvent("stop", {
-      detail: this
-    });
-    this.state.playing = false;
-    return this;
-  }
-  /**
-   * @name        _playSlide
-   * @type    Function
-   *
-   * This method allows you to play a particular slide
-   *
-   * @return      {SSliderComponent}          The slider element to maintain chainability
-   *
-   * @since       2.0.0
-   * @author          Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-   */
-  _playSlide(idIdxOrElement) {
-    const slide = this.getSlide(idIdxOrElement);
-    if (!slide || !slide.timer)
-      return;
-    const interval = 100;
-    let elapsed = 0;
-    const slideInterval = setInterval(() => {
-      if (!this.isPlaying())
-        return;
-      elapsed += interval;
-      slide.timer.current = elapsed;
-      slide.timer.percentage = 100 / slide.timer.total * elapsed;
-      if (elapsed >= slide.timer.total) {
-        clearInterval(slideInterval);
-        slide.timer.current = 0;
-        slide.timer.percentage = 0;
-        this.next(false);
-      }
-    }, interval);
-    return this;
-  }
-  /**
-   * Function that is in charge of making the transition happend.
-   * It will use the setted behavior if this one support custom transition,
-   * of simply changing the current slide.
-   */
-  _transitionHandler($from, $to) {
-    return new Promise((resolve, reject) => __awaiter$4(this, void 0, void 0, function* () {
-      var _a2, _b2, _c2;
-      this.style.setProperty("--s-slider-slide-height", `${Math.round(this.getCurrentSlide().$slide.getBoundingClientRect().height)}px`);
-      this.style.setProperty("--s-slider-slide-width", `${Math.round(this.getCurrentSlide().$slide.getBoundingClientRect().width)}px`);
-      if (this.props.transitionHandler) {
-        yield this.props.transitionHandler($from, $to);
-        return resolve();
-      }
-      if ((_a2 = this.props.behavior) === null || _a2 === void 0 ? void 0 : _a2.goTo) {
-        yield this.props.behavior.goTo($from, $to);
-        return resolve();
-      }
-      yield (_c2 = (_b2 = this.getBehavior()).transition) === null || _c2 === void 0 ? void 0 : _c2.call(_b2, $from, $to);
-      resolve();
-    }));
-  }
-  render() {
-    var _a2;
-    if (!this.$slides.length)
-      return;
-    const currentSlide = this.getCurrentSlide();
-    let slide = this.getCurrentSlide();
-    this.style.setProperty("--s-slider-slide", this.state.currentSlideIdx);
-    this.style.setProperty("--s-slider-total-slides", this.$slides.length);
-    this.style.setProperty("--s-slider-page", this.state.currentPage);
-    this.style.setProperty("--s-slider-total-pages", Math.ceil(this.$slides.length / this.props.slidesByPage));
-    this.style.setProperty("--s-slider-slides-by-page", this.props.slidesByPage);
-    this.style.setProperty("--s-slider-slide-timer-total", `${(_a2 = slide.timer.total) !== null && _a2 !== void 0 ? _a2 : 0 / 1e3}s`);
-    return html`
-            <div class="${this.utils.cls("_root")}">
-                <div class="${this.utils.cls("_slides-wrapper")}">
-                    <div class="${this.utils.cls("_slides")}">
-                        <div class="${this.utils.cls("_pad _pad-start")}"></div>
-                        ${this.$slides.map(($slide) => {
-      return $slide;
-    })}
-                        <div class="${this.utils.cls("_pad _pad-end")}"></div>
-                    </div>
-                </div>
-                <div
-                    class="${this.utils.cls("_ui", `${typeof this.props.uiContainer === "string" ? `s-container--${this.props.uiContainer}` : this.props.uiContainer === true ? "s-container" : ""}`)}"
-                >
-                    ${this.props.progress ? html`
-                              <div class="${this.utils.cls("_progress")}">
-                                  <div
-                                      class="${this.utils.cls("_progress-bar")}"
-                                  ></div>
-                              </div>
-                          ` : ""}
-                    ${this.props.nav ? html`
-                              <div class="${this.utils.cls("_nav")}">
-                                  ${[
-      ...Array(Math.ceil(this.$slides.length / this.props.slidesByPage))
-    ].map((i, idx) => {
-      return html`
-                                          <div
-                                              class="${this.utils.cls("_nav-item")} ${this.isSlideInPage(currentSlide.idx, idx) ? "active" : ""}"
-                                              @pointerup=${() => this.goTo(idx * this.props.slidesByPage)}
-                                          ></div>
-                                      `;
-    })}
-                              </div>
-                          ` : ""}
-                    ${this.props.controls ? html`
-                              <div class="${this.utils.cls("_controls")}">
-                                  <div
-                                      class="${this.utils.cls("_controls-previous")} ${this.isFirst() && !this.props.loop ? "" : "active"}"
-                                      @pointerup=${() => this.previous()}
-                                  >
-                                      ${this.props.previousIconClass ? html`
-                                                <i
-                                                    class="${this.props.previousIconClass}"
-                                                ></i>
-                                            ` : html`<div
-                                                class="${this.utils.cls("_controls-previous-arrow")}"
-                                            ></div>`}
-                                  </div>
-                                  <div
-                                      class="${this.utils.cls("_controls-next")} ${this.isLast() && !this.props.loop ? "" : "active"}"
-                                      @pointerup=${() => this.next()}
-                                  >
-                                      ${this.props.nextIconClass ? html`
-                                                <i
-                                                    class="${this.props.nextIconClass}"
-                                                ></i>
-                                            ` : html`<div
-                                                class="${this.utils.cls("_controls-next-arrow")}"
-                                            ></div>`}
-                                  </div>
-                              </div>
-                          ` : ""}
-                </div>
-            </div>
-        `;
-  }
+  });
 }
-function define$4(props = {}, tagName = "s-slider") {
-  SLitComponent.define(tagName, SSliderComponent, props);
+var __awaiter$6 = globalThis && globalThis.__awaiter || function(thisArg, _arguments, P, generator) {
+  function adopt(value) {
+    return value instanceof P ? value : new P(function(resolve) {
+      resolve(value);
+    });
+  }
+  return new (P || (P = Promise))(function(resolve, reject) {
+    function fulfilled(value) {
+      try {
+        step(generator.next(value));
+      } catch (e) {
+        reject(e);
+      }
+    }
+    function rejected(value) {
+      try {
+        step(generator["throw"](value));
+      } catch (e) {
+        reject(e);
+      }
+    }
+    function step(result2) {
+      result2.done ? resolve(result2.value) : adopt(result2.value).then(fulfilled, rejected);
+    }
+    step((generator = generator.apply(thisArg, _arguments || [])).next());
+  });
+};
+function autoResizeFeature() {
+  __querySelectorLive("[auto-resize]", ($elm) => __awaiter$6(this, void 0, void 0, function* () {
+    autoResize($elm);
+  }));
 }
-var __awaiter$3 = globalThis && globalThis.__awaiter || function(thisArg, _arguments, P, generator) {
+var __awaiter$5 = globalThis && globalThis.__awaiter || function(thisArg, _arguments, P, generator) {
   function adopt(value) {
     return value instanceof P ? value : new P(function(resolve) {
       resolve(value);
@@ -32672,7 +29400,7 @@ var __awaiter$3 = globalThis && globalThis.__awaiter || function(thisArg, _argum
   });
 };
 function confirmButtonFeature() {
-  __querySelectorLive("[confirm]", ($btn) => __awaiter$3(this, void 0, void 0, function* () {
+  __querySelectorLive("[confirm]", ($btn) => __awaiter$5(this, void 0, void 0, function* () {
     if ($btn.needConfirmation !== void 0) {
       return;
     }
@@ -32868,6 +29596,11 @@ class SSugarFeatureInterface extends SInterface {
         type: "Boolean",
         default: true
       },
+      autofocus: {
+        description: 'Specify if you want the "autofocus" to work on your page',
+        type: "Boolean",
+        default: true
+      },
       containerQuery: {
         description: "Specify if you want support for container queries in your css or not",
         type: "Boolean",
@@ -32885,6 +29618,11 @@ class SSugarFeatureInterface extends SInterface {
       },
       vhvar: {
         description: "Specify if you want the `--vh` css variable to be computed and available",
+        type: "Boolean",
+        default: true
+      },
+      autoResize: {
+        description: "Specify if you want the auto resize to be enabled",
         type: "Boolean",
         default: true
       },
@@ -32921,10 +29659,14 @@ class SSugarFeatureInterface extends SInterface {
     };
   }
 }
-function define$3(props = {}, name2 = "s-sugar") {
+function define$4(props = {}, name2 = "s-sugar") {
   SSugarFeature.define(name2, SSugarFeature, Object.assign({ mountWhen: "direct" }, props));
 }
-var __awaiter$2 = globalThis && globalThis.__awaiter || function(thisArg, _arguments, P, generator) {
+const define$5 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+  __proto__: null,
+  default: define$4
+}, Symbol.toStringTag, { value: "Module" }));
+var __awaiter$4 = globalThis && globalThis.__awaiter || function(thisArg, _arguments, P, generator) {
   function adopt(value) {
     return value instanceof P ? value : new P(function(resolve) {
       resolve(value);
@@ -32973,13 +29715,17 @@ class SSugarFeature extends SFeature {
     this._isResizing = false;
   }
   mount() {
-    return __awaiter$2(this, void 0, void 0, function* () {
+    return __awaiter$4(this, void 0, void 0, function* () {
       if (this.props.pleasantCss)
         this._pleasantCss();
+      if (this.props.autofocus)
+        this._autofocus();
       if (this.props.scrolled)
         this._scrolled();
       if (this.props.vhvar)
         this._vhvar();
+      if (this.props.autoResize)
+        this._autoResize();
       if (this.props.confirmBtn)
         this._confirmBtn();
       if (this.props.resizeTransmations)
@@ -33027,6 +29773,9 @@ class SSugarFeature extends SFeature {
       }
     });
   }
+  _autofocus() {
+    autoFocusFeature();
+  }
   _scrolled() {
     document.addEventListener("scroll", (e) => {
       if (window.scrollY >= this.props.scrolledDelta) {
@@ -33048,324 +29797,100 @@ class SSugarFeature extends SFeature {
       document.documentElement.style.setProperty("--vh", `${vh}px`);
     });
   }
+  _autoResize() {
+    autoResizeFeature();
+  }
   _confirmBtn() {
     confirmButtonFeature();
   }
 }
 function SPackEssentials() {
-  define$c();
-  define$8();
-  define$7();
-  define$5();
-  define$4();
-  define$3();
   define$e();
-  define$d();
-  define$b();
   define$a();
   define$9();
+  define$7();
   define$6();
+  define$4();
+  define$g();
+  define$f();
+  define$d();
+  define$c();
+  define$b();
+  define$8();
 }
-class SSpacesSelectorComponentInterface extends SInterface {
-  static get _definition() {
-    return {
-      spaces: {
-        type: "Object",
-        description: 'Specify the spaces you want as options. This object MUST contain two properties which are "margin" and "padding", which contains each every options you want as an object with "name" and "value" properties',
-        required: true,
-        get default() {
-          var _a2, _b2;
-          return {
-            margin: (_a2 = SFrontspec.get("margin")) !== null && _a2 !== void 0 ? _a2 : {},
-            padding: (_b2 = SFrontspec.get("padding")) !== null && _b2 !== void 0 ? _b2 : {}
-          };
-        }
-      },
-      values: {
-        type: "Object",
-        description: 'Specify the initial values for the selectors. MUST be an object with properties "paddingTop", "paddingLeft", "marginBottom", etc...',
-        default: {}
-      },
-      valueProp: {
-        type: "String",
-        description: "Specify the space object propery to take as value",
-        default: "value"
-      }
-    };
-  }
-}
-const __css$2 = `.s-spaces-selector_inner {
-    aspect-ratio: 16/10;
-    position: relative;
-
-    margin-top: var(--s-spaces-selector-offset-y, 0);
-    margin-right: var(--s-spaces-selector-offset-x, 0);
-    margin-bottom: var(--s-spaces-selector-offset-y, 0);
-    margin-left: var(--s-spaces-selector-offset-x, 0);
-}
-
-.s-spaces-selector_clear {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-}
-
-.s-spaces-selector_space {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-}
-
-.s-spaces-selector_select {
-    position: absolute !important;
-    text-align: center;
-}
-
-.s-spaces-selector_select-margin-top {
-            left: 50%;
-            bottom: calc(100%);
-            transform: translateX(-50%);
-        }
-
-.s-spaces-selector_select-margin-right {
-            top: 50%;
-            left: calc(100%);
-            transform: translateY(-50%);
-        }
-
-.s-spaces-selector_select-margin-bottom {
-            left: 50%;
-            top: calc(100%);
-            transform: translateX(-50%);
-        }
-
-.s-spaces-selector_select-margin-left {
-            top: 50%;
-            right: calc(100%);
-            transform: translateY(-50%);
-        }
-
-.s-spaces-selector_select-padding-top {
-            left: 50%;
-            top: 0;
-            transform: translateX(-50%);
-        }
-
-.s-spaces-selector_select-padding-right {
-            top: 50%;
-            right: 0;
-            transform: translateY(-50%);
-        }
-
-.s-spaces-selector_select-padding-bottom {
-            left: 50%;
-            bottom: 0;
-            transform: translateX(-50%);
-        }
-
-.s-spaces-selector_select-padding-left {
-            top: 50%;
-            left: 0;
-            transform: translateY(-50%);
-        }body:after {
-                    display: none;;
-                    content: '{"lod":{"enabled":true,"defaultLevel":3,"botLevel":1,"levels":{"0":{"name":"bare","speedIndex":0},"1":{"name":"lnf","speedIndex":30},"2":{"name":"theme","speedIndex":40},"3":{"name":"high","speedIndex":50},"4":{"name":"ultra","speedIndex":60}},"method":"class","defaultAction":">=","cssProperties":{"animation":2,"animation-delay":2,"animation-direction":2,"animation-duration":2,"animation-fill-mode":2,"animation-iteration-count":2,"animation-name":2,"animation-play-state":2,"animation-timing-function":2,"backdrop-filter":3,"background":1,"background-attachment":1,"background-blend-mode":3,"background-clip":1,"background-color":1,"background-image":1,"background-origin":1,"background-position":1,"background-repeat":1,"background-size":1,"border":1,"border-bottom":1,"border-bottom-color":1,"border-bottom-left-radius":1,"border-bottom-right-radius":1,"border-bottom-style":1,"border-bottom-width":1,"border-collapse":1,"border-color":1,"border-image":1,"border-image-outset":1,"border-image-repeat":1,"border-image-slice":1,"border-image-source":1,"border-image-width":1,"border-left":1,"border-left-color":1,"border-left-style":1,"border-left-width":1,"border-radius":1,"border-right":1,"border-right-color":1,"border-right-style":1,"border-right-width":1,"border-spacing":1,"border-style":1,"border-top":1,"border-top-color":1,"border-top-left-radius":1,"border-top-right-radius":1,"border-top-style":1,"border-top-width":1,"border-width":1,"box-shadow":1,"caret-color":1,"color":1,"column-count":1,"column-fill":1,"column-rule":1,"column-rule-color":1,"column-rule-style":1,"column-rule-width":1,"counter-increment":1,"counter-reset":1,"filter":1,"list-style-image":1,"outline":1,"outline-color":1,"outline-offset":1,"outline-style":1,"outline-width":1,"text-decoration":1,"text-decoration-color":1,"text-decoration-line":1,"text-indent":1,"text-justify":1,"text-overflow":1,"text-shadow":2,"text-transform":1,"transition":1,"transition-delay":1,"transition-duration":1,"transition-property":1,"transition-timing-function":1,"word-break":1,"word-spacing":1,"word-wrap":1}},"clean":{"variables":false},"compress":{"variables":false}}';
-}
-`;
-function define$2(props = {}, tagName = "s-spaces-selector") {
-  SSpacesSelectorComponent.define(tagName, SSpacesSelectorComponent, props);
-}
-class SSpacesSelectorComponent extends SLitComponent {
-  static get properties() {
-    return SLitComponent.propertiesFromInterface({}, SSpacesSelectorComponentInterface);
-  }
-  static get styles() {
-    return css`
-            ${unsafeCSS(__css$2)}
-        `;
-  }
-  static get state() {
-    return {};
-  }
-  constructor() {
-    super(__deepMerge({
-      name: "s-spaces-selector",
-      interface: SSpacesSelectorComponentInterface
-    }));
-    this._spacesNames = ["margin", "padding"];
-  }
-  firstUpdated() {
-    const $marginLeft = this.querySelector('select[name="margin-left"]'), marginLeftBound = $marginLeft.getBoundingClientRect(), $marginTop = this.querySelector('select[name="margin-top"]'), marginTopBound = $marginTop.getBoundingClientRect();
-    this.style.setProperty("--s-spaces-selector-offset-y", `${marginTopBound.height}px`);
-    this.style.setProperty("--s-spaces-selector-offset-x", `${marginLeftBound.width}px`);
-  }
-  clear() {
-    this.props.values = {};
-    this.utils.dispatchEvent("change", {
-      bubbles: true,
-      detail: Object.assign({}, this.props.values)
+var __awaiter$3 = globalThis && globalThis.__awaiter || function(thisArg, _arguments, P, generator) {
+  function adopt(value) {
+    return value instanceof P ? value : new P(function(resolve) {
+      resolve(value);
     });
   }
-  _updateSelect(e) {
-    const propertyName = __camelCase(e.target.name);
-    this.props.values[propertyName] = __parse(e.target.value);
-    this.utils.dispatchEvent("change", {
-      bubbles: true,
-      detail: Object.assign({}, this.props.values)
+  return new (P || (P = Promise))(function(resolve, reject) {
+    function fulfilled(value) {
+      try {
+        step(generator.next(value));
+      } catch (e) {
+        reject(e);
+      }
+    }
+    function rejected(value) {
+      try {
+        step(generator["throw"](value));
+      } catch (e) {
+        reject(e);
+      }
+    }
+    function step(result2) {
+      result2.done ? resolve(result2.value) : adopt(result2.value).then(fulfilled, rejected);
+    }
+    step((generator = generator.apply(thisArg, _arguments || [])).next());
+  });
+};
+function define$3(props, name2 = "s-sugar", settings = {}) {
+  var _a2;
+  __querySelectorLive(`[${name2}]`, ($elm) => __awaiter$3(this, void 0, void 0, function* () {
+    const define2 = yield __vitePreload(() => Promise.resolve().then(() => define$5), true ? void 0 : void 0);
+    define2.default(props, name2);
+  }), {
+    when: (_a2 = settings.when) !== null && _a2 !== void 0 ? _a2 : "nearViewport",
+    firstOnly: true
+  });
+}
+var __awaiter$2 = globalThis && globalThis.__awaiter || function(thisArg, _arguments, P, generator) {
+  function adopt(value) {
+    return value instanceof P ? value : new P(function(resolve) {
+      resolve(value);
     });
   }
-  render() {
-    return html`
-            <div class="${this.utils.cls("_inner")}">
-                ${this._spacesNames.map((spaceName) => html`
-                        <div
-                            class="${this.utils.cls("_space")} ${this.utils.cls(`_space-${spaceName}`)}"
-                        >
-                            ${["top", "right", "bottom", "left"].map((side) => {
-      var _a2;
-      const options = (_a2 = this.props.spaces[spaceName]) !== null && _a2 !== void 0 ? _a2 : [], value = this.props.values[`${spaceName}${__upperFirst(side)}`];
-      let selected = null;
-      options.forEach((option) => {
-        if (value && option[this.props.valueProp] == value) {
-          selected = option;
-        }
-      });
-      return html`
-                                    <select
-                                        class="${this.utils.cls("_select")} ${this.utils.cls(`_select-${spaceName}-${side}`)}"
-                                        name="${spaceName}-${side}"
-                                        .value=${value}
-                                        @change=${(e) => {
-        this._updateSelect(e);
-      }}
-                                    >
-                                        ${options.map((option) => {
-        return html`
-                                                <option
-                                                    value="${option[this.props.valueProp]}"
-                                                    ?selected=${selected === option || selected === null && option.default}
-                                                >
-                                                    ${option.name}
-                                                </option>
-                                            `;
-      })}
-                                    </select>
-                                `;
-    })}
-                        </div>
-                    `)}
-
-                <button
-                    class="${this.utils.cls("_clear")}"
-                    @pointerup=${() => {
-      this.clear();
-    }}
-                >
-                    Clear
-                </button>
-            </div>
-        `;
-  }
-}
-class SGoogleMapComponentInterface extends SInterface {
-  static get _definition() {
-    return {
-      apiKey: {
-        type: "String",
-        description: "Specify the google api key to use. You can specify it in the config.google.map.apiKey configuration for your project if you prefer",
-        default: SSugarConfig.get("google.map.apiKey"),
-        required: true
-      },
-      mapId: {
-        type: "String",
-        description: "Specify your mapId that you can create [here](https://console.cloud.google.com/google/maps-apis/studio/maps)",
-        required: true
-      },
-      lat: {
-        type: "Number",
-        description: "Specify the map latitude",
-        required: true
-      },
-      lng: {
-        type: "Number",
-        description: "Specify the map longitude",
-        required: true
-      },
-      zoom: {
-        type: "Number",
-        description: "Specify the google map zoom"
-      },
-      bounds: {
-        type: "Boolean",
-        description: "Specify if you want your map to be bounds on current markers",
-        default: true
-      },
-      icons: {
-        type: "Object",
-        description: "Specify some icons to be used across your maps",
-        default: {
-          marker: '<i class="fa-solid fa-location-dot"></i>'
-        }
-      },
-      zoomControl: {
-        type: "Boolean",
-        description: "Specify if you want the zom control or not",
-        default: false
-      },
-      mapTypeControl: {
-        type: "Boolean",
-        description: "Specify if you want the map type control or not",
-        default: false
-      },
-      scaleControl: {
-        type: "Boolean",
-        description: "Specify if you want the map scale control or not",
-        default: false
-      },
-      streetViewControl: {
-        type: "Boolean",
-        description: "Specify if you want the streeview control or not",
-        default: false
-      },
-      rotateControl: {
-        type: "Boolean",
-        description: "Specify if you want the rotate control or not",
-        default: false
-      },
-      fullscreenControl: {
-        type: "Boolean",
-        description: "Specify if you want the fullscreen control or not",
-        default: false
+  return new (P || (P = Promise))(function(resolve, reject) {
+    function fulfilled(value) {
+      try {
+        step(generator.next(value));
+      } catch (e) {
+        reject(e);
       }
-    };
-  }
-}
-const __css$1 = `.s-google-map {
-    display: block;
-    position: relative;
-}
-
-    .s-google-map:not([mounted]) {
-        opacity: 0.001;
-        pointer-events: none;
     }
-
-    .s-google-map > div[style] {
-        background: none !important;
+    function rejected(value) {
+      try {
+        step(generator["throw"](value));
+      } catch (e) {
+        reject(e);
+      }
     }
-
-    .s-google-map .gm-style {
-        font: inherit;
-    }body:after {
-                    display: none;;
-                    content: '{"lod":{"enabled":true,"defaultLevel":3,"botLevel":1,"levels":{"0":{"name":"bare","speedIndex":0},"1":{"name":"lnf","speedIndex":30},"2":{"name":"theme","speedIndex":40},"3":{"name":"high","speedIndex":50},"4":{"name":"ultra","speedIndex":60}},"method":"class","defaultAction":">=","cssProperties":{"animation":2,"animation-delay":2,"animation-direction":2,"animation-duration":2,"animation-fill-mode":2,"animation-iteration-count":2,"animation-name":2,"animation-play-state":2,"animation-timing-function":2,"backdrop-filter":3,"background":1,"background-attachment":1,"background-blend-mode":3,"background-clip":1,"background-color":1,"background-image":1,"background-origin":1,"background-position":1,"background-repeat":1,"background-size":1,"border":1,"border-bottom":1,"border-bottom-color":1,"border-bottom-left-radius":1,"border-bottom-right-radius":1,"border-bottom-style":1,"border-bottom-width":1,"border-collapse":1,"border-color":1,"border-image":1,"border-image-outset":1,"border-image-repeat":1,"border-image-slice":1,"border-image-source":1,"border-image-width":1,"border-left":1,"border-left-color":1,"border-left-style":1,"border-left-width":1,"border-radius":1,"border-right":1,"border-right-color":1,"border-right-style":1,"border-right-width":1,"border-spacing":1,"border-style":1,"border-top":1,"border-top-color":1,"border-top-left-radius":1,"border-top-right-radius":1,"border-top-style":1,"border-top-width":1,"border-width":1,"box-shadow":1,"caret-color":1,"color":1,"column-count":1,"column-fill":1,"column-rule":1,"column-rule-color":1,"column-rule-style":1,"column-rule-width":1,"counter-increment":1,"counter-reset":1,"filter":1,"list-style-image":1,"outline":1,"outline-color":1,"outline-offset":1,"outline-style":1,"outline-width":1,"text-decoration":1,"text-decoration-color":1,"text-decoration-line":1,"text-indent":1,"text-justify":1,"text-overflow":1,"text-shadow":2,"text-transform":1,"transition":1,"transition-delay":1,"transition-duration":1,"transition-property":1,"transition-timing-function":1,"word-break":1,"word-spacing":1,"word-wrap":1}},"clean":{"variables":false},"compress":{"variables":false}}';
-}
-`;
-function define$1(props = {}, tagName = "s-google-map") {
-  SGoogleMapComponent.define(tagName, SGoogleMapComponent, props);
+    function step(result2) {
+      result2.done ? resolve(result2.value) : adopt(result2.value).then(fulfilled, rejected);
+    }
+    step((generator = generator.apply(thisArg, _arguments || [])).next());
+  });
+};
+function define$2(props, tagName = "s-spaces-selector", settings = {}) {
+  var _a2;
+  __querySelectorLive(tagName, ($elm) => __awaiter$2(this, void 0, void 0, function* () {
+    const define2 = yield __vitePreload(() => import("./define-f26c3301.js"), true ? [] : void 0);
+    define2.default(props, tagName, settings);
+  }), {
+    when: (_a2 = settings.when) !== null && _a2 !== void 0 ? _a2 : "nearViewport",
+    firstOnly: true
+  });
 }
 var __awaiter$1 = globalThis && globalThis.__awaiter || function(thisArg, _arguments, P, generator) {
   function adopt(value) {
@@ -33394,129 +29919,67 @@ var __awaiter$1 = globalThis && globalThis.__awaiter || function(thisArg, _argum
     step((generator = generator.apply(thisArg, _arguments || [])).next());
   });
 };
-class SGoogleMapComponent extends SLitComponent {
-  static get properties() {
-    return SLitComponent.propertiesFromInterface({}, SGoogleMapComponentInterface);
-  }
-  static get styles() {
-    return css`
-            ${unsafeCSS(__css$1)}
-        `;
-  }
-  static loadApi(apiKey) {
-    if (this._loadApiPromise) {
-      return this._loadApiPromise;
-    }
-    this._loadApiPromise = new Promise((resolve) => {
-      const $script = document.createElement("script");
-      $script.setAttribute("id", "s-google-map-component");
-      $script.src = `https://maps.googleapis.com/maps/api/js?key=${apiKey}&v=beta&libraries=marker&callback=_initMap`;
-      $script.async = true;
-      window._initMap = function() {
-        resolve(null);
-      };
-      document.head.appendChild($script);
-    });
-    return this._loadApiPromise;
-  }
-  constructor() {
-    super(__deepMerge({
-      name: "s-google-map",
-      interface: SGoogleMapComponentInterface
-    }));
-    this._markers = this._getMarkers();
-  }
-  mount() {
-    return __awaiter$1(this, void 0, void 0, function* () {
-      yield this.constructor.loadApi(this.props.apiKey);
-      this._map = new google.maps.Map(this, {
-        center: { lat: this.props.lat, lng: this.props.lng },
-        zoom: 8,
-        mapId: this.props.mapId,
-        zoomControl: this.props.zoomControl,
-        mapTypeControl: this.props.mapTypeControl,
-        scaleControl: this.props.scaleControl,
-        streetViewControl: this.props.streetViewControl,
-        rotateControl: this.props.rotateControl,
-        fullscreenControl: this.props.fullscreenControl,
-        disableDefaultUI: true
-      });
-      this._createMarkers(this._markers);
-      this._handleBoundsAndZoom();
-    });
-  }
-  /**
-   * Handle bounds and zoom
-   */
-  _handleBoundsAndZoom() {
-    const boundsListener = this._map.addListener("bounds_changed", () => {
-      google.maps.event.removeListener(boundsListener);
-      if (this.props.bounds) {
-        this._bounds(this._markers);
-      }
-      if (this.props.zoom) {
-        this._map.setZoom(this.props.zoom);
-      }
-    });
-  }
-  /**
-   * Bounds markers
-   */
-  _bounds(markers) {
-    const bounds = new google.maps.LatLngBounds();
-    for (let marker2 of markers) {
-      const latLng = new google.maps.LatLng(marker2.lat, marker2.lng);
-      bounds.extend(latLng);
-    }
-    this._map.fitBounds(bounds);
-  }
-  /**
-   * Create the markers
-   */
-  _createMarkers(markers) {
-    for (let marker2 of markers) {
-      const latLng = { lat: marker2.lat, lng: marker2.lng };
-      if (!marker2.content) {
-        document.createElement("div");
-        const domParser = new DOMParser(), markerDocument = domParser.parseFromString(`
-                        <div class="${this.utils.cls("-marker")}">
-                            <div class="${this.utils.cls("-marker__icon")}">
-                                ${this.props.icons.marker}
-                            </div>
-                        </div>
-                    `, "text/html");
-        marker2.content = markerDocument.body.children[0];
-      }
-      marker2.marker = new google.maps.marker.AdvancedMarkerView({
-        map: this._map,
-        content: marker2.content,
-        position: latLng
-      });
-    }
-  }
-  /**
-   * Get the markers from the component children
-   */
-  _getMarkers() {
-    const markers = Array.from(
-      // @ts-ignore
-      this.querySelectorAll(`${this.tagName.toLowerCase()}-marker`)
-    ).map(($marker) => {
-      var _a2, _b2;
-      return {
-        lat: parseFloat((_a2 = $marker.getAttribute("lat")) !== null && _a2 !== void 0 ? _a2 : "0"),
-        lng: parseFloat((_b2 = $marker.getAttribute("lng")) !== null && _b2 !== void 0 ? _b2 : "0"),
-        icon: $marker.getAttribute("icon"),
-        content: $marker.children.length ? $marker.children[0] : null
-      };
-    });
-    return markers;
-  }
-  render() {
-    return html``;
-  }
+function define$1(props, tagName = "s-google-map", settings = {}) {
+  var _a2;
+  __querySelectorLive(tagName, ($elm) => __awaiter$1(this, void 0, void 0, function* () {
+    const define2 = yield __vitePreload(() => import("./define-ad74983e.js"), true ? [] : void 0);
+    define2.default(props, tagName, settings);
+  }), {
+    when: (_a2 = settings.when) !== null && _a2 !== void 0 ? _a2 : "nearViewport",
+    firstOnly: true
+  });
 }
-SGoogleMapComponent.state = {};
+function __i18n(str2, settings) {
+  var _a2, _b2, _c2;
+  const finalSettings = Object.assign({ tokens: {} }, settings !== null && settings !== void 0 ? settings : {});
+  const i18n = (_a2 = SEnv2.get("i18n")) !== null && _a2 !== void 0 ? _a2 : {};
+  let translation;
+  if (finalSettings.id) {
+    translation = (_b2 = i18n[finalSettings.id]) !== null && _b2 !== void 0 ? _b2 : get(i18n, finalSettings.id);
+  }
+  if (!translation) {
+    translation = (_c2 = i18n[str2]) !== null && _c2 !== void 0 ? _c2 : str2;
+  }
+  const tokens = ` ${translation} `.match(/(__\([^__\)]*\)__|(?!\|)%[a-zA-Z0-9])/gm);
+  if (!tokens) {
+    return translation;
+  }
+  function getTokenValue(t) {
+    var _a3, _b3;
+    return (_b3 = (_a3 = finalSettings.tokens[t]) !== null && _a3 !== void 0 ? _a3 : finalSettings.tokens[t.replace(/^%/, "")]) !== null && _b3 !== void 0 ? _b3 : t;
+  }
+  let currentToken;
+  tokens.forEach((token) => {
+    var _a3;
+    if (token.match(/^%/)) {
+      currentToken = token;
+      const tokenValue = getTokenValue(token);
+      translation = translation.replaceAll(new RegExp(`([^(])?${token}`, "g"), `$1${tokenValue}`);
+    } else {
+      const tokenMatch = token.match(/\|(%[a-zA-Z0-9]+)\)__/), activeToken = (_a3 = tokenMatch === null || tokenMatch === void 0 ? void 0 : tokenMatch[1]) !== null && _a3 !== void 0 ? _a3 : currentToken, tokenValue = getTokenValue(activeToken);
+      if (typeof tokenValue !== "number") {
+        translation = translation.replace(token, `**(invalid token "${activeToken}" for pluralization)**`);
+        return;
+      }
+      token = token.replace(/\\\|/gm, "_$_");
+      let parts = token.split(/\|/gm);
+      parts = parts.map((p) => {
+        return p.replace(/_\$_/gm, "|").replace(/^__\(/, "").replace(/\)__$/, "");
+      });
+      token = token.replace(/_\$_/gm, "\\|");
+      if (parts.length === 1) {
+        translation = translation.replace(token, tokenValue > 1 ? parts[0] : "");
+      } else if (parts.length === 2 && parts[0].match(/^%[a-zA-Z0-9]+/)) {
+        translation = translation.replace(token, tokenValue > 1 ? parts[1] : "");
+      } else if (parts.length === 2 && !parts[0].match(/^%[a-zA-Z0-9]+/)) {
+        translation = translation.replace(token, tokenValue > 1 ? parts[1] : parts[0]);
+      } else if (parts.length === 3) {
+        translation = translation.replace(token, tokenValue > 1 ? parts[2] : parts[1]);
+      }
+    }
+  });
+  return translation;
+}
 class SCarpenterComponentInterface extends SInterface {
   static get _definition() {
     return {
@@ -33542,16 +30005,27 @@ class SCarpenterComponentInterface extends SInterface {
         description: 'Specify if you want the editor to be automatically inited when adding the "s-carpenter" component. If not, the user will have to click on a "Carpenter" button',
         default: document.location.hash === "#carpenter"
       },
+      escape: {
+        type: "Boolean",
+        description: 'Specify if you want to enable the "escape" key to exit the editor',
+        default: false
+      },
       autoEdit: {
         type: "Boolean",
         description: "Specify if you want the editor to automatically open the first editable found in the HTML",
         default: false
       },
-      specs: {
-        type: "String",
-        description: "Specify a url from where to get the carpenter data back, directly the JSON data or a simple id pointing to a HTMLTemplate tag that host the JSON data",
-        default: "/carpenter.json",
-        required: true
+      endpoints: {
+        type: "Object",
+        description: "Specify the differents URL's that can be called to retreive the infos like specs, nodes, etc...",
+        default: {
+          base: "/carpenter/api",
+          specs: "%base/specs/%specs",
+          nodes: "%base/nodes/%uid",
+          pages: "%base/pages/%uid",
+          scopes: "%base/scopes",
+          categories: "%base/categories"
+        }
       },
       adapter: {
         type: "String",
@@ -33564,21 +30038,39 @@ class SCarpenterComponentInterface extends SInterface {
         description: "Specify if you want the left sidebar to jump across all the components/sections/etc...",
         default: false
       },
-      pagesLink: {
+      pagesUrl: {
         type: "String",
-        description: "Specify the link to use to change page. You have access to the %dotpath token that will be replaced by the actual component/section specs dotpath",
-        default: "/carpenter/%dotpath"
+        description: "Specify the link to use to change page. You have access to the %specs token that will be replaced by the actual component/section specs dotpath",
+        default: "/carpenter/%specs"
       },
       features: {
         type: "Object",
         description: 'Specify which features you want in your carpenter editor. Available features are: "save", "delete", "upload", "nav" and "media". Note that these features can be specified also in the "carpenter.json" usually returned by the server. These will be propritary on the ones you specified here cause the server may not support "upload", etc...',
         default: {
-          save: true,
+          scope: false,
+          insert: true,
+          edit: true,
           delete: true,
+          move: true,
           upload: true,
-          nav: true,
-          media: true
+          newPage: false,
+          savePage: true,
+          saveComponent: true,
+          media: true,
+          nav: true
         }
+      },
+      frontspec: {
+        type: "Object",
+        title: "Frontspec",
+        description: "Specify a custom frontspec object",
+        default: SFrontspec.get(".")
+      },
+      defaultMedia: {
+        type: "String",
+        title: "Default media",
+        description: "Specify the default media",
+        default: SFrontspec.get("media.defaultMedia")
       },
       ghostSpecs: {
         type: "Boolean",
@@ -33588,28 +30080,105 @@ class SCarpenterComponentInterface extends SInterface {
       logo: {
         type: "String",
         description: "Specify an image to be used as logo on top left of the interface",
-        default: `<svg width="315" height="59" viewBox="0 0 315 59" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <g opacity="0.5">
-                <path d="M90.6797 5.5957V0.732422H96.3047V14.8828H90.5625C89.1172 12.0508 88.1348 9.84375 85.6152 8.26172C83.0957 6.67969 81.332 5.88867 78.3242 5.88867C75.4141 5.88867 72.8164 6.66016 70.5312 8.20312C68.2461 9.72656 66.459 11.7773 65.1699 14.3555C63.9004 16.9141 63.2656 19.668 63.2656 22.6172C63.2656 25.6641 63.9297 28.4766 65.2578 31.0547C66.6055 33.6328 68.4512 35.6934 70.7949 37.2363C73.1387 38.7793 75.7461 39.5508 78.6172 39.5508C82.1523 39.5508 85.2773 38.4766 87.9922 36.3281C90.707 34.1602 92.6895 31.0938 93.9395 27.1289L99.5645 30.1172C98.041 35.0391 95.3457 38.8574 91.4785 41.5723C87.6309 44.2676 83.1094 45.6152 77.9141 45.6152C73.6367 45.6152 69.8379 44.5996 66.5176 42.5684C63.1973 40.5176 60.6094 37.7734 58.7539 34.3359C56.918 30.8789 56 27.0898 56 22.9688C56 18.4961 56.9375 14.5117 58.8125 11.0156C60.707 7.51953 63.3145 4.81445 66.6348 2.90039C69.9551 0.966797 73.7539 0 78.0312 0C80.9023 0 82.5488 0.478516 84.9707 1.43555C87.3926 2.39258 88.6289 3.7793 90.6797 5.5957Z" fill="black"/>
-                <path d="M121.459 24.9609V39.4922H126.615V44.8828H116.127V41.1035C113.197 43.9746 109.936 45.4102 106.342 45.4102C104.447 45.4102 102.709 44.9707 101.127 44.0918C99.5645 43.2129 98.3047 42.041 97.3477 40.5762C96.4102 39.0918 95.9414 37.4512 95.9414 35.6543C95.9414 33.7207 96.459 32.002 97.4941 30.498C98.5488 28.9746 99.9648 27.8027 101.742 26.9824C103.52 26.1621 105.307 25.752 107.104 25.752C110.111 25.752 112.914 26.6309 115.512 28.3887V25.0781C115.512 22.6758 115.004 20.957 113.988 19.9219C112.973 18.8867 111.303 18.3691 108.979 18.3691C107.338 18.3691 105.961 18.6719 104.848 19.2773C103.754 19.8633 102.846 20.7617 102.123 21.9727L96.3223 20.5371C97.6309 18.0957 99.3984 16.2793 101.625 15.0879C103.852 13.877 106.498 13.2715 109.564 13.2715C113.686 13.2715 116.693 14.209 118.588 16.084C120.502 17.959 121.459 20.918 121.459 24.9609ZM107.162 40.752C110.131 40.752 112.914 39.5117 115.512 37.0312V33.4277C112.875 31.377 110.238 30.3516 107.602 30.3516C106 30.3516 104.613 30.8594 103.441 31.875C102.289 32.8711 101.713 34.1309 101.713 35.6543C101.713 37.1191 102.221 38.3398 103.236 39.3164C104.252 40.2734 105.561 40.752 107.162 40.752Z" fill="black"/>
-                <path d="M136.402 32.5195V39.4922H143.111V44.8828H124.215V39.4922H130.396V19.5117H124.215V14.0918H135.201V21.0645C136.432 18.3105 137.955 16.3965 139.771 15.3223C141.607 14.2285 144.225 13.6816 147.623 13.6816H149V19.8047H147.682C144.4 19.8047 141.959 20.2344 140.357 21.0938C138.756 21.9531 137.691 23.252 137.164 24.9902C136.656 26.7285 136.402 29.2383 136.402 32.5195Z" fill="black"/>
-                <path d="M180 29.6484C180 32.5195 179.336 35.2051 178.008 37.7051C176.68 40.2051 174.863 42.1777 172.559 43.623C170.273 45.0684 167.734 45.791 164.941 45.791C160.82 45.791 157.217 44.209 154.131 41.0449V53.291H160.137V58.6816H142.5V53.291H148.066V19.5117L143 19.8828L147.682 13.6816H154.131V19.0137C155.654 17.2168 157.334 15.8789 159.17 15C161.006 14.1211 162.969 13.6816 165.059 13.6816C167.969 13.6816 170.557 14.4043 172.822 15.8496C175.088 17.2754 176.846 19.209 178.096 21.6504C179.365 24.0918 180 26.7578 180 29.6484ZM164.854 40.2539C166.533 40.2539 168.047 39.7656 169.395 38.7891C170.742 37.8125 171.797 36.4844 172.559 34.8047C173.32 33.125 173.701 31.3477 173.701 29.4727C173.701 27.5781 173.281 25.8398 172.441 24.2578C171.602 22.6562 170.449 21.3867 168.984 20.4492C167.52 19.4922 165.869 19.0137 164.033 19.0137C162.119 19.0137 160.4 19.5215 158.877 20.5371C157.354 21.5332 156.172 22.8613 155.332 24.5215C154.492 26.1816 154.072 28.0078 154.072 30C154.072 33.2031 155.078 35.7129 157.09 37.5293C159.121 39.3457 161.709 40.2539 164.854 40.2539Z" fill="black"/>
-                <path d="M209.5 31.0254H183.689C184.061 33.9746 185.203 36.3086 187.117 38.0273C189.031 39.7266 191.375 40.5762 194.148 40.5762C196.18 40.5762 198.064 40.1562 199.803 39.3164C201.541 38.4766 201 38.9355 202.879 37.5293L209.5 39.4922C207.82 42.1094 205.613 42.4512 202.879 43.7988C200.164 45.127 197.205 45.791 194.002 45.791C190.682 45.791 187.732 45.0977 185.154 43.7109C182.576 42.3242 180.564 40.3906 179.119 37.9102C177.693 35.4297 176.98 32.6367 176.98 29.5312C176.98 26.4453 177.684 23.6621 179.09 21.1816C180.516 18.7012 182.459 16.7676 184.92 15.3809C187.381 13.9746 190.096 13.2715 193.064 13.2715C196.307 13.2715 199.129 13.9941 201.531 15.4395C203.953 16.8652 205.857 18.916 207.244 21.5918C208.631 24.248 209.383 27.3926 209.5 31.0254ZM193.182 18.3105C190.896 18.3105 188.895 19.082 187.176 20.625C185.457 22.1484 184.354 24.1699 183.865 26.6895H203.143C202.576 24.1699 201.375 22.1484 199.539 20.625C197.703 19.082 195.584 18.3105 193.182 18.3105Z" fill="black"/>
-                <path d="M237.844 24.1699V39.4922H243V44.8828H231.779V24.5508C231.779 22.6172 231.496 21.2305 230.93 20.3906C230.383 19.5508 229.475 19.1309 228.205 19.1309C225.51 19.1309 222.482 20.459 219.123 23.1152V39.4922H224.426V44.8828L194.148 45.7906L207.727 39.4922H213.146V19.5117H207.727V14.0918H219.123V17.8125C222.893 15.0586 226.438 13.6816 229.758 13.6816C232.512 13.6816 234.543 14.5312 235.852 16.2305C237.18 17.9297 237.844 20.5762 237.844 24.1699Z" fill="black"/>
-                <path d="M257.203 14.0918V19.5117H251.578V35.6543C251.578 37.334 251.754 38.4277 252.105 38.9355C252.477 39.4238 253.102 39.668 253.98 39.668C255.055 39.668 260.426 39.8633 261.5 39.4922L274.021 45.791C271.4 45.791 253.814 45.4102 252.662 45.4102C250.123 45.4102 248.297 44.7754 247.184 43.5059C246.07 42.2168 245.514 40.0195 245.514 36.9141V19.5117H236L229.758 13.6816L245.514 14.0918V9.43359L251.578 3.89648V14.0918H257.203Z" fill="black"/>
-                <path d="M289.52 31.0254H263.709C264.08 33.9746 265.223 36.3086 267.137 38.0273C269.051 39.7266 271.395 40.5762 274.168 40.5762C276.199 40.5762 278.084 40.1562 279.822 39.3164C281.561 38.4766 283.016 37.1875 284.188 35.4492L289.52 37.8516C287.84 40.4688 285.633 42.4512 282.898 43.7988C280.184 45.127 277.225 45.791 274.021 45.791C270.701 45.791 267.752 45.0977 265.174 43.7109C262.596 42.3242 260.584 40.3906 259.139 37.9102C257.713 35.4297 257 32.6367 257 29.5312C257 26.4453 257.703 23.6621 259.109 21.1816C260.535 18.7012 262.479 16.7676 264.939 15.3809C267.4 13.9746 270.115 13.2715 273.084 13.2715C276.326 13.2715 279.148 13.9941 281.551 15.4395C283.973 16.8652 285.877 18.916 287.264 21.5918C288.65 24.248 289.402 27.3926 289.52 31.0254ZM273.201 18.3105C270.916 18.3105 268.914 19.082 267.195 20.625C265.477 22.1484 264.373 24.1699 263.885 26.6895H283.162C282.596 24.1699 281.395 22.1484 279.559 20.625C277.723 19.082 275.604 18.3105 273.201 18.3105Z" fill="black"/>
-                <path d="M302.402 32.5195V39.4922H309.111V44.8828H290.215V39.4922H296.396V19.5117H284L273.201 13.2718L301.201 14.0918V21.0645C302.432 18.3105 303.955 16.3965 305.771 15.3223C307.607 14.2285 310.225 13.6816 313.623 13.6816H315V19.8047H313.682C310.4 19.8047 307.959 20.2344 306.357 21.0938C304.756 21.9531 303.691 23.252 303.164 24.9902C302.656 26.7285 302.402 29.2383 302.402 32.5195Z" fill="black"/>
-                </g>
+        default: `<svg width="47" height="46" viewBox="0 0 47 46" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <rect opacity="0.5" x="46.0059" y="-0.000976562" width="46.0006" height="20.9094" rx="10.4547" transform="rotate(90 46.0059 -0.000976562)" fill="#FECE0F"/>
                 <rect opacity="0.3" x="20.916" y="-0.000976562" width="20.9094" height="20.9094" rx="10.4547" transform="rotate(90 20.916 -0.000976562)" fill="#4900E6"/>
                 <rect opacity="0.5" x="20.916" y="25.0918" width="20.9094" height="20.9094" rx="10.4547" transform="rotate(90 20.916 25.0918)" fill="black"/>
-                </svg>
+                </svg>                
                 `
+      },
+      i18n: {
+        type: "Object",
+        description: "Specify all the UI text that can be translated",
+        default: {
+          // Scope selector
+          scopeSelectorTitle: __i18n("Scope", {
+            id: "s-carpenter.scope.selector.title"
+          }),
+          scopeSelectorLabel: __i18n("Select a scope", {
+            id: "s-carpenter.scope.selector.label"
+          }),
+          scopeSelectorButton: __i18n("Validate", {
+            id: "s-carpenter.scope.selector.button"
+          }),
+          // New node
+          newNodeTitle: __i18n("New node", {
+            id: "s-carpenter.node.new.title"
+          }),
+          newNodeDescription: __i18n("Please enter a uid (unique id) for your node. This is important for you to find your node later...", {
+            id: "s-carpenter.node.new.title"
+          }),
+          newNodeUidLabel: __i18n("Enter a valid node uid", {
+            id: "s-carpenter.node.new.uidLabel"
+          }),
+          newNodeUidPlaceholder: __i18n("contact", {
+            id: "s-carpenter.node.new.namePlaceholder"
+          }),
+          newNodeButton: __i18n("Add my node", {
+            id: "s-carpenter.node.new.button"
+          }),
+          newNodeUidAlreadyTaken: __i18n("This uid is already taken", {
+            id: "s-carpenter.page.new.uidAlreadyTaken"
+          }),
+          newNodeUidRequired: __i18n("You must provide a valid uid to proceed", {
+            id: "s-carpenter.page.new.uidRequired"
+          }),
+          // New page
+          newPageTitle: __i18n("New page", {
+            id: "s-carpenter.page.new.title"
+          }),
+          newPageNameLabel: __i18n("Enter a valid page name", {
+            id: "s-carpenter.page.new.nameLabel"
+          }),
+          newPageNamePlaceholder: __i18n("Homepage", {
+            id: "s-carpenter.page.new.namePlaceholder"
+          }),
+          newPageSlugLabel: __i18n("Enter a valid page slug", {
+            id: "s-carpenter.page.new.slugLabel"
+          }),
+          newPageSlugPlaceholder: __i18n("/homepage", {
+            id: "s-carpenter.page.new.slugPlaceholder"
+          }),
+          newPageUidLabel: __i18n("Enter a valid page uid", {
+            id: "s-carpenter.page.new.uidLabel"
+          }),
+          newPageUidPlaceholder: __i18n("homepage", {
+            id: "s-carpenter.page.new.namePlaceholder"
+          }),
+          newPageButton: __i18n("Create the page", {
+            id: "s-carpenter.page.new.button"
+          }),
+          newPageUidError: __i18n("The uid must contains only these characters [a-z0-9-]", {
+            id: "s-carpenter.page.new.uiError"
+          }),
+          addComponent: __i18n("Add a component", {
+            id: "s-carpenter.components.add"
+          }),
+          modeInsert: __i18n("Insert", {
+            id: "s-carpenter.mode.insert"
+          }),
+          modeEdit: __i18n("Edit", {
+            id: "s-carpenter.mode.edit"
+          }),
+          modeToggle: __i18n("%s to toggle modes", {
+            id: "s-carpenter.mode.insert",
+            tokens: {
+              "%s": `<span style="font-weight: bold">CTRL+i</span>`
+            }
+          })
+        }
       },
       icons: {
         type: "Object",
         description: "Specify some icons html to be used across the UI",
         default: {
+          menu: '<i class="fa-solid fa-ellipsis"></i>',
+          component: '<i class="fa-solid fa-puzzle-piece"></i>',
+          delete: '<i class="fa-regular fa-trash-can"></i>',
+          edit: '<i class="fa-regular fa-pen-to-square"></i>',
+          save: '<i class="fa-solid fa-floppy-disk"></i>',
+          add: '<i class="fa-solid fa-plus"></i>',
+          page: '<i class="fa-regular fa-file"></i>',
           mobile: '<i class="fa-solid fa-mobile-screen-button"></i>',
           tablet: '<i class="fa-solid fa-tablet-screen-button"></i>',
           desktop: '<i class="fa-solid fa-desktop"></i>',
@@ -33928,6 +30497,12 @@ const __css = `:root {
 --s-theme-color-current-border-saturation-offset: var(--s-theme-color-accent-border-saturation-offset, 0);
 --s-theme-color-current-border-lightness-offset: var(--s-theme-color-accent-border-lightness-offset, 0);
 --s-theme-color-current-a: var(--s-theme-color-accent-a, 1);
+--s-theme-color-current-hover-saturation-offset: var(--s-theme-color-accent-hover-saturation-offset, 0);
+--s-theme-color-current-hover-lightness-offset: var(--s-theme-color-accent-hover-lightness-offset, 0);
+--s-theme-color-current-a: var(--s-theme-color-accent-a, 1);
+--s-theme-color-current-active-saturation-offset: var(--s-theme-color-accent-active-saturation-offset, 0);
+--s-theme-color-current-active-lightness-offset: var(--s-theme-color-accent-active-lightness-offset, 0);
+--s-theme-color-current-a: var(--s-theme-color-accent-a, 1);
 --s-theme-color-current-gradientStart-saturation-offset: var(--s-theme-color-accent-gradientStart-saturation-offset, 0);
 --s-theme-color-current-gradientStart-lightness-offset: var(--s-theme-color-accent-gradientStart-lightness-offset, 0);
 --s-theme-color-current-a: var(--s-theme-color-accent-a, 1);
@@ -34029,6 +30604,10 @@ const __css = `:root {
 --s-theme-color-current-border-saturation-offset: 0;
 --s-theme-color-current-border-lightness-offset: 0;
 --s-theme-color-current-border-a: 0.2;
+--s-theme-color-current-hover-saturation-offset: 0;
+--s-theme-color-current-hover-lightness-offset: 40;
+--s-theme-color-current-active-saturation-offset: 0;
+--s-theme-color-current-active-lightness-offset: -10;
 --s-theme-color-current-gradientStart-saturation-offset: 0;
 --s-theme-color-current-gradientStart-lightness-offset: 0;
 --s-theme-color-current-gradientEnd-saturation-offset: 0;
@@ -34067,6 +30646,10 @@ const __css = `:root {
 --s-theme-color-main-border-saturation-offset: 0;
 --s-theme-color-main-border-lightness-offset: 0;
 --s-theme-color-main-border-a: 0.2;
+--s-theme-color-main-hover-saturation-offset: 0;
+--s-theme-color-main-hover-lightness-offset: 40;
+--s-theme-color-main-active-saturation-offset: 0;
+--s-theme-color-main-active-lightness-offset: -10;
 --s-theme-color-main-gradientStart-saturation-offset: 0;
 --s-theme-color-main-gradientStart-lightness-offset: 0;
 --s-theme-color-main-gradientEnd-saturation-offset: 0;
@@ -34101,6 +30684,10 @@ const __css = `:root {
 --s-theme-color-accent-border-saturation-offset: 0;
 --s-theme-color-accent-border-lightness-offset: 0;
 --s-theme-color-accent-border-a: 0.2;
+--s-theme-color-accent-hover-saturation-offset: 0;
+--s-theme-color-accent-hover-lightness-offset: 40;
+--s-theme-color-accent-active-saturation-offset: 0;
+--s-theme-color-accent-active-lightness-offset: -10;
 --s-theme-color-accent-gradientStart-saturation-offset: 0;
 --s-theme-color-accent-gradientStart-lightness-offset: 0;
 --s-theme-color-accent-gradientEnd-saturation-offset: 0;
@@ -34137,6 +30724,10 @@ const __css = `:root {
 --s-theme-color-complementary-border-saturation-offset: 0;
 --s-theme-color-complementary-border-lightness-offset: 0;
 --s-theme-color-complementary-border-a: 0.2;
+--s-theme-color-complementary-hover-saturation-offset: 0;
+--s-theme-color-complementary-hover-lightness-offset: 40;
+--s-theme-color-complementary-active-saturation-offset: 0;
+--s-theme-color-complementary-active-lightness-offset: -10;
 --s-theme-color-complementary-gradientStart-saturation-offset: 0;
 --s-theme-color-complementary-gradientStart-lightness-offset: 0;
 --s-theme-color-complementary-gradientEnd-saturation-offset: 0;
@@ -34171,6 +30762,10 @@ const __css = `:root {
 --s-theme-color-success-border-saturation-offset: 0;
 --s-theme-color-success-border-lightness-offset: 0;
 --s-theme-color-success-border-a: 0.2;
+--s-theme-color-success-hover-saturation-offset: 0;
+--s-theme-color-success-hover-lightness-offset: 40;
+--s-theme-color-success-active-saturation-offset: 0;
+--s-theme-color-success-active-lightness-offset: -10;
 --s-theme-color-success-gradientStart-saturation-offset: 0;
 --s-theme-color-success-gradientStart-lightness-offset: 0;
 --s-theme-color-success-gradientEnd-saturation-offset: 0;
@@ -34205,6 +30800,10 @@ const __css = `:root {
 --s-theme-color-warning-border-saturation-offset: 0;
 --s-theme-color-warning-border-lightness-offset: 0;
 --s-theme-color-warning-border-a: 0.2;
+--s-theme-color-warning-hover-saturation-offset: 0;
+--s-theme-color-warning-hover-lightness-offset: 40;
+--s-theme-color-warning-active-saturation-offset: 0;
+--s-theme-color-warning-active-lightness-offset: -10;
 --s-theme-color-warning-gradientStart-saturation-offset: 0;
 --s-theme-color-warning-gradientStart-lightness-offset: 0;
 --s-theme-color-warning-gradientEnd-saturation-offset: 0;
@@ -34239,6 +30838,10 @@ const __css = `:root {
 --s-theme-color-error-border-saturation-offset: 0;
 --s-theme-color-error-border-lightness-offset: 0;
 --s-theme-color-error-border-a: 0.2;
+--s-theme-color-error-hover-saturation-offset: 0;
+--s-theme-color-error-hover-lightness-offset: 40;
+--s-theme-color-error-active-saturation-offset: 0;
+--s-theme-color-error-active-lightness-offset: -10;
 --s-theme-color-error-gradientStart-saturation-offset: 0;
 --s-theme-color-error-gradientStart-lightness-offset: 0;
 --s-theme-color-error-gradientEnd-saturation-offset: 0;
@@ -34275,6 +30878,10 @@ const __css = `:root {
 --s-theme-color-info-border-saturation-offset: 0;
 --s-theme-color-info-border-lightness-offset: 0;
 --s-theme-color-info-border-a: 0.2;
+--s-theme-color-info-hover-saturation-offset: 0;
+--s-theme-color-info-hover-lightness-offset: 40;
+--s-theme-color-info-active-saturation-offset: 0;
+--s-theme-color-info-active-lightness-offset: -10;
 --s-theme-color-info-gradientStart-saturation-offset: 0;
 --s-theme-color-info-gradientStart-lightness-offset: 0;
 --s-theme-color-info-gradientEnd-saturation-offset: 0;
@@ -34878,6 +31485,7 @@ const __css = `:root {
 --s-theme-typo-p-style-fontSize: 30;
 --s-theme-typo-p-style-lineHeight: 1.8;
 --s-theme-typo-p-style-maxWidth: 55ch;
+--s-theme-typo-p-style-opacity: 0.6;
 --s-theme-typo-p-rhythmVertical-marginBottom: 40;
 --s-theme-typo-lead-label: Lead paragraph;
 --s-theme-typo-lead-group: style;
@@ -34892,7 +31500,7 @@ const __css = `:root {
 --s-theme-typo-hr-group: block;
 --s-theme-typo-hr-button-label: --;
 --s-theme-typo-hr-style-display: block;
---s-theme-typo-hr-style-color: hsla(212,6,50,1);
+--s-theme-typo-hr-style-color: hsla(212,6%,50%,1);
 --s-theme-typo-hr-style-opacity: 0.2;
 --s-theme-typo-hr-rhythmVertical-marginBottom: 50;
 --s-theme-typo-pre-not([class])-label: Pre;
@@ -35007,7 +31615,7 @@ const __css = `:root {
 --s-theme-typo-main-label: Main;
 --s-theme-typo-main-group: color;
 --s-theme-typo-main-type: color;
---s-theme-typo-main-style-color: hsla(212,6,50,1);
+--s-theme-typo-main-style-color: hsla(212,6%,50%,1);
 --s-theme-typo-mainGradient-label: Main gradient;
 --s-theme-typo-mainGradient-group: color;
 --s-theme-typo-mainGradient-type: color;
@@ -35016,7 +31624,7 @@ const __css = `:root {
 --s-theme-typo-mainGradient-style-mozBackgroundClip: text;
 --s-theme-typo-mainGradient-style-webkitTextFillColor: transparent;
 --s-theme-typo-mainGradient-style-mozTextFillColor: transparent;
---s-theme-typo-mainGradient-style-backgroundImage: linear-gradient(90deg, hsla(212,6,50,1) 0%, #878c92 100%);
+--s-theme-typo-mainGradient-style-backgroundImage: linear-gradient(90deg, hsla(212,6%,50%,1) 0%, #878c92 100%);
 --s-theme-typo-accent-label: Accent;
 --s-theme-typo-accent-group: color;
 --s-theme-typo-accent-type: color;
@@ -35123,6 +31731,8 @@ const __css = `:root {
 --s-theme-colorSchema-ui-lighten: 49;
 --s-theme-colorSchema-uiForeground-darken: 15;
 --s-theme-colorSchema-border-alpha: 0.2;
+--s-theme-colorSchema-hover-lighten: 40;
+--s-theme-colorSchema-active-darken: 10;
 --s-theme-colorSchema-gradientStart-lighten: 0;
 --s-theme-colorSchema-gradientEnd-lighten: 20;font-family: var(--s-theme-font-family-default-font-family, "Roboto"); 
  font-weight: var(--s-theme-font-family-default-font-weight, 400);font-size: calc(var(--s-theme-font-size-default, 15px) * 1);
@@ -35144,6 +31754,20 @@ const __css = `:root {
 [theme$="dark"].s-wireframe [s-carpenter-initial-ui],[theme$="dark"].s-wireframe [s-carpenter-initial-ui] {
                 color: rgba(255, 255, 255, 0.7);
 }
+
+/* body {
+}
+body:before {
+    content: ' ';
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    z-index: 9999;
+} */
 
 .s-carpenter_website-iframe,.s-carpenter_editor-iframe {
     position: fixed;
@@ -35169,7 +31793,6 @@ body:has(.s-carpenter_body) {
 }
 
 .s-carpenter_website-iframe {
-    pointer-events: all;
     left: 50%;
     position: absolute;
     top: 0;
@@ -35215,6 +31838,10 @@ body:has(.s-carpenter_body) {
 
 [theme$="dark"].s-wireframe .s-carpenter_website-iframe::-webkit-scrollbar-thumb,[theme$="dark"].s-wireframe .s-carpenter_website-iframe::-webkit-scrollbar-thumb {
                     background-color: rgba(255,255,255,0.1);
+}
+
+.s-carpenter_website-iframe {
+    pointer-events: all;
 }
 
 .s-lod--1 .s-carpenter_website-iframe {box-shadow: 0px 1.4px 1.4px rgba(0, 0, 0, 0.011),
@@ -35302,21 +31929,20 @@ body:has(.s-carpenter_body) {
               content: attr(confirm);
               position: absolute;
               top: 0; left: 0;
+              opacity: 0;
               width: calc(var(--s-btn-confirm-width) * var(--s-scale, 1));
-              height: 0;
+              height: 100%;
               overflow: hidden;
               display: flex;
               align-items: center;
               justify-content: center;
-              transform: translateY(100%);
               pointer-events: none;
-              padding-inline: var(--s-btn-padding-inline);
+              padding-inline: calc(var(--s-btn-padding-inline) * 0.5);
             }
 
 .s-carpenter_open-btn[confirm]:focus:after,.s-carpenter_open-btn[confirm]:focus-within:after {
-                height: 100%;
-                transform: translateY(0);
-              }
+                opacity: 1;
+            }
 
 .s-carpenter_open-btn {
 
@@ -35343,13 +31969,21 @@ body:has(.s-carpenter_body) {
                   color: hsla(calc(var(--s-theme-color-current-h, 0) + var(--s-theme-color-current-foreground-spin ,0)),calc((var(--s-theme-color-current-s, 0) + var(--s-theme-color-current-foreground-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-current-l, 0) + var(--s-theme-color-current-foreground-lightness-offset, 0)) * 1%),var(--s-theme-color-current-foreground-a, 1)) !important;
 }
 
-.s-lod--1 .s-carpenter_open-btn:hover,.s-lod--1 .s-carpenter_open-btn:focus,.s-lod--1 .s-carpenter_open-btn:focus-within {
+.s-lod--1 .s-carpenter_open-btn:hover {
                     background-color: hsla(calc(var(--s-theme-color-current-h, 0) + var(--s-theme-color-current-spin ,0)),calc((var(--s-theme-color-current-s, 0)) * 1%),calc((var(--s-theme-color-current-l, 0) + -6) * 1%),1);
                     color: hsla(calc(var(--s-theme-color-current-h, 0) + var(--s-theme-color-current-foreground-spin ,0)),calc((var(--s-theme-color-current-s, 0) + var(--s-theme-color-current-foreground-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-current-l, 0) + var(--s-theme-color-current-foreground-lightness-offset, 0)) * 1%),var(--s-theme-color-current-foreground-a, 1)) !important;
 }
 
-[theme$="dark"].s-lod--1 .s-carpenter_open-btn:hover,[theme$="dark"].s-lod--1 .s-carpenter_open-btn:hover,[theme$="dark"].s-lod--1 .s-carpenter_open-btn:focus,[theme$="dark"].s-lod--1 .s-carpenter_open-btn:focus,[theme$="dark"].s-lod--1 .s-carpenter_open-btn:focus-within,[theme$="dark"].s-lod--1 .s-carpenter_open-btn:focus-within {
+[theme$="dark"].s-lod--1 .s-carpenter_open-btn:hover,[theme$="dark"].s-lod--1 .s-carpenter_open-btn:hover {
                       background-color: hsla(calc(var(--s-theme-color-current-h, 0) + var(--s-theme-color-current-spin ,0)),calc((var(--s-theme-color-current-s, 0)) * 1%),calc((var(--s-theme-color-current-l, 0) + 6) * 1%),1);
+}
+
+.s-lod--1 .s-carpenter_open-btn:active {
+                    background-color: hsla(calc(var(--s-theme-color-current-h, 0) + var(--s-theme-color-current-spin ,0)),calc((var(--s-theme-color-current-s, 0)) * 1%),calc((var(--s-theme-color-current-l, 0) + -10) * 1%),1);
+}
+
+[theme$="dark"].s-lod--1 .s-carpenter_open-btn:active,[theme$="dark"].s-lod--1 .s-carpenter_open-btn:active {
+                      background-color: hsla(calc(var(--s-theme-color-current-h, 0) + var(--s-theme-color-current-spin ,0)),calc((var(--s-theme-color-current-s, 0)) * 1%),calc((var(--s-theme-color-current-l, 0) + 10) * 1%),1);
 }
 
 .s-carpenter_open-btn:disabled {
@@ -35392,6 +32026,12 @@ body:has(.s-carpenter_body) {
 --s-theme-color-current-a: var(--s-theme-color-error-a, 1);
 --s-theme-color-current-border-saturation-offset: var(--s-theme-color-error-border-saturation-offset, 0);
 --s-theme-color-current-border-lightness-offset: var(--s-theme-color-error-border-lightness-offset, 0);
+--s-theme-color-current-a: var(--s-theme-color-error-a, 1);
+--s-theme-color-current-hover-saturation-offset: var(--s-theme-color-error-hover-saturation-offset, 0);
+--s-theme-color-current-hover-lightness-offset: var(--s-theme-color-error-hover-lightness-offset, 0);
+--s-theme-color-current-a: var(--s-theme-color-error-a, 1);
+--s-theme-color-current-active-saturation-offset: var(--s-theme-color-error-active-saturation-offset, 0);
+--s-theme-color-current-active-lightness-offset: var(--s-theme-color-error-active-lightness-offset, 0);
 --s-theme-color-current-a: var(--s-theme-color-error-a, 1);
 --s-theme-color-current-gradientStart-saturation-offset: var(--s-theme-color-error-gradientStart-saturation-offset, 0);
 --s-theme-color-current-gradientStart-lightness-offset: var(--s-theme-color-error-gradientStart-lightness-offset, 0);
@@ -35474,6 +32114,12 @@ body:has(.s-carpenter_body) {
 --s-theme-color-current-border-saturation-offset: var(--s-theme-color-complementary-border-saturation-offset, 0);
 --s-theme-color-current-border-lightness-offset: var(--s-theme-color-complementary-border-lightness-offset, 0);
 --s-theme-color-current-a: var(--s-theme-color-complementary-a, 1);
+--s-theme-color-current-hover-saturation-offset: var(--s-theme-color-complementary-hover-saturation-offset, 0);
+--s-theme-color-current-hover-lightness-offset: var(--s-theme-color-complementary-hover-lightness-offset, 0);
+--s-theme-color-current-a: var(--s-theme-color-complementary-a, 1);
+--s-theme-color-current-active-saturation-offset: var(--s-theme-color-complementary-active-saturation-offset, 0);
+--s-theme-color-current-active-lightness-offset: var(--s-theme-color-complementary-active-lightness-offset, 0);
+--s-theme-color-current-a: var(--s-theme-color-complementary-a, 1);
 --s-theme-color-current-gradientStart-saturation-offset: var(--s-theme-color-complementary-gradientStart-saturation-offset, 0);
 --s-theme-color-current-gradientStart-lightness-offset: var(--s-theme-color-complementary-gradientStart-lightness-offset, 0);
 --s-theme-color-current-a: var(--s-theme-color-complementary-a, 1);
@@ -35537,21 +32183,20 @@ body:has(.s-carpenter_body) {
               content: attr(confirm);
               position: absolute;
               top: 0; left: 0;
+              opacity: 0;
               width: calc(var(--s-btn-confirm-width) * var(--s-scale, 1));
-              height: 0;
+              height: 100%;
               overflow: hidden;
               display: flex;
               align-items: center;
               justify-content: center;
-              transform: translateY(100%);
               pointer-events: none;
-              padding-inline: var(--s-btn-padding-inline);
+              padding-inline: calc(var(--s-btn-padding-inline) * 0.5);
             }
 
 .s-carpenter_open-btn.loading[confirm]:focus:after,.s-carpenter_open-btn.loading[confirm]:focus-within:after {
-                height: 100%;
-                transform: translateY(0);
-              }
+                opacity: 1;
+            }
 
 .s-carpenter_open-btn.loading {
 
@@ -35639,6 +32284,12 @@ body:has(.s-carpenter_body) {
 --s-theme-color-current-border-saturation-offset: var(--s-theme-color-error-border-saturation-offset, 0);
 --s-theme-color-current-border-lightness-offset: var(--s-theme-color-error-border-lightness-offset, 0);
 --s-theme-color-current-a: var(--s-theme-color-error-a, 1);
+--s-theme-color-current-hover-saturation-offset: var(--s-theme-color-error-hover-saturation-offset, 0);
+--s-theme-color-current-hover-lightness-offset: var(--s-theme-color-error-hover-lightness-offset, 0);
+--s-theme-color-current-a: var(--s-theme-color-error-a, 1);
+--s-theme-color-current-active-saturation-offset: var(--s-theme-color-error-active-saturation-offset, 0);
+--s-theme-color-current-active-lightness-offset: var(--s-theme-color-error-active-lightness-offset, 0);
+--s-theme-color-current-a: var(--s-theme-color-error-a, 1);
 --s-theme-color-current-gradientStart-saturation-offset: var(--s-theme-color-error-gradientStart-saturation-offset, 0);
 --s-theme-color-current-gradientStart-lightness-offset: var(--s-theme-color-error-gradientStart-lightness-offset, 0);
 --s-theme-color-current-a: var(--s-theme-color-error-a, 1);
@@ -35720,8 +32371,7 @@ body:has(.s-carpenter_body) {
     }
 
 .s-lod--1 .s-carpenter_loading ._inner {
-        background-color: hsla(calc(var(--s-theme-color-main-h, 0) + var(--s-theme-color-main-background-spin ,0)),calc((var(--s-theme-color-main-s, 0) + var(--s-theme-color-main-background-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-main-l, 0) + var(--s-theme-color-main-background-lightness-offset, 0)) * 1%),var(--s-theme-color-main-background-a, 1));
-        border-radius: 20px;box-shadow: 0px 1.4px 1.4px rgba(0, 0, 0, 0.011),
+        background-color: hsla(calc(var(--s-theme-color-main-h, 0) + var(--s-theme-color-main-background-spin ,0)),calc((var(--s-theme-color-main-s, 0) + var(--s-theme-color-main-background-saturation-offset, 0)) * 1%),calc((var(--s-theme-color-main-l, 0) + var(--s-theme-color-main-background-lightness-offset, 0)) * 1%),var(--s-theme-color-main-background-a, 1));border-radius: calc(5px * var(--s-scale, 1) * var(--s-scale-global, 1));box-shadow: 0px 1.4px 1.4px rgba(0, 0, 0, 0.011),
   0px 3.3px 3.5px rgba(0, 0, 0, 0.016),
   0px 6.1px 6.5px rgba(0, 0, 0, 0.02),
   0px 10.9px 11.6px rgba(0, 0, 0, 0.024),
@@ -35738,9 +32388,9 @@ body:has(.s-carpenter_body) {
         display: flex;
         align-items: start;
         gap: calc(var(--s-theme-margin-default, 1rem) * 0.75);
-        -webkit-margin-after: calc(var(--s-theme-margin-default, 1rem) * 1.5);
-                margin-block-end: calc(var(--s-theme-margin-default, 1rem) * 1.5);
     }
+
+/* margin-block-end: sugar.margin(30); */
 
 .s-carpenter_loading ._logo svg {
             opacity: 0.5;
@@ -35837,6 +32487,7 @@ class SCarpenterComponent extends SLitComponent {
       if (__isInIframe()) {
         return;
       }
+      SLitComponent.setDefaultProps("s-carpenter-app", this.props);
       document.addEventListener("s-carpenter-app.ready", (e) => {
         this.remove();
       });
@@ -35856,7 +32507,8 @@ class SCarpenterComponent extends SLitComponent {
     document.body.appendChild(this._$editorIframe);
     const iframeHtml = `
             <script type="module" defer src="${this.props.src}"><\/script>
-            <s-carpenter-app id="${(_a2 = this.props.id) !== null && _a2 !== void 0 ? _a2 : "s-carpenter"}" save-state ${this.props.sidebar ? "sidebar" : ""} ${this.props.autoEdit ? "auto-edit" : ""} ${this.props.features ? `features='${JSON.stringify(this.props.features)}'` : ""}></s-caprenter-app>    
+            <div class="s-carpenter_editor-bkg"></div>
+            <s-carpenter-app id="${(_a2 = this.props.id) !== null && _a2 !== void 0 ? _a2 : "s-carpenter"}" save-state ${this.props.values ? `values='${JSON.stringify(this.props.values)}'` : ""} ${this.props.specs ? `specs='${JSON.stringify(this.props.specs)}'` : ""} ${this.props.source ? `source='${JSON.stringify(this.props.source)}'` : ""}></s-caprenter-app>    
         `;
     __injectIframeContent(this._$editorIframe, iframeHtml);
   }
@@ -35966,13 +32618,13 @@ class SCarpenterComponent extends SLitComponent {
                               <!-- <div class="_loader carpenter-loader">
                                   ${this._carpenterLogo()}
                               </div> -->
-                              <h1 class="_title">
+                              <!-- <h1 class="_title">
                                   Loading <span>Carpenter</span>
                               </h1>
                               <p class="_text">
                                   Loading.
                                   <span>Please wait....</span>
-                              </p>
+                              </p> -->
                               <!-- <button class="_cancel-btn">Cancel</button> -->
                           </div>
                       </div>
@@ -36008,22 +32660,56 @@ if (!window.___deepMerge) {
   };
 }
 document.env = window.___deepMerge(
-  JSON.parse(`{"PLATFORM":"browser","ENV":"development","SUGAR":{"config":{"datetime":{"dateFormat":"YYYY-MM-DD","timeFormat":"h:mm:ss","i18n":{"previousMonth":"Previous Month","nextMonth":"Next Month","months":["January","February","March","April","May","June","July","August","September","October","November","December"],"weekdays":["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],"weekdaysShort":["Sun","Mon","Tue","Wed","Thu","Fri","Sat"]}},"google":{"gtm":"GTM-K4LMN8Q","map":{"apiKey":"AIzaSyDzFfEzhmYXRTlONUCtMWQ88uHJhsbtXY4"}},"project":{"environments":{}},"serve":{"img":{"imgPath":"/dist/img"},"js":{"path":"/dist/js"},"css":{"path":"/dist/css"},"icons":{"path":"/dist/icons"},"fonts":{"path":"/dist/fonts"},"cache":{"path":"/cache"}},"dashboard":{"layout":[["s-dashboard-pages"],["s-dashboard-browserstack","s-dashboard-google","s-dashboard-web-vitals","s-dashboard-responsive"],["s-dashboard-project","s-dashboard-frontend-checker"]]},"env":{"envFromLocation":{"development":"https?://(localhost|127.0.0.1|0.0.0.0|192.168.[0-9]{1,3}.[0-9]{1,3})","staging":"https?://([a-zA-Z0-9.-]+)?staging([a-zA-Z0-9.-]+)?","production":"https?://.*"},"git":{"template":{"name":"Template","commit":{}}}},"theme":{"theme":"default","variant":"light","themes":{"default-light":{"defaultColor":"main","color":{"current":"hsla(212,6,50,1)","main":"hsla(212,6,50,1)","accent":"#ffbb00","complementary":"#5100ff","success":"#91ff00","warning":"#ffd500","error":"#ff003b","info":"#00ffff"},"classmap":{"enabled":false,"url":"/classmap.json"},"lod":{"enabled":true,"defaultLevel":3,"botLevel":1,"levels":{"0":{"name":"bare","speedIndex":0},"1":{"name":"lnf","speedIndex":30},"2":{"name":"theme","speedIndex":40},"3":{"name":"high","speedIndex":50},"4":{"name":"ultra","speedIndex":60}},"method":"class","defaultAction":">=","cssProperties":{}},"easing":{"default":"cubic-bezier(0.700, 0.000, 0.305, 0.995)"},"scroll":{"duration":300,"offset":0,"offsetX":0,"offsetY":0},"partytown":{"enabled":false,"forward":["dataLayer.push","fbq","freshpaint.addPageviewProperties","freshpaint.identify","freshpaint.track","_hsq.push","Intercom","_learnq.push","ttq.track","ttq.page","ttq.load","mixpanel.track"]},"timing":{"slow":".6s","default":".3s","fast":".1s"},"transition":{"slow":"all .6s cubic-bezier(0.700, 0.000, 0.305, 0.995)","default":"all .3s cubic-bezier(0.700, 0.000, 0.305, 0.995)","fast":"all .1s cubic-bezier(0.700, 0.000, 0.305, 0.995)"},"gradient":{"defaultModifierStart":{},"defaultModifierEnd":{"lighten":20},"defaultX":"50%","defaultY":"50%","defaultAngle":"90deg","defaultTextModifierStart":{"darken":5},"defaultTextModifierEnd":{"lighten":5},"defaultTextAngle":"90deg"},"helpers":{"states":["mounted","active","loading"],"clearfix":{"default":"overflow"},"disabled":{"opacity":0.4},"truncate":{"count":10},"order":{"count":20}},"layout":{"offset":{"top":0,"right":0,"bottom":0,"left":0},"container":{"default":"1280px","wide":"1440px","full":"none"},"grid":{"1":1,"2":2,"3":3,"4":4,"5":5,"6":6,"7":7,"8":8,"9":9,"10":10,"11":11,"12":12},"layout":{"1":"1","12":"1 2","21":"2 1","112":"1 1 2","122":"1 2 2","123":"1 2 3","211":"2 1 1","221":"2 2 1","321":"3 2 1","1112":"1 1 1 2","1222":"1 2 2 2","1234":"1 2 3 4","2221":"2 2 2 1","11112":"1 1 1 1 2","12222":"1 2 2 2 2","12345":"1 2 3 4 5","22221":"2 2 2 2 1","111112":"1 1 1 1 1 2","122222":"1 2 2 2 2 2","123456":"1 2 3 4 5 6","1_2":"1 _ 2","2_1":"2 _ 1","12_33":"1 2 _ 3 3","1_23":"1 _ 2 3","1_2_3":"1 _ 2 _ 3","32_1":"3 2 _ 1","3_21":"3 _ 2 1","12_34":"1 2 _ 3 4","123_4":"1 2 3 _ 4","1_234":"1 _ 2 3 4","1_2_3_4":"1 _ 2 _ 3 _ 4","123_45":"1 2 3 _ 4 5","12_345":"1 2 _ 3 4 5","1_2345":"1 _ 2 3 4 5","1234_5":"1 2 3 4 _ 5","1_2_3_4_5":"1 _ 2 _ 3 _ 4 _ 5"}},"ratio":{"1":1,"16-9":1.7777777777777777,"16-10":1.6,"21-9":2.3333333333333335,"1-2":0.5,"2-1":2,"2-3":0.6666666666666666,"3-2":1.5,"4-3":1.3333333333333333,"3-4":0.75},"scalable":{"margin":false,"padding":true,"offsize":false,"font":true},"scale":{"10":1,"11":1.1,"12":1.2,"13":1.3,"14":1.4,"15":1.5,"16":1.6,"17":1.7,"18":1.8,"19":1.9,"20":2,"default":1,"01":0.1,"02":0.2,"03":0.3,"04":0.4,"05":0.5,"06":0.6,"07":0.7,"08":0.8,"09":0.9},"opacity":{"0":0,"10":0.1,"20":0.2,"30":0.3,"40":0.4,"50":0.5,"60":0.6,"70":0.7,"80":0.8,"90":0.9,"100":1},"width":{"0":"0","10":"10%","20":"20%","30":"30%","40":"40%","50":"50%","60":"60%","70":"70%","80":"80%","90":"90%","100":"100%"},"height":{"0":"0","10":"10%","20":"20%","30":"30%","40":"40%","50":"50%","60":"60%","70":"70%","80":"80%","90":"90%","100":"100%"},"depth":{"0":"0","5":"0px 0.6px 0.4px rgba(0, 0, 0, 0.006),\\n  0px 1.3px 1px rgba(0, 0, 0, 0.006),\\n  0px 2.5px 1.5px rgba(0, 0, 0, 0.005),\\n  0px 3.5px 3.4px rgba(0, 0, 0, 0.006),\\n  0px 4.4px 4.3px rgba(0, 0, 0, 0.007),\\n  0px 10px 10px rgba(0, 0, 0, 0.01)","10":"0px 0.6px 0.4px rgba(0, 0, 0, 0.006),\\n  0px 1.3px 1px rgba(0, 0, 0, 0.008),\\n  0px 2.5px 1.9px rgba(0, 0, 0, 0.01),\\n  0px 4.5px 3.4px rgba(0, 0, 0, 0.012),\\n  0px 8.4px 6.3px rgba(0, 0, 0, 0.014),\\n  0px 20px 15px rgba(0, 0, 0, 0.02)","20":"0px 0.6px 0.4px rgba(0, 0, 0, 0.006),\\n  0px 1.3px 1px rgba(0, 0, 0, 0.008),\\n  0px 2.5px 1.9px rgba(0, 0, 0, 0.01),\\n  0px 4.5px 3.4px rgba(0, 0, 0, 0.012),\\n  0px 8.4px 6.3px rgba(0, 0, 0, 0.014),\\n  0px 20px 15px rgba(0, 0, 0, 0.02)","30":"0px 0.6px 0.4px rgba(0, 0, 0, 0.008),\\n  0px 1.3px 1px rgba(0, 0, 0, 0.012),\\n  0px 2.5px 1.9px rgba(0, 0, 0, 0.015),\\n  0px 4.5px 3.4px rgba(0, 0, 0, 0.018),\\n  0px 8.4px 6.3px rgba(0, 0, 0, 0.022),\\n  0px 20px 15px rgba(0, 0, 0, 0.03)","40":"0px 0.8px 0.6px rgba(0, 0, 0, 0.008),\\n  0px 2px 1.3px rgba(0, 0, 0, 0.012),\\n  0px 3.8px 2.5px rgba(0, 0, 0, 0.015),\\n  0px 6.7px 4.5px rgba(0, 0, 0, 0.018),\\n  0px 12.5px 8.4px rgba(0, 0, 0, 0.022),\\n  0px 30px 20px rgba(0, 0, 0, 0.03)","50":"0px 1px 0.8px rgba(0, 0, 0, 0.011),\\n  0px 2.3px 2px rgba(0, 0, 0, 0.016),\\n  0px 4.4px 3.8px rgba(0, 0, 0, 0.02),\\n  0px 7.8px 6.7px rgba(0, 0, 0, 0.024),\\n  0px 14.6px 12.5px rgba(0, 0, 0, 0.029),\\n  0px 35px 30px rgba(0, 0, 0, 0.04)","60":"0px 1px 0.7px rgba(0, 0, 0, 0.011),\\n  0px 2.3px 1.7px rgba(0, 0, 0, 0.016),\\n  0px 4.4px 3.1px rgba(0, 0, 0, 0.02),\\n  0px 7.8px 5.6px rgba(0, 0, 0, 0.024),\\n  0px 14.6px 10.4px rgba(0, 0, 0, 0.029),\\n  0px 35px 25px rgba(0, 0, 0, 0.04)","70":"0px 1.1px 0.8px rgba(0, 0, 0, 0.011),\\n  0px 2.7px 2px rgba(0, 0, 0, 0.016),\\n  0px 5px 3.8px rgba(0, 0, 0, 0.02),\\n  0px 8.9px 6.7px rgba(0, 0, 0, 0.024),\\n  0px 16.7px 12.5px rgba(0, 0, 0, 0.029),\\n  0px 40px 30px rgba(0, 0, 0, 0.04)","80":"0px 1.1px 1px rgba(0, 0, 0, 0.011),\\n  0px 2.7px 2.3px rgba(0, 0, 0, 0.016),\\n  0px 5px 4.4px rgba(0, 0, 0, 0.02),\\n  0px 8.9px 7.8px rgba(0, 0, 0, 0.024),\\n  0px 16.7px 14.6px rgba(0, 0, 0, 0.029),\\n  0px 40px 35px rgba(0, 0, 0, 0.04)","90":"0px 1.4px 1.1px rgba(0, 0, 0, 0.011),\\n  0px 3.3px 2.7px rgba(0, 0, 0, 0.016),\\n  0px 6.1px 5px rgba(0, 0, 0, 0.02),\\n  0px 10.9px 8.9px rgba(0, 0, 0, 0.024),\\n  0px 20.5px 16.7px rgba(0, 0, 0, 0.029),\\n  0px 49px 40px rgba(0, 0, 0, 0.04)","100":"0px 1.4px 1.4px rgba(0, 0, 0, 0.011),\\n  0px 3.3px 3.5px rgba(0, 0, 0, 0.016),\\n  0px 6.1px 6.5px rgba(0, 0, 0, 0.02),\\n  0px 10.9px 11.6px rgba(0, 0, 0, 0.024),\\n  0px 20.5px 21.7px rgba(0, 0, 0, 0.029),\\n  0px 49px 52px rgba(0, 0, 0, 0.04)","default":"0"},"size":{"0":0.25,"5":"0.5","10":0.65,"15":0.7,"20":0.75,"25":0.95,"30":1.1,"40":1.25,"50":1.5,"60":2,"70":2.5,"80":3,"90":4,"100":5,"default":"15px"},"font":{"family":{"default":{"fontFamily":"\\"Roboto\\"","fontWeight":400,"import":"https://fonts.googleapis.com/css2?family=Roboto&display=swap"},"title":{"fontFamily":"\\"Roboto\\"","fontWeight":500,"import":"https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap"},"quote":{"fontFamily":"\\"Palatino, Times, Georgia, serif\\"","fontWeight":"normal","fontStyle":"normal","fontDisplay":"auto","capHeight":0.65},"code":{"fontFamily":"Menlo, Monaco, Consolas, Courier New, monospace","fontWeight":"normal","fontStyle":"normal","fontDisplay":"auto","capHeight":0.65}},"size":{"0":0,"5":"0.5","10":0.65,"15":0.7,"20":0.75,"25":0.95,"30":1.1,"40":1.25,"50":1.5,"60":2,"70":2.5,"80":3,"90":4,"100":5,"default":"15px"}},"border":{"width":{"0":0,"10":1,"20":2,"30":4,"40":6,"50":8,"60":12,"70":16,"80":20,"90":24,"100":30,"default":"1px"},"radius":{"0":0,"10":0.8,"20":1.6,"30":2.4,"40":3.2,"50":4,"60":5.2,"70":6.4,"80":8,"90":10,"100":12,"default":"5px"}},"space":{"0":0,"10":0.375,"20":0.75,"30":1.5,"40":2.25,"50":3.25,"60":4.25,"70":5.5,"80":7,"90":9,"100":11,"default":"1rem"},"margin":{"0":0,"10":0.375,"20":0.75,"30":1.5,"40":2.25,"50":3.25,"60":4.25,"70":5.5,"80":7,"90":9,"100":11,"default":"1rem"},"padding":{"0":0,"10":0.375,"20":0.75,"30":1.5,"40":2.25,"50":3.25,"60":4.25,"70":5.5,"80":7,"90":9,"100":11,"default":"1rem"},"offsize":{"0":0,"10":0.375,"20":0.75,"30":1.5,"40":2.25,"50":3.25,"60":4.25,"70":5.5,"80":7,"90":9,"100":11,"default":"1rem"},"media":{"defaultAction":"<=","defaultMedia":"desktop","queries":{"mobile":{"minWidth":0,"maxWidth":639},"tablet":{"minWidth":640,"maxWidth":1279},"desktop":{"minWidth":1280,"maxWidth":2047},"wide":{"minWidth":2048,"maxWidth":null}}},"ui":{"default":{"paddingInline":1.5,"paddingBlock":0.75,"borderRadius":1,"borderWidth":"1px","transition":"all .1s cubic-bezier(0.700, 0.000, 0.305, 0.995)","defaultLnf":"solid","depth":"0","outline":true,"spacing":1.5,"rhythmVertical":{"margin-bottom":60}},"form":{"paddingInline":1,"paddingBlock":0.75,"borderRadius":1,"borderWidth":"1px","transition":"all .1s cubic-bezier(0.700, 0.000, 0.305, 0.995)","outline":true,"depth":"0","rhythmVertical":{"margin-bottom":40}},"outline":{"active":true,"borderWidth":"10px","borderRadius":1,"transition":"all .2s ease-out"},"scrollbar":{"size":"2px","color":"accent"},"label":{"defaultLnf":"inline"},"dropdown":{"paddingInline":0.75,"paddingBlock":0.75,"itemPaddingInline":1.5,"itemPaddingBlock":0.75},"list":{"defaultLnf":"dl","bulletChar":"-"},"fsTree":{"bulletChar":"●"},"tooltip":{"defaultPosition":"top","arrowSize":"15px"},"loader":{"duration":"1s","easing":"linear"}},"typo":{"h1":{"label":"H1","group":"style","style":{"display":"block","fontFamily":"title","fontSize":80,"lineHeight":1.3,"maxWidth":"55ch","mobile":{"fontSize":70}},"rhythmVertical":{"marginBottom":50}},"h2":{"label":"H2","group":"style","style":{"display":"block","fontFamily":"title","fontSize":70,"lineHeight":1.3,"maxWidth":"55ch","mobile":{"fontSize":60}},"rhythmVertical":{"marginBottom":50}},"h3":{"label":"H3","group":"style","style":{"display":"block","fontFamily":"title","fontSize":60,"lineHeight":1.3,"maxWidth":"55ch","mobile":{"fontSize":50}},"rhythmVertical":{"marginBottom":50}},"h4":{"label":"H4","group":"style","style":{"display":"block","fontFamily":"title","fontSize":50,"lineHeight":1.3,"maxWidth":"55ch","mobile":{"fontSize":40}},"rhythmVertical":{"marginBottom":50}},"h5":{"label":"H5","group":"style","style":{"display":"block","fontFamily":"title","fontSize":40,"lineHeight":1.3,"maxWidth":"55ch","mobile":{"fontSize":30}},"rhythmVertical":{"marginBottom":40}},"h6":{"label":"H6","group":"style","style":{"display":"block","fontFamily":"title","fontSize":30,"lineHeight":1.3,"maxWidth":"55ch","mobile":{"fontSize":30}},"hythmVertical":{"marginBottom":40}},"p":{"label":"Paragraph","group":"style","default":true,"style":{"display":"block","fontFamily":"default","fontSize":30,"lineHeight":1.8,"maxWidth":"55ch"},"rhythmVertical":{"marginBottom":40}},"lead":{"label":"Lead paragraph","group":"style","style":{"display":"block","fontFamily":"default","fontSize":40,"lineHeight":1.6,"maxWidth":"55ch","mobile":{"fontSize":40}},"rhythmVertical":{"marginBottom":40}},"hr":{"label":"--","group":"block","button":{"label":"--"},"style":{"display":"block","color":"hsla(212,6,50,1)","opacity":0.2},"rhythmVertical":{"marginBottom":50}},"pre:not([class])":{"label":"Pre","group":"text","style":{"display":"block","fontFamily":"code","color":["main","text"],"backgroundColor":["main","surface"],"lineHeight":1.5,"paddingInline":1.5,"paddingBlock":0.75,"borderRadius":1,"depth":"0"},"rhythmVertical":{"marginBottom":50}},"code:not(pre > code)":{"label":"Code","group":"text","button":{"label":"</>"},"style":{"display":"inline-block","fontFamily":"code","color":["main","text"],"lineHeight":1.1,"backgroundColor":["accent","surface"],"borderRadius":10,"paddingInline":10,"paddingBlock":0}},"blockquote":{"label":"Blockquote","group":"block","button":{"label":"<svg viewBox=\\"0 0 20 20\\"><path d=\\"M3 10.423a6.5 6.5 0 0 1 6.056-6.408l.038.67C6.448 5.423 5.354 7.663 5.22 10H9c.552 0 .5.432.5.986v4.511c0 .554-.448.503-1 .503h-5c-.552 0-.5-.449-.5-1.003v-4.574zm8 0a6.5 6.5 0 0 1 6.056-6.408l.038.67c-2.646.739-3.74 2.979-3.873 5.315H17c.552 0 .5.432.5.986v4.511c0 .554-.448.503-1 .503h-5c-.552 0-.5-.449-.5-1.003v-4.574z\\"></path></svg>"},"style":{"display":"block","fontFamily":"quote"},"editor":{"style":{"paddingInlineStart":1.5,"borderLeft":"1px solid #000"}},"rhythmVertical":{"marginBottom":50}},"a":{"label":"Link","group":"text","button":{"label":"<svg viewBox=\\"0 0 20 20\\"><path d=\\"m11.077 15 .991-1.416a.75.75 0 1 1 1.229.86l-1.148 1.64a.748.748 0 0 1-.217.206 5.251 5.251 0 0 1-8.503-5.955.741.741 0 0 1 .12-.274l1.147-1.639a.75.75 0 1 1 1.228.86L4.933 10.7l.006.003a3.75 3.75 0 0 0 6.132 4.294l.006.004zm5.494-5.335a.748.748 0 0 1-.12.274l-1.147 1.639a.75.75 0 1 1-1.228-.86l.86-1.23a3.75 3.75 0 0 0-6.144-4.301l-.86 1.229a.75.75 0 0 1-1.229-.86l1.148-1.64a.748.748 0 0 1 .217-.206 5.251 5.251 0 0 1 8.503 5.955zm-4.563-2.532a.75.75 0 0 1 .184 1.045l-3.155 4.505a.75.75 0 1 1-1.229-.86l3.155-4.506a.75.75 0 0 1 1.045-.184z\\"></path></svg>"},"style":{"color":"accent","textDecoration":"underline"}},"quote":{"label":"Quote","group":"text","button":{"label":"<svg viewBox=\\"0 0 20 20\\"><path d=\\"M3 10.423a6.5 6.5 0 0 1 6.056-6.408l.038.67C6.448 5.423 5.354 7.663 5.22 10H9c.552 0 .5.432.5.986v4.511c0 .554-.448.503-1 .503h-5c-.552 0-.5-.449-.5-1.003v-4.574zm8 0a6.5 6.5 0 0 1 6.056-6.408l.038.67c-2.646.739-3.74 2.979-3.873 5.315H17c.552 0 .5.432.5.986v4.511c0 .554-.448.503-1 .503h-5c-.552 0-.5-.449-.5-1.003v-4.574z\\"></path></svg>"},"style":{"fontFamily":"quote"},"rhythmVertical":{"marginBottom":50}},"bold":{"label":"Bold","group":"text","style":{"fontWeight":"bold"},"button":{"label":"B","style":{"fontWeight":"bolder"}}},"italic":{"label":"Italic","group":"text","style":{"fontStyle":"italic"},"button":{"label":"I","style":{"fontStyle":"italic"}}},"large":{"label":"Large","group":"text","style":{"fontSize":"1.1em"},"button":{"label":"A","style":{"fontSize":"1.01em"}}},"larger":{"label":"Larger","group":"text","style":{"fontSize":"1.2em"},"button":{"label":"A","style":{"fontSize":"1.02em"}}},"largest":{"label":"Largest","group":"text","style":{"fontSize":"1.3em"},"button":{"label":"A","style":{"fontSize":"1.03em"}}},"small":{"label":"Small","group":"text","style":{"fontSize":"0.9em"},"button":{"label":"A","style":{"fontSize":"0.99em"}}},"smaller":{"label":"Smaller","group":"text","style":{"fontSize":"0.8em"},"button":{"label":"A","style":{"fontSize":"0.98em"}}},"smallest":{"label":"Smallest","group":"text","style":{"fontSize":"0.7em"},"button":{"label":"A","style":{"fontSize":"0.97em"}}},"mark":{"label":"Mark","group":"text","button":{"label":"M"},"style":{"backgroundColor":"#ffbb00"}},"del":{"label":"Deleted","group":"text","style":{"textDecoration":"line-through"},"button":{"label":"D","style":{"textDecoration":"line-through"}}},"ins":{"label":"Inserted","group":"text","style":{"textDecoration":"underline"},"button":{"label":"U","style":{"textDecoration":"underline"}}},"sub":{"label":"Subscript","group":"text","style":{"verticalAlign":"sub","fontSize":"0.6em"},"button":{"label":"Sub","style":{"verticalAlign":"sub","fontSize":"0.6em"}}},"sup":{"label":"Superscript","group":"text","style":{"verticalAlign":"sup","fontSize":"0.6em"},"button":{"label":"Sup","style":{"verticalAlign":"sup","fontSize":"0.6em"}}},"main":{"label":"Main","group":"color","type":"color","style":{"color":"hsla(212,6,50,1)"}},"mainGradient":{"label":"Main gradient","group":"color","type":"color","style":{"backgroundSize":"100%","-webkitBackgroundClip":"text","-mozBackgroundClip":"text","-webkitTextFillColor":"transparent","-mozTextFillColor":"transparent","backgroundImage":"linear-gradient(90deg, hsla(212,6,50,1) 0%, #878c92 100%)"}},"accent":{"label":"Accent","group":"color","type":"color","style":{"color":"#ffbb00"}},"accentGradient":{"label":"Accent gradient","group":"color","type":"color","style":{"backgroundSize":"100%","-webkitBackgroundClip":"text","-mozBackgroundClip":"text","-webkitTextFillColor":"transparent","-mozTextFillColor":"transparent","backgroundImage":"linear-gradient(90deg, #ffbb00 0%, #ffc21a 100%)"}},"complementary":{"label":"Complementary","group":"color","type":"color","style":{"color":"#5100ff"}},"complementaryGradient":{"label":"Complementary gradient","group":"color","type":"color","style":{"backgroundSize":"100%","-webkitBackgroundClip":"text","-mozBackgroundClip":"text","-webkitTextFillColor":"transparent","-mozTextFillColor":"transparent","backgroundImage":"linear-gradient(90deg, #5100ff 0%, #621aff 100%)"}},"success":{"label":"Success","group":"color","type":"color","style":{"color":"#91ff00"}},"successGradient":{"label":"Success gradient","group":"color","type":"color","style":{"backgroundSize":"100%","-webkitBackgroundClip":"text","-mozBackgroundClip":"text","-webkitTextFillColor":"transparent","-mozTextFillColor":"transparent","backgroundImage":"linear-gradient(90deg, #91ff00 0%, #9cff1a 100%)"}},"warning":{"label":"Warning","group":"color","type":"color","style":{"color":"#ffd500"}},"warningGradient":{"label":"Warning gradient","group":"color","type":"color","style":{"backgroundSize":"100%","-webkitBackgroundClip":"text","-mozBackgroundClip":"text","-webkitTextFillColor":"transparent","-mozTextFillColor":"transparent","backgroundImage":"linear-gradient(90deg, #ffd500 0%, #ffd91a 100%)"}},"error":{"label":"Error","group":"color","type":"color","style":{"color":"#ff003b"}},"errorGradient":{"label":"Error gradient","group":"color","type":"color","style":{"backgroundSize":"100%","-webkitBackgroundClip":"text","-mozBackgroundClip":"text","-webkitTextFillColor":"transparent","-mozTextFillColor":"transparent","backgroundImage":"linear-gradient(90deg, #ff003b 0%, #ff1a4f 100%)"}},"info":{"label":"Info","group":"color","type":"color","style":{"color":"#00ffff"}},"infoGradient":{"label":"Info gradient","group":"color","type":"color","style":{"backgroundSize":"100%","-webkitBackgroundClip":"text","-mozBackgroundClip":"text","-webkitTextFillColor":"transparent","-mozTextFillColor":"transparent","backgroundImage":"linear-gradient(90deg, #00ffff 0%, #1affff 100%)"}}},"wireframe":{"light":{"border":"1px solid rgba(0,0,0,0.1)","borderColor":"rgba(0,0,0,0.1)","background":"#ffffff","surface":"#fafafa"},"dark":{"border":"1px solid rgba(255,255,255,0.2)","borderColor":"rgba(255,255,255,0.2)","background":"#2D323A","surface":"#3B424C"}},"metas":{"title":"Default light","description":"Nice and elegant light theme"},"colorSchema":{"text":{"darken":0,"color":{"base":{"darken":5},"main":{"darken":10},"complementary":{"lighten":15},"info":{"darken":10}}},"placeholder":{"darken":0,"alpha":0.4},"foreground":{"lighten":50},"background":{"lighten":50,"color":{"surface":{"darken":20}}},"backgroundForeground":{"darken":45},"surface":{"lighten":40,"color":{"base":{"lighten":49},"main":{"lighten":49}}},"surfaceForeground":{"darken":45},"ui":{"lighten":49},"uiForeground":{"darken":15},"border":{"alpha":0.2},"gradientStart":{"lighten":0},"gradientEnd":{"lighten":20}}},"default-dark":{"defaultColor":"main","color":{"current":"hsla(212,6,50,1)","main":"hsla(212,6,50,1)","accent":"#ffbb00","complementary":"#5100ff","success":"#91ff00","warning":"#ffd500","error":"#ff003b","info":"#00ffff"},"classmap":{"enabled":false,"url":"/classmap.json"},"lod":{"enabled":true,"defaultLevel":3,"botLevel":1,"levels":{"0":{"name":"bare","speedIndex":0},"1":{"name":"lnf","speedIndex":30},"2":{"name":"theme","speedIndex":40},"3":{"name":"high","speedIndex":50},"4":{"name":"ultra","speedIndex":60}},"method":"class","defaultAction":">=","cssProperties":{}},"easing":{"default":"cubic-bezier(0.700, 0.000, 0.305, 0.995)"},"scroll":{"duration":300,"offset":0,"offsetX":0,"offsetY":0},"partytown":{"enabled":false,"forward":["dataLayer.push","fbq","freshpaint.addPageviewProperties","freshpaint.identify","freshpaint.track","_hsq.push","Intercom","_learnq.push","ttq.track","ttq.page","ttq.load","mixpanel.track"]},"timing":{"slow":".6s","default":".3s","fast":".1s"},"transition":{"slow":"all .6s cubic-bezier(0.700, 0.000, 0.305, 0.995)","default":"all .3s cubic-bezier(0.700, 0.000, 0.305, 0.995)","fast":"all .1s cubic-bezier(0.700, 0.000, 0.305, 0.995)"},"gradient":{"defaultModifierStart":{},"defaultModifierEnd":{"lighten":20},"defaultX":"50%","defaultY":"50%","defaultAngle":"90deg","defaultTextModifierStart":{"darken":5},"defaultTextModifierEnd":{"lighten":5},"defaultTextAngle":"90deg"},"helpers":{"states":["mounted","active","loading"],"clearfix":{"default":"overflow"},"disabled":{"opacity":0.4},"truncate":{"count":10},"order":{"count":20}},"layout":{"offset":{"top":0,"right":0,"bottom":0,"left":0},"container":{"default":"1280px","wide":"1440px","full":"none"},"grid":{"1":1,"2":2,"3":3,"4":4,"5":5,"6":6,"7":7,"8":8,"9":9,"10":10,"11":11,"12":12},"layout":{"1":"1","12":"1 2","21":"2 1","112":"1 1 2","122":"1 2 2","123":"1 2 3","211":"2 1 1","221":"2 2 1","321":"3 2 1","1112":"1 1 1 2","1222":"1 2 2 2","1234":"1 2 3 4","2221":"2 2 2 1","11112":"1 1 1 1 2","12222":"1 2 2 2 2","12345":"1 2 3 4 5","22221":"2 2 2 2 1","111112":"1 1 1 1 1 2","122222":"1 2 2 2 2 2","123456":"1 2 3 4 5 6","1_2":"1 _ 2","2_1":"2 _ 1","12_33":"1 2 _ 3 3","1_23":"1 _ 2 3","1_2_3":"1 _ 2 _ 3","32_1":"3 2 _ 1","3_21":"3 _ 2 1","12_34":"1 2 _ 3 4","123_4":"1 2 3 _ 4","1_234":"1 _ 2 3 4","1_2_3_4":"1 _ 2 _ 3 _ 4","123_45":"1 2 3 _ 4 5","12_345":"1 2 _ 3 4 5","1_2345":"1 _ 2 3 4 5","1234_5":"1 2 3 4 _ 5","1_2_3_4_5":"1 _ 2 _ 3 _ 4 _ 5"}},"ratio":{"1":1,"16-9":1.7777777777777777,"16-10":1.6,"21-9":2.3333333333333335,"1-2":0.5,"2-1":2,"2-3":0.6666666666666666,"3-2":1.5,"4-3":1.3333333333333333,"3-4":0.75},"scalable":{"margin":false,"padding":true,"offsize":false,"font":true},"scale":{"10":1,"11":1.1,"12":1.2,"13":1.3,"14":1.4,"15":1.5,"16":1.6,"17":1.7,"18":1.8,"19":1.9,"20":2,"default":1,"01":0.1,"02":0.2,"03":0.3,"04":0.4,"05":0.5,"06":0.6,"07":0.7,"08":0.8,"09":0.9},"opacity":{"0":0,"10":0.1,"20":0.2,"30":0.3,"40":0.4,"50":0.5,"60":0.6,"70":0.7,"80":0.8,"90":0.9,"100":1},"width":{"0":"0","10":"10%","20":"20%","30":"30%","40":"40%","50":"50%","60":"60%","70":"70%","80":"80%","90":"90%","100":"100%"},"height":{"0":"0","10":"10%","20":"20%","30":"30%","40":"40%","50":"50%","60":"60%","70":"70%","80":"80%","90":"90%","100":"100%"},"depth":{"0":"0","5":"0px 0.6px 0.4px rgba(0, 0, 0, 0.006),\\n  0px 1.3px 1px rgba(0, 0, 0, 0.006),\\n  0px 2.5px 1.5px rgba(0, 0, 0, 0.005),\\n  0px 3.5px 3.4px rgba(0, 0, 0, 0.006),\\n  0px 4.4px 4.3px rgba(0, 0, 0, 0.007),\\n  0px 10px 10px rgba(0, 0, 0, 0.01)","10":"0px 0.6px 0.4px rgba(0, 0, 0, 0.006),\\n  0px 1.3px 1px rgba(0, 0, 0, 0.008),\\n  0px 2.5px 1.9px rgba(0, 0, 0, 0.01),\\n  0px 4.5px 3.4px rgba(0, 0, 0, 0.012),\\n  0px 8.4px 6.3px rgba(0, 0, 0, 0.014),\\n  0px 20px 15px rgba(0, 0, 0, 0.02)","20":"0px 0.6px 0.4px rgba(0, 0, 0, 0.006),\\n  0px 1.3px 1px rgba(0, 0, 0, 0.008),\\n  0px 2.5px 1.9px rgba(0, 0, 0, 0.01),\\n  0px 4.5px 3.4px rgba(0, 0, 0, 0.012),\\n  0px 8.4px 6.3px rgba(0, 0, 0, 0.014),\\n  0px 20px 15px rgba(0, 0, 0, 0.02)","30":"0px 0.6px 0.4px rgba(0, 0, 0, 0.008),\\n  0px 1.3px 1px rgba(0, 0, 0, 0.012),\\n  0px 2.5px 1.9px rgba(0, 0, 0, 0.015),\\n  0px 4.5px 3.4px rgba(0, 0, 0, 0.018),\\n  0px 8.4px 6.3px rgba(0, 0, 0, 0.022),\\n  0px 20px 15px rgba(0, 0, 0, 0.03)","40":"0px 0.8px 0.6px rgba(0, 0, 0, 0.008),\\n  0px 2px 1.3px rgba(0, 0, 0, 0.012),\\n  0px 3.8px 2.5px rgba(0, 0, 0, 0.015),\\n  0px 6.7px 4.5px rgba(0, 0, 0, 0.018),\\n  0px 12.5px 8.4px rgba(0, 0, 0, 0.022),\\n  0px 30px 20px rgba(0, 0, 0, 0.03)","50":"0px 1px 0.8px rgba(0, 0, 0, 0.011),\\n  0px 2.3px 2px rgba(0, 0, 0, 0.016),\\n  0px 4.4px 3.8px rgba(0, 0, 0, 0.02),\\n  0px 7.8px 6.7px rgba(0, 0, 0, 0.024),\\n  0px 14.6px 12.5px rgba(0, 0, 0, 0.029),\\n  0px 35px 30px rgba(0, 0, 0, 0.04)","60":"0px 1px 0.7px rgba(0, 0, 0, 0.011),\\n  0px 2.3px 1.7px rgba(0, 0, 0, 0.016),\\n  0px 4.4px 3.1px rgba(0, 0, 0, 0.02),\\n  0px 7.8px 5.6px rgba(0, 0, 0, 0.024),\\n  0px 14.6px 10.4px rgba(0, 0, 0, 0.029),\\n  0px 35px 25px rgba(0, 0, 0, 0.04)","70":"0px 1.1px 0.8px rgba(0, 0, 0, 0.011),\\n  0px 2.7px 2px rgba(0, 0, 0, 0.016),\\n  0px 5px 3.8px rgba(0, 0, 0, 0.02),\\n  0px 8.9px 6.7px rgba(0, 0, 0, 0.024),\\n  0px 16.7px 12.5px rgba(0, 0, 0, 0.029),\\n  0px 40px 30px rgba(0, 0, 0, 0.04)","80":"0px 1.1px 1px rgba(0, 0, 0, 0.011),\\n  0px 2.7px 2.3px rgba(0, 0, 0, 0.016),\\n  0px 5px 4.4px rgba(0, 0, 0, 0.02),\\n  0px 8.9px 7.8px rgba(0, 0, 0, 0.024),\\n  0px 16.7px 14.6px rgba(0, 0, 0, 0.029),\\n  0px 40px 35px rgba(0, 0, 0, 0.04)","90":"0px 1.4px 1.1px rgba(0, 0, 0, 0.011),\\n  0px 3.3px 2.7px rgba(0, 0, 0, 0.016),\\n  0px 6.1px 5px rgba(0, 0, 0, 0.02),\\n  0px 10.9px 8.9px rgba(0, 0, 0, 0.024),\\n  0px 20.5px 16.7px rgba(0, 0, 0, 0.029),\\n  0px 49px 40px rgba(0, 0, 0, 0.04)","100":"0px 1.4px 1.4px rgba(0, 0, 0, 0.011),\\n  0px 3.3px 3.5px rgba(0, 0, 0, 0.016),\\n  0px 6.1px 6.5px rgba(0, 0, 0, 0.02),\\n  0px 10.9px 11.6px rgba(0, 0, 0, 0.024),\\n  0px 20.5px 21.7px rgba(0, 0, 0, 0.029),\\n  0px 49px 52px rgba(0, 0, 0, 0.04)","default":"0"},"size":{"0":0.25,"5":"0.5","10":0.65,"15":0.7,"20":0.75,"25":0.95,"30":1.1,"40":1.25,"50":1.5,"60":2,"70":2.5,"80":3,"90":4,"100":5,"default":"15px"},"font":{"family":{"default":{"fontFamily":"\\"Roboto\\"","fontWeight":400,"import":"https://fonts.googleapis.com/css2?family=Roboto&display=swap"},"title":{"fontFamily":"\\"Roboto\\"","fontWeight":500,"import":"https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap"},"quote":{"fontFamily":"\\"Palatino, Times, Georgia, serif\\"","fontWeight":"normal","fontStyle":"normal","fontDisplay":"auto","capHeight":0.65},"code":{"fontFamily":"Menlo, Monaco, Consolas, Courier New, monospace","fontWeight":"normal","fontStyle":"normal","fontDisplay":"auto","capHeight":0.65}},"size":{"0":0,"5":"0.5","10":0.65,"15":0.7,"20":0.75,"25":0.95,"30":1.1,"40":1.25,"50":1.5,"60":2,"70":2.5,"80":3,"90":4,"100":5,"default":"15px"}},"border":{"width":{"0":0,"10":1,"20":2,"30":4,"40":6,"50":8,"60":12,"70":16,"80":20,"90":24,"100":30,"default":"1px"},"radius":{"0":0,"10":0.8,"20":1.6,"30":2.4,"40":3.2,"50":4,"60":5.2,"70":6.4,"80":8,"90":10,"100":12,"default":"5px"}},"space":{"0":0,"10":0.375,"20":0.75,"30":1.5,"40":2.25,"50":3.25,"60":4.25,"70":5.5,"80":7,"90":9,"100":11,"default":"1rem"},"margin":{"0":0,"10":0.375,"20":0.75,"30":1.5,"40":2.25,"50":3.25,"60":4.25,"70":5.5,"80":7,"90":9,"100":11,"default":"1rem"},"padding":{"0":0,"10":0.375,"20":0.75,"30":1.5,"40":2.25,"50":3.25,"60":4.25,"70":5.5,"80":7,"90":9,"100":11,"default":"1rem"},"offsize":{"0":0,"10":0.375,"20":0.75,"30":1.5,"40":2.25,"50":3.25,"60":4.25,"70":5.5,"80":7,"90":9,"100":11,"default":"1rem"},"media":{"defaultAction":"<=","defaultMedia":"desktop","queries":{"mobile":{"minWidth":0,"maxWidth":639},"tablet":{"minWidth":640,"maxWidth":1279},"desktop":{"minWidth":1280,"maxWidth":2047},"wide":{"minWidth":2048,"maxWidth":null}}},"ui":{"default":{"paddingInline":1.5,"paddingBlock":0.75,"borderRadius":1,"borderWidth":"1px","transition":"all .1s cubic-bezier(0.700, 0.000, 0.305, 0.995)","defaultLnf":"solid","depth":"0","outline":true,"spacing":1.5,"rhythmVertical":{"margin-bottom":60}},"form":{"paddingInline":1,"paddingBlock":0.75,"borderRadius":1,"borderWidth":"1px","transition":"all .1s cubic-bezier(0.700, 0.000, 0.305, 0.995)","outline":true,"depth":"0","rhythmVertical":{"margin-bottom":40}},"outline":{"active":true,"borderWidth":"10px","borderRadius":1,"transition":"all .2s ease-out"},"scrollbar":{"size":"2px","color":"accent"},"label":{"defaultLnf":"inline"},"dropdown":{"paddingInline":0.75,"paddingBlock":0.75,"itemPaddingInline":1.5,"itemPaddingBlock":0.75},"list":{"defaultLnf":"dl","bulletChar":"-"},"fsTree":{"bulletChar":"●"},"tooltip":{"defaultPosition":"top","arrowSize":"15px"},"loader":{"duration":"1s","easing":"linear"}},"typo":{"h1":{"label":"H1","group":"style","style":{"display":"block","fontFamily":"title","fontSize":80,"lineHeight":1.3,"maxWidth":"55ch","mobile":{"fontSize":70}},"rhythmVertical":{"marginBottom":50}},"h2":{"label":"H2","group":"style","style":{"display":"block","fontFamily":"title","fontSize":70,"lineHeight":1.3,"maxWidth":"55ch","mobile":{"fontSize":60}},"rhythmVertical":{"marginBottom":50}},"h3":{"label":"H3","group":"style","style":{"display":"block","fontFamily":"title","fontSize":60,"lineHeight":1.3,"maxWidth":"55ch","mobile":{"fontSize":50}},"rhythmVertical":{"marginBottom":50}},"h4":{"label":"H4","group":"style","style":{"display":"block","fontFamily":"title","fontSize":50,"lineHeight":1.3,"maxWidth":"55ch","mobile":{"fontSize":40}},"rhythmVertical":{"marginBottom":50}},"h5":{"label":"H5","group":"style","style":{"display":"block","fontFamily":"title","fontSize":40,"lineHeight":1.3,"maxWidth":"55ch","mobile":{"fontSize":30}},"rhythmVertical":{"marginBottom":40}},"h6":{"label":"H6","group":"style","style":{"display":"block","fontFamily":"title","fontSize":30,"lineHeight":1.3,"maxWidth":"55ch","mobile":{"fontSize":30}},"hythmVertical":{"marginBottom":40}},"p":{"label":"Paragraph","group":"style","default":true,"style":{"display":"block","fontFamily":"default","fontSize":30,"lineHeight":1.8,"maxWidth":"55ch"},"rhythmVertical":{"marginBottom":40}},"lead":{"label":"Lead paragraph","group":"style","style":{"display":"block","fontFamily":"default","fontSize":40,"lineHeight":1.6,"maxWidth":"55ch","mobile":{"fontSize":40}},"rhythmVertical":{"marginBottom":40}},"hr":{"label":"--","group":"block","button":{"label":"--"},"style":{"display":"block","color":"hsla(212,6,50,1)","opacity":0.2},"rhythmVertical":{"marginBottom":50}},"pre:not([class])":{"label":"Pre","group":"text","style":{"display":"block","fontFamily":"code","color":["main","text"],"backgroundColor":["main","surface"],"lineHeight":1.5,"paddingInline":1.5,"paddingBlock":0.75,"borderRadius":1,"depth":"0"},"rhythmVertical":{"marginBottom":50}},"code:not(pre > code)":{"label":"Code","group":"text","button":{"label":"</>"},"style":{"display":"inline-block","fontFamily":"code","color":["main","text"],"lineHeight":1.1,"backgroundColor":["accent","surface"],"borderRadius":10,"paddingInline":10,"paddingBlock":0}},"blockquote":{"label":"Blockquote","group":"block","button":{"label":"<svg viewBox=\\"0 0 20 20\\"><path d=\\"M3 10.423a6.5 6.5 0 0 1 6.056-6.408l.038.67C6.448 5.423 5.354 7.663 5.22 10H9c.552 0 .5.432.5.986v4.511c0 .554-.448.503-1 .503h-5c-.552 0-.5-.449-.5-1.003v-4.574zm8 0a6.5 6.5 0 0 1 6.056-6.408l.038.67c-2.646.739-3.74 2.979-3.873 5.315H17c.552 0 .5.432.5.986v4.511c0 .554-.448.503-1 .503h-5c-.552 0-.5-.449-.5-1.003v-4.574z\\"></path></svg>"},"style":{"display":"block","fontFamily":"quote"},"editor":{"style":{"paddingInlineStart":1.5,"borderLeft":"1px solid #000"}},"rhythmVertical":{"marginBottom":50}},"a":{"label":"Link","group":"text","button":{"label":"<svg viewBox=\\"0 0 20 20\\"><path d=\\"m11.077 15 .991-1.416a.75.75 0 1 1 1.229.86l-1.148 1.64a.748.748 0 0 1-.217.206 5.251 5.251 0 0 1-8.503-5.955.741.741 0 0 1 .12-.274l1.147-1.639a.75.75 0 1 1 1.228.86L4.933 10.7l.006.003a3.75 3.75 0 0 0 6.132 4.294l.006.004zm5.494-5.335a.748.748 0 0 1-.12.274l-1.147 1.639a.75.75 0 1 1-1.228-.86l.86-1.23a3.75 3.75 0 0 0-6.144-4.301l-.86 1.229a.75.75 0 0 1-1.229-.86l1.148-1.64a.748.748 0 0 1 .217-.206 5.251 5.251 0 0 1 8.503 5.955zm-4.563-2.532a.75.75 0 0 1 .184 1.045l-3.155 4.505a.75.75 0 1 1-1.229-.86l3.155-4.506a.75.75 0 0 1 1.045-.184z\\"></path></svg>"},"style":{"color":"accent","textDecoration":"underline"}},"quote":{"label":"Quote","group":"text","button":{"label":"<svg viewBox=\\"0 0 20 20\\"><path d=\\"M3 10.423a6.5 6.5 0 0 1 6.056-6.408l.038.67C6.448 5.423 5.354 7.663 5.22 10H9c.552 0 .5.432.5.986v4.511c0 .554-.448.503-1 .503h-5c-.552 0-.5-.449-.5-1.003v-4.574zm8 0a6.5 6.5 0 0 1 6.056-6.408l.038.67c-2.646.739-3.74 2.979-3.873 5.315H17c.552 0 .5.432.5.986v4.511c0 .554-.448.503-1 .503h-5c-.552 0-.5-.449-.5-1.003v-4.574z\\"></path></svg>"},"style":{"fontFamily":"quote"},"rhythmVertical":{"marginBottom":50}},"bold":{"label":"Bold","group":"text","style":{"fontWeight":"bold"},"button":{"label":"B","style":{"fontWeight":"bolder"}}},"italic":{"label":"Italic","group":"text","style":{"fontStyle":"italic"},"button":{"label":"I","style":{"fontStyle":"italic"}}},"large":{"label":"Large","group":"text","style":{"fontSize":"1.1em"},"button":{"label":"A","style":{"fontSize":"1.01em"}}},"larger":{"label":"Larger","group":"text","style":{"fontSize":"1.2em"},"button":{"label":"A","style":{"fontSize":"1.02em"}}},"largest":{"label":"Largest","group":"text","style":{"fontSize":"1.3em"},"button":{"label":"A","style":{"fontSize":"1.03em"}}},"small":{"label":"Small","group":"text","style":{"fontSize":"0.9em"},"button":{"label":"A","style":{"fontSize":"0.99em"}}},"smaller":{"label":"Smaller","group":"text","style":{"fontSize":"0.8em"},"button":{"label":"A","style":{"fontSize":"0.98em"}}},"smallest":{"label":"Smallest","group":"text","style":{"fontSize":"0.7em"},"button":{"label":"A","style":{"fontSize":"0.97em"}}},"mark":{"label":"Mark","group":"text","button":{"label":"M"},"style":{"backgroundColor":"#ffbb00"}},"del":{"label":"Deleted","group":"text","style":{"textDecoration":"line-through"},"button":{"label":"D","style":{"textDecoration":"line-through"}}},"ins":{"label":"Inserted","group":"text","style":{"textDecoration":"underline"},"button":{"label":"U","style":{"textDecoration":"underline"}}},"sub":{"label":"Subscript","group":"text","style":{"verticalAlign":"sub","fontSize":"0.6em"},"button":{"label":"Sub","style":{"verticalAlign":"sub","fontSize":"0.6em"}}},"sup":{"label":"Superscript","group":"text","style":{"verticalAlign":"sup","fontSize":"0.6em"},"button":{"label":"Sup","style":{"verticalAlign":"sup","fontSize":"0.6em"}}},"main":{"label":"Main","group":"color","type":"color","style":{"color":"hsla(212,6,50,1)"}},"mainGradient":{"label":"Main gradient","group":"color","type":"color","style":{"backgroundSize":"100%","-webkitBackgroundClip":"text","-mozBackgroundClip":"text","-webkitTextFillColor":"transparent","-mozTextFillColor":"transparent","backgroundImage":"linear-gradient(90deg, hsla(212,6,50,1) 0%, #878c92 100%)"}},"accent":{"label":"Accent","group":"color","type":"color","style":{"color":"#ffbb00"}},"accentGradient":{"label":"Accent gradient","group":"color","type":"color","style":{"backgroundSize":"100%","-webkitBackgroundClip":"text","-mozBackgroundClip":"text","-webkitTextFillColor":"transparent","-mozTextFillColor":"transparent","backgroundImage":"linear-gradient(90deg, #ffbb00 0%, #ffc21a 100%)"}},"complementary":{"label":"Complementary","group":"color","type":"color","style":{"color":"#5100ff"}},"complementaryGradient":{"label":"Complementary gradient","group":"color","type":"color","style":{"backgroundSize":"100%","-webkitBackgroundClip":"text","-mozBackgroundClip":"text","-webkitTextFillColor":"transparent","-mozTextFillColor":"transparent","backgroundImage":"linear-gradient(90deg, #5100ff 0%, #621aff 100%)"}},"success":{"label":"Success","group":"color","type":"color","style":{"color":"#91ff00"}},"successGradient":{"label":"Success gradient","group":"color","type":"color","style":{"backgroundSize":"100%","-webkitBackgroundClip":"text","-mozBackgroundClip":"text","-webkitTextFillColor":"transparent","-mozTextFillColor":"transparent","backgroundImage":"linear-gradient(90deg, #91ff00 0%, #9cff1a 100%)"}},"warning":{"label":"Warning","group":"color","type":"color","style":{"color":"#ffd500"}},"warningGradient":{"label":"Warning gradient","group":"color","type":"color","style":{"backgroundSize":"100%","-webkitBackgroundClip":"text","-mozBackgroundClip":"text","-webkitTextFillColor":"transparent","-mozTextFillColor":"transparent","backgroundImage":"linear-gradient(90deg, #ffd500 0%, #ffd91a 100%)"}},"error":{"label":"Error","group":"color","type":"color","style":{"color":"#ff003b"}},"errorGradient":{"label":"Error gradient","group":"color","type":"color","style":{"backgroundSize":"100%","-webkitBackgroundClip":"text","-mozBackgroundClip":"text","-webkitTextFillColor":"transparent","-mozTextFillColor":"transparent","backgroundImage":"linear-gradient(90deg, #ff003b 0%, #ff1a4f 100%)"}},"info":{"label":"Info","group":"color","type":"color","style":{"color":"#00ffff"}},"infoGradient":{"label":"Info gradient","group":"color","type":"color","style":{"backgroundSize":"100%","-webkitBackgroundClip":"text","-mozBackgroundClip":"text","-webkitTextFillColor":"transparent","-mozTextFillColor":"transparent","backgroundImage":"linear-gradient(90deg, #00ffff 0%, #1affff 100%)"}}},"wireframe":{"light":{"border":"1px solid rgba(0,0,0,0.1)","borderColor":"rgba(0,0,0,0.1)","background":"#ffffff","surface":"#fafafa"},"dark":{"border":"1px solid rgba(255,255,255,0.2)","borderColor":"rgba(255,255,255,0.2)","background":"#2D323A","surface":"#3B424C"}},"metas":{"title":"Default dark","description":"Nice and elegant dark theme"},"colorSchema":{"text":{"lighten":15,"color":{"base":{"lighten":30},"main":{"lighten":46}}},"placeholder":{"lighten":50,"alpha":0.4},"foreground":{"lighten":50},"background":{"darken":30},"backgroundForeground":{"lighten":50},"surface":{"darken":25},"surfaceForeground":{"lighten":50},"ui":{"darken":28},"uiForeground":{"lighten":45},"border":{"alpha":0.4},"gradientStart":{"lighten":0},"gradientEnd":{"darken":20}}}}},"ts":{"compilerOptions":{"moduleResolution":"node","sourceMap":true}}}},"FRONTSPEC":{"$custom":{"menus":{"primary":{"name":"Primary menu"},"footer":{"name":"Footer menu"}},"metas":{"backgroundColor":"#2c323a"}},"metas":{"lang":"en","title":"@example/01-basic","homepage":"https://coffeekraken.io","description":"","themeColor":"#ffbb00","author":{"name":"","email":"","url":""},"og":{"title":"@example/01-basic","description":"","type":"website","url":"https://coffeekraken.io","image":"https://cdnv2.coffeekraken.io/coffeekraken-og.png"},"backgroundColor":"#2c323a"},"favicon":{"rootDir":"./dist/favicon","filename":"favicon.html","filePath":"./dist/favicon/favicon.html"},"theme":{"theme":"default","variant":"light","themes":{"default-light":{"title":"Default light","description":"Nice and elegant light theme"},"default-dark":{"title":"Default dark","description":"Nice and elegant dark theme"}}},"media":{"defaultAction":"<=","defaultMedia":"desktop","queries":{"wide":{"minWidth":2048,"maxWidth":null},"desktop":{"minWidth":1280,"maxWidth":2047},"tablet":{"minWidth":640,"maxWidth":1279},"mobile":{"minWidth":0,"maxWidth":639}}},"google":{"gtm":"GTM-K4LMN8Q","map":{"apiKey":"AIzaSyDzFfEzhmYXRTlONUCtMWQ88uHJhsbtXY4"}},"margin":{"0":0,"10":0.375,"20":0.75,"30":1.5,"40":2.25,"50":3.25,"60":4.25,"70":5.5,"80":7,"90":9,"100":11,"default":"1rem"},"padding":{"0":0,"10":0.375,"20":0.75,"30":1.5,"40":2.25,"50":3.25,"60":4.25,"70":5.5,"80":7,"90":9,"100":11,"default":"1rem"},"lod":{"enabled":true,"defaultLevel":3,"botLevel":1,"levels":{"0":{"name":"bare","speedIndex":0},"1":{"name":"lnf","speedIndex":30},"2":{"name":"theme","speedIndex":40},"3":{"name":"high","speedIndex":50},"4":{"name":"ultra","speedIndex":60}},"method":"class","defaultAction":">="},"partytown":{"enabled":false,"forward":["dataLayer.push","fbq","freshpaint.addPageviewProperties","freshpaint.identify","freshpaint.track","_hsq.push","Intercom","_learnq.push","ttq.track","ttq.page","ttq.load","mixpanel.track"]},"font":{"family":{"default":{"fontFamily":"\\"Roboto\\"","fontWeight":400,"import":"https://fonts.googleapis.com/css2?family=Roboto&display=swap"},"title":{"fontFamily":"\\"Roboto\\"","fontWeight":500,"import":"https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap"},"quote":{"fontFamily":"\\"Palatino, Times, Georgia, serif\\"","fontWeight":"normal","fontStyle":"normal","fontDisplay":"auto","capHeight":0.65},"code":{"fontFamily":"Menlo, Monaco, Consolas, Courier New, monospace","fontWeight":"normal","fontStyle":"normal","fontDisplay":"auto","capHeight":0.65}},"size":{"0":0,"5":"0.5","10":0.65,"15":0.7,"20":0.75,"25":0.95,"30":1.1,"40":1.25,"50":1.5,"60":2,"70":2.5,"80":3,"90":4,"100":5,"default":"15px"}},"typo":{"h1":{"label":"H1","group":"style","button":{},"editor":{},"style":{"display":"block","fontFamily":"\\"Roboto\\"","fontSize":"45px","lineHeight":1.3,"maxWidth":"55ch","marginBottom":"3.25rem"}},"h2":{"label":"H2","group":"style","button":{},"editor":{},"style":{"display":"block","fontFamily":"\\"Roboto\\"","fontSize":"37.5px","lineHeight":1.3,"maxWidth":"55ch","marginBottom":"3.25rem"}},"h3":{"label":"H3","group":"style","button":{},"editor":{},"style":{"display":"block","fontFamily":"\\"Roboto\\"","fontSize":"30px","lineHeight":1.3,"maxWidth":"55ch","marginBottom":"3.25rem"}},"h4":{"label":"H4","group":"style","button":{},"editor":{},"style":{"display":"block","fontFamily":"\\"Roboto\\"","fontSize":"22.5px","lineHeight":1.3,"maxWidth":"55ch","marginBottom":"3.25rem"}},"h5":{"label":"H5","group":"style","button":{},"editor":{},"style":{"display":"block","fontFamily":"\\"Roboto\\"","fontSize":"18.75px","lineHeight":1.3,"maxWidth":"55ch","marginBottom":"2.25rem"}},"h6":{"label":"H6","group":"style","button":{},"editor":{},"style":{"display":"block","fontFamily":"\\"Roboto\\"","fontSize":"16.5px","lineHeight":1.3,"maxWidth":"55ch"}},"p":{"label":"Paragraph","group":"style","button":{},"editor":{},"style":{"display":"block","fontFamily":"\\"Roboto\\"","fontSize":"16.5px","lineHeight":1.8,"maxWidth":"55ch","marginBottom":"2.25rem"},"default":true},"lead":{"label":"Lead paragraph","group":"style","button":{},"editor":{},"style":{"display":"block","fontFamily":"\\"Roboto\\"","fontSize":"18.75px","lineHeight":1.6,"maxWidth":"55ch","marginBottom":"2.25rem"}},"hr":{"label":"--","group":"block","button":{"label":"--"},"editor":{},"style":{"display":"block","color":"hsla(212,6,50,1)","opacity":0.2,"marginBottom":"3.25rem"}},"pre":{"label":"Pre","group":"text","button":{},"editor":{},"style":{"display":"block","fontFamily":"Menlo, Monaco, Consolas, Courier New, monospace","color":"#61666b","backgroundColor":"#fcfcfd","lineHeight":1.5,"paddingInline":"1.5rem","paddingBlock":"0.75rem","borderRadius":"5px","depth":"0","marginBottom":"3.25rem"}},"code":{"label":"Code","group":"text","button":{"label":"</>"},"editor":{},"style":{"display":"inline-block","fontFamily":"Menlo, Monaco, Consolas, Courier New, monospace","color":"#61666b","lineHeight":1.1,"backgroundColor":"#fff1cc","borderRadius":"4px","paddingInline":"0.375rem","paddingBlock":"0rem"}},"blockquote":{"label":"Blockquote","group":"block","button":{"label":"<svg viewBox=\\"0 0 20 20\\"><path d=\\"M3 10.423a6.5 6.5 0 0 1 6.056-6.408l.038.67C6.448 5.423 5.354 7.663 5.22 10H9c.552 0 .5.432.5.986v4.511c0 .554-.448.503-1 .503h-5c-.552 0-.5-.449-.5-1.003v-4.574zm8 0a6.5 6.5 0 0 1 6.056-6.408l.038.67c-2.646.739-3.74 2.979-3.873 5.315H17c.552 0 .5.432.5.986v4.511c0 .554-.448.503-1 .503h-5c-.552 0-.5-.449-.5-1.003v-4.574z\\"></path></svg>"},"editor":{"style":{"paddingInlineStart":1.5,"borderLeft":"1px solid #000"}},"style":{"display":"block","fontFamily":"\\"Palatino, Times, Georgia, serif\\"","marginBottom":"3.25rem"}},"a":{"label":"Link","group":"text","button":{"label":"<svg viewBox=\\"0 0 20 20\\"><path d=\\"m11.077 15 .991-1.416a.75.75 0 1 1 1.229.86l-1.148 1.64a.748.748 0 0 1-.217.206 5.251 5.251 0 0 1-8.503-5.955.741.741 0 0 1 .12-.274l1.147-1.639a.75.75 0 1 1 1.228.86L4.933 10.7l.006.003a3.75 3.75 0 0 0 6.132 4.294l.006.004zm5.494-5.335a.748.748 0 0 1-.12.274l-1.147 1.639a.75.75 0 1 1-1.228-.86l.86-1.23a3.75 3.75 0 0 0-6.144-4.301l-.86 1.229a.75.75 0 0 1-1.229-.86l1.148-1.64a.748.748 0 0 1 .217-.206 5.251 5.251 0 0 1 8.503 5.955zm-4.563-2.532a.75.75 0 0 1 .184 1.045l-3.155 4.505a.75.75 0 1 1-1.229-.86l3.155-4.506a.75.75 0 0 1 1.045-.184z\\"></path></svg>"},"editor":{},"style":{"color":"#ffbb00","textDecoration":"underline"}},"quote":{"label":"Quote","group":"text","button":{"label":"<svg viewBox=\\"0 0 20 20\\"><path d=\\"M3 10.423a6.5 6.5 0 0 1 6.056-6.408l.038.67C6.448 5.423 5.354 7.663 5.22 10H9c.552 0 .5.432.5.986v4.511c0 .554-.448.503-1 .503h-5c-.552 0-.5-.449-.5-1.003v-4.574zm8 0a6.5 6.5 0 0 1 6.056-6.408l.038.67c-2.646.739-3.74 2.979-3.873 5.315H17c.552 0 .5.432.5.986v4.511c0 .554-.448.503-1 .503h-5c-.552 0-.5-.449-.5-1.003v-4.574z\\"></path></svg>"},"editor":{},"style":{"fontFamily":"\\"Palatino, Times, Georgia, serif\\"","marginBottom":"3.25rem"}},"bold":{"label":"Bold","group":"text","button":{"label":"B","style":{"fontWeight":"bolder"}},"editor":{},"style":{"fontWeight":"bold"}},"italic":{"label":"Italic","group":"text","button":{"label":"I","style":{"fontStyle":"italic"}},"editor":{},"style":{"fontStyle":"italic"}},"large":{"label":"Large","group":"text","button":{"label":"A","style":{"fontSize":"1.01em"}},"editor":{},"style":{"fontSize":"1.1em"}},"larger":{"label":"Larger","group":"text","button":{"label":"A","style":{"fontSize":"1.02em"}},"editor":{},"style":{"fontSize":"1.2em"}},"largest":{"label":"Largest","group":"text","button":{"label":"A","style":{"fontSize":"1.03em"}},"editor":{},"style":{"fontSize":"1.3em"}},"small":{"label":"Small","group":"text","button":{"label":"A","style":{"fontSize":"0.99em"}},"editor":{},"style":{"fontSize":"0.9em"}},"smaller":{"label":"Smaller","group":"text","button":{"label":"A","style":{"fontSize":"0.98em"}},"editor":{},"style":{"fontSize":"0.8em"}},"smallest":{"label":"Smallest","group":"text","button":{"label":"A","style":{"fontSize":"0.97em"}},"editor":{},"style":{"fontSize":"0.7em"}},"mark":{"label":"Mark","group":"text","button":{"label":"M"},"editor":{},"style":{"backgroundColor":"#ffbb00"}},"del":{"label":"Deleted","group":"text","button":{"label":"D","style":{"textDecoration":"line-through"}},"editor":{},"style":{"textDecoration":"line-through"}},"ins":{"label":"Inserted","group":"text","button":{"label":"U","style":{"textDecoration":"underline"}},"editor":{},"style":{"textDecoration":"underline"}},"sub":{"label":"Subscript","group":"text","button":{"label":"Sub","style":{"verticalAlign":"sub","fontSize":"0.6em"}},"editor":{},"style":{"verticalAlign":"sub","fontSize":"0.6em"}},"sup":{"label":"Superscript","group":"text","button":{"label":"Sup","style":{"verticalAlign":"sup","fontSize":"0.6em"}},"editor":{},"style":{"verticalAlign":"sup","fontSize":"0.6em"}},"main":{"label":"Main","group":"color","type":"color","button":{},"editor":{},"style":{"color":"hsla(212,6,50,1)"}},"mainGradient":{"label":"Main gradient","group":"color","type":"color","button":{},"editor":{},"style":{"backgroundSize":"100%","-webkitBackgroundClip":"text","-mozBackgroundClip":"text","-webkitTextFillColor":"transparent","-mozTextFillColor":"transparent","backgroundImage":"linear-gradient(90deg, hsla(212,6,50,1) 0%, #878c92 100%)"}},"accent":{"label":"Accent","group":"color","type":"color","button":{},"editor":{},"style":{"color":"#ffbb00"}},"accentGradient":{"label":"Accent gradient","group":"color","type":"color","button":{},"editor":{},"style":{"backgroundSize":"100%","-webkitBackgroundClip":"text","-mozBackgroundClip":"text","-webkitTextFillColor":"transparent","-mozTextFillColor":"transparent","backgroundImage":"linear-gradient(90deg, #ffbb00 0%, #ffc21a 100%)"}},"complementary":{"label":"Complementary","group":"color","type":"color","button":{},"editor":{},"style":{"color":"#5100ff"}},"complementaryGradient":{"label":"Complementary gradient","group":"color","type":"color","button":{},"editor":{},"style":{"backgroundSize":"100%","-webkitBackgroundClip":"text","-mozBackgroundClip":"text","-webkitTextFillColor":"transparent","-mozTextFillColor":"transparent","backgroundImage":"linear-gradient(90deg, #5100ff 0%, #621aff 100%)"}},"success":{"label":"Success","group":"color","type":"color","button":{},"editor":{},"style":{"color":"#91ff00"}},"successGradient":{"label":"Success gradient","group":"color","type":"color","button":{},"editor":{},"style":{"backgroundSize":"100%","-webkitBackgroundClip":"text","-mozBackgroundClip":"text","-webkitTextFillColor":"transparent","-mozTextFillColor":"transparent","backgroundImage":"linear-gradient(90deg, #91ff00 0%, #9cff1a 100%)"}},"warning":{"label":"Warning","group":"color","type":"color","button":{},"editor":{},"style":{"color":"#ffd500"}},"warningGradient":{"label":"Warning gradient","group":"color","type":"color","button":{},"editor":{},"style":{"backgroundSize":"100%","-webkitBackgroundClip":"text","-mozBackgroundClip":"text","-webkitTextFillColor":"transparent","-mozTextFillColor":"transparent","backgroundImage":"linear-gradient(90deg, #ffd500 0%, #ffd91a 100%)"}},"error":{"label":"Error","group":"color","type":"color","button":{},"editor":{},"style":{"color":"#ff003c"}},"errorGradient":{"label":"Error gradient","group":"color","type":"color","button":{},"editor":{},"style":{"backgroundSize":"100%","-webkitBackgroundClip":"text","-mozBackgroundClip":"text","-webkitTextFillColor":"transparent","-mozTextFillColor":"transparent","backgroundImage":"linear-gradient(90deg, #ff003b 0%, #ff1a4f 100%)"}},"info":{"label":"Info","group":"color","type":"color","button":{},"editor":{},"style":{"color":"#00ffff"}},"infoGradient":{"label":"Info gradient","group":"color","type":"color","button":{},"editor":{},"style":{"backgroundSize":"100%","-webkitBackgroundClip":"text","-mozBackgroundClip":"text","-webkitTextFillColor":"transparent","-mozTextFillColor":"transparent","backgroundImage":"linear-gradient(90deg, #00ffff 0%, #1affff 100%)"}}},"layout":{"offset":{"top":0,"right":0,"bottom":0,"left":0},"container":{"default":"1280px","wide":"1440px","full":"none"},"grid":{"1":1,"2":2,"3":3,"4":4,"5":5,"6":6,"7":7,"8":8,"9":9,"10":10,"11":11,"12":12},"layout":{"1":"1","12":"1 2","21":"2 1","112":"1 1 2","122":"1 2 2","123":"1 2 3","211":"2 1 1","221":"2 2 1","321":"3 2 1","1112":"1 1 1 2","1222":"1 2 2 2","1234":"1 2 3 4","2221":"2 2 2 1","11112":"1 1 1 1 2","12222":"1 2 2 2 2","12345":"1 2 3 4 5","22221":"2 2 2 2 1","111112":"1 1 1 1 1 2","122222":"1 2 2 2 2 2","123456":"1 2 3 4 5 6","1_2":"1 _ 2","2_1":"2 _ 1","12_33":"1 2 _ 3 3","1_23":"1 _ 2 3","1_2_3":"1 _ 2 _ 3","32_1":"3 2 _ 1","3_21":"3 _ 2 1","12_34":"1 2 _ 3 4","123_4":"1 2 3 _ 4","1_234":"1 _ 2 3 4","1_2_3_4":"1 _ 2 _ 3 _ 4","123_45":"1 2 3 _ 4 5","12_345":"1 2 _ 3 4 5","1_2345":"1 _ 2 3 4 5","1234_5":"1 2 3 4 _ 5","1_2_3_4_5":"1 _ 2 _ 3 _ 4 _ 5"}},"menus":{"primary":{"name":"Primary menu"},"footer":{"name":"Footer menu"}}},"PACKAGE":{"name":"@example/01-basic","version":"2.0.0-alpha.26","description":"","main":"index.js","type":"module","private":true,"license":"AGPL-version-3.0","engines":{"node":">= 14.0.0","npm":">= 6.0.0"},"homepage":"https://coffeekraken.io","repository":{"type":"git","url":""},"bugs":"","keywords":[],"author":{"name":"","email":"","url":""},"contributors":[],"scripts":{"dev":"sugard kitchen.run dev","prod":"sugard kitchen.run prod","build":"sugard kitchen.run build","static":"live-server static","static.build":"sugard static.build --clean --env production --target production","deploy":"rsync -avzh --delete --progress --stats ./static fe0mt_coffeekraken@fe0mt.ftp.infomaniak.com:~/sites/01-basic.coffeekraken.io"},"dependencies":{"@coffeekraken/s-activate-feature":"^2.0.0-alpha.26","@coffeekraken/s-carpenter":"^2.0.0-alpha.26","@coffeekraken/s-front":"^2.0.0-alpha.26","@coffeekraken/s-google-map-component":"^2.0.0-alpha.26","@coffeekraken/s-log":"^2.0.0-alpha.26","@coffeekraken/s-postcss-sugar-plugin":"^2.0.0-alpha.26","@coffeekraken/s-sugar-feature":"^2.0.0-alpha.26","@coffeekraken/sugar":"^2.0.0-alpha.26","autoprefixer":"^10.4.12","postcss":"^8.4.17","postcss-atroot":"^0.2.3","postcss-extend-rule":"^4.0.0","postcss-import":"^15.0.0","postcss-nested":"^5.0.6","postcss-property-lookup":"^3.0.0"},"exports":{"./shared/*":{"require":"./dist/pkg/cjs/shared/*.js","import":"./dist/pkg/esm/shared/*.js"},"./node/*":{"require":"./dist/pkg/cjs/node/*.js","import":"./dist/pkg/esm/node/*.js"},"./js/*":{"require":"./dist/pkg/cjs/js/*.js","import":"./dist/pkg/esm/js/*.js"}}}}`),
+  JSON.parse(`{"PLATFORM":"browser","ENV":"development","SUGAR":{"config":{"datetime":{"dateFormat":"YYYY-MM-DD","timeFormat":"h:mm:ss","i18n":{"previousMonth":"Previous Month","nextMonth":"Next Month","months":["January","February","March","April","May","June","July","August","September","October","November","December"],"weekdays":["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],"weekdaysShort":["Sun","Mon","Tue","Wed","Thu","Fri","Sat"]}},"google":{"gtm":"GTM-K4LMN8Q","map":{"apiKey":"AIzaSyDzFfEzhmYXRTlONUCtMWQ88uHJhsbtXY4"}},"project":{"environments":{}},"serve":{"img":{"imgPath":"/dist/img"},"js":{"path":"/dist/js"},"css":{"path":"/dist/css"},"icons":{"path":"/dist/icons"},"fonts":{"path":"/dist/fonts"},"cache":{"path":"/cache"}},"dashboard":{"layout":[["s-dashboard-pages"],["s-dashboard-browserstack","s-dashboard-google","s-dashboard-web-vitals","s-dashboard-responsive"],["s-dashboard-project","s-dashboard-frontend-checker"]]},"env":{"envFromLocation":{"development":"https?://(localhost|127.0.0.1|0.0.0.0|192.168.[0-9]{1,3}.[0-9]{1,3})","staging":"https?://([a-zA-Z0-9.-]+)?staging([a-zA-Z0-9.-]+)?","production":"https?://.*"},"git":{"template":{"name":"Template","commit":{}}}},"theme":{"theme":"default","variant":"light","themes":{"default-light":{"defaultColor":"main","color":{"current":"hsla(212,6%,50%,1)","main":"hsla(212,6%,50%,1)","accent":"#ffbb00","complementary":"#5100ff","success":"#91ff00","warning":"#ffd500","error":"#ff003b","info":"#00ffff"},"classmap":{"enabled":false,"url":"/classmap.json"},"lod":{"enabled":true,"defaultLevel":3,"botLevel":1,"levels":{"0":{"name":"bare","speedIndex":0},"1":{"name":"lnf","speedIndex":30},"2":{"name":"theme","speedIndex":40},"3":{"name":"high","speedIndex":50},"4":{"name":"ultra","speedIndex":60}},"method":"class","defaultAction":">=","cssProperties":{}},"easing":{"default":"cubic-bezier(0.700, 0.000, 0.305, 0.995)"},"scroll":{"duration":300,"offset":0,"offsetX":0,"offsetY":0},"partytown":{"enabled":false,"forward":["dataLayer.push","fbq","freshpaint.addPageviewProperties","freshpaint.identify","freshpaint.track","_hsq.push","Intercom","_learnq.push","ttq.track","ttq.page","ttq.load","mixpanel.track"]},"timing":{"slow":".6s","default":".3s","fast":".1s"},"transition":{"slow":"all .6s cubic-bezier(0.700, 0.000, 0.305, 0.995)","default":"all .3s cubic-bezier(0.700, 0.000, 0.305, 0.995)","fast":"all .1s cubic-bezier(0.700, 0.000, 0.305, 0.995)"},"gradient":{"defaultModifierStart":{},"defaultModifierEnd":{"lighten":20},"defaultX":"50%","defaultY":"50%","defaultAngle":"90deg","defaultTextModifierStart":{"darken":5},"defaultTextModifierEnd":{"lighten":5},"defaultTextAngle":"90deg"},"helpers":{"states":["mounted","active","loading"],"clearfix":{"default":"overflow"},"disabled":{"opacity":0.4},"truncate":{"count":10},"order":{"count":20}},"layout":{"offset":{"top":0,"right":0,"bottom":0,"left":0},"container":{"default":"1280px","wide":"1440px","full":"none"},"grid":{"1":1,"2":2,"3":3,"4":4,"5":5,"6":6,"7":7,"8":8,"9":9,"10":10,"11":11,"12":12},"layout":{"1":"1","12":"1 2","21":"2 1","112":"1 1 2","122":"1 2 2","123":"1 2 3","211":"2 1 1","221":"2 2 1","321":"3 2 1","1112":"1 1 1 2","1222":"1 2 2 2","1234":"1 2 3 4","2221":"2 2 2 1","11112":"1 1 1 1 2","12222":"1 2 2 2 2","12345":"1 2 3 4 5","22221":"2 2 2 2 1","111112":"1 1 1 1 1 2","122222":"1 2 2 2 2 2","123456":"1 2 3 4 5 6","1_2":"1 _ 2","2_1":"2 _ 1","12_33":"1 2 _ 3 3","1_23":"1 _ 2 3","1_2_3":"1 _ 2 _ 3","32_1":"3 2 _ 1","3_21":"3 _ 2 1","12_34":"1 2 _ 3 4","123_4":"1 2 3 _ 4","1_234":"1 _ 2 3 4","1_2_3_4":"1 _ 2 _ 3 _ 4","123_45":"1 2 3 _ 4 5","12_345":"1 2 _ 3 4 5","1_2345":"1 _ 2 3 4 5","1234_5":"1 2 3 4 _ 5","1_2_3_4_5":"1 _ 2 _ 3 _ 4 _ 5"}},"ratio":{"1":1,"16-9":1.7777777777777777,"16-10":1.6,"21-9":2.3333333333333335,"1-2":0.5,"2-1":2,"2-3":0.6666666666666666,"3-2":1.5,"4-3":1.3333333333333333,"3-4":0.75},"scalable":{"margin":false,"padding":true,"offsize":false,"font":true},"scale":{"10":1,"11":1.1,"12":1.2,"13":1.3,"14":1.4,"15":1.5,"16":1.6,"17":1.7,"18":1.8,"19":1.9,"20":2,"default":1,"01":0.1,"02":0.2,"03":0.3,"04":0.4,"05":0.5,"06":0.6,"07":0.7,"08":0.8,"09":0.9},"opacity":{"0":0,"10":0.1,"20":0.2,"30":0.3,"40":0.4,"50":0.5,"60":0.6,"70":0.7,"80":0.8,"90":0.9,"100":1},"width":{"0":"0","10":"10%","20":"20%","30":"30%","40":"40%","50":"50%","60":"60%","70":"70%","80":"80%","90":"90%","100":"100%"},"height":{"0":"0","10":"10%","20":"20%","30":"30%","40":"40%","50":"50%","60":"60%","70":"70%","80":"80%","90":"90%","100":"100%"},"depth":{"0":"0","5":"0px 0.6px 0.4px rgba(0, 0, 0, 0.006),\\n  0px 1.3px 1px rgba(0, 0, 0, 0.006),\\n  0px 2.5px 1.5px rgba(0, 0, 0, 0.005),\\n  0px 3.5px 3.4px rgba(0, 0, 0, 0.006),\\n  0px 4.4px 4.3px rgba(0, 0, 0, 0.007),\\n  0px 10px 10px rgba(0, 0, 0, 0.01)","10":"0px 0.6px 0.4px rgba(0, 0, 0, 0.006),\\n  0px 1.3px 1px rgba(0, 0, 0, 0.008),\\n  0px 2.5px 1.9px rgba(0, 0, 0, 0.01),\\n  0px 4.5px 3.4px rgba(0, 0, 0, 0.012),\\n  0px 8.4px 6.3px rgba(0, 0, 0, 0.014),\\n  0px 20px 15px rgba(0, 0, 0, 0.02)","20":"0px 0.6px 0.4px rgba(0, 0, 0, 0.006),\\n  0px 1.3px 1px rgba(0, 0, 0, 0.008),\\n  0px 2.5px 1.9px rgba(0, 0, 0, 0.01),\\n  0px 4.5px 3.4px rgba(0, 0, 0, 0.012),\\n  0px 8.4px 6.3px rgba(0, 0, 0, 0.014),\\n  0px 20px 15px rgba(0, 0, 0, 0.02)","30":"0px 0.6px 0.4px rgba(0, 0, 0, 0.008),\\n  0px 1.3px 1px rgba(0, 0, 0, 0.012),\\n  0px 2.5px 1.9px rgba(0, 0, 0, 0.015),\\n  0px 4.5px 3.4px rgba(0, 0, 0, 0.018),\\n  0px 8.4px 6.3px rgba(0, 0, 0, 0.022),\\n  0px 20px 15px rgba(0, 0, 0, 0.03)","40":"0px 0.8px 0.6px rgba(0, 0, 0, 0.008),\\n  0px 2px 1.3px rgba(0, 0, 0, 0.012),\\n  0px 3.8px 2.5px rgba(0, 0, 0, 0.015),\\n  0px 6.7px 4.5px rgba(0, 0, 0, 0.018),\\n  0px 12.5px 8.4px rgba(0, 0, 0, 0.022),\\n  0px 30px 20px rgba(0, 0, 0, 0.03)","50":"0px 1px 0.8px rgba(0, 0, 0, 0.011),\\n  0px 2.3px 2px rgba(0, 0, 0, 0.016),\\n  0px 4.4px 3.8px rgba(0, 0, 0, 0.02),\\n  0px 7.8px 6.7px rgba(0, 0, 0, 0.024),\\n  0px 14.6px 12.5px rgba(0, 0, 0, 0.029),\\n  0px 35px 30px rgba(0, 0, 0, 0.04)","60":"0px 1px 0.7px rgba(0, 0, 0, 0.011),\\n  0px 2.3px 1.7px rgba(0, 0, 0, 0.016),\\n  0px 4.4px 3.1px rgba(0, 0, 0, 0.02),\\n  0px 7.8px 5.6px rgba(0, 0, 0, 0.024),\\n  0px 14.6px 10.4px rgba(0, 0, 0, 0.029),\\n  0px 35px 25px rgba(0, 0, 0, 0.04)","70":"0px 1.1px 0.8px rgba(0, 0, 0, 0.011),\\n  0px 2.7px 2px rgba(0, 0, 0, 0.016),\\n  0px 5px 3.8px rgba(0, 0, 0, 0.02),\\n  0px 8.9px 6.7px rgba(0, 0, 0, 0.024),\\n  0px 16.7px 12.5px rgba(0, 0, 0, 0.029),\\n  0px 40px 30px rgba(0, 0, 0, 0.04)","80":"0px 1.1px 1px rgba(0, 0, 0, 0.011),\\n  0px 2.7px 2.3px rgba(0, 0, 0, 0.016),\\n  0px 5px 4.4px rgba(0, 0, 0, 0.02),\\n  0px 8.9px 7.8px rgba(0, 0, 0, 0.024),\\n  0px 16.7px 14.6px rgba(0, 0, 0, 0.029),\\n  0px 40px 35px rgba(0, 0, 0, 0.04)","90":"0px 1.4px 1.1px rgba(0, 0, 0, 0.011),\\n  0px 3.3px 2.7px rgba(0, 0, 0, 0.016),\\n  0px 6.1px 5px rgba(0, 0, 0, 0.02),\\n  0px 10.9px 8.9px rgba(0, 0, 0, 0.024),\\n  0px 20.5px 16.7px rgba(0, 0, 0, 0.029),\\n  0px 49px 40px rgba(0, 0, 0, 0.04)","100":"0px 1.4px 1.4px rgba(0, 0, 0, 0.011),\\n  0px 3.3px 3.5px rgba(0, 0, 0, 0.016),\\n  0px 6.1px 6.5px rgba(0, 0, 0, 0.02),\\n  0px 10.9px 11.6px rgba(0, 0, 0, 0.024),\\n  0px 20.5px 21.7px rgba(0, 0, 0, 0.029),\\n  0px 49px 52px rgba(0, 0, 0, 0.04)","default":"0"},"size":{"0":0.25,"5":"0.5","10":0.65,"15":0.7,"20":0.75,"25":0.95,"30":1.1,"40":1.25,"50":1.5,"60":2,"70":2.5,"80":3,"90":4,"100":5,"default":"15px"},"font":{"family":{"default":{"fontFamily":"\\"Roboto\\"","fontWeight":400,"import":"https://fonts.googleapis.com/css2?family=Roboto&display=swap"},"title":{"fontFamily":"\\"Roboto\\"","fontWeight":500,"import":"https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap"},"quote":{"fontFamily":"\\"Palatino, Times, Georgia, serif\\"","fontWeight":"normal","fontStyle":"normal","fontDisplay":"auto","capHeight":0.65},"code":{"fontFamily":"Menlo, Monaco, Consolas, Courier New, monospace","fontWeight":"normal","fontStyle":"normal","fontDisplay":"auto","capHeight":0.65}},"size":{"0":0,"5":"0.5","10":0.65,"15":0.7,"20":0.75,"25":0.95,"30":1.1,"40":1.25,"50":1.5,"60":2,"70":2.5,"80":3,"90":4,"100":5,"default":"15px"}},"border":{"width":{"0":0,"10":1,"20":2,"30":4,"40":6,"50":8,"60":12,"70":16,"80":20,"90":24,"100":30,"default":"1px"},"radius":{"0":0,"10":0.8,"20":1.6,"30":2.4,"40":3.2,"50":4,"60":5.2,"70":6.4,"80":8,"90":10,"100":12,"default":"5px"}},"space":{"0":0,"10":0.375,"20":0.75,"30":1.5,"40":2.25,"50":3.25,"60":4.25,"70":5.5,"80":7,"90":9,"100":11,"default":"1rem"},"margin":{"0":0,"10":0.375,"20":0.75,"30":1.5,"40":2.25,"50":3.25,"60":4.25,"70":5.5,"80":7,"90":9,"100":11,"default":"1rem"},"padding":{"0":0,"10":0.375,"20":0.75,"30":1.5,"40":2.25,"50":3.25,"60":4.25,"70":5.5,"80":7,"90":9,"100":11,"default":"1rem"},"offsize":{"0":0,"10":0.375,"20":0.75,"30":1.5,"40":2.25,"50":3.25,"60":4.25,"70":5.5,"80":7,"90":9,"100":11,"default":"1rem"},"media":{"defaultAction":"<=","defaultMedia":"desktop","queries":{"mobile":{"minWidth":0,"maxWidth":639},"tablet":{"minWidth":640,"maxWidth":1279},"desktop":{"minWidth":1280,"maxWidth":2047},"wide":{"minWidth":2048,"maxWidth":null}}},"ui":{"default":{"paddingInline":1.5,"paddingBlock":0.75,"borderRadius":1,"borderWidth":"1px","transition":"all .1s cubic-bezier(0.700, 0.000, 0.305, 0.995)","defaultLnf":"solid","depth":"0","outline":true,"spacing":1.5,"rhythmVertical":{"margin-bottom":60}},"form":{"paddingInline":1,"paddingBlock":0.75,"borderRadius":1,"borderWidth":"1px","transition":"all .1s cubic-bezier(0.700, 0.000, 0.305, 0.995)","outline":true,"depth":"0","rhythmVertical":{"margin-bottom":40}},"outline":{"active":true,"borderWidth":"10px","borderRadius":1,"transition":"all .2s ease-out"},"scrollbar":{"size":"2px","color":"accent"},"label":{"defaultLnf":"inline"},"dropdown":{"paddingInline":0.75,"paddingBlock":0.75,"itemPaddingInline":1.5,"itemPaddingBlock":0.75},"list":{"defaultLnf":"dl","bulletChar":"-"},"fsTree":{"bulletChar":"●"},"tooltip":{"defaultPosition":"top","arrowSize":"15px"},"loader":{"duration":"1s","easing":"linear"}},"typo":{"h1":{"label":"H1","group":"style","style":{"display":"block","fontFamily":"title","fontSize":80,"lineHeight":1.3,"maxWidth":"55ch","mobile":{"fontSize":70}},"rhythmVertical":{"marginBottom":50}},"h2":{"label":"H2","group":"style","style":{"display":"block","fontFamily":"title","fontSize":70,"lineHeight":1.3,"maxWidth":"55ch","mobile":{"fontSize":60}},"rhythmVertical":{"marginBottom":50}},"h3":{"label":"H3","group":"style","style":{"display":"block","fontFamily":"title","fontSize":60,"lineHeight":1.3,"maxWidth":"55ch","mobile":{"fontSize":50}},"rhythmVertical":{"marginBottom":50}},"h4":{"label":"H4","group":"style","style":{"display":"block","fontFamily":"title","fontSize":50,"lineHeight":1.3,"maxWidth":"55ch","mobile":{"fontSize":40}},"rhythmVertical":{"marginBottom":50}},"h5":{"label":"H5","group":"style","style":{"display":"block","fontFamily":"title","fontSize":40,"lineHeight":1.3,"maxWidth":"55ch","mobile":{"fontSize":30}},"rhythmVertical":{"marginBottom":40}},"h6":{"label":"H6","group":"style","style":{"display":"block","fontFamily":"title","fontSize":30,"lineHeight":1.3,"maxWidth":"55ch","mobile":{"fontSize":30}},"hythmVertical":{"marginBottom":40}},"p":{"label":"Paragraph","group":"style","default":true,"style":{"display":"block","fontFamily":"default","fontSize":30,"lineHeight":1.8,"maxWidth":"55ch","opacity":0.6},"rhythmVertical":{"marginBottom":40}},"lead":{"label":"Lead paragraph","group":"style","style":{"display":"block","fontFamily":"default","fontSize":40,"lineHeight":1.6,"maxWidth":"55ch","mobile":{"fontSize":40}},"rhythmVertical":{"marginBottom":40}},"hr":{"label":"--","group":"block","button":{"label":"--"},"style":{"display":"block","color":"hsla(212,6%,50%,1)","opacity":0.2},"rhythmVertical":{"marginBottom":50}},"pre:not([class])":{"label":"Pre","group":"text","style":{"display":"block","fontFamily":"code","color":["main","text"],"backgroundColor":["main","surface"],"lineHeight":1.5,"paddingInline":1.5,"paddingBlock":0.75,"borderRadius":1,"depth":"0"},"rhythmVertical":{"marginBottom":50}},"code:not(pre > code)":{"label":"Code","group":"text","button":{"label":"</>"},"style":{"display":"inline-block","fontFamily":"code","color":["main","text"],"lineHeight":1.1,"backgroundColor":["accent","surface"],"borderRadius":10,"paddingInline":10,"paddingBlock":0}},"blockquote":{"label":"Blockquote","group":"block","button":{"label":"<svg viewBox=\\"0 0 20 20\\"><path d=\\"M3 10.423a6.5 6.5 0 0 1 6.056-6.408l.038.67C6.448 5.423 5.354 7.663 5.22 10H9c.552 0 .5.432.5.986v4.511c0 .554-.448.503-1 .503h-5c-.552 0-.5-.449-.5-1.003v-4.574zm8 0a6.5 6.5 0 0 1 6.056-6.408l.038.67c-2.646.739-3.74 2.979-3.873 5.315H17c.552 0 .5.432.5.986v4.511c0 .554-.448.503-1 .503h-5c-.552 0-.5-.449-.5-1.003v-4.574z\\"></path></svg>"},"style":{"display":"block","fontFamily":"quote"},"editor":{"style":{"paddingInlineStart":1.5,"borderLeft":"1px solid #000"}},"rhythmVertical":{"marginBottom":50}},"a":{"label":"Link","group":"text","button":{"label":"<svg viewBox=\\"0 0 20 20\\"><path d=\\"m11.077 15 .991-1.416a.75.75 0 1 1 1.229.86l-1.148 1.64a.748.748 0 0 1-.217.206 5.251 5.251 0 0 1-8.503-5.955.741.741 0 0 1 .12-.274l1.147-1.639a.75.75 0 1 1 1.228.86L4.933 10.7l.006.003a3.75 3.75 0 0 0 6.132 4.294l.006.004zm5.494-5.335a.748.748 0 0 1-.12.274l-1.147 1.639a.75.75 0 1 1-1.228-.86l.86-1.23a3.75 3.75 0 0 0-6.144-4.301l-.86 1.229a.75.75 0 0 1-1.229-.86l1.148-1.64a.748.748 0 0 1 .217-.206 5.251 5.251 0 0 1 8.503 5.955zm-4.563-2.532a.75.75 0 0 1 .184 1.045l-3.155 4.505a.75.75 0 1 1-1.229-.86l3.155-4.506a.75.75 0 0 1 1.045-.184z\\"></path></svg>"},"style":{"color":"accent","textDecoration":"underline"}},"quote":{"label":"Quote","group":"text","button":{"label":"<svg viewBox=\\"0 0 20 20\\"><path d=\\"M3 10.423a6.5 6.5 0 0 1 6.056-6.408l.038.67C6.448 5.423 5.354 7.663 5.22 10H9c.552 0 .5.432.5.986v4.511c0 .554-.448.503-1 .503h-5c-.552 0-.5-.449-.5-1.003v-4.574zm8 0a6.5 6.5 0 0 1 6.056-6.408l.038.67c-2.646.739-3.74 2.979-3.873 5.315H17c.552 0 .5.432.5.986v4.511c0 .554-.448.503-1 .503h-5c-.552 0-.5-.449-.5-1.003v-4.574z\\"></path></svg>"},"style":{"fontFamily":"quote"},"rhythmVertical":{"marginBottom":50}},"bold":{"label":"Bold","group":"text","style":{"fontWeight":"bold"},"button":{"label":"B","style":{"fontWeight":"bolder"}}},"italic":{"label":"Italic","group":"text","style":{"fontStyle":"italic"},"button":{"label":"I","style":{"fontStyle":"italic"}}},"large":{"label":"Large","group":"text","style":{"fontSize":"1.1em"},"button":{"label":"A","style":{"fontSize":"1.01em"}}},"larger":{"label":"Larger","group":"text","style":{"fontSize":"1.2em"},"button":{"label":"A","style":{"fontSize":"1.02em"}}},"largest":{"label":"Largest","group":"text","style":{"fontSize":"1.3em"},"button":{"label":"A","style":{"fontSize":"1.03em"}}},"small":{"label":"Small","group":"text","style":{"fontSize":"0.9em"},"button":{"label":"A","style":{"fontSize":"0.99em"}}},"smaller":{"label":"Smaller","group":"text","style":{"fontSize":"0.8em"},"button":{"label":"A","style":{"fontSize":"0.98em"}}},"smallest":{"label":"Smallest","group":"text","style":{"fontSize":"0.7em"},"button":{"label":"A","style":{"fontSize":"0.97em"}}},"mark":{"label":"Mark","group":"text","button":{"label":"M"},"style":{"backgroundColor":"#ffbb00"}},"del":{"label":"Deleted","group":"text","style":{"textDecoration":"line-through"},"button":{"label":"D","style":{"textDecoration":"line-through"}}},"ins":{"label":"Inserted","group":"text","style":{"textDecoration":"underline"},"button":{"label":"U","style":{"textDecoration":"underline"}}},"sub":{"label":"Subscript","group":"text","style":{"verticalAlign":"sub","fontSize":"0.6em"},"button":{"label":"Sub","style":{"verticalAlign":"sub","fontSize":"0.6em"}}},"sup":{"label":"Superscript","group":"text","style":{"verticalAlign":"sup","fontSize":"0.6em"},"button":{"label":"Sup","style":{"verticalAlign":"sup","fontSize":"0.6em"}}},"main":{"label":"Main","group":"color","type":"color","style":{"color":"hsla(212,6%,50%,1)"}},"mainGradient":{"label":"Main gradient","group":"color","type":"color","style":{"backgroundSize":"100%","-webkitBackgroundClip":"text","-mozBackgroundClip":"text","-webkitTextFillColor":"transparent","-mozTextFillColor":"transparent","backgroundImage":"linear-gradient(90deg, hsla(212,6%,50%,1) 0%, #878c92 100%)"}},"accent":{"label":"Accent","group":"color","type":"color","style":{"color":"#ffbb00"}},"accentGradient":{"label":"Accent gradient","group":"color","type":"color","style":{"backgroundSize":"100%","-webkitBackgroundClip":"text","-mozBackgroundClip":"text","-webkitTextFillColor":"transparent","-mozTextFillColor":"transparent","backgroundImage":"linear-gradient(90deg, #ffbb00 0%, #ffc21a 100%)"}},"complementary":{"label":"Complementary","group":"color","type":"color","style":{"color":"#5100ff"}},"complementaryGradient":{"label":"Complementary gradient","group":"color","type":"color","style":{"backgroundSize":"100%","-webkitBackgroundClip":"text","-mozBackgroundClip":"text","-webkitTextFillColor":"transparent","-mozTextFillColor":"transparent","backgroundImage":"linear-gradient(90deg, #5100ff 0%, #621aff 100%)"}},"success":{"label":"Success","group":"color","type":"color","style":{"color":"#91ff00"}},"successGradient":{"label":"Success gradient","group":"color","type":"color","style":{"backgroundSize":"100%","-webkitBackgroundClip":"text","-mozBackgroundClip":"text","-webkitTextFillColor":"transparent","-mozTextFillColor":"transparent","backgroundImage":"linear-gradient(90deg, #91ff00 0%, #9cff1a 100%)"}},"warning":{"label":"Warning","group":"color","type":"color","style":{"color":"#ffd500"}},"warningGradient":{"label":"Warning gradient","group":"color","type":"color","style":{"backgroundSize":"100%","-webkitBackgroundClip":"text","-mozBackgroundClip":"text","-webkitTextFillColor":"transparent","-mozTextFillColor":"transparent","backgroundImage":"linear-gradient(90deg, #ffd500 0%, #ffd91a 100%)"}},"error":{"label":"Error","group":"color","type":"color","style":{"color":"#ff003b"}},"errorGradient":{"label":"Error gradient","group":"color","type":"color","style":{"backgroundSize":"100%","-webkitBackgroundClip":"text","-mozBackgroundClip":"text","-webkitTextFillColor":"transparent","-mozTextFillColor":"transparent","backgroundImage":"linear-gradient(90deg, #ff003b 0%, #ff1a4f 100%)"}},"info":{"label":"Info","group":"color","type":"color","style":{"color":"#00ffff"}},"infoGradient":{"label":"Info gradient","group":"color","type":"color","style":{"backgroundSize":"100%","-webkitBackgroundClip":"text","-mozBackgroundClip":"text","-webkitTextFillColor":"transparent","-mozTextFillColor":"transparent","backgroundImage":"linear-gradient(90deg, #00ffff 0%, #1affff 100%)"}}},"wireframe":{"light":{"border":"1px solid rgba(0,0,0,0.1)","borderColor":"rgba(0,0,0,0.1)","background":"#ffffff","surface":"#fafafa"},"dark":{"border":"1px solid rgba(255,255,255,0.2)","borderColor":"rgba(255,255,255,0.2)","background":"#2D323A","surface":"#3B424C"}},"metas":{"title":"Default light","description":"Nice and elegant light theme"},"colorSchema":{"text":{"darken":0,"color":{"base":{"darken":5},"main":{"darken":10},"complementary":{"lighten":15},"info":{"darken":10}}},"placeholder":{"darken":0,"alpha":0.4},"foreground":{"lighten":50},"background":{"lighten":50,"color":{"surface":{"darken":20}}},"backgroundForeground":{"darken":45},"surface":{"lighten":40,"color":{"base":{"lighten":49},"main":{"lighten":49}}},"surfaceForeground":{"darken":45},"ui":{"lighten":49},"uiForeground":{"darken":15},"border":{"alpha":0.2},"hover":{"lighten":40},"active":{"darken":10},"gradientStart":{"lighten":0},"gradientEnd":{"lighten":20}}},"default-dark":{"defaultColor":"main","color":{"current":"hsla(212,6%,50%,1)","main":"hsla(212,6%,50%,1)","accent":"#ffbb00","complementary":"#5100ff","success":"#91ff00","warning":"#ffd500","error":"#ff003b","info":"#00ffff"},"classmap":{"enabled":false,"url":"/classmap.json"},"lod":{"enabled":true,"defaultLevel":3,"botLevel":1,"levels":{"0":{"name":"bare","speedIndex":0},"1":{"name":"lnf","speedIndex":30},"2":{"name":"theme","speedIndex":40},"3":{"name":"high","speedIndex":50},"4":{"name":"ultra","speedIndex":60}},"method":"class","defaultAction":">=","cssProperties":{}},"easing":{"default":"cubic-bezier(0.700, 0.000, 0.305, 0.995)"},"scroll":{"duration":300,"offset":0,"offsetX":0,"offsetY":0},"partytown":{"enabled":false,"forward":["dataLayer.push","fbq","freshpaint.addPageviewProperties","freshpaint.identify","freshpaint.track","_hsq.push","Intercom","_learnq.push","ttq.track","ttq.page","ttq.load","mixpanel.track"]},"timing":{"slow":".6s","default":".3s","fast":".1s"},"transition":{"slow":"all .6s cubic-bezier(0.700, 0.000, 0.305, 0.995)","default":"all .3s cubic-bezier(0.700, 0.000, 0.305, 0.995)","fast":"all .1s cubic-bezier(0.700, 0.000, 0.305, 0.995)"},"gradient":{"defaultModifierStart":{},"defaultModifierEnd":{"lighten":20},"defaultX":"50%","defaultY":"50%","defaultAngle":"90deg","defaultTextModifierStart":{"darken":5},"defaultTextModifierEnd":{"lighten":5},"defaultTextAngle":"90deg"},"helpers":{"states":["mounted","active","loading"],"clearfix":{"default":"overflow"},"disabled":{"opacity":0.4},"truncate":{"count":10},"order":{"count":20}},"layout":{"offset":{"top":0,"right":0,"bottom":0,"left":0},"container":{"default":"1280px","wide":"1440px","full":"none"},"grid":{"1":1,"2":2,"3":3,"4":4,"5":5,"6":6,"7":7,"8":8,"9":9,"10":10,"11":11,"12":12},"layout":{"1":"1","12":"1 2","21":"2 1","112":"1 1 2","122":"1 2 2","123":"1 2 3","211":"2 1 1","221":"2 2 1","321":"3 2 1","1112":"1 1 1 2","1222":"1 2 2 2","1234":"1 2 3 4","2221":"2 2 2 1","11112":"1 1 1 1 2","12222":"1 2 2 2 2","12345":"1 2 3 4 5","22221":"2 2 2 2 1","111112":"1 1 1 1 1 2","122222":"1 2 2 2 2 2","123456":"1 2 3 4 5 6","1_2":"1 _ 2","2_1":"2 _ 1","12_33":"1 2 _ 3 3","1_23":"1 _ 2 3","1_2_3":"1 _ 2 _ 3","32_1":"3 2 _ 1","3_21":"3 _ 2 1","12_34":"1 2 _ 3 4","123_4":"1 2 3 _ 4","1_234":"1 _ 2 3 4","1_2_3_4":"1 _ 2 _ 3 _ 4","123_45":"1 2 3 _ 4 5","12_345":"1 2 _ 3 4 5","1_2345":"1 _ 2 3 4 5","1234_5":"1 2 3 4 _ 5","1_2_3_4_5":"1 _ 2 _ 3 _ 4 _ 5"}},"ratio":{"1":1,"16-9":1.7777777777777777,"16-10":1.6,"21-9":2.3333333333333335,"1-2":0.5,"2-1":2,"2-3":0.6666666666666666,"3-2":1.5,"4-3":1.3333333333333333,"3-4":0.75},"scalable":{"margin":false,"padding":true,"offsize":false,"font":true},"scale":{"10":1,"11":1.1,"12":1.2,"13":1.3,"14":1.4,"15":1.5,"16":1.6,"17":1.7,"18":1.8,"19":1.9,"20":2,"default":1,"01":0.1,"02":0.2,"03":0.3,"04":0.4,"05":0.5,"06":0.6,"07":0.7,"08":0.8,"09":0.9},"opacity":{"0":0,"10":0.1,"20":0.2,"30":0.3,"40":0.4,"50":0.5,"60":0.6,"70":0.7,"80":0.8,"90":0.9,"100":1},"width":{"0":"0","10":"10%","20":"20%","30":"30%","40":"40%","50":"50%","60":"60%","70":"70%","80":"80%","90":"90%","100":"100%"},"height":{"0":"0","10":"10%","20":"20%","30":"30%","40":"40%","50":"50%","60":"60%","70":"70%","80":"80%","90":"90%","100":"100%"},"depth":{"0":"0","5":"0px 0.6px 0.4px rgba(0, 0, 0, 0.006),\\n  0px 1.3px 1px rgba(0, 0, 0, 0.006),\\n  0px 2.5px 1.5px rgba(0, 0, 0, 0.005),\\n  0px 3.5px 3.4px rgba(0, 0, 0, 0.006),\\n  0px 4.4px 4.3px rgba(0, 0, 0, 0.007),\\n  0px 10px 10px rgba(0, 0, 0, 0.01)","10":"0px 0.6px 0.4px rgba(0, 0, 0, 0.006),\\n  0px 1.3px 1px rgba(0, 0, 0, 0.008),\\n  0px 2.5px 1.9px rgba(0, 0, 0, 0.01),\\n  0px 4.5px 3.4px rgba(0, 0, 0, 0.012),\\n  0px 8.4px 6.3px rgba(0, 0, 0, 0.014),\\n  0px 20px 15px rgba(0, 0, 0, 0.02)","20":"0px 0.6px 0.4px rgba(0, 0, 0, 0.006),\\n  0px 1.3px 1px rgba(0, 0, 0, 0.008),\\n  0px 2.5px 1.9px rgba(0, 0, 0, 0.01),\\n  0px 4.5px 3.4px rgba(0, 0, 0, 0.012),\\n  0px 8.4px 6.3px rgba(0, 0, 0, 0.014),\\n  0px 20px 15px rgba(0, 0, 0, 0.02)","30":"0px 0.6px 0.4px rgba(0, 0, 0, 0.008),\\n  0px 1.3px 1px rgba(0, 0, 0, 0.012),\\n  0px 2.5px 1.9px rgba(0, 0, 0, 0.015),\\n  0px 4.5px 3.4px rgba(0, 0, 0, 0.018),\\n  0px 8.4px 6.3px rgba(0, 0, 0, 0.022),\\n  0px 20px 15px rgba(0, 0, 0, 0.03)","40":"0px 0.8px 0.6px rgba(0, 0, 0, 0.008),\\n  0px 2px 1.3px rgba(0, 0, 0, 0.012),\\n  0px 3.8px 2.5px rgba(0, 0, 0, 0.015),\\n  0px 6.7px 4.5px rgba(0, 0, 0, 0.018),\\n  0px 12.5px 8.4px rgba(0, 0, 0, 0.022),\\n  0px 30px 20px rgba(0, 0, 0, 0.03)","50":"0px 1px 0.8px rgba(0, 0, 0, 0.011),\\n  0px 2.3px 2px rgba(0, 0, 0, 0.016),\\n  0px 4.4px 3.8px rgba(0, 0, 0, 0.02),\\n  0px 7.8px 6.7px rgba(0, 0, 0, 0.024),\\n  0px 14.6px 12.5px rgba(0, 0, 0, 0.029),\\n  0px 35px 30px rgba(0, 0, 0, 0.04)","60":"0px 1px 0.7px rgba(0, 0, 0, 0.011),\\n  0px 2.3px 1.7px rgba(0, 0, 0, 0.016),\\n  0px 4.4px 3.1px rgba(0, 0, 0, 0.02),\\n  0px 7.8px 5.6px rgba(0, 0, 0, 0.024),\\n  0px 14.6px 10.4px rgba(0, 0, 0, 0.029),\\n  0px 35px 25px rgba(0, 0, 0, 0.04)","70":"0px 1.1px 0.8px rgba(0, 0, 0, 0.011),\\n  0px 2.7px 2px rgba(0, 0, 0, 0.016),\\n  0px 5px 3.8px rgba(0, 0, 0, 0.02),\\n  0px 8.9px 6.7px rgba(0, 0, 0, 0.024),\\n  0px 16.7px 12.5px rgba(0, 0, 0, 0.029),\\n  0px 40px 30px rgba(0, 0, 0, 0.04)","80":"0px 1.1px 1px rgba(0, 0, 0, 0.011),\\n  0px 2.7px 2.3px rgba(0, 0, 0, 0.016),\\n  0px 5px 4.4px rgba(0, 0, 0, 0.02),\\n  0px 8.9px 7.8px rgba(0, 0, 0, 0.024),\\n  0px 16.7px 14.6px rgba(0, 0, 0, 0.029),\\n  0px 40px 35px rgba(0, 0, 0, 0.04)","90":"0px 1.4px 1.1px rgba(0, 0, 0, 0.011),\\n  0px 3.3px 2.7px rgba(0, 0, 0, 0.016),\\n  0px 6.1px 5px rgba(0, 0, 0, 0.02),\\n  0px 10.9px 8.9px rgba(0, 0, 0, 0.024),\\n  0px 20.5px 16.7px rgba(0, 0, 0, 0.029),\\n  0px 49px 40px rgba(0, 0, 0, 0.04)","100":"0px 1.4px 1.4px rgba(0, 0, 0, 0.011),\\n  0px 3.3px 3.5px rgba(0, 0, 0, 0.016),\\n  0px 6.1px 6.5px rgba(0, 0, 0, 0.02),\\n  0px 10.9px 11.6px rgba(0, 0, 0, 0.024),\\n  0px 20.5px 21.7px rgba(0, 0, 0, 0.029),\\n  0px 49px 52px rgba(0, 0, 0, 0.04)","default":"0"},"size":{"0":0.25,"5":"0.5","10":0.65,"15":0.7,"20":0.75,"25":0.95,"30":1.1,"40":1.25,"50":1.5,"60":2,"70":2.5,"80":3,"90":4,"100":5,"default":"15px"},"font":{"family":{"default":{"fontFamily":"\\"Roboto\\"","fontWeight":400,"import":"https://fonts.googleapis.com/css2?family=Roboto&display=swap"},"title":{"fontFamily":"\\"Roboto\\"","fontWeight":500,"import":"https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap"},"quote":{"fontFamily":"\\"Palatino, Times, Georgia, serif\\"","fontWeight":"normal","fontStyle":"normal","fontDisplay":"auto","capHeight":0.65},"code":{"fontFamily":"Menlo, Monaco, Consolas, Courier New, monospace","fontWeight":"normal","fontStyle":"normal","fontDisplay":"auto","capHeight":0.65}},"size":{"0":0,"5":"0.5","10":0.65,"15":0.7,"20":0.75,"25":0.95,"30":1.1,"40":1.25,"50":1.5,"60":2,"70":2.5,"80":3,"90":4,"100":5,"default":"15px"}},"border":{"width":{"0":0,"10":1,"20":2,"30":4,"40":6,"50":8,"60":12,"70":16,"80":20,"90":24,"100":30,"default":"1px"},"radius":{"0":0,"10":0.8,"20":1.6,"30":2.4,"40":3.2,"50":4,"60":5.2,"70":6.4,"80":8,"90":10,"100":12,"default":"5px"}},"space":{"0":0,"10":0.375,"20":0.75,"30":1.5,"40":2.25,"50":3.25,"60":4.25,"70":5.5,"80":7,"90":9,"100":11,"default":"1rem"},"margin":{"0":0,"10":0.375,"20":0.75,"30":1.5,"40":2.25,"50":3.25,"60":4.25,"70":5.5,"80":7,"90":9,"100":11,"default":"1rem"},"padding":{"0":0,"10":0.375,"20":0.75,"30":1.5,"40":2.25,"50":3.25,"60":4.25,"70":5.5,"80":7,"90":9,"100":11,"default":"1rem"},"offsize":{"0":0,"10":0.375,"20":0.75,"30":1.5,"40":2.25,"50":3.25,"60":4.25,"70":5.5,"80":7,"90":9,"100":11,"default":"1rem"},"media":{"defaultAction":"<=","defaultMedia":"desktop","queries":{"mobile":{"minWidth":0,"maxWidth":639},"tablet":{"minWidth":640,"maxWidth":1279},"desktop":{"minWidth":1280,"maxWidth":2047},"wide":{"minWidth":2048,"maxWidth":null}}},"ui":{"default":{"paddingInline":1.5,"paddingBlock":0.75,"borderRadius":1,"borderWidth":"1px","transition":"all .1s cubic-bezier(0.700, 0.000, 0.305, 0.995)","defaultLnf":"solid","depth":"0","outline":true,"spacing":1.5,"rhythmVertical":{"margin-bottom":60}},"form":{"paddingInline":1,"paddingBlock":0.75,"borderRadius":1,"borderWidth":"1px","transition":"all .1s cubic-bezier(0.700, 0.000, 0.305, 0.995)","outline":true,"depth":"0","rhythmVertical":{"margin-bottom":40}},"outline":{"active":true,"borderWidth":"10px","borderRadius":1,"transition":"all .2s ease-out"},"scrollbar":{"size":"2px","color":"accent"},"label":{"defaultLnf":"inline"},"dropdown":{"paddingInline":0.75,"paddingBlock":0.75,"itemPaddingInline":1.5,"itemPaddingBlock":0.75},"list":{"defaultLnf":"dl","bulletChar":"-"},"fsTree":{"bulletChar":"●"},"tooltip":{"defaultPosition":"top","arrowSize":"15px"},"loader":{"duration":"1s","easing":"linear"}},"typo":{"h1":{"label":"H1","group":"style","style":{"display":"block","fontFamily":"title","fontSize":80,"lineHeight":1.3,"maxWidth":"55ch","mobile":{"fontSize":70}},"rhythmVertical":{"marginBottom":50}},"h2":{"label":"H2","group":"style","style":{"display":"block","fontFamily":"title","fontSize":70,"lineHeight":1.3,"maxWidth":"55ch","mobile":{"fontSize":60}},"rhythmVertical":{"marginBottom":50}},"h3":{"label":"H3","group":"style","style":{"display":"block","fontFamily":"title","fontSize":60,"lineHeight":1.3,"maxWidth":"55ch","mobile":{"fontSize":50}},"rhythmVertical":{"marginBottom":50}},"h4":{"label":"H4","group":"style","style":{"display":"block","fontFamily":"title","fontSize":50,"lineHeight":1.3,"maxWidth":"55ch","mobile":{"fontSize":40}},"rhythmVertical":{"marginBottom":50}},"h5":{"label":"H5","group":"style","style":{"display":"block","fontFamily":"title","fontSize":40,"lineHeight":1.3,"maxWidth":"55ch","mobile":{"fontSize":30}},"rhythmVertical":{"marginBottom":40}},"h6":{"label":"H6","group":"style","style":{"display":"block","fontFamily":"title","fontSize":30,"lineHeight":1.3,"maxWidth":"55ch","mobile":{"fontSize":30}},"hythmVertical":{"marginBottom":40}},"p":{"label":"Paragraph","group":"style","default":true,"style":{"display":"block","fontFamily":"default","fontSize":30,"lineHeight":1.8,"maxWidth":"55ch","opacity":0.6},"rhythmVertical":{"marginBottom":40}},"lead":{"label":"Lead paragraph","group":"style","style":{"display":"block","fontFamily":"default","fontSize":40,"lineHeight":1.6,"maxWidth":"55ch","mobile":{"fontSize":40}},"rhythmVertical":{"marginBottom":40}},"hr":{"label":"--","group":"block","button":{"label":"--"},"style":{"display":"block","color":"hsla(212,6%,50%,1)","opacity":0.2},"rhythmVertical":{"marginBottom":50}},"pre:not([class])":{"label":"Pre","group":"text","style":{"display":"block","fontFamily":"code","color":["main","text"],"backgroundColor":["main","surface"],"lineHeight":1.5,"paddingInline":1.5,"paddingBlock":0.75,"borderRadius":1,"depth":"0"},"rhythmVertical":{"marginBottom":50}},"code:not(pre > code)":{"label":"Code","group":"text","button":{"label":"</>"},"style":{"display":"inline-block","fontFamily":"code","color":["main","text"],"lineHeight":1.1,"backgroundColor":["accent","surface"],"borderRadius":10,"paddingInline":10,"paddingBlock":0}},"blockquote":{"label":"Blockquote","group":"block","button":{"label":"<svg viewBox=\\"0 0 20 20\\"><path d=\\"M3 10.423a6.5 6.5 0 0 1 6.056-6.408l.038.67C6.448 5.423 5.354 7.663 5.22 10H9c.552 0 .5.432.5.986v4.511c0 .554-.448.503-1 .503h-5c-.552 0-.5-.449-.5-1.003v-4.574zm8 0a6.5 6.5 0 0 1 6.056-6.408l.038.67c-2.646.739-3.74 2.979-3.873 5.315H17c.552 0 .5.432.5.986v4.511c0 .554-.448.503-1 .503h-5c-.552 0-.5-.449-.5-1.003v-4.574z\\"></path></svg>"},"style":{"display":"block","fontFamily":"quote"},"editor":{"style":{"paddingInlineStart":1.5,"borderLeft":"1px solid #000"}},"rhythmVertical":{"marginBottom":50}},"a":{"label":"Link","group":"text","button":{"label":"<svg viewBox=\\"0 0 20 20\\"><path d=\\"m11.077 15 .991-1.416a.75.75 0 1 1 1.229.86l-1.148 1.64a.748.748 0 0 1-.217.206 5.251 5.251 0 0 1-8.503-5.955.741.741 0 0 1 .12-.274l1.147-1.639a.75.75 0 1 1 1.228.86L4.933 10.7l.006.003a3.75 3.75 0 0 0 6.132 4.294l.006.004zm5.494-5.335a.748.748 0 0 1-.12.274l-1.147 1.639a.75.75 0 1 1-1.228-.86l.86-1.23a3.75 3.75 0 0 0-6.144-4.301l-.86 1.229a.75.75 0 0 1-1.229-.86l1.148-1.64a.748.748 0 0 1 .217-.206 5.251 5.251 0 0 1 8.503 5.955zm-4.563-2.532a.75.75 0 0 1 .184 1.045l-3.155 4.505a.75.75 0 1 1-1.229-.86l3.155-4.506a.75.75 0 0 1 1.045-.184z\\"></path></svg>"},"style":{"color":"accent","textDecoration":"underline"}},"quote":{"label":"Quote","group":"text","button":{"label":"<svg viewBox=\\"0 0 20 20\\"><path d=\\"M3 10.423a6.5 6.5 0 0 1 6.056-6.408l.038.67C6.448 5.423 5.354 7.663 5.22 10H9c.552 0 .5.432.5.986v4.511c0 .554-.448.503-1 .503h-5c-.552 0-.5-.449-.5-1.003v-4.574zm8 0a6.5 6.5 0 0 1 6.056-6.408l.038.67c-2.646.739-3.74 2.979-3.873 5.315H17c.552 0 .5.432.5.986v4.511c0 .554-.448.503-1 .503h-5c-.552 0-.5-.449-.5-1.003v-4.574z\\"></path></svg>"},"style":{"fontFamily":"quote"},"rhythmVertical":{"marginBottom":50}},"bold":{"label":"Bold","group":"text","style":{"fontWeight":"bold"},"button":{"label":"B","style":{"fontWeight":"bolder"}}},"italic":{"label":"Italic","group":"text","style":{"fontStyle":"italic"},"button":{"label":"I","style":{"fontStyle":"italic"}}},"large":{"label":"Large","group":"text","style":{"fontSize":"1.1em"},"button":{"label":"A","style":{"fontSize":"1.01em"}}},"larger":{"label":"Larger","group":"text","style":{"fontSize":"1.2em"},"button":{"label":"A","style":{"fontSize":"1.02em"}}},"largest":{"label":"Largest","group":"text","style":{"fontSize":"1.3em"},"button":{"label":"A","style":{"fontSize":"1.03em"}}},"small":{"label":"Small","group":"text","style":{"fontSize":"0.9em"},"button":{"label":"A","style":{"fontSize":"0.99em"}}},"smaller":{"label":"Smaller","group":"text","style":{"fontSize":"0.8em"},"button":{"label":"A","style":{"fontSize":"0.98em"}}},"smallest":{"label":"Smallest","group":"text","style":{"fontSize":"0.7em"},"button":{"label":"A","style":{"fontSize":"0.97em"}}},"mark":{"label":"Mark","group":"text","button":{"label":"M"},"style":{"backgroundColor":"#ffbb00"}},"del":{"label":"Deleted","group":"text","style":{"textDecoration":"line-through"},"button":{"label":"D","style":{"textDecoration":"line-through"}}},"ins":{"label":"Inserted","group":"text","style":{"textDecoration":"underline"},"button":{"label":"U","style":{"textDecoration":"underline"}}},"sub":{"label":"Subscript","group":"text","style":{"verticalAlign":"sub","fontSize":"0.6em"},"button":{"label":"Sub","style":{"verticalAlign":"sub","fontSize":"0.6em"}}},"sup":{"label":"Superscript","group":"text","style":{"verticalAlign":"sup","fontSize":"0.6em"},"button":{"label":"Sup","style":{"verticalAlign":"sup","fontSize":"0.6em"}}},"main":{"label":"Main","group":"color","type":"color","style":{"color":"hsla(212,6%,50%,1)"}},"mainGradient":{"label":"Main gradient","group":"color","type":"color","style":{"backgroundSize":"100%","-webkitBackgroundClip":"text","-mozBackgroundClip":"text","-webkitTextFillColor":"transparent","-mozTextFillColor":"transparent","backgroundImage":"linear-gradient(90deg, hsla(212,6%,50%,1) 0%, #878c92 100%)"}},"accent":{"label":"Accent","group":"color","type":"color","style":{"color":"#ffbb00"}},"accentGradient":{"label":"Accent gradient","group":"color","type":"color","style":{"backgroundSize":"100%","-webkitBackgroundClip":"text","-mozBackgroundClip":"text","-webkitTextFillColor":"transparent","-mozTextFillColor":"transparent","backgroundImage":"linear-gradient(90deg, #ffbb00 0%, #ffc21a 100%)"}},"complementary":{"label":"Complementary","group":"color","type":"color","style":{"color":"#5100ff"}},"complementaryGradient":{"label":"Complementary gradient","group":"color","type":"color","style":{"backgroundSize":"100%","-webkitBackgroundClip":"text","-mozBackgroundClip":"text","-webkitTextFillColor":"transparent","-mozTextFillColor":"transparent","backgroundImage":"linear-gradient(90deg, #5100ff 0%, #621aff 100%)"}},"success":{"label":"Success","group":"color","type":"color","style":{"color":"#91ff00"}},"successGradient":{"label":"Success gradient","group":"color","type":"color","style":{"backgroundSize":"100%","-webkitBackgroundClip":"text","-mozBackgroundClip":"text","-webkitTextFillColor":"transparent","-mozTextFillColor":"transparent","backgroundImage":"linear-gradient(90deg, #91ff00 0%, #9cff1a 100%)"}},"warning":{"label":"Warning","group":"color","type":"color","style":{"color":"#ffd500"}},"warningGradient":{"label":"Warning gradient","group":"color","type":"color","style":{"backgroundSize":"100%","-webkitBackgroundClip":"text","-mozBackgroundClip":"text","-webkitTextFillColor":"transparent","-mozTextFillColor":"transparent","backgroundImage":"linear-gradient(90deg, #ffd500 0%, #ffd91a 100%)"}},"error":{"label":"Error","group":"color","type":"color","style":{"color":"#ff003b"}},"errorGradient":{"label":"Error gradient","group":"color","type":"color","style":{"backgroundSize":"100%","-webkitBackgroundClip":"text","-mozBackgroundClip":"text","-webkitTextFillColor":"transparent","-mozTextFillColor":"transparent","backgroundImage":"linear-gradient(90deg, #ff003b 0%, #ff1a4f 100%)"}},"info":{"label":"Info","group":"color","type":"color","style":{"color":"#00ffff"}},"infoGradient":{"label":"Info gradient","group":"color","type":"color","style":{"backgroundSize":"100%","-webkitBackgroundClip":"text","-mozBackgroundClip":"text","-webkitTextFillColor":"transparent","-mozTextFillColor":"transparent","backgroundImage":"linear-gradient(90deg, #00ffff 0%, #1affff 100%)"}}},"wireframe":{"light":{"border":"1px solid rgba(0,0,0,0.1)","borderColor":"rgba(0,0,0,0.1)","background":"#ffffff","surface":"#fafafa"},"dark":{"border":"1px solid rgba(255,255,255,0.2)","borderColor":"rgba(255,255,255,0.2)","background":"#2D323A","surface":"#3B424C"}},"metas":{"title":"Default dark","description":"Nice and elegant dark theme"},"colorSchema":{"text":{"lighten":15,"color":{"base":{"lighten":30},"main":{"lighten":46}}},"placeholder":{"lighten":50,"alpha":0.4},"foreground":{"lighten":50},"background":{"darken":30},"backgroundForeground":{"lighten":50},"surface":{"darken":25},"surfaceForeground":{"lighten":50},"ui":{"darken":28},"uiForeground":{"lighten":45},"border":{"alpha":0.4},"hover":{"lighten":40},"active":{"darken":10},"gradientStart":{"lighten":0},"gradientEnd":{"darken":20}}}}},"ts":{"compilerOptions":{"moduleResolution":"node","sourceMap":true}}}},"FRONTSPEC":{"$custom":{"menus":{"primary":{"name":"Primary menu"},"footer":{"name":"Footer menu"}},"metas":{"backgroundColor":"#2c323a"}},"metas":{"lang":"en","title":"@example/01-basic","homepage":"https://coffeekraken.io","description":"","themeColor":"#ffbb00","author":{"name":"","email":"","url":""},"og":{"title":"@example/01-basic","description":"","type":"website","url":"https://coffeekraken.io","image":"https://cdnv2.coffeekraken.io/coffeekraken-og.png"},"backgroundColor":"#2c323a"},"favicon":{"rootDir":"./dist/favicon","filename":"favicon.html","filePath":"./dist/favicon/favicon.html"},"theme":{"theme":"default","variant":"light","themes":{"default-light":{"title":"Default light","description":"Nice and elegant light theme"},"default-dark":{"title":"Default dark","description":"Nice and elegant dark theme"}}},"media":{"defaultAction":"<=","defaultMedia":"desktop","queries":{"wide":{"minWidth":2048,"maxWidth":null},"desktop":{"minWidth":1280,"maxWidth":2047},"tablet":{"minWidth":640,"maxWidth":1279},"mobile":{"minWidth":0,"maxWidth":639}}},"google":{"gtm":"GTM-K4LMN8Q","map":{"apiKey":"AIzaSyDzFfEzhmYXRTlONUCtMWQ88uHJhsbtXY4"}},"margin":{"0":0,"10":0.375,"20":0.75,"30":1.5,"40":2.25,"50":3.25,"60":4.25,"70":5.5,"80":7,"90":9,"100":11,"default":"1rem"},"padding":{"0":0,"10":0.375,"20":0.75,"30":1.5,"40":2.25,"50":3.25,"60":4.25,"70":5.5,"80":7,"90":9,"100":11,"default":"1rem"},"lod":{"enabled":true,"defaultLevel":3,"botLevel":1,"levels":{"0":{"name":"bare","speedIndex":0},"1":{"name":"lnf","speedIndex":30},"2":{"name":"theme","speedIndex":40},"3":{"name":"high","speedIndex":50},"4":{"name":"ultra","speedIndex":60}},"method":"class","defaultAction":">="},"partytown":{"enabled":false,"forward":["dataLayer.push","fbq","freshpaint.addPageviewProperties","freshpaint.identify","freshpaint.track","_hsq.push","Intercom","_learnq.push","ttq.track","ttq.page","ttq.load","mixpanel.track"]},"font":{"family":{"default":{"fontFamily":"\\"Roboto\\"","fontWeight":400,"import":"https://fonts.googleapis.com/css2?family=Roboto&display=swap"},"title":{"fontFamily":"\\"Roboto\\"","fontWeight":500,"import":"https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap"},"quote":{"fontFamily":"\\"Palatino, Times, Georgia, serif\\"","fontWeight":"normal","fontStyle":"normal","fontDisplay":"auto","capHeight":0.65},"code":{"fontFamily":"Menlo, Monaco, Consolas, Courier New, monospace","fontWeight":"normal","fontStyle":"normal","fontDisplay":"auto","capHeight":0.65}},"size":{"0":0,"5":"0.5","10":0.65,"15":0.7,"20":0.75,"25":0.95,"30":1.1,"40":1.25,"50":1.5,"60":2,"70":2.5,"80":3,"90":4,"100":5,"default":"15px"}},"typo":{"h1":{"label":"H1","group":"style","button":{},"editor":{},"style":{"display":"block","fontFamily":"\\"Roboto\\"","fontSize":"45px","lineHeight":1.3,"maxWidth":"55ch","marginBottom":"3.25rem"}},"h2":{"label":"H2","group":"style","button":{},"editor":{},"style":{"display":"block","fontFamily":"\\"Roboto\\"","fontSize":"37.5px","lineHeight":1.3,"maxWidth":"55ch","marginBottom":"3.25rem"}},"h3":{"label":"H3","group":"style","button":{},"editor":{},"style":{"display":"block","fontFamily":"\\"Roboto\\"","fontSize":"30px","lineHeight":1.3,"maxWidth":"55ch","marginBottom":"3.25rem"}},"h4":{"label":"H4","group":"style","button":{},"editor":{},"style":{"display":"block","fontFamily":"\\"Roboto\\"","fontSize":"22.5px","lineHeight":1.3,"maxWidth":"55ch","marginBottom":"3.25rem"}},"h5":{"label":"H5","group":"style","button":{},"editor":{},"style":{"display":"block","fontFamily":"\\"Roboto\\"","fontSize":"18.75px","lineHeight":1.3,"maxWidth":"55ch","marginBottom":"2.25rem"}},"h6":{"label":"H6","group":"style","button":{},"editor":{},"style":{"display":"block","fontFamily":"\\"Roboto\\"","fontSize":"16.5px","lineHeight":1.3,"maxWidth":"55ch"}},"p":{"label":"Paragraph","group":"style","button":{},"editor":{},"style":{"display":"block","fontFamily":"\\"Roboto\\"","fontSize":"16.5px","lineHeight":1.8,"maxWidth":"55ch","marginBottom":"2.25rem"},"default":true},"lead":{"label":"Lead paragraph","group":"style","button":{},"editor":{},"style":{"display":"block","fontFamily":"\\"Roboto\\"","fontSize":"18.75px","lineHeight":1.6,"maxWidth":"55ch","marginBottom":"2.25rem"}},"hr":{"label":"--","group":"block","button":{"label":"--"},"editor":{},"style":{"display":"block","color":"hsla(212,6%,50%,1)","opacity":0.2,"marginBottom":"3.25rem"}},"pre":{"label":"Pre","group":"text","button":{},"editor":{},"style":{"display":"block","fontFamily":"Menlo, Monaco, Consolas, Courier New, monospace","color":"#61666b","backgroundColor":"#fcfcfd","lineHeight":1.5,"paddingInline":"1.5rem","paddingBlock":"0.75rem","borderRadius":"5px","depth":"0","marginBottom":"3.25rem"}},"code":{"label":"Code","group":"text","button":{"label":"</>"},"editor":{},"style":{"display":"inline-block","fontFamily":"Menlo, Monaco, Consolas, Courier New, monospace","color":"#61666b","lineHeight":1.1,"backgroundColor":"#fff1cc","borderRadius":"4px","paddingInline":"0.375rem","paddingBlock":"0rem"}},"blockquote":{"label":"Blockquote","group":"block","button":{"label":"<svg viewBox=\\"0 0 20 20\\"><path d=\\"M3 10.423a6.5 6.5 0 0 1 6.056-6.408l.038.67C6.448 5.423 5.354 7.663 5.22 10H9c.552 0 .5.432.5.986v4.511c0 .554-.448.503-1 .503h-5c-.552 0-.5-.449-.5-1.003v-4.574zm8 0a6.5 6.5 0 0 1 6.056-6.408l.038.67c-2.646.739-3.74 2.979-3.873 5.315H17c.552 0 .5.432.5.986v4.511c0 .554-.448.503-1 .503h-5c-.552 0-.5-.449-.5-1.003v-4.574z\\"></path></svg>"},"editor":{"style":{"paddingInlineStart":1.5,"borderLeft":"1px solid #000"}},"style":{"display":"block","fontFamily":"\\"Palatino, Times, Georgia, serif\\"","marginBottom":"3.25rem"}},"a":{"label":"Link","group":"text","button":{"label":"<svg viewBox=\\"0 0 20 20\\"><path d=\\"m11.077 15 .991-1.416a.75.75 0 1 1 1.229.86l-1.148 1.64a.748.748 0 0 1-.217.206 5.251 5.251 0 0 1-8.503-5.955.741.741 0 0 1 .12-.274l1.147-1.639a.75.75 0 1 1 1.228.86L4.933 10.7l.006.003a3.75 3.75 0 0 0 6.132 4.294l.006.004zm5.494-5.335a.748.748 0 0 1-.12.274l-1.147 1.639a.75.75 0 1 1-1.228-.86l.86-1.23a3.75 3.75 0 0 0-6.144-4.301l-.86 1.229a.75.75 0 0 1-1.229-.86l1.148-1.64a.748.748 0 0 1 .217-.206 5.251 5.251 0 0 1 8.503 5.955zm-4.563-2.532a.75.75 0 0 1 .184 1.045l-3.155 4.505a.75.75 0 1 1-1.229-.86l3.155-4.506a.75.75 0 0 1 1.045-.184z\\"></path></svg>"},"editor":{},"style":{"color":"#ffbb00","textDecoration":"underline"}},"quote":{"label":"Quote","group":"text","button":{"label":"<svg viewBox=\\"0 0 20 20\\"><path d=\\"M3 10.423a6.5 6.5 0 0 1 6.056-6.408l.038.67C6.448 5.423 5.354 7.663 5.22 10H9c.552 0 .5.432.5.986v4.511c0 .554-.448.503-1 .503h-5c-.552 0-.5-.449-.5-1.003v-4.574zm8 0a6.5 6.5 0 0 1 6.056-6.408l.038.67c-2.646.739-3.74 2.979-3.873 5.315H17c.552 0 .5.432.5.986v4.511c0 .554-.448.503-1 .503h-5c-.552 0-.5-.449-.5-1.003v-4.574z\\"></path></svg>"},"editor":{},"style":{"fontFamily":"\\"Palatino, Times, Georgia, serif\\"","marginBottom":"3.25rem"}},"bold":{"label":"Bold","group":"text","button":{"label":"B","style":{"fontWeight":"bolder"}},"editor":{},"style":{"fontWeight":"bold"}},"italic":{"label":"Italic","group":"text","button":{"label":"I","style":{"fontStyle":"italic"}},"editor":{},"style":{"fontStyle":"italic"}},"large":{"label":"Large","group":"text","button":{"label":"A","style":{"fontSize":"1.01em"}},"editor":{},"style":{"fontSize":"1.1em"}},"larger":{"label":"Larger","group":"text","button":{"label":"A","style":{"fontSize":"1.02em"}},"editor":{},"style":{"fontSize":"1.2em"}},"largest":{"label":"Largest","group":"text","button":{"label":"A","style":{"fontSize":"1.03em"}},"editor":{},"style":{"fontSize":"1.3em"}},"small":{"label":"Small","group":"text","button":{"label":"A","style":{"fontSize":"0.99em"}},"editor":{},"style":{"fontSize":"0.9em"}},"smaller":{"label":"Smaller","group":"text","button":{"label":"A","style":{"fontSize":"0.98em"}},"editor":{},"style":{"fontSize":"0.8em"}},"smallest":{"label":"Smallest","group":"text","button":{"label":"A","style":{"fontSize":"0.97em"}},"editor":{},"style":{"fontSize":"0.7em"}},"mark":{"label":"Mark","group":"text","button":{"label":"M"},"editor":{},"style":{"backgroundColor":"#ffbb00"}},"del":{"label":"Deleted","group":"text","button":{"label":"D","style":{"textDecoration":"line-through"}},"editor":{},"style":{"textDecoration":"line-through"}},"ins":{"label":"Inserted","group":"text","button":{"label":"U","style":{"textDecoration":"underline"}},"editor":{},"style":{"textDecoration":"underline"}},"sub":{"label":"Subscript","group":"text","button":{"label":"Sub","style":{"verticalAlign":"sub","fontSize":"0.6em"}},"editor":{},"style":{"verticalAlign":"sub","fontSize":"0.6em"}},"sup":{"label":"Superscript","group":"text","button":{"label":"Sup","style":{"verticalAlign":"sup","fontSize":"0.6em"}},"editor":{},"style":{"verticalAlign":"sup","fontSize":"0.6em"}},"main":{"label":"Main","group":"color","type":"color","button":{},"editor":{},"style":{"color":"hsla(212,6%,50%,1)"}},"accent":{"label":"Accent","group":"color","type":"color","button":{},"editor":{},"style":{"color":"#ffbb00"}},"complementary":{"label":"Complementary","group":"color","type":"color","button":{},"editor":{},"style":{"color":"#5100ff"}},"success":{"label":"Success","group":"color","type":"color","button":{},"editor":{},"style":{"color":"#91ff00"}},"warning":{"label":"Warning","group":"color","type":"color","button":{},"editor":{},"style":{"color":"#ffd500"}},"error":{"label":"Error","group":"color","type":"color","button":{},"editor":{},"style":{"color":"#ff003c"}},"info":{"label":"Info","group":"color","type":"color","button":{},"editor":{},"style":{"color":"#00ffff"}}},"layout":{"offset":{"top":0,"right":0,"bottom":0,"left":0},"container":{"default":"1280px","wide":"1440px","full":"none"},"grid":{"1":1,"2":2,"3":3,"4":4,"5":5,"6":6,"7":7,"8":8,"9":9,"10":10,"11":11,"12":12},"layout":{"1":"1","12":"1 2","21":"2 1","112":"1 1 2","122":"1 2 2","123":"1 2 3","211":"2 1 1","221":"2 2 1","321":"3 2 1","1112":"1 1 1 2","1222":"1 2 2 2","1234":"1 2 3 4","2221":"2 2 2 1","11112":"1 1 1 1 2","12222":"1 2 2 2 2","12345":"1 2 3 4 5","22221":"2 2 2 2 1","111112":"1 1 1 1 1 2","122222":"1 2 2 2 2 2","123456":"1 2 3 4 5 6","1_2":"1 _ 2","2_1":"2 _ 1","12_33":"1 2 _ 3 3","1_23":"1 _ 2 3","1_2_3":"1 _ 2 _ 3","32_1":"3 2 _ 1","3_21":"3 _ 2 1","12_34":"1 2 _ 3 4","123_4":"1 2 3 _ 4","1_234":"1 _ 2 3 4","1_2_3_4":"1 _ 2 _ 3 _ 4","123_45":"1 2 3 _ 4 5","12_345":"1 2 _ 3 4 5","1_2345":"1 _ 2 3 4 5","1234_5":"1 2 3 4 _ 5","1_2_3_4_5":"1 _ 2 _ 3 _ 4 _ 5"}},"menus":{"primary":{"name":"Primary menu"},"footer":{"name":"Footer menu"}}},"PACKAGE":{"name":"@example/01-basic","version":"2.0.0-alpha.27","description":"","main":"index.js","type":"module","private":true,"license":"AGPL-version-3.0","engines":{"node":">= 14.0.0","npm":">= 6.0.0"},"homepage":"https://coffeekraken.io","repository":{"type":"git","url":""},"bugs":"","keywords":[],"author":{"name":"","email":"","url":""},"contributors":[],"scripts":{"dev":"sugard kitchen.run dev","prod":"sugard kitchen.run prod","build":"sugard kitchen.run build","static":"live-server static","static.build":"sugard static.build --clean --env production --target production","deploy":"rsync -avzh --delete --progress --stats ./static fe0mt_coffeekraken@fe0mt.ftp.infomaniak.com:~/sites/01-basic.coffeekraken.io"},"dependencies":{"@coffeekraken/s-activate-feature":"^2.0.0-alpha.27","@coffeekraken/s-carpenter":"^2.0.0-alpha.27","@coffeekraken/s-front":"^2.0.0-alpha.27","@coffeekraken/s-google-map-component":"^2.0.0-alpha.27","@coffeekraken/s-log":"^2.0.0-alpha.27","@coffeekraken/s-postcss-sugar-plugin":"^2.0.0-alpha.27","@coffeekraken/s-sugar-feature":"^2.0.0-alpha.27","@coffeekraken/sugar":"^2.0.0-alpha.27","autoprefixer":"^10.4.12","postcss":"^8.4.17","postcss-atroot":"^0.2.3","postcss-extend-rule":"^4.0.0","postcss-import":"^15.0.0","postcss-nested":"^5.0.6","postcss-property-lookup":"^3.0.0"},"exports":{"./shared/*":{"require":"./dist/pkg/cjs/shared/*.js","import":"./dist/pkg/esm/shared/*.js"},"./node/*":{"require":"./dist/pkg/cjs/node/*.js","import":"./dist/pkg/esm/node/*.js"},"./js/*":{"require":"./dist/pkg/cjs/js/*.js","import":"./dist/pkg/esm/js/*.js"}}}}`),
   document.env || {}
 );
 (async () => {
+  if (document.querySelector("s-carpenter")) {
+    define({
+      autoInit: true,
+      escape: true,
+      features: {
+        newPage: true,
+        savePage: true,
+        delete: true,
+        insert: true,
+        scopes: true
+      }
+    });
+    return;
+  }
   SFeature.setDefaultProps("*", {});
   SLitComponent.setDefaultProps("*", {});
   SFront.init({});
   define$3();
   SPackEssentials();
-  define$4();
+  define$6();
   define$1();
-  define();
   define$2();
 })();
 export {
-  SStdio as S,
-  __isNode as _,
-  SSugarConfig as a
+  SInterface as S,
+  __deepMerge as _,
+  SFrontspec as a,
+  SLitComponent as b,
+  css as c,
+  __camelCase as d,
+  __parse as e,
+  __upperFirst as f,
+  SSugarConfig as g,
+  html as h,
+  __traverseUp as i,
+  SPromise as j,
+  __uniqid as k,
+  isClass$1 as l,
+  __querySelectorLive as m,
+  __isNode as n,
+  SStdio as o,
+  SFeature as p,
+  __makeFloat as q,
+  __isColor as r,
+  SClass as s,
+  format$1 as t,
+  unsafeCSS as u,
+  SComponentUtils as v
 };

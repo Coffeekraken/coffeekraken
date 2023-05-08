@@ -155,6 +155,38 @@ export default class SCarpenterComponentInterface extends __SInterface {
                         id: 's-carpenter.scope.selector.button',
                     }),
 
+                    // New node
+                    newNodeTitle: __i18n('New node', {
+                        id: 's-carpenter.node.new.title',
+                    }),
+                    newNodeDescription: __i18n(
+                        'Please enter a uid (unique id) for your node. This is important for you to find your node later...',
+                        {
+                            id: 's-carpenter.node.new.title',
+                        },
+                    ),
+                    newNodeUidLabel: __i18n('Enter a valid node uid', {
+                        id: 's-carpenter.node.new.uidLabel',
+                    }),
+                    newNodeUidPlaceholder: __i18n('contact', {
+                        id: 's-carpenter.node.new.namePlaceholder',
+                    }),
+                    newNodeButton: __i18n('Add my node', {
+                        id: 's-carpenter.node.new.button',
+                    }),
+                    newNodeUidAlreadyTaken: __i18n(
+                        'This uid is already taken',
+                        {
+                            id: 's-carpenter.page.new.uidAlreadyTaken',
+                        },
+                    ),
+                    newNodeUidRequired: __i18n(
+                        'You must provide a valid uid to proceed',
+                        {
+                            id: 's-carpenter.page.new.uidRequired',
+                        },
+                    ),
+
                     // New page
                     newPageTitle: __i18n('New page', {
                         id: 's-carpenter.page.new.title',
@@ -199,7 +231,7 @@ export default class SCarpenterComponentInterface extends __SInterface {
                     modeToggle: __i18n('%s to toggle modes', {
                         id: 's-carpenter.mode.insert',
                         tokens: {
-                            '%s': `<span style="font-weight: bold">ctrl+i</span>`,
+                            '%s': `<span style="font-weight: bold">CTRL+i</span>`,
                         },
                     }),
                 },

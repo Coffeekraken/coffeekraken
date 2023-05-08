@@ -8,7 +8,6 @@ export default class SSpecsEditorComponentLayoutWidget extends __SSpecsEditorWid
     _renderedLayouts: {};
     _sMedia: any;
     constructor(deps: ISSpecsEditorWidgetDeps);
-    firstUpdated(): void;
     render(): import("lit-html").TemplateResult<1>;
     _renderLayout(layoutObj: any): any;
 }

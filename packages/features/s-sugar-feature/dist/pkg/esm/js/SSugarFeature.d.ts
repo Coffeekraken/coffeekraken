@@ -22,6 +22,7 @@ export default class SSugarFeature extends __SFeature implements ISFeature {
     _isResizing: boolean;
     _clearTransmationsOnResize(): void;
     _pleasantCss(): void;
+    _autofocus(): void;
     _scrolled(): void;
     _vhvar(): void;
     _autoResize(): void;

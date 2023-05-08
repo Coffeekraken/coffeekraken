@@ -119,6 +119,7 @@ declare const _default: (api: any) => {
             fontSize: number;
             lineHeight: number;
             maxWidth: string;
+            opacity: number;
         };
         rhythmVertical: {
             marginBottom: number;

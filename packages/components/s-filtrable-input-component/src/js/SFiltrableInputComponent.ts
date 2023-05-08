@@ -269,7 +269,6 @@ export default class SFiltrableInputComponent extends __SLitComponent {
         this.$input =
             <any>this.querySelector('input') ?? document.createElement('input');
         if (!this.$input?.parentElement) {
-            _console.log('Append');
             this.appendChild(this.$input);
         }
         this.$input.setAttribute('autocomplete', 'off');

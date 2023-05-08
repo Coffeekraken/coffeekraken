@@ -28,6 +28,12 @@ export default class SSugarFeatureInterface extends __SInterface {
                 type: 'Boolean',
                 default: true,
             },
+            autofocus: {
+                description:
+                    'Specify if you want the "autofocus" to work on your page',
+                type: 'Boolean',
+                default: true,
+            },
             containerQuery: {
                 description:
                     'Specify if you want support for container queries in your css or not',

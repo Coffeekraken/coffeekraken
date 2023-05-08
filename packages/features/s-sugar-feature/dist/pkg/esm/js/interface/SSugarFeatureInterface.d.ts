@@ -7,6 +7,11 @@ export default class SSugarFeatureInterface extends __SInterface {
             type: string;
             default: boolean;
         };
+        autofocus: {
+            description: string;
+            type: string;
+            default: boolean;
+        };
         containerQuery: {
             description: string;
             type: string;

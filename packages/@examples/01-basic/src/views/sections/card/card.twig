@@ -1,4 +1,5 @@
 <section {{ __id(id) }} class="section-card {{ __spacesClasses(spaces, frontspec) }}">
+    {{ __nodeDataTemplate('views.sections.card', _context)|raw }}
     <div class="s-container:wide">
         <div class="s-layout">
             {% if cardOne %}

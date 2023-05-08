@@ -2,6 +2,7 @@
 
 @import './vars.css';
 
+@import './generic/breadcrumb.css';
 @import './generic/carpenter-loader.css';
 @import './generic/drop-menu.css';
 @import './generic/s-fs-tree.css';
@@ -11,6 +12,7 @@
 @import './components/controls.css';
 @import './components/ask.css';
 @import './components/editor.css';
+@import './components/metas.css';
 @import './components/error.css';
 @import './components/loading.css';
 @import './components/sidebar.css';

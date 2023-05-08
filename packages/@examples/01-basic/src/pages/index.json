@@ -1,0 +1,8 @@
+{
+    "type": "page",
+    "uid": "index",
+    "name": "index",
+    "slug": ["/"],
+    "scope": "repo",
+    "nodes": []
+}

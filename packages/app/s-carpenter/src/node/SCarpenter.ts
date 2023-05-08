@@ -8,6 +8,8 @@ import { __onProcessExit } from '@coffeekraken/sugar/process';
 import __express from 'express';
 import __SCarpenterStartParamsInterface from './interface/SCarpenterStartParamsInterface';
 
+import __fs from 'fs';
+
 import __bodyParser from 'body-parser';
 
 import __expressHttpProxy from 'express-http-proxy';
@@ -98,7 +100,7 @@ class SCarpenter extends __SClass {
      * @name          loadSpecs
      * @type          Function
      *
-     * This method allows you to load the specs specified in the config.carpenter.sources configuration
+     * This method allows you to load the specs specified in the config.carpenter.categories configuration
      *
      * @return        {Promise}                                     A promise resolved with the corresponding specs loaded
      *
@@ -111,9 +113,11 @@ class SCarpenter extends __SClass {
         return new Promise((resolve) => {
             const finalSpecs = {};
 
-            for (let [key, source] of Object.entries(finalSettings.sources)) {
+            for (let [key, category] of Object.entries(
+                finalSettings.categories,
+            )) {
                 const specsInstance = new __SSpecs();
-                const specsArray = specsInstance.list(source.specsNamespaces);
+                const specsArray = specsInstance.list(category.specsNamespaces);
 
                 specsArray.forEach((specs) => {
                     const specsJson = specs.read({
@@ -288,6 +292,7 @@ class SCarpenter extends __SClass {
             res.sendFile(jsFilePath);
         });
 
+        // nodes
         [
             'put', // update a node HTML
             'post', // save a node
@@ -302,7 +307,26 @@ class SCarpenter extends __SClass {
                 });
             });
         });
+        // check if a passed node uid already exists
+        expressServer.get('/carpenter/api/nodes/:uid/status', (req, res) => {
+            const status = {
+                exists: false,
+            };
+            if (
+                __fs.existsSync(
+                    `${__SSugarConfig.get('storage.src.nodesDir')}/${
+                        req.params.uid
+                    }.json`,
+                )
+            ) {
+                status.exists = true;
+            }
+            res.type('application/json');
+            res.status(200);
+            res.send(status);
+        });
 
+        // pages
         [
             'put', // update a page HTML
             'post', // save/create a page
@@ -316,6 +340,24 @@ class SCarpenter extends __SClass {
                     allSpecs,
                 });
             });
+        });
+        // check if a passed page uid already exists
+        expressServer.get('/carpenter/api/pages/:uid/status', (req, res) => {
+            const status = {
+                exists: false,
+            };
+            if (
+                __fs.existsSync(
+                    `${__SSugarConfig.get('storage.src.pagesDir')}/${
+                        req.params.uid
+                    }.json`,
+                )
+            ) {
+                status.exists = true;
+            }
+            res.type('application/json');
+            res.status(200);
+            res.send(status);
         });
 
         // render a default node

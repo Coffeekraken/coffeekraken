@@ -127,7 +127,6 @@ export default class SDropzoneComponent extends __SLitComponent {
         //     e.preventDefault();
         // });
         // from.addEventListener('drop', (e) => {
-        //     _console.log('drop', e);
         //     e.preventDefault();
         // });
 

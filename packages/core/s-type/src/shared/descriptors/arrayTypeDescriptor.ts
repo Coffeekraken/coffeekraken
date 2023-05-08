@@ -29,7 +29,6 @@ const descriptor: ISTypeDescriptor = {
     name: 'Array',
     id: 'array',
     is: (value: any) => {
-        // _console.log('CHeck', value, Array.isArray(value));
         return Array.isArray(value);
     },
     cast: (value: any, params: any = {}) => {

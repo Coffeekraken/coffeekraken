@@ -1,4 +1,3 @@
 {
-    "extends": "sugar.views.bare.container",
-    "viewPath": "sugar/bare/container/container.twig"
+    "extends": "sugar.views.bare.container"
 }

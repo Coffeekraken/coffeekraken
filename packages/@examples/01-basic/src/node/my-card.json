@@ -1,0 +1,42 @@
+{
+    "uid": "my-card",
+    "specs": "views.components.card",
+    "values": {
+        "title": {
+            "value": "Card title"
+        },
+        "intro": {
+            "value": "Lorem ipsum dolor sit amet, dolor laboris cupidatat cupidatat laboris velit ex adipisicing enim do"
+        },
+        "text": {
+            "value": "Lorem ipsum dolor sit amet, aute ipsum duis tempor incididunt sint est irure magna amet est elit ad ipsum laborum cupidatat cupidatat minim sint occaecat"
+        },
+        "direction": {
+            "id": "vertical",
+            "value": "vertical"
+        },
+        "image": {
+            "url": "https://picsum.photos/1600/900"
+        },
+        "spacing": {
+            "id": "20",
+            "value": "20"
+        },
+        "cta": {
+            "color": {
+                "value": [
+                    {
+                        "id": "accent",
+                        "name": "Accent",
+                        "value": "accent"
+                    }
+                ]
+            },
+            "link": {
+                "text": "Click me!",
+                "url": "https://google.com",
+                "title": "Click me!"
+            }
+        }
+    }
+}

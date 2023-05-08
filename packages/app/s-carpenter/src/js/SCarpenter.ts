@@ -29,8 +29,6 @@ export default class SCarpenter extends __SClass {
         });
         front.setLod(5);
 
-        _console.log('A', __SComponentUtils.getDefaultProps('s-carpenter'));
-
         // components
         _sCarpenterAppComponentDefine({
             ...(__SComponentUtils.getDefaultProps('s-carpenter') ?? {}),

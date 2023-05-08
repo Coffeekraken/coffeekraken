@@ -26,25 +26,27 @@ if (isset($params['$_ENV'])) {
 }
 
 // handle if page file does not exists
-if (!file_exists($params['pageFilePath'])) {
+if (!file_exists($params['pageFile'])) {
     print 'The passed page file path "' .
-        $params['pageFilePath'] .
+        $params['pageFile'] .
         '" does not exists...';
     return;
 }
 
-$storeDir = $params['storeDir'];
+$nodesDir = $params['nodesDir'];
 
 // read the page json
-$pageFileJson = json_decode(file_get_contents($params['pageFilePath']));
+$pageFileJson = json_decode(file_get_contents($params['pageFile']));
 
 $viewRenderer = new SViewRenderer([
-    'sharedData' => ['something' => 'cool'],
+    'sharedData' => [
+        'page' => $params['page'],
+    ],
 ]);
 $renderRes = $viewRenderer->renderPage($pageFileJson, function (
     $component
-) use ($storeDir) {
-    $filePath = $storeDir . '/' . $component->uid . '.json';
+) use ($nodesDir) {
+    $filePath = $nodesDir . '/' . $component->uid . '.json';
 
     if (!file_exists($filePath)) {
         return;

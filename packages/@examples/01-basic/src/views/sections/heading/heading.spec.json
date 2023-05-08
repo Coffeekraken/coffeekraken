@@ -7,24 +7,46 @@
             "type": "Image",
             "title": "Background image",
             "description": "Background image",
+            "default": {
+                "url": "https://picsum.photos/1600/900",
+                "media": {
+                    "desktop": {
+                        "url": "https://picsum.photos/1600/900"
+                    }
+                }
+            },
             "required": true
         },
         "title": {
             "type": "Text",
             "title": "Title",
             "description": "Heading title",
+            "default": {
+                "value": "Heading title"
+            },
             "required": true
         },
         "text": {
             "type": "Text",
             "title": "Text",
             "description": "Heading text",
+            "default": {
+                "value": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum id euismod quam, at fringilla odio. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam vitae molestie augue. Curabitur et consectetur diam. Mauris vitae dui sit amet ipsum dignissim sollicitudin at ac ante. Donec porta, libero ut auctor efficitur"
+            },
             "required": true
         },
         "image": {
             "type": "Image",
             "title": "Image",
             "description": "Heading image",
+            "default": {
+                "url": "https://picsum.photos/1600/900",
+                "media": {
+                    "desktop": {
+                        "url": "https://picsum.photos/1600/900"
+                    }
+                }
+            },
             "required": true
         },
         "cta": {

@@ -1,6 +1,7 @@
+import __SSugarConfig from '@coffeekraken/s-sugar-config';
 import { __execPhp } from '@coffeekraken/sugar/exec';
 import { __dirname } from '@coffeekraken/sugar/fs';
-import { __packageRootDir, __packageTmpDir } from '@coffeekraken/sugar/path';
+import { __packageRootDir } from '@coffeekraken/sugar/path';
 import { __serverObjectFromExpressRequest } from '@coffeekraken/sugar/php';
 import __path from 'path';
 
@@ -23,9 +24,9 @@ export default function page({
             ),
             {
                 $_SERVER: __serverObjectFromExpressRequest(req),
-                pageFilePath,
-                documentRoot: __packageRootDir(),
-                storeDir: `${__packageTmpDir()}/store`,
+                pageFile: pageFilePath,
+                page: pageConfig,
+                nodesDir: __SSugarConfig.get('storage.src.nodesDir'),
             },
             {
                 paramsThroughFile: true,

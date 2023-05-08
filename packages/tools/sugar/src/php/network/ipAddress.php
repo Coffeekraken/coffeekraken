@@ -26,7 +26,7 @@ namespace Sugar\network;
  */
 function ipAddress($type = 'local')
 {
-    if ($type == 'local') {
+    if ($type == 'local' && function_exists('socket_create')) {
         $sock = socket_create(AF_INET, SOCK_DGRAM, SOL_UDP);
         socket_connect($sock, '8.8.8.8', 53);
         socket_getsockname($sock, $name); // $name passed by reference

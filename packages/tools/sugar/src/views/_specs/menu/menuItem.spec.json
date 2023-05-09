@@ -1,5 +1,6 @@
 {
     "type": "MenuItem",
+    "category": "menu",
     "props": {
         "label": {
             "type": "String",

@@ -1,5 +1,6 @@
 {
     "type": "Component",
+    "category": "component",
     "title": "Card",
     "description": "Display a nice card with some infos like \"image\", \"title\", \"intro\", \"description\" and \"cta\"",
     "props": {

@@ -1,5 +1,6 @@
 {
     "type": "Menu",
+    "category": "menu",
     "title": "Menu",
     "description": "Describe a menu with children etc",
     "props": {

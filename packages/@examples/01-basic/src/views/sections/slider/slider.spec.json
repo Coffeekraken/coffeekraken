@@ -1,5 +1,6 @@
 {
     "type": "Section",
+    "category": "section",
     "title": "Slider",
     "description": "Slider section",
     "props": {

@@ -1,5 +1,6 @@
 {
     "type": "section",
+    "category": "section",
     "title": "Contact",
     "description": "Display a contact section with a form and a google map",
     "props": {

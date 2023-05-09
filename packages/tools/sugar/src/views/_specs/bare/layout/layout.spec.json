@@ -1,5 +1,6 @@
 {
     "type": "Layout",
+    "category": "bare",
     "title": "Layout",
     "description": "Specify a custom layout where to put some components",
     "default": {

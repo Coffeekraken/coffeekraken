@@ -1,5 +1,6 @@
 {
     "type": "Object",
+    "category": "component",
     "title": "Cta",
     "description": "Display a call to action",
     "props": {

@@ -1,5 +1,6 @@
 {
     "type": "section",
+    "category": "section",
     "title": "Cards",
     "description": "Display two cards together",
     "props": {

@@ -1,5 +1,6 @@
 {
     "type": "Bare",
+    "category": "bare",
     "title": "Typo",
     "description": "Display a typo like an H1, H2, p, etc...",
     "props": {

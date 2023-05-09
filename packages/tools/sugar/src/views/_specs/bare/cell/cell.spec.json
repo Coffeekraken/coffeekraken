@@ -1,5 +1,6 @@
 {
     "type": "Bare",
+    "category": "bare",
     "title": "Cell",
     "description": "Simple cell that can be used inside a layout, etc...",
     "props": {

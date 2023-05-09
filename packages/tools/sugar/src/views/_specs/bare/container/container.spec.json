@@ -1,5 +1,6 @@
 {
     "type": "Bare",
+    "category": "bare",
     "title": "Container",
     "description": "Display a simple container that will center your content on the page with a certain max-width",
     "props": {

@@ -57,18 +57,8 @@ export interface ISCarpenterStartParams {
     env: 'development' | 'production';
 }
 
-export interface ISCarpenterSettingsSource {
-    title: string;
-    inDir: string;
-    glob: string;
-}
-
-export interface ISCarpenterSettingsSources {
-    [key: string]: Partial<ISCarpenterSettingsSource>;
-}
-
 export interface ISCarpenterSettings {
-    sources: ISCarpenterSettingsSources;
+    namespaces: string[];
 }
 
 class SCarpenter extends __SClass {
@@ -113,19 +103,16 @@ class SCarpenter extends __SClass {
         return new Promise((resolve) => {
             const finalSpecs = {};
 
-            for (let [key, category] of Object.entries(
-                finalSettings.categories,
-            )) {
-                const specsInstance = new __SSpecs();
-                const specsArray = specsInstance.list(category.specsNamespaces);
-
-                specsArray.forEach((specs) => {
-                    const specsJson = specs.read({
-                        metas: false,
-                    });
-                    finalSpecs[specs.dotpath] = specsJson;
+            const specsInstance = new __SSpecs();
+            const specsArray = specsInstance.list(
+                finalSettings.namespaces ?? ['views'],
+            );
+            specsArray.forEach((specs) => {
+                const specsJson = specs.read({
+                    metas: false,
                 });
-            }
+                finalSpecs[specs.dotpath] = specsJson;
+            });
 
             resolve(finalSpecs);
         });
@@ -247,13 +234,6 @@ class SCarpenter extends __SClass {
             res.status(200);
             res.type('application/json');
             res.send(__SSugarConfig.get('carpenter.scopes'));
-        });
-
-        // retrieve the available categories
-        expressServer.get('/carpenter/api/categories', (req, res) => {
-            res.status(200);
-            res.type('application/json');
-            res.send(__SSugarConfig.get('carpenter.categories'));
         });
 
         // Retrieve a specific spec

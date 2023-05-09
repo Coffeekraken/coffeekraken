@@ -11,25 +11,7 @@ export default function (api) {
             port: 3003,
         },
 
-        categories: {
-            bare: {
-                name: 'Bare',
-                description:
-                    'All the components that are helpful the the page structure like layout, container, etc...',
-                specsNamespaces: ['views.bare'],
-            },
-            sections: {
-                name: 'Sections',
-                description: 'All the available pre-build sections',
-                specsNamespaces: ['views.sections'],
-            },
-            components: {
-                name: 'Components',
-                description:
-                    'All the available components that you can use to create custom sections',
-                specsNamespaces: ['views.components'],
-            },
-        },
+        namespaces: ['views'],
 
         scopes: {
             user: {

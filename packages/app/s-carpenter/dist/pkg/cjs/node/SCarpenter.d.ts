@@ -6,16 +6,8 @@ export interface ISCarpenterStartParams {
     dev: boolean;
     env: 'development' | 'production';
 }
-export interface ISCarpenterSettingsSource {
-    title: string;
-    inDir: string;
-    glob: string;
-}
-export interface ISCarpenterSettingsSources {
-    [key: string]: Partial<ISCarpenterSettingsSource>;
-}
 export interface ISCarpenterSettings {
-    sources: ISCarpenterSettingsSources;
+    namespaces: string[];
 }
 declare class SCarpenter extends __SClass {
     

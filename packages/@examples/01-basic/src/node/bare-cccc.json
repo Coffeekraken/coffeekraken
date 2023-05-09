@@ -1,0 +1,19 @@
+{
+    "uid": "bare-cccc",
+    "specs": "sugar.views.bare.layout",
+    "values": {
+        "container": true,
+        "nodes": {
+            "1": "Hello",
+            "2": "World"
+        },
+        "gap": 30,
+        "media": {
+            "desktop": {
+                "id": "12",
+                "layout": "1 2"
+            }
+        },
+        "finalId": "s-layout-645a3e2a49d92"
+    }
+}

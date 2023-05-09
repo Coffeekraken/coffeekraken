@@ -98,6 +98,12 @@ class SViewRendererSettings
     {
         $this->cacheDir = $_SERVER['DOCUMENT_ROOT'] . '/.local/cache/views';
 
+        // add the src/views/shared.data.php file
+        array_push(
+            $this->sharedDataFiles,
+            $_SERVER['DOCUMENT_ROOT'] . '/src/views/shared.data.php'
+        );
+
         foreach ($settings as $key => $value) {
             if (is_array($this->{$key}) && is_array($value)) {
                 $this->{$key} = array_merge_recursive($this->{$key}, $value);

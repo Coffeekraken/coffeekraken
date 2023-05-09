@@ -79,6 +79,24 @@ export default class SCarpenterComponentInterface extends __SInterface {
                 nav: boolean;
             };
         };
+        categories: {
+            type: string;
+            description: string;
+            default: {
+                bare: {
+                    name: string;
+                    description: string;
+                };
+                sections: {
+                    name: string;
+                    description: string;
+                };
+                components: {
+                    name: string;
+                    description: string;
+                };
+            };
+        };
         frontspec: {
             type: string;
             title: string;

@@ -7,24 +7,6 @@
     {% set layoutCssRes = __layoutCss(media ? media : '1', {
         selector: '#' ~ finalId ~ '-layout'
     }) %}
-    
-    {# {% set layoutAreasCount = layoutCssRes.areas|length %}
-    {% set finalNodes = [] %}
-
-    {% if layoutAreasCount < nodes|length %}
-        {% for i, node in nodes %}
-            {% if i > layoutAreasCount - 1 %}
-                {% set finalNodes = finalNodes|merge({ (layoutAreasCount - 1): finalNodes[layoutAreasCount - 1] ~ node}) %}
-            {% else %}
-                {% set finalNodes = finalNodes|merge([node]) %}
-            {% endif %}
-        {% endfor %}
-    {% else %}
-        {% for i in 0..(layoutAreasCount - 1) %}
-            {% set finalNodes = finalNodes|merge([nodes[i]]) %}
-        {% endfor %}
-    {% endif %} #}
-
     <style>
         {{ layoutCssRes.css|raw }}
     </style>

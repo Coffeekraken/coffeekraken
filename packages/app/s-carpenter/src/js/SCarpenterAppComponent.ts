@@ -71,6 +71,11 @@ export interface ISCarpenterAppComponentFeatures {
     media: boolean;
 }
 
+export interface ISCarpenterAppComponentCategory {
+    title: string;
+    description: string;
+}
+
 export interface ISCarpenterAppComponentAddComponent {
     uid: string;
     specs: string;
@@ -96,6 +101,7 @@ export interface ISCarpenterComponentEnpoints {
 export interface ISCarpenterComponentProps {
     window: Window;
     features: ISCarpenterAppComponentFeatures;
+    categories: Record<string, ISCarpenterAppComponentCategory>;
     adapter: 'ajax';
     data: ISCarpenterAppComponentData;
     viewportElm: HTMLElement;
@@ -265,7 +271,7 @@ export default class SCarpenterAppComponent extends __SLitComponent {
         }
 
         // "categories"
-        await this._loadCategories();
+        // await this._loadCategories();
 
         // Specs (all the specs)
         await this._loadSpecs();
@@ -328,22 +334,22 @@ export default class SCarpenterAppComponent extends __SLitComponent {
         this._specs = specs;
     }
 
-    /**
-     * Load the categories
-     */
-    async _loadCategories(): Promise<void> {
-        const response = await fetch(
-            this.props.endpoints.categories.replace(
-                '%base',
-                this.props.endpoints.base,
-            ),
-            {
-                method: 'GET',
-            },
-        );
-        const categories = await response.json();
-        this._categories = categories;
-    }
+    // /**
+    //  * Load the categories
+    //  */
+    // async _loadCategories(): Promise<void> {
+    //     const response = await fetch(
+    //         this.props.endpoints.categories.replace(
+    //             '%base',
+    //             this.props.endpoints.base,
+    //         ),
+    //         {
+    //             method: 'GET',
+    //         },
+    //     );
+    //     const categories = await response.json();
+    //     this._categories = categories;
+    // }
 
     async firstUpdated() {
         await __wait(1000);
@@ -832,20 +838,44 @@ export default class SCarpenterAppComponent extends __SLitComponent {
      * Define the add component filtrable input
      */
     _defineAddComponentFiltrableInput() {
-        const items: any[] = [];
+        const items: any[] = [],
+            itemsByCategories: Record<string, any> = {};
         for (let [specs, specsObj] of Object.entries(this._specs ?? {})) {
+            if (!specsObj.category) {
+                _console.log(
+                    `<red>[SCarpenter]</red> Your "${specs}" specs does not specify any "category". It will be ignored...`,
+                );
+                continue;
+            }
+            // take in consideration ONLY the categories that are specified in the "categories" props
+            if (!this.props.categories[specsObj.category]) {
+                continue;
+            }
+
+            if (!itemsByCategories[specsObj.category]) {
+                itemsByCategories[specsObj.category] = [];
+            }
+            itemsByCategories[specsObj.category].push({
+                ...specsObj,
+                specs,
+            });
             items.push({
                 ...specsObj,
                 specs,
             });
         }
+        items.forEach((item) => {
+            _console.log('it', item.category, item.specs);
+        });
 
         __querySelectorLive(
             's-carpenter-app-add-component',
             ($elm) => {
                 $elm.addEventListener('s-filtrable-input.select', async (e) => {
                     // get a proper uniqid
-                    const nodeMetas = await this._ask('nodeMetas');
+                    const nodeMetas = await this._ask('nodeMetas', {
+                        category: e.detail.item.category,
+                    });
 
                     // add the component
                     this._addComponent({
@@ -904,17 +934,25 @@ export default class SCarpenterAppComponent extends __SLitComponent {
                         }
                     }
                 },
+                searchValudPreprocess(value) {
+                    return value.replace(/^\/[a-zA-Z0-9]+\s?/, '');
+                },
                 items: async ({ value }) => {
                     if (!value) {
                         const categoriesItems = [];
-                        for (let [id, categoryObj] of Object.entries(
-                            this._categories ?? {},
-                        )) {
+                        for (let [
+                            category,
+                            itemsInThisCategory,
+                        ] of Object.entries(itemsByCategories ?? {})) {
                             categoriesItems.push({
-                                title: categoryObj.name,
-                                description: categoryObj.description,
+                                title:
+                                    this.props.categories[category]?.title ??
+                                    __upperFirst(category),
+                                description:
+                                    this.props.categories[category]
+                                        ?.description ?? '',
                                 type: 'category',
-                                value: `/${id}`,
+                                value: `/${category} `,
                                 preventClose: true,
                                 preventReset: true,
                                 preventSelect: true,
@@ -927,16 +965,18 @@ export default class SCarpenterAppComponent extends __SLitComponent {
                         return categoriesItems;
                     }
 
+                    let filteredItems = items;
+
                     if (value.match(/^\/[a-zA-Z0-9]+/)) {
-                        const category = value.trim().replace(/^\//, '');
-                        let filteredItems = items.filter((item) => {
-                            if (!category) return true;
-                            return item.specs.includes(`.${category}.`);
-                        });
-                        return filteredItems;
+                        const category = value
+                            .trim()
+                            .match(/^\/([a-zA-Z0-9]+)/)?.[1];
+                        if (category && itemsByCategories[category]) {
+                            filteredItems = itemsByCategories[category];
+                        }
                     }
 
-                    return items;
+                    return filteredItems;
                 },
             },
             's-carpenter-app-add-component',
@@ -1538,36 +1578,44 @@ export default class SCarpenterAppComponent extends __SLitComponent {
 
                 <label class="s-label:block s-mbe:30">
                     <span>${this.props.i18n.newNodeUidLabel}</span>
-                    <input
-                        type="text"
-                        class="s-input"
-                        maxlength="100"
-                        autofocus
-                        required
-                        .value=${this._askData.uid ?? ''}
-                        value="${this._askData.uid ?? ''}"
-                        placeholder="${this.props.i18n.newNodeUidPlaceholder}"
-                        @keyup=${__debounce(100, async (e) => {
-                            if (!e.target.value) {
-                                this._askErrors.uid =
-                                    this.props.i18n.newNodeUidRequired;
-                                return this.requestUpdate();
-                            }
+                    <div class="s-input-container:group">
+                        <div class="s-btn s-color:complementary">
+                            ${this._askData.category.trim().replace(/s$/, '')}-
+                        </div>
+                        <input
+                            type="text"
+                            class="s-input"
+                            maxlength="100"
+                            autofocus
+                            required
+                            .value=${this._askData.uid ?? ''}
+                            value="${this._askData.uid ?? ''}"
+                            placeholder="${this.props.i18n
+                                .newNodeUidPlaceholder}"
+                            @keyup=${__debounce(200, async (e) => {
+                                if (!e.target.value) {
+                                    this._askErrors.uid =
+                                        this.props.i18n.newNodeUidRequired;
+                                    return this.requestUpdate();
+                                }
 
-                            this._askData.uid = __idCompliant(e.target.value);
-                            const nodeStatus = await this.getStatus(
-                                'node',
-                                this._askData.uid,
-                            );
-                            if (nodeStatus.exists) {
-                                this._askErrors.uid =
-                                    this.props.i18n.newNodeUidAlreadyTaken;
-                            } else {
-                                delete this._askErrors.uid;
-                            }
-                            this.requestUpdate();
-                        })}
-                    />
+                                this._askData.uid = __idCompliant(
+                                    e.target.value,
+                                );
+                                const nodeStatus = await this.getStatus(
+                                    'node',
+                                    this._askData.uid,
+                                );
+                                if (nodeStatus.exists) {
+                                    this._askErrors.uid =
+                                        this.props.i18n.newNodeUidAlreadyTaken;
+                                } else {
+                                    delete this._askErrors.uid;
+                                }
+                                this.requestUpdate();
+                            })}
+                        />
+                    </div>
                     ${this._askErrors?.uid
                         ? html` ${this._renderError(this._askErrors.uid)} `
                         : ''}
@@ -1578,6 +1626,12 @@ export default class SCarpenterAppComponent extends __SLitComponent {
                         class="s-btn s-color:accent"
                         ?disabled=${!this._askData.uid || this._askErrors.uid}
                         @pointerup=${async (e) => {
+                            // add the "category" prefix
+                            this._askData.uid = `${this._askData.category.replace(
+                                /s$/,
+                                '',
+                            )}-${__idCompliant(this._askData.uid)}`;
+                            // confirm the uid
                             callback?.(this._askData);
                             this._askCallback?.(this._askData);
                         }}

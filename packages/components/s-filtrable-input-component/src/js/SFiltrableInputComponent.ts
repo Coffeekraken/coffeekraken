@@ -28,7 +28,7 @@ export interface ISFiltrableInputComponentProps {
     showKeywords: boolean;
     emptyText: string;
     loadingText: string;
-    searchValudPreprocess: Function;
+    searchValuePreprocess: Function;
     filterItems: Function;
     filtrable: string[];
     templates: Record<string, Function>;

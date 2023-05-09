@@ -23,6 +23,10 @@ export interface ISCarpenterAppComponentFeatures {
     nav: boolean;
     media: boolean;
 }
+export interface ISCarpenterAppComponentCategory {
+    title: string;
+    description: string;
+}
 export interface ISCarpenterAppComponentAddComponent {
     uid: string;
     specs: string;
@@ -45,6 +49,7 @@ export interface ISCarpenterComponentEnpoints {
 export interface ISCarpenterComponentProps {
     window: Window;
     features: ISCarpenterAppComponentFeatures;
+    categories: Record<string, ISCarpenterAppComponentCategory>;
     adapter: 'ajax';
     data: ISCarpenterAppComponentData;
     viewportElm: HTMLElement;
@@ -111,8 +116,6 @@ export default class SCarpenterAppComponent extends __SLitComponent {
     _loadScopes(): Promise<void>;
     
     _loadSpecs(): Promise<void>;
-    
-    _loadCategories(): Promise<void>;
     firstUpdated(): Promise<void>;
     
     _initWebsiteContainers(): void;

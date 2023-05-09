@@ -1,10 +1,12 @@
 <?php
 
+namespace Sugar\css;
+
 /**
  * @name            layoutCss
- * @namespace            php.twig.functions
+ * @namespace            php.css
  * @type            Function
- * @platform        twig
+ * @platform        php
  * @status          beta
  *
  * This function takes a layout definition like "1 2 _ 3 3" and generate the css that will handle this layout.
@@ -24,27 +26,25 @@
  * @setting         {Boolean}       [minify=true]             Minify the output css or not
  * @setting         {Array}         [$scope=['bare','lnf','gap','align','justify']]             The scope(s) you want to generate
  *
- * @snippet             __layoutCss($1);
+ * @snippet             \Sugar\css\layoutCss($1);
  *
- * @example         twig
- * {% set css = __layoutCss('1 2 _ 3 3', {
- *      selector: '#my-layout'
- * }) %}
- * <style>
- *      {{ css }}
- * </style>
- * <div id="my-layout" class="s-layout">
+ * @example         php
+ * $css = \Sugar\css\layoutCss('1 2 _ 3 3', [
+ *      'selector' => '#my-layout'
+ * ]);
+ * print '<style>' . $css . '</style>';
+ * print '<div class="s-layout" id="my-layout">
  *      <div class="s-layout_area-1">Cell #1</div>
  *      <div class="s-layout_area-2">Cell #2</div>
- *      <div class="s-layout_area-3">Cell #3</div>
- * </div>
+ *      <div class="s-layout_area-3>Cell #3</div>
+ * </div>';
  *
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-return new \Twig\TwigFunction('__layoutCss', function (
-    $layout,
-    $settings = []
-) {
-    return \Sugar\css\layoutCss($layout, $settings);
-});
+function layoutCss($layout, $settings = [])
+{
+    $media = new \SMedia();
+    $res = $media->layoutCss($layout, $settings);
+    return $res;
+}

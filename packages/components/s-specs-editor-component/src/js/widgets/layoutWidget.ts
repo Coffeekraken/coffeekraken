@@ -101,12 +101,14 @@ export default class SSpecsEditorComponentLayoutWidget extends __SSpecsEditorWid
                 ${this._renderedLayouts[layoutObj.id].css}
             </style>
             <div
-                class="_layout ${`s-carpenter-app-layout-widget-${layoutObj.id}`}"
+                class="s-layout _layout ${`s-carpenter-app-layout-widget-${layoutObj.id}`}"
             >
                 ${this._renderedLayouts[layoutObj.id].areas.map(
                     (areaId) =>
                         html`
-                            <div class="_area _area-${areaId}">${areaId}</div>
+                            <div class="_area s-layout_area-${areaId}">
+                                ${areaId}
+                            </div>
                         `,
                 )}
             </div>

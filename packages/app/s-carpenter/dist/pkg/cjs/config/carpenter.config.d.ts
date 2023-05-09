@@ -5,23 +5,7 @@ export default function (api: any): {
     vite: {
         port: number;
     };
-    categories: {
-        bare: {
-            name: string;
-            description: string;
-            specsNamespaces: string[];
-        };
-        sections: {
-            name: string;
-            description: string;
-            specsNamespaces: string[];
-        };
-        components: {
-            name: string;
-            description: string;
-            specsNamespaces: string[];
-        };
-    };
+    namespaces: string[];
     scopes: {
         user: {
             name: string;

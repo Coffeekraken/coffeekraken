@@ -163,7 +163,7 @@ export default function (api): IStorageConfig {
              * @name            nodeDir
              * @namespace       config.storage.src
              * @type            String
-             * @default         [config.storage.src.rootDir]/node
+             * @default         [config.storage.src.rootDir]/nodes
              *
              * Configure where is located the javascript/typescript node source files
              *
@@ -171,7 +171,7 @@ export default function (api): IStorageConfig {
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             get nodeDir() {
-                return `${this.rootDir}/node`;
+                return `${this.rootDir}/nodes`;
             },
 
             /**
@@ -375,7 +375,7 @@ export default function (api): IStorageConfig {
              * @name            nodeDir
              * @namespace       config.storage.dist
              * @type            String
-             * @default         [config.storage.dist.rootDir]/node
+             * @default         [config.storage.dist.rootDir]/nodes
              *
              * Configure where is located the javascript/typescript node distribution files
              *
@@ -383,7 +383,7 @@ export default function (api): IStorageConfig {
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             get nodeDir() {
-                return `${this.rootDir}/node`;
+                return `${this.rootDir}/nodes`;
             },
 
             /**

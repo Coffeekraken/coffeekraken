@@ -111,6 +111,27 @@ export default class SCarpenterComponentInterface extends __SInterface {
                     nav: true,
                 },
             },
+            categories: {
+                type: 'Object',
+                description:
+                    'Specify the categories metas like title and description',
+                default: {
+                    bare: {
+                        name: 'Bare',
+                        description:
+                            'All the components that are helpful the the page structure like layout, container, etc...',
+                    },
+                    sections: {
+                        name: 'Sections',
+                        description: 'All the available pre-build sections',
+                    },
+                    components: {
+                        name: 'Components',
+                        description:
+                            'All the available components that you can use to create custom sections',
+                    },
+                },
+            },
             frontspec: {
                 type: 'Object',
                 title: 'Frontspec',

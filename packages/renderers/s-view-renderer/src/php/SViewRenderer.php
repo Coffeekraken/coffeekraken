@@ -84,8 +84,21 @@ class SViewRenderer
         // shared data from files
         if (count($this->settings->sharedDataFiles)) {
             foreach ($this->settings->sharedDataFiles as $filePath) {
+                $relFilePath = str_replace(
+                    $_SERVER['DOCUMENT_ROOT'] . '/',
+                    '',
+                    $filePath
+                );
                 $parts = explode('.', $filePath);
                 $extension = array_pop($parts);
+                if (!file_exists($filePath)) {
+                    \Sugar\console\log(
+                        '[SViewRenderer] The registered shared data file "' .
+                            $relFilePath .
+                            '" does not exists...'
+                    );
+                    continue;
+                }
                 $data = [];
                 switch ($extension) {
                     case 'php':

@@ -7,7 +7,12 @@
     "nodes": [
         {
             "uid": "main",
-            "type": "container"
+            "type": "container",
+            "nodes": [
+                {
+                    "uid": ""
+                }
+            ]
         }
     ]
 }

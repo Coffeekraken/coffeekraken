@@ -331,29 +331,32 @@ class SMedia
 
         if (in_array('bare', $finalSettings->scope)) {
             foreach ($areas as $i => $areaId) {
-                array_push(
-                    $vars,
-                    $finalSettings->selector .
-                        ' > *:nth-child(' .
-                        $i +
-                        1 .
-                        ') {
-                    grid-column-start: ' .
-                        $colsStartByArea[$areaId] .
-                        ';
-                    grid-column-end: ' .
-                        $colsEndByArea[$areaId] +
-                        1 .
-                        ';
-                    grid-row-start: ' .
-                        $rowsStartByArea[$areaId] .
-                        ';
-                    grid-row-end: ' .
-                        $rowsEndByArea[$areaId] +
-                        1 .
-                        ';
-                }'
-                );
+                if ($areaId == 'x' || $areaId == '-') {
+                } else {
+                    array_push(
+                        $vars,
+                        $finalSettings->selector .
+                            ' > .s-layout_area-' .
+                            $areaId .
+                            ' { ' .
+                            'grid-column-start: ' .
+                            $colsStartByArea[$areaId] .
+                            ';
+                                    grid-column-end: ' .
+                            $colsEndByArea[$areaId] +
+                            1 .
+                            ';
+                                    grid-row-start: ' .
+                            $rowsStartByArea[$areaId] .
+                            ';
+                                    grid-row-end: ' .
+                            $rowsEndByArea[$areaId] +
+                            1 .
+                            ';' .
+                            '
+                    }'
+                    );
+                }
             }
         }
 

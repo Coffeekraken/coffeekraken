@@ -34,11 +34,11 @@
         <div class="s-layout {{ gap ? 's-gap:' ~ gap : '' }}" id="{{ finalId }}-layout">
             {% if html %}
                 {{ html|raw }}
-            {% elseif nodes %}
-                {% for node in nodes %}
-                    <div s-carpenter-container="area-{{ loop.index }}">
-                        {% if node %}
-                            {{ node|raw }}
+            {% elseif areas %}
+                {% for areaId, html in areas %}
+                    <div class="s-layout_area-{{ areaId }}" s-carpenter-container="area-{{ areaId }}">
+                        {% if html %}
+                            {{ html|raw }}
                         {% endif %}
                     </div>
                 {% endfor %}

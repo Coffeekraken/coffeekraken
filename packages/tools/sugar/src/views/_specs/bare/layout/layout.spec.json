@@ -5,7 +5,10 @@
     "description": "Specify a custom layout where to put some components",
     "default": {
         "container": true,
-        "cells": ["", ""],
+        "areas": {
+            "1": "Hello",
+            "2": "World"
+        },
         "gap": 30,
         "media": {
             "desktop": {

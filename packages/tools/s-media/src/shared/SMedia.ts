@@ -469,12 +469,16 @@ export default class SMedia extends __SClass {
 
         if (finalSettings.scope.includes('bare')) {
             areas.forEach((areaId, i) => {
-                vars.push(`${finalSettings.selector} > *:nth-child(${i + 1}) {
-                grid-column-start: ${colsStartByArea[areaId]};
-                grid-column-end: ${colsEndByArea[areaId] + 1};
-                grid-row-start: ${rowsStartByArea[areaId]};
-                grid-row-end: ${rowsEndByArea[areaId] + 1};
-
+                if (areaId === 'x' || areaId === '-') {
+                    return;
+                }
+                vars.push(`${
+                    finalSettings.selector
+                } > .s-layout_area-${areaId} {
+                        grid-column-start: ${colsStartByArea[areaId]};
+                        grid-column-end: ${colsEndByArea[areaId] + 1};
+                        grid-row-start: ${rowsStartByArea[areaId]};
+                        grid-row-end: ${rowsEndByArea[areaId] + 1};
             }`);
             });
         }

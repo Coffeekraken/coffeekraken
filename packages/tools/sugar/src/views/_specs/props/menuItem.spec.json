@@ -22,7 +22,6 @@
                 "newWindow": false
             }
         },
-        "link": "@sugar.views.props.link",
         "children": {
             "type": "Object[]",
             "description": "Specify a menu item child"

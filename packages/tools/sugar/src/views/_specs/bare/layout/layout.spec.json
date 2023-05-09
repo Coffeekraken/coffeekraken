@@ -5,7 +5,7 @@
     "description": "Specify a custom layout where to put some components",
     "default": {
         "container": true,
-        "areas": {
+        "nodes": {
             "1": "Hello",
             "2": "World"
         },

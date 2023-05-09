@@ -1,6 +1,6 @@
 {
     "type": "Bare",
-    "category": "component",
+    "category": "components",
     "title": "Slide",
     "ghost": true,
     "description": "Simple slide usable in a slider",

@@ -1,6 +1,6 @@
 {
     "type": "Section",
-    "category": "section",
+    "category": "sections",
     "title": "Tabs",
     "description": "Tabs section",
     "props": {

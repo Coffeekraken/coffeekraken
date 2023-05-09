@@ -1,6 +1,6 @@
 {
     "type": "Section",
-    "category": "section",
+    "category": "sections",
     "title": "Separator",
     "description": "Separator section",
     "props": {

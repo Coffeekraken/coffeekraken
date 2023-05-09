@@ -1,6 +1,6 @@
 {
     "type": "Section",
-    "category": "section",
+    "category": "sections",
     "title": "Sandbox",
     "description": "Sandbox section",
     "props": {

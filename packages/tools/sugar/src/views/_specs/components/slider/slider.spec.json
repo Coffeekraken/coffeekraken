@@ -1,6 +1,6 @@
 {
     "type": "Component",
-    "category": "component",
+    "category": "components",
     "title": "Slider",
     "description": "Display a nice slider with a multitude of options like the direction, autoplay, etc...",
     "props": {

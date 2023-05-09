@@ -20,7 +20,7 @@
                         <h1 class="s-typo:h3 s-mbe:30">{{ tab.title.value|raw }}</h1>
                         <p class="s-typo:lead s-mbe:20 s-tc:accent">{{ tab.intro.value|raw }}</p>
                         <p class="s-typo:p">{{ tab.text.value|raw }}</p>
-                        <a class="s-btn s-mbs:40 s-color:{{ tab.cta.color.value }}" href="{{ tab.cta.link.url }}" target="{{ tab.cta.link.target }}">
+                        <a class="s-btn s-mbs:40 s-color:{{ tab.cta.color.value[0].value }}" href="{{ tab.cta.link.url }}" {% if tab.cta.link.newWindow %} target="_blank" {% endif %}>
                             {{ tab.cta.link.text }}
                         </a>
                     </div>

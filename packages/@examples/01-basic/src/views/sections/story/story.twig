@@ -9,7 +9,7 @@
                 <p class="s-typo:p">
                     {{ text.value|raw }}
                 </p>
-                <a class="s-btn s-mbs:40 s-color:{{ cta.color.value }}" href="{{ cta.link.url.value }}" target="{{ cta.link.target }}">
+                <a class="s-btn s-mbs:40 s-color:{{ cta.color.value[0].value }}" href="{{ cta.link.url.value }}" {% if cta.link.newWindow %} target="_blank" {% endif %}>
                     {{ cta.link.text.value }}
                 </a>
             </div>

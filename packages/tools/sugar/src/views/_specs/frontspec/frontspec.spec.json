@@ -1,5 +1,6 @@
 {
     "type": "frontspec",
+    "category": "props",
     "title": "Frontspec",
     "description": "Describe the frontspec.json properties",
     "props": {

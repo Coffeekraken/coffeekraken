@@ -1,5 +1,6 @@
 {
     "type": "Select",
+    "category": "props",
     "title": "Ratio",
     "description": "The available ratios",
     "options": [

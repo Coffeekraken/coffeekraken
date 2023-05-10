@@ -123,6 +123,7 @@
 
     .s-carpenter-app-add-component {
         @sugar.ui.filtrableInput();
+        min-width: 350px;
 
         ._group {
             @sugar.ui.inputcontainer ($lnf: group);

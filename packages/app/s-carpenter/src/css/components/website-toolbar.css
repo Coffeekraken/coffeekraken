@@ -16,6 +16,11 @@
     @sugar.depth (100);
     @sugar.transition (fast);
 
+    .s-carpenter--preview & {
+        opacity: 0 !important;
+        pointer-events: none !important;
+    }
+
     /* &:hover {
         transform: translateX(calc(-100% + sugar.margin(10)))
             translateY(calc(sugar.margin(10) * -1)) scale(1.2);

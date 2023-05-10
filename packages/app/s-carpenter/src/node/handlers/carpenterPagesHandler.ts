@@ -46,11 +46,7 @@ export default async function carpenterPagesHandler({ req, res }) {
         case 'POST':
             let pageJson = {
                 type: 'page',
-                uid: req.body.uid,
-                name: req.body.name,
-                slug: req.body.slug,
-                scope: req.body.scope,
-                nodes: req.body.nodes,
+                ...req.body,
             };
 
             // // check if the page already exists

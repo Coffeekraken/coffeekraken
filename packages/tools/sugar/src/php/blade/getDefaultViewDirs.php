@@ -24,5 +24,5 @@ namespace Sugar\blade;
  */
 function getDefaultViewDirs()
 {
-    return [realpath(__DIR__ . '/../../views/blade')];
+    return [realpath(__DIR__ . '/../../views')];
 }

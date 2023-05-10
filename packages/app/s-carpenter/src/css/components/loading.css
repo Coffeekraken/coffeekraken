@@ -10,7 +10,7 @@
 .s-carpenter-app_loading {
     position: absolute;
     top: 45%;
-    left: var(--s-carpenter-media-left);
+    left: calc(50% + var(--s-carpenter-viewport-offset-x, 0px));
     transform: translate(-50%, -50%);
 
     background: sugar.color(main, background);

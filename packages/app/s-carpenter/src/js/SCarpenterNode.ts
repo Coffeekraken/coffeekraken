@@ -40,12 +40,6 @@ export default class SCarpenterNode {
         return (
             this._uid ?? this._data?.uid ?? this.$node.getAttribute('s-node')
         );
-
-        // if (this._uid) {
-        //     return this._uid;
-        // }
-        // this._uid = this.$node.getAttribute('s-node');
-        // return this._uid;
     }
 
     _adapter: __SCarpenterNodeAdapter;
@@ -107,7 +101,7 @@ export default class SCarpenterNode {
         // check if the element is a new one
         if ($node.hasAttribute('is-new')) {
             $node.removeAttribute('is-new');
-            this.save();
+            // this.save();
         }
     }
 

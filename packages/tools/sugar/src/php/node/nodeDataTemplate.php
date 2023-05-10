@@ -56,6 +56,10 @@ function nodeDataTemplate($specs, $data)
     unset($data['_sharedDataFilePath']);
     unset($data['shared']);
     unset($data['request']);
+    unset($data['nodes']);
+    unset($data['page']);
+    unset($data['carpenter']);
+    unset($data['finalId']);
 
     // handle the "$source" property
     $source = (object) [];

@@ -148,11 +148,48 @@ export default class SCarpenterNodeAjaxAdapter extends __SCarpenterNodeAdapter {
         // keep the element id and the s-specs
         $newComponent.id = this.element.$elm.id;
 
+        // get all the containers
+        const containers = Array.from(
+            this.element.$elm.querySelectorAll('[s-container]') ?? [],
+        )
+            .filter(($container) => {
+                return $container.querySelector('[s-container]') === null;
+            })
+            .map(($container) => {
+                return {
+                    containerId: $container.getAttribute('s-container'),
+                    html: $container.innerHTML,
+                    $elm: $container,
+                };
+            });
+
         // @ts-ignore
         this.element.$elm.after($newComponent);
 
         // remove old element
         this.element.$elm.remove();
+
+        // restore "containers"
+        let lastContainer;
+        containers.forEach((container) => {
+            _console.log('id0', container.containerId);
+            const $container = $newComponent.querySelector(
+                `[s-container="${container.containerId}"]`,
+            );
+            _console.log('con', $container);
+
+            if (!$container && lastContainer) {
+                // put the content of the container inside the last one
+                lastContainer.$elm.innerHTML += container.html;
+                return;
+            }
+
+            $container.after(container.$elm);
+            $container.remove();
+
+            // update the lastContainer
+            lastContainer = container;
+        });
 
         // return the new node
         return $newNode;

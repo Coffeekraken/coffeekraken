@@ -618,6 +618,7 @@ class SFile extends __SClass implements ISFile {
     update() {
         // reset some variables
         this._content = undefined;
+        this._data = undefined;
 
         this.exists = __fs.existsSync(this.path);
         if (!this.exists) {

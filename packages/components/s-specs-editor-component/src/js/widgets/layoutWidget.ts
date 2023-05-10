@@ -3,6 +3,7 @@ import { html } from 'lit';
 import type { ISLayoutData } from '@specimen/types';
 
 import __SMedia from '@coffeekraken/s-media';
+import { __upperFirst } from '@coffeekraken/sugar/string';
 import type { ISSpecsEditorWidgetDeps } from '../SSpecsEditorWidget';
 import __SSpecsEditorWidget from '../SSpecsEditorWidget';
 
@@ -21,6 +22,7 @@ export default class SSpecsEditorComponentLayoutWidget extends __SSpecsEditorWid
         if (!this.values.media && this.propObj.default) {
             this.setDefault(this.propObj.default);
         }
+
         this._sMedia = new __SMedia();
     }
 
@@ -36,13 +38,27 @@ export default class SSpecsEditorComponentLayoutWidget extends __SSpecsEditorWid
                 ${this._sMedia.medias.map(
                     (media) => html`
                         ${this.renderLabel({
-                            title: media,
+                            title: `${__upperFirst(media)}${
+                                media === this._sMedia.defaultMedia
+                                    ? ' (default) '
+                                    : ''
+                            }`,
+                            description: `Set a layout for ${media}`,
                         })}
                         <div class="custom-select" tabindex="0">
                             <div class="custom-select_value">
-                                ${this._renderLayout(
-                                    values.media[media] ?? defaultLayout,
-                                )}
+                                ${!values.media[media]
+                                    ? html`
+                                          <p class="_same-as-default">
+                                              Same as
+                                              ${this._sMedia.defaultMedia}
+                                          </p>
+                                      `
+                                    : html`
+                                          ${this._renderLayout(
+                                              values.media[media],
+                                          )}
+                                      `}
                             </div>
                             <div class="custom-select_dropdown">
                                 ${this.propObj.layouts.map(
@@ -51,19 +67,6 @@ export default class SSpecsEditorComponentLayoutWidget extends __SSpecsEditorWid
                                             class="custom-select_item"
                                             tabindex="0"
                                             @pointerup=${(e) => {
-                                                let cells = values.cells;
-                                                const areasCount =
-                                                    this._sMedia.countAreas(
-                                                        layoutObj.layout,
-                                                    );
-                                                if (areasCount < cells.length) {
-                                                    for (
-                                                        let i = cells.length;
-                                                        i > areasCount;
-                                                        i--
-                                                    ) {}
-                                                }
-
                                                 this.mergeValue({
                                                     media: {
                                                         [media]: layoutObj,
@@ -95,7 +98,6 @@ export default class SSpecsEditorComponentLayoutWidget extends __SSpecsEditorWid
                 },
             );
         }
-
         return html`
             <style>
                 ${this._renderedLayouts[layoutObj.id].css}

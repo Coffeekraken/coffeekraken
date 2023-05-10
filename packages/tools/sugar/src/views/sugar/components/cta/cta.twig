@@ -1,7 +1,7 @@
-<a id="{{ id.value }}" class="s-cta s-btn s-color:{{ color.value[0].value }} {{ attributes.class }}" {{ __attrs(attributes, ['class'])|raw }}
+<a id="{{ id.value }}" class="s-cta s-btn s-color:{{ color.value.value }} {{ attributes.class }}" {{ __attrs(attributes, ['class'])|raw }}
     href="{{ link.url }}"
     {% if link.newWindow %} target="_blank" {% endif %}
-    color="{{ color.value[0].value }}"
+    color="{{ color.value.value }}"
     title="{{ link.title }}"
 >
     {{ link.text }}

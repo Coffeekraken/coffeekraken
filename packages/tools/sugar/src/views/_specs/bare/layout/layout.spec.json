@@ -6,8 +6,8 @@
     "default": {
         "container": true,
         "nodes": {
-            "1": "Hello",
-            "2": "World"
+            "1": "",
+            "2": ""
         },
         "gap": 30,
         "media": {

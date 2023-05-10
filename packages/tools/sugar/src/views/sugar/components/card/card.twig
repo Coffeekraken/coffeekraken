@@ -1,4 +1,4 @@
-<div id="{{ id.value }}" class="s-card {{ attributes.class }} {{ direction.value ? 's-card--' ~ direction.value : '' }} {{ __spacesClasses(spaces, frontspec) }}" {{ __attrs(attributes, ['class'])|raw }}
+<div id="{{ id.value }}" class="s-card {{ attributes.class }} {{ direction.value.value ? 's-card--' ~ direction.value.value : '' }} {{ __spacesClasses(spaces, frontspec) }}" {{ __attrs(attributes, ['class'])|raw }}
 >
 {{ __nodeDataTemplate('views.components.card', _context)|raw }}
 
@@ -8,7 +8,7 @@
         </div>
     {% endif %}
 
-    <div class="s-card_content s-spacing:{{ spacing.value ? spacing.value : '30' }}">
+    <div class="s-card_content s-spacing:{{ spacing.value.value ? spacing.value.value : '30' }}">
         {% if title.value %}
             <h1 class="s-card_title s-typo:h3">{{ title.value|raw }}</h1>
         {% endif %}

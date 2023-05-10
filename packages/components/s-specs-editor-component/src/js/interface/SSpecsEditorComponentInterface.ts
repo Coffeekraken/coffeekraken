@@ -88,6 +88,9 @@ export default class SSpecsEditorComponentInterface extends __SInterface {
                 description:
                     'Specify all the words/sentences that are used in the UI',
                 default: {
+                    saveButton: __i18n('Save', {
+                        id: 's-specs-editor.actions.saveButton',
+                    }),
                     image: {
                         copyUrl: __i18n('Copy image url', {
                             id: 's-specs-editor.image.copyUrl',
@@ -106,6 +109,7 @@ export default class SSpecsEditorComponentInterface extends __SInterface {
                 description:
                     'Specify some icons html used across the interface',
                 default: {
+                    save: '<i class="fa-solid fa-floppy-disk"></i>',
                     clear: '<i class="fa-solid fa-xmark"></i>',
                     add: '<i class="fa-solid fa-plus"></i>',
                     delete: '<i class="fa-regular fa-trash-can"></i>',

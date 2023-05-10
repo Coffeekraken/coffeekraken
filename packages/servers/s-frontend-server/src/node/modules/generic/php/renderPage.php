@@ -48,14 +48,8 @@ $renderRes = $viewRenderer->renderPage($pageFileJson, function ($node) use (
 ) {
     $filePath = $nodesDir . '/' . $node->uid . '.json';
 
-    // print '<pre>';
-    // print_r($node);
-
     if (!file_exists($filePath)) {
-        return (object) [
-            'specs' => 'views.bare.container',
-            'values' => [],
-        ];
+        return;
     }
 
     $data = json_decode(file_get_contents($filePath));
@@ -63,33 +57,3 @@ $renderRes = $viewRenderer->renderPage($pageFileJson, function ($node) use (
 });
 
 print \Sugar\html\expandPleasantCssClassnames($renderRes);
-
-// $loader = new \Twig\Loader\FilesystemLoader();
-// foreach ($params->rootDirs as $dir) {
-//     if (file_exists($dir)) {
-//         $loader->addPath($dir);
-//     }
-// }
-// $loader->addPath('/');
-// $twig = new \Twig\Environment($loader, [
-//     // 'cache' => $params->cacheDir . '/twig',
-//     'debug' => true,
-//     'cache' => false,
-// ]);
-// $twig->addExtension(new \Twig\Extension\DebugExtension());
-
-// // init twig with Sugar power
-// $twig = \Sugar\twig\initTwig($twig, $loader);
-
-// // ensure we send an array to the renderer
-// $data = \Sugar\convert\toArray($data);
-
-// try {
-//     $html = \Sugar\html\expandPleasantCssClassnames(
-//         $twig->render($params->viewPath, $data)
-//     );
-//     // $html = \Sugar\classname\patchHtml($html);
-//     print $html;
-// } catch (Exception $e) {
-//     print $e;
-// }

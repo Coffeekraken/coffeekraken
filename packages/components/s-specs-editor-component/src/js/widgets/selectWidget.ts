@@ -11,12 +11,9 @@ export default class SSpecsEditorComponentSelectWidget extends __SSpecsEditorWid
 
     constructor(deps: ISSpecsEditorWidgetDeps) {
         super(deps);
-
-        if (!this.values.value) {
-            this.values.value = [];
-        }
-
         this._select = new __SSelect(this.propObj, this.values);
+
+        _console.log('t', this.valuePath, this.values);
     }
 
     validate(newValues) {

@@ -8,20 +8,18 @@
     --s-carpenter-editor-bottom: var(--s-carpenter-editor-margin);
 
     --s-carpenter-media-bottom: sugar.margin(30);
-    --s-carpenter-media-left: 50vw;
+
+    --s-carpenter-viewport-width: 100%; /* this is overrided by the carpenter component depending on the selected media (mobile, etc...) */
+    --s-carpenter-viewport-max-width: 100%;
+    --s-carpenter-viewport-offset-x: 0px;
 }
 
-.s-carpenter--open,
-.s-carpenter-app--open {
-    --s-carpenter-media-left: calc(
-        50vw - var(--s-carpenter-editor-width) * 0.5 +
-            var(--s-carpenter-sidebar-width) * 0.5
+.s-carpenter--open {
+    --s-carpenter-viewport-offset-x: calc(
+        var(--s-carpenter-editor-width) * -0.5
     );
+}
 
-    @media (max-width: 550px) {
-        --s-carpenter-editor-width: calc(100vw - sugar.margin(30) * 2);
-        --s-carpenter-editor-bottom: 140px;
-
-        --s-carpenter-media-left: 50%;
-    }
+.s-carpenter--preview {
+    --s-carpenter-viewport-offset-x: 0px;
 }

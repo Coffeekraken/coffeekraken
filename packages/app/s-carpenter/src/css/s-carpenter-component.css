@@ -46,11 +46,11 @@ body:has(.s-carpenter_body) {
 }
 
 .s-carpenter_website-iframe {
-    left: 50%;
     position: absolute;
     top: 0;
-    left: var(--s-carpenter-media-left);
+    left: calc(50% + var(--s-carpenter-viewport-offset-x, 0px));
     width: var(--s-carpenter-viewport-width, 100%);
+    /* max-width: var(--s-carpenter-viewport-max-width, 100%); */
     transform: translateX(-50%);
     border-left: 1px solid sugar.color(main, --alpha 0.6);
     border-right: 1px solid sugar.color(main, --alpha 0.6);

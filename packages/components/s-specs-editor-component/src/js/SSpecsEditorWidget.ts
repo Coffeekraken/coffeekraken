@@ -318,7 +318,7 @@ export default class SSpecsEditorWidget {
     }
 
     hasErrors(): boolean {
-        if (this.status.pristine && this.editor.status.pristine) {
+        if (this.status.pristine && this.editor.state.status.pristine) {
             return false;
         }
         if (this.status.pristine) {

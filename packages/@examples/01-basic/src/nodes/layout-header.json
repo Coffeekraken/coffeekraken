@@ -1,0 +1,18 @@
+{
+    "uid": "layout-header",
+    "specs": "views.bare.layout",
+    "values": {
+        "container": true,
+        "gap": {
+            "value": 30
+        },
+        "media": {
+            "desktop": {
+                "id": "123",
+                "layout": "1 2 3"
+            }
+        },
+        "id": "s-4249e592-f19a-4650-bfa1-4496311a2b49",
+        "specs": "views.bare.layout"
+    }
+}

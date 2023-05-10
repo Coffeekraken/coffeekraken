@@ -52,7 +52,6 @@
     {% block head %}{% endblock %}
 
 </head>
-
 <body class="{{ bodyAttributes.class }} initial-loading loading" s-sugar {{ __attrs(bodyAttributes, ['class'])|raw }}>
     {% if page and page.uid %}
         {{ __pageDataTemplate(page)|raw }}

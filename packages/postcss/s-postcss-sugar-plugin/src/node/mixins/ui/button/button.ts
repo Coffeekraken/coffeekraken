@@ -223,6 +223,7 @@ export default function ({
                 background-color: sugar.color(current, --alpha 0);
                 border: sugar.color(current) solid sugar.theme(ui.button.borderWidth);
                 color: sugar.color(current) !important;
+                transition: sugar.theme(ui.button.transition);
 
                 &:hover {
                   background-color: sugar.color(current);
@@ -236,6 +237,7 @@ export default function ({
                   border: rgba(0,0,0,0) solid sugar.theme(ui.button.borderWidth);
                   color: sugar.color(current) !important;
                   box-shadow: none !important;
+                  transition: sugar.theme(ui.button.transition);
                 `);
                 break;
             case 'loading':
@@ -258,6 +260,7 @@ export default function ({
                   pointer-events: none !important;
           
                   img,
+                  i,
                   .s-icon,
                   svg {
                       display: none;
@@ -280,6 +283,7 @@ export default function ({
                   background-color: sugar.color(current);
                   border: sugar.color(current, border) solid sugar.theme(ui.button.borderWidth);
                   color: sugar.color(current, foreground) !important;
+                  transition: sugar.theme(ui.button.transition);
 
                   &:hover {
                     background-color: sugar.color(current, --darken 6);

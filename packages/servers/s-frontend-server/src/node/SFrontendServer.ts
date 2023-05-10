@@ -584,6 +584,7 @@ export default class SFrontendServer extends __SClass {
                 let pageConfig;
 
                 if (file.extension === 'json') {
+                    file.update?.();
                     pageConfig = file.data;
                 } else {
                     // @ts-ignore

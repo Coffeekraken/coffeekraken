@@ -59,6 +59,7 @@ export default class SSpecsEditorComponentInterface extends __SInterface {
             title: string;
             description: string;
             default: {
+                saveButton: string;
                 image: {
                     copyUrl: string;
                 };
@@ -72,6 +73,7 @@ export default class SSpecsEditorComponentInterface extends __SInterface {
             title: string;
             description: string;
             default: {
+                save: string;
                 clear: string;
                 add: string;
                 delete: string;

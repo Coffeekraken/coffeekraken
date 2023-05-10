@@ -90,12 +90,6 @@ export interface ISSpecsEditorComponentSetValueSettings {
     merge?: boolean;
 }
 
-export interface ISSpecsEditorStatus {
-    pristine: boolean;
-    valid: boolean;
-    unsaved: boolean;
-}
-
 export interface ISSpecsEditorComponentIconsProp {
     clear: string;
     add: string;
@@ -228,18 +222,17 @@ export default class SSpecsEditorComponent extends __SLitComponent {
         `;
     }
 
-    static state = {
-        actives: {},
-    };
-
-    status: ISSpecsEditorStatus = {
-        pristine: true,
-        valid: true,
-        unsaved: false,
-    };
+    static get state() {
+        return {
+            actives: {},
+            status: {
+                pristine: true,
+                saving: false,
+            },
+        };
+    }
 
     _isValid = true;
-    _isPristine = true;
     _widgets = {};
     _values;
 
@@ -346,7 +339,7 @@ export default class SSpecsEditorComponent extends __SLitComponent {
     }
 
     hasErrors(): boolean {
-        if (this.status.pristine) {
+        if (this.state.status.pristine) {
             return false;
         }
 
@@ -541,17 +534,23 @@ export default class SSpecsEditorComponent extends __SLitComponent {
      */
     save(force: boolean = false): void {
         // no more pristine....
-        this.status.pristine = false;
+        this.state.status.pristine = false;
 
-        // if (!force && this.hasErrors()) {
-        //     return this.requestUpdate();
-        // }
+        if (!force && this.hasErrors()) {
+            return this.requestUpdate();
+        }
 
+        // mark all widget as saved
         for (let [dotpath, widget] of Object.entries(this._widgets)) {
             widget.saved();
         }
 
         this.requestUpdate();
+
+        this.state.status.saving = 'success';
+        setTimeout(() => {
+            this.state.status.saving = false;
+        }, 1000);
 
         this.utils.dispatchEvent('save', {
             bubbles: true,
@@ -1248,7 +1247,9 @@ export default class SSpecsEditorComponent extends __SLitComponent {
                                                     class="_action _action-delete"
                                                     confirm="Confirm?"
                                                     @click=${() => {
-                                                        this.save();
+                                                        _console.log(
+                                                            'delete action to integrate',
+                                                        );
                                                     }}
                                                 >
                                                     ${unsafeHTML(
@@ -1262,15 +1263,26 @@ export default class SSpecsEditorComponent extends __SLitComponent {
                                                 <button
                                                     class="_action _action-save ${this.hasErrors()
                                                         ? 'error'
+                                                        : ''} ${this.state
+                                                        .status.saving ===
+                                                    'success'
+                                                        ? 'success'
+                                                        : this.state.status
+                                                              .saving
+                                                        ? 'loading'
                                                         : ''}"
                                                     @click=${() => {
                                                         this.save();
                                                     }}
-                                                    ?disabled=${!this._isValid}
+                                                    ?disabled=${!this
+                                                        ._isValid ||
+                                                    !this.hasUnsavedChanges()}
                                                 >
-                                                    ${__i18n('Save', {
-                                                        id: 's-specs-editor.actions.save',
-                                                    })}
+                                                    ${unsafeHTML(
+                                                        this.props.icons.save,
+                                                    )}
+                                                    ${this.props.i18n
+                                                        .saveButton}
                                                 </button>
                                             `
                                           : ''}

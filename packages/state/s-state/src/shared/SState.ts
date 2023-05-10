@@ -67,7 +67,7 @@ export interface ISStateSettings {
     save: boolean;
     adapter: ISStateAdapter;
     watchDeep: boolean;
-    exclude: String[];
+    excludeFromSave: String[];
 }
 
 export interface ISStateAdapter {
@@ -113,9 +113,9 @@ export default class SState extends __SClass {
         super(
             __deepMerge(
                 {
-                    watchDeep: false,
+                    watchDeep: true,
                     save: false,
-                    exclude: [],
+                    excludeFromSave: [],
                 },
                 settings ?? {},
             ),
@@ -164,7 +164,7 @@ export default class SState extends __SClass {
                         const stateToSave = JSON.parse(JSON.stringify(proxy));
 
                         // filter the excludes properties
-                        this.settings.exclude.forEach((prop) => {
+                        this.settings.excludeFromSave.forEach((prop) => {
                             delete stateToSave[prop];
                         });
 

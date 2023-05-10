@@ -306,7 +306,7 @@ export default function (api): IStorageConfig {
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             get nodesDir() {
-                return `${this.rootDir}/node`;
+                return `${this.rootDir}/nodes`;
             },
 
             /**
@@ -503,7 +503,7 @@ export default function (api): IStorageConfig {
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             get nodesDir() {
-                return `${this.rootDir}/node`;
+                return `${this.rootDir}/nodes`;
             },
 
             /**

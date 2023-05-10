@@ -486,7 +486,7 @@ export default class SComponentUtils extends __SClass {
             _state = new __SState(Object.assign({}, state), {
                 id: finalStateSettings.id,
                 save: finalStateSettings.save,
-                exclude: ['status'],
+                excludeFromSave: ['status'],
             });
         }
 

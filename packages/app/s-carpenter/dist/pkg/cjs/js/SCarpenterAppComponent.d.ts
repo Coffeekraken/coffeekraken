@@ -46,6 +46,10 @@ export interface ISCarpenterComponentEnpoints {
     nodes: string;
     pages: string;
 }
+export interface ISCarpenterStatus {
+    loading: boolean;
+    savingPage: boolean;
+}
 export interface ISCarpenterComponentProps {
     window: Window;
     features: ISCarpenterAppComponentFeatures;
@@ -84,6 +88,10 @@ export default class SCarpenterAppComponent extends __SLitComponent {
         activeMedia: any;
         isLoading: boolean;
         loadingStack: {};
+        status: {
+            loading: boolean;
+            savingPage: boolean;
+        };
         mode: string;
     };
     currentSpecs: any;

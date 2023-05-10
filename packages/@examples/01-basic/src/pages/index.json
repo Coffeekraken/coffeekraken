@@ -2,15 +2,52 @@
     "type": "page",
     "uid": "index",
     "name": "index",
-    "slug": ["/"],
     "scope": "repo",
+    "slug": ["/"],
     "nodes": [
         {
-            "uid": "main",
+            "uid": "root",
             "type": "container",
             "nodes": [
                 {
-                    "uid": ""
+                    "uid": "layout-header",
+                    "type": "node",
+                    "nodes": [
+                        {
+                            "uid": "area-1",
+                            "type": "container",
+                            "nodes": [
+                                {
+                                    "uid": "card-header-1",
+                                    "type": "node"
+                                }
+                            ]
+                        },
+                        {
+                            "uid": "area-2",
+                            "type": "container",
+                            "nodes": [
+                                {
+                                    "uid": "card-header-2",
+                                    "type": "node"
+                                },
+                                {
+                                    "uid": "card-plop",
+                                    "type": "node"
+                                }
+                            ]
+                        },
+                        {
+                            "uid": "area-3",
+                            "type": "container",
+                            "nodes": [
+                                {
+                                    "uid": "card-3",
+                                    "type": "node"
+                                }
+                            ]
+                        }
+                    ]
                 }
             ]
         }

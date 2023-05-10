@@ -2,6 +2,7 @@
     position: absolute;
     bottom: var(--s-carpenter-editor-bottom);
     right: var(--s-carpenter-editor-margin);
+    opacity: 1;
     @sugar.transition();
 
     .s-carpenter--open & {
@@ -11,6 +12,12 @@
         );
     }
 
+    .s-carpenter--preview & {
+        transform: translate(0, 200%);
+        opacity: 0;
+        pointer-events: none;
+    }
+
     ._save {
         @sugar.ui.button();
         @sugar.color (complementary);
@@ -18,6 +25,15 @@
 
         i {
             color: sugar.color(complementary, foreground);
+        }
+
+        &.success {
+            @sugar.color (success);
+        }
+
+        &.loading {
+            @sugar.ui.button ($lnf: loading);
+            @sugar.color (accent);
         }
     }
 }

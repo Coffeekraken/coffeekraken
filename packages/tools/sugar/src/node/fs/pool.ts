@@ -32,22 +32,23 @@ import __deepMerge from '../../shared/object/deepMerge';
  * @setting             {String[]}      [exclude=[]]            Specify some file(s), path(s) to exclude
  * @setting             {Boolean}       [watch=false]           Specify if you want to watch files or not
  * @setting             {IChokidarSettings}     [chokidar={}]       Specify some settings to pass to chokidar in order to watch files
+ * @setting             {Number}            [changeInterval=300]        Specify an interval to wait between two "change" event. If multiple change occured in this time frame, only 1 change will be emitted
  *
  * @event       ready       Emitted when the pool is ready
  * @event       add         Emitted when a new file has been added
  * @event       change      Emitted when a file has been changed
  * @event       update      Alias of the "change" event
  * @event       unlink      Emitted when a file has been deleted
- * 
+ *
  * @snippet             __pool($1)
  * const pool = __pool($1).on('file', file => {
  *      $2
- * }).on('update', file => {
+ * }).on('change', file => {
  *      $3
  * });
  * await pool.ready; // wait for pool to be ready
  * // pool.cancel();
- * 
+ *
  * @example         js
  * import { __pool } from '@coffeekraken/sugar/fs';
  * const myPool = __pool('/something/cool/** /*', {
@@ -56,7 +57,7 @@ import __deepMerge from '../../shared/object/deepMerge';
  * __pool.on('file', file => {
  *      // do something with each files
  * })
- * __pool.on('update', (file) => {
+ * __pool.on('change', (file) => {
  *      // do something with updated files
  * });
  * // when you want to stop your pool watching process
@@ -72,6 +73,7 @@ export interface IPoolSettings {
     exclude: string[];
     watch: boolean;
     chokidar: Partial<IChokidarSettings>;
+    changeInterval: number;
     [key: string]: any;
 }
 
@@ -107,6 +109,7 @@ export default function __pool(input, settings?: Partial<IPoolSettings>) {
                     cwd: process.cwd(),
                     watch: false,
                     chokidar: {},
+                    changeInterval: 300,
                     exclude: [],
                     ignored: ['**/node_modules/**/*', '**/.git/**/*'],
                 },
@@ -134,6 +137,9 @@ export default function __pool(input, settings?: Partial<IPoolSettings>) {
                 ignored: [...set.ignored, ...(set.exclude ?? [])],
             });
 
+            // track the status of each files
+            const statusStack = {};
+
             watcher
                 .on('add', (path) => {
                     if (
@@ -152,6 +158,14 @@ export default function __pool(input, settings?: Partial<IPoolSettings>) {
                     emit('add', filesStack[path]);
                 })
                 .on('change', (path) => {
+                    if (statusStack[path] === 'change') {
+                        return;
+                    }
+                    statusStack[path] = 'change';
+                    setTimeout(() => {
+                        delete statusStack[path];
+                    }, set.changeInterval);
+
                     if (!__fs.existsSync(`${set.cwd}/${path}`)) return;
                     if (!filesStack[path]) {
                         if (set.SFile)
@@ -161,7 +175,6 @@ export default function __pool(input, settings?: Partial<IPoolSettings>) {
                         else filesStack[path] = path;
                     }
                     emit('change', filesStack[path]);
-                    emit('update', filesStack[path]);
                 })
                 .on('unlink', (path) => {
                     // @ts-ignore

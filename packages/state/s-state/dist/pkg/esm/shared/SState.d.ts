@@ -6,7 +6,7 @@ export interface ISStateSettings {
     save: boolean;
     adapter: ISStateAdapter;
     watchDeep: boolean;
-    exclude: String[];
+    excludeFromSave: String[];
 }
 export interface ISStateAdapter {
     save(id: string, state: any): Promise<void> | void;

@@ -200,13 +200,23 @@ class SViewRenderer
                 $nodes = [];
                 if (isset($node->nodes)) {
                     foreach ($node->nodes as $i => $n) {
-                        $nodes[$i] = $renderNodes([$i => $n], $renderNodes);
+                        $nodes[isset($n->uid) ? $n->uid : $i] = $renderNodes(
+                            [$i => $n],
+                            $renderNodes
+                        );
                     }
                 }
 
                 // load the node data. See @specimen/specimen ISRenderableNode type
                 if (is_callable($nodeLoader)) {
                     $renderableNode = $nodeLoader($node);
+                }
+
+                if ($node->type == 'container') {
+                    $renderableNode = (object) [
+                        'specs' => 'sugar.views.bare.nude',
+                        'values' => [],
+                    ];
                 }
 
                 if (!isset($renderableNode->specs)) {

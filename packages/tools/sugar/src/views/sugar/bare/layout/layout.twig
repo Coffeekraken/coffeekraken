@@ -3,7 +3,9 @@
     {% set finalId = 's-layout-' ~ __uniqid() %}
 {% endif %}
 <div id="{{ finalId }}" class="{{ attributes.class }} {{ __spacesClasses(spaces, frontspec) }}" {{ __attrs(attributes, ['class'])|raw }}>
-    {{ __nodeDataTemplate('sugar.views.bare.layout', _context)|raw }}
+    {% set filteredContext = _context %}
+    {% set filteredContext = filteredContext|filter((v, k) => k != 'nodes') %}
+    {{ __nodeDataTemplate(specs ? specs : 'sugar.views.bare.layout', filteredContext)|raw }}
     {% set layoutCssRes = __layoutCss(media ? media : '1', {
         selector: '#' ~ finalId ~ '-layout'
     }) %}
@@ -17,12 +19,22 @@
             {% if html %}
                 {{ html|raw }}
             {% elseif nodes %}
+                {% set drawedAreas = [] %}
                 {% for areaId, html in nodes %}
-                    <div class="s-layout_area-{{ areaId }}" s-container="area-{{ areaId }}">
+                    <div class="s-layout_area-{{ areaId }}" s-container="area-{{ areaId|replace({
+                        'area-': ''
+                    }) }}">
                         {% if html %}
                             {{ html|raw }}
                         {% endif %}
                     </div>
+                    {% set drawedAreas = drawedAreas|merge([areaId, areaId|replace({'area-': ''})]) %}
+                {% endfor %}
+                {% for areaId in layoutCssRes.areas %}
+                    {% if areaId in drawedAreas %}
+                    {% else %}
+                        <div class="s-layout_area-{{ areaId }}" s-container="area-{{ areaId }}"></div>
+                    {% endif %}
                 {% endfor %}
             {% else %}
                 <p>You MUST pass at least some "nodes" or raw "html" for your layout...</p>

@@ -132,6 +132,11 @@ class SMedia
             (array) $settings
         );
 
+        // handle layout object like that have "id" and/or "layout" properties
+        if (isset($layout['layout'])) {
+            $layout = $layout['layout'];
+        }
+
         // handle array or object passed
         if (is_object($layout) or is_array($layout)) {
             $layout = (array) $layout;

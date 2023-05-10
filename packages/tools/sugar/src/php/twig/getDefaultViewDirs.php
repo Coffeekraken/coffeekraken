@@ -24,5 +24,5 @@ namespace Sugar\twig;
  */
 function getDefaultViewDirs()
 {
-    return [realpath(__DIR__ . '/../../views/twig')];
+    return [realpath(__DIR__ . '/../../views')];
 }

@@ -13,4 +13,10 @@
     @sugar.transition();
     @sugar.border.radius (30);
     @sugar.depth (100);
+
+    .s-carpenter--preview & {
+        transform: translate(0, 200%);
+        opacity: 0;
+        pointer-events: none;
+    }
 }

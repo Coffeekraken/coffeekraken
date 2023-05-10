@@ -310,10 +310,10 @@ export default class SMedia extends __SClass {
                 defaultAction = this._media.defaultAction;
             }
 
-            const queries = sortedMedia.queries;
+            const queries = this._media.queries;
             const keys = Object.keys(queries);
 
-            const orderedLayouts = [];
+            const orderedLayouts = {};
 
             keys.forEach((media) => {
                 if (layout[media]) {

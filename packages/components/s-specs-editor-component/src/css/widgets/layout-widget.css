@@ -3,14 +3,14 @@
         gap: sugar.margin(10);
     }
 
-    .custom-select {
-        margin-block-end: sugar.margin(30);
+    ._same-as-default {
+        text-align: center;
+        color: sugar.color(main, text, --alpha 0.3);
+        padding: sugar.padding(20);
     }
 
-    .custom-select_item:nth-child(even) {
-        /* ._area {
-            background: sugar.color(complementary, surface);
-        } */
+    .custom-select {
+        margin-block-end: sugar.margin(30);
     }
 
     .custom-select_item:hover {
@@ -28,7 +28,7 @@
 
     .custom-select_value {
         ._area {
-            background: sugar.color(accent);
+            background: sugar.color(accent, --alpha 0.3);
             color: sugar.color(accent, foreground);
         }
     }
@@ -46,7 +46,21 @@
 }
 
 .custom-select {
+    @sugar.ui.input;
+    cursor: pointer;
     position: relative;
+    --padding-inline: sugar.padding(ui.form.paddingInline);
+    background-repeat: no-repeat;
+    background-image: linear-gradient(
+            45deg,
+            transparent 50%,
+            sugar.color(current) 50%
+        ),
+        linear-gradient(135deg, sugar.color(current) 50%, transparent 50%);
+    background-position: right calc(var(--padding-inline) + 5px) top 50%,
+        right var(--padding-inline) top 50%;
+    background-size: sugar.scalable(5px) sugar.scalable(5px),
+        sugar.scalable(5px) sugar.scalable(5px);
 
     &:focus,
     &:focus-within {
@@ -67,7 +81,7 @@
     }
 }
 .custom-select_value {
-    @sugar.ui.input;
+    padding-inline-end: sugar.padding(20);
 }
 .custom-select_dropdown {
     position: absolute;

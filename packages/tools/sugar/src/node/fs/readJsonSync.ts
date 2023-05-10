@@ -13,7 +13,7 @@ import __fs from 'fs';
  * @return      {Object}                            The readed json
  *
  * @snippet         __readJsonSync($1)
- * 
+ *
  * @example         js
  * import { __readJsonSync } from '@coffeekraken/sugar/fs';
  * __readJsonSync('my-cool-json/file.json');
@@ -22,9 +22,9 @@ import __fs from 'fs';
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 
-const _cache = {};
+// const _cache = {};
 export default function __readJsonSync(path: string): any {
-    if (_cache[path]) return _cache[path];
+    // if (_cache[path]) return _cache[path];
     if (!__fs.existsSync(path)) {
         throw new Error(
             `<red>[readJsonSync]</red> Sorry but the passed file path "<cyan>${path}</cyan>" does not exists...`,
@@ -33,6 +33,6 @@ export default function __readJsonSync(path: string): any {
 
     const jsonStr = __fs.readFileSync(path, 'utf8').toString();
     const json = JSON.parse(jsonStr);
-    _cache[path] = json;
+    // _cache[path] = json;
     return json;
 }

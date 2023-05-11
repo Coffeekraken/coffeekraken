@@ -3,7 +3,7 @@
     "specs": "views.components.card",
     "values": {
         "title": {
-            "value": "Card title"
+            "value": "Card title geerg§"
         },
         "intro": {
             "value": "Lorem ipsum dolor sit amet, dolor laboris cupidatat cupidatat laboris velit ex adipisicing enim do"
@@ -12,15 +12,13 @@
             "value": "Lorem ipsum dolor sit amet, aute ipsum duis tempor incididunt sint est irure magna amet est elit ad ipsum laborum cupidatat cupidatat minim sint occaecat"
         },
         "direction": {
-            "value": [
-                {
-                    "id": "vertical",
-                    "value": "vertical"
-                }
-            ]
+            "value": {
+                "id": "vertical",
+                "value": "vertical"
+            }
         },
         "image": {
-            "url": "https://picsum.photos/1600/900"
+            "url": "https://picsum.photos/1600/900?fwefwef"
         },
         "spacing": {
             "id": "20",
@@ -30,6 +28,7 @@
             "color": {
                 "value": {
                     "id": "accent",
+                    "name": "Accent",
                     "value": "accent"
                 }
             },
@@ -41,6 +40,13 @@
         },
         "id": {
             "value": "s-90ce6e36-70e5-4279-b919-c58ef5036252"
+        },
+        "spaces": {
+            "media": {
+                "wide": {
+                    "marginBottom": 70
+                }
+            }
         }
     }
 }

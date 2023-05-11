@@ -38,6 +38,7 @@
     ._logo {
         width: 100%;
         transform: scale(0.8);
+        cursor: pointer;
         @sugar.transition fast;
 
         svg {
@@ -72,7 +73,49 @@
     flex-direction: column;
     width: 100%;
 
+    .s-tooltip {
+        white-space: nowrap;
+    }
+
     ._query {
+        aspect-ratio: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        @sugar.border.radius;
+        @sugar.transition fast;
+
+        &:hover,
+        &.is-active {
+            i {
+                color: sugar.color(main, foreground);
+            }
+        }
+        &:hover {
+            background: sugar.color(main, hover);
+        }
+        &:active {
+            background: sugar.color(main, active);
+        }
+        &.is-active {
+            background: sugar.color(main);
+        }
+    }
+}
+
+.s-carpenter-app_modes {
+    background: sugar.color(main, background) !important;
+    border-bottom-left-radius: sugar.border.radius();
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+
+    .s-tooltip {
+        white-space: nowrap;
+    }
+
+    ._mode {
         aspect-ratio: 1;
         display: flex;
         align-items: center;

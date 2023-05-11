@@ -435,9 +435,7 @@ export default class SCarpenterAppComponent extends __SLitComponent {
 
                 const $toolbar = document.createElement('div');
                 $toolbar.setAttribute('s-carpenter-website-ui', 'true');
-                $toolbar.classList.add(
-                    this.utils.cls('_website-container-toolbar'),
-                );
+                $toolbar.classList.add(this.utils.cls('_toolbar-container'));
 
                 const $addFiltrableInputContainer =
                     document.createElement('label');
@@ -462,6 +460,7 @@ export default class SCarpenterAppComponent extends __SLitComponent {
                 $elm._sCarpenterContainer = $container;
             },
             {
+                once: true,
                 rootNode: this._$websiteDocument,
             },
         );
@@ -522,13 +521,12 @@ export default class SCarpenterAppComponent extends __SLitComponent {
                 });
                 // restore mode
                 this._setMode(currentMode);
-            }
-        });
-
-        // "ctrl+i" to change mode
-        $scope.addEventListener('keyup', (e) => {
-            if (e.key === 'i' && e.ctrlKey) {
-                this._setMode(this.state.mode === 'insert' ? 'edit' : 'insert');
+            } else if (e.key === 'i') {
+                this._setMode('insert');
+            } else if (e.key === 'e') {
+                this._setMode('edit');
+            } else if (e.key === 'm') {
+                this._setMode('move');
             }
         });
     }
@@ -569,12 +567,13 @@ export default class SCarpenterAppComponent extends __SLitComponent {
 
         // create the toolbar element
         this._initToolbar();
+        this._initToolbarPositioning();
 
         // listen for toolbar actions
         this._listenToolbarActions();
 
         // watch for hover on carpenter elements
-        this._watchHoverOnNodes();
+        this._initMoveMode();
 
         // prevent default links behaviors
         this._preventExternalLinksBehaviors();
@@ -1024,12 +1023,21 @@ export default class SCarpenterAppComponent extends __SLitComponent {
     /**
      * Set the edit/insert mode
      */
-    _setMode(mode: 'edit' | 'insert'): void {
+    _setMode(mode: 'edit' | 'insert' | 'move'): void {
+        // protect agains switchingg to a none authorized mode
+        if (!this.props.features[mode]) {
+            return;
+        }
         // apply the mode on the website body inside the iframe
-        this._$websiteDocument.body.classList.remove(
-            this.utils.cls(`--${this.state.mode}`),
-        );
-        this._$websiteDocument.body.classList.add(this.utils.cls(`--${mode}`));
+        const $bodies = [
+            this._$editorDocument?.body,
+            this._$websiteDocument?.body,
+            this._$rootDocument.body,
+        ];
+        $bodies.forEach(($body) => {
+            $body?.classList?.remove(`s-carpenter--${this.state.mode}`);
+            $body?.classList?.add(`s-carpenter--${mode}`);
+        });
 
         // set the mode in state
         this.state.mode = mode;
@@ -1105,19 +1113,226 @@ export default class SCarpenterAppComponent extends __SLitComponent {
         });
     }
 
+    _solidColorImage(
+        color: string,
+        width: number,
+        height: number,
+    ): HTMLCanvasElement {
+        const drawingCanvas = document.createElement('canvas');
+        let context = drawingCanvas.getContext('2d');
+        context.canvas.width = width;
+        context.canvas.height = height;
+        let pixSize = 1;
+        for (let i = 0; i < height; i++) {
+            for (let j = 0; j < width; j++) {
+                context.fillStyle = color; // assumes the data is in #hex format already.
+                context.fillRect(j * pixSize, i * pixSize, pixSize, pixSize);
+            }
+        }
+        drawingCanvas.style.position = 'absolute';
+        drawingCanvas.style.left = '200vw';
+        return drawingCanvas;
+    }
+
     /**
      * Watch hover on specs element to position the toolbar
      */
-    _watchHoverOnNodes() {
+    _initMoveMode() {
+        let $draggedElm;
+
+        __querySelectorLive(
+            '[s-container]',
+            ($container) => {
+                $container.addEventListener('dragenter', (e) => {
+                    e.stopPropagation();
+                    e.preventDefault();
+                });
+                $container.addEventListener('dragover', (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                });
+                $container.addEventListener('dragleave', (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                });
+                $container.addEventListener('drop', (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+
+                    // remove drag classes
+                    $draggedElm?.classList.remove('drag');
+
+                    e.currentTarget.appendChild($draggedElm);
+                });
+            },
+            {
+                rootNode: this._$websiteDocument.body,
+            },
+        );
+
         __querySelectorLive(
             `[s-node][s-specs]`,
             ($node) => {
-                // add node class
-                $node.parentNode.classList.add(this.utils.cls('_node'));
+                // get the parent element that is actually the
+                // element to move
+                const $elm = $node.parentNode;
 
-                $node.parentNode.addEventListener('pointerover', (e) => {
+                // add node class
+                $elm.classList.add(this.utils.cls('_node'));
+
+                $elm.setAttribute('draggable', 'true');
+                let $preview;
+                $preview = document.createElement('div');
+                $preview.classList.add(this.utils.cls('_drag-preview'));
+                $elm.addEventListener('dragstart', (e) => {
+                    // stop the propagation
+                    e.stopPropagation();
+
+                    // set the dragged element
+                    $draggedElm = $elm;
+
+                    // add drag classes
+                    $elm.classList.add('drag');
+                    const $bodies = [
+                        this._$editorDocument?.body,
+                        this._$websiteDocument?.body,
+                        this._$rootDocument.body,
+                    ];
+                    $bodies.forEach(($body) => {
+                        $body.classList.add('s-carpenter--drag');
+                    });
+
+                    // create the preview
+                    const bounds = $elm.getBoundingClientRect();
+                    $preview.style.width = `${bounds.width}px`;
+                    $preview.style.height = `${bounds.height}px`;
+                    document.body.appendChild($preview);
+                    e.dataTransfer.setDragImage(
+                        $preview,
+                        e.clientX - bounds.left,
+                        e.clientY - bounds.top,
+                    );
+                });
+
+                $elm.addEventListener('drop', (e) => {
+                    e.stopPropagation();
+                    e.preventDefault();
+
+                    // remove drag classes
+                    $draggedElm.classList.remove('drag');
+
+                    // remove all the drag related classes
+                    e.currentTarget.classList.remove(
+                        'drag-x-before',
+                        'drag-x-after',
+                        'drag-y-before',
+                        'drag-y-after',
+                    );
+
+                    // check the mouse position over the element
+                    const bounds = $elm.getBoundingClientRect();
+                    // if (e.clientX - bounds.left > bounds.width * 0.5) {
+                    //     $elm.classList.remove('drag-x-before');
+                    //     $elm.classList.add('drag-x-after');
+                    // } else {
+                    //     $elm.classList.add('drag-x-before');
+                    //     $elm.classList.remove('drag-x-after');
+                    // }
+                    if (e.clientY - bounds.top > bounds.height * 0.5) {
+                        e.currentTarget.after($draggedElm);
+                    } else {
+                        e.currentTarget.before($draggedElm);
+                    }
+
+                    const $bodies = [
+                        this._$editorDocument?.body,
+                        this._$websiteDocument?.body,
+                        this._$rootDocument.body,
+                    ];
+                    $bodies.forEach(($body) => {
+                        $body.classList.remove('s-carpenter--drag');
+                    });
+
+                    // remove the preview
+                    $preview.remove?.();
+                });
+
+                $elm.addEventListener('dragend', (e) => {
+                    // stop propagation
+                    e.stopPropagation();
+                    e.preventDefault();
+                });
+
+                $node.addEventListener('dragover', (e) => {
+                    // stop propagation
+                    e.stopPropagation();
+                    e.preventDefault();
+
+                    // prevent dragging into itself
+                    if ($draggedElm?.contains(e.target)) {
+                        return;
+                    }
+
+                    // check the mouse position over the element
+                    const bounds = $elm.getBoundingClientRect();
+                    // if (e.clientX - bounds.left > bounds.width * 0.5) {
+                    //     $elm.classList.remove('drag-x-before');
+                    //     $elm.classList.add('drag-x-after');
+                    // } else {
+                    //     $elm.classList.add('drag-x-before');
+                    //     $elm.classList.remove('drag-x-after');
+                    // }
+                    if (e.clientY - bounds.top > bounds.height * 0.5) {
+                        $elm.classList.remove('drag-y-before');
+                        $elm.classList.add('drag-y-after');
+                    } else {
+                        $elm.classList.add('drag-y-before');
+                        $elm.classList.remove('drag-y-after');
+                    }
+                });
+                $elm.addEventListener('dragenter', (e) => {
+                    e.stopPropagation();
+                    e.preventDefault();
+
+                    // prevent dragging into itself
+                    // if ($draggedElm?.contains(e.target)) {
+                    //     return;
+                    // }
+                });
+                $elm.addEventListener('dragleave', (e) => {
+                    // stop propagation
+                    e.stopPropagation();
+                    e.preventDefault();
+
+                    // remove all the drag related classes
+                    e.currentTarget.classList.remove(
+                        'drag-x-before',
+                        'drag-x-after',
+                        'drag-y-before',
+                        'drag-y-after',
+                    );
+                });
+            },
+            {
+                rootNode: this._$websiteDocument.body,
+            },
+        );
+    }
+
+    /**
+     * Watch hover on specs element to position the toolbar
+     */
+    _initToolbarPositioning() {
+        __querySelectorLive(
+            `[s-node][s-specs]`,
+            ($node) => {
+                // get the parent element that is actually the
+                // element to move
+                const $elm = $node.parentNode;
+
+                $elm.addEventListener('pointerover', (e) => {
                     // add hover class
-                    e.currentTarget.classList.add('hover');
+                    $elm.classList.add('hover');
 
                     e.stopPropagation();
 
@@ -1130,16 +1345,16 @@ export default class SCarpenterAppComponent extends __SLitComponent {
 
                     // position toolbar
                     this._setToolbarTitleAndPosition(
-                        e.currentTarget,
+                        $elm,
                         __upperFirst(element.specs.split('.').pop()),
                     );
 
                     // set the "pre" activate element
                     this._preselectedNode = element;
                 });
-                $node.parentNode.addEventListener('pointerout', (e) => {
+                $elm.addEventListener('pointerout', (e) => {
                     // remove hover class
-                    e.currentTarget.classList.remove('hover');
+                    $elm.classList.remove('hover');
                 });
             },
             {
@@ -1205,7 +1420,7 @@ export default class SCarpenterAppComponent extends __SLitComponent {
             return this._$toolbar;
         }
         const $toolbar = this._$websiteDocument.createElement('div');
-        $toolbar.classList.add('s-carpenter-website-toolbar');
+        $toolbar.classList.add(this.utils.cls('_toolbar'));
         $toolbar.setAttribute('s-carpenter-website-ui', 'true');
         this._$toolbar = $toolbar;
 
@@ -2076,26 +2291,46 @@ export default class SCarpenterAppComponent extends __SLitComponent {
                           </ul>
                       `
                     : ''}
-                ${this.props.features?.insert
-                    ? html`
-                          <label class="_modes s-tooltip-container">
-                              <input
-                                  type="checkbox"
-                                  class="_switch"
-                                  .checked=${this.state.mode === 'insert'}
-                                  ?checked=${this.state.mode === 'insert'}
-                                  @change=${(e) => {
-                                      this._setMode(
-                                          e.target.checked ? 'insert' : 'edit',
-                                      );
-                                  }}
-                              />
-                              <div class="s-tooltip:right s-white-space:nowrap">
-                                  ${unsafeHTML(this.props.i18n.modeToggle)}
-                              </div>
-                          </label>
-                      `
-                    : ''}
+
+                <ul class="${this.utils.cls('_modes')}">
+                    <li
+                        tabindex="0"
+                        @pointerup=${() => {
+                            this._setMode('edit');
+                        }}
+                        class="s-tooltip-container ${this.state.mode === 'edit'
+                            ? 'is-active'
+                            : ''} _mode"
+                    >
+                        ${unsafeHTML(this.props.icons.edit)}
+                        <div class="s-tooltip:right">Edit (e)</div>
+                    </li>
+                    <li
+                        tabindex="0"
+                        @pointerup=${() => {
+                            this._setMode('insert');
+                        }}
+                        class="s-tooltip-container ${this.state.mode ===
+                        'insert'
+                            ? 'is-active'
+                            : ''} _mode"
+                    >
+                        ${unsafeHTML(this.props.icons.insert)}
+                        <div class="s-tooltip:right">Insert (i)</div>
+                    </li>
+                    <li
+                        tabindex="0"
+                        @pointerup=${() => {
+                            this._setMode('move');
+                        }}
+                        class="s-tooltip-container ${this.state.mode === 'move'
+                            ? 'is-active'
+                            : ''} _mode"
+                    >
+                        ${unsafeHTML(this.props.icons.move)}
+                        <div class="s-tooltip:right">Move (m)</div>
+                    </li>
+                </ul>
             </nav>
 
             ${this._page

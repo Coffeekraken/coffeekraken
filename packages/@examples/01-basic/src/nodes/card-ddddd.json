@@ -1,9 +1,9 @@
 {
-    "uid": "card-3",
+    "uid": "card-ddddd",
     "specs": "views.components.card",
     "values": {
         "title": {
-            "value": "Card title ege"
+            "value": "Card title wefef"
         },
         "intro": {
             "value": "Lorem ipsum dolor sit amet, dolor laboris cupidatat cupidatat laboris velit ex adipisicing enim do"
@@ -39,7 +39,14 @@
             }
         },
         "id": {
-            "value": "s-eccb0729-e78d-48e6-a62e-9bbca3867ff8"
+            "value": "s-69a66767-c33d-4256-8d4b-7df5f7717b14"
+        },
+        "spaces": {
+            "media": {
+                "wide": {
+                    "marginBottom": 70
+                }
+            }
         }
     }
 }

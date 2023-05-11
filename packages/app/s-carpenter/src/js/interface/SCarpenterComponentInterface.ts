@@ -261,6 +261,8 @@ export default class SCarpenterComponentInterface extends __SInterface {
                 type: 'Object',
                 description: 'Specify some icons html to be used across the UI',
                 default: {
+                    insert: '<i class="fa-solid fa-plus"></i>',
+                    move: '<i class="fa-solid fa-up-down-left-right"></i>',
                     menu: '<i class="fa-solid fa-ellipsis"></i>',
                     component: '<i class="fa-solid fa-puzzle-piece"></i>',
                     delete: '<i class="fa-regular fa-trash-can"></i>',

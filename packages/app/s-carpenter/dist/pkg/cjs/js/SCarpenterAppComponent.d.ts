@@ -147,7 +147,7 @@ export default class SCarpenterAppComponent extends __SLitComponent {
     
     _defineAddComponentFiltrableInput(): void;
     
-    _setMode(mode: 'edit' | 'insert'): void;
+    _setMode(mode: 'edit' | 'insert' | 'move'): void;
     
     getElementFromDomNode($node: HTMLElement): __SCarpenterNode;
     
@@ -155,8 +155,11 @@ export default class SCarpenterAppComponent extends __SLitComponent {
     applyComponent(values?: any): Promise<void>;
     
     _listenSpecsEditorEvents(): void;
+    _solidColorImage(color: string, width: number, height: number): HTMLCanvasElement;
     
-    _watchHoverOnNodes(): void;
+    _initMoveMode(): void;
+    
+    _initToolbarPositioning(): void;
     
     _handleScrolledClassOnEditor(): void;
     

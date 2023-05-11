@@ -19,7 +19,6 @@
             justify-content: center;
             color: sugar.color(main, text, --alpha 0.4);
             position: absolute;
-            /* z-index: -1; */
             bottom: 0;
             left: 50%;
             background: transparent;
@@ -84,7 +83,7 @@
         }
     }
 
-    .s-carpenter-app_website-container-toolbar {
+    .s-carpenter-app_toolbar-container {
         position: absolute;
         z-index: 9999;
         left: 50%;
@@ -155,7 +154,7 @@
     }
 }
 
-.s-carpenter-app--edit [s-container] {
+.s-carpenter--edit [s-container] {
     > *:not(.s-carpenter-app_website-container, svg):not(
             :has(+ .s-carpenter-app_website-container)
         ) {
@@ -178,7 +177,7 @@
     }
 }
 
-.s-carpenter-app--insert [s-container] {
+.s-carpenter--insert [s-container] {
     > *:not(.s-carpenter-app_website-container, svg):not(
             :has(+ .s-carpenter-app_website-container)
         ) {
@@ -199,4 +198,15 @@
             height: calc(100px - 40px);
         }
     }
+}
+
+[s-container='root'] {
+    @sugar.transition;
+}
+.s-carpenter--move [s-container='root'] {
+    transform: scale(0.5);
+}
+.s-carpenter--move .s-carpenter-app_toolbar {
+    opacity: 0 !important;
+    pointer-events: none !important;
 }

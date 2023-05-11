@@ -68,9 +68,6 @@ export default function ({
                 pointer-events: none;
                 width: 100%;
             }
-                
-            opacity: 1;
-            pointer-events: all;
         `);
     }
 

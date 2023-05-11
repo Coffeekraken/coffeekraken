@@ -15,18 +15,18 @@
     @sugar.border.radius;
 }
 
-[s-specs]:is(:not(:has(> [uid])), .unsaved) {
+*:has(> template[s-node]) {
     position: relative;
 }
 
-[s-specs]:is(:not(:has(> [uid])), .unsaved) template[uid] {
+template[s-node] {
     display: block;
-    pointer-events: none;
+    /* pointer-events: none; */
 
     &:before {
         content: '';
         position: absolute;
-        z-index: 200;
+        /* z-index: 1; */
         top: 0;
         left: 0;
         width: 100%;
@@ -38,30 +38,122 @@
     }
 
     &:after {
+        content: '';
         display: inline-block;
-        content: 'This component does not have an "id" specified and will not be available in the carpenter editor...';
         position: absolute;
-        z-index: 200;
-        width: auto;
-        height: auto;
+        /* z-index: 200; */
         top: 0;
         left: 0;
-        right: auto;
-        bottom: auto;
-        white-space: nowrap;
-        /* transform: translate(-50%, -50%); */
-        background: transparent;
-        color: sugar.color(error, foreground);
-        padding: sugar.padding(30);
+        border: 0px solid transparent;
+        background: none;
+        @sugar.transition;
         @sugar.border.radius;
     }
 }
-[s-specs].unsaved template[uid] {
+
+.unsaved > template[s-node] {
     &:before {
         border: 4px solid sugar.color(accent);
     }
     &:after {
         background: sugar.color(accent);
+        padding: sugar.padding(20);
         content: 'Unsaved changes';
+    }
+}
+
+/* .s-carpenter-app_node:not(
+        .s-carpenter-app_node:has(.s-carpenter-app_node:active)
+    ):active {
+    > * {
+    }
+} */
+
+.s-carpenter-app_drag-preview {
+    background-color: sugar.color(complementary, --alpha 0.5);
+    position: absolute;
+    left: 200vw;
+    pointer-events: none;
+}
+
+.s-carpenter--drag {
+    /* [s-container] {
+        position: relative;
+
+        &:after {
+            content: '';
+            display: block;
+            position: absolute;
+            pointer-events: none;
+            z-index: 10;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: sugar.color(accent, --alpha 0.02);
+            border: 1px dashed sugar.color(accent, --alpha 0.3);
+        }
+
+        &:has(.s-carpenter-app_node[class*='drag-y-']) {
+            &:after {
+                background: sugar.color(accent, --alpha 0.05);
+            }
+        }
+    } */
+
+    template[s-node] {
+        &:before {
+            opacity: 0;
+        }
+        &:after {
+            transition: none !important;
+            display: block;
+            top: -200px;
+            left: 0;
+            width: 100%;
+            height: calc(100% + 400px);
+            background: rgba(255, 255, 255, 0.001);
+        }
+    }
+}
+
+.s-carpenter--move .s-carpenter-app_node {
+    @sugar.transition;
+
+    &.drag {
+        opacity: 0.3;
+        z-index: 0;
+    }
+
+    &.drag-y-before {
+        transform: translateY(200px);
+
+        & ~ .s-carpenter-app_node {
+            transform: translateY(200px);
+        }
+    }
+    &.drag-y-after {
+        & ~ .s-carpenter-app_node {
+            transform: translateY(200px);
+        }
+    }
+}
+
+.s-carpenter--drag .s-carpenter-app_node {
+    pointer-events: all !important;
+}
+
+.s-carpenter--move:not(.s-carpenter--drag) .s-carpenter-app_node {
+    pointer-events: none;
+}
+.s-carpenter--move template[s-node] {
+    pointer-events: all;
+    cursor: move;
+
+    &:before {
+        background: sugar.color(complementary, --alpha 0);
+    }
+    &:hover:before {
+        background: sugar.color(complementary, --alpha 0.2);
     }
 }

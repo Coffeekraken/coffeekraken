@@ -1,9 +1,9 @@
 {
-    "uid": "card-3",
+    "uid": "card-wwwwwwww",
     "specs": "views.components.card",
     "values": {
         "title": {
-            "value": "Card title ege"
+            "value": "Card title"
         },
         "intro": {
             "value": "Lorem ipsum dolor sit amet, dolor laboris cupidatat cupidatat laboris velit ex adipisicing enim do"
@@ -37,9 +37,6 @@
                 "url": "https://google.com",
                 "title": "Click me!"
             }
-        },
-        "id": {
-            "value": "s-eccb0729-e78d-48e6-a62e-9bbca3867ff8"
         }
     }
 }

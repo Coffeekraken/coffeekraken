@@ -152,6 +152,8 @@ export default class SCarpenterComponentInterface extends __SInterface {
             type: string;
             description: string;
             default: {
+                insert: string;
+                move: string;
                 menu: string;
                 component: string;
                 delete: string;

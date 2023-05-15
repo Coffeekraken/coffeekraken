@@ -76,6 +76,7 @@ export interface ISSpecsEditorComponentRenderLabelSettings {
     tooltip?: 'top' | 'left' | 'right' | 'bottom';
     title?: string;
     description?: string;
+    required: boolean;
 }
 
 export interface ISSpecsEditorComponentGetValueSettings {
@@ -437,32 +438,52 @@ export default class SSpecsEditorComponent extends __SLitComponent {
         return value;
     }
 
+    _nonePathValues: any = {};
     getWidget(
         type: string,
-        path: string[],
+        pathOrCallback: string[] | Function,
         propObj: any,
         settings?: ISSpeceEditorWidgetSettings,
     ): any {
-        const valuePath = path.filter((l) => l !== 'props');
+        let path: string[],
+            callback: Function,
+            values: any,
+            valuePath: string[];
 
-        let values = __get(this._values, valuePath);
-        if (!values) {
-            values = __set(
-                this._values,
-                valuePath,
-                {},
-                {
-                    preferAssign: true,
-                },
-            );
-        } else if (!__isPlainObject(values)) {
-            console.error(
-                `<red>[SSpecsEditorComponent]</red> It seems that your value "<cyan>${valuePath.join(
-                    '.',
-                )}</cyan>" is a <yellow>${typeof values}</yellow> but it MUST be an object according to the following specs and values:`,
-            );
-            console.warn(propObj, values);
-            return;
+        if (typeof pathOrCallback === 'function') {
+            callback = pathOrCallback;
+        } else {
+            path = pathOrCallback;
+        }
+
+        // when we have passed a value path
+        if (path) {
+            valuePath = path.filter((l) => l !== 'props');
+            values = __get(this._values, valuePath);
+
+            if (!values) {
+                values = __set(
+                    this._values,
+                    valuePath,
+                    {},
+                    {
+                        preferAssign: true,
+                    },
+                );
+            } else if (!__isPlainObject(values)) {
+                console.error(
+                    `<red>[SSpecsEditorComponent]</red> It seems that your value "<cyan>${valuePath.join(
+                        '.',
+                    )}</cyan>" is a <yellow>${typeof values}</yellow> but it MUST be an object according to the following specs and values:`,
+                );
+                console.warn(propObj, values);
+                return;
+            }
+        } else {
+            if (!this._nonePathValues[propObj.id]) {
+                this._nonePathValues[propObj.id] = {};
+            }
+            values = this._nonePathValues[propObj.id];
         }
 
         let widgetId = values.id;
@@ -496,7 +517,7 @@ export default class SSpecsEditorComponent extends __SLitComponent {
             values,
             source: __get(this.props.source?.values ?? {}, valuePath),
             propObj,
-            path,
+            pathOrCallback,
             valuePath,
             settings: finalSettings,
         });
@@ -727,8 +748,10 @@ export default class SSpecsEditorComponent extends __SLitComponent {
         return html`
             <span>
                 <h3 class="_title">
-                    ${finalSettings.title ?? propObj.title ?? propObj.id}
-                    ${propObj.required
+                    ${unsafeHTML(
+                        finalSettings.title ?? propObj.title ?? propObj.id,
+                    )}
+                    ${finalSettings.required || propObj.required
                         ? html` <span class="_required">*</span> `
                         : ''}
                 </h3>
@@ -791,10 +814,14 @@ export default class SSpecsEditorComponent extends __SLitComponent {
         }
     }
 
-    renderWidget(propObj, path, settings?: ISSpecsEditorRenderSettings) {
+    renderWidget(
+        propObj,
+        pathOrCallback: string[] | Function,
+        settings?: ISSpecsEditorRenderSettings,
+    ) {
         const type =
                 propObj.widget?.toLowerCase?.() ?? propObj.type.toLowerCase(),
-            widget = this.getWidget(type, path, propObj, {});
+            widget = this.getWidget(type, pathOrCallback, propObj, {});
 
         return html`
             ${widget?.render
@@ -827,10 +854,22 @@ export default class SSpecsEditorComponent extends __SLitComponent {
                   </div>`
                 : ''}
             ${widget?.hasErrors() && !widget.canBeOverride()
-                ? this.renderError(propObj, path, widget.lastError)
+                ? this.renderError(
+                      propObj,
+                      Array.isArray(pathOrCallback)
+                          ? pathOrCallback
+                          : [propObj.id],
+                      widget.lastError,
+                  )
                 : ''}
             ${widget?.hasWarnings()
-                ? this.renderWarning(propObj, path, widget.lastWarning)
+                ? this.renderWarning(
+                      propObj,
+                      Array.isArray(pathOrCallback)
+                          ? pathOrCallback
+                          : [propObj.id],
+                      widget.lastWarning,
+                  )
                 : ''}
         `;
     }
@@ -843,9 +882,9 @@ export default class SSpecsEditorComponent extends __SLitComponent {
             return this._renderRepeatableProps(propObj, path);
         }
 
-        if (typeLower === 'object' && propObj.props) {
-            return this.renderProps(propObj, path, settings);
-        }
+        // if (typeLower === 'object' && propObj.props) {
+        //     return this.renderProps(propObj, path, settings);
+        // }
 
         return html`
             <div
@@ -1112,6 +1151,10 @@ export default class SSpecsEditorComponent extends __SLitComponent {
                 return this.renderProp(specs, path, finalSettings);
             }
 
+            if (this.constructor.widgetMap[specs.type.toLowerCase()]) {
+                return this.renderProp(specs, path, finalSettings);
+            }
+
             return html`
                 ${Object.keys(specs.props).map((prop) => {
                     const propObj = specs.props[prop],
@@ -1119,7 +1162,10 @@ export default class SSpecsEditorComponent extends __SLitComponent {
                             .filter((l) => l !== 'props')
                             .join('-');
 
-                    if (propObj.props) {
+                    if (
+                        propObj.props &&
+                        propObj.type?.toLowerCase() === 'object'
+                    ) {
                         return html`
                             <div class="${this.utils.cls('_child')}">
                                 <div class="${this.utils.cls('_child-metas')}">

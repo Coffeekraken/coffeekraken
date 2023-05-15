@@ -13,23 +13,25 @@
         margin-block-end: sugar.margin(30);
     }
 
+    .custom-select_item {
+        ._same-as-default {
+            border: 1px solid sugar.color(main, border);
+            @sugar.border.radius;
+        }
+    }
+
     .custom-select_item:hover {
         background: sugar.color(accent, surface);
+
+        ._same-as-default {
+            background-color: sugar.color(main, background);
+            border-color: sugar.color(main, background);
+            color: sugar.color(accent, surface);
+        }
 
         ._area {
             background: sugar.color(accent, foreground);
             color: sugar.color(accent, surface);
-        }
-    }
-
-    .custom-select_item:active {
-        background: sugar.color(accent, surface, --darken 5);
-    }
-
-    .custom-select_value {
-        ._area {
-            background: sugar.color(accent, --alpha 0.3);
-            color: sugar.color(accent, foreground);
         }
     }
 
@@ -43,11 +45,19 @@
         color: sugar.color(main, foreground);
         @sugar.border.radius;
     }
+
+    .custom-select_item.active,
+    .custom-select_value {
+        ._area {
+            background: sugar.color(accent, --alpha 0.3);
+            color: sugar.color(accent, foreground);
+        }
+    }
 }
 
 .custom-select {
     @sugar.ui.input;
-    cursor: pointer;
+    cursor: pointer !important;
     position: relative;
     --padding-inline: sugar.padding(ui.form.paddingInline);
     background-repeat: no-repeat;

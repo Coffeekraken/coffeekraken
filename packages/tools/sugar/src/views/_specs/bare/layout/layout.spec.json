@@ -9,7 +9,14 @@
             "1": "",
             "2": ""
         },
-        "gap": 30,
+        "gap": {
+            "id": "30",
+            "value": "30"
+        },
+        "spacing": {
+            "id": "50",
+            "value": "50"
+        },
         "media": {
             "desktop": {
                 "id": "12",
@@ -163,6 +170,9 @@
             "layout": "1 _ 2 _ 3 _ 4 _ 5"
         }
     ],
+    "gap": "@sugar.views.props.space",
+    "spacing": "@sugar.views.props.spacing",
+    "spaces": "@sugar.views.props.spaces",
     "examples": {
         "twig": {
             "title": "Twig",

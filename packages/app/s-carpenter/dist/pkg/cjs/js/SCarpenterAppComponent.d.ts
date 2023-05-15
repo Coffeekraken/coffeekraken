@@ -5,6 +5,7 @@ import __SCarpenterPageAdapter from './SCarpenterPageAdapter';
 import __SCarpenterNode from './SCarpenterNode';
 import type { ISSpecsEditorComponentSource } from '@coffeekraken/s-specs-editor-component';
 import __define from './defineApp';
+export type TSCarpenterAppComponentMode = 'edit' | 'insert' | 'move';
 export interface ISCarpenterAppComponentIconsProp {
     mobile: string;
     tablet: string;
@@ -121,14 +122,20 @@ export default class SCarpenterAppComponent extends __SLitComponent {
     constructor();
     mount(): Promise<void>;
     
+    _confirmExit(): void;
+    
     _loadScopes(): Promise<void>;
     
     _loadSpecs(): Promise<void>;
     firstUpdated(): Promise<void>;
     
+    hasUnsavedChanges(): boolean;
+    
     _initWebsiteContainers(): void;
     
-    _registerShortcuts($scope: Document): void;
+    _registerKeyboardShortcuts($scope: Document): void;
+    
+    _registerMouseShortcutsInWebsite(): void;
     
     _initWebsiteIframeContent(): void;
     
@@ -147,7 +154,9 @@ export default class SCarpenterAppComponent extends __SLitComponent {
     
     _defineAddComponentFiltrableInput(): void;
     
-    _setMode(mode: 'edit' | 'insert' | 'move'): void;
+    isMode(mode: TSCarpenterAppComponentMode): boolean;
+    
+    _setMode(mode: TSCarpenterAppComponentMode): void;
     
     getElementFromDomNode($node: HTMLElement): __SCarpenterNode;
     
@@ -156,6 +165,7 @@ export default class SCarpenterAppComponent extends __SLitComponent {
     
     _listenSpecsEditorEvents(): void;
     _solidColorImage(color: string, width: number, height: number): HTMLCanvasElement;
+    _removeAllDragClasses(): void;
     
     _initMoveMode(): void;
     

@@ -3,7 +3,7 @@
     "specs": "views.components.card",
     "values": {
         "title": {
-            "value": "Card title"
+            "value": "Card title egrgergq"
         },
         "intro": {
             "value": "Lorem ipsum dolor sit amet, dolor laboris cupidatat cupidatat laboris velit ex adipisicing enim do"
@@ -37,6 +37,9 @@
                 "url": "https://google.com",
                 "title": "Click me!"
             }
+        },
+        "id": {
+            "value": "s-8ecb9953-ad0e-4cd0-8d4e-d308d068cc62"
         }
     }
 }

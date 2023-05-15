@@ -88,6 +88,10 @@
     }
 }
 
+body:not(.s-carpenter--edit) .s-carpenter-app_toolbar {
+    display: none !important;
+}
+
 body:has(.s-carpenter-app_node.hover) .s-carpenter-app_toolbar,
 .s-carpenter-app_toolbar:hover {
     opacity: 1;

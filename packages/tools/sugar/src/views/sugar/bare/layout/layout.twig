@@ -15,13 +15,13 @@
     {% if container %}
         <div class="s-container:{{ container }}">
     {% endif %}
-        <div class="s-layout {{ gap ? 's-gap:' ~ gap : '' }}" id="{{ finalId }}-layout">
+        <div class="s-layout {{ gap.value ? 's-gap:' ~ gap.value : '' }}" id="{{ finalId }}-layout">
             {% if html %}
                 {{ html|raw }}
             {% elseif nodes %}
                 {% set drawedAreas = [] %}
                 {% for areaId, html in nodes %}
-                    <div class="s-layout_area-{{ areaId }}" s-container="area-{{ areaId|replace({
+                    <div class="s-layout_area-{{ areaId }} {{ spacing.value ? 's-spacing:' ~ spacing.value : '' }}" s-container="area-{{ areaId|replace({
                         'area-': ''
                     }) }}">
                         {% if html %}
@@ -33,7 +33,7 @@
                 {% for areaId in layoutCssRes.areas %}
                     {% if areaId in drawedAreas %}
                     {% else %}
-                        <div class="s-layout_area-{{ areaId }}" s-container="area-{{ areaId }}"></div>
+                        <div class="s-layout_area-{{ areaId }} {{ spacing.value ? 's-spacing:' ~ spacing.value : '' }}" s-container="area-{{ areaId }}"></div>
                     {% endif %}
                 {% endfor %}
             {% else %}

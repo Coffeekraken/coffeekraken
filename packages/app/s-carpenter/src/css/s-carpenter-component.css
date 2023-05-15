@@ -131,19 +131,34 @@ body:has(.s-carpenter_body) {
     z-index: 99999;
     top: 50%;
     left: 50%;
+    width: 400px;
     transform: scale(1) translate(-50%, -50%);
     transform-origin: 0 0;
     background: none;
     animation: s-carpenter-popin-in 0.3s cubic-bezier(0.725, -0.21, 0.055, 1.26)
         forwards;
+    box-shadow: 0 0 100vw 100vw rgba(0, 0, 0, 0.5);
 
     ._inner {
         background-color: sugar.color(main, background);
-        padding: sugar.padding(50) sugar.padding(60);
         text-align: center;
-        @sugar.border.radius;
+        @sugar.border.radius (30);
         @sugar.depth (100);
-        perspective: 1200px;
+    }
+
+    ._picture {
+        padding: sugar.padding(20);
+        width: 100%;
+        aspect-ratio: 21/9;
+        overflow: hidden;
+        @sugar.border.radius (30);
+
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            @sugar.border.radius (30);
+        }
     }
 
     ._picto {
@@ -152,8 +167,10 @@ body:has(.s-carpenter_body) {
     }
 
     ._logo {
+        padding: sugar.padding(40);
         display: flex;
-        align-items: start;
+        align-items: center;
+        justify-content: center;
         gap: sugar.margin(20);
         /* margin-block-end: sugar.margin(30); */
 

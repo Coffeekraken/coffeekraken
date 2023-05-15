@@ -36,7 +36,6 @@ export default function __delete(
     if (Array.isArray(dotpath)) {
         dotpath = dotpath.join('.');
     }
-    p;
 
     if (!dotpath || dotpath === '' || dotpath === '.') return object;
     dotpath = dotpath.replace(/\[(\w+)\]/g, '.$1');

@@ -1,0 +1,15 @@
+{
+    "uid": "separator-asdfasd",
+    "specs": "views.sections.separator",
+    "values": {
+        "title": {
+            "value": "Separator title"
+        },
+        "id": {
+            "value": "s-36491c62-60e4-4f99-af05-a89f1d8e544c"
+        },
+        "image": {
+            "url": "/tmp/upload/1000_F_524438877_PZFzwc5OWJ3MTWQVFfHKwu1DRVMaSgPx-3414.jpg"
+        }
+    }
+}

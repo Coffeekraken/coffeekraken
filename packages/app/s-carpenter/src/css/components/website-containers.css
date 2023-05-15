@@ -1,48 +1,29 @@
 [s-container] {
     position: relative;
+    @sugar.transition fast;
 
-    /* > *:not(.s-carpenter-app_website-container, svg):not(
-            :has(+ .s-carpenter-app_website-container)
-        ) { */
-
-    > *:not(.s-carpenter-app_website-container, svg):not(
-            :has(+ .s-carpenter-app_website-container)
-        ) {
-        margin-bottom: 0;
-        position: relative;
-        /* transition: margin-bottom 0.3s ease-in-out; */
-
-        &:after {
-            content: 'Add components/sections here...';
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: sugar.color(main, text, --alpha 0.4);
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            background: transparent;
-            width: calc(100% - 40px);
-            max-width: sugar.container.width();
-            opacity: 0;
-            transform: translate(-50%, calc(100% + 80px));
-            border: 1px dashed sugar.color(main, border);
-            background: sugar.color(main, --alpha 0.1);
-            @sugar.transition;
-
-            [s-container] & {
-                width: 100%;
-            }
-        }
+    &.drag-over {
+        background: sugar.color(accent, --alpha 0.1);
     }
 
-    .s-carpenter-app_website-container {
+    > * {
+        @sugar.transition;
+        margin-bottom: 0;
+    }
+
+    .s-carpenter-app_website-add-component {
         position: relative;
         display: flex;
         z-index: 100;
         align-items: center;
-        pointer-events: none;
+        justify-content: center;
+        height: 200px;
         @sugar.transition;
+
+        > * {
+            opacity: 0;
+            pointer-events: none;
+        }
 
         &:hover,
         &:focus,
@@ -54,6 +35,13 @@
                 pointer-events: all;
             }
         }
+    }
+
+    > * > template[s-node] + template {
+        display: block;
+        position: absolute;
+        width: 100%;
+        height: 100%;
 
         &:after {
             content: 'Add components/sections here...';
@@ -61,63 +49,30 @@
             align-items: center;
             justify-content: center;
             color: sugar.color(main, text, --alpha 0.4);
-            opacity: 0;
             position: absolute;
-            top: 80px;
+            top: calc(100% + 50px);
             left: 50%;
             width: calc(100% - 40px);
+            height: 0;
             max-width: sugar.container.width();
-            transform: translate(-50%, 0);
-            border: 1px dashed sugar.color(main, border);
+            transform: translateX(-50%);
+            border: 0px dashed sugar.color(main, border);
             background: sugar.color(main, --alpha 0.1);
+            overflow: hidden;
+            @sugar.font.size (40);
             @sugar.transition;
 
             [s-container] & {
                 width: 100%;
             }
         }
-        &:hover:after {
-            color: sugar.color(main, text, --alpha 0);
-            border: 1px dashed sugar.color(accent, border);
-            background: sugar.color(accent, --alpha 0.1);
-        }
     }
 
-    .s-carpenter-app_toolbar-container {
-        position: absolute;
-        z-index: 9999;
-        left: 50%;
-        top: 0;
-        transform: translate(-50%, 0);
-        background: sugar.color(main, background);
-        color: sugar.color(main, text);
-        display: flex;
-        padding: sugar.padding(20);
-        flex-wrap: nowrap;
-        align-items: center;
-        cursor: pointer;
-        user-select: none;
-        pointer-events: none;
-        opacity: 0;
+    .s-carpenter-app_add-component-container {
+        background-color: transparent !important;
         @sugar.border.radius (30);
         @sugar.depth (100);
         @sugar.transition;
-
-        &:after {
-            content: ' ';
-            position: absolute;
-            border-style: default;
-            border-color: sugar.color(main, background) transparent transparent
-                transparent;
-            top: 100%;
-            left: 50%;
-            margin-left: -12.5px;
-            border-width: calc(25px / 2);
-        }
-    }
-
-    .s-carpenter-app_website-container-add {
-        @sugar.ui.button();
     }
 
     .s-carpenter-app-add-component {
@@ -126,17 +81,76 @@
 
         ._group {
             @sugar.ui.inputcontainer ($lnf: group);
-        }
-        ._icon {
-            background: sugar.color(main, surface, --darken 3);
-            border: 1px solid sugar.color(main, border);
-            border-right: none;
-            padding: sugar.padding(30);
+
+            ._icon {
+                display: flex;
+                padding: sugar.padding(30);
+                justify-content: center;
+                align-items: center;
+                aspect-ratio: 1;
+                background: sugar.color(complementary, --lighten 20);
+                @sugar.border.radius;
+
+                i {
+                    color: sugar.color(complementary, foreground);
+                }
+            }
         }
 
         ._item {
             font-weight: bold;
             white-space: nowrap;
+            display: flex;
+            align-items: center;
+            gap: sugar.margin(30);
+
+            ._preview {
+                width: 150px;
+                aspect-ratio: 4/3;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+
+                img {
+                    display: block;
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                }
+
+                svg {
+                    width: 60px !important;
+                    height: 60px !important;
+                    opacity: 0.3;
+
+                    [fill] {
+                        fill: sugar.color(complementary);
+                    }
+                    [stroke] {
+                        stroke: sugar.color(complementary);
+                    }
+                }
+            }
+
+            ._icon {
+                padding-block: sugar.padding(10);
+
+                svg {
+                    width: 60px !important;
+                    height: 60px !important;
+                    opacity: 0.3;
+
+                    [fill] {
+                        fill: sugar.color(complementary);
+                    }
+                    [stroke] {
+                        stroke: sugar.color(complementary);
+                    }
+                }
+            }
+        }
+
+        ._metas {
         }
 
         ._title {
@@ -154,55 +168,60 @@
     }
 }
 
-.s-carpenter--edit [s-container] {
-    > *:not(.s-carpenter-app_website-container, svg):not(
-            :has(+ .s-carpenter-app_website-container)
-        ) {
-        margin-bottom: 0;
+body.s-carpenter--preview .s-carpenter-app_website-add-component,
+body:not(.s-carpenter--insert) .s-carpenter-app_website-add-component {
+    height: 0 !important;
+    display: none !important;
+}
 
+.s-carpenter--insert:not(.s-carpenter--preview) [s-container] {
+    gap: 0;
+
+    > *:not(.s-carpenter-app_website-add-component) {
+        margin-bottom: 200px !important;
+    }
+
+    .s-carpenter-app_website-add-component {
+        margin-top: -200px;
+    }
+
+    &:has(> .s-carpenter-app_website-add-component:first-child:last-child) {
         &:after {
-            height: 0;
-            opacity: 0;
+            content: 'Add components/sections here...';
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: sugar.color(main, text, --alpha 0.4);
+            position: absolute;
+            top: 50px;
+            left: 50%;
+            width: calc(100% - 40px);
+            height: 100px;
+            max-width: sugar.container.width();
+            transform: translateX(-50%);
+            border: 1px dashed sugar.color(main, border);
+            background: sugar.color(main, --alpha 0.1);
+            @sugar.font.size (40);
+            @sugar.transition;
+
+            [s-container] & {
+                width: 100%;
+            }
+        }
+
+        .s-carpenter-app_website-add-component {
+            margin-top: 0;
         }
     }
 
-    .s-carpenter-app_website-container {
-        height: 0;
-        pointer-events: none;
-
+    > * > template[s-node] + template {
         &:after {
-            opacity: 0;
-            height: 0;
+            height: 100px;
+            border: 1px dashed sugar.color(main, border);
         }
     }
 }
 
-.s-carpenter--insert [s-container] {
-    > *:not(.s-carpenter-app_website-container, svg):not(
-            :has(+ .s-carpenter-app_website-container)
-        ) {
-        margin-bottom: 200px;
-
-        &:after {
-            height: calc(100px - 40px);
-            opacity: 1;
-        }
-    }
-
-    .s-carpenter-app_website-container {
-        height: 200px;
-        pointer-events: all;
-
-        &:after {
-            opacity: 1;
-            height: calc(100px - 40px);
-        }
-    }
-}
-
-[s-container='root'] {
-    @sugar.transition;
-}
 .s-carpenter--move [s-container='root'] {
     transform: scale(0.5);
 }

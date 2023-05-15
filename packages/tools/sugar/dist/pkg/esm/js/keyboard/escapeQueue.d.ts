@@ -1,9 +1,11 @@
 import __SPromise from '@coffeekraken/s-promise';
 
 export interface IEscapeQueueSettings {
+    id?: string;
     rootNode?: HTMLElement | Document | HTMLElement[] | Document[];
 }
 export interface IEscapeQueueItem {
+    id: string;
     callback?: Function;
     resolve: Function;
 }

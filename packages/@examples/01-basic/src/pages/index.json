@@ -18,11 +18,11 @@
                             "type": "container",
                             "nodes": [
                                 {
-                                    "uid": "card-header-1",
+                                    "uid": "card-header-2",
                                     "type": "node"
                                 },
                                 {
-                                    "uid": "card-header-2",
+                                    "uid": "card-plop",
                                     "type": "node"
                                 }
                             ]
@@ -32,15 +32,11 @@
                             "type": "container",
                             "nodes": [
                                 {
-                                    "uid": "card-3",
-                                    "type": "node"
-                                },
-                                {
-                                    "uid": "card-wwwwwwww",
-                                    "type": "node"
-                                },
-                                {
                                     "uid": "card-plop-1",
+                                    "type": "node"
+                                },
+                                {
+                                    "uid": "card-ddddd",
                                     "type": "node"
                                 }
                             ]
@@ -50,11 +46,41 @@
                             "type": "container",
                             "nodes": [
                                 {
-                                    "uid": "card-ddddd",
+                                    "uid": "card-wwwwwwww",
                                     "type": "node"
                                 },
                                 {
-                                    "uid": "card-plop",
+                                    "uid": "card-3",
+                                    "type": "node"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "uid": "layout-aaa",
+                    "type": "node",
+                    "nodes": [
+                        {
+                            "uid": "area-1",
+                            "type": "container",
+                            "nodes": [
+                                {
+                                    "uid": "card-aws",
+                                    "type": "node"
+                                }
+                            ]
+                        },
+                        {
+                            "uid": "area-2",
+                            "type": "container",
+                            "nodes": [
+                                {
+                                    "uid": "separator-asdfasd",
+                                    "type": "node"
+                                },
+                                {
+                                    "uid": "card-asasas",
                                     "type": "node"
                                 }
                             ]

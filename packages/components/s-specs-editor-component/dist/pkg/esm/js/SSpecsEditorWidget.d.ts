@@ -28,16 +28,18 @@ export interface ISSpecsEditorWidgetValidateResult {
 }
 export interface ISSpecsEditorWidgetDeps {
     editor: __SSpecsEditorComponent;
-    path: string[];
+    pathOrCallback: string[] | Function;
     values: any;
     source: any;
     propObj: any;
     settings: ISSpecsEditorWidgetSettings;
 }
 export default class SSpecsEditorWidget {
+    id: string;
     editor: __SSpecsEditorComponent;
     propObj: any;
     path: string[];
+    callback: Function;
     valuePath: string[];
     settings: ISSpecsEditorWidgetSettings;
     status: ISSpeceEditorWidgetStatus;
@@ -51,6 +53,7 @@ export default class SSpecsEditorWidget {
     get values(): any;
     get noneResponsiveValue(): any;
     saved(): void;
+    clearValue(path?: string[] | string): void;
     resetValue(): void;
     mergeValue(value: any, settings?: ISSpecsEditorWidgetSetValueSettings): void;
     override(): void;
@@ -59,6 +62,7 @@ export default class SSpecsEditorWidget {
     setValue(value: any, settings?: ISSpecsEditorWidgetSetValueSettings): Promise<void>;
     _validate(values?: any): ISSpecsEditorWidgetValidateResult;
     renderLabel(settings?: ISSpecsEditorComponentRenderLabelSettings): any;
+    renderWidget(propObj: any, callback: Function): any;
     renderInlineInput(settings: ISSpecsEditorWidgetInlineLabel): any;
     validate(values: any): ISSpecsEditorWidgetValidateResult;
     hasUnsavedChanges(): boolean;

@@ -15,7 +15,6 @@
             sugar.color(main, surface, --alpha 0),
             sugar.color(main, --alpha 0.2)
         );
-        max-width: 500px;
 
         &--horizontal {
             max-width: 1280px;

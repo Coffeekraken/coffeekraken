@@ -21,12 +21,10 @@
 
 template[s-node] {
     display: block;
-    /* pointer-events: none; */
 
     &:before {
         content: '';
         position: absolute;
-        /* z-index: 1; */
         top: 0;
         left: 0;
         width: 100%;
@@ -41,7 +39,6 @@ template[s-node] {
         content: '';
         display: inline-block;
         position: absolute;
-        /* z-index: 200; */
         top: 0;
         left: 0;
         border: 0px solid transparent;
@@ -77,30 +74,6 @@ template[s-node] {
 }
 
 .s-carpenter--drag {
-    /* [s-container] {
-        position: relative;
-
-        &:after {
-            content: '';
-            display: block;
-            position: absolute;
-            pointer-events: none;
-            z-index: 10;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: sugar.color(accent, --alpha 0.02);
-            border: 1px dashed sugar.color(accent, --alpha 0.3);
-        }
-
-        &:has(.s-carpenter-app_node[class*='drag-y-']) {
-            &:after {
-                background: sugar.color(accent, --alpha 0.05);
-            }
-        }
-    } */
-
     template[s-node] {
         &:before {
             opacity: 0;
@@ -125,7 +98,7 @@ template[s-node] {
         z-index: 0;
     }
 
-    &.drag-y-before {
+    /* &.drag-y-before {
         transform: translateY(200px);
 
         & ~ .s-carpenter-app_node {
@@ -136,7 +109,7 @@ template[s-node] {
         & ~ .s-carpenter-app_node {
             transform: translateY(200px);
         }
-    }
+    } */
 }
 
 .s-carpenter--drag .s-carpenter-app_node {

@@ -95,22 +95,6 @@ export default function __deepProxy(
     function makeHandler(path) {
         return {
             set(target, key, value) {
-                // protect agains set loop
-                // if (!_loopTimeout.has(target)) {
-                //     _loopTimeout.set(target, {});
-                // }
-
-                // const dotpath = [...path, key].join('.');
-                // const timeouts = _loopTimeout.get(target);
-                // if (timeouts[dotpath]) {
-                //     _console.log('Timeout', dotpath);
-                //     return true;
-                // }
-                // timeouts[dotpath] = true;
-                // setTimeout(() => {
-                //     delete timeouts[dotpath];
-                // });
-
                 // stop here if revoked of does not handle set
                 if (isRevoked || !settings.handleSet) return true;
 

@@ -11,9 +11,6 @@
         border-left: sugar.margin(10) solid
             sugar.color(complementary, --alpha 0.05);
     }
-    .s-specs-editor_prop + .s-specs-editor_child {
-        /* margin-block-start: sugar.margin(40); */
-    }
 }
 .s-specs-editor_child-metas {
 }

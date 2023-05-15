@@ -394,7 +394,6 @@ class SDescriptor extends __SClass implements ISDescriptor {
                 const ruleSettings =
                     ruleObj.settings !== undefined ? ruleObj.settings : {};
                 // check if the rule accept this type of value
-                // _console.log('AAA', propName, value, params);
                 // if (ruleObj.accept && __isOfType(value, ruleObj.accept) !== true)
                 //   return;
                 // console.log('CC', propName, value, params);

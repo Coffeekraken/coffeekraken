@@ -30,20 +30,6 @@ export default class SSpecsEditorComponentImageWidget extends __SSpecsEditorWidg
                                       this.setValue({
                                           url: e.detail[0].url,
                                       });
-
-                                      //   if (
-                                      //       this.isResponsive() &&
-                                      //       this.editor.isDefaultMedia()
-                                      //   ) {
-                                      //       _console.log('SET');
-                                      //       this.setValue(
-                                      //           <ISImageData>e.detail[0].url,
-                                      //           {
-                                      //               path: 'url',
-                                      //               noneResponsive: true,
-                                      //           },
-                                      //       );
-                                      //   }
                                   }}
                               ></s-dropzone>
                           `

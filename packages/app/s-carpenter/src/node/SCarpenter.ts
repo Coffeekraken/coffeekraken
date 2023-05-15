@@ -109,7 +109,7 @@ class SCarpenter extends __SClass {
             );
             specsArray.forEach((specs) => {
                 const specsJson = specs.read({
-                    metas: false,
+                    metas: true,
                 });
                 finalSpecs[specs.dotpath] = specsJson;
             });
@@ -222,11 +222,18 @@ class SCarpenter extends __SClass {
     async initOnExpressServer(expressServer: any): Promise<void> {
         // load the specs files
         const allSpecs = await this.loadSpecs();
+        const allSpecsWithoutMetas = {};
+        for (let [key, obj] of Object.entries(allSpecs)) {
+            allSpecsWithoutMetas[key] = {
+                ...obj,
+            };
+            delete allSpecsWithoutMetas.metas;
+        }
 
         // Retrieve all the specs
         expressServer.get('/carpenter/api/specs', async (req, res) => {
             res.type('application/json');
-            res.send(allSpecs ?? {});
+            res.send(allSpecsWithoutMetas ?? {});
         });
 
         // retrieve the available scopes
@@ -258,6 +265,28 @@ class SCarpenter extends __SClass {
             res.type('application/json');
             res.send(finalSpecs ?? {});
         });
+        // add "preview" property in specs
+        for (let [dotpath, specObj] of Object.entries(allSpecs)) {
+            const potentialPreviewFilePath = specObj.metas.path.replace(
+                '.spec.json',
+                '.preview.png',
+            );
+            if (__fs.existsSync(potentialPreviewFilePath)) {
+                // expose a URL to access the preview
+                expressServer.get(
+                    '/carpenter/api/specs/:specs/preview.png',
+                    async (req, res) => {
+                        res.status(200);
+                        res.type('image/png');
+                        res.sendFile(potentialPreviewFilePath);
+                    },
+                );
+                // add the "preview" property in the spec json
+                allSpecsWithoutMetas[
+                    dotpath
+                ].preview = `/carpenter/api/specs/${dotpath}/preview.png`;
+            }
+        }
 
         expressServer.get('/carpenter.css', async (req, res) => {
             const cssFilePath = `${__packageRootDir(

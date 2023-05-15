@@ -12,6 +12,8 @@
         padding-inline: sugar.padding(20);
         line-height: 1.1;
         color: sugar.color(main, text, --alpha 0.5);
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
 
     ._image {
@@ -22,8 +24,8 @@
 
     ._preview {
         img {
-            width: 5em;
-            height: 5em;
+            width: 100px;
+            height: 100px;
             object-fit: contain;
         }
     }

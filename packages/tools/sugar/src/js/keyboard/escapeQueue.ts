@@ -1,4 +1,5 @@
 import __SPromise from '@coffeekraken/s-promise';
+import { __uniqid } from '@coffeekraken/sugar/string';
 import __hotkey from './hotkey';
 
 /**
@@ -16,6 +17,9 @@ import __hotkey from './hotkey';
  * @param           {Function}          [callback=null]            The callback to call on pressing escape
  * @param         {Object}      [settings={}]    An option object to configure your hotkey. Here's the list of available settings:
  * @return      {SPromise}                       An SPromise instance that will be resolved when the user has pressed the escape key and that it's yout turn in the queue
+ *
+ * @setting         {HTMLElement}       [rootNode=document]         Specify where to add the listener
+ * @setting         {String}            [id=null]                   Specify an id. If specified, will before unqueue the previous item with the same id and add it again
  *
  * @todo      interface
  * @todo      doc
@@ -41,10 +45,12 @@ import __hotkey from './hotkey';
  */
 
 export interface IEscapeQueueSettings {
+    id?: string;
     rootNode?: HTMLElement | Document | HTMLElement[] | Document[];
 }
 
 export interface IEscapeQueueItem {
+    id: string;
     callback?: Function;
     resolve: Function;
 }
@@ -94,12 +100,25 @@ export default function escapeQueue(
 
         // create the queue item to register
         const queueItem: IEscapeQueueItem = {
+            id: finalSettings.id ?? __uniqid(),
             callback,
             resolve,
         };
 
-        // add to the queue
-        _escapeQueue.push(queueItem);
+        if (finalSettings.id) {
+            const existing = <IEscapeQueueItem>(
+                _escapeQueue.find((i) => i.id === finalSettings.id)
+            );
+            if (existing) {
+                existing.callback = callback;
+                existing.resolve = resolve;
+            } else {
+                _escapeQueue.push(queueItem);
+            }
+        } else {
+            // add to the queue
+            _escapeQueue.push(queueItem);
+        }
 
         // handle the "cancel" call
         on('cancel', () => {

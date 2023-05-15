@@ -27,22 +27,23 @@ export default class SSpecsEditorComponentLayoutWidget extends __SSpecsEditorWid
     }
 
     render() {
-        const values = <ISLayoutData>this.values;
-        const defaultLayout = {
-            id: '1',
-            layout: '1',
-        };
+        const values = <ISLayoutData>this.values,
+            defaultLayout = values.media[this._sMedia.defaultMedia],
+            areasCount = this._sMedia.countAreas(defaultLayout.layout);
 
         return html`
             <div class="${this.editor.utils.cls('_layout-widget')}">
                 ${this._sMedia.medias.map(
                     (media) => html`
                         ${this.renderLabel({
-                            title: `${__upperFirst(media)}${
+                            title: `<span style="font-weight: bold;">${__upperFirst(
+                                media,
+                            )}${
                                 media === this._sMedia.defaultMedia
                                     ? ' (default) '
                                     : ''
-                            }`,
+                            }</span>`,
+                            required: media === this._sMedia.defaultMedia,
                             description: `Set a layout for ${media}`,
                         })}
                         <div class="custom-select" tabindex="0">
@@ -61,29 +62,133 @@ export default class SSpecsEditorComponentLayoutWidget extends __SSpecsEditorWid
                                       `}
                             </div>
                             <div class="custom-select_dropdown">
-                                ${this.propObj.layouts.map(
-                                    (layoutObj) => html`
-                                        <div
-                                            class="custom-select_item"
-                                            tabindex="0"
-                                            @pointerup=${(e) => {
-                                                this.mergeValue({
-                                                    media: {
-                                                        [media]: layoutObj,
-                                                    },
-                                                });
-                                            }}
-                                        >
-                                            ${this._renderLayout(
-                                                layoutObj,
-                                                media,
-                                            )}
-                                        </div>
-                                    `,
-                                )}
+                                ${this.values.media[media] &&
+                                media !== this._sMedia.defaultMedia
+                                    ? html`
+                                          <div
+                                              class="custom-select_item"
+                                              tabindex="0"
+                                              @pointerup=${(e) => {
+                                                  document.activeElement?.blur?.();
+                                                  this.clearValue(
+                                                      `media.${media}`,
+                                                  );
+                                              }}
+                                          >
+                                              <p class="_same-as-default">
+                                                  Same as
+                                                  ${this._sMedia.defaultMedia}
+                                              </p>
+                                          </div>
+                                      `
+                                    : ''}
+                                ${this.propObj.layouts.map((layoutObj) => {
+                                    // save layout as default
+                                    if (
+                                        defaultLayout.layout ===
+                                        layoutObj.layout
+                                    ) {
+                                        return '';
+                                    }
+
+                                    // same areas count than the default layout
+                                    if (
+                                        media !== this._sMedia.defaultMedia &&
+                                        areasCount !==
+                                            this._sMedia.countAreas(
+                                                layoutObj.layout,
+                                            )
+                                    ) {
+                                        return '';
+                                    }
+
+                                    return html` <div
+                                        class="custom-select_item ${this.values
+                                            .media[media]?.layout ===
+                                        layoutObj.layout
+                                            ? 'active'
+                                            : ''}"
+                                        tabindex="0"
+                                        @pointerup=${(e) => {
+                                            document.activeElement?.blur?.();
+                                            this.mergeValue({
+                                                media: {
+                                                    [media]: layoutObj,
+                                                },
+                                            });
+                                        }}
+                                    >
+                                        ${this._renderLayout(layoutObj, media)}
+                                    </div>`;
+                                })}
                             </div>
                         </div>
                     `,
+                )}
+                ${this.renderWidget(
+                    {
+                        id: 'container',
+                        type: 'Switch',
+                        title: 'Container',
+                        description:
+                            'Specify if you want your layout to be wrapped inside a container or not',
+                        default: {
+                            value: this.values.container,
+                        },
+                    },
+                    (values) => {
+                        this.mergeValue({
+                            container: values.value,
+                        });
+                    },
+                )}
+                ${this.renderWidget(
+                    {
+                        id: 'gap',
+                        type: 'Select',
+                        title: 'Gao',
+                        description:
+                            'Specify the gap you want beetween your areas',
+                        default: {
+                            value: this.values.gap,
+                        },
+                        options: this.propObj.gap.options,
+                    },
+                    (values) => {
+                        this.mergeValue({
+                            gap: values.value,
+                        });
+                    },
+                )}
+                ${this.renderWidget(
+                    {
+                        id: 'spacing',
+                        type: 'Select',
+                        title: 'Spacing',
+                        description:
+                            'Specify the spacing you want beetween your items inside the areas',
+                        default: {
+                            value: this.values.spacing,
+                        },
+                        options: this.propObj.spacing.options,
+                    },
+                    (values) => {
+                        this.mergeValue({
+                            spacing: values.value,
+                        });
+                    },
+                )}
+                ${this.renderWidget(
+                    {
+                        ...this.propObj.spaces,
+                        id: 'spaces',
+                        default: this.values.spaces,
+                    },
+                    (values) => {
+                        this.mergeValue({
+                            spaces: values,
+                        });
+                    },
                 )}
             </div>
         `;

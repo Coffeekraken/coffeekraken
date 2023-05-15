@@ -65,7 +65,6 @@ export default function ({
             display: flex;
             flex-direction: column;
             align-items: center;
-            max-width: 500px;
 
             &.s-card--horizontal {
                 flex-direction: row;

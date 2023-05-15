@@ -100,5 +100,6 @@ function nodeDataTemplate($specs, $data)
             JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_QUOT
         ) .
         '
-    }</template>';
+    }</template>
+    <template></template>';
 }

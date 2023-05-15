@@ -4,15 +4,32 @@
     "values": {
         "container": true,
         "gap": {
-            "value": 30
+            "id": "20",
+            "value": "20"
+        },
+        "spacing": {
+            "id": "50",
+            "value": "50"
         },
         "media": {
             "desktop": {
                 "id": "123",
                 "layout": "1 2 3"
+            },
+            "tablet": {
+                "id": "1_2_3",
+                "layout": "1 _ 2 _ 3"
             }
         },
         "id": "s-4249e592-f19a-4650-bfa1-4496311a2b49",
-        "specs": "views.bare.layout"
+        "specs": "views.bare.layout",
+        "spaces": {
+            "media": {
+                "wide": {
+                    "marginBottom": 80
+                }
+            },
+            "id": "s-cf5a5aba-05f7-4191-a7e1-22e1fb61c186"
+        }
     }
 }

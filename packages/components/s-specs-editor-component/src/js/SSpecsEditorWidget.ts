@@ -2,9 +2,11 @@ import {
     __clone,
     __deepClean,
     __deepMerge,
+    __delete,
     __get,
     __set,
 } from '@coffeekraken/sugar/object';
+import { __uniqid } from '@coffeekraken/sugar/string';
 import type { ISSpecsEditorComponentRenderLabelSettings } from './SSpecsEditorComponent';
 import __SSpecsEditorComponent from './SSpecsEditorComponent';
 
@@ -45,7 +47,7 @@ export interface ISSpecsEditorWidgetValidateResult {
 
 export interface ISSpecsEditorWidgetDeps {
     editor: __SSpecsEditorComponent;
-    path: string[];
+    pathOrCallback: string[] | Function;
     values: any;
     source: any;
     propObj: any;
@@ -53,9 +55,11 @@ export interface ISSpecsEditorWidgetDeps {
 }
 
 export default class SSpecsEditorWidget {
+    id: string;
     editor: __SSpecsEditorComponent;
     propObj: any;
     path: string[];
+    callback: Function;
     valuePath: string[];
     settings: ISSpecsEditorWidgetSettings;
     status: ISSpeceEditorWidgetStatus = {
@@ -80,9 +84,19 @@ export default class SSpecsEditorWidget {
             ...(deps.settings ?? {}),
         };
 
+        // set a uniqid for the widget
+        this.id = __uniqid();
+
+        // grab values from dependencies
         this.editor = deps.editor;
         this.propObj = deps.propObj;
-        this.path = deps.path;
+        this.path = Array.isArray(deps.pathOrCallback)
+            ? deps.pathOrCallback
+            : ['value'];
+        this.callback =
+            typeof deps.pathOrCallback === 'function'
+                ? deps.pathOrCallback
+                : null;
         this.valuePath = this.path.filter((l) => l !== 'props');
         this._values = deps.values;
         this._source = __deepClean(deps.source ?? {});
@@ -121,10 +135,26 @@ export default class SSpecsEditorWidget {
         this.status.unsaved = false;
     }
 
+    clearValue(path?: string[] | string): void {
+        if (!path) {
+            return this.resetValue();
+        }
+
+        // delete actual value
+        __delete(this._values, path);
+
+        // update UI
+        this.editor.requestUpdate();
+    }
+
     resetValue(): void {
+        // delete all values
         for (let [key, value] of Object.entries(this._values)) {
             delete this._values[key];
         }
+
+        // update UI
+        this.editor.requestUpdate();
     }
 
     mergeValue(
@@ -238,6 +268,9 @@ export default class SSpecsEditorWidget {
             // ugly hack to avoid issue in repeatable display...
             await __wait();
 
+            // call the passed callback if is one
+            this.callback?.(this._values);
+
             // apply the changes in the editor
             if (finalSettings.apply) {
                 this.editor.apply();
@@ -283,6 +316,25 @@ export default class SSpecsEditorWidget {
         >
             ${this.editor.renderLabel(this.propObj, this.path, settings)}
         </label>`;
+    }
+
+    renderWidget(propObj: any, callback: Function): any {
+        if (!propObj.id) {
+            throw new Error(
+                `<red>[SSpecsEditor]</red> To render a widget with a callback, you MUST specify an "id" inside the "propObj"...`,
+            );
+        }
+        return html` <div
+            class="s-specs-editor_prop s-specs-editor_prop-${propObj.type.toLowerCase()}"
+        >
+            ${this.editor.renderWidget(
+                {
+                    ...propObj,
+                    id: `${this.id}.${propObj.id}`,
+                },
+                callback,
+            )}
+        </div>`;
     }
 
     renderInlineInput(settings: ISSpecsEditorWidgetInlineLabel): any {

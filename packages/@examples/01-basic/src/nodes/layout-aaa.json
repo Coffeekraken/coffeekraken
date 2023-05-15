@@ -1,0 +1,22 @@
+{
+    "uid": "layout-aaa",
+    "specs": "views.bare.layout",
+    "values": {
+        "container": true,
+        "gap": {
+            "id": "30",
+            "value": "30"
+        },
+        "spacing": {
+            "id": "50",
+            "value": "50"
+        },
+        "media": {
+            "desktop": {
+                "id": "12",
+                "layout": "1 2"
+            }
+        },
+        "specs": "views.bare.layout"
+    }
+}

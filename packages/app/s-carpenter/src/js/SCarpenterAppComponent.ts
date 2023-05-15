@@ -52,6 +52,8 @@ import { __injectIframeContent } from '@coffeekraken/sugar/dom';
 import __indexCss from '../css/index.css';
 import __websiteUiCss from '../css/s-carpenter-app-website-ui.css';
 
+export type TSCarpenterAppComponentMode = 'edit' | 'insert' | 'move';
+
 export interface ISCarpenterAppComponentIconsProp {
     mobile: string;
     tablet: string;
@@ -281,9 +283,6 @@ export default class SCarpenterAppComponent extends __SLitComponent {
             await this._loadScopes();
         }
 
-        // "categories"
-        // await this._loadCategories();
-
         // Specs (all the specs)
         await this._loadSpecs();
 
@@ -310,6 +309,22 @@ export default class SCarpenterAppComponent extends __SLitComponent {
         // get the initial carpenter component
         this._$carpenterComponent =
             this._$rootDocument.querySelector('s-carpenter');
+
+        // confirm exit page
+        this._confirmExit();
+    }
+
+    /**
+     * Ask user if really want to exit the page when
+     * some unsaved changes exists
+     */
+    _confirmExit(): void {
+        window.onbeforeunload = () => {
+            if (this.hasUnsavedChanges()) {
+                if (confirm(this.props.i18n.unsavedConfirmation)) return true;
+                else return false;
+            }
+        };
     }
 
     /**
@@ -345,23 +360,6 @@ export default class SCarpenterAppComponent extends __SLitComponent {
         this._specs = specs;
     }
 
-    // /**
-    //  * Load the categories
-    //  */
-    // async _loadCategories(): Promise<void> {
-    //     const response = await fetch(
-    //         this.props.endpoints.categories.replace(
-    //             '%base',
-    //             this.props.endpoints.base,
-    //         ),
-    //         {
-    //             method: 'GET',
-    //         },
-    //     );
-    //     const categories = await response.json();
-    //     this._categories = categories;
-    // }
-
     async firstUpdated() {
         await __wait(1000);
 
@@ -378,15 +376,8 @@ export default class SCarpenterAppComponent extends __SLitComponent {
         // handle media method
         await this._init();
 
-        // listen for escape key press to close editor
-        if (this.props.escape) {
-            __hotkey('escape').on('press', () => {
-                this._closeEditor();
-            });
-        }
-
         // register shortcuts in the editor iframe
-        this._registerShortcuts(this._$editorDocument);
+        this._registerKeyboardShortcuts(this._$editorDocument);
 
         // listen spec editor events like save, change, etc...
         this._listenSpecsEditorEvents();
@@ -423,6 +414,18 @@ export default class SCarpenterAppComponent extends __SLitComponent {
     }
 
     /**
+     * Check if their's some unsaved changes un page or components...
+     */
+    hasUnsavedChanges(): boolean {
+        for (let [key, node] of Object.entries(this._nodesStack)) {
+            if (node.hasUnsavedChanges()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
      * Init the containers marked by a "s-container" attribute
      * to allow adding new content into the page
      */
@@ -431,11 +434,20 @@ export default class SCarpenterAppComponent extends __SLitComponent {
             '[s-container]',
             ($elm) => {
                 const $container = document.createElement('div');
-                $container.classList.add(this.utils.cls('_website-container'));
+                $container.classList.add(
+                    this.utils.cls('_website-add-component'),
+                );
 
                 const $toolbar = document.createElement('div');
                 $toolbar.setAttribute('s-carpenter-website-ui', 'true');
-                $toolbar.classList.add(this.utils.cls('_toolbar-container'));
+                $toolbar.classList.add(
+                    this.utils.cls('_add-component-container'),
+                );
+
+                $elm.addEventListener('keyup', (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                });
 
                 const $addFiltrableInputContainer =
                     document.createElement('label');
@@ -466,13 +478,14 @@ export default class SCarpenterAppComponent extends __SLitComponent {
         );
 
         __querySelectorLive(
-            `[s-container] > *:not(.${this.utils.cls('_website-container')})`,
+            `[s-container] > *:not(.${this.utils.cls(
+                '_website-add-component',
+            )})`,
             ($child) => {
                 const $container = $child.parentNode;
                 if (!$container._sCarpenterContainer) {
                     return;
                 }
-
                 let timeout;
                 $child.addEventListener('pointerover', (e) => {
                     if ($container._$current === $child) {
@@ -497,7 +510,7 @@ export default class SCarpenterAppComponent extends __SLitComponent {
      * The "scope" is the different document like the _$websiteDocument,
      * _$rootDocument, etc...
      */
-    _registerShortcuts($scope: Document): void {
+    _registerKeyboardShortcuts($scope: Document): void {
         // "§" key to hide the editor
         let currentMode = this.state.mode;
         const $bodies = [
@@ -510,11 +523,19 @@ export default class SCarpenterAppComponent extends __SLitComponent {
                 $bodies.forEach(($body) => {
                     $body?.classList?.add('s-carpenter--preview');
                 });
-                // set the mode to edit
-                this._setMode('edit');
+                // save the current mode
+                currentMode = this.state.mode;
             }
         });
         $scope.addEventListener('keyup', (e) => {
+            Object.keys(this.props.frontspec?.media?.queries ?? {})
+                .reverse()
+                .map((query, i) => {
+                    if (e.key === `${i + 1}`) {
+                        this._activateMedia(query);
+                    }
+                });
+
             if (e.key === '§') {
                 $bodies.forEach(($body) => {
                     $body?.classList?.remove('s-carpenter--preview');
@@ -529,6 +550,25 @@ export default class SCarpenterAppComponent extends __SLitComponent {
                 this._setMode('move');
             }
         });
+    }
+
+    /**
+     * Register some mouse "shortcuts"
+     */
+    _registerMouseShortcutsInWebsite(): void {
+        __querySelectorLive(
+            '[s-node]',
+            ($node) => {
+                $node.parentNode.addEventListener('dblclick', (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    this._edit(this._preselectedNode.uid);
+                });
+            },
+            {
+                rootNode: this._$websiteDocument,
+            },
+        );
     }
 
     /**
@@ -812,7 +852,10 @@ export default class SCarpenterAppComponent extends __SLitComponent {
                 this._$websiteDocument.querySelector('s-carpenter')?.remove?.();
 
                 // register shortcuts in the website iframe
-                this._registerShortcuts(this._$websiteDocument);
+                this._registerKeyboardShortcuts(this._$websiteDocument);
+
+                // register mouse shortcuts like double-click on nodes, etc...
+                this._registerMouseShortcutsInWebsite();
 
                 // init the interactivity in the website iframe
                 this._initWebsiteIframeContent();
@@ -890,19 +933,17 @@ export default class SCarpenterAppComponent extends __SLitComponent {
                 title: specsObj.title,
                 description: specsObj.description,
                 category: specsObj.category,
+                preview: specsObj.preview,
                 specs,
             });
             items.push({
                 title: specsObj.title,
                 description: specsObj.description,
                 category: specsObj.category,
+                preview: specsObj.preview,
                 specs,
             });
         }
-
-        items.forEach((i) => {
-            _console.log('item', i.specs);
-        });
 
         __querySelectorLive(
             's-carpenter-app-add-component',
@@ -919,7 +960,7 @@ export default class SCarpenterAppComponent extends __SLitComponent {
                         specs: e.detail.item.specs,
                         $after: __traverseUp(e.target, ($elm) =>
                             $elm.classList.contains(
-                                's-carpenter-app_website-container',
+                                's-carpenter-app_website-add-component',
                             ),
                         ),
                     });
@@ -932,6 +973,7 @@ export default class SCarpenterAppComponent extends __SLitComponent {
 
         __SFiltrableInputComponent(
             {
+                mountWhen: 'interact',
                 value: 'specs',
                 placeholder: this.props.i18n.addComponent,
                 label(item) {
@@ -944,26 +986,47 @@ export default class SCarpenterAppComponent extends __SLitComponent {
                             case 'category':
                                 return html`
                                     <div class="_item _item-category">
-                                        <h3 class="_title">
-                                            ${unsafeHTML(item.title)}
-                                        </h3>
-                                        <p class="_description">
-                                            ${item.description}
-                                        </p>
+                                        <div class="_icon">
+                                            ${unsafeHTML(item.icon)}
+                                        </div>
+                                        <div class="_metas">
+                                            <h3 class="_title">
+                                                ${unsafeHTML(item.title)}
+                                            </h3>
+                                            <p class="_description">
+                                                ${item.description}
+                                            </p>
+                                        </div>
                                     </div>
                                 `;
                                 break;
                             default:
                                 return html`
                                     <div class="_item _item-component">
-                                        <h3 class="_title">
-                                            ${unsafeHTML(item.title)}
-                                        </h3>
-                                        <span class="_description"
-                                            >${unsafeHTML(
-                                                item.description,
-                                            )}</span
-                                        >
+                                        <div class="_preview">
+                                            ${item.preview
+                                                ? html`
+                                                      <img
+                                                          src="${item.preview}?v=${__uniqid()}"
+                                                      />
+                                                  `
+                                                : html`
+                                                      ${unsafeHTML(
+                                                          this.props
+                                                              .noPreviewIcon,
+                                                      )}
+                                                  `}
+                                        </div>
+                                        <div class="_metas">
+                                            <h3 class="_title">
+                                                ${unsafeHTML(item.title)}
+                                            </h3>
+                                            <span class="_description"
+                                                >${unsafeHTML(
+                                                    item.description,
+                                                )}</span
+                                            >
+                                        </div>
                                     </div>
                                 `;
                                 break;
@@ -987,6 +1050,8 @@ export default class SCarpenterAppComponent extends __SLitComponent {
                                 description:
                                     this.props.categories[category]
                                         ?.description ?? '',
+                                icon:
+                                    this.props.categories[category]?.icon ?? '',
                                 type: 'category',
                                 value: `/${category} `,
                                 preventClose: true,
@@ -1021,9 +1086,16 @@ export default class SCarpenterAppComponent extends __SLitComponent {
     }
 
     /**
+     * Check if the current mode is the same as the passed one
+     */
+    isMode(mode: TSCarpenterAppComponentMode): boolean {
+        return this.state.mode === mode;
+    }
+
+    /**
      * Set the edit/insert mode
      */
-    _setMode(mode: 'edit' | 'insert' | 'move'): void {
+    _setMode(mode: TSCarpenterAppComponentMode): void {
         // protect agains switchingg to a none authorized mode
         if (!this.props.features[mode]) {
             return;
@@ -1076,12 +1148,16 @@ export default class SCarpenterAppComponent extends __SLitComponent {
                 node: this._currentNode,
             });
         }
+        // open the editor
         this._edit();
+        // save component
+        await this._currentNode.save();
+        // save the page
+        await this._savePage();
     }
 
     async applyComponent(values?: any): Promise<void> {
         await this._currentNode.setValues(values);
-        // await this._currentNode.save();
         this.requestUpdate();
     }
 
@@ -1134,6 +1210,25 @@ export default class SCarpenterAppComponent extends __SLitComponent {
         return drawingCanvas;
     }
 
+    _removeAllDragClasses(): void {
+        // remove all drag classes
+        Array.from(
+            this._$websiteDocument.querySelectorAll('[s-container]') ?? [],
+        ).forEach(($cont) => {
+            $cont.classList.remove('drag-over');
+        });
+
+        // all classes on the bodies
+        const $bodies = [
+            this._$editorDocument?.body,
+            this._$websiteDocument?.body,
+            this._$rootDocument.body,
+        ];
+        $bodies.forEach(($body) => {
+            $body.classList.remove('s-carpenter--drag');
+        });
+    }
+
     /**
      * Watch hover on specs element to position the toolbar
      */
@@ -1143,21 +1238,38 @@ export default class SCarpenterAppComponent extends __SLitComponent {
         __querySelectorLive(
             '[s-container]',
             ($container) => {
-                $container.addEventListener('dragenter', (e) => {
+                $container.addEventListener('dragover', (e) => {
+                    if (!this.isMode('move')) {
+                        return;
+                    }
                     e.stopPropagation();
                     e.preventDefault();
+                    $container.classList.add('drag-over');
                 });
                 $container.addEventListener('dragover', (e) => {
+                    if (!this.isMode('move')) {
+                        return;
+                    }
                     e.preventDefault();
                     e.stopPropagation();
                 });
                 $container.addEventListener('dragleave', (e) => {
+                    if (!this.isMode('move')) {
+                        return;
+                    }
                     e.preventDefault();
                     e.stopPropagation();
+                    $container.classList.remove('drag-over');
                 });
                 $container.addEventListener('drop', (e) => {
+                    if (!this.isMode('move')) {
+                        return;
+                    }
                     e.preventDefault();
                     e.stopPropagation();
+
+                    // remove all drag classes
+                    this._removeAllDragClasses();
 
                     // remove drag classes
                     $draggedElm?.classList.remove('drag');
@@ -1185,6 +1297,12 @@ export default class SCarpenterAppComponent extends __SLitComponent {
                 $preview = document.createElement('div');
                 $preview.classList.add(this.utils.cls('_drag-preview'));
                 $elm.addEventListener('dragstart', (e) => {
+                    // only in move mode
+                    if (!this.isMode('move')) {
+                        e.preventDefault();
+                        return;
+                    }
+
                     // stop the propagation
                     e.stopPropagation();
 
@@ -1215,6 +1333,11 @@ export default class SCarpenterAppComponent extends __SLitComponent {
                 });
 
                 $elm.addEventListener('drop', (e) => {
+                    // only in move mode
+                    if (!this.isMode('move')) {
+                        return;
+                    }
+
                     e.stopPropagation();
                     e.preventDefault();
 
@@ -1244,73 +1367,21 @@ export default class SCarpenterAppComponent extends __SLitComponent {
                         e.currentTarget.before($draggedElm);
                     }
 
-                    const $bodies = [
-                        this._$editorDocument?.body,
-                        this._$websiteDocument?.body,
-                        this._$rootDocument.body,
-                    ];
-                    $bodies.forEach(($body) => {
-                        $body.classList.remove('s-carpenter--drag');
-                    });
+                    // remove all drag classes
+                    this._removeAllDragClasses();
 
                     // remove the preview
                     $preview.remove?.();
                 });
 
                 $elm.addEventListener('dragend', (e) => {
-                    // stop propagation
-                    e.stopPropagation();
-                    e.preventDefault();
-                });
-
-                $node.addEventListener('dragover', (e) => {
-                    // stop propagation
-                    e.stopPropagation();
-                    e.preventDefault();
-
-                    // prevent dragging into itself
-                    if ($draggedElm?.contains(e.target)) {
+                    // only in move mode
+                    if (!this.isMode('move')) {
                         return;
                     }
-
-                    // check the mouse position over the element
-                    const bounds = $elm.getBoundingClientRect();
-                    // if (e.clientX - bounds.left > bounds.width * 0.5) {
-                    //     $elm.classList.remove('drag-x-before');
-                    //     $elm.classList.add('drag-x-after');
-                    // } else {
-                    //     $elm.classList.add('drag-x-before');
-                    //     $elm.classList.remove('drag-x-after');
-                    // }
-                    if (e.clientY - bounds.top > bounds.height * 0.5) {
-                        $elm.classList.remove('drag-y-before');
-                        $elm.classList.add('drag-y-after');
-                    } else {
-                        $elm.classList.add('drag-y-before');
-                        $elm.classList.remove('drag-y-after');
-                    }
-                });
-                $elm.addEventListener('dragenter', (e) => {
-                    e.stopPropagation();
-                    e.preventDefault();
-
-                    // prevent dragging into itself
-                    // if ($draggedElm?.contains(e.target)) {
-                    //     return;
-                    // }
-                });
-                $elm.addEventListener('dragleave', (e) => {
                     // stop propagation
                     e.stopPropagation();
                     e.preventDefault();
-
-                    // remove all the drag related classes
-                    e.currentTarget.classList.remove(
-                        'drag-x-before',
-                        'drag-x-after',
-                        'drag-y-before',
-                        'drag-y-after',
-                    );
                 });
             },
             {
@@ -1398,6 +1469,15 @@ export default class SCarpenterAppComponent extends __SLitComponent {
         setTimeout(() => {
             this._updateUiPlaceholders();
         }, 400);
+
+        __escapeQueue(
+            () => {
+                this._closeEditor();
+            },
+            {
+                id: 'closeEditor',
+            },
+        );
     }
 
     /**
@@ -1487,6 +1567,9 @@ export default class SCarpenterAppComponent extends __SLitComponent {
      * Edit an item
      */
     async _edit(uid?: string) {
+        if (!uid && !this._preselectedNode) {
+            return;
+        }
         // set the current element
         if (uid && uid !== this._currentNode?.uid) {
             await this._setCurrentNode(uid);
@@ -1530,8 +1613,6 @@ export default class SCarpenterAppComponent extends __SLitComponent {
 
         // set the current element
         this._currentNode = this._nodesStack[uid];
-
-        _console.log('seted', this._currentNode);
 
         await this._currentNode.getData();
         await __wait(200);
@@ -2270,7 +2351,7 @@ export default class SCarpenterAppComponent extends __SLitComponent {
                           <ul class="${this.utils.cls('_queries')}">
                               ${Object.keys(
                                   this.props.frontspec?.media?.queries ?? {},
-                              ).map((query) => {
+                              ).map((query, i) => {
                                   return html`
                                       <li
                                           tabindex="0"
@@ -2284,6 +2365,10 @@ export default class SCarpenterAppComponent extends __SLitComponent {
                                           ${unsafeHTML(this.props.icons[query])}
                                           <div class="s-tooltip:right">
                                               ${__upperFirst(query)}
+                                              (${Object.keys(
+                                                  this.props.frontspec.media
+                                                      .queries,
+                                              ).length - i})
                                           </div>
                                       </li>
                                   `;

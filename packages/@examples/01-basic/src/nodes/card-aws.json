@@ -1,9 +1,9 @@
 {
-    "uid": "card-plop-1",
+    "uid": "card-aws",
     "specs": "views.components.card",
     "values": {
         "title": {
-            "value": " wfe titleef"
+            "value": "Card title"
         },
         "intro": {
             "value": "Lorem ipsum dolor sit amet, dolor laboris cupidatat cupidatat laboris velit ex adipisicing enim do"
@@ -18,13 +18,11 @@
             }
         },
         "image": {
-            "url": "https://picsum.photos/1600/900?fwefwef22"
+            "url": "https://picsum.photos/1600/900"
         },
         "spacing": {
             "id": "20",
-            "value": {
-                "id": "---"
-            }
+            "value": "20"
         },
         "cta": {
             "color": {
@@ -39,9 +37,6 @@
                 "url": "https://google.com",
                 "title": "Click me!"
             }
-        },
-        "id": {
-            "value": "s-bd04d589-c758-4013-ac01-cdc6c358fe7a"
         }
     }
 }

@@ -86,16 +86,25 @@ export default class SCarpenterComponentInterface extends __SInterface {
                 bare: {
                     name: string;
                     description: string;
+                    icon: string;
                 };
                 sections: {
                     name: string;
                     description: string;
+                    icon: string;
                 };
                 components: {
                     name: string;
                     description: string;
+                    icon: string;
                 };
             };
+        };
+        noPreviewIcon: {
+            type: string;
+            title: string;
+            description: string;
+            default: string;
         };
         frontspec: {
             type: string;
@@ -123,6 +132,7 @@ export default class SCarpenterComponentInterface extends __SInterface {
             type: string;
             description: string;
             default: {
+                unsavedConfirmation: string;
                 scopeSelectorTitle: string;
                 scopeSelectorLabel: string;
                 scopeSelectorButton: string;

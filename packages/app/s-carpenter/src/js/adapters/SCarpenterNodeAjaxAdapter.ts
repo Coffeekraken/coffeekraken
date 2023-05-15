@@ -172,11 +172,9 @@ export default class SCarpenterNodeAjaxAdapter extends __SCarpenterNodeAdapter {
         // restore "containers"
         let lastContainer;
         containers.forEach((container) => {
-            _console.log('id0', container.containerId);
             const $container = $newComponent.querySelector(
                 `[s-container="${container.containerId}"]`,
             );
-            _console.log('con', $container);
 
             if (!$container && lastContainer) {
                 // put the content of the container inside the last one
@@ -184,8 +182,10 @@ export default class SCarpenterNodeAjaxAdapter extends __SCarpenterNodeAdapter {
                 return;
             }
 
-            $container.after(container.$elm);
-            $container.remove();
+            // add the old children inside the new container
+            Array.from(container.$elm.children).forEach((child) => {
+                $container.appendChild(child);
+            });
 
             // update the lastContainer
             lastContainer = container;

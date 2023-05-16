@@ -1,13 +1,15 @@
 [s-container] {
+    --s-container-transition: all 0.3s ease-in-out;
+
     position: relative;
-    @sugar.transition fast;
+    transition: var(--s-container-transition) !important;
 
     &.drag-over {
         background: sugar.color(accent, --alpha 0.1);
     }
 
     > * {
-        @sugar.transition;
+        transition: var(--s-container-transition) !important;
         margin-bottom: 0;
     }
 
@@ -18,7 +20,7 @@
         align-items: center;
         justify-content: center;
         height: 200px;
-        @sugar.transition;
+        transition: var(--s-container-transition);
 
         > * {
             opacity: 0;
@@ -48,7 +50,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            color: sugar.color(main, text, --alpha 0.4);
+            color: sugar.color(main, --alpha 0.1);
             position: absolute;
             top: calc(100% + 50px);
             left: 50%;
@@ -59,8 +61,8 @@
             border: 0px dashed sugar.color(main, border);
             background: sugar.color(main, --alpha 0.1);
             overflow: hidden;
+            transition: var(--s-container-transition), color 0.1s ease-out;
             @sugar.font.size (40);
-            @sugar.transition;
 
             [s-container] & {
                 width: 100%;
@@ -216,8 +218,10 @@ body:not(.s-carpenter--insert) .s-carpenter-app_website-add-component {
 
     > * > template[s-node] + template {
         &:after {
+            color: sugar.color(main, text, --alpha 0.4);
             height: 100px;
             border: 1px dashed sugar.color(main, border);
+            transition: var(--s-container-transition), color 0.1s ease-out 0.2s;
         }
     }
 }

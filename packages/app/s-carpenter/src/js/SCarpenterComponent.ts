@@ -211,7 +211,7 @@ export default class SCarpenterComponent extends __SLitComponent {
                       >
                           <div class="_inner">
                               <figure class="_picture">
-                                  <img src="https://picsum.photos/500/282" />
+                                  <img src="https://picsum.photos/500/400" />
                               </figure>
                               <div class="_logo">
                                   <div class="_picto">

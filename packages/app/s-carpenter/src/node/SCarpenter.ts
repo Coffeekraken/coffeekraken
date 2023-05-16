@@ -103,7 +103,11 @@ class SCarpenter extends __SClass {
         return new Promise((resolve) => {
             const finalSpecs = {};
 
-            const specsInstance = new __SSpecs();
+            const specsInstance = new __SSpecs({
+                previewUrl({ path, specs }) {
+                    return `/carpenter/api/specs/${specs}/preview.png`;
+                },
+            });
             const specsArray = specsInstance.list(
                 finalSettings.namespaces ?? ['views'],
             );
@@ -281,10 +285,6 @@ class SCarpenter extends __SClass {
                         res.sendFile(potentialPreviewFilePath);
                     },
                 );
-                // add the "preview" property in the spec json
-                allSpecsWithoutMetas[
-                    dotpath
-                ].preview = `/carpenter/api/specs/${dotpath}/preview.png`;
             }
         }
 

@@ -144,20 +144,26 @@ body:has(.s-carpenter_body) {
         text-align: center;
         @sugar.border.radius (30);
         @sugar.depth (100);
+        perspective: 800px;
     }
 
     ._picture {
-        padding: sugar.padding(20);
+        padding: sugar.padding(50) sugar.padding(30) sugar.padding(30)
+            sugar.padding(30);
         width: 100%;
-        aspect-ratio: 21/9;
+        aspect-ratio: 16/10;
         overflow: hidden;
         @sugar.border.radius (30);
+        transform: rotateZ(5deg) rotateX(20deg) scale(1.3);
+
+        filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.2));
 
         img {
             width: 100%;
             height: 100%;
             object-fit: cover;
             @sugar.border.radius (30);
+            /* @sugar.depth (100); */
         }
     }
 

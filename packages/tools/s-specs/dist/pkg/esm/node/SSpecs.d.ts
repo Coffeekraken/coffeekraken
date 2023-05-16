@@ -3,7 +3,8 @@ import __SInterface from '@coffeekraken/s-interface';
 
 export interface ISSpecsSettings {
     namespaces: Record<string, string[]>;
-    read: Partial<ISSpecsReadSettings>;
+    read?: Partial<ISSpecsReadSettings>;
+    previewUrl?: Function;
 }
 export interface ISSpecsReadSettings {
     metas: boolean;

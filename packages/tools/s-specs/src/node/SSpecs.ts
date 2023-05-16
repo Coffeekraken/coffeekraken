@@ -16,7 +16,7 @@ import __path from 'path';
 
 /**
  * @name            SSpecs
- * @namespace       php
+ * @namespace       node
  * @type            Class
  * @platform        node
  * @status          beta
@@ -25,6 +25,11 @@ import __path from 'path';
  * This is usefull to build specification files in json format that make share some parts through common files, etc...
  * You will also have easy access to your files through "namespaces" that represent different folders on your system. This will simplify
  * the way you read your files by prefixing your dotpath (simple fs "/" replacement) with the namespace you want to look in.
+ *
+ * @param       {Object}          [$settings={}]              Some settings to configure your instance
+ *
+ * @setting         {Object}            [namespaces={}]             An object of namespace like "my.namespace" property with a simple array of folders where to search for specs files when using this namespace
+ * @setting         {Function}               [previewUrl=null]            A function called only when a .preview.png file exists alongside the .spec.json file that will take an object with "path", "name", "specs" and "specsObj" as input and that has to return the web accessible preview url. If not specified, no "preview" field will exists in the output spec json
  *
  * @snippet          __SSpecs($1)
  * const specs = new __SSpecs($1);
@@ -52,7 +57,8 @@ import __path from 'path';
 
 export interface ISSpecsSettings {
     namespaces: Record<string, string[]>;
-    read: Partial<ISSpecsReadSettings>;
+    read?: Partial<ISSpecsReadSettings>;
+    previewUrl?: Function;
 }
 
 export interface ISSpecsReadSettings {
@@ -379,6 +385,20 @@ export default class SSpecs extends __SClass {
                 clone: false,
             },
         );
+
+        // check if we have a ".preview.png" file alongside the spec file
+        const potentialPreviewUrl = finalSpecFilePath.replace(
+            '.spec.json',
+            '.preview.png',
+        );
+        if (__fs.existsSync(potentialPreviewUrl) && this.settings.previewUrl) {
+            specJson.preview = this.settings.previewUrl({
+                path: potentialPreviewUrl,
+                name: internalDotPath.split('.').pop(),
+                specs: internalDotPath,
+                specsObj: specJson,
+            });
+        }
 
         // if we have an internal spec dotpath
         if (internalSpecDotPath) {

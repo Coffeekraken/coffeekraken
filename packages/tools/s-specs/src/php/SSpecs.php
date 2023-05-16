@@ -16,7 +16,7 @@
  *
  * @setting         {Object|Array}            [namespaces=[]]             An array|object of namespace like "my.namespace" property with a simple array of folders where to search for specs files when using this namespace
  * @setting         {Object|Array}            [sFrontspecSettings=[]]           Some settings to pass to the SFrontspec class in order to read the `frontspec.json` content
- * @setting         {Function}               [previewUrl=null]            A function called only when a .preview.png file exists alongside the .spec.json file that will take as input an object with "path", "name", "specs" and "specsObj" as input and that has to return the web accessible preview url. If not specified, no "preview" field will exists in the output spec json
+ * @setting         {Function}               [previewUrl=null]            A function called only when a .preview.png file exists alongside the .spec.json file that will take an object with "path", "name", "specs" and "specsObj" as input and that has to return the web accessible preview url. If not specified, no "preview" field will exists in the output spec json
  *
  * @snippet         new SSpecs($1);
  * $specs = new SSpecs($1);

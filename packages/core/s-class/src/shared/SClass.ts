@@ -21,7 +21,7 @@ import __toJson from '@coffeekraken/sugar/shared/object/toJson';
  *          super(settings);
  *      }
  * }
- * 
+ *
  * @example         js
  * import __SClass from '@coffeekraken/s-class';
  * class MyCoolClass extends __SClass {
@@ -68,11 +68,11 @@ export interface ISClass {
     metas: ISClassMetas;
 }
 
-export default class SClass {
+export default class SClass implements ISClass {
     /**
      * @name            settings
      * @type            ISClassSettings
-     * @private
+     * @public
      *
      * Store the class settings
      *
@@ -85,13 +85,14 @@ export default class SClass {
      * @name            metas
      * @type            String
      * @get
+     * @public
      *
      * Access the metas in the ```settings.metas```
      *
      * @since           2.0.0
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    metas: ISClassMetas;
+    public metas: ISClassMetas;
 
     static extends(Cls: any) {
         class SClass extends Cls {

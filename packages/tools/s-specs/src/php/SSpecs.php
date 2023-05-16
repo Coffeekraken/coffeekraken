@@ -16,6 +16,7 @@
  *
  * @setting         {Object|Array}            [namespaces=[]]             An array|object of namespace like "my.namespace" property with a simple array of folders where to search for specs files when using this namespace
  * @setting         {Object|Array}            [sFrontspecSettings=[]]           Some settings to pass to the SFrontspec class in order to read the `frontspec.json` content
+ * @setting         {Function}               [previewUrl=null]            A function called only when a .preview.png file exists alongside the .spec.json file that will take as input an object with "path", "name", "specs" and "specsObj" as input and that has to return the web accessible preview url. If not specified, no "preview" field will exists in the output spec json
  *
  * @snippet         new SSpecs($1);
  * $specs = new SSpecs($1);
@@ -62,6 +63,7 @@ class SSpecs
             [
                 'namespaces' => [],
                 'sFrontspecSettings' => [],
+                'previewUrl' => null,
             ],
             (array) $settings
         );
@@ -237,7 +239,9 @@ class SSpecs
         $internalPath =
             implode('/', explode('.', $internalDotPath)) . '.spec.json';
 
+        // some variables
         $finalSpecFilePath;
+        $specName = @array_pop(explode('.', $internalDotPath));
 
         // loop on each registered namespaces directories to check if the specDotPath
         // correspond to a file in one of them...
@@ -333,6 +337,24 @@ class SSpecs
             }
             return $value;
         });
+
+        // check if we have a ".preview.png" file alongside the spec file
+        $potentialPreviewUrl = str_replace(
+            '.spec.json',
+            '.preview.png',
+            $finalSpecFilePath
+        );
+        if (file_exists($potentialPreviewUrl)) {
+            if (is_callable($this->settings->previewUrl[1])) {
+                $args = (object) [
+                    'path' => $potentialPreviewUrl,
+                    'name' => $specName,
+                    'specs' => $internalDotPath,
+                    'specsObj' => $specJson,
+                ];
+                $specJson->preview = $this->settings->previewUrl[1]($args);
+            }
+        }
 
         // if we have an internal spec dotpath
         if (isset($internalSpecDotPath)) {

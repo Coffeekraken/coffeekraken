@@ -8,6 +8,7 @@ export interface ISSpecsSettings {
 }
 export interface ISSpecsReadSettings {
     metas: boolean;
+    models: boolean;
 }
 export interface ISSpecsListResult {
     name: string;

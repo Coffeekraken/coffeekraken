@@ -1,6 +1,7 @@
 import __SClass from '@coffeekraken/s-class';
 import __SInterface from '@coffeekraken/s-interface';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
+import { __readJsonSync } from '@coffeekraken/sugar/fs';
 import { __isPlainObject } from '@coffeekraken/sugar/is';
 import {
     __deepMap,
@@ -11,7 +12,7 @@ import {
 } from '@coffeekraken/sugar/object';
 import { __packageRootDir } from '@coffeekraken/sugar/path';
 import __fs from 'fs';
-import __glob from 'glob';
+import * as __glob from 'glob';
 import __path from 'path';
 
 /**
@@ -30,6 +31,8 @@ import __path from 'path';
  *
  * @setting         {Object}            [namespaces={}]             An object of namespace like "my.namespace" property with a simple array of folders where to search for specs files when using this namespace
  * @setting         {Function}               [previewUrl=null]            A function called only when a .preview.png file exists alongside the .spec.json file that will take an object with "path", "name", "specs" and "specsObj" as input and that has to return the web accessible preview url. If not specified, no "preview" field will exists in the output spec json
+ * @setting         {Boolean}           [read.metas=true]           Specify if you want to get the metas back for each spec
+ * @setting         {Boolean}           [read.models=true]          Specigy if you want to get back the ".model.json" files that are alongside of the .spec.json file if exists
  *
  * @snippet          __SSpecs($1)
  * const specs = new __SSpecs($1);
@@ -63,6 +66,7 @@ export interface ISSpecsSettings {
 
 export interface ISSpecsReadSettings {
     metas: boolean;
+    models: boolean;
 }
 
 export interface ISSpecsListResult {
@@ -212,6 +216,12 @@ export default class SSpecs extends __SClass {
     constructor(settings?: Partial<ISSpecsSettings>) {
         super(
             __deepMerge(
+                {
+                    read: {
+                        metas: true,
+                        models: true,
+                    },
+                },
                 __toPlainObject(__SSugarConfig.get('specs') ?? {}),
                 settings ?? {},
             ),
@@ -278,15 +288,12 @@ export default class SSpecs extends __SClass {
         }
 
         const finalSettings: ISSpecsReadSettings = __deepMerge(
-            {
-                metas: true,
-            },
             // @ts-ignore
-            this.settings,
+            this.settings.read,
             settings,
         );
 
-        let definedNamespaces = finalSettings.namespaces;
+        let definedNamespaces = this.settings.namespaces;
         let definesNamespacesKeys = Object.keys(definedNamespaces);
 
         let currentNamespace = '';
@@ -323,7 +330,7 @@ export default class SSpecs extends __SClass {
 
         // loop on each registered namespaces directories to check if the specDotPath
         // correspond to a file in one of them...
-        const dirs = finalSettings.namespaces[currentNamespace];
+        const dirs = this.settings.namespaces[currentNamespace];
         for (let i = 0; i < dirs.length; i++) {
             const dir = dirs[i];
 
@@ -355,6 +362,11 @@ export default class SSpecs extends __SClass {
                 `[SSpecs] The requested dotpath spec "${specDotPath}" does not resolve to any existing spec file...`,
             );
         }
+
+        const specName = finalSpecFilePath
+            .split('/')
+            .pop()
+            .replace('.spec.json', '');
 
         // read the spec file
         let specJson = JSON.parse(
@@ -394,7 +406,7 @@ export default class SSpecs extends __SClass {
         if (__fs.existsSync(potentialPreviewUrl) && this.settings.previewUrl) {
             specJson.preview = this.settings.previewUrl({
                 path: potentialPreviewUrl,
-                name: internalDotPath.split('.').pop(),
+                name: specName,
                 specs: internalDotPath,
                 specsObj: specJson,
             });
@@ -405,12 +417,59 @@ export default class SSpecs extends __SClass {
             return __get(specJson, internalSpecDotPath);
         }
 
+        if (finalSettings.models) {
+            const folderPath = finalSpecFilePath
+                    .split('/')
+                    .slice(0, -1)
+                    .join('/'),
+                glob = `${folderPath}/*.${specName}.model.json`,
+                files = __glob.sync(glob);
+            if (files?.length) {
+                specJson.models = {};
+                files.forEach((filePath) => {
+                    // read the model json
+                    const modelJson = __readJsonSync(filePath),
+                        fileName = filePath.split('/').pop(),
+                        name = fileName?.replace('.model.json', '');
+                    // handle potential "preview.png" file alongside the model one
+                    const potentialModelPreviewUrl = filePath.replace(
+                        '.model.json',
+                        '.preview.png',
+                    );
+                    if (
+                        __fs.existsSync(potentialModelPreviewUrl) &&
+                        this.settings.previewUrl
+                    ) {
+                        modelJson.preview = this.settings.previewUrl({
+                            path: potentialModelPreviewUrl,
+                            name,
+                            specs: internalDotPath,
+                            specsObj: specJson,
+                            modelObj: modelJson,
+                        });
+                    }
+                    // add some metas to the model
+                    if (finalSettings.metas) {
+                        modelJson.metas = {
+                            path: filePath,
+                            dir: filePath.split('/').slice(0, -1).join('/'),
+                            name,
+                            specs: specDotPath,
+                        };
+                    }
+                    // set the model in the json
+                    specJson.models[<string>name] = modelJson;
+                });
+            }
+        }
+
         // add metas about the spec file read
         if (finalSettings.metas) {
             specJson.metas = {
-                dotpath: specDotPath,
                 path: finalSpecFilePath,
-                settings: finalSettings,
+                dir: finalSpecFilePath.split('/').slice(0, -1).join('/'),
+                name: specName,
+                specs: internalDotPath,
             };
         }
 
@@ -516,7 +575,11 @@ export default class SSpecs extends __SClass {
                 newValue = config;
             } else if (value.startsWith('@')) {
                 const dotPath = value.replace('@', ''),
-                    spec = this.read(dotPath, settings);
+                    spec = this.read(dotPath, {
+                        metas: false,
+                        models: false,
+                        ...(settings ?? {}),
+                    });
                 newValue = spec;
             }
         }

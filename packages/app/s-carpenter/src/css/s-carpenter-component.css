@@ -115,7 +115,7 @@ body:has(.s-carpenter_body) {
     }
 }
 
-@keyframes s-carpenter-popin-in {
+@keyframes s-carpenter-loading-popin-in {
     from {
         opacity: 0;
         transform: scale(0) translate(-50%, -50%);
@@ -123,6 +123,39 @@ body:has(.s-carpenter_body) {
     to {
         opacity: 1;
         transform: scale(1) translate(-50%, -50%);
+    }
+}
+
+@keyframes s-carpenter-loading-picture-in {
+    from {
+        opacity: 0;
+        transform: rotateZ(-10deg) rotateX(-10deg) scale(0.5);
+        filter: drop-shadow(0 0 0 rgba(0, 0, 0, 0));
+    }
+    to {
+        opacity: 1;
+        transform: rotateZ(5deg) rotateX(20deg) scale(1.3);
+        filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.2));
+    }
+}
+@keyframes s-carpenter-loading-logo-in {
+    from {
+        opacity: 0;
+        transform: translateY(-50%);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+@keyframes s-carpenter-loading-version-in {
+    from {
+        opacity: 0;
+        transform: translateY(50%);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
     }
 }
 
@@ -135,9 +168,9 @@ body:has(.s-carpenter_body) {
     transform: scale(1) translate(-50%, -50%);
     transform-origin: 0 0;
     background: none;
-    animation: s-carpenter-popin-in 0.3s cubic-bezier(0.725, -0.21, 0.055, 1.26)
-        forwards;
     box-shadow: 0 0 100vw 100vw rgba(0, 0, 0, 0.5);
+    animation: s-carpenter-loading-popin-in 0.3s
+        cubic-bezier(0.755, 0.005, 0.185, 1.315) forwards;
 
     ._inner {
         background-color: sugar.color(main, background);
@@ -153,10 +186,12 @@ body:has(.s-carpenter_body) {
         width: 100%;
         aspect-ratio: 16/10;
         overflow: hidden;
+        opacity: 0;
         @sugar.border.radius (30);
-        transform: rotateZ(5deg) rotateX(20deg) scale(1.3);
-
-        filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.2));
+        /* transform: rotateZ(5deg) rotateX(20deg) scale(1.3);
+        filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.2)); */
+        animation: s-carpenter-loading-picture-in 0.5s
+            cubic-bezier(0.755, 0.005, 0.185, 1.315) forwards 0.3s;
 
         img {
             width: 100%;
@@ -165,6 +200,17 @@ body:has(.s-carpenter_body) {
             @sugar.border.radius (30);
             /* @sugar.depth (100); */
         }
+    }
+
+    ._version {
+        position: absolute;
+        top: sugar.margin(30);
+        right: sugar.margin(30);
+        font-weight: bold;
+        color: sugar.color(main, text, --alpha 0.3);
+        opacity: 0;
+        animation: s-carpenter-loading-version-in 1s
+            cubic-bezier(0.755, 0.005, 0.185, 1.315) forwards 0.4s;
     }
 
     ._picto {
@@ -178,7 +224,9 @@ body:has(.s-carpenter_body) {
         align-items: center;
         justify-content: center;
         gap: sugar.margin(20);
-        /* margin-block-end: sugar.margin(30); */
+        opacity: 0;
+        animation: s-carpenter-loading-logo-in 1s
+            cubic-bezier(0.755, 0.005, 0.185, 1.315) forwards 0.4s;
 
         svg {
             opacity: 0.5;

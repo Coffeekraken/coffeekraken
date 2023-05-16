@@ -17,6 +17,8 @@
  * @setting         {Object|Array}            [namespaces=[]]             An array|object of namespace like "my.namespace" property with a simple array of folders where to search for specs files when using this namespace
  * @setting         {Object|Array}            [sFrontspecSettings=[]]           Some settings to pass to the SFrontspec class in order to read the `frontspec.json` content
  * @setting         {Function}               [previewUrl=null]            A function called only when a .preview.png file exists alongside the .spec.json file that will take an object with "path", "name", "specs" and "specsObj" as input and that has to return the web accessible preview url. If not specified, no "preview" field will exists in the output spec json
+ * @setting         {Boolean}           [read.metas=true]           Specify if you want to get the metas back for each spec
+ * @setting         {Boolean}           [read.models=true]          Specigy if you want to get back the ".model.json" files that are alongside of the .spec.json file if exists
  *
  * @snippet         new SSpecs($1);
  * $specs = new SSpecs($1);
@@ -57,15 +59,19 @@ class SSpecs
     /**
      * Constructor
      */
-    public function __construct($settings)
+    public function __construct($settings = [])
     {
-        $this->settings = (object) array_merge_recursive(
+        $this->settings = \Sugar\object\deepMerge(
             [
                 'namespaces' => [],
                 'sFrontspecSettings' => [],
+                'read' => [
+                    'metas' => true,
+                    'models' => true,
+                ],
                 'previewUrl' => null,
             ],
-            (array) $settings
+            $settings
         );
 
         $frontspec = new \SFrontspec($this->settings->sFrontspecSettings);
@@ -175,8 +181,11 @@ class SSpecs
                         'namespace' => $namespace,
                         'path' => $specFilePath,
                         'dir' => dirname($specFilePath),
-                        'read' => function () use ($that, $dotpath) {
-                            return $that->read($dotpath);
+                        'read' => function ($settings = []) use (
+                            $that,
+                            $dotpath
+                        ) {
+                            return $that->read($dotpath, $settings);
                         },
                     ]);
                 }
@@ -200,9 +209,14 @@ class SSpecs
      * @since       2.0.0
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    public function read($specDotPath)
+    public function read($specDotPath, $settings = [])
     {
         $finalValue;
+
+        $finalSettings = \Sugar\object\deepMerge(
+            $this->settings->read,
+            $settings
+        );
 
         $definedNamespaces = $this->settings->namespaces;
         $definedNamespacesKeys = array_keys((array) $definedNamespaces);
@@ -345,7 +359,7 @@ class SSpecs
             $finalSpecFilePath
         );
         if (file_exists($potentialPreviewUrl)) {
-            if (is_callable($this->settings->previewUrl[1])) {
+            if (@is_callable($this->settings->previewUrl[1])) {
                 $args = (object) [
                     'path' => $potentialPreviewUrl,
                     'name' => $specName,
@@ -359,6 +373,64 @@ class SSpecs
         // if we have an internal spec dotpath
         if (isset($internalSpecDotPath)) {
             return \Sugar\ar\get($specJson, $internalSpecDotPath);
+        }
+
+        // models
+        if ($finalSettings->models) {
+            $folderPath = dirname($finalSpecFilePath);
+            $glob = $folderPath . '/*.' . $specName . '.model.json';
+            $files = glob($glob);
+            if (count($files)) {
+                $specJson->models = (object) [];
+                foreach ($files as $filePath) {
+                    $modelJson = json_decode(file_get_contents($filePath));
+                    $fileName = @array_pop(explode('/', $filePath));
+                    $name = str_replace('.model.json', '', $fileName);
+
+                    // handle the potential "preview.png" file(s) alongside the model one
+                    $potentialModelPreviewUrl = str_replace(
+                        '.model.json',
+                        '.preview.png',
+                        $filePath
+                    );
+
+                    if (
+                        file_exists($potentialModelPreviewUrl) &&
+                        @is_callable($this->settings->previewUrl)
+                    ) {
+                        $modelJson->preview = $this->settings->previewUrl(
+                            (object) [
+                                'path' => $potentialModelPreviewUrl,
+                                'name' => $name,
+                                'specs' => $internalDotPath,
+                                'specsObj' => $specJson,
+                                'modelObj' => $modelJson,
+                            ]
+                        );
+                    }
+                    // handle "metas"
+                    if ($finalSettings->metas) {
+                        $modelJson->metas = (object) [
+                            'path' => $filePath,
+                            'dir' => dirname($filePath),
+                            'name' => $name,
+                            'specs' => $specDotPath,
+                        ];
+                    }
+                    // set the model in the json
+                    $specJson->models->{$name} = $modelJson;
+                }
+            }
+        }
+
+        // add metas about the spec file read
+        if ($finalSettings->metas) {
+            $specJson->metas = (object) [
+                'path' => $finalSpecFilePath,
+                'dir' => dirname($finalSpecFilePath),
+                'name' => $specName,
+                'specs' => $internalDotPath,
+            ];
         }
 
         // return the getted specJson
@@ -386,7 +458,10 @@ class SSpecs
                 }
             } elseif (str_starts_with($value, '@')) {
                 $dotPath = str_replace('@', '', $value);
-                $spec = $this->read($dotPath);
+                $spec = $this->read($dotPath, [
+                    'metas' => false,
+                    'models' => false,
+                ]);
                 $newValue = $spec;
             }
         }

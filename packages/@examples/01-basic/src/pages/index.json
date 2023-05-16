@@ -10,6 +10,36 @@
             "type": "container",
             "nodes": [
                 {
+                    "uid": "layout-aaa",
+                    "type": "node",
+                    "nodes": [
+                        {
+                            "uid": "area-1",
+                            "type": "container",
+                            "nodes": [
+                                {
+                                    "uid": "card-aws",
+                                    "type": "node"
+                                }
+                            ]
+                        },
+                        {
+                            "uid": "area-2",
+                            "type": "container",
+                            "nodes": [
+                                {
+                                    "uid": "separator-asdfasd",
+                                    "type": "node"
+                                },
+                                {
+                                    "uid": "card-asasas",
+                                    "type": "node"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
                     "uid": "layout-header",
                     "type": "node",
                     "nodes": [
@@ -22,7 +52,7 @@
                                     "type": "node"
                                 },
                                 {
-                                    "uid": "card-plop",
+                                    "uid": "card-3",
                                     "type": "node"
                                 }
                             ]
@@ -50,37 +80,7 @@
                                     "type": "node"
                                 },
                                 {
-                                    "uid": "card-3",
-                                    "type": "node"
-                                }
-                            ]
-                        }
-                    ]
-                },
-                {
-                    "uid": "layout-aaa",
-                    "type": "node",
-                    "nodes": [
-                        {
-                            "uid": "area-1",
-                            "type": "container",
-                            "nodes": [
-                                {
-                                    "uid": "card-aws",
-                                    "type": "node"
-                                }
-                            ]
-                        },
-                        {
-                            "uid": "area-2",
-                            "type": "container",
-                            "nodes": [
-                                {
-                                    "uid": "separator-asdfasd",
-                                    "type": "node"
-                                },
-                                {
-                                    "uid": "card-asasas",
+                                    "uid": "card-plop",
                                     "type": "node"
                                 }
                             ]

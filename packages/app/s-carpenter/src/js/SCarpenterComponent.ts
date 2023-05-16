@@ -210,6 +210,7 @@ export default class SCarpenterComponent extends __SLitComponent {
                           class="${this.utils.cls('_loading')}"
                       >
                           <div class="_inner">
+                              <div class="_version">v2.0.0</div>
                               <figure class="_picture">
                                   <img src="https://picsum.photos/500/400" />
                               </figure>

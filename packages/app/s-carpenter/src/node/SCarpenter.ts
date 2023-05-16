@@ -8,6 +8,8 @@ import { __onProcessExit } from '@coffeekraken/sugar/process';
 import __express from 'express';
 import __SCarpenterStartParamsInterface from './interface/SCarpenterStartParamsInterface';
 
+import { __clone } from '@coffeekraken/sugar/object';
+
 import __fs from 'fs';
 
 import __bodyParser from 'body-parser';
@@ -104,8 +106,8 @@ class SCarpenter extends __SClass {
             const finalSpecs = {};
 
             const specsInstance = new __SSpecs({
-                previewUrl({ path, specs }) {
-                    return `/carpenter/api/specs/${specs}/preview.png`;
+                previewUrl({ path, specs, name }) {
+                    return `/carpenter/api/specs/${specs}/${name}.preview.png`;
                 },
             });
             const specsArray = specsInstance.list(
@@ -114,6 +116,7 @@ class SCarpenter extends __SClass {
             specsArray.forEach((specs) => {
                 const specsJson = specs.read({
                     metas: true,
+                    models: true,
                 });
                 finalSpecs[specs.dotpath] = specsJson;
             });
@@ -226,12 +229,16 @@ class SCarpenter extends __SClass {
     async initOnExpressServer(expressServer: any): Promise<void> {
         // load the specs files
         const allSpecs = await this.loadSpecs();
-        const allSpecsWithoutMetas = {};
-        for (let [key, obj] of Object.entries(allSpecs)) {
-            allSpecsWithoutMetas[key] = {
-                ...obj,
-            };
-            delete allSpecsWithoutMetas.metas;
+        const allSpecsWithoutMetas = __clone(allSpecs, {
+            deep: true,
+        });
+        for (let [key, obj] of Object.entries(allSpecsWithoutMetas)) {
+            delete obj.metas;
+            if (obj.models) {
+                for (let [n, modelObj] of Object.entries(obj.models)) {
+                    delete modelObj.metas;
+                }
+            }
         }
 
         // Retrieve all the specs
@@ -253,14 +260,14 @@ class SCarpenter extends __SClass {
             let finalSpecs;
 
             // try with the passed specs
-            if (allSpecs[specs]) {
-                finalSpecs = allSpecs[specs];
+            if (allSpecsWithoutMetas[specs]) {
+                finalSpecs = allSpecsWithoutMetas[specs];
             }
 
             // try by adding the name at the end
             if (!finalSpecs) {
                 const longSpecs = `${specs}.${specs.split('.').pop()}`;
-                finalSpecs = allSpecs[longSpecs];
+                finalSpecs = allSpecsWithoutMetas[longSpecs];
             }
 
             if (finalSpecs) {
@@ -271,20 +278,37 @@ class SCarpenter extends __SClass {
         });
         // add "preview" property in specs
         for (let [dotpath, specObj] of Object.entries(allSpecs)) {
-            const potentialPreviewFilePath = specObj.metas.path.replace(
-                '.spec.json',
-                '.preview.png',
-            );
+            const potentialPreviewFilePath = `${specObj.metas.dir}/${specObj.metas.name}.preview.png`;
             if (__fs.existsSync(potentialPreviewFilePath)) {
                 // expose a URL to access the preview
                 expressServer.get(
-                    '/carpenter/api/specs/:specs/preview.png',
+                    `/carpenter/api/specs/:specs/${specObj.metas.name}.preview.png`,
                     async (req, res) => {
                         res.status(200);
                         res.type('image/png');
                         res.sendFile(potentialPreviewFilePath);
                     },
                 );
+            }
+
+            // models preview
+            if (specObj.models) {
+                for (let [modelName, modelObj] of Object.entries(
+                    specObj.models,
+                )) {
+                    const potentialModelPreviewFilePath = `${modelObj.metas.dir}/${modelObj.metas.name}.preview.png`;
+                    if (__fs.existsSync(potentialModelPreviewFilePath)) {
+                        // expose a URL to access the preview
+                        expressServer.get(
+                            `/carpenter/api/specs/:specs/${modelObj.metas.name}.preview.png`,
+                            async (req, res) => {
+                                res.status(200);
+                                res.type('image/png');
+                                res.sendFile(potentialModelPreviewFilePath);
+                            },
+                        );
+                    }
+                }
             }
         }
 

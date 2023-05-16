@@ -8,25 +8,17 @@
             "type": "Text",
             "title": "Title",
             "description": "The card title",
-            "default": {
-                "value": "Card title"
-            }
+            "required": true
         },
         "intro": {
             "type": "Text",
             "title": "Intro",
-            "description": "The card intro",
-            "default": {
-                "value": "Lorem ipsum dolor sit amet, dolor laboris cupidatat cupidatat laboris velit ex adipisicing enim do"
-            }
+            "description": "The card intro"
         },
         "text": {
             "type": "Text",
             "title": "Text",
-            "description": "The card text",
-            "default": {
-                "value": "Lorem ipsum dolor sit amet, aute ipsum duis tempor incididunt sint est irure magna amet est elit ad ipsum laborum cupidatat cupidatat minim sint occaecat"
-            }
+            "description": "The card text"
         },
         "direction": {
             "type": "Select",
@@ -64,10 +56,7 @@
         "image": {
             "type": "Image",
             "title": "Card image",
-            "description": "Card image",
-            "default": {
-                "url": "https://picsum.photos/1600/900"
-            }
+            "description": "Card image"
         },
         "spacing": "@sugar.views.props.spacing",
         "cta": "@sugar.views.components.cta",

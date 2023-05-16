@@ -30,8 +30,6 @@ namespace Sugar\object;
  */
 function _deepMerge($obj1, $obj2)
 {
-    $wasObj1Array = is_array($obj1);
-
     $obj1 = (array) $obj1;
     $obj2 = (array) $obj2;
 
@@ -49,21 +47,11 @@ function _deepMerge($obj1, $obj2)
         }
 
         if (is_object($value) || \Sugar\is\assocArray($value)) {
-            // var_dump($obj1[$key], $value);
-
             $obj1[$key] = _deepMerge($obj1[$key], $value);
         }
-
-        // if (is_object($value) || \Sugar\is\assocArray($value)) {
-        //     $obj1[$key] = _deepMerge($obj1[$key], $value);
-        // }
     }
 
-    if ($wasObj1Array) {
-        $obj1 = (array) $obj1;
-    }
-
-    return $obj1;
+    return (object) $obj1;
 }
 function deepMerge(...$args)
 {
@@ -75,5 +63,5 @@ function deepMerge(...$args)
         $obj2 = $args[$i];
     }
 
-    return $current;
+    return (object) $current;
 }

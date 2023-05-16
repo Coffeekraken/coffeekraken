@@ -1,0 +1,15 @@
+{
+    "title": "Basic card",
+    "description": "Basic card with just a title and an image",
+    "values": {
+        "image": {
+            "url": "https://picsum.photos/1600/900"
+        },
+        "title": {
+            "value": "Hello world"
+        },
+        "text": {
+            "value": "How are you lorem ipsum dolor sit amet, aute ipsum duis tempor incididunt sint est irure magna amet est elit ad ipsum laborum cupidatat cupidatat minim sint occaecat"
+        }
+    }
+}

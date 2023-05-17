@@ -430,7 +430,8 @@ export default class SSpecs extends __SClass {
                     // read the model json
                     const modelJson = __readJsonSync(filePath),
                         fileName = filePath.split('/').pop(),
-                        name = fileName?.replace('.model.json', '');
+                        name = fileName?.replace('.model.json', ''),
+                        modelName = name?.split('/')[0];
                     // handle potential "preview.png" file alongside the model one
                     const potentialModelPreviewUrl = filePath.replace(
                         '.model.json',
@@ -458,7 +459,7 @@ export default class SSpecs extends __SClass {
                         };
                     }
                     // set the model in the json
-                    specJson.models[<string>name] = modelJson;
+                    specJson.models[<string>modelName] = modelJson;
                 });
             }
         }

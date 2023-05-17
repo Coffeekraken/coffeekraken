@@ -48,7 +48,10 @@ function _deepMerge($obj1, $obj2)
 
         if (is_object($value) || \Sugar\is\assocArray($value)) {
             $obj1[$key] = _deepMerge($obj1[$key], $value);
+            continue;
         }
+
+        $obj1[$key] = $obj2[$key];
     }
 
     return (object) $obj1;

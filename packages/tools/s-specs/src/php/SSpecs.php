@@ -359,14 +359,17 @@ class SSpecs
             $finalSpecFilePath
         );
         if (file_exists($potentialPreviewUrl)) {
-            if (@is_callable($this->settings->previewUrl[1])) {
+            if (@is_callable($this->settings->previewUrl)) {
                 $args = (object) [
                     'path' => $potentialPreviewUrl,
                     'name' => $specName,
                     'specs' => $internalDotPath,
                     'specsObj' => $specJson,
                 ];
-                $specJson->preview = $this->settings->previewUrl[1]($args);
+                $specJson->preview = call_user_func(
+                    $this->settings->previewUrl,
+                    $args
+                );
             }
         }
 
@@ -386,6 +389,7 @@ class SSpecs
                     $modelJson = json_decode(file_get_contents($filePath));
                     $fileName = @array_pop(explode('/', $filePath));
                     $name = str_replace('.model.json', '', $fileName);
+                    $modelName = explode('.', $name)[0];
 
                     // handle the potential "preview.png" file(s) alongside the model one
                     $potentialModelPreviewUrl = str_replace(
@@ -398,7 +402,8 @@ class SSpecs
                         file_exists($potentialModelPreviewUrl) &&
                         @is_callable($this->settings->previewUrl)
                     ) {
-                        $modelJson->preview = $this->settings->previewUrl(
+                        $modelJson->preview = call_user_func(
+                            $this->settings->previewUrl,
                             (object) [
                                 'path' => $potentialModelPreviewUrl,
                                 'name' => $name,
@@ -418,7 +423,7 @@ class SSpecs
                         ];
                     }
                     // set the model in the json
-                    $specJson->models->{$name} = $modelJson;
+                    $specJson->models->{$modelName} = $modelJson;
                 }
             }
         }

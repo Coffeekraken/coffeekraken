@@ -25,7 +25,7 @@ namespace Sugar\frontspec;
 function og($frontspec)
 {
     if (!$frontspec) {
-        $frontspecInstance = new SFrontspec();
+        $frontspecInstance = new \SFrontspec();
         $frontspec = $frontspecInstance->read();
     }
 

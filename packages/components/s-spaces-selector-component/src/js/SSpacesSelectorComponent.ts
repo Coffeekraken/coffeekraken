@@ -64,7 +64,9 @@ export default class SSpacesSelectorComponent extends __SLitComponent {
     }
 
     static get state() {
-        return {};
+        return {
+            values: {},
+        };
     }
 
     _spacesNames = ['margin', 'padding'];
@@ -96,25 +98,34 @@ export default class SSpacesSelectorComponent extends __SLitComponent {
 
     clear() {
         // reset the values
-        this.props.values = {};
+        this.state.values = {};
 
         // dispatch a new update event
         this.utils.dispatchEvent('change', {
             bubbles: true,
             detail: Object.assign({}, this.props.values),
         });
+
+        // reset all select
+        Array.from(this.querySelectorAll('select')).forEach(($select) => {
+            $select.selectedIndex = 0;
+        });
+
+        this.requestUpdate();
     }
 
     _updateSelect(e) {
         const propertyName = __camelCase(e.target.name);
 
         // set the new value
-        this.props.values[propertyName] = __parse(e.target.value);
+        this.state.values[propertyName] = __parse(e.target.value);
+
+        _console.log('^this', this.state.values);
 
         // dispatch a new update event
         this.utils.dispatchEvent('change', {
             bubbles: true,
-            detail: Object.assign({}, this.props.values),
+            detail: Object.assign({}, this.state.values),
         });
     }
 
@@ -132,7 +143,7 @@ export default class SSpacesSelectorComponent extends __SLitComponent {
                                 const options =
                                         this.props.spaces[spaceName] ?? [],
                                     value =
-                                        this.props.values[
+                                        this.state.values[
                                             `${spaceName}${__upperFirst(side)}`
                                         ];
 
@@ -154,7 +165,6 @@ export default class SSpacesSelectorComponent extends __SLitComponent {
                                             `_select-${spaceName}-${side}`,
                                         )}"
                                         name="${spaceName}-${side}"
-                                        .value=${value}
                                         @change=${(e) => {
                                             this._updateSelect(e);
                                         }}
@@ -162,13 +172,13 @@ export default class SSpacesSelectorComponent extends __SLitComponent {
                                         ${options.map((option) => {
                                             return html`
                                                 <option
-                                                    value="${option[
+                                                    .value=${option[
                                                         this.props.valueProp
-                                                    ]}"
+                                                    ]}
                                                     ?selected=${selected ===
                                                         option ||
                                                     (selected === null &&
-                                                        option.default)}
+                                                        !option.value)}
                                                 >
                                                     ${option.name}
                                                 </option>

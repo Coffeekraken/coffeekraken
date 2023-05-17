@@ -15,7 +15,7 @@ export interface ISSpecsEditorWidgetSetValueSettings {
     media?: string;
     path?: string;
     merge?: boolean;
-    noneResponsive?: boolean;
+    responsive?: boolean;
     validate?: boolean;
     apply?: boolean;
 }
@@ -62,6 +62,7 @@ export default class SSpecsEditorWidget {
     setValue(value: any, settings?: ISSpecsEditorWidgetSetValueSettings): Promise<void>;
     _validate(values?: any): ISSpecsEditorWidgetValidateResult;
     renderLabel(settings?: ISSpecsEditorComponentRenderLabelSettings): any;
+    _widgets: any;
     renderWidget(propObj: any, callback: Function): any;
     renderInlineInput(settings: ISSpecsEditorWidgetInlineLabel): any;
     validate(values: any): ISSpecsEditorWidgetValidateResult;

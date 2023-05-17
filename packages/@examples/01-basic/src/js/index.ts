@@ -27,10 +27,14 @@ const viewsRelated = import.meta.globEager('../views/**/*.ts');
             autoInit: true,
             escape: true,
             features: {
-                newPage: true,
-                savePage: true,
-                delete: true,
-                insert: true,
+                page: {
+                    create: true,
+                    save: true,
+                },
+                node: {
+                    delete: true,
+                    insert: true,
+                },
                 scopes: true,
             },
         });

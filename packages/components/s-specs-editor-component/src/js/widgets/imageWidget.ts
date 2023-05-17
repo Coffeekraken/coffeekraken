@@ -51,7 +51,7 @@ export default class SSpecsEditorComponentImageWidget extends __SSpecsEditorWidg
                               this.mergeValue(
                                   { alt: e.target.value },
                                   {
-                                      noneResponsive: true,
+                                      responsive: false,
                                   },
                               );
                           },

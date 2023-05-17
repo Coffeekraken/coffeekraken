@@ -127,8 +127,6 @@ class SInterfaceRenderer extends __SClass implements ISInterfaceRenderer {
                         interfaceClass: this._interface,
                     };
 
-                    //  console.log('s', key, propKey);
-
                     // check if we have a template directory specified and if
                     if (
                         set.templatesDir &&

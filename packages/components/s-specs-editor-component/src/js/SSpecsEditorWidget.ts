@@ -31,7 +31,7 @@ export interface ISSpecsEditorWidgetSetValueSettings {
     media?: string;
     path?: string;
     merge?: boolean;
-    noneResponsive?: boolean;
+    responsive?: boolean;
     validate?: boolean;
     apply?: boolean;
 }
@@ -140,8 +140,15 @@ export default class SSpecsEditorWidget {
             return this.resetValue();
         }
 
+        // not so much pristine...
+        this.status.pristine = false;
+        this.status.unsaved = true;
+
         // delete actual value
         __delete(this._values, path);
+
+        // call the passed callback if is one
+        this.callback?.(this._values);
 
         // update UI
         this.editor.requestUpdate();
@@ -152,6 +159,13 @@ export default class SSpecsEditorWidget {
         for (let [key, value] of Object.entries(this._values)) {
             delete this._values[key];
         }
+
+        // not so much pristine...
+        this.status.pristine = false;
+        this.status.unsaved = true;
+
+        // call the passed callback if is one
+        this.callback?.(this._values);
 
         // update UI
         this.editor.requestUpdate();
@@ -213,6 +227,7 @@ export default class SSpecsEditorWidget {
             merge: false,
             validate: true,
             apply: true,
+            responsive: true,
             ...(settings ?? {}),
         };
 
@@ -220,8 +235,8 @@ export default class SSpecsEditorWidget {
         this.status.pristine = false;
         this.status.unsaved = true;
 
-        const sourceValues = finalSettings.noneResponsive
-            ? this._values
+        const sourceValues = !finalSettings.responsive
+            ? __get(this._values, finalSettings.path) ?? {}
             : this.values;
 
         // get the current values
@@ -231,13 +246,9 @@ export default class SSpecsEditorWidget {
 
         // set or merge new value
         if (finalSettings.merge) {
-            __set(
-                newValues,
-                finalSettings.path,
-                __deepMerge(__get(newValues, finalSettings.path), value),
-            );
+            __deepMerge(newValues, value);
         } else {
-            __set(newValues, finalSettings.path, value);
+            newValues = value;
         }
 
         // validate
@@ -249,13 +260,15 @@ export default class SSpecsEditorWidget {
         // if no error, set the new value
         if (!validateResult.error) {
             let path = finalSettings.path;
-            if (this.isResponsive() && !finalSettings.noneResponsive) {
+            if (this.isResponsive() && finalSettings.responsive) {
                 path =
                     `media.${this.editor.props.media}.${finalSettings.path}`.replace(
                         /\.{2}/gm,
                         '',
                     );
             }
+
+            _console.log('new', newValues);
 
             // set the new value(s)
             __set(this._values, path, newValues, {
@@ -318,22 +331,28 @@ export default class SSpecsEditorWidget {
         </label>`;
     }
 
+    _widgets: any = {};
     renderWidget(propObj: any, callback: Function): any {
         if (!propObj.id) {
             throw new Error(
                 `<red>[SSpecsEditor]</red> To render a widget with a callback, you MUST specify an "id" inside the "propObj"...`,
             );
         }
-        return html` <div
-            class="s-specs-editor_prop s-specs-editor_prop-${propObj.type.toLowerCase()}"
-        >
-            ${this.editor.renderWidget(
+
+        if (!this._widgets[propObj.id]) {
+            this._widgets[propObj.id] = this.editor.renderWidget(
                 {
                     ...propObj,
                     id: `${this.id}.${propObj.id}`,
                 },
                 callback,
-            )}
+            );
+        }
+
+        return html` <div
+            class="s-specs-editor_prop s-specs-editor_prop-${propObj.type.toLowerCase()}"
+        >
+            ${this._widgets[propObj.id]}
         </div>`;
     }
 

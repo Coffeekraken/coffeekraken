@@ -67,16 +67,19 @@ export default class SCarpenterComponentInterface extends __SInterface {
             description: string;
             default: {
                 scope: boolean;
-                insert: boolean;
-                edit: boolean;
-                delete: boolean;
-                move: boolean;
                 upload: boolean;
-                newPage: boolean;
-                savePage: boolean;
-                saveComponent: boolean;
                 media: boolean;
-                nav: boolean;
+                page: {
+                    create: boolean;
+                    save: boolean;
+                };
+                node: {
+                    insert: boolean;
+                    edit: boolean;
+                    delete: boolean;
+                    move: boolean;
+                    save: boolean;
+                };
             };
         };
         categories: {

@@ -27,11 +27,18 @@ export default class SSpecsEditorComponentSpacesWidget extends __SSpecsEditorWid
             });
         });
 
+        _console.log('VAL', this.values);
+
         return html`
             <div
                 class="${this.editor.utils.cls('_spaces-widget')}"
                 @s-spaces-selector.change=${(e) => {
-                    this.setValue(e.detail);
+                    _console.log('SA', e.detail, Object.keys(e.detail));
+                    if (!Object.keys(e.detail).length) {
+                        this.resetValue();
+                    } else {
+                        this.setValue(e.detail);
+                    }
                 }}
             >
                 ${this.renderLabel()}

@@ -18,11 +18,23 @@ export interface ISCarpenterAdapter {
     node: __SCarpenterNodeAdapter;
     page: __SCarpenterPageAdapter;
 }
-export interface ISCarpenterAppComponentFeatures {
+export interface ISCarpenterAppComponentFeaturesPage {
+    create: boolean;
     save: boolean;
+}
+export interface ISCarpenterAppComponentFeaturesNode {
+    insert: boolean;
+    edit: boolean;
+    delete: boolean;
+    move: boolean;
+    save: boolean;
+}
+export interface ISCarpenterAppComponentFeatures {
+    scope: boolean;
     upload: boolean;
-    nav: boolean;
     media: boolean;
+    page: ISCarpenterAppComponentFeaturesPage;
+    node: ISCarpenterAppComponentFeaturesNode;
 }
 export interface ISCarpenterAppComponentCategory {
     title: string;
@@ -133,7 +145,7 @@ export default class SCarpenterAppComponent extends __SLitComponent {
     
     _initWebsiteContainers(): void;
     
-    _registerKeyboardShortcuts($scope: Document): void;
+    _registerKeyboardShortcuts($scopes?: any[]): void;
     
     _registerMouseShortcutsInWebsite(): void;
     

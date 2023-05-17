@@ -137,8 +137,8 @@ export default class SSpecsEditorComponentLayoutWidget extends __SSpecsEditorWid
                         },
                     },
                     (values) => {
-                        this.mergeValue({
-                            container: values.value,
+                        this.setValue(values.value, {
+                            path: 'container',
                         });
                     },
                 )}
@@ -146,7 +146,7 @@ export default class SSpecsEditorComponentLayoutWidget extends __SSpecsEditorWid
                     {
                         id: 'gap',
                         type: 'Select',
-                        title: 'Gao',
+                        title: 'Gap',
                         description:
                             'Specify the gap you want beetween your areas',
                         default: {
@@ -155,8 +155,8 @@ export default class SSpecsEditorComponentLayoutWidget extends __SSpecsEditorWid
                         options: this.propObj.gap.options,
                     },
                     (values) => {
-                        this.mergeValue({
-                            gap: values.value,
+                        this.setValue(values.value, {
+                            path: 'gap',
                         });
                     },
                 )}
@@ -164,6 +164,7 @@ export default class SSpecsEditorComponentLayoutWidget extends __SSpecsEditorWid
                     {
                         id: 'spacing',
                         type: 'Select',
+                        responsive: true,
                         title: 'Spacing',
                         description:
                             'Specify the spacing you want beetween your items inside the areas',
@@ -173,8 +174,9 @@ export default class SSpecsEditorComponentLayoutWidget extends __SSpecsEditorWid
                         options: this.propObj.spacing.options,
                     },
                     (values) => {
-                        this.mergeValue({
-                            spacing: values.value,
+                        this.setValue(values.value, {
+                            path: 'spacing',
+                            responsive: false,
                         });
                     },
                 )}
@@ -185,8 +187,9 @@ export default class SSpecsEditorComponentLayoutWidget extends __SSpecsEditorWid
                         default: this.values.spaces,
                     },
                     (values) => {
-                        this.mergeValue({
-                            spaces: values,
+                        this.setValue(values, {
+                            path: 'spaces',
+                            responsive: false,
                         });
                     },
                 )}

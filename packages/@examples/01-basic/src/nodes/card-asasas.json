@@ -2,23 +2,11 @@
     "uid": "card-asasas",
     "specs": "views.components.card",
     "values": {
-        "title": {
-            "value": "Card title"
-        },
-        "intro": {
-            "value": "Lorem ipsum dolor sit amet, dolor laboris cupidatat cupidatat laboris velit ex adipisicing enim do"
-        },
-        "text": {
-            "value": "Lorem ipsum dolor sit amet, aute ipsum duis tempor incididunt sint est irure magna amet est elit ad ipsum laborum cupidatat cupidatat minim sint occaecat"
-        },
         "direction": {
             "value": {
                 "id": "vertical",
                 "value": "vertical"
             }
-        },
-        "image": {
-            "url": "/tmp/upload/Screenshot 2023-02-15 at 11-6112.png"
         },
         "spacing": {
             "id": "20",
@@ -37,6 +25,18 @@
                 "url": "https://google.com",
                 "title": "Click me!"
             }
+        },
+        "title": {
+            "value": "Card title wefwef"
+        },
+        "intro": {
+            "value": "Lorem ipsum dolor sit amet, dolor laboris cupidatat cupidatat laboris velit ex adipisicing enim do"
+        },
+        "text": {
+            "value": "Lorem ipsum dolor sit amet, aute ipsum duis tempor incididunt sint est irure magna amet est elit ad ipsum laborum cupidatat cupidatat minim sint occaecat"
+        },
+        "image": {
+            "url": "/tmp/upload/Screenshot 2023-02-15 at 11-6112.png"
         },
         "id": {
             "value": "s-17d0d2de-741f-43b3-bacf-522c5ffae4eb"

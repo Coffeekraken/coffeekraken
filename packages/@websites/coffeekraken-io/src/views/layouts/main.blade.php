@@ -1,6 +1,6 @@
 @extends('sugar.layouts.main.main', [
 'bodyAttributes' => [
-'id' => ($request->path != '/' and $request->path != '') ? \Sugar\string\idCompliant($request->path) : 'homepage',
+'id' => (@$request->path != '/' and @$request->path != '') ? \Sugar\string\idCompliant($request->path) : 'homepage',
 's-sugar' => true
 ]
 ])
@@ -9,7 +9,6 @@
 @section('body')
 
     @include('layouts.header.header')
-
 
     <div class="bkg"></div>
 

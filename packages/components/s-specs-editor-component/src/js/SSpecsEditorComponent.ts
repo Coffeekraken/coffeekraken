@@ -82,13 +82,7 @@ export interface ISSpecsEditorComponentRenderLabelSettings {
 export interface ISSpecsEditorComponentGetValueSettings {
     default?: any;
     media?: string;
-    noneResponsive?: boolean;
-}
-
-export interface ISSpecsEditorComponentSetValueSettings {
-    media?: string;
-    noneResponsive?: boolean;
-    merge?: boolean;
+    responsive?: boolean;
 }
 
 export interface ISSpecsEditorComponentIconsProp {
@@ -400,7 +394,7 @@ export default class SSpecsEditorComponent extends __SLitComponent {
         noneMediaValuePath = noneMediaValuePath.filter((p) => p !== 'props');
         mediaValuePath = mediaValuePath.filter((p) => p !== 'props');
 
-        if (finalSettings.noneResponsive) {
+        if (!finalSettings.responsive) {
             return noneMediaValuePath;
         }
 
@@ -572,6 +566,8 @@ export default class SSpecsEditorComponent extends __SLitComponent {
         setTimeout(() => {
             this.state.status.saving = false;
         }, 1000);
+
+        _console.log('save', this.data);
 
         this.utils.dispatchEvent('save', {
             bubbles: true,
@@ -745,6 +741,7 @@ export default class SSpecsEditorComponent extends __SLitComponent {
             tooltip: 'left',
             ...(settings ?? {}),
         };
+
         return html`
             <span>
                 <h3 class="_title">
@@ -755,8 +752,7 @@ export default class SSpecsEditorComponent extends __SLitComponent {
                         ? html` <span class="_required">*</span> `
                         : ''}
                 </h3>
-                ${this.props.frontspec?.media?.queries &&
-                this.isPathResponsive(path)
+                ${this.props.frontspec?.media?.queries && propObj.responsive
                     ? this._renderMediaSelector(path)
                     : ''}
                 ${finalSettings.description ?? propObj.description
@@ -882,9 +878,9 @@ export default class SSpecsEditorComponent extends __SLitComponent {
             return this._renderRepeatableProps(propObj, path);
         }
 
-        // if (typeLower === 'object' && propObj.props) {
-        //     return this.renderProps(propObj, path, settings);
-        // }
+        if (typeLower === 'object' && propObj.props) {
+            return this.renderProps(propObj, path, settings);
+        }
 
         return html`
             <div
@@ -900,7 +896,7 @@ export default class SSpecsEditorComponent extends __SLitComponent {
     _renderRepeatableProps(propObj, path) {
         let loopOn = this.getValue(path, {
             default: [],
-            noneResponsive: true,
+            responsive: false,
         });
 
         let dropIndex;
@@ -1222,11 +1218,7 @@ export default class SSpecsEditorComponent extends __SLitComponent {
                                                     '_child-media',
                                                 )}"
                                             >
-                                                ${this.isPathResponsive([
-                                                    ...path,
-                                                    'props',
-                                                    prop,
-                                                ])
+                                                ${propObj.responsive
                                                     ? this._renderMediaSelector(
                                                           [
                                                               ...path,

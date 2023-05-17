@@ -99,16 +99,19 @@ export default class SCarpenterComponentInterface extends __SInterface {
                     'Specify which features you want in your carpenter editor. Available features are: "save", "delete", "upload", "nav" and "media". Note that these features can be specified also in the "carpenter.json" usually returned by the server. These will be propritary on the ones you specified here cause the server may not support "upload", etc...',
                 default: {
                     scope: false,
-                    insert: true,
-                    edit: true,
-                    delete: true,
-                    move: true,
                     upload: true,
-                    newPage: false,
-                    savePage: true,
-                    saveComponent: true,
                     media: true,
-                    nav: true,
+                    page: {
+                        create: false,
+                        save: true,
+                    },
+                    node: {
+                        insert: true,
+                        edit: true,
+                        delete: true,
+                        move: true,
+                        save: true,
+                    },
                 },
             },
             categories: {

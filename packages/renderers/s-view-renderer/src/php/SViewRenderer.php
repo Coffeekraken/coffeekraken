@@ -47,6 +47,7 @@ class SViewRenderer
      */
     public static $engines = [
         'twig' => 'SViewRendererEngineTwig',
+        'blade.php' => 'SViewRendererEngineBlade',
     ];
 
     /**
@@ -155,10 +156,8 @@ class SViewRenderer
         $parts = explode('.', $viewDotPath);
         $viewName = array_pop($parts);
         $viewPath = $this->_getFinalViewPath($viewDotPath);
-        $parts = explode('.', $viewPath);
-        $extension = array_pop($parts);
-        $engineInstance = $this->_getEngineInstance($extension);
 
+        // if no file path
         if (!isset($viewPath)) {
             throw new Exception(
                 'The passed viewDotPath "' .
@@ -167,6 +166,19 @@ class SViewRenderer
             );
         }
 
+        // get the engine extension
+        $extension;
+        foreach (SViewRenderer::$engines as $ext => $engineId) {
+            if (str_ends_with($viewPath, $ext)) {
+                $extension = $ext;
+                break;
+            }
+        }
+
+        // get the engine instance
+        $engineInstance = $this->_getEngineInstance($extension);
+
+        // return the view metas
         return [
             'name' => $viewName,
             'path' => $viewPath,
@@ -257,6 +269,7 @@ class SViewRenderer
 
         // render the layout with the content rendered above
         $viewMetas = $this->getViewMetas($pageJson->layout);
+
         $layoutRenderResult = $viewMetas['engineInstance']->render(
             $viewMetas['path'],
             array_merge_recursive(
@@ -300,7 +313,7 @@ class SViewRenderer
             $parts = explode('.', $viewDotPath);
             $viewName = array_pop($parts);
             $viewPath = preg_replace('/\./', '/', $viewDotPath);
-            $globPart = '{' . implode('|', $handledViewsExtensions) . '}';
+            $globPart = '{' . implode(',', $handledViewsExtensions) . '}';
 
             $potentialViewGlob1 = $rootDir . '/' . $viewPath . '.' . $globPart;
             $potentialViewGlob2 =

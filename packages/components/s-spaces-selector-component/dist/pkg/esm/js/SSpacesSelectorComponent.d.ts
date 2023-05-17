@@ -6,7 +6,9 @@ export interface ISSpacesSelectorComponentProps {
 export default class SSpacesSelectorComponent extends __SLitComponent {
     static get properties(): any;
     static get styles(): import("lit").CSSResult;
-    static get state(): {};
+    static get state(): {
+        values: {};
+    };
     _spacesNames: string[];
     constructor();
     firstUpdated(): void;

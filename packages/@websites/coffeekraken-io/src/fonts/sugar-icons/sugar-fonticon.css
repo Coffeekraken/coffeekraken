@@ -2,11 +2,11 @@
     font-display: swap;
 
     font-family: 'sugar-fonticon';
-    src: url('/dist/fonts/sugar-icons/sugar-fonticon.eot?e2019667b217b137031f534364368b68#iefix')
+    src: url('/dist/fonts/sugar-icons/sugar-fonticon.eot?ea2d353a0a4d9bd70292f51a56ccabb3#iefix')
             format('embedded-opentype'),
-        url('/dist/fonts/sugar-icons/sugar-fonticon.woff2?e2019667b217b137031f534364368b68')
+        url('/dist/fonts/sugar-icons/sugar-fonticon.woff2?ea2d353a0a4d9bd70292f51a56ccabb3')
             format('woff2'),
-        url('/dist/fonts/sugar-icons/sugar-fonticon.woff?e2019667b217b137031f534364368b68')
+        url('/dist/fonts/sugar-icons/sugar-fonticon.woff?ea2d353a0a4d9bd70292f51a56ccabb3')
             format('woff');
 }
 
@@ -45,6 +45,8 @@
 .s-icon--layout:before,
 .s-icon--link-broken-solid:before,
 .s-icon--link-broken:before,
+.s-icon--logo-carpenter-solid:before,
+.s-icon--logo-carpenter:before,
 .s-icon--logo-coffeekraken:before,
 .s-icon--logo-lit-solid:before,
 .s-icon--logo-lit:before,
@@ -209,146 +211,152 @@
 .s-icon--link-broken:before {
     content: '\f123';
 }
-.s-icon--logo-coffeekraken:before {
+.s-icon--logo-carpenter-solid:before {
     content: '\f124';
 }
-.s-icon--logo-lit-solid:before {
+.s-icon--logo-carpenter:before {
     content: '\f125';
 }
-.s-icon--logo-lit:before {
+.s-icon--logo-coffeekraken:before {
     content: '\f126';
 }
-.s-icon--logo-nextjs-solid:before {
+.s-icon--logo-lit-solid:before {
     content: '\f127';
 }
-.s-icon--logo-nextjs:before {
+.s-icon--logo-lit:before {
     content: '\f128';
 }
-.s-icon--logo-opensource:before {
+.s-icon--logo-nextjs-solid:before {
     content: '\f129';
 }
-.s-icon--logo-vite-solid:before {
+.s-icon--logo-nextjs:before {
     content: '\f12a';
 }
-.s-icon--logo-vite:before {
+.s-icon--logo-opensource:before {
     content: '\f12b';
 }
-.s-icon--logo-vscode-solid:before {
+.s-icon--logo-vite-solid:before {
     content: '\f12c';
 }
-.s-icon--logo-vscode:before {
+.s-icon--logo-vite:before {
     content: '\f12d';
 }
-.s-icon--misc-bubbles:before {
+.s-icon--logo-vscode-solid:before {
     content: '\f12e';
 }
-.s-icon--misc-build-solid:before {
+.s-icon--logo-vscode:before {
     content: '\f12f';
 }
-.s-icon--misc-build:before {
+.s-icon--misc-bubbles:before {
     content: '\f130';
 }
-.s-icon--misc-eye:before {
+.s-icon--misc-build-solid:before {
     content: '\f131';
 }
-.s-icon--misc-ring:before {
+.s-icon--misc-build:before {
     content: '\f132';
 }
-.s-icon--misc-tools:before {
+.s-icon--misc-eye:before {
     content: '\f133';
 }
-.s-icon--read-direction:before {
+.s-icon--misc-ring:before {
     content: '\f134';
 }
-.s-icon--safari:before {
+.s-icon--misc-tools:before {
     content: '\f135';
 }
-.s-icon--support-chromium:before {
+.s-icon--read-direction:before {
     content: '\f136';
 }
-.s-icon--support-edge:before {
+.s-icon--safari:before {
     content: '\f137';
 }
-.s-icon--support-firefox:before {
+.s-icon--support-chromium:before {
     content: '\f138';
 }
-.s-icon--support-rtl:before {
+.s-icon--support-edge:before {
     content: '\f139';
 }
-.s-icon--support-safari:before {
+.s-icon--support-firefox:before {
     content: '\f13a';
 }
-.s-icon--theme-colors:before {
+.s-icon--support-rtl:before {
     content: '\f13b';
 }
-.s-icon--theme:before {
+.s-icon--support-safari:before {
     content: '\f13c';
 }
-.s-icon--ui-align:before {
+.s-icon--theme-colors:before {
     content: '\f13d';
 }
-.s-icon--ui-autocomplete:before {
+.s-icon--theme:before {
     content: '\f13e';
 }
-.s-icon--ui-avatar:before {
+.s-icon--ui-align:before {
     content: '\f13f';
 }
-.s-icon--ui-button:before {
+.s-icon--ui-autocomplete:before {
     content: '\f140';
 }
-.s-icon--ui-code:before {
+.s-icon--ui-avatar:before {
     content: '\f141';
 }
-.s-icon--ui-copy:before {
+.s-icon--ui-button:before {
     content: '\f142';
 }
-.s-icon--ui-datepicker:before {
+.s-icon--ui-code:before {
     content: '\f143';
 }
-.s-icon--ui-display-preview:before {
+.s-icon--ui-copy:before {
     content: '\f144';
 }
-.s-icon--ui-dropdown:before {
+.s-icon--ui-datepicker:before {
     content: '\f145';
 }
-.s-icon--ui-link-broken-solid:before {
+.s-icon--ui-display-preview:before {
     content: '\f146';
 }
-.s-icon--ui-link-broken:before {
+.s-icon--ui-dropdown:before {
     content: '\f147';
 }
-.s-icon--ui-loader-solid:before {
+.s-icon--ui-link-broken-solid:before {
     content: '\f148';
 }
-.s-icon--ui-loader:before {
+.s-icon--ui-link-broken:before {
     content: '\f149';
 }
-.s-icon--ui-more-solid:before {
+.s-icon--ui-loader-solid:before {
     content: '\f14a';
 }
-.s-icon--ui-more:before {
+.s-icon--ui-loader:before {
     content: '\f14b';
 }
-.s-icon--ui-range:before {
+.s-icon--ui-more-solid:before {
     content: '\f14c';
 }
-.s-icon--ui-refresh:before {
+.s-icon--ui-more:before {
     content: '\f14d';
 }
-.s-icon--ui-switch:before {
+.s-icon--ui-range:before {
     content: '\f14e';
 }
-.s-icon--ui-tooltip:before {
+.s-icon--ui-refresh:before {
     content: '\f14f';
 }
-.s-icon--ui-typography:before {
+.s-icon--ui-switch:before {
     content: '\f150';
 }
-.s-icon--vue:before {
+.s-icon--ui-tooltip:before {
     content: '\f151';
 }
-.s-icon--vuejs:before {
+.s-icon--ui-typography:before {
     content: '\f152';
+}
+.s-icon--vue:before {
+    content: '\f153';
+}
+.s-icon--vuejs:before {
+    content: '\f154';
 }
 .s-icon--animation-easing,
 .s-icon--chrome,
@@ -385,6 +393,8 @@
 .s-icon--layout,
 .s-icon--link-broken-solid,
 .s-icon--link-broken,
+.s-icon--logo-carpenter-solid,
+.s-icon--logo-carpenter,
 .s-icon--logo-coffeekraken,
 .s-icon--logo-lit-solid,
 .s-icon--logo-lit,

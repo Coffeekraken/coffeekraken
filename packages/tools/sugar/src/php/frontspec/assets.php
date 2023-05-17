@@ -25,7 +25,7 @@ namespace Sugar\frontspec;
  */
 function assets($frontspec = null, $cacheBuster = '')
 {
-    if (!$frontspec) {
+    if ($frontspec) {
         $frontspecInstance = new \SFrontspec();
         $frontspec = $frontspecInstance->read();
     }

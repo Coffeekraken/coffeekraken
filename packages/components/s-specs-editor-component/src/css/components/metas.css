@@ -32,13 +32,14 @@
             gap: sugar.margin(10);
 
             ._action {
-                i {
-                    color: sugar.color(complementary, foreground);
-                }
             }
             ._action-save {
                 @sugar.ui.button();
                 @sugar.color (complementary);
+
+                i {
+                    color: sugar.color(complementary, foreground);
+                }
 
                 &.success {
                     @sugar.color (success);

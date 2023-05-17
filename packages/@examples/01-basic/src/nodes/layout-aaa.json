@@ -4,8 +4,8 @@
     "values": {
         "container": true,
         "gap": {
-            "id": "30",
-            "value": "30"
+            "id": "90",
+            "value": "90"
         },
         "spacing": {
             "id": "50",
@@ -15,8 +15,28 @@
             "desktop": {
                 "id": "12",
                 "layout": "1 2"
+            },
+            "tablet": {
+                "id": "1_2",
+                "layout": "1 _ 2"
+            },
+            "mobile": {
+                "id": "21",
+                "layout": "2 1"
             }
         },
-        "specs": "views.bare.layout"
+        "specs": "views.bare.layout",
+        "id": {
+            "value": "s-bf135aa7-2f83-4976-acd2-132d24caf225"
+        },
+        "spaces": {
+            "media": {
+                "wide": {
+                    "marginBottom": 80,
+                    "paddingTop": 70,
+                    "marginTop": 90
+                }
+            }
+        }
     }
 }

@@ -68,11 +68,25 @@ export interface ISCarpenterAdapter {
     page: __SCarpenterPageAdapter;
 }
 
-export interface ISCarpenterAppComponentFeatures {
+export interface ISCarpenterAppComponentFeaturesPage {
+    create: boolean;
     save: boolean;
+}
+
+export interface ISCarpenterAppComponentFeaturesNode {
+    insert: boolean;
+    edit: boolean;
+    delete: boolean;
+    move: boolean;
+    save: boolean;
+}
+
+export interface ISCarpenterAppComponentFeatures {
+    scope: boolean;
     upload: boolean;
-    nav: boolean;
     media: boolean;
+    page: ISCarpenterAppComponentFeaturesPage;
+    node: ISCarpenterAppComponentFeaturesNode;
 }
 
 export interface ISCarpenterAppComponentCategory {
@@ -271,9 +285,9 @@ export default class SCarpenterAppComponent extends __SLitComponent {
         // define the s-specs-editor component
         __sSpecsEditorComponentDefine({
             features: {
-                delete: this.props.features.delete,
+                delete: this.props.features.node.delete,
                 upload: this.props.features.upload,
-                save: this.props.features.saveComponent,
+                save: this.props.features.node.save,
                 media: this.props.features.media,
             },
         });
@@ -377,7 +391,7 @@ export default class SCarpenterAppComponent extends __SLitComponent {
         await this._init();
 
         // register shortcuts in the editor iframe
-        this._registerKeyboardShortcuts(this._$editorDocument);
+        this._registerKeyboardShortcuts();
 
         // listen spec editor events like save, change, etc...
         this._listenSpecsEditorEvents();
@@ -510,45 +524,56 @@ export default class SCarpenterAppComponent extends __SLitComponent {
      * The "scope" is the different document like the _$websiteDocument,
      * _$rootDocument, etc...
      */
-    _registerKeyboardShortcuts($scope: Document): void {
+    _registerKeyboardShortcuts($scopes?: any[]): void {
         // "§" key to hide the editor
         let currentMode = this.state.mode;
-        const $bodies = [
-            this._$editorDocument?.body,
-            this._$websiteDocument?.body,
-            this._$rootDocument.body,
+        const $documents = [
+            this._$editorDocument,
+            this._$websiteDocument,
+            this._$rootDocument,
         ];
-        $scope.addEventListener('keydown', (e) => {
-            if (e.key === '§') {
-                $bodies.forEach(($body) => {
-                    $body?.classList?.add('s-carpenter--preview');
-                });
-                // save the current mode
-                currentMode = this.state.mode;
-            }
-        });
-        $scope.addEventListener('keyup', (e) => {
-            Object.keys(this.props.frontspec?.media?.queries ?? {})
-                .reverse()
-                .map((query, i) => {
-                    if (e.key === `${i + 1}`) {
-                        this._activateMedia(query);
-                    }
-                });
 
-            if (e.key === '§') {
-                $bodies.forEach(($body) => {
-                    $body?.classList?.remove('s-carpenter--preview');
-                });
-                // restore mode
-                this._setMode(currentMode);
-            } else if (e.key === 'i') {
-                this._setMode('insert');
-            } else if (e.key === 'e') {
-                this._setMode('edit');
-            } else if (e.key === 'm') {
-                this._setMode('move');
-            }
+        if (!$scopes) {
+            $scopes = $documents;
+        } else if (!Array.isArray($scopes)) {
+            $scopes = [$scopes];
+        }
+
+        $scopes.forEach(($scope) => {
+            $scope.addEventListener('keydown', (e) => {
+                if (e.key === '§') {
+                    $documents.forEach(($document) => {
+                        $document.body?.classList?.add('s-carpenter--preview');
+                    });
+                    // save the current mode
+                    currentMode = this.state.mode;
+                }
+            });
+            $scope.addEventListener('keyup', (e) => {
+                Object.keys(this.props.frontspec?.media?.queries ?? {})
+                    .reverse()
+                    .map((query, i) => {
+                        if (e.key === `${i + 1}`) {
+                            this._activateMedia(query);
+                        }
+                    });
+
+                if (e.key === '§') {
+                    $documents.forEach(($document) => {
+                        $document.body?.classList?.remove(
+                            's-carpenter--preview',
+                        );
+                    });
+                    // restore mode
+                    this._setMode(currentMode);
+                } else if (e.key === 'i') {
+                    this._setMode('insert');
+                } else if (e.key === 'e') {
+                    this._setMode('edit');
+                } else if (e.key === 'm') {
+                    this._setMode('move');
+                }
+            });
         });
     }
 
@@ -952,6 +977,9 @@ export default class SCarpenterAppComponent extends __SLitComponent {
                     // get a proper uniqid
                     const nodeMetas = await this._ask('nodeMetas', {
                         prefix: `${e.detail.item.specs.split('.').pop()}`,
+                        image: {
+                            url: e.detail.item.preview,
+                        },
                     });
 
                     // add the component
@@ -1097,7 +1125,7 @@ export default class SCarpenterAppComponent extends __SLitComponent {
      */
     _setMode(mode: TSCarpenterAppComponentMode): void {
         // protect agains switchingg to a none authorized mode
-        if (!this.props.features[mode]) {
+        if (!this.props.features.node[mode]) {
             return;
         }
         // apply the mode on the website body inside the iframe
@@ -1510,7 +1538,7 @@ export default class SCarpenterAppComponent extends __SLitComponent {
             <div class="_title"></div>
         `);
 
-        if (this.props.features?.saveComponent) {
+        if (this.props.features.node.save) {
             html.push(`
                 <button s-carpenter-app-action="save" class="_save" confirm="Save?">
                     ${this.props.icons.save}
@@ -1523,7 +1551,7 @@ export default class SCarpenterAppComponent extends __SLitComponent {
                 ${this.props.icons.edit} <span>Edit</span>
             </button>
         `);
-        if (this.props.features?.delete) {
+        if (this.props.features.node.delete) {
             html.push(`
                 <button s-carpenter-app-action="delete" class="_delete" confirm="Confirm?">
                     ${this.props.icons.delete}
@@ -1625,7 +1653,8 @@ export default class SCarpenterAppComponent extends __SLitComponent {
     _setToolbarTitleAndPosition($from: HTMLElement, title: string = ''): void {
         const targetRect = $from.getBoundingClientRect();
         this._$toolbar.style.top = `${
-            targetRect.top + this._websiteWindow.scrollY
+            (targetRect.top < 100 ? 100 : targetRect.top) +
+            this._websiteWindow.scrollY
         }px`;
 
         let left =
@@ -2068,10 +2097,17 @@ export default class SCarpenterAppComponent extends __SLitComponent {
             Object.keys(this._scopes ?? {}).length
         ) {
             // ask for the page scope
-            scope = await this._ask('scope');
+            scope = await this._ask('scope', {
+                image: {
+                    url: 'https://picsum.photos/600/600?v=scope',
+                },
+            });
         }
 
         const result = await this._ask('pageMetas', {
+            image: {
+                url: 'https://picsum.photos/600/600?v=pageMetas',
+            },
             scope,
         });
 
@@ -2329,7 +2365,7 @@ export default class SCarpenterAppComponent extends __SLitComponent {
                     ${unsafeHTML(this.props.icons.menu)}
                     <div class="_drop">
                         <ol class="_menu">
-                            ${this.props.features.newPage
+                            ${this.props.features.page.create
                                 ? html`
                                       <li
                                           class="_menu-item"
@@ -2442,10 +2478,10 @@ export default class SCarpenterAppComponent extends __SLitComponent {
                       </div>
                   `
                 : ''}.
-            ${this.props.features?.savePage
+            ${this.props.features.page.save
                 ? html`
                       <div class="${this.utils.cls('_actions')}" s-carpenter-ui>
-                          ${this.props.features?.savePage && this._page
+                          ${this.props.features.page.save && this._page
                               ? html`
                                     <button
                                         ?disabled=${!this._isSpecsEditorValid ||
@@ -2485,13 +2521,25 @@ export default class SCarpenterAppComponent extends __SLitComponent {
             ${this._askFor
                 ? html`
                       <div class="${this.utils.cls('_ask')}" s-carpenter-ui>
-                          ${this._askFor === 'scope'
-                              ? this._renderScopeSelector()
-                              : this._askFor === 'pageMetas'
-                              ? this._renderPageMetasForm()
-                              : this._askFor === 'nodeMetas'
-                              ? this._renderNodeMetasForm()
+                          ${this._askData.image
+                              ? html`
+                                    <figure class="s-media-container">
+                                        <img
+                                            class="s-media"
+                                            src="${this._askData.image.url}"
+                                        />
+                                    </figure>
+                                `
                               : ''}
+                          <div class="${this.utils.cls('_ask-body')}">
+                              ${this._askFor === 'scope'
+                                  ? this._renderScopeSelector()
+                                  : this._askFor === 'pageMetas'
+                                  ? this._renderPageMetasForm()
+                                  : this._askFor === 'nodeMetas'
+                                  ? this._renderNodeMetasForm()
+                                  : ''}
+                          </div>
                       </div>
                   `
                 : ''}

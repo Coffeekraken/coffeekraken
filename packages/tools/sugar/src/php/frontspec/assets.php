@@ -11,7 +11,7 @@ namespace Sugar\frontspec;
  *
  * Print the passed "assets" from the frontspec
  *
- * @param     {Object}      $assets         The "assets" object of the frontspec
+ * @param     {Object}      [$frontspec=null]         The frontspec object
  * @param     {String}      [$cacheBuster='']      A string to be added to the asset url to bust cache
  * @return    {String}    The HTML code of the assets
  *
@@ -25,9 +25,13 @@ namespace Sugar\frontspec;
  */
 function assets($frontspec = null, $cacheBuster = '')
 {
-    if (!$frontspec) {
+    if (!$frontspec || !isset($frontspec->assets)) {
         $frontspecInstance = new \SFrontspec();
         $frontspec = $frontspecInstance->read();
+    }
+
+    if (!isset($frontspec->assets)) {
+        return '<!-- frontspec: No assets found... -->';
     }
 
     $frontspec = \Sugar\convert\toObject($frontspec);

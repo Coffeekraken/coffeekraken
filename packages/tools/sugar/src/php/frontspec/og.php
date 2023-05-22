@@ -11,7 +11,7 @@ namespace Sugar\frontspec;
  *
  * Print the passed "og" from the frontspec
  *
- * @param     {Object}     $frontspec        The frontspec object containing the "og" property
+ * @param     {Object}     [$frontspec=null]        The frontspec object containing the "og" property
  * @return    {String}    The HTML code of the og
  *
  * @snippet             \Sugar\frontspec\og($1);
@@ -22,11 +22,15 @@ namespace Sugar\frontspec;
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-function og($frontspec)
+function og($frontspec = null)
 {
-    if (!$frontspec) {
+    if (!$frontspec || !isset($frontspec->metas->og)) {
         $frontspecInstance = new \SFrontspec();
         $frontspec = $frontspecInstance->read();
+    }
+
+    if (!isset($frontspec->metas->og)) {
+        return '<!-- frontspec: No open graph metas found... -->';
     }
 
     $frontspec = \Sugar\convert\toObject($frontspec);

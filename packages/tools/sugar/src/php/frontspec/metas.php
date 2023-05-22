@@ -11,7 +11,7 @@ namespace Sugar\frontspec;
  *
  * Print the passed "metas" from the frontspec
  *
- * @param     {Object}      $frontspec                  The frontspec object containing the "metas" property
+ * @param     {Object}      [$frontspec=null]                  The frontspec object containing the "metas" property
  * @param     {Object}      [$env='development']        The "env" string that can be "development" or "production"
  * @return    {String}    The HTML code of the metas
  *
@@ -23,11 +23,15 @@ namespace Sugar\frontspec;
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-function metas($frontspec, $env = 'development')
+function metas($frontspec = null, $env = 'development')
 {
-    if (!$frontspec) {
+    if (!$frontspec || !isset($frontspec->metas)) {
         $frontspecInstance = new \SFrontspec();
         $frontspec = $frontspecInstance->read();
+    }
+
+    if (!isset($frontspec->assets)) {
+        return '<!-- frontspec: No metas found... -->';
     }
 
     $frontspec = \Sugar\convert\toObject($frontspec);

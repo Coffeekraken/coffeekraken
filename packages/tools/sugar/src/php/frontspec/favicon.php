@@ -11,7 +11,7 @@ namespace Sugar\frontspec;
  *
  * Print the passed "favicon" from the frontspec
  *
- * @param     {Object}      $frontspec                  The frontspec object containing the "metas" property
+ * @param     {Object}      [$frontspec=null]                  The frontspec object containing the "metas" property
  * @return    {String}    The HTML code of the favicon
  *
  * @snippet             \Sugar\frontspec\favicon($1);
@@ -22,11 +22,15 @@ namespace Sugar\frontspec;
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-function favicon($frontspec)
+function favicon($frontspec = null)
 {
-    if (!$frontspec) {
+    if (!$frontspec || !isset($frontspec->favicon)) {
         $frontspecInstance = new \SFrontspec();
         $frontspec = $frontspecInstance->read();
+    }
+
+    if (!isset($frontspec->favicon)) {
+        return '<!-- frontspec: No favicon found... -->';
     }
 
     $frontspec = \Sugar\convert\toObject($frontspec);

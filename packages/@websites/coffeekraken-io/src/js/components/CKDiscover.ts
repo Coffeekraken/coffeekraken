@@ -36,6 +36,7 @@ export default class CKDiscover extends __SLitComponent {
 
     async firstUpdated() {
         this._docmap = await loadDocmap();
+        _console.log('DOC', this._docmap);
         this.grabItem();
     }
 

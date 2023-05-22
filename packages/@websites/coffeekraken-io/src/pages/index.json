@@ -4,5 +4,46 @@
     "name": "index",
     "scope": "repo",
     "slug": ["/"],
-    "nodes": []
+    "nodes": [
+        {
+            "type": "node",
+            "uid": "welcome"
+        },
+        {
+            "type": "node",
+            "uid": "openSource"
+        },
+        {
+            "type": "node",
+            "uid": "ui"
+        },
+        {
+            "type": "node",
+            "uid": "helpers"
+        },
+        {
+            "type": "node",
+            "uid": "frontend"
+        },
+        {
+            "type": "node",
+            "uid": "discover"
+        },
+        {
+            "type": "node",
+            "uid": "sugar"
+        },
+        {
+            "type": "node",
+            "uid": "vscode"
+        },
+        {
+            "type": "node",
+            "uid": "development"
+        },
+        {
+            "type": "node",
+            "uid": "why"
+        }
+    ]
 }

@@ -114,6 +114,7 @@ export interface ISMarkdownBuilderBuildParams {
     cache: boolean;
     target: 'html' | 'markdown';
     preset: string[];
+    print: boolean;
 }
 
 export default class SMarkdownBuilder extends __SBuilder {
@@ -685,6 +686,13 @@ export default class SMarkdownBuilder extends __SBuilder {
                         cacheFilePath,
                         JSON.stringify(cacheHashes, null, 4),
                     );
+                }
+
+                // check if we need to print the output
+                if (finalParams.print) {
+                    buildedFiles.forEach((res) => {
+                        console.log(res.code);
+                    });
                 }
 
                 resolve(buildedFiles);

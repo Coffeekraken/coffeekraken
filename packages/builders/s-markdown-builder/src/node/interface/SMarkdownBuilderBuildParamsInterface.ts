@@ -101,6 +101,12 @@ export default class SMarkdownBuilderBuildParamsInterface extends __SInterface {
                 ),
                 alias: 'p',
             },
+            print: {
+                description:
+                    'Specify if you want to print out the build result on finish. This can be usefull when using the builder through the CLI and that you want to get the result from the output buffer.',
+                type: 'Boolean',
+                default: false,
+            },
         };
     }
 }

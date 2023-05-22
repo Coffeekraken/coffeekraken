@@ -43,17 +43,19 @@ $viewRenderer = new SViewRenderer([
         'page' => $params['page'],
     ],
 ]);
-$renderRes = $viewRenderer->renderPage($pageFileJson, function ($node) use (
-    $nodesDir
-) {
-    $filePath = $nodesDir . '/' . $node->uid . '.json';
+$renderRes = $viewRenderer->renderPage($pageFileJson);
 
-    if (!file_exists($filePath)) {
-        return;
-    }
+// function ($node) use (
+//     $nodesDir
+// ) {
+//     $filePath = $nodesDir . '/' . $node->uid . '.json';
 
-    $data = json_decode(file_get_contents($filePath));
-    return $data;
-});
+//     if (!file_exists($filePath)) {
+//         return;
+//     }
+
+//     $data = json_decode(file_get_contents($filePath));
+//     return $data;
+// }
 
 print \Sugar\html\expandPleasantCssClassnames($renderRes);

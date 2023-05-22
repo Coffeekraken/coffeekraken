@@ -6,3 +6,4 @@ node_modules
 .yarn/cache
 *.tmp
 yarn-error.log
+execFromPhp.js

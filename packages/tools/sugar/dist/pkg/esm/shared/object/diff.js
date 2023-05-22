@@ -27,7 +27,7 @@ import __isPlainObject from '../is/isPlainObject';
  * @todo      doc
  * @todo      tests
  *
- * @snipper         __diff($1, $2)
+ * @snippet         __diff($1, $2)
  *
  * @example         js
  * import { __diff } from '@coffeekraken/sugar/object';

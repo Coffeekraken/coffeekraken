@@ -1,5 +1,5 @@
 <div>
-    @include('generic.logo')
+    @include ('sugar.logos.coffeekraken.coffeekraken')
 
     <h1 class="s-typo:h3 s-mbs:30 s-mbe:20">
         Congrats!

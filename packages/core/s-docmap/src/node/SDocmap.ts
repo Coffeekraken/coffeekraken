@@ -8,10 +8,13 @@ import {
     __checkPathWithMultipleExtensions,
     __fileName,
     __folderPath,
-    __readJsonSync
+    __readJsonSync,
 } from '@coffeekraken/sugar/fs';
 import { __deepMap, __deepMerge, __get } from '@coffeekraken/sugar/object';
-import { __packageJsonSync, __packageMetasSync } from '@coffeekraken/sugar/package';
+import {
+    __packageJsonSync,
+    __packageMetasSync,
+} from '@coffeekraken/sugar/package';
 import { __packageRootDir } from '@coffeekraken/sugar/path';
 import __deepFilter from '@coffeekraken/sugar/shared/object/deepFilter';
 import __set from '@coffeekraken/sugar/shared/object/set';
@@ -43,7 +46,7 @@ function __toLowerCase(l = '') {
  * and save it inside a directory you choose.
  *
  * @param           {Object}        [settings={}]           An object of settings to configure your docmap instance
- * 
+ *
  * @setting         {Record<String, ISDocmapCustomMenuSettingFn>}       [customMenu={}]         Specify some custom menus you want to extract from the docmap.
  * @setting         {Record<String, ISDocmapTagProxyFn>}                [tagsProxy={}]          Specify some tags proxy to transform some tags values at BUILD process.
  *
@@ -51,9 +54,9 @@ function __toLowerCase(l = '') {
  * @todo      doc
  * @todo      tests
  *
- * @snipper         __SDocmap($1)
+ * @snippet         __SDocmap($1)
  * new __SDocmap($1)
- * 
+ *
  * @example             js
  * import __SDocmap from '@coffeekraken/s-docmap';
  * const docmap = new __SDocmap();
@@ -213,23 +216,23 @@ class SDocmap extends __SClass implements ISDocmap {
                     tagsProxy: {},
                     customMenu: {
                         styleguide({ key, value, isObject }) {
+                            if (key === 'styleguide') return true;
                             if (
                                 key.split('/').length > 1 &&
                                 key.match(/^([a-zA-Z0-9-_@\/]+)?\/styleguide\//)
                             ) {
                                 return true;
                             }
-                            if (key === 'styleguide') return true;
                             return false;
                         },
                         specs({ key, value, isObject }) {
+                            if (key === 'specs') return true;
                             if (
                                 key.split('/').length > 1 &&
                                 key.match(/^([a-zA-Z0-9-_@\/]+)?\/views\//)
                             ) {
                                 return true;
                             }
-                            if (key === 'specs') return true;
                             return false;
                         },
                     },
@@ -264,13 +267,13 @@ class SDocmap extends __SClass implements ISDocmap {
      * @type          Function
      * @async
      *
-     * This static method allows you to search for docmap.json files and read them to get
+     * This method allows you to search for docmap.json files and read them to get
      * back the content of them in one call. It can take advantage of the cache if
      *
      * @todo      update documentation
      * @todo      integrate the "cache" feature
      *
-     * @param       {Object}        [settings={}]       A settings object to override the instance level ones
+     * @param       {ISDocmapReadParams}            [params=null]       An ISDocmapReadParams object to configure your read process
      * @return      {Promise<ISDocmapObj>}                          A promise instance that will be resolved once the docmap.json file(s) have been correctly read
      *
      * @since       2.0.0
@@ -285,7 +288,7 @@ class SDocmap extends __SClass implements ISDocmap {
                 )
             );
 
-            const packageJson = __packageJsonSync();
+            // const packageJson = __packageJsonSync();
 
             let docmapVersion = 'current';
 

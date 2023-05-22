@@ -417,6 +417,11 @@ class SViewRenderer extends __SClass implements ISViewRenderer {
         if (this.settings.sharedDataFiles) {
             for (let i = 0; i < this.settings.sharedDataFiles.length; i++) {
                 const dataFilePath = this.settings.sharedDataFiles[i];
+
+                if (!__fs.existsSync(dataFilePath)) {
+                    continue;
+                }
+
                 sharedData = __deepMerge(
                     sharedData,
                     await __SDataFileGeneric.load(dataFilePath),

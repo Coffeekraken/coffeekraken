@@ -1,0 +1,16 @@
+#features-why {
+    position: relative;
+
+    &:after {
+        display: none;
+    }
+
+    img,
+    svg {
+        display: none;
+
+        @sugar.lod theme {
+            display: block;
+        }
+    }
+}

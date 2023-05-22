@@ -16,7 +16,7 @@
  * @todo      doc
  * @todo      tests
  *
- * @snipper         __parseHsla($1)
+ * @snippet         __parseHsla($1)
  *
  * @example         js
  * import { __parseHsla } from '@coffeekraken/sugar/color';

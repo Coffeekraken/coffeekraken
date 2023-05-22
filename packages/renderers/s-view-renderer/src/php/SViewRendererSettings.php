@@ -3,6 +3,20 @@
 class SViewRendererSettings
 {
     /**
+     * @name           rootDir
+     * @type            String
+     * @default         $_ENV['S_FRONTEND_PATH'] || $_SERVER['DOCUMENT_ROOT']
+     *
+     * Specify the folder from where to build the pathes like "cacheDir", etc...
+     * By default, it will take the $_ENV['S_FRONTEND_DIR'] variable and if this is not set,
+     * it will take the $_SERVER['DOCUMENT_ROOT'] one.
+     *
+     * @since       2.0.0
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    public $rootDir;
+
+    /**
      * @name           rootDirs
      * @type            String[]
      *
@@ -24,6 +38,31 @@ class SViewRendererSettings
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     public $cacheDir;
+
+    /**
+     * @name           nodeLoader
+     * @type            Function
+     * @default         null
+     *
+     * Specify a function that will be called for each nodes defined in the page file.
+     * This function has as responsability to return some data to be injected inside the view at render.
+     *
+     * @since       2.0.0
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    public $nodeLoader;
+
+    /**
+     * @name           nodeLoaderPath
+     * @type            String
+     * @default         $this->rootDir . '/src/nodes/nodeLoader.php'
+     *
+     * Specify a path to a .php file that return a node loader function.
+     *
+     * @since       2.0.0
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    public $nodeLoaderPath;
 
     /**
      * @name           defaultEngine
@@ -96,14 +135,6 @@ class SViewRendererSettings
 
     public function __construct($settings)
     {
-        $this->cacheDir = $_SERVER['DOCUMENT_ROOT'] . '/.local/cache/views';
-
-        // add the src/views/shared.data.php file
-        array_push(
-            $this->sharedDataFiles,
-            $_SERVER['DOCUMENT_ROOT'] . '/src/views/shared.data.php'
-        );
-
         foreach ($settings as $key => $value) {
             if (is_array($this->{$key}) && is_array($value)) {
                 $this->{$key} = array_merge_recursive($this->{$key}, $value);
@@ -112,10 +143,38 @@ class SViewRendererSettings
             }
         }
 
+        if (!isset($this->rootDir)) {
+            $this->rootDir = $_SERVER['DOCUMENT_ROOT'];
+            if (isset($_ENV['S_FRONTEND_DIR'])) {
+                $this->rootDir = $_ENV['S_FRONTEND_DIR'];
+            }
+        }
+
+        if (!isset($this->cacheDir)) {
+            $this->cacheDir = $this->rootDir . '/.local/cache/views';
+        }
+
+        if (!isset($this->nodeLoaderPath)) {
+            $this->nodeLoaderPath =
+                $this->rootDir . '/src/nodes/nodeLoader.php';
+        } elseif (!file_exists($this->nodeLoaderPath)) {
+            throw new Exception(
+                '[SViewRendererSettings] Your nodeLoaderPath "' .
+                    $this->nodeLoaderPath .
+                    '" file does not exists...'
+            );
+        }
+
+        // add the src/views/shared.data.php file
+        array_push(
+            $this->sharedDataFiles,
+            $this->rootDir . '/src/views/shared.data.php'
+        );
+
         // handle complexe rootDirs
         $this->rootDirs = array_merge(
             $this->rootDirs,
-            [$_SERVER['DOCUMENT_ROOT'] . '/src/views'],
+            [$this->rootDir . '/src/views'],
             \Sugar\twig\getDefaultViewDirs(),
             \Sugar\blade\getDefaultViewDirs()
         );

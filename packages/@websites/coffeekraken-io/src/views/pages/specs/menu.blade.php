@@ -28,7 +28,7 @@
                         {{ $item->name }}
                     </div>
                     @if (!isset($item->tree))
-                        @include('pages.markdown.menu', [
+                        @include('doc.menu', [
                             'menu' => $item,
                             'id' => $subId
                         ])

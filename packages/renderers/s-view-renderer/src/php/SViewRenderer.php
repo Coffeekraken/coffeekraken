@@ -9,14 +9,10 @@
  *
  * This class represent a template that can be rendered using all the supported render engines listed in the features bellow.
  *
- * @param       {Object|Array}          [$settings=[]]              Some settings to configure your instance
- *
- * @setting         {Object|Array}            [namespaces=[]]             An array|object of namespace like "my.namespace" property with a simple array of folders where to search for specs files when using this namespace
- * @setting         {Object|Array}            [sFrontspecSettings=[]]           Some settings to pass to the SFrontspec class in order to read the `frontspec.json` content
+ * @param       {SViewRendererSettings}          [$settings=[]]              An instance of the SViewRendererSettings class to configure your views renderer
  *
  * @feature       2.0.0         Support for ```bladePhp``` render engine
  * @feature       2.0.0         Support for ```twig``` render engine
- * @feature       2.0.0         Simply render your template using the ```render``` method that returns you back a nice SPromise instance resolved once the template has been rendered correctly
  *
  * @snippet         new SViewRenderer($1);
  * $template = new SViewRenderer($1);
@@ -75,6 +71,102 @@ class SViewRenderer
     }
 
     /**
+     * Load a data file for the passed view path
+     */
+    private function _loadDataFileForView($viewPath)
+    {
+        $viewMetas = $this->getViewMetas($viewPath);
+
+        $dataFilePath;
+        $dataFileExt;
+        foreach (['php', 'js', 'json'] as $ext) {
+            $potentialFilePath =
+                $viewMetas->dir .
+                '/' .
+                $viewMetas->filenameWithoutExt .
+                '.data.' .
+                $ext;
+            if (file_exists($potentialFilePath)) {
+                $dataFilePath = $potentialFilePath;
+                $dataFileExt = $ext;
+                break;
+            }
+        }
+
+        if (!isset($dataFilePath)) {
+            return [];
+        }
+
+        return $this->_loadDataFile($dataFilePath);
+    }
+
+    /**
+     * Load a data file
+     */
+    private function _loadDataFile($filePath)
+    {
+        $relFilePath = str_replace(
+            $this->settings->rootDir . '/',
+            '',
+            $filePath
+        );
+        $parts = explode('.', $filePath);
+        $extension = array_pop($parts);
+        if (!file_exists($filePath)) {
+            \Sugar\console\log(
+                '[SViewRenderer] The registered shared data file "' .
+                    $relFilePath .
+                    '" does not exists...'
+            );
+        }
+
+        $data = [];
+        switch ($extension) {
+            case 'php':
+                $data = require $filePath;
+                break;
+            case 'json':
+                $data = json_decode(file_get_contents($filePath), true);
+                break;
+            case 'js':
+                $output = [];
+                $tmpFilePath = dirname($filePath) . '/execFromPhp.js';
+                $relPath = str_replace(
+                    $this->settings->rootDir . '/',
+                    '',
+                    $tmpFilePath
+                );
+                $nodeFile = [
+                    'import __fn from "./' . basename($filePath) . '";',
+                    'import __SSugarConfig from "@coffeekraken/s-sugar-config";',
+                    'async function _exec() {',
+                    '   await __SSugarConfig.load();',
+                    '   console.log(JSON.stringify(await __fn()));',
+                    '   process.exit(0);',
+                    '}',
+                    '_exec();',
+                ];
+                file_put_contents($tmpFilePath, implode(PHP_EOL, $nodeFile));
+                $data = exec(
+                    'node --experimental-json-modules --trace-warnings --trace-uncaught --no-warnings --es-module-specifier-resolution node ' .
+                        $relPath,
+                    $output,
+                    $result
+                );
+                unlink($tmpFilePath);
+                $data = json_decode(implode('', $output));
+                break;
+            default:
+                throw new Exception(
+                    'The data file "' .
+                        $filePath .
+                        '" is not a supported format, at least for now...'
+                );
+        }
+        return $data;
+    }
+
+    /**
      * Load the shared datas
      */
     private function _getSharedData()
@@ -85,36 +177,12 @@ class SViewRenderer
         // shared data from files
         if (count($this->settings->sharedDataFiles)) {
             foreach ($this->settings->sharedDataFiles as $filePath) {
-                $relFilePath = str_replace(
-                    $_SERVER['DOCUMENT_ROOT'] . '/',
-                    '',
-                    $filePath
-                );
-                $parts = explode('.', $filePath);
-                $extension = array_pop($parts);
                 if (!file_exists($filePath)) {
-                    \Sugar\console\log(
-                        '[SViewRenderer] The registered shared data file "' .
-                            $relFilePath .
-                            '" does not exists...'
-                    );
                     continue;
                 }
-                $data = [];
-                switch ($extension) {
-                    case 'php':
-                        $data = require $filePath;
-                        break;
-                    case 'json':
-                        $data = json_decode(file_get_contents($filePath), true);
-                        break;
-                    default:
-                        throw new Exception(
-                            'The data file "' .
-                                $filePath .
-                                '" is not a supported format, at least for now...'
-                        );
-                }
+                // load the data from the file
+                $data = $this->_loadDataFile($filePath);
+
                 // merge the data
                 $sharedData = array_merge_recursive($sharedData, $data);
             }
@@ -151,11 +219,13 @@ class SViewRenderer
     {
     }
 
-    private function getViewMetas($viewDotPath)
+    public function getViewMetas($viewDotPath)
     {
         $parts = explode('.', $viewDotPath);
         $viewName = array_pop($parts);
         $viewPath = $this->_getFinalViewPath($viewDotPath);
+        $filename = basename($viewPath);
+        $filenameWithoutExt = $filename;
 
         // if no file path
         if (!isset($viewPath)) {
@@ -170,6 +240,11 @@ class SViewRenderer
         $extension;
         foreach (SViewRenderer::$engines as $ext => $engineId) {
             if (str_ends_with($viewPath, $ext)) {
+                $filenameWithoutExt = str_replace(
+                    '.' . $ext,
+                    '',
+                    $filenameWithoutExt
+                );
                 $extension = $ext;
                 break;
             }
@@ -179,9 +254,12 @@ class SViewRenderer
         $engineInstance = $this->_getEngineInstance($extension);
 
         // return the view metas
-        return [
+        return (object) [
             'name' => $viewName,
             'path' => $viewPath,
+            'filename' => basename($viewPath),
+            'filenameWithoutExt' => $filenameWithoutExt,
+            'dir' => dirname($viewPath),
             'extension' => $extension,
             'engineInstance' => $engineInstance,
         ];
@@ -192,6 +270,16 @@ class SViewRenderer
         // make sure we have a layout
         if (!isset($pageJson->layout)) {
             $pageJson->layout = 'layouts.main';
+        }
+
+        // nodeLoader from nodeLoaderPath
+        if (!$nodeLoader && isset($this->settings->nodeLoaderPath)) {
+            $nodeLoader = require_once $this->settings->nodeLoaderPath;
+        }
+
+        // nodeLoader from settings
+        if (!$nodeLoader && isset($this->settings->nodeLoader)) {
+            $nodeLoader = $this->settings->nodeLoader;
         }
 
         // get the shared data
@@ -246,14 +334,28 @@ class SViewRenderer
                 // render the node
                 $viewMetas = $this->getViewMetas($renderableNode->specs);
 
-                $renderResult = $viewMetas['engineInstance']->render(
-                    $viewMetas['path'],
+                // load data from the ".data.php/json" file alongside the
+                // node file
+                $data = $this->_loadDataFileForView($viewMetas->path);
+
+                // if the returned data is callbable
+                if (is_callable($data)) {
+                    $data = $data();
+                }
+
+                if (!$data) {
+                    $data = [];
+                }
+
+                $renderResult = $viewMetas->engineInstance->render(
+                    $viewMetas->path,
                     array_merge_recursive(
                         [
                             'nodes' => $nodes,
                             'uid' => $node->uid,
                         ],
                         $sharedData,
+                        (array) $data,
                         \Sugar\convert\toArray($renderableNode->values)
                     )
                 );
@@ -270,8 +372,8 @@ class SViewRenderer
         // render the layout with the content rendered above
         $viewMetas = $this->getViewMetas($pageJson->layout);
 
-        $layoutRenderResult = $viewMetas['engineInstance']->render(
-            $viewMetas['path'],
+        $layoutRenderResult = $viewMetas->engineInstance->render(
+            $viewMetas->path,
             array_merge_recursive(
                 [
                     'body' => $contentHtml,
@@ -361,6 +463,14 @@ class SViewRenderer
                     $finalViewPath = $viewDotPath;
                 }
             }
+        }
+
+        if ($finalViewPath == $viewDotPath) {
+            throw new Exception(
+                '[SViewRenderer] No suitable view found for "' .
+                    $viewDotPath .
+                    '"...'
+            );
         }
 
         return $finalViewPath;

@@ -9,11 +9,11 @@
     s-deps css="docblock">
 
     @if (isset($isFirst))
-        @include('doc.title', ['block' => $block])
+        @include('doc.partials.title', ['block' => $block])
     @else
 
         @if (isset($block->name))
-            @include('doc.sectionTitle', ['block' => $block])
+            @include('doc.partials.sectionTitle', ['block' => $block])
         @endif
     @endif
 
@@ -22,39 +22,39 @@
     @endif
 
     @if (isset($isFirst))
-        @include('doc.see-banner', ['block' => $block])
+        @include('doc.partials.see-banner', ['block' => $block])
     @endif
 
-    @include('doc.description', ['block' => $block])
+    @include('doc.partials.description', ['block' => $block])
     
     @if (isset($isFirst))
-        @include('doc.status', ['block' => $block])
-            @include('doc.preview', ['block' => $block])
-        @include('doc.feature', ['block' => $block])
-        @include('doc.import', ['block' => $block])
-        @include('doc.install', ['block' => $block])
+        @include('doc.partials.status', ['block' => $block])
+            @include('doc.partials.preview', ['block' => $block])
+        @include('doc.partials.feature', ['block' => $block])
+        @include('doc.partials.import', ['block' => $block])
+        @include('doc.partials.install', ['block' => $block])
     @endif
     
     @if (!isset($isStyleguide) && @$block->type->raw !== 'CssClass')
-        @include('doc.example', ['block' => $block])
+        @include('doc.partials.example', ['block' => $block])
     @endif
     
-    @include('doc.cssClass', ['block' => $block])
+    @include('doc.partials.cssClass', ['block' => $block])
     
     @if (isset($block->event))
-        @include('doc.event', ['interface' => $block->event])
+        @include('doc.partials.event', ['interface' => $block->event])
     @endif
 
     @if (isset($block->interface))
-        @include('doc.interface', ['interface' => $block->interface])
+        @include('doc.partials.interface', ['interface' => $block->interface])
     @endif
     
-    @include('doc.param', ['block' => $block])
-    @include('doc.return', ['block' => $block])
-    @include('doc.setting', ['block' => $block])
-    @include('doc.props', ['block' => $block])
-    @include('doc.todo', ['block' => $block])
-    @include('doc.see', ['block' => $block])
+    @include('doc.partials.param', ['block' => $block])
+    @include('doc.partials.return', ['block' => $block])
+    @include('doc.partials.setting', ['block' => $block])
+    @include('doc.partials.props', ['block' => $block])
+    @include('doc.partials.todo', ['block' => $block])
+    @include('doc.partials.see', ['block' => $block])
 
     @if (!isset($isFirst))
         </section>

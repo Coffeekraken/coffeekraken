@@ -71,5 +71,10 @@ export default class SMarkdownBuilderBuildParamsInterface extends __SInterface {
             values: string[];
             alias: string;
         };
+        print: {
+            description: string;
+            type: string;
+            default: boolean;
+        };
     };
 }

@@ -48,6 +48,7 @@ export interface ISMarkdownBuilderBuildParams {
     cache: boolean;
     target: 'html' | 'markdown';
     preset: string[];
+    print: boolean;
 }
 export default class SMarkdownBuilder extends __SBuilder {
     static _registeredTransformers: any;

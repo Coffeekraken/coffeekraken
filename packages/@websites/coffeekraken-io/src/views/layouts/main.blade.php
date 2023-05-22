@@ -48,7 +48,7 @@
             Welcome on
         </p>
         <div class="_logo">
-            @include ('generic.logo')
+            @include ('sugar.logos.coffeekraken.coffeekraken')
         </div>
         <div class="_spinner"></div>
     </div>

@@ -31,7 +31,7 @@ if ($firstBlock->status == 'wip') {
                     </h5>
 
                     @php $menu = get_object_vars($docmap->menu->custom->styleguide->tree->styleguide); @endphp
-                    @include('pages.markdown.menu', ['menu' => $menu, 'id' => 'main', 'icon' => 'display-preview'])
+                    @include('doc.menu', ['menu' => $menu, 'id' => 'main', 'icon' => 'display-preview'])
 
                 </div>
 

@@ -40,6 +40,11 @@ export default function __isScrollable(
         ...(settings ?? {}),
     };
 
+    // check only Element nodes
+    if (!($elm instanceof Element)) {
+        return false;
+    }
+
     const style = window.getComputedStyle($elm);
     var overflowY = style.overflowY.trim();
     var overflowX = style.overflowX.trim();

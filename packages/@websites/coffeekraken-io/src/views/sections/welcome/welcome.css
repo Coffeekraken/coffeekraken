@@ -1,0 +1,132 @@
+/* @sugar.partial (welcome) { */
+#homepage-welcome {
+    height: calc(100vh - 200px);
+    min-height: 800px;
+    text-align: left;
+    position: relative;
+    z-index: 10;
+    padding-block: 0;
+
+    .s-logo--coffeekraken {
+        width: 270px;
+
+        @sugar.media mobile {
+            display: block;
+            margin: 0 auto;
+        }
+    }
+
+    @sugar.media mobile {
+        height: auto;
+
+        text-align: center;
+        position: relative;
+        top: 100px;
+        left: 0;
+        width: 100%;
+    }
+
+    input {
+        text-align: left;
+    }
+
+    .s-slider_slides {
+        display: flex;
+        pointer-events: none;
+
+        @sugar.media mobile {
+            height: auto;
+            min-height: 600px;
+            height: calc(100vh - 100px);
+            /* align-items: start; */
+        }
+    }
+
+    .s-slider[lnf='welcome-header'] {
+        margin-top: 100px;
+        height: calc(100% - 100px);
+        opacity: 0;
+        transition: sugar.transition();
+        position: absolute;
+        z-index: 0;
+        pointer-events: none !important;
+
+        &[mounted] {
+            opacity: 1;
+            position: relative;
+        }
+
+        @sugar.media mobile {
+            height: auto;
+            margin-top: 0;
+        }
+    }
+
+    [s-slider-slide]:not(.s-slider .s-slider [s-slider-slide]) {
+        flex: 0 0 100%;
+        width: 100vw;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        opacity: 0;
+        @sugar.transition (fast);
+
+        &.pre-active {
+            opacity: 1;
+            transition-delay: 0.5s !important;
+        }
+
+        &.active {
+            opacity: 1;
+        }
+    }
+
+    .s-slider_slides-wrapper {
+        pointer-events: none;
+
+        @sugar.wireframe {
+            &:after {
+                display: none;
+            }
+        }
+    }
+
+    .s-slider .s-slider [s-slider-slide] {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        color: white;
+        pointer-events: none;
+    }
+
+    ._content {
+        /* width: 50%; */
+        pointer-events: none;
+        padding-right: 35%;
+        /* text-align: center; */
+        /* padding-top: 200px; */
+
+        > * {
+            pointer-events: all;
+        }
+
+        .s-typo--h3,
+        .s-typo--p,
+        .s-typo--lead {
+            /* margin-inline: auto; */
+        }
+
+        @sugar.media >=wide {
+            @sugar.container (wide);
+        }
+
+        @sugar.media mobile {
+            position: relative;
+            top: 0;
+            left: 0;
+            width: 100%;
+            transform: none;
+            padding: sugar.padding(30) sugar.padding(30);
+        }
+    }
+}

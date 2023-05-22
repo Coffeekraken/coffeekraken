@@ -24,19 +24,15 @@ namespace Sugar\frontspec;
  */
 function og($frontspec = null)
 {
-    if (!$frontspec || !isset($frontspec->metas->og)) {
+    if ($frontspec) {
+        $frontspec = \Sugar\convert\toObject($frontspec);
+    } elseif (!$frontspec || !isset($frontspec->metas->og)) {
         $frontspecInstance = new \SFrontspec();
         $frontspec = $frontspecInstance->read();
     }
 
     if (!isset($frontspec->metas->og)) {
         return '<!-- frontspec: No open graph metas found... -->';
-    }
-
-    $frontspec = \Sugar\convert\toObject($frontspec);
-
-    if (!isset($frontspec->metas->og)) {
-        return '';
     }
 
     $og = $frontspec->metas->og;

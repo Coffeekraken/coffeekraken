@@ -25,7 +25,9 @@ namespace Sugar\frontspec;
  */
 function assets($frontspec = null, $cacheBuster = '')
 {
-    if (!$frontspec || !isset($frontspec->assets)) {
+    if ($frontspec) {
+        $frontspec = \Sugar\convert\toObject($frontspec);
+    } elseif (!$frontspec || !isset($frontspec->assets)) {
         $frontspecInstance = new \SFrontspec();
         $frontspec = $frontspecInstance->read();
     }
@@ -33,8 +35,6 @@ function assets($frontspec = null, $cacheBuster = '')
     if (!isset($frontspec->assets)) {
         return '<!-- frontspec: No assets found... -->';
     }
-
-    $frontspec = \Sugar\convert\toObject($frontspec);
 
     $assets = $frontspec->assets;
     $assetsStr = [];

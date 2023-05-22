@@ -24,7 +24,9 @@ namespace Sugar\frontspec;
  */
 function favicon($frontspec = null)
 {
-    if (!$frontspec || !isset($frontspec->favicon)) {
+    if ($frontspec) {
+        $frontspec = \Sugar\convert\toObject($frontspec);
+    } elseif (!$frontspec || !isset($frontspec->favicon)) {
         $frontspecInstance = new \SFrontspec();
         $frontspec = $frontspecInstance->read();
     }
@@ -32,8 +34,6 @@ function favicon($frontspec = null)
     if (!isset($frontspec->favicon)) {
         return '<!-- frontspec: No favicon found... -->';
     }
-
-    $frontspec = \Sugar\convert\toObject($frontspec);
 
     if (!isset($frontspec->favicon)) {
         return '<!-- No favicon has been found -->';

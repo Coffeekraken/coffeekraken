@@ -25,7 +25,9 @@ namespace Sugar\frontspec;
  */
 function metas($frontspec = null, $env = 'development')
 {
-    if (!$frontspec || !isset($frontspec->metas)) {
+    if ($frontspec) {
+        $frontspec = \Sugar\convert\toObject($frontspec);
+    } elseif (!$frontspec || !isset($frontspec->metas)) {
         $frontspecInstance = new \SFrontspec();
         $frontspec = $frontspecInstance->read();
     }
@@ -33,8 +35,6 @@ function metas($frontspec = null, $env = 'development')
     if (!isset($frontspec->assets)) {
         return '<!-- frontspec: No metas found... -->';
     }
-
-    $frontspec = \Sugar\convert\toObject($frontspec);
 
     $metas = [];
     if (isset($frontspec->metas)) {

@@ -273,7 +273,11 @@ class SViewRenderer
         }
 
         // nodeLoader from nodeLoaderPath
-        if (!$nodeLoader && isset($this->settings->nodeLoaderPath)) {
+        if (
+            !$nodeLoader &&
+            isset($this->settings->nodeLoaderPath) &&
+            file_exists($this->settings->nodeLoaderPath)
+        ) {
             $nodeLoader = require_once $this->settings->nodeLoaderPath;
         }
 

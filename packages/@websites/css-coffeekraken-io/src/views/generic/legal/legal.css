@@ -1,0 +1,3 @@
+.section-legal {
+    background-color: sugar.color(main, background, --darken 5%);
+}

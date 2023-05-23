@@ -1,0 +1,15 @@
+.toolbar {
+  background: sugar.color(main, surface);
+  position: sticky;
+  top: 100px;
+  z-index: 10;
+  padding-inline: 0;
+  padding-block: sugar.padding(20);
+
+  .s-icon {
+    font-size: 0.8em;
+  }
+  [class*="s-platform-"] {
+    font-size: 1em;
+  }
+}

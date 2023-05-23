@@ -1,0 +1,79 @@
+@sugar.import ('./sugar.css');
+@sugar.import ('./dwarf.css');
+@sugar.import ('../views/**/*.css');
+@sugar.import ('./generic/**/*.css');
+
+html {
+    overflow-x: hidden;
+    background: none;
+}
+
+body {
+    width: 100vw;
+}
+
+.s-container:not(#header .s-container, .s-panel .s-container) {
+    margin: 0 0 0 50%;
+    translate: -50% 0;
+    @sugar.transition;
+
+    @sugar.media mobile {
+        margin: 0 !important;
+        translate: 0 0 !important;
+    }
+}
+
+body:not(#homepage) {
+    .s-container:not(._nav .s-container, .s-panel .s-container) {
+        margin: 0 0 0 sugar.margin(80) !important;
+        max-width: 1500px;
+        translate: 0 0 !important;
+
+        @sugar.media mobile {
+            margin: 0 !important;
+        }
+    }
+}
+
+[s-appear]:not([appear]) {
+    opacity: 0;
+}
+
+.hljs > * {
+    display: inline-block !important;
+}
+
+.s-container {
+    @sugar.media (>=wide) {
+        @sugar.container (wide);
+    }
+}
+
+.s-page-transition.loading * {
+    user-select: none;
+    pointer-events: none !important;
+}
+
+.sticky {
+    @sugar.media (>=desktop) {
+        position: sticky;
+        top: 100px;
+    }
+}
+
+[s-form-validate][password] {
+    ._levels * {
+        display: none;
+        margin-inline-end: sugar.margin(20);
+    }
+
+    &.password-weak ._levels ._weak {
+        display: inline-block;
+    }
+    &.password-medium ._levels ._medium {
+        display: inline-block;
+    }
+    &.password-strong ._levels ._strong {
+        display: inline-block;
+    }
+}

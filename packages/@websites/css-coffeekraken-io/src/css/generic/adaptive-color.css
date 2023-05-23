@@ -1,0 +1,41 @@
+.adaptive-color {
+    [fill='white'],
+    .main {
+        fill: sugar.color(main);
+    }
+    [fill='#FFBB01'],
+    [fill='#FEBD0F'] .accent {
+        fill: sugar.color(accent);
+    }
+    [stroke='#FFBB01'],
+    [stroke='#FEBD0F'] {
+        stroke: sugar.color(accent);
+    }
+
+    [fill='#5100FF'],
+    [fill='#4900E6'],
+    [fill='#FEBD0F'] .complementary {
+        fill: sugar.color(complementary);
+    }
+    [stroke='#5100FF'],
+    [stroke='#4900E6'],
+    [stroke='#FEBD0F'] {
+        stroke: sugar.color(complementary);
+    }
+
+    @sugar.theme (dark) {
+        [fill='white'],
+        .main {
+            fill: sugar.color(main, text);
+        }
+        [fill='#FFBB01'],
+        [fill='#FEBD0F'],
+        .accent {
+            fill: sugar.color(accent);
+        }
+        [stroke='#FFBB01'],
+        [stroke='#FEBD0F'] {
+            stroke: sugar.color(accent);
+        }
+    }
+}

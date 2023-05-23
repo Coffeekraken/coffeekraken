@@ -1,0 +1,48 @@
+/* @sugar.partial (welcome) { */
+#homepage-welcome {
+    height: calc(100vh - 200px);
+    min-height: 800px;
+    text-align: left;
+    position: relative;
+    display: flex;
+    align-items: center;
+    z-index: 10;
+    padding-block: 0;
+    /* background: sugar.color(accent); */
+
+    .s-logo--coffeekraken-picto {
+        width: 100px;
+    }
+
+    @sugar.media mobile {
+        height: auto;
+        text-align: center;
+        position: relative;
+        top: 100px;
+        left: 0;
+        width: 100%;
+    }
+
+    ._content {
+        display: flex;
+        align-items: center;
+        gap: sugar.margin(100);
+
+        ._right {
+            flex-grow: 1;
+        }
+
+        @sugar.media >=wide {
+            @sugar.container (wide);
+        }
+
+        @sugar.media mobile {
+            position: relative;
+            top: 0;
+            left: 0;
+            width: 100%;
+            transform: none;
+            padding: sugar.padding(30) sugar.padding(30);
+        }
+    }
+}

@@ -1,0 +1,21 @@
+{
+    "type": "page",
+    "uid": "index",
+    "name": "index",
+    "scope": "repo",
+    "slug": ["/"],
+    "nodes": [
+        {
+            "type": "node",
+            "uid": "welcome"
+        },
+        {
+            "type": "node",
+            "uid": "getStarted"
+        },
+        {
+            "type": "node",
+            "uid": "examples"
+        }
+    ]
+}

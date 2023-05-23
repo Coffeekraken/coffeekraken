@@ -1,0 +1,7 @@
+#features-frontend {
+    position: relative;
+
+    img {
+        max-width: 100%;
+    }
+}

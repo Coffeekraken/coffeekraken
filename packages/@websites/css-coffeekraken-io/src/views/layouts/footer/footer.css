@@ -1,0 +1,99 @@
+.footer {
+    background-color: sugar.color(main, surface);
+    position: relative;
+    z-index: 20;
+    border-top: 1px solid sugar.color(main, --alpha 0.05);
+
+    @sugar.wireframe {
+        @sugar.wireframe.border;
+    }
+
+    @sugar.theme dark {
+        background-color: sugar.color(main, surface);
+    }
+
+    @sugar.media mobile {
+        padding-block: sugar.padding(70);
+    }
+
+    ._main {
+        padding-block: sugar.padding(70);
+        /* padding-inline: sugar.padding(50); */
+
+        svg {
+            /* height: 60px; */
+            width: 250px;
+            margin-block-end: sugar.margin(30);
+        }
+    }
+
+    @sugar.theme (dark) {
+        svg .main {
+            fill: sugar.color(main, text);
+        }
+        svg .accent {
+            fill: sugar.color(accent);
+        }
+    }
+
+    ._columns {
+        display: flex;
+        justify-content: space-between;
+        margin-block-start: 35px;
+
+        @sugar.media mobile {
+            flex-wrap: wrap;
+            display: none;
+
+            > div {
+                width: 100%;
+                margin-block-start: sugar.margin(30);
+            }
+        }
+    }
+
+    ._collab {
+        background: sugar.color(main, background);
+        padding-block: sugar.margin(50);
+        overflow: hidden;
+        position: relative;
+
+        @sugar.wireframe {
+            @sugar.wireframe.border;
+        }
+
+        @sugar.media mobile {
+            display: none;
+        }
+
+        ._bkg svg {
+            height: 100px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translateX(400px) translateY(-50%);
+            opacity: 0.05;
+        }
+
+        ._join {
+            flex-grow: 1;
+            text-align: right;
+            margin-inline-end: 0 !important;
+        }
+
+        .s-container {
+            display: flex;
+            align-items: center;
+            /* gap: sugar.margin(50); */
+
+            > * {
+                margin-inline-end: sugar.margin(50);
+            }
+        }
+
+        svg {
+            width: auto;
+            height: 25px;
+        }
+    }
+}

@@ -1,0 +1,60 @@
+{% extends 'sugar/readme/layouts/doc/doc.twig' %}
+{% block body %}
+
+<!--
+/**
+ * @name            Overview
+ * @namespace       doc.components
+ * @type            Markdown
+ * @platform        md
+ * @status          stable
+ * @menu            Documentation / Components           /doc/components/overview
+ *
+ * @since           2.0.0
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+ */
+-->
+
+# Overview
+
+Component in Coffeekraken is very important part of our vision, and this, even is as everything else, they can be used or not inside your project. Totally your decision.
+
+## What are components?
+
+We call `component` everything that takes place inside your HTML like a `button`, a form `input`, etc...
+
+Inside the component category, we also include `web`components. These are new custom elements that you can use within your HTML like `s-date-picker`, `s-color-picker`, `s-panel`, etc...
+
+## Official components
+
+Here's the list of currently official available components:
+
+{% for key, slug in docmap.menu.custom.styleguide.slug %}
+{% if '/styleguide/ui' in key and '-component' not in key %}
+- [**{{ slug.name }}**]({{key}})
+{% endif %}
+{% endfor %}
+
+And here's the list of our official `web`components:
+
+{% for key, obj in docmap.menu.custom.styleguide.slug %}
+{% if '-component' in key %}
+- [**{{ obj.name }}**](/package/{{key}}/doc/readme)
+{% endif %}
+{% endfor %}
+
+## Components MUST follow some simple rules
+
+All the components that we provide follows these simple rules:
+
+1. A component **MUST** be as customizable as possible
+2. A component **MUST** provide at least 2 `scopes`:
+    1. The "**bare**" scope that contain all the structural css for your component to work.
+        - Usually loaded directly in your JS file.
+    2. The "**lnf**" (look and feel) scope that provides optional visual styling.
+        - Usually provided through a `@sugar.ui.componentName.classes` mixin
+        - **MUST** take in consideration the theme configurations.
+3. A component **MUST** work out of the box without anything more to do
+4. A component **MUST** follow your `theme` specifications if the `lnf` (look and feel) `scope` is applied
+
+{% endblock %}

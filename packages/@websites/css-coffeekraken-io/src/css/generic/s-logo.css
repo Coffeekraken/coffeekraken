@@ -1,0 +1,21 @@
+.s-logo {
+    &[fill='black'],
+    *[fill='black'],
+    &[stroke='black'],
+    *[stroke='black'] {
+        fill: sugar.color(main, --darken 10);
+        stroke: sugar.color(main, --darken 10);
+
+        @sugar.theme dark {
+            fill: white;
+            stroke: white;
+        }
+    }
+
+    @sugar.wireframe {
+        &,
+        * {
+            fill: #a4a4a4 !important;
+        }
+    }
+}

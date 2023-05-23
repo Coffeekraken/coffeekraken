@@ -1,0 +1,5 @@
+{
+    "uid": "welcome",
+    "view": "views.sections.welcome",
+    "values": {}
+}

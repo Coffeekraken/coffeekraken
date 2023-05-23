@@ -1,0 +1,66 @@
+@keyframes s-code-example-loading {
+    0% {
+        background-position: 0px 0%;
+    }
+    50% {
+        background-position: 996px 0%;
+    }
+    100% {
+        background-position: 0px 0%;
+    }
+}
+.s-code-example {
+    display: block;
+    position: relative;
+}
+
+@sugar.lod theme {
+    .s-code-example_tabs {
+        margin-bottom: calc(sugar.margin(20) * -1);
+        margin-left: calc(sugar.margin(20));
+        position: relative;
+        @sugar.depth (100);
+    }
+
+    .s-code-example_toolbar {
+        color: rgba(0, 0, 0, 0.3);
+        top: calc(sugar.margin(10) * -1) !important;
+
+        @sugar.theme (dark) {
+            color: rgba(255, 255, 255, 0.3);
+        }
+    }
+
+    .s-code-example .s-clipboard-copy {
+        opacity: 0.2;
+
+        @sugar.theme dark {
+            opacity: 0.6;
+        }
+
+        &:hover {
+            opacity: 1;
+        }
+
+        &:has([state='success'], [state='error']) {
+            opacity: 1;
+        }
+    }
+
+    .s-code-example_content {
+        @sugar.depth (100);
+
+        @sugar.media.container '<=550' {
+            background: red !important;
+        }
+    }
+
+    .s-code-example_content .hljs {
+        background-color: sugar.color(main, surface, --darken 1) !important;
+        border: 1px solid sugar.color(main, border, --alpha 0.1);
+
+        @sugar.theme dark {
+            border-color: sugar.color(main, border, --alpha 0.3);
+        }
+    }
+}

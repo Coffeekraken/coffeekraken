@@ -1,0 +1,65 @@
+#features-development {
+    position: relative;
+
+    img {
+        max-width: 100%;
+    }
+
+    ._stack {
+        background-color: sugar.color(main, surface);
+
+        @sugar.wireframe {
+            @sugar.wireframe.border;
+        }
+    }
+
+    ._illustration {
+        @sugar.media mobile {
+            width: 60%;
+            position: relative;
+            left: 20%;
+        }
+    }
+
+    img,
+    svg {
+        display: none;
+
+        @sugar.lod theme {
+            display: block;
+        }
+    }
+
+    ._recipes-grid {
+        @sugar.layout (
+      1 2 3 4
+      5 6 7 8
+    , $gap: 30, $gapBetween: true);
+
+        @sugar.media mobile {
+            @sugar.layout (
+            1 2
+            4 3
+            5 6
+            8 7
+            , $gap: 30, $gapBetween: true);
+        }
+    }
+
+    ._webcomponents-grid {
+        @sugar.layout (
+      1 2 3 4 5
+      6 7 8 9 10
+    , $gap: 50, $gapBetween: true);
+
+        @sugar.media mobile {
+            @sugar.layout (
+        1 2
+        4 3 
+        5 6
+        8 7
+        9 10
+        , $gap: 30, $gapBetween: true);
+        }
+    }
+}

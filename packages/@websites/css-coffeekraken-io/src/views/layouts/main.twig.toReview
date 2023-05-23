@@ -1,0 +1,52 @@
+{% extends "@coffeekraken/layouts/main.twig" %}
+
+{% set id = (request.path != '/' and request.path != '') ? idCompliant(request.path) : 'homepage' %}
+{% set bodyAttributes = {
+    id,
+    's-sugar': true
+} %}
+
+{% block title %}{{ title ? title : 'Coffeekraken' }}{% endblock %}
+{% block body %}
+
+    <script>
+        document.body.classList.add('initial-loading');
+        document.body.classList.add('loading');
+    </script>
+
+    {% include('layouts/header/header.twig')%}
+
+    <div class="bkg"></div>
+
+    <div s-page-transition class="content">
+        {{ body|raw }}
+    </div>
+
+    {% include('generic/tools/tools.twig')%}
+
+    <s-panel id="settings" position="right" backdrop>
+        <ck-settings mount-when="inViewport"></ck-settings>
+    </s-panel>
+
+    <s-panel id="ratings" position="right" backdrop>
+        <ck-ratings></ck-ratings>
+    </s-panel>
+
+    {% include('layouts/footer/footer.twig')%}
+
+    <s-scroll class="scroll-top" to="top">
+        <i class="s-icon:angle-up"></i>
+    </s-scroll>
+
+    <div class="loader">
+        <p class="s-typo--p">
+            Welcome on
+        </p>
+        <div class="_logo">
+            {% include('generic/logo.twig')%}
+        </div>
+        <div class="_spinner"></div>
+    </div>
+    <div class="top-loader"></div>
+
+{% endblock %}

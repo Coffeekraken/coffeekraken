@@ -1,0 +1,13 @@
+{
+    "type": "page",
+    "uid": "styleguide",
+    "name": "styleguide",
+    "scope": "repo",
+    "slugs": ["/styleguide/*", "/package/:organisation/:package/styleguide/*"],
+    "nodes": [
+        {
+            "type": "node",
+            "uid": "styleguide"
+        }
+    ]
+}

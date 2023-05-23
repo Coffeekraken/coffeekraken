@@ -1,0 +1,19 @@
+{
+    "name": "olivierbossel/coffeekraken-io",
+    "autoload": {
+        "psr-4": {
+            "Olivierbossel\\CoffeekrakenIo\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Olivier Bossel",
+            "email": "olivier.bossel@gmail.com"
+        }
+    ],
+    "require": {
+        "coffeekraken/sugar": "^2.0.0"
+    },
+    "version": "2.0.0-alpha.27",
+    "homepage": "https://coffeekraken.io"
+}

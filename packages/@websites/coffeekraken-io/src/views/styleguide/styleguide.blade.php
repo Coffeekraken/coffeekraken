@@ -1,4 +1,4 @@
-@php $firstBlock = $docblocks[0]; @endphp
+{{-- @php $firstBlock = $docblocks[0]; @endphp
 
 @php
 $statusColor = 'info';
@@ -11,7 +11,16 @@ if ($firstBlock->status == 'stable') {
 if ($firstBlock->status == 'wip') {
     $statusColor = 'error';
 }
-@endphp
+@endphp --}}
+
+@if (isset($error))
+<pre>
+    <p>{{ var_dump($error) }}</p>
+</pre>
+@endif
+
+{{-- <pre>
+{{ var_dump($docblocks)}} --}}
 
 <div id="styleguide">
     
@@ -30,8 +39,8 @@ if ($firstBlock->status == 'wip') {
                         Styleguide
                     </h5>
 
-                    @php $menu = get_object_vars($docmap->menu->custom->styleguide->tree->styleguide); @endphp
-                    @include('doc.menu', ['menu' => $menu, 'id' => 'main', 'icon' => 'display-preview'])
+                    {{-- @php $menu = get_object_vars($styleguideMenu); @endphp
+                    @include('doc.menu', ['menu' => $menu, 'id' => 'main', 'icon' => 'display-preview']) --}}
 
                 </div>
 

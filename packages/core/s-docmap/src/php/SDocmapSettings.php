@@ -57,12 +57,11 @@ class SDocmapSettings
         // styleguide custom menu
         if (!isset($this->customMenu->styleguide)) {
             $this->customMenu->styleguide = function ($prop, $value) {
-                print_r($value);
                 if (!isset($value->slug)) {
                     return true;
                 }
                 if (
-                    preg_match('/^([a-zA-Z0-9-_@\/]+)?\/doddc\//', $value->slug)
+                    preg_match('/^([a-zA-Z0-9-_@\/]+)?\/doc\//', $value->slug)
                 ) {
                     return true;
                 }
@@ -71,19 +70,18 @@ class SDocmapSettings
         }
 
         // specs custom menu
-        // if (!isset($this->customMenu->specs)) {
-        //     $this->customMenu->specs = function ($namespace, $docmapItem) {
-        //         if ($namespace == 'specs') {
-        //             return true;
-        //         }
-        //         if (
-        //             count(explode('/', $namespace)) > 1 &&
-        //             preg_match('/^([a-zA-Z0-9-_@\/]+)?\/views\//', $namespace)
-        //         ) {
-        //             return true;
-        //         }
-        //         return false;
-        //     };
-        // }
+        if (!isset($this->customMenu->specs)) {
+            $this->customMenu->specs = function ($prop, $value) {
+                if (!isset($value->slug)) {
+                    return true;
+                }
+                if (
+                    preg_match('/^([a-zA-Z0-9-_@\/]+)?\/views\//', $value->slug)
+                ) {
+                    return true;
+                }
+                return false;
+            };
+        }
     }
 }

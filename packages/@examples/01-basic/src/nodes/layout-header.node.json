@@ -1,6 +1,6 @@
 {
     "uid": "layout-header",
-    "specs": "views.bare.layout",
+    "view": "views.bare.layout",
     "values": {
         "container": true,
         "gap": {
@@ -22,7 +22,7 @@
             }
         },
         "id": "s-4249e592-f19a-4650-bfa1-4496311a2b49",
-        "specs": "views.bare.layout",
+        "view": "views.bare.layout",
         "spaces": {
             "media": {
                 "wide": {

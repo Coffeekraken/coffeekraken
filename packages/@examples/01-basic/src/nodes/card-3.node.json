@@ -1,6 +1,6 @@
 {
     "uid": "card-3",
-    "specs": "views.components.card",
+    "view": "views.components.card",
     "values": {
         "title": {
             "value": "Card title ege"

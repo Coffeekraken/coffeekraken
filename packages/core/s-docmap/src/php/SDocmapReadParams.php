@@ -17,10 +17,10 @@ class SDocmapReadParams
     public function __construct($params = [])
     {
         foreach ($params as $key => $value) {
-            if (is_array($this->{$key}) && is_array($value)) {
-                $this->{$key} = array_merge_recursive($this->{$key}, $value);
+            if (is_array($this->$key) && is_array($value)) {
+                $this->$key = array_merge_recursive($this->{$key}, $value);
             } else {
-                $this->{$key} = $value;
+                $this->$key = $value;
             }
         }
 

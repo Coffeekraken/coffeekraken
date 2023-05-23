@@ -5,15 +5,26 @@ $docmap = $docmapInstance->read();
 
 $requestedDoc = $_SERVER['REQUEST_URI'];
 
-$command =
-    'sugard markdown.build --inPath "' .
-    __DIR__ .
-    '/../../doc/00-getStarted/00-overview.md.twig" --save false --target html --print';
+$searchResult = $docmapInstance->search(
+    (object) [
+        'slug' => $requestedDoc,
+    ]
+);
 
+$markdownFilePath;
 $output = [];
-// exec($command, $output);
+
+$item = \Sugar\object\firstItem($searchResult->items);
+if ($item) {
+    $markdownFilePath = $item->path;
+    $command =
+        'sugard markdown.build --inPath "' .
+        $markdownFilePath .
+        '" --save false --target html --print';
+    exec($command, $output);
+}
 
 return [
     'docmap' => $docmap,
-    // 'body' => implode(PHP_EOL, $output),
+    'body' => implode(PHP_EOL, $output),
 ];

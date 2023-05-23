@@ -1,5 +1,5 @@
 {
     "uid": "doc",
-    "specs": "views.doc.doc",
+    "view": "views.doc.doc",
     "values": {}
 }

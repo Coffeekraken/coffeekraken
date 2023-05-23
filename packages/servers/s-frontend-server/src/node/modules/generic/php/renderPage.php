@@ -41,6 +41,7 @@ $pageFileJson = json_decode(file_get_contents($params['pageFile']));
 $viewRenderer = new SViewRenderer([
     'sharedData' => [
         'page' => $params['page'],
+        'req' => $params['req'],
     ],
 ]);
 $renderRes = $viewRenderer->renderPage($pageFileJson);

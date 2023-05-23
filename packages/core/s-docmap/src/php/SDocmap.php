@@ -67,6 +67,60 @@ class SDocmap
     }
 
     /**
+     * @name          search
+     * @type          Function
+     *
+     * This methodallows you to search for an docmap item by it's slug.
+     * You can specify if you want to search also in the "packages" section or not
+     *
+     * @param           {ISDocmapSearchParams}      params          Some params to configure your search
+     * @return        {ISDocmapSearchResult}                        The result of your search
+     *
+     * @since       2.0.0
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    public function search($params = [])
+    {
+        $finalParams = $params;
+        if (!($params instanceof SDocmapSearchParams)) {
+            $finalParams = new SDocmapSearchParams($params);
+        }
+
+        $docmapJson = $this->read();
+
+        $result = (object) [
+            'search' => $finalParams,
+            'items' => (object) [],
+        ];
+
+        foreach ($docmapJson->map as $namespace => $item) {
+            $itemMatch = true;
+
+            // slug
+            if (isset($finalParams->slug)) {
+                if (!isset($item->menu)) {
+                    $itemMatch = false;
+                } elseif (!fnmatch($finalParams->slug, $item->menu->slug)) {
+                    $itemMatch = false;
+                }
+            }
+
+            // slug
+            if (isset($finalParams->namespace)) {
+                if (!fnmatch($finalParams->namespace, $item->namespace)) {
+                    $itemMatch = false;
+                }
+            }
+
+            if ($itemMatch) {
+                $result->items->{$item->namespace} = $item;
+            }
+        }
+
+        return $result;
+    }
+
+    /**
      * @name          read
      * @type          Function
      * @async
@@ -247,7 +301,7 @@ class SDocmap
     }
 
     /**
-     * @name          extractMenu
+     * @name          _extractMenu
      * @type          Function
      *
      * This method allows you to extract the docmap items that have a "menu" array property and
@@ -295,30 +349,30 @@ class SDocmap
                     (array) $menuObj
                 );
             } else {
-                // $scopedSlugMenu = (object) [];
-                // foreach ($menuObj->slug as $slug => $docItem) {
-                //     $scopedSlugMenu->{'/package/' .
-                //         $packageName .
-                //         $slug} = clone $menuObj->slug->$slug-;
-                //     $scopedSlugMenu->{'/package/' .
-                //         $packageName .
-                //         $slug}->slug = '/package/' . $packageName . $slug;
-                // }
+                $scopedSlugMenu = (object) [];
+                foreach ($menuObj->slug as $slug => $docItem) {
+                    $scopedSlugMenu->{'/package/' .
+                        $packageName .
+                        $slug} = clone $menuObj->slug->$slug;
+                    $scopedSlugMenu->{'/package/' .
+                        $packageName .
+                        $slug}->slug = '/package/' . $packageName . $slug;
+                }
 
-                // $finalMenu->packages->$packageName- = (object) [
-                //     'name' => $packageName,
-                //     'tree' => \Sugar\object\deepMap($menuObj->tree, function (
-                //         $prop,
-                //         $value,
-                //         $object
-                //     ) use ($packageName) {
-                //         if ($prop == 'slug') {
-                //             return '/package/' . $packageName . $value;
-                //         }
-                //         return $value;
-                //     }),
-                //     'slug' => $scopedSlugMenu,
-                // ];
+                $finalMenu->packages->$packageName = (object) [
+                    'name' => $packageName,
+                    'tree' => \Sugar\object\deepMap($menuObj->tree, function (
+                        $prop,
+                        $value,
+                        $object
+                    ) use ($packageName) {
+                        if ($prop == 'slug') {
+                            return '/package/' . $packageName . $value;
+                        }
+                        return $value;
+                    }),
+                    'slug' => $scopedSlugMenu,
+                ];
             }
         }
 
@@ -336,35 +390,29 @@ class SDocmap
             );
 
             // slug
-            // $finalMenu->custom->$menuName->slug = \Sugar\object\deepMap(
-            //     $finalMenu->slug,
-            //     function ($prop, $value) use ($closure) {
-            //         $res = $closure($prop, $value);
-            //         if ($res == false) {
-            //             return -1;
-            //         }
-            //         return $value;
-            //     }
-            // );
+            $finalMenu->custom->$menuName->slug = \Sugar\object\deepFilter(
+                $finalMenu->slug,
+                $this->settings->customMenu->$menuName
+            );
 
-            // foreach ($finalMenu->packages as $packageName => $packageItem) {
-            //     $packageFilteredTree = \Sugar\object\deepMap(
-            //         $packageItem->tree,
-            //         $closure
-            //     );
-            //     $finalMenu->custom->$menuName->tree = \Sugar\object\deepMerge(
-            //         $finalMenu->custom->$menuName-,
-            //         $packageFilteredTree
-            //     );
-            //     $packageFilteredSlug = \Sugar\object\deepMap(
-            //         $packageItem->slug,
-            //         $closure
-            //     );
-            //     $finalMenu->custom->$menuName->slug = \Sugar\object\deepMerge(
-            //         $finalMenu->custom->$menuName-,
-            //         $packageFilteredSlug
-            //     );
-            // }
+            foreach ($finalMenu->packages as $packageName => $packageItem) {
+                $packageFilteredTree = \Sugar\object\deepFilter(
+                    $packageItem->tree,
+                    $closure
+                );
+                $finalMenu->custom->$menuName->tree = \Sugar\object\deepMerge(
+                    $finalMenu->custom->$menuName,
+                    $packageFilteredTree
+                );
+                $packageFilteredSlug = \Sugar\object\deepMap(
+                    $packageItem->slug,
+                    $closure
+                );
+                $finalMenu->custom->$menuName->slug = \Sugar\object\deepMerge(
+                    $finalMenu->custom->$menuName,
+                    $packageFilteredSlug
+                );
+            }
         }
 
         return $finalMenu;

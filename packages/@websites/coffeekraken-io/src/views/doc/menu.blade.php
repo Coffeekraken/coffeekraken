@@ -1,10 +1,6 @@
 <ul class="s-fs-tree">
-    
-    {{-- <pre>
-    {{ var_dump($menu) }}
-    </pre> --}}
-    
-    {{-- @foreach ($menu as $item)
+        
+    @foreach ($menu as $item)
 
         @php
             $subId = $id . '-' . \Sugar\string\idCompliant(isset($item->name) ? $item->name : 'item');
@@ -45,5 +41,5 @@
         @else
         @endif
 
-    @endforeach --}}
+    @endforeach
 </ul>

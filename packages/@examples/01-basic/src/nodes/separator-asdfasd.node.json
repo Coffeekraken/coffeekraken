@@ -1,6 +1,6 @@
 {
     "uid": "separator-asdfasd",
-    "specs": "views.sections.separator",
+    "view": "views.sections.separator",
     "values": {
         "title": {
             "value": "Separator title"

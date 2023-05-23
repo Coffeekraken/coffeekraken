@@ -1,6 +1,6 @@
 {
     "uid": "layout-aaa",
-    "specs": "views.bare.layout",
+    "view": "views.bare.layout",
     "values": {
         "container": true,
         "gap": {
@@ -25,7 +25,7 @@
                 "layout": "2 1"
             }
         },
-        "specs": "views.bare.layout",
+        "view": "views.bare.layout",
         "id": {
             "value": "s-bf135aa7-2f83-4976-acd2-132d24caf225"
         },

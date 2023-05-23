@@ -138,14 +138,18 @@ class SViewRenderer
                 );
                 $nodeFile = [
                     'import __fn from "./' . basename($filePath) . '";',
-                    'import __SSugarConfig from "@coffeekraken/s-sugar-config";',
+                    'const sharedData = ' .
+                    json_encode($this->settings->sharedData) .
+                    ';',
+                    // 'import __SSugarConfig from "@coffeekraken/s-sugar-config";',
                     'async function _exec() {',
-                    '   await __SSugarConfig.load();',
-                    '   console.log(JSON.stringify(await __fn()));',
+                    // '   await __SSugarConfig.load();',
+                    '   console.log(JSON.stringify(await __fn(sharedData)));',
                     '   process.exit(0);',
                     '}',
                     '_exec();',
                 ];
+
                 file_put_contents($tmpFilePath, implode(PHP_EOL, $nodeFile));
                 $data = exec(
                     'node --experimental-json-modules --trace-warnings --trace-uncaught --no-warnings --es-module-specifier-resolution node ' .
@@ -155,6 +159,12 @@ class SViewRenderer
                 );
                 unlink($tmpFilePath);
                 $data = json_decode(implode('', $output));
+
+                if (isset($data->filePath)) {
+                    print_r($data);
+                    $data = json_decode(file_get_contents($data->filePath));
+                }
+
                 break;
             default:
                 throw new Exception(
@@ -323,20 +333,20 @@ class SViewRenderer
                     ];
                 }
 
-                if (!isset($renderableNode->specs)) {
+                if (!isset($renderableNode->view)) {
                     array_push(
                         $html,
                         '<div class="s-carpenter-app_error">Your "' .
                             $node->uid .
                             '" (' .
                             $node->type .
-                            ') node does not have any data attached...</div>'
+                            ') node does not have any view attached...</div>'
                     );
                     continue;
                 }
 
                 // render the node
-                $viewMetas = $this->getViewMetas($renderableNode->specs);
+                $viewMetas = $this->getViewMetas($renderableNode->view);
 
                 // load data from the ".data.php/json" file alongside the
                 // node file

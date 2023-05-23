@@ -1,6 +1,6 @@
 {
     "uid": "card-aasas",
-    "specs": "views.components.card",
+    "view": "views.components.card",
     "values": {
         "title": {
             "value": "Card titlewfef"

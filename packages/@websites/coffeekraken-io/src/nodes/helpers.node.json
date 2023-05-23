@@ -1,5 +1,5 @@
 {
     "uid": "helpers",
-    "specs": "views.sections.helpers",
+    "view": "views.sections.helpers",
     "values": {}
 }

@@ -1,5 +1,5 @@
 {
     "uid": "why",
-    "specs": "views.sections.why",
+    "view": "views.sections.why",
     "values": {}
 }

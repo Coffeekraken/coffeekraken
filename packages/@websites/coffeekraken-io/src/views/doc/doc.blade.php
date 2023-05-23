@@ -10,7 +10,8 @@
 
                 <div class="sidemenu-main">
 
-                    {{-- @php $menu = get_object_vars($docmap->menu->tree->documentation); @endphp
+
+                    @php $menu = get_object_vars($docmap->menu->tree->documentation); @endphp
                     @include('doc.menu', ['menu' => $menu, 'id' => 'main'])
 
                     @if (count(get_object_vars($docmap->menu->packages)))
@@ -40,7 +41,7 @@
                                 </li>
                             @endforeach
                         </ul>
-                    @endif --}}
+                    @endif
 
                 </div>
 
@@ -49,9 +50,6 @@
             <div s-page-transition-container="markdown">
                 
                 <div s-scope class="_content s-pb:50 s-pis:50 s-rhythm:vertical s-format:text @mobile s-pis:0">
-
-                     <pre>
-                        {{ var_dump($docmap->menu->custom->styleguide)}}
 
                     @if (!isset($body))
 

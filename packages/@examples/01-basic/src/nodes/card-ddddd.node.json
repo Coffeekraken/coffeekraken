@@ -1,6 +1,6 @@
 {
     "uid": "card-ddddd",
-    "specs": "views.components.card",
+    "view": "views.components.card",
     "values": {
         "direction": {
             "value": {

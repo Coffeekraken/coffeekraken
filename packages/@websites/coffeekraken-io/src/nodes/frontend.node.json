@@ -1,5 +1,5 @@
 {
     "uid": "frontend",
-    "specs": "views.sections.frontend",
+    "view": "views.sections.frontend",
     "values": {}
 }

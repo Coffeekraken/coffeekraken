@@ -1,6 +1,6 @@
 {
     "uid": "layout-ssdsds",
-    "specs": "views.bare.layout",
+    "view": "views.bare.layout",
     "values": {
         "container": true,
         "gap": {
@@ -17,6 +17,6 @@
                 "layout": "1 2"
             }
         },
-        "specs": "views.bare.layout"
+        "view": "views.bare.layout"
     }
 }

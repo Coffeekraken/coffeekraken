@@ -1,5 +1,5 @@
 {
     "uid": "discover",
-    "specs": "views.sections.discover",
+    "view": "views.sections.discover",
     "values": {}
 }

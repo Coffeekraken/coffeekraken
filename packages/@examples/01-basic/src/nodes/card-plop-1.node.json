@@ -1,6 +1,6 @@
 {
     "uid": "card-plop-1",
-    "specs": "views.components.card",
+    "view": "views.components.card",
     "values": {
         "title": {
             "value": " wfe titleef"

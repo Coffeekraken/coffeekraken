@@ -3,6 +3,7 @@ import __STheme from '@coffeekraken/s-theme';
 
 /**
  * @name          round
+ * @as              @sugar.ui.loader.round
  * @namespace     node.mixin.ui.loader
  * @type               PostcssMixin
  * @interface     ./round          interface

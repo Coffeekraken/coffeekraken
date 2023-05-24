@@ -5,6 +5,7 @@ import __faker from 'faker';
 
 /**
  * @name           classes
+ * @as              @sugar.spacing.classes
  * @namespace      node.mixin.spacing
  * @type           PostcssMixin
  * @platform      postcss
@@ -15,7 +16,7 @@ import __faker from 'faker';
  * @return        {Css}         The generated css
  *
  * @snippet         @sugar.spacing.classes
- * 
+ *
  * @example        css
  * \@sugar.spacing.classes;
  *

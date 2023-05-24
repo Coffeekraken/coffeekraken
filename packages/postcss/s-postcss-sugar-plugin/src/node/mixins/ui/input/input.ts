@@ -3,6 +3,7 @@ import __STheme from '@coffeekraken/s-theme';
 
 /**
  * @name          input
+ * @as          @sugar.ui.input
  * @namespace     node.mixin.ui.input
  * @type               PostcssMixin
  * @interface       ./input
@@ -11,7 +12,7 @@ import __STheme from '@coffeekraken/s-theme';
  *
  * Apply the input style to any element
  *
- * @param       {'default'}                           [style='theme.ui.form.defaultLnf']         The style you want to generate
+ * @param       {'solid'|'underline'}                           [style='theme.ui.form.defaultLnf']         The lnf you want to generate
  * @param       {('bare'|'lnf')[]}        [scope=['bare', 'lnf']]      The scope you want to generate
  * @return      {String}            The generated css
  *

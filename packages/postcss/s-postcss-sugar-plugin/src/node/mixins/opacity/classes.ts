@@ -3,6 +3,7 @@ import __STheme from '@coffeekraken/s-theme';
 
 /**
  * @name           classes
+ * @as              @sugar.opacity.classes
  * @namespace      node.mixin.opacity
  * @type           PostcssMixin
  * @platform      postcss
@@ -13,7 +14,7 @@ import __STheme from '@coffeekraken/s-theme';
  * @return        {Css}         The generated css
  *
  * @snippet         @sugar.opacity.classes
- * 
+ *
  * @example        css
  * \@sugar.opacity.classes;
  *

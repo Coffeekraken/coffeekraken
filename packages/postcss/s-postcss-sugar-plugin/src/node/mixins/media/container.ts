@@ -18,24 +18,25 @@ class postcssSugarPluginMediaContainerMixinInterface extends __SInterface {
 export { postcssSugarPluginMediaContainerMixinInterface as interface };
 
 /**
- * @name           container
- * @namespace      node.mixin.media
- * @type           PostcssMixin
- * @platform      postcss
- * @status        beta
+ * @__name           container
+ * @__as              @sugar.media.container
+ * @__namespace      node.mixin.media
+ * @__type           PostcssMixin
+ * @__platform      postcss
+ * @__status        wip
  *
  * This mixin allows you to apply a container query in your css.
  * If no containerName is passed, it will init the target itself as a the container to use for the query.
  *
- * @param       {String}        query       The query string like ">200", "<=500", etc...
- * @return      {Css}         The generated css
+ * @__param       {String}        query       The query string like ">200", "<=500", etc...
+ * @__return      {Css}         The generated css
  *
- * @snippet         @sugar.media.container $1
+ * @__snippet         @sugar.media.container $1
  * \@sugar.media.container $1 {
  *      $2
  * }
  *
- * @example        css
+ * @__example        css
  * \@sugar.media.container >=200 {
  *      // ...
  * }
@@ -43,8 +44,8 @@ export { postcssSugarPluginMediaContainerMixinInterface as interface };
  *      // ...
  * }
  *
- * @since       2.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+ * @__since       2.0.0
+ * @__author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 export default function ({
     params,

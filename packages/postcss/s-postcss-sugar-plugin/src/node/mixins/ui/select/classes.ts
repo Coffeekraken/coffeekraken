@@ -4,6 +4,7 @@ import __faker from 'faker';
 
 /**
  * @name          classes
+ * @as          @sugar.ui.select.classes
  * @namespace     node.mixin.ui.select
  * @type               PostcssMixin
  * @interface     ./classes          interface
@@ -12,8 +13,8 @@ import __faker from 'faker';
  *
  * Generate the select classes
  *
- * @param       {('default')[]}                           [lnfs=['default']]         The style(s) you want to generate
- * @param       {'default'}                [defaultLnf='theme.ui.form.defaultLnf']           The default style you want
+ * @param       {('solid'|'underline')[]}                           [lnfs=['solid','underline']]         The style(s) you want to generate
+ * @param       {'solid'}                [defaultLnf='theme.ui.form.defaultLnf']           The default style you want
  * @param       {('bare'|'lnf'|'vr'|'tf')[]}        [scope=['bare', 'lnf', 'vr', 'tf']]      The scope you want to generate
  * @return      {String}            The generated css
  *

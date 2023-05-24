@@ -11,6 +11,7 @@ export interface postcssSugarPluginStateOutlineMixinParams {}
 
 /**
  * @name           outline
+ * @as              @sugar.outline
  * @namespace      node.mixin.outline
  * @type           PostcssMixin
  * @platform      postcss

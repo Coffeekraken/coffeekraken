@@ -2,6 +2,7 @@ import __SInterface from '@coffeekraken/s-interface';
 
 /**
  * @name          scalable
+ * @as            sugar.scalable
  * @namespace     node.function.scalable
  * @type          PostcssFunction
  * @platform      postcss
@@ -17,7 +18,7 @@ import __SInterface from '@coffeekraken/s-interface';
  * @return      {Css}                   The corresponding css
  *
  * @snippet         sugar.scalable($1)
- * 
+ *
  * @example       css
  * .my-element {
  *    padding: sugar.scalable(20px);

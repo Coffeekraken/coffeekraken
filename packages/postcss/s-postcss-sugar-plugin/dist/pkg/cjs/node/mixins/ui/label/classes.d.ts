@@ -25,7 +25,7 @@ declare class postcssSugarPluginUiLabelClassesInterface extends __SInterface {
 export interface IPostcssSugarPluginUiLabelClassesParams {
     lnfs: ('inline' | 'float')[];
     defaultLnf: 'inline' | 'float';
-    scope: ('bare' | 'lnf' | 'vr' | 'tf')[];
+    scope: ('bare' | 'lnf' | 'vr')[];
 }
 export { postcssSugarPluginUiLabelClassesInterface as interface };
 export default function ({ params, atRule, CssVars, replaceWith, }: {

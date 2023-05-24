@@ -7,6 +7,7 @@ import __path from 'path';
 
 /**
  * @name           import
+ * @as              @sugar.import
  * @namespace      node.mixin.import
  * @type           PostcssMixin
  * @platform      postcss
@@ -19,7 +20,7 @@ import __path from 'path';
  * @return        {Css}         The generated css
  *
  * @snippet         @sugar.import($1)
- * 
+ *
  * @example        css
  * \@sugar.import('./my-cool-file.css');
  * \@sugar.import('../views/** /*.css');

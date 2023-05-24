@@ -4,6 +4,7 @@ import __faker from 'faker';
 
 /**
  * @name          classes
+ * @as              @sugar.ui.tooltip.classes
  * @namespace     node.mixin.ui.tooltip
  * @type               PostcssMixin
  * @interface     ./classes          interface
@@ -12,13 +13,13 @@ import __faker from 'faker';
  *
  * Generate the tooltip classes
  *
- * @param       {('default')[]}                           [lnfs=['default']]         The style(s) you want to generate
- * @param       {'default'}                [defaultLnf='theme.ui.tooltip.defaultLnf']           The default style you want
- * @param       {('bare'|'lnf'|'shape'|'vr'|'tf')[]}        [scope=['bare', 'lnf', 'shape', 'vr', 'tf']]      The scope you want to generate
+ * @param       {('solid')[]}                           [lnfs=['solid']]         The lnf(s) you want to generate
+ * @param       {'solid'}                [defaultLnf='theme.ui.tooltip.defaultLnf']           The default lnf you want
+ * @param       {('bare'|'lnf')[]}        [scope=['bare', 'lnf']]      The scope you want to generate
  * @return      {String}            The generated css
  *
  * @snippet         @sugar.ui.tooltip.classes
- * 
+ *
  * @example     css
  * \@sugar.ui.tooltip.classes;
  *

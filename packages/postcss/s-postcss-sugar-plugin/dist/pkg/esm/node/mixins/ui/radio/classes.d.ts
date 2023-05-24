@@ -23,8 +23,8 @@ declare class postcssSugarPluginUiRadioClassesInterface extends __SInterface {
     };
 }
 export interface IPostcssSugarPluginUiRangeClassesParams {
-    lnfs: 'default'[];
-    defaultLnf: 'default';
+    lnfs: 'solid'[];
+    defaultLnf: 'solid';
     scope: ('bare' | 'lnf' | 'vr' | 'tf')[];
 }
 export { postcssSugarPluginUiRadioClassesInterface as interface };

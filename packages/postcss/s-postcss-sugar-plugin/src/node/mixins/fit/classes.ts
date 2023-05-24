@@ -2,6 +2,7 @@ import __SInterface from '@coffeekraken/s-interface';
 
 /**
  * @name           classes
+ * @as          @sugar.fit.classes
  * @namespace      node.mixin.fit
  * @type           PostcssMixin
  * @platform      postcss

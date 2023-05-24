@@ -1895,6 +1895,19 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@coffeekraken/s-doc@^2.0.0-alpha.27, @coffeekraken/s-doc@workspace:packages/app/s-doc":
+  version: 0.0.0-use.local
+  resolution: "@coffeekraken/s-doc@workspace:packages/app/s-doc"
+  dependencies:
+    "@coffeekraken/s-i18n": ^2.0.0-alpha.27
+    "@coffeekraken/s-interface": ^2.0.0-alpha.27
+    "@coffeekraken/s-lit-component": ^2.0.0-alpha.27
+    "@coffeekraken/s-promise": ^2.0.0-alpha.27
+    "@coffeekraken/sugar": ^2.0.0-alpha.27
+    lit: ^2.2.8
+  languageName: unknown
+  linkType: soft
+
 "@coffeekraken/s-docblock@^2.0.0-alpha.27, @coffeekraken/s-docblock@workspace:packages/core/s-docblock":
   version: 0.0.0-use.local
   resolution: "@coffeekraken/s-docblock@workspace:packages/core/s-docblock"
@@ -6709,6 +6722,7 @@ __metadata:
     "@coffeekraken/s-dashboard": ^2.0.0-alpha.27
     "@coffeekraken/s-datetime-picker-component": ^2.0.0-alpha.27
     "@coffeekraken/s-descriptor": ^2.0.0-alpha.27
+    "@coffeekraken/s-doc": ^2.0.0-alpha.27
     "@coffeekraken/s-docblock": ^2.0.0-alpha.27
     "@coffeekraken/s-docmap": ^2.0.0-alpha.27
     "@coffeekraken/s-duration": ^2.0.0-alpha.27

@@ -5,6 +5,7 @@ import __faker from 'faker';
 
 /**
  * @name          classes
+ * @as          @sugar.ui.input.classes
  * @namespace     node.mixin.ui.input
  * @type               PostcssMixin
  * @interface     ./classes          interface
@@ -13,13 +14,13 @@ import __faker from 'faker';
  *
  * Generate the input classes
  *
- * @param       {('default')[]}                           [lnfs=['default']]         The style(s) you want to generate
- * @param       {'default'}                [defaultLnf='theme.ui.form.defaultLnf']           The default style you want
- * @param       {('bare'|'lnf'|'vr'|'tf')[]}        [scope=['bare', 'lnf', 'vr', 'tf']]      The scope you want to generate
+ * @param       {('solid'|'underline')[]}                           [lnfs=['solid','underline']]         The lnf(s) you want to generate
+ * @param       {'solid'}                [defaultLnf='theme.ui.form.defaultLnf']           The default lnf you want
+ * @param       {('bare'|'lnf'|'vr')[]}        [scope=['bare', 'lnf', 'vr']]      The scope you want to generate
  * @return      {String}            The generated css
  *
  * @snippet         @sugar.ui.input.classes
- * 
+ *
  * @example     css
  * \@sugar.ui.form.classes;
  *
@@ -43,8 +44,8 @@ class postcssSugarPluginUiFormClassesInterface extends __SInterface {
                     type: 'Array<String>',
                     splitChars: [',', ' '],
                 },
-                values: ['bare', 'lnf', 'vr', 'tf'],
-                default: ['bare', 'lnf', 'vr', 'tf'],
+                values: ['bare', 'lnf', 'vr'],
+                default: ['bare', 'lnf', 'vr'],
             },
         };
     }
@@ -53,7 +54,7 @@ class postcssSugarPluginUiFormClassesInterface extends __SInterface {
 export interface IPostcssSugarPluginUiFormClassesParams {
     lnfs: string[];
     defaultLnf: 'solid' | 'underline';
-    scope: ('bare' | 'lnf' | 'vr' | 'tf')[];
+    scope: ('bare' | 'lnf' | 'vr')[];
 }
 
 export { postcssSugarPluginUiFormClassesInterface as interface };

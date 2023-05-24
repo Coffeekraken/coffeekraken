@@ -3,6 +3,7 @@ import __STheme from '@coffeekraken/s-theme';
 
 /**
  * @name          switch
+ * @as              @sugar.ui.switch
  * @namespace     node.mixin.ui.form
  * @type               PostcssMixin
  * @interface     ./switch          interface

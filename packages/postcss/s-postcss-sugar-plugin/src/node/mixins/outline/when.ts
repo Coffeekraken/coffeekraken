@@ -19,6 +19,7 @@ export interface postcssSugarPluginStateOutlineWhenMixinParams {
 
 /**
  * @name           when
+ * @as              @sugar.outline.when
  * @namespace      node.mixin.outline
  * @type           PostcssMixin
  * @platform      postcss
@@ -31,7 +32,7 @@ export interface postcssSugarPluginStateOutlineWhenMixinParams {
  * @return      {Css}         The generated css
  *
  * @snippet         @sugar.outline.when($1)
- * 
+ *
  * @example        css
  * .myCoolItem {
  *      @sugar.outline.when(focus);

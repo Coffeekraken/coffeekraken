@@ -2,7 +2,8 @@ import __SInterface from '@coffeekraken/s-interface';
 import __STheme from '@coffeekraken/s-theme';
 
 /**
- * @name          radius
+ * @name          size
+ * @as              sugar.font.size
  * @namespace     node.function.font
  * @type          PostcssFunction
  * @platform      postcss
@@ -16,7 +17,7 @@ import __STheme from '@coffeekraken/s-theme';
  * @return      {Css}                   The corresponding css
  *
  * @snippet         sugar.font.size($1)
- * 
+ *
  * @example       css
  * .my-element {
  *    font-size: sugar.font.size(20);

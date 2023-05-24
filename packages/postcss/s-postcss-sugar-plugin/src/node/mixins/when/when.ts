@@ -2,6 +2,7 @@ import __SInterface from '@coffeekraken/s-interface';
 
 /**
  * @name           active
+ * @as              @sugar.when
  * @namespace      node.mixin.when
  * @type           PostcssMixin
  * @platform      postcss
@@ -13,14 +14,18 @@ import __SInterface from '@coffeekraken/s-interface';
  * Supported states are:
  * - mounted: When a sugar webcomponent has the "mounted" attribute
  * - active: When the element has the "active" class or the "active" attribute
+ * - dark: When the prefered color scheme is dark
+ * - light: When the prefered color scheme is light
  *
+ * @param       {'mounted'|'active'|'dark'|'light'}         state           The state you want to target
+ * @param       {'self'|'sibling'|'parent'|'ancestor'|'theme'}      [context='self']        The context of the when
  * @return        {Css}         The generated css
  *
  * @example        css
  * .myElement {
  *      display: none;
  *
- *      @sugar.when.mounted {
+ *      @sugar.when mounted {
  *          display: block;
  *      }
  * }

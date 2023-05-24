@@ -2,6 +2,7 @@ import __SInterface from '@coffeekraken/s-interface';
 
 /**
  * @name          classes
+ * @as              @sugar.ui.avatar.classes
  * @namespace     node.mixin.ui.avatar
  * @type          PostcssMixin
  * @interface     ./classes
@@ -10,14 +11,11 @@ import __SInterface from '@coffeekraken/s-interface';
  *
  * Generate the avatar classes
  *
- * @param       {('default')[]}                                                [lnfs=['default']]         The lnf(s) you want to generate
- * @param       {('default'|'square'|'rounded')[]}                 [shape=['default'|'square','pill','rounded']]         The shape(s) you want to generate
- * @param       {'default''}                                                  [defaultLnf='theme.ui.avatar.defaultLnf']           The default lnf you want
  * @param       {('bare'|'lnf'|'shape'|'interactive'|'notifications')[]}        [scope=['bare','lnf','shape','interactive','notifications']]      The scope you want to generate
  * @return      {Css}                   The corresponding css
  *
  * @snippet         @sugar.ui.avatar.classes
- * 
+ *
  * @example       css
  * \@sugar.ui.avatar.classes();
  *

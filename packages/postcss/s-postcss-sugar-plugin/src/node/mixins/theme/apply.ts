@@ -3,6 +3,7 @@ import __STheme from '@coffeekraken/s-theme';
 
 /**
  * @name           apply
+ * @as              @sugar.theme.apply
  * @namespace      node.mixin.theme
  * @type           PostcssMixin
  * @platform      postcss
@@ -10,6 +11,9 @@ import __STheme from '@coffeekraken/s-theme';
  *
  * This mixin simply apply a theme in the desired scope
  *
+ * @param       {String}            variant             The theme variant you want
+ * @param       {String}            theme               The theme you want
+ * @param       {Boolean}           [scope=false]           If you want to scope the theme or not
  * @return        {Css}         The generated css
  *
  * @snippet         @sugar.theme.apply($1)

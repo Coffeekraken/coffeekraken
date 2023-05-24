@@ -3,6 +3,7 @@ import __STheme from '@coffeekraken/s-theme';
 
 /**
  * @name          width
+ * @as              @sugar.border.width
  * @namespace     node.mixin.border
  * @type          PostcssMixin
  * @platform      postcss
@@ -17,7 +18,7 @@ import __STheme from '@coffeekraken/s-theme';
  * @todo      Add multiple values support like @sugar.border.width(10);
  *
  * @snippet         @sugar.border.width($1)
- * 
+ *
  * @example       css
  * .my-element {
  *    @sugar.border.width(10);

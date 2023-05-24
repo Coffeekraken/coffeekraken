@@ -3,6 +3,7 @@ import __STheme from '@coffeekraken/s-theme';
 
 /**
  * @name          space
+ * @as          sugar.space
  * @namespace     node.function.space
  * @type          PostcssFunction
  * @platform      postcss
@@ -15,7 +16,7 @@ import __STheme from '@coffeekraken/s-theme';
  * @return      {Css}                   The corresponding css
  *
  * @snippet         sugar.space($1)
- * 
+ *
  * @example       css
  * .my-element {
  *    padding: sugar.space(20);

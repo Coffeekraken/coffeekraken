@@ -2,6 +2,7 @@ import __SInterface from '@coffeekraken/s-interface';
 
 /**
  * @name          blockquote
+ * @as          @sugar.ui.blockquote
  * @namespace     node.mixin.ui.blockquote
  * @type          PostcssMixin
  * @interface     ./blockquote
@@ -10,11 +11,11 @@ import __SInterface from '@coffeekraken/s-interface';
  *
  * This mixin allows you to generate the "blockquote" UI component css.
  *
- * @param       {('bare'|'lnf')[]}        [scope=['bare', 'lnf'']]      The scope you want to generate
+ * @param       {('bare'|'lnf')[]}        [scope=['bare', 'lnf']]      The scope you want to generate
  * @return      {Css}                   The corresponding css
  *
  * @snippet         @sugar.ui.blockquote
- * 
+ *
  * @example       css
  * .my-element {
  *      \@sugar.ui.blockquote();
@@ -32,8 +33,8 @@ class postcssSugarPluginUiBlockquoteInterface extends __SInterface {
                     type: 'Array<String>',
                     splitChars: [',', ' '],
                 },
-                values: ['bare', 'lnf', 'color'],
-                default: ['bare', 'lnf', 'color'],
+                values: ['bare', 'lnf'],
+                default: ['bare', 'lnf'],
             },
         };
     }

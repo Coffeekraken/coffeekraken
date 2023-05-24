@@ -7,6 +7,7 @@ exports.interface = void 0;
 const s_interface_1 = __importDefault(require("@coffeekraken/s-interface"));
 /**
  * @name          table
+ * @as              @sugar.ui.table
  * @namespace     node.mixin.ui.table
  * @type               PostcssMixin
  * @interface     ./table          interface
@@ -15,7 +16,6 @@ const s_interface_1 = __importDefault(require("@coffeekraken/s-interface"));
  *
  * Apply the table style to any element
  *
- * @param       {'default'}                           [style='theme.ui.table.defaultLnf']         The style you want to generate
  * @param       {('bare'|'lnf')[]}        [scope=['bare', 'lnf']]      The scope you want to generate
  * @return      {String}            The generated css
  *

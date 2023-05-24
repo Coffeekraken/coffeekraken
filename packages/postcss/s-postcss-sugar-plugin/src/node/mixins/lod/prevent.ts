@@ -12,14 +12,15 @@ export interface postcssSugarPluginScopePreventMixinParams {}
 
 /**
  * @name           prevent
+ * @as          @sugar.lod.prevent
  * @namespace      node.mixin.scope
  * @type           PostcssMixin
  * @platform        css
  * @status        beta
  *
- * This mixin allows you to mark some css as not using the "scopes" feature.
+ * This mixin allows you to mark some css as not using the "lod" feature.
  * This mean that your inside rules selectors will not be affected and will not
- * have any ".s-scope..." classes added
+ * have any ".s-lod..." classes added
  *
  * @param       {String}        query       The query string like ">tablet", "<=desktop", etc...
  *
@@ -27,7 +28,7 @@ export interface postcssSugarPluginScopePreventMixinParams {}
  * \@sugar.lod.prevent {
  *      $1
  * }
- * 
+ *
  * @example        css
  * \@sugar.lod.prevent() {
  *      // ...

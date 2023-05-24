@@ -2,6 +2,7 @@ import __SInterface from '@coffeekraken/s-interface';
 
 /**
  * @name          scale
+ * @as              @sugar.scale
  * @namespace     node.mixin.scale
  * @type          PostcssMixin
  * @platform      postcss
@@ -14,7 +15,7 @@ import __SInterface from '@coffeekraken/s-interface';
  * @return      {Css}                   The corresponding css
  *
  * @snippet         @sugar.scale($1)
- * 
+ *
  * @example       css
  * .my-element {
  *    @sugar.scale(1.2);

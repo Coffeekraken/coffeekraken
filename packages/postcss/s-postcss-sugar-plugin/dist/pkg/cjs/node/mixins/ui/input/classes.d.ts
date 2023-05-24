@@ -23,7 +23,7 @@ declare class postcssSugarPluginUiFormClassesInterface extends __SInterface {
 export interface IPostcssSugarPluginUiFormClassesParams {
     lnfs: string[];
     defaultLnf: 'solid' | 'underline';
-    scope: ('bare' | 'lnf' | 'vr' | 'tf')[];
+    scope: ('bare' | 'lnf' | 'vr')[];
 }
 export { postcssSugarPluginUiFormClassesInterface as interface };
 export default function ({ params, atRule, CssVars, replaceWith, }: {

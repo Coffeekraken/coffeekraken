@@ -6,6 +6,7 @@ import { __argsToString } from '@coffeekraken/sugar/cli';
 
 /**
  * @name           classes
+ * @as              @sugar.gradient.classes
  * @namespace      node.mixin.gradient
  * @type           PostcssMixin
  * @platform      postcss
@@ -16,7 +17,7 @@ import { __argsToString } from '@coffeekraken/sugar/cli';
  * @return        {Css}         The generated css
  *
  * @snippet         @sugar.gradient.classes
- * 
+ *
  * @example        css
  * \@sugar.gradient.classes;
  *

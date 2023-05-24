@@ -3,6 +3,7 @@ import __faker from 'faker';
 
 /**
  * @name          classes
+ * @as          @sugar.ui.tabs.classes
  * @namespace     node.mixin.ui.tabs
  * @type               PostcssMixin
  * @interface     ./classes          interface
@@ -11,11 +12,11 @@ import __faker from 'faker';
  *
  * Generate the tabs classes
  *
- * @param       {('bare'|'lnf'|'vr'|'tf')[]}        [scope=['bare', 'lnf', 'vr', 'tf']]      The scope you want to generate
+ * @param       {('bare'|'lnf')[]}        [scope=['bare', 'lnf']]      The scope you want to generate
  * @return      {String}            The generated css
  *
  * @snippet     @sugar.ui.tabs.classes
- * 
+ *
  * @example     css
  * \@sugar.ui.tabs.classes;
  *
@@ -31,15 +32,15 @@ class postcssSugarPluginUiListClassesInterface extends __SInterface {
                     type: 'Array<String>',
                     splitChars: [',', ' '],
                 },
-                values: ['bare', 'lnf', 'vr', 'tf'],
-                default: ['bare', 'lnf', 'vr', 'tf'],
+                values: ['bare', 'lnf'],
+                default: ['bare', 'lnf'],
             },
         };
     }
 }
 
 export interface IPostcssSugarPluginUiListClassesParams {
-    scope: ('bare' | 'lnf' | 'vr' | 'tf')[];
+    scope: ('bare' | 'lnf')[];
 }
 
 export { postcssSugarPluginUiListClassesInterface as interface };

@@ -14,6 +14,7 @@ export { postcssSugarPluginBorderRadiusClassesMixinInterface as interface };
 
 /**
  * @name          classes
+ * @as          @sugar.border.classes
  * @namespace     node.mixin.border
  * @type          PostcssMixin
  * @platform      postcss
@@ -24,7 +25,7 @@ export { postcssSugarPluginBorderRadiusClassesMixinInterface as interface };
  * @return      {Css}                   The generated css
  *
  * @snippet         @sugar.border.classes
- * 
+ *
  * @example       css
  * \@sugar.border.classes;
  *

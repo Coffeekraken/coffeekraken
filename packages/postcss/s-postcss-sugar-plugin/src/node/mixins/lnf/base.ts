@@ -12,6 +12,7 @@ export { postcssSugarPluginLiikAndFeelBaseInterface as interface };
 
 /**
  * @name          base
+ * @as          @sugar.lnf.base
  * @namespace     node.mixin.lnf
  * @type          PostcssMixin
  * @platform      postcss

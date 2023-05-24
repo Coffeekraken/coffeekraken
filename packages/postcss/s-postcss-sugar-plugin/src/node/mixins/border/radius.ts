@@ -3,6 +3,7 @@ import __STheme from '@coffeekraken/s-theme';
 
 /**
  * @name          radius
+ * @as              @sugar.border.radius
  * @namespace     node.mixin.border
  * @type          PostcssMixin
  * @platform      postcss
@@ -17,7 +18,7 @@ import __STheme from '@coffeekraken/s-theme';
  * @todo      Add multiple values support like @sugar.border.radius(10 20);
  *
  * @snippet         @sugar.border.radius($1)
- * 
+ *
  * @example       css
  * .my-element {
  *    @sugar.border.radius(10);

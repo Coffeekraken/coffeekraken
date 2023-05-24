@@ -3,6 +3,7 @@ import __STheme from '@coffeekraken/s-theme';
 
 /**
  * @name          margin
+ * @as          sugar.margin
  * @namespace     node.function.margin
  * @type          PostcssFunction
  * @platform      postcss
@@ -16,7 +17,7 @@ import __STheme from '@coffeekraken/s-theme';
  * @return      {Css}                   The corresponding css
  *
  * @snippet         sugar.margin($1)
- * 
+ *
  * @example       css
  * .my-element {
  *      margin-top: sugar.margin(20);

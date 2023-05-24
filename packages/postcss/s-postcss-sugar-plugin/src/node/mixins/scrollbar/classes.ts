@@ -4,6 +4,7 @@ import __faker from 'faker';
 
 /**
  * @name           classes
+ * @as              @sugar.scrollbar.classes
  * @namespace      node.mixin.scale
  * @type           PostcssMixin
  * @platform      postcss
@@ -15,7 +16,7 @@ import __faker from 'faker';
  * @return        {Css}         The generated css
  *
  * @snippet         @sugar.scrollbar.classes
- * 
+ *
  * @example        css
  * \@sugar.scale.classes;
  *

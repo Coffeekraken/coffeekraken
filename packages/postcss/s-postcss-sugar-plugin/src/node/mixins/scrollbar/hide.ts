@@ -2,6 +2,7 @@ import __SInterface from '@coffeekraken/s-interface';
 
 /**
  * @name           hide
+ * @as              @sugar.scrollbar.hide
  * @namespace      node.mixin.scrollbar
  * @type           PostcssMixin
  * @platform        css
@@ -12,7 +13,7 @@ import __SInterface from '@coffeekraken/s-interface';
  * @return        {Css}           The generated css
  *
  * @snippet         @sugar.scrollbar.hide
- * 
+ *
  * @example        css
  * body {
  *    @sugar.scrollbar.hide();

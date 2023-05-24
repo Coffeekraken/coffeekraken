@@ -3,6 +3,7 @@ import __STheme from '@coffeekraken/s-theme';
 
 /**
  * @name          classes
+ * @as              @sugar.ui.button.classes
  * @namespace     node.mixin.ui.button
  * @type          PostcssMixin
  * @interface       ./classes
@@ -11,13 +12,13 @@ import __STheme from '@coffeekraken/s-theme';
  *
  * Generate the button classes
  *
- * @param       {('default'|'outline'|'text')[]}                           [lnfs=['default','outline','text']]         The style(s) you want to generate
- * @param       {'default'|'outline'|'text'}                [defaultLnf='theme.ui.button.defaultLnf']           The default style you want
- * @param       {('bare'|'lnf'|'vr')[]}        [scope=['bare', 'lnf', 'vr']]      The scope you want to generate
+ * @param       {('solid'|'gradient'|'outline'|'text'|'loading')[]}                           [lnfs=['solid','gradient','outline','text','loading']]         The style(s) you want to generate
+ * @param       {'solid'|'gradient'|'outline'|'text'|'loading'}                [defaultLnf='theme.ui.button.defaultLnf']           The default style you want
+ * @param       {('bare'|'lnf'|'vr'|'tf)[]}        [scope=['bare', 'lnf', 'vr', 'tf']]      The scope you want to generate
  * @return      {Css}                   The corresponding css
  *
  * @snippet         @sugar.ui.button.classes
- * 
+ *
  * @example       css
  * \@sugar.ui.button.classes();
  *
@@ -30,13 +31,13 @@ class postcssSugarPluginUiButtonClassesInterface extends __SInterface {
         return {
             lnfs: {
                 type: 'String[]',
-                values: ['solid', 'outline', 'text'],
-                default: ['solid', 'outline', 'text'],
+                values: ['solid', 'gradient', 'outline', 'text', 'loading'],
+                default: ['solid', 'gradient', 'outline', 'text', 'loading'],
             },
             defaultLnf: {
                 type: 'String',
-                values: ['solid', 'outline', 'text'],
-                default: __STheme.get('ui.button.defaultLnf') ?? 'default',
+                values: ['solid', 'gradient', 'outline', 'text', 'loading'],
+                default: __STheme.get('ui.button.defaultLnf') ?? 'solid',
             },
             scope: {
                 type: {
@@ -51,8 +52,8 @@ class postcssSugarPluginUiButtonClassesInterface extends __SInterface {
 }
 
 export interface IPostcssSugarPluginUiButtonClassesParams {
-    lnfs: ('solid' | 'outline' | 'text')[];
-    defaultLnf: 'solid' | 'outline' | 'text';
+    lnfs: ('solid' | 'gradient' | 'outline' | 'text' | 'loading')[];
+    defaultLnf: 'solid' | 'gradient' | 'outline' | 'text' | 'loading';
     scope: ('bare' | 'lnf' | 'bare' | 'vr' | 'tf')[];
 }
 
@@ -70,7 +71,7 @@ export default function ({
     replaceWith: Function;
 }) {
     const finalParams: IPostcssSugarPluginUiButtonClassesParams = {
-        lnfs: ['solid', 'outline', 'text'],
+        lnfs: ['solid', 'gradient', 'outline', 'text', 'loading'],
         defaultLnf: 'solid',
         scope: ['bare', 'lnf', 'vr', 'tf'],
         ...params,

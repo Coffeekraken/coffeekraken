@@ -5,6 +5,7 @@ import __faker from 'faker';
 
 /**
  * @name           classes
+ * @as              @sugar.margin.classes
  * @namespace      node.mixin.margin
  * @type           PostcssMixin
  * @platform      postcss
@@ -15,7 +16,7 @@ import __faker from 'faker';
  * @return        {Css}         The generated css
  *
  * @snippet         @sugar.margin.classes
- * 
+ *
  * @example        css
  * \@sugar.margin.classes;
  *

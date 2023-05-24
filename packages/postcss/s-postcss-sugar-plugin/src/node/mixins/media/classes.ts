@@ -4,6 +4,7 @@ import __STheme from '@coffeekraken/s-theme';
 
 /**
  * @name           classes
+ * @as              @sugar.media.classes
  * @namespace      node.mixin.media
  * @type           PostcssMixin
  * @platform      postcss

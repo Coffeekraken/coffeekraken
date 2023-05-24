@@ -1,36 +1,36 @@
 .examples {
     @sugar.layout ('1 2 2 2');
-    gap: sugar.margin(30);
+    @sugar.depth (100);
 
     ._sidebar {
         /* background: sugar.color(main, surface);
         border: solid 1px sugar.color(main, border); */
-        background: linear-gradient(
-            35deg,
-            sugar.color(main, background, --alpha 0),
-            sugar.color(main, surface)
-        );
-        padding: sugar.padding(30) sugar.padding(10);
         @sugar.border.radius();
 
         a {
             display: block;
             padding: sugar.padding(30) sugar.padding(30);
-            transform: translateX(0);
-            border-right: 0px solid sugar.color(accent);
-            @sugar.border.radius();
+            border-top-left-radius: sugar.border.radius();
+            border-bottom-left-radius: sugar.border.radius();
+            border-bottom: 1px solid sugar.color(main, border, --alpha 0);
             @sugar.transition fast;
 
+            &:not(:last-child):not(
+                    :hover,
+                    :active,
+                    .active,
+                    :has(+ .active, + :active, + :hover)
+                ) {
+                border-bottom: 1px solid sugar.color(main, border);
+            }
+
             &:hover {
-                background: sugar.color(main, surface, --lighten 5);
-                transform: translateX(sugar.margin(20));
+                background: sugar.color(main, surface, --alpha 0.4);
             }
             &:active,
             &.active {
-                background: sugar.color(main, surface, --lighten 10);
-                border-right: 5px solid sugar.color(accent);
-                transform: translateX(sugar.margin(20));
-                /* @sugar.depth (100); */
+                background: sugar.color(main, surface);
+                color: sugar.color(accent);
             }
 
             i {
@@ -47,6 +47,11 @@
 
         &.active {
             display: block;
+        }
+
+        .s-code-example_tabs,
+        .s-code-example_toolbar {
+            display: none;
         }
     }
 }

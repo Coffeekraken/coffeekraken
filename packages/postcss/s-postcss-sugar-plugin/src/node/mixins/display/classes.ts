@@ -3,6 +3,7 @@ import __faker from 'faker';
 
 /**
  * @name           classes
+ * @as          @sugar.display.classes
  * @namespace      node.mixin.display
  * @type           PostcssMixin
  * @platform      postcss
@@ -13,7 +14,7 @@ import __faker from 'faker';
  * @return        {Css}         The generated css
  *
  * @snippet         @sugar.display.classes
- * 
+ *
  * @example        css
  * \@sugar.display.classes;
  *

@@ -5,6 +5,7 @@ import __STheme from '@coffeekraken/s-theme';
 
 /**
  * @name          value
+ * @as          sugar.theme.value
  * @namespace     node.function.theme
  * @type          PostcssFunction
  * @platform      postcss
@@ -21,7 +22,7 @@ import __STheme from '@coffeekraken/s-theme';
  * @return      {Css}                   The corresponding css
  *
  * @snippet         sugar.theme.value($1)
- * 
+ *
  * @example       css
  * .my-element {
  *    font-family: sugar.theme.value(font.family.fontFamily);

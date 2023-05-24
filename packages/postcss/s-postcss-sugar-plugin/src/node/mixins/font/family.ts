@@ -4,6 +4,7 @@ import { __dashCase } from '@coffeekraken/sugar/string';
 
 /**
  * @name           family
+ * @as              @sugar.font.family
  * @namespace      node.mixin.font
  * @type           PostcssMixin
  * @platform      postcss
@@ -16,7 +17,7 @@ import { __dashCase } from '@coffeekraken/sugar/string';
  * @return        {Css}         The generated css
  *
  * @snippet         @sugar.font.family($1)
- * 
+ *
  * @example        css
  * .my-cool-element {
  *    \@sugar.font.family(title);

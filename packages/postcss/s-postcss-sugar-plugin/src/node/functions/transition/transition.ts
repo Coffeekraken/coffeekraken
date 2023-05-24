@@ -3,7 +3,8 @@ import __STheme from '@coffeekraken/s-theme';
 
 /**
  * @name          transition
- * @namespace     node.function.border
+ * @as            sugar.transition
+ * @namespace     node.function.transition
  * @type          PostcssFunction
  * @platform      postcss
  * @interface       ./transition
@@ -15,7 +16,7 @@ import __STheme from '@coffeekraken/s-theme';
  * @return      {Css}                   The corresponding css
  *
  * @snippet         sugar.transition($1)
- * 
+ *
  * @example       css
  * .my-element {
  *      transition: sugar.transition(fast);

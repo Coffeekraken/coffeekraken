@@ -12,6 +12,7 @@ export interface postcssSugarPluginStateActiveMixinParams {}
 
 /**
  * @name           focus
+ * @as              @sugar.state.active
  * @namespace      node.mixin.state
  * @type           PostcssMixin
  * @platform      postcss
@@ -27,7 +28,7 @@ export interface postcssSugarPluginStateActiveMixinParams {}
  * \@sugar.state.active {
  *      $1
  * }
- * 
+ *
  * @example        css
  * .myCoolItem {
  *  \@sugar.state.active {

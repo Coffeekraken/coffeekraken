@@ -10,7 +10,7 @@ declare class postcssSugarPluginUiBadgeClassesInterface extends __SInterface {
         defaultLnf: {
             type: string;
             values: string[];
-            default: string;
+            default: any;
         };
         scope: {
             type: {
@@ -23,9 +23,9 @@ declare class postcssSugarPluginUiBadgeClassesInterface extends __SInterface {
     };
 }
 export interface IPostcssSugarPluginUiBadgeClassesParams {
-    lnfs: ('default' | 'outline')[];
-    defaultLnf: 'default' | 'outline';
-    scope: ('bare' | 'lnf' | 'vr')[];
+    lnfs: ('solid' | 'outline')[];
+    defaultLnf: 'solid' | 'outline';
+    scope: ('bare' | 'lnf')[];
 }
 export { postcssSugarPluginUiBadgeClassesInterface as interface };
 export default function ({ params, atRule, CssVars, replaceWith, }: {

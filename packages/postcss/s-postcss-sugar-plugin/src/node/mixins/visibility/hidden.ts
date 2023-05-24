@@ -2,6 +2,7 @@ import __SInterface from '@coffeekraken/s-interface';
 
 /**
  * @name           hidden
+ * @as              @sugar.visibility.hidden
  * @namespace      node.mixin.visually
  * @type           PostcssMixin
  * @interface       ./hidden
@@ -14,7 +15,7 @@ import __SInterface from '@coffeekraken/s-interface';
  * @return        {Css}         The generated css
  *
  * @snippet         @sugar.visibility.hidden
- * 
+ *
  * @example        css
  * .my-element {
  *  \@sugar.visually.hidden;

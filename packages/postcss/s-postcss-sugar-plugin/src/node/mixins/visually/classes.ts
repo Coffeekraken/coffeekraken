@@ -2,6 +2,7 @@ import __SInterface from '@coffeekraken/s-interface';
 
 /**
  * @name           classes
+ * @as              @sugar.visually.classes
  * @namespace      node.mixin.visually
  * @type           PostcssMixin
  * @interface       ./classes
@@ -13,7 +14,7 @@ import __SInterface from '@coffeekraken/s-interface';
  * @return        {Css}         The generated css
  *
  * @snippet         @sugar.visually.classes
- * 
+ *
  * @example        css
  * \@sugar.visually.classes;
  *

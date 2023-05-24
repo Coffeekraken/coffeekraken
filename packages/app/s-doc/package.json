@@ -1,0 +1,53 @@
+{
+    "name": "@coffeekraken/s-doc",
+    "version": "2.0.0-alpha.27",
+    "description": "Simple package that allows you to expose some documentation easily",
+    "type": "module",
+    "homepage": "https://coffeekraken.io",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "author": "",
+    "license": "MIT",
+    "dependencies": {
+        "@coffeekraken/s-i18n": "^2.0.0-alpha.27",
+        "@coffeekraken/s-interface": "^2.0.0-alpha.27",
+        "@coffeekraken/s-class": "^2.0.0-alpha.27",
+        "@coffeekraken/s-docmap": "^2.0.0-alpha.27",
+        "@coffeekraken/s-docblock": "^2.0.0-alpha.27",
+        "@coffeekraken/s-lit-component": "^2.0.0-alpha.27",
+        "@coffeekraken/s-promise": "^2.0.0-alpha.27",
+        "@coffeekraken/sugar": "^2.0.0-alpha.27",
+        "lit": "^2.2.8"
+    },
+    "main": "dist/pkg/cjs/js/exports.js",
+    "module": "dist/pkg/esm/js/exports.js",
+    "exports": {
+        ".": {
+            "node": {
+                "require": "./dist/pkg/cjs/node/exports.js",
+                "import": "./dist/pkg/esm/node/exports.js"
+            },
+            "default": {
+                "require": "./dist/pkg/cjs/js/exports.js",
+                "import": "./dist/pkg/esm/js/exports.js"
+            }
+        },
+        "./lazy": {
+            "require": "./dist/pkg/cjs/js/lazy.js",
+            "import": "./dist/pkg/esm/js/lazy.js"
+        },
+        "./shared/*": {
+            "require": "./dist/pkg/cjs/shared/*.js",
+            "import": "./dist/pkg/esm/shared/*.js"
+        },
+        "./node/*": {
+            "require": "./dist/pkg/cjs/node/*.js",
+            "import": "./dist/pkg/esm/node/*.js"
+        },
+        "./js/*": {
+            "require": "./dist/pkg/cjs/js/*.js",
+            "import": "./dist/pkg/esm/js/*.js"
+        }
+    }
+}

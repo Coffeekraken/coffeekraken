@@ -15,6 +15,7 @@ export { postcssSugarPluginMediaMixinInterface as interface };
 
 /**
  * @name           media
+ * @as              @sugar.media
  * @namespace      node.mixin.media
  * @type           PostcssMixin
  * @platform      postcss

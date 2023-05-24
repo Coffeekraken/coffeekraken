@@ -3,6 +3,7 @@ import { __isValidCssUnitValue } from '@coffeekraken/sugar/css';
 
 /**
  * @name          family
+ * @as              sugar.font.family
  * @namespace     node.function.font
  * @type          PostcssFunction
  * @platform      postcss
@@ -15,7 +16,7 @@ import { __isValidCssUnitValue } from '@coffeekraken/sugar/css';
  * @return      {Css}                   The corresponding css
  *
  * @snippet         sugar.font.family($1)
- * 
+ *
  * @example       css
  * .my-element {
  *      font-family: sugar.font.family(code);

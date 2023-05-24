@@ -2,6 +2,7 @@ import __SInterface from '@coffeekraken/s-interface';
 
 /**
  * @name           layout
+ * @as              @sugar.layout
  * @namespace      node.mixin.layout
  * @type           PostcssMixin
  * @platform      postcss

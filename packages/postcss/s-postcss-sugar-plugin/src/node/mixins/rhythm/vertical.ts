@@ -20,6 +20,7 @@ export interface postcssSugarPluginRhythmVerticalMixinParams {
 
 /**
  * @name           vertical
+ * @as              @sugar.rhythm.vertical
  * @namespace      node.mixin.rhythm
  * @type           PostcssMixin
  * @platform      postcss
@@ -34,7 +35,7 @@ export interface postcssSugarPluginRhythmVerticalMixinParams {
  * \@sugar.rhythm.vertical {
  *      $1
  * }
- * 
+ *
  * @example        css          Custom styling
  * .my-cool-element {
  *    \@sugar.rhythm.vertical {

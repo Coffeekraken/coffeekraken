@@ -61,5 +61,8 @@ export default function SPackEssentials(): void {
     __SFloatingFeatureDefine();
     __SFormValidateFeatureDefine();
     __SInlineFeatureDefine();
-    __SRefocusFeatureDefine();
+    __SRefocusFeatureDefine({
+        trigger: ['event:actual', 'anchor', 'history'],
+        offsetY: 400,
+    });
 }

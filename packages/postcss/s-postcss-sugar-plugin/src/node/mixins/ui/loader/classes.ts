@@ -3,6 +3,7 @@ import __camelCase from '@coffeekraken/sugar/shared/string/camelCase';
 
 /**
  * @name          classes
+ * @as              @sugar.ui.loader.classes
  * @namespace     node.mixin.ui.loader
  * @type               PostcssMixin
  * @interface     ./classes          interface

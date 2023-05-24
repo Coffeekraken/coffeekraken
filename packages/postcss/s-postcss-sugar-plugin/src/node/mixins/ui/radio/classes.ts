@@ -4,6 +4,7 @@ import __faker from 'faker';
 
 /**
  * @name          classes
+ * @as              @sugar.ui.radio.classes
  * @namespace     node.mixin.ui.radio
  * @type               PostcssMixin
  * @interface     ./classes          interface
@@ -12,13 +13,13 @@ import __faker from 'faker';
  *
  * Generate the radio classes
  *
- * @param       {('default')[]}                           [lnfs=['default']]         The style(s) you want to generate
- * @param       {'default'}                [defaultLnf='theme.ui.form.defaultLnf']           The default style you want
+ * @param       {('solid')[]}                           [lnfs=['solid']]         The lnf(s) you want to generate
+ * @param       {'solid'}                [defaultLnf='theme.ui.form.defaultLnf']           The default lnf you want
  * @param       {('bare'|'lnf'|'vr'|'tf')[]}        [scope=['bare', 'lnf', 'vr', 'tf']]      The scope you want to generate
  * @return      {String}            The generated css
  *
  * @snippet         @sugar.ui.radio.classes
- * 
+ *
  * @example     css
  * \@sugar.ui.form.classes;
  *
@@ -31,12 +32,12 @@ class postcssSugarPluginUiRadioClassesInterface extends __SInterface {
         return {
             lnfs: {
                 type: 'String[]',
-                values: ['default'],
-                default: ['default'],
+                values: ['solid'],
+                default: ['solid'],
             },
             defaultLnf: {
                 type: 'String',
-                values: ['default'],
+                values: ['solid'],
                 default: __STheme.get('ui.form.defaultLnf'),
             },
             scope: {
@@ -52,8 +53,8 @@ class postcssSugarPluginUiRadioClassesInterface extends __SInterface {
 }
 
 export interface IPostcssSugarPluginUiRangeClassesParams {
-    lnfs: 'default'[];
-    defaultLnf: 'default';
+    lnfs: 'solid'[];
+    defaultLnf: 'solid';
     scope: ('bare' | 'lnf' | 'vr' | 'tf')[];
 }
 
@@ -72,7 +73,7 @@ export default function ({
 }) {
     const finalParams: IPostcssSugarPluginUiRangeClassesParams = {
         lnfs: [],
-        defaultLnf: 'default',
+        defaultLnf: 'solid',
         scope: [],
         ...params,
     };

@@ -3,6 +3,7 @@ import __SInterface from '@coffeekraken/s-interface';
 
 /**
  * @name          maxWidth
+ * @as              sugar.container.width
  * @namespace     node.function.color
  * @type          PostcssFunction
  * @platform      postcss
@@ -15,7 +16,7 @@ import __SInterface from '@coffeekraken/s-interface';
  * @return      {Css}                   The corresponding css
  *
  * @snippet         sugar.container.width($1)
- * 
+ *
  * @example       css
  * .my-element {
  *    max-width: sugar.container.width();

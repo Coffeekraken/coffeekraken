@@ -2,17 +2,18 @@ import __SInterface from '@coffeekraken/s-interface';
 
 /**
  * @name           classes
- * @namespace      node.mixin.spacing
+ * @as              @sugar.shape.classes
+ * @namespace      node.mixin.shape
  * @type           PostcssMixin
  * @platform      postcss
  * @status        beta
  *
- * This mixin generate all the spacing helper classes like s-p:10, s-pie:40, etc...
+ * This mixin generate all the shape helper classes like s-shape:default, s-shape:square and s-shape:pill
  *
  * @return        {Css}         The generated css
  *
  * @snippet         @sugar.shape.classes
- * 
+ *
  * @example        css
  * \@sugar.shape.classes;
  *

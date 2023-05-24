@@ -4,6 +4,7 @@ import __faker from 'faker';
 
 /**
  * @name          classes
+ * @as          @sugar.ui.fsTree.classes
  * @namespace     node.mixin.ui.fsTree
  * @type               PostcssMixin
  * @interface     ./classes          interface
@@ -12,13 +13,11 @@ import __faker from 'faker';
  *
  * Generate the fsTree classes
  *
- * @param       {('default')[]}                           [lnfs=['default']]         The style(s) you want to generate
- * @param       {'default'}                [defaultLnf='theme.ui.fsTree.defaultLnf']           The default style you want
  * @param       {('bare'|'lnf')[]}        [scope=['bare', 'lnf']]      The scope you want to generate
  * @return      {String}            The generated css
  *
  * @snippet         @sugar.ui.fsTree.classes
- * 
+ *
  * @example     css
  * \@sugar.ui.fsTree.classes;
  *

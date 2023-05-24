@@ -2,6 +2,7 @@ import __SInterface from '@coffeekraken/s-interface';
 
 /**
  * @name          classes
+ * @as          @sugar.ui.backdrop.classes
  * @namespace     node.mixin.ui.backdrop
  * @type          PostcssMixin
  * @interface       ./classes
@@ -14,7 +15,7 @@ import __SInterface from '@coffeekraken/s-interface';
  * @return      {Css}                   The corresponding css
  *
  * @snippet         @sugar.ui.backdrop.classes
- * 
+ *
  * @example       css
  * \@sugar.ui.backdrop.classes();
  *

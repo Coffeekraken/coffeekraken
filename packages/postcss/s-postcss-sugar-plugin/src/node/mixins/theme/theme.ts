@@ -21,6 +21,7 @@ export interface postcssSugarPluginThemeMixinParams {
 
 /**
  * @name           theme
+ * @as          @sugar.theme
  * @namespace      node.mixin.theme
  * @type           PostcssMixin
  * @platform      postcss
@@ -28,6 +29,8 @@ export interface postcssSugarPluginThemeMixinParams {
  *
  * This mixin allows you to scope some css for a particular theme.
  *
+ * @param       {String}            variant             The theme variant you want
+ * @param       {String}            theme               The theme you want
  * @return      {Css}         The generated css
  *
  * @snippet         @sugar.theme($1)

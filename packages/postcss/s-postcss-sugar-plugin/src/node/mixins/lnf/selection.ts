@@ -12,6 +12,7 @@ export { postcssSugarPluginLiikAndFeelSelectionInterface as interface };
 
 /**
  * @name          selection
+ * @as          @sugar.lnf.selection
  * @namespace     node.mixin.lnf
  * @type          PostcssMixin
  * @platform      postcss
@@ -25,7 +26,7 @@ export { postcssSugarPluginLiikAndFeelSelectionInterface as interface };
  * @return      {Css}                   The corresponding grid css
  *
  * @snippet         @sugar.lnf.selection
- * 
+ *
  * @example       css
  * \@sugar.lnf.selection;
  *

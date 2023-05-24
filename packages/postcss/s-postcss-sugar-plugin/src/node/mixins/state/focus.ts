@@ -12,6 +12,7 @@ export interface postcssSugarPluginStateFocusMixinParams {}
 
 /**
  * @name           focus
+ * @as              @sugar.state.focus
  * @namespace      node.mixin.state
  * @type           PostcssMixin
  * @platform      postcss
@@ -21,13 +22,11 @@ export interface postcssSugarPluginStateFocusMixinParams {}
  * Here's the generated selector:
  * - &:focus
  *
- * @param       {String}        query       The query string like ">tablet", "<=desktop", etc...
- *
  * @snippet         @sugar.state.focus
  * \@sugar.state.focus {
  *      $1
  * }
- * 
+ *
  * @example        css
  * .myCoolItem {
  *  \@sugar.state.focus {

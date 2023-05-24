@@ -3,6 +3,7 @@ import __STheme from '@coffeekraken/s-theme';
 
 /**
  * @name          select
+ * @as              @sugar.ui.select
  * @namespace     node.mixin.ui.select
  * @type               PostcssMixin
  * @interface     ./select          interface
@@ -11,7 +12,7 @@ import __STheme from '@coffeekraken/s-theme';
  *
  * Apply the select style to any HTMLSelectElement
  *
- * @param       {'default'}                           [style='theme.ui.form.defaultLnf']         The style you want to generate
+ * @param       {'solid'|'underline'}                           [style='theme.ui.form.defaultLnf']         The lnf you want to generate
  * @param       {('bare'|'lnf')[]}        [scope=['bare', 'lnf']]      The scope you want to generate
  * @return      {String}            The generated css
  *
@@ -31,7 +32,7 @@ class postcssSugarPluginUiFormSelectInterface extends __SInterface {
         return {
             lnf: {
                 type: 'String',
-                values: ['default'],
+                values: ['solid', 'underline'],
                 default: __STheme.get('ui.form.defaultLnf'),
             },
             scope: {
@@ -47,8 +48,9 @@ class postcssSugarPluginUiFormSelectInterface extends __SInterface {
 }
 
 export interface IPostcssSugarPluginUiFormSelectParams {
-    lnf: 'default' | 'underline';
+    lnf: 'solid' | 'underline';
     scope: ('bare' | 'lnf')[];
+    outline: boolean;
 }
 
 export { postcssSugarPluginUiFormSelectInterface as interface };
@@ -63,8 +65,9 @@ export default function ({
     replaceWith: Function;
 }) {
     const finalParams: IPostcssSugarPluginUiFormSelectParams = {
-        lnf: 'default',
+        lnf: 'solid',
         scope: ['bare', 'lnf'],
+        outline: true,
         ...params,
     };
 

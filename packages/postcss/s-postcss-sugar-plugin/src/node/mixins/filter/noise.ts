@@ -2,6 +2,7 @@ import __SInterface from '@coffeekraken/s-interface';
 
 /**
  * @name           noise
+ * @as              @sugar.filter.noise
  * @namespace      node.mixin.filter
  * @type           PostcssMixin
  * @platform      postcss
@@ -12,7 +13,7 @@ import __SInterface from '@coffeekraken/s-interface';
  * @return        {Css}         The generated css
  *
  * @snippet         @sugar.filter.noise
- * 
+ *
  * @example        css
  * .my-element {
  *    \@sugar.filter.noise(20);

@@ -3,6 +3,7 @@ import { __dirname } from '@coffeekraken/sugar/fs';
 
 /**
  * @name           reset
+ * @as              @sugar.reset
  * @namespace      node.mixin.reset
  * @type           PostcssMixin
  * @platform      postcss
@@ -17,7 +18,7 @@ import { __dirname } from '@coffeekraken/sugar/fs';
  * @return        {Css}         The generated css
  *
  * @snippet         @sugar.reset
- * 
+ *
  * @example        css
  * \@sugar.reset;
  *

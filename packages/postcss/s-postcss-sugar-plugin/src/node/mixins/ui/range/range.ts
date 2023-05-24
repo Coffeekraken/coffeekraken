@@ -3,6 +3,7 @@ import __STheme from '@coffeekraken/s-theme';
 
 /**
  * @name          range
+ * @as              @sugar.ui.range
  * @namespace     node.mixin.ui.range
  * @type               PostcssMixin
  * @interface     ./range          interface
@@ -11,7 +12,7 @@ import __STheme from '@coffeekraken/s-theme';
  *
  * Apply the range style to any HTMLInputElement
  *
- * @param       {'default'}                           [style='theme.ui.form.defaultLnf']         The style you want to generate
+ * @param       {'solid'}                           [style='theme.ui.form.defaultLnf']         The lnf you want to generate
  * @param       {('bare'|'lnf')[]}        [scope=['bare', 'lnf']]      The scope you want to generate
  * @return      {String}            The generated css
  *

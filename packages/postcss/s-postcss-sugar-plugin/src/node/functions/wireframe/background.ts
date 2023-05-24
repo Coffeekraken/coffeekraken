@@ -3,6 +3,7 @@ import __STheme from '@coffeekraken/s-theme';
 
 /**
  * @name          background
+ * @as          sugar.wireframe.background
  * @namespace     node.function.wireframe
  * @type          PostcssFunction
  * @platform      postcss

@@ -23,8 +23,8 @@ declare class postcssSugarPluginUiButtonClassesInterface extends __SInterface {
     };
 }
 export interface IPostcssSugarPluginUiButtonClassesParams {
-    lnfs: ('solid' | 'outline' | 'text')[];
-    defaultLnf: 'solid' | 'outline' | 'text';
+    lnfs: ('solid' | 'gradient' | 'outline' | 'text' | 'loading')[];
+    defaultLnf: 'solid' | 'gradient' | 'outline' | 'text' | 'loading';
     scope: ('bare' | 'lnf' | 'bare' | 'vr' | 'tf')[];
 }
 export { postcssSugarPluginUiButtonClassesInterface as interface };

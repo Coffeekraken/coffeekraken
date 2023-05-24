@@ -4,6 +4,7 @@ import { __keysFirst } from '@coffeekraken/sugar/array';
 
 /**
  * @name           classes
+ * @as              @sugar.depth.classes
  * @namespace      node.mixin.depth
  * @type           PostcssMixin
  * @platform      postcss
@@ -14,7 +15,7 @@ import { __keysFirst } from '@coffeekraken/sugar/array';
  * @return        {Css}        The generated css
  *
  * @snippet         @sugar.depth.classes
- * 
+ *
  * @example        css
  * \@sugar.depth.classes;
  *

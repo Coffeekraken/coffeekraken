@@ -4,6 +4,7 @@ import __faker from 'faker';
 
 /**
  * @name          classes
+ * @as              @sugar.ui.switch.classes
  * @namespace     node.mixin.ui.switch
  * @type               PostcssMixin
  * @interface     ./classes          interface
@@ -14,11 +15,11 @@ import __faker from 'faker';
  *
  * @param       {('solid')[]}                           [lnfs=['solid']]         The style(s) you want to generate
  * @param       {'solid'}                [defaultLnf='theme.ui.form.defaultLnf']           The default style you want
- * @param       {('bare'|'lnf'|'vr'|'tf')[]}        [scope=['bare', 'lnf', 'vr', 'tf']]      The scope you want to generate
+ * @param       {('bare'|'lnf')[]}        [scope=['bare', 'lnf']]      The scope you want to generate
  * @return      {String}            The generated css
  *
  * @snippet         @sugar.ui.switch.classes
- * 
+ *
  * @example     css
  * \@sugar.ui.switch.classes;
  *
@@ -44,8 +45,8 @@ class postcssSugarPluginUiSwitchClassesMixinInterface extends __SInterface {
                     type: 'Array<String>',
                     splitChars: [',', ' '],
                 },
-                values: ['bare', 'lnf', 'tf'],
-                default: ['bare', 'lnf', 'tf'],
+                values: ['bare', 'lnf'],
+                default: ['bare', 'lnf'],
             },
         };
     }
@@ -54,7 +55,7 @@ class postcssSugarPluginUiSwitchClassesMixinInterface extends __SInterface {
 export interface IPostcssSugarPluginUiSwitchClassesMixinParams {
     lnfs: 'solid'[];
     defaultLnf: 'solid';
-    scope: ('bare' | 'lnf' | 'vr' | 'tf')[];
+    scope: ('bare' | 'lnf')[];
 }
 
 export { postcssSugarPluginUiSwitchClassesMixinInterface as interface };

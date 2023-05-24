@@ -3,6 +3,7 @@ import __STheme from '@coffeekraken/s-theme';
 
 /**
  * @name            typo
+ * @as              @sugar.typo
  * @namespace       node.mixin.typo
  * @type            PostcssMixin
  * @platform        css

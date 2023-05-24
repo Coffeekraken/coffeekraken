@@ -2,6 +2,7 @@ import __SInterface from '@coffeekraken/s-interface';
 
 /**
  * @name          avatar
+ * @as              @sugar.ui.avatar
  * @namespace     node.mixin.ui.avatar
  * @type          PostcssMixin
  * @interface       ./avatar

@@ -23,6 +23,7 @@ export { postcssSugarPluginBackdropInterface as interface };
 
 /**
  * @name          backdrop
+ * @as              @sugar.ui.backdrop
  * @namespace     node.mixin.backdrop
  * @type          PostcssMixin
  * @platform      postcss
@@ -34,7 +35,7 @@ export { postcssSugarPluginBackdropInterface as interface };
  * @return      {Css}                   The corresponding css
  *
  * @snippet         @sugar.backdrop
- * 
+ *
  * @example       css
  * .my-element {
  *    \@sugar.backdrop();

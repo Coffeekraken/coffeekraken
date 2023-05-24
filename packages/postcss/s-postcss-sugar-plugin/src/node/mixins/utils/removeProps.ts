@@ -2,6 +2,7 @@ import __SInterface from '@coffeekraken/s-interface';
 
 /**
  * @name           removeProps
+ * @as              @sugar.utils.removeProps
  * @namespace      node.mixin.utils
  * @type           PostcssMixin
  * @platform      postcss

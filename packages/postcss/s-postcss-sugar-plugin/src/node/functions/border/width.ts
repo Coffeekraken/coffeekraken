@@ -3,6 +3,7 @@ import __STheme from '@coffeekraken/s-theme';
 
 /**
  * @name          width
+ * @as            sugar.border.width
  * @namespace     node.function.border
  * @type          PostcssFunction
  * @platform      postcss
@@ -15,7 +16,7 @@ import __STheme from '@coffeekraken/s-theme';
  * @return      {Css}                   The corresponding css
  *
  * @snippet         sugar.border.width($1)
- * 
+ *
  * @example       css
  * .my-element {
  *    border-width: sugar.border.width(50);

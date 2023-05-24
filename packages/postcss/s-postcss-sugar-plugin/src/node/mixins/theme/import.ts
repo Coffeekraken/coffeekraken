@@ -3,6 +3,7 @@ import __STheme from '@coffeekraken/s-theme';
 
 /**
  * @name           import
+ * @as              @sugar.theme.import
  * @namespace      node.mixin.theme
  * @type           PostcssMixin
  * @platform      postcss
@@ -13,6 +14,9 @@ import __STheme from '@coffeekraken/s-theme';
  * as set the correct font style and some other small things...
  * It just import the theme but does not apply directly.
  *
+ * @param       {String}            variant             The theme variant you want
+ * @param       {String}            theme               The theme you want
+ * @param       {Boolean}           [scope=true]           If you want to scope the theme or not
  * @return        {Css}         The generated css
  *
  * @snippet         @sugar.theme.import($1)

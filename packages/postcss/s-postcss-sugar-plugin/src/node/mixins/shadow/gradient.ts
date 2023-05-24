@@ -2,6 +2,7 @@ import __SInterface from '@coffeekraken/s-interface';
 
 /**
  * @name           shadow
+ * @as              @sugar.shadow.gradient
  * @namespace      node.mixin.shadow
  * @type           PostcssMixin
  * @platform        css
@@ -10,6 +11,13 @@ import __SInterface from '@coffeekraken/s-interface';
  * This mixin allows you to apply a linear gradient shadow to any HTMLElement.
  * Note that this mixin make use of the :before pseudo class.
  *
+ * @param       {Number|String}         [x=0]           The x offset
+ * @param       {Number|String}         [y=0]           The y offset
+ * @param       {Number|String}         [blur=0]        The blur amount
+ * @param       {Number|String}         [spread=0]      The spread amount
+ * @param       {String}                [startColor=sugar.color(accent)]            The start color
+ * @param       {String}                [endColor=sugar.color(complementary)]       The end color
+ * @param           {String}            [angle=90deg]           The gradient angle
  * @return        {Css}           The generated css
  *
  * @example        css

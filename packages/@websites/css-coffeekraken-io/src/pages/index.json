@@ -16,6 +16,10 @@
         {
             "type": "node",
             "uid": "examples"
+        },
+        {
+            "type": "node",
+            "uid": "api"
         }
     ]
 }

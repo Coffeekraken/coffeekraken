@@ -1,26 +1,26 @@
 import __SInterface from '@coffeekraken/s-interface';
 
 /**
- * @name           partial
- * @namespace      node.mixin.export
- * @type           PostcssMixin
- * @platform      postcss
- * @status        wip
+ * @__name           partial
+ * @__namespace      node.mixin.export
+ * @__type           PostcssMixin
+ * @__platform      postcss
+ * @__status        wip
  *
  * This mixin allows you to mark some css to be exported as separated file.
  * You can specify the name of your partial
  *
- * @return        {Css}         The generated css
+ * @__return        {Css}         The generated css
  *
- * @example        css
+ * @__example        css
  * \@sugar.partial(general) {
  *   body {
  *      background: red;
  *   }
  * }
  *
- * @since       2.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+ * @__since       2.0.0
+ * @__author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 
 class postcssSugarPluginCacheInterface extends __SInterface {
@@ -61,7 +61,9 @@ export default function ({
         ...params,
     };
 
-    throw new Error(`<red>[postcss]</red> "<magenta>@sugar.partial</magenta>" mixin is not supported for now...`);
+    throw new Error(
+        `<red>[postcss]</red> "<magenta>@sugar.partial</magenta>" mixin is not supported for now...`,
+    );
 
     if (!finalParams.id || finalParams.id === '') {
         throw new Error(

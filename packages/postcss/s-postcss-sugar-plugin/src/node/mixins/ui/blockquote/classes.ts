@@ -4,6 +4,7 @@ import __faker from 'faker';
 
 /**
  * @name          classes
+ * @as              @sugar.blockquote.classes
  * @namespace     node.mixin.ui.blockquote
  * @type          PostcssMixin
  * @interface       ./classes
@@ -12,11 +13,11 @@ import __faker from 'faker';
  *
  * Generate the blockquote classes
  *
- * @param       {('bare'|'lnf'|'vr')[]}        [scope=['bare', 'lnf', 'vr']]      The scope you want to generate
+ * @param       {('bare'|'lnf'|'vr'|'tf')[]}        [scope=['bare', 'lnf', 'vr', 'tf']]      The scope you want to generate
  * @return      {Css}                   The corresponding css
  *
  * @snippet         @sugar.ui.blockquote.classes
- * 
+ *
  * @example       css
  * \@sugar.ui.blockquote.classes();
  *

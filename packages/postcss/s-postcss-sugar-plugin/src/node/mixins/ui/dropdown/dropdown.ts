@@ -2,6 +2,7 @@ import __SInterface from '@coffeekraken/s-interface';
 
 /**
  * @name          dropdown
+ * @as              @sugar.ui.dropdown
  * @namespace     node.mixin.ui.dropdown
  * @type               PostcssMixin
  * @interface     ./dropdown          interface
@@ -10,7 +11,8 @@ import __SInterface from '@coffeekraken/s-interface';
  *
  * Apply the dropdown style to any element
  *
- * @param       {('bare'|'lnf')[]}        [scope=['bare', 'lnf']]      The scope you want to generate
+ * @param       {'top'|'top-start'|'top-end'|'bottom'|'bottom-start'|'bottom-end'}          [position='bottom']         The position of the dropdown
+ * @param       {('bare'|'lnf'|'position')[]}        [scope=['bare', 'lnf', 'position']]      The scope you want to generate
  * @return      {String}            The generated css
  *
  * @snippet         @sugar.ui.dropdown

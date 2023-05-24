@@ -3,6 +3,7 @@ import __STheme from '@coffeekraken/s-theme';
 
 /**
  * @name          tooltip
+ * @as              @sugar.ui.tooltip
  * @namespace     node.mixin.ui.tooltip
  * @type               PostcssMixin
  * @interface     ./tooltip          interface
@@ -11,8 +12,8 @@ import __STheme from '@coffeekraken/s-theme';
  *
  * Apply the tooltip style to any element
  *
- * @param       {'default'}                           [style='theme.ui.tooltip.defaultLnf']         The style you want to generate
- * @param       {''top'|'right'|'bottom'|'left'}            [position='theme.ui.tooltip.defaultPosition']         The position you want to generate
+ * @param       {'solid'}                           [style='theme.ui.tooltip.defaultLnf']         The style you want to generate
+ * @param       {'top'|'right'|'bottom'|'left'}            [position='theme.ui.tooltip.defaultPosition']         The position you want to generate
  * @param      {Boolean}                                [interactive=false]                 Specify if the tooltip is interactive or not
  * @param       {('bare'|'lnf')[]}        [scope=['bare', 'lnf']]      The scope you want to generate
  * @return      {String}            The generated css
@@ -33,7 +34,7 @@ class postcssSugarPluginUiTooltipInterface extends __SInterface {
         return {
             lnf: {
                 type: 'String',
-                values: ['default'],
+                values: ['solid'],
                 default: __STheme.get('ui.tooltip.defaultLnf'),
             },
             position: {
@@ -58,7 +59,7 @@ class postcssSugarPluginUiTooltipInterface extends __SInterface {
 }
 
 export interface IPostcssSugarPluginUiTooltipParams {
-    lnf: 'default';
+    lnf: 'solid';
     position: 'top' | 'right' | 'bottom' | 'left';
     interactive: Boolean;
     scope: ('bare' | 'lnf' | 'position' | 'interactive' | 'vr')[];
@@ -75,7 +76,7 @@ export default function ({
     replaceWith: Function;
 }) {
     const finalParams: IPostcssSugarPluginUiTooltipParams = {
-        lnf: 'default',
+        lnf: 'solid',
         position: 'top',
         interactive: false,
         scope: ['bare', 'lnf', 'position', 'interactive'],

@@ -3,6 +3,7 @@ import __STheme from '@coffeekraken/s-theme';
 
 /**
  * @name           classes
+ * @as              @sugar.clearfix.classes
  * @namespace      node.mixin.clearfix
  * @type           PostcssMixin
  * @platform      postcss
@@ -13,7 +14,7 @@ import __STheme from '@coffeekraken/s-theme';
  * @return        {Css}        The generated css
  *
  * @snippet         @sugar.clearfix.classes
- * 
+ *
  * @example        css
  * \@sugar.clearfix.classes;
  *

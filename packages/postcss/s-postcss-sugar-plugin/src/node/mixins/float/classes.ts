@@ -2,6 +2,7 @@ import __SInterface from '@coffeekraken/s-interface';
 
 /**
  * @name           classes
+ * @as              @sugar.float.classes
  * @namespace      node.mixin.float
  * @type           PostcssMixin
  * @platform      postcss
@@ -12,7 +13,7 @@ import __SInterface from '@coffeekraken/s-interface';
  * @return        {Css}         The generated css
  *
  * @snippet         @sugar.float.classes
- * 
+ *
  * @example        css
  * \@sugar.float.classes;
  *

@@ -2,6 +2,7 @@ import __SInterface from '@coffeekraken/s-interface';
 
 /**
  * @name          classes
+ * @as          @sugar.ui.toggle.classes
  * @namespace     node.mixin.ui.toggle
  * @type          PostcssMixin
  * @interface       ./classes
@@ -10,11 +11,11 @@ import __SInterface from '@coffeekraken/s-interface';
  *
  * Generate the toggle classes
  *
- * @param       {String[]}              [types=null]            The toggles type you want to generate
+ * @param       {('burger')[]}              [types=['burger']]            The toggles type you want to generate
  * @return      {Css}                   The corresponding css
  *
  * @snippet         @sugar.ui.toggle.classes
- * 
+ *
  * @example       css
  * \@sugar.ui.toggle.classes();
  *

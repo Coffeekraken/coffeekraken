@@ -20,6 +20,7 @@ export { postcssSugarPluginColorMixinInterface as interface };
 
 /**
  * @name           color
+ * @as              @sugar.color
  * @namespace      node.mixin.color
  * @type           PostcssMixin
  * @platform      postcss
@@ -34,7 +35,7 @@ export { postcssSugarPluginColorMixinInterface as interface };
  * @return      {Css}                     The generated remap css
  *
  * @snippet         @sugar.color($1)
- * 
+ *
  * @example        css
  * .my-section {
  *      @sugar.color(accent, complementary, success);

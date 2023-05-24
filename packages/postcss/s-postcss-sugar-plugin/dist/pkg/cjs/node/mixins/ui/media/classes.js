@@ -7,6 +7,7 @@ exports.interface = void 0;
 const s_interface_1 = __importDefault(require("@coffeekraken/s-interface"));
 /**
  * @name          classes
+ * @as              @sugar.ui.media.classes
  * @namespace     node.mixin.ui.media
  * @type          PostcssMixin
  * @interface     ./classes
@@ -15,7 +16,6 @@ const s_interface_1 = __importDefault(require("@coffeekraken/s-interface"));
  *
  * Generate the media classes
  *
- * @param       {('default')[]}                                                [lnfs=['default']]         The lnf(s) you want to generate
  * @param       {('bare'|'lnf')[]}        [scope=['bare','lnf']]      The scope you want to generate
  * @return      {Css}                   The corresponding css
  *

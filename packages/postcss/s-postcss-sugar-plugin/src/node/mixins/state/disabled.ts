@@ -12,6 +12,7 @@ export interface postcssSugarPluginStateDisabledMixinParams {}
 
 /**
  * @name           disabled
+ * @as              @sugar.state.disabled
  * @namespace      node.mixin.state
  * @type           PostcssMixin
  * @platform      postcss
@@ -21,13 +22,11 @@ export interface postcssSugarPluginStateDisabledMixinParams {}
  * Here's the generated selector:
  * - &:disabled
  *
- * @param       {String}        query       The query string like ">tablet", "<=desktop", etc...
- *
  * @snippet         @sugar.state.disabled
  * \@sugar.state.disabled {
  *      $1
  * }
- * 
+ *
  * @example        css
  * .myCoolItem {
  *  \@sugar.state.disabled {

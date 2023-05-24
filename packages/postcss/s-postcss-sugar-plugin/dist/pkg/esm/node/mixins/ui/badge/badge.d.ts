@@ -18,7 +18,7 @@ declare class postcssSugarPluginUiBadgeInterface extends __SInterface {
     };
 }
 export interface IPostcssSugarPluginUiBadgeParams {
-    lnf: 'default' | 'outline';
+    lnf: 'solid' | 'outline';
     scope: ('bare' | 'lnf')[];
 }
 export { postcssSugarPluginUiBadgeInterface as interface };

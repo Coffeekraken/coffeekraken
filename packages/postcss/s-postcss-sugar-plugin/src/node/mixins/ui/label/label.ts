@@ -3,6 +3,7 @@ import __STheme from '@coffeekraken/s-theme';
 
 /**
  * @name          label
+ * @as          @sugar.ui.label
  * @namespace     node.mixin.ui.label
  * @type               PostcssMixin
  * @interface     ./label          interface

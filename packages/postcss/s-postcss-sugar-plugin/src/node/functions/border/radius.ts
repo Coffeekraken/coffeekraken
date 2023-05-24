@@ -3,6 +3,7 @@ import __STheme from '@coffeekraken/s-theme';
 
 /**
  * @name          radius
+ * @as            sugar.border.radius
  * @namespace     node.function.border
  * @type          PostcssFunction
  * @platform      postcss
@@ -16,7 +17,7 @@ import __STheme from '@coffeekraken/s-theme';
  * @return      {Css}                   The corresponding css
  *
  * @snippet         sugar.border.radius($1)
- * 
+ *
  * @example       css
  * .my-element {
  *    border-radius: sugar.border.radius(30);

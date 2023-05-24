@@ -1,0 +1,55 @@
+{% extends 'sugar/readme/layouts/main/main.twig' %}
+{% block body %}
+
+<!--
+/**
+ * @name            README
+ * @namespace       doc
+ * @type            Markdown
+ * @platform        md
+ * @status          stable
+ * @menu            Documentation           /doc/readme
+ *
+ * @since           2.0.0
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+ */
+-->
+
+## SDropzoneComponent
+
+This package allows you to create a nice and easy to use dropzone where to drag files
+to be uploaded on a server, or whatever...
+
+## Features
+
+-   Framework agnostic. Simply webcomponent.
+-   Upload support out of the box with progress
+-   Images preview
+-   And more...
+
+## Usage
+
+First, simply import and define the component in your js/ts file:
+
+```js
+import { define } from '@coffeekraken/s-dropzone-component';
+define();
+```
+
+Make use of it in your pages:
+
+```html
+<s-dropzone accept="image/*" upload upload-url="/my-upload-url"></s-dropzone>
+```
+
+## Attributes
+
+{% include 'sugar/interface/fromDocmap/fromDocmap.twig' with {
+    docmapItem: docmap.map['@coffeekraken.s-clipboard-copy-component.js.interface.SClipboardCopyComponentInterface']
+} only %}
+
+## API
+
+For more information about the API, please check out [the API documentation](/api/@coffeekraken.s-clipboard-copy-component.js.SClipboardCopyComponent)
+
+{% endblock %}

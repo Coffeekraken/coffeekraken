@@ -3,6 +3,7 @@ import __STheme from '@coffeekraken/s-theme';
 
 /**
  * @name          checkbox
+ * @as              @sugar.ui.checkbox
  * @namespace     node.mixin.ui.form
  * @type               PostcssMixin
  * @interface     ./checkbox          interface
@@ -11,7 +12,7 @@ import __STheme from '@coffeekraken/s-theme';
  *
  * Apply the checkbox style to any element
  *
- * @param       {'defaut'}                           [lnf='theme.ui.form.defaultLnf']         The style(s) you want to generate
+ * @param       {'solid'}                           [lnf='theme.ui.form.defaultLnf']         The lnf(s) you want to generate
  * @param       {'bare'|'lnf'}        [scope=['bare', 'lnf']]      The scope you want to generate
  * @return      {String}            The generated css
  *

@@ -12,6 +12,7 @@ export interface postcssSugarPluginWireframeMixinParams {}
 
 /**
  * @name           wireframe
+ * @as              @sugar.wireframe
  * @namespace      node.mixin.wireframe
  * @type           PostcssMixin
  * @platform        css

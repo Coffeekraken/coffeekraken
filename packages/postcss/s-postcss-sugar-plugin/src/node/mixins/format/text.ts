@@ -11,6 +11,7 @@ export interface postcssSugarPluginFormatTextMixinParams {}
 
 /**
  * @name           text
+ * @as              @sugar.format.text
  * @namespace      node.mixin.format
  * @type           PostcssMixin
  * @platform      postcss
@@ -25,7 +26,7 @@ export interface postcssSugarPluginFormatTextMixinParams {}
  * \@sugar.format.text {
  *      $1
  * }
- * 
+ *
  * @example        css
  * .my-cool-element {
  *    \@sugar.format.text {

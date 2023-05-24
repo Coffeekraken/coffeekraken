@@ -2,6 +2,7 @@ import __SInterface from '@coffeekraken/s-interface';
 
 /**
  * @name          media
+ * @as              @sugar.ui.media
  * @namespace     node.mixin.ui.media
  * @type          PostcssMixin
  * @interface       ./media

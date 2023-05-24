@@ -78,6 +78,7 @@ export interface ISDocmapBuildParams {
 
 export interface ISDocmapReadParams {
     input: string;
+    dependencies: boolean;
     sort: string[];
     sortDeep: string[];
 }
@@ -133,6 +134,8 @@ export interface ISDocmapMenuObj {
 export interface ISDocmapSearchParams {
     slug: string;
     namespace: string;
+    type: string;
+    id: string;
 }
 
 export interface ISDocmapSearchResult {
@@ -421,26 +424,33 @@ class SDocmap extends __SClass implements ISDocmap {
             await loadJson(docmapJsonFolderPath);
 
             // load npm dependencies docmap
-            const docmapPackageJson = __packageJsonSync(docmapJsonFolderPath);
-            const packageJsonDeps = {
-                ...(docmapPackageJson.dependencies ?? {}),
-                ...(docmapPackageJson.devDependencies ?? {}),
-            };
-            for (let [depName, depVersion] of Object.entries(packageJsonDeps)) {
-                await loadJson(depName, 'npm');
+            if (finalParams.dependencies) {
+                const docmapPackageJson =
+                    __packageJsonSync(docmapJsonFolderPath);
+                const packageJsonDeps = {
+                    ...(docmapPackageJson.dependencies ?? {}),
+                    ...(docmapPackageJson.devDependencies ?? {}),
+                };
+                for (let [depName, depVersion] of Object.entries(
+                    packageJsonDeps,
+                )) {
+                    await loadJson(depName, 'npm');
+                }
             }
 
             // load composer dependencies
             const docmapComposerJson = __composerJsonSync(docmapJsonFolderPath);
 
-            const composerJsonDeps = {
-                ...(docmapComposerJson?.require ?? {}),
-                ...(docmapComposerJson?.requireDev ?? {}),
-            };
-            for (let [depName, depVersion] of Object.entries(
-                composerJsonDeps,
-            )) {
-                await loadJson(depName, 'composer');
+            if (finalParams.dependencies) {
+                const composerJsonDeps = {
+                    ...(docmapComposerJson?.require ?? {}),
+                    ...(docmapComposerJson?.requireDev ?? {}),
+                };
+                for (let [depName, depVersion] of Object.entries(
+                    composerJsonDeps,
+                )) {
+                    await loadJson(depName, 'composer');
+                }
             }
 
             // save the docmap json
@@ -516,26 +526,37 @@ class SDocmap extends __SClass implements ISDocmap {
             for (let [key, item] of Object.entries(docmapJson.map)) {
                 let itemMatch = true;
 
-                // slug
-                if (finalParams.slug) {
-                    if (!item.menu) {
-                        itemMatch = false;
-                    } else if (
-                        !__micromatch.isMatch(item.menu.slug, finalParams.slug)
-                    ) {
-                        itemMatch = false;
-                    }
-                }
+                const props = ['type', 'id', 'slug', 'namespace'];
+                for (let i = 0; i < props.length; i++) {
+                    const prop = props[i];
 
-                // namespace
-                if (finalParams.namespace) {
-                    if (
-                        !__micromatch.isMatch(
-                            item.namespace,
-                            finalParams.namespace,
-                        )
-                    ) {
+                    if (finalParams[prop] === undefined) {
+                        continue;
+                    }
+
+                    if (item[prop] === undefined) {
                         itemMatch = false;
+                        break;
+                    }
+
+                    let valueToCheck = item[prop];
+                    if (prop === 'type') {
+                        valueToCheck = item.type?.raw ?? item.type;
+                    }
+
+                    if (finalParams[prop].match(/^\/.*\/$/)) {
+                        itemMatch = new RegExp(
+                            finalParams[prop].slice(1, -1),
+                        ).test(valueToCheck.toLowerCase());
+                    } else {
+                        itemMatch = __micromatch.isMatch(
+                            valueToCheck.toLowerCase(),
+                            finalParams[prop].toLowerCase(),
+                        );
+                    }
+
+                    if (!itemMatch) {
+                        break;
                     }
                 }
 

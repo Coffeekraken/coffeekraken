@@ -4,6 +4,7 @@ import { __keysFirst } from '@coffeekraken/sugar/array';
 
 /**
  * @name           classes
+ * @as              @sugar.gap.classes
  * @namespace      node.mixin.gap
  * @type           PostcssMixin
  * @platform      postcss
@@ -14,7 +15,7 @@ import { __keysFirst } from '@coffeekraken/sugar/array';
  * @return        {Css}         The generated css
  *
  * @snippet         @sugar.gap.classes
- * 
+ *
  * @example        css
  * \@sugar.gap.classes;
  *

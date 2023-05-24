@@ -5,6 +5,7 @@ import __STheme from '@coffeekraken/s-theme';
 
 /**
  * @name          depth
+ * @as            sugar.depth
  * @namespace     node.function.depth
  * @type          PostcssFunction
  * @platform      postcss
@@ -17,7 +18,7 @@ import __STheme from '@coffeekraken/s-theme';
  * @return      {Css}                   The corresponding css
  *
  * @snippet         sugar.depth($1)
- * 
+ *
  * @example       css
  * .my-element {
  *    box-shadow: sugar.depth(20);

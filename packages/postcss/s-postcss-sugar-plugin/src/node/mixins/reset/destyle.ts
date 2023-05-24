@@ -2,6 +2,7 @@ import __SInterface from '@coffeekraken/s-interface';
 
 /**
  * @name           destyle
+ * @as          @sugar.reset.destyle
  * @namespace      node.mixin.reset
  * @type           PostcssMixin
  * @platform      postcss
@@ -14,7 +15,7 @@ import __SInterface from '@coffeekraken/s-interface';
  * @return        {Css}         The generated css
  *
  * @snippet     @sugar.reset.destyle
- * 
+ *
  * @example        css
  * \@sugar.reset.destyle;
  *

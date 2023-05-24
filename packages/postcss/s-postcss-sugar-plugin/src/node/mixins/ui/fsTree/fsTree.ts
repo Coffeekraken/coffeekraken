@@ -2,6 +2,7 @@ import __SInterface from '@coffeekraken/s-interface';
 
 /**
  * @name          fsTree
+ * @as              @sugar.ui.fsTree
  * @namespace    node.mixin.ui.fsTree
  * @type               PostcssMixin
  * @interface     ./fsTree          interface
@@ -10,12 +11,11 @@ import __SInterface from '@coffeekraken/s-interface';
  *
  * Apply the fsTree style to any element
  *
- * @param       {'default'}                           [lnf='theme.ui.fsTree.defaultLnf']         The style you want to generate
  * @param       {('bare'|'lnf')[]}        [scope=['bare', 'lnf']]      The scope you want to generate
  * @return      {String}            The generated css
  *
  * @snippet         @sugar.ui.fsTree
- * 
+ *
  * @example     css
  * .my-fsTree {
  *    @sugar.ui.fsTree;

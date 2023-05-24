@@ -2,6 +2,7 @@ import __SInterface from '@coffeekraken/s-interface';
 
 /**
  * @name           shape
+ * @as              @sugar.shape
  * @namespace      node.mixin.shape
  * @type           PostcssMixin
  * @platform        css
@@ -15,7 +16,7 @@ import __SInterface from '@coffeekraken/s-interface';
  * @return        {Css}           The generated css
  *
  * @snippet         @sugar.shape($1)
- * 
+ *
  * @example        css
  * .btn {
  *    @sugar.shape(square);

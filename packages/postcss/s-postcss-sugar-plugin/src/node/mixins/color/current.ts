@@ -14,6 +14,7 @@ export { postcssSugarPluginColorCurrentMixinInterface as interface };
 
 /**
  * @name           current
+ * @as          @sugar.color.corrent
  * @namespace      node.mixin.color
  * @type           PostcssMixin
  * @platform      postcss
@@ -25,7 +26,7 @@ export { postcssSugarPluginColorCurrentMixinInterface as interface };
  * @return      {Css}                     The generated remap css
  *
  * @snippet         @sugar.color.current($1)
- * 
+ *
  * @example        css
  * .my-section {
  *      @sugar.color.current(accent);

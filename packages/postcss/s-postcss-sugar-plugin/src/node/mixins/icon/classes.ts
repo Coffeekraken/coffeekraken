@@ -8,6 +8,7 @@ import { __unquote } from '@coffeekraken/sugar/string';
 
 /**
  * @name           classes
+ * @as              @sugar.icon.classes
  * @namespace      node.mixin.icon
  * @type           PostcssMixin
  * @platform      postcss
@@ -48,7 +49,7 @@ import { __unquote } from '@coffeekraken/sugar/string';
  *      fs:src/icons/*.svg
  *      $1
  * )
- * 
+ *
  * @example        css
  * \@sugar.icon.classes(
  *    fa:user:user

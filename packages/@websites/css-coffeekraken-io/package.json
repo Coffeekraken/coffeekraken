@@ -38,6 +38,7 @@
         "@coffeekraken/s-dashboard": "^2.0.0-alpha.27",
         "@coffeekraken/s-datetime-picker-component": "^2.0.0-alpha.27",
         "@coffeekraken/s-descriptor": "^2.0.0-alpha.27",
+        "@coffeekraken/s-doc": "^2.0.0-alpha.27",
         "@coffeekraken/s-docblock": "^2.0.0-alpha.27",
         "@coffeekraken/s-docmap": "^2.0.0-alpha.27",
         "@coffeekraken/s-duration": "^2.0.0-alpha.27",

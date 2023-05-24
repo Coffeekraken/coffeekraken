@@ -4,24 +4,25 @@ import { __packageRootDir } from '@coffeekraken/sugar/path';
 import __fs from 'fs';
 
 /**
- * @name           classes
- * @namespace      node.mixin.platform
- * @type           PostcssMixin
- * @platform      postcss
- * @status        beta
+ * @__name           classes
+ * @__as              @sugar.platform.classes
+ * @__namespace      node.mixin.platform
+ * @__type           PostcssMixin
+ * @__platform      postcss
+ * @__status        wip
  *
  * This mixin generate all the "platforms" css classes like s-platform:css, etc...
  * "Platforms" are some kind of "icons" of platforms like "css", "node", "js", "php", etc...
  *
- * @return        {Css}         The generated css
+ * @__return        {Css}         The generated css
  *
- * @snippet         @sugar.platform.classes
- * 
- * @example        css
+ * @__snippet         @sugar.platform.classes
+ *
+ * @__example        css
  * \@sugar.platform.classes;
  *
- * @since       2.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+ * @__since       2.0.0
+ * @__author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 
 class postcssSugarPluginPlatformClassesMixinInterface extends __SInterface {

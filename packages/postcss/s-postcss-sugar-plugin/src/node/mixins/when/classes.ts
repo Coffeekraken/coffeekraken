@@ -3,6 +3,7 @@ import __STheme from '@coffeekraken/s-theme';
 
 /**
  * @name           classes
+ * @as              @sugar.when.classes
  * @namespace      node.mixin.when
  * @type           PostcssMixin
  * @interface       ./classes
@@ -18,7 +19,7 @@ import __STheme from '@coffeekraken/s-theme';
  * @return        {Css}         The generated css
  *
  * @snippet         @sugar.when.classes
- * 
+ *
  * @example        css
  * \@sugar.when.classes;
  *

@@ -2,6 +2,7 @@ import __SInterface from '@coffeekraken/s-interface';
 
 /**
  * @name           classes
+ * @as          @sugar.link.classes
  * @namespace      node.mixin.link
  * @type           PostcssMixin
  * @platform      postcss
@@ -12,7 +13,7 @@ import __SInterface from '@coffeekraken/s-interface';
  * @return        {Css}         The generated css
  *
  * @snippet         @sugar.link.classes
- * 
+ *
  * @example        css
  * \@sugar.link.classes;
  *

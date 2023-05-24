@@ -5,6 +5,7 @@ import __STheme from '@coffeekraken/s-theme';
 
 /**
  * @name          color
+ * @as            sugar.color
  * @namespace     node.function.color
  * @type          PostcssFunction
  * @platform      postcss
@@ -19,7 +20,7 @@ import __STheme from '@coffeekraken/s-theme';
  * @return      {Css}                   The corresponding css
  *
  * @snippet         sugar.color($1)
- * 
+ *
  * @example       css
  * .my-element {
  *    color: sugar.color(accent);

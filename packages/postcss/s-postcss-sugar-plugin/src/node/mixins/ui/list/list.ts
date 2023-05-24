@@ -3,6 +3,7 @@ import __STheme from '@coffeekraken/s-theme';
 
 /**
  * @name          list
+ * @as            @sugar.ui.list
  * @namespace     node.mixin.ui.list
  * @type               PostcssMixin
  * @interface     ./list          interface
@@ -16,7 +17,7 @@ import __STheme from '@coffeekraken/s-theme';
  * @return      {String}            The generated css
  *
  * @snippet     @sugar.ui.list
- * 
+ *
  * @example     css
  * .my-list {
  *    @sugar.ui.list;

@@ -4,6 +4,7 @@ import __faker from 'faker';
 
 /**
  * @name           classes
+ * @as              @sugar.whiteSpace.classes
  * @namespace      node.mixin.visibility
  * @type           PostcssMixin
  * @platform      postcss
@@ -15,7 +16,7 @@ import __faker from 'faker';
  * @return        {Css}         The generated css
  *
  * @snippet         @sugar.whiteSpace.classes
- * 
+ *
  * @example        css
  * \@sugar.visibility.classes;
  *

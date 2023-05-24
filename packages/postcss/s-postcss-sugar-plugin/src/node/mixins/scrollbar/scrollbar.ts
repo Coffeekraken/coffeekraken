@@ -3,6 +3,7 @@ import __STheme from '@coffeekraken/s-theme';
 
 /**
  * @name           scrollbar
+ * @as          @sugar.scrollbar
  * @namespace      node.mixin.scrollbar
  * @type           PostcssMixin
  * @platform        css

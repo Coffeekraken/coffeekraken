@@ -3,6 +3,7 @@ import __STheme from '@coffeekraken/s-theme';
 
 /**
  * @name          offsize
+ * @as          sugar.offsize
  * @namespace     node.function.offsize
  * @type          PostcssFunction
  * @platform      postcss
@@ -16,7 +17,7 @@ import __STheme from '@coffeekraken/s-theme';
  * @return      {Css}                   The corresponding css
  *
  * @snippet         sugar.offsize($1)
- * 
+ *
  * @example       css
  * .my-element {
  *      margin-top: sugar.offsize(20);

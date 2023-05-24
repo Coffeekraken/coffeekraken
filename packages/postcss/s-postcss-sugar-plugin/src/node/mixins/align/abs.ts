@@ -19,6 +19,7 @@ export { postcssSugarPluginAlignInterface as interface };
 
 /**
  * @name          abs
+ * @as          @sugar.align.abs
  * @namespace     node.mixin.align
  * @type          PostcssMixin
  * @platform      postcss
@@ -32,7 +33,7 @@ export { postcssSugarPluginAlignInterface as interface };
  * @return      {Css}                   The corresponding grid css
  *
  * @snippet         @sugar.align.abs($1)
- * 
+ *
  * @example       css
  * .my-element {
  *    \@sugar.align.abs(top right);

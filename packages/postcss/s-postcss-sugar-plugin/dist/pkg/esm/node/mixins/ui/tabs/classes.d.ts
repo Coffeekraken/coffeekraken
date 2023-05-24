@@ -13,7 +13,7 @@ declare class postcssSugarPluginUiListClassesInterface extends __SInterface {
     };
 }
 export interface IPostcssSugarPluginUiListClassesParams {
-    scope: ('bare' | 'lnf' | 'vr' | 'tf')[];
+    scope: ('bare' | 'lnf')[];
 }
 export { postcssSugarPluginUiListClassesInterface as interface };
 export default function ({ params, atRule, CssVars, replaceWith, }: {

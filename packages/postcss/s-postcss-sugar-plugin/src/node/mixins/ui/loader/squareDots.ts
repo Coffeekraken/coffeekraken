@@ -4,6 +4,7 @@ import { __uniqid } from '@coffeekraken/sugar/string';
 
 /**
  * @name          squareDots
+ * @as              @sugar.ui.loader.squareDots
  * @namespace     node.mixin.ui.loader
  * @type               PostcssMixin
  * @interface     ./squareDots          interface

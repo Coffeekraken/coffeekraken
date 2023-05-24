@@ -3,6 +3,7 @@ import __STheme from '@coffeekraken/s-theme';
 
 /**
  * @name           classes
+ * @as              @sugar.until.classes
  * @namespace      node.mixin.until
  * @type           PostcssMixin
  * @interface    ./classes
@@ -17,7 +18,7 @@ import __STheme from '@coffeekraken/s-theme';
  * @return        {Css}         The generated css
  *
  * @snippet         @sugar.until.classes
- * 
+ *
  * @example        css
  * \@sugar.until.classes;
  *

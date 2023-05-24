@@ -2,6 +2,7 @@ import __SInterface from '@coffeekraken/s-interface';
 
 /**
  * @name           classes
+ * @as              @sugar.cursor.classes
  * @namespace      node.mixin.cursor
  * @type           PostcssMixin
  * @platform      postcss
@@ -14,7 +15,7 @@ import __SInterface from '@coffeekraken/s-interface';
  * @return        {Css}         The generated css
  *
  * @snippet         @sugar.cursor.classes
- * 
+ *
  * @example        css
  * \@sugar.cursor.classes;
  *

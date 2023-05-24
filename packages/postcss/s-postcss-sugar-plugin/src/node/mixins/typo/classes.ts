@@ -4,6 +4,7 @@ import __faker from 'faker';
 
 /**
  * @name           classes
+ * @as              @sugar.typo.classes
  * @namespace      node.mixin.typo
  * @type           PostcssMixin
  * @platform      postcss
@@ -15,7 +16,7 @@ import __faker from 'faker';
  * @return        {Css}         The generated css
  *
  * @snippet         @sugar.typo.classes
- * 
+ *
  * @example        css
  * \@sugar.typo.classes;
  *

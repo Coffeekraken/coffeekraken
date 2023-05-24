@@ -18,8 +18,9 @@ declare class postcssSugarPluginUiFormSelectInterface extends __SInterface {
     };
 }
 export interface IPostcssSugarPluginUiFormSelectParams {
-    lnf: 'default' | 'underline';
+    lnf: 'solid' | 'underline';
     scope: ('bare' | 'lnf')[];
+    outline: boolean;
 }
 export { postcssSugarPluginUiFormSelectInterface as interface };
 export default function ({ params, atRule, replaceWith, }: {

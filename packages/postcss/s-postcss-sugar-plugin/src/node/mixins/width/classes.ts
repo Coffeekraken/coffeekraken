@@ -3,6 +3,7 @@ import __STheme from '@coffeekraken/s-theme';
 
 /**
  * @name           classes
+ * @as              @sugar.width.classes
  * @namespace      node.mixin.width
  * @type           PostcssMixin
  * @platform      postcss

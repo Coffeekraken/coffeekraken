@@ -3,6 +3,7 @@ import __STheme from '@coffeekraken/s-theme';
 
 /**
  * @name          badge
+ * @as              @sugar.ui.badge
  * @namespace     node.mixin.ui.badge
  * @type          PostcssMixin
  * @interface       ./badge
@@ -11,7 +12,8 @@ import __STheme from '@coffeekraken/s-theme';
  *
  * This mixin allows you to generate the "badge" UI component css.
  *
- * @param       {('bare'|'lnf'|'vr'|'tf')[]}        [scope=['bare', 'lnf']]      The scope you want to generate
+ * @param       {'default'|'outline'}       [lnf='solid']]       The lnf you want to generate
+ * @param       {('bare'|'lnf')[]}        [scope=['bare', 'lnf']]      The scope you want to generate
  * @return      {Css}                   The corresponding css
  *
  * @snippet         @sugar.ui.badge
@@ -30,7 +32,7 @@ class postcssSugarPluginUiBadgeInterface extends __SInterface {
         return {
             lnf: {
                 type: 'String',
-                values: ['default', 'outline'],
+                values: ['solid', 'outline'],
                 default: __STheme.get('ui.badge.defaultLnf'),
             },
             scope: {
@@ -46,7 +48,7 @@ class postcssSugarPluginUiBadgeInterface extends __SInterface {
 }
 
 export interface IPostcssSugarPluginUiBadgeParams {
-    lnf: 'default' | 'outline';
+    lnf: 'solid' | 'outline';
     scope: ('bare' | 'lnf')[];
 }
 
@@ -61,7 +63,7 @@ export default function ({
     replaceWith: Function;
 }) {
     const finalParams: IPostcssSugarPluginUiBadgeParams = {
-        lnf: 'default',
+        lnf: 'solid',
         scope: ['bare', 'lnf'],
         ...params,
     };

@@ -11,6 +11,7 @@ export interface ISDocmapBuildParams {
 }
 export interface ISDocmapReadParams {
     input: string;
+    dependencies: boolean;
     sort: string[];
     sortDeep: string[];
 }
@@ -59,6 +60,8 @@ export interface ISDocmapMenuObj {
 export interface ISDocmapSearchParams {
     slug: string;
     namespace: string;
+    type: string;
+    id: string;
 }
 export interface ISDocmapSearchResult {
     search: Partial<ISDocmapSearchParams>;

@@ -2,6 +2,7 @@ import __SInterface from '@coffeekraken/s-interface';
 
 /**
  * @name           classes
+ * @as          @sugar.disabled.classes
  * @namespace      node.mixin.disabled
  * @type           PostcssMixin
  * @platform      postcss
@@ -12,7 +13,7 @@ import __SInterface from '@coffeekraken/s-interface';
  * @return        {Css}        The generated css
  *
  * @snippet         @sugar.disabled.classes
- * 
+ *
  * @example        css
  * \@sugar.disabled.classes;
  *

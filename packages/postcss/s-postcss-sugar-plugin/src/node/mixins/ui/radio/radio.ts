@@ -3,6 +3,7 @@ import __STheme from '@coffeekraken/s-theme';
 
 /**
  * @name          radio
+ * @as              @sugar.ui.radio
  * @namespace     node.mixin.ui.radio
  * @type               PostcssMixin
  * @interface     ./radio          interface
@@ -11,12 +12,12 @@ import __STheme from '@coffeekraken/s-theme';
  *
  * Apply the radio style to any element
  *
- * @param       {'default'}                           [lnf='theme.ui.form.defaultLnf']         The style you want to generate
+ * @param       {'solid'}                           [lnf='theme.ui.form.defaultLnf']         The lnf you want to generate
  * @param       {('bare'|'lnf'')[]}        [scope=['bare', 'lnf']]      The scope you want to generate
  * @return      {String}            The generated css
  *
  * @snippet         @sugar.ui.radio
- * 
+ *
  * @example     css
  * .my-radio {
  *    @sugar.ui.radio;
@@ -31,7 +32,7 @@ class postcssSugarPluginUiRadioInterface extends __SInterface {
         return {
             lnf: {
                 type: 'String',
-                values: ['default'],
+                values: ['solid'],
                 default: __STheme.get('ui.form.defaultLnf'),
             },
             scope: {
@@ -47,7 +48,7 @@ class postcssSugarPluginUiRadioInterface extends __SInterface {
 }
 
 export interface IPostcssSugarPluginUiRadioParams {
-    lnf: 'default';
+    lnf: 'solid';
     scope: ('bare' | 'lnf')[];
 }
 
@@ -62,7 +63,7 @@ export default function ({
     replaceWith: Function;
 }) {
     const finalParams: IPostcssSugarPluginUiRadioParams = {
-        lnf: 'default',
+        lnf: 'solid',
         scope: ['bare', 'lnf'],
         ...params,
     };

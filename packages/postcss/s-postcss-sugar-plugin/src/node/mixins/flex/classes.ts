@@ -3,6 +3,7 @@ import __faker from 'faker';
 
 /**
  * @name           classes
+ * @as              @sugar.flex.classes
  * @namespace      node.mixin.flex
  * @type           PostcssMixin
  * @platform      postcss
@@ -13,7 +14,7 @@ import __faker from 'faker';
  * @return        {Css}         The generated css
  *
  * @snippet         @sugar.flex.classes
- * 
+ *
  * @example        css
  * \@sugar.flex.classes;
  *

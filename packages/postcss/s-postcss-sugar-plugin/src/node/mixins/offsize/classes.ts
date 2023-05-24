@@ -4,6 +4,7 @@ import { __keysFirst } from '@coffeekraken/sugar/array';
 
 /**
  * @name           classes
+ * @as              @sugar.offsize.classes
  * @namespace      node.mixin.offsize
  * @type           PostcssMixin
  * @platform      postcss
@@ -14,7 +15,7 @@ import { __keysFirst } from '@coffeekraken/sugar/array';
  * @return        {Css}         The generated css
  *
  * @snippet         @sugar.offsize.classes
- * 
+ *
  * @example        css
  * \@sugar.offsize.classes;
  *

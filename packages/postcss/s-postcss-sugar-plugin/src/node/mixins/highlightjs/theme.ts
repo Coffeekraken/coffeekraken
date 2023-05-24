@@ -2,6 +2,7 @@ import __SInterface from '@coffeekraken/s-interface';
 
 /**
  * @name           theme
+ * @as              @sugar.highlightjs.theme
  * @namespace      node.mixin.highlightjs
  * @type           PostcssMixin
  * @platform      postcss
@@ -13,7 +14,7 @@ import __SInterface from '@coffeekraken/s-interface';
  * @return        {Css}         The generated css
  *
  * @snippet         @sugar.highlightjs.theme
- * 
+ *
  * @example        css
  * \@sugar.highlightjs.theme;
  *

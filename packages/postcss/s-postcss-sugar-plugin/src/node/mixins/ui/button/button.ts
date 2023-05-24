@@ -3,7 +3,8 @@ import __STheme from '@coffeekraken/s-theme';
 import __getRoot from '../../../utils/getRoot';
 
 /**
- * @name          blockquote
+ * @name          button
+ * @as            @sugar.ui.button
  * @namespace     node.mixin.ui.button
  * @type          PostcssMixin
  * @interface     ./button
@@ -12,7 +13,7 @@ import __getRoot from '../../../utils/getRoot';
  *
  * This mixin allows you to generate the "button" UI component css.
  *
- * @param       {'default'|'gradient'|'outline'|'text'|'loading'}                           [style='theme.ui.button.defaultLnf']         The style you want to generate
+ * @param       {'solid'|'gradient'|'outline'|'text'|'loading'}                           [lnf='theme.ui.button.defaultLnf']         The lnf you want to generate
  * @param       {('bare'|'lnf')[]}        [scope=['bare', 'lnf']]      The scope you want to generate
  * @return      {Css}                   The corresponding css
  *
@@ -32,7 +33,7 @@ class postcssSugarPluginUiButtonInterface extends __SInterface {
         return {
             lnf: {
                 type: 'String',
-                values: ['default', 'gradient', 'outline', 'text', 'loading'],
+                values: ['solid', 'gradient', 'outline', 'text', 'loading'],
                 default: __STheme.get('ui.button.defaultLnf'),
             },
             scope: {
@@ -48,30 +49,11 @@ class postcssSugarPluginUiButtonInterface extends __SInterface {
 }
 
 export interface IPostcssSugarPluginUiButtonParams {
-    lnf: 'default' | 'gradient' | 'outline' | 'text' | 'loading';
+    lnf: 'solid' | 'gradient' | 'outline' | 'text' | 'loading';
     scope: ('bare' | 'lnf')[];
 }
 
 export { postcssSugarPluginUiButtonInterface as interface };
-
-/**
- * @name          button
- * @namespace     ui.button
- * @type               PostcssMixin
- * @interface     ./button          interface
- * @platform      postcss
- * @status        beta
- *
- * Apply the button style to any element
- *
- * @example     css
- * .my-button {
- *    @sugar.ui.button;
- * }
- *
- * @since      2.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
 
 export default function ({
     params,
@@ -87,7 +69,7 @@ export default function ({
     replaceWith: Function;
 }) {
     const finalParams: IPostcssSugarPluginUiButtonParams = {
-        lnf: 'default',
+        lnf: 'solid',
         scope: ['bare', 'lnf'],
         ...params,
     };
@@ -278,6 +260,7 @@ export default function ({
                   }
                 `);
                 break;
+            case 'solid':
             default:
                 vars.push(`
                   background-color: sugar.color(current);

@@ -5,6 +5,7 @@ import __faker from 'faker';
 
 /**
  * @name           classes
+ * @as          @sugar.padding.classes
  * @namespace      node.mixin.padding
  * @type           PostcssMixin
  * @platform      postcss
@@ -15,7 +16,7 @@ import __faker from 'faker';
  * @return        {Css}         The generated css
  *
  * @snippet         @sugar.padding.classes
- * 
+ *
  * @example        css
  * \@sugar.padding.classes;
  *

@@ -2,6 +2,7 @@ import __SInterface from '@coffeekraken/s-interface';
 
 /**
  * @name           classes
+ * @as          @sugar.hide.classes
  * @namespace      node.mixin.hide
  * @type           PostcssMixin
  * @platform      postcss
@@ -12,7 +13,7 @@ import __SInterface from '@coffeekraken/s-interface';
  * @return        {Css}         The generated css
  *
  * @snippet         @sugar.hide.classes
- * 
+ *
  * @example        css
  * \@sugar.hide.classes;
  *

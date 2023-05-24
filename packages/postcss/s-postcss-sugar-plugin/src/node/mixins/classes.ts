@@ -2,6 +2,7 @@ import __SInterface from '@coffeekraken/s-interface';
 
 /**
  * @name           classes
+ * @as              @sugar.classes
  * @namespace      node.mixin
  * @type           PostcssMixin
  * @platform      postcss
@@ -10,6 +11,7 @@ import __SInterface from '@coffeekraken/s-interface';
  *
  * This mixin generate all the sugar classes like utilities for colors, fonts, margins, etc...
  *
+ * @param           {Boolean}           [ui=true]           Specify if you want to generate also the ui classes (avatar, etc...)
  * @return        {Css}         The generated css
  *
  * @snippet         @sugar.classes
@@ -66,7 +68,6 @@ export default async function ({
         '@sugar.format.classes;',
         '@sugar.link.classes;',
         '@sugar.gap.classes;',
-        '@sugar.height.classes;',
         '@sugar.hide.classes;',
         '@sugar.text.classes;',
         '@sugar.font.classes;',

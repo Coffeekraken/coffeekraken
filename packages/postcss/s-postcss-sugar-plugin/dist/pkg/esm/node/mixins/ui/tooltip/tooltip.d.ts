@@ -27,7 +27,7 @@ declare class postcssSugarPluginUiTooltipInterface extends __SInterface {
     };
 }
 export interface IPostcssSugarPluginUiTooltipParams {
-    lnf: 'default';
+    lnf: 'solid';
     position: 'top' | 'right' | 'bottom' | 'left';
     interactive: Boolean;
     scope: ('bare' | 'lnf' | 'position' | 'interactive' | 'vr')[];

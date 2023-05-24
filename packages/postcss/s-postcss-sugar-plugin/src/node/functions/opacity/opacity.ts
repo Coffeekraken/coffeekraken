@@ -3,6 +3,7 @@ import __STheme from '@coffeekraken/s-theme';
 
 /**
  * @name          opacity
+ * @as          sugar.opacity
  * @namespace     node.function.opacity
  * @type          PostcssFunction
  * @platform      postcss
@@ -15,7 +16,7 @@ import __STheme from '@coffeekraken/s-theme';
  * @return      {Css}                   The corresponding css
  *
  * @snippet         sugar.opacity($1)
- * 
+ *
  * @example       css
  * .my-element {
  *      opacity: sugar.opacity(20);

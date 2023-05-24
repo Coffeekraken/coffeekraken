@@ -11,6 +11,7 @@ export interface postcssSugarPluginWireframeBorderMixinParams {}
 
 /**
  * @name           border
+ * @as              @sugar.wireframe.border
  * @namespace      node.mixin.wireframe
  * @type           PostcssMixin
  * @platform      postcss

@@ -1,7 +1,9 @@
 import __SInterface from '@coffeekraken/s-interface';
+import __STheme from '@coffeekraken/s-theme';
 
 /**
  * @name          classes
+ * @as              @sugar.ui.badge.classes
  * @namespace     node.mixin.ui.badge
  * @type          PostcssMixin
  * @interface       ./classes
@@ -10,13 +12,13 @@ import __SInterface from '@coffeekraken/s-interface';
  *
  * Generate the badge classes
  *
- * @param       {('default'|'outline')[]}                           [lnfs=['default','outline']]         The lnf(s) you want to generate
- * @param       {'default'|'outline'}                [defaultLnf='theme.ui.badge.defaultLnf']           The default lnf you want
- * @param       {('bare'|'lnf'|'vr')[]}        [scope=['bare', 'lnf', 'vr']]      The scope you want to generate
+ * @param       {('solid'|'outline')[]}                           [lnfs=['solid','outline']]         The lnf(s) you want to generate
+ * @param       {'solid'|'outline'}                [defaultLnf='theme.ui.badge.defaultLnf']           The default lnf you want
+ * @param       {('bare'|'lnf')[]}        [scope=['bare', 'lnf']]      The scope you want to generate
  * @return      {Css}                   The corresponding css
  *
  * @snippet         @sugar.ui.badge.classes
- * 
+ *
  * @example       css
  * \@sugar.ui.badge.classes();
  *
@@ -29,30 +31,30 @@ class postcssSugarPluginUiBadgeClassesInterface extends __SInterface {
         return {
             lnfs: {
                 type: 'String[]',
-                values: ['default', 'outline'],
-                default: ['default', 'outline'],
+                values: ['solid', 'outline'],
+                default: ['solid', 'outline'],
             },
             defaultLnf: {
                 type: 'String',
-                values: ['default', 'outline'],
-                default: 'default',
+                values: ['solid', 'outline'],
+                default: __STheme.get('ui.badge.defaultLnf'),
             },
             scope: {
                 type: {
                     type: 'Array<String>',
                     splitChars: [',', ' '],
                 },
-                values: ['bare', 'lnf', 'vr'],
-                default: ['bare', 'lnf', 'vr'],
+                values: ['bare', 'lnf'],
+                default: ['bare', 'lnf'],
             },
         };
     }
 }
 
 export interface IPostcssSugarPluginUiBadgeClassesParams {
-    lnfs: ('default' | 'outline')[];
-    defaultLnf: 'default' | 'outline';
-    scope: ('bare' | 'lnf' | 'vr')[];
+    lnfs: ('solid' | 'outline')[];
+    defaultLnf: 'solid' | 'outline';
+    scope: ('bare' | 'lnf')[];
 }
 
 export { postcssSugarPluginUiBadgeClassesInterface as interface };

@@ -2,6 +2,7 @@ import __SInterface from '@coffeekraken/s-interface';
 
 /**
  * @name          inputContainer
+ * @as          @sugar.ui.inputContainer
  * @namespace     node.mixin.ui.inputContainer
  * @type               PostcssMixin
  * @interface       ./input

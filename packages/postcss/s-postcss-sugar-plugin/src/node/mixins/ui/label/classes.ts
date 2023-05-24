@@ -4,6 +4,7 @@ import __faker from 'faker';
 
 /**
  * @name          classes
+ * @as              @sugar.ui.label.classes
  * @namespace     node.mixin.ui.label
  * @type               PostcssMixin
  * @interface     ./classes          interface
@@ -14,11 +15,11 @@ import __faker from 'faker';
  *
  * @param       {('inline'|'block'|'float')[]}                           [lnfs=['inline','block','float']]         The style(s) you want to generate
  * @param       {'inline'|'block'|'float'}                [defaultLnf='theme.ui.label.defaultLnf']           The default style you want
- * @param       {('bare'|'lnf'|'vr'|'tf')[]}        [scope=['bare', 'lnf', 'vr', 'tf']]      The scope you want to generate
+ * @param       {('bare'|'lnf'|'vr')[]}        [scope=['bare', 'lnf', 'vr']]      The scope you want to generate
  * @return      {String}            The generated css
  *
  * @snippet         @sugar.ui.label.classes
- * 
+ *
  * @example     css
  * \@sugar.ui.input.classes;
  *
@@ -44,8 +45,8 @@ class postcssSugarPluginUiLabelClassesInterface extends __SInterface {
                     type: 'Array<String>',
                     splitChars: [',', ' '],
                 },
-                values: ['bare', 'lnf', 'vr', 'tf'],
-                default: ['bare', 'lnf', 'vr', 'tf'],
+                values: ['bare', 'lnf', 'vr'],
+                default: ['bare', 'lnf', 'vr'],
             },
         };
     }
@@ -54,7 +55,7 @@ class postcssSugarPluginUiLabelClassesInterface extends __SInterface {
 export interface IPostcssSugarPluginUiLabelClassesParams {
     lnfs: ('inline' | 'float')[];
     defaultLnf: 'inline' | 'float';
-    scope: ('bare' | 'lnf' | 'vr' | 'tf')[];
+    scope: ('bare' | 'lnf' | 'vr')[];
 }
 
 export { postcssSugarPluginUiLabelClassesInterface as interface };

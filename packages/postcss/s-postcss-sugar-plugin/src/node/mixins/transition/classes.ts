@@ -4,6 +4,7 @@ import { __uniqid } from '@coffeekraken/sugar/string';
 
 /**
  * @name           classes
+ * @as              @sugar.transition.classes
  * @namespace      node.mixin.transition
  * @type           PostcssMixin
  * @platform      postcss
@@ -15,7 +16,7 @@ import { __uniqid } from '@coffeekraken/sugar/string';
  * @return        {Css}         The generated css
  *
  * @snippet         @sugar.transition.classes
- * 
+ *
  * @example        css
  * \@sugar.transition.classes;
  *

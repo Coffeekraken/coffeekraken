@@ -7,14 +7,14 @@ class postcssSugarPluginDirectionRtlMixinInterface extends __SInterface {
 export { postcssSugarPluginDirectionRtlMixinInterface as interface };
 /**
  * @name           rtl
+ * @as              @sugar.direction.rtl
  * @namespace      node.mixin.direction
  * @type           PostcssMixin
  * @platform      postcss
  * @status        beta
  *
- * This mixin allows you to style an element when it is in an rtl scope
- *
- * @param       {String}        query       The query string like ">tablet", "<=desktop", etc...
+ * This mixin allows you to style an element when it is in an rtl scope.
+ * The scope is specified like so: [dir="rtl"] &, &[dir="rtl"]
  *
  * @snippet         @sugar.direction.rtl
  * \@sugar.direction.rtl {

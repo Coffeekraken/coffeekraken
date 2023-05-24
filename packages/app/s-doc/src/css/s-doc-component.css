@@ -1,0 +1,142 @@
+.s-doc {
+    display: flex;
+
+    &_explorer {
+        flex-grow: 0;
+    }
+
+    &_content {
+        flex-grow: 1;
+    }
+}
+
+.s-doc {
+    max-height: 80vh;
+    max-width: 100vw;
+    /* width: 90vw; */
+    display: flex;
+    background: sugar.color(main, surface, --alpha 0.3);
+    position: relative;
+    /* left: 50%;
+    transform: translateX(-50%); */
+    @sugar.depth (100);
+
+    &_explorer {
+        width: 400px;
+        height: 100%;
+        max-height: 80vh;
+        overflow-y: auto;
+        @sugar.scrollbar;
+    }
+
+    &_categories {
+        .s-doc_categories {
+        }
+    }
+
+    .s-fs-tree {
+        margin-block-end: sugar.margin(40);
+        position: relative;
+
+        .s-fs-tree {
+            &:before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0.65em;
+                width: 1px;
+                height: 100%;
+                background: sugar.color(main, border);
+            }
+
+            .s-fs-tree:before {
+                display: none;
+            }
+        }
+    }
+
+    &_item {
+        > div {
+            padding: sugar.padding(30) !important;
+
+            > span {
+                font-size: 0.9em;
+                opacity: 0.8;
+            }
+        }
+
+        &.active > div > span {
+            color: sugar.color(accent);
+            opacity: 1;
+        }
+    }
+
+    &_category {
+        > div {
+            padding: sugar.padding(30) !important;
+        }
+
+        > div > i {
+            margin-inline-end: sugar.margin(10);
+            position: relative;
+            top: -2px;
+        }
+
+        &.active > div > span {
+            font-weight: bold;
+        }
+
+        &:hover > div {
+            background: sugar.color(main, surface, --alpha 0.3);
+        }
+        &:active > div,
+        &.active > div {
+            background: sugar.color(main, surface);
+
+            > i {
+                color: sugar.color(complementary, --lighten 20);
+            }
+        }
+    }
+
+    &_content {
+        background: sugar.color(main, surface);
+        padding: sugar.padding(50);
+        height: 100%;
+        max-height: 80vh;
+        overflow-y: auto;
+        @sugar.border.radius();
+        @sugar.scrollbar;
+
+        .s-code-example_code .hljs {
+            background: sugar.color(main, background) !important;
+        }
+
+        ._title {
+        }
+        ._status {
+            position: relative;
+            top: -0.5em;
+            font-size: 0.3em !important;
+        }
+
+        ._param {
+        }
+        ._param-metas {
+            display: flex;
+            background: sugar.color(main, background);
+            padding: sugar.padding(30);
+            @sugar.border.radius();
+        }
+        ._param-name {
+            flex-grow: 1;
+        }
+        ._param-type {
+            color: sugar.color(info);
+        }
+        ._param-description {
+            padding: sugar.padding(30);
+            @sugar.typo (p);
+        }
+    }
+}

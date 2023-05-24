@@ -3,6 +3,7 @@ import __STheme from '@coffeekraken/s-theme';
 
 /**
  * @name          padding
+ * @as          sugar.padding
  * @namespace     node.function.padding
  * @type          PostcssFunction
  * @platform      postcss
@@ -16,7 +17,7 @@ import __STheme from '@coffeekraken/s-theme';
  * @return      {Css}                   The corresponding css
  *
  * @snippet         sugar.padding($1)
- * 
+ *
  * @example       css
  * .my-element {
  *      padding-top: sugar.padding(30);

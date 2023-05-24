@@ -3,6 +3,7 @@ import __faker from 'faker';
 
 /**
  * @name          classes
+ * @as          @sugar.ui.dropdown.classes
  * @namespace     node.mixin.ui.dropdown
  * @type               PostcssMixin
  * @interface     ./classes          interface
@@ -15,7 +16,7 @@ import __faker from 'faker';
  * @return      {String}            The generated css
  *
  * @snippet         @sugar.ui.dropdown.classes
- * 
+ *
  * @example     css
  * \@sugar.ui.dropdown.classes;
  *

@@ -142,6 +142,13 @@ export default function (api: any): {
                 rootDir: string;
             };
         };
+        doc: {
+            
+            description: string;
+            
+            path: string;
+            settings: {};
+        };
     };
     pages: {};
     handlers: {};

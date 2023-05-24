@@ -4,6 +4,7 @@ import __faker from 'faker';
 
 /**
  * @name           classes
+ * @as              @sugar.truncate.classes
  * @namespace      node.mixin.truncate
  * @type           PostcssMixin
  * @platform      postcss
@@ -12,10 +13,11 @@ import __faker from 'faker';
  * This mixin generate all the truncate classes like s-truncate, s-truncate:2, etc...
  * The number of truncate classes generated is defined in the theme.helpers.truncate.count settings
  *
+ * @param           {Number}            [count=__STheme.get('helpers.truncate.count')]          Specify how many s-truncate:{lines} classes you want to generate
  * @return        {Css}         The generated css
  *
  * @snippet         @sugar.truncate.classes
- * 
+ *
  * @example        css
  * \@sugar.truncate.classes;
  *

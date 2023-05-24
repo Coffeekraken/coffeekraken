@@ -12,6 +12,7 @@
         "@coffeekraken/s-docblock": "^2.0.0-alpha.27",
         "@coffeekraken/s-docmap": "^2.0.0-alpha.27",
         "@coffeekraken/s-duration": "^2.0.0-alpha.27",
+        "@coffeekraken/s-doc": "^2.0.0-alpha.27",
         "@coffeekraken/s-env": "^2.0.0-alpha.27",
         "@coffeekraken/s-file": "^2.0.0-alpha.27",
         "@coffeekraken/s-frontspec": "^2.0.0-alpha.27",

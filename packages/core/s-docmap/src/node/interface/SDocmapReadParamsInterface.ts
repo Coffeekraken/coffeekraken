@@ -28,6 +28,12 @@ class SDocmapReadParamsInterface extends __SInterface {
                 default: __SSugarConfig.get('docmap.read.input'),
                 alias: 'i',
             },
+            dependencies: {
+                description:
+                    'Specify if you want to read also the dependencies packages docmap files or not',
+                type: 'Boolean',
+                default: true,
+            },
             sort: {
                 description:
                     'Specify which of the docmap entries has to be sorted alphabetically.',

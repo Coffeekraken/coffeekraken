@@ -12,6 +12,7 @@ export interface postcssSugarPluginStateHoverMixinParams {}
 
 /**
  * @name           hover
+ * @as              @sugar.state.hover
  * @namespace      node.mixin.state
  * @type           PostcssMixin
  * @platform      postcss
@@ -21,13 +22,11 @@ export interface postcssSugarPluginStateHoverMixinParams {}
  * Here's the generated selector:
  * - &:hover
  *
- * @param       {String}        query       The query string like ">tablet", "<=desktop", etc...
- *
  * @snippet         @sugar.state.hover
  * \@sugar.state.hover {
  *      $1
  * }
- * 
+ *
  * @example        css
  * .myCoolItem {
  *  \@sugar.state.hover {

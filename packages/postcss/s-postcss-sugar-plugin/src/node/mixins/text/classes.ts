@@ -4,6 +4,7 @@ import __faker from 'faker';
 
 /**
  * @name           classes
+ * @as              @sugar.text.classes
  * @namespace      node.mixin.text
  * @type           PostcssMixin
  * @platform      postcss

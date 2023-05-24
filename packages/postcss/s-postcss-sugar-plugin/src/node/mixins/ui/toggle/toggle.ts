@@ -2,6 +2,7 @@ import __SInterface from '@coffeekraken/s-interface';
 
 /**
  * @name          toggle
+ * @as              @sugar.ui.toggle
  * @namespace     node.mixin.ui.toggle
  * @type          PostcssMixin
  * @interface       ./toggle
@@ -15,7 +16,7 @@ import __SInterface from '@coffeekraken/s-interface';
  * @return      {Css}                   The corresponding css
  *
  * @snippet         @sugar.ui.toggle
- * 
+ *
  * @example       css
  * .my-element {
  *      \@sugar.ui.toggle(burger);

@@ -6,18 +6,18 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.interface = void 0;
 const s_interface_1 = __importDefault(require("@coffeekraken/s-interface"));
 /**
- * @name           depth
+ * @name           fit
+ * @as              @sugar.fit
  * @namespace      node.mixin.fit
  * @type           PostcssMixin
  * @platform      postcss
  * @status        beta
  *
- * This mixin allows you to apply a certain depth that are defined
- * in the config.theme.depth stack like 10, 20, etc...
+ * This mixin allows you to apply a certain object-fit on your element
  *
  * @return        {Css}         The generated css
  *
- * @snippet         @sugar.fix($1)
+ * @snippet         @sugar.fit($1)
  *
  * @example        css
  * .my-element {

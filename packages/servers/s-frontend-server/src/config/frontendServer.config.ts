@@ -623,6 +623,34 @@ export default function (api) {
                     rootDir: `${__packageTmpDir()}/store`,
                 },
             },
+
+            doc: {
+                /**
+                 * @name            description
+                 * @namespace       config.frontendServer.modules.doc
+                 * @type            String
+                 *
+                 * Specify the module description
+                 *
+                 * @since           2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+                 */
+                description:
+                    'This module expose the SDoc enpoints to access documentations based on the docmap.json',
+                /**
+                 * @name            path
+                 * @namespace       config.frontendServer.modules.doc
+                 * @type            String
+                 * @default             ${__dirname()}/../node/modules/doc/doc
+                 *
+                 * Specify where to find the "doc" module
+                 *
+                 * @since           2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+                 */
+                path: `${__dirname()}/../node/modules/doc/doc`,
+                settings: {},
+            },
         },
 
         pages: {},

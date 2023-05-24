@@ -4,27 +4,27 @@ import { __dirname } from '@coffeekraken/sugar/fs';
 import { __packageRootDir } from '@coffeekraken/sugar/path';
 import __fs from 'fs';
 /**
- * @name           platform
- * @namespace      node.mixin.platform
- * @type           PostcssMixin
- * @platform      postcss
- * @status        beta
+ * @__name           platform
+ * @__namespace      node.mixin.platform
+ * @__type           PostcssMixin
+ * @__platform      postcss
+ * @__status        wip
  *
  * This mixin generate all the css needed to display correctly a "platform" icon like
  * css, node, js, php, etc...
  *
- * @param         {IPostcssSugarPluginAssetPlatformParams}    params      The parameters object
- * @return        {Css}         The generated css
+ * @__param         {IPostcssSugarPluginAssetPlatformParams}    params      The parameters object
+ * @__return        {Css}         The generated css
  *
- * @snippet         @sugar.platform($1)
+ * @__snippet         @sugar.platform($1)
  *
- * @example        css
+ * @__example        css
  * .my-platform {
  *    \@sugar.platform(css);
  * }
  *
- * @since       2.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+ * @__since       2.0.0
+ * @__author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 class postcssSugarPluginAssetPlatformInterface extends __SInterface {
     static get _definition() {

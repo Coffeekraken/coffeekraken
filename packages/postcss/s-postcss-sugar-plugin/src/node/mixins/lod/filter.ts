@@ -3,6 +3,7 @@ import { __fromQuantifier } from '@coffeekraken/sugar/array';
 
 /**
  * @name           filter
+ * @as              @sugar.lod.filter
  * @namespace      node.mixin.lod
  * @type           PostcssMixin
  * @platform      postcss

@@ -2,7 +2,10 @@ import __SLitComponent from '@coffeekraken/s-lit-component';
 
 import { __deepMerge } from '@coffeekraken/sugar/object';
 import { css, html, unsafeCSS } from 'lit';
+import { unsafeHTML } from 'lit/directives/unsafe-html.js';
 import __SDocComponentInterface from './interface/SDocComponentInterface';
+
+import { __replaceChunks } from '@coffeekraken/sugar/string';
 
 // @ts-ignore
 import __css from '../../../../src/css/s-doc-component.css'; // relative to /dist/pkg/esm/js
@@ -65,6 +68,8 @@ export default class SDocComponent extends __SLitComponent {
 
     _categories: any;
     _item: any;
+    _searchValue: string;
+    _$searchInput: HTMLInputElement;
 
     constructor() {
         super(
@@ -76,12 +81,34 @@ export default class SDocComponent extends __SLitComponent {
     }
 
     async mount() {
+        // add shortcuts
+        this._registerShortcuts();
+
+        // load the categories
         const request = await fetch(this.props.endpoints.base),
             categories = await request.json();
-
         this._categories = categories;
 
         this.requestUpdate();
+    }
+
+    _firstCategory;
+    async firstUpdated() {
+        // get the search input
+        this._$searchInput = this.querySelector(
+            `.${this.utils.cls('_search-input')}`,
+        );
+    }
+
+    /**
+     * Register some shortcuts
+     */
+    _registerShortcuts(): void {
+        document.addEventListener('keyup', (e) => {
+            if (e.key === 'd' && e.ctrlKey) {
+                this._$searchInput?.focus();
+            }
+        });
     }
 
     async _loadItem(itemObj): Promise<void> {
@@ -114,6 +141,11 @@ export default class SDocComponent extends __SLitComponent {
     }
 
     async _loadItems(category: any, loadFirstItem = false): Promise<void> {
+        if (category._loading) {
+            return;
+        }
+        category._loading = true;
+
         const request = await fetch(
                 this.props.endpoints.items.replace(
                     ':filters',
@@ -133,18 +165,30 @@ export default class SDocComponent extends __SLitComponent {
         }
     }
 
-    _firstCategory;
-    async firstUpdated() {
-        if (this._firstCategory) {
-            await this._loadItems(this._firstCategory, true);
-        }
+    _search(value: string): void {
+        this._searchValue = value;
+        this.requestUpdate();
     }
 
     _renderItems(items: any): any {
+        let searchReg;
+        if (this._searchValue) {
+            searchReg = new RegExp(
+                this._searchValue.replace(/\s/gm, '|'),
+                'gi',
+            );
+        }
+
         return html`
-            <ul class="s-fs-tree ${this.utils.cls('_items')}">
+            <ul class="${this.utils.cls('_items')}">
                 ${Object.keys(items).map((namespace) => {
                     const itemObj = items[namespace];
+
+                    // filter search
+                    if (this._searchValue && !searchReg.test(itemObj.id)) {
+                        return;
+                    }
+
                     return html`
                         <li
                             class="${this.utils.cls('_item')} ${this._item
@@ -157,14 +201,34 @@ export default class SDocComponent extends __SLitComponent {
                             }}
                         >
                             <div>
-                                ${itemObj.loading
+                                <!-- ${itemObj.loading
                                     ? html`
                                           <div
-                                              class="s-loader:square-dots s-color:accent s-mie:10"
+                                              class="s-loader:square-dots ${this.utils.cls(
+                                                  null,
+                                                  's-color:accent s-mie:10',
+                                              )}"
                                           ></div>
                                       `
-                                    : ''}
-                                <span>${itemObj.as ?? itemObj.name}</span>
+                                    : ''} -->
+                                <span>
+                                    ${this._searchValue
+                                        ? html`
+                                              ${unsafeHTML(
+                                                  __replaceChunks(
+                                                      itemObj.as ??
+                                                          itemObj.name,
+                                                      this._searchValue.split(
+                                                          ' ',
+                                                      ),
+                                                      (chunk) => {
+                                                          return `<span class="s-tc--accent">${chunk}</span>`;
+                                                      },
+                                                  ),
+                                              )}
+                                          `
+                                        : itemObj.as ?? itemObj.name}
+                                </span>
                             </div>
                         </li>
                     `;
@@ -175,62 +239,114 @@ export default class SDocComponent extends __SLitComponent {
 
     _renderItem(itemObj): any {
         return html`
-            ${itemObj.name
-                ? html`
-                      <h1 class="s-typo:h1 s-mbe:30 _title">
-                          ${itemObj.as ?? itemObj.name}
-                          ${itemObj.status
-                              ? html` <span
-                                    class="s-badge s-color:${itemObj.status ===
-                                    'stable'
-                                        ? 'success'
-                                        : itemObj.status === 'beta'
-                                        ? 'accent'
-                                        : 'error'} _status"
-                                    >${itemObj.status}</span
-                                >`
-                              : ''}
-                      </h1>
-                  `
-                : ''}
-            ${itemObj.description
-                ? html`
-                <p class="s-typo:lead s-mbe:30 _description">${itemObj.description}</h1>
+            <header class="${this.utils.cls('_metas')}">
+                ${itemObj.name
+                    ? html`
+                          <h1
+                              class="${this.utils.cls(
+                                  '_doc-title',
+                                  's-typo--h1 s-mbe--30',
+                              )}"
+                          >
+                              ${itemObj.as ?? itemObj.name}
+                              ${itemObj.status
+                                  ? html` <span
+                                        class="${this.utils.cls(
+                                            '_doc-status',
+                                            `s-badge s-color:${
+                                                itemObj.status === 'stable'
+                                                    ? 'success'
+                                                    : itemObj.status === 'beta'
+                                                    ? 'accent'
+                                                    : 'error'
+                                            }`,
+                                        )}"
+                                        >${itemObj.status}</span
+                                    >`
+                                  : ''}
+                          </h1>
+                      `
+                    : ''}
+                ${itemObj.description
+                    ? html`
+                <p class="${this.utils.cls(
+                    '_doc-description',
+                    's-typo--lead s-mbe--30',
+                )}">${itemObj.description}</h1>
             `
-                : ''}
+                    : ''}
+            </header>
             ${itemObj.example
                 ? html`
-                      ${itemObj.example.map(
-                          (example) => html`
-                              <s-code-example>
-                                  <code lang="${example.language}">
-                                      ${example.code}
-                                  </code>
-                              </s-code-example>
-                          `,
-                      )}
+                      <div class="${this.utils.cls('_examples')}">
+                          <h2
+                              class="${this.utils.cls(
+                                  '_section-title',
+                                  's-typo--h2 s-mbe--30',
+                              )}"
+                          >
+                              ${this.props.i18n.examplesTitle}
+                          </h2>
+                          ${itemObj.example.map(
+                              (example) => html`
+                                  <s-code-example bare=${this.props.bare}>
+                                      <code lang="${example.language}">
+                                          ${example.code}
+                                      </code>
+                                  </s-code-example>
+                              `,
+                          )}
+                      </div>
                   `
                 : ''}
             ${itemObj.param
                 ? html`
-                      <div class="_params">
+                      <div class="${this.utils.cls('_params')}">
+                          <h2
+                              class="${this.utils.cls(
+                                  '_section-title',
+                                  's-typo--h2 s-mbe--30',
+                              )}"
+                          >
+                              ${this.props.i18n.paramsTitle}
+                          </h2>
                           ${Object.keys(itemObj.param).map((param) => {
                               const paramObj = itemObj.param[param];
                               return html`
-                                  <div class="_param">
-                                      <div class="_param-metas">
-                                          <div class="_param-name">
+                                  <div class="${this.utils.cls('_param')}">
+                                      <div
+                                          class="${this.utils.cls(
+                                              '_param-metas',
+                                          )}"
+                                      >
+                                          <div
+                                              class="${this.utils.cls(
+                                                  '_param-name',
+                                              )}"
+                                          >
                                               ${paramObj.name}
                                           </div>
-                                          <div class="_param-type">
+                                          <div
+                                              class="${this.utils.cls(
+                                                  '_param-type',
+                                              )}"
+                                          >
                                               ${paramObj.type?.raw ??
                                               paramObj.type}
                                           </div>
-                                          <div class="_param-default">
+                                          <div
+                                              class="${this.utils.cls(
+                                                  '_param-default',
+                                              )}"
+                                          >
                                               ${paramObj.default}
                                           </div>
                                       </div>
-                                      <p class="_param-description">
+                                      <p
+                                          class="${this.utils.cls(
+                                              '_param-description',
+                                          )}"
+                                      >
                                           ${paramObj.description}
                                       </p>
                                   </div>
@@ -244,25 +360,22 @@ export default class SDocComponent extends __SLitComponent {
 
     _renderCategories(categories: any): any {
         return html`
-            <ul class="s-fs-tree ${this.utils.cls('_categories')}">
+            <ul class="${this.utils.cls('_categories')}">
                 ${Object.keys(categories).map((categoryId, i) => {
                     const categoryObj = categories[categoryId];
-                    if (i === 0 && !this._item) {
-                        categoryObj.selected = true;
-                        this._firstCategory = categoryObj;
+                    if (!categoryObj.items && !categoryObj.children) {
+                        this._loadItems(categoryObj);
                     }
                     return html`
                         <li
                             class="${this.utils.cls(
                                 '_category',
-                            )} ${categoryObj.selected ? 'active' : ''}"
+                            )} ${categoryObj.selected || this._searchValue
+                                ? 'active'
+                                : ''}"
                             @click=${(e) => {
                                 e.stopPropagation();
                                 categoryObj.selected = !categoryObj.selected;
-                                if (categoryObj.children) {
-                                } else {
-                                    this._loadItems(categoryObj);
-                                }
                                 this.requestUpdate();
                             }}
                         >
@@ -280,7 +393,8 @@ export default class SDocComponent extends __SLitComponent {
                                           categoryObj.children,
                                       )}
                                   `
-                                : categoryObj.items
+                                : (categoryObj.selected || this._searchValue) &&
+                                  categoryObj.items
                                 ? html`
                                       ${this._renderItems(categoryObj.items)}
                                   `
@@ -295,6 +409,25 @@ export default class SDocComponent extends __SLitComponent {
     render() {
         return html`
             <div class="${this.utils.cls('_explorer')}">
+                <label
+                    class="${this.utils.cls(
+                        '_search',
+                        's-input-container--addon',
+                    )}"
+                >
+                    <input
+                        type="text"
+                        name="search"
+                        placeholder="${this.props.i18n.search} (CTRL+D)"
+                        class="${this.utils.cls('_search-input')}"
+                        @keyup=${(e) => {
+                            this._search(e.target.value);
+                        }}
+                    />
+                    <div>
+                        <i class="s-icon:search"></i>
+                    </div>
+                </label>
                 ${this._renderCategories(this._categories)}
             </div>
             <div class="${this.utils.cls('_content')}">

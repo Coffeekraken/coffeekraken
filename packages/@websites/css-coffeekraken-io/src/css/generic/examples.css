@@ -1,8 +1,10 @@
 .examples {
-    @sugar.layout ('1 2 2 2');
-    @sugar.depth (100);
+    display: flex;
+    /* @sugar.depth (100); */
 
     ._sidebar {
+        width: 400px;
+        flex-shrink: 0;
         /* background: sugar.color(main, surface);
         border: solid 1px sugar.color(main, border); */
         @sugar.border.radius();
@@ -12,17 +14,8 @@
             padding: sugar.padding(30) sugar.padding(30);
             border-top-left-radius: sugar.border.radius();
             border-bottom-left-radius: sugar.border.radius();
-            border-bottom: 1px solid sugar.color(main, border, --alpha 0);
-            @sugar.transition fast;
-
-            &:not(:last-child):not(
-                    :hover,
-                    :active,
-                    .active,
-                    :has(+ .active, + :active, + :hover)
-                ) {
-                border-bottom: 1px solid sugar.color(main, border);
-            }
+            background: sugar.color(main, surface, --alpha 0);
+            @sugar.transition;
 
             &:hover {
                 background: sugar.color(main, surface, --alpha 0.4);
@@ -40,6 +33,8 @@
     }
 
     ._content {
+        background: sugar.color(main, surface);
+        flex-grow: 1;
     }
 
     ._code {

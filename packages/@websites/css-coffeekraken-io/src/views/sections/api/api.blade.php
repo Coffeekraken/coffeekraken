@@ -5,9 +5,9 @@
         <div class="_layout s-mbe:50">
             
             <div>
-                <i class="s-icon:api _icon-title"></i>
+                <i class="s-icon:documentation _icon-title"></i>
                 <h2 class="s-typo:h2 s-mbe:30 _title">
-                    API
+                    Documentation
                 </h2>
                 <p class="s-typo:h4 s-mbe:30">
                     Here all the available mixins, functions and configurations

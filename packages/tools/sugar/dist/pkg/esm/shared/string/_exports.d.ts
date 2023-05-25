@@ -29,4 +29,5 @@ import __uncamelize from './uncamelize';
 import __unquote from './unquote';
 import __upperFirst from './upperFirst';
 import __urlCompliant from './urlCompliant';
-export { __camelCase, __camelize, __countLineChars, __crop, __dashCase, __dedupe, __extractSame, __format, __idCompliant, __lowerFirst, __ltrim, __namespaceCompliant, __paramCase, __parse, __printf, __replaceTokens, __rtrim, __simplify, __simplifySpecialChars, __snakeCase, __splitEvery, __sprintf, __stripAnsi, __stripDocblocks, __stripSourcemap, __toString, __trimLines, __uncamelize, __unquote, __upperFirst, __urlCompliant, };
+import __replaceChunks from './replaceChunks';
+export { __camelCase, __camelize, __countLineChars, __crop, __dashCase, __dedupe, __extractSame, __format, __idCompliant, __lowerFirst, __ltrim, __namespaceCompliant, __paramCase, __parse, __printf, __replaceChunks, __replaceTokens, __rtrim, __simplify, __simplifySpecialChars, __snakeCase, __splitEvery, __sprintf, __stripAnsi, __stripDocblocks, __stripSourcemap, __toString, __trimLines, __uncamelize, __unquote, __upperFirst, __urlCompliant, };

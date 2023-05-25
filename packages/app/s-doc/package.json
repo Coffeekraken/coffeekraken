@@ -14,6 +14,7 @@
         "@coffeekraken/s-interface": "^2.0.0-alpha.27",
         "@coffeekraken/s-class": "^2.0.0-alpha.27",
         "@coffeekraken/s-docmap": "^2.0.0-alpha.27",
+        "@coffeekraken/s-i18n": "^2.0.0-alpha.27",
         "@coffeekraken/s-docblock": "^2.0.0-alpha.27",
         "@coffeekraken/s-lit-component": "^2.0.0-alpha.27",
         "@coffeekraken/s-promise": "^2.0.0-alpha.27",

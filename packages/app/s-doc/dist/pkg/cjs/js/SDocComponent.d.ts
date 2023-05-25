@@ -9,12 +9,17 @@ export default class SDocComponent extends __SLitComponent {
     static get state(): {};
     _categories: any;
     _item: any;
+    _searchValue: string;
+    _$searchInput: HTMLInputElement;
     constructor();
     mount(): Promise<void>;
-    _loadItem(itemObj: any): Promise<void>;
-    _loadItems(category: any, loadFirstItem?: boolean): Promise<void>;
     _firstCategory: any;
     firstUpdated(): Promise<void>;
+    
+    _registerShortcuts(): void;
+    _loadItem(itemObj: any): Promise<void>;
+    _loadItems(category: any, loadFirstItem?: boolean): Promise<void>;
+    _search(value: string): void;
     _renderItems(items: any): any;
     _renderItem(itemObj: any): any;
     _renderCategories(categories: any): any;

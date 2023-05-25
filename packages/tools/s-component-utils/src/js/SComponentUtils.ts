@@ -877,49 +877,57 @@ export default class SComponentUtils extends __SClass {
      *
      * This method allows you to get a component ready class like my-component__something, etc...
      *
-     * @param         {String}        cls         The class you want to process. Can be multiple classes separated by a space
+     * @param         {String}        cls         The class you want to process. Can be multiple classes separated by a space. If null, does not print any class at all but the "style" one
      * @return        {String}                    The generated class that you can apply
      *
      * @since         2.0.0
      * @author 		Olivier Bossel<olivier.bossel@gmail.com>
      */
     cls(cls = '', style = '') {
-        let clsString = cls
-            .split(' ')
-            .map((clsName) => {
-                let clses: string[] = [];
-                // class from the component tagname if wanted
-                if (this.settings.useTagNameForClassName) {
-                    clses.push(
-                        `${this.node.tagName.toLowerCase()}${
-                            clsName && !clsName.match(/^(_{1,2}|-)/) ? '-' : ''
-                        }${clsName}`,
-                    );
-                }
-                // class from the passed "name" in the settings
-                if (
-                    this.settings.name &&
-                    this.node.tagName.toLowerCase() !== this.settings.name
-                ) {
-                    clses.push(
-                        `${this.settings.name.toLowerCase()}${
-                            clsName && !clsName.match(/^(_{1,2}|-)/) ? '-' : ''
-                        }${clsName}`,
-                    );
-                }
-                // replace '---' by '--'
-                clses = clses.map((c) => c.replace('---', '--'));
+        let clsString = '';
 
-                // classmap
-                if (document.env?.SUGAR?.classmap) {
-                    clses = clses.map((cls) => {
-                        return document.env.SUGAR.classmap[cls] ?? cls;
-                    });
-                }
+        if (cls !== null) {
+            clsString = cls
+                .split(' ')
+                .map((clsName) => {
+                    let clses: string[] = [];
+                    // class from the component tagname if wanted
+                    if (this.settings.useTagNameForClassName) {
+                        clses.push(
+                            `${this.node.tagName.toLowerCase()}${
+                                clsName && !clsName.match(/^(_{1,2}|-)/)
+                                    ? '-'
+                                    : ''
+                            }${clsName}`,
+                        );
+                    }
+                    // class from the passed "name" in the settings
+                    if (
+                        this.settings.name &&
+                        this.node.tagName.toLowerCase() !== this.settings.name
+                    ) {
+                        clses.push(
+                            `${this.settings.name.toLowerCase()}${
+                                clsName && !clsName.match(/^(_{1,2}|-)/)
+                                    ? '-'
+                                    : ''
+                            }${clsName}`,
+                        );
+                    }
+                    // replace '---' by '--'
+                    clses = clses.map((c) => c.replace('---', '--'));
 
-                return clses.join(' ');
-            })
-            .join(' ');
+                    // classmap
+                    if (document.env?.SUGAR?.classmap) {
+                        clses = clses.map((cls) => {
+                            return document.env.SUGAR.classmap[cls] ?? cls;
+                        });
+                    }
+
+                    return clses.join(' ');
+                })
+                .join(' ');
+        }
 
         if (style) {
             clsString += ` ${style}`;

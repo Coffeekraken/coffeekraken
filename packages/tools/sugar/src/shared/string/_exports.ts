@@ -30,6 +30,8 @@ import __unquote from './unquote';
 import __upperFirst from './upperFirst';
 import __urlCompliant from './urlCompliant';
 
+import __replaceChunks from './replaceChunks';
+
 export {
     __camelCase,
     __camelize,
@@ -46,6 +48,7 @@ export {
     __paramCase,
     __parse,
     __printf,
+    __replaceChunks,
     __replaceTokens,
     __rtrim,
     __simplify,

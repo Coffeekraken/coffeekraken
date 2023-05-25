@@ -1,4 +1,32 @@
-/* @sugar.partial (welcome) { */
+@import url('https://fonts.googleapis.com/css2?family=Baloo+Da+2&display=swap');
+
+@keyframes welcome-blur {
+    0% {
+        filter: blur(10px);
+        opacity: 0.02;
+    }
+    20% {
+        filter: blur(15px);
+        opacity: 0.04;
+    }
+    40% {
+        filter: blur(10px);
+        opacity: 0.01;
+    }
+    60% {
+        filter: blur(15px);
+        opacity: 0.06;
+    }
+    80% {
+        filter: blur(5px);
+        opacity: 0.01;
+    }
+    100% {
+        filter: blur(10px);
+        opacity: 0.02;
+    }
+}
+
 #homepage-welcome {
     height: calc(100vh - 200px);
     min-height: 800px;
@@ -43,6 +71,104 @@
             width: 100%;
             transform: none;
             padding: sugar.padding(30) sugar.padding(30);
+        }
+    }
+
+    ._illustration {
+        position: absolute;
+        top: 0;
+        left: 40%;
+        width: 50vw;
+        height: 100%;
+        user-select: none;
+
+        * {
+            font-family: 'Baloo Da 2', cursive;
+            white-space: nowrap;
+        }
+
+        ._line {
+            white-space: nowrap;
+            line-height: 1.3;
+
+            .s-tc--error {
+                /* text-decoration: underline; */
+            }
+        }
+
+        ._text {
+            color: sugar.color(main, text);
+        }
+        ._comment {
+            opacity: 0.5;
+        }
+
+        ._01-1,
+        ._01-2 {
+            position: absolute;
+            font-size: 250px;
+            top: 50%;
+            transform: translateY(-50%);
+            animation: welcome-blur 2s ease-in-out 0s infinite;
+            /* filter: blur(20px); */
+            opacity: 0.2;
+        }
+        ._01-2 {
+            opacity: 0.03 !important;
+            font-size: 350px;
+            top: 60%;
+            left: -40%;
+            * {
+                opacity: 1 !important;
+                color: black !important;
+            }
+        }
+        ._02 {
+            position: absolute;
+            font-size: 40px;
+            top: 20%;
+            left: 0;
+            display: none;
+            transform: translateY(-10%);
+            filter: drop-shadow(0 0 20px sugar.color(main, background));
+        }
+        ._03 {
+            position: absolute;
+            display: none;
+            font-size: 80px;
+            top: 70%;
+            left: 0;
+            opacity: 0.4;
+            transform: translateY(-10%);
+            filter: blur(10px)
+                drop-shadow(0 0 20px sugar.color(main, background));
+        }
+        ._04 {
+            position: absolute;
+            font-size: 50px;
+            top: 50%;
+            left: 20%;
+            transform: translateY(-50%);
+            filter: blur(0) drop-shadow(0 0 20px sugar.color(main, background));
+        }
+        ._05 {
+            display: none;
+            color: sugar.color(error, text);
+            position: absolute;
+            font-size: 30px;
+            top: 75%;
+            left: 10%;
+            transform: translateY(-50%);
+            filter: blur(0) drop-shadow(0 0 20px sugar.color(main, background));
+        }
+        ._06 {
+            display: none;
+            position: absolute;
+            font-size: 25px;
+            top: 30%;
+            left: 5%;
+            transform: translateY(-50%);
+            filter: blur(0) drop-shadow(0 0 20px sugar.color(main, background));
         }
     }
 }

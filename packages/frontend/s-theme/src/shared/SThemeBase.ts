@@ -721,16 +721,18 @@ export default class SThemeBase extends __SEventEmitter {
         // proxy non existint dotPath
         dotPath = theme.proxyNonExistingUiDotpath(dotPath);
 
+        // prepare final variable name
+        let varName = `s-theme-${dotPath
+            .replace(/\./gm, '-')
+            .replace(/:/gm, '-')
+            .replace(/\?/gm, '')
+            .replace(/--/gm, '-')}`;
+        varName = `--${__dashCase(varName)}`;
+
         let fb = theme.get(dotPath);
         if (!fallback || (typeof fb === 'string' && fb.includes(','))) fb = 0;
 
-        const v = `var(${this.compressVarName(
-            `--s-theme-${dotPath
-                .replace(/\./gm, '-')
-                .replace(/:/gm, '-')
-                .replace(/\?/gm, '')
-                .replace(/--/gm, '-')}`,
-        )}, ${fb})`;
+        const v = `var(${this.compressVarName(varName)}, ${fb})`;
         return v;
     }
 
@@ -1390,6 +1392,26 @@ export default class SThemeBase extends __SEventEmitter {
         delete themeObjWithoutColors.color;
         const flattenedTheme = __flatten(themeObjWithoutColors);
 
+        const keep = [
+            '--s-theme-easing',
+            '--s-theme-timing',
+            '--s-theme-transition',
+            '--s-theme-scale',
+            '--s-theme-opacity',
+            '--s-theme-width',
+            '--s-theme-height',
+            '--s-theme-depth',
+            '--s-theme-size',
+            '--s-theme-font',
+            '--s-theme-border',
+            '--s-theme-space',
+            '--s-theme-margin',
+            '--s-theme-padding',
+            '--s-theme-offsize',
+            '--s-theme-color',
+            '--s-theme-layout',
+        ];
+
         Object.keys(flattenedTheme).forEach((key) => {
             const value = flattenedTheme[key];
             const varKey = key
@@ -1398,7 +1420,19 @@ export default class SThemeBase extends __SEventEmitter {
                 .replace(/\?/gm, '')
                 .replace(/--/gm, '-');
 
-            let variable = `--s-theme-${varKey}`;
+            let variable = `--${__dashCase(`s-theme-${varKey}`)}`;
+
+            // filter some variables
+            let hasToKeep = false;
+            for (let [i, startWith] of keep.entries()) {
+                if (variable.startsWith(startWith)) {
+                    hasToKeep = true;
+                    break;
+                }
+            }
+            if (!hasToKeep) {
+                return;
+            }
 
             if (`${value}`.match(/:/)) {
                 vars.push(
@@ -1794,9 +1828,11 @@ export default class SThemeBase extends __SEventEmitter {
             const c = new __SColor(colorValue);
             map[colorName] = {
                 color: colorValue,
-                variable: this.constructor.compressVarName(
-                    `--s-theme-color-${colorName}`,
-                ),
+                variable: `--${__dashCase(
+                    this.constructor.compressVarName(
+                        `s-theme-color-${colorName}`,
+                    ),
+                )}`,
                 r: c.r,
                 g: c.g,
                 b: c.b,
@@ -2192,9 +2228,11 @@ export default class SThemeBase extends __SEventEmitter {
                 // @ts-ignore
                 value: {
                     color: colorValue,
-                    variable: this.constructor.compressVarName(
-                        `--s-theme-color-${colorName}`,
-                    ),
+                    variable: `--${__dashCase(
+                        this.constructor.compressVarName(
+                            `s-theme-color-${colorName}`,
+                        ),
+                    )}`,
                     r: c.r,
                     g: c.g,
                     b: c.b,
@@ -2213,9 +2251,11 @@ export default class SThemeBase extends __SEventEmitter {
                     name: colorName,
                     schema: schemaName,
                     value: {
-                        variable: this.constructor.compressVarName(
-                            `--s-theme-color-${colorName}-${schemaName}`,
-                        ),
+                        variable: `--${__dashCase(
+                            this.constructor.compressVarName(
+                                `s-theme-color-${colorName}-${schemaName}`,
+                            ),
+                        )}`,
                         // @ts-ignore
                         ...schemaObj,
                         r: newColor.r,
@@ -2243,9 +2283,11 @@ export default class SThemeBase extends __SEventEmitter {
                             name: colorSchemaColorName,
                             schema: schemaName,
                             value: {
-                                variable: this.constructor.compressVarName(
-                                    `--s-theme-color-${colorSchemaColorName}-${schemaName}`,
-                                ),
+                                variable: `--${__dashCase(
+                                    this.constructor.compressVarName(
+                                        `s-theme-color-${colorSchemaColorName}-${schemaName}`,
+                                    ),
+                                )}`,
                                 // @ts-ignore
                                 ...colorSchemaObj,
                                 r: newColor.r,

@@ -7,5 +7,15 @@ export default class SDocComponentInterface extends __SInterface {
             description: string;
             default: any;
         };
+        i18n: {
+            type: string;
+            description: string;
+            default: {
+                examplesTitle: string;
+                paramsTitle: string;
+                settingsTitle: string;
+                search: string;
+            };
+        };
     };
 }

@@ -38,7 +38,9 @@ const viewsRelated = import.meta.globEager('../views/**/*.ts');
 
     // components
     __SCodeExampleComponentDefine();
-    __SDocComponentDefine();
+    __SDocComponentDefine({
+        mountWhen: 'direct',
+    });
 
     // Website specific
 })();

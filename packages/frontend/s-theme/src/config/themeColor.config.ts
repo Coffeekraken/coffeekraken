@@ -1,10 +1,24 @@
+/**
+ * @name                    themeColor
+ * @as                      Colors
+ * @namespace               config
+ * @type                    Config
+ * @plateform               node
+ * @status                  beta
+ *
+ * Specify the @coffeekraken/s-theme color available configurations
+ *
+ * @since           2.0.0
+ * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+ */
+
 export default (api) => {
     return {
         /**
          * @name                accent
-         * @namespace            theme.themeColor
+         * @namespace            config.themeColor
          * @type                Color
-         * @default             [config.themeColor.main]
+         * @default             config.themeBase.defaultColor
          *
          * Specify the "current" color value.
          *
@@ -12,7 +26,7 @@ export default (api) => {
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         get current() {
-            return api.config.themeColor.main;
+            return api.config.themeBase.defaultColor;
         },
 
         /**
@@ -30,7 +44,7 @@ export default (api) => {
 
         /**
          * @name                accent
-         * @namespace            theme.themeColor
+         * @namespace            config.themeColor
          * @type                Color
          * @default             #ffbb00
          *
@@ -43,7 +57,7 @@ export default (api) => {
 
         /**
          * @name                complementary
-         * @namespace            theme.themeColor
+         * @namespace            config.themeColor
          * @type                Color
          * @default             #5100ff
          *
@@ -56,7 +70,7 @@ export default (api) => {
 
         /**
          * @name                success
-         * @namespace            theme.themeColor
+         * @namespace            config.themeColor
          * @type                Color
          * @default             #91ff00
          *
@@ -69,7 +83,7 @@ export default (api) => {
 
         /**
          * @name                warning
-         * @namespace            theme.themeColor
+         * @namespace            config.themeColor
          * @type                Color
          * @default             #ffd500
          *
@@ -82,7 +96,7 @@ export default (api) => {
 
         /**
          * @name                error
-         * @namespace            theme.themeColor
+         * @namespace            config.themeColor
          * @type                Color
          * @default             #ff003b
          *
@@ -95,7 +109,7 @@ export default (api) => {
 
         /**
          * @name                info
-         * @namespace            theme.themeColor
+         * @namespace            config.themeColor
          * @type                Color
          * @default             #00ffff
          *

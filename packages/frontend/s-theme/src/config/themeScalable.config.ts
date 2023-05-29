@@ -1,3 +1,17 @@
+/**
+ * @name                    themeScalable
+ * @as                      Scalable
+ * @namespace               config
+ * @type                    Config
+ * @plateform               node
+ * @status                  beta
+ *
+ * Specify the @coffeekraken/s-theme scalable available configurations
+ *
+ * @since           2.0.0
+ * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+ */
+
 export default function (api) {
     return {
         /**

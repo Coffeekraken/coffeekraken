@@ -15,11 +15,11 @@
                 <p class="s-typo:p s-mbe:30">
                     
                 </p>
-                <a href="https://postcss.org" class="s-btn s-color:complementary s-mbe:20" title="Discover PostCSS">
+                {{-- <a href="https://postcss.org" class="s-btn s-color:complementary s-mbe:20" title="Discover PostCSS">
                     <i class="s-icon:more"></i>
                     Discover PostCSS
                     <i class="s-icon:more"></i>
-                </a>
+                </a> --}}
                 {{-- <a href="https://github.com/postcss/postcss#usage" class="s-btn s-color:accent" title="Setup PostCSS plugin">
                     <i class="s-icon:more"></i>
                         Setup PostCSS plugins

@@ -7,6 +7,8 @@ import { define as __SDocComponentDefine } from '@coffeekraken/s-doc';
 import __SFeature from '@coffeekraken/s-feature';
 import __SLitComponent from '@coffeekraken/s-lit-component';
 
+import { __splitLetters } from '@coffeekraken/sugar/dom';
+
 // Views specific
 // @ts-ignore
 const viewsRelated = import.meta.globEager('../views/**/*.ts');
@@ -40,7 +42,147 @@ const viewsRelated = import.meta.globEager('../views/**/*.ts');
     __SCodeExampleComponentDefine();
     __SDocComponentDefine({
         mountWhen: 'direct',
+        icons: {
+            file: '<i class="s-icon:file"></i>',
+            enterFullscreen: '<i class="s-icon:enter-fullscreen"></i>',
+            exitFullscreen: '<i class="s-icon:exit-fullscreen"></i>',
+        },
     });
+
+    class WelcomeSlider {
+        _$slider;
+        _$slides;
+
+        _settings = {
+            easing: 'cubic-bezier(0.755, 0.000, 0.195, 0.985)',
+            maxDelay: 0.3,
+            maxDuration: 0.3,
+            maxRotation: 360,
+            maxTranslate: 100,
+            translateXFactor: 1,
+            translateYFactor: 0,
+            rotationFactor: 0,
+        };
+
+        _slideIdx = 0;
+
+        constructor($slider) {
+            this._$slider = $slider;
+
+            this._$slides = Array.from($slider.children);
+
+            this._$slides.forEach(($slide) => {
+                __splitLetters($slide);
+                $slide._$letters = Array.from(
+                    $slide.querySelectorAll('.s-split-letter'),
+                );
+            });
+
+            this.goTo(this._slideIdx);
+
+            setInterval(() => {
+                this.next();
+            }, 5000);
+        }
+
+        getSlideByIdx(idx: number): HTMLElement {
+            return this._$slides[idx];
+        }
+
+        next(): void {
+            const newSlideIdx =
+                this._slideIdx + 1 >= this._$slides.length
+                    ? 0
+                    : this._slideIdx + 1;
+            this.goTo(newSlideIdx);
+        }
+
+        previous() {
+            const newSlideIdx =
+                this._slideIdx - 1 < 0
+                    ? this._$slides.length - 1
+                    : this._slideIdx - 1;
+            this.goTo(newSlideIdx);
+        }
+
+        goTo(slideIdx: number) {
+            const $currentSlide = this.getSlideByIdx(this._slideIdx);
+            if ($currentSlide) {
+                $currentSlide.classList.remove('active');
+                this._slideOut($currentSlide);
+            }
+
+            const $newSlide = this.getSlideByIdx(slideIdx);
+            $newSlide?.classList.add('active');
+            this._slideIn($newSlide);
+
+            // set the new slide idx
+            this._slideIdx = slideIdx;
+        }
+
+        _getTransformObj() {
+            const y =
+                    (this._settings.maxTranslate * -1 +
+                        Math.round(
+                            Math.random() * this._settings.maxTranslate * 2,
+                        )) *
+                    this._settings.translateYFactor,
+                x =
+                    (this._settings.maxTranslate * -1 +
+                        Math.round(
+                            Math.random() * this._settings.maxTranslate * 2,
+                        )) *
+                    this._settings.translateXFactor,
+                rotation =
+                    (this._settings.maxRotation * -1 +
+                        Math.round(
+                            Math.random() * this._settings.maxRotation * 2,
+                        )) *
+                    this._settings.rotationFactor,
+                duration = Math.random() * this._settings.maxDuration,
+                delay = Math.random() * this._settings.maxDelay;
+
+            return {
+                x,
+                y,
+                rotation,
+                duration,
+                delay,
+            };
+        }
+
+        _applyTransformToLetter(transformObj, $letter) {
+            $letter.style.display = 'inline-block';
+            $letter.style.opacity = 0;
+            $letter.style.transformOrigin = '50% 50%';
+            $letter.style.transition = `all ${transformObj.duration}s ${this._settings.easing} ${transformObj.delay}s`;
+            $letter.style.transform = `translate(${transformObj.x}px, ${transformObj.y}px) rotateZ(${transformObj.rotation}deg)`;
+        }
+
+        _slideOut($slide: HTMLElement): void {
+            $slide._$letters.forEach(($letter) => {
+                if ($letter.innerHTML.trim()) {
+                    const transformObj = this._getTransformObj();
+                    this._applyTransformToLetter(transformObj, $letter);
+                }
+            });
+        }
+
+        _slideIn($slide: HTMLElement): void {
+            $slide._$letters.forEach(($letter, i) => {
+                const transformObj = this._getTransformObj();
+
+                if ($letter.innerHTML.trim()) {
+                    this._applyTransformToLetter(transformObj, $letter);
+                    setTimeout(() => {
+                        $letter.style.transform = `translate(0px, 0px) rotateZ(0deg)`;
+                        $letter.style.opacity = 1;
+                    }, 1000);
+                }
+            });
+        }
+    }
+    new WelcomeSlider(document.querySelector('[welcome-slider]'));
 
     // Website specific
 })();

@@ -1,5 +1,19 @@
 import __path from 'path';
 
+/**
+ * @name                    postcssSugarPluginConfig
+ * @as                      PostCSS Sugar plugin config
+ * @namespace               config
+ * @type                    Config
+ * @plateform               node
+ * @status                  beta
+ *
+ * Specify the @coffeekraken/s-postcss-sugar-plugin available configurations
+ *
+ * @since           2.0.0
+ * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+ */
+
 export default function (api) {
     if (api.env.platform !== 'node') return;
     return {

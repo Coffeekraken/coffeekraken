@@ -1,12 +1,77 @@
+@keyframes s-doc-loading {
+    0% {
+        opacity: 0.3;
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0.3;
+    }
+}
+
+body:has(.s-doc-fullscreen) {
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+}
+
 .s-doc {
     display: flex;
+
+    &-fullscreen {
+        position: fixed !important;
+        top: 50%;
+        left: 50%;
+        height: 100vh;
+        width: 100vw;
+        max-width: none !important;
+        max-height: none !important;
+        transform: translate(-50%, -50%);
+        z-index: 9999;
+    }
 
     &_explorer {
         flex-grow: 0;
     }
 
     &_content {
+        position: relative;
         flex-grow: 1;
+    }
+
+    &_body {
+        height: 100%;
+    }
+
+    &_color-preview {
+        display: inline-block;
+        width: 1em;
+        height: 1em;
+    }
+
+    &_loading {
+        position: absolute;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: sugar.color(main, surface, --alpha 0.6);
+        animation: s-doc-loading 1s ease-in-out infinite;
+
+        svg {
+            max-width: 60px;
+            max-height: 60px;
+        }
+    }
+
+    &_toolbar {
+        position: absolute;
+        top: 0;
+        right: 0;
     }
 }
 
@@ -27,6 +92,9 @@
         max-height: 80vh;
         overflow-y: auto;
         @sugar.scrollbar;
+    }
+    &-fullscreen &_explorer {
+        max-height: none;
     }
 
     &_category {
@@ -129,6 +197,9 @@
     }
 
     &_content {
+    }
+
+    &_body {
         display: flex;
         flex-direction: column;
         gap: sugar.margin(50);
@@ -140,6 +211,36 @@
 
         .s-code-example_code .hljs {
             background: sugar.color(main, background) !important;
+        }
+    }
+
+    &_file {
+        display: inline-block;
+        padding: sugar.padding(30);
+        background: sugar.color(main, background);
+        @sugar.border.radius();
+
+        span {
+            color: sugar.color(info, text);
+        }
+        i {
+            margin-inline-end: sugar.margin(20);
+        }
+    }
+
+    &_param-metas,
+    &_config-metas,
+    .s-code-example {
+        max-width: 960px;
+    }
+
+    &_toolbar > button {
+        padding: sugar.padding(30);
+        background: sugar.color(main, background);
+        @sugar.transition;
+
+        &:hover {
+            background: sugar.color(main, surface);
         }
     }
 
@@ -158,22 +259,42 @@
     &_examples {
     }
 
+    &_color-preview {
+        @sugar.border.radius();
+    }
+
+    &_configs,
     &_params {
     }
     &_param {
     }
+    &_config-metas,
     &_param-metas {
         display: flex;
+        gap: sugar.margin(30);
         background: sugar.color(main, background);
         padding: sugar.padding(30);
         @sugar.border.radius();
     }
+    &_config-name,
     &_param-name {
+        color: sugar.color(accent);
         flex-grow: 1;
     }
+    &_config-default,
+    &_param-default {
+        display: inline-flex;
+        gap: sugar.margin(10);
+
+        ._value {
+            opacity: 0.6;
+        }
+    }
+    &_config-type,
     &_param-type {
         color: sugar.color(info);
     }
+    &_config-description,
     &_param-description {
         padding: sugar.padding(30);
         @sugar.typo (p);

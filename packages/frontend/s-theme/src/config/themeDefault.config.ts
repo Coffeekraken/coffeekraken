@@ -1,3 +1,17 @@
+/**
+ * @name                    themeDefault
+ * @as                      Default theme
+ * @namespace               config
+ * @type                    Config
+ * @plateform               node
+ * @status                  beta
+ *
+ * Specify the @coffeekraken/s-theme default available configurations
+ *
+ * @since           2.0.0
+ * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+ */
+
 export default function (api) {
     return {
         /**
@@ -41,7 +55,7 @@ export default function (api) {
              * @name          light
              * @namespace     config.themeDefault.variants
              * @type          Object
-             * @default      [config.themeDefaultLight]
+             * @default      config.themeDefaultLight
              *
              * Specify the default theme light variant
              *
@@ -56,7 +70,7 @@ export default function (api) {
              * @name          dark
              * @namespace     config.themeDefault.variants
              * @type          Object
-             * @default      [config.themeDefaultDark]
+             * @default      config.themeDefaultDark
              *
              * Specify the default theme dark variant
              *

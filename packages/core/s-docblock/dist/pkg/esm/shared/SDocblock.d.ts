@@ -31,7 +31,8 @@ declare class SDocblock extends __SClass implements ISDocblock {
     
     get blocks(): any[];
     
-    parse(string?: string): Promise<any[]>;
+    _parsed: boolean;
+    parse(string?: string): Promise<ISDocblockBlock[]>;
     
     toObject(): any[];
     

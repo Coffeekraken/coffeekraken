@@ -12,7 +12,7 @@
     {% if config.readme.shields %}
         <!-- shields -->
         {% for key, shield in config.readme.shields %}
-        [![{{ key }}]({{ shield.url|replace('%packageName',  config.package.name) }})]({{ shield.href|replace('%packageName', config.package.name) }})
+        [![{{ key }}]({{ shield.url|replace({'%packageName':  config.package.name}) }})]({{ shield.href|replace({'%packageName': config.package.name}) }})
         {% endfor %}
     {% endif %}
 {% endif %}

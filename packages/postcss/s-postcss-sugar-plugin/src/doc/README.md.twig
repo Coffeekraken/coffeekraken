@@ -66,20 +66,4 @@ module.exports = {
 };
 ```
 
-## Mixins
-
-Here's the list of all the available mixins:
-
-{% for key, mixin in mixins %}
--   [@sugar.{{mixin.dotCall}}(...);](/api/@coffeekraken.s-postcss-sugar-plugin.node.mixin.{{mixin.dotPath}})
-{% endfor %}
-
-## Functions
-
-Here's the list of all the available functions:
-
-{% for key, function in functions %}
--   [sugar.{{function.dotCall}}(...);](/api/@coffeekraken.s-postcss-sugar-plugin.node.function.{{function.dotPath}})
-{% endfor %}
-
 {% endblock %}

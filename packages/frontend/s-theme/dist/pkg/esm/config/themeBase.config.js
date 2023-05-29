@@ -1,3 +1,17 @@
+/**
+ * @name                    themeBase
+ * @as                      Base
+ * @namespace               config
+ * @type                    Config
+ * @plateform               node
+ * @status                  beta
+ *
+ * Specify the @coffeekraken/s-theme base available configurations
+ * This is the base theme configuration that aggregate all the others like the themeColors, etc...
+ *
+ * @since           2.0.0
+ * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+ */
 export default function (api) {
     return {
         /**
@@ -16,7 +30,7 @@ export default function (api) {
          * @name            color
          * @namespace        config.themeBase
          * @type            String
-         * @default         [config.themeColor]
+         * @default         config.themeColor
          *
          * Specify the color schema to be used in the theme
          *
@@ -30,7 +44,7 @@ export default function (api) {
          * @name            classmap
          * @namespace        config.themeBase
          * @type            String
-         * @default         [config.themeClassmap]
+         * @default         config.themeClassmap
          *
          * Specify classmap settings to be used in the theme
          *
@@ -44,7 +58,7 @@ export default function (api) {
          * @name            lod
          * @namespace        config.themeBase
          * @type            String
-         * @default         [config.themeLod]
+         * @default         config.themeLod
          *
          * Specify the level of details to be used in the theme
          *
@@ -58,7 +72,7 @@ export default function (api) {
          * @name            easing
          * @namespace       config.themeBase
          * @type            Object
-         * @default         {}
+         * @default         config.themeEasing
          *
          * Reference the "themeEasing" config
          *
@@ -72,7 +86,7 @@ export default function (api) {
          * @name            scroll
          * @namespace       config.themeBase
          * @type            Object
-         * @default         {}
+         * @default         config.themeScroll
          *
          * Reference the "themeScroll" config
          *
@@ -86,7 +100,7 @@ export default function (api) {
          * @name            partytown
          * @namespace       config.themeBase
          * @type            Object
-         * @default         {}
+         * @default         config.themePartytown
          *
          * Reference the "themePartytown" config
          *
@@ -100,7 +114,7 @@ export default function (api) {
          * @name            timing
          * @namespace       config.themeBase
          * @type            Object
-         * @default         {}
+         * @default         config.themeTiming
          *
          * Reference the "themeTiming" config
          *
@@ -114,7 +128,7 @@ export default function (api) {
          * @name            transition
          * @namespace       config.themeBase
          * @type            Object
-         * @default         {}
+         * @default         config.themeTransition
          *
          * Reference the "themeTransition" config
          *
@@ -128,9 +142,9 @@ export default function (api) {
          * @name            gradient
          * @namespace       config.themeBase
          * @type            Object
-         * @default         {}
+         * @default         config.themeGradient
          *
-         * Reference the "themegradient" config
+         * Reference the "themeGradient" config
          *
          * @since       2.0.0
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -142,7 +156,7 @@ export default function (api) {
          * @name            helpers
          * @namespace       config.themeBase
          * @type            Object
-         * @default         {}
+         * @default         config.themeHelpers
          *
          * Reference the "themeHelpers" config
          *
@@ -156,7 +170,7 @@ export default function (api) {
          * @name            layout
          * @namespace       config.themeBase
          * @type            Object
-         * @default         {}
+         * @default         config.themeLayout
          *
          * Reference the "themeLayout" config
          *
@@ -170,7 +184,7 @@ export default function (api) {
          * @name            ratio
          * @namespace       config.themeBase
          * @type            Object
-         * @default         {}
+         * @default         config.themeRatio
          *
          * Reference the "themeRatio" config
          *
@@ -184,7 +198,7 @@ export default function (api) {
          * @name            scalable
          * @namespace       config.themeBase
          * @type            Object
-         * @default         {}
+         * @default         config.themeScalable
          *
          * Reference the "themeScalable" config
          *
@@ -198,7 +212,7 @@ export default function (api) {
          * @name            scale
          * @namespace       config.themeBase
          * @type            Object
-         * @default         {}
+         * @default         config.themeScale
          *
          * Reference the "themeScale" config
          *
@@ -212,7 +226,7 @@ export default function (api) {
          * @name            opacity
          * @namespace       config.themeBase
          * @type            Object
-         * @default         {}
+         * @default         config.themeOpacity
          *
          * Reference the "themeOpacity" config
          *
@@ -226,7 +240,7 @@ export default function (api) {
          * @name            width
          * @namespace       config.themeBase
          * @type            Object
-         * @default         {}
+         * @default         config.themeWidth
          *
          * Reference the "themeWidth" config
          *
@@ -240,7 +254,7 @@ export default function (api) {
          * @name            height
          * @namespace       config.themeBase
          * @type            Object
-         * @default         {}
+         * @default         config.themeHeight
          *
          * Reference the "themeHeight" config
          *
@@ -254,7 +268,7 @@ export default function (api) {
          * @name            depth
          * @namespace       config.themeBase
          * @type            Object
-         * @default         {}
+         * @default         config.themeDepth
          *
          * Reference the "themeDepth" config
          *
@@ -268,7 +282,7 @@ export default function (api) {
          * @name            size
          * @namespace       config.themeBase
          * @type            Object
-         * @default         {}
+         * @default         config.themeSize
          *
          * Reference the "themeSize" config
          *
@@ -282,7 +296,7 @@ export default function (api) {
          * @name            font
          * @namespace       config.themeBase
          * @type            Object
-         * @default         {}
+         * @default         config.themeFont
          *
          * Reference the "themeFont" config
          *
@@ -293,12 +307,12 @@ export default function (api) {
             return api.config.themeFont;
         },
         /**
-         * @name            scale
+         * @name            border
          * @namespace       config.themeBase
          * @type            Object
-         * @default         {}
+         * @default         config.themeBorder
          *
-         * Reference the "themeScale" config
+         * Reference the "themeBorder" config
          *
          * @since       2.0.0
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -310,7 +324,7 @@ export default function (api) {
          * @name            space
          * @namespace       config.themeBase
          * @type            Object
-         * @default         {}
+         * @default         config.themeSpace
          *
          * Reference the "themeSpace" config
          *
@@ -324,7 +338,7 @@ export default function (api) {
          * @name            margin
          * @namespace       config.themeBase
          * @type            Object
-         * @default         {}
+         * @default         config.themeMargin
          *
          * Reference the "themeMargin" config
          *
@@ -338,7 +352,7 @@ export default function (api) {
          * @name            padding
          * @namespace       config.themeBase
          * @type            Object
-         * @default         {}
+         * @default         config.themePadding
          *
          * Reference the "themePadding" config
          *
@@ -352,7 +366,7 @@ export default function (api) {
          * @name            offsize
          * @namespace       config.themeBase
          * @type            Object
-         * @default         {}
+         * @default         config.themeOffsize
          *
          * Reference the "themeOffsize" config
          *
@@ -366,7 +380,7 @@ export default function (api) {
          * @name            media
          * @namespace       config.themeBase
          * @type            Object
-         * @default         {}
+         * @default         config.themeMedia
          *
          * Reference the "themeMedia" config
          *
@@ -380,7 +394,7 @@ export default function (api) {
          * @name            ui
          * @namespace       config.themeBase
          * @type            Object
-         * @default         {}
+         * @default         config.themeUi
          *
          * Reference the "themeUi" config for UI elements definition
          *
@@ -394,7 +408,7 @@ export default function (api) {
          * @name            typo
          * @namespace       config.themeBase
          * @type            Object
-         * @default         {}
+         * @default         config.themeTypo
          *
          * Reference the "themeTypo" config for typo elements definition
          *
@@ -408,9 +422,9 @@ export default function (api) {
          * @name            wireframe
          * @namespace       config.themeBase
          * @type            Object
-         * @default         {}
+         * @default         config.themeWireframe
          *
-         * Reference the "themewireframe" config for wireframe elements definition
+         * Reference the "themeWireframe" config for wireframe elements definition
          *
          * @since       2.0.0
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -420,4 +434,4 @@ export default function (api) {
         },
     };
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE1BQU0sQ0FBQyxPQUFPLFdBQVcsR0FBRztJQUN4QixPQUFPO1FBQ0g7Ozs7Ozs7Ozs7V0FVRztRQUNILFlBQVksRUFBRSxNQUFNO1FBRXBCOzs7Ozs7Ozs7O1dBVUc7UUFDSCxJQUFJLEtBQUs7WUFDTCxPQUFPLEdBQUcsQ0FBQyxNQUFNLENBQUMsVUFBVSxDQUFDO1FBQ2pDLENBQUM7UUFFRDs7Ozs7Ozs7OztXQVVHO1FBQ0gsSUFBSSxRQUFRO1lBQ1IsT0FBTyxHQUFHLENBQUMsTUFBTSxDQUFDLGFBQWEsQ0FBQztRQUNwQyxDQUFDO1FBRUQ7Ozs7Ozs7Ozs7V0FVRztRQUNILElBQUksR0FBRztZQUNILE9BQU8sR0FBRyxDQUFDLE1BQU0sQ0FBQyxRQUFRLENBQUM7UUFDL0IsQ0FBQztRQUVEOzs7Ozs7Ozs7O1dBVUc7UUFDSCxJQUFJLE1BQU07WUFDTixPQUFPLEdBQUcsQ0FBQyxNQUFNLENBQUMsV0FBVyxDQUFDO1FBQ2xDLENBQUM7UUFFRDs7Ozs7Ozs7OztXQVVHO1FBQ0gsSUFBSSxNQUFNO1lBQ04sT0FBTyxHQUFHLENBQUMsTUFBTSxDQUFDLFdBQVcsQ0FBQztRQUNsQyxDQUFDO1FBRUQ7Ozs7Ozs7Ozs7V0FVRztRQUNILElBQUksU0FBUztZQUNULE9BQU8sR0FBRyxDQUFDLE1BQU0sQ0FBQyxjQUFjLENBQUM7UUFDckMsQ0FBQztRQUVEOzs7Ozs7Ozs7O1dBVUc7UUFDSCxJQUFJLE1BQU07WUFDTixPQUFPLEdBQUcsQ0FBQyxNQUFNLENBQUMsV0FBVyxDQUFDO1FBQ2xDLENBQUM7UUFFRDs7Ozs7Ozs7OztXQVVHO1FBQ0gsSUFBSSxVQUFVO1lBQ1YsT0FBTyxHQUFHLENBQUMsTUFBTSxDQUFDLGVBQWUsQ0FBQztRQUN0QyxDQUFDO1FBRUQ7Ozs7Ozs7Ozs7V0FVRztRQUNILElBQUksUUFBUTtZQUNSLE9BQU8sR0FBRyxDQUFDLE1BQU0sQ0FBQyxhQUFhLENBQUM7UUFDcEMsQ0FBQztRQUVEOzs7Ozs7Ozs7O1dBVUc7UUFDSCxJQUFJLE9BQU87WUFDUCxPQUFPLEdBQUcsQ0FBQyxNQUFNLENBQUMsWUFBWSxDQUFDO1FBQ25DLENBQUM7UUFFRDs7Ozs7Ozs7OztXQVVHO1FBQ0gsSUFBSSxNQUFNO1lBQ04sT0FBTyxHQUFHLENBQUMsTUFBTSxDQUFDLFdBQVcsQ0FBQztRQUNsQyxDQUFDO1FBRUQ7Ozs7Ozs7Ozs7V0FVRztRQUNILElBQUksS0FBSztZQUNMLE9BQU8sR0FBRyxDQUFDLE1BQU0sQ0FBQyxVQUFVLENBQUM7UUFDakMsQ0FBQztRQUVEOzs7Ozs7Ozs7O1dBVUc7UUFDSCxJQUFJLFFBQVE7WUFDUixPQUFPLEdBQUcsQ0FBQyxNQUFNLENBQUMsYUFBYSxDQUFDO1FBQ3BDLENBQUM7UUFFRDs7Ozs7Ozs7OztXQVVHO1FBQ0gsSUFBSSxLQUFLO1lBQ0wsT0FBTyxHQUFHLENBQUMsTUFBTSxDQUFDLFVBQVUsQ0FBQztRQUNqQyxDQUFDO1FBRUQ7Ozs7Ozs7Ozs7V0FVRztRQUNILElBQUksT0FBTztZQUNQLE9BQU8sR0FBRyxDQUFDLE1BQU0sQ0FBQyxZQUFZLENBQUM7UUFDbkMsQ0FBQztRQUVEOzs7Ozs7Ozs7O1dBVUc7UUFDSCxJQUFJLEtBQUs7WUFDTCxPQUFPLEdBQUcsQ0FBQyxNQUFNLENBQUMsVUFBVSxDQUFDO1FBQ2pDLENBQUM7UUFFRDs7Ozs7Ozs7OztXQVVHO1FBQ0gsSUFBSSxNQUFNO1lBQ04sT0FBTyxHQUFHLENBQUMsTUFBTSxDQUFDLFdBQVcsQ0FBQztRQUNsQyxDQUFDO1FBRUQ7Ozs7Ozs7Ozs7V0FVRztRQUNILElBQUksS0FBSztZQUNMLE9BQU8sR0FBRyxDQUFDLE1BQU0sQ0FBQyxVQUFVLENBQUM7UUFDakMsQ0FBQztRQUVEOzs7Ozs7Ozs7O1dBVUc7UUFDSCxJQUFJLElBQUk7WUFDSixPQUFPLEdBQUcsQ0FBQyxNQUFNLENBQUMsU0FBUyxDQUFDO1FBQ2hDLENBQUM7UUFFRDs7Ozs7Ozs7OztXQVVHO1FBQ0gsSUFBSSxJQUFJO1lBQ0osT0FBTyxHQUFHLENBQUMsTUFBTSxDQUFDLFNBQVMsQ0FBQztRQUNoQyxDQUFDO1FBRUQ7Ozs7Ozs7Ozs7V0FVRztRQUNILElBQUksTUFBTTtZQUNOLE9BQU8sR0FBRyxDQUFDLE1BQU0sQ0FBQyxXQUFXLENBQUM7UUFDbEMsQ0FBQztRQUVEOzs7Ozs7Ozs7O1dBVUc7UUFDSCxJQUFJLEtBQUs7WUFDTCxPQUFPLEdBQUcsQ0FBQyxNQUFNLENBQUMsVUFBVSxDQUFDO1FBQ2pDLENBQUM7UUFFRDs7Ozs7Ozs7OztXQVVHO1FBQ0gsSUFBSSxNQUFNO1lBQ04sT0FBTyxHQUFHLENBQUMsTUFBTSxDQUFDLFdBQVcsQ0FBQztRQUNsQyxDQUFDO1FBRUQ7Ozs7Ozs7Ozs7V0FVRztRQUNILElBQUksT0FBTztZQUNQLE9BQU8sR0FBRyxDQUFDLE1BQU0sQ0FBQyxZQUFZLENBQUM7UUFDbkMsQ0FBQztRQUVEOzs7Ozs7Ozs7O1dBVUc7UUFDSCxJQUFJLE9BQU87WUFDUCxPQUFPLEdBQUcsQ0FBQyxNQUFNLENBQUMsWUFBWSxDQUFDO1FBQ25DLENBQUM7UUFFRDs7Ozs7Ozs7OztXQVVHO1FBQ0gsSUFBSSxLQUFLO1lBQ0wsT0FBTyxHQUFHLENBQUMsTUFBTSxDQUFDLFVBQVUsQ0FBQztRQUNqQyxDQUFDO1FBRUQ7Ozs7Ozs7Ozs7V0FVRztRQUNILElBQUksRUFBRTtZQUNGLE9BQU8sR0FBRyxDQUFDLE1BQU0sQ0FBQyxPQUFPLENBQUM7UUFDOUIsQ0FBQztRQUVEOzs7Ozs7Ozs7O1dBVUc7UUFDSCxJQUFJLElBQUk7WUFDSixPQUFPLEdBQUcsQ0FBQyxNQUFNLENBQUMsU0FBUyxDQUFDO1FBQ2hDLENBQUM7UUFFRDs7Ozs7Ozs7OztXQVVHO1FBQ0gsSUFBSSxTQUFTO1lBQ1QsT0FBTyxHQUFHLENBQUMsTUFBTSxDQUFDLGNBQWMsQ0FBQztRQUNyQyxDQUFDO0tBQ0osQ0FBQztBQUNOLENBQUMifQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBOzs7Ozs7Ozs7Ozs7O0dBYUc7QUFFSCxNQUFNLENBQUMsT0FBTyxXQUFXLEdBQUc7SUFDeEIsT0FBTztRQUNIOzs7Ozs7Ozs7O1dBVUc7UUFDSCxZQUFZLEVBQUUsTUFBTTtRQUVwQjs7Ozs7Ozs7OztXQVVHO1FBQ0gsSUFBSSxLQUFLO1lBQ0wsT0FBTyxHQUFHLENBQUMsTUFBTSxDQUFDLFVBQVUsQ0FBQztRQUNqQyxDQUFDO1FBRUQ7Ozs7Ozs7Ozs7V0FVRztRQUNILElBQUksUUFBUTtZQUNSLE9BQU8sR0FBRyxDQUFDLE1BQU0sQ0FBQyxhQUFhLENBQUM7UUFDcEMsQ0FBQztRQUVEOzs7Ozs7Ozs7O1dBVUc7UUFDSCxJQUFJLEdBQUc7WUFDSCxPQUFPLEdBQUcsQ0FBQyxNQUFNLENBQUMsUUFBUSxDQUFDO1FBQy9CLENBQUM7UUFFRDs7Ozs7Ozs7OztXQVVHO1FBQ0gsSUFBSSxNQUFNO1lBQ04sT0FBTyxHQUFHLENBQUMsTUFBTSxDQUFDLFdBQVcsQ0FBQztRQUNsQyxDQUFDO1FBRUQ7Ozs7Ozs7Ozs7V0FVRztRQUNILElBQUksTUFBTTtZQUNOLE9BQU8sR0FBRyxDQUFDLE1BQU0sQ0FBQyxXQUFXLENBQUM7UUFDbEMsQ0FBQztRQUVEOzs7Ozs7Ozs7O1dBVUc7UUFDSCxJQUFJLFNBQVM7WUFDVCxPQUFPLEdBQUcsQ0FBQyxNQUFNLENBQUMsY0FBYyxDQUFDO1FBQ3JDLENBQUM7UUFFRDs7Ozs7Ozs7OztXQVVHO1FBQ0gsSUFBSSxNQUFNO1lBQ04sT0FBTyxHQUFHLENBQUMsTUFBTSxDQUFDLFdBQVcsQ0FBQztRQUNsQyxDQUFDO1FBRUQ7Ozs7Ozs7Ozs7V0FVRztRQUNILElBQUksVUFBVTtZQUNWLE9BQU8sR0FBRyxDQUFDLE1BQU0sQ0FBQyxlQUFlLENBQUM7UUFDdEMsQ0FBQztRQUVEOzs7Ozs7Ozs7O1dBVUc7UUFD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

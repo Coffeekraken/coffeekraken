@@ -225,16 +225,22 @@ export default class SActivateFeature extends __SFeature {
                             preventSave: true,
                         });
                     });
-                } else if (trigger.match(/^scrollspy:/)) {
-                    const parts = trigger.split(':'),
-                        selector = parts[1],
-                        group = parts[2];
+                } else if (trigger.match(/^scrollspy/)) {
+                    let parts = trigger.split(':'),
+                        selector = this.props.href,
+                        group = this.props.group ?? 'scrollspy';
+
+                    if (parts.length === 2) {
+                        selector = parts[1];
+                    }
+
+                    _console.log('parts', parts, selector);
 
                     const $toSpyElm = document.querySelector(selector);
 
                     if (!$toSpyElm) {
                         throw new Error(
-                            `<red>[SActivate]</red> The s-activate trigger "${trigger}" does not resolve to any HTMLElement to spy on`,
+                            `<red>[SActivate]</red> The s-activate trigger "${trigger}" with the selector "${selector}" does not resolve to any HTMLElement to spy on`,
                         );
                     }
 

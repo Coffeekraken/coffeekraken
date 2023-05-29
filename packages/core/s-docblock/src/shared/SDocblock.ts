@@ -29,19 +29,21 @@ import __SDocblockBlock from './SDocblockBlock';
  * @setting         {Boolean}       [renderMarkdown=false]              Specify if you want to render the markdown in the tags values or not
  * @setting         {Any}           [markedOptions={}]                  Specify some [marked](https://www.npmjs.com/package/marked) options to render markdown
  * @setting         {Function}      [sortFunction=function(a, b) {})]       Specify a function to sort the docblocks. A default sort is applied
- * 
+ *
  * @todo        tests
  * @todo        interface
  * @todo        doc
  *
  * @snippet         __SDocblock($1)
  * new __SDocblock($1)
- * 
+ *
  * @example         js
  * import __SDocblock from '@coffeekraken/s-docblock';
- * new __SDocblock(source, {
+ * const docblock = new __SDocblock(source, {
  *    // override some settings here...
  * });
+ * const blocks = docblock.parse();
+ *
  *
  * @since     2.0.0
  * @author 	Olivier Bossel <olivier.bossel@gmail.com>
@@ -207,10 +209,14 @@ class SDocblock extends __SClass implements ISDocblock {
      * @since       2.0.0
      * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    parse(string = this._source): Promise<any[]> {
+    _parsed = false;
+    parse(string = this._source): Promise<ISDocblockBlock[]> {
         return new Promise(async (resolve) => {
             // extract each docblocks
             const regDefault = /(['"`\s]+)?(\/\*{2})([\s\S]+?)(\*\/)/g;
+
+            // update parsed flag
+            this._parsed = true;
 
             let blocksArrayStr: string[] = [];
 
@@ -361,6 +367,12 @@ class SDocblock extends __SClass implements ISDocblock {
      * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     toObject() {
+        if (!this._parsed) {
+            throw new Error(
+                `<red>[SDocblock]</red> Before accessing any block, you MUST call the "parse" async method...`,
+            );
+        }
+
         return this.blocks.map((block) => {
             return block.toObject();
         });
@@ -376,6 +388,12 @@ class SDocblock extends __SClass implements ISDocblock {
      * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     toString() {
+        if (!this._parsed) {
+            throw new Error(
+                `<red>[SDocblock]</red> Before accessing any block, you MUST call the "parse" async method...`,
+            );
+        }
+
         return this.blocks
             .map((block) => {
                 return block.toString();

@@ -3,6 +3,31 @@
     "extends": [],
     "generated": {
         "map": {
+            "@coffeekraken.s-postcss-sugar-plugin.config.postcssSugarPluginConfig": {
+                "id": "@coffeekraken.s-postcss-sugar-plugin.config.postcssSugarPluginConfig",
+                "name": "postcssSugarPluginConfig",
+                "as": "PostCSS Sugar plugin config",
+                "type": {
+                    "types": [
+                        {
+                            "type": "Config"
+                        }
+                    ],
+                    "raw": "Config"
+                },
+                "description": "Specify the @coffeekraken/s-postcss-sugar-plugin available configurations",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.config",
+                "status": "beta",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "postcssSugarPlugin.config.ts",
+                "extension": "config",
+                "relPath": "src/config/postcssSugarPlugin.config.ts"
+            },
             "@coffeekraken.s-postcss-sugar-plugin.config.postcssSugarPlugin.outDir": {
                 "id": "@coffeekraken.s-postcss-sugar-plugin.config.postcssSugarPlugin.outDir",
                 "name": "outDir",

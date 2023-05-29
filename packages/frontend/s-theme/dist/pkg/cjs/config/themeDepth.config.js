@@ -1,4 +1,17 @@
 "use strict";
+/**
+ * @name                    themeDepth
+ * @as                      Depths
+ * @namespace               config
+ * @type                    Config
+ * @plateform               node
+ * @status                  beta
+ *
+ * Specify the @coffeekraken/s-theme depth available configurations
+ *
+ * @since           2.0.0
+ * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+ */
 Object.defineProperty(exports, "__esModule", { value: true });
 function default_1(api) {
     return {
@@ -6,7 +19,7 @@ function default_1(api) {
          * @name                default
          * @namespace           config.themeDepth
          * @type                String
-         * @default             [theme.depth.0]
+         * @default             theme.depth.0
          *
          * Specify the default depth for your theme
          *
@@ -218,4 +231,4 @@ function default_1(api) {
     };
 }
 exports.default = default_1;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7O0FBQUEsbUJBQXlCLEdBQUc7SUFDeEIsT0FBTztRQUNIOzs7Ozs7Ozs7O1dBVUc7UUFDSCxJQUFJLE9BQU87WUFDUCxPQUFPLEdBQUcsQ0FBQyxLQUFLLENBQUMsS0FBSyxDQUFDLEdBQUcsQ0FBQyxDQUFDO1FBQ2hDLENBQUM7UUFFRDs7Ozs7Ozs7OztXQVVHO1FBQ0gsQ0FBQyxFQUFFLEdBQUc7UUFDTjs7Ozs7Ozs7OztXQVVHO1FBQ0gsQ0FBQyxFQUFFOzs7OztvQ0FLeUI7UUFDNUI7Ozs7Ozs7Ozs7V0FVRztRQUNILEVBQUUsRUFBRTs7Ozs7b0NBS3dCO1FBQzVCOzs7Ozs7Ozs7O1dBVUc7UUFDSCxFQUFFLEVBQUU7Ozs7O29DQUt3QjtRQUM1Qjs7Ozs7Ozs7OztXQVVHO1FBQ0gsRUFBRSxFQUFFOzs7OztvQ0FLd0I7UUFDNUI7Ozs7Ozs7Ozs7V0FVRztRQUNILEVBQUUsRUFBRTs7Ozs7b0NBS3dCO1FBQzVCOzs7Ozs7Ozs7O1dBVUc7UUFDSCxFQUFFLEVBQUU7Ozs7O29DQUt3QjtRQUM1Qjs7Ozs7Ozs7OztXQVVHO1FBQ0gsRUFBRSxFQUFFOzs7OztvQ0FLd0I7UUFDNUI7Ozs7Ozs7Ozs7V0FVRztRQUNILEVBQUUsRUFBRTs7Ozs7b0NBS3dCO1FBQzVCOzs7Ozs7Ozs7O1dBVUc7UUFDSCxFQUFFLEVBQUU7Ozs7O29DQUt3QjtRQUM1Qjs7Ozs7Ozs7OztXQVVHO1FBQ0gsRUFBRSxFQUFFOzs7OztvQ0FLd0I7UUFDNUI7Ozs7Ozs7Ozs7V0FVRztRQUNILEdBQUcsRUFBRTs7Ozs7b0NBS3VCO0tBQy9CLENBQUM7QUFDTixDQUFDO0FBek5ELDRCQXlOQyJ9
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQTs7Ozs7Ozs7Ozs7O0dBWUc7O0FBRUgsbUJBQXlCLEdBQUc7SUFDeEIsT0FBTztRQUNIOzs7Ozs7Ozs7O1dBVUc7UUFDSCxJQUFJLE9BQU87WUFDUCxPQUFPLEdBQUcsQ0FBQyxLQUFLLENBQUMsS0FBSyxDQUFDLEdBQUcsQ0FBQyxDQUFDO1FBQ2hDLENBQUM7UUFFRDs7Ozs7Ozs7OztXQVVHO1FBQ0gsQ0FBQyxFQUFFLEdBQUc7UUFDTjs7Ozs7Ozs7OztXQVVHO1FBQ0gsQ0FBQyxFQUFFOzs7OztvQ0FLeUI7UUFDNUI7Ozs7Ozs7Ozs7V0FVRztRQUNILEVBQUUsRUFBRTs7Ozs7b0NBS3dCO1FBQzVCOzs7Ozs7Ozs7O1dBVUc7UUFDSCxFQUFFLEVBQUU7Ozs7O29DQUt3QjtRQUM1Qjs7Ozs7Ozs7OztXQVVHO1FBQ0gsRUFBRSxFQUFFOzs7OztvQ0FLd0I7UUFDNUI7Ozs7Ozs7Ozs7V0FVRztRQUNILEVBQUUsRUFBRTs7Ozs7b0NBS3dCO1FBQzVCOzs7Ozs7Ozs7O1dBVUc7UUFDSCxFQUFFLEVBQUU7Ozs7O29DQUt3QjtRQUM1Qjs7Ozs7Ozs7OztXQVVHO1FBQ0gsRUFBRSxFQUFFOzs7OztvQ0FLd0I7UUFDNUI7Ozs7Ozs7Ozs7V0FVRztRQUNILEVBQUUsRUFBRTs7Ozs7b0NBS3dCO1FBQzVCOzs7Ozs7Ozs7O1dBVUc7UUFDSCxFQUFFLEVBQUU7Ozs7O29DQUt3QjtRQUM1Qjs7Ozs7Ozs7OztXQVVHO1FBQ0gsRUFBRSxFQUFFOzs7OztvQ0FLd0I7UUFDNUI7Ozs7Ozs7Ozs7V0FVRztRQUNILEdBQUcsRUFBRTs7Ozs7b0NBS3VCO0tBQy9CLENBQUM7QUFDTixDQUFDO0FBek5ELDRCQXlOQyJ9

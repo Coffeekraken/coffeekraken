@@ -774,8 +774,13 @@ export default class SThemeBase extends __SEventEmitter {
                     color = value[0];
                     schema = value[1];
                 }
+                if (Array.isArray(value) && value.length === 3) {
+                    color = value[0];
+                    schema = value[1];
+                    modifier = value[2];
+                }
                 return (
-                    this.resolveColor(color, schema, null, {
+                    this.resolveColor(color, schema, modifier, {
                         ...(settings ?? {}),
                         return: 'value',
                     }) ?? value
@@ -916,8 +921,6 @@ export default class SThemeBase extends __SEventEmitter {
             const value = jsObject[originalProp];
             if (!value) return;
 
-            let color, schema;
-
             // media queries
             const medias = Object.keys(this.get('media.queries'));
             if (medias.includes(originalProp)) {
@@ -934,28 +937,31 @@ export default class SThemeBase extends __SEventEmitter {
                     case 'font-size':
                         propsStack.push(`@sugar.font.size(${value});`);
                         break;
+
                     case 'color':
-                        color = value;
-                        schema = '';
-                        if (Array.isArray(value)) {
-                            color = value[0];
-                            schema = value[1];
-                        }
-                        propsStack.push(
-                            `color: sugar.color(${color}, ${schema});`,
-                        );
-                        break;
                     case 'background-color':
-                        color = value;
-                        schema = '';
-                        if (Array.isArray(value)) {
+                        let color = value,
+                            schema,
+                            modifier;
+                        if (Array.isArray(value) && value.length === 2) {
                             color = value[0];
                             schema = value[1];
                         }
+                        if (Array.isArray(value) && value.length === 3) {
+                            color = value[0];
+                            schema = value[1];
+                            modifier = value[2];
+                        }
                         propsStack.push(
-                            `background-color: sugar.color(${color}, ${schema});`,
+                            `${prop}: ${
+                                this.resolveColor(color, schema, modifier, {
+                                    ...(settings ?? {}),
+                                    return: 'var',
+                                }) ?? value
+                            };`,
                         );
                         break;
+
                     case 'border-radius':
                     case 'border-top-left-radius':
                     case 'border-top-right-radius':
@@ -2144,7 +2150,7 @@ export default class SThemeBase extends __SEventEmitter {
                     ),
                     ${
                         modifierParams.alpha !== undefined
-                            ? modifierParams.alpha
+                            ? alpha
                             : `var(${colorSchemaNameVar}-a, 1)`
                     }
                     )`;

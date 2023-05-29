@@ -1,12 +1,25 @@
 "use strict";
+/**
+ * @name                    themeColor
+ * @as                      Colors
+ * @namespace               config
+ * @type                    Config
+ * @plateform               node
+ * @status                  beta
+ *
+ * Specify the @coffeekraken/s-theme color available configurations
+ *
+ * @since           2.0.0
+ * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+ */
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.default = (api) => {
     return {
         /**
          * @name                accent
-         * @namespace            theme.themeColor
+         * @namespace            config.themeColor
          * @type                Color
-         * @default             [config.themeColor.main]
+         * @default             config.themeBase.defaultColor
          *
          * Specify the "current" color value.
          *
@@ -14,7 +27,7 @@ exports.default = (api) => {
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         get current() {
-            return api.config.themeColor.main;
+            return api.config.themeBase.defaultColor;
         },
         /**
          * @name                main
@@ -30,7 +43,7 @@ exports.default = (api) => {
         main: '#6F7C90',
         /**
          * @name                accent
-         * @namespace            theme.themeColor
+         * @namespace            config.themeColor
          * @type                Color
          * @default             #ffbb00
          *
@@ -42,7 +55,7 @@ exports.default = (api) => {
         accent: '#ffbb00',
         /**
          * @name                complementary
-         * @namespace            theme.themeColor
+         * @namespace            config.themeColor
          * @type                Color
          * @default             #5100ff
          *
@@ -54,7 +67,7 @@ exports.default = (api) => {
         complementary: '#5100ff',
         /**
          * @name                success
-         * @namespace            theme.themeColor
+         * @namespace            config.themeColor
          * @type                Color
          * @default             #91ff00
          *
@@ -66,7 +79,7 @@ exports.default = (api) => {
         success: '#91ff00',
         /**
          * @name                warning
-         * @namespace            theme.themeColor
+         * @namespace            config.themeColor
          * @type                Color
          * @default             #ffd500
          *
@@ -78,7 +91,7 @@ exports.default = (api) => {
         warning: '#ffd500',
         /**
          * @name                error
-         * @namespace            theme.themeColor
+         * @namespace            config.themeColor
          * @type                Color
          * @default             #ff003b
          *
@@ -90,7 +103,7 @@ exports.default = (api) => {
         error: '#ff003b',
         /**
          * @name                info
-         * @namespace            theme.themeColor
+         * @namespace            config.themeColor
          * @type                Color
          * @default             #00ffff
          *
@@ -102,4 +115,4 @@ exports.default = (api) => {
         info: '#00ffff',
     };
 };
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7O0FBQUEsa0JBQWUsQ0FBQyxHQUFHLEVBQUUsRUFBRTtJQUNuQixPQUFPO1FBQ0g7Ozs7Ozs7Ozs7V0FVRztRQUNILElBQUksT0FBTztZQUNQLE9BQU8sR0FBRyxDQUFDLE1BQU0sQ0FBQyxVQUFVLENBQUMsSUFBSSxDQUFDO1FBQ3RDLENBQUM7UUFFRDs7Ozs7Ozs7OztXQVVHO1FBQ0gsSUFBSSxFQUFFLFNBQVM7UUFFZjs7Ozs7Ozs7OztXQVVHO1FBQ0gsTUFBTSxFQUFFLFNBQVM7UUFFakI7Ozs7Ozs7Ozs7V0FVRztRQUNILGFBQWEsRUFBRSxTQUFTO1FBRXhCOzs7Ozs7Ozs7O1dBVUc7UUFDSCxPQUFPLEVBQUUsU0FBUztRQUVsQjs7Ozs7Ozs7OztXQVVHO1FBQ0gsT0FBTyxFQUFFLFNBQVM7UUFFbEI7Ozs7Ozs7Ozs7V0FVRztRQUNILEtBQUssRUFBRSxTQUFTO1FBRWhCOzs7Ozs7Ozs7O1dBVUc7UUFDSCxJQUFJLEVBQUUsU0FBUztLQUNsQixDQUFDO0FBQ04sQ0FBQyxDQUFDIn0=
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQTs7Ozs7Ozs7Ozs7O0dBWUc7O0FBRUgsa0JBQWUsQ0FBQyxHQUFHLEVBQUUsRUFBRTtJQUNuQixPQUFPO1FBQ0g7Ozs7Ozs7Ozs7V0FVRztRQUNILElBQUksT0FBTztZQUNQLE9BQU8sR0FBRyxDQUFDLE1BQU0sQ0FBQyxTQUFTLENBQUMsWUFBWSxDQUFDO1FBQzdDLENBQUM7UUFFRDs7Ozs7Ozs7OztXQVVHO1FBQ0gsSUFBSSxFQUFFLFNBQVM7UUFFZjs7Ozs7Ozs7OztXQVVHO1FBQ0gsTUFBTSxFQUFFLFNBQVM7UUFFakI7Ozs7Ozs7Ozs7V0FVRztRQUNILGFBQWEsRUFBRSxTQUFTO1FBRXhCOzs7Ozs7Ozs7O1dBVUc7UUFDSCxPQUFPLEVBQUUsU0FBUztRQUVsQjs7Ozs7Ozs7OztXQVVHO1FBQ0gsT0FBTyxFQUFFLFNBQVM7UUFFbEI7Ozs7Ozs7Ozs7V0FVRztRQUNILEtBQUssRUFBRSxTQUFTO1FBRWhCOzs7Ozs7Ozs7O1dBVUc7UUFDSCxJQUFJLEVBQUUsU0FBUztLQUNsQixDQUFDO0FBQ04sQ0FBQyxDQUFDIn0=

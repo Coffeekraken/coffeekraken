@@ -1,6 +1,20 @@
 import __SSugarJson from '@coffeekraken/s-sugar-json';
 import { __deepMerge } from '@coffeekraken/sugar/object';
 
+/**
+ * @name                    theme
+ * @as                      Theme
+ * @namespace               config
+ * @type                    Config
+ * @plateform               node
+ * @status                  beta
+ *
+ * Specify the @coffeekraken/s-theme available configurations
+ *
+ * @since           2.0.0
+ * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+ */
+
 export function preprocess(api) {
     // setting theme from sugar.json
     const sugarJsonInstance = new __SSugarJson();

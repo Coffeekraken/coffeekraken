@@ -1,6 +1,7 @@
 import __SClass from '@coffeekraken/s-class';
 import __SDocblock from '@coffeekraken/s-docblock';
 import __SDocmap from '@coffeekraken/s-docmap';
+import __SMarkdownBuilder from '@coffeekraken/s-markdown-builder';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
 import { __deepMerge } from '@coffeekraken/sugar/object';
 
@@ -93,6 +94,7 @@ export default class SDoc extends __SClass {
         express.get(this.settings.endpoints.items, async (req, res) => {
             const filters = JSON.parse(decodeURIComponent(req.params.filters)),
                 result = await this._docmap.search(filters);
+
             res.status(200);
             res.type('application/json');
             res.send(result.items ?? {});
@@ -105,8 +107,26 @@ export default class SDoc extends __SClass {
             const id = req.params.id;
 
             const item = this._docmapJson.map[id];
-            if (item) {
+
+            if (!item) {
+                res.status(200);
+                res.type('application/json');
+                res.send({});
+            }
+
+            if (item.type.raw?.toLowerCase?.() === 'markdown') {
+                // render the markdown
+                const builder = new __SMarkdownBuilder({});
+                const mdResult = await builder.build({
+                    inPath: item.path,
+                    target: 'html',
+                    save: false,
+                    log: false,
+                });
+                item.docHtml = mdResult[0].code;
+            } else if (item) {
                 const docblock = new __SDocblock(item.path);
+                await docblock.parse();
                 item.docblocks = docblock.toObject();
             }
 

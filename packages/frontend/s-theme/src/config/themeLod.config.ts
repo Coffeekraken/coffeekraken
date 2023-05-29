@@ -1,3 +1,17 @@
+/**
+ * @name                    themeLod
+ * @as                      Lod (level of details)
+ * @namespace               config
+ * @type                    Config
+ * @plateform               node
+ * @status                  wip
+ *
+ * Specify the @coffeekraken/s-theme lof (level of details) available configurations
+ *
+ * @since           2.0.0
+ * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+ */
+
 export default function (api) {
     return {
         /**

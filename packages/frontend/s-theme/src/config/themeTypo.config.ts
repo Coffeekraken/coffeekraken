@@ -1,6 +1,20 @@
 import __SColor from '@coffeekraken/s-color';
 import { __upperFirst } from '@coffeekraken/sugar/string';
 
+/**
+ * @name                    themeTypo
+ * @as                      Typos
+ * @namespace               config
+ * @type                    Config
+ * @plateform               node
+ * @status                  beta
+ *
+ * Specify the @coffeekraken/s-theme typo available configurations
+ *
+ * @since           2.0.0
+ * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+ */
+
 export function preprocess(api) {
     if (!api.config.themeTypo) {
         api.config.themeTypo = {};
@@ -234,7 +248,7 @@ export default (api) => {
                 fontSize: 30,
                 lineHeight: 1.8,
                 maxWidth: '55ch',
-                opacity: 0.6,
+                color: ['main', 'text', '--alpha 0.7'],
             },
             rhythmVertical: {
                 marginBottom: 40,

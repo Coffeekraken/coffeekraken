@@ -1,9 +1,12 @@
 import __SLitComponent from '@coffeekraken/s-lit-component';
 
+import { __escapeQueue } from '@coffeekraken/sugar/keyboard';
 import { __deepMerge } from '@coffeekraken/sugar/object';
 import { css, html, unsafeCSS } from 'lit';
 import { unsafeHTML } from 'lit/directives/unsafe-html.js';
 import __SDocComponentInterface from './interface/SDocComponentInterface';
+
+import { __isColor } from '@coffeekraken/sugar/is';
 
 import { __replaceChunks } from '@coffeekraken/sugar/string';
 
@@ -11,6 +14,11 @@ import { __replaceChunks } from '@coffeekraken/sugar/string';
 import __css from '../../../../src/css/s-doc-component.css'; // relative to /dist/pkg/esm/js
 
 import __define from './define';
+
+export interface ISDocComponentStatus {
+    loading: boolean;
+    fullscreen: boolean;
+}
 
 export interface ISDocComponentProps {}
 
@@ -66,10 +74,17 @@ export default class SDocComponent extends __SLitComponent {
         return {};
     }
 
+    _status: ISDocComponentStatus = {
+        loading: false,
+        fullscreen: false,
+    };
     _categories: any;
     _item: any;
     _searchValue: string;
+
+    _$body: HTMLElement;
     _$searchInput: HTMLInputElement;
+    _$placeholder: HTMLElement;
 
     constructor() {
         super(
@@ -98,6 +113,9 @@ export default class SDocComponent extends __SLitComponent {
         this._$searchInput = this.querySelector(
             `.${this.utils.cls('_search-input')}`,
         );
+
+        // get the body element
+        this._$body = this.querySelector(`.${this.utils.cls('_body')}`);
     }
 
     /**
@@ -105,8 +123,10 @@ export default class SDocComponent extends __SLitComponent {
      */
     _registerShortcuts(): void {
         document.addEventListener('keyup', (e) => {
-            if (e.key === 'd' && e.ctrlKey) {
+            if (e.key === 's' && e.ctrlKey) {
                 this._$searchInput?.focus();
+            } else if (e.key === 'd' && e.ctrlKey) {
+                this._toggleFullscreen();
             }
         });
     }
@@ -116,6 +136,7 @@ export default class SDocComponent extends __SLitComponent {
         if (!itemObj.cache) {
             // set the item loading state
             itemObj.loading = true;
+            this._status.loading = true;
             this.requestUpdate();
 
             const request = await fetch(
@@ -135,8 +156,15 @@ export default class SDocComponent extends __SLitComponent {
         // wait a loop and set the new item
         setTimeout(() => {
             itemObj.loading = false;
+            this._status.loading = false;
             this._item = itemObj.cache;
             this.requestUpdate();
+
+            // scroll top body
+            this._$body?.scrollTo?.({
+                top: 0,
+                behavior: 'smooth',
+            });
         });
     }
 
@@ -145,6 +173,7 @@ export default class SDocComponent extends __SLitComponent {
             return;
         }
         category._loading = true;
+        this._status.loading = true;
 
         const request = await fetch(
                 this.props.endpoints.items.replace(
@@ -161,6 +190,7 @@ export default class SDocComponent extends __SLitComponent {
             const firstItemId = Object.keys(items)[0];
             this._loadItem(items[firstItemId]);
         } else {
+            this._status.loading = false;
             this.requestUpdate();
         }
     }
@@ -168,6 +198,47 @@ export default class SDocComponent extends __SLitComponent {
     _search(value: string): void {
         this._searchValue = value;
         this.requestUpdate();
+    }
+
+    _exitFullscreen(): void {
+        this._$placeholder.after(this);
+        this._$placeholder.remove();
+
+        this.classList.remove(this.utils.cls('-fullscreen'));
+        this._status.fullscreen = false;
+        this.requestUpdate();
+
+        window.scrollTo({
+            top: this.getBoundingClientRect().top - 200,
+        });
+    }
+
+    _enterFullscreen(): void {
+        __escapeQueue(
+            () => {
+                this._exitFullscreen();
+            },
+            {
+                id: 's-doc',
+            },
+        );
+
+        this._$placeholder = document.createElement('div');
+        this.before(this._$placeholder);
+
+        document.body.appendChild(this);
+
+        this.classList.add(this.utils.cls('-fullscreen'));
+        this._status.fullscreen = true;
+        this.requestUpdate();
+    }
+
+    _toggleFullscreen(): void {
+        if (this._status.fullscreen) {
+            this._exitFullscreen();
+        } else {
+            this._enterFullscreen();
+        }
     }
 
     _renderItems(items: any): any {
@@ -201,7 +272,7 @@ export default class SDocComponent extends __SLitComponent {
                             }}
                         >
                             <div>
-                                <!-- ${itemObj.loading
+                                ${itemObj.loading
                                     ? html`
                                           <div
                                               class="s-loader:square-dots ${this.utils.cls(
@@ -210,7 +281,7 @@ export default class SDocComponent extends __SLitComponent {
                                               )}"
                                           ></div>
                                       `
-                                    : ''} -->
+                                    : ''}
                                 <span>
                                     ${this._searchValue
                                         ? html`
@@ -237,7 +308,31 @@ export default class SDocComponent extends __SLitComponent {
         `;
     }
 
-    _renderItem(itemObj): any {
+    _renderItemDefault(itemObj: any): any {
+        let addon = '';
+        if (__isColor(itemObj.default ?? '')) {
+            addon = unsafeHTML(
+                `<span class="${this.utils.cls(
+                    '_color-preview',
+                )}" style="background: ${itemObj.default}"></span>`,
+            );
+        }
+
+        return html`
+            ${itemObj.default !== undefined && itemObj.default !== 'undefined'
+                ? html`
+                      <div class="${this.utils.cls('_config-default')}">
+                          <span class="_value">${itemObj.default}</span>
+                          ${addon
+                              ? html` <span class="_addon">${addon}</span> `
+                              : ''}
+                      </div>
+                  `
+                : ''}
+        `;
+    }
+
+    _renderItemMetas(itemObj: any): any {
         return html`
             <header class="${this.utils.cls('_metas')}">
                 ${itemObj.name
@@ -267,6 +362,14 @@ export default class SDocComponent extends __SLitComponent {
                           </h1>
                       `
                     : ''}
+                ${itemObj.type?.raw?.toLowerCase?.() === 'config'
+                    ? html`
+                          <div class="${this.utils.cls('_file', 's-mbe--30')}">
+                              ${unsafeHTML(this.props.icons.file)}
+                              <span>.sugar/${itemObj.name}.config.ts</span>
+                          </div>
+                      `
+                    : ''}
                 ${itemObj.description
                     ? html`
                 <p class="${this.utils.cls(
@@ -276,6 +379,57 @@ export default class SDocComponent extends __SLitComponent {
             `
                     : ''}
             </header>
+        `;
+    }
+
+    _renderItemConfig(configObj: any): any {
+        return html`
+            <div class="${this.utils.cls('_config')}">
+                <div class="${this.utils.cls('_config-metas')}">
+                    <div class="${this.utils.cls('_config-name')}">
+                        ${configObj.id.replace(/^.*\.config\./, '')}
+                    </div>
+                    ${this._renderItemDefault(configObj)}
+                    <div class="${this.utils.cls('_config-type')}">
+                        ${configObj.type?.raw ?? configObj.type}
+                    </div>
+                </div>
+                <p class="${this.utils.cls('_param-description')}">
+                    ${configObj.description}
+                </p>
+            </div>
+        `;
+    }
+
+    _renderItem(itemObj): any {
+        // markdown support
+        if (itemObj.docHtml) {
+            return html`
+                <div class="s-format:text s-rhythm:vertical">
+                    ${unsafeHTML(itemObj.docHtml)}
+                </div>
+            `;
+        }
+
+        if (itemObj.type.raw.toLowerCase() === 'config') {
+            return html`
+                ${this._renderItemMetas(itemObj)}
+
+                <div class="${this.utils.cls('_configs')}">
+                    ${itemObj.docblocks
+                        .slice(1)
+                        .map(
+                            (configObj) => html`
+                                ${this._renderItemConfig(configObj)}
+                            `,
+                        )}
+                </div>
+            `;
+        }
+
+        // default item
+        return html`
+            ${this._renderItemMetas(itemObj)}
             ${itemObj.example
                 ? html`
                       <div class="${this.utils.cls('_examples')}">
@@ -326,6 +480,7 @@ export default class SDocComponent extends __SLitComponent {
                                           >
                                               ${paramObj.name}
                                           </div>
+                                          ${this._renderItemDefault(paramObj)}
                                           <div
                                               class="${this.utils.cls(
                                                   '_param-type',
@@ -333,13 +488,6 @@ export default class SDocComponent extends __SLitComponent {
                                           >
                                               ${paramObj.type?.raw ??
                                               paramObj.type}
-                                          </div>
-                                          <div
-                                              class="${this.utils.cls(
-                                                  '_param-default',
-                                              )}"
-                                          >
-                                              ${paramObj.default}
                                           </div>
                                       </div>
                                       <p
@@ -364,7 +512,15 @@ export default class SDocComponent extends __SLitComponent {
                 ${Object.keys(categories).map((categoryId, i) => {
                     const categoryObj = categories[categoryId];
                     if (!categoryObj.items && !categoryObj.children) {
-                        this._loadItems(categoryObj);
+                        if (!this._firstCategory) {
+                            this._loadItems(categoryObj, true);
+                        } else {
+                            this._loadItems(categoryObj);
+                        }
+                    }
+                    if (!this._firstCategory) {
+                        categoryObj.selected = true;
+                        this._firstCategory = categoryObj;
                     }
                     return html`
                         <li
@@ -418,7 +574,7 @@ export default class SDocComponent extends __SLitComponent {
                     <input
                         type="text"
                         name="search"
-                        placeholder="${this.props.i18n.search} (CTRL+D)"
+                        placeholder="${this.props.i18n.search} (CTRL+S)"
                         class="${this.utils.cls('_search-input')}"
                         @keyup=${(e) => {
                             this._search(e.target.value);
@@ -431,7 +587,44 @@ export default class SDocComponent extends __SLitComponent {
                 ${this._renderCategories(this._categories)}
             </div>
             <div class="${this.utils.cls('_content')}">
-                ${this._item ? html` ${this._renderItem(this._item)} ` : ''}
+                <div class="${this.utils.cls('_body')}">
+                    ${this._item ? html` ${this._renderItem(this._item)} ` : ''}
+                </div>
+                <div class="${this.utils.cls('_toolbar')}">
+                    ${this.props.features.fullscreen
+                        ? html`
+                              <button
+                                  class="${this.utils.cls('_fullscreen-btn')}"
+                                  title="${this.props.i18n
+                                      .toggleFullscreen} (CTRL+D"
+                                  @click=${(e) => {
+                                      e.stopPropagation();
+                                      this._toggleFullscreen();
+                                  }}
+                              >
+                                  ${this._status.fullscreen
+                                      ? html`
+                                            ${unsafeHTML(
+                                                this.props.icons.exitFullscreen,
+                                            )}
+                                        `
+                                      : html`
+                                            ${unsafeHTML(
+                                                this.props.icons
+                                                    .enterFullscreen,
+                                            )}
+                                        `}
+                              </button>
+                          `
+                        : ''}
+                </div>
+                ${this._status.loading
+                    ? html`
+                          <div class="${this.utils.cls('_loading')}">
+                              ${unsafeHTML(this.props.loaderSvg)}
+                          </div>
+                      `
+                    : ''}
             </div>
         `;
     }

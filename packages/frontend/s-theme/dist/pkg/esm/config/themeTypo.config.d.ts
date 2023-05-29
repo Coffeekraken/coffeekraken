@@ -1,3 +1,4 @@
+
 export declare function preprocess(api: any): any;
 declare const _default: (api: any) => {
     
@@ -119,7 +120,7 @@ declare const _default: (api: any) => {
             fontSize: number;
             lineHeight: number;
             maxWidth: string;
-            opacity: number;
+            color: string[];
         };
         rhythmVertical: {
             marginBottom: number;

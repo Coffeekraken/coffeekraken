@@ -1,6 +1,15 @@
 export default function (api) {
     return {
         categories: {
+            doc: {
+                title: 'Doc',
+                description:
+                    'All the documentations like install, get started, etc...',
+                filters: {
+                    type: 'Markdown',
+                    id: '@coffeekraken.s-postcss-sugar-plugin.**',
+                },
+            },
             helperClasses: {
                 title: 'Helper classes',
                 description: 'All the available helper classes',
@@ -31,6 +40,22 @@ export default function (api) {
                 filters: {
                     type: 'PostcssMixin',
                     id: '/@coffeekraken.s-postcss-sugar-plugin..*.ui..*(?<!.classes)$/',
+                },
+            },
+            theme: {
+                title: 'Theme',
+                description: 'All the available theme configs',
+                filters: {
+                    type: 'Config',
+                    id: '@coffeekraken.s-theme.**',
+                },
+            },
+            configs: {
+                title: 'Configs',
+                description: 'All the available configs',
+                filters: {
+                    type: 'Config',
+                    id: '@coffeekraken.s-postcss-sugar-plugin.**',
                 },
             },
         },

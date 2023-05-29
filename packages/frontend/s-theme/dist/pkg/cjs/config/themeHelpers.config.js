@@ -1,4 +1,17 @@
 "use strict";
+/**
+ * @name                    themeHelpers
+ * @as                      Helpers
+ * @namespace               config
+ * @type                    Config
+ * @plateform               node
+ * @status                  beta
+ *
+ * Specify the @coffeekraken/s-theme helpers available configurations
+ *
+ * @since           2.0.0
+ * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+ */
 Object.defineProperty(exports, "__esModule", { value: true });
 function default_1(api) {
     return {
@@ -76,4 +89,4 @@ function default_1(api) {
     };
 }
 exports.default = default_1;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7O0FBQUEsbUJBQXlCLEdBQUc7SUFDeEIsT0FBTztRQUNIOzs7Ozs7Ozs7O1dBVUc7UUFDSCxNQUFNLEVBQUUsQ0FBQyxTQUFTLEVBQUUsUUFBUSxFQUFFLFNBQVMsQ0FBQztRQUN4QyxRQUFRLEVBQUU7WUFDTjs7Ozs7Ozs7Ozs7ZUFXRztZQUNILE9BQU8sRUFBRSxVQUFVO1NBQ3RCO1FBQ0QsUUFBUSxFQUFFO1lBQ047Ozs7Ozs7Ozs7O2VBV0c7WUFDSCxPQUFPLEVBQUUsR0FBRztTQUNmO1FBQ0QsUUFBUSxFQUFFO1lBQ047Ozs7Ozs7Ozs7O2VBV0c7WUFDSCxLQUFLLEVBQUUsRUFBRTtTQUNaO1FBQ0QsS0FBSyxFQUFFO1lBQ0g7Ozs7Ozs7Ozs7ZUFVRztZQUNILEtBQUssRUFBRSxFQUFFO1NBQ1o7S0FDSixDQUFDO0FBQ04sQ0FBQztBQTFFRCw0QkEwRUMifQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQTs7Ozs7Ozs7Ozs7O0dBWUc7O0FBRUgsbUJBQXlCLEdBQUc7SUFDeEIsT0FBTztRQUNIOzs7Ozs7Ozs7O1dBVUc7UUFDSCxNQUFNLEVBQUUsQ0FBQyxTQUFTLEVBQUUsUUFBUSxFQUFFLFNBQVMsQ0FBQztRQUN4QyxRQUFRLEVBQUU7WUFDTjs7Ozs7Ozs7Ozs7ZUFXRztZQUNILE9BQU8sRUFBRSxVQUFVO1NBQ3RCO1FBQ0QsUUFBUSxFQUFFO1lBQ047Ozs7Ozs7Ozs7O2VBV0c7WUFDSCxPQUFPLEVBQUUsR0FBRztTQUNmO1FBQ0QsUUFBUSxFQUFFO1lBQ047Ozs7Ozs7Ozs7O2VBV0c7WUFDSCxLQUFLLEVBQUUsRUFBRTtTQUNaO1FBQ0QsS0FBSyxFQUFFO1lBQ0g7Ozs7Ozs7Ozs7ZUFVRztZQUNILEtBQUssRUFBRSxFQUFFO1NBQ1o7S0FDSixDQUFDO0FBQ04sQ0FBQztBQTFFRCw0QkEwRUMifQ==

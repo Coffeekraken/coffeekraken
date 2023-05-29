@@ -48,9 +48,7 @@ import __ogTransformer from './transformers/og';
  * @example         js
  * import SMarkdownBuilder from '@coffeekraken/s-postcss-builder';
  * const builder = new SMarkdownBuilder({
- *      markdownBuilder: {
- *          // settings here...
- *      }
+ *      // settings here...
  * });
  * await builder.build({
  *      inPath: 'my-cool-file.md',
@@ -212,7 +210,7 @@ export default class SMarkdownBuilder extends __SBuilder {
                 for (let i = 0; i < params.preset.length; i++) {
                     const preset = params.preset[i];
 
-                    if (this.settings.log.preset) {
+                    if (this.settings.log?.preset) {
                         console.log(
                             `<cyan>[preset]</cyan> Start "<yellow>${preset}</yellow>" preset markdown build`,
                         );
@@ -332,7 +330,7 @@ export default class SMarkdownBuilder extends __SBuilder {
                         __path.relative(process.cwd(), sourceObj.outDir) || '.';
                 }
 
-                if (this.settings.log.summary) {
+                if (this.settings.log?.summary) {
                     console.log(
                         `<yellow>[build]</yellow> Starting markdown Build`,
                     );
@@ -344,7 +342,7 @@ export default class SMarkdownBuilder extends __SBuilder {
                         )}</cyan>`,
                     );
 
-                    if (sourceObj.outRelDir) {
+                    if (sourceObj.outRelDir && this.settings.save) {
                         console.log(
                             `<yellow>○</yellow> Output      : <cyan>${sourceObj.outRelDir}</cyan>`,
                         );
@@ -446,8 +444,8 @@ export default class SMarkdownBuilder extends __SBuilder {
                             finalFileHash
                     ) {
                         if (
-                            this.settings.log.cache ||
-                            this.settings.log.verbose
+                            this.settings.log?.cache ||
+                            this.settings.log?.verbose
                         ) {
                             console.log(
                                 `<magenta>[cache]</magenta> No need to rebuild the file "<cyan>${__path

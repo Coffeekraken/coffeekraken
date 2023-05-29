@@ -1,3 +1,17 @@
+/**
+ * @name                    themeMedia
+ * @as                      Medias
+ * @namespace               config
+ * @type                    Config
+ * @plateform               node
+ * @status                  beta
+ *
+ * Specify the @coffeekraken/s-theme medias available configurations
+ *
+ * @since           2.0.0
+ * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+ */
+
 export default function (api) {
     return {
         /**

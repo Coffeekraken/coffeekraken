@@ -25,6 +25,7 @@
         /* border-radius: sugar.border.radius(); */
         /* backdrop-filter: blur(10px); */
         border-bottom: solid 1px sugar.color(main, --alpha 0.1);
+        @sugar.border.radius;
 
         /* @sugar.theme dark {
             background: linear-gradient(

@@ -88,7 +88,8 @@ export default function __splitLetters(
 ): HTMLElement {
     settings = {
         tag: 'span',
-        class: 's-split-litters',
+        class: 's-split-letters',
+        letterClass: 's-split-letter',
         ...settings,
     };
 
@@ -100,10 +101,37 @@ export default function __splitLetters(
 
     elm.classList.add(settings.class);
 
+    function process(nodes) {
+        nodes.forEach((node) => {
+            if (node.childNodes.length) {
+                process(node.childNodes);
+            }
+
+            if (node.nodeName === '#text') {
+                const newValue = node.textContent
+                    .split('')
+                    .map((letter) => {
+                        return `<${settings.tag} class="${settings.letterClass}">${letter}</span>`;
+                    })
+                    .join('');
+                const $wrap = document.createElement(settings.tag);
+                $wrap.innerHTML = newValue;
+                $wrap.classList.add(settings.class);
+                node.after($wrap);
+                node.remove();
+            }
+        });
+    }
+    process(elm.childNodes);
+
+    return elm;
+
     // wrap each characters inside two spans
     let words = string.match(
         /<\s*(\w+\b)(?:(?!<\s*\/\s*\1\b)[\s\S])*<\s*\/\s*\1\s*>|\S+/g,
     );
+
+    _console.log(words);
 
     // split words
     words = words

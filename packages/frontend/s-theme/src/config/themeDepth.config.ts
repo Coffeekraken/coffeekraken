@@ -1,10 +1,24 @@
+/**
+ * @name                    themeDepth
+ * @as                      Depths
+ * @namespace               config
+ * @type                    Config
+ * @plateform               node
+ * @status                  beta
+ *
+ * Specify the @coffeekraken/s-theme depth available configurations
+ *
+ * @since           2.0.0
+ * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+ */
+
 export default function (api) {
     return {
         /**
          * @name                default
          * @namespace           config.themeDepth
          * @type                String
-         * @default             [theme.depth.0]
+         * @default             theme.depth.0
          *
          * Specify the default depth for your theme
          *

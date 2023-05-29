@@ -27,6 +27,34 @@ export default class SDocComponentInterface extends __SInterface {
                 description: 'Specify the doc endpoints url',
                 default: __SSugarConfig.get('doc.endpoints'),
             },
+            loaderSvg: {
+                type: 'String',
+                description: 'Specify an svg to use as the loader',
+                default: `<svg class="s-logo s-logo--coffeekraken-picto" viewBox="0 0 299 229" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M102.5 55.3151V202.802H191V229H71V29H142V55.3151H102.5Z" fill="white"/>
+                        <path d="M265.5 26.3151V202.802H227.5V229H298.5V0H227.5V26.3151H265.5Z" fill="white"/>
+                        <path d="M31.5 109.315V166.802H31V193H0V83H71V109.315H31.5Z" fill="white"/>
+                        <path d="M173 144.5C173 159.136 162.703 171 150 171C137.297 171 127 159.136 127 144.5C127 129.864 137.297 118 150 118C167.5 118 173 129.864 173 144.5Z" fill="#FEBD0F"/>
+                        <path d="M240 144.5C240 159.136 229.703 171 217 171C204.297 171 194 159.136 194 144.5C194 129.864 200.5 118 217 118C229.703 118 240 129.864 240 144.5Z" fill="#FEBD0F"/>
+                        </svg>
+                        `,
+            },
+            features: {
+                type: 'Object',
+                description: 'Specify which feature are available like "fullscreen", etc...',
+                default: {
+                    fullscreen: true,
+                },
+            },
+            icons: {
+                type: 'Object',
+                description: 'Specify some icons for the UI',
+                default: {
+                    file: '<i class="fa-regular fa-file"></i>',
+                    enterFullscreen: '<i class="fa-solid fa-expand"></i>',
+                    exitFullscreen: '<i class="fa-solid fa-compress"></i>',
+                },
+            },
             i18n: {
                 type: 'Object',
                 description: 'Specify all the UI translations',
@@ -43,9 +71,12 @@ export default class SDocComponentInterface extends __SInterface {
                     search: __i18n('Search documentation', {
                         id: 's-doc.search',
                     }),
+                    toggleFullscreen: __i18n('Toggle fullscreen', {
+                        id: 's-doc.fullscreen.toggle',
+                    }),
                 },
             },
         };
     }
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sRUFBRSxNQUFNLEVBQUUsTUFBTSxzQkFBc0IsQ0FBQztBQUM5QyxPQUFPLFlBQVksTUFBTSwyQkFBMkIsQ0FBQztBQUNyRCxPQUFPLGNBQWMsTUFBTSw4QkFBOEIsQ0FBQztBQUUxRDs7Ozs7Ozs7Ozs7Ozs7Ozs7R0FpQkc7QUFFSCxNQUFNLENBQUMsT0FBTyxPQUFPLHNCQUF1QixTQUFRLFlBQVk7SUFDNUQsTUFBTSxLQUFLLFdBQVc7UUFDbEIsT0FBTztZQUNILFNBQVMsRUFBRTtnQkFDUCxJQUFJLEVBQUUsUUFBUTtnQkFDZCxXQUFXLEVBQUUsK0JBQStCO2dCQUM1QyxPQUFPLEVBQUUsY0FBYyxDQUFDLEdBQUcsQ0FBQyxlQUFlLENBQUM7YUFDL0M7WUFDRCxJQUFJLEVBQUU7Z0JBQ0YsSUFBSSxFQUFFLFFBQVE7Z0JBQ2QsV0FBVyxFQUFFLGlDQUFpQztnQkFDOUMsT0FBTyxFQUFFO29CQUNMLGFBQWEsRUFBRSxNQUFNLENBQUMsVUFBVSxFQUFFO3dCQUM5QixFQUFFLEVBQUUsc0JBQXNCO3FCQUM3QixDQUFDO29CQUNGLFdBQVcsRUFBRSxNQUFNLENBQUMsWUFBWSxFQUFFO3dCQUM5QixFQUFFLEVBQUUsb0JBQW9CO3FCQUMzQixDQUFDO29CQUNGLGFBQWEsRUFBRSxNQUFNLENBQUMsVUFBVSxFQUFFO3dCQUM5QixFQUFFLEVBQUUsc0JBQXNCO3FCQUM3QixDQUFDO29CQUNGLE1BQU0sRUFBRSxNQUFNLENBQUMsc0JBQXNCLEVBQUU7d0JBQ25DLEVBQUUsRUFBRSxjQUFjO3FCQUNyQixDQUFDO2lCQUNMO2FBQ0o7U0FDSixDQUFDO0lBQ04sQ0FBQztDQUNKIn0=
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sRUFBRSxNQUFNLEVBQUUsTUFBTSxzQkFBc0IsQ0FBQztBQUM5QyxPQUFPLFlBQVksTUFBTSwyQkFBMkIsQ0FBQztBQUNyRCxPQUFPLGNBQWMsTUFBTSw4QkFBOEIsQ0FBQztBQUUxRDs7Ozs7Ozs7Ozs7Ozs7Ozs7R0FpQkc7QUFFSCxNQUFNLENBQUMsT0FBTyxPQUFPLHNCQUF1QixTQUFRLFlBQVk7SUFDNUQsTUFBTSxLQUFLLFdBQVc7UUFDbEIsT0FBTztZQUNILFNBQVMsRUFBRTtnQkFDUCxJQUFJLEVBQUUsUUFBUTtnQkFDZCxXQUFXLEVBQUUsK0JBQStCO2dCQUM1QyxPQUFPLEVBQUUsY0FBYyxDQUFDLEdBQUcsQ0FBQyxlQUFlLENBQUM7YUFDL0M7WUFDRCxTQUFTLEVBQUU7Z0JBQ1AsSUFBSSxFQUFFLFFBQVE7Z0JBQ2QsV0FBVyxFQUFFLHFDQUFxQztnQkFDbEQsT0FBTyxFQUFFOzs7Ozs7O3lCQU9BO2FBQ1o7WUFDRCxRQUFRLEVBQUU7Z0JBQ04sSUFBSSxFQUFFLFFBQVE7Z0JBQ2QsV0FBVyxFQUNQLCtEQUErRDtnQkFDbkUsT0FBTyxFQUFFO29CQUNMLFVBQVUsRUFBRSxJQUFJO2lCQUNuQjthQUNKO1lBQ0QsS0FBSyxFQUFFO2dCQUNILElBQUksRUFBRSxRQUFRO2dCQUNkLFdBQVcsRUFBRSwrQkFBK0I7Z0JBQzVDLE9BQU8sRUFBRTtvQkFDTCxJQUFJLEVBQUUsb0NBQW9DO29CQUMxQyxlQUFlLEVBQUUsb0NBQW9DO29CQUNyRCxjQUFjLEVBQUUsc0NBQXNDO2lCQUN6RDthQUNKO1lBQ0QsSUFBSSxFQUFFO2dCQUNGLElBQUksRUFBRSxRQUFRO2dCQUNkLFdBQVcsRUFBRSxpQ0FBaUM7Z0JBQzlDLE9BQU8sRUFBRTtvQkFDTCxhQUFhLEVBQUUsTUFBTSxDQUFDLFVBQVUsRUFBRTt3QkFDOUIsRUFBRSxFQUFFLHNCQUFzQjtxQkFDN0IsQ0FBQztvQkFDRixXQUFXLEVBQUUsTUFBTSxDQUFDLFlBQVksRUFBRTt3QkFDOUIsRUFBRSxFQUFFLG9CQUFvQjtxQkFDM0IsQ0FBQztvQkFDRixhQUFhLEVBQUUsTUFBTSxDQUFDLFVBQVUsRUFBRTt3QkFDOUIsRUFBRSxFQUFFLHNCQUFzQjtxQkFDN0IsQ0FBQztvQkFDRixNQUFNLEVBQUUsTUFBTSxDQUFDLHNCQUFzQixFQUFFO3dCQUNuQyxFQUFFLEVBQUUsY0FBYztxQkFDckIsQ0FBQztvQkFDRixnQkFBZ0IsRUFBRSxNQUFNLENBQUMsbUJBQW1CLEVBQUU7d0JBQzFDLEVBQUUsRUFBRSx5QkFBeUI7cUJBQ2hDLENBQUM7aUJBQ0w7YUFDSjtTQUNKLENBQUM7SUFDTixDQUFDO0NBQ0oifQ==

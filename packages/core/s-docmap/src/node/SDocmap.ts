@@ -561,7 +561,7 @@ class SDocmap extends __SClass implements ISDocmap {
                 }
 
                 if (itemMatch) {
-                    result.items[item.namespace] = item;
+                    result.items[item.id] = item;
                 }
             }
 

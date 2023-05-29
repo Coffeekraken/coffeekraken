@@ -1,3 +1,4 @@
+
 export default function (api: any): {
     family: {
         default: {
@@ -51,7 +52,11 @@ export default function (api: any): {
         
         readonly 10: any;
         
+        readonly 15: any;
+        
         readonly 20: any;
+        
+        readonly 25: any;
         
         readonly 30: any;
         

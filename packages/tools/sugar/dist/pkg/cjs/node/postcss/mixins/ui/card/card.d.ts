@@ -1,6 +1,11 @@
 import __SInterface from '@coffeekraken/s-interface';
 declare class postcssUiCardInterface extends __SInterface {
     static get _definition(): {
+        direction: {
+            type: string;
+            values: string[];
+            default: string;
+        };
         scope: {
             type: {
                 type: string;
@@ -12,7 +17,8 @@ declare class postcssUiCardInterface extends __SInterface {
     };
 }
 export interface IPostcssUiCardParams {
-    scope: ('bare' | 'lnf')[];
+    direction: 'vertical' | 'horizontal' | 'vertical-reverse' | 'horizontal-reverse';
+    scope: ('bare' | 'lnf' | 'direction')[];
 }
 export { postcssUiCardInterface as interface };
 

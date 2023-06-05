@@ -208,6 +208,7 @@ export interface ISThemeConfig {
 export interface ISThemeLoopOnColorsColor {
     name: string;
     schema: string;
+    schemaDash: string;
     value: ISThemeColor | ISThemeColorModifiers;
 }
 
@@ -1135,7 +1136,7 @@ export default class SThemeBase extends __SEventEmitter {
                                     `${this.compressVarName(
                                         `${fromVariable}-saturation-offset`,
                                     )}: var(${this.compressVarName(
-                                        `${toVariable}-${colorObj.schema}-saturation-offset`,
+                                        `${toVariable}-${colorObj.schemaDash}-saturation-offset`,
                                     )}, 0);`,
                                 );
                                 result.properties[
@@ -1143,13 +1144,13 @@ export default class SThemeBase extends __SEventEmitter {
                                         `${fromVariable}-saturation-offset`,
                                     )}`
                                 ] = `var(${this.compressVarName(
-                                    `${toVariable}-${colorObj.schema}-saturation-offset`,
+                                    `${toVariable}-${colorObj.schemaDash}-saturation-offset`,
                                 )}, 0)`;
                                 result.vars.push(
                                     `${this.compressVarName(
                                         `${fromVariable}-lightness-offset`,
                                     )}: var(${this.compressVarName(
-                                        `${toVariable}-${colorObj.schema}-lightness-offset`,
+                                        `${toVariable}-${colorObj.schemaDash}-lightness-offset`,
                                     )}, 0);`,
                                 );
                                 result.properties[
@@ -1157,7 +1158,7 @@ export default class SThemeBase extends __SEventEmitter {
                                         `${fromVariable}-lightness-offset`,
                                     )}`
                                 ] = `var(${this.compressVarName(
-                                    `${toVariable}-${colorObj.schema}-lightness-offset`,
+                                    `${toVariable}-${colorObj.schemaDash}-lightness-offset`,
                                 )}, 0)`;
                                 result.vars.push(
                                     `${this.compressVarName(
@@ -1221,31 +1222,31 @@ export default class SThemeBase extends __SEventEmitter {
                             } else {
                                 result.vars.push(
                                     `${this.compressVarName(
-                                        `${fromVariable}-${colorObj.schema}-saturation-offset`,
+                                        `${fromVariable}-${colorObj.schemaDash}-saturation-offset`,
                                     )}: var(${this.compressVarName(
-                                        `${toVariable}-${colorObj.schema}-saturation-offset`,
+                                        `${toVariable}-${colorObj.schemaDash}-saturation-offset`,
                                     )}, 0);`,
                                 );
                                 result.properties[
                                     `${this.compressVarName(
-                                        `${fromVariable}-${colorObj.schema}-saturation-offset`,
+                                        `${fromVariable}-${colorObj.schemaDash}-saturation-offset`,
                                     )}`
                                 ] = `var(${this.compressVarName(
-                                    `${toVariable}-${colorObj.schema}-saturation-offset`,
+                                    `${toVariable}-${colorObj.schemaDash}-saturation-offset`,
                                 )}, 0)`;
                                 result.vars.push(
                                     `${this.compressVarName(
-                                        `${fromVariable}-${colorObj.schema}-lightness-offset`,
+                                        `${fromVariable}-${colorObj.schemaDash}-lightness-offset`,
                                     )}: var(${this.compressVarName(
-                                        `${toVariable}-${colorObj.schema}-lightness-offset`,
+                                        `${toVariable}-${colorObj.schemaDash}-lightness-offset`,
                                     )}, 0);`,
                                 );
                                 result.properties[
                                     `${this.compressVarName(
-                                        `${fromVariable}-${colorObj.schema}-lightness-offset`,
+                                        `${fromVariable}-${colorObj.schemaDash}-lightness-offset`,
                                     )}`
                                 ] = `var(${this.compressVarName(
-                                    `${toVariable}-${colorObj.schema}-lightness-offset`,
+                                    `${toVariable}-${colorObj.schemaDash}-lightness-offset`,
                                 )}, 0)`;
                                 result.vars.push(
                                     `${this.compressVarName(
@@ -2060,7 +2061,7 @@ export default class SThemeBase extends __SEventEmitter {
         let colorSchemaName = schema ?? '';
         let colorModifier = modifier ?? '';
 
-        if (colorSchemaName.match(/^--[a-z]+/)) {
+        if (colorSchemaName.match(/^--[a-zA-Z]+/)) {
             colorModifier = colorSchemaName;
             colorSchemaName = undefined;
         }
@@ -2088,9 +2089,8 @@ export default class SThemeBase extends __SEventEmitter {
 
                     let colorSchemaNameVar = `s-theme-color-${colorName}`;
                     if (colorSchemaName) {
-                        colorSchemaNameVar += `-${colorSchemaName}`;
+                        colorSchemaNameVar += `-${__dashCase(colorSchemaName)}`;
                     }
-
                     colorSchemaNameVar =
                         '--' + colorSchemaNameVar.replace(/-{2,999}/gm, '-');
 
@@ -2256,6 +2256,7 @@ export default class SThemeBase extends __SEventEmitter {
                 callback(<ISThemeLoopOnColorsColor>{
                     name: colorName,
                     schema: schemaName,
+                    schemaDash: __dashCase(schemaName),
                     value: {
                         variable: `--${__dashCase(
                             this.constructor.compressVarName(

@@ -3,6 +3,24 @@ import __SInterface from '@coffeekraken/s-interface';
 class postcssUiCardClassesInterface extends __SInterface {
     static get _definition() {
         return {
+            direction: {
+                type: {
+                    type: 'Array<String>',
+                    splitChars: [',', ' '],
+                },
+                values: [
+                    'vertical',
+                    'vertical-reverse',
+                    'horizontal',
+                    'horizontal-reverse',
+                ],
+                default: [
+                    'vertical',
+                    'vertical-reverse',
+                    'horizontal',
+                    'horizontal-reverse',
+                ],
+            },
             scope: {
                 type: {
                     type: 'Array<String>',
@@ -16,6 +34,12 @@ class postcssUiCardClassesInterface extends __SInterface {
 }
 
 export interface IPostcssUiCardClassesParams {
+    direction: (
+        | 'vertical'
+        | 'vertical-reverse'
+        | 'horizontal'
+        | 'horizontal-reverse'
+    )[];
     scope: ('bare' | 'lnf' | 'vr')[];
 }
 
@@ -33,6 +57,12 @@ export default function ({
     replaceWith: Function;
 }) {
     const finalParams: IPostcssUiCardClassesParams = {
+        direction: [
+            'vertical',
+            'vertical-reverse',
+            'horizontal',
+            'horizontal-reverse',
+        ],
         scope: ['bare', 'lnf'],
         ...params,
     };
@@ -130,6 +160,36 @@ export default function ({
                 type: 'CssClass',
             },
         );
+    }
+
+    if (finalParams.scope.includes('bare')) {
+        finalParams.direction.forEach((direction) => {
+            vars.comment(
+                `/**
+                * @name           .s-card--${direction}
+                * @namespace          sugar.ui.card
+                * @type           CssClass
+                * 
+                * This class represent a(n) "<s-color="accent">${direction}</s-color> card
+                * 
+                * @example        html
+                ${cardTpl({
+                    class: `s-card:${direction}`,
+                })}
+                * 
+                * @since    2.0.0
+                * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+            */`,
+            ).code(
+                `
+                .s-card--${direction} {
+                    @sugar.ui.card($direction: ${direction}, $scope: direction);
+                }`,
+                {
+                    type: 'CssClass',
+                },
+            );
+        });
     }
 
     if (finalParams.scope.includes('lnf')) {

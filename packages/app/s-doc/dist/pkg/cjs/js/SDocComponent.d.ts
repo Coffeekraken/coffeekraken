@@ -34,6 +34,7 @@ export default class SDocComponent extends __SLitComponent {
     _renderItemDefault(itemObj: any): any;
     _renderItemMetas(itemObj: any): any;
     _renderItemConfig(configObj: any): any;
+    _renderItemExamples(itemObj: any): any;
     _renderItem(itemObj: any): any;
     _renderCategories(categories: any): any;
     render(): import("lit-html").TemplateResult<1>;

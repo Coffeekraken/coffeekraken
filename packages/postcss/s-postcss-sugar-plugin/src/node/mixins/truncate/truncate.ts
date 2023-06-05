@@ -63,7 +63,7 @@ export default function ({
         -webkit-box-orient: vertical;
         -webkit-line-clamp: ${finalParams.lines};
         line-clamp: ${finalParams.lines};
-        overflow: hidden;
+        overflow: hidden;p
   `,
     ];
 

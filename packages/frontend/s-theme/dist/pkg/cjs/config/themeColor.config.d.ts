@@ -7,7 +7,7 @@ declare const _default: (api: any) => {
     
     accent: string;
     
-    complementary: string;
+    complementary: any;
     
     success: string;
     

@@ -116,6 +116,7 @@ export interface ISThemeConfig {
 export interface ISThemeLoopOnColorsColor {
     name: string;
     schema: string;
+    schemaDash: string;
     value: ISThemeColor | ISThemeColorModifiers;
 }
 export interface ISThemeLoopOnColorsCallback {

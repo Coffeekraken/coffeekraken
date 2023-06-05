@@ -11,12 +11,6 @@ body {
     width: 100vw;
 
     @sugar.lod theme {
-        /* --s-theme-color-main-h: 357;
-        --s-theme-color-main-s: 80;
-        --s-theme-color-main-l: 50; */
-
-        /* --s-theme-color-main-text-lightness-offset: 100; */
-
         background-color: sugar.color(main, background) !important;
 
         @sugar.theme (dark) {

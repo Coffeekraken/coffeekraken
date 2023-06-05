@@ -33,6 +33,7 @@ body:has(.s-doc-fullscreen) {
 
     &_explorer {
         flex-grow: 0;
+        flex-shrink: 0;
     }
 
     &_content {

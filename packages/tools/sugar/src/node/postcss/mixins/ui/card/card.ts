@@ -3,20 +3,35 @@ import __SInterface from '@coffeekraken/s-interface';
 class postcssUiCardInterface extends __SInterface {
     static get _definition() {
         return {
+            direction: {
+                type: 'String',
+                values: [
+                    'vertical',
+                    'horizontal',
+                    'vertical-reverse',
+                    'horizontal-reverse',
+                ],
+                default: 'vertical',
+            },
             scope: {
                 type: {
                     type: 'Array<String>',
                     splitChars: [',', ' '],
                 },
-                values: ['bare', 'lnf'],
-                default: ['bare', 'lnf'],
+                values: ['bare', 'lnf', 'direction'],
+                default: ['bare', 'lnf', 'direction'],
             },
         };
     }
 }
 
 export interface IPostcssUiCardParams {
-    scope: ('bare' | 'lnf')[];
+    direction:
+        | 'vertical'
+        | 'horizontal'
+        | 'vertical-reverse'
+        | 'horizontal-reverse';
+    scope: ('bare' | 'lnf' | 'direction')[];
 }
 
 export { postcssUiCardInterface as interface };
@@ -53,7 +68,8 @@ export default function ({
     replaceWith: Function;
 }) {
     const finalParams: IPostcssUiCardParams = {
-        scope: ['bare', 'lnf'],
+        direction: 'vertical',
+        scope: ['bare', 'lnf', 'direction'],
         ...params,
     };
 
@@ -67,49 +83,80 @@ export default function ({
             align-items: center;
 
             &.s-card--horizontal {
-                flex-direction: row;
-                max-width: none;
                 
-                .s-card_media {
-                    align-self: stretch;
-                    width: 50%;
-                }
-                .s-card_img {
-                    width: 100%;
-                    height: 100%;
-                    object-fit: cover;
-                }
-
-                @sugar.media mobile {
-                    flex-direction: column;
-                }
             }
             &.s-card--horizontal-reverse {
-                flex-direction: row-reverse;
-                max-width: none;
-
-                .s-card_media {
-                    align-self: stretch;
-                    width: 50%;
-                }
-                .s-card_img {
-                    width: 100%;
-                    height: 100%;
-                    object-fit: cover;
-                }
-
-                @sugar.media mobile {
-                    flex-direction: column-reverse;
-                }
+                
             }
             &.s-card--vertical-reverse {
-                flex-direction: column-reverse;
+                
             }
 
             .s-card_content {
                 align-items: unset;
             }
         `);
+    }
+
+    // direction
+    if (finalParams.scope.indexOf('direction') !== -1) {
+        switch (finalParams.direction) {
+            case 'horizontal-reverse':
+                vars.push(`
+                    flex-direction: row-reverse;
+                    max-width: none;
+
+                    .s-card_media {
+                        align-self: stretch;
+                        width: 50%;
+                    }
+                    .s-card_img {
+                        width: 100%;
+                        height: 100%;
+                        object-fit: cover;
+                    }
+
+                    @sugar.media mobile {
+                        flex-direction: column-reverse;
+                    }
+                `);
+                break;
+            case 'horizontal':
+                vars.push(`
+                    flex-direction: row;
+                    max-width: none;
+                    
+                    .s-card_media {
+                        align-self: stretch;
+                        width: 50%;
+                    }
+                    .s-card_img {
+                        width: 100%;
+                        height: 100%;
+                        object-fit: cover;
+                    }
+
+                    @sugar.media mobile {
+                        flex-direction: column;
+                    }
+            `);
+
+                break;
+            case 'vertical-reverse':
+                vars.push(`
+                    flex-direction: column-reverse;
+                    align-items: flex-start;
+                `);
+                break;
+            default:
+            case 'vertical':
+                vars.push(
+                    `
+                        align-items: flex-start;
+                    `,
+                );
+                break;
+        }
     }
 
     // lnf

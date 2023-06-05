@@ -26,7 +26,7 @@ export default (api) => {
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         get current() {
-            return api.config.themeBase.defaultColor;
+            return api.this[api.config.themeBase.defaultColor] ?? api.this.main;
         },
 
         /**
@@ -66,7 +66,7 @@ export default (api) => {
          * @since             2.0.0
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
-        complementary: '#5100ff',
+        complementary: ##,
 
         /**
          * @name                success

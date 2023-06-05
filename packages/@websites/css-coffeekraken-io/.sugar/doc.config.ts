@@ -10,6 +10,22 @@ export default function (api) {
                     id: '@coffeekraken.s-postcss-sugar-plugin.**',
                 },
             },
+            styleguideComponents: {
+                title: 'Styleguide components',
+                description: 'All the available components, etc...',
+                filters: {
+                    type: 'Styleguide',
+                    id: '/.*.sugar.style.ui.*/',
+                },
+            },
+            styleguideHelpers: {
+                title: 'Styleguide helpers',
+                description: 'All the available helpers, etc...',
+                filters: {
+                    type: 'Styleguide',
+                    id: '/.*.sugar.style.helpers.*/',
+                },
+            },
             helperClasses: {
                 title: 'Helper classes',
                 description: 'All the available helper classes',

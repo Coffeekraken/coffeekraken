@@ -8,13 +8,23 @@ const s_interface_1 = __importDefault(require("@coffeekraken/s-interface"));
 class postcssUiCardInterface extends s_interface_1.default {
     static get _definition() {
         return {
+            direction: {
+                type: 'String',
+                values: [
+                    'vertical',
+                    'horizontal',
+                    'vertical-reverse',
+                    'horizontal-reverse',
+                ],
+                default: 'vertical',
+            },
             scope: {
                 type: {
                     type: 'Array<String>',
                     splitChars: [',', ' '],
                 },
-                values: ['bare', 'lnf'],
-                default: ['bare', 'lnf'],
+                values: ['bare', 'lnf', 'direction'],
+                default: ['bare', 'lnf', 'direction'],
             },
         };
     }
@@ -40,7 +50,7 @@ exports.interface = postcssUiCardInterface;
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 function default_1({ params, atRule, sharedData, replaceWith, }) {
-    const finalParams = Object.assign({ scope: ['bare', 'lnf'] }, params);
+    const finalParams = Object.assign({ direction: 'vertical', scope: ['bare', 'lnf', 'direction'] }, params);
     const vars = [];
     // bare
     if (finalParams.scope.indexOf('bare') !== -1) {
@@ -50,49 +60,76 @@ function default_1({ params, atRule, sharedData, replaceWith, }) {
             align-items: center;
 
             &.s-card--horizontal {
-                flex-direction: row;
-                max-width: none;
                 
-                .s-card_media {
-                    align-self: stretch;
-                    width: 50%;
-                }
-                .s-card_img {
-                    width: 100%;
-                    height: 100%;
-                    object-fit: cover;
-                }
-
-                @sugar.media mobile {
-                    flex-direction: column;
-                }
             }
             &.s-card--horizontal-reverse {
-                flex-direction: row-reverse;
-                max-width: none;
-
-                .s-card_media {
-                    align-self: stretch;
-                    width: 50%;
-                }
-                .s-card_img {
-                    width: 100%;
-                    height: 100%;
-                    object-fit: cover;
-                }
-
-                @sugar.media mobile {
-                    flex-direction: column-reverse;
-                }
+                
             }
             &.s-card--vertical-reverse {
-                flex-direction: column-reverse;
+                
             }
 
             .s-card_content {
                 align-items: unset;
             }
         `);
+    }
+    // direction
+    if (finalParams.scope.indexOf('direction') !== -1) {
+        switch (finalParams.direction) {
+            case 'horizontal-reverse':
+                vars.push(`
+                    flex-direction: row-reverse;
+                    max-width: none;
+
+                    .s-card_media {
+                        align-self: stretch;
+                        width: 50%;
+                    }
+                    .s-card_img {
+                        width: 100%;
+                        height: 100%;
+                        object-fit: cover;
+                    }
+
+                    @sugar.media mobile {
+                        flex-direction: column-reverse;
+                    }
+                `);
+                break;
+            case 'horizontal':
+                vars.push(`
+                    flex-direction: row;
+                    max-width: none;
+                    
+                    .s-card_media {
+                        align-self: stretch;
+                        width: 50%;
+                    }
+                    .s-card_img {
+                        width: 100%;
+                        height: 100%;
+                        object-fit: cover;
+                    }
+
+                    @sugar.media mobile {
+                        flex-direction: column;
+                    }
+            `);
+                break;
+            case 'vertical-reverse':
+                vars.push(`
+                    flex-direction: column-reverse;
+                    align-items: flex-start;
+                `);
+                break;
+            default:
+            case 'vertical':
+                vars.push(`
+                        align-items: flex-start;
+                    `);
+                break;
+        }
     }
     // lnf
     if (finalParams.scope.includes('lnf')) {
@@ -125,4 +162,4 @@ function default_1({ params, atRule, sharedData, replaceWith, }) {
     return vars;
 }
 exports.default = default_1;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7OztBQUFBLDRFQUFxRDtBQUVyRCxNQUFNLHNCQUF1QixTQUFRLHFCQUFZO0lBQzdDLE1BQU0sS0FBSyxXQUFXO1FBQ2xCLE9BQU87WUFDSCxLQUFLLEVBQUU7Z0JBQ0gsSUFBSSxFQUFFO29CQUNGLElBQUksRUFBRSxlQUFlO29CQUNyQixVQUFVLEVBQUUsQ0FBQyxHQUFHLEVBQUUsR0FBRyxDQUFDO2lCQUN6QjtnQkFDRCxNQUFNLEVBQUUsQ0FBQyxNQUFNLEVBQUUsS0FBSyxDQUFDO2dCQUN2QixPQUFPLEVBQUUsQ0FBQyxNQUFNLEVBQUUsS0FBSyxDQUFDO2FBQzNCO1NBQ0osQ0FBQztJQUNOLENBQUM7Q0FDSjtBQU1rQywyQ0FBUztBQUU1Qzs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBa0JHO0FBRUgsbUJBQXlCLEVBQ3JCLE1BQU0sRUFDTixNQUFNLEVBQ04sVUFBVSxFQUNWLFdBQVcsR0FNZDtJQUNHLE1BQU0sV0FBVyxtQkFDYixLQUFLLEVBQUUsQ0FBQyxNQUFNLEVBQUUsS0FBSyxDQUFDLElBQ25CLE1BQU0sQ0FDWixDQUFDO0lBRUYsTUFBTSxJQUFJLEdBQWEsRUFBRSxDQUFDO0lBRTFCLE9BQU87SUFDUCxJQUFJLFdBQVcsQ0FBQyxLQUFLLENBQUMsT0FBTyxDQUFDLE1BQU0sQ0FBQyxLQUFLLENBQUMsQ0FBQyxFQUFFO1FBQzFDLElBQUksQ0FBQyxJQUFJLENBQUM7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztTQWdEVCxDQUFDLENBQUM7S0FDTjtJQUVELE1BQU07SUFDTixJQUFJLFdBQVcsQ0FBQyxLQUFLLENBQUMsUUFBUSxDQUFDLEtBQUssQ0FBQyxFQUFFO1FBQ25DLElBQUksQ0FBQyxJQUFJLENBQUM7Ozs7Ozs7Ozs7Ozs7Ozs7O1NBaUJULENBQUMsQ0FBQztLQUNOO0lBRUQsWUFBWTtJQUNaLElBQUksQ0FBQyxJQUFJLENBQUM7Ozs7O0tBS1QsQ0FBQyxDQUFDO0lBRUgsT0FBTyxJQUFJLENBQUM7QUFDaEIsQ0FBQztBQXRHRCw0QkFzR0MifQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7OztBQUFBLDRFQUFxRDtBQUVyRCxNQUFNLHNCQUF1QixTQUFRLHFCQUFZO0lBQzdDLE1BQU0sS0FBSyxXQUFXO1FBQ2xCLE9BQU87WUFDSCxTQUFTLEVBQUU7Z0JBQ1AsSUFBSSxFQUFFLFFBQVE7Z0JBQ2QsTUFBTSxFQUFFO29CQUNKLFVBQVU7b0JBQ1YsWUFBWTtvQkFDWixrQkFBa0I7b0JBQ2xCLG9CQUFvQjtpQkFDdkI7Z0JBQ0QsT0FBTyxFQUFFLFVBQVU7YUFDdEI7WUFDRCxLQUFLLEVBQUU7Z0JBQ0gsSUFBSSxFQUFFO29CQUNGLElBQUksRUFBRSxlQUFlO29CQUNyQixVQUFVLEVBQUUsQ0FBQyxHQUFHLEVBQUUsR0FBRyxDQUFDO2lCQUN6QjtnQkFDRCxNQUFNLEVBQUUsQ0FBQyxNQUFNLEVBQUUsS0FBSyxFQUFFLFdBQVcsQ0FBQztnQkFDcEMsT0FBTyxFQUFFLENBQUMsTUFBTSxFQUFFLEtBQUssRUFBRSxXQUFXLENBQUM7YUFDeEM7U0FDSixDQUFDO0lBQ04sQ0FBQztDQUNKO0FBV2tDLDJDQUFTO0FBRTVDOzs7Ozs7Ozs7Ozs7Ozs7Ozs7R0FrQkc7QUFFSCxtQkFBeUIsRUFDckIsTUFBTSxFQUNOLE1BQU0sRUFDTixVQUFVLEVBQ1YsV0FBVyxHQU1kO0lBQ0csTUFBTSxXQUFXLG1CQUNiLFNBQVMsRUFBRSxVQUFVLEVBQ3JCLEtBQUssRUFBRSxDQUFDLE1BQU0sRUFBRSxLQUFLLEVBQUUsV0FBVyxDQUFDLElBQ2hDLE1BQU0sQ0FDWixDQUFDO0lBRUYsTUFBTSxJQUFJLEdBQWEsRUFBRSxDQUFDO0lBRTFCLE9BQU87SUFDUCxJQUFJLFdBQVcsQ0FBQyxLQUFLLENBQUMsT0FBTyxDQUFDLE1BQU0sQ0FBQyxLQUFLLENBQUMsQ0FBQyxFQUFFO1FBQzFDLElBQUksQ0FBQyxJQUFJLENBQUM7Ozs7Ozs7Ozs7Ozs7Ozs7OztTQWtCVCxDQUFDLENBQUM7S0FDTjtJQUVELFlBQVk7SUFDWixJQUFJLFdBQVcsQ0FBQyxLQUFLLENBQUMsT0FBTyxDQUFDLFdBQVcsQ0FBQyxLQUFLLENBQUMsQ0FBQyxFQUFFO1FBQy9DLFFBQVEsV0FBVyxDQUFDLFNBQVMsRUFBRTtZQUMzQixLQUFLLG9CQUFvQjtnQkFDckIsSUFBSSxDQUFDLElBQUksQ0FBQzs7Ozs7Ozs7Ozs7Ozs7Ozs7aUJBaUJULENBQUMsQ0FBQztnQkFDSCxNQUFNO1lBQ1YsS0FBSyxZQUFZO2dCQUNiLElBQUksQ0FBQyxJQUFJLENBQUM7Ozs7Ozs7Ozs7Ozs7Ozs7O2FBaUJiLENBQUMsQ0FBQztnQkFFQyxNQUFNO1lBQ1YsS0FBSyxrQkFBa0I7Z0JBQ25CLElBQUksQ0FBQyxJQUFJLENBQUM7OztpQkFHVCxDQUFDLENBQUM7Z0JBQ0gsTUFBTTtZQUNWLFFBQVE7WUFDUixLQUFLLFVBQVU7Z0JBQ1gsSUFBSSxDQUFDLElBQUksQ0FDTDs7cUJBRUMsQ0FDSixDQUFDO2dCQUNGLE1BQU07U0FDYjtLQUNKO0lBRUQsTUFBTTtJQUNOLElBQUksV0FBVyxDQUFDLEtBQUssQ0FBQyxRQUFRLENBQUMsS0FBSyxDQUFDLEVBQUU7UUFDbkMsSUFBSSxDQUFDLElBQUksQ0FBQzs7Ozs7Ozs7Ozs7Ozs7Ozs7U0FpQlQsQ0FBQyxDQUFDO0tBQ047SUFFRCxZQUFZO0lBQ1osSUFBSSxDQUFDLElBQUksQ0FBQzs7Ozs7S0FLVCxDQUFDLENBQUM7SUFFSCxPQUFPLElBQUksQ0FBQztBQUNoQixDQUFDO0FBdElELDRCQXNJQyJ9

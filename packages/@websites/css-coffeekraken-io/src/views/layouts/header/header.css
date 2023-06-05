@@ -24,7 +24,6 @@
     @sugar.lod theme {
         /* border-radius: sugar.border.radius(); */
         /* backdrop-filter: blur(10px); */
-        border-bottom: solid 1px sugar.color(main, --alpha 0.1);
         @sugar.border.radius;
 
         /* @sugar.theme dark {
@@ -36,16 +35,10 @@
         } */
 
         body#homepage & {
-            border-bottom: solid 1px sugar.color(main, --alpha 0);
             transition: all sugar.theme(easing.default) 0.6s;
         }
 
         body.scrolled & {
-            border-bottom: solid 1px sugar.color(main, --alpha 0.1) !important;
-
-            @sugar.theme dark {
-                border-bottom: solid 1px sugar.color(main, --alpha 0.2) !important;
-            }
         }
     }
 

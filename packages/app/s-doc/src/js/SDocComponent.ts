@@ -1,5 +1,7 @@
 import __SLitComponent from '@coffeekraken/s-lit-component';
 
+import { __upperFirst } from '@coffeekraken/sugar/string';
+
 import { __escapeQueue } from '@coffeekraken/sugar/keyboard';
 import { __deepMerge } from '@coffeekraken/sugar/object';
 import { css, html, unsafeCSS } from 'lit';
@@ -401,6 +403,60 @@ export default class SDocComponent extends __SLitComponent {
         `;
     }
 
+    _renderItemExamples(itemObj: any): any {
+        return html`
+            ${itemObj.example
+                ? html`
+                      <div class="${this.utils.cls('_examples')}">
+                          <h2
+                              class="${this.utils.cls(
+                                  '_section-title',
+                                  's-typo--h2 s-mbe--30',
+                              )}"
+                          >
+                              ${this.props.i18n.examplesTitle}
+                          </h2>
+                          ${itemObj.example.map(
+                              (example) => html`
+                                  <div
+                                      class="${this.utils.cls(
+                                          '_example',
+                                          's-mbe--50',
+                                      )}"
+                                  >
+                                      <h3
+                                          class="${this.utils.cls(
+                                              '_example-title',
+                                              's-typo--h3 s-mbe--50',
+                                          )}"
+                                      >
+                                          ${__upperFirst(example.title ?? '')}
+                                      </h3>
+                                      ${itemObj.type.raw?.toLowerCase() ===
+                                      'styleguide'
+                                          ? html`<div
+                                                class="${this.utils.cls(
+                                                    '_example-preview',
+                                                    's-mbe--50',
+                                                )}"
+                                            >
+                                                ${unsafeHTML(example.code)}
+                                            </div>`
+                                          : ''}
+                                      <s-code-example bare=${this.props.bare}>
+                                          <code lang="${example.language}">
+                                              ${example.code}
+                                          </code>
+                                      </s-code-example>
+                                  </div>
+                              `,
+                          )}
+                      </div>
+                  `
+                : ''}
+        `;
+    }
+
     _renderItem(itemObj): any {
         // markdown support
         if (itemObj.docHtml) {
@@ -430,29 +486,7 @@ export default class SDocComponent extends __SLitComponent {
         // default item
         return html`
             ${this._renderItemMetas(itemObj)}
-            ${itemObj.example
-                ? html`
-                      <div class="${this.utils.cls('_examples')}">
-                          <h2
-                              class="${this.utils.cls(
-                                  '_section-title',
-                                  's-typo--h2 s-mbe--30',
-                              )}"
-                          >
-                              ${this.props.i18n.examplesTitle}
-                          </h2>
-                          ${itemObj.example.map(
-                              (example) => html`
-                                  <s-code-example bare=${this.props.bare}>
-                                      <code lang="${example.language}">
-                                          ${example.code}
-                                      </code>
-                                  </s-code-example>
-                              `,
-                          )}
-                      </div>
-                  `
-                : ''}
+            ${this._renderItemExamples(itemObj)}
             ${itemObj.param
                 ? html`
                       <div class="${this.utils.cls('_params')}">

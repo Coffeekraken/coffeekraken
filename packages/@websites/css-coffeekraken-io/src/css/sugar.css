@@ -2,8 +2,6 @@
 @sugar.init ($variant: dark);
 /* @sugar.theme.import ($variant: light); */
 
-/* @sugar.utils.removeprops 'border-radius' { */
-
 /* main sugar classes */
 @sugar.classes;
 

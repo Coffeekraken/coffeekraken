@@ -65,6 +65,7 @@ const viewsRelated = import.meta.globEager('../views/**/*.ts');
         };
 
         _slideIdx = 0;
+        _paused = false;
 
         constructor($slider) {
             this._$slider = $slider;
@@ -80,7 +81,17 @@ const viewsRelated = import.meta.globEager('../views/**/*.ts');
 
             this.goTo(this._slideIdx);
 
+            $slider.addEventListener('pointerover', (e) => {
+                this._paused = true;
+            });
+            $slider.addEventListener('pointerout', (e) => {
+                this._paused = false;
+            });
+
             setInterval(() => {
+                if (this._paused) {
+                    return;
+                }
                 this.next();
             }, 5000);
         }

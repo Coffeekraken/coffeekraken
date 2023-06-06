@@ -5,7 +5,7 @@
 
 
     <h1 class="s-typo:h1:bold s-mbe:30">
-        PostCSS
+        
     </h1>
 
     <h2 class="s-typo:h3:bold s-mbe:50 @mobile s-typo:h5">

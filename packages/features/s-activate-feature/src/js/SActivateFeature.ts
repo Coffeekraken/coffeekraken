@@ -234,8 +234,6 @@ export default class SActivateFeature extends __SFeature {
                         selector = parts[1];
                     }
 
-                    _console.log('parts', parts, selector);
-
                     const $toSpyElm = document.querySelector(selector);
 
                     if (!$toSpyElm) {

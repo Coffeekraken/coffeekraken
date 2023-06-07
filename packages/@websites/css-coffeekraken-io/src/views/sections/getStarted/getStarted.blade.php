@@ -10,21 +10,16 @@
                     Get started
                 </h2>
                 <p class="s-typo:h4 s-mbe:30">
-                    Install the PostCSS plugin and start working!
+                    Install the <span class="s-tc:complementary">PostCSS plugin</span><br />and start working!
                 </p>
                 <p class="s-typo:p s-mbe:30">
                     Our PostCSS plugin can be installed just as any other ones. For more informations about PostCSS, please refer to the official website.
                 </p>
-                <a href="https://postcss.org" class="s-btn s-color:complementary s-mbe:20" title="Discover PostCSS">
+                <a href="https://postcss.org" target="_blank" class="s-btn s-color:complementary s-mbe:20" title="Discover PostCSS">
                     <i class="s-icon:more"></i>
                     Discover PostCSS
                     <i class="s-icon:more"></i>
                 </a>
-                {{-- <a href="https://github.com/postcss/postcss#usage" class="s-btn s-color:accent" title="Setup PostCSS plugin">
-                    <i class="s-icon:more"></i>
-                        Setup PostCSS plugins
-                    <i class="s-icon:more"></i>
-                </a> --}}
             </div>
 
             <div>

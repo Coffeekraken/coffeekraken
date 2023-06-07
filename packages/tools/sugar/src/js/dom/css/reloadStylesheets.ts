@@ -36,7 +36,18 @@ export default function reloadStylesheets(
     for (var link of finalSettings.$root.querySelectorAll(
         'link[rel=stylesheet]',
     )) {
-        // @ts-ignore
-        link.href = link.href.replace(/\?.*|$/, '?' + Date.now());
+        // clone the link element
+        const $newLink = <HTMLLinkElement>link.cloneNode();
+        $newLink.href = (<HTMLLinkElement>link).href.replace(
+            /\?.*|$/,
+            '?' + Date.now(),
+        );
+        // listen when fully loaded
+        $newLink.addEventListener('load', (e) => {
+            // remove old css
+            link.remove?.();
+        });
+        // add the new link after the one to reload
+        link.after($newLink);
     }
 }

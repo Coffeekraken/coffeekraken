@@ -10,12 +10,13 @@
         {
             "stack": "sugarJson",
             "description": "Sugar.json processes like update, etc...",
+            "defaultAction": "search",
             "actions": {
-                "list": {
+                "search": {
                     "scope": "package",
                     "description": "Search and list for sugar.json files",
-                    "interface": "./dist/pkg/esm/node/interface/SSugarJsonListParamsInterface.js",
-                    "process": "./dist/pkg/esm/cli/list.cli.js"
+                    "interface": "./dist/pkg/esm/node/interface/SSugarJsonSearchParamsInterface.js",
+                    "process": "./dist/pkg/esm/cli/search.cli.js"
                 }
             }
         }

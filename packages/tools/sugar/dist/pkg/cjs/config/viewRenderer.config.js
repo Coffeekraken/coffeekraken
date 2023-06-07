@@ -22,21 +22,32 @@ function default_1(api) {
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         get rootDirs() {
-            var _a, _b;
-            if (api.config.viewRenderer.defaultEngine === 'twig') {
-                return [
-                    (0, path_1.__packageRootDir)(),
-                    ...((_a = api.parent.rootDirs) !== null && _a !== void 0 ? _a : []),
-                    `${path_2.default.resolve((0, path_1.__packageRootDir)((0, fs_1.__dirname)()), 'src/views/twig')}`,
-                ];
-            }
+            var _a;
             return [
                 (0, path_1.__packageRootDir)(),
-                ...((_b = api.parent.rootDirs) !== null && _b !== void 0 ? _b : []),
-                `${path_2.default.resolve((0, path_1.__packageRootDir)((0, fs_1.__dirname)()), 'src/views/blade')}`,
+                ...((_a = api.parent.rootDirs) !== null && _a !== void 0 ? _a : []),
+                `${path_2.default.resolve((0, path_1.__packageRootDir)((0, fs_1.__dirname)()), 'src/views/twig')}`,
             ];
+            // if (api.config.viewRenderer.defaultEngine === 'twig') {
+            //     return [
+            //         __packageRootDir(),
+            //         ...(api.parent.rootDirs ?? []),
+            //         `${__path.resolve(
+            //             __packageRootDir(__dirname()),
+            //             'src/views/twig',
+            //         )}`,
+            //     ];
+            // }
+            // return [
+            //     __packageRootDir(),
+            //     ...(api.parent.rootDirs ?? []),
+            //     `${__path.resolve(
+            //         __packageRootDir(__dirname()),
+            //         'src/views/blade',
+            //     )}`,
+            // ];
         },
     };
 }
 exports.default = default_1;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7O0FBQUEsK0NBQW1EO0FBQ25ELG1EQUE0RDtBQUM1RCxnREFBMEI7QUFFMUIsbUJBQXlCLEdBQUc7SUFDeEIsSUFBSSxHQUFHLENBQUMsR0FBRyxDQUFDLFFBQVEsS0FBSyxNQUFNO1FBQUUsT0FBTztJQUV4QyxPQUFPO1FBQ0g7Ozs7Ozs7Ozs7V0FVRztRQUNILElBQUksUUFBUTs7WUFDUixJQUFJLEdBQUcsQ0FBQyxNQUFNLENBQUMsWUFBWSxDQUFDLGFBQWEsS0FBSyxNQUFNLEVBQUU7Z0JBQ2xELE9BQU87b0JBQ0gsSUFBQSx1QkFBZ0IsR0FBRTtvQkFDbEIsR0FBRyxDQUFDLE1BQUEsR0FBRyxDQUFDLE1BQU0sQ0FBQyxRQUFRLG1DQUFJLEVBQUUsQ0FBQztvQkFDOUIsR0FBRyxjQUFNLENBQUMsT0FBTyxDQUNiLElBQUEsdUJBQWdCLEVBQUMsSUFBQSxjQUFTLEdBQUUsQ0FBQyxFQUM3QixnQkFBZ0IsQ0FDbkIsRUFBRTtpQkFDTixDQUFDO2FBQ0w7WUFDRCxPQUFPO2dCQUNILElBQUEsdUJBQWdCLEdBQUU7Z0JBQ2xCLEdBQUcsQ0FBQyxNQUFBLEdBQUcsQ0FBQyxNQUFNLENBQUMsUUFBUSxtQ0FBSSxFQUFFLENBQUM7Z0JBQzlCLEdBQUcsY0FBTSxDQUFDLE9BQU8sQ0FDYixJQUFBLHVCQUFnQixFQUFDLElBQUEsY0FBUyxHQUFFLENBQUMsRUFDN0IsaUJBQWlCLENBQ3BCLEVBQUU7YUFDTixDQUFDO1FBQ04sQ0FBQztLQUNKLENBQUM7QUFDTixDQUFDO0FBcENELDRCQW9DQyJ9
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7O0FBQUEsK0NBQW1EO0FBQ25ELG1EQUE0RDtBQUM1RCxnREFBMEI7QUFFMUIsbUJBQXlCLEdBQUc7SUFDeEIsSUFBSSxHQUFHLENBQUMsR0FBRyxDQUFDLFFBQVEsS0FBSyxNQUFNO1FBQUUsT0FBTztJQUV4QyxPQUFPO1FBQ0g7Ozs7Ozs7Ozs7V0FVRztRQUNILElBQUksUUFBUTs7WUFDUixPQUFPO2dCQUNILElBQUEsdUJBQWdCLEdBQUU7Z0JBQ2xCLEdBQUcsQ0FBQyxNQUFBLEdBQUcsQ0FBQyxNQUFNLENBQUMsUUFBUSxtQ0FBSSxFQUFFLENBQUM7Z0JBQzlCLEdBQUcsY0FBTSxDQUFDLE9BQU8sQ0FDYixJQUFBLHVCQUFnQixFQUFDLElBQUEsY0FBUyxHQUFFLENBQUMsRUFDN0IsZ0JBQWdCLENBQ25CLEVBQUU7YUFDTixDQUFDO1lBRUYsMERBQTBEO1lBQzFELGVBQWU7WUFDZiw4QkFBOEI7WUFDOUIsMENBQTBDO1lBQzFDLDZCQUE2QjtZQUM3Qiw2Q0FBNkM7WUFDN0MsZ0NBQWdDO1lBQ2hDLGVBQWU7WUFDZixTQUFTO1lBQ1QsSUFBSTtZQUNKLFdBQVc7WUFDWCwwQkFBMEI7WUFDMUIsc0NBQXNDO1lBQ3RDLHlCQUF5QjtZQUN6Qix5Q0FBeUM7WUFDekMsNkJBQTZCO1lBQzdCLFdBQVc7WUFDWCxLQUFLO1FBQ1QsQ0FBQztLQUNKLENBQUM7QUFDTixDQUFDO0FBN0NELDRCQTZDQyJ9

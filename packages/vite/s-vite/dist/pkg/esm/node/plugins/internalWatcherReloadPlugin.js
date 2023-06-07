@@ -13,7 +13,6 @@ export default (config = {}) => ({
         server: { watch: { disableGlobbing: false, followSymlinks: true } },
     }),
     handleHotUpdate(api) {
-        // console.log('___UP', api);
         // handle only css reload
         if (!api.file.match(/\.css$/) || !api.file.match(/\/src/)) {
             return;
@@ -38,59 +37,17 @@ export default (config = {}) => ({
                 type: 'custom',
                 event: 'sugar.update.css',
                 data: {
-                    filePath: api.file,
-                    path: servePath,
+                    srcPath: api.file,
+                    srcRelPath: api.file.replace(`${__packageRootDir()}/`, ''),
+                    distPath: api.file.replace('/src/', '/dist/'),
+                    distRelPath: api.file
+                        .replace(`${__packageRootDir()}/`, '')
+                        .replace('/src/', '/dist/'),
+                    url: servePath,
                 },
             });
         }, 100);
-        // server.ws.send({
-        //   type: 'custom',
-        //   event: 'special-update',
-        //   data: {}
-        // })
         return [];
     },
-    // configureServer({ watcher, ws, config: { logger } }: ViteDevServer) {
-    //     config = __deepMerge(
-    //         {
-    //             config: true,
-    //             css: true,
-    //         },
-    //         config,
-    //     );
-    //     const configFiles = __SugarConfig.foldersRealPaths.map(
-    //         (p) => `${p}/*.config.js`,
-    //     );
-    //     const shouldReloadConfigs = __picomatch(configFiles);
-    //     const checkReload = (path: string) => {
-    //         if (!path.match(/\.config\.js$/) && !path.match(/\.css$/)) return;
-    //         // let passChecks = false;
-    //         // if (shouldReloadConfigs(path) && config.config) passChecks = true;
-    //         // if (!passChecks && path.match(/\.css$/) && config.css)
-    //         //     passChecks = true;
-    //         // if (!passChecks) return;
-    //         let type = 'update';
-    //         if (path.match(/\.css$/)) {
-    //             type = 'css.update';
-    //         }
-    //         console.log('up', type, path);
-    //         setTimeout(() => ws.send({ type, event: 'sugar' }, path), 100);
-    //     };
-    //     __SEventEmitter.global.on(
-    //         's-postcss-sugar-plugin-import-update',
-    //         (e) => {
-    //             console.log('PPP', e);
-    //             checkReload(e.path);
-    //         },
-    //     );
-    //     const localWatcher = __chokidar.watch(configFiles, {
-    //         ignoreInitial: true,
-    //     });
-    //     // Ensure Vite keeps track of the files and triggers HMR as needed.
-    //     // watcher.add(configFiles)
-    //     // Do a full page reload if any of the watched files changes.
-    //     localWatcher.on('add', checkReload);
-    //     localWatcher.on('change', checkReload);
-    // },
 });
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7QUFFZCxPQUFPLEVBQUUsZ0JBQWdCLEVBQUUsTUFBTSwwQkFBMEIsQ0FBQztBQVU1RCxNQUFNLGNBQWMsR0FBYSxFQUFFLENBQUM7QUFDcEMsSUFBSSxXQUFXLENBQUM7QUFFaEI7O0dBRUc7QUFDSCxlQUFlLENBQUMsU0FBaUIsRUFBRSxFQUFnQixFQUFFLENBQUMsQ0FBQztJQUNuRCxJQUFJLEVBQUUsdUNBQXVDO0lBRTdDLEtBQUssRUFBRSxPQUFPO0lBRWQsd0VBQXdFO0lBQ3hFLE1BQU0sRUFBRSxHQUFHLEVBQUUsQ0FBQyxDQUFDO1FBQ1gsTUFBTSxFQUFFLEVBQUUsS0FBSyxFQUFFLEVBQUUsZUFBZSxFQUFFLEtBQUssRUFBRSxjQUFjLEVBQUUsSUFBSSxFQUFFLEVBQUU7S0FDdEUsQ0FBQztJQUVGLGVBQWUsQ0FBQyxHQUFHO1FBQ2YsNkJBQTZCO1FBRTdCLHlCQUF5QjtRQUN6QixJQUFJLENBQUMsR0FBRyxDQUFDLElBQUksQ0FBQyxLQUFLLENBQUMsUUFBUSxDQUFDLElBQUksQ0FBQyxHQUFHLENBQUMsSUFBSSxDQUFDLEtBQUssQ0FBQyxPQUFPLENBQUMsRUFBRTtZQUN2RCxPQUFPO1NBQ1Y7UUFFRCxpREFBaUQ7UUFDakQscURBQXFEO1FBQ3JELGtEQUFrRDtRQUNsRCx5Q0FBeUM7UUFDekMsSUFBSSxDQUFDLGNBQWMsQ0FBQyxRQUFRLENBQUMsR0FBRyxDQUFDLElBQUksQ0FBQyxFQUFFO1lBQ3BDLGNBQWMsQ0FBQyxJQUFJLENBQUMsR0FBRyxDQUFDLElBQUksQ0FBQyxDQUFDO1lBQzlCLE9BQU87U0FDVjtRQUVELHdDQUF3QztRQUN4QyxhQUFhO1FBQ2IsWUFBWSxDQUFDLFdBQVcsQ0FBQyxDQUFDO1FBQzFCLFdBQVcsR0FBRyxVQUFVLENBQUMsR0FBRyxFQUFFO1lBQzFCLE1BQU0sU0FBUyxHQUFHLEdBQUcsQ0FBQyxJQUFJO2lCQUNyQixPQUFPLENBQUMsR0FBRyxnQkFBZ0IsRUFBRSxFQUFFLEVBQUUsRUFBRSxDQUFDO2lCQUNwQyxPQUFPLENBQUMsUUFBUSxFQUFFLE9BQU8sQ0FBQyxDQUFDO1lBRWhDLHNCQUFzQjtZQUN0QixHQUFHLENBQUMsTUFBTSxDQUFDLEVBQUUsQ0FBQyxJQUFJLENBQUM7Z0JBQ2YsSUFBSSxFQUFFLFFBQVE7Z0JBQ2QsS0FBSyxFQUFFLGtCQUFrQjtnQkFDekIsSUFBSSxFQUFFO29CQUNGLFFBQVEsRUFBRSxHQUFHLENBQUMsSUFBSTtvQkFDbEIsSUFBSSxFQUFFLFNBQVM7aUJBQ2xCO2FBQ0osQ0FBQyxDQUFDO1FBQ1AsQ0FBQyxFQUFFLEdBQUcsQ0FBQyxDQUFDO1FBRVIsbUJBQW1CO1FBQ25CLG9CQUFvQjtRQUNwQiw2QkFBNkI7UUFDN0IsYUFBYTtRQUNiLEtBQUs7UUFDTCxPQUFPLEVBQUUsQ0FBQztJQUNkLENBQUM7SUFFRCx3RUFBd0U7SUFDeEUsNEJBQTRCO0lBQzVCLFlBQVk7SUFDWiw0QkFBNEI7SUFDNUIseUJBQXlCO0lBQ3pCLGFBQWE7SUFDYixrQkFBa0I7SUFDbEIsU0FBUztJQUVULDhEQUE4RDtJQUM5RCxxQ0FBcUM7SUFDckMsU0FBUztJQUVULDREQUE0RDtJQUM1RCw4Q0FBOEM7SUFDOUMsNkVBQTZFO0lBRTdFLHFDQUFxQztJQUVyQyxnRkFBZ0Y7SUFDaEYsb0VBQW9FO0lBQ3BFLG9DQUFvQztJQUVwQyxzQ0FBc0M7SUFFdEMsK0JBQStCO0lBQy9CLHNDQUFzQztJQUN0QyxtQ0FBbUM7SUFDbkMsWUFBWTtJQUVaLHlDQUF5QztJQUV6QywwRUFBMEU7SUFDMUUsU0FBUztJQUVULGlDQUFpQztJQUNqQyxrREFBa0Q7SUFDbEQsbUJBQW1CO0lBQ25CLHFDQUFxQztJQUNyQyxtQ0FBbUM7SUFDbkMsYUFBYTtJQUNiLFNBQVM7SUFFVCwyREFBMkQ7SUFDM0QsK0JBQStCO0lBQy9CLFVBQVU7SUFFViwwRUFBMEU7SUFDMUUsa0NBQWtDO0lBRWxDLG9FQUFvRTtJQUNwRSwyQ0FBMkM7SUFDM0MsOENBQThDO0lBQzlDLEtBQUs7Q0FDUixDQUFDLENBQUMifQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7QUFFZCxPQUFPLEVBQUUsZ0JBQWdCLEVBQUUsTUFBTSwwQkFBMEIsQ0FBQztBQVU1RCxNQUFNLGNBQWMsR0FBYSxFQUFFLENBQUM7QUFDcEMsSUFBSSxXQUFXLENBQUM7QUFFaEI7O0dBRUc7QUFDSCxlQUFlLENBQUMsU0FBaUIsRUFBRSxFQUFnQixFQUFFLENBQUMsQ0FBQztJQUNuRCxJQUFJLEVBQUUsdUNBQXVDO0lBRTdDLEtBQUssRUFBRSxPQUFPO0lBRWQsd0VBQXdFO0lBQ3hFLE1BQU0sRUFBRSxHQUFHLEVBQUUsQ0FBQyxDQUFDO1FBQ1gsTUFBTSxFQUFFLEVBQUUsS0FBSyxFQUFFLEVBQUUsZUFBZSxFQUFFLEtBQUssRUFBRSxjQUFjLEVBQUUsSUFBSSxFQUFFLEVBQUU7S0FDdEUsQ0FBQztJQUVGLGVBQWUsQ0FBQyxHQUFHO1FBQ2YseUJBQXlCO1FBQ3pCLElBQUksQ0FBQyxHQUFHLENBQUMsSUFBSSxDQUFDLEtBQUssQ0FBQyxRQUFRLENBQUMsSUFBSSxDQUFDLEdBQUcsQ0FBQyxJQUFJLENBQUMsS0FBSyxDQUFDLE9BQU8sQ0FBQyxFQUFFO1lBQ3ZELE9BQU87U0FDVjtRQUVELGlEQUFpRDtRQUNqRCxxREFBcUQ7UUFDckQsa0RBQWtEO1FBQ2xELHlDQUF5QztRQUN6QyxJQUFJLENBQUMsY0FBYyxDQUFDLFFBQVEsQ0FBQyxHQUFHLENBQUMsSUFBSSxDQUFDLEVBQUU7WUFDcEMsY0FBYyxDQUFDLElBQUksQ0FBQyxHQUFHLENBQUMsSUFBSSxDQUFDLENBQUM7WUFDOUIsT0FBTztTQUNWO1FBRUQsd0NBQXdDO1FBQ3hDLGFBQWE7UUFDYixZQUFZLENBQUMsV0FBVyxDQUFDLENBQUM7UUFDMUIsV0FBVyxHQUFHLFVBQVUsQ0FBQyxHQUFHLEVBQUU7WUFDMUIsTUFBTSxTQUFTLEdBQUcsR0FBRyxDQUFDLElBQUk7aUJBQ3JCLE9BQU8sQ0FBQyxHQUFHLGdCQUFnQixFQUFFLEVBQUUsRUFBRSxFQUFFLENBQUM7aUJBQ3BDLE9BQU8sQ0FBQyxRQUFRLEVBQUUsT0FBTyxDQUFDLENBQUM7WUFFaEMsc0JBQXNCO1lBQ3RCLEdBQUcsQ0FBQyxNQUFNLENBQUMsRUFBRSxDQUFDLElBQUksQ0FBQztnQkFDZixJQUFJLEVBQUUsUUFBUTtnQkFDZCxLQUFLLEVBQUUsa0JBQWtCO2dCQUN6QixJQUFJLEVBQUU7b0JBQ0YsT0FBTyxFQUFFLEdBQUcsQ0FBQyxJQUFJO29CQUNqQixVQUFVLEVBQUUsR0FBRyxDQUFDLElBQUksQ0FBQyxPQUFPLENBQUMsR0FBRyxnQkFBZ0IsRUFBRSxHQUFHLEVBQUUsRUFBRSxDQUFDO29CQUMxRCxRQUFRLEVBQUUsR0FBRyxDQUFDLElBQUksQ0FBQyxPQUFPLENBQUMsT0FBTyxFQUFFLFFBQVEsQ0FBQztvQkFDN0MsV0FBVyxFQUFFLEdBQUcsQ0FBQyxJQUFJO3lCQUNoQixPQUFPLENBQUMsR0FBRyxnQkFBZ0IsRUFBRSxHQUFHLEVBQUUsRUFBRSxDQUFDO3lCQUNyQyxPQUFPLENBQUMsT0FBTyxFQUFFLFFBQVEsQ0FBQztvQkFDL0IsR0FBRyxFQUFFLFNBQVM7aUJBQ2pCO2FBQ0osQ0FBQyxDQUFDO1FBQ1AsQ0FBQyxFQUFFLEdBQUcsQ0FBQyxDQUFDO1FBRVIsT0FBTyxFQUFFLENBQUM7SUFDZCxDQUFDO0NBQ0osQ0FBQyxDQUFDIn0=

@@ -18,13 +18,25 @@ export default function (api: any): {
                 type: string;
                 config: string;
             };
+            package: {
+                title: string;
+                description: string;
+                type: string;
+                readonly value: {
+                    name: any;
+                    description: any;
+                    version: any;
+                    author: any;
+                    license: any;
+                };
+            };
             favicon: {
                 title: string;
                 description: string;
                 type: string;
                 readonly value: {
                     rootDir: string;
-                    filename: any;
+                    fileName: any;
                     filePath: string;
                 };
             };
@@ -36,6 +48,13 @@ export default function (api: any): {
                     theme: any;
                     variant: any;
                     themes: {};
+                    lnf: {
+                        margin: any;
+                        padding: any;
+                        font: any;
+                        layout: any;
+                        typo: {};
+                    };
                 };
             };
             media: {
@@ -62,18 +81,6 @@ export default function (api: any): {
                 type: string;
                 config: string;
             };
-            margin: {
-                title: string;
-                description: string;
-                type: string;
-                readonly value: any;
-            };
-            padding: {
-                title: string;
-                description: string;
-                type: string;
-                readonly value: any;
-            };
             lod: {
                 title: string;
                 description: string;
@@ -81,24 +88,6 @@ export default function (api: any): {
                 readonly value: any;
             };
             partytown: {
-                title: string;
-                description: string;
-                type: string;
-                readonly value: any;
-            };
-            font: {
-                title: string;
-                description: string;
-                type: string;
-                readonly value: any;
-            };
-            typo: {
-                title: string;
-                description: string;
-                type: string;
-                readonly value: {};
-            };
-            layout: {
                 title: string;
                 description: string;
                 type: string;

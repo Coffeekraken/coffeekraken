@@ -369,7 +369,7 @@ function chokidarJsCallback(path) {
     // processPath(path, 'node');
     processPath(path, 'browser');
 }
-// chokidarJs.on('add', chokidarJsCallback);
+chokidarJs.on('add', chokidarJsCallback);
 chokidarJs.on('change', chokidarJsCallback);
 
 // node, shared, etc...
@@ -385,5 +385,5 @@ function chokidarNodeCallback(path) {
     processPath(path, 'node');
     processPath(path, 'browser');
 }
-// chokidarNode.on('add', chokidarNodeCallback);
+chokidarNode.on('add', chokidarNodeCallback);
 chokidarNode.on('change', chokidarNodeCallback);

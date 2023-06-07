@@ -31,7 +31,7 @@ import __fs from 'fs';
  * @todo      tests
  *
  * @snippet         __hashFromSync($1)
- * 
+ *
  * @example             js
  * import { __hashFromSync } from '@coffeekraken/sugar/hash';
  * __hashFromSync([{
@@ -52,6 +52,10 @@ export default function __hashFromSync(
     settings?: Partial<IHashFromSettings>,
 ): string | undefined {
     const hashes: string[] = [];
+
+    if (!Array.isArray(sources)) {
+        sources = [sources];
+    }
 
     const finalSettings: IHashFromSettings = {
         algo: 'sha256',

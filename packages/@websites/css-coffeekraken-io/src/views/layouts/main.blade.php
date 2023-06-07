@@ -43,15 +43,6 @@
         <i class="s-icon:angle-up"></i>
     </s-scroll>
 
-    <div class="loader">
-        <p class="s-typo--p">
-            Welcome on
-        </p>
-        <div class="_logo">
-            @include ('sugar.logos.coffeekraken.coffeekraken')
-        </div>
-        <div class="_spinner"></div>
-    </div>
-    <div class="top-loader"></div>
+    
 
 @endsection

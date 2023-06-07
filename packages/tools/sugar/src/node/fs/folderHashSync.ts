@@ -1,7 +1,6 @@
 import { __fileHashSync } from '@coffeekraken/sugar/fs';
 import { __isDirectory } from '@coffeekraken/sugar/is';
 import { __deepMerge } from '@coffeekraken/sugar/object';
-import { __replaceTokens } from '@coffeekraken/sugar/token';
 import { BinaryToTextEncoding } from 'crypto';
 import __fs from 'fs';
 import __sha256 from '../../shared/crypto/sha256';
@@ -46,13 +45,10 @@ export interface IFolderHashSettings {
     include: Partial<IFolderHashIncludeSettings>;
 }
 
-export default function __folderHashSyncSync(
+export default function __folderHashSync(
     folderPath: string,
     settings: Partial<IFolderHashSettings> = {},
 ): string {
-    // replace tokens
-    folderPath = __replaceTokens(folderPath);
-
     settings = __deepMerge(
         {
             recursive: true,

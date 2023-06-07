@@ -7,6 +7,8 @@ import { define as __SDocComponentDefine } from '@coffeekraken/s-doc';
 import __SFeature from '@coffeekraken/s-feature';
 import __SLitComponent from '@coffeekraken/s-lit-component';
 
+import { __pickRandom } from '@coffeekraken/sugar/array';
+
 import { __splitLetters } from '@coffeekraken/sugar/dom';
 
 // Views specific
@@ -31,7 +33,7 @@ const viewsRelated = import.meta.globEager('../views/**/*.ts');
         },
     });
 
-    __SFront.init({});
+    __SFront.init();
 
     // essentials
     __SPackEssentials();
@@ -88,6 +90,8 @@ const viewsRelated = import.meta.globEager('../views/**/*.ts');
                 this._paused = false;
             });
 
+            // this.highlightLetter();
+
             setInterval(() => {
                 if (this._paused) {
                     return;
@@ -96,8 +100,34 @@ const viewsRelated = import.meta.globEager('../views/**/*.ts');
             }, 5000);
         }
 
+        highlightLetter(): void {
+            const $letter = __pickRandom(this.getCurrentSlideLetters() ?? []);
+            if ($letter.innerHTML.trim() !== '░') {
+                setTimeout(() => {
+                    this.highlightLetter();
+                }, Math.random() * 500);
+                return;
+            }
+            setTimeout(() => {
+                this.highlightLetter();
+            }, Math.random() * 500);
+            $letter.classList.add('active');
+            setTimeout(() => {
+                $letter.classList.remove('active');
+            }, Math.random() * 1000);
+        }
+
         getSlideByIdx(idx: number): HTMLElement {
             return this._$slides[idx];
+        }
+
+        getCurrentSlide(): HTMLElement {
+            return this._$slides[this._slideIdx];
+        }
+
+        getCurrentSlideLetters(): HTMLElement[] {
+            // @ts-ignore
+            return this.getCurrentSlide()._$letters;
         }
 
         next(): void {

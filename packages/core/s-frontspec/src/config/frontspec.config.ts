@@ -51,6 +51,21 @@ export default function (api) {
                     type: 'config',
                     config: 'assets',
                 },
+                package: {
+                    title: 'Package',
+                    description:
+                        'Specify some info about the package from the package.json',
+                    type: 'object',
+                    get value() {
+                        return {
+                            name: api.config.package.name,
+                            description: api.config.package.description,
+                            version: api.config.package.version,
+                            author: api.config.package.author,
+                            license: api.config.package.license,
+                        };
+                    },
+                },
                 favicon: {
                     title: 'Favicon',
                     description: 'Specify where to find the favicon html file',
@@ -63,7 +78,7 @@ export default function (api) {
                                 packageRootDir,
                                 api.config.faviconBuilder.outDir,
                             )}`,
-                            filename: api.config.faviconBuilder.outFileName,
+                            fileName: api.config.faviconBuilder.outFileName,
                             filePath: `./${__path.relative(
                                 packageRootDir,
                                 api.config.faviconBuilder.outDir,
@@ -76,6 +91,62 @@ export default function (api) {
                     description: 'Specify the theme used by default',
                     type: 'object',
                     get value() {
+                        const typoObj = {};
+                        for (let [key, value] of Object.entries(
+                            api.theme.typo,
+                        )) {
+                            // exclude "gradient" for now...
+                            // @TODO        check to add theme back
+                            if (key.toLowerCase().includes('gradient')) {
+                                continue;
+                            }
+
+                            const finalStyle = Object.assign(
+                                {},
+                                value.style ?? {},
+                            );
+                            for (let [media, mediaObj] of Object.entries(
+                                api.theme.media.queries,
+                            )) {
+                                delete finalStyle[media];
+                            }
+
+                            const finalKey = key.split(':')[0];
+                            typoObj[finalKey] = {
+                                label: value.label ?? finalKey,
+                                group: value.group,
+                                type: value.type,
+                                button: value.button ?? {},
+                                editor: value.editor ?? {},
+                                style: {
+                                    ...__STheme.resolveCssObjectPropertiesValues(
+                                        finalStyle,
+                                    ),
+                                    ...__STheme.resolveCssObjectPropertiesValues(
+                                        value.rhythmVertical ?? {},
+                                    ),
+                                },
+                            };
+
+                            if (value.default) {
+                                typoObj[finalKey].default = value.default;
+                            }
+
+                            if (value.editorStyle) {
+                                typoObj[finalKey].editorStyle =
+                                    __STheme.resolveCssObjectPropertiesValues(
+                                        value.editorStyle,
+                                    );
+                            }
+
+                            if (value.buttonStyle) {
+                                typoObj[finalKey].buttonStyle =
+                                    __STheme.resolveCssObjectPropertiesValues(
+                                        value.buttonStyle,
+                                    );
+                            }
+                        }
+
                         const themesObj = {};
                         Object.keys(api.config.theme.themes).forEach((name) => {
                             themesObj[name] = {
@@ -92,6 +163,13 @@ export default function (api) {
                             theme: api.config.theme.theme,
                             variant: api.config.theme.variant,
                             themes: themesObj,
+                            lnf: {
+                                margin: api.theme.margin,
+                                padding: api.theme.padding,
+                                font: api.theme.font,
+                                layout: api.theme.layout,
+                                typo: typoObj,
+                            },
                         };
                     },
                 },
@@ -124,64 +202,6 @@ export default function (api) {
                         'Specify some google specifications like the GTM/GA to use, etc...',
                     type: 'config',
                     config: 'google',
-                },
-                // spaces: {
-                //     title: 'Spaces',
-                //     description:
-                //         'Specify the spaces (margin, padding) available in the project.',
-                //     type: 'object',
-                //     get value() {
-                //         const result = {},
-                //             padding = api.theme.padding,
-                //             margin = api.theme.margin;
-
-                //         [
-                //             'paddingTop',
-                //             'paddingRight',
-                //             'paddingBottom',
-                //             'paddingLeft',
-                //         ].forEach((side) => {
-                //             result[side] = {};
-
-                //             Object.keys(padding).forEach((paddingName) => {
-                //                 result[side][paddingName] =
-                //                     padding[paddingName];
-                //             });
-                //         });
-
-                //         [
-                //             'marginTop',
-                //             'marginRight',
-                //             'marginBottom',
-                //             'marginLeft',
-                //         ].forEach((side) => {
-                //             result[side] = {};
-
-                //             Object.keys(margin).forEach((marginName) => {
-                //                 result[side][marginName] = margin[marginName];
-                //             });
-                //         });
-
-                //         return result;
-                //     },
-                // },
-                margin: {
-                    title: 'Margin',
-                    description:
-                        'Specify the margins available in the project.',
-                    type: 'object',
-                    get value() {
-                        return api.theme.margin;
-                    },
-                },
-                padding: {
-                    title: 'Padding',
-                    description:
-                        'Specify the paddings available in the project.',
-                    type: 'object',
-                    get value() {
-                        return api.theme.padding;
-                    },
                 },
                 lod: {
                     title: 'Lod',
@@ -221,88 +241,6 @@ export default function (api) {
                 //         };
                 //     },
                 // },
-                font: {
-                    title: 'Font',
-                    description:
-                        'Specify the fonts specifications like the font-faces available, sizes, etc...',
-                    type: 'object',
-                    get value() {
-                        return api.theme.font;
-                    },
-                },
-                typo: {
-                    title: 'Typo',
-                    description:
-                        'Specify some typo specifications like which are the available typo classes/tags, etc...',
-                    type: 'object',
-                    get value() {
-                        const finalObj = {};
-                        for (let [key, value] of Object.entries(
-                            api.theme.typo,
-                        )) {
-                            // exclude "gradient" for now...
-                            // @TODO        check to add theme back
-                            if (key.toLowerCase().includes('gradient')) {
-                                continue;
-                            }
-
-                            const finalStyle = Object.assign(
-                                {},
-                                value.style ?? {},
-                            );
-                            for (let [media, mediaObj] of Object.entries(
-                                api.theme.media.queries,
-                            )) {
-                                delete finalStyle[media];
-                            }
-
-                            const finalKey = key.split(':')[0];
-                            finalObj[finalKey] = {
-                                label: value.label ?? finalKey,
-                                group: value.group,
-                                type: value.type,
-                                button: value.button ?? {},
-                                editor: value.editor ?? {},
-                                style: {
-                                    ...__STheme.resolveCssObjectPropertiesValues(
-                                        finalStyle,
-                                    ),
-                                    ...__STheme.resolveCssObjectPropertiesValues(
-                                        value.rhythmVertical ?? {},
-                                    ),
-                                },
-                            };
-
-                            if (value.default) {
-                                finalObj[finalKey].default = value.default;
-                            }
-
-                            if (value.editorStyle) {
-                                finalObj[finalKey].editorStyle =
-                                    __STheme.resolveCssObjectPropertiesValues(
-                                        value.editorStyle,
-                                    );
-                            }
-
-                            if (value.buttonStyle) {
-                                finalObj[finalKey].buttonStyle =
-                                    __STheme.resolveCssObjectPropertiesValues(
-                                        value.buttonStyle,
-                                    );
-                            }
-                        }
-                        return finalObj;
-                    },
-                },
-                layout: {
-                    title: 'Layout',
-                    description:
-                        'Specify some layout specifications like the available containers, layouts and grids.',
-                    type: 'object',
-                    get value() {
-                        return api.theme.layout;
-                    },
-                },
             },
         },
 

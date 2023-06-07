@@ -1,4 +1,5 @@
 import __SClass from '@coffeekraken/s-class';
+import type { ISFrontspec } from '@coffeekraken/s-frontspec';
 
 export interface ISFrontspecSourceConfigObj {
     config: String;
@@ -21,7 +22,7 @@ export interface ISFrontspecAssetToServe {
 export default class SFrontspec extends __SClass {
     static _cachesStack: {};
     static _defaultFrontspecInstance: any;
-    _frontspec: any;
+    _frontspec: ISFrontspec;
     
     static get(dotpath?: string): any;
     

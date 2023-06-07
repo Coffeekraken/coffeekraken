@@ -10,8 +10,14 @@
     {
       "stack": "config",
       "description": "Configuration related actions",
-      "defaultAction": "cache",
+      "defaultAction": "read",
       "actions": {
+        "read": {
+          "scope": "package",
+          "description": "Read the configuration or a part of",
+          "interface": "./dist/pkg/esm/node/interfaces/SSugarConfigReadParamsInterface.js",
+          "process": "./dist/pkg/esm/cli/read.cli.js"
+        },
         "cache": {
           "scope": "package",
           "description": "Put the configuration in the cache to speed up subsequent calls",

@@ -92,13 +92,13 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
         *   </p>
         * 
         * @example          html        Shapes
-        * <p class="s-blockquote s-shape:default s-mbe:30">
+        * <p class="s-blockquote s-color:accent s-shape:default s-mbe:30">
         *       ${__faker.lorem.paragraph()}
         *   </p>
-        *   <p class="s-blockquote s-shape:pill s-mbe:30">
+        *   <p class="s-blockquote s-color:accent s-shape:pill s-mbe:30">
         *       ${__faker.lorem.paragraph()}
         *   </p>
-        * <p class="s-blockquote s-shape:square s-mbe:30">
+        * <p class="s-blockquote s-color:accent s-shape:square s-mbe:30">
         *       ${__faker.lorem.paragraph()}
         *   </p>
         * 

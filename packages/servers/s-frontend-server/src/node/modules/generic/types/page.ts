@@ -23,6 +23,9 @@ export default function page({
                 'src/node/modules/generic/php/renderPage.php',
             ),
             {
+                $_ENV: {
+                    S_FRONTEND_DIR: __packageRootDir(),
+                },
                 $_SERVER: __serverObjectFromExpressRequest(req),
                 pageFile: pageFilePath,
                 page: pageConfig,

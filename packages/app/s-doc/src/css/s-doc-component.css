@@ -204,14 +204,14 @@ body:has(.s-doc-fullscreen) {
         display: flex;
         flex-direction: column;
         gap: sugar.margin(50);
-        background: sugar.color(main, surface);
+        background: sugar.color(main, background);
         padding: sugar.padding(50);
         overflow-y: auto;
         @sugar.border.radius();
         @sugar.scrollbar;
 
-        .s-code-example_code .hljs {
-            background: sugar.color(main, background) !important;
+        > * {
+            max-width: 960px;
         }
     }
 

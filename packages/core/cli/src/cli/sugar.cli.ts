@@ -489,7 +489,7 @@ export default class SSugarCli {
             // init stdio
             this._initStdio(true);
 
-            await __wait(100);
+            // await __wait(100);
 
             if (!__isChildProcess()) {
                 this._newStep();
@@ -508,7 +508,7 @@ export default class SSugarCli {
 
             await proPromise;
 
-            await __wait(1000);
+            // await __wait(1000);
             process.exit(0);
         } else if (cliObj.command) {
             // init stdio
@@ -757,7 +757,7 @@ export default class SSugarCli {
         // init stdop
         this._initStdio(true);
 
-        await __wait(1000);
+        // await __wait(1000);
 
         this._newStep();
 
@@ -812,7 +812,7 @@ export default class SSugarCli {
                 });
             }
 
-            await __wait(1000);
+            // await __wait(1000);
 
             process.exit(0);
         }
@@ -862,7 +862,7 @@ export default class SSugarCli {
             });
         });
 
-        await __wait(1000);
+        // await __wait(1000);
         process.exit(0);
     }
 

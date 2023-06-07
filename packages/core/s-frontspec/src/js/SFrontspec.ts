@@ -1,6 +1,19 @@
 // @ts-nocheck
 
-import __SClass from '@coffeekraken/s-class';
+import {
+    ISFrontspec,
+    ISFrontspecAssets,
+    ISFrontspecFavicon,
+    ISFrontspecGoogle,
+    ISFrontspecLod,
+    ISFrontspecMedia,
+    ISFrontspecMetas,
+    ISFrontspecPackage,
+    ISFrontspecPartytown,
+    ISFrontspecSpecs,
+    ISFrontspecTheme,
+    ISFrontspecViews,
+} from '@coffeekraken/s-frontspec';
 import { __deepMerge, __get } from '@coffeekraken/sugar/object';
 
 /**
@@ -35,9 +48,7 @@ import { __deepMerge, __get } from '@coffeekraken/sugar/object';
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 
-export interface ISFrontspecInitSettings {}
-
-export default class SFrontspec extends __SClass {
+export default class SFrontspec implements ISFrontspec {
     _defaultFrontspecInstance;
 
     /**
@@ -52,10 +63,8 @@ export default class SFrontspec extends __SClass {
      * @since           2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    static init(): SFront {
-        const finalSettings = <ISFrontspecInitSettings>{};
-
-        let frontspecInstance = new this(finalSettings);
+    static init(frontspec?: ISFrontspec): SFront {
+        let frontspecInstance = new this(frontspec);
 
         // set the front in the env.SUGAR.front property
         if (!document.env) document.env = {};
@@ -88,7 +97,7 @@ export default class SFrontspec extends __SClass {
 
     /**
      * @name        _frontspec
-     * @type        Object
+     * @type        ISFrontspec
      * @private
      *
      * Store the actual frontspec object
@@ -96,7 +105,161 @@ export default class SFrontspec extends __SClass {
      * @since       2.0.0
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    private _frontspec = {};
+    private _frontspec: ISFrontspec = {};
+
+    /**
+     * @name        metas
+     * @type        ISFrontspecMetas
+     * @private
+     *
+     * Store the frontspec metas object
+     *
+     * @since       2.0.0
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    get metas(): ISFrontspecMetas {
+        return this._frontspec.metas;
+    }
+
+    /**
+     * @name        package
+     * @type        ISFrontspecPackage
+     * @private
+     *
+     * Store the frontspec package object
+     *
+     * @since       2.0.0
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    get package(): ISFrontspecPackage {
+        return this._frontspec.package;
+    }
+
+    /**
+     * @name        assets
+     * @type        ISFrontspecAssets
+     * @private
+     *
+     * Store the frontspec assets object
+     *
+     * @since       2.0.0
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    get assets(): ISFrontspecAssets {
+        return this._frontspec.assets;
+    }
+
+    /**
+     * @name        favicon
+     * @type        ISFrontspecFavicon
+     * @private
+     *
+     * Store the frontspec favicon object
+     *
+     * @since       2.0.0
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    get favicon(): ISFrontspecFavicon {
+        return this._frontspec.favicon;
+    }
+
+    /**
+     * @name        theme
+     * @type        ISFrontspecTheme
+     * @private
+     *
+     * Store the frontspec theme object
+     *
+     * @since       2.0.0
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    get theme(): ISFrontspecTheme {
+        return this._frontspec.theme;
+    }
+
+    /**
+     * @name        media
+     * @type        ISFrontspecMedia
+     * @private
+     *
+     * Store the frontspec media object
+     *
+     * @since       2.0.0
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    get media(): ISFrontspecMedia {
+        return this._frontspec.media;
+    }
+
+    /**
+     * @name        views
+     * @type        ISFrontspecViews
+     * @private
+     *
+     * Store the frontspec views object
+     *
+     * @since       2.0.0
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    get views(): ISFrontspecViews {
+        return this._frontspec.views;
+    }
+
+    /**
+     * @name        specs
+     * @type        ISFrontspecSpecs
+     * @private
+     *
+     * Store the frontspec specs object
+     *
+     * @since       2.0.0
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    get specs(): ISFrontspecSpecs {
+        return this._frontspec.specs;
+    }
+
+    /**
+     * @name        google
+     * @type        ISFrontspecGoogle
+     * @private
+     *
+     * Store the frontspec google object
+     *
+     * @since       2.0.0
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    get google(): ISFrontspecGoogle {
+        return this._frontspec.google;
+    }
+
+    /**
+     * @name        lod
+     * @type        ISFrontspecLod
+     * @private
+     *
+     * Store the frontspec lod object
+     *
+     * @since       2.0.0
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    get lod(): ISFrontspecLod {
+        return this._frontspec.lod;
+    }
+
+    /**
+     * @name        partytown
+     * @type        ISFrontspecPartytown
+     * @private
+     *
+     * Store the frontspec partytown object
+     *
+     * @since       2.0.0
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    get partytown(): ISFrontspecPartytown {
+        return this._frontspec.partytown;
+    }
 
     /**
      * @name            constructor
@@ -108,15 +271,7 @@ export default class SFrontspec extends __SClass {
      * @since       2.0.0
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    constructor(frontspec = {}) {
-        super(
-            __deepMerge({
-                metas: {
-                    id: 'SFrontspec',
-                },
-            }),
-        );
-
+    constructor(frontspec: ISFrontspec = {}) {
         this.constructor._defaultFrontspecInstance = this;
         this._frontspec = __deepMerge(
             document.env?.FRONTSPEC ? document.env.FRONTSPEC : {},

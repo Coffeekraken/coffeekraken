@@ -12,6 +12,9 @@ export interface ISugarConfigToDocblocksResult {
     path: string;
     docblocks: any[];
 }
+export interface ISSugarConfigReadParams {
+    path: string;
+}
 export interface ISSugarConfigSettings {
     id: string;
     env: 'development' | 'production' | 'test';
@@ -63,6 +66,8 @@ export default class SSugarConfig extends __SClass {
     constructor(settings?: Partial<ISSugarConfigSettings>);
     
     hash(dotPath?: string): string;
+    
+    read(params?: ISSugarConfigReadParams): any;
     
     get(dotpath?: string, settings?: Partial<ISConfigSettings>): any;
     

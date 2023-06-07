@@ -4,12 +4,7 @@ import __SConfigAdapter from '@coffeekraken/s-config-adapter';
 import __SDuration from '@coffeekraken/s-duration';
 import __SEnv from '@coffeekraken/s-env';
 import { __isNode, __isPlainObject } from '@coffeekraken/sugar/is';
-import {
-    __decycle,
-    __deepMerge,
-    __filterObject,
-    __get
-} from '@coffeekraken/sugar/object';
+import { __deepMerge, __filterObject, __get } from '@coffeekraken/sugar/object';
 import __set from '@coffeekraken/sugar/shared/object/set';
 
 /**
@@ -34,7 +29,7 @@ import __set from '@coffeekraken/sugar/shared/object/set';
  *
  * @snippet         __SConfig($1)
  * new __SConfig($1);
- * 
+ *
  * @example             js
  * import SConfig, { SConfigLsAdapter } from '@coffeekraken/s-config';
  * const config = new SConfig('my-config', new SConfigLsAdapter();
@@ -619,7 +614,6 @@ Make sure to check these before anything else...
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     toJson() {
-        const decycledObj = Object.assign({}, __decycle(this.get('.')));
-        return JSON.parse(JSON.stringify(decycledObj));
+        return JSON.parse(JSON.stringify(this.get('.')));
     }
 }

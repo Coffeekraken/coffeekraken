@@ -1,12 +1,39 @@
 "use strict";
 // @ts-nocheck
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-const s_class_1 = __importDefault(require("@coffeekraken/s-class"));
 const object_1 = require("@coffeekraken/sugar/object");
-class SFrontspec extends s_class_1.default {
+/**
+ * @name                SFrontspec
+ * @namespace           js
+ * @type                Class
+ * @extends             SClass
+ * @platform            js
+ * @status              beta
+ *
+ * This class represent the ```frontspec.json``` json that must be either in:
+ * 1. The `document.env.SUGAR.frontspec` object
+ * 2. The `document.env.FRONTSPEC` object
+ * 3. The "frontspec" param of the constructor
+ * Each level will be overrided by the upper one using a deepMerge.
+ *
+ * @param           {Object}        [frontspec={}]          A frontspec formated object
+ *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
+ *
+ * @snippet        __SFrontspec.get($1)
+ *
+ * @example             js
+ * import __SFrontspec from '@coffeekraken/s-frontspec';
+ * const frontspec = new SFrontspec();
+ * frontspec.get('partytown.enabled');
+ * __SFrontspec.get('partytown.enabled');
+ *
+ * @since           2.0.0
+ * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+ */
+class SFrontspec {
     /**
      * @name            init
      * @type            Function
@@ -19,9 +46,8 @@ class SFrontspec extends s_class_1.default {
      * @since           2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    static init() {
-        const finalSettings = {};
-        let frontspecInstance = new this(finalSettings);
+    static init(frontspec) {
+        let frontspecInstance = new this(frontspec);
         // set the front in the env.SUGAR.front property
         if (!document.env)
             document.env = {};
@@ -51,6 +77,149 @@ class SFrontspec extends s_class_1.default {
         return this._defaultFrontspecInstance.get(dotpath);
     }
     /**
+     * @name        metas
+     * @type        ISFrontspecMetas
+     * @private
+     *
+     * Store the frontspec metas object
+     *
+     * @since       2.0.0
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    get metas() {
+        return this._frontspec.metas;
+    }
+    /**
+     * @name        package
+     * @type        ISFrontspecPackage
+     * @private
+     *
+     * Store the frontspec package object
+     *
+     * @since       2.0.0
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    get package() {
+        return this._frontspec.package;
+    }
+    /**
+     * @name        assets
+     * @type        ISFrontspecAssets
+     * @private
+     *
+     * Store the frontspec assets object
+     *
+     * @since       2.0.0
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    get assets() {
+        return this._frontspec.assets;
+    }
+    /**
+     * @name        favicon
+     * @type        ISFrontspecFavicon
+     * @private
+     *
+     * Store the frontspec favicon object
+     *
+     * @since       2.0.0
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    get favicon() {
+        return this._frontspec.favicon;
+    }
+    /**
+     * @name        theme
+     * @type        ISFrontspecTheme
+     * @private
+     *
+     * Store the frontspec theme object
+     *
+     * @since       2.0.0
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    get theme() {
+        return this._frontspec.theme;
+    }
+    /**
+     * @name        media
+     * @type        ISFrontspecMedia
+     * @private
+     *
+     * Store the frontspec media object
+     *
+     * @since       2.0.0
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    get media() {
+        return this._frontspec.media;
+    }
+    /**
+     * @name        views
+     * @type        ISFrontspecViews
+     * @private
+     *
+     * Store the frontspec views object
+     *
+     * @since       2.0.0
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    get views() {
+        return this._frontspec.views;
+    }
+    /**
+     * @name        specs
+     * @type        ISFrontspecSpecs
+     * @private
+     *
+     * Store the frontspec specs object
+     *
+     * @since       2.0.0
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    get specs() {
+        return this._frontspec.specs;
+    }
+    /**
+     * @name        google
+     * @type        ISFrontspecGoogle
+     * @private
+     *
+     * Store the frontspec google object
+     *
+     * @since       2.0.0
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    get google() {
+        return this._frontspec.google;
+    }
+    /**
+     * @name        lod
+     * @type        ISFrontspecLod
+     * @private
+     *
+     * Store the frontspec lod object
+     *
+     * @since       2.0.0
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    get lod() {
+        return this._frontspec.lod;
+    }
+    /**
+     * @name        partytown
+     * @type        ISFrontspecPartytown
+     * @private
+     *
+     * Store the frontspec partytown object
+     *
+     * @since       2.0.0
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    get partytown() {
+        return this._frontspec.partytown;
+    }
+    /**
      * @name            constructor
      * @type            Function
      * @constructor
@@ -62,14 +231,9 @@ class SFrontspec extends s_class_1.default {
      */
     constructor(frontspec = {}) {
         var _a;
-        super((0, object_1.__deepMerge)({
-            metas: {
-                id: 'SFrontspec',
-            },
-        }));
         /**
          * @name        _frontspec
-         * @type        Object
+         * @type        ISFrontspec
          * @private
          *
          * Store the actual frontspec object
@@ -98,4 +262,4 @@ class SFrontspec extends s_class_1.default {
     }
 }
 exports.default = SFrontspec;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOzs7OztBQUVkLG9FQUE2QztBQUM3Qyx1REFBZ0U7QUFvQ2hFLE1BQXFCLFVBQVcsU0FBUSxpQkFBUTtJQUc1Qzs7Ozs7Ozs7Ozs7T0FXRztJQUNILE1BQU0sQ0FBQyxJQUFJO1FBQ1AsTUFBTSxhQUFhLEdBQTRCLEVBQUUsQ0FBQztRQUVsRCxJQUFJLGlCQUFpQixHQUFHLElBQUksSUFBSSxDQUFDLGFBQWEsQ0FBQyxDQUFDO1FBRWhELGdEQUFnRDtRQUNoRCxJQUFJLENBQUMsUUFBUSxDQUFDLEdBQUc7WUFBRSxRQUFRLENBQUMsR0FBRyxHQUFHLEVBQUUsQ0FBQztRQUNyQyxJQUFJLENBQUMsUUFBUSxDQUFDLEdBQUcsQ0FBQyxLQUFLO1lBQUUsUUFBUSxDQUFDLEdBQUcsQ0FBQyxLQUFLLEdBQUcsRUFBRSxDQUFDO1FBQ2pELFFBQVEsQ0FBQyxHQUFHLENBQUMsS0FBSyxDQUFDLFNBQVMsR0FBRyxpQkFBaUIsQ0FBQztRQUVqRCwyQkFBMkI7UUFDM0IsT0FBTyxpQkFBaUIsQ0FBQztJQUM3QixDQUFDO0lBRUQ7Ozs7Ozs7Ozs7OztPQVlHO0lBQ0gsTUFBTSxDQUFDLEdBQUcsQ0FBQyxVQUFrQixHQUFHO1FBQzVCLElBQUksQ0FBQyxJQUFJLENBQUMseUJBQXlCLEVBQUU7WUFDakMsSUFBSSxDQUFDLHlCQUF5QixHQUFHLFVBQVUsQ0FBQyxJQUFJLEVBQUUsQ0FBQztTQUN0RDtRQUNELE9BQU8sSUFBSSxDQUFDLHlCQUF5QixDQUFDLEdBQUcsQ0FBQyxPQUFPLENBQUMsQ0FBQztJQUN2RCxDQUFDO0lBY0Q7Ozs7Ozs7OztPQVNHO0lBQ0gsWUFBWSxTQUFTLEdBQUcsRUFBRTs7UUFDdEIsS0FBSyxDQUNELElBQUEsb0JBQVcsRUFBQztZQUNSLEtBQUssRUFBRTtnQkFDSCxFQUFFLEVBQUUsWUFBWTthQUNuQjtTQUNKLENBQUMsQ0FDTCxDQUFDO1FBN0JOOzs7Ozs7Ozs7V0FTRztRQUNLLGVBQVUsR0FBRyxFQUFFLENBQUM7UUFxQnBCLElBQUksQ0FBQyxXQUFXLENBQUMseUJBQXlCLEdBQUcsSUFBSSxDQUFDO1FBQ2xELElBQUksQ0FBQyxVQUFVLEdBQUcsSUFBQSxvQkFBVyxFQUN6QixDQUFBLE1BQUEsUUFBUSxDQUFDLEdBQUcsMENBQUUsU0FBUyxFQUFDLENBQUMsQ0FBQyxRQUFRLENBQUMsR0FBRyxDQUFDLFNBQVMsQ0FBQyxDQUFDLENBQUMsRUFBRSxFQUNyRCxTQUFTLENBQ1osQ0FBQztJQUNOLENBQUM7SUFFRDs7Ozs7Ozs7Ozs7T0FXRztJQUNILEdBQUcsQ0FBQyxVQUFrQixHQUFHO1FBQ3JCLE9BQU8sSUFBQSxjQUFLLEVBQUMsSUFBSSxDQUFDLFVBQVUsRUFBRSxPQUFPLENBQUMsQ0FBQztJQUMzQyxDQUFDO0NBQ0o7QUF0R0QsNkJBc0dDIn0=
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOztBQWdCZCx1REFBZ0U7QUFFaEU7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQThCRztBQUVILE1BQXFCLFVBQVU7SUFHM0I7Ozs7Ozs7Ozs7O09BV0c7SUFDSCxNQUFNLENBQUMsSUFBSSxDQUFDLFNBQXVCO1FBQy9CLElBQUksaUJBQWlCLEdBQUcsSUFBSSxJQUFJLENBQUMsU0FBUyxDQUFDLENBQUM7UUFFNUMsZ0RBQWdEO1FBQ2hELElBQUksQ0FBQyxRQUFRLENBQUMsR0FBRztZQUFFLFFBQVEsQ0FBQyxHQUFHLEdBQUcsRUFBRSxDQUFDO1FBQ3JDLElBQUksQ0FBQyxRQUFRLENBQUMsR0FBRyxDQUFDLEtBQUs7WUFBRSxRQUFRLENBQUMsR0FBRyxDQUFDLEtBQUssR0FBRyxFQUFFLENBQUM7UUFDakQsUUFBUSxDQUFDLEdBQUcsQ0FBQyxLQUFLLENBQUMsU0FBUyxHQUFHLGlCQUFpQixDQUFDO1FBRWpELDJCQUEyQjtRQUMzQixPQUFPLGlCQUFpQixDQUFDO0lBQzdCLENBQUM7SUFFRDs7Ozs7Ozs7Ozs7O09BWUc7SUFDSCxNQUFNLENBQUMsR0FBRyxDQUFDLFVBQWtCLEdBQUc7UUFDNUIsSUFBSSxDQUFDLElBQUksQ0FBQyx5QkFBeUIsRUFBRTtZQUNqQyxJQUFJLENBQUMseUJBQXlCLEdBQUcsVUFBVSxDQUFDLElBQUksRUFBRSxDQUFDO1NBQ3REO1FBQ0QsT0FBTyxJQUFJLENBQUMseUJBQXlCLENBQUMsR0FBRyxDQUFDLE9BQU8sQ0FBQyxDQUFDO0lBQ3ZELENBQUM7SUFjRDs7Ozs7Ozs7O09BU0c7SUFDSCxJQUFJLEtBQUs7UUFDTCxPQUFPLElBQUksQ0FBQyxVQUFVLENBQUMsS0FBSyxDQUFDO0lBQ2pDLENBQUM7SUFFRDs7Ozs7Ozs7O09BU0c7SUFDSCxJQUFJLE9BQU87UUFDUCxPQUFPLElBQUksQ0FBQyxVQUFVLENBQUMsT0FBTyxDQUFDO0lBQ25DLENBQUM7SUFFRDs7Ozs7Ozs7O09BU0c7SUFDSCxJQUFJLE1BQU07UUFDTixPQUFPLElBQUksQ0FBQyxVQUFVLENBQUMsTUFBTSxDQUFDO0lBQ2xDLENBQUM7SUFFRDs7Ozs7Ozs7O09BU0c7SUFDSCxJQUFJLE9BQU87UUFDUCxPQUFPLElBQUksQ0FBQyxVQUFVLENBQUMsT0FBTyxDQUFDO0lBQ25DLENBQUM7SUFFRDs7Ozs7Ozs7O09BU0c7SUFDSCxJQUFJLEtBQUs7UUFDTCxPQUFPLElBQUksQ0FBQyxVQUFVLENBQUMsS0FBSyxDQUFDO0lBQ2pDLENBQUM7SUFFRDs7Ozs7Ozs7O09BU0c7SUFDSCxJQUFJLEtBQUs7UUFDTCxPQUFPLElBQUksQ0FBQyxVQUFVLENBQUMsS0FBSyxDQUFDO0lBQ2pDLENBQUM7SUFFRDs7Ozs7Ozs7O09BU0c7SUFDSCxJQUFJLEtBQUs7UUFDTCxPQUFPLElBQUksQ0FBQyxVQUFVLENBQUMsS0FBSyxDQUFDO0lBQ2pDLENBQUM7SUFFRDs7Ozs7Ozs7O09BU0c7SUFDSCxJQUFJLEtBQUs7UUFDTCxPQUFPLElBQUksQ0FBQyxVQUFVLENBQUMsS0FBSyxDQUFDO0lBQ2pDLENBQUM7SUFFRDs7Ozs7Ozs7O09BU0c7SUFDSCxJQUFJLE1BQU07UUFDTixPQUFPLElBQUksQ0FBQyxVQUFVLENBQUMsTUFBTSxDQUFDO0lBQ2xDLENBQUM7SUFFRDs7Ozs7Ozs7O09BU0c7SUFDSCxJQUFJLEdBQUc7UUFDSCxPQUFPLElBQUksQ0FBQyxVQUFVLENBQUMsR0FBRyxDQUFDO0lBQy9CLENBQUM7SUFFRDs7Ozs7Ozs7O09BU0c7SUFDSCxJQUFJLFNBQVM7UUFDVCxPQUFPLElBQUksQ0FBQyxVQUFVLENBQUMsU0FBUyxDQUFDO0lBQ3JDLENBQUM7SUFFRDs7Ozs7Ozs7O09BU0c7SUFDSCxZQUFZLFlBQXlCLEVBQUU7O1FBaEx2Qzs7Ozs7Ozs7O1dBU0c7UUFDSyxlQUFVLEdBQWdCLEVBQUUsQ0FBQztRQXVLakMsSUFBSSxDQUFDLFdBQVcsQ0FBQyx5QkFBeUIsR0FBRyxJQUFJLENBQUM7UUFDbEQsSUFBSSxDQUFDLFVBQVUsR0FBRyxJQUFBLG9CQUFXLEVBQ3pCLENBQUEsTUFBQSxRQUFRLENBQUMsR0FBRywwQ0FBRSxTQUFTLEVBQUMsQ0FBQyxDQUFDLFFBQVEsQ0FBQyxHQUFHLENBQUMsU0FBUyxDQUFDLENBQUMsQ0FBQyxFQUFFLEVBQ3JELFNBQVMsQ0FDWixDQUFDO0lBQ04sQ0FBQztJQUVEOzs7Ozs7Ozs7OztPQVdHO0lBQ0gsR0FBRyxDQUFDLFVBQWtCLEdBQUc7UUFDckIsT0FBTyxJQUFBLGNBQUssRUFBQyxJQUFJLENBQUMsVUFBVSxFQUFFLE9BQU8sQ0FBQyxDQUFDO0lBQzNDLENBQUM7Q0FDSjtBQXRQRCw2QkFzUEMifQ==

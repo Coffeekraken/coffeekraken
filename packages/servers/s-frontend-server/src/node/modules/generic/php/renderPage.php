@@ -35,11 +35,16 @@ if (!file_exists($params['pageFile'])) {
 
 $nodesDir = $params['nodesDir'];
 
+// read frontspec
+$frontspec = new \SFrontspec();
+$frontspecJson = $frontspec->read();
+
 // read the page json
 $pageFileJson = json_decode(file_get_contents($params['pageFile']));
 
 $viewRenderer = new SViewRenderer([
     'sharedData' => [
+        'frontspec' => $frontspecJson,
         'page' => $params['page'],
         'req' => $params['req'],
     ],

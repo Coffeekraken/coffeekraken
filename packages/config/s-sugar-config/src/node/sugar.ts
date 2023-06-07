@@ -13,6 +13,8 @@ import __replaceTokens from '@coffeekraken/sugar/shared/token/replaceTokens';
 import __fs from 'fs';
 import __path from 'path';
 
+import __SSugarConfigReadParamsInterface from './interfaces/SSugarConfigReadParamsInterface';
+
 import type { ISSugarConfig } from '../shared/types';
 
 /**
@@ -37,7 +39,7 @@ import type { ISSugarConfig } from '../shared/types';
  * @todo      Add multi level extends support
  *
  * @snippet         __SSugarConfig.get($1)
- * 
+ *
  * @example             js
  * import __SSugarConfig from '@coffeekraken/s-sugar-config';
  * __SSugarConfig.get('scss.unit'); // => rem
@@ -55,6 +57,10 @@ export interface ISSugarConfigLoadedObj {
 export interface ISugarConfigToDocblocksResult {
     path: string;
     docblocks: any[];
+}
+
+export interface ISSugarConfigReadParams {
+    path: string;
 }
 
 export interface ISSugarConfigSettings {
@@ -546,6 +552,25 @@ export default class SSugarConfig extends __SClass {
     hash(dotPath: string = '.'): string {
         const config = this.get(dotPath);
         return __objectHash(config);
+    }
+
+    /**
+     * @name            read
+     * @type            Function
+     *
+     * This method allows you to get a configuration back by passing a dotpath like "something.else"
+     *
+     * @param       {__SSugarConfigReadParamsInterface}         [params=null]           Some params to configure your read process
+     * @return      {any}                           The getted configuration
+     *
+     * @since           2.0.0
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    read(params?: ISSugarConfigReadParams): any {
+        const finalParams = <ISSugarConfigReadParams>(
+            __SSugarConfigReadParamsInterface.apply(params)
+        );
+        return this._configInstance.get(finalParams.path);
     }
 
     /**

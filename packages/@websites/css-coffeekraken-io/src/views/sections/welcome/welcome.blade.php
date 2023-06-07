@@ -53,6 +53,25 @@
             </div>
 
             <div class="_code">
+<div class="_line _comment"><span class="s-tc--accent">░░░░░░░░░░░░░░░░░░░░░░</span></div>
+<div class="_line _comment"><span class="s-tc--error">░░░░░░░</span>&nbsp;<span class="s-tc--white">Styled</span>&nbsp;<span class="s-tc--error">░░░░░░░</span></div>
+<div class="_line _comment"><span class="s-tc--info">░░░░░░░░░░░░░░░░░░░░░░</span></div>
+<div class="_line _comment">&nbsp;</div>
+<div class="_line _comment">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;░░░░░░░░░░░░░░░░░░░░</div>
+<div class="_line _comment">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;░░&nbsp;&nbsp;&nbsp;&nbsp;<span class="s-tc--white">Unstyled</span>&nbsp;&nbsp;&nbsp;&nbsp;░░</div>
+<div class="_line _comment">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;░░░░░░░░░░░░░░░░░░░░</div>
+                <div class="_line _comment">&nbsp;</div>
+                <div class="_line">
+                    <div class="_comment">Styled components</div>
+                </div>
+                <div class="_line"><span class="s-tc:accent">sugar.ui.button</span>;</div>
+                <div class="_line">
+                    <div class="_comment">Unstyled components</div>
+                </div>
+                <div class="_line"><span class="s-tc:accent">sugar.ui.button (<span class="s-tc--complementary">$scope: bare</span>)</span>;</div>
+            </div>
+
+            <div class="_code">
 <div class="_line _comment">░░░&nbsp;&nbsp;&nbsp;░░░&nbsp;░░░░░░░░░&nbsp;░░░░░░░░░</div>
 <div class="_line _comment">░░░&nbsp;&nbsp;&nbsp;░░░&nbsp;░░░&nbsp;&nbsp;&nbsp;░░░&nbsp;░░░</div>
 <div class="_line _comment">░░░░░░░░░&nbsp;░░░░░░░░░&nbsp;░░░░░░░░░</div>
@@ -93,17 +112,35 @@
             </div>
 
             <div class="_code">
+                <div class="_line _comment">░░░░░░░░░░░░░░░░░░░░░░░░░░░░░</div>
+                <div class="_line _comment">░░&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;░░&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;░░&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;░░</div>
+                <div class="_line _comment">░░&nbsp;&nbsp;&nbsp;<span class="s-tc--accent">1</span>&nbsp;&nbsp;&nbsp;░░&nbsp;&nbsp;&nbsp;<span class="s-tc--complementary">2</span>&nbsp;&nbsp;&nbsp;░░&nbsp;&nbsp;&nbsp;<span class="s-tc--error">4</span>&nbsp;&nbsp;&nbsp;░░</div>
+                <div class="_line _comment">░░&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;░░&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;░░&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;░░</div>
+                <div class="_line _comment">░░░░░░░░░░░░░░░░░░░░&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;░░</div>
+                <div class="_line _comment">░░&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;░░&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;░░</div>
+                <div class="_line _comment">░░&nbsp;&nbsp;&nbsp;<span class="s-tc--info">3</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="s-tc--info">3</span>&nbsp;&nbsp;&nbsp;░░&nbsp;&nbsp;&nbsp;<span class="s-tc--error">4</span>&nbsp;&nbsp;&nbsp;░░</div>
+                <div class="_line _comment">░░&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;░░&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;░░</div>
+                <div class="_line _comment">░░░░░░░░░░░░░░░░░░░░░░░░░░░░░</div>
+                <div class="_line">&nbsp;</div>
+                <div class="_line _comment">Easy complexe layout creation</div>
+                <div class="_line"><span class="s-tc:accent">@sugar.layout</span> <span class="_comment">("</span></div>
+                <div class="_line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="s-tc--accent">1</span> <span class="s-tc--complementary">2</span> <span class="s-tc--error">4</span></div>
+                <div class="_line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="s-tc--info">3</span> <span class="s-tc--info">3</span> <span class="s-tc--error">4</span></div>
+                <div class="_line _comment">");</div>
+            </div>
+
+            <div class="_code">
 
 <div class="_line _comment">░░░░░░░░░░░░░░░░░░░░░░░░░░</div>
 <div class="_line _comment">░░░░░░░░░░░░░░░░░░░░░░░░░░</div>
 <div class="_line _comment">░░░</div>
 <div class="_line _comment">░░░&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="s-tc--complementary">░░░░░░░░░░░</span></div>
 <div class="_line _comment">░░░&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="s-tc--complementary">░░</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="s-tc--complementary">░░</span></div>
-<div class="_line _comment">░░░&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="s-tc--complementary">░░</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="s-tc--white">░░░░░░░░░░</span></div>
-<div class="_line _comment">░░░░░░░░░░░░░░&nbsp;&nbsp;&nbsp;<span class="s-tc--complementary">░░</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="s-tc--white">░░&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;░░</span></div>
-<div class="_line _comment">░░░░░░░░░░░░░░&nbsp;&nbsp;&nbsp;<span class="s-tc--complementary">░░</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="s-tc--white">░░&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;░░</span></div>
-<div class="_line _comment">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;░░░░░&nbsp;&nbsp;&nbsp;<span class="s-tc--complementary">░░</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="s-tc--white">░░</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="s-tc--white">░░</span></div>
-<div class="_line _comment">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;░░░░░░&nbsp;&nbsp;&nbsp;<span class="s-tc--complementary">░░░░░░░</span><span class="s-tc--white">░░░░░░░░░░</span></div>
+<div class="_line _comment">░░░&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="s-tc--complementary">░░</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="s-tc--white">░░░░░░░░░</span></div>
+<div class="_line _comment">░░░░░░░░░░░░░░&nbsp;&nbsp;&nbsp;<span class="s-tc--complementary">░░</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="s-tc--white">░░&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;░░</span></div>
+<div class="_line _comment">░░░░░░░░░░░░░░&nbsp;&nbsp;&nbsp;<span class="s-tc--complementary">░░</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="s-tc--white">░░&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;░░</span></div>
+<div class="_line _comment">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;░░░░░&nbsp;&nbsp;&nbsp;<span class="s-tc--complementary">░░</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="s-tc--white">░░</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="s-tc--white">░░</span></div>
+<div class="_line _comment">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;░░░░░░&nbsp;&nbsp;&nbsp;<span class="s-tc--complementary">░░░░░░░</span><span class="s-tc--white">░░░░░░░░░</span></div>
 
 <div class="_line">&nbsp;</div>
                 <div class="_line">
@@ -115,23 +152,7 @@
                 <div class="_line"><span class="s-tc:accent">@sugar.media</span> <span class="s-tc:error">desktop</span> { <span class="_comment">...</span> }</div>
             </div>
 
-            <div class="_code">
-                <div class="_line _comment">░░░░░░░░░░░░░░░░░░░░░░░░░░░░░</div>
-                <div class="_line _comment">░░&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;░░&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;░░&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;░░</div>
-                <div class="_line _comment">░░&nbsp;&nbsp;&nbsp;<span class="s-tc--accent">1</span>&nbsp;&nbsp;&nbsp;░░&nbsp;&nbsp;&nbsp;<span class="s-tc--complementary">2</span>&nbsp;&nbsp;&nbsp;░░&nbsp;&nbsp;&nbsp;<span class="s-tc--error">4</span>&nbsp;&nbsp;&nbsp;░░</div>
-                <div class="_line _comment">░░&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;░░&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;░░&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;░░</div>
-                <div class="_line _comment">░░░░░░░░░░░&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;░░&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;░░</div>
-                <div class="_line _comment">░░&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;░░&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;░░&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;░░</div>
-                <div class="_line _comment">░░&nbsp;&nbsp;&nbsp;<span class="s-tc--info">3</span>&nbsp;&nbsp;&nbsp;░░&nbsp;&nbsp;&nbsp;<span class="s-tc--complementary">2</span>&nbsp;&nbsp;&nbsp;░░&nbsp;&nbsp;&nbsp;<span class="s-tc--error">4</span>&nbsp;&nbsp;&nbsp;░░</div>
-                <div class="_line _comment">░░&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;░░&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;░░&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;░░</div>
-                <div class="_line _comment">░░░░░░░░░░░░░░░░░░░░░░░░░░░░░</div>
-                <div class="_line">&nbsp;</div>
-                <div class="_line _comment">Easy complexe layout creation</div>
-                <div class="_line"><span class="s-tc:accent">@sugar.layout</span> <span class="_comment">("</span></div>
-                <div class="_line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="s-tc--accent">1</span> <span class="s-tc--complementary">2</span> <span class="s-tc--error">4</span></div>
-                <div class="_line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="s-tc--info">3</span> <span class="s-tc--complementary">2</span> <span class="s-tc--error">4</span></div>
-                <div class="_line _comment">");</div>
-            </div>
+            
 
             <div class="_code">
 <div class="_line _comment">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;░░░░░░░░</div>

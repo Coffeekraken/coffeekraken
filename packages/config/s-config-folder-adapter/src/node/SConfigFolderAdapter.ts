@@ -14,6 +14,8 @@ import __replaceTokens from '@coffeekraken/sugar/shared/token/replaceTokens';
 import __fs from 'fs';
 import __path from 'path';
 
+import { __hashFromSync } from '@coffeekraken/sugar/hash';
+
 /**
  * @name                  SConfigFolderAdapter
  * @namespace           node
@@ -30,15 +32,15 @@ import __path from 'path';
  * @setting         {String}            [fileName='%name.config.js']        Specify the config filename schema
  * @setting         {String}            [folderName='.sugar']               Specify the folder name schema
  * @setting         {ISConfigFolderAdapterScopesSettings}       [scopes={}]     Specify the scopes "default", "module", "repo", "package" and "user" folder paths
- *  
+ *
  * @snippet         __SConfigFolderAdapter($1)
  * new __SConfigFolderAdapter($1)
- * 
+ *
  * @example         js
  * import __SConfigFolderAdapter from '@coffeekraken/s-config-folder-adapter';
  * import __SConfig from '@coffeekraken/s-config';
  * const config = new __SConfig($1, new __SConfigFolderAdapter($2));
- * 
+ *
  * @todo      interface
  * @todo      doc
  * @todo      tests
@@ -154,7 +156,8 @@ export default class SConfigFolderAdapter extends __SConfigAdapter {
     }
 
     async integrity() {
-        let filesAddedTimes = 0;
+        const hashes: string[] = [];
+
         for (let [scope, folderPaths] of Object.entries(
             this._scopedFoldersPaths,
         )) {
@@ -165,13 +168,15 @@ export default class SConfigFolderAdapter extends __SConfigAdapter {
                 for (let j = 0; j < filesPaths.length; j++) {
                     const filePath = `${folderPath}/${filesPaths[j]}`;
                     try {
-                        const stats = __fs.statSync(filePath);
-                        filesAddedTimes += stats.mtime.getTime();
-                    } catch (e) {}
+                        hashes.push(__hashFromSync(filePath));
+                    } catch (e) {
+                        console.log(e);
+                    }
                 }
             }
         }
-        const hash = __sha256.encrypt(`${filesAddedTimes}`);
+
+        const hash = __sha256.encrypt(`${hashes.join('-')}`);
         return hash;
     }
 

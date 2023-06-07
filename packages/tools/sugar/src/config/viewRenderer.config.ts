@@ -18,24 +18,33 @@ export default function (api) {
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         get rootDirs() {
-            if (api.config.viewRenderer.defaultEngine === 'twig') {
-                return [
-                    __packageRootDir(),
-                    ...(api.parent.rootDirs ?? []),
-                    `${__path.resolve(
-                        __packageRootDir(__dirname()),
-                        'src/views/twig',
-                    )}`,
-                ];
-            }
             return [
                 __packageRootDir(),
                 ...(api.parent.rootDirs ?? []),
                 `${__path.resolve(
                     __packageRootDir(__dirname()),
-                    'src/views/blade',
+                    'src/views/twig',
                 )}`,
             ];
+
+            // if (api.config.viewRenderer.defaultEngine === 'twig') {
+            //     return [
+            //         __packageRootDir(),
+            //         ...(api.parent.rootDirs ?? []),
+            //         `${__path.resolve(
+            //             __packageRootDir(__dirname()),
+            //             'src/views/twig',
+            //         )}`,
+            //     ];
+            // }
+            // return [
+            //     __packageRootDir(),
+            //     ...(api.parent.rootDirs ?? []),
+            //     `${__path.resolve(
+            //         __packageRootDir(__dirname()),
+            //         'src/views/blade',
+            //     )}`,
+            // ];
         },
     };
 }

@@ -1,4 +1,5 @@
 import __SClass from '@coffeekraken/s-class';
+import { ISFrontspec } from '@coffeekraken/s-frontspec';
 import type { ISThemeInitSettings } from '@coffeekraken/s-theme';
 import __STheme from '@coffeekraken/s-theme';
 
@@ -6,29 +7,13 @@ export interface ISFrontLegalSettings {
     cookieName: string;
     defaultMetas: any;
 }
-export interface ISFrontLodSettingsLevel {
-    name: string;
-    speedIndex?: number;
-}
-export interface ISFrontLodSettings {
-    enabled: boolean;
-    defaultLevel: number;
-    botLevel: number;
-    levels: Record<string, ISFrontLodSettingsLevel>;
-}
-export interface ISFrontPartytownSettings {
-    enabled: boolean;
-    [key: string]: any;
-}
 export interface ISFrontWireframeSettings {
     enabled: boolean;
 }
 export interface ISFrontInitSettings {
     id: string;
-    gtm: string;
-    lod: Partial<ISFrontLodSettings>;
+    frontspec: any;
     wireframe: Partial<ISFrontWireframeSettings>;
-    partytown: Partial<ISFrontPartytownSettings>;
     legal: Partial<ISFrontLegalSettings>;
     theme: __STheme | Partial<ISThemeInitSettings>;
     logs: undefined | boolean;
@@ -51,7 +36,7 @@ export default class SFront extends __SClass {
     
     theme: any;
     
-    frontspec: any;
+    frontspec: ISFrontspec;
     
     _originalState: {
         lod: {

@@ -12,23 +12,14 @@ function default_1({ env, config }) {
         layouts: {
             main: {
                 name: 'Default (main)',
-                viewPath: {
-                    twig: 'layouts/main.twig',
-                    blade: null,
-                },
+                viewDotPath: 'layouts.main',
             },
         },
-        rootDirs: {
-            twig: [
-                `./${path_2.default.relative((0, path_1.__packageRootDir)(), config.storage.src.viewsDir)}`,
-                `./node_modules/@coffeekraken/sugar/src/views/twig`,
-            ],
-            blade: [
-                `./${path_2.default.relative((0, path_1.__packageRootDir)(), config.storage.src.viewsDir)}`,
-                `./node_modules/@coffeekraken/sugar/src/views/blade`,
-            ],
-        },
+        rootDirs: [
+            `./${path_2.default.relative((0, path_1.__packageRootDir)(), config.storage.src.viewsDir)}`,
+            `./node_modules/@coffeekraken/sugar/src/views`,
+        ],
     };
 }
 exports.default = default_1;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7O0FBQUEsbURBQTREO0FBQzVELGdEQUEwQjtBQUUxQixtQkFBeUIsRUFBRSxHQUFHLEVBQUUsTUFBTSxFQUFFO0lBQ3BDLElBQUksR0FBRyxDQUFDLFFBQVEsS0FBSyxNQUFNO1FBQUUsT0FBTztJQUVwQyxPQUFPO1FBQ0gsT0FBTyxFQUFFO1lBQ0wsSUFBSSxFQUFFO2dCQUNGLElBQUksRUFBRSxnQkFBZ0I7Z0JBQ3RCLFFBQVEsRUFBRTtvQkFDTixJQUFJLEVBQUUsbUJBQW1CO29CQUN6QixLQUFLLEVBQUUsSUFBSTtpQkFDZDthQUNKO1NBQ0o7UUFDRCxRQUFRLEVBQUU7WUFDTixJQUFJLEVBQUU7Z0JBQ0YsS0FBSyxjQUFNLENBQUMsUUFBUSxDQUNoQixJQUFBLHVCQUFnQixHQUFFLEVBQ2xCLE1BQU0sQ0FBQyxPQUFPLENBQUMsR0FBRyxDQUFDLFFBQVEsQ0FDOUIsRUFBRTtnQkFDSCxtREFBbUQ7YUFDdEQ7WUFDRCxLQUFLLEVBQUU7Z0JBQ0gsS0FBSyxjQUFNLENBQUMsUUFBUSxDQUNoQixJQUFBLHVCQUFnQixHQUFFLEVBQ2xCLE1BQU0sQ0FBQyxPQUFPLENBQUMsR0FBRyxDQUFDLFFBQVEsQ0FDOUIsRUFBRTtnQkFDSCxvREFBb0Q7YUFDdkQ7U0FDSjtLQUNKLENBQUM7QUFDTixDQUFDO0FBOUJELDRCQThCQyJ9
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7O0FBQUEsbURBQTREO0FBQzVELGdEQUEwQjtBQUUxQixtQkFBeUIsRUFBRSxHQUFHLEVBQUUsTUFBTSxFQUFFO0lBQ3BDLElBQUksR0FBRyxDQUFDLFFBQVEsS0FBSyxNQUFNO1FBQUUsT0FBTztJQUVwQyxPQUFPO1FBQ0gsT0FBTyxFQUFFO1lBQ0wsSUFBSSxFQUFFO2dCQUNGLElBQUksRUFBRSxnQkFBZ0I7Z0JBQ3RCLFdBQVcsRUFBRSxjQUFjO2FBQzlCO1NBQ0o7UUFDRCxRQUFRLEVBQUU7WUFDTixLQUFLLGNBQU0sQ0FBQyxRQUFRLENBQ2hCLElBQUEsdUJBQWdCLEdBQUUsRUFDbEIsTUFBTSxDQUFDLE9BQU8sQ0FBQyxHQUFHLENBQUMsUUFBUSxDQUM5QixFQUFFO1lBQ0gsOENBQThDO1NBQ2pEO0tBQ0osQ0FBQztBQUNOLENBQUM7QUFsQkQsNEJBa0JDIn0=

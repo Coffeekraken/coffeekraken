@@ -27,8 +27,6 @@ export default (config: Config = {}): PluginOption => ({
     }),
 
     handleHotUpdate(api) {
-        // console.log('___UP', api);
-
         // handle only css reload
         if (!api.file.match(/\.css$/) || !api.file.match(/\/src/)) {
             return;
@@ -56,72 +54,17 @@ export default (config: Config = {}): PluginOption => ({
                 type: 'custom',
                 event: 'sugar.update.css',
                 data: {
-                    filePath: api.file,
-                    path: servePath,
+                    srcPath: api.file,
+                    srcRelPath: api.file.replace(`${__packageRootDir()}/`, ''),
+                    distPath: api.file.replace('/src/', '/dist/'),
+                    distRelPath: api.file
+                        .replace(`${__packageRootDir()}/`, '')
+                        .replace('/src/', '/dist/'),
+                    url: servePath,
                 },
             });
         }, 100);
 
-        // server.ws.send({
-        //   type: 'custom',
-        //   event: 'special-update',
-        //   data: {}
-        // })
         return [];
     },
-
-    // configureServer({ watcher, ws, config: { logger } }: ViteDevServer) {
-    //     config = __deepMerge(
-    //         {
-    //             config: true,
-    //             css: true,
-    //         },
-    //         config,
-    //     );
-
-    //     const configFiles = __SugarConfig.foldersRealPaths.map(
-    //         (p) => `${p}/*.config.js`,
-    //     );
-
-    //     const shouldReloadConfigs = __picomatch(configFiles);
-    //     const checkReload = (path: string) => {
-    //         if (!path.match(/\.config\.js$/) && !path.match(/\.css$/)) return;
-
-    //         // let passChecks = false;
-
-    //         // if (shouldReloadConfigs(path) && config.config) passChecks = true;
-    //         // if (!passChecks && path.match(/\.css$/) && config.css)
-    //         //     passChecks = true;
-
-    //         // if (!passChecks) return;
-
-    //         let type = 'update';
-    //         if (path.match(/\.css$/)) {
-    //             type = 'css.update';
-    //         }
-
-    //         console.log('up', type, path);
-
-    //         setTimeout(() => ws.send({ type, event: 'sugar' }, path), 100);
-    //     };
-
-    //     __SEventEmitter.global.on(
-    //         's-postcss-sugar-plugin-import-update',
-    //         (e) => {
-    //             console.log('PPP', e);
-    //             checkReload(e.path);
-    //         },
-    //     );
-
-    //     const localWatcher = __chokidar.watch(configFiles, {
-    //         ignoreInitial: true,
-    //     });
-
-    //     // Ensure Vite keeps track of the files and triggers HMR as needed.
-    //     // watcher.add(configFiles)
-
-    //     // Do a full page reload if any of the watched files changes.
-    //     localWatcher.on('add', checkReload);
-    //     localWatcher.on('change', checkReload);
-    // },
 });

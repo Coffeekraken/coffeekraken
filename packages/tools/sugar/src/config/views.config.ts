@@ -8,27 +8,15 @@ export default function ({ env, config }) {
         layouts: {
             main: {
                 name: 'Default (main)',
-                viewPath: {
-                    twig: 'layouts/main.twig',
-                    blade: null,
-                },
+                viewDotPath: 'layouts.main',
             },
         },
-        rootDirs: {
-            twig: [
-                `./${__path.relative(
-                    __packageRootDir(),
-                    config.storage.src.viewsDir,
-                )}`,
-                `./node_modules/@coffeekraken/sugar/src/views/twig`,
-            ],
-            blade: [
-                `./${__path.relative(
-                    __packageRootDir(),
-                    config.storage.src.viewsDir,
-                )}`,
-                `./node_modules/@coffeekraken/sugar/src/views/blade`,
-            ],
-        },
+        rootDirs: [
+            `./${__path.relative(
+                __packageRootDir(),
+                config.storage.src.viewsDir,
+            )}`,
+            `./node_modules/@coffeekraken/sugar/src/views`,
+        ],
     };
 }

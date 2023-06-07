@@ -321,20 +321,20 @@ export default function (api) {
                 description: 'Start the development stack',
                 runInParallel: true,
                 actions: {
-                    /**
-                     * @name            typescriptBuild
-                     * @namespace       config.kitchenRecipeDefault.stacks.dev.actions
-                     * @type            String
-                     * @default         [config.kitchen.actions.typescriptBuild]
-                     *
-                     * Specify the recipe dev stack frontendServer action
-                     *
-                     * @since       2.0.0
-                     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-                     */
-                    get typescriptBuild() {
-                        return api.config.kitchen.actions.typescriptBuild;
-                    },
+                    // /**
+                    //  * @__name            typescriptBuild
+                    //  * @__namespace       config.kitchenRecipeDefault.stacks.dev.actions
+                    //  * @__type            String
+                    //  * @__default         [config.kitchen.actions.typescriptBuild]
+                    //  *
+                    //  * Specify the recipe dev stack frontendServer action
+                    //  *
+                    //  * @since       2.0.0
+                    //  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+                    //  */
+                    // get typescriptBuild() {
+                    //     return api.config.kitchen.actions.typescriptBuild;
+                    // },
 
                     /**
                      * @name            frontendServer
@@ -351,20 +351,20 @@ export default function (api) {
                         return api.config.kitchen.actions.frontendServer;
                     },
 
-                    /**
-                     * @name            corsProxy
-                     * @namespace       config.kitchenRecipeDefault.stacks.dev.actions
-                     * @type            String
-                     * @default         [config.kitchen.actions.corsProxy]
-                     *
-                     * Specify the recipe prod stack corsProxy action
-                     *
-                     * @since       2.0.0
-                     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-                     */
-                    get corsProxy() {
-                        return api.config.kitchen.actions.corsProxy;
-                    },
+                    // /**
+                    //  * @__name            corsProxy
+                    //  * @__namespace       config.kitchenRecipeDefault.stacks.dev.actions
+                    //  * @__type            String
+                    //  * @__default         [config.kitchen.actions.corsProxy]
+                    //  *
+                    //  * Specify the recipe prod stack corsProxy action
+                    //  *
+                    //  * @since       2.0.0
+                    //  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+                    //  */
+                    // get corsProxy() {
+                    //     return api.config.kitchen.actions.corsProxy;
+                    // },
 
                     /**
                      * @name            vite
@@ -380,21 +380,6 @@ export default function (api) {
                     get vite() {
                         return api.config.kitchen.actions.vite;
                     },
-
-                    // /**
-                    //  * @name            format
-                    //  * @namespace       config.kitchenRecipeDefault.stacks.dev.actions
-                    //  * @type            String
-                    //  * @default         [config.kitchen.actions.format]
-                    //  *
-                    //  * Specify the format action settings
-                    //  *
-                    //  * @since       2.0.0
-                    //  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-                    //  */
-                    // get format() {
-                    //     return api.config.kitchen.actions.format;
-                    // },
                 },
             },
             prod: {
@@ -440,20 +425,20 @@ export default function (api) {
                         return api.config.kitchen.actions.frontendServer;
                     },
 
-                    /**
-                     * @name            corsProxy
-                     * @namespace       config.kitchenRecipeDefault.stacks.prod.actions
-                     * @type            String
-                     * @default         [config.kitchen.actions.corsProxy]
-                     *
-                     * Specify the recipe prod stack corsProxy action
-                     *
-                     * @since       2.0.0
-                     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-                     */
-                    get corsProxy() {
-                        return api.config.kitchen.actions.corsProxy;
-                    },
+                    // /**
+                    //  * @__name            corsProxy
+                    //  * @__namespace       config.kitchenRecipeDefault.stacks.prod.actions
+                    //  * @__type            String
+                    //  * @__default         [config.kitchen.actions.corsProxy]
+                    //  *
+                    //  * Specify the recipe prod stack corsProxy action
+                    //  *
+                    //  * @since       2.0.0
+                    //  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+                    //  */
+                    // get corsProxy() {
+                    //     return api.config.kitchen.actions.corsProxy;
+                    // },
                 },
             },
             build: {

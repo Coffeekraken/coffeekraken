@@ -49,7 +49,7 @@ function default_1({ params, atRule, replaceWith, }) {
         -webkit-box-orient: vertical;
         -webkit-line-clamp: ${finalParams.lines};
         line-clamp: ${finalParams.lines};
-        overflow: hidden;p
+        overflow: hidden;
   `,
     ];
     return vars;

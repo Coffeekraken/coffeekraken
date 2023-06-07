@@ -7,6 +7,10 @@ import { __isInIframe, __reloadStylesheets } from '@coffeekraken/sugar/dom';
 import { __isCrawler } from '@coffeekraken/sugar/is';
 import { __deepMerge } from '@coffeekraken/sugar/object';
 
+import { ISFrontspec } from '@coffeekraken/s-frontspec';
+
+import __SFrontspec from '@coffeekraken/s-frontspec';
+
 import __SStdio, {
     __SStdioBasicAdapter,
     __SStdioConsoleSource,
@@ -14,7 +18,6 @@ import __SStdio, {
 
 import { __speedIndex } from '@coffeekraken/sugar/perf';
 
-import __SFrontspec from '@coffeekraken/s-frontspec';
 import type { ISThemeInitSettings } from '@coffeekraken/s-theme';
 import __STheme from '@coffeekraken/s-theme';
 
@@ -22,7 +25,10 @@ import __STheme from '@coffeekraken/s-theme';
 if (import.meta?.hot) {
     // @ts-ignore
     import.meta.hot.on('sugar.update.css', (data) => {
-        console.log('RELOAD', data);
+        // @ts-ignore
+        console.verbose?.(
+            `[SFront] Reloading css "${data.srcRelPath ?? data}"`,
+        );
         // perform custom update
         __reloadStylesheets();
     });
@@ -60,33 +66,14 @@ export interface ISFrontLegalSettings {
     defaultMetas: any;
 }
 
-export interface ISFrontLodSettingsLevel {
-    name: string;
-    speedIndex?: number;
-}
-
-export interface ISFrontLodSettings {
-    enabled: boolean;
-    defaultLevel: number;
-    botLevel: number;
-    levels: Record<string, ISFrontLodSettingsLevel>;
-}
-
-export interface ISFrontPartytownSettings {
-    enabled: boolean;
-    [key: string]: any;
-}
-
 export interface ISFrontWireframeSettings {
     enabled: boolean;
 }
 
 export interface ISFrontInitSettings {
     id: string;
-    gtm: string;
-    lod: Partial<ISFrontLodSettings>;
+    frontspec: any;
     wireframe: Partial<ISFrontWireframeSettings>;
-    partytown: Partial<ISFrontPartytownSettings>;
     legal: Partial<ISFrontLegalSettings>;
     theme: __STheme | Partial<ISThemeInitSettings>;
     logs: undefined | boolean;
@@ -207,14 +194,14 @@ export default class SFront extends __SClass {
 
     /**
      * @name        frontspec
-     * @type        Sfrontspec
+     * @type        ISFrontspec
      *
      * Store the current frontspec instance
      *
      * @since       2.0.0
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    frontspec;
+    frontspec: ISFrontspec;
 
     /**
      * @name        state
@@ -297,9 +284,7 @@ export default class SFront extends __SClass {
         }
 
         // init frontspec and theme
-        let frontspec, theme;
-
-        // init frontspec
+        let frontspec;
         if (settings?.frontspec instanceof __SFrontspec) {
             frontspec = settings?.frontspec;
         } else {
@@ -307,6 +292,7 @@ export default class SFront extends __SClass {
         }
 
         // init theme
+        let theme;
         if (settings?.theme instanceof __STheme) {
             theme = settings?.theme;
         } else {
@@ -335,6 +321,9 @@ export default class SFront extends __SClass {
             ),
         );
 
+        this.frontspec = frontspec;
+        this.theme = theme;
+
         // save the default instance to access it using the SFront.instance static property
         if (
             this.settings.id === 'default' &&
@@ -342,10 +331,6 @@ export default class SFront extends __SClass {
         ) {
             this.constructor._defaultInstance = this;
         }
-
-        // save frontspec and theme in class property
-        this.frontspec = frontspec;
-        this.theme = theme;
 
         // listen for legal changes
         document.addEventListener('s-front.legal.agree', () => {
@@ -359,7 +344,7 @@ export default class SFront extends __SClass {
         this.restore();
 
         // handle lod
-        if (this.settings.lod.enabled) {
+        if (this.frontspec.get('lod.enabled')) {
             this._initLod();
         }
 
@@ -505,18 +490,17 @@ export default class SFront extends __SClass {
                 document.querySelectorAll('link[s-lod]'),
             );
 
-            if (this.settings.lod.stylesheet instanceof HTMLLinkElement) {
-                $stylesheet = this.settings.lod.stylesheet;
-            } else if (typeof this.settings.lod.stylesheet === 'string') {
-                $stylesheet = document.querySelector(
-                    this.settings.lod.stylesheet,
-                );
+            const lod = this.frontspec.get('lod') ?? {};
+            if (lod.stylesheet instanceof HTMLLinkElement) {
+                $stylesheet = lod.stylesheet;
+            } else if (typeof lod.stylesheet === 'string') {
+                $stylesheet = document.querySelector(lod.stylesheet);
             }
 
             // remove all none used stylesheets
             lodStylesheets.forEach(($link) => {
                 const l = parseInt($link.getAttribute('s-lod'));
-                if (l > level) {
+                if (l > <number>level) {
                     $link.remove();
                 }
             });
@@ -594,7 +578,7 @@ export default class SFront extends __SClass {
         if (!__SEnv.is('production') && !__isInIframe()) {
             console.log(
                 '<yellow>[SFront]</yellow> Initializing <magenta>lod</magenta> (level of details) with these settings',
-                this.settings.lod,
+                this.frontspec.get('lod'),
             );
         }
 
@@ -616,7 +600,7 @@ export default class SFront extends __SClass {
         }
 
         // set lod level
-        this.setLod(this.settings.lod.defaultLevel);
+        this.setLod(this.frontspec.lod.defaultLevel);
 
         // if the user does not have selected a specific lod
         // we check which lod is the most suited for his
@@ -624,7 +608,7 @@ export default class SFront extends __SClass {
         if (
             !isCrawler &&
             this.state.lod.level === undefined &&
-            this.settings.lod.defaultLevel === undefined
+            this.frontspec.lod.defaultLevel === undefined
         ) {
             const speedIndex = __speedIndex();
             let suitedLod = 0;
@@ -677,13 +661,13 @@ export default class SFront extends __SClass {
         }
 
         // init google tag manager
-        if (this.settings.google?.gtm) {
+        if (this.frontspec?.google?.gtm) {
             this._initGtm();
         }
 
         // partytown
-        if (this.settings.partytown?.enabled) {
-            // this._initPartytown();
+        if (this.frontspec?.partytown?.enabled) {
+            this._initPartytown();
         }
     }
 
@@ -693,7 +677,7 @@ export default class SFront extends __SClass {
     private _initGtm() {
         if (!__SEnv.is('production') && !__isInIframe()) {
             console.log(
-                `<yellow>[SFront]</yellow> Initializing tracking through the <magenta>google tag manager</magenta> with this id "<cyan>${this.settings.google.gtm}</cyan>"`,
+                `<yellow>[SFront]</yellow> Initializing tracking through the <magenta>google tag manager</magenta> with this id "<cyan>${this.frontspec.google.gtm}</cyan>"`,
             );
         }
 
@@ -701,7 +685,7 @@ export default class SFront extends __SClass {
 new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
 j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','${this.settings.google.gtm}');`;
+})(window,document,'script','dataLayer','${this.frontspec.google.gtm}');`;
 
         // create the actual script tag
         const $script = document.createElement('script');
@@ -710,7 +694,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         // @ts-ignore
         $script.setAttribute(
             'type',
-            this.settings.partytown?.enabled
+            this.frontspec.partytown?.enabled
                 ? 'text/partytown'
                 : 'text/javascript',
         );
@@ -722,10 +706,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
      */
     private _initPartytown() {
         // make sure we have all we need for partytown
-        if (!this.settings.google.gtm) {
+        if (!this.frontspec?.google?.gtm) {
             if (!__SEnv.is('production') && !__isInIframe()) {
                 console.log(
-                    `<yellow>[SFront]</yellow> You have enabled <magenta>partytown</magenta> but you don't have specified any "<cyan>settings.google.gtm</cyan>" tag manager id...'`,
+                    `<yellow>[SFront]</yellow> You have enabled <magenta>partytown</magenta> but you don't have specified any "<cyan>settings.frontspec.google.gtm</cyan>" tag manager id...'`,
                 );
                 return;
             }
@@ -733,12 +717,12 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
         // set the partytown settings
         // @ts-ignore
-        window.partytown = this.settings.partytown;
+        window.partytown = this.frontspec.partytown;
 
         if (!__SEnv.is('production') && !__isInIframe()) {
             console.log(
                 '<yellow>[SFront]</yellow> Initializing <magenta>partytown</magenta> with these settings',
-                this.settings.partytown,
+                this.frontspec.partytown,
             );
         }
 

@@ -11,6 +11,8 @@ import __fs from 'fs';
 import __path from 'path';
 import __SFrontspecBuildParamsInterface from './interface/SFrontspecBuildParamsInterface';
 
+import type { ISFrontspec } from '@coffeekraken/s-frontspec';
+
 /**
  * @name                SFrontspec
  * @namespace           node
@@ -65,7 +67,7 @@ export default class SFrontspec extends __SClass {
     static _cachesStack = {};
     static _defaultFrontspecInstance;
 
-    _frontspec;
+    _frontspec: ISFrontspec;
 
     /**
      * @name        get

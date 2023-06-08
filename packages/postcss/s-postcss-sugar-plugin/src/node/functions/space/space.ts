@@ -61,7 +61,7 @@ export default function ({
     const spaces = space.split(' ').map((s) => {
         const size = __STheme.get(`space.${s}`);
         if (!size) return size;
-        return `var(${`--s-theme-space-${s}`}, ${size})`;
+        return `var(${`--s-space-${s}`}, ${size})`;
     });
 
     return spaces.join(' ');

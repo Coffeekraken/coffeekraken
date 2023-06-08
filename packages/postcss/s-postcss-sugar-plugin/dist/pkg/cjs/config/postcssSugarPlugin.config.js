@@ -59,7 +59,7 @@ function default_1(api) {
              * @type            Boolean
              * @default         undefined
              *
-             * Specify if you want to compress the --s-theme... variables or not.
+             * Specify if you want to compress the --s-... variables or not.
              * If is set to "undefined", it will be true only for production target build.
              *
              * @since           2.0.0

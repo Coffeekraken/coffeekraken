@@ -52,8 +52,8 @@ export default function width({
     };
 
     if (!finalParams.type) {
-        return `var(--s-container-max-width, var(--s-theme-layout-container-default, 100%))`;
+        return `var(--s-container-max-width, var(--s-layout-container-default, 100%))`;
     }
 
-    return `var(--s-theme-layout-container-${finalParams.type}, var(--s-theme-layout-container-default, 100%))`;
+    return `var(--s-layout-container-${finalParams.type}, var(--s-layout-container-default, 100%))`;
 }

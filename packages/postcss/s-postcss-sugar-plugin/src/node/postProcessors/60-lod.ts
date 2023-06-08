@@ -476,10 +476,6 @@ export default async function ({ root, sharedData, postcssApi, settings }) {
         container.remove();
     });
 
-    // // classmap
-    // classmap.applyOnAst(root);
-    // classmap.save();
-
     if (settings.lod.method === 'file') {
         const filePath = root.source.input.file;
 

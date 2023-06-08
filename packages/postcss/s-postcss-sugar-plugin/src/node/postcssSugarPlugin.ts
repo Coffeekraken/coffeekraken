@@ -120,8 +120,6 @@ const plugin = (settings: IPostcssSugarPluginSettings = {}) => {
         settings,
     );
 
-    // const classmap = new __SClassmap();
-
     let themeHash, settingsHash, bench;
 
     if (_configLoaded) {
@@ -426,7 +424,6 @@ const plugin = (settings: IPostcssSugarPluginSettings = {}) => {
                     params,
                     atRule,
                     settings,
-                    // classmap,
                     // cacheDir,
                     packageHash,
                     themeHash,
@@ -535,7 +532,6 @@ const plugin = (settings: IPostcssSugarPluginSettings = {}) => {
                 CssVars: __CssVars,
                 packageHash,
                 themeHash,
-                // classmap
                 postcssApi: __postcss,
                 getRoot: __getRoot,
                 settings,
@@ -544,17 +540,17 @@ const plugin = (settings: IPostcssSugarPluginSettings = {}) => {
             });
         }
 
-        // compress --s-theme-... variables
+        // compress --s-... variables
         if (settings.compress.variables) {
             root.walkDecls((node) => {
                 if (node.variable) {
-                    if (node.prop.match(/--s-theme/)) {
+                    if (node.prop.match(/--s-/)) {
                         const compressedProp = __compressCssVarName(node.prop);
                         node.prop = compressedProp;
                     }
                 }
 
-                const valueMatches = node.value.match(/--s-theme-[^,\)]+/gm);
+                const valueMatches = node.value.match(/--s-[^,\)]+/gm);
                 if (valueMatches) {
                     valueMatches.forEach((match) => {
                         node.value = node.value.replace(
@@ -679,7 +675,6 @@ const plugin = (settings: IPostcssSugarPluginSettings = {}) => {
                     CssVars: __CssVars,
                     packageHash,
                     themeHash,
-                    // classmap,
                     // cacheDir,
                     getRoot: __getRoot,
                     replaceWith(nodes) {

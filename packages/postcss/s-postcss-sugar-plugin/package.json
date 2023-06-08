@@ -10,6 +10,7 @@
         "@coffeekraken/s-color": "^2.0.0-alpha.27",
         "@coffeekraken/s-docblock": "^2.0.0-alpha.27",
         "@coffeekraken/s-duration": "^2.0.0-alpha.27",
+        "@coffeekraken/s-classmap": "^2.0.0-alpha.27",
         "@coffeekraken/s-env": "^2.0.0-alpha.27",
         "@coffeekraken/s-event-emitter": "^2.0.0-alpha.27",
         "@coffeekraken/s-file": "^2.0.0-alpha.27",

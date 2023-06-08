@@ -73,7 +73,7 @@ export default function ({
             case 'fontWeight':
             case 'fontStyle':
                 vars.code(
-                    `${dashProp}: var(${`--s-theme-font-family-${finalParams.font}-${dashProp}`}, ${
+                    `${dashProp}: var(${`--s-font-family-${finalParams.font}-${dashProp}`}, ${
                         fontFamilyObj[prop]
                     });`,
                 );

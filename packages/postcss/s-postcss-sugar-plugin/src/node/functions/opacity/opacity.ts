@@ -61,7 +61,7 @@ export default function ({
     const opacityRes = opacity.split(' ').map((s) => {
         const size = __STheme.get(`opacity.${s}`);
         if (!size) return size;
-        return `var(${`--s-theme-opacity-${s}`}, ${size})`;
+        return `var(${`--s-opacity-${s}`}, ${size})`;
     });
 
     return opacityRes.join(' ');

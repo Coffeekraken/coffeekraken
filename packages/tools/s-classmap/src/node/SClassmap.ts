@@ -3,6 +3,8 @@
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
 import type { ISClassmapSettings } from '../shared/SClassmapBase';
 
+import { __toBase } from '@coffeekraken/sugar/number';
+
 import __fs from 'fs';
 import __SClassmapBase from '../shared/SClassmap';
 
@@ -61,7 +63,7 @@ export default class SClassmap extends __SClassmapBase {
     }
 
     /**
-     * @name      read
+     * @name      readSync
      * @type        Function
      *
      * This method simply load the classmap.json file at the root of your project
@@ -71,7 +73,7 @@ export default class SClassmap extends __SClassmapBase {
      * @since       2.0.0
      * @author 		Olivier Bossel<olivier.bossel@gmail.com>
      */
-    read(): any {
+    readSync(): any {
         if (!__fs.existsSync(this.settings.path)) {
             return this.map;
         }
@@ -80,7 +82,7 @@ export default class SClassmap extends __SClassmapBase {
     }
 
     /**
-     * @name      save
+     * @name      saveSync
      * @type        Function
      *
      * This method simply save the classmap.json file at the root of your project
@@ -90,7 +92,7 @@ export default class SClassmap extends __SClassmapBase {
      * @since       2.0.0
      * @author 		Olivier Bossel<olivier.bossel@gmail.com>
      */
-    save(): void {
+    saveSync(): void {
         if (!this.settings.path) {
             throw new Error(
                 `<red>[SClassmap]</red> To save your classmap.json file, you MUST specify a settings.path`,
@@ -121,23 +123,29 @@ export default class SClassmap extends __SClassmapBase {
             if (map[name]) {
                 return map[name];
             }
-            map[name] = `s${Object.keys(map).length}`;
+            map[name] = __toBase(Object.keys(map).length, 62);
             return map[name];
         }
 
-        if (!map?.['s-lod--0']) {
-            map['s-lod--0'] = 's0';
-            map['s-lod--1'] = 's1';
-            map['s-lod--2'] = 's2';
-            map['s-lod--3'] = 's3';
-            map['s-lod--4'] = 's4';
-            map['s-lod--5'] = 's5';
-            map['s-lod--6'] = 's6';
-            map['s-lod--7'] = 's7';
-            map['s-lod--8'] = 's8';
-            map['s-lod--9'] = 's9';
-            map['s-lod--10'] = 's10';
-        }
+        // console.log(a(203));
+
+        // // --s-color-accent-olivier
+        // // --s-color-accent-tania
+        // // --sab
+
+        // if (!map?.['s-lod--0']) {
+        //     map['s-lod--0'] = 's0';
+        //     map['s-lod--1'] = 's1';
+        //     map['s-lod--2'] = 's2';
+        //     map['s-lod--3'] = 's3';
+        //     map['s-lod--4'] = 's4';
+        //     map['s-lod--5'] = 's5';
+        //     map['s-lod--6'] = 's6';
+        //     map['s-lod--7'] = 's7';
+        //     map['s-lod--8'] = 's8';
+        //     map['s-lod--9'] = 's9';
+        //     map['s-lod--10'] = 's10';
+        // }
 
         node.walkDecls((decl) => {
             if (decl.variable) {

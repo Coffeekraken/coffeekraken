@@ -64,4 +64,12 @@ $renderRes = $viewRenderer->renderPage($pageFileJson);
 //     return $data;
 // }
 
-print \Sugar\html\expandPleasantCssClassnames($renderRes);
+// expand classes
+$renderRes = \Sugar\html\expandPleasantCssClassnames($renderRes);
+
+// handle classmap
+$classmap = new SClassmap();
+$renderRes = $classmap->patchHtml($renderRes);
+
+// print the result
+print $renderRes;

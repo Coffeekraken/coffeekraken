@@ -96,6 +96,9 @@ if (isset($frontspec)) {
         @if (isset($frontspec))
             document.env.FRONTSPEC = {!! json_encode(\Sugar\object\deepDiff(\Sugar\frontspec\readFrontspec(), $frontspec)) !!};
         @endif
+        @if (isset($classmap))
+            document.env.CLASSMAP = {!! json_encode(\Sugar\object\deepDiff(\Sugar\classmap\readClassmap(), $classmap)) !!};
+        @endif
     </script>
     @endif
 

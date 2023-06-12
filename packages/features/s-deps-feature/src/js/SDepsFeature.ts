@@ -1,4 +1,3 @@
-import __SComponentUtils from '@coffeekraken/s-component-utils';
 import __SFeature from '@coffeekraken/s-feature';
 import {
     __querySelectorLive,
@@ -114,10 +113,8 @@ export default class SDepsFeature extends __SFeature {
         }
 
         // apply class and attribute
-        __SComponentUtils.fastdom.mutate(() => {
-            $elm.setAttribute('ready', 'true');
-            $elm.classList.add('ready');
-        });
+        $elm.setAttribute('ready', 'true');
+        $elm.classList.add('ready');
     }
 
     /**

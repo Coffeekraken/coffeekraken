@@ -1,0 +1,72 @@
+.ck-menu {
+    button {
+        padding: sugar.padding(30);
+    }
+    button i {
+        @sugar.transition fast;
+    }
+
+    &:hover,
+    &:focus,
+    &:focus-within {
+        button i {
+            color: sugar.color(accent);
+        }
+    }
+
+    .s-dropdown {
+        background: sugar.color(accent, text);
+    }
+
+    ._packages {
+        @sugar.border.radius;
+        overflow: hidden;
+    }
+    ._package {
+        background: sugar.color(main, surface, --alpha 0.8);
+    }
+    ._package:not(:last-child) {
+        border-bottom: 1px solid sugar.color(accent, --alpha 0.1);
+    }
+
+    ._package a {
+        display: flex;
+        align-items: stretch;
+        @sugar.transition fast;
+
+        &:hover,
+        &:focus {
+            background: sugar.color(complementary, text);
+        }
+    }
+
+    ._icon {
+        width: 80px;
+        aspect-ratio: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        svg {
+            width: 2em;
+            height: 2em;
+
+            [fill] {
+                fill: white;
+            }
+        }
+    }
+    ._metas {
+        flex-grow: 1;
+        padding: sugar.padding(30);
+        padding-inline-start: 0;
+    }
+    ._title {
+        margin-block-end: sugar.margin(10);
+        color: sugar.color(accent, text);
+    }
+    ._version {
+        opacity: 0.6;
+        font-size: 0.8em;
+    }
+}

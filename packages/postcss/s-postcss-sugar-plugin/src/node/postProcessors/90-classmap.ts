@@ -4,7 +4,6 @@ export default function ({ root, sharedData, postcssApi, settings, cacheDir }) {
     // if (!settings.compress?.variables) {
     //     return;
     // }
-
     const classmap = new __SClassmap();
     classmap.applyOnAst(root);
     classmap.saveSync();

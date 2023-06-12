@@ -167,6 +167,10 @@
             line-height: 1.3;
         }
 
+        [welcome-slider]:not([ready]) {
+            visibility: hidden;
+        }
+
         .s-split-letter {
             opacity: 0;
 

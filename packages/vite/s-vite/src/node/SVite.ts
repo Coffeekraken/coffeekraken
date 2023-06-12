@@ -371,7 +371,9 @@ export default class SVite extends __SClass {
                             input: buildParams.input,
                             external: [],
                             plugins: [],
-                            output: {},
+                            output: {
+                                preserveModules: true,
+                            },
                             onwarn(warning, warn) {
                                 const onwarnRes =
                                     viteConfig.build?.rollupOptions?.onwarn?.(

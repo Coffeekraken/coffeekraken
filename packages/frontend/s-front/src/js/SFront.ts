@@ -9,6 +9,9 @@ import { __deepMerge } from '@coffeekraken/sugar/object';
 
 import { ISFrontspec } from '@coffeekraken/s-frontspec';
 
+import type { ISClassmapSettings } from '@coffeekraken/s-classmap';
+import __SClassmap from '@coffeekraken/s-classmap';
+
 import __SFrontspec from '@coffeekraken/s-frontspec';
 
 import __SStdio, {
@@ -77,13 +80,8 @@ export interface ISFrontInitSettings {
     legal: Partial<ISFrontLegalSettings>;
     theme: __STheme | Partial<ISThemeInitSettings>;
     logs: undefined | boolean;
-    // classmap: Partial<ISFrontClassmapSettings>;
+    classmap: ISClassmapSettings;
 }
-
-// export interface ISFrontClassmapSettings {
-//     enabled: boolean;
-//     url: string;
-// }
 
 export interface ISFrontSettings extends ISFrontInitSettings {}
 
@@ -204,6 +202,17 @@ export default class SFront extends __SClass {
     frontspec: ISFrontspec;
 
     /**
+     * @name        classmap
+     * @type        SClassmap
+     *
+     * Store the current classmap instance
+     *
+     * @since       2.0.0
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    classmap: __SClassmap;
+
+    /**
      * @name        state
      * @type        Object
      *
@@ -291,6 +300,14 @@ export default class SFront extends __SClass {
             frontspec = __SFrontspec.init(settings?.frontspec);
         }
 
+        // classmap
+        let classmap;
+        if (settings.classmap instanceof __SClassmap) {
+            classmap = settings.classmap;
+        } else if (document.env?.CLASSMAP) {
+            classmap = __SClassmap.init(settings.classmap);
+        }
+
         // init theme
         let theme;
         if (settings?.theme instanceof __STheme) {
@@ -321,6 +338,7 @@ export default class SFront extends __SClass {
             ),
         );
 
+        this.classmap = classmap;
         this.frontspec = frontspec;
         this.theme = theme;
 

@@ -72,6 +72,9 @@
         {% if frontspec %}
             document.env.FRONTSPEC = {{ __deepDiff(__readFrontspec(), frontspec)|json_encode()|raw }};
         {% endif %}
+        {% if classmap %}
+            document.env.CLASSMAP = {{ __deepDiff(__readClassmap(), classmap)|json_encode()|raw }};
+        {% endif %}
     </script>
     {% endif %}
 

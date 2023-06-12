@@ -1,3 +1,5 @@
+import { __uniqid } from '@coffeekraken/sugar/string';
+
 /**
  * @name            reloadStylesheets
  * @namespace       js.dom.css
@@ -33,21 +35,28 @@ export default function reloadStylesheets(
         ...(settings ?? {}),
     };
     // loop on all stylesheetgs link and add the timestamp in
-    for (var link of finalSettings.$root.querySelectorAll(
-        'link[rel=stylesheet]',
-    )) {
+    Array.from(
+        finalSettings.$root.querySelectorAll('link[rel=stylesheet]') ?? [],
+    ).forEach(($link) => {
+        const id = $link.id ?? __uniqid();
+
         // clone the link element
-        const $newLink = <HTMLLinkElement>link.cloneNode();
-        $newLink.href = (<HTMLLinkElement>link).href.replace(
+        const $newLink = <HTMLLinkElement>$link.cloneNode();
+        $newLink.href = (<HTMLLinkElement>$link).href.replace(
             /\?.*|$/,
             '?' + Date.now(),
         );
         // listen when fully loaded
         $newLink.addEventListener('load', (e) => {
-            // remove old css
-            link.remove?.();
+            // remove old css's
+            Array.from(
+                finalSettings.$root.querySelectorAll(`link[id="${id}"]`) ?? [],
+            ).forEach(($remove) => {
+                if ($remove === $newLink) return;
+                $remove.remove();
+            });
         });
         // add the new link after the one to reload
-        link.after($newLink);
-    }
+        $link.after($newLink);
+    });
 }

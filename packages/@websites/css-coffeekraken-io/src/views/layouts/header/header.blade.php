@@ -27,6 +27,7 @@
                     <span>Documentation</span>
                 </a>                
             </nav>
+            <ck-menu></ck-menu>
         </div>
 
     </div>

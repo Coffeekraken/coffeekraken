@@ -3,6 +3,7 @@ import { __isInIframe } from '@coffeekraken/sugar/dom';
 // @TODO            check how to override private static methods
 
 import __SClass from '@coffeekraken/s-class';
+import __SClassmap from '@coffeekraken/s-classmap';
 import __SFront from '@coffeekraken/s-front';
 import __SFrontspec from '@coffeekraken/s-frontspec';
 import __SInterface from '@coffeekraken/s-interface';
@@ -78,6 +79,12 @@ export default class SComponentUtils extends __SClass {
      * these will be executed normally
      */
     static _$carpenter;
+
+    /**
+     * Store an instance of the SClassmap class
+     * to resolve classes if needed
+     */
+    static _classmap;
 
     /**
      * @name            fastdom
@@ -259,6 +266,11 @@ export default class SComponentUtils extends __SClass {
                 settings ?? {},
             ),
         );
+
+        // init classmap if not already done
+        if (!this.constructor._classmap) {
+            this.constructor._classmap = new __SClassmap();
+        }
 
         this.node = node;
 
@@ -931,6 +943,17 @@ export default class SComponentUtils extends __SClass {
 
         if (style) {
             clsString += ` ${style}`;
+        }
+
+        // resolve classmap
+        if (__SClassmap.isEnabled()) {
+            clsString = clsString
+                .split(' ')
+                .map((sel) => this.constructor._classmap.resolve(sel.trim()))
+                .join(' ');
+            if (clsString.includes('panel')) {
+                console.log('str', clsString);
+            }
         }
 
         return clsString;

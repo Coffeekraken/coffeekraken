@@ -1,5 +1,7 @@
 import __SClass from '@coffeekraken/s-class';
 import { ISFrontspec } from '@coffeekraken/s-frontspec';
+import type { ISClassmapSettings } from '@coffeekraken/s-classmap';
+import __SClassmap from '@coffeekraken/s-classmap';
 import type { ISThemeInitSettings } from '@coffeekraken/s-theme';
 import __STheme from '@coffeekraken/s-theme';
 
@@ -17,6 +19,7 @@ export interface ISFrontInitSettings {
     legal: Partial<ISFrontLegalSettings>;
     theme: __STheme | Partial<ISThemeInitSettings>;
     logs: undefined | boolean;
+    classmap: ISClassmapSettings;
 }
 export interface ISFrontSettings extends ISFrontInitSettings {
 }
@@ -37,6 +40,8 @@ export default class SFront extends __SClass {
     theme: any;
     
     frontspec: ISFrontspec;
+    
+    classmap: __SClassmap;
     
     _originalState: {
         lod: {

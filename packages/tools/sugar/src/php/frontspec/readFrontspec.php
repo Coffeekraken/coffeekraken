@@ -6,7 +6,7 @@ namespace Sugar\frontspec;
  * @name            readFrontspec
  * @namespace            php.twig.functions.frontspec
  * @type            Function
- * @platform        twig
+ * @platform        php
  * @status          beta
  *
  * This function allows you to read the `frontspec.json` file

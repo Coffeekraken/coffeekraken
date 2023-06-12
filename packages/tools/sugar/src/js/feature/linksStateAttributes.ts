@@ -100,6 +100,10 @@ export default function __linksStateAttributes(
     settings = deepMerge({}, settings);
 
     function handleLink($linkElm) {
+        // protect for async removed links
+        if (!$linkElm) {
+            return;
+        }
         __fastdom.mutate(() => {
             if ($linkElm.getAttribute('href') === document.location.pathname) {
                 $linkElm.setAttribute('actual', true);
@@ -130,24 +134,24 @@ export default function __linksStateAttributes(
         });
     }
 
-    __querySelectorLive(`[href]`, ($linkElm) => {
+    __querySelectorLive(`a[href]`, ($linkElm) => {
         handleLink($linkElm);
         setTimeout(() => {
             handleLink($linkElm);
         }, 500);
     });
     window.addEventListener('locationchange', () => {
-        Array.from(document.querySelectorAll('[href]')).forEach(($linkElm) => {
+        Array.from(document.querySelectorAll('a[href]')).forEach(($linkElm) => {
             handleLink($linkElm);
         });
     });
     window.addEventListener('popstate', () => {
-        Array.from(document.querySelectorAll('[href]')).forEach(($linkElm) => {
+        Array.from(document.querySelectorAll('a[href]')).forEach(($linkElm) => {
             handleLink($linkElm);
         });
     });
     window.addEventListener('pushstate', () => {
-        Array.from(document.querySelectorAll('[href]')).forEach(($linkElm) => {
+        Array.from(document.querySelectorAll('a[href]')).forEach(($linkElm) => {
             handleLink($linkElm);
         });
     });

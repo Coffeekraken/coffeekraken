@@ -1,16 +1,18 @@
-import type { ISClassmapSettings } from '../shared/SClassmapBase';
-import __SClassmapBase from '../shared/SClassmap';
+import type { ISClassmapBaseSettings } from '../shared/SClassmapBase';
+import __SClassmapBase from '../shared/SClassmapBase';
 
-export interface ISClassmapNodeSettings extends ISClassmapSettings {
+export interface ISClassmapSettings extends ISClassmapBaseSettings {
     path: string;
 }
 export default class SClassmap extends __SClassmapBase {
     
-    constructor(settings?: Partial<ISClassmapNodeSettings>);
+    map: {};
     
-    read(): any;
+    constructor(settings?: Partial<ISClassmapSettings>);
     
-    save(): void;
+    readSync(): any;
     
-    applyOnAst(node: any, map?: any): any;
+    saveSync(incremental?: boolean): void;
+    
+    applyOnAst(node: any, map?: {}): {};
 }

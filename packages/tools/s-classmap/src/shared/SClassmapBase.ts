@@ -26,7 +26,7 @@ import { __deepMerge } from '@coffeekraken/sugar/object';
  * @author 		Olivier Bossel<olivier.bossel@gmail.com>
  */
 
-export interface ISClassmapSettings {
+export interface ISClassmapBaseSettings {
     map: string | Record<string, string>;
 }
 
@@ -52,7 +52,7 @@ export default class SClassmapBase extends __SClass {
      * @since       2.0.0
      * @author 		Olivier Bossel<olivier.bossel@gmail.com>
      */
-    constructor(settings?: Partial<ISClassmapSettings>) {
+    constructor(settings?: Partial<ISClassmapBaseSettings>) {
         super(
             __deepMerge(
                 {

@@ -1,12 +1,12 @@
 // @ts-nocheck
 
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
-import type { ISClassmapSettings } from '../shared/SClassmapBase';
+import type { ISClassmapBaseSettings } from '../shared/SClassmapBase';
 
 import { __toBase } from '@coffeekraken/sugar/number';
 
 import __fs from 'fs';
-import __SClassmapBase from '../shared/SClassmap';
+import __SClassmapBase from '../shared/SClassmapBase';
 
 /**
  * @name                SClassmap
@@ -35,11 +35,22 @@ import __SClassmapBase from '../shared/SClassmap';
  * @author 		Olivier Bossel<olivier.bossel@gmail.com>
  */
 
-export interface ISClassmapNodeSettings extends ISClassmapSettings {
+export interface ISClassmapSettings extends ISClassmapBaseSettings {
     path: string;
 }
 
 export default class SClassmap extends __SClassmapBase {
+    /**
+     * @name      map
+     * @type        Object
+     *
+     * Store the actual classes map
+     *
+     * @since       2.0.0
+     * @author 		Olivier Bossel<olivier.bossel@gmail.com>
+     */
+    map = {};
+
     /**
      * @name            constructor
      * @type            Function
@@ -50,7 +61,7 @@ export default class SClassmap extends __SClassmapBase {
      * @since       2.0.0
      * @author 		Olivier Bossel<olivier.bossel@gmail.com>
      */
-    constructor(settings?: Partial<ISClassmapNodeSettings>) {
+    constructor(settings?: Partial<ISClassmapSettings>) {
         super({
             path: __SSugarConfig.get('classmap.path'),
             ...(settings ?? {}),
@@ -58,7 +69,7 @@ export default class SClassmap extends __SClassmapBase {
         // read the docmap file if no map is provided
         // in the settings
         if (!this.settings.map && this.settings.path) {
-            this.read();
+            this.readSync();
         }
     }
 
@@ -92,15 +103,28 @@ export default class SClassmap extends __SClassmapBase {
      * @since       2.0.0
      * @author 		Olivier Bossel<olivier.bossel@gmail.com>
      */
-    saveSync(): void {
+    saveSync(incremental = false): void {
         if (!this.settings.path) {
             throw new Error(
                 `<red>[SClassmap]</red> To save your classmap.json file, you MUST specify a settings.path`,
             );
         }
+
+        let mapToSave = this.map;
+
+        if (incremental) {
+            const actualMap = this.map ?? {};
+            let savedMap = this.readSync();
+            const newMap = {
+                ...savedMap,
+                ...actualMap,
+            };
+            mapToSave = newMap;
+        }
+
         __fs.writeFileSync(
             this.settings.path,
-            JSON.stringify(this.map, null, 4),
+            JSON.stringify(mapToSave, null, 4),
         );
     }
 
@@ -123,7 +147,7 @@ export default class SClassmap extends __SClassmapBase {
             if (map[name]) {
                 return map[name];
             }
-            map[name] = __toBase(Object.keys(map).length, 62);
+            map[name] = `s${__toBase(Object.keys(map).length, 62)}`;
             return map[name];
         }
 

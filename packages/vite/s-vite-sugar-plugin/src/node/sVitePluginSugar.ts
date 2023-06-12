@@ -1,3 +1,4 @@
+import __SClassmap from '@coffeekraken/s-classmap';
 import __SEnv from '@coffeekraken/s-env';
 import __SFrontspec from '@coffeekraken/s-frontspec';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
@@ -45,6 +46,9 @@ export default function sVitePluginSugar(settings: any = {}) {
         // frontspec
         const frontspec = new __SFrontspec(),
             frontspecJson = frontspec.read();
+        // classmap
+        const classmap = new __SClassmap(),
+            classmapJson = classmap.readSync();
         // removing some data for the frontend
         for (let key of __SSugarConfig.get('frontspec.removeForFrontend')) {
             delete frontspecJson[key];
@@ -58,6 +62,7 @@ export default function sVitePluginSugar(settings: any = {}) {
                 config: browserConfig,
             },
             FRONTSPEC: frontspecJson,
+            CLASSMAP: classmapJson,
             PACKAGE: __packageJsonSync(),
         });
 

@@ -111,11 +111,14 @@ export default function __splitLetters(
                 const newValue = node.textContent
                     .split('')
                     .map((letter) => {
-                        return `<${settings.tag} class="${settings.letterClass}">${letter}</span>`;
+                        return `<${settings.tag}>${letter}</span>`;
                     })
                     .join('');
                 const $wrap = document.createElement(settings.tag);
                 $wrap.innerHTML = newValue;
+                Array.from($wrap.children).forEach((child) =>
+                    child.classList.add(settings.letterClass),
+                );
                 $wrap.classList.add(settings.class);
                 node.after($wrap);
                 node.remove();
@@ -123,39 +126,6 @@ export default function __splitLetters(
         });
     }
     process(elm.childNodes);
-
-    return elm;
-
-    // wrap each characters inside two spans
-    let words = string.match(
-        /<\s*(\w+\b)(?:(?!<\s*\/\s*\1\b)[\s\S])*<\s*\/\s*\1\s*>|\S+/g,
-    );
-
-    _console.log(words);
-
-    // split words
-    words = words
-        .map((word) => {
-            return `<${settings.tag} style="white-space:nowrap">${word}</${settings.tag}>`;
-        })
-        .join(' ');
-
-    let letters = _decodeHtml(words).split('');
-
-    let hasTagOpened = false;
-    letters = letters.map((letter) => {
-        // check if a tag has started
-        if (letter === '<') hasTagOpened = true;
-        else if (letter === '>') {
-            hasTagOpened = false;
-            return letter;
-        }
-        if (hasTagOpened) return letter;
-        if (letter === ' ') letter = '&nbsp;';
-        return `<${settings.tag} class="${settings.class}__letter-container"><${settings.tag} class="${settings.class}__letter">${letter}</${settings.tag}></${settings.tag}>`;
-    });
-
-    elm.innerHTML = letters.join('');
 
     return elm;
 }

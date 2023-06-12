@@ -19,7 +19,7 @@
                 <p>Under <a class="s-typo:bold s-mbe:20 s-tc:accent"
                         href="https://github.com/Coffeekraken/coffeekraken/blob/master/LICENSE" target="_blank"
                         title="Coffeekraken.io">MIT</a> License</p>
-                <p>Current version: <bold class="s-typo:bold s-tc:accent">{{ $config->package->version }}</bold>
+                <p>Current version: <bold class="s-typo:bold s-tc:accent">{{ $frontspec->package->version }}</bold>
                 </p>
 
             </div>
@@ -32,41 +32,15 @@
                     </h3>
                     <ol class="s-list:ul s-color:accent">
                         <li>
-                            <a href="/doc/get-started/get-started" title="Get Started with Coffeekraken">Get Started</a>
+                            <a href="https://github.com/Coffeekraken/coffeekraken" title="Coffeekraken on Github">Github repo</a>
                         </li>
                         <li>
-                            <a href="/doc/get-started/first-project"
-                                title="Coffeekraken documentation">Documentation</a>
-                        </li>
-                        <li>
-                            <a href="/styleguide/ui/avatar" title="Coffeekraken styleguide">Styleguide</a>
-                        </li>
-                        <li>
-                            <a href="/api/@coffeekraken.sugar.js.dom.query.querySelectorLive"
-                                title="Coffeekraken API">API</a>
+                            <a href="https://www.npmjs.com/search?q=%40coffeekraken"
+                                title="Coffeekraken on NPM">NPM packages</a>
                         </li>
                     </ol>
                 </div>
-
-                <div>
-                    <h3 class="s-typo:h5 s-mbe:30">
-                        Usefull
-                    </h3>
-                    <ol class="s-list:ul s-color:accent">
-                        <li>
-                            <a href="https://www.npmjs.com/search?q=%40coffeekraken" title="Coffeekraken on NPM" target="_blank">NPM
-                                Packages</a>
-                        </li>
-                        <li>
-                            <a href="/doc/cli/overview" title="CLI">Start using the CLI</a>
-                        </li>
-                        <li>
-                            <a href="/doc/css/theming" title="Start using the Coffeekraken theming features">Start with
-                                theming</a>
-                        </li>
-                    </ol>
-                </div>
-
+                
                 <div>
                     <h3 class="s-typo:h5 s-mbe:30">
                         Community

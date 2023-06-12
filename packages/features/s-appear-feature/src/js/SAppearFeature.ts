@@ -102,11 +102,9 @@ export default class SAppearFeature extends __SFeature {
         );
 
         // add the s-appear attribute if not present
-        this.utils.fastdom.mutate(() => {
-            if (!this.node.hasAttribute('s-appear')) {
-                this.node.setAttribute('s-appear', 'true');
-            }
-        });
+        if (!this.node.hasAttribute('s-appear')) {
+            this.node.setAttribute('s-appear', 'true');
+        }
     }
 
     async mount() {

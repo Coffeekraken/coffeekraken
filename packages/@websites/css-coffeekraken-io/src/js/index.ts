@@ -2,6 +2,8 @@ import __SPackEssentials from '@coffeekraken/s-pack-essentials';
 
 import __SFront from '@coffeekraken/s-front';
 
+import { define as __CKMenuDefine } from './components/CKMenu';
+
 import { define as __SCodeExampleComponentDefine } from '@coffeekraken/s-code-example-component';
 import { define as __SDocComponentDefine } from '@coffeekraken/s-doc';
 import __SFeature from '@coffeekraken/s-feature';
@@ -41,6 +43,7 @@ const viewsRelated = import.meta.globEager('../views/**/*.ts');
     // features
 
     // components
+    __CKMenuDefine();
     __SCodeExampleComponentDefine();
     __SDocComponentDefine({
         mountWhen: 'direct',
@@ -91,6 +94,8 @@ const viewsRelated = import.meta.globEager('../views/**/*.ts');
             });
 
             // this.highlightLetter();
+
+            this._$slider.setAttribute('ready', 'true');
 
             setInterval(() => {
                 if (this._paused) {
@@ -223,6 +228,7 @@ const viewsRelated = import.meta.globEager('../views/**/*.ts');
             });
         }
     }
+
     new WelcomeSlider(document.querySelector('[welcome-slider]'));
 
     // Website specific

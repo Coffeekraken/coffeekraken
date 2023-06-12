@@ -8,6 +8,7 @@
     "dependencies": {
         "@coffeekraken/s-env": "^2.0.0-alpha.27",
         "@coffeekraken/s-frontspec": "^2.0.0-alpha.27",
+        "@coffeekraken/s-classmap": "^2.0.0-alpha.27",
         "@coffeekraken/s-sugar-config": "^2.0.0-alpha.27",
         "@coffeekraken/sugar": "^2.0.0-alpha.27"
     },

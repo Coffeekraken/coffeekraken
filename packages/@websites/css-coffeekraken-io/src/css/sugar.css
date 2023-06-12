@@ -39,72 +39,22 @@
 
 /* icons */
 @sugar.icon.classes (
-  fa:user
-  fa:heart
+  fa:fire
+  fa:user-graduate:documentation
   fa:synagogue:start
   fa:file-code:examples
-  fa:circle-nodes:api
-  fa:fire
-  fa:expand:enter-fullscreen
-  fa:compress:exit-fullscreen
-  fa:eye:preview
-  fab:css3-alt:css
-  fa:calendar-alt:calendarp
-  fa:angle-down:arrow-down
-  fa:angle-up:arrow-up
-  fa:angle-left:arrow-left
-  fa:angle-right:arrow-right
-  fa:user-graduate:documentation
-  fa:box-open:box
-  fa:angles-right:more
-  fa:angle-up
-  fa:palette:color
-  fa:eye-dropper
-  fa:info
-  fa:bars:menu
-  fa:times-circle:close
-  fa:times:cross
-  fab:npm
-  fa:chalkboard-teacher:example
-  fa:list-ul
-  fa:cogs:setting
-  fa:th:return
-  fa:link
-  fa:copy
-  fa:check
-  fa:check:copied
-  fa:search
-  fa:radiation:nothing
-  fa:download:import
-  fa:moon:dark-mode
-  fa:star
+  fa:file
+  fa:heart
   fa:bugs
-  fa:pen-nib:write
-  fab:google
-  fab:github
+  fa:user
   fab:discord
   fab:github
   fab:facebook
   fab:patreon
   fab:twitter
   fab:instagram
-  fa:cloud-download-alt:install
-  fa:cogs:settings
-  fab:vuejs
-  fa:tasks
-  fa:hammer:todo
-  fa:file-pdf
-  fa:file-image
-  fa:file-code
-  fa:file-archive
-  fa:file
-  fa:computer
-  fa:server
-  fs:src/icons/read-direction.svg:support-rtl
-  fs:src/icons/edge.svg:support-edge
-  fs:src/icons/chrome.svg:support-chromium
-  fs:src/icons/firefox.svg:support-firefox
-  fs:src/icons/safari.svg:support-safari
-  fs:src/icons/vuejs.svg:vue
-  fs:'src/icons/coffeekraken/**/*.svg'
+  fs:'src/icons/coffeekraken/logo-opensource.svg'
+  fs:'src/icons/coffeekraken/logo-postcss.svg'
+  fs:'src/icons/coffeekraken/ui-menu-grid-solid.svg'
+  fs:'src/icons/coffeekraken/logo-coffeekraken-sugar.svg'
 );

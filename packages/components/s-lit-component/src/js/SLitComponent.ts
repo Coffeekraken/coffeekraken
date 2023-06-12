@@ -7,66 +7,42 @@ import __SComponentUtils, {
 } from '@coffeekraken/s-component-utils';
 import __SInterface from '@coffeekraken/s-interface';
 import { __injectStyle, __querySelectorLive } from '@coffeekraken/sugar/dom';
-import { __expandPleasantCssClassnames } from '@coffeekraken/sugar/html';
 import { __deepMerge } from '@coffeekraken/sugar/object';
 import __dashCase from '@coffeekraken/sugar/shared/string/dashCase';
 import { LitElement, html as __html } from 'lit';
 
-export function html(strings, ...values) {
-    return __html(strings, ...values);
+export { __html as html };
 
-    const newStrings = [];
-    newStrings.raw = strings.raw;
-    const newValues = [];
+// export function html(...args) {
+//     args = args.map((arg, i) => {
+//         if (i === 0) {
+//             const raw = arg.raw;
+//             arg = arg.map((str, i) => {
+//                 // return str;
+//                 // if (typeof str !== 'string') {
+//                 //     return str;
+//                 // }
+//                 // // handle classes if a SClassmap instance exists in the document.env.SUGAR stack
+//                 // if (document.env?.SUGAR?.classmap) {
+//                 //     // str = document.env.SUGAR.classmap.patchHtml(str);
+//                 //     // console.log('new', str);
+//                 // }
+//                 // // return the patched string
+//                 return str;
+//             });
+//             arg.raw = raw;
 
-    const classmap = document.env?.SUGAR?.classmap;
+//             return arg;
+//         } else {
+//             if (typeof arg === 'string') {
+//                 // arg += ' coco';
+//             }
+//             return arg;
+//         }
+//     });
 
-    let inClass = false,
-        newClasses = [];
-
-    for (let i = 0; i < strings.length; i++) {
-        let newStr = strings[i],
-            newVal = values[i];
-
-        // patch html if a classmap is available
-        // and expand classnames
-        newStr = __expandPleasantCssClassnames(newStr);
-        // if (classmap && (inClass || newStr.match(/class="/))) {
-        //     newStr = classmap.patchHtml(newStr);
-        // }
-
-        // patch html in the value if possible
-        // and expand classnames
-        if (newVal && typeof newVal === 'string') {
-            newVal = __expandPleasantCssClassnames(newVal);
-            // if (classmap && (inClass || newStr.match(/class="/))) {
-            //     newVal = classmap.patchHtml(newVal);
-            // }
-        }
-
-        // // check if the newStr ends with some classes like `class="my-class ${something}`
-        // const classesMatches = newStr.match(/class="([a-zA-Z0-9_-\s]+)$/m);
-        // if (inClass && typeof values[i] === 'string') {
-        //     newClasses.push(values[i]);
-        // } else if (classesMatches?.[1]) {
-        //     inClass = true;
-        // } else if (i > 0 && inClass && newStr.match(/^"/)) {
-        //     newStrings[i - 1] += ` ${newClasses.join(' ')}`;
-        //     newClasses = [];
-        //     inClass = false;
-        // }
-
-        // add the new string into the template string
-        newStrings.push(newStr);
-
-        // add the new value
-        newValues.push(newVal);
-    }
-
-    // console.log(newStrings);
-
-    return __html(newStrings, ...newValues);
-}
+//     return __html(...args);
+// }
 
 export interface ISLitComponentSettings extends ISComponentUtilsSettings {
     interface?: typeof __SInterface;
@@ -419,6 +395,19 @@ export default class SLitComponent extends LitElement {
                 this._mount();
             });
         })();
+    }
+
+    firstUpdated() {
+        super.firstUpdated();
+        if (document.env?.SUGAR?.classmap) {
+            document.env.SUGAR.classmap.patchDom(this);
+        }
+    }
+
+    updated() {
+        if (document.env?.SUGAR?.classmap) {
+            document.env.SUGAR.classmap.patchDom(this);
+        }
     }
 
     _getDocumentFromElement($elm) {

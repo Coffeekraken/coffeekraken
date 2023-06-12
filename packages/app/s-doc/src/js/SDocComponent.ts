@@ -1,10 +1,10 @@
-import __SLitComponent from '@coffeekraken/s-lit-component';
+import __SLitComponent, { html } from '@coffeekraken/s-lit-component';
 
 import { __upperFirst } from '@coffeekraken/sugar/string';
 
 import { __escapeQueue } from '@coffeekraken/sugar/keyboard';
 import { __deepMerge } from '@coffeekraken/sugar/object';
-import { css, html, unsafeCSS } from 'lit';
+import { css, unsafeCSS } from 'lit';
 import { unsafeHTML } from 'lit/directives/unsafe-html.js';
 import __SDocComponentInterface from './interface/SDocComponentInterface';
 

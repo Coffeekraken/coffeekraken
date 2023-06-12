@@ -1,40 +1,26 @@
-/**
- * @name            reloadStylesheets
- * @namespace       js.dom.css
- * @type             Function
- * @platform          js
- * @status           stable
- *
- * This function just loop on each "link" tags that point to some css files
- * and reload them by adding a "queryString" with the timestamp in it
- * to prevent caching
- *
- * @param       {HTMLElement}           [$root=document]            The root element in which to reload the stylesheets
- *
- * @snippet         __reloadStylesheets()
- *
- * @example         js
- * import { __reloeadStylesheets } from '@coffeekraken/sugar/dom';
- * __reloadStylesheets();
- *
- * @since       2.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
+import { __uniqid } from '@coffeekraken/sugar/string';
 export default function reloadStylesheets(settings) {
+    var _a;
     const finalSettings = Object.assign({ $root: document }, (settings !== null && settings !== void 0 ? settings : {}));
     // loop on all stylesheetgs link and add the timestamp in
-    for (var link of finalSettings.$root.querySelectorAll('link[rel=stylesheet]')) {
+    Array.from((_a = finalSettings.$root.querySelectorAll('link[rel=stylesheet]')) !== null && _a !== void 0 ? _a : []).forEach(($link) => {
+        var _a;
+        const id = (_a = $link.id) !== null && _a !== void 0 ? _a : __uniqid();
         // clone the link element
-        const $newLink = link.cloneNode();
-        $newLink.href = link.href.replace(/\?.*|$/, '?' + Date.now());
+        const $newLink = $link.cloneNode();
+        $newLink.href = $link.href.replace(/\?.*|$/, '?' + Date.now());
         // listen when fully loaded
         $newLink.addEventListener('load', (e) => {
             var _a;
-            // remove old css
-            (_a = link.remove) === null || _a === void 0 ? void 0 : _a.call(link);
+            // remove old css's
+            Array.from((_a = finalSettings.$root.querySelectorAll(`link[id="${id}"]`)) !== null && _a !== void 0 ? _a : []).forEach(($remove) => {
+                if ($remove === $newLink)
+                    return;
+                $remove.remove();
+            });
         });
         // add the new link after the one to reload
-        link.after($newLink);
-    }
+        $link.after($newLink);
+    });
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0FxQkc7QUFNSCxNQUFNLENBQUMsT0FBTyxVQUFVLGlCQUFpQixDQUNyQyxRQUE4QztJQUU5QyxNQUFNLGFBQWEsbUJBQ2YsS0FBSyxFQUFFLFFBQVEsSUFDWixDQUFDLFFBQVEsYUFBUixRQUFRLGNBQVIsUUFBUSxHQUFJLEVBQUUsQ0FBQyxDQUN0QixDQUFDO0lBQ0YseURBQXlEO0lBQ3pELEtBQUssSUFBSSxJQUFJLElBQUksYUFBYSxDQUFDLEtBQUssQ0FBQyxnQkFBZ0IsQ0FDakQsc0JBQXNCLENBQ3pCLEVBQUU7UUFDQyx5QkFBeUI7UUFDekIsTUFBTSxRQUFRLEdBQW9CLElBQUksQ0FBQyxTQUFTLEVBQUUsQ0FBQztRQUNuRCxRQUFRLENBQUMsSUFBSSxHQUFxQixJQUFLLENBQUMsSUFBSSxDQUFDLE9BQU8sQ0FDaEQsUUFBUSxFQUNSLEdBQUcsR0FBRyxJQUFJLENBQUMsR0FBRyxFQUFFLENBQ25CLENBQUM7UUFDRiwyQkFBMkI7UUFDM0IsUUFBUSxDQUFDLGdCQUFnQixDQUFDLE1BQU0sRUFBRSxDQUFDLENBQUMsRUFBRSxFQUFFOztZQUNwQyxpQkFBaUI7WUFDakIsTUFBQSxJQUFJLENBQUMsTUFBTSxvREFBSSxDQUFDO1FBQ3BCLENBQUMsQ0FBQyxDQUFDO1FBQ0gsMkNBQTJDO1FBQzNDLElBQUksQ0FBQyxLQUFLLENBQUMsUUFBUSxDQUFDLENBQUM7S0FDeEI7QUFDTCxDQUFDIn0=
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sRUFBRSxRQUFRLEVBQUUsTUFBTSw0QkFBNEIsQ0FBQztBQTZCdEQsTUFBTSxDQUFDLE9BQU8sVUFBVSxpQkFBaUIsQ0FDckMsUUFBOEM7O0lBRTlDLE1BQU0sYUFBYSxtQkFDZixLQUFLLEVBQUUsUUFBUSxJQUNaLENBQUMsUUFBUSxhQUFSLFFBQVEsY0FBUixRQUFRLEdBQUksRUFBRSxDQUFDLENBQ3RCLENBQUM7SUFDRix5REFBeUQ7SUFDekQsS0FBSyxDQUFDLElBQUksQ0FDTixNQUFBLGFBQWEsQ0FBQyxLQUFLLENBQUMsZ0JBQWdCLENBQUMsc0JBQXNCLENBQUMsbUNBQUksRUFBRSxDQUNyRSxDQUFDLE9BQU8sQ0FBQyxDQUFDLEtBQUssRUFBRSxFQUFFOztRQUNoQixNQUFNLEVBQUUsR0FBRyxNQUFBLEtBQUssQ0FBQyxFQUFFLG1DQUFJLFFBQVEsRUFBRSxDQUFDO1FBRWxDLHlCQUF5QjtRQUN6QixNQUFNLFFBQVEsR0FBb0IsS0FBSyxDQUFDLFNBQVMsRUFBRSxDQUFDO1FBQ3BELFFBQVEsQ0FBQyxJQUFJLEdBQXFCLEtBQU0sQ0FBQyxJQUFJLENBQUMsT0FBTyxDQUNqRCxRQUFRLEVBQ1IsR0FBRyxHQUFHLElBQUksQ0FBQyxHQUFHLEVBQUUsQ0FDbkIsQ0FBQztRQUNGLDJCQUEyQjtRQUMzQixRQUFRLENBQUMsZ0JBQWdCLENBQUMsTUFBTSxFQUFFLENBQUMsQ0FBQyxFQUFFLEVBQUU7O1lBQ3BDLG1CQUFtQjtZQUNuQixLQUFLLENBQUMsSUFBSSxDQUNOLE1BQUEsYUFBYSxDQUFDLEtBQUssQ0FBQyxnQkFBZ0IsQ0FBQyxZQUFZLEVBQUUsSUFBSSxDQUFDLG1DQUFJLEVBQUUsQ0FDakUsQ0FBQyxPQUFPLENBQUMsQ0FBQyxPQUFPLEVBQUUsRUFBRTtnQkFDbEIsSUFBSSxPQUFPLEtBQUssUUFBUTtvQkFBRSxPQUFPO2dCQUNqQyxPQUFPLENBQUMsTUFBTSxFQUFFLENBQUM7WUFDckIsQ0FBQyxDQUFDLENBQUM7UUFDUCxDQUFDLENBQUMsQ0FBQztRQUNILDJDQUEyQztRQUMzQyxLQUFLLENBQUMsS0FBSyxDQUFDLFFBQVEsQ0FBQyxDQUFDO0lBQzFCLENBQUMsQ0FBQyxDQUFDO0FBQ1AsQ0FBQyJ9

@@ -13,7 +13,7 @@
  *
  * @param       {Object|Array}          [$settings=[]]              Some settings to configure your instance
  *
- * @setting         {String}            [path=null]                 Specify the path to the classmap file to load
+ * @setting        {String}                 [$path=$_ENV['S_CLASSMAP_PATH'] || $_ENV['S_FRONTEND_DIR'] . '/classmap.json']       The classmap path. If not specified, it will try to find it by looking for the nearest `frontspec.json` file from the cwd
  * @setting         {Object|Array}            [sFrontspecSettings=[]]           Some settings to pass to the SFrontspec class in order to read the `frontspec.json` content
  *
  * @example         php
@@ -51,21 +51,28 @@ class SClassmap
     /**
      * Constructor
      */
-    public function __construct($settings)
+    public function __construct($settings = [])
     {
         $this->settings = (object) array_merge_recursive(
             [
                 'map' => null,
-                'path' => null,
+                'path' => isset($_ENV['S_CLASSMAP_PATH'])
+                    ? $_ENV['S_CLASSMAP_PATH']
+                    : (isset($_ENV['S_FRONTEND_DIR'])
+                        ? $_ENV['S_FRONTEND_DIR'] . '/classmap.json'
+                        : null),
                 'sFrontspecSettings' => [],
             ],
             (array) $settings
         );
 
         if (isset($this->settings->map)) {
-            $this->$map = $this->settings->map;
-        } elseif (isset($this->settings->path)) {
-            $this->$map = $this->read($this->settings->path);
+            $this->map = $this->settings->map;
+        } elseif (
+            isset($this->settings->path) &&
+            file_exists($this->settings->path)
+        ) {
+            $this->map = $this->read($this->settings->path);
         } else {
             // read the frontspec
             $frontspec = new \SFrontspec($this->settings->sFrontspecSettings);
@@ -93,6 +100,8 @@ class SClassmap
      */
     public function patchHtml(string $html)
     {
+        // return $html;
+
         // grab do not touch tags
         preg_match_all(
             '/<code[^>]*>(.*?)<\/code>/s',
@@ -161,14 +170,17 @@ class SClassmap
      *
      * This method allows you to read a spec file and/or a value inside the passed spec file.
      *
-     * @param       {String}        $path                 The classmap.json file path to read
+     * @param       {String}        [$path=$this->settings->path                 The classmap.json file path to read
      * @return      {Any}                               The classmap json
      *
      * @since       2.0.0
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    public function read($path)
+    public function read($path = null)
     {
+        if (!$path) {
+            $path = $this->settings->path;
+        }
         $json = json_decode(file_get_contents($path));
         $this->map = $json;
         return $json;

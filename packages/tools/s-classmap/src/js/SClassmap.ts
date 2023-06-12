@@ -1,5 +1,6 @@
 // @ts-nocheck
 
+import type { ISClassmapBaseSettings } from '../shared/SClassmapBase';
 import __SClassmapBase from '../shared/SClassmapBase';
 
 /**
@@ -29,9 +30,68 @@ import __SClassmapBase from '../shared/SClassmapBase';
  * @author 		Olivier Bossel<olivier.bossel@gmail.com>
  */
 
-export interface ISClassmapJsSettings extends ISClassmapSettings {}
+export interface ISClassmapSettings extends ISClassmapBaseSettings {
+    patchNativeMethods: boolean;
+}
 
 export default class SClassmap extends __SClassmapBase {
+    /**
+     * @name            init
+     * @type            Function
+     * @static
+     *
+     * This method allows you to init the your SClassmap instance and store it into the document.env.SUGAR.classmap property
+     *
+     * @return          {SClassmap}                                    The SClassmal instance that represent the classmap.json file
+     *
+     * @since           2.0.0
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    static init(settings?: ISClassmapSettings): SClassmap {
+        let classmapInstance = new this(settings);
+
+        // set the front in the env.SUGAR.front property
+        if (!document.env) document.env = {};
+        if (!document.env.SUGAR) document.env.SUGAR = {};
+        document.env.SUGAR.classmap = classmapInstance;
+
+        // return the classmap instance
+        return classmapInstance;
+    }
+
+    /**
+     * @name           isEnabled
+     * @type            Function
+     * @static
+     *
+     * Store if the classmap if enabled or not
+     *
+     * @return      {Boolean}       true if enabled, false if not. Basically, the classmap is enabled if a `document.env.CLASSMAP` map exists
+     *
+     * @since       2.0.0
+     * @author 		Olivier Bossel<olivier.bossel@gmail.com>
+     */
+    static isEnabled(): boolean {
+        return document.env?.CLASSMAP !== undefined;
+    }
+
+    /**
+     * @name           areNativeMethodsPatched
+     * @type            Function
+     * @static
+     *
+     * Store if the native methods have already been patched
+     *
+     * @return      {Boolean}       true if already patched, false if not
+     *
+     * @since       2.0.0
+     * @author 		Olivier Bossel<olivier.bossel@gmail.com>
+     */
+    _areNativeMethodsPatched: boolean;
+    static areNativeMethodsPatched(): boolean {
+        return this._areNativeMethodsPatched;
+    }
+
     /**
      * @name            constructor
      * @type            Function
@@ -42,11 +102,20 @@ export default class SClassmap extends __SClassmapBase {
      * @since       2.0.0
      * @author 		Olivier Bossel<olivier.bossel@gmail.com>
      */
-    constructor(settings?: Partial<ISClassmapJsSettings>) {
+    constructor(settings?: Partial<ISClassmapSettings>) {
         super({
-            map: document.env?.SUGAR?.classmap,
+            map: document.env?.CLASSMAP ?? {},
+            patchNativeMethods: true,
             ...(settings ?? {}),
         });
+
+        // patch native methods
+        if (
+            this.settings.patchNativeMethods &&
+            !this.constructor.areNativeMethodsPatched()
+        ) {
+            this.patchNativeMethods();
+        }
     }
 
     /**
@@ -62,19 +131,24 @@ export default class SClassmap extends __SClassmapBase {
     patchNativeMethods(): void {
         const _this = this;
 
+        // mark methods as patched
+        this.constructor._areNativeMethodsPatched = true;
+
         // classList
         function getClassList() {
             var element = this;
             var classList = this.className.split(' ');
             classList.add = function (name) {
-                if (classList.indexOf(name) !== -1) {
+                const finalName = _this.map[name] ?? name;
+                if (classList.indexOf(finalName) !== -1) {
                     return;
                 }
-                classList.push(_this.map[name] ?? name);
+                classList.push(finalName);
                 element.className = classList.join(' ');
             };
             classList.remove = function (name) {
-                var index = classList.indexOf(_this.map[name] ?? name);
+                const finalName = _this.map[name] ?? name;
+                var index = classList.indexOf(finalName);
                 if (index !== -1) {
                     classList.splice(index, 1);
                     element.className = classList.join(' ');
@@ -101,10 +175,7 @@ export default class SClassmap extends __SClassmapBase {
             sels = sels.map((sel) => {
                 return _this.patchSelector(sel);
             });
-            const res = nativeQuerySelector.call(this, sels);
-            if (!res) {
-            }
-            return res;
+            return nativeQuerySelector.call(this, sels);
         };
 
         // // style
@@ -119,6 +190,46 @@ export default class SClassmap extends __SClassmapBase {
         // Object.defineProperty(HTMLElement.prototype.style, 'setProperty', {
         //     get: getStyle,
         // });
+    }
+
+    resolve(cls: string): string {
+        return this.map[cls] ?? this.map[cls.replace(/^\./, '')] ?? cls;
+    }
+
+    patchElement($elm: HTMLElement): void {
+        const cls = $elm.getAttribute('class')?.split(' ') ?? [];
+        const newCls = cls.map((c) => this.resolve(c));
+        if ($elm.classList.contains('_package')) {
+            console.log('PACKAGE', cls, newCls);
+        }
+        $elm.setAttribute('class', newCls.join(' '));
+    }
+
+    patchDom($rootNode: HTMLElement): void {
+        const $elms = Array.from($rootNode.querySelectorAll('[class]') ?? []);
+        for (let [idx, $elm] of $elms.entries()) {
+            this.patchElement($elm);
+        }
+    }
+
+    patchHtml(html: string): string {
+        const classesMatches = html.match(/class="([a-zA-Z0-9_-\s]+)"/gm);
+        if (classesMatches?.length) {
+            classesMatches.forEach((clsStatement) => {
+                let sels = clsStatement
+                    .replace('class="', '')
+                    .replace(/\"$/, '')
+                    .split(' ');
+
+                sels = sels.map((sel) => {
+                    return this.resolve(sel);
+                });
+
+                html = html.replace(clsStatement, `class="${sels.join(' ')}"`);
+            });
+        }
+
+        return html;
     }
 
     patchSelector(sel) {

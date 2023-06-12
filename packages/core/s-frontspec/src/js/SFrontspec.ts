@@ -63,7 +63,7 @@ export default class SFrontspec implements ISFrontspec {
      * @since           2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    static init(frontspec?: ISFrontspec): SFront {
+    static init(frontspec?: ISFrontspec): SFrontspec {
         let frontspecInstance = new this(frontspec);
 
         // set the front in the env.SUGAR.front property
@@ -71,7 +71,7 @@ export default class SFrontspec implements ISFrontspec {
         if (!document.env.SUGAR) document.env.SUGAR = {};
         document.env.SUGAR.frontspec = frontspecInstance;
 
-        // return the current theme
+        // return the frontspec instance
         return frontspecInstance;
     }
 

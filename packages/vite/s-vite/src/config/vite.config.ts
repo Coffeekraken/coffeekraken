@@ -4,6 +4,8 @@ import { __deepMerge } from '@coffeekraken/sugar/object';
 import __path from 'path';
 import { configDefaults, defineConfig } from 'vitest/config';
 
+import __sugarPackageJson from '@coffeekraken/sugar/package.json' assert { type: 'json' };
+
 export async function preprocess(api) {
     const config = (await __loadConfigFile('vite.config.js')) ?? {};
     return __deepMerge(api.this, config);
@@ -11,6 +13,67 @@ export async function preprocess(api) {
 
 export default function (api) {
     if (api.env.platform !== 'node') return;
+
+    const optimizeDepsInclude: string[] = [];
+
+    // const packageJsonPath = `${api.config.storage.package.rootDir}/package.json`;
+    // if (__fs.existsSync(packageJsonPath)) {
+    //     const packageJson = __readJsonSync(packageJsonPath),
+    //         deps = {
+    //             ...(packageJson.dependencies ?? {}),
+    //             ...(packageJson.devDependencies ?? {}),
+    //         };
+    //     for (let [packageName, version] of Object.entries(deps)) {
+    //         if (
+    //             !optimizeDepsInclude.includes(packageName) &&
+    //             ![
+    //                 '@coffeekraken/sugar',
+    //                 '@coffeekraken/cli',
+    //                 '@coffeekraken/s-kitchen',
+    //                 '@coffeekraken/s-glob',
+    //                 '@coffeekraken/s-docblock',
+    //                 '@coffeekraken/s-docmap',
+    //                 '@coffeekraken/s-favicon-builder',
+    //                 '@coffeekraken/s-timer',
+    //                 '@coffeekraken/s-vite-sugar-plugin',
+    //             ].includes(packageName) &&
+    //             packageName.startsWith('@coffeekraken/')
+    //         ) {
+    //             // optimizeDepsInclude.push(packageName);
+    //         }
+    //     }
+    // }
+
+    for (let [path, value] of Object.entries(__sugarPackageJson.exports)) {
+        if (
+            [
+                'cli',
+                'coffeekraken',
+                'composer',
+                'error',
+                'exec',
+                'github',
+                'hash',
+                'load',
+                'monorepo',
+                'npm',
+                'network',
+                'og',
+                'path',
+                'php',
+                'process',
+                'project',
+                'terminal',
+                'fs',
+                'is',
+            ].includes(path.replace('./', ''))
+        ) {
+            continue;
+        }
+        optimizeDepsInclude.push(
+            `@coffeekraken/sugar/${path.replace('./', '')}`,
+        );
+    }
 
     return defineConfig({
         /**
@@ -162,7 +225,10 @@ export default function (api) {
             // exclude: ['static'],
             entries: ['index.html'],
 
+            include: optimizeDepsInclude,
+            exclude: ['fsevents'],
             esbuildOptions: {
+                platform: 'browser',
                 // mainFields: ['module', 'main'],
                 resolveExtensions: ['.js', '.ts'],
             },

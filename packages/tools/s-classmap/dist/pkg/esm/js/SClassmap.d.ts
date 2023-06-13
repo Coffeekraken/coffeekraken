@@ -18,6 +18,7 @@ export default class SClassmap extends __SClassmapBase {
     patchNativeMethods(): void;
     resolve(cls: string): string;
     patchElement($elm: HTMLElement): void;
+    patchDomLive($rootNode?: HTMLElement): void;
     patchDom($rootNode: HTMLElement): void;
     patchHtml(html: string): string;
     patchSelector(sel: any): any;

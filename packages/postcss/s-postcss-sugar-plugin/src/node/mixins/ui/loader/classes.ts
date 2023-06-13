@@ -1,5 +1,5 @@
 import __SInterface from '@coffeekraken/s-interface';
-import __camelCase from '@coffeekraken/sugar/shared/string/camelCase';
+import { __camelCase } from '@coffeekraken/sugar/string';
 
 /**
  * @name          classes

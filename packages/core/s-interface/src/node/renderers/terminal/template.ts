@@ -1,5 +1,5 @@
 import { __parseHtml } from '@coffeekraken/sugar/console';
-import __countLineChar from '@coffeekraken/sugar/shared/string/countLine';
+import { __countLineChar } from '@coffeekraken/sugar/string';
 
 /**
  * @name                layout

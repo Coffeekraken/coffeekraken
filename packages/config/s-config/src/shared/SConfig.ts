@@ -4,8 +4,12 @@ import __SConfigAdapter from '@coffeekraken/s-config-adapter';
 import __SDuration from '@coffeekraken/s-duration';
 import __SEnv from '@coffeekraken/s-env';
 import { __isNode, __isPlainObject } from '@coffeekraken/sugar/is';
-import { __deepMerge, __filterObject, __get } from '@coffeekraken/sugar/object';
-import __set from '@coffeekraken/sugar/shared/object/set';
+import {
+    __deepMerge,
+    __filterObject,
+    __get,
+    __set,
+} from '@coffeekraken/sugar/object';
 
 /**
  * @name                                            SConfig

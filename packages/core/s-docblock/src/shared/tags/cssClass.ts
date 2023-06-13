@@ -1,6 +1,6 @@
 // @ts-nocheck
 
-import __idCompliant from '@coffeekraken/sugar/shared/string/idCompliant';
+import { __idCompliant } from '@coffeekraken/sugar/string';
 
 /**
  * @name              cssClass

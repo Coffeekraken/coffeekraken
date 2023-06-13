@@ -18,7 +18,7 @@ import __fs from 'fs';
  * await __globalNodeModulesPath()
  *
  * @example         js
- * import { __globalNodeModulesPath } from '@coffeekraken/sugar/node/npm/globalNodeModulesPath';
+ * import { __globalNodeModulesPath } from '@coffeekraken/sugar/npm';
  * await __globalNodeModulesPath();
  *
  * @since       2.0.0

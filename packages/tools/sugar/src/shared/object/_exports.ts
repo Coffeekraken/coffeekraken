@@ -1,13 +1,15 @@
+import __SWatch from './SWatch';
 import __applyScope from './applyScope';
 import __camelCaseProps from './camelCaseProps';
 import __clone from './clone';
 import __decycle from './decycle';
 import __deepAssign from './deepAssign';
 import __deepClean from './deepClean';
-import __deepize from './deepize';
+import __deepFilter from './deepFilter';
 import __deepMap from './deepMap';
 import __deepMerge from './deepMerge';
 import __deepProxy from './deepProxy';
+import __deepize from './deepize';
 import __delete from './delete';
 import __deleteProperty from './deleteProperty';
 import __diff from './diff';
@@ -25,7 +27,6 @@ import __propertyProxy from './propertyProxy';
 import __set from './set';
 import __sort from './sort';
 import __sortDeep from './sortDeep';
-import __SWatch from './SWatch';
 import __toJson from './toJson';
 import __toPlainObject from './toPlainObject';
 import __toQueryString from './toQueryString';
@@ -39,6 +40,7 @@ export {
     __deepAssign,
     __deepClean,
     __deepize,
+    __deepFilter,
     __deepMap,
     __deepMerge,
     __deepProxy,

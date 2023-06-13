@@ -34,6 +34,12 @@ export default class SSugarFeatureInterface extends __SInterface {
                 type: 'Boolean',
                 default: true,
             },
+            viewportAware: {
+                description:
+                    'Specify if you want the "viewport-aware" attribute to be enabled or not. If true, the elements that have this attribute will dispatch the "viewport.enter" and "viewport.exit" events as well as have the "in-viewport" class and attribute',
+                type: 'Boolean',
+                default: true,
+            },
             containerQuery: {
                 description:
                     'Specify if you want support for container queries in your css or not',

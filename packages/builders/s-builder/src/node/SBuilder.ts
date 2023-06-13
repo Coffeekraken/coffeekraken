@@ -28,7 +28,7 @@ import { __deepMerge } from '@coffeekraken/sugar/object';
  *          });
  *      }
  * }
- * 
+ *
  * @example         js
  * import __SBuilder from '@coffeekraken/s-builder';
  * class MyBuilder extends __SBuilder {
@@ -59,7 +59,7 @@ export interface ISBuilder extends ISClass {
     build(params: any, settings?: any);
 }
 
-class SBuilder extends __SClass implements ISBuilder {
+export default class SBuilder extends __SClass implements ISBuilder {
     /**
      * @name        constructor
      * @type        Function
@@ -134,5 +134,3 @@ class SBuilder extends __SClass implements ISBuilder {
         return promise;
     }
 }
-
-export default SBuilder;

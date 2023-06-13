@@ -1,6 +1,5 @@
 import __SClass from '@coffeekraken/s-class';
-import { IGetAnimationsFromElementResult } from '@coffeekraken/sugar/js/dom/style/getAnimationsFromElement';
-import { IKeyframe } from '@coffeekraken/sugar/js/dom/style/getKeyframesFromStylesheets';
+import { IGetAnimationsFromElementResult, IKeyframe } from '@coffeekraken/sugar/dom';
 
 export interface INearestKeyframes {
     before?: IKeyframe;

@@ -3,21 +3,20 @@ import __SEventEmitter, { ISEventEmitter } from '@coffeekraken/s-event-emitter';
 import type { ISLog } from '@coffeekraken/s-log';
 import __SPromise from '@coffeekraken/s-promise';
 import __SStdio from '@coffeekraken/s-stdio';
+import { __getExtendsStack } from '@coffeekraken/sugar/class';
 import { __buildCommandLine } from '@coffeekraken/sugar/cli';
 import { __dirname } from '@coffeekraken/sugar/fs';
 import {
     __isChildProcess,
     __isClass,
-    __isPlainObject
+    __isPlainObject,
 } from '@coffeekraken/sugar/is';
 import { __deepMerge } from '@coffeekraken/sugar/object';
 import { __onProcessExit, __spawn } from '@coffeekraken/sugar/process';
-import __extendsStack from '@coffeekraken/sugar/shared/class/getExtendsStack';
 import { __toString } from '@coffeekraken/sugar/string';
 import __fs from 'fs';
 import __path from 'path';
 import __stackTrace from 'stack-trace';
-import __SProcessSettingsInterface from './interface/SProcessSettingsInterface';
 import {
     ISCommandProcessParams,
     ISCommandProcessSettings,
@@ -25,8 +24,9 @@ import {
     ISProcessParams,
     ISProcessProcessObj,
     ISProcessResultObject,
-    ISProcessSettings
+    ISProcessSettings,
 } from './ISProcess';
+import __SProcessSettingsInterface from './interface/SProcessSettingsInterface';
 
 /**
  * @name                SProcess
@@ -171,7 +171,7 @@ class SProcess extends __SEventEmitter implements ISProcessInternal {
         what: string | Function | Promise<any> | SProcess,
         settings?: Partial<ISProcessSettings>,
     ): Promise<SProcess> {
-        if (__isClass(what) && __extendsStack(what)['SProcess']) {
+        if (__isClass(what) && __getExtendsStack(what)['SProcess']) {
             // @ts-ignore
             return new what({}, settings);
         }

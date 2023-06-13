@@ -9,7 +9,7 @@ import __SSugarJson from '@coffeekraken/s-sugar-json';
 import { __dirname, __readJsonSync } from '@coffeekraken/sugar/fs';
 import { __deepMerge, __objectHash } from '@coffeekraken/sugar/object';
 import { __packageRootDir } from '@coffeekraken/sugar/path';
-import __replaceTokens from '@coffeekraken/sugar/shared/token/replaceTokens';
+import { __replaceTokens } from '@coffeekraken/sugar/token';
 import __fs from 'fs';
 import __path from 'path';
 
@@ -87,10 +87,6 @@ export default class SSugarConfig extends __SClass {
      * when accessing the config using the ```sugar``` function
      *
      * @param       {String}        folderPath          The folder path in which to check for .config.js files
-     *
-     * @example         js
-     * import registerFolder from '@coffeekraken/sugar/shared/config/registerFolder';
-     * registerFolder('/something/cool');
      *
      * @since       2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -586,7 +582,7 @@ export default class SSugarConfig extends __SClass {
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     get(dotpath: string = '.', settings?: Partial<ISConfigSettings>): any {
-        return this._configInstance.get(dotpath, settings);
+        return this._configInstance?.get(dotpath, settings);
     }
 
     /**

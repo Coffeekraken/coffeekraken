@@ -1,6 +1,6 @@
 import __SClass from '@coffeekraken/s-class';
 import type { ISDurationObject } from '@coffeekraken/s-duration';
-import { TWhenTrigger } from '@coffeekraken/sugar/js/dom/detect/when';
+import { TWhenTrigger } from '@coffeekraken/sugar/dom';
 
 export interface ISConductorSettings {
     idleTimeout: number;

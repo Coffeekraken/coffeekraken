@@ -42,26 +42,26 @@ interface ITypeofSettings {
  * @todo      doc
  * @todo      tests
  *
- * @snippet         __typeof($1)
- * 
+ * @snippet         __typeOf($1)
+ *
  * @example         js
- * import { __typeof } from '@coffeekraken/sugar/type';
- * __typeof(true); // => Boolean
- * __typeof(10); // => Integer
- * __typeof(12.4); // => Number
- * __typeof(['Hello']); // => Array
- * __typeof(['Hello',true], { of: true }); // => Array<String|Boolean>
+ * import { __typeOf } from '@coffeekraken/sugar/type';
+ * __typeOf(true); // => Boolean
+ * __typeOf(10); // => Integer
+ * __typeOf(12.4); // => Number
+ * __typeOf(['Hello']); // => Array
+ * __typeOf(['Hello',true], { of: true }); // => Array<String|Boolean>
  *
  * class MyCoolClass {
  *    // ...
  * }
  * const myInstance = new MyCoolClass();
- * __typeof(myInstance, { customClass: true }); // => MyCoolClass
+ * __typeOf(myInstance, { customClass: true }); // => MyCoolClass
  *
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-export default function __typeof(
+export default function __typeOf(
     value: any,
     settings: ITypeofSettings = {},
 ): string {

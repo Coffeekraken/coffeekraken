@@ -21,7 +21,7 @@ const dom_1 = require("@coffeekraken/sugar/dom");
  * @snippet         __getTransformProperties($1)
  *
  * @example  	js
- * import getTransformProperties from '@coffeekraken/sugar/js/dom/getTransformProperties'
+ * import { __getTransformProperties } from '@coffeekraken/sugar/dom'
  * const props = getTransformProperties(myCoolHTMLElement);
  * // output format
  * // {

@@ -1,10 +1,9 @@
 // @ts-nocheck
 
+import type { ISConfigAdapterSettings } from '@coffeekraken/s-config-adapter';
+import __SConfigAdapter from '@coffeekraken/s-config-adapter';
 import { __deepMerge, __diff } from '@coffeekraken/sugar/object';
-import __parse from '@coffeekraken/sugar/shared/string/parse';
-import { __toString } from '@coffeekraken/sugar/string';
-import type { ISConfigAdapterSettings } from '../../shared/adapters/SConfigAdapter';
-import __SConfigAdapter from '../../shared/adapters/SConfigAdapter';
+import { __parse, __toString } from '@coffeekraken/sugar/string';
 
 /**
  * @name                  SConfigLsAdapter
@@ -23,14 +22,14 @@ import __SConfigAdapter from '../../shared/adapters/SConfigAdapter';
  * @setting      {Any}   [defaultConfig={}]         Specify the "default" config that you want.
  * @setting      {Any}   [appConfig={}]             Specify the "application" level config that you want.
  * @setting      {Any}   [userConfig={}]            Specify the "user" level config that you want. It's usually this config that is updated
- * 
+ *
  * @snippet         __SConfigLsAdapter($1)
  * new __SConfigLsAdapter($1)
- * 
+ *
  * @example         js
  * import __SConfig, { __SConfigLsAdapter } from '@coffeekraken/s-config';
  * const config = new __SConfig($1, new __SConfigLsAdapter($2));
- * 
+ *
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */

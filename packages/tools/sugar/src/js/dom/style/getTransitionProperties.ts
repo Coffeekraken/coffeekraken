@@ -23,8 +23,8 @@ import __convertTime from '../../../shared/datetime/convertTime';
  * @snippet         __getTransitionProperties($1)
  *
  * @example  	js
- * import getTransitionProperties from '@coffeekraken/sugar/js/dom/getTransitionProperties'
- * const props = getTransitionProperties(myCoolHTMLElement);
+ * import { getTransitionProperties } from '@coffeekraken/sugar/dom'
+ * const props = __getTransitionProperties(myCoolHTMLElement);
  * // output format
  * // {
  * // 	property : ['all'],

@@ -3,7 +3,7 @@ import type { ISDurationObject } from '@coffeekraken/s-duration';
 import type { ISInterface } from '@coffeekraken/s-interface';
 import type { ISLog } from '@coffeekraken/s-log';
 import type { ISStdio } from '@coffeekraken/s-stdio';
-import type { ISpawnSettings } from '@coffeekraken/sugar/node/process/spawn';
+import type { ISpawnSettings } from '@coffeekraken/sugar/process';
 export interface ISCommandProcessSettings extends ISProcessSettings {
     spawnSettings: Partial<ISpawnSettings>;
 }

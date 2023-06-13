@@ -3,7 +3,6 @@ import { __isInIframe } from '@coffeekraken/sugar/dom';
 // @TODO            check how to override private static methods
 
 import __SClass from '@coffeekraken/s-class';
-import __SClassmap from '@coffeekraken/s-classmap';
 import __SFront from '@coffeekraken/s-front';
 import __SFrontspec from '@coffeekraken/s-frontspec';
 import __SInterface from '@coffeekraken/s-interface';
@@ -17,11 +16,14 @@ import __fastdom from 'fastdom';
 import { __adoptStyleInShadowRoot } from '@coffeekraken/sugar/dom';
 
 import { __wait } from '@coffeekraken/sugar/datetime';
-import { __when, __whenInViewport } from '@coffeekraken/sugar/dom';
+import {
+    __injectStyle,
+    __when,
+    __whenInViewport,
+} from '@coffeekraken/sugar/dom';
 import { __debounce } from '@coffeekraken/sugar/function';
-import __injectStyle from '@coffeekraken/sugar/js/dom/inject/injectStyle';
 import { __deepMerge } from '@coffeekraken/sugar/object';
-import __dashCase from '@coffeekraken/sugar/shared/string/dashCase';
+import { __dashCase } from '@coffeekraken/sugar/string';
 import __SComponentUtilsDefaultPropsInterface from './interface/SComponentUtilsDefaultPropsInterface';
 import __SComponentUtilsSettingsInterface from './interface/SComponentUtilsSettingsInterface';
 
@@ -79,12 +81,6 @@ export default class SComponentUtils extends __SClass {
      * these will be executed normally
      */
     static _$carpenter;
-
-    /**
-     * Store an instance of the SClassmap class
-     * to resolve classes if needed
-     */
-    static _classmap;
 
     /**
      * @name            fastdom
@@ -266,11 +262,6 @@ export default class SComponentUtils extends __SClass {
                 settings ?? {},
             ),
         );
-
-        // init classmap if not already done
-        if (!this.constructor._classmap) {
-            this.constructor._classmap = new __SClassmap();
-        }
 
         this.node = node;
 
@@ -929,13 +920,6 @@ export default class SComponentUtils extends __SClass {
                     // replace '---' by '--'
                     clses = clses.map((c) => c.replace('---', '--'));
 
-                    // classmap
-                    if (document.env?.SUGAR?.classmap) {
-                        clses = clses.map((cls) => {
-                            return document.env.SUGAR.classmap[cls] ?? cls;
-                        });
-                    }
-
                     return clses.join(' ');
                 })
                 .join(' ');
@@ -943,17 +927,6 @@ export default class SComponentUtils extends __SClass {
 
         if (style) {
             clsString += ` ${style}`;
-        }
-
-        // resolve classmap
-        if (__SClassmap.isEnabled()) {
-            clsString = clsString
-                .split(' ')
-                .map((sel) => this.constructor._classmap.resolve(sel.trim()))
-                .join(' ');
-            if (clsString.includes('panel')) {
-                console.log('str', clsString);
-            }
         }
 
         return clsString;

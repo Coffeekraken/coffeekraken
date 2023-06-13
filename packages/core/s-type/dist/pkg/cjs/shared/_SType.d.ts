@@ -1,4 +1,4 @@
-import { IParseTypeStringResultObj } from '@coffeekraken/sugar/shared/type/parseTypeString';
+import type { IParseTypeStringResultObj } from '@coffeekraken/sugar/type';
 import __STypeResult from './STypeResult';
 
 export interface ISTypeDescriptorIsFn {

@@ -10,29 +10,19 @@ import type { ISInterfaceDefinitionProperty } from '../SInterface';
 import __SInterface from '../SInterface';
 
 /**
- * @name            SInterfaceRenderer
- * @namespace       node.renderers
- * @type            Class
- * @extends         SClass
- * @platform        node
- * @status          beta
+ * @___name            SInterfaceRenderer
+ * @___namespace       node.renderers
+ * @___type            Class
+ * @___extends         SClass
+ * @___platform        node
+ * @___status          beta
+ * @private
  *
  * This class represent the base for every interface renderers.
  * It handle things like registering types templates, properties to exclude, etc...
  *
  * @param        {SInterface}              interface           The interface you want to render
  * @param       {ISInterfaceRendererSettings}       [settings={}]       Some settings to configure your renderer like properties to exclude, etc...
- *
- * @example         js
- * import SInterfaceRenderer from '@coffeekraken/sugar/js/interface/renderers/SInterfaceRenderer';
- * class MyCoolRenderer extends SInterfaceRenderer {
- *      constructor(settings: ISInterfaceRendererSettings) {
- *          super({
- *              id: 'myCoolRenderer',
- *              ...settings
- *          });
- *      }
- * }
  *
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)

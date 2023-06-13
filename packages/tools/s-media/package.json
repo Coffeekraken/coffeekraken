@@ -25,7 +25,7 @@
             "require": "./dist/pkg/cjs/node/exports.js",
             "import": "./dist/pkg/esm/node/exports.js"
         },
-        "default": {
+        "browser": {
             "require": "./dist/pkg/cjs/js/exports.js",
             "import": "./dist/pkg/esm/js/exports.js"
         }

@@ -1,6 +1,6 @@
 import __SFeature from '@coffeekraken/s-feature';
 import { __scrollTo } from '@coffeekraken/sugar/dom';
-import type { IScrollToSettings } from '@coffeekraken/sugar/js/dom/scroll/scrollTo';
+import type { IScrollToSettings } from '@coffeekraken/sugar/dom';
 import { __deepMerge } from '@coffeekraken/sugar/object';
 import __SRefocusFeatureInterface from './interface/SRefocusFeatureInterface';
 

@@ -8,9 +8,9 @@ import __STypescriptBuilder from '@coffeekraken/s-typescript-builder';
 import { __unique } from '@coffeekraken/sugar/array';
 import { __sha256 } from '@coffeekraken/sugar/crypto';
 import { __dirname, __readJsonSync } from '@coffeekraken/sugar/fs';
-import __packageRootDir from '@coffeekraken/sugar/node/path/packageRootDir';
 import { __deepMerge, __merge } from '@coffeekraken/sugar/object';
-import __replaceTokens from '@coffeekraken/sugar/shared/token/replaceTokens';
+import { __packageRootDir } from '@coffeekraken/sugar/path';
+import { __replaceTokens } from '@coffeekraken/sugar/token';
 import __fs from 'fs';
 import __path from 'path';
 
@@ -101,7 +101,8 @@ export default class SConfigFolderAdapter extends __SConfigAdapter {
         // determine the running format (cjs|esm)
         try {
             if (module !== undefined) format = 'cjs';
-        } catch (e) {}
+        } catch (e) {
+        }
 
         // handle each scopes
         Object.keys(this.settings.scopes).forEach((scope) => {
@@ -252,14 +253,6 @@ export default class SConfigFolderAdapter extends __SConfigAdapter {
                 // if (buildTemporaryRes) {
                 //     // buildTemporaryRes.remove();
                 // }
-
-                let parentFreezedConfig = {};
-                try {
-                    parentFreezedConfig = JSON.parse(
-                        JSON.stringify(configObj[configId] ?? {}),
-                    );
-                } catch (e) {}
-
                 let configData = importedConfig.default;
                 if (typeof configData === 'function') {
                     configData = configData({
@@ -273,7 +266,6 @@ export default class SConfigFolderAdapter extends __SConfigAdapter {
                             const themeId = `${configObj.theme.theme}-${configObj.theme.variant}`;
                             return configObj.theme.themes[themeId];
                         },
-                        parent: parentFreezedConfig,
                         extends: __merge,
                         // extends(...objects) {
                         //     return __merge.apply(null, ...objects.reverse());

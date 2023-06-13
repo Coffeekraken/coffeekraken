@@ -1,5 +1,5 @@
 import __SLitComponent from '@coffeekraken/s-lit-component';
-import type { IScrollToSettings } from '@coffeekraken/sugar/js/dom/scroll/scrollTo';
+import type { IScrollToSettings } from '@coffeekraken/sugar/dom';
 import __define from './define';
 export interface ISCodeExampleComponentProps {
     theme: string;

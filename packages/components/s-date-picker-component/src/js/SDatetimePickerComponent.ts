@@ -2,10 +2,7 @@
 
 import __SLitComponent from '@coffeekraken/s-lit-component';
 import { __isUserScrolling, __makeFloat } from '@coffeekraken/sugar/dom';
-import type {
-    IFloatApi,
-    IFloatSettings,
-} from '@coffeekraken/sugar/js/dom/ui/makeFloat';
+import type { IFloatApi, IFloatSettings } from '@coffeekraken/sugar/dom';
 import { __deepMerge } from '@coffeekraken/sugar/object';
 import {
     format as __formatDate,

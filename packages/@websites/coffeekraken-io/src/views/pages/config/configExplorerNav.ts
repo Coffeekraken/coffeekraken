@@ -2,7 +2,7 @@
 
 // import __SLitComponent from '@coffeekraken/s-lit-component';
 // import __SRequest from '@coffeekraken/s-request';
-// import __filterObject from '@coffeekraken/sugar/shared/object/filter';
+// import __filterObject from '@coffeekraken/sugar/object';
 // import { __get } from '@coffeekraken/sugar/object';
 // import { html } from 'lit';
 // import { property } from 'lit/decorators.js';

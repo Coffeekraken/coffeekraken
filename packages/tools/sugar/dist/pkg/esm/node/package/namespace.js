@@ -23,8 +23,8 @@ import __json from './json';
  * @todo      tests
  *
  * @example     js
- * import namespace from '@coffeekraken/sugar/node/package/namespace';
- * namespace('something.cool'); => // coffeekraken.sugar.something.cool
+ * import { __namespace } from '@coffeekraken/sugar/package';
+ * __namespace('something.cool'); => // coffeekraken.sugar.something.cool
  *
  * @since       2.0.0
  * @author 		Olivier Bossel<olivier.bossel@gmail.com>

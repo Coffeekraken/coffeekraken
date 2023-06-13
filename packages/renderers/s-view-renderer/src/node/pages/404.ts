@@ -1,25 +1,18 @@
 import type { ISViewRendererRenderResult } from '../SViewRenderer';
 
 /**
- * @name           404
- * @namespace       s-view.pages
- * @type            Function
- * @platform        node
- * @status              beta
- * @async
- * @private
+ * @___name           404
+ * @___namespace       s-view.pages
+ * @___type            Function
+ * @___platform        node
+ * @___status              beta
+ * @___async
+ * @___private
  *
  * This function simply take a data object and render a clean 404 page
  *
  * @param       {data:I404Data}         data          An object of data to render the 404 page
- * @retuen      {ISViewResult}                                The rendered 404 page
- *
- * @example         js
- * import page404 from '@coffeekraken/sugar/node/engines/pages/404';
- * const html = await page404(renderer, {
- *      title: 'Not found',
- *      body: 'The page you want does not exists...'
- * });
+ * @return      {ISViewResult}                                The rendered 404 page
  *
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)

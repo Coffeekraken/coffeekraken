@@ -1,5 +1,5 @@
 // @ts-nocheck
-import __packageRootDir from '@coffeekraken/sugar/node/path/packageRootDir';
+import { __packageRootDir } from '@coffeekraken/sugar/path';
 import __path from 'path';
 import __SSugarJson from '../node/SSugarJson';
 

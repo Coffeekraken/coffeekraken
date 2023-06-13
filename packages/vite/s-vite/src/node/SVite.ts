@@ -10,7 +10,7 @@ import {
     __writeTmpFileSync,
 } from '@coffeekraken/sugar/fs';
 import { __isPortFree } from '@coffeekraken/sugar/network';
-import __listNodeModulesPackages from '@coffeekraken/sugar/node/npm/listNodeModulesPackages';
+import { __listNodeModulesPackages } from '@coffeekraken/sugar/npm';
 import { __deepMerge } from '@coffeekraken/sugar/object';
 import { __packageRootDir } from '@coffeekraken/sugar/path';
 import { __onProcessExit } from '@coffeekraken/sugar/process';
@@ -371,9 +371,7 @@ export default class SVite extends __SClass {
                             input: buildParams.input,
                             external: [],
                             plugins: [],
-                            output: {
-                                preserveModules: true,
-                            },
+                            output: {},
                             onwarn(warning, warn) {
                                 const onwarnRes =
                                     viteConfig.build?.rollupOptions?.onwarn?.(

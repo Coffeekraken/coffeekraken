@@ -35,7 +35,7 @@ import requestAnimationFrame from '../utilities/requestAnimationFrame';
  *
  * @example 	js
  * import { __scrollTop } from '@coffeekraken/sugar/dom'
- * import easeInOutQuad from '@coffeekraken/sugar/js/easings/easeInOutQuad'
+ * import { __easeInOutQuad } from '@coffeekraken/sugar/easing'
  * __scrollTo(myCoolHTMLElement);
  *
  * @since           2.0.0

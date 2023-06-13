@@ -3,7 +3,6 @@ import type { ISComponentUtilsSettings } from '@coffeekraken/s-component-utils';
 import __SComponentUtils from '@coffeekraken/s-component-utils';
 import __SInterface from '@coffeekraken/s-interface';
 import { __injectStyle, __querySelectorLive } from '@coffeekraken/sugar/dom';
-import { __deepMerge } from '@coffeekraken/sugar/object';
 
 /**
  * @name                SFeature
@@ -160,7 +159,7 @@ export default class SFeature extends __SClass implements ISFeature {
         node: HTMLElement,
         settings?: Partial<ISFeatureSettings>,
     ) {
-        super(__deepMerge({}, settings));
+        super(settings);
 
         // inject style if needed
         if (this.settings.style) {

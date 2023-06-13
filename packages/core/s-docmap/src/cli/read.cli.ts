@@ -1,6 +1,6 @@
 // @ts-nocheck
 
-import __copy from '@coffeekraken/sugar/node/clipboard/copy';
+import { __copy } from '@coffeekraken/sugar/clipboard';
 import __SDocmap from '../node/SDocmap';
 
 export default (stringArgs = '') => {

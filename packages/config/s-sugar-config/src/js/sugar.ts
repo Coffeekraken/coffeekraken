@@ -1,5 +1,4 @@
-import { __deepMerge, __get } from '@coffeekraken/sugar/object';
-import __set from '@coffeekraken/sugar/shared/object/set';
+import { __deepMerge, __get, __set } from '@coffeekraken/sugar/object';
 
 import type { ISSugarConfig } from '../shared/types';
 

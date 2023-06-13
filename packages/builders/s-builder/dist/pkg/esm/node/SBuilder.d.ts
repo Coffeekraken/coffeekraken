@@ -12,10 +12,9 @@ export interface ISBuilderSettings {
 export interface ISBuilder extends ISClass {
     build(params: any, settings?: any): any;
 }
-declare class SBuilder extends __SClass implements ISBuilder {
+export default class SBuilder extends __SClass implements ISBuilder {
     
     constructor(settings: Partial<ISBuilderSettings>);
     
     build(params?: any, settings?: any): any;
 }
-export default SBuilder;

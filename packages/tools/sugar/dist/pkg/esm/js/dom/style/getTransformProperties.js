@@ -19,7 +19,7 @@ import { __getRotateProperties, __getTranslateProperties, } from '@coffeekraken/
  * @snippet         __getTransformProperties($1)
  *
  * @example  	js
- * import getTransformProperties from '@coffeekraken/sugar/js/dom/getTransformProperties'
+ * import { __getTransformProperties } from '@coffeekraken/sugar/dom'
  * const props = getTransformProperties(myCoolHTMLElement);
  * // output format
  * // {

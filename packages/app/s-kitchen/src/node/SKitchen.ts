@@ -6,7 +6,7 @@ import __SLog from '@coffeekraken/s-log';
 import __SProcess, {
     ISProcessManagerProcessSettings,
     ISProcessSettings,
-    SProcessManager as __SProcessManager
+    SProcessManager as __SProcessManager,
 } from '@coffeekraken/s-process';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
 import __SSugarJson from '@coffeekraken/s-sugar-json';
@@ -17,14 +17,13 @@ import { __deepMerge, __filterObject } from '@coffeekraken/sugar/object';
 import { __sharedContext } from '@coffeekraken/sugar/process';
 import type { IDetectProjectTypeResult } from '@coffeekraken/sugar/project';
 import { __detectProjectType } from '@coffeekraken/sugar/project';
-import __stripAnsi from '@coffeekraken/sugar/shared/string/stripAnsi';
+import { __stripAnsi } from '@coffeekraken/sugar/string';
 import __SKitchenAddParamsInterface from './interface/SKitchenAddParamsInterface';
 import __SKitchenListParamsInterface from './interface/SKitchenListParamsInterface';
 import __SFronstackNewParamsInterface from './interface/SKitchenNewParamsInterface';
 import __SKitchenRunParamsInterface from './interface/SKitchenRunParamsInterface';
 
-import __lowerFirst from '@coffeekraken/sugar/shared/string/lowerFirst';
-import __upperFirst from '@coffeekraken/sugar/shared/string/upperFirst';
+import { __lowerFirst, __upperFirst } from '@coffeekraken/sugar/string';
 import __defaultPackageJsonIngredient from './ingredients/defaultPackageJson/defaultPackageJsonIngredient';
 import __defaultPagesIngredient from './ingredients/defaultPages/defaultPagesIngredient';
 import __defaultScriptsIngredient from './ingredients/defaultScripts/defaultScriptsIngredient';
@@ -534,22 +533,27 @@ class SKitchen extends __SClass {
                     if (actionObj.interface) {
                         InterfaceClass = await __import(actionObj.interface);
                         // filter shared params using each action "interface"
-                        actionParams = __filterObject(actionParams, (key, value) => {
-                            if (key === 'env') return true;
-                            if (key.toLowerCase() === 'bench') {
-                                return true;
-                            }
-                            if (key.toLowerCase() === 'devscut') {
-                                return true;
-                            }
-                            if (key.toLowerCase() === 'verbose') {
-                                return true;
-                            }
-                            if (key.toLowerCase() === 'target') {
-                                return true;
-                            }
-                            return InterfaceClass.definition[key] !== undefined;
-                        });
+                        actionParams = __filterObject(
+                            actionParams,
+                            (key, value) => {
+                                if (key === 'env') return true;
+                                if (key.toLowerCase() === 'bench') {
+                                    return true;
+                                }
+                                if (key.toLowerCase() === 'devscut') {
+                                    return true;
+                                }
+                                if (key.toLowerCase() === 'verbose') {
+                                    return true;
+                                }
+                                if (key.toLowerCase() === 'target') {
+                                    return true;
+                                }
+                                return (
+                                    InterfaceClass.definition[key] !== undefined
+                                );
+                            },
+                        );
                     }
 
                     const actionId = actionObj.id ?? actionName;

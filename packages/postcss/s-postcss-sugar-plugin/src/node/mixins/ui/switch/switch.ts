@@ -85,7 +85,7 @@ export default function ({
 
         --track-size: calc(var(--thumb-size) * 2);
         --track-padding: 0.2em;
-        --track-color-active: sugar.color(accent);
+        --track-color-active: sugar.color(current);
         --track-color-inactive: sugar.color(current, --alpha 0);
 
         --isLTR: 1;
@@ -95,7 +95,8 @@ export default function ({
         }
 
         --thumb-position: 0%;
-        --thumb-transition-duration: .25s;
+
+        --thumb-transition-duration: sugar.theme(ui.form.transition);
         
         padding: var(--track-padding);
         inline-size: var(--track-size);
@@ -177,7 +178,7 @@ export default function ({
                     border: sugar.color(main, border) solid sugar.border.width(ui.form.borderWidth);
                     outline-offset: 5px;
                     
-                    transition: sugar.theme(ui.form.transition);
+                    transition: var(--thumb-transition-duration);
 
                     &:checked {
                         &::before {
@@ -193,13 +194,13 @@ export default function ({
                         background: var(--thumb-color-inactive);
                         box-shadow: 0 0 0 var(--highlight-size) var(--thumb-color-highlight);
                         transform: translateX(var(--thumb-position));
-                        transition: sugar.theme(ui.form.transition);
+                        transition: var(--thumb-transition-duration);
                     }
 
                     &::after {
                         background: rgba(255,255,25,0);
                         box-shadow: 0;
-                        transition: sugar.theme(ui.form.transition);
+                        transition: ;
                     }
 
                     &:not(:disabled):hover::before {

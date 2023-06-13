@@ -11,14 +11,14 @@
         "@coffeekraken/s-typescript-builder": "^2.0.0-alpha.27",
         "@coffeekraken/sugar": "^2.0.0-alpha.27"
     },
-    "main": "dist/pkg/cjs/js/exports.js",
-    "module": "dist/pkg/esm/js/exports.js",
+    "main": "dist/pkg/cjs/node/exports.js",
+    "module": "dist/pkg/esm/node/exports.js",
     "exports": {
         "node": {
             "require": "./dist/pkg/cjs/node/exports.js",
             "import": "./dist/pkg/esm/node/exports.js"
         },
-        "default": {
+        "browser": {
             "require": "./dist/pkg/cjs/js/exports.js",
             "import": "./dist/pkg/esm/js/exports.js"
         }

@@ -15,7 +15,7 @@ export default function (api) {
          */
         get rootDirs() {
             return [
-                ...(api.parent.rootDirs ?? []),
+                // ...(api.parent.rootDirs ?? []),
                 `${api.config.storage.src.rootDir}/views`,
             ];
         },

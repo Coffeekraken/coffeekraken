@@ -29,12 +29,10 @@ export default class SStateFsAdapter implements ISStateAdapter {
         this._settings = settings;
     }
     async _init() {
-        const _packageTmpDir = (
-            await import('@coffeekraken/sugar/node/path/packageTmpDir')
-        ).default;
+        const { __packageTmpDir } = await import('@coffeekraken/sugar/path');
 
         this._statesDir =
-            this._settings?.folder ?? `${_packageTmpDir()}/states`;
+            this._settings?.folder ?? `${__packageTmpDir()}/states`;
         this._stateFile = `${this._statesDir}/${this._id}.state.json`;
     }
     save(state: any): Promise<void> {

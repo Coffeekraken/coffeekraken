@@ -1,2 +1,2 @@
-import __SNpmUnusedProcess from '@coffeekraken/sugar/node/npm/SNpmUnusedProcess';
+import { __SNpmUnusedProcess } from '@coffeekraken/sugar/npm';
 export default __SNpmUnusedProcess;

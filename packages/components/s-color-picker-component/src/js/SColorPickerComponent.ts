@@ -11,7 +11,7 @@ import { __isMobile } from '@coffeekraken/sugar/is';
 import type {
     IFloatApi,
     IFloatSettings,
-} from '@coffeekraken/sugar/js/dom/ui/makeFloat';
+} from '@coffeekraken/sugar/dom';
 import { __deepMerge } from '@coffeekraken/sugar/object';
 import { css, html, unsafeCSS } from 'lit';
 import __SColorPickerComponentInterface from './interface/SColorPickerComponentInterface';

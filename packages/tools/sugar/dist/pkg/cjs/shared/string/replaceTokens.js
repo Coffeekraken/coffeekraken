@@ -32,8 +32,8 @@ const deepMerge_1 = __importDefault(require("../object/deepMerge"));
  * __replaceTokens($1, $2)
  *
  * @example     js
- * import replaceTokens from '@coffeekraken/sugar/js/string/replaceTokens';
- * replaceTokens('hello [world]', { world: 'Coco' }); // => hello Coco
+ * import { __replaceTokens } from '@coffeekraken/sugar/string';
+ * __replaceTokens('hello [world]', { world: 'Coco' }); // => hello Coco
  *
  * @since     2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)

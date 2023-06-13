@@ -8,7 +8,7 @@ import __SComponentUtils, {
 import __SInterface from '@coffeekraken/s-interface';
 import { __injectStyle, __querySelectorLive } from '@coffeekraken/sugar/dom';
 import { __deepMerge } from '@coffeekraken/sugar/object';
-import __dashCase from '@coffeekraken/sugar/shared/string/dashCase';
+import { __dashCase } from '@coffeekraken/sugar/string';
 import { LitElement, html as __html } from 'lit';
 
 export { __html as html };

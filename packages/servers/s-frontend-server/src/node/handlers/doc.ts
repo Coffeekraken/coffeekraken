@@ -3,7 +3,7 @@
 import __SDocblock from '@coffeekraken/s-docblock';
 import __SDocmap from '@coffeekraken/s-docmap';
 import { page404 } from '@coffeekraken/s-view-renderer';
-import __scrapeUrl from '@coffeekraken/sugar/node/og/scrapeUrl';
+import { __scrapeUrl } from '@coffeekraken/sugar/og';
 
 /**
  * @name                doc

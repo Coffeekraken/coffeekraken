@@ -1,5 +1,6 @@
 import __SEventEmitter from '@coffeekraken/s-event-emitter';
 import type { ISLog } from '@coffeekraken/s-log';
+import __SPromise from '@coffeekraken/s-promise';
 import { ISCommandProcessParams, ISCommandProcessSettings, ISProcessInternal, ISProcessParams, ISProcessProcessObj, ISProcessSettings } from './ISProcess';
 
 declare class SProcess extends __SEventEmitter implements ISProcessInternal {
@@ -25,7 +26,7 @@ declare class SProcess extends __SEventEmitter implements ISProcessInternal {
     
     static fromCommand(initialParams?: Partial<ISCommandProcessParams>, settings?: Partial<ISCommandProcessSettings>): Promise<SProcess>;
     
-    static run(paramsOrStringArgs?: string | Partial<ISProcessParams>, settings?: Partial<ISProcessSettings>): Promise<any>;
+    static run(paramsOrStringArgs?: string | Partial<ISProcessParams>, settings?: Partial<ISProcessSettings>): Promise<__SPromise>;
     
     constructor(initialParams?: Partial<ISProcessParams>, settings?: Partial<ISProcessSettings>);
     
@@ -35,7 +36,7 @@ declare class SProcess extends __SEventEmitter implements ISProcessInternal {
     ready(): void;
     
     _duration: any;
-    run(paramsOrStringArgs?: string | Partial<ISProcessParams>, settings?: Partial<ISProcessSettings>): any;
+    run(paramsOrStringArgs?: string | Partial<ISProcessParams>, settings?: Partial<ISProcessSettings>): __SPromise;
     state(value?: string): string;
     
     kill(data: any): void;

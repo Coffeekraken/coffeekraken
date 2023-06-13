@@ -18,9 +18,9 @@ import __packageRootDir from '../path/packageRootDir';
  * @return      {Record<string, IPackageJson}            An object containing each modules under the module name as key
  *
  * @snippet         __listNodeModulesPackages()
- * 
+ *
  * @example         js
- * import { __listNodeModulesPackages } from '@coffeekraken/sugar/node/npm/listNodeModulesPackages';
+ * import { __listNodeModulesPackages } from '@coffeekraken/sugar/npm';
  * __listNodeModulesPackages();
  *
  * @since       2.0.0

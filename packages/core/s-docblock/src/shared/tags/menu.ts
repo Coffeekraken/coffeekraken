@@ -1,5 +1,5 @@
 // @ts-nocheck
-import __urlFromString from '@coffeekraken/sugar/shared/url/urlFromString';
+import { __urlFromString } from '@coffeekraken/sugar/url';
 
 /**
  * @name              menuTag

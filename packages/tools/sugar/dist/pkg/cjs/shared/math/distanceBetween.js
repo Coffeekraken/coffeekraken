@@ -27,7 +27,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
  * })
  *
  * @example    js
- * import { __distanceBetween } from '@coffeekraken/sugar/js/geom/2d/distanceBetween'
+ * import { __distanceBetween } from '@coffeekraken/sugar/geom'
  * __distanceBetween({
  * 	x: 10, y: 20
  * }, {

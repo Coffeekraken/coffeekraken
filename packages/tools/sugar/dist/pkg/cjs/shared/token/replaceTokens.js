@@ -21,8 +21,8 @@ const currentModuleSystem_1 = __importDefault(require("../module/currentModuleSy
  * __replaceTokens($1)
  *
  * @example         js
- * import replaceTokens from '@coffeekraken/sugar/shared/token/replaceTokens';
- * replaceTokens('Current module system is %moduleSystem');
+ * import { __replaceTokens } from '@coffeekraken/sugar/token';
+ * __replaceTokens('Current module system is %moduleSystem');
  *
  * @since           2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)

@@ -2,7 +2,7 @@
 
 import __SLitComponent from '@coffeekraken/s-lit-component';
 import { __querySelectorLive } from '@coffeekraken/sugar/dom';
-import __getTransitionProperties from '@coffeekraken/sugar/js/dom/style/getTransitionProperties';
+import { __getTransitionProperties } from '@coffeekraken/sugar/dom';
 import { __hotkey } from '@coffeekraken/sugar/keyboard';
 import { __deepMerge } from '@coffeekraken/sugar/object';
 import { css, html, unsafeCSS } from 'lit';
@@ -230,6 +230,7 @@ export default class SPanelComponent extends __SLitComponent {
         this._$backdrop = this.querySelector(
             `.${this.utils.uCls('_backdrop')}`,
         );
+
         this._containerTransitionProps = __getTransitionProperties(
             this._$container,
         );

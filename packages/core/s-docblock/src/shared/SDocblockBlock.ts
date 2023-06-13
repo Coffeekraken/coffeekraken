@@ -2,7 +2,7 @@ import __SClass from '@coffeekraken/s-class';
 import { __sha256 } from '@coffeekraken/sugar/crypto';
 import { __isPlainObject } from '@coffeekraken/sugar/is';
 import { __deepMerge } from '@coffeekraken/sugar/object';
-import __namespaceCompliant from '@coffeekraken/sugar/shared/string/namespaceCompliant';
+import { __namespaceCompliant } from '@coffeekraken/sugar/string';
 import { marked as __marked } from 'marked';
 
 import __authorTag from './tags/author';
@@ -57,7 +57,7 @@ import __typeTag from './tags/type';
  * @feature         `todo` tag support
  * @feature         `type` tag support
  * @feature         All the other tags are treated like a `String` value
- * 
+ *
  * @param         {String}       source      The docblock source.  Has to be a parsable docblock string
  * @param         {Object}      [settings={}]       A settings object to configure your instance
  *
@@ -67,14 +67,14 @@ import __typeTag from './tags/type';
  * @setting         {Any}           [markedOptions={}]                  Specify some [marked](https://www.npmjs.com/package/marked) options to render markdown
  * @setting         {Function}      [sortFunction=function(a, b) {})]       Specify a function to sort the docblocks. A default sort is applied
  * @setting         {Record<String, Function>}      [tags={}]           Specify some tags you want to include with a function that will be used to actually parse his value and return the formatted one. Some tags are built-in. Look at the features section.
- * 
+ *
  * @todo        tests
  * @todo        Support "feature" tag
  * @todo        Check the supported tags
  *
  * @snippet         __SDocblockBlock($1)
  * new __SDocblockBlock($1)
- * 
+ *
  * @example         js
  * import { __SDocblockBlock } from '@coffeekraken/s-docblock';
  * const docblock = new __SDocblockBlock(myDocblockString);

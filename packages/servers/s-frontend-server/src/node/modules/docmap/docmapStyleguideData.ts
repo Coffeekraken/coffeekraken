@@ -1,7 +1,7 @@
 import __SBench from '@coffeekraken/s-bench';
 import __SDocblock from '@coffeekraken/s-docblock';
 import __SDocmap from '@coffeekraken/s-docmap';
-import __scrapeUrl from '@coffeekraken/sugar/node/og/scrapeUrl';
+import { __scrapeUrl } from '@coffeekraken/sugar/og';
 import __fs from 'fs';
 
 export default function docmapStyleguideData({ req, res, pageConfig }) {

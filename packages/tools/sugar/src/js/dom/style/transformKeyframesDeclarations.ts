@@ -25,7 +25,7 @@ import __camelCase from '../../../shared/string/camelCase';
  * @todo      tests
  *
  * @example  	js
- * import __transformKeyframesDeclarations from '@coffeekraken/sugar/js/dom/style/transformKeyframesDeclarations';
+ * import { __transformKeyframesDeclarations } from '@coffeekraken/sugar/dom';
  *
  * @see             https://github.com/marionebl/jogwheel/blob/master/source/library/transform-keyframe-declaration.js
  * @since           2.0.0

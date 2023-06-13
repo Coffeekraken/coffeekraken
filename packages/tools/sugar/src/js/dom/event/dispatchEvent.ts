@@ -19,7 +19,7 @@
  * @snippet         __dispatchEvent($1, $2, $3)
  *
  * @example  	js
- * import { __dispatchEvent } from '@coffeekraken/sugar/js/dom/dispatchEvent'
+ * import { __dispatchEvent } from '@coffeekraken/sugar/dom'
  *  __dispatchEvent(myCoolHTMLElement, 'myCoolEventName', {
  * 		var1 : 'value1'
  * });

@@ -1,9 +1,9 @@
 import __SClass from '@coffeekraken/s-class';
 import type { ISLog, ISLogAsk } from '@coffeekraken/s-log';
 import { __deepMerge } from '@coffeekraken/sugar/object';
-import __SStdioSettingsInterface from './interface/SStdioSettingsInterface';
 import type { ISStdioAdapter } from './SStdioAdapter';
 import type { ISStdioSource } from './SStdioSource';
+import __SStdioSettingsInterface from './interface/SStdioSettingsInterface';
 
 export interface ISStdioSettings {
     filter: typeof Function;
@@ -45,9 +45,6 @@ export interface ISStdioLogFn {
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-
-const _nativeLog = console.log;
-
 export default class SStdio extends __SClass {
     /**
      * @name      sources
@@ -175,8 +172,8 @@ export default class SStdio extends __SClass {
      *
      * @example       js
      * import SStdio from '@coffeekraken/s-stdio';
-     * import spawn from '@coffeekraken/sugar/node/process/spawn';
-     * const proc = spawn('ls -la');
+     * import { __spawn } from '@coffeekraken/sugar/process';
+     * const proc = __spawn('ls -la');
      * SStdio.new('default', proc);
      *
      * @since     2.0.0
@@ -321,50 +318,11 @@ export default class SStdio extends __SClass {
      */
     registerSource(source: ISStdioSource) {
         // listen for logs
-
         source.on('log', this.log.bind(this));
         source.on('ask', this.ask.bind(this));
         source.on('ready', () => {
             this.display();
         });
-
-        // subscribe to data
-
-        // // "ask" event
-        // source.on('ask', async (askObj: ISLogAsk, metas, answer) => {
-        //     // @ts-ignore
-        //     askObj.metas = metas;
-        //     const res = await this.ask(askObj);
-        //     answer?.(res);
-        // });
-
-        // source.on(
-        //     'log',
-        //     (data, metas) => {
-        //         // @TODO        find why some logs are printed x times... It seems that it's linked to number of actions theirs in a recipe in the SKitchen class...
-        //         if (this._tmpPrintedLogs.includes(data.value)) {
-        //             return;
-        //         }
-        //         this._tmpPrintedLogs.push(data.value);
-        //         setTimeout(() => {
-        //             this._tmpPrintedLogs.splice(
-        //                 this._tmpPrintedLogs.indexOf(data.value),
-        //                 1,
-        //             );
-        //         }, 100);
-
-        //         if (data === undefined || data === null) return;
-
-        //         // save metas into logObj
-        //         data.metas = metas;
-
-        //         this.log(data);
-        //     },
-        //     {
-        //         filter: set.filter,
-        //         processor: set.processor,
-        //     },
-        // );
     }
 
     /**

@@ -1,7 +1,7 @@
 // @ts-nocheck
 
 import { __readJsonSync } from '@coffeekraken/sugar/fs';
-import __packageRootDir from '@coffeekraken/sugar/node/path/packageRootDir';
+import { __packageRootDir } from '@coffeekraken/sugar/path';
 import { __formatPackageJson } from '@coffeekraken/sugar/package';
 import __fs from 'fs';
 

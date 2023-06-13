@@ -16,5 +16,5 @@ export interface IwhenSettings {
     whenStylesheetsReady?: IWhenStyleSheetsReadySettings;
 }
 export type TWhenTrigger = 'direct' | 'directly' | 'inViewport' | 'nearViewport' | 'enterViewport' | 'outOfViewport' | 'interact' | 'visible' | 'domReady' | 'stylesheetsReady' | 'animationEnd' | 'lod:0' | 'lod:1' | 'lod:2' | 'lod:3' | 'lod:4';
-export declare const triggers: string[];
+export declare const WhenTriggers: string[];
 export default function __when($elm: HTMLElement, trigger: TWhenTrigger[], settings?: IwhenSettings): Promise<any>;

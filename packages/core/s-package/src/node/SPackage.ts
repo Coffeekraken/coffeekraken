@@ -127,8 +127,8 @@ export default class SPackage extends __SClass {
             // @ts-ignore
             let mapedFiles: {
                 node: Record<string, string>;
-                js: Record<string, string>;
-                shared: Record<string, string>;
+                browser: Record<string, string>;
+                default: Record<string, string>;
             } = {};
 
             // process each exports
@@ -288,7 +288,9 @@ export default class SPackage extends __SClass {
                 if (!currentPackageJson.exports) {
                     currentPackageJson.exports = {};
                 }
-            } catch (e) {}
+            } catch (e) {
+                console.log('Error', e);
+            }
 
             const newPackageJson = __deepMerge(currentPackageJson, json);
 

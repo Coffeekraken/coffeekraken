@@ -1,8 +1,7 @@
 import __SColor from '@coffeekraken/s-color';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
 import { __compressCssVarName } from '@coffeekraken/sugar/css';
-import { __get, __sort } from '@coffeekraken/sugar/object';
-import __set from '@coffeekraken/sugar/shared/object/set';
+import { __get, __set, __sort } from '@coffeekraken/sugar/object';
 // import __micromatch from 'micromatch';
 import __SEventEmitter from '@coffeekraken/s-event-emitter';
 import __SInterface from '@coffeekraken/s-interface';
@@ -12,7 +11,7 @@ import {
     __flatten,
     __objectHash,
 } from '@coffeekraken/sugar/object';
-import __dashCase from '@coffeekraken/sugar/shared/string/dashCase';
+import { __dashCase } from '@coffeekraken/sugar/string';
 import __knownCssProperties from 'known-css-properties';
 
 /**
@@ -1405,6 +1404,7 @@ export default class SThemeBase extends __SEventEmitter {
             '--s-offsize',
             '--s-color',
             '--s-layout',
+            '--s-ui',
         ];
 
         Object.keys(flattenedTheme).forEach((key) => {

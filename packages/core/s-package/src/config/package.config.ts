@@ -170,8 +170,8 @@ export default function (api) {
              */
             folderPlatformMap: {
                 node: 'node',
-                shared: 'shared',
-                js: 'js',
+                shared: 'default',
+                js: 'browser',
             },
         },
     };

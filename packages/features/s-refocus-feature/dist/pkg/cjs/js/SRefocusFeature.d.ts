@@ -1,5 +1,5 @@
 import __SFeature from '@coffeekraken/s-feature';
-import type { IScrollToSettings } from '@coffeekraken/sugar/js/dom/scroll/scrollTo';
+import type { IScrollToSettings } from '@coffeekraken/sugar/dom';
 import __define from './define';
 export interface ISRefocusFeatureProps {
     trigger: string[];

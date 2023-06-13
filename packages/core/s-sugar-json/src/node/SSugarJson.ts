@@ -2,7 +2,7 @@ import __SBench from '@coffeekraken/s-bench';
 import __SClass from '@coffeekraken/s-class';
 import { __unique } from '@coffeekraken/sugar/array';
 import { __dirname, __readJsonSync } from '@coffeekraken/sugar/fs';
-import __globalNodeModulesPath from '@coffeekraken/sugar/node/npm/globalNodeModulesPath';
+import { __globalNodeModulesPath } from '@coffeekraken/sugar/npm';
 import { __deepMerge } from '@coffeekraken/sugar/object';
 import { __packageRootDir } from '@coffeekraken/sugar/path';
 import __fs from 'fs';

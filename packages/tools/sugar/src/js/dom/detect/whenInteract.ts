@@ -34,7 +34,7 @@ import __WhenInteractSettingsInterface from './interface/WhenInteractSettingsInt
  * @todo      tests
  *
  * @example  	js
- * import { __whenInteract } from '@coffeekraken/sugar/js/dom/detect/whenInteract'
+ * import { __whenInteract } from '@coffeekraken/sugar/dom'
  * __whenInteract(myCoolElement).then($elm => {
  *      // do something...
  * });

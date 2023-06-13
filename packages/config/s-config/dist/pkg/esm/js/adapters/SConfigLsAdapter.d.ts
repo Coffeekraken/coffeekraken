@@ -1,5 +1,5 @@
-import type { ISConfigAdapterSettings } from '../../shared/adapters/SConfigAdapter';
-import __SConfigAdapter from '../../shared/adapters/SConfigAdapter';
+import type { ISConfigAdapterSettings } from '@coffeekraken/s-config-adapter';
+import __SConfigAdapter from '@coffeekraken/s-config-adapter';
 
 export interface ISConfigLsAdapterSettings extends ISConfigAdapterSettings {
 }

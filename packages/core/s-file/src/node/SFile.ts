@@ -736,58 +736,6 @@ class SFile extends __SClass implements ISFile {
     }
 
     /**
-     * @name      duplicateSync
-     * @type      Function
-     *
-     * This method allows you to make a copy of this file.
-     * If you don't specify a "to" path, the file will be diplicated
-     * into the temp directory
-     *
-     * @param     {String}      [to=undefined]      The path where you want to duplicate this file including the file name
-     * @return    {SFile}                      A new SFile instance that represent your new file
-     *
-     * @since     2.0.0
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-     */
-    duplicateSync(to?): SFile {
-        // let destination = to;
-        // if (!to) {
-        //     const __replacePathTokens = __require(
-        //         '@coffeekraken/sugar/node/path/replacePathTokens',
-        //     ).default;
-        //     destination = __replacePathTokens(
-        //         `%tmpDir/files/${this.constructor.name}/${
-        //             this.nameWithoutExt
-        //         }.${__uniqid()}.${this.extension}`,
-        //     );
-        //     __onProcessExit(() => {
-        //         try {
-        //             __fs.unlinkSync(destination);
-        //         } catch (e) {}
-        //     });
-        // }
-        // destination = __path.resolve(destination);
-        // // make sure the destination does not exists already
-        // if (__fs.existsSync(destination)) {
-        //     throw new Error(
-        //         `<red>[sugar.node.fs.SFile.duplicate]</red> Sorry but a file already exists at "<cyan>${destination}</cyan>"`,
-        //     );
-        // }
-        // // ensure destination directory exists
-        // __ensureDirSync(__folderPath(destination));
-        // // copy the file
-        // __fs.copyFileSync(this.path, destination);
-        // // create a new instance for this new file
-        // // @ts-ignore
-        // const newFileInstance = new this.constructor(
-        //     destination,
-        //     this.settings,
-        // );
-        // // return this new instance
-        // return newFileInstance;
-    }
-
-    /**
      * @name       save
      * @type      Function
      * @async

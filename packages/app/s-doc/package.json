@@ -10,14 +10,13 @@
     "author": "",
     "license": "MIT",
     "dependencies": {
-        "@coffeekraken/s-i18n": "^2.0.0-alpha.27",
-        "@coffeekraken/s-interface": "^2.0.0-alpha.27",
         "@coffeekraken/s-class": "^2.0.0-alpha.27",
-        "@coffeekraken/s-markdown": "^2.0.0-alpha.27",
+        "@coffeekraken/s-docblock": "^2.0.0-alpha.27",
         "@coffeekraken/s-docmap": "^2.0.0-alpha.27",
         "@coffeekraken/s-i18n": "^2.0.0-alpha.27",
-        "@coffeekraken/s-docblock": "^2.0.0-alpha.27",
+        "@coffeekraken/s-interface": "^2.0.0-alpha.27",
         "@coffeekraken/s-lit-component": "^2.0.0-alpha.27",
+        "@coffeekraken/s-markdown-builder": "^2.0.0-alpha.27",
         "@coffeekraken/s-promise": "^2.0.0-alpha.27",
         "@coffeekraken/sugar": "^2.0.0-alpha.27",
         "lit": "^2.2.8"
@@ -30,7 +29,7 @@
                 "require": "./dist/pkg/cjs/node/exports.js",
                 "import": "./dist/pkg/esm/node/exports.js"
             },
-            "default": {
+            "browser": {
                 "require": "./dist/pkg/cjs/js/exports.js",
                 "import": "./dist/pkg/esm/js/exports.js"
             }

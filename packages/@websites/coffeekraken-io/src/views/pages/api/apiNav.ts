@@ -2,8 +2,7 @@
 
 import __SLitComponent from '@coffeekraken/s-lit-component';
 import __SRequest from '@coffeekraken/s-request';
-import { __filterObject, __get } from '@coffeekraken/sugar/object';
-import __set from '@coffeekraken/sugar/shared/object/set';
+import { __filterObject, __get, __set } from '@coffeekraken/sugar/object';
 import { html } from 'lit';
 
 export interface IApiNavComponentProps {}

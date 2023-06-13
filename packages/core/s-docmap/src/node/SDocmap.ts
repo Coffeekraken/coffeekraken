@@ -10,17 +10,22 @@ import {
     __folderPath,
     __readJsonSync,
 } from '@coffeekraken/sugar/fs';
-import { __deepMap, __deepMerge, __get } from '@coffeekraken/sugar/object';
+import {
+    __deepFilter,
+    __deepMap,
+    __deepMerge,
+    __get,
+    __set,
+    __sort,
+    __sortDeep,
+} from '@coffeekraken/sugar/object';
 import {
     __packageJsonSync,
     __packageMetasSync,
 } from '@coffeekraken/sugar/package';
 import { __packageRootDir } from '@coffeekraken/sugar/path';
-import __deepFilter from '@coffeekraken/sugar/shared/object/deepFilter';
-import __set from '@coffeekraken/sugar/shared/object/set';
-import __sortObject from '@coffeekraken/sugar/shared/object/sort';
-import __sortObjectDeep from '@coffeekraken/sugar/shared/object/sortDeep';
-import __namespaceCompliant from '@coffeekraken/sugar/shared/string/namespaceCompliant';
+
+import { __namespaceCompliant } from '@coffeekraken/sugar/string';
 import __chokidar from 'chokidar';
 import __fs from 'fs';
 import __micromatch from 'micromatch';
@@ -470,7 +475,7 @@ class SDocmap extends __SClass implements ISDocmap {
                 __set(
                     finalDocmapJson,
                     dotPath,
-                    __sortObject(toSort, (a, b) => {
+                    __sort(toSort, (a, b) => {
                         return a.key.localeCompare(b.key);
                     }),
                 );
@@ -481,7 +486,7 @@ class SDocmap extends __SClass implements ISDocmap {
                 __set(
                     finalDocmapJson,
                     dotPath,
-                    __sortObjectDeep(toSort, (a, b) => {
+                    __sortDeep(toSort, (a, b) => {
                         return a.key.localeCompare(b.key);
                     }),
                 );

@@ -26,7 +26,7 @@ import __yaml from 'yaml';
  *
  * @snippet         __loadConfigFile($1)
  * await __loadConfigFile($1)
- * 
+ *
  * @example         js
  * import { __loadConfigFile } from '@coffeekraken/sugar/load';
  * await __loadConfigFile('vite.config.js`);
@@ -116,7 +116,8 @@ export default async function __loadConfigFile(
             // try to pass result in JSON.parse
             try {
                 str = JSON.parse(str);
-            } catch (e) {}
+            } catch (e) {
+            }
             return str;
             break;
     }

@@ -1,8 +1,7 @@
 import __SClass from '@coffeekraken/s-class';
 import { __isGlob, __isOfType } from '@coffeekraken/sugar/is';
-import { __deepMerge, __get } from '@coffeekraken/sugar/object';
-import __set from '@coffeekraken/sugar/shared/object/set';
-import { __typeof } from '@coffeekraken/sugar/type';
+import { __deepMerge, __get, __set } from '@coffeekraken/sugar/object';
+import { __typeOf } from '@coffeekraken/sugar/type';
 import __SDescriptorResult, {
     ISDescriptorResult,
     ISDescriptorResultObj,
@@ -10,14 +9,14 @@ import __SDescriptorResult, {
 } from './SDescriptorResult';
 
 /**
- * @name                SDescriptor
- * @namespace           shared
- * @type                Class
- * @extends             SClass
- * @platform            node
- * @platform            js
- * @status              beta
- * @private
+ * @__name                SDescriptor
+ * @__namespace           shared
+ * @__type                Class
+ * @__extends             SClass
+ * @__platform            node
+ * @__platform            js
+ * @__status              beta
+ * @__private
  *
  * Make a description...
  *
@@ -27,15 +26,6 @@ import __SDescriptorResult, {
  * @todo      handle not object values
  * @todo      doc
  * @todo      interfaces
- *
- * @example       js
- * import SDescriptor from '@coffeekraken/sugar/js/descriptor/SDescriptor';
- * class MyDescriptor extends SDescriptor {
- *    constructor(settings) {
- *      super(settings);
- *      // do something...
- *    }
- * }
  *
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -242,7 +232,7 @@ class SDescriptor extends __SClass implements ISDescriptor {
             throw new Error(
                 `Sorry but this descriptor "<yellow>${
                     this.metas.name
-                }</yellow>" does not accept values of type "<cyan>${__typeof(
+                }</yellow>" does not accept values of type "<cyan>${__typeOf(
                     value,
                 )}</cyan>" but only "<green>${set.type}</green>"...`,
             );

@@ -5,20 +5,18 @@ import { __getExtendsStack } from '@coffeekraken/sugar/class';
 import { __parseHtml } from '@coffeekraken/sugar/console';
 import { __map } from '@coffeekraken/sugar/iterable';
 import { __deepMerge } from '@coffeekraken/sugar/object';
-import __parseTypeString, {
-    IParseTypeStringResultObj,
-} from '@coffeekraken/sugar/shared/type/parseTypeString';
-import __typeOf from '@coffeekraken/sugar/shared/type/typeof';
+import type { IParseTypeStringResultObj } from '@coffeekraken/sugar/type';
+import { __parseTypeString, __typeOf } from '@coffeekraken/sugar/type';
 import __STypeResult from './STypeResult';
 
 /**
- * @name                SType
- * @namespace           shared
- * @type                Class
- * @platform            node
- * @platform            js
- * @status              beta
- * @private
+ * @___name                SType
+ * @___namespace           shared
+ * @___type                Class
+ * @___platform            node
+ * @___platform            js
+ * @___status              beta
+ * @___private
  *
  * This class is the main one that MUST be used as parent one
  * when creating any type like object, string, etc...
@@ -32,15 +30,6 @@ import __STypeResult from './STypeResult';
  *
  * @todo      tests
  * @todo      doc
- *
- * @example       js
- * import SType from '@coffeekraken/sugar/js/descriptor/SType';
- * class MyDescriptor extends SType {
- *    constructor(settings) {
- *      super(settings);
- *      // do something...
- *    }
- * }
  *
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -196,7 +185,7 @@ class SType implements ISType {
      * @type      Function
      * @static
      *
-     * This static method allows you to parse a type string using the `@coffeekraken/sugar/shared/type/parseTypeString` function.
+     * This static method allows you to parse a type string.
      *
      * @param     {String}        typeString      The type string to parse
      * @return    {ITypeStringObject[]}             An array of object(s) describing the type string passed

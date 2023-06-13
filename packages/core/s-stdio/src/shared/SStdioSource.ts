@@ -11,8 +11,6 @@ export interface ISStdioSource {
 
 export interface ISStdioSourceSettings {}
 
-const _nativeLog = console.log;
-
 export default class SStdioSource extends __SClass implements ISStdioSource {
     private _callbacks: Record<string, Function[]> = {};
 

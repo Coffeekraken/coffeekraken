@@ -1,5 +1,5 @@
 import { define } from '@coffeekraken/s-filtrable-input-component';
-import __wait from '@coffeekraken/sugar/shared/datetime/wait';
+import { __wait } from '@coffeekraken/sugar/datetime';
 
 (() => {
     define(

@@ -3,7 +3,7 @@ import {
     __querySelectorLive,
     __whenStylesheetsReady,
 } from '@coffeekraken/sugar/dom';
-import __whenNearViewport from '@coffeekraken/sugar/js/dom/detect/whenNearViewport';
+import { __whenNearViewport } from '@coffeekraken/sugar/dom';
 import { __deepMerge } from '@coffeekraken/sugar/object';
 import __SDepsFeatureInterface from './interface/SDepsFeatureInterface';
 

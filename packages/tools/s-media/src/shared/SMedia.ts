@@ -2,8 +2,7 @@
 
 import __SClass from '@coffeekraken/s-class';
 import { __deepMerge, __sort } from '@coffeekraken/sugar/object';
-import __dashCase from '@coffeekraken/sugar/shared/string/dashCase';
-import { __parse } from '@coffeekraken/sugar/string';
+import { __dashCase, __parse } from '@coffeekraken/sugar/string';
 import type { ISMedia } from '@specimen/types';
 
 export interface IBuildQuerySettings {

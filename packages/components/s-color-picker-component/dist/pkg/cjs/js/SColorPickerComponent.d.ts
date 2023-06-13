@@ -1,5 +1,5 @@
 import __SLitComponent from '@coffeekraken/s-lit-component';
-import type { IFloatApi, IFloatSettings } from '@coffeekraken/sugar/js/dom/ui/makeFloat';
+import type { IFloatApi, IFloatSettings } from '@coffeekraken/sugar/dom';
 import __define from './define';
 export interface ISColorPickerComponentProps {
     name: string;

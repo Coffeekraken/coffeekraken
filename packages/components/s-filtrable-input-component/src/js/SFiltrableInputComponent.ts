@@ -7,7 +7,7 @@ import { css, html, unsafeCSS } from 'lit';
 import { unsafeHTML } from 'lit/directives/unsafe-html.js';
 import __SFiltrableInputComponentInterface from './interface/SFiltrableInputComponentInterface';
 
-import __cursorToEnd from '@coffeekraken/sugar/js/dom/input/cursorToEnd';
+import { __cursorToEnd } from '@coffeekraken/sugar/dom';
 
 import {
     __distanceFromElementTopToViewportBottom,
@@ -15,7 +15,7 @@ import {
     __getStyleProperty,
     __onScrollEnd,
 } from '@coffeekraken/sugar/dom';
-import __stripTags from '@coffeekraken/sugar/js/dom/manipulate/stripTags';
+import { __stripTags } from '@coffeekraken/sugar/dom';
 import { __hotkey } from '@coffeekraken/sugar/keyboard';
 
 // @ts-ignore

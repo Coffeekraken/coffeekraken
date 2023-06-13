@@ -4,7 +4,7 @@ import __SEnv from '@coffeekraken/s-env';
 import { define as __sFiltrableInputDefine } from '@coffeekraken/s-filtrable-input-component';
 import __SLitComponent from '@coffeekraken/s-lit-component';
 import __SRequest from '@coffeekraken/s-request';
-import __cursorToEnd from '@coffeekraken/sugar/js/dom/input/cursorToEnd';
+import { __cursorToEnd } from '@coffeekraken/sugar/dom';
 import { __hotkey } from '@coffeekraken/sugar/keyboard';
 import { html } from 'lit';
 

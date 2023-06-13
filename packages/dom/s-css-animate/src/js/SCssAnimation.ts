@@ -3,15 +3,19 @@ import {
     __cssEasingStrToJsFunction,
     __parseTransformRule,
 } from '@coffeekraken/sugar/css';
-import { __easeInterval } from '@coffeekraken/sugar/function';
-import __getAnimationsFromElement, {
+import {
     IGetAnimationsFromElementResult,
-} from '@coffeekraken/sugar/js/dom/style/getAnimationsFromElement';
-import __getKeyframesFromStylesheets, {
     IKeyframe,
-} from '@coffeekraken/sugar/js/dom/style/getKeyframesFromStylesheets';
-import { __deepMerge, __flatten, __get } from '@coffeekraken/sugar/object';
-import __set from '@coffeekraken/sugar/shared/object/set';
+    default as __getAnimationsFromElement,
+    default as __getKeyframesFromStylesheets,
+} from '@coffeekraken/sugar/dom';
+import { __easeInterval } from '@coffeekraken/sugar/function';
+import {
+    __deepMerge,
+    __flatten,
+    __get,
+    __set,
+} from '@coffeekraken/sugar/object';
 import * as __rematrix from 'rematrix';
 
 /**

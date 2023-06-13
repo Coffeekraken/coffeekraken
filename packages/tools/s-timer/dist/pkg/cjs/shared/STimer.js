@@ -42,8 +42,8 @@ const object_1 = require("@coffeekraken/sugar/object");
  * @todo      tests
  *
  * @example 	js
- * import STimer from '@coffeekraken/sugar/js/time/STimer';
- * const myTimer = new STimer(2000, {
+ * import __STimer from '@coffeekraken/s-timer';
+ * const myTimer = new __STimer(2000, {
  * 		tickCount : 5
  * })
  * myTimer.on('tick', myTimer => {

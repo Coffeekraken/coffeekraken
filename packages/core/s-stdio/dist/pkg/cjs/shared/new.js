@@ -15,15 +15,15 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const is_1 = require("@coffeekraken/sugar/is");
 const SStdio_1 = __importDefault(require("./SStdio"));
 /**
- * @name            new
- * @type            Function
+ * @___name            new
+ * @___type            Function
  *
  * This static method is a sugar to instanciate an stdio by specifying some sources,
  * and either a path to a SStdio class, an SStdio class directly or a pre-registered
  * stdio id like:
  * - inherit: If is in node context, will fallback to SBasicStdio, if in browser, in SConsoleStdio
  *
- * @param       {String}        id          A unique id for your stdio instance
+ * @___param       {String}        id          A unique id for your stdio instance
  * @param         {SProcess}          proc        The process to display Stdio for
  * @param           {ISStdioUi}         stdio           Specify the stdio to init
  * @param         {Object}            [settings={}]     An object of blessed settings that will be passed to the main blessed.box instance
@@ -34,8 +34,8 @@ const SStdio_1 = __importDefault(require("./SStdio"));
  *
  * @example       js
  * import SStdio from '@coffeekraken/s-stdio';
- * import spawn from '@coffeekraken/sugar/node/process/spawn';
- * const proc = spawn('ls -la');
+ * import { __spawn } from '@coffeekraken/sugar/process';
+ * const proc = __spawn('ls -la');
  * await SStdio.new('default', proc);
  *
  * @since     2.0.0
@@ -56,4 +56,4 @@ function _new(id, sources, adapters, settings) {
     });
 }
 exports.default = _new;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7O0FBQUEsK0NBQWtEO0FBRWxELHNEQUFnQztBQUloQzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0EwQkc7QUFDSCxTQUE4QixJQUFJLENBQzlCLEVBQVUsRUFDVixPQUF3QixFQUN4QixRQUEwQixFQUMxQixRQUEwQjs7UUFFMUIsSUFBSSxDQUFDLEtBQUssQ0FBQyxPQUFPLENBQUMsT0FBTyxDQUFDO1lBQUUsT0FBTyxHQUFHLENBQUMsT0FBTyxDQUFDLENBQUM7UUFFakQsSUFBSSxhQUFrQixDQUFDO1FBRXZCLElBQUksSUFBQSxhQUFRLEdBQUUsRUFBRTtZQUVaLGFBQWEsR0FBRyxJQUFJLGdCQUFRLENBQUMsRUFBRSxFQUFFLE9BQU8sRUFBRSxRQUFRLEVBQUUsUUFBUSxDQUFDLENBQUM7U0FDakU7YUFBTTtZQUNILE1BQU0sSUFBSSxLQUFLLENBQ1gsd0VBQXdFLENBQzNFLENBQUM7U0FDTDtRQUNELE9BQU8sYUFBYSxDQUFDO0lBQ3pCLENBQUM7Q0FBQTtBQW5CRCx1QkFtQkMifQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7O0FBQUEsK0NBQWtEO0FBRWxELHNEQUFnQztBQUloQzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0EwQkc7QUFDSCxTQUE4QixJQUFJLENBQzlCLEVBQVUsRUFDVixPQUF3QixFQUN4QixRQUEwQixFQUMxQixRQUEwQjs7UUFFMUIsSUFBSSxDQUFDLEtBQUssQ0FBQyxPQUFPLENBQUMsT0FBTyxDQUFDO1lBQUUsT0FBTyxHQUFHLENBQUMsT0FBTyxDQUFDLENBQUM7UUFFakQsSUFBSSxhQUFrQixDQUFDO1FBRXZCLElBQUksSUFBQSxhQUFRLEdBQUUsRUFBRTtZQUNaLGFBQWEsR0FBRyxJQUFJLGdCQUFRLENBQUMsRUFBRSxFQUFFLE9BQU8sRUFBRSxRQUFRLEVBQUUsUUFBUSxDQUFDLENBQUM7U0FDakU7YUFBTTtZQUNILE1BQU0sSUFBSSxLQUFLLENBQ1gsd0VBQXdFLENBQzNFLENBQUM7U0FDTDtRQUNELE9BQU8sYUFBYSxDQUFDO0lBQ3pCLENBQUM7Q0FBQTtBQWxCRCx1QkFrQkMifQ==

@@ -191,14 +191,23 @@ export default class SSugarCli {
         if (global._sugarCli) return global._sugarCli;
         global._sugarCli = SSugarCli;
 
-        // make sure we are in a package
-        await this._checkIfWeAreInPackage();
-
         // listen for ctrl+c
         __hotkey('ctrl+c').on('press', () => {
             process.emit('custom_exit');
             process.emit('SIGINT');
         });
+
+        // make sure we are in a package
+        await this._checkIfWeAreInPackage();
+
+        // load the sugar config
+        await __SSugarConfig.load({
+            cache: true,
+        });
+
+        // console.log('LOADED');
+        // console.log(__SSugarConfig.get('viewRenderer.rootDirs'));
+        // return;
 
         this._bench = new __SBench('sugar.cli', {
             bubbles: false,
@@ -217,17 +226,6 @@ export default class SSugarCli {
         this._setNodeEnv();
 
         this._bench.step('beforeLoadConfig');
-
-        await __wait(10);
-
-        // load the sugar config
-        const config = await __SSugarConfig.load({
-            cache: true,
-        });
-
-        // console.log('LOADED');
-        // console.log(__SSugarConfig.get('viewRenderer'));
-        // return;
 
         // check the "sugar.lock" file in the tmp folder
         // only if we are in a package scope
@@ -288,12 +286,6 @@ export default class SSugarCli {
             this._displayHelp(this.args.stack, this.args.action);
             return;
         }
-
-        // interactive
-        // if (!this.args.stack && !this.args.action && !this.args.params) {
-        //     this._interactivePrompt();
-        //     return;
-        // }
 
         this._bench.step('beforeProcess');
         this._bench.end();
@@ -414,7 +406,7 @@ export default class SSugarCli {
         });
     }
 
-    static _initStdio(def = true) {
+    static async _initStdio(def = true) {
         if (this._isStdioNeeded()) {
             if (def) {
                 this._stdio = new __SStdio(
@@ -428,6 +420,7 @@ export default class SSugarCli {
                         new __SStdioNotificationAdapter(),
                     ],
                 );
+                await __wait();
             }
         }
     }
@@ -487,9 +480,7 @@ export default class SSugarCli {
             );
 
             // init stdio
-            this._initStdio(true);
-
-            // await __wait(100);
+            await this._initStdio(true);
 
             if (!__isChildProcess()) {
                 this._newStep();
@@ -508,11 +499,10 @@ export default class SSugarCli {
 
             await proPromise;
 
-            // await __wait(1000);
             process.exit(0);
         } else if (cliObj.command) {
             // init stdio
-            this._initStdio(true);
+            await this._initStdio(true);
             const promise = __spawn(
                 __replaceCommandTokens(cliObj.command),
                 [],
@@ -755,9 +745,7 @@ export default class SSugarCli {
 
     static async _displayHelp(stack?, action?) {
         // init stdop
-        this._initStdio(true);
-
-        // await __wait(1000);
+        await this._initStdio(true);
 
         this._newStep();
 
@@ -812,8 +800,6 @@ export default class SSugarCli {
                 });
             }
 
-            // await __wait(1000);
-
             process.exit(0);
         }
 
@@ -862,7 +848,6 @@ export default class SSugarCli {
             });
         });
 
-        // await __wait(1000);
         process.exit(0);
     }
 

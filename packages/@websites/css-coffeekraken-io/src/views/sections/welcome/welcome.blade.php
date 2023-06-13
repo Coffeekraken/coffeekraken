@@ -1,4 +1,4 @@
-<section id="homepage-welcome">
+<section id="homepage-welcome" viewport-aware>
     
     <div class="_bkg"></div>
     

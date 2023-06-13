@@ -5,7 +5,7 @@ import __SEnv from '@coffeekraken/s-env';
 import __SFile from '@coffeekraken/s-file';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
 import { __folderPath, __readJsonSync } from '@coffeekraken/sugar/fs';
-import __packageRootDir from '@coffeekraken/sugar/node/path/packageRootDir';
+import { __packageRootDir } from '@coffeekraken/sugar/path';
 import { __deepMerge, __get } from '@coffeekraken/sugar/object';
 import __fs from 'fs';
 import __path from 'path';

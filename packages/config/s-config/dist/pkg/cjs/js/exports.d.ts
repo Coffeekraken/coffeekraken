@@ -1,7 +1,5 @@
-import SConfigAdapter from '../shared/adapters/SConfigAdapter';
-import SConfigLsAdapter from './adapters/SConfigLsAdapter';
 import SConfig from '../shared/SConfig';
-export * from '../shared/adapters/SConfigAdapter';
+import SConfigLsAdapter from './adapters/SConfigLsAdapter';
 export * from './adapters/SConfigLsAdapter';
-export { SConfigAdapter, SConfigLsAdapter };
+export { SConfigLsAdapter };
 export default SConfig;

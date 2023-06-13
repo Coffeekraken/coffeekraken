@@ -1,6 +1,6 @@
 import __SClass from '@coffeekraken/s-class';
 import SFile from '@coffeekraken/s-file';
-import type { IResolveGlobSettings } from '@coffeekraken/sugar/node/glob/resolveGlob';
+import type { IResolveGlobSettings } from '@coffeekraken/sugar/glob';
 
 export interface ISGlobSettings {
 }
@@ -11,7 +11,7 @@ export default class SGlob extends __SClass {
     
     static isGlob(glob: string): boolean;
     
-    static resolve(globs: any, settings?: Partial<IResolveGlobSettings>): SFile[] | string[];
+    static resolveSync(globs: any, settings?: Partial<IResolveGlobSettings>): SFile[] | string[];
     
     static copySync(globs: string | string[], outDir: string, settings?: Partial<IResolveGlobSettings>): SFile[] | string[];
     
@@ -23,7 +23,7 @@ export default class SGlob extends __SClass {
     
     constructor(globs: string | string[], settings?: Partial<ISGlobSettings>);
     
-    resolve(settings?: Partial<IResolveGlobSettings>): SFile[] | string[];
+    resolveSync(settings?: Partial<IResolveGlobSettings>): SFile[] | string[];
     
     copySync(outDir: string, settings?: Partial<IResolveGlobSettings>): SFile[] | string[];
     

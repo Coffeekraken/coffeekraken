@@ -4,6 +4,7 @@ import __SFile from '@coffeekraken/s-file';
 import __SGlob from '@coffeekraken/s-glob';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
 import { __dirname, __getFiles } from '@coffeekraken/sugar/fs';
+import { __currentModuleSystem } from '@coffeekraken/sugar/module';
 import { __deepMerge } from '@coffeekraken/sugar/object';
 import {
     __packageCacheDir,
@@ -11,7 +12,6 @@ import {
     __srcRootDir,
 } from '@coffeekraken/sugar/path';
 import { __onProcessExit } from '@coffeekraken/sugar/process';
-import __currentModuleSystem from '@coffeekraken/sugar/shared/module/currentModuleSystem';
 import __fs, { promises as __fsPromise } from 'fs';
 import __path from 'path';
 import __ts from 'typescript';

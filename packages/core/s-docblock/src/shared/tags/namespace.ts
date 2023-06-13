@@ -1,5 +1,5 @@
 // @ts-nocheck
-import __namespaceCompliant from '@coffeekraken/sugar/shared/string/namespaceCompliant';
+import { __namespaceCompliant } from '@coffeekraken/sugar/string';
 
 /**
  * @name              namespace

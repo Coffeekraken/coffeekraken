@@ -35,14 +35,8 @@ export default function __getStyleProperty(
     elm: HTMLElement,
     property: string,
 ): any {
-    // // caching mecanisme
-    // setTimeout(() => {
-    //     elm._sComputedStyle = null;
-    // });
-    _console.log('ELM', elm);
-    const computed = window.getComputedStyle(elm);
-    // elm._sComputedStyle = computed;
-
+    if (!elm) return;
+    const computed = elm._sComputedStyle || window.getComputedStyle(elm);
     const prefixes = ['', 'webkit-', 'moz-', 'ms-', 'o-', 'khtml-'];
     for (let i = 0; i < prefixes.length; i++) {
         const prefix = prefixes[i];

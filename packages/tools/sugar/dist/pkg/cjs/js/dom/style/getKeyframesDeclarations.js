@@ -22,7 +22,7 @@ const dom_1 = require("@coffeekraken/sugar/dom");
  * @snippet         __getKeyframesDeclarations($1)
  *
  * @example  	js
- * import __getKeyframesDeclarations from '@coffeekraken/sugar/js/dom/style/getKeyframesDeclarations';
+ * import { __getKeyframesDeclarations } from '@coffeekraken/sugar/dom';
  * __getKeyframesDeclarations('myCoolAnimation', [myCoolCssRules]);
  *
  * @see             https://github.com/marionebl/jogwheel/blob/master/source/library/get-keyframe-declarations.js

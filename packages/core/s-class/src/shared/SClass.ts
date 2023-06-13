@@ -1,7 +1,3 @@
-import type { ISInterface } from '@coffeekraken/s-interface';
-import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
-import __toJson from '@coffeekraken/sugar/shared/object/toJson';
-
 /**
  * @name            SClass
  * @namespace       sugar.js.class
@@ -20,7 +16,7 @@ import __toJson from '@coffeekraken/sugar/shared/object/toJson';
  *      constructor(settings = {}) {
  *          super(settings);
  *      }
- * }
+ * }324e
  *
  * @example         js
  * import __SClass from '@coffeekraken/s-class';
@@ -47,13 +43,13 @@ export interface ISClassSettings {
 export interface ISClassCtor {
     new (settings?: Partial<ISClassSettings>);
     extends(cls: any): any;
-    interface?: ISInterface;
-    settingsInterface?: ISInterface;
+    interface?: any;
+    settingsInterface?: any;
     _sClassAsName?: string;
 }
 
 export interface ISClassInterfaceObj {
-    class: ISInterface;
+    class: any;
     apply: boolean;
     on: string;
 }
@@ -162,13 +158,11 @@ function getMetas(ctx: any): ISClassMetas {
 }
 
 function expose(ctx: any, instance: any, settings: ISClassExposeSettings) {
-    settings = __deepMerge(
-        {
-            as: undefined,
-            props: [],
-        },
-        settings,
-    );
+    settings = {
+        as: undefined,
+        props: [],
+        ...(settings ?? {}),
+    };
 
     if (settings.as && typeof settings.as === 'string') {
         ctx[settings.as] = instance;
@@ -184,7 +178,7 @@ function expose(ctx: any, instance: any, settings: ISClassExposeSettings) {
 }
 
 function toPlainObject(ctx: any): any {
-    return __toJson(ctx);
+    return JSON.parse(JSON.stringify(ctx));
 }
 
 function setSettings(ctx: any, settings: any = {}) {

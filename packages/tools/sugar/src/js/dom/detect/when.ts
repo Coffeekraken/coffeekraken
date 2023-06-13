@@ -92,7 +92,7 @@ export type TWhenTrigger =
     | 'lod:3'
     | 'lod:4';
 
-export const triggers = [
+export const WhenTriggers = [
     'direct',
     'directly',
     'inViewport',

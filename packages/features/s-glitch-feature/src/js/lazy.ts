@@ -1,5 +1,5 @@
 import { __querySelectorLive } from '@coffeekraken/sugar/dom';
-import type TWhenTrigger from '@coffeekraken/sugar/js/dom/detect/when';
+import type { TWhenTrigger } from '@coffeekraken/sugar/dom';
 
 interface ILazyDefineSettings {
     when: TWhenTrigger;

@@ -1726,6 +1726,7 @@ __metadata:
   resolution: "@coffeekraken/s-component-utils@workspace:packages/tools/s-component-utils"
   dependencies:
     "@coffeekraken/s-class": ^2.0.0-alpha.27
+    "@coffeekraken/s-classmap": ^2.0.0-alpha.27
     "@coffeekraken/s-conductor": ^2.0.0-alpha.27
     "@coffeekraken/s-front": ^2.0.0-alpha.27
     "@coffeekraken/s-frontspec": ^2.0.0-alpha.27
@@ -1899,9 +1900,13 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@coffeekraken/s-doc@workspace:packages/app/s-doc"
   dependencies:
+    "@coffeekraken/s-class": ^2.0.0-alpha.27
+    "@coffeekraken/s-docblock": ^2.0.0-alpha.27
+    "@coffeekraken/s-docmap": ^2.0.0-alpha.27
     "@coffeekraken/s-i18n": ^2.0.0-alpha.27
     "@coffeekraken/s-interface": ^2.0.0-alpha.27
     "@coffeekraken/s-lit-component": ^2.0.0-alpha.27
+    "@coffeekraken/s-markdown-builder": ^2.0.0-alpha.27
     "@coffeekraken/s-promise": ^2.0.0-alpha.27
     "@coffeekraken/sugar": ^2.0.0-alpha.27
     lit: ^2.2.8
@@ -2119,6 +2124,7 @@ __metadata:
     "@coffeekraken/s-bench": ^2.0.0-alpha.27
     "@coffeekraken/s-carpenter": ^2.0.0-alpha.27
     "@coffeekraken/s-class": ^2.0.0-alpha.27
+    "@coffeekraken/s-doc": ^2.0.0-alpha.27
     "@coffeekraken/s-docblock": ^2.0.0-alpha.27
     "@coffeekraken/s-docmap": ^2.0.0-alpha.27
     "@coffeekraken/s-duration": ^2.0.0-alpha.27
@@ -2555,6 +2561,7 @@ __metadata:
   resolution: "@coffeekraken/s-postcss-sugar-plugin@workspace:packages/postcss/s-postcss-sugar-plugin"
   dependencies:
     "@coffeekraken/s-bench": ^2.0.0-alpha.27
+    "@coffeekraken/s-classmap": ^2.0.0-alpha.27
     "@coffeekraken/s-color": ^2.0.0-alpha.27
     "@coffeekraken/s-docblock": ^2.0.0-alpha.27
     "@coffeekraken/s-duration": ^2.0.0-alpha.27
@@ -3036,6 +3043,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@coffeekraken/s-vite-sugar-plugin@workspace:packages/vite/s-vite-sugar-plugin"
   dependencies:
+    "@coffeekraken/s-classmap": ^2.0.0-alpha.27
     "@coffeekraken/s-env": ^2.0.0-alpha.27
     "@coffeekraken/s-frontspec": ^2.0.0-alpha.27
     "@coffeekraken/s-sugar-config": ^2.0.0-alpha.27
@@ -3079,7 +3087,7 @@ __metadata:
     rollup-plugin-uglify: ^6.0.4
     terser: ^5.16.1
     url-parse: ^1.5.10
-    vite: ^4.0.0
+    vite: ^4.3.9
     vite-plugin-compress: ^2.1.1
     vite-plugin-compression2: ^0.4.3
     vitest: ^0.20.3
@@ -16640,7 +16648,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"nanoid@npm:^3.1.22":
+"nanoid@npm:^3.1.22, nanoid@npm:^3.3.6":
   version: 3.3.6
   resolution: "nanoid@npm:3.3.6"
   bin:
@@ -18877,6 +18885,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"postcss@npm:^8.4.23":
+  version: 8.4.24
+  resolution: "postcss@npm:8.4.24"
+  dependencies:
+    nanoid: ^3.3.6
+    picocolors: ^1.0.0
+    source-map-js: ^1.0.2
+  checksum: 814e2126dacfea313588eda09cc99a9b4c26ec55c059188aa7a916d20d26d483483106dc5ff9e560731b59f45c5bb91b945dfadc670aed875cc90ddbbf4e787d
+  languageName: node
+  linkType: hard
+
 "potrace@npm:2.1.8":
   version: 2.1.8
   resolution: "potrace@npm:2.1.8"
@@ -19965,9 +19984,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"rollup@npm:^3.18.0":
-  version: 3.20.0
-  resolution: "rollup@npm:3.20.0"
+"rollup@npm:^3.21.0":
+  version: 3.25.1
+  resolution: "rollup@npm:3.25.1"
   dependencies:
     fsevents: ~2.3.2
   dependenciesMeta:
@@ -19975,7 +19994,7 @@ __metadata:
       optional: true
   bin:
     rollup: dist/bin/rollup
-  checksum: ebf75f48eb81234f8233b4ed145b00841cefba26802d4f069f161247ffba085ca5bb165cc3cd662d9c36cfc135a67660dfff9088d3da2d2c6a70addc15f3233a
+  checksum: f483b28a0605097a725b080c088262b0fa21f7bce66f741df73d9ff0be6a3baaf2927916b094ce95412f4f15cc59bb5eae020f59cae3d3a6993d123faceb5b41
   languageName: node
   linkType: hard
 
@@ -22763,15 +22782,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vite@npm:^4.0.0":
-  version: 4.2.0
-  resolution: "vite@npm:4.2.0"
+"vite@npm:^4.3.9":
+  version: 4.3.9
+  resolution: "vite@npm:4.3.9"
   dependencies:
     esbuild: ^0.17.5
     fsevents: ~2.3.2
-    postcss: ^8.4.21
-    resolve: ^1.22.1
-    rollup: ^3.18.0
+    postcss: ^8.4.23
+    rollup: ^3.21.0
   peerDependencies:
     "@types/node": ">= 14"
     less: "*"
@@ -22797,7 +22815,7 @@ __metadata:
       optional: true
   bin:
     vite: bin/vite.js
-  checksum: 1088cdc0c89ab835aab07a0a114397b749e8dfb20f4b94241ba179d9c371b72d31e13782b22893860c3d65da596e43b24fce5e023f79cfde427f42549f2e1844
+  checksum: 8c45a516278d1e0425fac00c0877336790f71484a851a318346a70e0d2aef9f3b9651deb2f9f002c791ceb920eda7d6a3cda753bdefd657321c99f448b02dd25
   languageName: node
   linkType: hard
 

@@ -78,8 +78,6 @@ export default class CkSettings extends __SLitComponent {
             </div>
         `;
 
-        console.log('H', h);
-
         return h;
     }
 }

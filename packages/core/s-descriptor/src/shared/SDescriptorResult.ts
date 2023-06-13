@@ -8,13 +8,13 @@ import { __clone } from '@coffeekraken/sugar/object';
 import { __toString } from '@coffeekraken/sugar/string';
 
 /**
- * @name                SDescriptorResult
- * @namespace           shared
- * @type                Class
- * @extends             SClass
- * @platform            node
- * @platform            js
- * @status              wip
+ * @___name                SDescriptorResult
+ * @___namespace           shared
+ * @___type                Class
+ * @___extends             SClass
+ * @___platform            node
+ * @___platform            js
+ * @___status              wip
  *
  * This class is the main one that MUST be used as parent one
  * when creating any descriptor like object, string, etc...
@@ -24,15 +24,6 @@ import { __toString } from '@coffeekraken/sugar/string';
  * @todo         doc
  * @todo        tests
  * @todo        add possibility to set a "details" on each rules for better returns
- *
- * @example       js
- * import SDescriptorResult from '@coffeekraken/sugar/js/descriptor/SDescriptorResult';
- * class MyDescriptor extends SDescriptorResult {
- *    constructor(settings) {
- *      super(settings);
- *      // do something...
- *    }
- * }
  *
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)

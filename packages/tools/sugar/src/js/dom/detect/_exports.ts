@@ -3,7 +3,7 @@ import __inViewportStatusChange from './inViewportStatusChange';
 import __onDrag from './onDrag';
 import __onScrollEnd from './onScrollEnd';
 import __onSwipe from './onSwipe';
-import __when from './when';
+import __when, { WhenTriggers } from './when';
 import __whenAnimationEnd from './whenAnimationEnd';
 import __whenAttribute from './whenAttribute';
 import __whenBackgroundImageLoaded from './whenBackgroundImageLoaded';
@@ -12,8 +12,8 @@ import __whenEntersViewport from './whenEntersViewport';
 import __whenIframeReady from './whenIframeReady';
 import __whenImageLoaded from './whenImageLoaded';
 import __whenImagesLoaded from './whenImagesLoaded';
-import __whenInteract from './whenInteract';
 import __whenInViewport from './whenInViewport';
+import __whenInteract from './whenInteract';
 import __whenLinkLoaded from './whenLinkLoaded';
 import __whenLod from './whenLod';
 import __whenNearViewport from './whenNearViewport';
@@ -24,6 +24,7 @@ import __whenStylesheetsReady from './whenStylesheetsReady';
 import __whenTransitionEnd from './whenTransitionEnd';
 import __whenVisible from './whenVisible';
 export {
+    WhenTriggers,
     __detectInOutDirection,
     __inViewportStatusChange,
     __onDrag,

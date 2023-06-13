@@ -16,7 +16,7 @@
     "main": "dist/pkg/cjs/shared/exports.js",
     "module": "dist/pkg/esm/shared/exports.js",
     "exports": {
-        "default": {
+        "browser": {
             "require": "./dist/pkg/cjs/shared/exports.js",
             "import": "./dist/pkg/esm/shared/exports.js"
         },

@@ -6,17 +6,20 @@ export interface ISStdioConsoleSource extends ISStdioSource {}
 
 export interface ISStdioConsoleSourceSettings extends ISStdioSourceSettings {}
 
-const _nativeConsole = {};
+// save the native console methods in a _console stack
+const _console = {};
 for (let key of ['log', 'error', 'warn', 'success', 'verbose', 'notify']) {
-    _nativeConsole[key] = console[key];
+    _console[key] = console[key];
 }
+// expose _console globally
+global._console = _console;
 
 // process.on('unhandledRejection', (error) => {
 //     throw error;
 // });
 
 // process.on('uncaughtException', (error) => {
-//     _nativeConsole.log(error);
+//     _console.log(error);
 // });
 
 export default class SStdioConsoleSource
@@ -40,10 +43,9 @@ export default class SStdioConsoleSource
             return res;
         };
 
-        // source ready
         setTimeout(() => {
             this.ready();
-        }, 1000);
+        });
     }
 
     /**
@@ -58,7 +60,7 @@ export default class SStdioConsoleSource
             'verbose',
             'notify',
         ]) {
-            console[key] = _nativeConsole[key];
+            console[key] = _console[key];
         }
     }
 
@@ -74,7 +76,7 @@ export default class SStdioConsoleSource
             'verbose',
             'notify',
         ]) {
-            _nativeConsole[key] = console[key] ?? _nativeConsole.log;
+            _console[key] = console[key] ?? _console.log;
             console[key] = (...args) => {
                 args = args.filter((log) => {
                     // // do not use this in iframe
@@ -82,11 +84,11 @@ export default class SStdioConsoleSource
                     //     return;
                     // }
                     if (log === null || log === undefined) {
-                        _nativeConsole.log(log);
+                        _console.log(log);
                         return false;
                     }
                     if (log?.toString?.().match(/[a-zA-Z0-9]Error\:/)) {
-                        _nativeConsole.error(log);
+                        _console.error(log);
                         return false;
                     }
                     return true;
@@ -123,7 +125,7 @@ export default class SStdioConsoleSource
                         verbose: key === 'verbose' || log?.verbose,
                         metas: log?.metas ?? {},
                         // @ts-ignore
-                        logger: _nativeConsole[key],
+                        logger: _console[key],
                     });
                 });
 

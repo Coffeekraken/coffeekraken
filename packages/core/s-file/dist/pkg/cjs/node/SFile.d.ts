@@ -145,8 +145,6 @@ declare class SFile extends __SClass implements ISFile {
     
     duplicate(to?: any): Promise<SFile>;
     
-    duplicateSync(to?: any): SFile;
-    
     save(): Promise<SFile>;
     
     saveSync(): SFile;

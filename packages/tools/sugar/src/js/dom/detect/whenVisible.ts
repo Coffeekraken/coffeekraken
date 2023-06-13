@@ -25,7 +25,7 @@ import { __uniqid } from '@coffeekraken/sugar/string';
  * @todo      tests
  *
  * @example 	js
- * import { __whenVisible } from '@coffeekraken/sugar/js/dom/whenVisible'
+ * import { __whenVisible } from '@coffeekraken/sugar/dom'
  * __whenVisible(myCoolHTMLElement).then(($elm) => {
  * 		// do something with your element that is now visible
  * });

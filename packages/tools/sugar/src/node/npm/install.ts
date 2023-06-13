@@ -26,11 +26,11 @@ import __spawn from '../process/spawn';
  *
  * @snippet         __install($1)
  * await __install($1)
- * 
+ *
  * @example         js
- * import install from '@coffeekraken/sugar/node/npm/install';
- * await install(); // install all dependencies
- * await install(['@coffeekraken/sugar']); // install just 1 dependency
+ * import { __install } from '@coffeekraken/sugar/npm';
+ * await __install(); // install all dependencies
+ * await __install(['@coffeekraken/sugar']); // install just 1 dependency
  *
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)

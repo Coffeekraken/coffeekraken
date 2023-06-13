@@ -6,11 +6,10 @@ import {
     __isChildProcess,
     __isClass,
     __isNode,
-    __isPlainObject
+    __isPlainObject,
 } from '@coffeekraken/sugar/is';
 import { __deepMerge } from '@coffeekraken/sugar/object';
-import __toString from '@coffeekraken/sugar/shared/string/toString';
-import { __uniqid } from '@coffeekraken/sugar/string';
+import { __toString, __uniqid } from '@coffeekraken/sugar/string';
 import __globToRegex from 'glob-to-regexp';
 
 /**
@@ -26,7 +25,7 @@ import __globToRegex from 'glob-to-regexp';
  * @todo      doc
  * @todo      tests
  * @todo      Add a "pipe" capabilities on events to allow for "throttle", "debounce", etc...
- * 
+ *
  * @example         js
  * import __SEventEmitter from '@coffeekraken/s-event-emitter';
  * const emitter = new __SEventEmitter();

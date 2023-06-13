@@ -21,8 +21,8 @@ const url_1 = __importDefault(require("url"));
  * @snippet         __urlFromString($1)
  *
  * @example             js
- * import urlFromString from '@coffeekraken/sugar/shared/url/urlFromString';
- * urlFromString('Sir James Paul McCartney MBE is an English singer-songwriter');
+ * import { __urlFromString } from '@coffeekraken/sugar/url';
+ * __urlFromString('Sir James Paul McCartney MBE is an English singer-songwriter');
  * // sir-james-paul-mc-cartney-mbe-is-an-english-singer-songwriter
  *
  * @see             https://www.npmjs.com/package/url-slug

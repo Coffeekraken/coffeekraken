@@ -8,7 +8,7 @@ import __langTwig from 'highlight.js/lib/languages/twig';
 import __langCss from './languages/css';
 // import __langCss from 'highlight.js/lib/languages/css';
 import { __scrollTo } from '@coffeekraken/sugar/dom';
-import type { IScrollToSettings } from '@coffeekraken/sugar/js/dom/scroll/scrollTo';
+import type { IScrollToSettings } from '@coffeekraken/sugar/dom';
 import { __decodeHtmlEntities } from '@coffeekraken/sugar/string';
 import __langJavascript from 'highlight.js/lib/languages/javascript';
 import __langPhp from 'highlight.js/lib/languages/php';

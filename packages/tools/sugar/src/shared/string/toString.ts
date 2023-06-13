@@ -131,7 +131,8 @@ function fn(value, settings = {}) {
     if (__isObject(value) || __isArray(value) || __isJson(value)) {
         try {
             value = decycle(value);
-        } catch (e) {}
+        } catch (e) {
+        }
 
         value = __deepMap(value, ({ value }) => {
             if (value instanceof Map) return __mapToObj(value);

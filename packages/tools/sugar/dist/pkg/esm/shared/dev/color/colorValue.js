@@ -12,8 +12,8 @@ import __SugarConfig from '@coffeekraken/s-sugar-config';
  * These colors are specified in the config.terminal configuration file under the "colors" property.
  *
  * @example         js
- * import colorValue from '@coffeekraken/sugar/shared/dev/color/colorValue';
- * colorValue('black'); => #000000
+ * import { __colorValue } from '@coffeekraken/sugar/dev';
+ * __colorValue('black'); => #000000
  *
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)

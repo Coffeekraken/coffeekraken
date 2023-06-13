@@ -116,6 +116,8 @@ export default class SClassmap extends __SClassmapBase {
         ) {
             this.patchNativeMethods();
         }
+
+        this.patchDomLive();
     }
 
     /**
@@ -165,17 +167,19 @@ export default class SClassmap extends __SClassmapBase {
 
         const nativeQuerySelectorAll = Element.prototype.querySelectorAll;
         Element.prototype.querySelectorAll = function (...sels) {
-            sels = sels.map((sel) => {
+            const newSels = sels.map((sel) => {
                 return _this.patchSelector(sel);
             });
-            return nativeQuerySelectorAll.call(this, sels);
+            return nativeQuerySelectorAll.call(this, [...sels, ...newSels]);
         };
         const nativeQuerySelector = Element.prototype.querySelector;
         Element.prototype.querySelector = function (...sels) {
-            sels = sels.map((sel) => {
-                return _this.patchSelector(sel);
+            const newSels = sels.map((sel) => {
+                const newSel = _this.patchSelector(sel);
+                return newSel;
             });
-            return nativeQuerySelector.call(this, sels);
+
+            return nativeQuerySelector.call(this, [...sels, ...newSels]);
         };
 
         // // style
@@ -199,10 +203,51 @@ export default class SClassmap extends __SClassmapBase {
     patchElement($elm: HTMLElement): void {
         const cls = $elm.getAttribute('class')?.split(' ') ?? [];
         const newCls = cls.map((c) => this.resolve(c));
-        if ($elm.classList.contains('_package')) {
-            console.log('PACKAGE', cls, newCls);
-        }
         $elm.setAttribute('class', newCls.join(' '));
+    }
+
+    patchDomLive($rootNode: HTMLElement = document): void {
+        const settings = {
+            afterFirst: undefined,
+            rootNode: document,
+            // ...settings,
+        };
+
+        // observer callback
+        const patchDomLiveCallback = (mutationList) => {
+            mutationList.forEach((mutation) => {
+                // new nodes
+                if (mutation.addedNodes) {
+                    mutation.addedNodes.forEach((node) => {
+                        if (!node.matches) return;
+                        this.patchElement(node);
+                        this.patchDom(node);
+                    });
+                }
+                if (mutation.attributeName === 'class') {
+                    if (mutation.target._classmapProcessing) {
+                        return;
+                    }
+                    clearTimeout(mutation.target._classmapTimeout);
+                    mutation.target._classmapTimeout = setTimeout(() => {
+                        mutation.target._classmapProcessing = true;
+                        this.patchElement(mutation.target);
+                        setTimeout(() => {
+                            mutation.target._classmapProcessing = false;
+                        });
+                    });
+                }
+            });
+        };
+
+        // observe for classes changes to path them live
+        const observer = new MutationObserver(patchDomLiveCallback);
+        observer.observe($rootNode, {
+            attributeFilter: ['class'],
+            attributeOldValue: true,
+            childList: true,
+            subtree: true,
+        });
     }
 
     patchDom($rootNode: HTMLElement): void {
@@ -233,7 +278,7 @@ export default class SClassmap extends __SClassmapBase {
     }
 
     patchSelector(sel) {
-        sel = sel
+        const newSel = sel
             .split(' ')
             .map((part) => {
                 const classMatches = part.match(/\.[a-zA-Z0-9_-]+/gm);
@@ -249,7 +294,7 @@ export default class SClassmap extends __SClassmapBase {
                 return part;
             })
             .join(' ');
-        return sel;
+        return newSel;
     }
 
     /**

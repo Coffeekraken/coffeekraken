@@ -20,31 +20,12 @@ export default function (api) {
         get rootDirs() {
             return [
                 __packageRootDir(),
-                ...(api.parent.rootDirs ?? []),
+                `${api.config.storage.src.rootDir}/views`,
                 `${__path.resolve(
                     __packageRootDir(__dirname()),
                     'src/views/twig',
                 )}`,
             ];
-
-            // if (api.config.viewRenderer.defaultEngine === 'twig') {
-            //     return [
-            //         __packageRootDir(),
-            //         ...(api.parent.rootDirs ?? []),
-            //         `${__path.resolve(
-            //             __packageRootDir(__dirname()),
-            //             'src/views/twig',
-            //         )}`,
-            //     ];
-            // }
-            // return [
-            //     __packageRootDir(),
-            //     ...(api.parent.rootDirs ?? []),
-            //     `${__path.resolve(
-            //         __packageRootDir(__dirname()),
-            //         'src/views/blade',
-            //     )}`,
-            // ];
         },
     };
 }

@@ -5,7 +5,7 @@ import SFile from '@coffeekraken/s-file';
 import { __copySync } from '@coffeekraken/sugar/fs';
 import { __extractGlob, __extractNoneGlob, __resolveGlobSync } from '@coffeekraken/sugar/glob';
 import { __isGlob } from '@coffeekraken/sugar/is';
-import type { IResolveGlobSettings } from '@coffeekraken/sugar/node/glob/resolveGlob';
+import type { IResolveGlobSettings } from '@coffeekraken/sugar/glob';
 import { __deepMerge } from '@coffeekraken/sugar/object';
 import __micromatch from 'micromatch';
 
@@ -27,10 +27,10 @@ import __micromatch from 'micromatch';
  * @todo      tests
  *
  * @example         js
- * import SGlob from '@coffeekraken/sugar/node/glob/SGlob';
- * const glob = new SGlob('my/cool/glob/*.js');
+ * import __SGlob from '@coffeekraken/s-glob';
+ * const glob = new __SGlob('my/cool/glob/*.js');
  * const files = glob.resolveSync();
- * SGlob.resolveSync('my/cool/glob/*.js');
+ * __SGlob.resolveSync('my/cool/glob/*.js');
  *
  * @since           2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)

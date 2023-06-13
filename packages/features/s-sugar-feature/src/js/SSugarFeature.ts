@@ -4,6 +4,7 @@ import {
     __clearTransmations,
     __expandPleasantCssClassnamesLive,
     __preventScrollRestoration,
+    __querySelectorLive,
 } from '@coffeekraken/sugar/dom';
 import {
     __autoFocus,
@@ -15,12 +16,15 @@ import {
 import { __deepMerge } from '@coffeekraken/sugar/object';
 import __SSugarFeatureInterface from './interface/SSugarFeatureInterface';
 
+import { __viewportEvents } from '@coffeekraken/sugar/dom';
+
 import __define from './define';
 
 export interface ISSugarFeatureProps {
     scrolled: boolean;
     scrolledDelta: number;
     vhvar: boolean;
+    viewportEvents: boolean;
     inputAdditionalAttributes: boolean;
     autoResize: boolean;
     linksStateAttributes: boolean;
@@ -70,6 +74,7 @@ export interface ISSugarFeatureProps {
  * @feature         Prevent the scroll restoration behavior on chrome that can usually be anoying
  * @feature         Remove some classes at page loading end: "initial-loading", "loading"
  * @feature         Proxy the `history.pushState` method to make it dispatch an "pushstate" event with the actual state as detail
+ * @feature         Track in/out viewport events and classes for particular marked section/div by adding the "viewport-aware" attribute on any HTMLElements
  *
  * @import          import { define as __SSugarFeatureDefine } from '@coffeekraken/s-sugar-feature';
  *
@@ -136,6 +141,8 @@ export default class SSugarFeature extends __SFeature implements ISFeature {
         if (this.props.pleasantCss) this._pleasantCss();
         // autofocus
         if (this.props.autofocus) this._autofocus();
+        // viewport aware
+        if (this.props.viewportAware) this._viewportAware();
         // scrolled
         if (this.props.scrolled) this._scrolled();
         // vhvar
@@ -192,6 +199,20 @@ export default class SSugarFeature extends __SFeature implements ISFeature {
                     document.body.classList.remove('loading');
                 }, 500);
             },
+        });
+    }
+
+    _viewportAware() {
+        __querySelectorLive('[viewport-aware]', ($elm) => {
+            __viewportEvents($elm);
+            $elm.addEventListener('viewport.enter', () => {
+                $elm.setAttribute('in-viewport', 'true');
+                $elm.classList.add('in-viewport');
+            });
+            $elm.addEventListener('viewport.exit', () => {
+                $elm.removeAttribute('in-viewport');
+                $elm.classList.remove('in-viewport');
+            });
         });
     }
 

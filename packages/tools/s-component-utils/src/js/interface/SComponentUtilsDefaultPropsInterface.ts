@@ -1,5 +1,5 @@
 import __SInterface from '@coffeekraken/s-interface';
-import { triggers } from '@coffeekraken/sugar/js/dom/detect/when';
+import { WhenTriggers } from '@coffeekraken/sugar/dom';
 
 /**
  * @name                SComponentUtilsDefaultPropsInterface
@@ -39,7 +39,7 @@ export default class SComponentUtilsDefaultPropsInterface extends __SInterface {
             mountWhen: {
                 description: 'Specify when your component will be mounted',
                 type: 'String',
-                values: triggers,
+                values: WhenTriggers,
                 default: 'direct',
             },
             activeWhen: {

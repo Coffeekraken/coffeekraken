@@ -11,7 +11,7 @@ import __SLitComponent from '@coffeekraken/s-lit-component';
 
 import { __pickRandom } from '@coffeekraken/sugar/array';
 
-import { __splitLetters } from '@coffeekraken/sugar/dom';
+import { __querySelectorUp, __splitLetters } from '@coffeekraken/sugar/dom';
 
 // Views specific
 // @ts-ignore
@@ -83,6 +83,20 @@ const viewsRelated = import.meta.globEager('../views/**/*.ts');
                     $slide.querySelectorAll('.s-split-letter'),
                 );
             });
+
+            // handle the in-viewport
+            const $viewportAware = __querySelectorUp(
+                this._$slider,
+                '[viewport-aware]',
+            );
+            if ($viewportAware) {
+                $viewportAware.addEventListener('viewport.enter', () => {
+                    this._paused = false;
+                });
+                $viewportAware.addEventListener('viewport.exit', () => {
+                    this._paused = true;
+                });
+            }
 
             this.goTo(this._slideIdx);
 
@@ -229,7 +243,7 @@ const viewsRelated = import.meta.globEager('../views/**/*.ts');
         }
     }
 
-    new WelcomeSlider(document.querySelector('[welcome-slider]'));
+    // new WelcomeSlider(document.querySelector('[welcome-slider]'));
 
     // Website specific
 })();

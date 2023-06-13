@@ -178,7 +178,8 @@ export default function spawn(
             let value = resolveValue ?? rejectValue ?? undefined;
             try {
                 value = JSON.parse(value);
-            } catch (e) {}
+            } catch (e) {
+            }
 
             // build the result object
             const resultObj = {

@@ -1,6 +1,5 @@
-export default function(api) {
-
+export default function (api) {
     return {
-        enabled: false
-    }
+        enabled: true,
+    };
 }

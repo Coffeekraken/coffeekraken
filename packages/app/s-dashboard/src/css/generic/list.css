@@ -18,11 +18,10 @@
 
         @sugar.theme dark {
             &:hover {
-                /* background-color: sugar.color(current, --alpha 0.1);  */
-                background-color: sugar.color(accent, --alpha 0.3);
+                background-color: sugar.color(main, --alpha 0.2);
             }
             &:focus-within {
-                background-color: sugar.color(accent, --alpha 1);
+                background-color: sugar.color(main, --alpha 1);
                 color: sugar.color(accent, foreground);
             }
         }

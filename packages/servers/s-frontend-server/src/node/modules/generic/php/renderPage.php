@@ -68,8 +68,10 @@ $renderRes = $viewRenderer->renderPage($pageFileJson);
 $renderRes = \Sugar\html\expandPleasantCssClassnames($renderRes);
 
 // handle classmap
-$classmap = new SClassmap();
-$renderRes = $classmap->patchHtml($renderRes);
+if (isset($frontspec->classmap->enabled) && $frontspec->classmap->enabled) {
+    $classmap = new SClassmap();
+    $renderRes = $classmap->patchHtml($renderRes);
+}
 
 // print the result
 print $renderRes;

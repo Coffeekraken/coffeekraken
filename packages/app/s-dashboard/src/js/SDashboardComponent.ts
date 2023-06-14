@@ -3,7 +3,6 @@ import { __deepMerge } from '@coffeekraken/sugar/object';
 import { css, html, unsafeCSS } from 'lit';
 import { unsafeHTML } from 'lit/directives/unsafe-html.js';
 // @ts-ignore
-import __SSugarConfig from '@coffeekraken/s-sugar-config';
 import { __hotkey } from '@coffeekraken/sugar/keyboard';
 import __css from '../../../../src/css/s-dashboard.css'; // relative to /dist/pkg/esm/js
 import __SDashboardComponentInterface from './interface/SDashboardComponentInterface';
@@ -57,8 +56,7 @@ export default class SDashboardComponent extends __SLitComponent {
     _pipedEvents = [...__SDashboardPagesComponentEvents];
 
     // @ts-ignore
-    _dashboardSettings = this.document.dashboard.settings.dashboard;
-    _dashboardConfig;
+    _dashboardSettings = this.document.dashboard.settings;
 
     constructor() {
         super(
@@ -74,8 +72,6 @@ export default class SDashboardComponent extends __SLitComponent {
 
         // pipe events
         this._pipeEvents();
-
-        this._dashboardConfig = __SSugarConfig.get('dashboard');
     }
 
     /**
@@ -122,7 +118,7 @@ export default class SDashboardComponent extends __SLitComponent {
         return html`
             <div class="${this.utils.cls('')}">
                 <header class="header">
-                    <div class="s-container:wide">
+                    <div class="s-container">
                         <div class="_toolbar">
                             <div class="_logo" @click=${() => this.close()}>
                                 ${unsafeHTML(__logoSvg)}
@@ -133,38 +129,38 @@ export default class SDashboardComponent extends __SLitComponent {
                     </div>
                 </header>
                 <section class="content">
-                    <div class="s-container:wide">
+                    <div class="s-container">
                         <div
                             class="s-layout:${[
                                 ...Array(
-                                    this._dashboardConfig.layout.length + 1,
+                                    this._dashboardSettings.layout.length + 1,
                                 ).keys(),
                             ]
                                 .filter((n) => n !== 0)
                                 .join('')} s-gap:30"
                         >
-                            ${this._dashboardConfig.layout.map(
-                                (column) => html`
+                            ${this._dashboardSettings.layout.map((column) => {
+                                return html`
                                     <div
                                         class="_column __column-${column.length}"
                                     >
                                         ${column.map((component) =>
                                             component === 's-dashboard-pages'
                                                 ? html`
-                                                      <s-dashboard-pages
+                                                      <!-- <s-dashboard-pages
                                                           .settings=${this
-                                                              ._dashboardSettings
-                                                              .components[
-                                                              component
-                                                          ]}
-                                                      ></s-dashboard-pages>
+                                                          ._dashboardSettings
+                                                          .components?.[
+                                                          component
+                                                      ] ?? {}}
+                                                      ></s-dashboard-pages> -->
                                                   `
                                                 : html`
                                                       ${unsafeHTML(
                                                           `<${component} settings="${JSON.stringify(
                                                               this
                                                                   ._dashboardSettings
-                                                                  .components[
+                                                                  .components?.[
                                                                   component
                                                               ] ?? {},
                                                           )}"></${component}>`,
@@ -172,8 +168,8 @@ export default class SDashboardComponent extends __SLitComponent {
                                                   `,
                                         )}
                                     </div>
-                                `,
-                            )}
+                                `;
+                            })}
                         </div>
                     </div>
                 </section>

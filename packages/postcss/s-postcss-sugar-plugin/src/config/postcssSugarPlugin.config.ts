@@ -50,22 +50,19 @@ export default function (api) {
             },
         },
 
-        compress: {
-            /**
-             * @name            variables
-             * @namespace       config.postcssSugarPlugin.compress
-             * @type            Boolean
-             * @default         undefined
-             *
-             * Specify if you want to compress the --s-... variables or not.
-             * If is set to "undefined", it will be true only for production target build.
-             *
-             * @since           2.0.0
-             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-             */
-            get variables(): boolean {
-                return api.env.target === 'production';
-            },
+        /**
+         * @name            classmap
+         * @namespace       config.postcssSugarPlugin
+         * @type            {ISClassmapSettings | false}
+         * @default         api.theme.classmap.enabled ? {} : false
+         *
+         * Specigy some SClassmap settings, of false if you dont want to use classmap at all.
+         *
+         * @since           2.0.0
+         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+         */
+        get classmap() {
+            return api.theme.classmap.enabled ? {} : false;
         },
 
         /**

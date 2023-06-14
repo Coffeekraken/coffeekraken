@@ -128,7 +128,7 @@ export default class SDashboardBrowserstackComponent extends __SLitComponent {
                 var _a;
                 return html `
                                                           <li
-                                                              class="ck-list__item"
+                                                              class="ck-list_item"
                                                           >
                                                               <a
                                                                   href="https://live.browserstack.com/dashboard#os=${obj.os}&os_version=${obj.os_version}&browser=${obj.browser}&browser_version=${obj.browser_version}&zoom_to_fit=true&full_screen=true&url=https://google.com"

@@ -113,6 +113,7 @@ export default function ({
                     right: 0;
                     border: sugar.color(current) solid 1px;
                     pointer-events: none;
+                    @sugar.shape();
                 }
             `);
                 break;

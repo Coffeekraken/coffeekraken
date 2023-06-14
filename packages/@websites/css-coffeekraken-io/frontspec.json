@@ -783,5 +783,10 @@
             "ttq.load",
             "mixpanel.track"
         ]
+    },
+    "classmap": {
+        "enabled": false,
+        "url": "/classmap.json",
+        "path": "./classmap.json"
     }
 }

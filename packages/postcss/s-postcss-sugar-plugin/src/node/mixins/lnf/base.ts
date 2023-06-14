@@ -55,6 +55,7 @@ export default function ({
         background-color: sugar.color(main, background);
         @sugar.font.family(default);
         @sugar.font.size(default);
+        @sugar.shape(default);
         --s-scale: sugar.theme(scale.default);
 
         @sugar.wireframe {

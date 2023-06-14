@@ -57,7 +57,7 @@ export default class SDashboardProjectComponent extends __SLitComponent {
                         ${Object.entries(this._project.environments ?? {}).map(
                             ([name, obj]) => html`
                                 <div
-                                    class="ck-tabs__item s-tooltip-container ${name ===
+                                    class="ck-tabs_item s-tooltip-container ${name ===
                                     this._activeEnvironmentId
                                         ? 'active'
                                         : ''}"

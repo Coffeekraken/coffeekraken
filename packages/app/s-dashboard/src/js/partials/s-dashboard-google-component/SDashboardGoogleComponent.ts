@@ -55,10 +55,10 @@ export default class SDashboardGoogleComponent extends __SLitComponent {
                     ${this._gtm
                         ? html`
                               <div class="ck-stat">
-                                  <h3 class="ck-stat__label">
+                                  <h3 class="ck-stat_label">
                                       Google Tag Manager
                                   </h3>
-                                  <p class="ck-stat__value ck-stat__value-code">
+                                  <p class="ck-stat_value ck-stat_value-code">
                                       ${this._gtm ?? 'Undefined'}
                                   </p>
                               </div>
@@ -67,10 +67,10 @@ export default class SDashboardGoogleComponent extends __SLitComponent {
                     ${this._ga
                         ? html`
                               <div class="ck-stat">
-                                  <h3 class="ck-stat__label">
+                                  <h3 class="ck-stat_label">
                                       Google Analytics
                                   </h3>
-                                  <p class="ck-stat__value ck-stat__value-code">
+                                  <p class="ck-stat_value ck-stat_value-code">
                                       ${this._ga ?? 'Undefined'}
                                   </p>
                               </div>

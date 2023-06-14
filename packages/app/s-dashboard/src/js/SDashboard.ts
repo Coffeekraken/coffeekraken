@@ -256,12 +256,16 @@ export default class SDashboard extends __SClass {
                     $document.addEventListener('s-theme.change', function(e) {
                         $dashboardHtml.setAttribute('theme', 'default-' + e.detail.variant);
                     });
-                    var $originalScript = window.parent.document.querySelector('script');
-                    var $script = document.createElement('script');
-                    $script.setAttribute('src', $originalScript.getAttribute('src'));
-                    $script.setAttribute('type', 'module');
-                    document.addEventListener('DOMContentLoaded', function() {
-                        document.querySelector('head').appendChild($script);
+                    var $originalScripts = Array.from(window.parent.document.querySelectorAll('script'));
+                    $originalScripts.forEach(function($originalScript) {
+                        var $script = document.createElement('script');
+                        var src = $originalScript.getAttribute('src');
+                        if (!src) return;
+                        $script.setAttribute('src', src);
+                        $script.setAttribute('type', 'module');
+                        document.addEventListener('DOMContentLoaded', function() {
+                            document.querySelector('head').appendChild($script);
+                        });
                     });
                 </script>
                 </head>
@@ -279,9 +283,9 @@ export default class SDashboard extends __SClass {
         // overflow
         this.document.querySelector('html').style.overflow = 'hidden';
 
-        // // init the dashboard
-        // const SDashboardComponent = await import('./SDashboardComponent');
-        // SDashboardComponent.define();
+        // init the dashboard
+        const SDashboardComponent = await import('./SDashboardComponent');
+        SDashboardComponent.define();
     }
 
     define(props = {}, tagName = 's-dashboard', win = window) {

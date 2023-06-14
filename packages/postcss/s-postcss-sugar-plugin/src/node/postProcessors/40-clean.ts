@@ -5,11 +5,6 @@ export default function ({ root, sharedData, settings, cacheDir, classmap }) {
         return;
     }
 
-    // console.log({
-    //     group: 'postcssSugarPlugin',
-    //     value: `<yellow>[postcssSugarPlugin]</yellow> Clean unused variables`,
-    // });
-
     root.walkDecls((decl) => {
         if (!decl.value) return;
         const varsMatches = decl.value.match(/var\((--[a-zA-Z0-9_-]+)/);

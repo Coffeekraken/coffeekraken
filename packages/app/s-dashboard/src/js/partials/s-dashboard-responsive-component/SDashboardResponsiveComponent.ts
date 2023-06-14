@@ -56,7 +56,7 @@ export default class SDashboardResponsiveComponent extends __SLitComponent {
                         ${Object.entries(this._mediaConfig?.queries ?? {}).map(
                             ([name, obj]) => html`
                                 <div
-                                    class="ck-tabs__item s-tooltip-container ${name ===
+                                    class="ck-tabs_item s-tooltip-container ${name ===
                                     this._activeQuery
                                         ? 'active'
                                         : ''}"

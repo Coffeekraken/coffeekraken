@@ -54,8 +54,13 @@ if (isset($frontspec)) {
     } else if (isset($frontspec->metas->dir)) {
         $dir = $frontspec->metas->dir;
     }
+
+    $lodClasses = '';
+    if (isset($frontspec->lod->enabled) && $frontspec->lod->enabled) {
+        $lodClasses = \Sugar\lod\lodClasses(isset($frontspec->lod->defaultLevel) ? $frontspec->lod->defaultLevel : 3);
+    }
 @endphp
-<html lang="{{ $lang }}" dir="{{ $dir }}" class="{{ \Sugar\lod\lodClasses(isset($frontspec->lod->defaultLevel) ? $frontspec->lod->defaultLevel : 3) }}">
+<html lang="{{ $lang }}" dir="{{ $dir }}" class="{{ $lodClasses }}">
 <head>
     <!-- metas -->
     {!! \Sugar\frontspec\metas($frontspec, $env) !!}

@@ -1,22 +1,5 @@
 .ck-panel {
-    /* background: sugar.color(main, background, --alpha 0.7); */
+    background: sugar.color(main, background, --alpha 0.7);
     padding: sugar.padding(30);
     @sugar.border.radius (10);
-    @sugar.depth (100);
-
-    background: radial-gradient(
-        ellipse at top left,
-        sugar.color(main, --lighten 60),
-        sugar.color(main, --lighten 50)
-    );
-
-    @sugar.theme dark {
-        background: radial-gradient(
-            ellipse at top left,
-            sugar.color(main, --darken 35 --alpha 0.7),
-            sugar.color(main, --darken 25 --alpha 0.7)
-        );
-    }
-
-    background-attachment: fixed;
 }

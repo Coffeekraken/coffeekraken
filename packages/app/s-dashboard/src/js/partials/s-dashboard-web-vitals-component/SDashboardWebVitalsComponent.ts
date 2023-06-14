@@ -44,29 +44,29 @@ export default class SDashboardWebVitalsComponent extends __SLitComponent {
                 <div class="ck-panel">
                     <div class="_stats">
                         <div class="ck-stat">
-                            <h3 class="ck-stat__label">LCP</h3>
+                            <h3 class="ck-stat_label">LCP</h3>
                             ${this._webVitals.lcp
                                 ? html`
-                                      <p class="ck-stat__value">
+                                      <p class="ck-stat_value">
                                           ${(
                                               this._webVitals.lcp.value / 1000
                                           ).toFixed(2)}s
                                           ${this._webVitals.lcp.value <= 2500
                                               ? html`
                                                     <i
-                                                        class="s-icon:success s-tc:success"
+                                                        class="fa-solid fa-thumbs-up s-tc:success"
                                                     ></i>
                                                 `
                                               : this._webVitals.lcp.value <=
                                                 4000
                                               ? html`
                                                     <i
-                                                        class="s-icon:warning s-tc:warning"
+                                                        class="fa-solid fa-triangle-exclamation s-tc:warning"
                                                     ></i>
                                                 `
                                               : html`
                                                     <i
-                                                        class="s-icon:error s-tc:error"
+                                                        class="fa-solid fa-xmark s-tc:error"
                                                     ></i>
                                                 `}
                                       </p>
@@ -79,28 +79,28 @@ export default class SDashboardWebVitalsComponent extends __SLitComponent {
                         </div>
 
                         <div class="ck-stat">
-                            <h3 class="ck-stat__label">FID</h3>
+                            <h3 class="ck-stat_label">FID</h3>
                             ${this._webVitals.fid
                                 ? html`
-                                      <p class="ck-stat__value">
+                                      <p class="ck-stat_value">
                                           ${Math.round(
                                               this._webVitals.fid.value,
                                           )}ms
                                           ${this._webVitals.fid.value <= 100
                                               ? html`
                                                     <i
-                                                        class="s-icon:success s-tc:success"
+                                                        class="fa-solid fa-thumbs-up s-tc:success"
                                                     ></i>
                                                 `
                                               : this._webVitals.fid.value <= 300
                                               ? html`
                                                     <i
-                                                        class="s-icon:warning s-tc:warning"
+                                                        class="fa-solid fa-triangle-exclamation s-tc:warning"
                                                     ></i>
                                                 `
                                               : html`
                                                     <i
-                                                        class="s-icon:error s-tc:error"
+                                                        class="fa-solid fa-xmark s-tc:error"
                                                     ></i>
                                                 `}
                                       </p>
@@ -113,29 +113,29 @@ export default class SDashboardWebVitalsComponent extends __SLitComponent {
                         </div>
 
                         <div class="ck-stat">
-                            <h3 class="ck-stat__label">CLS</h3>
+                            <h3 class="ck-stat_label">CLS</h3>
                             ${this._webVitals.cls
                                 ? html`
-                                      <p class="ck-stat__value">
+                                      <p class="ck-stat_value">
                                           ${this._webVitals.cls.value.toFixed(
                                               2,
                                           )}
                                           ${this._webVitals.cls.value <= 0.1
                                               ? html`
                                                     <i
-                                                        class="s-icon:success s-tc:success"
+                                                        class="fa-solid fa-thumbs-up s-tc:success"
                                                     ></i>
                                                 `
                                               : this._webVitals.cls.value <=
                                                 0.25
                                               ? html`
                                                     <i
-                                                        class="s-icon:warning s-tc:warning"
+                                                        class="fa-solid fa-triangle-exclamation s-tc:warning"
                                                     ></i>
                                                 `
                                               : html`
                                                     <i
-                                                        class="s-icon:error s-tc:error"
+                                                        class="fa-solid fa-xmark s-tc:error"
                                                     ></i>
                                                 `}
                                       </p>
@@ -148,28 +148,28 @@ export default class SDashboardWebVitalsComponent extends __SLitComponent {
                         </div>
 
                         <div class="ck-stat">
-                            <h3 class="ck-stat__label">FCP</h3>
+                            <h3 class="ck-stat_label">FCP</h3>
                             ${this._webVitals.fcp
                                 ? html`
-                                      <p class="ck-stat__value">
+                                      <p class="ck-stat_value">
                                           ${(
                                               this._webVitals.fcp.value / 1000
                                           ).toFixed(2)}s
                                           ${this._webVitals.fcp.value <= 1.8
                                               ? html`
                                                     <i
-                                                        class="s-icon:success s-tc:success"
+                                                        class="fa-solid fa-thumbs-up s-tc:success"
                                                     ></i>
                                                 `
                                               : this._webVitals.fcp.value <= 3
                                               ? html`
                                                     <i
-                                                        class="s-icon:warning s-tc:warning"
+                                                        class="fa-solid fa-triangle-exclamation s-tc:warning"
                                                     ></i>
                                                 `
                                               : html`
                                                     <i
-                                                        class="s-icon:error s-tc:error"
+                                                        class="fa-solid fa-xmark s-tc:error"
                                                     ></i>
                                                 `}
                                       </p>
@@ -182,29 +182,29 @@ export default class SDashboardWebVitalsComponent extends __SLitComponent {
                         </div>
 
                         <div class="ck-stat">
-                            <h3 class="ck-stat__label">TTFB</h3>
+                            <h3 class="ck-stat_label">TTFB</h3>
                             ${this._webVitals.ttfb
                                 ? html`
-                                      <p class="ck-stat__value">
+                                      <p class="ck-stat_value">
                                           ${(
                                               this._webVitals.ttfb.value / 1000
                                           ).toFixed(2)}s
                                           ${this._webVitals.ttfb.value <= 200
                                               ? html`
                                                     <i
-                                                        class="s-icon:success s-tc:success"
+                                                        class="fa-solid fa-thumbs-up s-tc:success"
                                                     ></i>
                                                 `
                                               : this._webVitals.ttfb.value <=
                                                 500
                                               ? html`
                                                     <i
-                                                        class="s-icon:warning s-tc:warning"
+                                                        class="fa-solid fa-triangle-exclamation s-tc:warning"
                                                     ></i>
                                                 `
                                               : html`
                                                     <i
-                                                        class="s-icon:error s-tc:error"
+                                                        class="fa-solid fa-xmark s-tc:error"
                                                     ></i>
                                                 `}
                                       </p>

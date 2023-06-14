@@ -30,8 +30,13 @@
     {% set dir = frontspec.metas.dir %}
 {% endif %}
 
+{% set lodClasses = '' %}
+{% if frontspec.lod.enabled %}
+    {% set lodClasses = __lodClasses(frontspec.lod.defaultLevel ? frontspec.lod.defaultLevel : 3) %}
+{% endif %}
+
 <!DOCTYPE html>
-<html lang="{{ lang }}" dir="{{ dir }}" class="{{ __lodClasses(frontspec.lod.defaultLevel ? frontspec.lod.defaultLevel : 3) }}">
+<html lang="{{ lang }}" dir="{{ dir }}" class="{{ lodClasses }}">
 <head>
     <!-- metas -->
     {{ __frontspecMetas(frontspec)|raw }}

@@ -12,7 +12,9 @@ for (let key of ['log', 'error', 'warn', 'success', 'verbose', 'notify']) {
     _console[key] = console[key];
 }
 // expose _console globally
-global._console = _console;
+try {
+    global._console = _console;
+} catch (e) {}
 
 // process.on('unhandledRejection', (error) => {
 //     throw error;

@@ -39,7 +39,7 @@ export default {
                 moreLink: null,
                 action: {
                     label: () => `Log them (${$sameIds.length})`,
-                    handler: () => console.log($sameIds),
+                    handler: () => (_console ?? console).log($sameIds),
                 },
             };
         }

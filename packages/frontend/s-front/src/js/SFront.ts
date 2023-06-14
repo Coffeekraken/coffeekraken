@@ -76,11 +76,11 @@ export interface ISFrontWireframeSettings {
 export interface ISFrontInitSettings {
     id: string;
     frontspec: any;
+    classmap: ISClassmapSettings;
     wireframe: Partial<ISFrontWireframeSettings>;
     legal: Partial<ISFrontLegalSettings>;
     theme: __STheme | Partial<ISThemeInitSettings>;
     logs: undefined | boolean;
-    classmap: ISClassmapSettings;
 }
 
 export interface ISFrontSettings extends ISFrontInitSettings {}
@@ -120,6 +120,7 @@ export default class SFront extends __SClass {
         const finalSettings = <ISFrontInitSettings>{
             id: 'default',
             lod: {},
+            classmap: {},
             wireframe: {},
             legal: {},
             partytown: {},
@@ -181,14 +182,14 @@ export default class SFront extends __SClass {
 
     /**
      * @name        theme
-     * @type        STheme
+     * @type        __STheme
      *
      * Store the current theme instance
      *
      * @since       2.0.0
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    theme;
+    theme: __STheme;
 
     /**
      * @name        frontspec
@@ -267,7 +268,7 @@ export default class SFront extends __SClass {
         });
 
         // Stdio
-        const stdio = new __SStdio(
+        new __SStdio(
             'default',
             new __SStdioConsoleSource(),
             new __SStdioBasicAdapter(),
@@ -290,6 +291,11 @@ export default class SFront extends __SClass {
                     `<yellow>[SFront]</yellow> Project "<cyan>${document.env.PACKAGE.name}</cyan>" in version "<yellow>${document.env.PACKAGE.version}</yellow>"`,
                 );
             }
+            if (document.env?.CLASSMAP) {
+                console.log(
+                    `<yellow>[SFront]</yellow> Using <yellow>classmap</yellow>"`,
+                );
+            }
         }
 
         // init frontspec and theme
@@ -304,7 +310,7 @@ export default class SFront extends __SClass {
         let classmap;
         if (settings.classmap instanceof __SClassmap) {
             classmap = settings.classmap;
-        } else if (document.env?.CLASSMAP) {
+        } else if (frontspec.get('classmap.enabled')) {
             classmap = __SClassmap.init(settings.classmap);
         }
 
@@ -322,6 +328,7 @@ export default class SFront extends __SClass {
                     id: 'default',
                     google: frontspec.get('google') ?? {},
                     partytown: frontspec.get('partytown') ?? {},
+                    classmap: frontspec.get('classmap') ?? {},
                     lod: {
                         stylesheet: 'link#global',
                         ...(frontspec.get('lod') ?? {}),
@@ -482,6 +489,10 @@ export default class SFront extends __SClass {
         level: string | number,
         settings?: Partial<ISThemeSetLodSettings>,
     ): void {
+        if (!this.frontspec.get('lod.enabled')) {
+            return;
+        }
+
         const finalSettings = <ISThemeSetLodSettings>{
             $context: document.querySelector('html'),
             ...(settings ?? {}),

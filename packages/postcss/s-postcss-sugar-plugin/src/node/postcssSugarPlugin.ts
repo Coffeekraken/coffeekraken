@@ -15,7 +15,6 @@ import __path from 'path';
 import __postcss from 'postcss';
 import __getRoot from './utils/getRoot';
 
-import { __compressCssVarName } from '@coffeekraken/sugar/css';
 import __CssVars from './CssVars';
 
 const mixinsStack = {},
@@ -24,9 +23,10 @@ const externalPackagesHashes: string[] = [];
 let packageHash = __folderHashSync(__path.dirname(__dirname()));
 let loadedPromise, compileFileTimeout;
 
+import type { ISClassmapSettings } from '@coffeekraken/s-classmap';
+
 const sharedData = {
     isPristine: true,
-    frontSettings: {},
 };
 
 export interface IPostcssSugarPluginLodSettings {
@@ -38,15 +38,11 @@ export interface IPostcssSugarPluginCleanSettings {
     variables: boolean;
 }
 
-export interface IPostcssSugarPluginCompressSettings {
-    variables: boolean;
-}
-
 export interface IPostcssSugarPluginSettings {
     outDir: string;
     lod: IPostcssSugarPluginLodSettings;
+    classmap: ISClassmapSettings | false;
     clean: Partial<IPostcssSugarPluginCleanSettings>;
-    compress: Partial<IPostcssSugarPluginCompressSettings>;
     excludeByTypes?: string[];
     excludeCommentByTypes?: string[];
     excludeCodeByTypes?: string[];
@@ -105,17 +101,14 @@ const plugin = (settings: IPostcssSugarPluginSettings = {}) => {
             excludeCommentByTypes: [],
             excludeCodeByTypes: [],
             lod: {},
+            classmap: {},
             clean: {
-                variables: undefined,
-            },
-            compress: {
                 variables: undefined,
             },
             target: __SEnv.get('target') ?? 'vite',
             plugins: [],
             partials: true,
             verbose: __SEnv.is('verbose'),
-            // @ts-ignore
         },
         settings,
     );
@@ -138,8 +131,8 @@ const plugin = (settings: IPostcssSugarPluginSettings = {}) => {
             excludeCodeByTypes: __SSugarConfig.get(
                 'postcssSugarPlugin.excludeCodeByTypes',
             ),
+            classmap: __SSugarConfig.get('postcssSugarPlugin.classmap'),
             clean: __SSugarConfig.get('postcssSugarPlugin.clean'),
-            compress: __SSugarConfig.get('postcssSugarPlugin.compress'),
             lod: __STheme.get('lod'),
         });
 
@@ -147,13 +140,6 @@ const plugin = (settings: IPostcssSugarPluginSettings = {}) => {
         if (settings.target === 'production') {
             if (settings.clean.variables === undefined) {
                 settings.clean.variables = true;
-            }
-        }
-
-        // compress if set to undefined and target is production
-        if (settings.target === 'production') {
-            if (settings.compress.variables === undefined) {
-                settings.compress.variables = true;
             }
         }
 
@@ -170,13 +156,6 @@ const plugin = (settings: IPostcssSugarPluginSettings = {}) => {
             }
             settings.lod.method = 'class';
         }
-
-        // build the frontSettings
-        sharedData.frontSettings = {
-            lod: settings.lod,
-            clean: settings.clean,
-            compress: settings.compress,
-        };
 
         // set the settings hash
         settingsHash = __objectHash(settings);
@@ -540,28 +519,6 @@ const plugin = (settings: IPostcssSugarPluginSettings = {}) => {
             });
         }
 
-        // compress --s-... variables
-        if (settings.compress.variables) {
-            root.walkDecls((node) => {
-                if (node.variable) {
-                    if (node.prop.match(/--s-/)) {
-                        const compressedProp = __compressCssVarName(node.prop);
-                        node.prop = compressedProp;
-                    }
-                }
-
-                const valueMatches = node.value.match(/--s-[^,\)]+/gm);
-                if (valueMatches) {
-                    valueMatches.forEach((match) => {
-                        node.value = node.value.replace(
-                            match,
-                            __compressCssVarName(match),
-                        );
-                    });
-                }
-            });
-        }
-
         return root;
     }
 
@@ -608,25 +565,25 @@ const plugin = (settings: IPostcssSugarPluginSettings = {}) => {
             // post processors
             await postProcessors(root);
 
-            // front settings
-            root.nodes.push(
-                __postcss.rule({
-                    selector: 'body:after',
-                    nodes: __postcss
-                        .parse(
-                            `
-                    display: none;
-                    content: '${JSON.stringify(
-                        sharedData.frontSettings ?? {},
-                    )}';
-                `,
-                        )
-                        .nodes.map((decl) => {
-                            decl.value += ';';
-                            return decl;
-                        }),
-                }),
-            );
+            // // front settings
+            // root.nodes.push(
+            //     __postcss.rule({
+            //         selector: 'body:after',
+            //         nodes: __postcss
+            //             .parse(
+            //                 `
+            //         display: none;
+            //         content: '${JSON.stringify(
+            //             sharedData.frontSettings ?? {},
+            //         )}';
+            //     `,
+            //             )
+            //             .nodes.map((decl) => {
+            //                 decl.value += ';';
+            //                 return decl;
+            //             }),
+            //     }),
+            // );
 
             // end the bench
             bench.end();

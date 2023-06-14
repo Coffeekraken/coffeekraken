@@ -20,13 +20,9 @@ import { __packageJsonSync } from '@coffeekraken/sugar/package';
  */
 export default function sVitePluginSugar(settings: any = {}) {
     const jsReg = /\.(j|t)s(\?.*)?$/;
-    let areEnvVarsInjected = false;
     let config;
 
     async function _injectEnvVars(src, id) {
-        // if (areEnvVarsInjected) return src;
-        // areEnvVarsInjected = true;
-
         const c = await __SSugarConfig.load({
             id: 'browser',
             platform: 'browser',
@@ -48,7 +44,9 @@ export default function sVitePluginSugar(settings: any = {}) {
             frontspecJson = frontspec.read();
         // classmap
         const classmap = new __SClassmap(),
-            classmapJson = classmap.readSync();
+            classmapJson = __SSugarConfig.get('themeClassmap.enabled')
+                ? classmap.readSync()
+                : null;
         // removing some data for the frontend
         for (let key of __SSugarConfig.get('frontspec.removeForFrontend')) {
             delete frontspecJson[key];

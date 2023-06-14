@@ -1,14 +1,12 @@
 .s-dashboard {
     .header {
         /* padding-block: sugar.padding(100) sugar.padding(100); */
-        background: sugar.color(main, background, --alpha 0.7);
         /* padding: sugar.padding(30); */
         display: flex;
         align-items: center;
         height: 80px;
         /* margin-block-end: sugar.margin(50); */
         /* @sugar.border.radius (10); */
-        @sugar.depth (100);
 
         .s-container {
             width: 100%;

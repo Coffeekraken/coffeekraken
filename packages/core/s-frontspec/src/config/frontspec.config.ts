@@ -227,20 +227,20 @@ export default function (api) {
                         return partytownConfig;
                     },
                 },
-                // classmap: {
-                //     title: 'Classmap',
-                //     description: 'Specify the classmap settings',
-                //     type: 'object',
-                //     get value() {
-                //         return {
-                //             ...Object.assign({}, api.theme.classmap),
-                //             path: `./${__path.relative(
-                //                 __packageRootDir(),
-                //                 api.config.classmap.path,
-                //             )}`,
-                //         };
-                //     },
-                // },
+                classmap: {
+                    title: 'Classmap',
+                    description: 'Specify the classmap settings',
+                    type: 'object',
+                    get value() {
+                        return {
+                            ...Object.assign({}, api.theme.classmap),
+                            path: `./${__path.relative(
+                                __packageRootDir(),
+                                api.config.classmap.path,
+                            )}`,
+                        };
+                    },
+                },
             },
         },
 

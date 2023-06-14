@@ -197,8 +197,8 @@ export default class SPostcssBuilder extends __SBuilder {
                         }`,
                     );
                     console.log(
-                        `              <yellow>○</yellow> Compress variables        : ${
-                            postcssSugarPluginConfig.compress?.variables
+                        `              <yellow>○</yellow> Classmap                  : ${
+                            postcssSugarPluginConfig.classmap?.enabled
                                 ? '<green>true</green>'
                                 : '<red>false</red>'
                         }`,

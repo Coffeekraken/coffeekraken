@@ -2,7 +2,7 @@
 
 import __SClass from '@coffeekraken/s-class';
 import __SPromise from '@coffeekraken/s-promise';
-import { __deepMerge } from '@coffeekraken/sugar/object';
+import { __clone, __deepMerge } from '@coffeekraken/sugar/object';
 import __SFrontendCheckerSettingsInterface from './interface/SFrontendCheckerSettingsInterface';
 
 import __author from './checks/author';
@@ -26,7 +26,7 @@ import __w3c from './checks/w3c';
 import __webpImages from './checks/webpImages';
 
 /**
- * @name                SFrontendCheckeer
+ * @name                SFrontendChecker
  * @namespace            js
  * @type                Class
  * @platform            js
@@ -43,8 +43,8 @@ import __webpImages from './checks/webpImages';
  * @todo      tests
  *
  * @example         js
- * import SFrontendCheckeer from '@coffeekraken/s-frontend-checker';
- * const checker = new SFrontendCheckeer();
+ * import SFrontendChecker from '@coffeekraken/s-frontend-checker';
+ * const checker = new SFrontendChecker();
  * const insights = await checker.check();
  *
  * @since           2.0.0
@@ -59,13 +59,6 @@ export interface ISFrontendCheckerCheckObj {
     description: string;
     level: number;
     check: Function;
-}
-
-export interface ISFrontendCheckerCheckResultObj {
-    id: string;
-    name: string;
-    description: string;
-    level: number;
     result: ISFrontendCheckerCheckResult;
 }
 
@@ -86,11 +79,11 @@ export interface ISFrontendCheckerCheckFn {
     ($context: HTMLElement): Promise<ISFrontendCheckerCheckResult>;
 }
 
-export default class SFrontendCheckeer extends __SClass {
+export default class SFrontendChecker extends __SClass {
     /**
      * Store the registered checks
      */
-    static _registeredChecks: { [key: string]: ISFrontendCheckerCheckFn } = {};
+    static _registeredChecks: { [key: string]: ISFrontendCheckerCheckObj } = {};
 
     /**
      * @name        LEVEL_LOW
@@ -212,42 +205,47 @@ export default class SFrontendCheckeer extends __SClass {
      */
     check(
         $context = document,
-        checks = Object.keys(SFrontendCheckeer._registeredChecks),
+        checks = Object.keys(SFrontendChecker._registeredChecks),
     ) {
-        const results: ISFrontendCheckerCheckResult[] = [];
+        const checksObjects: Record<string, ISFrontendCheckerCheckObj> =
+            __clone(SFrontendChecker._registeredChecks, {
+                deep: true,
+            });
+
         return new __SPromise(async ({ resolve, reject, emit, pipe }) => {
+            emit('start', checksObjects);
             for (let i = 0; i < checks.length; i++) {
                 const checkId = checks[i];
-                const checkObj = SFrontendCheckeer._registeredChecks[checkId];
+                const checkObj = checksObjects[checkId];
+                emit('check.start', checkObj);
                 const checkResult = await checkObj.check({ $context });
-                const checkResultObj = Object.assign({}, checkObj);
-                delete checkResultObj.check;
-                checkResultObj.result = checkResult;
-                emit('check', checkResultObj);
-                results.push(checkResultObj);
+                delete checkObj.check;
+                checkObj.result = checkResult;
+                emit('check.complete', checkObj);
             }
-            resolve(results);
+            emit('complete', checksObjects);
+            resolve(checksObjects);
         });
     }
 }
 
 // register default checks
-SFrontendCheckeer.registerCheck(__doctype);
-SFrontendCheckeer.registerCheck(__charset);
-SFrontendCheckeer.registerCheck(__viewport);
-SFrontendCheckeer.registerCheck(__title);
-SFrontendCheckeer.registerCheck(__description);
-SFrontendCheckeer.registerCheck(__keywords);
-SFrontendCheckeer.registerCheck(__author);
-SFrontendCheckeer.registerCheck(__direction);
-SFrontendCheckeer.registerCheck(__language);
-SFrontendCheckeer.registerCheck(__cssOrder);
-SFrontendCheckeer.registerCheck(__opengraph);
-SFrontendCheckeer.registerCheck(__twitterCard);
-SFrontendCheckeer.registerCheck(__noopener);
-SFrontendCheckeer.registerCheck(__comments);
-SFrontendCheckeer.registerCheck(__w3c);
-SFrontendCheckeer.registerCheck(__printStylesheet);
-SFrontendCheckeer.registerCheck(__uniqueIds);
-SFrontendCheckeer.registerCheck(__webpImages);
-SFrontendCheckeer.registerCheck(__imagesAlt);
+SFrontendChecker.registerCheck(__doctype);
+SFrontendChecker.registerCheck(__charset);
+SFrontendChecker.registerCheck(__viewport);
+SFrontendChecker.registerCheck(__title);
+SFrontendChecker.registerCheck(__description);
+SFrontendChecker.registerCheck(__keywords);
+SFrontendChecker.registerCheck(__author);
+SFrontendChecker.registerCheck(__direction);
+SFrontendChecker.registerCheck(__language);
+SFrontendChecker.registerCheck(__cssOrder);
+SFrontendChecker.registerCheck(__opengraph);
+SFrontendChecker.registerCheck(__twitterCard);
+SFrontendChecker.registerCheck(__noopener);
+SFrontendChecker.registerCheck(__comments);
+SFrontendChecker.registerCheck(__w3c);
+SFrontendChecker.registerCheck(__printStylesheet);
+SFrontendChecker.registerCheck(__uniqueIds);
+SFrontendChecker.registerCheck(__webpImages);
+SFrontendChecker.registerCheck(__imagesAlt);

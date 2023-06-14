@@ -3,27 +3,24 @@
 /* @sugar.theme.import ($variant: light); */
 
 /* main sugar classes */
+/* @sugar.typo.classes;
+@sugar.color.classes;
+@sugar.display.classes;
+@sugar.layout.classes;
+@sugar.flex.classes;
+@sugar.text.classes;
+@sugar.gap.classes;
+@sugar.margin.classes;
+@sugar.padding.classes; */
 @sugar.classes;
 
 /* UI's */
 @sugar.ui.codeexample.classes;
 @sugar.ui.clipboardcopy;
 @sugar.ui.filtrableinput.classes;
-@sugar.ui.colorpicker.classes;
-@sugar.ui.datetimepicker.classes;
-@sugar.ui.codeexample.classes;
-@sugar.ui.rating.classes;
-@sugar.ui.slider.classes;
-@sugar.ui.googlemap.classes;
-@sugar.ui.googlemapmarker.classes;
-@sugar.ui.themeswitcher.classes;
-@sugar.ui.panel.classes;
-@sugar.platform.classes;
-
-/* } */
 
 /* mobile specific classes */
-@sugar.media.classes mobile {
+/* @sugar.media.classes mobile {
     @sugar.display.classes;
     @sugar.layout.classes;
     @sugar.hide.classes;
@@ -31,11 +28,11 @@
     @sugar.text.classes;
     @sugar.gap.classes;
     @sugar.ui.button.classes;
-}
-@sugar.media.classes 'mobile,tablet,wide' {
+} */
+/* @sugar.media.classes 'mobile,tablet,wide' {
     @sugar.margin.classes;
     @sugar.padding.classes;
-}
+} */
 
 /* icons */
 @sugar.icon.classes (
@@ -46,6 +43,7 @@
   fa:file
   fa:heart
   fa:bugs
+  fa:angle-up
   fa:user
   fab:discord
   fab:github

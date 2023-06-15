@@ -1,9 +1,6 @@
 import __SClass from '@coffeekraken/s-class';
-import { __isInIframe } from '@coffeekraken/sugar/dom';
-import { __hotkey } from '@coffeekraken/sugar/keyboard';
+import { __escapeQueue, __hotkey } from '@coffeekraken/sugar/keyboard';
 import { __deepMerge } from '@coffeekraken/sugar/object';
-
-import __SDashboardComponent from './SDashboardComponent';
 
 import '../../../../src/css/index.css';
 import __SDashboardSettingsInterface from './interface/SDashboardSettingsInterface';
@@ -35,7 +32,7 @@ import __SDashboardSettingsInterface from './interface/SDashboardSettingsInterfa
 
 export interface ISDashboardSettings {
     layout: any[];
-    components: Record<string, any>;
+    widgets: Record<string, any>;
 }
 
 export default class SDashboard extends __SClass {
@@ -60,6 +57,11 @@ export default class SDashboard extends __SClass {
      */
     _$iframe: HTMLIFrameElement;
     _$focusItem: HTMLDivElement;
+
+    /**
+     * Track if the component has already been inited
+     */
+    _defined = false;
 
     /**
      * @name            document
@@ -94,12 +96,6 @@ export default class SDashboard extends __SClass {
             ),
         );
 
-        // if in iframe, register custom element
-        if (__isInIframe()) {
-            this.define();
-            return;
-        }
-
         // expose the dashboard on document to be able to access it from the iframe
         // @ts-ignore
         document.dashboard = this;
@@ -118,12 +114,9 @@ export default class SDashboard extends __SClass {
         __hotkey('ctrl+s').on('press', () => {
             this.open();
         });
-        __hotkey('escape').on('press', () => {
-            this.close();
-        });
-        __hotkey('ctrl+p').on('press', () => {
-            this.changePage();
-        });
+        // __hotkey('ctrl+p').on('press', () => {
+        //     this.changePage();
+        // });
 
         this._injectWebVitals();
     }
@@ -256,18 +249,8 @@ export default class SDashboard extends __SClass {
                     $document.addEventListener('s-theme.change', function(e) {
                         $dashboardHtml.setAttribute('theme', 'default-' + e.detail.variant);
                     });
-                    var $originalScripts = Array.from(window.parent.document.querySelectorAll('script'));
-                    $originalScripts.forEach(function($originalScript) {
-                        var $script = document.createElement('script');
-                        var src = $originalScript.getAttribute('src');
-                        if (!src) return;
-                        $script.setAttribute('src', src);
-                        $script.setAttribute('type', 'module');
-                        document.addEventListener('DOMContentLoaded', function() {
-                            document.querySelector('head').appendChild($script);
-                        });
-                    });
                 </script>
+                <script src="/sugar/dashboard/init.js" type="module" defer></script>
                 </head>
                 <body s-sugar>
                     <s-dashboard></s-dashboard>
@@ -283,18 +266,13 @@ export default class SDashboard extends __SClass {
         // overflow
         this.document.querySelector('html').style.overflow = 'hidden';
 
-        // init the dashboard
-        const SDashboardComponent = await import('./SDashboardComponent');
-        SDashboardComponent.define();
-    }
-
-    define(props = {}, tagName = 's-dashboard', win = window) {
-        __SDashboardComponent.define(
-            's-dashboard',
-            __SDashboardComponent,
-            {},
+        // handle escape to close
+        __escapeQueue(
+            () => {
+                this.close();
+            },
             {
-                window: win,
+                rootNode: [document, this.document],
             },
         );
     }

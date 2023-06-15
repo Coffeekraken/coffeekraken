@@ -83,5 +83,7 @@
     "s-doc_config-type": "sbt",
     "s-doc_param-type": "sbu",
     "s-doc_config-description": "sbv",
-    "s-doc_param-description": "sbw"
+    "s-doc_param-description": "sbw",
+    "--s-color-main-spin": "sbx",
+    "s-dashboard-iframe": "sby"
 }

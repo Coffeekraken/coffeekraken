@@ -207,13 +207,23 @@ export default class SFrontendChecker extends __SClass {
         $context = document,
         checks = Object.keys(SFrontendChecker._registeredChecks),
     ) {
-        const checksObjects: Record<string, ISFrontendCheckerCheckObj> =
-            __clone(SFrontendChecker._registeredChecks, {
-                deep: true,
-            });
+        const checksObjects: Record<string, ISFrontendCheckerCheckObj> = {};
+        checks.forEach((checkId) => {
+            if (!SFrontendChecker._registeredChecks[checkId]) {
+                throw new Error(
+                    `[SFrontendChecker] The requested "${checkId}" does not exists...`,
+                );
+            }
+            checksObjects[checkId] = __clone(
+                SFrontendChecker._registeredChecks[checkId],
+                {
+                    deep: true,
+                },
+            );
+        });
 
         return new __SPromise(async ({ resolve, reject, emit, pipe }) => {
-            emit('start', checksObjects);
+            emit('checks.start', checksObjects);
             for (let i = 0; i < checks.length; i++) {
                 const checkId = checks[i];
                 const checkObj = checksObjects[checkId];
@@ -223,7 +233,7 @@ export default class SFrontendChecker extends __SClass {
                 checkObj.result = checkResult;
                 emit('check.complete', checkObj);
             }
-            emit('complete', checksObjects);
+            emit('checks.complete', checksObjects);
             resolve(checksObjects);
         });
     }

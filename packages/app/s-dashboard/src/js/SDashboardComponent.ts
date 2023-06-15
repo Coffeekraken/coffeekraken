@@ -38,6 +38,13 @@ export default class SDashboardComponent extends __SLitComponent {
         `;
     }
 
+    static get properties() {
+        return __SLitComponent.propertiesFromInterface(
+            {},
+            __SDashboardComponentInterface,
+        );
+    }
+
     /**
      * @name            document
      * @type            Document
@@ -56,7 +63,7 @@ export default class SDashboardComponent extends __SLitComponent {
     _pipedEvents = [...__SDashboardPagesComponentEvents];
 
     // @ts-ignore
-    _dashboardSettings = this.document.dashboard.settings;
+    _dashboardSettings = this.document.dashboard?.settings;
 
     constructor() {
         super(
@@ -66,6 +73,16 @@ export default class SDashboardComponent extends __SLitComponent {
                 shadowDom: false,
             }),
         );
+    }
+
+    mount() {
+        // if dashboard settings exists, mean that we are using the dashboard through the "SDashboard" class
+        // we then extends the component props with these settings
+        if (this._dashboardSettings) {
+            for (let [prop, value] of Object.entries(this._dashboardSettings)) {
+                this.props[prop] = value;
+            }
+        }
 
         // listen shortcuts
         this._listenShortcuts();
@@ -132,14 +149,12 @@ export default class SDashboardComponent extends __SLitComponent {
                     <div class="s-container">
                         <div
                             class="s-layout:${[
-                                ...Array(
-                                    this._dashboardSettings.layout.length + 1,
-                                ).keys(),
+                                ...Array(this.props.layout.length + 1).keys(),
                             ]
                                 .filter((n) => n !== 0)
                                 .join('')} s-gap:30"
                         >
-                            ${this._dashboardSettings.layout.map((column) => {
+                            ${this.props.layout.map((column) => {
                                 return html`
                                     <div
                                         class="_column __column-${column.length}"
@@ -155,17 +170,16 @@ export default class SDashboardComponent extends __SLitComponent {
                                                       ] ?? {}}
                                                       ></s-dashboard-pages> -->
                                                   `
-                                                : html`
-                                                      ${unsafeHTML(
-                                                          `<${component} settings="${JSON.stringify(
-                                                              this
-                                                                  ._dashboardSettings
-                                                                  .components?.[
-                                                                  component
-                                                              ] ?? {},
-                                                          )}"></${component}>`,
-                                                      )}
-                                                  `,
+                                                : unsafeHTML(`
+                                                          <${component} settings="${JSON.stringify(
+                                                      this.props.widgets[
+                                                          component
+                                                      ] ?? {},
+                                                  ).replace(
+                                                      /\"/gm,
+                                                      '&quot;',
+                                                  )}"></${component}>
+                                                  `),
                                         )}
                                     </div>
                                 `;

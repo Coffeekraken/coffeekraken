@@ -1,7 +1,7 @@
 import __SInterface from '@coffeekraken/s-interface';
 
 /**
- * @name                SDashboardComponentInterface
+ * @name                SDashboardComponentWidgetInterface
  * @namespace           js.interface
  * @type                      Class
  * @extends             SInterface
@@ -18,23 +18,16 @@ import __SInterface from '@coffeekraken/s-interface';
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-class SDashboardComponentInterface extends __SInterface {
+class SDashboardComponentWidgetInterface extends __SInterface {
     static get _definition() {
         return {
-            layout: {
-                type: 'Array',
-                description:
-                    'Specify the layout you want for your dashboard. First level array are the columns, then nested arrays are rows of widgets',
-                default: [],
-            },
-            widgets: {
-                description:
-                    'Specify each widget settings if wanted to customize default behaviors',
+            settings: {
                 type: 'Object',
+                description: 'Specify some settings by widget',
                 default: {},
             },
         };
     }
 }
 
-export default SDashboardComponentInterface;
+export default SDashboardComponentWidgetInterface;

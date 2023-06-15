@@ -6,6 +6,8 @@ import __SRequest from '@coffeekraken/s-request';
 import { __xmlToJson } from '@coffeekraken/sugar/convert';
 import { html } from 'lit';
 
+import _SDashboardComponentWidgetInterface from '../../interface/SDashboardComponentWidgetInterface';
+
 import __SDashboardPagesComponentAttrsInterface from './interface/SDashboardPagesComponentAttrsInterface';
 
 import '../../../../../../src/js/partials/s-dashboard-pages-component/s-dashboard-pages-component.css';
@@ -77,6 +79,13 @@ __sFiltrableInputDefine(
 export const events = ['s-dashboard-pages.selectItem'];
 
 export default class SDashboardPages extends __SLitComponent {
+    static get properties() {
+        return __SLitComponent.propertiesFromInterface(
+            {},
+            _SDashboardComponentWidgetInterface,
+        );
+    }
+
     /**
      * @name            document
      * @type            Document

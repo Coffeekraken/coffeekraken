@@ -2,9 +2,19 @@
 
 import __SLitComponent from '@coffeekraken/s-lit-component';
 import { html } from 'lit';
+
+import _SDashboardComponentWidgetInterface from '../../interface/SDashboardComponentWidgetInterface';
+
 import '../../../../../../src/js/partials/s-dashboard-responsive-component/s-dashboard-responsive-component.css';
 
 export default class SDashboardResponsiveComponent extends __SLitComponent {
+    static get properties() {
+        return __SLitComponent.propertiesFromInterface(
+            {},
+            _SDashboardComponentWidgetInterface,
+        );
+    }
+
     /**
      * @name            document
      * @type            Document

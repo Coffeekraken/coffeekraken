@@ -3,9 +3,18 @@
 import __SLitComponent from '@coffeekraken/s-lit-component';
 import { html } from 'lit';
 
+import _SDashboardComponentWidgetInterface from '../../interface/SDashboardComponentWidgetInterface';
+
 import '../../../../../../src/js/partials/s-dashboard-google-component/s-dashboard-google-component.css';
 
 export default class SDashboardGoogleComponent extends __SLitComponent {
+    static get properties() {
+        return __SLitComponent.propertiesFromInterface(
+            {},
+            _SDashboardComponentWidgetInterface,
+        );
+    }
+
     _gtm: string;
     _ga: string;
 

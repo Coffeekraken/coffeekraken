@@ -351,20 +351,20 @@ export default function (api) {
                         return api.config.kitchen.actions.frontendServer;
                     },
 
-                    // /**
-                    //  * @__name            corsProxy
-                    //  * @__namespace       config.kitchenRecipeDefault.stacks.dev.actions
-                    //  * @__type            String
-                    //  * @__default         [config.kitchen.actions.corsProxy]
-                    //  *
-                    //  * Specify the recipe prod stack corsProxy action
-                    //  *
-                    //  * @since       2.0.0
-                    //  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-                    //  */
-                    // get corsProxy() {
-                    //     return api.config.kitchen.actions.corsProxy;
-                    // },
+                    /**
+                     * @name            corsProxy
+                     * @namespace       config.kitchenRecipeDefault.stacks.dev.actions
+                     * @type            String
+                     * @default         [config.kitchen.actions.corsProxy]
+                     *
+                     * Specify the recipe prod stack corsProxy action
+                     *
+                     * @since       2.0.0
+                     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+                     */
+                    get corsProxy() {
+                        return api.config.kitchen.actions.corsProxy;
+                    },
 
                     /**
                      * @name            vite

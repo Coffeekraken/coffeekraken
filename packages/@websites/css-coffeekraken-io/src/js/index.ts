@@ -2,8 +2,6 @@ import __SPackEssentials from '@coffeekraken/s-pack-essentials';
 
 import __SFront from '@coffeekraken/s-front';
 
-import __SDashboard from '@coffeekraken/s-dashboard';
-
 import { define as __CKMenuDefine } from './components/CKMenu';
 
 import { define as __SCodeExampleComponentDefine } from '@coffeekraken/s-code-example-component';
@@ -249,15 +247,15 @@ const viewsRelated = import.meta.globEager('../views/**/*.ts');
     const $slider = document.querySelector('[welcome-slider]');
     $slider && new WelcomeSlider($slider);
 
-    // dashboard
-    new __SDashboard({
-        layout: [
-            [
-                's-dashboard-browserstack',
-                's-dashboard-google',
-                's-dashboard-web-vitals',
-            ],
-            ['s-dashboard-frontend-checker'],
-        ],
-    });
+    // // dashboard
+    // new __SDashboard({
+    //     layout: [
+    //         [
+    //             's-dashboard-browserstack',
+    //             's-dashboard-google',
+    //             's-dashboard-web-vitals',
+    //         ],
+    //         ['s-dashboard-frontend-checker'],
+    //     ],
+    // });
 })();

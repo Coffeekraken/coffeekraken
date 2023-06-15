@@ -28,6 +28,12 @@ class SDashboardSettingsInterface extends __SInterface {
                 type: 'Array',
                 default: __SSugarConfig.get('dashboard.layout'),
             },
+            widgets: {
+                description:
+                    'Specify each widget settings if wanted to customize default behaviors',
+                type: 'Object',
+                default: {},
+            },
         };
     }
 }

@@ -14,4 +14,8 @@
         text-align: center;
         padding: sugar.padding(30);
     }
+
+    .s-tooltip {
+        white-space: nowrap;
+    }
 }

@@ -2,9 +2,18 @@
 
 import __SLitComponent from '@coffeekraken/s-lit-component';
 import { html } from 'lit';
+import _SDashboardComponentWidgetInterface from '../../interface/SDashboardComponentWidgetInterface';
+
 import '../../../../../../src/js/partials/s-dashboard-web-vitals-component/s-dashboard-web-vitals-component.css';
 
 export default class SDashboardWebVitalsComponent extends __SLitComponent {
+    static get properties() {
+        return __SLitComponent.propertiesFromInterface(
+            {},
+            _SDashboardComponentWidgetInterface,
+        );
+    }
+
     _webVitals: any = null;
 
     /**

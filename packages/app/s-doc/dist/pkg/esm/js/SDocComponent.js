@@ -98,7 +98,7 @@ export default class SDocComponent extends __SLitComponent {
     _registerShortcuts() {
         document.addEventListener('keyup', (e) => {
             var _a;
-            if (e.key === 's' && e.ctrlKey) {
+            if (e.key === 'f' && e.ctrlKey) {
                 (_a = this._$searchInput) === null || _a === void 0 ? void 0 : _a.focus();
             }
             else if (e.key === 'd' && e.ctrlKey) {
@@ -487,7 +487,7 @@ export default class SDocComponent extends __SLitComponent {
                     <input
                         type="text"
                         name="search"
-                        placeholder="${this.props.i18n.search} (CTRL+S)"
+                        placeholder="${this.props.i18n.search} (CTRL+f)"
                         class="${this.utils.cls('_search-input')}"
                         @keyup=${(e) => {
             this._search(e.target.value);

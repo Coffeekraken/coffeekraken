@@ -62,6 +62,9 @@ if (isset($frontspec)) {
 @endphp
 <html lang="{{ $lang }}" dir="{{ $dir }}" class="{{ $lodClasses }}">
 <head>
+
+    <script src="/sugar/dashboard/lazy.js" type="module" defer></script>
+
     <!-- metas -->
     {!! \Sugar\frontspec\metas($frontspec, $env) !!}
 

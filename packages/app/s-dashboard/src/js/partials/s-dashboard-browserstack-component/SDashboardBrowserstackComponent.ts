@@ -4,6 +4,10 @@ import __SLitComponent from '@coffeekraken/s-lit-component';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
 import { html } from 'lit';
 
+import { __upperFirst } from '@coffeekraken/sugar/string';
+
+import _SDashboardComponentWidgetInterface from '../../interface/SDashboardComponentWidgetInterface';
+
 import '../../../../../../src/js/partials/s-dashboard-browserstack-component/s-dashboard-browserstack-component.css';
 
 import __chromeSvg from '../../../../../../src/js/partials/s-dashboard-browserstack-component/svg/chrome.svg';
@@ -15,6 +19,13 @@ import __samsumgSvg from '../../../../../../src/js/partials/s-dashboard-browsers
 import __yandexSvg from '../../../../../../src/js/partials/s-dashboard-browserstack-component/svg/yandex.svg';
 
 export default class SDashboardBrowserstackComponent extends __SLitComponent {
+    static get properties() {
+        return __SLitComponent.propertiesFromInterface(
+            {},
+            _SDashboardComponentWidgetInterface,
+        );
+    }
+
     _maxVersions = 10;
 
     _credentials = {
@@ -53,6 +64,8 @@ export default class SDashboardBrowserstackComponent extends __SLitComponent {
 
         var requestOptions = {
             method: 'GET',
+            mode: 'cors',
+            cache: 'no-cache',
             redirect: 'follow',
             headers,
         };
@@ -162,7 +175,7 @@ export default class SDashboardBrowserstackComponent extends __SLitComponent {
                                                   ]}"
                                               />
                                               <div class="s-tooltip">
-                                                  ${browser}
+                                                  ${__upperFirst(browser)}
                                               </div>
                                           </div>
                                           <div class="s-dropdown">

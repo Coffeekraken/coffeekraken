@@ -466,13 +466,17 @@ export default class SFrontendServer extends __SClass {
                         });
                         return;
                     }
+
                     __request(
                         {
                             url: targetURL + req.url,
                             method: req.method,
                             json: req.body,
+                            referrerPolicy: 'no-referrer',
+                            cache: 'no-cache',
                             headers: {
                                 Authorization: req.header('Authorization'),
+                                'Content-Type': 'application/json',
                             },
                         },
                         function (error, response, body) {

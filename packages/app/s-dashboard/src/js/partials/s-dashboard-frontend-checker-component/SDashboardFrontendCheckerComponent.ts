@@ -3,13 +3,26 @@
 import __SLitComponent from '@coffeekraken/s-lit-component';
 import { html } from 'lit';
 
+import _SDashboardComponentWidgetInterface from '../../interface/SDashboardComponentWidgetInterface';
+
 import '../../../../../../src/js/partials/s-dashboard-frontend-checker-component/s-dashboard-frontend-checker-component.css';
 
 import __SFrontendChecker, {
     ISFrontendCheckerCheckObj,
 } from '@coffeekraken/s-frontend-checker';
 
+export interface ISDashboardFrontendCheckerComponentSettings {
+    checks: string[];
+}
+
 export default class SDashboardFrontendCheckerComponent extends __SLitComponent {
+    static get properties() {
+        return __SLitComponent.propertiesFromInterface(
+            {},
+            _SDashboardComponentWidgetInterface,
+        );
+    }
+
     constructor() {
         super({
             shadowDom: false,
@@ -30,14 +43,18 @@ export default class SDashboardFrontendCheckerComponent extends __SLitComponent 
 
     firstUpdated() {
         const checker = new __SFrontendChecker();
+        const pro = checker.check(
+            window.parent?.document ?? document,
+            this.props.settings.checks,
+        );
 
-        // _console.log('ch', checker.checks);
-
-        const pro = checker.check(window.parent?.document ?? document);
-        pro.on('start', (checks: Record<string, ISFrontendCheckerCheckObj>) => {
-            this._checks = checks;
-            this.requestUpdate();
-        });
+        pro.on(
+            'checks.start',
+            (checks: Record<string, ISFrontendCheckerCheckObj>) => {
+                this._checks = checks;
+                this.requestUpdate();
+            },
+        );
         pro.on('check.complete', (checkObj: ISFrontendCheckerCheckObj) => {
             this.requestUpdate();
         });

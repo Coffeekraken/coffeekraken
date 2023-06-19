@@ -1,5 +1,5 @@
-import { __deepMap } from '@coffeekraken/sugar/object';
-import { __parse } from '@coffeekraken/sugar/string';
+import __deepMap from '../object/deepMap';
+import __parse from '../string/parse';
 
 /**
  * @name            parseTypeString

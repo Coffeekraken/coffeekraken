@@ -4,8 +4,6 @@ import __html2canvas from 'html2canvas';
 import __SGlitchFeatureInterface from './interface/SGlitchFeatureInterface';
 import __Glitch from './lib/Glitch';
 
-import __define from './define';
-
 // @ts-ignore
 import __css from '../../../../src/css/s-glitch-feature.css'; // relative to /dist/pkg/esm/js
 
@@ -27,16 +25,16 @@ import __css from '../../../../src/css/s-glitch-feature.css'; // relative to /di
  * @support          edge
  *
  * @import          import { define as __SGlitchFeatureDefine } from '@coffeekraken/s-glitch-feature';
- * 
+ *
  * @snippet         __SGlitchFeatureDefine($1)
- * 
+ *
  * @install         js
  * import { define as __SGlitchFeatureDefine } from '@coffeekraken/s-glitch-feature';
  * __SGlitchFeatureDefine();
- * 
+ *
  * @install         bash
  * npm i @coffeekraken/s-form-validate-feature
- * 
+ *
  * @example         html            Highlight
  * <div class="s-radius s-bg:main s-depth s-mbe:30" style="height:100px" s-highlight>
  * </div>
@@ -107,5 +105,3 @@ export default class SGlitchFeature extends __SFeature {
         glitch.start();
     }
 }
-
-export { __define as define };

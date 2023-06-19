@@ -1,5 +1,5 @@
 import __SPromise from '@coffeekraken/s-promise';
-import { __uniqid } from '@coffeekraken/sugar/string';
+import __uniqid from '../string/uniqid';
 import __hotkey from './hotkey';
 
 /**

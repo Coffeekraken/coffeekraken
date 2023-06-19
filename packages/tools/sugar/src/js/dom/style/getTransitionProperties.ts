@@ -1,7 +1,7 @@
 // @ts-nocheck
 
-import { __getStyleProperty } from '@coffeekraken/sugar/dom';
 import __convertTime from '../../../shared/datetime/convertTime';
+import __getStyleProperty from './getStyleProperty';
 
 /**
  * @name      getTransitionProperties

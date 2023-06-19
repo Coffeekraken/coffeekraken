@@ -82,7 +82,7 @@ export default class CkSettings extends __SLitComponent {
     }
 }
 
-export function define(props: any = {}, tagName = 'ck-menu') {
+export function __define(props: any = {}, tagName = 'ck-menu') {
     __SLitComponent.define(tagName, CkSettings, {
         id: 'ck-menu',
         ...props,

@@ -1,4 +1,5 @@
-import { __readJsonSync } from '@coffeekraken/sugar/fs';
+
+import __readJsonSync from '../fs/readJsonSync';
 
 /**
  * @name                import

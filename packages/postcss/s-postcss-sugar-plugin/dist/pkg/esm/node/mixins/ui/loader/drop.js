@@ -63,7 +63,7 @@ export default function ({ params, atRule, replaceWith, }) {
         top: 50%; left: 50%;
         opacity: 0;
         transform: translate(-50%, -50%) scale(0);
-        border: sugar.scalable(0.1em) solid sugar.color(current);
+        border: sugar.scalable(0.1em) solid currentColor;
         border-radius: 50%;
         width: sugar.scalable(1em); height: sugar.scalable(1em);
     }

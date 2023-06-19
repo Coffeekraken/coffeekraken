@@ -1,7 +1,8 @@
 // @ts-nocheck
 
-import { __querySelectorLive, __whenInViewport } from '@coffeekraken/sugar/dom';
 import __fastdom from 'fastdom';
+import __whenInViewport from '../dom/detect/whenInViewport';
+import __querySelectorLive from '../dom/query/querySelectorLive';
 
 /**
  * @name 		videoLazySrcAttribute

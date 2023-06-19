@@ -1,9 +1,9 @@
 // @ts-nocheck
 
-import { __writeFileSync } from '@coffeekraken/sugar/fs';
-import { __packageTmpDir } from '@coffeekraken/sugar/path';
 import __path from 'path';
 import __uniqid from '../../node/string/uniqid';
+import __packageTmpDir from '../path/packageTmpDir';
+import __writeFileSync from './writeFileSync';
 
 /**
  * @name        writeTmpFileSync
@@ -25,7 +25,7 @@ import __uniqid from '../../node/string/uniqid';
  * @todo      tests
  *
  * @snippet         __writeTmpFileSync($1, $2)
- * 
+ *
  * @example       js
  * import { __writeTmpFileSync } from '@coffeekraken/sugar/fs';
  * const path = __writeTmpFileSync('Hello World');

@@ -1,7 +1,8 @@
 // @ts-nocheck
 
-import { __ensureDirSync, __folderPath } from '@coffeekraken/sugar/fs';
 import __fs from 'fs-extra';
+import __ensureDirSync from '../fs/ensureDirSync';
+import __folderPath from './folderPath';
 
 /**
  * @name        writeFile
@@ -19,7 +20,7 @@ import __fs from 'fs-extra';
  * @return      {Promise}                           A promise that will be resolved when the writeFile is completed
  *
  * @snippet         __writeFile($1, $2)
- * await __writeFile($1, $2) 
+ * await __writeFile($1, $2)
  *
  * @example       js
  * import { __writeFile } from '@coffeekraken/sugar/fs';

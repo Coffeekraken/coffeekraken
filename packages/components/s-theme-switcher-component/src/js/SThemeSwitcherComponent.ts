@@ -6,8 +6,6 @@ import __SThemeSwitcherComponentInterface from './interface/SThemeSwitcherCompon
 // @ts-ignore
 import __css from '../../../../src/css/s-theme-switcher.css'; // relative to /dist/pkg/esm/js
 
-import __define from './define';
-
 export interface ISThemeSwitcherComponentProps {
     darkModeIcon: boolean;
     darkModeIconClass: string;
@@ -38,14 +36,14 @@ export interface ISThemeSwitcherComponentProps {
  * @support         edge
  *
  * @import          import { define as __SThemeSwitcherComponentDefine } from '@coffeekraken/s-theme-switcher-component';
- * 
+ *
  * @snippet             __SThemeSwitcherComponentDefine($1)
- * 
+ *
  * @install           shell
  * npm i @coffeekraken/s-theme-switcher-component
  *
  * @install           js
- * import { define as __SThemeSwitcherComponentDefine } from '@coffeekraken/s-theme-switcher-component';
+ * import { __define as __SThemeSwitcherComponentDefine } from '@coffeekraken/s-theme-switcher-component';
  * __SThemeSwitcherComponentDefine();
  *
  * @example         html        Simple dark mode switcher
@@ -200,5 +198,3 @@ export default class SThemeSwitcherComponent extends __SLitComponent {
         `;
     }
 }
-
-export { __define as define };

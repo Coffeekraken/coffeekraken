@@ -3,8 +3,6 @@ import __SFeature from '@coffeekraken/s-feature';
 import { __deepMerge } from '@coffeekraken/sugar/object';
 import __SInlineFeatureInterface from './interface/SInlineFeatureInterface';
 
-import __define from './define';
-
 // @ts-ignore
 import '../../../../src/css/s-inline-feature.css'; // relative to /dist/pkg/esm/js
 // import '../css/s-inline-feature.css'; // for dev
@@ -31,16 +29,16 @@ export interface IInlineFeatureProps {}
  * @support          edge
  *
  * @import          import { define as __SInlineFeatureDefine } from '@coffeekraken/s-inline-feature';
- * 
+ *
  * @snippet         __SInlineFeatureDefine($1)
- * 
+ *
  * @install         js
  * import { define as __SInlineFeatureDefine } from '@coffeekraken/s-inline-feature';
  * __SInlineFeatureDefine();
- * 
+ *
  * @install         bash
  * npm i @coffeekraken/s-form-validate-feature
- * 
+ *
  * @example         html        Inline svg image
  * <img s-inline src="/dist/img/illustrations/stack.svg" />
  *
@@ -92,5 +90,3 @@ export default class SInlineFeature extends __SFeature implements ISFeature {
         this.node.remove();
     }
 }
-
-export { __define as define };

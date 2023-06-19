@@ -1,9 +1,9 @@
-import { __sharedContext } from '@coffeekraken/sugar/process';
 import __pickRandom from '../../../shared/array/pickRandom';
 import __md5 from '../../../shared/crypto/md5';
 import type { IAvailableColorsSettings } from '../../../shared/dev/color/availableColors';
 import __availableColors from '../../../shared/dev/color/availableColors';
 import __deepMerge from '../../../shared/object/deepMerge';
+import __sharedContext from '../../process/sharedContext';
 
 /**
  * @name            getColorFor

@@ -1,5 +1,5 @@
 // @ts-nocheck
-import { __wait } from '@coffeekraken/sugar/datetime';
+import __wait from '../../../shared/datetime/wait';
 
 /**
  * @name        addClassTimeout

@@ -373,11 +373,11 @@ export default class SVite extends __SClass {
                             plugins: [],
                             output: {},
                             onwarn(warning, warn) {
-                                const onwarnRes =
-                                    viteConfig.build?.rollupOptions?.onwarn?.(
-                                        warning,
-                                        warn,
-                                    );
+                                // const onwarnRes =
+                                //     viteConfig.build?.rollupOptions?.onwarn?.(
+                                //         warning,
+                                //         warn,
+                                //     );
 
                                 console.log({
                                     margin: {
@@ -393,7 +393,6 @@ export default class SVite extends __SClass {
                                     type: __SLog.TYPE_WARNING,
                                     value: `at <cyan>${warning.loc.file}</cyan>:<yellow>${warning.loc.column}:${warning.loc.line}</yellow>`,
                                 });
-                                return onwarnRes;
                             },
                         },
                     },

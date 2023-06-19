@@ -1,9 +1,7 @@
 // @ts-nocheck
 
-import {
-    __getRotateProperties,
-    __getTranslateProperties,
-} from '@coffeekraken/sugar/dom';
+import __getRotateProperties from './getRotateProperties';
+import __getTranslateProperties from './getTranslateProperties';
 
 /**
  * @name      getTransformProperties

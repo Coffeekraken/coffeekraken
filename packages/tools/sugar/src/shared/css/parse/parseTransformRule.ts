@@ -1,4 +1,5 @@
-import { __parse } from '@coffeekraken/sugar/string';
+
+import __parse from '../../../shared/string/parse';
 
 /**
  * @name      parseTransformRule

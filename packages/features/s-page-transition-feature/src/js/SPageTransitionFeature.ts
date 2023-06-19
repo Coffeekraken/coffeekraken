@@ -6,8 +6,6 @@ import { __querySelectorUp, __scrollTo } from '@coffeekraken/sugar/dom';
 import { __deepMerge } from '@coffeekraken/sugar/object';
 import __SPageTransitionFeatureInterface from './interface/SPageTransitionFeatureInterface';
 
-import __define from './define';
-
 // @ts-ignore
 import __css from '../../../../src/css/s-page-transition.css'; // relative to /dist/pkg/esm/js
 
@@ -65,16 +63,16 @@ export interface ISPageTransitionFeatureProps {
  * @support          edge
  *
  * @import          import { define as __SPageTransitionFeatureDefine } from '@coffeekraken/s-page-transition-feature';
- * 
+ *
  * @snippet         __SPageTransitionFeatureDefine($1)
- * 
+ *
  * @install         js
  * import { define as __SPageTransitionFeatureDefine } from '@coffeekraken/s-page-transition-feature';
  * __SPageTransitionFeatureDefine();
- * 
+ *
  * @install         bash
  * npm i @coffeekraken/s-form-validate-feature
- * 
+ *
  * @example         html            Simple example
  * <p class="s-typo:p">On your body tag, put the <span class="s-typo:code">s-page-transition</span> attribute</p>
  * <!-- <body s-page-transition> -->
@@ -519,5 +517,3 @@ export default class SPageTransitionFeature extends __SFeature {
         });
     }
 }
-
-export { __define as define };

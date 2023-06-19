@@ -1,6 +1,6 @@
 // @ts-nocheck
 
-import { __getStyleProperty } from '@coffeekraken/sugar/dom';
+import __getStyleProperty from '../style/getStyleProperty';
 
 /**
  * @name      textWidth

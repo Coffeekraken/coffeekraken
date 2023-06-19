@@ -10,8 +10,9 @@ import __SDashboard from './SDashboard';
                 layout: [
                     [
                         's-dashboard-browserstack',
-                        's-dashboard-google',
                         's-dashboard-web-vitals',
+                        's-dashboard-assets',
+                        's-dashboard-google',
                     ],
                     ['s-dashboard-frontend-checker'],
                 ],

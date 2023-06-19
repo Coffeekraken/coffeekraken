@@ -14,10 +14,10 @@ import {
 import { __copy } from '@coffeekraken/sugar/clipboard';
 import { __addClassTimeout } from '@coffeekraken/sugar/dom';
 
-import { define as __SColorPickerComponentDefine } from '@coffeekraken/s-color-picker-component';
-import { define as __SDatetimePickerComponentDefine } from '@coffeekraken/s-datetime-picker-component';
-import { define as __SDropzoneComponentDefine } from '@coffeekraken/s-dropzone-component';
-import { define as __SWysiwygComponentDefine } from '@coffeekraken/s-wysiwyg-component';
+import { __define as __SColorPickerComponentDefine } from '@coffeekraken/s-color-picker-component';
+import { __define as __SDatetimePickerComponentDefine } from '@coffeekraken/s-datetime-picker-component';
+import { __define as __SDropzoneComponentDefine } from '@coffeekraken/s-dropzone-component';
+import { __define as __SWysiwygComponentDefine } from '@coffeekraken/s-wysiwyg-component';
 
 import __STheme from '@coffeekraken/s-theme';
 
@@ -33,8 +33,6 @@ import __SSpecsEditorComponentInterface from './interface/SSpecsEditorComponentI
 
 // @ts-ignore
 import __css from '../../../../src/css/s-specs-editor-component.css'; // relative to /dist/pkg/esm/js
-
-import __define from './define';
 
 import __checkboxWidget from './widgets/checkboxWidget';
 import __colorPickerWidget from './widgets/colorPickerWidget';
@@ -151,7 +149,7 @@ export interface ISSpecsEditorComponentProps {
  * npm i @coffeekraken/s-clipboard-copy-component
  *
  * @install           js
- * import { define as __SSpecsEditorComponentDefine } from '@coffeekraken/s-clipboard-copy-component';
+ * import { __define as __SSpecsEditorComponentDefine } from '@coffeekraken/s-clipboard-copy-component';
  * __SSpecsEditorComponentDefine();
  *
  * @example         html        Copy from an input
@@ -1369,5 +1367,3 @@ export default class SSpecsEditorComponent extends __SLitComponent {
         `;
     }
 }
-
-export { __define as define };

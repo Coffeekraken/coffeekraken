@@ -6,6 +6,13 @@ import _SDashboardComponentWidgetInterface from '../../interface/SDashboardCompo
 
 import '../../../../../../src/js/partials/s-dashboard-web-vitals-component/s-dashboard-web-vitals-component.css';
 
+export interface ISDashboardWebVitalsComponentVital {
+    good: number;
+    medium: number;
+    value: number;
+    unit: 'ms' | 's' | '';
+}
+
 export default class SDashboardWebVitalsComponent extends __SLitComponent {
     static get properties() {
         return __SLitComponent.propertiesFromInterface(
@@ -45,6 +52,60 @@ export default class SDashboardWebVitalsComponent extends __SLitComponent {
 
     firstUpdated() {}
 
+    _renderVital(vitals: ISDashboardWebVitalsComponentVital): any {
+        if (!vitals.value) {
+            return html`
+                <div class="_value">
+                    <i class="s-loader:spinner"></i>
+                </div>
+                <div class="_vital loading">
+                    <div class="_indicator"></div>
+                    <div class="_scores">
+                        <div class="_good"></div>
+                        <div class="_medium"></div>
+                        <div class="_poor"></div>
+                    </div>
+                </div>
+            `;
+        }
+
+        const goodPercent = (100 / vitals.good) * vitals.value,
+            mediumPercent =
+                (100 / (vitals.medium - vitals.good)) * vitals.value,
+            poorPercent =
+                (100 / (vitals.medium + vitals.medium)) * vitals.value,
+            globalPercent =
+                (100 / 300) * (goodPercent + mediumPercent + poorPercent);
+
+        let displayValue = vitals.value.toFixed(3);
+        if (vitals.unit === 'ms') {
+            displayValue = vitals.value.toFixed(0);
+        } else if (vitals.unit === 's') {
+            displayValue = (vitals.value / 1000).toFixed(2);
+        }
+
+        return html`
+            <div class="_value">${displayValue}${vitals.unit}</div>
+            <div
+                class="_vital ${goodPercent <= 100
+                    ? 'good'
+                    : mediumPercent <= 100
+                    ? 'medium'
+                    : 'poor'}"
+            >
+                <div
+                    class="_indicator"
+                    style="--percent: ${globalPercent};"
+                ></div>
+                <div class="_scores">
+                    <div class="_good"></div>
+                    <div class="_medium"></div>
+                    <div class="_poor"></div>
+                </div>
+            </div>
+        `;
+    }
+
     render() {
         return html`
             <div class="s-dashboard-web-vitals s-width:100">
@@ -52,177 +113,74 @@ export default class SDashboardWebVitalsComponent extends __SLitComponent {
 
                 <div class="ck-panel">
                     <div class="_stats">
-                        <div class="ck-stat">
-                            <h3 class="ck-stat_label">LCP</h3>
-                            ${this._webVitals.lcp
-                                ? html`
-                                      <p class="ck-stat_value">
-                                          ${(
-                                              this._webVitals.lcp.value / 1000
-                                          ).toFixed(2)}s
-                                          ${this._webVitals.lcp.value <= 2500
-                                              ? html`
-                                                    <i
-                                                        class="fa-solid fa-thumbs-up s-tc:success"
-                                                    ></i>
-                                                `
-                                              : this._webVitals.lcp.value <=
-                                                4000
-                                              ? html`
-                                                    <i
-                                                        class="fa-solid fa-triangle-exclamation s-tc:warning"
-                                                    ></i>
-                                                `
-                                              : html`
-                                                    <i
-                                                        class="fa-solid fa-xmark s-tc:error"
-                                                    ></i>
-                                                `}
-                                      </p>
-                                  `
-                                : html`
-                                      <div
-                                          class="s-loader:spinner s-mbs:20 s-color:accent"
-                                      ></div>
-                                  `}
+                        <div class="_stat">
+                            <h3 class="_label">
+                                <a href="https://web.dev/lcp/" target="_blank">
+                                    LCP
+                                </a>
+                            </h3>
+                            ${this._renderVital({
+                                good: 2500,
+                                medium: 4000,
+                                value: this._webVitals?.lcp?.value,
+                                unit: 's',
+                            })}
                         </div>
 
-                        <div class="ck-stat">
-                            <h3 class="ck-stat_label">FID</h3>
-                            ${this._webVitals.fid
-                                ? html`
-                                      <p class="ck-stat_value">
-                                          ${Math.round(
-                                              this._webVitals.fid.value,
-                                          )}ms
-                                          ${this._webVitals.fid.value <= 100
-                                              ? html`
-                                                    <i
-                                                        class="fa-solid fa-thumbs-up s-tc:success"
-                                                    ></i>
-                                                `
-                                              : this._webVitals.fid.value <= 300
-                                              ? html`
-                                                    <i
-                                                        class="fa-solid fa-triangle-exclamation s-tc:warning"
-                                                    ></i>
-                                                `
-                                              : html`
-                                                    <i
-                                                        class="fa-solid fa-xmark s-tc:error"
-                                                    ></i>
-                                                `}
-                                      </p>
-                                  `
-                                : html`
-                                      <div
-                                          class="s-loader:spinner s-mbs:20 s-color:accent"
-                                      ></div>
-                                  `}
+                        <div class="_stat">
+                            <h3 class="_label">
+                                <a href="https://web.dev/fid/" target="_blank">
+                                    FID
+                                </a>
+                            </h3>
+                            ${this._renderVital({
+                                good: 100,
+                                medium: 300,
+                                value: this._webVitals?.fid?.value,
+                                unit: 'ms',
+                            })}
                         </div>
 
-                        <div class="ck-stat">
-                            <h3 class="ck-stat_label">CLS</h3>
-                            ${this._webVitals.cls
-                                ? html`
-                                      <p class="ck-stat_value">
-                                          ${this._webVitals.cls.value.toFixed(
-                                              2,
-                                          )}
-                                          ${this._webVitals.cls.value <= 0.1
-                                              ? html`
-                                                    <i
-                                                        class="fa-solid fa-thumbs-up s-tc:success"
-                                                    ></i>
-                                                `
-                                              : this._webVitals.cls.value <=
-                                                0.25
-                                              ? html`
-                                                    <i
-                                                        class="fa-solid fa-triangle-exclamation s-tc:warning"
-                                                    ></i>
-                                                `
-                                              : html`
-                                                    <i
-                                                        class="fa-solid fa-xmark s-tc:error"
-                                                    ></i>
-                                                `}
-                                      </p>
-                                  `
-                                : html`
-                                      <div
-                                          class="s-loader:spinner s-mbs:20 s-color:accent"
-                                      ></div>
-                                  `}
+                        <div class="_stat">
+                            <h3 class="_label">
+                                <a href="https://web.dev/cls/" target="_blank">
+                                    CLS
+                                </a>
+                            </h3>
+                            ${this._renderVital({
+                                good: 100,
+                                medium: 250,
+                                value: this._webVitals?.cls?.value,
+                                unit: 's',
+                            })}
                         </div>
 
-                        <div class="ck-stat">
-                            <h3 class="ck-stat_label">FCP</h3>
-                            ${this._webVitals.fcp
-                                ? html`
-                                      <p class="ck-stat_value">
-                                          ${(
-                                              this._webVitals.fcp.value / 1000
-                                          ).toFixed(2)}s
-                                          ${this._webVitals.fcp.value <= 1.8
-                                              ? html`
-                                                    <i
-                                                        class="fa-solid fa-thumbs-up s-tc:success"
-                                                    ></i>
-                                                `
-                                              : this._webVitals.fcp.value <= 3
-                                              ? html`
-                                                    <i
-                                                        class="fa-solid fa-triangle-exclamation s-tc:warning"
-                                                    ></i>
-                                                `
-                                              : html`
-                                                    <i
-                                                        class="fa-solid fa-xmark s-tc:error"
-                                                    ></i>
-                                                `}
-                                      </p>
-                                  `
-                                : html`
-                                      <div
-                                          class="s-loader:spinner s-mbs:20 s-color:accent"
-                                      ></div>
-                                  `}
+                        <div class="_stat">
+                            <h3 class="_label">
+                                <a href="https://web.dev/fcp/" target="_blank">
+                                    FCP
+                                </a>
+                            </h3>
+                            ${this._renderVital({
+                                good: 1800,
+                                medium: 3000,
+                                value: this._webVitals?.fcp?.value,
+                                unit: 's',
+                            })}
                         </div>
 
-                        <div class="ck-stat">
-                            <h3 class="ck-stat_label">TTFB</h3>
-                            ${this._webVitals.ttfb
-                                ? html`
-                                      <p class="ck-stat_value">
-                                          ${(
-                                              this._webVitals.ttfb.value / 1000
-                                          ).toFixed(2)}s
-                                          ${this._webVitals.ttfb.value <= 200
-                                              ? html`
-                                                    <i
-                                                        class="fa-solid fa-thumbs-up s-tc:success"
-                                                    ></i>
-                                                `
-                                              : this._webVitals.ttfb.value <=
-                                                500
-                                              ? html`
-                                                    <i
-                                                        class="fa-solid fa-triangle-exclamation s-tc:warning"
-                                                    ></i>
-                                                `
-                                              : html`
-                                                    <i
-                                                        class="fa-solid fa-xmark s-tc:error"
-                                                    ></i>
-                                                `}
-                                      </p>
-                                  `
-                                : html`
-                                      <div
-                                          class="s-loader:spinner s-mbs:20 s-color:accent"
-                                      ></div>
-                                  `}
+                        <div class="_stat">
+                            <h3 class="_label">
+                                <a href="https://web.dev/ttfb/" target="_blank">
+                                    TTFB
+                                </a>
+                            </h3>
+                            ${this._renderVital({
+                                good: 800,
+                                medium: 1800,
+                                value: this._webVitals?.ttfb?.value,
+                                unit: 's',
+                            })}
                         </div>
                     </div>
                 </div>
@@ -231,7 +189,7 @@ export default class SDashboardWebVitalsComponent extends __SLitComponent {
     }
 }
 
-export function define(props: any = {}, tagName = 's-dashboard-web-vitals') {
+export function __define(props: any = {}, tagName = 's-dashboard-web-vitals') {
     __SLitComponent.setDefaultProps(tagName, props);
     customElements.define(tagName, SDashboardWebVitalsComponent);
 }

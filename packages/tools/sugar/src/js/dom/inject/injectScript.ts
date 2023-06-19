@@ -1,6 +1,6 @@
 // @ts-nocheck
 
-import { __whenScriptLoaded } from '@coffeekraken/sugar/dom';
+import __whenScriptLoaded from '../detect/whenScriptLoaded';
 
 /**
  * @name        injectScript

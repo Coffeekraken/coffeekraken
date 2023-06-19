@@ -1,5 +1,5 @@
 // @ts-nocheck
-import { __closestScrollable } from '@coffeekraken/sugar/dom';
+import __closestScrollable from '../query/closestScrollable';
 
 /**
  * @name      whenNearViewport

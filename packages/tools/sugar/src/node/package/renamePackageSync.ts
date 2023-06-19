@@ -1,8 +1,9 @@
 // @ts-nocheck
 
-import { __readJsonSync, __writeJsonSync } from '@coffeekraken/sugar/fs';
-import { __packageRootDir } from '@coffeekraken/sugar/path';
 import __fs from 'fs';
+import __readJsonSync from '../fs/readJsonSync';
+import __writeJsonSync from '../fs/writeJsonSync';
+import __packageRootDir from '../path/packageRootDir';
 
 /**
  * @name          renamePackageSync

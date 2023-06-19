@@ -1,4 +1,4 @@
-<section class="footer">
+<footer class="footer">
 
     <div class="_main s-container">
 
@@ -101,4 +101,4 @@
 
     </div>
 
-</section>
+</footer>

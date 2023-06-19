@@ -18,8 +18,6 @@ import __SSugarFeatureInterface from './interface/SSugarFeatureInterface';
 
 import { __viewportEvents } from '@coffeekraken/sugar/dom';
 
-import __define from './define';
-
 export interface ISSugarFeatureProps {
     scrolled: boolean;
     scrolledDelta: number;
@@ -248,5 +246,3 @@ export default class SSugarFeature extends __SFeature implements ISFeature {
         __confirmButton();
     }
 }
-
-export { __define as define };

@@ -1,6 +1,6 @@
 // @ts-nocheck
 
-import { __isPortFree } from '@coffeekraken/sugar/network';
+import __isPortFree from '../network/isPortFree';
 
 /**
  * @name            getFreePort

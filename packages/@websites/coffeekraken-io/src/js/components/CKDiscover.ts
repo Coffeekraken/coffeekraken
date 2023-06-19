@@ -138,6 +138,6 @@ export default class CKDiscover extends __SLitComponent {
     }
 }
 
-export function define(props: any = {}, tagName = 'ck-discover') {
+export function __define(props: any = {}, tagName = 'ck-discover') {
     __SLitComponent.define(tagName, CKDiscover, props);
 }

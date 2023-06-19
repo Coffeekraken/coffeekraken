@@ -77,9 +77,9 @@ export default function ({
     display: inline-block;
     pointer-events: none;
     text-indent: -9999em;
-    border-top: 0.3em solid sugar.color(current, --alpha 0.8);
-    border-right: 0.3em solid sugar.color(current, --alpha 0.8);
-    border-bottom: 0.3em solid sugar.color(current, --alpha 0.8);
+    border-top: 0.3em solid currentColor;
+    border-right: 0.3em solid currentColor;
+    border-bottom: 0.3em solid currentColor;
     border-left: 0.3em solid rgba(0,0,0,0);
     border-radius: 50%;
     width: sugar.scalable(1em);

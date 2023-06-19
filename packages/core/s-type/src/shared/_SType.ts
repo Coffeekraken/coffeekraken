@@ -1,6 +1,5 @@
 // @ts-nocheck
 
-import __SInterface from '@coffeekraken/s-interface';
 import { __getExtendsStack } from '@coffeekraken/sugar/class';
 import { __parseHtml } from '@coffeekraken/sugar/console';
 import { __map } from '@coffeekraken/sugar/iterable';
@@ -97,6 +96,22 @@ export interface ISType {
     name: string;
     id: string;
     is: ISTypeIsFn;
+}
+
+function __isNode() {
+    return (
+        typeof process !== 'undefined' &&
+        process.release &&
+        process.release.name === 'node'
+    );
+}
+function __getAvailableInterfaceTypes() {
+    // @ts-ignore
+    if (__isNode()) return global._registeredInterfacesTypes || {};
+    // @ts-ignore
+    else if (window !== undefined)
+        return window._registeredInterfacesTypes || {};
+    else return {};
 }
 
 class SType implements ISType {
@@ -407,8 +422,7 @@ class SType implements ISType {
             this.constructor._registeredTypes[type.toLowerCase()] === undefined
         ) {
             if (settings.interfaces === true) {
-                const availableInterfaceTypes =
-                    __SInterface.getAvailableTypes();
+                const availableInterfaceTypes = __getAvailableInterfaceTypes();
                 if (availableInterfaceTypes[type] !== undefined) {
                     const res = availableInterfaceTypes[type].apply(value, {});
                     return res;

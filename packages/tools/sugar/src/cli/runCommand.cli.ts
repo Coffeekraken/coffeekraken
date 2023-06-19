@@ -1,8 +1,8 @@
 import __SDuration from '@coffeekraken/s-duration';
 import __SGlob from '@coffeekraken/s-glob';
-import { __formatDuration } from '@coffeekraken/sugar/datetime';
 import __path from 'path';
 import __spawn from '../node/process/spawn';
+import __formatDuration from '../shared/datetime/formatDuration';
 import __SRunCommandParamsInterface from './interface/SRunCommandParamsInterface';
 
 export default function runCommand(stringArgs = '') {

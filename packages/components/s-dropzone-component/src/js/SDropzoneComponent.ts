@@ -9,8 +9,6 @@ import __SDropzoneComponentInterface from './interface/SDropzoneComponentInterfa
 // @ts-ignore
 import __css from '../../../../src/css/s-dropzone.css'; // relative to /dist/pkg/esm/js
 
-import __define from './define';
-
 export interface ISDropzoneComponentProps {
     maxFiles: number;
     maxSize: number;
@@ -60,7 +58,7 @@ export interface ISDropzoneComponentUploadResult {
  * npm i @coffeekraken/s-dropzone-component
  *
  * @install           js
- * import { define as __SDropzoneComponentDefine } from '@coffeekraken/s-dropzone-component';
+ * import { __define as __SDropzoneComponentDefine } from '@coffeekraken/s-dropzone-component';
  * __SDropzoneComponentDefine();
  *
  * @example         html        Copy from an input
@@ -445,5 +443,3 @@ export default class SDropzoneComponent extends __SLitComponent {
         `;
     }
 }
-
-export { __define as define };

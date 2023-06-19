@@ -1,7 +1,7 @@
-import { __deepMerge } from '@coffeekraken/sugar/object';
 import { Buffer } from 'buffer';
 import __crypto, { BinaryToTextEncoding } from 'crypto';
 import __fs from 'fs';
+import __deepMerge from '../../shared/object/deepMerge';
 
 /**
  * @name            fileHashSync
@@ -23,7 +23,7 @@ import __fs from 'fs';
  * @setting         {BinaryToTextEncoding}      [digest='base64']       How to digest the hash
  *
  * @snippet         __fileHashSync($1)
- * 
+ *
  * @example         js
  * import { __fileHashSync } from '@coffeekraken/sugar/fs';
  * __fileHashSync('my/cool/folder'); // => YZOrKDx9LCLd8X39PoFTflXGpRU=,

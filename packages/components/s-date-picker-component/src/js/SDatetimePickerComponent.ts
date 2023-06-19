@@ -1,8 +1,8 @@
 // @ts-nocheck
 
 import __SLitComponent from '@coffeekraken/s-lit-component';
-import { __isUserScrolling, __makeFloat } from '@coffeekraken/sugar/dom';
 import type { IFloatApi, IFloatSettings } from '@coffeekraken/sugar/dom';
+import { __isUserScrolling, __makeFloat } from '@coffeekraken/sugar/dom';
 import { __deepMerge } from '@coffeekraken/sugar/object';
 import {
     format as __formatDate,
@@ -78,7 +78,7 @@ export interface ISDatetimePickerComponentProps {
  * npm i @coffeekraken/s-datetime-picker-component
  *
  * @install         js
- * import { define as __SDatetimePickerComponentDefine } from '@coffeekraken/s-datetime-picker-component';
+ * import { __define as __SDatetimePickerComponentDefine } from '@coffeekraken/s-datetime-picker-component';
  * __SDatetimePickerComponentDefine();
  *
  * @example         html            Simple input
@@ -1004,14 +1004,4 @@ export default class SDatetimePickerComponent extends __SLitComponent {
             </div>
         `;
     }
-}
-
-export function define(
-    props: Partial<ISDatetimePickerComponentProps> = {},
-    tagName = 's-datetime-picker',
-) {
-    __SLitComponent.define(tagName, SDatetimePickerComponent, props);
-
-    // __SLitComponent.setDefaultProps(tagName, props);
-    // customElements.define(tagName, SDatetimePicker);
 }

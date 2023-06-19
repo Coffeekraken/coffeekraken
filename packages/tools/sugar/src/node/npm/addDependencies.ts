@@ -1,6 +1,7 @@
-import { __packageJsonSync } from '@coffeekraken/sugar/package';
-import { __packageRootDir } from '@coffeekraken/sugar/path';
+
 import __fs from 'fs';
+import __packageJsonSync from '../package/packageJsonSync';
+import __packageRootDir from '../path/packageRootDir';
 
 /**
  * @name            addDependencies

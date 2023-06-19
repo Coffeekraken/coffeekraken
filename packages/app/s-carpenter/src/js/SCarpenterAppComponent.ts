@@ -21,9 +21,9 @@ import __SCarpenterNode from './SCarpenterNode';
 
 import __layoutNodeHook from './nodesHooks/layout';
 
-import { define as __SFiltrableInputComponent } from '@coffeekraken/s-filtrable-input-component';
-import { define as __sSpecsEditorComponentDefine } from '@coffeekraken/s-specs-editor-component';
-import { define as __sSugarFeatureDefine } from '@coffeekraken/s-sugar-feature';
+import { __define as __SFiltrableInputComponent } from '@coffeekraken/s-filtrable-input-component';
+import { __define as __sSpecsEditorComponentDefine } from '@coffeekraken/s-specs-editor-component';
+import { __define as __sSugarFeatureDefine } from '@coffeekraken/s-sugar-feature';
 
 import { __wait } from '@coffeekraken/sugar/datetime';
 import { __hotkey } from '@coffeekraken/sugar/keyboard';

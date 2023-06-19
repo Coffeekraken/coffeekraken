@@ -1,5 +1,7 @@
-import { __dirname, __readJsonSync } from '@coffeekraken/sugar/fs';
-import { __packageRootDir } from '@coffeekraken/sugar/path';
+import __dirname from '../fs/dirname';
+import __readJsonSync from '../fs/readJsonSync';
+import __packageRootDir from '../path/packageRootDir';
+
 import __fs from 'fs';
 import __path from 'path';
 import __parseSemverString, {

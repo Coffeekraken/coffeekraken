@@ -1,5 +1,5 @@
 // @ts-nocheck
-import { __querySelectorUp } from '@coffeekraken/sugar/dom';
+import __querySelectorUp from '../query/querySelectorUp';
 
 /**
  * @name        closest

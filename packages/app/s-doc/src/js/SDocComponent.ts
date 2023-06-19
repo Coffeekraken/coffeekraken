@@ -15,8 +15,6 @@ import { __replaceChunks } from '@coffeekraken/sugar/string';
 // @ts-ignore
 import __css from '../../../../src/css/s-doc-component.css'; // relative to /dist/pkg/esm/js
 
-import __define from './define';
-
 export interface ISDocComponentStatus {
     loading: boolean;
     fullscreen: boolean;
@@ -48,7 +46,7 @@ export interface ISDocComponentProps {}
  * npm i @coffeekraken/s-doc
  *
  * @install           js
- * import { define as __SDocComponentDefine } from '@coffeekraken/s-doc';
+ * import { __define as __SDocComponentDefine } from '@coffeekraken/s-doc';
  * __SDocComponentDefine();
  *
  * @example         html        Simple documentation explorer
@@ -663,5 +661,3 @@ export default class SDocComponent extends __SLitComponent {
         `;
     }
 }
-
-export { __define as define };

@@ -1,4 +1,4 @@
-import { define as __SClipboardCopy } from '@coffeekraken/s-clipboard-copy-component';
+import { __define as __SClipboardCopy } from '@coffeekraken/s-clipboard-copy-component';
 import __SLitComponent from '@coffeekraken/s-lit-component';
 import { __wait } from '@coffeekraken/sugar/datetime';
 import { __deepMerge } from '@coffeekraken/sugar/object';
@@ -7,8 +7,8 @@ import __langBash from 'highlight.js/lib/languages/bash';
 import __langTwig from 'highlight.js/lib/languages/twig';
 import __langCss from './languages/css';
 // import __langCss from 'highlight.js/lib/languages/css';
-import { __scrollTo } from '@coffeekraken/sugar/dom';
 import type { IScrollToSettings } from '@coffeekraken/sugar/dom';
+import { __scrollTo } from '@coffeekraken/sugar/dom';
 import { __decodeHtmlEntities } from '@coffeekraken/sugar/string';
 import __langJavascript from 'highlight.js/lib/languages/javascript';
 import __langPhp from 'highlight.js/lib/languages/php';
@@ -27,8 +27,6 @@ import __SCodeExampleComponentInterface from './interface/SCodeExampleComponentI
 // // @ts-ignore
 // import __prettierPhp from '@prettier/plugin-php/standalone';
 // import __prettierCss from 'prettier/esm/parser-postcss.mjs';
-
-import __define from './define';
 
 // @ts-ignore
 import __css from '../../../../src/css/s-code-example.css'; // relative to /dist/pkg/esm/js
@@ -79,7 +77,7 @@ export interface ISCodeExampleComponentProps {
  * npm i @coffeekraken/s-code-example-component
  *
  * @install           js
- * import { define as __SCodeExampleComponentDefine } from '@coffeekraken/s-code-example-component';
+ * import { __define as __SCodeExampleComponentDefine } from '@coffeekraken/s-code-example-component';
  * __SCodeExampleComponentDefine();
  *
  * @example         html
@@ -466,5 +464,3 @@ export default class SCodeExample extends __SLitComponent {
         `;
     }
 }
-
-export { __define as define };

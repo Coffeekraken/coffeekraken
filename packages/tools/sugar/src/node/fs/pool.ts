@@ -1,11 +1,11 @@
 import __SFile from '@coffeekraken/s-file';
 import __SPromise from '@coffeekraken/s-promise';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
-import { __matchGlobSync } from '@coffeekraken/sugar/glob';
 import __chokidar from 'chokidar';
 import __fs from 'fs';
 import __expandGlob from '../../shared/glob/expandGlob';
 import __deepMerge from '../../shared/object/deepMerge';
+import __matchGlobSync from '../glob/matchGlobSync';
 
 /**
  * @name                pool

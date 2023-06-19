@@ -1,11 +1,11 @@
 // @ts-nocheck
 
 import __SPromise from '@coffeekraken/s-promise';
-import { __when } from '@coffeekraken/sugar/dom';
-import { __deepMerge } from '@coffeekraken/sugar/object';
-import { __uniqid } from '@coffeekraken/sugar/string';
 import __fastdom from 'fastdom';
+import __deepMerge from '../../../shared/object/deepMerge';
+import __uniqid from '../../string/uniqid';
 import type { TWhenTrigger } from '../detect/when';
+import __when from '../detect/when';
 
 /**
  * @name            querySelectorLive

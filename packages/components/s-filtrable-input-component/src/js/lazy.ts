@@ -1,7 +1,7 @@
 import type ISFiltrableInputComponentProps from './SFiltrableInputComponent';
 import __SFiltrableInputComponent from './SFiltrableInputComponent';
 
-export function define(
+export function __define(
     props: Partial<ISFiltrableInputComponentProps> = {},
     tagName = 's-filtrable-input',
 ) {

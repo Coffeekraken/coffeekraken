@@ -1,6 +1,6 @@
 // @ts-nocheck
 
-import { __getAnimationProperties } from '@coffeekraken/sugar/dom';
+import __getAnimationProperties from './getAnimationProperties';
 
 /**
  * @name      getAnimationsFromElement

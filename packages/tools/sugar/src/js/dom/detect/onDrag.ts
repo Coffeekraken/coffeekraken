@@ -1,4 +1,4 @@
-import { __positionFromEvent } from '@coffeekraken/sugar/dom';
+import __positionFromEvent from '../position/positionFromEvent';
 
 /**
  * @name      onDrag

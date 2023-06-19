@@ -1,6 +1,6 @@
 // @ts-nocheck
 
-import { __addEventListenerOnce } from '@coffeekraken/sugar/dom';
+import __addEventListenerOnce from '../event/addEventListenerOnce';
 
 /**
  * @name      whenAnimationEnd

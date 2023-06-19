@@ -12,9 +12,9 @@
 
     <div class="bkg"></div>
 
-    <div s-page-transition s-refocus class="content">
+    <main s-page-transition s-refocus class="content">
         {!! $body !!}
-    </div>
+    </main>
 
     @include('generic.tools.tools')
 

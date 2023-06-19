@@ -1,6 +1,8 @@
 // @ts-nocheck
 
-import { __querySelectorLive, __scrollTo } from '@coffeekraken/sugar/dom';
+import __querySelectorLive from '../dom/query/querySelectorLive';
+import __scrollTo from '../dom/scroll/scrollTo';
+
 import urlParse from 'url-parse';
 import __deepMerge from '../../shared/object/deepMerge';
 import type { IScrollToSettings } from '../dom/scroll/scrollTo';

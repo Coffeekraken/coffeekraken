@@ -1,6 +1,7 @@
 // @ts-nocheck
 
-import { __scrollTo } from '@coffeekraken/sugar/dom';
+import __scrollTo from './scrollTo';
+
 import __deepMerge from '../../../shared/object/deepMerge';
 import type { IScrollToSettings } from './scrollTo';
 

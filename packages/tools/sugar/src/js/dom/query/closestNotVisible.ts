@@ -1,6 +1,6 @@
 // @ts-nocheck
 
-import { __isVisible } from '@coffeekraken/sugar/dom';
+import __isVisible from '../is/isVisible';
 
 /**
  * @name        closestNotVisible

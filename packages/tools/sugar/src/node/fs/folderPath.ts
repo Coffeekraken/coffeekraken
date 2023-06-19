@@ -1,6 +1,6 @@
 // @ts-nocheck
 
-import { __isPath } from '@coffeekraken/sugar/fs';
+import __isPath from '../../shared/is/isPath';
 
 /**
  * @name                folderPath
@@ -18,7 +18,7 @@ import { __isPath } from '@coffeekraken/sugar/fs';
  * @return          {String|Boolean}                    The folder path or false if not exists
  *
  * @snippet         __folderPath($1)
- * 
+ *
  * @example         js
  * import { __folderPath } from '@coffeekraken/sugar/fs';
  * __folderPath('my/cool/path.js'); // => true
@@ -31,12 +31,14 @@ export interface IFolderPathSettings {
     checkExistence: boolean;
 }
 
-export default function __folderPath(path, settings?: Partial<IFolderPathSettings>) {
-
+export default function __folderPath(
+    path,
+    settings?: Partial<IFolderPathSettings>,
+) {
     const finalSettings: IFolderPathSettings = {
         checkExistence: false,
-        ...settings ?? {}
-    }
+        ...(settings ?? {}),
+    };
 
     if (finalSettings.checkExistence) {
         if (!__isPath(path, true)) return false;

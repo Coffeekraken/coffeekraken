@@ -11,7 +11,6 @@ import __css from '../../../../src/css/s-form-validate.css'; // relative to /dis
 import __SFormValidateFeatureInterface from './interface/SFormValidateFeatureInterface';
 
 import { __format } from '@coffeekraken/sugar/string';
-import __define from './define';
 
 /**
  * @name            SFormValidateFeature
@@ -690,5 +689,3 @@ export default class SFormValidateFeature extends __SFeature {
         }
     }
 }
-
-export { __define as define };

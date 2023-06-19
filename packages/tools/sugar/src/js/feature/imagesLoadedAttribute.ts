@@ -1,7 +1,7 @@
 // @ts-nocheck
 
-import { __whenImageLoaded } from '@coffeekraken/sugar/dom';
 import __fastdom from 'fastdom';
+import __whenImageLoaded from '../dom/detect/whenImageLoaded';
 
 /**
  * @name 		imagesLoadedAttribute

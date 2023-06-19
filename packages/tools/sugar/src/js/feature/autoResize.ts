@@ -1,4 +1,4 @@
-import { __autoResize, __querySelectorLive } from '@coffeekraken/sugar/dom';
+import __autoResize from '../dom/input/autoResize';
 
 /**
  *

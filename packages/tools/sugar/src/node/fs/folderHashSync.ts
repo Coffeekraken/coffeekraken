@@ -1,6 +1,7 @@
-import { __fileHashSync } from '@coffeekraken/sugar/fs';
-import { __isDirectory } from '@coffeekraken/sugar/is';
-import { __deepMerge } from '@coffeekraken/sugar/object';
+import __deepMerge from '../../shared/object/deepMerge';
+import __isDirectory from '../is/isDirectory';
+import __fileHashSync from './fileHashSync';
+
 import { BinaryToTextEncoding } from 'crypto';
 import __fs from 'fs';
 import __sha256 from '../../shared/crypto/sha256';

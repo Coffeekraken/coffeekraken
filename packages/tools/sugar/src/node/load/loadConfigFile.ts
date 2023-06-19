@@ -1,8 +1,8 @@
-import { __readJsonSync } from '@coffeekraken/sugar/fs';
-import { __packageRootDir } from '@coffeekraken/sugar/path';
 import __fs from 'fs';
 import __path from 'path';
 import __yaml from 'yaml';
+import __readJsonSync from '../fs/readJsonSync';
+import __packageRootDir from '../path/packageRootDir';
 
 /**
  * @name            loadConfigFile
@@ -116,8 +116,7 @@ export default async function __loadConfigFile(
             // try to pass result in JSON.parse
             try {
                 str = JSON.parse(str);
-            } catch (e) {
-            }
+            } catch (e) {}
             return str;
             break;
     }

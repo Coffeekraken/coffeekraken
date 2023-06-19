@@ -1,6 +1,6 @@
 // @ts-nocheck
 
-import { __extension } from '@coffeekraken/sugar/fs';
+import __extension from '../fs/extension';
 
 /**
  * @name                       filename

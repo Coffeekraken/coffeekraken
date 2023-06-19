@@ -1,7 +1,8 @@
-import { __ensureDirSync, __folderPath } from '@coffeekraken/sugar/fs';
-import { __packageRootDir } from '@coffeekraken/sugar/path';
 import __childProcess from 'child_process';
 import __fs from 'fs';
+import __ensureDirSync from '../fs/ensureDirSync';
+import __folderPath from '../fs/folderPath';
+import __packageRootDir from '../path/packageRootDir';
 
 /**
  * @name            globalNodeModulesPath

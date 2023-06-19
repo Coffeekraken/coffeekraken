@@ -7,8 +7,6 @@ import __SGoogleMapComponentInterface from './interface/SGoogleMapComponentInter
 // @ts-ignore
 import __css from '../../../../src/css/s-google-map.css'; // relative to /dist/pkg/esm/js
 
-import __define from './define';
-
 export interface ISGoogleMapComponentMarker {
     lat: number;
     lng: number;
@@ -68,7 +66,7 @@ export interface ISGoogleMapComponentProps {
  * npm i @coffeekraken/s-google-map-component
  *
  * @install           js
- * import { define as __SGoogleMapComponentDefine } from '@coffeekraken/s-google-map-component';
+ * import { __define as __SGoogleMapComponentDefine } from '@coffeekraken/s-google-map-component';
  * __SGoogleMapComponentDefine();
  *
  * @example         html        Simple google map
@@ -297,5 +295,3 @@ export default class SGoogleMapComponent extends __SLitComponent {
         return html``;
     }
 }
-
-export { __define as define };

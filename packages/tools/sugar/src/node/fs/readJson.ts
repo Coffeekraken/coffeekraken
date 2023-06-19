@@ -1,5 +1,5 @@
-import { __readJsonSync } from '@coffeekraken/sugar/fs';
 import __fs from 'fs';
+import __readJsonSync from './readJsonSync';
 
 /**
  * @name            readJson
@@ -16,7 +16,7 @@ import __fs from 'fs';
  *
  * @snippet         __readJson($1)
  * await __readJson($1)
- * 
+ *
  * @example         js
  * import { __readJson } from '@coffeekraken/sugar/fs';
  * await __readJson('my-cool-json/file.json');

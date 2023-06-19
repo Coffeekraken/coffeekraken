@@ -1,7 +1,8 @@
 // @ts-nocheck
 
-import { __handleErrors } from '@coffeekraken/sugar/error';
-import { __exitCleanup, __onProcessExit } from '@coffeekraken/sugar/process';
+import __handleErrors from '../error/handleErrors';
+import __exitCleanup from './exitCleanup';
+import __onProcessExit from './onProcessExit';
 
 /**
  * @name                    index
@@ -13,11 +14,11 @@ import { __exitCleanup, __onProcessExit } from '@coffeekraken/sugar/process';
  * - Process exit cleanup
  *
  * @snippet         __processSugar()
- * 
+ *
  * @example         js
  * import { __processSugar } from '@coffeekraken/sugar/process';
  * __processSugar();
- * 
+ *
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */

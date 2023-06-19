@@ -1,6 +1,6 @@
 // @ts-nocheck
 
-import { __SSvgFilter } from '@coffeekraken/sugar/filter';
+import __SSvgFilter from './SSvgFilter';
 
 /**
  * @name 		        SGooeySvgFilter

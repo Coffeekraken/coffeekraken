@@ -1,11 +1,11 @@
-import { __querySelectorLive } from '@coffeekraken/sugar/dom';
 import type { TWhenTrigger } from '@coffeekraken/sugar/dom';
+import { __querySelectorLive } from '@coffeekraken/sugar/dom';
 
 interface ILazyDefineSettings {
     when: TWhenTrigger;
 }
 
-export function define(
+export function __define(
     props,
     name = 's-page-transition',
     settings: Partial<ILazyDefineSettings> = {},

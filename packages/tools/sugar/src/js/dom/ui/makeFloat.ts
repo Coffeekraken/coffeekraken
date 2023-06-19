@@ -9,7 +9,7 @@ import {
     shift,
 } from '@floating-ui/dom';
 
-import { __whenRemoved } from '@coffeekraken/sugar/dom';
+import __whenRemoved from '../detect/whenRemoved';
 
 /**
  * @name        makeFloat

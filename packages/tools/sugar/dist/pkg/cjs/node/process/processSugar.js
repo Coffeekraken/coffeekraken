@@ -1,8 +1,12 @@
 "use strict";
 // @ts-nocheck
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-const error_1 = require("@coffeekraken/sugar/error");
-const process_1 = require("@coffeekraken/sugar/process");
+const handleErrors_1 = __importDefault(require("../error/handleErrors"));
+const exitCleanup_1 = __importDefault(require("./exitCleanup"));
+const onProcessExit_1 = __importDefault(require("./onProcessExit"));
 /**
  * @name                    index
  * @namespace           node
@@ -23,11 +27,11 @@ const process_1 = require("@coffeekraken/sugar/process");
  */
 function __processSugar() {
     // handle the errors
-    (0, error_1.__handleErrors)();
+    (0, handleErrors_1.default)();
     // exit cleanup
-    (0, process_1.__onProcessExit)(() => {
-        return process_1.__exitCleanup;
+    (0, onProcessExit_1.default)(() => {
+        return exitCleanup_1.default;
     });
 }
 exports.default = __processSugar;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOztBQUVkLHFEQUEyRDtBQUMzRCx5REFBNkU7QUFFN0U7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBaUJHO0FBQ0gsU0FBd0IsY0FBYztJQUNsQyxvQkFBb0I7SUFDcEIsSUFBQSxzQkFBYyxHQUFFLENBQUM7SUFFakIsZUFBZTtJQUNmLElBQUEseUJBQWUsRUFBQyxHQUFHLEVBQUU7UUFDakIsT0FBTyx1QkFBYSxDQUFDO0lBQ3pCLENBQUMsQ0FBQyxDQUFDO0FBQ1AsQ0FBQztBQVJELGlDQVFDIn0=
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOzs7OztBQUVkLHlFQUFtRDtBQUNuRCxnRUFBMEM7QUFDMUMsb0VBQThDO0FBRTlDOzs7Ozs7Ozs7Ozs7Ozs7OztHQWlCRztBQUNILFNBQXdCLGNBQWM7SUFDbEMsb0JBQW9CO0lBQ3BCLElBQUEsc0JBQWMsR0FBRSxDQUFDO0lBRWpCLGVBQWU7SUFDZixJQUFBLHVCQUFlLEVBQUMsR0FBRyxFQUFFO1FBQ2pCLE9BQU8scUJBQWEsQ0FBQztJQUN6QixDQUFDLENBQUMsQ0FBQztBQUNQLENBQUM7QUFSRCxpQ0FRQyJ9

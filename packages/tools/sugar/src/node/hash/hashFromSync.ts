@@ -1,7 +1,10 @@
-import { __fileHashSync, __folderHashSync } from '@coffeekraken/sugar/fs';
-import { __isDirectory, __isGlob } from '@coffeekraken/sugar/is';
-import { __packagePathSync } from '@coffeekraken/sugar/npm';
-import { __objectHash } from '@coffeekraken/sugar/object';
+import __isGlob from '../../shared/is/isGlob';
+import __objectHash from '../../shared/object/objectHash';
+import __fileHashSync from '../fs/fileHashSync';
+import __folderHashSync from '../fs/folderHashSync';
+import __isDirectory from '../is/isDirectory';
+import __packagePathSync from '../npm/packagePathSync';
+
 import __crypto, { BinaryToTextEncoding } from 'crypto';
 import __fs from 'fs';
 

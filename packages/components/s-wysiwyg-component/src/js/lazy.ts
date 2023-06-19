@@ -1,12 +1,12 @@
 import type { ISLitComponentDefineSettings } from '@coffeekraken/s-lit-component';
-import { __querySelectorLive } from '@coffeekraken/sugar/dom';
 import type { TWhenTrigger } from '@coffeekraken/sugar/dom';
+import { __querySelectorLive } from '@coffeekraken/sugar/dom';
 
 interface ILazyDefineSettings extends ISLitComponentDefineSettings {
     when: TWhenTrigger;
 }
 
-export function define(
+export function __define(
     props,
     tagName = 's-wysiwyg',
     settings: Partial<ILazyDefineSettings> = {},

@@ -1,14 +1,13 @@
 // @ts-nocheck
 
-import __replaceTags from '../html/replaceTags';
+import __replaceTags from '../../shared/html/replaceTags';
 
-import { __tagsMap } from '@coffeekraken/sugar/console';
+import __tagsMap from './tagsMap';
 
 /**
  * @name                                parseHtml
- * @namespace            shared.console
+ * @namespace            node.console
  * @type                                Function
- * @platform          js
  * @platform          node
  * @status          beta
  *
@@ -21,7 +20,7 @@ import { __tagsMap } from '@coffeekraken/sugar/console';
  * @todo        doc
  *
  * @snippet         __parseHtml($1)
- * 
+ *
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */

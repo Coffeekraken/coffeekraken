@@ -3,8 +3,6 @@ import __SFeature from '@coffeekraken/s-feature';
 import { __deepMerge } from '@coffeekraken/sugar/object';
 import __SLazyFeatureInterface from './interface/SLazyFeatureInterface';
 
-import __define from './define';
-
 // @ts-ignore
 import __css from '../../../../src/css/s-lazy-feature.css'; // relative to /dist/pkg/esm/js
 
@@ -28,16 +26,16 @@ export interface ISLazyFeatureProps {}
  * @support          edge
  *
  * @import          import { define as __SLazyFeatureDefine } from '@coffeekraken/s-lazy-feature';
- * 
+ *
  * @snippet         __SLazyFeatureDefine($1)
- * 
+ *
  * @install         js
  * import { define as __SLazyFeatureDefine } from '@coffeekraken/s-lazy-feature';
  * __SLazyFeatureDefine();
- * 
+ *
  * @install         bash
  * npm i @coffeekraken/s-form-validate-feature
- * 
+ *
  * @example         html        Template        Simply add the "s-lazy" on your template tag and template content will be appended right after when it comes in the viewport
  * <template s-lazy>
  *      <!-- my normal code... -->
@@ -81,5 +79,3 @@ export default class SLazyFeature extends __SFeature implements ISFeature {
         });
     }
 }
-
-export { __define as define };

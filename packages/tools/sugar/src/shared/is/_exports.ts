@@ -32,7 +32,6 @@ import __isNode from './isNode';
 import __isNumber from './isNumber';
 import __isObject from './isObject';
 import __isOdd from './isOdd';
-import __isOfType from './isOfType';
 import __isOsx from './isOsx';
 import __isPath from './isPath';
 import __isPlainObject from './isPlainObject';
@@ -81,7 +80,6 @@ export {
     __isNumber,
     __isObject,
     __isOdd,
-    __isOfType,
     __isOsx,
     __isPath,
     __isPlainObject,

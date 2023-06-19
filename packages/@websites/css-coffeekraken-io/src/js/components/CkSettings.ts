@@ -2,7 +2,7 @@
 
 import __SFront from '@coffeekraken/s-front';
 import __SLitComponent, { html } from '@coffeekraken/s-lit-component';
-import { define as __SThemeSwitcherComponentDefine } from '@coffeekraken/s-theme-switcher-component';
+import { __define as __SThemeSwitcherComponentDefine } from '@coffeekraken/s-theme-switcher-component';
 
 __SThemeSwitcherComponentDefine();
 
@@ -294,7 +294,7 @@ export default class CkSettings extends __SLitComponent {
     }
 }
 
-export function define(props: any = {}, tagName = 'ck-settings') {
+export function __define(props: any = {}, tagName = 'ck-settings') {
     __SLitComponent.define(tagName, CkSettings, {
         id: 'ck-settings',
         ...props,

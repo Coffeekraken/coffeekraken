@@ -1,9 +1,7 @@
 // @ts-nocheck
 
-import {
-    __styleObjectToString,
-    __styleStringToObject
-} from '@coffeekraken/sugar/css';
+import __styleObjectToString from '../../../shared/css/transform/styleObjectToString';
+import __styleStringToObject from '../../../shared/css/transform/styleStringToObject';
 
 /**
  * @name      style

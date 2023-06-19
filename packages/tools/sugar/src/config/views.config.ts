@@ -1,5 +1,5 @@
-import { __packageRootDir } from '@coffeekraken/sugar/path';
 import __path from 'path';
+import __packageRootDir from '../node/path/packageRootDir';
 
 export default function ({ env, config }) {
     if (env.platform !== 'node') return;

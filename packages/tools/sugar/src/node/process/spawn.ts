@@ -4,9 +4,9 @@ import __SDuration from '@coffeekraken/s-duration';
 import __SEventEmitter from '@coffeekraken/s-event-emitter';
 import type { ISPromise } from '@coffeekraken/s-promise';
 import __SPromise from '@coffeekraken/s-promise';
-import { __onProcessExit } from '@coffeekraken/sugar/process';
 import { spawn as __spawn, SpawnOptions } from 'child_process';
 import __deepMerge from '../../shared/object/deepMerge';
+import __onProcessExit from './onProcessExit';
 
 /**
  * @name            spawn

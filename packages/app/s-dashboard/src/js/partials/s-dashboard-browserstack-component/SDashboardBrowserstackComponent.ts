@@ -214,7 +214,10 @@ export default class SDashboardBrowserstackComponent extends __SLitComponent {
     }
 }
 
-export function define(props: any = {}, tagName = 's-dashboard-browserstack') {
+export function __define(
+    props: any = {},
+    tagName = 's-dashboard-browserstack',
+) {
     __SLitComponent.setDefaultProps(tagName, props);
     customElements.define(tagName, SDashboardBrowserstackComponent);
 }

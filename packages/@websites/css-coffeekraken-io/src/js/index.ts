@@ -2,10 +2,10 @@ import __SPackEssentials from '@coffeekraken/s-pack-essentials';
 
 import __SFront from '@coffeekraken/s-front';
 
-import { define as __CKMenuDefine } from './components/CKMenu';
+import { __define as __CKMenuDefine } from './components/CKMenu';
 
-import { define as __SCodeExampleComponentDefine } from '@coffeekraken/s-code-example-component';
-import { define as __SDocComponentDefine } from '@coffeekraken/s-doc';
+import { __define as __SCodeExampleComponentDefine } from '@coffeekraken/s-code-example-component';
+import { __define as __SDocComponentDefine } from '@coffeekraken/s-doc';
 import __SFeature from '@coffeekraken/s-feature';
 import __SLitComponent from '@coffeekraken/s-lit-component';
 

@@ -1,6 +1,8 @@
 // @ts-nocheck
 
-import { __ensureDirSync, __folderPath } from '@coffeekraken/sugar/fs';
+import __ensureDirSync from './ensureDirSync';
+import __folderPath from './folderPath';
+
 import __fs from 'fs';
 import __stringify from '../../shared/json/stringify';
 
@@ -21,7 +23,7 @@ import __stringify from '../../shared/json/stringify';
  *
  * @snippet         __writeJson($1, $2)
  * await _writeJson($1, $2)
- * 
+ *
  * @example       js
  * import { __writeJson } from '@coffeekraken/sugar/fs';
  * __writeJson('my/cool/file.json', { hello: 'world' }).then(() => {

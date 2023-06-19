@@ -88,7 +88,7 @@ export default class CKWelcomeRatings extends __SLitComponent {
     }
 }
 
-export function define(props: any = {}, tagName = 'ck-welcome-ratings') {
+export function __define(props: any = {}, tagName = 'ck-welcome-ratings') {
     __SLitComponent.setDefaultProps(tagName, props);
     customElements.define(tagName, CKWelcomeRatings);
 }

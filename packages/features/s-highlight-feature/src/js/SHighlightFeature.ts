@@ -2,8 +2,6 @@ import __SFeature from '@coffeekraken/s-feature';
 import { __deepMerge } from '@coffeekraken/sugar/object';
 import __SHighlightFeatureInterface from './interface/SHighlightFeatureInterface';
 
-import __define from './define';
-
 // @ts-ignore
 import __css from '../../../../src/css/s-highlight-feature.css'; // relative to /dist/pkg/esm/js
 
@@ -25,16 +23,16 @@ import __css from '../../../../src/css/s-highlight-feature.css'; // relative to 
  * @support          edge
  *
  * @import          import { define as __SHighlightFeatureDefine } from '@coffeekraken/s-highlight-feature';
- * 
+ *
  * @snippet         __SHighlightFeatureDefine($1)
- * 
+ *
  * @install         js
  * import { define as __SHighlightFeatureDefine } from '@coffeekraken/s-highlight-feature';
  * __SHighlightFeatureDefine();
- * 
+ *
  * @install         bash
  * npm i @coffeekraken/s-form-validate-feature
- * 
+ *
  * @example         html            Highlight
  * <div class="s-radius s-bg:main s-depth s-mbe:30" style="height:100px" s-highlight>
  * </div>
@@ -119,5 +117,3 @@ export default class SHighlightFeature extends __SFeature {
         });
     }
 }
-
-export { __define as define };

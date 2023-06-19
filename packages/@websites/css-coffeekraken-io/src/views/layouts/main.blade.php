@@ -12,9 +12,20 @@
 
     <div class="bkg"></div>
 
-    <div s-page-transition s-refocus class="content">
+    <main s-page-transition s-refocus class="content">
+
+        <img src="https://picsum.photos/200/300" />
+
+        <video id='video' controls="controls" autoplay muted width="600" poster="https://assets.codepen.io/32795/poster.png">
+            <source id='mp4' src="http://media.w3.org/2010/05/sintel/trailer.mp4" type='video/mp4' />
+            <source id='webm' src="http://media.w3.org/2010/05/sintel/trailer.webm" type='video/webm' />
+            <source id='ogv' src="http://media.w3.org/2010/05/sintel/trailer.ogv" type='video/ogg' />
+            <p>Your user agent does not support the HTML5 Video element.</p>
+        </video>
+
+
         {!! $body !!}
-    </div>
+    </main>
 
     @include('generic.tools.tools')
 

@@ -1,7 +1,6 @@
 import __SInterface from '@coffeekraken/s-interface';
 import __SPromise from '@coffeekraken/s-promise';
-// import __SIpc from '../ipc/SIpc';
-import { __isChildProcess } from '@coffeekraken/sugar/is';
+import __isChildProcess from '../../shared/is/isChildProcess';
 
 /**
  * @name                hotkey

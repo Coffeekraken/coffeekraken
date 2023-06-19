@@ -1,7 +1,7 @@
 // @ts-nocheck
 
-import { __querySelectorLive } from '@coffeekraken/sugar/dom';
 import __fastdom from 'fastdom';
+import __querySelectorLive from '../dom/query/querySelectorLive';
 
 /**
  * @name 		handleInputAttributes

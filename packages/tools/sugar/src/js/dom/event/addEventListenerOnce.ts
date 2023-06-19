@@ -1,7 +1,7 @@
 // @ts-nocheck
 
 import __SPromise from '@coffeekraken/s-promise';
-import { __addEventListener } from '@coffeekraken/sugar/dom';
+import __addEventListener from './addEventListener';
 
 /**
  * @name        addEventListenerOnce

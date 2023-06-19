@@ -1,7 +1,7 @@
 import __SPromise from '@coffeekraken/s-promise';
-import { __dependencyTree } from '@coffeekraken/sugar/module';
 import __deepMap from '../../shared/object/deepMap';
 import type { IDependencyTreeExtendedSettings } from './dependencyTree';
+import __dependencyTree from './dependencyTree';
 
 /**
  * @name                dependencyList
@@ -19,7 +19,7 @@ import type { IDependencyTreeExtendedSettings } from './dependencyTree';
  *
  * @snippet         __dependencyList($1)
  * await __dependencyList($1)
- * 
+ *
  * @example         js
  * import { __dependencyList } from '@coffeekraken/sugar/module';
  * await __dependencyList('/something/cool.js', {

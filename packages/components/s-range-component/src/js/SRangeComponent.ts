@@ -1,7 +1,7 @@
 // @ts-nocheck
 
 import __SLitComponent, {
-    ISLitComponentDefaultProps
+    ISLitComponentDefaultProps,
 } from '@coffeekraken/s-lit-component';
 import { __deepMerge } from '@coffeekraken/sugar/object';
 import { css, html, unsafeCSS } from 'lit';
@@ -34,14 +34,14 @@ import __css from '../../../../src/css/s-range.css'; // relative to /dist/pkg/es
  * @support         edge
  *
  * @import          import { define as __SRangeComponentDefine } from '@coffeekraken/s-range-component';
- * 
+ *
  * @snippet         __SRangeComponentDefine($1)
- * 
+ *
  * @install          bash
  * npm i @coffeekraken/s-range-component
  *
  * @install         js
- * import { define as __SRangeComponentDefine } from '@coffeekraken/s-range-component';
+ * import { __define as __SRangeComponentDefine } from '@coffeekraken/s-range-component';
  * __SRangeComponentDefine();
  *
  * @example         html        Simple range
@@ -187,33 +187,11 @@ export default class SRangeComponent extends __SLitComponent {
                 ${this.props.tooltip
                     ? html`
                           <div
-                              class="${this.utils.cls(
-                                  '_tooltip',
-                                  's-tooltip',
-                              )}"
+                              class="${this.utils.cls('_tooltip', 's-tooltip')}"
                           ></div>
                       `
                     : ''}
             </div>
         `;
     }
-}
-
-/**
- * @name            webcomponent
- * @type            Function
- *
- * This function allows you to define (register) your webcomponent with some default
- * props if needed.
- *
- * @param           {any}           [props={}]              Some default props you want to set for your webcomponent
- *
- * @since       2.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
-export function define(
-    props: Partial<ISRangeComponentProps> = {},
-    tagName = 's-range',
-) {
-    __SLitComponent.define(tagName, SRangeComponent, props);
 }

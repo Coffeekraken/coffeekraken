@@ -1,6 +1,6 @@
-import { __replacePackageJsonTokens } from '@coffeekraken/sugar/package';
-import { __replacePathTokens } from '@coffeekraken/sugar/path';
 import __sharedReplaceTokens from '../../shared/token/replaceTokens';
+import __replacePackageJsonTokens from '../package/replacePackageJsonTokens';
+import __replacePathTokens from '../path/replacePathTokens';
 
 /**
  * @name            replaceTokens
@@ -35,12 +35,12 @@ import __sharedReplaceTokens from '../../shared/token/replaceTokens';
  * - `%distRootDir`: The absolute path to the "dist" directory
  * - `%distViewsDir`: The absolute path to the "views" directory in the "dist" one
  * - `%packageJson.property...`: Any value from the package.json file
- * 
+ *
  * @param       {String}            string          The string you want to process
  * @return      {String}                            The processed string
  *
  * @snippet         _replaceTokens($1)
- * 
+ *
  * @example         js
  * import { __replaceTokens } from '@coffeekraken/sugar/string';
  * __replaceTokens('Hello %packageJson.name, hope you are doing well (%packageRootDir)');

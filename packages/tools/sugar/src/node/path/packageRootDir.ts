@@ -1,7 +1,8 @@
 // @ts-nocheck
 
-import { __isFile } from '@coffeekraken/sugar/is';
-import { __objectHash } from '@coffeekraken/sugar/object';
+import __objectHash from '../../shared/object/objectHash';
+import __isFile from '../is/isFile';
+
 import __findPkgJson from 'find-package-json';
 
 /**

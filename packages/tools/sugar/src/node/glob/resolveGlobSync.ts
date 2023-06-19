@@ -1,7 +1,9 @@
 // @ts-nocheck
 
 import __SFile from '@coffeekraken/s-file';
-import { __excludedGlobs } from '@coffeekraken/sugar/glob';
+
+import __excludedGlobs from './excludedGlobs';
+
 import __fs from 'fs';
 import __glob from 'glob';
 import __path from 'path';

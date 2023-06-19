@@ -219,7 +219,7 @@ export default class CKVersionSelector extends __SLitComponent {
     }
 }
 
-export function define(props: any = {}, tagName = 'ck-version-selector') {
+export function __define(props: any = {}, tagName = 'ck-version-selector') {
     __SLitComponent.define(tagName, CKVersionSelector, {
         ...props,
         id: 'version-selector',

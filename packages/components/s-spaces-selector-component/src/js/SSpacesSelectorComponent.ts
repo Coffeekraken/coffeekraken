@@ -8,8 +8,6 @@ import __SSpacesSelectorComponentInterface from './interface/SSpacesSelectorComp
 // @ts-ignore
 import __css from '../../../../src/css/s-spaces-selector.css'; // relative to /dist/pkg/esm/js
 
-import __define from './define';
-
 export interface ISSpacesSelectorComponentProps {}
 
 /**
@@ -39,7 +37,7 @@ export interface ISSpacesSelectorComponentProps {}
  * npm i @coffeekraken/s-spaces-selector-component
  *
  * @install           js
- * import { define as __SSpacesSelectorComponentDefine } from '@coffeekraken/s-spaces-selector-component';
+ * import { __define as __SSpacesSelectorComponentDefine } from '@coffeekraken/s-spaces-selector-component';
  * __SSpacesSelectorComponentDefine();
  *
  * @example         html        Simple selector
@@ -203,5 +201,3 @@ export default class SSpacesSelectorComponent extends __SLitComponent {
         `;
     }
 }
-
-export { __define as define };

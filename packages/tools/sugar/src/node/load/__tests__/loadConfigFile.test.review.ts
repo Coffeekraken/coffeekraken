@@ -1,4 +1,5 @@
-import { __loadConfigFile } from '@coffeekraken/sugar/load';
+
+import __loadConfigFile from '../loadConfigFile';
 
 describe('sugar.node.config.loadConfigFile', () => {
     it('Should load a simple js file correctly', async () => {

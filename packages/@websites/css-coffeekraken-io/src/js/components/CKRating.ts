@@ -286,6 +286,6 @@ export default class CKRatings extends __SLitComponent {
     }
 }
 
-export function define(props: any = {}, tagName = 'ck-ratings') {
+export function __define(props: any = {}, tagName = 'ck-ratings') {
     __SLitComponent.define(tagName, CKRatings, props);
 }

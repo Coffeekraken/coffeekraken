@@ -1,15 +1,130 @@
 .s-dashboard-web-vitals {
     ._stats {
-        display: flex;
-        flex-wrap: wrap;
-        row-gap: sugar.margin(20);
-
-        > * {
-            width: 33.3%;
-        }
+        position: relative;
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: sugar.margin(40);
 
         i {
             font-size: 0.5em;
+        }
+    }
+    ._stat {
+        position: relative;
+    }
+
+    ._value {
+        position: absolute;
+        top: 0;
+        right: 0;
+
+        &:has(+ .good) {
+            color: sugar.color(success, text);
+        }
+        &:has(+ .medium) {
+            color: sugar.color(warning, text);
+        }
+        &:has(+ .poor) {
+            color: sugar.color(error, text);
+        }
+    }
+
+    ._label {
+        color: sugar.color(accent);
+    }
+
+    ._vital {
+        position: relative;
+        padding-block-start: 25px;
+
+        &:not(:hover, :focus, :focus-within) {
+            ._good {
+                background: sugar.color(
+                    main,
+                    foreground,
+                    --alpha 0.5
+                ) !important;
+            }
+            ._medium {
+                background: sugar.color(
+                    main,
+                    foreground,
+                    --alpha 0.35
+                ) !important;
+            }
+            ._poor {
+                background: sugar.color(
+                    main,
+                    foreground,
+                    --alpha 0.2
+                ) !important;
+            }
+        }
+
+        &.loading ._indicator:after {
+            display: none !important;
+        }
+    }
+
+    .s-loader {
+    }
+
+    ._indicator {
+        position: absolute;
+        bottom: 19px;
+        left: var(--percent);
+        font-weight: bold;
+        padding-block: 2px;
+        user-select: none;
+
+        &:after {
+            content: ' ';
+            display: block;
+            position: absolute;
+            border-left: 1px solid sugar.color(main, foreground);
+            height: 15px;
+            opacity: 0.5;
+        }
+    }
+
+    ._scores {
+        display: flex;
+        gap: 1px;
+
+        > * {
+            flex-grow: 1;
+            height: 4px;
+            border-radius: 99px;
+        }
+    }
+
+    ._good,
+    ._medium,
+    ._poor {
+        @sugar.transition fast;
+    }
+    ._good {
+        background: sugar.color(main, foreground, --alpha 0.5);
+    }
+    ._medium {
+        background: sugar.color(main, foreground, --alpha 0.35);
+    }
+    ._poor {
+        background: sugar.color(main, foreground, --alpha 0.2);
+    }
+    ._vital.good {
+        ._good {
+            background: sugar.color(success, text) !important;
+        }
+    }
+    ._vital.medium {
+        ._medium {
+            background: sugar.color(warning, text) !important;
+        }
+    }
+    ._vital.poor {
+        ._poor {
+            background: sugar.color(error, text) !important;
         }
     }
 }

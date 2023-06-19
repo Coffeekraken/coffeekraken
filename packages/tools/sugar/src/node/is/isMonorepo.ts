@@ -1,4 +1,5 @@
-import { __packageJsonSync } from '@coffeekraken/sugar/package';
+
+import __packageJsonSync from '../package/packageJsonSync';
 
 /**
  * @name            isMonorepo

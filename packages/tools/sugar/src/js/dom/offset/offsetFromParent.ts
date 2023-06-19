@@ -1,6 +1,7 @@
 // @ts-nocheck
 
-import { __offsetFromViewport } from '@coffeekraken/sugar/dom';
+import __offsetFromViewport from './offsetFromViewport';
+
 /**
  * @name      offsetFromParent
  * @namespace            js.dom.offset

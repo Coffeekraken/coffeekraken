@@ -2,8 +2,6 @@ import __SLitComponent from '@coffeekraken/s-lit-component';
 import { css, html, unsafeCSS } from 'lit';
 import __SRatingComponentInterface from './interface/SRatingComponentInterface';
 
-import __define from './define';
-
 // @ts-ignore
 import __css from '../../../../src/css/s-rating.css'; // relative to /dist/pkg/esm/js
 
@@ -38,14 +36,14 @@ export interface ISRatingComponentProps {
  * @support         edge
  *
  * @import          import { define as __SRatingComponentDefine } from '@coffeekraken/s-rating-component';
- * 
+ *
  * @snippet         __SRatingComponentDefine($1)
- * 
+ *
  * @install           shell
  * npm i @coffeekraken/s-rating-component
  *
  * @install           js
- * import { define as __SRatingComponentDefine } from '@coffeekraken/s-rating-component';
+ * import { __define as __SRatingComponentDefine } from '@coffeekraken/s-rating-component';
  * __SRatingComponentDefine();
  *
  * @example         html        Simple rating
@@ -153,5 +151,3 @@ export default class SRatingComponent extends __SLitComponent {
         `;
     }
 }
-
-export { __define as define };

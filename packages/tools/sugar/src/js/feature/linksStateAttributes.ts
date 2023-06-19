@@ -1,8 +1,8 @@
 // @ts-nocheck
 
-import { __querySelectorLive } from '@coffeekraken/sugar/dom';
 import __fastdom from 'fastdom';
-import deepMerge from '../../shared/object/deepMerge';
+import __deepMerge from '../../shared/object/deepMerge';
+import __querySelectorLive from '../dom/query/querySelectorLive';
 
 /**
  * @name 		linksStateAttributes
@@ -97,7 +97,7 @@ export interface IlinksStateAttributesSettings {}
 export default function __linksStateAttributes(
     settings: Partial<IlinksStateAttributesSettings> = {},
 ): void {
-    settings = deepMerge({}, settings);
+    settings = __deepMerge({}, settings);
 
     function handleLink($linkElm) {
         // protect for async removed links

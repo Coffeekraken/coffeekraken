@@ -1,5 +1,7 @@
-import { __packageRootDir } from '@coffeekraken/sugar/path';
+
 import __resolvePackagePath from 'resolve-package-path';
+
+import __packageRootDir from '../path/packageRootDir';
 
 /**
  * @name                resolvePackagePath

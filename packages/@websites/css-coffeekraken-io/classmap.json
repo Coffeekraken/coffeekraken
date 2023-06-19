@@ -85,5 +85,18 @@
     "s-doc_config-description": "sbv",
     "s-doc_param-description": "sbw",
     "--s-color-main-spin": "sbx",
-    "s-dashboard-iframe": "sby"
+    "s-dashboard-iframe": "sby",
+    "--max-lines": "sbz",
+    "--paddingBlock": "sbA",
+    "s-rhythm--vertical": "sbB",
+    "hljs": "sbC",
+    "s-code-example_slot": "sbD",
+    "s-code-example_nav": "sbE",
+    "s-code-example_tabs": "sbF",
+    "s-code-example_tab": "sbG",
+    "s-code-example_content": "sbH",
+    "s-code-example--more": "sbI",
+    "s-code-example_more-bar": "sbJ",
+    "s-code-example_code": "sbK",
+    "s-code-example_toolbar": "sbL"
 }

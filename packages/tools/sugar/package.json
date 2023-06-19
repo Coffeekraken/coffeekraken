@@ -222,6 +222,10 @@
             "require": "./dist/pkg/cjs/shared/extension/_exports.js",
             "import": "./dist/pkg/esm/shared/extension/_exports.js"
         },
+        "./format": {
+            "require": "./dist/pkg/cjs/shared/format/_exports.js",
+            "import": "./dist/pkg/esm/shared/format/_exports.js"
+        },
         "./function": {
             "require": "./dist/pkg/cjs/shared/function/_exports.js",
             "import": "./dist/pkg/esm/shared/function/_exports.js"

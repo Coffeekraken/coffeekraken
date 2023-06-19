@@ -12,8 +12,6 @@ import { __wait } from '@coffeekraken/sugar/datetime';
 
 import { __getCookie } from '@coffeekraken/sugar/cookie';
 
-import __define from './define';
-
 export interface ISActivateFeatureProps {
     href: string;
     group: string;
@@ -561,5 +559,3 @@ export default class SActivateFeature extends __SFeature {
         }
     }
 }
-
-export { __define as define };

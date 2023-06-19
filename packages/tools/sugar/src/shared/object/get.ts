@@ -1,6 +1,6 @@
 // @ts-nocheck
 
-import { __unique } from '@coffeekraken/sugar/array';
+import __unique from '../array/unique';
 import __unquote from '../string/unquote';
 
 /**

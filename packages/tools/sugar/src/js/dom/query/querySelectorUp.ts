@@ -1,5 +1,5 @@
 // @ts-nocheck
-import { __matches } from '@coffeekraken/sugar/dom';
+import __matches from './matches';
 
 /**
  * @name        querySelectorUp

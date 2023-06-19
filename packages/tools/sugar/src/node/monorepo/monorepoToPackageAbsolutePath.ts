@@ -1,4 +1,5 @@
-import { __packageRootDir } from '@coffeekraken/sugar/path';
+
+import __packageRootDir from '../path/packageRootDir';
 
 /**
  * @name            monorepoToPackageAbsolutePath

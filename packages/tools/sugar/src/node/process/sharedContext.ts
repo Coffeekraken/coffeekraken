@@ -1,8 +1,9 @@
 // @ts-nocheck
-import { __readJsonSync, __writeJsonSync } from '@coffeekraken/sugar/fs';
-import { __isChildProcess } from '@coffeekraken/sugar/is';
-import { __systemTmpDir } from '@coffeekraken/sugar/path';
 import __fs from 'fs';
+import __isChildProcess from '../../shared/is/isChildProcess';
+import __readJsonSync from '../fs/readJsonSync';
+import __writeJsonSync from '../fs/writeJsonSync';
+import __systemTmpDir from '../path/systemTmpDir';
 
 /**
  * @name            sharedContext

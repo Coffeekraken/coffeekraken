@@ -1,7 +1,7 @@
 // @ts-nocheck
 
-import { __htmlTagToHtmlClassMap } from '@coffeekraken/sugar/dom';
 import __upperFirst from '../../../shared/string/upperFirst';
+import __htmlTagToHtmlClassMap from './htmlTagToHtmlClassMap';
 
 /**
  * @name            getHtmlClassFromTagName

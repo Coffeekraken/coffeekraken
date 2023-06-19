@@ -1,4 +1,3 @@
-import __SWatch from './SWatch';
 import __applyScope from './applyScope';
 import __camelCaseProps from './camelCaseProps';
 import __clone from './clone';
@@ -30,7 +29,6 @@ import __sortDeep from './sortDeep';
 import __toJson from './toJson';
 import __toPlainObject from './toPlainObject';
 import __toQueryString from './toQueryString';
-import __watch from './watch';
 
 export {
     __applyScope,
@@ -61,9 +59,7 @@ export {
     __set,
     __sort,
     __sortDeep,
-    __SWatch,
     __toJson,
     __toPlainObject,
     __toQueryString,
-    __watch,
 };

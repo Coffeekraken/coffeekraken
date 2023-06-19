@@ -2,11 +2,9 @@
 import __deepMerge from '../../shared/object/deepMerge';
 import type { IScrollToSettings } from '../dom/scroll/scrollTo';
 
-import {
-    __smoothScrollOnAnchorLinks,
-    __smoothScrollOnHashChange,
-    __smoothScrollOnPageLoad,
-} from '@coffeekraken/sugar/feature';
+import __smoothScrollOnAnchorLinks from './smoothScrollOnAnchorLinks';
+import __smoothScrollOnHashChange from './smoothScrollOnHashChange';
+import __smoothScrollOnPageLoad from './smoothScrollOnPageLoad';
 
 /**
  * @name        smoothScroll

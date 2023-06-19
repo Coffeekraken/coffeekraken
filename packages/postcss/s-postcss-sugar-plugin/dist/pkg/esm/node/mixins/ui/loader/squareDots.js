@@ -61,7 +61,7 @@ export default function ({ params, atRule, replaceWith, }) {
         top: 0;
         left: calc(-0.225ch);
         white-space: nowrap;
-        color: sugar.color(current);
+        color: currentColor;
         display: block;
         content: "⠁⠈⠀⠀⠀⠠⠄⠂";
         z-index: 1;
@@ -74,7 +74,7 @@ export default function ({ params, atRule, replaceWith, }) {
         position: absolute;
         top: 0;
         left: calc(0.59ch);
-        color: sugar.color(current);
+        color: currentColor;
         content: "⠀⠀⠁⠂⠄⠀⠀⠀";
         display: block;
         text-indent: 0;

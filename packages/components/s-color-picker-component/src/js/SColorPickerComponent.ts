@@ -3,20 +3,15 @@
 import __SColor from '@coffeekraken/s-color';
 import __SLitComponent from '@coffeekraken/s-lit-component';
 import { __copy } from '@coffeekraken/sugar/clipboard';
+import type { IFloatApi, IFloatSettings } from '@coffeekraken/sugar/dom';
 import {
     __makeFloat,
     __preventViewportMovement,
 } from '@coffeekraken/sugar/dom';
 import { __isMobile } from '@coffeekraken/sugar/is';
-import type {
-    IFloatApi,
-    IFloatSettings,
-} from '@coffeekraken/sugar/dom';
 import { __deepMerge } from '@coffeekraken/sugar/object';
 import { css, html, unsafeCSS } from 'lit';
 import __SColorPickerComponentInterface from './interface/SColorPickerComponentInterface';
-
-import __define from './define';
 
 // @ts-ignore
 import __css from '../../../../src/css/s-color-picker.css'; // relative to /dist/pkg/esm/js
@@ -83,7 +78,7 @@ export interface ISColorPickerComponentProps {
  * npm i @coffeekraken/s-color-picker-component
  *
  * @install         js
- * import { define as __SColorPickerComponentDefine } from '@coffeekraken/s-color-picker-component';
+ * import { __define as __SColorPickerComponentDefine } from '@coffeekraken/s-color-picker-component';
  * __SColorPickerComponentDefine();
  *
  * @example         html            With a different format (hsla)
@@ -958,5 +953,3 @@ export default class SColorPickerComponent extends __SLitComponent {
         `;
     }
 }
-
-export { __define as define };

@@ -1,5 +1,5 @@
 // @ts-nocheck
-import { __isInViewport } from '@coffeekraken/sugar/dom';
+import __isInViewport from '../is/isInViewport';
 
 /**
  * @name      whenEntersViewport

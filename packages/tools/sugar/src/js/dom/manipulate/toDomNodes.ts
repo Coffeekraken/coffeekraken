@@ -1,13 +1,6 @@
 // @ts-nocheck
 
-import { __stringToNode } from '@coffeekraken/sugar/dom';
-
-function processString(string) {
-    return string
-        .replace(/&gt;/g, '>')
-        .replace(/&lt;/g, '<')
-        .replace(/&nbsp;/g, ' ');
-}
+import __stringToNode from '../html/stringToNode';
 
 function processNodeElm(elm) {
     // check tpl type

@@ -1,5 +1,5 @@
-import { __writeFileSync } from '@coffeekraken/sugar/fs';
 import __fs from 'fs';
+import __writeFileSync from '../fs/writeFileSync';
 
 /**
  * @name            prependToFileSync
@@ -16,7 +16,7 @@ import __fs from 'fs';
  * @param       {String}            content             The content to add to the file
  *
  * @snippet         __prependToFileSync($1, $2)
- * 
+ *
  * @example         js
  * import { __prependToFileSync } from '@coffeekraken/sugar/fs';
  * __prependToFileSync('/my/cool/file.txt', 'Hello world');

@@ -1,5 +1,3 @@
-import { __isNode } from '@coffeekraken/sugar/is';
-
 /**
  * @name                getAvailableInterfaceTypes
  * @namespace           shared
@@ -22,6 +20,13 @@ import { __isNode } from '@coffeekraken/sugar/is';
  * @since           2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
+function __isNode() {
+    return (
+        typeof process !== 'undefined' &&
+        process.release &&
+        process.release.name === 'node'
+    );
+}
 function getAvailableInterfaceTypes() {
     // @ts-ignore
     if (__isNode()) return global._registeredInterfacesTypes || {};

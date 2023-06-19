@@ -1,6 +1,8 @@
 // @ts-nocheck
 
-import { __getStyleProperty, __whenImageLoaded } from '@coffeekraken/sugar/dom';
+import __getStyleProperty from '../style/getStyleProperty';
+import __whenImageLoaded from './whenImageLoaded';
+
 import __unquote from '../../../shared/string/unquote';
 
 /**

@@ -1,8 +1,8 @@
 // @ts-nocheck
 
 import __SugarConfig from '@coffeekraken/s-sugar-config';
-import { __fileName } from '@coffeekraken/sugar/fs';
 import __deepMerge from '../../shared/object/deepMerge';
+import __fileName from '../fs/filename';
 import __json from './json';
 
 /**

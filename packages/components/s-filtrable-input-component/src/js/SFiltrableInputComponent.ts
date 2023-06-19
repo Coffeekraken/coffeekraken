@@ -14,8 +14,8 @@ import {
     __distanceFromElementTopToViewportTop,
     __getStyleProperty,
     __onScrollEnd,
+    __stripTags,
 } from '@coffeekraken/sugar/dom';
-import { __stripTags } from '@coffeekraken/sugar/dom';
 import { __hotkey } from '@coffeekraken/sugar/keyboard';
 
 // @ts-ignore
@@ -82,7 +82,7 @@ export interface ISFiltrableInputState {
  * npm i @coffeekraken/s-filtrable-input-component
  *
  * @install           js
- * import { define as __SFiltrableInputComponentDefine } from '@coffeekraken/s-filtrable-input-component';
+ * import { __define as __SFiltrableInputComponentDefine } from '@coffeekraken/s-filtrable-input-component';
  * __SFiltrableInputComponentDefine();
  *
  * @example         html            Simple example
@@ -860,24 +860,4 @@ export default class SFiltrableInputComponent extends __SLitComponent {
             </div>
         `;
     }
-}
-
-/**
- * @name            define
- * @type            Function
- *
- * This function allows you to define (register) your custom element with some default
- * props if needed.
- *
- * @param           {any}           [props={}]              Some default props you want to set for your custom element
- * @param           {String}        [tagName='s-filtrable-input']       The tagName associated to this custom element
- *
- * @since       2.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
- */
-export function define(
-    props: Partial<ISFiltrableInputComponentProps> = {},
-    tagName = 's-filtrable-input',
-) {
-    __SLitComponent.define(tagName, SFiltrableInputComponent, props);
 }

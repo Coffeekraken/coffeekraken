@@ -8,18 +8,15 @@ import type { IWhenOutOfViewportSettings } from './whenOutOfViewport';
 import type { IWhenStyleSheetsReadySettings } from './whenStylesheetsReady';
 import type { IWhenVisibleSettings } from './whenVisible';
 
-import {
-    __whenAnimationEnd,
-    __whenDomReady,
-    __whenEntersViewport,
-    __whenInteract,
-    __whenInViewport,
-    __whenLod,
-    __whenNearViewport,
-    __whenOutOfViewport,
-    __whenStylesheetsReady,
-    __whenVisible,
-} from '@coffeekraken/sugar/dom';
+import __whenAnimationEnd from './whenAnimationEnd';
+import __whenEntersViewport from './whenEntersViewport';
+import __whenInteract from './whenInteract';
+import __whenInViewport from './whenInViewport';
+import __whenLod from './whenLod';
+import __whenNearViewport from './whenNearViewport';
+import __whenOutOfViewport from './whenOutOfViewport';
+import __whenStylesheetsReady from './whenStylesheetsReady';
+import __whenVisible from './whenVisible';
 
 /**
  * @name            when

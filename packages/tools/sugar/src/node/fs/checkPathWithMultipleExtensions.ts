@@ -1,5 +1,5 @@
-import { __extension } from '@coffeekraken/sugar/fs';
 import __fs from 'fs';
+import __extension from '../fs/extension';
 
 /**
  * @name            checkPathWithMultipleExtensions

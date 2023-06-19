@@ -1,5 +1,5 @@
-import { __wait } from '@coffeekraken/sugar/datetime';
-import { __querySelectorLive } from '@coffeekraken/sugar/dom';
+import __wait from '../../shared/datetime/wait';
+import __querySelectorLive from '../dom/query/querySelectorLive';
 
 /**
  * @name 		confirmButton

@@ -1,10 +1,8 @@
 // @ts-nocheck
 
-import {
-    __closestNotVisible,
-    __isInViewport,
-    __isVisible,
-} from '@coffeekraken/sugar/dom';
+import __isInViewport from '../is/isInViewport';
+import __isVisible from '../is/isVisible';
+import __closestNotVisible from './closestNotVisible';
 
 /**
  * @name      querySelectorAll

@@ -1,7 +1,8 @@
 // @ts-nocheck
 
-import { __forceRedraw, __offsetFromViewport } from '@coffeekraken/sugar/dom';
-import { __SSvgFilter } from '@coffeekraken/sugar/filter';
+import __offsetFromViewport from '../dom/offset/offsetFromViewport';
+import __forceRedraw from '../dom/utilities/forceRedraw';
+import __SSvgFilter from './SSvgFilter';
 
 /**
  * @name 		SMotionblurSvgFilter

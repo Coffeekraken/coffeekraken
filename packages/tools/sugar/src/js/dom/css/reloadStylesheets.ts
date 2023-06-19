@@ -1,4 +1,4 @@
-import { __uniqid } from '@coffeekraken/sugar/string';
+import __uniqid from '../../string/uniqid';
 
 /**
  * @name            reloadStylesheets

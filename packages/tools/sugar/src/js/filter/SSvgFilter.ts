@@ -1,6 +1,6 @@
 // @ts-nocheck
 
-import uniqid from '../../js/string/uniqid';
+import __uniqid from '../../js/string/uniqid';
 
 /**
  * @name 		           __SSvgFilter
@@ -53,7 +53,7 @@ export default class __SSvgFilter {
         this.filter_content = filter_content;
 
         // generate a uniqid
-        this.id = 's-svg-filter-' + uniqid();
+        this.id = 's-svg-filter-' + __uniqid();
 
         // if need to inject svg
         if (!document.body.querySelector('#s-svg-filters'))

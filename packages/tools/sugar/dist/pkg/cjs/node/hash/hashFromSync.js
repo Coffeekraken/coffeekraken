@@ -3,12 +3,14 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const fs_1 = require("@coffeekraken/sugar/fs");
-const is_1 = require("@coffeekraken/sugar/is");
-const npm_1 = require("@coffeekraken/sugar/npm");
-const object_1 = require("@coffeekraken/sugar/object");
+const isGlob_1 = __importDefault(require("../../shared/is/isGlob"));
+const objectHash_1 = __importDefault(require("../../shared/object/objectHash"));
+const fileHashSync_1 = __importDefault(require("../fs/fileHashSync"));
+const folderHashSync_1 = __importDefault(require("../fs/folderHashSync"));
+const isDirectory_1 = __importDefault(require("../is/isDirectory"));
+const packagePathSync_1 = __importDefault(require("../npm/packagePathSync"));
 const crypto_1 = __importDefault(require("crypto"));
-const fs_2 = __importDefault(require("fs"));
+const fs_1 = __importDefault(require("fs"));
 function __hashFromSync(sources, settings) {
     const hashes = [];
     if (!Array.isArray(sources)) {
@@ -19,37 +21,37 @@ function __hashFromSync(sources, settings) {
     for (let source of sources) {
         // plain object
         if (typeof source !== 'string') {
-            hashes.push((0, object_1.__objectHash)(source));
+            hashes.push((0, objectHash_1.default)(source));
             continue;
         }
         // package
         if (!source.startsWith('/') && source.match(/^[a-zA-Z-_\/\@]+$/)) {
-            const path = (0, npm_1.__packagePathSync)(source);
+            const path = (0, packagePathSync_1.default)(source);
             if (path) {
-                hashes.push((0, fs_1.__folderHashSync)(path));
+                hashes.push((0, folderHashSync_1.default)(path));
                 continue;
             }
         }
         // directory
-        if ((0, is_1.__isDirectory)(source)) {
-            hashes.push((0, fs_1.__folderHashSync)(source));
+        if ((0, isDirectory_1.default)(source)) {
+            hashes.push((0, folderHashSync_1.default)(source));
             continue;
         }
         // absolute file
-        if (fs_2.default.existsSync(source)) {
-            hashes.push((0, fs_1.__fileHashSync)(source));
+        if (fs_1.default.existsSync(source)) {
+            hashes.push((0, fileHashSync_1.default)(source));
             continue;
         }
         // glob
-        if ((0, is_1.__isGlob)(source)) {
+        if ((0, isGlob_1.default)(source)) {
             const files = __glob.sync(source);
             for (let filePath of files) {
-                if ((0, is_1.__isDirectory)(filePath)) {
+                if ((0, isDirectory_1.default)(filePath)) {
                     // console.log('Directory', filePath);
-                    hashes.push((0, fs_1.__folderHashSync)(filePath));
+                    hashes.push((0, folderHashSync_1.default)(filePath));
                 }
                 else {
-                    hashes.push((0, fs_1.__fileHashSync)(filePath));
+                    hashes.push((0, fileHashSync_1.default)(filePath));
                 }
             }
             continue;
@@ -68,4 +70,4 @@ function __hashFromSync(sources, settings) {
     return hash;
 }
 exports.default = __hashFromSync;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7O0FBQUEsK0NBQTBFO0FBQzFFLCtDQUFpRTtBQUNqRSxpREFBNEQ7QUFDNUQsdURBQTBEO0FBQzFELG9EQUF3RDtBQUN4RCw0Q0FBc0I7QUE0Q3RCLFNBQXdCLGNBQWMsQ0FDbEMsT0FBeUIsRUFDekIsUUFBcUM7SUFFckMsTUFBTSxNQUFNLEdBQWEsRUFBRSxDQUFDO0lBRTVCLElBQUksQ0FBQyxLQUFLLENBQUMsT0FBTyxDQUFDLE9BQU8sQ0FBQyxFQUFFO1FBQ3pCLE9BQU8sR0FBRyxDQUFDLE9BQU8sQ0FBQyxDQUFDO0tBQ3ZCO0lBRUQsTUFBTSxhQUFhLG1CQUNmLElBQUksRUFBRSxRQUFRLEVBQ2QsTUFBTSxFQUFFLFFBQVEsSUFDYixDQUFDLFFBQVEsYUFBUixRQUFRLGNBQVIsUUFBUSxHQUFJLEVBQUUsQ0FBQyxDQUN0QixDQUFDO0lBRUYsSUFBSSxJQUFJLENBQUM7SUFFVCxLQUFLLElBQUksTUFBTSxJQUFJLE9BQU8sRUFBRTtRQUN4QixlQUFlO1FBQ2YsSUFBSSxPQUFPLE1BQU0sS0FBSyxRQUFRLEVBQUU7WUFDNUIsTUFBTSxDQUFDLElBQUksQ0FBQyxJQUFBLHFCQUFZLEVBQUMsTUFBTSxDQUFDLENBQUMsQ0FBQztZQUNsQyxTQUFTO1NBQ1o7UUFFRCxVQUFVO1FBQ1YsSUFBSSxDQUFDLE1BQU0sQ0FBQyxVQUFVLENBQUMsR0FBRyxDQUFDLElBQUksTUFBTSxDQUFDLEtBQUssQ0FBQyxtQkFBbUIsQ0FBQyxFQUFFO1lBQzlELE1BQU0sSUFBSSxHQUFHLElBQUEsdUJBQWlCLEVBQUMsTUFBTSxDQUFDLENBQUM7WUFDdkMsSUFBSSxJQUFJLEVBQUU7Z0JBQ04sTUFBTSxDQUFDLElBQUksQ0FBQyxJQUFBLHFCQUFnQixFQUFDLElBQUksQ0FBQyxDQUFDLENBQUM7Z0JBQ3BDLFNBQVM7YUFDWjtTQUNKO1FBRUQsWUFBWTtRQUNaLElBQUksSUFBQSxrQkFBYSxFQUFDLE1BQU0sQ0FBQyxFQUFFO1lBQ3ZCLE1BQU0sQ0FBQyxJQUFJLENBQUMsSUFBQSxxQkFBZ0IsRUFBQyxNQUFNLENBQUMsQ0FBQyxDQUFDO1lBQ3RDLFNBQVM7U0FDWjtRQUVELGdCQUFnQjtRQUNoQixJQUFJLFlBQUksQ0FBQyxVQUFVLENBQUMsTUFBTSxDQUFDLEVBQUU7WUFDekIsTUFBTSxDQUFDLElBQUksQ0FBQyxJQUFBLG1CQUFjLEVBQUMsTUFBTSxDQUFDLENBQUMsQ0FBQztZQUNwQyxTQUFTO1NBQ1o7UUFFRCxPQUFPO1FBQ1AsSUFBSSxJQUFBLGFBQVEsRUFBQyxNQUFNLENBQUMsRUFBRTtZQUNsQixNQUFNLEtBQUssR0FBRyxNQUFNLENBQUMsSUFBSSxDQUFDLE1BQU0sQ0FBQyxDQUFDO1lBQ2xDLEtBQUssSUFBSSxRQUFRLElBQUksS0FBSyxFQUFFO2dCQUN4QixJQUFJLElBQUEsa0JBQWEsRUFBQyxRQUFRLENBQUMsRUFBRTtvQkFDekIsc0NBQXNDO29CQUN0QyxNQUFNLENBQUMsSUFBSSxDQUFDLElBQUEscUJBQWdCLEVBQUMsUUFBUSxDQUFDLENBQUMsQ0FBQztpQkFDM0M7cUJBQU07b0JBQ0gsTUFBTSxDQUFDLElBQUksQ0FBQyxJQUFBLG1CQUFjLEVBQUMsUUFBUSxDQUFDLENBQUMsQ0FBQztpQkFDekM7YUFDSjtZQUNELFNBQVM7U0FDWjtRQUVELGdCQUFnQjtRQUNoQixNQUFNLENBQUMsSUFBSSxDQUFDLE1BQU0sQ0FBQyxDQUFDO0tBQ3ZCO0lBRUQsd0JBQXdCO0lBQ3hCLElBQUksTUFBTSxDQUFDLE1BQU0sRUFBRTtRQUNmLElBQUksR0FBRyxnQkFBUTthQUNWLFVBQVUsQ0FBQyxhQUFhLENBQUMsSUFBSSxDQUFDO2FBQzlCLE1BQU0sQ0FBQyxNQUFNLENBQUMsSUFBSSxDQUFDLEdBQUcsQ0FBQyxDQUFDO2FBQ3hCLE1BQU0sQ0FBQyxhQUFhLENBQUMsTUFBTSxDQUFDLENBQUM7S0FDckM7SUFFRCxrQkFBa0I7SUFDbEIsT0FBTyxJQUFJLENBQUM7QUFDaEIsQ0FBQztBQTFFRCxpQ0EwRUMifQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7O0FBQUEsb0VBQThDO0FBQzlDLGdGQUEwRDtBQUMxRCxzRUFBZ0Q7QUFDaEQsMEVBQW9EO0FBQ3BELG9FQUE4QztBQUM5Qyw2RUFBdUQ7QUFFdkQsb0RBQXdEO0FBQ3hELDRDQUFzQjtBQTRDdEIsU0FBd0IsY0FBYyxDQUNsQyxPQUF5QixFQUN6QixRQUFxQztJQUVyQyxNQUFNLE1BQU0sR0FBYSxFQUFFLENBQUM7SUFFNUIsSUFBSSxDQUFDLEtBQUssQ0FBQyxPQUFPLENBQUMsT0FBTyxDQUFDLEVBQUU7UUFDekIsT0FBTyxHQUFHLENBQUMsT0FBTyxDQUFDLENBQUM7S0FDdkI7SUFFRCxNQUFNLGFBQWEsbUJBQ2YsSUFBSSxFQUFFLFFBQVEsRUFDZCxNQUFNLEVBQUUsUUFBUSxJQUNiLENBQUMsUUFBUSxhQUFSLFFBQVEsY0FBUixRQUFRLEdBQUksRUFBRSxDQUFDLENBQ3RCLENBQUM7SUFFRixJQUFJLElBQUksQ0FBQztJQUVULEtBQUssSUFBSSxNQUFNLElBQUksT0FBTyxFQUFFO1FBQ3hCLGVBQWU7UUFDZixJQUFJLE9BQU8sTUFBTSxLQUFLLFFBQVEsRUFBRTtZQUM1QixNQUFNLENBQUMsSUFBSSxDQUFDLElBQUEsb0JBQVksRUFBQyxNQUFNLENBQUMsQ0FBQyxDQUFDO1lBQ2xDLFNBQVM7U0FDWjtRQUVELFVBQVU7UUFDVixJQUFJLENBQUMsTUFBTSxDQUFDLFVBQVUsQ0FBQyxHQUFHLENBQUMsSUFBSSxNQUFNLENBQUMsS0FBSyxDQUFDLG1CQUFtQixDQUFDLEVBQUU7WUFDOUQsTUFBTSxJQUFJLEdBQUcsSUFBQSx5QkFBaUIsRUFBQyxNQUFNLENBQUMsQ0FBQztZQUN2QyxJQUFJLElBQUksRUFBRTtnQkFDTixNQUFNLENBQUMsSUFBSSxDQUFDLElBQUEsd0JBQWdCLEVBQUMsSUFBSSxDQUFDLENBQUMsQ0FBQztnQkFDcEMsU0FBUzthQUNaO1NBQ0o7UUFFRCxZQUFZO1FBQ1osSUFBSSxJQUFBLHFCQUFhLEVBQUMsTUFBTSxDQUFDLEVBQUU7WUFDdkIsTUFBTSxDQUFDLElBQUksQ0FBQyxJQUFBLHdCQUFnQixFQUFDLE1BQU0sQ0FBQyxDQUFDLENBQUM7WUFDdEMsU0FBUztTQUNaO1FBRUQsZ0JBQWdCO1FBQ2hCLElBQUksWUFBSSxDQUFDLFVBQVUsQ0FBQyxNQUFNLENBQUMsRUFBRTtZQUN6QixNQUFNLENBQUMsSUFBSSxDQUFDLElBQUEsc0JBQWMsRUFBQyxNQUFNLENBQUMsQ0FBQyxDQUFDO1lBQ3BDLFNBQVM7U0FDWjtRQUVELE9BQU87UUFDUCxJQUFJLElBQUEsZ0JBQVEsRUFBQyxNQUFNLENBQUMsRUFBRTtZQUNsQixNQUFNLEtBQUssR0FBRyxNQUFNLENBQUMsSUFBSSxDQUFDLE1BQU0sQ0FBQyxDQUFDO1lBQ2xDLEtBQUssSUFBSSxRQUFRLElBQUksS0FBSyxFQUFFO2dCQUN4QixJQUFJLElBQUEscUJBQWEsRUFBQyxRQUFRLENBQUMsRUFBRTtvQkFDekIsc0NBQXNDO29CQUN0QyxNQUFNLENBQUMsSUFBSSxDQUFDLElBQUEsd0JBQWdCLEVBQUMsUUFBUSxDQUFDLENBQUMsQ0FBQztpQkFDM0M7cUJBQU07b0JBQ0gsTUFBTSxDQUFDLElBQUksQ0FBQyxJQUFBLHNCQUFjLEVBQUMsUUFBUSxDQUFDLENBQUMsQ0FBQztpQkFDekM7YUFDSjtZQUNELFNBQVM7U0FDWjtRQUVELGdCQUFnQjtRQUNoQixNQUFNLENBQUMsSUFBSSxDQUFDLE1BQU0sQ0FBQyxDQUFDO0tBQ3ZCO0lBRUQsd0JBQXdCO0lBQ3hCLElBQUksTUFBTSxDQUFDLE1BQU0sRUFBRTtRQUNmLElBQUksR0FBRyxnQkFBUTthQUNWLFVBQVUsQ0FBQyxhQUFhLENBQUMsSUFBSSxDQUFDO2FBQzlCLE1BQU0sQ0FBQyxNQUFNLENBQUMsSUFBSSxDQUFDLEdBQUcsQ0FBQyxDQUFDO2FBQ3hCLE1BQU0sQ0FBQyxhQUFhLENBQUMsTUFBTSxDQUFDLENBQUM7S0FDckM7SUFFRCxrQkFBa0I7SUFDbEIsT0FBTyxJQUFJLENBQUM7QUFDaEIsQ0FBQztBQTFFRCxpQ0EwRUMifQ==

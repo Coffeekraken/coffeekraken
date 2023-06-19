@@ -1,6 +1,8 @@
 // @ts-nocheck
 
-import { __querySelectorLive, __whenInViewport } from '@coffeekraken/sugar/dom';
+import __whenInViewport from '../dom/detect/whenInViewport';
+import __querySelectorLive from '../dom/query/querySelectorLive';
+
 import __fastdom from 'fastdom';
 import deepMerge from '../../shared/object/deepMerge';
 

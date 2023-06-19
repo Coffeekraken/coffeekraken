@@ -336,7 +336,7 @@ export default class SDashboardFrontendCheckerComponent extends __SLitComponent 
     }
 }
 
-export function define(
+export function __define(
     props: any = {},
     tagName = 's-dashboard-frontend-checker',
 ) {

@@ -84,7 +84,7 @@ export default class CKFallingStars extends __SLitComponent {
     }
 }
 
-export function define(props: any = {}, tagName = 'ck-falling-stars') {
+export function __define(props: any = {}, tagName = 'ck-falling-stars') {
     __SLitComponent.setDefaultProps(tagName, props);
     customElements.define(tagName, CKFallingStars);
 }

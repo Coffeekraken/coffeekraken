@@ -1,6 +1,6 @@
 // @ts-nocheck
+import __isUserScrolling from '../is/isUserScrolling';
 
-import { __isUserScrolling } from '@coffeekraken/sugar/dom';
 import easeInOutQuad from '../../../shared/easing/easeInOutQuad';
 import requestAnimationFrame from '../utilities/requestAnimationFrame';
 

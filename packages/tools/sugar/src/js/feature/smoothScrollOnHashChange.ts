@@ -1,5 +1,6 @@
 // @ts-nocheck
-import { __scrollToLocationHash } from '@coffeekraken/sugar/dom';
+import __scrollToLocationHash from '../dom/scroll/scrollToLocationHash';
+
 import __deepMerge from '../../shared/object/deepMerge';
 import type { IScrollToSettings } from '../dom/scroll/scrollTo';
 

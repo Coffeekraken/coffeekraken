@@ -1,6 +1,6 @@
 // @ts-nocheck
 
-import { define as __sFiltrableInputDefine } from '@coffeekraken/s-filtrable-input-component';
+import { __define as __sFiltrableInputDefine } from '@coffeekraken/s-filtrable-input-component';
 import __SLitComponent from '@coffeekraken/s-lit-component';
 import __SRequest from '@coffeekraken/s-request';
 import { __xmlToJson } from '@coffeekraken/sugar/convert';
@@ -183,7 +183,7 @@ export default class SDashboardPages extends __SLitComponent {
     }
 }
 
-export function define(props: any = {}, tagName = 's-dashboard-pages') {
+export function __define(props: any = {}, tagName = 's-dashboard-pages') {
     __SLitComponent.setDefaultProps(tagName, props);
     customElements.define(tagName, SDashboardPages);
 }

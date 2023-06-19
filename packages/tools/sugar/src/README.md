@@ -1,4 +1,4 @@
-<!-- 
+<!--
 /**
  * @name            README
  * @namespace       doc
@@ -42,7 +42,7 @@ Each of these languages comes with multiple tools in areas likes:
     - And more...
 2. **Status detection like:**
     - Has the focus on a particular element using `isFocus`
-    - Same for the *within* state using `isFocusWithin`
+    - Same for the _within_ state using `isFocusWithin`
     - Check if an element is visible using `isVisible`
     - And more...
 3. **Dom manipulation like**
@@ -102,8 +102,8 @@ Each of these languages comes with multiple tools in areas likes:
 Sugar toolkit came with a lot of utilities, functions and classes. To use them, simply load them directly like so:
 
 ```js
-import __querySelectorLive from '@coffeekraken/sugar/js/dom/query/querySelectorLive';
-import __isInViewport from '@coffeekraken/sugar/js/dom/is/inViewport';
+import { __querySelectorLive } from '@coffeekraken/sugar/dom';
+import { __isInViewport } from '@coffeekraken/sugar/dom';
 // etc...
 ```
 

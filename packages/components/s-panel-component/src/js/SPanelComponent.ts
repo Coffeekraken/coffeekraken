@@ -1,8 +1,10 @@
 // @ts-nocheck
 
 import __SLitComponent from '@coffeekraken/s-lit-component';
-import { __querySelectorLive } from '@coffeekraken/sugar/dom';
-import { __getTransitionProperties } from '@coffeekraken/sugar/dom';
+import {
+    __getTransitionProperties,
+    __querySelectorLive,
+} from '@coffeekraken/sugar/dom';
 import { __hotkey } from '@coffeekraken/sugar/keyboard';
 import { __deepMerge } from '@coffeekraken/sugar/object';
 import { css, html, unsafeCSS } from 'lit';
@@ -54,7 +56,7 @@ export interface SPanelComponentProps {
  * npm i @coffeekraken/s-panel-component
  *
  * @install         js
- * import { define as __SPanelComponentDefine } from '@coffeekraken/s-panel-component';
+ * import { __define as __SPanelComponentDefine } from '@coffeekraken/s-panel-component';
  * __SPanelComponentDefine();
  *
  * @example         html        Simple top panel
@@ -389,11 +391,4 @@ export default class SPanelComponent extends __SLitComponent {
             </div>
         `;
     }
-}
-
-export function define(
-    props: Partial<SPanelComponentProps> = {},
-    tagName = 's-panel',
-) {
-    __SLitComponent.define(tagName, SPanelComponent, props);
 }

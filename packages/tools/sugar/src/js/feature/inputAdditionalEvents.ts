@@ -1,6 +1,6 @@
 // @ts-nocheck
 
-import { __dispatchEvent } from '@coffeekraken/sugar/dom';
+import __dispatchEvent from '../dom/event/dispatchEvent';
 
 /**
  * @name 		handleInputAttributes

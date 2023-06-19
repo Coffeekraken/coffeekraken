@@ -58,7 +58,7 @@ function default_1({ params, atRule, replaceWith, }) {
     pointer-events: none;
     display: inline-block;
     border-radius: 50%;
-    background: sugar.color(current);
+    background: currentColor;
     width: sugar.scalable(1em);
     height: sugar.scalable(1em);
     animation: ${finalParams.name} ${finalParams.duration} ${finalParams.easing} infinite;

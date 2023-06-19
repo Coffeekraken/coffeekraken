@@ -1,7 +1,7 @@
 import __SPromise from '@coffeekraken/s-promise';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
-import { __isCommandExists } from '@coffeekraken/sugar/is';
 import __argsToString from '../../shared/cli/argsToString';
+import __isCommandExists from '../is/isCommandExists';
 import __spawn from '../process/spawn';
 
 /**

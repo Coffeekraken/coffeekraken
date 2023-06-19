@@ -1,6 +1,6 @@
 // @ts-nocheck
 
-import { __isPlainObject } from '@coffeekraken/sugar/is';
+import __isPlainObject from '../is/isPlainObject';
 
 /**
  * @name            deepClean

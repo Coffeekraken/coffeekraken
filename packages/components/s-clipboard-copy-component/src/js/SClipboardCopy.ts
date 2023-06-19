@@ -8,8 +8,6 @@ import __SClipboardCopyComponentInterface from './interface/SClipboardCopyCompon
 // @ts-ignore
 import __css from '../../../../src/css/s-clipboard-copy.css'; // relative to /dist/pkg/esm/js
 
-import __define from './define';
-
 export interface ISClipboardCopyComponentProps {
     from: string;
     successTimeout: number;
@@ -38,14 +36,14 @@ export interface ISClipboardCopyComponentProps {
  * @support         edge
  *
  * @import          import { define as __SClipboardCopyComponentDefine } from '@coffeekraken/s-clipboard-copy-component';
- * 
+ *
  * @snippet         __SClipboardCopyComponentDefine($1)
- * 
+ *
  * @install           shell
  * npm i @coffeekraken/s-clipboard-copy-component
  *
  * @install           js
- * import { define as __SClipboardCopyComponentDefine } from '@coffeekraken/s-clipboard-copy-component';
+ * import { __define as __SClipboardCopyComponentDefine } from '@coffeekraken/s-clipboard-copy-component';
  * __SClipboardCopyComponentDefine();
  *
  * @example         html        Copy from an input
@@ -226,5 +224,3 @@ export default class SClipboardCopyComponent extends __SLitComponent {
         `;
     }
 }
-
-export { __define as define };

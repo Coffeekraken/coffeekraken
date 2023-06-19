@@ -1,5 +1,5 @@
-import { __packageRootDir } from '@coffeekraken/sugar/path';
 import __url from 'url';
+import __packageRootDir from '../path/packageRootDir';
 
 /**
  * @name                            serverObjectFromExpressRequest

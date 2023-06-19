@@ -1,7 +1,7 @@
 // @ts-nocheck
 
-import { __observeAttributes } from '@coffeekraken/sugar/dom';
-import { __parse } from '@coffeekraken/sugar/string';
+import __parse from '../../../shared/string/parse';
+import __observeAttributes from '../observe/observeAttributes';
 
 /**
  * @name      whenAttribute

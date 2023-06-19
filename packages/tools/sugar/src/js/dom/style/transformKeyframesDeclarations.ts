@@ -1,8 +1,7 @@
-import {
-    __parseKeyframeKey,
-    __removeVendorPrefix,
-} from '@coffeekraken/sugar/css';
-import { __getDefinedStyles } from '@coffeekraken/sugar/dom';
+import __parseKeyframeKey from '../../../shared/css/parse/parseKeyframeKey';
+import __removeVendorPrefix from '../../../shared/css/rule/removeVendorPrefix';
+import __getDefinedStyles from './getDefinedStyles';
+
 import __camelCase from '../../../shared/string/camelCase';
 
 /**

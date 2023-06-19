@@ -1,4 +1,4 @@
-import { __querySelectorLive } from '@coffeekraken/sugar/dom';
+import __querySelectorLive from '../dom/query/querySelectorLive';
 
 /**
  *

@@ -1,8 +1,10 @@
-import { __fileName, __folderPath } from '@coffeekraken/sugar/fs';
+
 import __fs from 'fs';
 import __fsExtra from 'fs-extra';
 import __https from 'https';
 import __unzip from '../compression/unzip';
+import __fileName from '../fs/filename';
+import __folderPath from '../fs/folderPath';
 import __tmpDir from '../path/systemTmpDir';
 
 /**

@@ -132,7 +132,7 @@ export default class SDashboardProjectComponent extends __SLitComponent {
     }
 }
 
-export function define(props: any = {}, tagName = 's-dashboard-project') {
+export function __define(props: any = {}, tagName = 's-dashboard-project') {
     __SLitComponent.setDefaultProps(tagName, props);
     customElements.define(tagName, SDashboardProjectComponent);
 }

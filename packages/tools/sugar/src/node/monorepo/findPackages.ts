@@ -1,7 +1,7 @@
 // @ts-nocheck
 
-import { __readJsonSync } from '@coffeekraken/sugar/fs';
 import _glob from 'glob';
+import __readJsonSync from '../fs/readJsonSync';
 
 /**
  * @name            findPackages

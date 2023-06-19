@@ -88,8 +88,8 @@ export default class SDashboardGoogleComponent extends __SLitComponent {
                     ${!this._gtm && !this._ga
                         ? html`
                               <p class="s-typo:p">
-                                  No google analytics or tag manager
-                                  installed...
+                                  No google analytics or tag manager installed
+                                  or you don't have accepted the legal terms...
                               </p>
                           `
                         : ''}
@@ -99,7 +99,7 @@ export default class SDashboardGoogleComponent extends __SLitComponent {
     }
 }
 
-export function define(props: any = {}, tagName = 's-dashboard-google') {
+export function __define(props: any = {}, tagName = 's-dashboard-google') {
     __SLitComponent.setDefaultProps(tagName, props);
     customElements.define(tagName, SDashboardGoogleComponent);
 }

@@ -10,8 +10,6 @@ import { __deepMerge } from '@coffeekraken/sugar/object';
 import { __uniqid } from '@coffeekraken/sugar/string';
 import __SAppearFeatureInterface from './interface/SAppearFeatureInterface';
 
-import __define from './define';
-
 // @ts-ignore
 import __css from '../../../../src/css/s-appear-feature.css'; // relative to /dist/pkg/esm/js
 
@@ -207,5 +205,3 @@ export default class SAppearFeature extends __SFeature {
         }, delay);
     }
 }
-
-export { __define as define };

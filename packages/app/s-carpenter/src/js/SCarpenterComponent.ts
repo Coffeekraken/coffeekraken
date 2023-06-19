@@ -58,11 +58,11 @@ export interface ISCarpenterComponentProps {
  * @snippet             __defineSCarpenterComponent()
  *
  * @example           js
- * import { define as __defineSCarpenterComponent } from '@coffeekraken/s-carpenter';
+ * import { __define as __defineSCarpenterComponent } from '@coffeekraken/s-carpenter';
  * __defineSCarpenterComponent();
  *
  * @install           js
- * import { define as __defineSCarpenterComponent } from '@coffeekraken/s-carpenter';
+ * import { __define as __defineSCarpenterComponent } from '@coffeekraken/s-carpenter';
  * __defineSCarpenterComponent();
  *
  * @since           2.0.0

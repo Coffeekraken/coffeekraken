@@ -1,4 +1,5 @@
-import { __offsetFromViewport, __scrollTop } from '@coffeekraken/sugar/dom';
+import __scrollTop from '../distance/scrollTop';
+import __offsetFromViewport from '../offset/offsetFromViewport';
 
 /**
  * @name            distanceFromElementTopToViewportTop

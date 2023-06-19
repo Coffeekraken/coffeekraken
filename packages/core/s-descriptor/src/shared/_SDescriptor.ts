@@ -1,5 +1,6 @@
 import __SClass from '@coffeekraken/s-class';
-import { __isGlob, __isOfType } from '@coffeekraken/sugar/is';
+import __SType from '@coffeekraken/s-type';
+import { __isGlob } from '@coffeekraken/sugar/is';
 import { __deepMerge, __get, __set } from '@coffeekraken/sugar/object';
 import { __typeOf } from '@coffeekraken/sugar/type';
 import __SDescriptorResult, {
@@ -228,7 +229,8 @@ class SDescriptor extends __SClass implements ISDescriptor {
         const rules = set.rules;
 
         // check the passed value type correspond to the descriptor type
-        if (!__isOfType(value, set.type)) {
+        const typeInstance = new __SType(set.type);
+        if (!typeInstance.is(value)) {
             throw new Error(
                 `Sorry but this descriptor "<yellow>${
                     this.metas.name

@@ -1,6 +1,7 @@
 // @ts-nocheck
 
-import { __camelize, __parse } from '@coffeekraken/sugar/string';
+import __camelize from '../../../shared/string/camelize';
+import __parse from '../../../shared/string/parse';
 
 /**
  * @name      getStyleProperty

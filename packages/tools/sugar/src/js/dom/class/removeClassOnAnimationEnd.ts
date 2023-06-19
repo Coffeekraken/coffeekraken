@@ -1,6 +1,6 @@
 // @ts-nocheck
 
-import { __whenAnimationEnd } from '@coffeekraken/sugar/dom';
+import __whenAnimationEnd from '../detect/whenAnimationEnd';
 
 /**
  * @name      removeClassOnAnimationEnd

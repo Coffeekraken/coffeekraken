@@ -1,6 +1,6 @@
 // @ts-nocheck
 
-import { __whenLinkLoaded } from '@coffeekraken/sugar/dom';
+import __whenLinkLoaded from './whenLinkLoaded';
 /**
  * @name      whenStylesheetsReady
  * @namespace            js.dom.detect

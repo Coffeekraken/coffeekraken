@@ -1,7 +1,7 @@
 // @ts-nocheck
 
-import { __deepMerge } from '@coffeekraken/sugar/object';
 import __fs from 'fs';
+import __deepMerge from '../../shared/object/deepMerge';
 
 /**
  * @name            isFile

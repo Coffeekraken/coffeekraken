@@ -2,35 +2,35 @@ import __SPackEssentials from '@coffeekraken/s-pack-essentials';
 
 import __SFront from '@coffeekraken/s-front';
 
-import { define as __SCodeExampleComponentDefine } from '@coffeekraken/s-code-example-component';
-import { define as __SColorPickerComponentDefine } from '@coffeekraken/s-color-picker-component';
+import { __define as __SCodeExampleComponentDefine } from '@coffeekraken/s-code-example-component';
+import { __define as __SColorPickerComponentDefine } from '@coffeekraken/s-color-picker-component';
 // import __SDashboard from '@coffeekraken/s-dashboard';
-import { define as __SDatetimePickerComponentDefine } from '@coffeekraken/s-datetime-picker-component';
-import { define as __SFiltrableInputComponentDefine } from '@coffeekraken/s-filtrable-input-component';
-import { define as __SGoogleMapComponentDefine } from '@coffeekraken/s-google-map-component';
+import { __define as __SDatetimePickerComponentDefine } from '@coffeekraken/s-datetime-picker-component';
+import { __define as __SFiltrableInputComponentDefine } from '@coffeekraken/s-filtrable-input-component';
+import { __define as __SGoogleMapComponentDefine } from '@coffeekraken/s-google-map-component';
 import __SLitComponent from '@coffeekraken/s-lit-component';
-import { define as __SSidePanelComponentDefine } from '@coffeekraken/s-panel-component';
-import { define as __SRatingComponentDefine } from '@coffeekraken/s-rating-component';
-import { define as __SSliderComponentDefine } from '@coffeekraken/s-slider-component';
-import { define as __SThemeSwitcherComponentDefine } from '@coffeekraken/s-theme-switcher-component';
+import { __define as __SSidePanelComponentDefine } from '@coffeekraken/s-panel-component';
+import { __define as __SRatingComponentDefine } from '@coffeekraken/s-rating-component';
+import { __define as __SSliderComponentDefine } from '@coffeekraken/s-slider-component';
+import { __define as __SThemeSwitcherComponentDefine } from '@coffeekraken/s-theme-switcher-component';
 
 import __SFeature from '@coffeekraken/s-feature';
-// import { define as __SGlitchFeatureDefine } from '@coffeekraken/s-glitch-feature';
-import { define as __SHighlightFeatureDefine } from '@coffeekraken/s-highlight-feature';
-import { define as __SLazyFeatureDefine } from '@coffeekraken/s-lazy-feature';
-import { define as __SPageTransitionFeatureDefine } from '@coffeekraken/s-page-transition-feature';
-import { define as __SParallaxFeatureDefine } from '@coffeekraken/s-parallax-feature';
+// import { __define as __SGlitchFeatureDefine } from '@coffeekraken/s-glitch-feature';
+import { __define as __SHighlightFeatureDefine } from '@coffeekraken/s-highlight-feature';
+import { __define as __SLazyFeatureDefine } from '@coffeekraken/s-lazy-feature';
+import { __define as __SPageTransitionFeatureDefine } from '@coffeekraken/s-page-transition-feature';
+import { __define as __SParallaxFeatureDefine } from '@coffeekraken/s-parallax-feature';
 
 // Website specific
-import { define as __CKDiscoverComponent } from './components/CKDiscover';
-import { define as __CKDiscoverTabedComponent } from './components/CKDiscoverTabed';
-import { define as __CKDiscoverWelcomeComponent } from './components/CKDiscoverWelcome';
-import { define as __CKDocSubNavDefine } from './components/CKDocSubNav';
-import { define as __CKSearchComponent } from './components/CKSearch';
-import { define as __CKSettingsComponent } from './components/CkSettings';
-import { define as __CKVersionSelector } from './components/CKVersionSelector';
-// import { define as __CKRatingsComponent } from './components/CKRating';
-// import { define as __CKWelcomeRatingsComponent } from './components/CKWelcomeRatings';
+import { __define as __CKDiscoverComponent } from './components/CKDiscover';
+import { __define as __CKDiscoverTabedComponent } from './components/CKDiscoverTabed';
+import { __define as __CKDiscoverWelcomeComponent } from './components/CKDiscoverWelcome';
+import { __define as __CKDocSubNavDefine } from './components/CKDocSubNav';
+import { __define as __CKSearchComponent } from './components/CKSearch';
+import { __define as __CKSettingsComponent } from './components/CkSettings';
+import { __define as __CKVersionSelector } from './components/CKVersionSelector';
+// import { __define as __CKRatingsComponent } from './components/CKRating';
+// import { __define as __CKWelcomeRatingsComponent } from './components/CKWelcomeRatings';
 
 // import { __isMobile } from '@coffeekraken/sugar/is';
 

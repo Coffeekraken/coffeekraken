@@ -2,12 +2,12 @@ import __SDuration from '@coffeekraken/s-duration';
 import __SEnv from '@coffeekraken/s-env';
 import __SLog from '@coffeekraken/s-log';
 import __SPromise from '@coffeekraken/s-promise';
-import { __writeJsonSync } from '@coffeekraken/sugar/fs';
-import { __deepMerge } from '@coffeekraken/sugar/object';
-import { __packageTmpDir } from '@coffeekraken/sugar/path';
-import { __uniqid } from '@coffeekraken/sugar/string';
 import __childProcess from 'child_process';
 import __fs from 'fs';
+import __uniqid from '../../node/string/uniqid';
+import __deepMerge from '../../shared/object/deepMerge';
+import __writeJsonSync from '../fs/writeJsonSync';
+import __packageTmpDir from '../path/packageTmpDir';
 
 /**
  * @name            execPhp

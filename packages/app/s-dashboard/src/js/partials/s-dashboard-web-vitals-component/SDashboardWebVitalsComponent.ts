@@ -1,10 +1,10 @@
 // @ts-nocheck
 
 import __SLitComponent from '@coffeekraken/s-lit-component';
-import { html } from 'lit';
+import { css, html, unsafeCSS } from 'lit';
 import _SDashboardComponentWidgetInterface from '../../interface/SDashboardComponentWidgetInterface';
 
-import '../../../../../../src/js/partials/s-dashboard-web-vitals-component/s-dashboard-web-vitals-component.css';
+import __css from './s-dashboard-web-vitals-component.css';
 
 export interface ISDashboardWebVitalsComponentVital {
     good: number;
@@ -19,6 +19,12 @@ export default class SDashboardWebVitalsComponent extends __SLitComponent {
             {},
             _SDashboardComponentWidgetInterface,
         );
+    }
+
+    static get styles() {
+        return css`
+            ${unsafeCSS(__css)}
+        `;
     }
 
     _webVitals: any = null;

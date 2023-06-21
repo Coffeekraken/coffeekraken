@@ -10,7 +10,9 @@
         "@coffeekraken/s-file": "^2.0.0-alpha.27",
         "@coffeekraken/s-interface": "^2.0.0-alpha.27",
         "@coffeekraken/s-promise": "^2.0.0-alpha.27",
-        "@coffeekraken/sugar": "^2.0.0-alpha.27"
+        "@coffeekraken/sugar": "^2.0.0-alpha.27",
+        "aria-query": "^5.2.1",
+        "dom-accessibility-api": "^0.6.1"
     },
     "homepage": "https://coffeekraken.io",
     "main": "dist/pkg/cjs/js/exports.js",

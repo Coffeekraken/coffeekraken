@@ -5,8 +5,8 @@ import __SEnv from '@coffeekraken/s-env';
 import __SFile from '@coffeekraken/s-file';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
 import { __folderPath, __readJsonSync } from '@coffeekraken/sugar/fs';
-import { __packageRootDir } from '@coffeekraken/sugar/path';
 import { __deepMerge, __get } from '@coffeekraken/sugar/object';
+import { __packageRootDir } from '@coffeekraken/sugar/path';
 import __fs from 'fs';
 import __path from 'path';
 import __SFrontspecBuildParamsInterface from './interface/SFrontspecBuildParamsInterface';
@@ -67,7 +67,22 @@ export default class SFrontspec extends __SClass {
     static _cachesStack = {};
     static _defaultFrontspecInstance;
 
-    _frontspec: ISFrontspec;
+    _frontspec: ISFrontspec = {};
+
+    /**
+     * @name        exists
+     * @type        Function
+     * @static
+     *
+     * Check if the frontspec.json exists or not
+     *
+     * @since       2.0.0
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    static exists(): boolean {
+        const frontspecPath = `${__packageRootDir()}/frontspec.json`;
+        return __fs.existsSync(frontspecPath);
+    }
 
     /**
      * @name        get

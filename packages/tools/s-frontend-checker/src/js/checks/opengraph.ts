@@ -1,7 +1,3 @@
-import __SFrontendChecker, {
-    ISFrontendCheckerCheckResult,
-} from '../SFrontendChecker';
-
 /**
  * @name            opengraph
  * @namespace       js.checks
@@ -16,24 +12,27 @@ import __SFrontendChecker, {
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 
-export default {
-    id: 'opengraph',
-    name: 'Open Graph Metas',
-    description: 'Specifying the open graph metas is recommanded',
-    level: 1,
-    check({ $context }) {
-        // @ts-ignore
-        if (!$context.querySelector('meta[property^="og:"]')) {
+export default function (__SFrontendChecker) {
+    return {
+        id: 'opengraph',
+        name: 'Open Graph Metas',
+        description: 'Specifying the open graph metas is recommanded',
+        category: __SFrontendChecker.CATEGORY_BEST_PRACTICES,
+        level: 1,
+        check({ $context }) {
+            // @ts-ignore
+            if (!$context.querySelector('meta[property^="og:"]')) {
+                return {
+                    status: 'error',
+                    message: 'The document is missing the opengraph metas',
+                    example:
+                        '<meta property="og:title" content="The Rock" />\n<meta property="og:type" content="video.movie" />',
+                    moreLink: 'https://ogp.me/',
+                };
+            }
             return {
-                status: 'error',
-                message: 'The document is missing the opengraph metas',
-                example:
-                    '<meta property="og:title" content="The Rock" />\n<meta property="og:type" content="video.movie" />',
-                moreLink: 'https://ogp.me/',
+                status: 'success',
             };
-        }
-        return {
-            status: 'success',
-        };
-    },
-};
+        },
+    };
+}

@@ -1,7 +1,3 @@
-import __SFrontendChecker, {
-    ISFrontendCheckerCheckResult,
-} from '../SFrontendChecker';
-
 /**
  * @name            description
  * @namespace       js.checks
@@ -16,24 +12,28 @@ import __SFrontendChecker, {
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 
-export default {
-    id: 'description',
-    name: 'Description',
-    description: 'The document must contain a valid description declaration',
-    level: 1,
-    check({ $context }) {
-        // @ts-ignore
-        if (!$context.querySelector('head meta[name="description"]')) {
+export default function (__SFrontendChecker) {
+    return {
+        id: 'description',
+        name: 'Description',
+        description:
+            'The document must contain a valid description declaration',
+        category: __SFrontendChecker.CATEGORY_SEO,
+        level: 1,
+        check({ $context }) {
+            // @ts-ignore
+            if (!$context.querySelector('head meta[name="description"]')) {
+                return {
+                    status: 'error',
+                    message: 'The document is missing the description',
+                    example:
+                        '<meta name="description" content="My awesome description">',
+                    moreLink: 'https://www.w3schools.com/tags/tag_meta.asp',
+                };
+            }
             return {
-                status: 'error',
-                message: 'The document is missing the description',
-                example:
-                    '<meta name="description" content="My awesome description">',
-                moreLink: 'https://www.w3schools.com/tags/tag_meta.asp',
+                status: 'success',
             };
-        }
-        return {
-            status: 'success',
-        };
-    },
-};
+        },
+    };
+}

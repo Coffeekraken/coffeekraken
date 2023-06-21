@@ -1,7 +1,3 @@
-import __SFrontendChecker, {
-    ISFrontendCheckerCheckResult,
-} from '../SFrontendChecker';
-
 /**
  * @name            twitterCard
  * @namespace       js.checks
@@ -16,25 +12,28 @@ import __SFrontendChecker, {
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 
-export default {
-    id: 'twitterCard',
-    name: 'Twitter Card Metas',
-    description: 'Specifying the twitter card metas is recommanded',
-    level: 1,
-    check({ $context }) {
-        // @ts-ignore
-        if (!$context.querySelector('meta[property^="twitter:"]')) {
+export default function (__SFrontendChecker) {
+    return {
+        id: 'twitterCard',
+        name: 'Twitter Card Metas',
+        description: 'Specifying the twitter card metas is recommanded',
+        category: __SFrontendChecker.CATEGORY_SOCIAL,
+        level: 1,
+        check({ $context }) {
+            // @ts-ignore
+            if (!$context.querySelector('meta[property^="twitter:"]')) {
+                return {
+                    status: 'error',
+                    message: 'The document is missing the twitterCard metas',
+                    example:
+                        '<meta name="twitter:card" content="summary" />\n<meta name="twitter:site" content="@nytimesbits" />',
+                    moreLink:
+                        'https://developer.twitter.com/en/docs/twitter-for-websites/cards/guides/getting-started',
+                };
+            }
             return {
-                status: 'error',
-                message: 'The document is missing the twitterCard metas',
-                example:
-                    '<meta name="twitter:card" content="summary" />\n<meta name="twitter:site" content="@nytimesbits" />',
-                moreLink:
-                    'https://developer.twitter.com/en/docs/twitter-for-websites/cards/guides/getting-started',
+                status: 'success',
             };
-        }
-        return {
-            status: 'success',
-        };
-    },
-};
+        },
+    };
+}

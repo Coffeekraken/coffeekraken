@@ -18,14 +18,10 @@ body {
 
 .s-dashboard {
     .s-layout ._column {
-        /* height: calc(100vh - 80px); */
-        /* overflow-y: auto;
-        overflow-x: visible; */
         padding-block-start: sugar.padding(50);
-        /* @sugar.scrollbar (sugar.color(accent, --alpha 0.3)); */
     }
 
-    .s-layout > * > *:not(:first-child) {
+    .s-layout > * > *:not(:first-child, style) {
         display: block;
         margin-block-start: sugar.margin(30);
     }

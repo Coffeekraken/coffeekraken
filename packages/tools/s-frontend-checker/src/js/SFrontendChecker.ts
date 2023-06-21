@@ -5,6 +5,18 @@ import __SPromise from '@coffeekraken/s-promise';
 import { __clone, __deepMerge } from '@coffeekraken/sugar/object';
 import __SFrontendCheckerSettingsInterface from './interface/SFrontendCheckerSettingsInterface';
 
+import __ariaBanner from './checks/ariaBanner';
+import __ariaButtonLabel from './checks/ariaButtonLabel';
+import __ariaComplmentary from './checks/ariaComplementary';
+import __ariaContentInfo from './checks/ariaContentInfo';
+import __ariaDescribedBy from './checks/ariaDescribedBy';
+import __ariaFigureFigcaption from './checks/ariaFigureFigcaption';
+import __ariaForm from './checks/ariaForm';
+import __ariaLabelledBy from './checks/ariaLabelledBy';
+import __ariaMain from './checks/ariaMain';
+import __ariaRoles from './checks/ariaRoles';
+import __ariaSearch from './checks/ariaSearch';
+import __ariaTree from './checks/ariaTree';
 import __author from './checks/author';
 import __bTag from './checks/bTag';
 import __charset from './checks/charset';
@@ -30,8 +42,15 @@ import __title from './checks/title';
 import __twitterCard from './checks/twitterCard';
 import __uniqueIds from './checks/uniqueIds';
 import __viewport from './checks/viewport';
+import __visualFocus from './checks/visualFocus';
 import __w3c from './checks/w3c';
 import __webpImages from './checks/webpImages';
+
+import __ariaTableCaption from './checks/ariaTableCaption';
+
+import __ariaFieldsetLegend from './checks/ariaFieldsetLegend';
+
+import __ariaLabelForm from './checks/ariaLabelForm';
 
 /**
  * @name                SFrontendChecker
@@ -67,7 +86,7 @@ export interface ISFrontendCheckerCheckObj {
     description: string;
     level: number;
     check: Function;
-    result: ISFrontendCheckerCheckResult;
+    result?: ISFrontendCheckerCheckResult;
 }
 
 export interface ISFrontendCheckerCheckResultAction {
@@ -92,6 +111,78 @@ export default class SFrontendChecker extends __SClass {
      * Store the registered checks
      */
     static _registeredChecks: { [key: string]: ISFrontendCheckerCheckObj } = {};
+
+    /**
+     * @name        CATEGORY_ACCESSIBILITY
+     * @type        String
+     * @static
+     *
+     * Store the "accessibility" category
+     *
+     * @since       2.0.0
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    static CATEGORY_ACCESSIBILITY = 'accessibility';
+
+    /**
+     * @name        CATEGORY_SEO
+     * @type        String
+     * @static
+     *
+     * Store the "seo" category
+     *
+     * @since       2.0.0
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    static CATEGORY_SEO = 'seo';
+
+    /**
+     * @name        CATEGORY_BEST_PRACTICES
+     * @type        String
+     * @static
+     *
+     * Store the "best practices" category
+     *
+     * @since       2.0.0
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    static CATEGORY_BEST_PRACTICES = 'best pracices';
+
+    /**
+     * @name        CATEGORY_PERFORMANCE
+     * @type        String
+     * @static
+     *
+     * Store the "performance" category
+     *
+     * @since       2.0.0
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    static CATEGORY_PERFORMANCE = 'performance';
+
+    /**
+     * @name        CATEGORY_SOCIAL
+     * @type        String
+     * @static
+     *
+     * Store the "social" category
+     *
+     * @since       2.0.0
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    static CATEGORY_SOCIAL = 'social';
+
+    /**
+     * @name        CATEGORY_NICE_TO_HAVE
+     * @type        String
+     * @static
+     *
+     * Store the "nice to have" category
+     *
+     * @since       2.0.0
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    static CATEGORY_NICE_TO_HAVE = 'nice to have';
 
     /**
      * @name        LEVEL_LOW
@@ -177,8 +268,17 @@ export default class SFrontendChecker extends __SClass {
      * @since          2.0.0
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    static registerCheck(checkObj: ISFrontendCheckerCheckObj) {
-        this._registeredChecks[checkObj.id] = checkObj;
+    static registerCheck(
+        check: ISFrontendCheckerCheckObj | Function<ISFrontendCheckerCheckObj>,
+    ) {
+        // setTimeout(() => {
+        if (typeof check === 'function') {
+            const checkObj = check(SFrontendChecker);
+            this._registeredChecks[checkObj.id] = checkObj;
+            return;
+        }
+        this._registeredChecks[check.id] = check;
+        // });
     }
 
     /**
@@ -275,3 +375,19 @@ SFrontendChecker.registerCheck(__iTag);
 SFrontendChecker.registerCheck(__linksTitle);
 SFrontendChecker.registerCheck(__navRoleAttribute);
 SFrontendChecker.registerCheck(__main);
+SFrontendChecker.registerCheck(__ariaForm);
+SFrontendChecker.registerCheck(__ariaMain);
+SFrontendChecker.registerCheck(__ariaBanner);
+SFrontendChecker.registerCheck(__ariaComplmentary);
+SFrontendChecker.registerCheck(__ariaContentInfo);
+SFrontendChecker.registerCheck(__ariaSearch);
+SFrontendChecker.registerCheck(__ariaTree);
+SFrontendChecker.registerCheck(__ariaRoles);
+SFrontendChecker.registerCheck(__ariaLabelForm);
+SFrontendChecker.registerCheck(__ariaFieldsetLegend);
+SFrontendChecker.registerCheck(__ariaTableCaption);
+SFrontendChecker.registerCheck(__ariaFigureFigcaption);
+SFrontendChecker.registerCheck(__ariaButtonLabel);
+SFrontendChecker.registerCheck(__ariaDescribedBy);
+SFrontendChecker.registerCheck(__ariaLabelledBy);
+SFrontendChecker.registerCheck(__visualFocus);

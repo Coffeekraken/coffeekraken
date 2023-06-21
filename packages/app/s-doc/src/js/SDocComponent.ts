@@ -2,7 +2,7 @@ import __SLitComponent, { html } from '@coffeekraken/s-lit-component';
 
 import { __upperFirst } from '@coffeekraken/sugar/string';
 
-import { __escapeQueue } from '@coffeekraken/sugar/keyboard';
+import { __escapeQueue, __hotkey } from '@coffeekraken/sugar/keyboard';
 import { __deepMerge } from '@coffeekraken/sugar/object';
 import { css, unsafeCSS } from 'lit';
 import { unsafeHTML } from 'lit/directives/unsafe-html.js';
@@ -122,12 +122,17 @@ export default class SDocComponent extends __SLitComponent {
      * Register some shortcuts
      */
     _registerShortcuts(): void {
-        document.addEventListener('keyup', (e) => {
-            if (e.key === 'f' && e.ctrlKey) {
-                this._$searchInput?.focus();
-            } else if (e.key === 'd' && e.ctrlKey) {
-                this._toggleFullscreen();
-            }
+        __hotkey('ctrl+d', {
+            title: 'Documentation',
+            description: 'Access the documentation easily',
+        }).on('press', (e) => {
+            this._toggleFullscreen();
+        });
+        __hotkey('ctrl+s', {
+            title: 'Search',
+            description: 'Search the documentation',
+        }).on('press', (e) => {
+            this._$searchInput?.focus();
         });
     }
 

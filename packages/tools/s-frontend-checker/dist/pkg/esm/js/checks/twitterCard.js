@@ -11,24 +11,27 @@
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-export default {
-    id: 'twitterCard',
-    name: 'Twitter Card Metas',
-    description: 'Specifying the twitter card metas is recommanded',
-    level: 1,
-    check({ $context }) {
-        // @ts-ignore
-        if (!$context.querySelector('meta[property^="twitter:"]')) {
+export default function (__SFrontendChecker) {
+    return {
+        id: 'twitterCard',
+        name: 'Twitter Card Metas',
+        description: 'Specifying the twitter card metas is recommanded',
+        category: __SFrontendChecker.CATEGORY_SOCIAL,
+        level: 1,
+        check({ $context }) {
+            // @ts-ignore
+            if (!$context.querySelector('meta[property^="twitter:"]')) {
+                return {
+                    status: 'error',
+                    message: 'The document is missing the twitterCard metas',
+                    example: '<meta name="twitter:card" content="summary" />\n<meta name="twitter:site" content="@nytimesbits" />',
+                    moreLink: 'https://developer.twitter.com/en/docs/twitter-for-websites/cards/guides/getting-started',
+                };
+            }
             return {
-                status: 'error',
-                message: 'The document is missing the twitterCard metas',
-                example: '<meta name="twitter:card" content="summary" />\n<meta name="twitter:site" content="@nytimesbits" />',
-                moreLink: 'https://developer.twitter.com/en/docs/twitter-for-websites/cards/guides/getting-started',
+                status: 'success',
             };
-        }
-        return {
-            status: 'success',
-        };
-    },
-};
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUlBOzs7Ozs7Ozs7Ozs7R0FZRztBQUVILGVBQWU7SUFDWCxFQUFFLEVBQUUsYUFBYTtJQUNqQixJQUFJLEVBQUUsb0JBQW9CO0lBQzFCLFdBQVcsRUFBRSxrREFBa0Q7SUFDL0QsS0FBSyxFQUFFLENBQUM7SUFDUixLQUFLLENBQUMsRUFBRSxRQUFRLEVBQUU7UUFDZCxhQUFhO1FBQ2IsSUFBSSxDQUFDLFFBQVEsQ0FBQyxhQUFhLENBQUMsNEJBQTRCLENBQUMsRUFBRTtZQUN2RCxPQUFPO2dCQUNILE1BQU0sRUFBRSxPQUFPO2dCQUNmLE9BQU8sRUFBRSwrQ0FBK0M7Z0JBQ3hELE9BQU8sRUFDSCxxR0FBcUc7Z0JBQ3pHLFFBQVEsRUFDSix5RkFBeUY7YUFDaEcsQ0FBQztTQUNMO1FBQ0QsT0FBTztZQUNILE1BQU0sRUFBRSxTQUFTO1NBQ3BCLENBQUM7SUFDTixDQUFDO0NBQ0osQ0FBQyJ9
+        },
+    };
+}
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBOzs7Ozs7Ozs7Ozs7R0FZRztBQUVILE1BQU0sQ0FBQyxPQUFPLFdBQVcsa0JBQWtCO0lBQ3ZDLE9BQU87UUFDSCxFQUFFLEVBQUUsYUFBYTtRQUNqQixJQUFJLEVBQUUsb0JBQW9CO1FBQzFCLFdBQVcsRUFBRSxrREFBa0Q7UUFDL0QsUUFBUSxFQUFFLGtCQUFrQixDQUFDLGVBQWU7UUFDNUMsS0FBSyxFQUFFLENBQUM7UUFDUixLQUFLLENBQUMsRUFBRSxRQUFRLEVBQUU7WUFDZCxhQUFhO1lBQ2IsSUFBSSxDQUFDLFFBQVEsQ0FBQyxhQUFhLENBQUMsNEJBQTRCLENBQUMsRUFBRTtnQkFDdkQsT0FBTztvQkFDSCxNQUFNLEVBQUUsT0FBTztvQkFDZixPQUFPLEVBQUUsK0NBQStDO29CQUN4RCxPQUFPLEVBQ0gscUdBQXFHO29CQUN6RyxRQUFRLEVBQ0oseUZBQXlGO2lCQUNoRyxDQUFDO2FBQ0w7WUFDRCxPQUFPO2dCQUNILE1BQU0sRUFBRSxTQUFTO2FBQ3BCLENBQUM7UUFDTixDQUFDO0tBQ0osQ0FBQztBQUNOLENBQUMifQ==

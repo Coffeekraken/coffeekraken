@@ -407,9 +407,9 @@ export default class SFrontendServer extends __SClass {
                         `<red>[kill]</red> Gracefully killing the <cyan>frontend server</cyan>...`,
                     );
                     return new Promise((_resolve) => {
-                        server.close(() => {
-                            // @ts-ignore
-                            _resolve();
+                        server.close(async () => {
+                            await __wait(500);
+                            _resolve(null);
                         });
                     });
                 });

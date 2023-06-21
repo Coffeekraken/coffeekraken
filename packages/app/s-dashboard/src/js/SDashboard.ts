@@ -1,8 +1,9 @@
 import __SClass from '@coffeekraken/s-class';
+import { __injectStyle } from '@coffeekraken/sugar/dom';
 import { __escapeQueue, __hotkey } from '@coffeekraken/sugar/keyboard';
 import { __deepMerge } from '@coffeekraken/sugar/object';
 
-import '../../../../src/css/index.css';
+import __css from '../css/index.css';
 import __SDashboardSettingsInterface from './interface/SDashboardSettingsInterface';
 
 /**
@@ -33,6 +34,7 @@ import __SDashboardSettingsInterface from './interface/SDashboardSettingsInterfa
 export interface ISDashboardSettings {
     layout: any[];
     widgets: Record<string, any>;
+    env: 'development' | 'production';
 }
 
 export default class SDashboard extends __SClass {
@@ -96,6 +98,9 @@ export default class SDashboard extends __SClass {
             ),
         );
 
+        // inject css
+        __injectStyle(__css);
+
         // expose the dashboard on document to be able to access it from the iframe
         // @ts-ignore
         document.dashboard = this;
@@ -114,9 +119,9 @@ export default class SDashboard extends __SClass {
         __hotkey('ctrl+s').on('press', () => {
             this.open();
         });
-        // __hotkey('ctrl+p').on('press', () => {
-        //     this.changePage();
-        // });
+        __hotkey('ctrl+y').on('press', () => {
+            this.open();
+        });
 
         this._injectWebVitals();
     }
@@ -185,16 +190,16 @@ export default class SDashboard extends __SClass {
      * @since       2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    changePage() {
-        // open the dashboard
-        this.open();
-        // @ts-ignore
-        this._$iframe.contentDocument?.dispatchEvent(
-            new CustomEvent('dashboard.changePage', {}),
-        );
-        // @ts-ignore
-        this._$iframe.contentDocument.isChangePageWanted = true;
-    }
+    // changePage() {
+    //     // open the dashboard
+    //     this.open();
+    //     // @ts-ignore
+    //     this._$iframe.contentDocument?.dispatchEvent(
+    //         new CustomEvent('dashboard.changePage', {}),
+    //     );
+    //     // @ts-ignore
+    //     this._$iframe.contentDocument.isChangePageWanted = true;
+    // }
 
     /**
      * @name            open
@@ -232,25 +237,30 @@ export default class SDashboard extends __SClass {
             this._$iframe.contentWindow.document.write(`
                 <html>
                 <head>
-                <script>
-                    var $document = document;
-                    if (window.parent) {
-                        $document = window.parent.document;
+                    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+                    <script>
+                        var $document = document;
+                        if (window.parent) {
+                            $document = window.parent.document;
+                        }
+                        var $html = $document.querySelector('html');
+                        var $dashboardHtml = document.querySelector('html');
+                        var theme = $html.getAttribute('theme');
+                        var isDark = theme.match(/dark$/);
+                        if (isDark && window.parent) {
+                            $dashboardHtml.setAttribute('theme', 'default-dark');
+                        } else {
+                            $dashboardHtml.setAttribute('theme', 'default-light');
+                        }
+                        $document.addEventListener('s-theme.change', function(e) {
+                            $dashboardHtml.setAttribute('theme', 'default-' + e.detail.variant);
+                        });
+                    </script>
+                    ${
+                        this.settings.env === 'development'
+                            ? '<script src="/sugar/dashboard/init.js" type="module" defer></script>'
+                            : '<script src="https://cdnv2.coffeekraken.io/s-dashboard/init/init.js" type="module" defer></script>'
                     }
-                    var $html = $document.querySelector('html');
-                    var $dashboardHtml = document.querySelector('html');
-                    var theme = $html.getAttribute('theme');
-                    var isDark = theme.match(/dark$/);
-                    if (isDark && window.parent) {
-                        $dashboardHtml.setAttribute('theme', 'default-dark');
-                    } else {
-                        $dashboardHtml.setAttribute('theme', 'default-light');
-                    }
-                    $document.addEventListener('s-theme.change', function(e) {
-                        $dashboardHtml.setAttribute('theme', 'default-' + e.detail.variant);
-                    });
-                </script>
-                <script src="/sugar/dashboard/init.js" type="module" defer></script>
                 </head>
                 <body s-sugar>
                     <s-dashboard></s-dashboard>
@@ -269,6 +279,7 @@ export default class SDashboard extends __SClass {
         // handle escape to close
         __escapeQueue(
             () => {
+                _console.log('CLOSE');
                 this.close();
             },
             {

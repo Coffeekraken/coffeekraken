@@ -1,11 +1,11 @@
 // @ts-nocheck
 
 import __SLitComponent from '@coffeekraken/s-lit-component';
-import { html } from 'lit';
+import { css, html, unsafeCSS } from 'lit';
 
 import _SDashboardComponentWidgetInterface from '../../interface/SDashboardComponentWidgetInterface';
 
-import '../../../../../../src/js/partials/s-dashboard-frontend-checker-component/s-dashboard-frontend-checker-component.css';
+import __css from './s-dashboard-frontend-checker-component.css';
 
 import __SFrontendChecker, {
     ISFrontendCheckerCheckObj,
@@ -21,6 +21,12 @@ export default class SDashboardFrontendCheckerComponent extends __SLitComponent 
             {},
             _SDashboardComponentWidgetInterface,
         );
+    }
+
+    static get styles() {
+        return css`
+            ${unsafeCSS(__css)}
+        `;
     }
 
     constructor() {
@@ -256,7 +262,8 @@ export default class SDashboardFrontendCheckerComponent extends __SLitComponent 
                                             <p
                                                 class="_description s-typo:p s-mbs:10"
                                             >
-                                                ${check.description}
+                                                ${check.result?.message ??
+                                                check.description}
                                             </p>
 
                                             ${check.result

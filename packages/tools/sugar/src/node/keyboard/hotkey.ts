@@ -30,7 +30,7 @@ import __isChildProcess from '../../shared/is/isChildProcess';
  *      $2
  * });
  * // hotkey.cancel(); // when want to cancel the listener
- * 
+ *
  * @example         js
  * import { __hotkey } from '@coffeekraken/sugar/keyboard';
  * const promise = __hotkey('ctrl+a').on('press', (e) => {
@@ -66,11 +66,21 @@ export class HotkeySettingsInterface extends __SInterface {
 }
 
 import __readline from 'readline';
-__readline.emitKeypressEvents(process.stdin);
 
-if (process.stdin.setRawMode != null) {
-    process.stdin.setRawMode(true);
+let readline;
+
+if (!__isChildProcess()) {
+    readline = __readline.createInterface({
+        input: process.stdin,
+        output: process.stdout,
+    });
+    __readline.emitKeypressEvents(process.stdin);
+    if (process.stdin.isTTY) {
+        process.stdin.setRawMode(true);
+    }
 }
+
+let isSigInt = false;
 
 export { HotkeySettingsInterface as SettingsInterface };
 
@@ -81,11 +91,11 @@ export default function __hotkey(key, settings?: Partial<IHotkeySettings>) {
         id: 'hotkey',
     });
 
-    process.stdin.on('keypress', (str, keyObj) => {
-        if (__isChildProcess()) {
-            return;
-        }
+    if (__isChildProcess()) {
+        return;
+    }
 
+    readline.on('keypress', (str, keyObj) => {
         let pressedKey = keyObj.name;
         if (keyObj.ctrl) pressedKey = `ctrl${set.splitChar}${pressedKey}`;
         if (keyObj.shift) pressedKey = `shift${set.splitChar}${pressedKey}`;

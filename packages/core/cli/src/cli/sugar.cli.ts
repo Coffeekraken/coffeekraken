@@ -187,15 +187,23 @@ export default class SSugarCli {
      * @author      Olivier Bossel <olivier.bossel@gmail.com>
      */
     static async init() {
+        // listen for ctrl+c
+        if (!__isChildProcess()) {
+            __hotkey('ctrl+c').on('press', () => {
+                process.emit('custom_exit');
+                process.emit('SIGINT');
+            });
+        }
+
         // singleton
         if (global._sugarCli) return global._sugarCli;
         global._sugarCli = SSugarCli;
 
-        // listen for ctrl+c
-        __hotkey('ctrl+c').on('press', () => {
-            process.emit('custom_exit');
-            process.emit('SIGINT');
-        });
+        // parse arguments
+        this.args = this._parseArgs(process.argv);
+
+        // set node environment (MUST be before config loading)
+        this._setNodeEnv();
 
         // make sure we are in a package
         await this._checkIfWeAreInPackage();
@@ -220,10 +228,6 @@ export default class SSugarCli {
 
         this.packageJson = __packageJsonSync();
         this.cliPackageJson = __packageJsonSync(__dirname());
-
-        this.args = this._parseArgs(process.argv);
-
-        this._setNodeEnv();
 
         this._bench.step('beforeLoadConfig');
 
@@ -495,7 +499,6 @@ export default class SSugarCli {
 
             // @ts-ignore
             const proPromise = processFn(args);
-            // this._eventEmitter.pipe(proPromise, {});
 
             await proPromise;
 
@@ -508,7 +511,6 @@ export default class SSugarCli {
                 [],
                 {},
             );
-            // this._eventEmitter.pipe(promise);
             await promise;
             process.exit(0);
         }
@@ -531,55 +533,6 @@ export default class SSugarCli {
                         `The sugar.json file of the package "<yellow>${packageName}</yellow>"is missing the "cli.actions" object`,
                     );
                 }
-
-                // if (cliObj.interactive) {
-                //     Object.keys(cliObj.interactive).forEach(
-                //         (interactiveName) => {
-                //             const interactiveObj =
-                //                 cliObj.interactive[interactiveName];
-
-                //             // skip cli that are scoped in package when not in a package
-                //             if (
-                //                 interactiveObj.scope === 'package' &&
-                //                 !__SEnv.packageJson
-                //             ) {
-                //                 return;
-                //             }
-
-                //             const cliPath = __path.resolve(
-                //                 sugarJson.metas.path.replace(
-                //                     /\/sugar\.json$/,
-                //                     '',
-                //                 ),
-                //                 interactiveObj.process,
-                //             );
-
-                //             let interfacePath;
-                //             if (interactiveObj.interface) {
-                //                 interfacePath = __path.resolve(
-                //                     sugarJson.metas.path.replace(
-                //                         /\/sugar\.json$/,
-                //                         '',
-                //                     ),
-                //                     interactiveObj.interface,
-                //                 );
-                //             }
-
-                //             if (!__fs.existsSync(cliPath))
-                //                 throw new Error(
-                //                     `[sugar.cli] Sorry but the references interactive cli file "${cliPath}" does not exists...`,
-                //                 );
-
-                //             this._availableInteractiveCli[
-                //                 `${cliObj.stack}.${interactiveName}`
-                //             ] = {
-                //                 ...interactiveObj,
-                //                 processPath: cliPath,
-                //                 interfacePath,
-                //             };
-                //         },
-                //     );
-                // }
 
                 Object.keys(cliObj.actions).forEach((action) => {
                     if (action.match(/\s/)) {

@@ -1,0 +1,46 @@
+/**
+ * @name            ariaFieldsetLegend
+ * @namespace       js.checks
+ * @type            Function
+ * @platform        js
+ * @status          beta
+ * @async
+ *
+ * Check that each <fieldset> tags have a proper <legend> into it
+ *
+ * @since       2.0.0
+ * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+ */
+export default function (__SFrontendChecker) {
+    return {
+        id: 'ariaFieldsetLegend',
+        name: 'Aria fieldset legend',
+        category: __SFrontendChecker.CATEGORY_ACCESSIBILITY,
+        description: 'Each `<fieldset>` elements should have a proper `<legend>` into it',
+        level: 1,
+        check({ $context }) {
+            var _a;
+            const $fieldsets = Array.from((_a = $context.querySelectorAll('fieldset:not(:has(> legend))')) !== null && _a !== void 0 ? _a : []);
+            if ($fieldsets.length) {
+                return {
+                    status: 'warning',
+                    message: 'Your `<fieldset>` tags should have a proper `<legend>` into it',
+                    example: '<fieldset\n<legend>My cool form</legend>\n</fieldset>',
+                    moreLink: 'https://www.w3.org/WAI/ARIA/apg/practices/names-and-descriptions/',
+                    action: {
+                        label: () => `Log them (${$fieldsets.length})`,
+                        handler: () => console.log($fieldsets),
+                    },
+                };
+            }
+            return {
+                status: 'success',
+                action: {
+                    label: () => `Log them (${$fieldsets.length})`,
+                    handler: () => console.log($fieldsets),
+                },
+            };
+        },
+    };
+}
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBOzs7Ozs7Ozs7Ozs7R0FZRztBQUNILE1BQU0sQ0FBQyxPQUFPLFdBQVcsa0JBQWtCO0lBQ3ZDLE9BQU87UUFDSCxFQUFFLEVBQUUsb0JBQW9CO1FBQ3hCLElBQUksRUFBRSxzQkFBc0I7UUFDNUIsUUFBUSxFQUFFLGtCQUFrQixDQUFDLHNCQUFzQjtRQUNuRCxXQUFXLEVBQ1Asb0VBQW9FO1FBQ3hFLEtBQUssRUFBRSxDQUFDO1FBQ1IsS0FBSyxDQUFDLEVBQUUsUUFBUSxFQUFFOztZQUNkLE1BQU0sVUFBVSxHQUFHLEtBQUssQ0FBQyxJQUFJLENBQ3pCLE1BQUEsUUFBUSxDQUFDLGdCQUFnQixDQUFDLDhCQUE4QixDQUFDLG1DQUFJLEVBQUUsQ0FDbEUsQ0FBQztZQUNGLElBQUksVUFBVSxDQUFDLE1BQU0sRUFBRTtnQkFDbkIsT0FBTztvQkFDSCxNQUFNLEVBQUUsU0FBUztvQkFDakIsT0FBTyxFQUNILGdFQUFnRTtvQkFDcEUsT0FBTyxFQUNILHVEQUF1RDtvQkFDM0QsUUFBUSxFQUNKLG1FQUFtRTtvQkFDdkUsTUFBTSxFQUFFO3dCQUNKLEtBQUssRUFBRSxHQUFHLEVBQUUsQ0FBQyxhQUFhLFVBQVUsQ0FBQyxNQUFNLEdBQUc7d0JBQzlDLE9BQU8sRUFBRSxHQUFHLEVBQUUsQ0FBQyxPQUFPLENBQUMsR0FBRyxDQUFDLFVBQVUsQ0FBQztxQkFDekM7aUJBQ0osQ0FBQzthQUNMO1lBQ0QsT0FBTztnQkFDSCxNQUFNLEVBQUUsU0FBUztnQkFDakIsTUFBTSxFQUFFO29CQUNKLEtBQUssRUFBRSxHQUFHLEVBQUUsQ0FBQyxhQUFhLFVBQVUsQ0FBQyxNQUFNLEdBQUc7b0JBQzlDLE9BQU8sRUFBRSxHQUFHLEVBQUUsQ0FBQyxPQUFPLENBQUMsR0FBRyxDQUFDLFVBQVUsQ0FBQztpQkFDekM7YUFDSixDQUFDO1FBQ04sQ0FBQztLQUNKLENBQUM7QUFDTixDQUFDIn0=

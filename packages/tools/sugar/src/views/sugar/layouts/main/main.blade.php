@@ -63,8 +63,6 @@ if (isset($frontspec)) {
 <html lang="{{ $lang }}" dir="{{ $dir }}" class="{{ $lodClasses }}">
 <head>
 
-    <script src="/sugar/dashboard/lazy.js" type="module" defer></script>
-
     <!-- metas -->
     {!! \Sugar\frontspec\metas($frontspec, $env) !!}
 
@@ -79,6 +77,13 @@ if (isset($frontspec)) {
         }
     @endphp
     {!! \Sugar\frontspec\assets($frontspec, $cacheBuster) !!}
+
+    {{-- SDashboard --}}
+    @if (isset($_ENV['ENV']) && $_ENV['ENV'] != 'production')
+        <!-- SDashboard -->
+        {{-- <script src="/sugar/dashboard/lazy.js" type="module" defer></script> --}}
+        <script src="https://cdnv2.coffeekraken.io/s-dashboard/lazy/lazy.js" defer></script>
+    @endif
 
     <!-- favicon -->
     {!! \Sugar\frontspec\favicon($frontspec) !!}

@@ -1,7 +1,3 @@
-import __SFrontendChecker, {
-    ISFrontendCheckerCheckResult,
-} from '../SFrontendChecker';
-
 /**
  * @name            comments
  * @namespace       js.checks
@@ -29,27 +25,30 @@ function findComments(el) {
     return arr;
 }
 
-export default {
-    id: 'comments',
-    name: 'Comments',
-    description: 'Comments are not recommanded in your code',
-    level: 3,
-    check({ $context }) {
-        const $comments = findComments($context);
-        // @ts-ignore
-        if ($comments.length) {
+export default function (__SFrontendChecker) {
+    return {
+        id: 'comments',
+        name: 'Comments',
+        description: 'Comments are not recommanded in your code',
+        category: __SFrontendChecker.CATEGORY_BEST_PRACTICES,
+        level: 3,
+        check({ $context }) {
+            const $comments = findComments($context);
+            // @ts-ignore
+            if ($comments.length) {
+                return {
+                    status: 'warning',
+                    message: 'The document has some comment(s) left',
+                    example: '<!-- comment -->',
+                    action: {
+                        label: () => `Log them (${$comments.length})`,
+                        handler: () => console.log($comments),
+                    },
+                };
+            }
             return {
-                status: 'warning',
-                message: 'The document has some comment(s) left',
-                example: '<!-- comment -->',
-                action: {
-                    label: () => `Log them (${$comments.length})`,
-                    handler: () => console.log($comments),
-                },
+                status: 'success',
             };
-        }
-        return {
-            status: 'success',
-        };
-    },
-};
+        },
+    };
+}

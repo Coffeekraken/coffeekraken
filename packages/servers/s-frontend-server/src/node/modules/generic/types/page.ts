@@ -1,3 +1,4 @@
+import __SEnv from '@coffeekraken/s-env';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
 import { __execPhp } from '@coffeekraken/sugar/exec';
 import { __dirname } from '@coffeekraken/sugar/fs';
@@ -25,6 +26,7 @@ export default function page({
             {
                 $_ENV: {
                     S_FRONTEND_DIR: __packageRootDir(),
+                    ENV: __SEnv.get('env'),
                 },
                 $_SERVER: __serverObjectFromExpressRequest(req),
                 pageFile: pageFilePath,

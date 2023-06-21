@@ -4,8 +4,9 @@ import { css, html, unsafeCSS } from 'lit';
 import { unsafeHTML } from 'lit/directives/unsafe-html.js';
 // @ts-ignore
 import { __hotkey } from '@coffeekraken/sugar/keyboard';
-import __css from '../../../../src/css/s-dashboard.css'; // relative to /dist/pkg/esm/js
 import __SDashboardComponentInterface from './interface/SDashboardComponentInterface';
+
+import { __escapeQueue } from '@coffeekraken/sugar/keyboard';
 
 import { __define as __SDashboardAssetsComponent } from './partials/s-dashboard-assets-component/SDashboardAssetsComponent';
 import { __define as __SDashboardBrowserstackComponent } from './partials/s-dashboard-browserstack-component/SDashboardBrowserstackComponent';
@@ -19,7 +20,13 @@ import { __define as __SDashboardProjectComponent } from './partials/s-dashboard
 import { __define as __SDashboardResponsiveComponent } from './partials/s-dashboard-responsive-component/SDashboardResponsiveComponent';
 import { __define as __SDashboardWebVitalsComponent } from './partials/s-dashboard-web-vitals-component/SDashboardWebVitalsComponent';
 
-import __logoSvg from '../../../../src/js/partials/logo';
+// dev
+// import __css from '../../../../src/css/s-dashboard.css'; // relative to /dist/pkg/esm/js
+// import __logoSvg from '../../../../src/js/partials/logo';
+
+// build
+import __css from '../css/s-dashboard.css'; // relative to /dist/pkg/esm/js
+import __logoSvg from './partials/logo';
 
 // external components
 __SDashboardPagesComponent();
@@ -124,11 +131,18 @@ export default class SDashboardComponent extends __SLitComponent {
      */
     _listenShortcuts() {
         // ctrl+s
-        __hotkey('ctrl+s').on('press', () => {
-            this.open();
-        });
+        __hotkey('ctrl+s').on(
+            'press',
+            () => {
+                this.open();
+            },
+            {
+                title: 'Dashboard',
+                description: 'Show sugar dashboard',
+            },
+        );
         // escape
-        __hotkey('escape').on('press', () => {
+        __escapeQueue(() => {
             this.close();
         });
     }

@@ -19,7 +19,7 @@
                 <p>Under <a class="s-typo:bold s-mbe:20 s-tc:accent"
                         href="https://github.com/Coffeekraken/coffeekraken/blob/master/LICENSE" target="_blank"
                         title="Coffeekraken.io">MIT</a> License</p>
-                <p>Current version: <bold class="s-typo:bold s-tc:accent">{{ $config->package->version }}</bold>
+                <p>Current version: <bold class="s-typo:bold s-tc:accent">{{ $frontspec->package->version }}</bold>
                 </p>
 
             </div>

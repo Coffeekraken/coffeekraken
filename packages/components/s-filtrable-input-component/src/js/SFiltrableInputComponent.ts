@@ -9,6 +9,8 @@ import __SFiltrableInputComponentInterface from './interface/SFiltrableInputComp
 
 import { __cursorToEnd } from '@coffeekraken/sugar/dom';
 
+import { __escapeQueue } from '@coffeekraken/sugar/keyboard';
+
 import {
     __distanceFromElementTopToViewportBottom,
     __distanceFromElementTopToViewportTop,
@@ -308,6 +310,7 @@ export default class SFiltrableInputComponent extends __SLitComponent {
             // @ts-ignore
             const value = e.target.value;
             this.state.searchValue = value;
+            this.open();
             this.filterItems();
             this._updateListSizeAndPosition();
         });
@@ -343,11 +346,6 @@ export default class SFiltrableInputComponent extends __SLitComponent {
             this.filterItems(false);
         });
 
-        __hotkey('escape').on('press', (e) => {
-            e.preventDefault();
-            if (!this.utils.isActive()) return;
-            this.close();
-        });
         __hotkey('up').on('press', async (e) => {
             e.preventDefault();
 
@@ -548,6 +546,12 @@ export default class SFiltrableInputComponent extends __SLitComponent {
         this.$input.value = '';
         this.state.searchValue = '';
         this.filterItems();
+    }
+    open() {
+        __escapeQueue(() => {
+            if (!this.utils.isActive()) return;
+            this.close();
+        });
     }
     close() {
         __cursorToEnd(this.$input);

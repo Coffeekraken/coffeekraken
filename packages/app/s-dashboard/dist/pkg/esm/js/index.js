@@ -1,6 +1,0 @@
-import { define as __SDashboardComponent } from './SDashboardComponent';
-import { __expandPleasantCssClassnamesLive } from '@coffeekraken/sugar/dom';
-console.log('AAAAAA');
-__SDashboardComponent();
-__expandPleasantCssClassnamesLive();
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sRUFBRSxNQUFNLElBQUkscUJBQXFCLEVBQUUsTUFBTSx1QkFBdUIsQ0FBQztBQUV4RSxPQUFPLEVBQUUsaUNBQWlDLEVBQUUsTUFBTSx5QkFBeUIsQ0FBQztBQUU1RSxPQUFPLENBQUMsR0FBRyxDQUFDLFFBQVEsQ0FBQyxDQUFDO0FBRXRCLHFCQUFxQixFQUFFLENBQUM7QUFFeEIsaUNBQWlDLEVBQUUsQ0FBQyJ9

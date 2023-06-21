@@ -1,0 +1,54 @@
+{% extends 'sugar/readme/layouts/main/main.twig' %}
+{% block body %}
+
+<!--
+/**
+ * @name            README
+ * @namespace       doc
+ * @type            Markdown
+ * @platform        md
+ * @status          stable
+ * @menu            Documentation           /doc/readme
+ *
+ * @since           2.0.0
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+ */
+-->
+
+## SHotkeysListComponent
+
+Simply list the registered hotkeys stored in the document.env.HOTKEYS stack and update itself on the 'hotkey.update' event. Works fine with the `__hotkey` function from \"@coffeekraken/sugar/dom\" package.
+
+## Features
+
+-   Framework agnostic. Simply webcomponent.
+-   List all the registered hotkeys from the document.env.HOTKEYS stack.
+-   Works fine with the `__hotkey` function from \"@coffeekraken/sugar/dom\" package.
+-   And more...
+
+## Usage
+
+First, simply import and define the component in your js/ts file:
+
+```js
+import { __define } from '@coffeekraken/s-hotkeys-list-component';
+__define();
+```
+
+Make use of it in your pages:
+
+```html
+<s-hotkeys-list></s-hotkeys-list>
+```
+
+## Attributes
+
+{% include 'sugar/interface/fromDocmap/fromDocmap.twig' with {
+    docmapItem: docmap.map['@coffeekraken.s-hotkeys-list-component.js.interface.SHotkeysListComponentInterface']
+} only %}
+
+## API
+
+For more information about the API, please check out [the API documentation](/api/@coffeekraken.s-hotkeys-list-component.js.SHotkeysListComponent)
+
+{% endblock %}

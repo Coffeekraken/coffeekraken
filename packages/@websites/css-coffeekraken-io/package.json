@@ -7,7 +7,7 @@
     "private": true,
     "scripts": {
         "dev": "sugard kitchen.run dev",
-        "prod": "sugard kitchen.run prod",
+        "preview": "sugard kitchen.run preview",
         "build": "sugard kitchen.run build --target production",
         "static": "live-server static",
         "static.build": "sugard static.build --clean --env production --target production",
@@ -57,6 +57,7 @@
         "@coffeekraken/s-glob": "^2.0.0-alpha.27",
         "@coffeekraken/s-google-map-component": "^2.0.0-alpha.27",
         "@coffeekraken/s-highlight-feature": "^2.0.0-alpha.27",
+        "@coffeekraken/s-hotkeys-list-component": "^2.0.0-alpha.27",
         "@coffeekraken/s-images-builder": "^2.0.0-alpha.27",
         "@coffeekraken/s-inline-feature": "^2.0.0-alpha.27",
         "@coffeekraken/s-interface": "^2.0.0-alpha.27",

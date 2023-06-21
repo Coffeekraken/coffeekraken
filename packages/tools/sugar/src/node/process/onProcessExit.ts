@@ -1,5 +1,6 @@
 // @ts-nocheck
 
+import { __isChildProcess } from '@coffeekraken/sugar/is';
 import __terminalKit from 'terminal-kit';
 
 /**
@@ -26,7 +27,7 @@ import __terminalKit from 'terminal-kit';
  * __onProcessExit(() => {
  *      $1
  * });
- * 
+ *
  * @example         js
  * import { __onProcessExit } from '@coffeekraken/sugar/process';
  * __onProcessExit(() => {
@@ -40,19 +41,23 @@ const __onProcessExitCallbacks = [];
 
 export default function __onProcessExit(callback) {
     if (!__onProcessExitCallbacks.length) {
-        process.stdin.resume();
-        process.env.HAS_ON_PROCESS_EXIT_HANDLERS = true;
+        if (!__isChildProcess()) {
+            process.stdin.resume();
+            process.env.HAS_ON_PROCESS_EXIT_HANDLERS = true;
+        }
         let isExiting = false;
-        async function exitHandler(state) {
+        async function exitHandler(state, killTerminal = true) {
             if (isExiting) return;
             isExiting = true;
             for (let i = 0; i < __onProcessExitCallbacks.length; i++) {
                 const cbFn = __onProcessExitCallbacks[i];
                 await cbFn(state);
             }
-            setTimeout(() => {
-                __terminalKit.terminal.processExit('SIGTERM');
-            }, 100);
+            if (killTerminal) {
+                setTimeout(() => {
+                    __terminalKit.terminal.processExit('SIGTERM');
+                }, 100);
+            }
         }
         process.on('close', (code) =>
             code === 0 ? exitHandler('success') : exitHandler('error'),
@@ -61,7 +66,7 @@ export default function __onProcessExit(callback) {
             code === 0 ? exitHandler('success') : exitHandler('error'),
         );
         process.on('custom_exit', (state) => {
-            exitHandler(state);
+            exitHandler(state ?? 'custom');
         });
         process.on('SIGINT', () => exitHandler('killed'));
         process.on('SIGUSR1', () => exitHandler('killed'));

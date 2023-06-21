@@ -1,4 +1,5 @@
 import __autoResize from '../dom/input/autoResize';
+import __querySelectorLive from '../dom/query/querySelectorLive';
 
 /**
  *

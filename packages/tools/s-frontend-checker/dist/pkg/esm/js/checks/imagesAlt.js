@@ -11,28 +11,31 @@
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-export default {
-    id: 'imagesAlt',
-    name: 'Images alt attribute',
-    description: "It's highly recommended to add an 'alt' attribute to all images to improve the accessibility of your website",
-    level: 0,
-    check({ $context }) {
-        const $nonAltImages = $context.querySelectorAll('img:not([alt])');
-        if ($nonAltImages.length) {
+export default function (__SFrontendChecker) {
+    return {
+        id: 'imagesAlt',
+        name: 'Images alt attribute',
+        description: "It's highly recommended to add an 'alt' attribute to all images to improve the accessibility of your website",
+        category: __SFrontendChecker.CATEGORY_SEO,
+        level: 0,
+        check({ $context }) {
+            const $nonAltImages = $context.querySelectorAll('img:not([alt])');
+            if ($nonAltImages.length) {
+                return {
+                    status: 'warning',
+                    message: null,
+                    example: '<img src="something.webp" alt="something">',
+                    moreLink: 'https://www.w3schools.com/tags/att_img_alt.asp',
+                    action: {
+                        label: () => `Log them (${$nonAltImages.length})`,
+                        handler: () => console.log($nonAltImages),
+                    },
+                };
+            }
             return {
-                status: 'warning',
-                message: null,
-                example: '<img src="something.webp" alt="something">',
-                moreLink: 'https://www.w3schools.com/tags/att_img_alt.asp',
-                action: {
-                    label: () => `Log them (${$nonAltImages.length})`,
-                    handler: () => console.log($nonAltImages),
-                },
+                status: 'success',
             };
-        }
-        return {
-            status: 'success',
-        };
-    },
-};
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBOzs7Ozs7Ozs7Ozs7R0FZRztBQUNILGVBQWU7SUFDWCxFQUFFLEVBQUUsV0FBVztJQUNmLElBQUksRUFBRSxzQkFBc0I7SUFDNUIsV0FBVyxFQUNQLDhHQUE4RztJQUNsSCxLQUFLLEVBQUUsQ0FBQztJQUNSLEtBQUssQ0FBQyxFQUFFLFFBQVEsRUFBRTtRQUNkLE1BQU0sYUFBYSxHQUFHLFFBQVEsQ0FBQyxnQkFBZ0IsQ0FBQyxnQkFBZ0IsQ0FBQyxDQUFDO1FBRWxFLElBQUksYUFBYSxDQUFDLE1BQU0sRUFBRTtZQUN0QixPQUFPO2dCQUNILE1BQU0sRUFBRSxTQUFTO2dCQUNqQixPQUFPLEVBQUUsSUFBSTtnQkFDYixPQUFPLEVBQUUsNENBQTRDO2dCQUNyRCxRQUFRLEVBQUUsZ0RBQWdEO2dCQUMxRCxNQUFNLEVBQUU7b0JBQ0osS0FBSyxFQUFFLEdBQUcsRUFBRSxDQUFDLGFBQWEsYUFBYSxDQUFDLE1BQU0sR0FBRztvQkFDakQsT0FBTyxFQUFFLEdBQUcsRUFBRSxDQUFDLE9BQU8sQ0FBQyxHQUFHLENBQUMsYUFBYSxDQUFDO2lCQUM1QzthQUNKLENBQUM7U0FDTDtRQUNELE9BQU87WUFDSCxNQUFNLEVBQUUsU0FBUztTQUNwQixDQUFDO0lBQ04sQ0FBQztDQUNKLENBQUMifQ==
+        },
+    };
+}
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBOzs7Ozs7Ozs7Ozs7R0FZRztBQUNILE1BQU0sQ0FBQyxPQUFPLFdBQVcsa0JBQWtCO0lBQ3ZDLE9BQU87UUFDSCxFQUFFLEVBQUUsV0FBVztRQUNmLElBQUksRUFBRSxzQkFBc0I7UUFDNUIsV0FBVyxFQUNQLDhHQUE4RztRQUNsSCxRQUFRLEVBQUUsa0JBQWtCLENBQUMsWUFBWTtRQUN6QyxLQUFLLEVBQUUsQ0FBQztRQUNSLEtBQUssQ0FBQyxFQUFFLFFBQVEsRUFBRTtZQUNkLE1BQU0sYUFBYSxHQUFHLFFBQVEsQ0FBQyxnQkFBZ0IsQ0FBQyxnQkFBZ0IsQ0FBQyxDQUFDO1lBRWxFLElBQUksYUFBYSxDQUFDLE1BQU0sRUFBRTtnQkFDdEIsT0FBTztvQkFDSCxNQUFNLEVBQUUsU0FBUztvQkFDakIsT0FBTyxFQUFFLElBQUk7b0JBQ2IsT0FBTyxFQUFFLDRDQUE0QztvQkFDckQsUUFBUSxFQUFFLGdEQUFnRDtvQkFDMUQsTUFBTSxFQUFFO3dCQUNKLEtBQUssRUFBRSxHQUFHLEVBQUUsQ0FBQyxhQUFhLGFBQWEsQ0FBQyxNQUFNLEdBQUc7d0JBQ2pELE9BQU8sRUFBRSxHQUFHLEVBQUUsQ0FBQyxPQUFPLENBQUMsR0FBRyxDQUFDLGFBQWEsQ0FBQztxQkFDNUM7aUJBQ0osQ0FBQzthQUNMO1lBQ0QsT0FBTztnQkFDSCxNQUFNLEVBQUUsU0FBUzthQUNwQixDQUFDO1FBQ04sQ0FBQztLQUNKLENBQUM7QUFDTixDQUFDIn0=

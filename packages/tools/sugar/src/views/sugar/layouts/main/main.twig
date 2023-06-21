@@ -50,7 +50,13 @@
         {% set cacheBuster = shared.server.sessionId %}
     {% endif %}
     {{ __frontspecAssets(frontspec, cacheBuster)|raw }}
-        
+    
+    {# SDashboard #}
+    {% if app.request.server.get('ENV') != 'production' %}
+        <!-- SDashboard -->
+        <script src="/sugar/dashboard/lazy.js" type="module" defer></script>
+    {% endif %}
+
     <!-- favicon -->
     {{ __frontspecFavicon(frontspec)|raw }}
 

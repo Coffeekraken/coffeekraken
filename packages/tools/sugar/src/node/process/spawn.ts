@@ -109,8 +109,6 @@ export default function spawn(
             },
         });
 
-        let childProcessExitPromiseResolve;
-
         childProcess.on('message', (data) => {
             if (data.command) {
                 switch (data.command) {
@@ -129,45 +127,17 @@ export default function spawn(
             }
         });
 
-        process.on('exit', function () {
-            childProcess.kill();
-        });
-
         __onProcessExit(() => {
-            new Promise((resolve) => {
-                childProcessExitPromiseResolve = resolve;
+            return new Promise((resolve) => {
                 console.log(
-                    `<red>[kill]</red> Gracefully killing process "<cyan>${command}</cyan>"`,
+                    `<red>[kill]</red> Gracefully killing process "<cyan>${command.trim()}</cyan>"`,
                 );
-                childProcess.kill('SIGINT');
+                childProcess.on('exit', async (code) => {
+                    resolve();
+                });
+                childProcess.kill();
             });
         });
-
-        // // listen for errors etc...
-        // if (childProcess.stdout) {
-        //     childProcess.stdout.on('data', (data) => {
-        //         if (!data || data.toString().trim() === '') return;
-        //         data = data.toString();
-        //         stdout.push(data);
-        //         try {
-        //             data = JSON.parse(data);
-        //         } catch (e) {}
-        //         const logger = console[data.type] ?? console.log;
-        //         logger(data);
-        //     });
-        // }
-        // if (childProcess.stderr) {
-        //     childProcess.stderr.on('data', (data) => {
-        //         if (!data || data.toString().trim() === '') return;
-        //         data = data.toString();
-        //         stderr.push(data);
-        //         try {
-        //             data = JSON.parse(data);
-        //         } catch (e) {}
-        //         const logger = console[data.type] ?? console.log;
-        //         logger(data);
-        //     });
-        // }
 
         let isEnded = false;
         childProcess.on('close', (code, signal) => {
@@ -178,8 +148,7 @@ export default function spawn(
             let value = resolveValue ?? rejectValue ?? undefined;
             try {
                 value = JSON.parse(value);
-            } catch (e) {
-            }
+            } catch (e) {}
 
             // build the result object
             const resultObj = {
@@ -194,9 +163,6 @@ export default function spawn(
             if (resultObj.value === undefined) {
                 delete resultObj.value;
             }
-
-            // closed by this process
-            childProcessExitPromiseResolve?.();
 
             // generic close event
             emit('close', resultObj);

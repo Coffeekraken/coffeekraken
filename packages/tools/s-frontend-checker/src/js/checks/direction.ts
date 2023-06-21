@@ -1,7 +1,3 @@
-import __SFrontendChecker, {
-    ISFrontendCheckerCheckResult,
-} from '../SFrontendChecker';
-
 /**
  * @name            direction
  * @namespace       js.checks
@@ -16,23 +12,27 @@ import __SFrontendChecker, {
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 
-export default {
-    id: 'direction',
-    name: 'Direction',
-    description: 'The document must contain a valid dir declaration',
-    level: 0,
-    check({ $context }) {
-        // @ts-ignore
-        if (!$context.querySelector('html')?.hasAttribute('dir')) {
+export default function (__SFrontendChecker) {
+    return {
+        id: 'direction',
+        name: 'Direction',
+        description: 'The document must contain a valid dir declaration',
+        category: __SFrontendChecker.CATEGORY_BEST_PRACTICES,
+        level: 0,
+        check({ $context }) {
+            // @ts-ignore
+            if (!$context.querySelector('html')?.hasAttribute('dir')) {
+                return {
+                    status: 'error',
+                    message: 'The document is missing the direction',
+                    example: '<html dir="ltr">',
+                    moreLink:
+                        'https://www.w3schools.com/tags/att_global_dir.asp',
+                };
+            }
             return {
-                status: 'error',
-                message: 'The document is missing the direction',
-                example: '<html dir="ltr">',
-                moreLink: 'https://www.w3schools.com/tags/att_global_dir.asp',
+                status: 'success',
             };
-        }
-        return {
-            status: 'success',
-        };
-    },
-};
+        },
+    };
+}

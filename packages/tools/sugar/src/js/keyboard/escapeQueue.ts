@@ -79,7 +79,8 @@ export default function escapeQueue(
             $root._escapeQueue = true;
 
             __hotkey('escape', {
-                element: $root,
+                rootNode: $root,
+                private: true,
             }).on('press', () => {
                 if (!_escapeQueue.length || _isEscaping) {
                     return;

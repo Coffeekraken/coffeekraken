@@ -26,7 +26,6 @@ import { __define as __sSpecsEditorComponentDefine } from '@coffeekraken/s-specs
 import { __define as __sSugarFeatureDefine } from '@coffeekraken/s-sugar-feature';
 
 import { __wait } from '@coffeekraken/sugar/datetime';
-import { __hotkey } from '@coffeekraken/sugar/keyboard';
 import { __deepMerge, __filterObject } from '@coffeekraken/sugar/object';
 import { __uniqid, __upperFirst } from '@coffeekraken/sugar/string';
 import { css, html, unsafeCSS } from 'lit';
@@ -680,12 +679,14 @@ export default class SCarpenterAppComponent extends __SLitComponent {
         });
 
         if (this.props.escape) {
-            __hotkey('escape', {
-                // from the website itself
-                element: this._$websiteDocument,
-            }).on('press', () => {
-                this._closeEditor();
-            });
+            __escapeQueue(
+                () => {
+                    this._closeEditor();
+                },
+                {
+                    rootNode: this._$websiteDocument,
+                },
+            );
         }
 
         // mode

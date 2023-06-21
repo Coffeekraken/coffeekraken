@@ -1,5 +1,24 @@
 <div class="tools s-until:media:mobile">
 
+    <div class="tools_hotkeys s-tooltip-container">
+        <a class="s-btn:block" title="Hotkeys" target="_blank">
+            <i class="s-icon:keyboard"></i>
+        </a>
+        <div s-floating placement="left" class="s-bare s-tooltip:interactive s-text:center">
+            <div class="s-position:relative">
+                <i class="s-icon:keyboard s-font:100 s-mbe:30"></i>
+                <h3 class="s-typo:h5 s-mbe:30">
+                    <span class="s-tc:accent">Hotkeys</span><br /> makes the difference!
+                </h3>
+                <p class="s-typo:p s-font:30 s-mbe:30">
+                    Here's all the hotkeys available for you to use.
+                </p>
+
+                <s-hotkeys-list></s-hotkeys-list>
+            </div>
+        </div>
+    </div>
+
     <div class="tools_issue s-tooltip-container">
         <a class="s-btn:block s-color:error" title="Share the love" target="_blank">
             <i class="s-icon:fire"></i>

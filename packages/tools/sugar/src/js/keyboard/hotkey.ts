@@ -32,6 +32,8 @@ hotkeys.filter = function () {
  * @param         {Object}      [settings={}]    An option object to configure your hotkey. Here's the list of available settings:
  * @return      {SPromise}                       An SPromise instance on which you can register for "key" stack event
  *
+ * @event           hotkeys.update           Dispatched from the rootNode(s) to notify when an hotkey has been added or removed
+ *
  * @todo      interface
  * @todo      doc
  * @todo      tests
@@ -55,41 +57,97 @@ hotkeys.filter = function () {
  */
 
 export interface IHotkeySettings {
-    element: HTMLElemen | Document;
-    keyup: boolean;
-    keydown: boolean;
-    once: boolean;
-    splitKey: string;
+    rootNode?: (HTMLElement | Document)[] | HTMLElement | Document;
+    keyup?: boolean;
+    keydown?: boolean;
+    once?: boolean;
+    splitKey?: string;
+    title?: string;
+    description?: string;
+    private?: boolean;
 }
 
 export default function __hotkey(
     hotkey: string,
     settings: Partial<IHotkeySettings> = {},
 ): __SPromise<any> {
+    // merge default settings with passed ones:
+    settings = {
+        rootNode: [document],
+        keyup: false,
+        keydown: true,
+        once: false,
+        splitKey: '+',
+        title: hotkey,
+        description: null,
+        private: false,
+        ...settings,
+    };
+
+    if (!Array.isArray(settings.rootNode)) {
+        settings.rootNode = [settings.rootNode];
+    }
+
     return new __SPromise(
         ({ resolve, reject, emit, cancel }) => {
-            // merge default settings with passed ones:
-            settings = {
-                element: null,
-                keyup: false,
-                keydown: true,
-                once: false,
-                splitKey: '+',
-                ...settings,
-            };
+            settings.rootNode.forEach((rootNode: HTMLElement) => {
+                const documentElement = rootNode.ownerDocument ?? rootNode;
+                // handle storing in "env.KOTKEYS" stack
+                if (!settings.private) {
+                    if (!documentElement?.env) {
+                        documentElement.env = {};
+                    }
+                    if (!documentElement.env.HOTKEYS) {
+                        documentElement.env.HOTKEYS = {};
+                    }
+                    if (!documentElement.env.HOTKEYS[hotkey]) {
+                        setTimeout(() => {
+                            rootNode.dispatchEvent(
+                                new CustomEvent('hotkeys.update', {
+                                    bubbles: true,
+                                    detail: documentElement.env?.HOTKEYS,
+                                }),
+                            );
+                        });
+                    }
+                    documentElement.env.HOTKEYS[hotkey] = {
+                        title: settings.title,
+                        description: settings.description,
+                        hotkey,
+                    };
+                }
 
-            // init the hotkey
-            hotkeys(hotkey, settings, (e, h) => {
-                // call the handler function
-                emit('press', e);
-                // unsubscribe if once is truc
-                if (settings.once) cancel();
+                // init the hotkey
+                hotkeys(
+                    hotkey,
+                    {
+                        element: rootNode,
+                        ...settings,
+                    },
+                    (e, h) => {
+                        // call the handler function
+                        emit('press', e);
+                        // unsubscribe if once is truc
+                        if (settings.once) cancel();
+                    },
+                );
             });
         },
         {
             id: 'hotkey',
         },
     ).on('finally', () => {
+        settings.rootNode.forEach((rootNode: HTMLElement) => {
+            const documentElement = rootNode.ownerDocument ?? rootNode;
+            delete documentElement.env?.HOTKEYS[hotkey];
+            rootNode.dispatchEvent(
+                new CustomEvent('hotkeys.update', {
+                    bubbles: true,
+                    detail: documentElement.env?.HOTKEYS,
+                }),
+            );
+        });
+
         hotkeys.unbind(hotkey);
     });
 }

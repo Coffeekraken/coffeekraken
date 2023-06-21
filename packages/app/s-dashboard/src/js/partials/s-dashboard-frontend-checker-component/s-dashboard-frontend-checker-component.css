@@ -63,7 +63,7 @@ s-dashboard-frontend-checker {
     }
 
     .s-badge {
-        color: sugar.color(main, text);
+        color: sugar.color(current, text);
 
         &.level--0 {
             @sugar.color (success);

@@ -11,9 +11,15 @@ export default (api) => {
         dashboardInitProxyUrl = '';
 
     if (packageJsonHighest.name === '@coffeekraken/coffeekraken') {
-        const dashboardLazyPath = __path.resolve(__dirname(), '../js/lazy.js');
+        const dashboardLazyPath = __path.resolve(
+            __dirname(),
+            '../../../../src/js/lazy.ts',
+        );
         dashboardLazyProxyUrl = `http://localhost:3000/@fs${dashboardLazyPath}`;
-        const dashboardInitPath = __path.resolve(__dirname(), '../js/init.js');
+        const dashboardInitPath = __path.resolve(
+            __dirname(),
+            '../../../../src/js/init.ts',
+        );
         dashboardInitProxyUrl = `http://localhost:3000/@fs${dashboardInitPath}`;
     }
 

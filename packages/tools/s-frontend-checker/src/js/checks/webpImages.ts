@@ -11,31 +11,34 @@
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-export default {
-    id: 'webpImages',
-    name: 'Webp for images',
-    description:
-        "Consider using the 'webp' extension for images to improve the performances of your website",
-    level: 2,
-    check({ $context }) {
-        const $nonWebpImages = $context.querySelectorAll(
-            'img:not([src*=".webp"])',
-        );
+export default function (__SFrontendChecker) {
+    return {
+        id: 'webpImages',
+        name: 'Webp for images',
+        description:
+            "Consider using the 'webp' extension for images to improve the performances of your website",
+        category: __SFrontendChecker.CATEGORY_BEST_PRACTICES,
+        level: 2,
+        check({ $context }) {
+            const $nonWebpImages = $context.querySelectorAll(
+                'img:not([src*=".webp"])',
+            );
 
-        if ($nonWebpImages.length) {
+            if ($nonWebpImages.length) {
+                return {
+                    status: 'warning',
+                    message: null,
+                    example: '<img src="something.webp" alt="...">',
+                    moreLink: 'https://developers.google.com/speed/webp',
+                    action: {
+                        label: () => `Log them (${$nonWebpImages.length})`,
+                        handler: () => console.log($nonWebpImages),
+                    },
+                };
+            }
             return {
-                status: 'warning',
-                message: null,
-                example: '<img src="something.webp" alt="...">',
-                moreLink: 'https://developers.google.com/speed/webp',
-                action: {
-                    label: () => `Log them (${$nonWebpImages.length})`,
-                    handler: () => console.log($nonWebpImages),
-                },
+                status: 'success',
             };
-        }
-        return {
-            status: 'success',
-        };
-    },
-};
+        },
+    };
+}

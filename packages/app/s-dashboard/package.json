@@ -5,6 +5,10 @@
     "type": "module",
     "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)",
     "license": "MIT",
+    "scripts": {
+        "build": "node --experimental-json-modules --no-warnings --es-module-specifier-resolution node src/node/build.js",
+        "deploy": "rsync -avzh --delete --progress --stats ./dist/ fe0mt_coffeekraken@fe0mt.ftp.infomaniak.com:~/sites/cdnv2.coffeekraken.io/s-dashboard"
+    },
     "dependencies": {
         "@coffeekraken/s-class": "^2.0.0-alpha.27",
         "@coffeekraken/s-filtrable-input-component": "^2.0.0-alpha.27",
@@ -14,6 +18,8 @@
         "@coffeekraken/s-promise": "^2.0.0-alpha.27",
         "@coffeekraken/s-request": "^2.0.0-alpha.27",
         "@coffeekraken/s-sugar-config": "^2.0.0-alpha.27",
+        "@coffeekraken/s-vite-postcss-plugin": "workspace:^",
+        "@coffeekraken/s-vite-sugar-plugin": "workspace:^",
         "@coffeekraken/sugar": "^2.0.0-alpha.27",
         "lit": "^2.2.8"
     },
@@ -37,5 +43,10 @@
             "import": "./dist/pkg/esm/js/*.js"
         }
     },
-    "homepage": "https://coffeekraken.io"
+    "homepage": "https://coffeekraken.io",
+    "devDependencies": {
+        "@rollup/plugin-node-resolve": "^15.1.0",
+        "cross-env": "^7.0.3",
+        "vite": "^4.3.9"
+    }
 }

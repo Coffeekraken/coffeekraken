@@ -5,7 +5,7 @@ import {
     __getTransitionProperties,
     __querySelectorLive,
 } from '@coffeekraken/sugar/dom';
-import { __hotkey } from '@coffeekraken/sugar/keyboard';
+import { __escapeQueue } from '@coffeekraken/sugar/keyboard';
 import { __deepMerge } from '@coffeekraken/sugar/object';
 import { css, html, unsafeCSS } from 'lit';
 import __SPanelComponentInterface from './interface/SPanelComponentInterface';
@@ -170,6 +170,7 @@ export default class SPanelComponent extends __SLitComponent {
     _$backdrop;
     _backdropTransitionProps;
     _template;
+    _escapeQueue;
 
     constructor() {
         super(
@@ -246,13 +247,12 @@ export default class SPanelComponent extends __SLitComponent {
         this.props.closeOn.forEach((what) => {
             if (what === 'click') {
                 this.addEventListener('click', (e) => {
-                    !this._$container.contains(e.target) &&
-                        this.isTopPanel() &&
+                    if (
+                        !this._$container.contains(e.target) &&
+                        this.isTopPanel()
+                    ) {
                         this.close();
-                });
-            } else if (what === 'escape') {
-                __hotkey('escape').on('press', () => {
-                    this.isTopPanel() && this.close();
+                    }
                 });
             } else if (what.match(/^event\:/)) {
                 const eventStr = what.replace(/^event:/, ''),
@@ -321,6 +321,11 @@ export default class SPanelComponent extends __SLitComponent {
     open() {
         if (this.props.active) return;
 
+        // escape
+        this._escapeQueue = __escapeQueue(() => {
+            this.close();
+        });
+
         // create a ghost div to replace the panel after it's closed
         if (!this._$ghost) {
             this._$ghost = document.createElement('div');
@@ -350,6 +355,8 @@ export default class SPanelComponent extends __SLitComponent {
     }
     close() {
         if (!this.props.active) return;
+
+        this._escapeQueue?.cancel();
 
         const stackIdx = this.constructor._activePanels.indexOf(this);
         if (stackIdx !== -1) {

@@ -1,7 +1,3 @@
-import __SFrontendChecker, {
-    ISFrontendCheckerCheckResult,
-} from '../SFrontendChecker';
-
 /**
  * @name            title
  * @namespace       js.checks
@@ -16,23 +12,26 @@ import __SFrontendChecker, {
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 
-export default {
-    id: 'title',
-    name: 'Title',
-    description: 'The document must contain a valid title declaration',
-    level: 0,
-    check({ $context }) {
-        // @ts-ignore
-        if (!$context.title) {
+export default function (__SFrontendChecker) {
+    return {
+        id: 'title',
+        name: 'Title',
+        description: 'The document must contain a valid title declaration',
+        category: __SFrontendChecker.CATEGORY_BEST_PRACTICES,
+        level: 0,
+        check({ $context }) {
+            // @ts-ignore
+            if (!$context.title) {
+                return {
+                    status: 'error',
+                    message: 'The document is missing the title',
+                    example: '<title>My awesome title</title>',
+                    moreLink: 'https://www.w3schools.com/tags/tag_title.asp',
+                };
+            }
             return {
-                status: 'error',
-                message: 'The document is missing the title',
-                example: '<title>My awesome title</title>',
-                moreLink: 'https://www.w3schools.com/tags/tag_title.asp',
+                status: 'success',
             };
-        }
-        return {
-            status: 'success',
-        };
-    },
-};
+        },
+    };
+}

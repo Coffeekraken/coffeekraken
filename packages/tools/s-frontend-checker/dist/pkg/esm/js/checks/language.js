@@ -11,25 +11,28 @@
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-export default {
-    id: 'language',
-    name: 'Language',
-    description: 'The document must contain a valid langage declaration',
-    level: 0,
-    check({ $context }) {
-        var _a;
-        // @ts-ignore
-        if (!((_a = $context.querySelector('html')) === null || _a === void 0 ? void 0 : _a.hasAttribute('lang'))) {
+export default function (__SFrontendChecker) {
+    return {
+        id: 'language',
+        name: 'Language',
+        description: 'The document must contain a valid langage declaration',
+        category: __SFrontendChecker.CATEGORY_BEST_PRACTICES,
+        level: 0,
+        check({ $context }) {
+            var _a;
+            // @ts-ignore
+            if (!((_a = $context.querySelector('html')) === null || _a === void 0 ? void 0 : _a.hasAttribute('lang'))) {
+                return {
+                    status: 'error',
+                    message: 'The document is missing the language',
+                    example: '<html lang="en">',
+                    moreLink: 'https://www.w3.org/International/questions/qa-html-language-declarations',
+                };
+            }
             return {
-                status: 'error',
-                message: 'The document is missing the language',
-                example: '<html lang="en">',
-                moreLink: 'https://www.w3.org/International/questions/qa-html-language-declarations',
+                status: 'success',
             };
-        }
-        return {
-            status: 'success',
-        };
-    },
-};
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUlBOzs7Ozs7Ozs7Ozs7R0FZRztBQUVILGVBQWU7SUFDWCxFQUFFLEVBQUUsVUFBVTtJQUNkLElBQUksRUFBRSxVQUFVO0lBQ2hCLFdBQVcsRUFBRSx1REFBdUQ7SUFDcEUsS0FBSyxFQUFFLENBQUM7SUFDUixLQUFLLENBQUMsRUFBRSxRQUFRLEVBQUU7O1FBQ2QsYUFBYTtRQUNiLElBQUksQ0FBQyxDQUFBLE1BQUEsUUFBUSxDQUFDLGFBQWEsQ0FBQyxNQUFNLENBQUMsMENBQUUsWUFBWSxDQUFDLE1BQU0sQ0FBQyxDQUFBLEVBQUU7WUFDdkQsT0FBTztnQkFDSCxNQUFNLEVBQUUsT0FBTztnQkFDZixPQUFPLEVBQUUsc0NBQXNDO2dCQUMvQyxPQUFPLEVBQUUsa0JBQWtCO2dCQUMzQixRQUFRLEVBQ0osMEVBQTBFO2FBQ2pGLENBQUM7U0FDTDtRQUNELE9BQU87WUFDSCxNQUFNLEVBQUUsU0FBUztTQUNwQixDQUFDO0lBQ04sQ0FBQztDQUNKLENBQUMifQ==
+        },
+    };
+}
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBOzs7Ozs7Ozs7Ozs7R0FZRztBQUVILE1BQU0sQ0FBQyxPQUFPLFdBQVcsa0JBQWtCO0lBQ3ZDLE9BQU87UUFDSCxFQUFFLEVBQUUsVUFBVTtRQUNkLElBQUksRUFBRSxVQUFVO1FBQ2hCLFdBQVcsRUFBRSx1REFBdUQ7UUFDcEUsUUFBUSxFQUFFLGtCQUFrQixDQUFDLHVCQUF1QjtRQUNwRCxLQUFLLEVBQUUsQ0FBQztRQUNSLEtBQUssQ0FBQyxFQUFFLFFBQVEsRUFBRTs7WUFDZCxhQUFhO1lBQ2IsSUFBSSxDQUFDLENBQUEsTUFBQSxRQUFRLENBQUMsYUFBYSxDQUFDLE1BQU0sQ0FBQywwQ0FBRSxZQUFZLENBQUMsTUFBTSxDQUFDLENBQUEsRUFBRTtnQkFDdkQsT0FBTztvQkFDSCxNQUFNLEVBQUUsT0FBTztvQkFDZixPQUFPLEVBQUUsc0NBQXNDO29CQUMvQyxPQUFPLEVBQUUsa0JBQWtCO29CQUMzQixRQUFRLEVBQ0osMEVBQTBFO2lCQUNqRixDQUFDO2FBQ0w7WUFDRCxPQUFPO2dCQUNILE1BQU0sRUFBRSxTQUFTO2FBQ3BCLENBQUM7UUFDTixDQUFDO0tBQ0osQ0FBQztBQUNOLENBQUMifQ==

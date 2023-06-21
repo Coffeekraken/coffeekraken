@@ -1,11 +1,11 @@
 // @ts-nocheck
 
 import __SLitComponent from '@coffeekraken/s-lit-component';
-import { html } from 'lit';
+import { css, html, unsafeCSS } from 'lit';
 
 import _SDashboardComponentWidgetInterface from '../../interface/SDashboardComponentWidgetInterface';
 
-import '../../../../../../src/js/partials/s-dashboard-google-component/s-dashboard-google-component.css';
+import __css from './s-dashboard-google-component.css';
 
 export default class SDashboardGoogleComponent extends __SLitComponent {
     static get properties() {
@@ -13,6 +13,12 @@ export default class SDashboardGoogleComponent extends __SLitComponent {
             {},
             _SDashboardComponentWidgetInterface,
         );
+    }
+
+    static get styles() {
+        return css`
+            ${unsafeCSS(__css)}
+        `;
     }
 
     _gtm: string;

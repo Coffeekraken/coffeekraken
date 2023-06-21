@@ -253,6 +253,8 @@ function processPath(path, platform = 'node') {
             inlineSourceMap: true,
             traceResolution: false,
             esModuleInterop: true,
+            moduleResolution: 'node',
+            sourcemap: true,
             skipLibCheck: true,
             declaration: true,
             experimentalDecorators: true,

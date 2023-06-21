@@ -11,26 +11,31 @@
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-export default {
-    id: 'footer',
-    name: 'Footer tag',
-    description:
-        'It\'s recommanded to wrap your footer (menu, etc...) inside a "footer" tag.',
-    level: 1,
-    check({ $context }) {
-        const $footer = $context.querySelector('footer:not(article footer)');
+export default function (__SFrontendChecker) {
+    return {
+        id: 'footer',
+        name: 'Footer tag',
+        description:
+            'It\'s recommanded to wrap your footer (menu, etc...) inside a "footer" tag.',
+        category: __SFrontendChecker.CATEGORY_BEST_PRACTICES,
+        level: 1,
+        check({ $context }) {
+            const $footer = $context.querySelector(
+                'footer:not(article footer)',
+            );
 
-        if (!$footer) {
+            if (!$footer) {
+                return {
+                    status: 'warning',
+                    message: null,
+                    example: '<footer>...</footer>',
+                    moreLink: 'https://www.w3schools.com/tags/tag_footer.asp',
+                    action: null,
+                };
+            }
             return {
-                status: 'warning',
-                message: null,
-                example: '<footer>...</footer>',
-                moreLink: 'https://www.w3schools.com/tags/tag_footer.asp',
-                action: null,
+                status: 'success',
             };
-        }
-        return {
-            status: 'success',
-        };
-    },
-};
+        },
+    };
+}

@@ -37,8 +37,8 @@
 </a> --}}
 
 <p class="s-typo:p s-mbs:50 @dwarf hide">
-    Version: <span class="s-tc:{{ str_contains($config->package->version, 'alpha') ? 'error' : 'accent' }}">{{ $config->package->version }}</span> - License <a class="s-tc:accent"
-        href="https://opensource.org/licenses/MIT" target="_blank">{{ $config->package->license }}</a>
+    Version: <span class="s-tc:{{ str_contains($frontspec->package->version, 'alpha') ? 'error' : 'accent' }}">{{ $frontspec->package->version }}</span> - License <a class="s-tc:accent"
+        href="https://opensource.org/licenses/MIT" target="_blank">{{ $frontspec->package->license }}</a>
     <br />Fully open source
     <i class="s-icon:logo-opensource s-tc:accent"></i>
 </p>

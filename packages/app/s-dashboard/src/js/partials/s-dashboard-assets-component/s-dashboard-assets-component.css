@@ -38,6 +38,10 @@
         @sugar.font.size (40);
     }
 
+    ._external {
+        margin-inline-end: sugar.margin(10);
+    }
+
     ._details {
         display: grid;
         grid-template-rows: 0fr;

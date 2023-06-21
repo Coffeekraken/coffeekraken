@@ -1,5 +1,7 @@
 {
     "compilerOptions": {
+        "moduleResolution": "node",
+        "sourceMap": false,
         "types": ["vitest/globals"]
     }
 }

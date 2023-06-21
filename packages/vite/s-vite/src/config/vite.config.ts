@@ -4,8 +4,6 @@ import { __deepMerge } from '@coffeekraken/sugar/object';
 import __path from 'path';
 import { configDefaults, defineConfig } from 'vitest/config';
 
-import __sugarPackageJson from '@coffeekraken/sugar/package.json' assert { type: 'json' };
-
 export async function preprocess(api) {
     const config = (await __loadConfigFile('vite.config.js')) ?? {};
     return __deepMerge(api.this, config);
@@ -44,36 +42,37 @@ export default function (api) {
     //     }
     // }
 
-    for (let [path, value] of Object.entries(__sugarPackageJson.exports)) {
-        if (
-            [
-                'cli',
-                'coffeekraken',
-                'composer',
-                'error',
-                'exec',
-                'github',
-                'hash',
-                'load',
-                'monorepo',
-                'npm',
-                'network',
-                'og',
-                'path',
-                'php',
-                'process',
-                'project',
-                'terminal',
-                'fs',
-                'is',
-            ].includes(path.replace('./', ''))
-        ) {
-            continue;
-        }
-        optimizeDepsInclude.push(
-            `@coffeekraken/sugar/${path.replace('./', '')}`,
-        );
-    }
+    // for (let [path, value] of Object.entries(__sugarPackageJson.exports)) {
+    //     if (
+    //         [
+    //             'cli',
+    //             'coffeekraken',
+    //             'composer',
+    //             'error',
+    //             'exec',
+    //             'github',
+    //             'hash',
+    //             'load',
+    //             'monorepo',
+    //             'npm',
+    //             'network',
+    //             'keyboard',
+    //             'og',
+    //             'path',
+    //             'php',
+    //             'process',
+    //             'project',
+    //             'terminal',
+    //             'fs',
+    //             'is',
+    //         ].includes(path.replace('./', ''))
+    //     ) {
+    //         continue;
+    //     }
+    //     optimizeDepsInclude.push(
+    //         `@coffeekraken/sugar/${path.replace('./', '')}`,
+    //     );
+    // }
 
     return defineConfig({
         /**
@@ -162,9 +161,6 @@ export default function (api) {
          */
         plugins: [
             __path.resolve(`${__dirname()}/../node/plugins/sugarPlugin`),
-            // __path.resolve(`${__dirname()}/../node/plugins/sveltePlugin`),
-            // __path.resolve(`${__dirname()}/../node/plugins/vuejsPlugin`),
-            // __path.resolve(`${__dirname()}/../node/plugins/riotjsPlugin`),
             __path.resolve(`${__dirname()}/../node/plugins/postcssPlugin`),
             __path.resolve(`${__dirname()}/../node/plugins/plainTextPlugin`),
         ],

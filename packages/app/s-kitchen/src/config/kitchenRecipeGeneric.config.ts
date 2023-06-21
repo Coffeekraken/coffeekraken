@@ -321,21 +321,6 @@ export default function (api) {
                 description: 'Start the development stack',
                 runInParallel: true,
                 actions: {
-                    // /**
-                    //  * @__name            typescriptBuild
-                    //  * @__namespace       config.kitchenRecipeDefault.stacks.dev.actions
-                    //  * @__type            String
-                    //  * @__default         [config.kitchen.actions.typescriptBuild]
-                    //  *
-                    //  * Specify the recipe dev stack frontendServer action
-                    //  *
-                    //  * @since       2.0.0
-                    //  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-                    //  */
-                    // get typescriptBuild() {
-                    //     return api.config.kitchen.actions.typescriptBuild;
-                    // },
-
                     /**
                      * @name            frontendServer
                      * @namespace       config.kitchenRecipeDefault.stacks.dev.actions
@@ -382,7 +367,7 @@ export default function (api) {
                     },
                 },
             },
-            prod: {
+            preview: {
                 /**
                  * @name            description
                  * @namespace       config.kitchenRecipeDefault.stacks.prod
@@ -394,7 +379,7 @@ export default function (api) {
                  * @since       2.0.0
                  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
-                description: 'Start the production testing stack',
+                description: 'Start the preview testing stack',
                 sharedParams: {
                     /**
                      * @name            env
@@ -425,20 +410,20 @@ export default function (api) {
                         return api.config.kitchen.actions.frontendServer;
                     },
 
-                    // /**
-                    //  * @__name            corsProxy
-                    //  * @__namespace       config.kitchenRecipeDefault.stacks.prod.actions
-                    //  * @__type            String
-                    //  * @__default         [config.kitchen.actions.corsProxy]
-                    //  *
-                    //  * Specify the recipe prod stack corsProxy action
-                    //  *
-                    //  * @since       2.0.0
-                    //  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-                    //  */
-                    // get corsProxy() {
-                    //     return api.config.kitchen.actions.corsProxy;
-                    // },
+                    /**
+                     * @name            corsProxy
+                     * @namespace       config.kitchenRecipeDefault.stacks.prod.actions
+                     * @type            String
+                     * @default         [config.kitchen.actions.corsProxy]
+                     *
+                     * Specify the recipe prod stack corsProxy action
+                     *
+                     * @since       2.0.0
+                     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+                     */
+                    get corsProxy() {
+                        return api.config.kitchen.actions.corsProxy;
+                    },
                 },
             },
             build: {

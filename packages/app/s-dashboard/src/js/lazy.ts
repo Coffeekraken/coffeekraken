@@ -2,7 +2,7 @@ import __SDashboard from './SDashboard';
 
 (() => {
     function initDashboard(e) {
-        if (e.key === 's' && e.ctrlKey) {
+        if ((e.key === 's' || e.key === 'y') && e.ctrlKey) {
             document.removeEventListener('keyup', initDashboard);
 
             // dashboard
@@ -17,6 +17,7 @@ import __SDashboard from './SDashboard';
                     ['s-dashboard-frontend-checker'],
                 ],
                 widgets: {},
+                env: e.key === 'y' ? 'development' : 'production',
             });
             dashboard.open();
         }

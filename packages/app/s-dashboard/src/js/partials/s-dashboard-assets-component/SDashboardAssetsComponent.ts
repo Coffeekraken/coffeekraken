@@ -2,10 +2,10 @@
 
 import __SLitComponent from '@coffeekraken/s-lit-component';
 import { __formatFileSize } from '@coffeekraken/sugar/format';
-import { html } from 'lit';
+import { css, html, unsafeCSS } from 'lit';
 import _SDashboardComponentWidgetInterface from '../../interface/SDashboardComponentWidgetInterface';
 
-import '../../../../../../src/js/partials/s-dashboard-assets-component/s-dashboard-assets-component.css';
+import __css from './s-dashboard-assets-component.css';
 
 export interface ISDashboardAssetsComponentCategory {
     title: string;
@@ -17,9 +17,16 @@ export interface ISDashboardAssetsComponentCategory {
 export interface ISDashboardAssetsComponentAsset {
     url: string;
     totalSize: number;
+    external: boolean;
 }
 
 export default class SDashboardAssetsComponent extends __SLitComponent {
+    static get styles() {
+        return css`
+            ${unsafeCSS(__css)}
+        `;
+    }
+
     static get properties() {
         return __SLitComponent.propertiesFromInterface(
             {},
@@ -42,10 +49,11 @@ export default class SDashboardAssetsComponent extends __SLitComponent {
         return window.parent?.document ?? document;
     }
 
+    _documentSize: number = 0;
     _totalSize: number = 0;
     _totalSizeCompressed: number = 0;
     _links: ISDashboardAssetsComponentCategory = {
-        title: 'Links',
+        title: 'Stylesheets',
         totalSize: 0,
         assets: [],
         compressionPercent: 50,
@@ -81,13 +89,26 @@ export default class SDashboardAssetsComponent extends __SLitComponent {
         return __formatFileSize(size);
     }
 
-    _handleItem(item): void {
+    async _handleItem(item): void {
         let link, img, script, video;
+
+        if (
+            !item.decodedBodySize &&
+            typeof item.name === 'string' &&
+            item.name.match(/^https?\:\/\//)
+        ) {
+            // check for external items
+            if (!item.name.startsWith(this.document.location.origin)) {
+                item._isExternal = true;
+            }
+        }
+
         switch (item.initiatorType) {
             case 'img':
                 img = {
                     url: item.name,
                     totalSize: item.decodedBodySize,
+                    external: item._isExternal,
                 };
                 this._totalSize += item.decodedBodySize;
                 this._totalSizeCompressed += item.decodedBodySize;
@@ -101,6 +122,7 @@ export default class SDashboardAssetsComponent extends __SLitComponent {
                 video = {
                     url: item.name,
                     totalSize: item.decodedBodySize,
+                    external: item._isExternal,
                 };
                 this._totalSize += item.decodedBodySize;
                 this._totalSizeCompressed +=
@@ -113,6 +135,7 @@ export default class SDashboardAssetsComponent extends __SLitComponent {
                 script = {
                     url: item.name,
                     totalSize: item.decodedBodySize,
+                    external: item._isExternal,
                     assets: [],
                 };
                 this._totalSize += item.decodedBodySize;
@@ -126,6 +149,7 @@ export default class SDashboardAssetsComponent extends __SLitComponent {
                 link = {
                     url: item.name,
                     totalSize: item.decodedBodySize,
+                    external: item._isExternal,
                     assets: [],
                 };
                 this._totalSize += item.decodedBodySize;
@@ -139,6 +163,7 @@ export default class SDashboardAssetsComponent extends __SLitComponent {
                 link = {
                     url: item.name,
                     totalSize: item.decodedBodySize,
+                    external: item._isExternal,
                 };
                 this._totalSize += item.decodedBodySize;
                 this._totalSizeCompressed +=
@@ -154,6 +179,7 @@ export default class SDashboardAssetsComponent extends __SLitComponent {
                 script = {
                     url: item.name,
                     totalSize: item.decodedBodySize,
+                    external: item._isExternal,
                 };
                 this._totalSize += item.decodedBodySize;
                 this._totalSizeCompressed +=
@@ -173,17 +199,24 @@ export default class SDashboardAssetsComponent extends __SLitComponent {
             this.requestUpdate();
         });
         observer.observe({ type: 'resource', buffered: true });
+
+        this._getPageSize();
+    }
+
+    async _getPageSize(): void {
+        const request = await fetch(this.document.location.href),
+            html = await request.text();
+
+        this._documentSize = html.split('').length;
+        this._totalSize += this._documentSize;
+        this._totalSizeCompressed += (this._documentSize / 100) * 40;
+        this.requestUpdate();
     }
 
     _renderCategory(
         category: ISDashboardAssetsComponentCategory,
         id: string,
     ): any {
-        const totalSize = category.assets.reduce((size, link) => {
-            size += link.totalSize;
-            return size;
-        }, 0);
-
         return html`
             <li class="_category">
                 <div
@@ -194,52 +227,79 @@ export default class SDashboardAssetsComponent extends __SLitComponent {
                     }}
                 >
                     <span class="_label"
-                        >${category.title} (${category.assets.length})</span
+                        >${category.title}
+                        ${category.assets.length
+                            ? `(${category.assets.length})`
+                            : ''}</span
                     >
                     <span class="_value">
                         ${category.compressionPercent
                             ? html`
                                   <span class="_compressed s-tooltip-container">
                                       ${this._displaySize(
-                                          (totalSize / 100) *
+                                          (category.totalSize / 100) *
                                               (100 -
                                                   category.compressionPercent),
                                       )}
                                       <div class="s-tooltip">
-                                          Compressed (estimation)
+                                          Compressed estimation
+                                          ~${category.compressionPercent}%
                                       </div>
                                   </span>
                               `
                             : ''}
-                        ${this._displaySize(totalSize)}</span
+                        ${this._displaySize(category.totalSize)}</span
                     >
                 </div>
-                <div class="_details ${this._toggleStates[id] ? 'active' : ''}">
-                    <div class="_details-inner">
-                        <ul class="_details-assets">
-                            ${category.assets
-                                ?.sort((a, b) => {
-                                    return a.totalSize > b.totalSize ? -1 : 0;
-                                })
-                                .map(
-                                    (asset) => html`
-                            <li class="_details-asset">
-                                <span class="_details-label">${
-                                    asset.url.length >= 50
-                                        ? `...${asset.url.slice(
-                                              asset.url.length - 50,
-                                          )}`
-                                        : asset.url
-                                }</span>
-                                <span class="_details-value">${this._displaySize(
-                                    asset.totalSize,
-                                )}
-                            </li>
-                        `,
-                                )}
-                        </ul>
-                    </div>
-                </div>
+                ${category.assets.length
+                    ? html`
+                          <div
+                              class="_details ${this._toggleStates[id]
+                                  ? 'active'
+                                  : ''}"
+                          >
+                              <div class="_details-inner">
+                                  <ul class="_details-assets">
+                                      ${category.assets
+                                          ?.sort((a, b) => {
+                                              return a.totalSize > b.totalSize
+                                                  ? -1
+                                                  : 0;
+                                          })
+                                          .map(
+                                              (asset) => html`
+                                <li class="_details-asset">
+                                    <a class="_details-label" href="${
+                                        asset.url
+                                    }" target="_blank">
+                                    ${
+                                        asset.external
+                                            ? html`
+                                                  <span
+                                                      class="_external s-badge s-color:complementary"
+                                                      >external</span
+                                                  >
+                                              `
+                                            : ''
+                                    }
+                                    ${
+                                        asset.url.length >= 50
+                                            ? `...${asset.url.slice(
+                                                  asset.url.length - 50,
+                                              )}`
+                                            : asset.url
+                                    }</a>
+                                    <span class="_details-value">${this._displaySize(
+                                        asset.totalSize,
+                                    )}
+                                </li>
+                            `,
+                                          )}
+                                  </ul>
+                              </div>
+                          </div>
+                      `
+                    : ''}
             </li>
         `;
     }
@@ -251,6 +311,12 @@ export default class SDashboardAssetsComponent extends __SLitComponent {
 
                 <div class="ck-panel">
                     <ul class="_categories">
+                        ${this._renderCategory({
+                            title: 'HTML',
+                            totalSize: this._documentSize,
+                            assets: [],
+                            compressionPercent: 70,
+                        })}
                         ${this._renderCategory(this._links, 'links')}
                         ${this._renderCategory(this._scripts, 'scripts')}
                         ${this._renderCategory(this._imgs, 'imgs')}

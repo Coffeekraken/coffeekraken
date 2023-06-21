@@ -44,7 +44,9 @@ export default class SMedia extends __SMedia {
             this._media = __SFrontspec.get('media');
         } else if (media) {
             this._media = media;
-        } else {
+        }
+
+        if (!this._media) {
             this._media = {
                 defaultAction: '<=',
                 defaultMedia: 'desktop',

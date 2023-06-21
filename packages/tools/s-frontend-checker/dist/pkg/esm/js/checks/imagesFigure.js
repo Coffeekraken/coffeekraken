@@ -11,28 +11,31 @@
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-export default {
-    id: 'imagesFigure',
-    name: 'Images inside figure',
-    description: 'It\'s recommanded to have your "img" tags wrapped inside a "figure" one with a "figcaption" to desctibe it.',
-    level: 1,
-    check({ $context }) {
-        const $noneFigureImgs = $context.querySelectorAll('img:not(figure > img)');
-        if ($noneFigureImgs.length) {
+export default function (__SFrontendChecker) {
+    return {
+        id: 'imagesFigure',
+        name: 'Images inside figure',
+        description: 'It\'s recommanded to have your "img" tags wrapped inside a "figure" one with a "figcaption" to desctibe it.',
+        category: __SFrontendChecker.CATEGORY_BEST_SEO,
+        level: 1,
+        check({ $context }) {
+            const $noneFigureImgs = $context.querySelectorAll('img:not(figure > img)');
+            if ($noneFigureImgs.length) {
+                return {
+                    status: 'warning',
+                    message: null,
+                    example: '<figure>\n<img src="something.webp" alt="something">\n<figcaption>This is my image description...</figcaption>\n</figure>',
+                    moreLink: 'https://www.w3schools.com/tags/att_img_alt.asp',
+                    action: {
+                        label: () => `Log them (${$noneFigureImgs.length})`,
+                        handler: () => console.log($noneFigureImgs),
+                    },
+                };
+            }
             return {
-                status: 'warning',
-                message: null,
-                example: '<figure>\n<img src="something.webp" alt="something">\n<figcaption>This is my image description...</figcaption>\n</figure>',
-                moreLink: 'https://www.w3schools.com/tags/att_img_alt.asp',
-                action: {
-                    label: () => `Log them (${$noneFigureImgs.length})`,
-                    handler: () => console.log($noneFigureImgs),
-                },
+                status: 'success',
             };
-        }
-        return {
-            status: 'success',
-        };
-    },
-};
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBOzs7Ozs7Ozs7Ozs7R0FZRztBQUNILGVBQWU7SUFDWCxFQUFFLEVBQUUsY0FBYztJQUNsQixJQUFJLEVBQUUsc0JBQXNCO0lBQzVCLFdBQVcsRUFDUCw2R0FBNkc7SUFDakgsS0FBSyxFQUFFLENBQUM7SUFDUixLQUFLLENBQUMsRUFBRSxRQUFRLEVBQUU7UUFDZCxNQUFNLGVBQWUsR0FBRyxRQUFRLENBQUMsZ0JBQWdCLENBQzdDLHVCQUF1QixDQUMxQixDQUFDO1FBRUYsSUFBSSxlQUFlLENBQUMsTUFBTSxFQUFFO1lBQ3hCLE9BQU87Z0JBQ0gsTUFBTSxFQUFFLFNBQVM7Z0JBQ2pCLE9BQU8sRUFBRSxJQUFJO2dCQUNiLE9BQU8sRUFDSCwySEFBMkg7Z0JBQy9ILFFBQVEsRUFBRSxnREFBZ0Q7Z0JBQzFELE1BQU0sRUFBRTtvQkFDSixLQUFLLEVBQUUsR0FBRyxFQUFFLENBQUMsYUFBYSxlQUFlLENBQUMsTUFBTSxHQUFHO29CQUNuRCxPQUFPLEVBQUUsR0FBRyxFQUFFLENBQUMsT0FBTyxDQUFDLEdBQUcsQ0FBQyxlQUFlLENBQUM7aUJBQzlDO2FBQ0osQ0FBQztTQUNMO1FBQ0QsT0FBTztZQUNILE1BQU0sRUFBRSxTQUFTO1NBQ3BCLENBQUM7SUFDTixDQUFDO0NBQ0osQ0FBQyJ9
+        },
+    };
+}
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBOzs7Ozs7Ozs7Ozs7R0FZRztBQUNILE1BQU0sQ0FBQyxPQUFPLFdBQVcsa0JBQWtCO0lBQ3ZDLE9BQU87UUFDSCxFQUFFLEVBQUUsY0FBYztRQUNsQixJQUFJLEVBQUUsc0JBQXNCO1FBQzVCLFdBQVcsRUFDUCw2R0FBNkc7UUFDakgsUUFBUSxFQUFFLGtCQUFrQixDQUFDLGlCQUFpQjtRQUM5QyxLQUFLLEVBQUUsQ0FBQztRQUNSLEtBQUssQ0FBQyxFQUFFLFFBQVEsRUFBRTtZQUNkLE1BQU0sZUFBZSxHQUFHLFFBQVEsQ0FBQyxnQkFBZ0IsQ0FDN0MsdUJBQXVCLENBQzFCLENBQUM7WUFFRixJQUFJLGVBQWUsQ0FBQyxNQUFNLEVBQUU7Z0JBQ3hCLE9BQU87b0JBQ0gsTUFBTSxFQUFFLFNBQVM7b0JBQ2pCLE9BQU8sRUFBRSxJQUFJO29CQUNiLE9BQU8sRUFDSCwySEFBMkg7b0JBQy9ILFFBQVEsRUFBRSxnREFBZ0Q7b0JBQzFELE1BQU0sRUFBRTt3QkFDSixLQUFLLEVBQUUsR0FBRyxFQUFFLENBQUMsYUFBYSxlQUFlLENBQUMsTUFBTSxHQUFHO3dCQUNuRCxPQUFPLEVBQUUsR0FBRyxFQUFFLENBQUMsT0FBTyxDQUFDLEdBQUcsQ0FBQyxlQUFlLENBQUM7cUJBQzlDO2lCQUNKLENBQUM7YUFDTDtZQUNELE9BQU87Z0JBQ0gsTUFBTSxFQUFFLFNBQVM7YUFDcEIsQ0FBQztRQUNOLENBQUM7S0FDSixDQUFDO0FBQ04sQ0FBQyJ9

@@ -1,5 +1,2 @@
-import sVitePluginPostcss from './sVitePluginPostcss';
-
-export * from './sVitePluginPostcss';
-
+import sVitePluginPostcss from './sVitePluginPostcss.js';
 export default sVitePluginPostcss;

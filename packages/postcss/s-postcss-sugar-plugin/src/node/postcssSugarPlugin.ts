@@ -1,5 +1,4 @@
 // import __postcss from 'postcss';
-import __SBench from '@coffeekraken/s-bench';
 import __SEnv from '@coffeekraken/s-env';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
 import __SSugarJson from '@coffeekraken/s-sugar-json';
@@ -531,16 +530,16 @@ const plugin = (settings: IPostcssSugarPluginSettings = {}) => {
                 sharedData.rootFilePath = root.source?.input?.file;
             }
 
-            bench = new __SBench(
-                `postcssSugarPlugin.${root.source.input.file
-                    ?.replace(__packageRootDir(), '')
-                    .replace(
-                        __packageRootDir(process.cwd(), {
-                            highest: true,
-                        }),
-                        '',
-                    )}`,
-            );
+            // bench = new __SBench(
+            //     `postcssSugarPlugin.${root.source.input.file
+            //         ?.replace(__packageRootDir(), '')
+            //         .replace(
+            //             __packageRootDir(process.cwd(), {
+            //                 highest: true,
+            //             }),
+            //             '',
+            //         )}`,
+            // );
             await _load();
 
             // calculate the final hash depending on the
@@ -586,7 +585,7 @@ const plugin = (settings: IPostcssSugarPluginSettings = {}) => {
             // );
 
             // end the bench
-            bench.end();
+            // bench.end();
 
             // mark the plugin as not pristine anymore... slut... :)
             sharedData.isPristine = false;

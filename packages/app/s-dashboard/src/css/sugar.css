@@ -2,8 +2,6 @@
 
 @sugar.classes;
 
-/* @sugar.ui.filtrableinput.classes; */
-
 @sugar.icon.classes (
   fa:check:success
   fa:exclamation:error

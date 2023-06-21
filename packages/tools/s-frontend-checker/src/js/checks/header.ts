@@ -11,26 +11,31 @@
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-export default {
-    id: 'header',
-    name: 'Header tag',
-    description:
-        'It\'s recommanded to wrap your header (menu, etc...) inside a "header" tag.',
-    level: 1,
-    check({ $context }) {
-        const $header = $context.querySelector('header:not(article header)');
+export default function (__SFrontendChecker) {
+    return {
+        id: 'header',
+        name: 'Header tag',
+        description:
+            'It\'s recommanded to wrap your header (menu, etc...) inside a "header" tag.',
+        category: __SFrontendChecker.CATEGORY_BEST_PRACTICES,
+        level: 1,
+        check({ $context }) {
+            const $header = $context.querySelector(
+                'header:not(article header)',
+            );
 
-        if (!$header) {
+            if (!$header) {
+                return {
+                    status: 'warning',
+                    message: null,
+                    example: '<header>...</header>',
+                    moreLink: 'https://www.w3schools.com/tags/tag_header.asp',
+                    action: null,
+                };
+            }
             return {
-                status: 'warning',
-                message: null,
-                example: '<header>...</header>',
-                moreLink: 'https://www.w3schools.com/tags/tag_header.asp',
-                action: null,
+                status: 'success',
             };
-        }
-        return {
-            status: 'success',
-        };
-    },
-};
+        },
+    };
+}

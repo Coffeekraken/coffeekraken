@@ -112,9 +112,9 @@ export default class SSugarJson extends __SClass {
     async read(
         settings?: Partial<ISSugarJsonSettings>,
     ): Record<string, ISSugarJsonFile> | ISSugarJsonFile {
-        const bench = new __SBench('SSugarJson.read', {
-            bubbles: false,
-        });
+        // const bench = new __SBench('SSugarJson.read', {
+        //     bubbles: false,
+        // });
 
         // const SSugarJsonSettingsInterface = await import('./interface/SSugarJsonSettingsInterface');
         const finalSettings = <ISSugarJsonSettings>{
@@ -152,7 +152,7 @@ export default class SSugarJson extends __SClass {
             results[packageJson.name] = resultJson;
         });
 
-        bench.end();
+        // bench.end();
 
         return results;
     }

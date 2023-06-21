@@ -1,7 +1,3 @@
-import __SFrontendChecker, {
-    ISFrontendCheckerCheckResult,
-} from '../SFrontendChecker';
-
 /**
  * @name            language
  * @namespace       js.checks
@@ -16,24 +12,27 @@ import __SFrontendChecker, {
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 
-export default {
-    id: 'language',
-    name: 'Language',
-    description: 'The document must contain a valid langage declaration',
-    level: 0,
-    check({ $context }) {
-        // @ts-ignore
-        if (!$context.querySelector('html')?.hasAttribute('lang')) {
+export default function (__SFrontendChecker) {
+    return {
+        id: 'language',
+        name: 'Language',
+        description: 'The document must contain a valid langage declaration',
+        category: __SFrontendChecker.CATEGORY_BEST_PRACTICES,
+        level: 0,
+        check({ $context }) {
+            // @ts-ignore
+            if (!$context.querySelector('html')?.hasAttribute('lang')) {
+                return {
+                    status: 'error',
+                    message: 'The document is missing the language',
+                    example: '<html lang="en">',
+                    moreLink:
+                        'https://www.w3.org/International/questions/qa-html-language-declarations',
+                };
+            }
             return {
-                status: 'error',
-                message: 'The document is missing the language',
-                example: '<html lang="en">',
-                moreLink:
-                    'https://www.w3.org/International/questions/qa-html-language-declarations',
+                status: 'success',
             };
-        }
-        return {
-            status: 'success',
-        };
-    },
-};
+        },
+    };
+}

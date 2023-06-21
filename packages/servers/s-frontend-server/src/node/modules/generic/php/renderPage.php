@@ -8,7 +8,6 @@ require_once $nodeModulesVendorsPath;
 
 // set some environment variables
 $_ENV['S_NODES_DATA'] = true;
-$_ENV['ENV'] = 'development';
 
 $params = [];
 if (file_exists($argv[1])) {

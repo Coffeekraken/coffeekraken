@@ -284,6 +284,12 @@ export default function ({
                       background-color: sugar.color(current, --lighten 10);
                     }
                   }
+
+                  &:focus,
+                  &:focus-within {
+                    outline: 5px solid sugar.color(error);
+                  }
+
         `);
                 break;
         }

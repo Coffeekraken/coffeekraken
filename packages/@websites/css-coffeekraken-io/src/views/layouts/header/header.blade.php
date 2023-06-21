@@ -3,14 +3,14 @@
     <div class="s-container">
 
         <div class="s-flex:align-center" style="position: relative">
-            <div class="_actions s-display:none @mobile s-display:inline-block">
+            {{-- <div class="_actions s-display:none @mobile s-display:inline-block">
                 <div class="s-mis:30">
                     <a s-activate class="_menu-icon" href="#nav-mobile" toggle unactivate-on="event:s-page-transition.start">
                         <i class="s-icon:menu _open"></i>
                         <i class="s-icon:cross _close"></i>
                     </a>
                 </div>
-            </div>
+            </div> --}}
             <div class="_logo">
                 <a href="/" title="Coffeekraken.io" class="s-text:center">
                     @include ('sugar.logos.coffeekraken.coffeekraken')

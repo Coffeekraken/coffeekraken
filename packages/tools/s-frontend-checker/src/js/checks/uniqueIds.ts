@@ -23,7 +23,7 @@ export default function (__SFrontendChecker: ISFrontendChecker) {
         level: 0,
         check({ $context }) {
             const $sameIds: any = [];
-            const $ids = $context.querySelectorAll('[id]');
+            const $ids = Array.from($context.querySelectorAll('[id]') ?? []);
             const ids: Record<string, HTMLElement> = {};
 
             $ids.forEach(($id) => {
@@ -45,7 +45,11 @@ export default function (__SFrontendChecker: ISFrontendChecker) {
                     action: {
                         label: () => `Log them (${$sameIds.length})`,
                         // @ts-ignore
-                        handler: () => (_console ?? console).log($sameIds),
+                        handler: () => {
+                            $sameIds.forEach(($elm) => {
+                                console.log($elm);
+                            });
+                        },
                     },
                 };
             }

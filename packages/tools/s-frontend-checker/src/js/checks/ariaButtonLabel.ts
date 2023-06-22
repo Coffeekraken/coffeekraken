@@ -45,7 +45,11 @@ export default function (__SFrontendChecker: ISFrontendChecker) {
                                 action: {
                                     label: () =>
                                         `Log them (${$buttons.length})`,
-                                    handler: () => console.log($buttons),
+                                    handler: () => {
+                                        $buttons.forEach(($button) => {
+                                            console.log($button);
+                                        });
+                                    },
                                 },
                             };
                         }
@@ -56,7 +60,11 @@ export default function (__SFrontendChecker: ISFrontendChecker) {
                 status: 'success',
                 action: {
                     label: () => `Log them (${$buttons.length})`,
-                    handler: () => console.log($buttons),
+                    handler: () => {
+                        $buttons.forEach(($button) => {
+                            console.log($button);
+                        });
+                    },
                 },
             };
         },

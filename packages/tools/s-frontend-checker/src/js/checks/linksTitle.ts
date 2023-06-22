@@ -21,7 +21,9 @@ export default function (__SFrontendChecker: ISFrontendChecker) {
         category: __SFrontendChecker.CATEGORY_SEO,
         level: 1,
         check({ $context }) {
-            const $a = $context.querySelectorAll('a:not([title])');
+            const $a = Array.from(
+                $context.querySelectorAll('a:not([title])') ?? [],
+            );
 
             if ($a.length) {
                 return {
@@ -32,7 +34,11 @@ export default function (__SFrontendChecker: ISFrontendChecker) {
                     moreLink: 'https://www.w3schools.com/tags/tag_a.asp',
                     action: {
                         label: () => `Log them (${$a.length})`,
-                        handler: () => console.log($a),
+                        handler: () => {
+                            $a.forEach(($elm) => {
+                                console.log($elm);
+                            });
+                        },
                     },
                 };
             }

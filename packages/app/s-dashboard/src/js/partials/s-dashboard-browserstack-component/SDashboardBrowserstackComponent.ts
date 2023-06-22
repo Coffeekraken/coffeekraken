@@ -102,37 +102,39 @@ export default class SDashboardBrowserstackComponent extends __SLitComponent {
             <div class="s-dashboard-browserstack s-width:100">
                 <h2 class="s-typo:h6 s-mbe:20">Browserstack</h2>
 
-                <div class="_browsers ck-panel">
-                    ${Object.keys(this._browsers).length
-                        ? html`
-                              ${Object.entries(this._browsers).map(
-                                  ([browser, browserObj]) => html`
-                                      <a
-                                          href="https://live.browserstack.com/dashboard#browser=${browser}&&zoom_to_fit=true&full_screen=true&url=${this
-                                              .document.location.href}"
-                                          target="_blank"
-                                      >
-                                          <div class="s-tooltip-container">
-                                              <img
-                                                  class="_browser-svg"
-                                                  alt="${browser}"
-                                                  src="${this._browserSvgs[
-                                                      browser
-                                                  ]}"
-                                              />
-                                              <div class="s-tooltip">
-                                                  ${__upperFirst(browser)}
+                <div class="ck-panel">
+                    <div class="ck-panel_section _browsers">
+                        ${Object.keys(this._browsers).length
+                            ? html`
+                                  ${Object.entries(this._browsers).map(
+                                      ([browser, browserObj]) => html`
+                                          <a
+                                              href="https://live.browserstack.com/dashboard#browser=${browser}&&zoom_to_fit=true&full_screen=true&url=${this
+                                                  .document.location.href}"
+                                              target="_blank"
+                                          >
+                                              <div class="s-tooltip-container">
+                                                  <img
+                                                      class="_browser-svg"
+                                                      alt="${browser}"
+                                                      src="${this._browserSvgs[
+                                                          browser
+                                                      ]}"
+                                                  />
+                                                  <div class="s-tooltip">
+                                                      ${__upperFirst(browser)}
+                                                  </div>
                                               </div>
-                                          </div>
-                                      </a>
-                                  `,
-                              )}
-                          `
-                        : html`
-                              <div
-                                  class="s-loader:spinner s-color:accent"
-                              ></div>
-                          `}
+                                          </a>
+                                      `,
+                                  )}
+                              `
+                            : html`
+                                  <div
+                                      class="s-loader:spinner s-color:accent"
+                                  ></div>
+                              `}
+                    </div>
                 </div>
             </div>
         `;

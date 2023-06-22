@@ -10,6 +10,8 @@
 @import './generic/stat.css';
 @import './generic/tabs.css';
 
+@import './generic/s-tooltip.css';
+
 @import './partials/header.css';
 
 body {

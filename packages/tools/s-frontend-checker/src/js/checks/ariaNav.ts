@@ -44,7 +44,11 @@ export default function (__SFrontendChecker: ISFrontendChecker) {
                         'https://www.w3.org/WAI/ARIA/apg/patterns/landmarks/examples/navigation.html',
                     action: {
                         label: () => `Log them (${$navsNotLabelled.length})`,
-                        handler: () => console.log($navsNotLabelled),
+                        handler: () => {
+                            $navsNotLabelled.forEach(($elm) => {
+                                console.log($elm);
+                            });
+                        },
                     },
                 };
             }

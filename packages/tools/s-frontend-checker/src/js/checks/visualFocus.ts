@@ -72,7 +72,8 @@ export default function (__SFrontendChecker: ISFrontendChecker) {
 
             // restore focus
             // @ts-ignore
-            $focusdElement?.focus?.();
+            // $focusdElement?.focus?.();
+            window.parent.scrollTo(0, 0);
 
             if ($nonVisualFocusElements.length) {
                 return {

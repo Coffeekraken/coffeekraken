@@ -310,37 +310,39 @@ export default class SDashboardAssetsComponent extends __SLitComponent {
                 <h2 class="s-typo:h6 s-mbe:20">Assets</h2>
 
                 <div class="ck-panel">
-                    <ul class="_categories">
-                        ${this._renderCategory({
-                            title: 'HTML',
-                            totalSize: this._documentSize,
-                            assets: [],
-                            compressionPercent: 70,
-                        })}
-                        ${this._renderCategory(this._links, 'links')}
-                        ${this._renderCategory(this._scripts, 'scripts')}
-                        ${this._renderCategory(this._imgs, 'imgs')}
-                        ${this._renderCategory(this._videos, 'videos')}
-                    </ul>
-                    <div class="_total">
-                        <span class="_total-label">Total</span>
-                        <span class="_total-value">
-                            ${this._totalSize
-                                ? html`
-                                      <span
-                                          class="_compressed s-tooltip-container"
-                                      >
-                                          ${this._displaySize(
-                                              this._totalSizeCompressed,
-                                          )}
-                                          <div class="s-tooltip">
-                                              Compressed (estimation)
-                                          </div>
-                                      </span>
-                                      ${this._displaySize(this._totalSize)}
-                                  `
-                                : html` <i class="s-loader:spinner"></i> `}
-                        </span>
+                    <div class="ck-panel_section _browsers">
+                        <ul class="_categories">
+                            ${this._renderCategory({
+                                title: 'HTML',
+                                totalSize: this._documentSize,
+                                assets: [],
+                                compressionPercent: 70,
+                            })}
+                            ${this._renderCategory(this._links, 'links')}
+                            ${this._renderCategory(this._scripts, 'scripts')}
+                            ${this._renderCategory(this._imgs, 'imgs')}
+                            ${this._renderCategory(this._videos, 'videos')}
+                        </ul>
+                        <div class="_total">
+                            <span class="_total-label">Total</span>
+                            <span class="_total-value">
+                                ${this._totalSize
+                                    ? html`
+                                          <span
+                                              class="_compressed s-tooltip-container"
+                                          >
+                                              ${this._displaySize(
+                                                  this._totalSizeCompressed,
+                                              )}
+                                              <div class="s-tooltip">
+                                                  Compressed (estimation)
+                                              </div>
+                                          </span>
+                                          ${this._displaySize(this._totalSize)}
+                                      `
+                                    : html` <i class="s-loader:spinner"></i> `}
+                            </span>
+                        </div>
                     </div>
                 </div>
             </div>

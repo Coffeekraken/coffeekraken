@@ -285,11 +285,6 @@ export default function ({
                     }
                   }
 
-                  &:focus,
-                  &:focus-within {
-                    outline: 5px solid sugar.color(error);
-                  }
-
         `);
                 break;
         }

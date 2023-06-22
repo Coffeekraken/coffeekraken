@@ -22,7 +22,7 @@ export default function (__SFrontendChecker: ISFrontendChecker) {
         category: __SFrontendChecker.CATEGORY_BEST_PRACTICES,
         level: 0,
         check({ $context }) {
-            const $b = $context.querySelectorAll('b');
+            const $b = Array.from($context.querySelectorAll('b') ?? []);
 
             if ($b.length) {
                 return {
@@ -32,7 +32,11 @@ export default function (__SFrontendChecker: ISFrontendChecker) {
                     moreLink: 'https://www.w3schools.com/tags/tag_strong.asp',
                     action: {
                         label: () => `Log them (${$b.length})`,
-                        handler: () => console.log($b),
+                        handler: () => {
+                            $b.forEach(($elm) => {
+                                console.log($elm);
+                            });
+                        },
                     },
                 };
             }

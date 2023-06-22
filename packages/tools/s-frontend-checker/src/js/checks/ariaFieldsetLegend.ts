@@ -36,7 +36,11 @@ export default function (__SFrontendChecker: ISFrontendChecker) {
                         'https://www.w3.org/WAI/ARIA/apg/practices/names-and-descriptions/',
                     action: {
                         label: () => `Log them (${$fieldsets.length})`,
-                        handler: () => console.log($fieldsets),
+                        handler: () => {
+                            $fieldsets.forEach(($elm) => {
+                                console.log($elm);
+                            });
+                        },
                     },
                 };
             }
@@ -44,7 +48,11 @@ export default function (__SFrontendChecker: ISFrontendChecker) {
                 status: 'success',
                 action: {
                     label: () => `Log them (${$fieldsets.length})`,
-                    handler: () => console.log($fieldsets),
+                    handler: () => {
+                        $fieldsets.forEach(($elm) => {
+                            console.log($elm);
+                        });
+                    },
                 },
             };
         },

@@ -22,10 +22,12 @@ export default function (__SFrontendChecker: ISFrontendChecker) {
             'Each forms must have an "aria-label" or an "aria-labelledby" attribute',
         level: 1,
         check({ $context }) {
-            const $forms = $context.querySelectorAll(
-                'form:not([aria-label],[aria-labelledby])',
+            const $forms = Array.from(
+                $context.querySelectorAll(
+                    'form:not([aria-label],[aria-labelledby])',
+                ) ?? [],
             );
-            if ($forms) {
+            if ($forms.length) {
                 return {
                     status: 'warning',
                     message: 'Some forms are not aria compliant',
@@ -35,7 +37,11 @@ export default function (__SFrontendChecker: ISFrontendChecker) {
                         'https://www.w3.org/WAI/ARIA/apg/patterns/landmarks/examples/form.html',
                     action: {
                         label: () => `Log them (${$forms.length})`,
-                        handler: () => console.log($forms),
+                        handler: () => {
+                            $forms.forEach(($form) => {
+                                console.log($form);
+                            });
+                        },
                     },
                 };
             }

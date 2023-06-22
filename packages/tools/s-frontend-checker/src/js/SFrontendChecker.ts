@@ -5,23 +5,31 @@ import __SPromise from '@coffeekraken/s-promise';
 import { __clone, __deepMerge } from '@coffeekraken/sugar/object';
 import __SFrontendCheckerSettingsInterface from './interface/SFrontendCheckerSettingsInterface';
 
+import __SDuration from '@coffeekraken/s-duration';
+
 import type {
     ISFrontendChecker,
+    ISFrontendCheckerCheckCheckResult,
     ISFrontendCheckerCheckObj,
+    ISFrontendCheckerCheckResult,
     ISFrontendCheckerSettings,
 } from './types';
 
 import __ariaBanner from './checks/ariaBanner';
 import __ariaButtonLabel from './checks/ariaButtonLabel';
+import __ariaColorContrast from './checks/ariaColorContrast';
 import __ariaComplmentary from './checks/ariaComplementary';
 import __ariaContentInfo from './checks/ariaContentInfo';
 import __ariaDescribedBy from './checks/ariaDescribedBy';
+import __ariaFieldsetLegend from './checks/ariaFieldsetLegend';
 import __ariaFigureFigcaption from './checks/ariaFigureFigcaption';
 import __ariaForm from './checks/ariaForm';
+import __ariaLabelForm from './checks/ariaLabelForm';
 import __ariaLabelledBy from './checks/ariaLabelledBy';
 import __ariaMain from './checks/ariaMain';
 import __ariaRoles from './checks/ariaRoles';
 import __ariaSearch from './checks/ariaSearch';
+import __ariaTableCaption from './checks/ariaTableCaption';
 import __ariaTree from './checks/ariaTree';
 import __author from './checks/author';
 import __bTag from './checks/bTag';
@@ -51,12 +59,6 @@ import __viewport from './checks/viewport';
 import __visualFocus from './checks/visualFocus';
 import __w3c from './checks/w3c';
 import __webpImages from './checks/webpImages';
-
-import __ariaTableCaption from './checks/ariaTableCaption';
-
-import __ariaFieldsetLegend from './checks/ariaFieldsetLegend';
-
-import __ariaLabelForm from './checks/ariaLabelForm';
 
 /**
  * @name                SFrontendChecker
@@ -277,6 +279,69 @@ export default class SFrontendChecker
     }
 
     /**
+     * @name        level
+     * @type        Number
+     * @static
+     *
+     * Get the handled level
+     *
+     * @since       2.0.0
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    get levels(): number[] {
+        return this.settings.levels;
+    }
+
+    /**
+     * @name        categories
+     * @type        String[]
+     * @static
+     *
+     * Access the categories
+     *
+     * @since       2.0.0
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    get categories(): string[] {
+        return this.settings.categories;
+    }
+
+    /**
+     * @name        statuses
+     * @type        String[]
+     * @static
+     *
+     * Access the statuses
+     *
+     * @since       2.0.0
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    get statuses(): string[] {
+        return this.settings.statuses;
+    }
+
+    /**
+     * @name        checksCount
+     * @type        String[]
+     * @static
+     *
+     * Get how many checks are eligible in this instance depending on categories and levels.
+     *
+     * @since       2.0.0
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    _checksCount;
+    get checksCount(): number {
+        if (this._checksCount) {
+            return this._checksCount;
+        }
+        this.getChecksToRun(); // the checks count is setted inside this
+        return this._checksCount;
+    }
+
+    _areChecksRunning = false;
+
+    /**
      * @name          constructor
      * @type          Function
      * @constructor
@@ -297,47 +362,146 @@ export default class SFrontendChecker
     }
 
     /**
+     * @name            isChecking
+     * @type            Function
+     *
+     * Return true if a check is occuring, false if not
+     *
+     * @return      {Boolean}               true if a check is occuring, false if not
+     *
+     * @since       2.0.0
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    isChecking(): boolean {
+        return this._areChecksRunning;
+    }
+
+    /**
+     * Get all the checks to run depending on the statuses, levels and categories
+     */
+    getChecksToRun(): Record<string, ISFrontendCheckerCheckObj> {
+        const checks = {};
+        for (let [checkId, checkObj] of Object.entries(
+            SFrontendChecker._registeredChecks,
+        )) {
+            if (!this.categories.includes(checkObj.category)) continue;
+            if (!this.levels.includes(checkObj.level)) continue;
+            checks[checkId] = __clone(
+                SFrontendChecker._registeredChecks[checkId],
+                {
+                    deep: true,
+                },
+            );
+        }
+
+        // set the checks count
+        this._checksCount = Object.keys(checks).length;
+
+        return checks;
+    }
+
+    /**
      * @name          check
      * @type          Function
-     * @constructor
+     * @async
      *
      * Check the passed context and returns some insights about what is good and what's not.
      *
      * @since          2.0.0
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    check(
-        $context = document,
-        checks = Object.keys(SFrontendChecker._registeredChecks),
-    ) {
-        const checksObjects: Record<string, ISFrontendCheckerCheckObj> = {};
-        checks.forEach((checkId) => {
-            if (!SFrontendChecker._registeredChecks[checkId]) {
-                throw new Error(
-                    `[SFrontendChecker] The requested "${checkId}" does not exists...`,
-                );
-            }
-            checksObjects[checkId] = __clone(
-                SFrontendChecker._registeredChecks[checkId],
-                {
-                    deep: true,
-                },
-            );
-        });
+    check($context = document): Promise<ISFrontendCheckerCheckResult> {
+        const checksResult: ISFrontendCheckerCheckResult = {
+            score: null,
+            duration: null,
+            checks: this.getChecksToRun(),
+        };
+
+        let points = 0,
+            potentialPoints = 0;
+
+        const duration = new __SDuration();
+
+        // update checks running status
+        this._areChecksRunning = true;
 
         return new __SPromise(async ({ resolve, reject, emit, pipe }) => {
-            emit('checks.start', checksObjects);
-            for (let i = 0; i < checks.length; i++) {
-                const checkId = checks[i];
-                const checkObj = checksObjects[checkId];
-                emit('check.start', checkObj);
-                const checkResult = await checkObj.check({ $context });
-                delete checkObj.check;
-                checkObj.result = checkResult;
-                emit('check.complete', checkObj);
+            emit('checks.start', checksResult);
+
+            for (let [checkId, checkObj] of Object.entries(
+                checksResult.checks,
+            )) {
+                const checkDuration = new __SDuration();
+                const originalCheckFn = checkObj.check;
+
+                // handle the points
+                potentialPoints += checkObj.level + 1;
+                points += checkObj.level + 1;
+
+                checkObj.check = () => {
+                    return new __SPromise(async (promise) => {
+                        // update checks running status
+                        this._areChecksRunning = true;
+                        // remove potential points for this check
+                        points -= checkObj.points ?? checkObj.level + 1;
+                        // reset the checkObj
+                        delete checkObj.result;
+                        checkObj.duration = null;
+                        checkObj.isChecking = true;
+                        // emit start event
+                        promise.emit('start', checkObj);
+                        emit('check.start', checkObj);
+                        // execute the check
+                        const checkResult: ISFrontendCheckerCheckCheckResult =
+                            await originalCheckFn({ $context });
+                        // update the points
+                        let resultPoints = 0;
+                        switch (checkResult.status) {
+                            case SFrontendChecker.STATUS_WARNING:
+                                // half points
+                                resultPoints = (checkObj.level + 1) * 0;
+                                break;
+                            case SFrontendChecker.STATUS_SUCCESS:
+                                // all points
+                                resultPoints = checkObj.level + 1;
+                                break;
+                        }
+                        // update points
+                        points += resultPoints;
+                        // update the checkObj
+                        checkObj.points = resultPoints;
+                        checkObj.isChecking = false;
+                        checksResult.score = Math.round(
+                            (100 / potentialPoints) * points,
+                        );
+                        checkObj.duration = checkDuration.end();
+                        checkObj.result = checkResult;
+                        // update checks running status
+                        this._areChecksRunning = false;
+                        // emit complete event
+                        promise.emit('complete', checkObj);
+                        emit('check.complete', checkObj);
+                        // resolve the promise
+                        promise.resolve(checkObj);
+                    });
+                };
+                await checkObj.check();
             }
-            emit('checks.complete', checksObjects);
-            resolve(checksObjects);
+
+            // points
+            checksResult.potentialPoints = potentialPoints;
+            checksResult.points = points;
+            checksResult.score = Math.round((100 / potentialPoints) * points);
+
+            // duration
+            checksResult.duration = duration.end();
+
+            // update checks running status
+            this._areChecksRunning = false;
+
+            // emit complete event and resolve promise
+            emit('checks.complete', checksResult);
+            resolve(checksResult);
         });
     }
 }
@@ -386,3 +550,4 @@ SFrontendChecker.registerCheck(__ariaButtonLabel);
 SFrontendChecker.registerCheck(__ariaDescribedBy);
 SFrontendChecker.registerCheck(__ariaLabelledBy);
 SFrontendChecker.registerCheck(__visualFocus);
+SFrontendChecker.registerCheck(__ariaColorContrast);

@@ -1,3 +1,5 @@
+import type { ISDurationObject } from '@coffeekraken/s-duration';
+
 export interface ISFrontendChecker {
     CATEGORY_ACCESSIBILITY: string;
     CATEGORY_SEO: string;
@@ -17,6 +19,12 @@ export interface ISFrontendCheckerSettings {
     icons: Record<string, string>;
 }
 
+export interface ISFrontendCheckerCheckResult {
+    score: number;
+    duration: ISDurationObject;
+    checks: Record<string, ISFrontendCheckerCheckObj>;
+}
+
 export interface ISFrontendCheckerCheckObj {
     id: string;
     name: string;
@@ -24,6 +32,8 @@ export interface ISFrontendCheckerCheckObj {
     level: number;
     check: Function;
     result?: ISFrontendCheckerCheckResult;
+    duration?: ISDurationObject;
+    isChecking: boolean;
 }
 
 export interface ISFrontendCheckerCheckResultAction {
@@ -31,7 +41,7 @@ export interface ISFrontendCheckerCheckResultAction {
     handler: Function;
 }
 
-export interface ISFrontendCheckerCheckResult {
+export interface ISFrontendCheckerCheckCheckResult {
     status: 'success' | 'warning' | 'error';
     message?: string;
     example?: string;

@@ -47,7 +47,11 @@ export default function (__SFrontendChecker: ISFrontendChecker) {
                     action: {
                         label: () =>
                             `Log issues (${responseJson.messages.length})`,
-                        handler: () => console.log(responseJson.messages),
+                        handler: () => {
+                            responseJson.messages?.forEach?.((msg) => {
+                                console.log(mgs);
+                            });
+                        },
                     },
                 };
             }

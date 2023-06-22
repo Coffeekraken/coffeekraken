@@ -12,6 +12,8 @@ import { __deepMerge } from '@coffeekraken/sugar/object';
 import __SColorApplyParamsInterface from './interface/SColorApplyParamsInterface';
 import __SColorSettingsInterface from './interface/SColorSettingsInterface';
 
+import { Contrast as __contrast } from '@smockle/contrast';
+
 /**
  * @name 		    SColor
  * @namespace       shared
@@ -81,6 +83,23 @@ export interface ISColorObject {
 }
 
 class SColor extends __SClass {
+    static getContrastInfo(
+        color1: string | SColor,
+        color2: string | SColor,
+    ): any {
+        if (typeof color1 === 'string') {
+            const color1Instance = new SColor(color1);
+            color1 = color1Instance.toHexString();
+        }
+        if (typeof color2 === 'string') {
+            const color2Instance = new SColor(color2);
+            color2 = color2Instance.toHexString();
+        }
+
+        const contrast = new __contrast(color1, color2);
+        _console.log('contrast', contrast);
+    }
+
     /**
      * @name                colors
      * @type                Object

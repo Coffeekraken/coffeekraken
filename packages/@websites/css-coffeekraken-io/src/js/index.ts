@@ -113,6 +113,8 @@ const viewsRelated = import.meta.globEager('../views/**/*.ts');
 
             this._$slider.setAttribute('ready', 'true');
 
+            return;
+
             setInterval(() => {
                 if (this._paused) {
                     return;

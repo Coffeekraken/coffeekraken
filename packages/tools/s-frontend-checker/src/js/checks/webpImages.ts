@@ -19,11 +19,11 @@ export default function (__SFrontendChecker: ISFrontendChecker) {
         name: 'Webp for images',
         description:
             "Consider using the 'webp' extension for images to improve the performances of your website",
-        category: __SFrontendChecker.CATEGORY_BEST_PRACTICES,
+        category: __SFrontendChecker.CATEGORY_NICE_TO_HAVE,
         level: 2,
         check({ $context }) {
-            const $nonWebpImages = $context.querySelectorAll(
-                'img:not([src*=".webp"])',
+            const $nonWebpImages = Array.from(
+                $context.querySelectorAll('img:not([src*=".webp"])') ?? [],
             );
 
             if ($nonWebpImages.length) {
@@ -34,7 +34,11 @@ export default function (__SFrontendChecker: ISFrontendChecker) {
                     moreLink: 'https://developers.google.com/speed/webp',
                     action: {
                         label: () => `Log them (${$nonWebpImages.length})`,
-                        handler: () => console.log($nonWebpImages),
+                        handler: () => {
+                            $nonWebpImages.forEach(($elm) => {
+                                console.log($elm);
+                            });
+                        },
                     },
                 };
             }

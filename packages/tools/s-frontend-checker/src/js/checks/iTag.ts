@@ -22,7 +22,9 @@ export default function (__SFrontendChecker: ISFrontendChecker) {
         category: __SFrontendChecker.CATEGORY_BEST_PRACTICES,
         level: 0,
         check({ $context }) {
-            const $i = $context.querySelectorAll('i:not(:empty)');
+            const $i = Array.from(
+                $context.querySelectorAll('i:not(:empty)') ?? [],
+            );
 
             if ($i.length) {
                 return {
@@ -32,7 +34,11 @@ export default function (__SFrontendChecker: ISFrontendChecker) {
                     moreLink: 'https://www.w3schools.com/tags/tag_em.asp',
                     action: {
                         label: () => `Log them (${$i.length})`,
-                        handler: () => console.log($i),
+                        handler: () => {
+                            $i.forEach(($elm) => {
+                                console.log($elm);
+                            });
+                        },
                     },
                 };
             }

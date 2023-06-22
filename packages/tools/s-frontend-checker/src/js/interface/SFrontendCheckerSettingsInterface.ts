@@ -23,6 +23,36 @@ import __SFrontendChecker from '../exports';
 export default class SFrontendCheckerSettingsInterface extends __SInterface {
     static get _definition() {
         return {
+            levels: {
+                type: 'Array',
+                description: 'Specify which levels you want to handle',
+                default: [
+                    __SFrontendChecker.LEVEL_LOW,
+                    __SFrontendChecker.LEVEL_MEDIUM,
+                    __SFrontendChecker.LEVEL_HIGH,
+                ],
+            },
+            categories: {
+                type: 'Array',
+                description: 'List all the categories you want to handle',
+                default: [
+                    __SFrontendChecker.CATEGORY_ACCESSIBILITY,
+                    __SFrontendChecker.CATEGORY_BEST_PRACTICES,
+                    __SFrontendChecker.CATEGORY_NICE_TO_HAVE,
+                    __SFrontendChecker.CATEGORY_PERFORMANCE,
+                    __SFrontendChecker.CATEGORY_SEO,
+                    __SFrontendChecker.CATEGORY_SOCIAL,
+                ],
+            },
+            statuses: {
+                type: 'Array',
+                description: 'List all the statuses you want to handle',
+                default: [
+                    __SFrontendChecker.STATUS_ERROR,
+                    __SFrontendChecker.STATUS_WARNING,
+                    __SFrontendChecker.STATUS_SUCCESS,
+                ],
+            },
             icons: {
                 type: 'Object',
                 description:
@@ -39,7 +69,7 @@ export default class SFrontendCheckerSettingsInterface extends __SInterface {
                     [__SFrontendChecker.STATUS_WARNING]:
                         '<i class="fa-solid fa-triangle-exclamation s-tc:warning"></i>',
                     [__SFrontendChecker.STATUS_ERROR]:
-                        '<i class="fa-solid fa-xmark s-tc:error"></i>',
+                        '<i class="fa-solid fa-circle-exclamation s-tc:error"></i>',
                     [__SFrontendChecker.CATEGORY_ACCESSIBILITY]:
                         '<i class="fa-solid fa-universal-access"></i>',
                     [__SFrontendChecker.CATEGORY_BEST_PRACTICES]:

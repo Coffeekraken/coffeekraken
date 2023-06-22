@@ -10,9 +10,43 @@ s-dashboard-frontend-checker {
     flex-direction: column;
 
     ._header {
-        background: sugar.color(main, background);
-        padding: sugar.padding(30);
+        padding: sugar.padding(20);
         @sugar.border.radius (10);
+    }
+    ._score {
+        font-size: sugar.font.size(60);
+        font-weight: bold;
+        display: flex;
+        align-items: center;
+
+        ._score-label {
+            flex-grow: 1;
+        }
+
+        ._score-checks-count {
+            font-weight: regular;
+            font-size: sugar.font.size(30);
+
+            &-label {
+                margin-inline-start: sugar.margin(10);
+                opacity: 0.5;
+            }
+        }
+
+        ._score-value {
+            margin-inline-end: sugar.margin(10);
+            @sugar.transition;
+        }
+
+        ._score-high {
+            color: sugar.color(success);
+        }
+        ._score-medium {
+            color: sugar.color(accent);
+        }
+        ._score-low {
+            color: sugar.color(error);
+        }
     }
 
     ._filters {
@@ -25,6 +59,12 @@ s-dashboard-frontend-checker {
         @sugar.theme dark {
             background: sugar.color(main, --alpha 0.1);
         }
+
+        &._filters-tabs {
+            ._filter.active {
+                background-color: sugar.color(accent, --alpha 0.3) !important;
+            }
+        }
     }
     ._filter {
         padding: sugar.padding(20) sugar.padding(20);
@@ -32,18 +72,24 @@ s-dashboard-frontend-checker {
         width: 33.3%;
         cursor: pointer;
         @sugar.border.radius (10);
-        opacity: 0.5;
         text-align: center;
 
         i {
+            opacity: 0.3;
             margin-inline-end: sugar.margin(10);
+        }
+        span {
+            opacity: 0.3;
         }
 
         &:hover {
             background-color: sugar.color(accent, --alpha 0.3);
         }
         &.active {
-            opacity: 1;
+            i,
+            span {
+                opacity: 1;
+            }
         }
     }
 
@@ -54,8 +100,6 @@ s-dashboard-frontend-checker {
     }
 
     .ck-list_item:focus-within {
-        display: flex;
-        align-items: center;
         background: sugar.color(main, --alpha 0.1);
         color: sugar.color(main, text);
 
@@ -65,10 +109,11 @@ s-dashboard-frontend-checker {
     }
 
     ._level {
-        width: 1em;
-        height: 1em;
+        width: 0.5em;
+        height: 0.5em;
         background: sugar.color(current);
         border-radius: 0.5em;
+        margin-inline-end: sugar.margin(20);
 
         &.level--0 {
             @sugar.color (success);
@@ -98,6 +143,7 @@ s-dashboard-frontend-checker {
     ._details {
         @sugar.border.radius();
         display: none;
+        padding-block-end: sugar.padding(20);
     }
     .ck-list_item:focus-within ._details {
         display: block;

@@ -44,7 +44,11 @@ export default function (__SFrontendChecker: ISFrontendChecker) {
                         'https://www.w3.org/WAI/ARIA/apg/patterns/landmarks/examples/main.html',
                     action: {
                         label: () => `Log them (${$mainsNotLabelled.length})`,
-                        handler: () => console.log($mainsNotLabelled),
+                        handler: () => {
+                            $mainsNotLabelled.forEach(($elm) => {
+                                console.log($elm);
+                            });
+                        },
                     },
                 };
             }

@@ -22,11 +22,13 @@ export default function (__SFrontendChecker: ISFrontendChecker) {
             'When using tree (nested ul, ol and dl), roles should appear on each levels like `tree`, `treeitem`, `group`, etc...',
         level: 1,
         check({ $context }) {
-            const $trees = $context.querySelectorAll(
-                ':is(ul,ol,dl,li):has(ul,ol,dl):not([role])',
+            const $trees = Array.from(
+                $context.querySelectorAll(
+                    ':is(ul,ol,dl,li):has(ul,ol,dl):not([role])',
+                ) ?? [],
             );
 
-            if ($trees) {
+            if ($trees.length) {
                 return {
                     status: 'warning',
                     message: 'Some trees does not have any `role` attribute',
@@ -42,7 +44,11 @@ export default function (__SFrontendChecker: ISFrontendChecker) {
                     moreLink: 'https://www.w3.org/WAI/GL/wiki/Using_ARIA_trees',
                     action: {
                         label: () => `Log them (${$trees.length})`,
-                        handler: () => console.log($trees),
+                        handler: () => {
+                            $trees.forEach(($elm) => {
+                                console.log($elm);
+                            });
+                        },
                     },
                 };
             }

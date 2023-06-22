@@ -22,7 +22,9 @@ export default function (__SFrontendChecker: ISFrontendChecker) {
         category: __SFrontendChecker.CATEGORY_SEO,
         level: 0,
         check({ $context }) {
-            const $nonAltImages = $context.querySelectorAll('img:not([alt])');
+            const $nonAltImages = Array.from(
+                $context.querySelectorAll('img:not([alt])') ?? [],
+            );
 
             if ($nonAltImages.length) {
                 return {
@@ -32,7 +34,11 @@ export default function (__SFrontendChecker: ISFrontendChecker) {
                     moreLink: 'https://www.w3schools.com/tags/att_img_alt.asp',
                     action: {
                         label: () => `Log them (${$nonAltImages.length})`,
-                        handler: () => console.log($nonAltImages),
+                        handler: () => {
+                            $nonAltImages.forEach(($elm) => {
+                                console.log($elm);
+                            });
+                        },
                     },
                 };
             }

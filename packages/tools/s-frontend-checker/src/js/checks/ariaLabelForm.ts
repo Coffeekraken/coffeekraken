@@ -62,7 +62,11 @@ export default function (__SFrontendChecker: ISFrontendChecker) {
                 status: 'success',
                 action: {
                     label: () => `Log them (${$labels.length})`,
-                    handler: () => console.log($labels),
+                    handler: () => {
+                        $labels.forEach(($label) => {
+                            console.log($label);
+                        });
+                    },
                 },
             };
         },

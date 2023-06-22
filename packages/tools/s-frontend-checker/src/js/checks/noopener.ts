@@ -22,8 +22,10 @@ export default function (__SFrontendChecker: ISFrontendChecker) {
         category: __SFrontendChecker.CATEGORY_BEST_PRACTICES,
         level: 3,
         check({ $context }) {
-            const $externalLinks = $context.querySelectorAll(
-                'a[target="_blank"]:not([rel="noopener"])',
+            const $externalLinks = Array.from(
+                $context.querySelectorAll(
+                    'a[target="_blank"]:not([rel="noopener"])',
+                ) ?? [],
             );
 
             // @ts-ignore
@@ -36,7 +38,9 @@ export default function (__SFrontendChecker: ISFrontendChecker) {
                     action: {
                         label: () => `Log them (${$externalLinks.length})`,
                         handler: () => {
-                            console.log($externalLinks);
+                            $externalLinks.forEach(($elm) => {
+                                console.log($elm);
+                            });
                         },
                     },
                     moreLink:

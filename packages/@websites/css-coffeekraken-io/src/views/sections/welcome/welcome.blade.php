@@ -8,7 +8,7 @@
         </div>
     </div>
 
-    <div class="_illustration">
+    {{-- <div class="_illustration">
         <div welcome-slider>
 
             <div class="_code">
@@ -204,24 +204,9 @@
                 </div>
             </div>
 
-            
-
-            {{-- <div class="_code">
-                <div class="_line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="">.!!!!!!!</span></div>
-                <div class="_line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="">.......</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="">:PPPG###</span></div>
-                <div class="_line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="">5BGGGGB~</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="">~#BB</span></div>
-                <div class="_line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="">P##?^^^.</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="">~#BB</span></div>
-                <div class="_line"><span class="">7??????GB#~</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="">~#BB</span></div>
-                <div class="_line"><span class="">B##P555BB#~</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="">~#BB</span></div>
-                <div class="_line"><span class="">BBB^</span>&nbsp;&nbsp;&nbsp;<span class="">P##~</span>&nbsp;&nbsp;<span class="s-tc--accent">:^^^</span>&nbsp;&nbsp;<span class="s-tc--accent">.^^^:</span>&nbsp;&nbsp;<span class="">~#BB</span></div>
-                <div class="_line"><span class="">BBB^</span>&nbsp;&nbsp;&nbsp;<span class="">P##~</span>&nbsp;<span class="s-tc--accent">.~~~~.</span>&nbsp;<span class="s-tc--accent">:!~~~</span>&nbsp;&nbsp;<span class="">~#BB</span></div>
-                <div class="_line"><span class="">B##^</span>&nbsp;&nbsp;&nbsp;<span class="">P##~</span>&nbsp;&nbsp;<span class="s-tc--accent">.::.</span>&nbsp;&nbsp;&nbsp;<span class="s-tc--accent">:^:.</span>&nbsp;&nbsp;<span class="">~#BB</span></div>
-                <div class="_line"><span class="">JYY:</span>&nbsp;&nbsp;&nbsp;<span class="">P##!</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="">~#BB</span></div>
-                <div class="_line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="">P##GGGGGGGGG^</span>&nbsp;&nbsp;<span class="">:PGGG###</span></div>
-                <div class="_line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="">~!!!!!!!!!!!.</span>&nbsp;&nbsp;<span class="">.!!!!!!!</span></div>            
-            </div> --}}
+        
 
         </div>
-    </div>
+    </div> --}}
 
 </section>

@@ -44,7 +44,11 @@ export default function (__SFrontendChecker: ISFrontendChecker) {
                     example: '<!-- comment -->',
                     action: {
                         label: () => `Log them (${$comments.length})`,
-                        handler: () => console.log($comments),
+                        handler: () => {
+                            $comments.forEach(($elm) => {
+                                console.log($elm);
+                            });
+                        },
                     },
                 };
             }

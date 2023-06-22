@@ -22,8 +22,8 @@ export default function (__SFrontendChecker: ISFrontendChecker) {
         category: __SFrontendChecker.CATEGORY_BEST_SEO,
         level: 1,
         check({ $context }) {
-            const $noneFigureImgs = $context.querySelectorAll(
-                'img:not(figure > img)',
+            const $noneFigureImgs = Array.from(
+                $context.querySelectorAll('img:not(figure > img)') ?? [],
             );
 
             if ($noneFigureImgs.length) {
@@ -35,7 +35,11 @@ export default function (__SFrontendChecker: ISFrontendChecker) {
                     moreLink: 'https://www.w3schools.com/tags/att_img_alt.asp',
                     action: {
                         label: () => `Log them (${$noneFigureImgs.length})`,
-                        handler: () => console.log($noneFigureImgs),
+                        handler: () => {
+                            $noneFigureImgs.forEach(($elm) => {
+                                console.log($elm);
+                            });
+                        },
                     },
                 };
             }

@@ -43,7 +43,11 @@ export default function (__SFrontendChecker: ISFrontendChecker) {
                                 'https://www.w3.org/WAI/ARIA/apg/practices/names-and-descriptions/',
                             action: {
                                 label: () => `Log them (${$elements.length})`,
-                                handler: () => console.log($elements),
+                                handler: () => {
+                                    $elements.forEach(($elm) => {
+                                        console.log($elm);
+                                    });
+                                },
                             },
                         };
                     }

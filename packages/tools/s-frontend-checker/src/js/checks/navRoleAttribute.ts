@@ -21,7 +21,9 @@ export default function (__SFrontendChecker: ISFrontendChecker) {
         category: __SFrontendChecker.CATEGORY_ACCESSIBILITY,
         level: 1,
         check({ $context }) {
-            const $nav = $context.querySelectorAll('nav:not([role])');
+            const $nav = Array.from(
+                $context.querySelectorAll('nav:not([role])') ?? [],
+            );
 
             if ($nav.length) {
                 return {
@@ -31,7 +33,11 @@ export default function (__SFrontendChecker: ISFrontendChecker) {
                     moreLink: 'https://www.w3schools.com/tags/tag_nav.asp',
                     action: {
                         label: () => `Log them (${$nav.length})`,
-                        handler: () => console.log($nav),
+                        handler: () => {
+                            $nav.forEach(($elm) => {
+                                console.log($elm);
+                            });
+                        },
                     },
                 };
             }

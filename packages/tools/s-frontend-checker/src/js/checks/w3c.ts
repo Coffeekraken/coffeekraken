@@ -1,3 +1,5 @@
+import type { ISFrontendChecker } from '../types';
+
 /**
  * @name            w3c
  * @namespace       js.checks
@@ -12,7 +14,7 @@
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 
-export default function (__SFrontendChecker) {
+export default function (__SFrontendChecker: ISFrontendChecker) {
     return {
         id: 'w3c',
         name: 'W3C validator',

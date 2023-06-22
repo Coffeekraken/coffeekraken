@@ -1,3 +1,5 @@
+import type { ISFrontendChecker } from '../types';
+
 /**
  * @name            ariaSearch
  * @namespace       js.checks
@@ -6,12 +8,12 @@
  * @status          beta
  * @async
  *
- *
+ * Check that the search input is inside a role="search" container
  *
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-export default function (__SFrontendChecker) {
+export default function (__SFrontendChecker: ISFrontendChecker) {
     return {
         id: 'ariaSearch',
         name: 'Aria search',

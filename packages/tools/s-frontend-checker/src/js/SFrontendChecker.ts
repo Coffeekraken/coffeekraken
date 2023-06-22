@@ -5,6 +5,12 @@ import __SPromise from '@coffeekraken/s-promise';
 import { __clone, __deepMerge } from '@coffeekraken/sugar/object';
 import __SFrontendCheckerSettingsInterface from './interface/SFrontendCheckerSettingsInterface';
 
+import type {
+    ISFrontendChecker,
+    ISFrontendCheckerCheckObj,
+    ISFrontendCheckerSettings,
+} from './types';
+
 import __ariaBanner from './checks/ariaBanner';
 import __ariaButtonLabel from './checks/ariaButtonLabel';
 import __ariaComplmentary from './checks/ariaComplementary';
@@ -78,35 +84,10 @@ import __ariaLabelForm from './checks/ariaLabelForm';
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 
-export interface ISFrontendCheckerSettings {}
-
-export interface ISFrontendCheckerCheckObj {
-    id: string;
-    name: string;
-    description: string;
-    level: number;
-    check: Function;
-    result?: ISFrontendCheckerCheckResult;
-}
-
-export interface ISFrontendCheckerCheckResultAction {
-    label: string;
-    handler: Function;
-}
-
-export interface ISFrontendCheckerCheckResult {
-    status: 'success' | 'warning' | 'error';
-    message?: string;
-    example?: string;
-    action?: ISFrontendCheckerCheckResultAction;
-    moreLink?: string;
-}
-
-export interface ISFrontendCheckerCheckFn {
-    ($context: HTMLElement): Promise<ISFrontendCheckerCheckResult>;
-}
-
-export default class SFrontendChecker extends __SClass {
+export default class SFrontendChecker
+    extends __SClass
+    implements ISFrontendChecker
+{
     /**
      * Store the registered checks
      */
@@ -279,6 +260,20 @@ export default class SFrontendChecker extends __SClass {
         }
         this._registeredChecks[check.id] = check;
         // });
+    }
+
+    /**
+     * @name        icons
+     * @type        Record<string, string>
+     * @static
+     *
+     * Access the icons
+     *
+     * @since       2.0.0
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    get icons(): Record<string, string> {
+        return this.settings.icons;
     }
 
     /**

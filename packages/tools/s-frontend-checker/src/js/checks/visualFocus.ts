@@ -1,5 +1,7 @@
 import { __wait } from '@coffeekraken/sugar/datetime';
 
+import type { ISFrontendChecker } from '../types';
+
 /**
  * @name            visualFocus
  * @namespace       js.checks
@@ -14,7 +16,7 @@ import { __wait } from '@coffeekraken/sugar/datetime';
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 
-export default function (__SFrontendChecker) {
+export default function (__SFrontendChecker: ISFrontendChecker) {
     return {
         id: 'visualFocus',
         name: 'Visual focus',
@@ -32,71 +34,63 @@ export default function (__SFrontendChecker) {
                 ) ?? [],
             );
 
+            const $nonVisualFocusElements: HTMLElement[] = [];
+
             // @ts-ignore
             for (let [idx, $focusable] of $focusables.entries()) {
-                const style = Object.assign(
-                        {},
+                const style = JSON.stringify(
                         window.getComputedStyle($focusable),
                     ),
-                    styleAfter = Object.assign(
-                        {},
+                    styleAfter = JSON.stringify(
                         window.getComputedStyle($focusable, ':after'),
                     ),
-                    styleBefore = Object.assign(
-                        {},
+                    styleBefore = JSON.stringify(
                         window.getComputedStyle($focusable, ':before'),
                     );
 
                 $focusable.focus();
                 await __wait();
 
-                const focusStyle = Object.assign(
-                        {},
+                const focusStyle = JSON.stringify(
                         window.getComputedStyle($focusable),
                     ),
-                    focusStyleAfter = Object.assign(
-                        {},
+                    focusStyleAfter = JSON.stringify(
                         window.getComputedStyle($focusable, ':after'),
                     ),
-                    focusStyleBefore = Object.assign(
-                        {},
+                    focusStyleBefore = JSON.stringify(
                         window.getComputedStyle($focusable, ':before'),
                     );
 
                 if (
-                    JSON.stringify(focusStyle) === JSON.stringify(style) &&
-                    JSON.stringify(focusStyleBefore) ===
-                        JSON.stringify(styleBefore) &&
-                    JSON.stringify(focusStyleAfter) ===
-                        JSON.stringify(styleAfter)
+                    focusStyle === style &&
+                    focusStyleBefore === styleBefore &&
+                    focusStyleAfter === styleAfter
                 ) {
-                    _console.log(
-                        $focusable,
-                        style.animation,
-                        focusStyle.animation,
-                    );
-
-                    // restore focus
-                    // @ts-ignore
-                    $focusdElement?.focus?.();
-
-                    return {
-                        status: 'warning',
-                        message: `The \`${$focusable.outerHTML}\` does not have any focused visual display`,
-                        example: null,
-                        moreLink:
-                            'https://developer.chrome.com/docs/lighthouse/accessibility/interactive-element-affordance/',
-                        action: {
-                            label: () => `Log it`,
-                            handler: () => console.log($focusable),
-                        },
-                    };
+                    $nonVisualFocusElements.push($focusable);
                 }
             }
 
             // restore focus
             // @ts-ignore
             $focusdElement?.focus?.();
+
+            if ($nonVisualFocusElements.length) {
+                return {
+                    status: 'warning',
+                    message: `Some interactive elements does not have any focused visual display`,
+                    example: null,
+                    moreLink:
+                        'https://developer.chrome.com/docs/lighthouse/accessibility/interactive-element-affordance/',
+                    action: {
+                        label: () =>
+                            `Log them (${$nonVisualFocusElements.length})`,
+                        handler: () =>
+                            $nonVisualFocusElements.forEach(($elm) =>
+                                console.log($elm),
+                            ),
+                    },
+                };
+            }
 
             return {
                 status: 'success',

@@ -1,3 +1,5 @@
+import type { ISFrontendChecker } from '../types';
+
 /**
  * @name            comments
  * @namespace       js.checks
@@ -25,7 +27,7 @@ function findComments(el) {
     return arr;
 }
 
-export default function (__SFrontendChecker) {
+export default function (__SFrontendChecker: ISFrontendChecker) {
     return {
         id: 'comments',
         name: 'Comments',

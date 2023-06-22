@@ -10,6 +10,7 @@ import __css from './s-dashboard-frontend-checker-component.css';
 import __SFrontendChecker, {
     ISFrontendCheckerCheckObj,
 } from '@coffeekraken/s-frontend-checker';
+import { unsafeHTML } from 'lit/directives/unsafe-html.js';
 
 export interface ISDashboardFrontendCheckerComponentSettings {
     checks: string[];
@@ -41,15 +42,26 @@ export default class SDashboardFrontendCheckerComponent extends __SLitComponent 
                 'ck-dashboard-frontend-checker-display-status',
             ) || `["warning","error"]`,
         );
+
+        this._frontendChecker = new __SFrontendChecker();
     }
 
+    _frontendChecker: __SFrontendChecker;
     _checks: Record<string, ISFrontendCheckerCheckObj> = {};
-    _displayStatus: ('success' | 'warning' | 'error')[] = ['warning', 'error'];
+    _displayStatus: string[] = [
+        'warning',
+        'error',
+        __SFrontendChecker.CATEGORY_ACCESSIBILITY,
+        __SFrontendChecker.CATEGORY_BEST_PRACTICES,
+        __SFrontendChecker.CATEGORY_NICE_TO_HAVE,
+        __SFrontendChecker.CATEGORY_PERFORMANCE,
+        __SFrontendChecker.CATEGORY_SEO,
+        __SFrontendChecker.CATEGORY_SOCIAL,
+    ];
     _level = 1;
 
     firstUpdated() {
-        const checker = new __SFrontendChecker();
-        const pro = checker.check(
+        const pro = this._frontendChecker.check(
             window.parent?.document ?? document,
             this.props.settings.checks,
         );
@@ -72,13 +84,13 @@ export default class SDashboardFrontendCheckerComponent extends __SLitComponent 
         this.requestUpdate();
     }
 
-    _toggleStatus(status: 'success' | 'warning' | 'error') {
-        if (this._displayStatus.includes(status)) {
+    _toggleDisplay(display: string) {
+        if (this._displayStatus.includes(display)) {
             this._displayStatus = this._displayStatus.filter(
-                (s) => s !== status,
+                (s) => s !== display,
             );
         } else {
-            this._displayStatus.push(status);
+            this._displayStatus.push(display);
         }
         window.localStorage.setItem(
             'ck-dashboard-frontend-checker-display-status',
@@ -100,7 +112,11 @@ export default class SDashboardFrontendCheckerComponent extends __SLitComponent 
                                 : ''}"
                             @click=${() => this._chooseLevel(0)}
                         >
-                            <i class="fa-solid fa-battery-quarter"></i>
+                            ${unsafeHTML(
+                                this._frontendChecker.icons[
+                                    __SFrontendChecker.LEVEL_LOW
+                                ],
+                            )}
                             <span>Low</span>
                         </div>
                         <div
@@ -109,7 +125,11 @@ export default class SDashboardFrontendCheckerComponent extends __SLitComponent 
                                 : ''}"
                             @click=${() => this._chooseLevel(1)}
                         >
-                            <i class="fa-solid fa-battery-half"></i>
+                            ${unsafeHTML(
+                                this._frontendChecker.icons[
+                                    __SFrontendChecker.LEVEL_MEDIUM
+                                ],
+                            )}
                             <span>Medium</span>
                         </div>
                         <div
@@ -118,7 +138,11 @@ export default class SDashboardFrontendCheckerComponent extends __SLitComponent 
                                 : ''}"
                             @click=${() => this._chooseLevel(2)}
                         >
-                            <i class="fa-solid fa-battery-full"></i>
+                            ${unsafeHTML(
+                                this._frontendChecker.icons[
+                                    __SFrontendChecker.LEVEL_HIGH
+                                ],
+                            )}
                             <span>High</span>
                         </div>
                     </div>
@@ -129,9 +153,13 @@ export default class SDashboardFrontendCheckerComponent extends __SLitComponent 
                             )
                                 ? 'active'
                                 : ''}"
-                            @click=${() => this._toggleStatus('success')}
+                            @click=${() => this._toggleDisplay('success')}
                         >
-                            <i class="fa-solid fa-thumbs-up s-tc:success"></i>
+                            ${unsafeHTML(
+                                this._frontendChecker.icons[
+                                    __SFrontendChecker.STATUS_SUCCESS
+                                ],
+                            )}
                             Success
                             <span class="ck-count"
                                 >${Object.keys(this._checks).filter(
@@ -151,11 +179,13 @@ export default class SDashboardFrontendCheckerComponent extends __SLitComponent 
                             )
                                 ? 'active'
                                 : ''}"
-                            @click=${() => this._toggleStatus('warning')}
+                            @click=${() => this._toggleDisplay('warning')}
                         >
-                            <i
-                                class="fa-solid fa-triangle-exclamation s-tc:warning"
-                            ></i>
+                            ${unsafeHTML(
+                                this._frontendChecker.icons[
+                                    __SFrontendChecker.STATUS_WARNING
+                                ],
+                            )}
                             Warning
                             <span class="ck-count"
                                 >${Object.keys(this._checks).filter(
@@ -175,9 +205,13 @@ export default class SDashboardFrontendCheckerComponent extends __SLitComponent 
                             )
                                 ? 'active'
                                 : ''}"
-                            @click=${() => this._toggleStatus('error')}
+                            @click=${() => this._toggleDisplay('error')}
                         >
-                            <i class="fa-solid fa-xmark s-tc:error"></i>
+                            ${unsafeHTML(
+                                this._frontendChecker.icons[
+                                    __SFrontendChecker.STATUS_ERROR
+                                ],
+                            )}
                             Error
                             <span class="ck-count"
                                 >${Object.keys(this._checks).filter(
@@ -193,6 +227,45 @@ export default class SDashboardFrontendCheckerComponent extends __SLitComponent 
                         </div>
                     </div>
 
+                    <div class="_filters">
+                        ${[
+                            __SFrontendChecker.CATEGORY_ACCESSIBILITY,
+                            __SFrontendChecker.CATEGORY_BEST_PRACTICES,
+                            __SFrontendChecker.CATEGORY_NICE_TO_HAVE,
+                            __SFrontendChecker.CATEGORY_PERFORMANCE,
+                            __SFrontendChecker.CATEGORY_SEO,
+                            __SFrontendChecker.CATEGORY_SOCIAL,
+                        ].map(
+                            (categoryId) => html`
+                                <div
+                                    class="_filter ${this._displayStatus.includes(
+                                        categoryId,
+                                    )
+                                        ? 'active'
+                                        : ''}"
+                                    @click=${() =>
+                                        this._toggleDisplay(categoryId)}
+                                >
+                                    ${unsafeHTML(
+                                        this._frontendChecker.icons[categoryId],
+                                    )}
+                                    <span class="ck-count"
+                                        >${Object.keys(this._checks).filter(
+                                            (checkId) => {
+                                                const check =
+                                                    this._checks[checkId];
+                                                return (
+                                                    check.category ===
+                                                    categoryId
+                                                );
+                                            },
+                                        ).length}</span
+                                    >
+                                </div>
+                            `,
+                        )}
+                    </div>
+
                     <ul class="ck-list">
                         ${Object.keys(this._checks)
                             .filter((checkId) => {
@@ -202,7 +275,8 @@ export default class SDashboardFrontendCheckerComponent extends __SLitComponent 
                                     check.level <= this._level &&
                                     this._displayStatus.includes(
                                         check.result?.status,
-                                    )
+                                    ) &&
+                                    this._displayStatus.includes(check.category)
                                 );
                             })
                             .map((checkId) => {
@@ -213,7 +287,7 @@ export default class SDashboardFrontendCheckerComponent extends __SLitComponent 
                                             .result?.status}"
                                         tabindex="-1"
                                     >
-                                        <h2 class="s-flex:align:center">
+                                        <h2 class="s-flex:align-center">
                                             <span class="s-flex:align-center">
                                                 ${check.result
                                                     ? html`
@@ -221,22 +295,37 @@ export default class SDashboardFrontendCheckerComponent extends __SLitComponent 
                                                               .status ===
                                                           'success'
                                                               ? html`
-                                                                    <i
-                                                                        class="fa-solid fa-thumbs-up s-tc:success"
-                                                                    ></i>
+                                                                    ${unsafeHTML(
+                                                                        this
+                                                                            ._frontendChecker
+                                                                            .icons[
+                                                                            __SFrontendChecker
+                                                                                .STATUS_SUCCESS
+                                                                        ],
+                                                                    )}
                                                                 `
                                                               : check.result
                                                                     .status ===
                                                                 'warning'
                                                               ? html`
-                                                                    <i
-                                                                        class="fa-solid fa-triangle-exclamation s-tc:warning"
-                                                                    ></i>
+                                                                    ${unsafeHTML(
+                                                                        this
+                                                                            ._frontendChecker
+                                                                            .icons[
+                                                                            __SFrontendChecker
+                                                                                .STATUS_WARNING
+                                                                        ],
+                                                                    )}
                                                                 `
                                                               : html`
-                                                                    <i
-                                                                        class="fa-solid fa-xmark s-tc:error"
-                                                                    ></i>
+                                                                    ${unsafeHTML(
+                                                                        this
+                                                                            ._frontendChecker
+                                                                            .icons[
+                                                                            __SFrontendChecker
+                                                                                .STATUS_ERROR
+                                                                        ],
+                                                                    )}
                                                                 `}
                                                       `
                                                     : html`<i
@@ -249,13 +338,8 @@ export default class SDashboardFrontendCheckerComponent extends __SLitComponent 
                                                 ${check.name}
                                             </span>
                                             <span
-                                                class="s-badge s-badge--outline s-scale--08 level--${check.level}"
+                                                class="_level level--${check.level}"
                                             >
-                                                ${check.level === 0
-                                                    ? 'LOW'
-                                                    : check.level === 1
-                                                    ? 'MEDIUM'
-                                                    : 'HIGH'}
                                             </span>
                                         </h2>
                                         <div class="_details">

@@ -1,3 +1,5 @@
+import type { ISFrontendChecker } from '../types';
+
 /**
  * @name            cssOrder
  * @namespace       js.checks
@@ -12,7 +14,7 @@
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 
-export default function (__SFrontendChecker) {
+export default function (__SFrontendChecker: ISFrontendChecker) {
     return {
         id: 'cssOrder',
         name: 'CSS Order',

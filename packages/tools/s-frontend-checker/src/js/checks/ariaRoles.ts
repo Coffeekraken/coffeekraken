@@ -1,3 +1,5 @@
+import type { ISFrontendChecker } from '../types';
+
 import { elementRoles } from 'aria-query';
 
 /**
@@ -13,7 +15,7 @@ import { elementRoles } from 'aria-query';
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-export default function (__SFrontendChecker) {
+export default function (__SFrontendChecker: ISFrontendChecker) {
     return {
         id: 'ariaRoles',
         name: 'Aria roles',

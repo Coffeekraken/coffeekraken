@@ -54,11 +54,30 @@ s-dashboard-frontend-checker {
     }
 
     .ck-list_item:focus-within {
+        display: flex;
+        align-items: center;
         background: sugar.color(main, --alpha 0.1);
         color: sugar.color(main, text);
 
         .s-badge {
             filter: grayscale(1) brightness(1);
+        }
+    }
+
+    ._level {
+        width: 1em;
+        height: 1em;
+        background: sugar.color(current);
+        border-radius: 0.5em;
+
+        &.level--0 {
+            @sugar.color (success);
+        }
+        &.level--1 {
+            @sugar.color (warning);
+        }
+        &.level--2 {
+            @sugar.color (error);
         }
     }
 

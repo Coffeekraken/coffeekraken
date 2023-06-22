@@ -29,41 +29,39 @@ export default function (__SFrontendChecker) {
         description: 'Check that all focusable elements have a visual state setted',
         level: 1,
         check({ $context }) {
-            var _a, _b, _c, _d;
+            var _a, _b, _c;
             return __awaiter(this, void 0, void 0, function* () {
                 const $focusdElement = ((_a = window.parent) !== null && _a !== void 0 ? _a : window).document
                     .activeElement;
                 const $focusables = Array.from((_b = $context.querySelectorAll(':is([tabindex], button, input, select, a[href]):not([tabindex="-1"])')) !== null && _b !== void 0 ? _b : []);
+                const $nonVisualFocusElements = [];
                 // @ts-ignore
                 for (let [idx, $focusable] of $focusables.entries()) {
-                    const style = Object.assign({}, window.getComputedStyle($focusable)), styleAfter = Object.assign({}, window.getComputedStyle($focusable, ':after')), styleBefore = Object.assign({}, window.getComputedStyle($focusable, ':before'));
+                    const style = JSON.stringify(window.getComputedStyle($focusable)), styleAfter = JSON.stringify(window.getComputedStyle($focusable, ':after')), styleBefore = JSON.stringify(window.getComputedStyle($focusable, ':before'));
                     $focusable.focus();
                     yield __wait();
-                    const focusStyle = Object.assign({}, window.getComputedStyle($focusable)), focusStyleAfter = Object.assign({}, window.getComputedStyle($focusable, ':after')), focusStyleBefore = Object.assign({}, window.getComputedStyle($focusable, ':before'));
-                    if (JSON.stringify(focusStyle) === JSON.stringify(style) &&
-                        JSON.stringify(focusStyleBefore) ===
-                            JSON.stringify(styleBefore) &&
-                        JSON.stringify(focusStyleAfter) ===
-                            JSON.stringify(styleAfter)) {
-                        _console.log($focusable, style.animation, focusStyle.animation);
-                        // restore focus
-                        // @ts-ignore
-                        (_c = $focusdElement === null || $focusdElement === void 0 ? void 0 : $focusdElement.focus) === null || _c === void 0 ? void 0 : _c.call($focusdElement);
-                        return {
-                            status: 'warning',
-                            message: `The \`${$focusable.outerHTML}\` does not have any focused visual display`,
-                            example: null,
-                            moreLink: 'https://developer.chrome.com/docs/lighthouse/accessibility/interactive-element-affordance/',
-                            action: {
-                                label: () => `Log it`,
-                                handler: () => console.log($focusable),
-                            },
-                        };
+                    const focusStyle = JSON.stringify(window.getComputedStyle($focusable)), focusStyleAfter = JSON.stringify(window.getComputedStyle($focusable, ':after')), focusStyleBefore = JSON.stringify(window.getComputedStyle($focusable, ':before'));
+                    if (focusStyle === style &&
+                        focusStyleBefore === styleBefore &&
+                        focusStyleAfter === styleAfter) {
+                        $nonVisualFocusElements.push($focusable);
                     }
                 }
                 // restore focus
                 // @ts-ignore
-                (_d = $focusdElement === null || $focusdElement === void 0 ? void 0 : $focusdElement.focus) === null || _d === void 0 ? void 0 : _d.call($focusdElement);
+                (_c = $focusdElement === null || $focusdElement === void 0 ? void 0 : $focusdElement.focus) === null || _c === void 0 ? void 0 : _c.call($focusdElement);
+                if ($nonVisualFocusElements.length) {
+                    return {
+                        status: 'warning',
+                        message: `Some interactive elements does not have any focused visual display`,
+                        example: null,
+                        moreLink: 'https://developer.chrome.com/docs/lighthouse/accessibility/interactive-element-affordance/',
+                        action: {
+                            label: () => `Log them (${$nonVisualFocusElements.length})`,
+                            handler: () => $nonVisualFocusElements.forEach(($elm) => console.log($elm)),
+                        },
+                    };
+                }
                 return {
                     status: 'success',
                     action: {
@@ -75,4 +73,4 @@ export default function (__SFrontendChecker) {
         },
     };
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7OztBQUFBLE9BQU8sRUFBRSxNQUFNLEVBQUUsTUFBTSw4QkFBOEIsQ0FBQztBQUV0RDs7Ozs7Ozs7Ozs7O0dBWUc7QUFFSCxNQUFNLENBQUMsT0FBTyxXQUFXLGtCQUFrQjtJQUN2QyxPQUFPO1FBQ0gsRUFBRSxFQUFFLGFBQWE7UUFDakIsSUFBSSxFQUFFLGNBQWM7UUFDcEIsUUFBUSxFQUFFLGtCQUFrQixDQUFDLHNCQUFzQjtRQUNuRCxXQUFXLEVBQ1AsOERBQThEO1FBQ2xFLEtBQUssRUFBRSxDQUFDO1FBQ0YsS0FBSyxDQUFDLEVBQUUsUUFBUSxFQUFFOzs7Z0JBQ3BCLE1BQU0sY0FBYyxHQUFHLENBQUMsTUFBQSxNQUFNLENBQUMsTUFBTSxtQ0FBSSxNQUFNLENBQUMsQ0FBQyxRQUFRO3FCQUNwRCxhQUFhLENBQUM7Z0JBRW5CLE1BQU0sV0FBVyxHQUFHLEtBQUssQ0FBQyxJQUFJLENBQzFCLE1BQUEsUUFBUSxDQUFDLGdCQUFnQixDQUNyQixzRUFBc0UsQ0FDekUsbUNBQUksRUFBRSxDQUNWLENBQUM7Z0JBRUYsYUFBYTtnQkFDYixLQUFLLElBQUksQ0FBQyxHQUFHLEVBQUUsVUFBVSxDQUFDLElBQUksV0FBVyxDQUFDLE9BQU8sRUFBRSxFQUFFO29CQUNqRCxNQUFNLEtBQUssR0FBRyxNQUFNLENBQUMsTUFBTSxDQUNuQixFQUFFLEVBQ0YsTUFBTSxDQUFDLGdCQUFnQixDQUFDLFVBQVUsQ0FBQyxDQUN0QyxFQUNELFVBQVUsR0FBRyxNQUFNLENBQUMsTUFBTSxDQUN0QixFQUFFLEVBQ0YsTUFBTSxDQUFDLGdCQUFnQixDQUFDLFVBQVUsRUFBRSxRQUFRLENBQUMsQ0FDaEQsRUFDRCxXQUFXLEdBQUcsTUFBTSxDQUFDLE1BQU0sQ0FDdkIsRUFBRSxFQUNGLE1BQU0sQ0FBQyxnQkFBZ0IsQ0FBQyxVQUFVLEVBQUUsU0FBUyxDQUFDLENBQ2pELENBQUM7b0JBRU4sVUFBVSxDQUFDLEtBQUssRUFBRSxDQUFDO29CQUNuQixNQUFNLE1BQU0sRUFBRSxDQUFDO29CQUVmLE1BQU0sVUFBVSxHQUFHLE1BQU0sQ0FBQyxNQUFNLENBQ3hCLEVBQUUsRUFDRixNQUFNLENBQUMsZ0JBQWdCLENBQUMsVUFBVSxDQUFDLENBQ3RDLEVBQ0QsZUFBZSxHQUFHLE1BQU0sQ0FBQyxNQUFNLENBQzNCLEVBQUUsRUFDRixNQUFNLENBQUMsZ0JBQWdCLENBQUMsVUFBVSxFQUFFLFFBQVEsQ0FBQyxDQUNoRCxFQUNELGdCQUFnQixHQUFHLE1BQU0sQ0FBQyxNQUFNLENBQzVCLEVBQUUsRUFDRixNQUFNLENBQUMsZ0JBQWdCLENBQUMsVUFBVSxFQUFFLFNBQVMsQ0FBQyxDQUNqRCxDQUFDO29CQUVOLElBQ0ksSUFBSSxDQUFDLFNBQVMsQ0FBQyxVQUFVLENBQUMsS0FBSyxJQUFJLENBQUMsU0FBUyxDQUFDLEtBQUssQ0FBQzt3QkFDcEQsSUFBSSxDQUFDLFNBQVMsQ0FBQyxnQkFBZ0IsQ0FBQzs0QkFDNUIsSUFBSSxDQUFDLFNBQVMsQ0FBQyxXQUFXLENBQUM7d0JBQy9CLElBQUksQ0FBQyxTQUFTLENBQUMsZUFBZSxDQUFDOzRCQUMzQixJQUFJLENBQUMsU0FBUyxDQUFDLFVBQVUsQ0FBQyxFQUNoQzt3QkFDRSxRQUFRLENBQUMsR0FBRyxDQUNSLFVBQVUsRUFDVixLQUFLLENBQUMsU0FBUyxFQUNmLFVBQVUsQ0FBQyxTQUFTLENBQ3ZCLENBQUM7d0JBRUYsZ0JBQWdCO3dCQUNoQixhQUFhO3dCQUNiLE1BQUEsY0FBYyxhQUFkLGNBQWMsdUJBQWQsY0FBYyxDQUFFLEtBQUssOERBQUksQ0FBQzt3QkFFMUIsT0FBTzs0QkFDSCxNQUFNLEVBQUUsU0FBUzs0QkFDakIsT0FBTyxFQUFFLFNBQVMsVUFBVSxDQUFDLFNBQVMsNkNBQTZDOzRCQUNuRixPQUFPLEVBQUUsSUFBSTs0QkFDYixRQUFRLEVBQ0osNEZBQTRGOzRCQUNoRyxNQUFNLEVBQUU7Z0NBQ0osS0FBSyxFQUFFLEdBQUcsRUFBRSxDQUFDLFFBQVE7Z0NBQ3JCLE9BQU8sRUFBRSxHQUFHLEVBQUUsQ0FBQyxPQUFPLENBQUMsR0FBRyxDQUFDLFVBQVUsQ0FBQzs2QkFDekM7eUJBQ0osQ0FBQztxQkFDTDtpQkFDSjtnQkFFRCxnQkFBZ0I7Z0JBQ2hCLGFBQWE7Z0JBQ2IsTUFBQSxjQUFjLGFBQWQsY0FBYyx1QkFBZCxjQUFjLENBQUUsS0FBSyw4REFBSSxDQUFDO2dCQUUxQixPQUFPO29CQUNILE1BQU0sRUFBRSxTQUFTO29CQUNqQixNQUFNLEVBQUU7d0JBQ0osS0FBSyxFQUFFLEdBQUcsRUFBRSxDQUFDLGFBQWEsV0FBVyxDQUFDLE1BQU0sR0FBRzt3QkFDL0MsT0FBTyxFQUFFLEdBQUcsRUFBRSxDQUFDLE9BQU8sQ0FBQyxHQUFHLENBQUMsV0FBVyxDQUFDO3FCQUMxQztpQkFDSixDQUFDOztTQUNMO0tBQ0osQ0FBQztBQUNOLENBQUMifQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7OztBQUFBLE9BQU8sRUFBRSxNQUFNLEVBQUUsTUFBTSw4QkFBOEIsQ0FBQztBQUl0RDs7Ozs7Ozs7Ozs7O0dBWUc7QUFFSCxNQUFNLENBQUMsT0FBTyxXQUFXLGtCQUFxQztJQUMxRCxPQUFPO1FBQ0gsRUFBRSxFQUFFLGFBQWE7UUFDakIsSUFBSSxFQUFFLGNBQWM7UUFDcEIsUUFBUSxFQUFFLGtCQUFrQixDQUFDLHNCQUFzQjtRQUNuRCxXQUFXLEVBQ1AsOERBQThEO1FBQ2xFLEtBQUssRUFBRSxDQUFDO1FBQ0YsS0FBSyxDQUFDLEVBQUUsUUFBUSxFQUFFOzs7Z0JBQ3BCLE1BQU0sY0FBYyxHQUFHLENBQUMsTUFBQSxNQUFNLENBQUMsTUFBTSxtQ0FBSSxNQUFNLENBQUMsQ0FBQyxRQUFRO3FCQUNwRCxhQUFhLENBQUM7Z0JBRW5CLE1BQU0sV0FBVyxHQUFHLEtBQUssQ0FBQyxJQUFJLENBQzFCLE1BQUEsUUFBUSxDQUFDLGdCQUFnQixDQUNyQixzRUFBc0UsQ0FDekUsbUNBQUksRUFBRSxDQUNWLENBQUM7Z0JBRUYsTUFBTSx1QkFBdUIsR0FBa0IsRUFBRSxDQUFDO2dCQUVsRCxhQUFhO2dCQUNiLEtBQUssSUFBSSxDQUFDLEdBQUcsRUFBRSxVQUFVLENBQUMsSUFBSSxXQUFXLENBQUMsT0FBTyxFQUFFLEVBQUU7b0JBQ2pELE1BQU0sS0FBSyxHQUFHLElBQUksQ0FBQyxTQUFTLENBQ3BCLE1BQU0sQ0FBQyxnQkFBZ0IsQ0FBQyxVQUFVLENBQUMsQ0FDdEMsRUFDRCxVQUFVLEdBQUcsSUFBSSxDQUFDLFNBQVMsQ0FDdkIsTUFBTSxDQUFDLGdCQUFnQixDQUFDLFVBQVUsRUFBRSxRQUFRLENBQUMsQ0FDaEQsRUFDRCxXQUFXLEdBQUcsSUFBSSxDQUFDLFNBQVMsQ0FDeEIsTUFBTSxDQUFDLGdCQUFnQixDQUFDLFVBQVUsRUFBRSxTQUFTLENBQUMsQ0FDakQsQ0FBQztvQkFFTixVQUFVLENBQUMsS0FBSyxFQUFFLENBQUM7b0JBQ25CLE1BQU0sTUFBTSxFQUFFLENBQUM7b0JBRWYsTUFBTSxVQUFVLEdBQUcsSUFBSSxDQUFDLFNBQVMsQ0FDekIsTUFBTSxDQUFDLGdCQUFnQixDQUFDLFVBQVUsQ0FBQyxDQUN0QyxFQUNELGVBQWUsR0FBRyxJQUFJLENBQUMsU0FBUyxDQUM1QixNQUFNLENBQUMsZ0JBQWdCLENBQUMsVUFBVSxFQUFFLFFBQVEsQ0FBQyxDQUNoRCxFQUNELGdCQUFnQixHQUFHLElBQUksQ0FBQyxTQUFTLENBQzdCLE1BQU0sQ0FBQyxnQkFBZ0IsQ0FBQyxVQUFVLEVBQUUsU0FBUyxDQUFDLENBQ2pELENBQUM7b0JBRU4sSUFDSSxVQUFVLEtBQUssS0FBSzt3QkFDcEIsZ0JBQWdCLEtBQUssV0FBVzt3QkFDaEMsZUFBZSxLQUFLLFVBQVUsRUFDaEM7d0JBQ0UsdUJBQXVCLENBQUMsSUFBSSxDQUFDLFVBQVUsQ0FBQyxDQUFDO3FCQUM1QztpQkFDSjtnQkFFRCxnQkFBZ0I7Z0JBQ2hCLGFBQWE7Z0JBQ2IsTUFBQSxjQUFjLGFBQWQsY0FBYyx1QkFBZCxjQUFjLENBQUUsS0FBSyw4REFBSSxDQUFDO2dCQUUxQixJQUFJLHVCQUF1QixDQUFDLE1BQU0sRUFBRTtvQkFDaEMsT0FBTzt3QkFDSCxNQUFNLEVBQUUsU0FBUzt3QkFDakIsT0FBTyxFQUFFLG9FQUFvRTt3QkFDN0UsT0FBTyxFQUFFLElBQUk7d0JBQ2IsUUFBUSxFQUNKLDRGQUE0Rjt3QkFDaEcsTUFBTSxFQUFFOzRCQUNKLEtBQUssRUFBRSxHQUFHLEVBQUUsQ0FDUixhQUFhLHVCQUF1QixDQUFDLE1BQU0sR0FBRzs0QkFDbEQsT0FBTyxFQUFFLEdBQUcsRUFBRSxDQUNWLHVCQUF1QixDQUFDLE9BQU8sQ0FBQyxDQUFDLElBQUksRUFBRSxFQUFFLENBQ3JDLE9BQU8sQ0FBQyxHQUFHLENBQUMsSUFBSSxDQUFDLENBQ3BCO3lCQUNSO3FCQUNKLENBQUM7aUJBQ0w7Z0JBRUQsT0FBTztvQkFDSCxNQUFNLEVBQUUsU0FBUztvQkFDakIsTUFBTSxFQUFFO3dCQUNKLEtBQUssRUFBRSxHQUFHLEVBQUUsQ0FBQyxhQUFhLFdBQVcsQ0FBQyxNQUFNLEdBQUc7d0JBQy9DLE9BQU8sRUFBRSxHQUFHLEVBQUUsQ0FBQyxPQUFPLENBQUMsR0FBRyxDQUFDLFdBQVcsQ0FBQztxQkFDMUM7aUJBQ0osQ0FBQzs7U0FDTDtLQUNKLENBQUM7QUFDTixDQUFDIn0=

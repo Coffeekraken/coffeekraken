@@ -8,11 +8,11 @@
         </div>
     </div>
 
-    {{-- <div class="_illustration">
+    <div class="_illustration">
         <div welcome-slider>
 
             <div class="_code">
-<div class="_line _comment">░░░&nbsp;&nbsp;&nbsp;░░░&nbsp;░░░░░░░░░</div>
+<div class="_line _comment">°░░░&nbsp;&nbsp;&nbsp;░░░&nbsp;░░░░░░░░░</div>
 <div class="_line _comment">░░░&nbsp;&nbsp;&nbsp;░░░&nbsp;&nbsp;&nbsp;&nbsp;░░░</div>
 <div class="_line _comment">░░░&nbsp;&nbsp;&nbsp;░░░&nbsp;&nbsp;&nbsp;&nbsp;░░░</div>
 <div class="_line _comment">░░░&nbsp;&nbsp;&nbsp;░░░&nbsp;&nbsp;&nbsp;&nbsp;░░░</div>
@@ -207,6 +207,6 @@
         
 
         </div>
-    </div> --}}
+    </div>
 
 </section>

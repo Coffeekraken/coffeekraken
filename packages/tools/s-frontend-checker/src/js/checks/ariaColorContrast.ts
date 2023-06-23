@@ -1,6 +1,6 @@
-import type { ISFrontendChecker } from '../types';
-
 import __SColor from '@coffeekraken/s-color';
+import __html2canvas from 'html2canvas';
+import type { ISFrontendChecker } from '../types';
 
 /**
  * @name            ariaColorContrast
@@ -24,6 +24,28 @@ function textNodesUnder(el) {
     return a;
 }
 
+function averageData(data) {
+    const length = data.data.length,
+        blockSize = 1,
+        rgb = { r: 0, g: 0, b: 0 };
+    let count = 0,
+        i = -4;
+
+    while ((i += blockSize * 4) < length) {
+        ++count;
+        rgb.r += data.data[i];
+        rgb.g += data.data[i + 1];
+        rgb.b += data.data[i + 2];
+    }
+
+    // ~~ used to floor values
+    rgb.r = ~~(rgb.r / count);
+    rgb.g = ~~(rgb.g / count);
+    rgb.b = ~~(rgb.b / count);
+
+    return rgb;
+}
+
 export default function (__SFrontendChecker: ISFrontendChecker) {
     return {
         id: 'ariaColorContrast',
@@ -41,14 +63,21 @@ export default function (__SFrontendChecker: ISFrontendChecker) {
             window.parent.document.querySelector('iframe').style.display =
                 'none';
 
-            let j = 0;
+            let j = 0,
+                computedStyle,
+                elmColor;
 
             for (let [i, textNode] of textNodes.entries()) {
                 const $container = textNode.parentElement;
 
+                if (textNode.data !== '°') {
+                    continue;
+                }
+
                 const range = document.createRange();
                 range.selectNodeContents(textNode);
-                const rects = range.getClientRects();
+                const rects = range.getClientRects(),
+                    rect = rects[0];
 
                 // handle only text with at least 1 character
                 if (!rects.length) {
@@ -63,19 +92,22 @@ export default function (__SFrontendChecker: ISFrontendChecker) {
                     stack = [];
 
                 while (
-                    !elmStyle?.backgroundColor &&
-                    !elmStyle?.backgroundImage &&
                     $elm !== ($context.ownerDocument ?? $context).body &&
                     i <= 200
                 ) {
                     $elm = (
                         $context.ownerDocument ?? $context
-                    ).elementFromPoint(
-                        Math.round(rects[0].x),
-                        Math.round(rects[0].y),
-                    );
+                    ).elementFromPoint(Math.round(rect.x), Math.round(rect.y));
 
                     if (!$elm) {
+                        break;
+                    }
+
+                    computedStyle = window.getComputedStyle($elm);
+                    if (
+                        computedStyle.backgroundColor !== 'rgba(0, 0, 0, 0)' ||
+                        computedStyle.backgroundImage !== 'none'
+                    ) {
                         break;
                     }
 
@@ -85,7 +117,6 @@ export default function (__SFrontendChecker: ISFrontendChecker) {
                     stack.push($elm);
                     // update the secure index
                     i++;
-                    // _console.log('ELNM', $elm);
                 }
 
                 if (!$elm) {
@@ -97,14 +128,43 @@ export default function (__SFrontendChecker: ISFrontendChecker) {
                     $elmToReset.style.pointerEvents = 'unset';
                 });
 
-                const computedStyle = window.getComputedStyle($elm),
-                    textColor = window.getComputedStyle($container).color;
+                if (computedStyle.backgroundImage !== 'none') {
+                    const $canvas = await __html2canvas($elm);
 
-                _console.log('Elm', textNode.data, $elm);
-                __SColor.getContrastInfo(
-                    textColor,
-                    computedStyle.backgroundColor,
-                );
+                    const ctx = $canvas.getContext('2d');
+                    // ctx.fillStyle = 'red';
+                    const portionData = ctx.getImageData(
+                        rect.x,
+                        rect.y,
+                        rect.width,
+                        rect.height,
+                    );
+
+                    const average = averageData(portionData);
+
+                    // set the element color
+                    elmColor = `rgb(${average.r}, ${average.g}, ${average.b})`;
+
+                    // ctx.fillStyle = `rgb(${average.r}, ${average.g}, ${average.b})`;
+                    // ctx.fillRect(
+                    //     rect.x,
+                    //     rect.y,
+                    //     rect.width,
+                    //     rect.height,
+                    // );
+
+                    // document.body.appendChild($canvas);
+                } else if (computedStyle.backgroundColor) {
+                    elmColor = computedStyle.backgroundColor;
+                }
+
+                // if we don't have any element color, cannot make the contrast check...
+                if (!elmColor) {
+                    continue;
+                }
+
+                const textColor = window.getComputedStyle($container).color;
+                __SColor.getContrastInfo(textColor, elmColor);
 
                 $container.style.pointerEvents = 'unset';
 

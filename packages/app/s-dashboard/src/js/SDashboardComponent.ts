@@ -20,6 +20,8 @@ import { __define as __SDashboardProjectComponent } from './partials/s-dashboard
 import { __define as __SDashboardResponsiveComponent } from './partials/s-dashboard-responsive-component/SDashboardResponsiveComponent';
 import { __define as __SDashboardWebVitalsComponent } from './partials/s-dashboard-web-vitals-component/SDashboardWebVitalsComponent';
 
+import { __injectStyle } from '@coffeekraken/sugar/dom';
+
 // dev
 // import __css from '../../../../src/css/s-dashboard.css'; // relative to /dist/pkg/esm/js
 // import __logoSvg from '../../../../src/js/partials/logo';
@@ -37,6 +39,16 @@ __SDashboardWebVitalsComponent();
 __SDashboardResponsiveComponent();
 __SDashboardProjectComponent();
 __SDashboardAssetsComponent();
+
+export interface ISDashboardNotification {
+    action: 'show' | 'hide';
+    type?: 'default' | 'success' | 'warning' | 'error' | 'running';
+    icon?: string;
+    id?: string;
+    title: string;
+    description?: string;
+    timeout?: number;
+}
 
 export interface ISDashboardComponentProps {}
 
@@ -74,6 +86,8 @@ export default class SDashboardComponent extends __SLitComponent {
     // @ts-ignore
     _dashboardSettings = this.document.dashboard?.settings;
 
+    _$notifications: HTMLElement;
+
     constructor() {
         super(
             __deepMerge({
@@ -98,6 +112,162 @@ export default class SDashboardComponent extends __SLitComponent {
 
         // pipe events
         this._pipeEvents();
+
+        // listen for widget events
+        this._listenWidgetsEvents();
+    }
+
+    _notifsById = {};
+    notification(notification: ISDashboardNotification): void {
+        // init container
+        if (!this._$notifications) {
+            this._$notifications = document.createElement('div');
+            this._$notifications.classList.add(
+                this.utils.cls('_notifications'),
+            );
+            __injectStyle(
+                `
+
+                @keyframes notification-running {
+                    from {
+                        transform: rotateZ(0);
+                    }
+                    to {
+                        transform: rotateZ(360deg);
+                    }
+                }
+
+                .${this.utils.cls('_notifications')} {
+                    position: fixed;
+                    z-index: 99999;
+                    bottom: 20px; right: 20px;
+                    width: 300px;
+                    display: flex;
+                    flex-direction: column;
+                    gap: 10px;
+                }
+                .${this.utils.cls('_notifications')} ._notification {
+                    display: flex;
+                    gap: 10px;
+                    align-items: center;
+                    background: rgba(0,0,0,0.2);
+                    backdrop-filter: blur(40px);
+                    color: white;
+                    border-radius: 10px;
+                    padding: 15px;
+                }
+                .${this.utils.cls('_notifications')} ._icon {
+                    flex-grow: 0;
+                }
+                .${this.utils.cls(
+                    '_notifications',
+                )} ._notification.running ._icon {
+                    animation: notification-running 1s linear infinite;
+                }
+                .${this.utils.cls('_notifications')} ._icon svg {
+                    width: 1em;
+                    height: 1em;
+                    font-size: 50px;
+                    padding: 10px;
+                }
+                .${this.utils.cls('_notifications')} ._icon svg path {
+                    fill: rgb(255, 187, 0);
+                }
+                .${this.utils.cls('_notifications')} ._metas {
+                    flex-grow: 1;
+                }
+                .${this.utils.cls('_notifications')} ._title {
+                    font-weight: bold;
+                }
+                .${this.utils.cls('_notifications')} ._description {
+                    color: rgba(255, 255, 255, 0.5);
+                }
+
+            `,
+                {
+                    rootNode: this.document.head,
+                },
+            );
+        }
+        this.document.body.appendChild(this._$notifications);
+
+        if (notification.id) {
+            this._notifsById[notification.id]?.remove?.();
+            delete this._notifsById[notification.id];
+        }
+
+        // create notification
+        let $notif;
+        switch (notification.action) {
+            case 'hide':
+                break;
+            case 'show':
+            default:
+                $notif = document.createElement('div');
+                $notif.classList.add('_notification');
+                $notif.classList.add(notification.type ?? '');
+                if (notification.icon) {
+                    const $icon = document.createElement('div');
+                    $icon.classList.add('_icon');
+                    $icon.innerHTML = notification.icon;
+                    $notif.appendChild($icon);
+                }
+                const $metas = document.createElement('div');
+                $metas.classList.add('_metas');
+                $notif.appendChild($metas);
+                const $title = document.createElement('h6');
+                $title.classList.add('_title');
+                $title.innerHTML = notification.title;
+                $metas.appendChild($title);
+                if (notification.description) {
+                    const $desc = document.createElement('p');
+                    $desc.classList.add('_description');
+                    $desc.innerHTML = notification.description;
+                    $metas.appendChild($desc);
+                }
+                if (notification.id && this._notifsById[notification.id]) {
+                    this._notifsById[notification.id].after($notif);
+                } else {
+                    this._$notifications.appendChild($notif);
+                }
+                break;
+        }
+
+        // id
+        if (notification.id && $notif.parentElement) {
+            this._notifsById[notification.id] = $notif;
+        }
+
+        // timeout
+        if (notification.timeout) {
+            setTimeout(() => {
+                $notif.remove();
+                if (notification.id) {
+                    delete this._notifsById[notification.id];
+                }
+            }, notification.timeout);
+        }
+    }
+
+    /**
+     * Listen for widgets events
+     */
+    _listenWidgetsEvents(): void {
+        this.addEventListener('notification', (e) => {
+            this.notification(e.detail);
+        });
+        this.addEventListener('notification.close', (e) => {
+            this.notification({
+                action: 'hide',
+                ...(e.detail ?? {}),
+            });
+        });
+        this.addEventListener('dashboard.hide', (e) => {
+            this.close();
+        });
+        this.addEventListener('dashboard.show', (e) => {
+            this.open();
+        });
     }
 
     /**

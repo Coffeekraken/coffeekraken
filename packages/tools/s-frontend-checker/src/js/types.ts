@@ -25,12 +25,18 @@ export interface ISFrontendCheckerCheckResult {
     checks: Record<string, ISFrontendCheckerCheckObj>;
 }
 
+export interface ISFrontendCheckerCheckParams {
+    $context: HTMLElement | Document;
+    includeLazy: boolean;
+}
+
 export interface ISFrontendCheckerCheckObj {
     id: string;
     name: string;
     description: string;
     level: number;
     check: Function;
+    lazy: boolean;
     result?: ISFrontendCheckerCheckResult;
     duration?: ISDurationObject;
     isChecking: boolean;
@@ -51,4 +57,12 @@ export interface ISFrontendCheckerCheckCheckResult {
 
 export interface ISFrontendCheckerCheckFn {
     ($context: HTMLElement): Promise<ISFrontendCheckerCheckResult>;
+}
+
+export type TSFrontendCheckerCheckAriaColotContrastLevels = 'A' | 'AA' | 'AAA';
+
+export interface ISFrontendCheckerCheckAriaColotContrastSettings {
+    level: 'A' | 'AA' | 'AAA';
+    ratios: Record<TSFrontendCheckerCheckAriaColotContrastLevels, number>;
+    colors: Record<TSFrontendCheckerCheckAriaColotContrastLevels, string>;
 }

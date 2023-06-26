@@ -44,7 +44,11 @@
         width: calc(100% + 400px);
         height: 100%;
         background-color: sugar.color(main, surface, --lighten 3);
-        background: radial-gradient(#000000, #000000);
+        background-color: sugar.color(main, --lighten 45);
+        background: url('/dist/img/landscape-01.jpg');
+        background-position: 50% 50%;
+        background-size: cover;
+        /* background: radial-gradient(#000000, #000000); */
         /* background-image: conic-gradient(
             sugar.color(main, surface),
             sugar.color(main, --alpha 0.3)

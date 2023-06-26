@@ -82,11 +82,55 @@ export interface ISColorObject {
     l: number;
 }
 
+export interface ISColorContrastInfo {
+    background: {
+        r: {
+            value: string;
+        };
+        g: {
+            value: string;
+        };
+        b: {
+            value: string;
+        };
+        color: string;
+    };
+    foreground: {
+        r: {
+            value: string;
+        };
+        g: {
+            value: string;
+        };
+        b: {
+            value: string;
+        };
+        color: string;
+    };
+    value: number;
+}
+
 class SColor extends __SClass {
+    /**
+     * @name            getContrastInfo
+     * @type            Function
+     * @static
+     *
+     * This static function allows you to get the contact informations regarding two colors.
+     * You will get back an object containing informations about the color1, color2 and a "value"
+     * that represent the contrast between your colors between 0 and 21.
+     *
+     * @param           {String|SColor}             color1          The color 1 to check
+     * @param           {String|SColor}             color2          The color 2 to check
+     * @return          {ISColorContrastInfo}                       The contrast informations
+     *
+     * @since       2.0.0
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
     static getContrastInfo(
         color1: string | SColor,
         color2: string | SColor,
-    ): any {
+    ): ISColorContrastInfo {
         if (typeof color1 === 'string') {
             const color1Instance = new SColor(color1);
             color1 = color1Instance.toHexString();
@@ -97,7 +141,23 @@ class SColor extends __SClass {
         }
 
         const contrast = new __contrast(color1, color2);
-        _console.log('contrast', contrast);
+
+        const finalContrastInfo = {
+            background: {
+                r: contrast.background.R,
+                g: contrast.background.G,
+                b: contrast.background.b,
+                color: contrast.background.value,
+            },
+            foreground: {
+                r: contrast.foreground.R,
+                g: contrast.foreground.G,
+                b: contrast.foreground.b,
+                color: contrast.foreground.value,
+            },
+            value: contrast.value,
+        };
+        return finalContrastInfo;
     }
 
     /**

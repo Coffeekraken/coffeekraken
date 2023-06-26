@@ -71,17 +71,63 @@ export default class SDashboardFrontendCheckerComponent extends __SLitComponent 
         this._check();
     }
 
+    _$context = window.parent?.document ?? document;
+
+    _defaultIcon =
+        '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Pro 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M176 24c0-13.3-10.7-24-24-24s-24 10.7-24 24V64c-35.3 0-64 28.7-64 64H24c-13.3 0-24 10.7-24 24s10.7 24 24 24H64v56H24c-13.3 0-24 10.7-24 24s10.7 24 24 24H64v56H24c-13.3 0-24 10.7-24 24s10.7 24 24 24H64c0 35.3 28.7 64 64 64v40c0 13.3 10.7 24 24 24s24-10.7 24-24V448h56v40c0 13.3 10.7 24 24 24s24-10.7 24-24V448h56v40c0 13.3 10.7 24 24 24s24-10.7 24-24V448c35.3 0 64-28.7 64-64h40c13.3 0 24-10.7 24-24s-10.7-24-24-24H448V280h40c13.3 0 24-10.7 24-24s-10.7-24-24-24H448V176h40c13.3 0 24-10.7 24-24s-10.7-24-24-24H448c0-35.3-28.7-64-64-64V24c0-13.3-10.7-24-24-24s-24 10.7-24 24V64H280V24c0-13.3-10.7-24-24-24s-24 10.7-24 24V64H176V24zM160 128H352c17.7 0 32 14.3 32 32V352c0 17.7-14.3 32-32 32H160c-17.7 0-32-14.3-32-32V160c0-17.7 14.3-32 32-32zm192 32H160V352H352V160z"/></svg>';
+
+    _handleCheckStart(checkObj: ISFrontendCheckerCheckObj) {
+        if (checkObj.lazy) {
+            this.dispatchEvent(
+                new CustomEvent('dashboard.hide', {
+                    bubbles: true,
+                    detail: {},
+                }),
+            );
+            this.dispatchEvent(
+                new CustomEvent('notification', {
+                    bubbles: true,
+                    detail: {
+                        id: checkObj.id,
+                        title: checkObj.name ?? checkObj.title,
+                        type: 'running',
+                        description: null,
+                        icon: checkObj.icon ?? this._defaultIcon,
+                    },
+                }),
+            );
+        }
+    }
+
+    _handleCheckComplete(checkObj: ISFrontendCheckerCheckObj) {
+        if (checkObj.lazy) {
+            this.dispatchEvent(
+                new CustomEvent('notification', {
+                    bubbles: true,
+                    detail: {
+                        id: checkObj.id,
+                        title: checkObj.name ?? checkObj.title,
+                        type: checkObj.result?.status ?? 'success',
+                        description: null,
+                        icon: checkObj.icon ?? this._defaultIcon,
+                        timeout: 2000,
+                    },
+                }),
+            );
+        }
+    }
+
     _check() {
-        const pro = this._frontendChecker.check(
-            window.parent?.document ?? document,
-            this.props.settings.checks,
-        );
+        const pro = this._frontendChecker.check({
+            $context: this._$context,
+        });
 
         pro.on('checks.start', (checksResult: ISFrontendCheckerCheckResult) => {
             this._checksResult = checksResult;
             this.requestUpdate();
         });
         pro.on('check.start', (checkObj: ISFrontendCheckerCheckObj) => {
+            this._handleCheckStart(checkObj);
             this.requestUpdate();
         });
         pro.on('check.complete', (checkObj: ISFrontendCheckerCheckObj) => {
@@ -90,7 +136,6 @@ export default class SDashboardFrontendCheckerComponent extends __SLitComponent 
         pro.on(
             'checks.complete',
             (checksResult: ISFrontendCheckerCheckResult) => {
-                _console.log('ch', checksResult);
                 this.requestUpdate();
             },
         );
@@ -336,6 +381,10 @@ export default class SDashboardFrontendCheckerComponent extends __SLitComponent 
                                                                         )}
                                                                     `}
                                                           `
+                                                        : checkObj.lazy
+                                                        ? html`<i
+                                                              class="fa-regular fa-circle-play"
+                                                          ></i>`
                                                         : html`<i
                                                               class="s-loader:spinner s-color:accent"
                                                           ></i>`}
@@ -353,21 +402,35 @@ export default class SDashboardFrontendCheckerComponent extends __SLitComponent 
                                                             checkObj.check();
                                                         promise.on(
                                                             'start',
-                                                            () => {
+                                                            (checkObj) => {
+                                                                this._handleCheckStart(
+                                                                    checkObj,
+                                                                );
                                                                 this.requestUpdate();
                                                             },
                                                         );
                                                         promise.on(
                                                             'complete',
                                                             () => {
+                                                                this._handleCheckComplete(
+                                                                    checkObj,
+                                                                );
                                                                 this.requestUpdate();
                                                             },
                                                         );
                                                     }}
                                                 >
-                                                    <i
-                                                        class="fa-solid fa-arrows-rotate"
-                                                    ></i>
+                                                    ${checkObj.lazy
+                                                        ? html`
+                                                              <i
+                                                                  class="fa-regular fa-circle-play"
+                                                              ></i>
+                                                          `
+                                                        : html`
+                                                              <i
+                                                                  class="fa-solid fa-arrows-rotate"
+                                                              ></i>
+                                                          `}
                                                 </button>
                                                 <span
                                                     class="_level level--${checkObj.level}"

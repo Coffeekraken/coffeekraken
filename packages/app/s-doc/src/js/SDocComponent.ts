@@ -271,6 +271,7 @@ export default class SDocComponent extends __SLitComponent {
                                 ?.id === itemObj.id
                                 ? 'active'
                                 : ''}"
+                            tabindex="0"
                             @click=${(e) => {
                                 e.stopPropagation();
                                 this._loadItem(itemObj);
@@ -566,6 +567,7 @@ export default class SDocComponent extends __SLitComponent {
                             )} ${categoryObj.selected || this._searchValue
                                 ? 'active'
                                 : ''}"
+                            tabindex="0"
                             @click=${(e) => {
                                 e.stopPropagation();
                                 categoryObj.selected = !categoryObj.selected;

@@ -11,6 +11,7 @@ import type {
     ISFrontendChecker,
     ISFrontendCheckerCheckCheckResult,
     ISFrontendCheckerCheckObj,
+    ISFrontendCheckerCheckParams,
     ISFrontendCheckerCheckResult,
     ISFrontendCheckerSettings,
 } from './types';
@@ -410,7 +411,15 @@ export default class SFrontendChecker
      * @since          2.0.0
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    check($context = document): Promise<ISFrontendCheckerCheckResult> {
+    check(
+        params?: ISFrontendCheckerCheckParams,
+    ): Promise<ISFrontendCheckerCheckResult> {
+        const finalParams = <ISFrontendCheckerCheckParams>{
+            $context: document,
+            includeLazy: false,
+            ...(params ?? {}),
+        };
+
         const checksResult: ISFrontendCheckerCheckResult = {
             score: null,
             duration: null,
@@ -431,15 +440,19 @@ export default class SFrontendChecker
             for (let [checkId, checkObj] of Object.entries(
                 checksResult.checks,
             )) {
-                const checkDuration = new __SDuration();
                 const originalCheckFn = checkObj.check;
 
                 // handle the points
                 potentialPoints += checkObj.level + 1;
                 points += checkObj.level + 1;
 
-                checkObj.check = () => {
+                // settings
+                const checkSettings = this.settings.checks?.[checkId] ?? {};
+
+                checkObj.check = (set = checkSettings) => {
                     return new __SPromise(async (promise) => {
+                        // start the check duration
+                        const checkDuration = new __SDuration();
                         // update checks running status
                         this._areChecksRunning = true;
                         // remove potential points for this check
@@ -453,7 +466,10 @@ export default class SFrontendChecker
                         emit('check.start', checkObj);
                         // execute the check
                         const checkResult: ISFrontendCheckerCheckCheckResult =
-                            await originalCheckFn({ $context });
+                            await originalCheckFn({
+                                $context: finalParams.$context,
+                                settings: set,
+                            });
                         // update the points
                         let resultPoints = 0;
                         switch (checkResult.status) {
@@ -485,6 +501,13 @@ export default class SFrontendChecker
                         promise.resolve(checkObj);
                     });
                 };
+
+                // filter some filters
+                if (!finalParams.includeLazy && checkObj.lazy) {
+                    continue;
+                }
+
+                // run the cheeck
                 await checkObj.check();
             }
 

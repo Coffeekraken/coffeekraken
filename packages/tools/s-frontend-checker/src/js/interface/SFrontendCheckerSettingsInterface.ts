@@ -44,6 +44,11 @@ export default class SFrontendCheckerSettingsInterface extends __SInterface {
                     __SFrontendChecker.CATEGORY_SOCIAL,
                 ],
             },
+            checks: {
+                type: 'Object',
+                description: 'Specify settings for each checks',
+                default: {},
+            },
             statuses: {
                 type: 'Array',
                 description: 'List all the statuses you want to handle',

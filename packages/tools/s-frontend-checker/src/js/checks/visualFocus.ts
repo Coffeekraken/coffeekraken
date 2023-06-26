@@ -2,6 +2,9 @@ import { __wait } from '@coffeekraken/sugar/datetime';
 
 import type { ISFrontendChecker } from '../types';
 
+import { __injectStyle } from '@coffeekraken/sugar/dom';
+import { __uniqid } from '@coffeekraken/sugar/string';
+
 /**
  * @name            visualFocus
  * @namespace       js.checks
@@ -16,6 +19,8 @@ import type { ISFrontendChecker } from '../types';
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 
+let _$styles: HTMLStyleElement[] = [];
+
 export default function (__SFrontendChecker: ISFrontendChecker) {
     return {
         id: 'visualFocus',
@@ -23,11 +28,9 @@ export default function (__SFrontendChecker: ISFrontendChecker) {
         category: __SFrontendChecker.CATEGORY_ACCESSIBILITY,
         description:
             'Check that all focusable elements have a visual state setted',
-        level: 1,
+        lazy: true,
+        level: __SFrontendChecker.LEVEL_HIGH,
         async check({ $context }) {
-            const $focusdElement = (window.parent ?? window).document
-                .activeElement;
-
             const $focusables = Array.from(
                 $context.querySelectorAll(
                     ':is([tabindex], button, input, select, a[href]):not([tabindex="-1"])',
@@ -36,8 +39,22 @@ export default function (__SFrontendChecker: ISFrontendChecker) {
 
             const $nonVisualFocusElements: HTMLElement[] = [];
 
+            // remove old styles
+            _$styles = _$styles.filter(($style) => {
+                $style.remove();
+                return false;
+            });
+
             // @ts-ignore
             for (let [idx, $focusable] of $focusables.entries()) {
+                // make sure the container has a s-frontend-checker-id
+                if (!$focusable.hasAttribute('s-frontend-checker-id')) {
+                    $focusable.setAttribute(
+                        's-frontend-checker-id',
+                        __uniqid(),
+                    );
+                }
+
                 const style = JSON.stringify(
                         window.getComputedStyle($focusable),
                     ),
@@ -67,6 +84,37 @@ export default function (__SFrontendChecker: ISFrontendChecker) {
                     focusStyleAfter === styleAfter
                 ) {
                     $nonVisualFocusElements.push($focusable);
+
+                    const id = $focusable.getAttribute('s-frontend-checker-id');
+                    const $style = __injectStyle(
+                        `
+                    [s-frontend-checker-id="${id}"] {
+                        position: ${
+                            $focusable.style.position !== ''
+                                ? $focusable.style.position
+                                : 'relative'
+                        }
+                    }
+                    [s-frontend-checker-id="${id}"]:before {
+                        content: '';
+                        position: absolute;
+                        top: 0;
+                        right: 0;
+                        width: 100%;
+                        height: 100%;
+                        border: 5px dotted #ff0000;
+                    }
+                    `,
+                        {
+                            // @ts-ignore
+                            rootNode: $context.head ?? $context,
+                        },
+                    );
+
+                    // add this style tag to the styles stack to remove them at each check start
+                    _$styles.push($style);
+
+                    await __wait();
                 }
             }
 

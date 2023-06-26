@@ -7,7 +7,7 @@
             <div>
                 <i class="s-icon:start _icon-title"></i>
                 <h2 class="s-typo:h2 s-mbe:30 _title">
-                    Get started
+                    Get startedDD
                 </h2>
                 <p class="s-typo:h4 s-mbe:30">
                     Install the <span class="s-tc:complementary">PostCSS plugin</span><br />and start working!

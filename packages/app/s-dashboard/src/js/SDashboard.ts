@@ -258,7 +258,7 @@ export default class SDashboard extends __SClass {
                     </script>
                     ${
                         this.settings.env === 'development'
-                            ? '<script src="/sugar/dashboard/init.js" type="module" defer></script>'
+                            ? '<script src="http://localhost:3000/sugar/dashboard/init.js" type="module" defer></script>'
                             : '<script src="https://cdnv2.coffeekraken.io/s-dashboard/init/init.js" type="module" defer></script>'
                     }
                 </head>

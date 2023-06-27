@@ -1,6 +1,6 @@
 import __SColor from '@coffeekraken/s-color';
 import { __wait } from '@coffeekraken/sugar/datetime';
-import { __injectStyle } from '@coffeekraken/sugar/dom';
+import { __closestScrollable, __injectStyle } from '@coffeekraken/sugar/dom';
 import { __uniqid } from '@coffeekraken/sugar/string';
 import __html2canvas from 'html2canvas';
 import type {
@@ -106,7 +106,8 @@ export default function (__SFrontendChecker: ISFrontendChecker) {
 
             let j = 0,
                 computedStyle,
-                elmColor;
+                elmColor,
+                $scrollables: HTMLElement[] = [];
 
             // @ts-ignore
             for (let [i, textNode] of textNodes.entries()) {
@@ -130,11 +131,28 @@ export default function (__SFrontendChecker: ISFrontendChecker) {
                     continue;
                 }
 
+                // get the container
                 const $container = textNode.parentElement;
 
-                // $container.scrollIntoView({
-                //     block: 'center',
-                // });
+                // remove "scroll-snap-type" from closest scrollable
+                const $scrollable = __closestScrollable($container);
+                _console.log('SCRO', 'dd', $scrollable);
+                if ($scrollable && !$scrollables.includes($scrollable)) {
+                    if ($scrollable.style.scrollSnapType) {
+                        _console.log('Scroll', $scrollable);
+                        $scrollable._originalScrollSnapType =
+                            $scrollable.style.scrollSnapType;
+                        $scrollable.style.scrollSnapType = 'none';
+                        $scrollables.push($scrollable);
+                        await __wait();
+                    }
+                }
+
+                // scroll the container into view
+                $container.scrollIntoView({
+                    block: 'center',
+                    behavior: 'instant',
+                });
 
                 // focus the element
                 let wasTabindex = false;
@@ -343,6 +361,11 @@ export default function (__SFrontendChecker: ISFrontendChecker) {
             // display iframe
             window.parent.document.querySelector('iframe').style.display =
                 'initial';
+
+            // restore scroll snap types
+            $scrollables.forEach(($scrollable) => {
+                $scrollable.style.removeProperty('scroll-snap-type');
+            });
 
             const score = Math.round((100 / potentialPoints) * points);
 

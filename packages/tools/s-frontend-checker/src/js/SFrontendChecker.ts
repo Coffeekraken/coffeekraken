@@ -16,6 +16,7 @@ import type {
     ISFrontendCheckerSettings,
 } from './types';
 
+import __alternateLink from './checks/alternateLink';
 import __ariaBanner from './checks/ariaBanner';
 import __ariaButtonLabel from './checks/ariaButtonLabel';
 import __ariaColorContrast from './checks/ariaColorContrast';
@@ -34,12 +35,15 @@ import __ariaTableCaption from './checks/ariaTableCaption';
 import __ariaTree from './checks/ariaTree';
 import __author from './checks/author';
 import __bTag from './checks/bTag';
+import __canonicalLink from './checks/canonicalLink';
 import __charset from './checks/charset';
 import __comments from './checks/comments';
+import __criticalCss from './checks/criticalCss';
 import __cssOrder from './checks/cssOrder';
 import __description from './checks/description';
 import __direction from './checks/direction';
 import __doctype from './checks/doctype';
+import __favicon from './checks/favicon';
 import __footer from './checks/footer';
 import __header from './checks/header';
 import __iTag from './checks/iTag';
@@ -49,9 +53,11 @@ import __keywords from './checks/keywords';
 import __language from './checks/language';
 import __linksTitle from './checks/linksTitle';
 import __main from './checks/main';
+import __manifest from './checks/manifest';
 import __navRoleAttribute from './checks/navRoleAttribute';
 import __noopener from './checks/noopener';
 import __opengraph from './checks/opengraph';
+import __preloadViewportAssets from './checks/preloadViewportAssets';
 import __printStylesheet from './checks/printStylesheet';
 import __title from './checks/title';
 import __twitterCard from './checks/twitterCard';
@@ -59,6 +65,7 @@ import __uniqueIds from './checks/uniqueIds';
 import __viewport from './checks/viewport';
 import __visualFocus from './checks/visualFocus';
 import __w3c from './checks/w3c';
+import __webappCapable from './checks/webappCapable';
 import __webpImages from './checks/webpImages';
 
 /**
@@ -574,3 +581,10 @@ SFrontendChecker.registerCheck(__ariaDescribedBy);
 SFrontendChecker.registerCheck(__ariaLabelledBy);
 SFrontendChecker.registerCheck(__visualFocus);
 SFrontendChecker.registerCheck(__ariaColorContrast);
+SFrontendChecker.registerCheck(__favicon);
+SFrontendChecker.registerCheck(__manifest);
+SFrontendChecker.registerCheck(__webappCapable);
+SFrontendChecker.registerCheck(__canonicalLink);
+SFrontendChecker.registerCheck(__alternateLink);
+SFrontendChecker.registerCheck(__criticalCss);
+SFrontendChecker.registerCheck(__preloadViewportAssets);

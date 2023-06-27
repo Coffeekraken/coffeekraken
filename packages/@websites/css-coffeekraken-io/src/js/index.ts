@@ -12,7 +12,11 @@ import __SLitComponent from '@coffeekraken/s-lit-component';
 
 import { __pickRandom } from '@coffeekraken/sugar/array';
 
-import { __querySelectorUp, __splitLetters } from '@coffeekraken/sugar/dom';
+import {
+    __closestScrollable,
+    __querySelectorUp,
+    __splitLetters,
+} from '@coffeekraken/sugar/dom';
 
 // Views specific
 // @ts-ignore
@@ -55,6 +59,9 @@ const viewsRelated = import.meta.globEager('../views/**/*.ts');
             exitFullscreen: '<i class="s-icon:exit-fullscreen"></i>',
         },
     });
+
+    const $h1 = document.querySelector('h2');
+    console.log($h1, __closestScrollable($h1));
 
     class WelcomeSlider {
         _$slider;

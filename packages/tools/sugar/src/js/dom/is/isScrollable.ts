@@ -45,7 +45,7 @@ export default function __isScrollable(
         return false;
     }
 
-    const style = window.getComputedStyle($elm);
+    const style = (window.parent ?? window).getComputedStyle($elm);
     var overflowY = style.overflowY.trim();
     var overflowX = style.overflowX.trim();
 
@@ -57,6 +57,10 @@ export default function __isScrollable(
             (overflowX === 'scroll' || overflowX === 'auto') &&
             $elm.scrollWidth > $elm.clientWidth,
     };
+
+    if ($elm.classList.contains('body')) {
+        _console.log('b', dir, overflowX, overflowY);
+    }
 
     if (settings.x && dir.horizontal) return true;
     if (settings.y && dir.vertical) return true;

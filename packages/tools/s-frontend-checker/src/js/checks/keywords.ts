@@ -22,7 +22,10 @@ export default function (__SFrontendChecker: ISFrontendChecker) {
         level: 1,
         check({ $context }) {
             // @ts-ignore
-            if (!$context.querySelector('head meta[name="keywords"]')) {
+            const $keywords = $context.querySelector(
+                'head meta[name="keywords"]',
+            );
+            if (!$keywords) {
                 return {
                     status: 'warning',
                     message: 'The document is missing Some keywords',
@@ -33,6 +36,7 @@ export default function (__SFrontendChecker: ISFrontendChecker) {
             }
             return {
                 status: 'success',
+                elements: $keywords,
             };
         },
     };

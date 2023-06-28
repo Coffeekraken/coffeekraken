@@ -34,26 +34,12 @@ export default function (__SFrontendChecker: ISFrontendChecker) {
                         '<table\n<caption>My cool table</caption>\n</table>',
                     moreLink:
                         'https://www.w3.org/WAI/ARIA/apg/practices/names-and-descriptions/',
-                    action: {
-                        label: () => `Log them (${$tables.length})`,
-                        handler: () => {
-                            $tables.forEach(($elm) => {
-                                console.log($elm);
-                            });
-                        },
-                    },
+                    elements: $tables,
                 };
             }
             return {
                 status: 'success',
-                action: {
-                    label: () => `Log them (${$tables.length})`,
-                    handler: () => {
-                        $tables.forEach(($elm) => {
-                            console.log($elm);
-                        });
-                    },
-                },
+                elements: $tables,
             };
         },
     };

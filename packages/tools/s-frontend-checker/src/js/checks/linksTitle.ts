@@ -32,14 +32,7 @@ export default function (__SFrontendChecker: ISFrontendChecker) {
                     example:
                         '<a href="https://coffeekraken.io" title="Coffeekraken website">...</a>',
                     moreLink: 'https://www.w3schools.com/tags/tag_a.asp',
-                    action: {
-                        label: () => `Log them (${$a.length})`,
-                        handler: () => {
-                            $a.forEach(($elm) => {
-                                console.log($elm);
-                            });
-                        },
-                    },
+                    elements: $a,
                 };
             }
             return {

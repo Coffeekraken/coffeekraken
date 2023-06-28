@@ -1,0 +1,17 @@
+{
+    "cli": [
+        {
+            "stack": "frontendChecker",
+            "description": "Allows you to run frontend checker related commands like `check`, etc...",
+            "defaultAction": "check",
+            "actions": {
+                "check": {
+                    "scope": "global",
+                    "description": "Run the frontend checker on a particular website url",
+                    "interface": "./dist/pkg/esm/node/interface/SFrontendCheckerCheckParamsInterface.js",
+                    "process": "./dist/pkg/esm/cli/check.cli.js"
+                }
+            }
+        }
+    ]
+}

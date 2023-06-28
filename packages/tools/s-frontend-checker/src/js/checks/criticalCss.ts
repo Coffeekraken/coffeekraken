@@ -19,26 +19,24 @@ export default function (__SFrontendChecker: ISFrontendChecker) {
     return {
         id: 'criticalCss',
         name: 'Critical Css',
-        description:
-            'Check if a `style` with the id "critical" exists',
+        description: 'Check if a `style` with the id "critical" exists',
         category: __SFrontendChecker.CATEGORY_PERFORMANCE,
         level: __SFrontendChecker.LEVEL_MEDIUM,
         check({ $context }) {
             // canonical
-            const $criticalCss = $context.querySelector(
-                'style#critical',
-            );
+            const $criticalCss = $context.querySelector('style#critical');
             if (!$criticalCss) {
                 return {
                     status: __SFrontendChecker.STATUS_ERROR,
                     message: 'Your page does not have any critical css inlined',
                     example: `<style id="critical">...</style>`,
-                    moreLink: 'https://web.dev/extract-critical-css/'
+                    moreLink: 'https://web.dev/extract-critical-css/',
                 };
             }
 
             return {
                 status: 'success',
+                elements: $criticalCss,
             };
         },
     };

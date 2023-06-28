@@ -32,14 +32,7 @@ export default function (__SFrontendChecker: ISFrontendChecker) {
                     message: null,
                     example: '<img src="something.webp" alt="...">',
                     moreLink: 'https://developers.google.com/speed/webp',
-                    action: {
-                        label: () => `Log them (${$nonWebpImages.length})`,
-                        handler: () => {
-                            $nonWebpImages.forEach(($elm) => {
-                                console.log($elm);
-                            });
-                        },
-                    },
+                    elements: $nonWebpImages,
                 };
             }
             return {

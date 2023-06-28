@@ -32,14 +32,7 @@ export default function (__SFrontendChecker: ISFrontendChecker) {
                     message: null,
                     example: '<em>...</em>',
                     moreLink: 'https://www.w3schools.com/tags/tag_em.asp',
-                    action: {
-                        label: () => `Log them (${$i.length})`,
-                        handler: () => {
-                            $i.forEach(($elm) => {
-                                console.log($elm);
-                            });
-                        },
-                    },
+                    elements: $i,
                 };
             }
             return {

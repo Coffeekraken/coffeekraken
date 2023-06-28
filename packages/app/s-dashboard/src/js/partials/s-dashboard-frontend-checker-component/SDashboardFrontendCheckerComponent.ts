@@ -441,9 +441,16 @@ export default class SDashboardFrontendCheckerComponent extends __SLitComponent 
                                                 <p
                                                     class="_description s-typo:p s-mbs:20"
                                                 >
-                                                    ${checkObj.result
-                                                        ?.message ??
-                                                    checkObj.description}
+                                                    ${unsafeHTML(
+                                                        (
+                                                            checkObj.result
+                                                                ?.message ??
+                                                            checkObj.description
+                                                        ).replace(
+                                                            /\n/gm,
+                                                            '<br/>',
+                                                        ),
+                                                    )}
                                                 </p>
 
                                                 ${checkObj.result

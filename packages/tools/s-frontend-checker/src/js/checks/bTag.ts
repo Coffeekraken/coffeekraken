@@ -30,18 +30,12 @@ export default function (__SFrontendChecker: ISFrontendChecker) {
                     message: null,
                     example: '<strong>...</strong>',
                     moreLink: 'https://www.w3schools.com/tags/tag_strong.asp',
-                    action: {
-                        label: () => `Log them (${$b.length})`,
-                        handler: () => {
-                            $b.forEach(($elm) => {
-                                console.log($elm);
-                            });
-                        },
-                    },
+                    elements: $b,
                 };
             }
             return {
                 status: 'success',
+                elements: $b,
             };
         },
     };

@@ -41,14 +41,7 @@ export default function (__SFrontendChecker: ISFrontendChecker) {
                             example: null,
                             moreLink:
                                 'https://www.w3.org/WAI/ARIA/apg/practices/names-and-descriptions/',
-                            action: {
-                                label: () => `Log them (${$elements.length})`,
-                                handler: () => {
-                                    $elements.forEach(($elm) => {
-                                        console.log($elm);
-                                    });
-                                },
-                            },
+                            elements: $elements,
                         };
                     }
                 }
@@ -56,6 +49,7 @@ export default function (__SFrontendChecker: ISFrontendChecker) {
 
             return {
                 status: 'success',
+                elements: $elements,
             };
         },
     };

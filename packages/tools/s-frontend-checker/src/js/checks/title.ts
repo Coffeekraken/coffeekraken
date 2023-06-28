@@ -22,8 +22,9 @@ export default function (__SFrontendChecker: ISFrontendChecker) {
         category: __SFrontendChecker.CATEGORY_BEST_PRACTICES,
         level: 0,
         check({ $context }) {
+            const $title = $context.querySelector('head title');
             // @ts-ignore
-            if (!$context.title) {
+            if (!$title) {
                 return {
                     status: 'error',
                     message: 'The document is missing the title',
@@ -33,6 +34,7 @@ export default function (__SFrontendChecker: ISFrontendChecker) {
             }
             return {
                 status: 'success',
+                elements: $title,
             };
         },
     };

@@ -23,7 +23,8 @@ export default function (__SFrontendChecker: ISFrontendChecker) {
         level: __SFrontendChecker.LEVEL_MEDIUM,
         check({ $context }) {
             // manifest
-            if (!$context.querySelector('link[rel="manifest"]')) {
+            const $manifest = $context.querySelector('link[rel="manifest"]');
+            if (!$manifest) {
                 return {
                     status: 'error',
                     message: 'The document is missing the app manifest',
@@ -35,6 +36,7 @@ export default function (__SFrontendChecker: ISFrontendChecker) {
 
             return {
                 status: 'success',
+                elements: $manifest,
             };
         },
     };

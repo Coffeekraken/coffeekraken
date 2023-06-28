@@ -40,6 +40,7 @@ export default function (__SFrontendChecker: ISFrontendChecker) {
                     example: `link rel="alternate" media="only screen and (max-width: 640px)" href="https://example.com/dresses/green-dresses" />`,
                     moreLink:
                         'https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls',
+                    elements: $alternateLink,
                 };
             }
 
@@ -52,6 +53,7 @@ export default function (__SFrontendChecker: ISFrontendChecker) {
                     example: `link rel="alternate" media="only screen and (max-width: 640px)" href="https://example.com/dresses/green-dresses" />`,
                     moreLink:
                         'https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls',
+                    elements: $alternateLink,
                 };
             }
 
@@ -66,6 +68,7 @@ export default function (__SFrontendChecker: ISFrontendChecker) {
                     example: `link rel="alternate" media="only screen and (max-width: 640px)" href="https://example.com/dresses/green-dresses" />`,
                     moreLink:
                         'https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls',
+                    elements: $alternateLink,
                 };
             }
 

@@ -42,18 +42,12 @@ export default function (__SFrontendChecker: ISFrontendChecker) {
     </li>
 </ul>`,
                     moreLink: 'https://www.w3.org/WAI/GL/wiki/Using_ARIA_trees',
-                    action: {
-                        label: () => `Log them (${$trees.length})`,
-                        handler: () => {
-                            $trees.forEach(($elm) => {
-                                console.log($elm);
-                            });
-                        },
-                    },
+                    elements: $trees,
                 };
             }
             return {
                 status: 'success',
+                elements: $trees,
             };
         },
     };

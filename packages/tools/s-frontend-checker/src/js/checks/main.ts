@@ -30,11 +30,11 @@ export default function (__SFrontendChecker: ISFrontendChecker) {
                     message: null,
                     example: '<main id="content">...</main>',
                     moreLink: 'https://www.w3schools.com/tags/tag_main.asp',
-                    action: null,
                 };
             }
             return {
                 status: 'success',
+                elements: $main,
             };
         },
     };

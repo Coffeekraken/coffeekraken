@@ -19,10 +19,11 @@ export default function (__SFrontendChecker: ISFrontendChecker) {
         name: 'Viewport',
         description: 'The document must contain a valid viewport declaration',
         category: __SFrontendChecker.CATEGORY_BEST_PRACTICES,
-        level: 0,
+        level: __SFrontendChecker.LEVEL_MEDIUM,
         check({ $context }) {
+            const $viewport = $context.querySelector('meta[name="viewport"]');
             // @ts-ignore
-            if (!$context.querySelector('meta[name="viewport"]')) {
+            if (!$viewport) {
                 return {
                     status: 'error',
                     message: 'The document is missing a viewport',
@@ -34,6 +35,7 @@ export default function (__SFrontendChecker: ISFrontendChecker) {
             }
             return {
                 status: 'success',
+                elements: $context,
             };
         },
     };

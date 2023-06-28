@@ -20,10 +20,13 @@ export default function (__SFrontendChecker: ISFrontendChecker) {
         name: 'Twitter Card Metas',
         description: 'Specifying the twitter card metas is recommanded',
         category: __SFrontendChecker.CATEGORY_SOCIAL,
-        level: 1,
+        level: __SFrontendChecker.LEVEL_MEDIUM,
         check({ $context }) {
+            const $twitter = $context.querySelectorAll(
+                'meta[property^="twitter:"]',
+            );
             // @ts-ignore
-            if (!$context.querySelector('meta[property^="twitter:"]')) {
+            if (!$twitter) {
                 return {
                     status: 'error',
                     message: 'The document is missing the twitterCard metas',
@@ -35,6 +38,7 @@ export default function (__SFrontendChecker: ISFrontendChecker) {
             }
             return {
                 status: 'success',
+                elements: $twitter,
             };
         },
     };

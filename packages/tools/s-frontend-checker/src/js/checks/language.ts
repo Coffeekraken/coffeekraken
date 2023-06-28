@@ -22,8 +22,9 @@ export default function (__SFrontendChecker: ISFrontendChecker) {
         category: __SFrontendChecker.CATEGORY_BEST_PRACTICES,
         level: 0,
         check({ $context }) {
+            const $html = $context.querySelector('html');
             // @ts-ignore
-            if (!$context.querySelector('html')?.hasAttribute('lang')) {
+            if (!$html?.hasAttribute('lang')) {
                 return {
                     status: 'error',
                     message: 'The document is missing the language',
@@ -34,6 +35,7 @@ export default function (__SFrontendChecker: ISFrontendChecker) {
             }
             return {
                 status: 'success',
+                elements: $html,
             };
         },
     };

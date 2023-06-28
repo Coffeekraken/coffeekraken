@@ -35,18 +35,12 @@ export default function (__SFrontendChecker: ISFrontendChecker) {
                         '<form aria-label="Register to the event">...</form>',
                     moreLink:
                         'https://www.w3.org/WAI/ARIA/apg/patterns/landmarks/examples/form.html',
-                    action: {
-                        label: () => `Log them (${$forms.length})`,
-                        handler: () => {
-                            $forms.forEach(($form) => {
-                                console.log($form);
-                            });
-                        },
-                    },
+                    elements: $forms,
                 };
             }
             return {
                 status: 'success',
+                elements: $forms,
             };
         },
     };

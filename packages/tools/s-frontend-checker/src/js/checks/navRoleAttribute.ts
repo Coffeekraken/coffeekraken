@@ -31,14 +31,7 @@ export default function (__SFrontendChecker: ISFrontendChecker) {
                     message: null,
                     example: '<nav role="navigation">...</nav>',
                     moreLink: 'https://www.w3schools.com/tags/tag_nav.asp',
-                    action: {
-                        label: () => `Log them (${$nav.length})`,
-                        handler: () => {
-                            $nav.forEach(($elm) => {
-                                console.log($elm);
-                            });
-                        },
-                    },
+                    elements: $nav,
                 };
             }
             return {

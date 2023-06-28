@@ -22,8 +22,10 @@ export default function (__SFrontendChecker: ISFrontendChecker) {
         category: __SFrontendChecker.CATEGORY_BEST_PRACTICES,
         level: 1,
         check({ $context }) {
+            const $og = $context.querySelectorAll('meta[property^="og:"]');
+
             // @ts-ignore
-            if (!$context.querySelector('meta[property^="og:"]')) {
+            if (!$og.length) {
                 return {
                     status: 'error',
                     message: 'The document is missing the opengraph metas',
@@ -34,6 +36,7 @@ export default function (__SFrontendChecker: ISFrontendChecker) {
             }
             return {
                 status: 'success',
+                elements: $og,
             };
         },
     };

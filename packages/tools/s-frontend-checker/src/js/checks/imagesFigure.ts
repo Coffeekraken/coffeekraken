@@ -33,14 +33,7 @@ export default function (__SFrontendChecker: ISFrontendChecker) {
                     example:
                         '<figure>\n<img src="something.webp" alt="something">\n<figcaption>This is my image description...</figcaption>\n</figure>',
                     moreLink: 'https://www.w3schools.com/tags/att_img_alt.asp',
-                    action: {
-                        label: () => `Log them (${$noneFigureImgs.length})`,
-                        handler: () => {
-                            $noneFigureImgs.forEach(($elm) => {
-                                console.log($elm);
-                            });
-                        },
-                    },
+                    elements: $noneFigureImgs,
                 };
             }
             return {

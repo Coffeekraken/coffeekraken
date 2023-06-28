@@ -29,22 +29,15 @@ export default function (__SFrontendChecker: ISFrontendChecker) {
             );
 
             // @ts-ignore
-            if (!$context.querySelector('html')?.hasAttribute('dir')) {
+            if ($externalLinks.length) {
                 return {
                     status: 'error',
                     message:
                         'Some of your external links does not have rel="noopener"',
                     example: '<a href="..." target="_blank" rel="noopener">',
-                    action: {
-                        label: () => `Log them (${$externalLinks.length})`,
-                        handler: () => {
-                            $externalLinks.forEach(($elm) => {
-                                console.log($elm);
-                            });
-                        },
-                    },
                     moreLink:
                         'https://developer.mozilla.org/en-US/docs/Web/HTML/Link_types/noopener',
+                    elements: $externalLinks,
                 };
             }
             return {

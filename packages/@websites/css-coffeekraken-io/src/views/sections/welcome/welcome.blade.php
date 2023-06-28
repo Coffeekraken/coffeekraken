@@ -9,6 +9,9 @@
     </div>
 
     <div class="_illustration">
+
+    <img src="https://d2kq0urxkarztv.cloudfront.net/5d270dc21c3cf100a19dc2c7/3210758/image-fc041146-1eb8-4793-8151-ba188f5abab0.jpg?e=webp" />
+
         <div welcome-slider>
 
             <div class="_code">

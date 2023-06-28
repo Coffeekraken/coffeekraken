@@ -27,6 +27,7 @@ export default function (__SFrontendChecker: ISFrontendChecker) {
             if ($navs.length <= 1) {
                 return {
                     status: 'success',
+                    elements: $navs,
                 };
             }
 
@@ -42,18 +43,12 @@ export default function (__SFrontendChecker: ISFrontendChecker) {
                         '<nav aria-label="Why Elon Musk is such a nice/bad guy">...</nav>',
                     moreLink:
                         'https://www.w3.org/WAI/ARIA/apg/patterns/landmarks/examples/navigation.html',
-                    action: {
-                        label: () => `Log them (${$navsNotLabelled.length})`,
-                        handler: () => {
-                            $navsNotLabelled.forEach(($elm) => {
-                                console.log($elm);
-                            });
-                        },
-                    },
+                    elements: $navs,
                 };
             }
             return {
                 status: 'success',
+                elements: $navs,
             };
         },
     };

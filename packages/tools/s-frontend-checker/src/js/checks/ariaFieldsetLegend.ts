@@ -34,26 +34,12 @@ export default function (__SFrontendChecker: ISFrontendChecker) {
                         '<fieldset\n<legend>My cool form</legend>\n</fieldset>',
                     moreLink:
                         'https://www.w3.org/WAI/ARIA/apg/practices/names-and-descriptions/',
-                    action: {
-                        label: () => `Log them (${$fieldsets.length})`,
-                        handler: () => {
-                            $fieldsets.forEach(($elm) => {
-                                console.log($elm);
-                            });
-                        },
-                    },
+                    elements: $fieldsets,
                 };
             }
             return {
                 status: 'success',
-                action: {
-                    label: () => `Log them (${$fieldsets.length})`,
-                    handler: () => {
-                        $fieldsets.forEach(($elm) => {
-                            console.log($elm);
-                        });
-                    },
-                },
+                elements: $fieldsets,
             };
         },
     };

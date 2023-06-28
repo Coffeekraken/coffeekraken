@@ -47,10 +47,7 @@ export default function (__SFrontendChecker: ISFrontendChecker) {
                         message: `The \`<${tag}>\` does not accept any \`role\``,
                         example: null,
                         moreLink: null,
-                        action: {
-                            label: () => `Log it`,
-                            handler: () => console.log($role),
-                        },
+                        elements: $roles,
                     };
                 }
 
@@ -60,16 +57,14 @@ export default function (__SFrontendChecker: ISFrontendChecker) {
                         message: `The role \`${role}\` role cannot be placed on the \`<${tag}>\` tag`,
                         example: null,
                         moreLink: null,
-                        action: {
-                            label: () => `Log it`,
-                            handler: () => console.log($role),
-                        },
+                        elements: $roles,
                     };
                 }
             }
 
             return {
                 status: 'success',
+                elements: $roles,
             };
         },
     };

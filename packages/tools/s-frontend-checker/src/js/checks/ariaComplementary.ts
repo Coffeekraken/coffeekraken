@@ -41,14 +41,7 @@ export default function (__SFrontendChecker: ISFrontendChecker) {
                         '<aside aria-label="Why Elon Musk is such a nice/bad guy">...</aside>',
                     moreLink:
                         'https://www.w3.org/WAI/ARIA/apg/patterns/landmarks/examples/complementary.html',
-                    action: {
-                        label: () => `Log them (${$asidesNotLabelled.length})`,
-                        handler: () => {
-                            $asidesNotLabelled.forEach(($aside) => {
-                                console.log($aside);
-                            });
-                        },
-                    },
+                    elements: $asidesNotLabelled,
                 };
             }
             return {

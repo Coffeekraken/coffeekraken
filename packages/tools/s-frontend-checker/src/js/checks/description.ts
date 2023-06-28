@@ -23,8 +23,11 @@ export default function (__SFrontendChecker: ISFrontendChecker) {
         category: __SFrontendChecker.CATEGORY_SEO,
         level: 1,
         check({ $context }) {
+            const $desc = $context.querySelector(
+                'head meta[name="description"]',
+            );
             // @ts-ignore
-            if (!$context.querySelector('head meta[name="description"]')) {
+            if (!$desc) {
                 return {
                     status: 'error',
                     message: 'The document is missing the description',
@@ -35,6 +38,7 @@ export default function (__SFrontendChecker: ISFrontendChecker) {
             }
             return {
                 status: 'success',
+                elements: $desc,
             };
         },
     };

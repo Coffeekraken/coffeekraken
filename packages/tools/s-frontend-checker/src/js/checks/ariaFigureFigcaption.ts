@@ -35,26 +35,12 @@ export default function (__SFrontendChecker: ISFrontendChecker) {
                         '<figure>\n...\n<figcaption>My cool form</figcaption>\n</figure>',
                     moreLink:
                         'https://www.w3.org/WAI/ARIA/apg/practices/names-and-descriptions/',
-                    action: {
-                        label: () => `Log them (${$figures.length})`,
-                        handler: () => {
-                            $figures.forEach(($figure) => {
-                                console.log($figure);
-                            });
-                        },
-                    },
+                    elements: $figures,
                 };
             }
             return {
                 status: 'success',
-                action: {
-                    label: () => `Log them (${$figures.length})`,
-                    handler: () => {
-                        $figures.forEach(($figure) => {
-                            console.log($figure);
-                        });
-                    },
-                },
+                elements: $figures,
             };
         },
     };

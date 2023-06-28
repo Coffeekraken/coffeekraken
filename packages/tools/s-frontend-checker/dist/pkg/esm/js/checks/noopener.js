@@ -19,23 +19,16 @@ export default function (__SFrontendChecker) {
         category: __SFrontendChecker.CATEGORY_BEST_PRACTICES,
         level: 3,
         check({ $context }) {
-            var _a, _b;
+            var _a;
             const $externalLinks = Array.from((_a = $context.querySelectorAll('a[target="_blank"]:not([rel="noopener"])')) !== null && _a !== void 0 ? _a : []);
             // @ts-ignore
-            if (!((_b = $context.querySelector('html')) === null || _b === void 0 ? void 0 : _b.hasAttribute('dir'))) {
+            if ($externalLinks.length) {
                 return {
                     status: 'error',
                     message: 'Some of your external links does not have rel="noopener"',
                     example: '<a href="..." target="_blank" rel="noopener">',
-                    action: {
-                        label: () => `Log them (${$externalLinks.length})`,
-                        handler: () => {
-                            $externalLinks.forEach(($elm) => {
-                                console.log($elm);
-                            });
-                        },
-                    },
                     moreLink: 'https://developer.mozilla.org/en-US/docs/Web/HTML/Link_types/noopener',
+                    elements: $externalLinks,
                 };
             }
             return {
@@ -44,4 +37,4 @@ export default function (__SFrontendChecker) {
         },
     };
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUVBOzs7Ozs7Ozs7Ozs7R0FZRztBQUVILE1BQU0sQ0FBQyxPQUFPLFdBQVcsa0JBQXFDO0lBQzFELE9BQU87UUFDSCxFQUFFLEVBQUUsVUFBVTtRQUNkLElBQUksRUFBRSwyQkFBMkI7UUFDakMsV0FBVyxFQUFFLHVEQUF1RDtRQUNwRSxRQUFRLEVBQUUsa0JBQWtCLENBQUMsdUJBQXVCO1FBQ3BELEtBQUssRUFBRSxDQUFDO1FBQ1IsS0FBSyxDQUFDLEVBQUUsUUFBUSxFQUFFOztZQUNkLE1BQU0sY0FBYyxHQUFHLEtBQUssQ0FBQyxJQUFJLENBQzdCLE1BQUEsUUFBUSxDQUFDLGdCQUFnQixDQUNyQiwwQ0FBMEMsQ0FDN0MsbUNBQUksRUFBRSxDQUNWLENBQUM7WUFFRixhQUFhO1lBQ2IsSUFBSSxDQUFDLENBQUEsTUFBQSxRQUFRLENBQUMsYUFBYSxDQUFDLE1BQU0sQ0FBQywwQ0FBRSxZQUFZLENBQUMsS0FBSyxDQUFDLENBQUEsRUFBRTtnQkFDdEQsT0FBTztvQkFDSCxNQUFNLEVBQUUsT0FBTztvQkFDZixPQUFPLEVBQ0gsMERBQTBEO29CQUM5RCxPQUFPLEVBQUUsK0NBQStDO29CQUN4RCxNQUFNLEVBQUU7d0JBQ0osS0FBSyxFQUFFLEdBQUcsRUFBRSxDQUFDLGFBQWEsY0FBYyxDQUFDLE1BQU0sR0FBRzt3QkFDbEQsT0FBTyxFQUFFLEdBQUcsRUFBRTs0QkFDVixjQUFjLENBQUMsT0FBTyxDQUFDLENBQUMsSUFBSSxFQUFFLEVBQUU7Z0NBQzVCLE9BQU8sQ0FBQyxHQUFHLENBQUMsSUFBSSxDQUFDLENBQUM7NEJBQ3RCLENBQUMsQ0FBQyxDQUFDO3dCQUNQLENBQUM7cUJBQ0o7b0JBQ0QsUUFBUSxFQUNKLHVFQUF1RTtpQkFDOUUsQ0FBQzthQUNMO1lBQ0QsT0FBTztnQkFDSCxNQUFNLEVBQUUsU0FBUzthQUNwQixDQUFDO1FBQ04sQ0FBQztLQUNKLENBQUM7QUFDTixDQUFDIn0=
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUVBOzs7Ozs7Ozs7Ozs7R0FZRztBQUVILE1BQU0sQ0FBQyxPQUFPLFdBQVcsa0JBQXFDO0lBQzFELE9BQU87UUFDSCxFQUFFLEVBQUUsVUFBVTtRQUNkLElBQUksRUFBRSwyQkFBMkI7UUFDakMsV0FBVyxFQUFFLHVEQUF1RDtRQUNwRSxRQUFRLEVBQUUsa0JBQWtCLENBQUMsdUJBQXVCO1FBQ3BELEtBQUssRUFBRSxDQUFDO1FBQ1IsS0FBSyxDQUFDLEVBQUUsUUFBUSxFQUFFOztZQUNkLE1BQU0sY0FBYyxHQUFHLEtBQUssQ0FBQyxJQUFJLENBQzdCLE1BQUEsUUFBUSxDQUFDLGdCQUFnQixDQUNyQiwwQ0FBMEMsQ0FDN0MsbUNBQUksRUFBRSxDQUNWLENBQUM7WUFFRixhQUFhO1lBQ2IsSUFBSSxjQUFjLENBQUMsTUFBTSxFQUFFO2dCQUN2QixPQUFPO29CQUNILE1BQU0sRUFBRSxPQUFPO29CQUNmLE9BQU8sRUFDSCwwREFBMEQ7b0JBQzlELE9BQU8sRUFBRSwrQ0FBK0M7b0JBQ3hELFFBQVEsRUFDSix1RUFBdUU7b0JBQzNFLFFBQVEsRUFBRSxjQUFjO2lCQUMzQixDQUFDO2FBQ0w7WUFDRCxPQUFPO2dCQUNILE1BQU0sRUFBRSxTQUFTO2FBQ3BCLENBQUM7UUFDTixDQUFDO0tBQ0osQ0FBQztBQUNOLENBQUMifQ==

@@ -1,11 +1,11 @@
 // @ts-nocheck
 
-import __SClass from '@coffeekraken/s-class';
 import __SPromise from '@coffeekraken/s-promise';
-import { __clone, __deepMerge } from '@coffeekraken/sugar/object';
-import __SFrontendCheckerSettingsInterface from './interface/SFrontendCheckerSettingsInterface';
+import { __clone } from '@coffeekraken/sugar/object';
 
 import __SDuration from '@coffeekraken/s-duration';
+
+import __SFrontendChecker from '../shared/SFrontendChecker';
 
 import type {
     ISFrontendChecker,
@@ -33,6 +33,7 @@ import __ariaRoles from './checks/ariaRoles';
 import __ariaSearch from './checks/ariaSearch';
 import __ariaTableCaption from './checks/ariaTableCaption';
 import __ariaTree from './checks/ariaTree';
+import __assetsSize from './checks/assetsSize';
 import __author from './checks/author';
 import __bTag from './checks/bTag';
 import __canonicalLink from './checks/canonicalLink';
@@ -95,157 +96,13 @@ import __webpImages from './checks/webpImages';
  */
 
 export default class SFrontendChecker
-    extends __SClass
+    extends __SFrontendChecker
     implements ISFrontendChecker
 {
     /**
      * Store the registered checks
      */
     static _registeredChecks: { [key: string]: ISFrontendCheckerCheckObj } = {};
-
-    /**
-     * @name        CATEGORY_ACCESSIBILITY
-     * @type        String
-     * @static
-     *
-     * Store the "accessibility" category
-     *
-     * @since       2.0.0
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-     */
-    static CATEGORY_ACCESSIBILITY = 'accessibility';
-
-    /**
-     * @name        CATEGORY_SEO
-     * @type        String
-     * @static
-     *
-     * Store the "seo" category
-     *
-     * @since       2.0.0
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-     */
-    static CATEGORY_SEO = 'seo';
-
-    /**
-     * @name        CATEGORY_BEST_PRACTICES
-     * @type        String
-     * @static
-     *
-     * Store the "best practices" category
-     *
-     * @since       2.0.0
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-     */
-    static CATEGORY_BEST_PRACTICES = 'best pracices';
-
-    /**
-     * @name        CATEGORY_PERFORMANCE
-     * @type        String
-     * @static
-     *
-     * Store the "performance" category
-     *
-     * @since       2.0.0
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-     */
-    static CATEGORY_PERFORMANCE = 'performance';
-
-    /**
-     * @name        CATEGORY_SOCIAL
-     * @type        String
-     * @static
-     *
-     * Store the "social" category
-     *
-     * @since       2.0.0
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-     */
-    static CATEGORY_SOCIAL = 'social';
-
-    /**
-     * @name        CATEGORY_NICE_TO_HAVE
-     * @type        String
-     * @static
-     *
-     * Store the "nice to have" category
-     *
-     * @since       2.0.0
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-     */
-    static CATEGORY_NICE_TO_HAVE = 'nice to have';
-
-    /**
-     * @name        LEVEL_LOW
-     * @type        Number
-     * @static
-     *
-     * Store the "low" level id
-     *
-     * @since       2.0.0
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-     */
-    static LEVEL_LOW = 0;
-
-    /**
-     * @name        LEVEL_MEDIUM
-     * @type        Number
-     * @static
-     *
-     * Store the "medium" level id
-     *
-     * @since       2.0.0
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-     */
-    static LEVEL_MEDIUM = 1;
-
-    /**
-     * @name        LEVEL_HIGH
-     * @type        Number
-     * @static
-     *
-     * Store the "high" level id
-     *
-     * @since       2.0.0
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-     */
-    static LEVEL_HIGH = 2;
-
-    /**
-     * @name        STATUS_SUCCESS
-     * @type        Number
-     * @static
-     *
-     * Store the "success" status
-     *
-     * @since       2.0.0
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-     */
-    static STATUS_SUCCESS = 'success';
-
-    /**
-     * @name        STATUS_WARNING
-     * @type        Number
-     * @static
-     *
-     * Store the "warning" status
-     *
-     * @since       2.0.0
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-     */
-    static STATUS_WARNING = 'warning';
-
-    /**
-     * @name        STATUS_ERROR
-     * @type        Number
-     * @static
-     *
-     * Store the "error" status
-     *
-     * @since       2.0.0
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-     */
-    static STATUS_ERROR = 'error';
 
     /**
      * @name          registerCheck
@@ -270,62 +127,6 @@ export default class SFrontendChecker
         }
         this._registeredChecks[check.id] = check;
         // });
-    }
-
-    /**
-     * @name        icons
-     * @type        Record<string, string>
-     * @static
-     *
-     * Access the icons
-     *
-     * @since       2.0.0
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-     */
-    get icons(): Record<string, string> {
-        return this.settings.icons;
-    }
-
-    /**
-     * @name        level
-     * @type        Number
-     * @static
-     *
-     * Get the handled level
-     *
-     * @since       2.0.0
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-     */
-    get levels(): number[] {
-        return this.settings.levels;
-    }
-
-    /**
-     * @name        categories
-     * @type        String[]
-     * @static
-     *
-     * Access the categories
-     *
-     * @since       2.0.0
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-     */
-    get categories(): string[] {
-        return this.settings.categories;
-    }
-
-    /**
-     * @name        statuses
-     * @type        String[]
-     * @static
-     *
-     * Access the statuses
-     *
-     * @since       2.0.0
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-     */
-    get statuses(): string[] {
-        return this.settings.statuses;
     }
 
     /**
@@ -360,13 +161,7 @@ export default class SFrontendChecker
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     constructor(settings: Partial<ISFrontendCheckerSettings> = {}) {
-        super(
-            __deepMerge(
-                // @ts-ignore
-                __SFrontendCheckerSettingsInterface.defaults(),
-                settings,
-            ),
-        );
+        super(settings);
     }
 
     /**
@@ -536,6 +331,10 @@ export default class SFrontendChecker
     }
 }
 
+// expose into window
+window.SFrontendChecker = SFrontendChecker;
+window.coco = 'PLOP';
+
 // register default checks
 SFrontendChecker.registerCheck(__doctype);
 SFrontendChecker.registerCheck(__charset);
@@ -588,3 +387,4 @@ SFrontendChecker.registerCheck(__canonicalLink);
 SFrontendChecker.registerCheck(__alternateLink);
 SFrontendChecker.registerCheck(__criticalCss);
 SFrontendChecker.registerCheck(__preloadViewportAssets);
+SFrontendChecker.registerCheck(__assetsSize);

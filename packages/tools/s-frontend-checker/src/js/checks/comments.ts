@@ -42,14 +42,7 @@ export default function (__SFrontendChecker: ISFrontendChecker) {
                     status: 'warning',
                     message: 'The document has some comment(s) left',
                     example: '<!-- comment -->',
-                    action: {
-                        label: () => `Log them (${$comments.length})`,
-                        handler: () => {
-                            $comments.forEach(($elm) => {
-                                console.log($elm);
-                            });
-                        },
-                    },
+                    elements: $comments,
                 };
             }
             return {

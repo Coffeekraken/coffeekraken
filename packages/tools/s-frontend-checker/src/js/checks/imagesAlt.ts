@@ -32,14 +32,7 @@ export default function (__SFrontendChecker: ISFrontendChecker) {
                     message: null,
                     example: '<img src="something.webp" alt="something">',
                     moreLink: 'https://www.w3schools.com/tags/att_img_alt.asp',
-                    action: {
-                        label: () => `Log them (${$nonAltImages.length})`,
-                        handler: () => {
-                            $nonAltImages.forEach(($elm) => {
-                                console.log($elm);
-                            });
-                        },
-                    },
+                    elements: $nonAltImages,
                 };
             }
             return {

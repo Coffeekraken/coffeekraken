@@ -21,7 +21,8 @@ export default function (__SFrontendChecker: ISFrontendChecker) {
         category: __SFrontendChecker.CATEGORY_BEST_PRACTICES,
         level: 1,
         check({ $context }) {
-            if (!$context.querySelector('head meta[name="author"]')) {
+            const $author = $context.querySelector('head meta[name="author"]');
+            if (!$author) {
                 return {
                     status: 'error',
                     message: 'The document is missing an author',
@@ -31,6 +32,7 @@ export default function (__SFrontendChecker: ISFrontendChecker) {
             }
             return {
                 status: 'success',
+                elements: $author,
             };
         },
     };

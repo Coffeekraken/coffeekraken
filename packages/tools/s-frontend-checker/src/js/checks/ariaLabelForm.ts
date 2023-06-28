@@ -50,24 +50,14 @@ export default function (__SFrontendChecker: ISFrontendChecker) {
                             '<label>\n<input type="text" />\nEnter your name</label>',
                         moreLink:
                             'https://www.w3.org/WAI/ARIA/apg/practices/names-and-descriptions/',
-                        action: {
-                            label: () => `Log it`,
-                            handler: () => console.log($label),
-                        },
+                        elements: $labels,
                     };
                 }
             }
 
             return {
                 status: 'success',
-                action: {
-                    label: () => `Log them (${$labels.length})`,
-                    handler: () => {
-                        $labels.forEach(($label) => {
-                            console.log($label);
-                        });
-                    },
-                },
+                elements: $labels,
             };
         },
     };

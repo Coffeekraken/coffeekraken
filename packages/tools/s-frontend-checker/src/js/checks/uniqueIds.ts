@@ -42,15 +42,7 @@ export default function (__SFrontendChecker: ISFrontendChecker) {
                     message: null,
                     example: '<div id="hello">...</div>\n<a id="hello">...</a>',
                     moreLink: null,
-                    action: {
-                        label: () => `Log them (${$sameIds.length})`,
-                        // @ts-ignore
-                        handler: () => {
-                            $sameIds.forEach(($elm) => {
-                                console.log($elm);
-                            });
-                        },
-                    },
+                    elements: $sameIds,
                 };
             }
             return {

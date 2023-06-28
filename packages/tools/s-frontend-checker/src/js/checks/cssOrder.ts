@@ -53,10 +53,12 @@ export default function (__SFrontendChecker: ISFrontendChecker) {
                         '<link rel="stylesheet" href="..." />\n<script src="..."></script>',
                     moreLink:
                         'https://stackoverflow.com/questions/9271276/should-css-always-precede-javascript',
+                    elements: $styles,
                 };
             }
             return {
                 status: 'success',
+                elements: $styles,
             };
         },
     };

@@ -130,23 +130,13 @@ export default function (__SFrontendChecker: ISFrontendChecker) {
                     example: null,
                     moreLink:
                         'https://developer.chrome.com/docs/lighthouse/accessibility/interactive-element-affordance/',
-                    action: {
-                        label: () =>
-                            `Log them (${$nonVisualFocusElements.length})`,
-                        handler: () =>
-                            $nonVisualFocusElements.forEach(($elm) =>
-                                console.log($elm),
-                            ),
-                    },
+                    elements: $nonVisualFocusElements,
                 };
             }
 
             return {
                 status: 'success',
-                action: {
-                    label: () => `Log them (${$focusables.length})`,
-                    handler: () => console.log($focusables),
-                },
+                elements: $focusables,
             };
         },
     };

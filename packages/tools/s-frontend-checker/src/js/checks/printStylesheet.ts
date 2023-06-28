@@ -22,9 +22,11 @@ export default function (__SFrontendChecker: ISFrontendChecker) {
         category: __SFrontendChecker.CATEGORY_NICE_TO_HAVE,
         level: 2,
         check({ $context }) {
-            if (
-                !$context.querySelector('link[rel="stylesheet"][media="print"]')
-            ) {
+            const $printStyle = $context.querySelector(
+                'link[rel="stylesheet"][media="print"]',
+            );
+
+            if (!$printStyle) {
                 return {
                     status: 'warning',
                     message: null,
@@ -36,6 +38,7 @@ export default function (__SFrontendChecker: ISFrontendChecker) {
             }
             return {
                 status: 'success',
+                elements: $printStyle,
             };
         },
     };

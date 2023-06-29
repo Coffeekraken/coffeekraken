@@ -28,7 +28,8 @@ export default function (__SFrontendChecker: ISFrontendChecker) {
             if ($nav.length) {
                 return {
                     status: 'warning',
-                    message: null,
+                    message:
+                        'It\'s recommanded to add the `role="navigation"` attribute on your navs',
                     example: '<nav role="navigation">...</nav>',
                     moreLink: 'https://www.w3schools.com/tags/tag_nav.asp',
                     elements: $nav,

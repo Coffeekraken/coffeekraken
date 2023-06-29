@@ -29,7 +29,7 @@ export default function (__SFrontendChecker: ISFrontendChecker) {
             if (!$footer) {
                 return {
                     status: 'warning',
-                    message: null,
+                    message: 'Your page is missing a top level `<footer>` tag',
                     example: '<footer>...</footer>',
                     moreLink: 'https://www.w3schools.com/tags/tag_footer.asp',
                     action: null,

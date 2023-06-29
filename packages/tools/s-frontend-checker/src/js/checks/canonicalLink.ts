@@ -37,7 +37,7 @@ export default function (__SFrontendChecker: ISFrontendChecker) {
                 return {
                     status: __SFrontendChecker.STATUS_ERROR,
                     message: 'The `canonical` link `href` attribute is missing',
-                    example: `link rel="canonical" href="https://example.com/dresses/green-dresses" />`,
+                    example: `<link rel="canonical" href="https://example.com/dresses/green-dresses" />`,
                     moreLink:
                         'https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls',
                     elements: $canonicalLink,
@@ -50,7 +50,7 @@ export default function (__SFrontendChecker: ISFrontendChecker) {
                     message: `The \`canonical\` link "${$canonicalLink.getAttribute(
                         'href',
                     )}" is invalid`,
-                    example: `link rel="canonical" href="https://example.com/dresses/green-dresses" />`,
+                    example: `<link rel="canonical" href="https://example.com/dresses/green-dresses" />`,
                     moreLink:
                         'https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls',
                     elements: $canonicalLink,

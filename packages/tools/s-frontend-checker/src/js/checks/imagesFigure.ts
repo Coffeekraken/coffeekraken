@@ -29,7 +29,8 @@ export default function (__SFrontendChecker: ISFrontendChecker) {
             if ($noneFigureImgs.length) {
                 return {
                     status: 'warning',
-                    message: null,
+                    message:
+                        "It's recommanded to wrap your `<img />` tags into a `<figure>` one",
                     example:
                         '<figure>\n<img src="something.webp" alt="something">\n<figcaption>This is my image description...</figcaption>\n</figure>',
                     moreLink: 'https://www.w3schools.com/tags/att_img_alt.asp',

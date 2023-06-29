@@ -50,7 +50,7 @@ export default function (__SFrontendChecker: ISFrontendChecker) {
                     message: `The \`alternate\` link "${$alternateLink.getAttribute(
                         'href',
                     )}" is invalid`,
-                    example: `link rel="alternate" media="only screen and (max-width: 640px)" href="https://example.com/dresses/green-dresses" />`,
+                    example: `<link rel="alternate" media="only screen and (max-width: 640px)" href="https://example.com/dresses/green-dresses" />`,
                     moreLink:
                         'https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls',
                     elements: $alternateLink,
@@ -65,7 +65,7 @@ export default function (__SFrontendChecker: ISFrontendChecker) {
                     status: __SFrontendChecker.STATUS_ERROR,
                     message:
                         'The `alternate` link `hreflang`|`media` attribute is missing',
-                    example: `link rel="alternate" media="only screen and (max-width: 640px)" href="https://example.com/dresses/green-dresses" />`,
+                    example: `<link rel="alternate" media="only screen and (max-width: 640px)" href="https://example.com/dresses/green-dresses" />`,
                     moreLink:
                         'https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls',
                     elements: $alternateLink,

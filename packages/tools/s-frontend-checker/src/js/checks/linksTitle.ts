@@ -28,7 +28,8 @@ export default function (__SFrontendChecker: ISFrontendChecker) {
             if ($a.length) {
                 return {
                     status: 'warning',
-                    message: null,
+                    message:
+                        'Some links does not have a proper `title` attribute',
                     example:
                         '<a href="https://coffeekraken.io" title="Coffeekraken website">...</a>',
                     moreLink: 'https://www.w3schools.com/tags/tag_a.asp',

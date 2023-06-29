@@ -29,8 +29,9 @@ export default function (__SFrontendChecker: ISFrontendChecker) {
             if ($nonAltImages.length) {
                 return {
                     status: 'warning',
-                    message: null,
-                    example: '<img src="something.webp" alt="something">',
+                    message: 'Some images are missing the `alt` attribute',
+                    example:
+                        '<img src="something.webp" alt="Descriptive alternative text">',
                     moreLink: 'https://www.w3schools.com/tags/att_img_alt.asp',
                     elements: $nonAltImages,
                 };

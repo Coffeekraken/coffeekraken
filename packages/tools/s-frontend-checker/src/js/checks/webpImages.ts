@@ -29,7 +29,8 @@ export default function (__SFrontendChecker: ISFrontendChecker) {
             if ($nonWebpImages.length) {
                 return {
                     status: 'warning',
-                    message: null,
+                    message:
+                        "It's recommanded to provide images as `webp` format",
                     example: '<img src="something.webp" alt="...">',
                     moreLink: 'https://developers.google.com/speed/webp',
                     elements: $nonWebpImages,

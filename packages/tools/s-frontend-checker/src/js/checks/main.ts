@@ -27,7 +27,8 @@ export default function (__SFrontendChecker: ISFrontendChecker) {
             if (!$main) {
                 return {
                     status: 'warning',
-                    message: null,
+                    message:
+                        'Your page is missing a proper `<main>` tag to enclose correctly the content',
                     example: '<main id="content">...</main>',
                     moreLink: 'https://www.w3schools.com/tags/tag_main.asp',
                 };

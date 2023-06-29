@@ -29,7 +29,7 @@ export default function (__SFrontendChecker: ISFrontendChecker) {
             if ($i.length) {
                 return {
                     status: 'warning',
-                    message: null,
+                    message: `It's recommanded to not use the \`<i>\` tag. Use the \`<em>\` tag instead`,
                     example: '<em>...</em>',
                     moreLink: 'https://www.w3schools.com/tags/tag_em.asp',
                     elements: $i,

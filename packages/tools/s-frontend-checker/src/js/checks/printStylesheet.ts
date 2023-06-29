@@ -29,7 +29,8 @@ export default function (__SFrontendChecker: ISFrontendChecker) {
             if (!$printStyle) {
                 return {
                     status: 'warning',
-                    message: null,
+                    message:
+                        'Your page does not provide any `print` stylesheet',
                     example:
                         '<link rel="stylesheet" media="print" href="print.css" />',
                     moreLink:

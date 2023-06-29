@@ -31,10 +31,12 @@ export default function (__SFrontendChecker: ISFrontendChecker) {
                 // @ts-ignore
                 for (let [idx, $button] of $buttons.entries()) {
                     if (!$button.hasAttribute('aria-label')) {
-                        const innerText = $button.innerText.trim();
+                        const label =
+                            $button.getAttribute('value') ??
+                            $button.label.trim();
                         if (
-                            innerText === '' ||
-                            (innerText.split(' ') === 1 && innerText.length < 3)
+                            label === '' ||
+                            (label.split(' ') === 1 && label.length < 3)
                         ) {
                             return {
                                 status: 'warning',

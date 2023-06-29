@@ -29,7 +29,7 @@ export default function (__SFrontendChecker: ISFrontendChecker) {
             if (!$header) {
                 return {
                     status: 'warning',
-                    message: null,
+                    message: 'Your page is missing a top level `<header>` tag',
                     example: '<header>...</header>',
                     moreLink: 'https://www.w3schools.com/tags/tag_header.asp',
                     action: null,

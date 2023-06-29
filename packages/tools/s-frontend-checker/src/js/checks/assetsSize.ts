@@ -1,6 +1,5 @@
 import { __wait } from '@coffeekraken/sugar/datetime';
 import { __formatFileSize } from '@coffeekraken/sugar/format';
-import { __uniqid } from '@coffeekraken/sugar/string';
 import type { ISFrontendChecker } from '../types';
 
 /**
@@ -19,11 +18,11 @@ import type { ISFrontendChecker } from '../types';
 
 function getAssetSize(url, $context) {
     return new Promise(async (resolve) => {
-        const id = __uniqid();
-        window.fetchImageResolve = function () {
-            resolve(window.fetchedImageSize);
+        // const id = __uniqid();
+        window.fetchAssetResolve = function () {
+            resolve(window.fetchedAssetSize);
         };
-        console.log(`fetchImage:${id}:${url}`);
+        console.log(`fetchAsset:${url}`);
     });
 }
 
@@ -35,7 +34,6 @@ function _handleItem(item, globalObj, $context): Promise<void> {
         } else if (item.name.match(/\.(jpg|jpeg|png|gif|webp|avif)/)) {
             itemType = 'imgs';
         } else if (item.name.match(/\.(ts|js|tsx|jsx)/)) {
-            console.log('script', item.name, JSON.stringify(item, null, 2));
             itemType = 'scripts';
         } else if (item.name.match(/\.(mp4|avi|webm|mov)/)) {
             return resolve();
@@ -75,7 +73,7 @@ export default function (__SFrontendChecker: ISFrontendChecker) {
         description:
             'Check that the assets (images, styles, scripts, etc...) are not too heavy',
         level: 1,
-        async check({ $context }) {
+        async check({ $context, log }) {
             const globalObj = {
                 totalSize: 0,
                 totalSizeCompressed: 0,
@@ -103,6 +101,8 @@ export default function (__SFrontendChecker: ISFrontendChecker) {
 
             const items = [];
 
+            log('Gathering assets info from page...');
+
             const perf = (window.parent ?? window).performance;
             for (let [i, item] of perf.getEntriesByType('resource').entries()) {
                 items.push(item);
@@ -120,6 +120,7 @@ export default function (__SFrontendChecker: ISFrontendChecker) {
             await __wait(5000);
 
             for (let [i, item] of items.entries()) {
+                log(`Getting size for "${item.name}"`);
                 await _handleItem(item, globalObj, $context);
             }
 
@@ -164,7 +165,9 @@ export default function (__SFrontendChecker: ISFrontendChecker) {
                     ? 'red'
                     : 'green';
             messages.push(
-                `Images : <${imagesColor}>${__formatFileSize(
+                `<magenta>${
+                    globalObj.imgs.assets.length
+                }</magenta> images : <${imagesColor}>${__formatFileSize(
                     globalObj.imgs.totalSize,
                 )}</${imagesColor}>`,
             );
@@ -175,7 +178,9 @@ export default function (__SFrontendChecker: ISFrontendChecker) {
                     ? 'red'
                     : 'green';
             messages.push(
-                `Videos : <${videosColor}>${__formatFileSize(
+                `<magenta>${
+                    globalObj.videos.assets.length
+                }</magenta> videos : <${videosColor}>${__formatFileSize(
                     globalObj.videos.totalSize,
                 )}</${videosColor}>`,
             );
@@ -186,7 +191,9 @@ export default function (__SFrontendChecker: ISFrontendChecker) {
                     ? 'red'
                     : 'green';
             messages.push(
-                `Scripts: <${scriptsColor}>${__formatFileSize(
+                `<magenta>${
+                    globalObj.scripts.assets.length
+                }</magenta> scripts: <${scriptsColor}>${__formatFileSize(
                     globalObj.scripts.totalSize,
                 )}</${scriptsColor}>`,
             );
@@ -197,10 +204,20 @@ export default function (__SFrontendChecker: ISFrontendChecker) {
                     ? 'red'
                     : 'green';
             messages.push(
-                `Styles : <${linksColor}>${__formatFileSize(
+                `<magenta>${
+                    globalObj.links.assets.length
+                }</magenta> styles : <${linksColor}>${__formatFileSize(
                     globalObj.links.totalSize,
                 )}</${linksColor}>`,
             );
+
+            messages.push(
+                `Total  : <cyan>${__formatFileSize(
+                    globalObj.totalSize,
+                )}</cyan>`,
+            );
+
+            log('End of test');
 
             return {
                 status:

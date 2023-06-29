@@ -104,7 +104,7 @@ export default class SStdioBasicAdapter
     _loggedGroups: any = {};
     _logsStack: ISStdioBasicAdapterLogsContainer[] = [];
     log(logObj: ISLog) {
-        const logger = logObj.logger ?? _nativeConsole.log;
+        const logger = logObj.logger ?? process.stdout.write;
 
         // handle empty logs
         if (!logObj) {
@@ -142,20 +142,17 @@ export default class SStdioBasicAdapter
         }
 
         if (
-            logObj.clear &&
+            logObj.value.clear &&
             this._lastLogObj?.type !== __SLog.TYPE_WARN &&
             this._lastLogObj?.type !== __SLog.TYPE_ERROR
         ) {
-            if (typeof logObj.clear === 'number') {
+            if (typeof logObj.value.clear === 'number') {
                 // @ts-ignore
                 const toClear = this._lastLogLinesCountStack
-                    .slice(logObj.clear * -1)
+                    .slice(logObj.value.clear * -1)
                     .reduce((a, b) => a + b);
                 process.stdout.moveCursor(0, toClear * -1); // up one line
                 process.stdout.clearScreenDown();
-                // for (let i = 0; i < toClear; i++) {
-                //     process.stdout.clearLine(1); // clear current line
-                // }
             } else {
                 process.stdout.moveCursor(
                     0,

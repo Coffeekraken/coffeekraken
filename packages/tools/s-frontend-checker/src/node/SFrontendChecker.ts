@@ -1,6 +1,7 @@
 // @ts-nocheck
 
 import __SPromise from '@coffeekraken/s-promise';
+import { __splitEvery } from '@coffeekraken/sugar/string';
 import puppeteer from 'puppeteer';
 import __SFrontendChecker from '../shared/SFrontendChecker';
 
@@ -91,6 +92,143 @@ export default class SFrontendChecker
             finalParams.url = `https://${finalParams.url}`;
         }
 
+        const span = 25;
+        function pan(str) {
+            let finalStr = str.trim();
+
+            const cleanedStr = finalStr
+                .replace(/<\/?[a-zA-Z0-9]+>/gm, '')
+                .replace(/\%space/gm, '');
+
+            if (!cleanedStr) {
+                return ' '.repeat(span - 2);
+            }
+
+            finalStr = finalStr.replace(
+                /\s?\%space\s?/,
+                ' '.repeat(span - cleanedStr.length),
+            );
+
+            return finalStr;
+        }
+
+        function processLine(str: string): string {
+            return str
+                .replace(/\|/gm, '<grey>│</grey>')
+                .replace(
+                    '---',
+                    `<grey>${`⎯`.repeat(process.stdout.columns - 4)}</grey>`,
+                );
+        }
+
+        let lastCheckName,
+            lastCheckLines = 0;
+        function logCheck(checkObj) {
+            // exclude all non SFrontendChecker related logs
+            if (typeof checkObj === 'string' && !checkObj.startsWith?.('!')) {
+                return;
+            }
+
+            if (typeof checkObj === 'string' && checkObj.startsWith('!')) {
+                console.log(processLine(checkObj.replace(/^\!/, '')));
+                return;
+            }
+
+            let statusColor = 'yellow';
+            if (checkObj.result?.status) {
+                switch (checkObj.result.status) {
+                    case SFrontendChecker.STATUS_ERROR:
+                        statusColor = 'red';
+                        break;
+                    case SFrontendChecker.STATUS_WARNING:
+                        statusColor = 'yellow';
+                        break;
+                    case SFrontendChecker.STATUS_SUCCESS:
+                        statusColor = 'green';
+                        break;
+                }
+            }
+
+            if (
+                lastCheckName &&
+                lastCheckName === checkObj.name &&
+                lastCheckLines
+            ) {
+                process.stdout.moveCursor(0, lastCheckLines * -1);
+                process.stdout.cursorTo(0);
+                process.stdout.clearScreenDown();
+            }
+
+            let value = checkObj.description ?? '';
+
+            if (
+                checkObj.result &&
+                checkObj.result.status !== SFrontendChecker.STATUS_SUCCESS
+            ) {
+                value = [checkObj.result.message];
+                if (checkObj.result.example) {
+                    value = [
+                        ...value,
+                        ' ',
+                        '<grey>Example</grey>',
+                        checkObj.result.example,
+                    ];
+                }
+                if (checkObj.result.moreLink) {
+                    value = [
+                        ...value,
+                        ' ',
+                        '<grey>More</grey>',
+                        `<cyan>${checkObj.result.moreLink}</cyan>`,
+                    ];
+                }
+                value = value.join('\n');
+            }
+
+            let lines = value.split('\n');
+
+            if (checkObj.logs.length) {
+                lines = [...lines, ` `, `${checkObj.logs.pop()}`];
+            }
+
+            let finalLines: string[] = [];
+            lines.forEach((line) => {
+                const lns = __splitEvery(
+                    line,
+                    process.stdout.columns - 4 - 4 - span,
+                );
+                finalLines = [...finalLines, ...(lns ?? [])];
+            });
+            // console.log(finalLines);
+            let clearLines = 0;
+            if (
+                lastCheckName &&
+                lastCheckName !== checkObj.name &&
+                lastCheckLines
+            ) {
+                clearLines = lastCheckLines;
+            }
+            console.log(
+                processLine(
+                    `${pan(
+                        `<${statusColor}>${checkObj.name}</${statusColor}> %space`,
+                    )} | ${finalLines[0]}`,
+                ),
+            );
+            for (let i = 0; i < finalLines.length; i++) {
+                if (i === 0) continue;
+                console.log(
+                    processLine(`${pan(`%space`)}  | ${finalLines[i]}`),
+                );
+            }
+
+            console.log(processLine('---'));
+
+            // update last check name
+            lastCheckName = checkObj.name;
+            lastCheckLines = finalLines.length + 1;
+        }
+
         return new __SPromise(async ({ resolve, emit }) => {
             const browser = await puppeteer.launch({
                 headless: 'new',
@@ -106,59 +244,97 @@ export default class SFrontendChecker
                 content: `window.isPuppeteer = true;`,
             });
 
-            page.on('console', async (msg) => {
-                let str = msg.text();
+            let lastLogLines = 0;
+            page.on('console', async (checkObjOrString) => {
+                let str = checkObjOrString.text();
 
-                str = str.replace(/\|/gm, '<grey>│</grey>');
-
-                const fetchImagesMatches = str.match(
-                    /^fetchImage:([a-zA-Z0-9_-]+):(.*)/,
-                );
-                if (fetchImagesMatches?.[2]) {
-                    const fetchImageId = fetchImagesMatches[1],
-                        fetchImageUrl = fetchImagesMatches[2];
+                const fetchAssetsMatches = str.match(/^fetchAsset:(.*)/);
+                if (fetchAssetsMatches?.[1]) {
+                    const fetchAssetUrl = fetchAssetsMatches[1];
 
                     let length = 0;
 
-                    if (fetchImageUrl.match(/\.(css|js|ts|jsx|tsx)/)) {
-                        const request = await fetch(fetchImageUrl, {
-                            method: 'GET',
-                        });
-                        length = 0;
-
-                        console.log('LEN', request);
-                    } else {
-                        const request = await fetch(fetchImageUrl, {
+                    // try head request first
+                    const headController = new AbortController();
+                    const headTimeoutId = setTimeout(
+                        () => headController.abort(),
+                        3000,
+                    );
+                    try {
+                        const headRequest = await fetch(fetchAssetUrl, {
                             method: 'HEAD',
+                            signal: headController.signal,
                         });
-                        length = await request.headers.get('content-length');
+                        length = await headRequest.headers.get(
+                            'content-length',
+                        );
+                    } catch (error) {
+                        // console.log(error);
+                    } finally {
+                        clearTimeout(headTimeoutId);
+                    }
+
+                    if (!length) {
+                        const getController = new AbortController();
+                        const getTimeoutId = setTimeout(
+                            () => getController.abort(),
+                            3000,
+                        );
+                        try {
+                            const getRequest = await fetch(fetchAssetUrl, {
+                                method: 'GET',
+                                signal: getController.signal,
+                            });
+                            length =
+                                getRequest.headers.get('content-length') ??
+                                (await getRequest.blob()).size;
+                        } catch (error) {
+                            // console.log(error);
+                        } finally {
+                            clearTimeout(getTimeoutId);
+                        }
                     }
 
                     await page.addScriptTag({
-                        content: `window.fetchedImageSize = ${length};`,
+                        content: `window.fetchedAssetSize = ${length};`,
                     });
                     await page.evaluate(() => {
-                        window.fetchImageResolve();
+                        window.fetchAssetResolve();
                     });
                     return;
                 }
 
-                switch (str) {
-                    case '---':
-                        console.log(
-                            `<grey>${`⎯`.repeat(
-                                process.stdout.columns - 4,
-                            )}</grey>`,
-                        );
-                        break;
-                    default:
-                        str = str.replace(
-                            /\`(.*)\`/gm,
-                            `<magenta>$1</magenta>`,
-                        );
-                        console.log(str);
-                        break;
-                }
+                // try to parse json.
+                // if worked, means that it's an object from the SFrontendChecker package
+                try {
+                    const json = JSON.parse(str);
+                    if (json.name) {
+                        logCheck(json);
+                    }
+                    return;
+                } catch (e) {}
+
+                logCheck(str);
+
+                // // filter only frontend checker logs
+                // if (!str.startsWith('!') && !str.startsWith('fetchAsset')) {
+                //     return;
+                // }
+
+                // // clean the previous line
+                // if (str === '!%clearLine') {
+                //     console.log('\u001b[1A\u001b[2K\u001b[1A');
+                //     return;
+                // }
+                // // clean the last log
+                // if (str === '!%clearLast') {
+                //     for (let i = 0; i < lastLogLines; i++) {
+                //         console.log('\u001b[1A\u001b[2K\u001b[1A');
+                //     }
+                //     return;
+                // }
+
+                // str = str.replace(/^!/, '').replace(/\|/gm, '<grey>│</grey>');
             });
 
             // const body = await page.evaluateHandle(() => {
@@ -171,12 +347,23 @@ export default class SFrontendChecker
             });
 
             await page.evaluate(() => {
-                const span = 30;
-                function pan(str) {
-                    const cleanedStr = str.replace(/<\/?[a-zA-Z0-9]+>/gm, '');
-                    if (cleanedStr.length >= span) return str;
-                    return `${str}${' '.repeat(span - cleanedStr.length)}`;
-                }
+                const log = function (obj) {
+                    try {
+                        const json = JSON.stringify(obj);
+                        console.log(json);
+                    } catch (e) {}
+
+                    // if (!str.match(/\|/)) {
+                    //     console.log(`!${str}`);
+                    //     return;
+                    // }
+
+                    // const parts = str.split('|'),
+                    //     label = parts[0].trim(),
+                    //     value = parts[1]?.trim?.() ?? '';
+
+                    // console.log(`!${pan(label)} | ${value}`);
+                };
 
                 return new Promise((resolve) => {
                     const checker = new SFrontendChecker();
@@ -187,103 +374,36 @@ export default class SFrontendChecker
 
                     pro.on(
                         'checks.start',
-                        (checksResult: ISFrontendCheckerCheckResult) => {
-                            console.log('Launching tests...');
+                        (checksResult: ISFrontendCheckerCheckResult) => {},
+                    );
+                    pro.on(
+                        'check.log',
+                        (checkObj: ISFrontendCheckerCheckObj) => {
+                            log(checkObj);
                         },
                     );
                     pro.on(
                         'check.start',
                         (checkObj: ISFrontendCheckerCheckObj) => {
-                            console.log('---');
+                            log(checkObj);
                         },
                     );
                     pro.on(
                         'check.complete',
                         (checkObj: ISFrontendCheckerCheckObj) => {
-                            const color =
-                                checkObj.result?.status ===
-                                SFrontendChecker.STATUS_ERROR
-                                    ? 'red'
-                                    : checkObj.result?.status ===
-                                      SFrontendChecker.STATUS_WARNING
-                                    ? 'yellow'
-                                    : 'green';
-                            console.log(
-                                `<${color}>${pan(
-                                    `${checkObj.name}`,
-                                )}</${color}>${`<cyan>${
-                                    checkObj.duration.formatedDuration
-                                }</cyan> | ${
-                                    checkObj.result?.message ??
-                                    checkObj.description
-                                }`}`,
-                            );
-                            console.log(`${pan(' ')}    |`);
-                            if (
-                                checkObj.result.status !==
-                                SFrontendChecker.STATUS_SUCCESS
-                            ) {
-                                if (checkObj.result.example) {
-                                    console.log(
-                                        `${pan(
-                                            ' ',
-                                        )}    | <yellow>Example</yellow>:`,
-                                    );
-                                    checkObj.result.example
-                                        .split('\n')
-                                        .map((line) => {
-                                            console.log(
-                                                `${pan(' ')}    | ${line}`,
-                                            );
-                                        });
-                                    console.log(`${pan(' ')}    |`);
-                                }
-                                if (checkObj.result.elements?.length) {
-                                    console.log(
-                                        `${pan(
-                                            ' ',
-                                        )}    | <yellow>Elements</yellow>:`,
-                                    );
-                                    checkObj.result.elements.forEach(($elm) => {
-                                        const $newElm = $elm.cloneNode();
-                                        $newElm.innerHTML = '';
-                                        const elementStr = $newElm.outerHTML;
-                                        elementStr.split('\n').map((line) => {
-                                            console.log(
-                                                `${pan(' ')}    | ${line}`,
-                                            );
-                                        });
-                                    });
-                                    console.log(`${pan(' ')}    |`);
-                                }
-                                if (checkObj.result.moreLink) {
-                                    console.log(
-                                        `${pan(
-                                            ' ',
-                                        )}    | <yellow>More info</yellow>: ${
-                                            checkObj.result.moreLink
-                                        }`,
-                                    );
-                                    console.log(`${pan(' ')}    |`);
-                                }
-                            }
+                            log(checkObj);
                         },
                     );
                     pro.on(
                         'checks.complete',
                         (checksResult: ISFrontendCheckerCheckResult) => {
-                            console.log('---');
                             console.log(
-                                `${pan(
-                                    '<magenta>Executed</magenta> tests',
-                                )}    | <magenta>${
+                                `!<magenta>Executed</magenta> tests           <grey>:</grey> <magenta>${
                                     Object.keys(checksResult.checks).length
                                 }</magenta>`,
                             );
                             console.log(
-                                `${pan(
-                                    '<green>Successfull</green> tests',
-                                )}    | <green>${
+                                `!<green>Successfull</green> tests        <grey>:</grey> <green>${
                                     Object.keys(checksResult.checks).filter(
                                         (checkId) => {
                                             if (
@@ -299,9 +419,7 @@ export default class SFrontendChecker
                                 }</green>`,
                             );
                             console.log(
-                                `${pan(
-                                    '<yellow>Warning</yellow> tests',
-                                )}    | <yellow>${
+                                `!<yellow>Warning</yellow> tests            <grey>:</grey> <yellow>${
                                     Object.keys(checksResult.checks).filter(
                                         (checkId) => {
                                             if (
@@ -317,7 +435,7 @@ export default class SFrontendChecker
                                 }</yellow>`,
                             );
                             console.log(
-                                `${pan('<red>Error</red> tests')}    | <red>${
+                                `!<red>Error</red> tests              <grey>:</grey> <red>${
                                     Object.keys(checksResult.checks).filter(
                                         (checkId) => {
                                             if (
@@ -332,7 +450,7 @@ export default class SFrontendChecker
                                     ).length
                                 }</red>`,
                             );
-                            console.log('---');
+                            console.log('!---');
                             const scoreColor =
                                 checksResult.score >= 66
                                     ? 'green'
@@ -340,11 +458,7 @@ export default class SFrontendChecker
                                     ? 'yellow'
                                     : 'red';
                             console.log(
-                                `${pan(
-                                    'Front<yellow>score</yellow>',
-                                )}    | <${scoreColor}>${
-                                    checksResult.score
-                                }</${scoreColor}>`,
+                                `!Front<yellow>score</yellow>               <grey>:</grey> <${scoreColor}>${checksResult.score}</${scoreColor}><grey>/100</grey>`,
                             );
 
                             resolve(checksResult);

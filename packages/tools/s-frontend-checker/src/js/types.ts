@@ -37,6 +37,7 @@ export interface ISFrontendCheckerCheckObj {
     level: number;
     check: Function;
     lazy: boolean;
+    logs?: string[];
     result?: ISFrontendCheckerCheckResult;
     duration?: ISDurationObject;
     isChecking: boolean;

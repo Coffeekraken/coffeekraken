@@ -263,6 +263,7 @@ export default class SFrontendChecker
                         delete checkObj.result;
                         checkObj.duration = null;
                         checkObj.isChecking = true;
+                        checkObj.logs = [];
                         // emit start event
                         promise.emit('start', checkObj);
                         emit('check.start', checkObj);
@@ -270,6 +271,11 @@ export default class SFrontendChecker
                         const checkResult: ISFrontendCheckerCheckCheckResult =
                             await originalCheckFn({
                                 $context: finalParams.$context,
+                                log: (...args) => {
+                                    checkObj.logs = [...checkObj.logs, ...args];
+                                    promise.emit('log', checkObj);
+                                    emit('check.log', checkObj);
+                                },
                                 settings: set,
                             });
                         // update the points

@@ -1,5 +1,0 @@
-import __SRatingComponent from './SRatingComponent';
-export default function define(props = {}, tagName = 's-rating', settings) {
-    __SRatingComponent.define(tagName, __SRatingComponent, props, settings);
-}
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUVBLE9BQU8sa0JBQWtCLE1BQU0sb0JBQW9CLENBQUM7QUFFcEQsTUFBTSxDQUFDLE9BQU8sVUFBVSxNQUFNLENBQzFCLFFBQXlDLEVBQUUsRUFDM0MsT0FBTyxHQUFHLFVBQVUsRUFDcEIsUUFBdUM7SUFFdkMsa0JBQWtCLENBQUMsTUFBTSxDQUFDLE9BQU8sRUFBRSxrQkFBa0IsRUFBRSxLQUFLLEVBQUUsUUFBUSxDQUFDLENBQUM7QUFDNUUsQ0FBQyJ9

@@ -1,4 +1,0 @@
-import __SLitComponent from './SLitComponent';
-export * from './SLitComponent';
-export default __SLitComponent;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sZUFBZSxNQUFNLGlCQUFpQixDQUFDO0FBRTlDLGNBQWMsaUJBQWlCLENBQUM7QUFDaEMsZUFBZSxlQUFlLENBQUMifQ==

@@ -1,4 +1,0 @@
-import __vitePluginSvelte from '@sveltejs/vite-plugin-svelte';
-import __SugarConfig from '@coffeekraken/s-sugar-config';
-export default __vitePluginSvelte(__SugarConfig.get('svelte'));
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sa0JBQWtCLE1BQU0sOEJBQThCLENBQUM7QUFDOUQsT0FBTyxhQUFhLE1BQU0sOEJBQThCLENBQUM7QUFDekQsZUFBZSxrQkFBa0IsQ0FBQyxhQUFhLENBQUMsR0FBRyxDQUFDLFFBQVEsQ0FBQyxDQUFDLENBQUMifQ==

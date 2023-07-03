@@ -1,6 +1,0 @@
-import __SScrollComponent from './SScrollComponent';
-import __define from './define';
-export * from './SScrollComponent';
-export { __define };
-export default __SScrollComponent;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sa0JBQWtCLE1BQU0sb0JBQW9CLENBQUM7QUFDcEQsT0FBTyxRQUFRLE1BQU0sVUFBVSxDQUFDO0FBRWhDLGNBQWMsb0JBQW9CLENBQUM7QUFDbkMsT0FBTyxFQUFFLFFBQVEsRUFBRSxDQUFDO0FBQ3BCLGVBQWUsa0JBQWtCLENBQUMifQ==

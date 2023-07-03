@@ -1,3 +1,0 @@
-import __detectProjectType from './detectProjectType';
-export { __detectProjectType };
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sbUJBQW1CLE1BQU0scUJBQXFCLENBQUM7QUFFdEQsT0FBTyxFQUFFLG1CQUFtQixFQUFFLENBQUMifQ==

@@ -1,5 +1,0 @@
-import __SInlineFeature from './SInlineFeature';
-export default function define(props = {}, name = 's-inline') {
-    __SInlineFeature.define(name, __SInlineFeature, props);
-}
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUNBLE9BQU8sZ0JBQWdCLE1BQU0sa0JBQWtCLENBQUM7QUFFaEQsTUFBTSxDQUFDLE9BQU8sVUFBVSxNQUFNLENBQzFCLFFBQXVDLEVBQUUsRUFDekMsSUFBSSxHQUFHLFVBQVU7SUFFakIsZ0JBQWdCLENBQUMsTUFBTSxDQUFDLElBQUksRUFBRSxnQkFBZ0IsRUFBRSxLQUFLLENBQUMsQ0FBQztBQUMzRCxDQUFDIn0=

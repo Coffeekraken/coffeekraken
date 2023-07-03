@@ -1,6 +1,0 @@
-import __SWysiwygComponent from './SWysiwygComponent';
-import __define from './define';
-export * from './SWysiwygComponent';
-export { __define };
-export default __SWysiwygComponent;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sbUJBQW1CLE1BQU0scUJBQXFCLENBQUM7QUFDdEQsT0FBTyxRQUFRLE1BQU0sVUFBVSxDQUFDO0FBRWhDLGNBQWMscUJBQXFCLENBQUM7QUFDcEMsT0FBTyxFQUFFLFFBQVEsRUFBRSxDQUFDO0FBQ3BCLGVBQWUsbUJBQW1CLENBQUMifQ==

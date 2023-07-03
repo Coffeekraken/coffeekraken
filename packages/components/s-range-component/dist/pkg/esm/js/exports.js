@@ -1,6 +1,0 @@
-import __SRangeComponent from './SRangeComponent';
-import __define from './define';
-export * from './SRangeComponent';
-export { __define };
-export default __SRangeComponent;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8saUJBQWlCLE1BQU0sbUJBQW1CLENBQUM7QUFDbEQsT0FBTyxRQUFRLE1BQU0sVUFBVSxDQUFDO0FBRWhDLGNBQWMsbUJBQW1CLENBQUM7QUFDbEMsT0FBTyxFQUFFLFFBQVEsRUFBRSxDQUFDO0FBQ3BCLGVBQWUsaUJBQWlCLENBQUMifQ==

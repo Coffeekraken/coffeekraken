@@ -1,6 +1,0 @@
-import __SGoogleMapComponent from './SGoogleMapComponent';
-import __define from './define';
-export * from './SGoogleMapComponent';
-export { __define };
-export default __SGoogleMapComponent;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8scUJBQXFCLE1BQU0sdUJBQXVCLENBQUM7QUFDMUQsT0FBTyxRQUFRLE1BQU0sVUFBVSxDQUFDO0FBRWhDLGNBQWMsdUJBQXVCLENBQUM7QUFDdEMsT0FBTyxFQUFFLFFBQVEsRUFBRSxDQUFDO0FBQ3BCLGVBQWUscUJBQXFCLENBQUMifQ==

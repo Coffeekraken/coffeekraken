@@ -1,9 +1,0 @@
-import __SStdio from '../shared/SStdio';
-import __SStdioBasicAdapter from './adapters/SStdioBasicAdapter';
-import __SStdioNotificationAdapter from './adapters/SStdioNotificationAdapter';
-export * from '../shared/exports';
-export * from './adapters/SStdioBasicAdapter';
-export * from './adapters/SStdioNotificationAdapter';
-export { __SStdioBasicAdapter, __SStdioNotificationAdapter };
-export default __SStdio;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sUUFBUSxNQUFNLGtCQUFrQixDQUFDO0FBQ3hDLE9BQU8sb0JBQW9CLE1BQU0sK0JBQStCLENBQUM7QUFDakUsT0FBTywyQkFBMkIsTUFBTSxzQ0FBc0MsQ0FBQztBQUUvRSxjQUFjLG1CQUFtQixDQUFDO0FBQ2xDLGNBQWMsK0JBQStCLENBQUM7QUFDOUMsY0FBYyxzQ0FBc0MsQ0FBQztBQUNyRCxPQUFPLEVBQUUsb0JBQW9CLEVBQUUsMkJBQTJCLEVBQUUsQ0FBQztBQUM3RCxlQUFlLFFBQVEsQ0FBQyJ9

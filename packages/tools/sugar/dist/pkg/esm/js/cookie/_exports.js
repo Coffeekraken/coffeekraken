@@ -1,5 +1,0 @@
-import __deleteCookie from './deleteCookie';
-import __getCookie from './getCookie';
-import __setCookie from './setCookie';
-export { __deleteCookie, __setCookie, __getCookie };
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sY0FBYyxNQUFNLGdCQUFnQixDQUFDO0FBQzVDLE9BQU8sV0FBVyxNQUFNLGFBQWEsQ0FBQztBQUN0QyxPQUFPLFdBQVcsTUFBTSxhQUFhLENBQUM7QUFFdEMsT0FBTyxFQUFFLGNBQWMsRUFBRSxXQUFXLEVBQUUsV0FBVyxFQUFFLENBQUMifQ==

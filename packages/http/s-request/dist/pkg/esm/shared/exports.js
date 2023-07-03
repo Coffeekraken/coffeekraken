@@ -1,6 +1,0 @@
-import SRequest from './SRequest';
-import SRequestParamsInterface from './interface/SRequestParamsInterface';
-export { SRequestParamsInterface };
-export * from './SRequest';
-export default SRequest;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sUUFBUSxNQUFNLFlBQVksQ0FBQztBQUNsQyxPQUFPLHVCQUF1QixNQUFNLHFDQUFxQyxDQUFDO0FBRTFFLE9BQU8sRUFBRSx1QkFBdUIsRUFBRSxDQUFDO0FBQ25DLGNBQWMsWUFBWSxDQUFDO0FBQzNCLGVBQWUsUUFBUSxDQUFDIn0=

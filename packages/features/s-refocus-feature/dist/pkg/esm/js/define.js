@@ -1,5 +1,0 @@
-import __SRefocusFeature from './SRefocusFeature';
-export default function define(props = {}, name = 's-refocus') {
-    __SRefocusFeature.define(name, __SRefocusFeature, Object.assign({}, props));
-}
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUNBLE9BQU8saUJBQWlCLE1BQU0sbUJBQW1CLENBQUM7QUFFbEQsTUFBTSxDQUFDLE9BQU8sVUFBVSxNQUFNLENBQzFCLFFBQXdDLEVBQUUsRUFDMUMsSUFBSSxHQUFHLFdBQVc7SUFFbEIsaUJBQWlCLENBQUMsTUFBTSxDQUFDLElBQUksRUFBRSxpQkFBaUIsb0JBQ3pDLEtBQUssRUFDVixDQUFDO0FBQ1AsQ0FBQyJ9

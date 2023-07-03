@@ -1,5 +1,0 @@
-import __SPageTransitionFeature from './SPageTransitionFeature';
-export default function define(props = {}, name = 's-page-transition') {
-    __SPageTransitionFeature.define(name, __SPageTransitionFeature, Object.assign({}, props));
-}
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUNBLE9BQU8sd0JBQXdCLE1BQU0sMEJBQTBCLENBQUM7QUFFaEUsTUFBTSxDQUFDLE9BQU8sVUFBVSxNQUFNLENBQzFCLFFBQStDLEVBQUUsRUFDakQsSUFBSSxHQUFHLG1CQUFtQjtJQUUxQix3QkFBd0IsQ0FBQyxNQUFNLENBQUMsSUFBSSxFQUFFLHdCQUF3QixvQkFDdkQsS0FBSyxFQUNWLENBQUM7QUFDUCxDQUFDIn0=

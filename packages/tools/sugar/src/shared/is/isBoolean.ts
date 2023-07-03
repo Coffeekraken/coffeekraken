@@ -1,5 +1,3 @@
-// @ts-nocheck
-
 /**
  * @name        isBoolean
  * @namespace            shared.is

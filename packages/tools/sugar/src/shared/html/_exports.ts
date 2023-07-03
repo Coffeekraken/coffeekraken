@@ -11,5 +11,6 @@ export {
     __extractCssClassesNames,
     __replaceTags,
     __stripTags,
-    __unescapeHtml,
+    __unescapeHtml
 };
+

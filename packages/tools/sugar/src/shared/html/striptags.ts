@@ -23,7 +23,7 @@ import __stripTags from 'striptags';
  * @todo      tests
  *
  * @snippet         __stripTags($1)
- * 
+ *
  * @example    js
  * import { __stripTags } from '@coffeekraken/sugar/html'
  * __stripTags('<p><span>Hello</span> world</p>', '<span>') // <span>Hello</span> world

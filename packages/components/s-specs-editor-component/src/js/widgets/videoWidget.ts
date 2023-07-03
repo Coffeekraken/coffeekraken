@@ -3,7 +3,7 @@ import { unsafeHTML } from 'lit/directives/unsafe-html.js';
 
 import { __i18n } from '@coffeekraken/s-i18n';
 
-import type { ISVideoData, ISVideoFormat } from '@specimen/types';
+import type { ISVideoData, ISVideoFormat } from '@specim3n/types';
 
 import type { ISSpecsEditorWidgetDeps } from '../SSpecsEditorWidget';
 import __SSpecsEditorWidget from '../SSpecsEditorWidget';

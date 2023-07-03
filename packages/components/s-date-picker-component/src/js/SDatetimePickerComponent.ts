@@ -13,7 +13,7 @@ import __SDatetimePickerComponentInterface from './interface/SDatetimePickerComp
 
 import type { __ISDatetime } from '@coffeekraken/sugar';
 
-import { __SDatetime } from '@specimen/types/utils';
+import { __SDatetime } from '@specim3n/types/utils';
 
 // @ts-ignore
 import __css from '../../../../src/css/s-datetime-picker.css'; // relative to /dist/pkg/esm/js

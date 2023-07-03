@@ -1,7 +1,7 @@
 import type { __ISDatetime } from '@coffeekraken/sugar';
 import { html } from 'lit';
 
-import { __SDatetime } from '@specimen/types/utils';
+import { __SDatetime } from '@specim3n/types/utils';
 
 import type { ISSpecsEditorWidgetDeps } from '../SSpecsEditorWidget';
 import __SSpecsEditorWidget from '../SSpecsEditorWidget';

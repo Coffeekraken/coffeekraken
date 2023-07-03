@@ -1,6 +1,6 @@
 import { html } from 'lit';
 
-import type { ISLayoutData } from '@specimen/types';
+import type { ISLayoutData } from '@specim3n/types';
 
 import __SMedia from '@coffeekraken/s-media';
 import { __upperFirst } from '@coffeekraken/sugar/string';

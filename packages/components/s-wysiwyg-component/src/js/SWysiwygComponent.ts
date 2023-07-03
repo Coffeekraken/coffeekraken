@@ -7,7 +7,7 @@ import { __deepMerge } from '@coffeekraken/sugar/object';
 import { css, html, unsafeCSS } from 'lit';
 import __SWysiwygComponentInterface from './interface/SWysiwygComponentInterface';
 
-import type { ISWysiwygData } from '@specimen/types';
+import type { ISWysiwygData } from '@specim3n/types';
 
 import { __i18n } from '@coffeekraken/s-i18n';
 

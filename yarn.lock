@@ -1603,7 +1603,7 @@ __metadata:
     "@coffeekraken/s-vite": ^2.0.0-alpha.27
     "@coffeekraken/s-wysiwyg-component": ^2.0.0-alpha.27
     "@coffeekraken/sugar": ^2.0.0-alpha.27
-    "@specimen/types": ^1.0.0-alpha.1
+    "@specim3n/types": ^1.0.0-alpha.1
     "@vitejs/plugin-vue": ^3.1.2
     body-parser: ^1.20.2
     chokidar: ^3.5.3
@@ -1868,7 +1868,7 @@ __metadata:
     "@coffeekraken/s-lit-component": ^2.0.0-alpha.27
     "@coffeekraken/s-theme": ^2.0.0-alpha.27
     "@coffeekraken/sugar": ^2.0.0-alpha.27
-    "@specimen/types": ^1.0.0-alpha.1
+    "@specim3n/types": ^1.0.0-alpha.1
     date-format-parse: ^0.2.7
     dateformat: ^5.0.3
     lit: ^2.2.8
@@ -3126,7 +3126,7 @@ __metadata:
     "@coffeekraken/s-lit-component": ^2.0.0-alpha.27
     "@coffeekraken/s-theme": ^2.0.0-alpha.27
     "@coffeekraken/sugar": ^2.0.0-alpha.27
-    "@specimen/types": ^1.0.0-alpha.1
+    "@specim3n/types": ^1.0.0-alpha.1
     lit: ^2.2.8
   languageName: unknown
   linkType: soft
@@ -3148,7 +3148,7 @@ __metadata:
     "@coffeekraken/s-theme": ^2.0.0-alpha.27
     "@coffeekraken/sugar": ^2.0.0-alpha.27
     "@floating-ui/dom": ^0.5.4
-    "@specimen/types": ^1.0.0-alpha.1
+    "@specim3n/types": ^1.0.0-alpha.1
     "@types/blessed": ^0.1.19
     abstract-syntax-tree: ^2.20.6
     acorn-loose: ^8.3.0
@@ -5637,9 +5637,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@specimen/types@^1.0.0-alpha.1, @specimen/types@workspace:packages/@specimen/types":
+"@specim3n/types@^1.0.0-alpha.1, @specim3n/types@workspace:packages/@specim3n/types":
   version: 0.0.0-use.local
-  resolution: "@specimen/types@workspace:packages/@specimen/types"
+  resolution: "@specim3n/types@workspace:packages/@specim3n/types"
   dependencies:
     "@coffeekraken/s-color": ^2.0.0-alpha.27
   languageName: unknown

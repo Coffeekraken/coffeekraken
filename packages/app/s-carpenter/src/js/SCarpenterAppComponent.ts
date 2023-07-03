@@ -2117,7 +2117,7 @@ export default class SCarpenterAppComponent extends __SLitComponent {
 
     /**
      * This method takes all the content from the page and save it through the adapter(s)
-     * by respecting the ISPage interface available in the @specimen/types package.
+     * by respecting the ISPage interface available in the @specim3n/types package.
      */
     async _savePage(): Promise<void> {
         // go grab all the s-container elements in the website

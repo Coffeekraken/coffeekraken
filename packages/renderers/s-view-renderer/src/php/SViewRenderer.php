@@ -321,7 +321,7 @@ class SViewRenderer
                     }
                 }
 
-                // load the node data. See @specimen/specimen ISRenderableNode type
+                // load the node data. See @specim3n/specimen ISRenderableNode type
                 if (is_callable($nodeLoader)) {
                     $renderableNode = $nodeLoader($node);
                 }

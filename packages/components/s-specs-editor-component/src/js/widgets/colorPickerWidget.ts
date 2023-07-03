@@ -1,7 +1,7 @@
 import { html } from 'lit';
 
-import type { ISColorData } from '@specimen/types';
-import { __SColor } from '@specimen/types/utils';
+import type { ISColorData } from '@specim3n/types';
+import { __SColor } from '@specim3n/types/utils';
 
 import type { ISSpecsEditorWidgetDeps } from '../SSpecsEditorWidget';
 import __SSpecsEditorWidget from '../SSpecsEditorWidget';

@@ -7,7 +7,7 @@
  * @platform        php
  * @status          beta
  *
- * A simple class to handle the media (queries) like methods like buildQuery, layoutCss, etc... All of this on top of the @specimen/types ISMedia type and the @coffeekraken/s-frontspec package
+ * A simple class to handle the media (queries) like methods like buildQuery, layoutCss, etc... All of this on top of the @specim3n/types ISMedia type and the @coffeekraken/s-frontspec package
  *
  * @param       {String|Object}             [$media='frontspec']                      Either an ISMedia object, or 'frontspec' if you want them to be loaded from your frontspec.json file
  * @param       {Object|Array}              [$settings=[]]              Some settings to configure your SMedia instance

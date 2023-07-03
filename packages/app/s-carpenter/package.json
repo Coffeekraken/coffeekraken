@@ -30,7 +30,7 @@
         "@coffeekraken/s-vite": "^2.0.0-alpha.27",
         "@coffeekraken/s-wysiwyg-component": "^2.0.0-alpha.27",
         "@coffeekraken/sugar": "^2.0.0-alpha.27",
-        "@specimen/types": "^1.0.0-alpha.1",
+        "@specim3n/types": "^1.0.0-alpha.1",
         "@vitejs/plugin-vue": "^3.1.2",
         "body-parser": "^1.20.2",
         "chokidar": "^3.5.3",

@@ -1,6 +1,6 @@
 import { html } from 'lit';
 
-import type { ISImageData } from '@specimen/types';
+import type { ISImageData } from '@specim3n/types';
 
 import type { ISSpecsEditorWidgetDeps } from '../SSpecsEditorWidget';
 import __SSpecsEditorWidget from '../SSpecsEditorWidget';

@@ -1,7 +1,7 @@
 import { __i18n } from '@coffeekraken/s-i18n';
 import { html } from 'lit';
 
-import { __SSelect } from '@specimen/types/utils';
+import { __SSelect } from '@specim3n/types/utils';
 
 import type { ISSpecsEditorWidgetDeps } from '../SSpecsEditorWidget';
 import __SSpecsEditorWidget from '../SSpecsEditorWidget';

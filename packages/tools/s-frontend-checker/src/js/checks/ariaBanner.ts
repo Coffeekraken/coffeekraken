@@ -28,7 +28,7 @@ export default function (__SFrontendChecker: ISFrontendChecker) {
 
             if (!$header) {
                 return {
-                    status: 'warning',
+                    status: __SFrontendChecker.STATUS_WARNING,
                     message: 'Missing <header> top level tag',
                     example:
                         '<body>\n&nbsp;&nbsp;<header>...</header>\n...\n</body>',
@@ -38,7 +38,7 @@ export default function (__SFrontendChecker: ISFrontendChecker) {
             }
 
             return {
-                status: 'success',
+                status: __SFrontendChecker.STATUS_SUCCESS,
             };
         },
     };

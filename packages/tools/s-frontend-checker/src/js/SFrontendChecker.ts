@@ -82,6 +82,12 @@ import __webpImages from './checks/webpImages';
  * @param           {String|Array<String>}          globs            The glob pattern(s) you want to use with this instance
  * @param           {Object}                [settings={}]           An object of settings to configure your glob instance
  *
+ * @event           checks.start            Dispatched when the checks are starting
+ * @event           check.start             Dispatched when an individual check is starting
+ * @event           check.log               Dispatched when an individual check has a new log line
+ * @event           check.complete          Dispatched when an individual check is completed
+ * @event           checks.complete         Dispatched when the checks are completed
+ *
  * @todo      interface
  * @todo      doc
  * @todo      tests
@@ -228,7 +234,7 @@ export default class SFrontendChecker
             checks: this.getChecksToRun(),
         };
 
-        let points = 0,
+        let lostPoints = 0,
             potentialPoints = 0;
 
         const duration = new __SDuration();
@@ -245,8 +251,7 @@ export default class SFrontendChecker
                 const originalCheckFn = checkObj.check;
 
                 // handle the points
-                potentialPoints += checkObj.level + 1;
-                points += checkObj.level + 1;
+                potentialPoints += 10;
 
                 // settings
                 const checkSettings = this.settings.checks?.[checkId] ?? {};
@@ -258,7 +263,7 @@ export default class SFrontendChecker
                         // update checks running status
                         this._areChecksRunning = true;
                         // remove potential points for this check
-                        points -= checkObj.points ?? checkObj.level + 1;
+                        lostPoints += checkObj.lostPoints ?? 0;
                         // reset the checkObj
                         delete checkObj.result;
                         checkObj.duration = null;
@@ -279,25 +284,20 @@ export default class SFrontendChecker
                                 settings: set,
                             });
                         // update the points
-                        let resultPoints = 0;
+                        let checkLostPoints = 20 * checkObj.level;
                         switch (checkResult.status) {
                             case SFrontendChecker.STATUS_WARNING:
-                                // half points
-                                resultPoints = (checkObj.level + 1) * 0;
+                                checkLostPoints = 10 * checkObj.level;
                                 break;
                             case SFrontendChecker.STATUS_SUCCESS:
-                                // all points
-                                resultPoints = checkObj.level + 1;
+                                checkLostPoints = 0;
                                 break;
                         }
                         // update points
-                        points += resultPoints;
+                        lostPoints += checkLostPoints;
                         // update the checkObj
-                        checkObj.points = resultPoints;
+                        checkObj.lostPoints = checkLostPoints;
                         checkObj.isChecking = false;
-                        checksResult.score = Math.round(
-                            (100 / potentialPoints) * points,
-                        );
                         checkObj.duration = checkDuration.end();
                         checkObj.result = checkResult;
                         // update checks running status
@@ -321,8 +321,10 @@ export default class SFrontendChecker
 
             // points
             checksResult.potentialPoints = potentialPoints;
-            checksResult.points = points;
-            checksResult.score = Math.round((100 / potentialPoints) * points);
+            checksResult.lostPoints = lostPoints;
+            checksResult.score = Math.round(
+                (100 / potentialPoints) * (potentialPoints - lostPoints),
+            );
 
             // duration
             checksResult.duration = duration.end();
@@ -339,7 +341,6 @@ export default class SFrontendChecker
 
 // expose into window
 window.SFrontendChecker = SFrontendChecker;
-window.coco = 'PLOP';
 
 // register default checks
 SFrontendChecker.registerCheck(__doctype);

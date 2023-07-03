@@ -29,7 +29,7 @@ export default function (__SFrontendChecker: ISFrontendChecker) {
 
             if (!$styles.length || !$scripts.length) {
                 return {
-                    status: 'success',
+                    status: __SFrontendChecker.STATUS_SUCCESS,
                 };
             }
             let $lastStyle = $styles[$styles.length - 1],
@@ -47,7 +47,7 @@ export default function (__SFrontendChecker: ISFrontendChecker) {
             // // @ts-ignore
             if (lowestScriptsIndex > highestStylesIndex) {
                 return {
-                    status: 'warning',
+                    status: __SFrontendChecker.STATUS_WARNING,
                     message: "It's better to have link tags before scrips ones",
                     example:
                         '<link rel="stylesheet" href="..." />\n<script src="..."></script>',
@@ -57,7 +57,7 @@ export default function (__SFrontendChecker: ISFrontendChecker) {
                 };
             }
             return {
-                status: 'success',
+                status: __SFrontendChecker.STATUS_SUCCESS,
                 elements: $styles,
             };
         },

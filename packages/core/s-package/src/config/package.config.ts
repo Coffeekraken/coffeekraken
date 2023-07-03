@@ -1,4 +1,5 @@
 import { __dirname } from '@coffeekraken/sugar/fs';
+import { __packageJsonSync } from '@coffeekraken/sugar/package';
 import { __packageRootDir } from '@coffeekraken/sugar/path';
 import __fs from 'fs';
 
@@ -19,6 +20,17 @@ export default function (api) {
          * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         manager: 'yarn',
+
+        /**
+         * @name            json
+         * @namespace      config.package
+         *
+         * Access the package json object
+         *
+         * @since       2.0.0
+         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+         */
+        json: __packageJsonSync(),
 
         /**
          * @name            rootDir

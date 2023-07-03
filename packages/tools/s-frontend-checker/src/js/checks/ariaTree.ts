@@ -30,7 +30,7 @@ export default function (__SFrontendChecker: ISFrontendChecker) {
 
             if ($trees.length) {
                 return {
-                    status: 'warning',
+                    status: __SFrontendChecker.STATUS_WARNING,
                     message: 'Some trees does not have any `role` attribute',
                     example: `<ul role="tree">
     <li role="treeitem">Fruits
@@ -46,7 +46,7 @@ export default function (__SFrontendChecker: ISFrontendChecker) {
                 };
             }
             return {
-                status: 'success',
+                status: __SFrontendChecker.STATUS_SUCCESS,
                 elements: $trees,
             };
         },

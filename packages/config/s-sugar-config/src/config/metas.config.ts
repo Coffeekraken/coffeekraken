@@ -117,7 +117,7 @@ export default function (api) {
                 description: api.this.description,
                 type: 'website',
                 url: api.this.homepage,
-                image: 'https://cdnv2.coffeekraken.io/coffeekraken-og.png',
+                image: 'https://cdnv2.coffeekraken.io/global/coffeekraken-og.png',
             };
         },
     };

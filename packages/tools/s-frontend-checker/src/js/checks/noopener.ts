@@ -31,7 +31,7 @@ export default function (__SFrontendChecker: ISFrontendChecker) {
             // @ts-ignore
             if ($externalLinks.length) {
                 return {
-                    status: 'error',
+                    status: __SFrontendChecker.STATUS_ERROR,
                     message:
                         'Some of your external links does not have rel="noopener"',
                     example: '<a href="..." target="_blank" rel="noopener">',
@@ -41,7 +41,7 @@ export default function (__SFrontendChecker: ISFrontendChecker) {
                 };
             }
             return {
-                status: 'success',
+                status: __SFrontendChecker.STATUS_SUCCESS,
             };
         },
     };

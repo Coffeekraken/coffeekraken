@@ -25,7 +25,7 @@ export default function (__SFrontendChecker: ISFrontendChecker) {
             // favicon
             if (!$context.querySelector('link[rel="icon"]')) {
                 return {
-                    status: 'error',
+                    status: __SFrontendChecker.STATUS_ERROR,
                     message: 'The document is missing the favicon',
                     example:
                         '<link rel="icon" type="image/x-icon" href="/images/favicon.ico">',
@@ -36,7 +36,7 @@ export default function (__SFrontendChecker: ISFrontendChecker) {
             // shortcut icon
             if (!$context.querySelector('link[rel="shortcut icon"]')) {
                 return {
-                    status: 'error',
+                    status: __SFrontendChecker.STATUS_ERROR,
                     message: 'The document is missing the favicon',
                     example:
                         '<link rel="shortcut icon" href="/dist/favicon/favicon.ico">',
@@ -51,7 +51,7 @@ export default function (__SFrontendChecker: ISFrontendChecker) {
                     !$context.querySelector(`link[rel="icon"][sizes="${size}"]`)
                 ) {
                     return {
-                        status: 'error',
+                        status: __SFrontendChecker.STATUS_ERROR,
                         message: `The document is missing the \`${size}\` favicon`,
                         example: `<link rel="icon" type="image/png" sizes="${size}" href="/dist/favicon/favicon-${size}.png">`,
                         moreLink: 'https://github.com/itgalaxy/favicons',
@@ -60,7 +60,7 @@ export default function (__SFrontendChecker: ISFrontendChecker) {
             }
 
             return {
-                status: 'success',
+                status: __SFrontendChecker.STATUS_SUCCESS,
             };
         },
     };

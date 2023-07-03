@@ -28,7 +28,7 @@ export default function (__SFrontendChecker: ISFrontendChecker) {
 
             if (!$printStyle) {
                 return {
-                    status: 'warning',
+                    status: __SFrontendChecker.STATUS_WARNING,
                     message:
                         'Your page does not provide any `print` stylesheet',
                     example:
@@ -38,7 +38,7 @@ export default function (__SFrontendChecker: ISFrontendChecker) {
                 };
             }
             return {
-                status: 'success',
+                status: __SFrontendChecker.STATUS_SUCCESS,
                 elements: $printStyle,
             };
         },

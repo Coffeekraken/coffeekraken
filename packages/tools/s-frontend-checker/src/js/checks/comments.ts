@@ -39,14 +39,14 @@ export default function (__SFrontendChecker: ISFrontendChecker) {
             // @ts-ignore
             if ($comments.length) {
                 return {
-                    status: 'warning',
+                    status: __SFrontendChecker.STATUS_WARNING,
                     message: 'The document has some comment(s) left',
                     example: '<!-- comment -->',
                     elements: $comments,
                 };
             }
             return {
-                status: 'success',
+                status: __SFrontendChecker.STATUS_SUCCESS,
             };
         },
     };

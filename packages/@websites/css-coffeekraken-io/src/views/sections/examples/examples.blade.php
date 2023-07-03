@@ -32,11 +32,11 @@
         <div class="examples">
 
             <div class="_sidebar">
-                <a href="#example-sugar" s-activate group="examples">
-                    <i class="s-icon:examples"></i> sugar.css
-                </a>
                 <a href="#example-index" s-activate group="examples">
                     <i class="s-icon:examples"></i> index.css
+                </a>
+                <a href="#example-sugar" s-activate group="examples">
+                    <i class="s-icon:examples"></i> sugar.css
                 </a>
                 <a href="#example-layout" s-activate group="examples">
                     <i class="s-icon:examples"></i> layout.css
@@ -95,6 +95,16 @@
                 <div class="_code" id="example-index">
                     <s-code-example>
                         <template lang="css">
+&nbsp;
+/*
+ *      ____
+ *    / ____|Coffeekraken __ _ _ __
+ *    \___ \| | | |/ _` |/ _` | `__|
+ *     ___) | |_| | (_| | (_| | |
+ *    |____/ \__,_|\__, |\__,_|_|
+ *                 |___/
+ */
+
 /* importing sugar toolkit */
 @sugar.import ('./sugar.css');
 

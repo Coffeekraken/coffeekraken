@@ -28,7 +28,7 @@ export default function (__SFrontendChecker: ISFrontendChecker) {
 
             if ($noneFigureImgs.length) {
                 return {
-                    status: 'warning',
+                    status: __SFrontendChecker.STATUS_WARNING,
                     message:
                         "It's recommanded to wrap your `<img />` tags into a `<figure>` one",
                     example:
@@ -38,7 +38,7 @@ export default function (__SFrontendChecker: ISFrontendChecker) {
                 };
             }
             return {
-                status: 'success',
+                status: __SFrontendChecker.STATUS_SUCCESS,
             };
         },
     };

@@ -27,7 +27,7 @@ export default function (__SFrontendChecker: ISFrontendChecker) {
             );
             if ($tables.length) {
                 return {
-                    status: 'warning',
+                    status: __SFrontendChecker.STATUS_WARNING,
                     message:
                         'Your `<table>` tags should have a proper `<legend>` into it',
                     example:
@@ -38,7 +38,7 @@ export default function (__SFrontendChecker: ISFrontendChecker) {
                 };
             }
             return {
-                status: 'success',
+                status: __SFrontendChecker.STATUS_SUCCESS,
                 elements: $tables,
             };
         },

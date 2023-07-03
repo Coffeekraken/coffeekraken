@@ -125,7 +125,7 @@ export default function (__SFrontendChecker: ISFrontendChecker) {
 
             if ($nonVisualFocusElements.length) {
                 return {
-                    status: 'warning',
+                    status: __SFrontendChecker.STATUS_WARNING,
                     message: `Some interactive elements does not have any focused visual display`,
                     example: null,
                     moreLink:
@@ -135,7 +135,7 @@ export default function (__SFrontendChecker: ISFrontendChecker) {
             }
 
             return {
-                status: 'success',
+                status: __SFrontendChecker.STATUS_SUCCESS,
                 elements: $focusables,
             };
         },

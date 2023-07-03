@@ -28,7 +28,7 @@ export default function (__SFrontendChecker: ISFrontendChecker) {
 
             if (!$search) {
                 return {
-                    status: 'warning',
+                    status: __SFrontendChecker.STATUS_WARNING,
                     message:
                         'Search input is not inside a `role="search"` container',
                     example:
@@ -39,7 +39,7 @@ export default function (__SFrontendChecker: ISFrontendChecker) {
             }
 
             return {
-                status: 'success',
+                status: __SFrontendChecker.STATUS_SUCCESS,
                 elements: $search,
             };
         },

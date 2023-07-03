@@ -28,7 +28,7 @@ export default function (__SFrontendChecker: ISFrontendChecker) {
 
             if ($nonWebpImages.length) {
                 return {
-                    status: 'warning',
+                    status: __SFrontendChecker.STATUS_WARNING,
                     message:
                         "It's recommanded to provide images as `webp` format",
                     example: '<img src="something.webp" alt="...">',
@@ -37,7 +37,7 @@ export default function (__SFrontendChecker: ISFrontendChecker) {
                 };
             }
             return {
-                status: 'success',
+                status: __SFrontendChecker.STATUS_SUCCESS,
             };
         },
     };

@@ -24,14 +24,14 @@ export default function (__SFrontendChecker: ISFrontendChecker) {
             const $author = $context.querySelector('head meta[name="author"]');
             if (!$author) {
                 return {
-                    status: 'error',
+                    status: __SFrontendChecker.STATUS_ERROR,
                     message: 'The document is missing an author',
                     example: '<meta name="author" content="Olivier Bossel">',
                     moreLink: 'https://www.w3schools.com/tags/tag_meta.asp',
                 };
             }
             return {
-                status: 'success',
+                status: __SFrontendChecker.STATUS_SUCCESS,
                 elements: $author,
             };
         },

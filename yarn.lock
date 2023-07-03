@@ -1718,7 +1718,6 @@ __metadata:
     "@coffeekraken/s-class": ^2.0.0-alpha.27
     "@coffeekraken/s-interface": ^2.0.0-alpha.27
     "@coffeekraken/sugar": ^2.0.0-alpha.27
-    "@smockle/contrast": ^7.0.145
   languageName: unknown
   linkType: soft
 
@@ -5635,15 +5634,6 @@ __metadata:
   dependencies:
     "@sinonjs/commons": ^1.7.0
   checksum: 09b5a158ce013a6c37613258bad79ca4efeb99b1f59c41c73cca36cac00b258aefcf46eeea970fccf06b989414d86fe9f54c1102272c0c3bdd51a313cea80949
-  languageName: node
-  linkType: hard
-
-"@smockle/contrast@npm:^7.0.145":
-  version: 7.0.145
-  resolution: "@smockle/contrast@npm:7.0.145"
-  bin:
-    contrast: dist/bin/index.js
-  checksum: fc2db36a95dc2e4fd4ad796567dcd71b980a627de1ea5c5eaff5e983c8a1470bac44e3fc2da987ede378029f86a0a00be8c73decb13a40be538d6bfe362efe1a
   languageName: node
   linkType: hard
 

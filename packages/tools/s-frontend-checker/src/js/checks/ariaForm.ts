@@ -29,7 +29,7 @@ export default function (__SFrontendChecker: ISFrontendChecker) {
             );
             if ($forms.length) {
                 return {
-                    status: 'warning',
+                    status: __SFrontendChecker.STATUS_WARNING,
                     message: 'Some forms are not aria compliant',
                     example:
                         '<form aria-label="Register to the event">...</form>',
@@ -39,7 +39,7 @@ export default function (__SFrontendChecker: ISFrontendChecker) {
                 };
             }
             return {
-                status: 'success',
+                status: __SFrontendChecker.STATUS_SUCCESS,
                 elements: $forms,
             };
         },

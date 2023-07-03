@@ -73,7 +73,10 @@ export default function (__SFrontendChecker: ISFrontendChecker) {
                         break;
                     default:
                         const style = window.getComputedStyle($elm);
-                        if (style.backgroundImage !== 'none') {
+                        if (
+                            style.backgroundImage &&
+                            style.backgroundImage !== 'none'
+                        ) {
                             mediaUrl = style.backgroundImage
                                 .trim()
                                 .replace(/^url\(['"`]?(.*)['"`]?\)$/, '$1');
@@ -103,7 +106,7 @@ export default function (__SFrontendChecker: ISFrontendChecker) {
             }
 
             return {
-                status: 'success',
+                status: __SFrontendChecker.STATUS_SUCCESS,
             };
         },
     };

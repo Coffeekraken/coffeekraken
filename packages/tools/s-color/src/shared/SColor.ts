@@ -12,8 +12,6 @@ import { __deepMerge } from '@coffeekraken/sugar/object';
 import __SColorApplyParamsInterface from './interface/SColorApplyParamsInterface';
 import __SColorSettingsInterface from './interface/SColorSettingsInterface';
 
-import { Contrast as __contrast } from '@smockle/contrast';
-
 /**
  * @name 		    SColor
  * @namespace       shared
@@ -110,6 +108,27 @@ export interface ISColorContrastInfo {
     value: number;
 }
 
+const RED = 0.2126;
+const GREEN = 0.7152;
+const BLUE = 0.0722;
+const GAMMA = 2.4;
+
+function _luminance(r, g, b) {
+    let a = [r, g, b].map((v) => {
+        v /= 255;
+        return v <= 0.03928 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, GAMMA);
+    });
+    return a[0] * RED + a[1] * GREEN + a[2] * BLUE;
+}
+
+function _contrast(rgb1, rgb2) {
+    var lum1 = _luminance(...rgb1);
+    var lum2 = _luminance(...rgb2);
+    var brightest = Math.max(lum1, lum2);
+    var darkest = Math.min(lum1, lum2);
+    return (brightest + 0.05) / (darkest + 0.05);
+}
+
 class SColor extends __SClass {
     /**
      * @name            getContrastInfo
@@ -131,31 +150,26 @@ class SColor extends __SClass {
         color1: string | SColor,
         color2: string | SColor,
     ): ISColorContrastInfo {
+        let color1Instance, color2Instance;
+
         if (typeof color1 === 'string') {
-            const color1Instance = new SColor(color1);
-            color1 = color1Instance.toHexString();
+            color1Instance = new SColor(color1);
         }
         if (typeof color2 === 'string') {
-            const color2Instance = new SColor(color2);
-            color2 = color2Instance.toHexString();
+            color2Instance = new SColor(color2);
         }
-
-        const contrast = new __contrast(color1, color2);
 
         const finalContrastInfo = {
             background: {
-                r: contrast.background.R,
-                g: contrast.background.G,
-                b: contrast.background.b,
-                color: contrast.background.value,
+                ...color2Instance.toObject(),
             },
             foreground: {
-                r: contrast.foreground.R,
-                g: contrast.foreground.G,
-                b: contrast.foreground.b,
-                color: contrast.foreground.value,
+                ...color1Instance.toObject(),
             },
-            value: contrast.value,
+            value: __contrast(
+                [color1Instance.r, color1Instance.g, color1Instance.b],
+                [color2Instance.r, color2Instance.g, color2Instance.b],
+            ),
         };
         return finalContrastInfo;
     }

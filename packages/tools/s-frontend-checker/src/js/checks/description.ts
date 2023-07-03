@@ -29,7 +29,7 @@ export default function (__SFrontendChecker: ISFrontendChecker) {
             // @ts-ignore
             if (!$desc) {
                 return {
-                    status: 'error',
+                    status: __SFrontendChecker.STATUS_ERROR,
                     message: 'The document is missing the description',
                     example:
                         '<meta name="description" content="My awesome description">',
@@ -37,7 +37,7 @@ export default function (__SFrontendChecker: ISFrontendChecker) {
                 };
             }
             return {
-                status: 'success',
+                status: __SFrontendChecker.STATUS_SUCCESS,
                 elements: $desc,
             };
         },

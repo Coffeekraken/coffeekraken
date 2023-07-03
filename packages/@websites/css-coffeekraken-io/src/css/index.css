@@ -9,13 +9,8 @@ html {
 
 body {
     width: 100vw;
+    overflow-x: hidden;
 }
-
-/* input:focus,
-    button:focus,
-    a:focus {
-        background: red !important;
-    } */
 
 .s-container:not(#header .s-container, .s-panel .s-container) {
     margin: 0 0 0 50%;

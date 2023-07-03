@@ -26,7 +26,7 @@ export default function (__SFrontendChecker: ISFrontendChecker) {
 
             if (!$main) {
                 return {
-                    status: 'warning',
+                    status: __SFrontendChecker.STATUS_WARNING,
                     message:
                         'Your page is missing a proper `<main>` tag to enclose correctly the content',
                     example: '<main id="content">...</main>',
@@ -34,7 +34,7 @@ export default function (__SFrontendChecker: ISFrontendChecker) {
                 };
             }
             return {
-                status: 'success',
+                status: __SFrontendChecker.STATUS_SUCCESS,
                 elements: $main,
             };
         },

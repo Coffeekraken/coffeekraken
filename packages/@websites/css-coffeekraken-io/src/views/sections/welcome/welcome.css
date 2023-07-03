@@ -46,9 +46,9 @@
         background-color: sugar.color(main, background);
         /* background-color: sugar.color(main, --lighten 45); */
         /* background: url('/dist/img/landscape-01.jpg'); */
-        background-position: 50% 50%;
+        /* background-position: 50% 50%;
         background-size: cover;
-        background-image: url('https://picsum.photos/200/300');
+        background-image: url('https://picsum.photos/200/300'); */
         /* background-image: linear-gradient(
             180deg,
             sugar.color(main, surface, --darken 2),
@@ -135,7 +135,7 @@
         aspect-ratio: 4/3;
         transform: translateY(-50%) scale(1);
         user-select: none;
-        /* pointer-events: none; */
+        pointer-events: none;
         @sugar.transition;
 
         /* * {

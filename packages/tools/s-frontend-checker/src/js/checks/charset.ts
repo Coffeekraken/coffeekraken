@@ -24,14 +24,14 @@ export default function (__SFrontendChecker: ISFrontendChecker) {
             // @ts-ignore
             if (!$context.characterSet) {
                 return {
-                    status: 'error',
+                    status: __SFrontendChecker.STATUS_ERROR,
                     message: 'The document is missing a charset',
                     example: '<meta charset="utf-8">',
                     moreLink: 'https://www.w3schools.com/html/html_charset.asp',
                 };
             }
             return {
-                status: 'success',
+                status: __SFrontendChecker.STATUS_SUCCESS,
             };
         },
     };

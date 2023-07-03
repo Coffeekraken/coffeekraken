@@ -16,9 +16,8 @@ import type { ISFrontendChecker } from '../types';
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 
-function getAssetSize(url, $context) {
+function getAssetSize(url) {
     return new Promise(async (resolve) => {
-        // const id = __uniqid();
         window.fetchAssetResolve = function () {
             resolve(window.fetchedAssetSize);
         };
@@ -36,7 +35,6 @@ function _handleItem(item, globalObj, $context): Promise<void> {
         } else if (item.name.match(/\.(ts|js|tsx|jsx)/)) {
             itemType = 'scripts';
         } else if (item.name.match(/\.(mp4|avi|webm|mov)/)) {
-            return resolve();
             itemType = 'videos';
         }
 
@@ -48,7 +46,7 @@ function _handleItem(item, globalObj, $context): Promise<void> {
 
         // @ts-ignore
         if (!itemObj.totalSize && window.isPuppeteer) {
-            itemObj.totalSize = await getAssetSize(itemObj.url, $context);
+            itemObj.totalSize = await getAssetSize(itemObj.url);
         }
 
         globalObj.totalSize += itemObj.totalSize;

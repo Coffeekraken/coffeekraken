@@ -6,11 +6,12 @@
     "type": "module",
     "private": true,
     "scripts": {
-        "dev": "sugard kitchen.run dev",
-        "preview": "sugard kitchen.run preview",
-        "build": "sugard kitchen.run build --target production",
+        "dev": "sugar kitchen.run dev",
+        "preview": "sugar kitchen.run preview",
+        "build": "sugar kitchen.run build --target production",
         "static": "live-server static",
-        "static.build": "sugard static.build --clean --env production --target production",
+        "static.build": "sugar static.build --clean --env production --target production",
+        "serve": "",
         "deploy": "rsync -avzh --delete --progress --stats ./static fe0mt_coffeekraken@fe0mt.ftp.infomaniak.com:~/sites/coffeekraken.io",
         "deploy.bogdanov": "rsync -avzh --delete --progress --stats ./static fe0mt_bogdanov_ssh@fe0mt.ftp.infomaniak.com:~/sites/bogdanov.coffeekraken.io"
     },

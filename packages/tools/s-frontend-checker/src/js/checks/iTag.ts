@@ -28,7 +28,7 @@ export default function (__SFrontendChecker: ISFrontendChecker) {
 
             if ($i.length) {
                 return {
-                    status: 'warning',
+                    status: __SFrontendChecker.STATUS_WARNING,
                     message: `It's recommanded to not use the \`<i>\` tag. Use the \`<em>\` tag instead`,
                     example: '<em>...</em>',
                     moreLink: 'https://www.w3schools.com/tags/tag_em.asp',
@@ -36,7 +36,7 @@ export default function (__SFrontendChecker: ISFrontendChecker) {
                 };
             }
             return {
-                status: 'success',
+                status: __SFrontendChecker.STATUS_SUCCESS,
             };
         },
     };

@@ -27,7 +27,7 @@ export default function (__SFrontendChecker: ISFrontendChecker) {
 
             if ($a.length) {
                 return {
-                    status: 'warning',
+                    status: __SFrontendChecker.STATUS_WARNING,
                     message:
                         'Some links does not have a proper `title` attribute',
                     example:
@@ -37,7 +37,7 @@ export default function (__SFrontendChecker: ISFrontendChecker) {
                 };
             }
             return {
-                status: 'success',
+                status: __SFrontendChecker.STATUS_SUCCESS,
             };
         },
     };

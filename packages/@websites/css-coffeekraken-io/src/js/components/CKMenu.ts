@@ -26,7 +26,7 @@ export default class CkSettings extends __SLitComponent {
 
     async fetchMenu() {
         const response = await fetch(
-                'https://cdnv2.coffeekraken.io/ck-menu.json',
+                'https://cdnv2.coffeekraken.io/global/ck-menu.json',
                 {
                     mode: 'cors',
                     cache: 'no-cache',

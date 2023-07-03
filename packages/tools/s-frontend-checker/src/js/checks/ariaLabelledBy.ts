@@ -35,7 +35,7 @@ export default function (__SFrontendChecker: ISFrontendChecker) {
                         )
                     ) {
                         return {
-                            status: 'warning',
+                            status: __SFrontendChecker.STATUS_WARNING,
                             message:
                                 'Some `[aria-labelledby]` elements points to none existant element',
                             example: null,
@@ -48,7 +48,7 @@ export default function (__SFrontendChecker: ISFrontendChecker) {
             }
 
             return {
-                status: 'success',
+                status: __SFrontendChecker.STATUS_SUCCESS,
                 elements: $elements,
             };
         },

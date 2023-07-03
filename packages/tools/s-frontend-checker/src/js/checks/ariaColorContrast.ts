@@ -111,11 +111,8 @@ export default function (__SFrontendChecker: ISFrontendChecker) {
 
             // @ts-ignore
             for (let [i, textNode] of textNodes.entries()) {
-                const str = textNode.data.trim();
+                const str = textNode.data?.trim() ?? '';
 
-                // if (str === 'Get startedDD') {
-                //     break;
-                // }
                 if (str === '' || str.length < 3) {
                     continue;
                 }

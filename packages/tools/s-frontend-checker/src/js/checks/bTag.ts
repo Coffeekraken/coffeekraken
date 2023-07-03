@@ -26,7 +26,7 @@ export default function (__SFrontendChecker: ISFrontendChecker) {
 
             if ($b.length) {
                 return {
-                    status: 'warning',
+                    status: __SFrontendChecker.STATUS_WARNING,
                     message: `It's recommanded to not use the \`<b>\` tag. Use the \`<strong>\` tag instead`,
                     example: '<strong>...</strong>',
                     moreLink: 'https://www.w3schools.com/tags/tag_strong.asp',
@@ -34,7 +34,7 @@ export default function (__SFrontendChecker: ISFrontendChecker) {
                 };
             }
             return {
-                status: 'success',
+                status: __SFrontendChecker.STATUS_SUCCESS,
                 elements: $b,
             };
         },

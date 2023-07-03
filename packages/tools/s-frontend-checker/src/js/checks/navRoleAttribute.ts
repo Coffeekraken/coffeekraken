@@ -27,7 +27,7 @@ export default function (__SFrontendChecker: ISFrontendChecker) {
 
             if ($nav.length) {
                 return {
-                    status: 'warning',
+                    status: __SFrontendChecker.STATUS_WARNING,
                     message:
                         'It\'s recommanded to add the `role="navigation"` attribute on your navs',
                     example: '<nav role="navigation">...</nav>',
@@ -36,7 +36,7 @@ export default function (__SFrontendChecker: ISFrontendChecker) {
                 };
             }
             return {
-                status: 'success',
+                status: __SFrontendChecker.STATUS_SUCCESS,
             };
         },
     };

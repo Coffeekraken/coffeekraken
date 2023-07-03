@@ -24,14 +24,14 @@ export default function (__SFrontendChecker: ISFrontendChecker) {
             // @ts-ignore
             if (!$context.doctype) {
                 return {
-                    status: 'error',
+                    status: __SFrontendChecker.STATUS_ERROR,
                     message: 'The document is missing a doctype',
                     example: '<!DOCTYPE html>',
                     moreLink: 'https://www.w3schools.com/tags/tag_doctype.asp',
                 };
             }
             return {
-                status: 'success',
+                status: __SFrontendChecker.STATUS_SUCCESS,
             };
         },
     };

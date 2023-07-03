@@ -26,7 +26,7 @@ export default function (__SFrontendChecker: ISFrontendChecker) {
             // @ts-ignore
             if (!$html?.hasAttribute('lang')) {
                 return {
-                    status: 'error',
+                    status: __SFrontendChecker.STATUS_ERROR,
                     message: 'The document is missing the language',
                     example: '<html lang="en">',
                     moreLink:
@@ -34,7 +34,7 @@ export default function (__SFrontendChecker: ISFrontendChecker) {
                 };
             }
             return {
-                status: 'success',
+                status: __SFrontendChecker.STATUS_SUCCESS,
                 elements: $html,
             };
         },

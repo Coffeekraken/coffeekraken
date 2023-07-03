@@ -25,7 +25,7 @@ export default function (__SFrontendChecker: ISFrontendChecker) {
             // @ts-ignore
             if (!$viewport) {
                 return {
-                    status: 'error',
+                    status: __SFrontendChecker.STATUS_ERROR,
                     message: 'The document is missing a viewport',
                     example:
                         '<meta name="viewport" content="width=device-width, minimum-scale=1, maximum-scale=1">',
@@ -34,7 +34,7 @@ export default function (__SFrontendChecker: ISFrontendChecker) {
                 };
             }
             return {
-                status: 'success',
+                status: __SFrontendChecker.STATUS_SUCCESS,
                 elements: $context,
             };
         },

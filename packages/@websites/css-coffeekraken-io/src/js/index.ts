@@ -99,10 +99,10 @@ const viewsRelated = import.meta.globEager('../views/**/*.ts');
                 '[viewport-aware]',
             );
             if ($viewportAware) {
-                $viewportAware.addEventListener('viewport.enter', () => {
+                $viewportAware.addEventListener('viewport.in', () => {
                     this._paused = false;
                 });
-                $viewportAware.addEventListener('viewport.exit', () => {
+                $viewportAware.addEventListener('viewport.out', () => {
                     this._paused = true;
                 });
             }
@@ -119,8 +119,6 @@ const viewsRelated = import.meta.globEager('../views/**/*.ts');
             // this.highlightLetter();
 
             this._$slider.setAttribute('ready', 'true');
-
-            return;
 
             setInterval(() => {
                 if (this._paused) {

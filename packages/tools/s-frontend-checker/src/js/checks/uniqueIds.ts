@@ -38,7 +38,7 @@ export default function (__SFrontendChecker: ISFrontendChecker) {
 
             if ($sameIds.length) {
                 return {
-                    status: 'error',
+                    status: __SFrontendChecker.STATUS_ERROR,
                     message: 'Some elements in your page share the same `id`',
                     example: '<div id="hello">...</div>\n<a id="hello">...</a>',
                     moreLink: null,
@@ -46,7 +46,7 @@ export default function (__SFrontendChecker: ISFrontendChecker) {
                 };
             }
             return {
-                status: 'success',
+                status: __SFrontendChecker.STATUS_SUCCESS,
             };
         },
     };

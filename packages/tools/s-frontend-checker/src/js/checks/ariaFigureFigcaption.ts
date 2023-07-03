@@ -28,7 +28,7 @@ export default function (__SFrontendChecker: ISFrontendChecker) {
             );
             if ($figures.length) {
                 return {
-                    status: 'warning',
+                    status: __SFrontendChecker.STATUS_WARNING,
                     message:
                         'Your `<figure>` tags should have a proper `<figcaption>` into it',
                     example:
@@ -39,7 +39,7 @@ export default function (__SFrontendChecker: ISFrontendChecker) {
                 };
             }
             return {
-                status: 'success',
+                status: __SFrontendChecker.STATUS_SUCCESS,
                 elements: $figures,
             };
         },

@@ -28,7 +28,7 @@ export default function (__SFrontendChecker: ISFrontendChecker) {
             // @ts-ignore
             if (!$twitter) {
                 return {
-                    status: 'error',
+                    status: __SFrontendChecker.STATUS_ERROR,
                     message: 'The document is missing the twitterCard metas',
                     example:
                         '<meta name="twitter:card" content="summary" />\n<meta name="twitter:site" content="@nytimesbits" />',
@@ -37,7 +37,7 @@ export default function (__SFrontendChecker: ISFrontendChecker) {
                 };
             }
             return {
-                status: 'success',
+                status: __SFrontendChecker.STATUS_SUCCESS,
                 elements: $twitter,
             };
         },

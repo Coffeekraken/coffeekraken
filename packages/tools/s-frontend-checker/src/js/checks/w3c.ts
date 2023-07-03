@@ -42,21 +42,12 @@ export default function (__SFrontendChecker: ISFrontendChecker) {
             // @ts-ignore
             if (responseJson.messages.length) {
                 return {
-                    status: 'warning',
+                    status: __SFrontendChecker.STATUS_WARNING,
                     message: 'The html is not w3c compliant',
-                    action: {
-                        label: () =>
-                            `Log issues (${responseJson.messages.length})`,
-                        handler: () => {
-                            responseJson.messages?.forEach?.((msg) => {
-                                console.log(mgs);
-                            });
-                        },
-                    },
                 };
             }
             return {
-                status: 'success',
+                status: __SFrontendChecker.STATUS_SUCCESS,
             };
         },
     };

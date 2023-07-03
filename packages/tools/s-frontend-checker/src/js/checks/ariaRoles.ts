@@ -43,7 +43,7 @@ export default function (__SFrontendChecker: ISFrontendChecker) {
 
                 if (!rolesByElements[tag]) {
                     return {
-                        status: 'warning',
+                        status: __SFrontendChecker.STATUS_WARNING,
                         message: `The \`<${tag}>\` does not accept any \`role\``,
                         example: null,
                         moreLink: null,
@@ -53,7 +53,7 @@ export default function (__SFrontendChecker: ISFrontendChecker) {
 
                 if (!rolesByElements[tag].includes(role)) {
                     return {
-                        status: 'warning',
+                        status: __SFrontendChecker.STATUS_WARNING,
                         message: `The role \`${role}\` role cannot be placed on the \`<${tag}>\` tag`,
                         example: null,
                         moreLink: null,
@@ -63,7 +63,7 @@ export default function (__SFrontendChecker: ISFrontendChecker) {
             }
 
             return {
-                status: 'success',
+                status: __SFrontendChecker.STATUS_SUCCESS,
                 elements: $roles,
             };
         },

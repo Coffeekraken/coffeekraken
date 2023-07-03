@@ -24,12 +24,12 @@
     },
     "contributors": [],
     "scripts": {
-        "dev": "sugard kitchen.run dev",
+        "dev": "sugar kitchen.run dev",
         "test": "",
-        "prod": "sugard kitchen.run prod",
-        "build": "sugard kitchen.run build",
+        "prod": "sugar kitchen.run prod",
+        "build": "sugar kitchen.run build",
         "static": "live-server static",
-        "static.build": "sugard static.build --clean --env production --target production",
+        "static.build": "sugar static.build --clean --env production --target production",
         "deploy": "echo \"no deploy script configured...\""
     },
     "dependencies": {

@@ -27,7 +27,7 @@ export default function (__SFrontendChecker: ISFrontendChecker) {
             );
             if (!$keywords) {
                 return {
-                    status: 'warning',
+                    status: __SFrontendChecker.STATUS_WARNING,
                     message: 'The document is missing Some keywords',
                     example:
                         '<meta name="keywords" content="Frontend, Web, Development">',
@@ -35,7 +35,7 @@ export default function (__SFrontendChecker: ISFrontendChecker) {
                 };
             }
             return {
-                status: 'success',
+                status: __SFrontendChecker.STATUS_SUCCESS,
                 elements: $keywords,
             };
         },

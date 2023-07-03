@@ -101,7 +101,7 @@ ${
 
 ### More
 
-![Coffeekraken](https://cdnv2.coffeekraken.io/coffeekraken-logo-vscode-popin.png)
+![Coffeekraken](https://cdnv2.coffeekraken.io/global/coffeekraken-logo-vscode-popin.png)
 
 - [Full documentation](https://coffeekraken.io/api/${docmapObj.id})
 - [Report an issue](https://github.com/Coffeekraken/coffeekraken/issues)

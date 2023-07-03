@@ -27,7 +27,7 @@ export default function (__SFrontendChecker: ISFrontendChecker) {
             // @ts-ignore
             if (!$og.length) {
                 return {
-                    status: 'error',
+                    status: __SFrontendChecker.STATUS_ERROR,
                     message: 'The document is missing the opengraph metas',
                     example:
                         '<meta property="og:title" content="The Rock" />\n<meta property="og:type" content="video.movie" />',
@@ -35,7 +35,7 @@ export default function (__SFrontendChecker: ISFrontendChecker) {
                 };
             }
             return {
-                status: 'success',
+                status: __SFrontendChecker.STATUS_SUCCESS,
                 elements: $og,
             };
         },

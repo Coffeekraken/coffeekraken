@@ -33,41 +33,25 @@ export default function (__SFrontendChecker: ISFrontendChecker) {
                     if (!$button.hasAttribute('aria-label')) {
                         const label =
                             $button.getAttribute('value') ??
-                            $button.label.trim();
+                            $button.getAttribute('label')?.trim() ??
+                            '';
                         if (
                             label === '' ||
                             (label.split(' ') === 1 && label.length < 3)
                         ) {
                             return {
-                                status: 'warning',
+                                status: __SFrontendChecker.STATUS_WARNING,
                                 message: `Your \`${$button.outerHTML}\` button does not have a proper descriptive label or content`,
                                 example: '<button>Send my info</button>',
                                 moreLink:
                                     'https://www.w3.org/WAI/ARIA/apg/practices/names-and-descriptions/',
-                                action: {
-                                    label: () =>
-                                        `Log them (${$buttons.length})`,
-                                    handler: () => {
-                                        $buttons.forEach(($button) => {
-                                            console.log($button);
-                                        });
-                                    },
-                                },
                             };
                         }
                     }
                 }
             }
             return {
-                status: 'success',
-                action: {
-                    label: () => `Log them (${$buttons.length})`,
-                    handler: () => {
-                        $buttons.forEach(($button) => {
-                            console.log($button);
-                        });
-                    },
-                },
+                status: __SFrontendChecker.STATUS_SUCCESS,
             };
         },
     };

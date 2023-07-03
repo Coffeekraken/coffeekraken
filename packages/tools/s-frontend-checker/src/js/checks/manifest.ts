@@ -26,7 +26,7 @@ export default function (__SFrontendChecker: ISFrontendChecker) {
             const $manifest = $context.querySelector('link[rel="manifest"]');
             if (!$manifest) {
                 return {
-                    status: 'error',
+                    status: __SFrontendChecker.STATUS_ERROR,
                     message: 'The document is missing the app manifest',
                     example:
                         '<link rel="manifest" href="/dist/favicon/manifest.json">',
@@ -35,7 +35,7 @@ export default function (__SFrontendChecker: ISFrontendChecker) {
             }
 
             return {
-                status: 'success',
+                status: __SFrontendChecker.STATUS_SUCCESS,
                 elements: $manifest,
             };
         },

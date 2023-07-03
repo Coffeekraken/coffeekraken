@@ -26,7 +26,7 @@ export default function (__SFrontendChecker: ISFrontendChecker) {
 
             if ($navs.length <= 1) {
                 return {
-                    status: 'success',
+                    status: __SFrontendChecker.STATUS_SUCCESS,
                     elements: $navs,
                 };
             }
@@ -37,7 +37,7 @@ export default function (__SFrontendChecker: ISFrontendChecker) {
 
             if ($navsNotLabelled) {
                 return {
-                    status: 'warning',
+                    status: __SFrontendChecker.STATUS_WARNING,
                     message: 'Some <nav> tags are not labelled',
                     example:
                         '<nav aria-label="Why Elon Musk is such a nice/bad guy">...</nav>',
@@ -47,7 +47,7 @@ export default function (__SFrontendChecker: ISFrontendChecker) {
                 };
             }
             return {
-                status: 'success',
+                status: __SFrontendChecker.STATUS_SUCCESS,
                 elements: $navs,
             };
         },

@@ -28,7 +28,7 @@ export default function (__SFrontendChecker: ISFrontendChecker) {
 
             if (!$labels.length) {
                 return {
-                    status: 'success',
+                    status: __SFrontendChecker.STATUS_SUCCESS,
                 };
             }
 
@@ -43,7 +43,7 @@ export default function (__SFrontendChecker: ISFrontendChecker) {
                         ))
                 ) {
                     return {
-                        status: 'warning',
+                        status: __SFrontendChecker.STATUS_WARNING,
                         message:
                             'A `<label>` tag must contain at least a descriptive text',
                         example:
@@ -56,7 +56,7 @@ export default function (__SFrontendChecker: ISFrontendChecker) {
             }
 
             return {
-                status: 'success',
+                status: __SFrontendChecker.STATUS_SUCCESS,
                 elements: $labels,
             };
         },

@@ -17,8 +17,8 @@
  * @setting         {String}        [offset='10px']             An offset to detect the in/out earlier or later
  * @setting         {Boolean}       [once=false]                Specify if you want to event to be dispatched only once
  *
- * @event       viewport.enter               Dispatched when the passed element enters the viewport
- * @event       viewport.exit               Dispatched when the passed element exits the viewport
+ * @event       viewport.in               Dispatched when the passed element enters the viewport
+ * @event       viewport.out               Dispatched when the passed element exits the viewport
  *
  * @snippet         __viewportEvents($1)
  * __viewportEvents($1).addEventListener('viewport.enter', (e) => {
@@ -69,7 +69,7 @@ export default function __viewportEvents(
                 }
                 status = 'in';
                 $elm.dispatchEvent(
-                    new CustomEvent('viewport.enter', {
+                    new CustomEvent('viewport.in', {
                         bubbles: true,
                     }),
                 );
@@ -82,7 +82,7 @@ export default function __viewportEvents(
                 }
                 status = 'out';
                 $elm.dispatchEvent(
-                    new CustomEvent('viewport.exit', {
+                    new CustomEvent('viewport.out', {
                         bubbles: true,
                     }),
                 );

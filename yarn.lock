@@ -5637,9 +5637,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@specim3n/types@^1.0.0-alpha.1, @specim3n/types@workspace:packages/@specim3n/types":
+"@specim3n/types@^1.0.0-alpha.1, @specim3n/types@workspace:packages/@specimen/types":
   version: 0.0.0-use.local
-  resolution: "@specim3n/types@workspace:packages/@specim3n/types"
+  resolution: "@specim3n/types@workspace:packages/@specimen/types"
   dependencies:
     "@coffeekraken/s-color": ^2.0.0-alpha.27
   languageName: unknown

@@ -16,13 +16,9 @@
     "main": "dist/pkg/cjs/shared/exports.js",
     "module": "dist/pkg/esm/shared/exports.js",
     "exports": {
-        "browser": {
+        "default": {
             "require": "./dist/pkg/cjs/shared/exports.js",
             "import": "./dist/pkg/esm/shared/exports.js"
-        },
-        "node": {
-            "require": "./dist/pkg/cjs/node/exports.js",
-            "import": "./dist/pkg/esm/node/exports.js"
         }
     },
     "homepage": "https://coffeekraken.io"

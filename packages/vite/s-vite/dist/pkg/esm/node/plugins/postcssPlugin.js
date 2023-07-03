@@ -1,0 +1,3 @@
+import __sVitePluginPostcss from '@coffeekraken/s-vite-postcss-plugin';
+export default __sVitePluginPostcss();
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sb0JBQW9CLE1BQU0scUNBQXFDLENBQUM7QUFDdkUsZUFBZSxvQkFBb0IsRUFBRSxDQUFDIn0=

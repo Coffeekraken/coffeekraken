@@ -1,0 +1,5 @@
+import __SDocComponent from './SDocComponent';
+export default function define(props = {}, tagName = 's-doc', settings) {
+    __SDocComponent.define(tagName, __SDocComponent, props, settings);
+}
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUVBLE9BQU8sZUFBZSxNQUFNLGlCQUFpQixDQUFDO0FBRTlDLE1BQU0sQ0FBQyxPQUFPLFVBQVUsTUFBTSxDQUMxQixRQUFzQyxFQUFFLEVBQ3hDLE9BQU8sR0FBRyxPQUFPLEVBQ2pCLFFBQXVDO0lBRXZDLGVBQWUsQ0FBQyxNQUFNLENBQUMsT0FBTyxFQUFFLGVBQWUsRUFBRSxLQUFLLEVBQUUsUUFBUSxDQUFDLENBQUM7QUFDdEUsQ0FBQyJ9

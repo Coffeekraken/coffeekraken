@@ -1,0 +1,4 @@
+import __SConfigFolderAdapter from './SConfigFolderAdapter';
+export * from './SConfigFolderAdapter';
+export default __SConfigFolderAdapter;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sc0JBQXNCLE1BQU0sd0JBQXdCLENBQUM7QUFDNUQsY0FBYyx3QkFBd0IsQ0FBQztBQUN2QyxlQUFlLHNCQUFzQixDQUFDIn0=

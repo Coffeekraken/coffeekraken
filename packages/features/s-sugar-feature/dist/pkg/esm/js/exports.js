@@ -1,0 +1,6 @@
+import __SSugarFeature from './SSugarFeature';
+import __define from './define';
+export * from './SSugarFeature';
+export { __define };
+export default __SSugarFeature;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sZUFBZSxNQUFNLGlCQUFpQixDQUFDO0FBQzlDLE9BQU8sUUFBUSxNQUFNLFVBQVUsQ0FBQztBQUVoQyxjQUFjLGlCQUFpQixDQUFDO0FBQ2hDLE9BQU8sRUFBRSxRQUFRLEVBQUUsQ0FBQztBQUNwQixlQUFlLGVBQWUsQ0FBQyJ9

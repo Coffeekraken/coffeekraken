@@ -1,0 +1,8 @@
+import SDocblock from '../shared/SDocblock';
+import SDocblockBlock from '../shared/SDocblockBlock';
+import firstDocblocksWithNamespaceInFolder from './utils/firstDocblocksWithNamespaceInFolder';
+export * from '../shared/SDocblock';
+export * from '../shared/SDocblockBlock';
+export { SDocblockBlock, firstDocblocksWithNamespaceInFolder };
+export default SDocblock;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sU0FBUyxNQUFNLHFCQUFxQixDQUFDO0FBQzVDLE9BQU8sY0FBYyxNQUFNLDBCQUEwQixDQUFDO0FBQ3RELE9BQU8sbUNBQW1DLE1BQU0sNkNBQTZDLENBQUM7QUFFOUYsY0FBYyxxQkFBcUIsQ0FBQztBQUNwQyxjQUFjLDBCQUEwQixDQUFDO0FBRXpDLE9BQU8sRUFBRSxjQUFjLEVBQUUsbUNBQW1DLEVBQUUsQ0FBQztBQUMvRCxlQUFlLFNBQVMsQ0FBQyJ9

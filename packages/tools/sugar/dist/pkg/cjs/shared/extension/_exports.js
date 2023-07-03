@@ -1,0 +1,35 @@
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.__commonWebFileExtensions = exports.__commonVideoFileExtensions = exports.__commonTextFileExtensions = exports.__commonProgrammingFileExtensions = exports.__commonMediaFileExtensions = exports.__commonImageFileExtensions = exports.__commonFontFileExtensions = exports.__commonFileExtensions = exports.__commonExecutableFileExtensions = exports.__commonEmailFileExtensions = exports.__commonDiscFileExtensions = exports.__commonDataFileExtensions = exports.__commonCompressedFileExtensions = exports.__commonAudioFileExtensions = void 0;
+const commonAudioFileExtensions_1 = __importDefault(require("./commonAudioFileExtensions"));
+exports.__commonAudioFileExtensions = commonAudioFileExtensions_1.default;
+const commonCompressedFileExtensions_1 = __importDefault(require("./commonCompressedFileExtensions"));
+exports.__commonCompressedFileExtensions = commonCompressedFileExtensions_1.default;
+const commonDataFileExtensions_1 = __importDefault(require("./commonDataFileExtensions"));
+exports.__commonDataFileExtensions = commonDataFileExtensions_1.default;
+const commonDiscFileExtensions_1 = __importDefault(require("./commonDiscFileExtensions"));
+exports.__commonDiscFileExtensions = commonDiscFileExtensions_1.default;
+const commonEmailFileExtensions_1 = __importDefault(require("./commonEmailFileExtensions"));
+exports.__commonEmailFileExtensions = commonEmailFileExtensions_1.default;
+const commonExecutableFileExtensions_1 = __importDefault(require("./commonExecutableFileExtensions"));
+exports.__commonExecutableFileExtensions = commonExecutableFileExtensions_1.default;
+const commonFileExtensions_1 = __importDefault(require("./commonFileExtensions"));
+exports.__commonFileExtensions = commonFileExtensions_1.default;
+const commonFontFileExtensions_1 = __importDefault(require("./commonFontFileExtensions"));
+exports.__commonFontFileExtensions = commonFontFileExtensions_1.default;
+const commonImageFileExtensions_1 = __importDefault(require("./commonImageFileExtensions"));
+exports.__commonImageFileExtensions = commonImageFileExtensions_1.default;
+const commonMediaFileExtensions_1 = __importDefault(require("./commonMediaFileExtensions"));
+exports.__commonMediaFileExtensions = commonMediaFileExtensions_1.default;
+const commonProgrammingFileExtensions_1 = __importDefault(require("./commonProgrammingFileExtensions"));
+exports.__commonProgrammingFileExtensions = commonProgrammingFileExtensions_1.default;
+const commonTextFileExtensions_1 = __importDefault(require("./commonTextFileExtensions"));
+exports.__commonTextFileExtensions = commonTextFileExtensions_1.default;
+const commonVideoFileExtensions_1 = __importDefault(require("./commonVideoFileExtensions"));
+exports.__commonVideoFileExtensions = commonVideoFileExtensions_1.default;
+const commonWebFileExtensions_1 = __importDefault(require("./commonWebFileExtensions"));
+exports.__commonWebFileExtensions = commonWebFileExtensions_1.default;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7OztBQUFBLDRGQUFzRTtBQWdCbEUsc0NBaEJHLG1DQUEyQixDQWdCSDtBQWYvQixzR0FBZ0Y7QUFnQjVFLDJDQWhCRyx3Q0FBZ0MsQ0FnQkg7QUFmcEMsMEZBQW9FO0FBZ0JoRSxxQ0FoQkcsa0NBQTBCLENBZ0JIO0FBZjlCLDBGQUFvRTtBQWdCaEUscUNBaEJHLGtDQUEwQixDQWdCSDtBQWY5Qiw0RkFBc0U7QUFnQmxFLHNDQWhCRyxtQ0FBMkIsQ0FnQkg7QUFmL0Isc0dBQWdGO0FBZ0I1RSwyQ0FoQkcsd0NBQWdDLENBZ0JIO0FBZnBDLGtGQUE0RDtBQWdCeEQsaUNBaEJHLDhCQUFzQixDQWdCSDtBQWYxQiwwRkFBb0U7QUFnQmhFLHFDQWhCRyxrQ0FBMEIsQ0FnQkg7QUFmOUIsNEZBQXNFO0FBZ0JsRSxzQ0FoQkcsbUNBQTJCLENBZ0JIO0FBZi9CLDRGQUFzRTtBQWdCbEUsc0NBaEJHLG1DQUEyQixDQWdCSDtBQWYvQix3R0FBa0Y7QUFnQjlFLDRDQWhCRyx5Q0FBaUMsQ0FnQkg7QUFmckMsMEZBQW9FO0FBZ0JoRSxxQ0FoQkcsa0NBQTBCLENBZ0JIO0FBZjlCLDRGQUFzRTtBQWdCbEUsc0NBaEJHLG1DQUEyQixDQWdCSDtBQWYvQix3RkFBa0U7QUFnQjlELG9DQWhCRyxpQ0FBeUIsQ0FnQkgifQ==

@@ -1,6 +1,6 @@
 // @ts-nocheck
 
-import __parseHtml from '../../shared/console/parseHtml';
+import __parseHtml from '../../node/console/parseHtml';
 import __isChildProcess from '../../shared/is/isChildProcess';
 import __toString from '../../shared/string/toString';
 

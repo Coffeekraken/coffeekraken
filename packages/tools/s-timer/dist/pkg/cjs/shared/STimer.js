@@ -1,0 +1,428 @@
+"use strict";
+// @ts-nocheck
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const s_promise_1 = __importDefault(require("@coffeekraken/s-promise"));
+const datetime_1 = require("@coffeekraken/sugar/datetime");
+const object_1 = require("@coffeekraken/sugar/object");
+/**
+ * @name 		            STimer
+ * @namespace           shared
+ * @type                  Class
+ * @extends               SPromise
+ * @platform            node
+ * @platform            js
+ * @status              wip
+ *
+ * Class that let you create and handle timer with ease.
+ * With this class you can set some callback function that will be
+ * called each x ms or tell that you want your callbacks to be called
+ * a certain number of time during the timer time.
+ * This class extends the SPromise one, meaning that you can subscribe to differents "events" emited by the timer instance. Here's the list:
+ * - complete: emited when the timer is completed
+ * - tick: emited at each ticks depending on your settings
+ * - duration: emited when the duration has been changed
+ * - tickCount: emited when the tickCount has been changed
+ * - reset: emited when the timer has been reseted
+ * - start: emited when the timer starts
+ * - pause: emited when the timer has been paused
+ * - stop: emited when the timer has been stoped
+ * - destroy: emited when the timer has been destroyed
+ *
+ * @param     {Number|String}     duration      The duration of the timer. Can be a Number that will be treated as miliseconds, or a string like "1s", "2m", etc...
+ * @param     {Object}            [settings={}]     A settings object to configure your timer more deeply:
+ * - tickInterval (1000) {Number}: Specify the interval wanted between each ticks in miliseconds
+ * - tickCount (null) {Number}: Specify how many ticks you want during the timer process
+ * - loop (false) {Boolean}: Specify if you want the timer to loop or not.
+ *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
+ *
+ * @example 	js
+ * import __STimer from '@coffeekraken/s-timer';
+ * const myTimer = new __STimer(2000, {
+ * 		tickCount : 5
+ * })
+ * myTimer.on('tick', myTimer => {
+ * 		// do something here...
+ * })
+ * myTimer.start()
+ *
+ * @since     2.0.0
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+ */
+class STimer extends s_promise_1.default {
+    /**
+     * @name          constructor
+     * @type          Function
+     *
+     * Constructor
+     *
+     * @param 	{number} 	[duration=1000] 		The duration of the timer. Can be a number of milliseconds of a string time like '1s', '2m', etc...
+     * @param 	{Object} 	settings 		The settings for the timer
+     *
+     * @example         js
+     * import STimer from '@coffeekraken/s-timer';
+     * const timer = new STimer('2m');
+     * timer.onTick(() => {
+     *    // do something...
+     * });
+     * timer.start();
+     *
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    constructor(duration, settings = {}) {
+        super(({ resolve, reject, emit }) => {
+            this.duration = duration;
+            // calculate the tickInterval
+            if (this.settings.tickCount) {
+                this._tickCount = this.settings.tickCount;
+                this._tickInterval = this._duration / this._tickCount; // remove 1 cause the first tick is always the start time
+            }
+            else {
+                this._tickInterval = (0, datetime_1.__convertTime)(this.settings.tickInterval, 'ms');
+            }
+        }, (0, object_1.__deepMerge)({
+            id: 'STimer',
+            tickInterval: 1000,
+            tickCount: null,
+            loop: false,
+        }, settings));
+        /**
+         * @name          _duration
+         * @type          Number
+         * @private
+         *
+         * Store the timer duration wanted
+         *
+         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+         */
+        this._duration = 0;
+        /**
+         * @name        _remaining
+         * @type        Number
+         * @private
+         *
+         * Store the remaining time
+         *
+         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+         */
+        this._remaining = 0;
+        /**
+         * @name            _tickCount
+         * @type            Number
+         * @private
+         *
+         * How many ticks wanted during the timeout
+         *
+         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+         */
+        this._tickCount = null;
+        /**
+         * @name          _tickInterval
+         * @type          Number
+         * @private
+         *
+         * Computed value depending on the settings
+         *
+         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+         */
+        this._tickInterval = 1000;
+        /**
+         * @name          _tickSetTimeout
+         * @type          Numbee
+         * @private
+         *
+         * Store the setInterval instance
+         *
+         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+         */
+        this._tickSetTimeout = null;
+        /**
+         * @name            _startTime
+         * @type            Date
+         * @private
+         *
+         * Store the time when the timer is started
+         *
+         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+         */
+        this._startTime = null;
+        /**
+         * @name          _tickTime
+         * @type          Date
+         * @private
+         *
+         * Store the last tick time
+         *
+         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+         */
+        this._tickTime = null;
+        /**
+         * @name          _pauseTime
+         * @type          Date
+         * @private
+         *
+         * Store the pause time
+         *
+         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+         */
+        this._pauseTime = null;
+    }
+    /**
+     * @name          _tick
+     * @type          Function
+     * @private
+     *
+     * Internal tick function
+     *
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    _tick() {
+        // save the remaining timeout
+        this._tickTime = new Date();
+        // update remaing
+        this._remaining -= this._tickInterval;
+        // if we are at the end of the timer
+        if (this.remaining <= 0) {
+            // stop the timer
+            this.stop();
+            // check if need to loop
+            if (this.settings.loop) {
+                this.start();
+            }
+            // loop on each completes functions
+            this.emit('complete', this);
+        }
+        else {
+            // launch another tick
+            clearTimeout(this._tickSetTimeout);
+            this._tickSetTimeout = setTimeout(() => {
+                this._tick();
+            }, this._tickInterval);
+        }
+        // loop on each ticks functions
+        this.emit('tick', this);
+    }
+    /**
+     * @name            remaing
+     * @type            Number
+     * @get
+     *
+     * Get the remaining time in ms
+     *
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    get remaining() {
+        if (!this._startTime)
+            return 0;
+        return this._startTime.getTime() + this._duration - Date.now();
+    }
+    /**
+     * @name              duration
+     * @type              Number
+     * @get
+     * @set
+     *
+     * Set or get the duration. Can be a number in milliseconds, or a time string like '1m', '2s', etc...
+     *
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    set duration(duration) {
+        duration = (0, datetime_1.__convertTime)(duration, 'ms');
+        this._duration = duration;
+        if (this._tickCount) {
+            this._tickInterval = this._duration / this._tickCount; // remove 1 cause the first tick is always the start time
+        }
+        // loop on each change duration functions
+        this.emit('duration', this);
+    }
+    get duration() {
+        return this._duration;
+    }
+    /**
+     * @name          tickCount
+     * @type          Number
+     * @get
+     * @set
+     *
+     * Set of get the tickCount
+     *
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    set tickCount(tickCount) {
+        this._tickCount = tickCount;
+        this._tickInterval = this._duration / this._tickCount;
+        // loop on each change tick count functions
+        this.emit('tickCount', this);
+    }
+    get tickCount() {
+        return this._tickCount;
+    }
+    /**
+     * @name              percentage
+     * @type              Number
+     * @get
+     *
+     * Get the current timer advancement percentage
+     *
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    get percentage() {
+        if (!this.isStarted())
+            return 0;
+        return (100 / this.duration) * (this.duration - this.remaining);
+    }
+    /**
+     * @name              reset
+     * @type              Function
+     *
+     * Reset the timer
+     *
+     * @param 	{Boolean} 	start 	If the timer has to start after reseting or not
+     * @return 	{STimer}            The STimer instance
+     *
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    reset(start = false) {
+        // stop the timeout
+        clearTimeout(this._tickSetTimeout);
+        // reset the different timer elements
+        this._pauseTime = null;
+        this._startTime = null;
+        this._remaining = this._duration;
+        // check if need to start again
+        if (start)
+            this.start();
+        // loop on each resets functions
+        this.emit('reset', this);
+        // maintain chainability
+        return this;
+    }
+    /**
+     * @name            start
+     * @type            Function
+     *
+     * Start the timer
+     *
+     * @param         {Number}          [duration=null]           An optional duration for the timer session
+     * @return 	{STimer}      The STimer instance
+     *
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    start(duration = null) {
+        // clear the timeout to be sure
+        clearTimeout(this._tickSetTimeout);
+        // set the duration
+        if (duration)
+            this.duration = duration;
+        // if no tick time
+        if (!this._tickTime) {
+            this._tickTime = new Date();
+        }
+        // if is a pausetime
+        // mean that we resume the timer
+        if (this._pauseTime) {
+            // calculate time before new tick
+            const elapsed = this._pauseTime.getTime() - this._tickTime.getTime();
+            const remaining = this._tickInterval - elapsed;
+            clearTimeout(this._tickSetTimeout);
+            this._tickSetTimeout = setTimeout(() => {
+                this._tick();
+            }, remaining);
+            // set the start time
+            this._startTime = new Date();
+            // reset pauseTime
+            this._pauseTime = null;
+        }
+        else {
+            // save the start time
+            this._startTime = new Date();
+            this._remaining = this._duration;
+            // first time tick
+            clearTimeout(this._tickSetTimeout);
+            this._tickSetTimeout = setTimeout(() => {
+                this._tick();
+            }, this._tickInterval);
+        }
+        // loop on each start functions
+        this.emit('start', this);
+        // maintain chainability
+        return this;
+    }
+    /**
+     * @name            pause
+     * @type            Function
+     *
+     * Pause the timer
+     *
+     * @return 	{STimer}        The STimer instance
+     *
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    pause() {
+        // set the pauseTime
+        this._pauseTime = new Date();
+        // clean the interval
+        clearTimeout(this._tickSetTimeout);
+        // loop on each pause functions
+        this.emit('pause', this);
+        // maintain chainability
+        return this;
+    }
+    /**
+     * @name              stop
+     * @type              Function
+     *
+     * Stop the timer
+     *
+     * @return 	{STimer}      The STimer instance
+     *
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    stop() {
+        // reset
+        this.reset();
+        // loop on each stop functions
+        this.emit('stop', this);
+        // maintain chainability
+        return this;
+    }
+    /**
+     * @name            destroy
+     * @type            Function
+     *
+     * Destroy the timer
+     *
+     * @return        {STimer}            The STimer instance
+     *
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    destroy() {
+        this.stop();
+        this._completesCallbacks = [];
+        this._ticksCallbacks = [];
+        // loop on each destroy functions
+        this.emit('destroy', this);
+        // maintain chainability
+        return this;
+    }
+    /**
+     * @name              isStarted
+     * @type              Function
+     *
+     * Check if the timer is started
+     *
+     * @return          {Boolean}         true if started, false if not
+     *
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    isStarted() {
+        return this._startTime && !this._pauseTime;
+    }
+}
+exports.default = STimer;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOzs7OztBQUVkLHdFQUFpRDtBQUNqRCwyREFBNkQ7QUFDN0QsdURBQXlEO0FBRXpEOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBOENHO0FBQ0gsTUFBcUIsTUFBTyxTQUFRLG1CQUFVO0lBeUYxQzs7Ozs7Ozs7Ozs7Ozs7Ozs7O09Ba0JHO0lBQ0gsWUFBWSxRQUFRLEVBQUUsUUFBUSxHQUFHLEVBQUU7UUFDL0IsS0FBSyxDQUNELENBQUMsRUFBRSxPQUFPLEVBQUUsTUFBTSxFQUFFLElBQUksRUFBRSxFQUFFLEVBQUU7WUFDMUIsSUFBSSxDQUFDLFFBQVEsR0FBRyxRQUFRLENBQUM7WUFFekIsNkJBQTZCO1lBQzdCLElBQUksSUFBSSxDQUFDLFFBQVEsQ0FBQyxTQUFTLEVBQUU7Z0JBQ3pCLElBQUksQ0FBQyxVQUFVLEdBQUcsSUFBSSxDQUFDLFFBQVEsQ0FBQyxTQUFTLENBQUM7Z0JBQzFDLElBQUksQ0FBQyxhQUFhLEdBQUcsSUFBSSxDQUFDLFNBQVMsR0FBRyxJQUFJLENBQUMsVUFBVSxDQUFDLENBQUMseURBQXlEO2FBQ25IO2lCQUFNO2dCQUNILElBQUksQ0FBQyxhQUFhLEdBQUcsSUFBQSx3QkFBYSxFQUM5QixJQUFJLENBQUMsUUFBUSxDQUFDLFlBQVksRUFDMUIsSUFBSSxDQUNQLENBQUM7YUFDTDtRQUNMLENBQUMsRUFDRCxJQUFBLG9CQUFXLEVBQ1A7WUFDSSxFQUFFLEVBQUUsUUFBUTtZQUNaLFlBQVksRUFBRSxJQUFJO1lBQ2xCLFNBQVMsRUFBRSxJQUFJO1lBQ2YsSUFBSSxFQUFFLEtBQUs7U0FDZCxFQUNELFFBQVEsQ0FDWCxDQUNKLENBQUM7UUFwSU47Ozs7Ozs7O1dBUUc7UUFDSCxjQUFTLEdBQUcsQ0FBQyxDQUFDO1FBRWQ7Ozs7Ozs7O1dBUUc7UUFD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

@@ -1,0 +1,3 @@
+import { __SNpmUnusedProcess } from '@coffeekraken/sugar/npm';
+export default __SNpmUnusedProcess;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sRUFBRSxtQkFBbUIsRUFBRSxNQUFNLHlCQUF5QixDQUFDO0FBQzlELGVBQWUsbUJBQW1CLENBQUMifQ==

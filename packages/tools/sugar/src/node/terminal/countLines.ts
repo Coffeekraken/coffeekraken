@@ -1,6 +1,6 @@
 // @ts-nocheck
 
-import __countLine from '../../shared/string/countLine';
+import __countLineChars from '../../shared/string/countLineChars';
 
 /**
  * @name                                  countLine
@@ -19,7 +19,7 @@ import __countLine from '../../shared/string/countLine';
  * @todo      tests
  *
  * @snippet         __countLines($1)
- * 
+ *
  * @example         js
  * import { __countLines } from '@coffeekraken/sugar/terminal';
  * __countLines('Hello <red>World</red>'); // 11
@@ -31,7 +31,7 @@ export default function __countLines(string) {
     let currentCount = 0;
     let lines = string.split('\n');
     lines.forEach((line) => {
-        const lineCount = __countLine(line);
+        const lineCount = __countLineChars(line);
         currentCount += Math.ceil(lineCount / process.stdout.columns);
     });
     return currentCount;

@@ -1,7 +1,7 @@
 // @ts-nocheck
 
 import __hslaToRgba from './hslaToRgba';
-import __parseColor from './parse';
+import __parseColor from './parseColor';
 import __rgbaToHex from './rgbaToHex';
 import __rgbaToHsla from './rgbaToHsla';
 
@@ -25,7 +25,7 @@ import __rgbaToHsla from './rgbaToHsla';
  * @todo      tests
  *
  * @snippet         __convert($1, $2)
- * 
+ *
  * @example         js
  * import { __convert } from '@coffeekraken/sugar/color';
  * __convert('rgba(10,20,30,100)', 'rgba'); // => { r: 10, g: 20, b: 30, a: 100 }

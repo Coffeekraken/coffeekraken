@@ -4,213 +4,6 @@ import __fs from 'fs';
 import __path from 'path';
 import __ts from 'typescript';
 
-const _processedPkgs = [];
-
-function processPackage(packageRoot) {
-    console.log(`Processing package ${__chalk.yellow(packageRoot)}...`);
-    _processedPkgs.push(packageRoot);
-
-    let hasShared = false,
-        hasNode = false,
-        hasJs = false,
-        hasCli = false;
-    if (__fs.existsSync(`${packageRoot}/src/shared/exports.ts`)) {
-        console.log(
-            `${__chalk.yellow(packageRoot)} has a ${__chalk.magenta(
-                'shared',
-            )} folder`,
-        );
-        hasShared = true;
-    }
-    if (__fs.existsSync(`${packageRoot}/src/node/exports.ts`)) {
-        console.log(
-            `${__chalk.yellow(packageRoot)} has a ${__chalk.magenta(
-                'node',
-            )} folder`,
-        );
-        hasNode = true;
-    }
-    if (__fs.existsSync(`${packageRoot}/src/js/exports.ts`)) {
-        console.log(
-            `${__chalk.yellow(packageRoot)} has a ${__chalk.magenta(
-                'js',
-            )} folder`,
-        );
-        hasJs = true;
-    }
-    if (__fs.existsSync(`${packageRoot}/src/cli/exports.ts`)) {
-        console.log(
-            `${__chalk.yellow(packageRoot)} has a ${__chalk.magenta(
-                'cli',
-            )} folder`,
-        );
-        hasCli = true;
-    }
-
-    let json;
-    if (hasJs && hasNode) {
-        json = {
-            main: 'dist/pkg/cjs/js/exports.js',
-            module: 'dist/pkg/esm/js/exports.js',
-            exports: {
-                node: {
-                    require: './dist/pkg/cjs/node/exports.js',
-                    import: './dist/pkg/esm/node/exports.js',
-                },
-                default: {
-                    require: './dist/pkg/cjs/js/exports.js',
-                    import: './dist/pkg/esm/js/exports.js',
-                },
-            },
-        };
-    } else if (hasJs && !hasNode) {
-        json = {
-            main: 'dist/pkg/cjs/js/exports.js',
-            module: 'dist/pkg/esm/js/exports.js',
-            exports: {
-                '.': {
-                    require: './dist/pkg/cjs/js/exports.js',
-                    import: './dist/pkg/esm/js/exports.js',
-                },
-                './shared/*': {
-                    require: './dist/pkg/cjs/shared/*.js',
-                    import: './dist/pkg/esm/shared/*.js',
-                },
-                './node/*': {
-                    require: './dist/pkg/cjs/node/*.js',
-                    import: './dist/pkg/esm/node/*.js',
-                },
-                './js/*': {
-                    require: './dist/pkg/cjs/js/*.js',
-                    import: './dist/pkg/esm/js/*.js',
-                },
-            },
-        };
-    } else if (hasNode && !hasJs) {
-        json = {
-            main: 'dist/pkg/cjs/node/exports.js',
-            module: 'dist/pkg/esm/node/exports.js',
-            exports: {
-                '.': {
-                    require: './dist/pkg/cjs/node/exports.js',
-                    import: './dist/pkg/esm/node/exports.js',
-                },
-                './shared/*': {
-                    require: './dist/pkg/cjs/shared/*.js',
-                    import: './dist/pkg/esm/shared/*.js',
-                },
-                './node/*': {
-                    require: './dist/pkg/cjs/node/*.js',
-                    import: './dist/pkg/esm/node/*.js',
-                },
-                './js/*': {
-                    require: './dist/pkg/cjs/js/*.js',
-                    import: './dist/pkg/esm/js/*.js',
-                },
-            },
-        };
-    } else if (hasShared) {
-        json = {
-            main: 'dist/pkg/cjs/shared/exports.js',
-            module: 'dist/pkg/esm/shared/exports.js',
-            exports: {
-                '.': {
-                    require: './dist/pkg/cjs/shared/exports.js',
-                    import: './dist/pkg/esm/shared/exports.js',
-                },
-                './shared/*': {
-                    require: './dist/pkg/cjs/shared/*.js',
-                    import: './dist/pkg/esm/shared/*.js',
-                },
-                './node/*': {
-                    require: './dist/pkg/cjs/node/*.js',
-                    import: './dist/pkg/esm/node/*.js',
-                },
-                './js/*': {
-                    require: './dist/pkg/cjs/js/*.js',
-                    import: './dist/pkg/esm/js/*.js',
-                },
-            },
-        };
-    } else if (hasCli) {
-        json = {
-            main: 'dist/pkg/cjs/cli/exports.js',
-            module: 'dist/pkg/esm/cli/exports.js',
-            exports: {
-                '.': {
-                    require: './dist/pkg/cjs/cli/exports.js',
-                    import: './dist/pkg/esm/cli/exports.js',
-                },
-                './shared/*': {
-                    require: './dist/pkg/cjs/shared/*.js',
-                    import: './dist/pkg/esm/shared/*.js',
-                },
-                './node/*': {
-                    require: './dist/pkg/cjs/node/*.js',
-                    import: './dist/pkg/esm/node/*.js',
-                },
-                './js/*': {
-                    require: './dist/pkg/cjs/js/*.js',
-                    import: './dist/pkg/esm/js/*.js',
-                },
-            },
-        };
-    } else {
-        json = {
-            exports: {
-                './shared/*': {
-                    require: './dist/pkg/cjs/shared/*.js',
-                    import: './dist/pkg/esm/shared/*.js',
-                },
-                './node/*': {
-                    require: './dist/pkg/cjs/node/*.js',
-                    import: './dist/pkg/esm/node/*.js',
-                },
-                './js/*': {
-                    require: './dist/pkg/cjs/js/*.js',
-                    import: './dist/pkg/esm/js/*.js',
-                },
-            },
-        };
-    }
-
-    // if no json, stop here
-    if (!json) {
-        console.log(
-            `Package ${__chalk.yellow(packageRoot)} processed ${__chalk.green(
-                'successfully',
-            )}`,
-        );
-        return;
-    }
-
-    // otherwise, update the package json file
-    const currentJson = JSON.parse(
-        __fs.readFileSync(`${packageRoot}/package.json`).toString(),
-    );
-    delete currentJson.main;
-    delete currentJson.module;
-    delete currentJson.exports;
-
-    // merge the json
-    const newJson = { ...currentJson, ...json };
-
-    // write the new json
-    // console.log(
-    //     `Writing new package.json for ${__chalk.yellow(packageRoot)}...`,
-    // );
-    // __fs.writeFileSync(
-    //     `${packageRoot}/package.json`,
-    //     JSON.stringify(newJson, null, 2),
-    // );
-
-    console.log(
-        `Package ${__chalk.yellow(packageRoot)} processed ${__chalk.green(
-            'successfully',
-        )}`,
-    );
-}
-
 function processPath(path, platform = 'node') {
     const packageRoot = path.split('/').slice(0, 3).join('/');
     const pathRelToPackageRoot = path.split('/').slice(4).join('/');
@@ -232,10 +25,10 @@ function processPath(path, platform = 'node') {
     //     outFilePath = path.replace(/\.ts/, format === 'cjs' ? '.cjs' : '.mjs');
     // }
 
-    // process package if needed
-    if (!_processedPkgs.includes(packageRoot)) {
-        processPackage(packageRoot);
-    }
+    // // process package if needed
+    // if (!_processedPkgs.includes(packageRoot)) {
+    //     processPackage(packageRoot);
+    // }
 
     console.log(
         `Compiling ${__chalk.cyan(path)} to ${__chalk.magenta(
@@ -360,7 +153,7 @@ function processPath(path, platform = 'node') {
 
 // js
 const chokidarJs = __chokidar.watch(
-    'packages/*/*/src/js/**/*.ts',
+    'packages/*/*/src/(shared|js)/**/*.ts',
     // 'packages/*/*/src/js/**/vite.config.ts',
     {
         // ignoreInitial: true,
@@ -368,7 +161,6 @@ const chokidarJs = __chokidar.watch(
     },
 );
 function chokidarJsCallback(path) {
-    // processPath(path, 'node');
     processPath(path, 'browser');
 }
 chokidarJs.on('add', chokidarJsCallback);
@@ -379,7 +171,7 @@ const chokidarNode = __chokidar.watch(
     'packages/*/*/src/(node|shared|config|views|pages|cli)/**/*.ts',
     // 'packages/*/*/src/(node|shared|config|views|pages|cli)/**/vite.config.ts',
     {
-        ignoreInitial: true,
+        // ignoreInitial: true,
         ignored: ['**/node_modules'],
     },
 );

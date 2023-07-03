@@ -10,8 +10,6 @@
         "@coffeekraken/s-env": "^2.0.0-alpha.27",
         "@coffeekraken/s-glob": "^2.0.0-alpha.27",
         "@coffeekraken/sugar": "^2.0.0-alpha.27",
-        "@ts-ast-parser/core": "^0.2.0",
-        "@ts-ast-parser/readers": "^0.2.0",
         "ntypescript": "^1.201706190042.1",
         "typescript": "^5.0.2"
     },

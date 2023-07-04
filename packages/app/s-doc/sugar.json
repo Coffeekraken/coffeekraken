@@ -6,5 +6,20 @@
         "path": "./dist/pkg/%moduleSystem/config"
       }
     ]
-  }
+  },
+  "cli": [
+    {
+      "stack": "doc",
+      "description": "SDoc CLI",
+      "defaultAction": "serve",
+      "actions": {
+        "serve": {
+          "scope": "package",
+          "description": "Launch the SDoc server",
+          "process": "./dist/pkg/esm/cli/serve.cli.js",
+          "interface": "./dist/pkg/esm/node/interface/SDocServeParamsInterface.js"
+        }
+      }
+    }
+  ]
 }

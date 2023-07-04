@@ -3,12 +3,9 @@ FROM node:18
 RUN echo "\n\e[33mFrom node 18\e[0m"
 
 # entrypoint
-COPY ./up.sh /up.sh
-RUN chmod +x /up.sh
-ENTRYPOINT ["/up.sh"]
-
-# expose some ports
-EXPOSE 9090
+COPY ./docker-up.sh /docker-up.sh
+RUN chmod +x /docker-up.sh
+ENTRYPOINT ["/docker-up.sh"]
 
 # Configure apt
 ENV DEBIAN_FRONTEND=noninteractive
@@ -19,7 +16,7 @@ RUN apt-get -y update \
     && apt-get -y install --no-install-recommends apt-utils lsb-release dialog 2>&1
 
 # System wide utils
-RUN apt-get -y install sudo
+# RUN apt-get -y install sudo
 
 # Promite the "node" user as root
 # RUN usermod -aG sudo nodesudo chmod
@@ -60,6 +57,6 @@ RUN yarn set version berry
 RUN yarn config set nodeLinker node-modules
 
 # linking local binaries to global
-RUN cd /usr/bin && ln -s /usr/local/bin/node node
-RUN cd /usr/bin && ln -s /usr/local/bin/nodejs nodejs
+# RUN cd /usr/bin && ln -s /usr/local/bin/node node
+# RUN cd /usr/bin && ln -s /usr/local/bin/nodejs nodejs
 RUN cd /usr/bin && ln -s /data/web/coffeekraken/coffeekraken/packages/core/cli/dist/pkg/esm/cli/sugar.cli.js sugar

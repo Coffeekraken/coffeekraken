@@ -37,7 +37,7 @@ export default class SFrontendServerStartParamsInterface extends __SInterface {
                 description: 'Server port',
                 type: 'Number',
                 alias: 'p',
-                default: __SSugarConfig.get('frontendServer.port') || 3000,
+                default: __SSugarConfig.get('frontendServer.port') || 8080,
             },
             listen: {
                 description: 'Specify if you want the server to listen on specified hostname and port for requests or not',

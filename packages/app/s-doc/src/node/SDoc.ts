@@ -3,7 +3,13 @@ import __SDocblock from '@coffeekraken/s-docblock';
 import __SDocmap from '@coffeekraken/s-docmap';
 import __SMarkdownBuilder from '@coffeekraken/s-markdown-builder';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
+import { __wait } from '@coffeekraken/sugar/datetime';
 import { __deepMerge } from '@coffeekraken/sugar/object';
+import { __onProcessExit } from '@coffeekraken/sugar/process';
+import __bodyParser from 'body-parser';
+import __cors from 'cors';
+import __express from 'express';
+import __SDocServeParamsInterface from './interface/SDocServeParamsInterface';
 
 /**
  * @name                SDoc
@@ -29,9 +35,14 @@ import { __deepMerge } from '@coffeekraken/sugar/object';
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 
+export interface ISDocServeParams {
+    port: number;
+}
+
 export interface ISDocSettingsEndpoints {
     base?: string;
-    doc?: string;
+    item?: string;
+    items?: string;
 }
 
 export interface ISDocSettingsCategory {
@@ -69,6 +80,52 @@ export default class SDoc extends __SClass {
         })();
     }
 
+    serve(params: __SDocServeParamsInterface | string): Promise<any> {
+        return new Promise((resolve) => {
+            const finalParams = __SDocServeParamsInterface.apply(params);
+            const app = __express();
+            this.initOnExpressServer(app);
+            const server = app.listen(finalParams.port, async () => {
+                await __wait(100);
+
+                // 404
+                app.get('*', function (req, res) {
+                    res.status(404).send(
+                        `╰◝◟≖◞౪◟≖◞◜╯ Lost in the darkness your "${req.url}" certainly is...`,
+                    );
+                });
+
+                // server started successfully
+                console.log(
+                    `<yellow>SDoc server</yellow> started <green>successfully</green>`,
+                );
+                console.log(
+                    `<yellow>http://localhost</yellow>:<cyan>${finalParams.port}</cyan>`,
+                );
+
+                resolve(() => {
+                    return new Promise((_resolve) => {
+                        server.close(() => {
+                            _resolve(null);
+                        });
+                    });
+                });
+            });
+
+            __onProcessExit(() => {
+                console.log(
+                    `<red>[kill]</red> Gracefully killing the <cyan>doc server</cyan>...`,
+                );
+                return new Promise((_resolve) => {
+                    server.close(async () => {
+                        await __wait(500);
+                        _resolve(null);
+                    });
+                });
+            });
+        });
+    }
+
     /**
      * @name            initOnExpressServer
      * @type            Function
@@ -81,8 +138,15 @@ export default class SDoc extends __SClass {
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     initOnExpressServer(express: any): void {
+        // cors
+        const cors = __cors();
+
+        // body parser
+        express.use(__bodyParser.urlencoded({ extended: true }));
+        // express.use(__bodyParser.json());
+
         // base url "/"
-        express.get(this.settings.endpoints.base, (req, res) => {
+        express.get(this.settings.endpoints.base, cors, (req, res) => {
             res.status(200);
             res.type('application/json');
             res.send(this.settings.categories);
@@ -91,49 +155,57 @@ export default class SDoc extends __SClass {
             `<yellow>[SDoc]</yellow> Exposing doc endpoint "<cyan>${this.settings.endpoints.base}</cyan>"`,
         );
 
-        express.get(this.settings.endpoints.items, async (req, res) => {
-            const filters = JSON.parse(decodeURIComponent(req.params.filters)),
-                result = await this._docmap.search(filters);
+        express.post(
+            `${this.settings.endpoints.base}${this.settings.endpoints.items}`,
+            cors,
+            async (req, res) => {
+                const filters = JSON.parse(Object.keys(req.body)[0]),
+                    result = await this._docmap.search(filters);
 
-            res.status(200);
-            res.type('application/json');
-            res.send(result.items ?? {});
-        });
+                res.status(200);
+                res.type('application/json');
+                res.send(result.items ?? {});
+            },
+        );
         console.log(
             `<yellow>[SDoc]</yellow> Exposing items endpoint "<cyan>${this.settings.endpoints.items}</cyan>"`,
         );
 
-        express.get(this.settings.endpoints.item, async (req, res) => {
-            const id = req.params.id;
+        express.get(
+            `${this.settings.endpoints.base}${this.settings.endpoints.item}`,
+            cors,
+            async (req, res) => {
+                const id = req.params.id;
 
-            const item = this._docmapJson.map[id];
+                const item = this._docmapJson.map[id];
 
-            if (!item) {
+                if (!item) {
+                    res.status(200);
+                    res.type('application/json');
+                    res.send({});
+                }
+
+                if (item.type.raw?.toLowerCase?.() === 'markdown') {
+                    // render the markdown
+                    const builder = new __SMarkdownBuilder({});
+                    const mdResult = await builder.build({
+                        inPath: item.path,
+                        target: 'html',
+                        save: false,
+                        log: false,
+                    });
+                    item.docHtml = mdResult[0].code;
+                } else if (item) {
+                    const docblock = new __SDocblock(item.path);
+                    await docblock.parse();
+                    item.docblocks = docblock.toObject();
+                }
+
                 res.status(200);
                 res.type('application/json');
-                res.send({});
-            }
-
-            if (item.type.raw?.toLowerCase?.() === 'markdown') {
-                // render the markdown
-                const builder = new __SMarkdownBuilder({});
-                const mdResult = await builder.build({
-                    inPath: item.path,
-                    target: 'html',
-                    save: false,
-                    log: false,
-                });
-                item.docHtml = mdResult[0].code;
-            } else if (item) {
-                const docblock = new __SDocblock(item.path);
-                await docblock.parse();
-                item.docblocks = docblock.toObject();
-            }
-
-            res.status(200);
-            res.type('application/json');
-            res.send(item ?? {});
-        });
+                res.send(item ?? {});
+            },
+        );
         console.log(
             `<yellow>[SDoc]</yellow> Exposing item endpoint "<cyan>${this.settings.endpoints.item}</cyan>"`,
         );

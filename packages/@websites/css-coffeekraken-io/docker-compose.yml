@@ -1,8 +1,19 @@
 version: '3.8'
 services:
-    web:
+    postcss-web:
         build:
             context: .
             dockerfile: Dockerfile
         volumes:
             - ../../../:/data/web/coffeekraken/coffeekraken
+        # network_mode: 'host'
+        networks:
+            - coffeekraken
+        ports:
+            - '8080:8080'
+            - '9191:9191'
+
+networks:
+    coffeekraken:
+        name: coffeekraken
+        external: true

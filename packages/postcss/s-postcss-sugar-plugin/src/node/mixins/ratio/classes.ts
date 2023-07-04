@@ -126,7 +126,7 @@ export default function ({
         ).code(
             `
 .s-ratio--${ratioName.replace('/', '-')} {
-    @sugar.ratio(${ratioValue});
+    aspect-ratio: ${ratioName};
 }`,
             { type: 'CssClass' },
         );

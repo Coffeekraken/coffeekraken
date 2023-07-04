@@ -9,6 +9,20 @@ function default_1(api) {
         //     filters: {},
         // },
         },
+        server: {
+            /**
+             * @name        port
+             * @namespace   config.doc.server
+             * @type        String
+             * @default         /api/doc
+             *
+             * The server port
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+             */
+            port: 9191,
+        },
         endpoints: {
             /**
              * @name        base
@@ -26,32 +40,28 @@ function default_1(api) {
              * @name        items
              * @namespace   config.doc.endpoints
              * @type        String
-             * @default         %base/items/:filters
+             * @default         items
              *
-             * Enpoint where to get a category items
+             * Enpoint where to get a category items. This must be a POST request with the filters stringified JSON as body
              *
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            get items() {
-                return `${this.base}/items/:filters`;
-            },
+            items: `/items`,
             /**
              * @name        item
              * @namespace   config.doc.endpoints
              * @type        String
-             * @default         %base/item/:id
+             * @default         item/:id
              *
              * Enpoint where to get an actual documentation informations
              *
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            get item() {
-                return `${this.base}/item/:id`;
-            },
+            item: '/item/:id',
         },
     };
 }
 exports.default = default_1;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7O0FBQUEsbUJBQXlCLEdBQUc7SUFDeEIsT0FBTztRQUNILFVBQVUsRUFBRTtRQUNSLFNBQVM7UUFDVCxvQkFBb0I7UUFDcEIsb0RBQW9EO1FBQ3BELG1CQUFtQjtRQUNuQixLQUFLO1NBQ1I7UUFFRCxTQUFTLEVBQUU7WUFDUDs7Ozs7Ozs7OztlQVVHO1lBQ0gsSUFBSSxFQUFFLFVBQVU7WUFFaEI7Ozs7Ozs7Ozs7ZUFVRztZQUNILElBQUksS0FBSztnQkFDTCxPQUFPLEdBQUcsSUFBSSxDQUFDLElBQUksaUJBQWlCLENBQUM7WUFDekMsQ0FBQztZQUVEOzs7Ozs7Ozs7O2VBVUc7WUFDSCxJQUFJLElBQUk7Z0JBQ0osT0FBTyxHQUFHLElBQUksQ0FBQyxJQUFJLFdBQVcsQ0FBQztZQUNuQyxDQUFDO1NBQ0o7S0FDSixDQUFDO0FBQ04sQ0FBQztBQXZERCw0QkF1REMifQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7O0FBQUEsbUJBQXlCLEdBQUc7SUFDeEIsT0FBTztRQUNILFVBQVUsRUFBRTtRQUNSLFNBQVM7UUFDVCxvQkFBb0I7UUFDcEIsb0RBQW9EO1FBQ3BELG1CQUFtQjtRQUNuQixLQUFLO1NBQ1I7UUFFRCxNQUFNLEVBQUU7WUFDSjs7Ozs7Ozs7OztlQVVHO1lBQ0gsSUFBSSxFQUFFLElBQUk7U0FDYjtRQUVELFNBQVMsRUFBRTtZQUNQOzs7Ozs7Ozs7O2VBVUc7WUFDSCxJQUFJLEVBQUUsVUFBVTtZQUVoQjs7Ozs7Ozs7OztlQVVHO1lBQ0gsS0FBSyxFQUFFLFFBQVE7WUFFZjs7Ozs7Ozs7OztlQVVHO1lBQ0gsSUFBSSxFQUFFLFdBQVc7U0FDcEI7S0FDSixDQUFDO0FBQ04sQ0FBQztBQWxFRCw0QkFrRUMifQ==

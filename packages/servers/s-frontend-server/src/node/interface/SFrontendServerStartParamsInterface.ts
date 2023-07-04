@@ -39,7 +39,7 @@ export default class SFrontendServerStartParamsInterface extends __SInterface {
                 description: 'Server port',
                 type: 'Number',
                 alias: 'p',
-                default: __SSugarConfig.get('frontendServer.port') || 3000,
+                default: __SSugarConfig.get('frontendServer.port') || 8080,
             },
             listen: {
                 description:

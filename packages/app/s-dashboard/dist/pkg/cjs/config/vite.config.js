@@ -13,9 +13,9 @@ exports.default = (api) => {
     let dashboardLazyProxyUrl = '', dashboardInitProxyUrl = '';
     if (packageJsonHighest.name === '@coffeekraken/coffeekraken') {
         const dashboardLazyPath = path_1.default.resolve((0, fs_1.__dirname)(), '../../../../src/js/lazy.ts');
-        dashboardLazyProxyUrl = `http://localhost:3000/@fs${dashboardLazyPath}`;
+        dashboardLazyProxyUrl = `http://localhost:5173/@fs${dashboardLazyPath}`;
         const dashboardInitPath = path_1.default.resolve((0, fs_1.__dirname)(), '../../../../src/js/init.ts');
-        dashboardInitProxyUrl = `http://localhost:3000/@fs${dashboardInitPath}`;
+        dashboardInitProxyUrl = `http://localhost:5173/@fs${dashboardInitPath}`;
     }
     return {
         server: {

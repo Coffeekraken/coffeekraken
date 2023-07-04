@@ -42,7 +42,7 @@ class SFrontendServerStartParamsInterface extends s_interface_1.default {
                 description: 'Server port',
                 type: 'Number',
                 alias: 'p',
-                default: s_sugar_config_1.default.get('frontendServer.port') || 3000,
+                default: s_sugar_config_1.default.get('frontendServer.port') || 8080,
             },
             listen: {
                 description: 'Specify if you want the server to listen on specified hostname and port for requests or not',

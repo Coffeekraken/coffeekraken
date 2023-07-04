@@ -281,14 +281,14 @@ export default function (api) {
              * @name          post
              * @namespace     config.vite.server
              * @type          Number
-             * @default      3000
+             * @default      5173
              *
              * Specify the port for the vite server
              *
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            port: 3000,
+            port: 5173,
             /**
              * @name          hostname
              * @namespace     config.vite.server
@@ -322,7 +322,7 @@ export default function (api) {
                 // have to target the "src" directory
                 '^\\/dist\\/.*(\\.css|\\.ts|\\.js(?!on)|\\.tsx|\\.jsx|\\.mjs)(\\?.*)?$':
                     {
-                        target: `http://localhost:3000`,
+                        target: `http://0.0.0.0:5173`,
                         changeOrigin: true,
                         rewrite: (path) => {
                             return path.replace(/\/dist\//, '/src/');

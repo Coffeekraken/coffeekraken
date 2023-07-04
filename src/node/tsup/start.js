@@ -46,12 +46,12 @@ function processPath(path, platform = 'node') {
             inlineSourceMap: true,
             traceResolution: false,
             esModuleInterop: true,
-            moduleResolution: 'node',
+            moduleResolution: 'nodenext',
             sourcemap: true,
             skipLibCheck: true,
             declaration: true,
             experimentalDecorators: true,
-            forceConsistentCasingInFileNames: false,
+            forceConsistentCasingInFileNames: true,
             noImplicitAny: false,
             noStrictGenericChecks: false,
             allowSyntheticDefaultImports: false,
@@ -156,7 +156,7 @@ const chokidarJs = __chokidar.watch(
     'packages/*/*/src/(shared|js)/**/*.ts',
     // 'packages/*/*/src/js/**/vite.config.ts',
     {
-        // ignoreInitial: true,
+        ignoreInitial: true,
         ignored: ['**/node_modules'],
     },
 );
@@ -171,7 +171,7 @@ const chokidarNode = __chokidar.watch(
     'packages/*/*/src/(node|shared|config|views|pages|cli)/**/*.ts',
     // 'packages/*/*/src/(node|shared|config|views|pages|cli)/**/vite.config.ts',
     {
-        // ignoreInitial: true,
+        ignoreInitial: true,
         ignored: ['**/node_modules'],
     },
 );

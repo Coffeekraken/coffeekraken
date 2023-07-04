@@ -13,7 +13,7 @@ import {
     __readJsonSync,
     __removeSync,
     __writeFileSync,
-    __writeJsonSync
+    __writeJsonSync,
 } from '@coffeekraken/sugar/fs';
 import { __deepMerge } from '@coffeekraken/sugar/object';
 import { __packageCacheDir, __packageRootDir } from '@coffeekraken/sugar/path';
@@ -175,6 +175,9 @@ export default class SStaticBuilder extends __SBuilder {
             );
             console.log(
                 `<yellow>○</yellow> Host   : <cyan>${params.host}</cyan>`,
+            );
+            console.log(
+                `<yellow>○</yellow> Input  : <cyan>${params.input}</cyan>`,
             );
 
             // handle params

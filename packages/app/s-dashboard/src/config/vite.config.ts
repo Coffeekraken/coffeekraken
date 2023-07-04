@@ -15,12 +15,12 @@ export default (api) => {
             __dirname(),
             '../../../../src/js/lazy.ts',
         );
-        dashboardLazyProxyUrl = `http://localhost:3000/@fs${dashboardLazyPath}`;
+        dashboardLazyProxyUrl = `http://localhost:5173/@fs${dashboardLazyPath}`;
         const dashboardInitPath = __path.resolve(
             __dirname(),
             '../../../../src/js/init.ts',
         );
-        dashboardInitProxyUrl = `http://localhost:3000/@fs${dashboardInitPath}`;
+        dashboardInitProxyUrl = `http://localhost:5173/@fs${dashboardInitPath}`;
     }
 
     return {

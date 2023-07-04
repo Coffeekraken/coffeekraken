@@ -145,7 +145,9 @@ export default class SDocComponent extends __SLitComponent {
             this.requestUpdate();
 
             const request = await fetch(
-                    this.props.endpoints.item.replace(':id', itemObj.id),
+                    `${
+                        this.props.endpoints.base
+                    }${this.props.endpoints.item.replace(':id', itemObj.id)}`,
                 ),
                 item = await request.json();
 
@@ -181,10 +183,15 @@ export default class SDocComponent extends __SLitComponent {
         this._status.loading = true;
 
         const request = await fetch(
-                this.props.endpoints.items.replace(
-                    ':filters',
-                    encodeURIComponent(JSON.stringify(category.filters)),
-                ),
+                `${this.props.endpoints.base}${this.props.endpoints.items}`,
+                {
+                    method: 'POST',
+                    headers: {
+                        Accept: 'application/json',
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                    },
+                    body: JSON.stringify(category.filters),
+                },
             ),
             items = await request.json();
 

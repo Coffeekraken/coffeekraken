@@ -219,14 +219,14 @@ export default function (api) {
                  * @name            glob
                  * @namespace       config.staticBuilder.assets.dist
                  * @type            String
-                 * @default         +(css|fonts|img|js)/** /*
+                 * @default         +(css|fonts|favicon|img|js)/** /*
                  *
                  * Specify the directory/file/url from which to get the asset to copy
                  *
                  * @since           2.0.0
                  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
-                glob: '+(css|fonts|img|js)/**/*',
+                glob: '+(css|fonts|favicon|img|js)/**/*',
                 /**
                  * @name            to
                  * @namespace       config.staticBuilder.assets.dist

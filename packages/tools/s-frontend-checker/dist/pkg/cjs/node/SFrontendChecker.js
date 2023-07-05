@@ -162,7 +162,7 @@ class SFrontendChecker extends SFrontendChecker_1.default {
         }
         return new s_promise_1.default(({ resolve, emit }) => __awaiter(this, void 0, void 0, function* () {
             const browser = yield puppeteer_1.default.launch({
-                headless: 'new',
+                headless: false,
             });
             const page = yield browser.newPage();
             yield page.goto(finalParams.url, {

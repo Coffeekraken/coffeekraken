@@ -231,7 +231,7 @@ export default class SFrontendChecker
 
         return new __SPromise(async ({ resolve, emit }) => {
             const browser = await puppeteer.launch({
-                headless: 'new',
+                headless: false,
             });
             const page = await browser.newPage();
             await page.goto(finalParams.url, {

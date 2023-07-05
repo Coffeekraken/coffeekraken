@@ -20,7 +20,7 @@
         </div>
 
         <div class="doc">
-            <s-doc port="9191"></s-doc>
+            <s-doc></s-doc>
         </div>
 
     </div>

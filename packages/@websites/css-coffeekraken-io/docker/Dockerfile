@@ -7,6 +7,10 @@ COPY ./docker-up.sh /docker-up.sh
 RUN chmod +x /docker-up.sh
 ENTRYPOINT ["/docker-up.sh"]
 
+# start script
+COPY ./docker-start.sh /docker-start.sh
+RUN chmod +x /docker-start.sh
+
 # Configure apt
 ENV DEBIAN_FRONTEND=noninteractive
 

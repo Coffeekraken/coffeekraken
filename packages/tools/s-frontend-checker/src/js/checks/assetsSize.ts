@@ -211,7 +211,7 @@ export default function (__SFrontendChecker: ISFrontendChecker) {
             );
 
             messages.push(
-                `Total  : <cyan>${__formatFileSize(
+                `Total    : <cyan>${__formatFileSize(
                     globalObj.totalSize,
                 )}</cyan>`,
             );

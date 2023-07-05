@@ -9508,13 +9508,20 @@ class yg extends ht {
       W(
         // @ts-ignore
         dg.defaults(),
+        {
+          layout: [
+            [
+              "s-dashboard-browserstack",
+              "s-dashboard-web-vitals",
+              "s-dashboard-assets",
+              "s-dashboard-google"
+            ],
+            ["s-dashboard-frontend-checker"]
+          ]
+        },
         e ?? {}
       )
-    ), this._defined = !1, this._webVitalsInjected = !1, Cc(pg), document.dashboard = this, this._$iframe = document.createElement("iframe"), this._$iframe.classList.add("s-dashboard-iframe"), this._$focusItem = document.createElement("div"), this._$focusItem.setAttribute("tabindex", "-1"), this._$focusItem.style.position = "fixed", this._$focusItem.style.top = "0", this._$focusItem.style.left = "0", document.body.appendChild(this._$focusItem), Oo("ctrl+s").on("press", () => {
-      this.open();
-    }), Oo("ctrl+y").on("press", () => {
-      this.open();
-    }), this._injectWebVitals();
+    ), this._inited = !1, this._webVitalsInjected = !1, document.dashboard = this, this._$iframe = document.createElement("iframe"), this._$iframe.classList.add("s-dashboard-iframe"), document.body.appendChild(this._$iframe), document.addEventListener("keyup", this._onKeyup.bind(this));
   }
   /**
    * @name            iframe
@@ -9543,6 +9550,50 @@ class yg extends ht {
   get document() {
     var e;
     return ((e = window.parent) == null ? void 0 : e.document) ?? document;
+  }
+  /**
+   * Init the dashboard
+   */
+  _onKeyup(e) {
+    (e.key === "s" || e.key === "x") && e.ctrlKey && (e.key === "x" && (this.settings.env = "development"), document.removeEventListener("keyup", this._onKeyup), this.open());
+  }
+  /**
+   * Init the dashboard
+   */
+  _initDashboard() {
+    this._inited || (Cc(pg), this._$focusItem = document.createElement("div"), this._$focusItem.setAttribute("tabindex", "-1"), this._$focusItem.style.position = "fixed", this._$focusItem.style.top = "0", this._$focusItem.style.left = "0", document.body.appendChild(this._$focusItem), Oo("ctrl+s").on("press", () => {
+      this.open();
+    }), Oo("ctrl+x").on("press", () => {
+      this.open();
+    }), this._injectWebVitals(), this._$iframe.contentWindow.document.open(), this._$iframe.contentWindow.document.write(`
+                <html>
+                <head>
+                    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+                    <script>
+                        var $document = document;
+                        if (window.parent) {
+                            $document = window.parent.document;
+                        }
+                        var $html = $document.querySelector('html');
+                        var $dashboardHtml = document.querySelector('html');
+                        var theme = $html.getAttribute('theme');
+                        var isDark = theme.match(/dark$/);
+                        if (isDark && window.parent) {
+                            $dashboardHtml.setAttribute('theme', 'default-dark');
+                        } else {
+                            $dashboardHtml.setAttribute('theme', 'default-light');
+                        }
+                        $document.addEventListener('s-theme.change', function(e) {
+                            $dashboardHtml.setAttribute('theme', 'default-' + e.detail.variant);
+                        });
+                    <\/script>
+                    ${this.settings.env === "development" ? '<script src="http://0.0.0.0:5173/sugar/dashboard/init.js" type="module" defer><\/script>' : '<script src="https://cdnv2.coffeekraken.io/s-dashboard/init/init.js" type="module" defer><\/script>'}
+                </head>
+                <body s-sugar>
+                    <s-dashboard></s-dashboard>
+                </body>
+                </html>
+            `), this._$iframe.contentWindow.document.close(), this._inited = !0);
   }
   _injectWebVitals() {
     if (this._webVitalsInjected)
@@ -9584,25 +9635,6 @@ class yg extends ht {
         `, document.webVitals = {}, this.document.body.appendChild(e);
   }
   /**
-   * @name            changePage
-   * @type            Function
-   *
-   * Open the dashboard with the pages component selected
-   *
-   * @since       2.0.0
-   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-   */
-  // changePage() {
-  //     // open the dashboard
-  //     this.open();
-  //     // @ts-ignore
-  //     this._$iframe.contentDocument?.dispatchEvent(
-  //         new CustomEvent('dashboard.changePage', {}),
-  //     );
-  //     // @ts-ignore
-  //     this._$iframe.contentDocument.isChangePageWanted = true;
-  // }
-  /**
    * @name            open
    * @type            Function
    *
@@ -9626,37 +9658,9 @@ class yg extends ht {
    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
    */
   async open() {
-    this._$iframe.parentElement || (document.body.appendChild(this._$iframe), this._$iframe.contentWindow.document.open(), this._$iframe.contentWindow.document.write(`
-                <html>
-                <head>
-                    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
-                    <script>
-                        var $document = document;
-                        if (window.parent) {
-                            $document = window.parent.document;
-                        }
-                        var $html = $document.querySelector('html');
-                        var $dashboardHtml = document.querySelector('html');
-                        var theme = $html.getAttribute('theme');
-                        var isDark = theme.match(/dark$/);
-                        if (isDark && window.parent) {
-                            $dashboardHtml.setAttribute('theme', 'default-dark');
-                        } else {
-                            $dashboardHtml.setAttribute('theme', 'default-light');
-                        }
-                        $document.addEventListener('s-theme.change', function(e) {
-                            $dashboardHtml.setAttribute('theme', 'default-' + e.detail.variant);
-                        });
-                    <\/script>
-                    ${this.settings.env === "development" ? '<script src="http://0.0.0.0:5173/sugar/dashboard/init.js" type="module" defer><\/script>' : '<script src="https://cdnv2.coffeekraken.io/s-dashboard/init/init.js" type="module" defer><\/script>'}
-                </head>
-                <body s-sugar>
-                    <s-dashboard></s-dashboard>
-                </body>
-                </html>
-            `), this._$iframe.contentWindow.document.close()), this._$iframe.classList.add("active"), this.document.querySelector("html").style.overflow = "hidden", fg(
+    this._inited || this._initDashboard(), this._$iframe.classList.add("active"), this.document.querySelector("html").style.overflow = "hidden", fg(
       () => {
-        _console.log("CLOSE"), this.close();
+        this.close();
       },
       {
         rootNode: [document, this.document]

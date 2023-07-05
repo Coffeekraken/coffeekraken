@@ -244,7 +244,6 @@ export default class SFrontendChecker
                 content: `window.isPuppeteer = true;`,
             });
 
-            let lastLogLines = 0;
             page.on('console', async (checkObjOrString) => {
                 let str = checkObjOrString.text().replace(/█/gm, '').trim();
 
@@ -362,12 +361,16 @@ export default class SFrontendChecker
                     pro.on(
                         'checks.complete',
                         (checksResult: ISFrontendCheckerCheckResult) => {
-                            console.log(
+                            const log = (...args) => {
+                                (_console ?? console).log(...args);
+                            };
+
+                            log(
                                 `!<magenta>Executed</magenta> tests           <grey>:</grey> <magenta>${
                                     Object.keys(checksResult.checks).length
                                 }</magenta>`,
                             );
-                            console.log(
+                            log(
                                 `!<green>Successfull</green> tests        <grey>:</grey> <green>${
                                     Object.keys(checksResult.checks).filter(
                                         (checkId) => {
@@ -383,7 +386,7 @@ export default class SFrontendChecker
                                     ).length
                                 }</green>`,
                             );
-                            console.log(
+                            log(
                                 `!<yellow>Warning</yellow> tests            <grey>:</grey> <yellow>${
                                     Object.keys(checksResult.checks).filter(
                                         (checkId) => {
@@ -399,7 +402,7 @@ export default class SFrontendChecker
                                     ).length
                                 }</yellow>`,
                             );
-                            console.log(
+                            log(
                                 `!<red>Error</red> tests              <grey>:</grey> <red>${
                                     Object.keys(checksResult.checks).filter(
                                         (checkId) => {
@@ -415,14 +418,14 @@ export default class SFrontendChecker
                                     ).length
                                 }</red>`,
                             );
-                            console.log('!---');
+                            log('!---');
                             const scoreColor =
                                 checksResult.score >= 66
                                     ? 'green'
                                     : checksResult.score >= 33
                                     ? 'yellow'
                                     : 'red';
-                            console.log(
+                            log(
                                 `!Front<yellow>score</yellow>               <grey>:</grey> <${scoreColor}>${checksResult.score}</${scoreColor}><grey>/100</grey>`,
                             );
 

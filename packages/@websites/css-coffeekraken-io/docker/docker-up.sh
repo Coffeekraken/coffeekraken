@@ -1,4 +1,4 @@
 #!/bin/sh
-cd /data/web/coffeekraken/coffeekraken && cd packages/@websites/css-coffeekraken-io
-npm install pm2 -g
-pm2 start docker/start.sh
+cd /data/web/coffeekraken/coffeekraken/packages/@websites/css-coffeekraken-io
+npm run static.serve &
+npm run doc.serve

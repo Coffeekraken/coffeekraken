@@ -6,7 +6,6 @@ services:
             dockerfile: Dockerfile
         volumes:
             - ../../../:/data/web/coffeekraken/coffeekraken
-        # network_mode: 'host'
         networks:
             - coffeekraken
         ports:

@@ -54,7 +54,7 @@ const viewsRelated = import.meta.globEager('../views/**/*.ts');
     __SDocComponentDefine({
         mountWhen: 'direct',
         endpoints: {
-            base: `${document.location.protocol}//${document.location.hostname}:9191/api/doc`,
+            // base: `${document.location.protocol}//${document.location.hostname}:9191/api/doc`,
         },
         icons: {
             file: '<i class="s-icon:file"></i>',

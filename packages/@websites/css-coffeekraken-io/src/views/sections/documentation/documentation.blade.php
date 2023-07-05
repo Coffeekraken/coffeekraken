@@ -12,9 +12,6 @@
                 <p class="s-typo:h4 s-mbe:30">
                     Here all the available mixins, functions and configurations
                 </p>
-                <p class="s-typo:p s-mbe:30">
-                    
-                </p>
             </div>
 
         </div>

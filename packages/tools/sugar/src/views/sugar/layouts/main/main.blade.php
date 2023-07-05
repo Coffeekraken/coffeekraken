@@ -82,7 +82,7 @@ if (isset($frontspec)) {
     @if (isset($_ENV['ENV']) && $_ENV['ENV'] != 'production')
         <!-- SDashboard -->
         {{-- <script src="/sugar/dashboard/lazy.js" type="module" defer></script> --}}
-        <script src="https://cdnv2.coffeekraken.io/s-dashboard/lazy/lazy.js" defer></script>
+        {{-- <script src="https://cdnv2.coffeekraken.io/s-dashboard/lazy/lazy.js" defer></script> --}}
     @endif
 
     <!-- favicon -->

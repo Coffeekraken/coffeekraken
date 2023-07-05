@@ -48,14 +48,14 @@ export default class CkSettings extends __SLitComponent {
         }
         const h = html`
             <div class="s-dropdown-container">
-                <button>
+                <button aria-label="Coffeekraken products">
                     <i class="s-icon:ui-menu-grid-solid"></i>
                 </button>
                 <div class="s-dropdown:bottom-end">
                     <ul class="_packages">
                         ${this._packages.map(
                             (pkg) => html`
-                                <li class="_package">
+                                <li class="_package" ?disabled=${pkg.disabled}>
                                     <a
                                         href="${pkg.url}"
                                         title="Coffeekraken ${pkg.title}"

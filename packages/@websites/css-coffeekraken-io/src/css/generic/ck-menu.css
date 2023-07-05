@@ -1,6 +1,7 @@
 .ck-menu {
     button {
         padding: sugar.padding(30);
+        @sugar.focus.outline (accent);
     }
     button i {
         @sugar.transition fast;

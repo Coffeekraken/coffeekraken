@@ -3,17 +3,29 @@
     "title": "Coffeekraken",
     "version": "2.0.0-alpha.27",
     "description": "The frontend toolkit that works for everyone. Experts, professionals and new-comers",
+    "keywords": [
+        "coffeekraken",
+        "coffee",
+        "kraken",
+        "sugar",
+        "postcss",
+        "styleguide",
+        "color",
+        "margin",
+        "padding",
+        "ui"
+    ],
     "type": "module",
     "private": true,
     "scripts": {
         "dev": "sugar kitchen.run dev & npm run doc.serve",
         "build": "sugar kitchen.run build --target production",
         "preview": "sugar kitchen.run preview",
+        "static": "npm run preview & sleep 5 && npm run static.build && npm run static.serve",
         "static.serve": "npx http-server static",
         "static.build": "sugar static.build --clean --env production --target production",
         "doc.serve": "sugar doc.serve",
-        "deploy": "rsync -avzh --delete --progress --stats ./static fe0mt_coffeekraken@fe0mt.ftp.infomaniak.com:~/sites/coffeekraken.io",
-        "deploy.bogdanov": "rsync -avzh --delete --progress --stats ./static fe0mt_bogdanov_ssh@fe0mt.ftp.infomaniak.com:~/sites/bogdanov.coffeekraken.io"
+        "deploy": "echo 'Simply push in the master branch to deploy'"
     },
     "repository": {
         "type": "git",
@@ -99,6 +111,7 @@
         "@coffeekraken/s-vite-sugar-plugin": "^2.0.0-alpha.27",
         "@coffeekraken/sugar": "^2.0.0-alpha.27",
         "firebase": "^9.9.1",
+        "http-server": "^14.1.1",
         "lit": "^2.2.8",
         "lit-element": "^2.5.1",
         "minisearch": "^3.3.0",

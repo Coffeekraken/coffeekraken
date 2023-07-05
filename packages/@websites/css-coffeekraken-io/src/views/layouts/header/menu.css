@@ -8,6 +8,8 @@
         font-size: sugar.font.size(40);
 
         ._main-link {
+            @sugar.focus.outline (accent);
+
             & > *:first-child {
                 position: relative;
             }
@@ -29,8 +31,7 @@
                 transform: scale(0.85);
             }
 
-            &:hover,
-            &:focus-within {
+            &:hover {
                 & > *:first-child {
                     color: sugar.color(accent);
                 }

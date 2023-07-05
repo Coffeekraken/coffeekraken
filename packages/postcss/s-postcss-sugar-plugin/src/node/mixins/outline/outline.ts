@@ -2,12 +2,19 @@ import __SInterface from '@coffeekraken/s-interface';
 
 class postcssSugarPluginStateOutlineMixinInterface extends __SInterface {
     static get _definition() {
-        return {};
+        return {
+            color: {
+                type: 'String',
+                default: 'current',
+            },
+        };
     }
 }
 export { postcssSugarPluginStateOutlineMixinInterface as interface };
 
-export interface postcssSugarPluginStateOutlineMixinParams {}
+export interface postcssSugarPluginStateOutlineMixinParams {
+    color?: string;
+}
 
 /**
  * @name           outline
@@ -43,6 +50,7 @@ export default function ({
     replaceWith: Function;
 }) {
     const finalParams = <postcssSugarPluginStateOutlineMixinParams>{
+        color: 'current',
         ...(params ?? {}),
     };
 
@@ -52,10 +60,10 @@ export default function ({
 
         @keyframes s-outline-in {
             from {
-                outline: 0px solid sugar.color(current, --alpha 0);
+                outline: 0px solid sugar.color(${finalParams.color}, --alpha 0);
             }
             to {
-                outline: 10px solid sugar.color(current, --alpha 0.1);
+                outline: 10px solid sugar.color(${finalParams.color}, --alpha 0.2);
             }
         }
 

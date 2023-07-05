@@ -3,15 +3,6 @@
 /* @sugar.theme.import ($variant: light); */
 
 /* main sugar classes */
-/* @sugar.typo.classes;
-@sugar.color.classes;
-@sugar.display.classes;
-@sugar.layout.classes;
-@sugar.flex.classes;
-@sugar.text.classes;
-@sugar.gap.classes;
-@sugar.margin.classes;
-@sugar.padding.classes; */
 @sugar.classes;
 
 /* UI's */
@@ -40,6 +31,9 @@
   fa:user-graduate:documentation
   fa:synagogue:start
   fa:file-code:examples
+  fa:magnifying-glass:search
+  fa:expand:enter-fullscreen
+  fa:compress:exit-fullscreen
   fa:keyboard
   fa:file
   fa:heart

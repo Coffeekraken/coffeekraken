@@ -23,7 +23,9 @@ export default function (__SFrontendChecker: ISFrontendChecker) {
         level: 2,
         check({ $context }) {
             const $nonWebpImages = Array.from(
-                $context.querySelectorAll('img:not([src*=".webp"])') ?? [],
+                $context.querySelectorAll(
+                    'img:is([src*=".jpg"],[src*=".jpeg"],[src*=".gif"],[src*=".png"])',
+                ) ?? [],
             );
 
             if ($nonWebpImages.length) {

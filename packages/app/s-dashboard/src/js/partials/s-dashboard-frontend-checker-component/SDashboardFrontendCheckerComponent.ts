@@ -162,6 +162,18 @@ export default class SDashboardFrontendCheckerComponent extends __SLitComponent 
         this.requestUpdate();
     }
 
+    _highlightElement($elm: HTMLElement): void {
+        _console.log('Highlighted element', $elm);
+
+        this.dispatchEvent(
+            new CustomEvent('dashboard.hide', {
+                bubbles: true,
+            }),
+        );
+
+        $elm.scrollIntoView();
+    }
+
     render() {
         return html`
             <div class="s-dashboard-frontend-checker s-width:100">
@@ -458,6 +470,11 @@ export default class SDashboardFrontendCheckerComponent extends __SLitComponent 
                                                           ${checkObj.result
                                                               .example
                                                               ? html`
+                                                                    <h3
+                                                                        class="s-typo:h4 s-mb:20"
+                                                                    >
+                                                                        Example
+                                                                    </h3>
                                                                     <p
                                                                         class="s-typo:code s-mb:20"
                                                                     >
@@ -465,6 +482,51 @@ export default class SDashboardFrontendCheckerComponent extends __SLitComponent 
                                                                             .result
                                                                             .example}
                                                                     </p>
+                                                                `
+                                                              : ''}
+                                                          ${checkObj.result
+                                                              .elements?.length
+                                                              ? html`
+                                                                    <h3
+                                                                        class="s-typo:h4 s-mb:20"
+                                                                    >
+                                                                        Element${checkObj
+                                                                            .result
+                                                                            .elements
+                                                                            .length >
+                                                                        1
+                                                                            ? `s (${checkObj.result.elements.length})`
+                                                                            : ''}
+                                                                    </h3>
+                                                                    ${Array.from(
+                                                                        checkObj
+                                                                            .result
+                                                                            .elements ??
+                                                                            [],
+                                                                    ).map(
+                                                                        (
+                                                                            $elm,
+                                                                        ) => {
+                                                                            const clonedElm =
+                                                                                $elm.cloneNode();
+                                                                            clonedElm.innerHTML =
+                                                                                '';
+                                                                            return html`
+                                                                                <p
+                                                                                    @dblclick=${(
+                                                                                        e,
+                                                                                    ) => {
+                                                                                        this._highlightElement(
+                                                                                            $elm,
+                                                                                        );
+                                                                                    }}
+                                                                                    class="s-typo:code s-mb:20"
+                                                                                >
+                                                                                    ${clonedElm.outerHTML}
+                                                                                </p>
+                                                                            `;
+                                                                        },
+                                                                    )}
                                                                 `
                                                               : ''}
                                                           <div

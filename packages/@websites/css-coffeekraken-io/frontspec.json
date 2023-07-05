@@ -1,9 +1,21 @@
 {
     "metas": {
         "lang": "en",
-        "title": "Coffeekraken",
+        "title": "@coffeekraken/s-postcss-sugar-plugin",
         "homepage": "https://coffeekraken.io",
-        "description": "The frontend toolkit that works for everyone. Experts, professionals and new-comers",
+        "description": "Postcss Coffeekraken plugin that gives you access to a ton of sugar like \"@sugar.when.dark\", \"@sugar.classes\", etc... mixins as well as functions like \"sugar.padding\", \"sugar.color\", etc... All of these makes uses of your theme configuration defined using the @coffeekraken/s-sugar-config system.",
+        "keywords": [
+            "coffeekraken",
+            "coffee",
+            "kraken",
+            "sugar",
+            "postcss",
+            "styleguide",
+            "color",
+            "margin",
+            "padding",
+            "ui"
+        ],
         "themeColor": "#ffbb00",
         "author": {
             "name": "Olivier Bossel",
@@ -11,11 +23,11 @@
             "url": "https://coffeekraken.io"
         },
         "og": {
-            "title": "Coffeekraken",
-            "description": "The frontend toolkit that works for everyone. Experts, professionals and new-comers",
+            "title": "@coffeekraken/s-postcss-sugar-plugin",
+            "description": "Postcss Coffeekraken plugin that gives you access to a ton of sugar like \"@sugar.when.dark\", \"@sugar.classes\", etc... mixins as well as functions like \"sugar.padding\", \"sugar.color\", etc... All of these makes uses of your theme configuration defined using the @coffeekraken/s-sugar-config system.",
             "type": "website",
             "url": "https://coffeekraken.io",
-            "image": "https://cdnv2.coffeekraken.io/coffeekraken-og.png"
+            "image": "https://cdnv2.coffeekraken.io/global/coffeekraken-og.png"
         }
     },
     "assets": {
@@ -44,8 +56,8 @@
         }
     },
     "package": {
-        "name": "@website/css-coffeekraken-io",
-        "description": "The frontend toolkit that works for everyone. Experts, professionals and new-comers",
+        "name": "@coffeekraken/s-postcss-sugar-plugin",
+        "description": "Postcss Coffeekraken plugin that gives you access to a ton of sugar like \"@sugar.when.dark\", \"@sugar.classes\", etc... mixins as well as functions like \"sugar.padding\", \"sugar.color\", etc... All of these makes uses of your theme configuration defined using the @coffeekraken/s-sugar-config system.",
         "version": "2.0.0-alpha.27",
         "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)",
         "license": "MIT"
@@ -768,7 +780,7 @@
         "defaultAction": ">="
     },
     "partytown": {
-        "enabled": false,
+        "enabled": true,
         "forward": [
             "dataLayer.push",
             "fbq",

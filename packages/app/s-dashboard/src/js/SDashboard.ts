@@ -3,7 +3,7 @@ import { __injectStyle } from '@coffeekraken/sugar/dom';
 import { __escapeQueue, __hotkey } from '@coffeekraken/sugar/keyboard';
 import { __deepMerge } from '@coffeekraken/sugar/object';
 
-import __css from '../css/index.css';
+import __css from '../../../../src/css/index.css';
 import __SDashboardSettingsInterface from './interface/SDashboardSettingsInterface';
 
 /**
@@ -54,16 +54,13 @@ export default class SDashboard extends __SClass {
         );
     }
 
+    _inited = false;
+
     /**
      * Store the iframe of the dashboard
      */
     _$iframe: HTMLIFrameElement;
     _$focusItem: HTMLDivElement;
-
-    /**
-     * Track if the component has already been inited
-     */
-    _defined = false;
 
     /**
      * @name            document
@@ -94,12 +91,20 @@ export default class SDashboard extends __SClass {
             __deepMerge(
                 // @ts-ignore
                 __SDashboardSettingsInterface.defaults(),
+                {
+                    layout: [
+                        [
+                            's-dashboard-browserstack',
+                            's-dashboard-web-vitals',
+                            's-dashboard-assets',
+                            's-dashboard-google',
+                        ],
+                        ['s-dashboard-frontend-checker'],
+                    ],
+                },
                 settings ?? {},
             ),
         );
-
-        // inject css
-        __injectStyle(__css);
 
         // expose the dashboard on document to be able to access it from the iframe
         // @ts-ignore
@@ -108,6 +113,36 @@ export default class SDashboard extends __SClass {
         // create the iframe
         this._$iframe = document.createElement('iframe');
         this._$iframe.classList.add(`s-dashboard-iframe`);
+        document.body.appendChild(this._$iframe);
+
+        // listen for shortcuts
+        document.addEventListener('keyup', this._onKeyup.bind(this));
+    }
+
+    /**
+     * Init the dashboard
+     */
+    _onKeyup(e): void {
+        if ((e.key === 's' || e.key === 'x') && e.ctrlKey) {
+            if (e.key === 'x') {
+                this.settings.env = 'development';
+            }
+            document.removeEventListener('keyup', this._onKeyup);
+            this.open();
+        }
+    }
+
+    /**
+     * Init the dashboard
+     */
+    _initDashboard(): void {
+        // protect
+        if (this._inited) {
+            return;
+        }
+
+        // inject css
+        __injectStyle(__css);
 
         this._$focusItem = document.createElement('div');
         this._$focusItem.setAttribute('tabindex', '-1');
@@ -116,14 +151,56 @@ export default class SDashboard extends __SClass {
         this._$focusItem.style.left = '0';
         document.body.appendChild(this._$focusItem);
 
+        // shortcuts
         __hotkey('ctrl+s').on('press', () => {
             this.open();
         });
-        __hotkey('ctrl+y').on('press', () => {
+        __hotkey('ctrl+x').on('press', () => {
             this.open();
         });
 
+        // injecting web vitals
         this._injectWebVitals();
+
+        // inject iframe content
+        this._$iframe.contentWindow.document.open();
+        this._$iframe.contentWindow.document.write(`
+                <html>
+                <head>
+                    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+                    <script>
+                        var $document = document;
+                        if (window.parent) {
+                            $document = window.parent.document;
+                        }
+                        var $html = $document.querySelector('html');
+                        var $dashboardHtml = document.querySelector('html');
+                        var theme = $html.getAttribute('theme');
+                        var isDark = theme.match(/dark$/);
+                        if (isDark && window.parent) {
+                            $dashboardHtml.setAttribute('theme', 'default-dark');
+                        } else {
+                            $dashboardHtml.setAttribute('theme', 'default-light');
+                        }
+                        $document.addEventListener('s-theme.change', function(e) {
+                            $dashboardHtml.setAttribute('theme', 'default-' + e.detail.variant);
+                        });
+                    </script>
+                    ${
+                        this.settings.env === 'development'
+                            ? '<script src="http://0.0.0.0:5173/sugar/dashboard/init.js" type="module" defer></script>'
+                            : '<script src="https://cdnv2.coffeekraken.io/s-dashboard/init/init.js" type="module" defer></script>'
+                    }
+                </head>
+                <body s-sugar>
+                    <s-dashboard></s-dashboard>
+                </body>
+                </html>
+            `);
+        this._$iframe.contentWindow.document.close();
+
+        // set as inited
+        this._inited = true;
     }
 
     /**
@@ -182,26 +259,6 @@ export default class SDashboard extends __SClass {
     }
 
     /**
-     * @name            changePage
-     * @type            Function
-     *
-     * Open the dashboard with the pages component selected
-     *
-     * @since       2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-     */
-    // changePage() {
-    //     // open the dashboard
-    //     this.open();
-    //     // @ts-ignore
-    //     this._$iframe.contentDocument?.dispatchEvent(
-    //         new CustomEvent('dashboard.changePage', {}),
-    //     );
-    //     // @ts-ignore
-    //     this._$iframe.contentDocument.isChangePageWanted = true;
-    // }
-
-    /**
      * @name            open
      * @type            Function
      *
@@ -231,43 +288,8 @@ export default class SDashboard extends __SClass {
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     async open() {
-        if (!this._$iframe.parentElement) {
-            document.body.appendChild(this._$iframe);
-            this._$iframe.contentWindow.document.open();
-            this._$iframe.contentWindow.document.write(`
-                <html>
-                <head>
-                    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
-                    <script>
-                        var $document = document;
-                        if (window.parent) {
-                            $document = window.parent.document;
-                        }
-                        var $html = $document.querySelector('html');
-                        var $dashboardHtml = document.querySelector('html');
-                        var theme = $html.getAttribute('theme');
-                        var isDark = theme.match(/dark$/);
-                        if (isDark && window.parent) {
-                            $dashboardHtml.setAttribute('theme', 'default-dark');
-                        } else {
-                            $dashboardHtml.setAttribute('theme', 'default-light');
-                        }
-                        $document.addEventListener('s-theme.change', function(e) {
-                            $dashboardHtml.setAttribute('theme', 'default-' + e.detail.variant);
-                        });
-                    </script>
-                    ${
-                        this.settings.env === 'development'
-                            ? '<script src="http://localhost:3030/sugar/dashboard/init.js" type="module" defer></script>'
-                            : '<script src="https://cdnv2.coffeekraken.io/s-dashboard/init/init.js" type="module" defer></script>'
-                    }
-                </head>
-                <body s-sugar>
-                    <s-dashboard></s-dashboard>
-                </body>
-                </html>
-            `);
-            this._$iframe.contentWindow.document.close();
+        if (!this._inited) {
+            this._initDashboard();
         }
 
         // handle class
@@ -279,7 +301,6 @@ export default class SDashboard extends __SClass {
         // handle escape to close
         __escapeQueue(
             () => {
-                _console.log('CLOSE');
                 this.close();
             },
             {

@@ -14,10 +14,12 @@
             </div>
             <div>
                 <button class="s-btn s-display:block s-text:center s-width:100 s-color:accent s-mbe:20"
+                    aria-label="I agree to be tracked by analytics"
                     onclick="document.env.SUGAR.front.agreeLegal()">
                     OK, I AGREE!
                 </button>
                 <button class="s-btn:outline s-display:block s-text:center s-width:100 s-color:main"
+                    aria-label="I don't want to be tracked by analytics"
                     onclick="document.env.SUGAR.front.disagreeLegal()">
                     NO, THANKS!
                 </button>

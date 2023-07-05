@@ -263,7 +263,7 @@ export default class SDocComponent extends __SLitComponent {
         }
 
         return html`
-            <ul class="${this.utils.cls('_items')}">
+            <ul role="group" class="${this.utils.cls('_items')}">
                 ${Object.keys(items).map((namespace) => {
                     const itemObj = items[namespace];
 
@@ -274,6 +274,7 @@ export default class SDocComponent extends __SLitComponent {
 
                     return html`
                         <li
+                            role="treeitem"
                             class="${this.utils.cls('_item')} ${this._item
                                 ?.id === itemObj.id
                                 ? 'active'
@@ -551,9 +552,9 @@ export default class SDocComponent extends __SLitComponent {
         `;
     }
 
-    _renderCategories(categories: any): any {
+    _renderCategories(categories: any, role = 'tree'): any {
         return html`
-            <ul class="${this.utils.cls('_categories')}">
+            <ul role="${role}" class="${this.utils.cls('_categories')}">
                 ${Object.keys(categories).map((categoryId, i) => {
                     const categoryObj = categories[categoryId];
                     if (!categoryObj.items && !categoryObj.children) {
@@ -569,6 +570,7 @@ export default class SDocComponent extends __SLitComponent {
                     }
                     return html`
                         <li
+                            role="treeitem"
                             class="${this.utils.cls(
                                 '_category',
                             )} ${categoryObj.selected || this._searchValue
@@ -593,6 +595,7 @@ export default class SDocComponent extends __SLitComponent {
                                 ? html`
                                       ${this._renderCategories(
                                           categoryObj.children,
+                                          'group',
                                       )}
                                   `
                                 : (categoryObj.selected || this._searchValue) &&
@@ -641,6 +644,7 @@ export default class SDocComponent extends __SLitComponent {
                         ? html`
                               <button
                                   class="${this.utils.cls('_fullscreen-btn')}"
+                                  aria-label="Toggle documentation fullscreen mode"
                                   title="${this.props.i18n
                                       .toggleFullscreen} (CTRL+D"
                                   @click=${(e) => {

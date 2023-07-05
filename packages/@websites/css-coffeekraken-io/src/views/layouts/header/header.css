@@ -77,6 +77,10 @@
         width: 110px;
         margin-inline-end: sugar.margin(20);
 
+        a {
+            @sugar.focus.outline accent;
+        }
+
         svg {
             height: 40px;
             width: 110px;

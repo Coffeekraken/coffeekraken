@@ -23,7 +23,9 @@ export default function (__SFrontendChecker: ISFrontendChecker) {
         level: 0,
         check({ $context }) {
             const $sameIds: any = [];
-            const $ids = Array.from($context.querySelectorAll('[id]') ?? []);
+            const $ids = Array.from(
+                $context.querySelectorAll('[id]:not(svg [id])') ?? [],
+            );
             const ids: Record<string, HTMLElement> = {};
 
             $ids.forEach(($id) => {

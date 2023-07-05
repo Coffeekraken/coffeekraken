@@ -12,19 +12,6 @@
                 <p class="s-typo:h4 s-mbe:30">
                     Here are some examples to <span class="s-tc:complementary">showcase the power</span> of our sugar css plugin.
                 </p>
-                <p class="s-typo:p s-mbe:30">
-                    
-                </p>
-                {{-- <a href="https://postcss.org" class="s-btn s-color:complementary s-mbe:20" title="Discover PostCSS">
-                    <i class="s-icon:more"></i>
-                    Discover PostCSS
-                    <i class="s-icon:more"></i>
-                </a> --}}
-                {{-- <a href="https://github.com/postcss/postcss#usage" class="s-btn s-color:accent" title="Setup PostCSS plugin">
-                    <i class="s-icon:more"></i>
-                        Setup PostCSS plugins
-                    <i class="s-icon:more"></i>
-                </a> --}}
             </div>
 
         </div>
@@ -32,28 +19,28 @@
         <div class="examples">
 
             <div class="_sidebar">
-                <a href="#example-index" s-activate group="examples">
+                <a href="#example-index" s-activate group="examples" title="Example of index.css file using Coffeekraken postcss sugar plugin">
                     <i class="s-icon:examples"></i> index.css
                 </a>
-                <a href="#example-sugar" s-activate group="examples">
+                <a href="#example-sugar" s-activate group="examples" title="Example of sugar.css file using Coffeekraken postcss sugar plugin">
                     <i class="s-icon:examples"></i> sugar.css
                 </a>
-                <a href="#example-layout" s-activate group="examples">
+                <a href="#example-layout" s-activate group="examples" title="Example using the @sugar.layout Coffeekraken postcss sugar plugin mixin">
                     <i class="s-icon:examples"></i> layout.css
                 </a>
-                <a href="#example-media" s-activate group="examples">
+                <a href="#example-media" s-activate group="examples" title="Example using the @sugar.media Coffeekraken postcss sugar plugin mixin">
                     <i class="s-icon:examples"></i> media.css
                 </a>
-                <a href="#example-component" s-activate group="examples">
+                <a href="#example-component" s-activate group="examples" title="Example using the scopes Coffeekraken postcss sugar plugin feature">
                     <i class="s-icon:examples"></i> component.css
                 </a>
-                <a href="#example-colors" s-activate group="examples">
+                <a href="#example-colors" s-activate group="examples" title="Example using the colors capabilities of the Coffeekraken postcss sugar plugin">
                     <i class="s-icon:examples"></i> colors.css
                 </a>
-                <a href="#example-icons" s-activate group="examples">
+                <a href="#example-icons" s-activate group="examples" title="Example using the icons capabilities of the Coffeekraken postcss sugar plugin">
                     <i class="s-icon:examples"></i> icons.css
                 </a>
-                <a href="#example-html" s-activate group="examples">
+                <a href="#example-html" s-activate group="examples" title="Example of HTML using the Coffeekraken postcss sugar plugin">
                     <i class="s-icon:examples"></i> index.html
                 </a>
             </div>

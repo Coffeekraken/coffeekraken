@@ -166,7 +166,7 @@ class SColor extends __SClass {
             foreground: {
                 ...color1Instance.toObject(),
             },
-            value: __contrast(
+            value: _contrast(
                 [color1Instance.r, color1Instance.g, color1Instance.b],
                 [color2Instance.r, color2Instance.g, color2Instance.b],
             ),

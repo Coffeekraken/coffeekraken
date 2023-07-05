@@ -4,6 +4,10 @@
     z-index: 20;
     border-top: 1px solid sugar.color(main, --alpha 0.05);
 
+    a {
+        @sugar.focus.outline accent;
+    }
+
     @sugar.wireframe {
         @sugar.wireframe.border;
     }

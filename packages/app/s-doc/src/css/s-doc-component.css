@@ -87,6 +87,11 @@ body:has(.s-doc-fullscreen) {
     transform: translateX(-50%); */
     /* @sugar.depth (100); */
 
+    &_search-input,
+    [tabindex]:not([tabindex='-1']) {
+        @sugar.focus.outline accent;
+    }
+
     &_explorer {
         width: 400px;
         height: 100%;
@@ -239,6 +244,7 @@ body:has(.s-doc-fullscreen) {
         padding: sugar.padding(30);
         background: sugar.color(main, background);
         @sugar.transition;
+        @sugar.focus.outline accent;
 
         &:hover {
             background: sugar.color(main, surface);

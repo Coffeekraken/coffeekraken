@@ -47,17 +47,17 @@ export default function (__SFrontendChecker: ISFrontendChecker) {
                         message: `The \`<${tag}>\` does not accept any \`role\``,
                         example: null,
                         moreLink: null,
-                        elements: $roles,
+                        elements: [$role],
                     };
                 }
 
                 if (!rolesByElements[tag].includes(role)) {
                     return {
                         status: __SFrontendChecker.STATUS_WARNING,
-                        message: `The role \`${role}\` role cannot be placed on the \`<${tag}>\` tag`,
+                        message: `The role \`${role}\` role cannot be placed on the \`&lt;${tag}&gt;\` tag`,
                         example: null,
                         moreLink: null,
-                        elements: $roles,
+                        elements: [$role],
                     };
                 }
             }

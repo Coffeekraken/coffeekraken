@@ -23,10 +23,6 @@
         background-size: cover;
         @sugar.depth (10);
 
-        @sugar.theme dark {
-            background-image: url('/dist/img/discord-illustration-bkg.png');
-        }
-
         &:after {
             border-color: sugar.color(main, surface) transparent transparent
                 transparent;

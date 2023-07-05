@@ -335,7 +335,6 @@ export default class SCodeExample extends __SLitComponent {
                                         .state.activeTabId === item.id
                                         ? 'active'
                                         : ''}"
-                                    id="${item.id}"
                                     ?active="${this.state.activeTabId ===
                                     item.id}"
                                     @click="${this.setActiveTabByTab}"
@@ -403,11 +402,14 @@ export default class SCodeExample extends __SLitComponent {
                                 // @ts-ignore
                                 this.moreAction === 'toggle'
                                     ? html`
-                                          <a
+                                          <button
                                               class="${this.utils.cls(
                                                   '_more-button',
                                                   's-btn',
                                               )}"
+                                              aria-label="${this.state.more
+                                                  ? 'Show less'
+                                                  : 'Show more'}"
                                               @click="${() =>
                                                   this.toggleMore()}"
                                           >
@@ -425,7 +427,7 @@ export default class SCodeExample extends __SLitComponent {
                                                             'Show more'}
                                                         `
                                               }
-                                          </a>
+                                          </button>
                                       `
                                     : html`
                                           <a
@@ -437,6 +439,9 @@ export default class SCodeExample extends __SLitComponent {
                                                   // @ts-ignore
                                                   this.moreAction
                                               }"
+                                              title="${this.state.more
+                                                  ? 'Show less'
+                                                  : 'Show more'}"
                                           >
                                               ${
                                                   // @ts-ignore

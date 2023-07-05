@@ -54,7 +54,7 @@ export default function (__SFrontendChecker: ISFrontendChecker) {
 
             // theme color
             const $themeColorMeta = $context.querySelector(
-                'link[rel="theme-color"]',
+                'meta[name="theme-color"]',
             );
             if (!$themeColorMeta) {
                 return {

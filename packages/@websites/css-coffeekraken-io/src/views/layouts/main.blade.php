@@ -10,39 +10,23 @@
 
     @include('layouts.header.header')
 
-    <div class="bkg"></div>
-
-    <main s-page-transition s-refocus class="content" >
+    <main class="content" >
         {!! $body !!}
     </main>
 
     @include('generic.tools.tools')
 
-    <s-panel id="settings" position="right" backdrop s-scope>
-        <template>
-            <ck-settings></ck-settings>
-        </template>
-    </s-panel>
-
-    <s-panel id="ratings" position="right" backdrop s-scope>
-        <template>
-            <ck-ratings></ck-ratings>
-        </template>
-    </s-panel>
-
-    <s-panel id="legal" position="bottom">
+    {{-- <s-panel id="legal" position="bottom">
         <template>
             @include('generic.legal.legal')
         </template>
     </s-panel>
-    <s href="#legal" s-activate mount-when="timeout:4000" trigger="!cookie:s-legal" unactivate-on="event:s-front.legal.agree:document,event:s-front.legal.disagree:document"></s>
+    <s href="#legal" s-activate mount-when="timeout:4000" trigger="!cookie:s-legal" unactivate-on="event:s-front.legal.agree:document,event:s-front.legal.disagree:document"></s> --}}
 
     @include('layouts.footer.footer')
 
     <s-scroll class="scroll-top" to="top">
         <i class="s-icon:angle-up"></i>
     </s-scroll>
-
-    
 
 @endsection

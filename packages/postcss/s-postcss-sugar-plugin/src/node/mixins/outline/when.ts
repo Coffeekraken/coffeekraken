@@ -8,6 +8,10 @@ class postcssSugarPluginStateOutlineWhenMixinInterface extends __SInterface {
                 values: ['hover', 'focus', 'always'],
                 default: ['focus'],
             },
+            color: {
+                type: 'String',
+                default: 'current',
+            },
         };
     }
 }
@@ -15,6 +19,7 @@ export { postcssSugarPluginStateOutlineWhenMixinInterface as interface };
 
 export interface postcssSugarPluginStateOutlineWhenMixinParams {
     when: ('hover' | 'focus' | 'always')[];
+    color?: string;
 }
 
 /**
@@ -52,6 +57,7 @@ export default function ({
 }) {
     const finalParams = <postcssSugarPluginStateOutlineWhenMixinParams>{
         when: ['focus'],
+        color: 'current',
         ...(params ?? {}),
     };
 
@@ -59,9 +65,10 @@ export default function ({
 
     if (finalParams.when.indexOf('focus') !== -1) {
         vars.push(`
-            &:focus-visible {
-                &:not(:hover):not(:active) {
-                    @sugar.outline;
+            &:focus,
+            &:focus-within {
+                &:not(:hover) {
+                    @sugar.outline(${finalParams.color});
                 }
             }
         `);
@@ -70,7 +77,7 @@ export default function ({
     if (finalParams.when.indexOf('hover') !== -1) {
         vars.push(`
                 &:hover {
-                    @sugar.outline;
+                    @sugar.outline(${finalParams.color});
                 }
             `);
     }
@@ -78,7 +85,7 @@ export default function ({
     if (finalParams.when.indexOf('always') !== -1) {
         vars.push(`
            & {
-                @sugar.outline;
+                @sugar.outline(${finalParams.color});
             }
         `);
     }

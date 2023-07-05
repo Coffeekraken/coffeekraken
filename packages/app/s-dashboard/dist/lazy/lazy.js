@@ -9648,7 +9648,7 @@ class yg extends ht {
                             $dashboardHtml.setAttribute('theme', 'default-' + e.detail.variant);
                         });
                     <\/script>
-                    ${this.settings.env === "development" ? '<script src="http://localhost:3000/sugar/dashboard/init.js" type="module" defer><\/script>' : '<script src="https://cdnv2.coffeekraken.io/s-dashboard/init/init.js" type="module" defer><\/script>'}
+                    ${this.settings.env === "development" ? '<script src="http://0.0.0.0:5173/sugar/dashboard/init.js" type="module" defer><\/script>' : '<script src="https://cdnv2.coffeekraken.io/s-dashboard/init/init.js" type="module" defer><\/script>'}
                 </head>
                 <body s-sugar>
                     <s-dashboard></s-dashboard>

@@ -26,7 +26,7 @@
 
     <p class="s-typo:p s-mbs:50 @dwarf hide">
         Version: <span class="s-tc:{{ str_contains($frontspec->package->version, 'alpha') ? 'error' : 'accent' }}">{{ $frontspec->package->version }}</span> - License <a class="s-tc:accent"
-            href="https://opensource.org/licenses/MIT" target="_blank">{{ $frontspec->package->license }}</a>
+            href="https://opensource.org/licenses/MIT" title="Fully open source" target="_blank">{{ $frontspec->package->license }}</a>
         <br />Fully open source
         <i class="s-icon:logo-opensource s-tc:accent"></i>
     </p>

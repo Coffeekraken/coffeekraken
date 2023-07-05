@@ -20,7 +20,7 @@ export default function (api) {
          * @name            title
          * @namespace       config.metas
          * @type            String
-         * @default         config.package.title ?? config.package.name
+         * @default         config.package.json.title ?? config.package.json.name
          *
          * Specify the title of the project
          *
@@ -29,13 +29,13 @@ export default function (api) {
          */
         get title() {
             var _a;
-            return (_a = api.config.package.title) !== null && _a !== void 0 ? _a : api.config.package.name;
+            return ((_a = api.config.package.json.title) !== null && _a !== void 0 ? _a : api.config.package.json.name);
         },
         /**
          * @name            homepage
          * @namespace       config.metas
          * @type            String
-         * @default         config.package.homepage
+         * @default         config.package.json.homepage
          *
          * Specify the homepage url of the project
          *
@@ -43,13 +43,13 @@ export default function (api) {
          * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         get homepage() {
-            return api.config.package.homepage;
+            return api.config.package.json.homepage;
         },
         /**
          * @name            description
          * @namespace       config.metas
          * @type            String
-         * @default         config.package.description
+         * @default         config.package.json.description
          *
          * Specify the description of the project
          *
@@ -57,7 +57,21 @@ export default function (api) {
          * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         get description() {
-            return api.config.package.description;
+            return api.config.package.json.description;
+        },
+        /**
+         * @name            keywords
+         * @namespace       config.metas
+         * @type            String[]
+         * @default         config.package.json.keywords
+         *
+         * Specify the keywords of the project
+         *
+         * @since           2.0.0
+         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+         */
+        get keywords() {
+            return api.config.package.json.keywords;
         },
         /**
          * @name            themeColor
@@ -77,7 +91,7 @@ export default function (api) {
          * @name            author
          * @namespace       config.metas
          * @type            String
-         * @default         config.package.author
+         * @default         config.package.json.author
          *
          * Specify the author of the project.
          * Must be an object with the "name", "email" and "url" properties
@@ -86,7 +100,7 @@ export default function (api) {
          * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         get author() {
-            let author = api.config.package.author;
+            let author = api.config.package.json.author;
             if (typeof author === 'string') {
                 author = __parseAuthorString(author);
             }
@@ -115,4 +129,4 @@ export default function (api) {
         },
     };
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sRUFBRSxtQkFBbUIsRUFBRSxNQUFNLDZCQUE2QixDQUFDO0FBRWxFLE1BQU0sQ0FBQyxPQUFPLFdBQVcsR0FBRztJQUN4QixJQUFJLEdBQUcsQ0FBQyxHQUFHLENBQUMsUUFBUSxLQUFLLE1BQU0sRUFBRTtRQUM3QixPQUFPO0tBQ1Y7SUFFRCxPQUFPO1FBQ0g7Ozs7Ozs7Ozs7V0FVRztRQUNILElBQUksRUFBRSxJQUFJO1FBRVY7Ozs7Ozs7Ozs7V0FVRztRQUNILElBQUksS0FBSzs7WUFDTCxPQUFPLE1BQUEsR0FBRyxDQUFDLE1BQU0sQ0FBQyxPQUFPLENBQUMsS0FBSyxtQ0FBSSxHQUFHLENBQUMsTUFBTSxDQUFDLE9BQU8sQ0FBQyxJQUFJLENBQUM7UUFDL0QsQ0FBQztRQUVEOzs7Ozs7Ozs7O1dBVUc7UUFDSCxJQUFJLFFBQVE7WUFDUixPQUFPLEdBQUcsQ0FBQyxNQUFNLENBQUMsT0FBTyxDQUFDLFFBQVEsQ0FBQztRQUN2QyxDQUFDO1FBRUQ7Ozs7Ozs7Ozs7V0FVRztRQUNILElBQUksV0FBVztZQUNYLE9BQU8sR0FBRyxDQUFDLE1BQU0sQ0FBQyxPQUFPLENBQUMsV0FBVyxDQUFDO1FBQzFDLENBQUM7UUFFRDs7Ozs7Ozs7OztXQVVHO1FBQ0gsSUFBSSxVQUFVO1lBQ1YsT0FBTyxHQUFHLENBQUMsS0FBSyxDQUFDLEtBQUssQ0FBQyxNQUFNLENBQUM7UUFDbEMsQ0FBQztRQUVEOzs7Ozs7Ozs7OztXQVdHO1FBQ0gsSUFBSSxNQUFNO1lBQ04sSUFBSSxNQUFNLEdBQUcsR0FBRyxDQUFDLE1BQU0sQ0FBQyxPQUFPLENBQUMsTUFBTSxDQUFDO1lBQ3ZDLElBQUksT0FBTyxNQUFNLEtBQUssUUFBUSxFQUFFO2dCQUM1QixNQUFNLEdBQUcsbUJBQW1CLENBQUMsTUFBTSxDQUFDLENBQUM7YUFDeEM7WUFDRCxPQUFPLE1BQU0sQ0FBQztRQUNsQixDQUFDO1FBRUQ7Ozs7Ozs7Ozs7O1dBV0c7UUFDSCxJQUFJLEVBQUU7WUFDRixPQUFPO2dCQUNILEtBQUssRUFBRSxHQUFHLENBQUMsSUFBSSxDQUFDLEtBQUs7Z0JBQ3JCLFdBQVcsRUFBRSxHQUFHLENBQUMsSUFBSSxDQUFDLFdBQVc7Z0JBQ2pDLElBQUksRUFBRSxTQUFTO2dCQUNmLEdBQUcsRUFBRSxHQUFHLENBQUMsSUFBSSxDQUFDLFFBQVE7Z0JBQ3RCLEtBQUssRUFBRSwwREFBMEQ7YUFDcEUsQ0FBQztRQUNOLENBQUM7S0FDSixDQUFDO0FBQ04sQ0FBQyJ9
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sRUFBRSxtQkFBbUIsRUFBRSxNQUFNLDZCQUE2QixDQUFDO0FBRWxFLE1BQU0sQ0FBQyxPQUFPLFdBQVcsR0FBRztJQUN4QixJQUFJLEdBQUcsQ0FBQyxHQUFHLENBQUMsUUFBUSxLQUFLLE1BQU0sRUFBRTtRQUM3QixPQUFPO0tBQ1Y7SUFFRCxPQUFPO1FBQ0g7Ozs7Ozs7Ozs7V0FVRztRQUNILElBQUksRUFBRSxJQUFJO1FBRVY7Ozs7Ozs7Ozs7V0FVRztRQUNILElBQUksS0FBSzs7WUFDTCxPQUFPLENBQ0gsTUFBQSxHQUFHLENBQUMsTUFBTSxDQUFDLE9BQU8sQ0FBQyxJQUFJLENBQUMsS0FBSyxtQ0FBSSxHQUFHLENBQUMsTUFBTSxDQUFDLE9BQU8sQ0FBQyxJQUFJLENBQUMsSUFBSSxDQUNoRSxDQUFDO1FBQ04sQ0FBQztRQUVEOzs7Ozs7Ozs7O1dBVUc7UUFDSCxJQUFJLFFBQVE7WUFDUixPQUFPLEdBQUcsQ0FBQyxNQUFNLENBQUMsT0FBTyxDQUFDLElBQUksQ0FBQyxRQUFRLENBQUM7UUFDNUMsQ0FBQztRQUVEOzs7Ozs7Ozs7O1dBVUc7UUFDSCxJQUFJLFdBQVc7WUFDWCxPQUFPLEdBQUcsQ0FBQyxNQUFNLENBQUMsT0FBTyxDQUFDLElBQUksQ0FBQyxXQUFXLENBQUM7UUFDL0MsQ0FBQztRQUVEOzs7Ozs7Ozs7O1dBVUc7UUFDSCxJQUFJLFFBQVE7WUFDUixPQUFPLEdBQUcsQ0FBQyxNQUFNLENBQUMsT0FBTyxDQUFDLElBQUksQ0FBQyxRQUFRLENBQUM7UUFDNUMsQ0FBQztRQUVEOzs7Ozs7Ozs7O1dBVUc7UUFDSCxJQUFJLFVBQVU7WUFDVixPQUFPLEdBQUcsQ0FBQyxLQUFLLENBQUMsS0FBSyxDQUFDLE1BQU0sQ0FBQztRQUNsQyxDQUFDO1FBRUQ7Ozs7Ozs7Ozs7O1dBV0c7UUFDSCxJQUFJLE1BQU07WUFDTixJQUFJLE1BQU0sR0FBRyxHQUFHLENBQUMsTUFBTSxDQUFDLE9BQU8sQ0FBQyxJQUFJLENBQUMsTUFBTSxDQUFDO1lBQzVDLElBQUksT0FBTyxNQUFNLEtBQUssUUFBUSxFQUFFO2dCQUM1QixNQUFNLEdBQUcsbUJBQW1CLENBQUMsTUFBTSxDQUFDLENBQUM7YUFDeEM7WUFDRCxPQUFPLE1BQU0sQ0FBQztRQUNsQixDQUFDO1FBRUQ7Ozs7Ozs7Ozs7O1dBV0c7UUFDSCxJQUFJLEVBQUU7WUFDRixPQUFPO2dCQUNILEtBQUssRUFBRSxHQUFHLENBQUMsSUFBSSxDQUFDLEtBQUs7Z0JBQ3JCLFdBQVcsRUFBRSxHQUFHLENBQUMsSUFBSSxDQUFDLFdBQVc7Z0JBQ2pDLElBQUksRUFBRSxTQUFTO2dCQUNmLEdBQUcsRUFBRSxHQUFHLENBQUMsSUFBSSxDQUFDLFFBQVE7Z0JBQ3RCLEtBQUssRUFBRSwwREFBMEQ7YUFDcEUsQ0FBQztRQUNOLENBQUM7S0FDSixDQUFDO0FBQ04sQ0FBQyJ9

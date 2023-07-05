@@ -16,37 +16,6 @@ export default function (api) {
          */
         style: 'for-the-badge',
         shields: {
-            size: {
-                /**
-                 * @name            url
-                 * @namespace       config.shieldsio.shields.size
-                 * @type            String
-                 * @default         https://shields.io/bundlephobia/min/[packageJson.name]?style=[config.shieldsio.style]
-                 *
-                 * Specify the shieldsio url for the "size" shield
-                 *
-                 * @since           2.0.0
-                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-                 */
-                get url() {
-                    return `https://shields.io/bundlephobia/min/%packageName?style=${api.this.style}`;
-                },
-
-                /**
-                 * @name            href
-                 * @namespace       config.shieldsio.shields.href
-                 * @type            String
-                 * @default         https://www.npmjs.com/package/[packageJson.name]
-                 *
-                 * Specify the shieldsio href for the "size" shield
-                 *
-                 * @since           2.0.0
-                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-                 */
-                get href() {
-                    return `https://www.npmjs.com/package/%packageName`;
-                },
-            },
             downloads: {
                 /**
                  * @name            url

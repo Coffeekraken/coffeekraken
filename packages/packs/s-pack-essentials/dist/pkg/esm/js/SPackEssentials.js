@@ -4,11 +4,8 @@ import { __define as __SClipboardCopyComponentDefine } from '@coffeekraken/s-cli
 import { __define as __SFloatingFeatureDefine } from '@coffeekraken/s-floating-feature/lazy';
 import { __define as __SFormValidateFeatureDefine } from '@coffeekraken/s-form-validate-feature/lazy';
 import { __define as __SInlineFeatureDefine } from '@coffeekraken/s-inline-feature';
-import { __define as __SPanelComponentDefine } from '@coffeekraken/s-panel-component';
-import { __define as __SRangeComponentDefine } from '@coffeekraken/s-range-component/lazy';
 import { __define as __SRefocusFeatureDefine } from '@coffeekraken/s-refocus-feature';
 import { __define as __SScrollComponentDefine } from '@coffeekraken/s-scroll-component';
-import { __define as __SSliderComponentDefine } from '@coffeekraken/s-slider-component/lazy';
 import { __define as __SSugarFeatureDefine } from '@coffeekraken/s-sugar-feature';
 /**
  * @name 		                    SPackEssentials
@@ -26,11 +23,7 @@ import { __define as __SSugarFeatureDefine } from '@coffeekraken/s-sugar-feature
  * - [@coffeekraken/s-inline-feature](/package/@coffeekraken/s-inline/doc/readme)
  * - [@coffeekraken/s-refocus-feature](/package/@coffeekraken/s-refocus/doc/readme)
  * - [@coffeekraken/s-sugar-feature](/package/@coffeekraken/s-sugar/doc/readme)
- * - [@coffeekraken/s-clipboard-copy-component](/package/@coffeekraken/s-clipboard-copy-component/doc/readme)
- * - [@coffeekraken/s-panel-component](/package/@coffeekraken/s-panel-component/doc/readme)
- * - [@coffeekraken/s-range-component](/package/@coffeekraken/s-range-component/doc/readme)
  * - [@coffeekraken/s-scroll-component](/package/@coffeekraken/s-scroll-component/doc/readme)
- * - [@coffeekraken/s-slider-component](/package/@coffeekraken/s-slider-component/doc/readme)
  *
  * @todo      interface
  * @todo      doc
@@ -48,10 +41,7 @@ import { __define as __SSugarFeatureDefine } from '@coffeekraken/s-sugar-feature
 export default function SPackEssentials() {
     // Components
     __SClipboardCopyComponentDefine();
-    __SPanelComponentDefine();
-    __SRangeComponentDefine();
     __SScrollComponentDefine();
-    __SSliderComponentDefine();
     // Features
     __SSugarFeatureDefine();
     __SActivateFeatureDefine();
@@ -61,7 +51,7 @@ export default function SPackEssentials() {
     __SInlineFeatureDefine();
     __SRefocusFeatureDefine({
         trigger: ['event:actual', 'anchor', 'history'],
-        offsetY: 400,
+        offsetY: 200,
     });
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sRUFBRSxRQUFRLElBQUksd0JBQXdCLEVBQUUsTUFBTSxrQ0FBa0MsQ0FBQztBQUN4RixPQUFPLEVBQUUsUUFBUSxJQUFJLHNCQUFzQixFQUFFLE1BQU0sZ0NBQWdDLENBQUM7QUFDcEYsT0FBTyxFQUFFLFFBQVEsSUFBSSwrQkFBK0IsRUFBRSxNQUFNLCtDQUErQyxDQUFDO0FBQzVHLE9BQU8sRUFBRSxRQUFRLElBQUksd0JBQXdCLEVBQUUsTUFBTSx1Q0FBdUMsQ0FBQztBQUM3RixPQUFPLEVBQUUsUUFBUSxJQUFJLDRCQUE0QixFQUFFLE1BQU0sNENBQTRDLENBQUM7QUFDdEcsT0FBTyxFQUFFLFFBQVEsSUFBSSxzQkFBc0IsRUFBRSxNQUFNLGdDQUFnQyxDQUFDO0FBQ3BGLE9BQU8sRUFBRSxRQUFRLElBQUksdUJBQXVCLEVBQUUsTUFBTSxpQ0FBaUMsQ0FBQztBQUN0RixPQUFPLEVBQUUsUUFBUSxJQUFJLHVCQUF1QixFQUFFLE1BQU0sc0NBQXNDLENBQUM7QUFDM0YsT0FBTyxFQUFFLFFBQVEsSUFBSSx1QkFBdUIsRUFBRSxNQUFNLGlDQUFpQyxDQUFDO0FBQ3RGLE9BQU8sRUFBRSxRQUFRLElBQUksd0JBQXdCLEVBQUUsTUFBTSxrQ0FBa0MsQ0FBQztBQUN4RixPQUFPLEVBQUUsUUFBUSxJQUFJLHdCQUF3QixFQUFFLE1BQU0sdUNBQXVDLENBQUM7QUFDN0YsT0FBTyxFQUFFLFFBQVEsSUFBSSxxQkFBcUIsRUFBRSxNQUFNLCtCQUErQixDQUFDO0FBRWxGOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBa0NHO0FBQ0gsTUFBTSxDQUFDLE9BQU8sVUFBVSxlQUFlO0lBQ25DLGFBQWE7SUFDYiwrQkFBK0IsRUFBRSxDQUFDO0lBQ2xDLHVCQUF1QixFQUFFLENBQUM7SUFDMUIsdUJBQXVCLEVBQUUsQ0FBQztJQUMxQix3QkFBd0IsRUFBRSxDQUFDO0lBQzNCLHdCQUF3QixFQUFFLENBQUM7SUFFM0IsV0FBVztJQUNYLHFCQUFxQixFQUFFLENBQUM7SUFDeEIsd0JBQXdCLEVBQUUsQ0FBQztJQUMzQixzQkFBc0IsRUFBRSxDQUFDO0lBQ3pCLHdCQUF3QixFQUFFLENBQUM7SUFDM0IsNEJBQTRCLEVBQUUsQ0FBQztJQUMvQixzQkFBc0IsRUFBRSxDQUFDO0lBQ3pCLHVCQUF1QixDQUFDO1FBQ3BCLE9BQU8sRUFBRSxDQUFDLGNBQWMsRUFBRSxRQUFRLEVBQUUsU0FBUyxDQUFDO1FBQzlDLE9BQU8sRUFBRSxHQUFHO0tBQ2YsQ0FBQyxDQUFDO0FBQ1AsQ0FBQyJ9
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sRUFBRSxRQUFRLElBQUksd0JBQXdCLEVBQUUsTUFBTSxrQ0FBa0MsQ0FBQztBQUN4RixPQUFPLEVBQUUsUUFBUSxJQUFJLHNCQUFzQixFQUFFLE1BQU0sZ0NBQWdDLENBQUM7QUFDcEYsT0FBTyxFQUFFLFFBQVEsSUFBSSwrQkFBK0IsRUFBRSxNQUFNLCtDQUErQyxDQUFDO0FBQzVHLE9BQU8sRUFBRSxRQUFRLElBQUksd0JBQXdCLEVBQUUsTUFBTSx1Q0FBdUMsQ0FBQztBQUM3RixPQUFPLEVBQUUsUUFBUSxJQUFJLDRCQUE0QixFQUFFLE1BQU0sNENBQTRDLENBQUM7QUFDdEcsT0FBTyxFQUFFLFFBQVEsSUFBSSxzQkFBc0IsRUFBRSxNQUFNLGdDQUFnQyxDQUFDO0FBQ3BGLE9BQU8sRUFBRSxRQUFRLElBQUksdUJBQXVCLEVBQUUsTUFBTSxpQ0FBaUMsQ0FBQztBQUN0RixPQUFPLEVBQUUsUUFBUSxJQUFJLHdCQUF3QixFQUFFLE1BQU0sa0NBQWtDLENBQUM7QUFDeEYsT0FBTyxFQUFFLFFBQVEsSUFBSSxxQkFBcUIsRUFBRSxNQUFNLCtCQUErQixDQUFDO0FBRWxGOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0E4Qkc7QUFDSCxNQUFNLENBQUMsT0FBTyxVQUFVLGVBQWU7SUFDbkMsYUFBYTtJQUNiLCtCQUErQixFQUFFLENBQUM7SUFDbEMsd0JBQXdCLEVBQUUsQ0FBQztJQUUzQixXQUFXO0lBQ1gscUJBQXFCLEVBQUUsQ0FBQztJQUN4Qix3QkFBd0IsRUFBRSxDQUFDO0lBQzNCLHNCQUFzQixFQUFFLENBQUM7SUFDekIsd0JBQXdCLEVBQUUsQ0FBQztJQUMzQiw0QkFBNEIsRUFBRSxDQUFDO0lBQy9CLHNCQUFzQixFQUFFLENBQUM7SUFDekIsdUJBQXVCLENBQUM7UUFDcEIsT0FBTyxFQUFFLENBQUMsY0FBYyxFQUFFLFFBQVEsRUFBRSxTQUFTLENBQUM7UUFDOUMsT0FBTyxFQUFFLEdBQUc7S0FDZixDQUFDLENBQUM7QUFDUCxDQUFDIn0=

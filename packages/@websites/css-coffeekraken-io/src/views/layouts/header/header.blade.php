@@ -16,7 +16,7 @@
                     @include ('sugar.logos.coffeekraken.coffeekraken')
                 </a>
             </div>
-            <nav id="nav" class="_nav s-until:media:mobile">
+            <nav role="navigation" id="nav" class="_nav s-until:media:mobile">
                 <a class="_main-link" href="#get-started" title="Get Started" s-activate trigger="scrollspy">
                     <span>Get started</span>
                 </a>

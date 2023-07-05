@@ -58,11 +58,11 @@ export default function (api) {
                     type: 'object',
                     get value() {
                         return {
-                            name: api.config.package.name,
-                            description: api.config.package.description,
-                            version: api.config.package.version,
-                            author: api.config.package.author,
-                            license: api.config.package.license,
+                            name: api.config.package.json.name,
+                            description: api.config.package.json.description,
+                            version: api.config.package.json.version,
+                            author: api.config.package.json.author,
+                            license: api.config.package.json.license,
                         };
                     },
                 },

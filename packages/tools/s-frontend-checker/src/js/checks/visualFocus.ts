@@ -45,8 +45,12 @@ export default function (__SFrontendChecker: ISFrontendChecker) {
                 return false;
             });
 
+            await __wait(100);
+
             // @ts-ignore
             for (let [idx, $focusable] of $focusables.entries()) {
+                // await __wait(100);
+
                 // make sure the container has a s-frontend-checker-id
                 if (!$focusable.hasAttribute('s-frontend-checker-id')) {
                     $focusable.setAttribute(
@@ -66,7 +70,7 @@ export default function (__SFrontendChecker: ISFrontendChecker) {
                     );
 
                 $focusable.focus();
-                await __wait();
+                await __wait(100);
 
                 const focusStyle = JSON.stringify(
                         window.getComputedStyle($focusable),
@@ -113,8 +117,6 @@ export default function (__SFrontendChecker: ISFrontendChecker) {
 
                     // add this style tag to the styles stack to remove them at each check start
                     _$styles.push($style);
-
-                    await __wait();
                 }
             }
 

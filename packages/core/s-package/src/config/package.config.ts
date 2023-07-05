@@ -30,7 +30,9 @@ export default function (api) {
          * @since       2.0.0
          * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
-        json: __packageJsonSync(),
+        get json() {
+            return __packageJsonSync();
+        },
 
         /**
          * @name            rootDir

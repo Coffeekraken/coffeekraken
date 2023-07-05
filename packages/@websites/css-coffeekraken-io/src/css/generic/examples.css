@@ -16,6 +16,7 @@
             border-bottom-left-radius: sugar.border.radius();
             background: sugar.color(main, surface, --alpha 0);
             @sugar.transition;
+            @sugar.focus.outline (accent);
 
             &:hover {
                 background: sugar.color(main, surface, --alpha 0.4);

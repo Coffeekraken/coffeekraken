@@ -133,10 +133,8 @@ export default function (__SFrontendChecker: ISFrontendChecker) {
 
                 // remove "scroll-snap-type" from closest scrollable
                 const $scrollable = __closestScrollable($container);
-                _console.log('SCRO', 'dd', $scrollable);
                 if ($scrollable && !$scrollables.includes($scrollable)) {
                     if ($scrollable.style.scrollSnapType) {
-                        _console.log('Scroll', $scrollable);
                         $scrollable._originalScrollSnapType =
                             $scrollable.style.scrollSnapType;
                         $scrollable.style.scrollSnapType = 'none';

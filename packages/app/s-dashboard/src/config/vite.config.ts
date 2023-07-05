@@ -11,27 +11,27 @@ export default (api) => {
         dashboardInitProxyUrl = '';
 
     if (packageJsonHighest.name === '@coffeekraken/coffeekraken') {
-        const dashboardLazyPath = __path.resolve(
-            __dirname(),
-            '../../../../src/js/lazy.ts',
-        );
-        dashboardLazyProxyUrl = `http://localhost:5173/@fs${dashboardLazyPath}`;
+        // const dashboardLazyPath = __path.resolve(
+        //     __dirname(),
+        //     '../../../../src/js/lazy.ts',
+        // );
+        // dashboardLazyProxyUrl = `http://localhost:5173/@fs${dashboardLazyPath}`;
         const dashboardInitPath = __path.resolve(
             __dirname(),
             '../../../../src/js/init.ts',
         );
-        dashboardInitProxyUrl = `http://localhost:5173/@fs${dashboardInitPath}`;
+        dashboardInitProxyUrl = `http://0.0.0.0:5173/@fs${dashboardInitPath}`;
     }
 
     return {
         server: {
             proxy: {
-                '/sugar/dashboard/lazy.js': {
-                    target: dashboardLazyProxyUrl,
-                    changeOrigin: true,
-                    rewrite: (path) =>
-                        path.replace('/sugar/dashboard/lazy.js', ''),
-                },
+                // '/sugar/dashboard/lazy.js': {
+                //     target: dashboardLazyProxyUrl,
+                //     changeOrigin: true,
+                //     rewrite: (path) =>
+                //         path.replace('/sugar/dashboard/lazy.js', ''),
+                // },
                 '/sugar/dashboard/init.js': {
                     target: dashboardInitProxyUrl,
                     changeOrigin: true,

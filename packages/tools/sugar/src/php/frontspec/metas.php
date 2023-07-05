@@ -68,6 +68,22 @@ function metas($frontspec = null, $env = 'development')
                     $finalMetas[$name] .
                     '" content="chrome=1" />'
             );
+        } elseif ($name == 'keywords') {
+            if (is_string($finalMetas[$name])) {
+                array_push(
+                    $metasStr,
+                    '<meta name="keywords" content="' .
+                        $finalMetas[$name] .
+                        '" />'
+                );
+            } elseif (is_array($finalMetas[$name])) {
+                array_push(
+                    $metasStr,
+                    '<meta name="keywords" content="' .
+                        implode(',', $finalMetas[$name]) .
+                        '" />'
+                );
+            }
         } elseif ($name == 'author') {
             if (is_string($finalMetas[$name])) {
                 array_push(

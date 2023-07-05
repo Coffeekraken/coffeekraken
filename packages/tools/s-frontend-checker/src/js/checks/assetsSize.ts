@@ -21,7 +21,8 @@ function getAssetSize(url) {
         window.fetchAssetResolve = function () {
             resolve(window.fetchedAssetSize);
         };
-        console.log(`fetchAsset:${url}`);
+        // @ts-ignore
+        (_console ?? console).log(`fetchAsset:${url}`);
     });
 }
 

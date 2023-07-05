@@ -231,7 +231,7 @@ export default class SFrontendChecker
 
         return new __SPromise(async ({ resolve, emit }) => {
             const browser = await puppeteer.launch({
-                headless: false,
+                headless: 'new',
             });
             const page = await browser.newPage();
             await page.goto(finalParams.url, {
@@ -246,7 +246,7 @@ export default class SFrontendChecker
 
             let lastLogLines = 0;
             page.on('console', async (checkObjOrString) => {
-                let str = checkObjOrString.text();
+                let str = checkObjOrString.text().replace(/█/gm, '').trim();
 
                 const fetchAssetsMatches = str.match(/^fetchAsset:(.*)/);
                 if (fetchAssetsMatches?.[1]) {
@@ -311,36 +311,12 @@ export default class SFrontendChecker
                     if (json.name) {
                         logCheck(json);
                     }
-                    return;
-                } catch (e) {}
+                } catch (e) {
+                    // console.log(e);
+                }
 
                 logCheck(str);
-
-                // // filter only frontend checker logs
-                // if (!str.startsWith('!') && !str.startsWith('fetchAsset')) {
-                //     return;
-                // }
-
-                // // clean the previous line
-                // if (str === '!%clearLine') {
-                //     console.log('\u001b[1A\u001b[2K\u001b[1A');
-                //     return;
-                // }
-                // // clean the last log
-                // if (str === '!%clearLast') {
-                //     for (let i = 0; i < lastLogLines; i++) {
-                //         console.log('\u001b[1A\u001b[2K\u001b[1A');
-                //     }
-                //     return;
-                // }
-
-                // str = str.replace(/^!/, '').replace(/\|/gm, '<grey>│</grey>');
             });
-
-            // const body = await page.evaluateHandle(() => {
-            //     return document.body;
-            // });
-            // _console.log('body', body);
 
             await page.addScriptTag({
                 url: 'https://cdnv2.coffeekraken.io/s-frontend-checker/SFrontendChecker.iife.js',
@@ -350,19 +326,8 @@ export default class SFrontendChecker
                 const log = function (obj) {
                     try {
                         const json = JSON.stringify(obj);
-                        console.log(json);
+                        (window._console ?? window.console).log(json);
                     } catch (e) {}
-
-                    // if (!str.match(/\|/)) {
-                    //     console.log(`!${str}`);
-                    //     return;
-                    // }
-
-                    // const parts = str.split('|'),
-                    //     label = parts[0].trim(),
-                    //     value = parts[1]?.trim?.() ?? '';
-
-                    // console.log(`!${pan(label)} | ${value}`);
                 };
 
                 return new Promise((resolve) => {

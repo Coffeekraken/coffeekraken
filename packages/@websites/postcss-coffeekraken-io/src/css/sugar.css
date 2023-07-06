@@ -3,27 +3,17 @@
 /* @sugar.theme.import ($variant: light); */
 
 /* main sugar classes */
+/* we need to load them all to display correctly the documentation */
 @sugar.classes;
 
 /* UI's */
 @sugar.ui.codeexample.classes;
 @sugar.ui.clipboardcopy;
-@sugar.ui.filtrableinput.classes;
 
 /* mobile specific classes */
-/* @sugar.media.classes mobile {
-    @sugar.display.classes;
+@sugar.media.classes mobile {
     @sugar.layout.classes;
-    @sugar.hide.classes;
-    @sugar.flex.classes;
-    @sugar.text.classes;
-    @sugar.gap.classes;
-    @sugar.ui.button.classes;
-} */
-/* @sugar.media.classes 'mobile,tablet,wide' {
-    @sugar.margin.classes;
-    @sugar.padding.classes;
-} */
+}
 
 /* icons */
 @sugar.icon.classes (
@@ -34,6 +24,7 @@
   fa:magnifying-glass:search
   fa:expand:enter-fullscreen
   fa:compress:exit-fullscreen
+  fa:list-ul:menu
   fa:keyboard
   fa:file
   fa:heart

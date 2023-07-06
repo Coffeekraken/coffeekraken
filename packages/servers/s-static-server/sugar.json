@@ -1,0 +1,23 @@
+{
+  "config": {
+    "folders": [
+      {
+        "path": "./dist/pkg/%moduleSystem/config"
+      }
+    ]
+  },
+  "cli": [
+    {
+      "stack": "staticServer",
+      "description": "Static server API",
+      "defaultAction": "start",
+      "actions": {
+        "start": {
+          "scope": "package",
+          "description": "Start a new static server process",
+          "process": "./dist/pkg/esm/cli/start.cli.js"
+        }
+      }
+    }
+  ]
+}

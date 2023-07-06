@@ -17,7 +17,7 @@ exports.default = {
                 case 'html':
                     return [
                         `<s-code-example>`,
-                        `   <template lang="${data[0]}">`,
+                        `   <template language="${data[0]}">`,
                         data[1],
                         `   </template>`,
                         `</s-code-example>`,
@@ -27,4 +27,4 @@ exports.default = {
         });
     },
 };
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7O0FBQUEsa0JBQWU7SUFDWCxHQUFHLEVBQUUsZ0NBQWdDO0lBQy9CLFNBQVMsQ0FBQyxJQUFJLEVBQUUsTUFBTTs7WUFDeEIsUUFBUSxNQUFNLEVBQUU7Z0JBQ1osS0FBSyxNQUFNO29CQUNQLE9BQU87d0JBQ0gsa0JBQWtCO3dCQUNsQixzQkFBc0IsSUFBSSxDQUFDLENBQUMsQ0FBQyxJQUFJO3dCQUNqQyxJQUFJLENBQUMsQ0FBQyxDQUFDO3dCQUNQLGdCQUFnQjt3QkFDaEIsbUJBQW1CO3FCQUN0QixDQUFDLElBQUksQ0FBQyxJQUFJLENBQUMsQ0FBQztvQkFDYixNQUFNO2FBQ2I7UUFDTCxDQUFDO0tBQUE7Q0FDSixDQUFDIn0=
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7O0FBQUEsa0JBQWU7SUFDWCxHQUFHLEVBQUUsZ0NBQWdDO0lBQy9CLFNBQVMsQ0FBQyxJQUFJLEVBQUUsTUFBTTs7WUFDeEIsUUFBUSxNQUFNLEVBQUU7Z0JBQ1osS0FBSyxNQUFNO29CQUNQLE9BQU87d0JBQ0gsa0JBQWtCO3dCQUNsQiwwQkFBMEIsSUFBSSxDQUFDLENBQUMsQ0FBQyxJQUFJO3dCQUNyQyxJQUFJLENBQUMsQ0FBQyxDQUFDO3dCQUNQLGdCQUFnQjt3QkFDaEIsbUJBQW1CO3FCQUN0QixDQUFDLElBQUksQ0FBQyxJQUFJLENBQUMsQ0FBQztvQkFDYixNQUFNO2FBQ2I7UUFDTCxDQUFDO0tBQUE7Q0FDSixDQUFDIn0=

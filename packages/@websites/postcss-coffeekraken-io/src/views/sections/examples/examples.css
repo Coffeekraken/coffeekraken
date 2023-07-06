@@ -4,5 +4,10 @@
     ._layout {
         @sugar.layout ('1 2 2');
         gap: sugar.margin(100);
+
+        @sugar.media mobile {
+            @sugar.layout ('1 _ 2');
+            gap: sugar.margin(40);
+        }
     }
 }

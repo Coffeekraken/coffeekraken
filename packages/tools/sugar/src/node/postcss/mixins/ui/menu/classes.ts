@@ -95,7 +95,7 @@ export default function ({
             * 
             * @example        html
             * <s-menu>
-            *   <template lang="js">
+            *   <template language="js">
             *       console.log('hello world');
             *   </template>
             * </s-menu>

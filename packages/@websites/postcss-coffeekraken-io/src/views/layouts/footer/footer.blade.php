@@ -28,9 +28,9 @@
             <div class="_columns">
                 <div></div>
                 <div>
-                    <h3 class="s-typo:h5 s-mbe:30">
+                    <h1 class="s-typo:h5 s-mbe:30">
                         Links
-                    </h3>
+                    </h1>
                     <ol class="s-list:ul s-color:accent">
                         <li>
                             <a href="https://github.com/Coffeekraken/coffeekraken" title="Coffeekraken on Github">Github repo</a>
@@ -43,9 +43,9 @@
                 </div>
                 
                 <div>
-                    <h3 class="s-typo:h5 s-mbe:30">
+                    <h1 class="s-typo:h5 s-mbe:30">
                         Community
-                    </h3>
+                    </h1>
                     <ol class="s-list:ul s-color:accent s-mbe:30">
                         <li>
                             <a href="https://discord.com/channels/940362961682333767/940362962223378494" title="Discord"

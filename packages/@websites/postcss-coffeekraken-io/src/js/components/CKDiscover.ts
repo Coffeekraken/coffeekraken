@@ -118,7 +118,7 @@ export default class CKDiscover extends __SLitComponent {
                                         css="codeExample"
                                     >
                                         <code
-                                            lang="${this.props.platform ===
+                                            language="${this.props.platform ===
                                                 'ts' ||
                                             this.props.platform === 'node'
                                                 ? 'js'

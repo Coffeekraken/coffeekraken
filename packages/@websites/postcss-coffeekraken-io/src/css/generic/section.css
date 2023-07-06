@@ -2,7 +2,7 @@
     padding-block: sugar.padding(100);
 
     @sugar.media mobile {
-        padding-block: sugar.padding(50);
+        padding-block: sugar.padding(30);
         padding-inline: sugar.padding(30);
     }
 

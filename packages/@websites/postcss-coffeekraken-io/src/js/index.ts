@@ -29,9 +29,6 @@ const viewsRelated = import.meta.globEager('../views/**/*.ts');
         mountWhen: 'nearViewport',
     });
     __SLitComponent.setDefaultProps(['s-code-example'], {
-        scrollToSettings: {
-            offset: 100,
-        },
         responsive: {
             mobile: {
                 lines: 5,
@@ -54,13 +51,17 @@ const viewsRelated = import.meta.globEager('../views/**/*.ts');
     __SDocComponentDefine({
         mountWhen: 'direct',
         endpoints: {
-            // base: `${document.location.protocol}//${document.location.hostname}:9191/api/doc`,
+            base:
+                document.location.hostname !== 'postcss.coffeekraken.io'
+                    ? 'http://localhost:9191/api/doc'
+                    : '/api/doc',
         },
         icons: {
             file: '<i class="s-icon:file"></i>',
             search: '<i class="s-icon:search"></i>',
             enterFullscreen: '<i class="s-icon:enter-fullscreen"></i>',
             exitFullscreen: '<i class="s-icon:exit-fullscreen"></i>',
+            menu: '<i class="s-icon:documentation"></i>',
         },
     });
 

@@ -7,9 +7,9 @@
         <div s-floating placement="left" class="s-bare s-tooltip:interactive s-text:center">
             <div class="s-position:relative">
                 <i class="s-icon:keyboard s-font:100 s-mbe:30"></i>
-                <h3 class="s-typo:h5 s-mbe:30">
+                <h1 class="s-typo:h5 s-mbe:30">
                     <span class="s-tc:accent">Hotkeys</span><br /> makes the difference!
-                </h3>
+                </h1>
                 <p class="s-typo:p s-font:30 s-mbe:30">
                     Here's all the hotkeys available for you to use.
                 </p>
@@ -26,9 +26,9 @@
         <div s-floating placement="left" class="s-bare s-tooltip:interactive s-text:center">
             <div class="s-position:relative">
                 <i class="s-icon:bugs s-font:100 s-mbe:30"></i>
-                <h3 class="s-typo:h5 s-mbe:30">
+                <h1 class="s-typo:h5 s-mbe:30">
                     <span class="s-tc:accent">Bugs</span><br />are not our friends...
-                </h3>
+                </h1>
                 <p class="s-typo:p s-font:30 s-mbe:30">
                     <span class="s-tc:accent">Don't hesitate</span> to declare an issue if something does not works as
                     expected.
@@ -53,9 +53,9 @@
         <div s-floating placement="left" class="s-bare s-tooltip:interactive s-text:center">
             <div class="s-position:relative">
                 <i class="s-icon:heart s-font:100 s-mbe:30"></i>
-                <h3 class="s-typo:h5 s-mbe:30">
+                <h1 class="s-typo:h5 s-mbe:30">
                     <span class="s-tc:accent">The more we are</span>,<br />the stronger we become.
-                </h3>
+                </h1>
                 <p class="s-typo:p s-font:30 s-mbe:30">
                     Don't hesitate to tell some words to you friends about us. The goal is to became more and more each
                     days to help each others...
@@ -91,9 +91,9 @@
         <div s-floating placement="left" class="s-bare s-tooltip:interactive s-text:center">
             <div class="s-position:relative">
                 <i class="s-icon:discord s-font:100 s-mbe:30"></i>
-                <h3 class="s-typo:h5 s-mbe:30">
+                <h1 class="s-typo:h5 s-mbe:30">
                     <span class="s-tc:accent">The more we are</span>,<br />the stronger we become.
-                </h3>
+                </h1>
                 <p class="s-typo:p s-font:30 s-mbe:30">
                     <span class="s-tc:accent">Don't be afraid</span> to join us on Discord.
                 </p>
@@ -112,9 +112,9 @@
         <div s-floating placement="left" class="s-bare s-tooltip:interactive s-text:center">
             <div class="s-position:relative">
                 <i class="s-icon:logo-opensource s-font:100 s-mbe:30"></i>
-                <h3 class="s-typo:h5 s-mbe:30">
+                <h1 class="s-typo:h5 s-mbe:30">
                     <span class="s-tc:accent">We love</span>,<br />Open source!
-                </h3>
+                </h1>
                 <p class="s-typo:p s-font:30 s-mbe:30">
                     All of our codebase can be found on Github. We hope that <span class="s-tc:accent">you may
                         contribute to help us make our

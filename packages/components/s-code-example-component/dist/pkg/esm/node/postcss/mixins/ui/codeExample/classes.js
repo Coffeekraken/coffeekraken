@@ -54,7 +54,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
             * 
             * @example        html
             * <s-code-example>
-            *   <template lang="js">
+            *   <template language="js">
             *       console.log('hello world');
             *   </template>
             * </s-code-example>
@@ -87,12 +87,12 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
             * @example        html
             * <div class="s-rhythm:vertical">
             *   <s-code-example>
-            *       <template lang="js">
+            *       <template language="js">
             *           console.log('hello world');
             *       </template>
             *   </s-code-example>
             *   <s-code-example>
-            *       <template lang="js">
+            *       <template language="js">
             *           console.log('hello world');
             *       </template>
             *   </s-code-example>

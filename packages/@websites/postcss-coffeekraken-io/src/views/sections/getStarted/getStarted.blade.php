@@ -26,7 +26,7 @@
 
                 <div class="step s-mbe:50" step="1">
                     <s-code-example>
-                        <template lang="bash">
+                        <template language="bash">
     npm i @coffeekraken/s-postcss-sugar-plugin
                         </template>
                     </s-code-example>
@@ -35,7 +35,7 @@
                 <div class="step" step="2">
 
                     <s-code-example>
-                        <template lang="js">
+                        <template language="js">
 // Create a postcss.config.js file at your project root
 module.exports = {
     plugins: [

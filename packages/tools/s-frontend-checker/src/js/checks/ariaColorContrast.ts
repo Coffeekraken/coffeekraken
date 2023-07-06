@@ -117,6 +117,10 @@ export default function (__SFrontendChecker: ISFrontendChecker) {
                     continue;
                 }
 
+                // if (str !== 'Get started!') {
+                //     continue;
+                // }
+
                 // get text node rect
                 const range = document.createRange();
                 range.selectNodeContents(textNode);
@@ -177,12 +181,16 @@ export default function (__SFrontendChecker: ISFrontendChecker) {
                     $elm !== ($context.ownerDocument ?? $context).body &&
                     i <= 200
                 ) {
-                    $elm = ($context.ownerDocument ?? $context)
-                        // @ts-ignore
-                        .elementFromPoint(
-                            Math.round(rect.x),
-                            Math.round(rect.y),
-                        );
+                    if (!$elm) {
+                        $elm = $container;
+                    } else {
+                        $elm = ($context.ownerDocument ?? $context)
+                            // @ts-ignore
+                            .elementFromPoint(
+                                Math.round(rect.x),
+                                Math.round(rect.y),
+                            );
+                    }
 
                     if (!$elm) {
                         break;
@@ -219,7 +227,7 @@ export default function (__SFrontendChecker: ISFrontendChecker) {
 
                 // reset the pointer events of the stack
                 stack.forEach(($elmToReset) => {
-                    $elmToReset.style.pointerEvents = 'unset';
+                    $elmToReset.style.removeProperty('pointer-events');
                 });
 
                 if (!$elm) {

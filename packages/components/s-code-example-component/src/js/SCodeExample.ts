@@ -82,7 +82,7 @@ export interface ISCodeExampleComponentProps {
  *
  * @example         html
  * <s-code-example>
- *      <template lang="js">
+ *      <template language="js">
  * function $initHighlight(block, cls) {
  * try {
  *   if (cls.search(/\bno\-highlight\b/) != -1)
@@ -172,8 +172,7 @@ export default class SCodeExample extends __SLitComponent {
             let parser = 'babel';
             switch (
                 $template.getAttribute('id') ??
-                $template.getAttribute('language') ??
-                $template.getAttribute('lang')
+                $template.getAttribute('language')
             ) {
                 case 'html':
                 case 'xml':
@@ -211,12 +210,8 @@ export default class SCodeExample extends __SLitComponent {
                     id:
                         $template.getAttribute('id') ??
                         $template.getAttribute('language') ??
-                        $template.getAttribute('lang') ??
                         'html',
-                    lang:
-                        $template.getAttribute('language') ??
-                        $template.getAttribute('lang') ??
-                        'html',
+                    language: $template.getAttribute('language') ?? 'html',
                     // @ts-ignore
                     code: formatedCode,
                     lines: formatedCode.trim().split('\n').length,
@@ -289,7 +284,7 @@ export default class SCodeExample extends __SLitComponent {
                 ),
             );
             code = __hljs.highlight(codeToHighlight, {
-                language: <string>$content.getAttribute('lang'),
+                language: <string>$content.getAttribute('language'),
             });
         } catch (e) {
             console.log(e);
@@ -339,7 +334,7 @@ export default class SCodeExample extends __SLitComponent {
                                     item.id}"
                                     @click="${this.setActiveTabByTab}"
                                 >
-                                    ${item.lang}
+                                    ${item.language}
                                 </div>
                             `,
                         )}
@@ -378,12 +373,12 @@ export default class SCodeExample extends __SLitComponent {
                             <pre
                                 class="${this.utils.cls('_code')}"
                                 style="line-height:0;"
-                                id="${item.id ?? item.lang}"
+                                id="${item.id ?? item.language}"
                                 ?active="${this.state.activeTabId ===
-                                (item.id ?? item.lang)}"
+                                (item.id ?? item.language)}"
                             >
-                            <code lang="${item.lang ??
-                            item.id}" class="language-${item.lang} ${item.lang} ${this
+                            <code language="${item.language ??
+                            item.id}" class="language-${item.language} ${item.language} ${this
                                 .props.bare
                                 ? ''
                                 : 'hljs'}">${

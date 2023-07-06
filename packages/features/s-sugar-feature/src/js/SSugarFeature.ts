@@ -19,7 +19,7 @@ import __SSugarFeatureInterface from './interface/SSugarFeatureInterface';
 import { __viewportEvents } from '@coffeekraken/sugar/dom';
 
 export interface ISSugarFeatureProps {
-    scrolled: boolean;
+    scrollClasses: boolean;
     scrolledDelta: number;
     vhvar: boolean;
     viewportEvents: boolean;
@@ -142,7 +142,7 @@ export default class SSugarFeature extends __SFeature implements ISFeature {
         // viewport aware
         if (this.props.viewportAware) this._viewportAware();
         // scrolled
-        if (this.props.scrolled) this._scrolled();
+        if (this.props.scrollClasses) this._scrollClasses();
         // vhvar
         if (this.props.vhvar) this._vhvar();
         // auto resize
@@ -218,7 +218,11 @@ export default class SSugarFeature extends __SFeature implements ISFeature {
         __autoFocus();
     }
 
-    _scrolled() {
+    _scrollClasses() {
+        let previousX = 0,
+            previousY = 0;
+        let directionX, directionY;
+
         document.addEventListener('scroll', (e) => {
             if (window.scrollY >= this.props.scrolledDelta) {
                 if (!document.body.classList.contains('scrolled')) {
@@ -229,8 +233,40 @@ export default class SSugarFeature extends __SFeature implements ISFeature {
                     document.body.classList.remove('scrolled');
                 }
             }
+
+            if (window.scrollY > previousY) {
+                directionY = 'down';
+            } else {
+                directionY = 'up';
+            }
+
+            if (window.scrollX > previousX) {
+                directionX = 'right';
+            } else if (window.scrollX <= previousX) {
+                directionX = 'left';
+            }
+
+            previousX = window.scrollX;
+            previousY = window.scrollY;
+
+            if (directionY === 'up') {
+                document.body.classList.remove('scroll-down');
+                document.body.classList.add('scroll-up');
+            } else {
+                document.body.classList.remove('scroll-up');
+                document.body.classList.add('scroll-down');
+            }
+
+            if (directionX === 'left') {
+                document.body.classList.remove('scroll-right');
+                document.body.classList.add('scroll-left');
+            } else if (directionX === 'right') {
+                document.body.classList.remove('scroll-left');
+                document.body.classList.add('scroll-right');
+            }
         });
     }
+
     _vhvar() {
         let vh = window.innerHeight * 0.01;
         document.documentElement.style.setProperty('--vh', `${vh}px`);

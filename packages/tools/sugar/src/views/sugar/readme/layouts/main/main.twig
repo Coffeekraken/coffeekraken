@@ -7,7 +7,7 @@
     <!-- header -->
     # {{ config.package.json.name }}
 
-    ###### [{{ config.package.json.license }}]({{ config.package.json.repository.url }} "{{ config.package.json.name }} license") {{ config.package.json.version }} - [Git repository]({{ config.package.json.repository.url }} "{{ config.package.json.name }} repository")
+    [{{ config.package.json.license }}]({{ config.package.json.repository.url }} "{{ config.package.json.name }} license") {{ config.package.json.version }} - [Git repository]({{ config.package.json.repository.url }} "{{ config.package.json.name }} repository")
 
     {% if config.readme.shields %}
         <!-- shields -->
@@ -15,6 +15,7 @@
         [![{{ key }}]({{ shield.url|replace({'%packageName':  config.package.json.name}) }})]({{ shield.href|replace({'%packageName': config.package.json.name}) }} "{{ config.package.json.name }} {{ key }}")
         {% endfor %}
     {% endif %}
+
 {% endif %}
 
 {% if not sections or 'description' in sections|keys %}
@@ -24,7 +25,7 @@
 
 {% if not sections or 'install' in sections|keys %}
     <!-- install -->
-    ### Install
+    ## Install
 
     ```shell
     npm i {{ config.package.json.name }}
@@ -36,14 +37,14 @@
 
 {% if not sections or 'license' in sections|keys %}
     <!-- license -->    
-    ### License
+    ## License
 
     Distributed under the **{{config.package.json.license }}** License. See **[LICENSE]({{ config.package.json.repository.url }} "{{ config.package.json.name }} license")** for more information.
 {% endif %}
 
 {% if not sections or 'contact' in sections|keys %}
     <!-- contact -->
-    ### Contact
+    ## Contact
 
     Here's all the ways you can contact us listed:
 

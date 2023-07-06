@@ -16,7 +16,7 @@
 
         </div>
 
-        <div class="doc">
+        <div class="_doc">
             <s-doc></s-doc>
         </div>
 

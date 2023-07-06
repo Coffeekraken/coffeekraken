@@ -28,14 +28,14 @@ export { postcssUiCodeExampleClassesInterface as interface };
  * @type                 PostcssMixin
  * @platform            css
  * @status              beta
- * 
+ *
  * This mixin represent a code example
  *
  * @snippet      @sugar.ui.codeExample.classes($1);
- * 
+ *
  * @example        css
  * \@sugar.ui.codeExample.classes;
- * 
+ *
  * @since    2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
@@ -82,7 +82,7 @@ export default function ({
             * 
             * @example        html
             * <s-code-example>
-            *   <template lang="js">
+            *   <template language="js">
             *       console.log('hello world');
             *   </template>
             * </s-code-example>
@@ -125,12 +125,12 @@ export default function ({
             * @example        html
             * <div class="s-rhythm:vertical">
             *   <s-code-example>
-            *       <template lang="js">
+            *       <template language="js">
             *           console.log('hello world');
             *       </template>
             *   </s-code-example>
             *   <s-code-example>
-            *       <template lang="js">
+            *       <template language="js">
             *           console.log('hello world');
             *       </template>
             *   </s-code-example>

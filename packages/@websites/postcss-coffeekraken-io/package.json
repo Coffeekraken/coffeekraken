@@ -22,7 +22,7 @@
         "build": "sugar kitchen.run build --target production",
         "preview": "sugar kitchen.run preview",
         "static": "npm run preview & sleep 5 && npm run static.build && npm run static.serve",
-        "static.serve": "npx http-server static",
+        "static.serve": "sugar staticServer.start",
         "static.build": "sugar static.build --clean --env production --target production",
         "doc.serve": "sugar doc.serve",
         "deploy": "echo 'Simply push in the master branch to deploy'"

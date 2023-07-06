@@ -1,6 +1,6 @@
 <s-code-example more-action="{{ $moreAction }}">
     @foreach ($examples as $k => $example)
-        <template lang="{{ $example->language or $k }}">
+        <template language="{{ $example->language or $k }}">
             {!! $example->code or $example !!}
         </template>
     @endforeach

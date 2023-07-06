@@ -16,7 +16,7 @@
         </script>
 
         <s-code-example toolbar-position="nav">
-            <template lang="html">
+            <template language="html">
                 <!-- using my layout -->
                 <section class="my-layout-1">
                     <div>
@@ -30,10 +30,10 @@
                     </div>
                 </section>
             </template>
-            <template lang="php">
+            <template language="php">
                 print_r(\Sugar\string\toLowerCase('Hello World'));
             </template>
-            <template lang="js">
+            <template language="js">
                 import __SClass from '@coffeekraken/s-class'; import __deepMerge
                 from '@coffeekraken/sugar/shared/object/deepMerge'; import
                 __SInterface from '@coffeekraken/s-interface'; import __mustache
@@ -41,42 +41,24 @@
                 '@coffeekraken/sugar/js/css/stylesheetToString'; export default
                 SSVelteComponent;
             </template>
-            <template lang="html">
+            <template language="html">
                 <h1>Something cool</h1>
                 <p>iwfj wioef oiw efjoijw oiefjw ioefjwiofj oij</p>
             </template>
-            
         </s-code-example>
 
         <s-code-example toolbar-position="nav">
-            <template lang="css">
-                @sugar.import ('./sugar.css');
-@sugar.import ('../views/**/*.css');
-@sugar.import ('./generic/**/*.css');
-
-html {
-    overflow-x: hidden;
-}body {
-display: block;
-@sugar.theme.when (dark) {
-background-color: sugar.color(main, --darken 30);
-}
-}
-
-.hljs > * {
-display: inline-block !important;
-}
-
-[class*='s-btn']:not(s-date-picker) [class*='s-btn']):not(.preview)
-[class*='s-btn']) {
-border: none !important;
-}
-
-.s-btn {
-    @sugar.depth (50);
-}
+            <template language="css">
+                @sugar.import ('./sugar.css'); @sugar.import
+                ('../views/**/*.css'); @sugar.import ('./generic/**/*.css');
+                html { overflow-x: hidden; }body { display: block;
+                @sugar.theme.when (dark) { background-color: sugar.color(main,
+                --darken 30); } } .hljs > * { display: inline-block !important;
+                } [class*='s-btn']:not(s-date-picker)
+                [class*='s-btn']):not(.preview) [class*='s-btn']) { border: none
+                !important; } .s-btn { @sugar.depth (50); }
             </template>
-            <template lang="html">
+            <template language="html">
                 <h1>Something cool</h1>
                 <p>iwfj wioef oiw efjoijw oiefjw ioefjwiofj oij</p>
             </template>

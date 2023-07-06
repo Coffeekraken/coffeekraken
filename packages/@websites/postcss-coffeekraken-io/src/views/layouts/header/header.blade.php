@@ -2,21 +2,13 @@
 
     <div class="s-container">
 
-        <div class="s-flex:align-center" style="position: relative">
-            {{-- <div class="_actions s-display:none @mobile s-display:inline-block">
-                <div class="s-mis:30">
-                    <a s-activate class="_menu-icon" href="#nav-mobile" toggle unactivate-on="event:s-page-transition.start">
-                        <i class="s-icon:menu _open"></i>
-                        <i class="s-icon:cross _close"></i>
-                    </a>
-                </div>
-            </div> --}}
+        <div class="_nav">
             <div class="_logo">
                 <a href="/" title="Coffeekraken.io" class="s-text:center">
                     @include ('sugar.logos.coffeekraken.coffeekraken')
                 </a>
             </div>
-            <nav role="navigation" id="nav" class="_nav s-until:media:mobile">
+            <nav role="navigation" id="nav" class="_links s-until:media:mobile">
                 <a class="_main-link" href="#get-started" title="Get Started" s-activate trigger="scrollspy">
                     <span>Get started</span>
                 </a>
@@ -27,7 +19,9 @@
                     <span>Documentation</span>
                 </a>                
             </nav>
-            <ck-menu></ck-menu>
+            <div class="_menu">
+                <ck-menu></ck-menu>
+            </div>
         </div>
 
     </div>

@@ -129,7 +129,7 @@
 
                 <div class="@mobile s-mbe:30">
                     <s-code-example s-deps css="codeExample">
-                        <template lang="css">
+                        <template language="css">
 @sugar.icon.classes {
 &nbsp;&nbsp;fa:calendar-alt:calendar
 &nbsp;&nbsp;fab:npm
@@ -137,7 +137,7 @@
 &nbsp;&nbsp;fs:icons/chrome.svg:chromium
 }
                         </template>
-                        <template lang="html">
+                        <template language="html">
                             <i class="s-icon:calendar"></i>
                             <i class="s-icon:npm"></i>
                             <i class="s-icon:search"></i>

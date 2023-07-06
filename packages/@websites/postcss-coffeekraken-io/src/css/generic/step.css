@@ -21,5 +21,11 @@
             sugar.color(main, background),
             sugar.color(main, background)
         );
+
+        @sugar.media mobile {
+            font-size: sugar.font.size(80);
+            top: 0;
+            right: 50px;
+        }
     }
 }

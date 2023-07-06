@@ -5,7 +5,7 @@ export default {
             case 'html':
                 return [
                     `<s-code-example>`,
-                    `   <template lang="${data[0]}">`,
+                    `   <template language="${data[0]}">`,
                     data[1],
                     `   </template>`,
                     `</s-code-example>`,

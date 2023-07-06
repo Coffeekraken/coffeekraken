@@ -8,6 +8,10 @@ import { css, unsafeCSS } from 'lit';
 import { unsafeHTML } from 'lit/directives/unsafe-html.js';
 import __SDocComponentInterface from './interface/SDocComponentInterface';
 
+import { __scrollTo } from '@coffeekraken/sugar/dom';
+
+import { __wait } from '@coffeekraken/sugar/datetime';
+
 import { __isColor } from '@coffeekraken/sugar/is';
 
 import { __replaceChunks } from '@coffeekraken/sugar/string';
@@ -83,6 +87,8 @@ export default class SDocComponent extends __SLitComponent {
     _searchValue: string;
 
     _$body: HTMLElement;
+    _$menuBtn: HTMLElement;
+    _$explorer: HTMLElement;
     _$searchInput: HTMLInputElement;
     _$placeholder: HTMLElement;
 
@@ -100,7 +106,7 @@ export default class SDocComponent extends __SLitComponent {
         this._registerShortcuts();
 
         // load the categories
-        const request = await fetch(this.props.endpoints.base),
+        const request = await fetch(this.props.endpoints.base, {}),
             categories = await request.json();
         this._categories = categories;
 
@@ -113,6 +119,13 @@ export default class SDocComponent extends __SLitComponent {
         this._$searchInput = this.querySelector(
             `.${this.utils.cls('_search-input')}`,
         );
+
+        // get the explorer
+        this._$explorer = this.querySelector(`.${this.utils.cls('_explorer')}`);
+
+        // get the menu button
+        this._$menuBtn = this.querySelector(`.${this.utils.cls('_menu-btn')}`);
+        document.body.appendChild(this._$menuBtn);
 
         // get the body element
         this._$body = this.querySelector(`.${this.utils.cls('_body')}`);
@@ -280,9 +293,14 @@ export default class SDocComponent extends __SLitComponent {
                                 ? 'active'
                                 : ''}"
                             tabindex="0"
-                            @click=${(e) => {
+                            @pointerup=${async (e) => {
                                 e.stopPropagation();
                                 this._loadItem(itemObj);
+                                await __wait(100);
+                                document.activeElement?.blur?.();
+                                __scrollTo(this._$body, {
+                                    offset: 100,
+                                });
                             }}
                         >
                             <div>
@@ -456,7 +474,7 @@ export default class SDocComponent extends __SLitComponent {
                                             </div>`
                                           : ''}
                                       <s-code-example bare=${this.props.bare}>
-                                          <code lang="${example.language}">
+                                          <code language="${example.language}">
                                               ${example.code}
                                           </code>
                                       </s-code-example>
@@ -577,7 +595,7 @@ export default class SDocComponent extends __SLitComponent {
                                 ? 'active'
                                 : ''}"
                             tabindex="0"
-                            @click=${(e) => {
+                            @pointerup=${(e) => {
                                 e.stopPropagation();
                                 categoryObj.selected = !categoryObj.selected;
                                 this.requestUpdate();
@@ -613,7 +631,17 @@ export default class SDocComponent extends __SLitComponent {
 
     render() {
         return html`
-            <div class="${this.utils.cls('_explorer')}">
+            <button
+                class="${this.utils.cls('_menu-btn')}"
+                @pointerup=${async (e) => {
+                    e.preventDefault();
+                    await __wait(100);
+                    this._$explorer.focus();
+                }}
+            >
+                ${unsafeHTML(this.props.icons.menu)}
+            </button>
+            <div class="${this.utils.cls('_explorer')}" tabindex="0">
                 <label
                     class="${this.utils.cls(
                         '_search',
@@ -635,8 +663,9 @@ export default class SDocComponent extends __SLitComponent {
                 </label>
                 ${this._renderCategories(this._categories)}
             </div>
+
             <div class="${this.utils.cls('_content')}">
-                <div class="${this.utils.cls('_body')}">
+                <div class="${this.utils.cls('_body')}" tabindex="0">
                     ${this._item ? html` ${this._renderItem(this._item)} ` : ''}
                 </div>
                 <div class="${this.utils.cls('_toolbar')}">
@@ -647,7 +676,7 @@ export default class SDocComponent extends __SLitComponent {
                                   aria-label="Toggle documentation fullscreen mode"
                                   title="${this.props.i18n
                                       .toggleFullscreen} (CTRL+D"
-                                  @click=${(e) => {
+                                  @pointerup=${(e) => {
                                       e.stopPropagation();
                                       this._toggleFullscreen();
                                   }}

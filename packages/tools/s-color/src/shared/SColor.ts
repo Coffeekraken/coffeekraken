@@ -12,6 +12,8 @@ import { __deepMerge } from '@coffeekraken/sugar/object';
 import __SColorApplyParamsInterface from './interface/SColorApplyParamsInterface';
 import __SColorSettingsInterface from './interface/SColorSettingsInterface';
 
+import { Contrast } from './contrast';
+
 /**
  * @name 		    SColor
  * @namespace       shared
@@ -108,27 +110,6 @@ export interface ISColorContrastInfo {
     value: number;
 }
 
-const RED = 0.2126;
-const GREEN = 0.7152;
-const BLUE = 0.0722;
-const GAMMA = 2.4;
-
-function _luminance(r, g, b) {
-    let a = [r, g, b].map((v) => {
-        v /= 255;
-        return v <= 0.03928 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, GAMMA);
-    });
-    return a[0] * RED + a[1] * GREEN + a[2] * BLUE;
-}
-
-function _contrast(rgb1, rgb2) {
-    var lum1 = _luminance(...rgb1);
-    var lum2 = _luminance(...rgb2);
-    var brightest = Math.max(lum1, lum2);
-    var darkest = Math.min(lum1, lum2);
-    return (brightest + 0.05) / (darkest + 0.05);
-}
-
 class SColor extends __SClass {
     /**
      * @name            getContrastInfo
@@ -158,7 +139,10 @@ class SColor extends __SClass {
         if (typeof color2 === 'string') {
             color2Instance = new SColor(color2);
         }
-
+        const contrast = new Contrast(
+            color1Instance.toHexaString(),
+            color2Instance.toHexaString(),
+        );
         const finalContrastInfo = {
             background: {
                 ...color2Instance.toObject(),
@@ -166,10 +150,7 @@ class SColor extends __SClass {
             foreground: {
                 ...color1Instance.toObject(),
             },
-            value: _contrast(
-                [color1Instance.r, color1Instance.g, color1Instance.b],
-                [color2Instance.r, color2Instance.g, color2Instance.b],
-            ),
+            value: contrast.value,
         };
         return finalContrastInfo;
     }

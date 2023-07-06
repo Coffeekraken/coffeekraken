@@ -50,11 +50,11 @@ export default class SHotkeysListComponent extends __SLitComponent {
                             <div class="${this.utils.cls('_metas')}">
                                 ${hotkeyObj.title
                 ? html `
-                                          <h6
+                                          <h1
                                               class="${this.utils.cls('_title')}"
                                           >
                                               ${hotkeyObj.title}
-                                          </h6>
+                                          </h1>
                                       `
                 : ''}
                                 ${hotkeyObj.description

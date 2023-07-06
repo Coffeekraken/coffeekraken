@@ -50,7 +50,7 @@
                  <div class="_code" id="example-sugar">
 
                         <s-code-example>
-                            <template lang="css">
+                            <template language="css">
 /**
 &nbsp;* Init sugar. This will import a reset css and print the
 &nbsp;* needed variables used across the toolkit classes.
@@ -81,7 +81,7 @@
 
                 <div class="_code" id="example-index">
                     <s-code-example>
-                        <template lang="css">
+                        <template language="css">
 &nbsp;
 /*
  *      ____
@@ -110,7 +110,7 @@ body {
 
                 <div class="_code" id="example-layout">
                     <s-code-example>
-                        <template lang="css">
+                        <template language="css">
 /* 
 &nbsp;* |------|------|------|
 &nbsp;* | 1    | 2    | 4    |
@@ -134,7 +134,7 @@ body {
 
                 <div class="_code" id="example-media">
                     <s-code-example>
-                        <template lang="css">
+                        <template language="css">
 /**
 &nbsp;* The @sugar.media mixin allows you to apply media queries with ease.
 &nbsp;* Available breakpoints are "mobile", "tablet", "desktop" and "wide"
@@ -162,7 +162,7 @@ body {
 
                 <div class="_code" id="example-component">
                     <s-code-example>
-                        <template lang="css">
+                        <template language="css">
 .my-component {
 &nbsp;&nbsp;&nbsp;&nbsp;background: sugar.color(main, surface);
 &nbsp;&nbsp;&nbsp;&nbsp;border: 1px solid sugar.color(main, border);
@@ -181,7 +181,7 @@ body {
 
                 <div class="_code" id="example-colors">
                     <s-code-example>
-                        <template lang="css">
+                        <template language="css">
 /**
 &nbsp;* Colors in a design toolkit is a central part.
 &nbsp;* Sugar let you define your own colors through the .sugar/themeColor.config.ts
@@ -222,7 +222,7 @@ body {
                 
                 <div class="_code" id="example-icons">
                     <s-code-example>
-                        <template lang="css">
+                        <template language="css">
 /**
 &nbsp;* Define some icons to be used with classes like "s-icon:github", etc...
 &nbsp;* Can be fontawesome icons using the "fa", "fab", "fas" and "far" protocol
@@ -247,7 +247,7 @@ body {
 
                 <div class="_code" id="example-html">
                     <s-code-example>
-                        <template lang="html">
+                        <template language="html">
 <!--
  * applying our layout generated in the layout.css example
  *-->

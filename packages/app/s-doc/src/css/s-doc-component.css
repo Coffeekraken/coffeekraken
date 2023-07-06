@@ -87,20 +87,59 @@ body:has(.s-doc-fullscreen) {
     transform: translateX(-50%); */
     /* @sugar.depth (100); */
 
+    @sugar.media mobile {
+        max-height: none;
+        display: block;
+    }
+
     &_search-input,
     [tabindex]:not([tabindex='-1']) {
         @sugar.focus.outline accent;
     }
 
     &_explorer {
+        position: relative;
         width: 400px;
         height: 100%;
         max-height: 80vh;
         overflow-y: auto;
         @sugar.scrollbar;
+
+        @sugar.media mobile {
+            background: sugar.color(main, background);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            max-height: 100vh;
+            z-index: 50;
+            transform: translateX(-100%);
+            @sugar.transition fast;
+
+            &:focus,
+            &:focus-within {
+                transform: translateX(0);
+            }
+        }
     }
     &-fullscreen &_explorer {
         max-height: none;
+    }
+
+    &_menu-btn {
+        display: none;
+        position: fixed;
+        bottom: sugar.margin(30);
+        right: sugar.margin(30);
+        background: sugar.color(main, surface);
+        padding: sugar.padding(30);
+        z-index: 100;
+        @sugar.border.radius;
+
+        @sugar.media mobile {
+            display: block;
+        }
     }
 
     &_category {
@@ -215,6 +254,10 @@ body:has(.s-doc-fullscreen) {
         @sugar.border.radius();
         @sugar.scrollbar;
 
+        @sugar.media mobile {
+            padding: sugar.padding(30);
+        }
+
         > * {
             max-width: 960px;
         }
@@ -240,6 +283,11 @@ body:has(.s-doc-fullscreen) {
         max-width: 960px;
     }
 
+    &_toolbar {
+        @sugar.media mobile {
+            display: none;
+        }
+    }
     &_toolbar > button {
         padding: sugar.padding(30);
         background: sugar.color(main, background);
@@ -305,5 +353,12 @@ body:has(.s-doc-fullscreen) {
     &_param-description {
         padding: sugar.padding(30);
         @sugar.typo (p);
+    }
+}
+
+html:has(.s-doc_explorer:focus, .s-doc_explorer:focus-within),
+body:has(.s-doc_explorer:focus, .s-doc_explorer:focus-within) {
+    @sugar.media mobile {
+        overflow: hidden;
     }
 }

@@ -2,6 +2,10 @@
     display: flex;
     /* @sugar.depth (100); */
 
+    @sugar.media mobile {
+        flex-direction: column;
+    }
+
     ._sidebar {
         width: 400px;
         flex-shrink: 0;
@@ -9,12 +13,20 @@
         border: solid 1px sugar.color(main, border); */
         @sugar.border.radius();
 
+        @sugar.media mobile {
+            display: flex;
+            width: 100%;
+            overflow-x: auto;
+            @sugar.scrollbar;
+        }
+
         a {
             display: block;
             padding: sugar.padding(30) sugar.padding(30);
             border-top-left-radius: sugar.border.radius();
             border-bottom-left-radius: sugar.border.radius();
             background: sugar.color(main, surface, --alpha 0);
+            white-space: nowrap;
             @sugar.transition;
             @sugar.focus.outline (accent);
 

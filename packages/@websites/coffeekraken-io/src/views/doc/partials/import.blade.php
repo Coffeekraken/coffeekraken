@@ -5,7 +5,7 @@
     </h4>
 
     <s-code-example class="" >
-        <template lang="js">
+        <template language="js">
             {{ $block->import }}
         </template>
     </s-code-example>

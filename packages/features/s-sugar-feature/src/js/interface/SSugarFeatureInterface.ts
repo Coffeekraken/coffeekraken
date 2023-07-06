@@ -46,9 +46,9 @@ export default class SSugarFeatureInterface extends __SInterface {
                 type: 'Boolean',
                 default: true,
             },
-            scrolled: {
+            scrollClasses: {
                 description:
-                    'Specify if you want the `scrolled` class to be applied on the `body` element when the page has been scrolled',
+                    'Specify if you want the scroll classes to be applied on the `body` element when the page has been scrolled',
                 type: 'Boolean',
                 default: true,
             },

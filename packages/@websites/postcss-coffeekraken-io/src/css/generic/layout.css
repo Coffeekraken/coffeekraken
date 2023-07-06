@@ -18,6 +18,10 @@
         transform: translateY(0);
     }
 
+    @sugar.media mobile {
+        display: none;
+    }
+
     &:hover {
         background: sugar.color(main, surface, --lighten 10);
     }

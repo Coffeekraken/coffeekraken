@@ -145,7 +145,7 @@ export default class CKDiscoverWelcome extends __SLitComponent {
                               ? html`
                                     <s-code-example lines="15">
                                         <code
-                                            lang="${this.item.example[0]
+                                            language="${this.item.example[0]
                                                 .language}"
                                         >
                                             ${this.item.example[0].code}

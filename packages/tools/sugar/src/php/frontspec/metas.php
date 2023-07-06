@@ -45,8 +45,7 @@ function metas($frontspec = null, $env = 'development')
         'charset' => 'UTF-8',
         'http-equiv' => 'X-UA-Compatible',
         'robots' => $env == 'production' ? 'all' : 'noindex,nofollow',
-        'viewport' =>
-            'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0',
+        'viewport' => 'width=device-width, initial-scale=1',
     ];
 
     $finalMetas = array_merge($defaultMetas, (array) $metas);

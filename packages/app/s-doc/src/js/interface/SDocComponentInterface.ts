@@ -56,6 +56,7 @@ export default class SDocComponentInterface extends __SInterface {
                     file: '<i class="fa-regular fa-file"></i>',
                     enterFullscreen: '<i class="fa-solid fa-expand"></i>',
                     exitFullscreen: '<i class="fa-solid fa-compress"></i>',
+                    menu: '<i class="fa-solid fa-list-ul"></i>',
                 },
             },
             i18n: {

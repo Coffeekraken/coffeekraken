@@ -29,7 +29,7 @@
                     </div>
                 @endif
                 <s-code-example class="s-mbs:50" >
-                    <template lang="{{ $example->language }}">
+                    <template language="{{ $example->language }}">
                         {!! html_entity_decode($example->code, ENT_QUOTES, 'UTF-8') !!}
                     </template>
                 </s-code-example>

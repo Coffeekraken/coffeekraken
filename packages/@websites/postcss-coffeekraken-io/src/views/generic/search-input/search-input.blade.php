@@ -49,7 +49,7 @@
                 @{{#with example.[0]}}
                     <div style="width: 60%" class="_code s-p:50 s-flex:align-center">
                         <s-code-example style="max-width:100%;" class="s-depth:50 s-flex-item:grow:shrink" >
-                            <template lang="@{{ this.language }}">
+                            <template language="@{{ this.language }}">
                                 @{{ this.code }}                    
                             </template>       
                         </s-code-example>

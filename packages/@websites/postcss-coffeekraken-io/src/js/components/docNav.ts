@@ -468,7 +468,7 @@ export default class DocNav extends __SLitComponent {
                                                                 css="codeExample"
                                                             >
                                                                 <textarea
-                                                                    lang="${(<
+                                                                    language="${(<
                                                                         any
                                                                     >item)
                                                                         .example[0]

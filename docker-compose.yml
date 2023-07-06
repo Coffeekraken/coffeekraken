@@ -10,8 +10,8 @@ services:
         networks:
             - coffeekraken
         volumes:
-            - ./data:/data
-            - ./letsencrypt:/etc/letsencrypt
+            - ./.nginxProxy/data:/data
+            - ./.nginxProxy/letsencrypt:/etc/letsencrypt
 
 networks:
     coffeekraken:

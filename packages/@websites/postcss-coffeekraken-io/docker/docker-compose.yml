@@ -1,7 +1,6 @@
 version: '3.8'
 services:
     postcss-web:
-        container_name: postcss-coffeekraken-io
         build:
             context: .
             dockerfile: Dockerfile

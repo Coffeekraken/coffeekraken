@@ -56,7 +56,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
     vars.comment(() => `
       /**
         * @name          Families
-        * @namespace          sugar.style.font
+        * @namespace          sugar.style.helpers.font
         * @type               CssClass
         * @menu           Styleguide / Fonts        /styleguide/fonts/families
         * @platform       css
@@ -96,7 +96,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
     vars.comment(() => `
       /**
         * @name          Sizes
-        * @namespace          sugar.style.font
+        * @namespace          sugar.style.helpers.font
         * @type               CssClass
         * @menu           Styleguide / Fonts        /styleguide/fonts/sizes
         * @platform       css
@@ -129,7 +129,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
     vars.comment(() => `
       /**
         * @name          Styles
-        * @namespace          sugar.style.font
+        * @namespace          sugar.style.helpers.font
         * @type               CssClass
         * @menu           Styleguide / Fonts        /styleguide/fonts/styles
         * @platform       css
@@ -160,7 +160,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
     vars.comment(() => `
       /**
         * @name          Weights
-        * @namespace          sugar.style.font
+        * @namespace          sugar.style.helpers.font
         * @type               CssClass
         * @menu           Styleguide / Fonts        /styleguide/fonts/weights
         * @platform       css
@@ -200,7 +200,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
     vars.comment(() => `
       /**
         * @name          Stretches
-        * @namespace          sugar.style.font
+        * @namespace          sugar.style.helpers.font
         * @type               CssClass
         * @menu           Styleguide / Fonts        /styleguide/fonts/stretches
         * @platform       css
@@ -235,7 +235,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
     vars.comment(() => `
       /**
         * @name          Resets
-        * @namespace          sugar.style.font
+        * @namespace          sugar.style.helpers.font
         * @type               CssClass
         * @menu           Styleguide / Fonts        /styleguide/fonts/resets
         * @platform       css
@@ -260,7 +260,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
         vars.comment(() => `
         /**
         * @name          s-font:${fontName}
-        * @namespace          sugar.style.font
+        * @namespace          sugar.style.helpers.font
         * @type               CssClass
         * @platform       css
         * @status       beta

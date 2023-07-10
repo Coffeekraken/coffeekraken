@@ -57,7 +57,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
     vars.comment(() => `
       /**
         * @name          Switch
-        * @namespace          sugar.style.ui
+        * @namespace          sugar.style.ui.switch
         * @type               Styleguide
         * @menu           Styleguide / Forms        /styleguide/form/switch
         * @platform       css

@@ -62,7 +62,7 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
     vars.comment(() => `
       /**
         * @name          Buttons
-        * @namespace          sugar.style.ui
+        * @namespace          sugar.style.ui.button
         * @type               Styleguide
         * @menu           Styleguide / UI        /styleguide/ui/button
         * @platform       css

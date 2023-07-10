@@ -34,7 +34,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
         const opacityCls = `s-opacity:${opacity}`;
         vars.comment(() => `/**
     * @name            ${opacityCls}
-    * @namespace          sugar.style.opacity
+    * @namespace          sugar.style.helpers.opacity
     * @type             CssClass
     * @platform             css
     * @status               beta

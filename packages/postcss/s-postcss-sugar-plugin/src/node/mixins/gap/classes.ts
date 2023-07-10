@@ -57,7 +57,7 @@ export default function ({
         () => `
       /**
         * @name          Gap
-        * @namespace          sugar.style.helpers
+        * @namespace          sugar.style.helpers.gap
         * @type               Styleguide
         * @menu           Styleguide / Helpers        /styleguide/helpers/gap
         * @platform       css
@@ -108,7 +108,7 @@ export default function ({
         vars.comment(
             () => `/**
                 * @name          s-gap${space === 'default' ? '' : `:${space}`}
-                * @namespace          sugar.style.gep
+                * @namespace          sugar.style.helpers.gap
                 * @type               CssClass
                 * @platform           css
                 * @status               beta
@@ -142,7 +142,7 @@ export default function ({
                 * @name          s-gap:row${
                     space === 'default' ? '' : `:${space}`
                 }
-                * @namespace          sugar.style.gep
+                * @namespace          sugar.style.helpers.gap
                 * @type               CssClass
                 * @platform           css
                 * @status               beta
@@ -174,7 +174,7 @@ export default function ({
                 * @name          s-gap:column${
                     space === 'default' ? '' : `:${space}`
                 }
-                * @namespace          sugar.style.gep
+                * @namespace          sugar.style.helpers.gap
                 * @type               CssClass
                 * @platform           css
                 * @status               beta

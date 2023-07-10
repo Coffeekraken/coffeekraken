@@ -58,7 +58,7 @@ export default function ({
             () => `
         /**
          * @name       s-grid:${id}
-         * @namespace          sugar.style.layout
+         * @namespace          sugar.style.helpers.grid
          * @type          CssClass
          * @platform      css
          * @status      beta

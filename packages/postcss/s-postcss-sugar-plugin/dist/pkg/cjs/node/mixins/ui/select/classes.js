@@ -61,7 +61,7 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
     vars.comment(() => `
       /**
         * @name          Select
-        * @namespace          sugar.style.ui
+        * @namespace          sugar.style.ui.select
         * @type               Styleguide
         * @menu           Styleguide / Forms        /styleguide/forms/select
         * @platform       css

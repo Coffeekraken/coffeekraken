@@ -38,7 +38,7 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
     vars.comment(`
       /**
         * @name          Visibility
-        * @namespace          sugar.style.helpers
+        * @namespace          sugar.style.helpers.visibility
         * @type               Styleguide
         * @menu           Styleguide / Helpers        /styleguide/helpers/visibility
         * @platform       css
@@ -74,7 +74,7 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
     `);
     vars.comment(`/**
     * @name          s-visibility:hidden
-    * @namespace          sugar.style.visibility
+    * @namespace          sugar.style.helpers.visibility
     * @type               CssClass
     * @platform             css
     * @status             beta
@@ -90,7 +90,7 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
     }`, { type: 'CssClass' });
     vars.comment(`/**
     * @name          s-visibility:visible
-    * @namespace          sugar.style.visibility
+    * @namespace          sugar.style.helpers.visibility
     * @type               CssClass
     * @platform             css
     * @status             beta
@@ -106,7 +106,7 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
     }`, { type: 'CssClass' });
     vars.comment(`/**
     * @name          s-visibility:collapse
-    * @namespace          sugar.style.visibility
+    * @namespace          sugar.style.helpers.visibility
     * @type               CssClass
     * @platform             css
     * @status             beta

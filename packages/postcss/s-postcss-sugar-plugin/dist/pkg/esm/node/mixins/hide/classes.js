@@ -30,7 +30,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
     const vars = new CssVars();
     vars.comment(() => `/**
     * @name          s-hide
-    * @namespace          sugar.style.hide
+    * @namespace          sugar.style.helpers.hide
     * @type               CssClass
     * @platform             css
     * @status             beta

@@ -46,6 +46,10 @@
         align-items: center;
         flex-grow: 1;
         padding-inline: sugar.padding(50);
+
+        @sugar.media mobile {
+            display: none;
+        }
     }
 
     .s-container {

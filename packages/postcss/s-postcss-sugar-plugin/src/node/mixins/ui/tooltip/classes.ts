@@ -83,8 +83,8 @@ export default function ({
     vars.comment(
         () => `
       /**
-        * @name          Tooltips
-        * @namespace          sugar.style.ui
+        * @name          Tooltip
+        * @namespace          sugar.style.ui.tooltip
         * @type               Styleguide
         * @menu           Styleguide / UI        /styleguide/ui/tooltip
         * @platform       css

@@ -206,7 +206,7 @@ body:has(.s-doc-fullscreen) {
                 calc(sugar.padding(30) * 0.6) sugar.padding(50);
 
             > span {
-                font-size: 0.9em;
+                /* font-size: 0.9em; */
                 opacity: 0.8;
                 @sugar.transition fast;
             }
@@ -327,7 +327,7 @@ body:has(.s-doc-fullscreen) {
     &_param-metas {
         display: flex;
         gap: sugar.margin(30);
-        background: sugar.color(main, background);
+        background: sugar.color(main, surface);
         padding: sugar.padding(30);
         @sugar.border.radius();
     }

@@ -42,7 +42,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
     vars.comment(() => `
       /**
         * @name          Clearfix
-        * @namespace          sugar.style.helpers
+        * @namespace          sugar.style.helpers.clearfix
         * @type               Styleguide
         * @menu           Styleguide / Helpers        /styleguide/helpers/clearfix
         * @platform       css

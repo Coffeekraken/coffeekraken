@@ -60,7 +60,7 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
     const vars = new CssVars();
     vars.comment(() => `
       /**
-        * @name          Text Input
+        * @name          Input
         * @namespace          sugar.style.ui.input
         * @type               Styleguide
         * @menu           Styleguide / Forms        /styleguide/forms/text-input

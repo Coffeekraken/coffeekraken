@@ -42,7 +42,7 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
     vars.comment(() => `
       /**
         * @name          Gap
-        * @namespace          sugar.style.helpers
+        * @namespace          sugar.style.helpers.gap
         * @type               Styleguide
         * @menu           Styleguide / Helpers        /styleguide/helpers/gap
         * @platform       css
@@ -88,7 +88,7 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
     spacesKeys.forEach((space) => {
         vars.comment(() => `/**
                 * @name          s-gap${space === 'default' ? '' : `:${space}`}
-                * @namespace          sugar.style.gep
+                * @namespace          sugar.style.helpers.gap
                 * @type               CssClass
                 * @platform           css
                 * @status               beta
@@ -110,7 +110,7 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
                 }`, { type: 'CssClass' });
         vars.comment(() => `/**
                 * @name          s-gap:row${space === 'default' ? '' : `:${space}`}
-                * @namespace          sugar.style.gep
+                * @namespace          sugar.style.helpers.gap
                 * @type               CssClass
                 * @platform           css
                 * @status               beta
@@ -132,7 +132,7 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
                 }`, { type: 'CssClass' });
         vars.comment(() => `/**
                 * @name          s-gap:column${space === 'default' ? '' : `:${space}`}
-                * @namespace          sugar.style.gep
+                * @namespace          sugar.style.helpers.gap
                 * @type               CssClass
                 * @platform           css
                 * @status               beta

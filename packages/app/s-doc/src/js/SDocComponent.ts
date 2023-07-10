@@ -2,6 +2,10 @@ import __SLitComponent, { html } from '@coffeekraken/s-lit-component';
 
 import { __upperFirst } from '@coffeekraken/sugar/string';
 
+import { __unique } from '@coffeekraken/sugar/array';
+
+import { __camelCase } from '@coffeekraken/sugar/string';
+
 import { __escapeQueue, __hotkey } from '@coffeekraken/sugar/keyboard';
 import { __deepMerge } from '@coffeekraken/sugar/object';
 import { css, unsafeCSS } from 'lit';
@@ -277,65 +281,77 @@ export default class SDocComponent extends __SLitComponent {
 
         return html`
             <ul role="group" class="${this.utils.cls('_items')}">
-                ${Object.keys(items).map((namespace) => {
-                    const itemObj = items[namespace];
+                ${__unique(Object.keys(items))
+                    .sort((a, b) => {
+                        const aObj = items[a],
+                            bObj = items[b];
+                        if (aObj.name < bObj.name) {
+                            return -1;
+                        }
+                        if (aObj.name > bObj.name) {
+                            return 1;
+                        }
+                        return 0;
+                    })
+                    .map((namespace) => {
+                        const itemObj = items[namespace];
 
-                    // filter search
-                    if (this._searchValue && !searchReg.test(itemObj.id)) {
-                        return;
-                    }
+                        // filter search
+                        if (this._searchValue && !searchReg.test(itemObj.id)) {
+                            return;
+                        }
 
-                    return html`
-                        <li
-                            role="treeitem"
-                            class="${this.utils.cls('_item')} ${this._item
-                                ?.id === itemObj.id
-                                ? 'active'
-                                : ''}"
-                            tabindex="0"
-                            @pointerup=${async (e) => {
-                                e.stopPropagation();
-                                this._loadItem(itemObj);
-                                await __wait(100);
-                                document.activeElement?.blur?.();
-                                __scrollTo(this._$body, {
-                                    offset: 100,
-                                });
-                            }}
-                        >
-                            <div>
-                                ${itemObj.loading
-                                    ? html`
-                                          <div
-                                              class="s-loader:square-dots ${this.utils.cls(
-                                                  null,
-                                                  's-color:accent s-mie:10',
-                                              )}"
-                                          ></div>
-                                      `
-                                    : ''}
-                                <span>
-                                    ${this._searchValue
+                        return html`
+                            <li
+                                role="treeitem"
+                                class="${this.utils.cls('_item')} ${this._item
+                                    ?.id === itemObj.id
+                                    ? 'active'
+                                    : ''}"
+                                tabindex="0"
+                                @pointerup=${async (e) => {
+                                    e.stopPropagation();
+                                    this._loadItem(itemObj);
+                                    await __wait(100);
+                                    document.activeElement?.blur?.();
+                                    __scrollTo(this._$body, {
+                                        offset: 100,
+                                    });
+                                }}
+                            >
+                                <div>
+                                    ${itemObj.loading
                                         ? html`
-                                              ${unsafeHTML(
-                                                  __replaceChunks(
-                                                      itemObj.as ??
-                                                          itemObj.name,
-                                                      this._searchValue.split(
-                                                          ' ',
-                                                      ),
-                                                      (chunk) => {
-                                                          return `<span class="s-tc--accent">${chunk}</span>`;
-                                                      },
-                                                  ),
-                                              )}
+                                              <div
+                                                  class="s-loader:square-dots ${this.utils.cls(
+                                                      null,
+                                                      's-color:accent s-mie:10',
+                                                  )}"
+                                              ></div>
                                           `
-                                        : itemObj.as ?? itemObj.name}
-                                </span>
-                            </div>
-                        </li>
-                    `;
-                })}
+                                        : ''}
+                                    <span>
+                                        ${this._searchValue
+                                            ? html`
+                                                  ${unsafeHTML(
+                                                      __replaceChunks(
+                                                          itemObj.as ??
+                                                              itemObj.name,
+                                                          this._searchValue.split(
+                                                              ' ',
+                                                          ),
+                                                          (chunk) => {
+                                                              return `<span class="s-tc--accent">${chunk}</span>`;
+                                                          },
+                                                      ),
+                                                  )}
+                                              `
+                                            : itemObj.as ?? itemObj.name}
+                                    </span>
+                                </div>
+                            </li>
+                        `;
+                    })}
             </ul>
         `;
     }
@@ -515,58 +531,65 @@ export default class SDocComponent extends __SLitComponent {
 
         // default item
         return html`
-            ${this._renderItemMetas(itemObj)}
-            ${this._renderItemExamples(itemObj)}
-            ${itemObj.param
-                ? html`
-                      <div class="${this.utils.cls('_params')}">
-                          <h2
-                              class="${this.utils.cls(
-                                  '_section-title',
-                                  's-typo--h2 s-mbe--30',
-                              )}"
-                          >
-                              ${this.props.i18n.paramsTitle}
-                          </h2>
-                          ${Object.keys(itemObj.param).map((param) => {
-                              const paramObj = itemObj.param[param];
-                              return html`
-                                  <div class="${this.utils.cls('_param')}">
-                                      <div
-                                          class="${this.utils.cls(
-                                              '_param-metas',
-                                          )}"
-                                      >
+            <div
+                s-deps
+                css="${__camelCase(itemObj.namespace?.split?.('.').pop())}"
+            >
+                ${this._renderItemMetas(itemObj)}
+                ${this._renderItemExamples(itemObj)}
+                ${itemObj.param
+                    ? html`
+                          <div class="${this.utils.cls('_params')}">
+                              <h2
+                                  class="${this.utils.cls(
+                                      '_section-title',
+                                      's-typo--h2 s-mbe--30',
+                                  )}"
+                              >
+                                  ${this.props.i18n.paramsTitle}
+                              </h2>
+                              ${Object.keys(itemObj.param).map((param) => {
+                                  const paramObj = itemObj.param[param];
+                                  return html`
+                                      <div class="${this.utils.cls('_param')}">
                                           <div
                                               class="${this.utils.cls(
-                                                  '_param-name',
+                                                  '_param-metas',
                                               )}"
                                           >
-                                              ${paramObj.name}
+                                              <div
+                                                  class="${this.utils.cls(
+                                                      '_param-name',
+                                                  )}"
+                                              >
+                                                  ${paramObj.name}
+                                              </div>
+                                              ${this._renderItemDefault(
+                                                  paramObj,
+                                              )}
+                                              <div
+                                                  class="${this.utils.cls(
+                                                      '_param-type',
+                                                  )}"
+                                              >
+                                                  ${paramObj.type?.raw ??
+                                                  paramObj.type}
+                                              </div>
                                           </div>
-                                          ${this._renderItemDefault(paramObj)}
-                                          <div
+                                          <p
                                               class="${this.utils.cls(
-                                                  '_param-type',
+                                                  '_param-description',
                                               )}"
                                           >
-                                              ${paramObj.type?.raw ??
-                                              paramObj.type}
-                                          </div>
+                                              ${paramObj.description}
+                                          </p>
                                       </div>
-                                      <p
-                                          class="${this.utils.cls(
-                                              '_param-description',
-                                          )}"
-                                      >
-                                          ${paramObj.description}
-                                      </p>
-                                  </div>
-                              `;
-                          })}
-                      </div>
-                  `
-                : ''}
+                                  `;
+                              })}
+                          </div>
+                      `
+                    : ''}
+            </div>
         `;
     }
 

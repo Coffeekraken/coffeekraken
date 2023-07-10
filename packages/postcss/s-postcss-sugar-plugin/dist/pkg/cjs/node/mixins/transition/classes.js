@@ -41,7 +41,7 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
     vars.comment(() => `
       /**
         * @name          Transitions
-        * @namespace          sugar.style.helpers
+        * @namespace          sugar.style.helpers.transition
         * @type               Styleguide
         * @menu           Styleguide / Helpers        /styleguide/helpers/transition
         * @platform       css
@@ -84,7 +84,7 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
     Object.keys(transitionObj).forEach((transitionName) => {
         vars.comment(() => `/**
   * @name          s-ratio:${transitionName.replace('/', '-')}
-  * @namespace          sugar.style.transition
+  * @namespace          sugar.style.helpers.transition
   * @type               CssClass
   * @platform             css
   * @status             beta

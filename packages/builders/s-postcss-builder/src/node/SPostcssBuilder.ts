@@ -76,7 +76,6 @@ export interface ISPostcssBuilderBuildParams {
     purge: boolean;
     minify: boolean;
     target: 'development' | 'production';
-    saveDev: boolean;
 }
 
 export default class SPostcssBuilder extends __SBuilder {
@@ -162,14 +161,6 @@ export default class SPostcssBuilder extends __SBuilder {
                     `<yellow>○</yellow> Output      : <cyan>${__path.relative(
                         process.cwd(),
                         params.output,
-                    )}</cyan>`,
-                );
-            }
-            if (params.saveDev && params.output) {
-                console.log(
-                    `<yellow>○</yellow> Output dev  : <cyan>${__path.relative(
-                        process.cwd(),
-                        params.output.replace(/\.css/, '.dev.css'),
                     )}</cyan>`,
                 );
             }
@@ -285,20 +276,6 @@ export default class SPostcssBuilder extends __SBuilder {
             );
 
             finalCss = result.css;
-
-            // saveDev
-            if (params.saveDev && params.output) {
-                __writeFileSync(
-                    params.output.replace(/\.css$/, '.dev.css'),
-                    finalCss,
-                );
-                const file = new __SFile(
-                    params.output.replace(/\.css$/, '.dev.css'),
-                );
-                console.log(
-                    `<green>[save]</green> Dev file "<yellow>${file.relPath}</yellow>" <yellow>${file.stats.kbytes}kb</yellow> saved <green>successfully</green>`,
-                );
-            }
 
             const purgeDuration = new __SDuration();
 

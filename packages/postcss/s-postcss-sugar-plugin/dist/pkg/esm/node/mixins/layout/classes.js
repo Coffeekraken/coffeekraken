@@ -38,7 +38,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
         vars.comment(() => `
       /**
        * @name       s-layout:${id}
-       * @namespace          sugar.style.layout
+       * @namespace          sugar.style.helpers.layout
        * @type          CssClass
        * @platform      css
        * @status      beta
@@ -71,7 +71,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
         vars.comment(() => `
       /**
        * @name       ${clsX}
-       * @namespace          sugar.style.layout
+       * @namespace          sugar.style.helpers.layout
        * @type          CssClass
        * @platform      css
        * @status        beta
@@ -99,7 +99,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
         vars.comment(() => `
       /**
        * @name       ${clsY}
-       * @namespace          sugar.style.layout
+       * @namespace          sugar.style.helpers.layout
        * @type          CssClass
        * @platform      css
        * @status        beta
@@ -127,7 +127,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
         vars.comment(() => `
       /**
        * @name       ${cls}
-       * @namespace          sugar.style.layout
+       * @namespace          sugar.style.helpers.layout
        * @type          CssClass
        * @platform      css
        * @status      beta
@@ -155,7 +155,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
     vars.comment(() => `
      /**
        * @name       s-layout:gap-between
-       * @namespace          sugar.style.layout
+       * @namespace          sugar.style.helpers.layout
        * @type          CssClass
        * @platform      css
        * @status      beta
@@ -189,7 +189,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
         vars.comment(() => `
       /**
          * @name       s-layout:align-${align}
-         * @namespace          sugar.style.layout
+         * @namespace          sugar.style.helpers.layout
          * @type          CssClass
          * @platform      css
          * @status        beta
@@ -219,7 +219,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
         vars.comment(() => `
       /**
          * @name       s-layout:justify-${justify}
-         * @namespace          sugar.style.layout
+         * @namespace          sugar.style.helpers.layout
          * @type          CssClass
          * @platform      css
          * @status        beta

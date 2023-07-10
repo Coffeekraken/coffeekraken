@@ -37,7 +37,7 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
     vars.comment(() => `
         /**
         * @name          Link
-        * @namespace          sugar.style.helpers
+        * @namespace          sugar.style.helpers.link
         * @type               Styleguide
         * @menu           Styleguide / Helpers        /styleguide/helpers/link
         * @platform       css
@@ -70,7 +70,7 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
     `);
     vars.comment(() => `/**
         * @name            s-link:stretch
-        * @namespace          sugar.style.link
+        * @namespace          sugar.style.helpers.link
         * @type             CssClass
         * @platform         css
         * @status         beta

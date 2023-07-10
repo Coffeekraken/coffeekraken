@@ -84,7 +84,7 @@ export default function ({
         () => `
       /**
         * @name          Range 
-        * @namespace          sugar.style.ui
+        * @namespace          sugar.style.ui.range
         * @type               Styleguide
         * @menu           Styleguide / Forms        /styleguide/forms/range
         * @platform       css

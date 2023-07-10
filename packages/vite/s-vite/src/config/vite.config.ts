@@ -309,9 +309,9 @@ export default function (api) {
                 'Cross-Origin-Opener-Policy': 'same-origin',
             },
             proxy: {
-                // all exported css in the /css/(partials|lod) folder
+                // all exported css in the /css/(chunks|lod) folder
                 // @TODO            find a better way...
-                '^\\/dist\\/css\\/(partials|lod)\\/.*\\.css(\\?.*)?$': {
+                '^\\/dist\\/css\\/(chunks|lod)\\/.*\\.css(\\?.*)?$': {
                     target: `http://${api.config.frontendServer.hostname}:${api.config.frontendServer.port}`,
                     changeOrigin: true,
                     rewrite: (path) => {

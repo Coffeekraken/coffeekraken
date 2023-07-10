@@ -16,7 +16,7 @@
 
         </div>
 
-        <div class="_doc">
+        <div class="_doc" s-deps css="inputContainer,hide,depth,disabled,scale,transision,opacity,shape,list,grid,flex,gap,border,text,fit">
             <s-doc></s-doc>
         </div>
 

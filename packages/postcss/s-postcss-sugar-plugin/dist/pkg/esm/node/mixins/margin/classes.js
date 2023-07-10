@@ -36,7 +36,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
     vars.comment(() => `
       /**
         * @name          Margin
-        * @namespace          sugar.style.helpers
+        * @namespace          sugar.style.helpers.margin
         * @type               Styleguide
         * @menu           Styleguide / Helpers        /styleguide/helpers/margin
         * @platform       css
@@ -113,7 +113,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
         const clsMargin = `s-m:${spaceName}`;
         vars.comment(() => `/**
     * @name            ${clsMargin}
-    * @namespace          sugar.style.margin
+    * @namespace          sugar.style.helpers.margin
     * @type             CssClass
     * @platform             css
     * @status               beta
@@ -133,7 +133,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
         const clsMarginTop = `s-mbs:${spaceName}`;
         vars.comment(() => `/**
     * @name            ${clsMarginTop}
-    * @namespace          sugar.style.margin
+    * @namespace          sugar.style.helpers.margin
     * @type             CssClass
     * @platform             css
     * @status               beta
@@ -153,7 +153,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
         const clsMarginBottom = `s-mbe:${spaceName}`;
         vars.comment(() => `/**
     * @name            ${clsMarginBottom}
-    * @namespace          sugar.style.margin
+    * @namespace          sugar.style.helpers.margin
     * @type             CssClass
     * @platform             css
     * @status               beta
@@ -173,7 +173,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
         const clsMarginLeft = `s-mis:${spaceName}`;
         vars.comment(() => `/**
     * @name            ${clsMarginLeft}
-    * @namespace          sugar.style.margin
+    * @namespace          sugar.style.helpers.margin
     * @type             CssClass
     * @platform             css
     * @status               beta
@@ -193,7 +193,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
         const clsMarginRight = `s-mie:${spaceName}`;
         vars.comment(() => `/**
     * @name            .${clsMarginRight}
-    * @namespace          sugar.style.margin
+    * @namespace          sugar.style.helpers.margin
     * @type             CssClass
     * @platform             css
     * @status               beta
@@ -213,7 +213,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
         const clsMarginX = `s-mi:${spaceName}`;
         vars.comment(() => `/**
     * @name            ${clsMarginX}
-    * @namespace          sugar.style.margin
+    * @namespace          sugar.style.helpers.margin
     * @type             CssClass
     * @platform             css
     * @status               beta
@@ -234,7 +234,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
         const clsMarginY = `s-mb:${spaceName}`;
         vars.comment(() => `/**
     * @name            ${clsMarginY}
-    * @namespace          sugar.style.margin
+    * @namespace          sugar.style.helpers.margin
     * @type             CssClass
     * @platform             css
     * @status               beta
@@ -259,7 +259,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
         const clsMargin = `s-m:-${spaceName}`;
         vars.comment(() => `/**
     * @name            ${clsMargin}
-    * @namespace          sugar.style.margin
+    * @namespace          sugar.style.helpers.margin
     * @type             CssClass
     * @platform             css
     * @status               beta
@@ -279,7 +279,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
         const clsMarginTop = `s-mbs:-${spaceName}`;
         vars.comment(() => `/**
     * @name            ${clsMarginTop}
-    * @namespace          sugar.style.margin
+    * @namespace          sugar.style.helpers.margin
     * @type             CssClass
     * @platform             css
     * @status               beta
@@ -299,7 +299,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
         const clsMarginBottom = `s-mbe:-${spaceName}`;
         vars.comment(() => `/**
     * @name            .${clsMarginBottom}
-    * @namespace          sugar.style.margin
+    * @namespace          sugar.style.helpers.margin
     * @type             CssClass
     * @platform             css
     * @status               beta
@@ -319,7 +319,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
         const clsMarginLeft = `s-mis:-${spaceName}`;
         vars.comment(() => `/**
     * @name            ${clsMarginLeft}
-    * @namespace          sugar.style.margin
+    * @namespace          sugar.style.helpers.margin
     * @type             CssClass
     * @platform             css
     * @status               beta
@@ -339,7 +339,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
         const clsMarginRight = `s-mie:-${spaceName}`;
         vars.comment(() => `/**
     * @name            ${clsMarginRight}
-    * @namespace          sugar.style.margin
+    * @namespace          sugar.style.helpers.margin
     * @type             CssClass
     * @platform             css
     * @status               beta
@@ -359,7 +359,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
         const clsMarginX = `s-mi:-${spaceName}`;
         vars.comment(() => `/**
     * @name            ${clsMarginX}
-    * @namespace          sugar.style.margin
+    * @namespace          sugar.style.helpers.margin
     * @type             CssClass
     * @platform             css
     * @status               beta
@@ -380,7 +380,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
         const clsMarginY = `s-mb:-${spaceName}`;
         vars.comment(() => `/**
     * @name            ${clsMarginY}
-    * @namespace          sugar.style.margin
+    * @namespace          sugar.style.helpers.margin
     * @type             CssClass
     * @platform             css
     * @status               beta
@@ -401,7 +401,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
     });
     vars.comment(() => `/**
     * @name            s-m:auto
-    * @namespace          sugar.style.margin
+    * @namespace          sugar.style.helpers.margin
     * @type             CssClass
     * @platform             css
     * @status               beta
@@ -420,7 +420,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
    }`, { type: 'CssClass' });
     vars.comment(() => `/**
     * @name            s-mbs:auto
-    * @namespace          sugar.style.margin
+    * @namespace          sugar.style.helpers.margin
     * @type             CssClass
     * @platform             css
     * @status               beta
@@ -439,7 +439,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
    }`, { type: 'CssClass' });
     vars.comment(() => `/**
     * @name            s-mie:auto
-    * @namespace          sugar.style.margin
+    * @namespace          sugar.style.helpers.margin
     * @type             CssClass
     * @platform             css
     * @status               beta
@@ -458,7 +458,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
    }`, { type: 'CssClass' });
     vars.comment(() => `/**
     * @name            s-mbe:auto
-    * @namespace          sugar.style.margin
+    * @namespace          sugar.style.helpers.margin
     * @type             CssClass
     * @platform             css
     * @status               beta
@@ -477,7 +477,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
    }`, { type: 'CssClass' });
     vars.comment(() => `/**
     * @name            s-mis:auto
-    * @namespace          sugar.style.margin
+    * @namespace          sugar.style.helpers.margin
     * @type             CssClass
     * @platform             css
     * @status               beta
@@ -496,7 +496,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
    }`, { type: 'CssClass' });
     vars.comment(() => `/**
     * @name            s-mi:auto
-    * @namespace          sugar.style.margin
+    * @namespace          sugar.style.helpers.margin
     * @type             CssClass
     * @platform             css
     * @status               beta
@@ -516,7 +516,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
    }`, { type: 'CssClass' });
     vars.comment(() => `/**
     * @name            s-mb:auto
-    * @namespace          sugar.style.margin
+    * @namespace          sugar.style.helpers.margin
     * @type             CssClass
     * @platform             css
     * @status               beta

@@ -113,7 +113,7 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
     vars.comment(() => `
       /**
         * @name          Fs Tree
-        * @namespace          sugar.style.ui
+        * @namespace          sugar.style.ui.fsTree
         * @type               Styleguide
         * @menu           Styleguide / UI        /styleguide/ui/fs-tree
         * @platform       css
@@ -162,7 +162,7 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
     if (finalParams.scope.includes('bare')) {
         vars.comment(() => `/**
             * @name           s-fs-tree
-            * @namespace          sugar.style.ui.list
+            * @namespace          sugar.style.ui.fsTree
             * @type           CssClass
             * 
             * This class represent an "<yellow>${s_theme_1.default.get('ui.fsTree.defaultLnf')}</yellow>" filesystem tree
@@ -197,7 +197,7 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
     if (finalParams.scope.includes('lnf')) {
         vars.comment(() => `/**
                 * @name           s-fs-tree
-                * @namespace          sugar.style.ui.list
+                * @namespace          sugar.style.ui.fsTree
                 * @type           CssClass
                 * 
                 * This class represent an filesystem tree

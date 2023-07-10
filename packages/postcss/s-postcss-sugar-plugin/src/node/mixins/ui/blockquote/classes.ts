@@ -68,7 +68,7 @@ export default function ({
         () => `
       /**
         * @name          Blockquote
-        * @namespace          sugar.style.ui
+        * @namespace          sugar.style.ui.blockquote
         * @type               Styleguide
         * @menu           Styleguide / UI        /styleguide/ui/blockquote
         * @platform       css

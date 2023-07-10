@@ -41,7 +41,7 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
     vars.comment(`
       /**
         * @name          Widths
-        * @namespace          sugar.style.helpers
+        * @namespace          sugar.style.helpers.width
         * @type               Styleguide
         * @menu           Styleguide / Helpers        /styleguide/helpers/widths
         * @platform       css
@@ -77,7 +77,7 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
     `);
     vars.comment(`/**
     * @name            s-width:viewport
-    * @namespace          sugar.style.width
+    * @namespace          sugar.style.helpers.width
     * @type             CssClass
     * @platform         css
     * @status         beta
@@ -106,7 +106,7 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
     Object.keys(widthObj).forEach((name) => {
         vars.comment(`/**
         * @name            s-width:${name}
-        * @namespace          sugar.style.width
+        * @namespace          sugar.style.helpers.width
         * @type             CssClass
         * @platform         css
         * @status           beta

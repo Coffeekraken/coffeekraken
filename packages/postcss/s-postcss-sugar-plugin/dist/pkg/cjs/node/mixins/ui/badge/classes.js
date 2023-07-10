@@ -60,8 +60,8 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
     const vars = new CssVars();
     vars.comment(() => `
       /**
-        * @name          Badges
-        * @namespace          sugar.style.ui
+        * @name          Badge
+        * @namespace          sugar.style.ui.badge
         * @type               Styleguide
         * @menu           Styleguide / UI        /styleguide/ui/badges
         * @platform       css
@@ -141,7 +141,7 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
         finalParams.lnfs.forEach((lnf) => {
             vars.comment(() => `/**
             * @name           s-badge${finalParams.defaultLnf === lnf ? '' : `:${lnf}`}
-            * @namespace          sugar.ui.badge
+            * @namespace          sugar.style.ui.badge
             * @type           CssClass
             * 
             * This class represent a(n) "<s-color="accent">outline</s-color>" badge

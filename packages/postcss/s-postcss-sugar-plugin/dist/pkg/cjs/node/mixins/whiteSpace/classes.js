@@ -39,7 +39,7 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
     vars.comment(`
       /**
         * @name          White space
-        * @namespace          sugar.style.helpers
+        * @namespace          sugar.style.helpers.whiteSpace
         * @type               Styleguide
         * @menu           Styleguide / Helpers        /styleguide/helpers/white-space
         * @platform       css
@@ -127,7 +127,7 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
     ].forEach((value) => {
         vars.comment(`/**
     * @name          s-white-space:${value}
-    * @namespace          sugar.style.whiteSpace
+    * @namespace          sugar.style.helpers.whiteSpace
     * @type               CssClass
     * @platform             css
     * @status             beta

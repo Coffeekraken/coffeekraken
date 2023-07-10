@@ -49,8 +49,8 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
     const vars = new CssVars();
     vars.comment(() => `
       /**
-        * @name          Loaders
-        * @namespace          sugar.style.ui
+        * @name          Loader
+        * @namespace          sugar.style.ui.loader
         * @type               Styleguide
         * @menu           Styleguide / UI        /styleguide/ui/loaders
         * @platform       css
@@ -106,7 +106,7 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
     finalParams.loaders.forEach((loaderName) => {
         vars.comment(() => `/**
             * @name           s-loader:${loaderName}
-            * @namespace          sugar.style.ui.range
+            * @namespace          sugar.style.ui.loader
             * @type           CssClass
             * 
             * This class represent a(n) "<s-color="accent">${loaderName}</s-color>" loader

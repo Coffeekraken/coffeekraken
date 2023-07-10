@@ -52,7 +52,7 @@ export default function ({
         () => `
         /**
         * @name          Link
-        * @namespace          sugar.style.helpers
+        * @namespace          sugar.style.helpers.link
         * @type               Styleguide
         * @menu           Styleguide / Helpers        /styleguide/helpers/link
         * @platform       css
@@ -88,7 +88,7 @@ export default function ({
     vars.comment(
         () => `/**
         * @name            s-link:stretch
-        * @namespace          sugar.style.link
+        * @namespace          sugar.style.helpers.link
         * @type             CssClass
         * @platform         css
         * @status         beta

@@ -1,4 +1,5 @@
 import __SInterface from '@coffeekraken/s-interface';
+import __SSugarConfig from '@coffeekraken/s-sugar-config';
 
 /**
  * @name                SDepsFeatureInterface
@@ -25,16 +26,16 @@ export default class SDepsFeatureInterface extends __SInterface {
             css: {
                 type: 'String',
                 description:
-                    'Specify the "partial" css you want to load. This is relative to the "rootPath" property and can be a simple id like "welcome" that will resolve to "${cssPartialsPath}/welcome.css" or directly a path',
+                    'Specify the "chunk" css you want to load. This is relative to the "cssChunksBasePath" property and can be a simple id like "welcome" that will resolve to "${cssChunksBasePath}/welcome.css" or directly a path',
             },
-            // cssPartialsPath: {
-            //     type: 'String',
-            //     description:
-            //         'Specify the path where are stored your css partials files',
-            //     get default() {
-            //         return `${__SSugarConfig.get('serve.css.path')}/partials`;
-            //     },
-            // },
+            cssChunksBasePath: {
+                type: 'String',
+                description:
+                    'Specify the path where are stored your css chunk files',
+                get default() {
+                    return `${__SSugarConfig.get('serve.css.path')}/chunks`;
+                },
+            },
         };
     }
 }

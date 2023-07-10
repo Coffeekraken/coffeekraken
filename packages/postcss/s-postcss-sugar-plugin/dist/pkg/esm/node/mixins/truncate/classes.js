@@ -40,7 +40,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
     vars.comment(() => `
       /**
         * @name          Truncate
-        * @namespace          sugar.style.helpers
+        * @namespace          sugar.style.helpers.truncate
         * @type               Styleguide
         * @menu           Styleguide / Helpers        /styleguide/helpers/truncate
         * @platform       css
@@ -78,7 +78,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
     [...Array(finalParams.count).keys()].forEach((i) => {
         vars.comment(() => `/**
   * @name          s-truncate:${i}
-  * @namespace          sugar.style.truncate
+  * @namespace          sugar.style.helpers.truncate
   * @type               CssClass
   * @platform             css
   * @status             beta

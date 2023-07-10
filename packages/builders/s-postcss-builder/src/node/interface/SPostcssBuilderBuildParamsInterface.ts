@@ -57,12 +57,6 @@ export default class SPostcssBuilderBuildParamsInterface extends __SInterface {
                 type: 'Boolean',
                 default: false,
             },
-            saveDev: {
-                description:
-                    'Specify if you want to save a .dev.css file that will not be purged or minified',
-                type: 'Boolean',
-                default: true,
-            },
         };
     }
 }

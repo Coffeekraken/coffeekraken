@@ -84,7 +84,7 @@ export default function ({
         () => `
       /**
         * @name          Radio
-        * @namespace          sugar.style.ui
+        * @namespace          sugar.style.ui.radio
         * @type               Styleguide
         * @menu           Styleguide / Forms        /styleguide/forms/radio
         * @platform       css

@@ -64,7 +64,7 @@ export default function ({
         () => `
       /**
         * @name          Truncate
-        * @namespace          sugar.style.helpers
+        * @namespace          sugar.style.helpers.truncate
         * @type               Styleguide
         * @menu           Styleguide / Helpers        /styleguide/helpers/truncate
         * @platform       css
@@ -109,7 +109,7 @@ export default function ({
         vars.comment(
             () => `/**
   * @name          s-truncate:${i}
-  * @namespace          sugar.style.truncate
+  * @namespace          sugar.style.helpers.truncate
   * @type               CssClass
   * @platform             css
   * @status             beta

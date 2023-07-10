@@ -56,7 +56,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
     vars.comment(() => `
       /**
         * @name          Radio
-        * @namespace          sugar.style.ui
+        * @namespace          sugar.style.ui.radio
         * @type               Styleguide
         * @menu           Styleguide / Forms        /styleguide/forms/radio
         * @platform       css

@@ -66,7 +66,7 @@ export default function ({
         () => `
       /**
         * @name          Avatar
-        * @namespace          sugar.style.ui
+        * @namespace          sugar.style.ui.avatar
         * @type               Styleguide
         * @menu           Styleguide / UI        /styleguide/ui/avatar
         * @platform       css
@@ -223,7 +223,7 @@ export default function ({
         vars.comment(
             () => `/**
         * @name           s-avatar
-        * @namespace          sugar.ui.avatar
+        * @namespace          sugar.style.ui.avatar
         * @type           CssClass
         * 
         * This class represent a(n) "<s-color="accent">default</s-color>" avatar

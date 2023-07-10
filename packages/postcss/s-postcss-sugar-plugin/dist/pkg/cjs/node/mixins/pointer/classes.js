@@ -39,7 +39,7 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
     vars.comment(() => `
       /**
         * @name          Pointer
-        * @namespace          sugar.style.helpers
+        * @namespace          sugar.style.helpers.pointer
         * @type               Styleguide
         * @menu           Styleguide / Helpers        /styleguide/helpers/pointer
         * @platform       css
@@ -86,7 +86,7 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
     `);
     vars.comment(() => `/**
     * @name          s-pointer-events:none
-    * @namespace          sugar.style.pointer
+    * @namespace          sugar.style.helpers.pointer
     * @type               CssClass
     * @platform             css
     * @status             beta
@@ -104,7 +104,7 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
     }`, { type: 'CssClass' });
     vars.comment(() => `/**
     * @name          s-pointer-events:all
-    * @namespace          sugar.style.pointer
+    * @namespace          sugar.style.helpers.pointer
     * @type               CssClass
     * @platform             css
     * @status             beta
@@ -122,7 +122,7 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
     }`, { type: 'CssClass' });
     vars.comment(() => `/**
     * @name          s-pointer-events:auto
-    * @namespace          sugar.style.pointer
+    * @namespace          sugar.style.helpers.pointer
     * @type               CssClass
     * @platform             css
     * @status             beta
@@ -140,7 +140,7 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
     }`, { type: 'CssClass' });
     vars.comment(() => `/**
     * @name          s-pointer-events:fill
-    * @namespace          sugar.style.pointer
+    * @namespace          sugar.style.helpers.pointer
     * @type               CssClass
     * @platform             css
     * @status             beta

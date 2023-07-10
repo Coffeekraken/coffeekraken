@@ -35,7 +35,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
     vars.comment(() => `
       /**
         * @name          Depth
-        * @namespace          sugar.style.helpers
+        * @namespace          sugar.style.helpers.depth
         * @type               Styleguide
         * @menu           Styleguide / Helpers        /styleguide/helpers/depth
         * @platform       css
@@ -82,7 +82,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
     depthsArray.forEach((depthName) => {
         vars.comment(() => `/**
                 * @name          s-depth:${depthName === 'default' ? '' : depthName}
-                * @namespace          sugar.style.depth
+                * @namespace          sugar.style.helpers.depth
                 * @type               CssClass
                 * @platform         css
                 * @status           beta
@@ -101,7 +101,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
     depthsArray.forEach((depthName) => {
         vars.comment(() => `/**
                 * @name          s-depth:text:${depthName === 'default' ? '' : depthName}
-                * @namespace          sugar.style.depth
+                * @namespace          sugar.style.helpers.depth
                 * @type               CssClass
                 * @platform         css
                 * @status           beta

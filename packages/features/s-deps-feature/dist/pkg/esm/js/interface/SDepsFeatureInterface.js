@@ -1,4 +1,5 @@
 import __SInterface from '@coffeekraken/s-interface';
+import __SSugarConfig from '@coffeekraken/s-sugar-config';
 /**
  * @name                SDepsFeatureInterface
  * @namespace           js.interface
@@ -22,17 +23,16 @@ export default class SDepsFeatureInterface extends __SInterface {
         return {
             css: {
                 type: 'String',
-                description: 'Specify the "partial" css you want to load. This is relative to the "rootPath" property and can be a simple id like "welcome" that will resolve to "${cssPartialsPath}/welcome.css" or directly a path',
+                description: 'Specify the "chunk" css you want to load. This is relative to the "cssChunksBasePath" property and can be a simple id like "welcome" that will resolve to "${cssChunksBasePath}/welcome.css" or directly a path',
             },
-            // cssPartialsPath: {
-            //     type: 'String',
-            //     description:
-            //         'Specify the path where are stored your css partials files',
-            //     get default() {
-            //         return `${__SSugarConfig.get('serve.css.path')}/partials`;
-            //     },
-            // },
+            cssChunksBasePath: {
+                type: 'String',
+                description: 'Specify the path where are stored your css chunk files',
+                get default() {
+                    return `${__SSugarConfig.get('serve.css.path')}/chunks`;
+                },
+            },
         };
     }
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sWUFBWSxNQUFNLDJCQUEyQixDQUFDO0FBRXJEOzs7Ozs7Ozs7Ozs7Ozs7OztHQWlCRztBQUVILE1BQU0sQ0FBQyxPQUFPLE9BQU8scUJBQXNCLFNBQVEsWUFBWTtJQUMzRCxNQUFNLEtBQUssV0FBVztRQUNsQixPQUFPO1lBQ0gsR0FBRyxFQUFFO2dCQUNELElBQUksRUFBRSxRQUFRO2dCQUNkLFdBQVcsRUFDUCx3TUFBd007YUFDL007WUFDRCxxQkFBcUI7WUFDckIsc0JBQXNCO1lBQ3RCLG1CQUFtQjtZQUNuQix1RUFBdUU7WUFDdkUsc0JBQXNCO1lBQ3RCLHFFQUFxRTtZQUNyRSxTQUFTO1lBQ1QsS0FBSztTQUNSLENBQUM7SUFDTixDQUFDO0NBQ0oifQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sWUFBWSxNQUFNLDJCQUEyQixDQUFDO0FBQ3JELE9BQU8sY0FBYyxNQUFNLDhCQUE4QixDQUFDO0FBRTFEOzs7Ozs7Ozs7Ozs7Ozs7OztHQWlCRztBQUVILE1BQU0sQ0FBQyxPQUFPLE9BQU8scUJBQXNCLFNBQVEsWUFBWTtJQUMzRCxNQUFNLEtBQUssV0FBVztRQUNsQixPQUFPO1lBQ0gsR0FBRyxFQUFFO2dCQUNELElBQUksRUFBRSxRQUFRO2dCQUNkLFdBQVcsRUFDUCxpTkFBaU47YUFDeE47WUFDRCxpQkFBaUIsRUFBRTtnQkFDZixJQUFJLEVBQUUsUUFBUTtnQkFDZCxXQUFXLEVBQ1Asd0RBQXdEO2dCQUM1RCxJQUFJLE9BQU87b0JBQ1AsT0FBTyxHQUFHLGNBQWMsQ0FBQyxHQUFHLENBQUMsZ0JBQWdCLENBQUMsU0FBUyxDQUFDO2dCQUM1RCxDQUFDO2FBQ0o7U0FDSixDQUFDO0lBQ04sQ0FBQztDQUNKIn0=

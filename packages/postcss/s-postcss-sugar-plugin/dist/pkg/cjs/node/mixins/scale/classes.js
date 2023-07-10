@@ -41,7 +41,7 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
     vars.comment(() => `
       /**
         * @name          Scale
-        * @namespace          sugar.style.tools
+        * @namespace          sugar.style.helpers.scale
         * @type               Styleguide
         * @menu           Styleguide / Tools        /styleguide/tools/scale
         * @platform       css
@@ -89,7 +89,7 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
         const scaleValue = scaleObj[scaleName];
         vars.comment(() => `/**
   * @name          s-scale:${scaleName}
-  * @namespace          sugar.style.scale
+  * @namespace          sugar.style.helpers.scale
   * @type               CssClass
   * @platform             css
   * @status             beta

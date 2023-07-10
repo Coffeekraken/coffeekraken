@@ -51,7 +51,7 @@ export default function ({
     vars.comment(
         () => `/**
     * @name          s-hide
-    * @namespace          sugar.style.hide
+    * @namespace          sugar.style.helpers.hide
     * @type               CssClass
     * @platform             css
     * @status             beta

@@ -38,8 +38,8 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
     const heightObj = s_theme_1.default.get('height');
     vars.comment(`
       /**
-        * @name          Heights
-        * @namespace          sugar.style.helpers
+        * @name          Height
+        * @namespace          sugar.style.helpers.height
         * @type               Styleguide
         * @menu           Styleguide / Helpers        /styleguide/helpers/heights
         * @platform       css
@@ -75,7 +75,7 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
     `);
     vars.comment(`/**
     * @name            s-height:viewport
-    * @namespace          sugar.style.width
+    * @namespace          sugar.style.helpers.height
     * @type             CssClass
     * @platform         css
     * @status         beta
@@ -103,7 +103,7 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
     Object.keys(heightObj).forEach((name) => {
         vars.comment(`/**
         * @name            s-height:${name}
-        * @namespace          sugar.style.width
+        * @namespace          sugar.style.helpers.height
         * @type             CssClass
         * @platform         css
         * @status           beta

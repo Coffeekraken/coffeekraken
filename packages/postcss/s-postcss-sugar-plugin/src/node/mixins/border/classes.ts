@@ -149,7 +149,7 @@ export default function ({
         () => `
       /**
         * @name          Border color
-        * @namespace          sugar.style.helpers
+        * @namespace          sugar.style.helpers.border
         * @type               Styleguide
         * @menu           Styleguide / Helpers        /styleguide/helpers/border-color
         * @platform       css
@@ -190,7 +190,7 @@ export default function ({
         const clsName = `s-radius:${radiusName}`.replace(':default', '');
         const radiusCss = `/**
             * @name               ${clsName}
-            * @namespace          sugar.style.border
+            * @namespace          sugar.style.helpers.border
             * @type               CssClass
             * @platform         css
             * @status           beta
@@ -219,7 +219,7 @@ export default function ({
         vars.comment(
             () => `/**
                 * @name               ${cls}
-                * @namespace          sugar.style.border
+                * @namespace          sugar.style.helpers.border
                 * @type               CssClass
                 * @platform         css
                 * @status           beta
@@ -247,7 +247,7 @@ export default function ({
         vars.comment(
             () => `/**
                 * @name               ${cls}
-                * @namespace          sugar.style.border
+                * @namespace          sugar.style.helpers.border
                 * @type               CssClass
                 * @platform         css
                 * @status           beta

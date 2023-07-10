@@ -44,7 +44,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
     vars.comment(() => `
       /**
         * @name          Table
-        * @namespace          sugar.style.ui
+        * @namespace          sugar.style.ui.table
         * @type               Styleguide
         * @menu           Styleguide / UI        /styleguide/ui/table
         * @platform       css

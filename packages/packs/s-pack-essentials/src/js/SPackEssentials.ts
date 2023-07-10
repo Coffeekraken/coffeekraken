@@ -1,6 +1,7 @@
 import { __define as __SActivateFeatureDefine } from '@coffeekraken/s-activate-feature';
 import { __define as __SAppearFeatureDefine } from '@coffeekraken/s-appear-feature';
 import { __define as __SClipboardCopyComponentDefine } from '@coffeekraken/s-clipboard-copy-component';
+import { __define as __SSDepsFeatureDefine } from '@coffeekraken/s-deps-feature';
 import { __define as __SFloatingFeatureDefine } from '@coffeekraken/s-floating-feature';
 import { __define as __SFormValidateFeatureDefine } from '@coffeekraken/s-form-validate-feature';
 import { __define as __SInlineFeatureDefine } from '@coffeekraken/s-inline-feature';
@@ -18,6 +19,7 @@ import { __define as __SSugarFeatureDefine } from '@coffeekraken/s-sugar-feature
  * This function init automatically these packages:
  *
  * - [@coffeekraken/s-activate-feature](/package/@coffeekraken/s-activate/doc/readme)
+ * - [@coffeekraken/s-deps-feature](/package/@coffeekraken/s-deps-feature/doc/readme)
  * - [@coffeekraken/s-appear-feature](/package/@coffeekraken/s-appear/doc/readme)
  * - [@coffeekraken/s-floating-feature](/package/@coffeekraken/s-floating/doc/readme)
  * - [@coffeekraken/s-form-validate-feature](/package/@coffeekraken/s-form-validate/doc/readme)
@@ -46,6 +48,7 @@ export default function SPackEssentials(): void {
 
     // Features
     __SSugarFeatureDefine();
+    __SSDepsFeatureDefine();
     __SActivateFeatureDefine();
     __SAppearFeatureDefine();
     __SFloatingFeatureDefine();

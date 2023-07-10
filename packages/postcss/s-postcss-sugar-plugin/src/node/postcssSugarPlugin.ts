@@ -28,6 +28,8 @@ const sharedData = {
     isPristine: true,
 };
 
+const frontData = {};
+
 export interface IPostcssSugarPluginLodSettings {
     enabled: boolean;
     method: 'class' | 'file';
@@ -47,7 +49,7 @@ export interface IPostcssSugarPluginSettings {
     excludeCodeByTypes?: string[];
     inlineImport?: boolean;
     target?: 'development' | 'production' | 'vite';
-    partials: boolean;
+    chunks: boolean;
     verbose: boolean;
     plugins: any[];
 }
@@ -106,7 +108,7 @@ const plugin = (settings: IPostcssSugarPluginSettings = {}) => {
             },
             target: __SEnv.get('target') ?? 'vite',
             plugins: [],
-            partials: true,
+            chunks: true,
             verbose: __SEnv.is('verbose'),
         },
         settings,
@@ -515,6 +517,7 @@ const plugin = (settings: IPostcssSugarPluginSettings = {}) => {
                 settings,
                 root,
                 sharedData,
+                frontData,
             });
         }
 
@@ -564,25 +567,25 @@ const plugin = (settings: IPostcssSugarPluginSettings = {}) => {
             // post processors
             await postProcessors(root);
 
-            // // front settings
-            // root.nodes.push(
-            //     __postcss.rule({
-            //         selector: 'body:after',
-            //         nodes: __postcss
-            //             .parse(
-            //                 `
-            //         display: none;
-            //         content: '${JSON.stringify(
-            //             sharedData.frontSettings ?? {},
-            //         )}';
-            //     `,
-            //             )
-            //             .nodes.map((decl) => {
-            //                 decl.value += ';';
-            //                 return decl;
-            //             }),
-            //     }),
-            // );
+            // front data only in the main file
+            if (Object.keys(frontData).length) {
+                root.nodes.push(
+                    __postcss.rule({
+                        selector: 'body:after',
+                        nodes: __postcss
+                            .parse(
+                                `
+                    display: none;
+                    content: '${JSON.stringify(frontData ?? {})}';
+                `,
+                            )
+                            .nodes.map((decl) => {
+                                decl.value += ';';
+                                return decl;
+                            }),
+                    }),
+                );
+            }
 
             // end the bench
             // bench.end();
@@ -647,6 +650,7 @@ const plugin = (settings: IPostcssSugarPluginSettings = {}) => {
                     postcssApi,
                     sourcePath,
                     sharedData,
+                    frontData,
                     registerPostProcessor(fn: Function) {
                         postProcessorsRegisteredFn.push(fn);
                     },

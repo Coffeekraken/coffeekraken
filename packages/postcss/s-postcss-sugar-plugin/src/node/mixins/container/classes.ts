@@ -61,7 +61,7 @@ export default function ({
         vars.comment(
             () => `/**
       * @name          ${cls}
-      * @namespace          sugar.style.container
+      * @namespace          sugar.style.helpers.container
       * @type               CssClass
       * @platform       css
       * @status         beta

@@ -38,7 +38,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
     states.forEach((state) => {
         vars.comment(() => `/**
             * @name          s-until:${state}
-            * @namespace          sugar.style.until
+            * @namespace          sugar.style.helpers.until
             * @type               CssClass
             * @platform             css
             * @status             beta
@@ -57,7 +57,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
             }`, { type: 'CssClass' });
         vars.comment(() => `/**
             * @name          s-until:sibling:${state}
-            * @namespace          sugar.style.until
+            * @namespace          sugar.style.helpers.until
             * @type               CssClass
             * @platform             css
             * @status             beta
@@ -81,7 +81,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
             }`, { type: 'CssClass' });
         vars.comment(() => `/**
             * @name          s-until:siblings:${state}
-            * @namespace          sugar.style.until
+            * @namespace          sugar.style.helpers.until
             * @type               CssClass
             * @platform             css
             * @status             beta
@@ -189,7 +189,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
     Object.keys(queries).forEach((query) => {
         vars.comment(() => `/**
             * @name          s-until:media:${query}
-            * @namespace          sugar.style.until
+            * @namespace          sugar.style.helpers.until
             * @type               CssClass
             * @platform             css
             * @status             beta

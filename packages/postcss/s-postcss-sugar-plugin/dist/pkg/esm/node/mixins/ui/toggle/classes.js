@@ -38,8 +38,8 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
     const vars = new CssVars();
     vars.comment(() => `
       /**
-        * @name          Toggles
-        * @namespace          sugar.style.ui
+        * @name          Toggle
+        * @namespace          sugar.style.ui.toggle
         * @type               Styleguide
         * @menu           Styleguide / UI        /styleguide/ui/toggles
         * @platform       css

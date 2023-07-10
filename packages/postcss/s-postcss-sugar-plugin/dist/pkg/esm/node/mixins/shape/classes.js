@@ -31,7 +31,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
     vars.comment(() => `
       /**
         * @name          Shape
-        * @namespace          sugar.style.helpers
+        * @namespace          sugar.style.helpers.shape
         * @type               Styleguide
         * @menu           Styleguide / Helpers        /styleguide/helpers/shape
         * @platform       css
@@ -63,7 +63,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
     `);
     vars.comment(() => `/**
 * @name            s-shape:default
-* @namespace          sugar.style.shape
+* @namespace          sugar.style.helpers.shape
 * @type             CssClass
 * @platform             css
 * @status               beta
@@ -83,7 +83,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
 }`, { type: 'CssClass' });
     vars.comment(() => `/**
 * @name            s-shape:square
-* @namespace          sugar.style.shape
+* @namespace          sugar.style.helpers.shape
 * @type             CssClass
 * @platform             css
 * @status               beta
@@ -103,7 +103,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
 }`, { type: 'CssClass' });
     vars.comment(() => `/**
 * @name            s-shape:pill
-* @namespace          sugar.style.shape
+* @namespace          sugar.style.helpers.shape
 * @type             CssClass
 * @platform             css
 * @status               beta

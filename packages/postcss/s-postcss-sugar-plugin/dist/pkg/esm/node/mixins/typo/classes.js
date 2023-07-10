@@ -34,8 +34,8 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
     const typosObj = __STheme.get('typo');
     vars.comment(() => `
       /**
-        * @name          Typography
-        * @namespace          sugar.style.ui
+        * @name          Typo
+        * @namespace          sugar.style.helpers.typo
         * @type               Styleguide
         * @menu           Styleguide / Helpers        /styleguide/helpers/typography
         * @platform       css
@@ -81,7 +81,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
         const css = __STheme.jsObjectToCssProperties((_a = typoObj.style) !== null && _a !== void 0 ? _a : {}, {});
         vars.comment(() => `/**
             * @name            ${cls}
-            * @namespace          sugar.style.typo
+            * @namespace          sugar.style.helpers.typo
             * @type             CssClass
             * @platform         css
             * @status           beta
@@ -100,7 +100,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
         }`, { type: 'CssClass' });
         vars.comment(() => `/**
             * @name            s-format:text ${typoName}
-            * @namespace          sugar.style.typo
+            * @namespace          sugar.style.helpers.typo
             * @type             CssClass
             * @platform         css
             * @status           beta
@@ -122,7 +122,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
         }`, { type: 'CssClass' });
         vars.comment(() => `/**
             * @name            s-rhythm:vertical .${typoName}, s-rhythm:vertical ${typoName}
-            * @namespace          sugar.style.typo
+            * @namespace          sugar.style.helpers.typo
             * @type             CssClass
             * @platform         css
             * @status           beta

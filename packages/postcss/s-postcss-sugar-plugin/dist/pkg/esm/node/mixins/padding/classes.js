@@ -36,7 +36,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
     vars.comment(() => `
       /**
         * @name          Padding
-        * @namespace          sugar.style.helpers
+        * @namespace          sugar.style.helpers.padding
         * @type               Styleguide
         * @menu           Styleguide / Helpers        /styleguide/helpers/padding
         * @platform       css
@@ -106,7 +106,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
         const clsMargin = `s-p:${spaceName}`;
         vars.comment(() => `/**
     * @name            ${clsMargin}
-    * @namespace          sugar.style.padding
+    * @namespace          sugar.style.helpers.padding
     * @type             CssClass
     * @platform             css
     * @status               beta
@@ -126,7 +126,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
         const clsMarginTop = `s-pbs:${spaceName}`;
         vars.comment(() => `/**
     * @name            ${clsMarginTop}
-    * @namespace          sugar.style.padding
+    * @namespace          sugar.style.helpers.padding
     * @type             CssClass
     * @platform             css
     * @status               beta
@@ -146,7 +146,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
         const clsMarginBottom = `s-pbe:${spaceName}`;
         vars.comment(() => `/**
     * @name            ${clsMarginBottom}
-    * @namespace          sugar.style.padding
+    * @namespace          sugar.style.helpers.padding
     * @type             CssClass
     * @platform             css
     * @status               beta
@@ -166,7 +166,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
         const clsMarginLeft = `s-pis:${spaceName}`;
         vars.comment(() => `/**
     * @name            ${clsMarginLeft}
-    * @namespace          sugar.style.padding
+    * @namespace          sugar.style.helpers.padding
     * @type             CssClass
     * @platform             css
     * @status               beta
@@ -186,7 +186,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
         const clsMarginRight = `s-pie:${spaceName}`;
         vars.comment(() => `/**
     * @name            .${clsMarginRight}
-    * @namespace          sugar.style.padding
+    * @namespace          sugar.style.helpers.padding
     * @type             CssClass
     * @platform             css
     * @status               beta
@@ -206,7 +206,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
         const clsMarginX = `s-pi:${spaceName}`;
         vars.comment(() => `/**
     * @name            ${clsMarginX}
-    * @namespace          sugar.style.padding
+    * @namespace          sugar.style.helpers.padding
     * @type             CssClass
     * @platform             css
     * @status               beta
@@ -227,7 +227,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
         const clsMarginY = `s-pb:${spaceName}`;
         vars.comment(() => `/**
     * @name            ${clsMarginY}
-    * @namespace          sugar.style.padding
+    * @namespace          sugar.style.helpers.padding
     * @type             CssClass
     * @platform             css
     * @status               beta

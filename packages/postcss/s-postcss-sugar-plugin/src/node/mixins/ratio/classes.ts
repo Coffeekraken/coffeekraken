@@ -59,7 +59,7 @@ export default function ({
         () => `
       /**
         * @name          Ratio
-        * @namespace          sugar.style.helpers
+        * @namespace          sugar.style.helpers.ratio
         * @type               Styleguide
         * @menu           Styleguide / Helpers        /styleguide/helpers/ratio
         * @platform       css
@@ -110,7 +110,7 @@ export default function ({
         vars.comment(
             () => `/**
   * @name          s-ratio:${ratioName.replace('/', '-')}
-  * @namespace          sugar.style.ratio
+  * @namespace          sugar.style.helpers.ratio
   * @type               CssClass
   * @platform             css
   * @status             beta
@@ -126,7 +126,7 @@ export default function ({
         ).code(
             `
 .s-ratio--${ratioName.replace('/', '-')} {
-    aspect-ratio: ${ratioName};
+    aspect-ratio: ${ratioName.replace('-', '/')};
 }`,
             { type: 'CssClass' },
         );

@@ -55,7 +55,7 @@ export default function ({
         () => `
       /**
         * @name          Text
-        * @namespace          sugar.style.helpers
+        * @namespace          sugar.style.helpers.text
         * @type               Styleguide
         * @menu           Styleguide / Helpers        /styleguide/helpers/text
         * @platform       css
@@ -137,7 +137,7 @@ export default function ({
         () => `
         /**
          * @name            s-text:left
-         * @namespace          sugar.style.mixins.text
+         * @namespace          sugar.style.helpers.text
          * @type            CssClass
          * @platform      css
          * @status        beta
@@ -164,7 +164,7 @@ export default function ({
         () => `
        /**
          * @name            s-text:right
-         * @namespace          sugar.style.mixins.text
+         * @namespace          sugar.style.helpers.text
          * @type            CssClass
          * @platform      css
          * @status        beta
@@ -191,7 +191,7 @@ export default function ({
         () => `
         /**
          * @name            s-text:center
-         * @namespace          sugar.style.mixins.text
+         * @namespace          sugar.style.helpers.text
          * @type            CssClass
          * @platform      css
          * @status        beta
@@ -218,7 +218,7 @@ export default function ({
         () => `
            /**
          * @name            s-text:start
-         * @namespace          sugar.style.mixins.text
+         * @namespace          sugar.style.helpers.text
          * @type            CssClass
          * @platform      css
          * @status        beta
@@ -245,7 +245,7 @@ export default function ({
         () => `
           /**
          * @name            s-text:end
-         * @namespace          sugar.style.mixins.text
+         * @namespace          sugar.style.helpers.text
          * @type            CssClass
          * @platform      css
          * @status        beta
@@ -272,7 +272,7 @@ export default function ({
         () => `
          /**
          * @name            s-text:justify
-         * @namespace          sugar.style.mixins.text
+         * @namespace          sugar.style.helpers.text
          * @type            CssClass
          * @platform      css
          * @status        beta
@@ -299,7 +299,7 @@ export default function ({
         () => `
         /**
          * @name            s-text:decoration:none
-         * @namespace          sugar.style.mixins.text
+         * @namespace          sugar.style.helpers.text
          * @type            CssClass
          * @platform      css
          * @status        beta
@@ -326,7 +326,7 @@ export default function ({
         () => `
         /**
          * @name            s-text:overline
-         * @namespace          sugar.style.mixins.text
+         * @namespace          sugar.style.helpers.text
          * @type            CssClass
          * @platform      css
          * @status        beta
@@ -353,7 +353,7 @@ export default function ({
         () => `
         /**
          * @name            s-text:underline
-         * @namespace          sugar.style.mixins.text
+         * @namespace          sugar.style.helpers.text
          * @type            CssClass
          * @platform      css
          * @status        beta
@@ -380,7 +380,7 @@ export default function ({
         () => `
         /**
          * @name            s-text:line-through
-         * @namespace          sugar.style.mixins.text
+         * @namespace          sugar.style.helpers.text
          * @type            CssClass
          * @platform      css
          * @status        beta
@@ -407,7 +407,7 @@ export default function ({
         () => `
         /**
          * @name            s-text:lowercase
-         * @namespace          sugar.style.mixins.text
+         * @namespace          sugar.style.helpers.text
          * @type            CssClass
          * @platform      css
          * @status        beta
@@ -434,7 +434,7 @@ export default function ({
         () => `
         /**
          * @name            s-text:uppercase
-         * @namespace          sugar.style.mixins.text
+         * @namespace          sugar.style.helpers.text
          * @type            CssClass
          * @platform      css
          * @status        beta
@@ -461,7 +461,7 @@ export default function ({
         () => `
         /**
          * @name            s-text:capitalize
-         * @namespace          sugar.style.mixins.text
+         * @namespace          sugar.style.helpers.text
          * @type            CssClass
          * @platform      css
          * @status        beta

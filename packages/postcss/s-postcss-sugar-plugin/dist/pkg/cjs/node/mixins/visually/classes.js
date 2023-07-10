@@ -38,7 +38,7 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
     vars.comment(`
       /**
         * @name          Visually
-        * @namespace          sugar.style.helpers
+        * @namespace          sugar.style.helpers.visually
         * @type               Styleguide
         * @menu           Styleguide / Helpers        /styleguide/helpers/visually
         * @platform       css
@@ -73,7 +73,7 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
     `);
     vars.comment(`/**
     * @name          s-visually:hidden
-    * @namespace          sugar.style.visually
+    * @namespace          sugar.style.helpers.visually
     * @type               CssClass
     * @platform             css
     * @status             beta

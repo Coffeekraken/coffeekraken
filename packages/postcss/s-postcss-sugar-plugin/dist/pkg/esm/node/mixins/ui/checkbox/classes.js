@@ -56,7 +56,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
     vars.comment(() => `
       /**
         * @name          Checkbox
-        * @namespace          sugar.style.ui
+        * @namespace          sugar.style.ui.checkbox
         * @type               Styleguide
         * @menu           Styleguide / Forms        /styleguide/forms/checkbox
         * @platform       css

@@ -54,7 +54,7 @@ export default function ({
         () => `
       /**
         * @name          Order
-        * @namespace          sugar.style.helpers
+        * @namespace          sugar.style.helpers.order
         * @type               Styleguide
         * @menu           Styleguide / Helpers        /styleguide/helpers/order
         * @platform       css
@@ -95,7 +95,7 @@ export default function ({
         vars.comment(
             () => `/**
                 * @name          s-order:${i}
-                * @namespace          sugar.style.order
+                * @namespace          sugar.style.helpers.order
                 * @type               CssClass
                 * @platform           css
                 * @status               beta

@@ -66,7 +66,7 @@ export default function ({
         () => `
       /**
         * @name          Media
-        * @namespace          sugar.style.ui
+        * @namespace          sugar.style.ui.media
         * @type               Styleguide
         * @menu           Styleguide / UI        /styleguide/ui/media
         * @platform       css
@@ -171,7 +171,7 @@ export default function ({
         vars.comment(
             () => `/**
         * @name           s-media
-        * @namespace          sugar.ui.media
+        * @namespace          sugar.style.ui.media
         * @type           CssClass
         * 
         * This class represent a(n) "<s-color="accent">default</s-color>" media

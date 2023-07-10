@@ -71,7 +71,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
     vars.comment(() => `
       /**
         * @name          Cursor
-        * @namespace          sugar.style.cursor
+        * @namespace          sugar.style.helpers.cursor
         * @type               Styleguide
         * @menu           Styleguide / Helpers        /styleguide/helpers/cursor
         * @platform       css
@@ -112,7 +112,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
     cursors.forEach((cursor) => {
         vars.comment(() => `/**
         * @name          s-cursor:${cursor}
-        * @namespace          sugar.style.cursor
+        * @namespace          sugar.style.helpers.cursor
         * @type               CssClass
         * @platform             css
         * @status             beta

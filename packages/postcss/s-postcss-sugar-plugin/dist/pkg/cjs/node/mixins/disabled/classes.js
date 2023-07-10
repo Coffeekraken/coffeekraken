@@ -37,7 +37,7 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
     vars.comment(() => `
       /**
         * @name          Disabled
-        * @namespace          sugar.style.helpers
+        * @namespace          sugar.style.helpers.disabled
         * @type               Styleguide
         * @menu           Styleguide / Helpers        /styleguide/helpers/disabled
         * @platform       css
@@ -69,7 +69,7 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
     `);
     vars.comment(() => `/**
             * @name          s-disabled,[disabled]
-            * @namespace          sugar.style.disabled
+            * @namespace          sugar.style.helpers.disabled
             * @type               CssClass
             * @platform         css
             * @status           beta

@@ -132,7 +132,7 @@ export default function ({
         () => `
       /**
         * @name          Fs Tree
-        * @namespace          sugar.style.ui
+        * @namespace          sugar.style.ui.fsTree
         * @type               Styleguide
         * @menu           Styleguide / UI        /styleguide/ui/fs-tree
         * @platform       css
@@ -184,7 +184,7 @@ export default function ({
         vars.comment(
             () => `/**
             * @name           s-fs-tree
-            * @namespace          sugar.style.ui.list
+            * @namespace          sugar.style.ui.fsTree
             * @type           CssClass
             * 
             * This class represent an "<yellow>${__STheme.get(
@@ -227,7 +227,7 @@ export default function ({
         vars.comment(
             () => `/**
                 * @name           s-fs-tree
-                * @namespace          sugar.style.ui.list
+                * @namespace          sugar.style.ui.fsTree
                 * @type           CssClass
                 * 
                 * This class represent an filesystem tree

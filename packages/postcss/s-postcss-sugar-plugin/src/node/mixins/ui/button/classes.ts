@@ -83,7 +83,7 @@ export default function ({
         () => `
       /**
         * @name          Buttons
-        * @namespace          sugar.style.ui
+        * @namespace          sugar.style.ui.button
         * @type               Styleguide
         * @menu           Styleguide / UI        /styleguide/ui/button
         * @platform       css

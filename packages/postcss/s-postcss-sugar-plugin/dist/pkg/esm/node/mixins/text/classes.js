@@ -32,7 +32,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
     vars.comment(() => `
       /**
         * @name          Text
-        * @namespace          sugar.style.helpers
+        * @namespace          sugar.style.helpers.text
         * @type               Styleguide
         * @menu           Styleguide / Helpers        /styleguide/helpers/text
         * @platform       css
@@ -111,7 +111,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
     vars.comment(() => `
         /**
          * @name            s-text:left
-         * @namespace          sugar.style.mixins.text
+         * @namespace          sugar.style.helpers.text
          * @type            CssClass
          * @platform      css
          * @status        beta
@@ -132,7 +132,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
     vars.comment(() => `
        /**
          * @name            s-text:right
-         * @namespace          sugar.style.mixins.text
+         * @namespace          sugar.style.helpers.text
          * @type            CssClass
          * @platform      css
          * @status        beta
@@ -153,7 +153,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
     vars.comment(() => `
         /**
          * @name            s-text:center
-         * @namespace          sugar.style.mixins.text
+         * @namespace          sugar.style.helpers.text
          * @type            CssClass
          * @platform      css
          * @status        beta
@@ -174,7 +174,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
     vars.comment(() => `
            /**
          * @name            s-text:start
-         * @namespace          sugar.style.mixins.text
+         * @namespace          sugar.style.helpers.text
          * @type            CssClass
          * @platform      css
          * @status        beta
@@ -195,7 +195,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
     vars.comment(() => `
           /**
          * @name            s-text:end
-         * @namespace          sugar.style.mixins.text
+         * @namespace          sugar.style.helpers.text
          * @type            CssClass
          * @platform      css
          * @status        beta
@@ -216,7 +216,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
     vars.comment(() => `
          /**
          * @name            s-text:justify
-         * @namespace          sugar.style.mixins.text
+         * @namespace          sugar.style.helpers.text
          * @type            CssClass
          * @platform      css
          * @status        beta
@@ -237,7 +237,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
     vars.comment(() => `
         /**
          * @name            s-text:decoration:none
-         * @namespace          sugar.style.mixins.text
+         * @namespace          sugar.style.helpers.text
          * @type            CssClass
          * @platform      css
          * @status        beta
@@ -258,7 +258,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
     vars.comment(() => `
         /**
          * @name            s-text:overline
-         * @namespace          sugar.style.mixins.text
+         * @namespace          sugar.style.helpers.text
          * @type            CssClass
          * @platform      css
          * @status        beta
@@ -279,7 +279,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
     vars.comment(() => `
         /**
          * @name            s-text:underline
-         * @namespace          sugar.style.mixins.text
+         * @namespace          sugar.style.helpers.text
          * @type            CssClass
          * @platform      css
          * @status        beta
@@ -300,7 +300,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
     vars.comment(() => `
         /**
          * @name            s-text:line-through
-         * @namespace          sugar.style.mixins.text
+         * @namespace          sugar.style.helpers.text
          * @type            CssClass
          * @platform      css
          * @status        beta
@@ -321,7 +321,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
     vars.comment(() => `
         /**
          * @name            s-text:lowercase
-         * @namespace          sugar.style.mixins.text
+         * @namespace          sugar.style.helpers.text
          * @type            CssClass
          * @platform      css
          * @status        beta
@@ -342,7 +342,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
     vars.comment(() => `
         /**
          * @name            s-text:uppercase
-         * @namespace          sugar.style.mixins.text
+         * @namespace          sugar.style.helpers.text
          * @type            CssClass
          * @platform      css
          * @status        beta
@@ -363,7 +363,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
     vars.comment(() => `
         /**
          * @name            s-text:capitalize
-         * @namespace          sugar.style.mixins.text
+         * @namespace          sugar.style.helpers.text
          * @type            CssClass
          * @platform      css
          * @status        beta

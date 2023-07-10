@@ -50,7 +50,7 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
     vars.comment(() => `
       /**
         * @name          Format text
-        * @namespace          sugar.style.font
+        * @namespace          sugar.style.helpers.format
         * @type               CssClass
         * @menu           Styleguide / Tools        /styleguide/tools/format-text
         * @platform       css
@@ -146,7 +146,7 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
     vars.comment(() => `
       /**
         * @name          Rhythm vertical
-        * @namespace          sugar.style.font
+        * @namespace          sugar.style.helpers.format
         * @type               CssClass
         * @menu           Styleguide / Tools        /styleguide/tools/rhythm-vertical
         * @platform       css

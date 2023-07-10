@@ -36,7 +36,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
         vars.comment(() => `
         /**
          * @name       s-grid:${id}
-         * @namespace          sugar.style.layout
+         * @namespace          sugar.style.helpers.grid
          * @type          CssClass
          * @platform      css
          * @status      beta

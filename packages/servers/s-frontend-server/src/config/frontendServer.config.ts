@@ -64,7 +64,7 @@ export default function (api) {
                     '/tmp': `${__packageTmpDir()}`,
                     '/dist/favicon': `${api.config.faviconBuilder.outDir}`,
                     '/dist/css/lod': `${api.config.storage.dist.cssDir}/lod`,
-                    '/dist/css/partials': `${api.config.storage.dist.cssDir}/partials`,
+                    '/dist/css/chunks': `${api.config.storage.dist.cssDir}/chunks`,
                     '/dist':
                         api.env.env === 'production'
                             ? api.config.storage.dist.rootDir

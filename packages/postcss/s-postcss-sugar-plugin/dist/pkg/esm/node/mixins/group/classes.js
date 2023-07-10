@@ -31,7 +31,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
     vars.comment(() => `
       /**
         * @name          Group
-        * @namespace          sugar.style
+        * @namespace          sugar.style.helpers.group
         * @type               Styleguide
         * @menu           Styleguide / UI        /styleguide/ui/group
         * @platform       css
@@ -81,7 +81,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
     `);
     vars.comment(() => `/**
         * @name           s-group
-        * @namespace          sugar.style.group
+        * @namespace          sugar.style.helpers.group
         * @type           CssClass
         * 
         * This class represent a(n) "<s-color="accent">group</s-color>" of buttons, form input, etc...

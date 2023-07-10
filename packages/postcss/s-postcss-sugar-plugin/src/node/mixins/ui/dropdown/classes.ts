@@ -67,7 +67,7 @@ export default function ({
         () => `
       /**
         * @name          Dropdown
-        * @namespace          sugar.style.ui
+        * @namespace          sugar.style.ui.dropdown
         * @type               Styleguide
         * @menu           Styleguide / UI        /styleguide/ui/dropdown
         * @platform       css
@@ -471,7 +471,7 @@ export default function ({
         vars.comment(
             () => `/**
             * @name           s-dropdown-container
-            * @namespace          sugar.style.ui.tooltip
+            * @namespace          sugar.style.ui.dropdown
             * @type           CssClass
             * 
             * This class represent the tooltip container in which you have to put your actual .s-tooltip element

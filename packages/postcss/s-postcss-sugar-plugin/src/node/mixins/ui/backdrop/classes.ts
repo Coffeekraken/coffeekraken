@@ -66,7 +66,7 @@ export default function ({
         () => `
       /**
         * @name          Backdrop
-        * @namespace          sugar.style.ui
+        * @namespace          sugar.style.ui.backdrop
         * @type               Styleguide
         * @menu           Styleguide / UI        /styleguide/ui/backdrop
         * @platform       css

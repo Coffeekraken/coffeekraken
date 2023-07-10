@@ -83,8 +83,8 @@ export default function ({
     vars.comment(
         () => `
       /**
-        * @name          Lists
-        * @namespace          sugar.style.ui
+        * @name          List
+        * @namespace          sugar.style.ui.list
         * @type               Styleguide
         * @menu           Styleguide / UI        /styleguide/ui/lists
         * @platform       css
@@ -223,7 +223,7 @@ export default function ({
                 * 
                 * @example        html
                 * <ul class="s-list${
-                    finalParams.defaultLnf === lnf ? '' : `:${lnf}`
+                    finalParams.defaultLnf === lnf ? '' : `$lnf:${lnf}`
                 }">
                 *   <li>Hello</li>
                 *   <li>World</li>

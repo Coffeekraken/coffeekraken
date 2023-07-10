@@ -37,7 +37,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
     vars.comment(() => `
       /**
         * @name          Fit Sizes
-        * @namespace          sugar.style.helpers
+        * @namespace          sugar.style.helpers.fit
         * @type               Styleguide
         * @menu           Styleguide / Helpers        /styleguide/helpers/fit-sizes
         * @platform       css
@@ -82,7 +82,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
     fitSizes.forEach((fitSizeName) => {
         vars.comment(() => `/**
                 * @name          s-fit:${fitSizeName}
-                * @namespace          sugar.style.fit
+                * @namespace          sugar.style.helpers.fit
                 * @type               CssClass
                 * @platform         css
                 * @status           beta

@@ -84,7 +84,7 @@ export default function ({
         () => `
       /**
         * @name          Checkbox
-        * @namespace          sugar.style.ui
+        * @namespace          sugar.style.ui.checkbox
         * @type               Styleguide
         * @menu           Styleguide / Forms        /styleguide/forms/checkbox
         * @platform       css

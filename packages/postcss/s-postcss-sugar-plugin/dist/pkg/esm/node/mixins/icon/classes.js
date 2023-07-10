@@ -164,8 +164,8 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
     const vars = new CssVars();
     vars.comment(() => `
       /**
-        * @name          Icons
-        * @namespace          sugar.style.ui
+        * @name          Icon
+        * @namespace          sugar.style.helpers.icon
         * @type               Styleguide
         * @menu           Styleguide / UI        /styleguide/ui/icons
         * @platform       css
@@ -230,7 +230,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
                 vars.comment(() => `
                 /**
                  * @name        s-icon:${iconObj.as}
-                  * @namespace          sugar.style.icon
+                  * @namespace          sugar.style.helpers.icon
                   * @type           CssClass
                   * @platform       css
                   * @status         beta
@@ -259,7 +259,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
                 vars.comment(() => `
                         /**
                          * @name        s-icon:${iconObj.as}
-                         * @namespace          sugar.style.icon
+                         * @namespace          sugar.style.helpers.icon
                          * @type           CssClass
                          * @platform         css
                          * @status         beta
@@ -288,7 +288,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
                 vars.comment(() => `
                             /**
                              * @name        s-icon:${iconObj.as}
-                             * @namespace          sugar.style.icon
+                             * @namespace          sugar.style.helpers.icon
                              * @type           CssClass
                              * @platform         css
                              * @status         beta

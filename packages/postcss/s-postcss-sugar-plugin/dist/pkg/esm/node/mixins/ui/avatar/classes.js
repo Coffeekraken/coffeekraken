@@ -42,7 +42,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
     vars.comment(() => `
       /**
         * @name          Avatar
-        * @namespace          sugar.style.ui
+        * @namespace          sugar.style.ui.avatar
         * @type               Styleguide
         * @menu           Styleguide / UI        /styleguide/ui/avatar
         * @platform       css
@@ -154,7 +154,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
     if (finalParams.scope.includes('lnf')) {
         vars.comment(() => `/**
         * @name           s-avatar
-        * @namespace          sugar.ui.avatar
+        * @namespace          sugar.style.ui.avatar
         * @type           CssClass
         * 
         * This class represent a(n) "<s-color="accent">default</s-color>" avatar

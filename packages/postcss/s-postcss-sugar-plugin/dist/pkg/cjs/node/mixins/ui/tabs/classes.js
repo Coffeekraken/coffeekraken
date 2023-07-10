@@ -49,7 +49,7 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
     vars.comment(() => `
       /**
         * @name          Tabs
-        * @namespace          sugar.style.ui
+        * @namespace          sugar.style.ui.tabs
         * @type               Styleguide
         * @menu           Styleguide / UI        /styleguide/ui/tabs
         * @platform       css

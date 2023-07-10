@@ -47,7 +47,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
         
         /**
          * @name            s-platform:${name}
-         * @namespace          sugar.style.platform
+         * @namespace          sugar.style.helpers.platform
          * @type            CssClass
          * @platform          css
          * @status          beta

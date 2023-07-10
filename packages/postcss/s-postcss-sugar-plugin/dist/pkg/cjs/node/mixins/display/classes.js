@@ -38,7 +38,7 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
     vars.comment(() => `
       /**
         * @name          Display
-        * @namespace          sugar.style.helpers
+        * @namespace          sugar.style.helpers.display
         * @type               Styleguide
         * @menu           Styleguide / Helpers        /styleguide/helpers/display
         * @platform       css
@@ -128,7 +128,7 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
         
       /**
        * @name            s-display:block
-       * @namespace          sugar.style.display
+       * @namespace          sugar.style.helpers.display
        * @type            CssClass
        * @platform        css
        * @status          beta
@@ -151,7 +151,7 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
     vars.comment(() => `
       /**
        * @name            s-display:inline-block
-       * @namespace          sugar.style.display
+       * @namespace          sugar.style.helpers.display
        * @type            CssClass
        * @platform           css
        * @status               beta
@@ -174,7 +174,7 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
     vars.comment(() => `
         /**
          * @name            s-display:contents
-         * @namespace          sugar.style.display
+         * @namespace          sugar.style.helpers.display
          * @type            CssClass
          * @platform           css
          * @status               beta
@@ -197,7 +197,7 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
     vars.comment(() => `
         /**
          * @name            s-display:flex
-         * @namespace          sugar.style.display
+         * @namespace          sugar.style.helpers.display
          * @type            CssClass
          * @platform           css
          * @status               beta
@@ -220,7 +220,7 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
     vars.comment(() => `
       /**
        * @name            s-display:grid
-       * @namespace          sugar.style.display
+       * @namespace          sugar.style.helpers.display
        * @type            CssClass
        * @platform           css
        * @status               beta
@@ -243,7 +243,7 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
     vars.comment(() => `
         /**
          * @name            s-display:inline-flex
-         * @namespace          sugar.style.display
+         * @namespace          sugar.style.helpers.display
          * @type            CssClass
          * @platform           css
          * @status               beta
@@ -266,7 +266,7 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
     vars.comment(() => `
         /**
          * @name            s-display:inline-grid
-         * @namespace          sugar.style.display
+         * @namespace          sugar.style.helpers.display
          * @type            CssClass
          * @platform           css
          * @status               beta
@@ -289,7 +289,7 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
     vars.comment(() => `
         /**
          * @name            s-display:none
-         * @namespace          sugar.style.display
+         * @namespace          sugar.style.helpers.display
          * @type            CssClass
          * @platform           css
          * @status               beta

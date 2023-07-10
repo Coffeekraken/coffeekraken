@@ -58,7 +58,7 @@ export default function ({
         () => `
       /**
         * @name          Padding
-        * @namespace          sugar.style.helpers
+        * @namespace          sugar.style.helpers.padding
         * @type               Styleguide
         * @menu           Styleguide / Helpers        /styleguide/helpers/padding
         * @platform       css
@@ -130,7 +130,7 @@ export default function ({
         vars.comment(
             () => `/**
     * @name            ${clsMargin}
-    * @namespace          sugar.style.padding
+    * @namespace          sugar.style.helpers.padding
     * @type             CssClass
     * @platform             css
     * @status               beta
@@ -155,7 +155,7 @@ export default function ({
         vars.comment(
             () => `/**
     * @name            ${clsMarginTop}
-    * @namespace          sugar.style.padding
+    * @namespace          sugar.style.helpers.padding
     * @type             CssClass
     * @platform             css
     * @status               beta
@@ -180,7 +180,7 @@ export default function ({
         vars.comment(
             () => `/**
     * @name            ${clsMarginBottom}
-    * @namespace          sugar.style.padding
+    * @namespace          sugar.style.helpers.padding
     * @type             CssClass
     * @platform             css
     * @status               beta
@@ -205,7 +205,7 @@ export default function ({
         vars.comment(
             () => `/**
     * @name            ${clsMarginLeft}
-    * @namespace          sugar.style.padding
+    * @namespace          sugar.style.helpers.padding
     * @type             CssClass
     * @platform             css
     * @status               beta
@@ -230,7 +230,7 @@ export default function ({
         vars.comment(
             () => `/**
     * @name            .${clsMarginRight}
-    * @namespace          sugar.style.padding
+    * @namespace          sugar.style.helpers.padding
     * @type             CssClass
     * @platform             css
     * @status               beta
@@ -255,7 +255,7 @@ export default function ({
         vars.comment(
             () => `/**
     * @name            ${clsMarginX}
-    * @namespace          sugar.style.padding
+    * @namespace          sugar.style.helpers.padding
     * @type             CssClass
     * @platform             css
     * @status               beta
@@ -281,7 +281,7 @@ export default function ({
         vars.comment(
             () => `/**
     * @name            ${clsMarginY}
-    * @namespace          sugar.style.padding
+    * @namespace          sugar.style.helpers.padding
     * @type             CssClass
     * @platform             css
     * @status               beta

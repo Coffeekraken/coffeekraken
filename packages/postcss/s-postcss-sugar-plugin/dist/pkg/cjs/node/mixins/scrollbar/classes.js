@@ -41,7 +41,7 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
     vars.comment(() => `
       /**
         * @name          Scrollbar
-        * @namespace          sugar.style.tools
+        * @namespace          sugar.style.helpers.scrollbar
         * @type               Styleguide
         * @menu           Styleguide / UI        /styleguide/ui/scrollbar
         * @platform       css
@@ -82,7 +82,7 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
     `);
     vars.comment(() => `/**
             * @name          s-scrollbar
-            * @namespace          sugar.style.scrollbar
+            * @namespace          sugar.style.helpers.scrollbar
             * @type               CssClass
             * @platform             css
             * @status             beta

@@ -58,7 +58,7 @@ export default function ({
         () => `
       /**
         * @name          Spacing
-        * @namespace          sugar.style.helpers
+        * @namespace          sugar.style.helpers.spacing
         * @type               Styleguide
         * @menu           Styleguide / Helpers        /styleguide/helpers/spacing
         * @platform       css
@@ -113,7 +113,7 @@ export default function ({
         vars.comment(
             () => `/**
     * @name            ${clsMargin}
-    * @namespace          sugar.style.spacing
+    * @namespace          sugar.style.helpers.spacing
     * @type             CssClass
     * @platform             css
     * @status               beta
@@ -145,7 +145,7 @@ export default function ({
     vars.comment(
         () => `/**
         * @name            s-spacing:column
-        * @namespace          sugar.style.spacing
+        * @namespace          sugar.style.helpers.spacing
         * @type             CssClass
         * @platform             css
         * @status               beta

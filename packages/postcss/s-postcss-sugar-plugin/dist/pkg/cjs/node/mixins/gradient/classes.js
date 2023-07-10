@@ -52,8 +52,8 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
     const vars = new CssVars();
     vars.comment(() => `
       /**
-        * @name          Gradients
-        * @namespace          sugar.style.helpers
+        * @name          Gradient
+        * @namespace          sugar.style.helpers.gradient
         * @type               Styleguide
         * @menu           Styleguide / Helpers        /styleguide/helpers/gradients
         * @platform       css
@@ -145,7 +145,7 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
         vars.comment(`
           /**
            * @name        .s-gradient:${name}
-           * @namespace          sugar.style.gradient
+           * @namespace          sugar.style.helpers.gradient
            * @type            CssClass
            * @platform        css
            * @status          beta
@@ -177,7 +177,7 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
         vars.comment(`
           /**
            * @name        .s-gradient:radial:${name}
-           * @namespace          sugar.style.gradient
+           * @namespace          sugar.style.helpers.gradient
            * @type            CssClass
            * @platform        css
            * @status          beta
@@ -210,7 +210,7 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
         vars.comment(`
           /**
            * @name        .s-gradient:text:${name}
-           * @namespace          sugar.style.gradient
+           * @namespace          sugar.style.helpers.gradient
            * @type            CssClass
            * @platform        css
            * @status          beta
@@ -241,7 +241,7 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
         vars.comment(`
           /**
            * @name        .s-gradient:text:radial:${name}
-           * @namespace          sugar.style.gradient
+           * @namespace          sugar.style.helpers.gradient
            * @type            CssClass
            * @platform        css
            * @status          beta
@@ -270,7 +270,7 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
       `, { type: 'CssClass' });
         vars.comment(`/**
             * @name          s-gradient:end-${name}
-            * @namespace          sugar.style.gradient
+            * @namespace          sugar.style.helpers.gradient
             * @type               CssClass
             * @platform         css
             * @status           beta
@@ -295,7 +295,7 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
             vars.comment(`
         /**
          * @name        .s-gradient:a-${angle}
-         * @namespace          sugar.style.gradient
+         * @namespace          sugar.style.helpers.gradient
          * @type            CssClass
          * @platform        css
          * @status          beta
@@ -323,7 +323,7 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
             vars.comment(`
         /**
          * @name        .s-gradient:y-${y}
-         * @namespace          sugar.style.gradient
+         * @namespace          sugar.style.helpers.gradient
          * @type            CssClass
          * @platform        css
          * @status          beta
@@ -348,7 +348,7 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
             vars.comment(`
         /**
          * @name        .s-gradient:x-${x}
-         * @namespace          sugar.style.gradient
+         * @namespace          sugar.style.helpers.gradient
          * @type            CssClass
          * @platform        css
          * @status          beta

@@ -61,8 +61,8 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
     const vars = new CssVars();
     vars.comment(() => `
       /**
-        * @name          Labels
-        * @namespace          sugar.style.ui
+        * @name          Label
+        * @namespace          sugar.style.ui.label
         * @type               Styleguide
         * @menu           Styleguide / Forms        /styleguide/forms/labels
         * @platform       css

@@ -52,7 +52,7 @@ export default function ({
     vars.comment(`
       /**
         * @name          Visually
-        * @namespace          sugar.style.helpers
+        * @namespace          sugar.style.helpers.visually
         * @type               Styleguide
         * @menu           Styleguide / Helpers        /styleguide/helpers/visually
         * @platform       css
@@ -89,7 +89,7 @@ export default function ({
     vars.comment(
         `/**
     * @name          s-visually:hidden
-    * @namespace          sugar.style.visually
+    * @namespace          sugar.style.helpers.visually
     * @type               CssClass
     * @platform             css
     * @status             beta

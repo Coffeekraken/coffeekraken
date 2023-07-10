@@ -48,7 +48,7 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
     vars.comment(() => `
       /**
         * @name          Media
-        * @namespace          sugar.style.ui
+        * @namespace          sugar.style.ui.media
         * @type               Styleguide
         * @menu           Styleguide / UI        /styleguide/ui/media
         * @platform       css
@@ -132,7 +132,7 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
     if (finalParams.scope.includes('lnf')) {
         vars.comment(() => `/**
         * @name           s-media
-        * @namespace          sugar.ui.media
+        * @namespace          sugar.style.ui.media
         * @type           CssClass
         * 
         * This class represent a(n) "<s-color="accent">default</s-color>" media

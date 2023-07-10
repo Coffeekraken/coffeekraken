@@ -83,7 +83,7 @@ export default function ({
         () => `
       /**
         * @name          Select
-        * @namespace          sugar.style.ui
+        * @namespace          sugar.style.ui.select
         * @type               Styleguide
         * @menu           Styleguide / Forms        /styleguide/forms/select
         * @platform       css

@@ -8,7 +8,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 import __SFeature from '@coffeekraken/s-feature';
-import { __querySelectorLive, __whenNearViewport, __whenStylesheetsReady, } from '@coffeekraken/sugar/dom';
+import { __querySelectorLive, __readCssDataFrom, __whenNearViewport, __whenStylesheetsReady, } from '@coffeekraken/sugar/dom';
 import { __deepMerge } from '@coffeekraken/sugar/object';
 import __SDepsFeatureInterface from './interface/SDepsFeatureInterface';
 export default class SDepsFeature extends __SFeature {
@@ -53,49 +53,84 @@ export default class SDepsFeature extends __SFeature {
      */
     static _checkAndApplyReadyStateForElement($elm, props = {}) {
         // css
-        if (props.css && !$elm._sDepsCssLoaded) {
+        // @ts-ignore
+        if (props.css && !$elm._sDepsCssStack) {
+            return;
+        }
+        // @ts-ignore
+        if ($elm._sDepsCssStack.length) {
             return;
         }
         // apply class and attribute
-        $elm.setAttribute('ready', 'true');
-        $elm.classList.add('ready');
+        $elm.setAttribute('resolved', 'true');
+        $elm.classList.add('resolved');
     }
     /**
      * Handle css dependencies for the passed element
      */
     static _handleCssDepsForElement($elm, props = {}) {
+        var _a, _b, _c, _d;
         return __awaiter(this, void 0, void 0, function* () {
-            // check if a partial already exists for this
-            const $existing = document.querySelector(`link[s-deps-css="${props.css}"]`);
-            if ($existing) {
-                // mark the element css as loaded
-                $elm._sDepsCssLoaded = true;
-                // check and apply ready state
-                this._checkAndApplyReadyStateForElement($elm, props);
-            }
             // create a new link to add in the head
-            let finalPartialPath = props.css;
+            let finalDepsPath = props.css.split(',').map((l) => l.trim());
+            // store in the element hte css deps to load as an array.
+            // each deps when loaded will be removed from the array
             // @ts-ignore
-            if (!finalPartialPath.match(/\.css$/)) {
-                finalPartialPath += '.css';
+            $elm._sDepsCssStack = finalDepsPath;
+            // loop on all the css deps specified
+            // @ts-ignore
+            for (let [i, finalDepPath] of finalDepsPath.entries()) {
+                // check if we have some "chunks" in the cssFrontData
+                // that is coming from the postcssSugarPlugin.
+                // if not, accept all chunks. if some, check if the requested chunk is in the list
+                if (finalDepPath.match(/[a-zA-Z0-9_-]+/) &&
+                    SDepsFeature._cssFrontData.chunks) {
+                    if (!((_b = (_a = SDepsFeature._cssFrontData.chunks).includes) === null || _b === void 0 ? void 0 : _b.call(_a, finalDepPath))) {
+                        continue;
+                    }
+                }
+                // check if a partial already exists for this
+                const $existing = document.querySelector(`link[s-deps-css="${finalDepPath}"]`);
+                if ($existing) {
+                    // mark the element css as loaded
+                    // @ts-ignore
+                    (_d = (_c = $elm._sDepsCssStack) === null || _c === void 0 ? void 0 : _c.splice) === null || _d === void 0 ? void 0 : _d.call(_c, 
+                    // @ts-ignore
+                    $elm._sDepsCssStack.indexOf(finalDepPath), 1);
+                    // check and apply ready state
+                    this._checkAndApplyReadyStateForElement($elm, props);
+                    // continue to next
+                    continue;
+                }
+                // @ts-ignore
+                if (!finalDepPath.match(/\.css$/)) {
+                    finalDepPath += '.css';
+                }
+                const $link = document.createElement('link');
+                $link.setAttribute('rel', 'stylesheet');
+                // @ts-ignore
+                $link.setAttribute('s-deps-css', props.css);
+                $link.setAttribute('rel', 'preload');
+                $link.setAttribute('as', 'style');
+                $link.setAttribute('href', `${props.cssChunksBasePath}/${finalDepPath}`);
+                // add the link in the head section
+                document.head.appendChild($link);
+                // wait for stylesheet to be ready
+                const promise = __whenStylesheetsReady($link);
+                // when loaded
+                promise.then(() => {
+                    var _a, _b;
+                    // put link in stylesheet again
+                    $link.setAttribute('rel', 'stylesheet');
+                    // mark the element css as loaded
+                    // @ts-ignore
+                    (_b = (_a = $elm._sDepsCssStack) === null || _a === void 0 ? void 0 : _a.splice) === null || _b === void 0 ? void 0 : _b.call(_a, 
+                    // @ts-ignore
+                    $elm._sDepsCssStack.indexOf(finalDepPath), 1);
+                    // check and apply ready state
+                    this._checkAndApplyReadyStateForElement($elm, props);
+                });
             }
-            const $link = document.createElement('link');
-            $link.setAttribute('rel', 'stylesheet');
-            // @ts-ignore
-            $link.setAttribute('s-deps-css', props.css);
-            $link.setAttribute('rel', 'preload');
-            $link.setAttribute('as', 'style');
-            $link.setAttribute('href', `${props.cssPartialsPath}/${finalPartialPath}`);
-            // add the link in the head section
-            document.head.appendChild($link);
-            // wait for stylesheet to be ready
-            yield __whenStylesheetsReady($link);
-            // put link in stylesheet again
-            $link.setAttribute('rel', 'stylesheet');
-            // mark the element css as loaded
-            $elm._sDepsCssLoaded = true;
-            // check and apply ready state
-            this._checkAndApplyReadyStateForElement($elm, props);
         });
     }
     /**
@@ -122,5 +157,6 @@ export default class SDepsFeature extends __SFeature {
         });
     }
 }
+SDepsFeature._cssFrontData = __readCssDataFrom(document.body);
 SDepsFeature.resolvedSelectors = [];
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7OztBQUFBLE9BQU8sVUFBVSxNQUFNLHlCQUF5QixDQUFDO0FBQ2pELE9BQU8sRUFDSCxtQkFBbUIsRUFDbkIsa0JBQWtCLEVBQ2xCLHNCQUFzQixHQUN6QixNQUFNLHlCQUF5QixDQUFDO0FBQ2pDLE9BQU8sRUFBRSxXQUFXLEVBQUUsTUFBTSw0QkFBNEIsQ0FBQztBQUN6RCxPQUFPLHVCQUF1QixNQUFNLG1DQUFtQyxDQUFDO0FBeUN4RSxNQUFNLENBQUMsT0FBTyxPQUFPLFlBQWEsU0FBUSxVQUFVO0lBRWhELE1BQU0sQ0FBQyxZQUFZLENBQ2YsUUFBZ0IsRUFDaEIsUUFBcUMsRUFBRTtRQUV2QyxtQkFBbUIsQ0FBQyxRQUFRLEVBQUUsQ0FBTyxJQUFJLEVBQUUsRUFBRSxNQUFNLEVBQUUsRUFBRSxFQUFFO1lBQ3JELDJDQUEyQztZQUMzQyxNQUFNLHVCQUF1QixHQUFHLGtCQUFrQixDQUFDLElBQUksQ0FBQyxDQUFDO1lBRXpELG9EQUFvRDtZQUNwRCxRQUFRLENBQUMsZ0JBQWdCLENBQUMsaUJBQWlCLEVBQUUsQ0FBQyxDQUFDLEVBQUUsRUFBRTtnQkFDL0MsYUFBYTtnQkFDYixJQUFJLENBQUMsQ0FBQyxNQUFNLENBQUMsUUFBUSxLQUFLLFFBQVEsRUFBRTtvQkFDaEMsdUJBQXVCLENBQUMsTUFBTSxFQUFFLENBQUM7aUJBQ3BDO1lBQ0wsQ0FBQyxDQUFDLENBQUM7WUFFSCwrQ0FBK0M7WUFDL0MsTUFBTSx1QkFBdUIsQ0FBQztZQUU5QixrREFBa0Q7WUFDbEQsaURBQWlEO1lBQ2pELElBQUksSUFBSSxDQUFDLGlCQUFpQixDQUFDLFFBQVEsQ0FBQyxRQUFRLENBQUMsRUFBRTtnQkFDM0MsT0FBTzthQUNWO1lBRUQsdURBQXVEO1lBQ3ZELElBQUksQ0FBQyxpQkFBaUIsQ0FBQyxJQUFJLENBQUMsUUFBUSxDQUFD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
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7OztBQUFBLE9BQU8sVUFBVSxNQUFNLHlCQUF5QixDQUFDO0FBQ2pELE9BQU8sRUFDSCxtQkFBbUIsRUFDbkIsaUJBQWlCLEVBQ2pCLGtCQUFrQixFQUNsQixzQkFBc0IsR0FDekIsTUFBTSx5QkFBeUIsQ0FBQztBQUNqQyxPQUFPLEVBQUUsV0FBVyxFQUFFLE1BQU0sNEJBQTRCLENBQUM7QUFDekQsT0FBTyx1QkFBdUIsTUFBTSxtQ0FBbUMsQ0FBQztBQXlDeEUsTUFBTSxDQUFDLE9BQU8sT0FBTyxZQUFhLFNBQVEsVUFBVTtJQUdoRCxNQUFNLENBQUMsWUFBWSxDQUNmLFFBQWdCLEVBQ2hCLFFBQXFDLEVBQUU7UUFFdkMsbUJBQW1CLENBQUMsUUFBUSxFQUFFLENBQU8sSUFBSSxFQUFFLEVBQUUsTUFBTSxFQUFFLEVBQUUsRUFBRTtZQUNyRCwyQ0FBMkM7WUFDM0MsTUFBTSx1QkFBdUIsR0FBRyxrQkFBa0IsQ0FBQyxJQUFJLENBQUMsQ0FBQztZQUV6RCxvREFBb0Q7WUFDcEQsUUFBUSxDQUFDLGdCQUFnQixDQUFDLGlCQUFpQixFQUFFLENBQUMsQ0FBQyxFQUFFLEVBQUU7Z0JBQy9DLGFBQWE7Z0JBQ2IsSUFBSSxDQUFDLENBQUMsTUFBTSxDQUFDLFFBQVEsS0FBSyxRQUFRLEVBQUU7b0JBQ2hDLHVCQUF1QixDQUFDLE1BQU0sRUFBRSxDQUFDO2lCQUNwQztZQUNMLENBQUMsQ0FBQyxDQUFDO1lBRUgsK0NBQStDO1lBQy9DLE1BQU0sdUJBQXVCLENBQUM7WUFFOUIsa0RBQWtEO1lBQ2xELGlEQUFpRDtZQUNqRCxJQUFJLElBQUksQ0FBQyxpQkFBaUIsQ0FBQyxRQUFRLENBQUMsUUFBUSxDQUFDLEVBQUU7Z0JBQzNDLE9BQU87YUFDVjtZQUVELHVEQUF1RDtZQUN2RCxJQUFJLENBQUMsaUJBQWlCLENBQUMsSUFBSSxD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

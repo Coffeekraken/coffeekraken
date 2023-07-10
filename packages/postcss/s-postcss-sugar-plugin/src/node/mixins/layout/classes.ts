@@ -60,7 +60,7 @@ export default function ({
             () => `
       /**
        * @name       s-layout:${id}
-       * @namespace          sugar.style.layout
+       * @namespace          sugar.style.helpers.layout
        * @type          CssClass
        * @platform      css
        * @status      beta
@@ -101,7 +101,7 @@ export default function ({
             () => `
       /**
        * @name       ${clsX}
-       * @namespace          sugar.style.layout
+       * @namespace          sugar.style.helpers.layout
        * @type          CssClass
        * @platform      css
        * @status        beta
@@ -135,7 +135,7 @@ export default function ({
             () => `
       /**
        * @name       ${clsY}
-       * @namespace          sugar.style.layout
+       * @namespace          sugar.style.helpers.layout
        * @type          CssClass
        * @platform      css
        * @status        beta
@@ -169,7 +169,7 @@ export default function ({
             () => `
       /**
        * @name       ${cls}
-       * @namespace          sugar.style.layout
+       * @namespace          sugar.style.helpers.layout
        * @type          CssClass
        * @platform      css
        * @status      beta
@@ -203,7 +203,7 @@ export default function ({
         () => `
      /**
        * @name       s-layout:gap-between
-       * @namespace          sugar.style.layout
+       * @namespace          sugar.style.helpers.layout
        * @type          CssClass
        * @platform      css
        * @status      beta
@@ -243,7 +243,7 @@ export default function ({
             () => `
       /**
          * @name       s-layout:align-${align}
-         * @namespace          sugar.style.layout
+         * @namespace          sugar.style.helpers.layout
          * @type          CssClass
          * @platform      css
          * @status        beta
@@ -279,7 +279,7 @@ export default function ({
             () => `
       /**
          * @name       s-layout:justify-${justify}
-         * @namespace          sugar.style.layout
+         * @namespace          sugar.style.helpers.layout
          * @type          CssClass
          * @platform      css
          * @status        beta

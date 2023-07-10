@@ -39,7 +39,7 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
     vars.comment(`
       /**
         * @name          User select
-        * @namespace          sugar.style.helpers
+        * @namespace          sugar.style.helpers.userSelect
         * @type               Styleguide
         * @menu           Styleguide / Helpers        /styleguide/helpers/user-select
         * @platform       css
@@ -87,7 +87,7 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
     ['all', 'auto', 'none', 'text'].forEach((value) => {
         vars.comment(`/**
     * @name          s-user-select:${value}
-    * @namespace          sugar.style.whiteSpace
+    * @namespace          sugar.style.helpers.userSelect
     * @type               CssClass
     * @platform             css
     * @status             beta

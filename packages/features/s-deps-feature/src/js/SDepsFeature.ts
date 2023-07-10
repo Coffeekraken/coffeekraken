@@ -1,6 +1,7 @@
 import __SFeature from '@coffeekraken/s-feature';
 import {
     __querySelectorLive,
+    __readCssDataFrom,
     __whenNearViewport,
     __whenStylesheetsReady,
 } from '@coffeekraken/sugar/dom';
@@ -39,7 +40,7 @@ import __SDepsFeatureInterface from './interface/SDepsFeatureInterface';
 
 export interface ISDepsFeatureProps {
     css: string;
-    cssPartialsPath: string;
+    cssChunksBasePath: string;
 }
 
 export interface ISDepsFeatureRegisterDepsObj {
@@ -47,6 +48,7 @@ export interface ISDepsFeatureRegisterDepsObj {
 }
 
 export default class SDepsFeature extends __SFeature {
+    static _cssFrontData = __readCssDataFrom(document.body);
     static resolvedSelectors: string[] = [];
     static registerDeps(
         selector: string,
@@ -102,17 +104,23 @@ export default class SDepsFeature extends __SFeature {
      * Check if all is loaded and add the "ready" class and attribute
      */
     static _checkAndApplyReadyStateForElement(
-        $elm,
+        $elm: HTMLElement,
         props: Partial<ISDepsFeatureProps> = {},
-    ) {
+    ): void {
         // css
-        if (props.css && !$elm._sDepsCssLoaded) {
+        // @ts-ignore
+        if (props.css && !$elm._sDepsCssStack) {
+            return;
+        }
+
+        // @ts-ignore
+        if ($elm._sDepsCssStack.length) {
             return;
         }
 
         // apply class and attribute
-        $elm.setAttribute('ready', 'true');
-        $elm.classList.add('ready');
+        $elm.setAttribute('resolved', 'true');
+        $elm.classList.add('resolved');
     }
 
     /**
@@ -121,50 +129,90 @@ export default class SDepsFeature extends __SFeature {
     static async _handleCssDepsForElement(
         $elm: HTMLElement,
         props: Partial<ISDepsFeatureProps> = {},
-    ): void {
-        // check if a partial already exists for this
-        const $existing = document.querySelector(
-            `link[s-deps-css="${props.css}"]`,
-        );
-        if ($existing) {
-            // mark the element css as loaded
-            $elm._sDepsCssLoaded = true;
-
-            // check and apply ready state
-            this._checkAndApplyReadyStateForElement($elm, props);
-        }
-
+    ): Promise<void> {
         // create a new link to add in the head
-        let finalPartialPath = props.css;
+        let finalDepsPath = props.css.split(',').map((l) => l.trim());
+
+        // store in the element hte css deps to load as an array.
+        // each deps when loaded will be removed from the array
         // @ts-ignore
-        if (!finalPartialPath.match(/\.css$/)) {
-            finalPartialPath += '.css';
+        $elm._sDepsCssStack = finalDepsPath;
+
+        // loop on all the css deps specified
+        // @ts-ignore
+        for (let [i, finalDepPath] of finalDepsPath.entries()) {
+            // check if we have some "chunks" in the cssFrontData
+            // that is coming from the postcssSugarPlugin.
+            // if not, accept all chunks. if some, check if the requested chunk is in the list
+            if (
+                finalDepPath.match(/[a-zA-Z0-9_-]+/) &&
+                SDepsFeature._cssFrontData.chunks
+            ) {
+                if (
+                    !SDepsFeature._cssFrontData.chunks.includes?.(finalDepPath)
+                ) {
+                    continue;
+                }
+            }
+
+            // check if a partial already exists for this
+            const $existing = document.querySelector(
+                `link[s-deps-css="${finalDepPath}"]`,
+            );
+            if ($existing) {
+                // mark the element css as loaded
+                // @ts-ignore
+                $elm._sDepsCssStack?.splice?.(
+                    // @ts-ignore
+                    $elm._sDepsCssStack.indexOf(finalDepPath),
+                    1,
+                );
+
+                // check and apply ready state
+                this._checkAndApplyReadyStateForElement($elm, props);
+
+                // continue to next
+                continue;
+            }
+
+            // @ts-ignore
+            if (!finalDepPath.match(/\.css$/)) {
+                finalDepPath += '.css';
+            }
+            const $link = document.createElement('link');
+            $link.setAttribute('rel', 'stylesheet');
+            // @ts-ignore
+            $link.setAttribute('s-deps-css', props.css);
+            $link.setAttribute('rel', 'preload');
+            $link.setAttribute('as', 'style');
+            $link.setAttribute(
+                'href',
+                `${props.cssChunksBasePath}/${finalDepPath}`,
+            );
+
+            // add the link in the head section
+            document.head.appendChild($link);
+
+            // wait for stylesheet to be ready
+            const promise = __whenStylesheetsReady($link);
+
+            // when loaded
+            promise.then(() => {
+                // put link in stylesheet again
+                $link.setAttribute('rel', 'stylesheet');
+
+                // mark the element css as loaded
+                // @ts-ignore
+                $elm._sDepsCssStack?.splice?.(
+                    // @ts-ignore
+                    $elm._sDepsCssStack.indexOf(finalDepPath),
+                    1,
+                );
+
+                // check and apply ready state
+                this._checkAndApplyReadyStateForElement($elm, props);
+            });
         }
-        const $link = document.createElement('link');
-        $link.setAttribute('rel', 'stylesheet');
-        // @ts-ignore
-        $link.setAttribute('s-deps-css', props.css);
-        $link.setAttribute('rel', 'preload');
-        $link.setAttribute('as', 'style');
-        $link.setAttribute(
-            'href',
-            `${props.cssPartialsPath}/${finalPartialPath}`,
-        );
-
-        // add the link in the head section
-        document.head.appendChild($link);
-
-        // wait for stylesheet to be ready
-        await __whenStylesheetsReady($link);
-
-        // put link in stylesheet again
-        $link.setAttribute('rel', 'stylesheet');
-
-        // mark the element css as loaded
-        $elm._sDepsCssLoaded = true;
-
-        // check and apply ready state
-        this._checkAndApplyReadyStateForElement($elm, props);
     }
 
     /**

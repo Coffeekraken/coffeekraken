@@ -36,7 +36,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
     vars.comment(() => `
       /**
         * @name          Spacing
-        * @namespace          sugar.style.helpers
+        * @namespace          sugar.style.helpers.spacing
         * @type               Styleguide
         * @menu           Styleguide / Helpers        /styleguide/helpers/spacing
         * @platform       css
@@ -88,7 +88,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
         const clsMargin = `s-spacing:${spaceName}`;
         vars.comment(() => `/**
     * @name            ${clsMargin}
-    * @namespace          sugar.style.spacing
+    * @namespace          sugar.style.helpers.spacing
     * @type             CssClass
     * @platform             css
     * @status               beta
@@ -114,7 +114,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
     // direction
     vars.comment(() => `/**
         * @name            s-spacing:column
-        * @namespace          sugar.style.spacing
+        * @namespace          sugar.style.helpers.spacing
         * @type             CssClass
         * @platform             css
         * @status               beta

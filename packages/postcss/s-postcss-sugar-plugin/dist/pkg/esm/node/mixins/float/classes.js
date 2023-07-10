@@ -31,7 +31,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
     vars.comment(() => `
       /**
         * @name          Float
-        * @namespace          sugar.style.helpers
+        * @namespace          sugar.style.helpers.float
         * @type               Styleguide
         * @menu           Styleguide / Helpers        /styleguide/helpers/float
         * @platform       css
@@ -72,7 +72,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
     `);
     vars.comment(() => `/**
     * @name          s-float:left
-    * @namespace          sugar.style.float
+    * @namespace          sugar.style.helpers.float
     * @type               CssClass
     * @platform             css
     * @status             beta
@@ -90,7 +90,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
     }`, { type: 'CssClass' });
     vars.comment(() => `/**
     * @name          s-float:right
-    * @namespace          sugar.style.float
+    * @namespace          sugar.style.helpers.float
     * @type               CssClass
     * @platform             css
     * @status             beta
@@ -108,7 +108,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
     }`, { type: 'CssClass' });
     vars.comment(() => `/**
     * @name          s-float:none
-    * @namespace          sugar.style.float
+    * @namespace          sugar.style.helpers.float
     * @type               CssClass
     * @platform             css
     * @status             beta

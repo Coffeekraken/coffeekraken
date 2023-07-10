@@ -68,7 +68,7 @@ export default function ({
         () => `
       /**
         * @name          Table
-        * @namespace          sugar.style.ui
+        * @namespace          sugar.style.ui.table
         * @type               Styleguide
         * @menu           Styleguide / UI        /styleguide/ui/table
         * @platform       css

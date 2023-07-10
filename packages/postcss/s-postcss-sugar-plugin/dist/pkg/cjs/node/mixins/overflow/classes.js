@@ -37,7 +37,7 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
     vars.comment(() => `
       /**
         * @name          Overflow
-        * @namespace          sugar.style.helpers
+        * @namespace          sugar.style.helpers.overflow
         * @type               Styleguide
         * @menu           Styleguide / Helpers        /styleguide/helpers/overflow
         * @platform       css
@@ -114,7 +114,7 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
     `);
     vars.comment(() => `/**
     * @name          s-overflow:auto
-    * @namespace          sugar.style.overflow
+    * @namespace          sugar.style.helpers.overflow
     * @type               CssClass
     * @platform             css
     * @status             beta
@@ -132,7 +132,7 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
     }`, { type: 'CssClass' });
     vars.comment(() => `/**
     * @name          s-overflow:hidden
-    * @namespace          sugar.style.overflow
+    * @namespace          sugar.style.helpers.overflow
     * @type               CssClass
     * @platform             css
     * @status             beta
@@ -150,7 +150,7 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
     }`, { type: 'CssClass' });
     vars.comment(() => `/**
     * @name          s-overflow:inherit
-    * @namespace          sugar.style.overflow
+    * @namespace          sugar.style.helpers.overflow
     * @type               CssClass
     * @platform             css
     * @status             beta
@@ -168,7 +168,7 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
     }`, { type: 'CssClass' });
     vars.comment(() => `/**
     * @name          s-overflow:initial
-    * @namespace          sugar.style.overflow
+    * @namespace          sugar.style.helpers.overflow
     * @type               CssClass
     * @platform             css
     * @status             beta
@@ -186,7 +186,7 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
     }`, { type: 'CssClass' });
     vars.comment(() => `/**
     * @name          s-overflow:overlay
-    * @namespace          sugar.style.overflow
+    * @namespace          sugar.style.helpers.overflow
     * @type               CssClass
     * @platform             css
     * @status             beta
@@ -204,7 +204,7 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
     }`, { type: 'CssClass' });
     vars.comment(() => `/**
     * @name          s-overflow:revert
-    * @namespace          sugar.style.overflow
+    * @namespace          sugar.style.helpers.overflow
     * @type               CssClass
     * @platform             css
     * @status             beta
@@ -222,7 +222,7 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
     }`, { type: 'CssClass' });
     vars.comment(() => `/**
     * @name          s-overflow:scroll
-    * @namespace          sugar.style.overflow
+    * @namespace          sugar.style.helpers.overflow
     * @type               CssClass
     * @platform             css
     * @status             beta
@@ -240,7 +240,7 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
     }`, { type: 'CssClass' });
     vars.comment(() => `/**
     * @name          s-overflow:visible
-    * @namespace          sugar.style.overflow
+    * @namespace          sugar.style.helpers.overflow
     * @type               CssClass
     * @platform             css
     * @status             beta
@@ -258,7 +258,7 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
     }`, { type: 'CssClass' });
     vars.comment(() => `/**
     * @name          s-overflow:unset
-    * @namespace          sugar.style.overflow
+    * @namespace          sugar.style.helpers.overflow
     * @type               CssClass
     * @platform             css
     * @status             beta

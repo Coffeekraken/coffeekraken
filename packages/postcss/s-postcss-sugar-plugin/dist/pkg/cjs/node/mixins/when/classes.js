@@ -45,7 +45,7 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
     states.forEach((state) => {
         vars.comment(() => `/**
             * @name          s-when:${state}
-            * @namespace          sugar.style.when
+            * @namespace          sugar.style.helpers.when
             * @type               CssClass
             * @platform             css
             * @status             beta
@@ -68,7 +68,7 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
             }`, { type: 'CssClass' });
         vars.comment(() => `/**
             * @name          s-when:sibling:${state}
-            * @namespace          sugar.style.when
+            * @namespace          sugar.style.helpers.when
             * @type               CssClass
             * @platform             css
             * @status             beta
@@ -94,7 +94,7 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
             }`, { type: 'CssClass' });
         vars.comment(() => `/**
             * @name          s-when:siblings:${state}
-            * @namespace          sugar.style.when
+            * @namespace          sugar.style.helpers.when
             * @type               CssClass
             * @platform             css
             * @status             beta
@@ -120,7 +120,7 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
             }`, { type: 'CssClass' });
         vars.comment(() => `/**
             * @name          s-when:parent:${state}
-            * @namespace          sugar.style.when
+            * @namespace          sugar.style.helpers.when
             * @type               CssClass
             * @platform             css
             * @status             beta
@@ -146,7 +146,7 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
             }`, { type: 'CssClass' });
         vars.comment(() => `/**
             * @name          s-when:grandparent:${state}
-            * @namespace          sugar.style.when
+            * @namespace          sugar.style.helpers.when
             * @type               CssClass
             * @platform             css
             * @status             beta
@@ -172,7 +172,7 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
             }`, { type: 'CssClass' });
         vars.comment(() => `/**
             * @name          s-when:ancestor:${state}
-            * @namespace          sugar.style.when
+            * @namespace          sugar.style.helpers.when
             * @type               CssClass
             * @platform             css
             * @status             beta
@@ -199,7 +199,7 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
     });
     vars.comment(() => `/**
         * @name          s-when:dark
-        * @namespace          sugar.style.when
+        * @namespace          sugar.style.helpers.when
         * @type               CssClass
         * @platform             css
         * @status             beta
@@ -226,7 +226,7 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
         `, { type: 'CssClass' });
     vars.comment(() => `/**
         * @name          s-when:light
-        * @namespace          sugar.style.when
+        * @namespace          sugar.style.helpers.when
         * @type               CssClass
         * @platform             css
         * @status             beta
@@ -255,7 +255,7 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
     Object.keys(queries).forEach((query) => {
         vars.comment(() => `/**
             * @name          s-when:media:${query}
-            * @namespace          sugar.style.when
+            * @namespace          sugar.style.helpers.when
             * @type               CssClass
             * @platform             css
             * @status             beta

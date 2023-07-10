@@ -48,7 +48,7 @@ function default_1({ params, atRule, CssVars, replaceWith, }) {
     vars.comment(() => `
       /**
         * @name          Backdrop
-        * @namespace          sugar.style.ui
+        * @namespace          sugar.style.ui.backdrop
         * @type               Styleguide
         * @menu           Styleguide / UI        /styleguide/ui/backdrop
         * @platform       css

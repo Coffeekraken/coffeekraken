@@ -290,7 +290,7 @@ body:has(.s-doc-fullscreen) {
     }
     &_toolbar > button {
         padding: sugar.padding(30);
-        background: sugar.color(main, background);
+        background: sugar.color(main, surface);
         @sugar.transition;
         @sugar.focus.outline accent;
 

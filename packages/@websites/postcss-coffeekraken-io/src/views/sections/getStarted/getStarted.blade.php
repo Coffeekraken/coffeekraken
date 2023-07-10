@@ -1,6 +1,6 @@
-<template s-lazy>
+<template s-lazy id="get-started">
 
-    <section class="section" id="get-started">
+    <section class="section">
 
         <div class="s-container">
 

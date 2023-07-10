@@ -27,6 +27,20 @@ import __whenVisible from './whenVisible';
  * @async
  *
  * This function listen for passed `trigger(s)` on the passed `HTMLElement` and resolve the promise once one of them has reached his state.
+ * Available triggers:
+ * - direct|directly        : Resolve promise directly
+ * - inViewport             : Resolved when element in is viewport
+ * - nearViewport           : Resolved when element is near the viewport
+ * - enterViewport          : Resolved when element enter the viewport
+ * - outOfViewport          : Resolved when element exit the viewport
+ * - interact               : Resolved when the user interact with the element (hover, click, focus, etc...)
+ * - visible                : Resolved when the element became visible
+ * - domReady               : Resolved when the dom is ready
+ * - stylesheetsReady       : Resolved when all the stylesheets are ready
+ * - animationEnd           : Resolved when the animation on the element is ended
+ * - timeout:%ms            : Resolved after the specified timeout
+ * - event:%eventName       : Resolved when the specified event is detected
+ * - lod:%lod               : Resolved when the lod (level of details) is reached
  *
  * @param       {HTMLElement}           $elm        The element to listen on
  * @param       {String|String[]}       trigger     The trigger(s) to listen on
@@ -146,6 +160,18 @@ export default function __when(
                 const timeout = parseInt(timeoutMatches[1]);
                 const promise = new Promise((resolve) => {
                     setTimeout(resolve, timeout);
+                });
+                promises.push(promise);
+                return;
+            }
+
+            // event
+            const eventMatches = t.match(/^event\:[a-zA-Z0-9-_\.]/);
+            if (eventMatches && eventMatches[1]) {
+                const promise = new Promise((resolve) => {
+                    $elm.addEventListener(eventMatches[1], (e) => {
+                        resolve();
+                    });
                 });
                 promises.push(promise);
                 return;

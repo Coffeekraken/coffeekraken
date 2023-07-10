@@ -110,7 +110,7 @@ export default class SDocComponent extends __SLitComponent {
         }).on('press', (e) => {
             this._toggleFullscreen();
         });
-        __hotkey('ctrl+s', {
+        __hotkey('ctrl+f', {
             title: 'Search',
             description: 'Search the documentation',
         }).on('press', (e) => {

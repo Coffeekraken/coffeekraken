@@ -21,10 +21,11 @@
 
     ._packages {
         @sugar.border.radius;
+        background: sugar.color(main, surface);
         overflow: hidden;
     }
     ._package {
-        background: sugar.color(main, surface, --alpha 0.8);
+        background: sugar.color(main, surface);
     }
     ._package:not(:last-child) {
         border-bottom: 1px solid sugar.color(accent, --alpha 0.1);

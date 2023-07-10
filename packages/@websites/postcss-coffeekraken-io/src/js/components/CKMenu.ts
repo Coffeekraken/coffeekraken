@@ -51,7 +51,7 @@ export default class CkSettings extends __SLitComponent {
                 <button aria-label="Coffeekraken products">
                     <i class="s-icon:ui-menu-grid-solid"></i>
                 </button>
-                <div class="s-dropdown:bottom-end">
+                <div class="s-dropdown s-dropdown--bottom-end">
                     <ul class="_packages">
                         ${this._packages.map(
                             (pkg) => html`

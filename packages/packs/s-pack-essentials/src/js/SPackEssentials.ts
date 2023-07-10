@@ -1,12 +1,12 @@
-import { __define as __SActivateFeatureDefine } from '@coffeekraken/s-activate-feature';
-import { __define as __SAppearFeatureDefine } from '@coffeekraken/s-appear-feature';
-import { __define as __SClipboardCopyComponentDefine } from '@coffeekraken/s-clipboard-copy-component';
-import { __define as __SSDepsFeatureDefine } from '@coffeekraken/s-deps-feature';
-import { __define as __SFloatingFeatureDefine } from '@coffeekraken/s-floating-feature';
-import { __define as __SFormValidateFeatureDefine } from '@coffeekraken/s-form-validate-feature';
-import { __define as __SInlineFeatureDefine } from '@coffeekraken/s-inline-feature';
-import { __define as __SRefocusFeatureDefine } from '@coffeekraken/s-refocus-feature';
-import { __define as __SScrollComponentDefine } from '@coffeekraken/s-scroll-component';
+import { __define as __SActivateFeatureDefine } from '@coffeekraken/s-activate-feature/lazy';
+import { __define as __SAppearFeatureDefine } from '@coffeekraken/s-appear-feature/lazy';
+import { __define as __SClipboardCopyComponentDefine } from '@coffeekraken/s-clipboard-copy-component/lazy';
+import { __define as __SSDepsFeatureDefine } from '@coffeekraken/s-deps-feature/lazy';
+import { __define as __SFloatingFeatureDefine } from '@coffeekraken/s-floating-feature/lazy';
+import { __define as __SFormValidateFeatureDefine } from '@coffeekraken/s-form-validate-feature/lazy';
+import { __define as __SInlineFeatureDefine } from '@coffeekraken/s-inline-feature/lazy';
+import { __define as __SRefocusFeatureDefine } from '@coffeekraken/s-refocus-feature/lazy';
+import { __define as __SScrollComponentDefine } from '@coffeekraken/s-scroll-component/lazy';
 import { __define as __SSugarFeatureDefine } from '@coffeekraken/s-sugar-feature';
 
 /**

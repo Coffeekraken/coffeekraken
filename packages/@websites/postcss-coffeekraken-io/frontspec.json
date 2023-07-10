@@ -43,12 +43,6 @@
             "src": "/dist/js/index.esm.js",
             "env": "production"
         },
-        "nomodule": {
-            "nomodule": true,
-            "defer": true,
-            "src": "/dist/js/index.amd.js",
-            "env": "production"
-        },
         "style": {
             "id": "global",
             "defer": true,
@@ -742,7 +736,7 @@
                 "./node_modules/@coffeekraken/sugar/src/views/_specs/components"
             ]
         },
-        "cwd": "/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/@websites/css-coffeekraken-io"
+        "cwd": "/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/@websites/postcss-coffeekraken-io"
     },
     "google": {
         "gtm": "GTM-K4LMN8Q",

@@ -41,24 +41,6 @@ export default function (api) {
         },
 
         /**
-         * @name            nomodule
-         * @namespace       config.assets
-         * @type            String
-         * @default         { nomodule: true, defer: true, src: '/dist/js/index.amd.js', env: 'production' }
-         *
-         * Specify the production javascript nomodule index asset.
-         *
-         * @since           2.0.0
-         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-         */
-        nomodule: {
-            nomodule: true,
-            defer: true,
-            src: '/dist/js/index.amd.js',
-            env: 'production',
-        },
-
-        /**
          * @name            style
          * @namespace       config.assets
          * @type            String

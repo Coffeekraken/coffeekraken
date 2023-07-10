@@ -40,23 +40,6 @@ function default_1(api) {
             env: 'production',
         },
         /**
-         * @name            nomodule
-         * @namespace       config.assets
-         * @type            String
-         * @default         { nomodule: true, defer: true, src: '/dist/js/index.amd.js', env: 'production' }
-         *
-         * Specify the production javascript nomodule index asset.
-         *
-         * @since           2.0.0
-         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-         */
-        nomodule: {
-            nomodule: true,
-            defer: true,
-            src: '/dist/js/index.amd.js',
-            env: 'production',
-        },
-        /**
          * @name            style
          * @namespace       config.assets
          * @type            String
@@ -75,4 +58,4 @@ function default_1(api) {
     };
 }
 exports.default = default_1;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7O0FBQUEsbUJBQXlCLEdBQUc7SUFDeEIsSUFBSSxHQUFHLENBQUMsR0FBRyxDQUFDLFFBQVEsS0FBSyxNQUFNLEVBQUU7UUFDN0IsT0FBTztLQUNWO0lBRUQsT0FBTztRQUNIOzs7Ozs7Ozs7O1dBVUc7UUFDSCxHQUFHLEVBQUU7WUFDRCxJQUFJLEVBQUUsUUFBUTtZQUNkLEtBQUssRUFBRSxJQUFJO1lBQ1gsR0FBRyxFQUFFLGtCQUFrQjtZQUN2QixHQUFHLEVBQUUsYUFBYTtTQUNyQjtRQUVEOzs7Ozs7Ozs7O1dBVUc7UUFDSCxNQUFNLEVBQUU7WUFDSixJQUFJLEVBQUUsUUFBUTtZQUNkLEtBQUssRUFBRSxJQUFJO1lBQ1gsR0FBRyxFQUFFLHVCQUF1QjtZQUM1QixHQUFHLEVBQUUsWUFBWTtTQUNwQjtRQUVEOzs7Ozs7Ozs7O1dBVUc7UUFDSCxRQUFRLEVBQUU7WUFDTixRQUFRLEVBQUUsSUFBSTtZQUNkLEtBQUssRUFBRSxJQUFJO1lBQ1gsR0FBRyxFQUFFLHVCQUF1QjtZQUM1QixHQUFHLEVBQUUsWUFBWTtTQUNwQjtRQUVEOzs7Ozs7Ozs7O1dBVUc7UUFDSCxLQUFLLEVBQUU7WUFDSCxFQUFFLEVBQUUsUUFBUTtZQUNaLEtBQUssRUFBRSxJQUFJO1lBQ1gsR0FBRyxFQUFFLHFCQUFxQjtTQUM3QjtLQUNKLENBQUM7QUFDTixDQUFDO0FBN0VELDRCQTZFQyJ9
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7O0FBQUEsbUJBQXlCLEdBQUc7SUFDeEIsSUFBSSxHQUFHLENBQUMsR0FBRyxDQUFDLFFBQVEsS0FBSyxNQUFNLEVBQUU7UUFDN0IsT0FBTztLQUNWO0lBRUQsT0FBTztRQUNIOzs7Ozs7Ozs7O1dBVUc7UUFDSCxHQUFHLEVBQUU7WUFDRCxJQUFJLEVBQUUsUUFBUTtZQUNkLEtBQUssRUFBRSxJQUFJO1lBQ1gsR0FBRyxFQUFFLGtCQUFrQjtZQUN2QixHQUFHLEVBQUUsYUFBYTtTQUNyQjtRQUVEOzs7Ozs7Ozs7O1dBVUc7UUFDSCxNQUFNLEVBQUU7WUFDSixJQUFJLEVBQUUsUUFBUTtZQUNkLEtBQUssRUFBRSxJQUFJO1lBQ1gsR0FBRyxFQUFFLHVCQUF1QjtZQUM1QixHQUFHLEVBQUUsWUFBWTtTQUNwQjtRQUVEOzs7Ozs7Ozs7O1dBVUc7UUFDSCxLQUFLLEVBQUU7WUFDSCxFQUFFLEVBQUUsUUFBUTtZQUNaLEtBQUssRUFBRSxJQUFJO1lBQ1gsR0FBRyxFQUFFLHFCQUFxQjtTQUM3QjtLQUNKLENBQUM7QUFDTixDQUFDO0FBM0RELDRCQTJEQyJ9

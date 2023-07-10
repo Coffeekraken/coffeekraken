@@ -25,7 +25,8 @@
         "static.serve": "sugar staticServer.start",
         "static.build": "sugar static.build --clean --env production --target production",
         "doc.serve": "sugar doc.serve",
-        "deploy": "echo 'Simply push in the master branch to deploy'"
+        "deploy": "echo 'Simply push in the master branch to deploy'",
+        "server.ssh": "ssh root@194.233.173.214"
     },
     "repository": {
         "type": "git",

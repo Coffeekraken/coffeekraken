@@ -81,7 +81,7 @@ export default function ({
     }
 
     // prepare content to be exportd using the export postprocessor
-    console.log(
+    console.verbose?.(
         `<yellow>[postcss]</yellow> Found "<cyan>${finalParams.id}</cyan>" css chunk`,
     );
 

@@ -380,6 +380,7 @@ export default function (api) {
                  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 description: 'Start the preview testing stack',
+                runInParallel: true,
                 sharedParams: {
                     /**
                      * @name            env

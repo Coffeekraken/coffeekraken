@@ -1,6 +1,6 @@
 import { __define as __SActivateFeatureDefine } from '@coffeekraken/s-activate-feature/lazy';
 import { __define as __SAppearFeatureDefine } from '@coffeekraken/s-appear-feature/lazy';
-import { __define as __SClipboardCopyComponentDefine } from '@coffeekraken/s-clipboard-copy-component/lazy';
+// import { __define as __SClipboardCopyComponentDefine } from '@coffeekraken/s-clipboard-copy-component/lazy';
 import { __define as __SSDepsFeatureDefine } from '@coffeekraken/s-deps-feature/lazy';
 import { __define as __SFloatingFeatureDefine } from '@coffeekraken/s-floating-feature/lazy';
 import { __define as __SFormValidateFeatureDefine } from '@coffeekraken/s-form-validate-feature/lazy';
@@ -43,7 +43,7 @@ import { __define as __SSugarFeatureDefine } from '@coffeekraken/s-sugar-feature
  */
 export default function SPackEssentials(): void {
     // Components
-    __SClipboardCopyComponentDefine();
+    // __SClipboardCopyComponentDefine();
     __SScrollComponentDefine();
 
     // Features

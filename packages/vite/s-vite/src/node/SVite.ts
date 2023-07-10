@@ -58,6 +58,7 @@ export interface ISViteBuildParams {
 export interface ISViteBuildResult {
     type: 'module' | 'modules' | 'lib' | 'bundle';
     format: 'esm' | 'amd' | 'umd' | 'cjs' | 'iife';
+    entryFileName: string;
     files: ISViteBuildFileResult[];
 }
 
@@ -290,12 +291,17 @@ export default class SVite extends __SClass {
                                 const buildResult: ISViteBuildResult = {
                                     type: buildType,
                                     format: finalFormats[0],
+                                    entryFileName: '',
                                     files: [],
                                 };
 
                                 for (let [key, chunkObj] of Object.entries(
                                     chunks,
                                 )) {
+                                    if (chunkObj.isEntry) {
+                                        buildResult.entryFileName =
+                                            chunkObj.fileName;
+                                    }
                                     buildResult.files.push({
                                         isEntry: chunkObj.isEntry,
                                         format: finalFormats[0],
@@ -386,13 +392,16 @@ export default class SVite extends __SClass {
                                     type: __SLog.TYPE_WARNING,
                                     value: `<yellow>[warn]</yellow> (<magenta>${warning.code}</magenta>) ${warning.message}`,
                                 });
-                                console.log({
-                                    margin: {
-                                        bottom: 1,
-                                    },
-                                    type: __SLog.TYPE_WARNING,
-                                    value: `at <cyan>${warning.loc.file}</cyan>:<yellow>${warning.loc.column}:${warning.loc.line}</yellow>`,
-                                });
+
+                                if (warning.loc?.file) {
+                                    console.log({
+                                        margin: {
+                                            bottom: 1,
+                                        },
+                                        type: __SLog.TYPE_WARNING,
+                                        value: `at <cyan>${warning.loc.file}</cyan>:<yellow>${warning.loc.column}:${warning.loc.line}</yellow>`,
+                                    });
+                                }
                             },
                         },
                     },
@@ -542,10 +551,17 @@ export default class SVite extends __SClass {
                 const finalBuildResult: ISViteBuildResult = {
                     type: buildType,
                     format: finalFormats[0],
+                    entryFileName: '',
                     files: [],
                 };
+
                 for (let i = 0; i < buildResult[0].output?.length; i++) {
                     const output = buildResult[0].output[i];
+
+                    if (output.isEntry) {
+                        finalBuildResult.entryFileName = output.fileName;
+                    }
+
                     finalBuildResult.files.push({
                         isEntry: output.isEntry ?? false,
                         format: finalFormats[0],
@@ -580,27 +596,6 @@ export default class SVite extends __SClass {
                 const buildFileResult: ISViteBuildFileResult =
                     buildResult.files[i];
 
-                //             const cssVarMatches = buildFileResult.code.match(
-                //                 /var\s[a-zA-Z0-9-_]+type_style[a-zA-Z0-9-_]+/gm,
-                //             );
-                //             if (cssVarMatches) {
-                //                 cssVarMatches.forEach((match) => {
-                //                     const varName = match.replace(/var\s?/, '').trim();
-                //                     const injectCode = `
-                //     var $style = document.querySelector('style#${varName}');
-                //     if (!$style) {
-                //     $style = document.createElement('style');
-                //     $style.setAttribute('id', '${varName}');
-                //     $style.type = 'text/css';
-                //     $style.appendChild(document.createTextNode(${varName}));
-                //     document.head.appendChild($style);
-                //     }
-                // `;
-
-                //                     buildFileResult.code += injectCode;
-                //                 });
-                //             }
-
                 // handle generated bundles
                 if (!buildParams.noWrite) {
                     // handle only js files
@@ -619,6 +614,11 @@ export default class SVite extends __SClass {
                                 /^index\./,
                                 `index.${buildFileResult.format}.`,
                             );
+                    } else {
+                        // replace the file entry name inside the code
+                        buildFileResult.code = buildFileResult.code
+                            .split(buildResult.entryFileName)
+                            .join(`index.${buildFileResult.format}.js`);
                     }
 
                     // write the file on the disk

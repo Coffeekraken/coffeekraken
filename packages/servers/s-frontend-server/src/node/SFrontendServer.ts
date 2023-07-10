@@ -491,18 +491,30 @@ export default class SFrontendServer extends __SClass {
             app.set('port', finalParams.port);
 
             app.listen(app.get('port'), function () {
-                console.verbose?.(
+                console.log(
                     `<yellow>[corsProxy]</yellow> Cors proxy server running on port <cyan>${app.get(
                         'port',
                     )}</cyan>...`,
                 );
-                console.verbose?.(
+                console.log(
                     `<yellow>[corsProxy]</yellow> Call "<cyan>http://${__SSugarConfig.get(
                         'frontendServer.hostname',
                     )}:${finalParams.port}</cyan>" with the "<magenta>${
                         finalParams.targetUrlHeaderName
                     }</magenta>" header to use it...`,
                 );
+            });
+
+            __onProcessExit(() => {
+                console.log(
+                    `<red>[kill]</red> Gracefully killing the <cyan>cors proxy server</cyan>...`,
+                );
+                return new Promise((_resolve) => {
+                    app.close?.(async () => {
+                        await __wait(500);
+                        _resolve(null);
+                    });
+                });
             });
         });
     }

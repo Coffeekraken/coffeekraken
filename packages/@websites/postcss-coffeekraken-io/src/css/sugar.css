@@ -10,6 +10,7 @@
 @sugar.ui.tabs.classes;
 @sugar.ui.button.classes;
 @sugar.container.classes;
+@sugar.disabled.classes;
 @sugar.layout.classes;
 @sugar.typo.classes;
 @sugar.format.classes;
@@ -104,9 +105,6 @@
 }
 @sugar.chunk 'depth' {
     @sugar.depth.classes;
-}
-@sugar.chunk 'disabled' {
-    @sugar.disabled.classes;
 }
 @sugar.chunk 'flex' {
     @sugar.flex.classes;

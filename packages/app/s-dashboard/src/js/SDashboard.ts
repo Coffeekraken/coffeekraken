@@ -1,9 +1,7 @@
 import __SClass from '@coffeekraken/s-class';
-import { __injectStyle } from '@coffeekraken/sugar/dom';
 import { __escapeQueue, __hotkey } from '@coffeekraken/sugar/keyboard';
 import { __deepMerge } from '@coffeekraken/sugar/object';
 
-import __css from '../../../../src/css/index.css';
 import __SDashboardSettingsInterface from './interface/SDashboardSettingsInterface';
 
 /**
@@ -114,6 +112,8 @@ export default class SDashboard extends __SClass {
         this._$iframe = document.createElement('iframe');
         this._$iframe.setAttribute('title', 's-dashboard');
         this._$iframe.classList.add(`s-dashboard-iframe`);
+        this._$iframe.style.width = '0';
+        this._$iframe.style.height = '0';
         document.body.appendChild(this._$iframe);
 
         // listen for shortcuts
@@ -143,7 +143,7 @@ export default class SDashboard extends __SClass {
         }
 
         // inject css
-        __injectStyle(__css);
+        // __injectStyle(__css);
 
         this._$focusItem = document.createElement('div');
         this._$focusItem.setAttribute('tabindex', '-1');

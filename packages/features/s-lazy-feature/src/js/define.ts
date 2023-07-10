@@ -5,6 +5,7 @@ export default function define(
     props: Partial<ISLazyFeatureProps> = {},
     name = 's-lazy',
 ) {
+    _console.log('DDE');
     __SLazyFeature.define(name, __SLazyFeature, {
         ...props,
     });

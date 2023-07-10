@@ -232,28 +232,28 @@ export default class SActivateFeature extends __SFeature {
                         selector = parts[1];
                     }
 
-                    const $toSpyElm = document.querySelector(selector);
-
-                    if (!$toSpyElm) {
-                        throw new Error(
-                            `<red>[SActivate]</red> The s-activate trigger "${trigger}" with the selector "${selector}" does not resolve to any HTMLElement to spy on`,
-                        );
-                    }
-
-                    // spy on the element in the page
-                    __scrollSpy($toSpyElm, {
-                        group,
-                    })
-                        .on('activate', () => {
-                            if (!this.isActive()) {
-                                this.activate();
-                            }
+                    __querySelectorLive(selector, ($toSpyElm) => {
+                        // spy on the element in the page
+                        __scrollSpy($toSpyElm, {
+                            group,
                         })
-                        .on('unactivate', () => {
-                            if (this.isActive()) {
-                                this.unactivate();
-                            }
-                        });
+                            .on('activate', () => {
+                                if (!this.isActive()) {
+                                    this.activate();
+                                }
+                            })
+                            .on('unactivate', () => {
+                                if (this.isActive()) {
+                                    this.unactivate();
+                                }
+                            });
+                    });
+
+                    // if (!$toSpyElm) {
+                    //     throw new Error(
+                    //         `<red>[SActivate]</red> The s-activate trigger "${trigger}" with the selector "${selector}" does not resolve to any HTMLElement to spy on`,
+                    //     );
+                    // }
                 } else {
                     switch (trigger) {
                         case 'click':

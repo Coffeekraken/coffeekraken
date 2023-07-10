@@ -13,6 +13,7 @@
         "@coffeekraken/s-floating-feature": "^2.0.0-alpha.27",
         "@coffeekraken/s-form-validate-feature": "^2.0.0-alpha.27",
         "@coffeekraken/s-inline-feature": "^2.0.0-alpha.27",
+        "@coffeekraken/s-lazy-feature": "^2.0.0-alpha.27",
         "@coffeekraken/s-panel-component": "^2.0.0-alpha.27",
         "@coffeekraken/s-range-component": "^2.0.0-alpha.27",
         "@coffeekraken/s-refocus-feature": "^2.0.0-alpha.27",

@@ -5,6 +5,7 @@ import { __define as __SSDepsFeatureDefine } from '@coffeekraken/s-deps-feature/
 import { __define as __SFloatingFeatureDefine } from '@coffeekraken/s-floating-feature/lazy';
 import { __define as __SFormValidateFeatureDefine } from '@coffeekraken/s-form-validate-feature/lazy';
 import { __define as __SInlineFeatureDefine } from '@coffeekraken/s-inline-feature/lazy';
+import { __define as __SLazyFeatureDefine } from '@coffeekraken/s-lazy-feature';
 import { __define as __SRefocusFeatureDefine } from '@coffeekraken/s-refocus-feature/lazy';
 import { __define as __SScrollComponentDefine } from '@coffeekraken/s-scroll-component/lazy';
 import { __define as __SSugarFeatureDefine } from '@coffeekraken/s-sugar-feature/lazy';
@@ -18,14 +19,15 @@ import { __define as __SSugarFeatureDefine } from '@coffeekraken/s-sugar-feature
  *
  * This function init automatically these packages:
  *
- * - [@coffeekraken/s-activate-feature](/package/@coffeekraken/s-activate/doc/readme)
+ * - [@coffeekraken/s-activate-feature](/package/@coffeekraken/s-activate-feature/doc/readme)
  * - [@coffeekraken/s-deps-feature](/package/@coffeekraken/s-deps-feature/doc/readme)
- * - [@coffeekraken/s-appear-feature](/package/@coffeekraken/s-appear/doc/readme)
- * - [@coffeekraken/s-floating-feature](/package/@coffeekraken/s-floating/doc/readme)
- * - [@coffeekraken/s-form-validate-feature](/package/@coffeekraken/s-form-validate/doc/readme)
- * - [@coffeekraken/s-inline-feature](/package/@coffeekraken/s-inline/doc/readme)
- * - [@coffeekraken/s-refocus-feature](/package/@coffeekraken/s-refocus/doc/readme)
- * - [@coffeekraken/s-sugar-feature](/package/@coffeekraken/s-sugar/doc/readme)
+ * - [@coffeekraken/s-appear-feature](/package/@coffeekraken/s-appear-feature/doc/readme)
+ * - [@coffeekraken/s-floating-feature](/package/@coffeekraken/s-floating-feature/doc/readme)
+ * - [@coffeekraken/s-form-validate-feature](/package/@coffeekraken/s-form-validate-feature/doc/readme)
+ * - [@coffeekraken/s-inline-feature](/package/@coffeekraken/s-inline-feature/doc/readme)
+ * - [@coffeekraken/s-refocus-feature](/package/@coffeekraken/s-refocus-feature/doc/readme)
+ * - [@coffeekraken/s-sugar-feature](/package/@coffeekraken/s-sugar-feature/doc/readme)
+ * - [@coffeekraken/s-sugar-feature](/package/@coffeekraken/s-lazy-feature/doc/readme)
  * - [@coffeekraken/s-scroll-component](/package/@coffeekraken/s-scroll-component/doc/readme)
  *
  * @todo      interface
@@ -48,6 +50,7 @@ export default function SPackEssentials(): void {
 
     // Features
     __SSugarFeatureDefine();
+    __SLazyFeatureDefine();
     __SSDepsFeatureDefine();
     __SActivateFeatureDefine();
     __SAppearFeatureDefine();

@@ -5,7 +5,7 @@ services:
             context: .
             dockerfile: Dockerfile
         volumes:
-            - ../../../../:/data/web/coffeekraken/coffeekraken:delegated
+            - ../../../../:/data/web/coffeekraken/coffeekraken:cached
         networks:
             - coffeekraken
         ports:

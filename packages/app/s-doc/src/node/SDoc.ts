@@ -7,6 +7,7 @@ import { __wait } from '@coffeekraken/sugar/datetime';
 import { __deepMerge } from '@coffeekraken/sugar/object';
 import { __onProcessExit } from '@coffeekraken/sugar/process';
 import __bodyParser from 'body-parser';
+import __compression from 'compression';
 import __cors from 'cors';
 import __express from 'express';
 import __SDocServeParamsInterface from './interface/SDocServeParamsInterface';
@@ -84,6 +85,7 @@ export default class SDoc extends __SClass {
         return new Promise((resolve) => {
             const finalParams = __SDocServeParamsInterface.apply(params);
             const app = __express();
+            app.use(__compression());
             this.initOnExpressServer(app);
             const server = app.listen(finalParams.port, async () => {
                 await __wait(100);

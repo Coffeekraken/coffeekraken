@@ -1,9 +1,9 @@
 import type { ISEventEmitter } from '@coffeekraken/s-event-emitter';
 import { __deepMerge } from '@coffeekraken/sugar/object';
-import __SStdioSettingsInterface from './interface/SStdioSettingsInterface';
+import __SStdioSettingsInterface from './interface/SStdioSettingsInterface.js';
 
-import type { ISStdioSettings } from '../shared/SStdio';
-import __SStdio from '../shared/SStdio';
+import type { ISStdioSettings } from '../shared/SStdio.js';
+import __SStdio from '../shared/SStdio.js';
 
 /**
  * @name          SStdio
@@ -12,7 +12,7 @@ import __SStdio from '../shared/SStdio';
  * @platform        js
  * @status              beta
  * @private
- * 
+ *
  * This class represent the base one for all the "Stdio"
  * compatible setting.
  *

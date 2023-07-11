@@ -1,8 +1,8 @@
 import __fs from 'fs';
 import __path from 'path';
 import __yaml from 'yaml';
-import __readJsonSync from '../fs/readJsonSync';
-import __packageRootDir from '../path/packageRootDir';
+import __readJsonSync from '../fs/readJsonSync.js';
+import __packageRootDir from '../path/packageRootDir.js';
 
 /**
  * @name            loadConfigFile

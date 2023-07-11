@@ -1,4 +1,4 @@
-import __deepFilter from '../deepFilter';
+import __deepFilter from '../deepFilter.js';
 
 describe('sugar.shared.object.deepFilter', () => {
     it('Should apply a simple filter correctly', (done) => {

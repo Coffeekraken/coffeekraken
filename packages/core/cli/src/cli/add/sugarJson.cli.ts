@@ -1,9 +1,9 @@
 // @ts-nocheck
 import __SLog from '@coffeekraken/s-log';
 import __SPromise from '@coffeekraken/s-promise';
-import __SCliAddSugarJsonParamsInterface from '../../node/add/interface/SCliAddSugarJsonParamsInterface';
 import { __readJsonSync, __writeJsonSync } from '@coffeekraken/sugar/fs';
 import __fs from 'fs';
+import __SCliAddSugarJsonParamsInterface from '../../node/add/interface/SCliAddSugarJsonParamsInterface.js';
 
 export default (stringArgs = '') => {
     return new __SPromise(async ({ resolve, reject, emit, pipe }) => {

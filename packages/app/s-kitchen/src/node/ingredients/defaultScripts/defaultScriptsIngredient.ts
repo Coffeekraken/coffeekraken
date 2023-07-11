@@ -3,7 +3,7 @@ import { __dirname } from '@coffeekraken/sugar/fs';
 import { __packageRootDir } from '@coffeekraken/sugar/path';
 import __path from 'path';
 import __recursiveCopy from 'recursive-copy';
-import type { ISKitchenIngredient } from '../../SKitchen';
+import type { ISKitchenIngredient } from '../../SKitchen.js';
 
 /**
  * @name        defaultScriptsIngredient

@@ -1,6 +1,6 @@
 // @ts-nocheck
 
-import __SSitemapBuilder from '../node/SSitemapBuilder';
+import __SSitemapBuilder from '../node/SSitemapBuilder.js';
 
 export default (stringArgs = '') => {
     return new Promise(async (resolve) => {

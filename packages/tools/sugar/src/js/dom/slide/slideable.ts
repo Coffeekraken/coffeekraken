@@ -1,14 +1,14 @@
 import __SPromise from '@coffeekraken/s-promise';
 import __SSugarElement from '@coffeekraken/s-sugar-element';
 
-import __uniqid from '../../../js/string/uniqid';
-import __easeOut from '../../../shared/easing/easeOutQuad';
-import __easeInterval from '../../../shared/function/easeInterval';
-import __clamp from '../../../shared/math/clamp';
-import __easeClamp from '../../../shared/math/easeClamp';
-import __onDrag from '../detect/onDrag';
-import __elementAreaStats from '../element/elementAreaStats';
-import __injectStyle from '../inject/injectStyle';
+import __uniqid from '../../../js/string/uniqid.js';
+import __easeOut from '../../../shared/easing/easeOutQuad.js';
+import __easeInterval from '../../../shared/function/easeInterval.js';
+import __clamp from '../../../shared/math/clamp.js';
+import __easeClamp from '../../../shared/math/easeClamp.js';
+import __onDrag from '../detect/onDrag.js';
+import __elementAreaStats from '../element/elementAreaStats.js';
+import __injectStyle from '../inject/injectStyle.js';
 
 /**
  * @name      slideable

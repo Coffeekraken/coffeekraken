@@ -1,5 +1,5 @@
-import __SCarpenterAppComponent from './SCarpenterAppComponent';
-import __SCarpenterPageAdapter from './SCarpenterPageAdapter';
+import __SCarpenterAppComponent from './SCarpenterAppComponent.js';
+import __SCarpenterPageAdapter from './SCarpenterPageAdapter.js';
 
 export interface ISCarpenterPageSettings {}
 

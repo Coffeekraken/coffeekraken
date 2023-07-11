@@ -1,3 +1,3 @@
-import SDataFilePhp from './SDataFilePhp';
-export * from './SDataFilePhp';
+import SDataFilePhp from './SDataFilePhp.js';
+export * from './SDataFilePhp.js';
 export default SDataFilePhp;

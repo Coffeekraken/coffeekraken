@@ -4,7 +4,7 @@ import __SPromise from '@coffeekraken/s-promise';
 import { __dirname } from '@coffeekraken/sugar/fs';
 import __fs from 'fs';
 import __os from 'os';
-import __SCliNvmAutoSwitchParamsInterface from '../../node/nvm/interface/SCliNvmAutoSwitchParamsInterface';
+import __SCliNvmAutoSwitchParamsInterface from '../../node/nvm/interface/SCliNvmAutoSwitchParamsInterface.js';
 
 export default (stringArgs = '') => {
     return new __SPromise(

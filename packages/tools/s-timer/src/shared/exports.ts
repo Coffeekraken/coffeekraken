@@ -1,5 +1,5 @@
-import STimer from './STimer';
+import STimer from './STimer.js';
 
-export * from './STimer';
+export * from './STimer.js';
 
 export default STimer;

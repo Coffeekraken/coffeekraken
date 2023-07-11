@@ -1,6 +1,6 @@
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
-import __packageRootDir from '../../path/packageRootDir';
-import __packageJsonSync from '../packageJsonSync';
+import __packageRootDir from '../../path/packageRootDir.js';
+import __packageJsonSync from '../packageJsonSync.js';
 
 describe('sugar.node.npm.utils.packageJson', () => {
     it('Should fetch the "chokidar" package.json correctly', async () => {

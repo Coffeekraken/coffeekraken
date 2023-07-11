@@ -18,15 +18,15 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.__getAvailableInterfaceTypes = exports.SInterfaceTerminalRenderer = exports.SInterfaceRenderer = void 0;
-const exports_1 = require("../shared/exports");
-Object.defineProperty(exports, "__getAvailableInterfaceTypes", { enumerable: true, get: function () { return exports_1.__getAvailableInterfaceTypes; } });
-const SInterface_1 = __importDefault(require("./SInterface"));
-const SInterfaceRenderer_1 = __importDefault(require("./renderers/SInterfaceRenderer"));
-exports.SInterfaceRenderer = SInterfaceRenderer_1.default;
-const SInterfaceTerminalRenderer_1 = __importDefault(require("./renderers/SInterfaceTerminalRenderer"));
-exports.SInterfaceTerminalRenderer = SInterfaceTerminalRenderer_1.default;
-__exportStar(require("./SInterface"), exports);
-__exportStar(require("./renderers/SInterfaceRenderer"), exports);
-__exportStar(require("./renderers/SInterfaceTerminalRenderer"), exports);
-exports.default = SInterface_1.default;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0FBQUEsK0NBQWlFO0FBVTdELDZHQVZLLHNDQUE0QixPQVVMO0FBVGhDLDhEQUFzQztBQUN0Qyx3RkFBZ0U7QUFNNUQsNkJBTkcsNEJBQWtCLENBTUg7QUFMdEIsd0dBQWdGO0FBTTVFLHFDQU5HLG9DQUEwQixDQU1IO0FBTDlCLCtDQUE2QjtBQUM3QixpRUFBK0M7QUFDL0MseUVBQXVEO0FBTXZELGtCQUFlLG9CQUFVLENBQUMifQ==
+const exports_js_1 = require("../shared/exports.js");
+Object.defineProperty(exports, "__getAvailableInterfaceTypes", { enumerable: true, get: function () { return exports_js_1.__getAvailableInterfaceTypes; } });
+const SInterface_js_1 = __importDefault(require("./SInterface.js"));
+const SInterfaceRenderer_js_1 = __importDefault(require("./renderers/SInterfaceRenderer.js"));
+exports.SInterfaceRenderer = SInterfaceRenderer_js_1.default;
+const SInterfaceTerminalRenderer_js_1 = __importDefault(require("./renderers/SInterfaceTerminalRenderer.js"));
+exports.SInterfaceTerminalRenderer = SInterfaceTerminalRenderer_js_1.default;
+__exportStar(require("./SInterface.js"), exports);
+__exportStar(require("./renderers/SInterfaceRenderer.js"), exports);
+__exportStar(require("./renderers/SInterfaceTerminalRenderer.js"), exports);
+exports.default = SInterface_js_1.default;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0FBQUEscURBQW9FO0FBVWhFLDZHQVZLLHlDQUE0QixPQVVMO0FBVGhDLG9FQUF5QztBQUN6Qyw4RkFBbUU7QUFNL0QsNkJBTkcsK0JBQWtCLENBTUg7QUFMdEIsOEdBQW1GO0FBTS9FLHFDQU5HLHVDQUEwQixDQU1IO0FBTDlCLGtEQUFnQztBQUNoQyxvRUFBa0Q7QUFDbEQsNEVBQTBEO0FBTTFELGtCQUFlLHVCQUFVLENBQUMifQ==

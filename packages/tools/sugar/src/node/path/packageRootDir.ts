@@ -1,7 +1,7 @@
 // @ts-nocheck
 
-import __objectHash from '../../shared/object/objectHash';
-import __isFile from '../is/isFile';
+import __objectHash from '../../shared/object/objectHash.js';
+import __isFile from '../is/isFile.js';
 
 import __findPkgJson from 'find-package-json';
 
@@ -26,7 +26,7 @@ import __findPkgJson from 'find-package-json';
  * @return          {String}                                      The finded package path or false if not finded
  *
  * @snippet         __packageRootDir()
- * 
+ *
  * @example         js
  * import { __packageRootDir } from '@coffeekraken/sugar/path';
  * const root = __packageRootDir();

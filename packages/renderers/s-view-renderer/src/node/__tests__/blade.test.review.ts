@@ -1,5 +1,5 @@
-import __SViewRenderer from '../SViewRenderer';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
+import __SViewRenderer from '../SViewRenderer.js';
 
 describe('s-view.blade', () => {
     it('Should compile the passed blade view correctly', async () => {

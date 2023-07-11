@@ -5,10 +5,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 // @ts-nocheck
 const fs_1 = __importDefault(require("fs"));
-const isChildProcess_1 = __importDefault(require("../../shared/is/isChildProcess"));
-const readJsonSync_1 = __importDefault(require("../fs/readJsonSync"));
-const writeJsonSync_1 = __importDefault(require("../fs/writeJsonSync"));
-const systemTmpDir_1 = __importDefault(require("../path/systemTmpDir"));
+const isChildProcess_js_1 = __importDefault(require("../../shared/is/isChildProcess.js"));
+const readJsonSync_js_1 = __importDefault(require("../fs/readJsonSync.js"));
+const writeJsonSync_js_1 = __importDefault(require("../fs/writeJsonSync.js"));
+const systemTmpDir_js_1 = __importDefault(require("../path/systemTmpDir.js"));
 /**
  * @name            sharedContext
  * @namespace            node.process
@@ -46,19 +46,19 @@ const systemTmpDir_1 = __importDefault(require("../path/systemTmpDir"));
  */
 function __sharedContext(data) {
     // get the context id. Either the pid, or the ppid
-    const contextId = (0, isChildProcess_1.default)() ? process.ppid : process.pid, contextPath = `${(0, systemTmpDir_1.default)()}/shared-context-${contextId}.json`;
+    const contextId = (0, isChildProcess_js_1.default)() ? process.ppid : process.pid, contextPath = `${(0, systemTmpDir_js_1.default)()}/shared-context-${contextId}.json`;
     // check if we have some data
     if (data) {
-        (0, writeJsonSync_1.default)(contextPath, data);
+        (0, writeJsonSync_js_1.default)(contextPath, data);
         return data;
     }
     // otherwise, we just read the data if some are defined
     if (fs_1.default.existsSync(contextPath)) {
-        const json = (0, readJsonSync_1.default)(contextPath);
+        const json = (0, readJsonSync_js_1.default)(contextPath);
         return json;
     }
     // otherwise, return an empty context
     return {};
 }
 exports.default = __sharedContext;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7O0FBQUEsY0FBYztBQUNkLDRDQUFzQjtBQUN0QixvRkFBOEQ7QUFDOUQsc0VBQWdEO0FBQ2hELHdFQUFrRDtBQUNsRCx3RUFBa0Q7QUFFbEQ7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0FrQ0c7QUFDSCxTQUF3QixlQUFlLENBQUMsSUFBUztJQUM3QyxrREFBa0Q7SUFDbEQsTUFBTSxTQUFTLEdBQUcsSUFBQSx3QkFBZ0IsR0FBRSxDQUFDLENBQUMsQ0FBQyxPQUFPLENBQUMsSUFBSSxDQUFDLENBQUMsQ0FBQyxPQUFPLENBQUMsR0FBRyxFQUM3RCxXQUFXLEdBQUcsR0FBRyxJQUFBLHNCQUFjLEdBQUUsbUJBQW1CLFNBQVMsT0FBTyxDQUFDO0lBRXpFLDZCQUE2QjtJQUM3QixJQUFJLElBQUksRUFBRTtRQUNOLElBQUEsdUJBQWUsRUFBQyxXQUFXLEVBQUUsSUFBSSxDQUFDLENBQUM7UUFDbkMsT0FBTyxJQUFJLENBQUM7S0FDZjtJQUVELHVEQUF1RDtJQUN2RCxJQUFJLFlBQUksQ0FBQyxVQUFVLENBQUMsV0FBVyxDQUFDLEVBQUU7UUFDOUIsTUFBTSxJQUFJLEdBQUcsSUFBQSxzQkFBYyxFQUFDLFdBQVcsQ0FBQyxDQUFDO1FBQ3pDLE9BQU8sSUFBSSxDQUFDO0tBQ2Y7SUFFRCxxQ0FBcUM7SUFDckMsT0FBTyxFQUFFLENBQUM7QUFDZCxDQUFDO0FBbkJELGtDQW1CQyJ9
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7O0FBQUEsY0FBYztBQUNkLDRDQUFzQjtBQUN0QiwwRkFBaUU7QUFDakUsNEVBQW1EO0FBQ25ELDhFQUFxRDtBQUNyRCw4RUFBcUQ7QUFFckQ7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0FrQ0c7QUFDSCxTQUF3QixlQUFlLENBQUMsSUFBUztJQUM3QyxrREFBa0Q7SUFDbEQsTUFBTSxTQUFTLEdBQUcsSUFBQSwyQkFBZ0IsR0FBRSxDQUFDLENBQUMsQ0FBQyxPQUFPLENBQUMsSUFBSSxDQUFDLENBQUMsQ0FBQyxPQUFPLENBQUMsR0FBRyxFQUM3RCxXQUFXLEdBQUcsR0FBRyxJQUFBLHlCQUFjLEdBQUUsbUJBQW1CLFNBQVMsT0FBTyxDQUFDO0lBRXpFLDZCQUE2QjtJQUM3QixJQUFJLElBQUksRUFBRTtRQUNOLElBQUEsMEJBQWUsRUFBQyxXQUFXLEVBQUUsSUFBSSxDQUFDLENBQUM7UUFDbkMsT0FBTyxJQUFJLENBQUM7S0FDZjtJQUVELHVEQUF1RDtJQUN2RCxJQUFJLFlBQUksQ0FBQyxVQUFVLENBQUMsV0FBVyxDQUFDLEVBQUU7UUFDOUIsTUFBTSxJQUFJLEdBQUcsSUFBQSx5QkFBYyxFQUFDLFdBQVcsQ0FBQyxDQUFDO1FBQ3pDLE9BQU8sSUFBSSxDQUFDO0tBQ2Y7SUFFRCxxQ0FBcUM7SUFDckMsT0FBTyxFQUFFLENBQUM7QUFDZCxDQUFDO0FBbkJELGtDQW1CQyJ9

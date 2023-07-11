@@ -1,6 +1,6 @@
 import __fs from 'fs';
-import type { IPackagePathSettings } from './packagePath';
-import __packagePathSync from './packagePathSync';
+import type { IPackagePathSettings } from './packagePath.js';
+import __packagePathSync from './packagePathSync.js';
 
 /**
  * @name                packageJsonSync
@@ -17,11 +17,11 @@ import __packagePathSync from './packagePathSync';
  * @return      {JSON}                      The package.json content
  *
  * @snippet         __packageJsonSync()
- * 
+ *
  * @example         js
  * import { __packageJsonSync } from '@coffeekraken/sugar/npm`;
  * __packageJsonSync('lodash');
- * 
+ *
  * @todo        Implement a cache strategy to avoid making same process again and again
  *
  * @since       2.0.0

@@ -1,6 +1,6 @@
 // @ts-nocheck
 
-import __camelize from './camelize';
+import __camelize from './camelize.js';
 
 /**
  * @name        camelCase
@@ -20,7 +20,7 @@ import __camelize from './camelize';
  * @todo      tests
  *
  * @snippet         __camelCase($1)
- * 
+ *
  * @example     js
  * import { __camelCase } from '@coffeekraken/sugar/string';
  * __camelCase('hello world'); // => helloWorld

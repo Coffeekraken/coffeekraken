@@ -1,6 +1,6 @@
 // @ts-nocheck
 
-import __md5 from '../crypto/md5';
+import __md5 from '../crypto/md5.js';
 
 /**
  * @name            gravatarUrl
@@ -22,7 +22,7 @@ import __md5 from '../crypto/md5';
  * @todo      move into "gravatar" folder
  *
  * @snippet         __gravatarUrl($1)
- * 
+ *
  * @example       js
  * import { __gravatarUrl } from '@coffeekraken/sugar/url';
  * __gravatarUrl('olivier.bossel@gmail.com'); // https://www.gravatar.com/avatar/b5df60055b6287bb7c90c0078ce20a5f

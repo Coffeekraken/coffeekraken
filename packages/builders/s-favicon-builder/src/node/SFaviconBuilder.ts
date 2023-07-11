@@ -9,7 +9,7 @@ import { __packageRootDir } from '@coffeekraken/sugar/path';
 import __favicons from 'favicons';
 import __fs from 'fs';
 import __path from 'path';
-import __SFaviconBuilderBuildParamsInterface from './interface/SFaviconBuilderBuildParamsInterface';
+import __SFaviconBuilderBuildParamsInterface from './interface/SFaviconBuilderBuildParamsInterface.js';
 
 /**
  * @name            SFaviconBuilder

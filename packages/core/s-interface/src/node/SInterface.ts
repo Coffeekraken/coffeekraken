@@ -1,8 +1,8 @@
-import SInterface from '../shared/SInterface';
-import SInterfaceTerminalRenderer from './renderers/SInterfaceTerminalRenderer';
+import SInterface from '../shared/SInterface.js';
+import SInterfaceTerminalRenderer from './renderers/SInterfaceTerminalRenderer.js';
 
 // register renderers
 SInterface.registerRenderer(SInterfaceTerminalRenderer);
 
-export * from '../shared/SInterface';
+export * from '../shared/SInterface.js';
 export default SInterface;

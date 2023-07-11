@@ -1,6 +1,6 @@
 // @ts-nocheck
 
-import _SInterface from '../../../node/class/SInterface';
+import _SInterface from '../../../node/class/SInterface.js';
 
 export default class SNpmBinInterface extends _SInterface {
     static get _definition() {

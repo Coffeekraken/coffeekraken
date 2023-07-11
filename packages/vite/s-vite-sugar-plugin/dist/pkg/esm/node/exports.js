@@ -1,4 +1,4 @@
-import sVitePluginSugar from './sVitePluginSugar';
-export * from './sVitePluginSugar';
+import sVitePluginSugar from './sVitePluginSugar.js';
+export * from './sVitePluginSugar.js';
 export default sVitePluginSugar;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sZ0JBQWdCLE1BQU0sb0JBQW9CLENBQUM7QUFFbEQsY0FBYyxvQkFBb0IsQ0FBQztBQUVuQyxlQUFlLGdCQUFnQixDQUFDIn0=
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sZ0JBQWdCLE1BQU0sdUJBQXVCLENBQUM7QUFFckQsY0FBYyx1QkFBdUIsQ0FBQztBQUV0QyxlQUFlLGdCQUFnQixDQUFDIn0=

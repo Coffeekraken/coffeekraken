@@ -2,10 +2,10 @@
 
 import __SPromise from '@coffeekraken/s-promise';
 import __fastdom from 'fastdom';
-import __deepMerge from '../../../shared/object/deepMerge';
-import __uniqid from '../../string/uniqid';
-import type { TWhenTrigger } from '../detect/when';
-import __when from '../detect/when';
+import __deepMerge from '../../../shared/object/deepMerge.js';
+import __uniqid from '../../string/uniqid.js';
+import type { TWhenTrigger } from '../detect/when.js';
+import __when from '../detect/when.js';
 
 /**
  * @name            querySelectorLive

@@ -1,6 +1,6 @@
-import __SRangeComponent from './SRangeComponent';
-import __define from './define';
+import __SRangeComponent from './SRangeComponent.js';
+import __define from './define.js';
 
-export * from './SRangeComponent';
+export * from './SRangeComponent.js';
 export { __define };
 export default __SRangeComponent;

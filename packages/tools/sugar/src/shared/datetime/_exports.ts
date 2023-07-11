@@ -1,6 +1,6 @@
-import __formatDuration from './formatDuration';
-import __utcTime from './utcTime';
-import __wait from './wait';
+import __formatDuration from './formatDuration.js';
+import __utcTime from './utcTime.js';
+import __wait from './wait.js';
 
-export * from './convertTime';
+export * from './convertTime.js';
 export { __formatDuration, __utcTime, __wait };

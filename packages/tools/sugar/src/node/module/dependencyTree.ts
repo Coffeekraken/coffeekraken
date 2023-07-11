@@ -2,10 +2,10 @@ import __SFile from '@coffeekraken/s-file';
 import __SPromise from '@coffeekraken/s-promise';
 import __fs from 'fs';
 import __path from 'path';
-import __md5 from '../../shared/crypto/md5';
-import __deepMerge from '../../shared/object/deepMerge';
-import __packageRootDir from '../path/packageRootDir';
-import __extractImport from './extractImport';
+import __md5 from '../../shared/crypto/md5.js';
+import __deepMerge from '../../shared/object/deepMerge.js';
+import __packageRootDir from '../path/packageRootDir.js';
+import __extractImport from './extractImport.js';
 
 /**
  * @name                dependencyTree

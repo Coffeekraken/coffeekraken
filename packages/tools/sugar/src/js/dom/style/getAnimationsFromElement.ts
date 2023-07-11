@@ -1,6 +1,6 @@
 // @ts-nocheck
 
-import __getAnimationProperties from './getAnimationProperties';
+import __getAnimationProperties from './getAnimationProperties.js';
 
 /**
  * @name      getAnimationsFromElement

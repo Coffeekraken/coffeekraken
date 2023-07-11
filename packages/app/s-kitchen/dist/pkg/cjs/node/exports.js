@@ -17,7 +17,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const SKitchen_1 = __importDefault(require("./SKitchen"));
-__exportStar(require("./SKitchen"), exports);
-exports.default = SKitchen_1.default;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7QUFBQSwwREFBa0M7QUFFbEMsNkNBQTJCO0FBRTNCLGtCQUFlLGtCQUFRLENBQUMifQ==
+const SKitchen_js_1 = __importDefault(require("./SKitchen.js"));
+__exportStar(require("./SKitchen.js"), exports);
+exports.default = SKitchen_js_1.default;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7QUFBQSxnRUFBcUM7QUFFckMsZ0RBQThCO0FBRTlCLGtCQUFlLHFCQUFRLENBQUMifQ==

@@ -1,4 +1,4 @@
-import SPostcssBuilder from './SPostcssBuilder';
-export * from './SPostcssBuilder';
+import SPostcssBuilder from './SPostcssBuilder.js';
+export * from './SPostcssBuilder.js';
 export default SPostcssBuilder;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sZUFBZSxNQUFNLG1CQUFtQixDQUFDO0FBQ2hELGNBQWMsbUJBQW1CLENBQUM7QUFDbEMsZUFBZSxlQUFlLENBQUMifQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sZUFBZSxNQUFNLHNCQUFzQixDQUFDO0FBQ25ELGNBQWMsc0JBQXNCLENBQUM7QUFDckMsZUFBZSxlQUFlLENBQUMifQ==

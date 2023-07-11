@@ -2,9 +2,9 @@ import { __isChildProcess } from '@coffeekraken/sugar/is';
 import { __deepMerge } from '@coffeekraken/sugar/object';
 import __SEventEmitterBase, {
     ISEventEmitterSettings,
-} from '../shared/SEventEmitter';
+} from '../shared/SEventEmitter.js';
 
-// export * from '../shared/SEventEmitter';
+// export * from '../shared/SEventEmitter.js';
 
 (async () => {
     const { default: __nodeIpc } = await import('node-ipc');

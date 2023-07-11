@@ -1,4 +1,4 @@
-import __higherRule from './higherRule';
+import __higherRule from './higherRule.js';
 
 export interface ICloneTreeSettings {
     empty: boolean;

@@ -1,5 +1,5 @@
-import SFront from './SFront';
+import SFront from './SFront.js';
 
-export * from './SFront';
+export * from './SFront.js';
 
 export default SFront;

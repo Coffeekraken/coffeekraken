@@ -1,6 +1,6 @@
 import __path from 'path';
-import __dirname from '../node/fs/dirname';
-import __packageRootDir from '../node/path/packageRootDir';
+import __dirname from '../node/fs/dirname.js';
+import __packageRootDir from '../node/path/packageRootDir.js';
 
 export default function (api) {
     if (api.env.platform !== 'node') return;

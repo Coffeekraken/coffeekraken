@@ -1,5 +1,5 @@
-import __SPostcssBuilderBuildParamsInterface from '../node/interface/SPostcssBuilderBuildParamsInterface';
-import __SPostcssBuilder from '../node/SPostcssBuilder';
+import __SPostcssBuilderBuildParamsInterface from '../node/interface/SPostcssBuilderBuildParamsInterface.js';
+import __SPostcssBuilder from '../node/SPostcssBuilder.js';
 
 export default function build(stringArgs = '') {
     return new Promise(async (resolve) => {

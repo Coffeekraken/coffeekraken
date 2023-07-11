@@ -1,7 +1,7 @@
 // @ts-nocheck
 
 import __SPromise from '@coffeekraken/s-promise';
-import __addEventListener from './addEventListener';
+import __addEventListener from './addEventListener.js';
 
 /**
  * @name        addEventListenerOnce

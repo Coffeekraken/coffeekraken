@@ -1,14 +1,14 @@
-import __closest from './closest';
-import __closestNotVisible from './closestNotVisible';
-import __closestScrollable from './closestScrollable';
-import __elementsInViewport from './elementsInViewport';
-import __matches from './matches';
-import __next from './next';
-import __previous from './previous';
-import __querySelector from './querySelector';
-import __querySelectorAll from './querySelectorAll';
-import __querySelectorLive from './querySelectorLive';
-import __querySelectorUp from './querySelectorUp';
+import __closest from './closest.js';
+import __closestNotVisible from './closestNotVisible.js';
+import __closestScrollable from './closestScrollable.js';
+import __elementsInViewport from './elementsInViewport.js';
+import __matches from './matches.js';
+import __next from './next.js';
+import __previous from './previous.js';
+import __querySelector from './querySelector.js';
+import __querySelectorAll from './querySelectorAll.js';
+import __querySelectorLive from './querySelectorLive.js';
+import __querySelectorUp from './querySelectorUp.js';
 
 export {
     __closest,

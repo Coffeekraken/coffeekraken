@@ -1,3 +1,3 @@
-import SConductor from './SConductor';
-export * from './SConductor';
+import SConductor from './SConductor.js';
+export * from './SConductor.js';
 export default SConductor;

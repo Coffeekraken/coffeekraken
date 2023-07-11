@@ -1,8 +1,8 @@
 // @ts-nocheck
 
-import __offsetFromViewport from '../dom/offset/offsetFromViewport';
-import __forceRedraw from '../dom/utilities/forceRedraw';
-import __SSvgFilter from './SSvgFilter';
+import __offsetFromViewport from '../dom/offset/offsetFromViewport.js';
+import __forceRedraw from '../dom/utilities/forceRedraw.js';
+import __SSvgFilter from './SSvgFilter.js';
 
 /**
  * @name 		SMotionblurSvgFilter

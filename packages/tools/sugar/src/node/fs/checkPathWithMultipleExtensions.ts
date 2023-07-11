@@ -1,5 +1,5 @@
 import __fs from 'fs';
-import __extension from '../fs/extension';
+import __extension from '../fs/extension.js';
 
 /**
  * @name            checkPathWithMultipleExtensions

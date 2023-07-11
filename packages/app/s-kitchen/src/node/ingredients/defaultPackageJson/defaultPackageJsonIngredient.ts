@@ -1,4 +1,4 @@
-import type { ISKitchenIngredient } from '../../SKitchen';
+import type { ISKitchenIngredient } from '../../SKitchen.js';
 
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
 import { __deepMerge } from '@coffeekraken/sugar/object';

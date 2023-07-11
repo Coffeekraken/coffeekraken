@@ -1,7 +1,7 @@
 // @ts-nocheck
 
-import type { ISClassmapBaseSettings } from '../shared/SClassmapBase';
-import __SClassmapBase from '../shared/SClassmapBase';
+import type { ISClassmapBaseSettings } from '../shared/SClassmapBase.js';
+import __SClassmapBase from '../shared/SClassmapBase.js';
 
 /**
  * @name                SClassmap

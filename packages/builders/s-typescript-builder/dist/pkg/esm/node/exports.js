@@ -1,4 +1,4 @@
-import __STypescriptBuilder from './STypescriptBuilder';
-export * from './STypescriptBuilder';
+import __STypescriptBuilder from './STypescriptBuilder.js';
+export * from './STypescriptBuilder.js';
 export default __STypescriptBuilder;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sb0JBQW9CLE1BQU0sc0JBQXNCLENBQUM7QUFFeEQsY0FBYyxzQkFBc0IsQ0FBQztBQUVyQyxlQUFlLG9CQUFvQixDQUFDIn0=
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sb0JBQW9CLE1BQU0seUJBQXlCLENBQUM7QUFFM0QsY0FBYyx5QkFBeUIsQ0FBQztBQUV4QyxlQUFlLG9CQUFvQixDQUFDIn0=

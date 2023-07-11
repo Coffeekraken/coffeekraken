@@ -1,4 +1,4 @@
-import __loopsCount from './loopsCount';
-import __speedIndex from './speedIndex';
+import __loopsCount from './loopsCount.js';
+import __speedIndex from './speedIndex.js';
 
 export { __loopsCount, __speedIndex };

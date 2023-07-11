@@ -1,6 +1,6 @@
 import __SPromise from '@coffeekraken/s-promise';
-import __uniqid from '../string/uniqid';
-import __hotkey from './hotkey';
+import __uniqid from '../string/uniqid.js';
+import __hotkey from './hotkey.js';
 
 /**
  * @name 		escaoeQueue

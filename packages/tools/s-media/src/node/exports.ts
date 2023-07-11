@@ -1,5 +1,5 @@
-import SMedia from './SMedia';
+import SMedia from './SMedia.js';
 
-export * from './SMedia';
+export * from './SMedia.js';
 
 export default SMedia;

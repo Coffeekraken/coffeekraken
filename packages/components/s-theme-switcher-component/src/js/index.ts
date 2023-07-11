@@ -1,2 +1,2 @@
-import { define } from './SThemeSwitcherComponent';
+import { define } from './SThemeSwitcherComponent.js';
 define();

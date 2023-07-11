@@ -1,6 +1,6 @@
 // @ts-nocheck
 
-import __toString from '../string/toString';
+import __toString from '../string/toString.js';
 
 /**
  * @name                            replaceTags
@@ -21,7 +21,7 @@ import __toString from '../string/toString';
  * @todo      tests
  *
  * @snippet         __replaceTags($1m $2)
- * 
+ *
  * @example             js
  * import { __replaceTags } from '@coffeekraken/sugar/html';
  *  __replaceTags('<span>Hello</span> world', {

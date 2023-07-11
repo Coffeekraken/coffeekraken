@@ -1,4 +1,4 @@
-import __ucBrowser from '../ucBrowser';
+import __ucBrowser from '../ucBrowser.js';
 
 describe('sugar.js.is.ucBrowser', () => {
     afterEach(() => {

@@ -1,19 +1,19 @@
-import __camelCaseProps from '../camelCaseProps';
+import __camelCaseProps from '../camelCaseProps.js';
 
 describe('sugar.shared.object.camelCaseProps', () => {
     it('Should process a simple 1 level object correctly', () => {
         const newObj = __camelCaseProps({
             'hello-world': true,
             plop: 'world',
-            'plop-World': true
+            'plop-World': true,
         });
 
         expect(newObj).toEqual({
             helloWorld: true,
             plop: 'world',
-            plopWorld: true
+            plopWorld: true,
         });
-    })
+    });
 
     it('Should process a multiple levels object correctly', () => {
         const newObj = __camelCaseProps({
@@ -21,8 +21,8 @@ describe('sugar.shared.object.camelCaseProps', () => {
             plop: 'world',
             'plop-World': {
                 yep: 'ok',
-                'plop_please': false
-            }
+                plop_please: false,
+            },
         });
 
         expect(newObj).toEqual({
@@ -30,9 +30,8 @@ describe('sugar.shared.object.camelCaseProps', () => {
             plop: 'world',
             plopWorld: {
                 yep: 'ok',
-                plopPlease: false
-            }
+                plopPlease: false,
+            },
         });
-    })
-
-})
+    });
+});

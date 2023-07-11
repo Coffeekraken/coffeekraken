@@ -4,8 +4,8 @@ import type { ISLayoutData } from '@specim3n/types';
 
 import __SMedia from '@coffeekraken/s-media';
 import { __upperFirst } from '@coffeekraken/sugar/string';
-import type { ISSpecsEditorWidgetDeps } from '../SSpecsEditorWidget';
-import __SSpecsEditorWidget from '../SSpecsEditorWidget';
+import type { ISSpecsEditorWidgetDeps } from '../SSpecsEditorWidget.js';
+import __SSpecsEditorWidget from '../SSpecsEditorWidget.js';
 
 export interface ISSpecsEditorComponentLayoutWidgetLayoutObj {
     id: string;

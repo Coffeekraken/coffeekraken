@@ -1,1 +1,1 @@
-export * from './nodeTypes';
+export * from './nodeTypes.js';

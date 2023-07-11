@@ -1,4 +1,4 @@
-import __SFrontendChecker from '../node/SFrontendChecker';
+import __SFrontendChecker from '../node/SFrontendChecker.js';
 
 export default function check(stringArgs = '') {
     return new Promise(async (resolve) => {

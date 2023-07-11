@@ -2,7 +2,7 @@
 
 import __SClass from '@coffeekraken/s-class';
 import { __deepMerge } from '@coffeekraken/sugar/object';
-import __SFrontendCheckerSettingsInterface from './interface/SFrontendCheckerSettingsInterface';
+import __SFrontendCheckerSettingsInterface from './interface/SFrontendCheckerSettingsInterface.js';
 
 /**
  * @name                SFrontendChecker

@@ -8,7 +8,7 @@ import { __querySelectorLive } from '@coffeekraken/sugar/dom';
 import { __camelCase, __parse } from '@coffeekraken/sugar/string';
 
 import __css from '../../../../src/css/s-form-validate.css'; // relative to /dist/pkg/esm/js
-import __SFormValidateFeatureInterface from './interface/SFormValidateFeatureInterface';
+import __SFormValidateFeatureInterface from './interface/SFormValidateFeatureInterface.js';
 
 import { __format } from '@coffeekraken/sugar/string';
 

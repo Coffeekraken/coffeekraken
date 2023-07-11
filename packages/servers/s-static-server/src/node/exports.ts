@@ -1,3 +1,3 @@
-import __SStaticServer from './SStaticServer';
-export * from './SStaticServer';
+import __SStaticServer from './SStaticServer.js';
+export * from './SStaticServer.js';
 export default __SStaticServer;

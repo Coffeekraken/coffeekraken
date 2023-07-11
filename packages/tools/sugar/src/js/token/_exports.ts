@@ -1,1 +1,1 @@
-export * from '../../shared/token/_exports';
+export * from '../../shared/token/_exports.js';

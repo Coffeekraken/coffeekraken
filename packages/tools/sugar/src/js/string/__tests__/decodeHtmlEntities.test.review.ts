@@ -2,7 +2,7 @@
  * @jest-environment jsdom
  */
 
-import __decodeHtmlEntities from '../decodeHtmlEntities';
+import __decodeHtmlEntities from '../decodeHtmlEntities.js';
 
 describe('sugar.js.html.decodeHtmlEntities', () => {
     it('Should process the passed string correctly', (done) => {

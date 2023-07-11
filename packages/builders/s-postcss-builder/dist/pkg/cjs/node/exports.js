@@ -17,7 +17,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const SPostcssBuilder_1 = __importDefault(require("./SPostcssBuilder"));
-__exportStar(require("./SPostcssBuilder"), exports);
-exports.default = SPostcssBuilder_1.default;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7QUFBQSx3RUFBZ0Q7QUFDaEQsb0RBQWtDO0FBQ2xDLGtCQUFlLHlCQUFlLENBQUMifQ==
+const SPostcssBuilder_js_1 = __importDefault(require("./SPostcssBuilder.js"));
+__exportStar(require("./SPostcssBuilder.js"), exports);
+exports.default = SPostcssBuilder_js_1.default;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7QUFBQSw4RUFBbUQ7QUFDbkQsdURBQXFDO0FBQ3JDLGtCQUFlLDRCQUFlLENBQUMifQ==

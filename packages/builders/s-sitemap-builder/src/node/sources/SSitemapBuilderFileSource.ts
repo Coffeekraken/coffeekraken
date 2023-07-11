@@ -1,11 +1,11 @@
 import __SGlob from '@coffeekraken/s-glob';
 import __STypescriptBuilder from '@coffeekraken/s-typescript-builder';
 import { __deepMerge } from '@coffeekraken/sugar/object';
-import type { ISSitemapBuilderBuildParams } from '../interface/SSitemapBuildIParamsInterface';
-import type { ISSitemapBuilderResultItem } from '../SSitemapBuilder';
+import type { ISSitemapBuilderResultItem } from '../SSitemapBuilder.js';
 import __SSitemapBuilderSource, {
     ISSitemapBuilderSourceResult,
-} from '../SSitemapBuilderSource';
+} from '../SSitemapBuilderSource.js';
+import type { ISSitemapBuilderBuildParams } from '../interface/SSitemapBuildIParamsInterface.js';
 
 /**
  * @name            SSitemapBuilderFileSource

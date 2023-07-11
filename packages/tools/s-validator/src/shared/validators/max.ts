@@ -1,10 +1,10 @@
 // @ts-nocheck
 import { __deepMerge } from '@coffeekraken/sugar/object';
-import __en from '../i18n/en';
 import type {
     ISValidatorResult,
     ISValidatorValidatorSettings,
-} from '../SValidator';
+} from '../SValidator.js';
+import __en from '../i18n/en.js';
 
 /**
  * @name            max

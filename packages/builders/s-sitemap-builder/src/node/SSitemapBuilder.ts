@@ -7,8 +7,8 @@ import { __isClass } from '@coffeekraken/sugar/is';
 import { __deepMerge } from '@coffeekraken/sugar/object';
 import { __packageRootDir } from '@coffeekraken/sugar/path';
 import __path from 'path';
-import __SSitemapBuilderBuildParamsInterface from './interface/SSitemapBuilderBuildParamsInterface';
-import __SSitemapBuilderSource from './SSitemapBuilderSource';
+import __SSitemapBuilderSource from './SSitemapBuilderSource.js';
+import __SSitemapBuilderBuildParamsInterface from './interface/SSitemapBuilderBuildParamsInterface.js';
 
 /**
  * @name            SSitemapBuilder

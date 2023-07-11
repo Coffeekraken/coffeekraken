@@ -17,7 +17,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const SMarkdownBuilder_1 = __importDefault(require("./SMarkdownBuilder"));
-__exportStar(require("./SMarkdownBuilder"), exports);
-exports.default = SMarkdownBuilder_1.default;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7QUFBQSwwRUFBa0Q7QUFDbEQscURBQW1DO0FBQ25DLGtCQUFlLDBCQUFnQixDQUFDIn0=
+const SMarkdownBuilder_js_1 = __importDefault(require("./SMarkdownBuilder.js"));
+__exportStar(require("./SMarkdownBuilder.js"), exports);
+exports.default = SMarkdownBuilder_js_1.default;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7QUFBQSxnRkFBcUQ7QUFDckQsd0RBQXNDO0FBQ3RDLGtCQUFlLDZCQUFnQixDQUFDIn0=

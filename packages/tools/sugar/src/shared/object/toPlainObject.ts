@@ -1,6 +1,6 @@
 // @ts-nocheck
 
-import __isPlainObject from '../is/isPlainObject';
+import __isPlainObject from '../is/isPlainObject.js';
 
 /**
  * @name                toPlainObject
@@ -21,7 +21,7 @@ import __isPlainObject from '../is/isPlainObject';
  * @todo      tests
  *
  * @snippet         __toPlainObject($1)
- * 
+ *
  * @example           js
  * import { __toPlainObject } from '@coffeekraken/sugar/object';
  * __toPlainObject({ something: 'cool' });

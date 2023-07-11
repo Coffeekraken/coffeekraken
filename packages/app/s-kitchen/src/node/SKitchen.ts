@@ -18,23 +18,23 @@ import { __sharedContext } from '@coffeekraken/sugar/process';
 import type { IDetectProjectTypeResult } from '@coffeekraken/sugar/project';
 import { __detectProjectType } from '@coffeekraken/sugar/project';
 import { __stripAnsi } from '@coffeekraken/sugar/string';
-import __SKitchenAddParamsInterface from './interface/SKitchenAddParamsInterface';
-import __SKitchenListParamsInterface from './interface/SKitchenListParamsInterface';
-import __SFronstackNewParamsInterface from './interface/SKitchenNewParamsInterface';
-import __SKitchenRunParamsInterface from './interface/SKitchenRunParamsInterface';
+import __SKitchenAddParamsInterface from './interface/SKitchenAddParamsInterface.js';
+import __SKitchenListParamsInterface from './interface/SKitchenListParamsInterface.js';
+import __SFronstackNewParamsInterface from './interface/SKitchenNewParamsInterface.js';
+import __SKitchenRunParamsInterface from './interface/SKitchenRunParamsInterface.js';
 
 import { __lowerFirst, __upperFirst } from '@coffeekraken/sugar/string';
-import __defaultPackageJsonIngredient from './ingredients/defaultPackageJson/defaultPackageJsonIngredient';
-import __defaultPagesIngredient from './ingredients/defaultPages/defaultPagesIngredient';
-import __defaultScriptsIngredient from './ingredients/defaultScripts/defaultScriptsIngredient';
-import __faviconIngredient from './ingredients/favicon/faviconIngredient';
-import __frontspecIngredient from './ingredients/frontspec/frontspecIngredient';
-import __manifestIngredient from './ingredients/manifest/manifestIngredient';
-import __nvmrcIngredient from './ingredients/nvmrc/nvmrcIngredient';
-import __postcssIngredient from './ingredients/postcss/postcssIngredient';
-import __readmeIngredient from './ingredients/readme/readmeIngredient';
-import __sugarIngredient from './ingredients/sugar/sugarIngredient';
-import __sugarJsonIngredient from './ingredients/sugarJson/sugarJsonIngredient';
+import __defaultPackageJsonIngredient from './ingredients/defaultPackageJson/defaultPackageJsonIngredient.js';
+import __defaultPagesIngredient from './ingredients/defaultPages/defaultPagesIngredient.js';
+import __defaultScriptsIngredient from './ingredients/defaultScripts/defaultScriptsIngredient.js';
+import __faviconIngredient from './ingredients/favicon/faviconIngredient.js';
+import __frontspecIngredient from './ingredients/frontspec/frontspecIngredient.js';
+import __manifestIngredient from './ingredients/manifest/manifestIngredient.js';
+import __nvmrcIngredient from './ingredients/nvmrc/nvmrcIngredient.js';
+import __postcssIngredient from './ingredients/postcss/postcssIngredient.js';
+import __readmeIngredient from './ingredients/readme/readmeIngredient.js';
+import __sugarIngredient from './ingredients/sugar/sugarIngredient.js';
+import __sugarJsonIngredient from './ingredients/sugarJson/sugarJsonIngredient.js';
 
 export interface ISKitchenSettings {}
 

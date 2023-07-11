@@ -1,4 +1,4 @@
-import __findUp from '../findUp';
+import __findUp from '../findUp.js';
 describe('sugar.node.fs.findUp', () => {
     it('Should find a simple file upward correctly', async () => {
         const res = await __findUp('file.jpg', {

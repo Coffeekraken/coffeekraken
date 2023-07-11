@@ -1,5 +1,5 @@
-import __deleteCookie from './deleteCookie';
-import __getCookie from './getCookie';
-import __setCookie from './setCookie';
-export { __deleteCookie, __setCookie, __getCookie };
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sY0FBYyxNQUFNLGdCQUFnQixDQUFDO0FBQzVDLE9BQU8sV0FBVyxNQUFNLGFBQWEsQ0FBQztBQUN0QyxPQUFPLFdBQVcsTUFBTSxhQUFhLENBQUM7QUFFdEMsT0FBTyxFQUFFLGNBQWMsRUFBRSxXQUFXLEVBQUUsV0FBVyxFQUFFLENBQUMifQ==
+import __deleteCookie from './deleteCookie.js';
+import __getCookie from './getCookie.js';
+import __setCookie from './setCookie.js';
+export { __deleteCookie, __getCookie, __setCookie };
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sY0FBYyxNQUFNLG1CQUFtQixDQUFDO0FBQy9DLE9BQU8sV0FBVyxNQUFNLGdCQUFnQixDQUFDO0FBQ3pDLE9BQU8sV0FBVyxNQUFNLGdCQUFnQixDQUFDO0FBRXpDLE9BQU8sRUFBRSxjQUFjLEVBQUUsV0FBVyxFQUFFLFdBQVcsRUFBRSxDQUFDIn0=

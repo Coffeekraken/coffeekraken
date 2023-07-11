@@ -9,7 +9,7 @@ import {
     shift,
 } from '@floating-ui/dom';
 
-import __whenRemoved from '../detect/whenRemoved';
+import __whenRemoved from '../detect/whenRemoved.js';
 
 /**
  * @name        makeFloat

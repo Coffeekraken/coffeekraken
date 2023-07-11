@@ -25,8 +25,8 @@ import {
     ISProcessProcessObj,
     ISProcessResultObject,
     ISProcessSettings,
-} from './ISProcess';
-import __SProcessSettingsInterface from './interface/SProcessSettingsInterface';
+} from './ISProcess.js';
+import __SProcessSettingsInterface from './interface/SProcessSettingsInterface.js';
 
 /**
  * @name                SProcess

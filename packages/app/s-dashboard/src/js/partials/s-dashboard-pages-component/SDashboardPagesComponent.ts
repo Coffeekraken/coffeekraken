@@ -6,9 +6,9 @@ import __SRequest from '@coffeekraken/s-request';
 import { __xmlToJson } from '@coffeekraken/sugar/convert';
 import { css, html, unsafeCSS } from 'lit';
 
-import _SDashboardComponentWidgetInterface from '../../interface/SDashboardComponentWidgetInterface';
+import _SDashboardComponentWidgetInterface from '../../interface/SDashboardComponentWidgetInterface.js';
 
-import __SDashboardPagesComponentAttrsInterface from './interface/SDashboardPagesComponentAttrsInterface';
+import __SDashboardPagesComponentAttrsInterface from './interface/SDashboardPagesComponentAttrsInterface.js';
 
 import __css from './s-dashboard-pages-component.css';
 

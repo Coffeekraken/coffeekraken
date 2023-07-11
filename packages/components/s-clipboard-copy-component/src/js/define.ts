@@ -1,6 +1,6 @@
 import type { ISLitComponentDefineSettings } from '@coffeekraken/s-lit-component';
-import type ISClipboardCopyComponentProps from './SClipboardCopy';
-import __SClipboardCopyWebcomponent from './SClipboardCopy';
+import type ISClipboardCopyComponentProps from './SClipboardCopy.js';
+import __SClipboardCopyWebcomponent from './SClipboardCopy.js';
 
 export default function define(
     props: Partial<ISClipboardCopyComponentProps> = {},

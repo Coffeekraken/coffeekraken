@@ -3,11 +3,11 @@ import __SLitComponent from '@coffeekraken/s-lit-component';
 import { __isInIframe } from '@coffeekraken/sugar/dom';
 import { __deepMerge } from '@coffeekraken/sugar/object';
 import { css, html, unsafeCSS } from 'lit';
-import __SCarpenterComponentInterface from './interface/SCarpenterComponentInterface';
+import __SCarpenterComponentInterface from './interface/SCarpenterComponentInterface.js';
 
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
 
-import __define from './define';
+import __define from './define.js';
 
 // @ts-ignore
 import { __injectIframeContent } from '@coffeekraken/sugar/dom';

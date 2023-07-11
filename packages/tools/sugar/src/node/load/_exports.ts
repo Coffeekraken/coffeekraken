@@ -1,2 +1,2 @@
-import __loadConfigFile from './loadConfigFile';
+import __loadConfigFile from './loadConfigFile.js';
 export { __loadConfigFile };

@@ -1,6 +1,6 @@
-import __SGlitchFeature from './SGlitchFeature';
-import __define from './define';
+import __SGlitchFeature from './SGlitchFeature.js';
+import __define from './define.js';
 
-export * from './SGlitchFeature';
+export * from './SGlitchFeature.js';
 export { __define };
 export default __SGlitchFeature;

@@ -1,6 +1,6 @@
 import type { ISLitComponentDefineSettings } from '@coffeekraken/s-lit-component';
-import type ISRangeComponentProps from './SRangeComponent';
-import __SRangeComponent from './SRangeComponent';
+import type ISRangeComponentProps from './SRangeComponent.js';
+import __SRangeComponent from './SRangeComponent.js';
 
 export default function define(
     props: Partial<ISRangeComponentProps> = {},

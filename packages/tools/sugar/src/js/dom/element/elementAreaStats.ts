@@ -1,6 +1,6 @@
-import __scrollLeft from '../distance/scrollLeft';
-import __scrollTop from '../distance/scrollTop';
-import __traverseUp from '../traverse/traverseUp';
+import __scrollLeft from '../distance/scrollLeft.js';
+import __scrollTop from '../distance/scrollTop.js';
+import __traverseUp from '../traverse/traverseUp.js';
 
 /**
  * @name            elementAreaStats

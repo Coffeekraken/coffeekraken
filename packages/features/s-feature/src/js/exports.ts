@@ -1,5 +1,5 @@
-import __SFeature from './SFeature';
+import __SFeature from './SFeature.js';
 
-export * from './SFeature';
+export * from './SFeature.js';
 
 export default __SFeature;

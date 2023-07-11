@@ -1,10 +1,10 @@
 // @ts-nocheck
 
-import __ensureDirSync from './ensureDirSync';
-import __folderPath from './folderPath';
+import __ensureDirSync from './ensureDirSync.js';
+import __folderPath from './folderPath.js';
 
 import __fs from 'fs';
-import __stringify from '../../shared/json/stringify';
+import __stringify from '../../shared/json/stringify.js';
 
 /**
  * @name        writeJson

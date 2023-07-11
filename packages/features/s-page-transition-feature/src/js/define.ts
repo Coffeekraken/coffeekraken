@@ -1,5 +1,5 @@
-import type ISPageTransitionFeatureProps from './SPageTransitionFeature';
-import __SPageTransitionFeature from './SPageTransitionFeature';
+import type ISPageTransitionFeatureProps from './SPageTransitionFeature.js';
+import __SPageTransitionFeature from './SPageTransitionFeature.js';
 
 export default function define(
     props: Partial<ISPageTransitionFeatureProps> = {},

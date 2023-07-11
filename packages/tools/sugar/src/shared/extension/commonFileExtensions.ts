@@ -1,18 +1,18 @@
-import __commonAudioFileExtensions from './commonAudioFileExtensions';
-import __commonCompressedFileExtensions from './commonCompressedFileExtensions';
-import __commonDataFileExtensions from './commonDataFileExtensions';
-import __commonDiscFileExtensions from './commonDiscFileExtensions';
-import __commonEmailFileExtensions from './commonEmailFileExtensions';
-import __commonExecutableFileExtensions from './commonExecutableFileExtensions';
-import __commonFontFileExtensions from './commonFontFileExtensions';
-import __commonImageFileExtensions from './commonImageFileExtensions';
-import __commonMediaFileExtensions from './commonMediaFileExtensions';
-import __commonProgrammingFileExtensions from './commonProgrammingFileExtensions';
-import __commonTextFileExtensions from './commonTextFileExtensions';
-import __commonVideoFileExtensions from './commonVideoFileExtensions';
-import __commonWebFileExtensions from './commonWebFileExtensions';
+import __commonAudioFileExtensions from './commonAudioFileExtensions.js';
+import __commonCompressedFileExtensions from './commonCompressedFileExtensions.js';
+import __commonDataFileExtensions from './commonDataFileExtensions.js';
+import __commonDiscFileExtensions from './commonDiscFileExtensions.js';
+import __commonEmailFileExtensions from './commonEmailFileExtensions.js';
+import __commonExecutableFileExtensions from './commonExecutableFileExtensions.js';
+import __commonFontFileExtensions from './commonFontFileExtensions.js';
+import __commonImageFileExtensions from './commonImageFileExtensions.js';
+import __commonMediaFileExtensions from './commonMediaFileExtensions.js';
+import __commonProgrammingFileExtensions from './commonProgrammingFileExtensions.js';
+import __commonTextFileExtensions from './commonTextFileExtensions.js';
+import __commonVideoFileExtensions from './commonVideoFileExtensions.js';
+import __commonWebFileExtensions from './commonWebFileExtensions.js';
 
-import __unique from '../array/unique';
+import __unique from '../array/unique.js';
 
 /**
  * @name            commonFileExtensions
@@ -42,7 +42,7 @@ import __unique from '../array/unique';
  * @return     {Array<String>}                           The array of extensions
  *
  * @snippet         __commonFileExtensions()
- * 
+ *
  * @example         js
  * import { __commonFileExtensions } from '@coffeekraken/sugar/extension';
  * const extensions = __commonFileExtensions(); // => ['avi','mp3',...]

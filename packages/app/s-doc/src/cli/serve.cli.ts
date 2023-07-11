@@ -1,4 +1,4 @@
-import __SDoc from '../node/SDoc';
+import __SDoc from '../node/SDoc.js';
 
 export default function start(stringArgs = '') {
     return new Promise(async (resolve) => {

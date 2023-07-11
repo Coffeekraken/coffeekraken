@@ -4,7 +4,7 @@ import __SLog from '@coffeekraken/s-log';
 import __SPromise from '@coffeekraken/s-promise';
 import { __chdir, __copySync } from '@coffeekraken/sugar/fs';
 import { __isDirectory } from '@coffeekraken/sugar/is';
-import __SCliFsCopyParamsInterface from '../../node/fs/interface/SCliFsCopyParamsInterface';
+import __SCliFsCopyParamsInterface from '../../node/fs/interface/SCliFsCopyParamsInterface.js';
 
 export default (stringArgs = '') => {
     return new __SPromise(async ({ resolve, reject, emit, pipe }) => {

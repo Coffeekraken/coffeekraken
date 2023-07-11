@@ -1,4 +1,4 @@
-import sugar from './sugar';
-export * from './sugar';
+import sugar from './sugar.js';
+export * from './sugar.js';
 export default sugar;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sS0FBSyxNQUFNLFNBQVMsQ0FBQztBQUU1QixjQUFjLFNBQVMsQ0FBQztBQUV4QixlQUFlLEtBQUssQ0FBQyJ9
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sS0FBSyxNQUFNLFlBQVksQ0FBQztBQUUvQixjQUFjLFlBQVksQ0FBQztBQUUzQixlQUFlLEtBQUssQ0FBQyJ9

@@ -1,4 +1,4 @@
-import __escapeQueue from './escapeQueue';
-import __hotkey from './hotkey';
+import __escapeQueue from './escapeQueue.js';
+import __hotkey from './hotkey.js';
 
-export { __hotkey, __escapeQueue };
+export { __escapeQueue, __hotkey };

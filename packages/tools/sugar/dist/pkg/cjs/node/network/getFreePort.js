@@ -13,7 +13,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const isPortFree_1 = __importDefault(require("../network/isPortFree"));
+const isPortFree_js_1 = __importDefault(require("../network/isPortFree.js"));
 /**
  * @name            getFreePort
  * @namespace            node.network
@@ -46,13 +46,13 @@ function __getFreePort(port = null) {
     return new Promise((resolve) => __awaiter(this, void 0, void 0, function* () {
         if (!port)
             port = Math.round(Math.random() * 65535);
-        let isFree = yield (0, isPortFree_1.default)(port);
+        let isFree = yield (0, isPortFree_js_1.default)(port);
         do {
             port = Math.round(Math.random() * 65535);
-            isFree = yield (0, isPortFree_1.default)(port);
+            isFree = yield (0, isPortFree_js_1.default)(port);
         } while (!isFree);
         resolve(port);
     }));
 }
 exports.default = __getFreePort;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOzs7Ozs7Ozs7Ozs7OztBQUVkLHVFQUFpRDtBQUVqRDs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBMkJHO0FBQ0gsU0FBd0IsYUFBYSxDQUFDLElBQUksR0FBRyxJQUFJO0lBQzdDLE9BQU8sSUFBSSxPQUFPLENBQUMsQ0FBTyxPQUFPLEVBQUUsRUFBRTtRQUNqQyxJQUFJLENBQUMsSUFBSTtZQUFFLElBQUksR0FBRyxJQUFJLENBQUMsS0FBSyxDQUFDLElBQUksQ0FBQyxNQUFNLEVBQUUsR0FBRyxLQUFLLENBQUMsQ0FBQztRQUNwRCxJQUFJLE1BQU0sR0FBRyxNQUFNLElBQUEsb0JBQVksRUFBQyxJQUFJLENBQUMsQ0FBQztRQUN0QyxHQUFHO1lBQ0MsSUFBSSxHQUFHLElBQUksQ0FBQyxLQUFLLENBQUMsSUFBSSxDQUFDLE1BQU0sRUFBRSxHQUFHLEtBQUssQ0FBQyxDQUFDO1lBQ3pDLE1BQU0sR0FBRyxNQUFNLElBQUEsb0JBQVksRUFBQyxJQUFJLENBQUMsQ0FBQztTQUNyQyxRQUFRLENBQUMsTUFBTSxFQUFFO1FBQ2xCLE9BQU8sQ0FBQyxJQUFJLENBQUMsQ0FBQztJQUNsQixDQUFDLENBQUEsQ0FBQyxDQUFDO0FBQ1AsQ0FBQztBQVZELGdDQVVDIn0=
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOzs7Ozs7Ozs7Ozs7OztBQUVkLDZFQUFvRDtBQUVwRDs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBMkJHO0FBQ0gsU0FBd0IsYUFBYSxDQUFDLElBQUksR0FBRyxJQUFJO0lBQzdDLE9BQU8sSUFBSSxPQUFPLENBQUMsQ0FBTyxPQUFPLEVBQUUsRUFBRTtRQUNqQyxJQUFJLENBQUMsSUFBSTtZQUFFLElBQUksR0FBRyxJQUFJLENBQUMsS0FBSyxDQUFDLElBQUksQ0FBQyxNQUFNLEVBQUUsR0FBRyxLQUFLLENBQUMsQ0FBQztRQUNwRCxJQUFJLE1BQU0sR0FBRyxNQUFNLElBQUEsdUJBQVksRUFBQyxJQUFJLENBQUMsQ0FBQztRQUN0QyxHQUFHO1lBQ0MsSUFBSSxHQUFHLElBQUksQ0FBQyxLQUFLLENBQUMsSUFBSSxDQUFDLE1BQU0sRUFBRSxHQUFHLEtBQUssQ0FBQyxDQUFDO1lBQ3pDLE1BQU0sR0FBRyxNQUFNLElBQUEsdUJBQVksRUFBQyxJQUFJLENBQUMsQ0FBQztTQUNyQyxRQUFRLENBQUMsTUFBTSxFQUFFO1FBQ2xCLE9BQU8sQ0FBQyxJQUFJLENBQUMsQ0FBQztJQUNsQixDQUFDLENBQUEsQ0FBQyxDQUFDO0FBQ1AsQ0FBQztBQVZELGdDQVVDIn0=

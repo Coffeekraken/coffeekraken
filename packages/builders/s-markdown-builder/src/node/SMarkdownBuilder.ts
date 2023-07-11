@@ -26,10 +26,10 @@ import { __deepMerge, __objectHash } from '@coffeekraken/sugar/object';
 import __fs from 'fs';
 import { marked as __marked } from 'marked';
 import __path from 'path';
-import __SMarkdownBuilderBuildParamsInterface from './interface/SMarkdownBuilderBuildParamsInterface';
+import __SMarkdownBuilderBuildParamsInterface from './interface/SMarkdownBuilderBuildParamsInterface.js';
 
-import __codeTransformer from './transformers/code';
-import __ogTransformer from './transformers/og';
+import __codeTransformer from './transformers/code.js';
+import __ogTransformer from './transformers/og.js';
 
 /**
  * @name                SMarkdownBuilder

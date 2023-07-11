@@ -1,7 +1,7 @@
 // @ts-nocheck
 
 import _glob from 'glob';
-import __readJsonSync from '../fs/readJsonSync';
+import __readJsonSync from '../fs/readJsonSync.js';
 
 /**
  * @name            findPackages
@@ -24,7 +24,7 @@ import __readJsonSync from '../fs/readJsonSync';
  *
  * @snippet         __findPackages($1)
  * await __findPackages($1)
- * 
+ *
  * @example       js
  * import { __findPackages } from '@coffeekraken/sugar/monorepo';
  * const packages = await __findPackages();

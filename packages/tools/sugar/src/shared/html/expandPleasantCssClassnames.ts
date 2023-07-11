@@ -1,4 +1,4 @@
-import __expandPleasantCssClassname from './expandPleasantCssClassname';
+import __expandPleasantCssClassname from './expandPleasantCssClassname.js';
 
 /**
  * @name            expandPleasantCssClassnames
@@ -15,7 +15,7 @@ import __expandPleasantCssClassname from './expandPleasantCssClassname';
  * @return    {String}                      The processed string with converted classnames
  *
  * @snippet         __expandPleasantCssClassnames($1)
- * 
+ *
  * @example         js
  * import { __expandPleasantCssClassnames } from '@coffeekraken/sugar/html';
  * __expandPleasantCssClassnames('...');

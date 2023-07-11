@@ -1,5 +1,5 @@
-import SDocmap from './SDocmap';
+import SDocmap from './SDocmap.js';
 
-export * from './SDocmap';
+export * from './SDocmap.js';
 
 export default SDocmap;

@@ -9,7 +9,7 @@ import { __queryStringToObject } from '@coffeekraken/sugar/url';
 import { html } from 'lit';
 import { property } from 'lit/decorators.js';
 import __miniSearch from 'minisearch';
-import { getState, loadDocmap } from '../state/state';
+import { getState, loadDocmap } from '../state/state.js';
 
 export default class DocNav extends __SLitComponent {
     maxItems = 10;

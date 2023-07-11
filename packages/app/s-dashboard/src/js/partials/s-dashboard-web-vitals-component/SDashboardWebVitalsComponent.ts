@@ -2,7 +2,7 @@
 
 import __SLitComponent from '@coffeekraken/s-lit-component';
 import { css, html, unsafeCSS } from 'lit';
-import _SDashboardComponentWidgetInterface from '../../interface/SDashboardComponentWidgetInterface';
+import _SDashboardComponentWidgetInterface from '../../interface/SDashboardComponentWidgetInterface.js';
 
 import __css from './s-dashboard-web-vitals-component.css';
 

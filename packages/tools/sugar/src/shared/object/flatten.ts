@@ -1,6 +1,6 @@
 // @ts-nocheck
 
-import __isPlain from '../is/isPlainObject';
+import __isPlain from '../is/isPlainObject.js';
 
 /**
  * @name                              flatten
@@ -27,7 +27,7 @@ import __isPlain from '../is/isPlainObject';
  * @todo      tests
  *
  * @snippet         __flatten($1)
- * 
+ *
  * @example             js
  * import { __flatten } from '@coffeekraken/sugar/object';
  * __flatten({

@@ -1,4 +1,4 @@
-import __unique from './unique';
+import __unique from './unique.js';
 
 /**
  * @name            pickRandom
@@ -14,7 +14,7 @@ import __unique from './unique';
  * @return      {Any}                       A random array item
  *
  * @snippet         __pickRandom($1)
- * 
+ *
  * @example         js
  * import { __pickRandom } from '@coffeekraken/sugar/array';
  * const array = ['hello','world'];

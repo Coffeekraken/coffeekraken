@@ -1,7 +1,7 @@
 // @ts-nocheck
 
 import __fs from 'fs';
-import __deepMerge from '../../shared/object/deepMerge';
+import __deepMerge from '../../shared/object/deepMerge.js';
 
 /**
  * @name            isFile
@@ -20,7 +20,7 @@ import __deepMerge from '../../shared/object/deepMerge';
  * @todo      tests
  *
  * @snippet         __isFile($1);
- * 
+ *
  * @example     js
  * import { __isFile } from '@coffeekraken/sugar/is';
  * __isFile('something/cool');

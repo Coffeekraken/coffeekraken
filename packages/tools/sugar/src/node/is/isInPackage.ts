@@ -1,8 +1,8 @@
 // @ts-nocheck
 
 import __fs from 'fs';
-import __readJsonSync from '../fs/readJsonSync';
-import __packageRootDir from '../path/packageRootDir';
+import __readJsonSync from '../fs/readJsonSync.js';
+import __packageRootDir from '../path/packageRootDir.js';
 
 /**
  * @name                    isInPackage
@@ -16,12 +16,12 @@ import __packageRootDir from '../path/packageRootDir';
  * @param           {String|Array}              name             The package name to check or a string comma separated like "myPackage,another"
  * @param           {IIsInPackageSettings}      [settings={}]       Some settings to configure your heck
  * @return          {String}                                      The finded package path or false if not finded
- * 
+ *
  * @setting           {String}              [cwd=process.cwd()]    Specify from where the research has to be done
  * @setting           {Boolean}             [highest=false]         Specify if you want the highest package root or the first finded
  *
  * @snippet         __isInPackage($1);
- * 
+ *
  * @example         js
  * import { __isInPackage } from '@coffeekraken/sugar/is';
  * const root = __isInPackage();
@@ -38,14 +38,13 @@ interface IIsInPackageSettings {
 
 export default function __isInPackage(
     name,
-    settings?: Partial<IIsInPackageSettings>
+    settings?: Partial<IIsInPackageSettings>,
 ) {
-
     const finalSettings: IIsInPackageSettings = {
         cwd: process.cwd(),
         highest: false,
-        ...settings ?? {}
-    }
+        ...(settings ?? {}),
+    };
 
     const packageRootDir = __packageRootDir(finalSettings.cwd);
     if (!packageRootDir) return false;
@@ -72,7 +71,7 @@ export default function __isInPackage(
     if (finalSettings.highest) {
         return __isInPackage(name, {
             cwd: newPath,
-            highest: true
+            highest: true,
         });
     }
 

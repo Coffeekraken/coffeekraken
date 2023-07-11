@@ -1,10 +1,10 @@
 // @ts-nocheck
 
-import __hexToRgba from './hexToRgba';
-import __hslaToRgba from './hslaToRgba';
-import __parseHsla from './parseHsla';
-import __parseRgba from './parseRgba';
-import __rgbaToHsla from './rgbaToHsla';
+import __hexToRgba from './hexToRgba.js';
+import __hslaToRgba from './hslaToRgba.js';
+import __parseHsla from './parseHsla.js';
+import __parseRgba from './parseRgba.js';
+import __rgbaToHsla from './rgbaToHsla.js';
 
 /**
  * @name            parseColor
@@ -26,7 +26,7 @@ import __rgbaToHsla from './rgbaToHsla';
  * @todo      tests
  *
  * @snippet         __parseColor($1)
- * 
+ *
  * @example         js
  * import { __parseColor } from '@coffeekraken/sugar/color';
  * __parseColor('rgba(10,20,30,100)'); // => { r: 10, b: 20, b: 30, a: 100 }

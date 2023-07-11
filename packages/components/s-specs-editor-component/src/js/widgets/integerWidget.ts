@@ -4,8 +4,8 @@ import { __i18n } from '@coffeekraken/s-i18n';
 
 import { __isValidNumber } from '@coffeekraken/sugar/is';
 
-import type { ISSpecsEditorWidgetDeps } from '../SSpecsEditorWidget';
-import __SSpecsEditorWidget from '../SSpecsEditorWidget';
+import type { ISSpecsEditorWidgetDeps } from '../SSpecsEditorWidget.js';
+import __SSpecsEditorWidget from '../SSpecsEditorWidget.js';
 
 export default class SSpecsEditorComponentIntegerWidget extends __SSpecsEditorWidget {
     constructor(deps: ISSpecsEditorWidgetDeps) {

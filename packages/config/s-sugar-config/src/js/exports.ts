@@ -1,5 +1,5 @@
-import sugar from './sugar';
+import sugar from './sugar.js';
 
-export * from './sugar';
+export * from './sugar.js';
 
 export default sugar;

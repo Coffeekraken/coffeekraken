@@ -2,7 +2,7 @@
  * @jest-environment jsdom
  */
 
-import __stringToNode from '../stringToNode';
+import __stringToNode from '../stringToNode.js';
 
 describe('sugar.js.html.strToNode', () => {
     const html = `

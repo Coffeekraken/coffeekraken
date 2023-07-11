@@ -1,7 +1,7 @@
 import __SLitComponent from '@coffeekraken/s-lit-component';
 import __STheme from '@coffeekraken/s-theme';
 import { css, html, unsafeCSS } from 'lit';
-import __SThemeSwitcherComponentInterface from './interface/SThemeSwitcherComponentInterface';
+import __SThemeSwitcherComponentInterface from './interface/SThemeSwitcherComponentInterface.js';
 
 // @ts-ignore
 import __css from '../../../../src/css/s-theme-switcher.css'; // relative to /dist/pkg/esm/js

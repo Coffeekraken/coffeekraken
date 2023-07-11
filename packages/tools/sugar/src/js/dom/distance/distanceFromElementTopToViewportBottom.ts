@@ -1,5 +1,5 @@
-import __scrollTop from '../distance/scrollTop';
-import __offsetFromViewport from '../offset/offsetFromViewport';
+import __scrollTop from '../distance/scrollTop.js';
+import __offsetFromViewport from '../offset/offsetFromViewport.js';
 
 /**
  * @name            distanceFromElementTopToViewportBottom

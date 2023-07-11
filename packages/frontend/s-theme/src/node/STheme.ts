@@ -1,5 +1,5 @@
 import __SColor from '@coffeekraken/s-color';
-import __SThemeBase from '../shared/SThemeBase';
+import __SThemeBase from '../shared/SThemeBase.js';
 
 /**
  * @name            STheme

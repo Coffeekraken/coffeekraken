@@ -1,6 +1,6 @@
-import SFrontspec from './SFrontspec';
+import SFrontspec from './SFrontspec.js';
 
-export * from '../shared/SFrontspecTypes';
-export * from './SFrontspec';
+export * from '../shared/SFrontspecTypes.js';
+export * from './SFrontspec.js';
 
 export default SFrontspec;

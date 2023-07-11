@@ -1,5 +1,5 @@
-import type ISGlitchFeatureProps from './SGlitchFeature';
-import __SGlitchFeature from './SGlitchFeature';
+import type ISGlitchFeatureProps from './SGlitchFeature.js';
+import __SGlitchFeature from './SGlitchFeature.js';
 
 export default function define(
     props: Partial<ISGlitchFeatureProps> = {},

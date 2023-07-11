@@ -4,31 +4,31 @@ import { css, html, unsafeCSS } from 'lit';
 import { unsafeHTML } from 'lit/directives/unsafe-html.js';
 // @ts-ignore
 import { __hotkey } from '@coffeekraken/sugar/keyboard';
-import __SDashboardComponentInterface from './interface/SDashboardComponentInterface';
+import __SDashboardComponentInterface from './interface/SDashboardComponentInterface.js';
 
 import { __escapeQueue } from '@coffeekraken/sugar/keyboard';
 
-import { __define as __SDashboardAssetsComponent } from './partials/s-dashboard-assets-component/SDashboardAssetsComponent';
-import { __define as __SDashboardBrowserstackComponent } from './partials/s-dashboard-browserstack-component/SDashboardBrowserstackComponent';
-import { __define as __SDashboardFrontendCheckerComponent } from './partials/s-dashboard-frontend-checker-component/SDashboardFrontendCheckerComponent';
-import { __define as __SDashboardGoogleComponent } from './partials/s-dashboard-google-component/SDashboardGoogleComponent';
+import { __define as __SDashboardAssetsComponent } from './partials/s-dashboard-assets-component/SDashboardAssetsComponent.js';
+import { __define as __SDashboardBrowserstackComponent } from './partials/s-dashboard-browserstack-component/SDashboardBrowserstackComponent.js';
+import { __define as __SDashboardFrontendCheckerComponent } from './partials/s-dashboard-frontend-checker-component/SDashboardFrontendCheckerComponent.js';
+import { __define as __SDashboardGoogleComponent } from './partials/s-dashboard-google-component/SDashboardGoogleComponent.js';
 import {
     __define as __SDashboardPagesComponent,
     events as __SDashboardPagesComponentEvents,
-} from './partials/s-dashboard-pages-component/SDashboardPagesComponent';
-import { __define as __SDashboardProjectComponent } from './partials/s-dashboard-project-component/SDashboardProjectComponent';
-import { __define as __SDashboardResponsiveComponent } from './partials/s-dashboard-responsive-component/SDashboardResponsiveComponent';
-import { __define as __SDashboardWebVitalsComponent } from './partials/s-dashboard-web-vitals-component/SDashboardWebVitalsComponent';
+} from './partials/s-dashboard-pages-component/SDashboardPagesComponent.js';
+import { __define as __SDashboardProjectComponent } from './partials/s-dashboard-project-component/SDashboardProjectComponent.js';
+import { __define as __SDashboardResponsiveComponent } from './partials/s-dashboard-responsive-component/SDashboardResponsiveComponent.js';
+import { __define as __SDashboardWebVitalsComponent } from './partials/s-dashboard-web-vitals-component/SDashboardWebVitalsComponent.js';
 
 import { __injectStyle } from '@coffeekraken/sugar/dom';
 
 // dev
 // import __css from '../../../../src/css/s-dashboard.css'; // relative to /dist/pkg/esm/js
-// import __logoSvg from '../../../../src/js/partials/logo';
+// import __logoSvg from '../../../../src/js/partials/logo.js';
 
 // build
 import __css from '../css/s-dashboard.css'; // relative to /dist/pkg/esm/js
-import __logoSvg from './partials/logo';
+import __logoSvg from './partials/logo.js';
 
 // external components
 __SDashboardPagesComponent();

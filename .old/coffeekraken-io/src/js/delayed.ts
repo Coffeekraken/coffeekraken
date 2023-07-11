@@ -15,13 +15,13 @@ import { __define as __sInlineFeature } from '@coffeekraken/s-inline-feature';
 
 // Website specific
 import { __define as __SRangeComponent } from '@coffeekraken/s-range-component';
-// import { __define as __CKBlobComponent } from './components/CkBlob';
-import { __define as __CKDiscoverComponent } from './components/CKDiscover';
-import { __define as __CKDiscoverTabedComponent } from './components/CKDiscoverTabed';
-// import { __define as __CKDocSubNavComponent } from './components/CKDocSubNav/CKDocSubNav';
-// import { __define as __CkFallingStarsComponent } from './components/CkFallingStars';
-// import { __define as __CKRatingsComponent } from './components/CKRating';
-// import { __define as __CKWelcomeRatingsComponent } from './components/CKWelcomeRatings';
+// import { __define as __CKBlobComponent } from './components/CkBlob.js';
+import { __define as __CKDiscoverComponent } from './components/CKDiscover.js';
+import { __define as __CKDiscoverTabedComponent } from './components/CKDiscoverTabed.js';
+// import { __define as __CKDocSubNavComponent } from './components/CKDocSubNav/CKDocSubNav.js';
+// import { __define as __CkFallingStarsComponent } from './components/CkFallingStars.js';
+// import { __define as __CKRatingsComponent } from './components/CKRating.js';
+// import { __define as __CKWelcomeRatingsComponent } from './components/CKWelcomeRatings.js';
 // import __SDashboard from '@coffeekraken/s-dashboard';
 
 (async () => {

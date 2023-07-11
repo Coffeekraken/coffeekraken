@@ -1,6 +1,6 @@
 // @ts-nocheck
-import __SPackageCheckDependenciesParamsInterface from '../node/interface/SPackageCheckDependenciesParamsInterface';
-import __SPackage from '../node/SPackage';
+import __SPackageCheckDependenciesParamsInterface from '../node/interface/SPackageCheckDependenciesParamsInterface.js';
+import __SPackage from '../node/SPackage.js';
 
 export default (stringArgs = '') => {
     return new Promise(async (resolve) => {

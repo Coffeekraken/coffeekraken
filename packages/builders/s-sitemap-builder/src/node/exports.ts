@@ -1,3 +1,3 @@
-import __SSitemapBuilder from './SSitemapBuilder';
-export * from './SSitemapBuilder';
+import __SSitemapBuilder from './SSitemapBuilder.js';
+export * from './SSitemapBuilder.js';
 export default __SSitemapBuilder;

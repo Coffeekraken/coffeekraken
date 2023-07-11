@@ -1,7 +1,7 @@
 import __SFeature from '@coffeekraken/s-feature';
 import { __makeFloat } from '@coffeekraken/sugar/dom';
 import { __deepMerge } from '@coffeekraken/sugar/object';
-import __SFloatingFeatureInterface from './interface/SFloatingFeatureInterface';
+import __SFloatingFeatureInterface from './interface/SFloatingFeatureInterface.js';
 
 // @ts-ignore
 import __css from '../../../../src/css/s-floating-feature.css'; // relative to /dist/pkg/esm/js

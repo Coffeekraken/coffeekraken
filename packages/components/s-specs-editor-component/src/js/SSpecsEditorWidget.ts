@@ -7,8 +7,8 @@ import {
     __set,
 } from '@coffeekraken/sugar/object';
 import { __uniqid } from '@coffeekraken/sugar/string';
-import type { ISSpecsEditorComponentRenderLabelSettings } from './SSpecsEditorComponent';
-import __SSpecsEditorComponent from './SSpecsEditorComponent';
+import type { ISSpecsEditorComponentRenderLabelSettings } from './SSpecsEditorComponent.js';
+import __SSpecsEditorComponent from './SSpecsEditorComponent.js';
 
 import { __wait } from '@coffeekraken/sugar/datetime';
 

@@ -1,3 +1,3 @@
-import SDashboard from './SDashboard';
-export * from './SDashboard';
+import SDashboard from './SDashboard.js';
+export * from './SDashboard.js';
 export default SDashboard;

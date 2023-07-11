@@ -1,7 +1,7 @@
 // @ts-nocheck
 
-import __get from './get';
-import __set from './set';
+import __get from './get.js';
+import __set from './set.js';
 
 /**
  * @name                        ensurePropertyExists
@@ -22,7 +22,7 @@ import __set from './set';
  * @todo      tests
  *
  * @snippet         __ensurePropertyExists($1, $2)
- * 
+ *
  * @example           js
  * import { __ensureProperyExists } from '@coffeekraken/sugar/object';
  * const myObj = { hello: 'world' }«

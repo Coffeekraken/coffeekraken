@@ -1,6 +1,6 @@
 import type { ISLitComponentDefineSettings } from '@coffeekraken/s-lit-component';
-import type ISPanelComponentProps from './SPanelComponent';
-import __SPanelComponent from './SPanelComponent';
+import type ISPanelComponentProps from './SPanelComponent.js';
+import __SPanelComponent from './SPanelComponent.js';
 
 export default function define(
     props: Partial<ISPanelComponentProps> = {},

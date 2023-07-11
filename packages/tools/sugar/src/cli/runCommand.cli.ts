@@ -1,9 +1,9 @@
 import __SDuration from '@coffeekraken/s-duration';
 import __SGlob from '@coffeekraken/s-glob';
 import __path from 'path';
-import __spawn from '../node/process/spawn';
-import __formatDuration from '../shared/datetime/formatDuration';
-import __SRunCommandParamsInterface from './interface/SRunCommandParamsInterface';
+import __spawn from '../node/process/spawn.js';
+import __formatDuration from '../shared/datetime/formatDuration.js';
+import __SRunCommandParamsInterface from './interface/SRunCommandParamsInterface.js';
 
 export default function runCommand(stringArgs = '') {
     return new Promise(async (resolve, reject) => {

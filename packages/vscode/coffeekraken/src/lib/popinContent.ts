@@ -1,7 +1,7 @@
 // @ts-nocheck
 
 import * as vscode from 'vscode';
-import __colors from './colors';
+import __colors from './colors.js';
 
 export interface IPopinContentMetas {
     title: string;

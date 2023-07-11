@@ -1,6 +1,6 @@
 // @ts-nocheck
-import __SMonorepoDevParamsInterface from '../node/interface/SMonorepoDevParamsInterface';
-import __SMonorepo from '../node/SMonorepo';
+import __SMonorepoDevParamsInterface from '../node/interface/SMonorepoDevParamsInterface.js';
+import __SMonorepo from '../node/SMonorepo.js';
 
 export default (stringArgs = '') => {
     return new Promise(async (resolve) => {

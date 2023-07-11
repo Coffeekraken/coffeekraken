@@ -1,5 +1,5 @@
-import type ISAppearFeatureProps from './SAppearFeature';
-import __SAppearFeature from './SAppearFeature';
+import type ISAppearFeatureProps from './SAppearFeature.js';
+import __SAppearFeature from './SAppearFeature.js';
 
 export default function define(
     props: Partial<ISAppearFeatureProps> = {},

@@ -4,7 +4,7 @@ import { __wait } from '@coffeekraken/sugar/datetime';
 import { __isPortFree } from '@coffeekraken/sugar/network';
 import __compression from 'compression';
 import __express from 'express';
-import __SStaticServerStartParamsInterface from './interface/SStaticServerStartParamsInterface';
+import __SStaticServerStartParamsInterface from './interface/SStaticServerStartParamsInterface.js';
 // import __vhost from 'vhost';
 import { __packageRootDir } from '@coffeekraken/sugar/path';
 import { __onProcessExit } from '@coffeekraken/sugar/process';

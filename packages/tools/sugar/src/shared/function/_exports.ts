@@ -1,7 +1,7 @@
-import __debounce from './debounce';
-import __easeInterval from './easeInterval';
-import __getArgsNames from './getArgsNames';
-import __memoize from './memoize';
-import __throttle from './throttle';
+import __debounce from './debounce.js';
+import __easeInterval from './easeInterval.js';
+import __getArgsNames from './getArgsNames.js';
+import __memoize from './memoize.js';
+import __throttle from './throttle.js';
 
 export { __debounce, __easeInterval, __getArgsNames, __memoize, __throttle };

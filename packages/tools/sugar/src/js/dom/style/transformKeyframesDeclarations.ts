@@ -1,8 +1,8 @@
-import __parseKeyframeKey from '../../../shared/css/parse/parseKeyframeKey';
-import __removeVendorPrefix from '../../../shared/css/rule/removeVendorPrefix';
-import __getDefinedStyles from './getDefinedStyles';
+import __parseKeyframeKey from '../../../shared/css/parse/parseKeyframeKey.js';
+import __removeVendorPrefix from '../../../shared/css/rule/removeVendorPrefix.js';
+import __getDefinedStyles from './getDefinedStyles.js';
 
-import __camelCase from '../../../shared/string/camelCase';
+import __camelCase from '../../../shared/string/camelCase.js';
 
 /**
  * @name      transformKeyframesDeclarations

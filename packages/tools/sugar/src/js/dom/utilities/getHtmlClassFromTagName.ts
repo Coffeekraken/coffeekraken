@@ -1,7 +1,7 @@
 // @ts-nocheck
 
-import __upperFirst from '../../../shared/string/upperFirst';
-import __htmlTagToHtmlClassMap from './htmlTagToHtmlClassMap';
+import __upperFirst from '../../../shared/string/upperFirst.js';
+import __htmlTagToHtmlClassMap from './htmlTagToHtmlClassMap.js';
 
 /**
  * @name            getHtmlClassFromTagName

@@ -14,7 +14,7 @@ import __fs from 'fs';
 import __path from 'path';
 import __postcss from 'postcss';
 import { PurgeCSS } from 'purgecss';
-import __SPostcssBuilderSettingsInterface from './interface/SPostcssBuilderSettingsInterface';
+import __SPostcssBuilderSettingsInterface from './interface/SPostcssBuilderSettingsInterface.js';
 
 /**
  * @name                SPostcssBuilder

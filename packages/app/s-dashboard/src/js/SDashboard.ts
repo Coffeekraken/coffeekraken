@@ -2,7 +2,7 @@ import __SClass from '@coffeekraken/s-class';
 import { __escapeQueue, __hotkey } from '@coffeekraken/sugar/keyboard';
 import { __deepMerge } from '@coffeekraken/sugar/object';
 
-import __SDashboardSettingsInterface from './interface/SDashboardSettingsInterface';
+import __SDashboardSettingsInterface from './interface/SDashboardSettingsInterface.js';
 
 /**
  * @name                SDashboard

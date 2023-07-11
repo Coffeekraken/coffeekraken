@@ -1,5 +1,5 @@
 import __SInterface from '@coffeekraken/s-interface';
-import __SValidator from '../SValidator';
+import __SValidator from '../SValidator.js';
 
 /**
  * @name                SValidatorValidatorsInterface

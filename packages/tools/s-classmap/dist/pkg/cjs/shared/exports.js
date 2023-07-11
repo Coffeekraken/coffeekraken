@@ -17,7 +17,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const SClassmapBase_1 = __importDefault(require("./SClassmapBase"));
-__exportStar(require("./SClassmapBase"), exports);
-exports.default = SClassmapBase_1.default;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7QUFBQSxvRUFBOEM7QUFFOUMsa0RBQWdDO0FBQ2hDLGtCQUFlLHVCQUFlLENBQUMifQ==
+const SClassmapBase_js_1 = __importDefault(require("./SClassmapBase.js"));
+__exportStar(require("./SClassmapBase.js"), exports);
+exports.default = SClassmapBase_js_1.default;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7QUFBQSwwRUFBaUQ7QUFFakQscURBQW1DO0FBQ25DLGtCQUFlLDBCQUFlLENBQUMifQ==

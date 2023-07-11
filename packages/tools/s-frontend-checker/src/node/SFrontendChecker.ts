@@ -3,7 +3,7 @@
 import __SPromise from '@coffeekraken/s-promise';
 import { __splitEvery } from '@coffeekraken/sugar/string';
 import puppeteer from 'puppeteer';
-import __SFrontendChecker from '../shared/SFrontendChecker';
+import __SFrontendChecker from '../shared/SFrontendChecker.js';
 
 /**
  * @name                SFrontendChecker

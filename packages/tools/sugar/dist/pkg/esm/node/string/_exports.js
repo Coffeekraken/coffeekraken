@@ -1,4 +1,4 @@
-import __uniqid from './uniqid';
-export * from '../../shared/string/_exports';
+import __uniqid from './uniqid.js';
+export * from '../../shared/string/_exports.js';
 export { __uniqid };
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sUUFBUSxNQUFNLFVBQVUsQ0FBQztBQUVoQyxjQUFjLDhCQUE4QixDQUFDO0FBQzdDLE9BQU8sRUFBRSxRQUFRLEVBQUUsQ0FBQyJ9
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sUUFBUSxNQUFNLGFBQWEsQ0FBQztBQUVuQyxjQUFjLGlDQUFpQyxDQUFDO0FBQ2hELE9BQU8sRUFBRSxRQUFRLEVBQUUsQ0FBQyJ9

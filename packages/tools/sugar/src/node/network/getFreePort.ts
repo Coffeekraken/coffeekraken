@@ -1,6 +1,6 @@
 // @ts-nocheck
 
-import __isPortFree from '../network/isPortFree';
+import __isPortFree from '../network/isPortFree.js';
 
 /**
  * @name            getFreePort
@@ -22,7 +22,7 @@ import __isPortFree from '../network/isPortFree';
  *
  * @snippet         __getFreePort()
  * await __getFreePort()
- * 
+ *
  * @example         js
  * import { __getFreePort } from '@coffeekraken/sugar/network';
  * await __getFreePort(); // => 22343

@@ -1,8 +1,8 @@
-import __SGooeySvgFilter from './SGooeySvgFilter';
-import __SGradientSvgFilter from './SGradientSvgFilter';
-import __SMotionblurSvgFilter from './SMotionblurSvgFilter';
-import __SOutlineSvgFilter from './SOutlineSvgFilter';
-import __SSvgFilter from './SSvgFilter';
+import __SGooeySvgFilter from './SGooeySvgFilter.js';
+import __SGradientSvgFilter from './SGradientSvgFilter.js';
+import __SMotionblurSvgFilter from './SMotionblurSvgFilter.js';
+import __SOutlineSvgFilter from './SOutlineSvgFilter.js';
+import __SSvgFilter from './SSvgFilter.js';
 
 export {
     __SGooeySvgFilter,

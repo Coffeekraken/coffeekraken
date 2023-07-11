@@ -1,3 +1,3 @@
-import SEventEmitter from './SEventEmitter';
-export * from './SEventEmitter';
+import SEventEmitter from './SEventEmitter.js';
+export * from './SEventEmitter.js';
 export default SEventEmitter;

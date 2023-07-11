@@ -1,4 +1,4 @@
-import __SMonorepo from './SMonorepo';
-export * from './SMonorepo';
+import __SMonorepo from './SMonorepo.js';
+export * from './SMonorepo.js';
 export default __SMonorepo;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sV0FBVyxNQUFNLGFBQWEsQ0FBQztBQUN0QyxjQUFjLGFBQWEsQ0FBQztBQUM1QixlQUFlLFdBQVcsQ0FBQyJ9
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sV0FBVyxNQUFNLGdCQUFnQixDQUFDO0FBQ3pDLGNBQWMsZ0JBQWdCLENBQUM7QUFDL0IsZUFBZSxXQUFXLENBQUMifQ==

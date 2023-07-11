@@ -18,10 +18,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.SStateManager = void 0;
-const SState_1 = __importDefault(require("./SState"));
-const SStateManager_1 = __importDefault(require("./SStateManager"));
-exports.SStateManager = SStateManager_1.default;
-__exportStar(require("./SState"), exports);
-__exportStar(require("./SStateManager"), exports);
-exports.default = SState_1.default;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0FBQUEsc0RBQWdDO0FBQ2hDLG9FQUE0QztBQUluQyx3QkFKRix1QkFBYSxDQUlFO0FBRnRCLDJDQUF5QjtBQUN6QixrREFBZ0M7QUFHaEMsa0JBQWUsZ0JBQVEsQ0FBQyJ9
+const SState_js_1 = __importDefault(require("./SState.js"));
+const SStateManager_js_1 = __importDefault(require("./SStateManager.js"));
+exports.SStateManager = SStateManager_js_1.default;
+__exportStar(require("./SState.js"), exports);
+__exportStar(require("./SStateManager.js"), exports);
+exports.default = SState_js_1.default;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0FBQUEsNERBQW1DO0FBQ25DLDBFQUErQztBQUl0Qyx3QkFKRiwwQkFBYSxDQUlFO0FBRnRCLDhDQUE0QjtBQUM1QixxREFBbUM7QUFHbkMsa0JBQWUsbUJBQVEsQ0FBQyJ9

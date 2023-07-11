@@ -1,5 +1,5 @@
-import __SStaticBuilderBuildParamsInterface from '../node/interface/SStaticBuilderBuildParamsInterface';
-import __SStaticBuilder from '../node/SStaticBuilder';
+import __SStaticBuilderBuildParamsInterface from '../node/interface/SStaticBuilderBuildParamsInterface.js';
+import __SStaticBuilder from '../node/SStaticBuilder.js';
 
 export default function build(stringArgs = '') {
     return new Promise(async (resolve) => {

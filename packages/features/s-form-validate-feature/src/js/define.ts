@@ -1,5 +1,5 @@
-import type ISFormValidateFeatureProps from './SFormValidateFeature';
-import __SFormValidateFeature from './SFormValidateFeature';
+import type ISFormValidateFeatureProps from './SFormValidateFeature.js';
+import __SFormValidateFeature from './SFormValidateFeature.js';
 
 export default function define(
     props: Partial<ISFormValidateFeatureProps> = {},

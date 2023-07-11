@@ -1,5 +1,5 @@
-import __SEventEmitterBase from '../shared/SEventEmitter';
-export * from '../shared/SEventEmitter';
+import __SEventEmitterBase from '../shared/SEventEmitter.js';
+export * from '../shared/SEventEmitter.js';
 export default class SEventEmitter extends __SEventEmitterBase {
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sbUJBQW1CLE1BQU0seUJBQXlCLENBQUM7QUFFMUQsY0FBYyx5QkFBeUIsQ0FBQztBQUV4QyxNQUFNLENBQUMsT0FBTyxPQUFPLGFBQWMsU0FBUSxtQkFBbUI7Q0FDN0QifQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sbUJBQW1CLE1BQU0sNEJBQTRCLENBQUM7QUFFN0QsY0FBYyw0QkFBNEIsQ0FBQztBQUUzQyxNQUFNLENBQUMsT0FBTyxPQUFPLGFBQWMsU0FBUSxtQkFBbUI7Q0FBRyJ9

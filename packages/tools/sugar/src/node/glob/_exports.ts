@@ -1,8 +1,12 @@
-import __excludedGlobs from './excludedGlobs';
-import __matchExcludeGlobs from './matchExcludeGlobs';
-import __matchGlobSync from './matchGlobSync';
-import __resolveGlobSync from './resolveGlobSync';
+import __excludedGlobs from './excludedGlobs.js';
+import __matchExcludeGlobs from './matchExcludeGlobs.js';
+import __matchGlobSync from './matchGlobSync.js';
+import __resolveGlobSync from './resolveGlobSync.js';
 
-export * from '../../shared/glob/_exports';
-export { __excludedGlobs, __matchExcludeGlobs, __matchGlobSync, __resolveGlobSync };
-
+export * from '../../shared/glob/_exports.js';
+export {
+    __excludedGlobs,
+    __matchExcludeGlobs,
+    __matchGlobSync,
+    __resolveGlobSync,
+};

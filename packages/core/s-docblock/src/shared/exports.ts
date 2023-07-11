@@ -1,8 +1,8 @@
-import SDocblock from './SDocblock';
-import SDocblockBlock from './SDocblockBlock';
+import SDocblock from './SDocblock.js';
+import SDocblockBlock from './SDocblockBlock.js';
 
-export * from './SDocblock';
-export * from './SDocblockBlock';
+export * from './SDocblock.js';
+export * from './SDocblockBlock.js';
 
 export { SDocblockBlock };
 export default SDocblock;

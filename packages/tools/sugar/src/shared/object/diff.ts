@@ -1,7 +1,7 @@
 // @ts-nocheck
 
 import __isEqual from 'is-equal';
-import __isPlainObject from '../is/isPlainObject';
+import __isPlainObject from '../is/isPlainObject.js';
 
 /**
  * @name                      diff

@@ -1,4 +1,4 @@
-import SDataFileGeneric from './SDataFileGeneric';
-export * from './SDataFileGeneric';
+import SDataFileGeneric from './SDataFileGeneric.js';
+export * from './SDataFileGeneric.js';
 export default SDataFileGeneric;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sZ0JBQWdCLE1BQU0sb0JBQW9CLENBQUM7QUFDbEQsY0FBYyxvQkFBb0IsQ0FBQztBQUNuQyxlQUFlLGdCQUFnQixDQUFDIn0=
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sZ0JBQWdCLE1BQU0sdUJBQXVCLENBQUM7QUFDckQsY0FBYyx1QkFBdUIsQ0FBQztBQUN0QyxlQUFlLGdCQUFnQixDQUFDIn0=

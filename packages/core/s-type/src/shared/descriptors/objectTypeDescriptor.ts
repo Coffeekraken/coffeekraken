@@ -1,7 +1,7 @@
 // shared
 
 import { __isObject } from '@coffeekraken/sugar/is';
-import type { ISTypeDescriptor } from '../SType';
+import type { ISTypeDescriptor } from '../SType.js';
 
 /**
  * @name              objectTypeDescriptor

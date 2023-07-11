@@ -1,11 +1,11 @@
 // @ts-nocheck
 
 import __fs from 'fs';
-import __objectHash from '../../shared/object/objectHash';
-import __formatPackageJson from '../../shared/package/formatPackageJson';
-import __readJsonSync from '../fs/readJsonSync';
-import __packageJsonSync from '../npm/packageJsonSync';
-import __packageRootDir from '../path/packageRootDir';
+import __objectHash from '../../shared/object/objectHash.js';
+import __formatPackageJson from '../../shared/package/formatPackageJson.js';
+import __readJsonSync from '../fs/readJsonSync.js';
+import __packageJsonSync from '../npm/packageJsonSync.js';
+import __packageRootDir from '../path/packageRootDir.js';
 
 /**
  * @name          packageJsonSync
@@ -24,7 +24,7 @@ import __packageRootDir from '../path/packageRootDir';
  * @todo      tests
  *
  * @snippet         __packageJsonSync()
- * 
+ *
  * @example     js
  * import { __packageJsonSync } from '@coffeekraken/sugar/package';
  * __packageJsonSync();

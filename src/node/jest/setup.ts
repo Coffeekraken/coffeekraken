@@ -1,5 +1,5 @@
 const __jsdomMock = require('./jsdomMock');
-// import __sugarConfigLoad from './sugarConfigLoad';
+// import __sugarConfigLoad from './sugarConfigLoad.js';
 
 module.exports = async function () {
     __jsdomMock();

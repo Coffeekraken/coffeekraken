@@ -1,4 +1,4 @@
-import SEventEmitter from './SEventEmitter';
-export * from './SEventEmitter';
+import SEventEmitter from './SEventEmitter.js';
+export * from './SEventEmitter.js';
 export default SEventEmitter;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sYUFBYSxNQUFNLGlCQUFpQixDQUFDO0FBQzVDLGNBQWMsaUJBQWlCLENBQUM7QUFDaEMsZUFBZSxhQUFhLENBQUMifQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sYUFBYSxNQUFNLG9CQUFvQixDQUFDO0FBQy9DLGNBQWMsb0JBQW9CLENBQUM7QUFDbkMsZUFBZSxhQUFhLENBQUMifQ==

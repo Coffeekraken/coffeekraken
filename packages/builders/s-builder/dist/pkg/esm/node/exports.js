@@ -1,4 +1,4 @@
-import SBuilder from './SBuilder';
-export * from './SBuilder';
+import SBuilder from './SBuilder.js';
+export * from './SBuilder.js';
 export default SBuilder;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sUUFBUSxNQUFNLFlBQVksQ0FBQztBQUNsQyxjQUFjLFlBQVksQ0FBQztBQUMzQixlQUFlLFFBQVEsQ0FBQyJ9
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sUUFBUSxNQUFNLGVBQWUsQ0FBQztBQUNyQyxjQUFjLGVBQWUsQ0FBQztBQUM5QixlQUFlLFFBQVEsQ0FBQyJ9

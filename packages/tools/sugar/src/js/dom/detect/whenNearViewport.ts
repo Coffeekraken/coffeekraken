@@ -1,5 +1,5 @@
 // @ts-nocheck
-import __closestScrollable from '../query/closestScrollable';
+import __closestScrollable from '../query/closestScrollable.js';
 
 /**
  * @name      whenNearViewport

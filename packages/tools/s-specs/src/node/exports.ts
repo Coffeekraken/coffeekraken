@@ -1,3 +1,3 @@
-import __SSpecs from './SSpecs';
-export * from './SSpecs';
+import __SSpecs from './SSpecs.js';
+export * from './SSpecs.js';
 export default __SSpecs;

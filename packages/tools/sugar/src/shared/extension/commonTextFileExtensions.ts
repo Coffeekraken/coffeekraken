@@ -1,5 +1,5 @@
-import { ICommonFileExtensionsSettings } from './commonFileExtensions';
-import __commonProgrammingFileExtensions from './commonProgrammingFileExtensions';
+import { ICommonFileExtensionsSettings } from './commonFileExtensions.js';
+import __commonProgrammingFileExtensions from './commonProgrammingFileExtensions.js';
 
 /**
  * @name            commonTextFileExtensions
@@ -15,7 +15,7 @@ import __commonProgrammingFileExtensions from './commonProgrammingFileExtensions
  * @return     {Array<String>}                           The array of extensions
  *
  * @snippet         __commonTextFileExtensions()
- * 
+ *
  * @example         js
  * import { __commonTextFileExtensions } from '@coffeekraken/sugar/extension';
  * const extensions = __commonTextFileExtensions();

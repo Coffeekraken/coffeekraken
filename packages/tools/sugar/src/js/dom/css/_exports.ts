@@ -1,8 +1,8 @@
-import __adoptStyleInShadowRoot from './adoptStyleInShadowRoot';
-import __expandPleasantCssClassnamesLive from './expandPleasantCssClassnamesLive';
-import __readCssDataFrom from './readCssDataFrom';
-import __reloadStylesheets from './reloadStylesheets';
-import __stylesheetToString from './stylesheetToString';
+import __adoptStyleInShadowRoot from './adoptStyleInShadowRoot.js';
+import __expandPleasantCssClassnamesLive from './expandPleasantCssClassnamesLive.js';
+import __readCssDataFrom from './readCssDataFrom.js';
+import __reloadStylesheets from './reloadStylesheets.js';
+import __stylesheetToString from './stylesheetToString.js';
 export {
     __adoptStyleInShadowRoot,
     __expandPleasantCssClassnamesLive,

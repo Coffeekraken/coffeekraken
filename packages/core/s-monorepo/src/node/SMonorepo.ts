@@ -20,12 +20,12 @@ import __childProcess from 'child_process';
 import __fs from 'fs';
 import __path from 'path';
 
-import __SMonorepoDevParamsInterface from './interface/SMonorepoDevParamsInterface';
-import __SMonorepoExecParamsInterface from './interface/SMonorepoExecParamsInterface';
-import __SMonorepoListParamsInteface from './interface/SMonorepoListParamsInterface';
-import __SMonorepoPublishParamsInteface from './interface/SMonorepoPublishParamsInterface';
-import __SMonorepoSettingsInterface from './interface/SMonorepoSettingsInterface';
-import __SMonorepoUpgradeParamsInterface from './interface/SMonorepoUpgradeParamsInterface';
+import __SMonorepoDevParamsInterface from './interface/SMonorepoDevParamsInterface.js';
+import __SMonorepoExecParamsInterface from './interface/SMonorepoExecParamsInterface.js';
+import __SMonorepoListParamsInteface from './interface/SMonorepoListParamsInterface.js';
+import __SMonorepoPublishParamsInteface from './interface/SMonorepoPublishParamsInterface.js';
+import __SMonorepoSettingsInterface from './interface/SMonorepoSettingsInterface.js';
+import __SMonorepoUpgradeParamsInterface from './interface/SMonorepoUpgradeParamsInterface.js';
 
 /**
  * @name                SMonorepo

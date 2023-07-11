@@ -1,4 +1,4 @@
-import __SFrontendServer from '../node/SFrontendServer';
+import __SFrontendServer from '../node/SFrontendServer.js';
 
 export default function start(stringArgs = '') {
     return new Promise(async (resolve) => {

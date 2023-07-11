@@ -1,12 +1,5 @@
 // @ts-nocheck
 
-import { prefix } from 'inline-style-prefixer';
-import css from 'css';
-import __set from '../object/set';
-import __get from '../object/get';
-
-import { parse, stringify } from 'scss-parser';
-
 /**
  * @name                autoPrefix
  * @namespace           js.css

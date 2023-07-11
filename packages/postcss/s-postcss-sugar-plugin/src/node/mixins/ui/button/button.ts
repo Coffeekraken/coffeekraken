@@ -1,6 +1,6 @@
 import __SInterface from '@coffeekraken/s-interface';
 import __STheme from '@coffeekraken/s-theme';
-import __getRoot from '../../../utils/getRoot';
+import __getRoot from '../../../utils/getRoot.js';
 
 /**
  * @name          button

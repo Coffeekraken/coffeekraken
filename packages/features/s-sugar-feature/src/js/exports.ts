@@ -1,6 +1,6 @@
-import __SSugarFeature from './SSugarFeature';
-import __define from './define';
+import __SSugarFeature from './SSugarFeature.js';
+import __define from './define.js';
 
-export * from './SSugarFeature';
+export * from './SSugarFeature.js';
 export { __define };
 export default __SSugarFeature;

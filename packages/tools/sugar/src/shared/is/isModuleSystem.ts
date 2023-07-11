@@ -1,5 +1,5 @@
-import __isCjs from './isCjs';
-import __isEsm from './isEsm';
+import __isCjs from './isCjs.js';
+import __isEsm from './isEsm.js';
 
 /**
  * @name          isModuleSystem
@@ -15,7 +15,7 @@ import __isEsm from './isEsm';
  * @return      {Boolean}           true if the current system is one of the passed system names, false otherwise
  *
  * @snippet         __isModuleSystem($1)
- * 
+ *
  * @example       js
  * import { __isModuleSystem } from '@coffeekraken/sugar/is';
  * __isModuleSystem('esm'); // => true

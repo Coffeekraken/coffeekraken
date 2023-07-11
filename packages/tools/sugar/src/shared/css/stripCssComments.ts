@@ -1,7 +1,7 @@
 // @ts-nocheck
 
 import __stripCssComments from 'strip-css-comments';
-import __deepMerge from '../object/deepMerge';
+import __deepMerge from '../object/deepMerge.js';
 
 /**
  * @name          stripCssComments
@@ -27,7 +27,7 @@ import __deepMerge from '../object/deepMerge';
  * @todo        doc
  *
  * @snippet         __stripCssComments($1)
- * 
+ *
  * @example       js
  * import { __stripCssComments } from '@coffeekraken/sugar/css';
  * __stripCssComments(`

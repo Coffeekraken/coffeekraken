@@ -1,5 +1,5 @@
-import type ISActivateFeatureProps from './SActivateFeature';
-import __SActivateFeature from './SActivateFeature';
+import type ISActivateFeatureProps from './SActivateFeature.js';
+import __SActivateFeature from './SActivateFeature.js';
 
 export default function define(
     props: Partial<ISActivateFeatureProps> = {},

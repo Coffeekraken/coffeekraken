@@ -1,4 +1,4 @@
-import __argsToString from './argsToString';
+import __argsToString from './argsToString.js';
 
 /**
  * @name            buildCommandLine
@@ -29,7 +29,7 @@ import __argsToString from './argsToString';
  * @todo      tests
  *
  * @snippet         __buildCommandLine($1, $2)
- * 
+ *
  * @example       js
  * import { __buildCommandLine } from '@coffeekraken/sugar/cli';
  * __buildCommandLine('php [hostname]:[port] [rootDir] [arguments]', {

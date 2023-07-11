@@ -1,6 +1,6 @@
 // @ts-nocheck
 
-import __dispatchEvent from '../dom/event/dispatchEvent';
+import __dispatchEvent from '../dom/event/dispatchEvent.js';
 
 /**
  * @name 		handleInputAttributes

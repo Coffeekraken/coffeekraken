@@ -7,8 +7,8 @@ import __SDescriptor, {
 import { __parseArgs } from '@coffeekraken/sugar/cli';
 import { __isPlainObject } from '@coffeekraken/sugar/is';
 import { __deepMerge } from '@coffeekraken/sugar/object';
-import __getAvailableInterfaceTypes from './getAvailableInterfaceTypes';
-import type { ISInterfaceRendererSettings } from './renderers/ISInterfaceRenderer';
+import __getAvailableInterfaceTypes from './getAvailableInterfaceTypes.js';
+import type { ISInterfaceRendererSettings } from './renderers/ISInterfaceRenderer.js';
 
 export interface ISInterfaceSettings {
     descriptor?: Partial<ISDescriptorSettings>;

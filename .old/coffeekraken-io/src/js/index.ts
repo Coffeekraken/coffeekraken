@@ -22,15 +22,15 @@ import { __define as __SPageTransitionFeatureDefine } from '@coffeekraken/s-page
 import { __define as __SParallaxFeatureDefine } from '@coffeekraken/s-parallax-feature';
 
 // Website specific
-import { __define as __CKDiscoverComponent } from './components/CKDiscover';
-import { __define as __CKDiscoverTabedComponent } from './components/CKDiscoverTabed';
-import { __define as __CKDiscoverWelcomeComponent } from './components/CKDiscoverWelcome';
-import { __define as __CKDocSubNavDefine } from './components/CKDocSubNav';
-import { __define as __CKSearchComponent } from './components/CKSearch';
-import { __define as __CKSettingsComponent } from './components/CkSettings';
-import { __define as __CKVersionSelector } from './components/CKVersionSelector';
-// import { __define as __CKRatingsComponent } from './components/CKRating';
-// import { __define as __CKWelcomeRatingsComponent } from './components/CKWelcomeRatings';
+import { __define as __CKDiscoverComponent } from './components/CKDiscover.js';
+import { __define as __CKDiscoverTabedComponent } from './components/CKDiscoverTabed.js';
+import { __define as __CKDiscoverWelcomeComponent } from './components/CKDiscoverWelcome.js';
+import { __define as __CKDocSubNavDefine } from './components/CKDocSubNav.js';
+import { __define as __CKSearchComponent } from './components/CKSearch.js';
+import { __define as __CKSettingsComponent } from './components/CkSettings.js';
+import { __define as __CKVersionSelector } from './components/CKVersionSelector.js';
+// import { __define as __CKRatingsComponent } from './components/CKRating.js';
+// import { __define as __CKWelcomeRatingsComponent } from './components/CKWelcomeRatings.js';
 
 // import { __isMobile } from '@coffeekraken/sugar/is';
 

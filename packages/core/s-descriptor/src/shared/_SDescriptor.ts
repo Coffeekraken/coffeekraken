@@ -7,7 +7,7 @@ import __SDescriptorResult, {
     ISDescriptorResult,
     ISDescriptorResultObj,
     ISDescriptorResultRule,
-} from './SDescriptorResult';
+} from './SDescriptorResult.js';
 
 /**
  * @__name                SDescriptor

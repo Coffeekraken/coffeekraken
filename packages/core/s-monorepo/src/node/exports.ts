@@ -1,3 +1,3 @@
-import __SMonorepo from './SMonorepo';
-export * from './SMonorepo';
+import __SMonorepo from './SMonorepo.js';
+export * from './SMonorepo.js';
 export default __SMonorepo;

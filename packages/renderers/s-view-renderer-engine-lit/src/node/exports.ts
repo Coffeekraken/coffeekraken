@@ -1,3 +1,3 @@
-import SViewRendererEngineLit from './SViewRendererEngineLit';
-export * from './SViewRendererEngineLit';
+import SViewRendererEngineLit from './SViewRendererEngineLit.js';
+export * from './SViewRendererEngineLit.js';
 export default SViewRendererEngineLit;

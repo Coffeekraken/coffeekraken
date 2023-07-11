@@ -17,7 +17,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const SValidator_1 = __importDefault(require("./SValidator"));
-__exportStar(require("./SValidator"), exports);
-exports.default = SValidator_1.default;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7QUFBQSw4REFBd0M7QUFDeEMsK0NBQTZCO0FBQzdCLGtCQUFlLG9CQUFZLENBQUMifQ==
+const SValidator_js_1 = __importDefault(require("./SValidator.js"));
+__exportStar(require("./SValidator.js"), exports);
+exports.default = SValidator_js_1.default;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7QUFBQSxvRUFBMkM7QUFDM0Msa0RBQWdDO0FBQ2hDLGtCQUFlLHVCQUFZLENBQUMifQ==

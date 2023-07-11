@@ -1,8 +1,8 @@
 import { html } from 'lit';
 
-import type { ISSpecsEditorWidgetDeps } from '../SSpecsEditorWidget';
+import type { ISSpecsEditorWidgetDeps } from '../SSpecsEditorWidget.js';
 
-import __SSpecsEditorWidget from '../SSpecsEditorWidget';
+import __SSpecsEditorWidget from '../SSpecsEditorWidget.js';
 
 export default class SSpecsEditorComponentHtmlWidget extends __SSpecsEditorWidget {
     constructor(deps: ISSpecsEditorWidgetDeps) {

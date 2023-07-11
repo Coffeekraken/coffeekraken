@@ -1,27 +1,27 @@
-import __packageCacheDir from './packageCacheDir';
-import __packageLocalDir from './packageLocalDir';
-import __packageRootDir from './packageRootDir';
-import __packageTmpDir from './packageTmpDir';
+import __packageCacheDir from './packageCacheDir.js';
+import __packageLocalDir from './packageLocalDir.js';
+import __packageRootDir from './packageRootDir.js';
+import __packageTmpDir from './packageTmpDir.js';
 
-import __srcCssDir from './srcCssDir';
-import __srcDocDir from './srcDocDir';
-import __srcFontsDir from './srcFontsDir';
-import __srcIconsDir from './srcIconsDir';
-import __srcImgDir from './srcImgDir';
-import __srcJsDir from './srcJsDir';
-import __srcNodeDir from './srcNodeDir';
-import __srcRootDir from './srcRootDir';
-import __srcViewsDir from './srcViewsDir';
+import __srcCssDir from './srcCssDir.js';
+import __srcDocDir from './srcDocDir.js';
+import __srcFontsDir from './srcFontsDir.js';
+import __srcIconsDir from './srcIconsDir.js';
+import __srcImgDir from './srcImgDir.js';
+import __srcJsDir from './srcJsDir.js';
+import __srcNodeDir from './srcNodeDir.js';
+import __srcRootDir from './srcRootDir.js';
+import __srcViewsDir from './srcViewsDir.js';
 
-import __distCssDir from './distCssDir';
-import __distDocDir from './distDocDir';
-import __distFontsDir from './distFontsDir';
-import __distIconsDir from './distIconsDir';
-import __distImgDir from './distImgDir';
-import __distJsDir from './distJsDir';
-import __distNodeDir from './distNodeDir';
-import __distRootDir from './distRootDir';
-import __distViewsDir from './distViewsDir';
+import __distCssDir from './distCssDir.js';
+import __distDocDir from './distDocDir.js';
+import __distFontsDir from './distFontsDir.js';
+import __distIconsDir from './distIconsDir.js';
+import __distImgDir from './distImgDir.js';
+import __distJsDir from './distJsDir.js';
+import __distNodeDir from './distNodeDir.js';
+import __distRootDir from './distRootDir.js';
+import __distViewsDir from './distViewsDir.js';
 
 /**
  * @name            replacePathTokens
@@ -38,7 +38,7 @@ import __distViewsDir from './distViewsDir';
  * @return      {String|Array<String>}                          If passed a string, get back a string, if passed an array, get back an array
  *
  * @snippet         __replacePathTokens($1)
- * 
+ *
  * @example         js
  * import { __replacePathTokens } from '@coffeekraken/sugar/path';
  * __replacePathTokens('%packageCacheDir/something.txt'); // => /path/to/cache/directory/something.txt'

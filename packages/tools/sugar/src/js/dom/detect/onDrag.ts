@@ -1,4 +1,4 @@
-import __positionFromEvent from '../position/positionFromEvent';
+import __positionFromEvent from '../position/positionFromEvent.js';
 
 /**
  * @name      onDrag

@@ -1,5 +1,5 @@
 import __path from 'path';
-import __packageRootDir from '../node/path/packageRootDir';
+import __packageRootDir from '../node/path/packageRootDir.js';
 
 export default function ({ env, config }) {
     if (env.platform !== 'node') return;

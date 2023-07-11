@@ -2,7 +2,7 @@ import { __elementsInViewport } from '@coffeekraken/sugar/dom';
 
 import { __wait } from '@coffeekraken/sugar/datetime';
 
-import type { ISFrontendChecker } from '../types';
+import type { ISFrontendChecker } from '../types.js';
 
 /**
  * @name            preloadViewportAssets

@@ -1,4 +1,4 @@
-import __SCarpenterAppComponent from './SCarpenterAppComponent';
+import __SCarpenterAppComponent from './SCarpenterAppComponent.js';
 
 export default function define(
     props: Partial<ISCarpenterAppComponentProps> = {},

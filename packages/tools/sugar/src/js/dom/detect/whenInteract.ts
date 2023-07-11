@@ -1,6 +1,6 @@
 // @ts-nocheck
 
-import __WhenInteractSettingsInterface from './interface/WhenInteractSettingsInterface';
+import __WhenInteractSettingsInterface from './interface/WhenInteractSettingsInterface.js';
 
 /**
  * @name      whenInteract

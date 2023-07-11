@@ -1,6 +1,6 @@
-export * from '../config/storage.config';
+export * from '../config/storage.config.js';
 
-import type { IStorageConfig } from '../config/storage.config';
+import type { IStorageConfig } from '../config/storage.config.js';
 
 export interface ISSugarConfig {
     storage: IStorageConfig;

@@ -1,8 +1,8 @@
 // @ts-nocheck
 
-import __isPlainObject from '../is/isPlainObject';
-import __deepMerge from '../object/deepMerge';
-import __toString from '../string/toString';
+import __isPlainObject from '../is/isPlainObject.js';
+import __deepMerge from '../object/deepMerge.js';
+import __toString from '../string/toString.js';
 
 /**
  * @name                  argsToString
@@ -24,7 +24,7 @@ import __toString from '../string/toString';
  * @todo      {Test}      Testing when no definition is passed
  *
  * @snippet         __argsToString($1)
- * 
+ *
  * @example       js
  * import { __argsToString } from '@coffeekraken/sugar/cli';
  * __argsToString({

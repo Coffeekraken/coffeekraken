@@ -1,7 +1,7 @@
 // @ts-nocheck
 
-import __getRotateProperties from './getRotateProperties';
-import __getTranslateProperties from './getTranslateProperties';
+import __getRotateProperties from './getRotateProperties.js';
+import __getTranslateProperties from './getTranslateProperties.js';
 
 /**
  * @name      getTransformProperties

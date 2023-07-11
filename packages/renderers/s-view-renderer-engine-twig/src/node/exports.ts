@@ -1,3 +1,3 @@
-import SViewRendererEngineTwig from './SViewRendererEngineTwig';
-export * from './SViewRendererEngineTwig';
+import SViewRendererEngineTwig from './SViewRendererEngineTwig.js';
+export * from './SViewRendererEngineTwig.js';
 export default SViewRendererEngineTwig;

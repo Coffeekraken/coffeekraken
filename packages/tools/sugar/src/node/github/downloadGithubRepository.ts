@@ -1,11 +1,10 @@
-
 import __fs from 'fs';
 import __fsExtra from 'fs-extra';
 import __https from 'https';
-import __unzip from '../compression/unzip';
-import __fileName from '../fs/filename';
-import __folderPath from '../fs/folderPath';
-import __tmpDir from '../path/systemTmpDir';
+import __unzip from '../compression/unzip.js';
+import __fileName from '../fs/filename.js';
+import __folderPath from '../fs/folderPath.js';
+import __tmpDir from '../path/systemTmpDir.js';
 
 /**
  * @name            downloadGithubRepository
@@ -27,7 +26,7 @@ import __tmpDir from '../path/systemTmpDir';
  * __downloadGithubRepository($1).then(result => {
  *      $2
  * });
- * 
+ *
  * @example         js
  * import __downloadGithubRepository from '@coffeekraken/sugar/github';
  * await __downloadGithubRepository('Coffeekraken/coffeekraken', {

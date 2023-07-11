@@ -1,5 +1,5 @@
-import __STheme from '../STheme';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
+import __STheme from '../STheme.js';
 
 describe('s-theme.node.STheme', () => {
     it('Should instanciate correctly the default theme', async () => {

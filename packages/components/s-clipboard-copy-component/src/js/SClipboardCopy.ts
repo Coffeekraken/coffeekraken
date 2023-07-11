@@ -3,7 +3,7 @@ import __SLitComponent from '@coffeekraken/s-lit-component';
 import { __copy } from '@coffeekraken/sugar/clipboard';
 import { __deepMerge } from '@coffeekraken/sugar/object';
 import { css, html, unsafeCSS } from 'lit';
-import __SClipboardCopyComponentInterface from './interface/SClipboardCopyComponentInterface';
+import __SClipboardCopyComponentInterface from './interface/SClipboardCopyComponentInterface.js';
 
 // @ts-ignore
 import __css from '../../../../src/css/s-clipboard-copy.css'; // relative to /dist/pkg/esm/js

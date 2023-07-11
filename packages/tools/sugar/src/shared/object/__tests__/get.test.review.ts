@@ -1,4 +1,4 @@
-import __get from '../get';
+import __get from '../get.js';
 
 describe('sugar.shared.object.get', () => {
     it('Should get the object property correctly', (done) => {

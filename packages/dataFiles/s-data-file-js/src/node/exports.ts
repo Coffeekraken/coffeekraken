@@ -1,3 +1,3 @@
-import SDataFileJs from './SDataFileJs';
-export * from './SDataFileJs';
+import SDataFileJs from './SDataFileJs.js';
+export * from './SDataFileJs.js';
 export default SDataFileJs;

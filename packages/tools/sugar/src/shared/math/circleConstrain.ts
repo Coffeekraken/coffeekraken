@@ -1,6 +1,6 @@
 // @ts-nocheck
 
-import distanceBetween from './distanceBetween';
+import distanceBetween from './distanceBetween.js';
 
 /**
  * @name 		circleConstrain
@@ -27,7 +27,7 @@ import distanceBetween from './distanceBetween';
  * }, $3, {
  *      x: $4, y: $5
  * })
- * 
+ *
  * @example    js
  * import { __circleConstrain } from '@coffeekraken/sugar/math'
  * __circleConstrain({

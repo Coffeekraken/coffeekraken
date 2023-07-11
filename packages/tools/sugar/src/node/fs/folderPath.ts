@@ -1,6 +1,6 @@
 // @ts-nocheck
 
-import __isPath from '../../shared/is/isPath';
+import __isPath from '../../shared/is/isPath.js';
 
 /**
  * @name                folderPath

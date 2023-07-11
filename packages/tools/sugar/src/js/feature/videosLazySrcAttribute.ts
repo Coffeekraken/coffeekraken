@@ -1,8 +1,8 @@
 // @ts-nocheck
 
 import __fastdom from 'fastdom';
-import __whenInViewport from '../dom/detect/whenInViewport';
-import __querySelectorLive from '../dom/query/querySelectorLive';
+import __whenInViewport from '../dom/detect/whenInViewport.js';
+import __querySelectorLive from '../dom/query/querySelectorLive.js';
 
 /**
  * @name 		videoLazySrcAttribute

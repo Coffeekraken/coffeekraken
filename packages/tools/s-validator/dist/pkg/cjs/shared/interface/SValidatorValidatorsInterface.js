@@ -4,7 +4,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const s_interface_1 = __importDefault(require("@coffeekraken/s-interface"));
-const SValidator_1 = __importDefault(require("../SValidator"));
+const SValidator_js_1 = __importDefault(require("../SValidator.js"));
 /**
  * @name                SValidatorValidatorsInterface
  * @namespace           shared.interface
@@ -25,8 +25,8 @@ const SValidator_1 = __importDefault(require("../SValidator"));
  */
 class SValidatorValidatorsInterface extends s_interface_1.default {
     static get _definition() {
-        return SValidator_1.default.getValidatorsDefinition();
+        return SValidator_js_1.default.getValidatorsDefinition();
     }
 }
 exports.default = SValidatorValidatorsInterface;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7O0FBQUEsNEVBQXFEO0FBQ3JELCtEQUF5QztBQUV6Qzs7Ozs7Ozs7Ozs7Ozs7Ozs7R0FpQkc7QUFDSCxNQUFxQiw2QkFBOEIsU0FBUSxxQkFBWTtJQUNuRSxNQUFNLEtBQUssV0FBVztRQUNsQixPQUFPLG9CQUFZLENBQUMsdUJBQXVCLEVBQUUsQ0FBQztJQUNsRCxDQUFDO0NBQ0o7QUFKRCxnREFJQyJ9
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7O0FBQUEsNEVBQXFEO0FBQ3JELHFFQUE0QztBQUU1Qzs7Ozs7Ozs7Ozs7Ozs7Ozs7R0FpQkc7QUFDSCxNQUFxQiw2QkFBOEIsU0FBUSxxQkFBWTtJQUNuRSxNQUFNLEtBQUssV0FBVztRQUNsQixPQUFPLHVCQUFZLENBQUMsdUJBQXVCLEVBQUUsQ0FBQztJQUNsRCxDQUFDO0NBQ0o7QUFKRCxnREFJQyJ9

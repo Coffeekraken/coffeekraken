@@ -1,8 +1,8 @@
 // @ts-nocheck
 
 import __minimatch from 'minimatch';
-import __deepize from './deepize';
-import __flatten from './flatten';
+import __deepize from './deepize.js';
+import __flatten from './flatten.js';
 
 /**
  * @name                          getGlob
@@ -28,7 +28,7 @@ import __flatten from './flatten';
  * @todo      tests
  *
  * @snippet         __getGlob($1, $2)
- * 
+ *
  * @example             js
  * import { __getGlob } from '@coffeekraken/sugar/object';
  * __getGlob({

@@ -1,7 +1,6 @@
-
 import __fs from 'fs';
-import __packageJsonSync from '../package/packageJsonSync';
-import __packageRootDir from '../path/packageRootDir';
+import __packageJsonSync from '../package/packageJsonSync.js';
+import __packageRootDir from '../path/packageRootDir.js';
 
 /**
  * @name            addDependencies
@@ -22,7 +21,7 @@ import __packageRootDir from '../path/packageRootDir';
  *
  * @snippet         __addDependencies($1)
  * await __addDependencies($1)
- * 
+ *
  * @example         js
  * import { __addDependencies } from '@coffeekraken/sugar/npm';
  * await __addDependencies($1);

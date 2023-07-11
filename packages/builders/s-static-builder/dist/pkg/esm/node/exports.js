@@ -1,4 +1,4 @@
-import SStaticBuilder from './SStaticBuilder';
-export * from './SStaticBuilder';
+import SStaticBuilder from './SStaticBuilder.js';
+export * from './SStaticBuilder.js';
 export default SStaticBuilder;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sY0FBYyxNQUFNLGtCQUFrQixDQUFDO0FBQzlDLGNBQWMsa0JBQWtCLENBQUM7QUFDakMsZUFBZSxjQUFjLENBQUMifQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sY0FBYyxNQUFNLHFCQUFxQixDQUFDO0FBQ2pELGNBQWMscUJBQXFCLENBQUM7QUFDcEMsZUFBZSxjQUFjLENBQUMifQ==

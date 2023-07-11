@@ -1,5 +1,5 @@
-import type { ISInterfaceDefinitionProperty } from '../SInterface';
-import __SInterface from '../SInterface';
+import type { ISInterfaceDefinitionProperty } from '../SInterface.js';
+import __SInterface from '../SInterface.js';
 
 export interface ISInterfaceRendererRenderPropertyObj {
     value: any;

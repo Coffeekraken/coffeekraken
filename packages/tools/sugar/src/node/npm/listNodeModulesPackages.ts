@@ -1,7 +1,7 @@
 import __fs from 'fs';
 import __glob from 'glob-all';
-import __unique from '../../shared/array/unique';
-import __packageRootDir from '../path/packageRootDir';
+import __unique from '../../shared/array/unique.js';
+import __packageRootDir from '../path/packageRootDir.js';
 
 /**
  * @name        listNodeModulesPackages

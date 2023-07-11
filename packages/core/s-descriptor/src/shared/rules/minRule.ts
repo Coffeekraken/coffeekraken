@@ -1,7 +1,10 @@
 // @ts-nocheck
 
-import type { ISDescriptorResultObj } from '../SDescriptorResult';
-import type { ISDescriptorRule, ISDescriptorSettings } from '../_SDescriptor';
+import type { ISDescriptorResultObj } from '../SDescriptorResult.js';
+import type {
+    ISDescriptorRule,
+    ISDescriptorSettings,
+} from '../_SDescriptor.js';
 
 /**
  * @name          minRule

@@ -3,7 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const packageJsonSync_1 = __importDefault(require("../package/packageJsonSync"));
+const packageJsonSync_js_1 = __importDefault(require("../package/packageJsonSync.js"));
 /**
  * @name            isMonorepo
  * @namespace       node.is
@@ -30,8 +30,8 @@ const packageJsonSync_1 = __importDefault(require("../package/packageJsonSync"))
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 function __isMonorepo() {
-    const json = (0, packageJsonSync_1.default)();
+    const json = (0, packageJsonSync_js_1.default)();
     return json.workspaces !== undefined;
 }
 exports.default = __isMonorepo;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7O0FBQ0EsaUZBQTJEO0FBRTNEOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0F3Qkc7QUFDSCxTQUF3QixZQUFZO0lBQ2hDLE1BQU0sSUFBSSxHQUFHLElBQUEseUJBQWlCLEdBQUUsQ0FBQztJQUNqQyxPQUFPLElBQUksQ0FBQyxVQUFVLEtBQUssU0FBUyxDQUFDO0FBQ3pDLENBQUM7QUFIRCwrQkFHQyJ9
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7O0FBQUEsdUZBQThEO0FBRTlEOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0F3Qkc7QUFDSCxTQUF3QixZQUFZO0lBQ2hDLE1BQU0sSUFBSSxHQUFHLElBQUEsNEJBQWlCLEdBQUUsQ0FBQztJQUNqQyxPQUFPLElBQUksQ0FBQyxVQUFVLEtBQUssU0FBUyxDQUFDO0FBQ3pDLENBQUM7QUFIRCwrQkFHQyJ9

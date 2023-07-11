@@ -18,9 +18,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.__i18n = void 0;
-const i18n_1 = __importDefault(require("./i18n"));
-exports.__i18n = i18n_1.default;
-const SI18n_1 = __importDefault(require("./SI18n"));
-__exportStar(require("./SI18n"), exports);
-exports.default = SI18n_1.default;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0FBQUEsa0RBQTRCO0FBSW5CLGlCQUpGLGNBQU0sQ0FJRTtBQUhmLG9EQUE4QjtBQUU5QiwwQ0FBd0I7QUFFeEIsa0JBQWUsZUFBTyxDQUFDIn0=
+const i18n_js_1 = __importDefault(require("./i18n.js"));
+exports.__i18n = i18n_js_1.default;
+const SI18n_js_1 = __importDefault(require("./SI18n.js"));
+__exportStar(require("./SI18n.js"), exports);
+exports.default = SI18n_js_1.default;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0FBQUEsd0RBQStCO0FBSXRCLGlCQUpGLGlCQUFNLENBSUU7QUFIZiwwREFBaUM7QUFFakMsNkNBQTJCO0FBRTNCLGtCQUFlLGtCQUFPLENBQUMifQ==

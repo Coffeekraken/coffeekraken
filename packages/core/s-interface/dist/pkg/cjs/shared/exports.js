@@ -18,9 +18,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.__getAvailableInterfaceTypes = void 0;
-const getAvailableInterfaceTypes_1 = __importDefault(require("./getAvailableInterfaceTypes"));
-exports.__getAvailableInterfaceTypes = getAvailableInterfaceTypes_1.default;
-const SInterface_1 = __importDefault(require("./SInterface"));
-__exportStar(require("./SInterface"), exports);
-exports.default = SInterface_1.default;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0FBQUEsOEZBQXdFO0FBSS9ELHVDQUpGLG9DQUE0QixDQUlFO0FBSHJDLDhEQUFzQztBQUV0QywrQ0FBNkI7QUFHN0Isa0JBQWUsb0JBQVUsQ0FBQyJ9
+const getAvailableInterfaceTypes_js_1 = __importDefault(require("./getAvailableInterfaceTypes.js"));
+exports.__getAvailableInterfaceTypes = getAvailableInterfaceTypes_js_1.default;
+const SInterface_js_1 = __importDefault(require("./SInterface.js"));
+__exportStar(require("./SInterface.js"), exports);
+exports.default = SInterface_js_1.default;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0FBQUEsb0dBQTJFO0FBSWxFLHVDQUpGLHVDQUE0QixDQUlFO0FBSHJDLG9FQUF5QztBQUV6QyxrREFBZ0M7QUFHaEMsa0JBQWUsdUJBQVUsQ0FBQyJ9

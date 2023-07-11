@@ -1,9 +1,9 @@
 // @ts-nocheck
 
-import __camelCaseProps from '../object/camelCaseProps';
-import __deepMerge from '../object/deepMerge';
-import __parse from '../string/parse';
-import __unquote from '../string/unquote';
+import __camelCaseProps from '../object/camelCaseProps.js';
+import __deepMerge from '../object/deepMerge.js';
+import __parse from '../string/parse.js';
+import __unquote from '../string/unquote.js';
 
 /**
  * @name                        parseArgs
@@ -33,7 +33,7 @@ import __unquote from '../string/unquote';
  * @todo      tests
  *
  * @snippet         __parseArgs($1)
- * 
+ *
  * @example         js
  * import { __parseArgs } from '@coffeekraken/sugar/cli';
  * __parseArgs('hello -w 10 yop "hello world" -b --hello.world Nelson --help "coco yep" #blop', {

@@ -1,6 +1,6 @@
 // @ts-nocheck
 
-import __SSugarConfig from '../node/sugar';
+import __SSugarConfig from '../node/sugar.js';
 
 export default (stringArgs = '') => {
     return new Promise(async (resolve) => {

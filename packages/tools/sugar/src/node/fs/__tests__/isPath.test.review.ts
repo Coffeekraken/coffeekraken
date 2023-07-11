@@ -1,4 +1,4 @@
-import __isPath from '../isPath';
+import __isPath from '../isPath.js';
 describe('sugar.node.fs.isPath', () => {
     it('Should detect that a valid path is a valid path', () => {
         expect(__isPath('/my/cool/path.png')).toBe(true);

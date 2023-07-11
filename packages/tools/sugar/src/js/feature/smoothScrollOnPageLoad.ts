@@ -1,7 +1,7 @@
 // @ts-nocheck
-import __deepMerge from '../../shared/object/deepMerge';
-import type { IScrollToSettings } from '../dom/scroll/scrollTo';
-import __scrollToLocationHash from '../dom/scroll/scrollToLocationHash';
+import __deepMerge from '../../shared/object/deepMerge.js';
+import type { IScrollToSettings } from '../dom/scroll/scrollTo.js';
+import __scrollToLocationHash from '../dom/scroll/scrollToLocationHash.js';
 
 /**
  * @name        smoothScrollOnPageLoad

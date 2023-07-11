@@ -2,8 +2,8 @@ import type { ISDurationObject } from '@coffeekraken/s-duration';
 import __SDuration from '@coffeekraken/s-duration';
 import __fs from 'fs';
 import __unzipper from 'unzipper';
-import __fileName from '../fs/filename';
-import __folderPath from '../fs/folderPath';
+import __fileName from '../fs/filename.js';
+import __folderPath from '../fs/folderPath.js';
 
 /**
  * @name            unzip

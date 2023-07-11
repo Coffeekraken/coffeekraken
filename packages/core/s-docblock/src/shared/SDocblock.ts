@@ -2,11 +2,11 @@ import __SClass from '@coffeekraken/s-class';
 import { __isPath } from '@coffeekraken/sugar/fs';
 import { __packageJsonSync } from '@coffeekraken/sugar/package';
 import __fs from 'fs';
-// import __markdown from './markdown/index';
+// import __markdown from './markdown/index.js';
 import { __isNode } from '@coffeekraken/sugar/is';
 import { __deepMerge } from '@coffeekraken/sugar/object';
-import type { ISDocblockBlock } from './SDocblockBlock';
-import __SDocblockBlock from './SDocblockBlock';
+import type { ISDocblockBlock } from './SDocblockBlock.js';
+import __SDocblockBlock from './SDocblockBlock.js';
 
 /**
  *

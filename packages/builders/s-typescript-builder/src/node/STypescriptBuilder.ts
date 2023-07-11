@@ -18,8 +18,8 @@ import __ts from 'typescript';
 
 import * as __tsMorph from 'ts-morph';
 
-import __STypescriptBuilderSettingsInterface from './interface/STypescriptBuilderSettingsInterface';
-// import __STypescriptBuilderBuildParamsInterface from './interface/STypescriptBuilderBuildParamsInterface';
+import __STypescriptBuilderSettingsInterface from './interface/STypescriptBuilderSettingsInterface.js';
+// import __STypescriptBuilderBuildParamsInterface from './interface/STypescriptBuilderBuildParamsInterface.js';
 
 /**
  * @name                STypescriptBuilder

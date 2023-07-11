@@ -1,7 +1,7 @@
 import __SClass from '@coffeekraken/s-class';
 import { __deepMerge } from '@coffeekraken/sugar/object';
-import type { ISStateSettings } from './SState';
-import __SState from './SState';
+import type { ISStateSettings } from './SState.js';
+import __SState from './SState.js';
 
 /**
  * @name                SStateManager

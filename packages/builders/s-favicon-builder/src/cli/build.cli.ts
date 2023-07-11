@@ -1,5 +1,5 @@
-import __SFaviconBuilderBuildParamsInterface from '../node/interface/SFaviconBuilderBuildParamsInterface';
-import __SFaviconBuilder from '../node/SFaviconBuilder';
+import __SFaviconBuilderBuildParamsInterface from '../node/interface/SFaviconBuilderBuildParamsInterface.js';
+import __SFaviconBuilder from '../node/SFaviconBuilder.js';
 
 export default function build(stringArgs = '') {
     return new Promise(async (resolve) => {

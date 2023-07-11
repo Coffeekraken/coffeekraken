@@ -20,11 +20,11 @@ import __rollupAnalyzerPlugin from 'rollup-plugin-analyzer';
 import { uglify as __uglifyPlugin } from 'rollup-plugin-uglify';
 import { build as __viteBuild, createServer as __viteServer } from 'vite';
 import { compression as __compression2 } from 'vite-plugin-compression2';
-import __SViteBuildParamsInterface from './interface/SViteBuildParamsInterface';
-import __SViteStartParamsInterface from './interface/SViteStartParamsInterface';
-import __SViteTestParamsInterface from './interface/SViteTestParamsInterface';
-import __sInternalWatcherReloadVitePlugin from './plugins/internalWatcherReloadPlugin';
-import __rewritesPlugin from './plugins/rewritesPlugin';
+import __SViteBuildParamsInterface from './interface/SViteBuildParamsInterface.js';
+import __SViteStartParamsInterface from './interface/SViteStartParamsInterface.js';
+import __SViteTestParamsInterface from './interface/SViteTestParamsInterface.js';
+import __sInternalWatcherReloadVitePlugin from './plugins/internalWatcherReloadPlugin.js';
+import __rewritesPlugin from './plugins/rewritesPlugin.js';
 
 export interface ISViteSettings {
     processConfig: Function;

@@ -4,7 +4,7 @@ import __SInterface from '@coffeekraken/s-interface';
 import __SLitComponent from '@coffeekraken/s-lit-component';
 import { __filterObject } from '@coffeekraken/sugar/object';
 import { html } from 'lit';
-import { loadDocmap } from '../state/state';
+import { loadDocmap } from '../state/state.js';
 
 class SCKDiscoverPropsInterface extends __SInterface {
     static get _definition() {

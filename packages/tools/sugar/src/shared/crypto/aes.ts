@@ -1,9 +1,9 @@
 // @ts-nocheck
 
-import AES from 'crypto-js/aes';
-import utf8 from 'crypto-js/enc-utf8';
-import parse from '../string/parse';
-import toString from '../string/toString';
+import AES from 'crypto-js/aes.js';
+import utf8 from 'crypto-js/enc-utf8.js';
+import parse from '../string/parse.js';
+import toString from '../string/toString.js';
 
 /**
  * @name            aes
@@ -16,7 +16,7 @@ import toString from '../string/toString';
  * Expose two function named "encrypt" and "decrypt" that you can use to process your content using the aes algorithm
  *
  * @snippet         __aes.encrypt($1)
- * 
+ *
  * @example         js
  * import { __aes } from '@coffeekraken/sugar/crypto';
  * __aes.encrypt('hello world');

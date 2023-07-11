@@ -1,6 +1,6 @@
 // @ts-nocheck
 
-import __addEventListenerOnce from '../event/addEventListenerOnce';
+import __addEventListenerOnce from '../event/addEventListenerOnce.js';
 
 /**
  * @name      whenAnimationEnd

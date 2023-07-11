@@ -1,4 +1,4 @@
-import __expandPleasantCssClassnames from '../expandPleasantCssClassnames';
+import __expandPleasantCssClassnames from '../expandPleasantCssClassnames.js';
 
 describe('sugar.shared.html.expandPleasantCssClassnames', () => {
     it('Should expand simple html content successfully', () => {

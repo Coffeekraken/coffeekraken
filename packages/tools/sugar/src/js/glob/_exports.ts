@@ -1,1 +1,1 @@
-export * from '../../shared/glob/_exports';
+export * from '../../shared/glob/_exports.js';

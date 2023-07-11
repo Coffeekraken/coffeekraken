@@ -7,7 +7,7 @@ import __STheme from '@coffeekraken/s-theme';
 import { html } from 'lit';
 import * as THREE from 'three';
 import { OBJLoader } from './lib/three/examples/jsm/loaders/OBJLoader.js';
-// import { RGBELoader } from './lib/three/examples/jsm/loaders/RGBELoader';
+// import { RGBELoader } from './lib/three/examples/jsm/loaders/RGBELoader.js';
 import { EffectComposer } from './lib/three/examples/jsm/postprocessing/EffectComposer.js';
 import { RenderPass } from './lib/three/examples/jsm/postprocessing/RenderPass.js';
 

@@ -1,4 +1,4 @@
-import __SBench from '../exports';
+import __SBench from '../exports.js';
 
 describe('s-bench', () => {
     it('Should handle a basic time benchmark correctly', () => {

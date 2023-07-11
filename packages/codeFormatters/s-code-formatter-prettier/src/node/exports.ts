@@ -1,3 +1,3 @@
-import SCodeFormatterPrettier from './SCodeFormatterPrettier';
-export * from './SCodeFormatterPrettier';
+import SCodeFormatterPrettier from './SCodeFormatterPrettier.js';
+export * from './SCodeFormatterPrettier.js';
 export default SCodeFormatterPrettier;

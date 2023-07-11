@@ -1,5 +1,5 @@
-import SUrl from './SUrl';
+import SUrl from './SUrl.js';
 
-export * from './SUrl';
+export * from './SUrl.js';
 
 export default SUrl;

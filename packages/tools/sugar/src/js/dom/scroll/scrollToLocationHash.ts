@@ -1,9 +1,9 @@
 // @ts-nocheck
 
-import __scrollTo from './scrollTo';
+import __scrollTo from './scrollTo.js';
 
-import __deepMerge from '../../../shared/object/deepMerge';
-import type { IScrollToSettings } from './scrollTo';
+import __deepMerge from '../../../shared/object/deepMerge.js';
+import type { IScrollToSettings } from './scrollTo.js';
 
 /**
  * @name      scrollToLocationHash

@@ -18,10 +18,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.STypeResult = void 0;
-const SType_1 = __importDefault(require("../shared/SType"));
-const STypeResult_1 = __importDefault(require("../shared/STypeResult"));
-exports.STypeResult = STypeResult_1.default;
-__exportStar(require("../shared/SType"), exports);
-__exportStar(require("../shared/STypeResult"), exports);
-exports.default = SType_1.default;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0FBQUEsNERBQW9DO0FBQ3BDLHdFQUFnRDtBQUt2QyxzQkFMRixxQkFBVyxDQUtFO0FBSHBCLGtEQUFnQztBQUNoQyx3REFBc0M7QUFHdEMsa0JBQWUsZUFBSyxDQUFDIn0=
+const SType_js_1 = __importDefault(require("../shared/SType.js"));
+const STypeResult_js_1 = __importDefault(require("../shared/STypeResult.js"));
+exports.STypeResult = STypeResult_js_1.default;
+__exportStar(require("../shared/SType.js"), exports);
+__exportStar(require("../shared/STypeResult.js"), exports);
+exports.default = SType_js_1.default;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0FBQUEsa0VBQXVDO0FBQ3ZDLDhFQUFtRDtBQUsxQyxzQkFMRix3QkFBVyxDQUtFO0FBSHBCLHFEQUFtQztBQUNuQywyREFBeUM7QUFHekMsa0JBQWUsa0JBQUssQ0FBQyJ9

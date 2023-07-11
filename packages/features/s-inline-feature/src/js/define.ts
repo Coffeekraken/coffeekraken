@@ -1,5 +1,5 @@
-import type ISInlineFeatureProps from './SInlineFeature';
-import __SInlineFeature from './SInlineFeature';
+import type ISInlineFeatureProps from './SInlineFeature.js';
+import __SInlineFeature from './SInlineFeature.js';
 
 export default function define(
     props: Partial<ISInlineFeatureProps> = {},

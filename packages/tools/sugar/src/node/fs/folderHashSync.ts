@@ -1,10 +1,10 @@
-import __deepMerge from '../../shared/object/deepMerge';
-import __isDirectory from '../is/isDirectory';
-import __fileHashSync from './fileHashSync';
+import __deepMerge from '../../shared/object/deepMerge.js';
+import __isDirectory from '../is/isDirectory.js';
+import __fileHashSync from './fileHashSync.js';
 
 import { BinaryToTextEncoding } from 'crypto';
 import __fs from 'fs';
-import __sha256 from '../../shared/crypto/sha256';
+import __sha256 from '../../shared/crypto/sha256.js';
 
 /**
  * @name            folderHashSync

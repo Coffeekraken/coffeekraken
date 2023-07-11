@@ -1,2 +1,2 @@
-import __slideable from './slideable';
+import __slideable from './slideable.js';
 export { __slideable };

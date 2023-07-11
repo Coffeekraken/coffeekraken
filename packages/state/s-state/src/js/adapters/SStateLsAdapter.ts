@@ -1,4 +1,4 @@
-import { ISStateAdapter } from '../../shared/SState';
+import { ISStateAdapter } from '../../shared/SState.js';
 
 /**
  * @name        SStateLsAdapter

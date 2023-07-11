@@ -1,4 +1,4 @@
-import __replaceTags from '../replaceTags';
+import __replaceTags from '../replaceTags.js';
 
 describe('sugar.shared.html.replaceTags', () => {
     const html = `

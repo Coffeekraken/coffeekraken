@@ -1,4 +1,4 @@
-import __folderHashSync from '../folderHashSync';
+import __folderHashSync from '../folderHashSync.js';
 describe('sugar.node.fs.folderHash', () => {
     it('Should hash correctly a simple folder', () => {
         const hash = __folderHashSync(`${__dirname}/data/hashfolder`);

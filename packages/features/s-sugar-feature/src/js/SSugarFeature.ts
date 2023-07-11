@@ -14,7 +14,7 @@ import {
     __linksStateAttributes,
 } from '@coffeekraken/sugar/feature';
 import { __deepMerge } from '@coffeekraken/sugar/object';
-import __SSugarFeatureInterface from './interface/SSugarFeatureInterface';
+import __SSugarFeatureInterface from './interface/SSugarFeatureInterface.js';
 
 import { __viewportEvents } from '@coffeekraken/sugar/dom';
 

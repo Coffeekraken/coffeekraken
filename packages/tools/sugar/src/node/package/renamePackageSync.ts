@@ -1,9 +1,9 @@
 // @ts-nocheck
 
 import __fs from 'fs';
-import __readJsonSync from '../fs/readJsonSync';
-import __writeJsonSync from '../fs/writeJsonSync';
-import __packageRootDir from '../path/packageRootDir';
+import __readJsonSync from '../fs/readJsonSync.js';
+import __writeJsonSync from '../fs/writeJsonSync.js';
+import __packageRootDir from '../path/packageRootDir.js';
 
 /**
  * @name          renamePackageSync

@@ -1,6 +1,6 @@
 // @ts-nocheck
 
-import __isVisible from '../is/isVisible';
+import __isVisible from '../is/isVisible.js';
 
 /**
  * @name      inViewportPercentage

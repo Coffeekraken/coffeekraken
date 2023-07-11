@@ -1,12 +1,17 @@
-import __SStdioConsoleSource from './sources/SStdioConsoleSource';
-import __SStdioEventEmitterSource from './sources/SStdioEventEmitterSource';
-import __SStdio from './SStdio';
-import __SStdioAdapter from './SStdioAdapter';
-import __SStdioSource from './SStdioSource';
+import __SStdioConsoleSource from './sources/SStdioConsoleSource.js';
+import __SStdioEventEmitterSource from './sources/SStdioEventEmitterSource.js';
+import __SStdio from './SStdio.js';
+import __SStdioAdapter from './SStdioAdapter.js';
+import __SStdioSource from './SStdioSource.js';
 
-export * from './SStdio';
-export * from './SStdioAdapter';
-export * from './SStdioSource';
-export { __SStdioAdapter, __SStdioSource, __SStdioEventEmitterSource, __SStdioConsoleSource };
+export * from './SStdio.js';
+export * from './SStdioAdapter.js';
+export * from './SStdioSource.js';
+export {
+    __SStdioAdapter,
+    __SStdioConsoleSource,
+    __SStdioEventEmitterSource,
+    __SStdioSource,
+};
 
 export default __SStdio;

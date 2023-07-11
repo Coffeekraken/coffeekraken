@@ -1,6 +1,6 @@
-import __SHotkeysListComponent from './SHotkeysListComponent';
-import __define from './define';
+import __SHotkeysListComponent from './SHotkeysListComponent.js';
+import __define from './define.js';
 
-export * from './SHotkeysListComponent';
+export * from './SHotkeysListComponent.js';
 export { __define };
 export default __SHotkeysListComponent;

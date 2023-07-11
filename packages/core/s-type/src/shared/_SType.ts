@@ -6,7 +6,7 @@ import { __map } from '@coffeekraken/sugar/iterable';
 import { __deepMerge } from '@coffeekraken/sugar/object';
 import type { IParseTypeStringResultObj } from '@coffeekraken/sugar/type';
 import { __parseTypeString, __typeOf } from '@coffeekraken/sugar/type';
-import __STypeResult from './STypeResult';
+import __STypeResult from './STypeResult.js';
 
 /**
  * @___name                SType

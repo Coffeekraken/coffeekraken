@@ -1,6 +1,6 @@
 // @ts-nocheck
 
-import __countLineChars from '../../shared/string/countLineChars';
+import __countLineChars from '../../shared/string/countLineChars.js';
 
 /**
  * @name                                  countLine

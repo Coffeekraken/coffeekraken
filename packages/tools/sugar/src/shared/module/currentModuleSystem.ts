@@ -1,5 +1,5 @@
-import __isCjs from '../is/isCjs';
-import __isEsm from '../is/isEsm';
+import __isCjs from '../is/isCjs.js';
+import __isEsm from '../is/isEsm.js';
 
 /**
  * @name          currentModuleSystem
@@ -14,7 +14,7 @@ import __isEsm from '../is/isEsm';
  * @return      {('esm'|'cjs')}           The module system the code is running on
  *
  * @snippet         __currentModuleSystem()
- * 
+ *
  * @example       js
  * import { __currentModuleSystem } from '@coffeekraken/sugar/module';
  * __currentModuleSystem(); // => 'cjs'

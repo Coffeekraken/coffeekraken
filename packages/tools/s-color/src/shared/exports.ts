@@ -1,5 +1,5 @@
-import SColor from './SColor';
+import SColor from './SColor.js';
 
-export * from './SColor';
+export * from './SColor.js';
 
 export default SColor;

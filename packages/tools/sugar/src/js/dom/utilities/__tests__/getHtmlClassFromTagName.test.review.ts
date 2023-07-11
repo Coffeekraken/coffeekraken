@@ -2,7 +2,7 @@
  * @jest-environment jsdom
  */
 
-import __getHtmlClassFromTagName from '../getHtmlClassFromTagName';
+import __getHtmlClassFromTagName from '../getHtmlClassFromTagName.js';
 
 describe('sugar.js.html.getHtmlClassFromTagName', () => {
     it('Should get back the correct HTMLElement class from passed tags', (done) => {

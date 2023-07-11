@@ -1,6 +1,6 @@
 // shared
 
-import type { ISTypeDescriptor } from '../SType';
+import type { ISTypeDescriptor } from '../SType.js';
 
 /**
  * @name              functionTypeDescriptor

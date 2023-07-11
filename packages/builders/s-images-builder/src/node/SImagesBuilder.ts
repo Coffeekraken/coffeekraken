@@ -18,8 +18,8 @@ import __imageSize from 'image-size';
 import __minimatch from 'minimatch';
 import __path from 'path';
 import __sharp from 'sharp';
-import __SImagesBuilderBuildParamsInterface from './interface/SImagesBuilderBuildParamsInterface';
-import __SImagesBuilderSettingsInterface from './interface/SImagesBuilderSettingsInterface';
+import __SImagesBuilderBuildParamsInterface from './interface/SImagesBuilderBuildParamsInterface.js';
+import __SImagesBuilderSettingsInterface from './interface/SImagesBuilderSettingsInterface.js';
 
 /**
  * @name            SImagesBuilder

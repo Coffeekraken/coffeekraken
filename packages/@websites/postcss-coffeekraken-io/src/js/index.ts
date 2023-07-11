@@ -4,8 +4,8 @@ import __SFront from '@coffeekraken/s-front';
 import __SPackEssentials from '@coffeekraken/s-pack-essentials';
 
 // website related
-import __WelcomeSlider from './classes/WelcomeSlider';
-import { __define as __CKMenuDefine } from './components/CKMenu';
+import __WelcomeSlider from './classes/WelcomeSlider.js';
+import { __define as __CKMenuDefine } from './components/CKMenu.js';
 
 // components
 import { __define as __SCodeExampleComponentDefine } from '@coffeekraken/s-code-example-component';

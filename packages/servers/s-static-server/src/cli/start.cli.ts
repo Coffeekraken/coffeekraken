@@ -1,4 +1,4 @@
-import __SStaticServer from '../node/SStaticServer';
+import __SStaticServer from '../node/SStaticServer.js';
 
 export default function start(stringArgs = '') {
     return new Promise(async (resolve) => {

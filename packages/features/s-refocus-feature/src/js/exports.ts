@@ -1,6 +1,6 @@
-import __SRefocusFeature from './SRefocusFeature';
-import __define from './define';
+import __SRefocusFeature from './SRefocusFeature.js';
+import __define from './define.js';
 
-export * from './SRefocusFeature';
+export * from './SRefocusFeature.js';
 export { __define };
 export default __SRefocusFeature;

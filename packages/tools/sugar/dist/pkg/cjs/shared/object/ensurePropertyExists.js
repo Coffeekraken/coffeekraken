@@ -4,8 +4,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const get_1 = __importDefault(require("./get"));
-const set_1 = __importDefault(require("./set"));
+const get_js_1 = __importDefault(require("./get.js"));
+const set_js_1 = __importDefault(require("./set.js"));
 /**
  * @name                        ensurePropertyExists
  * @namespace            shared.object
@@ -36,10 +36,10 @@ const set_1 = __importDefault(require("./set"));
  * @author  Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 function __ensureProperyExists(obj, path, value = {}) {
-    const v = (0, get_1.default)(obj, path);
+    const v = (0, get_js_1.default)(obj, path);
     if (v === undefined) {
-        (0, set_1.default)(obj, path, value);
+        (0, set_js_1.default)(obj, path, value);
     }
 }
 exports.default = __ensureProperyExists;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOzs7OztBQUVkLGdEQUEwQjtBQUMxQixnREFBMEI7QUFFMUI7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0E0Qkc7QUFDSCxTQUF3QixxQkFBcUIsQ0FBQyxHQUFHLEVBQUUsSUFBSSxFQUFFLEtBQUssR0FBRyxFQUFFO0lBQy9ELE1BQU0sQ0FBQyxHQUFHLElBQUEsYUFBSyxFQUFDLEdBQUcsRUFBRSxJQUFJLENBQUMsQ0FBQztJQUMzQixJQUFJLENBQUMsS0FBSyxTQUFTLEVBQUU7UUFDakIsSUFBQSxhQUFLLEVBQUMsR0FBRyxFQUFFLElBQUksRUFBRSxLQUFLLENBQUMsQ0FBQztLQUMzQjtBQUNMLENBQUM7QUFMRCx3Q0FLQyJ9
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOzs7OztBQUVkLHNEQUE2QjtBQUM3QixzREFBNkI7QUFFN0I7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0E0Qkc7QUFDSCxTQUF3QixxQkFBcUIsQ0FBQyxHQUFHLEVBQUUsSUFBSSxFQUFFLEtBQUssR0FBRyxFQUFFO0lBQy9ELE1BQU0sQ0FBQyxHQUFHLElBQUEsZ0JBQUssRUFBQyxHQUFHLEVBQUUsSUFBSSxDQUFDLENBQUM7SUFDM0IsSUFBSSxDQUFDLEtBQUssU0FBUyxFQUFFO1FBQ2pCLElBQUEsZ0JBQUssRUFBQyxHQUFHLEVBQUUsSUFBSSxFQUFFLEtBQUssQ0FBQyxDQUFDO0tBQzNCO0FBQ0wsQ0FBQztBQUxELHdDQUtDIn0=

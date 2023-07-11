@@ -1,3 +1,3 @@
-import __SCarpenter from './SCarpenter';
+import __SCarpenter from './SCarpenter.js';
 
 new __SCarpenter();

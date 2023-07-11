@@ -3,7 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const currentModuleSystem_1 = __importDefault(require("../module/currentModuleSystem"));
+const currentModuleSystem_js_1 = __importDefault(require("../module/currentModuleSystem.js"));
 /**
  * @name            replaceTokens
  * @namespace       shared.token
@@ -28,8 +28,8 @@ const currentModuleSystem_1 = __importDefault(require("../module/currentModuleSy
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 function replaceTokens(string) {
-    string = string.replace(/\%moduleSystem/g, (0, currentModuleSystem_1.default)());
+    string = string.replace(/\%moduleSystem/g, (0, currentModuleSystem_js_1.default)());
     return string;
 }
 exports.default = replaceTokens;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7O0FBQUEsd0ZBQWtFO0FBRWxFOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBc0JHO0FBQ0gsU0FBd0IsYUFBYSxDQUFDLE1BQWM7SUFDaEQsTUFBTSxHQUFHLE1BQU0sQ0FBQyxPQUFPLENBQUMsaUJBQWlCLEVBQUUsSUFBQSw2QkFBcUIsR0FBRSxDQUFDLENBQUM7SUFDcEUsT0FBTyxNQUFNLENBQUM7QUFDbEIsQ0FBQztBQUhELGdDQUdDIn0=
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7O0FBQUEsOEZBQXFFO0FBRXJFOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBc0JHO0FBQ0gsU0FBd0IsYUFBYSxDQUFDLE1BQWM7SUFDaEQsTUFBTSxHQUFHLE1BQU0sQ0FBQyxPQUFPLENBQUMsaUJBQWlCLEVBQUUsSUFBQSxnQ0FBcUIsR0FBRSxDQUFDLENBQUM7SUFDcEUsT0FBTyxNQUFNLENBQUM7QUFDbEIsQ0FBQztBQUhELGdDQUdDIn0=

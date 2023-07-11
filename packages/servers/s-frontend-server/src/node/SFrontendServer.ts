@@ -10,8 +10,8 @@ import __express from 'express';
 import __fs from 'fs';
 import { createProxyMiddleware } from 'http-proxy-middleware';
 import __path from 'path';
-import __SFrontendServerCorsProxyParamsInterface from './interface/SFrontendServerCorsProxyParamsInterface';
-import __SFrontendServerStartParamsInterface from './interface/SFrontendServerStartParamsInterface';
+import __SFrontendServerCorsProxyParamsInterface from './interface/SFrontendServerCorsProxyParamsInterface.js';
+import __SFrontendServerStartParamsInterface from './interface/SFrontendServerStartParamsInterface.js';
 // import __vhost from 'vhost';
 import __SDuration from '@coffeekraken/s-duration';
 import __STypescriptBuilder from '@coffeekraken/s-typescript-builder';
@@ -21,7 +21,7 @@ import { __parse } from '@coffeekraken/sugar/string';
 import __fileUpload from 'express-fileupload';
 import __runMiddleware from 'run-middleware';
 
-import __viewRendererMiddleware from './middleware/viewRendererMiddleware';
+import __viewRendererMiddleware from './middleware/viewRendererMiddleware.js';
 
 import __bodyParser from 'body-parser';
 import __request from 'request';

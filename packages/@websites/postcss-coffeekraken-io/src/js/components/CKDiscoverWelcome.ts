@@ -5,7 +5,7 @@ import __SLitComponent from '@coffeekraken/s-lit-component';
 import { __pickRandom } from '@coffeekraken/sugar/array';
 import { __wait } from '@coffeekraken/sugar/datetime';
 import { html } from 'lit';
-import { loadDocmap } from '../state/state';
+import { loadDocmap } from '../state/state.js';
 
 class SCKDiscoverWelcomePropsInterface extends __SInterface {
     static get _definition() {

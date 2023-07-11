@@ -1,10 +1,10 @@
-import __emptyNode from './emptyNode';
-import __insertAfter from './insertAfter';
-import __prependChild from './prependChild';
-import __stripTags from './stripTags';
-import __wrap from './wrap';
-import __wrapInner from './wrapInner';
-export * from './toDomNodes';
+import __emptyNode from './emptyNode.js';
+import __insertAfter from './insertAfter.js';
+import __prependChild from './prependChild.js';
+import __stripTags from './stripTags.js';
+import __wrap from './wrap.js';
+import __wrapInner from './wrapInner.js';
+export * from './toDomNodes.js';
 export {
     __emptyNode,
     __insertAfter,

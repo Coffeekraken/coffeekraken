@@ -5,8 +5,8 @@ import { __i18n } from '@coffeekraken/s-i18n';
 
 import type { ISVideoData, ISVideoFormat } from '@specim3n/types';
 
-import type { ISSpecsEditorWidgetDeps } from '../SSpecsEditorWidget';
-import __SSpecsEditorWidget from '../SSpecsEditorWidget';
+import type { ISSpecsEditorWidgetDeps } from '../SSpecsEditorWidget.js';
+import __SSpecsEditorWidget from '../SSpecsEditorWidget.js';
 
 export default class SSpecsEditorComponentVideoWidget extends __SSpecsEditorWidget {
     constructor(deps: ISSpecsEditorWidgetDeps) {

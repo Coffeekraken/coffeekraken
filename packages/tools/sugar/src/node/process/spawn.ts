@@ -5,8 +5,8 @@ import __SEventEmitter from '@coffeekraken/s-event-emitter';
 import type { ISPromise } from '@coffeekraken/s-promise';
 import __SPromise from '@coffeekraken/s-promise';
 import { spawn as __spawn, SpawnOptions } from 'child_process';
-import __deepMerge from '../../shared/object/deepMerge';
-import __onProcessExit from './onProcessExit';
+import __deepMerge from '../../shared/object/deepMerge.js';
+import __onProcessExit from './onProcessExit.js';
 
 /**
  * @name            spawn

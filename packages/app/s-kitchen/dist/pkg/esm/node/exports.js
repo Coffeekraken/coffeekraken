@@ -1,4 +1,4 @@
-import SKitchen from './SKitchen';
-export * from './SKitchen';
+import SKitchen from './SKitchen.js';
+export * from './SKitchen.js';
 export default SKitchen;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sUUFBUSxNQUFNLFlBQVksQ0FBQztBQUVsQyxjQUFjLFlBQVksQ0FBQztBQUUzQixlQUFlLFFBQVEsQ0FBQyJ9
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sUUFBUSxNQUFNLGVBQWUsQ0FBQztBQUVyQyxjQUFjLGVBQWUsQ0FBQztBQUU5QixlQUFlLFFBQVEsQ0FBQyJ9

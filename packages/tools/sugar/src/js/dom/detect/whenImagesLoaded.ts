@@ -1,7 +1,7 @@
 // @ts-nocheck
 
 import __SPromise from '@coffeekraken/s-promise';
-import __whenImageLoaded from './whenImageLoaded';
+import __whenImageLoaded from './whenImageLoaded.js';
 
 /**
  * @name      whenImagesLoaded

@@ -1,3 +1,3 @@
-import SPostcssBuilder from './SPostcssBuilder';
-export * from './SPostcssBuilder';
+import SPostcssBuilder from './SPostcssBuilder.js';
+export * from './SPostcssBuilder.js';
 export default SPostcssBuilder;

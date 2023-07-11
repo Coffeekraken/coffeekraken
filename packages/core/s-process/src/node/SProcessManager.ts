@@ -6,10 +6,10 @@ import type { ISStdioSettings } from '@coffeekraken/s-stdio';
 import __SStdio from '@coffeekraken/s-stdio';
 import { __getColorFor } from '@coffeekraken/sugar/dev';
 import { __deepMerge } from '@coffeekraken/sugar/object';
-import __SProcess from './SProcess';
+import __SProcess from './SProcess.js';
 import __SProcessManagerProcessWrapper, {
     ISProcessManagerProcessWrapperSettings,
-} from './SProcessManagerProcessWrapper';
+} from './SProcessManagerProcessWrapper.js';
 
 /**
  * @name            SProcessManager

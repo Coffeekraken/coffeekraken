@@ -1,34 +1,34 @@
-import __applyScope from './applyScope';
-import __camelCaseProps from './camelCaseProps';
-import __clone from './clone';
-import __decycle from './decycle';
-import __deepAssign from './deepAssign';
-import __deepClean from './deepClean';
-import __deepFilter from './deepFilter';
-import __deepMap from './deepMap';
-import __deepMerge from './deepMerge';
-import __deepProxy from './deepProxy';
-import __deepize from './deepize';
-import __delete from './delete';
-import __deleteProperty from './deleteProperty';
-import __diff from './diff';
-import __ensurePropertyExists from './ensurePropertyExists';
-import __extractValues from './extractValues';
-import __filterObject from './filterObject';
-import __flatten from './flatten';
-import __get from './get';
-import __getGlob from './getGlob';
-import __getKeyByValue from './getKeyByValue';
-import __map from './map';
-import __merge from './merge';
-import __objectHash from './objectHash';
-import __propertyProxy from './propertyProxy';
-import __set from './set';
-import __sort from './sort';
-import __sortDeep from './sortDeep';
-import __toJson from './toJson';
-import __toPlainObject from './toPlainObject';
-import __toQueryString from './toQueryString';
+import __applyScope from './applyScope.js';
+import __camelCaseProps from './camelCaseProps.js';
+import __clone from './clone.js';
+import __decycle from './decycle.js';
+import __deepAssign from './deepAssign.js';
+import __deepClean from './deepClean.js';
+import __deepFilter from './deepFilter.js';
+import __deepMap from './deepMap.js';
+import __deepMerge from './deepMerge.js';
+import __deepProxy from './deepProxy.js';
+import __deepize from './deepize.js';
+import __delete from './delete.js';
+import __deleteProperty from './deleteProperty.js';
+import __diff from './diff.js';
+import __ensurePropertyExists from './ensurePropertyExists.js';
+import __extractValues from './extractValues.js';
+import __filterObject from './filterObject.js';
+import __flatten from './flatten.js';
+import __get from './get.js';
+import __getGlob from './getGlob.js';
+import __getKeyByValue from './getKeyByValue.js';
+import __map from './map.js';
+import __merge from './merge.js';
+import __objectHash from './objectHash.js';
+import __propertyProxy from './propertyProxy.js';
+import __set from './set.js';
+import __sort from './sort.js';
+import __sortDeep from './sortDeep.js';
+import __toJson from './toJson.js';
+import __toPlainObject from './toPlainObject.js';
+import __toQueryString from './toQueryString.js';
 
 export {
     __applyScope,
@@ -37,11 +37,11 @@ export {
     __decycle,
     __deepAssign,
     __deepClean,
-    __deepize,
     __deepFilter,
     __deepMap,
     __deepMerge,
     __deepProxy,
+    __deepize,
     __delete,
     __deleteProperty,
     __diff,

@@ -1,10 +1,10 @@
-import __compressCssVarName from './compressCssVarName';
-import __isValidCssUnitValue from './isValidCssUnitValue';
-import __stripCssComments from './stripCssComments';
+import __compressCssVarName from './compressCssVarName.js';
+import __isValidCssUnitValue from './isValidCssUnitValue.js';
+import __stripCssComments from './stripCssComments.js';
 
-export * from '../../shared/css/_exports';
-export * from './easing/_exports';
-export * from './parse/_exports';
-export * from './rule/_exports';
-export * from './transform/_exports';
+export * from '../../shared/css/_exports.js';
+export * from './easing/_exports.js';
+export * from './parse/_exports.js';
+export * from './rule/_exports.js';
+export * from './transform/_exports.js';
 export { __compressCssVarName, __isValidCssUnitValue, __stripCssComments };

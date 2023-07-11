@@ -1,6 +1,6 @@
 // @ts-nocheck
 import __SPromise from '@coffeekraken/s-promise';
-import __uniqid from '../../string/uniqid';
+import __uniqid from '../../string/uniqid.js';
 
 /**
  * @name      whenVisible

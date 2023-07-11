@@ -1,6 +1,6 @@
 // @ts-nocheck
 
-import __deepMerge from '../object/deepMerge';
+import __deepMerge from '../object/deepMerge.js';
 
 /**
  * @name          trimLines
@@ -23,7 +23,7 @@ import __deepMerge from '../object/deepMerge';
  * @todo      tests
  *
  * @snippet         __trimLines($1)
- * 
+ *
  * @example         js
  * import { __trimLines } from '@coffeekraken/sugar/string';
  * __trimLines(`my cool lines

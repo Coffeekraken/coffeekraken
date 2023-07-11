@@ -1,9 +1,9 @@
 import __SFile from '@coffeekraken/s-file';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
-import __wait from '../../../shared/time/wait';
-import __packageTmpDir from '../../path/packageTmpDir';
-import __pool from '../pool';
-import __removeSync from '../removeSync';
+import __wait from '../../../shared/time/wait.js';
+import __packageTmpDir from '../../path/packageTmpDir.js';
+import __pool from '../pool.js';
+import __removeSync from '../removeSync.js';
 
 jest.setTimeout(20000);
 

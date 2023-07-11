@@ -17,7 +17,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const SSpecs_1 = __importDefault(require("./SSpecs"));
-__exportStar(require("./SSpecs"), exports);
-exports.default = SSpecs_1.default;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7QUFBQSxzREFBZ0M7QUFDaEMsMkNBQXlCO0FBQ3pCLGtCQUFlLGdCQUFRLENBQUMifQ==
+const SSpecs_js_1 = __importDefault(require("./SSpecs.js"));
+__exportStar(require("./SSpecs.js"), exports);
+exports.default = SSpecs_js_1.default;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7QUFBQSw0REFBbUM7QUFDbkMsOENBQTRCO0FBQzVCLGtCQUFlLG1CQUFRLENBQUMifQ==

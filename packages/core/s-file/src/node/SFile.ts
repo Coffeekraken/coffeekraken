@@ -1,4 +1,4 @@
-// import __SFileInterface from './interface/SFileInterface';
+// import __SFileInterface from './interface/SFileInterface.js';
 import __SClass from '@coffeekraken/s-class';
 import __SEventEmitter, { ISEventEmitter } from '@coffeekraken/s-event-emitter';
 import { __md5 } from '@coffeekraken/sugar/crypto';

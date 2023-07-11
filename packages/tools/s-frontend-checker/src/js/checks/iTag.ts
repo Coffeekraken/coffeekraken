@@ -1,4 +1,4 @@
-import type { ISFrontendChecker } from '../types';
+import type { ISFrontendChecker } from '../types.js';
 
 /**
  * @name            iTag

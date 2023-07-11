@@ -1,6 +1,6 @@
 // @ts-nocheck
 
-import __set from './set';
+import __set from './set.js';
 /**
  * @name          deepize
  * @namespace            shared.object
@@ -28,7 +28,7 @@ import __set from './set';
  * @todo      tests
  *
  * @snippet         __deepize($1)
- * 
+ *
  * @example       js
  * import { __deepize } from '@coffeekraken/sugar/object';
  * __deepize ({ 'something.cool': 'hello' }); // => { something: { cool: 'hello' } }

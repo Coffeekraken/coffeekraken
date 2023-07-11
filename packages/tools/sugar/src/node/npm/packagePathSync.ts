@@ -1,7 +1,7 @@
 import __fs from 'fs';
-import __deepMerge from '../../shared/object/deepMerge';
-import __globalNodeModulesPath from '../npm/globalNodeModulesPath';
-import __packageRootDir from '../path/packageRootDir';
+import __deepMerge from '../../shared/object/deepMerge.js';
+import __globalNodeModulesPath from '../npm/globalNodeModulesPath.js';
+import __packageRootDir from '../path/packageRootDir.js';
 
 /**
  * @name                packagePath
@@ -18,7 +18,7 @@ import __packageRootDir from '../path/packageRootDir';
  * @return      {String}                      The package path
  *
  * @snippet         __packagePathSync($1)
- * 
+ *
  * @example         js
  * import { __packagePathSync } from '@coffeekraken/sugar/npm`;
  * __packagePathSync('lodash');

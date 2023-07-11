@@ -1,3 +1,3 @@
-import SPromise from './SPromise';
-export * from './SPromise';
+import SPromise from './SPromise.js';
+export * from './SPromise.js';
 export default SPromise;

@@ -5,7 +5,7 @@ import __SLitComponent, {
 } from '@coffeekraken/s-lit-component';
 import { __deepMerge } from '@coffeekraken/sugar/object';
 import { css, html, unsafeCSS } from 'lit';
-import __SRangeComponentInterface from './interface/SRangeComponentInterface';
+import __SRangeComponentInterface from './interface/SRangeComponentInterface.js';
 
 // @ts-ignore
 import __css from '../../../../src/css/s-range.css'; // relative to /dist/pkg/esm/js

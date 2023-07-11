@@ -1,16 +1,16 @@
-import __autoFocus from './autoFocus';
-import __autoResize from './autoResize';
-import __confirmButton from './confirmButton';
-import __imagesLazySrcAttribute from './imagesLazySrcAttribute';
-import __imagesLoadedAttribute from './imagesLoadedAttribute';
-import __inputAdditionalAttributes from './inputAdditionalAttributes';
-import __inputAdditionalEvents from './inputAdditionalEvents';
-import __linksStateAttributes from './linksStateAttributes';
-import __smoothScroll from './smoothScroll';
-import __smoothScrollOnAnchorLinks from './smoothScrollOnAnchorLinks';
-import __smoothScrollOnHashChange from './smoothScrollOnHashChange';
-import __smoothScrollOnPageLoad from './smoothScrollOnPageLoad';
-import __videosLazySrcAttribute from './videosLazySrcAttribute';
+import __autoFocus from './autoFocus.js';
+import __autoResize from './autoResize.js';
+import __confirmButton from './confirmButton.js';
+import __imagesLazySrcAttribute from './imagesLazySrcAttribute.js';
+import __imagesLoadedAttribute from './imagesLoadedAttribute.js';
+import __inputAdditionalAttributes from './inputAdditionalAttributes.js';
+import __inputAdditionalEvents from './inputAdditionalEvents.js';
+import __linksStateAttributes from './linksStateAttributes.js';
+import __smoothScroll from './smoothScroll.js';
+import __smoothScrollOnAnchorLinks from './smoothScrollOnAnchorLinks.js';
+import __smoothScrollOnHashChange from './smoothScrollOnHashChange.js';
+import __smoothScrollOnPageLoad from './smoothScrollOnPageLoad.js';
+import __videosLazySrcAttribute from './videosLazySrcAttribute.js';
 
 export {
     __autoFocus,

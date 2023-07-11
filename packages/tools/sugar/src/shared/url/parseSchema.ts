@@ -1,6 +1,6 @@
 // @ts-nocheck
 
-import __parseString from '../string/parse';
+import __parseString from '../string/parse.js';
 
 /**
  * @name                                parseSchema
@@ -10,7 +10,7 @@ import __parseString from '../string/parse';
  * @platform          node
  * @status        wip
  * @private
- * 
+ *
  * This function take two arguments. The first one is the url to parse and the second is a schema to scan the url with.
  * The schema describe the pathname of an url and tell's how to analyze it.
  * Here's a little description with some example of schemas:

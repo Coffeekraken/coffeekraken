@@ -1,6 +1,6 @@
 // @ts-nocheck
 
-import __whenLinkLoaded from '../detect/whenLinkLoaded';
+import __whenLinkLoaded from '../detect/whenLinkLoaded.js';
 
 /**
  * @name        injectStylesheet

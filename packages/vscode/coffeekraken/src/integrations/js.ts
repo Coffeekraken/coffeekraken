@@ -1,8 +1,7 @@
 // @ts-nocheck
 
 import * as vscode from 'vscode';
-import __colors from '../lib/colors';
-import __popinContent from '../lib/popinContent';
+import __popinContent from '../lib/popinContent.js';
 
 function getDocmapObjByName(docmapJson: any, name: string): any {
     for (let [namespace, docmapObj] of Object.entries(docmapJson)) {

@@ -1,5 +1,5 @@
 // @ts-nocheck
-import __querySelectorUp from '../query/querySelectorUp';
+import __querySelectorUp from '../query/querySelectorUp.js';
 
 /**
  * @name        closest

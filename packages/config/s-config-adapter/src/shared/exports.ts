@@ -1,3 +1,3 @@
-import __SConfigAdapter from './SConfigAdapter';
-export * from './SConfigAdapter';
+import __SConfigAdapter from './SConfigAdapter.js';
+export * from './SConfigAdapter.js';
 export default __SConfigAdapter;

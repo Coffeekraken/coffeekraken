@@ -1,5 +1,5 @@
-import __SCommandProcess from '../SCommandProcess';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
+import __SCommandProcess from '../SCommandProcess.js';
 
 describe('s-process.SCommandProcess', () => {
     it('Should execute a simple command correctly', async () => {

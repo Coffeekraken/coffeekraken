@@ -1,57 +1,57 @@
-import __isArray from './isArray';
-import __isBase64 from './isBase64';
-import __isBoolean from './isBoolean';
-import __isBrowser from './isBrowser';
-import __isChildProcess from './isChildProcess';
-import __isCjs from './isCjs';
-import __isClass from './isClass';
-import __isClassInstance from './isClassInstance';
-import __isColor from './isColor';
-import __isCreditCard from './isCreditCard';
-import __isCyclic from './isCyclic';
-import __isDdmmyyyyDate from './isDdmmyyyyDate';
-import __isDomElement from './isDomElement';
-import __isDomNode from './isDomNode';
-import __isEmail from './isEmail';
-import __isEsm from './isEsm';
-import __isEven from './isEven';
-import __isFunction from './isFunction';
-import __isGlob from './isGlob';
-import __isIdCompliant from './isIdCompliant';
-import __isImageUrl from './isImageUrl';
-import __isInteger from './isInteger';
-import __isIsoDate from './isIsoDate';
-import __isIsoDateTime from './isIsoDateTime';
-import __isIsoTime from './isIsoTime';
-import __isJson from './isJson';
-import __isLinux from './isLinux';
-import __isMap from './isMap';
-import __isMmddyyyyDate from './isMmddyyyyDate';
-import __isModuleSystem from './isModuleSystem';
-import __isNode from './isNode';
-import __isNumber from './isNumber';
-import __isObject from './isObject';
-import __isOdd from './isOdd';
-import __isOsx from './isOsx';
-import __isPath from './isPath';
-import __isPlainObject from './isPlainObject';
-import __isRegex from './isRegex';
-import __isString from './isString';
-import __isTerminal from './isTerminal';
-import __isTestEnv from './isTestEnv';
-import __isUrl from './isUrl';
-import __isUrlCompliant from './isUrlCompliant';
-import __isValidNumber from './isValidNumber';
-import __isWindows from './isWindows';
-import __isYyyymmddDate from './isYyyymmddDate';
+import __isArray from './isArray.js';
+import __isBase64 from './isBase64.js';
+import __isBoolean from './isBoolean.js';
+import __isBrowser from './isBrowser.js';
+import __isChildProcess from './isChildProcess.js';
+import __isCjs from './isCjs.js';
+import __isClass from './isClass.js';
+import __isClassInstance from './isClassInstance.js';
+import __isColor from './isColor.js';
+import __isCreditCard from './isCreditCard.js';
+import __isCyclic from './isCyclic.js';
+import __isDdmmyyyyDate from './isDdmmyyyyDate.js';
+import __isDomElement from './isDomElement.js';
+import __isDomNode from './isDomNode.js';
+import __isEmail from './isEmail.js';
+import __isEsm from './isEsm.js';
+import __isEven from './isEven.js';
+import __isFunction from './isFunction.js';
+import __isGlob from './isGlob.js';
+import __isIdCompliant from './isIdCompliant.js';
+import __isImageUrl from './isImageUrl.js';
+import __isInteger from './isInteger.js';
+import __isIsoDate from './isIsoDate.js';
+import __isIsoDateTime from './isIsoDateTime.js';
+import __isIsoTime from './isIsoTime.js';
+import __isJson from './isJson.js';
+import __isLinux from './isLinux.js';
+import __isMap from './isMap.js';
+import __isMmddyyyyDate from './isMmddyyyyDate.js';
+import __isModuleSystem from './isModuleSystem.js';
+import __isNode from './isNode.js';
+import __isNumber from './isNumber.js';
+import __isObject from './isObject.js';
+import __isOdd from './isOdd.js';
+import __isOsx from './isOsx.js';
+import __isPath from './isPath.js';
+import __isPlainObject from './isPlainObject.js';
+import __isRegex from './isRegex.js';
+import __isString from './isString.js';
+import __isTerminal from './isTerminal.js';
+import __isTestEnv from './isTestEnv.js';
+import __isUrl from './isUrl.js';
+import __isUrlCompliant from './isUrlCompliant.js';
+import __isValidNumber from './isValidNumber.js';
+import __isWindows from './isWindows.js';
+import __isYyyymmddDate from './isYyyymmddDate.js';
 
 export {
-    __isChildProcess,
-    __isCjs,
     __isArray,
     __isBase64,
     __isBoolean,
     __isBrowser,
+    __isChildProcess,
+    __isCjs,
     __isClass,
     __isClassInstance,
     __isColor,
@@ -89,7 +89,7 @@ export {
     __isTestEnv,
     __isUrl,
     __isUrlCompliant,
+    __isValidNumber,
     __isWindows,
     __isYyyymmddDate,
-    __isValidNumber,
 };

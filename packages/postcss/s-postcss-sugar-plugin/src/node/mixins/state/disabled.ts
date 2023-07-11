@@ -1,5 +1,5 @@
 import __SInterface from '@coffeekraken/s-interface';
-import __astNodesToString from '../../utils/astNodesToString';
+import __astNodesToString from '../../utils/astNodesToString.js';
 
 class postcssSugarPluginStateDisabledMixinInterface extends __SInterface {
     static get _definition() {

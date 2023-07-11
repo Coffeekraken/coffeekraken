@@ -4,7 +4,7 @@ import __SFile from '@coffeekraken/s-file';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
 import __fs from 'fs';
 import __glob from 'glob';
-import __isGlob from '../../shared/is/isGlob';
+import __isGlob from '../../shared/is/isGlob.js';
 
 /**
  * @name            findUp

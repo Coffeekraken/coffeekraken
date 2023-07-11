@@ -1,5 +1,5 @@
-import __SPostcssBuilder from '../SPostcssBuilder';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
+import __SPostcssBuilder from '../SPostcssBuilder.js';
 
 describe('@coffeekraken.s-postcss-builder', () => {
     it('Should build a pretty complexe postcss file', async () => {

@@ -4,7 +4,7 @@ import { __stripTags } from '@coffeekraken/sugar/html';
 import { __deepMerge } from '@coffeekraken/sugar/object';
 import __notifier from 'node-notifier';
 import __path from 'path';
-import __SStdioAdapter from '../../shared/SStdioAdapter';
+import __SStdioAdapter from '../../shared/SStdioAdapter.js';
 
 /**
  * @name            SStdioNotificationAdapter

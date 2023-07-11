@@ -1,21 +1,25 @@
 import type { ISLog } from '@coffeekraken/s-log';
 import __SLog from '@coffeekraken/s-log';
-import type { ISStdioSource, ISStdioSourceSettings } from "../SStdioSource";
-import __SStdioSource from '../SStdioSource';
+import type { ISStdioSource, ISStdioSourceSettings } from '../SStdioSource.js';
+import __SStdioSource from '../SStdioSource.js';
 
-export interface ISStdioEventEmitterSource extends ISStdioSource {
+export interface ISStdioEventEmitterSource extends ISStdioSource {}
 
-}
+export interface ISStdioEventEmitterSourceSettings
+    extends ISStdioSourceSettings {}
 
-export interface ISStdioEventEmitterSourceSettings extends ISStdioSourceSettings {}
-
-export default class SStdioEventEmitterSource extends __SStdioSource implements ISStdioEventEmitterSource {
-
+export default class SStdioEventEmitterSource
+    extends __SStdioSource
+    implements ISStdioEventEmitterSource
+{
     _emitter;
 
     _tmpPrintedLogs = [];
 
-    constructor(eventEmitter: __SEventEmitter, settings?: Partial<ISStdioEventEmitterSourceSettings>) {
+    constructor(
+        eventEmitter: __SEventEmitter,
+        settings?: Partial<ISStdioEventEmitterSourceSettings>,
+    ) {
         super(settings);
 
         // save the emitter
@@ -23,7 +27,6 @@ export default class SStdioEventEmitterSource extends __SStdioSource implements 
 
         // listen for logs
         this._emitter.on('log', (logObj: ISLog, metas: any) => {
-
             // @TODO        find why some logs are printed x times... It seems that it's linked to number of actions theirs in a recipe in the SKitchen class...
             if (this._tmpPrintedLogs.includes(logObj.value)) {
                 return;
@@ -60,5 +63,4 @@ export default class SStdioEventEmitterSource extends __SStdioSource implements 
             this.ready();
         }, 1000);
     }
-
 }

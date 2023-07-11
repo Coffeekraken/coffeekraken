@@ -1,5 +1,5 @@
-import __SType from './_SType';
-import './sTypeRegisterDefaultDescriptors';
+import __SType from './_SType.js';
+import './sTypeRegisterDefaultDescriptors.js';
 
-export * from './_SType';
+export * from './_SType.js';
 export default __SType;

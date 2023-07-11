@@ -1,11 +1,11 @@
-import __builtInNodeModules from './buildInNodeModules';
-import __dependencyList from './dependencyList';
-import __dependencyTree from './dependencyTree';
-import __extractImport from './extractImport';
-import __import from './import';
-import __resolvePackagePath from './resolvePackagePath';
+import __builtInNodeModules from './buildInNodeModules.js';
+import __dependencyList from './dependencyList.js';
+import __dependencyTree from './dependencyTree.js';
+import __extractImport from './extractImport.js';
+import __import from './import.js';
+import __resolvePackagePath from './resolvePackagePath.js';
 
-export * from '../../shared/module/_exports';
+export * from '../../shared/module/_exports.js';
 export {
     __builtInNodeModules,
     __dependencyList,

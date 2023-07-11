@@ -18,10 +18,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.page404 = void 0;
-const SViewRenderer_1 = __importDefault(require("./SViewRenderer"));
-const _404_1 = __importDefault(require("./pages/404"));
-exports.page404 = _404_1.default;
-__exportStar(require("./SViewRenderer"), exports);
-__exportStar(require("./pages/404"), exports);
-exports.default = SViewRenderer_1.default;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0FBQUEsb0VBQTRDO0FBQzVDLHVEQUFrQztBQUt6QixrQkFMRixjQUFPLENBS0U7QUFIaEIsa0RBQWdDO0FBQ2hDLDhDQUE0QjtBQUc1QixrQkFBZSx1QkFBYSxDQUFDIn0=
+const SViewRenderer_js_1 = __importDefault(require("./SViewRenderer.js"));
+const _404_js_1 = __importDefault(require("./pages/404.js"));
+exports.page404 = _404_js_1.default;
+__exportStar(require("./SViewRenderer.js"), exports);
+__exportStar(require("./pages/404.js"), exports);
+exports.default = SViewRenderer_js_1.default;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0FBQUEsMEVBQStDO0FBQy9DLDZEQUFxQztBQUs1QixrQkFMRixpQkFBTyxDQUtFO0FBSGhCLHFEQUFtQztBQUNuQyxpREFBK0I7QUFHL0Isa0JBQWUsMEJBQWEsQ0FBQyJ9

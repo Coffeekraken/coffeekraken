@@ -1,5 +1,4 @@
-
-import __packageRootDir from '../path/packageRootDir';
+import __packageRootDir from '../path/packageRootDir.js';
 
 /**
  * @name            monorepoToPackageAbsolutePath
@@ -13,7 +12,7 @@ import __packageRootDir from '../path/packageRootDir';
  * @param      {String}           path      The path to make absolute from the passed package root
  * @param       {String}           [packageRootPath=__packageRootDir()]  The package root path
  * @return     {string}}       The absolute path to the passed package root path
- * 
+ *
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */

@@ -1,9 +1,9 @@
-import __getCssRulesFromStylesheet from './getCssRulesFromStylesheet';
+import __getCssRulesFromStylesheet from './getCssRulesFromStylesheet.js';
 
-import __getKeyframesDeclarations from './getKeyframesDeclarations';
+import __getKeyframesDeclarations from './getKeyframesDeclarations.js';
 import __transformKeyframeDeclaration, {
     ITransformedKeyframeDeclaration,
-} from './transformKeyframesDeclarations';
+} from './transformKeyframesDeclarations.js';
 
 export interface IKeyframe {
     delay?: number;

@@ -5,7 +5,7 @@ import { __clone } from '@coffeekraken/sugar/object';
 
 import __SDuration from '@coffeekraken/s-duration';
 
-import __SFrontendChecker from '../shared/SFrontendChecker';
+import __SFrontendChecker from '../shared/SFrontendChecker.js';
 
 import type {
     ISFrontendChecker,
@@ -14,60 +14,60 @@ import type {
     ISFrontendCheckerCheckParams,
     ISFrontendCheckerCheckResult,
     ISFrontendCheckerSettings,
-} from './types';
+} from './types.js';
 
-import __alternateLink from './checks/alternateLink';
-import __ariaBanner from './checks/ariaBanner';
-import __ariaButtonLabel from './checks/ariaButtonLabel';
-import __ariaColorContrast from './checks/ariaColorContrast';
-import __ariaComplmentary from './checks/ariaComplementary';
-import __ariaContentInfo from './checks/ariaContentInfo';
-import __ariaDescribedBy from './checks/ariaDescribedBy';
-import __ariaFieldsetLegend from './checks/ariaFieldsetLegend';
-import __ariaFigureFigcaption from './checks/ariaFigureFigcaption';
-import __ariaForm from './checks/ariaForm';
-import __ariaLabelForm from './checks/ariaLabelForm';
-import __ariaLabelledBy from './checks/ariaLabelledBy';
-import __ariaMain from './checks/ariaMain';
-import __ariaSearch from './checks/ariaSearch';
-import __ariaTableCaption from './checks/ariaTableCaption';
-import __ariaTree from './checks/ariaTree';
-import __assetsSize from './checks/assetsSize';
-import __author from './checks/author';
-import __bTag from './checks/bTag';
-import __canonicalLink from './checks/canonicalLink';
-import __charset from './checks/charset';
-import __comments from './checks/comments';
-import __criticalCss from './checks/criticalCss';
-import __cssOrder from './checks/cssOrder';
-import __description from './checks/description';
-import __direction from './checks/direction';
-import __doctype from './checks/doctype';
-import __emptyLinks from './checks/emptyLinks';
-import __favicon from './checks/favicon';
-import __footer from './checks/footer';
-import __header from './checks/header';
-import __iTag from './checks/iTag';
-import __imagesAlt from './checks/imagesAlt';
-import __imagesFigure from './checks/imagesFigure';
-import __keywords from './checks/keywords';
-import __language from './checks/language';
-import __linksTitle from './checks/linksTitle';
-import __main from './checks/main';
-import __manifest from './checks/manifest';
-import __navRoleAttribute from './checks/navRoleAttribute';
-import __noopener from './checks/noopener';
-import __opengraph from './checks/opengraph';
-import __preloadViewportAssets from './checks/preloadViewportAssets';
-import __printStylesheet from './checks/printStylesheet';
-import __title from './checks/title';
-import __twitterCard from './checks/twitterCard';
-import __uniqueIds from './checks/uniqueIds';
-import __viewport from './checks/viewport';
-import __visualFocus from './checks/visualFocus';
-import __w3c from './checks/w3c';
-import __webappCapable from './checks/webappCapable';
-import __webpImages from './checks/webpImages';
+import __alternateLink from './checks/alternateLink.js';
+import __ariaBanner from './checks/ariaBanner.js';
+import __ariaButtonLabel from './checks/ariaButtonLabel.js';
+import __ariaColorContrast from './checks/ariaColorContrast.js';
+import __ariaComplmentary from './checks/ariaComplementary.js';
+import __ariaContentInfo from './checks/ariaContentInfo.js';
+import __ariaDescribedBy from './checks/ariaDescribedBy.js';
+import __ariaFieldsetLegend from './checks/ariaFieldsetLegend.js';
+import __ariaFigureFigcaption from './checks/ariaFigureFigcaption.js';
+import __ariaForm from './checks/ariaForm.js';
+import __ariaLabelForm from './checks/ariaLabelForm.js';
+import __ariaLabelledBy from './checks/ariaLabelledBy.js';
+import __ariaMain from './checks/ariaMain.js';
+import __ariaSearch from './checks/ariaSearch.js';
+import __ariaTableCaption from './checks/ariaTableCaption.js';
+import __ariaTree from './checks/ariaTree.js';
+import __assetsSize from './checks/assetsSize.js';
+import __author from './checks/author.js';
+import __bTag from './checks/bTag.js';
+import __canonicalLink from './checks/canonicalLink.js';
+import __charset from './checks/charset.js';
+import __comments from './checks/comments.js';
+import __criticalCss from './checks/criticalCss.js';
+import __cssOrder from './checks/cssOrder.js';
+import __description from './checks/description.js';
+import __direction from './checks/direction.js';
+import __doctype from './checks/doctype.js';
+import __emptyLinks from './checks/emptyLinks.js';
+import __favicon from './checks/favicon.js';
+import __footer from './checks/footer.js';
+import __header from './checks/header.js';
+import __iTag from './checks/iTag.js';
+import __imagesAlt from './checks/imagesAlt.js';
+import __imagesFigure from './checks/imagesFigure.js';
+import __keywords from './checks/keywords.js';
+import __language from './checks/language.js';
+import __linksTitle from './checks/linksTitle.js';
+import __main from './checks/main.js';
+import __manifest from './checks/manifest.js';
+import __navRoleAttribute from './checks/navRoleAttribute.js';
+import __noopener from './checks/noopener.js';
+import __opengraph from './checks/opengraph.js';
+import __preloadViewportAssets from './checks/preloadViewportAssets.js';
+import __printStylesheet from './checks/printStylesheet.js';
+import __title from './checks/title.js';
+import __twitterCard from './checks/twitterCard.js';
+import __uniqueIds from './checks/uniqueIds.js';
+import __viewport from './checks/viewport.js';
+import __visualFocus from './checks/visualFocus.js';
+import __w3c from './checks/w3c.js';
+import __webappCapable from './checks/webappCapable.js';
+import __webpImages from './checks/webpImages.js';
 
 /**
  * @name                SFrontendChecker

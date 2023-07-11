@@ -4,8 +4,8 @@ import { define as __SSpacesSelectorComponentDefine } from '@coffeekraken/s-spac
 
 __SSpacesSelectorComponentDefine();
 
-import type { ISSpecsEditorWidgetDeps } from '../SSpecsEditorWidget';
-import __SSpecsEditorWidget from '../SSpecsEditorWidget';
+import type { ISSpecsEditorWidgetDeps } from '../SSpecsEditorWidget.js';
+import __SSpecsEditorWidget from '../SSpecsEditorWidget.js';
 
 export default class SSpecsEditorComponentSpacesWidget extends __SSpecsEditorWidget {
     constructor(deps: ISSpecsEditorWidgetDeps) {

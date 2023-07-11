@@ -6,7 +6,7 @@ import __html2canvas from 'html2canvas';
 import type {
     ISFrontendChecker,
     ISFrontendCheckerCheckAriaColotContrastSettings,
-} from '../types';
+} from '../types.js';
 
 /**
  * @name            ariaColorContrast

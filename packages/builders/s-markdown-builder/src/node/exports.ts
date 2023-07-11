@@ -1,3 +1,3 @@
-import SMarkdownBuilder from './SMarkdownBuilder';
-export * from './SMarkdownBuilder';
+import SMarkdownBuilder from './SMarkdownBuilder.js';
+export * from './SMarkdownBuilder.js';
 export default SMarkdownBuilder;

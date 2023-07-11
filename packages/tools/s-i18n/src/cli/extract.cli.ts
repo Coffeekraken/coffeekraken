@@ -1,4 +1,4 @@
-import __SI18n from '../node/SI18n';
+import __SI18n from '../node/SI18n.js';
 
 export default function extract(stringArgs = ''): Promise<void> {
     return new Promise(async (resolve) => {

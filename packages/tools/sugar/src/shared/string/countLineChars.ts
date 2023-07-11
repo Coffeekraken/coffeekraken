@@ -1,7 +1,7 @@
 // @ts-nocheck
 
 import __stripAnsi from 'strip-ansi';
-import __deepMerge from '../object/deepMerge';
+import __deepMerge from '../object/deepMerge.js';
 
 /**
  * @name                                  countLineChars
@@ -26,7 +26,7 @@ import __deepMerge from '../object/deepMerge';
  * @todo      tests
  *
  * @snippet         __countLineChars($1)
- * 
+ *
  * @example         js
  * import { __countLineChars } from '@coffeekraken/sugar/string';
  *  __countLineChars('Hello <red>World</red>'); // 11

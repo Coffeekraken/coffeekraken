@@ -1,4 +1,4 @@
-import __check from '../checkPathWithMultipleExtensions';
+import __check from '../checkPathWithMultipleExtensions.js';
 describe('sugar.node.fs.checkPathWithMultipleExtensions', () => {
     it('Should find a file with multiple extensions given', async () => {
         const filePath = __check(`${__dirname}/data/file.mkv`, [

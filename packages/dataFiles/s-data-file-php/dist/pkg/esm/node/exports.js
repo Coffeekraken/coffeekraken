@@ -1,4 +1,4 @@
-import SDataFilePhp from './SDataFilePhp';
-export * from './SDataFilePhp';
+import SDataFilePhp from './SDataFilePhp.js';
+export * from './SDataFilePhp.js';
 export default SDataFilePhp;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sWUFBWSxNQUFNLGdCQUFnQixDQUFDO0FBQzFDLGNBQWMsZ0JBQWdCLENBQUM7QUFDL0IsZUFBZSxZQUFZLENBQUMifQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sWUFBWSxNQUFNLG1CQUFtQixDQUFDO0FBQzdDLGNBQWMsbUJBQW1CLENBQUM7QUFDbEMsZUFBZSxZQUFZLENBQUMifQ==

@@ -1,7 +1,7 @@
 // @ts-nocheck
 
-import __convertTime from '../../../shared/datetime/convertTime';
-import __getStyleProperty from './getStyleProperty';
+import __convertTime from '../../../shared/datetime/convertTime.js';
+import __getStyleProperty from './getStyleProperty.js';
 
 /**
  * @name      getTransitionProperties

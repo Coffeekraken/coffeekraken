@@ -1,7 +1,6 @@
-
 import __resolvePackagePath from 'resolve-package-path';
 
-import __packageRootDir from '../path/packageRootDir';
+import __packageRootDir from '../path/packageRootDir.js';
 
 /**
  * @name                resolvePackagePath
@@ -17,7 +16,7 @@ import __packageRootDir from '../path/packageRootDir';
  * @return      {String}                  The absolute path to the requested package
  *
  * @snippet         __resolvePackagePath($1)
- * 
+ *
  * @example         js
  * import { __resolvePackagePath } from '@coffeekraken/sugar/module';
  * __resolvePackagePath('something');
@@ -33,11 +32,14 @@ export interface IResolvePackagePathSettings {
 
 export default function resolvePackagePath(
     pkg: string,
-    settings?: Partial<IResolvePackagePathSettings>
+    settings?: Partial<IResolvePackagePathSettings>,
 ) {
     const finalSettings: IResolvePackagePathSettings = {
         nodeModulesDir: `${__packageRootDir()}/node_modules`,
-        ...settings ?? {}
-    }
-    return __resolvePackagePath(pkg, finalSettings.nodeModulesDir)?.replace(/\/package\.json$/, '');
+        ...(settings ?? {}),
+    };
+    return __resolvePackagePath(pkg, finalSettings.nodeModulesDir)?.replace(
+        /\/package\.json$/,
+        '',
+    );
 }

@@ -1,10 +1,10 @@
 // @ts-nocheck
 
-import __proxyArray from '../array/proxyArray';
-import __isDomElement from '../is/isDomElement';
-import __clone from '../object/clone';
-import __deepMap from '../object/deepMap';
-import __deepMerge from '../object/deepMerge';
+import __proxyArray from '../array/proxyArray.js';
+import __isDomElement from '../is/isDomElement.js';
+import __clone from '../object/clone.js';
+import __deepMap from '../object/deepMap.js';
+import __deepMerge from '../object/deepMerge.js';
 
 /**
  * @name                            deepProxy

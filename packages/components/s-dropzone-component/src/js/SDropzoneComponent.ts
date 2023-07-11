@@ -4,7 +4,7 @@ import __SPromise from '@coffeekraken/s-promise';
 import { __isFileAccepted, __resetFileInput } from '@coffeekraken/sugar/dom';
 import { __deepMerge } from '@coffeekraken/sugar/object';
 import { css, html, unsafeCSS } from 'lit';
-import __SDropzoneComponentInterface from './interface/SDropzoneComponentInterface';
+import __SDropzoneComponentInterface from './interface/SDropzoneComponentInterface.js';
 
 // @ts-ignore
 import __css from '../../../../src/css/s-dropzone.css'; // relative to /dist/pkg/esm/js

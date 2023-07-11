@@ -1,4 +1,4 @@
-import __SDocblockBlock from '../SDocblockBlock';
+import __SDocblockBlock from '../SDocblockBlock.js';
 
 describe('s-docblock.shared.SDocblockBlock', () => {
     it('Should parse a complete docblock correctly', async () => {

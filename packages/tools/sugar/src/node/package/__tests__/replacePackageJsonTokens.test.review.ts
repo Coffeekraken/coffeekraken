@@ -1,9 +1,7 @@
-import __replacePackageJsonTokens from '../replacePackageJsonTokens';
+import __replacePackageJsonTokens from '../replacePackageJsonTokens.js';
 
 describe('@coffeekraken.sugar.node.meta.replacePackageJsonTokens', () => {
-
     it('Should replace tokens correctly', () => {
-
         const res = __replacePackageJsonTokens(`
             Hello %packageJson.name
 
@@ -15,7 +13,5 @@ describe('@coffeekraken.sugar.node.meta.replacePackageJsonTokens', () => {
         `);
 
         expect(res.match(/%packageJson\./gm)).toBe(null);
-
     });
-
 });

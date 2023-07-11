@@ -1,5 +1,5 @@
-import SFile from './SFile';
+import SFile from './SFile.js';
 
-export * from './SFile';
+export * from './SFile.js';
 
 export default SFile;

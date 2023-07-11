@@ -2,59 +2,59 @@
 
 import __SClass from '@coffeekraken/s-class';
 import { __deepMerge } from '@coffeekraken/sugar/object';
-import __en from './i18n/en';
+import __en from './i18n/en.js';
 
 import __alphanumValidator, {
     definition as __alphanumValidatorDefinition,
-} from './validators/alphanum';
+} from './validators/alphanum.js';
 import __colorValidator, {
     definition as __colorValidatorDefinition,
-} from './validators/color';
+} from './validators/color.js';
 import __creditCardValidator, {
     definition as __creditCardValidatorDefinition,
-} from './validators/creditCard';
+} from './validators/creditCard.js';
 import __emailValidator, {
     definition as __emailValidatorDefinition,
-} from './validators/email';
+} from './validators/email.js';
 import __hexValidator, {
     definition as __hexValidatorDefinition,
-} from './validators/hex';
+} from './validators/hex.js';
 import __integerValidator, {
     definition as __integerValidatorDefinition,
-} from './validators/integer';
+} from './validators/integer.js';
 import __isoDateValidator, {
     definition as __isoDateValidatorDefinition,
-} from './validators/isoDate';
+} from './validators/isoDate.js';
 import __isoDateTimeValidator, {
     definition as __isoDateTimeValidatorDefinition,
-} from './validators/isoDateTime';
+} from './validators/isoDateTime.js';
 import __isoTimeValidator, {
     definition as __isoTimeValidatorDefinition,
-} from './validators/isoTime';
+} from './validators/isoTime.js';
 import __maxValidator, {
     definition as __maxValidatorDefinition,
-} from './validators/max';
+} from './validators/max.js';
 import __minValidator, {
     definition as __minValidatorDefinition,
-} from './validators/min';
+} from './validators/min.js';
 import __negativeValidator, {
     definition as __negativeValidatorDefinition,
-} from './validators/negative';
+} from './validators/negative.js';
 import __numberValidator, {
     definition as __numberValidatorDefinition,
-} from './validators/number';
+} from './validators/number.js';
 import __passwordValidator, {
     definition as __passwordValidatorDefinition,
-} from './validators/password';
+} from './validators/password.js';
 import __patternValidator, {
     definition as __patternValidatorDefinition,
-} from './validators/pattern';
+} from './validators/pattern.js';
 import __positiveValidator, {
     definition as __positiveValidatorDefinition,
-} from './validators/positive';
+} from './validators/positive.js';
 import __requiredValidator, {
     definition as __requiredValidatorDefinition,
-} from './validators/required';
+} from './validators/required.js';
 
 /**
  * @name            SValidator

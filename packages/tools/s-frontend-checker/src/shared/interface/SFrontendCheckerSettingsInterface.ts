@@ -1,5 +1,5 @@
 import __SInterface from '@coffeekraken/s-interface';
-import __SFrontendChecker from '../SFrontendChecker';
+import __SFrontendChecker from '../SFrontendChecker.js';
 
 /**
  * @name                SFrontendCheckerSettingsInterface

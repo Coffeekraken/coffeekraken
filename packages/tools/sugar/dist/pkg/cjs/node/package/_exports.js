@@ -18,15 +18,15 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.__replacePackageJsonTokens = exports.__renamePackageSync = exports.__packageMetasSync = exports.__packageJsonSync = exports.__packageJson = void 0;
-const packageJson_1 = __importDefault(require("./packageJson"));
-exports.__packageJson = packageJson_1.default;
-const packageJsonSync_1 = __importDefault(require("./packageJsonSync"));
-exports.__packageJsonSync = packageJsonSync_1.default;
-const packageMetasSync_1 = __importDefault(require("./packageMetasSync"));
-exports.__packageMetasSync = packageMetasSync_1.default;
-const renamePackageSync_1 = __importDefault(require("./renamePackageSync"));
-exports.__renamePackageSync = renamePackageSync_1.default;
-const replacePackageJsonTokens_1 = __importDefault(require("./replacePackageJsonTokens"));
-exports.__replacePackageJsonTokens = replacePackageJsonTokens_1.default;
-__exportStar(require("../../shared/package/_exports"), exports);
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0FBQUEsZ0VBQTBDO0FBUXRDLHdCQVJHLHFCQUFhLENBUUg7QUFQakIsd0VBQWtEO0FBUTlDLDRCQVJHLHlCQUFpQixDQVFIO0FBUHJCLDBFQUFvRDtBQVFoRCw2QkFSRywwQkFBa0IsQ0FRSDtBQVB0Qiw0RUFBc0Q7QUFRbEQsOEJBUkcsMkJBQW1CLENBUUg7QUFQdkIsMEZBQW9FO0FBUWhFLHFDQVJHLGtDQUEwQixDQVFIO0FBTjlCLGdFQUE4QyJ9
+const packageJson_js_1 = __importDefault(require("./packageJson.js"));
+exports.__packageJson = packageJson_js_1.default;
+const packageJsonSync_js_1 = __importDefault(require("./packageJsonSync.js"));
+exports.__packageJsonSync = packageJsonSync_js_1.default;
+const packageMetasSync_js_1 = __importDefault(require("./packageMetasSync.js"));
+exports.__packageMetasSync = packageMetasSync_js_1.default;
+const renamePackageSync_js_1 = __importDefault(require("./renamePackageSync.js"));
+exports.__renamePackageSync = renamePackageSync_js_1.default;
+const replacePackageJsonTokens_js_1 = __importDefault(require("./replacePackageJsonTokens.js"));
+exports.__replacePackageJsonTokens = replacePackageJsonTokens_js_1.default;
+__exportStar(require("../../shared/package/_exports.js"), exports);
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0FBQUEsc0VBQTZDO0FBUXpDLHdCQVJHLHdCQUFhLENBUUg7QUFQakIsOEVBQXFEO0FBUWpELDRCQVJHLDRCQUFpQixDQVFIO0FBUHJCLGdGQUF1RDtBQVFuRCw2QkFSRyw2QkFBa0IsQ0FRSDtBQVB0QixrRkFBeUQ7QUFRckQsOEJBUkcsOEJBQW1CLENBUUg7QUFQdkIsZ0dBQXVFO0FBUW5FLHFDQVJHLHFDQUEwQixDQVFIO0FBTjlCLG1FQUFpRCJ9

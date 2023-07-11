@@ -1,7 +1,7 @@
 // @ts-nocheck
 
 import __fastdom from 'fastdom';
-import __whenImageLoaded from '../dom/detect/whenImageLoaded';
+import __whenImageLoaded from '../dom/detect/whenImageLoaded.js';
 
 /**
  * @name 		imagesLoadedAttribute

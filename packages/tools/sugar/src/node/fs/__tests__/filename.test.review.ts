@@ -1,4 +1,4 @@
-import __fileName from '../filename';
+import __fileName from '../filename.js';
 describe('sugar.node.fs.filename', () => {
     it('Should get the filename from a simple file name', () => {
         expect(__fileName('hello/plop.txt')).toBe('plop.txt');

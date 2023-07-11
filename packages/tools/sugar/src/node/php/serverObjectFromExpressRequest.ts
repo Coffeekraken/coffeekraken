@@ -1,5 +1,5 @@
 import __url from 'url';
-import __packageRootDir from '../path/packageRootDir';
+import __packageRootDir from '../path/packageRootDir.js';
 
 /**
  * @name                            serverObjectFromExpressRequest

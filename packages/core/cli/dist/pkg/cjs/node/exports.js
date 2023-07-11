@@ -19,8 +19,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.replaceCommandTokens = void 0;
 const sugar_cli_js_1 = __importDefault(require("../cli/sugar.cli.js"));
-const replaceCommandTokens_1 = __importDefault(require("./replaceCommandTokens"));
-exports.replaceCommandTokens = replaceCommandTokens_1.default;
+const replaceCommandTokens_js_1 = __importDefault(require("./replaceCommandTokens.js"));
+exports.replaceCommandTokens = replaceCommandTokens_js_1.default;
 __exportStar(require("../cli/sugar.cli.js"), exports);
 exports.default = sugar_cli_js_1.default;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0FBQUEsdUVBQTRDO0FBQzVDLGtGQUEwRDtBQUVqRCwrQkFGRiw4QkFBb0IsQ0FFRTtBQUQ3QixzREFBb0M7QUFFcEMsa0JBQWUsc0JBQVMsQ0FBQyJ9
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0FBQUEsdUVBQTRDO0FBQzVDLHdGQUE2RDtBQUVwRCwrQkFGRixpQ0FBb0IsQ0FFRTtBQUQ3QixzREFBb0M7QUFFcEMsa0JBQWUsc0JBQVMsQ0FBQyJ9

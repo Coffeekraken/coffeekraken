@@ -1,7 +1,7 @@
 // @ts-nocheck
 
-import __pageType from './types/page';
-import __viewsType from './types/views';
+import __pageType from './types/page.js';
+import __viewsType from './types/views.js';
 
 /**
  * @name                genericHandler

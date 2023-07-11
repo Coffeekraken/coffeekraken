@@ -1,6 +1,6 @@
 // @ts-nocheck
 
-import __getStyleProperty from '../style/getStyleProperty';
+import __getStyleProperty from '../style/getStyleProperty.js';
 
 /**
  * @name      forceRedraw

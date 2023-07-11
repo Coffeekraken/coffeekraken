@@ -5,17 +5,17 @@ import { css, html, unsafeCSS } from 'lit';
 
 import { __upperFirst } from '@coffeekraken/sugar/string';
 
-import _SDashboardComponentWidgetInterface from '../../interface/SDashboardComponentWidgetInterface';
+import _SDashboardComponentWidgetInterface from '../../interface/SDashboardComponentWidgetInterface.js';
 
 import __css from './s-dashboard-browserstack-component.css';
 
-import __chromeSvg from './svg/chrome.svg';
-import __edgeSvg from './svg/edge.svg';
-import __firefoxSvg from './svg/firefox.svg';
-import __operaSvg from './svg/opera.svg';
-import __safariSvg from './svg/safari.svg';
-import __samsumgSvg from './svg/samsung.svg';
-import __yandexSvg from './svg/yandex.svg';
+import __chromeSvg from './svg/chrome.svg.js';
+import __edgeSvg from './svg/edge.svg.js';
+import __firefoxSvg from './svg/firefox.svg.js';
+import __operaSvg from './svg/opera.svg.js';
+import __safariSvg from './svg/safari.svg.js';
+import __samsumgSvg from './svg/samsung.svg.js';
+import __yandexSvg from './svg/yandex.svg.js';
 
 export default class SDashboardBrowserstackComponent extends __SLitComponent {
     static get properties() {

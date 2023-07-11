@@ -1,7 +1,7 @@
 // @ts-nocheck
 import { __packageRootDir } from '@coffeekraken/sugar/path';
 import __path from 'path';
-import __SSugarJson from '../node/SSugarJson';
+import __SSugarJson from '../node/SSugarJson.js';
 
 export default (stringArgs = '') => {
     return new Promise(async (resolve) => {

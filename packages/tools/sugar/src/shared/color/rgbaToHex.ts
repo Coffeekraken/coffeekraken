@@ -1,4 +1,4 @@
-import __parseRgba from './parseRgba';
+import __parseRgba from './parseRgba.js';
 
 /**
  * @name                rgba2hex
@@ -21,7 +21,7 @@ import __parseRgba from './parseRgba';
  * @todo      tests
  *
  * @snippet         __rgbaToHex($1)
- * 
+ *
  * @example         js
  * import { __rgbaToHex } from '@coffeekraken/sugar/color';
  * __rgbaToHex(10,20,30,10);

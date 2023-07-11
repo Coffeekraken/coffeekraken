@@ -1,4 +1,4 @@
-import __SFrontspec from './SFrontspec';
-export * from '../shared/SFrontspecTypes';
+import __SFrontspec from './SFrontspec.js';
+export * from '../shared/SFrontspecTypes.js';
 export default __SFrontspec;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sWUFBWSxNQUFNLGNBQWMsQ0FBQztBQUN4QyxjQUFjLDJCQUEyQixDQUFDO0FBQzFDLGVBQWUsWUFBWSxDQUFDIn0=
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sWUFBWSxNQUFNLGlCQUFpQixDQUFDO0FBQzNDLGNBQWMsOEJBQThCLENBQUM7QUFDN0MsZUFBZSxZQUFZLENBQUMifQ==

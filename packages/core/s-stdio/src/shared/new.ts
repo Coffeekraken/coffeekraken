@@ -1,8 +1,8 @@
 import { __isNode } from '@coffeekraken/sugar/is';
-import type { ISStdioSettings } from './SStdio';
-import __SStdio from './SStdio';
-import type { ISStdioAdapter } from './SStdioAdapter';
-import type { ISStdioSource } from './SStdioSource';
+import type { ISStdioSettings } from './SStdio.js';
+import __SStdio from './SStdio.js';
+import type { ISStdioAdapter } from './SStdioAdapter.js';
+import type { ISStdioSource } from './SStdioSource.js';
 
 /**
  * @___name            new

@@ -1,5 +1,5 @@
-import type ISFiltrableInputComponentProps from './SFiltrableInputComponent';
-import __SFiltrableInputComponent from './SFiltrableInputComponent';
+import type ISFiltrableInputComponentProps from './SFiltrableInputComponent.js';
+import __SFiltrableInputComponent from './SFiltrableInputComponent.js';
 
 export function __define(
     props: Partial<ISFiltrableInputComponentProps> = {},

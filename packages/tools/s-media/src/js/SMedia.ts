@@ -2,7 +2,7 @@
 
 import __SFrontspec from '@coffeekraken/s-frontspec';
 import { __deepMerge } from '@coffeekraken/sugar/object';
-import __SMedia from '../shared/SMedia';
+import __SMedia from '../shared/SMedia.js';
 
 /**
  * @name                SMedia

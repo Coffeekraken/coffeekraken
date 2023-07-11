@@ -1,4 +1,4 @@
-import type { ISViewRendererRenderResult } from '../SViewRenderer';
+import type { ISViewRendererRenderResult } from '../SViewRenderer.js';
 
 /**
  * @___name           404

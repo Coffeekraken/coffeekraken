@@ -1,7 +1,7 @@
-import __excludedGlobs from './excludedGlobs';
-import __matchExcludeGlobs from './matchExcludeGlobs';
-import __matchGlobSync from './matchGlobSync';
-import __resolveGlobSync from './resolveGlobSync';
-export * from '../../shared/glob/_exports';
-export { __excludedGlobs, __matchExcludeGlobs, __matchGlobSync, __resolveGlobSync };
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sZUFBZSxNQUFNLGlCQUFpQixDQUFDO0FBQzlDLE9BQU8sbUJBQW1CLE1BQU0scUJBQXFCLENBQUM7QUFDdEQsT0FBTyxlQUFlLE1BQU0saUJBQWlCLENBQUM7QUFDOUMsT0FBTyxpQkFBaUIsTUFBTSxtQkFBbUIsQ0FBQztBQUVsRCxjQUFjLDRCQUE0QixDQUFDO0FBQzNDLE9BQU8sRUFBRSxlQUFlLEVBQUUsbUJBQW1CLEVBQUUsZUFBZSxFQUFFLGlCQUFpQixFQUFFLENBQUMifQ==
+import __excludedGlobs from './excludedGlobs.js';
+import __matchExcludeGlobs from './matchExcludeGlobs.js';
+import __matchGlobSync from './matchGlobSync.js';
+import __resolveGlobSync from './resolveGlobSync.js';
+export * from '../../shared/glob/_exports.js';
+export { __excludedGlobs, __matchExcludeGlobs, __matchGlobSync, __resolveGlobSync, };
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sZUFBZSxNQUFNLG9CQUFvQixDQUFDO0FBQ2pELE9BQU8sbUJBQW1CLE1BQU0sd0JBQXdCLENBQUM7QUFDekQsT0FBTyxlQUFlLE1BQU0sb0JBQW9CLENBQUM7QUFDakQsT0FBTyxpQkFBaUIsTUFBTSxzQkFBc0IsQ0FBQztBQUVyRCxjQUFjLCtCQUErQixDQUFDO0FBQzlDLE9BQU8sRUFDSCxlQUFlLEVBQ2YsbUJBQW1CLEVBQ25CLGVBQWUsRUFDZixpQkFBaUIsR0FDcEIsQ0FBQyJ9

@@ -1,10 +1,10 @@
-import __readJsonSync from '../fs/readJsonSync';
-import __writeJsonSync from '../fs/writeJsonSync';
-import __packageCacheDir from '../path/packageCacheDir';
+import __readJsonSync from '../fs/readJsonSync.js';
+import __writeJsonSync from '../fs/writeJsonSync.js';
+import __packageCacheDir from '../path/packageCacheDir.js';
 
 import __fs from 'fs';
 import __openGraphScraper from 'open-graph-scraper';
-import __deepMerge from '../../shared/object/deepMerge';
+import __deepMerge from '../../shared/object/deepMerge.js';
 
 /**
  * @name            scrapeUrl

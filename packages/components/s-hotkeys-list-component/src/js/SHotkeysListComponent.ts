@@ -1,6 +1,6 @@
 import __SLitComponent from '@coffeekraken/s-lit-component';
 import { css, html, unsafeCSS } from 'lit';
-import __SHotkeysListComponentInterface from './interface/SHotkeysListComponentInterface';
+import __SHotkeysListComponentInterface from './interface/SHotkeysListComponentInterface.js';
 
 import { unsafeHTML } from 'lit/directives/unsafe-html.js';
 

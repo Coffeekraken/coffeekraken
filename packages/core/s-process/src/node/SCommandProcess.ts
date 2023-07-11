@@ -1,12 +1,12 @@
 import { __deepMerge } from '@coffeekraken/sugar/object';
 import { __spawn } from '@coffeekraken/sugar/process';
-import __SCommandProcessInterface from './interface/SCommandProcessInterface';
 import {
     ISCommandProcessParams,
     ISCommandProcessSettings,
-    ISProcessResultObject
-} from './ISProcess';
-import __SProcess from './SProcess';
+    ISProcessResultObject,
+} from './ISProcess.js';
+import __SProcess from './SProcess.js';
+import __SCommandProcessInterface from './interface/SCommandProcessInterface.js';
 
 /**
  * @name            SCommandProcess
@@ -16,7 +16,7 @@ import __SProcess from './SProcess';
  * @platform        node
  * @status          beta
  * @private
- * 
+ *
  * This class represent an SProcess started with a simple bash command like "ls -la" or whatever
  *
  * @param       {ISCommandProcessSettings}          [settings={}]           Some settings to configure your command process

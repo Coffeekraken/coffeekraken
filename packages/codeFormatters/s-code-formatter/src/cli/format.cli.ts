@@ -1,4 +1,4 @@
-import __SCodeFormatter from '../node/SCodeFormatter';
+import __SCodeFormatter from '../node/SCodeFormatter.js';
 
 export default function format(stringArgs = '') {
     return new Promise(async (resolve) => {

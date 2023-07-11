@@ -1,4 +1,4 @@
-import __SFeature from './SFeature';
-export * from './SFeature';
+import __SFeature from './SFeature.js';
+export * from './SFeature.js';
 export default __SFeature;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sVUFBVSxNQUFNLFlBQVksQ0FBQztBQUVwQyxjQUFjLFlBQVksQ0FBQztBQUUzQixlQUFlLFVBQVUsQ0FBQyJ9
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sVUFBVSxNQUFNLGVBQWUsQ0FBQztBQUV2QyxjQUFjLGVBQWUsQ0FBQztBQUU5QixlQUFlLFVBQVUsQ0FBQyJ9

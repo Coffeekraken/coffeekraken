@@ -1,6 +1,6 @@
 import { __deepMerge } from '@coffeekraken/sugar/object';
-import __SCarpenterAppComponent from './SCarpenterAppComponent';
-import __SCarpenterNodeAdapter from './SCarpenterNodeAdapter';
+import __SCarpenterAppComponent from './SCarpenterAppComponent.js';
+import __SCarpenterNodeAdapter from './SCarpenterNodeAdapter.js';
 
 export interface ISCarpenterNodeSettings {}
 

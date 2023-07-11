@@ -1,7 +1,7 @@
 // @ts-nocheck
 
-import __deepMerge from '../object/deepMerge';
-import __countLineChars from './countLineChars';
+import __deepMerge from '../object/deepMerge.js';
+import __countLineChars from './countLineChars.js';
 
 /**
  * @name                                        crop
@@ -25,7 +25,7 @@ import __countLineChars from './countLineChars';
  * @todo      tests
  *
  * @snippet         __crop($1, $2)
- * 
+ *
  * @example         js
  * import { __crop } from '@coffeekraken/sugar/string';
  * __crop('Hello World', 10); // => Hello w...

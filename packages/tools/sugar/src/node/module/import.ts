@@ -1,5 +1,4 @@
-
-import __readJsonSync from '../fs/readJsonSync';
+import __readJsonSync from '../fs/readJsonSync.js';
 
 /**
  * @name                import
@@ -9,13 +8,13 @@ import __readJsonSync from '../fs/readJsonSync';
  * @status              beta
  * @async
  * @private
- * 
+ *
  * This function is the same as the native "import" one unless it allows you to pass an array with 2 values when the
  * first is the package name from which to import things, and the second is the "export" to import.
  *
  * @param       {String|Array}              what            Either a string like with the native "import" function, either an array with 2 values. 1st is the package name, 2nd is the "export" to import
  * @return      {any}                                       The imported things
- * 
+ *
  * @example         js
  * import { __import } from '@coffeekraken/sugar/module';
  * __import('@coffeekraken/s-typescript-builder');

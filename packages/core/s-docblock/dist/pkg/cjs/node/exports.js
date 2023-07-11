@@ -18,12 +18,12 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.firstDocblocksWithNamespaceInFolder = exports.SDocblockBlock = void 0;
-const SDocblock_1 = __importDefault(require("../shared/SDocblock"));
-const SDocblockBlock_1 = __importDefault(require("../shared/SDocblockBlock"));
-exports.SDocblockBlock = SDocblockBlock_1.default;
-const firstDocblocksWithNamespaceInFolder_1 = __importDefault(require("./utils/firstDocblocksWithNamespaceInFolder"));
-exports.firstDocblocksWithNamespaceInFolder = firstDocblocksWithNamespaceInFolder_1.default;
-__exportStar(require("../shared/SDocblock"), exports);
-__exportStar(require("../shared/SDocblockBlock"), exports);
-exports.default = SDocblock_1.default;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0FBQUEsb0VBQTRDO0FBQzVDLDhFQUFzRDtBQU03Qyx5QkFORix3QkFBYyxDQU1FO0FBTHZCLHNIQUE4RjtBQUtyRSw4Q0FMbEIsNkNBQW1DLENBS2tCO0FBSDVELHNEQUFvQztBQUNwQywyREFBeUM7QUFHekMsa0JBQWUsbUJBQVMsQ0FBQyJ9
+const SDocblock_js_1 = __importDefault(require("../shared/SDocblock.js"));
+const SDocblockBlock_js_1 = __importDefault(require("../shared/SDocblockBlock.js"));
+exports.SDocblockBlock = SDocblockBlock_js_1.default;
+const firstDocblocksWithNamespaceInFolder_js_1 = __importDefault(require("./utils/firstDocblocksWithNamespaceInFolder.js"));
+exports.firstDocblocksWithNamespaceInFolder = firstDocblocksWithNamespaceInFolder_js_1.default;
+__exportStar(require("../shared/SDocblock.js"), exports);
+__exportStar(require("../shared/SDocblockBlock.js"), exports);
+exports.default = SDocblock_js_1.default;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0FBQUEsMEVBQStDO0FBQy9DLG9GQUF5RDtBQU1oRCx5QkFORiwyQkFBYyxDQU1FO0FBTHZCLDRIQUFpRztBQUt4RSw4Q0FMbEIsZ0RBQW1DLENBS2tCO0FBSDVELHlEQUF1QztBQUN2Qyw4REFBNEM7QUFHNUMsa0JBQWUsc0JBQVMsQ0FBQyJ9

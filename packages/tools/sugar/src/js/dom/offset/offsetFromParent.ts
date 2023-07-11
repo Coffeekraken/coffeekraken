@@ -1,6 +1,6 @@
 // @ts-nocheck
 
-import __offsetFromViewport from './offsetFromViewport';
+import __offsetFromViewport from './offsetFromViewport.js';
 
 /**
  * @name      offsetFromParent

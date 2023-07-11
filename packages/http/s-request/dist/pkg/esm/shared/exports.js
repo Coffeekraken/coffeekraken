@@ -1,6 +1,6 @@
-import SRequest from './SRequest';
-import SRequestParamsInterface from './interface/SRequestParamsInterface';
+import SRequest from './SRequest.js';
+import SRequestParamsInterface from './interface/SRequestParamsInterface.js';
+export * from './SRequest.js';
 export { SRequestParamsInterface };
-export * from './SRequest';
 export default SRequest;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sUUFBUSxNQUFNLFlBQVksQ0FBQztBQUNsQyxPQUFPLHVCQUF1QixNQUFNLHFDQUFxQyxDQUFDO0FBRTFFLE9BQU8sRUFBRSx1QkFBdUIsRUFBRSxDQUFDO0FBQ25DLGNBQWMsWUFBWSxDQUFDO0FBQzNCLGVBQWUsUUFBUSxDQUFDIn0=
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sUUFBUSxNQUFNLGVBQWUsQ0FBQztBQUNyQyxPQUFPLHVCQUF1QixNQUFNLHdDQUF3QyxDQUFDO0FBRTdFLGNBQWMsZUFBZSxDQUFDO0FBQzlCLE9BQU8sRUFBRSx1QkFBdUIsRUFBRSxDQUFDO0FBQ25DLGVBQWUsUUFBUSxDQUFDIn0=

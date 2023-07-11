@@ -1,6 +1,6 @@
 import type { ISLitComponentDefineSettings } from '@coffeekraken/s-lit-component';
-import type ISSpacesSelectorComponentProps from './SSpacesSelectorComponent';
-import __SSpacesSelectorComponent from './SSpacesSelectorComponent';
+import type ISSpacesSelectorComponentProps from './SSpacesSelectorComponent.js';
+import __SSpacesSelectorComponent from './SSpacesSelectorComponent.js';
 
 export default function define(
     props: Partial<ISSpacesSelectorComponentProps> = {},

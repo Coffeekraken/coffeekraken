@@ -1,4 +1,4 @@
-import __dep from '../../dependencyList';
+import __dep from '../../dependencyList.js';
 describe('sugar.node.fs.dependencyList', () => {
     it('Should get correctly the dependencies from the passed file', async () => {
         const deps = await __dep(`${__dirname}/data/index.js`);

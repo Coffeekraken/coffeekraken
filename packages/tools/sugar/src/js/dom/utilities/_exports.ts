@@ -1,18 +1,18 @@
-import __canHaveChildren from './canHaveChildren';
-import __exitFullscreen from './exitFullscreen';
-import __forceRedraw from './forceRedraw';
-import __getHtmlClassFromTagName from './getHtmlClassFromTagName';
-import __getTagNameFromHtmlClass from './getTagNameFromHtmlClass';
-import __htmlTagToHtmlClassMap from './htmlTagToHtmlClassMap';
-import __inViewportPercentage from './inViewportPercentage';
-import __nodeIndex from './nodeIndex';
-import __requestAnimationFrame from './requestAnimationFrame';
-import __requestFullscreen from './requestFullscreen';
-import __splitLetters from './splitLetters';
-import __splitLines from './splitLines';
-import __splitWords from './splitWords';
-import __textWidth from './textWidth';
-import __toggleFullscreen from './toggleFullscreen';
+import __canHaveChildren from './canHaveChildren.js';
+import __exitFullscreen from './exitFullscreen.js';
+import __forceRedraw from './forceRedraw.js';
+import __getHtmlClassFromTagName from './getHtmlClassFromTagName.js';
+import __getTagNameFromHtmlClass from './getTagNameFromHtmlClass.js';
+import __htmlTagToHtmlClassMap from './htmlTagToHtmlClassMap.js';
+import __inViewportPercentage from './inViewportPercentage.js';
+import __nodeIndex from './nodeIndex.js';
+import __requestAnimationFrame from './requestAnimationFrame.js';
+import __requestFullscreen from './requestFullscreen.js';
+import __splitLetters from './splitLetters.js';
+import __splitLines from './splitLines.js';
+import __splitWords from './splitWords.js';
+import __textWidth from './textWidth.js';
+import __toggleFullscreen from './toggleFullscreen.js';
 
 export {
     __canHaveChildren,

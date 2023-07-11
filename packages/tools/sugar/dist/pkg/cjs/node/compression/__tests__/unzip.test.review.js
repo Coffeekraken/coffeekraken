@@ -12,14 +12,14 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const unzip_1 = __importDefault(require("../unzip"));
-const systemTmpDir_1 = __importDefault(require("../../path/systemTmpDir"));
+const systemTmpDir_js_1 = __importDefault(require("../../path/systemTmpDir.js"));
+const unzip_js_1 = __importDefault(require("../unzip.js"));
 describe('sugar.node.zip.unzip', () => {
     it('Should unzip a simple file correctly at the same destination folder', () => __awaiter(void 0, void 0, void 0, function* () {
-        const result = yield (0, unzip_1.default)(`${__dirname}/data/coffeekraken-new-logo.zip`, {
-            dest: (0, systemTmpDir_1.default)() + '/downloads',
+        const result = yield (0, unzip_js_1.default)(`${__dirname}/data/coffeekraken-new-logo.zip`, {
+            dest: (0, systemTmpDir_js_1.default)() + '/downloads',
         });
-        expect(result.dest).toBe(`${(0, systemTmpDir_1.default)()}/downloads/coffeekraken-new-logo`);
+        expect(result.dest).toBe(`${(0, systemTmpDir_js_1.default)()}/downloads/coffeekraken-new-logo`);
     }));
 });
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7O0FBQUEscURBQStCO0FBQy9CLDJFQUErQztBQUUvQyxRQUFRLENBQUMsc0JBQXNCLEVBQUUsR0FBRyxFQUFFO0lBQ2xDLEVBQUUsQ0FBQyxxRUFBcUUsRUFBRSxHQUFTLEVBQUU7UUFDakYsTUFBTSxNQUFNLEdBQUcsTUFBTSxJQUFBLGVBQU8sRUFDeEIsR0FBRyxTQUFTLGlDQUFpQyxFQUM3QztZQUNJLElBQUksRUFBRSxJQUFBLHNCQUFRLEdBQUUsR0FBRyxZQUFZO1NBQ2xDLENBQ0osQ0FBQztRQUNGLE1BQU0sQ0FBQyxNQUFNLENBQUMsSUFBSSxDQUFDLENBQUMsSUFBSSxDQUNwQixHQUFHLElBQUEsc0JBQVEsR0FBRSxrQ0FBa0MsQ0FDbEQsQ0FBQztJQUNOLENBQUMsQ0FBQSxDQUFDLENBQUM7QUFDUCxDQUFDLENBQUMsQ0FBQyJ9
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7O0FBQUEsaUZBQWtEO0FBQ2xELDJEQUFrQztBQUVsQyxRQUFRLENBQUMsc0JBQXNCLEVBQUUsR0FBRyxFQUFFO0lBQ2xDLEVBQUUsQ0FBQyxxRUFBcUUsRUFBRSxHQUFTLEVBQUU7UUFDakYsTUFBTSxNQUFNLEdBQUcsTUFBTSxJQUFBLGtCQUFPLEVBQ3hCLEdBQUcsU0FBUyxpQ0FBaUMsRUFDN0M7WUFDSSxJQUFJLEVBQUUsSUFBQSx5QkFBUSxHQUFFLEdBQUcsWUFBWTtTQUNsQyxDQUNKLENBQUM7UUFDRixNQUFNLENBQUMsTUFBTSxDQUFDLElBQUksQ0FBQyxDQUFDLElBQUksQ0FDcEIsR0FBRyxJQUFBLHlCQUFRLEdBQUUsa0NBQWtDLENBQ2xELENBQUM7SUFDTixDQUFDLENBQUEsQ0FBQyxDQUFDO0FBQ1AsQ0FBQyxDQUFDLENBQUMifQ==

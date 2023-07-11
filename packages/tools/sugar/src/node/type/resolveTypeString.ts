@@ -1,13 +1,13 @@
 import __SInterface from '@coffeekraken/s-interface';
 
-import __replaceTokens from '../../shared/token/replaceTokens';
-import __packageRootDir from '../path/packageRootDir';
+import __replaceTokens from '../../shared/token/replaceTokens.js';
+import __packageRootDir from '../path/packageRootDir.js';
 
 import __fs from 'fs';
 import __path from 'path';
 import __parseTypeString, {
     ITypeStringObject,
-} from '../../shared/type/parseTypeString';
+} from '../../shared/type/parseTypeString.js';
 
 /**
  * @name            resolveTypeString

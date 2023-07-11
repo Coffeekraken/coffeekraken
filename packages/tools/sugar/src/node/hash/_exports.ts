@@ -1,2 +1,2 @@
-import __hashFromSync from './hashFromSync';
+import __hashFromSync from './hashFromSync.js';
 export { __hashFromSync };

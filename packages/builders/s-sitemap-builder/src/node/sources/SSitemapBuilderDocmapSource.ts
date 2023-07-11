@@ -3,11 +3,11 @@ import { __fileHashSync } from '@coffeekraken/sugar/fs';
 import { __pad } from '@coffeekraken/sugar/number';
 import { __deepMerge } from '@coffeekraken/sugar/object';
 import __fs from 'fs';
-import type { ISSitemapBuilderBuildParams } from '../interface/SSitemapBuildIParamsInterface';
-import type { ISSitemapBuilderResultItem } from '../SSitemapBuilder';
+import type { ISSitemapBuilderResultItem } from '../SSitemapBuilder.js';
 import __SSitemapBuilderSource, {
     ISSitemapBuilderSourceResult,
-} from '../SSitemapBuilderSource';
+} from '../SSitemapBuilderSource.js';
+import type { ISSitemapBuilderBuildParams } from '../interface/SSitemapBuildIParamsInterface.js';
 
 /**
  * @name            SSitemapBuilderDocmapSource

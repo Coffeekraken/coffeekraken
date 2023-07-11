@@ -1,8 +1,8 @@
 import __SPromise from '@coffeekraken/s-promise';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
-import __argsToString from '../../shared/cli/argsToString';
-import __isCommandExists from '../is/isCommandExists';
-import __spawn from '../process/spawn';
+import __argsToString from '../../shared/cli/argsToString.js';
+import __isCommandExists from '../is/isCommandExists.js';
+import __spawn from '../process/spawn.js';
 
 /**
  * @name            install

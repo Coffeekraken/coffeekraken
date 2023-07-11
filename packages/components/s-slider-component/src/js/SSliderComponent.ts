@@ -14,9 +14,9 @@ import {
 } from '@coffeekraken/sugar/dom';
 import { __uniqid } from '@coffeekraken/sugar/string';
 import __css from '../../../../src/css/s-slider-component.css'; // relative to /dist/pkg/esm/js
-import __SSliderComponentInterface from './interface/SSliderComponentInterface';
+import __SSliderComponentInterface from './interface/SSliderComponentInterface.js';
 
-import __scrollBehavior from './behaviors/scrollBehavior';
+import __scrollBehavior from './behaviors/scrollBehavior.js';
 
 /**
  * @name                SSliderComponent

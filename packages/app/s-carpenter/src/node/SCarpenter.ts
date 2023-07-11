@@ -6,7 +6,7 @@ import { __dirname } from '@coffeekraken/sugar/fs';
 import { __deepMerge } from '@coffeekraken/sugar/object';
 import { __onProcessExit } from '@coffeekraken/sugar/process';
 import __express from 'express';
-import __SCarpenterStartParamsInterface from './interface/SCarpenterStartParamsInterface';
+import __SCarpenterStartParamsInterface from './interface/SCarpenterStartParamsInterface.js';
 
 import { __clone } from '@coffeekraken/sugar/object';
 
@@ -18,9 +18,9 @@ import __expressHttpProxy from 'express-http-proxy';
 
 import { __packageRootDir } from '@coffeekraken/sugar/path';
 
-import __carpenterNodesHandler from './handlers/carpenterNodesHandler';
-import __carpenterPagesHandler from './handlers/carpenterPagesHandler';
-import __carpenterViewHandler from './handlers/carpenterViewHandler';
+import __carpenterNodesHandler from './handlers/carpenterNodesHandler.js';
+import __carpenterPagesHandler from './handlers/carpenterPagesHandler.js';
+import __carpenterViewHandler from './handlers/carpenterViewHandler.js';
 
 /**
  * @name                SCarpenter

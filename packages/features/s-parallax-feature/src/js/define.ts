@@ -1,5 +1,5 @@
-import type ISParallaxFeatureProps from './SParallaxFeature';
-import __SParallaxFeature from './SParallaxFeature';
+import type ISParallaxFeatureProps from './SParallaxFeature.js';
+import __SParallaxFeature from './SParallaxFeature.js';
 
 export default function define(
     props: Partial<ISParallaxFeatureProps> = {},

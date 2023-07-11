@@ -1,6 +1,6 @@
 import type { ISLitComponentDefineSettings } from '@coffeekraken/s-lit-component';
-import type ISWysiwygComponentProps from './SWysiwygComponent';
-import __SWysiwygComponent from './SWysiwygComponent';
+import type ISWysiwygComponentProps from './SWysiwygComponent.js';
+import __SWysiwygComponent from './SWysiwygComponent.js';
 
 export default function define(
     props: Partial<ISWysiwygComponentProps> = {},

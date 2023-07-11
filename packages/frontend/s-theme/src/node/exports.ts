@@ -1,5 +1,5 @@
-import STheme from './STheme';
+import STheme from './STheme.js';
 
-export * from './STheme';
+export * from './STheme.js';
 
 export default STheme;

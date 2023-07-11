@@ -1,7 +1,7 @@
 // @ts-nocheck
 
-import __parse from '../../../shared/string/parse';
-import __observeAttributes from '../observe/observeAttributes';
+import __parse from '../../../shared/string/parse.js';
+import __observeAttributes from '../observe/observeAttributes.js';
 
 /**
  * @name      whenAttribute

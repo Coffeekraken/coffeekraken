@@ -1,8 +1,8 @@
 // @ts-nocheck
-import __uniqid from '../../../js/string/uniqid';
-import __convertTime from '../../../shared/datetime/convertTime';
-import __injectStyle from '../inject/injectStyle';
-import __emptyNode from '../manipulate/emptyNode';
+import __uniqid from '../../../js/string/uniqid.js';
+import __convertTime from '../../../shared/datetime/convertTime.js';
+import __injectStyle from '../inject/injectStyle.js';
+import __emptyNode from '../manipulate/emptyNode.js';
 
 /**
  * @name            animatedInnerHtml

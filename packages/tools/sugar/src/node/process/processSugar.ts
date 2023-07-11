@@ -1,8 +1,8 @@
 // @ts-nocheck
 
-import __handleErrors from '../error/handleErrors';
-import __exitCleanup from './exitCleanup';
-import __onProcessExit from './onProcessExit';
+import __handleErrors from '../error/handleErrors.js';
+import __exitCleanup from './exitCleanup.js';
+import __onProcessExit from './onProcessExit.js';
 
 /**
  * @name                    index

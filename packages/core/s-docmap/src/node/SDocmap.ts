@@ -30,10 +30,10 @@ import __chokidar from 'chokidar';
 import __fs from 'fs';
 import __micromatch from 'micromatch';
 import __path from 'path';
-import __SDocmapBuildParamsInterface from './interface/SDocmapBuildParamsInterface';
-import __SDocmapReadParamsInterface from './interface/SDocmapReadParamsInterface';
-import __SDocmapSearchParamsInterface from './interface/SDocmapSearchParamsInterface';
-import __SDocmapSettingsInterface from './interface/SDocmapSettingsInterface';
+import __SDocmapBuildParamsInterface from './interface/SDocmapBuildParamsInterface.js';
+import __SDocmapReadParamsInterface from './interface/SDocmapReadParamsInterface.js';
+import __SDocmapSearchParamsInterface from './interface/SDocmapSearchParamsInterface.js';
+import __SDocmapSettingsInterface from './interface/SDocmapSettingsInterface.js';
 
 function __toLowerCase(l = '') {
     return l.toLowerCase();

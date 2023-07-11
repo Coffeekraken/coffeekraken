@@ -1,4 +1,4 @@
-import __simplifySpecialChars from '../string/simplifySpecialChars';
+import __simplifySpecialChars from '../string/simplifySpecialChars.js';
 
 /**
  * @name            isIdCompliant

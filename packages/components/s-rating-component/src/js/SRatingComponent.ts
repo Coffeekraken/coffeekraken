@@ -1,6 +1,6 @@
 import __SLitComponent from '@coffeekraken/s-lit-component';
 import { css, html, unsafeCSS } from 'lit';
-import __SRatingComponentInterface from './interface/SRatingComponentInterface';
+import __SRatingComponentInterface from './interface/SRatingComponentInterface.js';
 
 // @ts-ignore
 import __css from '../../../../src/css/s-rating.css'; // relative to /dist/pkg/esm/js

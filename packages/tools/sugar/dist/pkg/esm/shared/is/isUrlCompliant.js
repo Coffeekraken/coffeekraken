@@ -1,4 +1,4 @@
-import __urlCompliant from '../string/urlCompliant';
+import __urlCompliant from '../string/urlCompliant.js';
 /**
  * @name            isUrlCompliant
  * @namespace            shared.string
@@ -26,4 +26,4 @@ import __urlCompliant from '../string/urlCompliant';
 export default function __isUrlCompliant(str) {
     return str === __urlCompliant(str);
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sY0FBYyxNQUFNLHdCQUF3QixDQUFDO0FBRXBEOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQXVCRztBQUNILE1BQU0sQ0FBQyxPQUFPLFVBQVUsZ0JBQWdCLENBQUMsR0FBVztJQUNoRCxPQUFPLEdBQUcsS0FBSyxjQUFjLENBQUMsR0FBRyxDQUFDLENBQUM7QUFDdkMsQ0FBQyJ9
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sY0FBYyxNQUFNLDJCQUEyQixDQUFDO0FBRXZEOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQXVCRztBQUNILE1BQU0sQ0FBQyxPQUFPLFVBQVUsZ0JBQWdCLENBQUMsR0FBVztJQUNoRCxPQUFPLEdBQUcsS0FBSyxjQUFjLENBQUMsR0FBRyxDQUFDLENBQUM7QUFDdkMsQ0FBQyJ9

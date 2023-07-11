@@ -9,10 +9,10 @@ import {
     __rgbaToHsla,
 } from '@coffeekraken/sugar/color';
 import { __deepMerge } from '@coffeekraken/sugar/object';
-import __SColorApplyParamsInterface from './interface/SColorApplyParamsInterface';
-import __SColorSettingsInterface from './interface/SColorSettingsInterface';
+import __SColorApplyParamsInterface from './interface/SColorApplyParamsInterface.js';
+import __SColorSettingsInterface from './interface/SColorSettingsInterface.js';
 
-import { Contrast } from './contrast';
+import { Contrast } from './contrast/index.js';
 
 /**
  * @name 		    SColor

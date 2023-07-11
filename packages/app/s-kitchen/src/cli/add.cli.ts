@@ -1,4 +1,4 @@
-import __SKitchen from '../node/SKitchen';
+import __SKitchen from '../node/SKitchen.js';
 
 export default function action(stringArgs = '') {
     return new Promise(async (resolve) => {

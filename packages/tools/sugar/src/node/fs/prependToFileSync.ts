@@ -1,5 +1,5 @@
 import __fs from 'fs';
-import __writeFileSync from '../fs/writeFileSync';
+import __writeFileSync from '../fs/writeFileSync.js';
 
 /**
  * @name            prependToFileSync

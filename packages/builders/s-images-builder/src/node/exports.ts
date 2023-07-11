@@ -1,3 +1,3 @@
-import __SImagesBuilder from './SImagesBuilder';
-export * from './SImagesBuilder';
+import __SImagesBuilder from './SImagesBuilder.js';
+export * from './SImagesBuilder.js';
 export default __SImagesBuilder;

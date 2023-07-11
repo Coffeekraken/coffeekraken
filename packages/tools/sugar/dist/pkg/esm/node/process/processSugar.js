@@ -1,7 +1,7 @@
 // @ts-nocheck
-import __handleErrors from '../error/handleErrors';
-import __exitCleanup from './exitCleanup';
-import __onProcessExit from './onProcessExit';
+import __handleErrors from '../error/handleErrors.js';
+import __exitCleanup from './exitCleanup.js';
+import __onProcessExit from './onProcessExit.js';
 /**
  * @name                    index
  * @namespace           node
@@ -28,4 +28,4 @@ export default function __processSugar() {
         return __exitCleanup;
     });
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7QUFFZCxPQUFPLGNBQWMsTUFBTSx1QkFBdUIsQ0FBQztBQUNuRCxPQUFPLGFBQWEsTUFBTSxlQUFlLENBQUM7QUFDMUMsT0FBTyxlQUFlLE1BQU0saUJBQWlCLENBQUM7QUFFOUM7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBaUJHO0FBQ0gsTUFBTSxDQUFDLE9BQU8sVUFBVSxjQUFjO0lBQ2xDLG9CQUFvQjtJQUNwQixjQUFjLEVBQUUsQ0FBQztJQUVqQixlQUFlO0lBQ2YsZUFBZSxDQUFDLEdBQUcsRUFBRTtRQUNqQixPQUFPLGFBQWEsQ0FBQztJQUN6QixDQUFDLENBQUMsQ0FBQztBQUNQLENBQUMifQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7QUFFZCxPQUFPLGNBQWMsTUFBTSwwQkFBMEIsQ0FBQztBQUN0RCxPQUFPLGFBQWEsTUFBTSxrQkFBa0IsQ0FBQztBQUM3QyxPQUFPLGVBQWUsTUFBTSxvQkFBb0IsQ0FBQztBQUVqRDs7Ozs7Ozs7Ozs7Ozs7Ozs7R0FpQkc7QUFDSCxNQUFNLENBQUMsT0FBTyxVQUFVLGNBQWM7SUFDbEMsb0JBQW9CO0lBQ3BCLGNBQWMsRUFBRSxDQUFDO0lBRWpCLGVBQWU7SUFDZixlQUFlLENBQUMsR0FBRyxFQUFFO1FBQ2pCLE9BQU8sYUFBYSxDQUFDO0lBQ3pCLENBQUMsQ0FBQyxDQUFDO0FBQ1AsQ0FBQyJ9

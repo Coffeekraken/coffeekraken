@@ -5,26 +5,26 @@ import { __deepMerge } from '@coffeekraken/sugar/object';
 import { __namespaceCompliant } from '@coffeekraken/sugar/string';
 import { marked as __marked } from 'marked';
 
-import __authorTag from './tags/author';
-import __contributorTag from './tags/contributor';
-import __cssClass from './tags/cssClass';
-import __descriptionTag from './tags/description';
-import __eventTag from './tags/event';
-import __exampleTag from './tags/example';
-import __installTag from './tags/install';
-import __interfaceTag from './tags/interface';
-import __menuTag from './tags/menu';
-import __namespaceTag from './tags/namespace';
-import __paramTag from './tags/param';
-import __platformTag from './tags/platform';
-import __returnTag from './tags/return';
-import __seeTag from './tags/see';
-import __simpleRepeatableValue from './tags/simpleRepeatableValue';
-import __simpleValueTag from './tags/simpleValue';
-import __snippetTag from './tags/snippet';
-import __supportTag from './tags/support';
-import __todoTag from './tags/todo';
-import __typeTag from './tags/type';
+import __authorTag from './tags/author.js';
+import __contributorTag from './tags/contributor.js';
+import __cssClass from './tags/cssClass.js';
+import __descriptionTag from './tags/description.js';
+import __eventTag from './tags/event.js';
+import __exampleTag from './tags/example.js';
+import __installTag from './tags/install.js';
+import __interfaceTag from './tags/interface.js';
+import __menuTag from './tags/menu.js';
+import __namespaceTag from './tags/namespace.js';
+import __paramTag from './tags/param.js';
+import __platformTag from './tags/platform.js';
+import __returnTag from './tags/return.js';
+import __seeTag from './tags/see.js';
+import __simpleRepeatableValue from './tags/simpleRepeatableValue.js';
+import __simpleValueTag from './tags/simpleValue.js';
+import __snippetTag from './tags/snippet.js';
+import __supportTag from './tags/support.js';
+import __todoTag from './tags/todo.js';
+import __typeTag from './tags/type.js';
 
 /**
  * @name          SDocblockBlock

@@ -1,8 +1,8 @@
 // @ts-nocheck
 
-import __isPlainObject from '../is/isPlainObject';
-import __unquote from '../string/unquote';
-import __get from './get';
+import __isPlainObject from '../is/isPlainObject.js';
+import __unquote from '../string/unquote.js';
+import __get from './get.js';
 
 /**
  * @name                                        set

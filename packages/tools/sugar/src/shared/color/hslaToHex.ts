@@ -1,4 +1,4 @@
-import __parseHsla from './parseHsla';
+import __parseHsla from './parseHsla.js';
 
 /**
  * @name              hslaToHex
@@ -21,7 +21,7 @@ import __parseHsla from './parseHsla';
  * @todo      tests
  *
  * @snippet         __hslaToHex($1)
- * 
+ *
  * @example         js
  * import { __hslaToHex } from '@coffeekraken/sugar/color';
  * __hslaToHex(10,20,30);

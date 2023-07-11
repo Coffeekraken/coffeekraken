@@ -1,4 +1,4 @@
-import __stripTags from '../striptags';
+import __stripTags from '../striptags.js';
 
 describe('sugar.shared.html.striptags', () => {
     const html = `<div><bold>Hello world</bold><h1>How are you?</h1></div>`;

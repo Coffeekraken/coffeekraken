@@ -1,4 +1,4 @@
-import __SColor from '../SColor';
+import __SColor from '../SColor.js';
 
 describe('s-color.shared', () => {
     it('Should parse and return the same color when passing hexa value in', () => {

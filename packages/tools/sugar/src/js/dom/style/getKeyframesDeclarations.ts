@@ -1,4 +1,4 @@
-import __getCssDeclarations from './getCssDeclarations';
+import __getCssDeclarations from './getCssDeclarations.js';
 
 /**
  * @name      getKeyframesDeclarations

@@ -1,5 +1,5 @@
 import __SInterface from '@coffeekraken/s-interface';
-import { IPostcssSugarPluginWireframeParams } from '../../functions/color/color';
+import { IPostcssSugarPluginWireframeParams } from '../../functions/color/color.js';
 
 class postcssSugarPluginScopeWireframeMixinInterface extends __SInterface {
     static get _definition() {

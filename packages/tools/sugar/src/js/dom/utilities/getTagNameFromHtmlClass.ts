@@ -1,6 +1,6 @@
 // @ts-nocheck
 
-import __htmlTagToHtmlClassMap from './htmlTagToHtmlClassMap';
+import __htmlTagToHtmlClassMap from './htmlTagToHtmlClassMap.js';
 
 /**
  * @name            getHtmlhtmlClassFromHtmlClass

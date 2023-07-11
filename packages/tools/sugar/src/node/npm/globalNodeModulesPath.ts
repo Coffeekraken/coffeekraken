@@ -1,8 +1,8 @@
 import __childProcess from 'child_process';
 import __fs from 'fs';
-import __ensureDirSync from '../fs/ensureDirSync';
-import __folderPath from '../fs/folderPath';
-import __packageRootDir from '../path/packageRootDir';
+import __ensureDirSync from '../fs/ensureDirSync.js';
+import __folderPath from '../fs/folderPath.js';
+import __packageRootDir from '../path/packageRootDir.js';
 
 /**
  * @name            globalNodeModulesPath

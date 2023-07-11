@@ -1,6 +1,6 @@
 // @ts-nocheck
 
-import __packageJsonSync from './packageJsonSync';
+import __packageJsonSync from './packageJsonSync.js';
 
 /**
  * @name          packageJson
@@ -21,7 +21,7 @@ import __packageJsonSync from './packageJsonSync';
  *
  * @snippet         __packageJson()
  * await __packageJson()
- * 
+ *
  * @example     js
  * import { __packageJson } from '@coffeekraken/sugar/package;
  * __packageJson();

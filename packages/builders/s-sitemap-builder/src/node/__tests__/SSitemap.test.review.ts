@@ -1,5 +1,5 @@
-import __SSitemap from '../SSitemapBuilder';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
+import __SSitemap from '../SSitemapBuilder.js';
 
 describe('s-sitemap.node.SSitemap', () => {
     it('Should generate a simple sitemap from a static source', async () => {

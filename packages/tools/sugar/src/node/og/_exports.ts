@@ -1,3 +1,3 @@
-import __scrapeUrl from './scrapeUrl';
+import __scrapeUrl from './scrapeUrl.js';
 
 export { __scrapeUrl };

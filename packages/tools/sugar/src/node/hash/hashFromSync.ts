@@ -1,9 +1,9 @@
-import __isGlob from '../../shared/is/isGlob';
-import __objectHash from '../../shared/object/objectHash';
-import __fileHashSync from '../fs/fileHashSync';
-import __folderHashSync from '../fs/folderHashSync';
-import __isDirectory from '../is/isDirectory';
-import __packagePathSync from '../npm/packagePathSync';
+import __isGlob from '../../shared/is/isGlob.js';
+import __objectHash from '../../shared/object/objectHash.js';
+import __fileHashSync from '../fs/fileHashSync.js';
+import __folderHashSync from '../fs/folderHashSync.js';
+import __isDirectory from '../is/isDirectory.js';
+import __packagePathSync from '../npm/packagePathSync.js';
 
 import __crypto, { BinaryToTextEncoding } from 'crypto';
 import __fs from 'fs';

@@ -1,6 +1,6 @@
 // @ts-nocheck
 
-import __deepMerge from '../object/deepMerge';
+import __deepMerge from '../object/deepMerge.js';
 
 /**
  * @name          simply
@@ -25,7 +25,7 @@ import __deepMerge from '../object/deepMerge';
  * @todo      tests
  *
  * @snippet         __simplify($1)
- * 
+ *
  * @example       js
  * import { __simplify } from '@coffeekraken/sugar/string';
  * __simplify('éàddö'); // => eaddo

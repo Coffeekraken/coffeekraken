@@ -9,7 +9,7 @@ import {
     parse as __parseDate,
 } from 'date-format-parse';
 import { css, html, unsafeCSS } from 'lit';
-import __SDatetimePickerComponentInterface from './interface/SDatetimePickerComponentInterface';
+import __SDatetimePickerComponentInterface from './interface/SDatetimePickerComponentInterface.js';
 
 import type { __ISDatetime } from '@coffeekraken/sugar';
 

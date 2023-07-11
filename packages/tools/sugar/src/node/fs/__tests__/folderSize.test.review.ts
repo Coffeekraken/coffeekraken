@@ -1,4 +1,4 @@
-import __folderSize from '../folderSize';
+import __folderSize from '../folderSize.js';
 describe('sugar.node.fs.folderSize', () => {
     it('Should get a folder size correctly', async () => {
         const size = await __folderSize(`${__dirname}/data/hashfolder`);

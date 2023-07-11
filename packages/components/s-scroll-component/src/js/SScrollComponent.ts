@@ -7,7 +7,7 @@ import __STheme from '@coffeekraken/s-theme';
 import { __scrollTo } from '@coffeekraken/sugar/dom';
 import { __deepMerge } from '@coffeekraken/sugar/object';
 import { css, html, unsafeCSS } from 'lit';
-import __SScrollComponentInterface from './interface/SScrollComponentInterface';
+import __SScrollComponentInterface from './interface/SScrollComponentInterface.js';
 
 // @ts-ignore
 import __css from '../../../../src/css/s-scroll.css'; // relative to /dist/pkg/esm/js

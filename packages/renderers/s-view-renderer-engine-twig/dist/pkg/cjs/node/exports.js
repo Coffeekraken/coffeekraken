@@ -17,7 +17,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const SViewRendererEngineTwig_1 = __importDefault(require("./SViewRendererEngineTwig"));
-__exportStar(require("./SViewRendererEngineTwig"), exports);
-exports.default = SViewRendererEngineTwig_1.default;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7QUFBQSx3RkFBZ0U7QUFDaEUsNERBQTBDO0FBQzFDLGtCQUFlLGlDQUF1QixDQUFDIn0=
+const SViewRendererEngineTwig_js_1 = __importDefault(require("./SViewRendererEngineTwig.js"));
+__exportStar(require("./SViewRendererEngineTwig.js"), exports);
+exports.default = SViewRendererEngineTwig_js_1.default;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7QUFBQSw4RkFBbUU7QUFDbkUsK0RBQTZDO0FBQzdDLGtCQUFlLG9DQUF1QixDQUFDIn0=

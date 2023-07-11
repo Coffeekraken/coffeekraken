@@ -1,6 +1,6 @@
 import { __monorepoToPackageAbsolutePath } from '@coffeekraken/sugar/monorepo';
 import { __packageRootDir } from '@coffeekraken/sugar/path';
-import __deepMap from '../../shared/object/deepMap';
+import __deepMap from '../../shared/object/deepMap.js';
 
 /**
  * @name            monorepoToPackageAbsolutePathDeepMap

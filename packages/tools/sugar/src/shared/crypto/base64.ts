@@ -2,8 +2,8 @@
 
 import __atob from 'atob';
 import __btoa from 'btoa';
-import parse from '../string/parse';
-import toString from '../string/toString';
+import parse from '../string/parse.js';
+import toString from '../string/toString.js';
 
 /**
  * @name            base64
@@ -16,7 +16,7 @@ import toString from '../string/toString';
  * Expose two function named "encrypt" and "decrypt" that you can use to process your content using the base64 algorithm
  *
  * @snippet         __base64.encrypt($1)
- * 
+ *
  * @example         js
  * import { __base64 } from '@coffeekraken/sugar/crypto';
  * __base64.encrypt('hello world');

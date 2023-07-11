@@ -1,4 +1,4 @@
-import __SImagesBuilder from './SImagesBuilder';
-export * from './SImagesBuilder';
+import __SImagesBuilder from './SImagesBuilder.js';
+export * from './SImagesBuilder.js';
 export default __SImagesBuilder;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sZ0JBQWdCLE1BQU0sa0JBQWtCLENBQUM7QUFDaEQsY0FBYyxrQkFBa0IsQ0FBQztBQUNqQyxlQUFlLGdCQUFnQixDQUFDIn0=
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sZ0JBQWdCLE1BQU0scUJBQXFCLENBQUM7QUFDbkQsY0FBYyxxQkFBcUIsQ0FBQztBQUNwQyxlQUFlLGdCQUFnQixDQUFDIn0=

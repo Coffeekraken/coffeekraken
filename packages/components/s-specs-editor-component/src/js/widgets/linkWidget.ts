@@ -2,8 +2,8 @@ import { html } from 'lit';
 
 import type { ISImageData } from '@specim3n/types';
 
-import type { ISSpecsEditorWidgetDeps } from '../SSpecsEditorWidget';
-import __SSpecsEditorWidget from '../SSpecsEditorWidget';
+import type { ISSpecsEditorWidgetDeps } from '../SSpecsEditorWidget.js';
+import __SSpecsEditorWidget from '../SSpecsEditorWidget.js';
 
 export default class SSpecsEditorComponentLinkWidget extends __SSpecsEditorWidget {
     constructor(deps: ISSpecsEditorWidgetDeps) {

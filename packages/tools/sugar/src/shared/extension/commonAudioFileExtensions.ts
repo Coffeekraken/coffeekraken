@@ -1,4 +1,4 @@
-import { ICommonFileExtensionsSettings } from './commonFileExtensions';
+import { ICommonFileExtensionsSettings } from './commonFileExtensions.js';
 
 /**
  * @name            commonAudioFileExtensions
@@ -14,7 +14,7 @@ import { ICommonFileExtensionsSettings } from './commonFileExtensions';
  * @return     {Array<String>}                           The array of extensions
  *
  * @snippet         __commonAudioFileExtensions()
- * 
+ *
  * @example         js
  * import { __commonAudioFileExtensions } from '@coffeekraken/sugar/extension';
  * const extensions = __commonAudioFileExtensions();

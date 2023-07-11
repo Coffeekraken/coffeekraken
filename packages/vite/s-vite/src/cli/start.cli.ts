@@ -1,4 +1,4 @@
-import __SVite from '../node/SVite';
+import __SVite from '../node/SVite.js';
 
 export default function start(stringArgs = '') {
     return new Promise(async (resolve) => {

@@ -1,10 +1,10 @@
 // @ts-nocheck
 
-import __whenInViewport from '../dom/detect/whenInViewport';
-import __querySelectorLive from '../dom/query/querySelectorLive';
+import __whenInViewport from '../dom/detect/whenInViewport.js';
+import __querySelectorLive from '../dom/query/querySelectorLive.js';
 
 import __fastdom from 'fastdom';
-import deepMerge from '../../shared/object/deepMerge';
+import deepMerge from '../../shared/object/deepMerge.js';
 
 /**
  * @name 		imagesLazySrcAttribute

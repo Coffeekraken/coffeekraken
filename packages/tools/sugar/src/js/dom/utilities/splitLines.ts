@@ -1,6 +1,6 @@
 // @ts-nocheck
 
-import __throttle from '../../../shared/function/throttle';
+import __throttle from '../../../shared/function/throttle.js';
 
 /**
  * @name      splitLines

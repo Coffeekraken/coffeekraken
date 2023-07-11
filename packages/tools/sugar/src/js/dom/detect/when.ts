@@ -1,22 +1,22 @@
 // @ts-nocheck
 
-import type { IWhenEntersViewportSettings } from './whenEntersViewport';
-import type { IWhenInteractSettings } from './whenInteract';
-import type { IWhenInViewportSettings } from './whenInViewport';
-import type { IWhenNearViewportSettings } from './whenNearViewport';
-import type { IWhenOutOfViewportSettings } from './whenOutOfViewport';
-import type { IWhenStyleSheetsReadySettings } from './whenStylesheetsReady';
-import type { IWhenVisibleSettings } from './whenVisible';
+import type { IWhenEntersViewportSettings } from './whenEntersViewport.js';
+import type { IWhenInteractSettings } from './whenInteract.js';
+import type { IWhenInViewportSettings } from './whenInViewport.js';
+import type { IWhenNearViewportSettings } from './whenNearViewport.js';
+import type { IWhenOutOfViewportSettings } from './whenOutOfViewport.js';
+import type { IWhenStyleSheetsReadySettings } from './whenStylesheetsReady.js';
+import type { IWhenVisibleSettings } from './whenVisible.js';
 
-import __whenAnimationEnd from './whenAnimationEnd';
-import __whenEntersViewport from './whenEntersViewport';
-import __whenInteract from './whenInteract';
-import __whenInViewport from './whenInViewport';
-import __whenLod from './whenLod';
-import __whenNearViewport from './whenNearViewport';
-import __whenOutOfViewport from './whenOutOfViewport';
-import __whenStylesheetsReady from './whenStylesheetsReady';
-import __whenVisible from './whenVisible';
+import __whenAnimationEnd from './whenAnimationEnd.js';
+import __whenEntersViewport from './whenEntersViewport.js';
+import __whenInteract from './whenInteract.js';
+import __whenInViewport from './whenInViewport.js';
+import __whenLod from './whenLod.js';
+import __whenNearViewport from './whenNearViewport.js';
+import __whenOutOfViewport from './whenOutOfViewport.js';
+import __whenStylesheetsReady from './whenStylesheetsReady.js';
+import __whenVisible from './whenVisible.js';
 
 /**
  * @name            when

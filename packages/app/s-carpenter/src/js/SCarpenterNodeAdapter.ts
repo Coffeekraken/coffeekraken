@@ -1,5 +1,5 @@
-import __SCarpenterAppComponent from './SCarpenterAppComponent';
-import __SCarpenterNode from './SCarpenterNode';
+import __SCarpenterAppComponent from './SCarpenterAppComponent.js';
+import __SCarpenterNode from './SCarpenterNode.js';
 
 export interface ISCarpenterNodeAdapterSettings {}
 

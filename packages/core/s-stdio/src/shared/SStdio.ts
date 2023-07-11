@@ -1,9 +1,9 @@
 import __SClass from '@coffeekraken/s-class';
 import type { ISLog, ISLogAsk } from '@coffeekraken/s-log';
 import { __deepMerge } from '@coffeekraken/sugar/object';
-import type { ISStdioAdapter } from './SStdioAdapter';
-import type { ISStdioSource } from './SStdioSource';
-import __SStdioSettingsInterface from './interface/SStdioSettingsInterface';
+import type { ISStdioAdapter } from './SStdioAdapter.js';
+import type { ISStdioSource } from './SStdioSource.js';
+import __SStdioSettingsInterface from './interface/SStdioSettingsInterface.js';
 
 export interface ISStdioSettings {
     filter: typeof Function;

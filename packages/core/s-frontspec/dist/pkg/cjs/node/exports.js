@@ -17,8 +17,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const SFrontspec_1 = __importDefault(require("./SFrontspec"));
-__exportStar(require("../shared/SFrontspecTypes"), exports);
-__exportStar(require("./SFrontspec"), exports);
-exports.default = SFrontspec_1.default;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7QUFBQSw4REFBc0M7QUFFdEMsNERBQTBDO0FBQzFDLCtDQUE2QjtBQUU3QixrQkFBZSxvQkFBVSxDQUFDIn0=
+const SFrontspec_js_1 = __importDefault(require("./SFrontspec.js"));
+__exportStar(require("../shared/SFrontspecTypes.js"), exports);
+__exportStar(require("./SFrontspec.js"), exports);
+exports.default = SFrontspec_js_1.default;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7QUFBQSxvRUFBeUM7QUFFekMsK0RBQTZDO0FBQzdDLGtEQUFnQztBQUVoQyxrQkFBZSx1QkFBVSxDQUFDIn0=

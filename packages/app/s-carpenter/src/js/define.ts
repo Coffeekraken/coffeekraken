@@ -1,6 +1,6 @@
 import { __isInIframe } from '@coffeekraken/sugar/dom';
-import type ISCarpenterComponentProps from './SCarpenterComponent';
-import __SCarpenterComponent from './SCarpenterComponent';
+import type ISCarpenterComponentProps from './SCarpenterComponent.js';
+import __SCarpenterComponent from './SCarpenterComponent.js';
 
 export default function define(
     props: Partial<ISCarpenterComponentProps> = {},

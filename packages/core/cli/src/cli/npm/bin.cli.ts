@@ -3,10 +3,10 @@
 import _childProcess from 'child_process';
 import _fs from 'fs';
 import _path from 'path';
-import _parseArgs from '../../node/cli/parseArgs';
-import _findPackages from '../../node/monorepo/findPackages';
-import __packageRootDir from '../../node/path/packageRootDir';
-import _SNpmBinCliInterface from './interface/SNpmBinCliInterface';
+import _parseArgs from '../../node/cli/parseArgs.js';
+import _findPackages from '../../node/monorepo/findPackages.js';
+import __packageRootDir from '../../node/path/packageRootDir.js';
+import _SNpmBinCliInterface from './interface/SNpmBinCliInterface.js';
 
 export default async function bin(stringArgs = '') {
     const argsObj = _parseArgs(stringArgs, {

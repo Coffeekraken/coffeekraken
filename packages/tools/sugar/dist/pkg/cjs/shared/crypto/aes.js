@@ -4,10 +4,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const aes_1 = __importDefault(require("crypto-js/aes"));
-const enc_utf8_1 = __importDefault(require("crypto-js/enc-utf8"));
-const parse_1 = __importDefault(require("../string/parse"));
-const toString_1 = __importDefault(require("../string/toString"));
+const aes_js_1 = __importDefault(require("crypto-js/aes.js"));
+const enc_utf8_js_1 = __importDefault(require("crypto-js/enc-utf8.js"));
+const parse_js_1 = __importDefault(require("../string/parse.js"));
+const toString_js_1 = __importDefault(require("../string/toString.js"));
 /**
  * @name            aes
  * @namespace            shared.crypto
@@ -45,8 +45,8 @@ exports.default = {
      */
     encrypt: function (message, key = 'coffeekraken.sugar.crypto.aes') {
         if (typeof message !== 'string')
-            message = (0, toString_1.default)(message);
-        return aes_1.default.encrypt(message, key).toString();
+            message = (0, toString_js_1.default)(message);
+        return aes_js_1.default.encrypt(message, key).toString();
     },
     /**
      * @name        decrypt
@@ -61,8 +61,8 @@ exports.default = {
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     decrypt: function (message, key = 'coffeekraken.sugar.crypto.aes') {
-        const value = aes_1.default.decrypt(message, key).toString(enc_utf8_1.default);
-        return (0, parse_1.default)(value);
+        const value = aes_js_1.default.decrypt(message, key).toString(enc_utf8_js_1.default);
+        return (0, parse_js_1.default)(value);
     },
 };
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOzs7OztBQUVkLHdEQUFnQztBQUNoQyxrRUFBc0M7QUFDdEMsNERBQW9DO0FBQ3BDLGtFQUEwQztBQUUxQzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBcUJHO0FBQ0gsa0JBQWU7SUFDWDs7Ozs7Ozs7Ozs7T0FXRztJQUNILE9BQU8sRUFBRSxVQUFVLE9BQU8sRUFBRSxHQUFHLEdBQUcsK0JBQStCO1FBQzdELElBQUksT0FBTyxPQUFPLEtBQUssUUFBUTtZQUFFLE9BQU8sR0FBRyxJQUFBLGtCQUFRLEVBQUMsT0FBTyxDQUFDLENBQUM7UUFDN0QsT0FBTyxhQUFHLENBQUMsT0FBTyxDQUFDLE9BQU8sRUFBRSxHQUFHLENBQUMsQ0FBQyxRQUFRLEVBQUUsQ0FBQztJQUNoRCxDQUFDO0lBRUQ7Ozs7Ozs7Ozs7O09BV0c7SUFDSCxPQUFPLEVBQUUsVUFBVSxPQUFPLEVBQUUsR0FBRyxHQUFHLCtCQUErQjtRQUM3RCxNQUFNLEtBQUssR0FBRyxhQUFHLENBQUMsT0FBTyxDQUFDLE9BQU8sRUFBRSxHQUFHLENBQUMsQ0FBQyxRQUFRLENBQUMsa0JBQUksQ0FBQyxDQUFDO1FBQ3ZELE9BQU8sSUFBQSxlQUFLLEVBQUMsS0FBSyxDQUFDLENBQUM7SUFDeEIsQ0FBQztDQUNKLENBQUMifQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxjQUFjOzs7OztBQUVkLDhEQUFtQztBQUNuQyx3RUFBeUM7QUFDekMsa0VBQXVDO0FBQ3ZDLHdFQUE2QztBQUU3Qzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBcUJHO0FBQ0gsa0JBQWU7SUFDWDs7Ozs7Ozs7Ozs7T0FXRztJQUNILE9BQU8sRUFBRSxVQUFVLE9BQU8sRUFBRSxHQUFHLEdBQUcsK0JBQStCO1FBQzdELElBQUksT0FBTyxPQUFPLEtBQUssUUFBUTtZQUFFLE9BQU8sR0FBRyxJQUFBLHFCQUFRLEVBQUMsT0FBTyxDQUFDLENBQUM7UUFDN0QsT0FBTyxnQkFBRyxDQUFDLE9BQU8sQ0FBQyxPQUFPLEVBQUUsR0FBRyxDQUFDLENBQUMsUUFBUSxFQUFFLENBQUM7SUFDaEQsQ0FBQztJQUVEOzs7Ozs7Ozs7OztPQVdHO0lBQ0gsT0FBTyxFQUFFLFVBQVUsT0FBTyxFQUFFLEdBQUcsR0FBRywrQkFBK0I7UUFDN0QsTUFBTSxLQUFLLEdBQUcsZ0JBQUcsQ0FBQyxPQUFPLENBQUMsT0FBTyxFQUFFLEdBQUcsQ0FBQyxDQUFDLFFBQVEsQ0FBQyxxQkFBSSxDQUFDLENBQUM7UUFDdkQsT0FBTyxJQUFBLGtCQUFLLEVBQUMsS0FBSyxDQUFDLENBQUM7SUFDeEIsQ0FBQztDQUNKLENBQUMifQ==

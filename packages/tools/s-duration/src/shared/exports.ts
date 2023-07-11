@@ -1,4 +1,4 @@
-import __SDuration from './SDuration';
+import __SDuration from './SDuration.js';
 
-export * from './SDuration';
+export * from './SDuration.js';
 export default __SDuration;

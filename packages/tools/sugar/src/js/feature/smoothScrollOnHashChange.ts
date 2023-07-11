@@ -1,8 +1,8 @@
 // @ts-nocheck
-import __scrollToLocationHash from '../dom/scroll/scrollToLocationHash';
+import __scrollToLocationHash from '../dom/scroll/scrollToLocationHash.js';
 
-import __deepMerge from '../../shared/object/deepMerge';
-import type { IScrollToSettings } from '../dom/scroll/scrollTo';
+import __deepMerge from '../../shared/object/deepMerge.js';
+import type { IScrollToSettings } from '../dom/scroll/scrollTo.js';
 
 /**
  * @name        smoothScrollOnHashChange

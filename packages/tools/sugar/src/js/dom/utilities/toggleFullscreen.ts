@@ -1,7 +1,7 @@
 // @ts-nocheck
 
-import exitFullscreen from './exitFullscreen';
-import requestFullscreen from './requestFullscreen';
+import exitFullscreen from './exitFullscreen.js';
+import requestFullscreen from './requestFullscreen.js';
 
 /**
  * @name      toggleFullscreen

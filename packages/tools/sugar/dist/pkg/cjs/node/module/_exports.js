@@ -18,17 +18,17 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.__resolvePackagePath = exports.__import = exports.__extractImport = exports.__dependencyTree = exports.__dependencyList = exports.__builtInNodeModules = void 0;
-const buildInNodeModules_1 = __importDefault(require("./buildInNodeModules"));
-exports.__builtInNodeModules = buildInNodeModules_1.default;
-const dependencyList_1 = __importDefault(require("./dependencyList"));
-exports.__dependencyList = dependencyList_1.default;
-const dependencyTree_1 = __importDefault(require("./dependencyTree"));
-exports.__dependencyTree = dependencyTree_1.default;
-const extractImport_1 = __importDefault(require("./extractImport"));
-exports.__extractImport = extractImport_1.default;
-const import_1 = __importDefault(require("./import"));
-exports.__import = import_1.default;
-const resolvePackagePath_1 = __importDefault(require("./resolvePackagePath"));
-exports.__resolvePackagePath = resolvePackagePath_1.default;
-__exportStar(require("../../shared/module/_exports"), exports);
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0FBQUEsOEVBQXdEO0FBU3BELCtCQVRHLDRCQUFvQixDQVNIO0FBUnhCLHNFQUFnRDtBQVM1QywyQkFURyx3QkFBZ0IsQ0FTSDtBQVJwQixzRUFBZ0Q7QUFTNUMsMkJBVEcsd0JBQWdCLENBU0g7QUFScEIsb0VBQThDO0FBUzFDLDBCQVRHLHVCQUFlLENBU0g7QUFSbkIsc0RBQWdDO0FBUzVCLG1CQVRHLGdCQUFRLENBU0g7QUFSWiw4RUFBd0Q7QUFTcEQsK0JBVEcsNEJBQW9CLENBU0g7QUFQeEIsK0RBQTZDIn0=
+const buildInNodeModules_js_1 = __importDefault(require("./buildInNodeModules.js"));
+exports.__builtInNodeModules = buildInNodeModules_js_1.default;
+const dependencyList_js_1 = __importDefault(require("./dependencyList.js"));
+exports.__dependencyList = dependencyList_js_1.default;
+const dependencyTree_js_1 = __importDefault(require("./dependencyTree.js"));
+exports.__dependencyTree = dependencyTree_js_1.default;
+const extractImport_js_1 = __importDefault(require("./extractImport.js"));
+exports.__extractImport = extractImport_js_1.default;
+const import_js_1 = __importDefault(require("./import.js"));
+exports.__import = import_js_1.default;
+const resolvePackagePath_js_1 = __importDefault(require("./resolvePackagePath.js"));
+exports.__resolvePackagePath = resolvePackagePath_js_1.default;
+__exportStar(require("../../shared/module/_exports.js"), exports);
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0FBQUEsb0ZBQTJEO0FBU3ZELCtCQVRHLCtCQUFvQixDQVNIO0FBUnhCLDRFQUFtRDtBQVMvQywyQkFURywyQkFBZ0IsQ0FTSDtBQVJwQiw0RUFBbUQ7QUFTL0MsMkJBVEcsMkJBQWdCLENBU0g7QUFScEIsMEVBQWlEO0FBUzdDLDBCQVRHLDBCQUFlLENBU0g7QUFSbkIsNERBQW1DO0FBUy9CLG1CQVRHLG1CQUFRLENBU0g7QUFSWixvRkFBMkQ7QUFTdkQsK0JBVEcsK0JBQW9CLENBU0g7QUFQeEIsa0VBQWdEIn0=

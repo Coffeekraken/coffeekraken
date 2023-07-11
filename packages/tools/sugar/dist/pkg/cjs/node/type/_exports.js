@@ -18,7 +18,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.__resolveTypeString = void 0;
-const resolveTypeString_1 = __importDefault(require("./resolveTypeString"));
-exports.__resolveTypeString = resolveTypeString_1.default;
-__exportStar(require("../../shared/type/_exports"), exports);
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0FBQUEsNEVBQXNEO0FBRzdDLDhCQUhGLDJCQUFtQixDQUdFO0FBRDVCLDZEQUEyQyJ9
+const resolveTypeString_js_1 = __importDefault(require("./resolveTypeString.js"));
+exports.__resolveTypeString = resolveTypeString_js_1.default;
+__exportStar(require("../../shared/type/_exports.js"), exports);
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0FBQUEsa0ZBQXlEO0FBR2hELDhCQUhGLDhCQUFtQixDQUdFO0FBRDVCLGdFQUE4QyJ9

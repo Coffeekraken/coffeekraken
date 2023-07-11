@@ -1,2 +1,3 @@
-import __downloadGithubRepository from './downloadGithubRepository';$
-export { __downloadGithubRepository }
+import __downloadGithubRepository from './downloadGithubRepository.js';
+$;
+export { __downloadGithubRepository };

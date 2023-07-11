@@ -1,8 +1,8 @@
-import __addDependencies from './addDependencies';
-import __globalNodeModulesPath from './globalNodeModulesPath';
-import __install from './install';
-import __listNodeModulesPackages from './listNodeModulesPackages';
-import __packagePathSync from './packagePathSync';
+import __addDependencies from './addDependencies.js';
+import __globalNodeModulesPath from './globalNodeModulesPath.js';
+import __install from './install.js';
+import __listNodeModulesPackages from './listNodeModulesPackages.js';
+import __packagePathSync from './packagePathSync.js';
 
 export {
     __addDependencies,

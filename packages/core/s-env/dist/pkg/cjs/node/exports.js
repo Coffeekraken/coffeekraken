@@ -17,7 +17,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const SEnv_1 = __importDefault(require("./SEnv"));
-__exportStar(require("./SEnv"), exports);
-exports.default = SEnv_1.default;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7QUFBQSxrREFBMEI7QUFFMUIseUNBQXVCO0FBRXZCLGtCQUFlLGNBQUksQ0FBQyJ9
+const SEnv_js_1 = __importDefault(require("./SEnv.js"));
+__exportStar(require("./SEnv.js"), exports);
+exports.default = SEnv_js_1.default;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7QUFBQSx3REFBNkI7QUFFN0IsNENBQTBCO0FBRTFCLGtCQUFlLGlCQUFJLENBQUMifQ==

@@ -1,6 +1,6 @@
 import __SLog from '@coffeekraken/s-log';
-import type { ISStdioSource, ISStdioSourceSettings } from '../SStdioSource';
-import __SStdioSource from '../SStdioSource';
+import type { ISStdioSource, ISStdioSourceSettings } from '../SStdioSource.js';
+import __SStdioSource from '../SStdioSource.js';
 
 export interface ISStdioConsoleSource extends ISStdioSource {}
 

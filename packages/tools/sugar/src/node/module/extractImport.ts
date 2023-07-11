@@ -2,7 +2,7 @@ import * as __ast from 'abstract-syntax-tree';
 import * as __acorn from 'acorn-loose';
 import { generate as __astring } from 'astring';
 import __fs from 'fs';
-import __deepMerge from '../../shared/object/deepMerge';
+import __deepMerge from '../../shared/object/deepMerge.js';
 
 /**
  * @name            extractImport
@@ -24,7 +24,7 @@ import __deepMerge from '../../shared/object/deepMerge';
  * @todo        Tests
  *
  * @snippet         __extractImports($1)
- * 
+ *
  * @example         js
  * import { __extractImports } from '@coffeekraken/sugar/module';
  * __extractImports('/something/cool.js');

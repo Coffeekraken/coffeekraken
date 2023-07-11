@@ -1,7 +1,7 @@
 // @ts-nocheck
 
-import __isPlainObject from '../is/isPlainObject';
-import __sort from './sort';
+import __isPlainObject from '../is/isPlainObject.js';
+import __sort from './sort.js';
 
 /**
  * @name                                sortDeep
@@ -25,7 +25,7 @@ import __sort from './sort';
  * __sortDeep($1, (a, b) => {
  *      $2
  * })
- * 
+ *
  * @example               js
  * import { __sortDeep } from '@coffeekraken/sugar/object';
  * __sortDeep({

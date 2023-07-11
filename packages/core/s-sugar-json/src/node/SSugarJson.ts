@@ -7,7 +7,7 @@ import { __deepMerge } from '@coffeekraken/sugar/object';
 import { __packageRootDir } from '@coffeekraken/sugar/path';
 import __fs from 'fs';
 import __glob from 'glob-all';
-import type { ISKitchenAction } from '../../../../app/s-kitchen/dist/pkg/cjs/node/exports';
+import type { ISKitchenAction } from '../../../../app/s-kitchen/dist/pkg/cjs/node/exports.js';
 
 export interface ISSugarJsonSettings {
     packages: string | boolean;

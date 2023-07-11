@@ -5,7 +5,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const monorepo_1 = require("@coffeekraken/sugar/monorepo");
 const path_1 = require("@coffeekraken/sugar/path");
-const deepMap_1 = __importDefault(require("../../shared/object/deepMap"));
+const deepMap_js_1 = __importDefault(require("../../shared/object/deepMap.js"));
 /**
  * @name            monorepoToPackageAbsolutePathDeepMap
  * @type            Function
@@ -23,7 +23,7 @@ const deepMap_1 = __importDefault(require("../../shared/object/deepMap"));
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 function __monorepoToPackageAbsolutePathDeepMap(obj, packageRootPath = (0, path_1.__packageRootDir)()) {
-    return (0, deepMap_1.default)(obj, ({ object, path, value, prop }) => {
+    return (0, deepMap_js_1.default)(obj, ({ object, path, value, prop }) => {
         if (typeof value === 'string') {
             value = (0, monorepo_1.__monorepoToPackageAbsolutePath)(value, packageRootPath);
         }
@@ -31,4 +31,4 @@ function __monorepoToPackageAbsolutePathDeepMap(obj, packageRootPath = (0, path_
     });
 }
 exports.default = __monorepoToPackageAbsolutePathDeepMap;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7O0FBQUEsMkRBQStFO0FBQy9FLG1EQUE0RDtBQUM1RCwwRUFBb0Q7QUFFcEQ7Ozs7Ozs7Ozs7Ozs7OztHQWVHO0FBQ0gsU0FBd0Isc0NBQXNDLENBQzFELEdBQVEsRUFDUixrQkFBMEIsSUFBQSx1QkFBZ0IsR0FBRTtJQUU1QyxPQUFPLElBQUEsaUJBQVMsRUFBQyxHQUFHLEVBQUUsQ0FBQyxFQUFFLE1BQU0sRUFBRSxJQUFJLEVBQUUsS0FBSyxFQUFFLElBQUksRUFBRSxFQUFFLEVBQUU7UUFDcEQsSUFBSSxPQUFPLEtBQUssS0FBSyxRQUFRLEVBQUU7WUFDM0IsS0FBSyxHQUFHLElBQUEsMENBQStCLEVBQUMsS0FBSyxFQUFFLGVBQWUsQ0FBQyxDQUFDO1NBQ25FO1FBQ0QsT0FBTyxLQUFLLENBQUM7SUFDakIsQ0FBQyxDQUFDLENBQUM7QUFDUCxDQUFDO0FBVkQseURBVUMifQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7O0FBQUEsMkRBQStFO0FBQy9FLG1EQUE0RDtBQUM1RCxnRkFBdUQ7QUFFdkQ7Ozs7Ozs7Ozs7Ozs7OztHQWVHO0FBQ0gsU0FBd0Isc0NBQXNDLENBQzFELEdBQVEsRUFDUixrQkFBMEIsSUFBQSx1QkFBZ0IsR0FBRTtJQUU1QyxPQUFPLElBQUEsb0JBQVMsRUFBQyxHQUFHLEVBQUUsQ0FBQyxFQUFFLE1BQU0sRUFBRSxJQUFJLEVBQUUsS0FBSyxFQUFFLElBQUksRUFBRSxFQUFFLEVBQUU7UUFDcEQsSUFBSSxPQUFPLEtBQUssS0FBSyxRQUFRLEVBQUU7WUFDM0IsS0FBSyxHQUFHLElBQUEsMENBQStCLEVBQUMsS0FBSyxFQUFFLGVBQWUsQ0FBQyxDQUFDO1NBQ25FO1FBQ0QsT0FBTyxLQUFLLENBQUM7SUFDakIsQ0FBQyxDQUFDLENBQUM7QUFDUCxDQUFDO0FBVkQseURBVUMifQ==

@@ -1,6 +1,6 @@
 // @ts-nocheck
 
-import __stringToNode from '../html/stringToNode';
+import __stringToNode from '../html/stringToNode.js';
 
 function processNodeElm(elm) {
     // check tpl type

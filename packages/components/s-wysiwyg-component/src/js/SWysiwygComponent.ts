@@ -5,7 +5,7 @@ import __SLitComponent, {
 } from '@coffeekraken/s-lit-component';
 import { __deepMerge } from '@coffeekraken/sugar/object';
 import { css, html, unsafeCSS } from 'lit';
-import __SWysiwygComponentInterface from './interface/SWysiwygComponentInterface';
+import __SWysiwygComponentInterface from './interface/SWysiwygComponentInterface.js';
 
 import type { ISWysiwygData } from '@specim3n/types';
 

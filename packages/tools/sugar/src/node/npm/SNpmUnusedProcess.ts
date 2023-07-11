@@ -2,8 +2,8 @@ import _SInterface from '@coffeekraken/s-interface';
 import __SProcess, { ISProcessSettings } from '@coffeekraken/s-process';
 import __SPromise from '@coffeekraken/s-promise';
 import __depCheck from 'depcheck';
-import __packageRootDir from '../path/packageRootDir';
-import __packageJsonSync from './packageJsonSync';
+import __packageRootDir from '../path/packageRootDir.js';
+import __packageJsonSync from './packageJsonSync.js';
 
 /**
  * @name            SNpmUnusedProcess

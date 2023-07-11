@@ -1,5 +1,5 @@
-import SVite from './SVite';
+import SVite from './SVite.js';
 
-export * from './SVite';
+export * from './SVite.js';
 
 export default SVite;

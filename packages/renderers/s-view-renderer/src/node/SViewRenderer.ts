@@ -2,7 +2,7 @@ import __SClass from '@coffeekraken/s-class';
 import type { ISDurationObject } from '@coffeekraken/s-duration';
 import __SDuration from '@coffeekraken/s-duration';
 import type { ISFileObject } from '@coffeekraken/s-file';
-// import __page404 from './pages/404';
+// import __page404 from './pages/404.js';
 import __SDataFileGeneric from '@coffeekraken/s-data-file-generic';
 import type { ISPromise } from '@coffeekraken/s-promise';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
@@ -14,7 +14,7 @@ import { __uniqid } from '@coffeekraken/sugar/string';
 import __fs from 'fs';
 import __glob from 'glob';
 import __path from 'path';
-import __SViewRendererSettingsInterface from './interface/SViewRendererSettingsInterface';
+import __SViewRendererSettingsInterface from './interface/SViewRendererSettingsInterface.js';
 
 /**
  * @name          SViewRenderer

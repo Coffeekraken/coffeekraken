@@ -1,3 +1,3 @@
-import __SFrontendServer from './SFrontendServer';
-export * from './SFrontendServer';
+import __SFrontendServer from './SFrontendServer.js';
+export * from './SFrontendServer.js';
 export default __SFrontendServer;

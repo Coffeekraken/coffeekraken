@@ -5,7 +5,7 @@ import { __deepMerge } from '@coffeekraken/sugar/object';
 import __hljs from 'highlight.js/lib/core';
 import __langBash from 'highlight.js/lib/languages/bash';
 import __langTwig from 'highlight.js/lib/languages/twig';
-import __langCss from './languages/css';
+import __langCss from './languages/css.js';
 // import __langCss from 'highlight.js/lib/languages/css';
 import type { IScrollToSettings } from '@coffeekraken/sugar/dom';
 import { __scrollTo } from '@coffeekraken/sugar/dom';
@@ -16,7 +16,7 @@ import __langHtml from 'highlight.js/lib/languages/xml';
 import { css, html, unsafeCSS } from 'lit';
 import { query } from 'lit/decorators.js';
 import { unsafeHTML } from 'lit/directives/unsafe-html.js';
-import __SCodeExampleComponentInterface from './interface/SCodeExampleComponentInterface';
+import __SCodeExampleComponentInterface from './interface/SCodeExampleComponentInterface.js';
 
 // // // @ts-ignore
 // import __prettier from 'prettier/esm/standalone.mjs';

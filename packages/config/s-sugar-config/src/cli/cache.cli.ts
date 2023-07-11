@@ -1,6 +1,6 @@
 // @ts-nocheck
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
-import __SCliConfigCacheParamsInterface from './interface/SCliConfigCacheParamsInterface';
+import __SCliConfigCacheParamsInterface from './interface/SCliConfigCacheParamsInterface.js';
 
 export default (stringArgs = '') => {
     return new Promise(async (resolve) => {

@@ -1,7 +1,7 @@
-import __getAvailableInterfaceTypes from './getAvailableInterfaceTypes';
-import SInterface from './SInterface';
+import __getAvailableInterfaceTypes from './getAvailableInterfaceTypes.js';
+import SInterface from './SInterface.js';
 
-export * from './SInterface';
+export * from './SInterface.js';
 export { __getAvailableInterfaceTypes };
 
 export default SInterface;

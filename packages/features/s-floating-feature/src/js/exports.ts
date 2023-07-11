@@ -1,6 +1,6 @@
-import __SFloatingFeature from './SFloatingFeature';
-import __define from './define';
+import __SFloatingFeature from './SFloatingFeature.js';
+import __define from './define.js';
 
-export * from './SFloatingFeature';
+export * from './SFloatingFeature.js';
 export { __define };
 export default __SFloatingFeature;

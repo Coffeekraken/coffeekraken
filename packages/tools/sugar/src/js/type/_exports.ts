@@ -1,1 +1,1 @@
-export * from '../../shared/type/_exports';
+export * from '../../shared/type/_exports.js';

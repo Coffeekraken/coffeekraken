@@ -3,7 +3,7 @@
 import __SClass from '@coffeekraken/s-class';
 import { __deepMerge } from '@coffeekraken/sugar/object';
 import __axios from 'axios';
-import __SRequestParamsInterface from './interface/SRequestParamsInterface';
+import __SRequestParamsInterface from './interface/SRequestParamsInterface.js';
 
 /**
  * @name 		                    SRequest

@@ -17,7 +17,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const SDataFilePhp_1 = __importDefault(require("./SDataFilePhp"));
-__exportStar(require("./SDataFilePhp"), exports);
-exports.default = SDataFilePhp_1.default;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7QUFBQSxrRUFBMEM7QUFDMUMsaURBQStCO0FBQy9CLGtCQUFlLHNCQUFZLENBQUMifQ==
+const SDataFilePhp_js_1 = __importDefault(require("./SDataFilePhp.js"));
+__exportStar(require("./SDataFilePhp.js"), exports);
+exports.default = SDataFilePhp_js_1.default;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7QUFBQSx3RUFBNkM7QUFDN0Msb0RBQWtDO0FBQ2xDLGtCQUFlLHlCQUFZLENBQUMifQ==

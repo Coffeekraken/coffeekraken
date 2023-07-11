@@ -1,6 +1,6 @@
 import __fs from 'fs';
-import __deepMerge from '../../shared/object/deepMerge';
-import __packageRootDir from '../path/packageRootDir';
+import __deepMerge from '../../shared/object/deepMerge.js';
+import __packageRootDir from '../path/packageRootDir.js';
 
 /**
  * @name                composerPath

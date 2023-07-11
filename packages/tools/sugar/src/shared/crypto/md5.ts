@@ -1,8 +1,8 @@
 // @ts-nocheck
 
-import md5 from 'crypto-js/md5';
-import parse from '../string/parse';
-import toString from '../string/toString';
+import md5 from 'crypto-js/md5.js';
+import parse from '../string/parse.js';
+import toString from '../string/toString.js';
 
 const __encryptedMessages = {};
 
@@ -17,7 +17,7 @@ const __encryptedMessages = {};
  * Expose two function named "encrypt" and "decrypt" that you can use to process your content using the md5 algorithm
  *
  * @snippet         __md5.encrypt($1)
- * 
+ *
  * @example         js
  * import { __md5 } from '@coffeekraken/sugar/crypto';
  * __md5.encrypt('hello world');

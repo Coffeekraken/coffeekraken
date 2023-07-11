@@ -1,6 +1,6 @@
 // @ts-nocheck
 
-import __whenScriptLoaded from '../detect/whenScriptLoaded';
+import __whenScriptLoaded from '../detect/whenScriptLoaded.js';
 
 /**
  * @name        injectScript

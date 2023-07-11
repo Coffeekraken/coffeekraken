@@ -1,4 +1,4 @@
-import __parseTypeString from '../parseTypeString';
+import __parseTypeString from '../parseTypeString.js';
 
 describe('sugar.shared.type.parseTypeString', () => {
     it('Should parse type string "{String}" correctly', () => {

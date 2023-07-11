@@ -1,6 +1,6 @@
 // @ts-nocheck
 
-import __whenAnimationEnd from '../detect/whenAnimationEnd';
+import __whenAnimationEnd from '../detect/whenAnimationEnd.js';
 
 /**
  * @name      removeClassOnAnimationEnd

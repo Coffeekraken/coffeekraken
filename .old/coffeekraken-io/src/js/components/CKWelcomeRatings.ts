@@ -4,7 +4,7 @@ import { __pickRandom } from '@coffeekraken/sugar/array';
 
 import __SLitComponent from '@coffeekraken/s-lit-component';
 import { html } from 'lit';
-import __ratingsApi from '../generic/ratingsApi';
+import __ratingsApi from '../generic/ratingsApi.js';
 
 export default class CKWelcomeRatings extends __SLitComponent {
     static get properties() {

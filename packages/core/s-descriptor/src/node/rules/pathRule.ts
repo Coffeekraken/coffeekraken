@@ -5,8 +5,11 @@ import { __isGlob, __isNode, __isPath } from '@coffeekraken/sugar/is';
 import { __replaceTokens } from '@coffeekraken/sugar/token';
 import __fs from 'fs';
 import __path from 'path';
-import type { ISDescriptorResultObj } from '../SDescriptorResult';
-import type { ISDescriptorRule, ISDescriptorSettings } from '../_SDescriptor';
+import type { ISDescriptorResultObj } from '../SDescriptorResult.js';
+import type {
+    ISDescriptorRule,
+    ISDescriptorSettings,
+} from '../_SDescriptor.js';
 
 /**
  * @name          pathRule

@@ -9,7 +9,7 @@ import { __deepMerge, __get } from '@coffeekraken/sugar/object';
 import { __packageRootDir } from '@coffeekraken/sugar/path';
 import __fs from 'fs';
 import __path from 'path';
-import __SFrontspecBuildParamsInterface from './interface/SFrontspecBuildParamsInterface';
+import __SFrontspecBuildParamsInterface from './interface/SFrontspecBuildParamsInterface.js';
 
 import type { ISFrontspec } from '@coffeekraken/s-frontspec';
 

@@ -1,8 +1,8 @@
 // @ts-nocheck
 
-import __parseHtml from '../../node/console/parseHtml';
-import __isChildProcess from '../../shared/is/isChildProcess';
-import __toString from '../../shared/string/toString';
+import __parseHtml from '../../node/console/parseHtml.js';
+import __isChildProcess from '../../shared/is/isChildProcess.js';
+import __toString from '../../shared/string/toString.js';
 
 /**
  * @name                    handleErrors

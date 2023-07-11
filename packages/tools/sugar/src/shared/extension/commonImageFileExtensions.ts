@@ -1,4 +1,4 @@
-import { ICommonFileExtensionsSettings } from './commonFileExtensions';
+import { ICommonFileExtensionsSettings } from './commonFileExtensions.js';
 
 /**
  * @name            commonImageFileExtensions
@@ -14,7 +14,7 @@ import { ICommonFileExtensionsSettings } from './commonFileExtensions';
  * @return     {Array<String>}                           The array of extensions
  *
  * @snippet         __commonImageFileExtensions()
- * 
+ *
  * @example         js
  * import { __commonImageFileExtensions } from '@coffeekraken/sugar/extension';
  * const extensions = __commonImageFileExtensions();

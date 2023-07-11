@@ -17,7 +17,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const sVitePluginSugar_1 = __importDefault(require("./sVitePluginSugar"));
-__exportStar(require("./sVitePluginSugar"), exports);
-exports.default = sVitePluginSugar_1.default;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7QUFBQSwwRUFBa0Q7QUFFbEQscURBQW1DO0FBRW5DLGtCQUFlLDBCQUFnQixDQUFDIn0=
+const sVitePluginSugar_js_1 = __importDefault(require("./sVitePluginSugar.js"));
+__exportStar(require("./sVitePluginSugar.js"), exports);
+exports.default = sVitePluginSugar_js_1.default;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7QUFBQSxnRkFBcUQ7QUFFckQsd0RBQXNDO0FBRXRDLGtCQUFlLDZCQUFnQixDQUFDIn0=

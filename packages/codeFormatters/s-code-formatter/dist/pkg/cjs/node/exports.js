@@ -17,7 +17,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const SCodeFormatter_1 = __importDefault(require("./SCodeFormatter"));
-__exportStar(require("./SCodeFormatter"), exports);
-exports.default = SCodeFormatter_1.default;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7QUFBQSxzRUFBOEM7QUFDOUMsbURBQWlDO0FBQ2pDLGtCQUFlLHdCQUFjLENBQUMifQ==
+const SCodeFormatter_js_1 = __importDefault(require("./SCodeFormatter.js"));
+__exportStar(require("./SCodeFormatter.js"), exports);
+exports.default = SCodeFormatter_js_1.default;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7QUFBQSw0RUFBaUQ7QUFDakQsc0RBQW9DO0FBQ3BDLGtCQUFlLDJCQUFjLENBQUMifQ==

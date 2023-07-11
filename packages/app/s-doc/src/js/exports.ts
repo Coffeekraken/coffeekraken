@@ -1,6 +1,6 @@
-import __SDocComponent from './SDocComponent';
-import __define from './define';
+import __SDocComponent from './SDocComponent.js';
+import __define from './define.js';
 
-export * from './SDocComponent';
+export * from './SDocComponent.js';
 export { __define };
 export default __SDocComponent;

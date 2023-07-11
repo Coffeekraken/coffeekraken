@@ -1,7 +1,7 @@
 // @ts-nocheck
 
 import __fs from 'fs';
-import __deepMerge from '../../shared/object/deepMerge';
+import __deepMerge from '../../shared/object/deepMerge.js';
 
 /**
  * @name            isDirectory
@@ -20,7 +20,7 @@ import __deepMerge from '../../shared/object/deepMerge';
  * @todo      tests
  *
  * @snippet         __isDirectory($1)
- * 
+ *
  * @example     js
  * import { __isDirectory } from '@coffeekraken/sugar/is';
  * __isDirectory('something/cool');

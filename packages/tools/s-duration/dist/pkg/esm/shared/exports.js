@@ -1,4 +1,4 @@
-import __SDuration from './SDuration';
-export * from './SDuration';
+import __SDuration from './SDuration.js';
+export * from './SDuration.js';
 export default __SDuration;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sV0FBVyxNQUFNLGFBQWEsQ0FBQztBQUV0QyxjQUFjLGFBQWEsQ0FBQztBQUM1QixlQUFlLFdBQVcsQ0FBQyJ9
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sV0FBVyxNQUFNLGdCQUFnQixDQUFDO0FBRXpDLGNBQWMsZ0JBQWdCLENBQUM7QUFDL0IsZUFBZSxXQUFXLENBQUMifQ==

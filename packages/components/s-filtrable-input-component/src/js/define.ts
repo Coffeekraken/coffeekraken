@@ -1,6 +1,6 @@
 import type { ISLitComponentDefineSettings } from '@coffeekraken/s-lit-component';
-import type ISFiltrableInputComponentProps from './SFiltrableInputComponent';
-import __SFiltrableInputComponent from './SFiltrableInputComponent';
+import type ISFiltrableInputComponentProps from './SFiltrableInputComponent.js';
+import __SFiltrableInputComponent from './SFiltrableInputComponent.js';
 
 export default function define(
     props: Partial<ISFiltrableInputComponentProps> = {},

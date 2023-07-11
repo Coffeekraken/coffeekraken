@@ -1,9 +1,9 @@
 import { __unescapeHtml } from '@coffeekraken/sugar/html';
 
-import type { ISCarpenterNodeAdapterDeps } from '../SCarpenterNodeAdapter';
-import __SCarpenterNodeAdapter from '../SCarpenterNodeAdapter';
+import type { ISCarpenterNodeAdapterDeps } from '../SCarpenterNodeAdapter.js';
+import __SCarpenterNodeAdapter from '../SCarpenterNodeAdapter.js';
 
-import type { ISCarpenterNode } from '../../types/_exports';
+import type { ISCarpenterNode } from '../../types/_exports.js';
 
 export default class SCarpenterNodeAjaxAdapter extends __SCarpenterNodeAdapter {
     constructor(deps: ISCarpenterNodeAdapterDeps) {

@@ -1,5 +1,5 @@
-import __SImagesBuilderBuildParamsInterface from '../node/interface/SImagesBuilderBuildParamsInterface';
-import __SImagesBuilder from '../node/SImagesBuilder';
+import __SImagesBuilderBuildParamsInterface from '../node/interface/SImagesBuilderBuildParamsInterface.js';
+import __SImagesBuilder from '../node/SImagesBuilder.js';
 
 export default function build(stringArgs = '') {
     return new Promise(async (resolve) => {

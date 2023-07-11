@@ -1,4 +1,4 @@
-import __fileHashSync from '../fileHashSync';
+import __fileHashSync from '../fileHashSync.js';
 describe('sugar.node.fs.fileHash', () => {
     it('Should a simple file correctly', () => {
         const hash = __fileHashSync(

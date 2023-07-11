@@ -1,7 +1,7 @@
 // @ts-nocheck
-import __isInViewport from '../is/isInViewport';
-import __isVisible from '../is/isVisible';
-import __closestNotVisible from './closestNotVisible';
+import __isInViewport from '../is/isInViewport.js';
+import __isVisible from '../is/isVisible.js';
+import __closestNotVisible from './closestNotVisible.js';
 
 /**
  * @name      querySelector

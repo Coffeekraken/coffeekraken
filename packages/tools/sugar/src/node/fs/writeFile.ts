@@ -1,8 +1,8 @@
 // @ts-nocheck
 
 import __fs from 'fs-extra';
-import __ensureDirSync from '../fs/ensureDirSync';
-import __folderPath from './folderPath';
+import __ensureDirSync from '../fs/ensureDirSync.js';
+import __folderPath from './folderPath.js';
 
 /**
  * @name        writeFile

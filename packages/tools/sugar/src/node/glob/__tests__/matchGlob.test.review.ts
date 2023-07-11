@@ -1,4 +1,4 @@
-import __matchGlobSync from '../matchGlobSync';
+import __matchGlobSync from '../matchGlobSync.js';
 
 describe('sugar.node.glob.matchGlob', () => {
     it('Should resolve the passed glob correctly', async () => {

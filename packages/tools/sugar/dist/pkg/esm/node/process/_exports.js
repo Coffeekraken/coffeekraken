@@ -1,8 +1,8 @@
-import __exitCleanup from './exitCleanup';
-import __kill from './kill';
-import __onProcessExit from './onProcessExit';
-import __processSugar from './processSugar';
-import __sharedContext from './sharedContext';
-import __spawn from './spawn';
-export { __exitCleanup, __kill, __onProcessExit, __processSugar, __sharedContext, __spawn };
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sYUFBYSxNQUFNLGVBQWUsQ0FBQztBQUMxQyxPQUFPLE1BQU0sTUFBTSxRQUFRLENBQUM7QUFDNUIsT0FBTyxlQUFlLE1BQU0saUJBQWlCLENBQUM7QUFDOUMsT0FBTyxjQUFjLE1BQU0sZ0JBQWdCLENBQUM7QUFDNUMsT0FBTyxlQUFlLE1BQU0saUJBQWlCLENBQUM7QUFDOUMsT0FBTyxPQUFPLE1BQU0sU0FBUyxDQUFDO0FBRTlCLE9BQU8sRUFBRSxhQUFhLEVBQUUsTUFBTSxFQUFFLGVBQWUsRUFBRSxjQUFjLEVBQUUsZUFBZSxFQUFFLE9BQU8sRUFBRSxDQUFDIn0=
+import __exitCleanup from './exitCleanup.js';
+import __kill from './kill.js';
+import __onProcessExit from './onProcessExit.js';
+import __processSugar from './processSugar.js';
+import __sharedContext from './sharedContext.js';
+import __spawn from './spawn.js';
+export { __exitCleanup, __kill, __onProcessExit, __processSugar, __sharedContext, __spawn, };
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sYUFBYSxNQUFNLGtCQUFrQixDQUFDO0FBQzdDLE9BQU8sTUFBTSxNQUFNLFdBQVcsQ0FBQztBQUMvQixPQUFPLGVBQWUsTUFBTSxvQkFBb0IsQ0FBQztBQUNqRCxPQUFPLGNBQWMsTUFBTSxtQkFBbUIsQ0FBQztBQUMvQyxPQUFPLGVBQWUsTUFBTSxvQkFBb0IsQ0FBQztBQUNqRCxPQUFPLE9BQU8sTUFBTSxZQUFZLENBQUM7QUFFakMsT0FBTyxFQUNILGFBQWEsRUFDYixNQUFNLEVBQ04sZUFBZSxFQUNmLGNBQWMsRUFDZCxlQUFlLEVBQ2YsT0FBTyxHQUNWLENBQUMifQ==

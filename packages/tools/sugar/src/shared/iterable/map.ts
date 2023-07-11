@@ -1,4 +1,4 @@
-import __typeOf from '../type/typeof';
+import __typeOf from '../type/typeof.js';
 
 /**
  * @name            map
@@ -19,7 +19,7 @@ import __typeOf from '../type/typeof';
  * __map($1, ({key, value}) => {
  *      $2
  * })
- * 
+ *
  * @example       js
  * import { __map } from '@coffeekraken/sugar/iterable';
  * const myStack = ['hello', 'world'];

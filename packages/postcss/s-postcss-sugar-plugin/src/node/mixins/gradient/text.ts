@@ -1,4 +1,4 @@
-import { interface as PostcssSugarPluginGradientInterface } from './gradient';
+import { interface as PostcssSugarPluginGradientInterface } from './gradient.js';
 
 /**
  * @name           text

@@ -1,6 +1,6 @@
 // @ts-nocheck
 
-import __countLineChars from './countLineChars';
+import __countLineChars from './countLineChars.js';
 
 /**
  * @name                          splitEvery
@@ -24,7 +24,7 @@ import __countLineChars from './countLineChars';
  * @todo      tests
  *
  * @snippet         __splitEvery($1, $2)
- * 
+ *
  * @example           js
  * import { __splitEvery } from '@coffeekraken/sugar/string';
  * __splitEvery('Hello World', 2, {

@@ -1,9 +1,9 @@
 // @ts-nocheck
 
 import __SDuration from '@coffeekraken/s-duration';
-import __SI18n from '../shared/SI18n';
+import __SI18n from '../shared/SI18n.js';
 
-import __SI18nExtractParamsInterface from './interface/SI18nExtractParamsInterface';
+import __SI18nExtractParamsInterface from './interface/SI18nExtractParamsInterface.js';
 
 import __ts from 'typescript';
 

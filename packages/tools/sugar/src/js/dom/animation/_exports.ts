@@ -1,2 +1,2 @@
-import __animatedInnerHtml from './animatedInnerHtml';
+import __animatedInnerHtml from './animatedInnerHtml.js';
 export { __animatedInnerHtml };

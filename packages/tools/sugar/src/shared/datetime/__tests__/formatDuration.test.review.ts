@@ -1,4 +1,4 @@
-import __formatDuration from '../formatDuration';
+import __formatDuration from '../formatDuration.js';
 
 describe('sugar.shared.time.formatDuration', () => {
     it('Should format an estimation under 1s correctly', () => {

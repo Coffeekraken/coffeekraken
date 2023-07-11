@@ -1,7 +1,7 @@
 // @ts-nocheck
 
-import __isScrollable from '../is/isScrollable';
-import __traverseUp from '../traverse/traverseUp';
+import __isScrollable from '../is/isScrollable.js';
+import __traverseUp from '../traverse/traverseUp.js';
 
 /**
  * @name        closestScrollable

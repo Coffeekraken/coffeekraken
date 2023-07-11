@@ -1,11 +1,11 @@
 import __SLitComponent from '@coffeekraken/s-lit-component';
 
-import __SCarpenterPage from './SCarpenterPage';
+import __SCarpenterPage from './SCarpenterPage.js';
 
-import __SCarpenterNodeAdapter from './SCarpenterNodeAdapter';
-import __SCarpenterPageAdapter from './SCarpenterPageAdapter';
-import __SCarpenterNodeAjaxAdapter from './adapters/SCarpenterNodeAjaxAdapter';
-import __SCarpenterPageAjaxAdapter from './adapters/SCarpenterPageAjaxAdapter';
+import __SCarpenterNodeAdapter from './SCarpenterNodeAdapter.js';
+import __SCarpenterPageAdapter from './SCarpenterPageAdapter.js';
+import __SCarpenterNodeAjaxAdapter from './adapters/SCarpenterNodeAjaxAdapter.js';
+import __SCarpenterPageAjaxAdapter from './adapters/SCarpenterPageAjaxAdapter.js';
 
 import { __debounce } from '@coffeekraken/sugar/function';
 
@@ -17,9 +17,9 @@ import { __idCompliant, __urlCompliant } from '@coffeekraken/sugar/string';
 
 import __SFrontspec from '@coffeekraken/s-frontspec';
 
-import __SCarpenterNode from './SCarpenterNode';
+import __SCarpenterNode from './SCarpenterNode.js';
 
-import __layoutNodeHook from './nodesHooks/layout';
+import __layoutNodeHook from './nodesHooks/layout.js';
 
 import { __define as __SFiltrableInputComponent } from '@coffeekraken/s-filtrable-input-component';
 import { __define as __sSpecsEditorComponentDefine } from '@coffeekraken/s-specs-editor-component';
@@ -30,7 +30,7 @@ import { __deepMerge, __filterObject } from '@coffeekraken/sugar/object';
 import { __uniqid, __upperFirst } from '@coffeekraken/sugar/string';
 import { css, html, unsafeCSS } from 'lit';
 import { unsafeHTML } from 'lit/directives/unsafe-html.js';
-import __SCarpenterComponentInterface from './interface/SCarpenterComponentInterface';
+import __SCarpenterComponentInterface from './interface/SCarpenterComponentInterface.js';
 
 import {
     __injectStyle,
@@ -43,7 +43,7 @@ import __SSugarConfig from '@coffeekraken/s-sugar-config';
 
 import type { ISSpecsEditorComponentSource } from '@coffeekraken/s-specs-editor-component';
 
-import __define from './defineApp';
+import __define from './defineApp.js';
 
 import { __injectIframeContent } from '@coffeekraken/sugar/dom';
 

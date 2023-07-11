@@ -1,7 +1,7 @@
 import { Buffer } from 'buffer';
 import __crypto, { BinaryToTextEncoding } from 'crypto';
 import __fs from 'fs';
-import __deepMerge from '../../shared/object/deepMerge';
+import __deepMerge from '../../shared/object/deepMerge.js';
 
 /**
  * @name            fileHashSync

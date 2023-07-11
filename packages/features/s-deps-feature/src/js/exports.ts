@@ -1,6 +1,6 @@
-import __SDepsFeature from './SDepsFeature';
-import __define from './define';
+import __SDepsFeature from './SDepsFeature.js';
+import __define from './define.js';
 
-export * from './SDepsFeature';
+export * from './SDepsFeature.js';
 export { __define };
 export default __SDepsFeature;

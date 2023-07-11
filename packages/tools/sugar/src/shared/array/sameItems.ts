@@ -1,6 +1,6 @@
-import __md5 from '../crypto/md5';
-import __isPlainObject from '../is/isPlainObject';
-import __unique from './unique';
+import __md5 from '../crypto/md5.js';
+import __isPlainObject from '../is/isPlainObject.js';
+import __unique from './unique.js';
 
 /**
  * @name            sameItems
@@ -22,7 +22,7 @@ import __unique from './unique';
  * @setting         {Boolean}           [hash=true]             Specify if you want to allows transforming object etc in to hashes and compare this instead
  *
  * @snippet         __sameItems($1, $2)
- * 
+ *
  * @example         js
  * import { __sameItems } from '@coffeekraken/sugar/array';
  * __sameItems([1,2,3,4], [1,3,5]); // => [1,3]

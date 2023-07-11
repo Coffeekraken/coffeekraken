@@ -18,11 +18,11 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.__wait = exports.__utcTime = exports.__formatDuration = void 0;
-const formatDuration_1 = __importDefault(require("./formatDuration"));
-exports.__formatDuration = formatDuration_1.default;
-const utcTime_1 = __importDefault(require("./utcTime"));
-exports.__utcTime = utcTime_1.default;
-const wait_1 = __importDefault(require("./wait"));
-exports.__wait = wait_1.default;
-__exportStar(require("./convertTime"), exports);
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0FBQUEsc0VBQWdEO0FBS3ZDLDJCQUxGLHdCQUFnQixDQUtFO0FBSnpCLHdEQUFrQztBQUlQLG9CQUpwQixpQkFBUyxDQUlvQjtBQUhwQyxrREFBNEI7QUFHVSxpQkFIL0IsY0FBTSxDQUcrQjtBQUQ1QyxnREFBOEIifQ==
+const formatDuration_js_1 = __importDefault(require("./formatDuration.js"));
+exports.__formatDuration = formatDuration_js_1.default;
+const utcTime_js_1 = __importDefault(require("./utcTime.js"));
+exports.__utcTime = utcTime_js_1.default;
+const wait_js_1 = __importDefault(require("./wait.js"));
+exports.__wait = wait_js_1.default;
+__exportStar(require("./convertTime.js"), exports);
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0FBQUEsNEVBQW1EO0FBSzFDLDJCQUxGLDJCQUFnQixDQUtFO0FBSnpCLDhEQUFxQztBQUlWLG9CQUpwQixvQkFBUyxDQUlvQjtBQUhwQyx3REFBK0I7QUFHTyxpQkFIL0IsaUJBQU0sQ0FHK0I7QUFENUMsbURBQWlDIn0=

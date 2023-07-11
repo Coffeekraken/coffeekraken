@@ -11,11 +11,11 @@ import __SLog from '@coffeekraken/s-log';
 import { __getMethods } from '@coffeekraken/sugar/class';
 import { __wait } from '@coffeekraken/sugar/datetime';
 import { __deepMerge } from '@coffeekraken/sugar/object';
-// import __SPromiseSettingsInterface from './interface/SPromiseSettingsInterface';
+// import __SPromiseSettingsInterface from './interface/SPromiseSettingsInterface.js';
 import __treatAsValue, {
     ITreatAsValueProxy,
     ITreatAsValueSettings,
-} from './treatAsValue';
+} from './treatAsValue.js';
 
 /**
  * @name                  SPromise

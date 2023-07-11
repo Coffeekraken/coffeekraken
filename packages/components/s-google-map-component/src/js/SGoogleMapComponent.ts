@@ -2,7 +2,7 @@ import __SLitComponent from '@coffeekraken/s-lit-component';
 
 import { __deepMerge } from '@coffeekraken/sugar/object';
 import { css, html, unsafeCSS } from 'lit';
-import __SGoogleMapComponentInterface from './interface/SGoogleMapComponentInterface';
+import __SGoogleMapComponentInterface from './interface/SGoogleMapComponentInterface.js';
 
 // @ts-ignore
 import __css from '../../../../src/css/s-google-map.css'; // relative to /dist/pkg/esm/js

@@ -6,6 +6,7 @@
             "type": "node",
             "request": "launch",
             "cwd": "${workspaceRoot}",
+            "runtimeVersion": "18.16.0",
             "runtimeExecutable": "${workspaceRoot}/node_modules/.bin/electron-vite",
             "windows": {
                 "runtimeExecutable": "${workspaceRoot}/node_modules/.bin/electron-vite.cmd"

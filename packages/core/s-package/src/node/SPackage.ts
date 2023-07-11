@@ -17,11 +17,11 @@ import __path from 'path';
 
 import { __chdir } from '@coffeekraken/sugar/fs';
 
-import __SPackageAddDefaultScriptsParamsInterface from './interface/SPackageApplyDefaultPackageJsonParamsInterface';
-import __SPackageCheckDependenciesParamsInterface from './interface/SPackageCheckDependenciesParamsInterface';
-import __SPackageExportsParamsInterface from './interface/SPackageExportsParamsInterface';
-import __SPackageInstallParamsInterface from './interface/SPackageInstallParamsInterface';
-import __SPackageSettingsInterface from './interface/SPackageSettingsInterface';
+import __SPackageAddDefaultScriptsParamsInterface from './interface/SPackageApplyDefaultPackageJsonParamsInterface.js';
+import __SPackageCheckDependenciesParamsInterface from './interface/SPackageCheckDependenciesParamsInterface.js';
+import __SPackageExportsParamsInterface from './interface/SPackageExportsParamsInterface.js';
+import __SPackageInstallParamsInterface from './interface/SPackageInstallParamsInterface.js';
+import __SPackageSettingsInterface from './interface/SPackageSettingsInterface.js';
 
 /**
  * @name                SPackage

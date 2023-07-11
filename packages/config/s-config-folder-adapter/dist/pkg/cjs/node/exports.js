@@ -17,7 +17,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const SConfigFolderAdapter_1 = __importDefault(require("./SConfigFolderAdapter"));
-__exportStar(require("./SConfigFolderAdapter"), exports);
-exports.default = SConfigFolderAdapter_1.default;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7QUFBQSxrRkFBNEQ7QUFDNUQseURBQXVDO0FBQ3ZDLGtCQUFlLDhCQUFzQixDQUFDIn0=
+const SConfigFolderAdapter_js_1 = __importDefault(require("./SConfigFolderAdapter.js"));
+__exportStar(require("./SConfigFolderAdapter.js"), exports);
+exports.default = SConfigFolderAdapter_js_1.default;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7QUFBQSx3RkFBK0Q7QUFDL0QsNERBQTBDO0FBQzFDLGtCQUFlLGlDQUFzQixDQUFDIn0=

@@ -1,6 +1,6 @@
 // @ts-nocheck
 
-import __removeClassesOnAnimationEnd from './removeClassOnAnimationEnd';
+import __removeClassesOnAnimationEnd from './removeClassOnAnimationEnd.js';
 /**
  * @name        addAnimationClass
  * @namespace            js.dom.class

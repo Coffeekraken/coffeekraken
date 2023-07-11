@@ -1,2 +1,2 @@
-import __removeVendorPrefix from './removeVendorPrefix';
+import __removeVendorPrefix from './removeVendorPrefix.js';
 export { __removeVendorPrefix };

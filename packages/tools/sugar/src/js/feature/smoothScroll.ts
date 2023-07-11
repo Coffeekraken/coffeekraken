@@ -1,10 +1,10 @@
 // @ts-nocheck
-import __deepMerge from '../../shared/object/deepMerge';
-import type { IScrollToSettings } from '../dom/scroll/scrollTo';
+import __deepMerge from '../../shared/object/deepMerge.js';
+import type { IScrollToSettings } from '../dom/scroll/scrollTo.js';
 
-import __smoothScrollOnAnchorLinks from './smoothScrollOnAnchorLinks';
-import __smoothScrollOnHashChange from './smoothScrollOnHashChange';
-import __smoothScrollOnPageLoad from './smoothScrollOnPageLoad';
+import __smoothScrollOnAnchorLinks from './smoothScrollOnAnchorLinks.js';
+import __smoothScrollOnHashChange from './smoothScrollOnHashChange.js';
+import __smoothScrollOnPageLoad from './smoothScrollOnPageLoad.js';
 
 /**
  * @name        smoothScroll

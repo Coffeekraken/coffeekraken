@@ -1,9 +1,9 @@
 // @ts-nocheck
 import __fs from 'fs';
-import __isChildProcess from '../../shared/is/isChildProcess';
-import __readJsonSync from '../fs/readJsonSync';
-import __writeJsonSync from '../fs/writeJsonSync';
-import __systemTmpDir from '../path/systemTmpDir';
+import __isChildProcess from '../../shared/is/isChildProcess.js';
+import __readJsonSync from '../fs/readJsonSync.js';
+import __writeJsonSync from '../fs/writeJsonSync.js';
+import __systemTmpDir from '../path/systemTmpDir.js';
 
 /**
  * @name            sharedContext
@@ -25,7 +25,7 @@ import __systemTmpDir from '../path/systemTmpDir';
  * @snippet         __sharedContext({
  *      $1
  * })
- * 
+ *
  * @example         js
  * import { __sharedContext } from '@coffeekraken/sugar/process';
  *

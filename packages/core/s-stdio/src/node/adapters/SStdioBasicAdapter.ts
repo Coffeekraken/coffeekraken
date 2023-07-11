@@ -9,7 +9,7 @@ import { __clone, __deepMerge } from '@coffeekraken/sugar/object';
 import { __stripAnsi, __upperFirst } from '@coffeekraken/sugar/string';
 import { __countLines, __termSize } from '@coffeekraken/sugar/terminal';
 import * as __Enquirer from 'enquirer';
-import __SStdioAdapter from '../../shared/SStdioAdapter';
+import __SStdioAdapter from '../../shared/SStdioAdapter.js';
 
 /**
  * @name            SStdioBasicAdapter

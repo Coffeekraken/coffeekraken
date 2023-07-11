@@ -1,6 +1,6 @@
 // @ts-nocheck
 
-import __matches from '../query/matches';
+import __matches from '../query/matches.js';
 
 /**
  * @name      previous

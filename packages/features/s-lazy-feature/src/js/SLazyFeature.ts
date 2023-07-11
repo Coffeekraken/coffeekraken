@@ -1,7 +1,7 @@
 import type { ISFeature } from '@coffeekraken/s-feature';
 import __SFeature from '@coffeekraken/s-feature';
 import { __deepMerge } from '@coffeekraken/sugar/object';
-import __SLazyFeatureInterface from './interface/SLazyFeatureInterface';
+import __SLazyFeatureInterface from './interface/SLazyFeatureInterface.js';
 
 // @ts-ignore
 import __css from '../../../../src/css/s-lazy-feature.css'; // relative to /dist/pkg/esm/js

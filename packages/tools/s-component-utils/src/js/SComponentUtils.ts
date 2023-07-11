@@ -24,8 +24,8 @@ import {
 import { __debounce } from '@coffeekraken/sugar/function';
 import { __deepMerge } from '@coffeekraken/sugar/object';
 import { __dashCase } from '@coffeekraken/sugar/string';
-import __SComponentUtilsDefaultPropsInterface from './interface/SComponentUtilsDefaultPropsInterface';
-import __SComponentUtilsSettingsInterface from './interface/SComponentUtilsSettingsInterface';
+import __SComponentUtilsDefaultPropsInterface from './interface/SComponentUtilsDefaultPropsInterface.js';
+import __SComponentUtilsSettingsInterface from './interface/SComponentUtilsSettingsInterface.js';
 
 export interface ISComponentUtilsSettings {
     name: string;

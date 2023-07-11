@@ -1,3 +1,3 @@
-import SDataFileGeneric from './SDataFileGeneric';
-export * from './SDataFileGeneric';
+import SDataFileGeneric from './SDataFileGeneric.js';
+export * from './SDataFileGeneric.js';
 export default SDataFileGeneric;

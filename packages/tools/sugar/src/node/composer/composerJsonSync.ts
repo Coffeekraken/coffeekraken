@@ -1,6 +1,6 @@
 import __fs from 'fs';
-import type { IComposerPathSettings } from './composerPath';
-import __composerPath from './composerPath';
+import type { IComposerPathSettings } from './composerPath.js';
+import __composerPath from './composerPath.js';
 
 /**
  * @name                composerJsonSync
@@ -31,8 +31,6 @@ export default function composerJsonSync(
     nameOrPath: string,
     settings?: Partial<IComposerPathSettings>,
 ): any {
-
-    
     if (nameOrPath.match(/^\//)) {
         if (!__fs.existsSync(`${nameOrPath}/composer.json`)) {
             return;

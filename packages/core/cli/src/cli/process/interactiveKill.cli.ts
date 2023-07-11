@@ -1,7 +1,6 @@
 import __SPromise from '@coffeekraken/s-promise';
 import { __spawn } from '@coffeekraken/sugar/process';
-import __SSugarCli from '@coffeekraken/cli';
-import __replaceCommandTokens from '../replaceCommandTokens';
+import __replaceCommandTokens from '../replaceCommandTokens.js';
 
 export default function interactiveKill(params) {
     return new __SPromise(

@@ -1,4 +1,4 @@
-import __sharedReplaceTokens from '../../shared/token/replaceTokens';
+import __sharedReplaceTokens from '../../shared/token/replaceTokens.js';
 
 /**
  * @name            replaceTokens

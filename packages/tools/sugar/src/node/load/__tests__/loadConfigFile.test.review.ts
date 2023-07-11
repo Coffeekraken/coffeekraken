@@ -1,5 +1,4 @@
-
-import __loadConfigFile from '../loadConfigFile';
+import __loadConfigFile from '../loadConfigFile.js';
 
 describe('sugar.node.config.loadConfigFile', () => {
     it('Should load a simple js file correctly', async () => {

@@ -1,9 +1,9 @@
 // @ts-nocheck
 
 import __SugarConfig from '@coffeekraken/s-sugar-config';
-import __deepMerge from '../../shared/object/deepMerge';
-import __fileName from '../fs/filename';
-import __json from './json';
+import __deepMerge from '../../shared/object/deepMerge.js';
+import __fileName from '../fs/filename.js';
+import __json from './json.js';
 
 /**
  * @name          namespace

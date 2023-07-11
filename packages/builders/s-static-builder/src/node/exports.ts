@@ -1,3 +1,3 @@
-import SStaticBuilder from './SStaticBuilder';
-export * from './SStaticBuilder';
+import SStaticBuilder from './SStaticBuilder.js';
+export * from './SStaticBuilder.js';
 export default SStaticBuilder;

@@ -1,7 +1,7 @@
 // @ts-nocheck
 
-import __camelize from '../../string/camelize';
-import __parse from '../../string/parse';
+import __camelize from '../../string/camelize.js';
+import __parse from '../../string/parse.js';
 
 /**
  * @name      styleString2Object

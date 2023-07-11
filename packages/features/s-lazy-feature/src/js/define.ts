@@ -1,5 +1,5 @@
-import type ISLazyFeatureProps from './SLazyFeature';
-import __SLazyFeature from './SLazyFeature';
+import type ISLazyFeatureProps from './SLazyFeature.js';
+import __SLazyFeature from './SLazyFeature.js';
 
 export default function define(
     props: Partial<ISLazyFeatureProps> = {},

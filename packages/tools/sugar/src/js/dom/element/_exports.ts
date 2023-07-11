@@ -1,2 +1,2 @@
-import __elementAreaStats from './elementAreaStats';
+import __elementAreaStats from './elementAreaStats.js';
 export { __elementAreaStats };

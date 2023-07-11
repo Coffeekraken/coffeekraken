@@ -1,5 +1,5 @@
-import __SMarkdownBuilderBuildParamsInterface from '../node/interface/SMarkdownBuilderBuildParamsInterface';
-import __SMarkdownBuilder from '../node/SMarkdownBuilder';
+import __SMarkdownBuilderBuildParamsInterface from '../node/interface/SMarkdownBuilderBuildParamsInterface.js';
+import __SMarkdownBuilder from '../node/SMarkdownBuilder.js';
 
 export default function build(stringArgs = '') {
     return new Promise(async (resolve) => {

@@ -5,7 +5,7 @@ import { __isPlainObject } from '@coffeekraken/sugar/is';
 import { __deepMerge } from '@coffeekraken/sugar/object';
 import { css, html, unsafeCSS } from 'lit';
 import { unsafeHTML } from 'lit/directives/unsafe-html.js';
-import __SFiltrableInputComponentInterface from './interface/SFiltrableInputComponentInterface';
+import __SFiltrableInputComponentInterface from './interface/SFiltrableInputComponentInterface.js';
 
 import { __cursorToEnd } from '@coffeekraken/sugar/dom';
 

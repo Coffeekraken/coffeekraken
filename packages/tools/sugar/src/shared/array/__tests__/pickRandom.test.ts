@@ -1,24 +1,16 @@
-import __pickRandom from '../pickRandom';
+import __pickRandom from '../pickRandom.js';
 
-const ar = [
-    'hello 1',
-    'hello 2',
-    'hello 3',
-    'hello 4'
-]
+const ar = ['hello 1', 'hello 2', 'hello 3', 'hello 4'];
 
 const obj = {
-    plop: true
-}
-const arObj = [
-    obj, obj, obj, obj
-];
-
+    plop: true,
+};
+const arObj = [obj, obj, obj, obj];
 
 describe('sugar.shared.array.pickRandom', () => {
     it('Should pick 1 random item correctly', () => {
         const item = __pickRandom(ar, 1);
-        expect(item.slice(0,5)).toBe('hello');
+        expect(item.slice(0, 5)).toBe('hello');
     });
     it('Should pick 3 random items correctly', () => {
         const items = __pickRandom(ar, 3);

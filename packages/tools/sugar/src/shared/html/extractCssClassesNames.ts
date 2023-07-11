@@ -1,4 +1,4 @@
-import __expandPleasantCssClassname from './expandPleasantCssClassname';
+import __expandPleasantCssClassname from './expandPleasantCssClassname.js';
 
 /**
  * @name            extractCssClassesNames
@@ -18,7 +18,7 @@ import __expandPleasantCssClassname from './expandPleasantCssClassname';
  * @setting         {Boolean}       [expandPleasantCssClassname=true]       Specify if you want to expand the pleasant css classes names like "s-typo:p" to "s-typo--p"
  *
  * @snippet         __extractCssClassesNames($1)
- * 
+ *
  * @example         js
  * import { __extractCssClassesNames } from '@coffeekraken/sugar/html';
  * __extractCssClassesNames('...');

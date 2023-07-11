@@ -1,6 +1,6 @@
 import type { ISLitComponentDefineSettings } from '@coffeekraken/s-lit-component';
-import type ISCodeExampleComponentProps from './SCodeExample';
-import __SCodeExampleWebcomponent from './SCodeExample';
+import type ISCodeExampleComponentProps from './SCodeExample.js';
+import __SCodeExampleWebcomponent from './SCodeExample.js';
 
 export default function define(
     props: Partial<ISCodeExampleComponentProps> = {},

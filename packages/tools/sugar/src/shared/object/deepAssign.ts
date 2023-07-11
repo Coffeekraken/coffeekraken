@@ -1,6 +1,6 @@
-import __unique from '../array/unique';
-import __isPlainObject from '../is/isPlainObject';
-import __clone from './clone';
+import __unique from '../array/unique.js';
+import __isPlainObject from '../is/isPlainObject.js';
+import __clone from './clone.js';
 /**
  * @name            deepAssign
  * @namespace            shared.object

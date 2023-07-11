@@ -8,7 +8,7 @@ import { __formatDuration } from '@coffeekraken/sugar/datetime';
 import __when, { TWhenTrigger } from '@coffeekraken/sugar/dom';
 import { __deepMerge } from '@coffeekraken/sugar/object';
 import { __uniqid } from '@coffeekraken/sugar/string';
-import __SConductorSettingsInterface from './interface/SConductorSettingsInterface';
+import __SConductorSettingsInterface from './interface/SConductorSettingsInterface.js';
 
 /**
  * @name                SConductor

@@ -1,7 +1,7 @@
 // @ts-nocheck
 
 import { __copy } from '@coffeekraken/sugar/clipboard';
-import __SFrontspec from '../node/SFrontspec';
+import __SFrontspec from '../node/SFrontspec.js';
 
 export default (stringArgs = '') => {
     return new Promise(async (resolve) => {

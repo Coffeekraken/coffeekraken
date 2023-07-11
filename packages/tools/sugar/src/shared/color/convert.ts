@@ -1,9 +1,9 @@
 // @ts-nocheck
 
-import __hslaToRgba from './hslaToRgba';
-import __parseColor from './parseColor';
-import __rgbaToHex from './rgbaToHex';
-import __rgbaToHsla from './rgbaToHsla';
+import __hslaToRgba from './hslaToRgba.js';
+import __parseColor from './parseColor.js';
+import __rgbaToHex from './rgbaToHex.js';
+import __rgbaToHsla from './rgbaToHsla.js';
 
 /**
  * @name                  convert

@@ -1,4 +1,4 @@
-import __SClassmapBase from './SClassmapBase';
+import __SClassmapBase from './SClassmapBase.js';
 
-export * from './SClassmapBase';
+export * from './SClassmapBase.js';
 export default __SClassmapBase;

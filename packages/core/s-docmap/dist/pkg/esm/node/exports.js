@@ -1,4 +1,4 @@
-import SDocmap from './SDocmap';
-export * from './SDocmap';
+import SDocmap from './SDocmap.js';
+export * from './SDocmap.js';
 export default SDocmap;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sT0FBTyxNQUFNLFdBQVcsQ0FBQztBQUVoQyxjQUFjLFdBQVcsQ0FBQztBQUUxQixlQUFlLE9BQU8sQ0FBQyJ9
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sT0FBTyxNQUFNLGNBQWMsQ0FBQztBQUVuQyxjQUFjLGNBQWMsQ0FBQztBQUU3QixlQUFlLE9BQU8sQ0FBQyJ9

@@ -1,8 +1,8 @@
-import SDocblock from '../shared/SDocblock';
-import SDocblockBlock from '../shared/SDocblockBlock';
-import firstDocblocksWithNamespaceInFolder from './utils/firstDocblocksWithNamespaceInFolder';
-export * from '../shared/SDocblock';
-export * from '../shared/SDocblockBlock';
+import SDocblock from '../shared/SDocblock.js';
+import SDocblockBlock from '../shared/SDocblockBlock.js';
+import firstDocblocksWithNamespaceInFolder from './utils/firstDocblocksWithNamespaceInFolder.js';
+export * from '../shared/SDocblock.js';
+export * from '../shared/SDocblockBlock.js';
 export { SDocblockBlock, firstDocblocksWithNamespaceInFolder };
 export default SDocblock;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sU0FBUyxNQUFNLHFCQUFxQixDQUFDO0FBQzVDLE9BQU8sY0FBYyxNQUFNLDBCQUEwQixDQUFDO0FBQ3RELE9BQU8sbUNBQW1DLE1BQU0sNkNBQTZDLENBQUM7QUFFOUYsY0FBYyxxQkFBcUIsQ0FBQztBQUNwQyxjQUFjLDBCQUEwQixDQUFDO0FBRXpDLE9BQU8sRUFBRSxjQUFjLEVBQUUsbUNBQW1DLEVBQUUsQ0FBQztBQUMvRCxlQUFlLFNBQVMsQ0FBQyJ9
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sU0FBUyxNQUFNLHdCQUF3QixDQUFDO0FBQy9DLE9BQU8sY0FBYyxNQUFNLDZCQUE2QixDQUFDO0FBQ3pELE9BQU8sbUNBQW1DLE1BQU0sZ0RBQWdELENBQUM7QUFFakcsY0FBYyx3QkFBd0IsQ0FBQztBQUN2QyxjQUFjLDZCQUE2QixDQUFDO0FBRTVDLE9BQU8sRUFBRSxjQUFjLEVBQUUsbUNBQW1DLEVBQUUsQ0FBQztBQUMvRCxlQUFlLFNBQVMsQ0FBQyJ9

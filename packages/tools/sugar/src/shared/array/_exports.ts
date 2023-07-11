@@ -1,13 +1,13 @@
-import __asyncForEach from './asyncForEach';
-import __fromQuantifier from './fromQuantifier';
-import __keysFirst from './keysFirst';
-import __keysLast from './keysLast';
-import __moveItem from './moveItem';
-import __pickRandom from './pickRandom';
-import __proxyArray from './proxyArray';
-import __sameItems from './sameItems';
-import __splitEvery from './splitEvery';
-import __unique from './unique';
+import __asyncForEach from './asyncForEach.js';
+import __fromQuantifier from './fromQuantifier.js';
+import __keysFirst from './keysFirst.js';
+import __keysLast from './keysLast.js';
+import __moveItem from './moveItem.js';
+import __pickRandom from './pickRandom.js';
+import __proxyArray from './proxyArray.js';
+import __sameItems from './sameItems.js';
+import __splitEvery from './splitEvery.js';
+import __unique from './unique.js';
 
 export {
     __asyncForEach,

@@ -1,6 +1,6 @@
-import __carpenterViewHandler from './handlers/carpenterViewHandler';
-import __SCarpenter from './SCarpenter';
-export * from './SCarpenter';
+import __carpenterViewHandler from './handlers/carpenterViewHandler.js';
+import __SCarpenter from './SCarpenter.js';
+export * from './SCarpenter.js';
 export { __carpenterViewHandler };
 export default __SCarpenter;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sc0JBQXNCLE1BQU0saUNBQWlDLENBQUM7QUFDckUsT0FBTyxZQUFZLE1BQU0sY0FBYyxDQUFDO0FBRXhDLGNBQWMsY0FBYyxDQUFDO0FBQzdCLE9BQU8sRUFBRSxzQkFBc0IsRUFBRSxDQUFDO0FBQ2xDLGVBQWUsWUFBWSxDQUFDIn0=
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sc0JBQXNCLE1BQU0sb0NBQW9DLENBQUM7QUFDeEUsT0FBTyxZQUFZLE1BQU0saUJBQWlCLENBQUM7QUFFM0MsY0FBYyxpQkFBaUIsQ0FBQztBQUNoQyxPQUFPLEVBQUUsc0JBQXNCLEVBQUUsQ0FBQztBQUNsQyxlQUFlLFlBQVksQ0FBQyJ9

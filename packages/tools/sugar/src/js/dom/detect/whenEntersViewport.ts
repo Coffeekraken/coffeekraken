@@ -1,5 +1,5 @@
 // @ts-nocheck
-import __isInViewport from '../is/isInViewport';
+import __isInViewport from '../is/isInViewport.js';
 
 /**
  * @name      whenEntersViewport

@@ -1,5 +1,5 @@
 // @ts-nocheck
-import __uniqid from '../../string/uniqid';
+import __uniqid from '../../string/uniqid.js';
 
 /**
  * @name        clearTransmations

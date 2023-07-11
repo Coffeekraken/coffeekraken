@@ -8,7 +8,7 @@ import __SPromise from '@coffeekraken/s-promise';
 import { __wait } from '@coffeekraken/sugar/datetime';
 import { __isPlainObject } from '@coffeekraken/sugar/is';
 import { __deepMerge } from '@coffeekraken/sugar/object';
-import __SProcess from './SProcess';
+import __SProcess from './SProcess.js';
 
 /**
  * @name            SProcessManagerProcessWrapper

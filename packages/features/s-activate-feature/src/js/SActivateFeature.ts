@@ -6,7 +6,7 @@ import {
     __scrollSpy,
 } from '@coffeekraken/sugar/dom';
 import { __deepMerge, __get } from '@coffeekraken/sugar/object';
-import __SActivateFeatureInterface from './interface/SActivateFeatureInterface';
+import __SActivateFeatureInterface from './interface/SActivateFeatureInterface.js';
 
 import { __wait } from '@coffeekraken/sugar/datetime';
 

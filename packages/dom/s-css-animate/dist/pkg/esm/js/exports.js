@@ -1,4 +1,4 @@
-import __SCssAnimation from './SCssAnimation';
-export * from './SCssAnimation';
+import __SCssAnimation from './SCssAnimation.js';
+export * from './SCssAnimation.js';
 export default __SCssAnimation;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sZUFBZSxNQUFNLGlCQUFpQixDQUFDO0FBQzlDLGNBQWMsaUJBQWlCLENBQUM7QUFDaEMsZUFBZSxlQUFlLENBQUMifQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sZUFBZSxNQUFNLG9CQUFvQixDQUFDO0FBQ2pELGNBQWMsb0JBQW9CLENBQUM7QUFDbkMsZUFBZSxlQUFlLENBQUMifQ==

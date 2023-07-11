@@ -1,4 +1,4 @@
-import __SDashboard from './SDashboard';
+import __SDashboard from './SDashboard.js';
 
 (() => {
     function initDashboard(e) {

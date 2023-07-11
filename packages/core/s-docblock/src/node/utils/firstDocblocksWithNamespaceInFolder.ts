@@ -6,7 +6,7 @@ import __findInFiles from 'find-in-files';
 import __fs from 'fs';
 import __minimatch from 'minimatch';
 import __path from 'path';
-import __SDocblock from '../../shared/SDocblock';
+import __SDocblock from '../../shared/SDocblock.js';
 
 /**
  * @___name                  firstDocblockWithNamespaceInFolder

@@ -1,5 +1,5 @@
-import type ISFloatingFeatureProps from './SFloatingFeature';
-import __SFloatingFeature from './SFloatingFeature';
+import type ISFloatingFeatureProps from './SFloatingFeature.js';
+import __SFloatingFeature from './SFloatingFeature.js';
 
 export default function define(
     props: Partial<ISFloatingFeatureProps> = {},

@@ -1,5 +1,5 @@
-import __wait from '../../shared/datetime/wait';
-import __querySelectorLive from '../dom/query/querySelectorLive';
+import __wait from '../../shared/datetime/wait.js';
+import __querySelectorLive from '../dom/query/querySelectorLive.js';
 
 /**
  * @name 		confirmButton

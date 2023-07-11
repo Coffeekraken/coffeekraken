@@ -1,12 +1,12 @@
-import __dirname from '../fs/dirname';
-import __readJsonSync from '../fs/readJsonSync';
-import __packageRootDir from '../path/packageRootDir';
+import __dirname from '../fs/dirname.js';
+import __readJsonSync from '../fs/readJsonSync.js';
+import __packageRootDir from '../path/packageRootDir.js';
 
 import __fs from 'fs';
 import __path from 'path';
 import __parseSemverString, {
     ISemverObject,
-} from '../../shared/version/parseSemverString';
+} from '../../shared/version/parseSemverString.js';
 
 /**
  * @name            getCoffeekrakenMetas

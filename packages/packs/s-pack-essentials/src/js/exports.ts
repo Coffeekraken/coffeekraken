@@ -1,3 +1,3 @@
-import __SPackEssentials from './SPackEssentials';
-export * from './SPackEssentials';
+import __SPackEssentials from './SPackEssentials.js';
+export * from './SPackEssentials.js';
 export default __SPackEssentials;

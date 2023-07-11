@@ -5,9 +5,9 @@ import __fs from 'fs';
 import ISInterfaceRenderer, {
     ISInterfaceRendererRenderPropertyObj,
     ISInterfaceRendererSettings,
-} from '../../shared/renderers/ISInterfaceRenderer';
-import type { ISInterfaceDefinitionProperty } from '../SInterface';
-import __SInterface from '../SInterface';
+} from '../../shared/renderers/ISInterfaceRenderer.js';
+import type { ISInterfaceDefinitionProperty } from '../SInterface.js';
+import __SInterface from '../SInterface.js';
 
 /**
  * @___name            SInterfaceRenderer

@@ -1,5 +1,5 @@
-import SSugarJson from './SSugarJson';
+import SSugarJson from './SSugarJson.js';
 
-export * from './SSugarJson';
+export * from './SSugarJson.js';
 
 export default SSugarJson;

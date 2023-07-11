@@ -3,7 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const loopsCount_1 = __importDefault(require("./loopsCount"));
+const loopsCount_js_1 = __importDefault(require("./loopsCount.js"));
 /**
  * @name            speedIndex
  * @namespace            shared.perf
@@ -40,9 +40,9 @@ const loopsCount_1 = __importDefault(require("./loopsCount"));
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 function speedIndex(slow = 100000, fast = 1500000) {
-    const loopsCount = (0, loopsCount_1.default)(100), // on 100ms
+    const loopsCount = (0, loopsCount_js_1.default)(100), // on 100ms
     index = (100 / (fast - slow)) * loopsCount;
     return Math.round(index);
 }
 exports.default = speedIndex;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7O0FBQUEsOERBQXdDO0FBRXhDOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBa0NHO0FBQ0gsU0FBd0IsVUFBVSxDQUFDLElBQUksR0FBRyxNQUFNLEVBQUUsSUFBSSxHQUFHLE9BQU87SUFDNUQsTUFBTSxVQUFVLEdBQUcsSUFBQSxvQkFBWSxFQUFDLEdBQUcsQ0FBQyxFQUFFLFdBQVc7SUFDN0MsS0FBSyxHQUFHLENBQUMsR0FBRyxHQUFHLENBQUMsSUFBSSxHQUFHLElBQUksQ0FBQyxDQUFDLEdBQUcsVUFBVSxDQUFDO0lBQy9DLE9BQU8sSUFBSSxDQUFDLEtBQUssQ0FBQyxLQUFLLENBQUMsQ0FBQztBQUM3QixDQUFDO0FBSkQsNkJBSUMifQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7O0FBQUEsb0VBQTJDO0FBRTNDOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBa0NHO0FBQ0gsU0FBd0IsVUFBVSxDQUFDLElBQUksR0FBRyxNQUFNLEVBQUUsSUFBSSxHQUFHLE9BQU87SUFDNUQsTUFBTSxVQUFVLEdBQUcsSUFBQSx1QkFBWSxFQUFDLEdBQUcsQ0FBQyxFQUFFLFdBQVc7SUFDN0MsS0FBSyxHQUFHLENBQUMsR0FBRyxHQUFHLENBQUMsSUFBSSxHQUFHLElBQUksQ0FBQyxDQUFDLEdBQUcsVUFBVSxDQUFDO0lBQy9DLE9BQU8sSUFBSSxDQUFDLEtBQUssQ0FBQyxLQUFLLENBQUMsQ0FBQztBQUM3QixDQUFDO0FBSkQsNkJBSUMifQ==

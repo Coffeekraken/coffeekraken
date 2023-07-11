@@ -1,5 +1,5 @@
 import __SPromise from '@coffeekraken/s-promise';
-import __easeInOutQuart from '../easing/easeInOutQuart';
+import __easeInOutQuart from '../easing/easeInOutQuart.js';
 
 /**
  * @name                easeInterval
@@ -30,7 +30,7 @@ import __easeInOutQuart from '../easing/easeInOutQuart';
  * });
  * // easeInterval.cancel(); // stop the easing process
  * await easeInterval;
- * 
+ *
  * @example         js
  * import { __easeInterval } from '@coffeekraken/sugar/function';
  * await __easeInterval(2000, (easedPercent) => {

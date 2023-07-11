@@ -1,5 +1,5 @@
-import __flatten from '../../shared/object/flatten';
-import __packageJsonSync from './packageJsonSync';
+import __flatten from '../../shared/object/flatten.js';
+import __packageJsonSync from './packageJsonSync.js';
 
 /**
  * @name            replacePackageJsonTokens
@@ -16,7 +16,7 @@ import __packageJsonSync from './packageJsonSync';
  * @return      {String}                                        The resulting string
  *
  * @snippet         __replacePackageJsonTokens($1)
- * 
+ *
  * @example         js
  * import { __replacePackageJsonTokens } from '@coffeekraken/sugar/package';
  * __replacePackageJsonTokens('Hello %packageJson.name'); // => Hello @coffeekraken/sugar

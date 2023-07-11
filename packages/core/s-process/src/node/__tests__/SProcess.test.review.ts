@@ -1,8 +1,6 @@
-import __SProcess from '../SProcess';
-import __SPromise from '@coffeekraken/s-promise';
-import __SInterface from '@coffeekraken/s-interface';
-import __MyProcess from './MyProcess';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
+import __SProcess from '../SProcess.js';
+import __MyProcess from './MyProcess.js';
 
 jest.setTimeout(30000);
 

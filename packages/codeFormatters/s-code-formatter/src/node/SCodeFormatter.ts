@@ -11,7 +11,7 @@ import { __packageRootDir, __systemTmpDir } from '@coffeekraken/sugar/path';
 import { __uniqid } from '@coffeekraken/sugar/string';
 import __fs from 'fs';
 import __path from 'path';
-import __SCodeFormatterFormatParamsInterface from './interface/SCodeFormatterFormatParamsInterface';
+import __SCodeFormatterFormatParamsInterface from './interface/SCodeFormatterFormatParamsInterface.js';
 
 /**
  * @name                SCodeFormatter

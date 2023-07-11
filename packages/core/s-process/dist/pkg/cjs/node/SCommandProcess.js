@@ -5,8 +5,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const object_1 = require("@coffeekraken/sugar/object");
 const process_1 = require("@coffeekraken/sugar/process");
-const SCommandProcessInterface_1 = __importDefault(require("./interface/SCommandProcessInterface"));
-const SProcess_1 = __importDefault(require("./SProcess"));
+const SProcess_js_1 = __importDefault(require("./SProcess.js"));
+const SCommandProcessInterface_js_1 = __importDefault(require("./interface/SCommandProcessInterface.js"));
 /**
  * @name            SCommandProcess
  * @namespace       node
@@ -29,7 +29,7 @@ const SProcess_1 = __importDefault(require("./SProcess"));
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 // @ts-ignore
-class SCommandProcess extends SProcess_1.default {
+class SCommandProcess extends SProcess_js_1.default {
     /**
      * @name        constructor
      * @type        Function
@@ -64,9 +64,9 @@ class SCommandProcess extends SProcess_1.default {
     process(params, settings) {
         const set = (0, object_1.__deepMerge)(this.settings, settings !== null && settings !== void 0 ? settings : {});
         // @ts-ignore
-        const finalParams = SCommandProcessInterface_1.default.apply(params);
+        const finalParams = SCommandProcessInterface_js_1.default.apply(params);
         return (0, process_1.__spawn)(finalParams.command, [], Object.assign({ returnValueOnly: true }, set.spawnSettings));
     }
 }
 exports.default = SCommandProcess;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7O0FBQUEsdURBQXlEO0FBQ3pELHlEQUFzRDtBQUN0RCxvR0FBOEU7QUFNOUUsMERBQW9DO0FBRXBDOzs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQW9CRztBQUVILGFBQWE7QUFDYixNQUFxQixlQUFnQixTQUFRLGtCQUFVO0lBQ25EOzs7Ozs7Ozs7T0FTRztJQUNILFlBQ0ksYUFBK0MsRUFDL0MsUUFBNEM7UUFFNUMsS0FBSyxDQUNELGFBQWEsYUFBYixhQUFhLGNBQWIsYUFBYSxHQUFJLEVBQUUsRUFDbkIsSUFBQSxvQkFBVyxFQUFDLFFBQVEsYUFBUixRQUFRLGNBQVIsUUFBUSxHQUFJLEVBQUUsRUFBRTtZQUN4QixhQUFhLEVBQUUsRUFBRTtZQUNqQixVQUFVLEVBQUUsS0FBSztTQUNwQixDQUFDLENBQ0wsQ0FBQztJQUNOLENBQUM7SUFFRDs7Ozs7Ozs7Ozs7Ozs7T0FjRztJQUNILE9BQU8sQ0FDSCxNQUF1QyxFQUN2QyxRQUE0QztRQUU1QyxNQUFNLEdBQUcsR0FBRyxJQUFBLG9CQUFXLEVBQUMsSUFBSSxDQUFDLFFBQVEsRUFBRSxRQUFRLGFBQVIsUUFBUSxjQUFSLFFBQVEsR0FBSSxFQUFFLENBQUMsQ0FBQztRQUV2RCxhQUFhO1FBQ2IsTUFBTSxXQUFXLEdBQ2Isa0NBQTBCLENBQUMsS0FBSyxDQUFDLE1BQU0sQ0FBQyxDQUFDO1FBRTdDLE9BQU8sSUFBQSxpQkFBTyxFQUFDLFdBQVcsQ0FBQyxPQUFPLEVBQUUsRUFBRSxrQkFDbEMsZUFBZSxFQUFFLElBQUksSUFDbEIsR0FBRyxDQUFDLGFBQWEsRUFDdEIsQ0FBQztJQUNQLENBQUM7Q0FDSjtBQXRERCxrQ0FzREMifQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7O0FBQUEsdURBQXlEO0FBQ3pELHlEQUFzRDtBQU10RCxnRUFBdUM7QUFDdkMsMEdBQWlGO0FBRWpGOzs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQW9CRztBQUVILGFBQWE7QUFDYixNQUFxQixlQUFnQixTQUFRLHFCQUFVO0lBQ25EOzs7Ozs7Ozs7T0FTRztJQUNILFlBQ0ksYUFBK0MsRUFDL0MsUUFBNEM7UUFFNUMsS0FBSyxDQUNELGFBQWEsYUFBYixhQUFhLGNBQWIsYUFBYSxHQUFJLEVBQUUsRUFDbkIsSUFBQSxvQkFBVyxFQUFDLFFBQVEsYUFBUixRQUFRLGNBQVIsUUFBUSxHQUFJLEVBQUUsRUFBRTtZQUN4QixhQUFhLEVBQUUsRUFBRTtZQUNqQixVQUFVLEVBQUUsS0FBSztTQUNwQixDQUFDLENBQ0wsQ0FBQztJQUNOLENBQUM7SUFFRDs7Ozs7Ozs7Ozs7Ozs7T0FjRztJQUNILE9BQU8sQ0FDSCxNQUF1QyxFQUN2QyxRQUE0QztRQUU1QyxNQUFNLEdBQUcsR0FBRyxJQUFBLG9CQUFXLEVBQUMsSUFBSSxDQUFDLFFBQVEsRUFBRSxRQUFRLGFBQVIsUUFBUSxjQUFSLFFBQVEsR0FBSSxFQUFFLENBQUMsQ0FBQztRQUV2RCxhQUFhO1FBQ2IsTUFBTSxXQUFXLEdBQ2IscUNBQTBCLENBQUMsS0FBSyxDQUFDLE1BQU0sQ0FBQyxDQUFDO1FBRTdDLE9BQU8sSUFBQSxpQkFBTyxFQUFDLFdBQVcsQ0FBQyxPQUFPLEVBQUUsRUFBRSxrQkFDbEMsZUFBZSxFQUFFLElBQUksSUFDbEIsR0FBRyxDQUFDLGFBQWEsRUFDdEIsQ0FBQztJQUNQLENBQUM7Q0FDSjtBQXRERCxrQ0FzREMifQ==

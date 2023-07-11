@@ -1,8 +1,8 @@
 // @ts-nocheck
 
-import __replaceTags from '../../shared/html/replaceTags';
+import __replaceTags from '../../shared/html/replaceTags.js';
 
-import __tagsMap from './tagsMap';
+import __tagsMap from './tagsMap.js';
 
 /**
  * @name                                parseHtml

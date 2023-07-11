@@ -1,6 +1,6 @@
 // @ts-nocheck
 
-import __SDocmap from '../node/SDocmap';
+import __SDocmap from '../node/SDocmap.js';
 
 export default (stringArgs = '') => {
     return new Promise(async (resolve) => {

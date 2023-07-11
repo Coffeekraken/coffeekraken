@@ -10,7 +10,7 @@ import { __countLineChars } from '@coffeekraken/sugar/string';
 import __micromatch from 'micromatch';
 import __nodeIpc from 'node-ipc';
 
-// import __SBenchSettingsInterface from './interface/SBenchSettingsInterface';
+// import __SBenchSettingsInterface from './interface/SBenchSettingsInterface.js';
 
 /**
  * @name            SBench

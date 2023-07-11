@@ -1,10 +1,10 @@
-import { __getAvailableInterfaceTypes } from '../shared/exports';
-import SInterface from './SInterface';
-import SInterfaceRenderer from './renderers/SInterfaceRenderer';
-import SInterfaceTerminalRenderer from './renderers/SInterfaceTerminalRenderer';
-export * from './SInterface';
-export * from './renderers/SInterfaceRenderer';
-export * from './renderers/SInterfaceTerminalRenderer';
+import { __getAvailableInterfaceTypes } from '../shared/exports.js';
+import SInterface from './SInterface.js';
+import SInterfaceRenderer from './renderers/SInterfaceRenderer.js';
+import SInterfaceTerminalRenderer from './renderers/SInterfaceTerminalRenderer.js';
+export * from './SInterface.js';
+export * from './renderers/SInterfaceRenderer.js';
+export * from './renderers/SInterfaceTerminalRenderer.js';
 export { SInterfaceRenderer, SInterfaceTerminalRenderer, __getAvailableInterfaceTypes, };
 export default SInterface;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sRUFBRSw0QkFBNEIsRUFBRSxNQUFNLG1CQUFtQixDQUFDO0FBQ2pFLE9BQU8sVUFBVSxNQUFNLGNBQWMsQ0FBQztBQUN0QyxPQUFPLGtCQUFrQixNQUFNLGdDQUFnQyxDQUFDO0FBQ2hFLE9BQU8sMEJBQTBCLE1BQU0sd0NBQXdDLENBQUM7QUFDaEYsY0FBYyxjQUFjLENBQUM7QUFDN0IsY0FBYyxnQ0FBZ0MsQ0FBQztBQUMvQyxjQUFjLHdDQUF3QyxDQUFDO0FBQ3ZELE9BQU8sRUFDSCxrQkFBa0IsRUFDbEIsMEJBQTBCLEVBQzFCLDRCQUE0QixHQUMvQixDQUFDO0FBQ0YsZUFBZSxVQUFVLENBQUMifQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sRUFBRSw0QkFBNEIsRUFBRSxNQUFNLHNCQUFzQixDQUFDO0FBQ3BFLE9BQU8sVUFBVSxNQUFNLGlCQUFpQixDQUFDO0FBQ3pDLE9BQU8sa0JBQWtCLE1BQU0sbUNBQW1DLENBQUM7QUFDbkUsT0FBTywwQkFBMEIsTUFBTSwyQ0FBMkMsQ0FBQztBQUNuRixjQUFjLGlCQUFpQixDQUFDO0FBQ2hDLGNBQWMsbUNBQW1DLENBQUM7QUFDbEQsY0FBYywyQ0FBMkMsQ0FBQztBQUMxRCxPQUFPLEVBQ0gsa0JBQWtCLEVBQ2xCLDBCQUEwQixFQUMxQiw0QkFBNEIsR0FDL0IsQ0FBQztBQUNGLGVBQWUsVUFBVSxDQUFDIn0=

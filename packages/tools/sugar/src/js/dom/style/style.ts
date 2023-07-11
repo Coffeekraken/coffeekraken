@@ -1,7 +1,7 @@
 // @ts-nocheck
 
-import __styleObjectToString from '../../../shared/css/transform/styleObjectToString';
-import __styleStringToObject from '../../../shared/css/transform/styleStringToObject';
+import __styleObjectToString from '../../../shared/css/transform/styleObjectToString.js';
+import __styleStringToObject from '../../../shared/css/transform/styleStringToObject.js';
 
 /**
  * @name      style

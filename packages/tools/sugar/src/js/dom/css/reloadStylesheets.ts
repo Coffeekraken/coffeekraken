@@ -1,4 +1,4 @@
-import __uniqid from '../../string/uniqid';
+import __uniqid from '../../string/uniqid.js';
 
 /**
  * @name            reloadStylesheets

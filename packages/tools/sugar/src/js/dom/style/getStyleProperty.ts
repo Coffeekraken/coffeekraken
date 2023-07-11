@@ -1,7 +1,7 @@
 // @ts-nocheck
 
-import __camelize from '../../../shared/string/camelize';
-import __parse from '../../../shared/string/parse';
+import __camelize from '../../../shared/string/camelize.js';
+import __parse from '../../../shared/string/parse.js';
 
 /**
  * @name      getStyleProperty

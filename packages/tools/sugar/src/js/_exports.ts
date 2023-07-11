@@ -1,1 +1,1 @@
-export * from './dom/_exports';
+export * from './dom/_exports.js';

@@ -1,11 +1,11 @@
 // @ts-nocheck
 
-import __querySelectorLive from '../dom/query/querySelectorLive';
-import __scrollTo from '../dom/scroll/scrollTo';
+import __querySelectorLive from '../dom/query/querySelectorLive.js';
+import __scrollTo from '../dom/scroll/scrollTo.js';
 
 import urlParse from 'url-parse';
-import __deepMerge from '../../shared/object/deepMerge';
-import type { IScrollToSettings } from '../dom/scroll/scrollTo';
+import __deepMerge from '../../shared/object/deepMerge.js';
+import type { IScrollToSettings } from '../dom/scroll/scrollTo.js';
 
 /**
  * @name        smoothScrollOnAnchorLinks

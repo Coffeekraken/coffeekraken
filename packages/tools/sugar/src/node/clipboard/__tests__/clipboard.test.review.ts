@@ -1,5 +1,5 @@
-import __copy from '../copy';
-import __read from '../read';
+import __copy from '../copy.js';
+import __read from '../read.js';
 describe('sugar.node.clipboad', () => {
     it('Should copy and past a text value correctly', async () => {
         const text = 'hello world';

@@ -1,7 +1,7 @@
 // @ts-nocheck
-import __getStyleProperty from './getStyleProperty';
+import __getStyleProperty from './getStyleProperty.js';
 
-import __convertTime from '../../../shared/datetime/convertTime';
+import __convertTime from '../../../shared/datetime/convertTime.js';
 
 /**
  * @name      getAnimationProperties

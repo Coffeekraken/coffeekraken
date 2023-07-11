@@ -11,7 +11,7 @@ import {
 import { __isMobile } from '@coffeekraken/sugar/is';
 import { __deepMerge } from '@coffeekraken/sugar/object';
 import { css, html, unsafeCSS } from 'lit';
-import __SColorPickerComponentInterface from './interface/SColorPickerComponentInterface';
+import __SColorPickerComponentInterface from './interface/SColorPickerComponentInterface.js';
 
 // @ts-ignore
 import __css from '../../../../src/css/s-color-picker.css'; // relative to /dist/pkg/esm/js

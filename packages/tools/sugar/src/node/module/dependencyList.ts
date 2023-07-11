@@ -1,7 +1,7 @@
 import __SPromise from '@coffeekraken/s-promise';
-import __deepMap from '../../shared/object/deepMap';
-import type { IDependencyTreeExtendedSettings } from './dependencyTree';
-import __dependencyTree from './dependencyTree';
+import __deepMap from '../../shared/object/deepMap.js';
+import type { IDependencyTreeExtendedSettings } from './dependencyTree.js';
+import __dependencyTree from './dependencyTree.js';
 
 /**
  * @name                dependencyList

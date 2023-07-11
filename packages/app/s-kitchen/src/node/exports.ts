@@ -1,5 +1,5 @@
-import SKitchen from './SKitchen';
+import SKitchen from './SKitchen.js';
 
-export * from './SKitchen';
+export * from './SKitchen.js';
 
 export default SKitchen;

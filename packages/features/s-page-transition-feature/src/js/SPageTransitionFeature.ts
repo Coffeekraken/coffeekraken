@@ -4,7 +4,7 @@ import __SRequest from '@coffeekraken/s-request';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
 import { __querySelectorUp, __scrollTo } from '@coffeekraken/sugar/dom';
 import { __deepMerge } from '@coffeekraken/sugar/object';
-import __SPageTransitionFeatureInterface from './interface/SPageTransitionFeatureInterface';
+import __SPageTransitionFeatureInterface from './interface/SPageTransitionFeatureInterface.js';
 
 // @ts-ignore
 import __css from '../../../../src/css/s-page-transition.css'; // relative to /dist/pkg/esm/js

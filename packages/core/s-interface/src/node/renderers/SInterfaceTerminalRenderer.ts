@@ -1,7 +1,7 @@
-import __SInterface from '../SInterface';
-import __SInterfaceRenderer from './SInterfaceRenderer';
+import __SInterface from '../SInterface.js';
+import __SInterfaceRenderer from './SInterfaceRenderer.js';
 
-import type { ISInterfaceRendererSettings } from '../../shared/renderers/ISInterfaceRenderer';
+import type { ISInterfaceRendererSettings } from '../../shared/renderers/ISInterfaceRenderer.js';
 
 import { __dirname } from '@coffeekraken/sugar/fs';
 

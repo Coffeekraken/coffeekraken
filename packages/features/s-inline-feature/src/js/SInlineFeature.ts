@@ -1,7 +1,7 @@
 import type { ISFeature } from '@coffeekraken/s-feature';
 import __SFeature from '@coffeekraken/s-feature';
 import { __deepMerge } from '@coffeekraken/sugar/object';
-import __SInlineFeatureInterface from './interface/SInlineFeatureInterface';
+import __SInlineFeatureInterface from './interface/SInlineFeatureInterface.js';
 
 // @ts-ignore
 import '../../../../src/css/s-inline-feature.css'; // relative to /dist/pkg/esm/js

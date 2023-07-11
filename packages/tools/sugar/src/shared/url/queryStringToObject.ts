@@ -1,6 +1,6 @@
 // @ts-nocheck
 
-import ltrim from '../string/ltrim';
+import ltrim from '../string/ltrim.js';
 
 /**
  * @name        queryStringToObject
@@ -20,7 +20,7 @@ import ltrim from '../string/ltrim';
  * @todo      tests
  *
  * @snippet         __queryStringToObject($1)
- * 
+ *
  * @example    js
  * import { __queryStringToObject } from '@coffeekraken/sugar/url'
  * __queryStringToObject('?var1=value1&var2=value2') // { var1: 'value1', var2: 'value2' }

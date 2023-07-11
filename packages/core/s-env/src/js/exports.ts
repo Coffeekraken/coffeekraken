@@ -1,3 +1,3 @@
-import __SEnv from './SEnv';
-export * from './SEnv';
+import __SEnv from './SEnv.js';
+export * from './SEnv.js';
 export default __SEnv;

@@ -1,4 +1,4 @@
-import __isClass from '../is/isClass';
+import __isClass from '../is/isClass.js';
 
 /**
  * @name            getExtendsStack
@@ -21,7 +21,7 @@ import __isClass from '../is/isClass';
  * @todo      tests
  *
  * @snippet         __getExtendsStack($1)
- * 
+ *
  * @example         js
  * import { __getExtendsStack } from '@coffeekraken/sugar/class';
  * class Coco extends Error {}

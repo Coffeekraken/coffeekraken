@@ -1,8 +1,8 @@
-import __SState from './SState';
-import SStateManager from './SStateManager';
+import __SState from './SState.js';
+import SStateManager from './SStateManager.js';
 
-export * from './SState';
-export * from './SStateManager';
+export * from './SState.js';
+export * from './SStateManager.js';
 export { SStateManager };
 
 export default __SState;

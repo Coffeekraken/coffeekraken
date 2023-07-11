@@ -2,7 +2,7 @@
 
 import __clipboardy from 'clipboardy';
 import __ncp from 'copy-paste';
-import __toString from '../../shared/string/toString';
+import __toString from '../../shared/string/toString.js';
 
 /**
  * @name            copy

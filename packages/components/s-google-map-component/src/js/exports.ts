@@ -1,6 +1,6 @@
-import __SGoogleMapComponent from './SGoogleMapComponent';
-import __define from './define';
+import __SGoogleMapComponent from './SGoogleMapComponent.js';
+import __define from './define.js';
 
-export * from './SGoogleMapComponent';
+export * from './SGoogleMapComponent.js';
 export { __define };
 export default __SGoogleMapComponent;

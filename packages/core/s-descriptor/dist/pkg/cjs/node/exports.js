@@ -18,12 +18,12 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.SDescriptorResult = void 0;
-const SDescriptor_1 = __importDefault(require("../shared/SDescriptor"));
-const SDescriptorResult_1 = __importDefault(require("../shared/SDescriptorResult"));
-exports.SDescriptorResult = SDescriptorResult_1.default;
-const pathRule_1 = __importDefault(require("./rules/pathRule"));
-SDescriptor_1.default.registerRule(pathRule_1.default);
-__exportStar(require("../shared/SDescriptorResult"), exports);
-__exportStar(require("../shared/SDescriptor"), exports);
-exports.default = SDescriptor_1.default;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0FBQUEsd0VBQWdEO0FBQ2hELG9GQUE0RDtBQVFuRCw0QkFSRiwyQkFBaUIsQ0FRRTtBQU4xQixnRUFBd0M7QUFDeEMscUJBQVcsQ0FBQyxZQUFZLENBQUMsa0JBQVEsQ0FBQyxDQUFDO0FBRW5DLDhEQUE0QztBQUM1Qyx3REFBc0M7QUFHdEMsa0JBQWUscUJBQVcsQ0FBQyJ9
+const SDescriptor_js_1 = __importDefault(require("../shared/SDescriptor.js"));
+const SDescriptorResult_js_1 = __importDefault(require("../shared/SDescriptorResult.js"));
+exports.SDescriptorResult = SDescriptorResult_js_1.default;
+const pathRule_js_1 = __importDefault(require("./rules/pathRule.js"));
+SDescriptor_js_1.default.registerRule(pathRule_js_1.default);
+__exportStar(require("../shared/SDescriptor.js"), exports);
+__exportStar(require("../shared/SDescriptorResult.js"), exports);
+exports.default = SDescriptor_js_1.default;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0FBQUEsOEVBQW1EO0FBQ25ELDBGQUErRDtBQVF0RCw0QkFSRiw4QkFBaUIsQ0FRRTtBQU4xQixzRUFBMkM7QUFDM0Msd0JBQVcsQ0FBQyxZQUFZLENBQUMscUJBQVEsQ0FBQyxDQUFDO0FBRW5DLDJEQUF5QztBQUN6QyxpRUFBK0M7QUFHL0Msa0JBQWUsd0JBQVcsQ0FBQyJ9

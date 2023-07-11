@@ -1,5 +1,5 @@
 // @ts-nocheck
-import __wait from '../../../shared/datetime/wait';
+import __wait from '../../../shared/datetime/wait.js';
 
 /**
  * @name        addClassTimeout

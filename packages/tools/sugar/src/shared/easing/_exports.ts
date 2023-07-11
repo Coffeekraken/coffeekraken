@@ -1,17 +1,17 @@
-import __availableEasingsArray from './availableEasingsArray';
-import __easeInCubic from './easeInCubic';
-import __easeInOutCubic from './easeInOutCubic';
-import __easeInOutQuad from './easeInOutQuad';
-import __easeInOutQuart from './easeInOutQuart';
-import __easeInOutQuint from './easeInOutQuint';
-import __easeInQuad from './easeInQuad';
-import __easeInQuart from './easeInQuart';
-import __easeInQuint from './easeInQuint';
-import __easeOutCubic from './easeOutCubic';
-import __easeOutQuad from './easeOutQuad';
-import __easeOutQuart from './easeOutQuart';
-import __easeOutQuint from './easeOutQuint';
-import __linear from './linear';
+import __availableEasingsArray from './availableEasingsArray.js';
+import __easeInCubic from './easeInCubic.js';
+import __easeInOutCubic from './easeInOutCubic.js';
+import __easeInOutQuad from './easeInOutQuad.js';
+import __easeInOutQuart from './easeInOutQuart.js';
+import __easeInOutQuint from './easeInOutQuint.js';
+import __easeInQuad from './easeInQuad.js';
+import __easeInQuart from './easeInQuart.js';
+import __easeInQuint from './easeInQuint.js';
+import __easeOutCubic from './easeOutCubic.js';
+import __easeOutQuad from './easeOutQuad.js';
+import __easeOutQuart from './easeOutQuart.js';
+import __easeOutQuint from './easeOutQuint.js';
+import __linear from './linear.js';
 
 export {
     __availableEasingsArray,

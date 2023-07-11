@@ -1,6 +1,6 @@
 // @ts-nocheck
 
-import __set from './set';
+import __set from './set.js';
 
 /**
  * @name                      deleteProperty
@@ -20,7 +20,7 @@ import __set from './set';
  * @todo      tests
  *
  * @snippet         __deleteProperty($1, $2)
- * 
+ *
  * @example         js
  * import { __deleteProperty } from '@coffeekraken/sugar/object';
  * const myObject = {

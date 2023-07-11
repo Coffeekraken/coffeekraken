@@ -1,9 +1,9 @@
-import __expandPleasantCssClassname from './expandPleasantCssClassname';
-import __expandPleasantCssClassnames from './expandPleasantCssClassnames';
-import __extractCssClassesNames from './extractCssClassesNames';
-import __replaceTags from './replaceTags';
-import __stripTags from './stripTags';
-import __unescapeHtml from './unescapeHtml';
+import __expandPleasantCssClassname from './expandPleasantCssClassname.js';
+import __expandPleasantCssClassnames from './expandPleasantCssClassnames.js';
+import __extractCssClassesNames from './extractCssClassesNames.js';
+import __replaceTags from './replaceTags.js';
+import __stripTags from './stripTags.js';
+import __unescapeHtml from './unescapeHtml.js';
 
 export {
     __expandPleasantCssClassname,
@@ -11,6 +11,5 @@ export {
     __extractCssClassesNames,
     __replaceTags,
     __stripTags,
-    __unescapeHtml
+    __unescapeHtml,
 };
-

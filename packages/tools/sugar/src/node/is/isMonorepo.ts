@@ -1,5 +1,4 @@
-
-import __packageJsonSync from '../package/packageJsonSync';
+import __packageJsonSync from '../package/packageJsonSync.js';
 
 /**
  * @name            isMonorepo
@@ -18,7 +17,7 @@ import __packageJsonSync from '../package/packageJsonSync';
  * @return          {Boolean}           true if is in a monorepo, false if not
  *
  * @snippet         __isMonorepo()
- * 
+ *
  * @example         js
  * import {__isMonorepo } from '@coffeekraken/sugar/is';
  * __isMonorepo(); // => true

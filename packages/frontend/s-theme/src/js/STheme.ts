@@ -4,8 +4,8 @@ import __SFrontspec from '@coffeekraken/s-frontspec';
 import { __clearTransmations, __isInIframe } from '@coffeekraken/sugar/dom';
 import { __deepMerge } from '@coffeekraken/sugar/object';
 import __fastdom from 'fastdom';
-import type { ISThemeSettings as __ISThemeSettings } from '../shared/SThemeBase';
-import __SThemeBase from '../shared/SThemeBase';
+import type { ISThemeSettings as __ISThemeSettings } from '../shared/SThemeBase.js';
+import __SThemeBase from '../shared/SThemeBase.js';
 
 window._console = {};
 ['log', 'warn', 'error', 'success'].forEach((key) => {

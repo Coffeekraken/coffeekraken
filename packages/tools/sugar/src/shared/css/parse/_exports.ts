@@ -1,3 +1,3 @@
-import __parseTransformRule from './parseTransformRule';
-import __parseKeyframeKey from './parseKeyframeKey';
-export { __parseTransformRule, __parseKeyframeKey };
+import __parseKeyframeKey from './parseKeyframeKey.js';
+import __parseTransformRule from './parseTransformRule.js';
+export { __parseKeyframeKey, __parseTransformRule };

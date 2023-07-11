@@ -5,7 +5,7 @@ import { __parseHtml } from '@coffeekraken/sugar/console';
 import { __getColorFor } from '@coffeekraken/sugar/dev';
 import { __deepMerge } from '@coffeekraken/sugar/object';
 import { __upperFirst } from '@coffeekraken/sugar/string';
-import __SStdioAdapter from '../../shared/SStdioAdapter';
+import __SStdioAdapter from '../../shared/SStdioAdapter.js';
 
 /**
  * @name            SBasicStdio

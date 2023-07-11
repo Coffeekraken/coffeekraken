@@ -1,10 +1,10 @@
-import __packageJson from './packageJson';
-import __packageJsonSync from './packageJsonSync';
-import __packageMetasSync from './packageMetasSync';
-import __renamePackageSync from './renamePackageSync';
-import __replacePackageJsonTokens from './replacePackageJsonTokens';
+import __packageJson from './packageJson.js';
+import __packageJsonSync from './packageJsonSync.js';
+import __packageMetasSync from './packageMetasSync.js';
+import __renamePackageSync from './renamePackageSync.js';
+import __replacePackageJsonTokens from './replacePackageJsonTokens.js';
 
-export * from '../../shared/package/_exports';
+export * from '../../shared/package/_exports.js';
 export {
     __packageJson,
     __packageJsonSync,
@@ -12,4 +12,3 @@ export {
     __renamePackageSync,
     __replacePackageJsonTokens,
 };
-

@@ -1,3 +1,3 @@
-import SCodeFormatter from './SCodeFormatter';
-export * from './SCodeFormatter';
+import SCodeFormatter from './SCodeFormatter.js';
+export * from './SCodeFormatter.js';
 export default SCodeFormatter;

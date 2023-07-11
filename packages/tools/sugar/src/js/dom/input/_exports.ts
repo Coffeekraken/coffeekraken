@@ -1,3 +1,3 @@
-import __autoResize from './autoResize';
-import __cursorToEnd from './cursorToEnd';
+import __autoResize from './autoResize.js';
+import __cursorToEnd from './cursorToEnd.js';
 export { __autoResize, __cursorToEnd };

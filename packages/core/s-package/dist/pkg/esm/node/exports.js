@@ -1,4 +1,4 @@
-import __SPackage from './SPackage';
-export * from './SPackage';
+import __SPackage from './SPackage.js';
+export * from './SPackage.js';
 export default __SPackage;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sVUFBVSxNQUFNLFlBQVksQ0FBQztBQUNwQyxjQUFjLFlBQVksQ0FBQztBQUMzQixlQUFlLFVBQVUsQ0FBQyJ9
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sVUFBVSxNQUFNLGVBQWUsQ0FBQztBQUN2QyxjQUFjLGVBQWUsQ0FBQztBQUM5QixlQUFlLFVBQVUsQ0FBQyJ9

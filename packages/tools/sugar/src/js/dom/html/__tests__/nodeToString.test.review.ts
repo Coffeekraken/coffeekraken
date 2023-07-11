@@ -4,7 +4,7 @@
 
 // @ts-nocheck
 
-import __nodeToString from '../nodeToString';
+import __nodeToString from '../nodeToString.js';
 
 describe('sugar.js.html.nodeToString', () => {
     const html = `

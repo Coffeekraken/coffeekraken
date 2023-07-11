@@ -4,10 +4,10 @@ import __SLog from '@coffeekraken/s-log';
 import __SPromise from '@coffeekraken/s-promise';
 import __childProcess from 'child_process';
 import __fs from 'fs';
-import __uniqid from '../../node/string/uniqid';
-import __deepMerge from '../../shared/object/deepMerge';
-import __writeJsonSync from '../fs/writeJsonSync';
-import __packageTmpDir from '../path/packageTmpDir';
+import __uniqid from '../../node/string/uniqid.js';
+import __deepMerge from '../../shared/object/deepMerge.js';
+import __writeJsonSync from '../fs/writeJsonSync.js';
+import __packageTmpDir from '../path/packageTmpDir.js';
 
 /**
  * @name            execPhp

@@ -8,7 +8,7 @@ import {
 } from '@coffeekraken/sugar/dom';
 import { __deepMerge } from '@coffeekraken/sugar/object';
 import { __uniqid } from '@coffeekraken/sugar/string';
-import __SAppearFeatureInterface from './interface/SAppearFeatureInterface';
+import __SAppearFeatureInterface from './interface/SAppearFeatureInterface.js';
 
 // @ts-ignore
 import __css from '../../../../src/css/s-appear-feature.css'; // relative to /dist/pkg/esm/js

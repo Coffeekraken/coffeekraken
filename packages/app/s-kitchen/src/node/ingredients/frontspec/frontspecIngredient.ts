@@ -1,5 +1,5 @@
 import __SFrontspec from '@coffeekraken/s-frontspec';
-import type { ISKitchenIngredient } from '../../SKitchen';
+import type { ISKitchenIngredient } from '../../SKitchen.js';
 
 /**
  * @name        frontspecIngredient

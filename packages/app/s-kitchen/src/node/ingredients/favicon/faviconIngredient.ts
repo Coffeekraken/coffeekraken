@@ -2,7 +2,7 @@ import __SSugarConfig from '@coffeekraken/s-sugar-config';
 import { __copySync, __dirname } from '@coffeekraken/sugar/fs';
 import { __packageRootDir } from '@coffeekraken/sugar/path';
 import __path from 'path';
-import type { ISKitchenIngredient } from '../../SKitchen';
+import type { ISKitchenIngredient } from '../../SKitchen.js';
 
 /**
  * @name        faviconIngredient

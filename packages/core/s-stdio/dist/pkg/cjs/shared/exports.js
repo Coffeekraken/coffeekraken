@@ -17,18 +17,18 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.__SStdioConsoleSource = exports.__SStdioEventEmitterSource = exports.__SStdioSource = exports.__SStdioAdapter = void 0;
-const SStdioConsoleSource_1 = __importDefault(require("./sources/SStdioConsoleSource"));
-exports.__SStdioConsoleSource = SStdioConsoleSource_1.default;
-const SStdioEventEmitterSource_1 = __importDefault(require("./sources/SStdioEventEmitterSource"));
-exports.__SStdioEventEmitterSource = SStdioEventEmitterSource_1.default;
-const SStdio_1 = __importDefault(require("./SStdio"));
-const SStdioAdapter_1 = __importDefault(require("./SStdioAdapter"));
-exports.__SStdioAdapter = SStdioAdapter_1.default;
-const SStdioSource_1 = __importDefault(require("./SStdioSource"));
-exports.__SStdioSource = SStdioSource_1.default;
-__exportStar(require("./SStdio"), exports);
-__exportStar(require("./SStdioAdapter"), exports);
-__exportStar(require("./SStdioSource"), exports);
-exports.default = SStdio_1.default;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0FBQUEsd0ZBQWtFO0FBU0ksZ0NBVC9ELDZCQUFxQixDQVMrRDtBQVIzRixrR0FBNEU7QUFRbEMscUNBUm5DLGtDQUEwQixDQVFtQztBQVBwRSxzREFBZ0M7QUFDaEMsb0VBQThDO0FBTXJDLDBCQU5GLHVCQUFlLENBTUU7QUFMeEIsa0VBQTRDO0FBS2xCLHlCQUxuQixzQkFBYyxDQUttQjtBQUh4QywyQ0FBeUI7QUFDekIsa0RBQWdDO0FBQ2hDLGlEQUErQjtBQUcvQixrQkFBZSxnQkFBUSxDQUFDIn0=
+exports.__SStdioSource = exports.__SStdioEventEmitterSource = exports.__SStdioConsoleSource = exports.__SStdioAdapter = void 0;
+const SStdioConsoleSource_js_1 = __importDefault(require("./sources/SStdioConsoleSource.js"));
+exports.__SStdioConsoleSource = SStdioConsoleSource_js_1.default;
+const SStdioEventEmitterSource_js_1 = __importDefault(require("./sources/SStdioEventEmitterSource.js"));
+exports.__SStdioEventEmitterSource = SStdioEventEmitterSource_js_1.default;
+const SStdio_js_1 = __importDefault(require("./SStdio.js"));
+const SStdioAdapter_js_1 = __importDefault(require("./SStdioAdapter.js"));
+exports.__SStdioAdapter = SStdioAdapter_js_1.default;
+const SStdioSource_js_1 = __importDefault(require("./SStdioSource.js"));
+exports.__SStdioSource = SStdioSource_js_1.default;
+__exportStar(require("./SStdio.js"), exports);
+__exportStar(require("./SStdioAdapter.js"), exports);
+__exportStar(require("./SStdioSource.js"), exports);
+exports.default = SStdio_js_1.default;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0FBQUEsOEZBQXFFO0FBV2pFLGdDQVhHLGdDQUFxQixDQVdIO0FBVnpCLHdHQUErRTtBQVczRSxxQ0FYRyxxQ0FBMEIsQ0FXSDtBQVY5Qiw0REFBbUM7QUFDbkMsMEVBQWlEO0FBTzdDLDBCQVBHLDBCQUFlLENBT0g7QUFObkIsd0VBQStDO0FBUzNDLHlCQVRHLHlCQUFjLENBU0g7QUFQbEIsOENBQTRCO0FBQzVCLHFEQUFtQztBQUNuQyxvREFBa0M7QUFRbEMsa0JBQWUsbUJBQVEsQ0FBQyJ9

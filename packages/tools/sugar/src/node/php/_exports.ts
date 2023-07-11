@@ -1,2 +1,2 @@
-import __serverObjectFromExpressRequest from './serverObjectFromExpressRequest';
+import __serverObjectFromExpressRequest from './serverObjectFromExpressRequest.js';
 export { __serverObjectFromExpressRequest };

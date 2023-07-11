@@ -1,6 +1,6 @@
-import __SSpacesSelector from './SSpacesSelectorComponent';
-import __define from './define';
+import __SSpacesSelector from './SSpacesSelectorComponent.js';
+import __define from './define.js';
 
-export * from './SSpacesSelectorComponent';
+export * from './SSpacesSelectorComponent.js';
 export { __define };
 export default __SSpacesSelector;

@@ -1,11 +1,10 @@
-
 import __fs from 'fs';
 import __minimatch from 'minimatch';
 import __path from 'path';
 import __toRegex from 'to-regex';
-import __expandGlob from '../../shared/glob/expandGlob';
-import __deepMerge from '../../shared/object/deepMerge';
-import __isDirectory from '../is/isDirectory';
+import __expandGlob from '../../shared/glob/expandGlob.js';
+import __deepMerge from '../../shared/object/deepMerge.js';
+import __isDirectory from '../is/isDirectory.js';
 
 /**
  * @name            matchGlobSynvc
@@ -25,7 +24,7 @@ import __isDirectory from '../is/isDirectory';
  * @return      {Boolean}               true if match, false if not
  *
  * @snippet         __matchGlobSync($1, $2);
- * 
+ *
  * @example         js
  * import { __matchGlobSync } from '@coffeekraken/sugar/glob';
  * __matchGlobSync('/something/cool.txt', '*\/cool.txt'); // => true

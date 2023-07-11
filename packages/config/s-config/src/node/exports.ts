@@ -1,3 +1,3 @@
-import SConfig from '../shared/SConfig';
-export * from '../shared/SConfig';
+import SConfig from '../shared/SConfig.js';
+export * from '../shared/SConfig.js';
 export default SConfig;

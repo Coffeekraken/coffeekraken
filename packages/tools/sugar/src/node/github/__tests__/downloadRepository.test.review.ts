@@ -1,6 +1,5 @@
-import __downloadRepository from '../downloadRepository';
-import __fs from 'fs';
-import __tmpDir from '../../path/systemTmpDir';
+import __tmpDir from '../../path/systemTmpDir.js';
+import __downloadRepository from '../downloadRepository.js';
 
 describe('sugar.node.github.downloadRepository', () => {
     it('Should download a repository successfully', async () => {

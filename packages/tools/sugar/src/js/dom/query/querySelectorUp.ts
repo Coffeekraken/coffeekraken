@@ -1,5 +1,5 @@
 // @ts-nocheck
-import __matches from './matches';
+import __matches from './matches.js';
 
 /**
  * @name        querySelectorUp

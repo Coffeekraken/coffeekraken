@@ -1,7 +1,7 @@
 import { __unescapeHtml } from '@coffeekraken/sugar/html';
 
-import type { ISCarpenterPageAdapterDeps } from '../SCarpenterPageAdapter';
-import __SCarpenterPageAdapter from '../SCarpenterPageAdapter';
+import type { ISCarpenterPageAdapterDeps } from '../SCarpenterPageAdapter.js';
+import __SCarpenterPageAdapter from '../SCarpenterPageAdapter.js';
 
 export default class SCarpenterPageAjaxAdapter extends __SCarpenterPageAdapter {
     constructor(deps: ISCarpenterPageAdapterDeps) {

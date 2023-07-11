@@ -1,6 +1,6 @@
 // @ts-nocheck
-import __SPackageApplyDefaultPackageJsonParamsInterface from '../node/interface/SPackageApplyDefaultPackageJsonParamsInterface';
-import __SPackage from '../node/SPackage';
+import __SPackageApplyDefaultPackageJsonParamsInterface from '../node/interface/SPackageApplyDefaultPackageJsonParamsInterface.js';
+import __SPackage from '../node/SPackage.js';
 
 export default (stringArgs = '') => {
     return new Promise(async (resolve) => {

@@ -17,7 +17,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const SCodeFormatterPrettier_1 = __importDefault(require("./SCodeFormatterPrettier"));
-__exportStar(require("./SCodeFormatterPrettier"), exports);
-exports.default = SCodeFormatterPrettier_1.default;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7QUFBQSxzRkFBOEQ7QUFDOUQsMkRBQXlDO0FBQ3pDLGtCQUFlLGdDQUFzQixDQUFDIn0=
+const SCodeFormatterPrettier_js_1 = __importDefault(require("./SCodeFormatterPrettier.js"));
+__exportStar(require("./SCodeFormatterPrettier.js"), exports);
+exports.default = SCodeFormatterPrettier_js_1.default;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7QUFBQSw0RkFBaUU7QUFDakUsOERBQTRDO0FBQzVDLGtCQUFlLG1DQUFzQixDQUFDIn0=

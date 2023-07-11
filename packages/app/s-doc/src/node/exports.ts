@@ -1,3 +1,3 @@
-import __SDoc from './SDoc';
-export * from './SDoc';
+import __SDoc from './SDoc.js';
+export * from './SDoc.js';
 export default __SDoc;

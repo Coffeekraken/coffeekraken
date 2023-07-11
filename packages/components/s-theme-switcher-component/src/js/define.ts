@@ -1,6 +1,6 @@
 import type { ISLitComponentDefineSettings } from '@coffeekraken/s-lit-component';
-import type ISThemeSwitcherComponentProps from './SThemeSwitcherComponent';
-import __SThemeSwitcherComponent from './SThemeSwitcherComponent';
+import type ISThemeSwitcherComponentProps from './SThemeSwitcherComponent.js';
+import __SThemeSwitcherComponent from './SThemeSwitcherComponent.js';
 
 export default function define(
     props: Partial<ISThemeSwitcherComponentProps> = {},

@@ -1,5 +1,5 @@
-import __autoResize from '../dom/input/autoResize';
-import __querySelectorLive from '../dom/query/querySelectorLive';
+import __autoResize from '../dom/input/autoResize.js';
+import __querySelectorLive from '../dom/query/querySelectorLive.js';
 
 /**
  *

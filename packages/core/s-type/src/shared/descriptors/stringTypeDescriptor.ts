@@ -2,7 +2,7 @@
 
 import { __isString } from '@coffeekraken/sugar/is';
 import { __toString } from '@coffeekraken/sugar/string';
-import type { ISTypeDescriptor } from '../SType';
+import type { ISTypeDescriptor } from '../SType.js';
 
 /**
  * @name              stringTypeDescriptor

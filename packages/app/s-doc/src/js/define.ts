@@ -1,6 +1,6 @@
 import type { ISLitComponentDefineSettings } from '@coffeekraken/s-lit-component';
-import type ISDocComponentProps from './SDocComponent';
-import __SDocComponent from './SDocComponent';
+import type ISDocComponentProps from './SDocComponent.js';
+import __SDocComponent from './SDocComponent.js';
 
 export default function define(
     props: Partial<ISDocComponentProps> = {},

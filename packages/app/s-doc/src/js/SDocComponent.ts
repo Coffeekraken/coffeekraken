@@ -10,7 +10,7 @@ import { __escapeQueue, __hotkey } from '@coffeekraken/sugar/keyboard';
 import { __deepMerge } from '@coffeekraken/sugar/object';
 import { css, unsafeCSS } from 'lit';
 import { unsafeHTML } from 'lit/directives/unsafe-html.js';
-import __SDocComponentInterface from './interface/SDocComponentInterface';
+import __SDocComponentInterface from './interface/SDocComponentInterface.js';
 
 import { __scrollTo } from '@coffeekraken/sugar/dom';
 

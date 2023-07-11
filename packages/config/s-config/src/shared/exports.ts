@@ -1,4 +1,4 @@
-import __SConfig from './SConfig';
+import __SConfig from './SConfig.js';
 
-// export * from './SConfig';
+// export * from './SConfig.js';
 export default __SConfig;

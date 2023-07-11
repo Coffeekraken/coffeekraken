@@ -1,8 +1,8 @@
 // @ts-nocheck
 
 import __fastdom from 'fastdom';
-import __deepMerge from '../../shared/object/deepMerge';
-import __querySelectorLive from '../dom/query/querySelectorLive';
+import __deepMerge from '../../shared/object/deepMerge.js';
+import __querySelectorLive from '../dom/query/querySelectorLive.js';
 
 /**
  * @name 		linksStateAttributes

@@ -1,9 +1,9 @@
-import __cloneClass from './cloneClass';
-import __getExtendsStack from './getExtendsStack';
-import __getMethods from './getMethods';
-import __methodExists from './methodExists';
-import __multipleExtends from './multipleExtends';
-import __toPlainObject from './toPlainObject';
+import __cloneClass from './cloneClass.js';
+import __getExtendsStack from './getExtendsStack.js';
+import __getMethods from './getMethods.js';
+import __methodExists from './methodExists.js';
+import __multipleExtends from './multipleExtends.js';
+import __toPlainObject from './toPlainObject.js';
 
 export {
     __cloneClass,

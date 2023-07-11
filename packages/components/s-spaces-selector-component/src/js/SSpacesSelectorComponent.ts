@@ -3,7 +3,7 @@ import __SLitComponent from '@coffeekraken/s-lit-component';
 import { __deepMerge } from '@coffeekraken/sugar/object';
 import { __camelCase, __parse, __upperFirst } from '@coffeekraken/sugar/string';
 import { css, html, unsafeCSS } from 'lit';
-import __SSpacesSelectorComponentInterface from './interface/SSpacesSelectorComponentInterface';
+import __SSpacesSelectorComponentInterface from './interface/SSpacesSelectorComponentInterface.js';
 
 // @ts-ignore
 import __css from '../../../../src/css/s-spaces-selector.css'; // relative to /dist/pkg/esm/js

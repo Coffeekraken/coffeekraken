@@ -1,6 +1,6 @@
 import type { ISLitComponentDefineSettings } from '@coffeekraken/s-lit-component';
-import type ISScrollComponentProps from './SScrollComponent';
-import __SScrollComponent from './SScrollComponent';
+import type ISScrollComponentProps from './SScrollComponent.js';
+import __SScrollComponent from './SScrollComponent.js';
 
 export default function define(
     props: Partial<ISScrollComponentProps> = {},

@@ -1,6 +1,6 @@
 // @ts-nocheck
 
-import __uncamelize from '../../../shared/string/uncamelize';
+import __uncamelize from '../../../shared/string/uncamelize.js';
 
 /**
  * @name      styleObject2String
@@ -19,7 +19,7 @@ import __uncamelize from '../../../shared/string/uncamelize';
  * @todo      tests
  *
  * @snippet         __styleObjectToString($1)
- * 
+ *
  * @example 	js
  * import { __styleObjectToString } from '@coffeekraken/sugar/css'
  * const styleString =  __styleObjectToString({

@@ -1,6 +1,6 @@
 import __fastdom from 'fastdom';
-import __expandPleasantCssClassname from '../../../shared/html/expandPleasantCssClassname';
-import __querySelectorLive from '../query/querySelectorLive';
+import __expandPleasantCssClassname from '../../../shared/html/expandPleasantCssClassname.js';
+import __querySelectorLive from '../query/querySelectorLive.js';
 
 /**
  * @name            expandPleasantCssClassnamesLive

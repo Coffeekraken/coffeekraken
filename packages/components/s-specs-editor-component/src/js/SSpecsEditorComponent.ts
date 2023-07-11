@@ -23,33 +23,33 @@ import __STheme from '@coffeekraken/s-theme';
 
 import { __uniqid } from '@coffeekraken/sugar/string';
 
-import type { ISSpeceEditorWidgetSettings } from './SSpecsEditorWidget';
+import type { ISSpeceEditorWidgetSettings } from './SSpecsEditorWidget.js';
 
 import { __deepMerge } from '@coffeekraken/sugar/object';
 import { __lowerFirst, __upperFirst } from '@coffeekraken/sugar/string';
 import { css, html, unsafeCSS } from 'lit';
 import { unsafeHTML } from 'lit/directives/unsafe-html.js';
-import __SSpecsEditorComponentInterface from './interface/SSpecsEditorComponentInterface';
+import __SSpecsEditorComponentInterface from './interface/SSpecsEditorComponentInterface.js';
 
 // @ts-ignore
 import __css from '../../../../src/css/s-specs-editor-component.css'; // relative to /dist/pkg/esm/js
 
-import __checkboxWidget from './widgets/checkboxWidget';
-import __colorPickerWidget from './widgets/colorPickerWidget';
-import __datetimePickerWidget from './widgets/datetimePickerWidget';
-import __htmlWidget from './widgets/htmlWidget';
-import __imageWidget from './widgets/imageWidget';
-import __integerWidget from './widgets/integerWidget';
-import __layoutWidget from './widgets/layoutWidget';
-import __linkWidget from './widgets/linkWidget';
-import __numberWidget from './widgets/numberWidget';
-import __selectWidget from './widgets/selectWidget';
-import __spacesWidget from './widgets/spacesWidget';
-import __stringWidget from './widgets/stringWidget';
-import __switchWidget from './widgets/switchWidget';
-import __textWidget from './widgets/textWidget';
-import __videoWidget from './widgets/videoWidget';
-import __wysiwygWidget from './widgets/wysiwygWidget';
+import __checkboxWidget from './widgets/checkboxWidget.js';
+import __colorPickerWidget from './widgets/colorPickerWidget.js';
+import __datetimePickerWidget from './widgets/datetimePickerWidget.js';
+import __htmlWidget from './widgets/htmlWidget.js';
+import __imageWidget from './widgets/imageWidget.js';
+import __integerWidget from './widgets/integerWidget.js';
+import __layoutWidget from './widgets/layoutWidget.js';
+import __linkWidget from './widgets/linkWidget.js';
+import __numberWidget from './widgets/numberWidget.js';
+import __selectWidget from './widgets/selectWidget.js';
+import __spacesWidget from './widgets/spacesWidget.js';
+import __stringWidget from './widgets/stringWidget.js';
+import __switchWidget from './widgets/switchWidget.js';
+import __textWidget from './widgets/textWidget.js';
+import __videoWidget from './widgets/videoWidget.js';
+import __wysiwygWidget from './widgets/wysiwygWidget.js';
 
 // components
 __SDropzoneComponentDefine();

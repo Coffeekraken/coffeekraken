@@ -13,9 +13,9 @@ import { __replaceTokens } from '@coffeekraken/sugar/token';
 import __fs from 'fs';
 import __path from 'path';
 
-import __SSugarConfigReadParamsInterface from './interfaces/SSugarConfigReadParamsInterface';
+import __SSugarConfigReadParamsInterface from './interfaces/SSugarConfigReadParamsInterface.js';
 
-import type { ISSugarConfig } from '../shared/types';
+import type { ISSugarConfig } from '../shared/types.js';
 
 /**
  * @name                  SSugarConfig

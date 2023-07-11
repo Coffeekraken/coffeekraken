@@ -1,5 +1,5 @@
-import __deepMap from '../object/deepMap';
-import __parse from '../string/parse';
+import __deepMap from '../object/deepMap.js';
+import __parse from '../string/parse.js';
 
 /**
  * @name            parseTypeString

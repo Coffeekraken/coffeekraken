@@ -1,9 +1,9 @@
 // @ts-nocheck
 
-import _isClass from '../is/isClass';
-import _isInt from '../is/isInteger';
-import _deepMerge from '../object/deepMerge';
-import _upperFirst from '../string/upperFirst';
+import _isClass from '../is/isClass.js';
+import _isInt from '../is/isInteger.js';
+import _deepMerge from '../object/deepMerge.js';
+import _upperFirst from '../string/upperFirst.js';
 
 interface ITypeofSettings {
     of?: boolean;

@@ -1,11 +1,11 @@
-import SDescriptor from '../shared/SDescriptor';
-import SDescriptorResult from '../shared/SDescriptorResult';
+import SDescriptor from '../shared/SDescriptor.js';
+import SDescriptorResult from '../shared/SDescriptorResult.js';
 
-import pathRule from './rules/pathRule';
+import pathRule from './rules/pathRule.js';
 SDescriptor.registerRule(pathRule);
 
-export * from '../shared/SDescriptorResult';
-export * from '../shared/SDescriptor';
+export * from '../shared/SDescriptor.js';
+export * from '../shared/SDescriptorResult.js';
 
 export { SDescriptorResult };
 export default SDescriptor;

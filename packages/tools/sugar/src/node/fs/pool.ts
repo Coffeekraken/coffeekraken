@@ -3,9 +3,9 @@ import __SPromise from '@coffeekraken/s-promise';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
 import __chokidar from 'chokidar';
 import __fs from 'fs';
-import __expandGlob from '../../shared/glob/expandGlob';
-import __deepMerge from '../../shared/object/deepMerge';
-import __matchGlobSync from '../glob/matchGlobSync';
+import __expandGlob from '../../shared/glob/expandGlob.js';
+import __deepMerge from '../../shared/object/deepMerge.js';
+import __matchGlobSync from '../glob/matchGlobSync.js';
 
 /**
  * @name                pool

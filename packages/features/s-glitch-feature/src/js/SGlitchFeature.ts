@@ -1,8 +1,8 @@
 import __SFeature from '@coffeekraken/s-feature';
 import { __deepMerge } from '@coffeekraken/sugar/object';
 import __html2canvas from 'html2canvas';
-import __SGlitchFeatureInterface from './interface/SGlitchFeatureInterface';
-import __Glitch from './lib/Glitch';
+import __SGlitchFeatureInterface from './interface/SGlitchFeatureInterface.js';
+import __Glitch from './lib/Glitch.js';
 
 // @ts-ignore
 import __css from '../../../../src/css/s-glitch-feature.css'; // relative to /dist/pkg/esm/js

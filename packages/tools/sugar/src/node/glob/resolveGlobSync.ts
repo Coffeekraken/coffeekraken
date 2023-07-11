@@ -2,13 +2,13 @@
 
 import __SFile from '@coffeekraken/s-file';
 
-import __excludedGlobs from './excludedGlobs';
+import __excludedGlobs from './excludedGlobs.js';
 
 import __fs from 'fs';
 import __glob from 'glob';
 import __path from 'path';
-import __expandGlob from '../../shared/glob/expandGlob';
-import __deepMerge from '../../shared/object/deepMerge';
+import __expandGlob from '../../shared/glob/expandGlob.js';
+import __deepMerge from '../../shared/object/deepMerge.js';
 
 /**
  * @name            resolveGlobSync

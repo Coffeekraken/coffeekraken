@@ -1,7 +1,7 @@
-import __injectIframeContent from './injectIframeContent';
-import __injectScript from './injectScript';
-import __injectStyle from './injectStyle';
-import __injectStylesheet from './injectStylesheet';
+import __injectIframeContent from './injectIframeContent.js';
+import __injectScript from './injectScript.js';
+import __injectStyle from './injectStyle.js';
+import __injectStylesheet from './injectStylesheet.js';
 
 export {
     __injectIframeContent,

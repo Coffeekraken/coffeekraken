@@ -1,4 +1,4 @@
-import __SEnv from './SEnv';
-export * from './SEnv';
+import __SEnv from './SEnv.js';
+export * from './SEnv.js';
 export default __SEnv;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sTUFBTSxNQUFNLFFBQVEsQ0FBQztBQUM1QixjQUFjLFFBQVEsQ0FBQztBQUN2QixlQUFlLE1BQU0sQ0FBQyJ9
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sTUFBTSxNQUFNLFdBQVcsQ0FBQztBQUMvQixjQUFjLFdBQVcsQ0FBQztBQUMxQixlQUFlLE1BQU0sQ0FBQyJ9

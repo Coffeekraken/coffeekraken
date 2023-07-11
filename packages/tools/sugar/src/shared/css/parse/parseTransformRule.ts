@@ -1,5 +1,4 @@
-
-import __parse from '../../../shared/string/parse';
+import __parse from '../../../shared/string/parse.js';
 
 /**
  * @name      parseTransformRule

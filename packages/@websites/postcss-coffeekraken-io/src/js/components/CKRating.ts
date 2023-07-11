@@ -2,7 +2,7 @@
 
 import __SLitComponent from '@coffeekraken/s-lit-component';
 import { html } from 'lit';
-import __ratingsApi from '../generic/ratingsApi';
+import __ratingsApi from '../generic/ratingsApi.js';
 
 export default class CKRatings extends __SLitComponent {
     _settings = {};

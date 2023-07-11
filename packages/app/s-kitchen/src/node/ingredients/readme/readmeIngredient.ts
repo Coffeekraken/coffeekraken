@@ -1,7 +1,7 @@
 import { __copySync, __dirname } from '@coffeekraken/sugar/fs';
 import { __packageRootDir } from '@coffeekraken/sugar/path';
 import __fs from 'fs';
-import type { ISKitchenIngredient } from '../../SKitchen';
+import type { ISKitchenIngredient } from '../../SKitchen.js';
 
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
 import __path from 'path';

@@ -1,4 +1,4 @@
-import __SFile from '../SFile';
+import __SFile from '../SFile.js';
 
 describe('s-file.SFile', () => {
     it('Should instanciate correctly a simple json file', () => {

@@ -1,4 +1,4 @@
-import __dashCase from './dashCase';
+import __dashCase from './dashCase.js';
 
 // @ts-nocheck
 /**
@@ -19,7 +19,7 @@ import __dashCase from './dashCase';
  * @todo      tests
  *
  * @snippet         __snakeCase($1)
- * 
+ *
  * @example     js
  * import { __snakeCase } from '@coffeekraken/sugar/string';
  * __snakeCase('hello world'); // => hello_world

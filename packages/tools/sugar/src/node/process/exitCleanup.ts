@@ -2,7 +2,7 @@
 
 import __fkill from 'fkill';
 import __psList from 'ps-list';
-import __deepMerge from '../../shared/object/deepMerge';
+import __deepMerge from '../../shared/object/deepMerge.js';
 
 /**
  * @name              exitCleanup
@@ -20,7 +20,7 @@ import __deepMerge from '../../shared/object/deepMerge';
  * @todo      tests
  *
  * @snippet         __exitCleanup()
- * 
+ *
  * @example         js
  * import { __exitCleanup } from '@coffeekraken/sugar/process';
  * await __exitCleanup();

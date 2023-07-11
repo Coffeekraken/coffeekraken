@@ -1,8 +1,11 @@
 // @ts-nocheck
 
 import { __isGlob, __isPath } from '@coffeekraken/sugar/is';
-import type { ISDescriptorResultObj } from '../SDescriptorResult';
-import type { ISDescriptorRule, ISDescriptorSettings } from '../_SDescriptor';
+import type { ISDescriptorResultObj } from '../SDescriptorResult.js';
+import type {
+    ISDescriptorRule,
+    ISDescriptorSettings,
+} from '../_SDescriptor.js';
 
 /**
  * @name          pathRule

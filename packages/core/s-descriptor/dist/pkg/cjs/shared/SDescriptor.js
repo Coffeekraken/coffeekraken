@@ -17,15 +17,15 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const maxRule_1 = __importDefault(require("./rules/maxRule"));
-const minRule_1 = __importDefault(require("./rules/minRule"));
-const requiredRule_1 = __importDefault(require("./rules/requiredRule"));
-const typeRule_1 = __importDefault(require("./rules/typeRule"));
-const _SDescriptor_1 = __importDefault(require("./_SDescriptor"));
-_SDescriptor_1.default.registerRule(requiredRule_1.default);
-_SDescriptor_1.default.registerRule(typeRule_1.default);
-_SDescriptor_1.default.registerRule(minRule_1.default);
-_SDescriptor_1.default.registerRule(maxRule_1.default);
-__exportStar(require("./_SDescriptor"), exports);
-exports.default = _SDescriptor_1.default;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7QUFBQSw4REFBc0M7QUFDdEMsOERBQXNDO0FBQ3RDLHdFQUFnRDtBQUNoRCxnRUFBd0M7QUFDeEMsa0VBQXlDO0FBRXpDLHNCQUFXLENBQUMsWUFBWSxDQUFDLHNCQUFZLENBQUMsQ0FBQztBQUN2QyxzQkFBVyxDQUFDLFlBQVksQ0FBQyxrQkFBUSxDQUFDLENBQUM7QUFDbkMsc0JBQVcsQ0FBQyxZQUFZLENBQUMsaUJBQU8sQ0FBQyxDQUFDO0FBQ2xDLHNCQUFXLENBQUMsWUFBWSxDQUFDLGlCQUFPLENBQUMsQ0FBQztBQUVsQyxpREFBK0I7QUFDL0Isa0JBQWUsc0JBQVcsQ0FBQyJ9
+const _SDescriptor_js_1 = __importDefault(require("./_SDescriptor.js"));
+const maxRule_js_1 = __importDefault(require("./rules/maxRule.js"));
+const minRule_js_1 = __importDefault(require("./rules/minRule.js"));
+const requiredRule_js_1 = __importDefault(require("./rules/requiredRule.js"));
+const typeRule_js_1 = __importDefault(require("./rules/typeRule.js"));
+_SDescriptor_js_1.default.registerRule(requiredRule_js_1.default);
+_SDescriptor_js_1.default.registerRule(typeRule_js_1.default);
+_SDescriptor_js_1.default.registerRule(minRule_js_1.default);
+_SDescriptor_js_1.default.registerRule(maxRule_js_1.default);
+__exportStar(require("./_SDescriptor.js"), exports);
+exports.default = _SDescriptor_js_1.default;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7QUFBQSx3RUFBNEM7QUFDNUMsb0VBQXlDO0FBQ3pDLG9FQUF5QztBQUN6Qyw4RUFBbUQ7QUFDbkQsc0VBQTJDO0FBRTNDLHlCQUFXLENBQUMsWUFBWSxDQUFDLHlCQUFZLENBQUMsQ0FBQztBQUN2Qyx5QkFBVyxDQUFDLFlBQVksQ0FBQyxxQkFBUSxDQUFDLENBQUM7QUFDbkMseUJBQVcsQ0FBQyxZQUFZLENBQUMsb0JBQU8sQ0FBQyxDQUFDO0FBQ2xDLHlCQUFXLENBQUMsWUFBWSxDQUFDLG9CQUFPLENBQUMsQ0FBQztBQUVsQyxvREFBa0M7QUFDbEMsa0JBQWUseUJBQVcsQ0FBQyJ9

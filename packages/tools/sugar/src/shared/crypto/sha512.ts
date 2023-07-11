@@ -1,8 +1,8 @@
 // @ts-nocheck
 
-import sha512 from 'crypto-js/sha512';
-import parse from '../string/parse';
-import toString from '../string/toString';
+import sha512 from 'crypto-js/sha512.js';
+import parse from '../string/parse.js';
+import toString from '../string/toString.js';
 
 const __encryptedMessages = {};
 
@@ -17,7 +17,7 @@ const __encryptedMessages = {};
  * Expose two function named "encrypt" and "decrypt" that you can use to process your content using the sha512 algorithm
  *
  * @snippet         __sha512.encrypt($1)
- * 
+ *
  * @example         js
  * import { __sha512 } from '@coffeekraken/sugar/crypto';
  * __sha512.encrypt('hello world');

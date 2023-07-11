@@ -17,11 +17,11 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const SLog_1 = __importDefault(require("./SLog"));
-// import ISLog from './ISLog';
-// import type { ISLogAsk } from './ISLogAsk';
-__exportStar(require("./ISLog"), exports);
-__exportStar(require("./ISLogAsk"), exports);
+const SLog_js_1 = __importDefault(require("./SLog.js"));
+// import ISLog from './ISLog.js';
+// import type { ISLogAsk } from './ISLogAsk.js';
+__exportStar(require("./ISLog.js"), exports);
+__exportStar(require("./ISLogAsk.js"), exports);
 // export { ISLog, ISLogAsk };
-exports.default = SLog_1.default;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7QUFBQSxrREFBMEI7QUFDMUIsK0JBQStCO0FBQy9CLDhDQUE4QztBQUU5QywwQ0FBd0I7QUFDeEIsNkNBQTJCO0FBRTNCLDhCQUE4QjtBQUM5QixrQkFBZSxjQUFJLENBQUMifQ==
+exports.default = SLog_js_1.default;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7QUFBQSx3REFBNkI7QUFDN0Isa0NBQWtDO0FBQ2xDLGlEQUFpRDtBQUVqRCw2Q0FBMkI7QUFDM0IsZ0RBQThCO0FBRTlCLDhCQUE4QjtBQUM5QixrQkFBZSxpQkFBSSxDQUFDIn0=

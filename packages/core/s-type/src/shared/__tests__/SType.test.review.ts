@@ -1,11 +1,9 @@
 // @ts-nocheck
 
-import __SType from '../SType';
+import __SType from '../SType.js';
 
 describe(`@coffeekraken/s-type`, () => {
-
     it('Should handle Numbers correctly', (done) => {
-
         const type = new __SType('Number');
 
         expect(type.is(10)).toBe(true);
@@ -16,12 +14,12 @@ describe(`@coffeekraken/s-type`, () => {
         expect(type.is([10])).toBe(false);
         expect(type.is(null)).toBe(false);
         expect(type.is(undefined)).toBe(false);
-        expect(type.is({something:10})).toBe(false);
+        expect(type.is({ something: 10 })).toBe(false);
 
         expect(type.cast(10)).toBe(10);
         expect(type.cast('10')).toBe(10);
         expect(() => {
-            type.cast({something: 10});
+            type.cast({ something: 10 });
         }).toThrow();
         expect(() => {
             type.cast([10]);
@@ -35,5 +33,4 @@ describe(`@coffeekraken/s-type`, () => {
 
         done();
     });
-
 });

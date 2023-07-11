@@ -1,7 +1,7 @@
 // @ts-nocheck
 
 import __SInterface from '@coffeekraken/s-interface';
-import __SDocmapReadParamsInterface from './SDocmapReadParamsInterface';
+import __SDocmapReadParamsInterface from './SDocmapReadParamsInterface.js';
 
 /**
  * @name                SDocmapReadParamsInterface

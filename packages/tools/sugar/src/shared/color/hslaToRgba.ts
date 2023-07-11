@@ -1,6 +1,6 @@
 // @ts-nocheck
 
-import __parseHsla from './parseHsla';
+import __parseHsla from './parseHsla.js';
 
 /**
  * @name              hslToRgba
@@ -23,7 +23,7 @@ import __parseHsla from './parseHsla';
  * @todo      tests
  *
  * @snippet         __hslaToRgba($1)
- * 
+ *
  * @example         js
  * import { __hslToRgba } from '@coffeekraken/sugar/color';
  * __hslToRgba(10,20,30);

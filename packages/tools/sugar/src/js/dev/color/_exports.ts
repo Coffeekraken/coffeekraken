@@ -1,3 +1,3 @@
-import __getColorFor from './getColorFor';
+import __getColorFor from './getColorFor.js';
 
 export { __getColorFor };

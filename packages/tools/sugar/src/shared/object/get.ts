@@ -1,7 +1,7 @@
 // @ts-nocheck
 
-import __unique from '../array/unique';
-import __unquote from '../string/unquote';
+import __unique from '../array/unique.js';
+import __unquote from '../string/unquote.js';
 
 /**
  * @name                          get

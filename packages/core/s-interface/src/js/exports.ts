@@ -1,5 +1,5 @@
-import { __getAvailableInterfaceTypes } from '../shared/exports';
-import SInterface from './SInterface';
-export * from './SInterface';
+import { __getAvailableInterfaceTypes } from '../shared/exports.js';
+import SInterface from './SInterface.js';
+export * from './SInterface.js';
 export { __getAvailableInterfaceTypes };
 export default SInterface;

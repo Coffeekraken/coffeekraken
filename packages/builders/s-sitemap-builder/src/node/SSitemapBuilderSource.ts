@@ -1,10 +1,10 @@
 import __SClass from '@coffeekraken/s-class';
 import { __deepMerge } from '@coffeekraken/sugar/object';
-import type { ISSitemapBuilderBuildParams } from './interface/SSitemapBuilderBuildParamsInterface';
 import type {
     ISSitemapBuilderResultItem,
-    ISSitemapBuilderSourceBuildResult
-} from './SSitemapBuilder';
+    ISSitemapBuilderSourceBuildResult,
+} from './SSitemapBuilder.js';
+import type { ISSitemapBuilderBuildParams } from './interface/SSitemapBuilderBuildParamsInterface.js';
 
 /**
  * @name            SSitemapBuilderSource

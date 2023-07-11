@@ -37,8 +37,8 @@ import * as __Enquirer from 'enquirer';
 import __fs from 'fs';
 import __fsExtra from 'fs-extra';
 import __path from 'path';
-import __replaceCommandTokens from '../node/replaceCommandTokens';
-import __SSugarCliParamsInterface from './interface/SSugarCliParamsInterface';
+import __replaceCommandTokens from '../node/replaceCommandTokens.js';
+import __SSugarCliParamsInterface from './interface/SSugarCliParamsInterface.js';
 
 export interface ISSugarCliAvailableCliObj {
     packageJson: any;

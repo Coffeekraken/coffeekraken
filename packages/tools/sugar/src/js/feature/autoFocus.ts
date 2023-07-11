@@ -1,4 +1,4 @@
-import __querySelectorLive from '../dom/query/querySelectorLive';
+import __querySelectorLive from '../dom/query/querySelectorLive.js';
 
 /**
  *

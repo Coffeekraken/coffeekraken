@@ -6,8 +6,8 @@ import {
     __deepMerge,
     __deepProxy,
 } from '@coffeekraken/sugar/object';
-import __SStateLsAdapter from '../js/adapters/SStateLsAdapter';
-import __SStateFsAdapter from '../node/adapters/SStateFsAdapter';
+import __SStateLsAdapter from '../js/adapters/SStateLsAdapter.js';
+import __SStateFsAdapter from '../node/adapters/SStateFsAdapter.js';
 
 /**
  * @name                SState

@@ -1,11 +1,11 @@
-import SProcess from './SProcess';
-import SProcessManager from './SProcessManager';
-import SCommandProcess from './SCommandProcess';
+import SCommandProcess from './SCommandProcess.js';
+import SProcess from './SProcess.js';
+import SProcessManager from './SProcessManager.js';
 
-export * from './SProcessManager';
-export * from './SCommandProcess';
-export * from './SProcess';
-export * from './ISProcess';
+export * from './ISProcess.js';
+export * from './SCommandProcess.js';
+export * from './SProcess.js';
+export * from './SProcessManager.js';
 
-export { SProcessManager, SCommandProcess };
+export { SCommandProcess, SProcessManager };
 export default SProcess;

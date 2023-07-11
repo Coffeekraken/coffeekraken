@@ -1,4 +1,4 @@
-import __currentModuleSystem from '../module/currentModuleSystem';
+import __currentModuleSystem from '../module/currentModuleSystem.js';
 
 /**
  * @name            replaceTokens

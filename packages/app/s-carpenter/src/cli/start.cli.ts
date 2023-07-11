@@ -1,6 +1,6 @@
 // @ts-nocheck
 
-import __SCarpenter from '../node/SCarpenter';
+import __SCarpenter from '../node/SCarpenter.js';
 
 export default (stringArgs = '') => {
     return new Promise(async (resolve) => {

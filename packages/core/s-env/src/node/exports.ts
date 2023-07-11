@@ -1,5 +1,5 @@
-import SEnv from './SEnv';
+import SEnv from './SEnv.js';
 
-export * from './SEnv';
+export * from './SEnv.js';
 
 export default SEnv;

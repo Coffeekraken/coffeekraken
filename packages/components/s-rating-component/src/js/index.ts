@@ -1,2 +1,2 @@
-import { define } from './SRatingComponent';
+import { define } from './SRatingComponent.js';
 define();

@@ -1,8 +1,8 @@
 // @ts-nocheck
 import __fs from 'fs';
-import __stringify from '../../shared/json/stringify';
-import __ensureDirSync from './ensureDirSync';
-import __folderPath from './folderPath';
+import __stringify from '../../shared/json/stringify.js';
+import __ensureDirSync from './ensureDirSync.js';
+import __folderPath from './folderPath.js';
 
 /**
  * @name        writeJsonSync

@@ -1,5 +1,5 @@
-import type ISRefocusFeatureProps from './SRefocusFeature';
-import __SRefocusFeature from './SRefocusFeature';
+import type ISRefocusFeatureProps from './SRefocusFeature.js';
+import __SRefocusFeature from './SRefocusFeature.js';
 
 export default function define(
     props: Partial<ISRefocusFeatureProps> = {},

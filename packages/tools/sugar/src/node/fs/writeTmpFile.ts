@@ -1,9 +1,9 @@
 // @ts-nocheck
 
 import __path from 'path';
-import __uniqid from '../../node/string/uniqid';
-import __packageTmpDir from '../path/packageTmpDir';
-import __writeFileSync from './writeFileSync';
+import __uniqid from '../../node/string/uniqid.js';
+import __packageTmpDir from '../path/packageTmpDir.js';
+import __writeFileSync from './writeFileSync.js';
 
 /**
  * @name        writeTmpFile

@@ -1,6 +1,6 @@
 import { __deepMerge, __get, __set } from '@coffeekraken/sugar/object';
 
-import type { ISSugarConfig } from '../shared/types';
+import type { ISSugarConfig } from '../shared/types.js';
 
 /**
  * @name                SSugarConfig

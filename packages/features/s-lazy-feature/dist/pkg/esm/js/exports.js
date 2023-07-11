@@ -1,6 +1,6 @@
-import __SLazyFeature from './SLazyFeature';
-import __define from './define';
-export * from './SLazyFeature';
+import __SLazyFeature from './SLazyFeature.js';
+import __define from './define.js';
+export * from './SLazyFeature.js';
 export { __define };
 export default __SLazyFeature;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sY0FBYyxNQUFNLGdCQUFnQixDQUFDO0FBQzVDLE9BQU8sUUFBUSxNQUFNLFVBQVUsQ0FBQztBQUVoQyxjQUFjLGdCQUFnQixDQUFDO0FBQy9CLE9BQU8sRUFBRSxRQUFRLEVBQUUsQ0FBQztBQUNwQixlQUFlLGNBQWMsQ0FBQyJ9
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sY0FBYyxNQUFNLG1CQUFtQixDQUFDO0FBQy9DLE9BQU8sUUFBUSxNQUFNLGFBQWEsQ0FBQztBQUVuQyxjQUFjLG1CQUFtQixDQUFDO0FBQ2xDLE9BQU8sRUFBRSxRQUFRLEVBQUUsQ0FBQztBQUNwQixlQUFlLGNBQWMsQ0FBQyJ9

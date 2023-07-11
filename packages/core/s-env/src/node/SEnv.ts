@@ -1,4 +1,4 @@
-import __SEnv from '../shared/SEnv';
+import __SEnv from '../shared/SEnv.js';
 
 /**
  * @name            SEnv

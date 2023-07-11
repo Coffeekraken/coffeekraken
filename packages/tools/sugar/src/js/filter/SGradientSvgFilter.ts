@@ -1,6 +1,6 @@
 // @ts-nocheck
 
-import __SSvgFilter from './SSvgFilter';
+import __SSvgFilter from './SSvgFilter.js';
 
 /**
  * @name 		SGradientSvgFilter

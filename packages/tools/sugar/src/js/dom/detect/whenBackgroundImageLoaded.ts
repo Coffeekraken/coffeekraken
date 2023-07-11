@@ -1,9 +1,9 @@
 // @ts-nocheck
 
-import __getStyleProperty from '../style/getStyleProperty';
-import __whenImageLoaded from './whenImageLoaded';
+import __getStyleProperty from '../style/getStyleProperty.js';
+import __whenImageLoaded from './whenImageLoaded.js';
 
-import __unquote from '../../../shared/string/unquote';
+import __unquote from '../../../shared/string/unquote.js';
 
 /**
  * @name        whenBackgroundImageLoaded

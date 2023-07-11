@@ -1,6 +1,6 @@
 import __SClass from '@coffeekraken/s-class';
-import type { ISDescriptorRule, ISDescriptorSettings } from './SDescriptor';
-import ISDescriptor from './SDescriptor';
+import type { ISDescriptorRule, ISDescriptorSettings } from './SDescriptor.js';
+import ISDescriptor from './SDescriptor.js';
 
 import { __parseHtml } from '@coffeekraken/sugar/console';
 import { __isNode } from '@coffeekraken/sugar/is';

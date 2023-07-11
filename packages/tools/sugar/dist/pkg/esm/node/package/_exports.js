@@ -1,8 +1,8 @@
-import __packageJson from './packageJson';
-import __packageJsonSync from './packageJsonSync';
-import __packageMetasSync from './packageMetasSync';
-import __renamePackageSync from './renamePackageSync';
-import __replacePackageJsonTokens from './replacePackageJsonTokens';
-export * from '../../shared/package/_exports';
+import __packageJson from './packageJson.js';
+import __packageJsonSync from './packageJsonSync.js';
+import __packageMetasSync from './packageMetasSync.js';
+import __renamePackageSync from './renamePackageSync.js';
+import __replacePackageJsonTokens from './replacePackageJsonTokens.js';
+export * from '../../shared/package/_exports.js';
 export { __packageJson, __packageJsonSync, __packageMetasSync, __renamePackageSync, __replacePackageJsonTokens, };
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sYUFBYSxNQUFNLGVBQWUsQ0FBQztBQUMxQyxPQUFPLGlCQUFpQixNQUFNLG1CQUFtQixDQUFDO0FBQ2xELE9BQU8sa0JBQWtCLE1BQU0sb0JBQW9CLENBQUM7QUFDcEQsT0FBTyxtQkFBbUIsTUFBTSxxQkFBcUIsQ0FBQztBQUN0RCxPQUFPLDBCQUEwQixNQUFNLDRCQUE0QixDQUFDO0FBRXBFLGNBQWMsK0JBQStCLENBQUM7QUFDOUMsT0FBTyxFQUNILGFBQWEsRUFDYixpQkFBaUIsRUFDakIsa0JBQWtCLEVBQ2xCLG1CQUFtQixFQUNuQiwwQkFBMEIsR0FDN0IsQ0FBQyJ9
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sYUFBYSxNQUFNLGtCQUFrQixDQUFDO0FBQzdDLE9BQU8saUJBQWlCLE1BQU0sc0JBQXNCLENBQUM7QUFDckQsT0FBTyxrQkFBa0IsTUFBTSx1QkFBdUIsQ0FBQztBQUN2RCxPQUFPLG1CQUFtQixNQUFNLHdCQUF3QixDQUFDO0FBQ3pELE9BQU8sMEJBQTBCLE1BQU0sK0JBQStCLENBQUM7QUFFdkUsY0FBYyxrQ0FBa0MsQ0FBQztBQUNqRCxPQUFPLEVBQ0gsYUFBYSxFQUNiLGlCQUFpQixFQUNqQixrQkFBa0IsRUFDbEIsbUJBQW1CLEVBQ25CLDBCQUEwQixHQUM3QixDQUFDIn0=

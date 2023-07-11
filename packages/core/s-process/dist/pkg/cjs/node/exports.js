@@ -17,15 +17,15 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.SCommandProcess = exports.SProcessManager = void 0;
-const SProcess_1 = __importDefault(require("./SProcess"));
-const SProcessManager_1 = __importDefault(require("./SProcessManager"));
-exports.SProcessManager = SProcessManager_1.default;
-const SCommandProcess_1 = __importDefault(require("./SCommandProcess"));
-exports.SCommandProcess = SCommandProcess_1.default;
-__exportStar(require("./SProcessManager"), exports);
-__exportStar(require("./SCommandProcess"), exports);
-__exportStar(require("./SProcess"), exports);
-__exportStar(require("./ISProcess"), exports);
-exports.default = SProcess_1.default;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0FBQUEsMERBQWtDO0FBQ2xDLHdFQUFnRDtBQVF2QywwQkFSRix5QkFBZSxDQVFFO0FBUHhCLHdFQUFnRDtBQU90QiwwQkFQbkIseUJBQWUsQ0FPbUI7QUFMekMsb0RBQWtDO0FBQ2xDLG9EQUFrQztBQUNsQyw2Q0FBMkI7QUFDM0IsOENBQTRCO0FBRzVCLGtCQUFlLGtCQUFRLENBQUMifQ==
+exports.SProcessManager = exports.SCommandProcess = void 0;
+const SCommandProcess_js_1 = __importDefault(require("./SCommandProcess.js"));
+exports.SCommandProcess = SCommandProcess_js_1.default;
+const SProcess_js_1 = __importDefault(require("./SProcess.js"));
+const SProcessManager_js_1 = __importDefault(require("./SProcessManager.js"));
+exports.SProcessManager = SProcessManager_js_1.default;
+__exportStar(require("./ISProcess.js"), exports);
+__exportStar(require("./SCommandProcess.js"), exports);
+__exportStar(require("./SProcess.js"), exports);
+__exportStar(require("./SProcessManager.js"), exports);
+exports.default = SProcess_js_1.default;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0FBQUEsOEVBQW1EO0FBUzFDLDBCQVRGLDRCQUFlLENBU0U7QUFSeEIsZ0VBQXFDO0FBQ3JDLDhFQUFtRDtBQU96QiwwQkFQbkIsNEJBQWUsQ0FPbUI7QUFMekMsaURBQStCO0FBQy9CLHVEQUFxQztBQUNyQyxnREFBOEI7QUFDOUIsdURBQXFDO0FBR3JDLGtCQUFlLHFCQUFRLENBQUMifQ==

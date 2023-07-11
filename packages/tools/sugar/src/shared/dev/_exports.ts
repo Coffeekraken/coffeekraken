@@ -1,2 +1,2 @@
-export * from './color/_exports';
-export * from './types/_exports';
+export * from './color/_exports.js';
+export * from './types/_exports.js';

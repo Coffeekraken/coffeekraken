@@ -17,7 +17,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const SImagesBuilder_1 = __importDefault(require("./SImagesBuilder"));
-__exportStar(require("./SImagesBuilder"), exports);
-exports.default = SImagesBuilder_1.default;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7QUFBQSxzRUFBZ0Q7QUFDaEQsbURBQWlDO0FBQ2pDLGtCQUFlLHdCQUFnQixDQUFDIn0=
+const SImagesBuilder_js_1 = __importDefault(require("./SImagesBuilder.js"));
+__exportStar(require("./SImagesBuilder.js"), exports);
+exports.default = SImagesBuilder_js_1.default;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7QUFBQSw0RUFBbUQ7QUFDbkQsc0RBQW9DO0FBQ3BDLGtCQUFlLDJCQUFnQixDQUFDIn0=

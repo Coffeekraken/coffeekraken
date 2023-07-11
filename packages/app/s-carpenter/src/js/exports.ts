@@ -1,3 +1,3 @@
-import __SCarpenterComponent from './SCarpenterComponent';
-export * from './SCarpenterComponent';
+import __SCarpenterComponent from './SCarpenterComponent.js';
+export * from './SCarpenterComponent.js';
 export default __SCarpenterComponent;

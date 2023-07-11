@@ -8,7 +8,7 @@ import { __addDependencies } from '@coffeekraken/sugar/npm';
 import { __packageJsonSync } from '@coffeekraken/sugar/package';
 import { __packageRootDir } from '@coffeekraken/sugar/path';
 import __path from 'path';
-import type { ISKitchenIngredient } from '../../SKitchen';
+import type { ISKitchenIngredient } from '../../SKitchen.js';
 
 /**
  * @name        sugarIngredient

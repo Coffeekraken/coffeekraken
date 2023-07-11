@@ -1,6 +1,6 @@
-import __SRatingComponent from './SRatingComponent';
-import __define from './define';
+import __SRatingComponent from './SRatingComponent.js';
+import __define from './define.js';
 
-export * from './SRatingComponent';
+export * from './SRatingComponent.js';
 export { __define };
 export default __SRatingComponent;

@@ -1,6 +1,6 @@
-import __SDatetimePickerComponent from './SDatetimePickerComponent';
-import __define from './define';
+import __SDatetimePickerComponent from './SDatetimePickerComponent.js';
+import __define from './define.js';
 
-export * from './SDatetimePickerComponent';
+export * from './SDatetimePickerComponent.js';
 export { __define };
 export default __SDatetimePickerComponent;

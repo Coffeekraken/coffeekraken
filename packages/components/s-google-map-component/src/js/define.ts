@@ -1,6 +1,6 @@
 import type { ISLitComponentDefineSettings } from '@coffeekraken/s-lit-component';
-import type ISGoogleMapComponentProps from './SGoogleMapComponent';
-import __SGoogleMapWebcomponent from './SGoogleMapComponent';
+import type ISGoogleMapComponentProps from './SGoogleMapComponent.js';
+import __SGoogleMapWebcomponent from './SGoogleMapComponent.js';
 
 export default function define(
     props: Partial<ISGoogleMapComponentProps> = {},

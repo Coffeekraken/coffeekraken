@@ -10,7 +10,7 @@ import __bodyParser from 'body-parser';
 import __compression from 'compression';
 import __cors from 'cors';
 import __express from 'express';
-import __SDocServeParamsInterface from './interface/SDocServeParamsInterface';
+import __SDocServeParamsInterface from './interface/SDocServeParamsInterface.js';
 
 /**
  * @name                SDoc

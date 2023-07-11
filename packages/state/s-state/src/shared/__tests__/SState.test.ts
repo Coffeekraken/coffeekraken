@@ -1,5 +1,5 @@
 import { __wait } from '@coffeekraken/sugar/datetime';
-import __SState from '../SState';
+import __SState from '../SState.js';
 
 describe('@coffeekraken.s-state', () => {
     it('Should create and destroy a simple state correctly', async () => {

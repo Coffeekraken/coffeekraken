@@ -17,7 +17,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const SSugarJson_1 = __importDefault(require("./SSugarJson"));
-__exportStar(require("./SSugarJson"), exports);
-exports.default = SSugarJson_1.default;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7QUFBQSw4REFBc0M7QUFFdEMsK0NBQTZCO0FBRTdCLGtCQUFlLG9CQUFVLENBQUMifQ==
+const SSugarJson_js_1 = __importDefault(require("./SSugarJson.js"));
+__exportStar(require("./SSugarJson.js"), exports);
+exports.default = SSugarJson_js_1.default;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7QUFBQSxvRUFBeUM7QUFFekMsa0RBQWdDO0FBRWhDLGtCQUFlLHVCQUFVLENBQUMifQ==

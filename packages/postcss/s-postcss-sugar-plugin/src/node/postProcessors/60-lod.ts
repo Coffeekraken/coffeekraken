@@ -2,8 +2,8 @@ import __SFile from '@coffeekraken/s-file';
 import { __distCssDir, __srcCssDir } from '@coffeekraken/sugar/path';
 import * as __csso from 'csso';
 
-import __cloneNodes from '../utils/cloneNodes';
-import __higherRule from '../utils/higherRule';
+import __cloneNodes from '../utils/cloneNodes.js';
+import __higherRule from '../utils/higherRule.js';
 
 import { __writeFileSync } from '@coffeekraken/sugar/fs';
 

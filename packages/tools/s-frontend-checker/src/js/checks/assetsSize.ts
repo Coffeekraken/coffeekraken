@@ -1,6 +1,6 @@
 import { __wait } from '@coffeekraken/sugar/datetime';
 import { __formatFileSize } from '@coffeekraken/sugar/format';
-import type { ISFrontendChecker } from '../types';
+import type { ISFrontendChecker } from '../types.js';
 
 /**
  * @name            assetsSize

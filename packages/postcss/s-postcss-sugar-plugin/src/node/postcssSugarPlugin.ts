@@ -12,9 +12,9 @@ import __fs from 'fs';
 import __glob from 'glob';
 import __path from 'path';
 import __postcss from 'postcss';
-import __getRoot from './utils/getRoot';
+import __getRoot from './utils/getRoot.js';
 
-import __CssVars from './CssVars';
+import __CssVars from './CssVars.js';
 
 const mixinsStack = {},
     functionsStack = {};

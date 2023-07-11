@@ -1,5 +1,5 @@
-import type ISHighlightFeatureProps from './SHighlightFeature';
-import __SHighlightFeature from './SHighlightFeature';
+import type ISHighlightFeatureProps from './SHighlightFeature.js';
+import __SHighlightFeature from './SHighlightFeature.js';
 
 export default function define(
     props: Partial<ISHighlightFeatureProps> = {},

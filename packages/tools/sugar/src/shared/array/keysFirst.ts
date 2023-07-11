@@ -1,5 +1,5 @@
 // @ts-nocheck
-import __unique from './unique';
+import __unique from './unique.js';
 
 /**
  * @name        keysFirst
@@ -16,7 +16,7 @@ import __unique from './unique';
  * @return    {Array}    The processed array
  *
  * @snippet         __keysFirst($1, $2)
- * 
+ *
  * @example    js
  * import { __keysFirst } from '@coffeekraken/sugar/array'
  * __keysFirst(['a','b','d','g','c'], ['d','g'])

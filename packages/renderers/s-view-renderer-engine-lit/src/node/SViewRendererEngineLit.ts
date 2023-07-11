@@ -4,7 +4,7 @@ import { __unique } from '@coffeekraken/sugar/array';
 import { render } from '@lit-labs/ssr/lib/render-with-global-dom-shim.js';
 import __fs from 'fs';
 import { Readable } from 'stream';
-import __SViewRendererBladeEngineSettingsInterface from './interface/SViewRendererEngineLitSettingsInterface';
+import __SViewRendererBladeEngineSettingsInterface from './interface/SViewRendererEngineLitSettingsInterface.js';
 
 /**
  * @name            SViewRendererEngineLit

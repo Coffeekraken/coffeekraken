@@ -18,10 +18,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.SDocblockBlock = void 0;
-const SDocblock_1 = __importDefault(require("./SDocblock"));
-const SDocblockBlock_1 = __importDefault(require("./SDocblockBlock"));
-exports.SDocblockBlock = SDocblockBlock_1.default;
-__exportStar(require("./SDocblock"), exports);
-__exportStar(require("./SDocblockBlock"), exports);
-exports.default = SDocblock_1.default;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0FBQUEsNERBQW9DO0FBQ3BDLHNFQUE4QztBQUtyQyx5QkFMRix3QkFBYyxDQUtFO0FBSHZCLDhDQUE0QjtBQUM1QixtREFBaUM7QUFHakMsa0JBQWUsbUJBQVMsQ0FBQyJ9
+const SDocblock_js_1 = __importDefault(require("./SDocblock.js"));
+const SDocblockBlock_js_1 = __importDefault(require("./SDocblockBlock.js"));
+exports.SDocblockBlock = SDocblockBlock_js_1.default;
+__exportStar(require("./SDocblock.js"), exports);
+__exportStar(require("./SDocblockBlock.js"), exports);
+exports.default = SDocblock_js_1.default;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0FBQUEsa0VBQXVDO0FBQ3ZDLDRFQUFpRDtBQUt4Qyx5QkFMRiwyQkFBYyxDQUtFO0FBSHZCLGlEQUErQjtBQUMvQixzREFBb0M7QUFHcEMsa0JBQWUsc0JBQVMsQ0FBQyJ9

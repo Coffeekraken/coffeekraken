@@ -1,2 +1,2 @@
-import __makeFloat from './makeFloat';
+import __makeFloat from './makeFloat.js';
 export { __makeFloat };

@@ -1,6 +1,6 @@
 import __SFeature from '@coffeekraken/s-feature';
 import { __deepMerge } from '@coffeekraken/sugar/object';
-import __SHighlightFeatureInterface from './interface/SHighlightFeatureInterface';
+import __SHighlightFeatureInterface from './interface/SHighlightFeatureInterface.js';
 
 // @ts-ignore
 import __css from '../../../../src/css/s-highlight-feature.css'; // relative to /dist/pkg/esm/js

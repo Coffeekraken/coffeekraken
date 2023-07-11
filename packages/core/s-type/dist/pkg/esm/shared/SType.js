@@ -1,5 +1,5 @@
-import __SType from './_SType';
-import './sTypeRegisterDefaultDescriptors';
-export * from './_SType';
+import __SType from './_SType.js';
+import './sTypeRegisterDefaultDescriptors.js';
+export * from './_SType.js';
 export default __SType;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sT0FBTyxNQUFNLFVBQVUsQ0FBQztBQUMvQixPQUFPLG1DQUFtQyxDQUFDO0FBRTNDLGNBQWMsVUFBVSxDQUFDO0FBQ3pCLGVBQWUsT0FBTyxDQUFDIn0=
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sT0FBTyxNQUFNLGFBQWEsQ0FBQztBQUNsQyxPQUFPLHNDQUFzQyxDQUFDO0FBRTlDLGNBQWMsYUFBYSxDQUFDO0FBQzVCLGVBQWUsT0FBTyxDQUFDIn0=

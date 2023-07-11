@@ -1,5 +1,5 @@
 import __SInterface from '@coffeekraken/s-interface';
-import { IPostcssSugarPluginColorParams } from '../../functions/color/color';
+import { IPostcssSugarPluginColorParams } from '../../functions/color/color.js';
 
 class postcssSugarPluginScopePreventMixinInterface extends __SInterface {
     static get _definition() {

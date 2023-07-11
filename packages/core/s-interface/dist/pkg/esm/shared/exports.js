@@ -1,6 +1,6 @@
-import __getAvailableInterfaceTypes from './getAvailableInterfaceTypes';
-import SInterface from './SInterface';
-export * from './SInterface';
+import __getAvailableInterfaceTypes from './getAvailableInterfaceTypes.js';
+import SInterface from './SInterface.js';
+export * from './SInterface.js';
 export { __getAvailableInterfaceTypes };
 export default SInterface;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sNEJBQTRCLE1BQU0sOEJBQThCLENBQUM7QUFDeEUsT0FBTyxVQUFVLE1BQU0sY0FBYyxDQUFDO0FBRXRDLGNBQWMsY0FBYyxDQUFDO0FBQzdCLE9BQU8sRUFBRSw0QkFBNEIsRUFBRSxDQUFDO0FBRXhDLGVBQWUsVUFBVSxDQUFDIn0=
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sNEJBQTRCLE1BQU0saUNBQWlDLENBQUM7QUFDM0UsT0FBTyxVQUFVLE1BQU0saUJBQWlCLENBQUM7QUFFekMsY0FBYyxpQkFBaUIsQ0FBQztBQUNoQyxPQUFPLEVBQUUsNEJBQTRCLEVBQUUsQ0FBQztBQUV4QyxlQUFlLFVBQVUsQ0FBQyJ9

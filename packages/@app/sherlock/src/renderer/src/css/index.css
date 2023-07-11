@@ -1,3 +1,5 @@
+@sugar.import ('./sugar.css');
+
 body {
-    background: sugar.color(main);
+    background: sugar.color(accent);
 }

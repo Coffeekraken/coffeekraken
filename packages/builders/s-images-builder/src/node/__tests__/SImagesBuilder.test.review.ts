@@ -1,6 +1,6 @@
-import __SImagesBuilder from '../SImagesBuilder';
-import { __packageTmpDir } from '@coffeekraken/sugar/path';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
+import { __packageTmpDir } from '@coffeekraken/sugar/path';
+import __SImagesBuilder from '../SImagesBuilder.js';
 
 describe('@coffeekraken.s-images-builder.SImagesBuilder', () => {
     it('Should compress simple jpg files correctly', async () => {

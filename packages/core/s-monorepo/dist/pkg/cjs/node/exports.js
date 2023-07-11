@@ -17,7 +17,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const SMonorepo_1 = __importDefault(require("./SMonorepo"));
-__exportStar(require("./SMonorepo"), exports);
-exports.default = SMonorepo_1.default;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7QUFBQSw0REFBc0M7QUFDdEMsOENBQTRCO0FBQzVCLGtCQUFlLG1CQUFXLENBQUMifQ==
+const SMonorepo_js_1 = __importDefault(require("./SMonorepo.js"));
+__exportStar(require("./SMonorepo.js"), exports);
+exports.default = SMonorepo_js_1.default;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7QUFBQSxrRUFBeUM7QUFDekMsaURBQStCO0FBQy9CLGtCQUFlLHNCQUFXLENBQUMifQ==

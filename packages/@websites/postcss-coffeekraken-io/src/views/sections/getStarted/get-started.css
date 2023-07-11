@@ -5,7 +5,7 @@
         @sugar.layout ('1 2 2');
         gap: sugar.margin(100);
 
-        @sugar.media mobile {
+        @sugar.media <=tablet {
             @sugar.layout ('1 _ 2');
             gap: sugar.margin(50);
         }

@@ -1,8 +1,12 @@
 .section {
     padding-block: sugar.padding(100);
 
+    @sugar.media tablet {
+        padding-block: sugar.padding(60) !important;
+        padding-inline: sugar.padding(50);
+    }
     @sugar.media mobile {
-        padding-block: sugar.padding(30);
+        padding-block: sugar.padding(60) !important;
         padding-inline: sugar.padding(30);
     }
 

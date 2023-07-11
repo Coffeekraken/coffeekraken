@@ -23,6 +23,9 @@
     ._main {
         padding-block: sugar.padding(70);
 
+        @sugar.media tablet {
+            padding-inline: sugar.padding(50);
+        }
         @sugar.media mobile {
             padding-inline: sugar.padding(30);
         }
@@ -75,6 +78,9 @@
 
         @sugar.media mobile {
             display: none;
+        }
+        @sugar.media tablet {
+            padding-inline: sugar.padding(50);
         }
 
         ._bkg svg {

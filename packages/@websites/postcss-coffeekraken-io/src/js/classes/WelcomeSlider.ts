@@ -58,12 +58,12 @@ export default class WelcomeSlider {
 
         this._$slider.setAttribute('ready', 'true');
 
-        setInterval(() => {
-            if (this._paused) {
-                return;
-            }
-            this.next();
-        }, 5000);
+        // setInterval(() => {
+        //     if (this._paused) {
+        //         return;
+        //     }
+        //     this.next();
+        // }, 5000);
     }
 
     highlightLetter(): void {

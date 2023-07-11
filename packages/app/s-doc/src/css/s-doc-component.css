@@ -87,7 +87,7 @@ body:has(.s-doc-fullscreen) {
     transform: translateX(-50%); */
     /* @sugar.depth (100); */
 
-    @sugar.media mobile {
+    @sugar.media <=tablet {
         max-height: none;
         display: block;
     }
@@ -105,7 +105,7 @@ body:has(.s-doc-fullscreen) {
         overflow-y: auto;
         @sugar.scrollbar;
 
-        @sugar.media mobile {
+        @sugar.media <=tablet {
             background: sugar.color(main, background);
             position: absolute;
             top: 0;
@@ -137,7 +137,7 @@ body:has(.s-doc-fullscreen) {
         z-index: 100;
         @sugar.border.radius;
 
-        @sugar.media mobile {
+        @sugar.media <=tablet {
             display: block;
         }
     }
@@ -284,7 +284,7 @@ body:has(.s-doc-fullscreen) {
     }
 
     &_toolbar {
-        @sugar.media mobile {
+        @sugar.media <=tablet {
             display: none;
         }
     }
@@ -358,7 +358,7 @@ body:has(.s-doc-fullscreen) {
 
 html:has(.s-doc_explorer:focus, .s-doc_explorer:focus-within),
 body:has(.s-doc_explorer:focus, .s-doc_explorer:focus-within) {
-    @sugar.media mobile {
+    @sugar.media <=tablet {
         overflow: hidden;
     }
 }

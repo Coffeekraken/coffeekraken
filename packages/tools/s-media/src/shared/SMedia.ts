@@ -92,7 +92,7 @@ export default class SMedia extends __SClass {
     }
 
     /**
-     * @name                buildMediaQuery
+     * @name                buildQuery
      * @type                Function
      *
      * This static method allows you to built a media query by passing args like "mobile", ">tablet", etc...
@@ -115,9 +115,9 @@ export default class SMedia extends __SClass {
         };
 
         const queryAr = queryString
-            .split(' ')
+            .split(/(\s|\,)/gm)
             .map((l) => l.trim())
-            .filter((l) => l !== '');
+            .filter((l) => l !== '' && l !== ',');
 
         queryAr.forEach((query, i) => {
             if (query === 'and' || query === 'or') {

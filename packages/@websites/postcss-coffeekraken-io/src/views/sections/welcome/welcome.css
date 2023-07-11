@@ -1,5 +1,28 @@
 @import url('https://fonts.googleapis.com/css2?family=Baloo+Da+2&display=swap');
 
+@keyframes welcome-letters-1n {
+    0% {
+        color: sugar.color(main, text, --alpha 0.4);
+    }
+    50% {
+        color: sugar.color(accent, text);
+    }
+    100% {
+        color: sugar.color(main, text, --alpha 0.4);
+    }
+}
+@keyframes welcome-letters-2n {
+    0% {
+        color: sugar.color(main, text, --alpha 0.4);
+    }
+    50% {
+        color: sugar.color(complementary, text);
+    }
+    100% {
+        color: sugar.color(main, text, --alpha 0.4);
+    }
+}
+
 #homepage-welcome {
     height: calc(100vh - 200px);
     min-height: 800px;
@@ -24,7 +47,6 @@
     ._content {
         position: relative;
         width: 100%;
-        padding-inline: sugar.padding(30);
 
         @sugar.media mobile {
             top: 40px;
@@ -45,7 +67,11 @@
         );
         @sugar.transition;
 
-        @sugar.media mobile {
+        @sugar.media <=1000 {
+            transform: translateX(-15%) translateY(-50%) scale(0.6);
+        }
+
+        @sugar.media tablet {
             display: none;
         }
 
@@ -107,6 +133,34 @@
             top: 50%;
             left: 0;
             transform: translateY(-50%);
+
+            &._postcss {
+                font-size: 36px;
+
+                ._comment {
+                    color: #f16f48;
+                    color: sugar.color(complementary, text);
+
+                    /* > span > span:nth-child(1n) {
+                        animation: welcome-letters-1n 7s ease-in-out infinite;
+                    }
+
+                    > span > span:nth-child(2n) {
+                        color: sugar.color(accent, text);
+                        animation: welcome-letters-2n 10s ease-in-out infinite
+                            0.5s;
+                    } */
+                    /* > span > span:nth-child(3n) {
+                        color: sugar.color(info, text);
+                    }
+                    > span > span:nth-child(4n) {
+                        color: sugar.color(error, text);
+                    }
+                    > span > span:nth-child(5n) {
+                        color: sugar.color(main, text, --alpha 0.3);
+                    } */
+                }
+            }
 
             &.active {
                 z-index: 10;

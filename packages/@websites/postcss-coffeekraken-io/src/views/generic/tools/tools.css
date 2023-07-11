@@ -5,6 +5,10 @@
     z-index: 100;
     transform: translate(0, -50%);
 
+    @sugar.media <=1400 {
+        display: none;
+    }
+
     @sugar.media mobile {
         display: none;
     }

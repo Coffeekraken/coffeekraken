@@ -18,12 +18,12 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.postcss = void 0;
-const postcssSugarPlugin_1 = __importDefault(require("./postcssSugarPlugin"));
-__exportStar(require("./postcssSugarPlugin"), exports);
+const postcssSugarPlugin_js_1 = __importDefault(require("./postcssSugarPlugin.js"));
+__exportStar(require("./postcssSugarPlugin.js"), exports);
 exports.postcss = true;
-exports.default = postcssSugarPlugin_1.default;
+exports.default = postcssSugarPlugin_js_1.default;
 if (typeof module !== 'undefined') {
     module.exports.postcss = true;
-    module.exports = postcssSugarPlugin_1.default;
+    module.exports = postcssSugarPlugin_js_1.default;
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0FBQUEsOEVBQXNEO0FBQ3RELHVEQUFxQztBQUN4QixRQUFBLE9BQU8sR0FBRyxJQUFJLENBQUM7QUFDNUIsa0JBQWUsNEJBQWtCLENBQUM7QUFFbEMsSUFBSSxPQUFPLE1BQU0sS0FBSyxXQUFXLEVBQUU7SUFDL0IsTUFBTSxDQUFDLE9BQU8sQ0FBQyxPQUFPLEdBQUcsSUFBSSxDQUFDO0lBQzlCLE1BQU0sQ0FBQyxPQUFPLEdBQUcsNEJBQWtCLENBQUM7Q0FDdkMifQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0FBQUEsb0ZBQXlEO0FBQ3pELDBEQUF3QztBQUMzQixRQUFBLE9BQU8sR0FBRyxJQUFJLENBQUM7QUFDNUIsa0JBQWUsK0JBQWtCLENBQUM7QUFFbEMsSUFBSSxPQUFPLE1BQU0sS0FBSyxXQUFXLEVBQUU7SUFDL0IsTUFBTSxDQUFDLE9BQU8sQ0FBQyxPQUFPLEdBQUcsSUFBSSxDQUFDO0lBQzlCLE1BQU0sQ0FBQyxPQUFPLEdBQUcsK0JBQWtCLENBQUM7Q0FDdkMifQ==

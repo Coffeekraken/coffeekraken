@@ -3,22 +3,28 @@
     top: 0;
     left: 50%;
     width: calc(1280px + sugar.padding(30) * 2);
+    max-width: 100vw;
     z-index: 200;
     height: 80px;
     display: flex;
     align-items: center;
     background: sugar.color(main, background);
     padding-inline: 0;
+
     transform: translateX(-50%);
     @sugar.transition;
 
+    @sugar.media tablet {
+        padding-inline: sugar.padding(50) sugar.padding(30);
+    }
+
     @sugar.media mobile {
-        width: 100%;
         padding-inline: sugar.padding(30) sugar.padding(10);
+        width: 100%;
     }
 
     body:has(.s-doc_explorer:focus, .s-doc_explorer:focus-within) &,
-    .scroll-down & {
+    .scrolled.scroll-down & {
         transform: translate(-50%, -100%);
     }
 

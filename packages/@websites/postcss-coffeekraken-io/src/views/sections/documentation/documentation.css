@@ -12,6 +12,9 @@
     }
 
     ._doc {
+        @sugar.media tablet {
+            margin-inline: calc(sugar.margin(50) * -1);
+        }
         @sugar.media mobile {
             margin-inline: calc(sugar.margin(30) * -1);
         }

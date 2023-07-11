@@ -12,17 +12,6 @@ body {
     overflow-x: hidden;
 }
 
-.s-container:not(#header .s-container, .s-panel .s-container) {
-    margin: 0 0 0 50%;
-    translate: -50% 0;
-    @sugar.transition;
-
-    @sugar.media mobile {
-        margin: 0 !important;
-        translate: 0 0 !important;
-    }
-}
-
 body:not(#homepage) {
     .s-container:not(._nav .s-container, .s-panel .s-container) {
         margin: 0 0 0 sugar.margin(80) !important;

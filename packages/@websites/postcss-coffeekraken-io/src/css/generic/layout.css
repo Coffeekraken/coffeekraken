@@ -18,7 +18,7 @@
         transform: translateY(0);
     }
 
-    @sugar.media mobile {
+    @sugar.media <=tablet {
         display: none;
     }
 

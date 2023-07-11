@@ -2,7 +2,7 @@
     display: flex;
     /* @sugar.depth (100); */
 
-    @sugar.media mobile {
+    @sugar.media <=tablet {
         flex-direction: column;
     }
 
@@ -13,7 +13,7 @@
         border: solid 1px sugar.color(main, border); */
         @sugar.border.radius();
 
-        @sugar.media mobile {
+        @sugar.media <=tablet {
             display: flex;
             width: 100%;
             overflow-x: auto;

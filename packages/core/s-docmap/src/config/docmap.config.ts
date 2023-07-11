@@ -9,14 +9,14 @@ export default function (api) {
          * @name        excludePackages
          * @namespace   config.docmap
          * @type        Boolean
-         * @default     ['@website/*', '@example/*']
+         * @default     ['@website/*', '@example/*', '@tests/*', '@app/*']
          *
          * Specify some package(s) name(s) (glob) to avoid extending.
          *
          * @since       2.0.0
          * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
-        excludePackages: ['@website/*', '@example/*', '@tests/*'],
+        excludePackages: ['@website/*', '@example/*', '@tests/*', '@app/*'],
 
         read: {
             /**

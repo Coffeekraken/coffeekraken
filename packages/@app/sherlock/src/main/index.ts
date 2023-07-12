@@ -1,19 +1,30 @@
-import { electronApp, is, optimizer } from '@electron-toolkit/utils'
-import { BrowserWindow, app, shell } from 'electron'
-import { join } from 'path'
-import icon from '../../resources/icon.png?asset.js'
+import { electronApp, is, optimizer } from '@electron-toolkit/utils';
+import { BrowserWindow, app, ipcMain, shell } from 'electron';
+import { join } from 'path';
+import icon from '../../resources/icon.png?asset.js';
+
+import __SherlockApp from './ShelockApp.js';
+
+import { execSync } from 'child_process';
+
+console.log('Rebuilding "canvas" module...');
+execSync('npm rebuild canvas');
+
+let sherlockApp = new __SherlockApp();
 
 function createWindow(): void {
+
     // Create the browser window.
     const mainWindow = new BrowserWindow({
-        width: 900,
-        height: 670,
+        width: 1920,
+        height: 1080,
         show: false,
         autoHideMenuBar: true,
         ...(process.platform === 'linux' ? { icon } : {}),
         webPreferences: {
             preload: join(__dirname, '../preload/index.js'),
-            sandbox: false
+            sandbox: false,
+            // webSecurity: false
         }
     })
 
@@ -41,6 +52,16 @@ function createWindow(): void {
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
 app.whenReady().then(() => {
+
+    // exposes API
+    ipcMain.handle('spaces:get', sherlockApp.adapter.getSpaces.bind(sherlockApp.adapter));
+    ipcMain.handle('clients:get', (e, spaceUid: string) => {
+        return sherlockApp.adapter.getClients(spaceUid);
+    });
+    ipcMain.handle('services:get', (e, clientUid: string) => {
+        return sherlockApp.adapter.getServices(clientUid);
+    });
+
     // Set app user model id for windows
     electronApp.setAppUserModelId('com.electron')
 

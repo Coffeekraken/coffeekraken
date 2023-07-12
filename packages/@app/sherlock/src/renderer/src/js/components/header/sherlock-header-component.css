@@ -1,0 +1,13 @@
+sherlock-header {
+    display: block;
+}
+
+.sh-header {
+    display: flex;
+    height: 80px;
+    margin-left: 100px;
+    align-items: center;
+    background: sugar.color(main, background, --darken 5% --alpha 0.4);
+    backdrop-filter: blur(10px);
+    padding-inline: sugar.padding(30);
+}

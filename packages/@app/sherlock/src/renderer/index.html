@@ -2,17 +2,22 @@
 <html>
     <head>
         <meta charset="UTF-8" />
-        <title>Electron</title>
+        <title>Sherlock</title>
         <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
-        <meta
+        <!-- <meta
             http-equiv="Content-Security-Policy"
             content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'"
+        /> -->
+        <meta
+            http-equiv="Content-Security-Policy"
+            content="default-src 'self'; script-src 'self'; img-src *; style-src-elem *; font-src *;"
         />
 
+        <script type="module" src="./src/js/index.ts" defer></script>
         <link href="./src/css/index.css" type="text/css" rel="stylesheet" />
     </head>
 
-    <body>
-        <script type="module" src="./src/js/index.ts"></script>
+    <body s-sugar>
+        <sherlock-app></sherlock-app>
     </body>
 </html>

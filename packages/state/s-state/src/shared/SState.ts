@@ -185,16 +185,29 @@ export default class SState extends __SClass {
         Object.defineProperty(proxy, '$set', {
             enumerable: false,
             get() {
-                return (event: string, handler: Function): any => {
-                    return _this._eventEmitter.on(`set.${event}`, handler);
+                return (props: string | string[], handler: Function): any => {
+                    if (!Array.isArray(props)) {
+                        props = [props];
+                    }
+                    props.forEach((prop) => {
+                        return _this._eventEmitter.on(`set.${prop}`, handler);
+                    });
                 };
             },
         });
         Object.defineProperty(proxy, '$delete', {
             enumerable: false,
             get() {
-                return (event: string, handler: Function): any => {
-                    return _this._eventEmitter.on(`delete.${event}`, handler);
+                return (props: string | string[], handler: Function): any => {
+                    if (!Array.isArray(props)) {
+                        props = [props];
+                    }
+                    props.forEach((prop) => {
+                        return _this._eventEmitter.on(
+                            `delete.${prop}`,
+                            handler,
+                        );
+                    });
                 };
             },
         });

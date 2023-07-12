@@ -1,5 +1,7 @@
 @sugar.import ('./sugar.css');
+@sugar.import ('./generic/**/*.css');
+@sugar.import ('../js/**/*.css');
 
 body {
-    background: sugar.color(accent);
+    
 }

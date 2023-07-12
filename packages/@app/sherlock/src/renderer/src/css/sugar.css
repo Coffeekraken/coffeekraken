@@ -1,2 +1,8 @@
 /* init theme */
 @sugar.init ($variant: dark);
+
+@sugar.ui.button.classes;
+
+@sugar.shape.classes;
+@sugar.color.classes;
+@sugar.flex.classes;

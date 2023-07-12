@@ -1,11 +1,10 @@
-;(() => {
-    window.addEventListener('DOMContentLoaded', () => {
-        doAThing()
-    })
-})()
+import { __define as __SSugarFeatureDefine } from '@coffeekraken/s-sugar-feature';
 
-function doAThing(): void {
-    // const versions = window.electron.process.versions
+import './components/app/SherlockAppComponent.js';
 
-    console.log('Hello world')
-}
+(async () => {
+
+    // features
+    __SSugarFeatureDefine();
+
+})();

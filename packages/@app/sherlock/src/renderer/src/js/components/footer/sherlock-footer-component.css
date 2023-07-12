@@ -1,0 +1,11 @@
+sherlock-footer {
+    display: block;
+}
+
+.sh-footer {
+    display: flex;
+    height: 30px;
+    align-items: center;
+    background: sugar.color(main, background, --darken 5% --alpha 0.4);
+    backdrop-filter: blur(10px);
+}

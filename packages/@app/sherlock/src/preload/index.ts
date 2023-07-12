@@ -1,5 +1,12 @@
-import { contextBridge } from 'electron'
-import { electronAPI } from '@electron-toolkit/preload'
+import { electronAPI } from '@electron-toolkit/preload';
+import { contextBridge, ipcRenderer } from 'electron';
+
+// Expose some API
+contextBridge.exposeInMainWorld('sherlock', {
+  getSpaces: () => ipcRenderer.invoke('spaces:get'),
+  getClients: (spaceUid: string) => ipcRenderer.invoke('clients:get', spaceUid),
+  getServices: (clientUid: string) => ipcRenderer.invoke('services:get', clientUid)
+});
 
 // Custom APIs for renderer
 const api = {}

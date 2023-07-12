@@ -21,11 +21,16 @@
   },
   "dependencies": {
     "@coffeekraken/s-postcss-sugar-plugin": "2.0.0-alpha.27",
+    "@coffeekraken/s-state": "2.0.0-alpha.27",
+    "@coffeekraken/s-sugar-feature": "2.0.0-alpha.27",
     "@coffeekraken/s-vite-postcss-plugin": "2.0.0-alpha.27",
     "@electron-toolkit/preload": "^2.0.0",
     "@electron-toolkit/utils": "^1.0.2",
+    "@fortawesome/fontawesome-free": "^6.4.0",
     "canvas": "^2.11.2",
-    "electron-updater": "^5.3.0"
+    "contentful": "^10.3.4",
+    "electron-updater": "^5.3.0",
+    "lit": "^2.7.6"
   },
   "devDependencies": {
     "@electron-toolkit/tsconfig": "^1.0.1",

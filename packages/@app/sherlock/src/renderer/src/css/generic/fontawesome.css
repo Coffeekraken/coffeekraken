@@ -1,0 +1,6 @@
+.svg-inline--fa {
+    display: inline-block;
+    width: 1em; height: 1em;
+    position: relative;
+    /* top: 0.1em; */
+}

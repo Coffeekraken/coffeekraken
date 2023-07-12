@@ -1,7 +1,5 @@
 // import __postcssSugarPlugin from "@coffeekraken/s-vite-postcss-plugin";
 import __postcssSugarPlugin from '@coffeekraken/s-postcss-sugar-plugin'
-import __postcssImport from 'postcss-import'
-import __postcssNested from 'postcss-nested'
 // import __postcssAtroot from "postcss-atroot";
 // import __postcssExtendRule from "postcss-extend-rule";
 // import __postcssPropertyLookup from "postcss-property-lookup";
@@ -21,7 +19,9 @@ export default defineConfig({
           preserveSymlinks: true,
           // extensions: ['.js','']
         },
-        // plugins: [externalizeDepsPlugin()]
+        optimizeDeps: {
+            exclude: ['@coffeekraken/*']
+        },
         css: {
             postcss: {
                 plugins: [

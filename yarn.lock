@@ -34,16 +34,20 @@ __metadata:
   resolution: "@app/sherlock@workspace:packages/@app/sherlock"
   dependencies:
     "@coffeekraken/s-postcss-sugar-plugin": 2.0.0-alpha.27
+    "@coffeekraken/s-state": 2.0.0-alpha.27
+    "@coffeekraken/s-sugar-feature": 2.0.0-alpha.27
     "@coffeekraken/s-vite-postcss-plugin": 2.0.0-alpha.27
     "@electron-toolkit/preload": ^2.0.0
     "@electron-toolkit/tsconfig": ^1.0.1
     "@electron-toolkit/utils": ^1.0.2
     "@electron/notarize": ^1.2.3
+    "@fortawesome/fontawesome-free": ^6.4.0
     "@types/node": ^18.16.16
     "@typescript-eslint/eslint-plugin": ^5.59.8
     "@typescript-eslint/parser": ^5.59.8
     autoprefixer: ^10.4.14
     canvas: ^2.11.2
+    contentful: ^10.3.4
     electron: 24.4.1
     electron-builder: ^23.6.0
     electron-updater: ^5.3.0
@@ -51,6 +55,7 @@ __metadata:
     eslint: ^8.42.0
     eslint-config-prettier: ^8.8.0
     eslint-plugin-prettier: ^4.2.1
+    lit: ^2.7.6
     postcss: ^8.4.25
     postcss-atroot: ^0.2.3
     postcss-extend-rule: ^4.0.0
@@ -2898,7 +2903,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/s-state@^2.0.0-alpha.27, @coffeekraken/s-state@workspace:packages/state/s-state":
+"@coffeekraken/s-state@2.0.0-alpha.27, @coffeekraken/s-state@^2.0.0-alpha.27, @coffeekraken/s-state@workspace:packages/state/s-state":
   version: 0.0.0-use.local
   resolution: "@coffeekraken/s-state@workspace:packages/state/s-state"
   dependencies:
@@ -2996,7 +3001,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/s-sugar-feature@^2.0.0-alpha.27, @coffeekraken/s-sugar-feature@workspace:packages/features/s-sugar-feature":
+"@coffeekraken/s-sugar-feature@2.0.0-alpha.27, @coffeekraken/s-sugar-feature@^2.0.0-alpha.27, @coffeekraken/s-sugar-feature@workspace:packages/features/s-sugar-feature":
   version: 0.0.0-use.local
   resolution: "@coffeekraken/s-sugar-feature@workspace:packages/features/s-sugar-feature"
   dependencies:
@@ -3362,6 +3367,13 @@ __metadata:
     yaml: ^1.10.2
   languageName: unknown
   linkType: soft
+
+"@contentful/rich-text-types@npm:^16.0.2":
+  version: 16.2.0
+  resolution: "@contentful/rich-text-types@npm:16.2.0"
+  checksum: ec9390201e7e7c1419b61efee12845169665b336fe866132515f61ed7ab6753a997d1336b13cb2962eb48db01deef4a5a035e929344eec41f1b58227d78ecff9
+  languageName: node
+  linkType: hard
 
 "@cronvel/get-pixels@npm:^3.4.0":
   version: 3.4.1
@@ -4440,6 +4452,13 @@ __metadata:
   dependencies:
     "@floating-ui/core": ^0.7.3
   checksum: 9f9d8a51a828c6be5f187204aa6d293c6c9ef70d51dcc5891a4d85683745fceebf79ff8826d0f75ae41b45c3b138367d339756f27f41be87a8770742ebc0de42
+  languageName: node
+  linkType: hard
+
+"@fortawesome/fontawesome-free@npm:^6.4.0":
+  version: 6.4.0
+  resolution: "@fortawesome/fontawesome-free@npm:6.4.0"
+  checksum: 0197cd7df96de375862fea561d69427deebb918cadc26074cc8d490180d536e7e58853d138ca74d081b46b2cbdec2783d01cdaccb8bd723d6ef6b4cc8455b84b
   languageName: node
   linkType: hard
 
@@ -8046,6 +8065,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"axios@npm:^0.26.1":
+  version: 0.26.1
+  resolution: "axios@npm:0.26.1"
+  dependencies:
+    follow-redirects: ^1.14.8
+  checksum: d9eb58ff4bc0b36a04783fc9ff760e9245c829a5a1052ee7ca6013410d427036b1d10d04e7380c02f3508c5eaf3485b1ae67bd2adbfec3683704745c8d7a6e1a
+  languageName: node
+  linkType: hard
+
 "axios@npm:^0.27.2":
   version: 0.27.2
   resolution: "axios@npm:0.27.2"
@@ -9660,6 +9688,42 @@ __metadata:
   version: 1.0.5
   resolution: "content-type@npm:1.0.5"
   checksum: 566271e0a251642254cde0f845f9dd4f9856e52d988f4eb0d0dcffbb7a1f8ec98de7a5215fc628f3bce30fe2fb6fd2bc064b562d721658c59b544e2d34ea2766
+  languageName: node
+  linkType: hard
+
+"contentful-resolve-response@npm:^1.3.6":
+  version: 1.7.0
+  resolution: "contentful-resolve-response@npm:1.7.0"
+  dependencies:
+    fast-copy: ^2.1.7
+  checksum: 54c92a84c7fdb453345e9a4acc2d26d16c1b970a18ac23929fcf110b8eadf3b23cf792c1baad4bce5f14197c818b013c78098dec93a35cacade76ded6297dd2e
+  languageName: node
+  linkType: hard
+
+"contentful-sdk-core@npm:^7.0.2":
+  version: 7.1.0
+  resolution: "contentful-sdk-core@npm:7.1.0"
+  dependencies:
+    fast-copy: ^2.1.7
+    lodash.isplainobject: ^4.0.6
+    lodash.isstring: ^4.0.1
+    p-throttle: ^4.1.1
+    qs: ^6.9.4
+  checksum: 9f31cef7f2d7a6247ec5473315ed9c5574d93f8afb9748bfbf2439b2c54552b3689cb48ff7512f05fdc4930b2d19363b2a7f6cea0c426d8d5cfe71b9987427e8
+  languageName: node
+  linkType: hard
+
+"contentful@npm:^10.3.4":
+  version: 10.3.4
+  resolution: "contentful@npm:10.3.4"
+  dependencies:
+    "@contentful/rich-text-types": ^16.0.2
+    axios: ^0.26.1
+    contentful-resolve-response: ^1.3.6
+    contentful-sdk-core: ^7.0.2
+    json-stringify-safe: ^5.0.1
+    type-fest: ^3.1.0
+  checksum: 493736968b5a7e912191370ed1c0fa72cdf5cef0adcf6d860b2611524a55bac33d9ee2148befc890e455b53925c6b9e6433063e61c4c3bafcd78c6b13cf27cda
   languageName: node
   linkType: hard
 
@@ -12797,6 +12861,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"fast-copy@npm:^2.1.7":
+  version: 2.1.7
+  resolution: "fast-copy@npm:2.1.7"
+  checksum: af8016c174b02bd4f706ffdf9f138511b17b748665b291fec6c5ca1922cb55da35cf86ded46b31890930bcf9b1c2481c03c793a47110ab81ec385e14972b9d7e
+  languageName: node
+  linkType: hard
+
 "fast-deep-equal@npm:^3.1.1, fast-deep-equal@npm:^3.1.3":
   version: 3.1.3
   resolution: "fast-deep-equal@npm:3.1.3"
@@ -13305,7 +13376,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"follow-redirects@npm:^1.0.0, follow-redirects@npm:^1.14.9":
+"follow-redirects@npm:^1.0.0, follow-redirects@npm:^1.14.8, follow-redirects@npm:^1.14.9":
   version: 1.15.2
   resolution: "follow-redirects@npm:1.15.2"
   peerDependenciesMeta:
@@ -16872,7 +16943,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"lit@npm:^2.0.0, lit@npm:^2.2.8, lit@npm:^2.5.0":
+"lit@npm:^2.0.0, lit@npm:^2.2.8, lit@npm:^2.5.0, lit@npm:^2.7.6":
   version: 2.7.6
   resolution: "lit@npm:2.7.6"
   dependencies:
@@ -17036,6 +17107,20 @@ __metadata:
   version: 4.5.0
   resolution: "lodash.isequal@npm:4.5.0"
   checksum: da27515dc5230eb1140ba65ff8de3613649620e8656b19a6270afe4866b7bd461d9ba2ac8a48dcc57f7adac4ee80e1de9f965d89d4d81a0ad52bb3eec2609644
+  languageName: node
+  linkType: hard
+
+"lodash.isplainobject@npm:^4.0.6":
+  version: 4.0.6
+  resolution: "lodash.isplainobject@npm:4.0.6"
+  checksum: 29c6351f281e0d9a1d58f1a4c8f4400924b4c79f18dfc4613624d7d54784df07efaff97c1ff2659f3e085ecf4fff493300adc4837553104cef2634110b0d5337
+  languageName: node
+  linkType: hard
+
+"lodash.isstring@npm:^4.0.1":
+  version: 4.0.1
+  resolution: "lodash.isstring@npm:4.0.1"
+  checksum: eaac87ae9636848af08021083d796e2eea3d02e80082ab8a9955309569cb3a463ce97fd281d7dc119e402b2e7d8c54a23914b15d2fc7fff56461511dc8937ba0
   languageName: node
   linkType: hard
 
@@ -19068,6 +19153,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"p-throttle@npm:^4.1.1":
+  version: 4.1.1
+  resolution: "p-throttle@npm:4.1.1"
+  checksum: fe8709f3c3b1da7c033479375c2c302e80c1a5d86449013afa7cd46d1dc210bc824a7e4a9d088e66d31987d00878c2b5491bb2fe76246d4d2fc9a1636f5f8298
+  languageName: node
+  linkType: hard
+
 "p-timeout@npm:^1.1.1":
   version: 1.2.1
   resolution: "p-timeout@npm:1.2.1"
@@ -20964,7 +21056,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"qs@npm:^6.1.0, qs@npm:^6.4.0":
+"qs@npm:^6.1.0, qs@npm:^6.4.0, qs@npm:^6.9.4":
   version: 6.11.2
   resolution: "qs@npm:6.11.2"
   dependencies:
@@ -24049,6 +24141,13 @@ __metadata:
   version: 1.4.0
   resolution: "type-fest@npm:1.4.0"
   checksum: b011c3388665b097ae6a109a437a04d6f61d81b7357f74cbcb02246f2f5bd72b888ae33631b99871388122ba0a87f4ff1c94078e7119ff22c70e52c0ff828201
+  languageName: node
+  linkType: hard
+
+"type-fest@npm:^3.1.0":
+  version: 3.13.0
+  resolution: "type-fest@npm:3.13.0"
+  checksum: f7be142ae1ad0582eafd52d085350799c8cd918c15455896a06c82c147b61f8cea58892bedf1348943478e37740562219375b3b59fd855db99cd2b2766510f98
   languageName: node
   linkType: hard
 

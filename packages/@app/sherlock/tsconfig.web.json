@@ -4,6 +4,8 @@
   "compilerOptions": {
     "moduleResolution": "node",
     "sourceMap": true,
-    "composite": true
+    "composite": true,
+    "target": "ES5",
+    "experimentalDecorators": true
   }
 }

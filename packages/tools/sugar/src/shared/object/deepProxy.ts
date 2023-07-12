@@ -2,6 +2,7 @@
 
 import __proxyArray from '../array/proxyArray.js';
 import __isDomElement from '../is/isDomElement.js';
+import __isPlainObject from '../is/isPlainObject.js';
 import __clone from '../object/clone.js';
 import __deepMap from '../object/deepMap.js';
 import __deepMerge from '../object/deepMerge.js';
@@ -102,7 +103,11 @@ export default function __deepProxy(
                 if (value === target[key]) return true;
 
                 // handle deep proxy
-                if (settings.deep && typeof value === 'object') {
+                if (
+                    settings.deep &&
+                    typeof value === 'object' &&
+                    __isPlainObject(value)
+                ) {
                     value = proxify(value, [...path, key]);
                 }
 
@@ -192,7 +197,10 @@ export default function __deepProxy(
                             });
                         },
                     );
-                } else if (typeof obj[key] === 'object') {
+                } else if (
+                    typeof obj[key] === 'object' &&
+                    __isPlainObject(obj[key])
+                ) {
                     obj[key] = proxify(obj[key], [...path, key]);
                 }
             }

@@ -15,12 +15,12 @@ export default defineConfig({
         plugins: [externalizeDepsPlugin()]
     },
     renderer: {
-        resolve: {
-          preserveSymlinks: true,
-          // extensions: ['.js','']
-        },
+        // resolve: {
+        //   preserveSymlinks: true,
+        //   // extensions: ['.js','']
+        // },
         optimizeDeps: {
-            exclude: ['@coffeekraken/*']
+            exclude: ['@coffeekraken/s-dobby']
         },
         css: {
             postcss: {

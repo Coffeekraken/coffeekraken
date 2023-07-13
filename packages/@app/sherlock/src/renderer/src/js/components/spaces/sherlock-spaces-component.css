@@ -15,6 +15,7 @@ sherlock-spaces {
     background: sugar.color(main, background, --darken 5% --alpha 0.6);
     backdrop-filter: blur(10px);
     padding: sugar.padding(30);
+    padding-top: sugar.padding(50);
 
     ._space {
         position: relative;
@@ -27,8 +28,10 @@ sherlock-spaces {
         &:after {
             content: '';
             position: absolute;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
             border: 3px solid sugar.color(accent, --alpha 0);
             border-radius: 50%;
             @sugar.transition fast;
@@ -46,9 +49,9 @@ sherlock-spaces {
         }
     }
     ._figure {
-
         img {
-            width: 100%; height: 100%;
+            width: 100%;
+            height: 100%;
             object-fit: cover;
         }
 

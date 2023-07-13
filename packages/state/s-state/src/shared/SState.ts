@@ -217,6 +217,12 @@ export default class SState extends __SClass {
                 return true;
             },
         });
+        Object.defineProperty(proxy, 'length', {
+            enumerable: false,
+            get() {
+                return Object.keys(proxy).length;
+            },
+        });
 
         // restoring state if wanted
         if (this.settings.save) {

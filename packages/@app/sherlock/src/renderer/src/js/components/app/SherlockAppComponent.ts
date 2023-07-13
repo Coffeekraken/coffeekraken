@@ -1,15 +1,14 @@
-import { LitElement, css, html } from 'lit';
-import { customElement } from 'lit/decorators.js';
+import { LitElement, css, html } from 'lit'
+import { customElement } from 'lit/decorators.js'
 
+import __sherlockStores from '../../stores/SherlockStores.js'
 
-import __sherlockAppStore from '../../stores/SherlockAppStore.js';
+import '@fortawesome/fontawesome-free/js/all'
 
-import "@fortawesome/fontawesome-free/js/all";
-
-import '../footer/SherlockFooterComponent.js';
-import '../header/SherlockHeaderComponent.js';
-import '../service/SherlockServiceComponent.js';
-import '../sidebar/SherlockSidebarComponent.js';
+import '../footer/SherlockFooterComponent.js'
+import '../header/SherlockHeaderComponent.js'
+import '../service/SherlockServiceComponent.js'
+import '../sidebar/SherlockSidebarComponent.js'
 
 @customElement('sherlock-app')
 export class SherlockAppComponent extends LitElement {
@@ -18,40 +17,31 @@ export class SherlockAppComponent extends LitElement {
     constructor() {
         super()
 
-        // load the resources
-        this._load();
-
         // listen for store changes
-        __sherlockAppStore.$set('*', () => {
+        __sherlockStores.route.$set('service', () => {
             this.requestUpdate()
         })
-        __sherlockAppStore.$set('currentSpace', async () => {
-            const clients = await window.sherlock.getClients(__sherlockAppStore.currentSpace.uid);
-            __sherlockAppStore.currentSpace.clients = clients;
+        __sherlockStores.app.$set('*', () => {
+            this.requestUpdate()
         })
-    }
-
-    // @property({type: String})
-    // name?: string = 'World';
-
-    async _load() {
-      // load the spaces
-      const spaces = await window.sherlock.getSpaces();
-      __sherlockAppStore.spaces = spaces;
     }
 
     render() {
         return html`
             <div class="_bkg"></div>
             <div class="sh-app">
+                <div class="_dragger"></div>
                 <sherlock-header></sherlock-header>
                 <div class="_body">
                     <sherlock-sidebar></sherlock-sidebar>
 
-                    ${__sherlockAppStore.currentService ? html`
-                        <sherlock-service .service=${__sherlockAppStore.currentService}></sherlock-service>
-                    ` : ''}
-                    
+                    ${__sherlockStores.route.service
+                        ? html`
+                              <sherlock-service
+                                  .service=${__sherlockStores.route.service}
+                              ></sherlock-service>
+                          `
+                        : ''}
                 </div>
                 <sherlock-footer></sherlock-footer>
             </div>

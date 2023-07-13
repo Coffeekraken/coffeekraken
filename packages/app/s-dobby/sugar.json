@@ -1,0 +1,23 @@
+{
+    "config": {
+        "folders": [
+            {
+                "path": "./dist/pkg/%moduleSystem/config"
+            }
+        ]
+    },
+    "cli": [
+        {
+            "stack": "dobby",
+            "description": "Dobby API",
+            "defaultAction": "start",
+            "actions": {
+                "start": {
+                    "scope": "package",
+                    "description": "Start a new dobby process",
+                    "process": "./dist/pkg/esm/cli/start.cli.js"
+                }
+            }
+        }
+    ]
+}

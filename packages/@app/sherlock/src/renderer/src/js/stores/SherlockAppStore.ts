@@ -1,21 +1,39 @@
-import __SState from '@coffeekraken/s-state';
+import __SState from '@coffeekraken/s-state'
 
-import type { ISherlockService, ISherlockSpace, ISherlockUiClientStates } from '../../../../shared/SherlockTypes';
+import type {
+    ISherlockService,
+    ISherlockSpace,
+    ISherlockUiClientStates
+} from '../../../../shared/SherlockTypes'
 
-export interface ISherlockAppStore {
-    title: string;
-    spaces: ISherlockSpace[];
-    currentSpace: ISherlockSpace;
-    currentService: ISherlockService;
-    clientStates: ISherlockUiClientStates;
+export interface ISetRouteParams {
+    space?: string
+    client?: string
+    service?: string
 }
 
-const appState = new __SState({
-    title: 'Sherlock',
-    spaces: [],
-    currentSpace: null,
-    currentService: null,
-    clientStates: {}
-});
+export interface ISherlockAppStore {
+    title: string
+    route: string[]
+    space: string
+    clientStates: ISherlockUiClientStates
+}
 
-export default appState
+const appStore = new __SState({
+    title: 'Sherlock',
+    route: [],
+    space: null,
+    clientStates: {}
+})
+
+export function __setRoute(params: ISetRouteParams): void {
+    const newRoute = []
+    if (params.space) {
+        newRoute.push(params.space)
+    }
+    if (params.client) {
+        newRoute.push(params.client)
+    }
+}
+
+export default appStore

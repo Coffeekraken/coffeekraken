@@ -5,9 +5,9 @@ import type { ISherlockClient, ISherlockService, ISherlockSpace } from '../../sh
 export interface ISherlockAdapterSettings {}
 
 export interface ISherlockAdapter {
-    getSpaces(): Promise<ISherlockSpace[]>;
-    getClients(spaceUid: string): Promise<ISherlockClient[]>;
-    getServices(clientUid: string): Promise<ISherlockService[]>;
+    getSpaces(): Promise<Record<string, ISherlockSpace>>;
+    getClients(spaceUid: string): Promise<Record<string, ISherlockClient>>;
+    getServices(clientUid: string): Promise<Record<string, ISherlockService>>;
 }
 
 export default class SherlockAdapter {

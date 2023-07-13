@@ -36,14 +36,15 @@ export default class SherlockContentfulAdapter extends __SherlockAdapter impleme
             }
         }
     }
-    getSpaces(): Promise<ISherlockSpace[]> {
+    getSpaces(): Promise<Record<string, ISherlockSpace>> {
         return new Promise(async (resolve) => {
             const entries = await this._client
                 .getEntries({
                     content_type: 'space',
                 });
-            const spaces = entries.items.map(entry => {
-                return this._processSpaceFromEntry(entry);
+            const spaces = {};
+            entries.items.forEach(entry => {
+                spaces[entry.fields.uid] = this._processSpaceFromEntry(entry);
             });
             resolve(spaces);
         });
@@ -54,10 +55,10 @@ export default class SherlockContentfulAdapter extends __SherlockAdapter impleme
             uid: entry.fields.uid,
             name: entry.fields.name,
             description: entry.fields.description,
-            space: entry.fields.space?.uid ? this._processSpaceFromEntry(entry.fields.space) : undefined
+            space: entry.fields.space?.uid
         };
     }
-    getClients(spaceUid: string): Promise<ISherlockClient[]> {
+    getClients(spaceUid: string): Promise<Record<string, ISherlockClient>> {
         return new Promise(async (resolve) => {
 
             const entries = await this._client.getEntries({
@@ -66,10 +67,10 @@ export default class SherlockContentfulAdapter extends __SherlockAdapter impleme
                 'fields.space.sys.contentType.sys.id': 'space'
             });
 
-            const clients = entries.items.map(entry => {
-                return this._processClientFromEntry(entry);
+            const clients = {};
+            entries.items.forEach(entry => {
+                clients[entry.fields.uid] = this._processClientFromEntry(entry);
             })
-
             resolve(clients);
         });
     }
@@ -80,10 +81,10 @@ export default class SherlockContentfulAdapter extends __SherlockAdapter impleme
             name: entry.fields.name,
             description: entry.fields.description,
             url: entry.fields.url,
-            client: entry.fields.client?.uid ? this._processClientFromEntry(entry.fields.client) : undefined
+            client: entry.fields.client?.uid
         };
     }
-    getServices(clientUid: string): Promise<ISherlockService[]> {
+    getServices(clientUid: string): Promise<Record<string, ISherlockService>> {
         return new Promise(async (resolve) => {
 
             const entries = await this._client.getEntries({
@@ -92,8 +93,9 @@ export default class SherlockContentfulAdapter extends __SherlockAdapter impleme
                 'fields.client.sys.contentType.sys.id': 'client'
             });
 
-            const services = entries.items.map(entry => {
-                return this._processServiceFromEntry(entry);
+            const services = {};
+            entries.items.forEach(entry => {
+                services[entry.fields.uid] = this._processServiceFromEntry(entry);
             })
 
             resolve(services);

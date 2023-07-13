@@ -1,5 +1,5 @@
 sherlock-sidebar {
-        display: flex;
+    display: flex;
 }
 
 .sh-sidebar {
@@ -11,18 +11,20 @@ sherlock-sidebar {
 
     ._clients {
         width: 100%;
+        padding: sugar.padding(30);
+        display: flex;
+        flex-direction: column;
+        /* gap: sugar.margin(30); */
     }
     ._client {
         width: 100%;
-
-        &:not(:last-child) {
-            border-bottom: 1px dashed sugar.color(main, background, --lighten 10%);
-        }
     }
     ._client-name {
-        padding: sugar.padding(30);
+        padding: sugar.padding(20) sugar.padding(30);
         cursor: pointer;
         @sugar.transition fast;
+        border-radius: 999px;
+        background: sugar.color(main, --alpha 0.1);
 
         &:hover {
             background: sugar.color(main, --alpha 0.2);
@@ -30,14 +32,14 @@ sherlock-sidebar {
 
         .svg-inline--fa {
             float: right;
-                transform: rotateZ(-180deg);
-                @sugar.transition;
+            transform: rotateZ(180deg);
+            @sugar.transition;
         }
     }
     ._client.active {
-
         ._client-name {
             background: sugar.color(main, --alpha 0.3);
+            transform: scale(1.02);
         }
 
         .svg-inline--fa {
@@ -47,8 +49,9 @@ sherlock-sidebar {
 
     ._services {
         width: 100%;
-         display: grid;
+        display: grid;
         grid-template-rows: 0fr;
+        padding: sugar.padding(20) sugar.padding(10);
         @sugar.transition;
 
         ._inner {
@@ -58,7 +61,6 @@ sherlock-sidebar {
     ._client.active {
         ._services {
             grid-template-rows: 1fr;
-
         }
     }
 
@@ -66,19 +68,20 @@ sherlock-sidebar {
         width: 100%;
     }
     ._service-name {
-        padding: sugar.padding(20) sugar.padding(30);
+        padding: sugar.padding(10) sugar.padding(20);
         cursor: pointer;
         @sugar.transition fast;
+        border-radius: 999px;
 
         &:hover {
-            background: sugar.color(complementary, text, --alpha 0.5);
+            background: sugar.color(complementary, --alpha 0.5);
         }
 
         .svg-inline--fa {
             position: relative;
-            top:0.1em;
+            top: 0.1em;
             margin-inline-end: sugar.margin(10);
-            
+
             [fill] {
                 fill: sugar.color(success);
             }
@@ -86,8 +89,7 @@ sherlock-sidebar {
     }
     ._service.active {
         ._service-name {
-            background: sugar.color(complementary, text);
+            background: sugar.color(complementary);
         }
     }
-
 }

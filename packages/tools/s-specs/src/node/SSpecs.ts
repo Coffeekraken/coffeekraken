@@ -1,6 +1,7 @@
 import __SClass from '@coffeekraken/s-class';
 import __SInterface from '@coffeekraken/s-interface';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
+import { __parseArgs } from '@coffeekraken/sugar/cli';
 import { __readJsonSync } from '@coffeekraken/sugar/fs';
 import { __isPlainObject } from '@coffeekraken/sugar/is';
 import {
@@ -175,6 +176,19 @@ export default class SSpecs extends __SClass {
 
         // return the new spec json
         return specJson;
+    }
+
+    static apply(what: string | any, spec: any): any {
+        if (!spec) {
+            throw new Error(
+                `[SSpecs.apply] You MUST specify a valid spec object as the second parameter...`,
+            );
+        }
+
+        if (typeof what === 'string') {
+            what = __parseArgs(what);
+        }
+        return __deepMerge(this.extractDefaults(spec), what);
     }
 
     static extractDefaults(specs: any): any {

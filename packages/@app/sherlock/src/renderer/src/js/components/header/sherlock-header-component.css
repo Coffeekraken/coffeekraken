@@ -10,4 +10,16 @@ sherlock-header {
     background: sugar.color(main, background, --darken 5% --alpha 0.4);
     backdrop-filter: blur(10px);
     padding-inline: sugar.padding(30);
+
+    .s-logo {
+        width: 30px;
+    }
+
+    ._title {
+        font-size: sugar.font.size(50);
+        position: relative;
+        top: 1px;
+        margin-inline-start: sugar.margin(20);
+        color: sugar.color(accent);
+    }
 }

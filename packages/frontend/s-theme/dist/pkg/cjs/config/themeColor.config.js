@@ -58,14 +58,14 @@ exports.default = (api) => {
          * @name                complementary
          * @namespace            config.themeColor
          * @type                Color
-         * @default             #5100ff
+         * @default             #8054F9
          *
          * Specify the "complementary" color value.
          *
          * @since             2.0.0
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
-        complementary: '#5100ff',
+        complementary: '#8054F9',
         /**
          * @name                success
          * @namespace            config.themeColor

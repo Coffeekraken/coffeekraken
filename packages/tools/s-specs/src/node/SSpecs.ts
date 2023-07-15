@@ -188,7 +188,11 @@ export default class SSpecs extends __SClass {
         if (typeof what === 'string') {
             what = __parseArgs(what);
         }
-        return __deepMerge(this.extractDefaults(spec), what);
+        const specsData = __deepMerge(this.extractDefaults(spec), what);
+
+        // @TODO            implement the "required" checks, etc...
+
+        return specsData;
     }
 
     static extractDefaults(specs: any): any {

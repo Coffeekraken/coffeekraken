@@ -1,6 +1,6 @@
 import { html } from 'lit';
 
-import { define as __SSpacesSelectorComponentDefine } from '@coffeekraken/s-spaces-selector-component';
+import { __define as __SSpacesSelectorComponentDefine } from '@coffeekraken/s-spaces-selector-component';
 
 __SSpacesSelectorComponentDefine();
 

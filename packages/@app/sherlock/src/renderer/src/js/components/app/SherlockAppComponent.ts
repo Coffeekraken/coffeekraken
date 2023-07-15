@@ -3,10 +3,13 @@ import { customElement } from 'lit/decorators.js'
 
 import __sherlockStores from '../../stores/SherlockStores.js'
 
+import { __define as __SSpecsEditorComponentDefine } from '@coffeekraken/s-specs-editor-component'
+
 import '@fortawesome/fontawesome-free/js/all'
 
 import '../footer/SherlockFooterComponent.js'
 import '../header/SherlockHeaderComponent.js'
+import '../newSpace/SherlockNewSpaceComponent.js'
 import '../service/SherlockServiceComponent.js'
 import '../sidebar/SherlockSidebarComponent.js'
 
@@ -16,6 +19,9 @@ export class SherlockAppComponent extends LitElement {
 
     constructor() {
         super()
+
+        // register some components
+        __SSpecsEditorComponentDefine()
 
         // listen for store changes
         __sherlockStores.route.$set('service', () => {
@@ -41,7 +47,7 @@ export class SherlockAppComponent extends LitElement {
                                   .service=${__sherlockStores.route.service}
                               ></sherlock-service>
                           `
-                        : ''}
+                        : html` <sherlock-new-space></sherlock-new-space> `}
                 </div>
                 <sherlock-footer></sherlock-footer>
             </div>

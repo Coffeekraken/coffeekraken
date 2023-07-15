@@ -13,6 +13,7 @@ import __SDuration from '@coffeekraken/s-duration';
 import __nodeSchedule from 'node-schedule';
 
 import __SDobbyFsAdapter from './adapters/SDobbyFsAdapter.js';
+import __SDobbyGunJsAdapter from './adapters/SDobbyGunJsAdapter.js';
 
 import type {
     ISDobbyConfig,
@@ -144,11 +145,15 @@ export default class SDobby extends __SClass {
 
         // default adapter
         if (!this.settings.adapter) {
-            this.settings.adapter = new __SDobbyFsAdapter();
+            this.settings.adapter = new __SDobbyGunJsAdapter({
+                key: 'fjwoiefjijoij3oirjion2fdjineiujfwnuhw0chqowcoqwnfijonqwfqéwnef',
+            });
         }
     }
 
     server(): void {
+        return;
+
         console.log('<yellow>[SDobby]</yellow> Starting websocket server');
         const wss = new WebSocketServer({
             port: 8787,

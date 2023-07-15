@@ -1,5 +1,4 @@
 import __SState from '@coffeekraken/s-state'
-import type { ISDobbyTaskMetas } from '@coffeekraken/s-dobby'
 
 import type { ISherlockSpace } from '../../shared/SherlockTypes.js'
 

@@ -21,4 +21,5 @@ exports.__SDobbyClient = void 0;
 const SDobbyClient_js_1 = __importDefault(require("./SDobbyClient.js"));
 exports.__SDobbyClient = SDobbyClient_js_1.default;
 __exportStar(require("./SDobbyClient.js"), exports);
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0FBQUEsd0VBQStDO0FBRXRDLHlCQUZGLHlCQUFjLENBRUU7QUFEdkIsb0RBQWtDIn0=
+__exportStar(require("./specs.js"), exports);
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0FBQUEsd0VBQStDO0FBR3RDLHlCQUhGLHlCQUFjLENBR0U7QUFGdkIsb0RBQWtDO0FBQ2xDLDZDQUEyQiJ9

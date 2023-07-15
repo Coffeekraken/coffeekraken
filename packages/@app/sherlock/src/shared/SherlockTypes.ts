@@ -9,6 +9,7 @@ export interface ISherlockSpace {
     name: string
     description: string
     image: ISherlockImage
+    adapter: 'fs' | 'gun'
 }
 
 export interface ISherlockClient {

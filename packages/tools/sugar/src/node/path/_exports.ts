@@ -13,6 +13,7 @@ import __packageLocalDir from './packageLocalDir.js';
 import __packageRootDir from './packageRootDir.js';
 import __packageTmpDir from './packageTmpDir.js';
 
+import __homeDir from './homeDir.js';
 import __replacePathTokens from './replacePathTokens.js';
 
 import __srcCssDir from './srcCssDir.js';
@@ -38,6 +39,7 @@ export {
     __distNodeDir,
     __distRootDir,
     __distViewsDir,
+    __homeDir,
     __packageCacheDir,
     __packageLocalDir,
     __packageRootDir,

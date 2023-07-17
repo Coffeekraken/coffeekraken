@@ -75,10 +75,7 @@ export default class SSpecsEditorWidget {
     _errors: string[] = [];
     _warnings: string[] = [];
 
-    constructor(
-        deps: ISSpecsEditorWidgetDeps,
-        settings?: ISSpecsEditorWidgetSettings,
-    ) {
+    constructor(deps: ISSpecsEditorWidgetDeps) {
         this.settings = {
             label: true,
             ...(deps.settings ?? {}),
@@ -267,8 +264,6 @@ export default class SSpecsEditorWidget {
                         '',
                     );
             }
-
-            _console.log('new', newValues);
 
             // set the new value(s)
             __set(this._values, path, newValues, {

@@ -1,12 +1,13 @@
-import { electronAPI } from '@electron-toolkit/preload';
-import { contextBridge, ipcRenderer } from 'electron';
+import { electronAPI } from '@electron-toolkit/preload'
+import { contextBridge, ipcRenderer } from 'electron'
 
 // Expose some API
 contextBridge.exposeInMainWorld('sherlock', {
-  getSpaces: () => ipcRenderer.invoke('spaces:get'),
-  getClients: (spaceUid: string) => ipcRenderer.invoke('clients:get', spaceUid),
-  getServices: (clientUid: string) => ipcRenderer.invoke('services:get', clientUid)
-});
+    getSpaces: () => ipcRenderer.invoke('spaces:get'),
+    newSpace: (space: any) => ipcRenderer.invoke('spaces:new', space),
+    getClients: (spaceUid: string) => ipcRenderer.invoke('clients:get', spaceUid),
+    getServices: (clientUid: string) => ipcRenderer.invoke('services:get', clientUid)
+})
 
 // Custom APIs for renderer
 const api = {}
@@ -15,15 +16,15 @@ const api = {}
 // renderer only if context isolation is enabled, otherwise
 // just add to the DOM global.
 if (process.contextIsolated) {
-  try {
-    contextBridge.exposeInMainWorld('electron', electronAPI)
-    contextBridge.exposeInMainWorld('api', api)
-  } catch (error) {
-    console.error(error)
-  }
+    try {
+        contextBridge.exposeInMainWorld('electron', electronAPI)
+        contextBridge.exposeInMainWorld('api', api)
+    } catch (error) {
+        console.error(error)
+    }
 } else {
-  // @ts-ignore (define in dts)
-  window.electron = electronAPI
-  // @ts-ignore (define in dts)
-  window.api = api
+    // @ts-ignore (define in dts)
+    window.electron = electronAPI
+    // @ts-ignore (define in dts)
+    window.api = api
 }

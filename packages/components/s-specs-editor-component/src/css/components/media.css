@@ -1,20 +1,10 @@
 .s-specs-editor_media-icons {
-    /* float: right; */
-    border-right: 1px solid sugar.color(main, border);
-    padding-inline-end: sugar.padding(20);
-    margin-inline-end: sugar.margin(20);
 }
 .s-specs-editor_media-icon {
-    padding-inline: sugar.padding(10);
     cursor: pointer;
-
-    i {
-        opacity: 0.3;
-    }
 
     &.active {
         position: relative;
-        /* color: sugar.color(accent); */
 
         &:after {
             content: '';
@@ -24,13 +14,10 @@
             right: 0;
             width: 0.5em;
             height: 0.5em;
-            background: sugar.color(accent);
-            border-radius: 50%;
         }
     }
 
     &:hover i,
     &.current i {
-        opacity: 1;
     }
 }

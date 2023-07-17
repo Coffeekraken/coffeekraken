@@ -7,8 +7,8 @@ import __SComponentUtils, {
 } from '@coffeekraken/s-component-utils';
 import __SInterface from '@coffeekraken/s-interface';
 import { __injectStyle, __querySelectorLive } from '@coffeekraken/sugar/dom';
-import { __deepMerge } from '@coffeekraken/sugar/object';
-import { __dashCase } from '@coffeekraken/sugar/string';
+import { __deepMerge, __set } from '@coffeekraken/sugar/object';
+import { __camelCase, __dashCase, __parse } from '@coffeekraken/sugar/string';
 import { LitElement, html as __html } from 'lit';
 
 export { __html as html };
@@ -472,6 +472,13 @@ export default class SLitComponent extends LitElement {
             // default props
             if (finalProps[prop] === undefined && this[prop] === undefined) {
                 finalProps[prop] = defaultProps[prop] ?? obj.default;
+            }
+        }
+
+        const attrs = this.attributes;
+        for (let [id, attr] of Object.entries(attrs)) {
+            if (attr.name.includes('.')) {
+                __set(finalProps, __camelCase(attr.name), __parse(attr.value));
             }
         }
 

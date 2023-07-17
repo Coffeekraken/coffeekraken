@@ -3,5 +3,5 @@
 @sugar.import ('../js/**/*.css');
 
 body {
-    
+    overflow: hidden;
 }

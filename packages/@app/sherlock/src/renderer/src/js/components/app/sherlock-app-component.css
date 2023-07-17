@@ -1,6 +1,25 @@
 sherlock-app {
 }
 
+@keyframes sherlock-popup-in {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+@keyframes sherlock-popup-content-in {
+    0% {
+        opacity: 0;
+        transform: translate(0, 50px);
+    }
+    100% {
+        opacity: 1;
+        transform: translate(0, 0);
+    }
+}
+
 .sh-app {
     position: relative;
     display: flex;
@@ -35,4 +54,45 @@ sherlock-app {
     background-position: 50% 50%;
     filter: grayscale(1);
     opacity: 0.2;
+}
+
+._popup {
+    position: absolute;
+    z-index: 200;
+    top: 50%;
+    left: 50%;
+    width: clamp(250px, 450px, 80vw);
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    @sutar.transition;
+
+    &.active {
+        pointer-events: all;
+    }
+
+    > * {
+        display: block;
+        opacity: 0;
+    }
+    &.active > * {
+        animation: sherlock-popup-content-in 0.2s ease-out 0.2s forwards;
+    }
+
+    &:before {
+        content: '';
+        display: block;
+        position: fixed;
+        width: 200vw;
+        height: 200vh;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: sugar.color(main, surface, --lighten 5% --alpha 0.6);
+        backdrop-filter: blur(10px);
+        opacity: 0;
+    }
+
+    &.active:before {
+        animation: sherlock-popup-in 0.2s ease-out forwards;
+    }
 }

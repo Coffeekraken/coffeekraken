@@ -24,7 +24,7 @@ export class SherlockAppComponent extends LitElement {
         __SSpecsEditorComponentDefine()
 
         // listen for store changes
-        __sherlockStores.route.$set('service', () => {
+        __sherlockStores.route.$set(['service', 'popup'], () => {
             this.requestUpdate()
         })
         __sherlockStores.app.$set('*', () => {
@@ -47,7 +47,13 @@ export class SherlockAppComponent extends LitElement {
                                   .service=${__sherlockStores.route.service}
                               ></sherlock-service>
                           `
-                        : html` <sherlock-new-space></sherlock-new-space> `}
+                        : ``}
+
+                    <div class="_popup ${__sherlockStores.route.popup ? 'active' : ''}">
+                        ${__sherlockStores.route.popup === 'newSpace'
+                            ? html` <sherlock-new-space></sherlock-new-space> `
+                            : ''}
+                    </div>
                 </div>
                 <sherlock-footer></sherlock-footer>
             </div>

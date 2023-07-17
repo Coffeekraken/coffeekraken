@@ -23,6 +23,7 @@ sherlock-spaces {
         aspect-ratio: 1;
         width: 100%;
         border-radius: 50%;
+        cursor: pointer;
         @sugar.transition fast;
 
         &:after {
@@ -49,14 +50,40 @@ sherlock-spaces {
         }
     }
     ._figure {
-        img {
+        position: relative;
+
+        ._media {
             width: 100%;
             height: 100%;
             object-fit: cover;
         }
 
-        figcation {
+        ._caption {
             display: none;
+        }
+
+        ._icon {
+            position: absolute;
+            z-index: 10;
+            font-size: sugar.font.size(50);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+        }
+
+        &:has(._icon) {
+            &:before {
+                content: '';
+                display: block;
+                position: absolute;
+                z-index: 1;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: sugar.color(complementary, --alpha 0.5);
+            }
         }
     }
 }

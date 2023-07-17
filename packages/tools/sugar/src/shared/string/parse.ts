@@ -18,7 +18,7 @@
  * @todo      tests
  *
  * @snippet         __parse($1)
- * 
+ *
  * @example           js
  * import { __parse } from '@coffeekraken/sugar/string';
  *  __parse('10'); // => 10
@@ -30,6 +30,12 @@ export default function (value) {
     // if the value is not a string
     // return it as he's
     if (typeof value !== 'string') return value;
+
+    // true | false | null | undefined
+    if (value === 'true') return true;
+    if (value === 'false') return false;
+    if (value === 'null') return null;
+    if (value === 'undefined') return undefined;
 
     // small dirty hack
     value = value.split('⠀').join('').trim();

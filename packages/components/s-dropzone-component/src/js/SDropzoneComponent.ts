@@ -179,7 +179,7 @@ export default class SDropzoneComponent extends __SLitComponent {
                 });
             });
 
-            // wait for upload complition
+            // wait for upload completion
             request.addEventListener('load', (e) => {
                 const data = JSON.parse(request.response);
 
@@ -365,7 +365,7 @@ export default class SDropzoneComponent extends __SLitComponent {
                                 // add the file to the stack
                                 this.state.files.push({
                                     type: file.type,
-                                    src: image.src,
+                                    url: image.src,
                                     alt: fileName,
                                 });
                                 // mark the file as processed
@@ -388,7 +388,16 @@ export default class SDropzoneComponent extends __SLitComponent {
         });
 
         // handle upload
-        await this._handleUpload(files);
+        if (this.props.upload) {
+            await this._handleUpload(files);
+        } else {
+            // dispatch an "file" event
+            this.state.files.forEach((file) => {
+                this.utils.dispatchEvent('file', {
+                    detail: file,
+                });
+            });
+        }
 
         // remove the loading class
         this.classList.remove('loading');

@@ -7,14 +7,9 @@
     ._color-preview {
         display: block;
         aspect-ratio: 1;
-        height: calc(100% - sugar.margin(20) * 2);
         background: var(--s-color-picker-rgba, blue);
         position: absolute;
         top: 50%;
-        right: sugar.margin(20);
         transform: translate(0, -50%);
-        border: 1px solid sugar.color(main, border);
-        @sugar.border.radius;
-        @sugar.depth (20);
     }
 }

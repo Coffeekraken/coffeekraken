@@ -6,6 +6,7 @@ import icon from '../../resources/icon.png?asset.js'
 import __SherlockApp from './ShelockApp.js'
 
 import { execSync } from 'child_process'
+import { ISherlockSpace } from '../shared/SherlockTypes.js'
 
 console.log('Rebuilding "canvas" module...')
 execSync('npm rebuild canvas')
@@ -58,7 +59,14 @@ function createWindow(): void {
 // Some APIs can only be used after this event occurs.
 app.whenReady().then(() => {
     // exposes API
-    ipcMain.handle('spaces:get', sherlockApp.adapter.getSpaces.bind(sherlockApp.adapter))
+    // ipcMain.handle('spaces:get', sherlockApp.adapter.getSpaces.bind(sherlockApp.adapter))
+    ipcMain.handle('spaces:get', (e) => {
+        return sherlockApp.getSpaces()
+    })
+    ipcMain.handle('spaces:new', (e, space: ISherlockSpace) => {
+        return sherlockApp.newSpace(space)
+    })
+
     ipcMain.handle('clients:get', (e, spaceUid: string) => {
         return sherlockApp.adapter.getClients(spaceUid)
     })

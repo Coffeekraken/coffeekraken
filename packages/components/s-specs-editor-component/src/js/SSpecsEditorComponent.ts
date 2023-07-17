@@ -102,6 +102,7 @@ export interface ISSpecsEditorComponentProps {
     specs: any;
     frontspec: any;
     media: string;
+    actionsPosition: 'top' | 'bottom';
     features: ISSpecsEditorComponentFeatures;
     ghostSpecs: boolean;
     icons: ISSpecsEditorComponentIconsProp;
@@ -224,6 +225,8 @@ export default class SSpecsEditorComponent extends __SLitComponent {
             },
         };
     }
+
+    props: ISSpecsEditorComponentProps;
 
     _isValid = true;
     _widgets = {};
@@ -565,8 +568,6 @@ export default class SSpecsEditorComponent extends __SLitComponent {
             this.state.status.saving = false;
         }, 1000);
 
-        _console.log('save', this.data);
-
         this.utils.dispatchEvent('save', {
             bubbles: true,
             detail: this.data,
@@ -813,9 +814,16 @@ export default class SSpecsEditorComponent extends __SLitComponent {
         pathOrCallback: string[] | Function,
         settings?: ISSpecsEditorRenderSettings,
     ) {
+        console.log('Prop', propObj);
+
         const type =
                 propObj.widget?.toLowerCase?.() ?? propObj.type.toLowerCase(),
-            widget = this.getWidget(type, pathOrCallback, propObj, {});
+            widget = this.getWidget(
+                type,
+                pathOrCallback,
+                propObj,
+                propObj.widgetSettings ?? {},
+            );
 
         return html`
             ${widget?.render
@@ -1258,6 +1266,49 @@ export default class SSpecsEditorComponent extends __SLitComponent {
         }
     }
 
+    _renderActions() {
+        return html`
+            <nav class="_actions">
+                ${this.props.features?.delete
+                    ? html`
+                          <button
+                              class="_action _action-delete"
+                              confirm="Confirm?"
+                              @click=${() => {
+                                  _console.log('delete action to integrate');
+                              }}
+                          >
+                              ${unsafeHTML(this.props.icons.delete)}
+                          </button>
+                      `
+                    : ''}
+                ${this.props.features?.save
+                    ? html`
+                          <button
+                              class="_action _action-save ${this.utils.cls(
+                                  '',
+                                  's-btn',
+                              )} ${this.hasErrors() ? 'error' : ''} ${this.state
+                                  .status.saving === 'success'
+                                  ? 'success'
+                                  : this.state.status.saving
+                                  ? 'loading'
+                                  : ''}"
+                              @click=${() => {
+                                  this.save();
+                              }}
+                              ?disabled=${!this._isValid ||
+                              !this.hasUnsavedChanges()}
+                          >
+                              ${unsafeHTML(this.props.icons.save)}
+                              ${this.props.i18n.saveButton}
+                          </button>
+                      `
+                    : ''}
+            </nav>
+        `;
+    }
+
     render() {
         return html`
             ${this.props.specs
@@ -1268,61 +1319,10 @@ export default class SSpecsEditorComponent extends __SLitComponent {
                                   <h3 class="_title s-typo--h3">
                                       ${this.props.specs.title}
                                   </h3>
-                                  <!-- <p
-                                        class="${this.utils.cls(
-                                      '_child-description',
-                                      's-typo--p',
-                                  )}"
-                                    >
-                                        ${this.props.specs.description}
-                                    </p> -->
-                                  <nav class="_actions">
-                                      ${this.props.features?.delete
-                                          ? html`
-                                                <button
-                                                    class="_action _action-delete"
-                                                    confirm="Confirm?"
-                                                    @click=${() => {
-                                                        _console.log(
-                                                            'delete action to integrate',
-                                                        );
-                                                    }}
-                                                >
-                                                    ${unsafeHTML(
-                                                        this.props.icons.delete,
-                                                    )}
-                                                </button>
-                                            `
-                                          : ''}
-                                      ${this.props.features?.save
-                                          ? html`
-                                                <button
-                                                    class="_action _action-save ${this.hasErrors()
-                                                        ? 'error'
-                                                        : ''} ${this.state
-                                                        .status.saving ===
-                                                    'success'
-                                                        ? 'success'
-                                                        : this.state.status
-                                                              .saving
-                                                        ? 'loading'
-                                                        : ''}"
-                                                    @click=${() => {
-                                                        this.save();
-                                                    }}
-                                                    ?disabled=${!this
-                                                        ._isValid ||
-                                                    !this.hasUnsavedChanges()}
-                                                >
-                                                    ${unsafeHTML(
-                                                        this.props.icons.save,
-                                                    )}
-                                                    ${this.props.i18n
-                                                        .saveButton}
-                                                </button>
-                                            `
-                                          : ''}
-                                  </nav>
+
+                                  ${this.props.actionsPosition === 'top'
+                                      ? this._renderActions()
+                                      : ''}
                               </div>
                               ${Object.keys(this.props.source ?? {}).length
                                   ? html`
@@ -1361,6 +1361,9 @@ export default class SSpecsEditorComponent extends __SLitComponent {
                                   : ''}
                           </div>
                           ${this.renderProps(this.props.specs, [])}
+                          ${this.props.actionsPosition === 'bottom'
+                              ? this._renderActions()
+                              : ''}
                       </div>
                   `
                 : ''}

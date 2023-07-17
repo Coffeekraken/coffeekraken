@@ -76,6 +76,13 @@ export default class SSpecsEditorComponentInterface extends __SInterface {
                     media: true,
                 },
             },
+            actionsPosition: {
+                type: 'String',
+                description:
+                    'Specify where to display the actions like "save", "delete", etc...',
+                values: ['top', 'bottom'],
+                default: 'bottom',
+            },
             ghostSpecs: {
                 type: 'Boolean',
                 description:

@@ -1,20 +1,17 @@
 import __SState from '@coffeekraken/s-state'
-import type { ISDobbyTaskMetas } from '@coffeekraken/s-dobby'
-
-import type { ISherlockClient } from '../../shared/SherlockTypes.js'
-
-import __sherlockAppStore from './SherlockAppStore'
 
 export interface ISetRouteParams {
     space?: string
     client?: string
     service?: string
+    popup?: string
 }
 
 export interface ISherlockRouteStore {
     space?: string
     client?: string
     service?: string
+    popup?: string
 }
 
 const routeStore = new __SState({})
@@ -32,6 +29,9 @@ export function __setRoute(params?: ISetRouteParams): ISherlockRouteStore {
         routeStore.space = params.space ?? routeStore.space
         routeStore.client = params.client ?? routeStore.client
         routeStore.service = params.service
+    }
+    if (params?.popup) {
+        routeStore.popup = params.popup
     }
 }
 

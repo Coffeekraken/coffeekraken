@@ -321,6 +321,8 @@ export default class SComponentUtils extends __SClass {
         for (let [prop, definition] of Object.entries(
             PropsInterface.definition,
         )) {
+            console.log('props', prop);
+
             const camelProp = __camelCase(prop),
                 dashProp = __dashCase(prop),
                 attrValue = this.node.getAttribute(dashProp);

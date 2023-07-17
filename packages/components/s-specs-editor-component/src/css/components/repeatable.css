@@ -1,33 +1,23 @@
 .s-specs-editor_repeatable {
-    /* background: red; */
-    /* background: sugar.color(main, background); */
-    /* margin-inline: calc(sugar.margin(40) * -1); */
     position: relative;
 
     > .s-label {
-        padding-inline: var(--s-specs-editor-padding-inline);
-        padding-block-start: var(--s-specs-editor-padding-block);
     }
 }
 
 .s-specs-editor_repeatable-item {
     position: relative;
-    @sugar.transition;
 
     &.sorting {
-        opacity: 0.3;
     }
 
     &.sorted {
-        background: sugar.color(complementary, --alpha 0.1);
     }
 }
 
 .s-specs-editor_repeatable-drop {
     position: relative;
     height: 0;
-    background: sugar.color(complementary, --alpha 0.1);
-    @sugar.transition fast;
 
     &:after {
         content: '';
@@ -39,7 +29,6 @@
         height: 0;
         transform: translateY(-50%);
         pointer-events: none;
-        @sugar.transition fast;
     }
 
     &:has(+ .s-specs-editor_repeatable-item.sorting),
@@ -49,18 +38,12 @@
 
     .s-specs-editor_repeatable.sort > & {
         z-index: 100;
-        height: sugar.margin(10);
 
         &:after {
-            height: sugar.margin(50);
             pointer-events: all;
         }
         &.sort-over {
-            background: sugar.color(complementary, --alpha 0.3);
-            height: sugar.margin(50);
-
             &:after {
-                height: sugar.margin(100);
             }
         }
     }
@@ -69,15 +52,10 @@
 .s-specs-editor_repeatable-title {
     display: flex;
     align-items: center;
-    gap: sugar.margin(20);
-    background: sugar.color(accent, --alpha 0.05);
-    padding: sugar.padding(20) var(--s-specs-editor-padding-inline);
-    border-top: 1px solid sugar.color(accent, --alpha 0.2);
     cursor: pointer;
 
     &,
     * {
-        @sugar.transition (fast);
     }
 
     > span {
@@ -86,7 +64,6 @@
 
     &.active,
     &:hover {
-        background: sugar.color(accent, --alpha 0.05);
     }
 
     &.active,
@@ -94,18 +71,12 @@
             + .s-specs-editor_repeatable-body
                 + .s-specs-editor_repeatable-actions:last-child
         ) {
-        border-bottom: 1px solid sugar.color(accent, --alpha 0.2);
     }
 
     ._reorder {
-        @sugar.ui.button ( $lnf: text);
-        box-shadow: none !important;
     }
 
     ._remove {
-        @sugar.ui.button ($lnf: text);
-        @sugar.color (error);
-        @sugar.scale (0.9);
     }
     &:hover ._remove {
         display: inline-block;
@@ -113,59 +84,33 @@
 }
 
 .s-specs-editor_repeatable-empty {
-    padding-inline: var(--s-specs-editor-padding-inline);
-    padding-block: sugar.padding(10);
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: sugar.margin(30);
 
     i {
-        opacity: 0.1;
-        font-size: sugar.font.size(100);
     }
 
     ._text {
-        @sugar.typo p;
-        @sugar.font.size (25);
-        opacity: 0.5;
     }
 }
 
 .s-specs-editor_repeatable-body {
-    /* overflow: hidden;
-    max-height: 0; */
-    border-left: sugar.margin(10) solid sugar.color(accent, --alpha 0.05);
     display: none;
-    /* @sugar.transition; */
 }
 .s-specs-editor_repeatable-body.active {
     display: block;
 }
 
 .s-specs-editor_repeatable-item-actions {
-    text-align: end;
-    /* padding: sugar.padding(30) var(--s-specs-editor-padding-inline);
-    background: sugar.color(main, background, --darken 5%); */
 }
 
 .s-specs-editor_repeatable-item-props {
-    /* padding-block: sugar.padding(30); */
-    /* padding: sugar.padding(30) 0; */
 }
 
 .s-specs-editor_repeatable-actions {
-    padding-inline: var(--s-specs-editor-padding-inline);
-    padding-block: var(--s-specs-editor-padding-block);
-    text-align: end;
-
     ._add {
-        @sugar.ui.button ($lnf: outline);
-        @sugar.color (accent);
-
         i {
-            color: currentColor;
-            margin: 0;
         }
     }
 }

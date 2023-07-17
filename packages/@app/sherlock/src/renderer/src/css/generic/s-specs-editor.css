@@ -1,0 +1,26 @@
+.s-specs-editor {
+    &_metas {
+        ._title {
+            color: sugar.color(accent, text);
+        }
+    }
+
+    &_error {
+        margin-block-start: sugar.margin(20);
+        color: sugar.color(error, text);
+    }
+
+    &_root {
+        display: flex;
+        flex-direction: column;
+        gap: sugar.margin(40);
+    }
+
+    &_label {
+        margin-block-end: sugar.margin(20);
+
+        ._title {
+            opacity: 0.6;
+        }
+    }
+}

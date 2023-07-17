@@ -110,6 +110,7 @@
         "unzipper": "^0.10.11",
         "url-parse": "^1.5.10",
         "url-slug": "^3.0.4",
+        "userdir": "^1.0.0",
         "yaml": "^1.10.2"
     },
     "globalDependencies": {},

@@ -1,37 +1,23 @@
 .s-specs-editor_layout-widget {
     ._layout {
-        gap: sugar.margin(10);
     }
 
     ._same-as-default {
-        text-align: center;
-        color: sugar.color(main, text, --alpha 0.3);
-        padding: sugar.padding(20);
     }
 
     .custom-select {
-        margin-block-end: sugar.margin(30);
     }
 
     .custom-select_item {
         ._same-as-default {
-            border: 1px solid sugar.color(main, border);
-            @sugar.border.radius;
         }
     }
 
     .custom-select_item:hover {
-        background: sugar.color(accent, surface);
-
         ._same-as-default {
-            background-color: sugar.color(main, background);
-            border-color: sugar.color(main, background);
-            color: sugar.color(accent, surface);
         }
 
         ._area {
-            background: sugar.color(accent, foreground);
-            color: sugar.color(accent, surface);
         }
     }
 
@@ -39,38 +25,18 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        height: 40px;
-        background: sugar.color(main, --alpha 0.2);
-        font-size: sugar.font.size(50);
-        color: sugar.color(main, foreground);
-        @sugar.border.radius;
     }
 
     .custom-select_item.active,
     .custom-select_value {
         ._area {
-            background: sugar.color(accent, --alpha 0.3);
-            color: sugar.color(accent, foreground);
         }
     }
 }
 
 .custom-select {
-    @sugar.ui.input;
     cursor: pointer !important;
     position: relative;
-    --padding-inline: sugar.padding(ui.form.paddingInline);
-    background-repeat: no-repeat;
-    background-image: linear-gradient(
-            45deg,
-            transparent 50%,
-            sugar.color(current) 50%
-        ),
-        linear-gradient(135deg, sugar.color(current) 50%, transparent 50%);
-    background-position: right calc(var(--padding-inline) + 5px) top 50%,
-        right var(--padding-inline) top 50%;
-    background-size: sugar.scalable(5px) sugar.scalable(5px),
-        sugar.scalable(5px) sugar.scalable(5px);
 
     &:focus,
     &:focus-within {
@@ -82,34 +48,25 @@
     }
 
     .custom-select_dropdown {
-        background: sugar.color(main, background);
         z-index: 50;
         opacity: 0;
         pointer-events: none;
-        transform: translateY(calc(sugar.margin(30) * -1));
-        @sugar.transition;
     }
 }
 .custom-select_value {
-    padding-inline-end: sugar.padding(20);
 }
 .custom-select_dropdown {
     position: absolute;
     top: 100%;
     left: 0;
-    max-height: 70vh;
     overflow-y: auto;
     display: flex;
     flex-direction: column;
     width: 100%;
-    @sugar.scrollbar();
-    @sugar.depth (100);
 }
 .custom-select_item {
     cursor: pointer;
-    padding: sugar.margin(30);
 
     &:hover {
-        background: sugar.color(main, surface);
     }
 }

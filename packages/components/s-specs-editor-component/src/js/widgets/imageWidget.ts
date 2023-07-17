@@ -5,10 +5,22 @@ import { __i18n } from '@coffeekraken/s-i18n';
 
 import type { ISImageData } from '@specim3n/types';
 
-import type { ISSpecsEditorWidgetDeps } from '../SSpecsEditorWidget.js';
+import type {
+    ISSpecsEditorWidgetDeps,
+    ISSpecsEditorWidgetSettings,
+} from '../SSpecsEditorWidget.js';
 import __SSpecsEditorWidget from '../SSpecsEditorWidget.js';
 
+export interface ISSpecsEditorComponentIMageWidgetSettings
+    extends ISSpecsEditorWidgetSettings {
+    upload?: boolean;
+    uploadUrl?: string;
+    multiple?: boolean;
+}
+
 export default class SSpecsEditorComponentImageWidget extends __SSpecsEditorWidget {
+    settings: ISSpecsEditorComponentIMageWidgetSettings;
+
     constructor(deps: ISSpecsEditorWidgetDeps) {
         super(deps);
     }
@@ -24,12 +36,12 @@ export default class SSpecsEditorComponentImageWidget extends __SSpecsEditorWidg
                         ? html`
                               <s-dropzone
                                   accept="image/*"
-                                  upload
+                                  ?upload=${this.settings.upload}
+                                  ?multiple=${this.settings.multiple}
                                   class="s-bare"
                                   @s-dropzone.file=${(e) => {
-                                      this.setValue({
-                                          url: e.detail[0].url,
-                                      });
+                                      console.log('e.', e.detail);
+                                      this.setValue(e.detail);
                                   }}
                               ></s-dropzone>
                           `

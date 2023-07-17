@@ -22,10 +22,11 @@
   "dependencies": {
     "@coffeekraken/s-dobby": "2.0.0-alpha.27",
     "@coffeekraken/s-postcss-sugar-plugin": "2.0.0-alpha.27",
+    "@coffeekraken/s-specs-editor-component": "2.0.0-alpha.27",
     "@coffeekraken/s-state": "2.0.0-alpha.27",
-    "@coffeekraken/s-specs-editor": "2.0.0-alpha.27",
     "@coffeekraken/s-sugar-feature": "2.0.0-alpha.27",
     "@coffeekraken/s-vite-postcss-plugin": "2.0.0-alpha.27",
+    "@coffeekraken/sugar": "2.0.0-alpha.27",
     "@electron-toolkit/preload": "^2.0.0",
     "@electron-toolkit/utils": "^1.0.2",
     "@fortawesome/fontawesome-free": "^6.4.0",
@@ -33,6 +34,7 @@
     "contentful": "^10.3.4",
     "electron-updater": "^5.3.0",
     "lit": "^2.7.6",
+    "userdir": "^1.0.0",
     "ws": "^8.13.0"
   },
   "devDependencies": {

@@ -1,19 +1,13 @@
 .s-specs-editor_prop {
-    padding-inline: var(--s-specs-editor-padding-inline);
-
     .s-specs-editor_prop {
-        padding-inline: 0;
     }
 
     &:has(> .s-specs-editor_repeatable) {
-        padding: 0;
     }
 
     &:has(> div) {
-        padding-block: var(--s-specs-editor-padding-block);
     }
 
     .s-specs-editor_child & {
-        /* padding: 0; */
     }
 }

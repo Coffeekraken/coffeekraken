@@ -1,33 +1,17 @@
 .s-specs-editor_label {
-    margin-block-end: sugar.margin(20);
-
     > span {
         display: flex;
     }
 
     ._title {
-        opacity: 0.5;
         flex-grow: 1;
     }
 
     ._required {
-        color: sugar.color(error);
     }
 
     ._help-icon {
-        margin-inline-start: sugar.margin(10);
-
         .s-tooltip {
-            min-width: 200px;
-        }
-    }
-
-    i {
-        opacity: 0.4;
-        @sugar.transition (fast);
-
-        &:hover {
-            opacity: 0.8;
         }
     }
 }

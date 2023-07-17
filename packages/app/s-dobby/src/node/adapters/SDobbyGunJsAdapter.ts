@@ -1,12 +1,8 @@
 import __SSpecs from '@coffeekraken/s-specs';
-import { __readJsonSync, __writeJsonSync } from '@coffeekraken/sugar/fs';
-import { __deepMerge } from '@coffeekraken/sugar/object';
-import { homedir } from 'os';
+import { __writeJsonSync } from '@coffeekraken/sugar/fs';
 import __SDobbyAdapter from '../SDobbyAdapter.js';
 
 import * as __gun from 'gun';
-
-import __fs from 'fs';
 
 import { ISDobbyGunJsAdapterSettings } from './SDobbyGunJsAdapterTypes.js';
 import type {

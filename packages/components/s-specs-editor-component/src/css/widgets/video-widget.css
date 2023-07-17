@@ -1,22 +1,14 @@
 .s-specs-editor_video-widget {
     .s-dropzone {
-        color: sugar.color(main, text, --alpha 0.3);
-        padding: sugar.padding(30);
     }
 
     ._format {
-        @sugar.ui.badge;
-        @sugar.color (accent);
     }
 
     ._drop {
-        @sugar.ui.input;
     }
 
     ._name {
-        padding-inline: sugar.padding(20);
-        line-height: 1.1;
-        color: sugar.color(main, text, --alpha 0.5);
     }
 
     ._videos {
@@ -25,17 +17,13 @@
     ._video {
         display: flex;
         align-items: center;
-        gap: sugar.margin(20);
 
         &:nth-child(even) {
-            background: sugar.color(main, surface);
         }
     }
 
     ._preview {
         video {
-            width: 5em;
-            height: 5em;
             object-fit: contain;
         }
     }
@@ -45,6 +33,5 @@
     }
 
     ._delete {
-        @sugar.ui.button ($lnf: text);
     }
 }

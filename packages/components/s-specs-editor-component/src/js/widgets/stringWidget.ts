@@ -16,7 +16,7 @@ export default class SSpecsEditorComponentStringWidget extends __SSpecsEditorWid
     validate(newValues) {
         if (this.propObj.required && !newValues?.value) {
             return {
-                error: __i18n(`This pro perty is required`, {
+                error: __i18n(`This property is required`, {
                     id: 's-specs-editor.widget.required',
                 }),
             };

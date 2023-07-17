@@ -70,6 +70,12 @@ export default class SDropzoneComponentInterface extends __SInterface {
                 description: 'Specify the url where to upload the file(s)',
                 default: '/upload',
             },
+            inline: {
+                type: 'Boolean',
+                description:
+                    'Specify if you want the droped file(s) to be treated as inline file "data:..."',
+                default: false,
+            },
             errorTimeout: {
                 type: 'Number',
                 description:

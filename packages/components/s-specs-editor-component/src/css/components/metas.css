@@ -4,24 +4,16 @@
     top: 0;
     left: 0;
     width: 100%;
-    border-bottom: 1px solid sugar.color(main, border);
-    background: sugar.color(main, background);
 
     &:has(&-source) {
-        border-bottom: none;
     }
 
     &-heading {
         display: flex;
         align-items: center;
-        padding-inline: var(--s-specs-editor-padding-inline);
-        padding-block: sugar.padding(30);
-        @sugar.transition;
 
         * {
-            @sugar.transition;
             overflow: hidden;
-            opacity: 1;
         }
         ._title {
             flex-grow: 1;
@@ -29,44 +21,28 @@
 
         ._actions {
             display: flex;
-            gap: sugar.margin(10);
 
             ._action {
             }
             ._action-save {
-                @sugar.ui.button();
-                @sugar.color (complementary);
-
                 i {
-                    color: sugar.color(complementary, foreground);
                 }
 
                 &.success {
-                    @sugar.color (success);
                 }
 
                 &.error {
-                    @sugar.color (error);
                 }
             }
             ._action-delete {
-                @sugar.ui.button ($lnf: text);
-                /* @sugar.color (error); */
             }
         }
     }
 
     &-source {
-        padding-inline: var(--s-specs-editor-padding-inline);
-        padding-block: sugar.padding(20);
-        background: sugar.color(accent, --alpha 0.2);
-        @sugar.transition;
-
         ._text {
         }
         ._link {
-            font-weight: bold;
-            color: sugar.color(accent);
         }
     }
 }

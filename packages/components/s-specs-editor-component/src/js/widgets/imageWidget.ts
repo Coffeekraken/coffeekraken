@@ -25,6 +25,16 @@ export default class SSpecsEditorComponentImageWidget extends __SSpecsEditorWidg
         super(deps);
     }
 
+    validate(newValues) {
+        if (this.propObj.required && !newValues?.url) {
+            return {
+                error: __i18n(`This property is required`, {
+                    id: 's-specs-editor.widget.required',
+                }),
+            };
+        }
+    }
+
     render() {
         const values = <ISImageData>this.values;
 

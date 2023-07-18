@@ -23,7 +23,7 @@
     "@coffeekraken/s-dobby": "2.0.0-alpha.27",
     "@coffeekraken/s-postcss-sugar-plugin": "2.0.0-alpha.27",
     "@coffeekraken/s-specs-editor-component": "2.0.0-alpha.27",
-    "@coffeekraken/s-state": "2.0.0-alpha.27",
+    "@coffeekraken/s-store": "2.0.0-alpha.27",
     "@coffeekraken/s-sugar-feature": "2.0.0-alpha.27",
     "@coffeekraken/s-vite-postcss-plugin": "2.0.0-alpha.27",
     "@coffeekraken/sugar": "2.0.0-alpha.27",

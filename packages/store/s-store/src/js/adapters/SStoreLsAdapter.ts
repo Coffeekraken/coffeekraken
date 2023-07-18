@@ -1,0 +1,30 @@
+import { ISStoreAdapter } from '../../shared/SStore.js';
+
+/**
+ * @name        SStoreLsAdapter
+ * @namespace   js.adapters
+ * @type        ISStateAdapter
+ * @platform    js
+ * @status      beta
+ * @private
+ *
+ * This state adapter allows you to save your state in the localStorage of the browser
+ *
+ * @since       2.0.0
+ * @author 		Olivier Bossel<olivier.bossel@gmail.com>
+ */
+export default class SStoreLsAdapter implements ISStoreAdapter {
+    async = false;
+    _id;
+    constructor(id: string) {
+        this._id = id;
+    }
+    save(state: any): void {
+        window.localStorage.setItem(`state-${this._id}`, JSON.stringify(state));
+    }
+    load(): any {
+        return JSON.parse(
+            window.localStorage.getItem(`state-${this._id}`) ?? '{}',
+        );
+    }
+}

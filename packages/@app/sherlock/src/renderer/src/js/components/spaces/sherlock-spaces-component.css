@@ -51,6 +51,8 @@ sherlock-spaces {
     }
     ._figure {
         position: relative;
+        width: 100%;
+        height: 100%;
 
         ._media {
             width: 100%;

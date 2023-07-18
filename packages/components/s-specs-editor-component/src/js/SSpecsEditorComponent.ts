@@ -777,6 +777,7 @@ export default class SSpecsEditorComponent extends __SLitComponent {
             this.utils.dispatchEvent('error', {
                 detail: {},
             });
+
             if (this._isValid) {
                 this._isValid = false;
                 this.requestUpdate();
@@ -814,8 +815,6 @@ export default class SSpecsEditorComponent extends __SLitComponent {
         pathOrCallback: string[] | Function,
         settings?: ISSpecsEditorRenderSettings,
     ) {
-        console.log('Prop', propObj);
-
         const type =
                 propObj.widget?.toLowerCase?.() ?? propObj.type.toLowerCase(),
             widget = this.getWidget(
@@ -1297,8 +1296,7 @@ export default class SSpecsEditorComponent extends __SLitComponent {
                               @click=${() => {
                                   this.save();
                               }}
-                              ?disabled=${!this._isValid ||
-                              !this.hasUnsavedChanges()}
+                              ?disabled=${!this._isValid}
                           >
                               ${unsafeHTML(this.props.icons.save)}
                               ${this.props.i18n.saveButton}

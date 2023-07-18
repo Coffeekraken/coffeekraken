@@ -51,7 +51,7 @@ sherlock-sidebar {
         width: 100%;
         display: grid;
         grid-template-rows: 0fr;
-        padding: sugar.padding(20) sugar.padding(10);
+        padding: sugar.padding(20) 0;
         @sugar.transition;
 
         ._inner {
@@ -68,10 +68,11 @@ sherlock-sidebar {
         width: 100%;
     }
     ._service-name {
-        padding: sugar.padding(10) sugar.padding(20);
+        padding: sugar.padding(20) sugar.padding(30);
         cursor: pointer;
-        @sugar.transition fast;
         border-radius: 999px;
+        margin-inline-start: sugar.margin(30);
+        @sugar.transition fast;
 
         &:hover {
             background: sugar.color(complementary, --alpha 0.5);

@@ -1,0 +1,3 @@
+.s-select:not(.s-color) {
+    @sugar.color (accent);
+}

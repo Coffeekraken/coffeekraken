@@ -70,10 +70,10 @@ export default class SSpecsEditorComponentInterface extends __SInterface {
                 description:
                     'Specify which features you want in your specs editor. Available features are: "save", "delete", "upload", and "media".',
                 default: {
-                    delete: true,
+                    delete: false,
                     upload: true,
                     save: true,
-                    media: true,
+                    media: false,
                 },
             },
             actionsPosition: {

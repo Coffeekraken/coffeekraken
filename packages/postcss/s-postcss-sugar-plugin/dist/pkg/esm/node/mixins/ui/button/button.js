@@ -106,7 +106,7 @@ export default function ({ params, atRule, postcssApi, sharedData, replaceWith, 
         switch (finalParams.lnf) {
             case 'text':
                 vars.push(`
-              padding-inline: calc(sugar.padding(ui.button.paddingInline) * 0.5);
+              padding-inline: calc(sugar.padding(ui.button.paddingInline) * 0.3);
               `);
                 break;
         }

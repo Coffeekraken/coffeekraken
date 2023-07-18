@@ -1,21 +1,21 @@
-import { LitElement, css, html } from 'lit'
-import { customElement } from 'lit/decorators.js'
+import { LitElement, css, html } from 'lit';
+import { customElement } from 'lit/decorators.js';
 
-import type { ISherlockClient, ISherlockService } from '../../../../../shared/SherlockTypes'
+import type { ISherlockClient } from '../../../../../shared/SherlockTypes';
 
-import __sherlockStores from '../../stores/SherlockStores'
+import __sherlockStores from '../../stores/SherlockStores';
 
-import '../spaces/SherlockSpacesComponent.js'
+import '../spaces/SherlockSpacesComponent.js';
 
 @customElement('sherlock-sidebar')
 export class SherlockSidebarComponent extends LitElement {
-    static styles = css``
+    static styles = css``;
 
     // @property({type: String})
     // name?: string = 'World';
 
     constructor() {
-        super()
+        super();
 
         // reactivity
 
@@ -24,49 +24,49 @@ export class SherlockSidebarComponent extends LitElement {
         // })
 
         __sherlockStores.route.$set('*', () => {
-            this.requestUpdate()
-        })
+            this.requestUpdate();
+        });
         __sherlockStores.clients.$set('*', () => {
-            this.requestUpdate()
-        })
+            this.requestUpdate();
+        });
         __sherlockStores.services.$set('*', () => {
-            this.requestUpdate()
-        })
+            this.requestUpdate();
+        });
         __sherlockStores.app.$set('space', () => {
-            this.requestUpdate()
-        })
+            this.requestUpdate();
+        });
     }
 
     _toggleClient(client: ISherlockClient): void {
         if (!__sherlockStores.app.clientStates[client.uid]) {
             __sherlockStores.app.clientStates[client.uid] = {
-                sidebar: true
-            }
+                sidebar: true,
+            };
         } else {
             __sherlockStores.app.clientStates[client.uid].sidebar =
-                !__sherlockStores.app.clientStates[client.uid].sidebar
+                !__sherlockStores.app.clientStates[client.uid].sidebar;
         }
-        this.requestUpdate()
+        this.requestUpdate();
     }
 
     _selectService(clientUid: string, serviceUid: string): Promise<void> {
-        __sherlockStores.setRoute({
+        __sherlockStores.route.setRoute({
             client: clientUid,
-            service: serviceUid
-        })
-        this.requestUpdate()
+            service: serviceUid,
+        });
+        this.requestUpdate();
     }
 
     private taskId(client, service): string {
-        return `${client.uid ?? client}.${service.uid ?? service}`
+        return `${client.uid ?? client}.${service.uid ?? service}`;
     }
 
     render() {
-        let clients = {}
+        let clients = {};
         if (__sherlockStores.route.space) {
-            clients = __sherlockStores.getClients({
-                space: __sherlockStores.route.space
-            })
+            clients = __sherlockStores.clients.getClients({
+                space: __sherlockStores.route.space,
+            });
         }
 
         return html`
@@ -80,9 +80,9 @@ export class SherlockSidebarComponent extends LitElement {
                               : html`
                                     <ul class="_clients">
                                         ${Object.entries(clients).map(([clientUid, client]) => {
-                                            const services = __sherlockStores.getServices({
-                                                client: client.uid
-                                            })
+                                            const services = __sherlockStores.services.getServices({
+                                                client: client.uid,
+                                            });
 
                                             return html`
                                                 <li
@@ -94,7 +94,7 @@ export class SherlockSidebarComponent extends LitElement {
                                                     <div
                                                         class="_client-name"
                                                         @pointerup=${(e) => {
-                                                            this._toggleClient(client)
+                                                            this._toggleClient(client);
                                                         }}
                                                     >
                                                         ${client.name}
@@ -107,11 +107,11 @@ export class SherlockSidebarComponent extends LitElement {
                                                               <ul class="_services">
                                                                   <div class="_inner">
                                                                       ${Object.entries(
-                                                                          services
+                                                                          services,
                                                                       ).map(
                                                                           ([
                                                                               serviceUid,
-                                                                              service
+                                                                              service,
                                                                           ]) => html`
                                                                               <li
                                                                                   class="_service ${__sherlockStores
@@ -124,12 +124,12 @@ export class SherlockSidebarComponent extends LitElement {
                                                                                   <div
                                                                                       class="_service-name"
                                                                                       @pointerup=${(
-                                                                                          e
+                                                                                          e,
                                                                                       ) => {
                                                                                           this._selectService(
                                                                                               client.uid,
-                                                                                              service.uid
-                                                                                          )
+                                                                                              service.uid,
+                                                                                          );
                                                                                       }}
                                                                                   >
                                                                                       <i
@@ -138,22 +138,22 @@ export class SherlockSidebarComponent extends LitElement {
                                                                                       ${service.name}
                                                                                   </div>
                                                                               </li>
-                                                                          `
+                                                                          `,
                                                                       )}
                                                                   </div>
                                                               </ul>
                                                           `}
                                                 </li>
-                                            `
+                                            `;
                                         })}
                                     </ul>
                                 `}
                       `}
             </nav>
-        `
+        `;
     }
 
     createRenderRoot() {
-        return this
+        return this;
     }
 }

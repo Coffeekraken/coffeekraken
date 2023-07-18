@@ -116,6 +116,9 @@ export default class SDobbyFsAdapter
     ): Promise<ISDobbySaveConfigResult> {
         return new Promise((resolve) => {
             const configPath = `${this.settings.rootDir}/${uid}.config.json`;
+
+            console.log('SAVE', uid, configPath, config);
+
             __writeJsonSync(configPath, config);
             resolve({});
         });

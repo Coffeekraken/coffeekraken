@@ -1,0 +1,11 @@
+.s-dropzone {
+    display: block;
+    background: sugar.color(main, ui);
+    aspect-ratio: 21/9;
+    display: flex;
+    justify-content: center;
+    @sugar.border.radius;
+
+    ._label {
+    }
+}

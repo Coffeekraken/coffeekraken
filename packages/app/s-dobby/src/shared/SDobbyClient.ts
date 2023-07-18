@@ -1,7 +1,7 @@
 import __SClass from '@coffeekraken/s-class';
 import { __deepMerge } from '@coffeekraken/sugar/object';
 
-import type { ISDobbyClientSettings, ISDobbyFsAdapterSettings } from './types';
+import type { ISDobbyClientSettings, ISDobbyFsAdapterSettings, ISDobbyTaskMetas } from './types';
 
 /**
  * @name                SDobbyClient
@@ -29,7 +29,7 @@ export default class SDobbyClient extends __SClass {
     settings: ISDobbyClientSettings;
 
     /**
-     * @name        socket
+     * @name        _socket
      * @type        WebSocket
      *
      * Store the socket connection to the server
@@ -38,6 +38,17 @@ export default class SDobbyClient extends __SClass {
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     private _socket: WebSocket;
+
+    /**
+     * @name        _config
+     * @type        Any
+     * 
+     * Store the config
+     * 
+     * @since           2.0.0
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    private _config: any;
 
     /**
      * @name        constructor
@@ -54,6 +65,12 @@ export default class SDobbyClient extends __SClass {
             host: 'localhost',
             port: 8787
         }, settings ?? {}));
+
+        // update local tasks stack
+        this.on('config', (config) => {
+            this._config = config;
+            console.log('con', config);
+        });
     }
 
     /**
@@ -86,6 +103,11 @@ export default class SDobbyClient extends __SClass {
                 detail: data;
             }));
         });
+    }
+
+    getTasks(): Promise<Record<string, ISDobbyTaskMetas>> {
+        return new Promise(async (resolve) => {
+        })
     }
 
     on(event: string, callback: function): function {

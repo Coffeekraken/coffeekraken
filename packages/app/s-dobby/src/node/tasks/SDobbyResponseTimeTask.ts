@@ -5,7 +5,6 @@ import __SSpecs from '@coffeekraken/s-specs';
 
 import __ping from 'ping';
 
-import { ISDobbyTaskResult } from '../types';
 import type { ISDobbyResponseTimeTaskMetas, ISDobbyTask } from './types';
 
 /**
@@ -74,10 +73,21 @@ export default class SDobbyTask extends __SDobbyTask implements ISDobbyTask {
             timeout: finalSettings.timeout,
         });
 
+        const responseTime = parseFloat(res.avg);
+
+        let status = 'success';
+        if (responseTime >= 200) {
+            status = 'warning';
+        }
+        if (responseTime >= finalSettings.timeout) {
+            status = 'error';
+        }
+
         return {
             ...super.end(),
             alive: res.alive,
-            responseTime: parseFloat(res.avg),
+            status,
+            responseTime,
             logs: [res.output],
         };
     }

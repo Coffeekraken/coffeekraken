@@ -78,7 +78,7 @@
         "@coffeekraken/s-scroll-component": "^2.0.0-alpha.27",
         "@coffeekraken/s-sitemap-builder": "^2.0.0-alpha.27",
         "@coffeekraken/s-slider-component": "^2.0.0-alpha.27",
-        "@coffeekraken/s-state": "^2.0.0-alpha.27",
+        "@coffeekraken/s-store": "^2.0.0-alpha.27",
         "@coffeekraken/s-static-builder": "^2.0.0-alpha.27",
         "@coffeekraken/s-stdio": "^2.0.0-alpha.27",
         "@coffeekraken/s-sugar-config": "^2.0.0-alpha.27",

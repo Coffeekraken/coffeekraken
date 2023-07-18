@@ -1,68 +1,72 @@
-import { LitElement, css, html } from 'lit'
-import { customElement } from 'lit/decorators.js'
+import { LitElement, css, html } from 'lit';
+import { customElement } from 'lit/decorators.js';
 
-import __sherlockStores from '../../stores/SherlockStores'
+import { ISherlockSpace } from '../../../../../shared/SherlockTypes';
+import __sherlockStores from '../../stores/SherlockStores';
 
 @customElement('sherlock-spaces')
 export class SherlockSpacesComponent extends LitElement {
-    static styles = css``
+    static styles = css``;
 
     //   @property({type: String})
     //   name?: string = 'World';
 
     constructor() {
-        super()
+        super();
 
         // reactive
         __sherlockStores.route.$set('*', () => {
-            this.requestUpdate()
-        })
+            this.requestUpdate();
+        });
         __sherlockStores.spaces.$set('*', () => {
-            this.requestUpdate()
-        })
+            this.requestUpdate();
+        });
     }
 
-    selectSpace(spaceUid: string): void {
-        __sherlockStores.setRoute({
-            space: spaceUid
-        })
+    async selectSpace(space: ISherlockSpace): Promise<void> {
+        const res = await window.sherlock.setSpace(space.toJson());
+
+        __sherlockStores.route.setRoute({
+            space: space.uid,
+        });
     }
 
     newSpace(): void {
-        __sherlockStores.setRoute({
-            popup: 'newSpace'
-        })
+        __sherlockStores.route.setRoute({
+            popup: 'newSpace',
+        });
     }
 
     render() {
         return html`
             <ul class="sh-spaces">
-                ${Object.entries(__sherlockStores.spaces).map(
-                    ([spaceUid, space]) => html`
+                ${Object.entries(__sherlockStores.spaces).map(([spaceUid, space]) => {
+                    return html`
                         <li
                             class="_space ${__sherlockStores.route.space === space.uid
                                 ? 'active'
                                 : ''}"
                             @pointerup=${(e) => {
-                                this.selectSpace(space.uid)
+                                this.selectSpace(space);
                             }}
                         >
                             <figure class="_figure">
                                 <img
+                                    class="_media"
                                     src="${space.image.url}"
                                     alt="${space.image.alt}"
                                     title="${space.image.title}"
                                 />
-                                <figcaption>${space.description}</figcaption>
+                                <figcaption class="_caption">${space.description}</figcaption>
                             </figure>
                         </li>
-                    `
-                )}
+                    `;
+                })}
 
                 <li
                     class="_space"
                     @pointerup=${(e) => {
-                        this.newSpace()
+                        this.newSpace();
                     }}
                 >
                     <figure class="_figure">
@@ -77,10 +81,10 @@ export class SherlockSpacesComponent extends LitElement {
                     </figure>
                 </li>
             </ul>
-        `
+        `;
     }
 
     createRenderRoot() {
-        return this
+        return this;
     }
 }

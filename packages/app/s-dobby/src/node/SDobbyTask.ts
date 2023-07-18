@@ -1,5 +1,4 @@
 import __SClass from '@coffeekraken/s-class';
-import { __deepMerge } from '@coffeekraken/sugar/object';
 
 import __SDuration from '@coffeekraken/s-duration';
 
@@ -54,12 +53,14 @@ export default class SDobbyTask extends __SClass {
         this.metas = taskMetas;
     }
 
+    _time;
     _duration;
 
     start() {
         console.log(
             `<yellow>[SDobby]</yellow> Starting <magenta>${this.metas.name} (${this.metas.type})</magenta> task...`,
         );
+        this._time = Date.now();
         this._duration = new __SDuration();
     }
 
@@ -69,7 +70,9 @@ export default class SDobbyTask extends __SClass {
             `<green>[SDobby]</green> Task <magenta>${this.metas.name} (${this.metas.type})</magenta> finished <green>successfully</green> in <cyan>${durationObj.formatedDuration}</cyan>`,
         );
         return {
+            time: this._time,
             duration: durationObj,
+            task: this.metas,
         };
     }
 }

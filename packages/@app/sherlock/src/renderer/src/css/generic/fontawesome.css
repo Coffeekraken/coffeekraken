@@ -1,6 +1,11 @@
 .svg-inline--fa {
     display: inline-block;
-    width: 1em; height: 1em;
+    width: 1em;
+    height: 1em;
     position: relative;
     /* top: 0.1em; */
+
+    [fill] {
+        fill: sugar.color(current);
+    }
 }

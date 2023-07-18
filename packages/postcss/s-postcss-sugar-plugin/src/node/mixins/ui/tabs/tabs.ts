@@ -151,7 +151,6 @@ export default function ({
     if (finalParams.scope.indexOf('lnf') !== -1) {
         vars.push(`
           user-select: none;
-          @sugar.color(main);
 
           & > * {
             text-align: center;

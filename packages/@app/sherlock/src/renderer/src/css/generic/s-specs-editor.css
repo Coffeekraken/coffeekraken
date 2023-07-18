@@ -16,6 +16,17 @@
         gap: sugar.margin(40);
     }
 
+    ._help-icon {
+        svg {
+            opacity: 0.4;
+            @sugar.transition fast;
+        }
+
+        &:hover svg {
+            opacity: 0.6;
+        }
+    }
+
     &_label {
         margin-block-end: sugar.margin(20);
 

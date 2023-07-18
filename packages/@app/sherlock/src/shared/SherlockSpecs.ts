@@ -7,23 +7,61 @@ export const SSherlockNewSpaceSpec = {
             type: 'String',
             title: 'Unique ID',
             description: 'Space unique id',
-            required: true
+            required: true,
         },
         name: {
             type: 'String',
             title: 'Name',
             description: 'Space name',
-            required: true
+            required: true,
         },
         description: {
             type: 'Text',
             title: 'Description',
-            description: 'Space description'
+            description: 'Space description',
         },
         image: {
             type: 'Image',
             title: 'Image',
-            description: 'Space image'
-        }
-    }
-}
+            description: 'Space image',
+            required: true,
+        },
+    },
+};
+
+export const SSherlockSpaceFsAdapterSpec = {
+    type: 'Object',
+    title: 'Fylesystem adapter',
+    description:
+        'Filesystem adapter used to store sherlock data (clients, services, etc...) locally',
+    props: {
+        folder: {
+            type: 'String',
+            title: 'Folder',
+            description: 'Specify a folder where to store the sherlock data for this space',
+            readonly: true,
+            required: true,
+        },
+    },
+};
+
+export const SSherlockSpaceContentfulAdapterSpec = {
+    type: 'Object',
+    title: 'Contentful adapter',
+    description:
+        'Contentful adapter used to store sherlock data (clients, services, etc...) locally',
+    props: {
+        space: {
+            type: 'String',
+            title: 'Space',
+            description: 'Contentful space to connect to',
+            required: true,
+        },
+        accessToken: {
+            type: 'String',
+            title: 'Access token',
+            description: 'Contentful access token to use for connection',
+            required: true,
+        },
+    },
+};

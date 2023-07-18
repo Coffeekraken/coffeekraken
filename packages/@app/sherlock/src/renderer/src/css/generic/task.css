@@ -1,0 +1,78 @@
+.task {
+    ._header {
+        background: sugar.color(main, --lighten 20% --alpha 0.1);
+        padding: sugar.padding(20) sugar.padding(30);
+        backdrop-filter: blur(10px);
+        @sugar.border.radius;
+        @sugar.transition;
+
+        &:hover {
+            background: sugar.color(main, --lighten 25% --alpha 0.2);
+        }
+
+        &.running {
+            background: sugar.color(complementary, --lighten 10% --alpha 0.3);
+        }
+    }
+
+    ._expand {
+        transform: rotateZ(180deg);
+        @sugar.transition;
+    }
+    &.details {
+        /* background: sugar.color(main, --lighten 20% --alpha 0.05); */
+
+        ._expand {
+            transform: rotateZ(0);
+        }
+    }
+
+    ._details {
+        width: 100%;
+        display: grid;
+        grid-template-rows: 0fr;
+        @sugar.transition;
+
+        ._inner {
+            overflow: hidden;
+        }
+    }
+    &.details {
+        ._details {
+            grid-template-rows: 1fr;
+        }
+    }
+
+    ._results {
+        position: relative;
+        overflow-y: auto;
+        max-height: 50vh;
+        @sugar.scrollbar;
+
+        &:before {
+            content: '';
+            display: block;
+            position: absolute;
+            top: 0;
+            left: sugar.margin(30);
+            width: 2px;
+            height: 100%;
+            background: sugar.color(main, border);
+        }
+    }
+    ._result {
+        &:nth-child(even) ._result-header {
+            background: sugar.color(main, --lighten 20% --alpha 0.02);
+        }
+    }
+
+    ._result-header {
+        display: flex;
+        align-items: center;
+        padding: sugar.padding(20) sugar.padding(30) sugar.padding(20) sugar.padding(50);
+    }
+
+    ._duration {
+        @sugar.typo p;
+    }
+}

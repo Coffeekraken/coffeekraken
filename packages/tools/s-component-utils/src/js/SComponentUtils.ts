@@ -7,7 +7,7 @@ import __SFront from '@coffeekraken/s-front';
 import __SFrontspec from '@coffeekraken/s-frontspec';
 import __SInterface from '@coffeekraken/s-interface';
 import __SMedia from '@coffeekraken/s-media';
-import __SState from '@coffeekraken/s-state';
+import __SStore from '@coffeekraken/s-store';
 
 import { __camelCase } from '@coffeekraken/sugar/string';
 
@@ -321,8 +321,6 @@ export default class SComponentUtils extends __SClass {
         for (let [prop, definition] of Object.entries(
             PropsInterface.definition,
         )) {
-            console.log('props', prop);
-
             const camelProp = __camelCase(prop),
                 dashProp = __dashCase(prop),
                 attrValue = this.node.getAttribute(dashProp);
@@ -488,7 +486,7 @@ export default class SComponentUtils extends __SClass {
         if (state.isSState) {
             _state = state;
         } else {
-            _state = new __SState(Object.assign({}, state), {
+            _state = new __SStore(Object.assign({}, state), {
                 id: finalStateSettings.id,
                 save: finalStateSettings.save,
                 excludeFromSave: ['status'],

@@ -93,6 +93,7 @@ export default function ({
             display: block;
             max-width: 9999999px !important;
             pointer-events: none;
+            white-space: nowrap;
 
             &:before {
                 content: '' !important;

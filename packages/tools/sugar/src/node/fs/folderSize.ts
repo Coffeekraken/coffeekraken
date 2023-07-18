@@ -1,6 +1,6 @@
 // @ts-nocheck
 
-import __getSize from 'get-folder-size';
+import __fastFolderSize from 'fast-folder-size';
 
 /**
  * @name                            folderSize
@@ -29,7 +29,8 @@ import __getSize from 'get-folder-size';
  */
 export default function __folderSize(folderPath: string) {
     return new Promise(async (resolve, reject) => {
-        const size = await __getSize.loose(folderPath);
-        resolve(size);
+        __fastFolderSize(folderPath, (err, bytes) => {
+            resolve(bytes);
+        });
     });
 }

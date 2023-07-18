@@ -18,7 +18,7 @@
         "@coffeekraken/s-interface": "^2.0.0-alpha.27",
         "@coffeekraken/s-media": "^2.0.0-alpha.27",
         "@coffeekraken/s-promise": "^2.0.0-alpha.27",
-        "@coffeekraken/s-state": "^2.0.0-alpha.27",
+        "@coffeekraken/s-store": "^2.0.0-alpha.27",
         "@coffeekraken/s-theme": "^2.0.0-alpha.27",
         "@coffeekraken/sugar": "^2.0.0-alpha.27",
         "fastdom": "^1.0.11"

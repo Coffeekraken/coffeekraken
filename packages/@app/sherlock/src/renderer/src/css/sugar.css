@@ -2,11 +2,16 @@
 @sugar.init ($variant: dark);
 
 @sugar.ui.button.classes;
+@sugar.ui.select.classes;
 @sugar.ui.input.classes;
 @sugar.ui.label.classes;
 @sugar.ui.tooltip.classes;
+@sugar.ui.tabs.classes;
+@sugar.ui.loader.classes;
 
 @sugar.typo.classes;
 @sugar.shape.classes;
 @sugar.color.classes;
+@sugar.gap.classes;
 @sugar.flex.classes;
+@sugar.spacing.classes;

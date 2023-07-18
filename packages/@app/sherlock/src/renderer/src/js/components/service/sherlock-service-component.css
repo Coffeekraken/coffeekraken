@@ -14,6 +14,10 @@ sherlock-service {
     background: sugar.color(main, background, --alpha 0.8);
     backdrop-filter: blur(10px);
 
+    ._metas {
+        margin-block-end: sugar.margin(50);
+    }
+
     ._content {
         flex-grow: 1;
         position: relative;
@@ -28,4 +32,9 @@ sherlock-service {
         @sugar.typo lead;
     }
 
+    ._tools {
+        display: flex;
+        align-items: center;
+        gap: sugar.margin(30);
+    }
 }

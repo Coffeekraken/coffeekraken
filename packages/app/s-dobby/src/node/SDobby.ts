@@ -1,6 +1,6 @@
 import __SClass from '@coffeekraken/s-class';
 import __SEventEmitter from '@coffeekraken/s-event-emitter';
-import __SPromise from '@coffeekraken/s-promise';
+// import __SPromise from '@coffeekraken/s-promise';
 import __SSpecs from '@coffeekraken/s-specs';
 import { __deepMerge } from '@coffeekraken/sugar/object';
 import { __onProcessExit } from '@coffeekraken/sugar/process';
@@ -8,13 +8,9 @@ import { WebSocketServer } from 'ws';
 
 import __SDobbyResponseTimeTask from './tasks/SDobbyResponseTimeTask.js';
 
-import __SDuration from '@coffeekraken/s-duration';
-
 import __nodeSchedule from 'node-schedule';
 
-import __SDobbyFsAdapter from './adapters/SDobbyFsAdapter.js';
-import __SDobbyGunJsAdapter from './adapters/SDobbyGunJsAdapter.js';
-
+import { __SDobbyFsAdapter } from './exports.js';
 import type {
     ISDobbyConfig,
     ISDobbyError,
@@ -123,7 +119,9 @@ export default class SDobby extends __SClass {
      * @since           2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    config: ISDobbyConfig;
+    config: ISDobbyConfig = {
+        tasks: {},
+    };
 
     /**
      * @name        constructor
@@ -145,15 +143,14 @@ export default class SDobby extends __SClass {
 
         // default adapter
         if (!this.settings.adapter) {
-            this.settings.adapter = new __SDobbyGunJsAdapter({
-                key: 'fjwoiefjijoij3oirjion2fdjineiujfwnuhw0chqowcoqwnfijonqwfqéwnef',
-            });
+            this.settings.adapter = new __SDobbyFsAdapter();
+            // this.settings.adapter = new __SDobbyGunJsAdapter({
+            //     key: 'fjwoiefjijoij3oirjion2fdjineiujfwnuhw0chqowcoqwnfijonqwfqéwnef',
+            // });
         }
     }
 
     server(): void {
-        return;
-
         console.log('<yellow>[SDobby]</yellow> Starting websocket server');
         const wss = new WebSocketServer({
             port: 8787,
@@ -219,13 +216,13 @@ export default class SDobby extends __SClass {
      * @type        Function
      * @async
      *
-     * Start the dobby work for the good and the bad
+     * Start the dobby work for the good, the bad and the ugly
      *
      * @since           2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     start(params?: ISDobbyStartParams): Promise<void | ISDobbyError> {
-        return new __SPromise(async ({ resolve, emit }) => {
+        return new Promise(async (resolve) => {
             const finalParams: ISDobbyStartParams = __SSpecs.apply(
                 params,
                 SDobbyStartParamsSpecs,
@@ -261,6 +258,16 @@ export default class SDobby extends __SClass {
     }
 
     /**
+     * Enqueue a task
+     */
+    _enqueueTask(taskMetas: ISDobbyTaskMetas): void {
+        __nodeSchedule.scheduleJob(taskMetas.schedule, () => {
+            // execute task
+            this.executeTask(taskMetas);
+        });
+    }
+
+    /**
      * Start the scheduler that will execute the tasks when needed
      */
     _startScheduler() {
@@ -268,10 +275,7 @@ export default class SDobby extends __SClass {
         for (let [taskUid, taskMetas] of Object.entries(
             this.config.tasks ?? {},
         )) {
-            __nodeSchedule.scheduleJob(taskMetas.schedule, () => {
-                // execute task
-                this.executeTask(taskMetas);
-            });
+            this._enqueueTask(taskMetas);
         }
     }
 
@@ -318,18 +322,20 @@ export default class SDobby extends __SClass {
      * @since           2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    addTask(task: ISDobbyTaskMetas): Promise<void | ISDobbyError> {
+    addTask(taskMetas: ISDobbyTaskMetas): Promise<void | ISDobbyError> {
         return new Promise(async (resolve, reject) => {
             // make sure the tasks not already exists
-            if (this.config.tasks?.[task.uid]) {
+            if (this.config.tasks?.[taskMetas.uid]) {
                 return reject(<ISDobbyError>{
-                    message: `A task with the uid \`${task.uid}\` already exists`,
+                    message: `A task with the uid \`${taskMetas.uid}\` already exists`,
                 });
             }
             // add the task in the config
-            this.config.tasks[task.uid] = task;
+            this.config.tasks[taskMetas.uid] = taskMetas;
             // save the config
             this.settings.adapter.saveConfig(this.uid, this.config);
+            // enqueue the new task
+            this._enqueueTask(taskMetas);
         });
     }
 

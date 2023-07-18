@@ -1,24 +1,33 @@
-import __SState from '@coffeekraken/s-state'
+import type { ISherlockSpace } from '../../shared/SherlockTypes.js';
 
-import type { ISherlockSpace } from '../../shared/SherlockTypes.js'
+import __SStore from '@coffeekraken/s-store';
 
 export interface ISherlockSpacesStore {
-    [key: string]: ISherlockSpace
+    [key: string]: ISherlockSpace;
 }
 
-const spacesStore = new __SState({})
+class SherlockSpacesStore extends __SStore {
+    constructor() {
+        super();
 
-// load the spaces
-;(async () => {
-    const spaces = await window.sherlock.getSpaces()
-    Object.assign(spacesStore, spaces)
-})()
+        this._init();
+    }
 
-export function __getSpaces(): Record<string, ISherlockSpace> {
-    return spacesStore
+    async _init() {
+        // load the spaces
+        const spaces = await window.sherlock.getSpaces();
+        Object.assign(spacesStore, spaces);
+    }
+
+    getSpaces(): Record<string, ISherlockSpace> {
+        return spacesStore;
+    }
+
+    getSpace(spaceUid: string): ISherlockSpace {
+        return spacesStore[spaceUid];
+    }
 }
-export function __getSpace(spaceUid: string): ISherlockSpace {
-    return spacesStore[spaceUid]
-}
 
-export default spacesStore
+const spacesStore = new SherlockSpacesStore();
+
+export default spacesStore;

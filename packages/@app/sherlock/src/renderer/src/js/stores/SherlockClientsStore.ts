@@ -1,33 +1,45 @@
-import __SState from '@coffeekraken/s-state'
-import type { ISDobbyTaskMetas } from '@coffeekraken/s-dobby'
+import __SStore from '@coffeekraken/s-store';
 
-import type { ISherlockClient } from '../../shared/SherlockTypes.js'
+import type { ISherlockClient } from '../../shared/SherlockTypes.js';
 
-import __sherlockRouteStore from './SherlockRouteStore'
+import __sherlockRouteStore from './SherlockRouteStore';
 
 export interface IGetClientsParams {
-    space?: string
+    space?: string;
 }
 
 export interface ISherlockClientStore {
-    [key: string]: ISherlockClient
+    [key: string]: ISherlockClient;
 }
 
-const clientsStore = new __SState({})
+class SherlockClientsStore extends __SStore {
+    constructor() {
+        super();
+        this._init();
+    }
 
-__sherlockRouteStore.$set('space', () => {
-    ;(async () => {
-        const clients = await window.sherlock.getClients(__sherlockRouteStore.space)
-        Object.assign(clientsStore, clients)
-    })()
-})
+    async _init() {
+        __sherlockRouteStore.$set('space', () => {
+            (async () => {
+                const clients = await window.sherlock.getClients(__sherlockRouteStore.space);
+                Object.assign(clientsStore.data, clients);
+            })();
+        });
+    }
 
-export function __getClients(params?: IGetClientsParams): Record<string, ISherlockClient> {
-    return clientsStore
+    getClients(params?: IGetClientsParams): Record<string, ISherlockClient> {
+        return this.data;
+    }
+
+    getClient(clientUid: string): ISherlockClient {
+        return this.data[clientUid];
+    }
 }
+
+const clientsStore = new SherlockClientsStore();
 
 export function __getClient(clientUid: string): ISherlockClient {
-    return clientsStore[clientUid]
+    return clientsStore[clientUid];
 }
 
-export default clientsStore
+export default clientsStore;

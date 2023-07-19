@@ -5,7 +5,11 @@ import __SSpecs from '@coffeekraken/s-specs';
 
 import __ping from 'ping';
 
-import type { ISDobbyResponseTimeTaskMetas, ISDobbyTask } from './types';
+import type {
+    ISDobbyResponseTimeTaskResult,
+    ISDobbyTask,
+    ISDobbyTaskMetas,
+} from '../../shared/types.js';
 
 /**
  * @name                SDobbyResponseTimeTask
@@ -57,7 +61,7 @@ export default class SDobbyTask extends __SDobbyTask implements ISDobbyTask {
      * @since           2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    constructor(taskMetas?: ISDobbyResponseTimeTaskMetas) {
+    constructor(taskMetas?: ISDobbyTaskMetas) {
         super(__deepMerge({}, taskMetas ?? {}));
     }
 

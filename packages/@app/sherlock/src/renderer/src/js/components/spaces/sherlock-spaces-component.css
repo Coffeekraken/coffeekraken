@@ -72,6 +72,10 @@ sherlock-spaces {
             left: 50%;
             transform: translate(-50%, -50%);
             color: white;
+
+            [fill] {
+                fill: white;
+            }
         }
 
         &:has(._icon) {

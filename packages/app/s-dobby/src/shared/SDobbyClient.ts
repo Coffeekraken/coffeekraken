@@ -1,7 +1,13 @@
 import __SClass from '@coffeekraken/s-class';
 import { __deepMerge } from '@coffeekraken/sugar/object';
 
-import type { ISDobbyClientSettings, ISDobbyFsAdapterSettings, ISDobbyTaskMetas } from './types';
+import type {
+    ISDobbyClientAction,
+    ISDobbyClientSettings,
+    ISDobbyFsPoolSettings,
+    ISDobbyPool,
+    ISDobbyTaskMetas,
+} from './types';
 
 /**
  * @name                SDobbyClient
@@ -40,15 +46,15 @@ export default class SDobbyClient extends __SClass {
     private _socket: WebSocket;
 
     /**
-     * @name        _config
+     * @name        pools
      * @type        Any
-     * 
-     * Store the config
-     * 
+     *
+     * Store the registered pools
+     *
      * @since           2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    private _config: any;
+    pools: Record<string, ISDobbyPool> = {};
 
     /**
      * @name        constructor
@@ -60,24 +66,34 @@ export default class SDobbyClient extends __SClass {
      * @since           2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    constructor(settings?: ISDobbyFsAdapterSettings) {
-        super(__deepMerge({
-            host: 'localhost',
-            port: 8787
-        }, settings ?? {}));
+    constructor(settings?: ISDobbyFsPoolSettings) {
+        super(
+            __deepMerge(
+                {
+                    host: 'localhost',
+                    port: 8787,
+                },
+                settings ?? {},
+            ),
+        );
 
         // update local tasks stack
-        this.on('config', (config) => {
-            this._config = config;
-            console.log('con', config);
+        this.on('pool', (res: any) => {
+            console.log('POOL', res);
+            this.pools[res.pool.uid] = res;
         });
+        // this.on('pool.config', (res: any) => {
+        //     if (!this.pools[res.pool.uid]) {
+        //         return;
+        //     }
+        //     this.pools[res.pool.uid].config = res.config;
+        // });
     }
 
     /**
      * Connect to server
      */
-    connect(): Promise<void> {
-
+    connect(): void {
         // Create WebSocket connection.
         this._socket = new WebSocket(
             `ws://${this.settings.host}:${this.settings.port}`,
@@ -99,15 +115,16 @@ export default class SDobbyClient extends __SClass {
             } catch (e) {}
 
             // dispatch the event
-            document.dispatchEvent(new CustomEvent(`dobby.${data.type}`, {
-                detail: data;
-            }));
+            document.dispatchEvent(
+                new CustomEvent(`dobby.${data.type}`, {
+                    detail: data,
+                }),
+            );
         });
     }
 
     getTasks(): Promise<Record<string, ISDobbyTaskMetas>> {
-        return new Promise(async (resolve) => {
-        })
+        return new Promise(async (resolve) => {});
     }
 
     on(event: string, callback: function): function {
@@ -118,5 +135,9 @@ export default class SDobbyClient extends __SClass {
         return function () {
             document.removeEventListener(`dobby.${event}`, cb);
         };
+    }
+
+    exec(action: ISDobbyClientAction): void {
+        this._socket.send(JSON.stringify(action));
     }
 }

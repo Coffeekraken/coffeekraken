@@ -4,7 +4,7 @@ import __SDobbyAdapter from '../SDobbyAdapter.js';
 
 import * as __gun from 'gun';
 
-import { ISDobbyGunJsAdapterSettings } from './SDobbyGunJsAdapterTypes.js';
+import { ISDobbyP2pPoolSettings } from '../../shared/types.js';
 import type {
     ISDobbyAdapter,
     ISDobbyAdapterSettings,
@@ -28,25 +28,11 @@ import type {
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 
-export const SDobbyGunJsAdapterSettingsSpecs = {
-    type: 'Object',
-    title: 'SDobby Gun JS adapter settings',
-    description: 'Specify the SDobby Gun JS adapter settings',
-    props: {
-        key: {
-            type: 'String',
-            title: 'Gun JS storage key',
-            description: 'Specify the Gun JS storage key',
-            required: true,
-        },
-    },
-};
-
-export default class SDobbyFsAdapter
+export default class SDobbyP2pAdapter
     extends __SDobbyAdapter
     implements ISDobbyAdapter
 {
-    settings: ISDobbyGunJsAdapterSettings;
+    settings: ISDobbyP2pPoolSettings;
 
     /**
      * @name        constructor
@@ -66,7 +52,7 @@ export default class SDobbyFsAdapter
         // start GunJS
         this._gun = __gun
             .default([
-                'http://localhost:8765/gun1',
+                'http://localhost:8765/gun',
                 'https://gun-manhattan.herokuapp.com/gun',
             ])
             .get('development');

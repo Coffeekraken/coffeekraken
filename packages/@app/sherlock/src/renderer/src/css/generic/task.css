@@ -3,6 +3,7 @@
         background: sugar.color(main, --lighten 20% --alpha 0.1);
         padding: sugar.padding(20) sugar.padding(30);
         backdrop-filter: blur(10px);
+        user-select: none;
         @sugar.border.radius;
         @sugar.transition;
 
@@ -43,11 +44,24 @@
         }
     }
 
+    ._next {
+        padding-inline-end: sugar.padding(30);
+
+        span {
+            opacity: 0.6;
+        }
+    }
+
     ._results {
         position: relative;
         overflow-y: auto;
         max-height: 50vh;
         @sugar.scrollbar;
+    }
+    ._result {
+        &:nth-child(even) ._result-header {
+            background: sugar.color(main, --lighten 20% --alpha 0.02);
+        }
 
         &:before {
             content: '';
@@ -60,11 +74,6 @@
             background: sugar.color(main, border);
         }
     }
-    ._result {
-        &:nth-child(even) ._result-header {
-            background: sugar.color(main, --lighten 20% --alpha 0.02);
-        }
-    }
 
     ._result-header {
         display: flex;
@@ -73,6 +82,5 @@
     }
 
     ._duration {
-        @sugar.typo p;
     }
 }

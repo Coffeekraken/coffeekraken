@@ -1,11 +1,23 @@
 import { LitElement, css, html } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 
+import { __pad } from '@coffeekraken/sugar/number';
+
 import { __timeAgo } from '@coffeekraken/sugar/datetime';
+
+import type { ISDobbyTaskMetas, ISDobbyTaskResult } from '@coffeekraken/s-dobby';
+
+import __cronParser from 'cron-parser';
 
 import type { ISherlockService } from '../../../../../shared/SherlockTypes.js';
 
 import __sherlockStores from '../../stores/SherlockStores';
+
+import __SherlockResponseTimeResultComponent from '../results/responseTime/SherlockResponseTimeResultComponent.js';
+
+const resultComponentsByTaskType = {
+    responseTime: __SherlockResponseTimeResultComponent,
+};
 
 @customElement('sherlock-service')
 export class SherlockServiceComponent extends LitElement {
@@ -27,6 +39,25 @@ export class SherlockServiceComponent extends LitElement {
         __sherlockStores.route.$set('service', () => {
             this.requestUpdate();
         });
+    }
+
+    startTask(task: ISDobbyTaskMetas) {
+        __sherlockStores.tasks.startTask(task);
+    }
+
+    pauseTask(task: ISDobbyTaskMetas) {
+        __sherlockStores.tasks.pauseTask(task);
+    }
+
+    resumeTask(task: ISDobbyTaskMetas) {
+        __sherlockStores.tasks.resumeTask(task);
+    }
+
+    renderResultWidget(result: ISDobbyTaskResult): any {
+        if (!resultComponentsByTaskType[result?.data?.task?.type]) {
+            return '';
+        }
+        return resultComponentsByTaskType[result.data.task.type].renderListWidget(result.data);
     }
 
     render() {
@@ -79,7 +110,22 @@ export class SherlockServiceComponent extends LitElement {
                             const taskResults =
                                 __sherlockStores.tasksResults.getTaskResults(taskUid);
 
-                            const lastTaskResults = taskResults.at(-1);
+                            const lastTaskResult = taskResults.at(-1);
+
+                            let cron,
+                                cronNext,
+                                nextStr = '';
+                            if (task.schedule) {
+                                cron = __cronParser.parseExpression(task.schedule);
+                                cronNext = cron.next();
+                                nextStr = `${__pad(cronNext.getDay(), 2)}.${__pad(
+                                    cronNext.getMonth(),
+                                    2,
+                                )}.${__pad(cronNext.getFullYear(), 4)} ${__pad(
+                                    cronNext.getHours(),
+                                    2,
+                                )}:${__pad(cronNext.getMinutes(), 2)}`;
+                            }
 
                             return html`
                                 <article class="task ${taskState.details ? 'details' : ''}">
@@ -96,14 +142,14 @@ export class SherlockServiceComponent extends LitElement {
                                                           class="s-loader:spinner s-tc:accent"
                                                       ></i>`
                                                     : html`
-                                                          ${lastTaskResults?.data.status ===
+                                                          ${lastTaskResult?.data.status ===
                                                           'success'
                                                               ? html`
                                                                     <i
                                                                         class="fa-solid fa-check s-color:success"
                                                                     ></i>
                                                                 `
-                                                              : lastTaskResults?.data.status ===
+                                                              : lastTaskResult?.data.status ===
                                                                 'warning'
                                                               ? html`
                                                                     <i
@@ -120,12 +166,37 @@ export class SherlockServiceComponent extends LitElement {
                                                 <h1 class="s-typo:h4">${task.name}</h1>
                                             </div>
                                             <div class="s-flex-item:grow"></div>
+                                            <div class="_next s-tooltip-container">
+                                                <span class="s-font:code">${nextStr}</span>
+                                                <div class="s-tooltip">Next execution time</div>
+                                            </div>
                                             <button
                                                 class="s-btn:text s-tooltip-container"
                                                 confirm="Really?"
+                                                @pointerup=${(e) => {
+                                                    if (e.target.needConfirmation) {
+                                                        return;
+                                                    }
+
+                                                    if (!task.schedule) {
+                                                        this.startTask(task);
+                                                        return;
+                                                    }
+
+                                                    if (task.state === 'paused') {
+                                                        this.resumeTask(task);
+                                                    } else {
+                                                        this.pauseTask(task);
+                                                    }
+                                                }}
                                             >
-                                                <i class="fa-solid fa-pause"></i>
-                                                <div class="s-tooltip">Pause this task</div>
+                                                ${task.state === 'paused' || !task.schedule
+                                                    ? html` <i class="fa-solid fa-play"></i> `
+                                                    : html` <i class="fa-solid fa-pause"></i> `}
+                                                <div class="s-tooltip">
+                                                    ${task.state === 'paused' ? 'Resume' : 'Pause'}
+                                                    this task
+                                                </div>
                                             </button>
                                             <button
                                                 class="s-btn:text s-tooltip-container"
@@ -173,17 +244,25 @@ export class SherlockServiceComponent extends LitElement {
                                                                                   class="fa-solid fa-xmark s-color:error"
                                                                               ></i>
                                                                           `}
-                                                                    <h2 class="s-typo:p">
-                                                                        ${__timeAgo(
-                                                                            taskResult.data.time /
-                                                                                1000,
+                                                                    <div class="_result-widget">
+                                                                        ${this.renderResultWidget(
+                                                                            taskResult,
                                                                         )}
-                                                                    </h2>
+                                                                    </div>
                                                                 </div>
                                                                 <div class="s-flex-item:grow"></div>
                                                                 <div class="_duration">
-                                                                    ${taskResult.data.duration
-                                                                        .formatedDuration}
+                                                                    <span class="s-font:code"
+                                                                        >${__timeAgo(
+                                                                            taskResult.data.time /
+                                                                                1000,
+                                                                        )}</span
+                                                                    >
+                                                                    in
+                                                                    <span class="s-font:code"
+                                                                        >${taskResult.data.duration
+                                                                            .formatedDuration}</span
+                                                                    >
                                                                 </div>
                                                                 <button class="s-btn:text">
                                                                     <i

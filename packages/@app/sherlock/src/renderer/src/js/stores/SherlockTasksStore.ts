@@ -26,20 +26,27 @@ class SherlockTasksStore extends __SStore {
             tasks: {},
         });
 
-        dobbyClient.on('config', (config) => {
-            Object.assign(this.tasks, config.tasks);
+        dobbyClient.on('pool', (poolEvent) => {
+            Object.assign(this.tasks, poolEvent.config.tasks);
         });
-        dobbyClient.on('task.start', (task) => {
-            if (!this.tasks[task.uid]) {
+        dobbyClient.on('task.start', (res) => {
+            if (!this.tasks[res.task.uid]) {
                 return;
             }
-            this.tasks[task.uid].status = 'running';
+            this.tasks[res.task.uid].status = 'running';
         });
         dobbyClient.on('task.end', (result: ISDobbyTaskResult) => {
             if (!this.tasks[result.task.uid]) {
                 return;
             }
             this.tasks[result.task.uid].status = 'idle';
+        });
+        dobbyClient.on('task.update', (newTaskMetas) => {
+            const taskMetas = this.getTask(newTaskMetas.uid);
+            if (!taskMetas) {
+                return;
+            }
+            Object.assign(taskMetas, newTaskMetas);
         });
 
         dobbyClient.connect();
@@ -70,8 +77,33 @@ class SherlockTasksStore extends __SStore {
         return tasks;
     }
 
-    getTask(taskId: string): ISDobbyTaskMetas {
-        return tasksStore[taskId];
+    getTask(taskUid: string): ISDobbyTaskMetas {
+        return this.tasks[taskUid];
+    }
+
+    startTask(task: ISDobbyTaskMetas): ISDobbyTaskMetas {
+        dobbyClient.exec({
+            type: 'task.start',
+            taskUid: task.uid,
+            poolUid: task.poolUid,
+        });
+    }
+
+    pauseTask(task: ISDobbyTaskMetas): ISDobbyTaskMetas {
+        dobbyClient.exec({
+            type: 'task.pause',
+            taskUid: task.uid,
+            poolUid: task.poolUid,
+        });
+    }
+
+    resumeTask(task: ISDobbyTaskMetas): ISDobbyTaskMetas {
+        console.log('resume');
+        dobbyClient.exec({
+            type: 'task.resume',
+            taskUid: task.uid,
+            poolUid: task.poolUid,
+        });
     }
 
     newTask(task: ISDobbyTaskMetas): ISDobbyTaskMetas {

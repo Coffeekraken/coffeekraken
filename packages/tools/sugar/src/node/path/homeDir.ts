@@ -1,4 +1,4 @@
-// import __userdir from 'userdir';
+import __userdir from 'userdir';
 
 // @ts-nocheck
 
@@ -28,6 +28,5 @@
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 export default function homeDir() {
-    return 'coco';
-    // return __userdir();
+    return __userdir();
 }

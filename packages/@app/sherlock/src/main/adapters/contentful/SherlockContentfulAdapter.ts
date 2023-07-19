@@ -33,6 +33,21 @@ export default class SherlockContentfulAdapter
             description: entry.fields.description,
         };
     }
+
+    getPools(): Promise<Record<string, ISherlockClient>> {
+        return new Promise(async (resolve) => {
+            const entries = await this._client.getEntries({
+                content_type: 'client',
+            });
+
+            const clients = {};
+            entries.items.forEach((entry) => {
+                clients[entry.fields.uid] = this._processClientFromEntry(entry);
+            });
+            resolve(clients);
+        });
+    }
+
     getClients(): Promise<Record<string, ISherlockClient>> {
         return new Promise(async (resolve) => {
             const entries = await this._client.getEntries({

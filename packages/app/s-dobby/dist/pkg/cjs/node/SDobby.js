@@ -12,17 +12,14 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.SDobbyStartParamsSpecs = void 0;
 const s_class_1 = __importDefault(require("@coffeekraken/s-class"));
 const s_event_emitter_1 = __importDefault(require("@coffeekraken/s-event-emitter"));
 // import __SPromise from '@coffeekraken/s-promise';
-const s_specs_1 = __importDefault(require("@coffeekraken/s-specs"));
 const object_1 = require("@coffeekraken/sugar/object");
-const process_1 = require("@coffeekraken/sugar/process");
 const ws_1 = require("ws");
+const SDobbyLighthouseTask_js_1 = __importDefault(require("./tasks/SDobbyLighthouseTask.js"));
 const SDobbyResponseTimeTask_js_1 = __importDefault(require("./tasks/SDobbyResponseTimeTask.js"));
-const node_schedule_1 = __importDefault(require("node-schedule"));
-const exports_js_1 = require("./exports.js");
+const SDobbyFsPool_js_1 = __importDefault(require("./pools/SDobbyFsPool.js"));
 /**
  * @name                SDobby
  * @namespace           node
@@ -46,23 +43,7 @@ const exports_js_1 = require("./exports.js");
  * @since           2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-exports.SDobbyStartParamsSpecs = {
-    type: 'Object',
-    title: 'Start params',
-    description: 'Start parameters',
-    props: {
-        uid: {
-            type: 'String',
-            title: 'UID',
-            description: 'Dobby process uid',
-            default: 'default',
-        },
-    },
-};
 class SDobby extends s_class_1.default {
-    get uid() {
-        return this._uid;
-    }
     /**
      * @name        constructor
      * @type        Function
@@ -86,61 +67,110 @@ class SDobby extends s_class_1.default {
          */
         this.events = new s_event_emitter_1.default();
         /**
-         * @name        uid
-         * @type        String
+         * @name        pools
+         * @type        Record<string, ISDobbyPool>
          *
-         * Store the dobby uid
-         *
-         * @since           2.0.0
-         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-         */
-        this._uid = 'default';
-        /**
-         * @name        config
-         * @type        ISDobbyConfig
-         *
-         * Store the actual config
+         * Store the registered pools
          *
          * @since           2.0.0
          * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
-        this.config = {
-            tasks: {},
-        };
-        // uid
-        if (settings === null || settings === void 0 ? void 0 : settings.uid) {
-            this._uid = settings.uid;
-        }
-        // default adapter
-        if (!this.settings.adapter) {
-            this.settings.adapter = new exports_js_1.__SDobbyFsAdapter();
-            // this.settings.adapter = new __SDobbyGunJsAdapter({
-            //     key: 'fjwoiefjijoij3oirjion2fdjineiujfwnuhw0chqowcoqwnfijonqwfqéwnef',
-            // });
-        }
+        this.pools = {};
+        // default pool
+        this.pools.local = new SDobbyFsPool_js_1.default({
+            uid: 'local',
+            name: 'Local',
+            type: 'fs',
+            settings,
+        }, this);
     }
     server() {
         console.log('<yellow>[SDobby]</yellow> Starting websocket server');
         const wss = new ws_1.WebSocketServer({
             port: 8787,
         });
+        // store at instance level
+        this._wss = wss;
+        // listen for connections
         wss.on('connection', (ws) => {
             ws.on('error', console.error);
             ws.on('message', (data) => {
-                console.log('received: %s', data);
+                try {
+                    data = JSON.parse(data);
+                }
+                catch (e) { }
+                if (data.type) {
+                    this._executeAction(data);
+                }
             });
-            this._send({
-                type: 'config',
-                data: this.config,
-            }, ws);
+            // announce all pools to client
+            for (let [poolUid, pool] of Object.entries(this.pools)) {
+                this._announcePool(pool, ws);
+            }
         });
-        // store at instance level
-        this._wss = wss;
+    }
+    /**
+     * Get a task metas from the poolUid and his uid
+     */
+    _getTaskMetasFromConfig(poolUid, taskUid) {
+        if (!this.pools[poolUid]) {
+            return;
+        }
+        // get the task from config
+        const taskMetas = this.pools[poolUid].getTask(taskUid);
+        return taskMetas;
+    }
+    /**
+     * Execute a particular action
+     */
+    _executeAction(action) {
+        switch (action.type) {
+            case 'task.start':
+                this.pools[action.poolUid].executeTask(action.taskUid);
+                break;
+            case 'task.pause':
+            case 'task.resume':
+                const taskMetas = this._getTaskMetasFromConfig(action.poolUid, action.taskUid);
+                if (!taskMetas) {
+                    return;
+                }
+                // update the state
+                taskMetas.state =
+                    action.type === 'task.pause' ? 'paused' : 'active';
+                // save the new configuration
+                this.pools[action.poolUid].saveConfig();
+                // broadcast an update on a task
+                this.broadcast({
+                    type: 'task.update',
+                    data: Object.assign(Object.assign({}, taskMetas), { poolUid: action.poolUid }),
+                });
+                break;
+        }
+    }
+    /**
+     * Annouce a pool to all clients or to a specific one
+     */
+    _announcePool(pool, to) {
+        var _a;
+        const clonedPool = (0, object_1.__clone)(pool, {
+            deep: true,
+        });
+        // add the "poolUid" to each tasks
+        for (let [taskUid, task] of Object.entries((_a = clonedPool.config.tasks) !== null && _a !== void 0 ? _a : {})) {
+            task.poolUid = clonedPool.metas.uid;
+        }
+        this[to ? 'send' : 'broadcast']({
+            type: 'pool',
+            data: {
+                pool: clonedPool.metas,
+                config: clonedPool.config,
+            },
+        }, to);
     }
     /**
      * Send something a particular client
      */
-    _send(data, ws) {
+    send(data, ws) {
         if (!this._wss) {
             return;
         }
@@ -156,7 +186,7 @@ class SDobby extends s_class_1.default {
     /**
      * Broadcast something to all connected clients on socket
      */
-    _broadcast(data) {
+    broadcast(data) {
         if (!this._wss) {
             return;
         }
@@ -181,115 +211,19 @@ class SDobby extends s_class_1.default {
      * @since           2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    start(params) {
+    start() {
         return new Promise((resolve) => __awaiter(this, void 0, void 0, function* () {
-            const finalParams = s_specs_1.default.apply(params, exports.SDobbyStartParamsSpecs);
-            // killing scheduled tasks gracefully
-            (0, process_1.__onProcessExit)(() => __awaiter(this, void 0, void 0, function* () {
-                console.log(`<red>[SDobby]</red> Gracefully kill the scheduled tasks...`);
-                yield node_schedule_1.default.gracefulShutdown();
-            }));
-            // save the uid
-            if (!finalParams.uid.match(/^[a-zA-Z0-9_-]+$/)) {
-                throw new Error(`The passed uid "${finalParams.uid}" ¡s invalid. /^[a-zA-Z0-9_-]+$/`);
+            // listen for pools ready
+            this.events.on('pool.ready', (pool) => {
+                this._announcePool(pool);
+            });
+            // start each pools
+            for (let [poolUid, pool] of Object.entries(this.pools)) {
+                yield pool.start();
             }
-            this._uid = finalParams.uid;
-            // load the config
-            this.config = yield this.settings.adapter.loadConfig(finalParams.uid);
             // ready
             this.events.emit('ready');
-            // start the scheduler
-            this._startScheduler();
         }));
-    }
-    /**
-     * Enqueue a task
-     */
-    _enqueueTask(taskMetas) {
-        node_schedule_1.default.scheduleJob(taskMetas.schedule, () => {
-            // execute task
-            this.executeTask(taskMetas);
-        });
-    }
-    /**
-     * Start the scheduler that will execute the tasks when needed
-     */
-    _startScheduler() {
-        var _a;
-        // loop on each tasks to schedule them
-        for (let [taskUid, taskMetas] of Object.entries((_a = this.config.tasks) !== null && _a !== void 0 ? _a : {})) {
-            this._enqueueTask(taskMetas);
-        }
-    }
-    /**
-     * Executing a tasks
-     */
-    executeTask(taskMetas) {
-        return __awaiter(this, void 0, void 0, function* () {
-            const TaskClass = this.constructor.registeredTasks[taskMetas.type];
-            // broadcast a start task event
-            this._broadcast({
-                type: 'task.start',
-                data: taskMetas,
-            });
-            if (!TaskClass) {
-                throw new Error(`<red>[SDobby]</red> The task <yellow>${taskMetas.name} (${taskMetas.type})</yellow> is not an available task type...`);
-            }
-            const task = new TaskClass(taskMetas);
-            const taskResult = yield task.run();
-            // broadcast a start task event
-            this._broadcast({
-                type: 'task.end',
-                data: taskResult,
-            });
-            return taskResult;
-        });
-    }
-    /**
-     * @name        addTask
-     * @type        Function
-     * @async
-     *
-     * Add a new task in the queue
-     *
-     * @param       {ISDobbyTask}          task             The task to add
-     * @return      {Promise<void>}                         A promise resolved once the task is added successfully
-     *
-     * @since           2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-     */
-    addTask(taskMetas) {
-        return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
-            var _a;
-            // make sure the tasks not already exists
-            if ((_a = this.config.tasks) === null || _a === void 0 ? void 0 : _a[taskMetas.uid]) {
-                return reject({
-                    message: `A task with the uid \`${taskMetas.uid}\` already exists`,
-                });
-            }
-            // add the task in the config
-            this.config.tasks[taskMetas.uid] = taskMetas;
-            // save the config
-            this.settings.adapter.saveConfig(this.uid, this.config);
-            // enqueue the new task
-            this._enqueueTask(taskMetas);
-        }));
-    }
-    /**
-     * @name        removeTask
-     * @type        Function
-     * @async
-     *
-     * Remove an existing task from the queue
-     *
-     * @param       {String}          taskUid             The task UID to remove
-     * @return      {Promise<void>}                         A promise resolved once the task is added successfully
-     *
-     * @since           2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-     */
-    removeTask(taskUid) {
-        return new Promise((resolve) => __awaiter(this, void 0, void 0, function* () { }));
     }
 }
 exports.default = SDobby;
@@ -304,5 +238,6 @@ exports.default = SDobby;
  */
 SDobby.registeredTasks = {
     responseTime: SDobbyResponseTimeTask_js_1.default,
+    lighthouse: SDobbyLighthouseTask_js_1.default,
 };
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7OztBQUFBLG9FQUE2QztBQUM3QyxvRkFBNEQ7QUFDNUQsb0RBQW9EO0FBQ3BELG9FQUE2QztBQUM3Qyx1REFBeUQ7QUFDekQseURBQThEO0FBQzlELDJCQUFxQztBQUVyQyxrR0FBeUU7QUFFekUsa0VBQTJDO0FBRTNDLDZDQUFpRDtBQVVqRDs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQXNCRztBQUVVLFFBQUEsc0JBQXNCLEdBQUc7SUFDbEMsSUFBSSxFQUFFLFFBQVE7SUFDZCxLQUFLLEVBQUUsY0FBYztJQUNyQixXQUFXLEVBQUUsa0JBQWtCO0lBQy9CLEtBQUssRUFBRTtRQUNILEdBQUcsRUFBRTtZQUNELElBQUksRUFBRSxRQUFRO1lBQ2QsS0FBSyxFQUFFLEtBQUs7WUFDWixXQUFXLEVBQUUsbUJBQW1CO1lBQ2hDLE9BQU8sRUFBRSxTQUFTO1NBQ3JCO0tBQ0o7Q0FDSixDQUFDO0FBRUYsTUFBcUIsTUFBTyxTQUFRLGlCQUFRO0lBZ0R4QyxJQUFJLEdBQUc7UUFDSCxPQUFPLElBQUksQ0FBQyxJQUFJLENBQUM7SUFDckIsQ0FBQztJQWVEOzs7Ozs7Ozs7T0FTRztJQUNILFlBQVksUUFBMEI7UUFDbEMsS0FBSyxDQUFDLElBQUEsb0JBQVcsRUFBQyxFQUFFLEVBQUUsUUFBUSxhQUFSLFFBQVEsY0FBUixRQUFRLEdBQUksRUFBRSxDQUFDLENBQUMsQ0FBQztRQWpEM0M7Ozs7Ozs7O1dBUUc7UUFDSCxXQUFNLEdBQW9CLElBQUkseUJBQWUsRUFBRSxDQUFDO1FBRWhEOzs7Ozs7OztXQVFHO1FBQ0ssU0FBSSxHQUFXLFNBQVMsQ0FBQztRQUtqQzs7Ozs7Ozs7V0FRRztRQUNILFdBQU0sR0FBa0I7WUFDcEIsS0FBSyxFQUFFLEVBQUU7U0FDWixDQUFDO1FBZUUsTUFBTTtRQUNOLElBQUksUUFBUSxhQUFSLFFB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
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7O0FBQUEsb0VBQTZDO0FBQzdDLG9GQUE0RDtBQUM1RCxvREFBb0Q7QUFDcEQsdURBQWtFO0FBQ2xFLDJCQUFxQztBQUVyQyw4RkFBcUU7QUFDckUsa0dBQXlFO0FBV3pFLDhFQUFxRDtBQUVyRDs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQXNCRztBQUVILE1BQXFCLE1BQU8sU0FBUSxpQkFBUTtJQWtEeEM7Ozs7Ozs7OztPQVNHO0lBQ0gsWUFBWSxRQUEwQjtRQUNsQyxLQUFLLENBQUMsSUFBQSxvQkFBVyxFQUFDLEVBQUUsRUFBRSxRQUFRLGFBQVIsUUFBUSxjQUFSLFFBQVEsR0FBSSxFQUFFLENBQUMsQ0FBQyxDQUFDO1FBakMzQzs7Ozs7Ozs7V0FRRztRQUNILFdBQU0sR0FBb0IsSUFBSSx5QkFBZSxFQUFFLENBQUM7UUFFaEQ7Ozs7Ozs7O1dBUUc7UUFDSCxVQUFLLEdBQWdDLEVBQUUsQ0FBQztRQWVwQyxlQUFlO1FBQ2YsSUFBSSxDQUFDLEtBQUssQ0FBQyxLQUFLLEdBQUcsSUFBSSx5QkFBYyxDQUNmO1lBQ2QsR0FBRyxFQUFFLE9BQU87WUFDWixJQUFJLEVBQUUsT0FBTztZQUNiLElBQUksRUFBRSxJQUFJO1lBQ1YsUUFBUTtTQUNYLEVBQ0QsSUFBSSxDQUNQLENBQUM7SUFDTixDQUFDO0lBRUQsTUFBTTtRQUNGLE9BQU8sQ0FBQyxHQUFHLENBQUMscURBQXFELENBQUMsQ0FBQztRQUNuRSxNQUFNLEdBQUcsR0FBRyxJQUFJLG9CQUFlLENBQUM7WUFDNUIsSUFBSSxFQUFFLElBQUk7U0FDYixDQUFDLENBQUM7UUFDSCwwQkFBMEI7UUFDMUIsSUFBSSxDQUFDLElBQUksR0FBRyxHQUFHLENBQUM7UUFFaEIseUJBQXlCO1FBQ3pCLEdBQUcsQ0FBQyxFQUFFLENBQUMsWUFBWSxFQUFFLENBQUMsRUFBRSxFQUFFLEVBQUU7WUFDeEIsRUFBRSxDQUFDLEVBQUUsQ0FBQyxPQUFPLEVBQUUsT0FBTyxDQUFDLEtBQUssQ0FBQyxDQUFDO1lBQzlCLEVBQUUsQ0FBQyxFQUFFLENBQUMsU0FBUyxFQUFFLENBQUMsSUFBSSxFQUFFLEVBQUU7Z0JBQ3RCLElBQUk7b0JBQ0EsSUFBSSxHQUFHLElBQUksQ0FBQyxLQUFLLENBQUMsSUFBSSxDQUFDLENBQUM7aUJBQzNCO2dCQUFDLE9BQU8sQ0FBQyxFQUFFLEdBQUU7Z0JBQ2QsSUFBSSxJQUFJLENBQUMsSUFBSSxFQUFFO29CQUNYLElBQUksQ0FBQyxjQUFjLENBQUMsSUFBSSxDQUFDLENBQUM7aUJBQzdCO1lBQ0wsQ0FBQyxDQUFDLENBQUM7WUFFSCwrQkFBK0I7WUFDL0IsS0FBSyxJQUFJLENBQUMsT0FBTyxFQUFFLElBQUksQ0FBQyxJQUFJLE1BQU0sQ0FBQyxPQUFPLENBQUMsSUFBSSxDQUFDLEtBQUssQ0FBQyxFQUFFO2dCQUNwRCxJQUFJLENBQUMsYUFBYSxDQUFDLElBQUksRUFBRSxFQUFFLENBQUMsQ0FBQzthQUNoQztRQUNMLENBQUMsQ0FBQyxDQUFDO0lBQ1AsQ0FBQztJQUVEOztPQUVHO0lBQ0gsdUJBQXVCLENBQUMsT0FBZSxFQUFFLE9BQWU7UUFDcEQsSUFBSSxDQUFDLElBQUksQ0FBQyxLQUFLLENBQUMsT0FBTyxDQUFDLEVBQUU7WUFDdEIsT0FBTztTQUNWO1FBQ0QsMkJBQTJCO1FBQzNCLE1BQU0sU0FBUyxHQUFHLElBQUksQ0FBQyxLQUFLLENBQUMsT0FBTyxDQUFDLENBQUMsT0FBTyxDQUFDLE9BQU8sQ0FBQyxDQUFDO1FBQ3ZELE9BQU8sU0FBUyxDQUFDO0lBQ3JCLENBQUM7SUFFRDs7T0FFRztJQUNILGNBQWMsQ0FBQyxNQUEyQjtRQUN0QyxRQUFRLE1BQU0sQ0FBQyxJQUFJLEVBQUU7WUFDakIsS0FBSyxZQUFZO2dCQUNiLElBQUksQ0FBQyxLQUFLLENBQUMsTUFBTSxDQUFDLE9BQU8sQ0FBQyxDQUFDLFdBQVcsQ0FBQyxNQUFNLENBQUMsT0FBTyxDQUFDLENBQUM7Z0JBQ3ZELE1BQU07WUFDVixLQUFLLFlBQVksQ0FBQztZQUNsQixLQUFLLGFBQWE7Z0JBQ2QsTUFBTSxTQUFTLEdBQUcsSUFBSSxDQUFDLHVCQUF1QixDQUMxQyxNQUFNLENBQUMsT0FBTyxFQUNkLE1BQU0sQ0FBQyxPQUFPLENBQ2pCLENBQUM7Z0JBRUYsSUFBSSxDQUFDLFNBQVMsRUFBRTtvQkFDWixPQUFPO2lCQUNWO2dCQUVELG1CQUFtQjtnQkFDbkIsU0FBUyxDQUFDLEtBQUs7b0JBQ1gsTUFBTSxDQUFDLElBQUksS0FBSyxZQUFZLENBQUMsQ0FBQyxDQUFDLFFBQVEsQ0FBQyxDQUFDLENBQUMsUUFBUSxDQUFDO2dCQUN2RCw2QkFBNkI7Z0JBQzdCLElBQUksQ0FBQyxLQUFLLENBQUMsTUFBTSxDQUFDLE9BQU8sQ0FBQyxDQUFDLFVBQVUsRUFBRSxDQUFDO2dCQUV4QyxnQ0FBZ0M7Z0JBQ2hDLElBQUksQ0FBQyxTQUFTLENBQUM7b0JBQ1gsSUFBSSxFQUFFLGFBQWE7b0JBQ25CLElBQUksa0NBQ0csU0FBUyxLQUNaLE9BQU8sRUFBRSxNQUFNLENBQUMsT0FBTyxHQUMxQjtpQkFDSixDQUFDLENBQUM7Z0JBQ0gsTUFBTTtTQUNiO0lBQ0wsQ0FBQztJQUVEOztPQUVHO0lBQ0gsYUFBYSxDQUFDLElBQWlCLEVBQUUsRUFBUTs7UUFDckMsTUFBTSxVQUFVLEdBQUcsSUFBQSxnQkFBTyxFQUFDLElBQUksRUFBRTtZQUM3QixJQUFJLEVBQUUsSUFBSTtTQUNiLENBQUMsQ0FBQztRQUVILGtDQUFrQztRQUNsQyxLQUFLLElBQUksQ0FBQyxPQUFPLEVBQUUsSUFBSSxDQUFDLElBQUksTUFBTSxDQUFDLE9BQU8sQ0FDdEMsTUFBQSxVQUFVLENBQUMsTUFBTSxDQUFDLEtBQUssbUNBQUksRUFBRSxDQUNoQyxFQUFFO1lBQ29CLElBQUssQ0FBQyxPQUFPLEdBQUcsVUFBVSxDQUFDLEtBQUssQ0FBQyxHQUFHLENBQUM7U0FDM0Q7UUFFRCxJQUFJLENBQUMsRUFBRSxDQUFDLENBQUMsQ0FBQyxNQUFNLENBQUMsQ0FBQyxDQUFDLFdBQVcsQ0FBQyxDQUMzQjtZQUNJLElBQUksRUFBRSxNQUFNO1lBQ1osSUFBSSxFQUFvQjtnQkFDcEIsSUFBSSxFQUFFLFVBQVUsQ0FBQyxLQUFLO2dCQUN0QixNQUFNLEVBQUUsVUFBVSxDQUFDLE1BQU07YUFDNUI7U0FDSixFQUNELEVBQUUsQ0FDTCxDQUFDO0lBQ04sQ0FBQztJQUVEOztPQUVHO0lBQ0gsSUFBSSxDQUFDLElBQVMsRUFBRSxFQUFPO1FBQ25CLElBQUksQ0FBQyxJQUFJLENBQUMsSUFBSSxFQUFFO1lBQ1osT0FBTztTQUNWO1FBRUQsSUFBSSxPQUFPLEdBQUcsSUFBSSxDQUFDO1FBQ25CLElBQUk7WUFDQSxPQUFPLEdBQUcsSUFBSSxDQUFDLFNBQVMsQ0FBQyxJQUFJLENBQUMsQ0FBQztTQUNsQztRQUFDLE9BQU8sQ0FBQyxFQUFFLEdBQUU7UUFFZCxJQUFJLEVBQUUsQ0FBQyxVQUFVLEtBQUssQ0FBQyxFQUFFO1lBQ3JCLEVBQUUsQ0FBQyxJQUFJLENBQUMsT0FBTyxFQUFFLEVBQUUsTUFBTSxFQUFFLElBQUksRUFBRSxDQUFDLENBQUM7U0FDdEM7SUFDTCxDQUFDO0lBRUQ7O09BRUc7SUFDSCxTQUFTLENBQUMsSUFBUztRQUNmLElBQUksQ0FBQyxJQUFJLENBQUMsSUFBSSxFQUFFO1lBQ1osT0FBTztTQUNWO1FBRUQsSUFBSSxPQUFPLEdBQUcsSUFBSSxDQUFDO1FBQ25CLElBQUk7WUFDQSxPQUFPLEdBQUcsSUFBSSxDQUFDLFNBQVMsQ0FBQyxJQUFJLENBQUMsQ0FBQztTQUNsQztRQUFDLE9BQU8sQ0FBQyxFQUFFLEdBQUU7UUFFZCxJQUFJLENBQUMsSUFBSSxDQUFDLE9BQU8sQ0FBQyxPQUFPLENBQUMsQ0FBQyxNQUFNLEVBQUUsRUFBRTtZQUNqQyxJQUFJLE1BQU0sQ0FBQyxVQUFVLEtBQUssQ0FBQyxFQUFFO2dCQUN6QixNQUFNLENBQUMsSUFBSSxDQUFDLE9BQU8sRUFBRSxFQUFFLE1BQU0sRUFBRSxJQUFJLEVBQUUsQ0FBQyxDQUFDO2FBQzFDO1FBQ0wsQ0FBQyxDQUFDLENBQUM7SUFDUCxDQUFDO0lBRUQ7Ozs7Ozs7OztPQVNHO0lBQ0gsS0FBSztRQUNELE9BQU8sSUFBSSxPQUFPLENBQUMsQ0FBTyxPQUFPLEVBQUUsRUFBRTtZQUNqQyx5QkFBeUI7WUFDekIsSUFBSSxDQUFDLE1BQU0sQ0FBQyxFQUFFLENBQUMsWUFBWSxFQUFFLENBQUMsSUFBaUIsRUFBRSxFQUFFO2dCQUMvQyxJQUFJLENBQUMsYUFBYSxDQUFDLElBQUksQ0FBQyxDQUFDO1lBQzdCLENBQUMsQ0FBQyxDQUFDO1lBRUgsbUJBQW1CO1lBQ25CLEtBQUssSUFBSSxDQUFDLE9BQU8sRUFBRSxJQUFJLENBQUMsSUFBSSxNQUFNLENBQUMsT0FBTyxDQUFDLElBQUksQ0FBQyxLQUFLLENBQUMsRUFBRTtnQkFDcEQsTUFBTSxJQUFJLENBQUMsS0FBSyxFQUFFLENBQUM7YUFDdEI7WUFFRCxRQUFRO1lBQ1IsSUFBSSxDQUFDLE1BQU0sQ0FBQyxJQUFJLENBQUMsT0FBTyxDQUFDLENBQUM7UUFDOUIsQ0FBQyxDQUFBLENBQUMsQ0FBQztJQUNQLENBQUM7O0FBalBMLHlCQWtQQztBQS9PRzs7Ozs7Ozs7R0FRRztBQUNJLHNCQUFlLEdBQUc7SUFDckIsWUFBWSxFQUFFLG1DQUF3QjtJQUN0QyxVQUFVLEVBQUUsaUNBQXNCO0NBQ3JDLENBQUMifQ==

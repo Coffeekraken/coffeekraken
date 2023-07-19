@@ -1,6 +1,9 @@
 "use strict";
-// import __userdir from 'userdir';
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
+const userdir_1 = __importDefault(require("userdir"));
 // @ts-nocheck
 /**
  * @name                            homeDir
@@ -28,8 +31,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 function homeDir() {
-    return 'coco';
-    // return __userdir();
+    return (0, userdir_1.default)();
 }
 exports.default = homeDir;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxtQ0FBbUM7O0FBRW5DLGNBQWM7QUFFZDs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBd0JHO0FBQ0gsU0FBd0IsT0FBTztJQUMzQixPQUFPLE1BQU0sQ0FBQztJQUNkLHNCQUFzQjtBQUMxQixDQUFDO0FBSEQsMEJBR0MifQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7O0FBQUEsc0RBQWdDO0FBRWhDLGNBQWM7QUFFZDs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBd0JHO0FBQ0gsU0FBd0IsT0FBTztJQUMzQixPQUFPLElBQUEsaUJBQVMsR0FBRSxDQUFDO0FBQ3ZCLENBQUM7QUFGRCwwQkFFQyJ9

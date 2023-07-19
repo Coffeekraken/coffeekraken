@@ -32,6 +32,10 @@ sherlock-service {
         @sugar.typo lead;
     }
 
+    ._result-widget {
+        margin-inline-end: sugar.margin(30);
+    }
+
     ._tools {
         display: flex;
         align-items: center;

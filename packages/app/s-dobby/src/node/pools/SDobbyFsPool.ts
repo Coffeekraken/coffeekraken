@@ -1,21 +1,23 @@
 import __SSpecs from '@coffeekraken/s-specs';
 import { __readJsonSync, __writeJsonSync } from '@coffeekraken/sugar/fs';
 import { __deepMerge } from '@coffeekraken/sugar/object';
-import { homedir } from 'os';
-import __SDobbyAdapter from '../SDobbyAdapter.js';
+import __SDobbyPool from '../SDobbyPool.js';
 
 import __fs from 'fs';
 
-import { ISDobbyFsAdapterSettings } from '../types.js';
 import type {
-    ISDobbyAdapter,
-    ISDobbyAdapterSettings,
     ISDobbyConfig,
+    ISDobbyPoolMetas,
+    ISDobbyPoolSettings,
     ISDobbySaveConfigResult,
-} from './types';
+} from '../../shared/types';
+import { ISDobbyFsPoolSettings, ISDobbyPool } from '../../shared/types.js';
+
+import __SDobby from '../exports.js';
+import { SDobbyFsPoolSettingsSpecs } from '../specs.js';
 
 /**
- * @name                SDobbyFsAdapter
+ * @name                SDobbyFsPool
  * @namespace           node
  * @type                Class
  * @extends             SDobbyAdapter
@@ -24,31 +26,16 @@ import type {
  *
  * This class represent the filesystem dobby adapter.
  *
- * @param           {ISDobbyAdapterSettings}          [settings={}]           Some settings to configure your dobby adapter instance
+ * @param           {ISDobbyPoolMetas}          poolMetas       The informations about the pool like name, uid, etc...
+ * @param           {SDobby}                    dobby           The dobby instance on which this pool is attached
+ * @param           {ISDobbyPoolSettings}          [settings={}]           Some settings to configure your dobby adapter instance
  *
  * @since           2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 
-export const SDobbyFsAdapterSettingsSpecs = {
-    type: 'Object',
-    title: 'SDobby FS adapter settings',
-    description: 'Specify the SDobby FS adapter settings',
-    props: {
-        rootDir: {
-            type: 'String',
-            title: 'Root directory',
-            description: 'Specify where to save the SDobby configurations',
-            default: `${homedir()}/.dobby`,
-        },
-    },
-};
-
-export default class SDobbyFsAdapter
-    extends __SDobbyAdapter
-    implements ISDobbyAdapter
-{
-    settings: ISDobbyFsAdapterSettings;
+export default class SDobbyFsPool extends __SDobbyPool implements ISDobbyPool {
+    settings: ISDobbyFsPoolSettings;
 
     /**
      * @name        constructor
@@ -60,10 +47,16 @@ export default class SDobbyFsAdapter
      * @since           2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    constructor(settings?: ISDobbyAdapterSettings) {
+    constructor(
+        poolMetas: ISDobbyPoolMetas,
+        dobby: __SDobby,
+        settings?: ISDobbyPoolSettings,
+    ) {
         super(
+            poolMetas,
+            dobby,
             __deepMerge(
-                __SSpecs.extractDefaults(SDobbyFsAdapterSettingsSpecs),
+                __SSpecs.extractDefaults(SDobbyFsPoolSettingsSpecs),
                 settings ?? {},
             ),
         );
@@ -82,9 +75,9 @@ export default class SDobbyFsAdapter
      * @since           2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    loadConfig(uid: string): Promise<ISDobbyConfig> {
+    loadConfig(): Promise<ISDobbyConfig> {
         return new Promise((resolve) => {
-            const configPath = `${this.settings.rootDir}/${uid}.config.json`;
+            const configPath = `${this.settings.rootDir}/${this.uid}.config.json`;
 
             if (!__fs.existsSync(configPath)) {
                 return resolve({
@@ -93,6 +86,7 @@ export default class SDobbyFsAdapter
             }
 
             const config = __readJsonSync(configPath);
+
             resolve(config);
         });
     }
@@ -110,16 +104,10 @@ export default class SDobbyFsAdapter
      * @since           2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    saveConfig(
-        uid: string,
-        config: ISDobbyConfig,
-    ): Promise<ISDobbySaveConfigResult> {
+    saveConfig(): Promise<ISDobbySaveConfigResult> {
         return new Promise((resolve) => {
-            const configPath = `${this.settings.rootDir}/${uid}.config.json`;
-
-            console.log('SAVE', uid, configPath, config);
-
-            __writeJsonSync(configPath, config);
+            const configPath = `${this.settings.rootDir}/${this.uid}.config.json`;
+            __writeJsonSync(configPath, this.config);
             resolve({});
         });
     }

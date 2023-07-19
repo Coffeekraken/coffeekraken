@@ -1,24 +1,22 @@
 import __SClass from '@coffeekraken/s-class';
 import __SEventEmitter from '@coffeekraken/s-event-emitter';
 // import __SPromise from '@coffeekraken/s-promise';
-import __SSpecs from '@coffeekraken/s-specs';
-import { __deepMerge } from '@coffeekraken/sugar/object';
-import { __onProcessExit } from '@coffeekraken/sugar/process';
+import { __clone, __deepMerge } from '@coffeekraken/sugar/object';
 import { WebSocketServer } from 'ws';
 
+import __SDobbyLighthouseTask from './tasks/SDobbyLighthouseTask.js';
 import __SDobbyResponseTimeTask from './tasks/SDobbyResponseTimeTask.js';
 
-import __nodeSchedule from 'node-schedule';
-
-import { __SDobbyFsAdapter } from './exports.js';
 import type {
-    ISDobbyConfig,
+    ISDobbyClientAction,
     ISDobbyError,
+    ISDobbyPoolEvent,
+    ISDobbyPoolMetas,
     ISDobbySettings,
-    ISDobbyStartParams,
     ISDobbyTaskMetas,
-    ISDobbyTaskResult,
-} from './types';
+} from '../shared/types';
+import { ISDobbyPool } from '../shared/types.js';
+import __SDobbyFsPool from './pools/SDobbyFsPool.js';
 
 /**
  * @name                SDobby
@@ -44,20 +42,6 @@ import type {
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 
-export const SDobbyStartParamsSpecs = {
-    type: 'Object',
-    title: 'Start params',
-    description: 'Start parameters',
-    props: {
-        uid: {
-            type: 'String',
-            title: 'UID',
-            description: 'Dobby process uid',
-            default: 'default',
-        },
-    },
-};
-
 export default class SDobby extends __SClass {
     settings: ISDobbySettings;
 
@@ -72,6 +56,7 @@ export default class SDobby extends __SClass {
      */
     static registeredTasks = {
         responseTime: __SDobbyResponseTimeTask,
+        lighthouse: __SDobbyLighthouseTask,
     };
 
     /**
@@ -97,31 +82,15 @@ export default class SDobby extends __SClass {
     events: __SEventEmitter = new __SEventEmitter();
 
     /**
-     * @name        uid
-     * @type        String
+     * @name        pools
+     * @type        Record<string, ISDobbyPool>
      *
-     * Store the dobby uid
-     *
-     * @since           2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-     */
-    private _uid: string = 'default';
-    get uid(): string {
-        return this._uid;
-    }
-
-    /**
-     * @name        config
-     * @type        ISDobbyConfig
-     *
-     * Store the actual config
+     * Store the registered pools
      *
      * @since           2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    config: ISDobbyConfig = {
-        tasks: {},
-    };
+    pools: Record<string, ISDobbyPool> = {};
 
     /**
      * @name        constructor
@@ -136,18 +105,16 @@ export default class SDobby extends __SClass {
     constructor(settings?: ISDobbySettings) {
         super(__deepMerge({}, settings ?? {}));
 
-        // uid
-        if (settings?.uid) {
-            this._uid = settings.uid;
-        }
-
-        // default adapter
-        if (!this.settings.adapter) {
-            this.settings.adapter = new __SDobbyFsAdapter();
-            // this.settings.adapter = new __SDobbyGunJsAdapter({
-            //     key: 'fjwoiefjijoij3oirjion2fdjineiujfwnuhw0chqowcoqwnfijonqwfqéwnef',
-            // });
-        }
+        // default pool
+        this.pools.local = new __SDobbyFsPool(
+            <ISDobbyPoolMetas>{
+                uid: 'local',
+                name: 'Local',
+                type: 'fs',
+                settings,
+            },
+            this,
+        );
     }
 
     server(): void {
@@ -155,28 +122,108 @@ export default class SDobby extends __SClass {
         const wss = new WebSocketServer({
             port: 8787,
         });
+        // store at instance level
+        this._wss = wss;
+
+        // listen for connections
         wss.on('connection', (ws) => {
             ws.on('error', console.error);
             ws.on('message', (data) => {
-                console.log('received: %s', data);
+                try {
+                    data = JSON.parse(data);
+                } catch (e) {}
+                if (data.type) {
+                    this._executeAction(data);
+                }
             });
-            this._send(
-                {
-                    type: 'config',
-                    data: this.config,
-                },
-                ws,
-            );
+
+            // announce all pools to client
+            for (let [poolUid, pool] of Object.entries(this.pools)) {
+                this._announcePool(pool, ws);
+            }
+        });
+    }
+
+    /**
+     * Get a task metas from the poolUid and his uid
+     */
+    _getTaskMetasFromConfig(poolUid: string, taskUid: string) {
+        if (!this.pools[poolUid]) {
+            return;
+        }
+        // get the task from config
+        const taskMetas = this.pools[poolUid].getTask(taskUid);
+        return taskMetas;
+    }
+
+    /**
+     * Execute a particular action
+     */
+    _executeAction(action: ISDobbyClientAction): void {
+        switch (action.type) {
+            case 'task.start':
+                this.pools[action.poolUid].executeTask(action.taskUid);
+                break;
+            case 'task.pause':
+            case 'task.resume':
+                const taskMetas = this._getTaskMetasFromConfig(
+                    action.poolUid,
+                    action.taskUid,
+                );
+
+                if (!taskMetas) {
+                    return;
+                }
+
+                // update the state
+                taskMetas.state =
+                    action.type === 'task.pause' ? 'paused' : 'active';
+                // save the new configuration
+                this.pools[action.poolUid].saveConfig();
+
+                // broadcast an update on a task
+                this.broadcast({
+                    type: 'task.update',
+                    data: {
+                        ...taskMetas,
+                        poolUid: action.poolUid,
+                    },
+                });
+                break;
+        }
+    }
+
+    /**
+     * Annouce a pool to all clients or to a specific one
+     */
+    _announcePool(pool: ISDobbyPool, to?: any): void {
+        const clonedPool = __clone(pool, {
+            deep: true,
         });
 
-        // store at instance level
-        this._wss = wss;
+        // add the "poolUid" to each tasks
+        for (let [taskUid, task] of Object.entries(
+            clonedPool.config.tasks ?? {},
+        )) {
+            (<ISDobbyTaskMetas>task).poolUid = clonedPool.metas.uid;
+        }
+
+        this[to ? 'send' : 'broadcast'](
+            {
+                type: 'pool',
+                data: <ISDobbyPoolEvent>{
+                    pool: clonedPool.metas,
+                    config: clonedPool.config,
+                },
+            },
+            to,
+        );
     }
 
     /**
      * Send something a particular client
      */
-    _send(data: any, ws: any): void {
+    send(data: any, ws: any): void {
         if (!this._wss) {
             return;
         }
@@ -194,7 +241,7 @@ export default class SDobby extends __SClass {
     /**
      * Broadcast something to all connected clients on socket
      */
-    _broadcast(data: any): void {
+    broadcast(data: any): void {
         if (!this._wss) {
             return;
         }
@@ -221,138 +268,20 @@ export default class SDobby extends __SClass {
      * @since           2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    start(params?: ISDobbyStartParams): Promise<void | ISDobbyError> {
+    start(): Promise<void | ISDobbyError> {
         return new Promise(async (resolve) => {
-            const finalParams: ISDobbyStartParams = __SSpecs.apply(
-                params,
-                SDobbyStartParamsSpecs,
-            );
-
-            // killing scheduled tasks gracefully
-            __onProcessExit(async () => {
-                console.log(
-                    `<red>[SDobby]</red> Gracefully kill the scheduled tasks...`,
-                );
-                await __nodeSchedule.gracefulShutdown();
+            // listen for pools ready
+            this.events.on('pool.ready', (pool: ISDobbyPool) => {
+                this._announcePool(pool);
             });
 
-            // save the uid
-            if (!finalParams.uid.match(/^[a-zA-Z0-9_-]+$/)) {
-                throw new Error(
-                    `The passed uid "${finalParams.uid}" ¡s invalid. /^[a-zA-Z0-9_-]+$/`,
-                );
+            // start each pools
+            for (let [poolUid, pool] of Object.entries(this.pools)) {
+                await pool.start();
             }
-            this._uid = finalParams.uid;
-
-            // load the config
-            this.config = await this.settings.adapter.loadConfig(
-                finalParams.uid,
-            );
 
             // ready
             this.events.emit('ready');
-
-            // start the scheduler
-            this._startScheduler();
         });
-    }
-
-    /**
-     * Enqueue a task
-     */
-    _enqueueTask(taskMetas: ISDobbyTaskMetas): void {
-        __nodeSchedule.scheduleJob(taskMetas.schedule, () => {
-            // execute task
-            this.executeTask(taskMetas);
-        });
-    }
-
-    /**
-     * Start the scheduler that will execute the tasks when needed
-     */
-    _startScheduler() {
-        // loop on each tasks to schedule them
-        for (let [taskUid, taskMetas] of Object.entries(
-            this.config.tasks ?? {},
-        )) {
-            this._enqueueTask(taskMetas);
-        }
-    }
-
-    /**
-     * Executing a tasks
-     */
-    async executeTask(taskMetas: ISDobbyTaskMetas): Promise<ISDobbyTaskResult> {
-        const TaskClass = this.constructor.registeredTasks[taskMetas.type];
-
-        // broadcast a start task event
-        this._broadcast({
-            type: 'task.start',
-            data: taskMetas,
-        });
-
-        if (!TaskClass) {
-            throw new Error(
-                `<red>[SDobby]</red> The task <yellow>${taskMetas.name} (${taskMetas.type})</yellow> is not an available task type...`,
-            );
-        }
-
-        const task = new TaskClass(taskMetas);
-        const taskResult = await task.run();
-
-        // broadcast a start task event
-        this._broadcast({
-            type: 'task.end',
-            data: taskResult,
-        });
-
-        return taskResult;
-    }
-
-    /**
-     * @name        addTask
-     * @type        Function
-     * @async
-     *
-     * Add a new task in the queue
-     *
-     * @param       {ISDobbyTask}          task             The task to add
-     * @return      {Promise<void>}                         A promise resolved once the task is added successfully
-     *
-     * @since           2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-     */
-    addTask(taskMetas: ISDobbyTaskMetas): Promise<void | ISDobbyError> {
-        return new Promise(async (resolve, reject) => {
-            // make sure the tasks not already exists
-            if (this.config.tasks?.[taskMetas.uid]) {
-                return reject(<ISDobbyError>{
-                    message: `A task with the uid \`${taskMetas.uid}\` already exists`,
-                });
-            }
-            // add the task in the config
-            this.config.tasks[taskMetas.uid] = taskMetas;
-            // save the config
-            this.settings.adapter.saveConfig(this.uid, this.config);
-            // enqueue the new task
-            this._enqueueTask(taskMetas);
-        });
-    }
-
-    /**
-     * @name        removeTask
-     * @type        Function
-     * @async
-     *
-     * Remove an existing task from the queue
-     *
-     * @param       {String}          taskUid             The task UID to remove
-     * @return      {Promise<void>}                         A promise resolved once the task is added successfully
-     *
-     * @since           2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-     */
-    removeTask(taskUid: string): Promise<void> {
-        return new Promise(async (resolve) => {});
     }
 }

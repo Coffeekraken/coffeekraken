@@ -61,6 +61,13 @@ export const SDobbyResponseTimeTaskSpec = {
     },
 };
 
+export const SDobbyPoolStartParamsSpecs = {
+    type: 'Object',
+    title: 'Pool start params',
+    description: 'Pool start parameters',
+    props: {},
+};
+
 export const SDobbyLighthouseTaskSpec = {
     type: 'Object',
     title: 'Lighthouse',

@@ -21,25 +21,29 @@ export interface ISherlockTasksStore {
 export const dobbyClient = new __SDobbyClient();
 
 class SherlockTasksStore extends __SStore {
-    constructor() {
+    _spaceUid: string;
+    _tasks: any = {};
+
+    constructor(spaceUid: string) {
         super({
-            tasks: {},
+            _tasks: {},
         });
+        this._spaceUid = spaceUid;
 
         dobbyClient.on('pool', (poolEvent) => {
-            Object.assign(this.tasks, poolEvent.config.tasks);
+            Object.assign(this._tasks, poolEvent.config.tasks);
         });
         dobbyClient.on('task.start', (res) => {
-            if (!this.tasks[res.task.uid]) {
+            if (!this._tasks[res.task.uid]) {
                 return;
             }
-            this.tasks[res.task.uid].status = 'running';
+            this._tasks[res.task.uid].status = 'running';
         });
         dobbyClient.on('task.end', (result: ISDobbyTaskResult) => {
-            if (!this.tasks[result.task.uid]) {
+            if (!this._tasks[result.task.uid]) {
                 return;
             }
-            this.tasks[result.task.uid].status = 'idle';
+            this._tasks[result.task.uid].status = 'idle';
         });
         dobbyClient.on('task.update', (newTaskMetas) => {
             const taskMetas = this.getTask(newTaskMetas.uid);
@@ -67,7 +71,7 @@ class SherlockTasksStore extends __SStore {
         const startWithStr = startsWith.join('.');
 
         const tasks = {};
-        for (let [taskUid, task] of Object.entries(this.tasks)) {
+        for (let [taskUid, task] of Object.entries(this._tasks)) {
             if (startsWith.length && !taskUid.startsWith(startWithStr)) {
                 continue;
             }
@@ -78,7 +82,7 @@ class SherlockTasksStore extends __SStore {
     }
 
     getTask(taskUid: string): ISDobbyTaskMetas {
-        return this.tasks[taskUid];
+        return this._tasks[taskUid];
     }
 
     startTask(task: ISDobbyTaskMetas): ISDobbyTaskMetas {
@@ -123,6 +127,4 @@ class SherlockTasksStore extends __SStore {
     }
 }
 
-const tasksStore = new SherlockTasksStore();
-
-export default tasksStore;
+export default SherlockTasksStore;

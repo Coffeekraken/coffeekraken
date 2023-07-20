@@ -7,23 +7,25 @@ export interface ISherlockTasksStateStore {
 }
 
 class SherlockTasksStatesStore extends __SStore {
-    constructor() {
+    _spaceUid: string;
+    _tasks: any = {};
+
+    constructor(spaceUid: string) {
         super({
-            tasks: {},
+            _tasks: {},
         });
+        this._spaceUid = spaceUid;
     }
 
     getTaskState(taskUid: string): ISherlockTaskState {
-        if (!tasksStateStore[taskUid]) {
-            tasksStateStore[taskUid] = {
+        if (!this._tasks[taskUid]) {
+            this._tasks[taskUid] = {
                 details: false,
             };
         }
 
-        return tasksStateStore[taskUid];
+        return this._tasks[taskUid];
     }
 }
 
-const tasksStateStore = new SherlockTasksStatesStore();
-
-export default tasksStateStore;
+export default SherlockTasksStatesStore;

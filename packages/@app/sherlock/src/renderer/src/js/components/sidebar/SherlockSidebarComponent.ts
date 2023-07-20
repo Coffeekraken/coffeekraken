@@ -18,20 +18,21 @@ export class SherlockSidebarComponent extends LitElement {
         super();
 
         // reactivity
-
-        // __sherlockStores.tasks.$set('*', () => {
-        //     this.requestUpdate()
-        // })
-
         __sherlockStores.route.$set('*', () => {
             this.requestUpdate();
         });
-        __sherlockStores.clients.$set('*', () => {
+
+        __sherlockStores.spaces.$set('*', () => {
             this.requestUpdate();
         });
-        __sherlockStores.services.$set('*', () => {
-            this.requestUpdate();
-        });
+
+        // __sherlockStores.current().clients.$set('*', () => {
+        //     this.requestUpdate();
+        // });
+        // __sherlockStores.current().services.$set('*', () => {
+        //     this.requestUpdate();
+        // });
+
         __sherlockStores.app.$set('space', () => {
             this.requestUpdate();
         });
@@ -64,9 +65,7 @@ export class SherlockSidebarComponent extends LitElement {
     render() {
         let clients = {};
         if (__sherlockStores.route.space) {
-            clients = __sherlockStores.clients.getClients({
-                space: __sherlockStores.route.space,
-            });
+            clients = __sherlockStores.current().clients.getClients();
         }
 
         return html`
@@ -80,9 +79,11 @@ export class SherlockSidebarComponent extends LitElement {
                               : html`
                                     <ul class="_clients">
                                         ${Object.entries(clients).map(([clientUid, client]) => {
-                                            const services = __sherlockStores.services.getServices({
-                                                client: client.uid,
-                                            });
+                                            const services = __sherlockStores
+                                                .current()
+                                                .services.getServices({
+                                                    client: client.uid,
+                                                });
 
                                             return html`
                                                 <li

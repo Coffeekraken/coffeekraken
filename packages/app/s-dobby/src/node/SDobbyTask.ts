@@ -1,5 +1,7 @@
 import __SClass from '@coffeekraken/s-class';
 
+import { __uniqid } from '@coffeekraken/sugar/string';
+
 import __SDuration from '@coffeekraken/s-duration';
 
 import type { ISDobbyTaskSettings } from './types';
@@ -70,6 +72,7 @@ export default class SDobbyTask extends __SClass {
             `<green>[SDobby]</green> Task <magenta>${this.metas.name} (${this.metas.type})</magenta> finished <green>successfully</green> in <cyan>${durationObj.formatedDuration}</cyan>`,
         );
         return {
+            uid: __uniqid(),
             time: this._time,
             duration: durationObj,
             task: this.metas,

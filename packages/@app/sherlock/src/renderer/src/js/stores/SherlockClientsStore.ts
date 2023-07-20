@@ -2,8 +2,6 @@ import __SStore from '@coffeekraken/s-store';
 
 import type { ISherlockClient } from '../../shared/SherlockTypes.js';
 
-import __sherlockRouteStore from './SherlockRouteStore';
-
 export interface IGetClientsParams {
     space?: string;
 }
@@ -13,33 +11,30 @@ export interface ISherlockClientStore {
 }
 
 class SherlockClientsStore extends __SStore {
-    constructor() {
+    _spaceUid: string;
+
+    _clients: any = {};
+
+    constructor(spaceUid: string) {
         super();
-        this._init();
+        this._spaceUid = spaceUid;
+        setTimeout(this._init.bind(this));
     }
 
     async _init() {
-        __sherlockRouteStore.$set('space', () => {
-            (async () => {
-                const clients = await window.sherlock.getClients(__sherlockRouteStore.space);
-                Object.assign(clientsStore.data, clients);
-            })();
-        });
+        // __sherlockRouteStore.$set('space', async () => {
+        const clients = await window.sherlock.getClients(this._spaceUid);
+        Object.assign(this._clients, clients);
+        // });
     }
 
     getClients(params?: IGetClientsParams): Record<string, ISherlockClient> {
-        return this.data;
+        return this._clients;
     }
 
     getClient(clientUid: string): ISherlockClient {
-        return this.data[clientUid];
+        return this._clients[clientUid];
     }
 }
 
-const clientsStore = new SherlockClientsStore();
-
-export function __getClient(clientUid: string): ISherlockClient {
-    return clientsStore[clientUid];
-}
-
-export default clientsStore;
+export default SherlockClientsStore;

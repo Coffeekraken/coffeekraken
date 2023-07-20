@@ -1,26 +1,26 @@
-import { LitElement, css, html } from 'lit'
-import { customElement } from 'lit/decorators.js'
+import { LitElement, css, html } from 'lit';
+import { customElement } from 'lit/decorators.js';
 
-import type { ISherlockService, ISherlockSpace } from '../../../../../shared/SherlockTypes.js'
+import type { ISherlockService, ISherlockSpace } from '../../../../../shared/SherlockTypes.js';
 
-import __sherlockAppStore from '../../stores/SherlockAppStore.js'
+import __sherlockStores from '../../stores/SherlockStores.js';
 
 @customElement('sherlock-header')
 export class SherlockHeaderComponent extends LitElement {
-    static styles = css``
+    static styles = css``;
 
     constructor() {
-        super()
+        super();
 
         // reactive
-        __sherlockAppStore.$set(['*'], () => {
-            this.requestUpdate()
-        })
+        __sherlockStores.app.$set(['*'], () => {
+            this.requestUpdate();
+        });
     }
 
     render() {
-        const service: ISherlockService = __sherlockAppStore.currentService,
-            space: ISherlockSpace = __sherlockAppStore.currentSpace
+        const service: ISherlockService = __sherlockStores.route.service,
+            space: ISherlockSpace = __sherlockStores.route.space;
 
         return html`
             <header class="sh-header">
@@ -51,10 +51,10 @@ export class SherlockHeaderComponent extends LitElement {
 
                 <h1 class="_title">${space?.name ?? 'Sherlock'}</h1>
             </header>
-        `
+        `;
     }
 
     createRenderRoot() {
-        return this
+        return this;
     }
 }

@@ -18,28 +18,33 @@ export interface ISherlockRouteStore {
 let escapeQueuePromise;
 
 class SherlockRouteStore extends __SStore {
+    space: string;
+    client: string;
+    service: string;
+    popup: string;
+
     constructor() {
         super();
     }
 
     setRoute(params?: ISetRouteParams): ISherlockRouteStore {
         if (params.space && !params.client) {
-            routeStore.space = params.space;
-            routeStore.client = undefined;
-            routeStore.service = undefined;
+            this.space = params.space;
+            this.client = undefined;
+            this.service = undefined;
         } else if (params.client && !params.service) {
-            routeStore.space = params.space ?? routeStore.space;
-            routeStore.client = params.client;
-            routeStore.service = undefined;
+            this.space = params.space ?? this.space;
+            this.client = params.client;
+            this.service = undefined;
         } else if (params.service) {
-            routeStore.space = params.space ?? routeStore.space;
-            routeStore.client = params.client ?? routeStore.client;
-            routeStore.service = params.service;
+            this.space = params.space ?? this.space;
+            this.client = params.client ?? this.client;
+            this.service = params.service;
         }
         if (params?.popup) {
-            routeStore.popup = params.popup;
+            this.popup = params.popup;
             escapeQueuePromise = __escapeQueue(() => {
-                routeStore.popup = undefined;
+                this.popup = undefined;
             });
         } else {
             escapeQueuePromise?.cancel?.();
@@ -47,6 +52,4 @@ class SherlockRouteStore extends __SStore {
     }
 }
 
-const routeStore = new SherlockRouteStore();
-
-export default routeStore;
+export default SherlockRouteStore;

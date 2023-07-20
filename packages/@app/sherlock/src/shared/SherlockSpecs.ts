@@ -63,5 +63,11 @@ export const SSherlockSpaceContentfulAdapterSpec = {
             description: 'Contentful access token to use for connection',
             required: true,
         },
+        managementAccessToken: {
+            type: 'String',
+            title: 'Management access token',
+            description: 'Contentful management access token to be able to write results, etc...',
+            required: true,
+        },
     },
 };

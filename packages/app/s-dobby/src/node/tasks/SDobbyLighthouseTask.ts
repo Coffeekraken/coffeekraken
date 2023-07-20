@@ -1,9 +1,12 @@
 import { __deepMerge } from '@coffeekraken/sugar/object';
 import __SDobbyTask from '../SDobbyTask';
 
+import __SSpecs from '@coffeekraken/s-specs';
+import { __ensureDirSync } from '@coffeekraken/sugar/fs';
 import { __homeDir } from '@coffeekraken/sugar/path';
 
-import __SSpecs from '@coffeekraken/s-specs';
+import __fs from 'fs';
+import __path from 'path';
 
 import type {
     ISDobbyLighthouseTaskResult,
@@ -72,35 +75,107 @@ export default class SDobbyLighthouseTask
                 SDobbyLighthouseTaskSettingsSpecs,
             );
 
+            const logs: string[] = [];
+            const result: ISDobbyLighthouseTaskResult = {};
+            const outputJsonPath = `${__homeDir()}/.dobby/tmp/${Date.now()}.json`;
+
+            __ensureDirSync(__path.dirname(outputJsonPath));
+
             const command = __childProcess.spawn(
-                `npx lighthouse https://coffeekraken.io --chrome-flags="--headless --window-size=1280,1080" --output=json --only-categories=accessibility,best-practices,performance,pwa,seo --output-path="${__homeDir()}/report.json"`,
+                `npx lighthouse https://coffeekraken.io --chrome-flags="--headless --window-size=1280,1080" --output=json --only-categories=accessibility,best-practices,performance,pwa,seo --output-path="${outputJsonPath}"`,
                 [],
                 {
                     shell: true,
-                    // maxBuffer: 1024 * 1024 * 100,
                 },
             );
 
+            let status = 'success';
+
             command.stdout.on('data', (data) => {
-                console.log(`stdout: ${data}`);
+                console.log(data.toString());
+                logs.push(data.toString());
             });
 
             command.stderr.on('data', (data) => {
-                console.log(`stderr: ${data}`);
+                console.log(data.toString());
+                logs.push(data.toString());
             });
 
             command.on('error', (error) => {
-                console.log(`error: ${error.message}`);
+                console.log(error.message);
+                logs.push(error.message);
+                status = 'error';
             });
 
             command.on('close', (code) => {
-                let status = 'success';
+                // read the output json
+                const outputJson: any = JSON.parse(
+                    __fs.readFileSync(outputJsonPath).toString(),
+                );
+
+                // delete the outputJson
+                __fs.unlinkSync(outputJsonPath);
+
+                // build the final result object
+                result.lighthouseVersion = outputJson.lighthouseVersion;
+                result.requestedUrl = outputJson.requestedUrl;
+                result.userAgent = outputJson.userAgent;
+                result.audits = {};
+                for (let [auditId, audit] of Object.entries(
+                    outputJson.audits,
+                )) {
+                    if (audit.score !== undefined && audit.score <= 0.33) {
+                        result.audits[auditId] = {
+                            id: audit.id,
+                            title: audit.title,
+                            description: audit.description,
+                            score: audit.score,
+                            displayValue: audit.displayValue,
+                        };
+                    }
+                }
+                result.categories = {};
+                for (let [categoryId, category] of Object.entries(
+                    outputJson.categories ?? {},
+                )) {
+                    result.categories[categoryId] = {
+                        title: category.title,
+                        score: category.score,
+                        audits: [],
+                    };
+                    for (let [i, audit] of category.auditRefs.entries()) {
+                        if (result.audits[audit.id]) {
+                            result.categories[categoryId].audits.push(audit.id);
+                        }
+                    }
+                }
+                result.entities = [];
+                for (let [i, entity] of outputJson.entities.entries()) {
+                    result.entities.push({
+                        name: entity.name,
+                        origins: entity.origins,
+                        homepage: entity.homepage,
+                        category: entity.category,
+                    });
+                }
+                result.screenshot = {
+                    data: outputJson.fullPageScreenshot.screenshot.data,
+                    width: outputJson.fullPageScreenshot.screenshot.width,
+                    height: outputJson.fullPageScreenshot.screenshot.height,
+                };
+
+                // save the json
+                __fs.writeFileSync(
+                    `${__homeDir()}/.dobby/lighthouse.json`,
+                    JSON.stringify(result, null, 4),
+                );
+
                 resolve({
+                    ...result,
                     ...super.end(),
                     status,
+                    logs,
                 });
-
-                console.log(`child process exited with code ${code}`);
             });
         });
     }

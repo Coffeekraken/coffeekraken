@@ -13,17 +13,18 @@ export interface ISherlockSpace {
     image: ISherlockImage;
     adapter: {
         type: 'fs' | 'contentful';
-        settings: ISherlockSpaceFsAdapter | ISherlockSpaceContentfulAdapter;
+        settings: ISherlockSpaceFsAdapterSettings | ISherlockContentfulAdapterSettings;
     };
 }
 
-export interface ISherlockSpaceFsAdapter {
+export interface ISherlockSpaceFsAdapterSettings {
     folder: string;
 }
 
-export interface ISherlockSpaceContentfulAdapter {
+export interface ISherlockContentfulAdapterSettings {
     space: string;
     accessToken: string;
+    accessManagementToken: string;
 }
 
 export interface ISherlockClient {

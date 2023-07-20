@@ -30,10 +30,10 @@ export class SherlockServiceComponent extends LitElement {
         super();
 
         // reactive
-        __sherlockStores.tasks.$set('*', () => {
+        __sherlockStores.current().tasks.$set('*', () => {
             this.requestUpdate();
         });
-        __sherlockStores.tasksStates.$set('*', () => {
+        __sherlockStores.current().tasksStates.$set('*', () => {
             this.requestUpdate();
         });
         __sherlockStores.route.$set('service', () => {
@@ -42,15 +42,15 @@ export class SherlockServiceComponent extends LitElement {
     }
 
     startTask(task: ISDobbyTaskMetas) {
-        __sherlockStores.tasks.startTask(task);
+        __sherlockStores.current().tasks.startTask(task);
     }
 
     pauseTask(task: ISDobbyTaskMetas) {
-        __sherlockStores.tasks.pauseTask(task);
+        __sherlockStores.current().tasks.pauseTask(task);
     }
 
     resumeTask(task: ISDobbyTaskMetas) {
-        __sherlockStores.tasks.resumeTask(task);
+        __sherlockStores.current().tasks.resumeTask(task);
     }
 
     renderResultWidget(result: ISDobbyTaskResult): any {
@@ -62,12 +62,14 @@ export class SherlockServiceComponent extends LitElement {
 
     render() {
         const tasks =
-            __sherlockStores.tasks.getTasks({
+            __sherlockStores.current().tasks.getTasks({
                 client: __sherlockStores.route.client,
                 service: __sherlockStores.route.service,
             }) ?? {};
 
-        const service: ISherlockService = __sherlockStores.services.getService(this.service);
+        const service: ISherlockService = __sherlockStores
+            .current()
+            .services.getService(this.service);
         return html`
             <article class="sh-service">
                 <div class="_content">
@@ -105,10 +107,11 @@ export class SherlockServiceComponent extends LitElement {
                     <main class="_tasks">
                         ${Object.entries(tasks).map(([taskUid, task]) => {
                             const taskState =
-                                __sherlockStores.tasksStates.getTaskState(taskUid) ?? {};
+                                __sherlockStores.current().tasksStates.getTaskState(taskUid) ?? {};
 
-                            const taskResults =
-                                __sherlockStores.tasksResults.getTaskResults(taskUid);
+                            const taskResults = __sherlockStores
+                                .current()
+                                .tasksResults.getTaskResults(taskUid);
 
                             const lastTaskResult = taskResults.at(-1);
 

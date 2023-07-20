@@ -1,4 +1,4 @@
-import { ISherlockSpace, ISherlockTask } from '../shared/SherlockTypes.js';
+import { ISherlockSpace, ISherlockTask, ISherlockTaskResult } from '../shared/SherlockTypes.js';
 import __SherlockContentfulAdapter from './adapters/contentful/SherlockContentfulAdapter.js';
 import type { ISherlockAdapter } from './adapters/SherlockAdapter.js';
 
@@ -52,6 +52,7 @@ export default class SherlockApp {
                     this.adapter = new __SherlockContentfulAdapter({
                         space: space.adapter.settings.space,
                         accessToken: space.adapter.settings.accessToken,
+                        accessManagementToken: space.adapter.settings.accessManagementToken,
                     });
                     resolve(space);
                     break;
@@ -86,11 +87,17 @@ export default class SherlockApp {
         });
     }
 
-    newTask(task: ISherlockTask): Promise<Record<string, ISherlockTask>> {
+    newTask(task: ISherlockTask, poolUid: string): Promise<Record<string, ISherlockTask>> {
         return new Promise((resolve, reject) => {
+            if (!this._dobby.pools[poolUid]) {
+                reject(`The requested pool "${poolUid}" does not exists...`);
+            }
             // add the task in the correct pool
-            console.log('ADD', task);
-            this._dobby.local.addTask(task);
+            this._dobby[poolUid].addTask(task);
         });
+    }
+
+    taskResult(taskResult: ISherlockTaskResult, spaceUid: string): Promise<ISherlockTaskResult> {
+        return new Promise((resolve) => {});
     }
 }

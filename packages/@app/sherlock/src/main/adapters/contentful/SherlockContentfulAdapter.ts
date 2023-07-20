@@ -1,14 +1,16 @@
 import { __deepMerge } from '@coffeekraken/sugar/object';
 import * as __contentful from 'contentful';
-import type { ISherlockAdapter, ISherlockAdapterSettings } from '../SherlockAdapter.js';
+import * as __contentfulManagement from 'contentful-management';
+
+import type { ISherlockAdapter } from '../SherlockAdapter.js';
 import __SherlockAdapter from '../SherlockAdapter.js';
 
-import type { ISherlockClient, ISherlockService } from '../../../shared/SherlockTypes.js';
-
-export interface ISherlockContentfulAdapterSettings extends ISherlockAdapterSettings {
-    space: string;
-    accessToken: string;
-}
+import type {
+    ISherlockClient,
+    ISherlockContentfulAdapterSettings,
+    ISherlockService,
+    ISherlockTaskResult,
+} from '../../../shared/SherlockTypes.js';
 
 export default class SherlockContentfulAdapter
     extends __SherlockAdapter
@@ -16,6 +18,7 @@ export default class SherlockContentfulAdapter
 {
     settings: ISherlockContentfulAdapterSettings;
     _client;
+    _managementClient;
 
     constructor(settings: ISherlockContentfulAdapterSettings) {
         super(__deepMerge({}, settings ?? {}));
@@ -24,6 +27,9 @@ export default class SherlockContentfulAdapter
         this._client = __contentful.createClient({
             space: this.settings.space,
             accessToken: this.settings.accessToken,
+        });
+        this._managementClient = __contentfulManagement.createClient({
+            accessToken: this.settings.accessManagementToken,
         });
     }
     _processClientFromEntry(entry: any): ISherlockClient {
@@ -86,5 +92,9 @@ export default class SherlockContentfulAdapter
 
             resolve(services);
         });
+    }
+
+    taskResult(taskResult: ISherlockTaskResult): Promise<ISherlockTaskResult> {
+        return new Promise(async (resolve) => {});
     }
 }

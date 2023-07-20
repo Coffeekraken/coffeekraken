@@ -40,7 +40,7 @@ export class SherlockSpacesComponent extends LitElement {
     render() {
         return html`
             <ul class="sh-spaces">
-                ${Object.entries(__sherlockStores.spaces).map(([spaceUid, space]) => {
+                ${Object.entries(__sherlockStores.spaces.getSpaces()).map(([spaceUid, space]) => {
                     return html`
                         <li
                             class="_space ${__sherlockStores.route.space === space.uid

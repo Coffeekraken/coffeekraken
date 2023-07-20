@@ -10,32 +10,37 @@ export interface ISherlockTasksResultsStore {
 }
 
 class SherlockTasksResultsStore extends __SStore {
-    constructor() {
+    _spaceUid: string;
+    _results: any = {};
+
+    constructor(spaceUid: string) {
         super({
-            tasks: {},
+            _results: {},
         });
+        this._spaceUid = spaceUid;
 
         dobbyClient.on('task.end', (taskResult: ISDobbyTaskResult) => {
-            if (!this.tasks[taskResult.task.uid]) {
-                this.tasks[taskResult.task.uid] = [];
+            if (!this._results[taskResult.task.uid]) {
+                this._results[taskResult.task.uid] = [];
             }
 
-            this.tasks[taskResult.task.uid].push({
-                uid: 'sppfkwef',
+            this._results[taskResult.task.uid].push({
+                uid: taskResult.uid,
                 taskUid: taskResult.task.uid,
                 data: taskResult,
             });
+
+            // save task result
+            window.sherlock.taskResult(taskResult, this._spaceUid);
         });
     }
 
     getTaskResults(taskUid: string): ISherlockTaskResult[] {
-        if (!this.tasks[taskUid]) {
-            this.tasks[taskUid] = [];
+        if (!this._results[taskUid]) {
+            this._results[taskUid] = [];
         }
-        return this.tasks[taskUid];
+        return this._results[taskUid];
     }
 }
 
-const tasksResultsStore = new SherlockTasksResultsStore();
-
-export default tasksResultsStore;
+export default SherlockTasksResultsStore;

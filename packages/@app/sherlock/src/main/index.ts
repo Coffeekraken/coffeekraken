@@ -6,7 +6,7 @@ import icon from '../../resources/icon.png?asset.js';
 import __SherlockApp from './ShelockApp.js';
 
 import { execSync } from 'child_process';
-import { ISherlockSpace, ISherlockTask } from '../shared/SherlockTypes.js';
+import { ISherlockSpace, ISherlockTask, ISherlockTaskResult } from '../shared/SherlockTypes.js';
 
 console.log('Rebuilding "canvas" module...');
 execSync('npm rebuild canvas');
@@ -76,8 +76,11 @@ app.whenReady().then(() => {
     ipcMain.handle('services:get', (e, clientUid: string) => {
         return sherlockApp.adapter.getServices(clientUid);
     });
-    ipcMain.handle('tasks:new', (e, task: ISherlockTask) => {
-        return sherlockApp.newTask(task);
+    ipcMain.handle('tasks:new', (e, task: ISherlockTask, poolUid: string) => {
+        return sherlockApp.newTask(task, poolUid);
+    });
+    ipcMain.handle('tasks:result', (e, taskResult: ISherlockTaskResult, spaceUid: string) => {
+        return sherlockApp.taskResult(taskResult, spaceUid);
     });
 
     // Set app user model id for windows

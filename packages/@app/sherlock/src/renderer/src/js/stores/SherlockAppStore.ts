@@ -26,5 +26,4 @@ class SherlockAppStore extends __SStore {
     }
 }
 
-const appStore = new SherlockAppStore();
-export default appStore;
+export default SherlockAppStore;

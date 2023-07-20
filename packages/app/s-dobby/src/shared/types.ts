@@ -77,10 +77,11 @@ export interface ISDobbyTaskMetas {
     status: 'running' | 'idle';
     schedule: string;
     poolUid: string;
-    settings: ISDobbyLighhouseTaskSettings | ISDobbyResponseTimeTaskSettings;
+    settings: ISDobbyLighthouseTaskSettings | ISDobbyResponseTimeTaskSettings;
 }
 
 export interface ISDobbyTaskResult {
+    uid: string;
     duration: ISDurationObject;
     time: number;
     status: 'success' | 'warning' | 'error';
@@ -90,7 +91,40 @@ export interface ISDobbyTaskResult {
 }
 
 export interface ISDobbyLighthouseTaskSettings {}
-export interface ISDobbyLighthouseTaskResult extends ISDobbyTaskResult {}
+export interface ISDobbyLighthouseTaskResult extends ISDobbyTaskResult {
+    lighthouseVersion: string;
+    requestedUrl: string;
+    userAgent: string;
+    audits: Record<
+        string,
+        {
+            id: string;
+            title: string;
+            description: string;
+            score: number;
+            displayValue: string;
+        }
+    >;
+    categories: Record<
+        string,
+        {
+            title: string;
+            score: number;
+            audits: string[];
+        }
+    >;
+    entities: {
+        name: string;
+        origins: string[];
+        homepage: string;
+        category: string;
+    }[];
+    screenshot: {
+        data: string;
+        width: number;
+        height: number;
+    };
+}
 
 export interface ISDobbyResponseTimeTaskSettings {
     timeout: number;

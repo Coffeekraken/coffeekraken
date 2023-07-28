@@ -1,6 +1,6 @@
 import __SPageTransitionFeature from './SPageTransitionFeature.js';
-import __define from './define.js';
+import define from './define.js';
 export * from './SPageTransitionFeature.js';
-export { __define };
+export { define };
 export default __SPageTransitionFeature;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sd0JBQXdCLE1BQU0sNkJBQTZCLENBQUM7QUFDbkUsT0FBTyxRQUFRLE1BQU0sYUFBYSxDQUFDO0FBRW5DLGNBQWMsNkJBQTZCLENBQUM7QUFDNUMsT0FBTyxFQUFFLFFBQVEsRUFBRSxDQUFDO0FBQ3BCLGVBQWUsd0JBQXdCLENBQUMifQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sd0JBQXdCLE1BQU0sNkJBQTZCLENBQUM7QUFDbkUsT0FBTyxNQUFNLE1BQU0sYUFBYSxDQUFDO0FBQ2pDLGNBQWMsNkJBQTZCLENBQUM7QUFDNUMsT0FBTyxFQUFFLE1BQU0sRUFBRSxDQUFDO0FBQ2xCLGVBQWUsd0JBQXdCLENBQUMifQ==

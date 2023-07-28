@@ -1,14 +1,14 @@
-import { __define as __SActivateFeatureDefine } from '@coffeekraken/s-activate-feature/lazy';
-import { __define as __SAppearFeatureDefine } from '@coffeekraken/s-appear-feature/lazy';
-import { __define as __SClipboardCopyComponentDefine } from '@coffeekraken/s-clipboard-copy-component/lazy';
-import { __define as __SSDepsFeatureDefine } from '@coffeekraken/s-deps-feature/lazy';
-import { __define as __SFloatingFeatureDefine } from '@coffeekraken/s-floating-feature/lazy';
-import { __define as __SFormValidateFeatureDefine } from '@coffeekraken/s-form-validate-feature/lazy';
-import { __define as __SInlineFeatureDefine } from '@coffeekraken/s-inline-feature/lazy';
-import { __define as __SLazyFeatureDefine } from '@coffeekraken/s-lazy-feature';
-import { __define as __SRefocusFeatureDefine } from '@coffeekraken/s-refocus-feature/lazy';
-import { __define as __SScrollComponentDefine } from '@coffeekraken/s-scroll-component/lazy';
-import { __define as __SSugarFeatureDefine } from '@coffeekraken/s-sugar-feature/lazy';
+import { define as __SActivateFeatureDefine } from '@coffeekraken/s-activate-feature/lazy';
+import { define as __SAppearFeatureDefine } from '@coffeekraken/s-appear-feature/lazy';
+import { define as __SClipboardCopyComponentDefine } from '@coffeekraken/s-clipboard-copy-component/lazy';
+import { define as __SSDepsFeatureDefine } from '@coffeekraken/s-deps-feature/lazy';
+import { define as __SFloatingFeatureDefine } from '@coffeekraken/s-floating-feature/lazy';
+import { define as __SFormValidateFeatureDefine } from '@coffeekraken/s-form-validate-feature/lazy';
+import { define as __SInlineFeatureDefine } from '@coffeekraken/s-inline-feature/lazy';
+import { define as __SLazyFeatureDefine } from '@coffeekraken/s-lazy-feature';
+import { define as __SRefocusFeatureDefine } from '@coffeekraken/s-refocus-feature/lazy';
+import { define as __SScrollComponentDefine } from '@coffeekraken/s-scroll-component/lazy';
+import { define as __SSugarFeatureDefine } from '@coffeekraken/s-sugar-feature/lazy';
 
 /**
  * @name 		                    SPackEssentials

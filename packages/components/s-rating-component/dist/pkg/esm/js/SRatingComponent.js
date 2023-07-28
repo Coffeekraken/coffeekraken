@@ -33,7 +33,7 @@ import __css from '../../../../src/css/s-rating.css'; // relative to /dist/pkg/e
  * npm i @coffeekraken/s-rating-component
  *
  * @install           js
- * import { __define as __SRatingComponentDefine } from '@coffeekraken/s-rating-component';
+ * import { define as __SRatingComponentDefine } from '@coffeekraken/s-rating-component';
  * __SRatingComponentDefine();
  *
  * @example         html        Simple rating

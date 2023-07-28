@@ -165,6 +165,6 @@ export default class CKDiscoverWelcome extends __SLitComponent {
     }
 }
 
-export function __define(props: any = {}, tagName = 'ck-discover-welcome') {
+export function define(props: any = {}, tagName = 'ck-discover-welcome') {
     __SLitComponent.define(tagName, CKDiscoverWelcome, props);
 }

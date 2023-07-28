@@ -65,7 +65,7 @@ import __scrollBehavior from './behaviors/scrollBehavior.js';
  * npm i @coffeekraken/s-slider-component
  *
  * @install         js
- * import { __define as __SSliderComponentDefine } from '@coffeekraken/s-slider-component';
+ * import { define as __SSliderComponentDefine } from '@coffeekraken/s-slider-component';
  * __SSliderComponentDefine();
  *
  * @example         html        Simple slider

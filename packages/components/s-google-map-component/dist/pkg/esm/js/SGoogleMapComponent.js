@@ -44,7 +44,7 @@ import __css from '../../../../src/css/s-google-map.css'; // relative to /dist/p
  * npm i @coffeekraken/s-google-map-component
  *
  * @install           js
- * import { __define as __SGoogleMapComponentDefine } from '@coffeekraken/s-google-map-component';
+ * import { define as __SGoogleMapComponentDefine } from '@coffeekraken/s-google-map-component';
  * __SGoogleMapComponentDefine();
  *
  * @example         html        Simple google map

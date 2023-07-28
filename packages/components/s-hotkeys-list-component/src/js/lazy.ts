@@ -5,7 +5,7 @@ interface ILazyDefineSettings {
     when: TWhenTrigger;
 }
 
-export function __define(
+export function define(
     props,
     tagName = 's-hotkeys-list',
     settings: Partial<ILazyDefineSettings> = {},

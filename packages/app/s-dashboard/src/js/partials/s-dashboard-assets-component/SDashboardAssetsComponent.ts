@@ -350,7 +350,7 @@ export default class SDashboardAssetsComponent extends __SLitComponent {
     }
 }
 
-export function __define(props: any = {}, tagName = 's-dashboard-assets') {
+export function define(props: any = {}, tagName = 's-dashboard-assets') {
     __SLitComponent.setDefaultProps(tagName, props);
     customElements.define(tagName, SDashboardAssetsComponent);
 }

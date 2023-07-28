@@ -1,6 +1,6 @@
 import __SFloatingFeature from './SFloatingFeature.js';
-import __define from './define.js';
+import define from './define.js';
 export * from './SFloatingFeature.js';
-export { __define };
+export { define };
 export default __SFloatingFeature;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sa0JBQWtCLE1BQU0sdUJBQXVCLENBQUM7QUFDdkQsT0FBTyxRQUFRLE1BQU0sYUFBYSxDQUFDO0FBRW5DLGNBQWMsdUJBQXVCLENBQUM7QUFDdEMsT0FBTyxFQUFFLFFBQVEsRUFBRSxDQUFDO0FBQ3BCLGVBQWUsa0JBQWtCLENBQUMifQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sa0JBQWtCLE1BQU0sdUJBQXVCLENBQUM7QUFDdkQsT0FBTyxNQUFNLE1BQU0sYUFBYSxDQUFDO0FBQ2pDLGNBQWMsdUJBQXVCLENBQUM7QUFDdEMsT0FBTyxFQUFFLE1BQU0sRUFBRSxDQUFDO0FBQ2xCLGVBQWUsa0JBQWtCLENBQUMifQ==

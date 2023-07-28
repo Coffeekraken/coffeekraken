@@ -2,20 +2,20 @@
 import __SFront from '@coffeekraken/s-front';
 import __SPackEssentials from '@coffeekraken/s-pack-essentials';
 
-import { __define as __sugarFeatureDefine } from '@coffeekraken/s-sugar-feature/lazy';
+import { define as __sugarFeatureDefine } from '@coffeekraken/s-sugar-feature/lazy';
 
-import { __define as __SSpacesSelectorComponentDefine } from '@coffeekraken/s-spaces-selector-component/lazy';
+import { define as __SSpacesSelectorComponentDefine } from '@coffeekraken/s-spaces-selector-component/lazy';
 
-// import { __define as __sFloatingFeature } from '@coffeekraken/s-floating-feature';
-// import { __define as __sInlineFeature } from '@coffeekraken/s-inline-feature';
-// import { __define as __sPageTransitionFeature } from '@coffeekraken/s-page-transition-feature';
-// import { __define as __sRefocusFeature } from '@coffeekraken/s-refocus-feature';
+// import { define as __sFloatingFeature } from '@coffeekraken/s-floating-feature';
+// import { define as __sInlineFeature } from '@coffeekraken/s-inline-feature';
+// import { define as __sPageTransitionFeature } from '@coffeekraken/s-page-transition-feature';
+// import { define as __sRefocusFeature } from '@coffeekraken/s-refocus-feature';
 import __SFeature from '@coffeekraken/s-feature';
-import { __define as __sGoogleMapComponentDefine } from '@coffeekraken/s-google-map-component/lazy';
+import { define as __sGoogleMapComponentDefine } from '@coffeekraken/s-google-map-component/lazy';
 import __SLitComponent from '@coffeekraken/s-lit-component';
-import { __define as __SSliderComponentDefine } from '@coffeekraken/s-slider-component/lazy';
+import { define as __SSliderComponentDefine } from '@coffeekraken/s-slider-component/lazy';
 
-import { __define as __sCarpenterComponentDefine } from '@coffeekraken/s-carpenter';
+import { define as __sCarpenterComponentDefine } from '@coffeekraken/s-carpenter';
 
 // Views related
 const viewsRelated = import.meta.globEager('../views/**/*.ts');

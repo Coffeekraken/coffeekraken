@@ -42,7 +42,7 @@ import __css from '../../../../src/css/s-scroll.css'; // relative to /dist/pkg/e
  * npm i @coffeekraken/s-scroll-component
  *
  * @install         js
- * import { __define as __SScrollComponentDefine } from '@coffeekraken/s-scroll-component';
+ * import { define as __SScrollComponentDefine } from '@coffeekraken/s-scroll-component';
  * __SScrollComponentDefine();
  *
  * @example         html        Scroll to top

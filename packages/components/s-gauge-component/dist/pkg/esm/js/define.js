@@ -1,0 +1,5 @@
+import __SGaugeComponent from './SGaugeComponent.js';
+export default function define(props = {}, tagName = 's-gauge', settings) {
+    __SGaugeComponent.define(tagName, __SGaugeComponent, props, settings);
+}
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUVBLE9BQU8saUJBQWlCLE1BQU0sc0JBQXNCLENBQUM7QUFFckQsTUFBTSxDQUFDLE9BQU8sVUFBVSxNQUFNLENBQzFCLFFBQXdDLEVBQUUsRUFDMUMsT0FBTyxHQUFHLFNBQVMsRUFDbkIsUUFBdUM7SUFFdkMsaUJBQWlCLENBQUMsTUFBTSxDQUFDLE9BQU8sRUFBRSxpQkFBaUIsRUFBRSxLQUFLLEVBQUUsUUFBUSxDQUFDLENBQUM7QUFDMUUsQ0FBQyJ9

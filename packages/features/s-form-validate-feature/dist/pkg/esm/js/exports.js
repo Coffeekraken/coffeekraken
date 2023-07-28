@@ -1,6 +1,6 @@
 import __SFormValidateFeature from './SFormValidateFeature.js';
-import __define from './define.js';
+import define from './define.js';
 export * from './SFormValidateFeature.js';
-export { __define };
+export { define };
 export default __SFormValidateFeature;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sc0JBQXNCLE1BQU0sMkJBQTJCLENBQUM7QUFDL0QsT0FBTyxRQUFRLE1BQU0sYUFBYSxDQUFDO0FBRW5DLGNBQWMsMkJBQTJCLENBQUM7QUFDMUMsT0FBTyxFQUFFLFFBQVEsRUFBRSxDQUFDO0FBQ3BCLGVBQWUsc0JBQXNCLENBQUMifQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sc0JBQXNCLE1BQU0sMkJBQTJCLENBQUM7QUFDL0QsT0FBTyxNQUFNLE1BQU0sYUFBYSxDQUFDO0FBQ2pDLGNBQWMsMkJBQTJCLENBQUM7QUFDMUMsT0FBTyxFQUFFLE1BQU0sRUFBRSxDQUFDO0FBQ2xCLGVBQWUsc0JBQXNCLENBQUMifQ==

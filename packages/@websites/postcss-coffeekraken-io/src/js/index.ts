@@ -5,15 +5,16 @@ import __SPackEssentials from '@coffeekraken/s-pack-essentials';
 
 // website related
 import __WelcomeSlider from './classes/WelcomeSlider.js';
-import { __define as __CKMenuDefine } from './components/CKMenu.js';
+import { define as __CKMenuDefine } from './components/CKMenu.js';
 
 // components
-import { __define as __SCodeExampleComponentDefine } from '@coffeekraken/s-code-example-component';
-import { __define as __SDocComponentDefine } from '@coffeekraken/s-doc';
+import { define as __SCodeExampleComponentDefine } from '@coffeekraken/s-code-example-component';
+import { define as __SDocComponentDefine } from '@coffeekraken/s-doc';
+import { define as __SGaugeComponentDefine } from '@coffeekraken/s-gauge-component';
 
 // features
 import __SFeature from '@coffeekraken/s-feature';
-import { __define as __SHotkeysListComponentDefine } from '@coffeekraken/s-hotkeys-list-component';
+import { define as __SHotkeysListComponentDefine } from '@coffeekraken/s-hotkeys-list-component';
 import __SLitComponent from '@coffeekraken/s-lit-component';
 import { __smoothScroll } from '@coffeekraken/sugar/feature';
 
@@ -48,6 +49,7 @@ const viewsRelated = import.meta.globEager('../views/**/*.ts');
     __CKMenuDefine();
     __SHotkeysListComponentDefine();
     __SCodeExampleComponentDefine();
+    __SGaugeComponentDefine();
     __SDocComponentDefine({
         mountWhen: 'direct',
         endpoints: {

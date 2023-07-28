@@ -58,7 +58,7 @@ export interface ISDropzoneComponentUploadResult {
  * npm i @coffeekraken/s-dropzone-component
  *
  * @install           js
- * import { __define as __SDropzoneComponentDefine } from '@coffeekraken/s-dropzone-component';
+ * import { define as __SDropzoneComponentDefine } from '@coffeekraken/s-dropzone-component';
  * __SDropzoneComponentDefine();
  *
  * @example         html        Copy from an input

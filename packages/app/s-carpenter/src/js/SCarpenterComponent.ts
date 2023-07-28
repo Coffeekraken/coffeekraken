@@ -7,8 +7,6 @@ import __SCarpenterComponentInterface from './interface/SCarpenterComponentInter
 
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
 
-import __define from './define.js';
-
 // @ts-ignore
 import { __injectIframeContent } from '@coffeekraken/sugar/dom';
 import __css from '../../../../src/css/s-carpenter-component.css'; // relative to /dist/pkg/esm/js
@@ -58,11 +56,11 @@ export interface ISCarpenterComponentProps {
  * @snippet             __defineSCarpenterComponent()
  *
  * @example           js
- * import { __define as __defineSCarpenterComponent } from '@coffeekraken/s-carpenter';
+ * import { define as __defineSCarpenterComponent } from '@coffeekraken/s-carpenter';
  * __defineSCarpenterComponent();
  *
  * @install           js
- * import { __define as __defineSCarpenterComponent } from '@coffeekraken/s-carpenter';
+ * import { define as __defineSCarpenterComponent } from '@coffeekraken/s-carpenter';
  * __defineSCarpenterComponent();
  *
  * @since           2.0.0
@@ -292,4 +290,4 @@ export default class SCarpenterComponent extends __SLitComponent {
     }
 }
 
-export { __define as define };
+export { define as define };

@@ -8,17 +8,17 @@ import __SDashboardComponentInterface from './interface/SDashboardComponentInter
 
 import { __escapeQueue } from '@coffeekraken/sugar/keyboard';
 
-import { __define as __SDashboardAssetsComponent } from './partials/s-dashboard-assets-component/SDashboardAssetsComponent.js';
-import { __define as __SDashboardBrowserstackComponent } from './partials/s-dashboard-browserstack-component/SDashboardBrowserstackComponent.js';
-import { __define as __SDashboardFrontendCheckerComponent } from './partials/s-dashboard-frontend-checker-component/SDashboardFrontendCheckerComponent.js';
-import { __define as __SDashboardGoogleComponent } from './partials/s-dashboard-google-component/SDashboardGoogleComponent.js';
+import { define as __SDashboardAssetsComponent } from './partials/s-dashboard-assets-component/SDashboardAssetsComponent.js';
+import { define as __SDashboardBrowserstackComponent } from './partials/s-dashboard-browserstack-component/SDashboardBrowserstackComponent.js';
+import { define as __SDashboardFrontendCheckerComponent } from './partials/s-dashboard-frontend-checker-component/SDashboardFrontendCheckerComponent.js';
+import { define as __SDashboardGoogleComponent } from './partials/s-dashboard-google-component/SDashboardGoogleComponent.js';
 import {
-    __define as __SDashboardPagesComponent,
+    define as __SDashboardPagesComponent,
     events as __SDashboardPagesComponentEvents,
 } from './partials/s-dashboard-pages-component/SDashboardPagesComponent.js';
-import { __define as __SDashboardProjectComponent } from './partials/s-dashboard-project-component/SDashboardProjectComponent.js';
-import { __define as __SDashboardResponsiveComponent } from './partials/s-dashboard-responsive-component/SDashboardResponsiveComponent.js';
-import { __define as __SDashboardWebVitalsComponent } from './partials/s-dashboard-web-vitals-component/SDashboardWebVitalsComponent.js';
+import { define as __SDashboardProjectComponent } from './partials/s-dashboard-project-component/SDashboardProjectComponent.js';
+import { define as __SDashboardResponsiveComponent } from './partials/s-dashboard-responsive-component/SDashboardResponsiveComponent.js';
+import { define as __SDashboardWebVitalsComponent } from './partials/s-dashboard-web-vitals-component/SDashboardWebVitalsComponent.js';
 
 import { __injectStyle } from '@coffeekraken/sugar/dom';
 
@@ -378,7 +378,7 @@ export default class SDashboardComponent extends __SLitComponent {
     }
 }
 
-export function __define(
+export function define(
     props: Partial<ISDashboardComponentProps> = {},
     tagName = 's-dashboard',
 ) {

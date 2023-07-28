@@ -32,7 +32,7 @@ import __css from '../../../../src/css/s-hotkeys-list.css'; // relative to /dist
  * npm i @coffeekraken/s-hotkeys-list-component
  *
  * @install           js
- * import { __define as __SHotkeysListComponentDefine } from '@coffeekraken/s-hotkeys-list-component';
+ * import { define as __SHotkeysListComponentDefine } from '@coffeekraken/s-hotkeys-list-component';
  * __SHotkeysListComponentDefine();
  *
  * @example         html        Simple dark mode switcher

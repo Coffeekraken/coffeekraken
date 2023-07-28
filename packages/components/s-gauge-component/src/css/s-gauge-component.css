@@ -1,0 +1,43 @@
+@keyframes gauge {
+    0% {
+        stroke-dashoffset: 0;
+    }
+    50% {
+        stroke-dashoffset: calc(2 * 3.14 * 1em);
+    }
+    100% {
+        stroke-dashoffset: 0;
+    }
+}
+
+.s-gauge {
+    /* background: red; */
+    display: block;
+    width: 1em;
+    height: 1em;
+    font-size: 350px;
+    stroke-width: calc(
+        var(--stroke-width) * 0.5
+    ); /* only for js to get the computed stroke width */
+
+    --stroke-width: 0.33em;
+
+    svg {
+        transform: rotateZ(90deg);
+    }
+
+    path {
+        stroke-width: calc(var(--stroke-width) * 0.5);
+        stroke-location: inside !important;
+        stroke-dasharray: calc(2 * 3.14 * 1em);
+        stroke-dashoffset: 0;
+        transform-origin: 50% 50%;
+    }
+    ._track {
+        stroke: sugar.color(main, --alpha 0.2);
+    }
+    ._gauge {
+        stroke: sugar.color(accent);
+        animation: 2s gauge ease-in-out 0s infinite;
+    }
+}

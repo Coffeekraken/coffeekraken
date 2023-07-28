@@ -78,7 +78,7 @@ export interface ISColorPickerComponentProps {
  * npm i @coffeekraken/s-color-picker-component
  *
  * @install         js
- * import { __define as __SColorPickerComponentDefine } from '@coffeekraken/s-color-picker-component';
+ * import { define as __SColorPickerComponentDefine } from '@coffeekraken/s-color-picker-component';
  * __SColorPickerComponentDefine();
  *
  * @example         html            With a different format (hsla)

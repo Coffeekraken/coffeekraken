@@ -1,6 +1,6 @@
 import __SDocComponent from './SDocComponent.js';
-import __define from './define.js';
+import define from './define.js';
 export * from './SDocComponent.js';
-export { __define };
+export { define };
 export default __SDocComponent;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sZUFBZSxNQUFNLG9CQUFvQixDQUFDO0FBQ2pELE9BQU8sUUFBUSxNQUFNLGFBQWEsQ0FBQztBQUVuQyxjQUFjLG9CQUFvQixDQUFDO0FBQ25DLE9BQU8sRUFBRSxRQUFRLEVBQUUsQ0FBQztBQUNwQixlQUFlLGVBQWUsQ0FBQyJ9
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sZUFBZSxNQUFNLG9CQUFvQixDQUFDO0FBQ2pELE9BQU8sTUFBTSxNQUFNLGFBQWEsQ0FBQztBQUVqQyxjQUFjLG9CQUFvQixDQUFDO0FBQ25DLE9BQU8sRUFBRSxNQUFNLEVBQUUsQ0FBQztBQUNsQixlQUFlLGVBQWUsQ0FBQyJ9

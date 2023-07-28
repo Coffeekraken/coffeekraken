@@ -6,7 +6,7 @@ interface ILazyDefineSettings extends ISLitComponentDefineSettings {
     when: TWhenTrigger;
 }
 
-export function __define(
+export function define(
     props,
     tagName = 's-rating',
     settings: Partial<ILazyDefineSettings> = {},

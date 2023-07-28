@@ -1,4 +1,4 @@
-import { __define as __SClipboardCopy } from '@coffeekraken/s-clipboard-copy-component';
+import { define as __SClipboardCopy } from '@coffeekraken/s-clipboard-copy-component';
 import __SLitComponent from '@coffeekraken/s-lit-component';
 import { __wait } from '@coffeekraken/sugar/datetime';
 import { __deepMerge } from '@coffeekraken/sugar/object';
@@ -77,7 +77,7 @@ export interface ISCodeExampleComponentProps {
  * npm i @coffeekraken/s-code-example-component
  *
  * @install           js
- * import { __define as __SCodeExampleComponentDefine } from '@coffeekraken/s-code-example-component';
+ * import { define as __SCodeExampleComponentDefine } from '@coffeekraken/s-code-example-component';
  * __SCodeExampleComponentDefine();
  *
  * @example         html

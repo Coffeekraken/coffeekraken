@@ -1,6 +1,6 @@
 import __SGoogleMapComponent from './SGoogleMapComponent.js';
-import __define from './define.js';
+import define from './define.js';
 export * from './SGoogleMapComponent.js';
-export { __define };
+export { define };
 export default __SGoogleMapComponent;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8scUJBQXFCLE1BQU0sMEJBQTBCLENBQUM7QUFDN0QsT0FBTyxRQUFRLE1BQU0sYUFBYSxDQUFDO0FBRW5DLGNBQWMsMEJBQTBCLENBQUM7QUFDekMsT0FBTyxFQUFFLFFBQVEsRUFBRSxDQUFDO0FBQ3BCLGVBQWUscUJBQXFCLENBQUMifQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8scUJBQXFCLE1BQU0sMEJBQTBCLENBQUM7QUFDN0QsT0FBTyxNQUFNLE1BQU0sYUFBYSxDQUFDO0FBQ2pDLGNBQWMsMEJBQTBCLENBQUM7QUFDekMsT0FBTyxFQUFFLE1BQU0sRUFBRSxDQUFDO0FBQ2xCLGVBQWUscUJBQXFCLENBQUMifQ==

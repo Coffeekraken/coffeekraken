@@ -1,6 +1,6 @@
 import __SInlineFeature from './SInlineFeature.js';
-import __define from './define.js';
+import define from './define.js';
 export * from './SInlineFeature.js';
-export { __define };
+export { define };
 export default __SInlineFeature;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sZ0JBQWdCLE1BQU0scUJBQXFCLENBQUM7QUFDbkQsT0FBTyxRQUFRLE1BQU0sYUFBYSxDQUFDO0FBRW5DLGNBQWMscUJBQXFCLENBQUM7QUFDcEMsT0FBTyxFQUFFLFFBQVEsRUFBRSxDQUFDO0FBQ3BCLGVBQWUsZ0JBQWdCLENBQUMifQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sZ0JBQWdCLE1BQU0scUJBQXFCLENBQUM7QUFDbkQsT0FBTyxNQUFNLE1BQU0sYUFBYSxDQUFDO0FBQ2pDLGNBQWMscUJBQXFCLENBQUM7QUFDcEMsT0FBTyxFQUFFLE1BQU0sRUFBRSxDQUFDO0FBQ2xCLGVBQWUsZ0JBQWdCLENBQUMifQ==

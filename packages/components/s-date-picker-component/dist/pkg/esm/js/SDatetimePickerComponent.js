@@ -48,7 +48,7 @@ import __css from '../../../../src/css/s-datetime-picker.css'; // relative to /d
  * npm i @coffeekraken/s-datetime-picker-component
  *
  * @install         js
- * import { __define as __SDatetimePickerComponentDefine } from '@coffeekraken/s-datetime-picker-component';
+ * import { define as __SDatetimePickerComponentDefine } from '@coffeekraken/s-datetime-picker-component';
  * __SDatetimePickerComponentDefine();
  *
  * @example         html            Simple input

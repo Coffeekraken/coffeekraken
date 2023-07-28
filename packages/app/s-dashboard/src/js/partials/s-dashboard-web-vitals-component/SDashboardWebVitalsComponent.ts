@@ -195,7 +195,7 @@ export default class SDashboardWebVitalsComponent extends __SLitComponent {
     }
 }
 
-export function __define(props: any = {}, tagName = 's-dashboard-web-vitals') {
+export function define(props: any = {}, tagName = 's-dashboard-web-vitals') {
     __SLitComponent.setDefaultProps(tagName, props);
     customElements.define(tagName, SDashboardWebVitalsComponent);
 }

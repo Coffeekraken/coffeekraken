@@ -120,7 +120,7 @@ export default class SDashboardResponsiveComponent extends __SLitComponent {
     }
 }
 
-export function __define(props: any = {}, tagName = 's-dashboard-responsive') {
+export function define(props: any = {}, tagName = 's-dashboard-responsive') {
     __SLitComponent.setDefaultProps(tagName, props);
     customElements.define(tagName, SDashboardResponsiveComponent);
 }

@@ -573,7 +573,7 @@ export default class CKBlob extends __SLitComponent {
     }
 }
 
-export function __define(props: any = {}, tagName = 'ck-blob') {
+export function define(props: any = {}, tagName = 'ck-blob') {
     __SLitComponent.setDefaultProps(tagName, props);
     customElements.define(tagName, CKBlob);
 }

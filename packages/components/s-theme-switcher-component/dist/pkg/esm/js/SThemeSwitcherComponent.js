@@ -36,7 +36,7 @@ import __css from '../../../../src/css/s-theme-switcher.css'; // relative to /di
  * npm i @coffeekraken/s-theme-switcher-component
  *
  * @install           js
- * import { __define as __SThemeSwitcherComponentDefine } from '@coffeekraken/s-theme-switcher-component';
+ * import { define as __SThemeSwitcherComponentDefine } from '@coffeekraken/s-theme-switcher-component';
  * __SThemeSwitcherComponentDefine();
  *
  * @example         html        Simple dark mode switcher

@@ -159,9 +159,7 @@ export default function ({ params, atRule, CssVars, replaceWith }) {
 
     __STheme.getTheme().loopOnColors((colorObj) => {
         const colorName = colorObj.name;
-        let modifierStr = '';
 
-        // if (colorObj.shade) modifierStr = `-${colorObj.shade}`;
         if (colorObj.shade) {
             return;
         }
@@ -170,20 +168,16 @@ export default function ({ params, atRule, CssVars, replaceWith }) {
             .comment(() =>
                 [
                     `/**`,
-                    ` * @name           s-tc:${colorName}${
-                        colorObj.shade === 'text' ? '' : modifierStr
-                    }`,
+                    ` * @name           s-tc:${colorName}`,
                     ` * @namespace          sugar.style.helpers.color`,
                     ` * @type           CssClass`,
                     ` * @platform       css`,
                     ` * @status         beta`,
                     ` *`,
-                    ` * This class allows you to apply the "${colorName}${modifierStr}" text color to an HTMLElement`,
+                    ` * This class allows you to apply the "${colorName}" text color to an HTMLElement`,
                     ` *`,
                     ` * @example        html`,
-                    ` * <h1 class="s-tc:${colorName}${
-                        colorObj.shade === 'text' ? '' : modifierStr
-                    }">`,
+                    ` * <h1 class="s-tc:${colorName}">`,
                     ` *     Something cool`,
                     ` * </h1>`,
                     ` */`,
@@ -191,12 +185,8 @@ export default function ({ params, atRule, CssVars, replaceWith }) {
             )
             .code(
                 `
-                .s-tc--${colorName}${
-                    colorObj.shade === 'text' ? '' : modifierStr
-                } {
-                    color: sugar.color(${colorName}, ${
-                    colorObj.shade
-                }) !important;
+                .s-tc--${colorName} {
+                    color: sugar.color(${colorName}, text) !important;
                 }
         `,
                 { type: 'CssClass' },
@@ -206,16 +196,16 @@ export default function ({ params, atRule, CssVars, replaceWith }) {
             .comment(() =>
                 [
                     `/**`,
-                    ` * @name           s-bg:${colorName}${modifierStr}`,
+                    ` * @name           s-bg:${colorName}`,
                     ` * @namespace          sugar.style.helpers.color`,
                     ` * @type           CssClass`,
                     ` * @platform       css`,
                     ` * @status         beta`,
                     ` *`,
-                    ` * This class allows you to apply the "${colorName}${modifierStr}" color to the background of an HTMLElement`,
+                    ` * This class allows you to apply the "${colorName}" color to the background of an HTMLElement`,
                     ` *`,
                     ` * @example        html`,
-                    ` * <h1 class="s-bg:${colorName}${modifierStr}">`,
+                    ` * <h1 class="s-bg:${colorName}">`,
                     ` *     Something cool`,
                     ` * </h1>`,
                     ` */`,
@@ -223,8 +213,8 @@ export default function ({ params, atRule, CssVars, replaceWith }) {
             )
             .code(
                 `
-                .s-bg--${colorName}${modifierStr} {
-                    background-color: sugar.color(${colorName}, ${colorObj.shade}) !important;
+                .s-bg--${colorName} {
+                    background-color: sugar.color(${colorName}) !important;
                 }
         `,
                 { type: 'CssClass' },

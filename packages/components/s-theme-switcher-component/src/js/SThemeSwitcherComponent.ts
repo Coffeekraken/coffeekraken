@@ -43,7 +43,7 @@ export interface ISThemeSwitcherComponentProps {
  * npm i @coffeekraken/s-theme-switcher-component
  *
  * @install           js
- * import { __define as __SThemeSwitcherComponentDefine } from '@coffeekraken/s-theme-switcher-component';
+ * import { define as __SThemeSwitcherComponentDefine } from '@coffeekraken/s-theme-switcher-component';
  * __SThemeSwitcherComponentDefine();
  *
  * @example         html        Simple dark mode switcher

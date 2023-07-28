@@ -66,7 +66,7 @@ export interface ISGoogleMapComponentProps {
  * npm i @coffeekraken/s-google-map-component
  *
  * @install           js
- * import { __define as __SGoogleMapComponentDefine } from '@coffeekraken/s-google-map-component';
+ * import { define as __SGoogleMapComponentDefine } from '@coffeekraken/s-google-map-component';
  * __SGoogleMapComponentDefine();
  *
  * @example         html        Simple google map

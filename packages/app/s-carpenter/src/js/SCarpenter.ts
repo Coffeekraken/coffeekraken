@@ -1,7 +1,7 @@
 import __SClass from '@coffeekraken/s-class';
 import __SComponentUtils from '@coffeekraken/s-component-utils';
 import { __deepMerge } from '@coffeekraken/sugar/object';
-import { __define as _sCarpenterAppComponentDefine } from './SCarpenterAppComponent.js';
+import { define as _sCarpenterAppComponentDefine } from './SCarpenterAppComponent.js';
 
 import __SFront from '@coffeekraken/s-front';
 

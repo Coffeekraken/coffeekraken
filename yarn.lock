@@ -2333,6 +2333,17 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@coffeekraken/s-gauge-component@^2.0.0-alpha.27, @coffeekraken/s-gauge-component@workspace:packages/components/s-gauge-component":
+  version: 0.0.0-use.local
+  resolution: "@coffeekraken/s-gauge-component@workspace:packages/components/s-gauge-component"
+  dependencies:
+    "@coffeekraken/s-interface": ^2.0.0-alpha.27
+    "@coffeekraken/s-lit-component": ^2.0.0-alpha.27
+    "@coffeekraken/sugar": ^2.0.0-alpha.27
+    lit: ^2.2.8
+  languageName: unknown
+  linkType: soft
+
 "@coffeekraken/s-glitch-feature@^2.0.0-alpha.27, @coffeekraken/s-glitch-feature@workspace:packages/features/s-glitch-feature":
   version: 0.0.0-use.local
   resolution: "@coffeekraken/s-glitch-feature@workspace:packages/features/s-glitch-feature"
@@ -7385,6 +7396,7 @@ __metadata:
     "@coffeekraken/s-front": ^2.0.0-alpha.27
     "@coffeekraken/s-frontend-server": ^2.0.0-alpha.27
     "@coffeekraken/s-frontspec": ^2.0.0-alpha.27
+    "@coffeekraken/s-gauge-component": ^2.0.0-alpha.27
     "@coffeekraken/s-glitch-feature": ^2.0.0-alpha.27
     "@coffeekraken/s-glob": ^2.0.0-alpha.27
     "@coffeekraken/s-google-map-component": ^2.0.0-alpha.27

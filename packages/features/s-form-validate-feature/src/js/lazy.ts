@@ -5,7 +5,7 @@ interface ILazyDefineSettings {
     when: TWhenTrigger;
 }
 
-export function __define(
+export function define(
     props,
     name = 's-form-validate',
     settings: Partial<ILazyDefineSettings> = {},

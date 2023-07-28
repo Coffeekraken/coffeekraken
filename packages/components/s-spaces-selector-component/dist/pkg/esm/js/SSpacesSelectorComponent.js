@@ -32,7 +32,7 @@ import __css from '../../../../src/css/s-spaces-selector.css'; // relative to /d
  * npm i @coffeekraken/s-spaces-selector-component
  *
  * @install           js
- * import { __define as __SSpacesSelectorComponentDefine } from '@coffeekraken/s-spaces-selector-component';
+ * import { define as __SSpacesSelectorComponentDefine } from '@coffeekraken/s-spaces-selector-component';
  * __SSpacesSelectorComponentDefine();
  *
  * @example         html        Simple selector

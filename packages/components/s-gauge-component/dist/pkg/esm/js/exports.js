@@ -1,0 +1,6 @@
+import __SGaugeComponent from './SGaugeComponent.js';
+import define from './define.js';
+export * from './SGaugeComponent.js';
+export { define };
+export default __SGaugeComponent;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8saUJBQWlCLE1BQU0sc0JBQXNCLENBQUM7QUFDckQsT0FBTyxNQUFNLE1BQU0sYUFBYSxDQUFDO0FBQ2pDLGNBQWMsc0JBQXNCLENBQUM7QUFDckMsT0FBTyxFQUFFLE1BQU0sRUFBRSxDQUFDO0FBQ2xCLGVBQWUsaUJBQWlCLENBQUMifQ==

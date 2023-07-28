@@ -3,7 +3,7 @@ import { customElement } from 'lit/decorators.js';
 
 import __sherlockStores from '../../stores/SherlockStores.js';
 
-import { __define as __SSpecsEditorComponentDefine } from '@coffeekraken/s-specs-editor-component';
+import { define as __SSpecsEditorComponentDefine } from '@coffeekraken/s-specs-editor-component';
 
 import '@fortawesome/fontawesome-free/js/all';
 

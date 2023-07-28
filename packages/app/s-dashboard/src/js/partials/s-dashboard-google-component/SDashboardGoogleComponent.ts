@@ -105,7 +105,7 @@ export default class SDashboardGoogleComponent extends __SLitComponent {
     }
 }
 
-export function __define(props: any = {}, tagName = 's-dashboard-google') {
+export function define(props: any = {}, tagName = 's-dashboard-google') {
     __SLitComponent.setDefaultProps(tagName, props);
     customElements.define(tagName, SDashboardGoogleComponent);
 }

@@ -52,7 +52,7 @@ import __css from '../../../../src/css/s-wysiwyg-component.css'; // relative to 
  * npm i @coffeekraken/s-range-component
  *
  * @install         js
- * import { __define as __SWysiwygComponentDefine } from '@coffeekraken/s-wysiwyg-component';
+ * import { define as __SWysiwygComponentDefine } from '@coffeekraken/s-wysiwyg-component';
  * __SWysiwygComponentDefine();
  *
  * @example         html        Simple editor

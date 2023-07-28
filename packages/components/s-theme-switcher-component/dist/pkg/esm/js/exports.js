@@ -1,6 +1,6 @@
 import __SThemeSwitcherComponent from './SThemeSwitcherComponent.js';
-import __define from './define.js';
+import define from './define.js';
 export * from './SThemeSwitcherComponent.js';
-export { __define };
+export { define };
 export default __SThemeSwitcherComponent;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8seUJBQXlCLE1BQU0sOEJBQThCLENBQUM7QUFDckUsT0FBTyxRQUFRLE1BQU0sYUFBYSxDQUFDO0FBRW5DLGNBQWMsOEJBQThCLENBQUM7QUFDN0MsT0FBTyxFQUFFLFFBQVEsRUFBRSxDQUFDO0FBQ3BCLGVBQWUseUJBQXlCLENBQUMifQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8seUJBQXlCLE1BQU0sOEJBQThCLENBQUM7QUFDckUsT0FBTyxNQUFNLE1BQU0sYUFBYSxDQUFDO0FBQ2pDLGNBQWMsOEJBQThCLENBQUM7QUFDN0MsT0FBTyxFQUFFLE1BQU0sRUFBRSxDQUFDO0FBQ2xCLGVBQWUseUJBQXlCLENBQUMifQ==

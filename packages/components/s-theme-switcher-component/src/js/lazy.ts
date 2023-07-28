@@ -5,7 +5,7 @@ interface ILazyDefineSettings {
     when: TWhenTrigger;
 }
 
-export function __define(
+export function define(
     props,
     tagName = 's-theme-switcher',
     settings: Partial<ILazyDefineSettings> = {},

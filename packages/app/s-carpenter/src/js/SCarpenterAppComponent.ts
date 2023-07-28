@@ -21,9 +21,9 @@ import __SCarpenterNode from './SCarpenterNode.js';
 
 import __layoutNodeHook from './nodesHooks/layout.js';
 
-import { __define as __SFiltrableInputComponent } from '@coffeekraken/s-filtrable-input-component';
-import { __define as __sSpecsEditorComponentDefine } from '@coffeekraken/s-specs-editor-component';
-import { __define as __sSugarFeatureDefine } from '@coffeekraken/s-sugar-feature';
+import { define as __SFiltrableInputComponent } from '@coffeekraken/s-filtrable-input-component';
+import { define as __sSpecsEditorComponentDefine } from '@coffeekraken/s-specs-editor-component';
+import { define as __sSugarFeatureDefine } from '@coffeekraken/s-sugar-feature';
 
 import { __wait } from '@coffeekraken/sugar/datetime';
 import { __deepMerge, __filterObject } from '@coffeekraken/sugar/object';
@@ -42,8 +42,6 @@ import {
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
 
 import type { ISSpecsEditorComponentSource } from '@coffeekraken/s-specs-editor-component';
-
-import __define from './defineApp.js';
 
 import { __injectIframeContent } from '@coffeekraken/sugar/dom';
 
@@ -2548,4 +2546,4 @@ export default class SCarpenterAppComponent extends __SLitComponent {
     }
 }
 
-export { __define as define };
+export { define as define };

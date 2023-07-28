@@ -55,7 +55,7 @@ import __css from '../../../../src/css/s-filtrable-input.css'; // relative to /d
  * npm i @coffeekraken/s-filtrable-input-component
  *
  * @install           js
- * import { __define as __SFiltrableInputComponentDefine } from '@coffeekraken/s-filtrable-input-component';
+ * import { define as __SFiltrableInputComponentDefine } from '@coffeekraken/s-filtrable-input-component';
  * __SFiltrableInputComponentDefine();
  *
  * @example         html            Simple example

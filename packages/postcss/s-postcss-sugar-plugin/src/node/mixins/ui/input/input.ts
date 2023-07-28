@@ -32,7 +32,7 @@ class postcssSugarPluginUiFormInputInterface extends __SInterface {
         return {
             lnf: {
                 type: 'String',
-                values: ['default', 'underline'],
+                values: ['solid', 'underline'],
                 default: __STheme.get('ui.form.defaultLnf'),
             },
             outline: {
@@ -52,7 +52,7 @@ class postcssSugarPluginUiFormInputInterface extends __SInterface {
 }
 
 export interface IPostcssSugarPluginUiFormInputParams {
-    lnf: 'default' | 'underline';
+    lnf: 'solid' | 'underline';
     outline: boolean;
     scope: string[];
 }
@@ -69,7 +69,7 @@ export default function ({
     replaceWith: Function;
 }) {
     const finalParams: IPostcssSugarPluginUiFormInputParams = {
-        lnf: 'default',
+        lnf: 'solid',
         outline: true,
         scope: [],
         ...params,

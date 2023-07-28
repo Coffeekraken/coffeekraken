@@ -56,7 +56,7 @@ export interface SPanelComponentProps {
  * npm i @coffeekraken/s-panel-component
  *
  * @install         js
- * import { __define as __SPanelComponentDefine } from '@coffeekraken/s-panel-component';
+ * import { define as __SPanelComponentDefine } from '@coffeekraken/s-panel-component';
  * __SPanelComponentDefine();
  *
  * @example         html        Simple top panel

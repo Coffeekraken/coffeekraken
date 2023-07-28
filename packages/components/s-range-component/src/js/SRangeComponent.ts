@@ -41,7 +41,7 @@ import __css from '../../../../src/css/s-range.css'; // relative to /dist/pkg/es
  * npm i @coffeekraken/s-range-component
  *
  * @install         js
- * import { __define as __SRangeComponentDefine } from '@coffeekraken/s-range-component';
+ * import { define as __SRangeComponentDefine } from '@coffeekraken/s-range-component';
  * __SRangeComponentDefine();
  *
  * @example         html        Simple range

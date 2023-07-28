@@ -108,6 +108,6 @@ export default class CKDocSubNav extends __SLitComponent {
     }
 }
 
-export function __define(props: any = {}, tagName = 'ck-doc-sub-nav') {
+export function define(props: any = {}, tagName = 'ck-doc-sub-nav') {
     __SLitComponent.define(tagName, CKDocSubNav, props);
 }

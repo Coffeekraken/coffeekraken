@@ -46,7 +46,7 @@ import __css from '../../../../src/css/s-doc-component.css'; // relative to /dis
  * npm i @coffeekraken/s-doc
  *
  * @install           js
- * import { __define as __SDocComponentDefine } from '@coffeekraken/s-doc';
+ * import { define as __SDocComponentDefine } from '@coffeekraken/s-doc';
  * __SDocComponentDefine();
  *
  * @example         html        Simple documentation explorer

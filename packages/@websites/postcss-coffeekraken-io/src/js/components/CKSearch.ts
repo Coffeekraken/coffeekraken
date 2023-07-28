@@ -1,7 +1,7 @@
 // @ts-nocheck
 
 import __SEnv from '@coffeekraken/s-env';
-import { __define as __sFiltrableInputDefine } from '@coffeekraken/s-filtrable-input-component';
+import { define as __sFiltrableInputDefine } from '@coffeekraken/s-filtrable-input-component';
 import __SLitComponent from '@coffeekraken/s-lit-component';
 import __SRequest from '@coffeekraken/s-request';
 import { __cursorToEnd } from '@coffeekraken/sugar/dom';
@@ -337,6 +337,6 @@ export default class CKSearch extends __SLitComponent {
     }
 }
 
-export function __define(props: any = {}, tagName = 'ck-search') {
+export function define(props: any = {}, tagName = 'ck-search') {
     __SLitComponent.define(tagName, CKSearch, props);
 }

@@ -14,10 +14,10 @@ import {
 import { __copy } from '@coffeekraken/sugar/clipboard';
 import { __addClassTimeout } from '@coffeekraken/sugar/dom';
 
-import { __define as __SColorPickerComponentDefine } from '@coffeekraken/s-color-picker-component';
-import { __define as __SDatetimePickerComponentDefine } from '@coffeekraken/s-datetime-picker-component';
-import { __define as __SDropzoneComponentDefine } from '@coffeekraken/s-dropzone-component';
-import { __define as __SWysiwygComponentDefine } from '@coffeekraken/s-wysiwyg-component';
+import { define as __SColorPickerComponentDefine } from '@coffeekraken/s-color-picker-component';
+import { define as __SDatetimePickerComponentDefine } from '@coffeekraken/s-datetime-picker-component';
+import { define as __SDropzoneComponentDefine } from '@coffeekraken/s-dropzone-component';
+import { define as __SWysiwygComponentDefine } from '@coffeekraken/s-wysiwyg-component';
 
 import __STheme from '@coffeekraken/s-theme';
 
@@ -150,7 +150,7 @@ export interface ISSpecsEditorComponentProps {
  * npm i @coffeekraken/s-clipboard-copy-component
  *
  * @install           js
- * import { __define as __SSpecsEditorComponentDefine } from '@coffeekraken/s-clipboard-copy-component';
+ * import { define as __SSpecsEditorComponentDefine } from '@coffeekraken/s-clipboard-copy-component';
  * __SSpecsEditorComponentDefine();
  *
  * @example         html        Copy from an input

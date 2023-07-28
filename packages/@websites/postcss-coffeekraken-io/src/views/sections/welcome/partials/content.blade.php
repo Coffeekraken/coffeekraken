@@ -2,6 +2,8 @@
     @include ('sugar.logos.coffeekraken.picto')
 </div>
 
+<s-gauge value="67"></s-gauge>
+
 <h1 class="s-typo:h1:bold s-mbe:30">
     PostCSS<br />
     <span class="s-tc:complementary">Sugar</span> plugin

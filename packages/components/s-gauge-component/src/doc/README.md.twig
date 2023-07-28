@@ -1,0 +1,54 @@
+{% extends 'sugar/readme/layouts/main/main.twig' %}
+{% block body %}
+
+<!--
+/**
+ * @name            README
+ * @namespace       doc
+ * @type            Markdown
+ * @platform        md
+ * @status          stable
+ * @menu            Documentation           /doc/readme
+ *
+ * @since           2.0.0
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+ */
+-->
+
+## SGaugeComponent
+
+This package expose a simple `SGauge` custom element that you can define and use in your pages easily.
+
+## Features
+
+-   Framework agnostic. Simply webcomponent.
+-   Responsive props [see more](/doc/components/responsive)
+-   And more...
+
+## Usage
+
+First, simply import and define the component in your js/ts file:
+
+```js
+import { define } from '@coffeekraken/s-gauge-component';
+define();
+```
+
+Make use of it in your pages:
+
+```html
+<input type="text" value="Hello world" id="my-input" />
+<s-clipboard-copy from="my-input"></s-clipboard-copy>
+```
+
+## Attributes
+
+{% include 'sugar/interface/fromDocmap/fromDocmap.twig' with {
+    docmapItem: docmap.map['@coffeekraken.s-clipboard-copy-component.js.interface.SClipboardCopyComponentInterface']
+} only %}
+
+## API
+
+For more information about the API, please check out [the API documentation](/api/@coffeekraken.s-clipboard-copy-component.js.SClipboardCopyComponent)
+
+{% endblock %}

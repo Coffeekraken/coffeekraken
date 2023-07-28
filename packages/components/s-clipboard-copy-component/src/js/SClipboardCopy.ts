@@ -43,7 +43,7 @@ export interface ISClipboardCopyComponentProps {
  * npm i @coffeekraken/s-clipboard-copy-component
  *
  * @install           js
- * import { __define as __SClipboardCopyComponentDefine } from '@coffeekraken/s-clipboard-copy-component';
+ * import { define as __SClipboardCopyComponentDefine } from '@coffeekraken/s-clipboard-copy-component';
  * __SClipboardCopyComponentDefine();
  *
  * @example         html        Copy from an input

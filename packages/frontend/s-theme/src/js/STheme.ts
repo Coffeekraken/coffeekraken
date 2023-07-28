@@ -31,7 +31,7 @@ window._console = {};
  * @example         js
  * import __STheme from '@coffeekraken/s-theme';
  * const theme = new __STheme();
- * theme.loopOnColors(({name, schema, value}) => {
+ * theme.loopOnColors(({name, shade, value}) => {
  *      // do something...
  * });
  *

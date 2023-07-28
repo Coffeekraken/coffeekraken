@@ -4,14 +4,14 @@
         <button class="s-btn:block" aria-label="Hotkeys">
             <i class="s-icon:keyboard"></i>
         </button>
-        <div s-floating placement="left" class="s-bare s-tooltip:interactive s-text:center">
+        <div s-floating placement="left" class="s-bare s-tooltip:interactive">
             <div class="s-position:relative">
                 <i class="s-icon:keyboard s-font:100 s-mbe:30"></i>
                 <h1 class="s-typo:h5 s-mbe:30">
                     <span class="s-tc:accent">Hotkeys</span><br /> makes the difference!
                 </h1>
                 <p class="s-typo:p s-font:30 s-mbe:30">
-                    Here's all the hotkeys available for you to use.
+                    Here's all the hotkeys available<br />for you to use.
                 </p>
 
                 <s-hotkeys-list></s-hotkeys-list>
@@ -23,14 +23,14 @@
         <button class="s-btn:block s-color:error" aria-label="Share the love">
             <i class="s-icon:fire"></i>
         </button>
-        <div s-floating placement="left" class="s-bare s-tooltip:interactive s-text:center">
+        <div s-floating placement="left" class="s-bare s-tooltip:interactive">
             <div class="s-position:relative">
                 <i class="s-icon:bugs s-font:100 s-mbe:30"></i>
                 <h1 class="s-typo:h5 s-mbe:30">
                     <span class="s-tc:accent">Bugs</span><br />are not our friends...
                 </h1>
                 <p class="s-typo:p s-font:30 s-mbe:30">
-                    <span class="s-tc:accent">Don't hesitate</span> to declare an issue if something does not works as
+                    <span class="s-tc:accent">Don't hesitate</span> to declare an issue<br />if something does not works as
                     expected.
                 </p>
                 <a class="s-btn s-color:error s-display:block s-mbe:20 s-depth:50"
@@ -50,14 +50,14 @@
         <button class="s-btn:block s-color:accent" aria-label="Share the love">
             <i class="s-icon:heart"></i>
         </button>
-        <div s-floating placement="left" class="s-bare s-tooltip:interactive s-text:center">
+        <div s-floating placement="left" class="s-bare s-tooltip:interactive">
             <div class="s-position:relative">
                 <i class="s-icon:heart s-font:100 s-mbe:30"></i>
                 <h1 class="s-typo:h5 s-mbe:30">
                     <span class="s-tc:accent">The more we are</span>,<br />the stronger we become.
                 </h1>
                 <p class="s-typo:p s-font:30 s-mbe:30">
-                    Don't hesitate to tell some words to you friends about us. The goal is to became more and more each
+                    Don't hesitate to tell some words to your<br />friends about us.<br />The goal is to became more and more each<br />
                     days to help each others...
                 </p>
                 <a href="https://www.patreon.com/coffeekraken" class="s-btn:block s-color:error s-mbe:20"
@@ -88,7 +88,7 @@
         <button class="s-btn:block s-color:complementary" aria-label="Join us on Discord">
             <i class="s-icon:user"></i>
         </button>
-        <div s-floating placement="left" class="s-bare s-tooltip:interactive s-text:center">
+        <div s-floating placement="left" class="s-bare s-tooltip:interactive">
             <div class="s-position:relative">
                 <i class="s-icon:discord s-font:100 s-mbe:30"></i>
                 <h1 class="s-typo:h5 s-mbe:30">
@@ -109,15 +109,15 @@
         <button class="s-btn:block s-bg:main-surface" aria-label="We love open source!">
             <i class="s-icon:logo-opensource s-tc:base"></i>
         </button>
-        <div s-floating placement="left" class="s-bare s-tooltip:interactive s-text:center">
+        <div s-floating placement="left" class="s-bare s-tooltip:interactive">
             <div class="s-position:relative">
                 <i class="s-icon:logo-opensource s-font:100 s-mbe:30"></i>
                 <h1 class="s-typo:h5 s-mbe:30">
                     <span class="s-tc:accent">We love</span>,<br />Open source!
                 </h1>
                 <p class="s-typo:p s-font:30 s-mbe:30">
-                    All of our codebase can be found on Github. We hope that <span class="s-tc:accent">you may
-                        contribute to help us make our
+                    All of our codebase can be found on<br />Github. We hope that <span class="s-tc:accent">you may<br />
+                        contribute to help us make our<br />
                         tools even better</span>!
                 </p>
                 <a class="s-btn s-color:accent s-display:block" href="https://github.com/Coffeekraken/coffeekraken"

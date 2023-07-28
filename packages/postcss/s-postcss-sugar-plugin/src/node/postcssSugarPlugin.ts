@@ -26,9 +26,23 @@ import type { ISClassmapSettings } from '@coffeekraken/s-classmap';
 
 const sharedData = {
     isPristine: true,
+    scope: {
+        no: [],
+        scope: [],
+    },
 };
 
 const frontData = {};
+
+export interface IPostcssSugarPluginSharedData {
+    rootFilePath: string;
+    isPristine: boolean;
+    scope: {
+        no: string[];
+        scope: string[];
+    };
+    [key: string]: any;
+}
 
 export interface IPostcssSugarPluginLodSettings {
     enabled: boolean;
@@ -623,6 +637,22 @@ const plugin = (settings: IPostcssSugarPluginSettings = {}) => {
 
                 const params = mixinInterface.apply(processedParams, {});
 
+                // handle the @sugar.scope(.exclude) mixins
+                if (mixinInterface.definition.scope) {
+                    // "scope" that specify exactyle the scope we want
+                    if (atRule._scope) {
+                        params.scope = atRule._scope;
+                    } else if (
+                        // "noScope" that specify which scope(s) to exclude
+                        atRule._scopeExclude
+                    ) {
+                        // get the default scopes from the interface and remove the unwanted ones
+                        params.scope = (
+                            mixinInterface.definition.scope.default ?? []
+                        ).filter((s) => !atRule._scopeExclude.includes(s));
+                    }
+                }
+
                 let mixinResult;
 
                 delete params.help;
@@ -658,7 +688,9 @@ const plugin = (settings: IPostcssSugarPluginSettings = {}) => {
                     settings,
                 });
 
-                if (mixinResult) {
+                if (typeof mixinResult === 'function') {
+                    mixinResult();
+                } else if (mixinResult) {
                     mixinResult = contentToString(mixinResult);
                     replaceWith(atRule, mixinResult);
                 }

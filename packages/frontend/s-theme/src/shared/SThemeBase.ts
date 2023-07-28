@@ -31,7 +31,7 @@ import __knownCssProperties from 'known-css-properties';
  * @example         js
  * import STheme from '@coffeekraken/s-theme';
  * const theme = new STheme();
- * theme.loopOnColors(({name, schema, value}) => {
+ * theme.loopOnColors(({name, shade, value}) => {
  *      // do something...
  * });
  *
@@ -39,7 +39,7 @@ import __knownCssProperties from 'known-css-properties';
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 
-class colorSchemaNameInterface extends __SInterface {
+class shadesNameInterface extends __SInterface {
     static get _definition() {
         return {
             saturate: {
@@ -203,8 +203,8 @@ export interface ISThemeConfig {
 
 export interface ISThemeLoopOnColorsColor {
     name: string;
-    schema: string;
-    schemaDash: string;
+    shade: string;
+    shadeDash: string;
     value: ISThemeColor | ISThemeColorModifiers;
 }
 
@@ -665,12 +665,12 @@ export default class SThemeBase extends __SEventEmitter {
      * @static
      *
      * This method allows you to get back the actual final value of a color with
-     * his schema and modifier.
+     * his shade and modifier.
      * You can get back either a css variable or the actual color value by specifying
      * the "settings.return" setting.
      *
      * @param       {String}            color       The color you want to resolve
-     * @param       {String}            [schema=null]      The color schema you want
+     * @param       {String}            [shade=null]      The color shade you want
      * @param       {String}            [modifier=null]     The modifier you want to apply. Can be something like "--darken 30%", etc...
      * @param       {ISThemeColorResolveColorSettings}      [settings={}]           Some settings
      * @return      {any}                       The final resolved color
@@ -682,12 +682,12 @@ export default class SThemeBase extends __SEventEmitter {
      */
     static resolveColor(
         color: string,
-        schema?: string,
+        shade?: string,
         modifier?: string,
         settings?: Partial<ISThemeResolveColorSettings>,
     ): string {
         const theme = this.getTheme(settings?.theme, settings?.variant);
-        return theme.resolveColor(color, schema, modifier, settings);
+        return theme.resolveColor(color, shade, modifier, settings);
     }
 
     /**
@@ -765,19 +765,19 @@ export default class SThemeBase extends __SEventEmitter {
             case 'color':
             case 'background-color':
                 let color = value,
-                    schema,
+                    shade,
                     modifier;
                 if (Array.isArray(value) && value.length === 2) {
                     color = value[0];
-                    schema = value[1];
+                    shade = value[1];
                 }
                 if (Array.isArray(value) && value.length === 3) {
                     color = value[0];
-                    schema = value[1];
+                    shade = value[1];
                     modifier = value[2];
                 }
                 return (
-                    this.resolveColor(color, schema, modifier, {
+                    this.resolveColor(color, shade, modifier, {
                         ...(settings ?? {}),
                         return: 'value',
                     }) ?? value
@@ -938,20 +938,20 @@ export default class SThemeBase extends __SEventEmitter {
                     case 'color':
                     case 'background-color':
                         let color = value,
-                            schema,
+                            shade,
                             modifier;
                         if (Array.isArray(value) && value.length === 2) {
                             color = value[0];
-                            schema = value[1];
+                            shade = value[1];
                         }
                         if (Array.isArray(value) && value.length === 3) {
                             color = value[0];
-                            schema = value[1];
+                            shade = value[1];
                             modifier = value[2];
                         }
                         propsStack.push(
                             `${prop}: ${
-                                this.resolveColor(color, schema, modifier, {
+                                this.resolveColor(color, shade, modifier, {
                                     ...(settings ?? {}),
                                     return: 'var',
                                 }) ?? value
@@ -1104,19 +1104,19 @@ export default class SThemeBase extends __SEventEmitter {
                 (colorObj) => {
                     if (colorObj.name === toColorName) {
                         if (toColorVariant) {
-                            if (colorObj.schema === toColorVariant) {
+                            if (colorObj.shade === toColorVariant) {
                                 result.vars.push(
-                                    `${fromVariable}-saturation-offset: var(${toVariable}-${colorObj.schemaDash}-saturation-offset, 0);`,
+                                    `${fromVariable}-saturation-offset: var(${toVariable}-${colorObj.shadeDash}-saturation-offset, 0);`,
                                 );
                                 result.properties[
                                     `${fromVariable}-saturation-offset`
-                                ] = `var(${toVariable}-${colorObj.schemaDash}-saturation-offset, 0)`;
+                                ] = `var(${toVariable}-${colorObj.shadeDash}-saturation-offset, 0)`;
                                 result.vars.push(
-                                    `${fromVariable}-lightness-offset: var(${toVariable}-${colorObj.schemaDash}-lightness-offset, 0);`,
+                                    `${fromVariable}-lightness-offset: var(${toVariable}-${colorObj.shadeDash}-lightness-offset, 0);`,
                                 );
                                 result.properties[
                                     `${fromVariable}-lightness-offset`
-                                ] = `var(${toVariable}-${colorObj.schemaDash}-lightness-offset, 0)`;
+                                ] = `var(${toVariable}-${colorObj.shadeDash}-lightness-offset, 0)`;
                                 result.vars.push(
                                     `${fromVariable}-a: var(${toVariable}-a, 1);`,
                                 );
@@ -1125,7 +1125,7 @@ export default class SThemeBase extends __SEventEmitter {
                                 ] = `var(${toVariable}-a, 1)`;
                             }
                         } else {
-                            if (!colorObj.schema && colorObj.value.color) {
+                            if (!colorObj.shade && colorObj.value.color) {
                                 result.vars.push(
                                     `${fromVariable}-h: var(${toVariable}-h);`,
                                 );
@@ -1146,17 +1146,17 @@ export default class SThemeBase extends __SEventEmitter {
                                 ] = `var(${toVariable}-l)`;
                             } else {
                                 result.vars.push(
-                                    `${fromVariable}-${colorObj.schemaDash}-saturation-offset: var(${toVariable}-${colorObj.schemaDash}-saturation-offset, 0);`,
+                                    `${fromVariable}-${colorObj.shadeDash}-saturation-offset: var(${toVariable}-${colorObj.shadeDash}-saturation-offset, 0);`,
                                 );
                                 result.properties[
-                                    `${fromVariable}-${colorObj.schemaDash}-saturation-offset`
-                                ] = `var(${toVariable}-${colorObj.schemaDash}-saturation-offset, 0)`;
+                                    `${fromVariable}-${colorObj.shadeDash}-saturation-offset`
+                                ] = `var(${toVariable}-${colorObj.shadeDash}-saturation-offset, 0)`;
                                 result.vars.push(
-                                    `${fromVariable}-${colorObj.schemaDash}-lightness-offset: var(${toVariable}-${colorObj.schemaDash}-lightness-offset, 0);`,
+                                    `${fromVariable}-${colorObj.shadeDash}-lightness-offset: var(${toVariable}-${colorObj.shadeDash}-lightness-offset, 0);`,
                                 );
                                 result.properties[
-                                    `${fromVariable}-${colorObj.schemaDash}-lightness-offset`
-                                ] = `var(${toVariable}-${colorObj.schemaDash}-lightness-offset, 0)`;
+                                    `${fromVariable}-${colorObj.shadeDash}-lightness-offset`
+                                ] = `var(${toVariable}-${colorObj.shadeDash}-lightness-offset, 0)`;
                                 result.vars.push(
                                     `${fromVariable}-a: var(${toVariable}-a, 1);`,
                                 );
@@ -1207,7 +1207,7 @@ export default class SThemeBase extends __SEventEmitter {
         themeInstance.loopOnColors((colorObj) => {
             const baseVariable = colorObj.value.variable;
 
-            if (!colorObj.schema && colorObj.value.color) {
+            if (!colorObj.shade && colorObj.value.color) {
                 vars.push(`${baseVariable}-h: ${colorObj.value.h};`);
                 vars.push(`${baseVariable}-s: ${colorObj.value.s};`);
                 vars.push(`${baseVariable}-l: ${colorObj.value.l};`);
@@ -1216,7 +1216,7 @@ export default class SThemeBase extends __SEventEmitter {
                 vars.push(`${baseVariable}-origin-s: ${colorObj.value.s};`);
                 vars.push(`${baseVariable}-origin-l: ${colorObj.value.l};`);
                 vars.push(`${baseVariable}-origin-a: ${colorObj.value.a};`);
-            } else if (colorObj.schema) {
+            } else if (colorObj.shade) {
                 if (colorObj.value.saturate) {
                     vars.push(
                         `${baseVariable}-saturation-offset: ${colorObj.value.saturate};`,
@@ -1872,12 +1872,12 @@ export default class SThemeBase extends __SEventEmitter {
      * @type        Function
      *
      * This method allows you to get back the actual final value of a color with
-     * his schema and modifier.
+     * his shade and modifier.
      * You can get back either a css variable or the actual color value by specifying
      * the "settings.return" setting.
      *
      * @param       {String}            color       The color you want to resolve
-     * @param       {String}            [schema=null]      The color schema you want
+     * @param       {String}            [shade=null]      The color shade you want
      * @param       {String}            [modifier=null]     The modifier you want to apply. Can be something like "--darken 30%", etc...
      * @param       {ISThemeColorResolveColorSettings}      [settings={}]           Some settings
      * @return      {any}                       The final resolved color
@@ -1889,7 +1889,7 @@ export default class SThemeBase extends __SEventEmitter {
      */
     resolveColor(
         color: string,
-        schema?: string,
+        shade?: string,
         modifier?: string,
         settings?: Partial<ISThemeResolveColorSettings>,
     ): string {
@@ -1903,17 +1903,17 @@ export default class SThemeBase extends __SEventEmitter {
         };
 
         let colorName = color;
-        let colorSchemaName = schema ?? '';
+        let shadeName = shade ?? '';
         let colorModifier = modifier ?? '';
 
-        if (colorSchemaName.match(/^--[a-zA-Z]+/)) {
-            colorModifier = colorSchemaName;
-            colorSchemaName = undefined;
+        if (shadeName.match(/^--[a-zA-Z]+/)) {
+            colorModifier = shadeName;
+            shadeName = undefined;
         }
 
         let modifierParams = {};
         if (colorModifier) {
-            modifierParams = colorSchemaNameInterface.apply(colorModifier);
+            modifierParams = shadesNameInterface.apply(colorModifier);
         }
 
         let finalValue;
@@ -1932,26 +1932,26 @@ export default class SThemeBase extends __SEventEmitter {
                 case 'var':
                     const colorVar = `--s-color-${colorName}`;
 
-                    let colorSchemaNameVar = `s-color-${colorName}`;
-                    if (colorSchemaName) {
-                        colorSchemaNameVar += `-${__dashCase(colorSchemaName)}`;
+                    let shadeNameVar = `s-color-${colorName}`;
+                    if (shadeName) {
+                        shadeNameVar += `-${__dashCase(shadeName)}`;
                     }
-                    colorSchemaNameVar =
-                        '--' + colorSchemaNameVar.replace(/-{2,999}/gm, '-');
+                    shadeNameVar =
+                        '--' + shadeNameVar.replace(/-{2,999}/gm, '-');
 
                     finalValue = colorVar;
 
                     const hParts = [
                         `var(${colorVar}-h, 0)`,
-                        `var(${colorSchemaNameVar}-spin ,${
+                        `var(${shadeNameVar}-spin ,${
                             modifierParams.spin ?? 0
                         })`,
                     ];
 
                     const sParts = [`var(${colorVar}-s, 0)`];
-                    if (colorSchemaName) {
+                    if (shadeName) {
                         sParts.push(
-                            `var(${colorSchemaNameVar}-saturation-offset, 0)`,
+                            `var(${shadeNameVar}-saturation-offset, 0)`,
                         );
                     }
                     let saturationOffset = modifierParams.saturate
@@ -1964,10 +1964,8 @@ export default class SThemeBase extends __SEventEmitter {
                     }
 
                     const lParts = [`var(${colorVar}-l, 0)`];
-                    if (colorSchemaName) {
-                        lParts.push(
-                            `var(${colorSchemaNameVar}-lightness-offset, 0)`,
-                        );
+                    if (shadeName) {
+                        lParts.push(`var(${shadeNameVar}-lightness-offset, 0)`);
                     }
                     let lightnessOffset = modifierParams.lighten
                         ? modifierParams.lighten
@@ -1996,7 +1994,7 @@ export default class SThemeBase extends __SEventEmitter {
                     ${
                         modifierParams.alpha !== undefined
                             ? alpha
-                            : `var(${colorSchemaNameVar}-a, 1)`
+                            : `var(${shadeNameVar}-a, 1)`
                     }
                     )`;
 
@@ -2013,23 +2011,21 @@ export default class SThemeBase extends __SEventEmitter {
                     const colorValue = this.getSafe(`color.${color}`) ?? color;
 
                     // nothing to apply on the color
-                    if (!schema && !modifier) {
+                    if (!shade && !modifier) {
                         finalValue = colorValue;
                     }
 
                     // init a new SColor instance
                     let colorInstance = new __SColor(colorValue);
 
-                    if (schema) {
-                        let finalSchema = schema;
-                        if (typeof schema === 'string') {
+                    if (shade) {
+                        let finalSchema = shade;
+                        if (typeof shade === 'string') {
                             finalSchema = this.getSafe(
-                                `colorSchema.${schema}.color.${color}`,
+                                `shades.${shade}.color.${color}`,
                             );
                             if (!finalSchema) {
-                                finalSchema = this.getSafe(
-                                    `colorSchema.${schema}`,
-                                );
+                                finalSchema = this.getSafe(`shades.${shade}`);
                             }
                         }
                         if (finalSchema) {
@@ -2059,7 +2055,7 @@ export default class SThemeBase extends __SEventEmitter {
      *
      * @param       {Function}      callback            Specify the callback that will be called for each color with an object containing these properties:
      * - name       {String}        The name of the color like "accent", "complementary", etc...
-     * - schema    {String}        The name of the variant like "background", "surface", etc...
+     * - shade    {String}        The name of the variant like "background", "surface", etc...
      * - value      {ISThemeColor | ISThemeColorModifiers}        The actual color object
      *
      * @since             2.0.0
@@ -2069,13 +2065,13 @@ export default class SThemeBase extends __SEventEmitter {
         callback: ISThemeLoopOnColorsCallback,
     ): Promise<boolean> {
         const colorsObj = this.get('color'),
-            colorSchemasObj = this.get('colorSchema');
+            shadessObj = this.get('shades');
 
         for (let [colorName, colorValue] of Object.entries(colorsObj)) {
             const c = new __SColor(colorValue);
             callback({
                 name: colorName,
-                schema: '',
+                shade: '',
                 // @ts-ignore
                 value: {
                     color: colorValue,
@@ -2090,20 +2086,18 @@ export default class SThemeBase extends __SEventEmitter {
                 },
             });
 
-            for (let [schemaName, schemaObj] of Object.entries(
-                colorSchemasObj,
-            )) {
-                const newColor = c.apply(schemaObj, true);
+            for (let [shadeName, shadeObj] of Object.entries(shadessObj)) {
+                const newColor = c.apply(shadeObj, true);
                 callback(<ISThemeLoopOnColorsColor>{
                     name: colorName,
-                    schema: schemaName,
-                    schemaDash: __dashCase(schemaName),
+                    shade: shadeName,
+                    shadeDash: __dashCase(shadeName),
                     value: {
                         variable: `--${__dashCase(
-                            `s-color-${colorName}-${schemaName}`,
+                            `s-color-${colorName}-${shadeName}`,
                         )}`,
                         // @ts-ignore
-                        ...schemaObj,
+                        ...shadeObj,
                         r: newColor.r,
                         g: newColor.g,
                         b: newColor.b,
@@ -2115,25 +2109,25 @@ export default class SThemeBase extends __SEventEmitter {
                 });
 
                 // @ts-ignore
-                if (schemaObj.color) {
+                if (shadeObj.color) {
                     for (let [
-                        colorSchemaColorName,
-                        colorSchemaObj,
+                        shadesColorName,
+                        shadesObj,
                         // @ts-ignore
-                    ] of Object.entries(schemaObj.color)) {
-                        if (colorSchemaColorName !== colorName) continue;
+                    ] of Object.entries(shadeObj.color)) {
+                        if (shadesColorName !== colorName) continue;
 
-                        const newColor = c.apply(colorSchemaObj, true);
+                        const newColor = c.apply(shadesObj, true);
 
                         callback(<ISThemeLoopOnColorsColor>{
-                            name: colorSchemaColorName,
-                            schema: schemaName,
+                            name: shadesColorName,
+                            shade: shadeName,
                             value: {
                                 variable: `--${__dashCase(
-                                    `s-color-${colorSchemaColorName}-${schemaName}`,
+                                    `s-color-${shadesColorName}-${shadeName}`,
                                 )}`,
                                 // @ts-ignore
-                                ...colorSchemaObj,
+                                ...shadesObj,
                                 r: newColor.r,
                                 g: newColor.g,
                                 b: newColor.b,

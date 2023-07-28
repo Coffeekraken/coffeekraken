@@ -160,14 +160,18 @@ export default function ({ params, atRule, CssVars, replaceWith }) {
     __STheme.getTheme().loopOnColors((colorObj) => {
         const colorName = colorObj.name;
         let modifierStr = '';
-        if (colorObj.schema) modifierStr = `-${colorObj.schema}`;
+
+        // if (colorObj.shade) modifierStr = `-${colorObj.shade}`;
+        if (colorObj.shade) {
+            return;
+        }
 
         cssArray
             .comment(() =>
                 [
                     `/**`,
                     ` * @name           s-tc:${colorName}${
-                        colorObj.schema === 'text' ? '' : modifierStr
+                        colorObj.shade === 'text' ? '' : modifierStr
                     }`,
                     ` * @namespace          sugar.style.helpers.color`,
                     ` * @type           CssClass`,
@@ -178,7 +182,7 @@ export default function ({ params, atRule, CssVars, replaceWith }) {
                     ` *`,
                     ` * @example        html`,
                     ` * <h1 class="s-tc:${colorName}${
-                        colorObj.schema === 'text' ? '' : modifierStr
+                        colorObj.shade === 'text' ? '' : modifierStr
                     }">`,
                     ` *     Something cool`,
                     ` * </h1>`,
@@ -188,10 +192,10 @@ export default function ({ params, atRule, CssVars, replaceWith }) {
             .code(
                 `
                 .s-tc--${colorName}${
-                    colorObj.schema === 'text' ? '' : modifierStr
+                    colorObj.shade === 'text' ? '' : modifierStr
                 } {
                     color: sugar.color(${colorName}, ${
-                    colorObj.schema
+                    colorObj.shade
                 }) !important;
                 }
         `,
@@ -220,7 +224,7 @@ export default function ({ params, atRule, CssVars, replaceWith }) {
             .code(
                 `
                 .s-bg--${colorName}${modifierStr} {
-                    background-color: sugar.color(${colorName}, ${colorObj.schema}) !important;
+                    background-color: sugar.color(${colorName}, ${colorObj.shade}) !important;
                 }
         `,
                 { type: 'CssClass' },

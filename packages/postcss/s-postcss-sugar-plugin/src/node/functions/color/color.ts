@@ -15,7 +15,7 @@ import __STheme from '@coffeekraken/s-theme';
  * This function allows you to get a color value depending on your theme config.
  *
  * @param       {String}        color      The color to get
- * @param       {String}        [schema=null]      The color schema to get
+ * @param       {String}        [shade=null]      The color shade to get
  * @param       {String}        [modifier=null]     A color modifier like "--alpha 0.3 --saturate 20", etc...
  * @return      {Css}                   The corresponding css
  *
@@ -30,7 +30,7 @@ import __STheme from '@coffeekraken/s-theme';
  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 
-class colorSchemaNameInterface extends __SInterface {
+class shadeNameInterface extends __SInterface {
     static get _definition() {
         return {
             saturate: {
@@ -68,7 +68,7 @@ class postcssSugarPluginColorInterface extends __SInterface {
                 type: 'String',
                 alias: 'c',
             },
-            schema: {
+            shade: {
                 type: 'String',
                 alias: 'v',
             },
@@ -83,7 +83,7 @@ export { postcssSugarPluginColorInterface as interface };
 
 export interface IPostcssSugarPluginColorParams {
     name: string;
-    schema: string;
+    shade: string;
     modifier: string;
 }
 
@@ -94,14 +94,14 @@ export default function color({
 }) {
     const finalParams: IPostcssSugarPluginColorParams = {
         color: '',
-        schema: undefined,
+        shade: undefined,
         modifier: undefined,
         ...params,
     };
 
     return __STheme.resolveColor(
         finalParams.color,
-        finalParams.schema,
+        finalParams.shade,
         finalParams.modifier,
         {
             return: 'var',

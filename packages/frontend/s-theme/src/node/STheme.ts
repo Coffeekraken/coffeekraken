@@ -18,7 +18,7 @@ import __SThemeBase from '../shared/SThemeBase.js';
  * @example         js
  * import STheme from '@coffeekraken/s-theme';
  * const theme = new STheme();
- * theme.loopOnColors(({name, schema, value}) => {
+ * theme.loopOnColors(({name, shade, value}) => {
  *      // do something...
  * });
  *
@@ -79,7 +79,7 @@ export default class STheme extends __SThemeBase {
      * THis method allows you to access a particular theme color
      *
      * @param           {String}            name            The color name you want to get
-     * @param           {String}            [schema=null]     The color schema you want to get
+     * @param           {String}            [shade=null]     The color shade you want to get
      * @param           {HTMLElement}       [$context=document.body]        The context in which to get the color
      * @return          {SColor}                                    An SColor instance that you can make use of
      *
@@ -88,7 +88,7 @@ export default class STheme extends __SThemeBase {
      */
     getColor(
         name: string,
-        schema?: string,
+        shade?: string,
         state: string = 'default',
     ): __SColor {
         const color = this.get(`color.${name}.color`);
@@ -97,17 +97,17 @@ export default class STheme extends __SThemeBase {
                 `Sorry but the requested "<yellow>${name}</yellow> color does not exists...`,
             );
         }
-        if (!schema) {
+        if (!shade) {
             return new __SColor(color);
         }
-        const schemaObj = this.get(`colorSchema.${schema}`);
-        if (!schemaObj) {
+        const shadeObj = this.get(`shades.${shade}`);
+        if (!shadeObj) {
             throw new Error(
-                `Sorry but the requested "<yellow>${name}</yellow>"color, schema "<cyan>${schema}</cyan>" and state "<magenta>${state}</magenta>" does not exists...`,
+                `Sorry but the requested "<yellow>${name}</yellow>"color, shade "<cyan>${shade}</cyan>" and state "<magenta>${state}</magenta>" does not exists...`,
             );
         }
         const colorInstance = new __SColor(color);
-        colorInstance.apply(schemaObj);
+        colorInstance.apply(shadeObj);
         return colorInstance;
     }
 }

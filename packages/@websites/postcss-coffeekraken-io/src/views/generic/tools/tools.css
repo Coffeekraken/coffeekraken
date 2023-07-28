@@ -13,6 +13,10 @@
         display: none;
     }
 
+    .s-btn {
+        display: block;
+    }
+
     > * {
         display: block !important;
         margin-block: sugar.margin(20);

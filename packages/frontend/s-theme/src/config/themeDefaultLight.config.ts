@@ -20,18 +20,18 @@ export default function (api) {
         },
 
         /**
-         * @name            colorSchema
+         * @name            shades
          * @namespace        config.themeDefaultDark
          * @type            String
-         * @default         config.themeColorSchemaLight
+         * @default         config.themeShadesLight
          *
-         * Specify the color schema to be used in the dark theme
+         * Specify the color shades to be used in the dark theme
          *
          * @since           2.0.0
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
-        get colorSchema() {
-            return api.config.themeColorSchemaLight;
+        get shades() {
+            return api.config.themeShadesLight;
         },
     });
 }

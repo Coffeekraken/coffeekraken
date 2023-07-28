@@ -63,11 +63,13 @@ export default function ({
     params,
     atRule,
     CssVars,
+    sharedData,
     replaceWith,
 }: {
     params: Partial<IPostcssSugarPluginUiButtonClassesParams>;
     atRule: any;
     CssVars: any;
+    sharedData: any;
     replaceWith: Function;
 }) {
     const finalParams: IPostcssSugarPluginUiButtonClassesParams = {
@@ -76,6 +78,8 @@ export default function ({
         scope: ['bare', 'lnf', 'vr', 'tf'],
         ...params,
     };
+
+    console.log('sha', finalParams.scope);
 
     const vars = new CssVars();
 

@@ -32,8 +32,8 @@ class postcssSugarPluginUiGaugeInterface extends __SInterface {
         return {
             lnf: {
                 type: 'String',
-                values: ['default', 'underline'],
-                default: __STheme.get('ui.form.defaultLnf'),
+                values: ['solid'],
+                default: __STheme.get('ui.gauge.defaultLnf'),
             },
             scope: {
                 type: {
@@ -73,15 +73,78 @@ export default function ({
 
     if (finalParams.scope.indexOf('bare') !== -1) {
         vars.push(`
-            width: 100%;
         `);
     }
 
     if (finalParams.scope.indexOf('lnf') !== -1) {
-        vars.push(``);
-
         switch (finalParams.lnf) {
             default:
+                vars.push(`
+
+                    @keyframes s-gauge-track-in {
+                        0% {
+                            stroke-dashoffset: var(--dash-circle);
+                        }
+                        100% {
+                            stroke-dashoffset: calc((var(--dash-circle) - var(--dash-length)));
+                        }
+                    }
+                    @keyframes s-gauge-value-in {
+                        0% {
+                            opacity: 0;
+                            transform: translate(-50%, calc(-50% + 0.5em));
+                        }
+                        100% {
+                            opacity: 1;
+                            transform: translate(-50%, -50%);
+                        }
+                    }
+                    @keyframes s-gauge-in {
+                        0% {
+                            stroke-dashoffset: var(--dash-circle);
+                        }
+                        100% {
+                            stroke-dashoffset: calc(
+                                (
+                                    var(--dash-circle) -
+                                        (var(--dash-length) / 100 * var(--value-percent))
+                                )
+                            );
+                        }
+                    }
+
+                    font-size: 150px;
+                    
+                    &.low {
+                        @sugar.color (error);
+                    }
+                    &.medium {
+                        @sugar.color (accent);
+                    }
+                    &.high {
+                        @sugar.color (success);
+                    }
+                
+                    ._track {
+                        stroke: sugar.color(main, --alpha 0.1);
+                        stroke-dashoffset: var(--dash-circle);
+                        animation: s-gauge-track-in 0.3s ease-in-out 0s forwards;
+                        @sugar.transition fast;
+                    }
+                    ._gauge {
+                        stroke: sugar.color(current);
+                        stroke-dashoffset: var(--dash-circle);
+                        animation: s-gauge-in 0.3s ease-in-out 0.2s forwards;
+                        @sugar.transition fast;
+                    }
+                
+                    ._value {
+                        opacity: 0;
+                        animation: s-gauge-value-in 0.3s ease-out 0.3s forwards;
+                        @sugar.transition fast;
+                    }
+                
+                `);
                 break;
         }
     }

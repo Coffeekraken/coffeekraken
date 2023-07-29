@@ -28,6 +28,18 @@ export default class SGaugeComponentInterface extends __SInterface {
                 description: 'Min value',
                 default: 0,
             },
+            start: {
+                type: 'Number',
+                title: 'Start',
+                description: 'Start degree',
+                default: 0,
+            },
+            end: {
+                type: 'Number',
+                title: 'End',
+                description: 'End degree',
+                default: 360,
+            },
             max: {
                 type: 'Number',
                 title: 'Max',
@@ -35,10 +47,21 @@ export default class SGaugeComponentInterface extends __SInterface {
                 default: 100,
             },
             value: {
-                type: 'Number',
+                type: 'String|Number',
                 title: 'Value',
                 description: 'Actual value between the min and the max one',
                 required: true,
+            },
+            classes: {
+                type: 'Object',
+                title: 'Classes',
+                description:
+                    'Specify a class to be added if the actual gauge value is above it. The check number has to be a percentage',
+                default: {
+                    low: 0,
+                    medium: 33,
+                    high: 66,
+                },
             },
             linecap: {
                 type: 'String',

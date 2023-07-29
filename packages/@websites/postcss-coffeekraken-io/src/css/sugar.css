@@ -19,6 +19,8 @@
 @sugar.margin.classes;
 @sugar.padding.classes;
 
+@sugar.ui.gauge.classes;
+
 /* chunked ui's */
 @sugar.chunk 'avatar' {
     @sugar.ui.avatar.classes;

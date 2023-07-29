@@ -79,8 +79,6 @@ export default function ({
         ...params,
     };
 
-    console.log('sha', finalParams.scope);
-
     const vars = new CssVars();
 
     vars.comment(

@@ -12,6 +12,7 @@ export interface ISGaugeComponentProps {
     max: number;
     value: number;
     linecap: 'butt' | 'square' | 'round';
+    classes: Record<string, number>;
 }
 
 /**
@@ -77,18 +78,25 @@ export default class SGaugeComponent extends __SLitComponent {
     }
 
     render() {
-        const boundings = this.getBoundingClientRect();
+        const value = parseFloat(this.props.value);
+        const boundings = this.getBoundingClientRect(),
+            strokeWidth = parseFloat(window.getComputedStyle(this).strokeWidth),
+            scale = (1 / (boundings.width + strokeWidth)) * boundings.width,
+            valuePercent =
+                (100 / this.props.max) * parseFloat(this.props.value);
 
-        const strokeWidth = parseFloat(
-            window.getComputedStyle(this).strokeWidth,
-        );
-
-        const scale = (1 / (boundings.width + strokeWidth)) * boundings.width;
-
-        console.log('stro', strokeWidth, scale);
+        for (let [cls, percentage] of Object.entries(this.props.classes)) {
+            if ((100 / this.props.max) * value >= <number>percentage) {
+                this.classList.add(cls);
+            } else {
+                this.classList.remove(cls);
+            }
+        }
 
         return html`
             <svg
+                style="--start-degree: ${this.props.start}; --end-degree: ${this
+                    .props.end}; --value-percent: ${valuePercent};"
                 viewBox="0 0 ${boundings.width} ${boundings.height}"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
@@ -118,6 +126,7 @@ export default class SGaugeComponent extends __SLitComponent {
   "
                 />
             </svg>
+            <div class="_value">${this.props.value}</div>
         `;
     }
 }

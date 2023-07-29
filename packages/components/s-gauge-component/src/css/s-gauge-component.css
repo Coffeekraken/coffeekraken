@@ -1,43 +1,49 @@
-@keyframes gauge {
-    0% {
-        stroke-dashoffset: 0;
-    }
-    50% {
-        stroke-dashoffset: calc(2 * 3.14 * 1em);
-    }
-    100% {
-        stroke-dashoffset: 0;
-    }
-}
-
 .s-gauge {
-    /* background: red; */
+    --stroke-width: 0.33em;
+
     display: block;
+    position: relative;
     width: 1em;
     height: 1em;
-    font-size: 350px;
+    font-size: 150px;
+    user-select: none;
     stroke-width: calc(
         var(--stroke-width) * 0.5
     ); /* only for js to get the computed stroke width */
 
-    --stroke-width: 0.33em;
-
     svg {
-        transform: rotateZ(90deg);
+        --dash-circle: calc(2 * 3.14 * 0.5em);
+        --dash-length: calc(
+            var(--dash-circle) / 360 * (var(--end-degree) - var(--start-degree))
+        );
+        transform: rotateZ(calc(90deg + var(--start-degree) * 1deg));
+        color: red;
     }
 
     path {
         stroke-width: calc(var(--stroke-width) * 0.5);
-        stroke-location: inside !important;
-        stroke-dasharray: calc(2 * 3.14 * 1em);
-        stroke-dashoffset: 0;
+        stroke-dasharray: calc(2 * 3.14 * 0.5em);
         transform-origin: 50% 50%;
     }
     ._track {
-        stroke: sugar.color(main, --alpha 0.2);
+        stroke: rgba(0, 0, 0, 0.1);
+        stroke-dashoffset: calc((var(--dash-circle) - var(--dash-length)));
     }
     ._gauge {
-        stroke: sugar.color(accent);
-        animation: 2s gauge ease-in-out 0s infinite;
+        stroke: currentColor;
+        stroke-dashoffset: calc(
+            (
+                var(--dash-circle) -
+                    (var(--dash-length) / 100 * var(--value-percent))
+            )
+        );
+    }
+
+    ._value {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        font-size: 0.25em;
+        transform: translate(-50%, -50%);
     }
 }

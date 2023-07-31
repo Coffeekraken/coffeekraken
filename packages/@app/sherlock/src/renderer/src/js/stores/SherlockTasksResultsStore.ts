@@ -26,12 +26,17 @@ class SherlockTasksResultsStore extends __SStore {
 
             this._results[taskResult.task.uid].push({
                 uid: taskResult.uid,
+                spaceUid: this._spaceUid,
                 taskUid: taskResult.task.uid,
                 data: taskResult,
             });
 
             // save task result
-            window.sherlock.taskResult(taskResult, this._spaceUid);
+            window.sherlock.taskResult(this._spaceUid, {
+                uid: taskResult.uid,
+                taskUid: taskResult.task.uid,
+                data: taskResult,
+            });
         });
     }
 

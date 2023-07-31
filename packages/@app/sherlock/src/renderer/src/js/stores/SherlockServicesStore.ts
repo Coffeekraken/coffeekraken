@@ -28,12 +28,18 @@ class SherlockServicesStore extends __SStore {
 
     async _init() {
         // load the services when the clients are updated
-        __sherlockStore.space(this._spaceUid).clients.$set('*', async ({ value }) => {
-            const services = await window.sherlock.getServices(value.uid);
-            for (let [serviceUid, service] of Object.entries(services)) {
-                this._services[`${value.uid}.${service.uid}`] = service;
-            }
-        });
+        __sherlockStore.space(this._spaceUid).clients.$set(
+            '*',
+            async ({ value }) => {
+                const services = await window.sherlock.getServices(this._spaceUid, value.uid);
+                for (let [serviceUid, service] of Object.entries(services)) {
+                    this._services[`${value.uid}.${service.uid}`] = service;
+                }
+            },
+            {
+                debounce: true,
+            },
+        );
     }
 
     getServices(params?: IGetServicesParams): Record<string, ISherlockService> {

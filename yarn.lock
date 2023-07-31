@@ -34,6 +34,7 @@ __metadata:
   resolution: "@app/sherlock@workspace:packages/@app/sherlock"
   dependencies:
     "@coffeekraken/s-dobby": 2.0.0-alpha.27
+    "@coffeekraken/s-gauge-component": 2.0.0-alpha.27
     "@coffeekraken/s-postcss-sugar-plugin": 2.0.0-alpha.27
     "@coffeekraken/s-specs-editor-component": 2.0.0-alpha.27
     "@coffeekraken/s-store": 2.0.0-alpha.27
@@ -2333,7 +2334,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@coffeekraken/s-gauge-component@^2.0.0-alpha.27, @coffeekraken/s-gauge-component@workspace:packages/components/s-gauge-component":
+"@coffeekraken/s-gauge-component@2.0.0-alpha.27, @coffeekraken/s-gauge-component@^2.0.0-alpha.27, @coffeekraken/s-gauge-component@workspace:packages/components/s-gauge-component":
   version: 0.0.0-use.local
   resolution: "@coffeekraken/s-gauge-component@workspace:packages/components/s-gauge-component"
   dependencies:

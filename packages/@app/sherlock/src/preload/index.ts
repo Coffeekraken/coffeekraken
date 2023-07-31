@@ -7,7 +7,8 @@ contextBridge.exposeInMainWorld('sherlock', {
     getSpaces: () => ipcRenderer.invoke('spaces:get'),
     newSpace: (space: any) => ipcRenderer.invoke('spaces:new', space),
     getClients: (spaceUid: string) => ipcRenderer.invoke('clients:get', spaceUid),
-    getServices: (clientUid: string) => ipcRenderer.invoke('services:get', clientUid),
+    getServices: (spaceUid: string, clientUid: string) =>
+        ipcRenderer.invoke('services:get', spaceUid, clientUid),
     newTask: (task: any, poolUid: string) => ipcRenderer.invoke('tasks:new', task, poolUid),
     taskResult: (task: any, poolUid: string) => ipcRenderer.invoke('tasks:result', task, poolUid),
 });

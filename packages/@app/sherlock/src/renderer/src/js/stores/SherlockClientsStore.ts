@@ -18,14 +18,12 @@ class SherlockClientsStore extends __SStore {
     constructor(spaceUid: string) {
         super();
         this._spaceUid = spaceUid;
-        setTimeout(this._init.bind(this));
+        this._init();
     }
 
     async _init() {
-        // __sherlockRouteStore.$set('space', async () => {
         const clients = await window.sherlock.getClients(this._spaceUid);
         Object.assign(this._clients, clients);
-        // });
     }
 
     getClients(params?: IGetClientsParams): Record<string, ISherlockClient> {

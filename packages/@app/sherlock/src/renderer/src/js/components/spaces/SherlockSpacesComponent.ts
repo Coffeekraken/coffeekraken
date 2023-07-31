@@ -1,7 +1,6 @@
 import { LitElement, css, html } from 'lit';
 import { customElement } from 'lit/decorators.js';
 
-import { ISherlockSpace } from '../../../../../shared/SherlockTypes';
 import __sherlockStores from '../../stores/SherlockStores';
 
 @customElement('sherlock-spaces')
@@ -23,14 +22,6 @@ export class SherlockSpacesComponent extends LitElement {
         });
     }
 
-    async selectSpace(space: ISherlockSpace): Promise<void> {
-        const res = await window.sherlock.setSpace(space.toJson());
-
-        __sherlockStores.route.setRoute({
-            space: space.uid,
-        });
-    }
-
     newSpace(): void {
         __sherlockStores.route.setRoute({
             popup: 'newSpace',
@@ -47,7 +38,7 @@ export class SherlockSpacesComponent extends LitElement {
                                 ? 'active'
                                 : ''}"
                             @pointerup=${(e) => {
-                                this.selectSpace(space);
+                                __sherlockStores.spaces.selectSpace(space);
                             }}
                         >
                             <figure class="_figure">

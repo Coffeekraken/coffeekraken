@@ -1,5 +1,6 @@
 import __SClass from '@coffeekraken/s-class';
 import __SEventEmitter from '@coffeekraken/s-event-emitter';
+import { __debounce } from '@coffeekraken/sugar/function';
 import { __isNode, __isPlainObject } from '@coffeekraken/sugar/is';
 import {
     __deepAssign,
@@ -61,6 +62,15 @@ import __SStoreFsAdapter from '../node/adapters/SStoreFsAdapter.js';
  * @since           2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
+
+export interface ISStoreSetSettings {
+    group: boolean;
+    until: Promise<any>;
+}
+export interface ISStoreDeleteSettings {
+    group: boolean;
+    until: Promise<any>;
+}
 
 export interface ISStoreSettings {
     id: string;
@@ -236,21 +246,109 @@ export default class SStore extends __SClass {
         }
     }
 
-    $set(props: string | string[], handler: Function): void {
+    $set(
+        props: string | string[],
+        handler: Function,
+        settings?: ISStoreSetSettings,
+    ): void {
+        const finalSettings: ISStoreSetSettings = {
+            group: false,
+            until: undefined,
+            ...(settings ?? {}),
+        };
+
         if (!Array.isArray(props)) {
             props = [props];
         }
+
+        let finalHandler = handler,
+            items = [],
+            ended = false;
+        if (finalSettings.group) {
+            finalHandler = __debounce(0, (...args) => {
+                if (ended) {
+                    return;
+                }
+                handler(...args);
+                items = [];
+            });
+        }
+
+        const eventHandler = (updateObj, event) => {
+            if (finalSettings.group) {
+                items.push(updateObj);
+                finalHandler(items);
+            } else {
+                setTimeout(() => {
+                    if (ended) {
+                        return;
+                    }
+                    finalHandler(updateObj, event);
+                });
+            }
+        };
+
         props.forEach((prop) => {
-            return this._eventEmitter.on(`set.${prop}`, handler);
+            this._eventEmitter.on(`set.${prop}`, eventHandler);
+            if (finalSettings.until) {
+                finalSettings.until.finally(() => {
+                    ended = true;
+                    this._eventEmitter.off(`set.${prop}`, eventHandler);
+                });
+            }
         });
     }
 
-    $delete(props: string | string[], handler: Function): void {
+    $delete(
+        props: string | string[],
+        handler: Function,
+        settings?: ISStoreDeleteSettings,
+    ): void {
+        const finalSettings: ISStoreDeleteSettings = {
+            group: false,
+            until: undefined,
+            ...(settings ?? {}),
+        };
+
         if (!Array.isArray(props)) {
             props = [props];
         }
+
+        let finalHandler = handler,
+            items = [],
+            ended = false;
+        if (finalSettings.group) {
+            finalHandler = __debounce(0, (...args) => {
+                if (ended) {
+                    return;
+                }
+                handler(...args);
+                items = [];
+            });
+        }
+
+        const eventHandler = (updateObj, event) => {
+            if (finalSettings.group) {
+                items.push(updateObj);
+                finalHandler(items);
+            } else {
+                setTimeout(() => {
+                    if (ended) {
+                        return;
+                    }
+                    finalHandler(updateObj, event);
+                });
+            }
+        };
+
         props.forEach((prop) => {
-            return this._eventEmitter.on(`delete.${prop}`, handler);
+            this._eventEmitter.on(`delete.${prop}`, eventHandler);
+            if (finalSettings.until) {
+                finalSettings.until.finally(() => {
+                    ended = true;
+                    this._eventEmitter.off(`set.${prop}`, eventHandler);
+                });
+            }
         });
     }
 }

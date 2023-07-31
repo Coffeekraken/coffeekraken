@@ -29,7 +29,7 @@ export default class SherlockContentfulAdapter
             accessToken: this.settings.accessToken,
         });
         this._managementClient = __contentfulManagement.createClient({
-            accessToken: this.settings.accessManagementToken,
+            accessToken: this.settings.managementAccessToken,
         });
     }
     _processClientFromEntry(entry: any): ISherlockClient {
@@ -94,7 +94,36 @@ export default class SherlockContentfulAdapter
         });
     }
 
+    _getEnvironment(): Promise<any> {
+        return new Promise((resolve) => {
+            // This API call will request a space with the specified ID
+            this._managementClient.getSpace(this.settings.space).then((space) => {
+                space.getEnvironment('master').then((environment) => {
+                    resolve(environment);
+                });
+            });
+        });
+    }
+
     taskResult(taskResult: ISherlockTaskResult): Promise<ISherlockTaskResult> {
-        return new Promise(async (resolve) => {});
+        return new Promise(async (resolve) => {
+            const environment = await this._getEnvironment();
+            await environment.createEntryWithId('taskResult', taskResult.uid, {
+                fields: {
+                    uid: {
+                        'en-US': taskResult.uid,
+                    },
+                    taskUid: {
+                        'en-US': taskResult.taskUid,
+                    },
+                    data: {
+                        'en-US': taskResult.data,
+                    },
+                },
+            });
+            const entry = await environment.getEntry(taskResult.uid);
+            await entry.publish();
+            resolve(taskResult);
+        });
     }
 }

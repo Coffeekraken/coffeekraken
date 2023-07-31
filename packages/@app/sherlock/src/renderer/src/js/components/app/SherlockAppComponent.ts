@@ -34,6 +34,8 @@ export class SherlockAppComponent extends LitElement {
     }
 
     render() {
+        console.log('route', __sherlockStores.route.service);
+
         return html`
             <div class="_bkg"></div>
             <div class="sh-app">

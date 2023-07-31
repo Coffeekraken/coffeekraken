@@ -1,12 +1,17 @@
 import { __deepMerge } from '@coffeekraken/sugar/object';
 
-import type { ISherlockClient, ISherlockService } from '../../shared/SherlockTypes.js';
+import type {
+    ISherlockClient,
+    ISherlockService,
+    ISherlockTaskResult,
+} from '../../shared/SherlockTypes.js';
 
 export interface ISherlockAdapterSettings {}
 
 export interface ISherlockAdapter {
-    getClients(spaceUid: string): Promise<Record<string, ISherlockClient>>;
+    getClients(): Promise<Record<string, ISherlockClient>>;
     getServices(clientUid: string): Promise<Record<string, ISherlockService>>;
+    taskResult(taskResult: ISherlockTaskResult): Promise<ISherlockTaskResult>;
 }
 
 export default class SherlockAdapter {

@@ -26,19 +26,44 @@ export class SherlockServiceComponent extends LitElement {
     @property({ type: String })
     service: string = null;
 
+    // end life promise
+    _lifeEndResolve;
+    _lifeEndPromise = new Promise((resolve) => {
+        this._lifeEndResolve = resolve;
+    });
+    disconnectedCallback() {
+        super.disconnectedCallback();
+        this._lifeEndResolve();
+    }
+
     constructor() {
         super();
 
         // reactive
-        __sherlockStores.current().tasks.$set('*', () => {
-            this.requestUpdate();
+        [
+            __sherlockStores.current().tasks,
+            __sherlockStores.current().tasksStates,
+            __sherlockStores.current().tasksResults,
+        ].forEach((store) => {
+            store.$set(
+                '*',
+                () => {
+                    this.requestUpdate();
+                },
+                {
+                    until: this._lifeEndPromise,
+                },
+            );
         });
-        __sherlockStores.current().tasksStates.$set('*', () => {
-            this.requestUpdate();
-        });
-        __sherlockStores.route.$set('service', () => {
-            this.requestUpdate();
-        });
+        __sherlockStores.route.$set(
+            'service',
+            () => {
+                this.requestUpdate();
+            },
+            {
+                until: this._lifeEndPromise,
+            },
+        );
     }
 
     startTask(task: ISDobbyTaskMetas) {

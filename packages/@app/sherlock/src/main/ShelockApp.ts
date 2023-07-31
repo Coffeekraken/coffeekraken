@@ -1,4 +1,4 @@
-import { ISherlockSpace, ISherlockTask, ISherlockTaskResult } from '../shared/SherlockTypes.js';
+import { ISherlockSpace, ISherlockTask } from '../shared/SherlockTypes.js';
 import __SherlockContentfulAdapter from './adapters/contentful/SherlockContentfulAdapter.js';
 import type { ISherlockAdapter } from './adapters/SherlockAdapter.js';
 
@@ -10,7 +10,7 @@ import { userdir as __userdir } from 'userdir';
 import __fs from 'fs';
 
 export default class SherlockApp {
-    adapter: ISherlockAdapter;
+    adapters: Record<string, ISherlockAdapter> = {};
 
     _dobby: __SDobby;
 
@@ -47,19 +47,24 @@ export default class SherlockApp {
 
     setSpace(space: ISherlockSpace): Promise<ISherlockSpace> {
         return new Promise((resolve) => {
+            // check if adapter already exists
+            if (this.adapters[space.uid]) {
+                return resolve(space);
+            }
+
             switch (space.adapter.type) {
                 case 'contentful':
-                    this.adapter = new __SherlockContentfulAdapter({
+                    this.adapters[space.uid] = new __SherlockContentfulAdapter({
                         space: space.adapter.settings.space,
                         accessToken: space.adapter.settings.accessToken,
-                        accessManagementToken: space.adapter.settings.accessManagementToken,
+                        managementAccessToken: space.adapter.settings.managementAccessToken,
                     });
-                    resolve(space);
                     break;
                 case 'fs':
                 default:
                     break;
             }
+            resolve(space);
         });
     }
 
@@ -95,9 +100,5 @@ export default class SherlockApp {
             // add the task in the correct pool
             this._dobby[poolUid].addTask(task);
         });
-    }
-
-    taskResult(taskResult: ISherlockTaskResult, spaceUid: string): Promise<ISherlockTaskResult> {
-        return new Promise((resolve) => {});
     }
 }

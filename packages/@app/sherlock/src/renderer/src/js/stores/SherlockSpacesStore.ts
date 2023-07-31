@@ -23,10 +23,17 @@ class SherlockSpacesStore extends __SStore {
         const spaces = await window.sherlock.getSpaces();
         Object.assign(this._spaces, spaces);
 
-        for (let [spaceUid, space] of Object.entries(this._spaces)) {
-            console.log('spa', space);
-            __sherlockStores.newSpace(space);
-        }
+        // for (let [spaceUid, space] of Object.entries(this._spaces)) {
+        //     __sherlockStores.newSpace(space);
+        // }
+    }
+
+    async selectSpace(space: ISherlockSpace): Promise<void> {
+        const res = await window.sherlock.setSpace(space.toJson());
+        __sherlockStores.initSpace(space);
+        __sherlockStores.route.setRoute({
+            space: space.uid,
+        });
     }
 
     getSpaces(): Record<string, ISherlockSpace> {

@@ -18,24 +18,38 @@ export class SherlockSidebarComponent extends LitElement {
         super();
 
         // reactivity
-        __sherlockStores.route.$set('*', () => {
+        __sherlockStores.route.$set('space', () => {
+            __sherlockStores.current().clients.$set(
+                '*',
+                () => {
+                    this.requestUpdate();
+                },
+                {
+                    group: true,
+                },
+            );
             this.requestUpdate();
         });
 
-        __sherlockStores.spaces.$set('*', () => {
-            this.requestUpdate();
-        });
+        __sherlockStores.spaces.$set(
+            '*',
+            () => {
+                this.requestUpdate();
+            },
+            {
+                group: true,
+            },
+        );
 
-        // __sherlockStores.current().clients.$set('*', () => {
-        //     this.requestUpdate();
-        // });
-        // __sherlockStores.current().services.$set('*', () => {
-        //     this.requestUpdate();
-        // });
-
-        __sherlockStores.app.$set('space', () => {
-            this.requestUpdate();
-        });
+        // __sherlockStores.current().services.$set(
+        //     '*',
+        //     () => {
+        //         this.requestUpdate();
+        //     },
+        //     {
+        //         debounce: true,
+        //     },
+        // );
     }
 
     _toggleClient(client: ISherlockClient): void {

@@ -40,7 +40,15 @@ export default {
         if (this._spaces[space.uid]) {
             return;
         }
-        console.log('NEW', space);
+        let needSelect = false;
+        if (!Object.keys(this._spaces).length) {
+            needSelect = true;
+        }
+        // if (needSelect) {
+        //     this.spaces.selectSpace(space);
+        // }
+    },
+    initSpace(space: ISherlockSpace): void | ISherlockSpace {
         this._spaces[space.uid] = {
             tasks: new __SherlockTasksStore(space.uid),
             tasksStates: new __SherlockTasksStateStore(space.uid),

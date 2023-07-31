@@ -102,7 +102,6 @@ class SherlockTasksStore extends __SStore {
     }
 
     resumeTask(task: ISDobbyTaskMetas): ISDobbyTaskMetas {
-        console.log('resume');
         dobbyClient.exec({
             type: 'task.resume',
             taskUid: task.uid,

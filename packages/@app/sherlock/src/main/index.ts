@@ -71,16 +71,16 @@ app.whenReady().then(() => {
         return sherlockApp.newSpace(space);
     });
     ipcMain.handle('clients:get', (e, spaceUid: string) => {
-        return sherlockApp.adapter.getClients(spaceUid);
+        return sherlockApp.adapters[spaceUid].getClients();
     });
-    ipcMain.handle('services:get', (e, clientUid: string) => {
-        return sherlockApp.adapter.getServices(clientUid);
+    ipcMain.handle('services:get', (e, spaceUid: string, clientUid: string) => {
+        return sherlockApp.adapters[spaceUid].getServices(clientUid);
     });
     ipcMain.handle('tasks:new', (e, task: ISherlockTask, poolUid: string) => {
         return sherlockApp.newTask(task, poolUid);
     });
-    ipcMain.handle('tasks:result', (e, taskResult: ISherlockTaskResult, spaceUid: string) => {
-        return sherlockApp.taskResult(taskResult, spaceUid);
+    ipcMain.handle('tasks:result', (e, spaceUid: string, taskResult: ISherlockTaskResult) => {
+        return sherlockApp.adapters[spaceUid].taskResult(taskResult);
     });
 
     // Set app user model id for windows

@@ -24,7 +24,7 @@ export interface ISherlockSpaceFsAdapterSettings {
 export interface ISherlockContentfulAdapterSettings {
     space: string;
     accessToken: string;
-    accessManagementToken: string;
+    managementAccessToken: string;
 }
 
 export interface ISherlockClient {

@@ -59,6 +59,8 @@
         @sugar.scrollbar;
     }
     ._result {
+        position: relative;
+
         &:nth-child(even) ._result-header {
             background: sugar.color(main, --lighten 20% --alpha 0.02);
         }
@@ -71,7 +73,7 @@
             left: sugar.margin(30);
             width: 2px;
             height: 100%;
-            background: sugar.color(main, border);
+            background: sugar.color(main, --alpha 0.1);
         }
     }
 

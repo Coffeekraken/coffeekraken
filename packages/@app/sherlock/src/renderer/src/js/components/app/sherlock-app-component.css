@@ -29,6 +29,15 @@ sherlock-app {
     ._body {
         display: flex;
         flex-grow: 1;
+        height: calc(100vh - 110px);
+    }
+    ._content {
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+        flex-shrink: 0;
+        overflow-y: auto;
+        @sugar.scrollbar;
     }
 }
 

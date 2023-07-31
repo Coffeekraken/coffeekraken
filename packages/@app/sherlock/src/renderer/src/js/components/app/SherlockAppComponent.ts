@@ -44,13 +44,15 @@ export class SherlockAppComponent extends LitElement {
                 <div class="_body">
                     <sherlock-sidebar></sherlock-sidebar>
 
-                    ${__sherlockStores.route.service
-                        ? html`
-                              <sherlock-service
-                                  .service=${__sherlockStores.route.service}
-                              ></sherlock-service>
-                          `
-                        : ``}
+                    <div class="_content">
+                        ${__sherlockStores.route.service
+                            ? html`
+                                  <sherlock-service
+                                      .service=${__sherlockStores.route.service}
+                                  ></sherlock-service>
+                              `
+                            : ``}
+                    </div>
 
                     <div class="_popup ${__sherlockStores.route.popup ? 'active' : ''}">
                         ${__sherlockStores.route.popup === 'newSpace'

@@ -3,14 +3,17 @@ import { contextBridge, ipcRenderer } from 'electron';
 
 // Expose some API
 contextBridge.exposeInMainWorld('sherlock', {
-    setSpace: (space: any) => ipcRenderer.invoke('spaces:set', space),
+    // setSpace: (space: any) => ipcRenderer.invoke('spaces:set', space),
     getSpaces: () => ipcRenderer.invoke('spaces:get'),
     newSpace: (space: any) => ipcRenderer.invoke('spaces:new', space),
     getClients: (spaceUid: string) => ipcRenderer.invoke('clients:get', spaceUid),
     getServices: (spaceUid: string, clientUid: string) =>
         ipcRenderer.invoke('services:get', spaceUid, clientUid),
     newTask: (task: any, poolUid: string) => ipcRenderer.invoke('tasks:new', task, poolUid),
-    taskResult: (task: any, poolUid: string) => ipcRenderer.invoke('tasks:result', task, poolUid),
+    setTaskResult: (spaceUid: string, taskResult: any) =>
+        ipcRenderer.invoke('tasks:results:set', spaceUid, taskResult),
+    getTaskResults: (spaceUid: string, taskUid: string) =>
+        ipcRenderer.invoke('tasks:results:get', spaceUid, taskUid),
 });
 
 // Custom APIs for renderer

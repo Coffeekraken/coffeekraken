@@ -13,10 +13,12 @@ import type { ISherlockService } from '../../../../../shared/SherlockTypes.js';
 
 import __sherlockStores from '../../stores/SherlockStores';
 
+import __SherlockLighthouseResultComponent from '../results/lighthouse/SherlockLighthouseResultComponent.js';
 import __SherlockResponseTimeResultComponent from '../results/responseTime/SherlockResponseTimeResultComponent.js';
 
 const resultComponentsByTaskType = {
     responseTime: __SherlockResponseTimeResultComponent,
+    lighthouse: __SherlockLighthouseResultComponent,
 };
 
 @customElement('sherlock-service')
@@ -52,6 +54,7 @@ export class SherlockServiceComponent extends LitElement {
                 },
                 {
                     until: this._lifeEndPromise,
+                    group: true,
                 },
             );
         });
@@ -62,6 +65,7 @@ export class SherlockServiceComponent extends LitElement {
             },
             {
                 until: this._lifeEndPromise,
+                group: true,
             },
         );
     }
@@ -138,7 +142,7 @@ export class SherlockServiceComponent extends LitElement {
                                 .current()
                                 .tasksResults.getTaskResults(taskUid);
 
-                            const lastTaskResult = taskResults.at(-1);
+                            const lastTaskResult = taskResults[Object.keys(taskResults).at(-1)];
 
                             let cron,
                                 cronNext,
@@ -184,11 +188,16 @@ export class SherlockServiceComponent extends LitElement {
                                                                         class="fa-solid fa-triangle-exclamation s-color:accent"
                                                                     ></i>
                                                                 `
-                                                              : html`
+                                                              : lastTaskResult?.data.status ===
+                                                                'error'
+                                                              ? html`
                                                                     <i
                                                                         class="fa-solid fa-xmark s-color:error"
                                                                     ></i>
-                                                                `}
+                                                                `
+                                                              : html`<i
+                                                                    class="s-loader:spinner s-tc:accent"
+                                                                ></i>`}
                                                       `}
 
                                                 <h1 class="s-typo:h4">${task.name}</h1>
@@ -198,41 +207,57 @@ export class SherlockServiceComponent extends LitElement {
                                                 <span class="s-font:code">${nextStr}</span>
                                                 <div class="s-tooltip">Next execution time</div>
                                             </div>
-                                            <button
-                                                class="s-btn:text s-tooltip-container"
-                                                confirm="Really?"
-                                                @pointerup=${(e) => {
-                                                    if (e.target.needConfirmation) {
-                                                        return;
-                                                    }
+                                            ${task.status !== 'running'
+                                                ? html`
+                                                      <button
+                                                          class="s-btn:text s-tooltip-container"
+                                                          confirm="Really?"
+                                                          @pointerup=${(e) => {
+                                                              if (e.target.needConfirmation) {
+                                                                  return;
+                                                              }
 
-                                                    if (!task.schedule) {
-                                                        this.startTask(task);
-                                                        return;
-                                                    }
+                                                              if (!task.schedule) {
+                                                                  this.startTask(task);
+                                                                  return;
+                                                              }
 
-                                                    if (task.state === 'paused') {
-                                                        this.resumeTask(task);
-                                                    } else {
-                                                        this.pauseTask(task);
-                                                    }
-                                                }}
-                                            >
-                                                ${task.state === 'paused' || !task.schedule
-                                                    ? html` <i class="fa-solid fa-play"></i> `
-                                                    : html` <i class="fa-solid fa-pause"></i> `}
-                                                <div class="s-tooltip">
-                                                    ${task.state === 'paused' ? 'Resume' : 'Pause'}
-                                                    this task
-                                                </div>
-                                            </button>
-                                            <button
-                                                class="s-btn:text s-tooltip-container"
-                                                confirm="Really?"
-                                            >
-                                                <i class="fa-regular fa-trash-can"></i>
-                                                <div class="s-tooltip">Delete this tasks</div>
-                                            </button>
+                                                              if (task.state === 'paused') {
+                                                                  this.resumeTask(task);
+                                                              } else {
+                                                                  this.pauseTask(task);
+                                                              }
+                                                          }}
+                                                      >
+                                                          ${task.state === 'paused' ||
+                                                          !task.schedule
+                                                              ? html`
+                                                                    <i class="fa-solid fa-play"></i>
+                                                                `
+                                                              : html`
+                                                                    <i
+                                                                        class="fa-solid fa-pause"
+                                                                    ></i>
+                                                                `}
+                                                          <div class="s-tooltip">
+                                                              ${task.state === 'paused'
+                                                                  ? 'Resume'
+                                                                  : 'Pause'}
+                                                              this task
+                                                          </div>
+                                                      </button>
+                                                      <button
+                                                          class="s-btn:text s-tooltip-container"
+                                                          confirm="Really?"
+                                                      >
+                                                          <i class="fa-regular fa-trash-can"></i>
+                                                          <div class="s-tooltip">
+                                                              Delete this tasks
+                                                          </div>
+                                                      </button>
+                                                  `
+                                                : ''}
+
                                             <button
                                                 class="s-btn:text _expand"
                                                 @pointerup=${(e) => {
@@ -246,8 +271,8 @@ export class SherlockServiceComponent extends LitElement {
                                     <main class="_details">
                                         <div class="_inner">
                                             <div class="_results">
-                                                ${taskResults.reverse().map(
-                                                    (taskResult) => html`
+                                                ${Object.entries(taskResults).map(
+                                                    ([taskResultUid, taskResult]) => html`
                                                         <article class="_result">
                                                             <header class="_result-header">
                                                                 <div
@@ -280,14 +305,15 @@ export class SherlockServiceComponent extends LitElement {
                                                                 </div>
                                                                 <div class="s-flex-item:grow"></div>
                                                                 <div class="_duration">
-                                                                    <span class="s-font:code"
+                                                                    <span
                                                                         >${__timeAgo(
                                                                             taskResult.data.time /
                                                                                 1000,
                                                                         )}</span
                                                                     >
                                                                     in
-                                                                    <span class="s-font:code"
+                                                                    <span
+                                                                        class="s-font:code s-tc:complementary"
                                                                         >${taskResult.data.duration
                                                                             .formatedDuration}</span
                                                                     >

@@ -41,32 +41,34 @@ export default class SherlockApp {
                 spaces = JSON.parse(__fs.readFileSync(this._spacesConfigPath).toString());
             }
 
+            for (let [spaceUid, space] of Object.entries(spaces)) {
+                switch (space.adapter.type) {
+                    case 'contentful':
+                        this.adapters[space.uid] = new __SherlockContentfulAdapter({
+                            space: space.adapter.settings.space,
+                            accessToken: space.adapter.settings.accessToken,
+                            managementAccessToken: space.adapter.settings.managementAccessToken,
+                        });
+                        break;
+                    case 'fs':
+                    default:
+                        break;
+                }
+            }
+
             resolve(spaces);
         });
     }
 
-    setSpace(space: ISherlockSpace): Promise<ISherlockSpace> {
-        return new Promise((resolve) => {
-            // check if adapter already exists
-            if (this.adapters[space.uid]) {
-                return resolve(space);
-            }
-
-            switch (space.adapter.type) {
-                case 'contentful':
-                    this.adapters[space.uid] = new __SherlockContentfulAdapter({
-                        space: space.adapter.settings.space,
-                        accessToken: space.adapter.settings.accessToken,
-                        managementAccessToken: space.adapter.settings.managementAccessToken,
-                    });
-                    break;
-                case 'fs':
-                default:
-                    break;
-            }
-            resolve(space);
-        });
-    }
+    // setSpace(space: ISherlockSpace): Promise<ISherlockSpace> {
+    //     return new Promise((resolve) => {
+    //         // check if adapter already exists
+    //         if (this.adapters[space.uid]) {
+    //             return resolve(space);
+    //         }
+    //         resolve(space);
+    //     });
+    // }
 
     newSpace(space: ISherlockSpace): Promise<Record<string, ISherlockSpace>> {
         return new Promise((resolve, reject) => {

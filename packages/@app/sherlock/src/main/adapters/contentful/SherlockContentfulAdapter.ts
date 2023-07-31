@@ -105,7 +105,32 @@ export default class SherlockContentfulAdapter
         });
     }
 
-    taskResult(taskResult: ISherlockTaskResult): Promise<ISherlockTaskResult> {
+    _processTaskResultFromEntry(entry: any): ISherlockTaskResult {
+        return {
+            uid: entry.fields.uid,
+            taskUid: entry.fields.taskUid,
+            data: entry.fields.data,
+        };
+    }
+    getTaskResults(taskUid: string): Promise<Record<string, ISherlockTaskResult>> {
+        return new Promise(async (resolve) => {
+            const entries = await this._client.getEntries({
+                limit: 25,
+                // order: 'sys.createdAt',
+                content_type: 'taskResult',
+                'fields.taskUid': taskUid,
+            });
+
+            const results = {};
+            entries.items.forEach((entry) => {
+                results[entry.fields.uid] = this._processTaskResultFromEntry(entry);
+            });
+
+            resolve(results);
+        });
+    }
+
+    setTaskResult(taskResult: ISherlockTaskResult): Promise<ISherlockTaskResult> {
         return new Promise(async (resolve) => {
             const environment = await this._getEnvironment();
             await environment.createEntryWithId('taskResult', taskResult.uid, {

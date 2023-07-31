@@ -9,6 +9,8 @@ sherlock-sidebar {
     backdrop-filter: blur(10px);
     user-select: none;
 
+    border-right: 1px solid sugar.color(main, --alpha 0.2);
+
     ._clients {
         width: 100%;
         padding: sugar.padding(30);

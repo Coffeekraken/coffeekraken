@@ -40,13 +40,6 @@ export default {
         if (this._spaces[space.uid]) {
             return;
         }
-        let needSelect = false;
-        if (!Object.keys(this._spaces).length) {
-            needSelect = true;
-        }
-        // if (needSelect) {
-        //     this.spaces.selectSpace(space);
-        // }
     },
     initSpace(space: ISherlockSpace): void | ISherlockSpace {
         this._spaces[space.uid] = {

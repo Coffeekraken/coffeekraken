@@ -61,9 +61,9 @@ app.whenReady().then(() => {
     // exposes API
     // ipcMain.handle('spaces:get', sherlockApp.adapter.getSpaces.bind(sherlockApp.adapter))
 
-    ipcMain.handle('spaces:set', (e, space: ISherlockSpace) => {
-        return sherlockApp.setSpace(space);
-    });
+    // ipcMain.handle('spaces:set', (e, space: ISherlockSpace) => {
+    //     return sherlockApp.setSpace(space);
+    // });
     ipcMain.handle('spaces:get', (e) => {
         return sherlockApp.getSpaces();
     });
@@ -79,8 +79,11 @@ app.whenReady().then(() => {
     ipcMain.handle('tasks:new', (e, task: ISherlockTask, poolUid: string) => {
         return sherlockApp.newTask(task, poolUid);
     });
-    ipcMain.handle('tasks:result', (e, spaceUid: string, taskResult: ISherlockTaskResult) => {
-        return sherlockApp.adapters[spaceUid].taskResult(taskResult);
+    ipcMain.handle('tasks:results:get', (e, spaceUid: string, taskUid: string) => {
+        return sherlockApp.adapters[spaceUid].getTaskResults(taskUid);
+    });
+    ipcMain.handle('tasks:results:set', (e, spaceUid: string, taskResult: ISherlockTaskResult) => {
+        return sherlockApp.adapters[spaceUid].setTaskResult(taskResult);
     });
 
     // Set app user model id for windows

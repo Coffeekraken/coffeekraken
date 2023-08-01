@@ -8,8 +8,11 @@ import { __homeDir } from '@coffeekraken/sugar/path';
 import __fs from 'fs';
 import __path from 'path';
 
+import { SDobbyLighthouseTaskSpec } from '../../shared/specs';
+
 import type {
     ISDobbyLighthouseTaskResult,
+    ISDobbyLighthouseTaskSettings,
     ISDobbyTask,
     ISDobbyTaskMetas,
 } from '../../shared/types.js';
@@ -39,18 +42,13 @@ import * as __childProcess from 'child_process';
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 
-export const SDobbyLighthouseTaskSettingsSpecs = {
-    type: 'Object',
-    title: 'Lighthouse settings',
-    description: 'Specify some settings for your lighthouse task',
-    props: {},
-};
-
 export default class SDobbyLighthouseTask
     extends __SDobbyTask
     implements ISDobbyTask
 {
-    static settingsSpecs = SDobbyLighthouseTaskSettingsSpecs;
+    static settingsSpecs = SDobbyLighthouseTaskSpec;
+
+    settings: ISDobbyLighthouseTaskSettings;
 
     /**
      * @name        constructor
@@ -67,12 +65,12 @@ export default class SDobbyLighthouseTask
     }
 
     run(): Promise<ISDobbyLighthouseTaskResult> {
-        super.start();
-
         return new Promise(async (resolve) => {
+            await super.start();
+
             const finalSettings = __SSpecs.apply(
                 this.metas.settings ?? {},
-                SDobbyLighthouseTaskSettingsSpecs,
+                SDobbyLighthouseTaskSpec,
             );
 
             const logs: string[] = [];
@@ -171,8 +169,8 @@ export default class SDobbyLighthouseTask
                 );
 
                 resolve({
-                    ...result,
                     ...super.end(),
+                    ...result,
                     status,
                     logs,
                 });

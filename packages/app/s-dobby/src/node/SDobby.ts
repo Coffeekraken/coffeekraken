@@ -163,6 +163,7 @@ export default class SDobby extends __SClass {
         switch (action.type) {
             case 'task.start':
                 this.pools[action.poolUid].executeTask(action.taskUid);
+
                 break;
             case 'task.pause':
             case 'task.resume':

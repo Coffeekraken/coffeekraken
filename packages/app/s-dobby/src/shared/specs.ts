@@ -42,7 +42,6 @@ export const SDobbyTaskSpec = {
             title: 'Schedule',
             description:
                 'Schedule the task execution using the `unix-cron` format',
-            required: true,
         },
     },
 };
@@ -58,14 +57,13 @@ export const SDobbyResponseTimeTaskSpec = {
             description: 'Url to ping',
             required: true,
         },
+        timeout: {
+            type: 'Number',
+            title: 'Timeout',
+            description: 'Timeout',
+            default: 5000,
+        },
     },
-};
-
-export const SDobbyPoolStartParamsSpecs = {
-    type: 'Object',
-    title: 'Pool start params',
-    description: 'Pool start parameters',
-    props: {},
 };
 
 export const SDobbyLighthouseTaskSpec = {
@@ -80,6 +78,13 @@ export const SDobbyLighthouseTaskSpec = {
             required: true,
         },
     },
+};
+
+export const SDobbyPoolStartParamsSpecs = {
+    type: 'Object',
+    title: 'Pool start params',
+    description: 'Pool start parameters',
+    props: {},
 };
 
 export const SDobbyGunJsAdapterSettingsSpecs = {

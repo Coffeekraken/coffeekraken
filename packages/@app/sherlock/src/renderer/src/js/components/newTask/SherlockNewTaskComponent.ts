@@ -11,7 +11,7 @@ import __unwrapSpecsValues from '../../utils/unwrapSpecsValues';
 import type {} from '../../../../../shared/SherlockTypes';
 
 @customElement('sherlock-new-task')
-export class SherlockNewSpaceComponent extends LitElement {
+export class SherlockTaskSpaceComponent extends LitElement {
     static styles = css``;
 
     @state()

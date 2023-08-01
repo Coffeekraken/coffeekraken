@@ -6,9 +6,11 @@ export interface ISDobbySettings {
     uid?: string;
     pool: ISDobbyPool;
 }
+export interface ISDobbyTaskStatic {
+    settingsSpecs: any;
+}
 
 export interface ISDobbyTask {
-    settingsSpecs: any;
     metas: ISDobbyTaskMetas;
     run(): Promise<ISDobbyTaskResult>;
 }
@@ -50,7 +52,7 @@ export interface ISDobbyPoolMetas {
     uid: string;
     type: 'fs' | 'p2p';
     name: string;
-    settings: ISDobbyLocalPoolSettings | ISDobbyP2pPoolSettings;
+    settings: ISDobbyFsPoolSettings | ISDobbyP2pPoolSettings;
 }
 
 export interface ISDobbyPoolSettings {
@@ -85,6 +87,19 @@ export interface ISDobbyTaskResult {
     duration: ISDurationObject;
     time: number;
     status: 'success' | 'warning' | 'error';
+    geo: {
+        country: {
+            iso: string;
+            name: string;
+        };
+        city: {
+            postal: string;
+            name: string;
+        };
+        timezone: string;
+        lat: number;
+        lng: number;
+    };
     logs?: string[];
     task: ISDobbyTaskMetas;
     pool: ISDobbyPoolMetas;
@@ -127,6 +142,7 @@ export interface ISDobbyLighthouseTaskResult extends ISDobbyTaskResult {
 }
 
 export interface ISDobbyResponseTimeTaskSettings {
+    url: string;
     timeout: number;
 }
 export interface ISDobbyResponseTimeTaskResult extends ISDobbyTaskResult {

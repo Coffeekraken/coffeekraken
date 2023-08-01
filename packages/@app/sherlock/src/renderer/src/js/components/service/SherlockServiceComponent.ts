@@ -275,54 +275,66 @@ export class SherlockServiceComponent extends LitElement {
                                                     ([taskResultUid, taskResult]) => html`
                                                         <article class="_result">
                                                             <header class="_result-header">
-                                                                <div
-                                                                    class="s-flex:align-center s-gap:20"
-                                                                >
-                                                                    ${taskResult.data.status ===
-                                                                    'success'
-                                                                        ? html`
+                                                                ${taskState.details
+                                                                    ? html`
+                                                                          <div
+                                                                              class="s-flex:align-center s-flex-item:grow s-gap:20"
+                                                                          >
+                                                                              ${taskResult.data
+                                                                                  .status ===
+                                                                              'success'
+                                                                                  ? html`
+                                                                                        <i
+                                                                                            class="fa-solid fa-check s-color:success"
+                                                                                        ></i>
+                                                                                    `
+                                                                                  : taskResult.data
+                                                                                        .status ===
+                                                                                    'warning'
+                                                                                  ? html`
+                                                                                        <i
+                                                                                            class="fa-solid fa-triangle-exclamation s-color:accent"
+                                                                                        ></i>
+                                                                                    `
+                                                                                  : html`
+                                                                                        <i
+                                                                                            class="fa-solid fa-xmark s-color:error"
+                                                                                        ></i>
+                                                                                    `}
+                                                                              <div
+                                                                                  class="_result-widget"
+                                                                              >
+                                                                                  ${this.renderResultWidget(
+                                                                                      taskResult,
+                                                                                  )}
+                                                                              </div>
+                                                                          </div>
+                                                                          <div class="_duration">
+                                                                              <span
+                                                                                  >${__timeAgo(
+                                                                                      taskResult
+                                                                                          .data
+                                                                                          .time /
+                                                                                          1000,
+                                                                                  )}</span
+                                                                              >
+                                                                              in
+                                                                              <span
+                                                                                  class="s-font:code s-tc:complementary"
+                                                                                  >${taskResult.data
+                                                                                      .duration
+                                                                                      .formatedDuration}</span
+                                                                              >
+                                                                          </div>
+                                                                          <button
+                                                                              class="s-btn:text"
+                                                                          >
                                                                               <i
-                                                                                  class="fa-solid fa-check s-color:success"
+                                                                                  class="fa-regular fa-eye s-color:accent"
                                                                               ></i>
-                                                                          `
-                                                                        : taskResult.data.status ===
-                                                                          'warning'
-                                                                        ? html`
-                                                                              <i
-                                                                                  class="fa-solid fa-triangle-exclamation s-color:accent"
-                                                                              ></i>
-                                                                          `
-                                                                        : html`
-                                                                              <i
-                                                                                  class="fa-solid fa-xmark s-color:error"
-                                                                              ></i>
-                                                                          `}
-                                                                    <div class="_result-widget">
-                                                                        ${this.renderResultWidget(
-                                                                            taskResult,
-                                                                        )}
-                                                                    </div>
-                                                                </div>
-                                                                <div class="s-flex-item:grow"></div>
-                                                                <div class="_duration">
-                                                                    <span
-                                                                        >${__timeAgo(
-                                                                            taskResult.data.time /
-                                                                                1000,
-                                                                        )}</span
-                                                                    >
-                                                                    in
-                                                                    <span
-                                                                        class="s-font:code s-tc:complementary"
-                                                                        >${taskResult.data.duration
-                                                                            .formatedDuration}</span
-                                                                    >
-                                                                </div>
-                                                                <button class="s-btn:text">
-                                                                    <i
-                                                                        class="fa-regular fa-eye s-color:accent"
-                                                                    ></i>
-                                                                </button>
+                                                                          </button>
+                                                                      `
+                                                                    : ''}
                                                             </header>
                                                         </article>
                                                     `,

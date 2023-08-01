@@ -34,6 +34,20 @@ sherlock-service {
 
     ._result-widget {
         margin-inline-end: sugar.margin(30);
+        flex-grow: 1;
+
+        ._label {
+            opacity: 0.9;
+        }
+
+        ._separator {
+            padding-inline: sugar.padding(20);
+            opacity: 0.3;
+
+            &:before {
+                content: '-';
+            }
+        }
     }
 
     ._tools {

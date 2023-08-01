@@ -20,11 +20,6 @@ sherlock-lighthouse-result {
         align-items: center;
     }
 
-    ._separator {
-        padding-inline: sugar.padding(20);
-        opacity: 0.3;
-    }
-
     ._categories {
         display: flex;
         gap: sugar.margin(30);

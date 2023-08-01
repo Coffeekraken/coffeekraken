@@ -2,6 +2,66 @@ sherlock-response-time-result {
 }
 
 .sh-response-time-result-list-widget {
+    display: flex;
+    gap: sugar.margin(20);
+    align-items: center;
+
+    ._values {
+        ._value {
+            &.low {
+                color: sugar.color(success, text);
+            }
+            &.medium {
+                color: sugar.color(accent, text);
+            }
+            &.high {
+                color: sugar.color(error, text);
+            }
+            &.error {
+                color: sugar.color(error, text);
+            }
+        }
+    }
+
+    ._charts {
+        display: flex;
+        flex-direction: column;
+        gap: sugar.margin(10);
+        width: clamp(100px, 100%, 500px);
+    }
+
+    ._ping,
+    ._ttfb {
+        background: sugar.color(main, --alpha 0.2);
+        width: 100%;
+        height: 4px;
+        border-radius: 2px;
+        overflow: hidden;
+
+        > div {
+            height: 100%;
+        }
+
+        &.low > div {
+            background: sugar.color(success);
+        }
+        &.medium > div {
+            background: sugar.color(accent);
+        }
+        &.high > div {
+            background: sugar.color(error);
+        }
+        &.error > div {
+            background: sugar.color(error);
+            width: 100% !important;
+        }
+    }
+    ._ping > div {
+        width: calc(100% / 250 * var(--ping, 0));
+    }
+    ._ttfb > div {
+        width: calc(100% / 250 * var(--ttfb, 0));
+    }
 }
 .sh-response-time-result {
 }

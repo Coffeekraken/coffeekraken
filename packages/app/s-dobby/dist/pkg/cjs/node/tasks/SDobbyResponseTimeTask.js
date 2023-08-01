@@ -12,11 +12,12 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.SDobbyResponseTimeTaskSettingsSpecs = void 0;
 const object_1 = require("@coffeekraken/sugar/object");
 const SDobbyTask_1 = __importDefault(require("../SDobbyTask"));
+const network_1 = require("@coffeekraken/sugar/network");
 const s_specs_1 = __importDefault(require("@coffeekraken/s-specs"));
 const ping_1 = __importDefault(require("ping"));
+const specs_1 = require("../../shared/specs");
 /**
  * @name                SDobbyResponseTimeTask
  * @namespace           node
@@ -38,19 +39,6 @@ const ping_1 = __importDefault(require("ping"));
  * @since           2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-exports.SDobbyResponseTimeTaskSettingsSpecs = {
-    type: 'Object',
-    title: 'Response time settings',
-    description: 'Specify some settings for your responseTime task',
-    props: {
-        timeout: {
-            type: 'Number',
-            title: 'Timeout (ms)',
-            description: 'Specify a timeout in ms before considering the target as offline',
-            default: 10000,
-        },
-    },
-};
 class SDobbyTask extends SDobbyTask_1.default {
     /**
      * @name        constructor
@@ -70,26 +58,34 @@ class SDobbyTask extends SDobbyTask_1.default {
             start: { get: () => super.start },
             end: { get: () => super.end }
         });
-        var _a;
-        return __awaiter(this, void 0, void 0, function* () {
-            _super.start.call(this);
-            const finalSettings = s_specs_1.default.apply((_a = this.metas.settings) !== null && _a !== void 0 ? _a : {}, exports.SDobbyResponseTimeTaskSettingsSpecs);
-            let res = yield ping_1.default.promise.probe('coffeekraken.io', {
+        return new Promise((resolve) => __awaiter(this, void 0, void 0, function* () {
+            var _a;
+            yield _super.start.call(this);
+            const finalSettings = s_specs_1.default.apply((_a = this.settings) !== null && _a !== void 0 ? _a : {}, specs_1.SDobbyResponseTimeTaskSpec);
+            let res = yield ping_1.default.promise.probe(this.settings.url, {
+                timeout: finalSettings.timeout / 1000,
+            });
+            const responseTime = res.alive ? parseFloat(res.avg) : -1;
+            const ttfb = yield (0, network_1.__ttfb)(this.settings.url, {
                 timeout: finalSettings.timeout,
             });
-            const responseTime = parseFloat(res.avg);
             let status = 'success';
-            if (responseTime >= 200) {
-                status = 'warning';
-            }
-            if (responseTime >= finalSettings.timeout) {
+            if (responseTime === -1 || ttfb === -1) {
                 status = 'error';
             }
-            return Object.assign(Object.assign({}, _super.end.call(this)), { alive: res.alive, status,
-                responseTime, logs: [res.output] });
-        });
+            else {
+                if (responseTime > 100) {
+                    status = 'warning';
+                }
+                if (ttfb > 150) {
+                    status = 'warning';
+                }
+            }
+            resolve(Object.assign(Object.assign({}, _super.end.call(this)), { alive: res.alive, status,
+                responseTime, ttfb: ttfb.ttfb, logs: [res.output] }));
+        }));
     }
 }
 exports.default = SDobbyTask;
-SDobbyTask.settingsSpecs = exports.SDobbyResponseTimeTaskSettingsSpecs;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7OztBQUFBLHVEQUF5RDtBQUN6RCwrREFBeUM7QUFFekMsb0VBQTZDO0FBRTdDLGdEQUEwQjtBQVExQjs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0FvQkc7QUFFVSxRQUFBLG1DQUFtQyxHQUFHO0lBQy9DLElBQUksRUFBRSxRQUFRO0lBQ2QsS0FBSyxFQUFFLHdCQUF3QjtJQUMvQixXQUFXLEVBQUUsa0RBQWtEO0lBQy9ELEtBQUssRUFBRTtRQUNILE9BQU8sRUFBRTtZQUNMLElBQUksRUFBRSxRQUFRO1lBQ2QsS0FBSyxFQUFFLGNBQWM7WUFDckIsV0FBVyxFQUNQLGtFQUFrRTtZQUN0RSxPQUFPLEVBQUUsS0FBSztTQUNqQjtLQUNKO0NBQ0osQ0FBQztBQUVGLE1BQXFCLFVBQVcsU0FBUSxvQkFBWTtJQUdoRDs7Ozs7Ozs7O09BU0c7SUFDSCxZQUFZLFNBQTRCO1FBQ3BDLEtBQUssQ0FBQyxJQUFBLG9CQUFXLEVBQUMsRUFBRSxFQUFFLFNBQVMsYUFBVCxTQUFTLGNBQVQsU0FBUyxHQUFJLEVBQUUsQ0FBQyxDQUFDLENBQUM7SUFDNUMsQ0FBQztJQUVLLEdBQUc7Ozs7Ozs7WUFDTCxPQUFNLEtBQUssWUFBRztZQUVkLE1BQU0sYUFBYSxHQUFHLGlCQUFRLENBQUMsS0FBSyxDQUNoQyxNQUFBLElBQUksQ0FBQyxLQUFLLENBQUMsUUFBUSxtQ0FBSSxFQUFFLEVBQ3pCLDJDQUFtQyxDQUN0QyxDQUFDO1lBRUYsSUFBSSxHQUFHLEdBQUcsTUFBTSxjQUFNLENBQUMsT0FBTyxDQUFDLEtBQUssQ0FBQyxpQkFBaUIsRUFBRTtnQkFDcEQsT0FBTyxFQUFFLGFBQWEsQ0FBQyxPQUFPO2FBQ2pDLENBQUMsQ0FBQztZQUVILE1BQU0sWUFBWSxHQUFHLFVBQVUsQ0FBQyxHQUFHLENBQUMsR0FBRyxDQUFDLENBQUM7WUFFekMsSUFBSSxNQUFNLEdBQUcsU0FBUyxDQUFDO1lBQ3ZCLElBQUksWUFBWSxJQUFJLEdBQUcsRUFBRTtnQkFDckIsTUFBTSxHQUFHLFNBQVMsQ0FBQzthQUN0QjtZQUNELElBQUksWUFBWSxJQUFJLGFBQWEsQ0FBQyxPQUFPLEVBQUU7Z0JBQ3ZDLE1BQU0sR0FBRyxPQUFPLENBQUM7YUFDcEI7WUFFRCx1Q0FDTyxPQUFNLEdBQUcsZ0JBQ1osS0FBSyxFQUFFLEdBQUcsQ0FBQyxLQUFLLEVBQ2hCLE1BQU07Z0JBQ04sWUFBWSxFQUNaLElBQUksRUFBRSxDQUFDLEdBQUcsQ0FBQyxNQUFNLENBQUMsSUFDcEI7O0tBQ0w7O0FBOUNMLDZCQStDQztBQTlDVSx3QkFBYSxHQUFHLDJDQUFtQyxDQUFDIn0=
+SDobbyTask.settingsSpecs = specs_1.SDobbyResponseTimeTaskSpec;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7O0FBQUEsdURBQXlEO0FBQ3pELCtEQUF5QztBQUV6Qyx5REFBcUQ7QUFFckQsb0VBQTZDO0FBRTdDLGdEQUEwQjtBQUUxQiw4Q0FBZ0U7QUFTaEU7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBb0JHO0FBRUgsTUFBcUIsVUFBVyxTQUFRLG9CQUFZO0lBS2hEOzs7Ozs7Ozs7T0FTRztJQUNILFlBQVksU0FBNEI7UUFDcEMsS0FBSyxDQUFDLElBQUEsb0JBQVcsRUFBQyxFQUFFLEVBQUUsU0FBUyxhQUFULFNBQVMsY0FBVCxTQUFTLEdBQUksRUFBRSxDQUFDLENBQUMsQ0FBQztJQUM1QyxDQUFDO0lBRUQsR0FBRzs7Ozs7UUFDQyxPQUFPLElBQUksT0FBTyxDQUFDLENBQU8sT0FBTyxFQUFFLEVBQUU7O1lBQ2pDLE1BQU0sT0FBTSxLQUFLLFdBQUUsQ0FBQztZQUVwQixNQUFNLGFBQWEsR0FBRyxpQkFBUSxDQUFDLEtBQUssQ0FDaEMsTUFBQSxJQUFJLENBQUMsUUFBUSxtQ0FBSSxFQUFFLEVBQ25CLGtDQUEwQixDQUM3QixDQUFDO1lBRUYsSUFBSSxHQUFHLEdBQUcsTUFBTSxjQUFNLENBQUMsT0FBTyxDQUFDLEtBQUssQ0FBQyxJQUFJLENBQUMsUUFBUSxDQUFDLEdBQUcsRUFBRTtnQkFDcEQsT0FBTyxFQUFFLGFBQWEsQ0FBQyxPQUFPLEdBQUcsSUFBSTthQUN4QyxDQUFDLENBQUM7WUFFSCxNQUFNLFlBQVksR0FBRyxHQUFHLENBQUMsS0FBSyxDQUFDLENBQUMsQ0FBQyxVQUFVLENBQUMsR0FBRyxDQUFDLEdBQUcsQ0FBQyxDQUFDLENBQUMsQ0FBQyxDQUFDLENBQUMsQ0FBQztZQUMxRCxNQUFNLElBQUksR0FBRyxNQUFNLElBQUEsZ0JBQU0sRUFBQyxJQUFJLENBQUMsUUFBUSxDQUFDLEdBQUcsRUFBRTtnQkFDekMsT0FBTyxFQUFFLGFBQWEsQ0FBQyxPQUFPO2FBQ2pDLENBQUMsQ0FBQztZQUVILElBQUksTUFBTSxHQUFHLFNBQVMsQ0FBQztZQUN2QixJQUFJLFlBQVksS0FBSyxDQUFDLENBQUMsSUFBSSxJQUFJLEtBQUssQ0FBQyxDQUFDLEVBQUU7Z0JBQ3BDLE1BQU0sR0FBRyxPQUFPLENBQUM7YUFDcEI7aUJBQU07Z0JBQ0gsSUFBSSxZQUFZLEdBQUcsR0FBRyxFQUFFO29CQUNwQixNQUFNLEdBQUcsU0FBUyxDQUFDO2lCQUN0QjtnQkFDRCxJQUFJLElBQUksR0FBRyxHQUFHLEVBQUU7b0JBQ1osTUFBTSxHQUFHLFNBQVMsQ0FBQztpQkFDdEI7YUFDSjtZQUVELE9BQU8saUNBQ0EsT0FBTSxHQUFHLGdCQUNaLEtBQUssRUFBRSxHQUFHLENBQUMsS0FBSyxFQUNoQixNQUFNO2dCQUNOLFlBQVksRUFDWixJQUFJLEVBQUUsSUFBSSxDQUFDLElBQUksRUFDZixJQUFJLEVBQUUsQ0FBQyxHQUFHLENBQUMsTUFBTSxDQUFDLElBQ3BCLENBQUM7UUFDUCxDQUFDLENBQUEsQ0FBQyxDQUFDO0tBQ047O0FBMURMLDZCQTJEQztBQTFEVSx3QkFBYSxHQUFHLGtDQUEwQixDQUFDIn0=

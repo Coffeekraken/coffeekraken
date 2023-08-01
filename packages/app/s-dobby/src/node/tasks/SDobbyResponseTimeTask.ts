@@ -1,12 +1,17 @@
 import { __deepMerge } from '@coffeekraken/sugar/object';
 import __SDobbyTask from '../SDobbyTask';
 
+import { __ttfb } from '@coffeekraken/sugar/network';
+
 import __SSpecs from '@coffeekraken/s-specs';
 
 import __ping from 'ping';
 
+import { SDobbyResponseTimeTaskSpec } from '../../shared/specs';
+
 import type {
     ISDobbyResponseTimeTaskResult,
+    ISDobbyResponseTimeTaskSettings,
     ISDobbyTask,
     ISDobbyTaskMetas,
 } from '../../shared/types.js';
@@ -33,23 +38,10 @@ import type {
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 
-export const SDobbyResponseTimeTaskSettingsSpecs = {
-    type: 'Object',
-    title: 'Response time settings',
-    description: 'Specify some settings for your responseTime task',
-    props: {
-        timeout: {
-            type: 'Number',
-            title: 'Timeout (ms)',
-            description:
-                'Specify a timeout in ms before considering the target as offline',
-            default: 10000,
-        },
-    },
-};
-
 export default class SDobbyTask extends __SDobbyTask implements ISDobbyTask {
-    static settingsSpecs = SDobbyResponseTimeTaskSettingsSpecs;
+    static settingsSpecs = SDobbyResponseTimeTaskSpec;
+
+    settings: ISDobbyResponseTimeTaskSettings;
 
     /**
      * @name        constructor
@@ -65,34 +57,44 @@ export default class SDobbyTask extends __SDobbyTask implements ISDobbyTask {
         super(__deepMerge({}, taskMetas ?? {}));
     }
 
-    async run(): Promise<ISDobbyResponseTimeTaskResult> {
-        super.start();
+    run(): Promise<ISDobbyResponseTimeTaskResult> {
+        return new Promise(async (resolve) => {
+            await super.start();
 
-        const finalSettings = __SSpecs.apply(
-            this.metas.settings ?? {},
-            SDobbyResponseTimeTaskSettingsSpecs,
-        );
+            const finalSettings = __SSpecs.apply(
+                this.settings ?? {},
+                SDobbyResponseTimeTaskSpec,
+            );
 
-        let res = await __ping.promise.probe('coffeekraken.io', {
-            timeout: finalSettings.timeout,
+            let res = await __ping.promise.probe(this.settings.url, {
+                timeout: finalSettings.timeout / 1000,
+            });
+
+            const responseTime = res.alive ? parseFloat(res.avg) : -1;
+            const ttfb = await __ttfb(this.settings.url, {
+                timeout: finalSettings.timeout,
+            });
+
+            let status = 'success';
+            if (responseTime === -1 || ttfb === -1) {
+                status = 'error';
+            } else {
+                if (responseTime > 100) {
+                    status = 'warning';
+                }
+                if (ttfb > 150) {
+                    status = 'warning';
+                }
+            }
+
+            resolve({
+                ...super.end(),
+                alive: res.alive,
+                status,
+                responseTime,
+                ttfb: ttfb.ttfb,
+                logs: [res.output],
+            });
         });
-
-        const responseTime = parseFloat(res.avg);
-
-        let status = 'success';
-        if (responseTime >= 200) {
-            status = 'warning';
-        }
-        if (responseTime >= finalSettings.timeout) {
-            status = 'error';
-        }
-
-        return {
-            ...super.end(),
-            alive: res.alive,
-            status,
-            responseTime,
-            logs: [res.output],
-        };
     }
 }

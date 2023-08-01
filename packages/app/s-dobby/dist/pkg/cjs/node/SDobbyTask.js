@@ -1,10 +1,20 @@
 "use strict";
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const s_class_1 = __importDefault(require("@coffeekraken/s-class"));
 const string_1 = require("@coffeekraken/sugar/string");
+const network_1 = require("@coffeekraken/sugar/network");
 const s_duration_1 = __importDefault(require("@coffeekraken/s-duration"));
 /**
  * @name                SDobbyTask
@@ -41,11 +51,37 @@ class SDobbyTask extends s_class_1.default {
     constructor(taskMetas) {
         super();
         this.metas = taskMetas;
+        this.settings = taskMetas.settings;
     }
     start() {
-        console.log(`<yellow>[SDobby]</yellow> Starting <magenta>${this.metas.name} (${this.metas.type})</magenta> task...`);
-        this._time = Date.now();
-        this._duration = new s_duration_1.default();
+        return __awaiter(this, void 0, void 0, function* () {
+            console.log(`<yellow>[SDobby]</yellow> Starting <magenta>${this.metas.name} (${this.metas.type})</magenta> task...`);
+            this._time = Date.now();
+            this._duration = new s_duration_1.default();
+            const headers = new Headers();
+            headers.set('Authorization', 'Basic ' +
+                Buffer.from(`897136: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`).toString('base64'));
+            const publicIp = yield (0, network_1.__publicIpAddress)();
+            const response = yield fetch(`https://geolite.info/geoip/v2.1/city/${publicIp}`, {
+                method: 'GET',
+                headers: headers,
+            });
+            const geoJson = yield response.json();
+            this._geo = {
+                country: {
+                    iso: geoJson.country.iso_code,
+                    name: geoJson.country.names.en,
+                },
+                city: {
+                    code: geoJson.postal.code,
+                    name: geoJson.city.names.en,
+                },
+                timezone: geoJson.location.time_zone,
+                lat: geoJson.location.latitude,
+                lng: geoJson.location.longitude,
+            };
+            return true;
+        });
     }
     end() {
         const durationObj = this._duration.end();
@@ -53,10 +89,11 @@ class SDobbyTask extends s_class_1.default {
         return {
             uid: (0, string_1.__uniqid)(),
             time: this._time,
+            geo: this._geo,
             duration: durationObj,
             task: this.metas,
         };
     }
 }
 exports.default = SDobbyTask;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7O0FBQUEsb0VBQTZDO0FBRTdDLHVEQUFzRDtBQUV0RCwwRUFBbUQ7QUFJbkQ7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBb0JHO0FBRUgsTUFBcUIsVUFBVyxTQUFRLGlCQUFRO0lBWTVDOzs7Ozs7Ozs7T0FTRztJQUNILFlBQVksU0FBNEI7UUFDcEMsS0FBSyxFQUFFLENBQUM7UUFDUixJQUFJLENBQUMsS0FBSyxHQUFHLFNBQVMsQ0FBQztJQUMzQixDQUFDO0lBS0QsS0FBSztRQUNELE9BQU8sQ0FBQyxHQUFHLENBQ1AsK0NBQStDLElBQUksQ0FBQyxLQUFLLENBQUMsSUFBSSxLQUFLLElBQUksQ0FBQyxLQUFLLENBQUMsSUFBSSxxQkFBcUIsQ0FDMUcsQ0FBQztRQUNGLElBQUksQ0FBQyxLQUFLLEdBQUcsSUFBSSxDQUFDLEdBQUcsRUFBRSxDQUFDO1FBQ3hCLElBQUksQ0FBQyxTQUFTLEdBQUcsSUFBSSxvQkFBVyxFQUFFLENBQUM7SUFDdkMsQ0FBQztJQUVELEdBQUc7UUFDQyxNQUFNLFdBQVcsR0FBRyxJQUFJLENBQUMsU0FBUyxDQUFDLEdBQUcsRUFBRSxDQUFDO1FBQ3pDLE9BQU8sQ0FBQyxHQUFHLENBQ1AseUNBQXlDLElBQUksQ0FBQyxLQUFLLENBQUMsSUFBSSxLQUFLLElBQUksQ0FBQyxLQUFLLENBQUMsSUFBSSw2REFBNkQsV0FBVyxDQUFDLGdCQUFnQixTQUFTLENBQ2pMLENBQUM7UUFDRixPQUFPO1lBQ0gsR0FBRyxFQUFFLElBQUEsaUJBQVEsR0FBRTtZQUNmLElBQUksRUFBRSxJQUFJLENBQUMsS0FBSztZQUNoQixRQUFRLEVBQUUsV0FBVztZQUNyQixJQUFJLEVBQUUsSUFBSSxDQUFDLEtBQUs7U0FDbkIsQ0FBQztJQUNOLENBQUM7Q0FDSjtBQWxERCw2QkFrREMifQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7O0FBQUEsb0VBQTZDO0FBRTdDLHVEQUFzRDtBQUV0RCx5REFBZ0U7QUFFaEUsMEVBQW1EO0FBUW5EOzs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQW9CRztBQUVILE1BQXFCLFVBQVcsU0FBUSxpQkFBUTtJQXVCNUM7Ozs7Ozs7OztPQVNHO0lBQ0gsWUFBWSxTQUE0QjtRQUNwQyxLQUFLLEVBQUUsQ0FBQztRQUNSLElBQUksQ0FBQyxLQUFLLEdBQUcsU0FBUyxDQUFDO1FBQ3ZCLElBQUksQ0FBQyxRQUFRLEdBQUcsU0FBUyxDQUFDLFFBQVEsQ0FBQztJQUN2QyxDQUFDO0lBTUssS0FBSzs7WUFDUCxPQUFPLENBQUMsR0FBRyxDQUNQLCtDQUErQyxJQUFJLENBQUMsS0FBSyxDQUFDLElBQUksS0FBSyxJQUFJLENBQUMsS0FBSyxDQUFDLElBQUkscUJBQXFCLENBQzFHLENBQUM7WUFDRixJQUFJLENBQUMsS0FBSyxHQUFHLElBQUksQ0FBQyxHQUFHLEVBQUUsQ0FBQztZQUN4QixJQUFJLENBQUMsU0FBUyxHQUFHLElBQUksb0JBQVcsRUFBRSxDQUFDO1lBRW5DLE1BQU0sT0FBTyxHQUFHLElBQUksT0FBTyxFQUFFLENBQUM7WUFDOUIsT0FBTyxDQUFDLEdBQUcsQ0FDUCxlQUFlLEVBQ2YsUUFBUTtnQkFDSixNQUFNLENBQUMsSUFBSSxDQUNQLGlEQUFpRCxDQUNwRCxDQUFDLFFBQVEsQ0FBQyxRQUFRLENBQUMsQ0FDM0IsQ0FBQztZQUVGLE1BQU0sUUFBUSxHQUFHLE1BQU0sSUFBQSwyQkFBaUIsR0FBRSxDQUFDO1lBRTNDLE1BQU0sUUFBUSxHQUFHLE1BQU0sS0FBSyxDQUN4Qix3Q0FBd0MsUUFBUSxFQUFFLEVBQ2xEO2dCQUNJLE1BQU0sRUFBRSxLQUFLO2dCQUNiLE9BQU8sRUFBRSxPQUFPO2FBQ25CLENBQ0osQ0FBQztZQUVGLE1BQU0sT0FBTyxHQUFHLE1BQU0sUUFBUSxDQUFDLElBQUksRUFBRSxDQUFDO1lBQ3RDLElBQUksQ0FBQyxJQUFJLEdBQUc7Z0JBQ1IsT0FBTyxFQUFFO29CQUNMLEdBQUcsRUFBRSxPQUFPLENBQUMsT0FBTyxDQUFDLFFBQVE7b0JBQzdCLElBQUksRUFBRSxPQUFPLENBQUMsT0FBTyxDQUFDLEtBQUssQ0FBQyxFQUFFO2lCQUNqQztnQkFDRCxJQUFJLEVBQUU7b0JBQ0YsSUFBSSxFQUFFLE9BQU8sQ0FBQyxNQUFNLENBQUMsSUFBSTtvQkFDekIsSUFBSSxFQUFFLE9BQU8sQ0FBQyxJQUFJLENBQUMsS0FBSyxDQUFDLEVBQUU7aUJBQzlCO2dCQUNELFFBQVEsRUFBRSxPQUFPLENBQUMsUUFBUSxDQUFDLFNBQVM7Z0JBQ3BDLEdBQUcsRUFBRSxPQUFPLENBQUMsUUFBUSxDQUFDLFFBQVE7Z0JBQzlCLEdBQUcsRUFBRSxPQUFPLENBQUMsUUFBUSxDQUFDLFNBQVM7YUFDbEMsQ0FBQztZQUVGLE9BQU8sSUFBSSxDQUFDO1FBQ2hCLENBQUM7S0FBQTtJQUVELEdBQUc7UUFDQyxNQUFNLFdBQVcsR0FBRyxJQUFJLENBQUMsU0FBUyxDQUFDLEdBQUcsRUFBRSxDQUFDO1FBQ3pDLE9BQU8sQ0FBQyxHQUFHLENBQ1AseUNBQXlDLElBQUksQ0FBQyxLQUFLLENBQUMsSUFBSSxLQUFLLElBQUksQ0FBQyxLQUFLLENBQUMsSUFBSSw2REFBNkQsV0FBVyxDQUFDLGdCQUFnQixTQUFTLENBQ2pMLENBQUM7UUFDRixPQUFPO1lBQ0gsR0FBRyxFQUFFLElBQUEsaUJBQVEsR0FBRTtZQUNmLElBQUksRUFBRSxJQUFJLENBQUMsS0FBSztZQUNoQixHQUFHLEVBQUUsSUFBSSxDQUFDLElBQUk7WUFDZCxRQUFRLEVBQUUsV0FBVztZQUNyQixJQUFJLEVBQUUsSUFBSSxDQUFDLEtBQUs7U0FDbkIsQ0FBQztJQUNOLENBQUM7Q0FDSjtBQXBHRCw2QkFvR0MifQ==

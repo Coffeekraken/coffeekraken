@@ -9,8 +9,10 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 import { __deepMerge } from '@coffeekraken/sugar/object';
 import __SDobbyTask from '../SDobbyTask';
+import { __ttfb } from '@coffeekraken/sugar/network';
 import __SSpecs from '@coffeekraken/s-specs';
 import __ping from 'ping';
+import { SDobbyResponseTimeTaskSpec } from '../../shared/specs';
 /**
  * @name                SDobbyResponseTimeTask
  * @namespace           node
@@ -32,19 +34,6 @@ import __ping from 'ping';
  * @since           2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-export const SDobbyResponseTimeTaskSettingsSpecs = {
-    type: 'Object',
-    title: 'Response time settings',
-    description: 'Specify some settings for your responseTime task',
-    props: {
-        timeout: {
-            type: 'Number',
-            title: 'Timeout (ms)',
-            description: 'Specify a timeout in ms before considering the target as offline',
-            default: 10000,
-        },
-    },
-};
 export default class SDobbyTask extends __SDobbyTask {
     /**
      * @name        constructor
@@ -64,25 +53,33 @@ export default class SDobbyTask extends __SDobbyTask {
             start: { get: () => super.start },
             end: { get: () => super.end }
         });
-        var _a;
-        return __awaiter(this, void 0, void 0, function* () {
-            _super.start.call(this);
-            const finalSettings = __SSpecs.apply((_a = this.metas.settings) !== null && _a !== void 0 ? _a : {}, SDobbyResponseTimeTaskSettingsSpecs);
-            let res = yield __ping.promise.probe('coffeekraken.io', {
+        return new Promise((resolve) => __awaiter(this, void 0, void 0, function* () {
+            var _a;
+            yield _super.start.call(this);
+            const finalSettings = __SSpecs.apply((_a = this.settings) !== null && _a !== void 0 ? _a : {}, SDobbyResponseTimeTaskSpec);
+            let res = yield __ping.promise.probe(this.settings.url, {
+                timeout: finalSettings.timeout / 1000,
+            });
+            const responseTime = res.alive ? parseFloat(res.avg) : -1;
+            const ttfb = yield __ttfb(this.settings.url, {
                 timeout: finalSettings.timeout,
             });
-            const responseTime = parseFloat(res.avg);
             let status = 'success';
-            if (responseTime >= 200) {
-                status = 'warning';
-            }
-            if (responseTime >= finalSettings.timeout) {
+            if (responseTime === -1 || ttfb === -1) {
                 status = 'error';
             }
-            return Object.assign(Object.assign({}, _super.end.call(this)), { alive: res.alive, status,
-                responseTime, logs: [res.output] });
-        });
+            else {
+                if (responseTime > 100) {
+                    status = 'warning';
+                }
+                if (ttfb > 150) {
+                    status = 'warning';
+                }
+            }
+            resolve(Object.assign(Object.assign({}, _super.end.call(this)), { alive: res.alive, status,
+                responseTime, ttfb: ttfb.ttfb, logs: [res.output] }));
+        }));
     }
 }
-SDobbyTask.settingsSpecs = SDobbyResponseTimeTaskSettingsSpecs;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7OztBQUFBLE9BQU8sRUFBRSxXQUFXLEVBQUUsTUFBTSw0QkFBNEIsQ0FBQztBQUN6RCxPQUFPLFlBQVksTUFBTSxlQUFlLENBQUM7QUFFekMsT0FBTyxRQUFRLE1BQU0sdUJBQXVCLENBQUM7QUFFN0MsT0FBTyxNQUFNLE1BQU0sTUFBTSxDQUFDO0FBUTFCOzs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQW9CRztBQUVILE1BQU0sQ0FBQyxNQUFNLG1DQUFtQyxHQUFHO0lBQy9DLElBQUksRUFBRSxRQUFRO0lBQ2QsS0FBSyxFQUFFLHdCQUF3QjtJQUMvQixXQUFXLEVBQUUsa0RBQWtEO0lBQy9ELEtBQUssRUFBRTtRQUNILE9BQU8sRUFBRTtZQUNMLElBQUksRUFBRSxRQUFRO1lBQ2QsS0FBSyxFQUFFLGNBQWM7WUFDckIsV0FBVyxFQUNQLGtFQUFrRTtZQUN0RSxPQUFPLEVBQUUsS0FBSztTQUNqQjtLQUNKO0NBQ0osQ0FBQztBQUVGLE1BQU0sQ0FBQyxPQUFPLE9BQU8sVUFBVyxTQUFRLFlBQVk7SUFHaEQ7Ozs7Ozs7OztPQVNHO0lBQ0gsWUFBWSxTQUE0QjtRQUNwQyxLQUFLLENBQUMsV0FBVyxDQUFDLEVBQUUsRUFBRSxTQUFTLGFBQVQsU0FBUyxjQUFULFNBQVMsR0FBSSxFQUFFLENBQUMsQ0FBQyxDQUFDO0lBQzVDLENBQUM7SUFFSyxHQUFHOzs7Ozs7O1lBQ0wsT0FBTSxLQUFLLFlBQUc7WUFFZCxNQUFNLGFBQWEsR0FBRyxRQUFRLENBQUMsS0FBSyxDQUNoQyxNQUFBLElBQUksQ0FBQyxLQUFLLENBQUMsUUFBUSxtQ0FBSSxFQUFFLEVBQ3pCLG1DQUFtQyxDQUN0QyxDQUFDO1lBRUYsSUFBSSxHQUFHLEdBQUcsTUFBTSxNQUFNLENBQUMsT0FBTyxDQUFDLEtBQUssQ0FBQyxpQkFBaUIsRUFBRTtnQkFDcEQsT0FBTyxFQUFFLGFBQWEsQ0FBQyxPQUFPO2FBQ2pDLENBQUMsQ0FBQztZQUVILE1BQU0sWUFBWSxHQUFHLFVBQVUsQ0FBQyxHQUFHLENBQUMsR0FBRyxDQUFDLENBQUM7WUFFekMsSUFBSSxNQUFNLEdBQUcsU0FBUyxDQUFDO1lBQ3ZCLElBQUksWUFBWSxJQUFJLEdBQUcsRUFBRTtnQkFDckIsTUFBTSxHQUFHLFNBQVMsQ0FBQzthQUN0QjtZQUNELElBQUksWUFBWSxJQUFJLGFBQWEsQ0FBQyxPQUFPLEVBQUU7Z0JBQ3ZDLE1BQU0sR0FBRyxPQUFPLENBQUM7YUFDcEI7WUFFRCx1Q0FDTyxPQUFNLEdBQUcsZ0JBQ1osS0FBSyxFQUFFLEdBQUcsQ0FBQyxLQUFLLEVBQ2hCLE1BQU07Z0JBQ04sWUFBWSxFQUNaLElBQUksRUFBRSxDQUFDLEdBQUcsQ0FBQyxNQUFNLENBQUMsSUFDcEI7O0tBQ0w7O0FBN0NNLHdCQUFhLEdBQUcsbUNBQW1DLENBQUMifQ==
+SDobbyTask.settingsSpecs = SDobbyResponseTimeTaskSpec;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7OztBQUFBLE9BQU8sRUFBRSxXQUFXLEVBQUUsTUFBTSw0QkFBNEIsQ0FBQztBQUN6RCxPQUFPLFlBQVksTUFBTSxlQUFlLENBQUM7QUFFekMsT0FBTyxFQUFFLE1BQU0sRUFBRSxNQUFNLDZCQUE2QixDQUFDO0FBRXJELE9BQU8sUUFBUSxNQUFNLHVCQUF1QixDQUFDO0FBRTdDLE9BQU8sTUFBTSxNQUFNLE1BQU0sQ0FBQztBQUUxQixPQUFPLEVBQUUsMEJBQTBCLEVBQUUsTUFBTSxvQkFBb0IsQ0FBQztBQVNoRTs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0FvQkc7QUFFSCxNQUFNLENBQUMsT0FBTyxPQUFPLFVBQVcsU0FBUSxZQUFZO0lBS2hEOzs7Ozs7Ozs7T0FTRztJQUNILFlBQVksU0FBNEI7UUFDcEMsS0FBSyxDQUFDLFdBQVcsQ0FBQyxFQUFFLEVBQUUsU0FBUyxhQUFULFNBQVMsY0FBVCxTQUFTLEdBQUksRUFBRSxDQUFDLENBQUMsQ0FBQztJQUM1QyxDQUFDO0lBRUQsR0FBRzs7Ozs7UUFDQyxPQUFPLElBQUksT0FBTyxDQUFDLENBQU8sT0FBTyxFQUFFLEVBQUU7O1lBQ2pDLE1BQU0sT0FBTSxLQUFLLFdBQUUsQ0FBQztZQUVwQixNQUFNLGFBQWEsR0FBRyxRQUFRLENBQUMsS0FBSyxDQUNoQyxNQUFBLElBQUksQ0FBQyxRQUFRLG1DQUFJLEVBQUUsRUFDbkIsMEJBQTBCLENBQzdCLENBQUM7WUFFRixJQUFJLEdBQUcsR0FBRyxNQUFNLE1BQU0sQ0FBQyxPQUFPLENBQUMsS0FBSyxDQUFDLElBQUksQ0FBQyxRQUFRLENBQUMsR0FBRyxFQUFFO2dCQUNwRCxPQUFPLEVBQUUsYUFBYSxDQUFDLE9BQU8sR0FBRyxJQUFJO2FBQ3hDLENBQUMsQ0FBQztZQUVILE1BQU0sWUFBWSxHQUFHLEdBQUcsQ0FBQyxLQUFLLENBQUMsQ0FBQyxDQUFDLFVBQVUsQ0FBQyxHQUFHLENBQUMsR0FBRyxDQUFDLENBQUMsQ0FBQyxDQUFDLENBQUMsQ0FBQyxDQUFDO1lBQzFELE1BQU0sSUFBSSxHQUFHLE1BQU0sTUFBTSxDQUFDLElBQUksQ0FBQyxRQUFRLENBQUMsR0FBRyxFQUFFO2dCQUN6QyxPQUFPLEVBQUUsYUFBYSxDQUFDLE9BQU87YUFDakMsQ0FBQyxDQUFDO1lBRUgsSUFBSSxNQUFNLEdBQUcsU0FBUyxDQUFDO1lBQ3ZCLElBQUksWUFBWSxLQUFLLENBQUMsQ0FBQyxJQUFJLElBQUksS0FBSyxDQUFDLENBQUMsRUFBRTtnQkFDcEMsTUFBTSxHQUFHLE9BQU8sQ0FBQzthQUNwQjtpQkFBTTtnQkFDSCxJQUFJLFlBQVksR0FBRyxHQUFHLEVBQUU7b0JBQ3BCLE1BQU0sR0FBRyxTQUFTLENBQUM7aUJBQ3RCO2dCQUNELElBQUksSUFBSSxHQUFHLEdBQUcsRUFBRTtvQkFDWixNQUFNLEdBQUcsU0FBUyxDQUFDO2lCQUN0QjthQUNKO1lBRUQsT0FBTyxpQ0FDQSxPQUFNLEdBQUcsZ0JBQ1osS0FBSyxFQUFFLEdBQUcsQ0FBQyxLQUFLLEVBQ2hCLE1BQU07Z0JBQ04sWUFBWSxFQUNaLElBQUksRUFBRSxJQUFJLENBQUMsSUFBSSxFQUNmLElBQUksRUFBRSxDQUFDLEdBQUcsQ0FBQyxNQUFNLENBQUMsSUFDcEIsQ0FBQztRQUNQLENBQUMsQ0FBQSxDQUFDLENBQUM7S0FDTjs7QUF6RE0sd0JBQWEsR0FBRywwQkFBMEIsQ0FBQyJ9

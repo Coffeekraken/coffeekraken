@@ -31,7 +31,7 @@ export default class SherlockLighthouseResultComponent extends LitElement {
                 <span class="_score">${globalScore}</span>
             </div>
 
-            <span class="_separator">-</span>
+            <span class="_separator"></span>
 
             <div class="_categories">
                 <span class="_label">Categories</span>
@@ -44,7 +44,9 @@ export default class SherlockLighthouseResultComponent extends LitElement {
                                     max="100"
                                     value="${category.score * 100}"
                                 ></s-gauge>
-                                <div class="s-tooltip:right">${category.title}</div>
+                                <div class="s-tooltip:right">
+                                    ${category.title} (${category.score * 100})
+                                </div>
                             </div>
                             <span class="_score">${category.score * 100}</span>
                         </div>

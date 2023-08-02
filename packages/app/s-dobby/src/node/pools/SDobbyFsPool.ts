@@ -48,13 +48,13 @@ export default class SDobbyFsPool extends __SDobbyPool implements ISDobbyPool {
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     constructor(
-        poolMetas: ISDobbyPoolMetas,
         dobby: __SDobby,
-        settings?: ISDobbyPoolSettings,
+        poolMetas: ISDobbyPoolMetas,
+        settings?: ISDobbyFsPoolSettings,
     ) {
         super(
-            poolMetas,
             dobby,
+            poolMetas,
             __deepMerge(
                 __SSpecs.extractDefaults(SDobbyFsPoolSettingsSpecs),
                 settings ?? {},

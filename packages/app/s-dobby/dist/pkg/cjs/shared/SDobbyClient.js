@@ -1,19 +1,47 @@
-"use strict";
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-const s_class_1 = __importDefault(require("@coffeekraken/s-class"));
-const object_1 = require("@coffeekraken/sugar/object");
+'use strict';
+var __awaiter =
+    (this && this.__awaiter) ||
+    function (thisArg, _arguments, P, generator) {
+        function adopt(value) {
+            return value instanceof P
+                ? value
+                : new P(function (resolve) {
+                      resolve(value);
+                  });
+        }
+        return new (P || (P = Promise))(function (resolve, reject) {
+            function fulfilled(value) {
+                try {
+                    step(generator.next(value));
+                } catch (e) {
+                    reject(e);
+                }
+            }
+            function rejected(value) {
+                try {
+                    step(generator['throw'](value));
+                } catch (e) {
+                    reject(e);
+                }
+            }
+            function step(result) {
+                result.done
+                    ? resolve(result.value)
+                    : adopt(result.value).then(fulfilled, rejected);
+            }
+            step(
+                (generator = generator.apply(thisArg, _arguments || [])).next(),
+            );
+        });
+    };
+var __importDefault =
+    (this && this.__importDefault) ||
+    function (mod) {
+        return mod && mod.__esModule ? mod : { default: mod };
+    };
+Object.defineProperty(exports, '__esModule', { value: true });
+const s_class_1 = __importDefault(require('@coffeekraken/s-class'));
+const object_1 = require('@coffeekraken/sugar/object');
 /**
  * @name                SDobbyClient
  * @namespace           node
@@ -47,10 +75,15 @@ class SDobbyClient extends s_class_1.default {
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     constructor(settings) {
-        super((0, object_1.__deepMerge)({
-            host: 'localhost',
-            port: 8787,
-        }, settings !== null && settings !== void 0 ? settings : {}));
+        super(
+            (0, object_1.__deepMerge)(
+                {
+                    host: 'localhost',
+                    port: 8787,
+                },
+                settings !== null && settings !== void 0 ? settings : {},
+            ),
+        );
         /**
          * @name        pools
          * @type        Any
@@ -63,50 +96,51 @@ class SDobbyClient extends s_class_1.default {
         this.pools = {};
         // update local tasks stack
         this.on('pool', (res) => {
-            console.log('POOL', res);
             this.pools[res.pool.uid] = res;
         });
-        // this.on('pool.config', (res: any) => {
-        //     if (!this.pools[res.pool.uid]) {
-        //         return;
-        //     }
-        //     this.pools[res.pool.uid].config = res.config;
-        // });
     }
     /**
      * Connect to server
      */
     connect() {
         // Create WebSocket connection.
-        this._socket = new WebSocket(`ws://${this.settings.host}:${this.settings.port}`);
+        this._socket = new WebSocket(
+            `ws://${this.settings.host}:${this.settings.port}`,
+        );
         // Connection opened
         this._socket.addEventListener('open', (event) => {
             this._socket.send('Hello Server!');
         });
         // Listen for messages
-        this._socket.addEventListener('message', (event) => __awaiter(this, void 0, void 0, function* () {
-            let data = event.data;
-            try {
-                data = yield event.data.text();
-            }
-            catch (e) { }
-            try {
-                data = JSON.parse(data);
-            }
-            catch (e) { }
-            // dispatch the event
-            document.dispatchEvent(new CustomEvent(`dobby.${data.type}`, {
-                detail: data,
-            }));
-        }));
+        this._socket.addEventListener('message', (event) =>
+            __awaiter(this, void 0, void 0, function* () {
+                let data = event.data;
+                try {
+                    data = yield event.data.text();
+                } catch (e) {}
+                try {
+                    data = JSON.parse(data);
+                } catch (e) {}
+                // dispatch the event
+                document.dispatchEvent(
+                    new CustomEvent(`dobby.${data.type}`, {
+                        detail: data,
+                    }),
+                );
+            }),
+        );
     }
     getTasks() {
-        return new Promise((resolve) => __awaiter(this, void 0, void 0, function* () { }));
+        return new Promise((resolve) =>
+            __awaiter(this, void 0, void 0, function* () {}),
+        );
     }
     on(event, callback) {
         const cb = (e) => {
             var _a;
-            callback((_a = e.detail.data) !== null && _a !== void 0 ? _a : e.detail);
+            callback(
+                (_a = e.detail.data) !== null && _a !== void 0 ? _a : e.detail,
+            );
         };
         document.addEventListener(`dobby.${event}`, cb);
         return function () {

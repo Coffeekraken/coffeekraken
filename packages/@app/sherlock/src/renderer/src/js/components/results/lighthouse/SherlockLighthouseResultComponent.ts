@@ -11,8 +11,6 @@ export default class SherlockLighthouseResultComponent extends LitElement {
     results: ISDobbyLi = null;
 
     static renderListWidget(result: ISDobbyLighthouseTaskResult): any {
-        console.log('az0', result);
-
         let total = 0;
         for (let [id, category] of Object.entries(result.categories ?? {})) {
             total += category.score * 100;
@@ -25,10 +23,12 @@ export default class SherlockLighthouseResultComponent extends LitElement {
             <div class="_global">
                 <span class="_label">Global</span>
                 <div class="s-tooltip-container">
-                    <s-gauge min="0" max="100" value="${globalScore}"></s-gauge>
+                    <div class="_global">
+                        <s-gauge min="0" max="100" value="${globalScore}"></s-gauge>
+                        <span class="_score">${globalScore}</span>
+                    </div>
                     <div class="s-tooltip:right">Global score (${globalScore})</div>
                 </div>
-                <span class="_score">${globalScore}</span>
             </div>
 
             <span class="_separator"></span>
@@ -37,20 +37,47 @@ export default class SherlockLighthouseResultComponent extends LitElement {
                 <span class="_label">Categories</span>
                 ${Object.entries(result.categories ?? {}).map(
                     ([id, category]) => html`
-                        <div class="_category">
-                            <div class="s-tooltip-container">
+                        <div class="s-tooltip-container">
+                            <div class="_category">
                                 <s-gauge
                                     min="0"
                                     max="100"
                                     value="${category.score * 100}"
                                 ></s-gauge>
-                                <div class="s-tooltip:right">
-                                    ${category.title} (${category.score * 100})
-                                </div>
+                                <span class="_score">${category.score * 100}</span>
                             </div>
-                            <span class="_score">${category.score * 100}</span>
+                            <div class="s-tooltip:right">
+                                ${category.title} (${category.score * 100})
+                            </div>
                         </div>
                     `,
+                )}
+            </div>
+
+            <div class="_separator"></div>
+
+            <div class="_vitals">
+                <div class="_label">Vitals</div>
+                ${['largest-contentful-paint', 'max-potential-fid', 'cumulative-layout-shift'].map(
+                    (auditId) => {
+                        const vital = result.audits[auditId];
+                        if (!vital) return '';
+                        return html`
+                            <div class="s-tooltip-container">
+                                <div class="_vital">
+                                    <s-gauge
+                                        min="0"
+                                        max="100"
+                                        value="${vital.score * 100}"
+                                    ></s-gauge>
+                                    <span class="_score">${vital.displayValue}</span>
+                                </div>
+                                <div class="s-tooltip:right">
+                                    ${vital.title} (${vital.displayValue})
+                                </div>
+                            </div>
+                        `;
+                    },
                 )}
             </div>
         </div>`;

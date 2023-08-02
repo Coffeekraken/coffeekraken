@@ -40,7 +40,7 @@ function default_1({ params, atRule, replaceWith, }) {
     // lnf
     if (finalParams.scope.indexOf('lnf') !== -1) {
         vars.push(`
-            color: sugar.color(main, uiForeground);
+            color: sugar.color(main, text);
             background-color: sugar.color(main, ui);
             font-size: sugar.scalable(1rem);
             border: sugar.color(current, --alpha 0.2) solid sugar.theme(ui.${finalParams.name}.borderWidth);

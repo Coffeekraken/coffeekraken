@@ -9,6 +9,9 @@ sherlock-lighthouse-result {
     .s-gauge {
         font-size: 20px;
 
+        ._track {
+            stroke: sugar.color(main, --lighten 50 --alpha 0.3);
+        }
         ._value {
             opacity: 0.3 !important;
         }
@@ -16,7 +19,7 @@ sherlock-lighthouse-result {
 
     ._global {
         display: flex;
-        gap: sugar.margin(10);
+        gap: sugar.margin(20);
         align-items: center;
     }
 
@@ -26,6 +29,16 @@ sherlock-lighthouse-result {
         align-items: center;
     }
     ._category {
+        display: flex;
+        gap: sugar.margin(10);
+        align-items: center;
+    }
+    ._vitals {
+        display: flex;
+        gap: sugar.margin(30);
+        align-items: center;
+    }
+    ._vital {
         display: flex;
         gap: sugar.margin(10);
         align-items: center;

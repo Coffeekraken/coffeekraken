@@ -1,8 +1,6 @@
 import { LitElement, css, html } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 
-import { __formatDuration } from '@coffeekraken/sugar/datetime';
-
 import type { ISDobbyResponseTimeTaskResult } from '@coffeekraken/s-dobby';
 
 @customElement('sherlock-response-time-result')
@@ -49,7 +47,8 @@ export default class SherlockResponseTimeResultComponent extends LitElement {
                         : result.responseTime <= 100
                         ? 'medium'
                         : 'high'}"
-                    >${result.responseTime === -1
+                >
+                    ${result.responseTime === -1
                         ? html`<i class="fa-solid fa-xmark"></i>`
                         : `${parseFloat(result.responseTime).toFixed(2)}ms`}</span
                 >
@@ -65,21 +64,12 @@ export default class SherlockResponseTimeResultComponent extends LitElement {
                         : result.ttfb <= 250
                         ? 'medium'
                         : 'high'}"
-                    >${result.ttfb === -1
+                >
+                    ${result.ttfb === -1
                         ? html`<i class="fa-solid fa-xmark"></i>`
                         : `${parseFloat(result.ttfb).toFixed(2)}ms`}</span
                 >
             </div>
-
-            <!-- Response time is
-            <span
-                class="_response-time s-font:code s-tc:${result.status === 'success'
-                ? 'success'
-                : result.status === 'warning'
-                ? 'accent'
-                : 'error'}"
-                >${__formatDuration(result.responseTime)}</span
-            > -->
         </div>`;
     }
 

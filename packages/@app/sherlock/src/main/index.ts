@@ -64,6 +64,9 @@ app.whenReady().then(() => {
     // ipcMain.handle('spaces:set', (e, space: ISherlockSpace) => {
     //     return sherlockApp.setSpace(space);
     // });
+    ipcMain.handle('pools:add', (e, poolMetas: any) => {
+        return sherlockApp.addPool(poolMetas);
+    });
     ipcMain.handle('spaces:get', (e) => {
         return sherlockApp.getSpaces();
     });

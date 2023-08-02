@@ -24,8 +24,14 @@ class SherlockSpacesStore extends __SStore {
         Object.assign(this._spaces, spaces);
 
         for (let [spaceUid, space] of Object.entries(this._spaces)) {
-            // __sherlockStores.newSpace(space);
             __sherlockStores.initSpace(space);
+
+            // check if a pool is defined
+            if (space.pool) {
+                console.log('Add');
+                // add the pool to dobby
+                await window.sherlock.addPool(JSON.parse(JSON.stringify(space.pool)));
+            }
         }
     }
 

@@ -37,6 +37,13 @@ sherlock-service {
         flex-grow: 1;
 
         ._label {
+            opacity: 0.6;
+
+            svg * {
+                fill: white;
+            }
+        }
+        ._label:not(:has(svg)) {
             opacity: 0.9;
         }
 
@@ -45,7 +52,32 @@ sherlock-service {
             opacity: 0.3;
 
             &:before {
-                content: '-';
+                content: '｜';
+            }
+        }
+    }
+    ._header {
+        ._result-widget {
+            display: flex;
+            flex-wrap: nowrap;
+            justify-content: flex-end;
+            min-width: 200px;
+            flex-grow: 1;
+            flex-shrink: 0;
+            opacity: 0;
+            pointer-events: none;
+            @sugar.transition fast;
+
+            > div {
+                flex-shrink: 0;
+            }
+        }
+
+        &:hover,
+        &:focus {
+            ._result-widget {
+                opacity: 1;
+                pointer-events: all;
             }
         }
     }

@@ -4,6 +4,7 @@ import __SEventEmitter from '@coffeekraken/s-event-emitter';
 import { __clone, __deepMerge } from '@coffeekraken/sugar/object';
 import { WebSocketServer } from 'ws';
 
+import __SDobbyEcoIndexTask from './tasks/SDobbyEcoIndexTask.js';
 import __SDobbyLighthouseTask from './tasks/SDobbyLighthouseTask.js';
 import __SDobbyResponseTimeTask from './tasks/SDobbyResponseTimeTask.js';
 
@@ -17,6 +18,7 @@ import type {
 } from '../shared/types';
 import { ISDobbyPool } from '../shared/types.js';
 import __SDobbyFsPool from './pools/SDobbyFsPool.js';
+import __SDobbyGunPool from './pools/SDobbyGunPool.js';
 
 /**
  * @name                SDobby
@@ -28,7 +30,6 @@ import __SDobbyFsPool from './pools/SDobbyFsPool.js';
  *
  * Dobby is your little friend that will keep an eye on your services like websites, api's, etc... and produce reports with tools like lighthouse, eco-index, and more.
  *
- * @param           {String}                    uid                     A unique id for your dobby process. ^[a-zA-Z0-9_-]+$
  * @param           {ISDobbySettings}          [settings={}]           Some settings to configure your dobby instance
  *
  * @event           ready               Dispatched when the dobby process is started successfully
@@ -46,6 +47,20 @@ export default class SDobby extends __SClass {
     settings: ISDobbySettings;
 
     /**
+     * @name        registeredPools
+     * @type        Object
+     *
+     * Store all the registered pools classes by type
+     *
+     * @since           2.0.0
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    static registeredPools = {
+        fs: __SDobbyFsPool,
+        gun: __SDobbyGunPool,
+    };
+
+    /**
      * @name        registeredTasks
      * @type        Object
      *
@@ -57,6 +72,7 @@ export default class SDobby extends __SClass {
     static registeredTasks = {
         responseTime: __SDobbyResponseTimeTask,
         lighthouse: __SDobbyLighthouseTask,
+        ecoindex: __SDobbyEcoIndexTask,
     };
 
     /**
@@ -106,15 +122,45 @@ export default class SDobby extends __SClass {
         super(__deepMerge({}, settings ?? {}));
 
         // default pool
-        this.pools.local = new __SDobbyFsPool(
-            <ISDobbyPoolMetas>{
-                uid: 'local',
-                name: 'Local',
-                type: 'fs',
-                settings,
-            },
-            this,
-        );
+        this.pools.local = new __SDobbyFsPool(this, <ISDobbyPoolMetas>{
+            uid: 'local',
+            name: 'Local',
+            type: 'fs',
+        });
+
+        // listen for pools ready
+        this.events.on('pool.ready', (pool: ISDobbyPool) => {
+            this._announcePool(pool);
+        });
+
+        // pool from the settings
+        if (this.settings.pool) {
+            this.addPool(this.settings.pool);
+        }
+    }
+
+    addPool(poolMetas: ISDobbyPoolMetas): void {
+        console.log('_AD', poolMetas);
+
+        if (!this.constructor.registeredPools[poolMetas.type]) {
+            throw new Error(
+                `Sorry but the requested "${
+                    poolMetas.type
+                }" pool type does not exists... Available pools: ${Object.keys(
+                    this.constructor.registeredPools,
+                ).join(',')}`,
+            );
+        }
+
+        console.log('Adding', poolMetas.uid, poolMetas);
+
+        // instanciate pool
+        this.pools[poolMetas.uid] = new this.constructor.registeredPools[
+            poolMetas.type
+        ](this, poolMetas, poolMetas.settings);
+
+        // start the pool
+        this.pools[poolMetas.uid].start();
     }
 
     server(): void {
@@ -271,14 +317,11 @@ export default class SDobby extends __SClass {
      */
     start(): Promise<void | ISDobbyError> {
         return new Promise(async (resolve) => {
-            // listen for pools ready
-            this.events.on('pool.ready', (pool: ISDobbyPool) => {
-                this._announcePool(pool);
-            });
-
             // start each pools
             for (let [poolUid, pool] of Object.entries(this.pools)) {
-                await pool.start();
+                if (!pool.started) {
+                    await pool.start();
+                }
             }
 
             // ready

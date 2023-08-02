@@ -1,0 +1,37 @@
+sherlock-ecoindex-result {
+}
+
+.sh-ecoindex-result-list-widget {
+    display: flex;
+    gap: sugar.margin(20);
+    align-items: center;
+
+    ._grade,
+    ._score,
+    ._size,
+    ._requests,
+    ._water {
+        display: flex;
+        gap: sugar.margin(10);
+        align-items: center;
+
+        &.high {
+            ._value {
+                color: sugar.color(success, text);
+            }
+        }
+        &.medium {
+            ._value {
+                color: sugar.color(accent, text);
+            }
+        }
+        &.low {
+            ._value {
+                color: sugar.color(error, text);
+            }
+        }
+    }
+}
+
+.sh-ecoindex-result {
+}

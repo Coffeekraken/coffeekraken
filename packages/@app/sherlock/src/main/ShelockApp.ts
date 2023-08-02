@@ -2,6 +2,7 @@ import { ISherlockSpace, ISherlockTask } from '../shared/SherlockTypes.js';
 import __SherlockContentfulAdapter from './adapters/contentful/SherlockContentfulAdapter.js';
 import type { ISherlockAdapter } from './adapters/SherlockAdapter.js';
 
+import type { ISDobbyPoolMetas } from '@coffeekraken/s-dobby';
 import __SDobby from '@coffeekraken/s-dobby';
 
 import __path from 'path';
@@ -25,7 +26,7 @@ export default class SherlockApp {
             __fs.mkdirSync(__path.dirname(this._spacesConfigPath));
         }
 
-        // create the "local" dobby instance
+        // create the dobby instance
         this._dobby = new __SDobby.default();
         this._dobby.start();
         this._dobby.server();
@@ -69,6 +70,14 @@ export default class SherlockApp {
     //         resolve(space);
     //     });
     // }
+
+    addPool(poolMetas: ISDobbyPoolMetas): Promise<void> {
+        return new Promise((resolve) => {
+            console.log('A', poolMetas);
+            this._dobby.addPool(poolMetas);
+            resolve();
+        });
+    }
 
     newSpace(space: ISherlockSpace): Promise<Record<string, ISherlockSpace>> {
         return new Promise((resolve, reject) => {

@@ -13,12 +13,14 @@ import type { ISherlockService } from '../../../../../shared/SherlockTypes.js';
 
 import __sherlockStores from '../../stores/SherlockStores';
 
+import __SherlockEcoindexResultComponent from '../results/ecoindex/SherlockEcoindexResultComponent.js';
 import __SherlockLighthouseResultComponent from '../results/lighthouse/SherlockLighthouseResultComponent.js';
 import __SherlockResponseTimeResultComponent from '../results/responseTime/SherlockResponseTimeResultComponent.js';
 
 const resultComponentsByTaskType = {
     responseTime: __SherlockResponseTimeResultComponent,
     lighthouse: __SherlockLighthouseResultComponent,
+    ecoindex: __SherlockEcoindexResultComponent,
 };
 
 @customElement('sherlock-service')
@@ -89,6 +91,25 @@ export class SherlockServiceComponent extends LitElement {
         return resultComponentsByTaskType[result.data.task.type].renderListWidget(result.data);
     }
 
+    _renderGeo(geo: any): any {
+        return html`
+            <div class="geo">
+                    <div class="_item">
+                        <span class="_label">City</span>
+                        <span class="_value">${geo.city?.name ?? '-'}
+                    </div>
+                    <div class="_item">
+                        <span class="_label">Country</span>
+                        <span class="_value">${geo.country?.name ?? '-'}
+                    </div>
+                    <div class="_item">
+                        <span class="_label">Timezone</span>
+                        <span class="_value">${geo.timezone ?? '-'}
+                    </div>
+            </div>
+        `;
+    }
+
     render() {
         const tasks =
             __sherlockStores.current().tasks.getTasks({
@@ -142,7 +163,7 @@ export class SherlockServiceComponent extends LitElement {
                                 .current()
                                 .tasksResults.getTaskResults(taskUid);
 
-                            const lastTaskResult = taskResults[Object.keys(taskResults).at(-1)];
+                            const lastTaskResult = taskResults[Object.keys(taskResults).at(0)];
 
                             let cron,
                                 cronNext,
@@ -195,20 +216,69 @@ export class SherlockServiceComponent extends LitElement {
                                                                         class="fa-solid fa-xmark s-color:error"
                                                                     ></i>
                                                                 `
-                                                              : html`<i
+                                                              : __sherlockStores
+                                                                    .current()
+                                                                    .tasksResults.areTaskResultsLoading(
+                                                                        task.uid,
+                                                                    )
+                                                              ? html`<i
                                                                     class="s-loader:spinner s-tc:accent"
-                                                                ></i>`}
+                                                                ></i>`
+                                                              : html`&nbsp;--&nbsp;`}
                                                       `}
 
                                                 <h1 class="s-typo:h4">${task.name}</h1>
                                             </div>
                                             <div class="s-flex-item:grow"></div>
-                                            <div class="_next s-tooltip-container">
+
+                                            <div class="_result-widget">
+                                                ${task.status !== 'running'
+                                                    ? this.renderResultWidget(lastTaskResult)
+                                                    : ''}
+                                            </div>
+
+                                            <!-- <div class="_next s-tooltip-container">
                                                 <span class="s-font:code">${nextStr}</span>
                                                 <div class="s-tooltip">Next execution time</div>
-                                            </div>
+                                            </div> -->
                                             ${task.status !== 'running'
                                                 ? html`
+                                                      ${lastTaskResult?.data?.geo
+                                                          ? html`
+                                                                <button
+                                                                    class="s-btn:text s-tooltip-container"
+                                                                    @pointerup=${(e) => {}}
+                                                                >
+                                                                    <i
+                                                                        class="fa-solid fa-earth-europe"
+                                                                    ></i>
+                                                                    <div
+                                                                        class="s-tooltip s-color:complementary"
+                                                                    >
+                                                                        ${this._renderGeo(
+                                                                            lastTaskResult.data.geo,
+                                                                        )}
+                                                                    </div>
+                                                                </button>
+                                                            `
+                                                          : ''}
+                                                      ${task.schedule
+                                                          ? html`
+                                                                <button
+                                                                    class="s-btn:text s-tooltip-container"
+                                                                    @pointerup=${(e) => {}}
+                                                                >
+                                                                    <i
+                                                                        class="fa-regular fa-clock"
+                                                                    ></i>
+                                                                    <div
+                                                                        class="s-tooltip s-color:complementary"
+                                                                    >
+                                                                        Change schedule...
+                                                                    </div>
+                                                                </button>
+                                                            `
+                                                          : ''}
                                                       <button
                                                           class="s-btn:text s-tooltip-container"
                                                           confirm="Really?"
@@ -229,22 +299,8 @@ export class SherlockServiceComponent extends LitElement {
                                                               }
                                                           }}
                                                       >
-                                                          ${task.state === 'paused' ||
-                                                          !task.schedule
-                                                              ? html`
-                                                                    <i class="fa-solid fa-play"></i>
-                                                                `
-                                                              : html`
-                                                                    <i
-                                                                        class="fa-solid fa-pause"
-                                                                    ></i>
-                                                                `}
-                                                          <div class="s-tooltip">
-                                                              ${task.state === 'paused'
-                                                                  ? 'Resume'
-                                                                  : 'Pause'}
-                                                              this task
-                                                          </div>
+                                                          <i class="fa-solid fa-play"></i>
+                                                          <div class="s-tooltip">Run this task</div>
                                                       </button>
                                                       <button
                                                           class="s-btn:text s-tooltip-container"
@@ -274,7 +330,7 @@ export class SherlockServiceComponent extends LitElement {
                                                 ${Object.entries(taskResults).map(
                                                     ([taskResultUid, taskResult]) => html`
                                                         <article class="_result">
-                                                            <header class="_result-header">
+                                                            <header class="_result-inner">
                                                                 ${taskState.details
                                                                     ? html`
                                                                           <div

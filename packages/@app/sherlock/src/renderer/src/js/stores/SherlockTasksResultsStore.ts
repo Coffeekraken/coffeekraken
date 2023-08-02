@@ -14,23 +14,26 @@ import __sherlockStores from './SherlockStores';
 class SherlockTasksResultsStore extends __SStore {
     _spaceUid: string;
     _results: any = {};
+    _tasksLoadingStates: Record<string, boolean> = {};
 
     constructor(spaceUid: string) {
         super();
         this._spaceUid = spaceUid;
 
-        __sherlockStores.route.$set('client', async () => {
+        __sherlockStores.route.$set('service', async () => {
             const tasks: Record<string, ISherlockTask> = __sherlockStores.current().tasks.getTasks({
                 client: __sherlockStores.route.client,
             });
 
             for (let [taskUid, task] of Object.entries(tasks)) {
-                const results: Record<string, ISherlockTaskResult> =
-                    await window.sherlock.getTaskResults(this._spaceUid, task.uid);
+                this._tasksLoadingStates[taskUid] = true;
 
-                for (let [taskResultUid, taskResult] of Object.entries(results)) {
-                    this._setTaskResults(taskResult.taskUid, taskResult);
-                }
+                window.sherlock.getTaskResults(this._spaceUid, task.uid).then((results) => {
+                    for (let [taskResultUid, taskResult] of Object.entries(results)) {
+                        this._setTaskResults(taskResult.taskUid, taskResult);
+                    }
+                    this._tasksLoadingStates[taskUid] = false;
+                });
             }
         });
 
@@ -53,6 +56,10 @@ class SherlockTasksResultsStore extends __SStore {
             this._results[taskUid] = {};
         }
         this._results[taskUid][taskResult.uid] = taskResult;
+    }
+
+    areTaskResultsLoading(taskUid: string): boolean {
+        return this._tasksLoadingStates[taskUid];
     }
 
     getTaskResults(taskUid: string): ISherlockTaskResult[] {

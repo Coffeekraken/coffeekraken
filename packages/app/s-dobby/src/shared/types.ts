@@ -3,8 +3,7 @@ import __SEventEmitter from '@coffeekraken/s-event-emitter';
 import __SDobby from '../node/exports';
 
 export interface ISDobbySettings {
-    uid?: string;
-    pool: ISDobbyPool;
+    pool?: ISDobbyPoolMetas;
 }
 export interface ISDobbyTaskStatic {
     settingsSpecs: any;
@@ -29,6 +28,7 @@ export interface ISDobbyPoolEvent {
 export interface ISDobbyPool {
     config: ISDobbyPoolConfig;
     uid: string;
+    started: boolean;
     dobby: __SDobby;
     events: __SEventEmitter;
     metas: ISDobbyPoolMetas;
@@ -50,20 +50,18 @@ export interface ISDobbyClientSettings {
 
 export interface ISDobbyPoolMetas {
     uid: string;
-    type: 'fs' | 'p2p';
+    type: 'fs' | 'gun';
     name: string;
-    settings: ISDobbyFsPoolSettings | ISDobbyP2pPoolSettings;
+    settings: ISDobbyFsPoolSettings | ISDobbyGunPoolSettings;
 }
 
-export interface ISDobbyPoolSettings {
-    uid: string;
-}
+export interface ISDobbyPoolSettings {}
 
 export interface ISDobbyFsPoolSettings extends ISDobbyPoolSettings {
     rootDir: string;
 }
 
-export interface ISDobbyP2pPoolSettings extends ISDobbyPoolSettings {
+export interface ISDobbyGunPoolSettings extends ISDobbyPoolSettings {
     key: string;
     pub: string;
     priv: string;
@@ -147,6 +145,30 @@ export interface ISDobbyResponseTimeTaskSettings {
 }
 export interface ISDobbyResponseTimeTaskResult extends ISDobbyTaskResult {
     responseTime: number;
+}
+
+export interface ISDobbyEcoIndexTaskSettings {
+    url: string;
+}
+
+export interface IEcoIndexResult {
+    width: number;
+    height: number;
+    url: string;
+    size: number;
+    nodes: number;
+    requests: number;
+    grade: 'A' | 'B' | 'C' | 'D' | 'E' | 'F' | 'G';
+    score: number;
+    ges: number;
+    water: number;
+    ecoindex_version: string;
+    date: string;
+    page_type: string;
+}
+
+export interface ISDobbyEcoIndexTaskResult extends ISDobbyTaskResult {
+    ecoindex: IEcoIndexResult;
 }
 
 export interface ISDobbyError {

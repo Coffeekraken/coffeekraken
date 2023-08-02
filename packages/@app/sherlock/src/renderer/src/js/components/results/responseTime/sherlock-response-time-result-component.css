@@ -3,11 +3,17 @@ sherlock-response-time-result {
 
 .sh-response-time-result-list-widget {
     display: flex;
+    flex-wrap: nowrap;
     gap: sugar.margin(20);
     align-items: center;
 
     ._values {
+        display: flex;
+        flex-wrap: nowrap;
+
         ._value {
+            margin-inline-start: sugar.margin(10);
+
             &.low {
                 color: sugar.color(success, text);
             }
@@ -26,15 +32,16 @@ sherlock-response-time-result {
     ._charts {
         display: flex;
         flex-direction: column;
+        flex-shrink: 0;
         gap: sugar.margin(10);
-        width: clamp(100px, 100%, 500px);
+        min-width: 300px;
     }
 
     ._ping,
     ._ttfb {
         background: sugar.color(main, --alpha 0.2);
         width: 100%;
-        height: 4px;
+        height: 1px;
         border-radius: 2px;
         overflow: hidden;
 

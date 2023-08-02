@@ -1,18 +1,18 @@
 // import __postcssSugarPlugin from "@coffeekraken/s-vite-postcss-plugin";
-import __postcssSugarPlugin from '@coffeekraken/s-postcss-sugar-plugin'
-import __autoprefixr from 'autoprefixer'
-import __postcssAtroot from 'postcss-atroot'
-import __postcssNested from 'postcss-nested'
-import __postcssPropertyLookup from 'postcss-property-lookup'
+import __postcssSugarPlugin from '@coffeekraken/s-postcss-sugar-plugin';
+import __autoprefixr from 'autoprefixer';
+import __postcssAtroot from 'postcss-atroot';
+import __postcssNested from 'postcss-nested';
+import __postcssPropertyLookup from 'postcss-property-lookup';
 
-import { defineConfig, externalizeDepsPlugin } from 'electron-vite'
+import { defineConfig, externalizeDepsPlugin } from 'electron-vite';
 
 export default defineConfig({
     main: {
-        plugins: [externalizeDepsPlugin()]
+        plugins: [externalizeDepsPlugin()],
     },
     preload: {
-        plugins: [externalizeDepsPlugin()]
+        plugins: [externalizeDepsPlugin()],
     },
     renderer: {
         // resolve: {
@@ -20,7 +20,7 @@ export default defineConfig({
         //   // extensions: ['.js','']
         // },
         optimizeDeps: {
-            exclude: ['@coffeekraken/s-dobby']
+            exclude: ['@coffeekraken/s-dobby'],
         },
         css: {
             postcss: {
@@ -30,9 +30,9 @@ export default defineConfig({
                     // __postcssImport(),
                     __postcssNested(),
                     __postcssPropertyLookup,
-                    __autoprefixr()
-                ]
-            }
-        }
-    }
-})
+                    __autoprefixr(),
+                ],
+            },
+        },
+    },
+});

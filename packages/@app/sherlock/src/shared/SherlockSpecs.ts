@@ -31,7 +31,7 @@ export const SSherlockNewSpaceSpec = {
 
 export const SSherlockSpaceFsAdapterSpec = {
     type: 'Object',
-    title: 'Fylesystem adapter',
+    title: 'Filesystem adapter',
     description:
         'Filesystem adapter used to store sherlock data (clients, services, etc...) locally',
     props: {

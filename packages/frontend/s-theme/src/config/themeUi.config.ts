@@ -19,14 +19,14 @@ export default (api) => {
              * @name          paddingInline
              * @namespace     config.themeUi.default
              * @type          String
-             * @default      1.5
+             * @default      1.25
              *
              * Specify the default padding inline for ui's
              *
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            paddingInline: 1.5,
+            paddingInline: 1.25,
             /**
              * @name          paddingBlock
              * @namespace     config.themeUi.default
@@ -110,7 +110,7 @@ export default (api) => {
             },
             /**
              * @name          outline
-             * @namespace     config.themeUi.input
+             * @namespace     config.themeUi.default
              * @type          Object
              * @default      [theme.ui.outline.active]
              *

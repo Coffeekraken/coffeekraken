@@ -61,7 +61,7 @@
     ._result {
         position: relative;
 
-        &:nth-child(even) ._result-header {
+        &:nth-child(even) ._result-inner {
             background: sugar.color(main, --lighten 20% --alpha 0.02);
         }
 
@@ -77,10 +77,11 @@
         }
     }
 
-    ._result-header {
+    ._result-inner {
         display: flex;
         align-items: center;
         padding: sugar.padding(20) sugar.padding(30) sugar.padding(20) sugar.padding(50);
+        min-height: 66px;
     }
 
     ._duration {

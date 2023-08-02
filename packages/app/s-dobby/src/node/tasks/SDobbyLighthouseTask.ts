@@ -75,7 +75,7 @@ export default class SDobbyLighthouseTask
 
             const logs: string[] = [];
             const result: ISDobbyLighthouseTaskResult = {};
-            const outputJsonPath = `${__homeDir()}/.dobby/tmp/${Date.now()}.json`;
+            const outputJsonPath = `${__homeDir()}/.dobby/tmp/lighthouse${Date.now()}.json`;
 
             __ensureDirSync(__path.dirname(outputJsonPath));
 
@@ -122,7 +122,14 @@ export default class SDobbyLighthouseTask
                 for (let [auditId, audit] of Object.entries(
                     outputJson.audits,
                 )) {
-                    if (audit.score !== undefined && audit.score <= 0.33) {
+                    if (
+                        [
+                            'largest-contentful-paint',
+                            'max-potential-fid',
+                            'cumulative-layout-shift',
+                        ].includes(auditId) ||
+                        (audit.score !== undefined && audit.score <= 0.33)
+                    ) {
                         result.audits[auditId] = {
                             id: audit.id,
                             title: audit.title,
@@ -167,6 +174,26 @@ export default class SDobbyLighthouseTask
                     `${__homeDir()}/.dobby/lighthouse.json`,
                     JSON.stringify(result, null, 4),
                 );
+
+                // check status
+                let total = 0;
+                for (let [id, category] of Object.entries(
+                    result.categories ?? {},
+                )) {
+                    total += category.score * 100;
+                }
+                const categoriesCount = Object.keys(
+                        result.categories ?? {},
+                    ).length,
+                    globalScore = Math.round(
+                        (100 / (100 * categoriesCount)) * total,
+                    );
+
+                if (globalScore < 33) {
+                    status = 'error';
+                } else if (globalScore < 66) {
+                    status = 'warning';
+                }
 
                 resolve({
                     ...super.end(),

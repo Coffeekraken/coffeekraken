@@ -112,6 +112,20 @@ export default class SDobbyPool extends __SClass {
     }
 
     /**
+     * @name        started
+     * @type        Boolean
+     *
+     * Store if the pool is started or not
+     *
+     * @since           2.0.0
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    _started = false;
+    get started(): boolean {
+        return this._started;
+    }
+
+    /**
      * @name        constructor
      * @type        Function
      * @constructor
@@ -122,8 +136,8 @@ export default class SDobbyPool extends __SClass {
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     constructor(
-        poolMetas: ISDobbyPoolMetas,
         dobby: __SDobby,
+        poolMetas: ISDobbyPoolMetas,
         settings?: ISDobbyPoolSettings,
     ) {
         super(__deepMerge({}, settings ?? {}));
@@ -147,6 +161,9 @@ export default class SDobbyPool extends __SClass {
                 params,
                 SDobbyPoolStartParamsSpecs,
             );
+
+            // pool started
+            this._started = true;
 
             // killing scheduled tasks gracefully
             __onProcessExit(async () => {
@@ -209,7 +226,7 @@ export default class SDobbyPool extends __SClass {
         }
 
         // check the task status to avoid running paused ones
-        if (taskMetas.state !== 'active') {
+        if (taskMetas.schedule && taskMetas.state !== 'active') {
             return;
         }
 

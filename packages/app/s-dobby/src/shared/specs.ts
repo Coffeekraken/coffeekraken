@@ -80,6 +80,20 @@ export const SDobbyLighthouseTaskSpec = {
     },
 };
 
+export const SDobbyEcoIndexTaskSpec = {
+    type: 'Object',
+    title: 'Lighthouse',
+    description: 'Execute ecoindex on a particular website',
+    props: {
+        url: {
+            type: 'String',
+            title: 'Url',
+            description: 'Url of the page to inspect with ecoindex',
+            required: true,
+        },
+    },
+};
+
 export const SDobbyPoolStartParamsSpecs = {
     type: 'Object',
     title: 'Pool start params',
@@ -87,10 +101,10 @@ export const SDobbyPoolStartParamsSpecs = {
     props: {},
 };
 
-export const SDobbyGunJsAdapterSettingsSpecs = {
+export const SDobbyGunPoolSettingsSpecs = {
     type: 'Object',
-    title: 'SDobby Gun JS adapter settings',
-    description: 'Specify the SDobby Gun JS adapter settings',
+    title: 'SDobby Gun JS pool settings',
+    description: 'Specify the SDobby Gun JS pool settings',
     props: {
         key: {
             type: 'String',
@@ -104,4 +118,5 @@ export const SDobbyGunJsAdapterSettingsSpecs = {
 export const SDobbyTasksSpecsByType = {
     responseTime: SDobbyResponseTimeTaskSpec,
     lighthouse: SDobbyLighthouseTaskSpec,
+    ecoindex: SDobbyEcoIndexTaskSpec,
 };

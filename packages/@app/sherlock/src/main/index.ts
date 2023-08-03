@@ -70,8 +70,8 @@ app.whenReady().then(() => {
     ipcMain.handle('spaces:get', (e) => {
         return sherlockApp.getSpaces();
     });
-    ipcMain.handle('spaces:new', (e, space: ISherlockSpace) => {
-        return sherlockApp.newSpace(space);
+    ipcMain.handle('spaces:add', (e, space: ISherlockSpace) => {
+        return sherlockApp.addSpace(space);
     });
     ipcMain.handle('clients:get', (e, spaceUid: string) => {
         return sherlockApp.adapters[spaceUid].getClients();

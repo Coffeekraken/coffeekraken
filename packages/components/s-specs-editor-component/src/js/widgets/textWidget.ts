@@ -6,6 +6,10 @@ import type { ISSpecsEditorWidgetDeps } from '../SSpecsEditorWidget.js';
 import __SSpecsEditorWidget from '../SSpecsEditorWidget.js';
 
 export default class SSpecsEditorComponentTextWidget extends __SSpecsEditorWidget {
+    // specify if the final value has to be just the "value" data
+    // and not an object with the "value" property
+    static unwrapValue = true;
+
     constructor(deps: ISSpecsEditorWidgetDeps) {
         super(deps);
         if (!this.values.value) {

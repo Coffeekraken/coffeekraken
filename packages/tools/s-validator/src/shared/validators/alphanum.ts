@@ -42,11 +42,12 @@ export interface IValidatorEmailSettings extends ISValidatorValidatorSettings {
 
 export const definition = {
     description: 'Validate an alphanum string',
-    type: 'String',
+    type: 'Boolean',
 };
 
 export default function alphanum(
     value: any,
+    validatorValue: boolean,
     settings?: Partial<IValidatorEmailSettings>,
 ): ISValidatorResult {
     let message, valid;

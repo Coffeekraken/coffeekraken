@@ -53,7 +53,7 @@ export interface ISValidatorMinSettings extends ISValidatorValidatorSettings {
 export const definition = {
     description:
         'Validate string, array, object and number using the "min" rule',
-    type: 'String|Array|Object|Number',
+    type: 'Number',
 };
 
 export default function min(

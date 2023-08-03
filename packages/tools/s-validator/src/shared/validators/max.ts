@@ -53,7 +53,7 @@ export interface IValidatorMaxSettings extends ISValidatorValidatorSettings {
 export const definition = {
     description:
         'Validate string, array, object and number using the "max" rule',
-    type: 'String|Array|Object|Number',
+    type: 'Number',
 };
 
 export default function max(

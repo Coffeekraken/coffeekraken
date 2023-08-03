@@ -28,7 +28,6 @@ class SherlockSpacesStore extends __SStore {
 
             // check if a pool is defined
             if (space.pool) {
-                console.log('Add');
                 // add the pool to dobby
                 await window.sherlock.addPool(JSON.parse(JSON.stringify(space.pool)));
             }

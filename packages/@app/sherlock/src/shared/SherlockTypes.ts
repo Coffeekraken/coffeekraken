@@ -12,8 +12,11 @@ export interface ISherlockSpace {
     description: string;
     image: ISherlockImage;
     adapter: {
-        type: 'fs' | 'contentful';
-        settings: ISherlockSpaceFsAdapterSettings | ISherlockContentfulAdapterSettings;
+        type: 'fs' | 'gun' | 'contentful';
+        settings:
+            | ISherlockSpaceFsAdapterSettings
+            | ISherlockSpaceGunAdapterSettings
+            | ISherlockSpaceContentfulAdapterSettings;
     };
 }
 
@@ -21,7 +24,12 @@ export interface ISherlockSpaceFsAdapterSettings {
     folder: string;
 }
 
-export interface ISherlockContentfulAdapterSettings {
+export interface ISherlockSpaceGunAdapterSettings {
+    name: string;
+    existing?: string;
+}
+
+export interface ISherlockSpaceContentfulAdapterSettings {
     space: string;
     accessToken: string;
     managementAccessToken: string;

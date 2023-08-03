@@ -3,10 +3,8 @@
     "view": "views.components.card",
     "values": {
         "direction": {
-            "value": {
-                "id": "vertical",
-                "value": "vertical"
-            }
+            "id": "vertical",
+            "value": "vertical"
         },
         "spacing": {
             "id": "20",
@@ -16,11 +14,9 @@
         },
         "cta": {
             "color": {
-                "value": {
-                    "id": "accent",
-                    "name": "Accent",
-                    "value": "accent"
-                }
+                "id": "accent",
+                "name": "Accent",
+                "value": "accent"
             },
             "link": {
                 "text": "Click me!",
@@ -28,18 +24,10 @@
                 "title": "Click me!"
             }
         },
-        "id": {
-            "value": "s-4b562aec-8b5d-4598-b9fb-de557a2baf24"
-        },
-        "title": {
-            "value": "jbhwbfnkbefwkjnwefkjbnf"
-        },
-        "intro": {
-            "value": "wwuf zhweifh wehfoh"
-        },
-        "text": {
-            "value": "wiuefh woeiuf woef hwiehf i"
-        },
+        "id": "s-4b562aec-8b5d-4598-b9fb-de557a2baf24",
+        "title": "jbhwbfnkbefwkjnwefkjbnf",
+        "intro": "wwuf zhweifh wehfoh",
+        "text": "wiuefh woeiuf woef hwiehf i",
         "image": {
             "url": "/tmp/upload/buzzbrothers dark-2200.png"
         }

@@ -36,7 +36,7 @@ export default {
     space(spaceUid: string): ISherlockSpaceStores {
         return this._spaces[spaceUid];
     },
-    newSpace(space: ISherlockSpace): void | ISherlockSpaceStores {
+    addSpace(space: ISherlockSpace): void | ISherlockSpaceStores {
         if (this._spaces[space.uid]) {
             return;
         }

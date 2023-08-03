@@ -45,11 +45,12 @@ export interface IValidatorIntegerSettings
 
 export const definition = {
     description: 'Validate an integer',
-    type: 'number',
+    type: 'Boolean',
 };
 
 export default function integer(
     value: any,
+    validatorValue: boolean,
     settings?: Partial<IValidatorIntegerSettings>,
 ): ISValidatorResult {
     let message, valid;

@@ -2,6 +2,7 @@
     "compilerOptions": {
         "moduleResolution": "node",
         "sourceMap": false,
-        "types": ["vitest/globals"]
+        "types": ["vitest/globals"],
+        "lib": ["esnext", "dom"]
     }
 }

@@ -4,35 +4,35 @@
     <div class="_type">
         <h1 class="_title">String</h1>
         <div class="_value">
-            <p class="s-typo:p">{{ string.value }}</p>
+            <p class="s-typo:p">{{ string }}</p>
         </div>
     </div>
 
     <div class="_type">
         <h1 class="_title">Text</h1>
         <div class="_value">
-            <p class="s-typo:p">{{ text.value }}</p>
+            <p class="s-typo:p">{{ text }}</p>
         </div>
     </div>
 
     <div class="_type">
         <h1 class="_title">Integer</h1>
         <div class="_value">
-            <p class="s-typo:p">{{ integer.value }}</p>
+            <p class="s-typo:p">{{ integer }}</p>
         </div>
     </div>
 
     <div class="_type">
         <h1 class="_title">Number</h1>
         <div class="_value">
-            <p class="s-typo:p">{{ number.value }}</p>
+            <p class="s-typo:p">{{ number }}</p>
         </div>
     </div>
 
     <div class="_type">
         <h1 class="_title">Select</h1>
         <div class="_value">
-            {% for value in select.value %}
+            {% for value in select %}
                 <dl class="_list">
                     <dt>Id: {{ value.id }}</dt>
                     <dt>Name: {{ value.name }}</dt>
@@ -45,7 +45,7 @@
     <div class="_type">
         <h1 class="_title">Checkbox</h1>
         <div class="_value">
-            {% for value in checkbox.value %}
+            {% for value in checkbox %}
                 <dl class="_list">
                     <dt>Id: {{ value.id }}</dt>
                     <dt>Name: {{ value.name }}</dt>
@@ -58,14 +58,14 @@
     <div class="_type">
         <h1 class="_title">Boolean</h1>
         <div class="_value">
-            <p class="s-typo:p">{{ boolean.value ? 'true' : 'false' }}</p>
+            <p class="s-typo:p">{{ boolean ? 'true' : 'false' }}</p>
         </div>
     </div>
 
     <div class="_type">
         <h1 class="_title">Switch</h1>
         <div class="_value">
-            <p class="s-typo:p">{{ switch.value ? 'true' : 'false' }}</p>
+            <p class="s-typo:p">{{ switch ? 'true' : 'false' }}</p>
         </div>
     </div>
 

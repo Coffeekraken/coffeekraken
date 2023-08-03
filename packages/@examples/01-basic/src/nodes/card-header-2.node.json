@@ -2,20 +2,12 @@
     "uid": "card-header-2",
     "view": "views.components.card",
     "values": {
-        "title": {
-            "value": "Card title"
-        },
-        "intro": {
-            "value": "Lorem ipsum dolor sit amet, dolor laboris cupidatat cupidatat laboris velit ex adipisicing enim do"
-        },
-        "text": {
-            "value": "Lorem ipsum dolor sit amet, aute ipsum duis tempor incididunt sint est irure magna amet est elit ad ipsum laborum cupidatat cupidatat minim sint occaecat"
-        },
+        "title": "Card title",
+        "intro": "Lorem ipsum dolor sit amet, dolor laboris cupidatat cupidatat laboris velit ex adipisicing enim do",
+        "text": "Lorem ipsum dolor sit amet, aute ipsum duis tempor incididunt sint est irure magna amet est elit ad ipsum laborum cupidatat cupidatat minim sint occaecat",
         "direction": {
-            "value": {
-                "id": "vertical",
-                "value": "vertical"
-            }
+            "id": "vertical",
+            "value": "vertical"
         },
         "image": {
             "url": "/tmp/upload/dark-8099.png"
@@ -26,11 +18,9 @@
         },
         "cta": {
             "color": {
-                "value": {
-                    "id": "accent",
-                    "name": "Accent",
-                    "value": "accent"
-                }
+                "id": "accent",
+                "name": "Accent",
+                "value": "accent"
             },
             "link": {
                 "text": "Click me!",
@@ -38,8 +28,6 @@
                 "title": "Click me!"
             }
         },
-        "id": {
-            "value": "s-7991e55a-783a-453c-b039-d03034b8f501"
-        }
+        "id": "s-7991e55a-783a-453c-b039-d03034b8f501"
     }
 }

@@ -45,11 +45,12 @@ export interface IValidatorIsoTimeSettings
 
 export const definition = {
     description: 'Validate an iso time string',
-    type: 'String',
+    type: 'Boolean',
 };
 
 export default function isoTime(
     value: any,
+    validatorValue: boolean,
     settings?: Partial<IValidatorIsoTimeSettings>,
 ): ISValidatorResult {
     let message, valid;

@@ -6,7 +6,6 @@ import { SDobbyTaskSpec, SDobbyTasksSpecsByType } from '@coffeekraken/s-dobby';
 import type { ISherlockTask } from '../../../../../shared/SherlockTypes';
 
 import __sherlockStores from '../../stores/SherlockStores.js';
-import __unwrapSpecsValues from '../../utils/unwrapSpecsValues';
 
 import type {} from '../../../../../shared/SherlockTypes';
 
@@ -69,7 +68,7 @@ export class SherlockTaskSpaceComponent extends LitElement {
                                       .values=${{}}
                                       .specs=${this._settingsSpecs}
                                       @s-specs-editor.save=${(e) => {
-                                          this._saveSettings(__unwrapSpecsValues(e.detail.values));
+                                          this._saveSettings(e.detail.values);
                                       }}
                                   ></s-specs-editor>
                               `
@@ -80,7 +79,7 @@ export class SherlockTaskSpaceComponent extends LitElement {
                                       .specs=${SDobbyTaskSpec}
                                       i18n.save-button="Continue"
                                       @s-specs-editor.save=${(e) => {
-                                          this._saveMetas(__unwrapSpecsValues(e.detail.values));
+                                          this._saveMetas(e.detail.values);
                                       }}
                                   ></s-specs-editor>
                               `}

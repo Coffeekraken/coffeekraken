@@ -19,6 +19,7 @@ export const SSherlockNewSpaceSpec = {
             type: 'Text',
             title: 'Description',
             description: 'Space description',
+            default: 'coco',
         },
         image: {
             type: 'Image',
@@ -41,6 +42,21 @@ export const SSherlockSpaceFsAdapterSpec = {
             description: 'Specify a folder where to store the sherlock data for this space',
             readonly: true,
             required: true,
+        },
+    },
+};
+
+export const SSherlockSpaceGunAdapterSpec = {
+    type: 'Object',
+    title: 'Gun adapter (p2p)',
+    description:
+        'Gun(.js) is a decentralized realtime database that will allows you to sync your space clients, services, etc... as well as the ability to dispatch tasks to other members of your space. It can also be a server running the Sherlock server',
+    props: {
+        existing: {
+            type: 'String',
+            title: 'Existing gun space id',
+            description:
+                'Paste here an existing gun space id to join it instead of creating anoter',
         },
     },
 };

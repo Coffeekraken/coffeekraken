@@ -51,11 +51,9 @@
             "placeholder": "Choose something...",
             "multiple": false,
             "default": {
-                "value": {
-                    "id": "value-2",
-                    "name": "Option #2",
-                    "value": "value 2"
-                }
+                "id": "value-2",
+                "name": "Option #2",
+                "value": "value 2"
             },
             "options": [
                 {

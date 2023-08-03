@@ -8,6 +8,10 @@ import { __i18n } from '@coffeekraken/s-i18n';
 import { __SCheckbox } from '@specim3n/types/utils';
 
 export default class SSpecsEditorComponentCheckboxWidget extends __SSpecsEditorWidget {
+    // specify if the final value has to be just the "value" data
+    // and not an object with the "value" property
+    static unwrapValue = true;
+
     _checkbox: __SCheckbox;
 
     constructor(deps: ISSpecsEditorWidgetDeps) {

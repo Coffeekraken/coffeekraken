@@ -43,11 +43,12 @@ export interface IValidatorEmailSettings extends ISValidatorValidatorSettings {
 
 export const definition = {
     description: 'Validate a credit card string',
-    type: 'String',
+    type: 'Boolean',
 };
 
 export default function creditCard(
     value: any,
+    validatorValue: boolean,
     settings?: Partial<IValidatorEmailSettings>,
 ): ISValidatorResult {
     let message, valid;

@@ -9,11 +9,9 @@
             "title": "Layout",
             "description": "Section layout",
             "default": {
-                "value": {
-                    "id": "right",
-                    "name": "Image right",
-                    "value": "12"
-                }
+                "id": "right",
+                "name": "Image right",
+                "value": "12"
             },
             "options": [
                 {

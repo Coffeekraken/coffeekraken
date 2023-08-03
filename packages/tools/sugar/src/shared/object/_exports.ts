@@ -8,6 +8,7 @@ import __deepFilter from './deepFilter.js';
 import __deepMap from './deepMap.js';
 import __deepMerge from './deepMerge.js';
 import __deepProxy from './deepProxy.js';
+import __deepUnwrap from './deepUnwrap.js';
 import __deepize from './deepize.js';
 import __delete from './delete.js';
 import __deleteProperty from './deleteProperty.js';
@@ -41,6 +42,7 @@ export {
     __deepMap,
     __deepMerge,
     __deepProxy,
+    __deepUnwrap,
     __deepize,
     __delete,
     __deleteProperty,

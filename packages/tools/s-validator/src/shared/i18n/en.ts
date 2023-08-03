@@ -66,11 +66,12 @@ export default {
     hex: {
         string: 'Must be a valid hex color',
     },
+    type: {
+        string: 'Must be of type %type',
+    },
     password: {
         weak: '',
-        medium:
-            'Must be >=6 characters, at least 1 lowercase/uppercase/special character',
-        strong:
-            'Must be >=8 characters, at least 1 lowercase/uppercase/digit/special character',
+        medium: 'Must be >=6 characters, at least 1 lowercase/uppercase/special character',
+        strong: 'Must be >=8 characters, at least 1 lowercase/uppercase/digit/special character',
     },
 };

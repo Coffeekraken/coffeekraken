@@ -22,7 +22,7 @@ export class SherlockSpacesComponent extends LitElement {
         });
     }
 
-    newSpace(): void {
+    addSpace(): void {
         __sherlockStores.route.setRoute({
             popup: 'newSpace',
         });
@@ -57,7 +57,7 @@ export class SherlockSpacesComponent extends LitElement {
                 <li
                     class="_space"
                     @pointerup=${(e) => {
-                        this.newSpace();
+                        this.addSpace();
                     }}
                 >
                     <figure class="_figure">

@@ -43,11 +43,12 @@ export interface IValidatorHexSettings extends ISValidatorValidatorSettings {
 
 export const definition = {
     description: 'Validate a hexadecimal string',
-    type: 'String',
+    type: 'Boolean',
 };
 
 export default function hex(
     value: any,
+    validatorValue: boolean,
     settings?: Partial<IValidatorHexSettings>,
 ): ISValidatorResult {
     let message, valid;

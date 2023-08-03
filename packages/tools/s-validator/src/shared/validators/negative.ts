@@ -45,11 +45,12 @@ export interface IValidatorNegativeSettings
 
 export const definition = {
     description: 'Validate an negative number',
-    type: 'number',
+    type: 'Boolean',
 };
 
 export default function negative(
     value: any,
+    validatorValue: boolean,
     settings?: Partial<IValidatorNegativeSettings>,
 ): ISValidatorResult {
     let message, valid;

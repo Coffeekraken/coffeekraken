@@ -1,17 +1,19 @@
 import { LitElement, css, html } from 'lit';
 import { customElement, state } from 'lit/decorators.js';
+
+import { __base64 } from '@coffeekraken/sugar/crypto';
+
 import {
     SSherlockNewSpaceSpec,
     SSherlockSpaceContentfulAdapterSpec,
     SSherlockSpaceFsAdapterSpec,
+    SSherlockSpaceGunAdapterSpec,
 } from '../../../../../shared/SherlockSpecs';
-
-import __unwrapSpecsValues from '../../utils/unwrapSpecsValues';
 
 import type {
     ISherlockSpace,
-    ISherlockSpaceContentfulAdapter,
-    ISherlockSpaceFsAdapter,
+    ISherlockSpaceContentfulAdapterSettings,
+    ISherlockSpaceFsAdapterSettings,
 } from '../../../../../shared/SherlockTypes';
 
 @customElement('sherlock-new-space')
@@ -19,32 +21,49 @@ export class SherlockNewSpaceComponent extends LitElement {
     static styles = css``;
 
     @state()
-    _step: 'metas' | 'adapter' = 'metas';
+    _step: 'metas' | 'adapter' = 'adapter';
 
     @state()
-    _adapter: 'fs' | 'contentful' = 'fs';
+    _adapter: 'fs' | 'contentful' | 'gun' = 'fs';
 
-    _space: ISherlockSpace;
+    @state()
+    _error: string;
+
+    _space: ISherlockSpace = {};
 
     constructor() {
         super();
     }
 
-    async _saveMetas(data: ISherlockSpace): void {
+    _validateGunExisting(uid: string): void {
+        console.log('ui', uid);
+
+        // console.log('en', __base64.encrypt(uid));
+
+        const decoded = __base64.decrypt(uid);
+        if (decoded.split(':').length !== 3) {
+            // invalid key
+            this._error = `This key is not valid...`;
+        }
+
+        console.log('de', decoded);
+    }
+
+    _saveMetas(data: ISherlockSpace): void {
         this._space = data;
-        this._step = 'adapter';
     }
 
     async _saveAdapter(
-        type: 'fs' | 'contentful',
-        values: ISherlockSpaceFsAdapter | ISherlockSpaceContentfulAdapter,
+        type: 'fs' | 'contentful' | 'gun',
+        settings: ISherlockSpaceFsAdapterSettings | ISherlockSpaceContentfulAdapterSettings,
     ): Promise<void> {
+        return;
         // save the adapter settings in the space directly
         this._space.adapter = {
             type,
-            settings: values,
+            settings,
         };
-        const res = await window.sherlock.newSpace(this._space);
+        const res = await window.sherlock.addSpace(this._space);
     }
 
     render() {
@@ -64,6 +83,14 @@ export class SherlockNewSpaceComponent extends LitElement {
                                           }}
                                       >
                                           Filesystem
+                                      </li>
+                                      <li
+                                          class="${this._adapter === 'gun' ? 'active' : ''}"
+                                          @click=${(e) => {
+                                              this._adapter = 'gun';
+                                          }}
+                                      >
+                                          Gun (p2p)
                                       </li>
                                       <li
                                           class="${this._adapter === 'contentful' ? 'active' : ''}"
@@ -86,10 +113,23 @@ export class SherlockNewSpaceComponent extends LitElement {
                                                     }}
                                                     .specs=${SSherlockSpaceFsAdapterSpec}
                                                     @s-specs-editor.save=${(e) => {
-                                                        this._saveAdapter(
-                                                            'fs',
-                                                            __unwrapSpecsValues(e.detail.values),
+                                                        this._saveAdapter('fs', e.detail.values);
+                                                    }}
+                                                ></s-specs-editor>
+                                            `
+                                          : this._adapter === 'gun'
+                                          ? html`
+                                                <s-specs-editor
+                                                    uid="fs-adapter"
+                                                    .values=${{}}
+                                                    .specs=${SSherlockSpaceGunAdapterSpec}
+                                                    @s-specs-editor.change=${(e) => {
+                                                        this._validateGunExisting(
+                                                            e.detail.values.existing,
                                                         );
+                                                    }}
+                                                    @s-specs-editor.save=${(e) => {
+                                                        this._saveAdapter('fs', e.detail.values);
                                                     }}
                                                 ></s-specs-editor>
                                             `
@@ -102,7 +142,7 @@ export class SherlockNewSpaceComponent extends LitElement {
                                                     @s-specs-editor.save=${(e) => {
                                                         this._saveAdapter(
                                                             'contentful',
-                                                            __unwrapSpecsValues(e.detail.values),
+                                                            e.detail.values,
                                                         );
                                                     }}
                                                 ></s-specs-editor>
@@ -115,11 +155,13 @@ export class SherlockNewSpaceComponent extends LitElement {
                     : html`
                           <s-specs-editor
                               uid="new-space"
-                              .values=${{}}
+                              .values=${{
+                                  uid: 'hello',
+                              }}
                               i18n.save-button="Continue"
                               .specs=${SSherlockNewSpaceSpec}
                               @s-specs-editor.save=${(e) => {
-                                  this._saveMetas(__unwrapSpecsValues(e.detail.values));
+                                  this._saveMetas(e.detail.values);
                               }}
                           ></s-specs-editor>
                       `}

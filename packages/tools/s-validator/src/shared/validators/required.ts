@@ -47,6 +47,7 @@ export const definition = {
 
 export default function required(
     value: any,
+    validatorValue: boolean,
     settings?: Partial<IValidatorEmailSettings>,
 ): ISValidatorResult {
     let message, valid;

@@ -13,14 +13,14 @@
         <div class="_layout">
             <div>
                 <div s-appear in="left" delay="500">
-                    {% if title.value %}
+                    {% if title %}
                         <h1 class="s-typo:h2 s-mbe:40">
-                            {{ title.value|raw }}
+                            {{ title|raw }}
                         </h1>
                     {% endif %}
-                    {% if text.value %}
+                    {% if text %}
                         <div class="s-rhythm:vertical">
-                            {{ text.value|raw }}
+                            {{ text|raw }}
                         </div>
                     {% endif %}
                     {% if cta %}

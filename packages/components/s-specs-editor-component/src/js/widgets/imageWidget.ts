@@ -50,7 +50,6 @@ export default class SSpecsEditorComponentImageWidget extends __SSpecsEditorWidg
                                   ?multiple=${this.settings.multiple}
                                   class="s-bare"
                                   @s-dropzone.file=${(e) => {
-                                      console.log('e.', e.detail);
                                       this.setValue(e.detail);
                                   }}
                               ></s-dropzone>

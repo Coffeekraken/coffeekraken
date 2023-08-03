@@ -10,6 +10,10 @@ import { __uniqid } from '@coffeekraken/sugar/string';
 import type { ISSpecsEditorComponentRenderLabelSettings } from './SSpecsEditorComponent.js';
 import __SSpecsEditorComponent from './SSpecsEditorComponent.js';
 
+import { __isPlainObject } from '@coffeekraken/sugar/is';
+
+import __SSpecs from '@coffeekraken/s-specs';
+
 import { __wait } from '@coffeekraken/sugar/datetime';
 
 import { html } from 'lit';
@@ -106,7 +110,13 @@ export default class SSpecsEditorWidget {
 
         // handle default
         if (!Object.keys(this._values).length && this.propObj.default) {
-            Object.assign(this._values, this.propObj.default);
+            if (__isPlainObject(this.propObj.default)) {
+                Object.assign(this._values, this.propObj.default);
+            } else {
+                Object.assign(this._values, {
+                    value: this.propObj.default,
+                });
+            }
         }
     }
 
@@ -299,6 +309,31 @@ export default class SSpecsEditorWidget {
         // reset errors and warnings
         this._errors = [];
         this._warnings = [];
+
+        console.log('VB', values, this.propObj);
+
+        let valueToValidate = values;
+        if (
+            Object.keys(valueToValidate).length === 1 &&
+            valueToValidate.value !== undefined
+        ) {
+            valueToValidate = valueToValidate.value;
+        }
+
+        const path = this.path;
+        const objToValidate = {
+            [path.at(-1)]: valueToValidate,
+        };
+        const specObj = {
+            props: {
+                [path.at(1)]: this.propObj,
+            },
+        };
+
+        console.log('Ob', objToValidate, specObj);
+
+        const res = __SSpecs.validate(objToValidate, specObj);
+        console.log('RESSS', res);
 
         // validate new values
         const validateResult = this.validate(values) ?? {};

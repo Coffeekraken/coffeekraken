@@ -44,11 +44,12 @@ export interface IValidatorNumberSettings extends ISValidatorValidatorSettings {
 
 export const definition = {
     description: 'Validate an number',
-    type: 'number',
+    type: 'Boolean',
 };
 
 export default function number(
     value: any,
+    validatorValue: boolean,
     settings?: Partial<IValidatorNumberSettings>,
 ): ISValidatorResult {
     let message, valid;

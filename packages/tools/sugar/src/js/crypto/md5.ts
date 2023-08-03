@@ -1,31 +1,31 @@
 // @ts-nocheck
 
-import sha256 from 'crypto-js/sha256.js';
-import parse from '../string/parse.js';
-import toString from '../string/toString.js';
+import { md5 } from 'blueimp-md5';
+import parse from '../../shared/string/parse.js';
+import toString from '../../shared/string/toString.js';
 
 const __encryptedMessages = {};
 
 /**
- * @name            sha256
- * @namespace            shared.crypto
+ * @name            md5
+ * @namespace            js.crypto
  * @type            Object
  * @platform          js
  * @platform          node
  * @status              beta
  *
- * Expose two function named "encrypt" and "decrypt" that you can use to process your content using the sha256 algorithm
+ * Expose two function named "encrypt" and "decrypt" that you can use to process your content using the md5 algorithm
  *
- * @snippet         __sha256.encrypt($1)
+ * @snippet         __md5.encrypt($1)
  *
  * @example         js
- * import { __sha256 } from '@coffeekraken/sugar/crypto';
- * __sha256.encrypt('hello world');
+ * import { __md5 } from '@coffeekraken/sugar/crypto';
+ * __md5.encrypt('hello world');
  *
  * @todo        interface
  * @todo        doc
  *
- * @since       2.0.0
+ * @since         2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 export default {
@@ -42,7 +42,7 @@ export default {
      */
     encrypt: function (message) {
         if (typeof message !== 'string') message = toString(message);
-        const string = sha256(message).toString();
+        const string = md5(message);
         __encryptedMessages[string] = message;
         return string;
     },

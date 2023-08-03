@@ -73,13 +73,14 @@ export default class SherlockApp {
 
     addPool(poolMetas: ISDobbyPoolMetas): Promise<void> {
         return new Promise((resolve) => {
+            return;
             console.log('A', poolMetas);
             this._dobby.addPool(poolMetas);
             resolve();
         });
     }
 
-    newSpace(space: ISherlockSpace): Promise<Record<string, ISherlockSpace>> {
+    addSpace(space: ISherlockSpace): Promise<Record<string, ISherlockSpace>> {
         return new Promise((resolve, reject) => {
             // read the current spaces config
             let spaces = {};

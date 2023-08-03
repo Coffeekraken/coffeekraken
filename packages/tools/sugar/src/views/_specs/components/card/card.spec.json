@@ -25,10 +25,8 @@
             "title": "Direction",
             "description": "Specify the direction of the card. Horizontal, vertical, etc...",
             "default": {
-                "value": {
-                    "id": "vertical",
-                    "value": "vertical"
-                }
+                "id": "vertical",
+                "value": "vertical"
             },
             "options": [
                 {

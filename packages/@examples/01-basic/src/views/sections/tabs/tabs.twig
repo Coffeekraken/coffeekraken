@@ -6,8 +6,8 @@
             <div s-appear in="left" delay="400">
                 <div class="_tabs">
                     {% for tab in tabs %}
-                        <a class="_tabs-item" href="#{{ tab.id.value }}" s-activate group="tabs">
-                            {{ tab.title.value }}
+                        <a class="_tabs-item" href="#{{ tab.id }}" s-activate group="tabs">
+                            {{ tab.title }}
                         </a>
                     {% endfor %}
                 </div>
@@ -16,11 +16,11 @@
             <div s-appear in="right" delay="600">
 
                 {% for tab in tabs %}
-                    <div class="_content" id="{{ tab.id.value }}">
-                        <h1 class="s-typo:h3 s-mbe:30">{{ tab.title.value|raw }}</h1>
-                        <p class="s-typo:lead s-mbe:20 s-tc:accent">{{ tab.intro.value|raw }}</p>
-                        <p class="s-typo:p">{{ tab.text.value|raw }}</p>
-                        <a class="s-btn s-mbs:40 s-color:{{ tab.cta.color.value.value }}" href="{{ tab.cta.link.url }}" {% if tab.cta.link.newWindow %} target="_blank" {% endif %}>
+                    <div class="_content" id="{{ tab.id }}">
+                        <h1 class="s-typo:h3 s-mbe:30">{{ tab.title|raw }}</h1>
+                        <p class="s-typo:lead s-mbe:20 s-tc:accent">{{ tab.intro|raw }}</p>
+                        <p class="s-typo:p">{{ tab.text|raw }}</p>
+                        <a class="s-btn s-mbs:40 s-color:{{ tab.cta.color.value }}" href="{{ tab.cta.link.url }}" {% if tab.cta.link.newWindow %} target="_blank" {% endif %}>
                             {{ tab.cta.link.text }}
                         </a>
                     </div>

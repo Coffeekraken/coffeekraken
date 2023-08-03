@@ -1,13 +1,11 @@
 // @ts-nocheck
-
 import AES from 'crypto-js/aes.js';
 import utf8 from 'crypto-js/enc-utf8.js';
-import parse from '../string/parse.js';
-import toString from '../string/toString.js';
-
+import parse from '../../shared/string/parse.js';
+import toString from '../../shared/string/toString.js';
 /**
  * @name            aes
- * @namespace            shared.crypto
+ * @namespace            node.crypto
  * @type            Object
  * @platform          js
  * @platform          node
@@ -41,10 +39,10 @@ export default {
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     encrypt: function (message, key = 'coffeekraken.sugar.crypto.aes') {
-        if (typeof message !== 'string') message = toString(message);
+        if (typeof message !== 'string')
+            message = toString(message);
         return AES.encrypt(message, key).toString();
     },
-
     /**
      * @name        decrypt
      * @type        Function
@@ -62,3 +60,4 @@ export default {
         return parse(value);
     },
 };
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7QUFFZCxPQUFPLEdBQUcsTUFBTSxrQkFBa0IsQ0FBQztBQUNuQyxPQUFPLElBQUksTUFBTSx1QkFBdUIsQ0FBQztBQUN6QyxPQUFPLEtBQUssTUFBTSw4QkFBOEIsQ0FBQztBQUNqRCxPQUFPLFFBQVEsTUFBTSxpQ0FBaUMsQ0FBQztBQUV2RDs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBcUJHO0FBQ0gsZUFBZTtJQUNYOzs7Ozs7Ozs7OztPQVdHO0lBQ0gsT0FBTyxFQUFFLFVBQVUsT0FBTyxFQUFFLEdBQUcsR0FBRywrQkFBK0I7UUFDN0QsSUFBSSxPQUFPLE9BQU8sS0FBSyxRQUFRO1lBQUUsT0FBTyxHQUFHLFFBQVEsQ0FBQyxPQUFPLENBQUMsQ0FBQztRQUM3RCxPQUFPLEdBQUcsQ0FBQyxPQUFPLENBQUMsT0FBTyxFQUFFLEdBQUcsQ0FBQyxDQUFDLFFBQVEsRUFBRSxDQUFDO0lBQ2hELENBQUM7SUFFRDs7Ozs7Ozs7Ozs7T0FXRztJQUNILE9BQU8sRUFBRSxVQUFVLE9BQU8sRUFBRSxHQUFHLEdBQUcsK0JBQStCO1FBQzdELE1BQU0sS0FBSyxHQUFHLEdBQUcsQ0FBQyxPQUFPLENBQUMsT0FBTyxFQUFFLEdBQUcsQ0FBQyxDQUFDLFFBQVEsQ0FBQyxJQUFJLENBQUMsQ0FBQztRQUN2RCxPQUFPLEtBQUssQ0FBQyxLQUFLLENBQUMsQ0FBQztJQUN4QixDQUFDO0NBQ0osQ0FBQyJ9

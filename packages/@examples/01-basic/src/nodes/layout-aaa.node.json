@@ -26,9 +26,7 @@
             }
         },
         "view": "views.bare.layout",
-        "id": {
-            "value": "s-bf135aa7-2f83-4976-acd2-132d24caf225"
-        },
+        "id": "s-bf135aa7-2f83-4976-acd2-132d24caf225",
         "spaces": {
             "media": {
                 "wide": {

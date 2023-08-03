@@ -1,16 +1,12 @@
-import __SClass from '@coffeekraken/s-class';
-import __SInterface from '@coffeekraken/s-interface';
-import __SSugarConfig from '@coffeekraken/s-sugar-config';
-import { __parseArgs } from '@coffeekraken/sugar/cli';
 import { __readJsonSync } from '@coffeekraken/sugar/fs';
+import { __deepMap, __deepMerge, __get } from '@coffeekraken/sugar/object';
+
+import type { ISSpecsSettings } from '../shared/SSpecs.js';
+import __SSpecs from '../shared/SSpecs.js';
+
+import __SSugarConfig from '@coffeekraken/s-sugar-config';
 import { __isPlainObject } from '@coffeekraken/sugar/is';
-import {
-    __deepMap,
-    __deepMerge,
-    __get,
-    __set,
-    __toPlainObject,
-} from '@coffeekraken/sugar/object';
+
 import { __packageRootDir } from '@coffeekraken/sugar/path';
 import __fs from 'fs';
 import * as __glob from 'glob';
@@ -59,7 +55,7 @@ import __path from 'path';
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 
-export interface ISSpecsSettings {
+export interface ISSpecsNodeSettings extends ISSpecsSettings {
     namespaces: Record<string, string[]>;
     read?: Partial<ISSpecsReadSettings>;
     previewUrl?: Function;
@@ -80,7 +76,7 @@ export interface ISSpecsListResult {
     read: Function;
 }
 
-export default class SSpecs extends __SClass {
+export default class SSpecs extends __SSpecs {
     /**
      * @name            fromInterface
      * @type            Function
@@ -178,50 +174,6 @@ export default class SSpecs extends __SClass {
         return specJson;
     }
 
-    static apply(what: string | any, spec: any): any {
-        if (!spec) {
-            throw new Error(
-                `[SSpecs.apply] You MUST specify a valid spec object as the second parameter...`,
-            );
-        }
-
-        if (typeof what === 'string') {
-            what = __parseArgs(what);
-        }
-        const specsData = __deepMerge(this.extractDefaults(spec), what);
-
-        // @TODO            implement the "required" checks, etc...
-
-        return specsData;
-    }
-
-    static extractDefaults(specs: any): any {
-        let defaults = {};
-
-        function processProps(props: any, path: string[]): any {
-            for (let [prop, propObj] of Object.entries(props)) {
-                if (propObj.default !== undefined) {
-                    __set(
-                        defaults,
-                        [...path, prop].filter((l) => l !== 'props'),
-                        propObj.default,
-                    );
-                }
-                if (propObj.props) {
-                    processProps(propObj.props, [...path, prop, 'props']);
-                }
-            }
-        }
-
-        processProps(specs.props ?? {}, []);
-
-        if (specs.default) {
-            defaults = __deepMerge(defaults, specs.default);
-        }
-
-        return defaults;
-    }
-
     /**
      * @name        constructor
      * @type        Function
@@ -231,7 +183,7 @@ export default class SSpecs extends __SClass {
      * @since       2.0.0
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    constructor(settings?: Partial<ISSpecsSettings>) {
+    constructor(settings?: Partial<ISSpecsNodeSettings>) {
         super(
             __deepMerge(
                 {

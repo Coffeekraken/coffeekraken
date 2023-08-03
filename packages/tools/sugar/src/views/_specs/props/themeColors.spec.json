@@ -41,11 +41,9 @@
         }
     ],
     "default": {
-        "value": {
-            "id": "accent",
-            "name": "Accent",
-            "value": "accent"
-        }
+        "id": "accent",
+        "name": "Accent",
+        "value": "accent"
     },
     "required": true
 }

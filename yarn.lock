@@ -2921,6 +2921,7 @@ __metadata:
     "@coffeekraken/s-i18n": ^2.0.0-alpha.27
     "@coffeekraken/s-interface": ^2.0.0-alpha.27
     "@coffeekraken/s-spaces-selector-component": ^2.0.0-alpha.27
+    "@coffeekraken/s-specs": ^2.0.0-alpha.27
     "@coffeekraken/s-theme": ^2.0.0-alpha.27
     "@coffeekraken/s-wysiwyg-component": ^2.0.0-alpha.27
     "@coffeekraken/sugar": ^2.0.0-alpha.27
@@ -2940,6 +2941,7 @@ __metadata:
     "@coffeekraken/s-interface": ^2.0.0-alpha.27
     "@coffeekraken/s-promise": ^2.0.0-alpha.27
     "@coffeekraken/s-sugar-config": ^2.0.0-alpha.27
+    "@coffeekraken/s-validator": ^2.0.0-alpha.27
     "@coffeekraken/sugar": ^2.0.0-alpha.27
     glob: ^10.2.4
   languageName: unknown
@@ -3332,6 +3334,7 @@ __metadata:
     astring: ^1.8.3
     atob: ^2.1.2
     bezier-easing: ^2.1.0
+    blueimp-md5: ^2.19.0
     btoa: ^1.2.1
     buffer: ^6.0.3
     callsites: ^4.0.0
@@ -8641,6 +8644,13 @@ __metadata:
   version: 3.4.7
   resolution: "bluebird@npm:3.4.7"
   checksum: bffa9dee7d3a41ab15c4f3f24687b49959b4e64e55c058a062176feb8ccefc2163414fb4e1a0f3053bf187600936509660c3ebd168fd9f0e48c7eba23b019466
+  languageName: node
+  linkType: hard
+
+"blueimp-md5@npm:^2.19.0":
+  version: 2.19.0
+  resolution: "blueimp-md5@npm:2.19.0"
+  checksum: 28095dcbd2c67152a2938006e8d7c74c3406ba6556071298f872505432feb2c13241b0476644160ee0a5220383ba94cb8ccdac0053b51f68d168728f9c382530
   languageName: node
   linkType: hard
 

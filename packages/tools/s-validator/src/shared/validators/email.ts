@@ -43,11 +43,12 @@ export interface IValidatorEmailSettings extends ISValidatorValidatorSettings {
 
 export const definition = {
     description: 'Validate an email string',
-    type: 'String',
+    type: 'Boolean',
 };
 
 export default function email(
     value: any,
+    validatorValue: boolean,
     settings?: Partial<IValidatorEmailSettings>,
 ): ISValidatorResult {
     let message, valid;

@@ -36,6 +36,7 @@
         "astring": "^1.8.3",
         "atob": "^2.1.2",
         "bezier-easing": "^2.1.0",
+        "blueimp-md5": "^2.19.0",
         "btoa": "^1.2.1",
         "buffer": "^6.0.3",
         "callsites": "^4.0.0",
@@ -179,8 +180,14 @@
             "import": "./dist/pkg/esm/js/cookie/_exports.js"
         },
         "./crypto": {
-            "require": "./dist/pkg/cjs/shared/crypto/_exports.js",
-            "import": "./dist/pkg/esm/shared/crypto/_exports.js"
+            "node": {
+                "require": "./dist/pkg/cjs/node/crypto/_exports.js",
+                "import": "./dist/pkg/esm/node/crypto/_exports.js"
+            },
+            "browser": {
+                "require": "./dist/pkg/cjs/js/crypto/_exports.js",
+                "import": "./dist/pkg/esm/js/crypto/_exports.js"
+            }
         },
         "./dom": {
             "require": "./dist/pkg/cjs/js/dom/_exports.js",

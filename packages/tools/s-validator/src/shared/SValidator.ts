@@ -4,6 +4,10 @@ import __SClass from '@coffeekraken/s-class';
 import { __deepMerge } from '@coffeekraken/sugar/object';
 import __en from './i18n/en.js';
 
+import __typeValidator, {
+    definition as __typeValidatorDefinition,
+} from './validators/type.js';
+
 import __alphanumValidator, {
     definition as __alphanumValidatorDefinition,
 } from './validators/alphanum.js';
@@ -311,7 +315,6 @@ export default class SValidator extends __SClass {
     validate(
         value: any,
         rulesOrPreset: ISValidatorRules | string,
-        settings?: Partial<ISValidatorSettings>,
     ): ISValidatorValidateResult {
         let result: ISValidatorValidateResult = {
             valid: true,
@@ -349,15 +352,11 @@ export default class SValidator extends __SClass {
             };
 
             // validate using the validator
-            if (typeof rulesOrPreset === 'boolean') {
-                res = validatorObj.validator(value, finalValidatorSettings);
-            } else {
-                res = validatorObj.validator(
-                    value,
-                    validatorValue,
-                    finalValidatorSettings,
-                );
-            }
+            res = validatorObj.validator(
+                value,
+                validatorValue,
+                finalValidatorSettings,
+            );
 
             if (!res.valid) {
                 // replace tokens in message
@@ -426,6 +425,9 @@ SValidator.registerValidator('color', __colorValidator, {
 });
 SValidator.registerValidator('hex', __hexValidator, {
     definition: __hexValidatorDefinition,
+});
+SValidator.registerValidator('type', __typeValidator, {
+    definition: __typeValidatorDefinition,
 });
 SValidator.registerValidator('password', __passwordValidator, {
     definition: __passwordValidatorDefinition,

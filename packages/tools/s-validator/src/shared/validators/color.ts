@@ -44,11 +44,12 @@ export interface IValidatorColorSettings extends ISValidatorValidatorSettings {
 
 export const definition = {
     description: 'Validate a color string',
-    type: 'String',
+    type: 'Boolean',
 };
 
 export default function color(
     value: any,
+    validatorValue: boolean,
     settings?: Partial<IValidatorColorSettings>,
 ): ISValidatorResult {
     let message, valid;

@@ -118,6 +118,8 @@ export default class SSpecsEditorWidget {
                 });
             }
         }
+
+        console.log('VBAL', this._values);
     }
 
     get values(): any {

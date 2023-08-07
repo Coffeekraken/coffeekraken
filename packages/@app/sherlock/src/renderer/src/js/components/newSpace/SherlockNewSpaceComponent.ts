@@ -35,39 +35,54 @@ export class SherlockNewSpaceComponent extends LitElement {
         super();
     }
 
-    _validateGunExisting(uid: string): void {
-        if (!uid) {
+    _validateGunExisting(base64Uid: string): void {
+        if (!base64Uid) {
             return;
         }
 
-        console.log('UO', uid);
-
-        // console.log('en', __base64.encrypt(uid));
-
-        const decoded = __base64.decrypt(uid);
+        const decoded = __base64.decrypt(base64Uid);
         if (decoded.split(':').length !== 3) {
             // invalid key
             this._error = `This key is not valid...`;
         }
 
-        console.log('de', decoded);
-    }
+        const parts = decoded.split(':');
 
-    _saveMetas(data: ISherlockSpace): void {
-        this._space = data;
+        const spaceUid = parts[1],
+            spaceName = parts[0];
+
+        this._space.uid = spaceUid;
+        this._space.name = spaceName;
     }
 
     async _saveAdapter(
         type: 'fs' | 'contentful' | 'gun',
         settings: ISherlockSpaceFsAdapterSettings | ISherlockSpaceContentfulAdapterSettings,
     ): Promise<void> {
-        return;
-        // save the adapter settings in the space directly
-        this._space.adapter = {
-            type,
-            settings,
-        };
+        switch (type) {
+            case 'gun':
+                this._space.adapter = {
+                    type: 'gun',
+                    settings: {
+                        gunUid: this._space.uid,
+                    },
+                };
+                break;
+            default:
+                this._space.adapter = {
+                    type,
+                    settings,
+                };
+                break;
+        }
+
+        this._step = 'metas';
+    }
+
+    async _saveMetas(metas: ISherlockSpace): Promise<void> {
         const res = await window.sherlock.addSpace(this._space);
+
+        console.log('RES', res);
     }
 
     render() {
@@ -116,6 +131,7 @@ export class SherlockNewSpaceComponent extends LitElement {
                                                         },
                                                     }}
                                                     .specs=${SSherlockSpaceFsAdapterSpec}
+                                                    i18n.save-button="Continue"
                                                     @s-specs-editor.save=${(e) => {
                                                         this._saveAdapter('fs', e.detail.values);
                                                     }}
@@ -124,16 +140,17 @@ export class SherlockNewSpaceComponent extends LitElement {
                                           : this._adapter === 'gun'
                                           ? html`
                                                 <s-specs-editor
-                                                    uid="fs-adapter"
+                                                    uid="gun-adapter"
                                                     .values=${{}}
                                                     .specs=${SSherlockSpaceGunAdapterSpec}
+                                                    i18n.save-button="Continue"
                                                     @s-specs-editor.change=${(e) => {
                                                         this._validateGunExisting(
                                                             e.detail.values.existing,
                                                         );
                                                     }}
                                                     @s-specs-editor.save=${(e) => {
-                                                        this._saveAdapter('fs', e.detail.values);
+                                                        this._saveAdapter('gun', e.detail.values);
                                                     }}
                                                 ></s-specs-editor>
                                             `
@@ -143,6 +160,7 @@ export class SherlockNewSpaceComponent extends LitElement {
                                                     uid="contentful-adapter"
                                                     .values=${{}}
                                                     .specs=${SSherlockSpaceContentfulAdapterSpec}
+                                                    i18n.save-button="Continue"
                                                     @s-specs-editor.save=${(e) => {
                                                         this._saveAdapter(
                                                             'contentful',
@@ -159,10 +177,7 @@ export class SherlockNewSpaceComponent extends LitElement {
                     : html`
                           <s-specs-editor
                               uid="new-space"
-                              .values=${{
-                                  uid: 'hello',
-                              }}
-                              i18n.save-button="Continue"
+                              .values=${this._space}
                               .specs=${SSherlockNewSpaceSpec}
                               @s-specs-editor.save=${(e) => {
                                   this._saveMetas(e.detail.values);

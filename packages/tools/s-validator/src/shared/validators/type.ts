@@ -80,6 +80,40 @@ export default function number(
         case 'object':
             valid = __isPlainObject(value);
             break;
+        case 'checkbox':
+        case 'select':
+            valid = __isPlainObject(value) && value.id;
+            break;
+        case 'image':
+            valid = __isPlainObject(value) && value.url;
+            break;
+        case 'video':
+            valid =
+                __isPlainObject(value) &&
+                value.sources &&
+                (value.sources.webm || value.sources.mp4 || value.sources.ogg);
+            break;
+        case 'datetime':
+            valid =
+                __isPlainObject(value) &&
+                value.iso &&
+                value.value &&
+                value.format;
+            break;
+        case 'link':
+            valid = __isPlainObject(value) && value.text && value.url;
+            break;
+        case 'color':
+            valid =
+                __isPlainObject(value) &&
+                (value.format === 'hex' ||
+                    value.format === 'hexa' ||
+                    value.format === 'hsl' ||
+                    value.format === 'hsla' ||
+                    value.format === 'rgb' ||
+                    value.format === 'rgba') &&
+                value.value;
+            break;
     }
 
     if (!valid) {

@@ -290,9 +290,13 @@ export default class SSpecsEditorComponent extends __SLitComponent {
     }
 
     mount() {
+        console.log('PROPR', this.props.values, this._values);
+
         if (!this._values) {
             this._values = Object.assign({}, this.props.values ?? {});
         }
+
+        console.log('S', this.props.values, this._values);
 
         // make sure we have an id
         if (!this._values['#id']) {
@@ -497,22 +501,24 @@ export default class SSpecsEditorComponent extends __SLitComponent {
             valuePath = path.filter((l) => l !== 'props');
             values = __get(this._values, valuePath);
 
-            if (!values) {
+            console.log('PA', path, values);
+
+            if (values !== undefined && !__isPlainObject(values)) {
                 values = __set(
                     this._values,
                     valuePath,
-                    {},
+                    {
+                        value: values,
+                    },
                     {
                         preferAssign: true,
                     },
                 );
-            } else if (!__isPlainObject(values)) {
+            } else if (!values) {
                 values = __set(
                     this._values,
                     valuePath,
-                    {
-                        value: undefined,
-                    },
+                    {},
                     {
                         preferAssign: true,
                     },

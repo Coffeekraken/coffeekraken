@@ -389,9 +389,19 @@ export default class SValidator extends __SClass {
             rules = SValidator._presets[rulesOrPreset].rules;
         }
 
+        // empty value when no required rule
+        if (!rules.required) {
+            if (value === undefined || value === null || value === '') {
+                return {
+                    valid: true,
+                    messages: null,
+                };
+            }
+        }
+
         for (let [validator, valueOrObj] of Object.entries(rules)) {
-            let validatorSettings = valueOrObj.settings ?? {},
-                validatorValue = valueOrObj.value ?? valueOrObj,
+            let validatorSettings = valueOrObj?.settings ?? {},
+                validatorValue = valueOrObj?.value ?? valueOrObj,
                 res;
 
             // get the corresponding validator in the registered ones

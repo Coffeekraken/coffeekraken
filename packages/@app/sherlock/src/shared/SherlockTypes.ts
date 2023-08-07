@@ -25,8 +25,7 @@ export interface ISherlockSpaceFsAdapterSettings {
 }
 
 export interface ISherlockSpaceGunAdapterSettings {
-    name: string;
-    existing?: string;
+    gunUid?: string;
 }
 
 export interface ISherlockSpaceContentfulAdapterSettings {

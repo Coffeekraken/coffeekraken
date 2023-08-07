@@ -4,7 +4,6 @@ import type {
     ISValidatorResult,
     ISValidatorValidatorSettings,
 } from '../SValidator.js';
-import __en from '../i18n/en.js';
 
 /**
  * @name            alphanum
@@ -32,11 +31,13 @@ import __en from '../i18n/en.js';
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 
-export interface IValidatorMaxI18nSettings {
-    string: string;
+export interface IValidatorAlphanumI18nSettings {
+    default: string;
 }
 
-export interface IValidatorEmailSettings extends ISValidatorValidatorSettings {
+export interface IValidatorAlphanumSettings
+    extends ISValidatorValidatorSettings {
+    i18n: IValidatorAlphanumI18nSettings;
     trim: boolean;
 }
 
@@ -48,22 +49,23 @@ export const definition = {
 export default function alphanum(
     value: any,
     validatorValue: boolean,
-    settings?: Partial<IValidatorEmailSettings>,
+    settings?: Partial<IValidatorAlphanumSettings>,
 ): ISValidatorResult {
     let message, valid;
 
-    const finalSettings: IValidatorEmailSettings = __deepMerge(
+    const finalSettings: IValidatorAlphanumSettings = __deepMerge(
         {
-            i18n: __en.alphanum,
+            i18n: settings.i18n.alphanum,
             trim: true,
         },
         settings ?? {},
     );
 
     if (typeof value !== 'string') {
-        throw new Error(
-            `Sorry but the "alphanum" validation only works with string`,
-        );
+        return {
+            valid: false,
+            message: finalSettings.i18n.default,
+        };
     }
 
     if (finalSettings.trim) {
@@ -73,7 +75,7 @@ export default function alphanum(
     valid = value.match(/^[a-z0-9]+$/i);
 
     if (!valid) {
-        message = finalSettings.i18n?.string;
+        message = finalSettings.i18n?.default;
     }
 
     return {

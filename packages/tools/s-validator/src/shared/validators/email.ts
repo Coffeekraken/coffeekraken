@@ -5,7 +5,6 @@ import type {
     ISValidatorResult,
     ISValidatorValidatorSettings,
 } from '../SValidator.js';
-import __en from '../i18n/en.js';
 
 /**
  * @name            email
@@ -33,11 +32,12 @@ import __en from '../i18n/en.js';
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 
-export interface IValidatorMaxI18nSettings {
-    string: string;
+export interface IValidatorEmailI18nSettings {
+    default: string;
 }
 
 export interface IValidatorEmailSettings extends ISValidatorValidatorSettings {
+    i18n: IValidatorEmailI18nSettings;
     trim: boolean;
 }
 
@@ -55,16 +55,17 @@ export default function email(
 
     const finalSettings: IValidatorEmailSettings = __deepMerge(
         {
-            i18n: __en.email,
+            i18n: settings?.i18n?.email,
             trim: true,
         },
         settings ?? {},
     );
 
     if (typeof value !== 'string') {
-        throw new Error(
-            `Sorry but the "email" validation only works with string`,
-        );
+        return {
+            valid: false,
+            message: finalSettings.i18n.default,
+        };
     }
 
     if (finalSettings.trim) {
@@ -74,7 +75,7 @@ export default function email(
     valid = __isEmail(value);
 
     if (!valid) {
-        message = finalSettings.i18n?.string;
+        message = finalSettings.i18n?.default;
     }
 
     return {

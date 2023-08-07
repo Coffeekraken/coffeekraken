@@ -4,7 +4,6 @@ import type {
     ISValidatorResult,
     ISValidatorValidatorSettings,
 } from '../SValidator.js';
-import __en from '../i18n/en.js';
 
 /**
  * @name            integer
@@ -33,7 +32,7 @@ import __en from '../i18n/en.js';
  */
 
 export interface IValidatorIntegerI18nSettings {
-    string: string;
+    default: string;
 }
 
 export interface IValidatorIntegerSettings
@@ -57,7 +56,7 @@ export default function integer(
 
     const finalSettings: IValidatorIntegerSettings = __deepMerge(
         {
-            i18n: __en.integer,
+            i18n: settings?.i18n?.integer,
             cast: true,
             trim: true,
         },
@@ -65,9 +64,10 @@ export default function integer(
     );
 
     if (typeof value !== 'string' && typeof value !== 'number') {
-        throw new Error(
-            `Sorry but the "integer" validation only works with string and number`,
-        );
+        return {
+            valid: false,
+            message: finalSettings.i18n.default,
+        };
     }
 
     if (typeof value === 'string' && finalSettings.trim) {
@@ -84,7 +84,7 @@ export default function integer(
     }
 
     if (!valid) {
-        message = finalSettings.i18n?.string;
+        message = finalSettings.i18n?.default;
     }
 
     return {

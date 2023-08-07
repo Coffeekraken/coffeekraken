@@ -2,61 +2,82 @@
 
 import __SClass from '@coffeekraken/s-class';
 import { __deepMerge } from '@coffeekraken/sugar/object';
-import __en from './i18n/en.js';
+import __i18n from './i18n.js';
 
 import __typeValidator, {
+    IValidatorTypeSettings,
     definition as __typeValidatorDefinition,
 } from './validators/type.js';
 
+import __base64Validator, {
+    definition as __base64ValidatorDefinition,
+} from './validators/base64.js';
+
 import __alphanumValidator, {
+    IValidatorAlphanumSettings,
     definition as __alphanumValidatorDefinition,
 } from './validators/alphanum.js';
 import __colorValidator, {
+    IValidatorColorSettings,
     definition as __colorValidatorDefinition,
 } from './validators/color.js';
 import __creditCardValidator, {
+    IValidatorCreditCardSettings,
     definition as __creditCardValidatorDefinition,
 } from './validators/creditCard.js';
 import __emailValidator, {
+    IValidatorEmailSettings,
     definition as __emailValidatorDefinition,
 } from './validators/email.js';
 import __hexValidator, {
+    IValidatorHexSettings,
     definition as __hexValidatorDefinition,
 } from './validators/hex.js';
 import __integerValidator, {
+    IValidatorIntegerSettings,
     definition as __integerValidatorDefinition,
 } from './validators/integer.js';
 import __isoDateValidator, {
+    IValidatorIsoDateSettings,
     definition as __isoDateValidatorDefinition,
 } from './validators/isoDate.js';
 import __isoDateTimeValidator, {
+    IValidatorIsoDateTimeSettings,
     definition as __isoDateTimeValidatorDefinition,
 } from './validators/isoDateTime.js';
 import __isoTimeValidator, {
+    IValidatorIsoTimeSettings,
     definition as __isoTimeValidatorDefinition,
 } from './validators/isoTime.js';
 import __maxValidator, {
+    IValidatorMaxSettings,
     definition as __maxValidatorDefinition,
 } from './validators/max.js';
 import __minValidator, {
+    IValidatorMinSettings,
     definition as __minValidatorDefinition,
 } from './validators/min.js';
 import __negativeValidator, {
+    IValidatorNegativeSettings,
     definition as __negativeValidatorDefinition,
 } from './validators/negative.js';
 import __numberValidator, {
     definition as __numberValidatorDefinition,
 } from './validators/number.js';
 import __passwordValidator, {
+    IValidatorPasswordSettings,
     definition as __passwordValidatorDefinition,
 } from './validators/password.js';
 import __patternValidator, {
+    IValidatorPatternSettings,
     definition as __patternValidatorDefinition,
 } from './validators/pattern.js';
 import __positiveValidator, {
+    IValidatorPositiveSettings,
     definition as __positiveValidatorDefinition,
 } from './validators/positive.js';
 import __requiredValidator, {
+    IValidatorRequiredSettings,
     definition as __requiredValidatorDefinition,
 } from './validators/required.js';
 
@@ -129,14 +150,50 @@ export interface ISValidatorRule {
 }
 
 export type ISValidatorAvailableValidators =
-    | 'min'
-    | 'max'
+    | 'alphanum'
+    | 'color'
+    | 'creditCard'
     | 'email'
+    | 'hex'
+    | 'integer'
+    | 'isoDateTime'
+    | 'isoTime'
+    | 'max'
+    | 'min'
+    | 'negative'
     | 'number'
-    | 'integer';
+    | 'password'
+    | 'pattern'
+    | 'positive'
+    | 'required'
+    | 'type';
 
 export interface ISValidatorRules {
-    [key: ISValidatorAvailableValidators]: any | ISValidatorRuleValue;
+    alphanum?: boolean | IValidatorAlphanumSettings;
+    color?: boolean | IValidatorColorSettings;
+    creditCard?: boolean | IValidatorCreditCardSettings;
+    email?: boolean | IValidatorEmailSettings;
+    hex?: boolean | IValidatorHexSettings;
+    integer?: boolean | IValidatorIntegerSettings;
+    isoDateTime?: boolean | IValidatorIsoDateTimeSettings;
+    isoDate?: boolean | IValidatorIsoDateSettings;
+    isoTime?: boolean | IValidatorIsoTimeSettings;
+    max?: boolean | IValidatorMaxSettings;
+    min?: boolean | IValidatorMinSettings;
+    negative?: boolean | IValidatorNegativeSettings;
+    number?: boolean | IValidatorNegativeSettings;
+    password?: boolean | IValidatorPasswordSettings;
+    pattern?: string | IValidatorPatternSettings;
+    positive?: boolean | IValidatorPositiveSettings;
+    required?: boolean | IValidatorRequiredSettings;
+    type?:
+        | 'string'
+        | 'number'
+        | 'boolean'
+        | 'integer'
+        | 'array'
+        | 'object'
+        | IValidatorTypeSettings;
 }
 
 export interface ISValidatorValidateResultMessages {
@@ -257,7 +314,7 @@ export default class SValidator extends __SClass {
         super(
             __deepMerge(
                 {
-                    i18n: __en,
+                    i18n: __i18n,
                 },
                 settings ?? {},
             ),
@@ -361,7 +418,7 @@ export default class SValidator extends __SClass {
             if (!res.valid) {
                 // replace tokens in message
                 res.message = res.message
-                    .replace('%value', value)
+                    ?.replace('%value', value)
                     .replace('%validator', validator);
 
                 result.valid = false;
@@ -378,6 +435,9 @@ export default class SValidator extends __SClass {
 }
 
 // register default validators
+SValidator.registerValidator('base64', __base64Validator, {
+    definition: __base64ValidatorDefinition,
+});
 SValidator.registerValidator('min', __minValidator, {
     definition: __minValidatorDefinition,
 });

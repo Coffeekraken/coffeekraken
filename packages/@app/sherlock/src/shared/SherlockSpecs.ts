@@ -57,6 +57,10 @@ export const SSherlockSpaceGunAdapterSpec = {
             title: 'Existing gun space id',
             description:
                 'Paste here an existing gun space id to join it instead of creating anoter',
+            required: true,
+            rules: {
+                base64: true,
+            },
         },
     },
 };

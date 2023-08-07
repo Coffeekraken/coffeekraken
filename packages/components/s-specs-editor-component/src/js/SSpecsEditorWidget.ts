@@ -45,8 +45,8 @@ export interface ISSpecsEditorWidgetSettings {
 }
 
 export interface ISSpecsEditorWidgetValidateResult {
-    error?: string;
-    warning?: string;
+    errors?: string[];
+    warnings?: string[];
 }
 
 export interface ISSpecsEditorWidgetDeps {
@@ -240,6 +240,7 @@ export default class SSpecsEditorWidget {
 
         // not so much pristine...
         this.status.pristine = false;
+        this.editor.state.status.pristine = false;
         this.status.unsaved = true;
 
         const sourceValues = !finalSettings.responsive
@@ -264,17 +265,17 @@ export default class SSpecsEditorWidget {
             validateResult = this._validate(newValues);
         }
 
-        // if no error, set the new value
-        if (!validateResult.error) {
-            let path = finalSettings.path;
-            if (this.isResponsive() && finalSettings.responsive) {
-                path =
-                    `media.${this.editor.props.media}.${finalSettings.path}`.replace(
-                        /\.{2}/gm,
-                        '',
-                    );
-            }
+        let path = finalSettings.path;
+        if (this.isResponsive() && finalSettings.responsive) {
+            path =
+                `media.${this.editor.props.media}.${finalSettings.path}`.replace(
+                    /\.{2}/gm,
+                    '',
+                );
+        }
 
+        // if no error, set the new value
+        if (!validateResult.errors?.length) {
             // set the new value(s)
             __set(this._values, path, newValues, {
                 preferAssign: true,
@@ -288,18 +289,18 @@ export default class SSpecsEditorWidget {
 
             // call the passed callback if is one
             this.callback?.(this._values);
-
-            // apply the changes in the editor
-            if (finalSettings.apply) {
-                this.editor.apply();
-            }
         } else {
-            // update the UI to display errors
-            this.editor.requestUpdate();
+            // // update the UI to display errors
+            // this.editor.requestUpdate();
+        }
+
+        // apply the changes in the editor
+        if (finalSettings.apply) {
+            this.editor.apply();
         }
     }
 
-    _validate(values?) {
+    _validate(values?): ISSpecsEditorWidgetValidateResult {
         if (!values) {
             values = __clone(this._values, {
                 deep: true,
@@ -309,8 +310,6 @@ export default class SSpecsEditorWidget {
         // reset errors and warnings
         this._errors = [];
         this._warnings = [];
-
-        console.log('VB', values, this.propObj);
 
         let valueToValidate = values;
         if (
@@ -330,23 +329,31 @@ export default class SSpecsEditorWidget {
             },
         };
 
-        console.log('Ob', objToValidate, specObj);
-
         const res = __SSpecs.validate(objToValidate, specObj);
-        console.log('RESSS', res);
+
+        for (let [prop, result] of Object.entries(res.props)) {
+            if (!result.valid) {
+                this._errors = [...this._errors, ...(result.messages ?? [])];
+            }
+        }
 
         // validate new values
-        const validateResult = this.validate(values) ?? {};
+        const validateResult = [];
+        // const validateResult = this.validate(values) ?? {};
+        // console.log('VAL', validateResult);
 
-        // error and warnings
-        if (validateResult.error) {
-            this._errors.push(validateResult.error);
-        }
-        if (validateResult.warning) {
-            this._warnings.push(validateResult.warning);
-        }
+        // // error and warnings
+        // if (validateResult.error) {
+        //     this._errors.push(validateResult.error);
+        // }
+        // if (validateResult.warning) {
+        //     this._warnings.push(validateResult.warning);
+        // }
 
-        return validateResult;
+        return {
+            errors: this._errors,
+            warnings: this._warnings,
+        };
     }
 
     renderLabel(settings?: ISSpecsEditorComponentRenderLabelSettings): any {
@@ -418,13 +425,26 @@ export default class SSpecsEditorWidget {
         return this.propObj.responsive;
     }
 
+    _hasErrorTimeout;
+    _hasErrors = undefined;
     hasErrors(): boolean {
-        if (this.status.pristine && this.editor.state.status.pristine) {
-            return false;
+        // "caching" to avoid doing same work
+        // multiple times in the same event loop
+        if (this._hasErrors !== undefined) {
+            return this._hasErrors;
         }
+        clearTimeout(this._hasErrorTimeout);
+        this._hasErrorTimeout = setTimeout(() => {
+            this._hasErrors = undefined;
+        });
+
+        // if (this.status.pristine) {
+        //     return false;
+        // }
         if (this.status.pristine) {
             this._validate();
         }
+        this._hasErrors = this._errors.length;
         return this._errors.length > 0;
     }
 

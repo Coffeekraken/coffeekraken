@@ -1,33 +1,32 @@
 "use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.definition = void 0;
 // @ts-nocheck
 const is_1 = require("@coffeekraken/sugar/is");
 const object_1 = require("@coffeekraken/sugar/object");
-const en_js_1 = __importDefault(require("../i18n/en.js"));
 exports.definition = {
     description: 'Validate an email string',
     type: 'Boolean',
 };
 function email(value, validatorValue, settings) {
-    var _a;
+    var _a, _b;
     let message, valid;
     const finalSettings = (0, object_1.__deepMerge)({
-        i18n: en_js_1.default.email,
+        i18n: (_a = settings === null || settings === void 0 ? void 0 : settings.i18n) === null || _a === void 0 ? void 0 : _a.email,
         trim: true,
     }, settings !== null && settings !== void 0 ? settings : {});
     if (typeof value !== 'string') {
-        throw new Error(`Sorry but the "email" validation only works with string`);
+        return {
+            valid: false,
+            message: finalSettings.i18n.default,
+        };
     }
     if (finalSettings.trim) {
         value = value.trim();
     }
     valid = (0, is_1.__isEmail)(value);
     if (!valid) {
-        message = (_a = finalSettings.i18n) === null || _a === void 0 ? void 0 : _a.string;
+        message = (_b = finalSettings.i18n) === null || _b === void 0 ? void 0 : _b.default;
     }
     return {
         valid,
@@ -35,4 +34,4 @@ function email(value, validatorValue, settings) {
     };
 }
 exports.default = email;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7OztBQUFBLGNBQWM7QUFDZCwrQ0FBbUQ7QUFDbkQsdURBQXlEO0FBS3pELDBEQUFpQztBQW9DcEIsUUFBQSxVQUFVLEdBQUc7SUFDdEIsV0FBVyxFQUFFLDBCQUEwQjtJQUN2QyxJQUFJLEVBQUUsU0FBUztDQUNsQixDQUFDO0FBRUYsU0FBd0IsS0FBSyxDQUN6QixLQUFVLEVBQ1YsY0FBdUIsRUFDdkIsUUFBMkM7O0lBRTNDLElBQUksT0FBTyxFQUFFLEtBQUssQ0FBQztJQUVuQixNQUFNLGFBQWEsR0FBNEIsSUFBQSxvQkFBVyxFQUN0RDtRQUNJLElBQUksRUFBRSxlQUFJLENBQUMsS0FBSztRQUNoQixJQUFJLEVBQUUsSUFBSTtLQUNiLEVBQ0QsUUFBUSxhQUFSLFFBQVEsY0FBUixRQUFRLEdBQUksRUFBRSxDQUNqQixDQUFDO0lBRUYsSUFBSSxPQUFPLEtBQUssS0FBSyxRQUFRLEVBQUU7UUFDM0IsTUFBTSxJQUFJLEtBQUssQ0FDWCx5REFBeUQsQ0FDNUQsQ0FBQztLQUNMO0lBRUQsSUFBSSxhQUFhLENBQUMsSUFBSSxFQUFFO1FBQ3BCLEtBQUssR0FBRyxLQUFLLENBQUMsSUFBSSxFQUFFLENBQUM7S0FDeEI7SUFFRCxLQUFLLEdBQUcsSUFBQSxjQUFTLEVBQUMsS0FBSyxDQUFDLENBQUM7SUFFekIsSUFBSSxDQUFDLEtBQUssRUFBRTtRQUNSLE9BQU8sR0FBRyxNQUFBLGFBQWEsQ0FBQyxJQUFJLDBDQUFFLE1BQU0sQ0FBQztLQUN4QztJQUVELE9BQU87UUFDSCxLQUFLO1FBQ0wsT0FBTztLQUNWLENBQUM7QUFDTixDQUFDO0FBbkNELHdCQW1DQyJ9
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7OztBQUFBLGNBQWM7QUFDZCwrQ0FBbUQ7QUFDbkQsdURBQXlEO0FBeUM1QyxRQUFBLFVBQVUsR0FBRztJQUN0QixXQUFXLEVBQUUsMEJBQTBCO0lBQ3ZDLElBQUksRUFBRSxTQUFTO0NBQ2xCLENBQUM7QUFFRixTQUF3QixLQUFLLENBQ3pCLEtBQVUsRUFDVixjQUF1QixFQUN2QixRQUEyQzs7SUFFM0MsSUFBSSxPQUFPLEVBQUUsS0FBSyxDQUFDO0lBRW5CLE1BQU0sYUFBYSxHQUE0QixJQUFBLG9CQUFXLEVBQ3REO1FBQ0ksSUFBSSxFQUFFLE1BQUEsUUFBUSxhQUFSLFFBQVEsdUJBQVIsUUFBUSxDQUFFLElBQUksMENBQUUsS0FBSztRQUMzQixJQUFJLEVBQUUsSUFBSTtLQUNiLEVBQ0QsUUFBUSxhQUFSLFFBQVEsY0FBUixRQUFRLEdBQUksRUFBRSxDQUNqQixDQUFDO0lBRUYsSUFBSSxPQUFPLEtBQUssS0FBSyxRQUFRLEVBQUU7UUFDM0IsT0FBTztZQUNILEtBQUssRUFBRSxLQUFLO1lBQ1osT0FBTyxFQUFFLGFBQWEsQ0FBQyxJQUFJLENBQUMsT0FBTztTQUN0QyxDQUFDO0tBQ0w7SUFFRCxJQUFJLGFBQWEsQ0FBQyxJQUFJLEVBQUU7UUFDcEIsS0FBSyxHQUFHLEtBQUssQ0FBQyxJQUFJLEVBQUUsQ0FBQztLQUN4QjtJQUVELEtBQUssR0FBRyxJQUFBLGNBQVMsRUFBQyxLQUFLLENBQUMsQ0FBQztJQUV6QixJQUFJLENBQUMsS0FBSyxFQUFFO1FBQ1IsT0FBTyxHQUFHLE1BQUEsYUFBYSxDQUFDLElBQUksMENBQUUsT0FBTyxDQUFDO0tBQ3pDO0lBRUQsT0FBTztRQUNILEtBQUs7UUFDTCxPQUFPO0tBQ1YsQ0FBQztBQUNOLENBQUM7QUFwQ0Qsd0JBb0NDIn0=

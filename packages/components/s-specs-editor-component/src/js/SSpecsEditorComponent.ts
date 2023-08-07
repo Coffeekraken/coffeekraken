@@ -364,20 +364,31 @@ export default class SSpecsEditorComponent extends __SLitComponent {
         return hasUnsaved;
     }
 
+    _hasErrorTimeout;
+    _hasErrors = undefined;
     hasErrors(): boolean {
         if (this.state.status.pristine) {
             return false;
         }
 
+        // "caching" to avoid doing same work
+        // multiple times in the same event loop
+        if (this._hasErrors !== undefined) {
+            return this._hasErrors;
+        }
+        clearTimeout(this._hasErrorTimeout);
+        this._hasErrorTimeout = setTimeout(() => {
+            this._hasErrors = undefined;
+        });
+
         let hasErrors = false;
         for (let [dotpath, widget] of Object.entries(this._widgets)) {
-            if (hasErrors) {
-                break;
-            }
             if (widget.hasErrors() && !widget.canBeOverride()) {
                 hasErrors = true;
+                break;
             }
         }
+        this._hasErrors = hasErrors;
         return hasErrors;
     }
 
@@ -514,7 +525,7 @@ export default class SSpecsEditorComponent extends __SLitComponent {
             values = this._nonePathValues[propObj.id];
         }
 
-        let widgetId = values.id;
+        let widgetId = values['#id'];
         if (!widgetId) {
             Object.defineProperty(values, '#id', {
                 value: __uniqid(),
@@ -567,6 +578,7 @@ export default class SSpecsEditorComponent extends __SLitComponent {
     _applyTimeout;
     apply() {
         clearTimeout(this._applyTimeout);
+        console.log('chan', this.data);
         this._applyTimeout = setTimeout(() => {
             this.utils.dispatchEvent('change', {
                 bubbles: true,
@@ -593,6 +605,8 @@ export default class SSpecsEditorComponent extends __SLitComponent {
     save(force: boolean = false): void {
         // no more pristine....
         this.state.status.pristine = false;
+
+        console.log('t', this.hasErrors());
 
         if (!force && this.hasErrors()) {
             return this.requestUpdate();
@@ -896,7 +910,9 @@ export default class SSpecsEditorComponent extends __SLitComponent {
                           : ''}
                   </div>`
                 : ''}
-            ${widget?.hasErrors() && !widget.canBeOverride()
+            ${!this.state.status.pristine &&
+            widget?.hasErrors() &&
+            !widget.canBeOverride()
                 ? this.renderError(
                       propObj,
                       Array.isArray(pathOrCallback)
@@ -905,7 +921,7 @@ export default class SSpecsEditorComponent extends __SLitComponent {
                       widget.lastError,
                   )
                 : ''}
-            ${widget?.hasWarnings()
+            ${!this.state.status.pristine && widget?.hasWarnings()
                 ? this.renderWarning(
                       propObj,
                       Array.isArray(pathOrCallback)

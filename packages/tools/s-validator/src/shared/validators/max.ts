@@ -4,7 +4,6 @@ import type {
     ISValidatorResult,
     ISValidatorValidatorSettings,
 } from '../SValidator.js';
-import __en from '../i18n/en.js';
 
 /**
  * @name            max
@@ -47,6 +46,7 @@ export interface IValidatorMaxI18nSettings {
 }
 
 export interface IValidatorMaxSettings extends ISValidatorValidatorSettings {
+    i18n: IValidatorMaxI18nSettings;
     trim: boolean;
 }
 
@@ -65,7 +65,7 @@ export default function max(
 
     const finalSettings: IValidatorMaxSettings = __deepMerge(
         {
-            i18n: __en.max,
+            i18n: settings?.i18n?.max,
             trim: true,
         },
         settings ?? {},
@@ -92,9 +92,10 @@ export default function max(
             message = finalSettings.i18n?.object.replace('%n', n);
             break;
         default:
-            throw new Error(
-                `Sorry but the "max" validation only works with string, number, array or object values.`,
-            );
+            return {
+                valid: false,
+                message: finalSettings.i18n.string,
+            };
             break;
     }
 

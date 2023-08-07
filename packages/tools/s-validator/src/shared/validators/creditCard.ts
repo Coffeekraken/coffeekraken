@@ -5,7 +5,6 @@ import type {
     ISValidatorResult,
     ISValidatorValidatorSettings,
 } from '../SValidator.js';
-import __en from '../i18n/en.js';
 
 /**
  * @name            creditCard
@@ -33,11 +32,13 @@ import __en from '../i18n/en.js';
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 
-export interface IValidatorMaxI18nSettings {
-    string: string;
+export interface IValidatorCreditCardI18nSettings {
+    default: string;
 }
 
-export interface IValidatorEmailSettings extends ISValidatorValidatorSettings {
+export interface IValidatorCreditCardSettings
+    extends ISValidatorValidatorSettings {
+    i18n: IValidatorCreditCardI18nSettings;
     trim: boolean;
 }
 
@@ -49,22 +50,23 @@ export const definition = {
 export default function creditCard(
     value: any,
     validatorValue: boolean,
-    settings?: Partial<IValidatorEmailSettings>,
+    settings?: Partial<IValidatorCreditCardSettings>,
 ): ISValidatorResult {
     let message, valid;
 
-    const finalSettings: IValidatorEmailSettings = __deepMerge(
+    const finalSettings: IValidatorCreditCardSettings = __deepMerge(
         {
-            i18n: __en.creditCard,
+            i18n: settings?.i18n?.creditCard,
             trim: true,
         },
         settings ?? {},
     );
 
     if (typeof value !== 'string') {
-        throw new Error(
-            `Sorry but the "creditCard" validation only works with string`,
-        );
+        return {
+            valid: false,
+            message: finalSettings.i18n.default,
+        };
     }
 
     if (finalSettings.trim) {
@@ -74,7 +76,7 @@ export default function creditCard(
     valid = __isCreditCard(value);
 
     if (!valid) {
-        message = finalSettings.i18n?.string;
+        message = finalSettings.i18n?.default;
     }
 
     return {

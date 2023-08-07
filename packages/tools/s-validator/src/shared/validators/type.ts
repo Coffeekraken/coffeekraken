@@ -5,7 +5,6 @@ import type {
     ISValidatorResult,
     ISValidatorValidatorSettings,
 } from '../SValidator.js';
-import __en from '../i18n/en.js';
 
 /**
  * @name            type
@@ -34,7 +33,7 @@ import __en from '../i18n/en.js';
  */
 
 export interface IValidatorTypeI18nSettings {
-    string: string;
+    default: string;
 }
 
 export interface IValidatorTypeSettings extends ISValidatorValidatorSettings {
@@ -50,14 +49,14 @@ export const definition = {
 
 export default function number(
     value: any,
-    type: string;
+    type: string,
     settings?: Partial<IValidatorTypeSettings>,
 ): ISValidatorResult {
     let message, valid;
 
     const finalSettings: IValidatorTypeSettings = __deepMerge(
         {
-            i18n: __en.type,
+            i18n: settings?.i18n?.type,
         },
         settings ?? {},
     );
@@ -84,7 +83,7 @@ export default function number(
     }
 
     if (!valid) {
-        message = finalSettings.i18n?.string.replace(
+        message = finalSettings.i18n?.default.replace(
             '%type',
             finalSettings.type,
         );

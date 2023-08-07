@@ -4,7 +4,6 @@ import type {
     ISValidatorResult,
     ISValidatorValidatorSettings,
 } from '../SValidator.js';
-import __en from '../i18n/en.js';
 
 /**
  * @name            negative
@@ -32,13 +31,13 @@ import __en from '../i18n/en.js';
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 
-export interface IValidatorIntegerI18nSettings {
-    string: string;
+export interface IValidatorNegativeI18nSettings {
+    default: string;
 }
 
 export interface IValidatorNegativeSettings
     extends ISValidatorValidatorSettings {
-    i18n: IValidatorIntegerI18nSettings;
+    i18n: IValidatorNegativeI18nSettings;
     trim: boolean;
     cast: boolean;
 }
@@ -57,7 +56,7 @@ export default function negative(
 
     const finalSettings: IValidatorNegativeSettings = __deepMerge(
         {
-            i18n: __en.negative,
+            i18n: settings?.i18n?.negative,
             cast: true,
             trim: true,
         },
@@ -65,9 +64,10 @@ export default function negative(
     );
 
     if (typeof value !== 'string' && typeof value !== 'number') {
-        throw new Error(
-            `Sorry but the "negative" validation only works with string and number`,
-        );
+        return {
+            valid: false,
+            message: finalSettings.i18n.default,
+        };
     }
 
     if (typeof value === 'string' && finalSettings.trim) {
@@ -84,7 +84,7 @@ export default function negative(
     }
 
     if (!valid) {
-        message = finalSettings.i18n?.string;
+        message = finalSettings.i18n?.default;
     }
 
     return {

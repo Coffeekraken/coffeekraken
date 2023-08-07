@@ -1,5 +1,6 @@
 import __SClass from '@coffeekraken/s-class';
 import __SInterface from '@coffeekraken/s-interface';
+import type { ISValidatorValidateResult } from '@coffeekraken/s-validator';
 import __SValidator from '@coffeekraken/s-validator';
 import { __parseArgs } from '@coffeekraken/sugar/cli';
 import { __deepMerge, __get, __set } from '@coffeekraken/sugar/object';
@@ -42,6 +43,11 @@ import { __deepMerge, __get, __set } from '@coffeekraken/sugar/object';
  */
 
 export interface ISSpecsSettings {}
+
+export interface ISSpecsValidateResult {
+    valid: boolean;
+    props: Record<string, ISValidatorValidateResult>;
+}
 
 export default class SSpecsBase extends __SClass {
     /**
@@ -133,55 +139,50 @@ export default class SSpecsBase extends __SClass {
             specJson = __deepMerge(specJson, int._specs);
         }
 
-        // resolve the @...
-        // const specs = new SSpecs(settings);
-        // specJson = specs.resolve(specJson);
-
         // return the new spec json
         return specJson;
     }
 
-    static validate(values: any | string, specs: any): any {
+    static validate(values: any | string, specs: any): ISSpecsValidateResult {
         const validator = new __SValidator();
 
         if (typeof values === 'string') {
             values = __parseArgs(values);
         }
 
-        const errors = {};
+        const finalResult: ISSpecsValidateResult = {
+            valid: true,
+            props: {},
+        };
+
         function processProps(props: any, path: string[]): any {
             for (let [prop, propObj] of Object.entries(props)) {
                 if (propObj.props) {
                     processProps(propObj.props, [...path, prop, 'props']);
                 } else {
-                    const valueToValidate = __get(values, [
+                    const valuePath = [
                         ...path.filter((l) => l !== 'props'),
                         prop,
-                    ]);
-                    console.log('to', valueToValidate);
+                    ];
+                    const valueToValidate = __get(values, valuePath);
 
                     const result = validator.validate(valueToValidate, {
                         type: propObj.type,
-                        min: 100,
+                        ...(propObj.rules ?? {}),
+                        required: propObj.required,
                     });
-                    console.log('rrrrr', result);
 
-                    console.log('Proces', prop);
+                    if (finalResult.valid && !result.valid) {
+                        finalResult.valid = false;
+                    }
+                    finalResult.props[valuePath.join('.')] = result;
                 }
             }
         }
 
         processProps(specs.props ?? {}, []);
 
-        // for (let [prop, propObj] of Object.entries(spec?.props ?? {})) {
-        //     if (propObj.props) {
-
-        //     }
-        // }
-
-        // const result = validator.validate(what, {});
-
-        // console.log('validate', result);
+        return finalResult;
     }
 
     static apply(what: string | any, spec: any): any {
@@ -195,8 +196,6 @@ export default class SSpecsBase extends __SClass {
             what = __parseArgs(what);
         }
         const specsData = __deepMerge(this.extractDefaults(spec), what);
-
-        // @TODO            implement the "required" checks, etc...
 
         return specsData;
     }

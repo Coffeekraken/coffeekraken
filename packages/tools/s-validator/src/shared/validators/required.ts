@@ -4,7 +4,6 @@ import type {
     ISValidatorResult,
     ISValidatorValidatorSettings,
 } from '../SValidator.js';
-import __en from '../i18n/en.js';
 
 /**
  * @name            required
@@ -36,7 +35,9 @@ export interface IValidatorRequiredI18nSettings {
     default: string;
 }
 
-export interface IValidatorEmailSettings extends ISValidatorValidatorSettings {
+export interface IValidatorRequiredSettings
+    extends ISValidatorValidatorSettings {
+    i18n: IValidatorRequiredI18nSettings;
     trim: boolean;
 }
 
@@ -48,13 +49,13 @@ export const definition = {
 export default function required(
     value: any,
     validatorValue: boolean,
-    settings?: Partial<IValidatorEmailSettings>,
+    settings?: Partial<IValidatorRequiredSettings>,
 ): ISValidatorResult {
     let message, valid;
 
-    const finalSettings: IValidatorEmailSettings = __deepMerge(
+    const finalSettings: IValidatorRequiredSettings = __deepMerge(
         {
-            i18n: __en.required,
+            i18n: settings?.i18n?.required,
             trim: true,
         },
         settings ?? {},

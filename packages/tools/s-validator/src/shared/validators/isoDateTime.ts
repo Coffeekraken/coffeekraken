@@ -5,7 +5,6 @@ import type {
     ISValidatorResult,
     ISValidatorValidatorSettings,
 } from '../SValidator.js';
-import __en from '../i18n/en.js';
 
 /**
  * @name            isoDateTime
@@ -34,7 +33,7 @@ import __en from '../i18n/en.js';
  */
 
 export interface IValidatorIsoDateTimeI18nSettings {
-    string: string;
+    default: string;
 }
 
 export interface IValidatorIsoDateTimeSettings
@@ -57,16 +56,17 @@ export default function isoDateTime(
 
     const finalSettings: IValidatorIsoDateTimeSettings = __deepMerge(
         {
-            i18n: __en.isoDateTime,
+            i18n: settings?.i18n?.isoDateTime,
             trim: true,
         },
         settings ?? {},
     );
 
     if (typeof value !== 'string') {
-        throw new Error(
-            `Sorry but the "isoDateTime" validation only works with string`,
-        );
+        return {
+            valid: false,
+            message: finalSettings.i18n.default,
+        };
     }
 
     if (finalSettings.trim) {
@@ -76,7 +76,7 @@ export default function isoDateTime(
     valid = __isIsoDateTime(value);
 
     if (!valid) {
-        message = finalSettings.i18n?.string;
+        message = finalSettings.i18n?.default;
     }
 
     return {

@@ -4,7 +4,6 @@ import type {
     ISValidatorResult,
     ISValidatorValidatorSettings,
 } from '../SValidator.js';
-import __en from '../i18n/en.js';
 
 /**
  * @name            min
@@ -46,7 +45,8 @@ export interface IValidatorMinI18nSettings {
     array: string;
 }
 
-export interface ISValidatorMinSettings extends ISValidatorValidatorSettings {
+export interface IValidatorMinSettings extends ISValidatorValidatorSettings {
+    i18n: IValidatorMinI18nSettings;
     trim: boolean;
 }
 
@@ -65,7 +65,7 @@ export default function min(
 
     const finalSettings: ISValidatorMinSettings = __deepMerge(
         {
-            i18n: __en.min,
+            i18n: settings?.i18n?.min,
             trim: true,
         },
         settings ?? {},
@@ -92,9 +92,10 @@ export default function min(
             message = finalSettings.i18n?.object.replace('%n', n);
             break;
         default:
-            throw new Error(
-                `Sorry but the "min" validation only works with string, number, array or object values.`,
-            );
+            return {
+                valid: false,
+                message: finalSettings.i18n.string,
+            };
             break;
     }
 

@@ -5,19 +5,20 @@ import type {
     ISValidatorValidatorSettings,
 } from '../SValidator.js';
 
+import { __isBase64 } from '@coffeekraken/sugar/is';
+
 /**
- * @name            pattern
+ * @name            base64
  * @namespace            shared.validators
  * @type            Function
  * @platform          js
  * @platform          node
  * @status        beta
  *
- * Validate a value using a regex.
+ * Validate using the "base64" rule.
  *
  * @param           {any}               value        The value to validate
- * @param           {String}            pattern      The regex pattern to use
- * @param          {IValidatorPatternSettings}         [settings={}]          Some settings to configure your validation
+ * @param          {IValidatorMaxSettings}         [settings={}]          Some settings to configure your validation
  * @return          {ISValidatorResult}                       The result object
  *
  * @todo      interface
@@ -25,38 +26,37 @@ import type {
  * @todo      tests
  *
  * @example       js
- * import __maxValidator from '@coffeekraken/s-validator/validators/max
- * __maxValidator('hello world', 10);
+ * import __base64Validator from '@coffeekraken/s-validator/validators/base64
+ * __base64Validator('hello world');
  *
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 
-export interface ISValidatorPattern18nSettings {
+export interface IValidatorBase64I18nSettings {
     default: string;
 }
 
-export interface IValidatorPatternSettings
-    extends ISValidatorValidatorSettings {
-    i18n: ISValidatorPattern18nSettings;
+export interface IValidatorBase64Settings extends ISValidatorValidatorSettings {
+    i18n: IValidatorBase64I18nSettings;
     trim: boolean;
 }
 
 export const definition = {
-    description: 'Validate a string using a regex pattern',
-    type: 'String',
+    description: 'Validate a base64 string',
+    type: 'Boolean',
 };
 
-export default function pattern(
+export default function alphanum(
     value: any,
-    pattern: string,
-    settings?: Partial<IValidatorPatternSettings>,
+    validatorValue: boolean,
+    settings?: Partial<IValidatorBase64Settings>,
 ): ISValidatorResult {
     let message, valid;
 
-    const finalSettings: IValidatorPatternSettings = __deepMerge(
+    const finalSettings: IValidatorBase64Settings = __deepMerge(
         {
-            i18n: settings?.i18n?.pattern,
+            i18n: settings.i18n.base64,
             trim: true,
         },
         settings ?? {},
@@ -65,7 +65,7 @@ export default function pattern(
     if (typeof value !== 'string') {
         return {
             valid: false,
-            message: finalSettings.i18n.default,
+            message: finalSettings.i18n?.default,
         };
     }
 
@@ -73,15 +73,14 @@ export default function pattern(
         value = value.trim();
     }
 
-    const reg = new RegExp(pattern);
-    valid = reg.test(value);
+    const isBase64 = __isBase64(value);
 
-    if (!valid) {
-        message = finalSettings.i18n?.default.replace('%pattern', pattern);
+    if (!isBase64) {
+        message = finalSettings.i18n.default;
     }
 
     return {
-        valid,
+        valid: isBase64,
         message,
     };
 }

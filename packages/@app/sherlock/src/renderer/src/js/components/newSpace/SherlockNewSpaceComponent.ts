@@ -36,7 +36,11 @@ export class SherlockNewSpaceComponent extends LitElement {
     }
 
     _validateGunExisting(uid: string): void {
-        console.log('ui', uid);
+        if (!uid) {
+            return;
+        }
+
+        console.log('UO', uid);
 
         // console.log('en', __base64.encrypt(uid));
 

@@ -4,7 +4,6 @@ import type {
     ISValidatorResult,
     ISValidatorValidatorSettings,
 } from '../SValidator.js';
-import __en from '../i18n/en.js';
 
 /**
  * @name            hex
@@ -34,10 +33,11 @@ import __en from '../i18n/en.js';
  */
 
 export interface IValidatorHexI18nSettings {
-    string: string;
+    default: string;
 }
 
 export interface IValidatorHexSettings extends ISValidatorValidatorSettings {
+    i18n: IValidatorHexI18nSettings;
     trim: boolean;
 }
 
@@ -55,16 +55,17 @@ export default function hex(
 
     const finalSettings: IValidatorHexSettings = __deepMerge(
         {
-            i18n: __en.hex,
+            i18n: settings?.i18n?.hex,
             trim: true,
         },
         settings ?? {},
     );
 
     if (typeof value !== 'string') {
-        throw new Error(
-            `Sorry but the "hex" validation only works with string`,
-        );
+        return {
+            valid: false,
+            message: finalSettings.i18n.default,
+        };
     }
 
     if (finalSettings.trim) {
@@ -74,7 +75,7 @@ export default function hex(
     valid = value.match(/^#[a-zA-Z0-9]{3,6}$/);
 
     if (!valid) {
-        message = finalSettings.i18n?.string;
+        message = finalSettings.i18n?.default;
     }
 
     return {

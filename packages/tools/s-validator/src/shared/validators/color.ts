@@ -5,7 +5,6 @@ import type {
     ISValidatorResult,
     ISValidatorValidatorSettings,
 } from '../SValidator.js';
-import __en from '../i18n/en.js';
 
 /**
  * @name            color
@@ -35,10 +34,11 @@ import __en from '../i18n/en.js';
  */
 
 export interface IValidatorColorI18nSettings {
-    string: string;
+    default: string;
 }
 
 export interface IValidatorColorSettings extends ISValidatorValidatorSettings {
+    i18n: IValidatorColorI18nSettings;
     trim: boolean;
 }
 
@@ -56,16 +56,17 @@ export default function color(
 
     const finalSettings: IValidatorColorSettings = __deepMerge(
         {
-            i18n: __en.color,
+            i18n: settings?.i18n?.color,
             trim: true,
         },
         settings ?? {},
     );
 
     if (typeof value !== 'string') {
-        throw new Error(
-            `Sorry but the "color" validation only works with string`,
-        );
+        return {
+            valid: false,
+            message: finalSettings.i18n.default,
+        };
     }
 
     if (finalSettings.trim) {
@@ -75,7 +76,7 @@ export default function color(
     valid = __isColor(value);
 
     if (!valid) {
-        message = finalSettings.i18n?.string;
+        message = finalSettings.i18n?.default;
     }
 
     return {

@@ -1,33 +1,32 @@
 "use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.definition = void 0;
 // @ts-nocheck
 const is_1 = require("@coffeekraken/sugar/is");
 const object_1 = require("@coffeekraken/sugar/object");
-const en_js_1 = __importDefault(require("../i18n/en.js"));
 exports.definition = {
     description: 'Validate an iso time string',
     type: 'Boolean',
 };
 function isoTime(value, validatorValue, settings) {
-    var _a;
+    var _a, _b;
     let message, valid;
     const finalSettings = (0, object_1.__deepMerge)({
-        i18n: en_js_1.default.isoTime,
+        i18n: (_a = settings === null || settings === void 0 ? void 0 : settings.i18n) === null || _a === void 0 ? void 0 : _a.isoTime,
         trim: true,
     }, settings !== null && settings !== void 0 ? settings : {});
     if (typeof value !== 'string') {
-        throw new Error(`Sorry but the "isoTime" validation only works with string`);
+        return {
+            valid: false,
+            message: finalSettings.i18n.default,
+        };
     }
     if (finalSettings.trim) {
         value = value.trim();
     }
     valid = (0, is_1.__isIsoTime)(value);
     if (!valid) {
-        message = (_a = finalSettings.i18n) === null || _a === void 0 ? void 0 : _a.string;
+        message = (_b = finalSettings.i18n) === null || _b === void 0 ? void 0 : _b.default;
     }
     return {
         valid,
@@ -35,4 +34,4 @@ function isoTime(value, validatorValue, settings) {
     };
 }
 exports.default = isoTime;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7OztBQUFBLGNBQWM7QUFDZCwrQ0FBcUQ7QUFDckQsdURBQXlEO0FBS3pELDBEQUFpQztBQXNDcEIsUUFBQSxVQUFVLEdBQUc7SUFDdEIsV0FBVyxFQUFFLDZCQUE2QjtJQUMxQyxJQUFJLEVBQUUsU0FBUztDQUNsQixDQUFDO0FBRUYsU0FBd0IsT0FBTyxDQUMzQixLQUFVLEVBQ1YsY0FBdUIsRUFDdkIsUUFBNkM7O0lBRTdDLElBQUksT0FBTyxFQUFFLEtBQUssQ0FBQztJQUVuQixNQUFNLGFBQWEsR0FBOEIsSUFBQSxvQkFBVyxFQUN4RDtRQUNJLElBQUksRUFBRSxlQUFJLENBQUMsT0FBTztRQUNsQixJQUFJLEVBQUUsSUFBSTtLQUNiLEVBQ0QsUUFBUSxhQUFSLFFBQVEsY0FBUixRQUFRLEdBQUksRUFBRSxDQUNqQixDQUFDO0lBRUYsSUFBSSxPQUFPLEtBQUssS0FBSyxRQUFRLEVBQUU7UUFDM0IsTUFBTSxJQUFJLEtBQUssQ0FDWCwyREFBMkQsQ0FDOUQsQ0FBQztLQUNMO0lBRUQsSUFBSSxhQUFhLENBQUMsSUFBSSxFQUFFO1FBQ3BCLEtBQUssR0FBRyxLQUFLLENBQUMsSUFBSSxFQUFFLENBQUM7S0FDeEI7SUFFRCxLQUFLLEdBQUcsSUFBQSxnQkFBVyxFQUFDLEtBQUssQ0FBQyxDQUFDO0lBRTNCLElBQUksQ0FBQyxLQUFLLEVBQUU7UUFDUixPQUFPLEdBQUcsTUFBQSxhQUFhLENBQUMsSUFBSSwwQ0FBRSxNQUFNLENBQUM7S0FDeEM7SUFFRCxPQUFPO1FBQ0gsS0FBSztRQUNMLE9BQU87S0FDVixDQUFDO0FBQ04sQ0FBQztBQW5DRCwwQkFtQ0MifQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7OztBQUFBLGNBQWM7QUFDZCwrQ0FBcUQ7QUFDckQsdURBQXlEO0FBMEM1QyxRQUFBLFVBQVUsR0FBRztJQUN0QixXQUFXLEVBQUUsNkJBQTZCO0lBQzFDLElBQUksRUFBRSxTQUFTO0NBQ2xCLENBQUM7QUFFRixTQUF3QixPQUFPLENBQzNCLEtBQVUsRUFDVixjQUF1QixFQUN2QixRQUE2Qzs7SUFFN0MsSUFBSSxPQUFPLEVBQUUsS0FBSyxDQUFDO0lBRW5CLE1BQU0sYUFBYSxHQUE4QixJQUFBLG9CQUFXLEVBQ3hEO1FBQ0ksSUFBSSxFQUFFLE1BQUEsUUFBUSxhQUFSLFFBQVEsdUJBQVIsUUFBUSxDQUFFLElBQUksMENBQUUsT0FBTztRQUM3QixJQUFJLEVBQUUsSUFBSTtLQUNiLEVBQ0QsUUFBUSxhQUFSLFFBQVEsY0FBUixRQUFRLEdBQUksRUFBRSxDQUNqQixDQUFDO0lBRUYsSUFBSSxPQUFPLEtBQUssS0FBSyxRQUFRLEVBQUU7UUFDM0IsT0FBTztZQUNILEtBQUssRUFBRSxLQUFLO1lBQ1osT0FBTyxFQUFFLGFBQWEsQ0FBQyxJQUFJLENBQUMsT0FBTztTQUN0QyxDQUFDO0tBQ0w7SUFFRCxJQUFJLGFBQWEsQ0FBQyxJQUFJLEVBQUU7UUFDcEIsS0FBSyxHQUFHLEtBQUssQ0FBQyxJQUFJLEVBQUUsQ0FBQztLQUN4QjtJQUVELEtBQUssR0FBRyxJQUFBLGdCQUFXLEVBQUMsS0FBSyxDQUFDLENBQUM7SUFFM0IsSUFBSSxDQUFDLEtBQUssRUFBRTtRQUNSLE9BQU8sR0FBRyxNQUFBLGFBQWEsQ0FBQyxJQUFJLDBDQUFFLE9BQU8sQ0FBQztLQUN6QztJQUVELE9BQU87UUFDSCxLQUFLO1FBQ0wsT0FBTztLQUNWLENBQUM7QUFDTixDQUFDO0FBcENELDBCQW9DQyJ9

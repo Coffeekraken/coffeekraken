@@ -4,7 +4,6 @@ import type {
     ISValidatorResult,
     ISValidatorValidatorSettings,
 } from '../SValidator.js';
-import __en from '../i18n/en.js';
 
 /**
  * @name            password
@@ -33,11 +32,14 @@ import __en from '../i18n/en.js';
  */
 
 export interface IValidatorPasswordI18nSettings {
-    string: string;
+    weak: string;
+    medium: string;
+    strong: string;
 }
 
 export interface IValidatorPasswordSettings
     extends ISValidatorValidatorSettings {
+    i18n: IValidatorPasswordI18nSettings;
     trim: boolean;
     weakReg: RegExp;
     mediumReg: RegExp;
@@ -59,7 +61,7 @@ export default function password(
 
     const finalSettings: IValidatorPasswordSettings = __deepMerge(
         {
-            i18n: __en.password,
+            i18n: settings?.i18n?.password,
             trim: true,
             weakReg: /.*/,
             mediumReg:
@@ -71,9 +73,10 @@ export default function password(
     );
 
     if (typeof value !== 'string') {
-        throw new Error(
-            `Sorry but the "password" validation only works with string`,
-        );
+        return {
+            valid: false,
+            message: finalSettings.i18n.default,
+        };
     }
 
     if (finalSettings.trim) {

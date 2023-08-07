@@ -4,7 +4,6 @@ import type {
     ISValidatorResult,
     ISValidatorValidatorSettings,
 } from '../SValidator.js';
-import __en from '../i18n/en.js';
 
 /**
  * @name            number
@@ -32,12 +31,12 @@ import __en from '../i18n/en.js';
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 
-export interface IValidatorIntegerI18nSettings {
-    string: string;
+export interface IValidatorNumberI18nSettings {
+    default: string;
 }
 
 export interface IValidatorNumberSettings extends ISValidatorValidatorSettings {
-    i18n: IValidatorIntegerI18nSettings;
+    i18n: IValidatorNumberI18nSettings;
     trim: boolean;
     cast: boolean;
 }
@@ -56,7 +55,7 @@ export default function number(
 
     const finalSettings: IValidatorNumberSettings = __deepMerge(
         {
-            i18n: __en.number,
+            i18n: settings?.i18n?.number,
             cast: true,
             trim: true,
         },
@@ -64,9 +63,10 @@ export default function number(
     );
 
     if (typeof value !== 'string' && typeof value !== 'number') {
-        throw new Error(
-            `Sorry but the "number" validation only works with string and number`,
-        );
+        return {
+            valid: false,
+            message: finalSettings.i18n.default,
+        };
     }
 
     if (typeof value === 'string' && finalSettings.trim) {
@@ -83,7 +83,7 @@ export default function number(
     }
 
     if (!valid) {
-        message = finalSettings.i18n?.string;
+        message = finalSettings.i18n?.default;
     }
 
     return {

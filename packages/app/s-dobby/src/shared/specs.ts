@@ -106,11 +106,17 @@ export const SDobbyGunPoolSettingsSpecs = {
     title: 'SDobby Gun JS pool settings',
     description: 'Specify the SDobby Gun JS pool settings',
     props: {
-        key: {
+        gunUid: {
             type: 'String',
-            title: 'Gun JS storage key',
-            description: 'Specify the Gun JS storage key',
+            title: 'Gun JS unique key id',
+            description: 'Specify the Gun JS storage unique key',
             required: true,
+        },
+        privateKey: {
+            type: 'String',
+            title: 'Private key',
+            description:
+                'Specify the private key used to encrypt and decrypt data',
         },
     },
 };

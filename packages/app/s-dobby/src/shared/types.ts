@@ -3,7 +3,7 @@ import __SEventEmitter from '@coffeekraken/s-event-emitter';
 import __SDobby from '../node/exports';
 
 export interface ISDobbySettings {
-    pool?: ISDobbyPoolMetas;
+    pools?: Record<string, ISDobbyPoolMetas>;
 }
 export interface ISDobbyTaskStatic {
     settingsSpecs: any;
@@ -50,23 +50,28 @@ export interface ISDobbyClientSettings {
 
 export interface ISDobbyPoolMetas {
     uid: string;
-    type: 'fs' | 'gun';
     name: string;
-    settings: ISDobbyFsPoolSettings | ISDobbyGunPoolSettings;
+}
+
+export interface ISDobbyGunPoolMetas extends ISDobbyPoolMetas {
+    type: 'gun';
+    settings: ISDobbyGunPoolSettings;
+}
+
+export interface ISDobbyFsPoolMetas extends ISDobbyPoolMetas {
+    type: 'fs';
+    settings: ISDobbyFsPoolSettings;
 }
 
 export interface ISDobbyPoolSettings {}
 
 export interface ISDobbyFsPoolSettings extends ISDobbyPoolSettings {
-    rootDir: string;
+    folder: string;
 }
 
 export interface ISDobbyGunPoolSettings extends ISDobbyPoolSettings {
-    key: string;
-    pub: string;
-    priv: string;
-    eprub: string;
-    epriv: string;
+    gunUid: string;
+    privateKey: string;
 }
 
 export interface ISDobbyTaskMetas {

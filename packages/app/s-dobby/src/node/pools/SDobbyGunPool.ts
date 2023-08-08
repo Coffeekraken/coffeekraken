@@ -6,7 +6,7 @@ import * as __gun from 'gun';
 import { __deepMerge } from '@coffeekraken/sugar/object';
 
 import __SDobby, {
-    ISDobbyPoolMetas,
+    ISDobbyGunPoolMetas,
     SDobbyGunPoolSettingsSpecs,
 } from '../exports.js';
 import type {
@@ -52,7 +52,7 @@ export default class SDobbyP2pAdapter
      */
     constructor(
         dobby: __SDobby,
-        poolMetas: ISDobbyPoolMetas,
+        poolMetas: ISDobbyGunPoolMetas,
         settings?: ISDobbyGunPoolSettings,
     ) {
         super(
@@ -102,30 +102,36 @@ export default class SDobbyP2pAdapter
             };
 
             // const pair = await __gun.default.SEA.pair();
-            const pair = this.settings;
-            const enc = await __gun.default.SEA.encrypt(d, pair);
-            const data = await __gun.default.SEA.sign(enc, pair);
-            const msg = await __gun.default.SEA.verify(data, pair.pub);
-            const dec = await __gun.default.SEA.decrypt(enc, {
-                epriv: pair.epriv,
-            });
+
+            let data: any = d;
+            if (this.settings.privateKey) {
+                data = await __gun.default.SEA.encrypt(
+                    data,
+                    this.settings.privateKey,
+                );
+            }
+
+            // const data = await __gun.default.SEA.sign(enc, pair);
+            // const msg = await __gun.default.SEA.verify(data, pair.pub);
+            // const dec = await __gun.default.SEA.decrypt(enc, {
+            //     epriv: pair.epriv,
+            // });
             // const proof = await __gun.default.SEA.work(dec, pair);
             // const check = await __gun.default.SEA.work(d, pair);
 
             console.log(data);
-            console.log(dec);
 
             // console.log(dec);
             // console.log(proof === check);
 
             const gConfig = this._gun
-                .get(this.settings.key)
+                .get(this.settings.gunUid)
                 .get('tasks')
                 .on((tasks) => {
                     console.log('tasks', tasks);
                 });
 
-            // gConfig.put(enc);
+            gConfig.put(data);
 
             // const configPath = `${this.settings.rootDir}/${uid}.config.json`;
 

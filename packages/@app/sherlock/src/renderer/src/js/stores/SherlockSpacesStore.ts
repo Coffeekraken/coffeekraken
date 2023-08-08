@@ -27,9 +27,18 @@ class SherlockSpacesStore extends __SStore {
             __sherlockStores.initSpace(space);
 
             // check if a pool is defined
-            if (space.pool) {
-                // add the pool to dobby
-                await window.sherlock.addPool(JSON.parse(JSON.stringify(space.pool)));
+            if (space.pools) {
+                for (let [poolUid, pool] of Object.entries(space.pools)) {
+                    // add the pool to dobby
+                    await window.sherlock.addPool(
+                        JSON.parse(
+                            JSON.stringify({
+                                uid: poolUid,
+                                ...pool,
+                            }),
+                        ),
+                    );
+                }
             }
         }
     }
@@ -39,6 +48,10 @@ class SherlockSpacesStore extends __SStore {
         __sherlockStores.route.setRoute({
             space: space.uid,
         });
+    }
+
+    addSpace(space: ISherlockSpace): void {
+        this._spaces[space.uid] = space;
     }
 
     getSpaces(): Record<string, ISherlockSpace> {

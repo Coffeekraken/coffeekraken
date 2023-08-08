@@ -45,9 +45,9 @@ export class SherlockServiceComponent extends LitElement {
 
         // reactive
         [
-            __sherlockStores.current().tasks,
-            __sherlockStores.current().tasksStates,
-            __sherlockStores.current().tasksResults,
+            __sherlockStores.space().tasks,
+            __sherlockStores.space().tasksStates,
+            __sherlockStores.space().tasksResults,
         ].forEach((store) => {
             store.$set(
                 '*',
@@ -73,15 +73,15 @@ export class SherlockServiceComponent extends LitElement {
     }
 
     startTask(task: ISDobbyTaskMetas) {
-        __sherlockStores.current().tasks.startTask(task);
+        __sherlockStores.space().tasks.startTask(task);
     }
 
     pauseTask(task: ISDobbyTaskMetas) {
-        __sherlockStores.current().tasks.pauseTask(task);
+        __sherlockStores.space().tasks.pauseTask(task);
     }
 
     resumeTask(task: ISDobbyTaskMetas) {
-        __sherlockStores.current().tasks.resumeTask(task);
+        __sherlockStores.space().tasks.resumeTask(task);
     }
 
     renderResultWidget(result: ISDobbyTaskResult): any {
@@ -112,13 +112,13 @@ export class SherlockServiceComponent extends LitElement {
 
     render() {
         const tasks =
-            __sherlockStores.current().tasks.getTasks({
+            __sherlockStores.space().tasks.getTasks({
                 client: __sherlockStores.route.client,
                 service: __sherlockStores.route.service,
             }) ?? {};
 
         const service: ISherlockService = __sherlockStores
-            .current()
+            .space()
             .services.getService(this.service);
         return html`
             <article class="sh-service">
@@ -157,10 +157,10 @@ export class SherlockServiceComponent extends LitElement {
                     <main class="_tasks">
                         ${Object.entries(tasks).map(([taskUid, task]) => {
                             const taskState =
-                                __sherlockStores.current().tasksStates.getTaskState(taskUid) ?? {};
+                                __sherlockStores.space().tasksStates.getTaskState(taskUid) ?? {};
 
                             const taskResults = __sherlockStores
-                                .current()
+                                .space()
                                 .tasksResults.getTaskResults(taskUid);
 
                             const lastTaskResult = taskResults[Object.keys(taskResults).at(0)];
@@ -217,7 +217,7 @@ export class SherlockServiceComponent extends LitElement {
                                                                     ></i>
                                                                 `
                                                               : __sherlockStores
-                                                                    .current()
+                                                                    .space()
                                                                     .tasksResults.areTaskResultsLoading(
                                                                         task.uid,
                                                                     )

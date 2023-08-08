@@ -3,6 +3,8 @@ import { __readJsonSync, __writeJsonSync } from '@coffeekraken/sugar/fs';
 import { __deepMerge } from '@coffeekraken/sugar/object';
 import __SDobbyPool from '../SDobbyPool.js';
 
+import { __homeDir } from '@coffeekraken/sugar/path';
+
 import __fs from 'fs';
 
 import type {
@@ -77,7 +79,10 @@ export default class SDobbyFsPool extends __SDobbyPool implements ISDobbyPool {
      */
     loadConfig(): Promise<ISDobbyConfig> {
         return new Promise((resolve) => {
-            const configPath = `${this.settings.rootDir}/${this.uid}.config.json`;
+            const configPath = `${this.settings.folder.replace(
+                /^\~/,
+                `${__homeDir()}`,
+            )}/${this.uid}.config.json`;
 
             if (!__fs.existsSync(configPath)) {
                 return resolve({
@@ -106,7 +111,10 @@ export default class SDobbyFsPool extends __SDobbyPool implements ISDobbyPool {
      */
     saveConfig(): Promise<ISDobbySaveConfigResult> {
         return new Promise((resolve) => {
-            const configPath = `${this.settings.rootDir}/${this.uid}.config.json`;
+            const configPath = `${this.settings.folder.replace(
+                /^\~/,
+                `${__homeDir()}`,
+            )}/${this.uid}.config.json`;
             __writeJsonSync(configPath, this.config);
             resolve({});
         });

@@ -7,9 +7,9 @@ export const SDobbyFsPoolSettingsSpecs = {
     title: 'SDobby FS adapter settings',
     description: 'Specify the SDobby FS adapter settings',
     props: {
-        rootDir: {
+        folder: {
             type: 'String',
-            title: 'Root directory',
+            title: 'Folder',
             description: 'Specify where to save the SDobby configurations',
             default: `${__homeDir()}/.dobby`,
         },

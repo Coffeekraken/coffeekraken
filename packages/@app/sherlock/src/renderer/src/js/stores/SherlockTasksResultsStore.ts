@@ -21,7 +21,7 @@ class SherlockTasksResultsStore extends __SStore {
         this._spaceUid = spaceUid;
 
         __sherlockStores.route.$set('service', async () => {
-            const tasks: Record<string, ISherlockTask> = __sherlockStores.current().tasks.getTasks({
+            const tasks: Record<string, ISherlockTask> = __sherlockStores.space().tasks.getTasks({
                 client: __sherlockStores.route.client,
             });
 

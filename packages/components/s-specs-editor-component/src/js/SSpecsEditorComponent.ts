@@ -501,8 +501,6 @@ export default class SSpecsEditorComponent extends __SLitComponent {
             valuePath = path.filter((l) => l !== 'props');
             values = __get(this._values, valuePath);
 
-            console.log('PA', path, values);
-
             if (values !== undefined && !__isPlainObject(values)) {
                 values = __set(
                     this._values,

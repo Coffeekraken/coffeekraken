@@ -1,8 +1,8 @@
-import { ISherlockSpace, ISherlockTask } from '../shared/SherlockTypes.js';
-import __SherlockContentfulAdapter from './adapters/contentful/SherlockContentfulAdapter.js';
+import { ISherlockPool, ISherlockSpace, ISherlockTask } from '../shared/SherlockTypes.js';
 import type { ISherlockAdapter } from './adapters/SherlockAdapter.js';
+import __SherlockContentfulAdapter from './adapters/contentful/SherlockContentfulAdapter.js';
+import __SherlockGunAdapter from './adapters/gun/SherlockGunAdapter.js';
 
-import type { ISDobbyPoolMetas } from '@coffeekraken/s-dobby';
 import __SDobby from '@coffeekraken/s-dobby';
 
 import __path from 'path';
@@ -44,6 +44,12 @@ export default class SherlockApp {
 
             for (let [spaceUid, space] of Object.entries(spaces)) {
                 switch (space.adapter.type) {
+                    case 'gun':
+                        this.adapters[space.uid] = new __SherlockGunAdapter({
+                            gunUid: space.adapter.settings.gunUid,
+                            privateKey: space.adapter.settings.privateKey,
+                        });
+                        break;
                     case 'contentful':
                         this.adapters[space.uid] = new __SherlockContentfulAdapter({
                             space: space.adapter.settings.space,
@@ -71,16 +77,30 @@ export default class SherlockApp {
     //     });
     // }
 
-    addPool(poolMetas: ISDobbyPoolMetas): Promise<void> {
+    addPool(pool: ISherlockPool): Promise<void> {
         return new Promise((resolve) => {
-            return;
-            console.log('A', poolMetas);
-            this._dobby.addPool(poolMetas);
+            console.log('Add', pool);
+            this._dobby.addPool({
+                uid: pool.uid,
+                type: pool.type,
+                name: pool.name,
+                settings:
+                    pool.type === 'gun'
+                        ? {
+                              gunUid: pool.settings.gunUid,
+                              privateKey: null,
+                          }
+                        : pool.type === 'fs'
+                        ? {
+                              folder: pool.settings.folder,
+                          }
+                        : {},
+            });
             resolve();
         });
     }
 
-    addSpace(space: ISherlockSpace): Promise<Record<string, ISherlockSpace>> {
+    addSpace(space: ISherlockSpace): Promise<ISherlockSpace> {
         return new Promise((resolve, reject) => {
             // read the current spaces config
             let spaces = {};
@@ -100,7 +120,7 @@ export default class SherlockApp {
             __fs.writeFileSync(this._spacesConfigPath, JSON.stringify(spaces, null, 4));
 
             // resolve the new space
-            resolve(spaces);
+            resolve(space);
         });
     }
 

@@ -11,24 +11,47 @@ export interface ISherlockSpace {
     name: string;
     description: string;
     image: ISherlockImage;
-    adapter: {
-        type: 'fs' | 'gun' | 'contentful';
-        settings:
-            | ISherlockSpaceFsAdapterSettings
-            | ISherlockSpaceGunAdapterSettings
-            | ISherlockSpaceContentfulAdapterSettings;
-    };
+    adapter:
+        | {
+              type: 'fs';
+              settings: ISherlockFsAdapterSettings;
+          }
+        | {
+              type: 'gun';
+              settings: ISherlockGunAdapterSettings;
+          }
+        | {
+              type: 'contentful';
+              settings: ISherlockContentfulAdapterSettings;
+          };
+    pools?: Record<string, ISherlockPool>;
 }
 
-export interface ISherlockSpaceFsAdapterSettings {
+export interface ISherlockPool {
+    uid: string;
+    type: 'fs' | 'gun';
+    name: string;
+    settings: ISherlockFsPoolSettings | ISherlockGunPoolSettings;
+}
+
+export interface ISherlockGunPoolSettings {
+    gunUid: string;
+}
+
+export interface ISherlockFsPoolSettings {
     folder: string;
 }
 
-export interface ISherlockSpaceGunAdapterSettings {
-    gunUid?: string;
+export interface ISherlockFsAdapterSettings {
+    folder: string;
 }
 
-export interface ISherlockSpaceContentfulAdapterSettings {
+export interface ISherlockGunAdapterSettings {
+    gunUid: string;
+    privateKey?: string;
+}
+
+export interface ISherlockContentfulAdapterSettings {
     space: string;
     accessToken: string;
     managementAccessToken: string;

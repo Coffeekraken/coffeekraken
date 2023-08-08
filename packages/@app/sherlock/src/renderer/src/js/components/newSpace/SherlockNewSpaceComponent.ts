@@ -3,6 +3,8 @@ import { customElement, state } from 'lit/decorators.js';
 
 import { __base64 } from '@coffeekraken/sugar/crypto';
 
+import __SherlockStores from '../../stores/SherlockStores';
+
 import {
     SSherlockNewSpaceSpec,
     SSherlockSpaceContentfulAdapterSpec,
@@ -67,6 +69,12 @@ export class SherlockNewSpaceComponent extends LitElement {
                         gunUid: this._space.uid,
                     },
                 };
+                this._space.pool = {
+                    type: 'gun',
+                    settings: {
+                        gunUid: this._space.uid,
+                    },
+                };
                 break;
             default:
                 this._space.adapter = {
@@ -80,9 +88,21 @@ export class SherlockNewSpaceComponent extends LitElement {
     }
 
     async _saveMetas(metas: ISherlockSpace): Promise<void> {
-        const res = await window.sherlock.addSpace(this._space);
+        const finalSpace = {
+            ...metas,
+            ...this._space,
+        };
 
-        console.log('RES', res);
+        // add space in sherlock app
+        const addedSpace = await window.sherlock.addSpace(finalSpace);
+
+        // add space in store
+        __SherlockStores.spaces.addSpace(addedSpace);
+
+        // go to new space
+        __SherlockStores.route.setRoute({
+            space: addedSpace.uid,
+        });
     }
 
     render() {
@@ -127,7 +147,7 @@ export class SherlockNewSpaceComponent extends LitElement {
                                                     uid="fs-adapter"
                                                     .values=${{
                                                         folder: {
-                                                            value: '%home/.sherlock',
+                                                            value: '~/.sherlock',
                                                         },
                                                     }}
                                                     .specs=${SSherlockSpaceFsAdapterSpec}

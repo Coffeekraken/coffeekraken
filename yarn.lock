@@ -61,6 +61,7 @@ __metadata:
     eslint: ^8.42.0
     eslint-config-prettier: ^8.8.0
     eslint-plugin-prettier: ^4.2.1
+    gun: ^0.2020.1239
     lit: ^2.7.6
     postcss: ^8.4.25
     postcss-atroot: ^0.2.3

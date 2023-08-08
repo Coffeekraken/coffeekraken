@@ -122,11 +122,11 @@ export default class SDobby extends __SClass {
         super(__deepMerge({}, settings ?? {}));
 
         // default pool
-        this.pools.local = new __SDobbyFsPool(this, <ISDobbyPoolMetas>{
-            uid: 'local',
-            name: 'Local',
-            type: 'fs',
-        });
+        // this.pools.local = new __SDobbyFsPool(this, <ISDobbyPoolMetas>{
+        //     uid: 'local',
+        //     name: 'Local',
+        //     type: 'fs',
+        // });
 
         // listen for pools ready
         this.events.on('pool.ready', (pool: ISDobbyPool) => {
@@ -134,13 +134,20 @@ export default class SDobby extends __SClass {
         });
 
         // pool from the settings
-        if (this.settings.pool) {
-            this.addPool(this.settings.pool);
+        if (this.settings.pools) {
+            for (let [poolUid, pool] of Object.entries(this.settings.pools)) {
+                this.addPool(pool);
+            }
         }
     }
 
-    addPool(poolMetas: ISDobbyPoolMetas): void {
+    addPool(poolMetas: ISDobbyPoolMetas): ISDobbyPoolMetas {
         console.log('_AD', poolMetas);
+
+        // check if the wanted pool is already initiated
+        if (this.pools[poolMetas.uid]) {
+            return poolMetas;
+        }
 
         if (!this.constructor.registeredPools[poolMetas.type]) {
             throw new Error(
@@ -161,6 +168,8 @@ export default class SDobby extends __SClass {
 
         // start the pool
         this.pools[poolMetas.uid].start();
+
+        return poolMetas;
     }
 
     server(): void {

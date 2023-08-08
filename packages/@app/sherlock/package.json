@@ -36,6 +36,7 @@
     "contentful-management": "^10.39.1",
     "cron-parser": "^4.8.1",
     "electron-updater": "^5.3.0",
+    "gun": "^0.2020.1239",
     "lit": "^2.7.6",
     "userdir": "^1.0.0",
     "ws": "^8.13.0"

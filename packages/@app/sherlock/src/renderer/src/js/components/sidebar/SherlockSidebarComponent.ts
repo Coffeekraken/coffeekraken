@@ -19,7 +19,7 @@ export class SherlockSidebarComponent extends LitElement {
 
         // reactivity
         __sherlockStores.route.$set('space', () => {
-            __sherlockStores.current().clients.$set(
+            __sherlockStores.space().clients.$set(
                 '*',
                 () => {
                     this.requestUpdate();
@@ -41,7 +41,7 @@ export class SherlockSidebarComponent extends LitElement {
             },
         );
 
-        // __sherlockStores.current().services.$set(
+        // __sherlockStores.space().services.$set(
         //     '*',
         //     () => {
         //         this.requestUpdate();
@@ -79,7 +79,8 @@ export class SherlockSidebarComponent extends LitElement {
     render() {
         let clients = {};
         if (__sherlockStores.route.space) {
-            clients = __sherlockStores.current().clients.getClients();
+            console.log('SPace', __sherlockStores.route.space);
+            clients = __sherlockStores.space().clients.getClients();
         }
 
         return html`
@@ -93,8 +94,10 @@ export class SherlockSidebarComponent extends LitElement {
                               : html`
                                     <ul class="_clients">
                                         ${Object.entries(clients).map(([clientUid, client]) => {
+                                            console.log('CLIENT', client);
+                                            if (!client.uid) return;
                                             const services = __sherlockStores
-                                                .current()
+                                                .space()
                                                 .services.getServices({
                                                     client: client.uid,
                                                 });

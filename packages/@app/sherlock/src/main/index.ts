@@ -71,9 +71,11 @@ app.whenReady().then(() => {
         return sherlockApp.getSpaces();
     });
     ipcMain.handle('spaces:add', (e, space: ISherlockSpace) => {
+        console.log('ÂDD', space);
         return sherlockApp.addSpace(space);
     });
     ipcMain.handle('clients:get', (e, spaceUid: string) => {
+        console.log('space', spaceUid, sherlockApp.adapters);
         return sherlockApp.adapters[spaceUid].getClients();
     });
     ipcMain.handle('services:get', (e, spaceUid: string, clientUid: string) => {

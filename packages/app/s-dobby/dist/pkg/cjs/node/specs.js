@@ -22,12 +22,12 @@ exports.SDobbyFsPoolSettingsSpecs = {
     title: 'SDobby FS adapter settings',
     description: 'Specify the SDobby FS adapter settings',
     props: {
-        rootDir: {
+        folder: {
             type: 'String',
-            title: 'Root directory',
+            title: 'Folder',
             description: 'Specify where to save the SDobby configurations',
             default: `${(0, path_1.__homeDir)()}/.dobby`,
         },
     },
 };
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7Ozs7O0FBQUEsa0RBQWdDO0FBRWhDLG1EQUFxRDtBQUV4QyxRQUFBLHlCQUF5QixHQUFHO0lBQ3JDLElBQUksRUFBRSxRQUFRO0lBQ2QsS0FBSyxFQUFFLDRCQUE0QjtJQUNuQyxXQUFXLEVBQUUsd0NBQXdDO0lBQ3JELEtBQUssRUFBRTtRQUNILE9BQU8sRUFBRTtZQUNMLElBQUksRUFBRSxRQUFRO1lBQ2QsS0FBSyxFQUFFLGdCQUFnQjtZQUN2QixXQUFXLEVBQUUsaURBQWlEO1lBQzlELE9BQU8sRUFBRSxHQUFHLElBQUEsZ0JBQVMsR0FBRSxTQUFTO1NBQ25DO0tBQ0o7Q0FDSixDQUFDIn0=
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7Ozs7O0FBQUEsa0RBQWdDO0FBRWhDLG1EQUFxRDtBQUV4QyxRQUFBLHlCQUF5QixHQUFHO0lBQ3JDLElBQUksRUFBRSxRQUFRO0lBQ2QsS0FBSyxFQUFFLDRCQUE0QjtJQUNuQyxXQUFXLEVBQUUsd0NBQXdDO0lBQ3JELEtBQUssRUFBRTtRQUNILE1BQU0sRUFBRTtZQUNKLElBQUksRUFBRSxRQUFRO1lBQ2QsS0FBSyxFQUFFLFFBQVE7WUFDZixXQUFXLEVBQUUsaURBQWlEO1lBQzlELE9BQU8sRUFBRSxHQUFHLElBQUEsZ0JBQVMsR0FBRSxTQUFTO1NBQ25DO0tBQ0o7Q0FDSixDQUFDIn0=

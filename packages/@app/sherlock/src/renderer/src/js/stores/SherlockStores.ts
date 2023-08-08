@@ -30,11 +30,8 @@ export default {
     route: new SherlockRouteStore(),
     spaces: new __SherlockSpacesStore(),
     _spaces: {},
-    current(): ISherlockSpaceStores {
-        return this._spaces[this.route.space];
-    },
-    space(spaceUid: string): ISherlockSpaceStores {
-        return this._spaces[spaceUid];
+    space(spaceUid?: string): ISherlockSpaceStores {
+        return this._spaces[spaceUid ?? this.route.space];
     },
     addSpace(space: ISherlockSpace): void | ISherlockSpaceStores {
         if (this._spaces[space.uid]) {

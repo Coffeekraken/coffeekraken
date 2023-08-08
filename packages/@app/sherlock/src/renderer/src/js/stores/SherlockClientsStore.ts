@@ -22,7 +22,9 @@ class SherlockClientsStore extends __SStore {
     }
 
     async _init() {
+        console.log('c', this._spaceUid);
         const clients = await window.sherlock.getClients(this._spaceUid);
+        console.log('CLIENT', clients);
         Object.assign(this._clients, clients);
     }
 

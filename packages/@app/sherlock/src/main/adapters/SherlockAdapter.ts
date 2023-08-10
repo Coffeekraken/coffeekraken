@@ -1,17 +1,16 @@
 import { __deepMerge } from '@coffeekraken/sugar/object';
 
-import type {
-    ISherlockClient,
-    ISherlockService,
-    ISherlockTaskResult,
-} from '../../shared/SherlockTypes.js';
+import type { ISherlockTask, ISherlockTaskResult } from '../../shared/SherlockTypes.js';
 
 export interface ISherlockAdapterSettings {}
 
 export interface ISherlockAdapter {
-    getClients(): Promise<Record<string, ISherlockClient>>;
-    getServices(clientUid: string): Promise<Record<string, ISherlockService>>;
-    getTaskResults(taskUid: string): Promise<Record<string, ISherlockTaskResult>>;
+    clients(cb: Function): void;
+    service(serviceUid: string, cb: Function): void;
+    clientServices(clientUid: string, cb: Function): void;
+    serviceTasks(serviceUid: string, cb: Function): void;
+    addTask(task: ISherlockTask): Promise<ISherlockTask>;
+    taskResults(taskUid: string, cb: Function): void;
     setTaskResult(taskResult: ISherlockTaskResult): Promise<ISherlockTaskResult>;
 }
 

@@ -1,7 +1,7 @@
 import __SClass from '@coffeekraken/s-class';
 import __SEventEmitter from '@coffeekraken/s-event-emitter';
 import { __debounce } from '@coffeekraken/sugar/function';
-import { __isNode, __isPlainObject } from '@coffeekraken/sugar/is';
+import { __isNode } from '@coffeekraken/sugar/is';
 import {
     __deepAssign,
     __deepMerge,
@@ -9,6 +9,8 @@ import {
 } from '@coffeekraken/sugar/object';
 import __SStoreLsAdapter from '../js/adapters/SStoreLsAdapter.js';
 import __SStoreFsAdapter from '../node/adapters/SStoreFsAdapter.js';
+
+import { __isPlainObject } from '@coffeekraken/sugar/is';
 
 /**
  * @name                SStore
@@ -153,9 +155,11 @@ export default class SStore extends __SClass {
             }
         }
 
-        let saveTimeout;
-        const data = __deepProxy(
-            object,
+        Object.assign(this, object);
+
+        // let saveTimeout;
+        const proxy = __deepProxy(
+            this,
             (actionObj) => {
                 switch (actionObj.action) {
                     case 'set':
@@ -198,33 +202,28 @@ export default class SStore extends __SClass {
         // instanciate the event emitter
         this._eventEmitter = new __SEventEmitter();
 
-        this._enrichObj(data);
-
         // restoring state if wanted
         if (this.settings.save) {
             // handle async adapter
             if (this.settings.adapter.async) {
                 (async () => {
                     const restoredState = await this.settings.adapter.load();
-                    __deepAssign(data, restoredState);
+                    __deepAssign(this, restoredState);
                 })();
             } else {
                 const restoredState = this.settings.adapter.load();
-                __deepAssign(data, restoredState);
+                __deepAssign(this, restoredState);
             }
         }
 
-        this.data = data;
+        if (this.mount) {
+            proxy.mount = this.mount.bind(this);
+            setTimeout(() => {
+                proxy.mount();
+            });
+        }
 
-        const _this = this;
-        return new Proxy(this.data, {
-            get(target, prop, receiver) {
-                if (!_this.data[prop]) {
-                    return _this[prop];
-                }
-                return target[prop];
-            },
-        });
+        return proxy;
     }
 
     _enrichObj(obj: any): void {

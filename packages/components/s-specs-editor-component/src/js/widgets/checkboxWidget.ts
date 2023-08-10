@@ -82,7 +82,7 @@ export default class SSpecsEditorComponentCheckboxWidget extends __SSpecsEditorW
                                     } else {
                                         this._checkbox.uncheck(option);
                                     }
-                                    this.setValue(this.values);
+                                    this.setValue(this.values.value);
                                 }}
                                 name="${this.path.at(-1)}"
                                 class="${this.editor.utils.cls(

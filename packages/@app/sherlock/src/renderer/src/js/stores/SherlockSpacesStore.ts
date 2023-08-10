@@ -24,8 +24,6 @@ class SherlockSpacesStore extends __SStore {
         Object.assign(this._spaces, spaces);
 
         for (let [spaceUid, space] of Object.entries(this._spaces)) {
-            __sherlockStores.initSpace(space);
-
             // check if a pool is defined
             if (space.pools) {
                 for (let [poolUid, pool] of Object.entries(space.pools)) {
@@ -44,6 +42,8 @@ class SherlockSpacesStore extends __SStore {
     }
 
     async selectSpace(space: ISherlockSpace): Promise<void> {
+        __sherlockStores.space(space.uid);
+
         // const res = await window.sherlock.setSpace(space.toJson());
         __sherlockStores.route.setRoute({
             space: space.uid,

@@ -28,11 +28,15 @@ export const SDobbyTaskSpec = {
             options: [
                 {
                     id: 'responseTime',
-                    name: 'Response time (ping)',
+                    name: 'Response time (ping + TTFB)',
                 },
                 {
                     id: 'lighthouse',
                     name: 'Lighthouse',
+                },
+                {
+                    id: 'ecoindex',
+                    name: 'Ecoindex',
                 },
             ],
             required: true,
@@ -117,6 +121,20 @@ export const SDobbyGunPoolSettingsSpecs = {
             title: 'Private key',
             description:
                 'Specify the private key used to encrypt and decrypt data',
+        },
+    },
+};
+
+export const SDobbyPocketbasePoolSettingsSpecs = {
+    type: 'Object',
+    title: 'Pocketbase pool settings',
+    description: 'Specify the SDobby pocketbase pool settings',
+    props: {
+        url: {
+            type: 'String',
+            title: 'Server Url',
+            description: 'Pocketbase server url',
+            required: true,
         },
     },
 };

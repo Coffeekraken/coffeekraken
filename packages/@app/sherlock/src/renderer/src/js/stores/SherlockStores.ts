@@ -1,12 +1,13 @@
-import { ISherlockSpace } from '../../../../shared/SherlockTypes.js';
 import SherlockAppStore from './SherlockAppStore.js';
 import __SherlockClientsStore from './SherlockClientsStore.js';
-import SherlockRouteStore from './SherlockRouteStore.js';
+import __SherlockPoolsStore from './SherlockPoolsStore.js';
+import __SherlockRouteStore from './SherlockRouteStore.js';
 import __SherlockServicesStore from './SherlockServicesStore.js';
+import __SherlockServiceStore from './SherlockServiceStore.js';
 import __SherlockSpacesStore from './SherlockSpacesStore.js';
 import __SherlockTasksResultsStore from './SherlockTasksResultsStore.js';
 import __SherlockTasksStateStore from './SherlockTasksStateStore.js';
-import __SherlockTasksStore, { dobbyClient } from './SherlockTasksStore.js';
+import __SherlockTasksStore from './SherlockTasksStore.js';
 
 export interface ISherlockStores {
     route: any;
@@ -23,29 +24,47 @@ export interface ISherlockSpaceStores {
     tasksResults: any;
     clients: any;
     services: any;
+    pools: any;
 }
+
+const routeStore = new __SherlockRouteStore();
 
 export default {
     app: new SherlockAppStore(),
-    route: new SherlockRouteStore(),
+    route: routeStore,
     spaces: new __SherlockSpacesStore(),
     _spaces: {},
-    space(spaceUid?: string): ISherlockSpaceStores {
-        return this._spaces[spaceUid ?? this.route.space];
-    },
-    addSpace(space: ISherlockSpace): void | ISherlockSpaceStores {
-        if (this._spaces[space.uid]) {
-            return;
+    space(spaceUid: string): ISherlockSpaceStores {
+        if (!spaceUid) {
+            spaceUid = routeStore.space;
         }
-    },
-    initSpace(space: ISherlockSpace): void | ISherlockSpace {
-        this._spaces[space.uid] = {
-            tasks: new __SherlockTasksStore(space.uid),
-            tasksStates: new __SherlockTasksStateStore(space.uid),
-            tasksResults: new __SherlockTasksResultsStore(space.uid),
-            clients: new __SherlockClientsStore(space.uid),
-            services: new __SherlockServicesStore(space.uid),
+
+        if (this._spaces[spaceUid]) {
+            return this._spaces[spaceUid];
+        }
+
+        this._spaces[spaceUid] = {
+            tasks: new __SherlockTasksStore(spaceUid),
+            tasksStates: new __SherlockTasksStateStore(spaceUid),
+            tasksResults: new __SherlockTasksResultsStore(spaceUid),
+            clients: new __SherlockClientsStore(spaceUid),
+            services: new __SherlockServicesStore(spaceUid),
+            pools: new __SherlockPoolsStore(spaceUid),
+            _services: {},
+            service(serviceUid?: string) {
+                if (!serviceUid) {
+                    serviceUid = routeStore.service;
+                }
+                if (this._services[serviceUid]) {
+                    return this._services[serviceUid];
+                }
+                this._services[serviceUid] = {
+                    service: new __SherlockServiceStore(spaceUid, serviceUid),
+                };
+                return this._services[serviceUid];
+            },
         };
+
+        return this._spaces[spaceUid];
     },
-    dobbyClient,
 };

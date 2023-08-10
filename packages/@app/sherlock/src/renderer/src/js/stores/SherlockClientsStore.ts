@@ -1,6 +1,7 @@
 import __SStore from '@coffeekraken/s-store';
 
 import type { ISherlockClient } from '../../shared/SherlockTypes.js';
+import __sherlockApi from '../api/SherlockApi.js';
 
 export interface IGetClientsParams {
     space?: string;
@@ -18,14 +19,12 @@ class SherlockClientsStore extends __SStore {
     constructor(spaceUid: string) {
         super();
         this._spaceUid = spaceUid;
-        this._init();
     }
 
-    async _init() {
-        console.log('c', this._spaceUid);
-        const clients = await window.sherlock.getClients(this._spaceUid);
-        console.log('CLIENT', clients);
-        Object.assign(this._clients, clients);
+    async mount() {
+        __sherlockApi.clients(this._spaceUid, (client: ISherlockClient) => {
+            this._clients[client.uid] = client;
+        });
     }
 
     getClients(params?: IGetClientsParams): Record<string, ISherlockClient> {

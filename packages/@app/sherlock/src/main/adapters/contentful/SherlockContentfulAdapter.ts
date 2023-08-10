@@ -54,17 +54,12 @@ export default class SherlockContentfulAdapter
         });
     }
 
-    getClients(): Promise<Record<string, ISherlockClient>> {
-        return new Promise(async (resolve) => {
-            const entries = await this._client.getEntries({
-                content_type: 'client',
-            });
-
-            const clients = {};
-            entries.items.forEach((entry) => {
-                clients[entry.fields.uid] = this._processClientFromEntry(entry);
-            });
-            resolve(clients);
+    async clients(cb: Function): void {
+        const entries = await this._client.getEntries({
+            content_type: 'client',
+        });
+        entries.items.forEach((entry) => {
+            cb(this._processClientFromEntry(entry));
         });
     }
 
@@ -77,21 +72,26 @@ export default class SherlockContentfulAdapter
             client: entry.fields.client?.uid,
         };
     }
-    getServices(clientUid: string): Promise<Record<string, ISherlockService>> {
-        return new Promise(async (resolve) => {
-            const entries = await this._client.getEntries({
-                content_type: 'service',
-                'fields.client.fields.uid': clientUid,
-                'fields.client.sys.contentType.sys.id': 'client',
-            });
-
-            const services = {};
-            entries.items.forEach((entry) => {
-                services[entry.fields.uid] = this._processServiceFromEntry(entry);
-            });
-
-            resolve(services);
+    async clientServices(clientUid: string, cb: Function): Promise<void> {
+        const entries = await this._client.getEntries({
+            content_type: 'service',
+            'fields.client.fields.uid': clientUid,
+            'fields.client.sys.contentType.sys.id': 'client',
         });
+        entries.items.forEach((entry) => {
+            cb(this._processServiceFromEntry(entry));
+        });
+    }
+
+    async clientServicesTasks(clientUid: string, serviceUid: string, cb: Function): Promise<void> {
+        // const entries = await this._client.getEntries({
+        //     content_type: 'service',
+        //     'fields.client.fields.uid': clientUid,
+        //     'fields.client.sys.contentType.sys.id': 'client',
+        // });
+        // entries.items.forEach((entry) => {
+        //     cb(this._processServiceFromEntry(entry));
+        // });
     }
 
     _getEnvironment(): Promise<any> {
@@ -112,21 +112,15 @@ export default class SherlockContentfulAdapter
             data: entry.fields.data,
         };
     }
-    getTaskResults(taskUid: string): Promise<Record<string, ISherlockTaskResult>> {
-        return new Promise(async (resolve) => {
-            const entries = await this._client.getEntries({
-                limit: 25,
-                // order: 'sys.createdAt',
-                content_type: 'taskResult',
-                'fields.taskUid': taskUid,
-            });
+    async taskResults(taskUid: string, cb: Function): Promise<void> {
+        const entries = await this._client.getEntries({
+            limit: 25,
+            content_type: 'taskResult',
+            'fields.taskUid': taskUid,
+        });
 
-            const results = {};
-            entries.items.forEach((entry) => {
-                results[entry.fields.uid] = this._processTaskResultFromEntry(entry);
-            });
-
-            resolve(results);
+        entries.items.forEach((entry) => {
+            cb(this._processTaskResultFromEntry(entry));
         });
     }
 

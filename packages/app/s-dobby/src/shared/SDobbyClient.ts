@@ -101,7 +101,7 @@ export default class SDobbyClient extends __SClass {
 
         // Connection opened
         this._socket.addEventListener('open', (event) => {
-            this._socket.send('Hello Server!');
+            // this._socket.send('Hello Server!');
         });
 
         // Listen for messages

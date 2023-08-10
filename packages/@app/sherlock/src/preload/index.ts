@@ -3,18 +3,25 @@ import { contextBridge, ipcRenderer } from 'electron';
 
 // Expose some API
 contextBridge.exposeInMainWorld('sherlock', {
-    // setSpace: (space: any) => ipcRenderer.invoke('spaces:set', space),
     addPool: (poolMetas: any) => ipcRenderer.invoke('pools:add', poolMetas),
+    getSpace: (spaceUid: string) => ipcRenderer.invoke('space:get', spaceUid),
     getSpaces: () => ipcRenderer.invoke('spaces:get'),
     addSpace: (space: any) => ipcRenderer.invoke('spaces:add', space),
-    getClients: (spaceUid: string) => ipcRenderer.invoke('clients:get', spaceUid),
-    getServices: (spaceUid: string, clientUid: string) =>
-        ipcRenderer.invoke('services:get', spaceUid, clientUid),
-    newTask: (task: any, poolUid: string) => ipcRenderer.invoke('tasks:new', task, poolUid),
+    tasks: (spaceUid: string, callbackId: string) =>
+        ipcRenderer.invoke('tasks:get', spaceUid, callbackId),
+    addTask: (spaceUid: string, task: any) => ipcRenderer.invoke('tasks:add', spaceUid, task),
+    clients: (spaceUid: string, callbackId: string) =>
+        ipcRenderer.invoke('clients:get', spaceUid, callbackId),
+    service: (spaceUid: string, serviceUid: string, callbackId: string) =>
+        ipcRenderer.invoke('service:get', spaceUid, serviceUid, callbackId),
+    clientServices: (spaceUid: string, clientUid: string, callbackId: string) =>
+        ipcRenderer.invoke('clients:services:get', spaceUid, clientUid, callbackId),
+    serviceTasks: (spaceUid: string, serviceUid: string, callbackId: string) =>
+        ipcRenderer.invoke('services:tasks:get', spaceUid, serviceUid, callbackId),
+    taskResults: (spaceUid: string, taskUid: string, callbackId: string) =>
+        ipcRenderer.invoke('tasks:results:get', spaceUid, taskUid, callbackId),
     setTaskResult: (spaceUid: string, taskResult: any) =>
         ipcRenderer.invoke('tasks:results:set', spaceUid, taskResult),
-    getTaskResults: (spaceUid: string, taskUid: string) =>
-        ipcRenderer.invoke('tasks:results:get', spaceUid, taskUid),
 });
 
 // Custom APIs for renderer

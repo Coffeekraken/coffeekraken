@@ -8,7 +8,6 @@ import * as __gun from 'gun';
 import type {
     ISherlockClient,
     ISherlockGunAdapterSettings,
-    ISherlockService,
     ISherlockTaskResult,
 } from '../../../shared/SherlockTypes.js';
 
@@ -27,58 +26,36 @@ export default class SherlockGunAdapter extends __SherlockAdapter implements ISh
             .get(this.settings.gunUid);
 
         (async () => {
-            // const ccc = await this._gun
-            //     .get(this.settings.gunUid)
-            //     .get('clients')
-            //     .map((client) => {
-            //         console.log('__S_A_AClient', client);
-            //         return client.uid === 'florimont' ? client : undefined;
-            //     });
-            // await this._gun.get('clients').put(null);
-            // await this._gun.get('clients').get('florimont').put({
-            //     uid: 'florimont',
-            //     name: 'Florimont',
-            //     description: 'Florimont school',
-            // });
-            // await this._gun.get('services').get('florimont/florimont-ch').put({
-            //     uid: 'florimont-ch',
-            //     name: 'florimont.ch',
-            //     description: 'Florimont website',
-            //     url: 'https://florimont.ch',
-            // });
-            // await this._gun
-            //     .get('clients')
-            //     .get('florimont')
-            //     .get('services')
-            //     .once((cls) => {
-            //         console.log('CLS', cls);
-            //     });
-            // await this._gun.get('services').put({
-            //     [`florimont.florimon-ch`]: {
-            //         uid: 'florimont-ch',
-            //         name: 'florimont.ch',
-            //         description: 'Florimont website',
-            //         url: 'https://florimont.ch',
-            //         clientUid: 'florimont',
-            //     },
-            // });
+            // this._gun.get('clients').put(null);
+            const clients = this._gun.get('clients');
+            const florimont = clients.put({
+                florimont: {
+                    uid: 'florimont',
+                    name: 'Florimont',
+                    description: 'Florimont school',
+                },
+            });
+            const services = this._gun.get('services');
+            const florimontch = services.put({
+                'florimont.florimont-ch': {
+                    uid: 'florimont-ch',
+                    name: 'florimont.ch',
+                    description: 'Florimont website',
+                    url: 'https://florimont.ch',
+                },
+            });
+            florimont.get('services').set(florimontch);
         })();
     }
 
-    getClients(): Promise<Record<string, ISherlockClient>> {
-        return new Promise(async (resolve) => {
-            const clients = {};
-
-            await this._gun
-                .get('clients')
-                .map((client) => (client === null ? undefined : client))
-                .once((client) => {
-                    console.log('Client', client);
-                    clients[client.uid] = client;
-                });
-
-            resolve(clients);
-        });
+    clients(cb: Function): void {
+        this._gun
+            .get('clients')
+            .map((client) => (client === null ? undefined : client))
+            .on((client) => {
+                delete client._;
+                cb(client);
+            });
     }
 
     setClient(client: ISherlockClient): Promise<ISherlockClient> {
@@ -88,33 +65,44 @@ export default class SherlockGunAdapter extends __SherlockAdapter implements ISh
         });
     }
 
-    getServices(clientUid: string): Promise<Record<string, ISherlockService>> {
-        return new Promise(async (resolve) => {
-            const services = {};
-            await this._gun
-                .get('services')
-                .map((service) => (service === null ? undefined : service))
-                .once((service, key) => {
-                    console.log('KEy', service, key, clientUid);
-                    if (!key.startsWith(`${clientUid}/`) && !key.startsWith(`${clientUid}.`)) {
-                        return;
-                    }
-                    services[service.uid] = service;
-                });
-
-            resolve(services);
-        });
+    clientServices(clientUid: string, cb: Function): void {
+        const client = this._gun.get('clients').get(clientUid);
+        client
+            .get('services')
+            .map()
+            .on((service) => {
+                delete service._;
+                cb(service);
+            });
     }
 
-    getTaskResults(taskUid: string): Promise<Record<string, ISherlockTaskResult>> {
-        return new Promise(async (resolve) => {
-            const results = {};
-            resolve(results);
-        });
+    // 0clientServiceTasks(clientUid: string, serviceUid: string, cb: Function): void {
+    //     const client = this._gun.get('clients').get(clientUid);
+    //     const service = client.get('services').get(serviceUid);
+    //     service
+    //         .get('tasks')
+    //         .map()
+    //         .on((task) => {
+    //             delete task._;
+    //             console.log('A', task);
+    //             cb(task);
+    //         });
+    // }
+
+    taskResults(taskUid: string, cb: Function): void {
+        const task = this._gun.get('tasks').get(taskUid);
+        task.get('results')
+            .map()
+            .on((taskResult) => {
+                delete taskResult._;
+                cb(taskResult);
+            });
     }
 
     setTaskResult(taskResult: ISherlockTaskResult): Promise<ISherlockTaskResult> {
         return new Promise(async (resolve) => {
+            const task = this._gun.get('tasks').get(taskResult.taskUid);
+            task.get('results').set(taskResult);
             resolve(taskResult);
         });
     }

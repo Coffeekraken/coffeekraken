@@ -46,6 +46,10 @@ export interface ISherlockFsAdapterSettings {
     folder: string;
 }
 
+export interface ISherlockPocketbaseAdapterSettings {
+    url: string;
+}
+
 export interface ISherlockGunAdapterSettings {
     gunUid: string;
     privateKey?: string;
@@ -72,7 +76,7 @@ export interface ISherlockService {
 }
 
 export interface ISherlockTask extends ISDobbyTaskMetas {
-    status: 'idle' | 'running' | 'error';
+    serviceUid: string;
 }
 
 export interface ISherlockTaskState {

@@ -37,6 +37,7 @@ export interface ISDobbyPool {
         taskMetasOrUid: String | ISDobbyTaskMetas,
     ): Promise<ISDobbyTaskResult>;
     getTask(uid: string): ISDobbyTaskMetas;
+    getTasks(): Record<string, ISDobbyTaskMetas>;
     addTask(taskMetas: ISDobbyTaskMetas): Promise<void | ISDobbyError>;
     removeTask(taskUid: string): Promise<void | ISDobbyError>;
     loadConfig(): Promise<ISDobbyPoolConfig>;
@@ -58,6 +59,11 @@ export interface ISDobbyGunPoolMetas extends ISDobbyPoolMetas {
     settings: ISDobbyGunPoolSettings;
 }
 
+export interface ISDobbyPocketbasePoolMetas extends ISDobbyPoolMetas {
+    type: 'pocketbase';
+    settings: ISDobbyGunPoolSettings;
+}
+
 export interface ISDobbyFsPoolMetas extends ISDobbyPoolMetas {
     type: 'fs';
     settings: ISDobbyFsPoolSettings;
@@ -67,6 +73,10 @@ export interface ISDobbyPoolSettings {}
 
 export interface ISDobbyFsPoolSettings extends ISDobbyPoolSettings {
     folder: string;
+}
+
+export interface ISDobbyPocketbasePoolSettings extends ISDobbyPoolSettings {
+    url: string;
 }
 
 export interface ISDobbyGunPoolSettings extends ISDobbyPoolSettings {
@@ -79,7 +89,7 @@ export interface ISDobbyTaskMetas {
     name: string;
     type: 'lighthouse' | 'responseTime';
     state: 'active' | 'paused';
-    status: 'running' | 'idle';
+    status: 'running' | 'idle' | 'error';
     schedule: string;
     poolUid: string;
     settings: ISDobbyLighthouseTaskSettings | ISDobbyResponseTimeTaskSettings;

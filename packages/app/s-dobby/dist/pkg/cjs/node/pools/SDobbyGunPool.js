@@ -75,7 +75,7 @@ class SDobbyP2pAdapter extends SDobbyPool_js_1.default {
             'http://localhost:8765/gun',
             'https://gun-manhattan.herokuapp.com/gun',
         ])
-            .get('development');
+            .get(this.settings.gunUid);
     }
     /**
      * @name        loadConfig
@@ -92,21 +92,19 @@ class SDobbyP2pAdapter extends SDobbyPool_js_1.default {
      */
     loadConfig() {
         return new Promise((resolve) => __awaiter(this, void 0, void 0, function* () {
-            const d = {
-                tasks: {
-                    'florimont.florimont-website.responseTime': {
-                        uid: 'florimont.florimont-website.responseTime',
-                        type: 'responseTime',
-                        name: 'Response time',
-                        schedule: '*/5 * * * * *',
-                    },
-                },
+            const sampleTask = {
+                uid: 'florimont.florimont-website.responseTime',
+                type: 'responseTime',
+                name: 'Response time',
+                schedule: null,
             };
             // const pair = await __gun.default.SEA.pair();
-            let data = d;
-            if (this.settings.privateKey) {
-                data = yield __gun.default.SEA.encrypt(data, this.settings.privateKey);
-            }
+            // if (this.settings.privateKey) {
+            //     data = await __gun.default.SEA.encrypt(
+            //         data,
+            //         this.settings.privateKey,
+            //     );
+            // }
             // const data = await __gun.default.SEA.sign(enc, pair);
             // const msg = await __gun.default.SEA.verify(data, pair.pub);
             // const dec = await __gun.default.SEA.decrypt(enc, {
@@ -114,16 +112,17 @@ class SDobbyP2pAdapter extends SDobbyPool_js_1.default {
             // });
             // const proof = await __gun.default.SEA.work(dec, pair);
             // const check = await __gun.default.SEA.work(d, pair);
-            console.log(data);
             // console.log(dec);
             // console.log(proof === check);
-            const gConfig = this._gun
-                .get(this.settings.gunUid)
+            yield this._gun.get('tasks').put(null);
+            this._gun
                 .get('tasks')
-                .on((tasks) => {
-                console.log('tasks', tasks);
+                .map()
+                .on((task) => {
+                delete task._;
+                console.log('__tasks', task);
             });
-            gConfig.put(data);
+            this._gun.get('tasks').get(sampleTask.uid).put(sampleTask);
             // const configPath = `${this.settings.rootDir}/${uid}.config.json`;
             // if (!__fs.existsSync(configPath)) {
             //     return resolve({
@@ -156,4 +155,4 @@ class SDobbyP2pAdapter extends SDobbyPool_js_1.default {
     }
 }
 exports.default = SDobbyP2pAdapter;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7QUFBQSxvRUFBNkM7QUFDN0MscUVBQTRDO0FBRTVDLDJDQUE2QjtBQUU3Qix1REFBeUQ7QUFFekQsOENBR3VCO0FBUXZCOzs7Ozs7Ozs7Ozs7OztHQWNHO0FBRUgsTUFBcUIsZ0JBQ2pCLFNBQVEsdUJBQVk7SUFPcEI7Ozs7Ozs7OztPQVNHO0lBQ0gsWUFDSSxLQUFlLEVBQ2YsU0FBOEIsRUFDOUIsUUFBaUM7UUFFakMsS0FBSyxDQUNELEtBQUssRUFDTCxTQUFTLEVBQ1QsSUFBQSxvQkFBVyxFQUNQLGlCQUFRLENBQUMsZUFBZSxDQUFDLHVDQUEwQixDQUFDLEVBQ3BELFFBQVEsYUFBUixRQUFRLGNBQVIsUUFBUSxHQUFJLEVBQUUsQ0FDakIsQ0FDSixDQUFDO1FBRUYscUNBQXFDO1FBRXJDLGNBQWM7UUFDZCxJQUFJLENBQUMsSUFBSSxHQUFHLEtBQUs7YUFDWixPQUFPLENBQUM7WUFDTCwyQkFBMkI7WUFDM0IseUNBQXlDO1NBQzVDLENBQUM7YUFDRCxHQUFHLENBQUMsYUFBYSxDQUFDLENBQUM7SUFDNUIsQ0FBQztJQUVEOzs7Ozs7Ozs7Ozs7T0FZRztJQUNILFVBQVU7UUFDTixPQUFPLElBQUksT0FBTyxDQUFDLENBQU8sT0FBTyxFQUFFLEVBQUU7WUFDakMsTUFBTSxDQUFDLEdBQUc7Z0JBQ04sS0FBSyxFQUFFO29CQUNILDBDQUEwQyxFQUFFO3dCQUN4QyxHQUFHLEVBQUUsMENBQTBDO3dCQUMvQyxJQUFJLEVBQUUsY0FBYzt3QkFDcEIsSUFBSSxFQUFFLGVBQWU7d0JBQ3JCLFFBQVEsRUFBRSxlQUFlO3FCQUM1QjtpQkFDSjthQUNKLENBQUM7WUFFRiwrQ0FBK0M7WUFFL0MsSUFBSSxJQUFJLEdBQVEsQ0FBQyxDQUFDO1lBQ2xCLElBQUksSUFBSSxDQUFDLFFBQVEsQ0FBQyxVQUFVLEVBQUU7Z0JBQzFCLElBQUksR0FBRyxNQUFNLEtBQUssQ0FBQyxPQUFPLENBQUMsR0FBRyxDQUFDLE9BQU8sQ0FDbEMsSUFBSSxFQUNKLElBQUksQ0FBQyxRQUFRLENBQUMsVUFBVSxDQUMzQixDQUFDO2FBQ0w7WUFFRCx3REFBd0Q7WUFDeEQsOERBQThEO1lBQzlELHFEQUFxRDtZQUNyRCx5QkFBeUI7WUFDekIsTUFBTTtZQUNOLHlEQUF5RDtZQUN6RCx1REFBdUQ7WUFFdkQsT0FBTyxDQUFDLEdBQUcsQ0FBQyxJQUFJLENBQUMsQ0FBQztZQUVsQixvQkFBb0I7WUFDcEIsZ0NBQWdDO1lBRWhDLE1BQU0sT0FBTyxHQUFHLElBQUksQ0FBQyxJQUFJO2lCQUNwQixHQUFHLENBQUMsSUFBSSxDQUFDLFFBQVEsQ0FBQyxNQUFNLENBQUM7aUJBQ3pCLEdBQUcsQ0FBQyxPQUFPLENBQUM7aUJBQ1osRUFBRSxDQUFDLENBQUMsS0FBSyxFQUFFLEVBQUU7Z0JBQ1YsT0FBTyxDQUFDLEdBQUcsQ0FBQyxPQUFPLEVBQUUsS0FBSyxDQUFDLENBQUM7WUFDaEMsQ0FBQyxDQUFDLENBQUM7WUFFUCxPQUFPLENBQUMsR0FBRyxDQUFDLElBQUksQ0FBQyxDQUFDO1lBRWxCLG9FQUFvRTtZQUVwRSxzQ0FBc0M7WUFDdEMsdUJBQXVCO1lBQ3ZCLHFCQUFxQjtZQUNyQixVQUFVO1lBQ1YsSUFBSTtZQUVKLDZDQUE2QztZQUM3QyxtQkFBbUI7UUFDdkIsQ0FBQyxDQUFBLENBQUMsQ0FBQztJQUNQLENBQUM7SUFFRDs7Ozs7Ozs7Ozs7O09BWUc7SUFDSCxVQUFVLENBQ04sR0FBVyxFQUNYLE1BQXFCO1FBRXJCLE9BQU8sSUFBSSxPQUFPLENBQUMsQ0FBQyxPQUFPLEVBQUUsRUFBRTtZQUMzQixvRUFBb0U7WUFDcEUsdUNBQXVDO1lBQ3ZDLE9BQU8sQ0FBQyxFQUFFLENBQUMsQ0FBQztRQUNoQixDQUFDLENBQUMsQ0FBQztJQUNQLENBQUM7Q0FDSjtBQXpJRCxtQ0F5SUMifQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kdWxlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibW9kdWxlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7QUFBQSxvRUFBNkM7QUFDN0MscUVBQTRDO0FBRTVDLDJDQUE2QjtBQUU3Qix1REFBeUQ7QUFFekQsOENBR3VCO0FBUXZCOzs7Ozs7Ozs7Ozs7OztHQWNHO0FBRUgsTUFBcUIsZ0JBQ2pCLFNBQVEsdUJBQVk7SUFPcEI7Ozs7Ozs7OztPQVNHO0lBQ0gsWUFDSSxLQUFlLEVBQ2YsU0FBOEIsRUFDOUIsUUFBaUM7UUFFakMsS0FBSyxDQUNELEtBQUssRUFDTCxTQUFTLEVBQ1QsSUFBQSxvQkFBVyxFQUNQLGlCQUFRLENBQUMsZUFBZSxDQUFDLHVDQUEwQixDQUFDLEVBQ3BELFFBQVEsYUFBUixRQUFRLGNBQVIsUUFBUSxHQUFJLEVBQUUsQ0FDakIsQ0FDSixDQUFDO1FBRUYscUNBQXFDO1FBRXJDLGNBQWM7UUFDZCxJQUFJLENBQUMsSUFBSSxHQUFHLEtBQUs7YUFDWixPQUFPLENBQUM7WUFDTCwyQkFBMkI7WUFDM0IseUNBQXlDO1NBQzVDLENBQUM7YUFDRCxHQUFHLENBQUMsSUFBSSxDQUFDLFFBQVEsQ0FBQyxNQUFNLENBQUMsQ0FBQztJQUNuQyxDQUFDO0lBRUQ7Ozs7Ozs7Ozs7OztPQVlHO0lBQ0gsVUFBVTtRQUNOLE9BQU8sSUFBSSxPQUFPLENBQUMsQ0FBTyxPQUFPLEVBQUUsRUFBRTtZQUNqQyxNQUFNLFVBQVUsR0FBRztnQkFDZixHQUFHLEVBQUUsMENBQTBDO2dCQUMvQyxJQUFJLEVBQUUsY0FBYztnQkFDcEIsSUFBSSxFQUFFLGVBQWU7Z0JBQ3JCLFFBQVEsRUFBRSxJQUFJO2FBQ2pCLENBQUM7WUFFRiwrQ0FBK0M7WUFFL0Msa0NBQWtDO1lBQ2xDLDhDQUE4QztZQUM5QyxnQkFBZ0I7WUFDaEIsb0NBQW9DO1lBQ3BDLFNBQVM7WUFDVCxJQUFJO1lBRUosd0RBQXdEO1lBQ3hELDhEQUE4RDtZQUM5RCxxREFBcUQ7WUFDckQseUJBQXlCO1lBQ3pCLE1BQU07WUFDTix5REFBeUQ7WUFDekQsdURBQXVEO1lBRXZELG9CQUFvQjtZQUNwQixnQ0FBZ0M7WUFFaEMsTUFBTSxJQUFJLENBQUMsSUFBSSxDQUFDLEdBQUcsQ0FBQyxPQUFPLENBQUMsQ0FBQyxHQUFHLENBQUMsSUFBSSxDQUFDLENBQUM7WUFFdkMsSUFBSSxDQUFDLElBQUk7aUJBQ0osR0FBRyxDQUFDLE9BQU8sQ0FBQztpQkFDWixHQUFHLEVBQUU7aUJBQ0wsRUFBRSxDQUFDLENBQUMsSUFBSSxFQUFFLEVBQUU7Z0JBQ1QsT0FBTyxJQUFJLENBQUMsQ0FBQyxDQUFDO2dCQUNkLE9BQU8sQ0FBQyxHQUFHLENBQUMsU0FBUyxFQUFFLElBQUksQ0FBQyxDQUFDO1lBQ2pDLENBQUMsQ0FBQyxDQUFDO1lBRVAsSUFBSSxDQUFDLElBQUksQ0FBQyxHQUFHLENBQUMsT0FBTyxDQUFDLENBQUMsR0FBRyxDQUFDLFVBQVUsQ0FBQyxHQUFHLENBQUMsQ0FBQyxHQUFHLENBQUMsVUFBVSxDQUFDLENBQUM7WUFFM0Qsb0VBQW9FO1lBRXBFLHNDQUFzQztZQUN0Qyx1QkFBdUI7WUFDdkIscUJBQXFCO1lBQ3JCLFVBQVU7WUFDVixJQUFJO1lBRUosNkNBQTZDO1lBQzdDLG1CQUFtQjtRQUN2QixDQUFDLENBQUEsQ0FBQyxDQUFDO0lBQ1AsQ0FBQztJQUVEOzs7Ozs7Ozs7Ozs7T0FZRztJQUNILFVBQVUsQ0FDTixHQUFXLEVBQ1gsTUFBcUI7UUFFckIsT0FBTyxJQUFJLE9BQU8sQ0FBQyxDQUFDLE9BQU8sRUFBRSxFQUFFO1lBQzNCLG9FQUFvRTtZQUNwRSx1Q0FBdUM7WUFDdkMsT0FBTyxDQUFDLEVBQUUsQ0FBQyxDQUFDO1FBQ2hCLENBQUMsQ0FBQyxDQUFDO0lBQ1AsQ0FBQztDQUNKO0FBcklELG1DQXFJQyJ9

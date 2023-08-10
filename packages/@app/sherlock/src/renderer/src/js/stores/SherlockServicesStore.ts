@@ -2,6 +2,7 @@ import __SStore from '@coffeekraken/s-store';
 
 import type { ISherlockService } from '../../shared/SherlockTypes.js';
 
+import __sherlockApi from '../api/SherlockApi.js';
 import __sherlockStore from './SherlockStores.js';
 
 export interface IGetServicesParams {
@@ -17,29 +18,17 @@ class SherlockServicesStore extends __SStore {
     _services: any = {};
 
     constructor(spaceUid: string) {
-        super({
-            // _services: {}
-        });
-
+        super();
         this._spaceUid = spaceUid;
-
-        setTimeout(this._init.bind(this));
     }
 
-    async _init() {
+    async mount() {
         // load the services when the clients are updated
-        __sherlockStore.space(this._spaceUid).clients.$set(
-            '*',
-            async ({ value }) => {
-                const services = await window.sherlock.getServices(this._spaceUid, value.uid);
-                for (let [serviceUid, service] of Object.entries(services)) {
-                    this._services[`${value.uid}.${service.uid}`] = service;
-                }
-            },
-            {
-                debounce: true,
-            },
-        );
+        __sherlockStore.space(this._spaceUid).clients.$set('*', async ({ value }) => {
+            __sherlockApi.clientServices(this._spaceUid, value.uid, (service) => {
+                this._services[`${value.uid}.${service.uid}`] = service;
+            });
+        });
     }
 
     getServices(params?: IGetServicesParams): Record<string, ISherlockService> {

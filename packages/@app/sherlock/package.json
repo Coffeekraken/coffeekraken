@@ -36,8 +36,10 @@
     "contentful-management": "^10.39.1",
     "cron-parser": "^4.8.1",
     "electron-updater": "^5.3.0",
+    "eventsource": "^2.0.2",
     "gun": "^0.2020.1239",
     "lit": "^2.7.6",
+    "pocketbase": "^0.16.0",
     "userdir": "^1.0.0",
     "ws": "^8.13.0"
   },

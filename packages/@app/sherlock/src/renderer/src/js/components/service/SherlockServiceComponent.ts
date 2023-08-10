@@ -9,8 +9,6 @@ import type { ISDobbyTaskMetas, ISDobbyTaskResult } from '@coffeekraken/s-dobby'
 
 import __cronParser from 'cron-parser';
 
-import type { ISherlockService } from '../../../../../shared/SherlockTypes.js';
-
 import __sherlockStores from '../../stores/SherlockStores';
 
 import __SherlockEcoindexResultComponent from '../results/ecoindex/SherlockEcoindexResultComponent.js';
@@ -30,6 +28,8 @@ export class SherlockServiceComponent extends LitElement {
     @property({ type: String })
     service: string = null;
 
+    _serviceStore;
+
     // end life promise
     _lifeEndResolve;
     _lifeEndPromise = new Promise((resolve) => {
@@ -43,9 +43,11 @@ export class SherlockServiceComponent extends LitElement {
     constructor() {
         super();
 
+        this._serviceStore = __sherlockStores.space().service().service;
+
         // reactive
         [
-            __sherlockStores.space().tasks,
+            this._serviceStore,
             __sherlockStores.space().tasksStates,
             __sherlockStores.space().tasksResults,
         ].forEach((store) => {
@@ -111,15 +113,19 @@ export class SherlockServiceComponent extends LitElement {
     }
 
     render() {
-        const tasks =
-            __sherlockStores.space().tasks.getTasks({
-                client: __sherlockStores.route.client,
-                service: __sherlockStores.route.service,
-            }) ?? {};
+        // const tasks =
+        //     __sherlockStores.space().tasks.getTasks({
+        //         client: __sherlockStores.route.client,
+        //         service: __sherlockStores.route.service,
+        //     }) ?? {};
 
-        const service: ISherlockService = __sherlockStores
-            .space()
-            .services.getService(this.service);
+        // const service: ISherlockService = __sherlockStores
+        //     .space()
+        //     .services.getService(this.service);
+
+        const service = this._serviceStore.service,
+            tasks = this._serviceStore.tasks;
+
         return html`
             <article class="sh-service">
                 <div class="_content">

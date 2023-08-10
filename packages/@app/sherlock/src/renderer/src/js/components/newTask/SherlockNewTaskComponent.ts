@@ -22,11 +22,28 @@ export class SherlockTaskSpaceComponent extends LitElement {
 
     constructor() {
         super();
+
+        // enhance the task specs with the available pools
+        SDobbyTaskSpec.props.poolUid = {
+            type: 'Select',
+            title: 'Pool',
+            description: 'Specify in which pool you want to add your task',
+            options: [],
+        };
+        const pools = __sherlockStores.space().pools.getPools();
+        for (let [poolUid, pool] of Object.entries(pools)) {
+            SDobbyTaskSpec.props.poolUid.options.push({
+                id: poolUid,
+                name: pool.name,
+            });
+        }
     }
 
     _saveMetas(taskMetas: ISherlockTask): ISherlockTask {
         // save metas
-        taskMetas.type = taskMetas.type.id ?? taskMetas.type;
+        taskMetas.type = taskMetas.type.id ?? taskMetas.type.value ?? taskMetas.type;
+        taskMetas.poolUid = taskMetas.poolUid.id ?? taskMetas.poolUid.value ?? taskMetas.poolUid;
+        taskMetas.serviceUid = __sherlockStores.route.service;
         this._task = taskMetas;
 
         // set the settings specs to use
@@ -48,7 +65,7 @@ export class SherlockTaskSpaceComponent extends LitElement {
         this._task.settings = taskSettings;
 
         // add the task in the store
-        __sherlockStores.tasks.newTask(this._task);
+        __sherlockStores.space().tasks.addTask(this._task);
 
         // return the task
         return this._task;

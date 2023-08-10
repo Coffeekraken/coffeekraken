@@ -79,7 +79,6 @@ export class SherlockSidebarComponent extends LitElement {
     render() {
         let clients = {};
         if (__sherlockStores.route.space) {
-            console.log('SPace', __sherlockStores.route.space);
             clients = __sherlockStores.space().clients.getClients();
         }
 

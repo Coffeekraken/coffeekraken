@@ -72,7 +72,7 @@ export default class SDobbyP2pAdapter
                 'http://localhost:8765/gun',
                 'https://gun-manhattan.herokuapp.com/gun',
             ])
-            .get('development');
+            .get(this.settings.gunUid);
     }
 
     /**
@@ -90,26 +90,21 @@ export default class SDobbyP2pAdapter
      */
     loadConfig(): Promise<ISDobbyConfig> {
         return new Promise(async (resolve) => {
-            const d = {
-                tasks: {
-                    'florimont.florimont-website.responseTime': {
-                        uid: 'florimont.florimont-website.responseTime',
-                        type: 'responseTime',
-                        name: 'Response time',
-                        schedule: '*/5 * * * * *',
-                    },
-                },
+            const sampleTask = {
+                uid: 'florimont.florimont-website.responseTime',
+                type: 'responseTime',
+                name: 'Response time',
+                schedule: null,
             };
 
             // const pair = await __gun.default.SEA.pair();
 
-            let data: any = d;
-            if (this.settings.privateKey) {
-                data = await __gun.default.SEA.encrypt(
-                    data,
-                    this.settings.privateKey,
-                );
-            }
+            // if (this.settings.privateKey) {
+            //     data = await __gun.default.SEA.encrypt(
+            //         data,
+            //         this.settings.privateKey,
+            //     );
+            // }
 
             // const data = await __gun.default.SEA.sign(enc, pair);
             // const msg = await __gun.default.SEA.verify(data, pair.pub);
@@ -119,19 +114,20 @@ export default class SDobbyP2pAdapter
             // const proof = await __gun.default.SEA.work(dec, pair);
             // const check = await __gun.default.SEA.work(d, pair);
 
-            console.log(data);
-
             // console.log(dec);
             // console.log(proof === check);
 
-            const gConfig = this._gun
-                .get(this.settings.gunUid)
+            await this._gun.get('tasks').put(null);
+
+            this._gun
                 .get('tasks')
-                .on((tasks) => {
-                    console.log('tasks', tasks);
+                .map()
+                .on((task) => {
+                    delete task._;
+                    console.log('__tasks', task);
                 });
 
-            gConfig.put(data);
+            this._gun.get('tasks').get(sampleTask.uid).put(sampleTask);
 
             // const configPath = `${this.settings.rootDir}/${uid}.config.json`;
 

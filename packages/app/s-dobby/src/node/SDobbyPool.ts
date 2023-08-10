@@ -262,6 +262,23 @@ export default class SDobbyPool extends __SClass {
     }
 
     /**
+     * @name        getTasks
+     * @type        Function
+     * @async
+     *
+     * Get all tasks metas from config
+     *
+     * @param       {String}          taskUid             The task uid to get
+     * @return      {ISDobbyTaskMetas}                         The tasks metas
+     *
+     * @since           2.0.0
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    getTasks(): Record<string, ISDobbyTaskMetas> {
+        return this.config.tasks;
+    }
+
+    /**
      * @name        getTask
      * @type        Function
      * @async

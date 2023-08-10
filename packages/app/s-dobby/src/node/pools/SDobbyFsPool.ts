@@ -82,7 +82,7 @@ export default class SDobbyFsPool extends __SDobbyPool implements ISDobbyPool {
             const configPath = `${this.settings.folder.replace(
                 /^\~/,
                 `${__homeDir()}`,
-            )}/${this.uid}.config.json`;
+            )}/${this.uid}.tasks.json`;
 
             if (!__fs.existsSync(configPath)) {
                 return resolve({
@@ -114,7 +114,7 @@ export default class SDobbyFsPool extends __SDobbyPool implements ISDobbyPool {
             const configPath = `${this.settings.folder.replace(
                 /^\~/,
                 `${__homeDir()}`,
-            )}/${this.uid}.config.json`;
+            )}/${this.uid}.tasks.json`;
             __writeJsonSync(configPath, this.config);
             resolve({});
         });

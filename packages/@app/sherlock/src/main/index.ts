@@ -67,6 +67,9 @@ app.whenReady().then(() => {
     ipcMain.handle('pools:add', (e, poolMetas: any) => {
         return sherlockApp.addPool(poolMetas);
     });
+    ipcMain.handle('space:get', (e, spaceUid: string) => {
+        return sherlockApp.getSpace(spaceUid);
+    });
     ipcMain.handle('spaces:get', (e) => {
         return sherlockApp.getSpaces();
     });
@@ -74,19 +77,36 @@ app.whenReady().then(() => {
         console.log('ÂDD', space);
         return sherlockApp.addSpace(space);
     });
-    ipcMain.handle('clients:get', (e, spaceUid: string) => {
-        console.log('space', spaceUid, sherlockApp.adapters);
-        return sherlockApp.adapters[spaceUid].getClients();
+    ipcMain.handle('tasks:get', (e, spaceUid: string, callbackId: string) => {
+        return sherlockApp.tasks(spaceUid, callbackId);
     });
-    ipcMain.handle('services:get', (e, spaceUid: string, clientUid: string) => {
-        return sherlockApp.adapters[spaceUid].getServices(clientUid);
+    ipcMain.handle('tasks:add', (e, spaceUid: string, task: ISherlockTask) => {
+        return sherlockApp.addTask(spaceUid, task);
     });
-    ipcMain.handle('tasks:new', (e, task: ISherlockTask, poolUid: string) => {
-        return sherlockApp.newTask(task, poolUid);
+    ipcMain.handle('clients:get', (e, spaceUid: string, callbackId: string) => {
+        return sherlockApp.clients(spaceUid, callbackId);
     });
-    ipcMain.handle('tasks:results:get', (e, spaceUid: string, taskUid: string) => {
-        return sherlockApp.adapters[spaceUid].getTaskResults(taskUid);
+    ipcMain.handle('service:get', (e, spaceUid: string, serviceUid: string, callbackId: string) => {
+        return sherlockApp.service(spaceUid, serviceUid, callbackId);
     });
+    ipcMain.handle(
+        'clients:services:get',
+        (e, spaceUid: string, clientUid: string, callbackId: string) => {
+            return sherlockApp.clientServices(spaceUid, clientUid, callbackId);
+        },
+    );
+    ipcMain.handle(
+        'services:tasks:get',
+        (e, spaceUid: string, serviceUid: string, callbackId: string) => {
+            return sherlockApp.serviceTasks(spaceUid, serviceUid, callbackId);
+        },
+    );
+    ipcMain.handle(
+        'tasks:results:get',
+        (e, spaceUid: string, taskUid: string, callbackId: string) => {
+            return sherlockApp.taskResults(spaceUid, taskUid, callbackId);
+        },
+    );
     ipcMain.handle('tasks:results:set', (e, spaceUid: string, taskResult: ISherlockTaskResult) => {
         return sherlockApp.adapters[spaceUid].setTaskResult(taskResult);
     });

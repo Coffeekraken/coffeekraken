@@ -61,8 +61,10 @@ __metadata:
     eslint: ^8.42.0
     eslint-config-prettier: ^8.8.0
     eslint-plugin-prettier: ^4.2.1
+    eventsource: ^2.0.2
     gun: ^0.2020.1239
     lit: ^2.7.6
+    pocketbase: ^0.16.0
     postcss: ^8.4.25
     postcss-atroot: ^0.2.3
     postcss-extend-rule: ^4.0.0
@@ -12936,6 +12938,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"eventsource@npm:^2.0.2":
+  version: 2.0.2
+  resolution: "eventsource@npm:2.0.2"
+  checksum: c0072d972753e10c705d9b2285b559184bf29d011bc208973dde9c8b6b8b7b6fdad4ef0846cecb249f7b1585e860fdf324cbd2ac854a76bc53649e797496e99a
+  languageName: node
+  linkType: hard
+
 "execa@npm:^0.7.0":
   version: 0.7.0
   resolution: "execa@npm:0.7.0"
@@ -20455,6 +20464,13 @@ __metadata:
   bin:
     pngquant: cli.js
   checksum: a08b9c40e668330ad203a52d200a3f0d7573b6ba4e5c6797f822d24daf34712a44a710b0ce09ea367843867c966178b66b81ad063382d21441afa1c40fb97e9d
+  languageName: node
+  linkType: hard
+
+"pocketbase@npm:^0.16.0":
+  version: 0.16.0
+  resolution: "pocketbase@npm:0.16.0"
+  checksum: 03bf7a3e50759bf0909a5fa96abca9b725559757689cd01b06fccd95777a1b301e8e62f45ce284a230af1b099753c6da5cfc1dd54a1e724539d0b40c29323376
   languageName: node
   linkType: hard
 

@@ -118,11 +118,11 @@ export default class SSpecsEditorWidget {
                 });
             }
         }
-
-        console.log('VBAL', this._values);
     }
 
     get values(): any {
+        let valuesToReturn = this._values;
+
         if (this.isResponsive()) {
             if (!this._values.media) {
                 this._values.media = {};
@@ -130,7 +130,7 @@ export default class SSpecsEditorWidget {
             if (!this._values.media[this.editor.props.media]) {
                 this._values.media[this.editor.props.media] = {};
             }
-            return this._values.media[this.editor.props.media];
+            valuesToReturn = this._values.media[this.editor.props.media];
         }
 
         return this._values;
@@ -278,6 +278,8 @@ export default class SSpecsEditorWidget {
 
         // if no error, set the new value
         if (!validateResult.errors?.length) {
+            console.log('SET', this._values, path, newValues);
+
             // set the new value(s)
             __set(this._values, path, newValues, {
                 preferAssign: true,
@@ -314,6 +316,9 @@ export default class SSpecsEditorWidget {
         this._warnings = [];
 
         let valueToValidate = values;
+
+        // console.log('___Val', this.path, valueToValidate);
+
         if (
             Object.keys(valueToValidate).length === 1 &&
             valueToValidate.value !== undefined
@@ -330,6 +335,8 @@ export default class SSpecsEditorWidget {
                 [path.at(1)]: this.propObj,
             },
         };
+
+        // console.log('vali', objToValidate, specObj);
 
         const res = __SSpecs.validate(objToValidate, specObj);
 

@@ -18,7 +18,7 @@ import type {
 } from '../shared/types';
 import { ISDobbyPool } from '../shared/types.js';
 import __SDobbyFsPool from './pools/SDobbyFsPool.js';
-import __SDobbyGunPool from './pools/SDobbyGunPool.js';
+import __SDobbyPocketbasePool from './pools/SDobbyPocketbasePool.js';
 
 /**
  * @name                SDobby
@@ -57,7 +57,8 @@ export default class SDobby extends __SClass {
      */
     static registeredPools = {
         fs: __SDobbyFsPool,
-        gun: __SDobbyGunPool,
+        // gun: __SDobbyGunPool,
+        pocketbase: __SDobbyPocketbasePool,
     };
 
     /**
@@ -121,13 +122,6 @@ export default class SDobby extends __SClass {
     constructor(settings?: ISDobbySettings) {
         super(__deepMerge({}, settings ?? {}));
 
-        // default pool
-        // this.pools.local = new __SDobbyFsPool(this, <ISDobbyPoolMetas>{
-        //     uid: 'local',
-        //     name: 'Local',
-        //     type: 'fs',
-        // });
-
         // listen for pools ready
         this.events.on('pool.ready', (pool: ISDobbyPool) => {
             this._announcePool(pool);
@@ -142,8 +136,6 @@ export default class SDobby extends __SClass {
     }
 
     addPool(poolMetas: ISDobbyPoolMetas): ISDobbyPoolMetas {
-        console.log('_AD', poolMetas);
-
         // check if the wanted pool is already initiated
         if (this.pools[poolMetas.uid]) {
             return poolMetas;
@@ -158,8 +150,6 @@ export default class SDobby extends __SClass {
                 ).join(',')}`,
             );
         }
-
-        console.log('Adding', poolMetas.uid, poolMetas);
 
         // instanciate pool
         this.pools[poolMetas.uid] = new this.constructor.registeredPools[
@@ -336,5 +326,27 @@ export default class SDobby extends __SClass {
             // ready
             this.events.emit('ready');
         });
+    }
+
+    getRegisteredTasks(
+        wantedPoolUid?: string,
+    ): Record<string, ISDobbyTaskMetas> {
+        const tasks: Record<string, ISDobbyTaskMetas> = {};
+
+        for (let [poolUid, pool] of Object.entries(this.pools)) {
+            if (wantedPoolUid && poolUid !== wantedPoolUid) {
+                continue;
+            }
+
+            const tasksInPool = pool.getTasks();
+            for (let [taskUid, taskMetas] of Object.entries(tasksInPool)) {
+                tasks[taskUid] = {
+                    ...taskMetas,
+                    poolUid: poolUid,
+                };
+            }
+        }
+
+        return tasks;
     }
 }

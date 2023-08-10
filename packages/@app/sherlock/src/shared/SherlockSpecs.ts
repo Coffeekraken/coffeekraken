@@ -63,6 +63,24 @@ export const SSherlockSpaceGunAdapterSpec = {
     },
 };
 
+export const SSherlockSpacePocketbaseAdapterSpec = {
+    type: 'Object',
+    title: 'Pocketbase adapter',
+    description:
+        'Pocketbase is a wonderful 1 file server that let you work with live data, auth, etc...',
+    props: {
+        url: {
+            type: 'String',
+            title: 'Server url',
+            description:
+                'Pocketbase server url with protocol (http:// or https://) and port (if needed)',
+            rules: {
+                url: true,
+            },
+        },
+    },
+};
+
 export const SSherlockSpaceContentfulAdapterSpec = {
     type: 'Object',
     title: 'Contentful adapter',

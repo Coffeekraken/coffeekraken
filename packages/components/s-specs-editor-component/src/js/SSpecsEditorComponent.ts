@@ -258,7 +258,10 @@ export default class SSpecsEditorComponent extends __SLitComponent {
             valuesByPath = {};
 
         for (let [path, value] of Object.entries(flat)) {
+            console.log('PA', path);
+
             const p = path.split('.').slice(0, -1).join('.');
+            console.log('_P', p);
             if (!parentPathesCounts[p]) {
                 parentPathesCounts[p] = 0;
             }
@@ -268,11 +271,20 @@ export default class SSpecsEditorComponent extends __SLitComponent {
             }
         }
 
+        console.log('parent', valuesByPath, parentPathesCounts);
+
         for (let [path, count] of Object.entries(parentPathesCounts)) {
             if (count === 1 && valuesByPath[path] !== undefined) {
                 __set(data.values, path, valuesByPath[path]);
             }
         }
+
+        console.log(
+            'A',
+            __deepClean(data.values, {
+                clone: true,
+            }),
+        );
 
         return {
             uid: this.props.uid,
@@ -290,13 +302,9 @@ export default class SSpecsEditorComponent extends __SLitComponent {
     }
 
     mount() {
-        console.log('PROPR', this.props.values, this._values);
-
         if (!this._values) {
             this._values = Object.assign({}, this.props.values ?? {});
         }
-
-        console.log('S', this.props.values, this._values);
 
         // make sure we have an id
         if (!this._values['#id']) {
@@ -609,8 +617,6 @@ export default class SSpecsEditorComponent extends __SLitComponent {
     save(force: boolean = false): void {
         // no more pristine....
         this.state.status.pristine = false;
-
-        console.log('t', this.hasErrors());
 
         if (!force && this.hasErrors()) {
             return this.requestUpdate();

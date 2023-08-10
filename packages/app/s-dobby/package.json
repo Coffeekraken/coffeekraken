@@ -25,6 +25,7 @@
     },
     "main": "dist/pkg/cjs/js/exports.js",
     "module": "dist/pkg/esm/js/exports.js",
+    "types": "src/shared/types.ts",
     "exports": {
         "node": {
             "require": "./dist/pkg/cjs/node/exports.js",

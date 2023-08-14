@@ -11,27 +11,11 @@ import '../spaces/SherlockSpacesComponent.js';
 export class SherlockSidebarComponent extends LitElement {
     static styles = css``;
 
-    // @property({type: String})
-    // name?: string = 'World';
-
     constructor() {
         super();
 
         // reactivity
-        __sherlockStores.route.$set('space', () => {
-            __sherlockStores.space().clients.$set(
-                '*',
-                () => {
-                    this.requestUpdate();
-                },
-                {
-                    group: true,
-                },
-            );
-            this.requestUpdate();
-        });
-
-        __sherlockStores.spaces.$set(
+        __sherlockStores.space().clients.$set(
             '*',
             () => {
                 this.requestUpdate();
@@ -41,15 +25,15 @@ export class SherlockSidebarComponent extends LitElement {
             },
         );
 
-        // __sherlockStores.space().services.$set(
-        //     '*',
-        //     () => {
-        //         this.requestUpdate();
-        //     },
-        //     {
-        //         debounce: true,
-        //     },
-        // );
+        __sherlockStores.route.$set(
+            ['space', 'client'],
+            () => {
+                this.requestUpdate();
+            },
+            {
+                group: true,
+            },
+        );
     }
 
     _toggleClient(client: ISherlockClient): void {
@@ -77,13 +61,9 @@ export class SherlockSidebarComponent extends LitElement {
     }
 
     render() {
-        let clients = {};
-        if (__sherlockStores.route.space) {
-            clients = __sherlockStores.space().clients.getClients();
-        }
+        let clients = __sherlockStores.space().clients.getClients();
 
         return html`
-            <sherlock-spaces></sherlock-spaces>
             <nav class="sh-sidebar">
                 ${!__sherlockStores.route.space
                     ? html` <p>Please select a space</p> `

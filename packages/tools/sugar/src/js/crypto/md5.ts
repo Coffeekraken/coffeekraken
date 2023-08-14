@@ -1,6 +1,6 @@
 // @ts-nocheck
 
-import { md5 } from 'blueimp-md5';
+import md5 from 'blueimp-md5';
 import parse from '../../shared/string/parse.js';
 import toString from '../../shared/string/toString.js';
 

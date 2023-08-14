@@ -18,7 +18,7 @@ sherlock-service {
         margin-block-end: sugar.margin(50);
     }
 
-    ._content {
+    ._inner {
         flex-grow: 1;
         position: relative;
     }

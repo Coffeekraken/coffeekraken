@@ -271,20 +271,18 @@ export default class SSpecsEditorComponent extends __SLitComponent {
             }
         }
 
-        console.log('parent', valuesByPath, parentPathesCounts);
-
         for (let [path, count] of Object.entries(parentPathesCounts)) {
             if (count === 1 && valuesByPath[path] !== undefined) {
                 __set(data.values, path, valuesByPath[path]);
             }
         }
 
-        console.log(
-            'A',
-            __deepClean(data.values, {
-                clone: true,
-            }),
-        );
+        Object.defineProperty(data.values, 'toJson', {
+            enumerable: false,
+            value: () => {
+                return JSON.parse(JSON.stringify(data.values));
+            },
+        });
 
         return {
             uid: this.props.uid,

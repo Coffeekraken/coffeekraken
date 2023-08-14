@@ -11,6 +11,8 @@ export interface ISherlockTasksStore {
     [key: string]: ISDobbyTaskMetas;
 }
 
+import __sherlockApi from '../api/SherlockApi.js';
+
 // dobby client
 // export const dobbyClient = new __SDobbyClient();
 
@@ -25,9 +27,10 @@ class SherlockTasksStore extends __SStore {
         this._spaceUid = spaceUid;
 
         // __sherlockApi.clientServicesTasks(this._spaceUid)
-        // __sherlockApi.tasks(this._spaceUid, (task) => {
-        //     this._tasks[task.uid] = task;
-        // });
+        __sherlockApi.tasks(this._spaceUid, (task) => {
+            console.log('TAK', task);
+            this._tasks[task.uid] = task;
+        });
 
         // dobbyClient.on('pool', (poolEvent) => {
         //     Object.assign(this._tasks, poolEvent.config.tasks);

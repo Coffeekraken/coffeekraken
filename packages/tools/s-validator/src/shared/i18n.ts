@@ -122,6 +122,14 @@ export default {
             id: 's-validator.base64.default',
         }),
     },
+    url: {
+        default: __i18n('Must be a valid url', {
+            id: 's-validator.url.default',
+        }),
+        secure: __i18n('Must be a secure url', {
+            id: 's-validator.url.secure',
+        }),
+    },
     password: {
         default: __i18n('Must be a password string', {
             id: 's-validator.password.default',

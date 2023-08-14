@@ -1,0 +1,23 @@
+{
+    "config": {
+        "folders": [
+            {
+                "path": "./dist/pkg/%moduleSystem/config"
+            }
+        ]
+    },
+    "cli": [
+        {
+            "stack": "sherlock",
+            "description": "Sherlock API",
+            "defaultAction": "start",
+            "actions": {
+                "start": {
+                    "scope": "package",
+                    "description": "Start a new sherlock process",
+                    "process": "./dist/pkg/esm/cli/start.cli.js"
+                }
+            }
+        }
+    ]
+}

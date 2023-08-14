@@ -3,6 +3,10 @@ import __SWebsocketCallbackClient from '../utils/SWebsocketCallbackClient.js';
 const websocketCallbackClient = new __SWebsocketCallbackClient();
 
 export default {
+    saveUserInfo(spaceUid: string, userInfo: any, cb: Function): void {
+        const callbackId = websocketCallbackClient.registerCallback(cb);
+        window.sherlock.saveUserInfo(spaceUid, userInfo, callbackId);
+    },
     tasks(spaceUid: string, cb: Function): void {
         const callbackId = websocketCallbackClient.registerCallback(cb);
         window.sherlock.tasks(spaceUid, callbackId);

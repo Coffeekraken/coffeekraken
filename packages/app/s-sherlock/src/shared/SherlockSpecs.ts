@@ -38,7 +38,8 @@ export const SSherlockSpaceFsAdapterSpec = {
         folder: {
             type: 'String',
             title: 'Folder',
-            description: 'Specify a folder where to store the sherlock data for this space',
+            description:
+                'Specify a folder where to store the sherlock data for this space',
             readonly: true,
             required: true,
         },
@@ -63,6 +64,42 @@ export const SSherlockSpaceGunAdapterSpec = {
     },
 };
 
+export const SSherlockUserInfoSpec = {
+    type: 'Object',
+    title: 'User informations',
+    description:
+        'These are your user informations that will be used to identify you in this particular space',
+    props: {
+        username: {
+            type: 'String',
+            title: 'Username',
+            description:
+                'Choose a username that will be displayed for the other users of this space',
+            rules: {
+                required: true,
+                alphanum: true,
+            },
+        },
+        fullname: {
+            type: 'String',
+            title: 'Fullname',
+            description: 'Enter your first and lastname',
+            rules: {
+                required: true,
+            },
+        },
+        email: {
+            type: 'String',
+            title: 'Email',
+            description:
+                'Your email will be used to send you notifications as well as display your Gravatar image',
+            rules: {
+                email: true,
+            },
+        },
+    },
+};
+
 export const SSherlockSpacePocketbaseAdapterSpec = {
     type: 'Object',
     title: 'Pocketbase adapter',
@@ -74,7 +111,9 @@ export const SSherlockSpacePocketbaseAdapterSpec = {
             title: 'Server url',
             description:
                 'Pocketbase server url with protocol (http:// or https://) and port (if needed)',
+            default: 'http://127.0.0.1:8090',
             rules: {
+                required: true,
                 url: true,
             },
         },
@@ -102,7 +141,8 @@ export const SSherlockSpaceContentfulAdapterSpec = {
         managementAccessToken: {
             type: 'String',
             title: 'Management access token',
-            description: 'Contentful management access token to be able to write results, etc...',
+            description:
+                'Contentful management access token to be able to write results, etc...',
             required: true,
         },
     },

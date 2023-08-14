@@ -100,16 +100,11 @@ export default class SherlockPocketbaseAdapter
     }
 
     async serviceTasks(serviceUid: string, cb: Function): Promise<void> {
-        // current records
-
-        console.log('GET', serviceUid);
-
         const records = await this._pocketbase.collection('tasks').getFullList({
             sort: '-name',
             filter: `service.uid="${serviceUid}"`,
         });
 
-        console.log('REC', records);
         for (let [idx, record] of records.entries()) {
             cb({
                 uid: record.uid,
@@ -119,6 +114,7 @@ export default class SherlockPocketbaseAdapter
                 status: record.status,
                 schedule: record.schedule,
                 poolUid: record.poolUid,
+                reporter: record.reporter,
                 settings: record.settings,
             });
         }
@@ -137,6 +133,7 @@ export default class SherlockPocketbaseAdapter
                     status: e.record.status,
                     schedule: e.record.schedule,
                     poolUid: e.record.poolUid,
+                    reporter: e.record.reporter,
                     settings: e.record.settings,
                 });
             }
@@ -157,6 +154,7 @@ export default class SherlockPocketbaseAdapter
                 status: null,
                 schedule: task.schedule,
                 poolUid: task.poolUid,
+                reporter: task.reporter,
                 settings: task.settings,
                 service: service.id,
             });

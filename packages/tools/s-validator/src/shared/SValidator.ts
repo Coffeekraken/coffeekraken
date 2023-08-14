@@ -5,7 +5,6 @@ import { __deepMerge } from '@coffeekraken/sugar/object';
 import __i18n from './i18n.js';
 
 import __typeValidator, {
-    IValidatorTypeSettings,
     definition as __typeValidatorDefinition,
 } from './validators/type.js';
 
@@ -17,6 +16,8 @@ import __alphanumValidator, {
     IValidatorAlphanumSettings,
     definition as __alphanumValidatorDefinition,
 } from './validators/alphanum.js';
+
+import { __isPlainObject } from '@coffeekraken/sugar/is';
 import __colorValidator, {
     IValidatorColorSettings,
     definition as __colorValidatorDefinition,
@@ -80,6 +81,10 @@ import __requiredValidator, {
     IValidatorRequiredSettings,
     definition as __requiredValidatorDefinition,
 } from './validators/required.js';
+import __urlValidator, {
+    IValidatorUrlSettings,
+    definition as __urlValidatorDefinition,
+} from './validators/url.js';
 
 /**
  * @name            SValidator
@@ -166,6 +171,7 @@ export type ISValidatorAvailableValidators =
     | 'pattern'
     | 'positive'
     | 'required'
+    | 'url'
     | 'type';
 
 export interface ISValidatorRules {
@@ -186,6 +192,7 @@ export interface ISValidatorRules {
     pattern?: string | IValidatorPatternSettings;
     positive?: boolean | IValidatorPositiveSettings;
     required?: boolean | IValidatorRequiredSettings;
+    url?: boolean | IValidatorUrlSettings;
     type?:
         | 'string'
         | 'number'
@@ -400,7 +407,9 @@ export default class SValidator extends __SClass {
         }
 
         for (let [validator, valueOrObj] of Object.entries(rules)) {
-            let validatorSettings = valueOrObj?.settings ?? {},
+            let validatorSettings = __isPlainObject(valueOrObj)
+                    ? valueOrObj
+                    : {},
                 validatorValue = valueOrObj?.value ?? valueOrObj,
                 res;
 
@@ -501,4 +510,7 @@ SValidator.registerValidator('type', __typeValidator, {
 });
 SValidator.registerValidator('password', __passwordValidator, {
     definition: __passwordValidatorDefinition,
+});
+SValidator.registerValidator('url', __urlValidator, {
+    definition: __urlValidatorDefinition,
 });

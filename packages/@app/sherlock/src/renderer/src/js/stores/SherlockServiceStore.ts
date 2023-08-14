@@ -20,10 +20,9 @@ class SherlockServiceStore extends __SStore {
         super({});
         this._spaceUid = spaceUid;
         this._serviceUid = serviceUid;
-        setTimeout(this._init.bind(this));
     }
 
-    async _init() {
+    async mount() {
         __sherlockApi.service(this._spaceUid, this._serviceUid, (service) => {
             Object.assign(this.service, service);
         });

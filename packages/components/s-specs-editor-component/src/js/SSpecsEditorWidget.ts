@@ -336,8 +336,6 @@ export default class SSpecsEditorWidget {
             },
         };
 
-        // console.log('vali', objToValidate, specObj);
-
         const res = __SSpecs.validate(objToValidate, specObj);
 
         for (let [prop, result] of Object.entries(res.props)) {

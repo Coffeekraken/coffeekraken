@@ -5,6 +5,7 @@ import type { ISherlockTask, ISherlockTaskResult } from '../../shared/SherlockTy
 export interface ISherlockAdapterSettings {}
 
 export interface ISherlockAdapter {
+    saveUserInfo(spaceUid: string, userInfo: any): Promise<void>;
     clients(cb: Function): void;
     service(serviceUid: string, cb: Function): void;
     clientServices(clientUid: string, cb: Function): void;

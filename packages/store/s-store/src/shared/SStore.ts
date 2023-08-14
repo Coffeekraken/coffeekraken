@@ -216,6 +216,17 @@ export default class SStore extends __SClass {
             }
         }
 
+        // for (let [prop, value] of Object.entries(this)) {
+        //     console.log('PROP', prop);
+        //     if (proxy[prop] === undefined) {
+        //         if (typeof this[prop] === 'function') {
+        //             proxy[prop] = this[prop].bind(this);
+        //         } else {
+        //             proxy[prop] = this[prop];
+        //         }
+        //     }
+        // }
+
         if (this.mount) {
             proxy.mount = this.mount.bind(this);
             setTimeout(() => {

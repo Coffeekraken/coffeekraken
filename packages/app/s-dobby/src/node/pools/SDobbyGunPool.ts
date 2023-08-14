@@ -2,19 +2,20 @@ import __SSpecs from '@coffeekraken/s-specs';
 import __SDobbyPool from '../SDobbyPool.js';
 
 import * as __gun from 'gun';
+import 'gun/lib/open.js';
 
 import { __deepMerge } from '@coffeekraken/sugar/object';
 
+import type {
+    ISDobbyGunPoolSettings,
+    ISDobbyPool,
+    ISDobbyPoolConfig,
+    ISDobbySaveConfigResult,
+} from '../../shared/types';
 import __SDobby, {
     ISDobbyGunPoolMetas,
     SDobbyGunPoolSettingsSpecs,
 } from '../exports.js';
-import type {
-    ISDobbyAdapter,
-    ISDobbyConfig,
-    ISDobbyGunPoolSettings,
-    ISDobbySaveConfigResult,
-} from './types';
 
 /**
  * @name                SDobbyGunPool
@@ -32,9 +33,9 @@ import type {
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 
-export default class SDobbyP2pAdapter
+export default class SDobbyGunAdapter
     extends __SDobbyPool
-    implements ISDobbyAdapter
+    implements ISDobbyPool
 {
     settings: ISDobbyGunPoolSettings;
 
@@ -64,13 +65,11 @@ export default class SDobbyP2pAdapter
             ),
         );
 
-        // console.log('set', this.settings);
-
         // start GunJS
         this._gun = __gun
             .default([
                 'http://localhost:8765/gun',
-                'https://gun-manhattan.herokuapp.com/gun',
+                // 'https://gun-manhattan.herokuapp.com/gun',
             ])
             .get(this.settings.gunUid);
     }
@@ -83,62 +82,58 @@ export default class SDobbyP2pAdapter
      * Load the configuration
      *
      * @param       {String}            uid             The current dobby process uid
-     * @return      {Promise<ISDobbyConfig>}            A promise resolved once the config is loaded successfully
+     * @return      {Promise<ISDobbyPoolConfig>}            A promise resolved once the config is loaded successfully
      *
      * @since           2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    loadConfig(): Promise<ISDobbyConfig> {
+    loadConfig(): Promise<ISDobbyPoolConfig> {
         return new Promise(async (resolve) => {
-            const sampleTask = {
-                uid: 'florimont.florimont-website.responseTime',
-                type: 'responseTime',
-                name: 'Response time',
-                schedule: null,
+            const config: ISDobbyPoolConfig = {
+                tasks: {},
             };
 
-            // const pair = await __gun.default.SEA.pair();
+            // this._gun.get('tasks').put(null, async () => {
 
-            // if (this.settings.privateKey) {
-            //     data = await __gun.default.SEA.encrypt(
-            //         data,
-            //         this.settings.privateKey,
-            //     );
-            // }
-
-            // const data = await __gun.default.SEA.sign(enc, pair);
-            // const msg = await __gun.default.SEA.verify(data, pair.pub);
-            // const dec = await __gun.default.SEA.decrypt(enc, {
-            //     epriv: pair.epriv,
+            // this._gun.get('tasks').once((task) => {
+            //     console.log('TASKSSSSS', task);
+            //     resolve(config);
             // });
-            // const proof = await __gun.default.SEA.work(dec, pair);
-            // const check = await __gun.default.SEA.work(d, pair);
-
-            // console.log(dec);
-            // console.log(proof === check);
-
-            await this._gun.get('tasks').put(null);
-
-            this._gun
+            await this._gun
                 .get('tasks')
                 .map()
-                .on((task) => {
+                .open((task) => {
                     delete task._;
-                    console.log('__tasks', task);
+                    config.tasks[task.uid] = task;
+                    this.events.emit('pool.task.add', task);
                 });
+            // });
 
-            this._gun.get('tasks').get(sampleTask.uid).put(sampleTask);
+            resolve(config);
 
-            // const configPath = `${this.settings.rootDir}/${uid}.config.json`;
-
-            // if (!__fs.existsSync(configPath)) {
-            //     return resolve({
-            //         tasks: {},
-            //     });
-            // }
-
-            // const config = __readJsonSync(configPath);
-            // resolve(config);
+            // const sampleTask = {
+            //     uid: 'florimont.florimont-website.responseTime',
+            //     type: 'responseTime',
+            //     name: 'Response time',
+            //     state: 'active',
+            //     status: 'idle',
+            //     schedule: '*/5 * * * * *',
+            //     settings: {
+            //         url: 'https://postcss.coffeekraken.io',
+            //         timeout: 2000,
+            //     },
+            //     poolUid: 'gun',
+            //     reporter: {
+            //         type: 'pocketbase',
+            //         name: 'Pocketbase',
+            //         settings: {
+            //             url: 'http://127.0.0.1:8090',
+            //             collection: 'tasksResults',
+            //         },
+            //     },
+            // };
+            // await this._gun.get('tasks').put(null);
+            // await this._gun.get('tasks').get(sampleTask.uid).put(sampleTask);
         });
     }
 
@@ -155,13 +150,9 @@ export default class SDobbyP2pAdapter
      * @since           2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    saveConfig(
-        uid: string,
-        config: ISDobbyConfig,
-    ): Promise<ISDobbySaveConfigResult> {
-        return new Promise((resolve) => {
-            // const configPath = `${this.settings.rootDir}/${uid}.config.json`;
-            // __writeJsonSync(configPath, config);
+    saveConfig(): Promise<ISDobbySaveConfigResult> {
+        return new Promise(async (resolve) => {
+            await this._gun.get('tasks').put(this.config.tasks);
             resolve({});
         });
     }

@@ -2,6 +2,7 @@ import __SStore from '@coffeekraken/s-store';
 
 import type { ISherlockClient } from '../../shared/SherlockTypes.js';
 import __sherlockApi from '../api/SherlockApi.js';
+import __sherlockStores from './SherlockStores.js';
 
 export interface IGetClientsParams {
     space?: string;
@@ -31,7 +32,10 @@ class SherlockClientsStore extends __SStore {
         return this._clients;
     }
 
-    getClient(clientUid: string): ISherlockClient {
+    getClient(clientUid?: string): ISherlockClient {
+        if (!clientUid) {
+            clientUid = __sherlockStores.route.client;
+        }
         return this._clients[clientUid];
     }
 }

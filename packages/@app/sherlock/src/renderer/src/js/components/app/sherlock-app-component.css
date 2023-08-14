@@ -23,22 +23,18 @@ sherlock-app {
 .sh-app {
     position: relative;
     display: flex;
-    flex-direction: column;
     height: 100vh;
 
     ._body {
         display: flex;
         flex-grow: 1;
-        height: calc(100vh - 110px);
+        flex-direction: column;
+        /* height: calc(100vh - 110px); */
     }
     ._content {
         display: flex;
-        flex-direction: column;
         flex-grow: 1;
         flex-shrink: 0;
-        overflow-x: hidden;
-        overflow-y: auto;
-        @sugar.scrollbar;
     }
 }
 

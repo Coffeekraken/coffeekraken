@@ -128,7 +128,7 @@ export class SherlockServiceComponent extends LitElement {
 
         return html`
             <article class="sh-service">
-                <div class="_content">
+                <div class="_inner">
                     <header class="_metas">
                         <div class="s-flex">
                             <h1 class="_title s-flex-item:grow">${service.name}</h1>

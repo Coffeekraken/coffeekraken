@@ -25,6 +25,8 @@ export default function ttfb(
     host,
     settings?: Partial<ITtfbSettings>,
 ): Promise<ITtfbResult> {
+    host = host.replace(/^https?\:\/\//, '');
+
     if (!__validator.isFQDN(host)) {
         return Promise.reject(new Error('Invalid host.'));
     }

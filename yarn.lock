@@ -36,6 +36,7 @@ __metadata:
     "@coffeekraken/s-dobby": 2.0.0-alpha.27
     "@coffeekraken/s-gauge-component": 2.0.0-alpha.27
     "@coffeekraken/s-postcss-sugar-plugin": 2.0.0-alpha.27
+    "@coffeekraken/s-sherlock": 2.0.0-alpha.27
     "@coffeekraken/s-specs-editor-component": 2.0.0-alpha.27
     "@coffeekraken/s-store": 2.0.0-alpha.27
     "@coffeekraken/s-sugar-feature": 2.0.0-alpha.27
@@ -2045,6 +2046,7 @@ __metadata:
     ping: ^0.4.4
     playwright: ^1.36.1
     playwright-lighthouse: ^3.1.0
+    pocketbase: ^0.16.0
     ws: ^8.13.0
   languageName: unknown
   linkType: soft
@@ -2863,6 +2865,31 @@ __metadata:
     "@coffeekraken/s-theme": ^2.0.0-alpha.27
     "@coffeekraken/sugar": ^2.0.0-alpha.27
     lit: ^2.2.8
+  languageName: unknown
+  linkType: soft
+
+"@coffeekraken/s-sherlock@2.0.0-alpha.27, @coffeekraken/s-sherlock@workspace:packages/app/s-sherlock":
+  version: 0.0.0-use.local
+  resolution: "@coffeekraken/s-sherlock@workspace:packages/app/s-sherlock"
+  dependencies:
+    "@coffeekraken/s-class": ^2.0.0-alpha.27
+    "@coffeekraken/s-dobby": 2.0.0-alpha.27
+    "@coffeekraken/s-event-emitter": ^2.0.0-alpha.27
+    "@coffeekraken/s-frontend-checker": ^2.0.0-alpha.27
+    "@coffeekraken/s-interface": ^2.0.0-alpha.27
+    "@coffeekraken/s-promise": ^2.0.0-alpha.27
+    "@coffeekraken/s-specs": ^2.0.0-alpha.27
+    "@coffeekraken/s-sugar-config": ^2.0.0-alpha.27
+    "@coffeekraken/sugar": ^2.0.0-alpha.27
+    geoip-lite: ^1.4.7
+    gun: ^0.2020.1239
+    lighthouse: ^10.4.0
+    node-schedule: ^2.1.1
+    ping: ^0.4.4
+    playwright: ^1.36.1
+    playwright-lighthouse: ^3.1.0
+    pocketbase: ^0.16.0
+    ws: ^8.13.0
   languageName: unknown
   linkType: soft
 

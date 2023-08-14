@@ -12,6 +12,7 @@ import { SDobbyPoolStartParamsSpecs } from '../shared/specs';
 
 import type {
     ISDobbyError,
+    ISDobbyPool,
     ISDobbyPoolConfig,
     ISDobbyPoolMetas,
     ISDobbyPoolStartParams,
@@ -35,6 +36,10 @@ import __SDobby from './exports.js';
  *
  * This class represent a base pool to save the configuration of the dobby deamon
  *
+ * @event           pool.ready          Emitted when the pool is ready
+ * @event           pool.task.add           Emitted when a new task is added
+ * @event           pool.task.remove        Emitted when a task is removed
+ *
  * @param           {ISDobbyPoolMetas}          poolMetas       The informations about the pool like name, uid, etc...
  * @param           {SDobby}                    dobby           The dobby instance on which this pool is attached
  * @param           {ISDobbyPoolSettings}          [settings={}]           Some settings to configure your dobby adapter instance
@@ -49,7 +54,7 @@ import __SDobby from './exports.js';
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 
-export default class SDobbyPool extends __SClass {
+export default class SDobbyPool extends __SClass implements ISDobbyPool {
     settings: ISDobbyPoolSettings;
 
     /**
@@ -94,9 +99,7 @@ export default class SDobbyPool extends __SClass {
      * @since           2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    config: ISDobbyPoolConfig = {
-        tasks: {},
-    };
+    config: ISDobbyPoolConfig;
 
     /**
      * @name        uid
@@ -174,17 +177,36 @@ export default class SDobbyPool extends __SClass {
             });
 
             // load the configs of all the pools
-            this.config = await this.loadConfig(this.uid);
+            // @ts-ignore
+            this.config = await this.loadConfig?.(this.uid);
 
             // ready
             this.dobby.events.emit('pool.ready', this);
 
-            // start the scheduler
-            this._startScheduler();
+            // loop on each tasks to schedule them
+            for (let [taskUid, taskMetas] of Object.entries(
+                this.config.tasks ?? {},
+            )) {
+                this._initTask(taskMetas);
+            }
+
+            // listen for new tasks
+            this.events.on('pool.task.add', (taskMetas: ISDobbyTaskMetas) => {
+                this._initTask(taskMetas);
+            });
 
             // resolve
             resolve();
         });
+    }
+
+    /**
+     * Init task
+     */
+    _initTask(taskMetas: ISDobbyTaskMetas): void {
+        if (taskMetas.schedule) {
+            this._enqueueTask(taskMetas);
+        }
     }
 
     /**
@@ -200,16 +222,7 @@ export default class SDobbyPool extends __SClass {
     /**
      * Start the scheduler that will execute the tasks when needed
      */
-    _startScheduler() {
-        // loop on each tasks to schedule them
-        for (let [taskUid, taskMetas] of Object.entries(
-            this.config.tasks ?? {},
-        )) {
-            if (taskMetas.schedule) {
-                this._enqueueTask(taskMetas);
-            }
-        }
-    }
+    _startScheduler() {}
 
     /**
      * Executing a tasks
@@ -319,6 +332,7 @@ export default class SDobbyPool extends __SClass {
             // add the task in the config
             this.config.tasks[taskMetas.uid] = taskMetas;
             // save the config
+            // @ts-ignore
             this.saveConfig();
             // enqueue the new task
             this._enqueueTask(taskMetas);

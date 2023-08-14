@@ -49,6 +49,21 @@ export interface ISDobbyClientSettings {
     port: number;
 }
 
+export interface ISDobbyPocketbaseReporterSettings {
+    url: string;
+    collection: string;
+}
+
+export interface ISDobbyReporterMetas {
+    type: 'pocketbase';
+    name: string;
+    settings: ISDobbyPocketbaseReporterSettings;
+}
+
+export interface ISDobbyReporter extends ISDobbyReporterMetas {
+    report(data: ISDobbyTaskResult): Promise<ISDobbyTaskResult>;
+}
+
 export interface ISDobbyPoolMetas {
     uid: string;
     name: string;
@@ -92,6 +107,7 @@ export interface ISDobbyTaskMetas {
     status: 'running' | 'idle' | 'error';
     schedule: string;
     poolUid: string;
+    reporter: ISDobbyReporterMetas;
     settings: ISDobbyLighthouseTaskSettings | ISDobbyResponseTimeTaskSettings;
 }
 
@@ -116,6 +132,7 @@ export interface ISDobbyTaskResult {
     logs?: string[];
     task: ISDobbyTaskMetas;
     pool: ISDobbyPoolMetas;
+    data: any;
 }
 
 export interface ISDobbyLighthouseTaskSettings {}

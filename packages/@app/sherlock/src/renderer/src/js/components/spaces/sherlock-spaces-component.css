@@ -1,7 +1,6 @@
 sherlock-spaces {
     display: flex;
     flex-direction: column;
-    height: 100%;
 }
 
 .sh-spaces {
@@ -10,7 +9,6 @@ sherlock-spaces {
     gap: sugar.margin(30);
     flex-grow: 1;
     width: 100px;
-    margin-top: -80px;
     margin-bottom: -20px;
     background: sugar.color(main, background, --darken 5% --alpha 0.6);
     backdrop-filter: blur(10px);

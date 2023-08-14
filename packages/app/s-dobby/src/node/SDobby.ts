@@ -18,7 +18,9 @@ import type {
 } from '../shared/types';
 import { ISDobbyPool } from '../shared/types.js';
 import __SDobbyFsPool from './pools/SDobbyFsPool.js';
-import __SDobbyPocketbasePool from './pools/SDobbyPocketbasePool.js';
+import __SDobbyGunPool from './pools/SDobbyGunPool.js';
+
+import __SDobbyPocketbaseReporter from './reporters/SDobbyPocketbaseReporter.js';
 
 /**
  * @name                SDobby
@@ -57,8 +59,20 @@ export default class SDobby extends __SClass {
      */
     static registeredPools = {
         fs: __SDobbyFsPool,
-        // gun: __SDobbyGunPool,
-        pocketbase: __SDobbyPocketbasePool,
+        gun: __SDobbyGunPool,
+    };
+
+    /**
+     * @name        registeredReporters
+     * @type        Object
+     *
+     * Store all the registered reporters classes by type
+     *
+     * @since           2.0.0
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    static registeredReporters = {
+        pocketbase: __SDobbyPocketbaseReporter,
     };
 
     /**
@@ -208,7 +222,6 @@ export default class SDobby extends __SClass {
         switch (action.type) {
             case 'task.start':
                 this.pools[action.poolUid].executeTask(action.taskUid);
-
                 break;
             case 'task.pause':
             case 'task.resume':
@@ -247,10 +260,13 @@ export default class SDobby extends __SClass {
             deep: true,
         });
 
+        console.log('CLONED', clonedPool);
+
         // add the "poolUid" to each tasks
         for (let [taskUid, task] of Object.entries(
             clonedPool.config.tasks ?? {},
         )) {
+            console.log('TA', task);
             (<ISDobbyTaskMetas>task).poolUid = clonedPool.metas.uid;
         }
 

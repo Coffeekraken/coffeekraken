@@ -8,15 +8,14 @@ import __SherlockStores from '../../stores/SherlockStores';
 import {
     SSherlockNewSpaceSpec,
     SSherlockSpaceContentfulAdapterSpec,
-    SSherlockSpaceFsAdapterSpec,
-    SSherlockSpaceGunAdapterSpec,
-} from '../../../../../shared/SherlockSpecs';
+    SSherlockSpacePocketbaseAdapterSpec,
+} from '@coffeekraken/s-sherlock';
 
 import type {
+    ISherlockContentfulAdapterSettings,
+    ISherlockPocketbaseAdapterSettings,
     ISherlockSpace,
-    ISherlockSpaceContentfulAdapterSettings,
-    ISherlockSpaceFsAdapterSettings,
-} from '../../../../../shared/SherlockTypes';
+} from '@coffeekraken/s-sherlock';
 
 @customElement('sherlock-new-space')
 export class SherlockNewSpaceComponent extends LitElement {
@@ -26,7 +25,7 @@ export class SherlockNewSpaceComponent extends LitElement {
     _step: 'metas' | 'adapter' = 'adapter';
 
     @state()
-    _adapter: 'fs' | 'contentful' | 'gun' = 'fs';
+    _adapter: 'pocketbase' | 'contentful' = 'pocketbase';
 
     @state()
     _error: string;
@@ -59,7 +58,7 @@ export class SherlockNewSpaceComponent extends LitElement {
 
     async _saveAdapter(
         type: 'fs' | 'contentful' | 'gun',
-        settings: ISherlockSpaceFsAdapterSettings | ISherlockSpaceContentfulAdapterSettings,
+        settings: ISherlockPocketbaseAdapterSettings | ISherlockContentfulAdapterSettings,
     ): Promise<void> {
         switch (type) {
             case 'gun':
@@ -116,20 +115,12 @@ export class SherlockNewSpaceComponent extends LitElement {
                               <div>
                                   <ol class="s-tabs:grow">
                                       <li
-                                          class="${this._adapter === 'fs' ? 'active' : ''}"
+                                          class="${this._adapter === 'pocketbase' ? 'active' : ''}"
                                           @click=${(e) => {
-                                              this._adapter = 'fs';
+                                              this._adapter = 'pocketbase';
                                           }}
                                       >
-                                          Filesystem
-                                      </li>
-                                      <li
-                                          class="${this._adapter === 'gun' ? 'active' : ''}"
-                                          @click=${(e) => {
-                                              this._adapter = 'gun';
-                                          }}
-                                      >
-                                          Gun (p2p)
+                                          Pocketbase
                                       </li>
                                       <li
                                           class="${this._adapter === 'contentful' ? 'active' : ''}"
@@ -141,7 +132,7 @@ export class SherlockNewSpaceComponent extends LitElement {
                                       </li>
                                   </ol>
                                   <div class="_adapter">
-                                      ${this._adapter === 'fs'
+                                      ${this._adapter === 'pocketbase'
                                           ? html`
                                                 <s-specs-editor
                                                     uid="fs-adapter"
@@ -150,27 +141,10 @@ export class SherlockNewSpaceComponent extends LitElement {
                                                             value: '~/.sherlock',
                                                         },
                                                     }}
-                                                    .specs=${SSherlockSpaceFsAdapterSpec}
+                                                    .specs=${SSherlockSpacePocketbaseAdapterSpec}
                                                     i18n.save-button="Continue"
                                                     @s-specs-editor.save=${(e) => {
                                                         this._saveAdapter('fs', e.detail.values);
-                                                    }}
-                                                ></s-specs-editor>
-                                            `
-                                          : this._adapter === 'gun'
-                                          ? html`
-                                                <s-specs-editor
-                                                    uid="gun-adapter"
-                                                    .values=${{}}
-                                                    .specs=${SSherlockSpaceGunAdapterSpec}
-                                                    i18n.save-button="Continue"
-                                                    @s-specs-editor.change=${(e) => {
-                                                        this._validateGunExisting(
-                                                            e.detail.values.existing,
-                                                        );
-                                                    }}
-                                                    @s-specs-editor.save=${(e) => {
-                                                        this._saveAdapter('gun', e.detail.values);
                                                     }}
                                                 ></s-specs-editor>
                                             `

@@ -15,10 +15,9 @@ class SherlockSpacesStore extends __SStore {
         super({
             _spaces: {},
         });
-        this._init();
     }
 
-    async _init() {
+    async mount() {
         // load the spaces
         const spaces = await window.sherlock.getSpaces();
         Object.assign(this._spaces, spaces);

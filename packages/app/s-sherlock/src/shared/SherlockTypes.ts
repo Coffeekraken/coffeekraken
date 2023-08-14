@@ -11,6 +11,7 @@ export interface ISherlockSpace {
     name: string;
     description: string;
     image: ISherlockImage;
+    userInfo: ISherlockUserInfo;
     adapter:
         | {
               type: 'fs';
@@ -59,6 +60,12 @@ export interface ISherlockContentfulAdapterSettings {
     space: string;
     accessToken: string;
     managementAccessToken: string;
+}
+
+export interface ISherlockUserInfo {
+    username: string;
+    fullname: string;
+    email: string;
 }
 
 export interface ISherlockClient {

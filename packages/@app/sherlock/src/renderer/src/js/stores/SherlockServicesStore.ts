@@ -26,22 +26,19 @@ class SherlockServicesStore extends __SStore {
         // load the services when the clients are updated
         __sherlockStore.space(this._spaceUid).clients.$set('*', async ({ value }) => {
             __sherlockApi.clientServices(this._spaceUid, value.uid, (service) => {
-                this._services[`${value.uid}.${service.uid}`] = service;
+                this._services[service.uid] = {
+                    ...service,
+                    clientUid: value.uid,
+                };
             });
         });
     }
 
     getServices(params?: IGetServicesParams): Record<string, ISherlockService> {
-        const startsWith = [];
-        if (params.client) {
-            startsWith.push(params.client);
-        }
-
-        const startsWithStr = startsWith.join('.');
-
         const services = {};
+        console.log('PA', params);
         for (let [serviceUid, service] of Object.entries(this._services)) {
-            if (startsWith.length && !serviceUid.startsWith(startsWithStr)) {
+            if (params?.client && service.clientUid !== params.client) {
                 continue;
             }
             services[serviceUid] = service;
@@ -50,14 +47,17 @@ class SherlockServicesStore extends __SStore {
         return services;
     }
 
-    getService(serviceUid: string): ISherlockService {
-        let service = this[serviceUid];
-        if (!service) {
-            for (let [serviceNamespace, service] of Object.entries(this._services)) {
-                if (serviceNamespace.endsWith(`.${serviceUid}`)) {
-                    return service;
-                }
-            }
+    getService(serviceUid?: string, clientUid?: string): ISherlockService {
+        if (!serviceUid) {
+            serviceUid = __sherlockStore.route.service;
+        }
+
+        const services = this.getServices({
+            client: clientUid,
+        });
+        console.log('SER', services);
+        for (let [uid, service] of Object.entries(services)) {
+            if (uid === serviceUid) return service;
         }
     }
 }

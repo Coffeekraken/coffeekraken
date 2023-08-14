@@ -8,6 +8,7 @@ import __SherlockSpacesStore from './SherlockSpacesStore.js';
 import __SherlockTasksResultsStore from './SherlockTasksResultsStore.js';
 import __SherlockTasksStateStore from './SherlockTasksStateStore.js';
 import __SherlockTasksStore from './SherlockTasksStore.js';
+import __SherlockUserInfoStore from './SherlockUserInfoStore.js';
 
 export interface ISherlockStores {
     route: any;
@@ -34,7 +35,7 @@ export default {
     route: routeStore,
     spaces: new __SherlockSpacesStore(),
     _spaces: {},
-    space(spaceUid: string): ISherlockSpaceStores {
+    space(spaceUid?: string): ISherlockSpaceStores {
         if (!spaceUid) {
             spaceUid = routeStore.space;
         }
@@ -44,6 +45,7 @@ export default {
         }
 
         this._spaces[spaceUid] = {
+            userInfo: new __SherlockUserInfoStore(spaceUid),
             tasks: new __SherlockTasksStore(spaceUid),
             tasksStates: new __SherlockTasksStateStore(spaceUid),
             tasksResults: new __SherlockTasksResultsStore(spaceUid),

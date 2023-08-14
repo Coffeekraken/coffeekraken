@@ -3,15 +3,15 @@ import { BrowserWindow, app, ipcMain, shell } from 'electron';
 import { join } from 'path';
 import icon from '../../resources/icon.png?asset.js';
 
-import __SherlockApp from './ShelockApp.js';
+import __SSherlock from '@coffeekraken/s-sherlock';
 
+import type { ISherlockSpace, ISherlockTask, ISherlockTaskResult } from '@coffeekraken/s-sherlock';
 import { execSync } from 'child_process';
-import { ISherlockSpace, ISherlockTask, ISherlockTaskResult } from '../shared/SherlockTypes.js';
 
 console.log('Rebuilding "canvas" module...');
 execSync('npm rebuild canvas');
 
-let sherlockApp = new __SherlockApp();
+let sherlock = new __SSherlock.default();
 
 function createWindow(): void {
     // Create the browser window.
@@ -59,56 +59,61 @@ function createWindow(): void {
 // Some APIs can only be used after this event occurs.
 app.whenReady().then(() => {
     // exposes API
-    // ipcMain.handle('spaces:get', sherlockApp.adapter.getSpaces.bind(sherlockApp.adapter))
+    // ipcMain.handle('spaces:get', sherlock.adapter.getSpaces.bind(sherlock.adapter))
 
     // ipcMain.handle('spaces:set', (e, space: ISherlockSpace) => {
-    //     return sherlockApp.setSpace(space);
+    //     return sherlock.setSpace(space);
     // });
+
+    ipcMain.handle('userInfo:save', (e, spaceUid: string, userInfo: any) => {
+        return sherlock.saveUserInfo(spaceUid, userInfo);
+    });
+
     ipcMain.handle('pools:add', (e, poolMetas: any) => {
-        return sherlockApp.addPool(poolMetas);
+        return sherlock.addPool(poolMetas);
     });
     ipcMain.handle('space:get', (e, spaceUid: string) => {
-        return sherlockApp.getSpace(spaceUid);
+        return sherlock.getSpace(spaceUid);
     });
     ipcMain.handle('spaces:get', (e) => {
-        return sherlockApp.getSpaces();
+        return sherlock.getSpaces();
     });
     ipcMain.handle('spaces:add', (e, space: ISherlockSpace) => {
         console.log('ÂDD', space);
-        return sherlockApp.addSpace(space);
+        return sherlock.addSpace(space);
     });
     ipcMain.handle('tasks:get', (e, spaceUid: string, callbackId: string) => {
-        return sherlockApp.tasks(spaceUid, callbackId);
+        return sherlock.tasks(spaceUid, callbackId);
     });
     ipcMain.handle('tasks:add', (e, spaceUid: string, task: ISherlockTask) => {
-        return sherlockApp.addTask(spaceUid, task);
+        return sherlock.addTask(spaceUid, task);
     });
     ipcMain.handle('clients:get', (e, spaceUid: string, callbackId: string) => {
-        return sherlockApp.clients(spaceUid, callbackId);
+        return sherlock.clients(spaceUid, callbackId);
     });
     ipcMain.handle('service:get', (e, spaceUid: string, serviceUid: string, callbackId: string) => {
-        return sherlockApp.service(spaceUid, serviceUid, callbackId);
+        return sherlock.service(spaceUid, serviceUid, callbackId);
     });
     ipcMain.handle(
         'clients:services:get',
         (e, spaceUid: string, clientUid: string, callbackId: string) => {
-            return sherlockApp.clientServices(spaceUid, clientUid, callbackId);
+            return sherlock.clientServices(spaceUid, clientUid, callbackId);
         },
     );
     ipcMain.handle(
         'services:tasks:get',
         (e, spaceUid: string, serviceUid: string, callbackId: string) => {
-            return sherlockApp.serviceTasks(spaceUid, serviceUid, callbackId);
+            return sherlock.serviceTasks(spaceUid, serviceUid, callbackId);
         },
     );
     ipcMain.handle(
         'tasks:results:get',
         (e, spaceUid: string, taskUid: string, callbackId: string) => {
-            return sherlockApp.taskResults(spaceUid, taskUid, callbackId);
+            return sherlock.taskResults(spaceUid, taskUid, callbackId);
         },
     );
     ipcMain.handle('tasks:results:set', (e, spaceUid: string, taskResult: ISherlockTaskResult) => {
-        return sherlockApp.adapters[spaceUid].setTaskResult(taskResult);
+        return sherlock.adapters[spaceUid].setTaskResult(taskResult);
     });
 
     // Set app user model id for windows

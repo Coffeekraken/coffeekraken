@@ -10,10 +10,10 @@ import __ping from 'ping';
 import { SDobbyResponseTimeTaskSpec } from '../../shared/specs';
 
 import type {
-    ISDobbyResponseTimeTaskResult,
     ISDobbyResponseTimeTaskSettings,
     ISDobbyTask,
     ISDobbyTaskMetas,
+    ISDobbyTaskResult,
 } from '../../shared/types.js';
 
 /**
@@ -57,7 +57,7 @@ export default class SDobbyTask extends __SDobbyTask implements ISDobbyTask {
         super(__deepMerge({}, taskMetas ?? {}));
     }
 
-    run(): Promise<ISDobbyResponseTimeTaskResult> {
+    run(): Promise<ISDobbyTaskResult> {
         return new Promise(async (resolve) => {
             await super.start();
 
@@ -66,9 +66,12 @@ export default class SDobbyTask extends __SDobbyTask implements ISDobbyTask {
                 SDobbyResponseTimeTaskSpec,
             );
 
-            let res = await __ping.promise.probe(this.settings.url, {
-                timeout: finalSettings.timeout / 1000,
-            });
+            let res = await __ping.promise.probe(
+                this.settings.url.replace(/^https?\:\/\//, ''),
+                {
+                    timeout: finalSettings.timeout / 1000,
+                },
+            );
 
             const responseTime = res.alive ? parseFloat(res.avg) : -1;
             const ttfb = await __ttfb(this.settings.url, {
@@ -87,14 +90,15 @@ export default class SDobbyTask extends __SDobbyTask implements ISDobbyTask {
                 }
             }
 
-            resolve({
-                ...super.end(),
+            const finalResult = await super.end({
                 alive: res.alive,
                 status,
                 responseTime,
                 ttfb: ttfb.ttfb,
                 logs: [res.output],
             });
+
+            resolve(finalResult);
         });
     }
 }

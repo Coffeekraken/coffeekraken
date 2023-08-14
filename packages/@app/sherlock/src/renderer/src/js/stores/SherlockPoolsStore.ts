@@ -15,10 +15,9 @@ class SherlockPoolsStore extends __SStore {
             _pools: {},
         });
         this._spaceUid = spaceUid;
-        this._init();
     }
 
-    async _init() {
+    async mount() {
         // load the spaces
         const space = await window.sherlock.getSpace(this._spaceUid);
         // set the pools

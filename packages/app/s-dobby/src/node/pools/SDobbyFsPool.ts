@@ -8,9 +8,8 @@ import { __homeDir } from '@coffeekraken/sugar/path';
 import __fs from 'fs';
 
 import type {
-    ISDobbyConfig,
+    ISDobbyPoolConfig,
     ISDobbyPoolMetas,
-    ISDobbyPoolSettings,
     ISDobbySaveConfigResult,
 } from '../../shared/types';
 import { ISDobbyFsPoolSettings, ISDobbyPool } from '../../shared/types.js';
@@ -22,7 +21,7 @@ import { SDobbyFsPoolSettingsSpecs } from '../specs.js';
  * @name                SDobbyFsPool
  * @namespace           node
  * @type                Class
- * @extends             SDobbyAdapter
+ * @extends             SDobbyPool
  * @platform            node
  * @status              beta
  *
@@ -72,12 +71,12 @@ export default class SDobbyFsPool extends __SDobbyPool implements ISDobbyPool {
      * Load the configuration
      *
      * @param       {String}            uid             The current dobby process uid
-     * @return      {Promise<ISDobbyConfig>}            A promise resolved once the config is loaded successfully
+     * @return      {Promise<ISDobbyPoolConfig>}            A promise resolved once the config is loaded successfully
      *
      * @since           2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    loadConfig(): Promise<ISDobbyConfig> {
+    loadConfig(): Promise<ISDobbyPoolConfig> {
         return new Promise((resolve) => {
             const configPath = `${this.settings.folder.replace(
                 /^\~/,

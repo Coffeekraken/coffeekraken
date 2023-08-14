@@ -165,11 +165,10 @@ export default class SSpecsBase extends __SClass {
                         prop,
                     ];
                     const valueToValidate = __get(values, valuePath);
-
                     const result = validator.validate(valueToValidate, {
                         type: propObj.type,
-                        ...(propObj.rules ?? {}),
                         required: propObj.required,
+                        ...(propObj.rules ?? {}),
                     });
 
                     if (finalResult.valid && !result.valid) {
